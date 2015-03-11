@@ -10,13 +10,13 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 		public void LimitFilter()
 		{
 			var s = new SearchDescriptor<ElasticsearchProject>().From(0).Size(10)
-				.Filter(filter=>filter
+				.PostFilter(filter=>filter
 					.Limit(100)
 			);
 				
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
-				filter : {
+				post_filter : {
 						limit : { 
 							value : 100
 						}

@@ -17,7 +17,7 @@ namespace Nest.Tests.Unit.Reproduce
 		public void Issue928()
 		{
 			var result = this._client.Search<ElasticsearchProject>(s => s
-				.Filter(f => f
+				.PostFilter(f => f
 					.Bool(bf => bf
 						.Must(
 							mf => mf.Cache(true).Query(q => q.Term("field1", "value"))
@@ -34,7 +34,7 @@ namespace Nest.Tests.Unit.Reproduce
 		public void Issue928_And()
 		{
 			var result = this._client.Search<ElasticsearchProject>(s => s
-				.Filter(f => 
+				.PostFilter(f => 
 					f.Cache(true).Query(q => q.Term("field1", "value"))
 					&& f.Cache(true).Query(q => q.Term("field2", "value"))
 				)

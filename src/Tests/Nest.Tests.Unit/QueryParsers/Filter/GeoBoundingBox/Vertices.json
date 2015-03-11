@@ -1,5 +1,5 @@
 {
-  "filter": {
+  "post_filter": {
     "geo_bounding_box": {
       "origin": {
          "top" : -74.1,

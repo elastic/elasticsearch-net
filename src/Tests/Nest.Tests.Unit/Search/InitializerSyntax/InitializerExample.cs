@@ -46,7 +46,7 @@ namespace Nest.Tests.Unit.Search.InitializerSyntax
 					Property.Path<ElasticsearchProject>(p=>p.Name)
 				},
 				Query = query,
-				Filter = new FilterContainer(new BoolFilter
+				PostFilter = new FilterContainer(new BoolFilter
 				{
 					Cache = true,
 					Must = new FilterContainer[]

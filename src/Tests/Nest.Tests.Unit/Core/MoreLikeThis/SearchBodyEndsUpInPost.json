@@ -4,7 +4,7 @@
   "query": {
     "match_all": {}
   },
-  "filter": {
+  "post_filter": {
     "term": {
       "country": "The Netherlands"
     }

@@ -21,7 +21,7 @@ namespace Nest.Tests.Unit.Search.Filter.ConditionlessBool
 			var s = new SearchDescriptor<ElasticsearchProject>()
 			 .From(0)
 			 .Take(10)
-			 .Filter(filter);
+			 .PostFilter(filter);
 
 			this.JsonEquals(s, System.Reflection.MethodBase.GetCurrentMethod(), Filename);
 		}

@@ -12,13 +12,13 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
-				.Filter(ff=>ff
+				.PostFilter(ff=>ff
 					.Terms(f=>f.Name, new [] {"elasticsearch.pm"})
 				);
 				
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
-				filter : {
+				post_filter : {
 						terms: {
 							""name"": [""elasticsearch.pm""]
 						}
@@ -32,14 +32,14 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
-				.Filter(ff => ff
+				.PostFilter(ff => ff
 					.Cache(false).Name("terms_filter")
 					.Terms(f => f.Name, new [] {"elasticsearch.pm"}, Execution:TermsExecution.Bool)
 				);
 
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
-				filter : {
+				post_filter : {
 						terms: {
 							""name"": [""elasticsearch.pm""],
 							execution: ""bool"",
@@ -58,13 +58,13 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
             var s = new SearchDescriptor<ElasticsearchProject>()
                 .From(0)
                 .Size(10)
-                .Filter(ff => ff
+                .PostFilter(ff => ff
                     .Terms(f => f.MyStringArrayField, new[] { "elasticsearch.pm" }, Execution: TermsExecution.Bool)
                 );
 
             var json = TestElasticClient.Serialize(s);
             var expected = @"{ from: 0, size: 10, 
-				filter : {
+				post_filter : {
 						terms: {
 							""myStringArrayField"": [""elasticsearch.pm""],
 							execution: ""bool""
@@ -81,13 +81,13 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
             var s = new SearchDescriptor<ElasticsearchProject>()
                 .From(0)
                 .Size(10)
-                .Filter(ff => ff
+                .PostFilter(ff => ff
                     .Terms("myStringArrayField", new[] { "elasticsearch.pm" }, Execution: TermsExecution.Bool)
                 );
 
             var json = TestElasticClient.Serialize(s);
             var expected = @"{ from: 0, size: 10, 
-				filter : {
+				post_filter : {
 						terms: {
 							""myStringArrayField"": [""elasticsearch.pm""],
 							execution: ""bool""

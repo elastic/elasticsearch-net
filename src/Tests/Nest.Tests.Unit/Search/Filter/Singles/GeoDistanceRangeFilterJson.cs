@@ -12,7 +12,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
-				.Filter(filter => filter
+				.PostFilter(filter => filter
 					.Cache(true)
 					.Name("my_geo_filter")
 					.GeoDistanceRange(f=>f.Origin, d=>d
@@ -24,7 +24,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
-				filter : {
+				post_filter : {
 					geo_distance_range: {
 						origin: ""40, -70"",
 						from: 12.0,

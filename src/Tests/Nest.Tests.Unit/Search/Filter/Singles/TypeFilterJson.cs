@@ -12,11 +12,11 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
-				.Filter(f=>f.Type("my_type"));
+				.PostFilter(f=>f.Type("my_type"));
 				
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
-				filter : {
+				post_filter : {
 						type : { 
 							value : ""my_type""
 						}

@@ -24,7 +24,7 @@ namespace Nest.Tests.Unit.Search.Filter.ConditionLess
 			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Take(10)
-				.Filter(filter);
+				.PostFilter(filter);
 
 			this.JsonEquals(s, System.Reflection.MethodInfo.GetCurrentMethod(), "MatchAll");
 		}
@@ -34,7 +34,7 @@ namespace Nest.Tests.Unit.Search.Filter.ConditionLess
 			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Take(10)
-				.Filter(filter);
+				.PostFilter(filter);
 
 			this.JsonNotEquals(s, System.Reflection.MethodInfo.GetCurrentMethod(), "MatchAll");
 		}

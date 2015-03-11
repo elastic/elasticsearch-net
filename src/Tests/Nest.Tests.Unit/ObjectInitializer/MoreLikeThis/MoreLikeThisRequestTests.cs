@@ -32,7 +32,7 @@ namespace Nest.Tests.Unit.ObjectInitializer.MoreLikeThis
 				From = 0,
 				Size = 20,
 				Query = query,
-				Filter = new FilterContainer(new BoolFilter
+				PostFilter = new FilterContainer(new BoolFilter
 				{
 					Cache = true,
 					Must = new FilterContainer[]

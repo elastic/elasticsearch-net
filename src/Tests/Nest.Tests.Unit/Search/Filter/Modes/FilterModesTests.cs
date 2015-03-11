@@ -15,7 +15,7 @@ namespace Nest.Tests.Unit.Search.Filter.Modes
 				var s = new SearchDescriptor<ElasticsearchProject>()
 					.From(0)
 					.Size(10)
-					.Filter(ff => ff.Strict().Term(p => p.Name, ""));
+					.PostFilter(ff => ff.Strict().Term(p => p.Name, ""));
 			});
 			//this.JsonEquals(s, MethodInfo.GetCurrentMethod());
 		}

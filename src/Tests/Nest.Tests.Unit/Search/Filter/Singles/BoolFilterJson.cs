@@ -12,7 +12,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
-				.Filter(filter=>filter
+				.PostFilter(filter=>filter
 					.Bool(b=>b
 						.Must(
 							f => f.MatchAll()
@@ -28,7 +28,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 				
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
-				filter : {
+				post_filter : {
 						""bool"": {
 							""must"": [
 								{
@@ -60,12 +60,12 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
-				.Filter(f => f.MatchAll() & f.Missing(p => p.LOC))
+				.PostFilter(f => f.MatchAll() & f.Missing(p => p.LOC))
 			;
 
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
-				filter : {
+				post_filter : {
 						""bool"": {
 							""must"": [
 								{
@@ -88,12 +88,12 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
-				.Filter(f => (f.MatchAll() && f.Missing(p => p.LOC)) || f.Term("x","y"))
+				.PostFilter(f => (f.MatchAll() && f.Missing(p => p.LOC)) || f.Term("x","y"))
 			;
 
 			var json = TestElasticClient.Serialize(s);
             var expected = @"{ from: 0, size: 10, 
-				""filter"": {
+				""post_filter"": {
 					""bool"": {
 						""should"": [
 							{
@@ -117,12 +117,12 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
-				.Filter(Filter<dynamic>.MatchAll() && Filter<ElasticsearchProject>.Missing(p => p.LOC))
+				.PostFilter(Filter<dynamic>.MatchAll() && Filter<ElasticsearchProject>.Missing(p => p.LOC))
 			;
 
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
-				filter : {
+				post_filter : {
 						""bool"": {
 							""must"": [
 								{
@@ -147,7 +147,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
-				.Filter(filter => filter
+				.PostFilter(filter => filter
 					.Name("my_bool_filter")
 					.Cache(true)
 					.Bool(b => b
@@ -165,7 +165,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
-				filter : {
+				post_filter : {
 						""bool"": {
 							""must"": [
 								{

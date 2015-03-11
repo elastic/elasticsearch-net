@@ -12,7 +12,7 @@ namespace Nest.Tests.Unit.Search.Filter.FilterCalls
 			var s = new SearchDescriptor<ElasticsearchProject>()
 			  .From(0)
 			  .Take(10)
-			  .Filter(ff =>
+			  .PostFilter(ff =>
 				ff.And(af =>
 				  af.Term(f => f.Name, "foo")
 				  || af.Term(f => f.Name, "bar")
@@ -25,7 +25,7 @@ namespace Nest.Tests.Unit.Search.Filter.FilterCalls
 			var s = new SearchDescriptor<ElasticsearchProject>()
 			  .From(0)
 			  .Take(10)
-			  .Filter(ff =>
+			  .PostFilter(ff =>
 				ff.And(af =>
 				  af.Term(f => f.Name, "foo")
 				  || af.Term(f => f.Name, "bar")
@@ -41,7 +41,7 @@ namespace Nest.Tests.Unit.Search.Filter.FilterCalls
 			var s = new SearchDescriptor<ElasticsearchProject>()
 			  .From(0)
 			  .Take(10)
-			  .Filter(ff =>
+			  .PostFilter(ff =>
 				ff.Or(of =>
 				  of.Term(f => f.Name, "foo")
 				  && of.Term(f => f.Name, "bar")
@@ -54,7 +54,7 @@ namespace Nest.Tests.Unit.Search.Filter.FilterCalls
 			var s = new SearchDescriptor<ElasticsearchProject>()
 			  .From(0)
 			  .Take(10)
-			  .Filter(ff =>
+			  .PostFilter(ff =>
 				ff.Or(of =>
 				  of.Term(f => f.Name, "foo")
 				  && of.Term(f => f.Name, "bar")
@@ -71,7 +71,7 @@ namespace Nest.Tests.Unit.Search.Filter.FilterCalls
 			var s = new SearchDescriptor<ElasticsearchProject>()
 			  .From(0)
 			  .Take(10)
-			  .Filter(ff =>
+			  .PostFilter(ff =>
 				ff.Not(of =>
 				  of.Term(f => f.Name, "foo")
 				  && of.Term(f => f.Name, "bar")
@@ -85,7 +85,7 @@ namespace Nest.Tests.Unit.Search.Filter.FilterCalls
 			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Take(10)
-				.Filter(ff => 
+				.PostFilter(ff => 
 					ff.Name("first_cache_name").Cache(true).CacheKey("first_cache_key").Term(f => f.Name, "foo")
 					&& ff.Term(f => f.Name, "bar")
 				);
@@ -98,7 +98,7 @@ namespace Nest.Tests.Unit.Search.Filter.FilterCalls
 			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Take(10)
-				.Filter(ff =>
+				.PostFilter(ff =>
 					ff.Name("first_cache_name").Cache(true).CacheKey("first_cache_key").Exists(f => f.Name)
 					&& ff.Exists(f => f.Content)
 				);

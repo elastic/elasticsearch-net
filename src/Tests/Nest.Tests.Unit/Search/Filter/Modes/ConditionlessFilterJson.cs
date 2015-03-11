@@ -10,7 +10,7 @@ namespace Nest.Tests.Unit.Search.Filter.Modes
 		public void Fallback()
 		{
 			var s = new SearchDescriptor<ElasticsearchProject>().From(0).Size(10)
-				.Filter(q=>q
+				.PostFilter(q=>q
 					.Conditionless(qs=>qs
 						.Filter(qcq=>qcq.Term("this_term_is_conditionless", ""))
 						.Fallback(qcf=>qcf.Term("name", "do_me_instead")
@@ -20,7 +20,7 @@ namespace Nest.Tests.Unit.Search.Filter.Modes
 				
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
-				filter : {
+				post_filter : {
 						term : { 
 							name : ""do_me_instead""
 						}
@@ -33,7 +33,7 @@ namespace Nest.Tests.Unit.Search.Filter.Modes
 		public void UseFilter()
 		{
 			var s = new SearchDescriptor<ElasticsearchProject>().From(0).Size(10)
-				.Filter(q => q
+				.PostFilter(q => q
 					.Conditionless(qs => qs
 						.Filter(qcq => qcq.Term("name", "NEST"))
 						.Fallback(qcf => qcf.Term("name", "do_me_instead")
@@ -43,7 +43,7 @@ namespace Nest.Tests.Unit.Search.Filter.Modes
 
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
-				filter : {
+				post_filter : {
 						term : { 
 							name : ""NEST"" 
 						}
@@ -56,7 +56,7 @@ namespace Nest.Tests.Unit.Search.Filter.Modes
 		public void BothConditionless()
 		{
 			var s = new SearchDescriptor<ElasticsearchProject>().From(0).Size(10)
-				.Filter(q => q
+				.PostFilter(q => q
 					.Conditionless(qs => qs
 						.Filter(qcq => qcq.Term("name", ""))
 						.Fallback(qcf => qcf.Term("name", "")

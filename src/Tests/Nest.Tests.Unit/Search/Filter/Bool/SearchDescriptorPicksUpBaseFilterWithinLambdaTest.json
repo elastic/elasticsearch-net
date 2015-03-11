@@ -1,7 +1,7 @@
   {
   "from": 0,
   "size": 20,
-  "filter": {
+  "post_filter": {
     "bool": {
       "must": [
         {

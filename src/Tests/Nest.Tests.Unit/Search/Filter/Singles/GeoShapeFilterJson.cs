@@ -14,7 +14,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
-				.Filter(filter => filter
+				.PostFilter(filter => filter
 					.Cache(true)
 					.Name("my_geo_filter")
 					.GeoShapeEnvelope(f => f.Origin, d => d
@@ -25,7 +25,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
-				filter : {
+				post_filter : {
 					geo_shape: {
 						origin: {
 							shape: {
@@ -48,7 +48,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
-				.Filter(f => f
+				.PostFilter(f => f
 					.Cache(true)
 					.Name("my_geo_filter")
 					.GeoShapeCircle(p => p.Origin, d => d
@@ -60,7 +60,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
-				filter : {
+				post_filter : {
 					geo_shape: {
 						origin: {
 							shape: {
@@ -84,7 +84,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
-				.Filter(f => f
+				.PostFilter(f => f
 					.Cache(true)
 					.Name("my_geo_filter")
 					.GeoShapeLineString(p => p.Origin, d => d
@@ -95,7 +95,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
-				filter : {
+				post_filter : {
 					geo_shape: {
 						origin: {
 							shape: {
@@ -120,7 +120,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
-				.Filter(f => f
+				.PostFilter(f => f
 					.Cache(true)
 					.Name("my_geo_filter")
 					.GeoShapeMultiLineString(p => p.Origin, d => d
@@ -136,7 +136,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
-				filter : {
+				post_filter : {
 					geo_shape: {
 						origin: {
 							shape: {
@@ -163,7 +163,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
-				.Filter(f => f
+				.PostFilter(f => f
 					.Cache(true)
 					.Name("my_geo_filter")
 					.GeoShapePoint(p => p.Origin, d => d
@@ -174,7 +174,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
-				filter : {
+				post_filter : {
 					geo_shape: {
 						origin: {
 							shape: {
@@ -196,7 +196,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
-				.Filter(f => f
+				.PostFilter(f => f
 					.Cache(true)
 					.Name("my_geo_filter")
 					.GeoShapeMultiPoint(p => p.Origin, d => d
@@ -207,7 +207,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
-				filter : {
+				post_filter : {
 					geo_shape: {
 						origin: {
 							shape: {
@@ -230,7 +230,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
-				.Filter(f => f
+				.PostFilter(f => f
 					.Cache(true)
 					.Name("my_geo_filter")
 					.GeoShapePolygon(p => p.Origin, d => d
@@ -244,7 +244,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
-				filter : {
+				post_filter : {
 					geo_shape: {
 						origin: {
 							shape: {
@@ -270,7 +270,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
-				.Filter(f => f
+				.PostFilter(f => f
 					.Cache(true)
 					.Name("my_geo_filter")
 					.GeoShapeMultiPolygon(p => p.Origin, d => d
@@ -295,7 +295,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
-				filter : {
+				post_filter : {
 					geo_shape: {
 						origin: {
 							shape: {

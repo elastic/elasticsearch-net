@@ -78,7 +78,7 @@ namespace Nest.Tests.Unit.Search.Filter.BoolCombinations
 		public void OrWithExistsLambda()
 		{
 			var s = new SearchDescriptor<ElasticsearchProject>()
-			  .Filter(q =>
+			  .PostFilter(q =>
 				q.Term(f => f.Name, "bar2")
 				|| q.Term(f => f.Name, "blah2")
 				|| q.Exists(f => f.Name)
@@ -89,7 +89,7 @@ namespace Nest.Tests.Unit.Search.Filter.BoolCombinations
 		public void OrWithExistsLambdaSimple()
 		{
 			var s = new SearchDescriptor<ElasticsearchProject>()
-			  .Filter(q =>
+			  .PostFilter(q =>
 				q.Term(f => f.Name, "blah2")
 		  || q.Exists(f => f.Name)
 			  );
@@ -100,7 +100,7 @@ namespace Nest.Tests.Unit.Search.Filter.BoolCombinations
 		public void OrSimpleLambda()
 		{
 			var s = new SearchDescriptor<ElasticsearchProject>()
-			  .Filter(q =>
+			  .PostFilter(q =>
 				q.Term(f => f.Name, "foo2")
 				|| q.Term(f => f.Name, "bar2")
 				|| q.Term(f => f.Name, "blah2")

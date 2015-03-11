@@ -14,7 +14,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
-				.Filter(ff=>ff
+				.PostFilter(ff=>ff
 					.Range(n => n
 						.OnField(f=>f.LOC)
 						.GreaterOrEquals("10")
@@ -24,7 +24,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 				
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
-				filter : {
+				post_filter : {
 						range: {
 							""loc"": {
 								gte: ""10"",
@@ -43,7 +43,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
-				.Filter(ff => ff.Cache(true).Name("my_name")
+				.PostFilter(ff => ff.Cache(true).Name("my_name")
 					.Range(n => n
 						.OnField(f => f.LOC)
 						.GreaterOrEquals("10")
@@ -53,7 +53,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
-				filter : {
+				post_filter : {
 						range: {
 							""loc"": {
 								gte: ""10"",
@@ -74,7 +74,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
-				.Filter(ff => ff
+				.PostFilter(ff => ff
 					.Range(n => n
 						.OnField(f => f.LOC)
 						.GreaterOrEquals(10)
@@ -84,7 +84,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
-				filter : {
+				post_filter : {
 						range: {
 							""loc"": {
 								gte: ""10"",
@@ -103,7 +103,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
-				.Filter(ff => ff
+				.PostFilter(ff => ff
 					.Range(n => n
 						.OnField(f => f.LOC)
 						.GreaterOrEquals(10.3)
@@ -113,7 +113,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
-				filter : {
+				post_filter : {
 						range: {
 							""loc"": {
 								gte: ""10.3"",
@@ -135,7 +135,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
-				.Filter(ff => ff
+				.PostFilter(ff => ff
 					.Range(n => n
 						.OnField(f => f.StartedOn)
 						.GreaterOrEquals(lowerBound, format)
@@ -146,7 +146,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
-				filter : {
+				post_filter : {
 						range: {
 							""startedOn"": {
 								gte: """ + lowerBound.ToString(format, CultureInfo.InvariantCulture) + @""",
@@ -166,7 +166,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
-				.Filter(ff => ff
+				.PostFilter(ff => ff
 					.Cache(true)
 					.Range(n => n
 						.OnField(f => f.LOC)
@@ -175,7 +175,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
-				filter : {
+				post_filter : {
 						range: {
 							""execution"" : ""fielddata"",
 							""loc"": {
@@ -196,7 +196,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
-				.Filter(ff => ff
+				.PostFilter(ff => ff
 					.Cache(true)
 					.Range(n => n
 						.OnField(f => f.LOC)
@@ -205,7 +205,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
-				filter : {
+				post_filter : {
 						range: {
 							""execution"" : ""index"",
 							""loc"": {
