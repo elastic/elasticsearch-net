@@ -44,6 +44,8 @@ namespace Nest.DSL.Descriptors
 
 		string IScriptSort.Language { get; set; }
 
+		string IScriptSort.File { get; set; }
+
 		PropertyPathMarker ISort.SortKey { get { return "_script"; } }
 
 		Dictionary<string, object> IScriptSort.Params { get; set; }
