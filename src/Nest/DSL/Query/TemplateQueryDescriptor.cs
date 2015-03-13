@@ -27,6 +27,8 @@ namespace Nest
 
 		public IDictionary<string, object> Params { get; set;}
 
+		public string Name { get; set; }
+
 		public bool IsConditionless
 		{
 			get { return this.Query.IsNullOrEmpty(); }
@@ -41,7 +43,15 @@ namespace Nest
 
 		IDictionary<string, object> ITemplateQuery.Params { get; set; }
 
+		string IQuery.Name { get; set; }
+
 		bool IQuery.IsConditionless { get { return this.Self.Query.IsNullOrEmpty(); } }
+
+		public TemplateQueryDescriptor Name(string name)
+		{
+			Self.Name = name;
+			return this;
+		}
 
 		public TemplateQueryDescriptor Query(string query)
 		{

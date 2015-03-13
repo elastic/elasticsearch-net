@@ -38,6 +38,7 @@ namespace Nest
 		}
 
 		bool IQuery.IsConditionless { get { return false; } }
+		public string Name { get; set; }
 		public ISpanQuery Include { get; set; }
 		public ISpanQuery Exclude { get; set; }
 		public double? Boost { get; set; }
@@ -72,8 +73,13 @@ namespace Nest
 			}
 		}
 
+		string IQuery.Name { get; set; }
 
-
+		public SpanNotQuery<T> Name(string name)
+		{
+			Self.Name = name;
+			return this;
+		}
 		public SpanNotQuery<T> Include(Func<SpanQuery<T>, SpanQuery<T>> selector)
 		{
 			if (selector == null) return this;

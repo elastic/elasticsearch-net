@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
@@ -27,6 +28,7 @@ namespace Nest
 			container.Boosting = this;
 		}
 
+		public string Name { get; set; }
 		bool IQuery.IsConditionless { get { return false; } }
 		public QueryContainer PositiveQuery { get; set; }
 		public QueryContainer NegativeQuery { get; set; }
@@ -35,6 +37,8 @@ namespace Nest
 
 	public class BoostingQueryDescriptor<T> : IBoostingQuery where T : class
 	{
+		private IBoostingQuery Self { get { return this; } }
+
 		QueryContainer IBoostingQuery.PositiveQuery { get; set; }
 
 		QueryContainer IBoostingQuery.NegativeQuery { get; set; }
@@ -45,16 +49,24 @@ namespace Nest
 		{
 			get
 			{
-				if (((IBoostingQuery)this).NegativeQuery == null && ((IBoostingQuery)this).PositiveQuery == null)
+				if (Self.NegativeQuery == null && Self.PositiveQuery == null)
 					return true;
-				return ((IBoostingQuery)this).PositiveQuery == null && ((IBoostingQuery)this).NegativeQuery.IsConditionless
-					|| ((IBoostingQuery)this).NegativeQuery == null && ((IBoostingQuery)this).PositiveQuery.IsConditionless;
+				return (Self.PositiveQuery == null || Self.NegativeQuery.IsConditionless)
+					|| (Self.NegativeQuery == null || Self.PositiveQuery.IsConditionless);
 			}
+		}
+
+		string IQuery.Name { get; set; }
+
+		public BoostingQueryDescriptor<T> Name(string name)
+		{
+			Self.Name = name;
+			return this;
 		}
 
 		public BoostingQueryDescriptor<T> NegativeBoost(double boost)
 		{
-			((IBoostingQuery)this).NegativeBoost = boost;
+			Self.NegativeBoost = boost;
 			return this;
 		}
 
@@ -62,14 +74,14 @@ namespace Nest
 		{
 			var query = new QueryDescriptor<T>();
 			var q = selector(query);
-			((IBoostingQuery)this).PositiveQuery = q;
+			Self.PositiveQuery = q;
 			return this;
 		}
 		public BoostingQueryDescriptor<T> Negative(Func<QueryDescriptor<T>, QueryContainer> selector)
 		{
 			var query = new QueryDescriptor<T>();
 			var q = selector(query);
-			((IBoostingQuery)this).NegativeQuery = q;
+			Self.NegativeQuery = q;
 			return this;
 		}
 	}

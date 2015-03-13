@@ -53,6 +53,7 @@ namespace Nest
 		PropertyPathMarker IFieldNameQuery.GetFieldName() { return this.Field; }
 		void IFieldNameQuery.SetFieldName(string fieldName) { this.Field = fieldName; }
 
+		public string Name { get; set; }
 		public PropertyPathMarker Field { get; set; }
 		public double? Boost { get; set; }
 		public string Fuzziness { get; set; }
@@ -66,6 +67,8 @@ namespace Nest
 
 	public class FuzzyQueryDescriptor<T> : IStringFuzzyQuery where T : class
 	{
+		private IStringFuzzyQuery Self { get { return this; } }
+
 		PropertyPathMarker IFuzzyQuery.Field { get; set; }
 		
 		double? IFuzzyQuery.Boost { get; set; }
@@ -88,14 +91,17 @@ namespace Nest
 		{
 			get
 			{
-				return ((IFuzzyQuery)this).Field.IsConditionless() || ((IStringFuzzyQuery)this).Value.IsNullOrEmpty();
+				return ((IFuzzyQuery)this).Field.IsConditionless() || Self.Value.IsNullOrEmpty();
 			}
 		}
-		
+
+		string IQuery.Name { get; set; }
+
 		void IFieldNameQuery.SetFieldName(string fieldName)
 		{
 			((IFuzzyQuery)this).Field = fieldName;
 		}
+
 		PropertyPathMarker IFieldNameQuery.GetFieldName()
 		{
 			return ((IFuzzyQuery)this).Field;
@@ -107,6 +113,11 @@ namespace Nest
 			return this;
 		}
 
+		public FuzzyQueryDescriptor<T> Name(string name)
+		{
+			Self.Name = name;
+			return this;
+		}
 		public FuzzyQueryDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
 		{
 			((IFuzzyQuery)this).Field = objectPath;
@@ -137,7 +148,7 @@ namespace Nest
 		}
 		public FuzzyQueryDescriptor<T> PrefixLength(int prefixLength)
 		{
-			((IStringFuzzyQuery)this).PrefixLength = prefixLength;
+			Self.PrefixLength = prefixLength;
 			return this;
 		}
 
@@ -160,7 +171,7 @@ namespace Nest
 		}
 		public FuzzyQueryDescriptor<T> Value(string value)
 		{
-			((IStringFuzzyQuery)this).Value = value;
+			Self.Value = value;
 			return this;
 		}
 	}

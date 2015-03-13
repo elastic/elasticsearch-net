@@ -40,6 +40,8 @@ namespace Nest
 			container.Bool = this;
 		}
 
+		public string Name { get; set; }
+
 		bool IQuery.IsConditionless { get { return false; } }
 
 		public IEnumerable<IQueryContainer> Must { get; set; }
@@ -70,7 +72,10 @@ namespace Nest
 		
 		[JsonProperty("boost")]
 		double? IBoolQuery.Boost { get; set; }
-		
+
+		[JsonProperty("_name")]
+		string IQuery.Name { get; set; }
+
 		bool IQuery.IsConditionless
 		{
 			get

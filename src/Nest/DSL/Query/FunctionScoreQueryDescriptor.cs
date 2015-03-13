@@ -44,12 +44,14 @@ namespace Nest
 
 	public class FunctionScoreQuery : PlainQuery, IFunctionScoreQuery
 	{
+
 		protected override void WrapInContainer(IQueryContainer container)
 		{
 			container.FunctionScore = this;
 		}
 
 		bool IQuery.IsConditionless { get { return false; } }
+		public string Name { get; set; }
 		public IEnumerable<IFunctionScoreFunction> Functions { get; set; }
 		public IQueryContainer Query { get; set; }
 		public FunctionScoreMode? ScoreMode { get; set; }
@@ -94,6 +96,8 @@ namespace Nest
 		// TODO: Remove in 2.0 and change Weight to double
 		double? IFunctionScoreQuery.WeightAsDouble { get; set; }
 
+		string IQuery.Name { get; set; }
+
 		bool IQuery.IsConditionless
 		{
 			get
@@ -103,6 +107,12 @@ namespace Nest
 					&& Self.ScriptScore == null 
 					&& !Self.Functions.HasAny();
 			}
+		}
+
+		public FunctionScoreQueryDescriptor<T> Name(string name)
+		{
+			Self.Name = name;
+			return this;
 		}
 
 		public FunctionScoreQueryDescriptor<T> Query(Func<QueryDescriptor<T>, QueryContainer> querySelector)

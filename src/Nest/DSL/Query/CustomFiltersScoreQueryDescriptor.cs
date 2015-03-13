@@ -36,6 +36,8 @@ namespace Nest
 
 	public class CustomFiltersScoreQueryDescriptor<T> : ICustomFiltersScoreQuery where T : class
 	{
+		ICustomFiltersScoreQuery Self { get { return this; }}
+
 		IQueryContainer ICustomFiltersScoreQuery.Query { get; set; }
 
 		List<IFilterScoreQuery> ICustomFiltersScoreQuery.Filters { get; set; }
@@ -48,12 +50,20 @@ namespace Nest
 
 		string ICustomFiltersScoreQuery.MaxBoost { get; set; }
 
+		string IQuery.Name { get; set; }
+
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				return ((ICustomFiltersScoreQuery)this).Query == null || ((ICustomFiltersScoreQuery)this).Query.IsConditionless;
+				return Self.Query == null || Self.Query.IsConditionless;
 			}
+		}
+
+		public CustomFiltersScoreQueryDescriptor<T> Name(string name)
+		{
+			Self.Name = name;
+			return this;
 		}
 
 		public CustomFiltersScoreQueryDescriptor<T> Query(Func<QueryDescriptor<T>, QueryContainer> querySelector)
@@ -62,13 +72,13 @@ namespace Nest
 			var query = new QueryDescriptor<T>();
 			var q = querySelector(query);
 
-			((ICustomFiltersScoreQuery)this).Query = q;
+			Self.Query = q;
 			return this;
 		}
 
 		public CustomFiltersScoreQueryDescriptor<T> ScoreMode(ScoreMode scoreMode)
 		{
-			((ICustomFiltersScoreQuery)this).ScoreMode = scoreMode;
+			Self.ScoreMode = scoreMode;
 			return this;
 		}
 
@@ -76,13 +86,13 @@ namespace Nest
 		{
 			filterSelectors.ThrowIfNull("filterSelectors");
 
-			((ICustomFiltersScoreQuery)this).Filters = new List<IFilterScoreQuery>();
+			Self.Filters = new List<IFilterScoreQuery>();
 
 			foreach (var filterSelector in filterSelectors)
 			{
 				var filter = new FilterScoreQueryDescriptor<T>();
 				filterSelector.ThrowIfNull("filterSelector");
-				((ICustomFiltersScoreQuery)this).Filters.Add(filterSelector(filter));
+				Self.Filters.Add(filterSelector(filter));
 			}
 
 			return this;
@@ -91,19 +101,19 @@ namespace Nest
 		public CustomFiltersScoreQueryDescriptor<T> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramDictionary)
 		{
 			paramDictionary.ThrowIfNull("paramDictionary");
-			((ICustomFiltersScoreQuery)this).Params = paramDictionary(new FluentDictionary<string, object>());
+			Self.Params = paramDictionary(new FluentDictionary<string, object>());
 			return this;
 		}
 
 		public CustomFiltersScoreQueryDescriptor<T> Language(string language)
 		{
-			((ICustomFiltersScoreQuery)this).Lang = language;
+			Self.Lang = language;
 			return this;
 		}
 
 		public CustomFiltersScoreQueryDescriptor<T> MaxBoost(string maxBoost)
 		{
-			((ICustomFiltersScoreQuery)this).MaxBoost = maxBoost;
+			Self.MaxBoost = maxBoost;
 			return this;
 		}
 	}

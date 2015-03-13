@@ -24,6 +24,7 @@ namespace Nest
 			container.Ids = this;
 		}
 
+		public string Name { get; set; }
 		bool IQuery.IsConditionless { get { return false; } }
 		public IEnumerable<string> Type { get; set; }
 		public IEnumerable<string> Values { get; set; }
@@ -31,6 +32,8 @@ namespace Nest
 
 	public class IdsQueryDescriptor : IIdsQuery
 	{
+		[JsonProperty(PropertyName = "_name")]
+		public string Name { get; set; }
 		[JsonProperty(PropertyName = "type")]
 		public IEnumerable<string> Type { get; set; }
 		[JsonProperty(PropertyName = "values")]

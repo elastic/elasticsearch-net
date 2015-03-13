@@ -22,20 +22,31 @@ namespace Nest
 
 		public IQueryContainer Match { get; set; }
 
+		public string Name { get; set; }
+
+		//TODO change to explicit IQuery implenentation in 2.0?
 		public bool IsConditionless { get { return false; } }
 	}
 
 	public class SpanMultiTermQueryDescriptor<T> : ISpanMultiTermQuery
 		where T : class
 	{
+		private ISpanMultiTermQuery Self { get { return this; } }
 		IQueryContainer ISpanMultiTermQuery.Match { get; set; }
 
 		bool IQuery.IsConditionless { get { return false; } }
+		string IQuery.Name { get; set; }
 
+		public SpanMultiTermQueryDescriptor<T> Name(string name)
+		{
+			Self.Name = name;
+			return this;
+		}
+		
 		public SpanMultiTermQueryDescriptor<T> Match(Func<QueryDescriptor<T>, QueryContainer> querySelector)
 		{
 			var q = new QueryDescriptor<T>();
-			((ISpanMultiTermQuery)this).Match = querySelector(q);
+			Self.Match = querySelector(q);
 			return this;
 		}
 	}

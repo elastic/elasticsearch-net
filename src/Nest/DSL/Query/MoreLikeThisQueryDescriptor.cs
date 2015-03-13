@@ -80,6 +80,7 @@ namespace Nest
 		}
 
 		bool IQuery.IsConditionless { get { return false; } }
+		public string Name { get; set; }
 		public IEnumerable<PropertyPathMarker> Fields { get; set; }
 		public string LikeText { get; set; }
 		public double? TermMatchPercentage { get; set; }
@@ -142,6 +143,13 @@ namespace Nest
 			}
 		}
 
+		string IQuery.Name { get; set; }
+
+		public MoreLikeThisQueryDescriptor<T> Name(string name)
+		{
+			Self.Name = name;
+			return this;
+		}
 		public MoreLikeThisQueryDescriptor<T> OnFields(IEnumerable<string> fields)
 		{
 			this.Self.Fields = fields.Select(f=>(PropertyPathMarker)f);

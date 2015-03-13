@@ -24,6 +24,7 @@ namespace Nest
 			container.GeoShape = this;
 		}
 
+		public string Name { get; set; }
 		bool IQuery.IsConditionless { get { return false; } }
 
 		PropertyPathMarker IFieldNameQuery.GetFieldName()
@@ -43,18 +44,22 @@ namespace Nest
 
 	public class GeoShapeMultiPointQueryDescriptor<T> : IGeoShapeMultiPointQuery where T : class
 	{
+		private IGeoShapeMultiPointQuery Self { get { return this; }}
+
 		PropertyPathMarker IGeoShapeQuery.Field { get; set; }
 		
 		IMultiPointGeoShape IGeoShapeMultiPointQuery.Shape { get; set; }
+			
+		string IQuery.Name { get; set; }
 
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				return ((IGeoShapeQuery)this).Field.IsConditionless() || ((IGeoShapeMultiPointQuery)this).Shape == null || !((IGeoShapeMultiPointQuery)this).Shape.Coordinates.HasAny();
+				return ((IGeoShapeQuery)this).Field.IsConditionless() || Self.Shape == null || !Self.Shape.Coordinates.HasAny();
 			}
-
 		}
+
 		void IFieldNameQuery.SetFieldName(string fieldName)
 		{
 			((IGeoShapeQuery)this).Field = fieldName;
@@ -63,7 +68,12 @@ namespace Nest
 		{
 			return ((IGeoShapeQuery)this).Field;
 		}
-		
+
+		public GeoShapeMultiPointQueryDescriptor<T> Name(string name)
+		{
+			Self.Name = name;
+			return this;
+		}
 		public GeoShapeMultiPointQueryDescriptor<T> OnField(string field)
 		{
 			((IGeoShapeQuery)this).Field = field;
@@ -77,9 +87,9 @@ namespace Nest
 
 		public GeoShapeMultiPointQueryDescriptor<T> Coordinates(IEnumerable<IEnumerable<double>> coordinates)
 		{
-			if (((IGeoShapeMultiPointQuery)this).Shape == null)
-				((IGeoShapeMultiPointQuery)this).Shape = new MultiPointGeoShape();
-			((IGeoShapeMultiPointQuery)this).Shape.Coordinates = coordinates;
+			if (Self.Shape == null)
+				Self.Shape = new MultiPointGeoShape();
+			Self.Shape.Coordinates = coordinates;
 			return this;
 		}
 	}

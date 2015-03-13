@@ -68,7 +68,7 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class RangeQueryDescriptor<T> : IRangeQuery where T : class
 	{
-		IRangeQuery Self { get { return this; } }
+		private IRangeQuery Self { get { return this; } }
 
 		string IRangeQuery.GreaterThanOrEqualTo { get; set; }
 	
@@ -102,6 +102,8 @@ namespace Nest
 			}
 		}
 
+		string IQuery.Name { get; set; }
+
 		void IFieldNameQuery.SetFieldName(string fieldName)
 		{
 			this.Self.Field = fieldName;
@@ -112,6 +114,11 @@ namespace Nest
 			return this.Self.Field;
 		}
 
+		public RangeQueryDescriptor<T> Name(string name)
+		{
+			Self.Name = name;
+			return this;
+		}
 		public RangeQueryDescriptor<T> OnField(string field)
 		{
 			this.Self.Field = field;

@@ -33,6 +33,7 @@ namespace Nest
 			container.SpanNear = this;
 		}
 
+		public string Name { get; set; }
 		bool IQuery.IsConditionless { get { return false; } }
 		public IEnumerable<ISpanQuery> Clauses { get; set; }
 		public int? Slop { get; set; }
@@ -43,6 +44,8 @@ namespace Nest
 
 	public class SpanNearQueryDescriptor<T> : ISpanNearQuery where T : class
 	{
+		private ISpanNearQuery Self { get { return this; }}
+
 		IEnumerable<ISpanQuery> ISpanNearQuery.Clauses { get; set; }
 
 		int? ISpanNearQuery.Slop { get; set; }
@@ -53,14 +56,21 @@ namespace Nest
 
         double? ISpanNearQuery.Boost { get; set; }
 
+		string IQuery.Name { get; set; }	
 
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				return !((ISpanNearQuery)this).Clauses.HasAny() 
-					|| ((ISpanNearQuery)this).Clauses.Cast<IQuery>().All(q => q.IsConditionless);
+				return !Self.Clauses.HasAny() 
+					|| Self.Clauses.Cast<IQuery>().All(q => q.IsConditionless);
 			}
+		}
+
+		public SpanNearQueryDescriptor<T> Name(string name)
+		{
+			Self.Name = name;
+			return this;
 		}
 
 		public SpanNearQueryDescriptor<T> Clauses(params Func<SpanQuery<T>, SpanQuery<T>>[] selectors)
@@ -77,28 +87,28 @@ namespace Nest
 				descriptors.Add(q);
 
 			}
-			((ISpanNearQuery)this).Clauses = descriptors.HasAny() ? descriptors : null;
+			Self.Clauses = descriptors.HasAny() ? descriptors : null;
 			return this;
 		}
 		public SpanNearQueryDescriptor<T> Slop(int slop)
 		{
-			((ISpanNearQuery)this).Slop = slop;
+			Self.Slop = slop;
 			return this;
 		}
 		public SpanNearQueryDescriptor<T> InOrder(bool inOrder)
 		{
-			((ISpanNearQuery)this).InOrder = inOrder;
+			Self.InOrder = inOrder;
 			return this;
 		}
 		public SpanNearQueryDescriptor<T> CollectPayloads(bool collectPayloads)
 		{
-			((ISpanNearQuery)this).CollectPayloads = collectPayloads;
+			Self.CollectPayloads = collectPayloads;
 			return this;
 		}
 
 	    public SpanNearQueryDescriptor<T> Boost(double boost)
 	    {
-	        ((ISpanNearQuery) this).Boost = boost;
+	        Self.Boost = boost;
 	        return this;
 	    }
 	}

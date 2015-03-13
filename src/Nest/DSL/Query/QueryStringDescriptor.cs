@@ -74,12 +74,14 @@ namespace Nest
 
 	public class QueryStringQuery : PlainQuery, IQueryStringQuery
 	{
+
 		protected override void WrapInContainer(IQueryContainer container)
 		{
 			container.QueryString = this;
 		}
 
 		bool IQuery.IsConditionless { get { return false; } }
+		public string Name { get; set; }
 		public string Query { get; set; }
 		public PropertyPathMarker DefaultField { get; set; }
 		public IEnumerable<PropertyPathMarker> Fields { get; set; }
@@ -104,6 +106,8 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class QueryStringQueryDescriptor<T> : IQueryStringQuery where T : class
 	{
+		private IQueryStringQuery Self { get { return this; }}
+
 		string IQueryStringQuery.Query { get; set; }
 
 		PropertyPathMarker IQueryStringQuery.DefaultField { get; set; }
@@ -150,7 +154,13 @@ namespace Nest
 			}
 		}
 
+		string IQuery.Name { get; set; }
 
+		public QueryStringQueryDescriptor<T> Name(string name)
+		{
+			Self.Name = name;
+			return this;
+		}
 		public QueryStringQueryDescriptor<T> DefaultField(string field)
 		{
 			((IQueryStringQuery)this).DefaultField = field;
