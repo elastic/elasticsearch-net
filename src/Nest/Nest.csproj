@@ -158,6 +158,7 @@
     <Compile Include="Domain\Mapping\SubMappings\FieldData\FieldDataRegexFilter.cs" />
     <Compile Include="Domain\Mapping\SubMappings\FieldData\FieldDataStringMapping.cs" />
     <Compile Include="Domain\Mapping\SubMappings\NormsMapping.cs" />
+    <Compile Include="Domain\Responses\DeleteByQueryResponse.cs" />
     <Compile Include="DSL\Facets\Ip4ExpressionRange.cs" />
     <Compile Include="Domain\Mapping\SubMappings\MappingTransform.cs" />
     <Compile Include="Domain\Observers\RestoreObserver.cs" />
