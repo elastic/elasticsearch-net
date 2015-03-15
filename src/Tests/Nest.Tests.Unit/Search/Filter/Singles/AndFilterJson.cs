@@ -12,7 +12,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
-				.Filter(filter=>filter
+				.PostFilter(filter=>filter
 					.And(
 						f=>f.MatchAll(),
 						f=>f.Missing(p=>p.LOC)
@@ -22,7 +22,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 				
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
-				filter : {
+				post_filter : {
 						""and"": {
 							""filters"": [
 								{
@@ -45,7 +45,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
-				.Filter(filter => filter.Cache(true).Name("and_filter")
+				.PostFilter(filter => filter.Cache(true).Name("and_filter")
 					.And(
 						f => f.MatchAll(),
 						f => f.Missing(p => p.LOC)
@@ -55,7 +55,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
-				filter : {
+				post_filter : {
 						""and"": {
 							""filters"": [
 								{

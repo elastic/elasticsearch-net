@@ -10,13 +10,13 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 		public void IdsFilter()
 		{
 			var s = new SearchDescriptor<ElasticsearchProject>().From(0).Size(10)
-				.Filter(filter=>filter
+				.PostFilter(filter=>filter
 					.Ids(new[] { "1", "4", "100" })
 			);
 				
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
-				filter : {
+				post_filter : {
 						ids : { 
 							values : [""1"", ""4"", ""100""]
 						}
@@ -28,13 +28,13 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 		public void IdsFilterWithType()
 		{
 			var s = new SearchDescriptor<ElasticsearchProject>().From(0).Size(10)
-				.Filter(filter => filter
+				.PostFilter(filter => filter
 					.Ids("my_type", new[] { "1", "4", "100" })
 			);
 
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
-				filter : {
+				post_filter : {
 						ids : { 
 							type: [""my_type""],
 							values : [""1"", ""4"", ""100""]
@@ -47,13 +47,13 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 		public void IdsFilterWithTypes()
 		{
 			var s = new SearchDescriptor<ElasticsearchProject>().From(0).Size(10)
-				.Filter(filter => filter
+				.PostFilter(filter => filter
 					.Ids(new []{"my_type", "my_other_type"}, new[] { "1", "4", "100" })
 			);
 
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
-				filter : {
+				post_filter : {
 						ids : { 
 							type: [""my_type"", ""my_other_type""],
 							values : [""1"", ""4"", ""100""]

@@ -137,7 +137,7 @@ namespace Nest.Tests.Unit.ObjectInitializer.Search
 					}}
 				},
 				Query = query,
-				Filter = new FilterContainer(new BoolFilter
+				PostFilter = new FilterContainer(new BoolFilter
 				{
 					Cache = true,
 					Must = new FilterContainer[]

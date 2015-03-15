@@ -16,7 +16,7 @@ namespace Nest.Tests.Integration.Search.Filter
 				.From(0)
 				.Size(20)
 				.Fields(p=>p.Id, p=>p.Name, p=>p.LOC)
-				.Filter(filter=>filter
+				.PostFilter(filter=>filter
 					.Bool(b=>b
 						.Must(
 							f => f.MatchAll()

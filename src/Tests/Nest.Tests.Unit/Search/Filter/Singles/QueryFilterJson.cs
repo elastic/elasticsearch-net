@@ -12,13 +12,13 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
-				.Filter(ff=>ff
+				.PostFilter(ff=>ff
 					.Query(q=>q.Term(f=>f.Name,"elasticsearch.pm"))
 				);
 				
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
-				filter : {
+				post_filter : {
 						fquery: {
 							query:{
 								term : {
@@ -39,7 +39,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
-				.Filter(ff => ff
+				.PostFilter(ff => ff
 					.Cache(true)
 					.Name("query_filter")
 					.Query(q => q.Term(f => f.Name, "elasticsearch.pm"))
@@ -47,7 +47,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
-				filter : {
+				post_filter : {
 						fquery: {
 							query:{
 								term : {

@@ -19,7 +19,7 @@ namespace Nest.Tests.Unit.QueryParsers.Filter
 			where T : IFilter
 		{
 			var descriptor = this.DeserializeInto<SearchDescriptor<ElasticsearchProject>>(method, fileName);
-			var filter = filterBaseSelector(((ISearchRequest)descriptor).Filter);
+			var filter = filterBaseSelector(((ISearchRequest)descriptor).PostFilter);
 			filter.Should().NotBeNull();
 			return filter;
 		}
@@ -31,13 +31,13 @@ namespace Nest.Tests.Unit.QueryParsers.Filter
 			where T : IFilter
 		{
 			var descriptor = this.GetSearchDescriptorForFilter(s=>s
-				.Filter(f=>create(f
+				.PostFilter(f=>create(f
 					.Name(cacheName)
 					.CacheKey(cacheKey)
 					.Cache(cache)
 				))
 			);
-			var filter = filterBaseSelector(descriptor.Filter);
+			var filter = filterBaseSelector(descriptor.PostFilter);
 			filter.Should().NotBeNull();
 			filter.FilterName.Should().Be(cacheName);
 			filter.Cache.Should().Be(cache);

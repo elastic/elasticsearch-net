@@ -97,7 +97,7 @@ namespace StartupTests
 					() => new CallRoutine(c=>c
 						.Search<ElasticsearchProject>(s => s
 							.Query(q => q.Term("field", "value") && q.Term(p => p.Name, "name"))
-							.Filter(f => f.GeoPolygon(p => p.MyGeoShape, "1.0", "2.0", "3.0"))
+							.PostFilter(f => f.GeoPolygon(p => p.MyGeoShape, "1.0", "2.0", "3.0"))
 							.Aggregations(a => a
 								.Terms("term_items", gh => gh
 									.Field(p => p.Content)
@@ -119,7 +119,7 @@ namespace StartupTests
 					() => new CallRoutine(c=>c
 						.Search<ElasticsearchProject>(s=>s
 							.Query(q => q.Term("field", "value") && q.Term(p => p.Name, "name"))
-							.Filter(f => f.GeoPolygon(p => p.MyGeoShape, "1.0", "2.0", "3.0"))
+							.PostFilter(f => f.GeoPolygon(p => p.MyGeoShape, "1.0", "2.0", "3.0"))
 							.Aggregations(a => a
 								.Terms("term_items", gh => gh
 									.Field(p => p.Content)

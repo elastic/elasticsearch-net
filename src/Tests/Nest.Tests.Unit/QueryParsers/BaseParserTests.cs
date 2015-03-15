@@ -18,7 +18,7 @@ namespace Nest.Tests.Unit.QueryParsers
 
 		public ISearchRequest GetSearchDescriptorForFilter(Func<SearchDescriptor<ElasticsearchProject>, SearchDescriptor<ElasticsearchProject>> create)
 		{
-			return GetSearchDescriptor(create, request => request.Filter.Should().NotBeNull());
+			return GetSearchDescriptor(create, request => request.PostFilter.Should().NotBeNull());
 		}
 
 		private ISearchRequest GetSearchDescriptor(Func<SearchDescriptor<ElasticsearchProject>, SearchDescriptor<ElasticsearchProject>> create, Action<ISearchRequest> assertFunc )

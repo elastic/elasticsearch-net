@@ -12,13 +12,13 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
-				.Filter(filter => filter
+				.PostFilter(filter => filter
 					.GeoBoundingBox(f => f.Origin, 40.73, -74.1, 40.717, -73.99)
 				);
 
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
-				filter : {
+				post_filter : {
 					 geo_bounding_box: {
 							origin : {
 								top_left: ""-74.1, 40.73"",
@@ -35,7 +35,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
-				.Filter(filter => filter
+				.PostFilter(filter => filter
 					.Cache(true)
 					.Name("my_geo_filter")
 					.GeoBoundingBox(f => f.Origin, 
@@ -49,7 +49,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
-				filter : {
+				post_filter : {
 					 geo_bounding_box: {
 							origin : {
 								top_left: ""-74.1, 40.73"",

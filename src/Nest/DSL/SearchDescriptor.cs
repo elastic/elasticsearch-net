@@ -78,9 +78,9 @@ namespace Nest
 		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryContainer>, CustomJsonConverter>))]
 		IQueryContainer Query { get; set; }
 
-		[JsonProperty(PropertyName = "filter")]
+		[JsonProperty(PropertyName = "post_filter")]
 		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<FilterContainer>, CustomJsonConverter>))]
-		IFilterContainer Filter { get; set; }
+		IFilterContainer PostFilter { get; set; }
 
 		string Preference { get; }
 		
@@ -154,7 +154,7 @@ namespace Nest
 		public ISourceFilter Source { get; set; }
 		public IList<ISort> Sort { get; set; }
 		public IDictionary<IndexNameMarker, double> IndicesBoost { get; set; }
-		public IFilterContainer Filter { get; set; }
+		public IFilterContainer PostFilter { get; set; }
 		public IQueryContainer Query { get; set; }
 		public IRescore Rescore { get; set; }
 		public IDictionary<PropertyPathMarker, IFacetContainer> Facets { get; set; }
@@ -235,7 +235,7 @@ namespace Nest
 		public ISourceFilter Source { get; set; }
 		public IDictionary<string, IAggregationContainer> Aggregations { get; set; }
 		public IQueryContainer Query { get; set; }
-		public IFilterContainer Filter { get; set; }
+		public IFilterContainer PostFilter { get; set; }
 		SearchType? ISearchRequest.SearchType
 		{
 			get { return  this.QueryString == null ? null : this.QueryString.GetQueryStringValue<SearchType?>("search_type");  }
@@ -339,7 +339,7 @@ namespace Nest
 
 		IQueryContainer ISearchRequest.Query { get; set; }
 
-		IFilterContainer ISearchRequest.Filter { get; set; }
+		IFilterContainer ISearchRequest.PostFilter { get; set; }
 
 		IList<PropertyPathMarker> ISearchRequest.Fields { get; set; }
 
@@ -1077,7 +1077,7 @@ namespace Nest
 		/// <summary>
 		/// Filter search using a filter descriptor lambda
 		/// </summary>
-		public SearchDescriptor<T> Filter(Func<FilterDescriptor<T>, FilterContainer> filter)
+		public SearchDescriptor<T> PostFilter(Func<FilterDescriptor<T>, FilterContainer> filter)
 		{
 			filter.ThrowIfNull("filter");
 			var f = new FilterDescriptor<T>().Strict(this._Strict);
@@ -1092,16 +1092,17 @@ namespace Nest
 				return this;
 
 
-			Self.Filter = bf;
+			Self.PostFilter = bf;
 			return this;
 		}
+
 		/// <summary>
 		/// Filter search
 		/// </summary>
-		public SearchDescriptor<T> Filter(FilterContainer filterDescriptor)
+		public SearchDescriptor<T> PostFilter(FilterContainer filterDescriptor)
 		{
 			filterDescriptor.ThrowIfNull("filter");
-			Self.Filter = filterDescriptor;
+			Self.PostFilter = filterDescriptor;
 			return this;
 		}
 
@@ -1110,7 +1111,7 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> FilterRaw(string rawFilter)
 		{
-			Self.Filter = new FilterDescriptor<T>().Raw(rawFilter);
+			Self.PostFilter = new FilterDescriptor<T>().Raw(rawFilter);
 			return this;
 		}
 

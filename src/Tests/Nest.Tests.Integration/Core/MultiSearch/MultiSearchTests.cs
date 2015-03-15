@@ -60,13 +60,13 @@ namespace Nest.Tests.Integration.Core.MultiSearch
 				.Search<ElasticsearchProject>(s => s
 					.IgnoreUnavailable()
 					.Query(q=>q.Term(p=>p.Name, "NEST"))
-					.Filter(f => f.Term(p => p.Name, "NEST"))
+					.PostFilter(f => f.Term(p => p.Name, "NEST"))
 					.FacetTerm(tf=>tf.OnField(p=>p.Name).Global())
 					.SortDescending(p=>p.LongValue)
 				)
 				.Search<Person>(s => s
 					.Query(q => q.Term(p => p.FirstName, "Ellie") || q.Term(p => p.FirstName, "Jessica"))
-					.Filter(f => f.Term(p => p.FirstName, "Jake") || f.Term(p => p.FirstName, "Lewis"))
+					.PostFilter(f => f.Term(p => p.FirstName, "Jake") || f.Term(p => p.FirstName, "Lewis"))
 					.FacetTerm(tf => tf.OnField(p => p.FirstName).Global())
 					.SortDescending(p => p.FirstName)
 				)

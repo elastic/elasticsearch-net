@@ -10,7 +10,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 		public void HasChildFilter()
 		{
 			var s = new SearchDescriptor<ElasticsearchProject>().From(0).Size(10)
-				.Filter(ff=>ff
+				.PostFilter(ff=>ff
 					.HasChild<Person>(d=>d
 						.Query(q => q.Term(p => p.FirstName, "value"))
 						.Filter(q => q.Term(p => p.Age, 42))
@@ -19,7 +19,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 				
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
-				filter : {
+				post_filter : {
 					""has_child"": {
 					  ""type"": ""person"",
 					  ""query"": {
