@@ -27,10 +27,8 @@ namespace Nest
 		double? Boost { get; set; }
 
 		[JsonProperty(PropertyName = "_cache")]
+		[Obsolete("scheduled to be removed in 2.o copy paste errror from filters")]
 		bool? Cache { get; set; }
-
-		[JsonProperty(PropertyName = "_name")]
-		string Name { get; set; }
 
 		[JsonProperty("time_zone")]
 		string TimeZone { get; set; }
@@ -68,7 +66,7 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class RangeQueryDescriptor<T> : IRangeQuery where T : class
 	{
-		IRangeQuery Self { get { return this; } }
+		private IRangeQuery Self { get { return this; } }
 
 		string IRangeQuery.GreaterThanOrEqualTo { get; set; }
 	
@@ -81,8 +79,6 @@ namespace Nest
 		double? IRangeQuery.Boost { get; set; }
 		
 		bool? IRangeQuery.Cache { get; set; }
-		
-		string IRangeQuery.Name { get; set; }
 
 		string IRangeQuery.TimeZone { get; set; }
 
@@ -102,6 +98,8 @@ namespace Nest
 			}
 		}
 
+		string IQuery.Name { get; set; }
+
 		void IFieldNameQuery.SetFieldName(string fieldName)
 		{
 			this.Self.Field = fieldName;
@@ -112,6 +110,11 @@ namespace Nest
 			return this.Self.Field;
 		}
 
+		public RangeQueryDescriptor<T> Name(string name)
+		{
+			Self.Name = name;
+			return this;
+		}
 		public RangeQueryDescriptor<T> OnField(string field)
 		{
 			this.Self.Field = field;

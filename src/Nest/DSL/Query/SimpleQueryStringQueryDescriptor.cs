@@ -44,7 +44,7 @@ namespace Nest
 		{
 			container.SimpleQueryString = this;
 		}
-
+		public string Name { get; set; }
 		bool IQuery.IsConditionless { get { return false; } }
 		public string Query { get; set; }
 		public PropertyPathMarker DefaultField { get; set; }
@@ -58,6 +58,8 @@ namespace Nest
 
 	public class SimpleQueryStringQueryDescriptor<T> : ISimpleQueryStringQuery where T : class
 	{
+		private ISimpleQueryStringQuery Self { get { return this; } }
+
 		string ISimpleQueryStringQuery.Query { get; set; }
 		
 		PropertyPathMarker ISimpleQueryStringQuery.DefaultField { get; set; }
@@ -74,80 +76,86 @@ namespace Nest
 		
 		string ISimpleQueryStringQuery.Locale { get; set; }
 
+		string IQuery.Name { get; set; }
 
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				return ((ISimpleQueryStringQuery)this).Query.IsNullOrEmpty();
+				return Self.Query.IsNullOrEmpty();
 			}
 		}
 
+		public SimpleQueryStringQueryDescriptor<T> Name(string name)
+		{
+			Self.Name = name;
+			return this;
+		}
 
 		public SimpleQueryStringQueryDescriptor<T> DefaultField(string field)
 		{
-			((ISimpleQueryStringQuery)this).DefaultField = field;
+			Self.DefaultField = field;
 			return this;
 		}
 		public SimpleQueryStringQueryDescriptor<T> DefaultField(Expression<Func<T, object>> objectPath)
 		{
-			((ISimpleQueryStringQuery)this).DefaultField = objectPath;
+			Self.DefaultField = objectPath;
 			return this;
 		}
 		public SimpleQueryStringQueryDescriptor<T> OnFields(IEnumerable<string> fields)
 		{
-			((ISimpleQueryStringQuery)this).Fields = fields.Select(f=>(PropertyPathMarker)f);
+			Self.Fields = fields.Select(f=>(PropertyPathMarker)f);
 			return this;
 		}
 		public SimpleQueryStringQueryDescriptor<T> OnFields(
 			params Expression<Func<T, object>>[] objectPaths)
 		{
-			((ISimpleQueryStringQuery)this).Fields = objectPaths.Select(e=>(PropertyPathMarker)e);
+			Self.Fields = objectPaths.Select(e=>(PropertyPathMarker)e);
 			return this;
 		}
 		public SimpleQueryStringQueryDescriptor<T> OnFieldsWithBoost(Action<FluentDictionary<Expression<Func<T, object>>, double?>> boostableSelector)
 		{
 			var d = new FluentDictionary<Expression<Func<T, object>>, double?>();
 			boostableSelector(d);
-			((ISimpleQueryStringQuery)this).Fields = d.Select(o => PropertyPathMarker.Create(o.Key, o.Value));
+			Self.Fields = d.Select(o => PropertyPathMarker.Create(o.Key, o.Value));
 			return this;
 		}
 		public SimpleQueryStringQueryDescriptor<T> OnFieldsWithBoost(Action<FluentDictionary<string, double?>> boostableSelector) 
 		{
 			var d = new FluentDictionary<string, double?>();
 			boostableSelector(d);
-			((ISimpleQueryStringQuery)this).Fields = d.Select(o => PropertyPathMarker.Create(o.Key, o.Value));
+			Self.Fields = d.Select(o => PropertyPathMarker.Create(o.Key, o.Value));
 			return this;
 		}
 
 		public SimpleQueryStringQueryDescriptor<T> Query(string query)
 		{
-			((ISimpleQueryStringQuery)this).Query = query;
+			Self.Query = query;
 			return this;
 		}
 		public SimpleQueryStringQueryDescriptor<T> DefaultOperator(Operator op)
 		{
-			((ISimpleQueryStringQuery)this).DefaultOperator = op;
+			Self.DefaultOperator = op;
 			return this;
 		}
 		public SimpleQueryStringQueryDescriptor<T> Analyzer(string analyzer)
 		{
-			((ISimpleQueryStringQuery)this).Analyzer = analyzer;
+			Self.Analyzer = analyzer;
 			return this;
 		}
 		public SimpleQueryStringQueryDescriptor<T> Flags(string flags)
 		{
-			((ISimpleQueryStringQuery)this).Flags = flags;
+			Self.Flags = flags;
 			return this;
 		}
 		public SimpleQueryStringQueryDescriptor<T> LowercaseExpendedTerms(bool lowercaseExpendedTerms= true)
 		{
-			((ISimpleQueryStringQuery)this).LowercaseExpendedTerms = lowercaseExpendedTerms;
+			Self.LowercaseExpendedTerms = lowercaseExpendedTerms;
 			return this;
 		}
 		public SimpleQueryStringQueryDescriptor<T> Locale(string locale)
 		{
-			((ISimpleQueryStringQuery)this).Locale = locale;
+			Self.Locale = locale;
 			return this;
 		}
 

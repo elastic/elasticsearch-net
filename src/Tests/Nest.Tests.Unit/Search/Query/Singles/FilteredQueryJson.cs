@@ -12,6 +12,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 			var s = new SearchDescriptor<ElasticsearchProject>().From(0).Size(10)
 				.Query(qd=>qd
 					.Filtered(cs=>cs
+						.Name("named_query")
 						.Query(q=>q.MatchAll())
 						.Filter(f => f.MatchAll())
 					)
@@ -21,6 +22,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 			var expected = @"{ from: 0, size: 10, 
 				query : {
 						filtered : { 
+							_name: ""named_query"",
 							query : { match_all : {} },
 							filter : { match_all : {} }
 						}

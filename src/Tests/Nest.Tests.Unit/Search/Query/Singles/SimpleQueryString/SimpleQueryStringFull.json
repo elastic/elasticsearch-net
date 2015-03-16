@@ -3,6 +3,7 @@
   "size": 10,
   "query": {
     "simple_query_string": {
+      "_name" :  "named_query",
       "query": "\"fried eggs\" +(eggplant | potato) -frittata",
       "fields": [
         "name^2",

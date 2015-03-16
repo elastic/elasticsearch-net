@@ -30,6 +30,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 				.Size(10)
 				.Query(qd=>qd
 					.Bool(b=>b
+						.Name("named_query")
 						.Must(q => q.MatchAll())
 						.MustNot(q => q.Term(p => p.Name, "elasticsearch.pm"))
 						.Should(q => q.Term(p => p.Name, "elasticflume"))
@@ -40,6 +41,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 			var expected = @"{ from: 0, size: 10, 
 				query : {
 						""bool"": {
+							_name: ""named_query"",
 							""must"": [
 								{
 									""match_all"": {}

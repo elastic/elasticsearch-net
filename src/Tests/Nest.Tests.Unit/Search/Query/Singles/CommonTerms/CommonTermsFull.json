@@ -4,6 +4,7 @@
   "query": {
     "common": {
       "content": {
+        "_name" : "named_query",
         "query": "This is the most awful stopwords query ever",
         "cutoff_frequency": 0.01,
         "low_freq_operator": "or",

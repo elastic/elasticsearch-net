@@ -65,6 +65,7 @@ namespace Nest
 		}
 
 		bool IQuery.IsConditionless { get { return false; } }
+
 		PropertyPathMarker IFieldNameQuery.GetFieldName()
 		{
 			return this.Field;
@@ -75,6 +76,7 @@ namespace Nest
 			this.Field = fieldName;
 		}
 
+		public string Name { get; set; }
 		public string Type { get; set; }
 		public string Query { get; set; }
 		public string Analyzer { get; set; }
@@ -134,6 +136,8 @@ namespace Nest
 				return Self.Field.IsConditionless() || Self.Query.IsNullOrEmpty();
 			}
 		}
+		string IQuery.Name { get; set; }
+
 		void IFieldNameQuery.SetFieldName(string fieldName)
 		{
 			Self.Field = fieldName;
@@ -143,6 +147,11 @@ namespace Nest
 			return Self.Field;
 		}
 
+		public MatchQueryDescriptor<T> Name(string name)
+		{
+			Self.Name = name;
+			return this;
+		}
 		public MatchQueryDescriptor<T> OnField(string field)
 		{
 			Self.Field = field;

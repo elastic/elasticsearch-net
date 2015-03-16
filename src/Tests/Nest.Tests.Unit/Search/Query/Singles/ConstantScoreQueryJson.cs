@@ -12,6 +12,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 			var s = new SearchDescriptor<ElasticsearchProject>().From(0).Size(10)
 				.Query(q=>q
 					.ConstantScore(cs=>cs
+						.Name("named_query")
 						.Query(qq=>qq.MatchAll())
 						.Boost(1.2)
 					)
@@ -21,6 +22,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 			var expected = @"{ from: 0, size: 10, 
 				query : {
 						constant_score : { 
+							_name: ""named_query"",
 							query : { match_all : {} },
 							boost: 1.2
 						}

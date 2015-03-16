@@ -21,6 +21,8 @@ namespace Nest
 			}
 		}
 
+		string IQuery.Name { get; set; }
+
 		public ConditionlessQueryDescriptor<T> Query(Func<QueryDescriptor<T>, QueryContainer> querySelector)
 		{
 			querySelector.ThrowIfNull("querySelector");

@@ -30,6 +30,7 @@ namespace Nest
 			container.HasChild = this;
 		}
 
+		public string Name { get; set; }
 		bool IQuery.IsConditionless { get { return false; } }
 		public TypeNameMarker Type { get; set; }
 		public ChildScoreType? ScoreType { get; set; }
@@ -38,42 +39,50 @@ namespace Nest
 
 	public class HasChildQueryDescriptor<T> : IHasChildQuery where T : class
 	{
-		TypeNameMarker IHasChildQuery.Type { get; set; }
+		private IHasChildQuery Self { get { return this; } }
 
+		TypeNameMarker IHasChildQuery.Type { get; set; }
 
 		ChildScoreType? IHasChildQuery.ScoreType { get; set; }
 
 		IQueryContainer IHasChildQuery.Query { get; set; }
 
+		string IQuery.Name { get; set; }
+
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				return ((IHasChildQuery)this).Query == null || ((IHasChildQuery)this).Query.IsConditionless;
+				return Self.Query == null || Self.Query.IsConditionless;
 			}
 		}
 
 		public HasChildQueryDescriptor()
 		{
-			((IHasChildQuery)this).Type = TypeNameMarker.Create<T>();
+			Self.Type = TypeNameMarker.Create<T>();
 		}
-	
+
+		public HasChildQueryDescriptor<T> Name(string name)
+		{
+			Self.Name = name;
+			return this;
+		}
 
 		public HasChildQueryDescriptor<T> Query(Func<QueryDescriptor<T>, QueryContainer> querySelector)
 		{
 			var q = new QueryDescriptor<T>();
-			((IHasChildQuery)this).Query = querySelector(q);
+			Self.Query = querySelector(q);
 			return this;
 		}
 		public HasChildQueryDescriptor<T> Type(string type)
 		{
-			((IHasChildQuery)this).Type = type;
+			Self.Type = type;
 			return this;
 		}
 
 		public HasChildQueryDescriptor<T> Score(ChildScoreType? scoreType)
 		{
-			((IHasChildQuery)this).ScoreType = scoreType;
+			Self.ScoreType = scoreType;
 			return this;
 		}
 

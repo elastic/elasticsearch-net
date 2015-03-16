@@ -19,6 +19,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 				.Size(10)
 				.Query(q => q
 					.SpanMultiTerm(sp => sp
+						.Name("named_query")
 						.Match(m => m
 							.Prefix(p => p
 								.OnField(ep => ep.Name)
@@ -31,6 +32,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 			var expected = @"{ from: 0, size: 10, query : 
 			{
 				span_multi:{
+					_name: ""named_query"",
 					match:{
 						prefix : { name :  { value : ""NEST"" } }
 					}

@@ -14,6 +14,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 				.Size(10)
 				.Query(qd=>qd
 					.Boosting(b=>b
+						.Name("named_query")
 						.Positive(q => q.MatchAll())
 						.Negative(q => q.Term(p => p.Name, "elasticsearch.pm"))
 						.NegativeBoost(0.4)
@@ -24,6 +25,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 			var expected = @"{ from: 0, size: 10, 
 				query : {
 						""boosting"": {
+							_name: ""named_query"",
 							""positive"":	{
 									""match_all"": {}
 							},

@@ -20,6 +20,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles.GeoShape
 				.Size(10)
 				.Query(q => q
 					.GeoShapeMultiPolygon(qs => qs
+						.Name("named_query")
 						.OnField(p => p.MyGeoShape)
 						.Coordinates(
 								new[] {

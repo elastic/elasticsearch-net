@@ -14,6 +14,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 				.Size(10)
 				.Query(q=>q
 					.QueryString(qs=>qs
+						.Name("named_query")
 						.OnFieldsWithBoost(d=>d
 							.Add(f=>f.Name, 2.0)
 							.Add(f=>f.Country, 5.0)
@@ -26,6 +27,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 			var expected = @"{ from: 0, size: 10, 
 				query : {
 					query_string: {
+						_name: ""named_query"",
 						query : ""this AND that OR thus"",
 						fields : [""name^2"", ""country^5""]
 					}

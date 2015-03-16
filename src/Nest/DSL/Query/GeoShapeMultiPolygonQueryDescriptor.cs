@@ -24,6 +24,7 @@ namespace Nest
 			container.GeoShape = this;
 		}
 
+		public string Name { get; set; }
 		bool IQuery.IsConditionless { get { return false; } }
 
 		PropertyPathMarker IFieldNameQuery.GetFieldName()
@@ -43,6 +44,8 @@ namespace Nest
 
 	public class GeoShapeMultiPolygonQueryDescriptor<T> : IGeoShapeMultiPolygonQuery where T : class
 	{
+		private IGeoShapeMultiPolygonQuery Self { get { return this; }}
+
 		PropertyPathMarker IGeoShapeQuery.Field { get; set; }
 		
 		IMultiPolygonGeoShape IGeoShapeMultiPolygonQuery.Shape { get; set; }
@@ -51,10 +54,12 @@ namespace Nest
 		{
 			get
 			{
-				return ((IGeoShapeQuery)this).Field.IsConditionless() || ((IGeoShapeMultiPolygonQuery)this).Shape == null || !((IGeoShapeMultiPolygonQuery)this).Shape.Coordinates.HasAny();
+				return ((IGeoShapeQuery)this).Field.IsConditionless() || Self.Shape == null || !Self.Shape.Coordinates.HasAny();
 			}
-
 		}
+
+		string IQuery.Name { get; set; }
+
 		void IFieldNameQuery.SetFieldName(string fieldName)
 		{
 			((IGeoShapeQuery)this).Field = fieldName;
@@ -75,11 +80,17 @@ namespace Nest
 			return this;
 		}
 
+		public GeoShapeMultiPolygonQueryDescriptor<T> Name(string name)
+		{
+			Self.Name = name;
+			return this;
+		}
+
 		public GeoShapeMultiPolygonQueryDescriptor<T> Coordinates(IEnumerable<IEnumerable<IEnumerable<IEnumerable<double>>>> coordinates)
 		{
-			if (((IGeoShapeMultiPolygonQuery)this).Shape == null)
-				((IGeoShapeMultiPolygonQuery)this).Shape = new MultiPolygonGeoShape();
-			((IGeoShapeMultiPolygonQuery)this).Shape.Coordinates = coordinates;
+			if (Self.Shape == null)
+				Self.Shape = new MultiPolygonGeoShape();
+			Self.Shape.Coordinates = coordinates;
 			return this;
 		}
 	}

@@ -12,6 +12,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 			var s = new SearchDescriptor<ElasticsearchProject>().From(0).Size(10)
 				.Query(q => q
 					.FunctionScore(fs => fs
+						.Name("named_query")
 						.Query(qq => qq.MatchAll())
 						.Functions(
 						    f => f.Weight(3.0).Filter(ff => ff.Term(p => p.Name, "elasticsearch")),
@@ -32,6 +33,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
                 fields: [""content""],
 				query : {
                     function_score : { 
+						_name: ""named_query"",
                         functions: [
 							{weight: 3.0, filter: { term: { 'name': 'elasticsearch' }}},
                             {gauss:  { startedOn  : { scale: '42w'}}},

@@ -1,4 +1,5 @@
 using FluentAssertions;
+using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
 
 namespace Nest.Tests.Unit.QueryParsers.Queries
@@ -10,9 +11,9 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 		public void Match_Deserializes()
 		{
 			var q = this.SerializeThenDeserialize(
-				f=>f.Match,
-				f=>f.Match(m=>m
-					.OnField(p=>p.Name)
+				f => f.Match,
+				f => f.Match(m => m
+					.OnField(p => p.Name)
 					.Analyzer("my-analyzer")
 					.Boost(2.1)
 					.CutoffFrequency(1.31)
@@ -46,9 +47,9 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 		public void MatchPhrasePhrefix_Deserializes()
 		{
 			var q = this.SerializeThenDeserialize(
-				f=>f.Match,
-				f=>f.MatchPhrasePrefix(m=>m
-					.OnField(p=>p.Name)
+				f => f.Match,
+				f => f.MatchPhrasePrefix(m => m
+					.OnField(p => p.Name)
 					.Analyzer("my-analyzer")
 					.Boost(2.1)
 					.CutoffFrequency(1.31)
@@ -81,9 +82,9 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 		public void MatchPhrase_Deserializes()
 		{
 			var q = this.SerializeThenDeserialize(
-				f=>f.Match,
-				f=>f.MatchPhrase(m=>m
-					.OnField(p=>p.Name)
+				f => f.Match,
+				f => f.MatchPhrase(m => m
+					.OnField(p => p.Name)
 					.Analyzer("my-analyzer")
 					.Boost(2.1)
 					.CutoffFrequency(1.31)

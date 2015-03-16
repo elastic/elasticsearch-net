@@ -24,6 +24,7 @@ namespace Nest
 			container.GeoShape = this;
 		}
 
+		public string Name { get; set; }
 		bool IQuery.IsConditionless { get { return false; } }
 
 		PropertyPathMarker IFieldNameQuery.GetFieldName()
@@ -43,6 +44,8 @@ namespace Nest
 
 	public class GeoShapeEnvelopeQueryDescriptor<T> : IGeoShapeEnvelopeQuery where T : class
 	{
+		private IGeoShapeEnvelopeQuery Self { get { return this; } }
+
 		PropertyPathMarker IGeoShapeQuery.Field { get; set; }
 		
 		IEnvelopeGeoShape IGeoShapeEnvelopeQuery.Shape { get; set; }
@@ -51,36 +54,44 @@ namespace Nest
 		{
 			get
 			{
-				return ((IGeoShapeQuery)this).Field.IsConditionless() || ((IGeoShapeEnvelopeQuery)this).Shape == null || !((IGeoShapeEnvelopeQuery)this).Shape.Coordinates.HasAny();
+				return Self.Field.IsConditionless() || Self.Shape == null || !Self.Shape.Coordinates.HasAny();
 			}
-
 		}
+
+		string IQuery.Name { get; set; }
+
 		void IFieldNameQuery.SetFieldName(string fieldName)
 		{
-			((IGeoShapeQuery)this).Field = fieldName;
+			Self.Field = fieldName;
 		}
 		PropertyPathMarker IFieldNameQuery.GetFieldName()
 		{
-			return ((IGeoShapeQuery)this).Field;
+			return Self.Field;
+		}
+
+		public GeoShapeEnvelopeQueryDescriptor<T> Name(string name)
+		{
+			Self.Name = name;
+			return this;
 		}
 		
 		public GeoShapeEnvelopeQueryDescriptor<T> OnField(string field)
 		{
-			((IGeoShapeQuery)this).Field = field;
+			Self.Field = field;
 			return this;
 		}
 
 		public GeoShapeEnvelopeQueryDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
 		{
-			((IGeoShapeQuery)this).Field = objectPath;
+			Self.Field = objectPath;
 			return this;
 		}
 
 		public GeoShapeEnvelopeQueryDescriptor<T> Coordinates(IEnumerable<IEnumerable<double>> coordinates)
 		{
-			if (((IGeoShapeEnvelopeQuery)this).Shape == null)
-				((IGeoShapeEnvelopeQuery)this).Shape = new EnvelopeGeoShape();
-			((IGeoShapeEnvelopeQuery)this).Shape.Coordinates = coordinates;
+			if (Self.Shape == null)
+				Self.Shape = new EnvelopeGeoShape();
+			Self.Shape.Coordinates = coordinates;
 			return this;
 		}
 	}

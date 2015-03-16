@@ -14,13 +14,14 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 				.Size(10)
 				.Query(q => q
 					.Fuzzy(fz => fz
+						.Name("named_query")
 						.OnField(f=>f.Name)
 						.Value("elasticsearcc")
 					)
 				);
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, query : 
-			{ fuzzy: { name : { value : ""elasticsearcc"" } }}}";
+			{ fuzzy: { name : { value : ""elasticsearcc"", _name: ""named_query"" } }}}";
 			Assert.True(json.JsonEquals(expected), json);
 		}
 		[Test]

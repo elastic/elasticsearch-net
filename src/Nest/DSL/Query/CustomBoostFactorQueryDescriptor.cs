@@ -25,6 +25,8 @@ namespace Nest
 			container.CustomBoostFactor = this;
 		}
 
+		public string Name { get; set; }
+
 		bool IQuery.IsConditionless { get { return false; } }
 		public IQueryContainer Query { get; set; }
 		public double? BoostFactor { get; set; }
@@ -32,18 +34,27 @@ namespace Nest
 
 	public class CustomBoostFactorQueryDescriptor<T> : ICustomBoostFactorQuery where T : class
 	{
+		private ICustomBoostFactorQuery Self  { get { return this; }}
+
 		IQueryContainer ICustomBoostFactorQuery.Query { get; set; }
 
 		double? ICustomBoostFactorQuery.BoostFactor { get; set; }
+
+		string IQuery.Name { get; set; }
 
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				return ((ICustomBoostFactorQuery)this).Query == null || ((ICustomBoostFactorQuery)this).Query.IsConditionless;
+				return Self.Query == null || Self.Query.IsConditionless;
 			}
 		}
 
+		public CustomBoostFactorQueryDescriptor<T> Name(string name)
+		{
+			Self.Name = name;
+			return this;
+		}
 
 		public CustomBoostFactorQueryDescriptor<T> Query(Func<QueryDescriptor<T>, QueryContainer> querySelector)
 		{
@@ -51,13 +62,13 @@ namespace Nest
 			var query = new QueryDescriptor<T>();
 			var q = querySelector(query);
 
-			((ICustomBoostFactorQuery)this).Query = q;
+			Self.Query = q;
 			return this;
 		}
 
 		public CustomBoostFactorQueryDescriptor<T> BoostFactor(double boostFactor)
 		{
-			((ICustomBoostFactorQuery)this).BoostFactor = boostFactor;
+			Self.BoostFactor = boostFactor;
 			return this;
 		}
 	}
