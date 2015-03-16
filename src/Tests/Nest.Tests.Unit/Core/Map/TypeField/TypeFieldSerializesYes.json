@@ -1,7 +1,7 @@
   {
   "elasticsearchprojects": {
     "_type": {
-      "index": "analyzed",
+      "index": "no",
       "store": true
     }
   }

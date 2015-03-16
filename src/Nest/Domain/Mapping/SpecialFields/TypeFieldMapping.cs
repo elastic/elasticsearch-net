@@ -29,7 +29,7 @@ namespace Nest
 
 		bool? ITypeFieldMapping.Store { get; set; }
 
-		public TypeFieldMappingDescriptor Index(NonStringIndexOption index = NonStringIndexOption.Analyzed)
+		public TypeFieldMappingDescriptor Index(NonStringIndexOption index = NonStringIndexOption.No)
 		{
 			Self.Index = index;
 			return this;

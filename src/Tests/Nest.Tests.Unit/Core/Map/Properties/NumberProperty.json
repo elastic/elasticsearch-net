@@ -5,7 +5,7 @@
         "type": "integer",
         "index_name": "lines_of_code",
         "store": true,
-        "index": "analyzed",
+        "index": "no",
         "precision_step": 1,
         "boost": 2.0,
         "null_value": 0.0,

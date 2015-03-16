@@ -74,7 +74,7 @@ namespace Nest.Tests.Unit.Core.Map
 				},
 				TypeFieldMappingDescriptor = new TypeFieldMapping()
 				{
-					Index = NonStringIndexOption.NotAnalyzed, 
+					Index = NonStringIndexOption.No, 
 					Store = false,
 				}
 			};
