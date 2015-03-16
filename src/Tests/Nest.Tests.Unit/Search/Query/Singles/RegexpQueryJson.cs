@@ -40,11 +40,11 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 				.From(0)
 				.Size(10)
 				.Query(q => q
-					.Regexp(r => r.OnField(p => p.Name).Value("ab?").Boost(1.2))
+					.Regexp(r => r.OnField(p => p.Name).Value("ab?").Boost(1.2).Name("named_query"))
 				);
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, query : 
-			{ regexp: { name : { value : ""ab?"", boost: 1.2 } }}}";
+			{ regexp: { name : { value : ""ab?"", boost: 1.2, _name: ""named_query""} }}}";
 			Assert.True(json.JsonEquals(expected), json);
 		}
 

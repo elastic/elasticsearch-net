@@ -14,6 +14,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 				.Size(10)
 				.Query(qd=>qd
 					.Dismax(d=>d
+						.Name("named_query")
 						.Boost(1.2)
 						.TieBreaker(0.7)
 						.Queries(
@@ -27,6 +28,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 			var expected = @"{ from: 0, size: 10, 
 				query : {
 						dis_max : { 
+							_name: ""named_query"",
 							tie_breaker: 0.7,
 							boost: 1.2,
 							queries :[

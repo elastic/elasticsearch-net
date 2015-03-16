@@ -14,6 +14,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 					//disabling obsolete message in this test
 					#pragma warning disable 0618
 					.CustomScore(cs=>cs
+						.Name("named_query")
 						.Script("doc['num1'].value > 1")
 						.Query(qq=>qq.MatchAll())
 					)
@@ -24,6 +25,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 			var expected = @"{ from: 0, size: 10, 
 				query : {
 						custom_score : { 
+							_name: ""named_query"",
 							script : ""doc['num1'].value > 1"",
 							query : { match_all : {} }
 						}

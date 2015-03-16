@@ -27,10 +27,8 @@ namespace Nest
 		double? Boost { get; set; }
 
 		[JsonProperty(PropertyName = "_cache")]
+		[Obsolete("scheduled to be removed in 2.o copy paste errror from filters")]
 		bool? Cache { get; set; }
-
-		[JsonProperty(PropertyName = "_name")]
-		string Name { get; set; }
 
 		[JsonProperty("time_zone")]
 		string TimeZone { get; set; }
@@ -81,8 +79,6 @@ namespace Nest
 		double? IRangeQuery.Boost { get; set; }
 		
 		bool? IRangeQuery.Cache { get; set; }
-		
-		string IRangeQuery.Name { get; set; }
 
 		string IRangeQuery.TimeZone { get; set; }
 

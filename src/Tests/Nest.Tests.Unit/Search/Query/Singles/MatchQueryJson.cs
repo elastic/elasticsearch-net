@@ -14,6 +14,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 				.Size(10)
 				.Query(q=>q
 					.Match(t=>t
+						.Name("named_query")
 						.OnField(f=>f.Name)
 						.Query("this is a test")
 						.MinimumShouldMatch("2<80%")
@@ -26,6 +27,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 				query : {
 					match: {
 						name : { 
+							_name: ""named_query"",
 							query : ""this is a test"",
 							rewrite: ""constant_score_default"",
 							minimum_should_match: ""2<80%""
@@ -44,6 +46,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 				.Size(10)
 				.Query(q=>q
 					.MatchPhrase(t=>t
+						.Name("named_query")
 						.OnField(f=>f.Name)
 						.Lenient()
 						.Query("this is a test")
@@ -55,6 +58,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 				query : {
 					match: {
 						name : { 
+							_name: ""named_query"",
 							type: ""phrase"",
 							query : ""this is a test"",
 							lenient: true

@@ -20,6 +20,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles.GeoShape
 				.Size(10)
 				.Query(q => q
 					.GeoShapeMultiLineString(qs => qs
+						.Name("named_query")
 						.OnField(p => p.MyGeoShape)
 						.Coordinates(new[] { 
 								new[] { new[] { 102.0, 2.0 }, new[] { 103.0, 2.0 }, new[] { 103.0, 3.0 }, new[] { 102.0, 3.0 } },

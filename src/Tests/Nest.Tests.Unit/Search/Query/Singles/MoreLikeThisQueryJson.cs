@@ -14,6 +14,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 				.Size(10)
 				.Query(q => q
 					.MoreLikeThis(fz => fz
+						.Name("named_query")
 						.OnFields(f => f.Name)
 						.LikeText("elasticsearcc")
 					)
@@ -21,6 +22,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, query : 
 			{ mlt: { 
+				_name: ""named_query"",
 				fields : [""name"" ],
 				like_text : ""elasticsearcc"" 
 			}}}";

@@ -88,7 +88,7 @@ namespace Nest
 			((ITermQuery)spanTerm).Field = fieldDescriptor;
 			((ITermQuery)spanTerm).Value = value;
 			((ITermQuery)spanTerm).Boost = Boost;
-			return CreateQuery(spanTerm, (sq) => Self.SpanTermQueryDescriptor = spanTerm);
+			return CreateQuery(spanTerm, (sq) => sq.SpanTermQueryDescriptor = spanTerm);
 		}
 		
 		public SpanQuery<T> SpanTerm(string field, string value, double? Boost = null)
@@ -100,43 +100,42 @@ namespace Nest
 			((ITermQuery)spanTerm).Field = field;
 			((ITermQuery)spanTerm).Value = value;
 			((ITermQuery)spanTerm).Boost = Boost;
-			return CreateQuery(spanTerm, (sq) => Self.SpanTermQueryDescriptor = spanTerm);
-
+			return CreateQuery(spanTerm, (sq) => sq.SpanTermQueryDescriptor = spanTerm);
 		}
 		
 		public SpanQuery<T> SpanFirst(Func<SpanFirstQueryDescriptor<T>, SpanFirstQueryDescriptor<T>> selector)
 		{
 			selector.ThrowIfNull("selector");
 			var q = selector(new SpanFirstQueryDescriptor<T>());
-			return CreateQuery(q, (sq) => Self.SpanFirst = q);
+			return CreateQuery(q, (sq) => sq.SpanFirst = q);
 		}
 		
 		public SpanQuery<T> SpanNear(Func<SpanNearQueryDescriptor<T>, SpanNearQueryDescriptor<T>> selector)
 		{
 			selector.ThrowIfNull("selector");
 			var q = selector(new SpanNearQueryDescriptor<T>());
-			return CreateQuery(q, (sq) => Self.SpanNear = q);
+			return CreateQuery(q, (sq) => sq.SpanNear = q);
 		}
 		public SpanQuery<T> SpanOr(Func<SpanOrQueryDescriptor<T>, SpanOrQueryDescriptor<T>> selector)
 		{
 			selector.ThrowIfNull("selector");
 			var q = selector(new SpanOrQueryDescriptor<T>());
-			return CreateQuery(q, (sq) => Self.SpanOr = q);
+			return CreateQuery(q, (sq) => sq.SpanOr = q);
 		}
 		public SpanQuery<T> SpanNot(Func<SpanNotQuery<T>, SpanNotQuery<T>> selector)
 		{
 			selector.ThrowIfNull("selector");
 			var q = selector(new SpanNotQuery<T>());
-			return CreateQuery(q, (sq) => Self.SpanNot = q);
+			return CreateQuery(q, (sq) => sq.SpanNot = q);
 		}
 		public SpanQuery<T> SpanMultiTerm(Func<SpanMultiTermQueryDescriptor<T>, SpanMultiTermQueryDescriptor<T>> selector)
 		{
 			selector.ThrowIfNull("selector");
 			var q= selector(new SpanMultiTermQueryDescriptor<T>());
-			return CreateQuery(q, (sq) => Self.SpanMultiTerm = q);
+			return CreateQuery(q, (sq) => sq.SpanMultiTerm = q);
 		}
 
-		private SpanQuery<T> CreateQuery<K>(K query, Action<SpanQuery<T>> setProperty) where K : ISpanSubQuery
+		private SpanQuery<T> CreateQuery<K>(K query, Action<ISpanQuery> setProperty) where K : ISpanSubQuery
 		{
 			if (((IQuery)(query)).IsConditionless)
 				return this;

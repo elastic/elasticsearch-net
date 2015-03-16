@@ -51,8 +51,9 @@ namespace Nest
 			{
 				if (Self.NegativeQuery == null && Self.PositiveQuery == null)
 					return true;
-				return (Self.PositiveQuery == null || Self.NegativeQuery.IsConditionless)
-					|| (Self.NegativeQuery == null || Self.PositiveQuery.IsConditionless);
+
+				return (Self.PositiveQuery == null && Self.NegativeQuery.IsConditionless)
+					|| (Self.NegativeQuery == null && Self.PositiveQuery.IsConditionless);
 			}
 		}
 

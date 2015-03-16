@@ -52,7 +52,7 @@ namespace Nest
 		public double? Boost { get; set; }
 	}
 
-
+	//TODO 2.0 why is this separate from the descriptor
 	public class BoolBaseQueryDescriptor : IBoolQuery
 	{
 		[JsonProperty("must")]
@@ -100,6 +100,17 @@ namespace Nest
 		}
 
 		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="minimumShouldMatches"></param>
+		/// <returns></returns>
+		public BoolQueryDescriptor<T> Name(string name)
+		{
+			((IBoolQuery) this).Name = name;
+			return this;
+		}
+		
+		/// <summary>
 		/// Specifies a minimum number of the optional BooleanClauses which must be satisfied.
 		/// </summary>
 		/// <param name="minimumShouldMatches"></param>
@@ -109,6 +120,7 @@ namespace Nest
 			((IBoolQuery)this).MinimumShouldMatch = minimumShouldMatches.ToString(CultureInfo.InvariantCulture);
 			return this;
 		}
+		
 		/// <summary>
 		/// Specifies a minimum number of the optional BooleanClauses which must be satisfied. String overload where you can specify percentages
 		/// </summary>
@@ -184,6 +196,7 @@ namespace Nest
 			((IBoolQuery)this).MustNot = descriptors.HasAny() ? descriptors : null;
 			return this;
 		}
+		
 		/// <summary>
 		/// The clause (query) should appear in the matching document. A boolean query with no must clauses, one or more should clauses must match a document.
 		///  The minimum number of should clauses to match can be set using minimum_should_match parameter.
@@ -202,6 +215,7 @@ namespace Nest
 			((IBoolQuery)this).MustNot = descriptors.HasAny() ? descriptors : null;
 			return this;
 		}
+		
 		/// <summary>
 		/// The clause (query) must not appear in the matching documents. Note that it is not possible to search on documents that only consists of a must_not clauses.
 		/// </summary>

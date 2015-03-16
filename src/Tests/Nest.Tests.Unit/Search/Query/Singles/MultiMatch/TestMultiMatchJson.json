@@ -1,15 +1,16 @@
   {
-  "from": 0,
-  "size": 10,
-  "query": {
-    "multi_match": {
-      "query": "this is a query",
-      "use_dis_max": true,
-      "tie_breaker": 0.7,
-      "fields": [
-        "name",
-        "country"
-      ]
+    "from": 0,
+    "size": 10,
+    "query": {
+      "multi_match": {
+        "_name" :  "named_query",
+        "query": "this is a query",
+        "use_dis_max": true,
+        "tie_breaker": 0.7,
+        "fields": [
+          "name",
+          "country"
+        ]
+      }
     }
-  }
 }

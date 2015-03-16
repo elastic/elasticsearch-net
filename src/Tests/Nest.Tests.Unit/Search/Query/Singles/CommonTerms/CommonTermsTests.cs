@@ -15,6 +15,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles.CommonTerms
 				.Size(10)
 				.Query(q=>q
 					.CommonTerms(qs=>qs
+						.Name("named_query")
 						.OnField(p=>p.Content)
 						.Analyzer("myAnalyzer")
 						.Boost(1.2)

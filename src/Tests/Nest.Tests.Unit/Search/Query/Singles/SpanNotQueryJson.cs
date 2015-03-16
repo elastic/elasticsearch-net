@@ -14,6 +14,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 				.Size(10)
 				.Query(q => q
 					.SpanNot(sf => sf
+						.Name("named_query")
 						.Pre(1)
 						.Post(2)
 						.Dist(3)
@@ -26,6 +27,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 			var expected = @"{ from: 0, size: 10, query : 
 			{
 				span_not: { 
+					_name: ""named_query"",
 					include: { 
 						span_term: { 
 							name: {

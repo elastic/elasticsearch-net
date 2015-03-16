@@ -14,6 +14,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 					//disabling obsolete message in this test
 					#pragma warning disable 0618
 						.CustomBoostFactor(cs=>cs
+							.Name("named_query")
 							.BoostFactor(5.2)
 							.Query(qq=>qq.MatchAll())
 					)
@@ -24,6 +25,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 			var expected = @"{ from: 0, size: 10, 
 				query : {
 						custom_boost_factor : { 
+							_name: ""named_query"",
 							query : { match_all : {} },
 							boost_factor : 5.2
 						}

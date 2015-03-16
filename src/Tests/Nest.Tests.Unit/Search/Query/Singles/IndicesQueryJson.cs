@@ -14,6 +14,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 				.Size(10)
 				.Query(q => q
 					.Indices(fz => fz
+						.Name("named_query")
 						.Indices(new[] { "elasticsearchprojects", "people", "randomindex" })
 						.Query(qq=>qq.Raw("{ match_all : {} }"))
 						.NoMatchQuery(qq => qq.MatchAll())
@@ -23,6 +24,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 			var expected = @"{ from: 0, size: 10, query : 
 			{  
 				indices: {
+					_name: ""named_query"",
 					query: { match_all : {} },
 					no_match_query: {
 						match_all: {}

@@ -53,6 +53,11 @@ namespace Nest.Resolvers.Converters.Queries
 					writer.WritePropertyName("boost");
 					writer.WriteValue(t.Boost.Value);
 				}
+				if (!t.Name.IsNullOrEmpty())
+				{
+					writer.WritePropertyName("_name");
+					writer.WriteValue(t.Name);
+				}
 				
 			}
 			writer.WriteEndObject();
@@ -80,6 +85,9 @@ namespace Nest.Resolvers.Converters.Queries
 					case "boost":
 						reader.Read();
 						f.Boost = reader.Value as double?;
+						break;
+					case "_name":
+						f.Name = reader.ReadAsString();
 						break;
 					default:
 						f.Field = property;

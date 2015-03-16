@@ -15,6 +15,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles.SimpleQueryString
 				.Size(10)
 				.Query(q=>q
 					.SimpleQueryString(qs=>qs
+						.Name("named_query")
 						.Query("\"fried eggs\" +(eggplant | potato) -frittata")
 						.OnFieldsWithBoost(d=>d
 							.Add(f=>f.Name, 2.0)
