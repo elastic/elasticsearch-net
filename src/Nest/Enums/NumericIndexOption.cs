@@ -8,6 +8,6 @@ namespace Nest
 	public enum NonStringIndexOption
 	{
 		[EnumMember(Value = "no")]
-		No,
+		No
 	}
 }
