@@ -67,11 +67,11 @@ namespace Nest
 		{
 			return new FilterDescriptor<T>().GeoPolygon(fieldDescriptor, points);
 		}
-		public static FilterContainer GeoPolygon(Expression<Func<T, object>> fieldDescriptor, IEnumerable<Tuple<double, double>> points)
+		public static FilterContainer GeoPolygon(Expression<Func<T, object>> fieldDescriptor, IEnumerable<GeoLocation> points)
 		{
 			return new FilterDescriptor<T>().GeoPolygon(fieldDescriptor, points);
 		}
-		public static FilterContainer GeoPolygon(string field, IEnumerable<Tuple<double, double>> points)
+		public static FilterContainer GeoPolygon(string field, IEnumerable<GeoLocation> points)
 		{
 			return new FilterDescriptor<T>().GeoPolygon(field, points);
 		}

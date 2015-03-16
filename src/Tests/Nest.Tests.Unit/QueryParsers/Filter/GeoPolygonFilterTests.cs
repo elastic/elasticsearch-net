@@ -14,14 +14,14 @@ namespace Nest.Tests.Unit.QueryParsers.Filter
 		{
 			var geoPolygonFilter = this.SerializeThenDeserialize(cacheName, cacheKey, cache, 
 				f=>f.GeoPolygon,
-				f=>f.GeoPolygon(p => p.Origin, new List<Tuple<double, double>>
+				f=>f.GeoPolygon(p => p.Origin, new []
 				{
-					Tuple.Create(30.0, -80.0), Tuple.Create(20.0, -90.0)
+					new GeoLocation(30.0, -80.0), new GeoLocation(20.0, -90.0)
 				})
-				);
+			);
 
 			geoPolygonFilter.Field.Should().Be("origin");
-			geoPolygonFilter.Points.Should().BeEquivalentTo(new []{"30, -80", "20, -90"});
+			geoPolygonFilter.Points.Should().BeEquivalentTo(new []{"30,-80", "20,-90"});
 		}
 		
 	}

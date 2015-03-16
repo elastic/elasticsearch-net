@@ -39,7 +39,11 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 				.From(0)
 				.Size(10)
 				.PostFilter(filter => filter
-					.GeoPolygon(f => f.Origin, new List<Tuple<double, double>> { Tuple.Create(30.0, -80.0), Tuple.Create(20.0, -90.0) })
+					.GeoPolygon(f => f.Origin, new []
+					{
+						new GeoLocation(30.0, -80.0), 
+						new GeoLocation(20.0, -90.0)
+					})
 				);
 			
 			var json = TestElasticClient.Serialize(s);
@@ -48,7 +52,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 					geo_polygon: {
 						origin : {
 							points: [
-								""30, -80"", ""20, -90""
+								""30,-80"", ""20,-90""
 							]
 						}
 					}
