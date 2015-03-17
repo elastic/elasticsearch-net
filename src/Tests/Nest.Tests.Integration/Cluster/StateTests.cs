@@ -22,6 +22,7 @@ namespace Nest.Tests.Integration.Cluster
 				if (!index.Key.StartsWith("nest"))
 					continue;
 				Assert.NotNull(index.Value.Mappings);
+				Assert.NotNull(index.Value.Aliases);
 				Assert.True(index.Value.Mappings.Count > 0, "{0}" , index.Key);
 			}
 
