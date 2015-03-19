@@ -38,5 +38,14 @@ namespace Nest
 			return client.AliasExistsAsync(new AliasExistsRequest(indexName, aliasName));
 		}
 
+		public static IExistsResponse TemplateExists(this IElasticClient client, string templateName)
+		{
+			return client.TemplateExists(new TemplateExistsRequest(templateName));
+		}
+
+		public static Task<IExistsResponse> TemplateExistsAsync(this IElasticClient client, string templateName)
+		{
+			return client.TemplateExistsAsync(new TemplateExistsRequest(templateName));
+		}
 	}
 }

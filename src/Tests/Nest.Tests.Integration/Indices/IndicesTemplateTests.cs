@@ -45,11 +45,11 @@ namespace Nest.Tests.Integration.Indices
 			});
 			putResponse.IsValid.Should().BeTrue();
 
-			var falseExists = this.Client.TemplateExists(new TemplateExistsRequest("hello-world-blah"));
+			var falseExists = this.Client.TemplateExists("hello-world-blah");
 			falseExists.IsValid.Should().BeTrue();
 			falseExists.Exists.Should().BeFalse();
 
-			var realExists = this.Client.TemplateExists(new TemplateExistsRequest(name));
+			var realExists = this.Client.TemplateExists(name);
 			realExists.Exists.Should().BeTrue();
 		}
 
