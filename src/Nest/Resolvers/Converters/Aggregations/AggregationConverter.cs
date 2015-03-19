@@ -184,18 +184,39 @@ namespace Nest.Resolvers.Converters.Aggregations
 			reader.Read(); reader.Read();
 			var variance = (reader.Value as double?);
 			reader.Read(); reader.Read();
-			var stdVariation = (reader.Value as double?);
+			var stdDeviation = (reader.Value as double?);
 			reader.Read();
+
+			StandardDeviationBounds stdDeviationBounds = null;
+			if (reader.TokenType != JsonToken.EndObject)
+			{
+				stdDeviationBounds = new StandardDeviationBounds();
+				reader.Read();
+				reader.Read();
+				if ((reader.Value as string) == "upper")
+				{
+					reader.Read();
+					stdDeviationBounds.Upper = reader.Value as double?;
+				}
+				reader.Read();
+				if ((reader.Value as string) == "lower")
+				{
+					reader.Read();
+					stdDeviationBounds.Lower = reader.Value as double?;
+				}
+			}
+
 			return new ExtendedStatsMetric()
 			{
 				Average = average,
 				Count = count,
 				Max = max,
 				Min = min,
-				StdDeviation = stdVariation,
+				StdDeviation = stdDeviation,
 				Sum = sum,
 				SumOfSquares = sumOfSquares,
-				Variance = variance
+				Variance = variance,
+				StdDeviationBounds = stdDeviationBounds
 			};
 		}
 
