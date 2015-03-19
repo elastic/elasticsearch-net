@@ -81,7 +81,27 @@ namespace Nest.Tests.Integration.Aggregations
 	        statsBucket.Should().NotBeNull();
 	        statsBucket.Count.Should().BeGreaterThan(1);
 	        statsBucket.StdDeviation.Should().BeGreaterThan(1);
-        }	
+        }
+
+		[Test]
+		[SkipVersion("0 - 1.4.2", "Standard deviation bounds added in 1.4.3")]
+		public void ExtendedStatsWithStandardDeviationBounds()
+		{
+			var results = this.Client.Search<ElasticsearchProject>(s => s
+				.Size(0)
+				.Aggregations(a => a
+					.ExtendedStats("stats_agg", t => t.Field(p => p.LOC))
+				)
+			);
+			results.IsValid.Should().BeTrue();
+			var statsBucket = results.Aggs.ExtendedStats("stats_agg");
+			statsBucket.Should().NotBeNull();
+			statsBucket.Count.Should().BeGreaterThan(1);
+			statsBucket.StdDeviation.Should().BeGreaterThan(1);
+			statsBucket.StdDeviationBounds.Should().NotBeNull();
+			statsBucket.StdDeviationBounds.Upper.Should().NotBe(0);
+			statsBucket.StdDeviationBounds.Lower.Should().NotBe(0);
+		}
 		
     }
 }
