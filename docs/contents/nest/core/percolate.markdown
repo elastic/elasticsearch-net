@@ -9,7 +9,7 @@ menuitem: percolate
 # Percolation
 The percolator allows to register queries against an index, then send percolate requests which include a doc, and get back the queries that match on that doc out of the set of registered queries. 
 
-Percolate is a complex but awesome Elasticsearch feature, so be sure to read the [official documentation](http://www.elasticsearch.org/guide/reference/api/percolate/).
+Percolate is a complex but awesome Elasticsearch feature, so be sure to read the [official documentation](http://www.elastic.co/guide/en/elasticsearch/reference/current/search-percolate.html).
 
 ## Register a Percolator
 
