@@ -12,7 +12,7 @@ namespace Nest.Tests.Unit.Reproduce
 	/// tests to reproduce reported errors
 	/// </summary>
 	[TestFixture]
-	public class Reproduce991Tests : BaseJsonTests
+	public class Reproduce901Tests : BaseJsonTests
 	{
 		private class MyClass
 		{
@@ -32,5 +32,6 @@ namespace Nest.Tests.Unit.Reproduce
 				.Query(q => q.Term(p => p.MyEnum, MyEnum.Value2));
 			this.JsonEquals(query, MethodBase.GetCurrentMethod());
 		}
+
 	}
 }

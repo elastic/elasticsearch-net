@@ -136,7 +136,7 @@ namespace Nest.Resolvers.Writers
 
 				var propertyName = this.Infer.PropertyName(p);
 				var type = GetElasticSearchType(att, p);
-				
+
 				if (type == null) //could not get type from attribute or infer from CLR type.
 					continue;
 
@@ -234,8 +234,8 @@ namespace Nest.Resolvers.Writers
 					return "boolean";
 				case FieldType.Completion:
 					return "completion";
-        case FieldType.Nested:
-          return "nested";
+				case FieldType.Nested:
+					return "nested";
 				case FieldType.Object:
 					return "object";
 				default:
@@ -254,6 +254,9 @@ namespace Nest.Resolvers.Writers
 
 			if (propertyType == typeof(string))
 				return FieldType.String;
+
+			if (propertyType.IsEnum)
+				return FieldType.Integer;
 
 			if (propertyType.IsValueType)
 			{
@@ -284,7 +287,7 @@ namespace Nest.Resolvers.Writers
 			if (type.IsArray)
 				return type.GetElementType();
 
-            if (type.IsGenericType && type.GetGenericArguments().Length == 1 && (type.GetInterface("IEnumerable") != null || Nullable.GetUnderlyingType(type) != null))
+			if (type.IsGenericType && type.GetGenericArguments().Length == 1 && (type.GetInterface("IEnumerable") != null || Nullable.GetUnderlyingType(type) != null))
 				return type.GetGenericArguments()[0];
 
 			return type;

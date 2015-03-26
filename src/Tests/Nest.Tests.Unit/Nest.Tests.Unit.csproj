@@ -107,6 +107,7 @@
     <Compile Include="Core\Indices\Analysis\TokenFilters\TokenFilterTests.cs" />
     <Compile Include="Core\Indices\Similarity\SimilarityTests.cs" />
     <Compile Include="Core\Map\CustomMapping\ImagePluginMappingTests.cs" />
+    <Compile Include="Core\Map\Enums\EnumMappingTests.cs" />
     <Compile Include="Core\Map\GenericTypes\GenericTypeMappingTests.cs" />
     <Compile Include="Core\Map\GeoShape\GeoShapeMappingTests.cs" />
     <Compile Include="Core\Map\GetMappingSerializationTests.cs" />
@@ -174,6 +175,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Core\Map\CustomMapping\RepresentUnknowImageMappingPlugin.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Map\Enums\EnumCanBeOverriddenAfterMapFromAttributes.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Map\Enums\EnumShouldMapToIntByDefault.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Core\Map\GenericTypes\GenericTypeMapping.json">
@@ -392,7 +399,7 @@
     <Compile Include="Reproduce\Reproduce1146Tests.cs" />
     <Compile Include="Reproduce\Reproduce629Tests.cs" />
     <Compile Include="Reproduce\Reproduce1187Tests.cs" />
-    <Compile Include="Reproduce\Reproduce991Tests.cs" />
+    <Compile Include="Reproduce\Reproduce901Tests.cs" />
     <Compile Include="Reproduce\Reproduce990Tests.cs" />
     <Compile Include="Reproduce\Reproduce974Tests.cs" />
     <Compile Include="Reproduce\Reproduce928Tests.cs" />
@@ -817,6 +824,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Reproduce\Issue1199Mapping.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Reproduce\EnumQueryDefaultsToInt.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Reproduce\Issue928.json">
