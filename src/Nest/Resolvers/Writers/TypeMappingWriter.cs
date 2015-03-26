@@ -15,6 +15,10 @@ namespace Nest.Resolvers.Writers
 		private readonly Type _type;
 		private readonly IConnectionSettingsValues _connectionSettings;
 		private readonly NestSerializer _elasticSerializer;
+
+		private readonly static string _noFieldTypeMessage =
+			"Property {0} on type {1} has an ElasticProperty attribute but its FieldType (Type = ) can not be inferred and is not set explicitly while calling MapFromAttributes";
+
 		private ElasticInferrer Infer { get; set; }
 
 		private int MaxRecursion { get; set; }
@@ -194,6 +198,11 @@ namespace Nest.Resolvers.Writers
 			if (fieldType == null || fieldType == FieldType.None)
 			{
 				fieldType = this.GetFieldTypeFromType(p.PropertyType);
+				if (fieldType == null && att != null)
+				{
+					var message = _noFieldTypeMessage.F(p.Name, this._type.Name);
+					throw new DslException(message);
+				}
 			}
 
 			return this.GetElasticSearchTypeFromFieldType(fieldType);
