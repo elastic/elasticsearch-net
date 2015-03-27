@@ -13,7 +13,7 @@ The multi search API allows to execute several search requests within the same A
 ### Fluent Syntax
 
 	var result = client.MultiSearch(ms => ms
-		.Search<ElasticsearchProject>("esproj", s => s.MatchAll())
+		.Search<ElasticsearchProject>("projects", s => s.MatchAll())
 		.Search<Person>("people", s => s.MatchAll())
 	);
 
@@ -24,12 +24,12 @@ The multi search API allows to execute several search requests within the same A
 	{
 		Operations = new Dictionary<string, ISearchRequest>
 		{
-			{ "esproj", new SearchRequest 
+			{ "projects", new SearchRequest<ElasticsearchProject>
 				{ 
 					Query = new QueryContainer(new MatchAllQuery()) 
 				} 
 			},
-			{ "people", new SearchRequest 
+			{ "people", new SearchRequest<Person>
 				{ 
 					Query = new QueryContainer(new MatchAllQuery()) 
 				} 
@@ -44,7 +44,7 @@ The multi search API allows to execute several search requests within the same A
 `MultiSearch` returns an `IMultiSearchResponse` object.  Each `SearchResponse<T>` can be retrieved using the corresponding name that was specified in the request.
 
 	// returns a SearchResponse<ElasticsearchProject>>
-	var projects = result.GetResponse<ElasticsearchProject>("esproj");
+	var projects = result.GetResponse<ElasticsearchProject>("projects");
 
 	// returns a SearchResponse<Person>>
 	var people = result.GetResponse<Person>("people");

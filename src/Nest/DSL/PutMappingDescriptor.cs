@@ -99,11 +99,11 @@ namespace Nest
 		}
 
 		/// <summary>
-		/// Convenience method to map from most of the object from the attributes/properties.
-		/// Later calls can override whatever is set is by this call. 
-		/// This helps mapping all the ints as ints, floats as floats etcetera withouth having to be overly verbose in your fluent mapping
+		/// Convenience method to map as much as it can based on ElasticType attributes set on the type.
+		/// <pre>This method also automatically sets up mappings for known values types (int, long, double, datetime, etcetera)</pre>
+		/// <pre>Class types default to object and Enums to int</pre>
+		/// <pre>Later calls can override whatever is set is by this call.</pre>
 		/// </summary>
-		/// <returns></returns>
 		public PutMappingDescriptor<T> MapFromAttributes(int maxRecursion = 0)
 		{
 			//TODO no longer needed when we have an IPutMappingRequest
