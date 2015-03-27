@@ -102,6 +102,8 @@ namespace Elasticsearch.Net.Connection.RequestState
 			string path)
 		{
 			this._requestId = TransportRequestState.RequestId;
+			this.Method = method;
+			this.Path = path;
 			this.StartedOn = DateTime.UtcNow;
 			this.SeenNodes = new List<Uri>();
 			this.SeenExceptions = new List<Exception>();
@@ -116,13 +118,11 @@ namespace Elasticsearch.Net.Connection.RequestState
 			{
 				Trace.TraceInformation("NEST start:{0} {1} {2}"
 					, this._requestId
-					, _result.RequestMethod
-					, _result.RequestUrl
+					, this.Method
+					, this.Path
 				);
 			}
 
-			this.Method = method;
-			this.Path = path;
 			if (this.RequestParameters != null)
 			{
 				if (this.RequestParameters.QueryString != null)
