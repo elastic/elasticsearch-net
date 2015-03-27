@@ -100,7 +100,7 @@ namespace Nest.Tests.Integration.Core.TermVectors
 		{
 			var result = Client.TermVector<ElasticsearchProject>(s => s
 				.Id("1")
-				.Fields(ep => ep.Name));
+				.Fields("blahblah"));
 
 			result.IsValid.Should().BeTrue();
 			result.TermVectors.Count().ShouldBeEquivalentTo(0);

@@ -49,6 +49,7 @@ namespace Nest.Tests.Integration.Core.Map.Mapping
 				)
 				.Transform(t => t
 					.Script("ctx._source['suggest'] = ctx._source['content']")
+					.Language("groovy") //mandatory since elasticsearch 1.5
 				)
 			);
 			this.DefaultResponseAssertations(putResult);
