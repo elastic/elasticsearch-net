@@ -715,7 +715,7 @@ namespace Nest
 
 			sortSelector.ThrowIfNull("sortSelector");
 			var descriptor = sortSelector(new SortScriptDescriptor<T>());
-			if (descriptor == null || descriptor.Script.IsNullOrEmpty())
+			if (descriptor == null || (descriptor.Script.IsNullOrEmpty() && descriptor.File.IsNullOrEmpty()))
 				return this;
 			Self.Sort.Add(new KeyValuePair<PropertyPathMarker, ISort>("_script", descriptor));
 			return this;
