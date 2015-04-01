@@ -13,6 +13,9 @@ namespace Nest
 		[JsonProperty("script")]
 		public string Script { get; set; }
 
+        [JsonProperty("script_file")]
+        public string ScriptFile { get; set; }
+
 		[JsonProperty("params")]
 		public IDictionary<string, string> Parameters { get; set; }
 
