@@ -27,15 +27,15 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 		}
 
 		[Test]
-		public void DisMax_With_Empty_Query()
+		public void DisMax_With_Conditionless_Query()
 		{
-			QueryContainer emptyQuery = Query<object>.Term("w", "");
+			QueryContainer conditionlessQuery = Query<object>.Term("w", "");
 
 			var q = this.SerializeThenDeserialize(
 				f => f.DisMax,
 				f => f.Dismax(d => d
 					.Boost(1.5)
-					.Queries(qq => emptyQuery, qq => Query1)
+					.Queries(qq => conditionlessQuery, qq => Query1)
 					.TieBreaker(1.1)
 					)
 				);
