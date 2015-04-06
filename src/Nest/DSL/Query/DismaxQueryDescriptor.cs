@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
+using Nest.Resolvers.Converters.Queries;
 
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeConverter<DisMaxQueryDescriptor<object>>))]
+	[JsonConverter(typeof(DismaxQueryJsonConverter))]
 	public interface IDisMaxQuery : IQuery
 	{
 		[JsonProperty(PropertyName = "tie_breaker")]
