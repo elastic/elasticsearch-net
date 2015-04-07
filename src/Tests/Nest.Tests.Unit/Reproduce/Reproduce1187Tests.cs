@@ -1,14 +1,8 @@
 ﻿using System.IO;
-using FluentAssertions;
-using Nest.Tests.MockData.Domain;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Nest.Tests.Unit.Reproduce
 {
@@ -18,42 +12,36 @@ namespace Nest.Tests.Unit.Reproduce
 		[Test]
 		public void IsClientSideSearchQueryDeserialisable()
 		{
-			var newDescriptor = Deserialize<SearchDescriptor<dynamic>>(original);
+			var newDescriptor = Deserialize<SearchDescriptor<dynamic>>(Original);
 			var actual = Serialize(newDescriptor);//Should is empty
 
 			var descriptorJobject = JObject.Parse(actual);
-			var expressionList = new object[][]
-	                             {
-	                                 new[] {"size"},//Works
-	                                 new[] {"from"},//Works
-	                                 new[] {"query", "filtered", "query", "query_string", "fields"},//Works
-	                                 new[] {"query", "filtered", "filter", "bool", "must"},//Works
-//Can't find contents of should
-                                     new object[] {"query", "filtered", "filter", "bool", "should", 0, "indices", "filter"},
-                                     new object[] {"query", "filtered", "filter", "bool", "should", 0, "indices", "no_match_filter"},
-	                                 new[] {"aggs", "Databases", "terms", "field"},//Works
-	                                 new[] {"aggs", "Year", "terms", "field"}//Works
-	                             };
-			foreach (var e in expressionList)
-				VerifyJsonPath(descriptorJobject, e);
+		    var jsonPathList = new[]
+		                       {
+		                           "size", "from", "query.filtered.query.query_string.fields",
+		                           "query.filtered.filter.bool.must", //Works
+		                           "query.filtered.filter.bool.should[0].indices.index",//Should find contents of "should"
+		                           "query.filtered.filter.bool.should[0].indices.indices",
+		                           "query.filtered.filter.bool.should[0].indices.filter",
+		                           "query.filtered.filter.bool.should[0].indices.no_match_filter",
+		                           "aggs.Databases.terms.field", //Works
+		                           "aggs.Year.terms.field" //Works
+		                       };
+		    foreach (var jsonPath in jsonPathList)
+                VerifyJsonPath(descriptorJobject, jsonPath);
 
 			//If we do a search without the below line
 			//it seems to contect /_all/object/_search instead of /_search
 			newDescriptor.AllTypes().AllIndices();
 		}
 
-		private static void VerifyJsonPath(JToken descriptorJobject, IEnumerable<object> strings)
-		{
-			foreach (var item in strings)
-			{
-				Assert.IsNotNull(descriptorJobject[item], item.ToString());
-				descriptorJobject = descriptorJobject[item];
-				if (item.ToString() == "no_match_filter")
-					descriptorJobject.ToString().Should().Be("none");
-			}
-		}
+        private static void VerifyJsonPath(JToken json, string path)
+        {
+            Console.WriteLine(path);
+            Assert.IsNotNull(json.SelectToken(path));
+        }
 
-		public string Serialize<T>(T obj) where T : class
+	    public string Serialize<T>(T obj) where T : class
 		{
 			var json = Encoding.UTF8.GetString(_client.Serializer.Serialize(obj));
 			return json;
@@ -64,8 +52,8 @@ namespace Nest.Tests.Unit.Reproduce
 			return _client.Serializer.Deserialize<T>(new MemoryStream(Encoding.UTF8.GetBytes(json)));
 		}
 
-		const string original =
-			@"{
+		const string Original =
+            @"{
    ""size"":10,
    ""from"":0,
    ""query"":{
@@ -90,6 +78,7 @@ namespace Nest.Tests.Unit.Reproduce
                ""should"":[
                   {
                      ""indices"":{
+                        ""indices"":[""index1""],
                         ""index"":""index1"",
                         ""filter"":{
                            ""terms"":{
@@ -105,6 +94,7 @@ namespace Nest.Tests.Unit.Reproduce
                   },
                   {
                      ""indices"":{
+                        ""indices"":[""index2""],
                         ""index"":""index2"",
                         ""filter"":{
                            ""terms"":{
