@@ -48,10 +48,13 @@ namespace Nest.Tests.Unit.Extensions
 		[TestCase("90s", 90 * s)]
 		[TestCase("1m", 1 * m)]
 		[TestCase("1h", 1 * h)]
+		[TestCase("1H", 1 * h)]
 		[TestCase("1d", 1 * d)]
 		[TestCase("1w", 1 * w)]
 		[TestCase("0", 0)]
 		[TestCase("1", 1)]
+		[TestCase("1S", 1)]
+		[TestCase("1.5ms", 1)]
 		public void ParseElasticSearchTimeUnit_Success(string value, double timeInMillis)
 		{
 			// act
@@ -68,6 +71,7 @@ namespace Nest.Tests.Unit.Extensions
 		[TestCase("2M")]
 		[TestCase("2y")]
 		[TestCase("s")]
+		[TestCase("1.5S")]
 		public void ParseElasticSearchTimeUnit_Fail_ReturnsNull(string value)
 		{
 			// act

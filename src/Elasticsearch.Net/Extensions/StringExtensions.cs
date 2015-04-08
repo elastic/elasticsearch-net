@@ -26,35 +26,55 @@ namespace Elasticsearch.Net
 
 			return queryParameters;
 		}
+
 		internal static TimeSpan? ToTimeSpan(this string s)
 		{
 			if (s.IsNullOrEmpty())
 				return null;
-			long wholeNumber;
-			if (long.TryParse(s, out wholeNumber))
-			{
-				return TimeSpan.FromMilliseconds(wholeNumber);
-			}
-			double decimalNumber;
-			var unit = s.Substring(s.Length - 1);
-			if (s.Length <= 1 || !double.TryParse(s.Substring(0, s.Length - 1), out decimalNumber))
+		    try
+		    {
+		        long millis;
+		        if (s.EndsWith("S"))
+		        {
+		            millis = long.Parse(s.Substring(0, s.Length - 1));
+		        }
+		        else if (s.EndsWith("ms"))
+		        {
+		            millis = (long) (double.Parse(s.Substring(0, s.Length - 2)));
+		        }
+		        else if (s.EndsWith("s"))
+		        {
+		            millis = (long) (double.Parse(s.Substring(0, s.Length - 1))*1000);
+		        }
+		        else if (s.EndsWith("m"))
+		        {
+		            millis = (long) (double.Parse(s.Substring(0, s.Length - 1))*60*1000);
+		        }
+		        else if (s.EndsWith("H") || s.EndsWith("h"))
+		        {
+		            millis = (long) (double.Parse(s.Substring(0, s.Length - 1))*60*60*1000);
+		        }
+		        else if (s.EndsWith("d"))
+		        {
+		            millis = (long) (double.Parse(s.Substring(0, s.Length - 1))*24*60*60*1000);
+		        }
+		        else if (s.EndsWith("w"))
+		        {
+		            millis = (long) (double.Parse(s.Substring(0, s.Length - 1))*7*24*60*60*1000);
+		        }
+		        else
+		        {
+		            millis = long.Parse(s);
+		        }
+		        return TimeSpan.FromMilliseconds(millis);
+		    }
+			catch (FormatException)
 			{
 				return null;
 			}
-			switch (unit)
+			catch (OverflowException)
 			{
-				case "s":
-					return TimeSpan.FromSeconds(decimalNumber);
-				case "m":
-					return TimeSpan.FromMinutes(decimalNumber);
-				case "h":
-					return TimeSpan.FromHours(decimalNumber);
-				case "d":
-					return TimeSpan.FromDays(decimalNumber);
-				case "w":
-					return TimeSpan.FromDays(decimalNumber * 7);
-				default:
-					return null;
+				return null;
 			}
 		}
 	}
