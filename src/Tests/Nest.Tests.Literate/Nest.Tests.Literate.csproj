@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ElasticsearchNet\Connecting.cs" />
+    <Compile Include="SearchAPIs\RequestBodySearch\Sort.cs" />
     <Compile Include="TestClient.cs" />
     <Compile Include="UsageTests.cs" />
     <Compile Include="SerializationTests.cs" />
