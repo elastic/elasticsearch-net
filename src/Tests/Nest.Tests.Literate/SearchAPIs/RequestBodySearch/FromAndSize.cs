@@ -19,24 +19,11 @@ namespace SearchApis.RequestBody
 		 * The size parameter allows you to configure the maximum amount of hits to be returned.
 		 */
 
-		public class Serializes : SerializationTests<ISearchRequest, SearchDescriptor<object>, SearchRequest<object>>
+		public class Usage : EndpointUsageTests<ISearchResponse<object>>
 		{
-			static int from = Create<int>();
-			static int size = Create<int>();
+			protected override object ExpectedJson { get; } =
+				new {from = 10, size = 12};
 
-			public Serializes() : base(
-				ExpectedJson: new { from = from, size = size },
-				Initializer: new SearchRequest<object>
-				{
-					From = from,
-					Size = size
-				},
-				Fluent: s => s.Size(size).From(from)
-			) {}
-		}
-
-		public class Usage : EndpointUsageTests<ISearchRequest, SearchDescriptor<object>, SearchRequest<object>, ISearchResponse<object>>
-		{
 			public override int ExpectStatusCode => 200;
 
 			public override bool ExpectIsValid => true;
@@ -55,6 +42,25 @@ namespace SearchApis.RequestBody
 					.From(10)
 					.Size(12)
 				);
+
+		}
+		
+		//[ESVM(single=true, nodes=3)]
+		public class ClusterThing : EndpointUsageTests<IHealthResponse>
+		{
+			protected override object ExpectedJson { get; } = new object {};
+
+			public override int ExpectStatusCode => 200;
+
+			public override bool ExpectIsValid => true;
+
+			public override void AssertUrl(string url) => url.Should().Be("");
+
+			protected override IHealthResponse Initializer(IElasticClient client) =>
+				client.ClusterHealth(new ClusterHealthRequest());
+
+			protected override IHealthResponse Fluent(IElasticClient client) =>
+				client.ClusterHealth(h => h);
 		}
 	}
 }

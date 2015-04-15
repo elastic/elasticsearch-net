@@ -8,49 +8,47 @@ using FluentAssertions;
 using Newtonsoft.Json.Linq;
 using Ploeh.AutoFixture;
 using Xunit;
+using Xunit.Sdk;
 
 namespace Nest.Tests.Literate
 {
-	public abstract class SerializationTests<TInterface, TDescriptor, TInitializer>
-		where TDescriptor : TInterface, new() where TInitializer : TInterface
+	public abstract class SerializationTests
 	{
 		protected readonly Fixture _fixture = new Fixture();
 		protected static readonly Fixture Fix = new Fixture();
+		
+		protected abstract object ExpectedJson { get; }
+		private readonly string _json;
+
+		public SerializationTests()
+		{
+			var o = this.ExpectedJson;
+			if (o != null)
+			{
+				this._json = this.Serialize(o);
+			}
+		} 
+
+		protected void AssertSerializes(object o)
+		{
+			if (string.IsNullOrEmpty(this._json)) return;
+
+			var json = this.Serialize(o);
+			this.AssertJsonEquals(this._json, json);
+		}
 
 		protected static TReturn Create<TReturn>()
 		{
 			return Fix.Create<TReturn>();
 		}
 
-		private readonly object _expectedJson;
-		private readonly TInitializer _initializer;
-		private readonly TDescriptor _fluent;
-		protected readonly string initializerJson;
-		protected readonly string fluentJson;
-		protected readonly string expectedJson;
-
-		public SerializationTests(
-			object ExpectedJson,
-			TInitializer Initializer,
-			Func<TDescriptor, TDescriptor> Fluent
-			)
-		{
-			this._expectedJson = ExpectedJson;
-			this._initializer = Initializer;
-			this._fluent = Fluent(new TDescriptor());
-
-			this.initializerJson = this.Serialize(Initializer);
-			this.fluentJson = this.Serialize(this._fluent);
-			this.expectedJson = this.Serialize(ExpectedJson);
-		}
-
-		protected string Serialize<TObject>(TObject o)
+		private string Serialize<TObject>(TObject o)
 		{
 			var bytes = TestClient.Client.Serializer.Serialize(o);
 			return Encoding.UTF8.GetString(bytes);
 		}
 
-		protected bool JsonEquals(string expected, string actual)
+		private bool JsonEquals(string expected, string actual)
 		{
 			var expectedJson = JObject.Parse(expected);
 			var actualJson = JObject.Parse(actual);
@@ -58,40 +56,12 @@ namespace Nest.Tests.Literate
 			return matches;
 		}
 
-		protected void AssertJsonEquals(string expected, string actual)
+		private void AssertJsonEquals(string expected, string actual)
 		{
 			var matches = this.JsonEquals(expected, actual);
 			if (matches) return;
 			//will throw a descriptive exception
 			expected.Should().BeEquivalentTo(actual);
-		}
-
-		[Fact]
-		public void initializer_syntax_serializes_to_expected_json()
-		{
-			this.AssertJsonEquals(this.expectedJson, this.initializerJson);
-		}
-
-		[Fact]
-		public void fluent_syntax_serializes_to_expected_json()
-		{
-			this.AssertJsonEquals(this.expectedJson, this.fluentJson);
-		}
-
-		[Fact]
-		public void initializer_syntax_roundtrips_withoutloss()
-		{
-			var stream = new MemoryStream(Encoding.UTF8.GetBytes(this.initializerJson));
-			var deserialized = TestClient.Client.Serializer.Deserialize<TInitializer>(stream);
-			this._initializer.ShouldBeEquivalentTo(deserialized);
-		}
-
-		[Fact]
-		public void fluent_syntax_roundtrips_withoutloss()
-		{
-			var stream = new MemoryStream(Encoding.UTF8.GetBytes(this.fluentJson));
-			var deserialized = TestClient.Client.Serializer.Deserialize<TDescriptor>(stream);
-			this._fluent.ShouldBeEquivalentTo(deserialized);
 		}
 
 	}

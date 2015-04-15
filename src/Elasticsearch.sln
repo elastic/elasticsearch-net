@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.22512.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".paket", ".paket", "{5310B710-DE6D-4BD1-BD73-F55885B6746B}"
 	ProjectSection(SolutionItems) = preProject
@@ -17,6 +17,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Documentation", "_Document
 		..\license.txt = ..\license.txt
 		..\docs\package.json = ..\docs\package.json
 		..\README.markdown = ..\README.markdown
+	EndProjectSection
+	ProjectSection(FolderGlobals) = preProject
+		package_1json__JSONSchema = http://json.schemastore.org/package
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nest.Tests.MockData", "Tests\Nest.Tests.MockData\Nest.Tests.MockData.csproj", "{27143A05-5655-447C-ADAF-405E1CF43741}"
