@@ -9,22 +9,15 @@ namespace Nest.Tests.Literate
 	{
 		private static bool _runIntegrationTests = false;
 
-		public static ConnectionSettings Settings { get; private set; }
-		public static IConnection Connection { get; private set; }
-		public static IElasticClient Client { get; private set; }
-
-		static TestClient()
+		public static IElasticClient GetClient(Func<ConnectionSettings, ConnectionSettings> modifySettings = null)
 		{
-			Settings = new ConnectionSettings(CreateBaseUri());
-			Client = new ElasticClient(Settings, Connection);
+			var defaultSettings = new ConnectionSettings((CreateBaseUri()));
+			var settings = modifySettings != null ? modifySettings(defaultSettings) : defaultSettings;
+			return new ElasticClient(settings, CreateConnection(settings));
 		}
 
-		public static IConnection CreateConnection(IConnectionSettingsValues connectionSettings)
-		{
-			if (RunIntegrationTests()) return new HttpConnection(connectionSettings);
-			return new InMemoryConnection(Settings);
-		}
-
+		public static IConnection CreateConnection(IConnectionSettingsValues connectionSettings) =>
+			RunIntegrationTests() ? new HttpConnection(connectionSettings) : new InMemoryConnection(connectionSettings);
 
 		public static Uri CreateBaseUri(int? port = null)
 		{

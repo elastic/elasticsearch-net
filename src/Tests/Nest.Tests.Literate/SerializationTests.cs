@@ -44,7 +44,7 @@ namespace Nest.Tests.Literate
 
 		private string Serialize<TObject>(TObject o)
 		{
-			var bytes = TestClient.Client.Serializer.Serialize(o);
+			var bytes = TestClient.GetClient().Serializer.Serialize(o);
 			return Encoding.UTF8.GetString(bytes);
 		}
 

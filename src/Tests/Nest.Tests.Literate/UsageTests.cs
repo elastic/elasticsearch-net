@@ -26,10 +26,18 @@ namespace Nest.Tests.Literate
 
 		public GeneralUsageTests()
 		{
-			this.InstanceInitializer = this.Initializer(TestClient.Client);
-			var func = this.Fluent(TestClient.Client);
+			var client = this.Client();
+			this.InstanceInitializer = this.Initializer(client);
+			var func = this.Fluent(client);
 			this.InstanceFluent = func(new TDescriptor());
 		}
+
+		protected virtual ConnectionSettings ConnectionSettings(ConnectionSettings settings) => settings; 
+		protected virtual IElasticClient Client() => TestClient.GetClient(ConnectionSettings); 
+
+		protected virtual void Setup(IElasticClient client) { }
+		protected virtual void Teardown(IElasticClient client) { }
+
 
 		[Fact] private void SerializesInitializer() => this.AssertSerializes(this.InstanceInitializer);
 
@@ -52,9 +60,13 @@ namespace Nest.Tests.Literate
 
 		public EndpointUsageTests()
 		{
-			this.InstanceInitializer = this.Initializer(TestClient.Client);
-			this.InstanceFluent = this.Fluent(TestClient.Client);
+			var client = this.Client();
+			this.InstanceInitializer = this.Initializer(client);
+			this.InstanceFluent = this.Fluent(client);
 		}
+
+		protected virtual ConnectionSettings ConnectionSettings(ConnectionSettings settings) => settings; 
+		protected virtual IElasticClient Client() => TestClient.GetClient(ConnectionSettings); 
 
 		private void Dispatch(Action<TResponse> assert)
 		{

@@ -34,7 +34,7 @@ namespace SearchApis.RequestBody
 			protected override Func<TermFilterDescriptor, ITermFilter> Fluent(IElasticClient client) =>
 				term=>term.Field("field").Value("value");
 		}
-
+		
 		public class UsageInsideFilterDescriptor : GeneralUsageTests<IFilterContainer, FilterDescriptor<object>, FilterContainer>
 		{
 			protected override object ExpectedJson { get; } =
