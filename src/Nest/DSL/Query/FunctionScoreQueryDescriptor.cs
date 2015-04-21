@@ -98,16 +98,25 @@ namespace Nest
 
 		string IQuery.Name { get; set; }
 
+		private bool _forcedConditionless = false;
+
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				return (Self.Query == null || Self.Query.IsConditionless)
+				return _forcedConditionless || ((Self.Query == null || Self.Query.IsConditionless)
 					&& Self.RandomScore == null 
 					&& Self.ScriptScore == null 
-					&& !Self.Functions.HasAny();
+					&& !Self.Functions.HasAny());
 			}
 		}
+
+		public FunctionScoreQueryDescriptor<T> ConditionlessWhen(bool isConditionless)
+		{
+			this._forcedConditionless = isConditionless;
+			return this;
+		}
+
 
 		public FunctionScoreQueryDescriptor<T> Name(string name)
 		{
