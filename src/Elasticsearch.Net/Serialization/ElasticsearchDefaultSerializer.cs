@@ -50,7 +50,11 @@ namespace Elasticsearch.Net.Serialization
 			if (ms != null && ms.Position > 0)
 			{
 				json = ms.ToArray().Utf8String();
+#if ASPNETCORE50
+				ms.Dispose(); //TODO: this should be fine for all platforms since close will dispose as well
+#else
 				ms.Close();
+#endif
 			}
 			else
 			{
@@ -60,7 +64,11 @@ namespace Elasticsearch.Net.Serialization
 					var buffer = new byte[BUFFER_SIZE];
 					while (stream != null)
 					{
+#if ASPNETCORE50
+						var read = stream.ReadAsync(buffer, 0, BUFFER_SIZE);
+#else
 						var read = Task<int>.Factory.FromAsync(stream.BeginRead, stream.EndRead, buffer, 0, BUFFER_SIZE, null);
+#endif
 						yield return read;
 						if (read.Result == 0) break;
 						ms.Write(buffer, 0, read.Result);

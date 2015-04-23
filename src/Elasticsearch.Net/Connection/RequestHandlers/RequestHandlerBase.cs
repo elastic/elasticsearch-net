@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using Elasticsearch.Net.Connection.RequestState;
 using Elasticsearch.Net.ConnectionPool;
 using Elasticsearch.Net.Exceptions;
@@ -185,9 +186,13 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 			ElasticsearchResponse<T> typedResponse,
 			ElasticsearchResponse<Stream> streamResponse)
 		{
-			if (streamResponse.Response != null && !typeof(Stream).IsAssignableFrom(typeof(T))) 
+			if (streamResponse.Response != null && !typeof(Stream).IsAssignableFrom(typeof(T)))
+#if ASPNETCORE50
+				streamResponse.Response.Dispose();
+#else
 				streamResponse.Response.Close();
-			
+#endif
+
 			if (error != null)
 			{
 				typedResponse.Success = false;

@@ -40,8 +40,9 @@ namespace Elasticsearch.Net.Connection
 		}
 	}
 
-
+#if !ASPNETCORE50
 	[Browsable(false)]
+#endif
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public class ConnectionConfiguration<T> : IConnectionConfigurationValues, IHideObjectMembers
 		where T : ConnectionConfiguration<T>

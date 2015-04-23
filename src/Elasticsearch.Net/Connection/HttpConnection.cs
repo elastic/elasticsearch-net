@@ -15,7 +15,8 @@ using PurifyNet;
 
 namespace Elasticsearch.Net.Connection
 {
-	public class HttpConnection : IConnection
+#if !ASPNETCORE50
+	public class HttpConnection2 : IConnection
 	{
 		const int BUFFER_SIZE = 1024;
 
@@ -24,7 +25,7 @@ namespace Elasticsearch.Net.Connection
 
 		public TransportAddressScheme? AddressScheme { get; private set; }
 
-		static HttpConnection()
+		static HttpConnection2()
 		{
 			//ServicePointManager.SetTcpKeepAlive(true, 2000, 2000);
 
@@ -37,7 +38,7 @@ namespace Elasticsearch.Net.Connection
 				HttpWebRequest.DefaultMaximumErrorResponseLength = -1;
 		}
 
-		public HttpConnection(IConnectionConfigurationValues settings)
+		public HttpConnection2(IConnectionConfigurationValues settings)
 		{
 			if (settings == null)
 				throw new ArgumentNullException("settings");
@@ -425,4 +426,7 @@ namespace Elasticsearch.Net.Connection
 			return this.ConnectionSettings.Timeout;
 		}
 	}
+
+#endif
+
 }

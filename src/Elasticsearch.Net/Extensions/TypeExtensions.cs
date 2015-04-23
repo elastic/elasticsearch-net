@@ -13,11 +13,11 @@ namespace Elasticsearch.Net
 	{
 		private static MethodInfo GetActivatorMethodInfo = typeof(TypeExtensions).GetMethod("GetActivator", BindingFlags.Static | BindingFlags.NonPublic);
 
-		private static ConcurrentDictionary<string, ObjectActivator<object>> _cachedActivators = new ConcurrentDictionary<string, ObjectActivator<object>>(); 
+		private static ConcurrentDictionary<string, ObjectActivator<object>> _cachedActivators = new ConcurrentDictionary<string, ObjectActivator<object>>();
 		private static ConcurrentDictionary<string, Type> _cachedGenericClosedTypes = new ConcurrentDictionary<string, Type>();
 
 		public delegate T ObjectActivator<out T>(params object[] args);
-		
+
 
 		internal static object CreateGenericInstance(this Type t, Type closeOver, params object[] args)
 		{
@@ -40,9 +40,9 @@ namespace Elasticsearch.Net
 			{
 				var generic = GetActivatorMethodInfo.MakeGenericMethod(t);
 
-				ConstructorInfo ctor = t.GetConstructors().FirstOrDefault(c=>c.GetParameters().Count() == argLength);
+				ConstructorInfo ctor = t.GetConstructors().FirstOrDefault(c => c.GetParameters().Count() == argLength);
 				if (ctor == null)
-					throw new Exception("Cannot create an instance of " + t.FullName 
+					throw new Exception("Cannot create an instance of " + t.FullName
 						+ "because it has no constructor taking " + argLength + " arguments");
 				activator = (ObjectActivator<object>)generic.Invoke(null, new[] { ctor });
 				_cachedActivators.TryAdd(key, activator);
@@ -91,5 +91,67 @@ namespace Elasticsearch.Net
 			ObjectActivator<T> compiled = (ObjectActivator<T>)lambda.Compile();
 			return compiled;
 		}
+
+
+		public static bool IsGeneric(this Type type)
+		{
+#if ASPNETCORE50 || NETFX_CORE
+			return type.GetTypeInfo().IsGenericType;
+#else
+			return type.IsGenericType;
+#endif
+		}
+
+		public static bool IsValue(this Type type)
+		{
+#if ASPNETCORE50 || NETFX_CORE
+			return type.GetTypeInfo().IsValueType;
+#else
+			return type.IsValueType;
+#endif
+		}
+
+
+#if ASPNETCORE50
+		public static TypeCode GetTypeCode(this Type type)
+		{
+			if (type == null)
+				return TypeCode.Empty;
+			else if (type == typeof(bool))
+				return TypeCode.Boolean;
+			else if (type == typeof(char))
+				return TypeCode.Char;
+			else if (type == typeof(sbyte))
+				return TypeCode.SByte;
+			else if (type == typeof(byte))
+				return TypeCode.Byte;
+			else if (type == typeof(short))
+				return TypeCode.Int16;
+			else if (type == typeof(ushort))
+				return TypeCode.UInt16;
+			else if (type == typeof(int))
+				return TypeCode.Int32;
+			else if (type == typeof(uint))
+				return TypeCode.UInt32;
+			else if (type == typeof(long))
+				return TypeCode.Int64;
+			else if (type == typeof(ulong))
+				return TypeCode.UInt64;
+			else if (type == typeof(float))
+				return TypeCode.Single;
+			else if (type == typeof(double))
+				return TypeCode.Double;
+			else if (type == typeof(decimal))
+				return TypeCode.Decimal;
+			else if (type == typeof(System.DateTime))
+				return TypeCode.DateTime;
+			else if (type == typeof(string))
+				return TypeCode.String;
+			else if (type.GetTypeInfo().IsEnum)
+				return GetTypeCode(Enum.GetUnderlyingType(type));
+			else
+				return TypeCode.Object;
+		}
+#endif
 	}
 }
