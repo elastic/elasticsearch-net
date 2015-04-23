@@ -6,7 +6,7 @@ namespace Nest
     {
         public static string ToUrlAndOverridePath(this Uri uri, string path)
         {
-            return uri.Scheme == Uri.UriSchemeHttps ?
+            return uri.Scheme ==  "https" ?
                 string.Format("https://{0}{1}", uri.Host, path) :
                 string.Format("http://{0}:{1}{2}", uri.Host, uri.Port, path);
         }

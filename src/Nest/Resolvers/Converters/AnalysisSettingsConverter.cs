@@ -47,19 +47,19 @@ namespace Nest.Resolvers.Converters
 
 			foreach (var rootProperty in o.Children<JProperty>())
 			{
-				if (rootProperty.Name.Equals("analyzer", StringComparison.InvariantCultureIgnoreCase))
+				if (rootProperty.Name.Equals("analyzer", StringComparison.OrdinalIgnoreCase))
 				{
 					result.Analyzers = serializer.Deserialize<IDictionary<string,AnalyzerBase>>(rootProperty.Value.CreateReader());
 				}
-				else if (rootProperty.Name.Equals("filter", StringComparison.InvariantCultureIgnoreCase))
+				else if (rootProperty.Name.Equals("filter", StringComparison.OrdinalIgnoreCase))
 				{
 					result.TokenFilters = serializer.Deserialize<IDictionary<string, TokenFilterBase>>(rootProperty.Value.CreateReader());
 				}
-				else if (rootProperty.Name.Equals("tokenizer", StringComparison.InvariantCultureIgnoreCase))
+				else if (rootProperty.Name.Equals("tokenizer", StringComparison.OrdinalIgnoreCase))
 				{
 					result.Tokenizers = serializer.Deserialize<IDictionary<string, TokenizerBase>>(rootProperty.Value.CreateReader());
 				}
-				else if (rootProperty.Name.Equals("char_filter", StringComparison.InvariantCultureIgnoreCase))
+				else if (rootProperty.Name.Equals("char_filter", StringComparison.OrdinalIgnoreCase))
 				{
 					result.CharFilters = serializer.Deserialize<IDictionary<string, CharFilterBase>>(rootProperty.Value.CreateReader());
 				}

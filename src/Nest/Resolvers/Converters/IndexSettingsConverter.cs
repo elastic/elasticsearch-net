@@ -137,12 +137,12 @@ namespace Nest.Resolvers.Converters
 				
 				foreach (var rootProperty in settings.Children<JProperty>())
 				{
-					if (rootProperty.Name.Equals("analysis", StringComparison.InvariantCultureIgnoreCase))
+					if (rootProperty.Name.Equals("analysis", StringComparison.OrdinalIgnoreCase))
 					{
 						result.Analysis = serializer.Deserialize<AnalysisSettings>(rootProperty.Value.CreateReader());
 						result.Settings.Remove(rootProperty.Name);
 					}
-					else if (rootProperty.Name.Equals("similarity", StringComparison.InvariantCultureIgnoreCase))
+					else if (rootProperty.Name.Equals("similarity", StringComparison.OrdinalIgnoreCase))
 					{
 						result.Similarity = serializer.Deserialize<SimilaritySettings>(rootProperty.Value.CreateReader());
 						result.Settings.Remove(rootProperty.Name);

@@ -4,13 +4,26 @@
     },
 
     "frameworks" : {
-        "aspnet50" : { 
+       "aspnetcore50" : { 
             "dependencies": {
-            }
-        },
-        "aspnetcore50" : { 
-            "dependencies": {
-                "System.Runtime": "4.0.20-beta-22416"
+              "Elasticsearch.Net": "",
+              "System.Runtime": "4.0.20-beta-22416",
+              "System.ObjectModel": "4.0.10-beta-22416",
+              "System.Linq": "4.0.0-beta-22416",
+              "System.Linq.Queryable": "4.0.0-beta-22416",
+              "System.Linq.Expressions": "4.0.0-beta-22416",
+              "System.Threading": "4.0.0-beta-22416",
+              "System.Threading.Tasks": "4.0.10-beta-22416",
+              "System.Dynamic.Runtime": "4.0.0-beta-22416",
+              "System.Globalization": "4.0.10-beta-22416",
+              "System.Reflection": "4.0.10-beta-22416",
+              "System.Reflection.Extensions": "4.0.0-beta-22416",
+              "System.Reflection.Primitives": "4.0.0-beta-22416",
+              "System.Reflection.TypeExtensions": "4.0.0-beta-22416",
+              "System.Collections": "4.0.10-beta-22416",
+              "System.Collections.Concurrent": "4.0.10-beta-22416",
+              "System.Threading.Timer": "4.0.0-beta-22416",
+              "Newtonsoft.Json" : "6.0.6"
             }
         }
     }

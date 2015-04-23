@@ -11,11 +11,11 @@ namespace Nest
 	{
 		private static MethodInfo GetActivatorMethodInfo = typeof(TypeExtensions).GetMethod("GetActivator", BindingFlags.Static | BindingFlags.NonPublic);
 
-		private static ConcurrentDictionary<string, ObjectActivator<object>> _cachedActivators = new ConcurrentDictionary<string, ObjectActivator<object>>(); 
+		private static ConcurrentDictionary<string, ObjectActivator<object>> _cachedActivators = new ConcurrentDictionary<string, ObjectActivator<object>>();
 		private static ConcurrentDictionary<string, Type> _cachedGenericClosedTypes = new ConcurrentDictionary<string, Type>();
 
 		public delegate T ObjectActivator<out T>(params object[] args);
-		
+
 
 		internal static object CreateGenericInstance(this Type t, Type closeOver, params object[] args)
 		{
@@ -38,9 +38,9 @@ namespace Nest
 			{
 				var generic = GetActivatorMethodInfo.MakeGenericMethod(t);
 
-				ConstructorInfo ctor = t.GetConstructors().FirstOrDefault(c=>c.GetParameters().Count() == argLength);
+				ConstructorInfo ctor = t.GetConstructors().FirstOrDefault(c => c.GetParameters().Count() == argLength);
 				if (ctor == null)
-					throw new Exception("Cannot create an instance of " + t.FullName 
+					throw new Exception("Cannot create an instance of " + t.FullName
 						+ "because it has no constructor taking " + argLength + " arguments");
 				activator = (ObjectActivator<object>)generic.Invoke(null, new[] { ctor });
 				_cachedActivators.TryAdd(key, activator);
@@ -89,5 +89,58 @@ namespace Nest
 			ObjectActivator<T> compiled = (ObjectActivator<T>)lambda.Compile();
 			return compiled;
 		}
+
+#if ASPNETCORE50
+		internal static bool IsAssignableFrom(this Type type, Type other)
+		{
+			return type.GetTypeInfo().IsAssignableFrom(other.GetTypeInfo());
+		}
+#endif
+		public static bool IsValue(this Type type)
+		{
+#if ASPNETCORE50 || NETFX_CORE
+			return type.GetTypeInfo().IsValueType;
+#else
+			return type.IsValueType;
+#endif
+		}
+
+		public static IEnumerable<Type> GetAllInterfaces(this Type type)
+		{
+
+#if ASPNETCORE50 || NETFX_CORE
+			return type.GetTypeInfo().ImplementedInterfaces;
+#else
+			return type.GetInterFaces();
+#endif
+		}
+
+		public static Type GetSpecifiedInterface(this Type type, string name)
+		{
+			return type.GetAllInterfaces().Where(t => t.Name.Equals(name, StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
+		}
+
+
+
+		public static bool IsEnumType(this Type type)
+		{
+#if ASPNETCORE50 || NETFX_CORE
+			return type.GetTypeInfo().IsEnum;
+#else
+			return type.IsEnum;
+#endif
+		}
+
+		public static bool IsGeneric(this Type type)
+		{
+#if ASPNETCORE50 || NETFX_CORE
+			return type.GetTypeInfo().IsGenericType;
+#else
+			return type.IsGenericType;
+#endif
+		}
+
+
+
 	}
 }

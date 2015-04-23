@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using Newtonsoft.Json.Linq;
+using System.Reflection;
 
 namespace Nest
 {
@@ -15,7 +16,12 @@ namespace Nest
 		internal static string GetStringValue(this Enum enumValue)
 		{
 			var type = enumValue.GetType();
-			var info = type.GetField(enumValue.ToString());
+			var field = enumValue.ToString();
+#if ASPNETCORE50
+			var info = type.GetTypeInfo().GetDeclaredField(field);
+#else
+			var info = type.GetField(field);
+#endif
 			var da = (EnumMemberAttribute[])(info.GetCustomAttributes(typeof(EnumMemberAttribute), false));
 
 			if (da.Length > 0)

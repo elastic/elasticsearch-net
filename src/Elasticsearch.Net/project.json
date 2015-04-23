@@ -4,6 +4,18 @@
   },
 
   "frameworks": {
+    "net45": {
+      "compilationOptions": {
+        "define": [ "NET45" ]
+      },
+      "frameworkAssemblies": {
+        "System.Runtime.Serialization": "",
+        "System.Net.Http": "",
+        "System.IO": "",
+        "System.Threading.Tasks": "",
+        "System.Runtime": ""
+      }
+    },
     "aspnetcore50": {
       "dependencies": {
         "System.Runtime": "4.0.20-beta-22416",

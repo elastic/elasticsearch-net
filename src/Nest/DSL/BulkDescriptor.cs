@@ -41,7 +41,8 @@ namespace Nest
 
 		public BulkDescriptor()
 		{
-			Self.Operations = new SynchronizedCollection<IBulkOperation>();
+			//TODO used to be synchronized collection, find one for corefx or switch to System.Collections.Concurrent
+			Self.Operations = new List<IBulkOperation>();
 		}
 
 		public BulkDescriptor Create<T>(Func<BulkCreateDescriptor<T>, BulkCreateDescriptor<T>> bulkCreateSelector) where T : class

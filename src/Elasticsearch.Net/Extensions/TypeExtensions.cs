@@ -91,7 +91,7 @@ namespace Elasticsearch.Net
 			ObjectActivator<T> compiled = (ObjectActivator<T>)lambda.Compile();
 			return compiled;
 		}
-
+		
 
 		public static bool IsGeneric(this Type type)
 		{
@@ -112,7 +112,7 @@ namespace Elasticsearch.Net
 		}
 
 
-#if ASPNETCORE50
+#if ASPNETCORE50 || NET45
 		public static TypeCode GetTypeCode(this Type type)
 		{
 			if (type == null)
