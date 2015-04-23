@@ -163,6 +163,7 @@
     <Compile Include="Core\Exists\IndexExistsTests.cs" />
     <Compile Include="Indices\StatsTests.cs" />
     <Compile Include="Core\AsyncTests.cs" />
+    <Compile Include="Mapping\MapFromAttributeTests.cs" />
     <Compile Include="Mapping\MappingVisitorTests.cs" />
     <Compile Include="Mapping\GetMultipleMappingTests.cs" />
     <Compile Include="Reproduce\Reproduce1181Tests.cs" />

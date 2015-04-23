@@ -100,6 +100,7 @@
     <Compile Include="Cluster\NodeTests.cs" />
     <Compile Include="Cluster\Reroute\RerouteTests.cs" />
     <Compile Include="Cluster\State\StateTests.cs" />
+    <Compile Include="Core\AttributeBasedMap\IncludeInParentTests.cs" />
     <Compile Include="Core\Bulk\BulkTests.cs" />
     <Compile Include="Core\Bulk\BulkUrlTests.cs" />
     <Compile Include="Core\Indices\Alias\AliasTests.cs" />
@@ -116,6 +117,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Cluster\Reroute\ClusterReroute.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\AttributeBasedMap\TestIncludeInParent.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Core\Bulk\BulkIndexDetailsFixedPath.json">
