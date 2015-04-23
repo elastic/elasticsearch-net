@@ -111,7 +111,7 @@ namespace Nest
 #if ASPNETCORE50 || NETFX_CORE
 			return type.GetTypeInfo().ImplementedInterfaces;
 #else
-			return type.GetInterFaces();
+			return type.GetInterfaces();
 #endif
 		}
 
