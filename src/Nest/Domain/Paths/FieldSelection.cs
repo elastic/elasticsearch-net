@@ -70,8 +70,9 @@ namespace Nest.Domain
 		/// <typeparam name="K">The type to return the value as, remember that if your field is a string K should be string[]</typeparam>
 		private K FieldArray<K>(string path)
 		{
+			var fieldValues = ((IFieldSelection<T>)this).FieldValuesDictionary;
 			object o;
-			if (((IFieldSelection<T>)this).FieldValuesDictionary.TryGetValue(path, out o))
+			if (fieldValues != null && fieldValues.TryGetValue(path, out o))
 			{
 				var t = typeof(K);
 				if (o is JArray && t.GetInterfaces().Contains(typeof(IEnumerable)))
