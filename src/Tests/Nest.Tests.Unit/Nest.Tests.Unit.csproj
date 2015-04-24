@@ -404,6 +404,7 @@
     <Compile Include="Reproduce\Reproduce629Tests.cs" />
     <Compile Include="Reproduce\Reproduce1187Tests.cs" />
     <Compile Include="Reproduce\Reproduce901Tests.cs" />
+    <Compile Include="Reproduce\Reproduce1320Tests.cs" />
     <Compile Include="Reproduce\Reproduce990Tests.cs" />
     <Compile Include="Reproduce\Reproduce974Tests.cs" />
     <Compile Include="Reproduce\Reproduce928Tests.cs" />
