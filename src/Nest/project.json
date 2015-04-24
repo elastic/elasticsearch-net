@@ -4,7 +4,7 @@
   },
 
   "frameworks": {
-    "aspnet45": {
+    "net45": {
       "frameworkAssemblies": {
 
       },
