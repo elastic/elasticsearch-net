@@ -25,6 +25,7 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 					.Query("querytext")
 					.Rewrite(RewriteMultiTerm.ConstantScoreBoolean)
 					.Slop(2)
+					.FuzzyTranspositions()
 					)
 				);
 
@@ -41,6 +42,7 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 			q.Query.Should().Be("querytext");
 			q.Rewrite.Should().Be(RewriteMultiTerm.ConstantScoreBoolean);
 			q.Slop.Should().Be(2);
+		    q.FuzzyTranspositions.Should().BeTrue();
 		}
 
 		[Test]
@@ -61,6 +63,7 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 					.Query("querytext")
 					.Rewrite(RewriteMultiTerm.ConstantScoreBoolean)
 					.Slop(2)
+                    .FuzzyTranspositions(false)
 					)
 				);
 			q.Type.Should().Be("phrase_prefix");
@@ -76,6 +79,7 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 			q.Query.Should().Be("querytext");
 			q.Rewrite.Should().Be(RewriteMultiTerm.ConstantScoreBoolean);
 			q.Slop.Should().Be(2);
+			q.FuzzyTranspositions.Should().BeFalse();
 		}
 
 		[Test]
