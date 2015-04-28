@@ -50,6 +50,7 @@ namespace Nest
 			fq.PrefixLength = GetPropValue<int?>(jo, "prefix_length");
 			fq.Query = GetPropValue<string>(jo, "query");
 			fq.Slop = GetPropValue<int?>(jo, "slop");
+			fq.FuzzyTranspositions = GetPropValue<bool?>(jo, "fuzzy_transpositions");
 			
 			var rewriteString = GetPropValue<string>(jo, "rewrite");
 			if (!rewriteString.IsNullOrEmpty())

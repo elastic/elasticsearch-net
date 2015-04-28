@@ -55,6 +55,9 @@ namespace Nest
 		Operator? Operator { get; set; }
 
 		PropertyPathMarker Field { get; set; }
+
+        [JsonProperty(PropertyName = "fuzzy_transpositions")]
+        bool? FuzzyTranspositions { get; set; }
 	}
 	
 	public class MatchQuery : PlainQuery, IMatchQuery
@@ -91,6 +94,7 @@ namespace Nest
 		public string MinimumShouldMatch { get; set; }
 		public Operator? Operator { get; set; }
 		public PropertyPathMarker Field { get; set; }
+        public bool? FuzzyTranspositions { get; set; }
 	}
 
 
@@ -129,7 +133,9 @@ namespace Nest
 
 		PropertyPathMarker IMatchQuery.Field { get; set; }
 
-		bool IQuery.IsConditionless
+        bool? IMatchQuery.FuzzyTranspositions { get; set; }
+
+	    bool IQuery.IsConditionless
 		{
 			get
 			{
@@ -235,6 +241,12 @@ namespace Nest
 			Self.Operator = op;
 			return this;
 		}
+
+        public MatchQueryDescriptor<T> FuzzyTranspositions(bool transpositions = true)
+        {
+            Self.FuzzyTranspositions = transpositions;
+            return this;
+        }
 	
 	}
 }
