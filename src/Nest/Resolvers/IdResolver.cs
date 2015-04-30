@@ -9,6 +9,7 @@ namespace Nest.Resolvers
 	public class IdResolver
 	{
 		private readonly IConnectionSettingsValues _connectionSettings;
+		private ConcurrentDictionary<Type, Func<object, string>> LocalIdDelegates = new ConcurrentDictionary<Type, Func<object, string>>();
 		private static ConcurrentDictionary<Type, Func<object, string>> IdDelegates = new ConcurrentDictionary<Type, Func<object, string>>();
 		private static MethodInfo MakeDelegateMethodInfo = typeof(IdResolver).GetMethod("MakeDelegate", BindingFlags.Static | BindingFlags.NonPublic);
 
@@ -56,7 +57,14 @@ namespace Nest.Resolvers
 
 			var type = typeof(T);
 			Func<object, string> cachedLookup;
-			if (IdDelegates.TryGetValue(type, out cachedLookup))
+			string propertyName;
+
+			var preferLocal = this._connectionSettings.IdProperties.TryGetValue(type, out propertyName);
+			
+			if (LocalIdDelegates.TryGetValue(type, out cachedLookup))
+				return cachedLookup(@object);
+
+			if (!preferLocal && IdDelegates.TryGetValue(type, out cachedLookup))
 				return cachedLookup(@object);
 
 			var idProperty = GetInferredId(type);
@@ -75,7 +83,10 @@ namespace Nest.Resolvers
 					var v = func(obj);
 					return v != null ? v.ToString() : null;
 				};
-				IdDelegates.TryAdd(type, cachedLookup);
+				if (preferLocal) 
+					LocalIdDelegates.TryAdd(type, cachedLookup);
+				else 
+					IdDelegates.TryAdd(type, cachedLookup);
 				return cachedLookup(@object);
 			}
 			catch 
