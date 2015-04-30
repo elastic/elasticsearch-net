@@ -8,6 +8,13 @@ namespace Nest.Tests.Unit.Internals.Inferno
 	[TestFixture]
 	public class IdLookupTests
 	{
+		private IdResolver _idResolver;
+
+		public IdLookupTests()
+		{
+			this._idResolver = new IdResolver(new ConnectionSettings());
+		}
+
 		[ElasticType(IdProperty = "Guid")]
 		internal class AlternateIdClass
 		{
@@ -35,7 +42,7 @@ namespace Nest.Tests.Unit.Internals.Inferno
 		public void TestAlternateIdLookup()
 		{
 			var expectedGuid = Guid.NewGuid();
-			var id = new IdResolver().GetIdFor(new AlternateIdClass { Guid = expectedGuid });
+			var id = this._idResolver.GetIdFor(new AlternateIdClass { Guid = expectedGuid });
 			StringAssert.AreEqualIgnoringCase(expectedGuid.ToString(), id);
 		}
 
@@ -43,28 +50,28 @@ namespace Nest.Tests.Unit.Internals.Inferno
 		public void TestIntLookup()
 		{
 			var expected = 12;
-			var id = new IdResolver().GetIdFor(new IntIdClass { Id = expected });
+			var id = this._idResolver.GetIdFor(new IntIdClass { Id = expected });
 			StringAssert.AreEqualIgnoringCase(expected.ToString(CultureInfo.InvariantCulture), id);
 		}
 		[Test]
 		public void TestDecimalLookup()
 		{
 			var expected = 12m;
-			var id = new IdResolver().GetIdFor(new DecimalIdClass { Id = expected });
+			var id = this._idResolver.GetIdFor(new DecimalIdClass { Id = expected });
 			StringAssert.AreEqualIgnoringCase(expected.ToString(CultureInfo.InvariantCulture), id);
 		}
 		[Test]
 		public void TestFloatLookup()
 		{
 			var expected = 12f;
-			var id = new IdResolver().GetIdFor(new FloatIdClass { Id = expected });
+			var id = this._idResolver.GetIdFor(new FloatIdClass { Id = expected });
 			StringAssert.AreEqualIgnoringCase(expected.ToString(CultureInfo.InvariantCulture), id);
 		}
 		[Test]
 		public void TestLongLookup()
 		{
 			var expected = long.MaxValue;
-			var id = new IdResolver().GetIdFor(new LongIdClass { Id = expected });
+			var id = this._idResolver.GetIdFor(new LongIdClass { Id = expected });
 			StringAssert.AreEqualIgnoringCase(expected.ToString(CultureInfo.InvariantCulture), id);
 		}
 		
@@ -72,14 +79,14 @@ namespace Nest.Tests.Unit.Internals.Inferno
 		public void TestDoubleLookup()
 		{
 			var expected = 12d;
-			var id = new IdResolver().GetIdFor(new DoubleIdClass { Id = expected });
+			var id = this._idResolver.GetIdFor(new DoubleIdClass { Id = expected });
 			StringAssert.AreEqualIgnoringCase(expected.ToString(CultureInfo.InvariantCulture), id);
 		}
 		[Test]
 		public void TestCustomLookup()
 		{
 			var expected = new MyCustomClass();
-			var id = new IdResolver().GetIdFor(new CustomObjectIdClass { Id = expected });
+			var id = this._idResolver.GetIdFor(new CustomObjectIdClass { Id = expected });
 			StringAssert.AreEqualIgnoringCase(expected.ToString(), id);
 		}
 
@@ -87,8 +94,8 @@ namespace Nest.Tests.Unit.Internals.Inferno
 		public void TestInheritedLookup()
 		{
 			var expected = new InheritedIdClass() { Id = 123 };
-			var id = new IdResolver().GetIdFor(expected);
-			id = new IdResolver().GetIdFor(expected);
+			var id = this._idResolver.GetIdFor(expected);
+			id = this._idResolver.GetIdFor(expected);
 			Assert.AreEqual(expected.Id.ToString(), id);
 		}
 
@@ -97,8 +104,8 @@ namespace Nest.Tests.Unit.Internals.Inferno
 		public void TestHitsCache()
 		{
 			var expected = 12m;
-			var id = new IdResolver().GetIdFor(new DecimalIdClass { Id = expected });
-			id = new IdResolver().GetIdFor(new DecimalIdClass { Id = expected });
+			var id = this._idResolver.GetIdFor(new DecimalIdClass { Id = expected });
+			id = this._idResolver.GetIdFor(new DecimalIdClass { Id = expected });
 			StringAssert.AreEqualIgnoringCase(expected.ToString(), id);
 		}
 	}

@@ -7,13 +7,11 @@ namespace Nest.Resolvers
 	public class TypeNameResolver
 	{
 		private readonly IConnectionSettingsValues _connectionSettings;
-		private PropertyNameResolver _propertyNameResolver;
 
 		public TypeNameResolver(IConnectionSettingsValues connectionSettings)
 		{
 			connectionSettings.ThrowIfNull("connectionSettings");
 			this._connectionSettings = connectionSettings;
-			this._propertyNameResolver = new PropertyNameResolver(this._connectionSettings);
 		}
 
 		public string GetTypeNameFor<T>()
