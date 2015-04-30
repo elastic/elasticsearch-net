@@ -19,6 +19,10 @@
 		<tags>elasticsearch elastic search lucene nest</tags>
 	</metadata>
 	<files>
+    <file src="output\Elasticsearch.Net\net40\Elasticsearch.Net.dll" target="lib"/>
+    <file src="output\Elasticsearch.Net\net40\Elasticsearch.Net.pdb" target="lib"/>
+    <file src="output\Elasticsearch.Net\net40\Elasticsearch.Net.XML" target="lib"/>
+    
 		<file src="output\Elasticsearch.Net\net40\Elasticsearch.Net.dll" target="lib\net40"/>
 		<file src="output\Elasticsearch.Net\net40\Elasticsearch.Net.pdb" target="lib\net40"/>
 		<file src="output\Elasticsearch.Net\net40\Elasticsearch.Net.XML" target="lib\net40"/>

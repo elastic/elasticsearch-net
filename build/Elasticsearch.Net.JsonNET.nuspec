@@ -19,6 +19,10 @@
 		<tags>elasticsearch elastic search lucene thrift nest</tags>
 	</metadata>
 	<files>
+    <file src="output\Elasticsearch.Net.JsonNET\net40\Elasticsearch.Net.JsonNET.dll" target="lib"/>
+    <file src="output\Elasticsearch.Net.JsonNET\net40\Elasticsearch.Net.JsonNET.pdb" target="lib"/>
+    <file src="output\Elasticsearch.Net.JsonNET\net40\Elasticsearch.Net.JsonNET.XML" target="lib"/>
+    
 		<file src="output\Elasticsearch.Net.JsonNET\net40\Elasticsearch.Net.JsonNET.dll" target="lib\net40"/>
 		<file src="output\Elasticsearch.Net.JsonNET\net40\Elasticsearch.Net.JsonNET.pdb" target="lib\net40"/>
 		<file src="output\Elasticsearch.Net.JsonNET\net40\Elasticsearch.Net.JsonNET.XML" target="lib\net40"/>
