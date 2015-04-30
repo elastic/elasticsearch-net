@@ -18,17 +18,16 @@
 		<tags>elasticsearch elastic search lucene thrift nest</tags>
 	</metadata>
 	<files>
-    <file src="output\Elasticsearch.Net.Connection.Thrift\net40\Elasticsearch.Net.Connection.Thrift.dll" target="lib"/>
-    <file src="output\Elasticsearch.Net.Connection.Thrift\net40\Elasticsearch.Net.Connection.Thrift.pdb" target="lib"/>
-    <file src="output\Elasticsearch.Net.Connection.Thrift\net40\Elasticsearch.Net.Connection.Thrift.XML" target="lib"/>
-    
+		<file src="output\Elasticsearch.Net.Connection.Thrift\net40\Elasticsearch.Net.Connection.Thrift.dll" target="lib"/>
+		<file src="output\Elasticsearch.Net.Connection.Thrift\net40\Elasticsearch.Net.Connection.Thrift.pdb" target="lib"/>
+		<file src="output\Elasticsearch.Net.Connection.Thrift\net40\Elasticsearch.Net.Connection.Thrift.XML" target="lib"/>
+
 		<file src="output\Elasticsearch.Net.Connection.Thrift\net40\Elasticsearch.Net.Connection.Thrift.dll" target="lib\net40"/>
 		<file src="output\Elasticsearch.Net.Connection.Thrift\net40\Elasticsearch.Net.Connection.Thrift.pdb" target="lib\net40"/>
 		<file src="output\Elasticsearch.Net.Connection.Thrift\net40\Elasticsearch.Net.Connection.Thrift.XML" target="lib\net40"/>
-		
+
 		<file src="output\Elasticsearch.Net.Connection.Thrift\net45\Elasticsearch.Net.Connection.Thrift.dll" target="lib\net45"/>
 		<file src="output\Elasticsearch.Net.Connection.Thrift\net45\Elasticsearch.Net.Connection.Thrift.pdb" target="lib\net45"/>
 		<file src="output\Elasticsearch.Net.Connection.Thrift\net45\Elasticsearch.Net.Connection.Thrift.XML" target="lib\net45"/>
-
 	</files>
 </package>
