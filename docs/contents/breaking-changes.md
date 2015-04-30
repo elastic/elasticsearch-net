@@ -123,6 +123,8 @@ When you do a search with NEST 0.12, you'd get back a `QueryResponse<T>` with tw
 
 Starting from NEST 1.0 `.DocumentsWithMetaData` is now called simply `.Hits`.
 
+The old `.Hits` has been renamed to `HitsMetaData`.
+
 ### int Properties
 
 In quite a few places values that should have been `long` were mapped as `int` in NEST 0.12.0 which could be troublesome if you for instance have more than `2,147,483,647` matching documents. In my preperations for this release I helped port one of my former employees applications to Elasticsearch 1.1 and NEST 1.0 and found that this change had the most impact on the application and all of its models. 
