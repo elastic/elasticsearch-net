@@ -129,6 +129,7 @@
     <Compile Include="Domain\Cat\CatRecoveryRecord.cs" />
     <Compile Include="Domain\Cat\CatPluginsRecord.cs" />
     <Compile Include="Domain\Cat\CatPendingTasksRecord.cs" />
+    <Compile Include="Domain\DSL\IDocument.cs" />
     <Compile Include="Domain\Geo\GeoLocation.cs" />
     <Compile Include="Domain\Geo\GeoPrecision.cs" />
     <Compile Include="Domain\Hit\ExplainGet.cs" />

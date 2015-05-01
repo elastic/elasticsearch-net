@@ -1,4 +1,5 @@
-﻿using Elasticsearch.Net;
+﻿using System.Security.Cryptography.X509Certificates;
+using Elasticsearch.Net;
 
 namespace Nest
 {
