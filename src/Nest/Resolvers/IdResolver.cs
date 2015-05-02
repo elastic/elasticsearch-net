@@ -8,8 +8,15 @@ namespace Nest.Resolvers
 {
 	public class IdResolver
 	{
+		private readonly IConnectionSettingsValues _connectionSettings;
 		private static ConcurrentDictionary<Type, Func<object, string>> IdDelegates = new ConcurrentDictionary<Type, Func<object, string>>();
 		private static MethodInfo MakeDelegateMethodInfo = typeof(IdResolver).GetMethod("MakeDelegate", BindingFlags.Static | BindingFlags.NonPublic);
+
+		public IdResolver(IConnectionSettingsValues connectionSettings)
+		{
+			_connectionSettings = connectionSettings;
+		}
+
 
 		internal Func<T, string> CreateIdSelector<T>() where T : class
 		{
@@ -24,6 +31,7 @@ namespace Nest.Resolvers
 			return t => f(t);
 		}
 
+		[Obsolete("Scheduled to be removed in 2.0, is not cached and not used internally")]
 		public string GetIdFor<T>(T @object, string idProperty)
 		{
 			try
@@ -81,26 +89,31 @@ namespace Nest.Resolvers
 		{
 			// if the type specifies through ElasticAttribute what the id prop is 
 			// use that no matter what
+
+			string propertyName;
+			this._connectionSettings.IdProperties.TryGetValue(type, out propertyName);
+			if (!propertyName.IsNullOrEmpty())
+				return GetPropertyCaseInsensitive(type, propertyName);
+
 			var esTypeAtt = ElasticAttributes.Type(type);
 			if (esTypeAtt != null && !string.IsNullOrWhiteSpace(esTypeAtt.IdProperty))
 				return GetPropertyCaseInsensitive(type, esTypeAtt.IdProperty);
 
-			var propertyName = "Id";
-
+			propertyName = "Id";
 			//Try Id on its own case insensitive
 			var idProperty = GetPropertyCaseInsensitive(type, propertyName);
 			if (idProperty != null)
 				return idProperty;
 
+			//TODO remove in 2.0 ?
 			//Try TypeNameId case insensitive
 			idProperty = GetPropertyCaseInsensitive(type, type.Name + propertyName);
 			if (idProperty != null)
 				return idProperty;
 
+			//TODO remove in 2.0 ?
 			//Try TypeName_Id case insensitive
 			idProperty = GetPropertyCaseInsensitive(type, type.Name + "_" + propertyName);
-			if (idProperty != null)
-				return idProperty;
 
 			return idProperty;
 		}
