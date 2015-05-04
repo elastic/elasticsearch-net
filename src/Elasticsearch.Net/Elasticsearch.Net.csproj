@@ -74,6 +74,7 @@
     <Compile Include="Exceptions\OneToOneServerException.cs" />
     <Compile Include="Exceptions\ElasticsearchAuthException.cs" />
     <Compile Include="IElasticsearchClient.cs" />
+    <Compile Include="Obsolete\RequestParameters\FlushRequestParametersObsoleteExtensions.cs" />
     <Compile Include="Obsolete\IndicesDeleteAlias.cs" />
     <Compile Include="Obsolete\IndicesPutAlias.cs" />
     <Compile Include="Obsolete\IndicesRecoveryStatus.cs" />
