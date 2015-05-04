@@ -369,7 +369,6 @@ namespace Nest
 			return this;
 		}
 
-
 		public SearchDescriptor<T> Source(bool include = true)
 		{
 			if (!include)
@@ -388,6 +387,7 @@ namespace Nest
 			Self.Source = sourceSelector(new SearchSourceDescriptor<T>());
 			return this;
 		}
+
 		/// <summary>
 		/// The number of hits to return. Defaults to 10. When using scroll search type 
 		/// size is actually multiplied by the number of shards!
@@ -429,6 +429,7 @@ namespace Nest
 			Self.Timeout = timeout;
 			return this;
 		}
+		
 		/// <summary>
 		/// Enables explanation for each hit on how its score was computed. 
 		/// (Use .DocumentsWithMetaData on the return results)

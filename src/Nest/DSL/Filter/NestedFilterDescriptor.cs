@@ -28,6 +28,10 @@ namespace Nest
 
 		[JsonProperty("join")]
 		bool? Join { get; set; }
+		
+		[JsonProperty("inner_hits")]
+		IInnerHits InnerHits { get; set; }
+
 	}
 
 	public class NestedFilter : PlainFilter, INestedFilter
@@ -42,10 +46,13 @@ namespace Nest
 		public IQueryContainer Query { get; set; }
 		public PropertyPathMarker Path { get; set; }
 		public bool? Join { get; set; }
+		public IInnerHits InnerHits { get; set; }
 	}
 
 	public class NestedFilterDescriptor<T> : FilterBase, INestedFilter where T : class
 	{
+		private INestedFilter Self { get { return this; } }
+
 		NestedScore? INestedFilter.Score { get; set; }
 
 		IFilterContainer INestedFilter.Filter { get; set; }
@@ -56,54 +63,61 @@ namespace Nest
 
 		bool? INestedFilter.Join { get; set; }
 
+		IInnerHits INestedFilter.InnerHits { get; set; }
+
 		bool IFilter.IsConditionless
 		{
 			get
 			{
-				return (((INestedFilter)this).Query == null 
-					|| ((INestedFilter)this).Query.IsConditionless)
-                    && (((INestedFilter)this).Filter == null
-                    || ((INestedFilter)this).Filter.IsConditionless)
-                    ;
+				return (Self.Query == null || Self.Query.IsConditionless)
+                    && (Self.Filter == null || Self.Filter.IsConditionless);
 			}
 		}
 
 		public NestedFilterDescriptor<T> Filter(Func<FilterDescriptor<T>, FilterContainer> filterSelector)
 		{
 			var q = new FilterDescriptor<T>();
-			((INestedFilter)this).Filter = filterSelector(q);
+			Self.Filter = filterSelector(q);
 			return this;
 		}
 
 		public NestedFilterDescriptor<T> Query(Func<QueryDescriptor<T>, QueryContainer> querySelector)
 		{
 			var q = new QueryDescriptor<T>();
-			((INestedFilter)this).Query = querySelector(q);
+			Self.Query = querySelector(q);
 			return this;
 		}
 
 		public NestedFilterDescriptor<T> Score(NestedScore score)
 		{
-			((INestedFilter)this).Score = score;
+			Self.Score = score;
 			return this;
 		}
 		
 		public NestedFilterDescriptor<T> Path(string path)
 		{
-			((INestedFilter)this).Path = path;
+			Self.Path = path;
 			return this;
 		}
 		
 		public NestedFilterDescriptor<T> Join(bool join = true)
 		{
-			((INestedFilter)this).Join = join;
+			Self.Join = join;
 			return this;
 		}
 		
 		public NestedFilterDescriptor<T> Path(Expression<Func<T, object>> objectPath)
 		{
-			((INestedFilter)this).Path = objectPath;
+			Self.Path = objectPath;
 			return this;
 		}
+
+		public NestedFilterDescriptor<T> InnerHits(Func<InnerHitsDescriptor<T>, IInnerHits> innerHitsSelector)
+		{
+			if (innerHitsSelector == null) return this;
+			Self.InnerHits = innerHitsSelector(new InnerHitsDescriptor<T>());
+			return this;
+		}
+
 	}
 }

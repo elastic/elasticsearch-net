@@ -183,6 +183,7 @@
     <Compile Include="Reproduce\Reproduce986Tests.cs" />
     <Compile Include="Reproduce\Reproduce960Tests.cs" />
     <Compile Include="Reproduce\Reproduce1279Tests.cs" />
+    <Compile Include="Search\IDocumentTests.cs" />
     <Compile Include="Search\Filter\AndOrNotFilterTests.cs" />
     <Compile Include="Search\Filter\ScriptFilterTests.cs" />
     <Compile Include="Search\Filter\MissingExistsFilterTests.cs" />

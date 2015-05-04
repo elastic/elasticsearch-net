@@ -16,6 +16,10 @@ namespace Nest
 		[JsonProperty("query")]
 		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryDescriptor<object>>, CustomJsonConverter>))]
 		IQueryContainer Query { get; set; }
+
+		[JsonProperty("inner_hits")]
+		IInnerHits InnerHits { get; set; }
+
 	}
 
 	public class HasParentFilter : PlainFilter, IHasParentFilter
@@ -27,40 +31,51 @@ namespace Nest
 
 		public TypeNameMarker Type { get; set; }
 		public IQueryContainer Query { get; set; }
+		public IInnerHits InnerHits { get; set; }
 	}
 
 	public class HasParentFilterDescriptor<T> : FilterBase, IHasParentFilter where T : class
 	{
+		private IHasParentFilter Self { get { return this; } }
+
 		TypeNameMarker IHasParentFilter.Type { get; set; }
 
 		IQueryContainer IHasParentFilter.Query { get; set; }
+
+		IInnerHits IHasParentFilter.InnerHits { get; set; }
 
 		bool IFilter.IsConditionless
 		{
 			get
 			{
-				var pf = ((IHasParentFilter)this);
-				return pf.Query == null 
-					|| pf.Query.IsConditionless 
-					|| pf.Type.IsNullOrEmpty();
+				return Self.Query == null 
+					|| Self.Query.IsConditionless 
+					|| Self.Type.IsNullOrEmpty();
 			}
 		}
 
 		public HasParentFilterDescriptor()
 		{
-			((IHasParentFilter)this).Type = TypeNameMarker.Create<T>();
+			Self.Type = TypeNameMarker.Create<T>();
 		}
 
 		public HasParentFilterDescriptor<T> Query(Func<QueryDescriptor<T>, QueryContainer> querySelector)
 		{
 			var q = new QueryDescriptor<T>();
-			((IHasParentFilter)this).Query = querySelector(q);
+			Self.Query = querySelector(q);
 			return this;
 		}
 
 		public HasParentFilterDescriptor<T> Type(string type)
 		{
-			((IHasParentFilter)this).Type = type;
+			Self.Type = type;
+			return this;
+		}
+
+		public HasParentFilterDescriptor<T> InnerHits(Func<InnerHitsDescriptor<T>, IInnerHits> innerHitsSelector)
+		{
+			if (innerHitsSelector == null) return this;
+			Self.InnerHits = innerHitsSelector(new InnerHitsDescriptor<T>());
 			return this;
 		}
 	}

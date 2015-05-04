@@ -237,6 +237,7 @@
     <Compile Include="DSL\Filter\IndicesFilterDescriptor.cs" />
     <Compile Include="Domain\DSL\NoMatchShortcut.cs" />
     <Compile Include="DSL\Query\Functions\WeightFunction.cs" />
+    <Compile Include="DSL\Search\InnerHitsDescriptor.cs" />
     <Compile Include="DSL\UpgradeDescriptor.cs" />
     <Compile Include="DSL\UpgradeStatusDescriptor.cs" />
     <Compile Include="DSL\VerifyRepositoryDescriptor.cs" />
