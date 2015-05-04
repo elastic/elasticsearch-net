@@ -452,6 +452,7 @@
     <Compile Include="Search\Query\Singles\SpanMultiTermQueryJson.cs" />
     <Compile Include="Search\Query\Singles\TemplateQueryJson.cs" />
     <Compile Include="Search\Query\Singles\Term\TermToStringJson.cs" />
+    <Compile Include="Search\InnerHits\GlobalInnerHitsTests.cs" />
     <Compile Include="Search\SearchUrlTests.cs" />
     <Compile Include="Search\Rescoring\RescoreTests.cs" />
     <Compile Include="Search\Facets\DateHistogramFacetJson.cs" />
@@ -976,6 +977,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Search\Query\Singles\Term\IntToStringTest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\InnerHits\ComplexInnerHitsSerializes.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Search\Rescoring\RescoreSerializes.json">

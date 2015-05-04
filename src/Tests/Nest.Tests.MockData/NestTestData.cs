@@ -16,6 +16,7 @@ namespace Nest.Tests.MockData
 		private static IList<ElasticsearchProject> _Data { get; set; }
 		private static IList<Parent> _Parents { get; set; }
 		private static IList<Child> _Children { get; set; }
+
 		public static IGenerationSession _Session { get; set; }
 		public static IGenerationSession Session
 		{
@@ -38,6 +39,11 @@ namespace Nest.Tests.MockData
 					x.Include<BoolTerm>()
 						.Setup(c => c.Name1).Use<IncrementalNameSource>("a")
 						.Setup(c => c.Name2).Use<IncrementalNameSource>("b");
+					x.Include<King>().Setup(c => c.Name).Use<IncrementalNameSource>("king");
+					x.Include<Prince>().Setup(c => c.Name).Use<IncrementalNameSource>("prince");
+					x.Include<Duke>().Setup(c => c.Name).Use<IncrementalNameSource>("duke");
+					x.Include<Earl>().Setup(c => c.Name).Use<IncrementalNameSource>("earl");
+					x.Include<Baron>().Setup(c => c.Name).Use<IncrementalNameSource>("baron");
 					x.Include<Person>()
 						.Setup(c => c.Id).Use<IntegerIdSource>()
 						.Setup(c => c.Email).Use<EmailAddressSource>()

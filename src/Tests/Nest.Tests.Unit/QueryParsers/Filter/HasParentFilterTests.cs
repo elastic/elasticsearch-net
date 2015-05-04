@@ -14,9 +14,12 @@ namespace Nest.Tests.Unit.QueryParsers.Filter
 			var hasParentFilter = this.SerializeThenDeserialize(cacheName, cacheKey, cache, 
 				f=>f.HasParent,
 				f=>f.HasParent<ElasticsearchProject>(d=>d
+					.InnerHits()
 					.Query(q=>q.Term(p=>p.Country, "value"))
-					)
-				);
+				)
+			);
+			hasParentFilter.InnerHits.Should().NotBeNull();
+
 			var query = hasParentFilter.Query;
 			query.Should().NotBeNull();
 			query.Term.Field.Should().Be("country");

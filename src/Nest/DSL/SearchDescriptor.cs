@@ -68,6 +68,7 @@ namespace Nest
 		IDictionary<string, IScriptFilter> ScriptFields { get; set; }
 
 		[JsonProperty(PropertyName = "_source")]
+		[JsonConverter(typeof(ReadAsTypeConverter<SourceFilter>))]
 		ISourceFilter Source { get; set; }
 
 		[JsonProperty(PropertyName = "aggs")]
@@ -81,6 +82,10 @@ namespace Nest
 		[JsonProperty(PropertyName = "filter")]
 		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<FilterContainer>, CustomJsonConverter>))]
 		IFilterContainer Filter { get; set; }
+
+		[JsonProperty(PropertyName = "inner_hits")]
+		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		IDictionary<string, IInnerHitsContainer> InnerHits { get; set; }
 
 		string Preference { get; }
 		
@@ -155,6 +160,7 @@ namespace Nest
 		public IList<KeyValuePair<PropertyPathMarker, ISort>> Sort { get; set; }
 		public IDictionary<IndexNameMarker, double> IndicesBoost { get; set; }
 		public IFilterContainer Filter { get; set; }
+		public IDictionary<string, IInnerHitsContainer> InnerHits { get; set; }
 		public IQueryContainer Query { get; set; }
 		public IRescore Rescore { get; set; }
 		public IDictionary<PropertyPathMarker, IFacetContainer> Facets { get; set; }
@@ -233,6 +239,7 @@ namespace Nest
 		public IList<PropertyPathMarker> Fields { get; set; }
 		public IDictionary<string, IScriptFilter> ScriptFields { get; set; }
 		public ISourceFilter Source { get; set; }
+		public IDictionary<string, IInnerHitsContainer> InnerHits { get; set; }
 		public IDictionary<string, IAggregationContainer> Aggregations { get; set; }
 		public IQueryContainer Query { get; set; }
 		public IFilterContainer Filter { get; set; }
@@ -349,6 +356,8 @@ namespace Nest
 
 		IDictionary<string, IAggregationContainer> ISearchRequest.Aggregations { get; set; }
 
+		IDictionary<string, IInnerHitsContainer> ISearchRequest.InnerHits { get; set; }
+
 		Func<dynamic, Hit<dynamic>, Type> ISearchRequest.TypeSelector { get; set; }
 
 		/// <summary>
@@ -360,7 +369,6 @@ namespace Nest
 			return this;
 		}
 
-
 		public SearchDescriptor<T> Aggregations(Func<AggregationDescriptor<T>, AggregationDescriptor<T>> aggregationsSelector)
 		{
 			var aggs = aggregationsSelector(new AggregationDescriptor<T>());
@@ -369,6 +377,30 @@ namespace Nest
 			return this;
 		}
 
+		public SearchDescriptor<T> InnerHits(
+			Func<
+				FluentDictionary<string, Func<InnerHitsContainerDescriptor<T>, IInnerHitsContainer>>, 
+				FluentDictionary<string, Func<InnerHitsContainerDescriptor<T>, IInnerHitsContainer>>
+			> innerHitsSelector)
+		{
+			if (innerHitsSelector == null)
+			{
+				Self.InnerHits = null;
+				return this;
+			}
+			var containers = innerHitsSelector(new FluentDictionary<string, Func<InnerHitsContainerDescriptor<T>, IInnerHitsContainer>>())
+				.Where(kv => kv.Value != null)
+				.Select(kv => new {Key = kv.Key, Value = kv.Value(new InnerHitsContainerDescriptor<T>())})
+				.Where(kv => kv.Value != null)
+				.ToDictionary(kv => kv.Key, kv => kv.Value);
+			if (containers == null || containers.Count == 0)
+			{
+				Self.InnerHits = null;
+				return this;
+			}
+			Self.InnerHits = containers;
+			return this;
+		}
 
 		public SearchDescriptor<T> Source(bool include = true)
 		{
@@ -388,6 +420,7 @@ namespace Nest
 			Self.Source = sourceSelector(new SearchSourceDescriptor<T>());
 			return this;
 		}
+
 		/// <summary>
 		/// The number of hits to return. Defaults to 10. When using scroll search type 
 		/// size is actually multiplied by the number of shards!
@@ -429,6 +462,7 @@ namespace Nest
 			Self.Timeout = timeout;
 			return this;
 		}
+		
 		/// <summary>
 		/// Enables explanation for each hit on how its score was computed. 
 		/// (Use .DocumentsWithMetaData on the return results)

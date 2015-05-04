@@ -93,6 +93,7 @@
     <Compile Include="Domain\CustomGeoLocation.cs" />
     <Compile Include="Domain\Person.cs" />
     <Compile Include="Domain\Product.cs" />
+    <Compile Include="Domain\Royals.cs" />
     <Compile Include="NestTestData.cs" />
     <Compile Include="Domain\Parent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

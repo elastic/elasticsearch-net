@@ -26,6 +26,10 @@ namespace Nest
 		[JsonProperty("path")]
 		PropertyPathMarker Path { get; set; }
 
+		[JsonProperty("inner_hits")]
+		[JsonConverter(typeof(ReadAsTypeConverter<InnerHits>))]
+		IInnerHits InnerHits { get; set; }
+
 	}
 
 	public class NestedQuery : PlainQuery, INestedQuery
@@ -41,6 +45,7 @@ namespace Nest
 		public IFilterContainer Filter { get; set; }
 		public IQueryContainer Query { get; set; }
 		public PropertyPathMarker Path { get; set; }
+		public IInnerHits InnerHits { get; set; }
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -56,11 +61,14 @@ namespace Nest
 
 		PropertyPathMarker INestedQuery.Path { get; set; }
 
+		IInnerHits INestedQuery.InnerHits { get; set; }
+
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				return Self.Query == null || Self.Query.IsConditionless;
+				return (Self.Query == null || Self.Query.IsConditionless)
+				       && (Self.Filter == null || Self.Filter.IsConditionless);
 			}
 		}
 
@@ -95,9 +103,23 @@ namespace Nest
 			Self.Path = path;
 			return this;
 		}
+
 		public NestedQueryDescriptor<T> Path(Expression<Func<T, object>> objectPath)
 		{
 			Self.Path = objectPath;
+			return this;
+		}
+
+		public NestedQueryDescriptor<T> InnerHits()
+		{
+			Self.InnerHits = new InnerHits();
+			return this;
+		}
+
+		public NestedQueryDescriptor<T> InnerHits(Func<InnerHitsDescriptor<T>, IInnerHits> innerHitsSelector)
+		{
+			if (innerHitsSelector == null) return this;
+			Self.InnerHits = innerHitsSelector(new InnerHitsDescriptor<T>());
 			return this;
 		}
 	}

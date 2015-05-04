@@ -22,6 +22,10 @@ namespace Nest
 		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryDescriptor<object>>, CustomJsonConverter>))]
 		IQueryContainer Query { get; set; }
 
+		[JsonProperty("inner_hits")]
+		[JsonConverter(typeof(ReadAsTypeConverter<InnerHits>))]
+		IInnerHits InnerHits { get; set; }
+
 	}
 
 	public class HasParentQuery : PlainQuery, IHasParentQuery
@@ -36,6 +40,7 @@ namespace Nest
 		public TypeNameMarker Type { get; set; }
 		public ParentScoreType? ScoreType { get; set; }
 		public IQueryContainer Query { get; set; }
+		public IInnerHits InnerHits { get; set; }
 	}
 
 	public class HasParentQueryDescriptor<T> : IHasParentQuery where T : class
@@ -45,6 +50,8 @@ namespace Nest
 		TypeNameMarker IHasParentQuery.Type { get; set; }
 
 		ParentScoreType? IHasParentQuery.ScoreType { get; set; }
+
+		IInnerHits IHasParentQuery.InnerHits { get; set; }
 		
 		string IQuery.Name { get; set; }
 
@@ -84,6 +91,19 @@ namespace Nest
 		public HasParentQueryDescriptor<T> Score(ParentScoreType? scoreType = ParentScoreType.Score)
 		{
 			Self.ScoreType = scoreType;
+			return this;
+		}
+
+		public HasParentQueryDescriptor<T> InnerHits()
+		{
+			Self.InnerHits = new InnerHits();
+			return this;
+		}
+
+		public HasParentQueryDescriptor<T> InnerHits(Func<InnerHitsDescriptor<T>, IInnerHits> innerHitsSelector)
+		{
+			if (innerHitsSelector == null) return this;
+			Self.InnerHits = innerHitsSelector(new InnerHitsDescriptor<T>());
 			return this;
 		}
 

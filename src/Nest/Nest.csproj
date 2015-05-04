@@ -129,6 +129,7 @@
     <Compile Include="Domain\Cat\CatRecoveryRecord.cs" />
     <Compile Include="Domain\Cat\CatPluginsRecord.cs" />
     <Compile Include="Domain\Cat\CatPendingTasksRecord.cs" />
+    <Compile Include="Domain\DSL\IDocument.cs" />
     <Compile Include="Domain\Geo\GeoLocation.cs" />
     <Compile Include="Domain\Geo\GeoPrecision.cs" />
     <Compile Include="Domain\Hit\ExplainGet.cs" />
@@ -236,6 +237,9 @@
     <Compile Include="DSL\Filter\IndicesFilterDescriptor.cs" />
     <Compile Include="Domain\DSL\NoMatchShortcut.cs" />
     <Compile Include="DSL\Query\Functions\WeightFunction.cs" />
+    <Compile Include="DSL\Search\IGlobalInnerHit.cs" />
+    <Compile Include="DSL\Search\IInnerHitsContainer.cs" />
+    <Compile Include="DSL\Search\InnerHitsDescriptor.cs" />
     <Compile Include="DSL\UpgradeDescriptor.cs" />
     <Compile Include="DSL\UpgradeStatusDescriptor.cs" />
     <Compile Include="DSL\VerifyRepositoryDescriptor.cs" />
