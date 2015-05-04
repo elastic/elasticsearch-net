@@ -3,8 +3,8 @@
     "documentation" : "http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-termvectors.html",
     "methods" : ["GET", "POST"],
     "url" : {
-      "path" : "/{index}/{type}/_termvector",
-      "paths" : ["/{index}/{type}/_termvector", "/{index}/{type}/{id}/_termvector"],
+      "path" : "/{index}/{type}/{id}/_termvector",
+      "paths" : ["/{index}/{type}/{id}/_termvector"],
       "parts" : {
         "index" : {
          "type" : "string",
@@ -18,10 +18,15 @@
         },
         "id" : {
            "type" : "string",
-           "description" : "The id of the document, when not specified a doc param should be supplied."
+           "description" : "The id of the document.",
+           "required" : true
          }
       },
       "params": {
+        "source": {
+          "type" : "string",
+          "description" : "The URL-encoded request definition"
+        },
         "term_statistics" : {
           "type" : "boolean",
           "description" : "Specifies if total term frequency and document frequency should be returned.",
@@ -80,7 +85,7 @@
       }
     },
     "body": {
-      "description" : "Define parameters and or supply a document to get termvectors for. See documentation.",
+      "description" : "Define parameters. See documentation.",
       "required" : false
     }
   }
