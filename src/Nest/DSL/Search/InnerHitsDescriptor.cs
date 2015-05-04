@@ -40,8 +40,26 @@ namespace Nest
 		[JsonProperty(PropertyName = "script_fields")]
 		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		IDictionary<string, IScriptFilter> ScriptFields { get; set; }
-
 	}
+
+	public interface IInnerHitsContainer
+	{
+		IDictionary<string, IGlobalInnerHit> Type { get; set; }
+		IDictionary<string, IGlobalInnerHit> Path { get; set; }
+	}
+
+	public interface IGlobalInnerHit
+	{
+
+		[JsonProperty(PropertyName = "query")]
+		IQueryContainer Query { get; set; }
+
+		[JsonProperty(PropertyName = "inner_hits")]
+		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		IDictionary<string, IInnerHitsContainer> InnerHits { get; set; }
+	}
+
+
 
 	public class InnerHits : IInnerHits
 	{
