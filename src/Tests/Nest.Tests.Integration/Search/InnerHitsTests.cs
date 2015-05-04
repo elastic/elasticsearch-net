@@ -28,11 +28,11 @@ namespace Nest.Tests.Integration.Search
 			);
 
 			var bulk = new BulkDescriptor();
-			IndexAll(bulk, ()=> NestTestData.Session.List<King>(2).Get(), indexChildren: king => 
-				IndexAll(bulk, ()=> NestTestData.Session.List<Prince>(2).Get(),  king.Name, prince => 
-					IndexAll(bulk, ()=> NestTestData.Session.List<Duke>(3).Get(),  prince.Name, duke => 
-						IndexAll(bulk, ()=> NestTestData.Session.List<Earl>(5).Get(),  duke.Name, earl => 
-							IndexAll(bulk, ()=> NestTestData.Session.List<Baron>(1).Get(), earl.Name)
+			IndexAll(bulk, () => NestTestData.Session.List<King>(2).Get(), indexChildren: king =>
+				IndexAll(bulk, () => NestTestData.Session.List<Prince>(2).Get(), king.Name, prince =>
+					IndexAll(bulk, () => NestTestData.Session.List<Duke>(3).Get(), prince.Name, duke =>
+						IndexAll(bulk, () => NestTestData.Session.List<Earl>(5).Get(), duke.Name, earl =>
+							IndexAll(bulk, () => NestTestData.Session.List<Baron>(1).Get(), earl.Name)
 						)
 					)
 				)
@@ -58,20 +58,73 @@ namespace Nest.Tests.Integration.Search
 		}
 
 		[Test]
+		[SkipVersion("0 - 1.4.9", "Inner hits introduced in 1.5")]
+		public void HasParent()
+		{
+			var results = this.Client.Search<Prince>(s => s
+				.Index(this._indexName)
+				.Query(q => q
+					.HasParent<King>(hp => hp
+						.Query(qq => qq.MatchAll())
+						.InnerHits()
+					)
+				)
+			);
+
+			results.IsValid.Should().BeTrue();
+			results.Hits.Should().NotBeEmpty();
+			foreach(var hit in results.Hits)
+			{
+				var kings = hit.InnerHits["king"].Documents<King>();
+				kings.Should().NotBeEmpty();
+			}
+		}
+
+		[Test]
+		[SkipVersion("0 - 1.4.9", "Inner hits introduced in 1.5")]
+		public void HasChild()
+		{
+			var results = this.Client.Search<King>(s => s
+				.Index(this._indexName)
+				.Query(q => q
+					.Filtered(f => f
+						.Filter(ff => ff
+							.HasChild<Prince>(hc => hc
+								.Query(qq => qq.MatchAll())
+									.InnerHits(ih => ih
+									.Name("princes")
+								)
+							)
+						)
+					)
+				)
+			);
+
+			results.IsValid.Should().BeTrue();
+			results.Hits.Should().NotBeEmpty();
+			foreach (var hit in results.Hits)
+			{
+				var princes = hit.InnerHits["princes"].Documents<Prince>();
+				princes.Should().NotBeEmpty();
+			};
+		}
+
+		[Test]
+		[SkipVersion("0 - 1.4.9", "Inner hits introduced in 1.5")]
 		public void Search()
 		{
 			var results = this.Client.Search<Duke>(s => s
 				.Index(this._indexName)
 				.InnerHits(innerHits => innerHits
 					.Add("earls", i => i
-						.Type<Earl>(ii=>ii
+						.Type<Earl>(ii => ii
 							.Size(5)
 							.InnerHits(innerInnerHits => innerInnerHits
-								.Add("barons", iii=>iii.Type<Baron>())
+								.Add("barons", iii => iii.Type<Baron>())
 							)
 						)
 					)
-					.Add("princes", i=>i.Type<Prince>())
+					.Add("princes", i => i.Type<Prince>())
 				)
 			);
 			results.IsValid.Should().BeTrue();
