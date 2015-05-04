@@ -27,6 +27,7 @@ namespace Nest
 		PropertyPathMarker Path { get; set; }
 
 		[JsonProperty("inner_hits")]
+		[JsonConverter(typeof(ReadAsTypeConverter<InnerHits>))]
 		IInnerHits InnerHits { get; set; }
 
 	}
@@ -106,6 +107,12 @@ namespace Nest
 		public NestedQueryDescriptor<T> Path(Expression<Func<T, object>> objectPath)
 		{
 			Self.Path = objectPath;
+			return this;
+		}
+
+		public NestedQueryDescriptor<T> InnerHits()
+		{
+			Self.InnerHits = new InnerHits();
 			return this;
 		}
 

@@ -30,6 +30,7 @@ namespace Nest
 		bool? Join { get; set; }
 		
 		[JsonProperty("inner_hits")]
+		[JsonConverter(typeof(ReadAsTypeConverter<InnerHits>))]
 		IInnerHits InnerHits { get; set; }
 
 	}
@@ -109,6 +110,12 @@ namespace Nest
 		public NestedFilterDescriptor<T> Path(Expression<Func<T, object>> objectPath)
 		{
 			Self.Path = objectPath;
+			return this;
+		}
+
+		public NestedFilterDescriptor<T> InnerHits()
+		{
+			Self.InnerHits = new InnerHits();
 			return this;
 		}
 

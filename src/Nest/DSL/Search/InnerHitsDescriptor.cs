@@ -29,6 +29,7 @@ namespace Nest
 		bool? Explain { get; set; }
 
 		[JsonProperty(PropertyName = "_source")]
+		[JsonConverter(typeof(ReadAsTypeConverter<SourceFilter>))]
 		ISourceFilter Source { get; set; }
 
 		[JsonProperty(PropertyName = "version")]
@@ -41,24 +42,6 @@ namespace Nest
 		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		IDictionary<string, IScriptFilter> ScriptFields { get; set; }
 	}
-
-	public interface IInnerHitsContainer
-	{
-		IDictionary<string, IGlobalInnerHit> Type { get; set; }
-		IDictionary<string, IGlobalInnerHit> Path { get; set; }
-	}
-
-	public interface IGlobalInnerHit
-	{
-
-		[JsonProperty(PropertyName = "query")]
-		IQueryContainer Query { get; set; }
-
-		[JsonProperty(PropertyName = "inner_hits")]
-		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		IDictionary<string, IInnerHitsContainer> InnerHits { get; set; }
-	}
-
 
 
 	public class InnerHits : IInnerHits

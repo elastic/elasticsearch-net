@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -30,6 +31,31 @@ namespace Nest
 		public GlobalInnerHitDescriptor<T> Query(Func<QueryDescriptor<T>, IQueryContainer> querySelector)
 		{
 			Self.Query = querySelector == null ? null : querySelector(new QueryDescriptor<T>());
+			return this;
+		}
+
+		public GlobalInnerHitDescriptor<T> InnerHits(
+			Func<
+				FluentDictionary<string, Func<InnerHitsContainerDescriptor<T>, IInnerHitsContainer>>, 
+				FluentDictionary<string, Func<InnerHitsContainerDescriptor<T>, IInnerHitsContainer>>
+			> innerHitsSelector)
+		{
+			if (innerHitsSelector == null)
+			{
+				Self.InnerHits = null;
+				return this;
+			}
+			var containers = innerHitsSelector(new FluentDictionary<string, Func<InnerHitsContainerDescriptor<T>, IInnerHitsContainer>>())
+				.Where(kv => kv.Value != null)
+				.Select(kv => new {Key = kv.Key, Value = kv.Value(new InnerHitsContainerDescriptor<T>())})
+				.Where(kv => kv.Value != null)
+				.ToDictionary(kv => kv.Key, kv => kv.Value);
+			if (containers == null || containers.Count == 0)
+			{
+				Self.InnerHits = null;
+				return this;
+			}
+			Self.InnerHits = containers;
 			return this;
 		}
 	}

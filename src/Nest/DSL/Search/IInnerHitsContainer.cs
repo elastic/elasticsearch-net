@@ -22,44 +22,39 @@ namespace Nest
 		public IDictionary<PropertyPathMarker, IGlobalInnerHit> Path { get; set; }
 	}
 
-	public class InnerHitsContainerDescriptor : IInnerHitsContainer
+	public class InnerHitsContainerDescriptor<T> : IInnerHitsContainer where T : class
 	{
 		private IInnerHitsContainer Self { get { return this; }}
 
 		IDictionary<TypeNameMarker, IGlobalInnerHit> IInnerHitsContainer.Type { get; set; }
 		IDictionary<PropertyPathMarker, IGlobalInnerHit> IInnerHitsContainer.Path { get; set; }
 
-		public void Type<T>(Func<GlobalInnerHitDescriptor<T>, IGlobalInnerHit> globalInnerHitsSelector) where T : class
+		public InnerHitsContainerDescriptor<T> Type(Func<GlobalInnerHitDescriptor<T>, IGlobalInnerHit> globalInnerHitsSelector = null) 
 		{
-			var globalInnerHit = globalInnerHitsSelector == null ? null : globalInnerHitsSelector(new GlobalInnerHitDescriptor<T>());
-			if (globalInnerHit == null)
-			{
-				Self.Type = null;
-				return;
-			}
+			var globalInnerHit = globalInnerHitsSelector == null ? new GlobalInnerHit() : globalInnerHitsSelector(new GlobalInnerHitDescriptor<T>());
 			Self.Type = new Dictionary<TypeNameMarker, IGlobalInnerHit> {{typeof(T), globalInnerHit}};
+			return this;
 		}
 		
-		public void Path<T>(string path, Func<GlobalInnerHitDescriptor<T>, IGlobalInnerHit> globalInnerHitsSelector) where T : class
+		public InnerHitsContainerDescriptor<T> Type<TOther>(Func<GlobalInnerHitDescriptor<TOther>, IGlobalInnerHit> globalInnerHitsSelector = null) where TOther : class
 		{
-			var globalInnerHit = globalInnerHitsSelector == null ? null : globalInnerHitsSelector(new GlobalInnerHitDescriptor<T>());
-			if (globalInnerHit == null)
-			{
-				Self.Path = null;
-				return;
-			}
-			Self.Path = new Dictionary<PropertyPathMarker, IGlobalInnerHit> {{ path, globalInnerHit}};
+			var globalInnerHit = globalInnerHitsSelector == null ? new GlobalInnerHit() : globalInnerHitsSelector(new GlobalInnerHitDescriptor<TOther>());
+			Self.Type = new Dictionary<TypeNameMarker, IGlobalInnerHit> {{typeof(TOther), globalInnerHit}};
+			return this;
 		}
 
-		public void Path<T, TPathReturn>(Expression<Func<T, TPathReturn>> path, Func<GlobalInnerHitDescriptor<T>, IGlobalInnerHit> globalInnerHitsSelector) where T : class
+		public InnerHitsContainerDescriptor<T> Path(string path, Func<GlobalInnerHitDescriptor<T>, IGlobalInnerHit> globalInnerHitsSelector = null) 
 		{
-			var globalInnerHit = globalInnerHitsSelector == null ? null : globalInnerHitsSelector(new GlobalInnerHitDescriptor<T>());
-			if (globalInnerHit == null)
-			{
-				Self.Path = null;
-				return;
-			}
+			var globalInnerHit = globalInnerHitsSelector == null ? new GlobalInnerHit() : globalInnerHitsSelector(new GlobalInnerHitDescriptor<T>());
 			Self.Path = new Dictionary<PropertyPathMarker, IGlobalInnerHit> {{ path, globalInnerHit}};
+			return this;
+		}
+
+		public InnerHitsContainerDescriptor<T> Path(Expression<Func<T, object>> path, Func<GlobalInnerHitDescriptor<T>, IGlobalInnerHit> globalInnerHitsSelector = null) 
+		{
+			var globalInnerHit = globalInnerHitsSelector == null ? new GlobalInnerHit() : globalInnerHitsSelector(new GlobalInnerHitDescriptor<T>());
+			Self.Path = new Dictionary<PropertyPathMarker, IGlobalInnerHit> {{ path, globalInnerHit}};
+			return this;
 		}
 	}
 }

@@ -23,6 +23,7 @@ namespace Nest
 		IQueryContainer Query { get; set; }
 
 		[JsonProperty("inner_hits")]
+		[JsonConverter(typeof(ReadAsTypeConverter<InnerHits>))]
 		IInnerHits InnerHits { get; set; }
 
 	}
@@ -90,6 +91,12 @@ namespace Nest
 		public HasParentQueryDescriptor<T> Score(ParentScoreType? scoreType = ParentScoreType.Score)
 		{
 			Self.ScoreType = scoreType;
+			return this;
+		}
+
+		public HasParentQueryDescriptor<T> InnerHits()
+		{
+			Self.InnerHits = new InnerHits();
 			return this;
 		}
 

@@ -20,6 +20,7 @@ namespace Nest
 		IFilterContainer Filter { get; set; }
 
 		[JsonProperty("inner_hits")]
+		[JsonConverter(typeof(ReadAsTypeConverter<InnerHits>))]
 		IInnerHits InnerHits { get; set; }
 
 	}
@@ -83,6 +84,12 @@ namespace Nest
 		public HasChildFilterDescriptor<T> Type(string type)
 		{
 			Self.Type = type;
+			return this;
+		}
+
+		public HasChildFilterDescriptor<T> InnerHits()
+		{
+			Self.InnerHits = new InnerHits();
 			return this;
 		}
 

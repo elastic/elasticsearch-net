@@ -18,6 +18,7 @@ namespace Nest
 		IQueryContainer Query { get; set; }
 
 		[JsonProperty("inner_hits")]
+		[JsonConverter(typeof(ReadAsTypeConverter<InnerHits>))]
 		IInnerHits InnerHits { get; set; }
 
 	}
@@ -69,6 +70,12 @@ namespace Nest
 		public HasParentFilterDescriptor<T> Type(string type)
 		{
 			Self.Type = type;
+			return this;
+		}
+
+		public HasParentFilterDescriptor<T> InnerHits()
+		{
+			Self.InnerHits = new InnerHits();
 			return this;
 		}
 

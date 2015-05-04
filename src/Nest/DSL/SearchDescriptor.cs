@@ -68,6 +68,7 @@ namespace Nest
 		IDictionary<string, IScriptFilter> ScriptFields { get; set; }
 
 		[JsonProperty(PropertyName = "_source")]
+		[JsonConverter(typeof(ReadAsTypeConverter<SourceFilter>))]
 		ISourceFilter Source { get; set; }
 
 		[JsonProperty(PropertyName = "aggs")]
@@ -368,7 +369,6 @@ namespace Nest
 			return this;
 		}
 
-
 		public SearchDescriptor<T> Aggregations(Func<AggregationDescriptor<T>, AggregationDescriptor<T>> aggregationsSelector)
 		{
 			var aggs = aggregationsSelector(new AggregationDescriptor<T>());
@@ -379,8 +379,8 @@ namespace Nest
 
 		public SearchDescriptor<T> InnerHits(
 			Func<
-				FluentDictionary<string, Func<InnerHitsContainerDescriptor, IInnerHitsContainer>>, 
-				FluentDictionary<string, Func<InnerHitsContainerDescriptor, IInnerHitsContainer>>
+				FluentDictionary<string, Func<InnerHitsContainerDescriptor<T>, IInnerHitsContainer>>, 
+				FluentDictionary<string, Func<InnerHitsContainerDescriptor<T>, IInnerHitsContainer>>
 			> innerHitsSelector)
 		{
 			if (innerHitsSelector == null)
@@ -388,9 +388,9 @@ namespace Nest
 				Self.InnerHits = null;
 				return this;
 			}
-			var containers = innerHitsSelector(new FluentDictionary<string, Func<InnerHitsContainerDescriptor, IInnerHitsContainer>>())
+			var containers = innerHitsSelector(new FluentDictionary<string, Func<InnerHitsContainerDescriptor<T>, IInnerHitsContainer>>())
 				.Where(kv => kv.Value != null)
-				.Select(kv => new {Key = kv.Key, Value = kv.Value(new InnerHitsContainerDescriptor())})
+				.Select(kv => new {Key = kv.Key, Value = kv.Value(new InnerHitsContainerDescriptor<T>())})
 				.Where(kv => kv.Value != null)
 				.ToDictionary(kv => kv.Key, kv => kv.Value);
 			if (containers == null || containers.Count == 0)
