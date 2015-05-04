@@ -401,6 +401,7 @@ namespace Nest
 			Self.InnerHits = containers;
 			return this;
 		}
+
 		public SearchDescriptor<T> Source(bool include = true)
 		{
 			if (!include)

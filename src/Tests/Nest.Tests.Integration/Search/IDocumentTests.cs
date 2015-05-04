@@ -17,7 +17,7 @@ namespace Nest.Tests.Integration.Search
 				.AllTypes()
 			);
 			searchResults.Total.Should().BeGreaterThan(0);
-			var project = searchResults.Documents.First().OfType<ElasticsearchProject>();
+			var project = searchResults.Documents.First().As<ElasticsearchProject>();
 			project.Should().NotBeNull();
 			project.Name.Should().NotBeNullOrEmpty();
 		}

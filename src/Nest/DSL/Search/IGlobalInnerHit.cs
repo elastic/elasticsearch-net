@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public interface IGlobalInnerHit
+	public interface IGlobalInnerHit : IInnerHits
 	{
 		[JsonProperty(PropertyName = "query")]
 		IQueryContainer Query { get; set; }
@@ -15,7 +15,7 @@ namespace Nest
 		IDictionary<string, IInnerHitsContainer> InnerHits { get; set; }
 	}
 
-	public class GlobalInnerHit : IGlobalInnerHit
+	public class GlobalInnerHit : InnerHits, IGlobalInnerHit
 	{
 		public IQueryContainer Query { get; set; }
 		public IDictionary<string, IInnerHitsContainer> InnerHits { get; set; }
@@ -27,6 +27,16 @@ namespace Nest
 
 		IQueryContainer IGlobalInnerHit.Query { get; set; }
 		IDictionary<string, IInnerHitsContainer> IGlobalInnerHit.InnerHits { get; set; }
+		string IInnerHits.Name { get; set; }
+		int? IInnerHits.From { get; set; }
+		int? IInnerHits.Size { get; set; }
+		IList<KeyValuePair<PropertyPathMarker, ISort>> IInnerHits.Sort { get; set; }
+		IHighlightRequest IInnerHits.Highlight { get; set; }
+		bool? IInnerHits.Explain { get; set; }
+		ISourceFilter IInnerHits.Source { get; set; }
+		bool? IInnerHits.Version { get; set; }
+		IEnumerable<string> IInnerHits.FielddataFields { get; set; }
+		IDictionary<string, IScriptFilter> IInnerHits.ScriptFields { get; set; }
 
 		public GlobalInnerHitDescriptor<T> Query(Func<QueryDescriptor<T>, IQueryContainer> querySelector)
 		{
@@ -58,5 +68,112 @@ namespace Nest
 			Self.InnerHits = containers;
 			return this;
 		}
+
+		public GlobalInnerHitDescriptor<T> From(int? from)
+		{
+			Self.From = from;
+			return this;
+		}
+
+		public GlobalInnerHitDescriptor<T> Size(int? size)
+		{
+			Self.Size = size;
+			return this;
+		}
+
+		public GlobalInnerHitDescriptor<T> Name(string name)
+		{
+			Self.Name = name;
+			return this;
+		}
+
+		public GlobalInnerHitDescriptor<T> FielddataFields(params string[] fielddataFields)
+		{
+			Self.FielddataFields = fielddataFields;
+			return this;
+		}
+
+		public GlobalInnerHitDescriptor<T> FielddataFields(IEnumerable<string> fielddataFields)
+		{
+			Self.FielddataFields = fielddataFields;
+			return this;
+		}
+
+		public GlobalInnerHitDescriptor<T> Explain(bool explain = true)
+		{
+			Self.Explain = explain;
+			return this;
+		}
+
+		public GlobalInnerHitDescriptor<T> Version(bool version = true)
+		{
+			Self.Version = version;
+			return this;
+		}
+
+		public GlobalInnerHitDescriptor<T> Sort(Func<SortDescriptor<T>, SortDescriptor<T>> sortSelector)
+		{
+			if (sortSelector == null) return this;
+
+			var descriptor = sortSelector(new SortDescriptor<T>());
+
+			Self.Sort = descriptor.InternalSortState.Count == 0 ? null : descriptor.InternalSortState;
+			return this;
+		}
+
+		/// <summary>
+		/// Allow to highlight search results on one or more fields. The implementation uses the either lucene fast-vector-highlighter or highlighter. 
+		/// </summary>
+		public GlobalInnerHitDescriptor<T> Highlight(Action<HighlightDescriptor<T>> highlightDescriptor)
+		{
+			highlightDescriptor.ThrowIfNull("highlightDescriptor");
+			var d = new HighlightDescriptor<T>();
+			highlightDescriptor(d);
+			Self.Highlight = d;
+			return this;
+		}
+
+		public GlobalInnerHitDescriptor<T> Source(bool include = true)
+		{
+			if (!include)
+			{
+				Self.Source = new SourceFilter
+				{
+					Exclude = new PropertyPathMarker[] {"*"}
+				};
+			}
+			else Self.Source = null;
+			return this;
+		}
+
+		public GlobalInnerHitDescriptor<T> Source(Func<SearchSourceDescriptor<T>, SearchSourceDescriptor<T>> sourceSelector)
+		{
+			if (sourceSelector == null) return this;
+			Self.Source = sourceSelector(new SearchSourceDescriptor<T>());
+			return this;
+		}
+
+		public GlobalInnerHitDescriptor<T> ScriptFields(
+				Func<FluentDictionary<string, Func<ScriptFilterDescriptor, ScriptFilterDescriptor>>,
+				 FluentDictionary<string, Func<ScriptFilterDescriptor, ScriptFilterDescriptor>>> scriptFields)
+		{
+			if (scriptFields == null) return null;
+
+			var scriptFieldDescriptors = scriptFields(new FluentDictionary<string, Func<ScriptFilterDescriptor, ScriptFilterDescriptor>>());
+			if (scriptFieldDescriptors == null || scriptFieldDescriptors.All(d => d.Value == null))
+			{
+				Self.ScriptFields = null;
+				return this;
+			}
+			Self.ScriptFields = new FluentDictionary<string, IScriptFilter>();
+			foreach (var d in scriptFieldDescriptors)
+			{
+				if (d.Value == null)
+					continue;
+				Self.ScriptFields.Add(d.Key, d.Value(new ScriptFilterDescriptor()));
+			}
+			return this;
+		}
+
 	}
 }

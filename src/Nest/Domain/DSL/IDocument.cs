@@ -12,7 +12,7 @@ namespace Nest
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
 		/// <returns></returns>
-		T OfType<T>() where T : class;
+		T As<T>() where T : class;
 	}
 
 	public class DocumentConverter : JsonConverter
@@ -45,7 +45,7 @@ namespace Nest
 			//_value = new Lazy<object>(deserializer);
 		}
 
-		public T OfType<T>() where T : class
+		public T As<T>() where T : class
 		{
 			var jToken = this._Value;
 			return jToken != null ? jToken.ToObject<T>() : null;
