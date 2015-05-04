@@ -29,24 +29,26 @@ namespace Nest.Tests.Unit.Core.Repository
 		}
 
 		[Test]
-		[ExpectedException]
+		[ExpectedException(typeof(ArgumentNullException))]
 		public void Null_IgnoreIndexSettings_ThorwException()
 		{
 			List<string> ignoreIndexSettings = null;
 			_client.Restore("repository", "snapshotName",
 				descriptor => descriptor
+					.Index("index")
 					.IgnoreIndexSettings(ignoreIndexSettings));
 		}
 
 		[Test]
-		[ExpectedException]
+		[ExpectedException(typeof(ArgumentNullException))]
 		public void Null_IndexSettings_ThorwException()
 		{
-			Func<UpdateSettingsDescriptor, UpdateSettingsDescriptor> settings = null;
+			Func<UpdateSettingsDescriptor, UpdateSettingsDescriptor> settingsSelector = null;
 
 			var restoreResponse = _client.Restore("repository", "snapshotName",
 				descriptor => descriptor
-					.IndexSettings(settings));
+					.Index("index")
+					.IndexSettings(settingsSelector));
 		}
 	}
 }

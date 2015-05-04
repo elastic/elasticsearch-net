@@ -111,9 +111,10 @@ namespace Nest
 			return this;
 		}
 
-		public RestoreDescriptor IndexSettings(Func<UpdateSettingsDescriptor, UpdateSettingsDescriptor> settings)
+		public RestoreDescriptor IndexSettings(Func<UpdateSettingsDescriptor, UpdateSettingsDescriptor> settingsSelector)
 		{
-			Self.IndexSettings = settings(new UpdateSettingsDescriptor());
+			settingsSelector.ThrowIfNull("settings");
+			Self.IndexSettings = settingsSelector(new UpdateSettingsDescriptor());
 			return this;
 		}
 
