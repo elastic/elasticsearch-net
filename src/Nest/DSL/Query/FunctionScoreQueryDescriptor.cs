@@ -40,6 +40,9 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "weight")]
 		double? WeightAsDouble { get; set; }
+
+		[JsonProperty(PropertyName = "min_score")]
+		float? MinScore { get; set; }
 	}
 
 	public class FunctionScoreQuery : PlainQuery, IFunctionScoreQuery
@@ -67,6 +70,7 @@ namespace Nest
 		}
 
 		public double? WeightAsDouble { get; set; }
+		public float? MinScore { get; set; }
 	}
 
 	public class FunctionScoreQueryDescriptor<T> : IFunctionScoreQuery where T : class
@@ -95,6 +99,7 @@ namespace Nest
 
 		// TODO: Remove in 2.0 and change Weight to double
 		double? IFunctionScoreQuery.WeightAsDouble { get; set; }
+		float? IFunctionScoreQuery.MinScore { get; set; }
 
 		string IQuery.Name { get; set; }
 
@@ -200,6 +205,12 @@ namespace Nest
 		public FunctionScoreQueryDescriptor<T> Weight(long weight)
 		{
 			Self.Weight = weight;
+			return this;
+		}
+
+		public FunctionScoreQueryDescriptor<T> MinScore(float minScore)
+		{
+			Self.MinScore = minScore;
 			return this;
 		}
 	}
