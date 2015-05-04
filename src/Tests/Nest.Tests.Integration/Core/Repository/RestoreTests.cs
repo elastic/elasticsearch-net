@@ -90,13 +90,50 @@ namespace Nest.Tests.Integration.Core.Repository
 
 			var indexExistsResponse = this.Client.IndexExists(f => f.Index(_restoredIndexName));
 			indexExistsResponse.Exists.Should().BeTrue();
-
+			
 			var count = this.Client.Count<ElasticsearchProject>(descriptor => descriptor.Index(_restoredIndexName)).Count;
 
 			var indexContent = this.Client.SourceMany<ElasticsearchProject>(_indexedElements.Select(x => (long)x.Id), _restoredIndexName);
 
 			count.Should().Be(_indexedElements.Count);
 			indexContent.ShouldBeEquivalentTo(_indexedElements);
+		}
+
+		[Test]
+		[SkipVersion("0 - 1.5.0", "Requires index_settings and ignore_index_settings parameters which have been added in ES 1.5.0")]
+		public void SnapshotRestore_IndexSettings()
+		{
+			var updateSettingsResponse = this.Client.UpdateSettings(descriptor => descriptor.BlocksWrite());
+			updateSettingsResponse.IsValid.Should().BeTrue();
+
+			var snapshotResponse = this.Client.Snapshot(_repositoryName, _snapshotName, selector: f => f
+				.Index(_indexName)
+				.WaitForCompletion(true)
+				.IgnoreUnavailable()
+				.Partial());
+			snapshotResponse.IsValid.Should().BeTrue();
+
+			var d = ElasticsearchConfiguration.DefaultIndex;
+			var restoreResponse = this.Client.Restore(_repositoryName, _snapshotName, r => r
+				.WaitForCompletion(true)
+				.RenamePattern(d + "_(.+)")
+				.RenameReplacement(d + "_restored_$1")
+				.Index(_indexName)
+				.IgnoreUnavailable(true)
+				.IndexSettings(descriptor => descriptor
+					.RefreshInterval("123s"))
+				.IgnoreIndexSettings(SettingNames.BlocksWrite));
+
+			restoreResponse.IsValid.Should().BeTrue();
+			_restoredIndexName = _indexName.Replace(d + "_", d + "_restored_");
+
+			var indexExistsResponse = this.Client.IndexExists(f => f.Index(_restoredIndexName));
+			indexExistsResponse.Exists.Should().BeTrue();
+
+			var indexSettingsResponse = this.Client.GetIndexSettings(descriptor => descriptor.Index(_restoredIndexName));
+			indexSettingsResponse.IsValid.Should().BeTrue();
+			indexSettingsResponse.IndexSettings.Settings[SettingNames.RefreshInterval].Should().Be("123s");
+			indexSettingsResponse.IndexSettings.Settings[SettingNames.BlocksWrite].Should().BeNull();
 		}
 
 		[Test]
