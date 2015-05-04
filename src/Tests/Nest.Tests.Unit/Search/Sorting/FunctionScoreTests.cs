@@ -288,5 +288,46 @@ namespace Nest.Tests.Unit.Search.Sorting
 							}";
 			Assert.IsTrue(json.JsonEquals(expected), json);
 		}
+
+		[Test]
+		public void TestMinScore()
+		{
+			var s = new SearchDescriptor<ElasticsearchProject>()
+				.Query(q => q
+					.FunctionScore(fs => fs
+						.MinScore(1.1f)
+						.Functions(
+							f => f
+								.BoostFactor(2)
+								.Filter(
+									filter => filter.Term("term1", "termValue")
+								)
+								.Weight(0.5)
+						)
+					)
+
+				);
+			var json = TestElasticClient.Serialize(s);
+			var expected = @"{
+                          query: {
+                            function_score: {
+                              functions : [
+                                {
+                                    boost_factor: 2.0,
+                                    filter:{
+                                        term : {
+                                            ""term1"":""termValue""
+                                        }
+                                    },
+                                    weight: 0.5
+                                }
+                              ],
+                              min_score: 1.1
+                            }
+                          }
+                        }";
+
+			Assert.True(json.JsonEquals(expected), json);
+		}
 	}
 }
