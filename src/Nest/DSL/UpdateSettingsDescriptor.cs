@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 { 
-	public class SettingNames
+	public class UpdatableSettings
 	{
 		public const string NumberOfReplicas = "index.number_of_replicas";
 		public const string AutoExpandReplicas = "index.auto_expand_replicas";
@@ -46,109 +46,109 @@ namespace Nest
 
 	public interface IUpdateSettingsRequest : IIndexOptionalPath<UpdateSettingsRequestParameters>
 	{
-		[JsonProperty(SettingNames.NumberOfReplicas)]
+		[JsonProperty(UpdatableSettings.NumberOfReplicas)]
 		int? NumberOfReplicas { get; set; }
 
-		[JsonProperty(SettingNames.AutoExpandReplicas)]
+		[JsonProperty(UpdatableSettings.AutoExpandReplicas)]
 		object AutoExpandReplicas { get; set; }
 
-		[JsonProperty(SettingNames.BlocksReadOnly)]
+		[JsonProperty(UpdatableSettings.BlocksReadOnly)]
 		bool? BlocksReadOnly { get; set; }
 
-		[JsonProperty(SettingNames.BlocksRead)]
+		[JsonProperty(UpdatableSettings.BlocksRead)]
 		bool? BlocksRead { get; set; }
 
-		[JsonProperty(SettingNames.BlocksWrite)]
+		[JsonProperty(UpdatableSettings.BlocksWrite)]
 		bool? BlocksWrite { get; set; }
 
-		[JsonProperty(SettingNames.BlocksMetadata)]
+		[JsonProperty(UpdatableSettings.BlocksMetadata)]
 		bool? BlocksMetadata { get; set; }
 
-		[JsonProperty(SettingNames.RefreshInterval)]
+		[JsonProperty(UpdatableSettings.RefreshInterval)]
 		string RefreshInterval { get; set; }
 
-		[JsonProperty(SettingNames.IndexConcurrency)]
+		[JsonProperty(UpdatableSettings.IndexConcurrency)]
 		int? IndexConcurrency { get; set; }
 
-		[JsonProperty(SettingNames.Codec)]
+		[JsonProperty(UpdatableSettings.Codec)]
 		string Codec { get; set; }
 
-		[JsonProperty(SettingNames.CodecBloomLoad)]
+		[JsonProperty(UpdatableSettings.CodecBloomLoad)]
 		bool? CodecBloomLoad { get; set; }
 
-		[JsonProperty(SettingNames.FailOnMergeFailure)]
+		[JsonProperty(UpdatableSettings.FailOnMergeFailure)]
 		bool? FailOnMergeFailure { get; set; }
 
-		[JsonProperty(SettingNames.TranslogFlushTreshHoldOps)]
+		[JsonProperty(UpdatableSettings.TranslogFlushTreshHoldOps)]
 		string TranslogFlushTreshHoldOps { get; set; }
 
-		[JsonProperty(SettingNames.TranslogFlushThresholdSize)]
+		[JsonProperty(UpdatableSettings.TranslogFlushThresholdSize)]
 		string TranslogFlushThresholdSize { get; set; }
 
-		[JsonProperty(SettingNames.TranslogFlushThresholdPeriod)]
+		[JsonProperty(UpdatableSettings.TranslogFlushThresholdPeriod)]
 		string TranslogFlushThresholdPeriod { get; set; }
 
-		[JsonProperty(SettingNames.TranslogDisableFlush)]
+		[JsonProperty(UpdatableSettings.TranslogDisableFlush)]
 		bool? TranslogDisableFlush { get; set; }
 
-		[JsonProperty(SettingNames.CacheFilterMaxSize)]
+		[JsonProperty(UpdatableSettings.CacheFilterMaxSize)]
 		string CacheFilterMaxSize { get; set; }
 
-		[JsonProperty(SettingNames.CacheFilterExpire)]
+		[JsonProperty(UpdatableSettings.CacheFilterExpire)]
 		string CacheFilterExpire { get; set; }
 
-		[JsonProperty(SettingNames.CacheQueryEnable)]
+		[JsonProperty(UpdatableSettings.CacheQueryEnable)]
 		bool? CacheQueryEnable { get; set; }
 
-		[JsonProperty(SettingNames.GatewaySnapshotInterval)]
+		[JsonProperty(UpdatableSettings.GatewaySnapshotInterval)]
 		string GatewaySnapshotInterval { get; set; }
 
-		[JsonProperty(SettingNames.RoutingAllocationInclude)]
+		[JsonProperty(UpdatableSettings.RoutingAllocationInclude)]
 		IDictionary<string, object> RoutingAllocationInclude { get; set; }
 
-		[JsonProperty(SettingNames.RoutingAllocationExclude)]
+		[JsonProperty(UpdatableSettings.RoutingAllocationExclude)]
 		IDictionary<string, object> RoutingAllocationExclude { get; set; }
 
-		[JsonProperty(SettingNames.RoutingAllocationRequire)]
+		[JsonProperty(UpdatableSettings.RoutingAllocationRequire)]
 		IDictionary<string, object> RoutingAllocationRequire { get; set; }
 
-		[JsonProperty(SettingNames.RoutingAllocationEnable)]
+		[JsonProperty(UpdatableSettings.RoutingAllocationEnable)]
 		RoutingAllocationEnableOption? RoutingAllocationEnable { get; set; }
 
-		[JsonProperty(SettingNames.RoutingAllocationDisableAllication)]
+		[JsonProperty(UpdatableSettings.RoutingAllocationDisableAllication)]
 		bool? RoutingAllocationDisableAllication { get; set; }
 
-		[JsonProperty(SettingNames.RoutingAllocationDisableNewAllocation)]
+		[JsonProperty(UpdatableSettings.RoutingAllocationDisableNewAllocation)]
 		bool? RoutingAllocationDisableNewAllocation { get; set; }
 
-		[JsonProperty(SettingNames.RoutingAllocationDisableReplicaAllocation)]
+		[JsonProperty(UpdatableSettings.RoutingAllocationDisableReplicaAllocation)]
 		bool? RoutingAllocationDisableReplicaAllocation { get; set; }
 
-		[JsonProperty(SettingNames.RoutingAllocationTotalShardsPerNode)]
+		[JsonProperty(UpdatableSettings.RoutingAllocationTotalShardsPerNode)]
 		int? RoutingAllocationTotalShardsPerNode { get; set; }
 
-		[JsonProperty(SettingNames.RecoveryInitialShards)]
+		[JsonProperty(UpdatableSettings.RecoveryInitialShards)]
 		string RecoveryInitialShards { get; set; }
 
-		[JsonProperty(SettingNames.GcDeletes)]
+		[JsonProperty(UpdatableSettings.GcDeletes)]
 		bool? GcDeletes { get; set; }
 
-		[JsonProperty(SettingNames.TtlDisablePurge)]
+		[JsonProperty(UpdatableSettings.TtlDisablePurge)]
 		bool? TtlDisablePurge { get; set; }
 
-		[JsonProperty(SettingNames.TranslogFsType)]
+		[JsonProperty(UpdatableSettings.TranslogFsType)]
 		string TranslogFsType { get; set; }
 
-		[JsonProperty(SettingNames.CompoundFormat)]
+		[JsonProperty(UpdatableSettings.CompoundFormat)]
 		bool? CompoundFormat { get; set; }
 
-		[JsonProperty(SettingNames.CompoundOnFlush)]
+		[JsonProperty(UpdatableSettings.CompoundOnFlush)]
 		bool? CompoundOnFlush { get; set; }
 
-		[JsonProperty(SettingNames.WarmersEnabled)]
+		[JsonProperty(UpdatableSettings.WarmersEnabled)]
 		bool? WarmersEnabled { get; set; }
 
-		[JsonProperty(SettingNames.Analysis)]
+		[JsonProperty(UpdatableSettings.Analysis)]
 		AnalysisSettings Analysis { get; set; }
 	}
 

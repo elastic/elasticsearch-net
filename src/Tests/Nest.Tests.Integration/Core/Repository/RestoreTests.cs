@@ -122,7 +122,7 @@ namespace Nest.Tests.Integration.Core.Repository
 				.IgnoreUnavailable(true)
 				.IndexSettings(descriptor => descriptor
 					.RefreshInterval("123s"))
-				.IgnoreIndexSettings(SettingNames.BlocksWrite));
+				.IgnoreIndexSettings(UpdatableSettings.BlocksWrite));
 
 			restoreResponse.IsValid.Should().BeTrue();
 			_restoredIndexName = _indexName.Replace(d + "_", d + "_restored_");
@@ -132,8 +132,8 @@ namespace Nest.Tests.Integration.Core.Repository
 
 			var indexSettingsResponse = this.Client.GetIndexSettings(descriptor => descriptor.Index(_restoredIndexName));
 			indexSettingsResponse.IsValid.Should().BeTrue();
-			indexSettingsResponse.IndexSettings.Settings[SettingNames.RefreshInterval].Should().Be("123s");
-			indexSettingsResponse.IndexSettings.Settings[SettingNames.BlocksWrite].Should().BeNull();
+			indexSettingsResponse.IndexSettings.Settings[UpdatableSettings.RefreshInterval].Should().Be("123s");
+			indexSettingsResponse.IndexSettings.Settings[UpdatableSettings.BlocksWrite].Should().BeNull();
 		}
 
 		[Test]

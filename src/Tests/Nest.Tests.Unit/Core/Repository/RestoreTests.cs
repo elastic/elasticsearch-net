@@ -22,7 +22,7 @@ namespace Nest.Tests.Unit.Core.Repository
 					.IndexSettings(settingsDescriptor => settingsDescriptor
 						.NumberOfReplicas(0)
 						.BlocksRead())
-					.IgnoreIndexSettings(SettingNames.RefreshInterval, SettingNames.AutoExpandReplicas));
+					.IgnoreIndexSettings(UpdatableSettings.RefreshInterval, UpdatableSettings.AutoExpandReplicas));
 
 			restoreResponse.ConnectionStatus.RequestUrl.Should().Be("http://localhost:9200/_snapshot/repository/snapshotName/_restore");
 			this.JsonEquals(restoreResponse.ConnectionStatus.Request, MethodInfo.GetCurrentMethod());
