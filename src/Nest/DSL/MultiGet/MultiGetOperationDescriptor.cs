@@ -15,6 +15,7 @@ namespace Nest
 			this.Index = typeof(T);
 			this.Type = typeof(T);
 		}
+
 		public MultiGetOperation(long id) : this(id.ToString(CultureInfo.InvariantCulture)) {}
 
 		Type IMultiGetOperation.ClrType { get { return typeof(T); } }
@@ -30,6 +31,8 @@ namespace Nest
 		public ISourceFilter Source { get; set; }
 
 		public string Routing { get; set; }
+
+		public object Document { get; set; }
 	}
 
 	public class MultiGetOperationDescriptor<T> : IMultiGetOperation
@@ -43,6 +46,7 @@ namespace Nest
 		string IMultiGetOperation.Routing { get; set; }
 		ISourceFilter IMultiGetOperation.Source { get; set; }
 		IList<PropertyPathMarker> IMultiGetOperation.Fields { get; set; }
+		object IMultiGetOperation.Document { get; set; }
 		Type IMultiGetOperation.ClrType { get { return typeof(T); } }
 
 		public MultiGetOperationDescriptor()
@@ -140,7 +144,7 @@ namespace Nest
 		/// </summary>
 		public MultiGetOperationDescriptor<T> Fields(params Expression<Func<T, object>>[] expressions)
 		{
-			((IMultiGetOperation) this).Fields = expressions.Select(e => (PropertyPathMarker) e).ToList();
+			Self.Fields = expressions.Select(e => (PropertyPathMarker) e).ToList();
 			return this;
 		}
 
@@ -150,7 +154,16 @@ namespace Nest
 		/// </summary>
 		public MultiGetOperationDescriptor<T> Fields(params string[] fields)
 		{
-			((IMultiGetOperation) this).Fields = fields.Select(f => (PropertyPathMarker) f).ToList();
+			Self.Fields = fields.Select(f => (PropertyPathMarker) f).ToList();
+			return this;
+		}
+
+		// Only used for the MLT query for specifying an artificial document.
+		// TODO: For 2.0, we should consider decoupling IMultiGetOperation from 
+		// MoreLikeThisQuery and have a dedicatd MoreLikeThisDocument object.
+		public MultiGetOperationDescriptor<T> Document(T document)
+		{
+			Self.Document = document;
 			return this;
 		}
 	}
