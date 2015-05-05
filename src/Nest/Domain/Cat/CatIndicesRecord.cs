@@ -31,5 +31,8 @@ namespace Nest
 
 		[JsonProperty("status")]
 		public string Status { get; set; }
+
+		[JsonProperty("tm")]
+		public string TotalMemory { get; set; }
 	}
 }
