@@ -19,7 +19,10 @@ namespace Nest
 		string RenamePattern { get; set; }
 		[JsonProperty("rename_replacement")]
 		string RenameReplacement { get; set; }
-		
+		[JsonProperty("index_settings")]
+		IUpdateSettingsRequest IndexSettings { get; set; }
+		[JsonProperty("ignore_index_settings")]
+		List<string> IgnoreIndexSettings { get; set; }
 	}
 
 	internal static class RestorePathInfo
@@ -43,6 +46,8 @@ namespace Nest
 		public string RenamePattern { get; set; }
 		
 		public string RenameReplacement { get; set; }
+		public IUpdateSettingsRequest IndexSettings { get; set; }
+		public List<string> IgnoreIndexSettings { get; set; }
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<RestoreRequestParameters> pathInfo)
 		{
@@ -61,7 +66,9 @@ namespace Nest
 		bool? IRestoreRequest.IncludeGlobalState { get; set; }
 		string IRestoreRequest.RenamePattern { get; set; }
 		string IRestoreRequest.RenameReplacement { get; set; }
-		
+		IUpdateSettingsRequest IRestoreRequest.IndexSettings { get; set; }
+		List<string> IRestoreRequest.IgnoreIndexSettings { get; set; }
+
 		public RestoreDescriptor Index(string index)
 		{
 			return this.Indices(index);
@@ -104,10 +111,30 @@ namespace Nest
 			return this;
 		}
 
+		public RestoreDescriptor IndexSettings(Func<UpdateSettingsDescriptor, UpdateSettingsDescriptor> settingsSelector)
+		{
+			settingsSelector.ThrowIfNull("settings");
+			Self.IndexSettings = settingsSelector(new UpdateSettingsDescriptor());
+			return this;
+		}
+
+		public RestoreDescriptor IgnoreIndexSettings(List<string> ignoreIndexSettings)
+		{
+			ignoreIndexSettings.ThrowIfNull("ignoreIndexSettings");
+			Self.IgnoreIndexSettings = ignoreIndexSettings;
+			return this;
+		}
+
+		public RestoreDescriptor IgnoreIndexSettings(params string[] ignoreIndexSettings)
+		{
+			ignoreIndexSettings.ThrowIfNull("ignoreIndexSettings");
+			this.IgnoreIndexSettings(ignoreIndexSettings.ToList());
+			return this;
+		}
+
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<RestoreRequestParameters> pathInfo)
 		{
 			RestorePathInfo.Update(pathInfo, this);
 		}
-
 	}
 }

@@ -201,6 +201,7 @@
     </None>
     <Compile Include="Core\MultiPercolate\MultiPercolateTests.cs" />
     <Compile Include="Core\Map\Transform\MappingTansformTests.cs" />
+    <Compile Include="Core\Repository\RestoreTests.cs" />
     <Compile Include="Core\Script\DeleteScriptRequestTests.cs" />
     <Compile Include="Core\Script\GetScriptRequestTests.cs" />
     <Compile Include="Core\Script\PutScriptRequestTests.cs" />
@@ -682,6 +683,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Core\MultiPercolate\MultiPercolateJson.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Repository\Restore.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Core\Script\PutScript.json">

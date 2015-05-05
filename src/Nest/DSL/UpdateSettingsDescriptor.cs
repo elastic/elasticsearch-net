@@ -1,116 +1,154 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
 
 namespace Nest
-{
+{ 
+	public class UpdatableSettings
+	{
+		public const string NumberOfReplicas = "index.number_of_replicas";
+		public const string AutoExpandReplicas = "index.auto_expand_replicas";
+		public const string BlocksReadOnly = "index.blocks.read_only";
+		public const string BlocksRead = "index.blocks.read";
+		public const string BlocksWrite = "index.blocks.write";
+		public const string BlocksMetadata = "index.blocks.metadata";
+		public const string RefreshInterval = "index.refresh_interval";
+		public const string IndexConcurrency = "index.index_concurrency";
+		public const string Codec = "index.codec";
+		public const string CodecBloomLoad = "index.codec.bloom.load";
+		public const string FailOnMergeFailure = "index.fail_on_merge_failure";
+		public const string TranslogFlushTreshHoldOps = "index.translog.flush_threshold_ops";
+		public const string TranslogFlushThresholdSize = "index.translog.flush_threshold_size";
+		public const string TranslogFlushThresholdPeriod = "index.translog.flush_threshold_period";
+		public const string TranslogDisableFlush = "index.translog.disable_flush";
+		public const string CacheFilterMaxSize = "index.cache.filter.max_size";
+		public const string CacheFilterExpire = "index.cache.filter.expire";
+		public const string CacheQueryEnable = "index.cache.query.enable";
+		public const string GatewaySnapshotInterval = "index.gateway.snapshot_interval";
+		public const string RoutingAllocationInclude = "index.routing.allocation.include";
+		public const string RoutingAllocationExclude = "index.routing.allocation.exclude";
+		public const string RoutingAllocationRequire = "index.routing.allocation.require";
+		public const string RoutingAllocationEnable = "index.routing.allocation.enable";
+		public const string RoutingAllocationDisableAllication = "index.routing.allocation.disable_allocation";
+		public const string RoutingAllocationDisableNewAllocation = "index.routing.allocation.disable_new_allocation";
+		public const string RoutingAllocationDisableReplicaAllocation = "index.routing.allocation.disable_replica_allocation";
+		public const string RoutingAllocationTotalShardsPerNode = "index.routing.allocation.total_shards_per_node";
+		public const string RecoveryInitialShards = "index.recovery.initial_shards";
+		public const string GcDeletes = "index.gc_deletes";
+		public const string TtlDisablePurge = "index.ttl.disable_purge";
+		public const string TranslogFsType = "index.translog.fs.type";
+		public const string CompoundFormat = "index.compound_format";
+		public const string CompoundOnFlush = "index.compound_on_flush";
+		public const string WarmersEnabled = "index.warmer.enabled";
+		public const string Analysis = "analysis";
+	}
+
 	public interface IUpdateSettingsRequest : IIndexOptionalPath<UpdateSettingsRequestParameters>
 	{
-		[JsonProperty("index.number_of_replicas")]
+		[JsonProperty(UpdatableSettings.NumberOfReplicas)]
 		int? NumberOfReplicas { get; set; }
 
-		[JsonProperty("index.auto_expand_replicas")]
+		[JsonProperty(UpdatableSettings.AutoExpandReplicas)]
 		object AutoExpandReplicas { get; set; }
 
-		[JsonProperty("index.blocks.read_only")]
+		[JsonProperty(UpdatableSettings.BlocksReadOnly)]
 		bool? BlocksReadOnly { get; set; }
 
-		[JsonProperty("index.blocks.read")]
+		[JsonProperty(UpdatableSettings.BlocksRead)]
 		bool? BlocksRead { get; set; }
 
-		[JsonProperty("index.blocks.write")]
+		[JsonProperty(UpdatableSettings.BlocksWrite)]
 		bool? BlocksWrite { get; set; }
 
-		[JsonProperty("index.blocks.metadata")]
+		[JsonProperty(UpdatableSettings.BlocksMetadata)]
 		bool? BlocksMetadata { get; set; }
 
-		[JsonProperty("index.refresh_interval")]
+		[JsonProperty(UpdatableSettings.RefreshInterval)]
 		string RefreshInterval { get; set; }
 
-		[JsonProperty("index.index_concurrency")]
+		[JsonProperty(UpdatableSettings.IndexConcurrency)]
 		int? IndexConcurrency { get; set; }
 
-		[JsonProperty("index.codec")]
+		[JsonProperty(UpdatableSettings.Codec)]
 		string Codec { get; set; }
 
-		[JsonProperty("index.codec.bloom.load")]
+		[JsonProperty(UpdatableSettings.CodecBloomLoad)]
 		bool? CodecBloomLoad { get; set; }
 
-		[JsonProperty("index.fail_on_merge_failure")]
+		[JsonProperty(UpdatableSettings.FailOnMergeFailure)]
 		bool? FailOnMergeFailure { get; set; }
 
-		[JsonProperty("index.translog.flush_threshold_ops")]
+		[JsonProperty(UpdatableSettings.TranslogFlushTreshHoldOps)]
 		string TranslogFlushTreshHoldOps { get; set; }
 
-		[JsonProperty("index.translog.flush_threshold_size")]
+		[JsonProperty(UpdatableSettings.TranslogFlushThresholdSize)]
 		string TranslogFlushThresholdSize { get; set; }
 
-		[JsonProperty("index.translog.flush_threshold_period")]
+		[JsonProperty(UpdatableSettings.TranslogFlushThresholdPeriod)]
 		string TranslogFlushThresholdPeriod { get; set; }
 
-		[JsonProperty("index.translog.disable_flush")]
+		[JsonProperty(UpdatableSettings.TranslogDisableFlush)]
 		bool? TranslogDisableFlush { get; set; }
 
-		[JsonProperty("index.cache.filter.max_size")]
+		[JsonProperty(UpdatableSettings.CacheFilterMaxSize)]
 		string CacheFilterMaxSize { get; set; }
 
-		[JsonProperty("index.cache.filter.expire")]
+		[JsonProperty(UpdatableSettings.CacheFilterExpire)]
 		string CacheFilterExpire { get; set; }
 
-		[JsonProperty("index.cache.query.enable")]
+		[JsonProperty(UpdatableSettings.CacheQueryEnable)]
 		bool? CacheQueryEnable { get; set; }
 
-		[JsonProperty("index.gateway.snapshot_interval")]
+		[JsonProperty(UpdatableSettings.GatewaySnapshotInterval)]
 		string GatewaySnapshotInterval { get; set; }
 
-		[JsonProperty("index.routing.allocation.include")]
+		[JsonProperty(UpdatableSettings.RoutingAllocationInclude)]
 		IDictionary<string, object> RoutingAllocationInclude { get; set; }
 
-		[JsonProperty("index.routing.allocation.exclude")]
+		[JsonProperty(UpdatableSettings.RoutingAllocationExclude)]
 		IDictionary<string, object> RoutingAllocationExclude { get; set; }
 
-		[JsonProperty("index.routing.allocation.require")]
+		[JsonProperty(UpdatableSettings.RoutingAllocationRequire)]
 		IDictionary<string, object> RoutingAllocationRequire { get; set; }
 
-		[JsonProperty("index.routing.allocation.enable")]
+		[JsonProperty(UpdatableSettings.RoutingAllocationEnable)]
 		RoutingAllocationEnableOption? RoutingAllocationEnable { get; set; }
 
-		[JsonProperty("index.routing.allocation.disable_allocation")]
+		[JsonProperty(UpdatableSettings.RoutingAllocationDisableAllication)]
 		bool? RoutingAllocationDisableAllication { get; set; }
 
-		[JsonProperty("index.routing.allocation.disable_new_allocation")]
+		[JsonProperty(UpdatableSettings.RoutingAllocationDisableNewAllocation)]
 		bool? RoutingAllocationDisableNewAllocation { get; set; }
 
-		[JsonProperty("index.routing.allocation.disable_replica_allocation")]
+		[JsonProperty(UpdatableSettings.RoutingAllocationDisableReplicaAllocation)]
 		bool? RoutingAllocationDisableReplicaAllocation { get; set; }
 
-		[JsonProperty("index.routing.allocation.total_shards_per_node")]
+		[JsonProperty(UpdatableSettings.RoutingAllocationTotalShardsPerNode)]
 		int? RoutingAllocationTotalShardsPerNode { get; set; }
 
-		[JsonProperty("index.recovery.initial_shards")]
+		[JsonProperty(UpdatableSettings.RecoveryInitialShards)]
 		string RecoveryInitialShards { get; set; }
 
-		[JsonProperty("index.gc_deletes")]
+		[JsonProperty(UpdatableSettings.GcDeletes)]
 		bool? GcDeletes { get; set; }
 
-		[JsonProperty("index.ttl.disable_purge")]
+		[JsonProperty(UpdatableSettings.TtlDisablePurge)]
 		bool? TtlDisablePurge { get; set; }
 
-		[JsonProperty("index.translog.fs.type")]
+		[JsonProperty(UpdatableSettings.TranslogFsType)]
 		string TranslogFsType { get; set; }
 
-		[JsonProperty("index.compound_format")]
+		[JsonProperty(UpdatableSettings.CompoundFormat)]
 		bool? CompoundFormat { get; set; }
 
-		[JsonProperty("index.compound_on_flush")]
+		[JsonProperty(UpdatableSettings.CompoundOnFlush)]
 		bool? CompoundOnFlush { get; set; }
 
-		[JsonProperty("index.warmer.enabled")]
+		[JsonProperty(UpdatableSettings.WarmersEnabled)]
 		bool? WarmersEnabled { get; set; }
 
-		[JsonProperty("analysis")]
+		[JsonProperty(UpdatableSettings.Analysis)]
 		AnalysisSettings Analysis { get; set; }
 	}
 
