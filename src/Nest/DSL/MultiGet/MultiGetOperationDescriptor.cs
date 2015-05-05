@@ -33,6 +33,8 @@ namespace Nest
 		public string Routing { get; set; }
 
 		public object Document { get; set; }
+
+		public IDictionary<PropertyPathMarker, string> PerFieldAnalyzer { get; set; }
 	}
 
 	public class MultiGetOperationDescriptor<T> : IMultiGetOperation
@@ -47,6 +49,7 @@ namespace Nest
 		ISourceFilter IMultiGetOperation.Source { get; set; }
 		IList<PropertyPathMarker> IMultiGetOperation.Fields { get; set; }
 		object IMultiGetOperation.Document { get; set; }
+		IDictionary<PropertyPathMarker, string> IMultiGetOperation.PerFieldAnalyzer { get; set; }
 		Type IMultiGetOperation.ClrType { get { return typeof(T); } }
 
 		public MultiGetOperationDescriptor()
@@ -63,7 +66,8 @@ namespace Nest
 		/// </pre>
 		/// </summary>
 		/// <param name="initializeEmpty"></param>
-		public MultiGetOperationDescriptor(bool allowExplicitIndex) : this()
+		public MultiGetOperationDescriptor(bool allowExplicitIndex)
+			: this()
 		{
 			if (allowExplicitIndex) return;
 			Self.Index = null;
@@ -89,7 +93,7 @@ namespace Nest
 			return this;
 		}
 
-		
+
 		/// <summary>
 		/// Manually set the type of which a typename will be inferred
 		/// </summary>
@@ -144,7 +148,7 @@ namespace Nest
 		/// </summary>
 		public MultiGetOperationDescriptor<T> Fields(params Expression<Func<T, object>>[] expressions)
 		{
-			Self.Fields = expressions.Select(e => (PropertyPathMarker) e).ToList();
+			Self.Fields = expressions.Select(e => (PropertyPathMarker)e).ToList();
 			return this;
 		}
 
@@ -154,7 +158,7 @@ namespace Nest
 		/// </summary>
 		public MultiGetOperationDescriptor<T> Fields(params string[] fields)
 		{
-			Self.Fields = fields.Select(f => (PropertyPathMarker) f).ToList();
+			Self.Fields = fields.Select(f => (PropertyPathMarker)f).ToList();
 			return this;
 		}
 
@@ -164,6 +168,28 @@ namespace Nest
 		public MultiGetOperationDescriptor<T> Document(T document)
 		{
 			Self.Document = document;
+			return this;
+		}
+
+		// Only used for the MLT query for providing a different analyzer per
+		// artificial document field.
+		// TODO: For 2.0, we should consider decoupling IMultiGetOperation from 
+		// MoreLikeThisQuery and have a dedicatd MoreLikeThisDocument object.
+		public MultiGetOperationDescriptor<T> PerFieldAnalyzer(Func<FluentDictionary<Expression<Func<T, object>>, string>, FluentDictionary<Expression<Func<T, object>>, string>> analyzerSelector)
+		{
+			var d = new FluentDictionary<Expression<Func<T, object>>, string>();
+			analyzerSelector(d);
+			Self.PerFieldAnalyzer = d.ToDictionary(x => PropertyPathMarker.Create(x.Key), x => x.Value);
+			return this;
+		}
+
+		// Only used for the MLT query for providing a different analyzer per
+		// artificial document field.
+		// TODO: For 2.0, we should consider decoupling IMultiGetOperation from 
+		// MoreLikeThisQuery and have a dedicatd MoreLikeThisDocument object.
+		public MultiGetOperationDescriptor<T> PerFieldAnalyzer(Func<FluentDictionary<PropertyPathMarker, string>, FluentDictionary<PropertyPathMarker, string>> analyzerSelector)
+		{
+			Self.PerFieldAnalyzer = analyzerSelector(new FluentDictionary<PropertyPathMarker, string>());
 			return this;
 		}
 	}

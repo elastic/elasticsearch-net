@@ -30,7 +30,14 @@ namespace Nest
 		// MoreLikeThisQuery and have a dedicatd MoreLikeThisDocument object.
 		[JsonProperty(PropertyName = "doc")]
 		object Document { get; set; }
-		
+
+		// Only used for the MLT query for providing a different analyzer per
+		// artificial document field.
+		// TODO: For 2.0, we should consider decoupling IMultiGetOperation from 
+		// MoreLikeThisQuery and have a dedicatd MoreLikeThisDocument object.
+		[JsonProperty(PropertyName = "per_field_analyzer")]
+		IDictionary<PropertyPathMarker, string> PerFieldAnalyzer { get; set; }
+
 		Type ClrType { get; }
 	}
 }

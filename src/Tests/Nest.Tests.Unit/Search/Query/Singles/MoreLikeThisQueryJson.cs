@@ -58,7 +58,12 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 				.Documents(d => d
 					.Get(1, g => g.Fields(p => p.Product.Name).Routing("routing_value"))
 					.Get<Person>("some-string-id", g => g.Routing("routing_value").Type("people").Index("different_index"))
-					.Get<MoreLikeThisTestDoc>(g => g.Document(new MoreLikeThisTestDoc { Name = "elasticsearch", Text = "foo" }))
+					.Get<MoreLikeThisTestDoc>(g => g
+						.Document(new MoreLikeThisTestDoc { Name = "elasticsearch", Text = "foo" })
+						.PerFieldAnalyzer(pfa => pfa
+							.Add(p => p.Name, "keyword")
+						)
+					)
 					.Document<MoreLikeThisTestDoc>(new MoreLikeThisTestDoc { Name = "nest" })
 					.Document<MoreLikeThisTestDoc>(new MoreLikeThisTestDoc { Name = "foo" }, "myindex", "mytype")
 				);
@@ -88,6 +93,9 @@ namespace Nest.Tests.Unit.Search.Query.Singles
                   doc: {
                     name: ""elasticsearch"",
                     text: ""foo""
+                  },
+                  per_field_analyzer: {
+                    name: ""keyword""
                   }
 				},
 				{
