@@ -161,6 +161,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 						.StopWords(new[] { "thou", "shall" })
 						.BoostTerms(1.4)
 						.TermMatchPercentage(12)
+						.MinimumShouldMatch("30%")
 						.Boost(1.1)
 						.Analyzer("my_analyzer")
 					)
@@ -171,6 +172,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 				fields : [""name"" ],
 				like_text : ""elasticsearcc"",
 				percent_terms_to_match: 12.0,
+                minimum_should_match: ""30%"",
 				stop_words: [
 					""thou"",
 					""shall""
