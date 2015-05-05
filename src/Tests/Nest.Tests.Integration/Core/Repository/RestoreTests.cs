@@ -100,7 +100,7 @@ namespace Nest.Tests.Integration.Core.Repository
 		}
 
 		[Test]
-		[SkipVersion("0 - 1.5.0", "Requires index_settings and ignore_index_settings parameters which have been added in ES 1.5.0")]
+		[SkipVersion("0 - 1.4.9", "Requires index_settings and ignore_index_settings parameters which have been added in ES 1.5.0")]
 		public void SnapshotRestore_IndexSettings()
 		{
 			var updateSettingsResponse = this.Client.UpdateSettings(descriptor => descriptor.BlocksWrite());
