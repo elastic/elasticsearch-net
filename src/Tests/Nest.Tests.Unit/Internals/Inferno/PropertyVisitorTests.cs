@@ -155,18 +155,26 @@ namespace Nest.Tests.Unit.Internals.Inferno
 			P(p => p.Collection.Suffix("suffix")).Should().Be("collection.suffix");
 		}
 
+		[Test]
+		public void PropertySuffixVariable()
+		{
+			P(p => p.Name.Suffix(_variable)).Should().Be("name.vari");
+		}
 
+		[Test]
+		public void PropertySuffixLocalVariable()
+		{
+			var prop = "propXY12";
+			P(p => p.Name.Suffix(prop)).Should().Be("name." + prop);
+		}
 
+		//Fully qualified tests
+		//TODO remove in 2.0 as type.properties are gonna be removed in elasticsearch 2.0
 
-
-
-
-
-
-
-
-
-
-
+		[Test]
+		public void PropertySuffixVariableFullyQualified()
+		{
+			P(p => p.FullyQualified().Name.Suffix(_variable)).Should().Be("domainobject.name.vari");
+		}
 	}
 }
