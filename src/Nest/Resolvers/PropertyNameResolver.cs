@@ -142,7 +142,13 @@ namespace Nest.Resolvers
 			}
 			else if (m.Method.Name == "get_Item" && m.Arguments.Any())
 			{
-				if (!typeof(IDictionary).IsAssignableFrom(m.Object.Type))
+				var t = m.Object.Type;
+				var isDict = 
+					typeof(IDictionary).IsAssignableFrom(t)
+					|| typeof(IDictionary<,>).IsAssignableFrom(t)
+					|| (t.IsGenericType && t.GetGenericTypeDefinition() == typeof (IDictionary<,>));
+
+				if (!isDict)
 				{
 					return base.VisitMethodCall(m, stack, properties);
 				}
