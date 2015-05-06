@@ -60,7 +60,10 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 			if (ss != null) return (string.Join("\n", ss) + "\n").Utf8Bytes();
 
 			var so = data as IEnumerable<object>;
-			if (so == null) return this._serializer.Serialize(data);
+			var indent = this._settings.UsesPrettyRequests
+				? SerializationFormatting.Indented
+				: SerializationFormatting.None;
+			if (so == null) return this._serializer.Serialize(data, indent);
 			var joined = string.Join("\n", so
 				.Select(soo => this._serializer.Serialize(soo, SerializationFormatting.None).Utf8String())) + "\n";
 			return joined.Utf8Bytes();
