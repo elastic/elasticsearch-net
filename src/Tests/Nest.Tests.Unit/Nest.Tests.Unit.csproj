@@ -501,7 +501,7 @@
     <Compile Include="Core\AttributeBasedMap\BaseAttributeMappingTests.cs" />
     <Compile Include="Core\AttributeBasedMap\DeepObjectMappingTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Internals\Inferno\PropertyVisitorTests.cs" />
+    <Compile Include="Internals\Inferno\PropertyPathResolverTests.cs" />
     <Compile Include="Search\Highlight\HighlightTests.cs" />
     <Compile Include="Search\Query\ConditionLess\ConditionLessTests.cs" />
     <Compile Include="Search\Query\ConditionlessBool\ConditionLessBooleanTests.cs" />
