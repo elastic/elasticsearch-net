@@ -211,5 +211,16 @@ namespace Nest.Tests.Integration.Core.Cat
 			await TestCatAsync(() => this._client.CatShardsAsync(), r => !r.State.IsNullOrEmpty());
 		}
 
+		[Test]
+		public void CatSegments()
+		{
+			TestCat(() => this._client.CatSegments(), r => !r.Index.IsNullOrEmpty() && !r.Shard.IsNullOrEmpty() && !r.PrimaryReplica.IsNullOrEmpty() && !r.Ip.IsNullOrEmpty() && !r.Segment.IsNullOrEmpty() && !r.Generation.IsNullOrEmpty() && !r.DocsCount.IsNullOrEmpty() && !r.DocsDeleted.IsNullOrEmpty() && !r.Size.IsNullOrEmpty() && !r.SizeMemory.IsNullOrEmpty() && !r.Committed.IsNullOrEmpty() && !r.Searchable.IsNullOrEmpty() && !r.Version.IsNullOrEmpty() && !r.Compound.IsNullOrEmpty());
+		}
+
+		[Test]
+		public async void CatSegmentsAsync()
+		{
+			await TestCatAsync(() => this._client.CatSegmentsAsync(), r => !r.Index.IsNullOrEmpty() && !r.Shard.IsNullOrEmpty() && !r.PrimaryReplica.IsNullOrEmpty() && !r.Ip.IsNullOrEmpty() && !r.Segment.IsNullOrEmpty() && !r.Generation.IsNullOrEmpty() && !r.DocsCount.IsNullOrEmpty() && !r.DocsDeleted.IsNullOrEmpty() && !r.Size.IsNullOrEmpty() && !r.SizeMemory.IsNullOrEmpty() && !r.Committed.IsNullOrEmpty() && !r.Searchable.IsNullOrEmpty() && !r.Version.IsNullOrEmpty() && !r.Compound.IsNullOrEmpty());
+		}
 	}
 }
