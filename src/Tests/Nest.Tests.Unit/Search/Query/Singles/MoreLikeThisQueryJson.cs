@@ -6,6 +6,12 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 	[TestFixture]
 	public class MoreLikeThisQueryJson
 	{
+		public class MoreLikeThisTestDoc
+		{
+			public string Name { get; set; }
+			public string Text { get; set; }
+		}
+
 		[Test]
 		public void TestMoreLikeThisQuery()
 		{
@@ -28,7 +34,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 			}}}";
 			Assert.True(json.JsonEquals(expected), json);
 		}
-		
+
 		[Test]
 		public void MoreLikeThisWithIds()
 		{
@@ -43,15 +49,23 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 			}";
 			Assert.True(json.JsonEquals(expected), json);
 		}
-		
+
 		[Test]
 		public void MoreLikeThisWithDocuments()
 		{
 			var s = new MoreLikeThisQueryDescriptor<ElasticsearchProject>()
 				.OnFields(p => p.Name)
-				.Documents(d=>d
-					.Get(1, g=>g.Fields(p=>p.Product.Name).Routing("routing_value"))
-					.Get<Person>("some-string-id", g=>g.Routing("routing_value").Type("people").Index("different_index"))
+				.Documents(d => d
+					.Get(1, g => g.Fields(p => p.Product.Name).Routing("routing_value"))
+					.Get<Person>("some-string-id", g => g.Routing("routing_value").Type("people").Index("different_index"))
+					.Get<MoreLikeThisTestDoc>(g => g
+						.Document(new MoreLikeThisTestDoc { Name = "elasticsearch", Text = "foo" })
+						.PerFieldAnalyzer(pfa => pfa
+							.Add(p => p.Name, "keyword")
+						)
+					)
+					.Document<MoreLikeThisTestDoc>(new MoreLikeThisTestDoc { Name = "nest" })
+					.Document<MoreLikeThisTestDoc>(new MoreLikeThisTestDoc { Name = "foo" }, "myindex", "mytype")
 				);
 			var json = TestElasticClient.Serialize(s);
 
@@ -72,6 +86,31 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 				  _type: ""people"",
 				  _id: ""some-string-id"",
 				  _routing: ""routing_value""
+				},
+				{
+				  _index: ""nest_test_data"",
+                  _type: ""morelikethistestdoc"",
+                  doc: {
+                    name: ""elasticsearch"",
+                    text: ""foo""
+                  },
+                  per_field_analyzer: {
+                    name: ""keyword""
+                  }
+				},
+				{
+                  _index: ""nest_test_data"",
+                  _type: ""morelikethistestdoc"",
+                  doc: {
+                    name: ""nest""
+                  }
+				},
+				{
+				  _index: ""myindex"",
+                  _type: ""mytype"",
+                  doc: {
+                    name: ""foo""
+                  }
 				}]
 			}";
 			Assert.True(json.JsonEquals(expected), json);
@@ -82,9 +121,9 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 		{
 			var s = new MoreLikeThisQueryDescriptor<ElasticsearchProject>()
 				.OnFields(p => p.Name)
-				.DocumentsExplicit(d=>d
-					.Get(1, g=>g.Fields(p=>p.Product.Name).Routing("routing_value"))
-					.Get<Person>("some-string-id", g=>g.Routing("routing_value").Type("people").Index("different_index"))
+				.DocumentsExplicit(d => d
+					.Get(1, g => g.Fields(p => p.Product.Name).Routing("routing_value"))
+					.Get<Person>("some-string-id", g => g.Routing("routing_value").Type("people").Index("different_index"))
 				);
 			var json = TestElasticClient.Serialize(s);
 
@@ -130,6 +169,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 						.StopWords(new[] { "thou", "shall" })
 						.BoostTerms(1.4)
 						.TermMatchPercentage(12)
+						.MinimumShouldMatch("30%")
 						.Boost(1.1)
 						.Analyzer("my_analyzer")
 					)
@@ -140,6 +180,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 				fields : [""name"" ],
 				like_text : ""elasticsearcc"",
 				percent_terms_to_match: 12.0,
+                minimum_should_match: ""30%"",
 				stop_words: [
 					""thou"",
 					""shall""
