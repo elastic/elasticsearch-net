@@ -137,7 +137,6 @@
     <Compile Include="indices.clear_cache\10_basic.yaml.cs" />
     <Compile Include="indices.create\10_basic.yaml.cs" />
     <Compile Include="indices.delete_alias\10_basic.yaml.cs" />
-    <Compile Include="indices.delete_alias\all_path_options.yaml.cs" />
     <Compile Include="indices.delete_mapping\10_basic.yaml.cs" />
     <Compile Include="indices.delete_mapping\all_path_options.yaml.cs" />
     <Compile Include="indices.delete_warmer\all_path_options.yaml.cs" />
@@ -165,7 +164,6 @@
     <Compile Include="indices.open\20_multiple_indices.yaml.cs" />
     <Compile Include="indices.optimize\10_basic.yaml.cs" />
     <Compile Include="indices.put_alias\10_basic.yaml.cs" />
-    <Compile Include="indices.put_alias\all_path_options.yaml.cs" />
     <Compile Include="indices.put_mapping\10_basic.yaml.cs" />
     <Compile Include="indices.put_mapping\all_path_options.yaml.cs" />
     <Compile Include="indices.put_settings\10_basic.yaml.cs" />
