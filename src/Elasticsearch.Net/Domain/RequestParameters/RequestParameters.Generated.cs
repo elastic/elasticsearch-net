@@ -25,7 +25,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for Bulk
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-bulk.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-bulk.html
 	///</pre>
 	///</summary>
 	public class BulkRequestParameters : FluentRequestParameters<BulkRequestParameters> 
@@ -95,7 +95,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for CatAliases
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-alias.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-alias.html
 	///</pre>
 	///</summary>
 	public class CatAliasesRequestParameters : FluentRequestParameters<CatAliasesRequestParameters> 
@@ -155,7 +155,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for CatAllocation
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-allocation.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-allocation.html
 	///</pre>
 	///</summary>
 	public class CatAllocationRequestParameters : FluentRequestParameters<CatAllocationRequestParameters> 
@@ -225,7 +225,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for CatCount
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-count.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-count.html
 	///</pre>
 	///</summary>
 	public class CatCountRequestParameters : FluentRequestParameters<CatCountRequestParameters> 
@@ -365,7 +365,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for CatHealth
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-health.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-health.html
 	///</pre>
 	///</summary>
 	public class CatHealthRequestParameters : FluentRequestParameters<CatHealthRequestParameters> 
@@ -435,7 +435,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for CatHelp
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat.html
 	///</pre>
 	///</summary>
 	public class CatHelpRequestParameters : FluentRequestParameters<CatHelpRequestParameters> 
@@ -455,7 +455,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for CatIndices
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-indices.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-indices.html
 	///</pre>
 	///</summary>
 	public class CatIndicesRequestParameters : FluentRequestParameters<CatIndicesRequestParameters> 
@@ -535,7 +535,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for CatMaster
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-master.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-master.html
 	///</pre>
 	///</summary>
 	public class CatMasterRequestParameters : FluentRequestParameters<CatMasterRequestParameters> 
@@ -595,7 +595,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for CatNodes
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-nodes.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-nodes.html
 	///</pre>
 	///</summary>
 	public class CatNodesRequestParameters : FluentRequestParameters<CatNodesRequestParameters> 
@@ -655,7 +655,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for CatPendingTasks
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-pending-tasks.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-pending-tasks.html
 	///</pre>
 	///</summary>
 	public class CatPendingTasksRequestParameters : FluentRequestParameters<CatPendingTasksRequestParameters> 
@@ -775,7 +775,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for CatRecovery
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-recovery.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-recovery.html
 	///</pre>
 	///</summary>
 	public class CatRecoveryRequestParameters : FluentRequestParameters<CatRecoveryRequestParameters> 
@@ -833,9 +833,49 @@ namespace Elasticsearch.Net
 	}
 	
 	
+	///<summary>Request parameters descriptor for CatSegments
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/cat-segments.html
+	///</pre>
+	///</summary>
+	public class CatSegmentsRequestParameters : FluentRequestParameters<CatSegmentsRequestParameters> 
+	{
+		
+		internal  string[] _h { get; set; }
+		///<summary>Comma-separated list of column names to display</summary>
+		public CatSegmentsRequestParameters H(params string[] h)
+		{
+			this._h = h;
+			this.AddQueryString("h", this._h);
+			return this;
+		}
+		
+		
+		internal bool _help { get; set; }
+		///<summary>Return help information</summary>
+		public CatSegmentsRequestParameters Help(bool help)
+		{
+			this._help = help;
+			this.AddQueryString("help", this._help);
+			return this;
+		}
+		
+		
+		internal bool _v { get; set; }
+		///<summary>Verbose mode. Display column headers</summary>
+		public CatSegmentsRequestParameters V(bool v)
+		{
+			this._v = v;
+			this.AddQueryString("v", this._v);
+			return this;
+		}
+		
+	}
+	
+	
 	///<summary>Request parameters descriptor for CatShards
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-shards.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-shards.html
 	///</pre>
 	///</summary>
 	public class CatShardsRequestParameters : FluentRequestParameters<CatShardsRequestParameters> 
@@ -965,7 +1005,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for ClearScroll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-request-scroll.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-request-scroll.html
 	///</pre>
 	///</summary>
 	public class ClearScrollRequestParameters : FluentRequestParameters<ClearScrollRequestParameters> 
@@ -975,7 +1015,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for ClusterGetSettings
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-update-settings.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-update-settings.html
 	///</pre>
 	///</summary>
 	public class ClusterGetSettingsRequestParameters : FluentRequestParameters<ClusterGetSettingsRequestParameters> 
@@ -1015,7 +1055,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for ClusterHealth
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-health.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-health.html
 	///</pre>
 	///</summary>
 	public class ClusterHealthRequestParameters : FluentRequestParameters<ClusterHealthRequestParameters> 
@@ -1105,7 +1145,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for ClusterPendingTasks
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-pending.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-pending.html
 	///</pre>
 	///</summary>
 	public class ClusterPendingTasksRequestParameters : FluentRequestParameters<ClusterPendingTasksRequestParameters> 
@@ -1135,7 +1175,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for ClusterPutSettings
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-update-settings.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-update-settings.html
 	///</pre>
 	///</summary>
 	public class ClusterSettingsRequestParameters : FluentRequestParameters<ClusterSettingsRequestParameters> 
@@ -1150,12 +1190,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _master_timeout { get; set; }
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public ClusterSettingsRequestParameters MasterTimeout(string master_timeout)
+		{
+			this._master_timeout = master_timeout;
+			this.AddQueryString("master_timeout", this._master_timeout);
+			return this;
+		}
+		
+		
+		internal string _timeout { get; set; }
+		///<summary>Explicit operation timeout</summary>
+		public ClusterSettingsRequestParameters Timeout(string timeout)
+		{
+			this._timeout = timeout;
+			this.AddQueryString("timeout", this._timeout);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for ClusterReroute
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-reroute.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-reroute.html
 	///</pre>
 	///</summary>
 	public class ClusterRerouteRequestParameters : FluentRequestParameters<ClusterRerouteRequestParameters> 
@@ -1215,7 +1275,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for ClusterState
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-state.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-state.html
 	///</pre>
 	///</summary>
 	public class ClusterStateRequestParameters : FluentRequestParameters<ClusterStateRequestParameters> 
@@ -1250,12 +1310,42 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal bool _ignore_unavailable { get; set; }
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public ClusterStateRequestParameters IgnoreUnavailable(bool ignore_unavailable)
+		{
+			this._ignore_unavailable = ignore_unavailable;
+			this.AddQueryString("ignore_unavailable", this._ignore_unavailable);
+			return this;
+		}
+		
+		
+		internal bool _allow_no_indices { get; set; }
+		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		public ClusterStateRequestParameters AllowNoIndices(bool allow_no_indices)
+		{
+			this._allow_no_indices = allow_no_indices;
+			this.AddQueryString("allow_no_indices", this._allow_no_indices);
+			return this;
+		}
+		
+		
+		internal ExpandWildcards _expand_wildcards { get; set; }
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public ClusterStateRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards)
+		{
+			this._expand_wildcards = expand_wildcards;
+			this.AddQueryString("expand_wildcards", this._expand_wildcards);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for ClusterStats
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-stats.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-stats.html
 	///</pre>
 	///</summary>
 	public class ClusterStatsRequestParameters : FluentRequestParameters<ClusterStatsRequestParameters> 
@@ -1285,7 +1375,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for Count
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-count.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-count.html
 	///</pre>
 	///</summary>
 	public class CountRequestParameters : FluentRequestParameters<CountRequestParameters> 
@@ -1365,11 +1455,21 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for CountPercolateGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-percolate.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-percolate.html
 	///</pre>
 	///</summary>
 	public class PercolateCountRequestParameters : FluentRequestParameters<PercolateCountRequestParameters> 
 	{
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public PercolateCountRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
 		
 		internal  string[] _routing { get; set; }
 		///<summary>A comma-separated list of specific routing values</summary>
@@ -1465,7 +1565,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for Delete
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-delete.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-delete.html
 	///</pre>
 	///</summary>
 	public class DeleteRequestParameters : FluentRequestParameters<DeleteRequestParameters> 
@@ -1555,7 +1655,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for DeleteByQuery
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-delete-by-query.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-delete-by-query.html
 	///</pre>
 	///</summary>
 	public class DeleteByQueryRequestParameters : FluentRequestParameters<DeleteByQueryRequestParameters> 
@@ -1745,7 +1845,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for Exists
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-get.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-get.html
 	///</pre>
 	///</summary>
 	public class DocumentExistsRequestParameters : FluentRequestParameters<DocumentExistsRequestParameters> 
@@ -1805,7 +1905,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for ExplainGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-explain.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-explain.html
 	///</pre>
 	///</summary>
 	public class ExplainRequestParameters : FluentRequestParameters<ExplainRequestParameters> 
@@ -1975,7 +2075,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for Get
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-get.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-get.html
 	///</pre>
 	///</summary>
 	public class GetRequestParameters : FluentRequestParameters<GetRequestParameters> 
@@ -2135,7 +2235,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for GetSource
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-get.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-get.html
 	///</pre>
 	///</summary>
 	public class SourceRequestParameters : FluentRequestParameters<SourceRequestParameters> 
@@ -2285,7 +2385,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for Index
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-index_.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-index_.html
 	///</pre>
 	///</summary>
 	public class IndexRequestParameters : FluentRequestParameters<IndexRequestParameters> 
@@ -2405,11 +2505,21 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for IndicesAnalyzeGetForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-analyze.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-analyze.html
 	///</pre>
 	///</summary>
 	public class AnalyzeRequestParameters : FluentRequestParameters<AnalyzeRequestParameters> 
 	{
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public AnalyzeRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
 		
 		internal string _analyzer { get; set; }
 		///<summary>The name of the analyzer to use</summary>
@@ -2505,7 +2615,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for IndicesClearCacheForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-clearcache.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-clearcache.html
 	///</pre>
 	///</summary>
 	public class ClearCacheRequestParameters : FluentRequestParameters<ClearCacheRequestParameters> 
@@ -2645,7 +2755,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for IndicesClose
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-open-close.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-open-close.html
 	///</pre>
 	///</summary>
 	public class CloseIndexRequestParameters : FluentRequestParameters<CloseIndexRequestParameters> 
@@ -2705,7 +2815,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for IndicesCreate
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-create-index.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-create-index.html
 	///</pre>
 	///</summary>
 	public class CreateIndexRequestParameters : FluentRequestParameters<CreateIndexRequestParameters> 
@@ -2735,7 +2845,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for IndicesDelete
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-delete-index.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-delete-index.html
 	///</pre>
 	///</summary>
 	public class DeleteIndexRequestParameters : FluentRequestParameters<DeleteIndexRequestParameters> 
@@ -2765,7 +2875,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for IndicesDeleteAlias
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html
 	///</pre>
 	///</summary>
 	public class DeleteAliasRequestParameters : FluentRequestParameters<DeleteAliasRequestParameters> 
@@ -2795,7 +2905,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for IndicesDeleteMapping
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-delete-mapping.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-delete-mapping.html
 	///</pre>
 	///</summary>
 	public class DeleteMappingRequestParameters : FluentRequestParameters<DeleteMappingRequestParameters> 
@@ -2815,7 +2925,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for IndicesDeleteWarmer
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-warmers.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-warmers.html
 	///</pre>
 	///</summary>
 	public class DeleteWarmerRequestParameters : FluentRequestParameters<DeleteWarmerRequestParameters> 
@@ -2835,7 +2945,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for IndicesExists
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-exists.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-exists.html
 	///</pre>
 	///</summary>
 	public class IndexExistsRequestParameters : FluentRequestParameters<IndexExistsRequestParameters> 
@@ -2885,7 +2995,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for IndicesExistsAliasForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html
 	///</pre>
 	///</summary>
 	public class AliasExistsRequestParameters : FluentRequestParameters<AliasExistsRequestParameters> 
@@ -2935,11 +3045,21 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for IndicesExistsTemplateForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-templates.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-templates.html
 	///</pre>
 	///</summary>
 	public class TemplateExistsRequestParameters : FluentRequestParameters<TemplateExistsRequestParameters> 
 	{
+		
+		internal string _master_timeout { get; set; }
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public TemplateExistsRequestParameters MasterTimeout(string master_timeout)
+		{
+			this._master_timeout = master_timeout;
+			this.AddQueryString("master_timeout", this._master_timeout);
+			return this;
+		}
+		
 		
 		internal bool _local { get; set; }
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
@@ -2955,7 +3075,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for IndicesExistsType
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-types-exists.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-types-exists.html
 	///</pre>
 	///</summary>
 	public class TypeExistsRequestParameters : FluentRequestParameters<TypeExistsRequestParameters> 
@@ -3005,7 +3125,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for IndicesFlushForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-flush.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-flush.html
 	///</pre>
 	///</summary>
 	public class FlushRequestParameters : FluentRequestParameters<FlushRequestParameters> 
@@ -3017,16 +3137,6 @@ namespace Elasticsearch.Net
 		{
 			this._force = force;
 			this.AddQueryString("force", this._force);
-			return this;
-		}
-		
-		
-		internal bool _full { get; set; }
-		///<summary>If set to true a new index writer is created and settings that have been changed related to the index writer will be refreshed. Note: if a full flush is required for a setting to take effect this will be part of the settings update process and it not required to be executed by the user. (This setting can be considered as internal)</summary>
-		public FlushRequestParameters Full(bool full)
-		{
-			this._full = full;
-			this.AddQueryString("full", this._full);
 			return this;
 		}
 		
@@ -3075,7 +3185,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for IndicesGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-index.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-get-index.html
 	///</pre>
 	///</summary>
 	public class GetIndexRequestParameters : FluentRequestParameters<GetIndexRequestParameters> 
@@ -3111,9 +3221,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal  string[] _expand_wildcards { get; set; }
+		internal ExpandWildcards _expand_wildcards { get; set; }
 		///<summary>Whether wildcard expressions should get expanded to open or closed indices (default: open)</summary>
-		public GetIndexRequestParameters ExpandWildcards(params string[] expand_wildcards)
+		public GetIndexRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this._expand_wildcards = expand_wildcards;
 			this.AddQueryString("expand_wildcards", this._expand_wildcards);
@@ -3125,7 +3235,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for IndicesGetAliasForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html
 	///</pre>
 	///</summary>
 	public class GetAliasRequestParameters : FluentRequestParameters<GetAliasRequestParameters> 
@@ -3175,7 +3285,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for IndicesGetAliasesForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html
 	///</pre>
 	///</summary>
 	public class GetAliasesRequestParameters : FluentRequestParameters<GetAliasesRequestParameters> 
@@ -3205,7 +3315,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for IndicesGetFieldMappingForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-field-mapping.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-get-field-mapping.html
 	///</pre>
 	///</summary>
 	public class GetFieldMappingRequestParameters : FluentRequestParameters<GetFieldMappingRequestParameters> 
@@ -3265,7 +3375,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for IndicesGetMappingForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-mapping.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-get-mapping.html
 	///</pre>
 	///</summary>
 	public class GetMappingRequestParameters : FluentRequestParameters<GetMappingRequestParameters> 
@@ -3291,9 +3401,9 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal  string[] _expand_wildcards { get; set; }
+		internal ExpandWildcards _expand_wildcards { get; set; }
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public GetMappingRequestParameters ExpandWildcards(params string[] expand_wildcards)
+		public GetMappingRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards)
 		{
 			this._expand_wildcards = expand_wildcards;
 			this.AddQueryString("expand_wildcards", this._expand_wildcards);
@@ -3315,7 +3425,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for IndicesGetSettingsForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-settings.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-get-settings.html
 	///</pre>
 	///</summary>
 	public class GetIndexSettingsRequestParameters : FluentRequestParameters<GetIndexSettingsRequestParameters> 
@@ -3425,7 +3535,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for IndicesGetWarmerForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-warmers.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-warmers.html
 	///</pre>
 	///</summary>
 	public class GetWarmerRequestParameters : FluentRequestParameters<GetWarmerRequestParameters> 
@@ -3475,7 +3585,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for IndicesOpen
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-open-close.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-open-close.html
 	///</pre>
 	///</summary>
 	public class OpenIndexRequestParameters : FluentRequestParameters<OpenIndexRequestParameters> 
@@ -3535,7 +3645,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for IndicesOptimizeForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-optimize.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-optimize.html
 	///</pre>
 	///</summary>
 	public class OptimizeRequestParameters : FluentRequestParameters<OptimizeRequestParameters> 
@@ -3635,7 +3745,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for IndicesPutAlias
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html
 	///</pre>
 	///</summary>
 	public class PutAliasRequestParameters : FluentRequestParameters<PutAliasRequestParameters> 
@@ -3665,7 +3775,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for IndicesPutMapping
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-put-mapping.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-put-mapping.html
 	///</pre>
 	///</summary>
 	public class PutMappingRequestParameters : FluentRequestParameters<PutMappingRequestParameters> 
@@ -3735,7 +3845,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for IndicesPutSettingsForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-update-settings.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-update-settings.html
 	///</pre>
 	///</summary>
 	public class UpdateSettingsRequestParameters : FluentRequestParameters<UpdateSettingsRequestParameters> 
@@ -3795,7 +3905,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for IndicesPutTemplateForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-templates.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-templates.html
 	///</pre>
 	///</summary>
 	public class PutTemplateRequestParameters : FluentRequestParameters<PutTemplateRequestParameters> 
@@ -3845,7 +3955,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for IndicesPutWarmerForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-warmers.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-warmers.html
 	///</pre>
 	///</summary>
 	public class PutWarmerRequestParameters : FluentRequestParameters<PutWarmerRequestParameters> 
@@ -3935,7 +4045,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for IndicesRefreshForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-refresh.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-refresh.html
 	///</pre>
 	///</summary>
 	public class RefreshRequestParameters : FluentRequestParameters<RefreshRequestParameters> 
@@ -3995,7 +4105,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for IndicesSegmentsForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-segments.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-segments.html
 	///</pre>
 	///</summary>
 	public class SegmentsRequestParameters : FluentRequestParameters<SegmentsRequestParameters> 
@@ -4055,7 +4165,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for IndicesStatsForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-stats.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-stats.html
 	///</pre>
 	///</summary>
 	public class IndicesStatsRequestParameters : FluentRequestParameters<IndicesStatsRequestParameters> 
@@ -4125,7 +4235,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for IndicesStatusForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-status.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-status.html
 	///</pre>
 	///</summary>
 	public class IndicesStatusRequestParameters : FluentRequestParameters<IndicesStatusRequestParameters> 
@@ -4205,7 +4315,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for IndicesUpdateAliasesForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html
 	///</pre>
 	///</summary>
 	public class AliasRequestParameters : FluentRequestParameters<AliasRequestParameters> 
@@ -4285,7 +4395,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for IndicesValidateQueryGetForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-validate.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-validate.html
 	///</pre>
 	///</summary>
 	public class ValidateQueryRequestParameters : FluentRequestParameters<ValidateQueryRequestParameters> 
@@ -4385,11 +4495,21 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for MgetGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-multi-get.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-multi-get.html
 	///</pre>
 	///</summary>
 	public class MultiGetRequestParameters : FluentRequestParameters<MultiGetRequestParameters> 
 	{
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public MultiGetRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
 		
 		internal IEnumerable<object> _fields { get; set; }
 		///<summary>A comma-separated list of fields to return in the response</summary>
@@ -4475,11 +4595,21 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for MltGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-more-like-this.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-more-like-this.html
 	///</pre>
 	///</summary>
 	public class MoreLikeThisRequestParameters : FluentRequestParameters<MoreLikeThisRequestParameters> 
 	{
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public MoreLikeThisRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
 		
 		internal double _boost_terms { get; set; }
 		///<summary>The boost factor</summary>
@@ -4665,11 +4795,21 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for MpercolateGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-percolate.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-percolate.html
 	///</pre>
 	///</summary>
 	public class MultiPercolateRequestParameters : FluentRequestParameters<MultiPercolateRequestParameters> 
 	{
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public MultiPercolateRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
 		
 		internal bool _ignore_unavailable { get; set; }
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -4705,11 +4845,21 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for MsearchGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-multi-search.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-multi-search.html
 	///</pre>
 	///</summary>
 	public class MultiSearchRequestParameters : FluentRequestParameters<MultiSearchRequestParameters> 
 	{
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public MultiSearchRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
 		
 		internal SearchType _search_type { get; set; }
 		///<summary>Search operation type</summary>
@@ -4730,6 +4880,16 @@ namespace Elasticsearch.Net
 	///</summary>
 	public class MultiTermVectorsRequestParameters : FluentRequestParameters<MultiTermVectorsRequestParameters> 
 	{
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public MultiTermVectorsRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
 		
 		internal bool _term_statistics { get; set; }
 		///<summary>Specifies if total term frequency and document frequency should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
@@ -4835,7 +4995,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for NodesHotThreadsForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-nodes-hot-threads.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-nodes-hot-threads.html
 	///</pre>
 	///</summary>
 	public class NodesHotThreadsRequestParameters : FluentRequestParameters<NodesHotThreadsRequestParameters> 
@@ -4871,6 +5031,16 @@ namespace Elasticsearch.Net
 		}
 		
 		
+		internal bool _ignore_idle_threads { get; set; }
+		///<summary>Don&#39;t show threads that are in known-idle places, such as waiting on a socket select or pulling from an empty task queue (default: true)</summary>
+		public NodesHotThreadsRequestParameters IgnoreIdleThreads(bool ignore_idle_threads)
+		{
+			this._ignore_idle_threads = ignore_idle_threads;
+			this.AddQueryString("ignore_idle_threads", this._ignore_idle_threads);
+			return this;
+		}
+		
+		
 		internal ThreadType _thread_type { get; set; }
 		///<summary>The type to sample (default: cpu)</summary>
 		public NodesHotThreadsRequestParameters ThreadType(ThreadType thread_type)
@@ -4885,7 +5055,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for NodesInfoForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-nodes-info.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-nodes-info.html
 	///</pre>
 	///</summary>
 	public class NodesInfoRequestParameters : FluentRequestParameters<NodesInfoRequestParameters> 
@@ -4915,7 +5085,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for NodesShutdownForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-nodes-shutdown.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-nodes-shutdown.html
 	///</pre>
 	///</summary>
 	public class NodesShutdownRequestParameters : FluentRequestParameters<NodesShutdownRequestParameters> 
@@ -4945,7 +5115,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for NodesStatsForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-nodes-stats.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-nodes-stats.html
 	///</pre>
 	///</summary>
 	public class NodesStatsRequestParameters : FluentRequestParameters<NodesStatsRequestParameters> 
@@ -5025,11 +5195,21 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for PercolateGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-percolate.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-percolate.html
 	///</pre>
 	///</summary>
 	public class PercolateRequestParameters : FluentRequestParameters<PercolateRequestParameters> 
 	{
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public PercolateRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
 		
 		internal  string[] _routing { get; set; }
 		///<summary>A comma-separated list of specific routing values</summary>
@@ -5205,17 +5385,27 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for ScrollGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-request-scroll.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-request-scroll.html
 	///</pre>
 	///</summary>
 	public class ScrollRequestParameters : FluentRequestParameters<ScrollRequestParameters> 
 	{
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public ScrollRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for SearchGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-search.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-search.html
 	///</pre>
 	///</summary>
 	public class SearchRequestParameters : FluentRequestParameters<SearchRequestParameters> 
@@ -5257,6 +5447,16 @@ namespace Elasticsearch.Net
 		{
 			this._df = df;
 			this.AddQueryString("df", this._df);
+			return this;
+		}
+		
+		
+		internal IEnumerable<object> _fielddata_fields { get; set; }
+		///<summary>A comma-separated list of fields to return as the field data representation of a field for each hit</summary>
+		public SearchRequestParameters FielddataFields(params string[] fielddata_fields)
+		{
+			this._fielddata_fields = fielddata_fields.Select(f=>(object)f);
+			this.AddQueryString("fielddata_fields", this._fielddata_fields);
 			return this;
 		}
 		
@@ -5571,6 +5771,16 @@ namespace Elasticsearch.Net
 	public class SearchTemplateRequestParameters : FluentRequestParameters<SearchTemplateRequestParameters> 
 	{
 		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public SearchTemplateRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
 		internal bool _ignore_unavailable { get; set; }
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public SearchTemplateRequestParameters IgnoreUnavailable(bool ignore_unavailable)
@@ -5645,7 +5855,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for SnapshotCreate
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/modules-snapshots.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
 	///</pre>
 	///</summary>
 	public class SnapshotRequestParameters : FluentRequestParameters<SnapshotRequestParameters> 
@@ -5675,7 +5885,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for SnapshotCreateRepository
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/modules-snapshots.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
 	///</pre>
 	///</summary>
 	public class CreateRepositoryRequestParameters : FluentRequestParameters<CreateRepositoryRequestParameters> 
@@ -5715,7 +5925,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for SnapshotDelete
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/modules-snapshots.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
 	///</pre>
 	///</summary>
 	public class DeleteSnapshotRequestParameters : FluentRequestParameters<DeleteSnapshotRequestParameters> 
@@ -5735,7 +5945,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for SnapshotDeleteRepository
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/modules-snapshots.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
 	///</pre>
 	///</summary>
 	public class DeleteRepositoryRequestParameters : FluentRequestParameters<DeleteRepositoryRequestParameters> 
@@ -5765,7 +5975,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for SnapshotGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/modules-snapshots.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
 	///</pre>
 	///</summary>
 	public class GetSnapshotRequestParameters : FluentRequestParameters<GetSnapshotRequestParameters> 
@@ -5785,7 +5995,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for SnapshotGetRepository
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/modules-snapshots.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
 	///</pre>
 	///</summary>
 	public class GetRepositoryRequestParameters : FluentRequestParameters<GetRepositoryRequestParameters> 
@@ -5815,7 +6025,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for SnapshotRestore
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/modules-snapshots.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
 	///</pre>
 	///</summary>
 	public class RestoreRequestParameters : FluentRequestParameters<RestoreRequestParameters> 
@@ -5895,7 +6105,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for Suggest
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-suggesters.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-suggesters.html
 	///</pre>
 	///</summary>
 	public class SuggestRequestParameters : FluentRequestParameters<SuggestRequestParameters> 
@@ -5970,6 +6180,16 @@ namespace Elasticsearch.Net
 	///</summary>
 	public class TermvectorRequestParameters : FluentRequestParameters<TermvectorRequestParameters> 
 	{
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public TermvectorRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
 		
 		internal bool _term_statistics { get; set; }
 		///<summary>Specifies if total term frequency and document frequency should be returned.</summary>
@@ -6075,7 +6295,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for Update
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-update.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-update.html
 	///</pre>
 	///</summary>
 	public class UpdateRequestParameters : FluentRequestParameters<UpdateRequestParameters> 
