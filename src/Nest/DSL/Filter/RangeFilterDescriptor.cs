@@ -32,6 +32,9 @@ namespace Nest
 		[JsonProperty("time_zone")]
 		string TimeZone { get; set; }
 
+		[JsonProperty("format")]
+		string Format { get; set; }
+
 		[JsonProperty("execution")]
 		RangeExecution? Execution { get; set; }
 	}
@@ -47,6 +50,7 @@ namespace Nest
 		public string GreaterThan { get; set; }
 		public string LowerThan { get; set; }
 		public string TimeZone { get; set; }
+		public string Format { get; set; }
 		public RangeExecution? Execution { get; set; }
 		public PropertyPathMarker Field { get; set; }
 	}
@@ -62,6 +66,8 @@ namespace Nest
 		string IRangeFilter.LowerThan { get; set; }
 
 		string IRangeFilter.TimeZone { get; set; }
+
+		string IRangeFilter.Format { get; set; }
 
 		RangeExecution? IRangeFilter.Execution { get; set; }
 
@@ -196,6 +202,12 @@ namespace Nest
 			return this;
 		}
 	
+		public RangeFilterDescriptor<T> Format(string format)
+		{
+			this.Self.Format = format;
+			return this;
+		}
+
 		public RangeFilterDescriptor<T> TimeZone(string timeZone)
 		{
 			this.Self.TimeZone = timeZone;
