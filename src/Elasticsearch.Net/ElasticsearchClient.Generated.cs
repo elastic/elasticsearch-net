@@ -38917,6 +38917,154 @@ namespace Elasticsearch.Net
 			));
 		}
 		
+		///<summary>Represents a GET on /{index}/{type}/_termvector
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-termvectors.html</para>	
+	    ///</summary>
+		///<param name="index">The index in which the document resides.</param>
+		///<param name="type">The type of the document.</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		public ElasticsearchResponse<T> TermvectorGet<T>(string index, string type, Func<TermvectorRequestParameters, TermvectorRequestParameters> requestParameters = null)
+		{
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
+			var url = "{0}/{1}/_termvector".F(Encoded(index), Encoded(type));
+			IRequestParameters requestParams = null;
+				
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new TermvectorRequestParameters());
+			}
+				
+
+
+			return this.DoRequest<T>(
+				"GET", url, data: null, 
+				requestParameters: requestParams
+			);
+		}
+		
+		///<summary>Represents a GET on /{index}/{type}/_termvector
+		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-termvectors.html</para>	
+	    ///</summary>
+		///<param name="index">The index in which the document resides.</param>
+		///<param name="type">The type of the document.</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		public Task<ElasticsearchResponse<T>> TermvectorGetAsync<T>(string index, string type, Func<TermvectorRequestParameters, TermvectorRequestParameters> requestParameters = null)
+		{
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
+			var url = "{0}/{1}/_termvector".F(Encoded(index), Encoded(type));
+			IRequestParameters requestParams = null;
+				
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new TermvectorRequestParameters());
+			}
+				
+
+
+			return this.DoRequestAsync<T>(
+				"GET", url, data: null, 
+				requestParameters: requestParams
+			);
+		}
+		
+		///<summary>Represents a GET on /{index}/{type}/_termvector
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-termvectors.html</para>	
+	    ///</summary>
+		///<param name="index">The index in which the document resides.</param>
+		///<param name="type">The type of the document.</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		public ElasticsearchResponse<DynamicDictionary> TermvectorGet(string index, string type, Func<TermvectorRequestParameters, TermvectorRequestParameters> requestParameters = null)
+		{
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
+			var url = "{0}/{1}/_termvector".F(Encoded(index), Encoded(type));
+			IRequestParameters requestParams = null;
+				
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new TermvectorRequestParameters());
+			}
+				
+
+
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
+				"GET", url, data: null, 
+				requestParameters: requestParams
+			));
+		}
+		
+		///<summary>Represents a GET on /{index}/{type}/_termvector
+		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-termvectors.html</para>	
+	    ///</summary>
+		///<param name="index">The index in which the document resides.</param>
+		///<param name="type">The type of the document.</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		public Task<ElasticsearchResponse<DynamicDictionary>> TermvectorGetAsync(string index, string type, Func<TermvectorRequestParameters, TermvectorRequestParameters> requestParameters = null)
+		{
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
+			var url = "{0}/{1}/_termvector".F(Encoded(index), Encoded(type));
+			IRequestParameters requestParams = null;
+				
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new TermvectorRequestParameters());
+			}
+				
+
+
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
+				"GET", url, data: null, 
+				requestParameters: requestParams
+			));
+		}
+		
 		///<summary>Represents a GET on /{index}/{type}/{id}/_termvector
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
@@ -38925,7 +39073,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="index">The index in which the document resides.</param>
 		///<param name="type">The type of the document.</param>
-		///<param name="id">The id of the document.</param>
+		///<param name="id">The id of the document, when not specified a doc param should be supplied.</param>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
 		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
@@ -38963,7 +39111,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="index">The index in which the document resides.</param>
 		///<param name="type">The type of the document.</param>
-		///<param name="id">The id of the document.</param>
+		///<param name="id">The id of the document, when not specified a doc param should be supplied.</param>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
 		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
@@ -39002,7 +39150,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="index">The index in which the document resides.</param>
 		///<param name="type">The type of the document.</param>
-		///<param name="id">The id of the document.</param>
+		///<param name="id">The id of the document, when not specified a doc param should be supplied.</param>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
 		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
@@ -39042,7 +39190,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="index">The index in which the document resides.</param>
 		///<param name="type">The type of the document.</param>
-		///<param name="id">The id of the document.</param>
+		///<param name="id">The id of the document, when not specified a doc param should be supplied.</param>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
 		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
@@ -39073,6 +39221,158 @@ namespace Elasticsearch.Net
 			));
 		}
 		
+		///<summary>Represents a POST on /{index}/{type}/_termvector
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-termvectors.html</para>	
+	    ///</summary>
+		///<param name="index">The index in which the document resides.</param>
+		///<param name="type">The type of the document.</param>
+		///<param name="body">Define parameters and or supply a document to get termvectors for. See documentation.</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		public ElasticsearchResponse<T> Termvector<T>(string index, string type, object body, Func<TermvectorRequestParameters, TermvectorRequestParameters> requestParameters = null)
+		{
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
+			var url = "{0}/{1}/_termvector".F(Encoded(index), Encoded(type));
+			IRequestParameters requestParams = null;
+				
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new TermvectorRequestParameters());
+			}
+				
+
+
+			return this.DoRequest<T>(
+				"POST", url, body, 
+				requestParameters: requestParams
+			);
+		}
+		
+		///<summary>Represents a POST on /{index}/{type}/_termvector
+		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-termvectors.html</para>	
+	    ///</summary>
+		///<param name="index">The index in which the document resides.</param>
+		///<param name="type">The type of the document.</param>
+		///<param name="body">Define parameters and or supply a document to get termvectors for. See documentation.</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
+		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
+		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
+		///</returns>
+		public Task<ElasticsearchResponse<T>> TermvectorAsync<T>(string index, string type, object body, Func<TermvectorRequestParameters, TermvectorRequestParameters> requestParameters = null)
+		{
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
+			var url = "{0}/{1}/_termvector".F(Encoded(index), Encoded(type));
+			IRequestParameters requestParams = null;
+				
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new TermvectorRequestParameters());
+			}
+				
+
+
+			return this.DoRequestAsync<T>(
+				"POST", url, body, 
+				requestParameters: requestParams
+			);
+		}
+		
+		///<summary>Represents a POST on /{index}/{type}/_termvector
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-termvectors.html</para>	
+	    ///</summary>
+		///<param name="index">The index in which the document resides.</param>
+		///<param name="type">The type of the document.</param>
+		///<param name="body">Define parameters and or supply a document to get termvectors for. See documentation.</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		public ElasticsearchResponse<DynamicDictionary> Termvector(string index, string type, object body, Func<TermvectorRequestParameters, TermvectorRequestParameters> requestParameters = null)
+		{
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
+			var url = "{0}/{1}/_termvector".F(Encoded(index), Encoded(type));
+			IRequestParameters requestParams = null;
+				
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new TermvectorRequestParameters());
+			}
+				
+
+
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
+				"POST", url, body, 
+				requestParameters: requestParams
+			));
+		}
+		
+		///<summary>Represents a POST on /{index}/{type}/_termvector
+		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+	    ///<para>See also: http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-termvectors.html</para>	
+	    ///</summary>
+		///<param name="index">The index in which the document resides.</param>
+		///<param name="type">The type of the document.</param>
+		///<param name="body">Define parameters and or supply a document to get termvectors for. See documentation.</param>
+		///<param name="requestParameters">
+		///Optional function to specify any additional request parameters 
+		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
+		///</param>
+		///<returns>Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
+		///<para> - Dynamic dictionary is a special dynamic type that allows json to be traversed safely</para>
+		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
+		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
+		///</returns>
+		public Task<ElasticsearchResponse<DynamicDictionary>> TermvectorAsync(string index, string type, object body, Func<TermvectorRequestParameters, TermvectorRequestParameters> requestParameters = null)
+		{
+			index.ThrowIfNullOrEmpty("index");
+			type.ThrowIfNullOrEmpty("type");
+			var url = "{0}/{1}/_termvector".F(Encoded(index), Encoded(type));
+			IRequestParameters requestParams = null;
+				
+			if (requestParameters != null)
+			{
+				requestParams = requestParameters(new TermvectorRequestParameters());
+			}
+				
+
+
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
+				"POST", url, body, 
+				requestParameters: requestParams
+			));
+		}
+		
 		///<summary>Represents a POST on /{index}/{type}/{id}/_termvector
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
@@ -39081,8 +39381,8 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="index">The index in which the document resides.</param>
 		///<param name="type">The type of the document.</param>
-		///<param name="id">The id of the document.</param>
-		///<param name="body">Define parameters. See documentation.</param>
+		///<param name="id">The id of the document, when not specified a doc param should be supplied.</param>
+		///<param name="body">Define parameters and or supply a document to get termvectors for. See documentation.</param>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
 		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
@@ -39120,8 +39420,8 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="index">The index in which the document resides.</param>
 		///<param name="type">The type of the document.</param>
-		///<param name="id">The id of the document.</param>
-		///<param name="body">Define parameters. See documentation.</param>
+		///<param name="id">The id of the document, when not specified a doc param should be supplied.</param>
+		///<param name="body">Define parameters and or supply a document to get termvectors for. See documentation.</param>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
 		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
@@ -39160,8 +39460,8 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="index">The index in which the document resides.</param>
 		///<param name="type">The type of the document.</param>
-		///<param name="id">The id of the document.</param>
-		///<param name="body">Define parameters. See documentation.</param>
+		///<param name="id">The id of the document, when not specified a doc param should be supplied.</param>
+		///<param name="body">Define parameters and or supply a document to get termvectors for. See documentation.</param>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
 		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
@@ -39201,8 +39501,8 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="index">The index in which the document resides.</param>
 		///<param name="type">The type of the document.</param>
-		///<param name="id">The id of the document.</param>
-		///<param name="body">Define parameters. See documentation.</param>
+		///<param name="id">The id of the document, when not specified a doc param should be supplied.</param>
+		///<param name="body">Define parameters and or supply a document to get termvectors for. See documentation.</param>
 		///<param name="requestParameters">
 		///Optional function to specify any additional request parameters 
 		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
