@@ -33,6 +33,9 @@ namespace Nest
 		[JsonProperty("time_zone")]
 		string TimeZone { get; set; }
 
+		[JsonProperty("format")]
+		string Format { get; set; }
+
 		PropertyPathMarker Field { get; set; }
 	}
 	public class RangeQuery : PlainQuery, IRangeQuery
@@ -61,6 +64,7 @@ namespace Nest
 		public bool? Cache { get; set; }
 		public string Name { get; set; }
 		public string TimeZone { get; set; }
+		public string Format { get; set; }
 		public PropertyPathMarker Field { get; set; }
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -81,6 +85,8 @@ namespace Nest
 		bool? IRangeQuery.Cache { get; set; }
 
 		string IRangeQuery.TimeZone { get; set; }
+
+		string IRangeQuery.Format { get; set; }
 
 		PropertyPathMarker IRangeQuery.Field { get; set; }
 		
@@ -209,6 +215,13 @@ namespace Nest
 			this.Self.TimeZone = timeZone;
 			return this;
 		}
+
+		public RangeQueryDescriptor<T> Format(string format)
+		{
+			this.Self.Format = format;
+			return this;
+		}
+
 
 	}
 }
