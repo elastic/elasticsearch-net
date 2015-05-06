@@ -20,6 +20,7 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 					.DefaultField(p=>p.Name)
 					.OnFields(p=>p.Name, p=>p.Origin)
 					.Query("some query")
+					.MinimumShouldMatch("50%")
 					)
 				);
 			q.Analyzer.Should().Be("my-analyzer");
@@ -30,7 +31,7 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 			q.DefaultField.Should().Be("name");
 			q.Fields.Should().BeEquivalentTo(new []{ "name", "origin"});
 			q.Query.Should().Be("some query");
-
+			q.MinimumShouldMatch.Should().Be("50%");
 		}
 	}
 }

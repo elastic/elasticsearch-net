@@ -36,6 +36,9 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "locale")]
 		string Locale { get; set; }
+
+		[JsonProperty("minimum_should_match")]
+		string MinimumShouldMatch { get; set; }
 	}
 
 	public class SimpleQueryStringQuery : PlainQuery, ISimpleQueryStringQuery
@@ -54,6 +57,7 @@ namespace Nest
 		public bool? LowercaseExpendedTerms { get; set; }
 		public string Flags { get; set; }
 		public string Locale { get; set; }
+		public string MinimumShouldMatch { get; set; }
 	}
 
 	public class SimpleQueryStringQueryDescriptor<T> : ISimpleQueryStringQuery where T : class
@@ -75,6 +79,7 @@ namespace Nest
 		string ISimpleQueryStringQuery.Flags { get; set; }
 		
 		string ISimpleQueryStringQuery.Locale { get; set; }
+		string ISimpleQueryStringQuery.MinimumShouldMatch { get; set; }
 
 		string IQuery.Name { get; set; }
 
@@ -159,5 +164,10 @@ namespace Nest
 			return this;
 		}
 
-	}
+		public SimpleQueryStringQueryDescriptor<T> MinimumShouldMatch(string minimumShouldMatch)
+		{
+			Self.MinimumShouldMatch = minimumShouldMatch;
+			return this;
+		}
+    }
 }
