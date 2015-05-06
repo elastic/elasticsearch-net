@@ -11,7 +11,7 @@ using Nest.Tests.MockData.Domain;
 namespace Nest.Tests.Unit.Internals.Inferno
 {
 	[TestFixture]
-	public class PropertyVisitorTests
+	public class PropertyPathResolverTests
 	{
 		private class CustomDict : Dictionary<string, ElasticsearchProject> { }
 
@@ -27,7 +27,7 @@ namespace Nest.Tests.Unit.Internals.Inferno
 		private readonly ElasticInferrer _infer;
 		private readonly string _variable = "vari";
 
-		public PropertyVisitorTests()
+		public PropertyPathResolverTests()
 		{
 			_infer = TestElasticClient.Client.Infer;
 		}
