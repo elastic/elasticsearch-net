@@ -43,6 +43,12 @@ namespace Nest
 	public partial class GetMappingDescriptor<T> : IndexTypePathDescriptor<GetMappingDescriptor<T>, GetMappingRequestParameters, T>, IGetMappingRequest
 		where T : class
 	{
+		[Obsolete("Please use the overload taking an enum", true)]
+		public GetIndexDescriptor ExpandWildcards(params string[] expandWildcards)
+		{
+			throw new NotImplementedException();
+		}
+
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<GetMappingRequestParameters> pathInfo)
 		{
 			GetMappingPathInfo.Update(pathInfo, this);
