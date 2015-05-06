@@ -766,7 +766,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/cat-segments.html
 	///</pre>
 	///</summary>
-	public partial class CatSegmentsDescriptor  : BaseRequest<CatSegmentsRequestParameters>
+	public partial class CatSegmentsDescriptor 
 	{
 		
 	
@@ -792,12 +792,6 @@ namespace Nest
 		{
 			this.Request.RequestParameters.V(v);
 			return this;
-		}
-		
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CatSegmentsRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
 		}
 		
 	

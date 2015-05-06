@@ -119,6 +119,7 @@
     <Compile Include="Domain\Analysis\TokenFilter\StemmerOverrideTokenFilter.cs" />
     <Compile Include="Domain\Analysis\TokenFilter\UppercaseTokenFilter.cs" />
     <Compile Include="Domain\Bulk\IBulkOperation.cs" />
+    <Compile Include="Domain\Cat\CatSegmentsRecord.cs" />
     <Compile Include="Domain\Cluster\ClusterRerouteDecision.cs" />
     <Compile Include="Domain\Cluster\ClusterRerouteExplanation.cs" />
     <Compile Include="Domain\Cluster\ClusterRerouteParameters.cs" />
@@ -217,6 +218,7 @@
     <Compile Include="Domain\Stats\PercolateStats.cs" />
     <Compile Include="Domain\Stats\PluginStats.cs" />
     <Compile Include="Domain\Stats\SegmentsStats.cs" />
+    <Compile Include="DSL\CatSegmentsDescriptor.cs" />
     <Compile Include="DSL\ClusterRerouteDescriptor.cs" />
     <Compile Include="DSL\Cluster\AllocateClusterRerouteCommand.cs" />
     <Compile Include="DSL\Cluster\AllocateClusterRerouteCommandDescriptor.cs" />

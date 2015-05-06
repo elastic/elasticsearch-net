@@ -715,7 +715,7 @@ namespace Nest
 	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/cat-segments.html
 	///</pre>
 	///</summary>
-	public partial class CatSegmentsRequest  : BasePathRequest<CatSegmentsRequestParameters>
+	public partial class CatSegmentsRequest 
 			{
 		
 		///<summary>Comma-separated list of column names to display</summary>
@@ -741,12 +741,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("v", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CatSegmentsRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		
