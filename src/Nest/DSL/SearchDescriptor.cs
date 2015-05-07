@@ -63,6 +63,9 @@ namespace Nest
 		[JsonProperty(PropertyName = "fields")]
 		IList<PropertyPathMarker> Fields { get; set; }
 
+		[JsonProperty(PropertyName = "fielddata_fields")]
+		IList<PropertyPathMarker> FielddataFields { get; set; }
+
 		[JsonProperty(PropertyName = "script_fields")]
 		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		IDictionary<string, IScriptFilter> ScriptFields { get; set; }
@@ -155,6 +158,7 @@ namespace Nest
 		public double? MinScore { get; set; }
 		public long? TerminateAfter { get; set; }
 		public IList<PropertyPathMarker> Fields { get; set; }
+		public IList<PropertyPathMarker> FielddataFields { get; set; }
 		public IDictionary<string, IScriptFilter> ScriptFields { get; set; }
 		public ISourceFilter Source { get; set; }
 		public IList<KeyValuePair<PropertyPathMarker, ISort>> Sort { get; set; }
@@ -237,6 +241,7 @@ namespace Nest
 		public IHighlightRequest Highlight { get; set; }
 		public IRescore Rescore { get; set; }
 		public IList<PropertyPathMarker> Fields { get; set; }
+		public IList<PropertyPathMarker> FielddataFields { get; set; }
 		public IDictionary<string, IScriptFilter> ScriptFields { get; set; }
 		public ISourceFilter Source { get; set; }
 		public IDictionary<string, IInnerHitsContainer> InnerHits { get; set; }
@@ -349,6 +354,8 @@ namespace Nest
 		IFilterContainer ISearchRequest.Filter { get; set; }
 
 		IList<PropertyPathMarker> ISearchRequest.Fields { get; set; }
+
+		IList<PropertyPathMarker> ISearchRequest.FielddataFields { get; set; }
 
 		IDictionary<string, IScriptFilter> ISearchRequest.ScriptFields { get; set; }
 
@@ -614,6 +621,28 @@ namespace Nest
 		public SearchDescriptor<T> Fields(params string[] fields)
 		{
 			Self.Fields = fields.Select(f => (PropertyPathMarker)f).ToList();
+			return this;
+		}
+
+		///<summary>
+		///A comma-separated list of fields to return as the field data representation of a field for each hit
+		///</summary>
+		public SearchDescriptor<T> FielddataFields(params string[] fielddataFields)
+		{
+			if (fielddataFields.HasAny())
+				return this;
+			Self.FielddataFields = fielddataFields.Select(f => (PropertyPathMarker)f).ToList();
+			return this;
+		}
+
+		///<summary>
+		///A comma-separated list of fields to return as the field data representation of a field for each hit
+		///</summary>
+		public SearchDescriptor<T> FielddataFields(params Expression<Func<T, object>>[] fielddataFields)
+		{
+			if (!fielddataFields.HasAny())
+				return this;
+			Self.FielddataFields = fielddataFields.Select(f => (PropertyPathMarker)f).ToList();
 			return this;
 		}
 

@@ -5451,16 +5451,6 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal IEnumerable<object> _fielddata_fields { get; set; }
-		///<summary>A comma-separated list of fields to return as the field data representation of a field for each hit</summary>
-		public SearchRequestParameters FielddataFields(params string[] fielddata_fields)
-		{
-			this._fielddata_fields = fielddata_fields.Select(f=>(object)f);
-			this.AddQueryString("fielddata_fields", this._fielddata_fields);
-			return this;
-		}
-		
-		
 		internal bool _ignore_unavailable { get; set; }
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public SearchRequestParameters IgnoreUnavailable(bool ignore_unavailable)

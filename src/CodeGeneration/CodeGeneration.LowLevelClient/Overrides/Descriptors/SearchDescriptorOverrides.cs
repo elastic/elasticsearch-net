@@ -27,7 +27,8 @@ namespace CodeGeneration.LowLevelClient.Overrides.Descriptors
 					"_source_include",
 					"_source_exclude",
 					"track_scores",
-					"terminate_after"
+					"terminate_after",
+					"fielddata_fields"
 				};
 			}
 		}

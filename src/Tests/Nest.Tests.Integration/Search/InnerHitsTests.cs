@@ -122,6 +122,7 @@ namespace Nest.Tests.Integration.Search
 							.InnerHits(innerInnerHits => innerInnerHits
 								.Add("barons", iii => iii.Type<Baron>())
 							)
+							.FielddataFields(p => p.Name)
 						)
 					)
 					.Add("princes", i => i.Type<Prince>())
@@ -136,6 +137,8 @@ namespace Nest.Tests.Integration.Search
 				var earlHits = hit.InnerHits["earls"].Hits;
 				earlHits.Total.Should().BeGreaterThan(0);
 				earlHits.Hits.Should().NotBeEmpty().And.HaveCount(5);
+				foreach(var earlHit in earlHits.Hits)
+					earlHit.Fields.FieldValues<string[]>("name").Should().NotBeEmpty();
 				var earls = earlHits.Documents<Earl>();
 				earls.Should().NotBeEmpty().And.OnlyContain(earl => !earl.Name.IsNullOrEmpty());
 				foreach (var earlHit in earlHits.Hits)

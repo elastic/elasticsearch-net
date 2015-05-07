@@ -5079,25 +5079,6 @@ namespace Nest
 		}
 		
 
-		///<summary>A comma-separated list of fields to return as the field data representation of a field for each hit</summary>
-		public SearchDescriptor<T> FielddataFields(params string[] fielddata_fields)
-		{
-			this.Request.RequestParameters.FielddataFields(fielddata_fields);
-			return this;
-		}
-		
-			
-		///<summary>A comma-separated list of fields to return as the field data representation of a field for each hit</summary>
-		public SearchDescriptor<T> FielddataFields(params Expression<Func<T, object>>[] typedPathLookups) 
-		{
-			if (!typedPathLookups.HasAny())
-				return this;
-
-			this.Request.RequestParameters._FielddataFields(typedPathLookups);
-			return this;
-		}
-			
-
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public SearchDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true)
 		{

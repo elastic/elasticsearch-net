@@ -281,18 +281,6 @@ namespace Nest
 		}
 		
 		
-		///<summary>A comma-separated list of fields to return as the field data representation of a field for each hit</summary>
-			internal static SearchRequestParameters _FielddataFields<T>(
-				this SearchRequestParameters qs,
-				IEnumerable<Expression<Func<T, object>>>  fielddata_fields)
-			where T : class
-		{
-			var _fielddata_fields = fielddata_fields.Select(e=>(PropertyPathMarker)e);
-			qs.AddQueryString("fielddata_fields", _fielddata_fields);
-			return qs;
-		}
-		
-		
 		///<summary>Specify which field to use for suggestions</summary>
 			internal static SearchRequestParameters _SuggestField<T>(
 				this SearchRequestParameters qs,

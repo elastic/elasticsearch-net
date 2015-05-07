@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
+using System.Linq.Expressions;
 
 namespace Nest
 {
@@ -35,7 +36,7 @@ namespace Nest
 		bool? IInnerHits.Explain { get; set; }
 		ISourceFilter IInnerHits.Source { get; set; }
 		bool? IInnerHits.Version { get; set; }
-		IEnumerable<string> IInnerHits.FielddataFields { get; set; }
+		IList<PropertyPathMarker> IInnerHits.FielddataFields { get; set; }
 		IDictionary<string, IScriptFilter> IInnerHits.ScriptFields { get; set; }
 
 		public GlobalInnerHitDescriptor<T> Query(Func<QueryDescriptor<T>, IQueryContainer> querySelector)
@@ -89,13 +90,17 @@ namespace Nest
 
 		public GlobalInnerHitDescriptor<T> FielddataFields(params string[] fielddataFields)
 		{
-			Self.FielddataFields = fielddataFields;
+			if (fielddataFields.HasAny())
+				return this;
+			Self.FielddataFields = fielddataFields.Select(f => (PropertyPathMarker)f).ToList();
 			return this;
 		}
 
-		public GlobalInnerHitDescriptor<T> FielddataFields(IEnumerable<string> fielddataFields)
+		public GlobalInnerHitDescriptor<T> FielddataFields(params Expression<Func<T, object>>[] fielddataFields)
 		{
-			Self.FielddataFields = fielddataFields;
+			if (!fielddataFields.HasAny())
+				return this;
+			Self.FielddataFields = fielddataFields.Select(e => (PropertyPathMarker)e).ToList();
 			return this;
 		}
 
