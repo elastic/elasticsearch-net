@@ -139,6 +139,18 @@ namespace Nest.Tests.Integration.Core.Cat
 		}
 
 		[Test]
+		public void CatNodesFileDescriptors()
+		{
+			TestCat(() => this._client.CatNodes(v => v.H("b", "fdc", "fdp", "fdm")), r => 
+				!r.Build.IsNullOrEmpty()
+				&& r.FileDescriptorCurrent.HasValue && r.FileDescriptorCurrent.Value > 0
+				&& r.FileDescriptorPercent.HasValue 
+				&& r.FileDescriptorMax.HasValue 
+
+			);
+		}
+
+		[Test]
 		public async void CatNodesAsync()
 		{
 			await TestCatAsync(() => this._client.CatNodesAsync(), r => !r.Master.IsNullOrEmpty());
