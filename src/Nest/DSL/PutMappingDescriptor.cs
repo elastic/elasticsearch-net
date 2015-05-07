@@ -265,12 +265,20 @@ namespace Nest
 			Self.Mapping.RoutingFieldMapping = routingMapper(new RoutingFieldMappingDescriptor<T>());
 			return this;
 		}
+
 		public PutMappingDescriptor<T> TimestampField(Func<TimestampFieldMappingDescriptor<T>, ITimestampFieldMapping> timestampMapper)
 		{
 			timestampMapper.ThrowIfNull("timestampMapper");
 			Self.Mapping.TimestampFieldMapping = timestampMapper(new TimestampFieldMappingDescriptor<T>());
 			return this;
 		}
+
+		public PutMappingDescriptor<T> FieldNamesField(Func<FieldNamesFieldMappingDescriptor<T>, IFieldNamesFieldMapping> fieldNamesMapper)
+		{
+			Self.Mapping.FieldNamesFieldMapping = fieldNamesMapper == null ? null : fieldNamesMapper(new FieldNamesFieldMappingDescriptor<T>());
+			return this;
+		}
+
 		public PutMappingDescriptor<T> TtlField(Func<TtlFieldMappingDescriptor, ITtlFieldMapping> ttlFieldMapper)
 		{
 			ttlFieldMapper.ThrowIfNull("ttlFieldMapper");
