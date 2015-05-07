@@ -27,7 +27,7 @@ namespace Nest.Resolvers
 
 		internal static Func<T, object> MakeDelegate<T, U>(MethodInfo @get)
 		{
-#if ASPNETCORE50
+#if DNXCORE50
 			var f = (Func<T, U>)@get.CreateDelegate(typeof(Func<T, U>));
 #else
 			var f = (Func<T, U>)Delegate.CreateDelegate(typeof(Func<T, U>), @get);

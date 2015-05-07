@@ -13,7 +13,7 @@ using Binder = Microsoft.CSharp.RuntimeBinder.Binder;
 namespace Elasticsearch.Net
 {
 	public class ElasticsearchDynamicValue : DynamicObject, IEquatable<ElasticsearchDynamicValue>
-#if !ASPNETCORE50
+#if !DNXCORE50
 		, IConvertible
 #endif
 	{
@@ -178,7 +178,7 @@ namespace Elasticsearch.Net
 					else if (stringValue != null)
 					{
 						var converter = TypeDescriptor.GetConverter(TType);
-#if ASPNETCORE50
+#if DNXCORE50
 						return (T)converter.ConvertFromInvariantString(stringValue);
 #else
 						if (converter.IsValid(stringValue))
@@ -189,7 +189,7 @@ namespace Elasticsearch.Net
 					}
 					else if (TType == typeof(string))
 					{
-#if ASPNETCORE50
+#if DNXCORE50
 						return (T)Convert.ChangeType(value, typeof(string), CultureInfo.InvariantCulture);
 #else
 						return (T)Convert.ChangeType(value, TypeCode.String, CultureInfo.InvariantCulture);
@@ -359,7 +359,7 @@ namespace Elasticsearch.Net
 						return false;
 					}
 				}
-#if ASPNETCORE50
+#if DNXCORE50
 				result = Convert.ChangeType(value, binderType);
 #else
 				result = Convert.ChangeType(value, typeCode);

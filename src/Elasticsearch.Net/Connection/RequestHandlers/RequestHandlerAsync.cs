@@ -361,7 +361,7 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 			{
 				while (responseStream != null)
 				{
-#if ASPNETCORE50
+#if DNXCORE50
 					var read = responseStream.ReadAsync(buffer, 0, BufferSize);
 #else
 					var read = Task<int>.Factory.FromAsync(responseStream.BeginRead, responseStream.EndRead, buffer, 0, BufferSize, null);

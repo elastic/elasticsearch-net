@@ -17,7 +17,7 @@ namespace Nest
 		{
 			var type = enumValue.GetType();
 			var field = enumValue.ToString();
-#if ASPNETCORE50
+#if DNXCORE50
 			var info = type.GetTypeInfo().GetDeclaredField(field);
 #else
 			var info = type.GetField(field);

@@ -50,7 +50,7 @@ namespace Nest
 	/// <summary>
 	/// Control how NEST's behaviour.
 	/// </summary>
-#if !ASPNETCORE50
+#if !DNXCORE50
 	[Browsable(false)]
 #endif
 	[EditorBrowsable(EditorBrowsableState.Never)]

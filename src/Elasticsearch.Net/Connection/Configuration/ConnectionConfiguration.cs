@@ -40,7 +40,7 @@ namespace Elasticsearch.Net.Connection
 		}
 	}
 
-#if !ASPNETCORE50
+#if !DNXCORE50
 	[Browsable(false)]
 #endif
 	[EditorBrowsable(EditorBrowsableState.Never)]

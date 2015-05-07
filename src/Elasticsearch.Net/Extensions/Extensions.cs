@@ -46,7 +46,7 @@ namespace Elasticsearch.Net
 			if (!char.IsUpper(s[0]))
 				return s;
 
-#if ASPNETCORE50
+#if DNXCORE50
 			//TODO write proper unit test for this
 			string camelCase = char.ToLowerInvariant(s[0]).ToString();
 #else

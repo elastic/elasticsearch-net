@@ -90,7 +90,7 @@ namespace Nest
 			return compiled;
 		}
 
-#if ASPNETCORE50
+#if DNXCORE50
 		internal static bool IsAssignableFrom(this Type type, Type other)
 		{
 			return type.GetTypeInfo().IsAssignableFrom(other.GetTypeInfo());
@@ -98,7 +98,7 @@ namespace Nest
 #endif
 		public static bool IsValue(this Type type)
 		{
-#if ASPNETCORE50 || NETFX_CORE
+#if DNXCORE50 || NETFX_CORE
 			return type.GetTypeInfo().IsValueType;
 #else
 			return type.IsValueType;
@@ -108,7 +108,7 @@ namespace Nest
 		public static IEnumerable<Type> GetAllInterfaces(this Type type)
 		{
 
-#if ASPNETCORE50 || NETFX_CORE
+#if DNXCORE50 || NETFX_CORE
 			return type.GetTypeInfo().ImplementedInterfaces;
 #else
 			return type.GetInterfaces();
@@ -124,7 +124,7 @@ namespace Nest
 
 		public static bool IsEnumType(this Type type)
 		{
-#if ASPNETCORE50 || NETFX_CORE
+#if DNXCORE50 || NETFX_CORE
 			return type.GetTypeInfo().IsEnum;
 #else
 			return type.IsEnum;
@@ -133,7 +133,7 @@ namespace Nest
 
 		public static bool IsGeneric(this Type type)
 		{
-#if ASPNETCORE50 || NETFX_CORE
+#if DNXCORE50 || NETFX_CORE
 			return type.GetTypeInfo().IsGenericType;
 #else
 			return type.IsGenericType;

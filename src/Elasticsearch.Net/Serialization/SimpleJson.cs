@@ -46,7 +46,7 @@
 
 // original json parsing code from http://techblog.procurios.nl/k/618/news/view/14605/14863/How-do-I-write-my-own-parser-for-JSON.html
 
-#if NETFX_CORE || ASPNETCORE50
+#if NETFX_CORE || DNXCORE50
 #define SIMPLE_JSON_TYPEINFO
 #endif
 
@@ -65,7 +65,7 @@ using System.Text;
 
 namespace Elasticsearch.Net.Serialization
 {
-#if !ASPNETCORE50
+#if !DNXCORE50
 using System.CodeDom.Compiler;
 using System.Diagnostics.CodeAnalysis;
 #else

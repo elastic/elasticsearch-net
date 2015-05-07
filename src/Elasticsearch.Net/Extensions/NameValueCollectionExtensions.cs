@@ -27,7 +27,7 @@ namespace Elasticsearch.Net
 
 			if (self.AllKeys.Length == 0) return string.Empty;
 
-#if ASPNETCORE50
+#if DNXCORE50
 			//SHOULD BE FINE 4.5 and up?
 			return prefix + string.Join("&", self.AllKeys.Select(key => string.Format("{0}={1}", Encode(key), Encode(self[key]))));
 #else

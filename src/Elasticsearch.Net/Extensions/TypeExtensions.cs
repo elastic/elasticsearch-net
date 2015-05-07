@@ -95,7 +95,7 @@ namespace Elasticsearch.Net
 
 		public static bool IsGeneric(this Type type)
 		{
-#if ASPNETCORE50 || NETFX_CORE
+#if DNXCORE50 || NETFX_CORE
 			return type.GetTypeInfo().IsGenericType;
 #else
 			return type.IsGenericType;
@@ -104,7 +104,7 @@ namespace Elasticsearch.Net
 
 		public static bool IsValue(this Type type)
 		{
-#if ASPNETCORE50 || NETFX_CORE
+#if DNXCORE50 || NETFX_CORE
 			return type.GetTypeInfo().IsValueType;
 #else
 			return type.IsValueType;
@@ -112,7 +112,7 @@ namespace Elasticsearch.Net
 		}
 
 
-#if ASPNETCORE50 || NET45
+#if DNXCORE50 || NET45
 		public static TypeCode GetTypeCode(this Type type)
 		{
 			if (type == null)

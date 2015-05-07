@@ -1,6 +1,6 @@
 ﻿using System;
 
-#if ASPNETCORE50
+#if DNXCORE50
 namespace System
 {
 	public enum TypeCode

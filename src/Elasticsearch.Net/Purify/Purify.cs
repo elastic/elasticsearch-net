@@ -12,7 +12,7 @@ namespace PurifyNet
 
         static Purifier()
         {
-#if ASPNETCORE50
+#if DNXCORE50
 			isMono = false;
 			hasBrokenDotNetUri = false;
 #else

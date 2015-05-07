@@ -1,18 +1,18 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.22512.0
+VisualStudioVersion = 14.0.22823.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{EBF0765A-EDD1-4B52-9608-2C049AE505A2}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Nest", "Nest\Nest.kproj", "{FFFA06EE-C157-4C25-9DAB-97D060BAD4B8}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Nest", "Nest\Nest.xproj", "{FFFA06EE-C157-4C25-9DAB-97D060BAD4B8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1A04554C-5085-45D3-BFEF-5375CAFD0C17}"
 	ProjectSection(SolutionItems) = preProject
 		global.json = global.json
 	EndProjectSection
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Elasticsearch.Net", "Elasticsearch.Net\Elasticsearch.Net.kproj", "{3B644A02-0947-4AC5-993C-DBC4FA3EA122}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Elasticsearch.Net", "Elasticsearch.Net\Elasticsearch.Net.xproj", "{3B644A02-0947-4AC5-993C-DBC4FA3EA122}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
