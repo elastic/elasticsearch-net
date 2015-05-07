@@ -629,7 +629,7 @@ namespace Nest
 		///</summary>
 		public SearchDescriptor<T> FielddataFields(params string[] fielddataFields)
 		{
-			if (fielddataFields.HasAny())
+			if (!fielddataFields.HasAny())
 				return this;
 			Self.FielddataFields = fielddataFields.Select(f => (PropertyPathMarker)f).ToList();
 			return this;
