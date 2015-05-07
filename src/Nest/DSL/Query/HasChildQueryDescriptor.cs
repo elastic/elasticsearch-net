@@ -18,6 +18,12 @@ namespace Nest
 		[JsonConverter(typeof (StringEnumConverter))]
 		ChildScoreType? ScoreType { get; set; }
 
+		[JsonProperty("min_children")]
+		int? MinChildren { get; set; }
+
+		[JsonProperty("max_children")]
+		int? MaxChildren { get; set; }
+
 		[JsonProperty("query")]
 		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryDescriptor<object>>, CustomJsonConverter>))]
 		IQueryContainer Query { get; set; }
@@ -39,6 +45,8 @@ namespace Nest
 		bool IQuery.IsConditionless { get { return false; } }
 		public TypeNameMarker Type { get; set; }
 		public ChildScoreType? ScoreType { get; set; }
+		public int? MinChildren { get; set; }
+		public int? MaxChildren { get; set; }
 		public IQueryContainer Query { get; set; }
 		public IInnerHits InnerHits { get; set; }
 	}
@@ -50,6 +58,10 @@ namespace Nest
 		TypeNameMarker IHasChildQuery.Type { get; set; }
 
 		ChildScoreType? IHasChildQuery.ScoreType { get; set; }
+
+		int? IHasChildQuery.MinChildren { get; set; }
+
+		int? IHasChildQuery.MaxChildren { get; set; }
 
 		IQueryContainer IHasChildQuery.Query { get; set; }
 
@@ -92,6 +104,18 @@ namespace Nest
 		public HasChildQueryDescriptor<T> Score(ChildScoreType? scoreType)
 		{
 			Self.ScoreType = scoreType;
+			return this;
+		}
+
+		public HasChildQueryDescriptor<T> MinChildren(int minChildren)
+		{
+			Self.MinChildren = minChildren;
+			return this;
+		}
+
+		public HasChildQueryDescriptor<T> MaxChildren(int maxChildren)
+		{
+			Self.MaxChildren = maxChildren;
 			return this;
 		}
 
