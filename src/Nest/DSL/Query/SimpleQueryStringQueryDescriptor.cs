@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
@@ -161,6 +162,12 @@ namespace Nest
 		public SimpleQueryStringQueryDescriptor<T> Locale(string locale)
 		{
 			Self.Locale = locale;
+			return this;
+		}
+
+		public SimpleQueryStringQueryDescriptor<T> MinimumShouldMatch(int minimumShouldMatches)
+		{
+			((ISimpleQueryStringQuery)this).MinimumShouldMatch = minimumShouldMatches.ToString(CultureInfo.InvariantCulture);
 			return this;
 		}
 
