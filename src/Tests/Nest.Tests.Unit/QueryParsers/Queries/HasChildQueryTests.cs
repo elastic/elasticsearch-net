@@ -16,12 +16,16 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 				f=>f.HasChild<Person>(hq=>hq
 					.Query(qq=>Query2)
 					.Score(ChildScoreType.Average)
+					.MinChildren(2)
+					.MaxChildren(10)
 					.InnerHits()
 				)
 			);
 			q.Type.Should().Be("person");
 			q.ScoreType.Should().Be(ChildScoreType.Average);
 			q.InnerHits.Should().NotBeNull();
+			q.MinChildren.Should().Be(2);
+			q.MaxChildren.Should().Be(10);
 			AssertIsTermQuery(q.Query, Query2);
 		}
 	}
