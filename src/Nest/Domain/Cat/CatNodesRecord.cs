@@ -63,6 +63,14 @@ namespace Nest
 		internal string _diskAvail { get; set; }
 		public string DiskAvailable { get { return this._diskAvail ?? this._disk ?? this._d ?? this._disk_avail; }}
 
+		[JsonProperty("heap.current")]
+		internal string _heap_current { get; set; }
+		[JsonProperty("hc")]
+		internal string _hc { get; set; }
+		[JsonProperty("heapCurrent")]
+		internal string _heapCurrent { get; set; }
+		public string HeapCurrent { get { return this._heapCurrent ?? this._hc ?? this._heap_current; }}
+
 		[JsonProperty("heap.percent")]
 		internal string _heap_percent { get; set; }
 		[JsonProperty("hp")]
@@ -78,6 +86,14 @@ namespace Nest
 		[JsonProperty("heapMax")]
 		internal string _heapMax { get; set; }
 		public string HeapMax { get { return this._heapMax ?? this._hm ?? this._heap_max; }}
+]
+		[JsonProperty("ram.current")]
+		internal string _ram_current { get; set; }
+		[JsonProperty("rc")]
+		internal string _rc { get; set; }
+		[JsonProperty("ramCurrent")]
+		internal string _ramCurrent { get; set; }
+		public string RamCurrent { get { return this._ramCurrent ?? this._rc ?? this._ram_current; }}
 
 		[JsonProperty("ram.percent")]
 		internal string _ram_percent { get; set; }
@@ -186,6 +202,22 @@ namespace Nest
 		[JsonProperty("flushTotalTime")]
 		internal string _flushTotalTime { get; set; }
 		public string FlushTotalTime { get { return this._flushTotalTime ?? this._ftt ?? this._flush_total_time; }}
+
+		[JsonProperty("file_desc.percent")]
+		internal int _file_desc_percent { get; set; }
+		[JsonProperty("fdp")]
+		internal int _fdp { get; set; }
+		[JsonProperty("fileDescriptorPercent")]
+		internal int _fileDescriptorPercent { get; set; }
+		public int FileDescriptorPercent { get { return this._fileDescriptorPercent ?? this._fdp ?? this._file_desc_percent; }}
+
+		[JsonProperty("file_desc.max")]
+		internal int _file_desc_max { get; set; }
+		[JsonProperty("fdm")]
+		internal int _fdm { get; set; }
+		[JsonProperty("fileDescriptorMax")]
+		internal int _fileDescriptorMax { get; set; }
+		public int FileDescriptorMax { get { return this._fileDescriptorMax ?? this._fdm ?? this._file_desc_max; }}
 
 		[JsonProperty("get.current")]
 		internal string _get_current { get; set; }
