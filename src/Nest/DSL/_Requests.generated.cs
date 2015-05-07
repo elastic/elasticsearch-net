@@ -4566,14 +4566,6 @@ namespace Nest
 		}
 		
 		
-		///<summary>A comma-separated list of fields to return as the field data representation of a field for each hit</summary>
-		public IList<PropertyPathMarker> FielddataFields 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("fielddata_fields"); } 
-			set { this.Request.RequestParameters.AddQueryString("fielddata_fields", value); }
-		}
-		
-		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool IgnoreUnavailable 
 		{ 
@@ -6472,14 +6464,6 @@ namespace Nest
 		{ 
 			get { return this.Request.RequestParameters.GetQueryStringValue<string>("df"); } 
 			set { this.Request.RequestParameters.AddQueryString("df", value); }
-		}
-		
-		
-		///<summary>A comma-separated list of fields to return as the field data representation of a field for each hit</summary>
-		public IList<PropertyPathMarker> FielddataFields 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("fielddata_fields"); } 
-			set { this.Request.RequestParameters.AddQueryString("fielddata_fields", value); }
 		}
 		
 		

@@ -36,7 +36,7 @@ namespace Nest
 		bool? Version { get; set; }
 
 		[JsonProperty(PropertyName = "fielddata_fields")]
-		IEnumerable<string> FielddataFields { get; set; }
+		IList<PropertyPathMarker> FielddataFields { get; set; }
 
 		[JsonProperty(PropertyName = "script_fields")]
 		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
@@ -62,7 +62,7 @@ namespace Nest
 
 		public bool? Version { get; set; }
 
-		public IEnumerable<string> FielddataFields { get; set; }
+		public IList<PropertyPathMarker> FielddataFields { get; set; }
 
 		public IDictionary<string, IScriptFilter> ScriptFields { get; set; }
 	}
@@ -79,7 +79,7 @@ namespace Nest
 		bool? IInnerHits.Explain { get; set; }
 		ISourceFilter IInnerHits.Source { get; set; }
 		bool? IInnerHits.Version { get; set; }
-		IEnumerable<string> IInnerHits.FielddataFields { get; set; }
+		IList<PropertyPathMarker> IInnerHits.FielddataFields { get; set; }
 		IDictionary<string, IScriptFilter> IInnerHits.ScriptFields { get; set; }
 
 		public InnerHitsDescriptor<T> From(int? from)
@@ -102,13 +102,17 @@ namespace Nest
 
 		public InnerHitsDescriptor<T> FielddataFields(params string[] fielddataFields)
 		{
-			Self.FielddataFields = fielddataFields;
+			if (fielddataFields.HasAny())
+				return this;
+			Self.FielddataFields = fielddataFields.Select(f => (PropertyPathMarker)f).ToList();
 			return this;
 		}
 
-		public InnerHitsDescriptor<T> FielddataFields(IEnumerable<string> fielddataFields)
+		public InnerHitsDescriptor<T> FielddataFields(params Expression<Func<T, object>>[] fielddataFields)
 		{
-			Self.FielddataFields = fielddataFields;
+			if (!fielddataFields.HasAny())
+				return this;
+			Self.FielddataFields = fielddataFields.Select(e => (PropertyPathMarker)e).ToList();
 			return this;
 		}
 
