@@ -153,6 +153,7 @@
     <Compile Include="Domain\Geo\MultiPolygonGeoShape.cs" />
     <Compile Include="Domain\Geo\PointGeoShape.cs" />
     <Compile Include="Domain\Geo\PolygonGeoShape.cs" />
+    <Compile Include="Domain\Mapping\SpecialFields\FieldNamesMapping.cs" />
     <Compile Include="Domain\Mapping\SubMappings\FieldData\FieldDataFilter.cs" />
     <Compile Include="Domain\Mapping\SubMappings\FieldData\FieldDataFrequencyFilter.cs" />
     <Compile Include="Domain\Mapping\SubMappings\FieldData\FieldDataMapping.cs" />
