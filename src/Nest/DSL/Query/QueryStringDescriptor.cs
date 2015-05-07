@@ -70,6 +70,9 @@ namespace Nest
 		[JsonProperty(PropertyName = "tie_breaker")]
 		double? TieBreaker { get; set; }
 
+		[JsonProperty(PropertyName = "max_determinized_states")]
+		int? MaximumDeterminizedStates { get; set; }
+
 		[JsonProperty(PropertyName = "rewrite")]
 		[JsonConverter(typeof (StringEnumConverter))]
 		RewriteMultiTerm? Rewrite { get; set; }
@@ -110,6 +113,7 @@ namespace Nest
 		public string MinimumShouldMatchPercentage { get; set; }
 		public bool? UseDisMax { get; set; }
 		public double? TieBreaker { get; set; }
+		public int? MaximumDeterminizedStates { get; set; }
 		public RewriteMultiTerm? Rewrite { get; set; }
 	}
 
@@ -155,6 +159,8 @@ namespace Nest
 		bool? IQueryStringQuery.UseDisMax { get; set; }
 		
 		double? IQueryStringQuery.TieBreaker { get; set; }
+
+		int? IQueryStringQuery.MaximumDeterminizedStates { get; set; }
 		
 		RewriteMultiTerm? IQueryStringQuery.Rewrite { get; set; }
 
@@ -303,6 +309,10 @@ namespace Nest
 			Self.TieBreaker = tieBreaker;
 			return this;
 		}
-
+		public QueryStringQueryDescriptor<T> MaximumDeterminizedStates(int maxDeterminizedStates)
+		{
+			Self.MaximumDeterminizedStates = maxDeterminizedStates;
+			return this;
+		}
 	}
 }
