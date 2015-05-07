@@ -32,6 +32,9 @@ namespace Nest
 		[JsonProperty(PropertyName = "lowercase_expanded_terms")]
 		bool? LowercaseExpendedTerms { get; set; }
 
+		[JsonProperty(PropertyName = "analyze_wildcard")]
+		bool? AnalyzeWildcard { get; set; }
+
 		[JsonProperty(PropertyName = "flags")]
 		string Flags { get; set; }
 
@@ -56,6 +59,7 @@ namespace Nest
 		public Operator? DefaultOperator { get; set; }
 		public string Analyzer { get; set; }
 		public bool? LowercaseExpendedTerms { get; set; }
+		public bool? AnalyzeWildcard { get; set; }
 		public string Flags { get; set; }
 		public string Locale { get; set; }
 		public string MinimumShouldMatch { get; set; }
@@ -74,6 +78,8 @@ namespace Nest
 		Operator? ISimpleQueryStringQuery.DefaultOperator { get; set; }
 		
 		string ISimpleQueryStringQuery.Analyzer { get; set; }
+		
+		bool? ISimpleQueryStringQuery.AnalyzeWildcard { get; set; }
 		
 		bool? ISimpleQueryStringQuery.LowercaseExpendedTerms { get; set; }
 		
@@ -157,6 +163,11 @@ namespace Nest
 		public SimpleQueryStringQueryDescriptor<T> LowercaseExpendedTerms(bool lowercaseExpendedTerms= true)
 		{
 			Self.LowercaseExpendedTerms = lowercaseExpendedTerms;
+			return this;
+		}
+		public SimpleQueryStringQueryDescriptor<T> AnalyzeWildcard(bool analyzeWildcard = true)
+		{
+			Self.AnalyzeWildcard = analyzeWildcard;
 			return this;
 		}
 		public SimpleQueryStringQueryDescriptor<T> Locale(string locale)
