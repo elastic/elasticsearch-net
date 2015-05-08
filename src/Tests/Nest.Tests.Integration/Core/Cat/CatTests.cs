@@ -139,6 +139,7 @@ namespace Nest.Tests.Integration.Core.Cat
 		}
 
 		[Test]
+		[SkipVersion("0 - 1.4.9", "File descriptors added in 1.5")]
 		public void CatNodesFileDescriptors()
 		{
 			TestCat(() => this._client.CatNodes(v => v.H("b", "fdc", "fdp", "fdm")), r => 
