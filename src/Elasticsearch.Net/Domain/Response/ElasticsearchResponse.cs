@@ -23,7 +23,7 @@ namespace Elasticsearch.Net
 
 	public static class ElasticsearchResponse
 	{
-		internal static Task<ElasticsearchResponse<DynamicDictionary>> WrapAsync(Task<ElasticsearchResponse<Dictionary<string, object>>> responseTask)
+		public static Task<ElasticsearchResponse<DynamicDictionary>> WrapAsync(Task<ElasticsearchResponse<Dictionary<string, object>>> responseTask)
 		{
 			return responseTask
 				.ContinueWith(t =>
@@ -35,7 +35,7 @@ namespace Elasticsearch.Net
 				});
 		}
 
-		internal static ElasticsearchResponse<DynamicDictionary> Wrap(ElasticsearchResponse<Dictionary<string, object>> response)
+		public static ElasticsearchResponse<DynamicDictionary> Wrap(ElasticsearchResponse<Dictionary<string, object>> response)
 		{
 			return ToDynamicResponse(response);
 		}
@@ -62,7 +62,7 @@ namespace Elasticsearch.Net
  			return response;
 		}
 
-		private static ElasticsearchResponse<DynamicDictionary> ToDynamicResponse(ElasticsearchResponse<Dictionary<string, object>> response)
+		public static ElasticsearchResponse<DynamicDictionary> ToDynamicResponse(ElasticsearchResponse<Dictionary<string, object>> response)
 		{
 			return CloneFrom(response, response.Response != null ? DynamicDictionary.Create(response.Response) : null);
 		}
@@ -138,20 +138,20 @@ namespace Elasticsearch.Net
 			}
 		}
 
-		protected internal ElasticsearchResponse(IConnectionConfigurationValues settings)
+		public ElasticsearchResponse(IConnectionConfigurationValues settings)
 		{
 			this.Settings = settings;
 			this.Serializer = settings.Serializer;
 		}
 
-		private ElasticsearchResponse(IConnectionConfigurationValues settings, Exception e)
+		public ElasticsearchResponse(IConnectionConfigurationValues settings, Exception e)
 			: this(settings)
 		{
 			this.Success = false;
 			this.OriginalException = e;
 		}
 
-		private ElasticsearchResponse(IConnectionConfigurationValues settings, int statusCode)
+		public ElasticsearchResponse(IConnectionConfigurationValues settings, int statusCode)
 			: this(settings)
 		{
 			this.Success = statusCode >= 200 && statusCode < 300;
