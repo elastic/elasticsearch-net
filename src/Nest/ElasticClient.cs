@@ -13,7 +13,7 @@ namespace Nest
 	/// <summary>
 	/// ElasticClient is NEST's strongly typed client which exposes fully mapped elasticsearch endpoints
 	/// </summary>
-	public partial class ElasticClient : Nest.IElasticClient
+	public partial class ElasticClient : IElasticClient, IDispatch
 	{
 		private readonly IConnectionSettingsValues _connectionSettings;
 
