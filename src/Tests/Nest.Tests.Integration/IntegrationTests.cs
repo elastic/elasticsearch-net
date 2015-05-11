@@ -13,7 +13,6 @@ namespace Nest.Tests.Integration
 		protected IElasticClient Client { get { return ElasticsearchConfiguration.Client.Value; } }
 		protected IElasticClient ClientThatThrows { get { return ElasticsearchConfiguration.ClientThatThrows.Value; } }
 		protected IElasticClient ClientNoRawResponse { get { return ElasticsearchConfiguration.ClientNoRawResponse.Value; } }
-		protected ElasticClient ThriftClient { get { return ElasticsearchConfiguration.ThriftClient.Value; } }
 
 		protected IConnectionSettingsValues Settings { get { return ElasticsearchConfiguration.Settings(); } }
 

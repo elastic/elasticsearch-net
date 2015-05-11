@@ -5,7 +5,6 @@ using System.Runtime.ConstrainedExecution;
 using System.Security.Cryptography.X509Certificates;
 using Elasticsearch.Net;
 using Elasticsearch.Net.Connection;
-using Elasticsearch.Net.Connection.Thrift;
 using Elasticsearch.Net.ConnectionPool;
 using Elasticsearch.Net.Exceptions;
 using FluentAssertions;

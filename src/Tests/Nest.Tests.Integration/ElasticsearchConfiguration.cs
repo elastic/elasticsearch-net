@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Linq;
-using Elasticsearch.Net.Connection.Thrift;
 using Elasticsearch.Net;
 
 namespace Nest.Tests.Integration
@@ -52,7 +51,6 @@ namespace Nest.Tests.Integration
 		public static readonly Lazy<ElasticClient> Client = new Lazy<ElasticClient>(()=> new ElasticClient(Settings()));
 		public static readonly Lazy<ElasticClient> ClientNoRawResponse = new Lazy<ElasticClient>(()=> new ElasticClient(Settings().ExposeRawResponse(false)));
 		public static readonly Lazy<ElasticClient> ClientThatThrows = new Lazy<ElasticClient>(()=> new ElasticClient(Settings().ThrowOnElasticsearchServerExceptions()));
-		public static readonly Lazy<ElasticClient> ThriftClient = new Lazy<ElasticClient>(()=> new ElasticClient(Settings(9500), new ThriftConnection(Settings(9500))));
 		public static string NewUniqueIndexName()
 		{
 			return DefaultIndex + "_" + Guid.NewGuid().ToString();

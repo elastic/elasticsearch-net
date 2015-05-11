@@ -101,7 +101,6 @@
     <Compile Include="Connection\Security\BasicAuthenticationTests.cs" />
     <Compile Include="Connection\Security\SniffingUsingSSLTests.cs" />
     <Compile Include="Connection\Security\UnauthorizedRequestTests.cs" />
-    <Compile Include="Connection\Thrift\ThiftBugReportTests.cs" />
     <Compile Include="Core\Analyze\AnalyzeTests.cs" />
     <Compile Include="Core\Bulk\BulkTests.cs" />
     <Compile Include="Core\Bulk\BulkUpdateTests.cs" />
@@ -188,7 +187,6 @@
     <Compile Include="Reproduce\Reproduce1317Tests.cs" />
     <Compile Include="Reproduce\Reproduce769Tests.cs" />
     <Compile Include="Reproduce\Reproduce945Tests.cs" />
-    <Compile Include="Reproduce\Reproduce953Tests.cs" />
     <Compile Include="Reproduce\Reproduce994Tests.cs" />
     <Compile Include="Reproduce\Reproduce986Tests.cs" />
     <Compile Include="Reproduce\Reproduce960Tests.cs" />
@@ -271,17 +269,9 @@
     <Compile Include="Warmers\WarmersTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Connections\Elasticsearch.Net.Connection.HttpClient\Elasticsearch.Net.Connection.HttpClient.csproj">
-      <Project>{a69322fd-b874-44ef-abe0-63f4a7b5593e}</Project>
-      <Name>Elasticsearch.Net.Connection.HttpClient</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Elasticsearch.Net\Elasticsearch.Net.csproj">
       <Project>{e97ccf40-0ba6-43fe-9f2d-58d454134088}</Project>
       <Name>Elasticsearch.Net</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Connections\Elasticsearch.Net.Connection.Thrift\Elasticsearch.Net.Connection.Thrift.csproj">
-      <Project>{704EF910-C4E7-413E-B21F-296EFE732FCF}</Project>
-      <Name>Elasticsearch.Net.Connection.Thrift</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Nest\Nest.csproj">
       <Project>{072BA7DA-7B60-407D-8B6E-95E3186BE70C}</Project>
