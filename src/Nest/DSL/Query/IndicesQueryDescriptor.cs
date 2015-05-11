@@ -62,6 +62,7 @@ namespace Nest
 		}
 
 		bool IQuery.IsConditionless { get { return false; } }
+		public string Name { get; set; }
 		public NestedScore? Score { get; set; }
 		public IQueryContainer Query { get; set; }
 		public IQueryContainer NoMatchQuery { get; set; }
@@ -70,6 +71,8 @@ namespace Nest
 
 	public class IndicesQueryDescriptor<T> : IIndicesQuery where T : class
 	{
+		private IIndicesQuery Self { get { return this; }}
+
 		NestedScore? IIndicesQuery.Score { get; set; }
 
 		IQueryContainer IIndicesQuery.Query { get; set; }
@@ -82,8 +85,16 @@ namespace Nest
 		{
 			get
 			{
-				return ((IIndicesQuery)this).NoMatchQuery == null && ((IIndicesQuery)this).Query == null;
+				return Self.NoMatchQuery == null && Self.Query == null;
 			}
+		}
+
+		string IQuery.Name { get; set; }
+
+		public IndicesQueryDescriptor<T> Name(string name)
+		{
+			Self.Name = name;
+			return this;
 		}
 
 		public IndicesQueryDescriptor<T> Query(Func<QueryDescriptor<T>, QueryContainer> querySelector)
@@ -93,8 +104,7 @@ namespace Nest
 			if (q.IsConditionless)
 				return this;
 
-
-			((IIndicesQuery)this).Query = q;
+			Self.Query = q;
 			return this;
 		}
 
@@ -105,13 +115,13 @@ namespace Nest
 			if (q.IsConditionless)
 				return this;
 
-			((IIndicesQuery)this).Query = q;
+			Self.Query = q;
 			return this;
 		}
 		
 		public IndicesQueryDescriptor<T> NoMatchQuery(NoMatchShortcut shortcut)
 		{
-			((IIndicesQuery)this).NoMatchQuery = new NoMatchQueryContainer { Shortcut = shortcut };
+			Self.NoMatchQuery = new NoMatchQueryContainer { Shortcut = shortcut };
 			return this;
 		}
 
@@ -122,7 +132,7 @@ namespace Nest
 			if (q.IsConditionless)
 				return this;
 
-			((IIndicesQuery)this).NoMatchQuery = q;
+			Self.NoMatchQuery = q;
 			return this;
 		}
 		public IndicesQueryDescriptor<T> NoMatchQuery<K>(Func<QueryDescriptor<K>, IQueryContainer> querySelector) where K : class
@@ -132,12 +142,12 @@ namespace Nest
 			if (q.IsConditionless)
 				return this;
 
-			((IIndicesQuery)this).NoMatchQuery = q;
+			Self.NoMatchQuery = q;
 			return this;
 		}
 		public IndicesQueryDescriptor<T> Indices(IEnumerable<string> indices)
 		{
-			((IIndicesQuery)this).Indices = indices;
+			Self.Indices = indices;
 			return this;
 		}
 	}

@@ -26,6 +26,7 @@ namespace Nest
 	}
 	public class WildcardQuery : PlainQuery, IWildcardQuery
 	{
+		public string Name { get; set; }
 		bool IQuery.IsConditionless { get { return false; } }
 		PropertyPathMarker IFieldNameQuery.GetFieldName() { return this.Field; }
 

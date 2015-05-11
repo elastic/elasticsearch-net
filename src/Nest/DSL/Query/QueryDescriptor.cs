@@ -10,7 +10,7 @@ namespace Nest
 	public class QueryDescriptor<T> : QueryContainer where T : class
 	{
 		
-
+		//TODO remove all the shortcuts into descriptors except for .Term(s)()
 
 		public QueryDescriptor()
 		{
@@ -291,6 +291,7 @@ namespace Nest
 
 			return this.New(query, q => q.Indices = query);
 		}
+
 		/// <summary>
 		/// Matches documents with fields that have terms within a certain range. The type of the Lucene query depends
 		/// on the field type, for string fields, the TermRangeQuery, while for number/date fields, the query is
@@ -303,6 +304,7 @@ namespace Nest
 			
 			return this.New(query, q => q.Range = query);
 		}
+
 		/// <summary>
 		/// Fuzzy like this query find documents that are “like” provided text by running it against one or more fields.
 		/// </summary>
@@ -444,6 +446,7 @@ namespace Nest
 
 			return this.New(query, q => q.HasChild = query);
 		}
+		
 		/// <summary>
 		/// The has_child query works the same as the has_child filter, by automatically wrapping the filter with a 
 		/// constant_score.
@@ -456,6 +459,7 @@ namespace Nest
 
 			return this.New(query, q => q.HasParent = query);
 		}
+		
 		/// <summary>
 		/// The top_children query runs the child query with an estimated hits size, and out of the hit docs, aggregates 
 		/// it into parent docs. If there aren’t enough parent docs matching the requested from/size search request, 
@@ -469,6 +473,7 @@ namespace Nest
 
 			return this.New(query, q => q.TopChildren = query);
 		}
+		
 		/// <summary>
 		/// A query that applies a filter to the results of another query. This query maps to Lucene FilteredQuery.
 		/// </summary>
@@ -500,6 +505,7 @@ namespace Nest
 
 			return this.New(query, q => q.DisMax = query);
 		}
+		
 		/// <summary>
 		/// A query that wraps a filter or another query and simply returns a constant score equal to the query boost 
 		/// for every document in the filter. Maps to Lucene ConstantScoreQuery.
@@ -512,6 +518,7 @@ namespace Nest
 			return this.New(query, q => q.ConstantScore = query);
 		}
 
+		
 		/// <summary>
 		/// custom_score query allows to wrap another query and customize the scoring of it optionally with a 
 		/// computation derived from other field values in the doc (numeric ones) using script or boost expression
@@ -523,6 +530,7 @@ namespace Nest
 
 			return this.New(query, q => q.CustomFiltersScore = query);
 		}
+		
 		/// <summary>
 		/// A query that matches documents matching boolean combinations of other queries. The bool query maps to 
 		/// Lucene BooleanQuery. 
@@ -559,11 +567,13 @@ namespace Nest
 		/// boosting into account, the norms_field needs to be provided in order to explicitly specify which
 		/// field the boosting will be done on (Note, this will result in slower execution time).
 		/// </param>
-		public QueryContainer MatchAll(double? Boost = null, string NormField = null)
+		public QueryContainer MatchAll(double? Boost = null, string NormField = null, string Name = null)
 		{
+			//TODO introduce a proper optional query descriptor
 			var query = new MatchAllQuery() { NormField = NormField };
 			if (Boost.HasValue)
 				query.Boost = Boost.Value;
+			query.Name = Name;
 
 			return this.New(query, q => q.MatchAllQuery = query);
 		}
@@ -581,6 +591,7 @@ namespace Nest
 					t.Boost(Boost.Value);
 			});
 		}
+		
 		/// <summary>
 		/// Matches documents that have fields that contain a term (not analyzed). 
 		/// The term query maps to Lucene TermQuery. 
@@ -594,6 +605,7 @@ namespace Nest
 					t.Boost(Boost.Value);
 			});
 		}
+		
 		/// <summary>
 		/// Matches documents that have fields that contain a term (not analyzed). 
 		/// The term query maps to Lucene TermQuery. 
@@ -607,6 +619,7 @@ namespace Nest
 					t.Boost(Boost.Value);
 			});
 		}
+		
 		/// <summary>
 		/// Matches documents that have fields that contain a term (not analyzed). 
 		/// The term query maps to Lucene TermQuery. 
@@ -617,6 +630,7 @@ namespace Nest
 			termSelector(termQuery);
 			return this.New(termQuery, q => q.Term = termQuery);
 		}
+		
 		/// <summary>
 		/// Matches documents that have fields matching a wildcard expression (not analyzed). 
 		/// Supported wildcards are *, which matches any character sequence (including the empty one), and ?, 
@@ -633,6 +647,7 @@ namespace Nest
 				if (Rewrite.HasValue) t.Rewrite(Rewrite.Value);
 			});
 		}
+		
 		/// <summary>
 		/// Matches documents that have fields matching a wildcard expression (not analyzed). 
 		/// Supported wildcards are *, which matches any character sequence (including the empty one), and ?,
@@ -663,6 +678,7 @@ namespace Nest
 			wildcardSelector(wildcardQuery);
 			return this.New(wildcardQuery, q => q.Wildcard = wildcardQuery);
 		}
+		
 		/// <summary>
 		/// Matches documents that have fields containing terms with a specified prefix (not analyzed). 
 		/// The prefix query maps to Lucene PrefixQuery. 
@@ -701,6 +717,7 @@ namespace Nest
 			prefixSelector(prefixQuery);
 			return this.New(prefixQuery, q => q.Prefix = prefixQuery);
 		}
+		
 		/// <summary>
 		/// Filters documents that only have the provided ids. Note, this filter does not require 
 		/// the _id field to be indexed since it works using the _uid field.
@@ -732,6 +749,17 @@ namespace Nest
 		{
 			var ids = new IdsQueryDescriptor { Values = values, Type = types };
 			return this.New(ids, q => q.Ids = ids);
+		}
+
+		/// <summary>
+		/// Filters documents that only have the provided ids. 
+		/// Note, this filter does not require the _id field to be indexed since 
+		/// it works using the _uid field.
+		/// </summary>
+		public QueryContainer Ids(Func<IdsQueryProperDescriptor, IdsQueryProperDescriptor> selector)
+		{
+			var ids = selector(new IdsQueryProperDescriptor());
+			return this.New(ids, c => c.Ids = ids);
 		}
 
 		/// <summary>
@@ -767,6 +795,7 @@ namespace Nest
 			spanTermSelector(spanTerm);
 			return this.New(spanTerm, q => q.SpanTerm = spanTerm);
 		}
+		
 		/// <summary>
 		/// Matches spans near the beginning of a field. The span first query maps to Lucene SpanFirstQuery. 
 		/// </summary>

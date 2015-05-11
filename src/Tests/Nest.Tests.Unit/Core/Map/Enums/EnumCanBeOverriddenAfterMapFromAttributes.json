@@ -1,0 +1,10 @@
+{
+  "myclass": {
+    "properties": {
+      "myEnum": {
+        "index": "not_analyzed",
+        "type": "string"
+      }
+    }
+  }
+}

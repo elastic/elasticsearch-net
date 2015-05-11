@@ -32,7 +32,7 @@ namespace Nest
 		
 	///<summary>Request parameters for Bulk
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-bulk.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-bulk.html
 	///</pre>
 	///</summary>
 	public partial class BulkRequest 
@@ -90,7 +90,7 @@ namespace Nest
 		
 	///<summary>Request parameters for CatAliases
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-alias.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-alias.html
 	///</pre>
 	///</summary>
 	public partial class CatAliasesRequest 
@@ -140,7 +140,7 @@ namespace Nest
 		
 	///<summary>Request parameters for CatAllocation
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-allocation.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-allocation.html
 	///</pre>
 	///</summary>
 	public partial class CatAllocationRequest 
@@ -198,7 +198,7 @@ namespace Nest
 		
 	///<summary>Request parameters for CatCount
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-count.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-count.html
 	///</pre>
 	///</summary>
 	public partial class CatCountRequest 
@@ -314,7 +314,7 @@ namespace Nest
 		
 	///<summary>Request parameters for CatHealth
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-health.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-health.html
 	///</pre>
 	///</summary>
 	public partial class CatHealthRequest 
@@ -372,7 +372,7 @@ namespace Nest
 		
 	///<summary>Request parameters for CatHelp
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat.html
 	///</pre>
 	///</summary>
 	public partial class CatHelpRequest  : BasePathRequest<CatHelpRequestParameters>
@@ -396,7 +396,7 @@ namespace Nest
 		
 	///<summary>Request parameters for CatIndices
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-indices.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-indices.html
 	///</pre>
 	///</summary>
 	public partial class CatIndicesRequest 
@@ -462,7 +462,7 @@ namespace Nest
 		
 	///<summary>Request parameters for CatMaster
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-master.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-master.html
 	///</pre>
 	///</summary>
 	public partial class CatMasterRequest 
@@ -512,7 +512,7 @@ namespace Nest
 		
 	///<summary>Request parameters for CatNodes
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-nodes.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-nodes.html
 	///</pre>
 	///</summary>
 	public partial class CatNodesRequest 
@@ -562,7 +562,7 @@ namespace Nest
 		
 	///<summary>Request parameters for CatPendingTasks
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-pending-tasks.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-pending-tasks.html
 	///</pre>
 	///</summary>
 	public partial class CatPendingTasksRequest 
@@ -662,7 +662,7 @@ namespace Nest
 		
 	///<summary>Request parameters for CatRecovery
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-recovery.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-recovery.html
 	///</pre>
 	///</summary>
 	public partial class CatRecoveryRequest 
@@ -710,9 +710,43 @@ namespace Nest
 	}
 	
 		
+	///<summary>Request parameters for CatSegments
+	///<pre>
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/cat-segments.html
+	///</pre>
+	///</summary>
+	public partial class CatSegmentsRequest 
+			{
+		
+		///<summary>Comma-separated list of column names to display</summary>
+		public  string[] H 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("h"); } 
+			set { this.Request.RequestParameters.AddQueryString("h", value); }
+		}
+		
+		
+		///<summary>Return help information</summary>
+		public bool Help 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("help"); } 
+			set { this.Request.RequestParameters.AddQueryString("help", value); }
+		}
+		
+		
+		///<summary>Verbose mode. Display column headers</summary>
+		public bool V 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("v"); } 
+			set { this.Request.RequestParameters.AddQueryString("v", value); }
+		}
+		
+	}
+	
+		
 	///<summary>Request parameters for CatShards
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cat-shards.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-shards.html
 	///</pre>
 	///</summary>
 	public partial class CatShardsRequest 
@@ -820,7 +854,7 @@ namespace Nest
 		
 	///<summary>Request parameters for ClearScroll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-request-scroll.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-request-scroll.html
 	///</pre>
 	///</summary>
 	public partial class ClearScrollRequest 
@@ -830,7 +864,7 @@ namespace Nest
 		
 	///<summary>Request parameters for ClusterGetSettings
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-update-settings.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-update-settings.html
 	///</pre>
 	///</summary>
 	public partial class ClusterGetSettingsRequest 
@@ -864,7 +898,7 @@ namespace Nest
 		
 	///<summary>Request parameters for ClusterHealth
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-health.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-health.html
 	///</pre>
 	///</summary>
 	public partial class ClusterHealthRequest 
@@ -938,7 +972,7 @@ namespace Nest
 		
 	///<summary>Request parameters for ClusterPendingTasks
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-pending.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-pending.html
 	///</pre>
 	///</summary>
 	public partial class ClusterPendingTasksRequest 
@@ -964,7 +998,7 @@ namespace Nest
 		
 	///<summary>Request parameters for ClusterPutSettings
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-update-settings.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-update-settings.html
 	///</pre>
 	///</summary>
 	public partial class ClusterSettingsRequest 
@@ -977,12 +1011,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("flat_settings", value); }
 		}
 		
+		
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public string MasterTimeout 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("master_timeout"); } 
+			set { this.Request.RequestParameters.AddQueryString("master_timeout", value); }
+		}
+		
+		
+		///<summary>Explicit operation timeout</summary>
+		public string Timeout 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("timeout"); } 
+			set { this.Request.RequestParameters.AddQueryString("timeout", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for ClusterReroute
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-reroute.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-reroute.html
 	///</pre>
 	///</summary>
 	public partial class ClusterRerouteRequest 
@@ -1032,7 +1082,7 @@ namespace Nest
 		
 	///<summary>Request parameters for ClusterState
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-state.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-state.html
 	///</pre>
 	///</summary>
 	public partial class ClusterStateRequest 
@@ -1061,12 +1111,36 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("flat_settings", value); }
 		}
 		
+		
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public bool IgnoreUnavailable 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("ignore_unavailable"); } 
+			set { this.Request.RequestParameters.AddQueryString("ignore_unavailable", value); }
+		}
+		
+		
+		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		public bool AllowNoIndices 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("allow_no_indices"); } 
+			set { this.Request.RequestParameters.AddQueryString("allow_no_indices", value); }
+		}
+		
+		
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public ExpandWildcards ExpandWildcards 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
+			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for ClusterStats
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-stats.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-stats.html
 	///</pre>
 	///</summary>
 	public partial class ClusterStatsRequest 
@@ -1092,7 +1166,7 @@ namespace Nest
 		
 	///<summary>Request parameters for Count
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-count.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-count.html
 	///</pre>
 	///</summary>
 	public partial class CountRequest<T> 
@@ -1158,11 +1232,19 @@ namespace Nest
 		
 	///<summary>Request parameters for CountPercolateGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-percolate.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-percolate.html
 	///</pre>
 	///</summary>
 	public partial class PercolateCountRequest<TDocument> 
 			{
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
 		
 		///<summary>A comma-separated list of specific routing values</summary>
 		public  string[] Routing 
@@ -1240,7 +1322,7 @@ namespace Nest
 		
 	///<summary>Request parameters for Delete
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-delete.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-delete.html
 	///</pre>
 	///</summary>
 	public partial class DeleteRequest<T> 
@@ -1314,7 +1396,7 @@ namespace Nest
 		
 	///<summary>Request parameters for DeleteByQuery
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-delete-by-query.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-delete-by-query.html
 	///</pre>
 	///</summary>
 	public partial class DeleteByQueryRequest<T> 
@@ -1472,7 +1554,7 @@ namespace Nest
 		
 	///<summary>Request parameters for Exists
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-get.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-get.html
 	///</pre>
 	///</summary>
 	public partial class DocumentExistsRequest<T> 
@@ -1522,7 +1604,7 @@ namespace Nest
 		
 	///<summary>Request parameters for ExplainGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-explain.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-explain.html
 	///</pre>
 	///</summary>
 	public partial class ExplainRequest<T> 
@@ -1652,7 +1734,7 @@ namespace Nest
 		
 	///<summary>Request parameters for Get
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-get.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-get.html
 	///</pre>
 	///</summary>
 	public partial class GetRequest<T> 
@@ -1776,7 +1858,7 @@ namespace Nest
 		
 	///<summary>Request parameters for GetSource
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-get.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-get.html
 	///</pre>
 	///</summary>
 	public partial class SourceRequest<T> 
@@ -1892,7 +1974,7 @@ namespace Nest
 		
 	///<summary>Request parameters for Index
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-index_.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-index_.html
 	///</pre>
 	///</summary>
 	public partial class IndexRequest<TDocument> 
@@ -1990,11 +2072,19 @@ namespace Nest
 		
 	///<summary>Request parameters for IndicesAnalyzeGetForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-analyze.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-analyze.html
 	///</pre>
 	///</summary>
 	public partial class AnalyzeRequest 
 			{
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
 		
 		///<summary>The name of the analyzer to use</summary>
 		public string Analyzer 
@@ -2072,7 +2162,7 @@ namespace Nest
 		
 	///<summary>Request parameters for IndicesClearCacheForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-clearcache.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-clearcache.html
 	///</pre>
 	///</summary>
 	public partial class ClearCacheRequest 
@@ -2186,7 +2276,7 @@ namespace Nest
 		
 	///<summary>Request parameters for IndicesClose
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-open-close.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-open-close.html
 	///</pre>
 	///</summary>
 	public partial class CloseIndexRequest 
@@ -2236,7 +2326,7 @@ namespace Nest
 		
 	///<summary>Request parameters for IndicesCreate
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-create-index.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-create-index.html
 	///</pre>
 	///</summary>
 	public partial class CreateIndexRequest 
@@ -2262,7 +2352,7 @@ namespace Nest
 		
 	///<summary>Request parameters for IndicesDelete
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-delete-index.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-delete-index.html
 	///</pre>
 	///</summary>
 	public partial class DeleteIndexRequest 
@@ -2288,7 +2378,7 @@ namespace Nest
 		
 	///<summary>Request parameters for IndicesDeleteAlias
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html
 	///</pre>
 	///</summary>
 	public partial class DeleteAliasRequest 
@@ -2314,7 +2404,7 @@ namespace Nest
 		
 	///<summary>Request parameters for IndicesDeleteMapping
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-delete-mapping.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-delete-mapping.html
 	///</pre>
 	///</summary>
 	public partial class DeleteMappingRequest<T> 
@@ -2332,7 +2422,7 @@ namespace Nest
 		
 	///<summary>Request parameters for IndicesDeleteWarmer
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-warmers.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-warmers.html
 	///</pre>
 	///</summary>
 	public partial class DeleteWarmerRequest 
@@ -2350,7 +2440,7 @@ namespace Nest
 		
 	///<summary>Request parameters for IndicesExists
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-exists.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-exists.html
 	///</pre>
 	///</summary>
 	public partial class IndexExistsRequest 
@@ -2392,7 +2482,7 @@ namespace Nest
 		
 	///<summary>Request parameters for IndicesExistsAliasForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html
 	///</pre>
 	///</summary>
 	public partial class AliasExistsRequest 
@@ -2434,11 +2524,19 @@ namespace Nest
 		
 	///<summary>Request parameters for IndicesExistsTemplateForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-templates.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-templates.html
 	///</pre>
 	///</summary>
 	public partial class TemplateExistsRequest 
 			{
+		
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public string MasterTimeout 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("master_timeout"); } 
+			set { this.Request.RequestParameters.AddQueryString("master_timeout", value); }
+		}
+		
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool Local 
@@ -2452,7 +2550,7 @@ namespace Nest
 		
 	///<summary>Request parameters for IndicesExistsType
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-types-exists.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-types-exists.html
 	///</pre>
 	///</summary>
 	public partial class TypeExistsRequest 
@@ -2494,7 +2592,7 @@ namespace Nest
 		
 	///<summary>Request parameters for IndicesFlushForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-flush.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-flush.html
 	///</pre>
 	///</summary>
 	public partial class FlushRequest 
@@ -2505,14 +2603,6 @@ namespace Nest
 		{ 
 			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("force"); } 
 			set { this.Request.RequestParameters.AddQueryString("force", value); }
-		}
-		
-		
-		///<summary>If set to true a new index writer is created and settings that have been changed related to the index writer will be refreshed. Note: if a full flush is required for a setting to take effect this will be part of the settings update process and it not required to be executed by the user. (This setting can be considered as internal)</summary>
-		public bool Full 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("full"); } 
-			set { this.Request.RequestParameters.AddQueryString("full", value); }
 		}
 		
 		
@@ -2552,7 +2642,7 @@ namespace Nest
 		
 	///<summary>Request parameters for IndicesGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-index.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-get-index.html
 	///</pre>
 	///</summary>
 	public partial class GetIndexRequest 
@@ -2583,9 +2673,9 @@ namespace Nest
 		
 		
 		///<summary>Whether wildcard expressions should get expanded to open or closed indices (default: open)</summary>
-		public  string[] ExpandWildcards 
+		public ExpandWildcards ExpandWildcards 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("expand_wildcards"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
 			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
 		}
 		
@@ -2594,7 +2684,7 @@ namespace Nest
 		
 	///<summary>Request parameters for IndicesGetAliasForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html
 	///</pre>
 	///</summary>
 	public partial class GetAliasRequest 
@@ -2636,7 +2726,7 @@ namespace Nest
 		
 	///<summary>Request parameters for IndicesGetAliasesForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html
 	///</pre>
 	///</summary>
 	public partial class GetAliasesRequest 
@@ -2662,7 +2752,7 @@ namespace Nest
 		
 	///<summary>Request parameters for IndicesGetFieldMappingForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-field-mapping.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-get-field-mapping.html
 	///</pre>
 	///</summary>
 	public partial class GetFieldMappingRequest<T> 
@@ -2712,7 +2802,7 @@ namespace Nest
 		
 	///<summary>Request parameters for IndicesGetMappingForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-mapping.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-get-mapping.html
 	///</pre>
 	///</summary>
 	public partial class GetMappingRequest<T> 
@@ -2735,9 +2825,9 @@ namespace Nest
 		
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public  string[] ExpandWildcards 
+		public ExpandWildcards ExpandWildcards 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("expand_wildcards"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
 			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
 		}
 		
@@ -2754,7 +2844,7 @@ namespace Nest
 		
 	///<summary>Request parameters for IndicesGetSettingsForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-settings.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-get-settings.html
 	///</pre>
 	///</summary>
 	public partial class GetIndexSettingsRequest 
@@ -2846,7 +2936,7 @@ namespace Nest
 		
 	///<summary>Request parameters for IndicesGetWarmerForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-warmers.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-warmers.html
 	///</pre>
 	///</summary>
 	public partial class GetWarmerRequest 
@@ -2888,7 +2978,7 @@ namespace Nest
 		
 	///<summary>Request parameters for IndicesOpen
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-open-close.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-open-close.html
 	///</pre>
 	///</summary>
 	public partial class OpenIndexRequest 
@@ -2938,7 +3028,7 @@ namespace Nest
 		
 	///<summary>Request parameters for IndicesOptimizeForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-optimize.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-optimize.html
 	///</pre>
 	///</summary>
 	public partial class OptimizeRequest 
@@ -3020,7 +3110,7 @@ namespace Nest
 		
 	///<summary>Request parameters for IndicesPutAlias
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html
 	///</pre>
 	///</summary>
 	public partial class PutAliasRequest 
@@ -3046,7 +3136,7 @@ namespace Nest
 		
 	///<summary>Request parameters for IndicesPutMapping
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-put-mapping.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-put-mapping.html
 	///</pre>
 	///</summary>
 	public partial class PutMappingRequest<T> 
@@ -3104,7 +3194,7 @@ namespace Nest
 		
 	///<summary>Request parameters for IndicesPutSettingsForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-update-settings.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-update-settings.html
 	///</pre>
 	///</summary>
 	public partial class UpdateSettingsRequest 
@@ -3154,7 +3244,7 @@ namespace Nest
 		
 	///<summary>Request parameters for IndicesPutTemplateForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-templates.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-templates.html
 	///</pre>
 	///</summary>
 	public partial class PutTemplateRequest 
@@ -3196,7 +3286,7 @@ namespace Nest
 		
 	///<summary>Request parameters for IndicesPutWarmerForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-warmers.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-warmers.html
 	///</pre>
 	///</summary>
 	public partial class PutWarmerRequest 
@@ -3272,7 +3362,7 @@ namespace Nest
 		
 	///<summary>Request parameters for IndicesRefreshForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-refresh.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-refresh.html
 	///</pre>
 	///</summary>
 	public partial class RefreshRequest 
@@ -3322,7 +3412,7 @@ namespace Nest
 		
 	///<summary>Request parameters for IndicesSegmentsForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-segments.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-segments.html
 	///</pre>
 	///</summary>
 	public partial class SegmentsRequest 
@@ -3372,7 +3462,7 @@ namespace Nest
 		
 	///<summary>Request parameters for IndicesStatsForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-stats.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-stats.html
 	///</pre>
 	///</summary>
 	public partial class IndicesStatsRequest 
@@ -3430,7 +3520,7 @@ namespace Nest
 		
 	///<summary>Request parameters for IndicesStatusForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-status.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-status.html
 	///</pre>
 	///</summary>
 	public partial class IndicesStatusRequest 
@@ -3496,7 +3586,7 @@ namespace Nest
 		
 	///<summary>Request parameters for IndicesUpdateAliasesForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-aliases.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html
 	///</pre>
 	///</summary>
 	public partial class AliasRequest 
@@ -3564,7 +3654,7 @@ namespace Nest
 		
 	///<summary>Request parameters for IndicesValidateQueryGetForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-validate.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-validate.html
 	///</pre>
 	///</summary>
 	public partial class ValidateQueryRequest<T> 
@@ -3656,11 +3746,19 @@ namespace Nest
 		
 	///<summary>Request parameters for MgetGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-multi-get.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-multi-get.html
 	///</pre>
 	///</summary>
 	public partial class MultiGetRequest 
 			{
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
 		
 		///<summary>A comma-separated list of fields to return in the response</summary>
 		public IList<PropertyPathMarker> Fields 
@@ -3722,11 +3820,19 @@ namespace Nest
 		
 	///<summary>Request parameters for MltGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-more-like-this.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-more-like-this.html
 	///</pre>
 	///</summary>
 	public partial class MoreLikeThisRequest<T> 
 			{
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
 		
 		///<summary>The boost factor</summary>
 		public double BoostTerms 
@@ -3876,11 +3982,19 @@ namespace Nest
 		
 	///<summary>Request parameters for MpercolateGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-percolate.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-percolate.html
 	///</pre>
 	///</summary>
 	public partial class MultiPercolateRequest 
 			{
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool IgnoreUnavailable 
@@ -3910,11 +4024,19 @@ namespace Nest
 		
 	///<summary>Request parameters for MsearchGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-multi-search.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-multi-search.html
 	///</pre>
 	///</summary>
 	public partial class MultiSearchRequest 
 			{
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
 		
 		///<summary>Search operation type</summary>
 		public SearchType SearchType 
@@ -3933,6 +4055,14 @@ namespace Nest
 	///</summary>
 	public partial class MultiTermVectorsRequest 
 			{
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
 		
 		///<summary>Specifies if total term frequency and document frequency should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
 		public bool TermStatistics 
@@ -4018,7 +4148,7 @@ namespace Nest
 		
 	///<summary>Request parameters for NodesHotThreadsForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-nodes-hot-threads.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-nodes-hot-threads.html
 	///</pre>
 	///</summary>
 	public partial class NodesHotThreadsRequest 
@@ -4048,6 +4178,14 @@ namespace Nest
 		}
 		
 		
+		///<summary>Don&#39;t show threads that are in known-idle places, such as waiting on a socket select or pulling from an empty task queue (default: true)</summary>
+		public bool IgnoreIdleThreads 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("ignore_idle_threads"); } 
+			set { this.Request.RequestParameters.AddQueryString("ignore_idle_threads", value); }
+		}
+		
+		
 		///<summary>The type to sample (default: cpu)</summary>
 		public ThreadType ThreadType 
 		{ 
@@ -4060,7 +4198,7 @@ namespace Nest
 		
 	///<summary>Request parameters for NodesInfoForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-nodes-info.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-nodes-info.html
 	///</pre>
 	///</summary>
 	public partial class NodesInfoRequest 
@@ -4086,7 +4224,7 @@ namespace Nest
 		
 	///<summary>Request parameters for NodesShutdownForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-nodes-shutdown.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-nodes-shutdown.html
 	///</pre>
 	///</summary>
 	public partial class NodesShutdownRequest 
@@ -4112,7 +4250,7 @@ namespace Nest
 		
 	///<summary>Request parameters for NodesStatsForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/cluster-nodes-stats.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-nodes-stats.html
 	///</pre>
 	///</summary>
 	public partial class NodesStatsRequest 
@@ -4178,11 +4316,19 @@ namespace Nest
 		
 	///<summary>Request parameters for PercolateGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-percolate.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-percolate.html
 	///</pre>
 	///</summary>
 	public partial class PercolateRequest<TDocument> 
 			{
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
 		
 		///<summary>A comma-separated list of specific routing values</summary>
 		public  string[] Routing 
@@ -4328,17 +4474,25 @@ namespace Nest
 		
 	///<summary>Request parameters for ScrollGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-request-scroll.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-request-scroll.html
 	///</pre>
 	///</summary>
 	public partial class ScrollRequest 
 			{
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for SearchGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-search.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-search.html
 	///</pre>
 	///</summary>
 	public partial class SearchRequest<T> 
@@ -4630,6 +4784,14 @@ namespace Nest
 	public partial class SearchTemplateRequest<T> 
 			{
 		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool IgnoreUnavailable 
 		{ 
@@ -4690,7 +4852,7 @@ namespace Nest
 		
 	///<summary>Request parameters for SnapshotCreate
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/modules-snapshots.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
 	///</pre>
 	///</summary>
 	public partial class SnapshotRequest 
@@ -4716,7 +4878,7 @@ namespace Nest
 		
 	///<summary>Request parameters for SnapshotCreateRepository
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/modules-snapshots.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
 	///</pre>
 	///</summary>
 	public partial class CreateRepositoryRequest 
@@ -4750,7 +4912,7 @@ namespace Nest
 		
 	///<summary>Request parameters for SnapshotDelete
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/modules-snapshots.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
 	///</pre>
 	///</summary>
 	public partial class DeleteSnapshotRequest 
@@ -4768,7 +4930,7 @@ namespace Nest
 		
 	///<summary>Request parameters for SnapshotDeleteRepository
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/modules-snapshots.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
 	///</pre>
 	///</summary>
 	public partial class DeleteRepositoryRequest 
@@ -4794,7 +4956,7 @@ namespace Nest
 		
 	///<summary>Request parameters for SnapshotGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/modules-snapshots.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
 	///</pre>
 	///</summary>
 	public partial class GetSnapshotRequest 
@@ -4812,7 +4974,7 @@ namespace Nest
 		
 	///<summary>Request parameters for SnapshotGetRepository
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/modules-snapshots.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
 	///</pre>
 	///</summary>
 	public partial class GetRepositoryRequest 
@@ -4838,7 +5000,7 @@ namespace Nest
 		
 	///<summary>Request parameters for SnapshotRestore
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/modules-snapshots.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
 	///</pre>
 	///</summary>
 	public partial class RestoreRequest 
@@ -4908,7 +5070,7 @@ namespace Nest
 		
 	///<summary>Request parameters for Suggest
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-suggesters.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-suggesters.html
 	///</pre>
 	///</summary>
 	public partial class SuggestRequest 
@@ -4971,6 +5133,14 @@ namespace Nest
 	///</summary>
 	public partial class TermvectorRequest<T> 
 			{
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
 		
 		///<summary>Specifies if total term frequency and document frequency should be returned.</summary>
 		public bool TermStatistics 
@@ -5056,7 +5226,7 @@ namespace Nest
 		
 	///<summary>Request parameters for Update
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-update.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-update.html
 	///</pre>
 	///</summary>
 	public partial class UpdateRequest<TDocument,TPartialDocument> 
@@ -5186,7 +5356,7 @@ namespace Nest
 		
 	///<summary>Request parameters for Count
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-count.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-count.html
 	///</pre>
 	///</summary>
 	public partial class CountRequest 
@@ -5252,7 +5422,7 @@ namespace Nest
 		
 	///<summary>Request parameters for Delete
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-delete.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-delete.html
 	///</pre>
 	///</summary>
 	public partial class DeleteRequest 
@@ -5326,7 +5496,7 @@ namespace Nest
 		
 	///<summary>Request parameters for DeleteByQuery
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-delete-by-query.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-delete-by-query.html
 	///</pre>
 	///</summary>
 	public partial class DeleteByQueryRequest 
@@ -5432,7 +5602,7 @@ namespace Nest
 		
 	///<summary>Request parameters for Exists
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-get.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-get.html
 	///</pre>
 	///</summary>
 	public partial class DocumentExistsRequest 
@@ -5482,7 +5652,7 @@ namespace Nest
 		
 	///<summary>Request parameters for ExplainGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-explain.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-explain.html
 	///</pre>
 	///</summary>
 	public partial class ExplainRequest 
@@ -5612,7 +5782,7 @@ namespace Nest
 		
 	///<summary>Request parameters for Get
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-get.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-get.html
 	///</pre>
 	///</summary>
 	public partial class GetRequest 
@@ -5710,7 +5880,7 @@ namespace Nest
 		
 	///<summary>Request parameters for GetSource
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/docs-get.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-get.html
 	///</pre>
 	///</summary>
 	public partial class SourceRequest 
@@ -5800,7 +5970,7 @@ namespace Nest
 		
 	///<summary>Request parameters for IndicesDeleteMapping
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-delete-mapping.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-delete-mapping.html
 	///</pre>
 	///</summary>
 	public partial class DeleteMappingRequest 
@@ -5818,7 +5988,7 @@ namespace Nest
 		
 	///<summary>Request parameters for IndicesGetFieldMappingForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-field-mapping.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-get-field-mapping.html
 	///</pre>
 	///</summary>
 	public partial class GetFieldMappingRequest 
@@ -5868,7 +6038,7 @@ namespace Nest
 		
 	///<summary>Request parameters for IndicesGetMappingForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-get-mapping.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-get-mapping.html
 	///</pre>
 	///</summary>
 	public partial class GetMappingRequest 
@@ -5891,9 +6061,9 @@ namespace Nest
 		
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public  string[] ExpandWildcards 
+		public ExpandWildcards ExpandWildcards 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("expand_wildcards"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
 			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
 		}
 		
@@ -5910,7 +6080,7 @@ namespace Nest
 		
 	///<summary>Request parameters for IndicesPutMapping
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/indices-put-mapping.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-put-mapping.html
 	///</pre>
 	///</summary>
 	public partial class PutMappingRequest 
@@ -5968,7 +6138,7 @@ namespace Nest
 		
 	///<summary>Request parameters for IndicesValidateQueryGetForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-validate.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-validate.html
 	///</pre>
 	///</summary>
 	public partial class ValidateQueryRequest 
@@ -6034,11 +6204,19 @@ namespace Nest
 		
 	///<summary>Request parameters for MltGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-more-like-this.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-more-like-this.html
 	///</pre>
 	///</summary>
 	public partial class MoreLikeThisRequest 
 			{
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
 		
 		///<summary>The boost factor</summary>
 		public double BoostTerms 
@@ -6188,7 +6366,7 @@ namespace Nest
 		
 	///<summary>Request parameters for SearchGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.4/search-search.html
+	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-search.html
 	///</pre>
 	///</summary>
 	public partial class SearchRequest 
@@ -6480,6 +6658,14 @@ namespace Nest
 	public partial class SearchTemplateRequest 
 			{
 		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool IgnoreUnavailable 
 		{ 
@@ -6545,6 +6731,14 @@ namespace Nest
 	///</summary>
 	public partial class TermvectorRequest 
 			{
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
 		
 		///<summary>Specifies if total term frequency and document frequency should be returned.</summary>
 		public bool TermStatistics 

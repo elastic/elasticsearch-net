@@ -116,15 +116,23 @@ namespace Nest.Resolvers.Converters.Aggregations
 				reader.Read();
 			while (reader.TokenType != JsonToken.EndObject)
 			{
-				var percentile = double.Parse(reader.Value as string, CultureInfo.InvariantCulture);
-				reader.Read();
-				var value = reader.Value as double?;
-				percentileItems.Add(new PercentileItem()
+				if ((reader.Value as string).Contains("_as_string"))
 				{
-					Percentile = percentile,
-					Value = value.GetValueOrDefault(0)
-				});
-				reader.Read();
+					reader.Read();
+					reader.Read();
+				}
+				if (reader.TokenType != JsonToken.EndObject)
+				{
+					var percentile = double.Parse(reader.Value as string, CultureInfo.InvariantCulture);
+					reader.Read();
+					var value = reader.Value as double?;
+					percentileItems.Add(new PercentileItem()
+					{
+						Percentile = percentile,
+						Value = value.GetValueOrDefault(0)
+					});
+					reader.Read();
+				}
 			}
 			metric.Items = percentileItems;
 			if (!oldFormat) reader.Read();
@@ -168,35 +176,72 @@ namespace Nest.Resolvers.Converters.Aggregations
 			reader.Read(); reader.Read();
 			var sum = (reader.Value as double?);
 
-			reader.Read();
-			if (reader.TokenType == JsonToken.EndObject)
-				return new StatsMetric()
-				{
-					Average = average,
-					Count = count,
-					Max = max,
-					Min = min,
-					Sum = sum
-				};
-
-			reader.Read();
-			var sumOfSquares = (reader.Value as double?);
-			reader.Read(); reader.Read();
-			var variance = (reader.Value as double?);
-			reader.Read(); reader.Read();
-			var stdVariation = (reader.Value as double?);
-			reader.Read();
-			return new ExtendedStatsMetric()
+			var statsMetric = new StatsMetric()
 			{
 				Average = average,
 				Count = count,
 				Max = max,
 				Min = min,
-				StdDeviation = stdVariation,
-				Sum = sum,
-				SumOfSquares = sumOfSquares,
-				Variance = variance
+				Sum = sum
 			};
+
+			reader.Read();
+
+			if (reader.TokenType == JsonToken.EndObject)
+				return statsMetric;
+
+			while (reader.TokenType != JsonToken.EndObject && (reader.Value as string).Contains("_as_string"))
+			{
+				reader.Read();
+				reader.Read();
+			}
+
+			if (reader.TokenType == JsonToken.EndObject)
+				return statsMetric;
+
+			return GetExtendedStatsAggregation(statsMetric, reader);
+		}
+
+		private IAggregation GetExtendedStatsAggregation(StatsMetric statsMetric, JsonReader reader)
+		{
+			var extendedStatsMetric = new ExtendedStatsMetric()
+			{
+				Average = statsMetric.Average,
+				Count = statsMetric.Count,
+				Max = statsMetric.Max,
+				Min = statsMetric.Min,
+				Sum = statsMetric.Sum
+			};
+
+			reader.Read();
+			extendedStatsMetric.SumOfSquares = (reader.Value as double?);
+			reader.Read(); 
+			reader.Read();
+			extendedStatsMetric.Variance = (reader.Value as double?);
+			reader.Read(); reader.Read();
+			extendedStatsMetric.StdDeviation = (reader.Value as double?);
+			reader.Read();
+
+			if (reader.TokenType != JsonToken.EndObject)
+			{
+				var bounds = new StandardDeviationBounds();
+				reader.Read();
+				reader.Read();
+				if ((reader.Value as string) == "upper")
+				{
+					reader.Read();
+					bounds.Upper = reader.Value as double?;
+				}
+				reader.Read();
+				if ((reader.Value as string) == "lower")
+				{
+					reader.Read();
+					bounds.Lower = reader.Value as double?;
+				}
+				extendedStatsMetric.StdDeviationBounds = bounds;
+			}
+
+			return extendedStatsMetric;
 		}
 
 		private IAggregation GetDateHistogramAggregation(JsonReader reader, JsonSerializer serializer)
@@ -358,6 +403,11 @@ namespace Nest.Resolvers.Converters.Aggregations
 			if (valueMetric.Value != null)
 			{
 				reader.Read();
+				if (reader.TokenType != JsonToken.EndObject)
+				{
+					reader.Read();
+					reader.Read();
+				}
 				return valueMetric;
 			}
 

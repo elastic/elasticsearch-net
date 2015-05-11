@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>NEST</id>
-		<version>1.4.2</version>
+		<version>1.5.0</version>
 		<title>NEST - Elasticsearch Client</title>
 		<authors>Elasticsearch Inc. and contributors</authors>
 		<owners>Elasticsearch Inc.</owners>
@@ -13,7 +13,7 @@
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>Elasticsearch client, strongly typed interface to Elasticsearch. Fluent request builder, mapped responses and powerful query dsl. Uses and exposes Elasticsearch.Net</description>
 		<dependencies>
-			<dependency id="Elasticsearch.Net" version="1.4.2"/>
+			<dependency id="Elasticsearch.Net" version="1.5.0"/>
 			<dependency id="Newtonsoft.Json" version="6.0.1" />
 		</dependencies>
 		<tags>elasticsearch elastic search lucene nest</tags>
@@ -22,10 +22,13 @@
 		<file src="output\Nest\net40\Nest.dll" target="lib"/>
 		<file src="output\Nest\net40\Nest.pdb" target="lib"/>
 		<file src="output\Nest\net40\Nest.XML" target="lib"/>
-		
+
+		<file src="output\Nest\net40\Nest.dll" target="lib\net40"/>
+		<file src="output\Nest\net40\Nest.pdb" target="lib\net40"/>
+		<file src="output\Nest\net40\Nest.XML" target="lib\net40"/>
+
 		<file src="output\Nest\net45\Nest.dll" target="lib\net45"/>
 		<file src="output\Nest\net45\Nest.pdb" target="lib\net45"/>
 		<file src="output\Nest\net45\Nest.XML" target="lib\net45"/>
-		
 	</files>
 </package>

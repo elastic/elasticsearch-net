@@ -79,6 +79,7 @@ namespace Nest.Tests.Unit
 			var file = this.GetFileFromMethod(method, fileName);
 
 			var expected = File.ReadAllText(file);
+			Console.WriteLine(json);
 			//Assert.AreEqual(expected, json);
 			Assert.True(json.JsonEquals(expected), this.PrettyPrint(json));
 		}

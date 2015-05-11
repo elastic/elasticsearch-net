@@ -163,6 +163,7 @@
     <Compile Include="Core\Exists\IndexExistsTests.cs" />
     <Compile Include="Indices\StatsTests.cs" />
     <Compile Include="Core\AsyncTests.cs" />
+    <Compile Include="Mapping\MapFromAttributeTests.cs" />
     <Compile Include="Mapping\MappingVisitorTests.cs" />
     <Compile Include="Mapping\GetMultipleMappingTests.cs" />
     <Compile Include="Reproduce\Reproduce1181Tests.cs" />
@@ -172,12 +173,18 @@
     <Compile Include="Reproduce\Reproduce1176Tests.cs" />
     <Compile Include="Reproduce\Reproduce1193Tests.cs" />
     <Compile Include="Reproduce\Reproduce1236Tests.cs" />
+    <Compile Include="Reproduce\Reproduce1278Tests.cs" />
+    <Compile Include="Reproduce\Reproduce1304Tests.cs" />
+    <Compile Include="Reproduce\Reproduce1317Tests.cs" />
     <Compile Include="Reproduce\Reproduce769Tests.cs" />
     <Compile Include="Reproduce\Reproduce945Tests.cs" />
     <Compile Include="Reproduce\Reproduce953Tests.cs" />
     <Compile Include="Reproduce\Reproduce994Tests.cs" />
     <Compile Include="Reproduce\Reproduce986Tests.cs" />
     <Compile Include="Reproduce\Reproduce960Tests.cs" />
+    <Compile Include="Reproduce\Reproduce1279Tests.cs" />
+    <Compile Include="Search\InnerHitsTests.cs" />
+    <Compile Include="Search\IDocumentTests.cs" />
     <Compile Include="Search\Filter\AndOrNotFilterTests.cs" />
     <Compile Include="Search\Filter\ScriptFilterTests.cs" />
     <Compile Include="Search\Filter\MissingExistsFilterTests.cs" />

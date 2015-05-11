@@ -16,6 +16,9 @@ namespace Nest
 		[JsonProperty("flags")]
 		string Flags { get; set; }
 
+		[JsonProperty(PropertyName = "max_determinized_states")]
+		int? MaximumDeterminizedStates { get; set; }
+
 		PropertyPathMarker Field { get; set; }
 
 		[JsonProperty("boost")]
@@ -29,6 +32,7 @@ namespace Nest
 			container.Regexp = this;
 		}
 
+		public string Name { get; set; }
 		bool IQuery.IsConditionless { get { return false; } }
 		PropertyPathMarker IFieldNameQuery.GetFieldName()
 		{
@@ -42,15 +46,20 @@ namespace Nest
 
 		public string Value { get; set; }
 		public string Flags { get; set; }
+		public int? MaximumDeterminizedStates { get; set; }
 		public PropertyPathMarker Field { get; set; }
 		public double? Boost { get; set; }
 	}
 
 	public class RegexpQueryDescriptor<T> : IRegexpQuery where T : class
 	{
+		private IRegexpQuery Self { get { return this; } }
+
 		string IRegexpQuery.Value { get; set; }
 
 		string IRegexpQuery.Flags { get; set; }
+
+		int? IRegexpQuery.MaximumDeterminizedStates { get; set; }
 
 		PropertyPathMarker IRegexpQuery.Field { get; set; }
 
@@ -60,43 +69,55 @@ namespace Nest
 		{
 			get
 			{
-				return ((IRegexpQuery)this).Field.IsConditionless() || ((IRegexpQuery)this).Value.IsNullOrEmpty();
+				return Self.Field.IsConditionless() || Self.Value.IsNullOrEmpty();
 			}
 		}
 
+		string IQuery.Name { get; set; }
+
 		void IFieldNameQuery.SetFieldName(string fieldName)
 		{
-			((IRegexpQuery)this).Field = fieldName;
+			Self.Field = fieldName;
 		}
 		PropertyPathMarker IFieldNameQuery.GetFieldName()
 		{
-			return ((IRegexpQuery)this).Field;
+			return Self.Field;
 		}
 
+		public RegexpQueryDescriptor<T> Name(string name)
+		{
+			Self.Name = name;
+			return this;
+		}
+		public RegexpQueryDescriptor<T> MaximumDeterminizedStates(int maxDeterminizedStates)
+		{
+			Self.MaximumDeterminizedStates = maxDeterminizedStates;
+			return this;
+		}
 		public RegexpQueryDescriptor<T> Value(string regex)
 		{
-			((IRegexpQuery)this).Value = regex;
+			Self.Value = regex;
 			return this;
 		}
 		public RegexpQueryDescriptor<T> Flags(string flags)
 		{
-			((IRegexpQuery)this).Flags = flags;
+			Self.Flags = flags;
 			return this;
 		}
 		public RegexpQueryDescriptor<T> OnField(string path)
 		{
-			((IRegexpQuery)this).Field = path;
+			Self.Field = path;
 			return this;
 		}
 		public RegexpQueryDescriptor<T> Boost(double boost)
 		{
-			((IRegexpQuery)this).Boost = boost;
+			Self.Boost = boost;
 			return this;
 		}
 
 		public RegexpQueryDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
 		{
-			((IRegexpQuery)this).Field = objectPath;
+			Self.Field = objectPath;
 			return this;
 		}
 

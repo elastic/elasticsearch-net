@@ -21,6 +21,7 @@ namespace Nest
 		{
 			container.Fuzzy = this;
 		}
+		public string Name { get; set; }
 		bool IQuery.IsConditionless { get { return false; } }
 		PropertyPathMarker IFieldNameQuery.GetFieldName() { return this.Field; }
 		void IFieldNameQuery.SetFieldName(string fieldName) { this.Field = fieldName; }
@@ -37,6 +38,8 @@ namespace Nest
 
 	public class FuzzyDateQueryDescriptor<T> : IFuzzyDateQuery where T : class
 	{
+		private IFuzzyDateQuery Self { get { return this; } }
+
 		PropertyPathMarker IFuzzyQuery.Field { get; set; }
 		
 		double? IFuzzyQuery.Boost { get; set; }
@@ -52,75 +55,85 @@ namespace Nest
 		bool? IFuzzyQuery.UnicodeAware { get; set; }
 
 		RewriteMultiTerm? IFuzzyQuery.Rewrite { get; set; }
+		
+		string IQuery.Name { get; set; }
 
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				return ((IFuzzyDateQuery)this).Field.IsConditionless() || ((IFuzzyDateQuery)this).Value == null;
+				return Self.Field.IsConditionless() || Self.Value == null;
 			}
 		}
+
 		void IFieldNameQuery.SetFieldName(string fieldName)
 		{
-			((IFuzzyQuery)this).Field = fieldName;
+			Self.Field = fieldName;
 		}
+
 		PropertyPathMarker IFieldNameQuery.GetFieldName()
 		{
-			return ((IFuzzyQuery)this).Field;
+			return Self.Field;
 		}
-		
+
+		public FuzzyDateQueryDescriptor<T> Name(string name)
+		{
+			Self.Name = name;
+			return this;
+		}
+
 		public FuzzyDateQueryDescriptor<T> OnField(string field)
 		{
-			((IFuzzyDateQuery)this).Field = field;
+			Self.Field = field;
 			return this;
 		}
 		public FuzzyDateQueryDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
 		{
-			((IFuzzyDateQuery)this).Field = objectPath;
+			Self.Field = objectPath;
 			return this;
 		}
 		public FuzzyDateQueryDescriptor<T> Boost(double boost)
 		{
-			((IFuzzyDateQuery)this).Boost = boost;
+			Self.Boost = boost;
 			return this;
 		}
 			
 		public FuzzyDateQueryDescriptor<T> Fuzziness(double fuzziness)
 		{
-			((IFuzzyQuery)this).Fuzziness = fuzziness.ToString(CultureInfo.InvariantCulture);
+			Self.Fuzziness = fuzziness.ToString(CultureInfo.InvariantCulture);
 			return this;
 		}
 		public FuzzyDateQueryDescriptor<T> Fuzziness(string fuzziness)
 		{
-			((IFuzzyQuery)this).Fuzziness = fuzziness;
+			Self.Fuzziness = fuzziness;
 			return this;
 		}
 		public FuzzyDateQueryDescriptor<T> Transpositions(bool enable = true)
 		{
-			((IFuzzyQuery)this).Transpositions = enable;
+			Self.Transpositions = enable;
 			return this;
 		}
 		public FuzzyDateQueryDescriptor<T> UnicodeAware(bool enable = true)
 		{
-			((IFuzzyQuery)this).UnicodeAware = enable;
+			Self.UnicodeAware = enable;
 			return this;
 		}
 		
 		public FuzzyDateQueryDescriptor<T> Rewrite(RewriteMultiTerm rewrite)
 		{
-			((IFuzzyQuery)this).Rewrite = rewrite;
+			Self.Rewrite = rewrite;
 			return this;
 		}
 
 		public FuzzyDateQueryDescriptor<T> MaxExpansions(int maxExpansions)
 		{
-			((IFuzzyQuery)this).MaxExpansions = maxExpansions;
+			Self.MaxExpansions = maxExpansions;
 			return this;
 		}
 
 		public FuzzyDateQueryDescriptor<T> Value(DateTime? value)
 		{
-			((IFuzzyDateQuery)this).Value = value;
+			Self.Value = value;
 			return this;
 		}
 	}

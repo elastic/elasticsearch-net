@@ -34,6 +34,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 			{ wildcard: { name : { value : ""elasticsearch.*"", boost: 1.2 } }}}";
 			Assert.True(json.JsonEquals(expected));
 		}
+
 		[Test]
 		public void TestWildcardWithBoostRewriteQuery()
 		{
@@ -48,5 +49,21 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 			{ wildcard: { name : { value : ""elasticsearch.*"", boost: 1.2, rewrite: ""scoring_boolean"" } }}}";
 			Assert.True(json.JsonEquals(expected), json);
 		}
+
+		[Test]
+		public void TestWildcardNamedQuery()
+		{
+			var s = new SearchDescriptor<ElasticsearchProject>()
+				.From(0)
+				.Size(10)
+				.Query(q => q
+					.Wildcard(w=>w.OnField(p=>p.Name).Value("elasticsearch.*").Name("named_query"))
+				);
+			var json = TestElasticClient.Serialize(s);
+			var expected = @"{ from: 0, size: 10, query : 
+			{ wildcard: { name : { value : ""elasticsearch.*"", _name: ""named_query"" } }}}";
+			Assert.True(json.JsonEquals(expected), json);
+		}
+
 	}
 }

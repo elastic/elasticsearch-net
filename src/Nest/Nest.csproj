@@ -119,6 +119,7 @@
     <Compile Include="Domain\Analysis\TokenFilter\StemmerOverrideTokenFilter.cs" />
     <Compile Include="Domain\Analysis\TokenFilter\UppercaseTokenFilter.cs" />
     <Compile Include="Domain\Bulk\IBulkOperation.cs" />
+    <Compile Include="Domain\Cat\CatSegmentsRecord.cs" />
     <Compile Include="Domain\Cluster\ClusterRerouteDecision.cs" />
     <Compile Include="Domain\Cluster\ClusterRerouteExplanation.cs" />
     <Compile Include="Domain\Cluster\ClusterRerouteParameters.cs" />
@@ -129,6 +130,7 @@
     <Compile Include="Domain\Cat\CatRecoveryRecord.cs" />
     <Compile Include="Domain\Cat\CatPluginsRecord.cs" />
     <Compile Include="Domain\Cat\CatPendingTasksRecord.cs" />
+    <Compile Include="Domain\DSL\IDocument.cs" />
     <Compile Include="Domain\Geo\GeoLocation.cs" />
     <Compile Include="Domain\Geo\GeoPrecision.cs" />
     <Compile Include="Domain\Hit\ExplainGet.cs" />
@@ -151,6 +153,7 @@
     <Compile Include="Domain\Geo\MultiPolygonGeoShape.cs" />
     <Compile Include="Domain\Geo\PointGeoShape.cs" />
     <Compile Include="Domain\Geo\PolygonGeoShape.cs" />
+    <Compile Include="Domain\Mapping\SpecialFields\FieldNamesMapping.cs" />
     <Compile Include="Domain\Mapping\SubMappings\FieldData\FieldDataFilter.cs" />
     <Compile Include="Domain\Mapping\SubMappings\FieldData\FieldDataFrequencyFilter.cs" />
     <Compile Include="Domain\Mapping\SubMappings\FieldData\FieldDataMapping.cs" />
@@ -218,6 +221,7 @@
     <Compile Include="Domain\Stats\PercolateStats.cs" />
     <Compile Include="Domain\Stats\PluginStats.cs" />
     <Compile Include="Domain\Stats\SegmentsStats.cs" />
+    <Compile Include="DSL\CatSegmentsDescriptor.cs" />
     <Compile Include="DSL\ClusterRerouteDescriptor.cs" />
     <Compile Include="DSL\Cluster\AllocateClusterRerouteCommand.cs" />
     <Compile Include="DSL\Cluster\AllocateClusterRerouteCommandDescriptor.cs" />
@@ -238,6 +242,9 @@
     <Compile Include="DSL\Filter\IndicesFilterDescriptor.cs" />
     <Compile Include="Domain\DSL\NoMatchShortcut.cs" />
     <Compile Include="DSL\Query\Functions\WeightFunction.cs" />
+    <Compile Include="DSL\Search\IGlobalInnerHit.cs" />
+    <Compile Include="DSL\Search\IInnerHitsContainer.cs" />
+    <Compile Include="DSL\Search\InnerHitsDescriptor.cs" />
     <Compile Include="DSL\UpgradeDescriptor.cs" />
     <Compile Include="DSL\UpgradeStatusDescriptor.cs" />
     <Compile Include="DSL\VerifyRepositoryDescriptor.cs" />
@@ -867,6 +874,7 @@
     <Compile Include="Resolvers\Converters\GeoShapeConverterBase.cs" />
     <Compile Include="Resolvers\Converters\GetRepositoryResponseConverter.cs" />
     <Compile Include="Resolvers\Converters\MappingTransformConverter.cs" />
+    <Compile Include="Resolvers\Converters\Queries\DismaxQueryJsonConverter.cs" />
     <Compile Include="Resolvers\Converters\Queries\GeoShapeQueryJsonReader.cs" />
     <Compile Include="Resolvers\Converters\SimilarityCollectionConverter.cs" />
     <Compile Include="Resolvers\Converters\FuzzinessConverter.cs" />

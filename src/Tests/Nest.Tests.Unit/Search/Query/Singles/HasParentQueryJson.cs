@@ -14,6 +14,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 				.Size(10)
 				.Query(q => q
 					.HasParent<Person>(fz => fz
+						.Name("named_query")
 						.Query(qq=>qq.Term(f=>f.FirstName, "john"))
 						.Score(ParentScoreType.Score)
                    )
@@ -21,6 +22,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, query : 
 			{ has_parent: { 
+				_name: ""named_query"",
 				type: ""person"",
 				score_type: ""score"",
 				query: {

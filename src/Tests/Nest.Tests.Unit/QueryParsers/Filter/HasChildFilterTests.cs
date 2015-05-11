@@ -16,10 +16,13 @@ namespace Nest.Tests.Unit.QueryParsers.Filter
 				f=>f.HasChild<Person>(d=>d
 					.Query(q => q.Term(p => p.FirstName, "value"))
 					.Filter(q => q.Term(p => p.Age, 42))
-					)
-				);
+					.InnerHits()
+				)
+			);
 
 			var query = hasChildFilter.Query;
+			hasChildFilter.InnerHits.Should().NotBeNull();
+
 			query.Should().NotBeNull();
 			query.Term.Field.Should().Be("firstName");
 

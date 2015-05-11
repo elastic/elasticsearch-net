@@ -96,7 +96,7 @@ namespace Nest.Resolvers.Converters
 			{
 				var descriptor = m.Descriptor.Value;
 				var concreteTypeSelector = descriptor.TypeSelector;
-				var baseType = m.Descriptor.Value.ClrType;
+				var baseType = m.Descriptor.Value.ClrType ?? typeof(object);
 				
 				var generic = MakeDelegateMethodInfo.MakeGenericMethod(baseType);
 

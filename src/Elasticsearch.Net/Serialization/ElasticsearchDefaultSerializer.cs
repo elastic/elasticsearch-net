@@ -27,6 +27,7 @@ namespace Elasticsearch.Net.Serialization
 				return SimpleJson.DeserializeObject<T>(buffer.Utf8String());
 			}
 		}
+
 		public Task<T> DeserializeAsync<T>(Stream stream)
 		{
 			var tcs = new TaskCompletionSource<T>();

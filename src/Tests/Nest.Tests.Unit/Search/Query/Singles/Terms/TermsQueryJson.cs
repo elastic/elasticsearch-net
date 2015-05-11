@@ -54,6 +54,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles.Terms
 				.Size(10)
 				.Query(ff => ff.
 					TermsDescriptor(tq => tq
+						.Name("named_query")
 						.OnField(f=>f.Name)
 						.Terms(new [] {"elasticsearch.pm", "nest"})
 						.MinimumShouldMatch(2)
@@ -67,7 +68,8 @@ namespace Nest.Tests.Unit.Search.Query.Singles.Terms
 						terms: {
 							""name"": [""elasticsearch.pm"", ""nest""],
 							disable_coord : true,
-							minimum_should_match: ""2""
+							minimum_should_match: ""2"",
+							_name: ""named_query""
 						}
 					}
 			}";

@@ -22,8 +22,19 @@ namespace Nest
 		{
 			var j = JObject.Load(reader);
 			if (!j.HasValues) return null;
+			
+			var properties = j.Properties().ToDictionary(kv=>kv.Name, v=>v);
+			if (properties.Count == 0) return null;
+			string namedQuery = null;
+			if (properties.ContainsKey("_name"))
+			{
+				namedQuery = properties["_name"].Value.Value<string>();
+				properties.Remove("_name");
+			}
 
-			var firstProp = j.Properties().FirstOrDefault();
+			if (properties.Count == 0) return null;
+
+			var firstProp = properties.Values.FirstOrDefault();
 			if (firstProp == null) return null;
 
 			var field = firstProp.Name;
@@ -34,6 +45,7 @@ namespace Nest
 			fq.Field = field;
 			fq.Boost = GetPropValue<double?>(jo, "boost");
 			fq.Value = GetPropValue<string>(jo, "value");
+			fq.Name = namedQuery;
 
 			return fq;
 		}
@@ -80,6 +92,12 @@ namespace Nest
 					writer.WriteValue(sq.Boost.Value);
 				}
 				writer.WriteEndObject();
+				if (!sq.Name.IsNullOrEmpty())
+				{
+					writer.WritePropertyName("_name");
+					writer.WriteValue(sq.Name);
+				}
+				
 			}
 			writer.WriteEndObject();
 		}

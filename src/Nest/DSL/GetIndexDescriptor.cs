@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using Elasticsearch.Net;
+using Nest.DSL.Query;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -82,6 +84,12 @@ namespace Nest
 		{
 			Self.Features = features;
 			return this;
+		}
+
+		[Obsolete("Please use the overload taking an enum", true)]
+		public GetIndexDescriptor ExpandWildcards(params string[] expandWildcards)
+		{
+			throw new NotImplementedException();
 		}
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<GetIndexRequestParameters> pathInfo)

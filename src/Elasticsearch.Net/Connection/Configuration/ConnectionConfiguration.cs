@@ -87,6 +87,10 @@ namespace Elasticsearch.Net.Connection
 
 		private bool _usePrettyResponses;
 		bool IConnectionConfigurationValues.UsesPrettyResponses { get { return _usePrettyResponses; } }
+
+		private bool _usePrettyRequests;
+		bool IConnectionConfigurationValues.UsesPrettyRequests { get{ return _usePrettyRequests; } }
+
 #if DEBUG
 		private bool _keepRawResponse = true;
 #else
@@ -150,6 +154,7 @@ namespace Elasticsearch.Net.Connection
 			this._connectionStatusHandler = this.ConnectionStatusDefaultHandler;
 			this._maximumAsyncConnections = 0;
 			this._connectionPool = connectionPool;
+			this._usePrettyRequests = true;
 		}
 
 		public ConnectionConfiguration(Uri uri = null)
@@ -341,6 +346,26 @@ namespace Elasticsearch.Net.Connection
 			this._proxyUsername = username;
 			this._proxyPassword = password;
 			return (T)this;
+		}
+
+		/// <summary>
+		/// Sets <see cref="UsePrettyRequests"/> and <see cref="UsePrettyResponses"/> in one go.
+		/// Whether we want to send and recieve formatted json
+		/// </summary>
+		/// <param name="b"></param>
+		/// <returns></returns>
+		public T PrettyJson(bool b = true)
+		{
+			return this.UsePrettyRequests(b).UsePrettyResponses(b);
+		}
+
+		/// <summary>
+		/// Defaults to true, wether to send formatted json to elasticsearch or not
+		/// </summary>
+		public T UsePrettyRequests(bool b = true)
+		{
+			this._usePrettyRequests = b;
+			return (T) this;
 		}
 
 		/// <summary>

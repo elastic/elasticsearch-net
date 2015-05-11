@@ -14,6 +14,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 				.Size(10)
 				.Query(q => q
 					.SpanNear(sn => sn
+						.Name("named_query")
 						.Clauses(
 							c => c.SpanTerm(f => f.Name, "elasticsearch.pm", 1.1),
 							c => c.SpanFirst(sf => sf
@@ -31,6 +32,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 			var expected = @"{ from: 0, size: 10, query : 
 			{
 				span_near: { 
+					_name: ""named_query"",
 					clauses: 
 					[{
 						span_term: { 

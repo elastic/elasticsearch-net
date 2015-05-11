@@ -102,6 +102,7 @@
     <Compile Include="Cluster\State\StateTests.cs" />
     <Compile Include="Converters\BaseConverterTest.cs" />
     <Compile Include="Converters\FuzzinessConverterTests.cs" />
+    <Compile Include="Core\AttributeBasedMap\IncludeInParentTests.cs" />
     <Compile Include="Core\Bulk\BulkTests.cs" />
     <Compile Include="Core\Bulk\BulkUrlTests.cs" />
     <Compile Include="Core\Indices\Alias\AliasTests.cs" />
@@ -109,6 +110,7 @@
     <Compile Include="Core\Indices\Analysis\TokenFilters\TokenFilterTests.cs" />
     <Compile Include="Core\Indices\Similarity\SimilarityTests.cs" />
     <Compile Include="Core\Map\CustomMapping\ImagePluginMappingTests.cs" />
+    <Compile Include="Core\Map\Enums\EnumMappingTests.cs" />
     <Compile Include="Core\Map\GenericTypes\GenericTypeMappingTests.cs" />
     <Compile Include="Core\Map\GeoShape\GeoShapeMappingTests.cs" />
     <Compile Include="Core\Map\GetMappingSerializationTests.cs" />
@@ -117,6 +119,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Cluster\Reroute\ClusterReroute.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\AttributeBasedMap\TestIncludeInParent.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Core\Bulk\BulkIndexDetailsFixedPath.json">
@@ -178,6 +183,12 @@
     <None Include="Core\Map\CustomMapping\RepresentUnknowImageMappingPlugin.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Core\Map\Enums\EnumCanBeOverriddenAfterMapFromAttributes.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Map\Enums\EnumShouldMapToIntByDefault.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Core\Map\GenericTypes\GenericTypeMapping.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -190,8 +201,10 @@
     <None Include="Core\Map\Properties\MultiFieldPropertyWithJustNamePath.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Compile Include="Core\Map\FieldNamesField\FieldNamesFieldTests.cs" />
     <Compile Include="Core\MultiPercolate\MultiPercolateTests.cs" />
     <Compile Include="Core\Map\Transform\MappingTansformTests.cs" />
+    <Compile Include="Core\Repository\RestoreTests.cs" />
     <Compile Include="Core\Script\DeleteScriptRequestTests.cs" />
     <Compile Include="Core\Script\GetScriptRequestTests.cs" />
     <Compile Include="Core\Script\PutScriptRequestTests.cs" />
@@ -388,10 +401,13 @@
     <Compile Include="QueryParsers\Visitor\DslPrettyPrintVisitor.cs" />
     <Compile Include="QueryParsers\Visitor\VisitorDemoUseCase.cs" />
     <Compile Include="QueryParsers\Visitor\VisitorTests.cs" />
+    <Compile Include="Reproduce\Reproduce1396Tests.cs" />
     <Compile Include="Reproduce\Reproduce1199Tests.cs" />
     <Compile Include="Reproduce\Reproduce1146Tests.cs" />
     <Compile Include="Reproduce\Reproduce629Tests.cs" />
     <Compile Include="Reproduce\Reproduce1187Tests.cs" />
+    <Compile Include="Reproduce\Reproduce901Tests.cs" />
+    <Compile Include="Reproduce\Reproduce1320Tests.cs" />
     <Compile Include="Reproduce\Reproduce990Tests.cs" />
     <Compile Include="Reproduce\Reproduce974Tests.cs" />
     <Compile Include="Reproduce\Reproduce928Tests.cs" />
@@ -439,6 +455,7 @@
     <Compile Include="Search\Query\Singles\SpanMultiTermQueryJson.cs" />
     <Compile Include="Search\Query\Singles\TemplateQueryJson.cs" />
     <Compile Include="Search\Query\Singles\Term\TermToStringJson.cs" />
+    <Compile Include="Search\InnerHits\GlobalInnerHitsTests.cs" />
     <Compile Include="Search\SearchUrlTests.cs" />
     <Compile Include="Search\Rescoring\RescoreTests.cs" />
     <Compile Include="Search\Facets\DateHistogramFacetJson.cs" />
@@ -486,7 +503,7 @@
     <Compile Include="Core\AttributeBasedMap\BaseAttributeMappingTests.cs" />
     <Compile Include="Core\AttributeBasedMap\DeepObjectMappingTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Internals\Inferno\PropertyVisitorTests.cs" />
+    <Compile Include="Internals\Inferno\PropertyPathResolverTests.cs" />
     <Compile Include="Search\Highlight\HighlightTests.cs" />
     <Compile Include="Search\Query\ConditionLess\ConditionLessTests.cs" />
     <Compile Include="Search\Query\ConditionlessBool\ConditionLessBooleanTests.cs" />
@@ -620,6 +637,9 @@
     <None Include="Core\Map\MetaField\MetaFieldSerializes.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Core\Map\FieldNamesField\FieldNamesMapping.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Core\Map\Transform\MultipleTransforms.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -666,6 +686,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Core\MultiPercolate\MultiPercolateJson.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Core\Repository\Restore.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Core\Script\PutScript.json">
@@ -816,6 +839,9 @@
     <None Include="Reproduce\Issue1199Mapping.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Reproduce\EnumQueryDefaultsToInt.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Reproduce\Issue928.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -958,6 +984,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Search\Query\Singles\Term\IntToStringTest.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Search\InnerHits\ComplexInnerHitsSerializes.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Search\Rescoring\RescoreSerializes.json">

@@ -119,6 +119,9 @@ namespace Nest.Resolvers
 			defaultProperties = PropertiesOf<IMultiGetOperation>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IRepository>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<ICreateAliasOperation>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<IInnerHitsContainer>(type, memberSerialization, defaultProperties, lookup);
+			//defaultProperties = PropertiesOf<IGlobalInnerHit>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<IInnerHits>(type, memberSerialization, defaultProperties, lookup);
 			return defaultProperties;
 		}
 

@@ -1,0 +1,25 @@
+{
+  "from": 0,
+  "size": 10,
+  "query": {
+    "match_all": {}
+  },
+  "inner_hits": {
+    "first": {
+      "path": {
+        "followers": {
+          "query": {
+            "match_all": {}
+          },
+          "inner_hits": {
+            "first_first": {
+              "type": {
+                "person": {}
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

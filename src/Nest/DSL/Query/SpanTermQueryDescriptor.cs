@@ -19,8 +19,11 @@ namespace Nest
 		{
 			container.SpanTerm = this;
 		}
+		
+		public string Name { get; set; }
 
 		bool IQuery.IsConditionless { get { return false; } }
+
 		PropertyPathMarker IFieldNameQuery.GetFieldName()
 		{
 			return this.Field;

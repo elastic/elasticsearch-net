@@ -10,5 +10,12 @@
 		public double? SumOfSquares { get; set; }
 		public double? Variance { get; set; }
 		public double? StdDeviation { get; set; }
+		public StandardDeviationBounds StdDeviationBounds { get; set; }
+	}
+
+	public class StandardDeviationBounds
+	{
+		public double? Upper { get; set; }
+		public double? Lower { get; set; }
 	}
 }

@@ -14,13 +14,15 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 			var q = this.SerializeThenDeserialize(
 				f=>f.HasParent,
 				f=>f.HasParent<Person>(hp=>hp
+					.InnerHits()
 					.Query(qq=>Query3)
 					.Score(ParentScoreType.Score)
-					)
-				);
+				)
+			);
 
 			q.Type.Should().Be("person");
 			q.ScoreType.Should().Be(ParentScoreType.Score);
+			q.InnerHits.Should().NotBeNull();
 			AssertIsTermQuery(q.Query, Query3);
 		}
 	}

@@ -28,10 +28,9 @@ namespace Nest
 		IQueryContainer Query { get; set; }
 
 		[JsonProperty(PropertyName = "_cache")]
+		[Obsolete("invalid mapping scheduled to be removed in 2.0")]
 		bool? Cache { get; set; }
 
-		[JsonProperty(PropertyName = "_name")]
-		string Name { get; set; }
 	}
 
 	public class TopChildrenQuery : PlainQuery, ITopChildrenQuery
@@ -47,6 +46,7 @@ namespace Nest
 		public int? Factor { get; set; }
 		public int? IncrementalFactor { get; set; }
 		public IQueryContainer Query { get; set; }
+		[Obsolete("invalid mapping scheduled to be removed in 2.0")]
 		public bool? Cache { get; set; }
 		public string Name { get; set; }
 	}
@@ -59,17 +59,27 @@ namespace Nest
 	/// <typeparam name="T">Type used to strongly type parts of this query</typeparam>
 	public class TopChildrenQueryDescriptor<T> : ITopChildrenQuery where T : class
 	{
+		private ITopChildrenQuery Self { get { return this; }}
+
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				return ((ITopChildrenQuery)this).Query == null || ((ITopChildrenQuery)this).Query.IsConditionless;
+				return Self.Query == null || Self.Query.IsConditionless;
 			}
+		}
+
+		string IQuery.Name { get; set; }
+
+		public TopChildrenQueryDescriptor<T> Name(string name)
+		{
+			Self.Name = name;
+			return this;
 		}
 
 		public TopChildrenQueryDescriptor()
 		{
-			((ITopChildrenQuery)this).Type = TypeNameMarker.Create<T>();
+			Self.Type = TypeNameMarker.Create<T>();
 			
 		}
 
@@ -84,8 +94,6 @@ namespace Nest
 		IQueryContainer ITopChildrenQuery.Query { get; set; }
 
 		bool? ITopChildrenQuery.Cache { get; set; }
-
-		string ITopChildrenQuery.Name { get; set; }
 
 		/// <summary>
 		/// Provide a child query for the top_children query

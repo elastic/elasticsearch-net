@@ -15,6 +15,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles.MultiMatch
 				.Size(10)
 				.Query(q => q
 					.MultiMatch(m=>m
+						.Name("named_query")
 						.OnFields(p=>p.Name, p=>p.Country)
 						.Query("this is a query")
 						.TieBreaker(0.7)
@@ -31,6 +32,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles.MultiMatch
 				.Size(10)
 				.Query(q => q
 					.MultiMatch(m => m
+						.Name("named_query")
 						.OnFieldsWithBoost(f=>f.Add("field1", 1.2).Add("field2",.9))
 						.Query("this is a query")
 					)

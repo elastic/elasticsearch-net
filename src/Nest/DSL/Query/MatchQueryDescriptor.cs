@@ -29,6 +29,9 @@ namespace Nest
 		[JsonProperty(PropertyName = "fuzziness")]
 		IFuzziness Fuzziness { get; set; }
 
+		[JsonProperty(PropertyName = "fuzzy_transpositions")]
+		bool? FuzzyTranspositions { get; set; }
+
 		[JsonProperty(PropertyName = "cutoff_frequency")]
 		double? CutoffFrequency { get; set; }
 
@@ -65,6 +68,7 @@ namespace Nest
 		}
 
 		bool IQuery.IsConditionless { get { return false; } }
+
 		PropertyPathMarker IFieldNameQuery.GetFieldName()
 		{
 			return this.Field;
@@ -75,11 +79,13 @@ namespace Nest
 			this.Field = fieldName;
 		}
 
+		public string Name { get; set; }
 		public string Type { get; set; }
 		public string Query { get; set; }
 		public string Analyzer { get; set; }
 		public RewriteMultiTerm? Rewrite { get; set; }
 		public IFuzziness Fuzziness { get; set; }
+		public bool? FuzzyTranspositions { get; set; }
 		public double? CutoffFrequency { get; set; }
 		public int? PrefixLength { get; set; }
 		public int? MaxExpansions { get; set; }
@@ -110,6 +116,7 @@ namespace Nest
 		RewriteMultiTerm? IMatchQuery.Rewrite { get; set; }
 
 		IFuzziness IMatchQuery.Fuzziness { get; set; }
+		bool? IMatchQuery.FuzzyTranspositions { get; set; }
 
 		double? IMatchQuery.CutoffFrequency { get; set; }
 
@@ -134,6 +141,8 @@ namespace Nest
 				return Self.Field.IsConditionless() || Self.Query.IsNullOrEmpty();
 			}
 		}
+		string IQuery.Name { get; set; }
+
 		void IFieldNameQuery.SetFieldName(string fieldName)
 		{
 			Self.Field = fieldName;
@@ -143,6 +152,11 @@ namespace Nest
 			return Self.Field;
 		}
 
+		public MatchQueryDescriptor<T> Name(string name)
+		{
+			Self.Name = name;
+			return this;
+		}
 		public MatchQueryDescriptor<T> OnField(string field)
 		{
 			Self.Field = field;
@@ -190,6 +204,13 @@ namespace Nest
 			return this;
 		}
 		
+
+		public MatchQueryDescriptor<T> FuzzyTranspositions(bool fuzzyTranspositions = true)
+		{
+			Self.FuzzyTranspositions = fuzzyTranspositions;
+			return this;
+		}
+
 		public MatchQueryDescriptor<T> CutoffFrequency(double cutoffFrequency)
 		{
 			Self.CutoffFrequency = cutoffFrequency;

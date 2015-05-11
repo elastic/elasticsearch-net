@@ -90,7 +90,7 @@ namespace Nest
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		public Dictionary<string, ObjectMapping> Mappings { get; internal set; }
 
-		//[JsonProperty("aliases")]
-		//public ?? Aliases { get; internal set; }
+		[JsonProperty("aliases")]
+		public IEnumerable<string> Aliases { get; internal set; }
 	}
 }

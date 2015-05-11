@@ -23,6 +23,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles.GeoShape
 						.OnField(p => p.MyGeoShape)
 						.Coordinates(new[] { -45.0, 45.0 })
 						.Radius("100m")
+						.Name("named_query")
 					)
 			);
 

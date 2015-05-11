@@ -20,6 +20,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles.GeoShape
 				.Size(10)
 				.Query(q => q
 					.GeoShapeMultiPoint(qs => qs
+						.Name("named_query")
 						.OnField(p => p.MyGeoShape)
 						.Coordinates(new[] { new[] { 13.0, 53.0 }, new[] { 14.0, 52.0 } })
 					)

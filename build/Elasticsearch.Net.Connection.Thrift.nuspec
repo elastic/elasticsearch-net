@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
 		<id>Elasticsearch.Net.Connection.Thrift</id>
-		<version>1.4.2</version>
+		<version>1.5.0</version>
 		<title>Elasticsearch.Net.Connection.Thrift - Thrift support for Elasticsearch.Net</title>
 		<authors>Elasticsearch Inc. and contributors</authors>
 		<owners>Elasticsearch Inc.</owners>
@@ -13,7 +13,7 @@
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>An IConnection implementation that utilizes Apache Thrift to talk with elasticsearch</description>
 		<dependencies>
-			<dependency id="Elasticsearch.Net" version="1.4.2"/>
+			<dependency id="Elasticsearch.Net" version="1.5.0"/>
 		</dependencies>
 		<tags>elasticsearch elastic search lucene thrift nest</tags>
 	</metadata>
@@ -21,10 +21,13 @@
 		<file src="output\Elasticsearch.Net.Connection.Thrift\net40\Elasticsearch.Net.Connection.Thrift.dll" target="lib"/>
 		<file src="output\Elasticsearch.Net.Connection.Thrift\net40\Elasticsearch.Net.Connection.Thrift.pdb" target="lib"/>
 		<file src="output\Elasticsearch.Net.Connection.Thrift\net40\Elasticsearch.Net.Connection.Thrift.XML" target="lib"/>
-		
+
+		<file src="output\Elasticsearch.Net.Connection.Thrift\net40\Elasticsearch.Net.Connection.Thrift.dll" target="lib\net40"/>
+		<file src="output\Elasticsearch.Net.Connection.Thrift\net40\Elasticsearch.Net.Connection.Thrift.pdb" target="lib\net40"/>
+		<file src="output\Elasticsearch.Net.Connection.Thrift\net40\Elasticsearch.Net.Connection.Thrift.XML" target="lib\net40"/>
+
 		<file src="output\Elasticsearch.Net.Connection.Thrift\net45\Elasticsearch.Net.Connection.Thrift.dll" target="lib\net45"/>
 		<file src="output\Elasticsearch.Net.Connection.Thrift\net45\Elasticsearch.Net.Connection.Thrift.pdb" target="lib\net45"/>
 		<file src="output\Elasticsearch.Net.Connection.Thrift\net45\Elasticsearch.Net.Connection.Thrift.XML" target="lib\net45"/>
-
 	</files>
 </package>

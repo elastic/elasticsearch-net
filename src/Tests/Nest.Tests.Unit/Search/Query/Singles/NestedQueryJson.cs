@@ -14,6 +14,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 				.Size(10)
 				.Query(ff=>ff
 					.Nested(n=>n
+						.Name("named_query")
 						.Path(f=>f.Followers[0])
 						.Query(q=>q.Term(f=>f.Followers[0].FirstName,"elasticsearch.pm"))
 					)
@@ -23,6 +24,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 			var expected = @"{ from: 0, size: 10, 
 				query : {
 					nested: {
+						_name: ""named_query"",
 						query: {
 							term: {
 								""followers.firstName"": { value: ""elasticsearch.pm"" }

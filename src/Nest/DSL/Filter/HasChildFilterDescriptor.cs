@@ -18,6 +18,11 @@ namespace Nest
 
 		[JsonProperty("filter")]
 		IFilterContainer Filter { get; set; }
+
+		[JsonProperty("inner_hits")]
+		[JsonConverter(typeof(ReadAsTypeConverter<InnerHits>))]
+		IInnerHits InnerHits { get; set; }
+
 	}
 	
 	public class HasChildFilter : PlainFilter, IHasChildFilter
@@ -30,25 +35,22 @@ namespace Nest
 		public TypeNameMarker Type { get; set; }
 		public IQueryContainer Query { get; set; }
 		public IFilterContainer Filter { get; set; }
+		public IInnerHits InnerHits { get; set; }
 	}
 
 	public class HasChildFilterDescriptor<T> : FilterBase, IHasChildFilter where T : class
 	{
+		private IHasChildFilter Self { get { return this; } }
+
 		bool IFilter.IsConditionless
 		{
 			get
 			{
-				var hf = ((IHasChildFilter)this);
-				if (hf.Type.IsNullOrEmpty())
-					return true;
-
-				if (hf.Query == null && hf.Filter == null)
-					return true;
-				if (hf.Filter == null && hf.Query != null)
-					return hf.Query.IsConditionless;
-				if (hf.Filter != null && hf.Query == null)
-					return hf.Filter.IsConditionless;
-				return hf.Query.IsConditionless && hf.Filter.IsConditionless;
+				if (Self.Type.IsNullOrEmpty()) return true;
+				if (Self.Query == null && Self.Filter == null) return true;
+				if (Self.Filter == null && Self.Query != null) return Self.Query.IsConditionless;
+				if (Self.Filter != null && Self.Query == null) return Self.Filter.IsConditionless;
+				return Self.Query.IsConditionless && Self.Filter.IsConditionless;
 			}
 		}
 
@@ -58,28 +60,43 @@ namespace Nest
 
 		IFilterContainer IHasChildFilter.Filter { get; set; }
 
+		IInnerHits IHasChildFilter.InnerHits { get; set; }
+
 		public HasChildFilterDescriptor()
 		{
-			((IHasChildFilter)this).Type = TypeNameMarker.Create<T>();
+			Self.Type = TypeNameMarker.Create<T>();
 		}
 
 		public HasChildFilterDescriptor<T> Query(Func<QueryDescriptor<T>, QueryContainer> querySelector)
 		{
 			var q = new QueryDescriptor<T>();
-			((IHasChildFilter)this).Query = querySelector(q);
+			Self.Query = querySelector(q);
 			return this;
 		}
 
 		public HasChildFilterDescriptor<T> Filter(Func<FilterDescriptor<T>, FilterContainer> filterSelector)
 		{
 			var f = new FilterDescriptor<T>();
-			((IHasChildFilter) this).Filter = filterSelector(f);
+			Self.Filter = filterSelector(f);
 			return this;
 		}
 
 		public HasChildFilterDescriptor<T> Type(string type)
 		{
-			((IHasChildFilter)this).Type = type;
+			Self.Type = type;
+			return this;
+		}
+
+		public HasChildFilterDescriptor<T> InnerHits()
+		{
+			Self.InnerHits = new InnerHits();
+			return this;
+		}
+
+		public HasChildFilterDescriptor<T> InnerHits(Func<InnerHitsDescriptor<T>, IInnerHits> innerHitsSelector)
+		{
+			if (innerHitsSelector == null) return this;
+			Self.InnerHits = innerHitsSelector(new InnerHitsDescriptor<T>());
 			return this;
 		}
 	}

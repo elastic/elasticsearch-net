@@ -24,6 +24,8 @@ namespace Nest
 
 		public string NormField { get; internal set; }
 
+		public string Name { get; set; }
+
 		bool IQuery.IsConditionless { get { return false; } }
 
 		protected override void WrapInContainer(IQueryContainer container)

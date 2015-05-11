@@ -54,5 +54,21 @@ namespace Nest.Tests.Integration.Search.FieldTests
 			}
 
 		}
+
+		[Test]
+		public void FielddataFieldsTest()
+		{
+			var result = this.Client.Search<ElasticsearchProject>(s => s
+				.FielddataFields(p => p.Name)
+			);
+
+			result.IsValid.Should().BeTrue();
+			
+			foreach(var hit in result.Hits)
+			{
+				var fieldValues = hit.Fields.FieldValues<string[]>("name");
+				fieldValues.Should().NotBeEmpty();
+			}
+		}
 	}
 }

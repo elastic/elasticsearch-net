@@ -47,7 +47,7 @@ namespace Nest
 		public ElasticInferrer(IConnectionSettingsValues connectionSettings)
 		{
 			this._connectionSettings = connectionSettings;
-			this.IdResolver = new IdResolver();
+			this.IdResolver = new IdResolver(this._connectionSettings);
 			this.IndexNameResolver = new IndexNameResolver(this._connectionSettings);
 			this.TypeNameResolver = new TypeNameResolver(this._connectionSettings);
 			this.PropertyNameResolver = new PropertyNameResolver(this._connectionSettings);
@@ -127,11 +127,6 @@ namespace Nest
 		public string Id<T>(T obj) where T : class
 		{
 			if (obj == null) return null;
-			
-			string idProperty;
-			this._connectionSettings.IdProperties.TryGetValue(typeof(T), out idProperty);
-			if (!idProperty.IsNullOrEmpty())
-				return this.IdResolver.GetIdFor(obj, idProperty);
 			
 			return this.IdResolver.GetIdFor(obj);
 		}

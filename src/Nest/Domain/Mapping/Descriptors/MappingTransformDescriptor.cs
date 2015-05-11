@@ -16,6 +16,12 @@ namespace Nest
 			return this;
 		}
 
+        public MappingTransformDescriptor ScriptFile(string scriptFile)
+        {
+            this._mappingTransform.ScriptFile = scriptFile;
+            return this;
+        }
+
 		public MappingTransformDescriptor Params(IDictionary<string, string> parameters)
 		{
 			this._mappingTransform.Parameters = parameters;

@@ -42,7 +42,8 @@ namespace Nest
 		{
 			container.FuzzyLikeThis = this;
 		}
-
+			
+		public string Name { get; set; }
 		bool IQuery.IsConditionless { get { return false; } }
 		public IEnumerable<PropertyPathMarker> Fields { get; set; }
 		public string LikeText { get; set; }
@@ -56,6 +57,8 @@ namespace Nest
 
 	public class FuzzyLikeThisQueryDescriptor<T> : IFuzzyLikeThisQuery where T : class
 	{
+		private IFuzzyLikeThisQuery Self { get { return this; }}
+
 		IEnumerable<PropertyPathMarker> IFuzzyLikeThisQuery.Fields { get; set; }
 		
 		string IFuzzyLikeThisQuery.LikeText { get; set; }
@@ -76,54 +79,62 @@ namespace Nest
 		{
 			get
 			{
-				return ((IFuzzyLikeThisQuery)this).LikeText.IsNullOrEmpty();
+				return Self.LikeText.IsNullOrEmpty();
 			}
+		}
+
+		string IQuery.Name { get; set; }
+
+		public FuzzyLikeThisQueryDescriptor<T> Name(string name)
+		{
+			Self.Name = name;
+			return this;
 		}
 
 		public FuzzyLikeThisQueryDescriptor<T> OnFields(IEnumerable<string> fields)
 		{
-			((IFuzzyLikeThisQuery)this).Fields = fields.Select(f=>(PropertyPathMarker)f);
+			Self.Fields = fields.Select(f=>(PropertyPathMarker)f);
 			return this;
 		}
 		public FuzzyLikeThisQueryDescriptor<T> OnFields(
 			params Expression<Func<T, object>>[] objectPaths)
 		{
-			((IFuzzyLikeThisQuery)this).Fields = objectPaths.Select(e=>(PropertyPathMarker)e);
+			Self.Fields = objectPaths.Select(e=>(PropertyPathMarker)e);
 			return this;
 		}
 		public FuzzyLikeThisQueryDescriptor<T> LikeText(string likeText)
 		{
-			((IFuzzyLikeThisQuery)this).LikeText = likeText;
+			Self.LikeText = likeText;
 			return this;
 		}
 		public FuzzyLikeThisQueryDescriptor<T> IgnoreTermFrequency(bool ignore = true)
 		{
-			((IFuzzyLikeThisQuery)this).IgnoreTermFrequency = ignore;
+			Self.IgnoreTermFrequency = ignore;
 			return this;
 		}
 		public FuzzyLikeThisQueryDescriptor<T> MinimumSimilarity(double minSimilarity)
 		{
-			((IFuzzyLikeThisQuery)this).MinSimilarity = minSimilarity;
+			Self.MinSimilarity = minSimilarity;
 			return this;
 		}
 		public FuzzyLikeThisQueryDescriptor<T> MaxQueryTerms(int maxQueryTerms)
 		{
-			((IFuzzyLikeThisQuery)this).MaxQueryTerms = maxQueryTerms;
+			Self.MaxQueryTerms = maxQueryTerms;
 			return this;
 		}
 		public FuzzyLikeThisQueryDescriptor<T> PrefixLength(int prefixLength)
 		{
-			((IFuzzyLikeThisQuery)this).PrefixLength = prefixLength;
+			Self.PrefixLength = prefixLength;
 			return this;
 		}
 		public FuzzyLikeThisQueryDescriptor<T> Boost(double boost)
 		{
-			((IFuzzyLikeThisQuery)this).Boost = boost;
+			Self.Boost = boost;
 			return this;
 		}
 		public FuzzyLikeThisQueryDescriptor<T> Analyzer(string analyzer)
 		{
-			((IFuzzyLikeThisQuery)this).Analyzer = analyzer;
+			Self.Analyzer = analyzer;
 			return this;
 		}
 	

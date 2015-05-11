@@ -27,6 +27,7 @@ namespace Nest
 			container.Terms = this;
 		}
 
+		public string Name { get; set; }
 		bool IQuery.IsConditionless { get { return false; } }
 		public PropertyPathMarker Field { get; set; }
 		public string MinimumShouldMatch { get; set; }
@@ -44,6 +45,7 @@ namespace Nest
 	/// <typeparam name="K">The type of the field that we want to specfify terms for</typeparam>
 	public class TermsQueryDescriptor<T, K> : ITermsQuery where T : class
 	{
+		private ITermsQuery Self { get { return this; }}
 		PropertyPathMarker ITermsQuery.Field { get; set; }
 		string ITermsQuery.MinimumShouldMatch { get; set; }
 		bool? ITermsQuery.DisableCoord { get; set; }
@@ -55,33 +57,39 @@ namespace Nest
 		{
 			get
 			{
-				var termsQuery = ((ITermsQuery)this);
-				return termsQuery.Field.IsConditionless() 
-					|| (!termsQuery.Terms.HasAny() && termsQuery.ExternalField == null);
+				return Self.Field.IsConditionless() 
+					|| (!Self.Terms.HasAny() && Self.ExternalField == null);
 			}
 		}
-	
+
+		string IQuery.Name { get; set; }
+
+		public TermsQueryDescriptor<T, K> Name(string name)
+		{
+			Self.Name = name;
+			return this;
+		}
 		public TermsQueryDescriptor<T, K> Boost(double boost)
 		{
-			((ITermsQuery)this).Boost = boost;
+			Self.Boost = boost;
 			return this;
 		}
 
 		public TermsQueryDescriptor<T, K> OnField(string field)
 		{
-			((ITermsQuery)this).Field = field;
+			Self.Field = field;
 			return this;
 		}
 
 		public TermsQueryDescriptor<T, K> OnField(PropertyPathMarker field)
 		{
-			((ITermsQuery)this).Field = field;
+			Self.Field = field;
 			return this;
 		}
 
 		public TermsQueryDescriptor<T, K> OnField(Expression<Func<T, K>> objectPath)
 		{
-			((ITermsQuery)this).Field = objectPath;
+			Self.Field = objectPath;
 			return this;
 		}
 
@@ -92,25 +100,25 @@ namespace Nest
 		{
 			externalFieldSelector.ThrowIfNull("externalFieldSelector");
 			var descriptor = externalFieldSelector(new ExternalFieldDeclarationDescriptor<TOther>());
-			((ITermsQuery)this).ExternalField = descriptor;
+			Self.ExternalField = descriptor;
 			return this;
 		}
 
 		public TermsQueryDescriptor<T, K> MinimumShouldMatch(string minMatch)
 		{
-			((ITermsQuery)this).MinimumShouldMatch = minMatch;
+			Self.MinimumShouldMatch = minMatch;
 			return this;
 		}
 		public TermsQueryDescriptor<T, K> MinimumShouldMatch(int minMatch)
 		{
-			((ITermsQuery)this).MinimumShouldMatch = minMatch.ToString(CultureInfo.InvariantCulture);
+			Self.MinimumShouldMatch = minMatch.ToString(CultureInfo.InvariantCulture);
 			return this;
 		}
 
 
 		public TermsQueryDescriptor<T, K> DisableCoord()
 		{
-			((ITermsQuery)this).DisableCoord = true;
+			Self.DisableCoord = true;
 			return this;
 		}
 
@@ -120,7 +128,7 @@ namespace Nest
 			if (terms.HasAny())
 				terms = terms.Where(t => !t.IsNullOrEmpty());
 
-			((ITermsQuery)this).Terms = terms;
+			Self.Terms = terms;
 			return this;
 		}
 		public TermsQueryDescriptor<T, K> Terms(IEnumerable<K> terms)
@@ -128,7 +136,7 @@ namespace Nest
 			if (terms.HasAny())
 				terms = terms.Where(t => t != null).ToArray();
 
-			((ITermsQuery)this).Terms = terms.Cast<object>();
+			Self.Terms = terms.Cast<object>();
 			return this;
 		}
 

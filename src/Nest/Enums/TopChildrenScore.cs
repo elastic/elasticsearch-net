@@ -15,8 +15,8 @@ namespace Nest
 		[EnumMember(Value = "sum")]
 		Sum,
 		[EnumMember(Value = "avg")]
-		Average
+		Average,
+		[EnumMember(Value = "min")]
+		Min
 	}
-
-	
 }

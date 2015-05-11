@@ -22,6 +22,8 @@ namespace Nest
 			container.Prefix = this;
 		}
 
+		public string Name { get; set; }
+
 		bool IQuery.IsConditionless { get { return false; } }
 		PropertyPathMarker IFieldNameQuery.GetFieldName()
 		{

@@ -227,12 +227,6 @@ namespace Nest.Tests.Unit.Search.Query.ConditionLessStrict
 		}
 
 		[Test]
-		public void Ids()
-		{
-			this.DoConditionlessQuery(q => q.Ids(null));
-		}
-
-		[Test]
 		public void IdsArray()
 		{
 			this.DoConditionlessQuery(q => q.Ids(new string[] { string.Empty }));

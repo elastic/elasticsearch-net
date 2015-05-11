@@ -40,16 +40,21 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "weight")]
 		double? WeightAsDouble { get; set; }
+
+		[JsonProperty(PropertyName = "min_score")]
+		float? MinScore { get; set; }
 	}
 
 	public class FunctionScoreQuery : PlainQuery, IFunctionScoreQuery
 	{
+
 		protected override void WrapInContainer(IQueryContainer container)
 		{
 			container.FunctionScore = this;
 		}
 
 		bool IQuery.IsConditionless { get { return false; } }
+		public string Name { get; set; }
 		public IEnumerable<IFunctionScoreFunction> Functions { get; set; }
 		public IQueryContainer Query { get; set; }
 		public FunctionScoreMode? ScoreMode { get; set; }
@@ -65,6 +70,7 @@ namespace Nest
 		}
 
 		public double? WeightAsDouble { get; set; }
+		public float? MinScore { get; set; }
 	}
 
 	public class FunctionScoreQueryDescriptor<T> : IFunctionScoreQuery where T : class
@@ -93,16 +99,34 @@ namespace Nest
 
 		// TODO: Remove in 2.0 and change Weight to double
 		double? IFunctionScoreQuery.WeightAsDouble { get; set; }
+		float? IFunctionScoreQuery.MinScore { get; set; }
+
+		string IQuery.Name { get; set; }
+
+		private bool _forcedConditionless = false;
 
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				return (Self.Query == null || Self.Query.IsConditionless)
+				return _forcedConditionless || ((Self.Query == null || Self.Query.IsConditionless)
 					&& Self.RandomScore == null 
 					&& Self.ScriptScore == null 
-					&& !Self.Functions.HasAny();
+					&& !Self.Functions.HasAny());
 			}
+		}
+
+		public FunctionScoreQueryDescriptor<T> ConditionlessWhen(bool isConditionless)
+		{
+			this._forcedConditionless = isConditionless;
+			return this;
+		}
+
+
+		public FunctionScoreQueryDescriptor<T> Name(string name)
+		{
+			Self.Name = name;
+			return this;
 		}
 
 		public FunctionScoreQueryDescriptor<T> Query(Func<QueryDescriptor<T>, QueryContainer> querySelector)
@@ -181,6 +205,12 @@ namespace Nest
 		public FunctionScoreQueryDescriptor<T> Weight(long weight)
 		{
 			Self.Weight = weight;
+			return this;
+		}
+
+		public FunctionScoreQueryDescriptor<T> MinScore(float minScore)
+		{
+			Self.MinScore = minScore;
 			return this;
 		}
 	}
