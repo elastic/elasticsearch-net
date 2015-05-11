@@ -18,12 +18,19 @@ namespace Nest
 
 	internal static class SuggestPathInfo
 	{
-		public static void Update(ElasticsearchPathInfo<SuggestRequestParameters> pathInfo, ISuggestRequest request, string indexName)
+		public static void Update(ElasticsearchPathInfo<SuggestRequestParameters> pathInfo, ISuggestRequest request)
 		{
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
+		}
 
-			if (!string.IsNullOrEmpty(indexName))
-				pathInfo.Index = indexName;
+		public static void Update<T>(ElasticsearchPathInfo<SuggestRequestParameters> pathInfo, ISuggestRequest request, IConnectionSettingsValues connectionSettingsValues)
+			where T : class
+		{
+			Update(pathInfo, request);
+
+			pathInfo.Index = string.IsNullOrEmpty(connectionSettingsValues.Inferrer.IndexName<T>()) ?
+				typeof(T).Name.ToLower() :
+				connectionSettingsValues.Inferrer.IndexName<T>();
 		}
 
 		public static object GetCustomJson(ISuggestRequest suggestRequest)
@@ -64,7 +71,7 @@ namespace Nest
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SuggestRequestParameters> pathInfo)
 		{
-			SuggestPathInfo.Update(pathInfo, this, string.Empty);
+			SuggestPathInfo.Update(pathInfo, this);
 		}
 
 		object ICustomJson.GetCustomJson() { return SuggestPathInfo.GetCustomJson(this); }
@@ -143,7 +150,7 @@ namespace Nest
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SuggestRequestParameters> pathInfo)
 		{
-			SuggestPathInfo.Update(pathInfo, this, settings.Inferrer.IndexName<T>());
+			SuggestPathInfo.Update<T>(pathInfo, this, settings);
 		}
 
 	}
