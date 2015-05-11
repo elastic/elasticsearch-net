@@ -1,0 +1,53 @@
+﻿{
+  "version": "1.0.0-*",
+  "dependencies": {
+  },
+
+  "frameworks": {
+    "net45": {
+      "compilationOptions": {
+        "define": [ "NET45" ]
+      },
+      "frameworkAssemblies": {
+        "System.Runtime.Serialization": "",
+        "System.Net.Http": "",
+        "System.IO": "",
+        "System.Threading.Tasks": "",
+        "System.Runtime": ""
+      }
+    },
+    "dnxcore50": {
+      "dependencies": {
+        "System.Runtime": "4.0.20-beta-*",
+        "System.Runtime.Extensions": "4.0.10-beta-*",
+        "System.Runtime.Handles": "4.0.0-beta-*",
+        "System.Reflection": "4.0.10-beta-*",
+        "System.Reflection.Extensions": "4.0.0-beta-*",
+        "System.Reflection.TypeExtensions": "4.0.0-beta-*",
+        "System.Reflection.MetaData": "1.0.17-*",
+        "System.Reflection.Primitives": "4.0.0-beta-*",
+        "System.Collections.Specialized": "4.0.0-beta-*",
+        "System.Collections.Concurrent": "4.0.0-beta-*",
+        "System.Linq": "4.0.0-beta-*",
+        "System.Threading": "4.0.0-beta-*",
+        "System.IO": "4.0.10-beta-*",
+        "System.IO.Compression": "4.0.0-beta-*",
+        "System.Security.Cryptography.Encoding": "4.0.0-beta-*",
+        "System.Collections": "4.0.10-beta-*",
+        "System.Dynamic.Runtime": "4.0.0-beta-*",
+        "System.Globalization": "4.0.10-beta-*",
+        "System.Globalization.Extensions": "4.0.0-beta-*",
+        "System.Runtime.Serialization.Primitives": "4.0.0-beta-*",
+        "System.Diagnostics.Contracts": "4.0.0-beta-*",
+        "System.Text.RegularExpressions": "4.0.10-beta-*",
+        "System.Security.Cryptography.X509Certificates": "4.0.0-beta-*",
+        "Microsoft.CSharp": "4.0.0-beta-*",
+        "System.ComponentModel.TypeConverter": "4.0.0-beta-*",
+        "System.Diagnostics.TraceSource": "4.0.0-beta-*",
+        "System.Net.Http": "4.0.0-beta-*",
+        "System.Net.Primitives": "4.0.10-beta-*",
+        "System.Net.NetworkInformation": "4.0.10-beta-*"
+      }
+    }
+  }
+}

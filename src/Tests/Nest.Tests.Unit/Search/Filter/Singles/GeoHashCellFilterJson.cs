@@ -12,7 +12,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
             var s = new SearchDescriptor<ElasticsearchProject>()
                 .From(0)
                 .Size(10)
-                .Filter(filter => filter
+                .PostFilter(filter => filter
                     .Cache(true)
                     .Name("my_geo_hash_cell_filter")
                     .GeoHashCell(f => f.Origin, d => d
@@ -23,7 +23,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 
             var json = TestElasticClient.Serialize(s);
             var expected = @"{ from: 0, size: 10, 
-                filter : {
+                post_filter : {
                             geohash_cell: {
                                 origin: ""{ lat: 13.408, lon: 52.5186 }"",
                                 precision: 3,

@@ -111,7 +111,7 @@ namespace Nest
 		}
 
 
-		public BulkCreateDescriptor<T> Version(string version)
+        public BulkCreateDescriptor<T> Version(long? version)
 		{
 			Self.Version = version; 
 			return this;

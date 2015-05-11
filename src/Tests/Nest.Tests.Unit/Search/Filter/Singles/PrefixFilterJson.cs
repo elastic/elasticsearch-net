@@ -12,13 +12,13 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
-				.Filter(ff=>ff
+				.PostFilter(ff=>ff
 					.Prefix(f=>f.Name, "elast")
 				);
 				
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
-				filter : {
+				post_filter : {
 						prefix: {
 							""name"": ""elast""
 						}
@@ -33,7 +33,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
-				.Filter(ff => ff
+				.PostFilter(ff => ff
 					.Cache(false)
 					.Name("prefix_filter")
 					.Prefix(f => f.Name, "elast")
@@ -41,7 +41,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
-				filter : {
+				post_filter : {
 						prefix: {
 							""name"": ""elast"",
 							_cache:false,

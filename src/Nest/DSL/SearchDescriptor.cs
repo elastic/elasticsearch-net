@@ -45,7 +45,7 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "sort")]
 		[JsonConverter(typeof(SortCollectionConverter))]
-		IList<KeyValuePair<PropertyPathMarker, ISort>> Sort { get; set; }
+		IList<ISort> Sort { get; set; }
 
 		[JsonProperty(PropertyName = "facets")]
 		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
@@ -82,9 +82,9 @@ namespace Nest
 		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryContainer>, CustomJsonConverter>))]
 		IQueryContainer Query { get; set; }
 
-		[JsonProperty(PropertyName = "filter")]
+		[JsonProperty(PropertyName = "post_filter")]
 		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<FilterContainer>, CustomJsonConverter>))]
-		IFilterContainer Filter { get; set; }
+		IFilterContainer PostFilter { get; set; }
 
 		[JsonProperty(PropertyName = "inner_hits")]
 		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
@@ -161,9 +161,9 @@ namespace Nest
 		public IList<PropertyPathMarker> FielddataFields { get; set; }
 		public IDictionary<string, IScriptFilter> ScriptFields { get; set; }
 		public ISourceFilter Source { get; set; }
-		public IList<KeyValuePair<PropertyPathMarker, ISort>> Sort { get; set; }
+		public IList<ISort> Sort { get; set; }
 		public IDictionary<IndexNameMarker, double> IndicesBoost { get; set; }
-		public IFilterContainer Filter { get; set; }
+		public IFilterContainer PostFilter { get; set; }
 		public IDictionary<string, IInnerHitsContainer> InnerHits { get; set; }
 		public IQueryContainer Query { get; set; }
 		public IRescore Rescore { get; set; }
@@ -235,7 +235,7 @@ namespace Nest
 		public double? MinScore { get; set; }
 		public long? TerminateAfter { get; set; }
 		public IDictionary<IndexNameMarker, double> IndicesBoost { get; set; }
-		public IList<KeyValuePair<PropertyPathMarker, ISort>> Sort { get; set; }
+		public IList<ISort> Sort { get; set; }
 		public IDictionary<PropertyPathMarker, IFacetContainer> Facets { get; set; }
 		public IDictionary<string, ISuggestBucket> Suggest { get; set; }
 		public IHighlightRequest Highlight { get; set; }
@@ -247,7 +247,7 @@ namespace Nest
 		public IDictionary<string, IInnerHitsContainer> InnerHits { get; set; }
 		public IDictionary<string, IAggregationContainer> Aggregations { get; set; }
 		public IQueryContainer Query { get; set; }
-		public IFilterContainer Filter { get; set; }
+		public IFilterContainer PostFilter { get; set; }
 		SearchType? ISearchRequest.SearchType
 		{
 			get { return  this.QueryString == null ? null : this.QueryString.GetQueryStringValue<SearchType?>("search_type");  }
@@ -339,7 +339,7 @@ namespace Nest
 
 		IDictionary<IndexNameMarker, double> ISearchRequest.IndicesBoost { get; set; }
 
-		IList<KeyValuePair<PropertyPathMarker, ISort>> ISearchRequest.Sort { get; set; }
+		IList<ISort> ISearchRequest.Sort { get; set; }
 
 		IDictionary<PropertyPathMarker, IFacetContainer> ISearchRequest.Facets { get; set; }
 
@@ -351,7 +351,7 @@ namespace Nest
 
 		IQueryContainer ISearchRequest.Query { get; set; }
 
-		IFilterContainer ISearchRequest.Filter { get; set; }
+		IFilterContainer ISearchRequest.PostFilter { get; set; }
 
 		IList<PropertyPathMarker> ISearchRequest.Fields { get; set; }
 
@@ -366,6 +366,13 @@ namespace Nest
 		IDictionary<string, IInnerHitsContainer> ISearchRequest.InnerHits { get; set; }
 
 		Func<dynamic, Hit<dynamic>, Type> ISearchRequest.TypeSelector { get; set; }
+
+
+		private void AddSort(ISort sort)
+		{
+			Self.Sort = Self.Sort ?? new List<ISort>();
+			Self.Sort.Add(sort);
+		}
 
 		/// <summary>
 		/// When strict is set, conditionless queries are treated as an exception. 
@@ -667,6 +674,15 @@ namespace Nest
 			return this;
 		}
 
+		/// <summary>
+		/// <para>Allows adding a prebuilt sort of any type.
+		/// </para>
+		/// </summary>
+		public SearchDescriptor<T> Sort(ISort sort)
+		{
+			AddSort(sort);
+			return this;
+		}
 
 		/// <summary>
 		/// <para>Allows to add one or more sort on specific fields. Each sort can be reversed as well.
@@ -678,9 +694,7 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> SortAscending(Expression<Func<T, object>> objectPath)
 		{
-			if (Self.Sort == null) Self.Sort = new List<KeyValuePair<PropertyPathMarker, ISort>>();
-
-			Self.Sort.Add(new KeyValuePair<PropertyPathMarker, ISort>(objectPath, new Sort() { Order = SortOrder.Ascending}));
+			AddSort(new Sort() { Field = objectPath, Order = SortOrder.Ascending });
 			return this;
 		}
 
@@ -694,9 +708,8 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> SortDescending(Expression<Func<T, object>> objectPath)
 		{
-			if (Self.Sort == null) Self.Sort = new List<KeyValuePair<PropertyPathMarker, ISort>>();
+			AddSort(new Sort() { Field = objectPath, Order = SortOrder.Descending });
 
-			Self.Sort.Add(new KeyValuePair<PropertyPathMarker, ISort>(objectPath, new Sort() { Order = SortOrder.Descending }));
 			return this;
 		}
 
@@ -710,8 +723,7 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> SortAscending(string field)
 		{
-			if (Self.Sort == null) Self.Sort = new List<KeyValuePair<PropertyPathMarker, ISort>>();
-			Self.Sort.Add(new KeyValuePair<PropertyPathMarker, ISort>(field, new Sort() { Order = SortOrder.Ascending }));
+			AddSort(new Sort() { Field = field, Order = SortOrder.Ascending });
 			return this;
 		}
 
@@ -725,10 +737,7 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> SortDescending(string field)
 		{
-			if (Self.Sort == null)
-				Self.Sort = new List<KeyValuePair<PropertyPathMarker, ISort>>();
-
-			Self.Sort.Add(new KeyValuePair<PropertyPathMarker, ISort>(field, new Sort() { Order = SortOrder.Descending}));
+			AddSort(new Sort() { Field = field, Order = SortOrder.Descending});
 			return this;
 		}
 
@@ -738,15 +747,9 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> Sort(Func<SortFieldDescriptor<T>, IFieldSort> sortSelector)
 		{
-			if (Self.Sort == null)
-				Self.Sort = new List<KeyValuePair<PropertyPathMarker, ISort>>();
-
 			sortSelector.ThrowIfNull("sortSelector");
 			var descriptor = sortSelector(new SortFieldDescriptor<T>());
-			if (descriptor == null || descriptor.Field.IsConditionless())
-				return this;
-
-			Self.Sort.Add(new KeyValuePair<PropertyPathMarker, ISort>(descriptor.Field, descriptor));
+			AddSort(descriptor);
 			return this;
 		}
 
@@ -756,14 +759,9 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> SortGeoDistance(Func<SortGeoDistanceDescriptor<T>, IGeoDistanceSort> sortSelector)
 		{
-			if (Self.Sort == null)
-				Self.Sort = new List<KeyValuePair<PropertyPathMarker, ISort>>();
-
 			sortSelector.ThrowIfNull("sortSelector");
 			var descriptor = sortSelector(new SortGeoDistanceDescriptor<T>());
-			if (descriptor == null || descriptor.Field.IsConditionless())
-				return this;
-			Self.Sort.Add(new KeyValuePair<PropertyPathMarker, ISort>("_geo_distance", descriptor));
+			AddSort(descriptor);
 			return this;
 		}
 
@@ -773,14 +771,9 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> SortScript(Func<SortScriptDescriptor<T>, IScriptSort> sortSelector)
 		{
-			if (Self.Sort == null)
-				Self.Sort = new List<KeyValuePair<PropertyPathMarker, ISort>>();
-
 			sortSelector.ThrowIfNull("sortSelector");
 			var descriptor = sortSelector(new SortScriptDescriptor<T>());
-			if (descriptor == null || (descriptor.Script.IsNullOrEmpty() && descriptor.File.IsNullOrEmpty()))
-				return this;
-			Self.Sort.Add(new KeyValuePair<PropertyPathMarker, ISort>("_script", descriptor));
+			AddSort(descriptor);
 			return this;
 		}
 
@@ -1147,7 +1140,7 @@ namespace Nest
 		/// <summary>
 		/// Filter search using a filter descriptor lambda
 		/// </summary>
-		public SearchDescriptor<T> Filter(Func<FilterDescriptor<T>, FilterContainer> filter)
+		public SearchDescriptor<T> PostFilter(Func<FilterDescriptor<T>, FilterContainer> filter)
 		{
 			filter.ThrowIfNull("filter");
 			var f = new FilterDescriptor<T>().Strict(this._Strict);
@@ -1162,16 +1155,17 @@ namespace Nest
 				return this;
 
 
-			Self.Filter = bf;
+			Self.PostFilter = bf;
 			return this;
 		}
+
 		/// <summary>
 		/// Filter search
 		/// </summary>
-		public SearchDescriptor<T> Filter(FilterContainer filterDescriptor)
+		public SearchDescriptor<T> PostFilter(FilterContainer filterDescriptor)
 		{
 			filterDescriptor.ThrowIfNull("filter");
-			Self.Filter = filterDescriptor;
+			Self.PostFilter = filterDescriptor;
 			return this;
 		}
 
@@ -1180,7 +1174,7 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> FilterRaw(string rawFilter)
 		{
-			Self.Filter = new FilterDescriptor<T>().Raw(rawFilter);
+			Self.PostFilter = new FilterDescriptor<T>().Raw(rawFilter);
 			return this;
 		}
 

@@ -15,7 +15,7 @@ namespace Nest.Tests.Integration.Core.Get
 			result.Id.Should().Be("1");
 			result.Index.Should().Be(ElasticsearchConfiguration.DefaultIndex);
 			result.Type.Should().Be("elasticsearchprojects");
-			result.Version.Should().Be("1");
+			result.Version.Should().Be(1);
 			result.Found.Should().BeTrue();
 		}
 

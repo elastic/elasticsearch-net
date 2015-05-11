@@ -30,7 +30,8 @@ namespace Nest
 		public string PinLocation { get; set; }
 		public IEnumerable<string> Points { get; set; }
 		public GeoUnit? GeoUnit { get; set; }
-		
+		public override PropertyPathMarker SortKey { get { return "_geo_distance"; } }
+
 		object ICustomJson.GetCustomJson()
 		{
 			var sort = this.Points.HasAny() ? (object)this.Points : this.PinLocation;
@@ -55,7 +56,9 @@ namespace Nest
 		IEnumerable<string> IGeoDistanceSort.Points { get; set; }
 
 		GeoUnit? IGeoDistanceSort.GeoUnit { get; set; }
-	
+
+		PropertyPathMarker ISort.SortKey { get { return "_geo_distance"; } }
+
 		public SortGeoDistanceDescriptor<T> PinTo(string geoLocationHash)
 		{
 			geoLocationHash.ThrowIfNullOrEmpty("geoLocationHash");

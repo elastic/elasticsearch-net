@@ -14,7 +14,7 @@ namespace Nest
 		string Index { get; }
 		double Score { get; }
 		string Type { get; }
-		string Version { get; }
+		long? Version { get; }
 		string Id { get; }
 		IEnumerable<object> Sorts { get; }
 		HighlightFieldDictionary Highlights { get; }
@@ -47,8 +47,10 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "_type")]
 		public string Type { get; internal set; }
+
 		[JsonProperty(PropertyName = "_version")]
-		public string Version { get; internal set; }
+		public long? Version { get; internal set; }
+
 		[JsonProperty(PropertyName = "_id")]
 		public string Id { get; internal set; }
 

@@ -12,7 +12,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
-				.Filter(ff=>ff
+				.PostFilter(ff=>ff
 					.Cache(true)
 					.Name("nesty")
 					.Nested(n=>n
@@ -23,7 +23,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 				
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
-				filter : {
+				post_filter : {
 					nested: {
 						query: {
 							term: {

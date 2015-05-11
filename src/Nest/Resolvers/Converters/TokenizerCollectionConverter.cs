@@ -31,7 +31,7 @@ namespace Nest
 				typeProperty.Remove();
 
 				var typePropertyValue = typeProperty.Value.ToString().Replace("_", string.Empty);
-				if (typePropertyValue.Equals("uax_url_email", StringComparison.InvariantCultureIgnoreCase))
+				if (typePropertyValue.Equals("uax_url_email", StringComparison.OrdinalIgnoreCase))
 				{
 					typePropertyValue = "UaxEmailUrl";
 				}

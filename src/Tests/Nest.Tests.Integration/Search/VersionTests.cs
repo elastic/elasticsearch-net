@@ -20,7 +20,7 @@ namespace Nest.Tests.Integration.Search
 			);
 			Assert.True(queryResults.IsValid);
 			Assert.Greater(queryResults.Total, 0);
-			Assert.True(queryResults.Hits.All(h => !h.Version.IsNullOrEmpty()));
+			Assert.True(queryResults.Hits.All(h => h.Version > 0));
 		}
 		[Test]
 		public void NoVersion()
@@ -32,7 +32,7 @@ namespace Nest.Tests.Integration.Search
 
 			Assert.True(queryResults.IsValid);
 			Assert.Greater(queryResults.Total, 0);
-			Assert.True(queryResults.Hits.All(h => h.Version.IsNullOrEmpty()));
+			Assert.True(queryResults.Hits.All(h => h.Version == null));
 		}
 	}
 }

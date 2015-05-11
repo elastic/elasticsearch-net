@@ -68,12 +68,6 @@ namespace Elasticsearch.Net.Connection
 		bool DisablePings { get; }
 
 		/// <summary>
-		/// When set signals elasticsearch to respond with compressed responses
-		/// </summary>
-		[Obsolete("Scheduled to be removed in 2.0, please use EnableHttpCompression")]
-		bool EnableCompressedResponses { get; }
-
-		/// <summary>
 		/// Enable gzip compressed requests and responses, do note that you need to configure elasticsearch to set this
 		/// <see cref="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-http.html"/>
 		/// </summary>

@@ -50,10 +50,4 @@ namespace Nest
 		public string SearchAnalyzer { get; set; }
 
 	}
-
-	[Obsolete("Please switch to GenericMapping or a strict *Mapping class such as StringMapping/NumberMapping/MultiFieldMapping, will be removed in the 1.0 release")]
-	public class TypeMappingProperty : GenericMapping
-	{
-
-	}
 }

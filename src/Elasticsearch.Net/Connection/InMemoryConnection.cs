@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Elasticsearch.Net.Connection.Configuration;
@@ -32,40 +33,38 @@ namespace Elasticsearch.Net.Connection
 			_fixedResultBytes = Encoding.UTF8.GetBytes(fixedResult);
 			_statusCode = statusCode;
 		}
-		
-		
 
-
-		protected override ElasticsearchResponse<Stream> DoSynchronousRequest(HttpWebRequest request, byte[] data = null, IRequestConfiguration requestSpecificConfig = null)
+		public override Task<ElasticsearchResponse<Stream>> DoRequest(HttpMethod method, Uri uri, byte[] data = null, IRequestConfiguration requestSpecificConfig = null)
 		{
-			return this.ReturnConnectionStatus(request, data, requestSpecificConfig);
+
+			return Task.Factory.StartNew(() =>
+			{
+				var cs = this.ReturnConnectionStatus(method, uri, data, requestSpecificConfig);
+				return cs;
+			});
 		}
 
-		private ElasticsearchResponse<Stream> ReturnConnectionStatus(HttpWebRequest request, byte[] data, IRequestConfiguration requestSpecificConfig = null)
+		public override ElasticsearchResponse<Stream> DoRequestSync(HttpMethod method, Uri uri, byte[] data = null,
+			IRequestConfiguration requestSpecificConfig = null)
 		{
-			var method = request.Method;
-			var path = request.RequestUri.ToString();
+			return this.ReturnConnectionStatus(method, uri, data, requestSpecificConfig);
+		}
 
-			var cs = ElasticsearchResponse<Stream>.Create(this.ConnectionSettings, _statusCode, method, path, data);
+		private ElasticsearchResponse<Stream> ReturnConnectionStatus(HttpMethod method, Uri uri, byte[] data, IRequestConfiguration requestSpecificConfig = null)
+		{
+			var path = uri.ToString();
+
+			var cs = ElasticsearchResponse<Stream>.Create(this._settings, _statusCode, method.ToString(), path, data);
 			cs.Response = new MemoryStream(_fixedResultBytes);
-			if (this.ConnectionSettings.ConnectionStatusHandler != null)
-				this.ConnectionSettings.ConnectionStatusHandler(cs);
+			if (this._settings.ConnectionStatusHandler != null)
+				this._settings.ConnectionStatusHandler(cs);
 
 			if (this.RecordRequests)
 			{
-				this.Requests.Add(Tuple.Create(method, request.RequestUri, data));
+				this.Requests.Add(Tuple.Create(method.ToString(), uri, data));
 			}
 
 			return cs;
-		}
-
-		protected override Task<ElasticsearchResponse<Stream>> DoAsyncRequest(HttpWebRequest request, byte[] data = null, IRequestConfiguration requestSpecificConfig = null)
-		{
-			return Task.Factory.StartNew(() =>
-			{
-				var cs = this.ReturnConnectionStatus(request, data, requestSpecificConfig);
-				return cs;
-			});
 		}
 
 	}

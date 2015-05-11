@@ -19,40 +19,5 @@ namespace Nest.Tests.Integration.Indices
 			public string Award { get; set; }
 			public int Year { get; set; }
 		}
-		[Test]
-		public void CustomBoosting()
-		{
-			var searchText = "myQuery";
-			Client.Search<Entry>(s=>s
-				.Query(q =>q
-					.Boosting(bq=>bq
-						.Positive(pq=>pq
-							//disabling obsolete message in this test
-							#pragma warning disable 0618
-							.CustomScore(cbf=>cbf
-								.Query(cbfq=>cbfq
-									.QueryString(qs => qs
-										.OnFieldsWithBoost(d =>
-											d.Add(entry => entry.Title, 5.0)
-											.Add(entry => entry.Description, 2.0)
-										)
-										.Query(searchText)
-									)
-								)
-								.Script("_score + doc['year'].value")
-							)
-							#pragma warning restore 0618
-						)
-						.Negative(nq=>nq
-							.Filtered(nfq=>nfq
-								.Query(qq=>qq.MatchAll())
-								.Filter(f=>f.Missing(p=>p.Award))
-							)
-						)
-						.NegativeBoost(0.2)
-					)
-				)
-			);
-		}
 	}
 }

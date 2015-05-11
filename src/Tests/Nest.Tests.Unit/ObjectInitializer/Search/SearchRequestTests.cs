@@ -39,9 +39,9 @@ namespace Nest.Tests.Unit.ObjectInitializer.Search
 				{
 					{ Infer.Index<ElasticsearchProject>(), 2.3 }
 				},
-				Sort = new List<KeyValuePair<PropertyPathMarker, ISort>>()
+				Sort = new List<ISort>()
 				{
-					new KeyValuePair<PropertyPathMarker, ISort>("field", new Sort { Order = SortOrder.Ascending, Missing = "_first"})
+					new Sort { Field = "field", Order = SortOrder.Ascending, Missing = "_first"}
 				},
 				Facets = new Dictionary<PropertyPathMarker, IFacetContainer>()
 				{
@@ -137,7 +137,7 @@ namespace Nest.Tests.Unit.ObjectInitializer.Search
 					}}
 				},
 				Query = query,
-				Filter = new FilterContainer(new BoolFilter
+				PostFilter = new FilterContainer(new BoolFilter
 				{
 					Cache = true,
 					Must = new FilterContainer[]

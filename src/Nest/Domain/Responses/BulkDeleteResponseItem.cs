@@ -15,7 +15,7 @@ namespace Nest
 		[JsonProperty("_id")]
 		public override string Id { get; internal set; }
 		[JsonProperty("_version")]
-		public override string Version { get; internal set; }
+		public override long Version { get; internal set; }
 		[JsonProperty("status")]
 		public override int Status { get; internal set; }
 		[JsonProperty("found")]

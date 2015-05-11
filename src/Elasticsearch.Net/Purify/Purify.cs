@@ -12,7 +12,12 @@ namespace PurifyNet
 
         static Purifier()
         {
-            isMono = typeof(Uri).GetField("m_Flags", BindingFlags.Instance | BindingFlags.NonPublic) == null;
+#if DNXCORE50
+			isMono = false;
+			hasBrokenDotNetUri = false;
+#else
+
+			isMono = typeof(Uri).GetField("m_Flags", BindingFlags.Instance | BindingFlags.NonPublic) == null;
             if (isMono)
                 return;
 
@@ -47,7 +52,7 @@ namespace PurifyNet
             hasBrokenDotNetUri = !new Uri("http://google.com/%2F")
                 .ToString()
                 .EndsWith("%2F", StringComparison.InvariantCulture);
-
+#endif
         }
 
         public static Uri Purify(this Uri uri)

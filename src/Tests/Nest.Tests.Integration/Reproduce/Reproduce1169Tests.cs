@@ -30,7 +30,7 @@ namespace Nest.Tests.Integration.Reproduce
 
 			response.IsValid.Should().BeTrue();
 			
-			var topHits = response.Aggs.TopHitsMetric("my-top-hits");
+			var topHits = response.Aggs.TopHits("my-top-hits");
 			topHits.Should().NotBeNull();
 			topHits.Hits<ElasticsearchProject>().Count().Should().BeGreaterThan(0);
 
@@ -57,7 +57,7 @@ namespace Nest.Tests.Integration.Reproduce
 
 			response.IsValid.Should().BeTrue();
 
-			var topHits = response.Aggs.TopHitsMetric("my-top-hits");
+			var topHits = response.Aggs.TopHits("my-top-hits");
 			topHits.Should().NotBeNull();
 			topHits.Hits<ElasticsearchProject>().Count().Should().BeGreaterThan(0);
 

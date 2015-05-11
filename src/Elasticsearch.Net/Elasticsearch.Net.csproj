@@ -39,6 +39,17 @@
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>..\..\build\keys\keypair.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'IntegrationTests|AnyCPU'">
+    <OutputPath>bin\IntegrationTests\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>bin\Release\Elasticsearch.Net.XML</DocumentationFile>
+    <Optimize>true</Optimize>
+    <NoWarn>1591,1572,1571,1573,1587,1570</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -74,16 +85,6 @@
     <Compile Include="Exceptions\OneToOneServerException.cs" />
     <Compile Include="Exceptions\ElasticsearchAuthException.cs" />
     <Compile Include="IElasticsearchClient.cs" />
-    <Compile Include="Obsolete\RequestParameters\FlushRequestParametersObsoleteExtensions.cs" />
-    <Compile Include="Obsolete\IndicesDeleteAlias.cs" />
-    <Compile Include="Obsolete\IndicesPutAlias.cs" />
-    <Compile Include="Obsolete\IndicesRecoveryStatus.cs" />
-    <Compile Include="Obsolete\IndicesTemplateExists.cs" />
-    <Compile Include="Obsolete\IndicesGetFieldMapping.cs" />
-    <Compile Include="Obsolete\Mpercolate.cs" />
-    <Compile Include="Obsolete\IndicesExistsType.cs" />
-    <Compile Include="Obsolete\Obsolete.cs" />
-    <Compile Include="Obsolete\IndicesExistsAlias.cs" />
     <Compile Include="Providers\DateTimeProvider.cs" />
     <Compile Include="Connection\HttpConnection.cs" />
     <Compile Include="Exceptions\ElasticsearchServerException.cs" />

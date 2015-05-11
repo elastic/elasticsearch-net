@@ -5,7 +5,7 @@
         "type": "date",
         "index_name": "started_on_index_name",
         "store": true,
-        "index": "analyzed",
+        "index": "no",
         "format": "dateOptionalTime",
         "precision_step": 4,
         "boost": 1.3,

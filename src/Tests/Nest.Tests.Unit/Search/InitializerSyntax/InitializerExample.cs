@@ -46,7 +46,7 @@ namespace Nest.Tests.Unit.Search.InitializerSyntax
 					Property.Path<ElasticsearchProject>(p=>p.Name)
 				},
 				Query = query,
-				Filter = new FilterContainer(new BoolFilter
+				PostFilter = new FilterContainer(new BoolFilter
 				{
 					Cache = true,
 					Must = new FilterContainer[]
@@ -69,9 +69,9 @@ namespace Nest.Tests.Unit.Search.InitializerSyntax
 							{"multiplier", 4}
 						}
 					}),
-				Sort = new List<KeyValuePair<PropertyPathMarker, ISort>>()
+				Sort = new List<ISort>()
 				{
-					new KeyValuePair<PropertyPathMarker, ISort>("field", new Sort { Order = SortOrder.Ascending, Missing = "_first"})
+					new Sort { Field="field", Order = SortOrder.Ascending, Missing = "_first"}
 				},
 				Source = new SourceFilter
 				{
@@ -127,7 +127,7 @@ namespace Nest.Tests.Unit.Search.InitializerSyntax
 						{
 							Field = Property.Path<ElasticsearchProject>(p=>p.Name),
 							Size = 10,
-							ExecutionHint = TermsAggregationExecutionHint.Ordinals,
+							ExecutionHint = TermsAggregationExecutionHint.GlobalOrdinals,
 						},
 						Aggregations = new Dictionary<string, IAggregationContainer>
 						{

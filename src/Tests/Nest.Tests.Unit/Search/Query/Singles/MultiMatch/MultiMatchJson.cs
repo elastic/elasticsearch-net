@@ -18,10 +18,6 @@ namespace Nest.Tests.Unit.Search.Query.Singles.MultiMatch
 						.Name("named_query")
 						.OnFields(p=>p.Name, p=>p.Country)
 						.Query("this is a query")
-						//disabling obsolete message in this test
-						#pragma warning disable 0618
-						.UseDisMax(true)
-						#pragma warning restore 0618
 						.TieBreaker(0.7)
 					)
 				);

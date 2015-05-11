@@ -12,13 +12,13 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
-				.Filter(ff=>ff
+				.PostFilter(ff=>ff
 					.Regexp(r=>r.OnField(p=>p.Name).Value("ab?"))
 				);
 				
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
-				filter : {
+				post_filter : {
 						regexp: {
 							""name"": {
 								""value"" : ""ab?""
@@ -35,12 +35,12 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
-				.Filter(Filter<ElasticsearchProject>.Regexp(r => r.OnField(p => p.Name).Value("ab?"))
+				.PostFilter(Filter<ElasticsearchProject>.Regexp(r => r.OnField(p => p.Name).Value("ab?"))
 				);
 
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
-				filter : {
+				post_filter : {
 						regexp: {
 							""name"": {
 								""value"" : ""ab?""
@@ -57,7 +57,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
-				.Filter(ff => ff
+				.PostFilter(ff => ff
 					.Cache(true)
 					.Name("regexp_filter")
 					.CacheKey("2problems")
@@ -70,7 +70,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
-				filter : {
+				post_filter : {
 						regexp: {
 							""name"": {
 								""value"" : ""ab?"",

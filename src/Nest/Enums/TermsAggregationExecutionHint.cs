@@ -17,12 +17,6 @@ namespace Nest
 		[EnumMember(Value = "map")]
 		Map,
 		/// <summary>
-		/// Order by using ordinals of the field values instead of the values themselves
-		/// </summary>
-		[Obsolete("ordinals was removed from ES in version 1.3.  Use global_ordinals instead.")]
-		[EnumMember(Value = "ordinals")]
-		Ordinals,
-		/// <summary>
 		/// Order by using ordinals of the field and preemptively allocating one bucket per ordinal value
 		/// </summary>
 		[EnumMember(Value = "global_ordinals")]

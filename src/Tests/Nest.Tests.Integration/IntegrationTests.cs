@@ -32,7 +32,7 @@ namespace Nest.Tests.Integration
 			var filterId = Filter<ElasticsearchProject>.Term(e => e.Id, project.Id);
 
 			var results = this.Client.Search<ElasticsearchProject>(
-			  s => s.Filter(ff => ff.And(
+			  s => s.PostFilter(ff => ff.And(
 				  f => f.Term(e => e.Id, project.Id),
 				  filter
 				))

@@ -517,33 +517,7 @@ namespace Nest
 
 			return this.New(query, q => q.ConstantScore = query);
 		}
-		
-		/// <summary>
-		/// custom_boost_factor query allows to wrap another query and multiply its score by the provided boost_factor.
-		/// This can sometimes be desired since boost value set on specific queries gets normalized, while this 
-		/// query boost factor does not.
-		/// </summary>
-		[Obsolete("Custom boost factor has been removed in 1.1")]
-		public QueryContainer CustomBoostFactor(Action<CustomBoostFactorQueryDescriptor<T>> selector)
-		{
-			var query = new CustomBoostFactorQueryDescriptor<T>();
-			selector(query);
 
-			return this.New(query, q => q.CustomBoostFactor = query);
-		}
-		
-		/// <summary>
-		/// custom_score query allows to wrap another query and customize the scoring of it optionally with a 
-		/// computation derived from other field values in the doc (numeric ones) using script expression
-		/// </summary>
-		[Obsolete("Custom score has been removed in 1.1")]
-		public QueryContainer CustomScore(Action<CustomScoreQueryDescriptor<T>> customScoreQuery)
-		{
-			var query = new CustomScoreQueryDescriptor<T>();
-			customScoreQuery(query);
-
-			return this.New(query, q => q.CustomScore = query);
-		}
 		
 		/// <summary>
 		/// custom_score query allows to wrap another query and customize the scoring of it optionally with a 

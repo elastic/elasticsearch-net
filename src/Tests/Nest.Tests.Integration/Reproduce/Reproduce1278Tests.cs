@@ -74,23 +74,23 @@ namespace Nest.Tests.Integration.Reproduce
 						)
 						.Number(s => s
 							.Name("ViewCount")
-							.Index(NonStringIndexOption.NotAnalyzed)
+							.Index(NonStringIndexOption.No)
 						)
 						.Number(s => s
 							.Name("LikesCount")
-							.Index(NonStringIndexOption.NotAnalyzed)
+							.Index(NonStringIndexOption.No)
 						)
 						.Number(s => s
 							.Name("DislikesCount")
-							.Index(NonStringIndexOption.NotAnalyzed)
+							.Index(NonStringIndexOption.No)
 						)
 						.Date(s => s
 							.Name("Published")
-							.Index(NonStringIndexOption.NotAnalyzed)
+							.Index(NonStringIndexOption.No)
 						)
 						.Date(s => s
 							.Name("CreatedDate")
-							.Index(NonStringIndexOption.NotAnalyzed)
+							.Index(NonStringIndexOption.No)
 						)
 						.String(s => s
 							.Name("WatchLater")
@@ -106,19 +106,19 @@ namespace Nest.Tests.Integration.Reproduce
 						)
 						.Number(s => s
 							.Name("TranscriptionStatus")
-							.Index(NonStringIndexOption.NotAnalyzed)
+							.Index(NonStringIndexOption.No)
 						)
 						.Number(s => s
 							.Name("UploadSource")
-							.Index(NonStringIndexOption.NotAnalyzed)
+							.Index(NonStringIndexOption.No)
 						)
 						.Boolean(s => s
 							.Name("FromProject")
-							.Index(NonStringIndexOption.NotAnalyzed)
+							.Index(NonStringIndexOption.No)
 						)
 						.Boolean(s => s
 							.Name("IsSearchable")
-							.Index(NonStringIndexOption.NotAnalyzed)
+							.Index(NonStringIndexOption.No)
 						)
 						.MultiField(s => s
 							.Name("NativeTranscription")

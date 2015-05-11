@@ -13,9 +13,9 @@ namespace Elasticsearch.Net.Connection
 	/// ConnectionConfiguration allows you to control how ElasticsearchClient behaves and where/how it connects 
 	/// to elasticsearch
 	/// </summary>
-	public class ConnectionConfiguration : 
-		ConnectionConfiguration<ConnectionConfiguration>, 
-		IConnectionConfiguration<ConnectionConfiguration> 
+	public class ConnectionConfiguration :
+		ConnectionConfiguration<ConnectionConfiguration>,
+		IConnectionConfiguration<ConnectionConfiguration>
 	{
 		/// <summary>
 		/// ConnectionConfiguration allows you to control how ElasticsearchClient behaves and where/how it connects 
@@ -40,8 +40,9 @@ namespace Elasticsearch.Net.Connection
 		}
 	}
 
-
+#if !DNXCORE50
 	[Browsable(false)]
+#endif
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public class ConnectionConfiguration<T> : IConnectionConfigurationValues, IHideObjectMembers
 		where T : ConnectionConfiguration<T>
@@ -50,8 +51,8 @@ namespace Elasticsearch.Net.Connection
 		IConnectionPool IConnectionConfigurationValues.ConnectionPool { get { return _connectionPool; } }
 
 		private int _timeout;
-		int IConnectionConfigurationValues.Timeout { get { return _timeout; }}
-		
+		int IConnectionConfigurationValues.Timeout { get { return _timeout; } }
+
 		private int? _pingTimeout;
 		int? IConnectionConfigurationValues.PingTimeout { get { return _pingTimeout; } }
 
@@ -59,14 +60,14 @@ namespace Elasticsearch.Net.Connection
 		int? IConnectionConfigurationValues.ConnectTimeout { get { return _connectTimeout; } }
 
 		private int? _deadTimeout;
-		int? IConnectionConfigurationValues.DeadTimeout { get{ return _deadTimeout; } }
-		
+		int? IConnectionConfigurationValues.DeadTimeout { get { return _deadTimeout; } }
+
 		private int? _maxDeadTimeout;
-		int? IConnectionConfigurationValues.MaxDeadTimeout { get{ return _maxDeadTimeout; } }
-	
+		int? IConnectionConfigurationValues.MaxDeadTimeout { get { return _maxDeadTimeout; } }
+
 		private TimeSpan? _maxRetryTimeout;
-		TimeSpan? IConnectionConfigurationValues.MaxRetryTimeout { get{ return _maxRetryTimeout; } }
-	
+		TimeSpan? IConnectionConfigurationValues.MaxRetryTimeout { get { return _maxRetryTimeout; } }
+
 		private int? _keepAliveTime;
 		int? IConnectionConfigurationValues.KeepAliveTime { get{ return _keepAliveTime; } }
 	
@@ -74,19 +75,19 @@ namespace Elasticsearch.Net.Connection
 		int? IConnectionConfigurationValues.KeepAliveInterval { get{ return _keepAliveInterval; } }
 	
 		private string _proxyUsername;
-		string IConnectionConfigurationValues.ProxyUsername { get{ return _proxyUsername; } }
-		
+		string IConnectionConfigurationValues.ProxyUsername { get { return _proxyUsername; } }
+
 		private string _proxyPassword;
-		string IConnectionConfigurationValues.ProxyPassword { get{ return _proxyPassword; } }
-		
+		string IConnectionConfigurationValues.ProxyPassword { get { return _proxyPassword; } }
+
 		private bool _disablePings;
-		bool IConnectionConfigurationValues.DisablePings { get{ return _disablePings; } }
-		
+		bool IConnectionConfigurationValues.DisablePings { get { return _disablePings; } }
+
 		private string _proxyAddress;
-		string IConnectionConfigurationValues.ProxyAddress { get{ return _proxyAddress; } }
+		string IConnectionConfigurationValues.ProxyAddress { get { return _proxyAddress; } }
 
 		private bool _usePrettyResponses;
-		bool IConnectionConfigurationValues.UsesPrettyResponses { get{ return _usePrettyResponses; } }
+		bool IConnectionConfigurationValues.UsesPrettyResponses { get { return _usePrettyResponses; } }
 
 		private bool _usePrettyRequests;
 		bool IConnectionConfigurationValues.UsesPrettyRequests { get{ return _usePrettyRequests; } }
@@ -96,62 +97,59 @@ namespace Elasticsearch.Net.Connection
 #else
 		private bool _keepRawResponse = false;
 #endif
-		bool IConnectionConfigurationValues.KeepRawResponse { get{ return _keepRawResponse; } }
+		bool IConnectionConfigurationValues.KeepRawResponse { get { return _keepRawResponse; } }
 
 #if DEBUG
 		private bool _enableMetrics = true;
 #else
 		private bool _enableMetrics = false;
 #endif
-		bool IConnectionConfigurationValues.MetricsEnabled { get{ return _enableMetrics; } }
+		bool IConnectionConfigurationValues.MetricsEnabled { get { return _enableMetrics; } }
 
-        private bool _disableAutomaticProxyDetection = false;
-        bool IConnectionConfigurationValues.DisableAutomaticProxyDetection { get { return _disableAutomaticProxyDetection; } }
+		private bool _disableAutomaticProxyDetection = false;
+		bool IConnectionConfigurationValues.DisableAutomaticProxyDetection { get { return _disableAutomaticProxyDetection; } }
 
 		private int _maximumAsyncConnections;
-		int IConnectionConfigurationValues.MaximumAsyncConnections { get{ return _maximumAsyncConnections; } }
+		int IConnectionConfigurationValues.MaximumAsyncConnections { get { return _maximumAsyncConnections; } }
 
 		private int? _maxRetries;
-		int? IConnectionConfigurationValues.MaxRetries { get{ return _maxRetries; } }
+		int? IConnectionConfigurationValues.MaxRetries { get { return _maxRetries; } }
 
 		private bool _sniffOnStartup;
-		bool IConnectionConfigurationValues.SniffsOnStartup { get{ return _sniffOnStartup; } }
+		bool IConnectionConfigurationValues.SniffsOnStartup { get { return _sniffOnStartup; } }
 
 		private bool _sniffOnConectionFault;
-		bool IConnectionConfigurationValues.SniffsOnConnectionFault { get{ return _sniffOnConectionFault; } }
+		bool IConnectionConfigurationValues.SniffsOnConnectionFault { get { return _sniffOnConectionFault; } }
 
 		private TimeSpan? _sniffLifeSpan;
-		TimeSpan? IConnectionConfigurationValues.SniffInformationLifeSpan { get{ return _sniffLifeSpan; } }
-
-		private bool _enableCompressedResponses;
-		bool IConnectionConfigurationValues.EnableCompressedResponses { get{ return _enableCompressedResponses; } }
+		TimeSpan? IConnectionConfigurationValues.SniffInformationLifeSpan { get { return _sniffLifeSpan; } }
 
 		private bool _enableHttpCompression;
-		bool IConnectionConfigurationValues.EnableHttpCompression { get{ return _enableHttpCompression; } }
+		bool IConnectionConfigurationValues.EnableHttpCompression { get { return _enableHttpCompression; } }
 
 		private bool _traceEnabled;
-		bool IConnectionConfigurationValues.TraceEnabled { get{ return _traceEnabled; } }
+		bool IConnectionConfigurationValues.TraceEnabled { get { return _traceEnabled; } }
 
 		private bool _httpPipeliningEnabled;
 		bool IConnectionConfigurationValues.HttpPipeliningEnabled { get { return _httpPipeliningEnabled; } }
 
 		private bool _throwOnServerExceptions;
-		bool IConnectionConfigurationValues.ThrowOnElasticsearchServerExceptions { get{ return _throwOnServerExceptions; } }
+		bool IConnectionConfigurationValues.ThrowOnElasticsearchServerExceptions { get { return _throwOnServerExceptions; } }
 
 		private Action<IElasticsearchResponse> _connectionStatusHandler;
-		Action<IElasticsearchResponse> IConnectionConfigurationValues.ConnectionStatusHandler { get{ return _connectionStatusHandler; } }
-		
+		Action<IElasticsearchResponse> IConnectionConfigurationValues.ConnectionStatusHandler { get { return _connectionStatusHandler; } }
+
 		private NameValueCollection _queryString;
-		NameValueCollection IConnectionConfigurationValues.QueryStringParameters { get{ return _queryString; } }
+		NameValueCollection IConnectionConfigurationValues.QueryStringParameters { get { return _queryString; } }
 
 		IElasticsearchSerializer IConnectionConfigurationValues.Serializer { get; set; }
 
 		private BasicAuthorizationCredentials _basicAuthCredentials;
-		BasicAuthorizationCredentials IConnectionConfigurationValues.BasicAuthorizationCredentials { get { return _basicAuthCredentials; } } 
-		
+		BasicAuthorizationCredentials IConnectionConfigurationValues.BasicAuthorizationCredentials { get { return _basicAuthCredentials; } }
+
 		public ConnectionConfiguration(IConnectionPool connectionPool)
 		{
-			this._timeout = 60*1000;
+			this._timeout = 60 * 1000;
 			//this.UriSpecifiedBasicAuth = !uri.UserInfo.IsNullOrEmpty();
 			//this.Uri = uri;
 			this._connectionStatusHandler = this.ConnectionStatusDefaultHandler;
@@ -160,7 +158,7 @@ namespace Elasticsearch.Net.Connection
 			this._usePrettyRequests = true;
 		}
 
-		public ConnectionConfiguration(Uri uri = null) 
+		public ConnectionConfiguration(Uri uri = null)
 			: this(new SingleNodeConnectionPool(uri ?? new Uri("http://localhost:9200")))
 		{
 			//this.Host = uri.Host;
@@ -177,7 +175,7 @@ namespace Elasticsearch.Net.Connection
 		public T MaximumRetries(int maxRetries)
 		{
 			this._maxRetries = maxRetries;
-			return (T) this;
+			return (T)this;
 		}
 
 		public T SniffOnConnectionFault(bool sniffsOnConnectionFault = true)
@@ -197,24 +195,13 @@ namespace Elasticsearch.Net.Connection
 		}
 
 		/// <summary>
-		/// Enable compressed responses from elasticsearch (NOTE that that nodes need to be configured to allow this)
-		/// http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-http.html
-		/// </summary>
-		[Obsolete("Scheduled to be removed in 2.0, please use EnableHttpCompression")]
-		public T EnableCompressedResponses(bool enabled = true)
-		{
-			this._enableCompressedResponses = enabled;
-			return (T) this;
-		}
-
-		/// <summary>
 		/// Enable gzip compressed requests and responses, do note that you need to configure elasticsearch to set this
 		/// <see cref="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-http.html"/>
 		/// </summary>
 		public T EnableHttpCompression(bool enabled = true)
 		{
 			this._enableHttpCompression = enabled;
-			return (T) this;
+			return (T)this;
 		}
 
 		/// <summary>
@@ -223,7 +210,7 @@ namespace Elasticsearch.Net.Connection
 		public T EnableTrace(bool enabled = true)
 		{
 			this._traceEnabled = enabled;
-			return (T) this;
+			return (T)this;
 		}
 
 		public T DisableAutomaticProxyDetection(bool disable = true)
@@ -231,14 +218,14 @@ namespace Elasticsearch.Net.Connection
 			this._disableAutomaticProxyDetection = disable;
 			return (T)this;
 		}
-		
+
 		/// <summary>
 		/// By enabling metrics more metadata is returned per API call about requests (ping, sniff, failover) and general stats
 		/// </summary>
 		public T EnableMetrics(bool enabled = true)
 		{
 			this._enableMetrics = enabled;
-			return (T) this;
+			return (T)this;
 		}
 
 		/// <summary>
@@ -249,7 +236,7 @@ namespace Elasticsearch.Net.Connection
 		public T ThrowOnElasticsearchServerExceptions(bool alwaysThrow = true)
 		{
 			this._throwOnServerExceptions = alwaysThrow;
-			return (T) this;
+			return (T)this;
 		}
 		/// <summary>
 		/// When a node is used for the very first time or when it's used for the first time after it has been marked dead
@@ -259,7 +246,7 @@ namespace Elasticsearch.Net.Connection
 		public T DisablePing(bool disable = true)
 		{
 			this._disablePings = disable;
-			return (T) this;
+			return (T)this;
 		}
 		/// <summary>
 		/// This NameValueCollection will be appended to every url NEST calls, great if you need to pass i.e an API key.
@@ -271,7 +258,7 @@ namespace Elasticsearch.Net.Connection
 				this._queryString.Add(queryStringParameters);
 			}
 			this._queryString = queryStringParameters;
-			return (T) this;
+			return (T)this;
 		}
 
 		/// <summary>
@@ -282,7 +269,7 @@ namespace Elasticsearch.Net.Connection
 		public T SetTimeout(int timeout)
 		{
 			this._timeout = timeout;
-			return (T) this;
+			return (T)this;
 		}
 
 		/// <summary>
@@ -293,7 +280,7 @@ namespace Elasticsearch.Net.Connection
 		public T SetPingTimeout(int timeout)
 		{
 			this._pingTimeout = timeout;
-			return (T) this;
+			return (T)this;
 		}
 
 		/// <summary>
@@ -313,7 +300,7 @@ namespace Elasticsearch.Net.Connection
 		public T SetDeadTimeout(int timeout)
 		{
 			this._deadTimeout = timeout;
-			return (T) this;
+			return (T)this;
 		}
 
 		/// <summary>
@@ -324,9 +311,9 @@ namespace Elasticsearch.Net.Connection
 		public T SetMaxDeadTimeout(int timeout)
 		{
 			this._maxDeadTimeout = timeout;
-			return (T) this;
+			return (T)this;
 		}
-		
+
 		/// <summary>
 		/// Limits the total runtime including retries separately from <see cref="Timeout"/>
 		/// <pre>
@@ -336,9 +323,9 @@ namespace Elasticsearch.Net.Connection
 		public T SetMaxRetryTimeout(TimeSpan maxRetryTimeout)
 		{
 			this._maxRetryTimeout = maxRetryTimeout;
-			return (T) this;
+			return (T)this;
 		}
-		
+
 		/// <summary>
 		/// Semaphore asynchronous connections automatically by giving
 		/// it a maximum concurrent connections. 
@@ -347,7 +334,7 @@ namespace Elasticsearch.Net.Connection
 		public T SetMaximumAsyncConnections(int maximum)
 		{
 			this._maximumAsyncConnections = maximum;
-			return (T) this;
+			return (T)this;
 		}
 
 		/// <summary>
@@ -359,7 +346,7 @@ namespace Elasticsearch.Net.Connection
 			this._proxyAddress = proxyAdress.ToString();
 			this._proxyUsername = username;
 			this._proxyPassword = password;
-			return (T) this;
+			return (T)this;
 		}
 
 		/// <summary>
@@ -388,8 +375,8 @@ namespace Elasticsearch.Net.Connection
 		public T UsePrettyResponses(bool b = true)
 		{
 			this._usePrettyResponses = b;
-			this.SetGlobalQueryStringParameters(new NameValueCollection {{"pretty", b.ToString().ToLowerInvariant()}});
-			return (T) this;
+			this.SetGlobalQueryStringParameters(new NameValueCollection { { "pretty", b.ToString().ToLowerInvariant() } });
+			return (T)this;
 		}
 
 		/// <summary>
@@ -399,7 +386,7 @@ namespace Elasticsearch.Net.Connection
 		public T ExposeRawResponse(bool b = true)
 		{
 			this._keepRawResponse = b;
-			return (T) this;
+			return (T)this;
 		}
 		protected void ConnectionStatusDefaultHandler(IElasticsearchResponse status)
 		{
@@ -409,20 +396,11 @@ namespace Elasticsearch.Net.Connection
 		/// <summary>
 		/// Global callback for every response that NEST receives, useful for custom logging.
 		/// </summary>
-        public T SetConnectionStatusHandler(Action<IElasticsearchResponse> handler)
-        {
-            handler.ThrowIfNull("handler");
-            this._connectionStatusHandler = handler;
-			return (T)this;
-        }
-
-		/// <summary>
-		/// Basic access authentication credentials to specify with all requests.
-		/// </summary>
-		[Obsolete("Scheduled to be removed in 2.0.  Use SetBasicAuthentication() instead.")]
-		public T SetBasicAuthorization(string userName, string password)
+		public T SetConnectionStatusHandler(Action<IElasticsearchResponse> handler)
 		{
-			return this.SetBasicAuthentication(userName, password);
+			handler.ThrowIfNull("handler");
+			this._connectionStatusHandler = handler;
+			return (T)this;
 		}
 
 		/// <summary>

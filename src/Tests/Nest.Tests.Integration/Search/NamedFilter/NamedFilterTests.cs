@@ -18,7 +18,7 @@ namespace Nest.Tests.Integration.Search.NamedFilter
 				.From(0)
 				.Size(10)
 				.Fields(p => p.Name)
-				.Filter(f =>
+				.PostFilter(f =>
 					f.Name("myfilter").Terms(p => p.Name.Suffix("sort"), new[] {_LookFor.ToLowerInvariant()})
 					|| f.Name("myfilter2").Terms(p => p.Name.Suffix("sort"), new[] {"nest"})
 				)

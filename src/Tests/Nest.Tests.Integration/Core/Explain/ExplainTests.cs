@@ -24,7 +24,7 @@ namespace Nest.Tests.Integration.Core.Explain
 			var explainResponse = this.Client.Explain<ElasticsearchProject>(e => e
 				.IdFrom(elasticSearchProject)
 				.Query(q=>q.Term(p=> p.Name.Suffix("sort"), elasticSearchProject.Name))
-				.EnableSource()
+				.SourceEnabled()
 			);
 
 			explainResponse.IsValid.Should().BeTrue();
@@ -55,7 +55,6 @@ namespace Nest.Tests.Integration.Core.Explain
 
 			var explainResponse = this.Client.Explain<ElasticsearchProject>(new ExplainRequest<ElasticsearchProject>(elasticSearchProject)
 			{
-				EnableSource = false,
 				Fields = new List<PropertyPathMarker>
 				{
 					{ Property.Path<ElasticsearchProject>(p=>p.Name) }

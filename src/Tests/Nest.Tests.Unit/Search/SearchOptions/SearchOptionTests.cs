@@ -279,7 +279,7 @@ namespace Nest.Tests.Unit.Search.SearchOptions
 				.Size(10)
 				.FilterRaw(@"{ raw : ""query""}");
 			var json = TestElasticClient.Serialize(s);
-			var expected = @"{ from: 0, size: 10, filter : { raw : ""query""}}";
+			var expected = @"{ from: 0, size: 10, post_filter : { raw : ""query""}}";
 			Assert.True(json.JsonEquals(expected), json);
 		}
 		[Test]
@@ -291,7 +291,7 @@ namespace Nest.Tests.Unit.Search.SearchOptions
 				.FilterRaw(@"{ raw : ""query""}")
 				.QueryRaw(@"{ raw : ""query""}");
 			var json = TestElasticClient.Serialize(s);
-			var expected = @"{ from: 0, size: 10, query : { raw : ""query""}, filter : { raw : ""query""}}";
+			var expected = @"{ from: 0, size: 10, query : { raw : ""query""}, post_filter : { raw : ""query""}}";
 			Assert.True(json.JsonEquals(expected));
 		}
 		

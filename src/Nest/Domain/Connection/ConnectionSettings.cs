@@ -50,7 +50,9 @@ namespace Nest
 	/// <summary>
 	/// Control how NEST's behaviour.
 	/// </summary>
+#if !DNXCORE50
 	[Browsable(false)]
+#endif
 	[EditorBrowsable(EditorBrowsableState.Never)]
 	public class ConnectionSettings<T> : ConnectionConfiguration<T>, IConnectionSettingsValues
 		where T : ConnectionSettings<T>

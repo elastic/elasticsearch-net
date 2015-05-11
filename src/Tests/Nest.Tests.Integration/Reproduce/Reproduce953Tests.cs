@@ -20,7 +20,7 @@ namespace Nest.Tests.Integration.Reproduce
 		{
 
 			var settings = ElasticsearchConfiguration.Settings()
-				.EnableCompressedResponses(true);
+				.EnableHttpCompression();
 			var connection = new HttpClientConnection(settings);
 			var client = new ElasticClient(settings, connection: connection);
 			

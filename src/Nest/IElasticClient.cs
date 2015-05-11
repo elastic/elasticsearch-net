@@ -315,14 +315,6 @@ namespace Nest
 		IIndicesOperationResponse DeleteTemplate(IDeleteTemplateRequest deleteTemplateRequest);
 
 		/// <inheritdoc />
-		[Obsolete("Scheduled for removal in 2.0, this method name has a typo")]
-		Task<IIndicesOperationResponse> DeleteTemplateAync(string name, Func<DeleteTemplateDescriptor, DeleteTemplateDescriptor> deleteTemplateSelector = null);
-
-		/// <inheritdoc />
-		[Obsolete("Scheduled for removal in 2.0, this method name has a typo")]
-		Task<IIndicesOperationResponse> DeleteTemplateAync(IDeleteTemplateRequest deleteTemplateRequest);
-
-		/// <inheritdoc />
 		Task<IIndicesOperationResponse> DeleteTemplateAsync(string name, Func<DeleteTemplateDescriptor, DeleteTemplateDescriptor> deleteTemplateSelector = null);
 
 		/// <inheritdoc />
@@ -388,27 +380,11 @@ namespace Nest
 		Task<IPercolateResponse> PercolateAsync<T>(IPercolateRequest<T> percolateRequest)
 			where T : class;
 
-		/// <summary>
-		/// Percolate a document but only return the number of matches not the matches itself
-		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-percolate.html
-		/// </summary>
-		/// <typeparam name="T">The type to infer the index/type from, and of the object that is being percolated</typeparam>
-		/// <param name="object">The object to percolator</param>
-		/// <param name="percolateSelector">An optional descriptor describing the percolate operation further</param>
-		[Obsolete("Scheduled to be removed in 2.0 please use the overload takes a func (descriptor=>descriptor)")]
-		IPercolateCountResponse PercolateCount<T>(T @object, Func<PercolateCountDescriptor<T>, PercolateCountDescriptor<T>> percolateSelector = null)
-			where T : class;
-
 		IPercolateCountResponse PercolateCount<T>(Func<PercolateCountDescriptor<T>, PercolateCountDescriptor<T>> percolateSelector)
 			where T : class;
 
 		/// <inheritdoc />
 		IPercolateCountResponse PercolateCount<T>(IPercolateCountRequest<T> percolateCountRequest)
-			where T : class;
-
-		/// <inheritdoc />
-		[Obsolete("Scheduled to be removed in 2.0 please use the overload takes a func (descriptor=>descriptor)")]
-		Task<IPercolateCountResponse> PercolateCountAsync<T>(T @object, Func<PercolateCountDescriptor<T>, PercolateCountDescriptor<T>> percolateSelector = null)
 			where T : class;
 
 		Task<IPercolateCountResponse> PercolateCountAsync<T>(Func<PercolateCountDescriptor<T>, PercolateCountDescriptor<T>> percolateSelector = null)
@@ -921,18 +897,18 @@ namespace Nest
 		/// <typeparam name="T">The type used to infer the default index and typename as well as describe the strongly
 		///  typed parts of the query</typeparam>
 		/// <param name="deleteByQuerySelector">An optional descriptor to further describe the delete by query operation</param>
-		IDeleteResponse DeleteByQuery<T>(Func<DeleteByQueryDescriptor<T>, DeleteByQueryDescriptor<T>> deleteByQuerySelector)
+		IDeleteByQueryResponse DeleteByQuery<T>(Func<DeleteByQueryDescriptor<T>, DeleteByQueryDescriptor<T>> deleteByQuerySelector)
 			where T : class;
 
 		/// <inheritdoc />
-		IDeleteResponse DeleteByQuery(IDeleteByQueryRequest deleteByQueryRequest);
+		IDeleteByQueryResponse DeleteByQuery(IDeleteByQueryRequest deleteByQueryRequest);
 
 		/// <inheritdoc />
-		Task<IDeleteResponse> DeleteByQueryAsync<T>(Func<DeleteByQueryDescriptor<T>, DeleteByQueryDescriptor<T>> deleteByQuerySelector)
+		Task<IDeleteByQueryResponse> DeleteByQueryAsync<T>(Func<DeleteByQueryDescriptor<T>, DeleteByQueryDescriptor<T>> deleteByQuerySelector)
 			where T : class;
 
 		/// <inheritdoc />
-		Task<IDeleteResponse> DeleteByQueryAsync(IDeleteByQueryRequest deleteByQueryRequest);
+		Task<IDeleteByQueryResponse> DeleteByQueryAsync(IDeleteByQueryRequest deleteByQueryRequest);
 
 		/// <summary>
 		/// The bulk API makes it possible to perform many index/delete operations in a single API call. 

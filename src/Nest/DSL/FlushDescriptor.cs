@@ -31,12 +31,5 @@ namespace Nest
 		{
 			FlushPathInfo.Update(pathInfo, this);
 		}
-
-		[Obsolete("Scheduled to be removed in 2.0")]
-		public FlushDescriptor Full(bool full)
-		{
-			this.Request.RequestParameters.Full(full);
-			return this;
-		}
 	}
 }

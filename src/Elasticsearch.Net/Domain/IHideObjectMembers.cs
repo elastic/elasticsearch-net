@@ -43,5 +43,12 @@ namespace Elasticsearch.Net
 		[EditorBrowsable(EditorBrowsableState.Never)]
 		string ToString();
 	}
-
+#if DNXCORE50
+	public class BrowsableAttribute : Attribute
+	{
+		public BrowsableAttribute(bool b)
+		{
+		}
+	}
+#endif
 }

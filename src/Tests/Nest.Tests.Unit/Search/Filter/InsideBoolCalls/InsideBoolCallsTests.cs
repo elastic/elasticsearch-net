@@ -12,7 +12,7 @@ namespace Nest.Tests.Unit.Search.Filter.InsideBoolCalls
       var s = new SearchDescriptor<ElasticsearchProject>()
        .From(0)
        .Take(10)
-       .Filter(ff => ff
+       .PostFilter(ff => ff
          .Bool(csq => csq
            .Must(
              mf => mf.Term(f => f.Name, "foo") || mf.Term(f => f.Name, "bar")
@@ -30,7 +30,7 @@ namespace Nest.Tests.Unit.Search.Filter.InsideBoolCalls
       var s = new SearchDescriptor<ElasticsearchProject>()
         .From(0)
         .Take(10)
-        .Filter(ff => ff
+        .PostFilter(ff => ff
           .Bool(csq => csq
             .Should(
               sf => sf.Term(f => f.Name, "foo") || sf.Term(f => f.Name, "bar")
@@ -48,7 +48,7 @@ namespace Nest.Tests.Unit.Search.Filter.InsideBoolCalls
       var s = new SearchDescriptor<ElasticsearchProject>()
         .From(0)
         .Take(10)
-        .Filter(ff => ff
+        .PostFilter(ff => ff
           .Bool(csq => csq
             .MustNot(
               mf => mf.Term(f => f.Name, "foo") || mf.Term(f => f.Name, "bar")

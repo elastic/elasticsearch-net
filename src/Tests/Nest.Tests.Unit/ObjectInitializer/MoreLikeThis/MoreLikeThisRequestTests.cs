@@ -32,7 +32,7 @@ namespace Nest.Tests.Unit.ObjectInitializer.MoreLikeThis
 				From = 0,
 				Size = 20,
 				Query = query,
-				Filter = new FilterContainer(new BoolFilter
+				PostFilter = new FilterContainer(new BoolFilter
 				{
 					Cache = true,
 					Must = new FilterContainer[]
@@ -42,9 +42,9 @@ namespace Nest.Tests.Unit.ObjectInitializer.MoreLikeThis
 				}),
 				TrackScores = true,
 				Explain = true,
-				Sort = new List<KeyValuePair<PropertyPathMarker, ISort>>()
+				Sort = new List<ISort>()
 				{
-					new KeyValuePair<PropertyPathMarker, ISort>("field", new Sort { Order = SortOrder.Ascending, Missing = "_first"})
+					new Sort { Field="field", Order = SortOrder.Ascending, Missing = "_first"}
 				}
 			};
 			var request = new MoreLikeThisRequest("some-index", "the-type","document-id-21")

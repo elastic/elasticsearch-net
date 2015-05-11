@@ -93,12 +93,6 @@ namespace Nest
 			return this.TryGet<PercentilesMetric>(key);
 		}
 
-		[Obsolete("Scheduled to be removed in 2.0.  Use TopHits() instead.")]
-		public TopHitsMetric TopHitsMetric(string key)
-		{
-			return this.TopHits(key);
-		}
-
 		public TopHitsMetric TopHits(string key)
 		{
 			return this.TryGet<TopHitsMetric>(key);

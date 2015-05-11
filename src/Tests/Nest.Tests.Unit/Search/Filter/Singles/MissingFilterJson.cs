@@ -10,11 +10,11 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 		public void MissingFilter()
 		{
 			var s = new SearchDescriptor<ElasticsearchProject>().From(0).Size(10)
-				.Filter(ff=>ff.Missing(f=>f.Name));
+				.PostFilter(ff=>ff.Missing(f=>f.Name));
 				
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
-				filter : {
+				post_filter : {
 						missing : { field : ""name"" }
 					}
 			}";

@@ -161,6 +161,8 @@
     <Compile Include="Domain\Mapping\SubMappings\FieldData\FieldDataRegexFilter.cs" />
     <Compile Include="Domain\Mapping\SubMappings\FieldData\FieldDataStringMapping.cs" />
     <Compile Include="Domain\Mapping\SubMappings\NormsMapping.cs" />
+    <Compile Include="Domain\Responses\DeleteByQueryResponse.cs" />
+    <Compile Include="DSL\Facets\Ip4ExpressionRange.cs" />
     <Compile Include="Domain\Mapping\SubMappings\MappingTransform.cs" />
     <Compile Include="Domain\Observers\RestoreObserver.cs" />
     <Compile Include="Domain\Observers\SnapshotObserver.cs" />
@@ -410,7 +412,6 @@
     <Compile Include="Exception\SnapshotException.cs" />
     <Compile Include="ExposedInternals\NestSerializer.cs" />
     <Compile Include="Enums\GeoDistance.cs" />
-    <Compile Include="Obsolete\Obsolete.cs" />
     <Compile Include="Resolvers\Converters\Aggregations\FiltersAggregatorConverter.cs" />
     <Compile Include="Resolvers\Converters\Aggregations\FilterAggregatorConverter.cs" />
     <Compile Include="Resolvers\Converters\ClusterRerouteCommandCollectionConverter.cs" />
@@ -895,7 +896,7 @@
     <Compile Include="Resolvers\Converters\ReadAsTypeConverter.cs" />
     <Compile Include="DSL\Facets\TermFacetDescriptor.cs" />
     <Compile Include="Domain\Facets\FilterFacet.cs" />
-    <Compile Include="Domain\Mapping\ParentTypeMapping.cs" />
+    <Compile Include="Domain\Mapping\ParentFieldMapping.cs" />
     <Compile Include="Domain\Responses\PercolateResponse.cs" />
     <Compile Include="Domain\Responses\UnregisterPercolateResponse.cs" />
     <Compile Include="Domain\Responses\RegisterPercolateResponse.cs" />
@@ -995,7 +996,6 @@
     <Compile Include="Resolvers\Converters\TokenizerCollectionConverter.cs" />
     <Compile Include="Resolvers\Converters\TypeNameMarkerConverter.cs" />
     <Compile Include="Resolvers\Converters\GeoPrecisionConverter.cs" />
-    <Compile Include="Resolvers\Converters\UriJsonConverter.cs" />
     <Compile Include="Resolvers\Converters\WarmerMappingConverter.cs" />
     <Compile Include="Resolvers\Converters\ShardsSegmentConverter.cs" />
     <Compile Include="Resolvers\Converters\MultiGetHitConverter.cs" />

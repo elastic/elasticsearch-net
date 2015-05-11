@@ -14,7 +14,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
-				.Filter(filter=>filter
+				.PostFilter(filter=>filter
 					.Indices(i=>i
 						.Indices(new [] { "index1", "index2"})
 						.Filter(f=>f.Term(p=>p.Name, "NEST"))
@@ -26,7 +26,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 			var expected = @"{
   from: 0,
   size: 10,
-  filter: {
+  post_filter: {
     indices: {
       indices: [
         ""index1"",
@@ -54,7 +54,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(10)
-				.Filter(filter=>filter
+				.PostFilter(filter=>filter
 					.Indices(i=>i
 						.Indices(new [] { "index1", "index2"})
 						.Filter(f=>f.Term(p=>p.Name, "NEST"))
@@ -66,7 +66,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 			var expected = @"{
   from: 0,
   size: 10,
-  filter: {
+  post_filter: {
     indices: {
       indices: [
         ""index1"",

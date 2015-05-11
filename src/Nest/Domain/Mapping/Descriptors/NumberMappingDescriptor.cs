@@ -31,7 +31,7 @@ namespace Nest
 			this._Mapping.IndexName = indexName;
 			return this;
 		}
-		public NumberMappingDescriptor<T> Index(NonStringIndexOption index = NonStringIndexOption.Analyzed)
+		public NumberMappingDescriptor<T> Index(NonStringIndexOption index = NonStringIndexOption.No)
 		{
 			this._Mapping.Index = index;
 			return this;

@@ -80,7 +80,7 @@ namespace Nest.Tests.Unit.Search.Filter.Bool
 			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(20)
-				.Filter(or1 && or2);
+				.PostFilter(or1 && or2);
 			
 
 			this.JsonEquals(s, System.Reflection.MethodInfo.GetCurrentMethod());
@@ -99,7 +99,7 @@ namespace Nest.Tests.Unit.Search.Filter.Bool
 			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(20)
-				.Filter(q=> {
+				.PostFilter(q=> {
 					return or1 && or2;
 				});
 
@@ -116,7 +116,7 @@ namespace Nest.Tests.Unit.Search.Filter.Bool
 			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(20)
-				.Filter(q =>
+				.PostFilter(q =>
 					(q.Term(f => f.Name, "foo") || q.Term(f => f.Name, "bar") || q.Term(f => f.Name, "blah"))
 					&& or2
 				);
@@ -134,7 +134,7 @@ namespace Nest.Tests.Unit.Search.Filter.Bool
 			var s = new SearchDescriptor<ElasticsearchProject>()
 				.From(0)
 				.Size(20)
-				.Filter(q =>
+				.PostFilter(q =>
 					{
 						var b = (q.Term(f => f.Name, "foo") || q.Term(f => f.Name, "bar") || q.Term(f => f.Name, "blah"));
 						if (1 == 1)

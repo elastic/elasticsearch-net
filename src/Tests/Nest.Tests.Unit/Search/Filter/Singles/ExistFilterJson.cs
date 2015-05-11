@@ -10,13 +10,13 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 		public void ExistFilter()
 		{
 			var s = new SearchDescriptor<ElasticsearchProject>().From(0).Size(10)
-				.Filter(filter=>filter
+				.PostFilter(filter=>filter
 					.Exists(f=>f.Name)
 			);
 				
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
-				filter : {
+				post_filter : {
 						exists : { field : ""name"" }
 					}
 			}";

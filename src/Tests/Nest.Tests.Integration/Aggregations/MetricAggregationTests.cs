@@ -230,8 +230,8 @@ namespace Nest.Tests.Integration.Aggregations
 				var hits = topHits.Hits<ElasticsearchProject>();
 				hits.Should().NotBeEmpty().And.NotContain(h=> h.Id.IsNullOrEmpty() || h.Index.IsNullOrEmpty());
 				hits.All(h => h.Explanation != null).Should().BeTrue();
-				hits.All(h => !h.Version.IsNullOrEmpty()).Should().BeTrue();
-				hits.All(h => h.Highlights.Count() > 0).Should().BeTrue();
+				hits.All(h => h.Version.HasValue);
+				hits.All(h => h.Highlights.Any()).Should().BeTrue();
 				hits.All(h => h.Fields.FieldValues<int[]>("locscriptfield").HasAny()).Should().BeTrue();
 				hits.All(h => h.Fields.FieldValues<string[]>("name").HasAny()).Should().BeTrue();
 				hits.All(h => h.Fields.FieldValues<string[]>("country").HasAny()).Should().BeTrue();

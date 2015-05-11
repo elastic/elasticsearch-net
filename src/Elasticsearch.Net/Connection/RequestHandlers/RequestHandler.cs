@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Net.NetworkInformation;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Elasticsearch.Net.Connection.Configuration;
@@ -94,7 +95,7 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 				var ms = this._memoryStreamProvider.New();
 				streamResponse.Response.CopyTo(ms);
 				bytes = ms.ToArray();
-				streamResponse.Response.Close();
+				streamResponse.Response.Dispose();
 				streamResponse.Response = ms;
 				streamResponse.Response.Position = 0;
 			}

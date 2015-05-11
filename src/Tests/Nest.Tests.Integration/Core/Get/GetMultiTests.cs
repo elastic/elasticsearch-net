@@ -80,7 +80,7 @@ namespace Nest.Tests.Integration.Core.Get
 			var personHit = people.FirstOrDefault(p => p.Id == authorId.ToString());
 			personHit.Should().NotBeNull();
 			personHit.Found.Should().BeTrue();
-			personHit.Version.Should().NotBeNullOrEmpty().And.Match("1");
+			personHit.Version.Should().Be(1);
 
 			var fieldSelection = personHit.FieldSelection;
 			fieldSelection.Should().NotBeNull();
@@ -109,7 +109,7 @@ namespace Nest.Tests.Integration.Core.Get
 			var personHit = result.Get<Person>(authorId);
 			personHit.Should().NotBeNull();
 			personHit.Found.Should().BeTrue();
-			personHit.Version.Should().NotBeNullOrEmpty().And.Match("1");
+			personHit.Version.Should().Be(1);
 
 			//personHit.FieldSelection would work too
 			var personFieldSelection = result.GetFieldSelection<Person>(authorId);

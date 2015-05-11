@@ -16,7 +16,7 @@ namespace Nest.Tests.Unit.Core.MoreLikeThis
 				.Search(s=>s
 					.From(0)
 					.Take(20)
-					.Filter(f=>f.Term(p=>p.Country, "The Netherlands"))
+					.PostFilter(f=>f.Term(p=>p.Country, "The Netherlands"))
 					.MatchAll()
 				)
 			);

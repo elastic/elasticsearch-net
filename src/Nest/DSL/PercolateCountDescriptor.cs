@@ -93,16 +93,6 @@ namespace Nest
 		/// <summary>
 		/// The object to perculate
 		/// </summary>
-		[Obsolete("Scheduled for removal in 2.0, please use Document() instead")]
-		public PercolateCountDescriptor<T> Object(T @object)
-		{
-			Self.Document = @object;
-			return this;
-		}
-
-		/// <summary>
-		/// The object to perculate
-		/// </summary>
 		public PercolateCountDescriptor<T> Id(string id)
 		{
 			Self.Id = id;

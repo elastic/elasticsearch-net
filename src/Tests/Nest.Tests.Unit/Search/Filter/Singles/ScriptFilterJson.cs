@@ -10,7 +10,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 		public void ScriptFilter()
 		{
 			var s = new SearchDescriptor<ElasticsearchProject>().From(0).Size(10)
-				.Filter(filter=>filter
+				.PostFilter(filter=>filter
 					.Script(sc=>sc
 						.Script("doc['num1'].value > 1")
 					)
@@ -18,7 +18,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 				
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
-				filter : {
+				post_filter : {
 						script : { 
 							script : ""doc['num1'].value > 1""
 						}
@@ -30,7 +30,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 		public void ScriptParamLangFilter()
 		{
 			var s = new SearchDescriptor<ElasticsearchProject>().From(0).Size(10)
-				.Filter(filter => filter
+				.PostFilter(filter => filter
 					.Script(sc => sc
 						.Script("doc['num1'].value > param1")
 						.Params(p => p.Add("param1", 12))
@@ -40,7 +40,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
-				filter : {
+				post_filter : {
 						script : { 
 							script : ""doc['num1'].value > param1"",
 							params : {
@@ -56,7 +56,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 		public void ScriptFilterParamsAndCache()
 		{
 			var s = new SearchDescriptor<ElasticsearchProject>().From(0).Size(10)
-				.Filter(filter => filter.Cache(true)
+				.PostFilter(filter => filter.Cache(true)
 					.Script(sc => sc
 						.Script("doc['num1'].value > param1")
 						.Params(p=>p.Add("param1", 1))
@@ -65,7 +65,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
-				filter : {
+				post_filter : {
 						script : { 
 							script : ""doc['num1'].value > param1"",
 							params: { param1 : 1 },

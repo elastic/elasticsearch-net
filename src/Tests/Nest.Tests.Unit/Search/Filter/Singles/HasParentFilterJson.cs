@@ -10,7 +10,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 		public void HasParentFilter()
 		{
 			var s = new SearchDescriptor<Person>().From(0).Size(10)
-				.Filter(ff=>ff
+				.PostFilter(ff=>ff
 					.HasParent<ElasticsearchProject>(d=>d
 						.Query(q=>q.Term(p=>p.Country, "value"))
 					)
@@ -18,7 +18,7 @@ namespace Nest.Tests.Unit.Search.Filter.Singles
 				
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ from: 0, size: 10, 
-				filter : {
+				post_filter : {
 					""has_parent"": {
 					  ""type"": ""elasticsearchprojects"",
 					  ""query"": {

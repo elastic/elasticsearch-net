@@ -27,7 +27,7 @@ namespace Nest
 		RewriteMultiTerm? Rewrite { get; set; }
 
 		[JsonProperty(PropertyName = "fuzziness")]
-		double? Fuzziness { get; set; }
+		IFuzziness Fuzziness { get; set; }
 
 		[JsonProperty(PropertyName = "fuzzy_transpositions")]
 		bool? FuzzyTranspositions { get; set; }
@@ -84,7 +84,7 @@ namespace Nest
 		public string Query { get; set; }
 		public string Analyzer { get; set; }
 		public RewriteMultiTerm? Rewrite { get; set; }
-		public double? Fuzziness { get; set; }
+		public IFuzziness Fuzziness { get; set; }
 		public bool? FuzzyTranspositions { get; set; }
 		public double? CutoffFrequency { get; set; }
 		public int? PrefixLength { get; set; }
@@ -115,7 +115,7 @@ namespace Nest
 
 		RewriteMultiTerm? IMatchQuery.Rewrite { get; set; }
 
-		double? IMatchQuery.Fuzziness { get; set; }
+		IFuzziness IMatchQuery.Fuzziness { get; set; }
 		bool? IMatchQuery.FuzzyTranspositions { get; set; }
 
 		double? IMatchQuery.CutoffFrequency { get; set; }
@@ -186,12 +186,24 @@ namespace Nest
 			Self.Analyzer = analyzer;
 			return this;
 		}
-		
-		public MatchQueryDescriptor<T> Fuzziness(double fuzziness)
+
+		public MatchQueryDescriptor<T> Fuzziness(double ratio)
 		{
-			Self.Fuzziness = fuzziness;
+			Self.Fuzziness = Nest.Fuzziness.Ratio(ratio);
 			return this;
 		}
+		public MatchQueryDescriptor<T> Fuzziness()
+		{
+			Self.Fuzziness = Nest.Fuzziness.Auto;
+			return this;
+		}
+
+		public MatchQueryDescriptor<T> Fuzziness(int editDistance)
+		{
+			Self.Fuzziness = Nest.Fuzziness.EditDistance(editDistance);
+			return this;
+		}
+		
 
 		public MatchQueryDescriptor<T> FuzzyTranspositions(bool fuzzyTranspositions = true)
 		{
