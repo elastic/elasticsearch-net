@@ -37,6 +37,9 @@ namespace Nest
 		[JsonConverter(typeof(StringEnumConverter))]
 		internal FieldValueFactorModifier? _Modifier { get; set; }
 
+		[JsonProperty("missing")]
+		internal double? _Missing { get; set; }
+
 		public FieldValueFactorDescriptor<T> Field(Expression<Func<T, object>> field)
 		{
 			this._Field = field;
@@ -52,6 +55,12 @@ namespace Nest
 		public FieldValueFactorDescriptor<T> Modifier(FieldValueFactorModifier modifier)
 		{
 			this._Modifier = modifier;
+			return this;
+		}
+
+		public FieldValueFactorDescriptor<T> Missing(double missing)
+		{
+			this._Missing = missing;
 			return this;
 		}
 	}

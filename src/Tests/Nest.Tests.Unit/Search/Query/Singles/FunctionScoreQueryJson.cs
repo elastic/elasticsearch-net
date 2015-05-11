@@ -14,12 +14,12 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 					.FunctionScore(fs => fs
 						.Query(qq => qq.MatchAll())
 						.Functions(
-						    f => f.Weight(3.0).Filter(ff => ff.Term(p => p.Name, "elasticsearch")),
+							f => f.Weight(3.0).Filter(ff => ff.Term(p => p.Name, "elasticsearch")),
 							f => f.Gauss(x => x.StartedOn, d => d.Scale("42w")),
 							f => f.Linear(x => x.FloatValue, d => d.Scale("0.3")),
 							f => f.Exp(x => x.DoubleValue, d => d.Scale("0.5")),
 							f => f.BoostFactor(2.0),
-							f => f.FieldValueFactor(op => op.Field(ff => ff.DoubleValue).Factor(2.5).Modifier(FieldValueFactorModifier.SquareRoot))
+							f => f.FieldValueFactor(op => op.Field(ff => ff.DoubleValue).Factor(2.5).Modifier(FieldValueFactorModifier.SquareRoot).Missing(1.0))
 						)
 						.ScoreMode(FunctionScoreMode.Sum)
 						.BoostMode(FunctionBoostMode.Replace)
@@ -28,21 +28,21 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ 
-                from: 0, size: 10, 
-                fields: [""content""],
+				from: 0, size: 10, 
+				fields: [""content""],
 				query : {
-                    function_score : { 
-                        functions: [
+					function_score : { 
+						functions: [
 							{weight: 3.0, filter: { term: { 'name': 'elasticsearch' }}},
-                            {gauss:  { startedOn  : { scale: '42w'}}},
-                            {linear: { floatValue : { scale: '0.3'}}},
-                            {exp:    { doubleValue: { scale: '0.5'}}}, 
-                            {boost_factor: 2.0 },
-							{field_value_factor: { field: 'doubleValue', factor: 2.5, modifier: 'sqrt'}}
-                        ],				
+							{gauss:  { startedOn  : { scale: '42w'}}},
+							{linear: { floatValue : { scale: '0.3'}}},
+							{exp:    { doubleValue: { scale: '0.5'}}}, 
+							{boost_factor: 2.0 },
+							{field_value_factor: { field: 'doubleValue', factor: 2.5, modifier: 'sqrt', missing: 1.0}}
+						],				
 						query : { match_all : {} },
-                        score_mode: 'sum',
-                        boost_mode: 'replace',
+						score_mode: 'sum',
+						boost_mode: 'replace',
 					}
 				}
 			}";
@@ -62,9 +62,9 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ 
-                from: 0, size: 10, 
+				from: 0, size: 10, 
 				query : {
-                    function_score : { 		
+					function_score : { 		
 						query : { match_all : {} },
 						weight : 2.0
 					}
@@ -85,7 +85,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 							f => f.Linear(x => x.FloatValue, d => d.Scale("0.3")),
 							f => f.Exp(x => x.DoubleValue, d => d.Scale("0.5")),
 							f => f.BoostFactor(2),
-							f => f.FieldValueFactor(db => db.Field(fa => fa.DoubleValue).Factor(3.4).Modifier(FieldValueFactorModifier.Ln))
+							f => f.FieldValueFactor(db => db.Field(fa => fa.DoubleValue).Factor(3.4).Modifier(FieldValueFactorModifier.Ln).Missing(1.4))
 						)
 						.ScoreMode(FunctionScoreMode.Sum)
 						.BoostMode(FunctionBoostMode.Replace)
@@ -94,19 +94,19 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"{ 
-                from: 0, size: 10, 
-                fields: [""content""],
+				from: 0, size: 10, 
+				fields: [""content""],
 				query : {
-                    function_score : { 
-                        functions: [
-                            {gauss:  { startedOn  : { scale: '42w'}}},
-                            {linear: { floatValue : { scale: '0.3'}}},
-                            {exp:    { doubleValue: { scale: '0.5'}}}, 
-                            {boost_factor: 2.0 },
-							{field_value_factor: { field: 'doubleValue', factor: 3.4, modifier: 'ln'}}
-                        ],				
-                        score_mode: 'sum',
-                        boost_mode: 'replace',
+					function_score : { 
+						functions: [
+							{gauss:  { startedOn  : { scale: '42w'}}},
+							{linear: { floatValue : { scale: '0.3'}}},
+							{exp:    { doubleValue: { scale: '0.5'}}}, 
+							{boost_factor: 2.0 },
+							{field_value_factor: { field: 'doubleValue', factor: 3.4, modifier: 'ln', missing: 1.4}}
+						],				
+						score_mode: 'sum',
+						boost_mode: 'replace',
 					}
 				}
 			}";
