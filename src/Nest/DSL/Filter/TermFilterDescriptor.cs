@@ -29,9 +29,25 @@ namespace Nest
 
 	public class TermFilterDescriptor : FilterBase, ITermFilter
 	{
+		private ITermFilter Self { get { return this; } }
+
 		PropertyPathMarker IFieldNameFilter.Field { get; set; }
 		object ITermFilter.Value { get; set; }
 		double? ITermFilter.Boost { get; set; }
+
+		public TermFilterDescriptor Field(PropertyPathMarker field)
+		{
+			Self.Field = field;
+			return this;
+		}
+
+
+		public TermFilterDescriptor Value(object value)
+		{
+			Self.Value = value;
+			return this;
+		}
+
 
 		bool IFilter.IsConditionless
 		{

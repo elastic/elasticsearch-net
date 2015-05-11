@@ -12,6 +12,10 @@ indent_size = 4
 indent_style = space
 indent_size = 2
 
+[*.fs]
+indent_style = space
+indent_size = 4
+
 [*.fsx]
 indent_style = space
 indent_size = 4
