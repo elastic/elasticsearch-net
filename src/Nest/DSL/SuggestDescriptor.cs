@@ -28,9 +28,8 @@ namespace Nest
 		{
 			Update(pathInfo, request);
 
-			pathInfo.Index = string.IsNullOrEmpty(connectionSettingsValues.Inferrer.IndexName<T>()) ?
-				typeof(T).Name.ToLower() :
-				connectionSettingsValues.Inferrer.IndexName<T>();
+			if(string.IsNullOrEmpty(pathInfo.Index))
+				pathInfo.Index = connectionSettingsValues.Inferrer.IndexName<T>();
 		}
 
 		public static object GetCustomJson(ISuggestRequest suggestRequest)
