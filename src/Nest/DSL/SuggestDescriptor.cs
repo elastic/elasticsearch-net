@@ -23,6 +23,15 @@ namespace Nest
 			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
 		}
 
+		public static void Update<T>(ElasticsearchPathInfo<SuggestRequestParameters> pathInfo, ISuggestRequest request, IConnectionSettingsValues connectionSettingsValues)
+			where T : class
+		{
+			Update(pathInfo, request);
+
+			if(string.IsNullOrEmpty(pathInfo.Index))
+				pathInfo.Index = connectionSettingsValues.Inferrer.IndexName<T>();
+		}
+
 		public static object GetCustomJson(ISuggestRequest suggestRequest)
 		{
 			if (suggestRequest == null || (suggestRequest.GlobalText.IsNullOrEmpty() && suggestRequest.Suggest == null))
@@ -140,7 +149,7 @@ namespace Nest
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SuggestRequestParameters> pathInfo)
 		{
-			SuggestPathInfo.Update(pathInfo, this);
+			SuggestPathInfo.Update<T>(pathInfo, this, settings);
 		}
 
 	}
