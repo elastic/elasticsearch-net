@@ -830,6 +830,7 @@
     <None Include="QueryParsers\Filter\Term.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Reproduce\FixDslThroughCustomInterfaceImplementation.json" />
     <None Include="Reproduce\Issue1199Index.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

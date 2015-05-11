@@ -749,10 +749,7 @@ namespace Nest
 		{
 			sortSelector.ThrowIfNull("sortSelector");
 			var descriptor = sortSelector(new SortFieldDescriptor<T>());
-			if (descriptor == null || descriptor.Field.IsConditionless())
-				return this;
-
-			Self.Sort.Add(new KeyValuePair<PropertyPathMarker, ISort>(descriptor.Field, descriptor));
+			AddSort(descriptor);
 			return this;
 		}
 
@@ -764,9 +761,7 @@ namespace Nest
 		{
 			sortSelector.ThrowIfNull("sortSelector");
 			var descriptor = sortSelector(new SortGeoDistanceDescriptor<T>());
-			if (descriptor == null || descriptor.Field.IsConditionless())
-				return this;
-			Self.Sort.Add(new KeyValuePair<PropertyPathMarker, ISort>("_geo_distance", descriptor));
+			AddSort(descriptor);
 			return this;
 		}
 
@@ -778,9 +773,7 @@ namespace Nest
 		{
 			sortSelector.ThrowIfNull("sortSelector");
 			var descriptor = sortSelector(new SortScriptDescriptor<T>());
-			if (descriptor == null || (descriptor.Script.IsNullOrEmpty() && descriptor.File.IsNullOrEmpty()))
-				return this;
-			Self.Sort.Add(new KeyValuePair<PropertyPathMarker, ISort>("_script", descriptor));
+			AddSort(descriptor);
 			return this;
 		}
 
