@@ -552,10 +552,10 @@
     <Compile Include="Search\Source\SourceTests.cs" />
     <Compile Include="Search\Sorting\FunctionScoreTests.cs" />
     <Compile Include="Search\Sorting\SortTests.cs" />
-    <Compile Include="Search\suggest\CompletionSuggestTests.cs" />
-    <Compile Include="Search\suggest\PhraseSuggestTests.cs" />
-    <Compile Include="Search\suggest\SuggestUrlTest.cs" />
-    <Compile Include="Search\suggest\TermSuggestTests.cs" />
+    <Compile Include="Search\Suggest\CompletionSuggestTests.cs" />
+    <Compile Include="Search\Suggest\PhraseSuggestTests.cs" />
+    <Compile Include="Search\Suggest\SuggestUrlTest.cs" />
+    <Compile Include="Search\Suggest\TermSuggestTests.cs" />
     <Compile Include="Settings\UsePrettyResponseTests.cs" />
     <Compile Include="TestElasticClient.cs" />
     <Compile Include="Core\Update\UpdateTests.cs" />

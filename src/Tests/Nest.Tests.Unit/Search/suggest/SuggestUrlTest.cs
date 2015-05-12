@@ -6,7 +6,7 @@ using FluentAssertions;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
 
-namespace Nest.Tests.Unit.Search.suggest
+namespace Nest.Tests.Unit.Search.Suggest
 {
 	[TestFixture]
 	public class SuggestUrlTest
@@ -56,6 +56,17 @@ namespace Nest.Tests.Unit.Search.suggest
 				expected: "/elasticsearchproject/_suggest",
 				descriptor: d => d.Term("name", s => s.OnField(f => f.Contributors)).Index<ElasticsearchVersionInfo>(),
 				settings: settings
+			);
+		}
+
+		[Test]
+		public void Suggest_to_specific_index_specified_as_string_in_descriptor_url_test()
+		{
+			var settings = new ConnectionSettings(new SingleNodeConnectionPool(new Uri("http://esserver.com")));
+
+			TestUrl(
+				expected: "/anotherindex/_suggest",
+				descriptor: d => d.Term("name", s => s.OnField(f => f.Contributors)).Index("anotherindex")
 			);
 		}
 	}
