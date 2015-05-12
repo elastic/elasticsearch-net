@@ -7,11 +7,9 @@ if not exist build\tools\nuget\nuget.exe (
 )
 
 REM we need FAKE to process our build scripts
-SET FAKEVERSION="3.28.8"
-SET FAKEDIR="FAKE."%FAKEVERSION%
-if not exist build\tools\%FAKEDIR%\tools\Fake.exe (
+if not exist build\tools\FAKE\tools\Fake.exe (
     ECHO FAKE not found.. Installing..
-    "build\tools\nuget\nuget.exe" "install" "FAKE" "-OutputDirectory" "build\tools" "-Version" "%FAKEVERSION%"
+    "build\tools\nuget\nuget.exe" "install" "FAKE" "-OutputDirectory" "build\tools" "-Version" "3.28.8" "-ExcludeVersion"
 )
 
 if not exist build\tools\gitlink\lib\net45\gitlink.exe (
@@ -55,4 +53,4 @@ IF NOT [%2]==[] (set VERSION="%2")
 shift
 shift
 
-"build\tools\%FAKEDIR%\tools\Fake.exe" "build\\scripts\\build.fsx" "target=%TARGET%" "version=%VERSION%"
+"build\tools\FAKE\tools\Fake.exe" "build\\scripts\\build.fsx" "target=%TARGET%" "version=%VERSION%"
