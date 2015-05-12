@@ -39,15 +39,23 @@ namespace Nest.Tests.Literate
 		protected virtual void Teardown(IElasticClient client) { }
 
 
-		[Fact] private void SerializesInitializer() => this.AssertSerializes(this.InstanceInitializer);
+		[Fact] protected void SerializesInitializer() => this.AssertSerializes(this.InstanceInitializer);
 
-		[Fact] private void SerializesFluent() => this.AssertSerializes(this.InstanceFluent);
+		[Fact] protected void SerializesFluent() => this.AssertSerializes(this.InstanceFluent);
 	}
 
-	public abstract class EndpointUsageTests<TResponse>
-		: SerializationTests
+	public abstract class EndpointUsageTests<TResponse, TInterface, TDescriptor, TInitializer> : SerializationTests
 		where TResponse : IResponse
+		where TDescriptor : TInterface, new() 
+		where TInitializer : TInterface
 	{
+		protected class T { };
+
+		private Func<IElasticClient, Func<TDescriptor, TInterface>, TResponse> _fluentCall;
+		private Func<IElasticClient, Func<TDescriptor, TInterface>, Task<TResponse>> _fluentAsyncCall;
+		private Func<IElasticClient, TInitializer, TResponse> _requestCall;
+		private Func<IElasticClient, TInitializer, Task<TResponse>> _requestAsyncCall;
+
 		public abstract int ExpectStatusCode { get; }
 		public abstract bool ExpectIsValid { get; }
 		public abstract void AssertUrl(string url);
@@ -55,14 +63,29 @@ namespace Nest.Tests.Literate
 		protected TResponse InstanceInitializer { get; private set; }
 		protected TResponse InstanceFluent { get; private set; }
 
-		protected abstract TResponse Initializer(IElasticClient client);
-		protected abstract TResponse Fluent(IElasticClient client);
+		protected abstract TInitializer Initializer { get; }
+		protected abstract Func<TDescriptor, TInterface> Fluent { get; }
+		protected abstract void ClientUsage();
+
+		protected void Calls(
+			Func<IElasticClient, Func<TDescriptor, TInterface>, TResponse> fluent,
+			Func<IElasticClient, Func<TDescriptor, TInterface>, Task<TResponse>> fluentAsync,
+			Func<IElasticClient, TInitializer, TResponse> request,
+			Func<IElasticClient, TInitializer, Task<TResponse>> requestAsync
+		)
+		{
+			this._fluentCall = fluent;
+			this._fluentAsyncCall = fluentAsync;
+			this._requestCall = request;
+			this._requestAsyncCall = requestAsync;
+		}
 
 		public EndpointUsageTests()
 		{
 			var client = this.Client();
-			this.InstanceInitializer = this.Initializer(client);
-			this.InstanceFluent = this.Fluent(client);
+			this.ClientUsage();
+			this.InstanceInitializer = this._requestCall(client, this.Initializer);
+			this.InstanceFluent = this._fluentCall(client, this.Fluent);
 		}
 
 		protected virtual ConnectionSettings ConnectionSettings(ConnectionSettings settings) => settings; 
@@ -74,10 +97,12 @@ namespace Nest.Tests.Literate
 			assert(this.InstanceInitializer);
 		}
 
-		[Fact] void HandlesStatusCode() =>
+		[Fact] protected void HandlesStatusCode() =>
 			this.Dispatch(r=>r.ConnectionStatus.HttpStatusCode.Should().Be(this.ExpectStatusCode));
 
-		[Fact] private void Serializes() => this.Dispatch(r=> this.AssertSerializes(r));
+		[Fact] protected void SerializesInitializer() => this.AssertSerializes(this.Initializer);
+
+		[Fact] protected void SerializesFluent() => this.AssertSerializes(this.Fluent(new TDescriptor()));
 
 	}
 }

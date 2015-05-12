@@ -22,7 +22,7 @@ namespace SearchApis.RequestBody
 		public class Usage : GeneralUsageTests<ITermFilter, TermFilterDescriptor, TermFilter>
 		{
 			protected override object ExpectedJson { get; } =
-				new {field = "field", value = "value"};
+				new  { field = "value" };
 
 			protected override TermFilter Initializer(IElasticClient client) =>
 				new TermFilter()
@@ -33,12 +33,13 @@ namespace SearchApis.RequestBody
 
 			protected override Func<TermFilterDescriptor, ITermFilter> Fluent(IElasticClient client) =>
 				term=>term.Field("field").Value("value");
+			
 		}
 		
 		public class UsageInsideFilterDescriptor : GeneralUsageTests<IFilterContainer, FilterDescriptor<object>, FilterContainer>
 		{
 			protected override object ExpectedJson { get; } =
-				new { term = new { field = "field", value = "value"} };
+				new { term = new { field = "value" } };
 
 			protected override FilterContainer Initializer(IElasticClient client) =>
 				new TermFilter()

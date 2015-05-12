@@ -1,15 +1,22 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Elasticsearch.Net;
+using Newtonsoft.Json;
 
 namespace Nest
 {
 	public interface IResponse : IResponseWithRequestInformation
 	{
+		[JsonIgnore]
 		bool IsValid { get; }
+
+		[JsonIgnore]
 		IElasticsearchResponse ConnectionStatus { get; }
+
+		[JsonIgnore]
 		ElasticInferrer Infer { get; }
 
+		[JsonIgnore]
 		ElasticsearchServerError ServerError { get; }
 	}
 		

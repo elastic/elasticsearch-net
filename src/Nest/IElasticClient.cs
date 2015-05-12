@@ -736,7 +736,7 @@ namespace Nest
 		/// </summary>
 		/// <typeparam name="T">The type used to infer the index and typename as well describe the query strongly typed</typeparam>
 		/// <param name="searchSelector">A descriptor that describes the parameters for the search operation</param>
-		ISearchResponse<T> Search<T>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searchSelector)
+		ISearchResponse<T> Search<T>(Func<SearchDescriptor<T>, ISearchRequest> searchSelector)
 			where T : class;
 
 		/// <inheritdoc />
@@ -744,7 +744,7 @@ namespace Nest
 			where T : class;
 
 		/// <inheritdoc />
-		ISearchResponse<TResult> Search<T, TResult>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searchSelector)
+		ISearchResponse<TResult> Search<T, TResult>(Func<SearchDescriptor<T>, ISearchRequest> searchSelector)
 			where T : class
 			where TResult : class;
 
@@ -756,7 +756,7 @@ namespace Nest
 		/// <inheritdoc />
 		/// <typeparam name="T">The type used to infer the index and typename as well describe the query strongly typed</typeparam>
 		/// <param name="searchSelector">A descriptor that describes the parameters for the search operation</param>
-		Task<ISearchResponse<T>> SearchAsync<T>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searchSelector)
+		Task<ISearchResponse<T>> SearchAsync<T>(Func<SearchDescriptor<T>, ISearchRequest> searchSelector)
 			where T : class;
 
 		/// <inheritdoc />
@@ -764,7 +764,7 @@ namespace Nest
 			where T : class;
 
 		/// <inheritdoc />
-		Task<ISearchResponse<TResult>> SearchAsync<T, TResult>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searchSelector)
+		Task<ISearchResponse<TResult>> SearchAsync<T, TResult>(Func<SearchDescriptor<T>, ISearchRequest> searchSelector)
 			where T : class
 			where TResult : class;
 

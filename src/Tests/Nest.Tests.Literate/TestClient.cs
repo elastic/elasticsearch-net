@@ -21,7 +21,7 @@ namespace Nest.Tests.Literate
 
 		public static Uri CreateBaseUri(int? port = null)
 		{
-			var host = "localhost";
+			var host = "localhost2";
 			if (port != 9500 && Process.GetProcessesByName("fiddler").Any())
 				host = "ipv4.fiddler";
 

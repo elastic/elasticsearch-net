@@ -131,7 +131,6 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <Import Project="..\..\..\.paket\paket.targets" />
   <ItemGroup>
     <Reference Include="AutoPoco">
       <HintPath>..\..\..\packages\AutoPoco\lib\AutoPoco.dll</HintPath>

@@ -152,7 +152,6 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <Import Project="..\..\..\.paket\paket.targets" />
   <Choose>
     <When Condition="$(TargetFrameworkIdentifier) == '.NETCore'">
       <ItemGroup>

@@ -43,6 +43,7 @@ namespace Nest.Tests.Unit.Cluster
 		[Test]
 		public void TestAllTheUrls()
 		{
+
 			Do("POST", "/_aliases", c => c.Alias(a => a));
 			Do("POST", "/_analyze", c => c.Analyze(a => a.Text("blah")));
 			Do("POST", "/myindex/_analyze", c => c.Analyze(a => a.Index("myindex").Text("blah")));

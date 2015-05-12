@@ -93,7 +93,6 @@ namespace Nest
 		IPrefixFilter Prefix { get; set; }
 
 		[JsonProperty(PropertyName = "term")]
-		[JsonConverter(typeof (TermFilterConverter))]
 		ITermFilter Term { get; set; }
 
 		[JsonProperty(PropertyName = "terms")]
