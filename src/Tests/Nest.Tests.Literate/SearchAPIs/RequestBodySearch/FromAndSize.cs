@@ -31,8 +31,8 @@ namespace SearchApis.RequestBody
 
 		public class Usage : SearchUsageBase
 		{
-			protected override object ExpectedJson { get; } =
-				new {from = 10, size = 12};
+			protected override object ExpectedJson =>
+				new { from = 10, size = 12 };
 
 			public override int ExpectStatusCode => 200;
 

@@ -15,21 +15,18 @@ namespace Nest.Tests.Literate
 {
 	public abstract class GeneralUsageTests<TInterface, TDescriptor, TInitializer>
 		: SerializationTests
-		where TDescriptor : TInterface, new() 
+		where TDescriptor : TInterface, new()
 		where TInitializer : TInterface
 	{
-		protected TInterface InstanceInitializer { get; private set; }
-		protected TInterface InstanceFluent { get; private set; }
+		protected abstract TInitializer Initializer { get; }
+		protected abstract Func<TDescriptor, TInterface> Fluent { get; }
 
-		protected abstract TInitializer Initializer(IElasticClient client);
-		protected abstract Func<TDescriptor, TInterface> Fluent(IElasticClient client);
+		protected TInterface FluentInstance { get; private set; }
 
 		public GeneralUsageTests()
 		{
 			var client = this.Client();
-			this.InstanceInitializer = this.Initializer(client);
-			var func = this.Fluent(client);
-			this.InstanceFluent = func(new TDescriptor());
+			this.FluentInstance = this.Fluent(new TDescriptor());
 		}
 
 		protected virtual ConnectionSettings ConnectionSettings(ConnectionSettings settings) => settings; 
@@ -38,10 +35,9 @@ namespace Nest.Tests.Literate
 		protected virtual void Setup(IElasticClient client) { }
 		protected virtual void Teardown(IElasticClient client) { }
 
+		[Fact] protected void SerializesInitializer() => this.AssertSerializes(this.Initializer);
 
-		[Fact] protected void SerializesInitializer() => this.AssertSerializes(this.InstanceInitializer);
-
-		[Fact] protected void SerializesFluent() => this.AssertSerializes(this.InstanceFluent);
+		[Fact] protected void SerializesFluent() => this.AssertSerializes(this.FluentInstance);
 	}
 
 	public abstract class EndpointUsageTests<TResponse, TInterface, TDescriptor, TInitializer> : SerializationTests
