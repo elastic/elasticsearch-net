@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 using Elasticsearch.Net.Connection;
@@ -126,21 +125,6 @@ namespace Nest
 			return this.DispatchAsync<D, Q, R, I>(descriptor, dispatch);
 		}
 
-		private static readonly Lazy<MethodInfo> preserveStackTraceMethodInfo = new Lazy<MethodInfo>(() => 
-			typeof(Exception).GetMethod("InternalPreserveStackTrace", BindingFlags.Instance | BindingFlags.NonPublic)
-		);
-
-		private static void RethrowKeepingStackTrace(Exception exception)
-		{
-			// In .Net 4.5 it would be simple : ExceptionDispatchInfo.Capture(exception).Throw();
-			// But as NEST target .Net 4.0 the old internal method must be used
-			if (preserveStackTraceMethodInfo.Value != null)
-			{
-				preserveStackTraceMethodInfo.Value.Invoke(exception, null);
-			}
-			throw exception;
-		}
-
 		private Task<I> DispatchAsync<D, Q, R, I>(
 			D descriptor
 			, Func<ElasticsearchPathInfo<Q>, D, Task<ElasticsearchResponse<R>>> dispatch
@@ -158,13 +142,13 @@ namespace Nest
 					{
 						var mr = r.Exception.InnerException as MaxRetryException;
 						if (mr != null)
-							RethrowKeepingStackTrace(mr);
+							mr.RethrowKeepingStackTrace();
 
 						var ae = r.Exception.Flatten();
 						if (ae.InnerException != null)
-							RethrowKeepingStackTrace(ae.InnerException);
+							ae.InnerException.RethrowKeepingStackTrace();
 
-						RethrowKeepingStackTrace(ae);
+						ae.RethrowKeepingStackTrace();
 					}
 					return ResultsSelector<D, Q, R>(r.Result, descriptor);
 				});
