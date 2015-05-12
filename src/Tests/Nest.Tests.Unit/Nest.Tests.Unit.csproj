@@ -554,6 +554,7 @@
     <Compile Include="Search\Sorting\SortTests.cs" />
     <Compile Include="Search\suggest\CompletionSuggestTests.cs" />
     <Compile Include="Search\suggest\PhraseSuggestTests.cs" />
+    <Compile Include="Search\suggest\SuggestUrlTest.cs" />
     <Compile Include="Search\suggest\TermSuggestTests.cs" />
     <Compile Include="Settings\UsePrettyResponseTests.cs" />
     <Compile Include="TestElasticClient.cs" />
