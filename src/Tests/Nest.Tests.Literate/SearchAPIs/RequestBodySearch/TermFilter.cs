@@ -1,16 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Nest;
-using Nest.Tests.Literate;
-using Ploeh.AutoFixture;
-using Xunit;
-using FluentAssertions;
-using Nest.Resolvers;
 
-namespace SearchApis.RequestBody
+namespace Nest.Tests.Literate.SearchAPIs.RequestBodySearch
 {
 	public class TermFilterTests
 	{
