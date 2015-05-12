@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Nest
 {
-	public interface IDispatch
+	public interface IHighLevelToLowLevelDispatcher
 	{
 		R Dispatch<D, Q, R>(D descriptor, Func<ElasticsearchPathInfo<Q>, D, ElasticsearchResponse<R>> dispatch)
 			where Q : FluentRequestParameters<Q>, new()
