@@ -32,7 +32,7 @@ namespace SearchApis.RequestBody
 				};
 
 			protected override Func<TermFilterDescriptor, ITermFilter> Fluent =>
-				term=>term.Field("field").Value("value");
+				term => term.Field("field").Value("value");
 		}
 		
 		public class UsageInsideFilterDescriptor : GeneralUsageTests<IFilterContainer, FilterDescriptor<object>, FilterContainer>
@@ -48,7 +48,7 @@ namespace SearchApis.RequestBody
 				};
 
 			protected override Func<FilterDescriptor<object>, IFilterContainer> Fluent =>
-				filter=>filter.Term("field" , "value");
+				filter => filter.Term("field" , "value");
 		}
 
 	}

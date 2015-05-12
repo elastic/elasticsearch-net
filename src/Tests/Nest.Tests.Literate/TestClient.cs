@@ -17,11 +17,11 @@ namespace Nest.Tests.Literate
 		}
 
 		public static IConnection CreateConnection(IConnectionSettingsValues connectionSettings) =>
-			RunIntegrationTests() ? new HttpConnection(connectionSettings) : new InMemoryConnection(connectionSettings);
+			RunIntegrationTests ? new HttpConnection(connectionSettings) : new InMemoryConnection(connectionSettings);
 
 		public static Uri CreateBaseUri(int? port = null)
 		{
-			var host = "localhost2";
+			var host = "localhost";
 			if (port != 9500 && Process.GetProcessesByName("fiddler").Any())
 				host = "ipv4.fiddler";
 
@@ -29,14 +29,17 @@ namespace Nest.Tests.Literate
 			return uri;
 		}
 
-		public static bool RunIntegrationTests()
+		public static bool RunIntegrationTests
 		{
-			if (_runIntegrationTests) return true;
+			get
+			{
+				if (_runIntegrationTests) return true;
 #if INTEGRATIONTESTS
-			return true;
+				return true;
 #else
-			return false;
+				return false;
 #endif
+			}
 		}
 	}
 }

@@ -10,13 +10,14 @@ using Newtonsoft.Json.Linq;
 using Ploeh.AutoFixture;
 using SearchApis.RequestBody;
 using Xunit;
+using System.Runtime.CompilerServices;
 
 namespace Nest.Tests.Literate
 {
-	public abstract class GeneralUsageTests<TInterface, TDescriptor, TInitializer>
-		: SerializationTests
+	public abstract class GeneralUsageTests<TInterface, TDescriptor, TInitializer> : SerializationTests
 		where TDescriptor : TInterface, new()
-		where TInitializer : TInterface
+		where TInitializer : class, TInterface
+		where TInterface : class
 	{
 		protected abstract TInitializer Initializer { get; }
 		protected abstract Func<TDescriptor, TInterface> Fluent { get; }
@@ -32,37 +33,84 @@ namespace Nest.Tests.Literate
 		protected virtual ConnectionSettings ConnectionSettings(ConnectionSettings settings) => settings; 
 		protected virtual IElasticClient Client() => TestClient.GetClient(ConnectionSettings); 
 
-		protected virtual void Setup(IElasticClient client) { }
-		protected virtual void Teardown(IElasticClient client) { }
+		[Fact] protected void SerializesInitializer() => this.AssertSerializesAndRoundTrips(this.Initializer);
 
-		[Fact] protected void SerializesInitializer() => this.AssertSerializes(this.Initializer);
+		[Fact] protected void SerializesFluent() => this.AssertSerializesAndRoundTrips(this.FluentInstance);
+	}
 
-		[Fact] protected void SerializesFluent() => this.AssertSerializes(this.FluentInstance);
+	public class IntegrationFact : FactAttribute
+	{
+		public IntegrationFact()
+		{
+			if (!TestClient.RunIntegrationTests)
+			{
+				Skip = "Ignored because we are not running integration tests";
+			}
+		}
+	}
+
+	/// <summary>
+	/// Provides support for asynchronous lazy initialization. This type is fully threadsafe.
+	/// </summary>
+	/// <typeparam name="T">The type of object that is being asynchronously initialized.</typeparam>
+	public sealed class AsyncLazy<T>
+	{
+		/// <summary>
+		/// The underlying lazy task.
+		/// </summary>
+		private readonly Lazy<Task<T>> instance;
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="AsyncLazy&lt;T&gt;"/> class.
+		/// </summary>
+		/// <param name="factory">The delegate that is invoked on a background thread to produce the value when it is needed.</param>
+		public AsyncLazy(Func<T> factory)
+		{
+			instance = new Lazy<Task<T>>(() => Task.Run(factory));
+		}
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="AsyncLazy&lt;T&gt;"/> class.
+		/// </summary>
+		/// <param name="factory">The asynchronous delegate that is invoked on a background thread to produce the value when it is needed.</param>
+		public AsyncLazy(Func<Task<T>> factory)
+		{
+			instance = new Lazy<Task<T>>(() => Task.Run(factory));
+		}
+
+		/// <summary>
+		/// Asynchronous infrastructure support. This method permits instances of <see cref="AsyncLazy&lt;T&gt;"/> to be await'ed.
+		/// </summary>
+		public TaskAwaiter<T> GetAwaiter()
+		{
+			return instance.Value.GetAwaiter();
+		}
+
+		/// <summary>
+		/// Starts the asynchronous initialization, if it has not already started.
+		/// </summary>
+		public void Start()
+		{
+			var unused = instance.Value;
+		}
 	}
 
 	public abstract class EndpointUsageTests<TResponse, TInterface, TDescriptor, TInitializer> : SerializationTests
 		where TResponse : IResponse
-		where TDescriptor : TInterface, new() 
-		where TInitializer : TInterface
+		where TDescriptor : class, TInterface, new() 
+		where TInitializer : class, TInterface
+		where TInterface : class
 	{
-		protected class T { };
-
-		private Func<IElasticClient, Func<TDescriptor, TInterface>, TResponse> _fluentCall;
-		private Func<IElasticClient, Func<TDescriptor, TInterface>, Task<TResponse>> _fluentAsyncCall;
-		private Func<IElasticClient, TInitializer, TResponse> _requestCall;
-		private Func<IElasticClient, TInitializer, Task<TResponse>> _requestAsyncCall;
+		private AsyncLazy<IDictionary<string, TResponse>> Responses;
 
 		public abstract int ExpectStatusCode { get; }
 		public abstract bool ExpectIsValid { get; }
 		public abstract void AssertUrl(string url);
 
-		protected TResponse InstanceInitializer { get; private set; }
-		protected TResponse InstanceFluent { get; private set; }
-
 		protected abstract TInitializer Initializer { get; }
 		protected abstract Func<TDescriptor, TInterface> Fluent { get; }
-		protected abstract void ClientUsage();
 
+		protected abstract void ClientUsage();
 		protected void Calls(
 			Func<IElasticClient, Func<TDescriptor, TInterface>, TResponse> fluent,
 			Func<IElasticClient, Func<TDescriptor, TInterface>, Task<TResponse>> fluentAsync,
@@ -70,35 +118,48 @@ namespace Nest.Tests.Literate
 			Func<IElasticClient, TInitializer, Task<TResponse>> requestAsync
 		)
 		{
-			this._fluentCall = fluent;
-			this._fluentAsyncCall = fluentAsync;
-			this._requestCall = request;
-			this._requestAsyncCall = requestAsync;
+			var client = this.Client();
+			this.Responses = new AsyncLazy<IDictionary<string, TResponse>>(async () =>
+			{
+				var dict = new Dictionary<string, TResponse>();
+				if (!TestClient.RunIntegrationTests) return dict;
+
+				dict.Add("fluent", fluent(client, this.Fluent));
+				dict.Add("fluentAsync", await fluentAsync(client, this.Fluent));
+				dict.Add("initializer", request(client, this.Initializer));
+				dict.Add("initializerAsync", await requestAsync(client, this.Initializer));
+				return dict;
+			});
 		}
 
 		public EndpointUsageTests()
 		{
-			var client = this.Client();
 			this.ClientUsage();
-			this.InstanceInitializer = this._requestCall(client, this.Initializer);
-			this.InstanceFluent = this._fluentCall(client, this.Fluent);
 		}
 
 		protected virtual ConnectionSettings ConnectionSettings(ConnectionSettings settings) => settings; 
 		protected virtual IElasticClient Client() => TestClient.GetClient(ConnectionSettings); 
 
-		private void Dispatch(Action<TResponse> assert)
+		private async Task AssertOnAllResponses(Action<TResponse> assert)
 		{
-			assert(this.InstanceFluent);
-			assert(this.InstanceInitializer);
+			foreach (var kv in await this.Responses)
+			{
+				assert(kv.Value);
+			}
 		}
 
-		[Fact] protected void HandlesStatusCode() =>
-			this.Dispatch(r=>r.ConnectionStatus.HttpStatusCode.Should().Be(this.ExpectStatusCode));
+		[IntegrationFact] protected async void HandlesStatusCode() =>
+			await this.AssertOnAllResponses(r=>r.ConnectionStatus.HttpStatusCode.Should().Be(this.ExpectStatusCode));
 
-		[Fact] protected void SerializesInitializer() => this.AssertSerializes(this.Initializer);
+		[IntegrationFact] protected async void ReturnsExpectedIsValid() =>
+			await this.AssertOnAllResponses(r=>r.IsValid.Should().Be(this.ExpectIsValid));
 
-		[Fact] protected void SerializesFluent() => this.AssertSerializes(this.Fluent(new TDescriptor()));
+		[IntegrationFact] protected async void HitsTheCorrectUrl() =>
+			await this.AssertOnAllResponses(r=>this.AssertUrl(r.ConnectionStatus.RequestUrl));
+
+		[Fact] protected void SerializesInitializer() => this.AssertSerializesAndRoundTrips(this.Initializer);
+
+		[Fact] protected void SerializesFluent() => this.AssertSerializesAndRoundTrips(this.Fluent(new TDescriptor()));
 
 	}
 }

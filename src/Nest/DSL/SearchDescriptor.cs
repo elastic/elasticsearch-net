@@ -11,6 +11,7 @@ namespace Nest
 {
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[JsonConverter(typeof(ReadAsTypeConverter<SearchRequest>))]
 	public interface ISearchRequest : IQueryPath<SearchRequestParameters>
 	{
 		Type ClrType { get; }
@@ -279,7 +280,6 @@ namespace Nest
 		public Func<dynamic, Hit<dynamic>, Type> TypeSelector { get; set; }
 		public SearchRequestParameters QueryString { get; set; }
 	}
-
 
 	/// <summary>
 	/// A descriptor wich describes a search operation for _search and _msearch
