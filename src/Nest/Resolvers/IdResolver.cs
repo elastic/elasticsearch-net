@@ -70,7 +70,11 @@ namespace Nest.Resolvers
 			var idProperty = GetInferredId(type);
 			if (idProperty == null)
 			{
-				return null;
+				idProperty = @object.GetType().GetProperty("ID", BindingFlags.Public | BindingFlags.Instance | BindingFlags.IgnoreCase);
+				 if (idProperty == null)
+				 {
+				 	 return null;
+				 }
 			}
 			try
 			{
