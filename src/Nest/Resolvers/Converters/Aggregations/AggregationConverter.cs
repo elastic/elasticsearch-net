@@ -239,6 +239,8 @@ namespace Nest.Resolvers.Converters.Aggregations
 					bounds.Lower = reader.Value as double?;
 				}
 				extendedStatsMetric.StdDeviationBounds = bounds;
+				reader.Read();
+				reader.Read();
 			}
 
 			return extendedStatsMetric;
