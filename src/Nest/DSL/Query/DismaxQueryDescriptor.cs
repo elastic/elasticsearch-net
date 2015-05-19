@@ -74,11 +74,25 @@ namespace Nest
 			return this;
 		}
 
+		public DisMaxQueryDescriptor<T> Queries(params QueryContainer[] queries)
+		{
+			var descriptors = new List<QueryContainer>();
+			foreach (var q in queries)
+			{
+				if (q.IsConditionless)
+					continue;
+				descriptors.Add(q);
+			}
+			((IDisMaxQuery)this).Queries = descriptors.HasAny() ? descriptors : null;
+			return this;
+		}
+
 		public DisMaxQueryDescriptor<T> Boost(double boost)
 		{
 			Self.Boost = boost;
 			return this;
 		}
+
 		public DisMaxQueryDescriptor<T> TieBreaker(double tieBreaker)
 		{
 			Self.TieBreaker = tieBreaker;
