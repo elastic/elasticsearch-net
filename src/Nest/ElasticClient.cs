@@ -13,7 +13,7 @@ namespace Nest
 	/// <summary>
 	/// ElasticClient is NEST's strongly typed client which exposes fully mapped elasticsearch endpoints
 	/// </summary>
-	public partial class ElasticClient : Nest.IElasticClient
+	public partial class ElasticClient : IElasticClient, IHighLevelToLowLevelDispatcher
 	{
 		private readonly IConnectionSettingsValues _connectionSettings;
 
@@ -57,7 +57,7 @@ namespace Nest
 		}
 
 
-		private R Dispatch<D, Q, R>(
+		public R Dispatch<D, Q, R>(
 			Func<D, D> selector
 			, Func<ElasticsearchPathInfo<Q>, D, ElasticsearchResponse<R>> dispatch
 			)
@@ -70,7 +70,7 @@ namespace Nest
 			return this.Dispatch<D, Q, R>(descriptor, dispatch);
 		}
 
-		private R Dispatch<D, Q, R>(
+		public R Dispatch<D, Q, R>(
 			D descriptor
 			, Func<ElasticsearchPathInfo<Q>, D, ElasticsearchResponse<R>> dispatch
 			)
@@ -111,7 +111,7 @@ namespace Nest
 			return r;
 		}
 
-		private Task<I> DispatchAsync<D, Q, R, I>(
+		public Task<I> DispatchAsync<D, Q, R, I>(
 			Func<D, D> selector
 			, Func<ElasticsearchPathInfo<Q>, D, Task<ElasticsearchResponse<R>>> dispatch
 			)
@@ -125,7 +125,7 @@ namespace Nest
 			return this.DispatchAsync<D, Q, R, I>(descriptor, dispatch);
 		}
 
-		private Task<I> DispatchAsync<D, Q, R, I>(
+		public Task<I> DispatchAsync<D, Q, R, I>(
 			D descriptor
 			, Func<ElasticsearchPathInfo<Q>, D, Task<ElasticsearchResponse<R>>> dispatch
 			)
