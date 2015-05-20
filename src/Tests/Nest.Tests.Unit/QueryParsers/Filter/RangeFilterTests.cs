@@ -27,6 +27,25 @@ namespace Nest.Tests.Unit.QueryParsers.Filter
 
 		}
 
+        [Test]
+        [TestCase("cacheName", "cacheKey", true)]
+        public void Range_Deserializes_LessThanGreaterThan(string cacheName, string cacheKey, bool cache)
+        {
+            var rangeFilter = this.SerializeThenDeserialize(cacheName, cacheKey, cache,
+                f => f.Range,
+                f => f.Range(n => n
+                    .OnField(p => p.LOC)
+                    .Greater("10")
+                    .Lower("20")
+                    )
+                );
+
+            rangeFilter.Field.Should().Be("loc");
+            rangeFilter.LowerThan.Should().Be("20");
+            rangeFilter.GreaterThan.Should().Be("10");
+
+        }
+
 		[Test]
 		[TestCase("cacheName", "cacheKey", true)]
 		public void Range_Long_Deserializes(string cacheName, string cacheKey, bool cache)
