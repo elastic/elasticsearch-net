@@ -122,6 +122,7 @@ namespace Nest.Resolvers
 			defaultProperties = PropertiesOf<IInnerHitsContainer>(type, memberSerialization, defaultProperties, lookup);
 			//defaultProperties = PropertiesOf<IGlobalInnerHit>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IInnerHits>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<IDomainObject>(type, memberSerialization, defaultProperties, lookup);
 			return defaultProperties;
 		}
 
