@@ -4282,7 +4282,27 @@ namespace Nest
 			this.Request.RequestParameters.SearchIndices(search_indices);
 			return this;
 		}
-		
+
+        ///<summary>The search request</summary>
+        public MoreLikeThisDescriptor<T> SearchRequest(string search_request)
+        {
+            this.Request.RequestParameters.SearchRequest(search_request);
+            return this;
+        }
+
+        ///<summary>The search query hint</summary>
+        public MoreLikeThisDescriptor<T> SearchQueryHint(string search_query_hint)
+        {
+            this.Request.RequestParameters.SearchQueryHint(search_query_hint);
+            return this;
+        }
+
+        ///<summary>The search algorithm</summary>
+        public MoreLikeThisDescriptor<T> SearchAlgorithm(string search_algorithm)
+        {
+            this.Request.RequestParameters.SearchAlgorithm(search_algorithm);
+            return this;
+        }
 
 		///<summary>A scroll search request definition</summary>
 		public MoreLikeThisDescriptor<T> SearchScroll(string search_scroll)

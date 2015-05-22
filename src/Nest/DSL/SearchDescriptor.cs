@@ -9,11 +9,35 @@ using Nest.DSL.Descriptors;
 
 namespace Nest
 {
+    //[JsonObject(MemberSerialization.OptIn)]
+    public class Search_request_class
+    {
+        [JsonProperty(PropertyName = "fields")]
+        public string[] fields { get; set; }
+        [JsonProperty(PropertyName = "size")]
+        public int size { get; set; }
+        [JsonProperty(PropertyName = "query")]
+        [JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryContainer>, CustomJsonConverter>))]
+        public IQueryContainer Query { get; set; }
 
+    }
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface ISearchRequest : IQueryPath<SearchRequestParameters>
 	{
 		Type ClrType { get; }
+        
+        [JsonProperty(PropertyName = "field_mapping")]
+        [JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+        IDictionary<string, IList<string>> FieldMapping { get; set; }
+
+        [JsonProperty(PropertyName = "search_request")]
+        Search_request_class Search_request { get; set; }
+
+        [JsonProperty(PropertyName = "query_hint")]
+        string Query_hint { get; set; }
+        
+        [JsonProperty(PropertyName = "algorithm")]
+        string Algorithm { get; set; }
 
 		[JsonProperty(PropertyName = "timeout")]
 		string Timeout { get; set; }
@@ -68,7 +92,6 @@ namespace Nest
 		IDictionary<string, IScriptFilter> ScriptFields { get; set; }
 
 		[JsonProperty(PropertyName = "_source")]
-		[JsonConverter(typeof(ReadAsTypeConverter<SourceFilter>))]
 		ISourceFilter Source { get; set; }
 
 		[JsonProperty(PropertyName = "aggs")]
@@ -83,9 +106,9 @@ namespace Nest
 		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<FilterContainer>, CustomJsonConverter>))]
 		IFilterContainer Filter { get; set; }
 
-		[JsonProperty(PropertyName = "inner_hits")]
-		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		IDictionary<string, IInnerHitsContainer> InnerHits { get; set; }
+        [JsonProperty(PropertyName = "inner_hits")]
+        [JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+        IDictionary<string, IInnerHitsContainer> InnerHits { get; set; }
 
 		string Preference { get; }
 		
@@ -147,6 +170,10 @@ namespace Nest
 		Type ISearchRequest.ClrType { get { return _clrType; } }
 
 		public string Timeout { get; set; }
+        Search_request_class ISearchRequest.Search_request { get; set; }
+        string ISearchRequest.Query_hint { get; set; }
+        string ISearchRequest.Algorithm { get; set; }
+        public IDictionary<string, IList<string>> FieldMapping { get; set; }
 		public int? From { get; set; }
 		public int? Size { get; set; }
 		public bool? Explain { get; set; }
@@ -160,7 +187,7 @@ namespace Nest
 		public IList<KeyValuePair<PropertyPathMarker, ISort>> Sort { get; set; }
 		public IDictionary<IndexNameMarker, double> IndicesBoost { get; set; }
 		public IFilterContainer Filter { get; set; }
-		public IDictionary<string, IInnerHitsContainer> InnerHits { get; set; }
+        public IDictionary<string, IInnerHitsContainer> InnerHits { get; set; }
 		public IQueryContainer Query { get; set; }
 		public IRescore Rescore { get; set; }
 		public IDictionary<PropertyPathMarker, IFacetContainer> Facets { get; set; }
@@ -223,6 +250,10 @@ namespace Nest
 
 		public Type ClrType { get { return typeof(T);  } }
 		public string Timeout { get; set; }
+        Search_request_class ISearchRequest.Search_request { get; set; }
+        string ISearchRequest.Query_hint { get; set; }
+        string ISearchRequest.Algorithm { get; set; }
+        public IDictionary<string, IList<string>> FieldMapping { get; set; }
 		public int? From { get; set; }
 		public int? Size { get; set; }
 		public bool? Explain { get; set; }
@@ -239,7 +270,7 @@ namespace Nest
 		public IList<PropertyPathMarker> Fields { get; set; }
 		public IDictionary<string, IScriptFilter> ScriptFields { get; set; }
 		public ISourceFilter Source { get; set; }
-		public IDictionary<string, IInnerHitsContainer> InnerHits { get; set; }
+        public IDictionary<string, IInnerHitsContainer> InnerHits { get; set; }
 		public IDictionary<string, IAggregationContainer> Aggregations { get; set; }
 		public IQueryContainer Query { get; set; }
 		public IFilterContainer Filter { get; set; }
@@ -323,6 +354,10 @@ namespace Nest
 		/// </summary>
 		internal bool _Strict { get; set; }
 
+        Search_request_class ISearchRequest.Search_request { get; set; }
+        string ISearchRequest.Query_hint { get; set; }
+        string ISearchRequest.Algorithm { get; set; }
+        public IDictionary<string, IList<string>> FieldMapping { get; set; }
 		string ISearchRequest.Timeout { get; set; }
 		int? ISearchRequest.From { get; set; }
 		int? ISearchRequest.Size { get; set; }
@@ -356,7 +391,7 @@ namespace Nest
 
 		IDictionary<string, IAggregationContainer> ISearchRequest.Aggregations { get; set; }
 
-		IDictionary<string, IInnerHitsContainer> ISearchRequest.InnerHits { get; set; }
+        IDictionary<string, IInnerHitsContainer> ISearchRequest.InnerHits { get; set; }
 
 		Func<dynamic, Hit<dynamic>, Type> ISearchRequest.TypeSelector { get; set; }
 
@@ -369,6 +404,7 @@ namespace Nest
 			return this;
 		}
 
+
 		public SearchDescriptor<T> Aggregations(Func<AggregationDescriptor<T>, AggregationDescriptor<T>> aggregationsSelector)
 		{
 			var aggs = aggregationsSelector(new AggregationDescriptor<T>());
@@ -377,30 +413,30 @@ namespace Nest
 			return this;
 		}
 
-		public SearchDescriptor<T> InnerHits(
-			Func<
-				FluentDictionary<string, Func<InnerHitsContainerDescriptor<T>, IInnerHitsContainer>>, 
-				FluentDictionary<string, Func<InnerHitsContainerDescriptor<T>, IInnerHitsContainer>>
-			> innerHitsSelector)
-		{
-			if (innerHitsSelector == null)
-			{
-				Self.InnerHits = null;
-				return this;
-			}
-			var containers = innerHitsSelector(new FluentDictionary<string, Func<InnerHitsContainerDescriptor<T>, IInnerHitsContainer>>())
-				.Where(kv => kv.Value != null)
-				.Select(kv => new {Key = kv.Key, Value = kv.Value(new InnerHitsContainerDescriptor<T>())})
-				.Where(kv => kv.Value != null)
-				.ToDictionary(kv => kv.Key, kv => kv.Value);
-			if (containers == null || containers.Count == 0)
-			{
-				Self.InnerHits = null;
-				return this;
-			}
-			Self.InnerHits = containers;
-			return this;
-		}
+        public SearchDescriptor<T> InnerHits(
+            Func<
+                FluentDictionary<string, Func<InnerHitsContainerDescriptor<T>, IInnerHitsContainer>>,
+                FluentDictionary<string, Func<InnerHitsContainerDescriptor<T>, IInnerHitsContainer>>
+            > innerHitsSelector)
+        {
+            if (innerHitsSelector == null)
+            {
+                Self.InnerHits = null;
+                return this;
+            }
+            var containers = innerHitsSelector(new FluentDictionary<string, Func<InnerHitsContainerDescriptor<T>, IInnerHitsContainer>>())
+                .Where(kv => kv.Value != null)
+                .Select(kv => new { Key = kv.Key, Value = kv.Value(new InnerHitsContainerDescriptor<T>()) })
+                .Where(kv => kv.Value != null)
+                .ToDictionary(kv => kv.Key, kv => kv.Value);
+            if (containers == null || containers.Count == 0)
+            {
+                Self.InnerHits = null;
+                return this;
+            }
+            Self.InnerHits = containers;
+            return this;
+        }
 
 		public SearchDescriptor<T> Source(bool include = true)
 		{
@@ -420,7 +456,6 @@ namespace Nest
 			Self.Source = sourceSelector(new SearchSourceDescriptor<T>());
 			return this;
 		}
-
 		/// <summary>
 		/// The number of hits to return. Defaults to 10. When using scroll search type 
 		/// size is actually multiplied by the number of shards!
@@ -445,6 +480,35 @@ namespace Nest
 			Self.From = from;
 			return this;
 		}
+
+        /// <summary>
+        /// Query hint for Lingo
+        /// </summary>
+        public SearchDescriptor<T> Query_hint(string query_hint)
+        {
+            Self.Query_hint = query_hint;
+            return this;
+        }
+
+        public SearchDescriptor<T> RiplSearchRequest(string field_title, string field_content, string url, IQueryContainer query)
+        {
+            //Self.Search_request = new Dictionary<string, IList<string>> { { "fields", new List<string>() { field_title, field_content } } };
+            Self.Search_request = new Search_request_class();
+            Self.Search_request.fields = new string[] { field_content, field_title, url };
+            Self.Search_request.size = 1000;
+            Self.Search_request.Query = query;
+            return this;
+        }
+
+        /// <summary>
+        /// Algorithm for Lingo
+        /// </summary>
+        public SearchDescriptor<T> Algorithm(string algorithm)
+        {
+            Self.Algorithm = algorithm;
+            return this;
+        }
+
 		/// <summary>
 		/// The starting from index of the hits to return. Defaults to 0.
 		/// </summary>
@@ -462,7 +526,6 @@ namespace Nest
 			Self.Timeout = timeout;
 			return this;
 		}
-		
 		/// <summary>
 		/// Enables explanation for each hit on how its score was computed. 
 		/// (Use .DocumentsWithMetaData on the return results)
@@ -720,6 +783,31 @@ namespace Nest
 			Self.Sort.Add(new KeyValuePair<PropertyPathMarker, ISort>(descriptor.Field, descriptor));
 			return this;
 		}
+
+        /// <summary>
+        /// <para>Sort() allows you to fully describe your sort unlike the SortAscending and SortDescending aliases.
+        /// </para>
+        /// </summary>
+        public SearchDescriptor<T> SetFieldMapping(List<string> titleFields, List<string> contentFields, List<string> urlFields)
+        {
+            Self.FieldMapping = new Dictionary<string,IList<string>>();
+
+            if (titleFields != null && titleFields.Count > 0)
+            {
+                Self.FieldMapping.Add("title", titleFields);
+            }
+
+            if (contentFields != null && contentFields.Count > 0)
+            {
+                Self.FieldMapping.Add("content", contentFields);
+            }
+
+            if (urlFields != null && urlFields.Count>0)
+            {
+                Self.FieldMapping.Add("url", urlFields);
+            }
+            return this;
+        }
 
 		/// <summary>
 		/// <para>SortGeoDistance() allows you to sort by a distance from a geo point.

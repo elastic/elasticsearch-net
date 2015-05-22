@@ -16,7 +16,9 @@ namespace Elasticsearch.Net.Connection
 			string method, 
 			string path, 
 			object data = null, 
-			IRequestParameters requestParameters = null);
+			IRequestParameters requestParameters = null,
+            string plugin = "_search"
+            );
 
 		Task<ElasticsearchResponse<T>> DoRequestAsync<T>(
 			string method, 

@@ -119,6 +119,7 @@
     <Compile Include="Domain\Analysis\TokenFilter\StemmerOverrideTokenFilter.cs" />
     <Compile Include="Domain\Analysis\TokenFilter\UppercaseTokenFilter.cs" />
     <Compile Include="Domain\Bulk\IBulkOperation.cs" />
+    <Compile Include="Domain\Clusters\Clusters.cs" />
     <Compile Include="Domain\Cluster\ClusterRerouteDecision.cs" />
     <Compile Include="Domain\Cluster\ClusterRerouteExplanation.cs" />
     <Compile Include="Domain\Cluster\ClusterRerouteParameters.cs" />
@@ -130,9 +131,11 @@
     <Compile Include="Domain\Cat\CatPluginsRecord.cs" />
     <Compile Include="Domain\Cat\CatPendingTasksRecord.cs" />
     <Compile Include="Domain\DSL\IDocument.cs" />
+    <Compile Include="Domain\FieldMapping\FieldMapping.cs" />
     <Compile Include="Domain\Geo\GeoLocation.cs" />
     <Compile Include="Domain\Geo\GeoPrecision.cs" />
     <Compile Include="Domain\Hit\ExplainGet.cs" />
+    <Compile Include="Domain\Info\Info.cs" />
     <Compile Include="Domain\Mapping\PropertyMapping.cs" />
     <Compile Include="Domain\Mapping\Descriptors\FieldDataFilterDescriptor.cs" />
     <Compile Include="Domain\Mapping\Descriptors\FieldDataFrequencyFilterDescriptor.cs" />

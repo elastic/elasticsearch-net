@@ -72,18 +72,36 @@ namespace Nest.Resolvers.Converters
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-			writer.WriteStartArray();
-			var sortItems = value as IList<KeyValuePair<PropertyPathMarker, ISort>>;
-			foreach (var item in sortItems)
-			{
-				writer.WriteStartObject();
-				var contract = serializer.ContractResolver as SettingsContractResolver;
-				var fieldName = contract.Infer.PropertyPath(item.Key);
-				writer.WritePropertyName(fieldName);
-				serializer.Serialize(writer, item.Value);
-				writer.WriteEndObject();
-			}
-			writer.WriteEndArray();
+            writer.WriteStartArray();
+            try
+            {
+                var sortItems = value as IList<KeyValuePair<PropertyPathMarker, ISort>>;
+                foreach (var item in sortItems)
+                {
+                    writer.WriteStartObject();
+                    var contract = serializer.ContractResolver as SettingsContractResolver;
+                    var fieldName = contract.Infer.PropertyPath(item.Key);
+                    writer.WritePropertyName(fieldName);
+                    serializer.Serialize(writer, item.Value);
+                    writer.WriteEndObject();
+                }
+                writer.WriteEndArray();
+            }
+            catch
+            {
+                var item = value as FieldMappingOuterClass;
+                writer.WriteStartObject();
+                var contract = serializer.ContractResolver as SettingsContractResolver;
+                writer.WritePropertyName("title");
+                serializer.Serialize(writer, item.field_mapping["title"]);
+
+                writer.WritePropertyName("content");
+                serializer.Serialize(writer, item.field_mapping["content"]);
+
+                writer.WriteEndObject();
+
+                writer.WriteEndArray();
+            }
 		}
 
 		private void LoadGeoDistanceSortLocation(GeoDistanceSort sort, JObject j)

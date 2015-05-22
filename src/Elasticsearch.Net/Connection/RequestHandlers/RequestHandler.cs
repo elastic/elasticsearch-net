@@ -26,7 +26,7 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 		{
 		}
 
-		public ElasticsearchResponse<T> Request<T>(TransportRequestState<T> requestState, object data = null)
+        public ElasticsearchResponse<T> Request<T>(TransportRequestState<T> requestState, object data = null, string plugin = "_search")
 		{
 			var postData = PostData(data);
 			requestState.TickSerialization(postData);

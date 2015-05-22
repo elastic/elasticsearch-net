@@ -47,6 +47,10 @@ namespace Nest.Resolvers
 
 			else if (objectType == typeof(Facet))
 				contract.Converter = new FacetConverter();
+
+            if (objectType == typeof(FieldMappingOuterClass))
+                contract.Converter = new FieldMappingOuterClassConverter();
+			
 			
 			else if (objectType == typeof(IAggregation))
 				contract.Converter = new AggregationConverter();
@@ -119,9 +123,6 @@ namespace Nest.Resolvers
 			defaultProperties = PropertiesOf<IMultiGetOperation>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IRepository>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<ICreateAliasOperation>(type, memberSerialization, defaultProperties, lookup);
-			defaultProperties = PropertiesOf<IInnerHitsContainer>(type, memberSerialization, defaultProperties, lookup);
-			//defaultProperties = PropertiesOf<IGlobalInnerHit>(type, memberSerialization, defaultProperties, lookup);
-			defaultProperties = PropertiesOf<IInnerHits>(type, memberSerialization, defaultProperties, lookup);
 			return defaultProperties;
 		}
 

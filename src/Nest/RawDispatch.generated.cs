@@ -3490,63 +3490,63 @@ namespace Nest
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.Scroll() into any of the following paths: \r\n - /_search/scroll\r\n - /_search/scroll/{scroll_id}");
 		}
-		
-		
-		internal ElasticsearchResponse<T> SearchDispatch<T>(ElasticsearchPathInfo<SearchRequestParameters> pathInfo , object body)
+
+
+        internal ElasticsearchResponse<T> SearchDispatch<T>(ElasticsearchPathInfo<SearchRequestParameters> pathInfo, object body, string plugin = "_search")
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/{type}/_search
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty())
-						return this.Raw.SearchGet<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.RequestParameters);
+                        return this.Raw.SearchGet<T>(pathInfo.Index, pathInfo.Type, u => pathInfo.RequestParameters, plugin);
 					//GET /{index}/_search
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.SearchGet<T>(pathInfo.Index,u => pathInfo.RequestParameters);
+                        return this.Raw.SearchGet<T>(pathInfo.Index, u => pathInfo.RequestParameters, plugin);
 					//GET /_search
-					return this.Raw.SearchGet<T>(u => pathInfo.RequestParameters);
+                    return this.Raw.SearchGet<T>(u => pathInfo.RequestParameters, plugin);
 
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/_search
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
-						return this.Raw.Search<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.RequestParameters);
+                        return this.Raw.Search<T>(pathInfo.Index, pathInfo.Type, body, u => pathInfo.RequestParameters, plugin);
 					//POST /{index}/_search
 					if (!pathInfo.Index.IsNullOrEmpty() && body != null)
-						return this.Raw.Search<T>(pathInfo.Index,body,u => pathInfo.RequestParameters);
+                        return this.Raw.Search<T>(pathInfo.Index, body, u => pathInfo.RequestParameters, plugin);
 					//POST /_search
 					if (body != null)
-						return this.Raw.Search<T>(body,u => pathInfo.RequestParameters);
+                        return this.Raw.Search<T>(body, u => pathInfo.RequestParameters, plugin);
 					break;
 
 			}
 			throw new DispatchException("Could not dispatch IElasticClient.Search() into any of the following paths: \r\n - /_search\r\n - /{index}/_search\r\n - /{index}/{type}/_search");
 		}
-		
-		
-		internal Task<ElasticsearchResponse<T>> SearchDispatchAsync<T>(ElasticsearchPathInfo<SearchRequestParameters> pathInfo , object body)
+
+
+        internal Task<ElasticsearchResponse<T>> SearchDispatchAsync<T>(ElasticsearchPathInfo<SearchRequestParameters> pathInfo, object body, string plugin = "_search")
 		{
 			switch(pathInfo.HttpMethod)
 			{
 				case PathInfoHttpMethod.GET:
 					//GET /{index}/{type}/_search
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty())
-						return this.Raw.SearchGetAsync<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.RequestParameters);
+                        return this.Raw.SearchGetAsync<T>(pathInfo.Index, pathInfo.Type, u => pathInfo.RequestParameters, plugin);
 					//GET /{index}/_search
 					if (!pathInfo.Index.IsNullOrEmpty())
-						return this.Raw.SearchGetAsync<T>(pathInfo.Index,u => pathInfo.RequestParameters);
+                        return this.Raw.SearchGetAsync<T>(pathInfo.Index, u => pathInfo.RequestParameters, plugin);
 					//GET /_search
-					return this.Raw.SearchGetAsync<T>(u => pathInfo.RequestParameters);
+                    return this.Raw.SearchGetAsync<T>(u => pathInfo.RequestParameters, plugin);
 
 				case PathInfoHttpMethod.POST:
 					//POST /{index}/{type}/_search
 					if (!pathInfo.Index.IsNullOrEmpty() && !pathInfo.Type.IsNullOrEmpty() && body != null)
-						return this.Raw.SearchAsync<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.RequestParameters);
+                        return this.Raw.SearchAsync<T>(pathInfo.Index, pathInfo.Type, body, u => pathInfo.RequestParameters, plugin);
 					//POST /{index}/_search
 					if (!pathInfo.Index.IsNullOrEmpty() && body != null)
-						return this.Raw.SearchAsync<T>(pathInfo.Index,body,u => pathInfo.RequestParameters);
+                        return this.Raw.SearchAsync<T>(pathInfo.Index, body, u => pathInfo.RequestParameters, plugin);
 					//POST /_search
 					if (body != null)
-						return this.Raw.SearchAsync<T>(body,u => pathInfo.RequestParameters);
+                        return this.Raw.SearchAsync<T>(body, u => pathInfo.RequestParameters, plugin);
 					break;
 
 			}

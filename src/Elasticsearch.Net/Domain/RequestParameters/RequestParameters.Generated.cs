@@ -4599,7 +4599,34 @@ namespace Elasticsearch.Net
 			this.AddQueryString("search_indices", this._search_indices);
 			return this;
 		}
-		
+
+
+        internal string _search_algorithm { get; set; }
+        ///<summary>The search query hint</summary>
+        public MoreLikeThisRequestParameters SearchAlgorithm(string search_algorithm)
+        {
+            this._search_algorithm = search_algorithm;
+            this.AddQueryString("search_algorithm", this._search_algorithm);
+            return this;
+        }
+
+        internal string _search_request { get; set; }
+        ///<summary>The search request</summary>
+        public MoreLikeThisRequestParameters SearchRequest(string search_request)
+        {
+            this._search_request = search_request;
+            this.AddQueryString("search_query_hint", this._search_request);
+            return this;
+        }
+
+        internal string _search_query_hint { get; set; }
+        ///<summary>The search query hint</summary>
+        public MoreLikeThisRequestParameters SearchQueryHint(string search_query_hint)
+        {
+            this._search_query_hint = search_query_hint;
+            this.AddQueryString("search_query_hint", this._search_query_hint);
+            return this;
+        }
 		
 		internal string _search_scroll { get; set; }
 		///<summary>A scroll search request definition</summary>

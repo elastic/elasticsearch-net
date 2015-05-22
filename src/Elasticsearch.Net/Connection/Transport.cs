@@ -336,11 +336,11 @@ namespace Elasticsearch.Net.Connection
 			}
 		}
 
-		public ElasticsearchResponse<T> DoRequest<T>(string method, string path, object data = null, IRequestParameters requestParameters = null)
+        public ElasticsearchResponse<T> DoRequest<T>(string method, string path, object data = null, IRequestParameters requestParameters = null, string plugin = "_search")
 		{
 			using (var requestState = new TransportRequestState<T>(this.Settings, requestParameters, method, path))
 			{
-				return this._requestHandler.Request<T>(requestState, data);
+				return this._requestHandler.Request<T>(requestState, data, plugin);
 			}
 		}
 

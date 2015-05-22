@@ -3858,7 +3858,28 @@ namespace Nest
 			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("search_indices"); } 
 			set { this.Request.RequestParameters.AddQueryString("search_indices", value); }
 		}
-		
+
+
+        ///<summary>The search query hint</summary>
+        public string SearchQueryHint
+        {
+            get { return this.Request.RequestParameters.GetQueryStringValue<string>("search_query_hint"); }
+            set { this.Request.RequestParameters.AddQueryString("search_query_hint", value); }
+        }
+
+        ///<summary>The search request</summary>
+        public string SearchRequest
+        {
+            get { return this.Request.RequestParameters.GetQueryStringValue<string>("search_request"); }
+            set { this.Request.RequestParameters.AddQueryString("search_request", value); }
+        }
+
+        ///<summary>The search algorithm</summary>
+        public string SearchAlgorithm
+        {
+            get { return this.Request.RequestParameters.GetQueryStringValue<string>("search_algorithm"); }
+            set { this.Request.RequestParameters.AddQueryString("search_algorithm", value); }
+        }
 		
 		///<summary>A scroll search request definition</summary>
 		public string SearchScroll 
@@ -6197,7 +6218,27 @@ namespace Nest
 			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("search_indices"); } 
 			set { this.Request.RequestParameters.AddQueryString("search_indices", value); }
 		}
-		
+
+        ///<summary>The search query hint</summary>
+        public string SearchQueryHint
+        {
+            get { return this.Request.RequestParameters.GetQueryStringValue<string>("search_query_hint"); }
+            set { this.Request.RequestParameters.AddQueryString("search_query_hint", value); }
+        }
+
+        ///<summary>The search request</summary>
+        public string SearchRequest
+        {
+            get { return this.Request.RequestParameters.GetQueryStringValue<string>("search_request"); }
+            set { this.Request.RequestParameters.AddQueryString("search_request", value); }
+        }
+
+        ///<summary>The search algorithm</summary>
+        public string SearchAlgorithm
+        {
+            get { return this.Request.RequestParameters.GetQueryStringValue<string>("search_algorithm"); }
+            set { this.Request.RequestParameters.AddQueryString("search_algorithm", value); }
+        }
 		
 		///<summary>A scroll search request definition</summary>
 		public string SearchScroll 

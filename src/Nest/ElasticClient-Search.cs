@@ -11,13 +11,13 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public ISearchResponse<T> Search<T>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searchSelector) where T : class
+        public ISearchResponse<T> Search<T>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searchSelector, string plugin = "_search") where T : class
 		{
-			return this.Search<T, T>(searchSelector);
+            return this.Search<T, T>(searchSelector, plugin);
 		}
 
 		/// <inheritdoc />
-		public ISearchResponse<TResult> Search<T, TResult>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searchSelector)
+        public ISearchResponse<TResult> Search<T, TResult>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searchSelector, string plugin = "_search")
 			where T : class
 			where TResult : class
 		{
@@ -29,19 +29,19 @@ namespace Nest
 				.ToPathInfo(_connectionSettings)
 				.DeserializationState(this.CreateSearchDeserializer<T, TResult>(descriptor));
 
-			var status = this.RawDispatch.SearchDispatch<SearchResponse<TResult>>(pathInfo, descriptor);
+            var status = this.RawDispatch.SearchDispatch<SearchResponse<TResult>>(pathInfo, descriptor, plugin);
 			return status.Success ? status.Response : CreateInvalidInstance<SearchResponse<TResult>>(status);
 		}
 
 
-		
-		public ISearchResponse<T> Search<T>(ISearchRequest request)
+
+        public ISearchResponse<T> Search<T>(ISearchRequest request, string plugin = "_search")
 			where T : class
 		{
-			return this.Search<T, T>(request);
+            return this.Search<T, T>(request, plugin);
 		}
 
-		public ISearchResponse<TResult> Search<T, TResult>(ISearchRequest request)
+        public ISearchResponse<TResult> Search<T, TResult>(ISearchRequest request, string plugin = "_search")
 			where T : class
 			where TResult : class
 		{
@@ -49,19 +49,19 @@ namespace Nest
 				.ToPathInfo(_connectionSettings)
 				.DeserializationState(this.CreateSearchDeserializer<T, TResult>(request));
 
-			var status = this.RawDispatch.SearchDispatch<SearchResponse<TResult>>(pathInfo, request);
+            var status = this.RawDispatch.SearchDispatch<SearchResponse<TResult>>(pathInfo, request, plugin);
 			return status.Success ? status.Response : CreateInvalidInstance<SearchResponse<TResult>>(status);
 		}
 
 		/// <inheritdoc />
-		public Task<ISearchResponse<T>> SearchAsync<T>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searchSelector)
+        public Task<ISearchResponse<T>> SearchAsync<T>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searchSelector, string plugin = "_search")
 			where T : class
 		{
-			return this.SearchAsync<T, T>(searchSelector);
+            return this.SearchAsync<T, T>(searchSelector, plugin);
 		}
 
 		/// <inheritdoc />
-		public Task<ISearchResponse<TResult>> SearchAsync<T, TResult>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searchSelector)
+        public Task<ISearchResponse<TResult>> SearchAsync<T, TResult>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searchSelector, string plugin = "_search")
 			where T : class
 			where TResult : class
 		{
@@ -73,7 +73,7 @@ namespace Nest
 				.ToPathInfo(_connectionSettings)
 				.DeserializationState(CreateSearchDeserializer<T, TResult>(descriptor));
 
-			return this.RawDispatch.SearchDispatchAsync<SearchResponse<TResult>>(pathInfo, descriptor)
+            return this.RawDispatch.SearchDispatchAsync<SearchResponse<TResult>>(pathInfo, descriptor, plugin)
 				.ContinueWith<ISearchResponse<TResult>>(t => {
 					if (t.IsFaulted)
 						throw t.Exception.Flatten().InnerException;
@@ -85,21 +85,21 @@ namespace Nest
 		}
 
 
-		public Task<ISearchResponse<T>> SearchAsync<T>(ISearchRequest request)
+        public Task<ISearchResponse<T>> SearchAsync<T>(ISearchRequest request, string plugin = "_search")
 			where T : class
 		{
-			return this.SearchAsync<T, T>(request);
+            return this.SearchAsync<T, T>(request, plugin);
 		}
 
-		public Task<ISearchResponse<TResult>> SearchAsync<T, TResult>(ISearchRequest request)
+        public Task<ISearchResponse<TResult>> SearchAsync<T, TResult>(ISearchRequest request, string plugin = "_search")
 			where T : class
 			where TResult : class
 		{
 			var pathInfo = request
 				.ToPathInfo(_connectionSettings)
 				.DeserializationState(this.CreateSearchDeserializer<T, TResult>(request));
-			
-			return this.RawDispatch.SearchDispatchAsync<SearchResponse<TResult>>(pathInfo, request)
+
+            return this.RawDispatch.SearchDispatchAsync<SearchResponse<TResult>>(pathInfo, request, plugin)
 				.ContinueWith<ISearchResponse<TResult>>(t => {
 					if (t.IsFaulted)
 						throw t.Exception.Flatten().InnerException;

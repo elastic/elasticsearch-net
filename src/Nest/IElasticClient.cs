@@ -760,40 +760,40 @@ namespace Nest
 		/// </summary>
 		/// <typeparam name="T">The type used to infer the index and typename as well describe the query strongly typed</typeparam>
 		/// <param name="searchSelector">A descriptor that describes the parameters for the search operation</param>
-		ISearchResponse<T> Search<T>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searchSelector)
+        ISearchResponse<T> Search<T>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searchSelector, string plugin = "_search")
 			where T : class;
 
 		/// <inheritdoc />
-		ISearchResponse<T> Search<T>(ISearchRequest request)
+        ISearchResponse<T> Search<T>(ISearchRequest request, string plugin = "_search")
 			where T : class;
 
 		/// <inheritdoc />
-		ISearchResponse<TResult> Search<T, TResult>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searchSelector)
+        ISearchResponse<TResult> Search<T, TResult>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searchSelector, string plugin = "_search")
 			where T : class
 			where TResult : class;
 
 		/// <inheritdoc />
-		ISearchResponse<TResult> Search<T, TResult>(ISearchRequest request)
+        ISearchResponse<TResult> Search<T, TResult>(ISearchRequest request, string plugin = "_search")
 			where T : class
 			where TResult : class;
 
 		/// <inheritdoc />
 		/// <typeparam name="T">The type used to infer the index and typename as well describe the query strongly typed</typeparam>
 		/// <param name="searchSelector">A descriptor that describes the parameters for the search operation</param>
-		Task<ISearchResponse<T>> SearchAsync<T>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searchSelector)
+        Task<ISearchResponse<T>> SearchAsync<T>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searchSelector, string plugin = "_search")
 			where T : class;
 
 		/// <inheritdoc />
-		Task<ISearchResponse<T>> SearchAsync<T>(ISearchRequest request)
+        Task<ISearchResponse<T>> SearchAsync<T>(ISearchRequest request, string plugin = "_search")
 			where T : class;
 
 		/// <inheritdoc />
-		Task<ISearchResponse<TResult>> SearchAsync<T, TResult>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searchSelector)
+        Task<ISearchResponse<TResult>> SearchAsync<T, TResult>(Func<SearchDescriptor<T>, SearchDescriptor<T>> searchSelector, string plugin = "_search")
 			where T : class
 			where TResult : class;
 
 		/// <inheritdoc />
-		Task<ISearchResponse<TResult>> SearchAsync<T, TResult>(ISearchRequest request)
+        Task<ISearchResponse<TResult>> SearchAsync<T, TResult>(ISearchRequest request, string plugin = "_search")
 			where T : class
 			where TResult : class;
 

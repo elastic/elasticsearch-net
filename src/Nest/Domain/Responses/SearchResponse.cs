@@ -4,6 +4,8 @@ using Newtonsoft.Json;
 using System.Linq.Expressions;
 using System;
 using System.Linq;
+using Nest.Domain.Info;
+using Nest.Domain.Clusters;
 
 namespace Nest
 {
@@ -30,6 +32,8 @@ namespace Nest
 		/// </summary>
 		IEnumerable<T> Documents { get; }
 		IEnumerable<IHit<T>> Hits { get; }
+        Clusters[] Clusters { get; }
+        Info Info { get; }
 
 		/// <summary>
 		/// Will return the field selections inside the hits when the search descriptor specified .Fields.
@@ -58,6 +62,12 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "hits")]
 		public HitsMetaData<T> HitsMetaData { get; internal set; }
+
+        [JsonProperty(PropertyName = "clusters")]
+        public Clusters[] Clusters { get; set; }
+
+        [JsonProperty(PropertyName = "info")]
+        public Info Info { get; set; }
 
 		[JsonProperty(PropertyName = "facets")]
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]

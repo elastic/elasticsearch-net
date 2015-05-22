@@ -32795,9 +32795,9 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> SearchGet<T>(Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> SearchGet<T>(Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null,  string plugin = "_search")
 		{
-			var url = "_search";
+            var url = plugin;
 			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
@@ -32827,9 +32827,9 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> SearchGetAsync<T>(Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null)
-		{
-			var url = "_search";
+        public Task<ElasticsearchResponse<T>> SearchGetAsync<T>(Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null, string plugin = "_search")
+        {
+            var url = plugin;
 			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
@@ -32861,9 +32861,9 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> SearchGet(Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null)
-		{
-			var url = "_search";
+        public ElasticsearchResponse<DynamicDictionary> SearchGet(Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null, string plugin = "_search")
+        {
+            var url = plugin;
 			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
@@ -32895,9 +32895,9 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> SearchGetAsync(Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null)
-		{
-			var url = "_search";
+        public Task<ElasticsearchResponse<DynamicDictionary>> SearchGetAsync(Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null, string plugin = "_search")
+        {
+            var url = plugin;
 			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
@@ -32928,10 +32928,10 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> SearchGet<T>(string index, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null)
-		{
+        public ElasticsearchResponse<T> SearchGet<T>(string index, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null, string plugin = "_search")
+        {
 			index.ThrowIfNullOrEmpty("index");
-			var url = "{0}/_search".F(Encoded(index));
+			var url = "{0}/"+plugin.F(Encoded(index));
 			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
@@ -32962,10 +32962,10 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> SearchGetAsync<T>(string index, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null)
-		{
-			index.ThrowIfNullOrEmpty("index");
-			var url = "{0}/_search".F(Encoded(index));
+        public Task<ElasticsearchResponse<T>> SearchGetAsync<T>(string index, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null, string plugin = "_search")
+        {
+            index.ThrowIfNullOrEmpty("index");
+            var url = "{0}/" + plugin.F(Encoded(index));
 			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
@@ -32998,10 +32998,10 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> SearchGet(string index, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null)
-		{
-			index.ThrowIfNullOrEmpty("index");
-			var url = "{0}/_search".F(Encoded(index));
+        public ElasticsearchResponse<DynamicDictionary> SearchGet(string index, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null, string plugin = "_search")
+        {
+            index.ThrowIfNullOrEmpty("index");
+            var url = "{0}/" + plugin.F(Encoded(index));
 			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
@@ -33034,10 +33034,10 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> SearchGetAsync(string index, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null)
-		{
-			index.ThrowIfNullOrEmpty("index");
-			var url = "{0}/_search".F(Encoded(index));
+        public Task<ElasticsearchResponse<DynamicDictionary>> SearchGetAsync(string index, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null, string plugin = "_search")
+        {
+            index.ThrowIfNullOrEmpty("index");
+            var url = "{0}/" + plugin.F(Encoded(index));
 			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
@@ -33069,11 +33069,11 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> SearchGet<T>(string index, string type, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null)
-		{
-			index.ThrowIfNullOrEmpty("index");
-			type.ThrowIfNullOrEmpty("type");
-			var url = "{0}/{1}/_search".F(Encoded(index), Encoded(type));
+        public ElasticsearchResponse<T> SearchGet<T>(string index, string type, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null, string plugin = "_search")
+        {
+            index.ThrowIfNullOrEmpty("index");
+            type.ThrowIfNullOrEmpty("type");
+            var url = "{0}/{1}/" + plugin.F(Encoded(index), Encoded(type));
 			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
@@ -33105,11 +33105,11 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> SearchGetAsync<T>(string index, string type, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null)
-		{
-			index.ThrowIfNullOrEmpty("index");
-			type.ThrowIfNullOrEmpty("type");
-			var url = "{0}/{1}/_search".F(Encoded(index), Encoded(type));
+        public Task<ElasticsearchResponse<T>> SearchGetAsync<T>(string index, string type, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null, string plugin = "_search")
+        {
+            index.ThrowIfNullOrEmpty("index");
+            type.ThrowIfNullOrEmpty("type");
+            var url = "{0}/{1}/" + plugin.F(Encoded(index), Encoded(type));
 			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
@@ -33143,11 +33143,11 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> SearchGet(string index, string type, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null)
-		{
-			index.ThrowIfNullOrEmpty("index");
-			type.ThrowIfNullOrEmpty("type");
-			var url = "{0}/{1}/_search".F(Encoded(index), Encoded(type));
+        public ElasticsearchResponse<DynamicDictionary> SearchGet(string index, string type, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null, string plugin = "_search")
+        {
+            index.ThrowIfNullOrEmpty("index");
+            type.ThrowIfNullOrEmpty("type");
+            var url = "{0}/{1}/" + plugin.F(Encoded(index), Encoded(type));
 			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
@@ -33181,11 +33181,11 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> SearchGetAsync(string index, string type, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null)
-		{
-			index.ThrowIfNullOrEmpty("index");
-			type.ThrowIfNullOrEmpty("type");
-			var url = "{0}/{1}/_search".F(Encoded(index), Encoded(type));
+        public Task<ElasticsearchResponse<DynamicDictionary>> SearchGetAsync(string index, string type, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null, string plugin = "_search")
+        {
+            index.ThrowIfNullOrEmpty("index");
+            type.ThrowIfNullOrEmpty("type");
+            var url = "{0}/{1}/" + plugin.F(Encoded(index), Encoded(type));
 			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
@@ -33216,9 +33216,9 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> Search<T>(object body, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null)
-		{
-			var url = "_search".F();
+        public ElasticsearchResponse<T> Search<T>(object body, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null, string plugin = "_search")
+        {
+            var url = plugin.F();
 			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
@@ -33249,9 +33249,9 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> SearchAsync<T>(object body, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null)
-		{
-			var url = "_search".F();
+        public Task<ElasticsearchResponse<T>> SearchAsync<T>(object body, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null, string plugin = "_search")
+        {
+            var url = plugin.F();
 			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
@@ -33284,9 +33284,9 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> Search(object body, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null)
-		{
-			var url = "_search".F();
+        public ElasticsearchResponse<DynamicDictionary> Search(object body, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null, string plugin = "_search")
+        {
+            var url = plugin.F();
 			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
@@ -33319,9 +33319,9 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> SearchAsync(object body, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null)
-		{
-			var url = "_search".F();
+        public Task<ElasticsearchResponse<DynamicDictionary>> SearchAsync(object body, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null, string plugin = "_search")
+        {
+            var url = plugin.F();
 			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
@@ -33353,10 +33353,10 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> Search<T>(string index, object body, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null)
-		{
-			index.ThrowIfNullOrEmpty("index");
-			var url = "{0}/_search".F(Encoded(index));
+        public ElasticsearchResponse<T> Search<T>(string index, object body, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null, string plugin = "_search")
+        {
+            index.ThrowIfNullOrEmpty("index");
+            var url = "{0}/" + plugin.F(Encoded(index));
 			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
@@ -33388,10 +33388,10 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> SearchAsync<T>(string index, object body, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null)
-		{
-			index.ThrowIfNullOrEmpty("index");
-			var url = "{0}/_search".F(Encoded(index));
+        public Task<ElasticsearchResponse<T>> SearchAsync<T>(string index, object body, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null, string plugin = "_search")
+        {
+            index.ThrowIfNullOrEmpty("index");
+            var url = "{0}/" + plugin.F(Encoded(index));
 			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
@@ -33425,10 +33425,10 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> Search(string index, object body, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null)
-		{
-			index.ThrowIfNullOrEmpty("index");
-			var url = "{0}/_search".F(Encoded(index));
+        public ElasticsearchResponse<DynamicDictionary> Search(string index, object body, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null, string plugin = "_search")
+        {
+            index.ThrowIfNullOrEmpty("index");
+            var url = "{0}/" + plugin.F(Encoded(index));
 			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
@@ -33462,10 +33462,10 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> SearchAsync(string index, object body, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null)
-		{
-			index.ThrowIfNullOrEmpty("index");
-			var url = "{0}/_search".F(Encoded(index));
+        public Task<ElasticsearchResponse<DynamicDictionary>> SearchAsync(string index, object body, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null, string plugin = "_search")
+        {
+            index.ThrowIfNullOrEmpty("index");
+            var url = "{0}/" + plugin.F(Encoded(index));
 			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
@@ -33498,11 +33498,11 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> Search<T>(string index, string type, object body, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null)
-		{
-			index.ThrowIfNullOrEmpty("index");
-			type.ThrowIfNullOrEmpty("type");
-			var url = "{0}/{1}/_search".F(Encoded(index), Encoded(type));
+        public ElasticsearchResponse<T> Search<T>(string index, string type, object body, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null, string plugin = "_search")
+        {
+            index.ThrowIfNullOrEmpty("index");
+            type.ThrowIfNullOrEmpty("type");
+            var url = string.Format("{0}/{1}/" + plugin, Encoded(index), Encoded(type));
 			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
@@ -33535,11 +33535,11 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> SearchAsync<T>(string index, string type, object body, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null)
-		{
-			index.ThrowIfNullOrEmpty("index");
-			type.ThrowIfNullOrEmpty("type");
-			var url = "{0}/{1}/_search".F(Encoded(index), Encoded(type));
+        public Task<ElasticsearchResponse<T>> SearchAsync<T>(string index, string type, object body, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null, string plugin = "_search")
+        {
+            index.ThrowIfNullOrEmpty("index");
+            type.ThrowIfNullOrEmpty("type");
+            var url = string.Format("{0}/{1}/" + plugin, Encoded(index), Encoded(type));
 			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
@@ -33574,11 +33574,11 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> Search(string index, string type, object body, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null)
-		{
-			index.ThrowIfNullOrEmpty("index");
-			type.ThrowIfNullOrEmpty("type");
-			var url = "{0}/{1}/_search".F(Encoded(index), Encoded(type));
+        public ElasticsearchResponse<DynamicDictionary> Search(string index, string type, object body, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null, string plugin = "_search")
+        {
+            index.ThrowIfNullOrEmpty("index");
+            type.ThrowIfNullOrEmpty("type");
+            var url = string.Format("{0}/{1}/" + plugin, Encoded(index), Encoded(type));
 			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
@@ -33613,11 +33613,11 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> SearchAsync(string index, string type, object body, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null)
-		{
-			index.ThrowIfNullOrEmpty("index");
-			type.ThrowIfNullOrEmpty("type");
-			var url = "{0}/{1}/_search".F(Encoded(index), Encoded(type));
+        public Task<ElasticsearchResponse<DynamicDictionary>> SearchAsync(string index, string type, object body, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null, string plugin = "_search")
+        {
+            index.ThrowIfNullOrEmpty("index");
+            type.ThrowIfNullOrEmpty("type");
+            var url = string.Format("{0}/{1}/" + plugin, Encoded(index), Encoded(type));
 			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
