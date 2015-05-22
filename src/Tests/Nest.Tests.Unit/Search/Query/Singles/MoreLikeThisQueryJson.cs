@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 using Nest.Tests.MockData.Domain;
 
 namespace Nest.Tests.Unit.Search.Query.Singles
@@ -15,27 +16,46 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 		[Test]
 		public void TestMoreLikeThisQuery()
 		{
-			var s = new SearchDescriptor<ElasticsearchProject>()
-				.From(0)
-				.Size(10)
-				.Query(q => q
-					.MoreLikeThis(fz => fz
-						.Name("named_query")
-						.OnFields(f => f.Name)
-						.LikeText("elasticsearcc")
-					)
-				);
+            Func<MoreLikeThisQueryDocumentsDescriptor<ElasticsearchProject>, MoreLikeThisQueryDocumentsDescriptor<ElasticsearchProject>> documentsSelector = d => d.Get("SOME_ID", op => op.Index("my_index").Type("my_type"));
+            Action<MoreLikeThisQueryDescriptor<ElasticsearchProject>> selector = fz => fz
+                .Name("named_query")
+                .OnFields(f => f.Name, f => f.Content)
+                .LikeText("elasticsearcc")
+                .Documents(documentsSelector)
+                .MinTermFrequency(1)
+                .MaxQueryTerms(12);
+            var s = new SearchDescriptor<ElasticsearchProject>()
+                .From(0)
+                .Size(10)
+                .Query(q => q.MoreLikeThis(selector));
+
 			var json = TestElasticClient.Serialize(s);
-			var expected = @"{ from: 0, size: 10, query : 
+			const string expected = @"{ from: 0, size: 10, query : 
 			{ mlt: { 
 				_name: ""named_query"",
-				fields : [""name"" ],
-				like_text : ""elasticsearcc"" 
-			}}}";
-			Assert.True(json.JsonEquals(expected), json);
+				fields : [""name"", ""content"" ],
+				like_text : ""elasticsearcc"" ,
+                ""docs"": [
+                            {
+                               ""_index"": ""my_index"",
+                               ""_type"": ""my_type"",
+                               ""_id"": ""SOME_ID""
+                            }
+                         ],
+                 ""min_term_freq"": 1,
+                 ""max_query_terms"": 12
+            }}}";
+		    Verify<SearchDescriptor<dynamic>>(json, expected);
 		}
 
-		[Test]
+	    private static void Verify<T>(string json, string expected) where T: class
+	    {
+	        Assert.True(json.JsonEquals(expected), json);
+	        var returnedJson = TestElasticClient.Serialize(TestElasticClient.Deserialize<T>(json));
+	        Assert.True(json.JsonEquals(returnedJson), json);
+	    }
+
+	    [Test]
 		public void MoreLikeThisWithIds()
 		{
 			var s = new MoreLikeThisQueryDescriptor<ElasticsearchProject>()
@@ -43,11 +63,11 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 				.OnFields(p => p.Name);
 			var json = TestElasticClient.Serialize(s);
 
-			var expected = @"{
+			const string expected = @"{
 				fields: [ ""name""],
 				ids: [ ""1"", ""2"", ""3"", ""4""],
 			}";
-			Assert.True(json.JsonEquals(expected), json);
+            Verify<MoreLikeThisQueryDescriptor<object>>(json, expected);
 		}
 
 		[Test]
@@ -69,7 +89,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 				);
 			var json = TestElasticClient.Serialize(s);
 
-			var expected = @"{
+			const string expected = @"{
 				fields: [ ""name""],
 				docs: [
 				{
@@ -113,7 +133,8 @@ namespace Nest.Tests.Unit.Search.Query.Singles
                   }
 				}]
 			}";
-			Assert.True(json.JsonEquals(expected), json);
+
+            Verify<MoreLikeThisQueryDescriptor<object>>(json, expected);
 		}
 
 		[Test]
@@ -122,13 +143,13 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 			var s = new MoreLikeThisQueryDescriptor<ElasticsearchProject>()
 				.OnFields(p => p.Name)
 				.DocumentsExplicit(d => d
-					.Get(1, g => g.Fields(p => p.Product.Name).Routing("routing_value"))
+                    .Get(1, g => g.Fields(p => p.Product.Name).Routing("routing_value"))
 					.Get<Person>("some-string-id", g => g.Routing("routing_value").Type("people").Index("different_index"))
 				);
 			var json = TestElasticClient.Serialize(s);
 
 			//NEST should default to not sending index but when specified explicitly it should not force it null
-			var expected = @"{
+			const string expected = @"{
 				fields: [ ""name""],
 				docs: [
 				{
@@ -146,7 +167,9 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 				  _routing: ""routing_value""
 				}]
 			}";
-			Assert.True(json.JsonEquals(expected), json);
+            Assert.True(json.JsonEquals(expected), json);
+            //Nice if we get this working
+            //Verify<MoreLikeThisQueryDescriptor<object>>(json, expected);
 		}
 
 		[Test]
@@ -175,7 +198,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 					)
 				);
 			var json = TestElasticClient.Serialize(s);
-			var expected = @"{ from: 0, size: 10, query : 
+			const string expected = @"{ from: 0, size: 10, query : 
 			{ mlt: { 
 				fields : [""name"" ],
 				like_text : ""elasticsearcc"",
@@ -195,7 +218,8 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 				boost: 1.1,
 				analyzer: ""my_analyzer""
 			}}}";
-			Assert.True(json.JsonEquals(expected), json);
+
+            Verify<SearchDescriptor<ElasticsearchProject>>(json, expected);
 		}
 	}
 }
