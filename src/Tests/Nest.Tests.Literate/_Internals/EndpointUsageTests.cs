@@ -8,7 +8,6 @@ using Elasticsearch.Net.Connection;
 using FluentAssertions;
 using Newtonsoft.Json.Linq;
 using Ploeh.AutoFixture;
-using SearchApis.RequestBody;
 using Xunit;
 
 namespace Nest.Tests.Literate
