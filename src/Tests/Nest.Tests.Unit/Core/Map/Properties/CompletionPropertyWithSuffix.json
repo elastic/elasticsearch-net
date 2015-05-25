@@ -1,26 +1,26 @@
 ﻿{
-	"elasticsearchprojects": {
-		"properties": {
-			"suggest.suffix": {
-				"type": "completion",
-        "index_analyzer":  "simple",
+  "elasticsearchprojects": {
+    "properties": {
+      "suggest.suffix": {
+        "type": "completion",
+        "index_analyzer": "simple",
         "search_analyzer": "simple",
-        "payloads":  true,
-        "max_input_len":  25,
-        "context":  {
-          "color":  {
-            "type":  "category",
+        "payloads": true,
+        "max_input_len": 25,
+        "context": {
+          "color": {
+            "type": "category",
             "path": "color_field",
-            "default": ["red", "green", "blue"]
+            "default": [ "red", "green", "blue" ]
           },
-          "location":  {
+          "location": {
             "type": "geo",
-            "precision": ["5m"],
+            "precision": [ "5m" ],
             "neighbors": true,
-            "default":  "u33"
+            "default": "u33"
           }
         }
-			}
-		}
-	}
+      }
+    }
+  }
 }
