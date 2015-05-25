@@ -4,12 +4,17 @@ using System.Linq.Expressions;
 namespace Nest
 {
 
-	
+
 	/// <summary>
 	/// Represents a typed container for property names i.e "property" in "field.nested.property";
 	/// </summary>
 	public class PropertyNameMarker : IEquatable<PropertyNameMarker>
 	{
+		/// <summary>
+		/// When property path is forced, we will infer from PropertyPath instead of PropertyName
+		/// </summary>
+		internal bool ForcePropertyPath { get; set; }
+
 		public string Name { get; set; }
 		public Expression Expression { get; set; }
 		public Type Type { get; set; }
@@ -43,7 +48,7 @@ namespace Nest
 		{
 			return type == null ? null : new PropertyNameMarker { Type = type };
 		}
-		
+
 		bool IEquatable<PropertyNameMarker>.Equals(PropertyNameMarker other)
 		{
 			return Equals(other);
@@ -70,7 +75,7 @@ namespace Nest
 			if (this.Type != null && other != null && other.Type != null)
 				return this.GetHashCode() == other.GetHashCode();
 			return false;
-			
+
 		}
 		public bool EqualsString(string other)
 		{

@@ -193,6 +193,9 @@
     <None Include="Core\Map\GeoShape\PrecisionSerializesAsString.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Core\Map\Properties\CompletionPropertyWithSuffix.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Core\Map\Properties\CompletionProperty.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

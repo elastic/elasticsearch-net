@@ -371,5 +371,33 @@ namespace Nest.Tests.Unit.Core.Map.Properties
 			);
 			this.JsonEquals(result.ConnectionStatus.Request, MethodInfo.GetCurrentMethod());
 		}
+
+		[Test]
+		public void CompletionPropertyWithSuffix()
+		{
+			var result = this._client.Map<ElasticsearchProject>(m => m
+				.Properties(props => props
+					.Completion(c => c
+						.Name(p => p.Suggest.Suffix("suffix"))
+						.IndexAnalyzer("simple")
+						.SearchAnalyzer("simple")
+						.Payloads()
+						.MaxInputLength(25)
+						.Context(cxt => cxt
+							.Category("color", cc => cc
+								.Path("color_field")
+								.Default("red", "green", "blue")
+							)
+							.GeoLocation("location", lc => lc
+								.Precision("5m")
+								.Neighbors()
+								.Default("u33")
+							)
+						)
+					)
+				)
+			);
+			this.JsonEquals(result.ConnectionStatus.Request, MethodInfo.GetCurrentMethod());
+		}
 	}
 }
