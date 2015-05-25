@@ -12,7 +12,7 @@ namespace Nest
 		RootObjectMapping Mapping { get; set; }
 	}
 
-	public interface IPutMappingRequest<T> : IPutMappingRequest where T : class {}
+	public interface IPutMappingRequest<T> : IPutMappingRequest where T : class { }
 
 	internal static class PutMappingPathInfo
 	{
@@ -25,7 +25,7 @@ namespace Nest
 	public partial class PutMappingRequest : IndicesTypePathBase<PutMappingRequestParameters>, IPutMappingRequest
 	{
 		public RootObjectMapping Mapping { get; set; }
-		
+
 		/// <summary>
 		/// Calls putmapping on /_all/{type}
 		/// </summary>
@@ -50,7 +50,7 @@ namespace Nest
 		public PutMappingRequest(IndexNameMarker index, TypeNameMarker type)
 		{
 			this.Type = type;
-			this.Indices = new [] { index };
+			this.Indices = new[] { index };
 		}
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<PutMappingRequestParameters> pathInfo)
 		{
@@ -85,7 +85,7 @@ namespace Nest
 		{
 			this._connectionSettings = connectionSettings;
 			this._infer = new ElasticInferrer(this._connectionSettings);
-			Self.Mapping = new RootObjectMapping() {  };
+			Self.Mapping = new RootObjectMapping() { };
 		}
 
 
@@ -121,7 +121,7 @@ namespace Nest
 			}
 			return this;
 		}
-		
+
 
 		public PutMappingDescriptor<T> Dynamic(DynamicMappingOption dynamic)
 		{
@@ -298,7 +298,10 @@ namespace Nest
 			}
 			foreach (var p in properties.Properties)
 			{
-				var key = this._infer.PropertyName(p.Key);
+				var key = p.Key.ForcePropertyPath
+					? this._infer.PropertyPath(p.Key.Expression)
+					: this._infer.PropertyName(p.Key);
+
 				Self.Mapping.Properties[key] = p.Value;
 			}
 			return this;
