@@ -411,6 +411,7 @@
     <Compile Include="ExposedInternals\NestSerializer.cs" />
     <Compile Include="Enums\GeoDistance.cs" />
     <Compile Include="IHighLevelToLowLevelDispatcher.cs" />
+    <Compile Include="Extensions\ExceptionExtensions.cs" />
     <Compile Include="Obsolete\Obsolete.cs" />
     <Compile Include="Resolvers\Converters\Aggregations\FiltersAggregatorConverter.cs" />
     <Compile Include="Resolvers\Converters\Aggregations\FilterAggregatorConverter.cs" />

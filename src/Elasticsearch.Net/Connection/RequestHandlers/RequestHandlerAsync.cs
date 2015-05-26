@@ -204,7 +204,7 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 
 			//If we are not using any pooling and we see an exception we rethrow
 			if (!requestState.UsingPooling && t.IsFaulted && t.Exception != null && maxRetries == 0)
-				throw t.Exception;
+				t.Exception.RethrowKeepingStackTrace();
 
 
 			var retried = requestState.Retried;
@@ -215,7 +215,7 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 
 			// If the response never recieved a status code and has a caught exception make sure we throw it
 			if (streamResponse.HttpStatusCode.GetValueOrDefault(-1) <= 0 && streamResponse.OriginalException != null)
-				throw streamResponse.OriginalException;
+				streamResponse.OriginalException.RethrowKeepingStackTrace();
 
 			// If the user explicitly wants a stream return the undisposed stream
 			if (typeof(Stream).IsAssignableFrom(typeof(T)))
