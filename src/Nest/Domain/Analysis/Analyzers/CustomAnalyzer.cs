@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -20,7 +21,7 @@ namespace Nest
 	    [JsonProperty("tokenizer")]
         public string Tokenizer { get; set; }
 
-        [JsonProperty("filter")]
+		[JsonProperty("filter")]
         public IList<string> Filter { get; set; }
 
         [JsonProperty("char_filter")]
