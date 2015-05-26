@@ -22,7 +22,7 @@ namespace Nest.Tests.Literate
 
 		public abstract int ExpectStatusCode { get; }
 		public abstract bool ExpectIsValid { get; }
-		public abstract void AssertUrl(string url);
+		public abstract void AssertUrl(Uri requestUri);
 
 		protected abstract TInitializer Initializer { get; }
 		protected abstract Func<TDescriptor, TInterface> Fluent { get; }
@@ -73,8 +73,8 @@ namespace Nest.Tests.Literate
 		[IntegrationFact] protected async void ReturnsExpectedIsValid() =>
 			await this.AssertOnAllResponses(r=>r.IsValid.Should().Be(this.ExpectIsValid));
 
-		[IntegrationFact] protected async void HitsTheCorrectUrl() =>
-			await this.AssertOnAllResponses(r=>this.AssertUrl(r.ConnectionStatus.RequestUrl));
+		[Fact] protected async void HitsTheCorrectUrl() =>
+			await this.AssertOnAllResponses(r=>this.AssertUrl(new Uri(r.ConnectionStatus.RequestUrl)));
 
 		[Fact] protected void SerializesInitializer() => this.AssertSerializesAndRoundTrips(this.Initializer);
 

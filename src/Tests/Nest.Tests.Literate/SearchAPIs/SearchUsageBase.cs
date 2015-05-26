@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Nest;
-using Nest.Tests.Literate;
+﻿using Nest.Tests.Literate._Internals.Integration;
+using Xunit;
 
-namespace SearchApis
+namespace Nest.Tests.Literate.SearchAPIs
 {
-public abstract class SearchUsageBase : EndpointUsageTests<ISearchResponse<object>, ISearchRequest, SearchDescriptor<object>, SearchRequest>
+	[Collection(IntegrationContext.ReadOnly)]
+	public abstract class SearchUsageBase : EndpointUsageTests<ISearchResponse<object>, ISearchRequest, SearchDescriptor<object>, SearchRequest>
 	{
 		protected override void ClientUsage() =>
 			this.Calls(
