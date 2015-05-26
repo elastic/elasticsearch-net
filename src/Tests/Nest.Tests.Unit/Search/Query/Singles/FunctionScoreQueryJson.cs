@@ -20,7 +20,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 							f => f.Linear(x => x.FloatValue, d => d.Scale("0.3")),
 							f => f.Exp(x => x.DoubleValue, d => d.Scale("0.5")),
 							f => f.BoostFactor(2.0),
-							f => f.FieldValueFactor(op => op.Field(ff => ff.DoubleValue).Factor(2.5).Modifier(FieldValueFactorModifier.SquareRoot))
+							f => f.FieldValueFactor(op => op.Field(ff => ff.DoubleValue).Factor(2.5).Modifier(FieldValueFactorModifier.SquareRoot).Missing(1.0))
 						)
 						.ScoreMode(FunctionScoreMode.Sum)
 						.BoostMode(FunctionBoostMode.Replace)
@@ -40,7 +40,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
                             {linear: { floatValue : { scale: '0.3'}}},
                             {exp:    { doubleValue: { scale: '0.5'}}}, 
                             {boost_factor: 2.0 },
-							{field_value_factor: { field: 'doubleValue', factor: 2.5, modifier: 'sqrt'}}
+							{field_value_factor: { field: 'doubleValue', factor: 2.5, modifier: 'sqrt', missing: 1.0}}
                         ],				
 						query : { match_all : {} },
                         score_mode: 'sum',
@@ -87,7 +87,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 							f => f.Linear(x => x.FloatValue, d => d.Scale("0.3")),
 							f => f.Exp(x => x.DoubleValue, d => d.Scale("0.5")),
 							f => f.BoostFactor(2),
-							f => f.FieldValueFactor(db => db.Field(fa => fa.DoubleValue).Factor(3.4).Modifier(FieldValueFactorModifier.Ln))
+							f => f.FieldValueFactor(db => db.Field(fa => fa.DoubleValue).Factor(3.4).Modifier(FieldValueFactorModifier.Ln).Missing(1.4))
 						)
 						.ScoreMode(FunctionScoreMode.Sum)
 						.BoostMode(FunctionBoostMode.Replace)
@@ -105,7 +105,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
                             {linear: { floatValue : { scale: '0.3'}}},
                             {exp:    { doubleValue: { scale: '0.5'}}}, 
                             {boost_factor: 2.0 },
-							{field_value_factor: { field: 'doubleValue', factor: 3.4, modifier: 'ln'}}
+							{field_value_factor: { field: 'doubleValue', factor: 3.4, modifier: 'ln', missing: 1.4}}
                         ],				
                         score_mode: 'sum',
                         boost_mode: 'replace',

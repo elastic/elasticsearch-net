@@ -143,5 +143,20 @@ namespace Nest
 			SuggestPathInfo.Update(pathInfo, this);
 		}
 
+		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<SuggestRequestParameters> pathInfo)
+		{
+			var inferrer = new ElasticInferrer(settings);
+
+			var index = inferrer.IndexName<T>();
+			pathInfo.Index = index;
+
+			if (Self.Indices.HasAny())
+				pathInfo.Index = inferrer.IndexNames(Self.Indices);
+			else
+				pathInfo.Index = Self.AllIndices.GetValueOrDefault(false) ? null : inferrer.IndexName<T>();
+
+			if (pathInfo.Index.IsNullOrEmpty())
+				pathInfo.Index = "_all";
+		}
 	}
 }

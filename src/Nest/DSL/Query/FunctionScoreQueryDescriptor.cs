@@ -19,6 +19,10 @@ namespace Nest
 		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryDescriptor<object>>, CustomJsonConverter>))]
 		IQueryContainer Query { get; set; }
 
+		[JsonProperty(PropertyName = "filter")]
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<FilterContainer>, CustomJsonConverter>))]
+		IFilterContainer Filter { get; set; }
+
 		[JsonProperty(PropertyName = "score_mode")]
 		[JsonConverter(typeof (StringEnumConverter))]
 		FunctionScoreMode? ScoreMode { get; set; }
@@ -57,6 +61,7 @@ namespace Nest
 		public string Name { get; set; }
 		public IEnumerable<IFunctionScoreFunction> Functions { get; set; }
 		public IQueryContainer Query { get; set; }
+		public IFilterContainer Filter { get; set; }
 		public FunctionScoreMode? ScoreMode { get; set; }
 		public FunctionBoostMode? BoostMode { get; set; }
 		public float? MaxBoost { get; set; }
@@ -80,6 +85,8 @@ namespace Nest
 		IEnumerable<IFunctionScoreFunction> IFunctionScoreQuery.Functions { get; set; }
 
 		IQueryContainer IFunctionScoreQuery.Query { get; set; }
+
+		IFilterContainer IFunctionScoreQuery.Filter { get; set; }
 
 		FunctionScoreMode? IFunctionScoreQuery.ScoreMode { get; set; }
 
@@ -109,10 +116,9 @@ namespace Nest
 		{
 			get
 			{
-				return _forcedConditionless || ((Self.Query == null || Self.Query.IsConditionless)
-					&& Self.RandomScore == null 
-					&& Self.ScriptScore == null 
-					&& !Self.Functions.HasAny());
+				return _forcedConditionless
+				       || ((Self.Query == null || Self.Query.IsConditionless || Self.Filter == null || Self.Filter.IsConditionless)
+				           && Self.RandomScore == null && Self.ScriptScore == null && !Self.Functions.HasAny());
 			}
 		}
 
@@ -134,9 +140,18 @@ namespace Nest
 			querySelector.ThrowIfNull("querySelector");
 			var query = new QueryDescriptor<T>();
 			var q = querySelector(query);
-			Self.Query = q.IsConditionless ? null :q;
+			Self.Query = q.IsConditionless ? null : q;
 			return this;
 		}
+
+		public FunctionScoreQueryDescriptor<T> Filter(Func<FilterDescriptor<T>, FilterContainer> filterSelector)
+		{
+			filterSelector.ThrowIfNull("filterSelector");
+			var filter = new FilterDescriptor<T>();
+			var f = filterSelector(filter);
+			Self.Filter = f.IsConditionless ? null : f;
+			return this;
+		} 
 
 		public FunctionScoreQueryDescriptor<T> Functions(params Func<FunctionScoreFunctionsDescriptor<T>, FunctionScoreFunction<T>>[] functions)
 		{

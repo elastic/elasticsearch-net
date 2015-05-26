@@ -37,6 +37,20 @@ namespace Nest.Tests.Unit.Reproduce
 			public new List<TermOrder> TermsOrder { get; set; }
 		}
 
+		public class MyTermsAggregationsFluentFix<T> : TermsAggregationDescriptor<T>
+			where T : class
+		{
+			[JsonProperty("order")]
+			internal List<TermOrder> TermsOrder { get; set; }
+
+			public MyTermsAggregationsFluentFix<T> PatchedOrder(List<TermOrder> order)
+			{
+				this.TermsOrder = order;
+				return this;
+			}
+
+		}
+
 
 		[Test]
 		public void FixDslThroughCustomInterfaceImplementation()
@@ -63,8 +77,28 @@ namespace Nest.Tests.Unit.Reproduce
 					}
 				}
 			};
-			var serialized = _client.Serializer.Serialize(search).Utf8String();
-			this.JsonEquals(search, MethodBase.GetCurrentMethod());
+			this.JsonEquals(search, MethodBase.GetCurrentMethod(), "PatchedTermsAggSort");
 		}
+
+		[Test]
+		public void FixDslThroughCustomInterfaceImplementationUsingFluent()
+		{
+			var order = new List<TermOrder>()
+			{
+				new TermOrder { Key = "x", Order = SortOrder.Ascending},
+				new TermOrder { Key = "y", Order = SortOrder.Descending}
+			};
+			var search = new SearchDescriptor<ElasticsearchProject>()
+				.Aggregations(aggs=>aggs
+					.Terms("my_terms_agg", t=> new MyTermsAggregationsFluentFix<ElasticsearchProject>()
+						.PatchedOrder(order)
+						.Field("x")
+					)
+				)
+				
+			;
+			this.JsonEquals(search, MethodBase.GetCurrentMethod(), "PatchedTermsAggSort");
+		}
+
 	}
 }

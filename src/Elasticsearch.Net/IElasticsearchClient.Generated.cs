@@ -21227,6 +21227,5 @@ namespace Elasticsearch.Net
 		///</returns>
 		
 		Task<ElasticsearchResponse<DynamicDictionary>> UpdateAsync(string index, string type, string id, object body, Func<UpdateRequestParameters, UpdateRequestParameters> requestParameters = null);
-		
 	}
 }

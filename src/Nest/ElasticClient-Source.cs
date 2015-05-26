@@ -33,7 +33,11 @@ namespace Nest
 			var response = this.RawDispatch.GetSourceDispatchAsync<T>(pathInfo)
 				.ContinueWith(t =>
 				{
-					if (t.IsFaulted) throw t.Exception.Flatten().InnerException;
+					if (t.IsFaulted && t.Exception != null)
+					{
+						t.Exception.Flatten().InnerException.RethrowKeepingStackTrace();
+						return null; //won't be hit
+					}
 					return t.Result.Response;
 				});
 			return response;
@@ -46,7 +50,11 @@ namespace Nest
 			var response = this.RawDispatch.GetSourceDispatchAsync<T>(pathInfo)
 				.ContinueWith(t =>
 				{
-					if (t.IsFaulted) throw t.Exception.Flatten().InnerException;
+					if (t.IsFaulted && t.Exception != null) 
+					{
+						t.Exception.Flatten().InnerException.RethrowKeepingStackTrace();
+						return null; //won't be hit
+					}
 					return t.Result.Response;
 				});
 			return response;

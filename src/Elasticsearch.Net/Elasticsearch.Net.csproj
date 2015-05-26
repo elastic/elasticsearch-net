@@ -84,6 +84,7 @@
     <Compile Include="Domain\Response\ElasticsearchServerError.cs" />
     <Compile Include="Exceptions\OneToOneServerException.cs" />
     <Compile Include="Exceptions\ElasticsearchAuthException.cs" />
+    <Compile Include="Extensions\ExceptionExtensions.cs" />
     <Compile Include="IElasticsearchClient.cs" />
     <Compile Include="Providers\DateTimeProvider.cs" />
     <Compile Include="Connection\HttpConnection.cs" />

@@ -412,6 +412,8 @@
     <Compile Include="Exception\SnapshotException.cs" />
     <Compile Include="ExposedInternals\NestSerializer.cs" />
     <Compile Include="Enums\GeoDistance.cs" />
+    <Compile Include="IHighLevelToLowLevelDispatcher.cs" />
+    <Compile Include="Extensions\ExceptionExtensions.cs" />
     <Compile Include="Resolvers\Converters\Aggregations\FiltersAggregatorConverter.cs" />
     <Compile Include="Resolvers\Converters\Aggregations\FilterAggregatorConverter.cs" />
     <Compile Include="Resolvers\Converters\ClusterRerouteCommandCollectionConverter.cs" />

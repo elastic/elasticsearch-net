@@ -211,6 +211,7 @@ namespace Nest.Tests.Unit.Search.Sorting
 					.PinTo(40, -70)
 					.Unit(GeoUnit.Kilometers)
 					.Mode(SortMode.Max)
+					.DistanceType(GeoDistance.Arc)
 				);
 			var json = TestElasticClient.Serialize(s);
 			var expected = @"
@@ -224,7 +225,8 @@ namespace Nest.Tests.Unit.Search.Sorting
 						 missing: ""_last"",
 						 mode: ""max"",
 						 order: ""desc"",
-						 unit: ""km""
+						 unit: ""km"",
+                         distance_type: ""arc""
 					  }
 					}
                   ]

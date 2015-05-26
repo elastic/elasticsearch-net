@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+    [JsonConverter(typeof(ReadAsTypeConverter<MultiGetOperationDescriptor<object>>))]
 	public interface IMultiGetOperation
 	{
 		[JsonProperty(PropertyName = "_index")]

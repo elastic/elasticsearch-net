@@ -7,4 +7,9 @@ namespace Nest
 	{
 		object GetCustomJson();
 	}
+
+	public interface IDomainObject
+	{
+		
+	}
 }

@@ -57,8 +57,8 @@
     <Compile Include="Failover\Retries\ClientExceptionsUsingPoolingTests.cs" />
     <Compile Include="Failover\Retries\ClientExceptionsWithoutPoolingMaxRetriesTests.cs" />
     <Compile Include="Failover\Retries\ClientExceptionsWithoutPoolingTests.cs" />
-    <Compile Include="Failover\Timeout\DontRetryAfterMaxRetryTimeoutTests.cs" />
     <Compile Include="Failover\Timeout\DontRetryAfterDefaultTimeoutTests.cs" />
+    <Compile Include="Failover\Timeout\DontRetryAfterMaxRetryTimeoutTests.cs" />
     <Compile Include="Memory\Helpers\AsyncMemorySetup.cs" />
     <Compile Include="Memory\Helpers\IMemorySetup.cs" />
     <Compile Include="Memory\ResponseAsyncCodePathsMemoryTests.cs" />
