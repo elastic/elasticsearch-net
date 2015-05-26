@@ -15,7 +15,7 @@ namespace Nest.Tests.Literate._Internals.Integration
 	public class ReadonlyIntegration: IDisposable
 	{
 		private readonly ElasticsearchNode _node;
-		private IObservable<string> _consoleOut;
+		private IObservable<ElasticsearchMessage> _consoleOut;
 
 		public ReadonlyIntegration()
 		{
