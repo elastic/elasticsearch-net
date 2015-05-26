@@ -158,12 +158,10 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 			}
 			catch (MaxRetryException)
 			{
-				//TODO ifdef ExceptionDispatchInfo.Capture(ex).Throw();
 				throw;
 			}
 			catch (ElasticsearchServerException)
 			{
-				//TODO ifdef ExceptionDispatchInfo.Capture(ex).Throw();
 				throw;
 			}
 			catch (Exception e)
@@ -171,7 +169,6 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 				requestState.SeenExceptions.Add(e);
 				if (maxRetries == 0 && retried == 0)
 				{
-					//TODO ifdef ExceptionDispatchInfo.Capture(ex).Throw();
 					throw;
 				}
 				seenError = true;

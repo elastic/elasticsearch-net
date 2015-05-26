@@ -29,8 +29,10 @@ namespace Elasticsearch.Net
 				.ContinueWith(t =>
 				{
 					if (t.IsFaulted && t.Exception != null)
-						throw t.Exception.Flatten().InnerException;
-
+					{
+						t.Exception.Flatten().InnerException.RethrowKeepingStackTrace();
+						return null; //won't be hit
+					}
 					return ToDynamicResponse(t.Result);
 				});
 		}
