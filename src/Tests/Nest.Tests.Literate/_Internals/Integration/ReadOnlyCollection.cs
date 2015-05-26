@@ -14,15 +14,18 @@ namespace Nest.Tests.Literate._Internals.Integration
 
 	public class ReadonlyIntegration: IDisposable
 	{
+		private readonly ElasticsearchNode _node;
+		private IObservable<string> _consoleOut;
+
 		public ReadonlyIntegration()
 		{
-
-			// ... initialize data in the test database ...
+			this._node = new ElasticsearchNode("1.5.2");
+			this._consoleOut = this._node.Start();
 		}
 
 		public void Dispose()
 		{
-			// ... clean up test data from the database ...
+			_node?.Dispose();
 		}
 
 	}
