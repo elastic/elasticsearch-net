@@ -854,6 +854,9 @@
     <None Include="Reproduce\Issue876.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Reproduce\PatchedTermsAggSort.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Search\Aggregations\Terms\TermAggregationSerializes.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
