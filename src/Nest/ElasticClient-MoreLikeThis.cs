@@ -11,7 +11,7 @@ namespace Nest
 		public ISearchResponse<T> MoreLikeThis<T>(Func<MoreLikeThisDescriptor<T>, MoreLikeThisDescriptor<T>> mltSelector)
 			where T : class
 		{
-			return this.Dispatch<MoreLikeThisDescriptor<T>, MoreLikeThisRequestParameters, SearchResponse<T>>(
+			return this.Dispatcher.Dispatch<MoreLikeThisDescriptor<T>, MoreLikeThisRequestParameters, SearchResponse<T>>(
 				mltSelector,
 				(p, d) =>
 				{
@@ -26,7 +26,7 @@ namespace Nest
 		public ISearchResponse<T> MoreLikeThis<T>(IMoreLikeThisRequest moreLikeThisRequest)
 			where T : class
 		{
-			return this.Dispatch<IMoreLikeThisRequest, MoreLikeThisRequestParameters, SearchResponse<T>>(
+			return this.Dispatcher.Dispatch<IMoreLikeThisRequest, MoreLikeThisRequestParameters, SearchResponse<T>>(
 				moreLikeThisRequest,
 				(p, d) =>
 				{
@@ -40,7 +40,7 @@ namespace Nest
 		public Task<ISearchResponse<T>> MoreLikeThisAsync<T>(Func<MoreLikeThisDescriptor<T>, MoreLikeThisDescriptor<T>> mltSelector) 
 			where T : class
 		{
-			return this.DispatchAsync<MoreLikeThisDescriptor<T>, MoreLikeThisRequestParameters, SearchResponse<T>, ISearchResponse<T>>(
+			return this.Dispatcher.DispatchAsync<MoreLikeThisDescriptor<T>, MoreLikeThisRequestParameters, SearchResponse<T>, ISearchResponse<T>>(
 				mltSelector,
 				(p, d) =>
 				{
@@ -55,7 +55,7 @@ namespace Nest
 		public Task<ISearchResponse<T>> MoreLikeThisAsync<T>(IMoreLikeThisRequest moreLikeThisRequest) 
 			where T : class
 		{
-			return this.DispatchAsync<IMoreLikeThisRequest, MoreLikeThisRequestParameters, SearchResponse<T>, ISearchResponse<T>>(
+			return this.Dispatcher.DispatchAsync<IMoreLikeThisRequest, MoreLikeThisRequestParameters, SearchResponse<T>, ISearchResponse<T>>(
 				moreLikeThisRequest,
 				(p, d) =>
 				{

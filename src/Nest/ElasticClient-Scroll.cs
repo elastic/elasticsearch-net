@@ -9,7 +9,7 @@ namespace Nest
 		/// <inheritdoc />
 		public ISearchResponse<T> Scroll<T>(IScrollRequest request) where T : class
 		{
-			return this.Dispatch<IScrollRequest, ScrollRequestParameters, SearchResponse<T>>(
+			return this.Dispatcher.Dispatch<IScrollRequest, ScrollRequestParameters, SearchResponse<T>>(
 				request,
 				(p, d) =>
 				{
@@ -22,7 +22,7 @@ namespace Nest
 		/// <inheritdoc />
 		public ISearchResponse<T> Scroll<T>(Func<ScrollDescriptor<T>, ScrollDescriptor<T>> scrollSelector) where T : class
 		{
-			return this.Dispatch<ScrollDescriptor<T>, ScrollRequestParameters, SearchResponse<T>>(
+			return this.Dispatcher.Dispatch<ScrollDescriptor<T>, ScrollRequestParameters, SearchResponse<T>>(
 				scrollSelector,
 				(p, d) =>
 				{
@@ -36,7 +36,7 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<ISearchResponse<T>> ScrollAsync<T>(IScrollRequest request) where T : class
 		{
-			return this.DispatchAsync<IScrollRequest, ScrollRequestParameters, SearchResponse<T>, ISearchResponse<T>>(
+			return this.Dispatcher.DispatchAsync<IScrollRequest, ScrollRequestParameters, SearchResponse<T>, ISearchResponse<T>>(
 				request,
 				(p, d) =>
 				{
@@ -50,7 +50,7 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<ISearchResponse<T>> ScrollAsync<T>(Func<ScrollDescriptor<T>, ScrollDescriptor<T>> scrollSelector) where T : class
 		{
-			return this.DispatchAsync<ScrollDescriptor<T>, ScrollRequestParameters, SearchResponse<T>, ISearchResponse<T>>(
+			return this.Dispatcher.DispatchAsync<ScrollDescriptor<T>, ScrollRequestParameters, SearchResponse<T>, ISearchResponse<T>>(
 				scrollSelector,
 				(p, d) =>
 				{
@@ -66,7 +66,7 @@ namespace Nest
 		/// <inheritdoc />
 		public IEmptyResponse ClearScroll(Func<ClearScrollDescriptor, ClearScrollDescriptor> clearScrollSelector)
 		{
-			return this.Dispatch<ClearScrollDescriptor, ClearScrollRequestParameters, EmptyResponse>(
+			return this.Dispatcher.Dispatch<ClearScrollDescriptor, ClearScrollRequestParameters, EmptyResponse>(
 				clearScrollSelector,
 				(p, d) =>
 				{
@@ -79,7 +79,7 @@ namespace Nest
 		/// <inheritdoc />
 		public IEmptyResponse ClearScroll(IClearScrollRequest clearScrollRequest)
 		{
-			return this.Dispatch<IClearScrollRequest, ClearScrollRequestParameters, EmptyResponse>(
+			return this.Dispatcher.Dispatch<IClearScrollRequest, ClearScrollRequestParameters, EmptyResponse>(
 				clearScrollRequest,
 				(p, d) =>
 				{
@@ -92,7 +92,7 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<IEmptyResponse> ClearScrollAsync(Func<ClearScrollDescriptor, ClearScrollDescriptor> clearScrollSelector)
 		{
-			return this.DispatchAsync<ClearScrollDescriptor, ClearScrollRequestParameters, EmptyResponse, IEmptyResponse>(
+			return this.Dispatcher.DispatchAsync<ClearScrollDescriptor, ClearScrollRequestParameters, EmptyResponse, IEmptyResponse>(
 				clearScrollSelector,
 				(p, d) =>
 				{
@@ -105,7 +105,7 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<IEmptyResponse> ClearScrollAsync(IClearScrollRequest clearScrollRequest)
 		{
-			return this.DispatchAsync<IClearScrollRequest, ClearScrollRequestParameters, EmptyResponse, IEmptyResponse>(
+			return this.Dispatcher.DispatchAsync<IClearScrollRequest, ClearScrollRequestParameters, EmptyResponse, IEmptyResponse>(
 				clearScrollRequest,
 				(p, d) =>
 				{

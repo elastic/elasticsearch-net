@@ -20,7 +20,7 @@ namespace Nest
 		/// <inheritdoc />
 		public IIndicesResponse Map(IPutMappingRequest putMappingRequest) 
 		{
-			return this.Dispatch<IPutMappingRequest, PutMappingRequestParameters, IndicesResponse>(
+			return this.Dispatcher.Dispatch<IPutMappingRequest, PutMappingRequestParameters, IndicesResponse>(
 				putMappingRequest,
 				(p, d) =>
 				{
@@ -45,7 +45,7 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<IIndicesResponse> MapAsync(IPutMappingRequest putMappingRequest)
 		{
-			return this.DispatchAsync<IPutMappingRequest, PutMappingRequestParameters, IndicesResponse, IIndicesResponse>(
+			return this.Dispatcher.DispatchAsync<IPutMappingRequest, PutMappingRequestParameters, IndicesResponse, IIndicesResponse>(
 				putMappingRequest,
 				(p, d) =>
 				{

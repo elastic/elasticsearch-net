@@ -16,7 +16,7 @@ namespace Nest
 		/// <inheritdoc />
 		public IMultiSearchResponse MultiSearch(Func<MultiSearchDescriptor, MultiSearchDescriptor> multiSearchSelector)
 		{
-			return this.Dispatch<MultiSearchDescriptor, MultiSearchRequestParameters, MultiSearchResponse>(
+			return this.Dispatcher.Dispatch<MultiSearchDescriptor, MultiSearchRequestParameters, MultiSearchResponse>(
 				multiSearchSelector(new MultiSearchDescriptor()),
 				(p, d) =>
 				{
@@ -31,7 +31,7 @@ namespace Nest
 		/// <inheritdoc />
 		public IMultiSearchResponse MultiSearch(IMultiSearchRequest multiSearchRequest)
 		{
-			return this.Dispatch<IMultiSearchRequest, MultiSearchRequestParameters, MultiSearchResponse>(
+			return this.Dispatcher.Dispatch<IMultiSearchRequest, MultiSearchRequestParameters, MultiSearchResponse>(
 				multiSearchRequest,
 				(p, d) =>
 				{
@@ -45,7 +45,7 @@ namespace Nest
 
 		/// <inheritdoc />
 		public Task<IMultiSearchResponse> MultiSearchAsync(Func<MultiSearchDescriptor, MultiSearchDescriptor> multiSearchSelector) {
-			return this.DispatchAsync<MultiSearchDescriptor, MultiSearchRequestParameters, MultiSearchResponse, IMultiSearchResponse>(
+			return this.Dispatcher.DispatchAsync<MultiSearchDescriptor, MultiSearchRequestParameters, MultiSearchResponse, IMultiSearchResponse>(
 				multiSearchSelector(new MultiSearchDescriptor()),
 				(p, d) =>
 				{
@@ -60,7 +60,7 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<IMultiSearchResponse> MultiSearchAsync(IMultiSearchRequest multiSearchRequest) 
 		{
-			return this.DispatchAsync<IMultiSearchRequest, MultiSearchRequestParameters, MultiSearchResponse, IMultiSearchResponse>(
+			return this.Dispatcher.DispatchAsync<IMultiSearchRequest, MultiSearchRequestParameters, MultiSearchResponse, IMultiSearchResponse>(
 				multiSearchRequest,
 				(p, d) =>
 				{

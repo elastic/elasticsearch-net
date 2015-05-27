@@ -11,7 +11,7 @@ namespace Nest
 		public IClusterStateResponse ClusterState(Func<ClusterStateDescriptor, ClusterStateDescriptor> clusterStateSelector = null)
 		{
 			clusterStateSelector = clusterStateSelector ?? (s => s);
-			return this.Dispatch<ClusterStateDescriptor, ClusterStateRequestParameters, ClusterStateResponse>(
+			return this.Dispatcher.Dispatch<ClusterStateDescriptor, ClusterStateRequestParameters, ClusterStateResponse>(
 				clusterStateSelector,
 				(p, d) => this.RawDispatch.ClusterStateDispatch<ClusterStateResponse>(p)
 			);
@@ -20,7 +20,7 @@ namespace Nest
 		/// <inheritdoc />
 		public IClusterStateResponse ClusterState(IClusterStateRequest clusterStateRequest)
 		{
-			return this.Dispatch<IClusterStateRequest, ClusterStateRequestParameters, ClusterStateResponse>(
+			return this.Dispatcher.Dispatch<IClusterStateRequest, ClusterStateRequestParameters, ClusterStateResponse>(
 				clusterStateRequest,
 				(p, d) => this.RawDispatch.ClusterStateDispatch<ClusterStateResponse>(p)
 			);
@@ -30,7 +30,7 @@ namespace Nest
 		public Task<IClusterStateResponse> ClusterStateAsync(Func<ClusterStateDescriptor, ClusterStateDescriptor> clusterStateSelector = null)
 		{
 			clusterStateSelector = clusterStateSelector ?? (s => s);
-			return this.DispatchAsync<ClusterStateDescriptor, ClusterStateRequestParameters, ClusterStateResponse, IClusterStateResponse>(
+			return this.Dispatcher.DispatchAsync<ClusterStateDescriptor, ClusterStateRequestParameters, ClusterStateResponse, IClusterStateResponse>(
 				clusterStateSelector,
 				(p, d) => this.RawDispatch.ClusterStateDispatchAsync<ClusterStateResponse>(p)
 			);
@@ -39,7 +39,7 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<IClusterStateResponse> ClusterStateAsync(IClusterStateRequest clusterStateRequest)
 		{
-			return this.DispatchAsync<IClusterStateRequest, ClusterStateRequestParameters, ClusterStateResponse, IClusterStateResponse>(
+			return this.Dispatcher.DispatchAsync<IClusterStateRequest, ClusterStateRequestParameters, ClusterStateResponse, IClusterStateResponse>(
 				clusterStateRequest,
 				(p, d) => this.RawDispatch.ClusterStateDispatchAsync<ClusterStateResponse>(p)
 			);

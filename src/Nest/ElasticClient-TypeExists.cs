@@ -13,7 +13,7 @@ namespace Nest
 		/// <inheritdoc />
 		public IExistsResponse TypeExists(Func<TypeExistsDescriptor, TypeExistsDescriptor> selector)
 		{
-			return this.Dispatch<TypeExistsDescriptor, TypeExistsRequestParameters, ExistsResponse>(
+			return this.Dispatcher.Dispatch<TypeExistsDescriptor, TypeExistsRequestParameters, ExistsResponse>(
 				selector,
 				(p, d) => this.RawDispatch.IndicesExistsTypeDispatch<ExistsResponse>(
 					p.DeserializationState(new TypeExistConverter(DeserializeExistsResponse))
@@ -24,7 +24,7 @@ namespace Nest
 		/// <inheritdoc />
 		public IExistsResponse TypeExists(ITypeExistsRequest TypeRequest)
 		{
-			return this.Dispatch<ITypeExistsRequest, TypeExistsRequestParameters, ExistsResponse>(
+			return this.Dispatcher.Dispatch<ITypeExistsRequest, TypeExistsRequestParameters, ExistsResponse>(
 				TypeRequest,
 				(p, d) => this.RawDispatch.IndicesExistsTypeDispatch<ExistsResponse>(
 					p.DeserializationState(new TypeExistConverter(DeserializeExistsResponse))
@@ -35,7 +35,7 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<IExistsResponse> TypeExistsAsync(Func<TypeExistsDescriptor, TypeExistsDescriptor> selector)
 		{
-			return this.DispatchAsync<TypeExistsDescriptor, TypeExistsRequestParameters, ExistsResponse, IExistsResponse>(
+			return this.Dispatcher.DispatchAsync<TypeExistsDescriptor, TypeExistsRequestParameters, ExistsResponse, IExistsResponse>(
 				selector,
 				(p, d) => this.RawDispatch.IndicesExistsTypeDispatchAsync<ExistsResponse>(
 					p.DeserializationState(new TypeExistConverter(DeserializeExistsResponse))
@@ -46,7 +46,7 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<IExistsResponse> TypeExistsAsync(ITypeExistsRequest TypeRequest)
 		{
-			return this.DispatchAsync<ITypeExistsRequest, TypeExistsRequestParameters, ExistsResponse, IExistsResponse>(
+			return this.Dispatcher.DispatchAsync<ITypeExistsRequest, TypeExistsRequestParameters, ExistsResponse, IExistsResponse>(
 				TypeRequest,
 				(p, d) => this.RawDispatch.IndicesExistsTypeDispatchAsync<ExistsResponse>(
 					p.DeserializationState(new TypeExistConverter(DeserializeExistsResponse))

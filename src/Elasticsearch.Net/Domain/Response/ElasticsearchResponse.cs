@@ -19,11 +19,10 @@ using Elasticsearch.Net.Serialization;
 
 namespace Elasticsearch.Net
 {
-	//TODO document and possibly rename some of the properties
-
+	// TODO: Make this class internal in 2.0
 	public static class ElasticsearchResponse
 	{
-		public static ElasticsearchResponse<TTo> CloneFrom<TTo>(IElasticsearchResponse from, TTo to)
+		internal static ElasticsearchResponse<TTo> CloneFrom<TTo>(IElasticsearchResponse from, TTo to)
 		{
 			var response = new ElasticsearchResponse<TTo>(from.Settings)
 			{
@@ -45,7 +44,6 @@ namespace Elasticsearch.Net
  			return response;
 		}
 	}
-
 
 	public class ElasticsearchResponse<T> : IElasticsearchResponse
 	{

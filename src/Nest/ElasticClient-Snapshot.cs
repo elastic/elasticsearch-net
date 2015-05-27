@@ -12,7 +12,7 @@ namespace Nest
 			snapshotName.ThrowIfNullOrEmpty("name");
 			repository.ThrowIfNullOrEmpty("repository");
 			selector = selector ?? (s => s);
-			return this.Dispatch<SnapshotDescriptor, SnapshotRequestParameters, SnapshotResponse>(
+			return this.Dispatcher.Dispatch<SnapshotDescriptor, SnapshotRequestParameters, SnapshotResponse>(
 				s => selector(s.Snapshot(snapshotName).Repository(repository)),
 				(p, d) => this.RawDispatch.SnapshotCreateDispatch<SnapshotResponse>(p, d)
 			);
@@ -21,7 +21,7 @@ namespace Nest
 		/// <inheritdoc />
 		public ISnapshotResponse Snapshot(ISnapshotRequest snapshotRequest)
 		{
-			return this.Dispatch<ISnapshotRequest, SnapshotRequestParameters, SnapshotResponse>(
+			return this.Dispatcher.Dispatch<ISnapshotRequest, SnapshotRequestParameters, SnapshotResponse>(
 				snapshotRequest,
 				(p, d) => this.RawDispatch.SnapshotCreateDispatch<SnapshotResponse>(p, d)
 			);
@@ -33,7 +33,7 @@ namespace Nest
 			snapshotName.ThrowIfNullOrEmpty("name");
 			repository.ThrowIfNullOrEmpty("repository");
 			selector = selector ?? (s => s);
-			return this.DispatchAsync<SnapshotDescriptor, SnapshotRequestParameters, SnapshotResponse, ISnapshotResponse>(
+			return this.Dispatcher.DispatchAsync<SnapshotDescriptor, SnapshotRequestParameters, SnapshotResponse, ISnapshotResponse>(
 				s => selector(s.Snapshot(snapshotName).Repository(repository)),
 				(p, d) => this.RawDispatch.SnapshotCreateDispatchAsync<SnapshotResponse>(p, d)
 			);
@@ -42,7 +42,7 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<ISnapshotResponse> SnapshotAsync(ISnapshotRequest snapshotRequest)
 		{
-			return this.DispatchAsync<ISnapshotRequest, SnapshotRequestParameters, SnapshotResponse, ISnapshotResponse>(
+			return this.Dispatcher.DispatchAsync<ISnapshotRequest, SnapshotRequestParameters, SnapshotResponse, ISnapshotResponse>(
 				snapshotRequest,
 				(p, d) => this.RawDispatch.SnapshotCreateDispatchAsync<SnapshotResponse>(p, d)
 			);
@@ -73,7 +73,7 @@ namespace Nest
 			snapshotName.ThrowIfNullOrEmpty("name");
 			repository.ThrowIfNullOrEmpty("repository");
 			selector = selector ?? (s => s);
-			return this.Dispatch<GetSnapshotDescriptor, GetSnapshotRequestParameters, GetSnapshotResponse>(
+			return this.Dispatcher.Dispatch<GetSnapshotDescriptor, GetSnapshotRequestParameters, GetSnapshotResponse>(
 				s => selector(s.Snapshot(snapshotName).Repository(repository)),
 				(p, d) => this.RawDispatch.SnapshotGetDispatch<GetSnapshotResponse>(p)
 			);
@@ -82,7 +82,7 @@ namespace Nest
 		/// <inheritdoc />
 		public IGetSnapshotResponse GetSnapshot(IGetSnapshotRequest getSnapshotRequest)
 		{
-			return this.Dispatch<IGetSnapshotRequest, GetSnapshotRequestParameters, GetSnapshotResponse>(
+			return this.Dispatcher.Dispatch<IGetSnapshotRequest, GetSnapshotRequestParameters, GetSnapshotResponse>(
 				getSnapshotRequest,
 				(p, d) => this.RawDispatch.SnapshotGetDispatch<GetSnapshotResponse>(p)
 			);
@@ -94,7 +94,7 @@ namespace Nest
 			snapshotName.ThrowIfNullOrEmpty("name");
 			repository.ThrowIfNullOrEmpty("repository");
 			selector = selector ?? (s => s);
-			return this.DispatchAsync<GetSnapshotDescriptor, GetSnapshotRequestParameters, GetSnapshotResponse, IGetSnapshotResponse>(
+			return this.Dispatcher.DispatchAsync<GetSnapshotDescriptor, GetSnapshotRequestParameters, GetSnapshotResponse, IGetSnapshotResponse>(
 				s => selector(s.Snapshot(snapshotName).Repository(repository)),
 				(p, d) => this.RawDispatch.SnapshotGetDispatchAsync<GetSnapshotResponse>(p)
 			);
@@ -103,7 +103,7 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<IGetSnapshotResponse> GetSnapshotAsync(IGetSnapshotRequest getSnapshotRequest)
 		{
-			return this.DispatchAsync<IGetSnapshotRequest, GetSnapshotRequestParameters, GetSnapshotResponse, IGetSnapshotResponse>(
+			return this.Dispatcher.DispatchAsync<IGetSnapshotRequest, GetSnapshotRequestParameters, GetSnapshotResponse, IGetSnapshotResponse>(
 				getSnapshotRequest,
 				(p, d) => this.RawDispatch.SnapshotGetDispatchAsync<GetSnapshotResponse>(p)
 			);
@@ -113,7 +113,7 @@ namespace Nest
 		/// <inheritdoc />
 		public ISnapshotStatusResponse SnapshotStatus(Func<SnapshotStatusDescriptor, SnapshotStatusDescriptor> selector = null)
 		{
-			return this.Dispatch<SnapshotStatusDescriptor, SnapshotStatusRequestParameters, SnapshotStatusResponse>(
+			return this.Dispatcher.Dispatch<SnapshotStatusDescriptor, SnapshotStatusRequestParameters, SnapshotStatusResponse>(
 				selector,
 				(p, d) => this.RawDispatch.SnapshotStatusDispatch<SnapshotStatusResponse>(p)
 			);
@@ -122,7 +122,7 @@ namespace Nest
 		/// <inheritdoc />
 		public ISnapshotStatusResponse SnapshotStatus(ISnapshotStatusRequest getSnapshotRequest)
 		{
-			return this.Dispatch<ISnapshotStatusRequest, SnapshotStatusRequestParameters, SnapshotStatusResponse>(
+			return this.Dispatcher.Dispatch<ISnapshotStatusRequest, SnapshotStatusRequestParameters, SnapshotStatusResponse>(
 				getSnapshotRequest,
 				(p, d) => this.RawDispatch.SnapshotStatusDispatch<SnapshotStatusResponse>(p)
 			);
@@ -131,7 +131,7 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<ISnapshotStatusResponse> SnapshotStatusAsync(Func<SnapshotStatusDescriptor, SnapshotStatusDescriptor> selector = null)
 		{
-			return this.DispatchAsync<SnapshotStatusDescriptor, SnapshotStatusRequestParameters, SnapshotStatusResponse, ISnapshotStatusResponse>(
+			return this.Dispatcher.DispatchAsync<SnapshotStatusDescriptor, SnapshotStatusRequestParameters, SnapshotStatusResponse, ISnapshotStatusResponse>(
 				selector,
 				(p, d) => this.RawDispatch.SnapshotStatusDispatchAsync<SnapshotStatusResponse>(p)
 			);
@@ -140,7 +140,7 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<ISnapshotStatusResponse> SnapshotStatusAsync(ISnapshotStatusRequest getSnapshotRequest)
 		{
-			return this.DispatchAsync<ISnapshotStatusRequest, SnapshotStatusRequestParameters, SnapshotStatusResponse, ISnapshotStatusResponse>(
+			return this.Dispatcher.DispatchAsync<ISnapshotStatusRequest, SnapshotStatusRequestParameters, SnapshotStatusResponse, ISnapshotStatusResponse>(
 				getSnapshotRequest,
 				(p, d) => this.RawDispatch.SnapshotStatusDispatchAsync<SnapshotStatusResponse>(p)
 			);
@@ -152,7 +152,7 @@ namespace Nest
 			snapshotName.ThrowIfNullOrEmpty("name");
 			repository.ThrowIfNullOrEmpty("repository");
 			selector = selector ?? (s => s);
-			return this.Dispatch<DeleteSnapshotDescriptor, DeleteSnapshotRequestParameters, AcknowledgedResponse>(
+			return this.Dispatcher.Dispatch<DeleteSnapshotDescriptor, DeleteSnapshotRequestParameters, AcknowledgedResponse>(
 				s => selector(s.Snapshot(snapshotName).Repository(repository)),
 				(p, d) => this.RawDispatch.SnapshotDeleteDispatch<AcknowledgedResponse>(p)
 			);
@@ -161,7 +161,7 @@ namespace Nest
 		/// <inheritdoc />
 		public IAcknowledgedResponse DeleteSnapshot(IDeleteSnapshotRequest deleteSnapshotRequest)
 		{
-			return this.Dispatch<IDeleteSnapshotRequest, DeleteSnapshotRequestParameters, AcknowledgedResponse>(
+			return this.Dispatcher.Dispatch<IDeleteSnapshotRequest, DeleteSnapshotRequestParameters, AcknowledgedResponse>(
 				deleteSnapshotRequest,
 				(p, d) => this.RawDispatch.SnapshotDeleteDispatch<AcknowledgedResponse>(p)
 			);
@@ -173,7 +173,7 @@ namespace Nest
 			snapshotName.ThrowIfNullOrEmpty("name");
 			repository.ThrowIfNullOrEmpty("repository");
 			selector = selector ?? (s => s);
-			return this.DispatchAsync<DeleteSnapshotDescriptor, DeleteSnapshotRequestParameters, AcknowledgedResponse, IAcknowledgedResponse>(
+			return this.Dispatcher.DispatchAsync<DeleteSnapshotDescriptor, DeleteSnapshotRequestParameters, AcknowledgedResponse, IAcknowledgedResponse>(
 				s => selector(s.Snapshot(snapshotName).Repository(repository)),
 				(p, d) => this.RawDispatch.SnapshotDeleteDispatchAsync<AcknowledgedResponse>(p)
 			);
@@ -182,7 +182,7 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<IAcknowledgedResponse> DeleteSnapshotAsync(IDeleteSnapshotRequest deleteSnapshotRequest)
 		{
-			return this.DispatchAsync<IDeleteSnapshotRequest, DeleteSnapshotRequestParameters, AcknowledgedResponse, IAcknowledgedResponse>(
+			return this.Dispatcher.DispatchAsync<IDeleteSnapshotRequest, DeleteSnapshotRequestParameters, AcknowledgedResponse, IAcknowledgedResponse>(
 				deleteSnapshotRequest,
 				(p, d) => this.RawDispatch.SnapshotDeleteDispatchAsync<AcknowledgedResponse>(p)
 			);

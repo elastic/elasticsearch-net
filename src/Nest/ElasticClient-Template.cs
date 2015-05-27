@@ -15,7 +15,7 @@ namespace Nest
 		public ITemplateResponse GetTemplate(string name, Func<GetTemplateDescriptor, GetTemplateDescriptor> getTemplateSelector = null)
 		{
 			getTemplateSelector = getTemplateSelector ?? (s => s);
-			return this.Dispatch<GetTemplateDescriptor, GetTemplateRequestParameters, TemplateResponse>(
+			return this.Dispatcher.Dispatch<GetTemplateDescriptor, GetTemplateRequestParameters, TemplateResponse>(
 				d => getTemplateSelector(d.Name(name)),
 				(p, d) => RawDispatch.IndicesGetTemplateDispatch<TemplateResponse>(
 					p.DeserializationState((GetTemplateConverter) DeserializeTemplateResponse)
@@ -26,7 +26,7 @@ namespace Nest
 		/// <inheritdoc />
 		public ITemplateResponse GetTemplate(IGetTemplateRequest getTemplateRequest)
 		{
-			return this.Dispatch<IGetTemplateRequest, GetTemplateRequestParameters, TemplateResponse>(
+			return this.Dispatcher.Dispatch<IGetTemplateRequest, GetTemplateRequestParameters, TemplateResponse>(
 				getTemplateRequest,
 				(p, d) => RawDispatch.IndicesGetTemplateDispatch<TemplateResponse>(
 					p.DeserializationState((GetTemplateConverter) DeserializeTemplateResponse)
@@ -38,7 +38,7 @@ namespace Nest
 		public Task<ITemplateResponse> GetTemplateAsync(string name, Func<GetTemplateDescriptor, GetTemplateDescriptor> getTemplateSelector = null)
 		{
 			getTemplateSelector = getTemplateSelector ?? (s => s);
-			return this.DispatchAsync<GetTemplateDescriptor, GetTemplateRequestParameters, TemplateResponse, ITemplateResponse>(
+			return this.Dispatcher.DispatchAsync<GetTemplateDescriptor, GetTemplateRequestParameters, TemplateResponse, ITemplateResponse>(
 				d => getTemplateSelector(d.Name(name)),
 				(p, d) => this.RawDispatch.IndicesGetTemplateDispatchAsync<TemplateResponse>(
 					p.DeserializationState((GetTemplateConverter) DeserializeTemplateResponse)
@@ -49,7 +49,7 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<ITemplateResponse> GetTemplateAsync(IGetTemplateRequest getTemplateRequest)
 		{
-			return this.DispatchAsync<IGetTemplateRequest, GetTemplateRequestParameters, TemplateResponse, ITemplateResponse>(
+			return this.Dispatcher.DispatchAsync<IGetTemplateRequest, GetTemplateRequestParameters, TemplateResponse, ITemplateResponse>(
 				getTemplateRequest,
 				(p, d) => this.RawDispatch.IndicesGetTemplateDispatchAsync<TemplateResponse>(
 					p.DeserializationState((GetTemplateConverter) DeserializeTemplateResponse)
@@ -64,7 +64,7 @@ namespace Nest
 		{
 			putTemplateSelector.ThrowIfNull("putTemplateSelector");
 			var descriptor = putTemplateSelector(new PutTemplateDescriptor(_connectionSettings).Name(name));
-			return this.Dispatch<IPutTemplateRequest, PutTemplateRequestParameters, IndicesOperationResponse>(
+			return this.Dispatcher.Dispatch<IPutTemplateRequest, PutTemplateRequestParameters, IndicesOperationResponse>(
 				descriptor,
 				(p, d) => this.RawDispatch.IndicesPutTemplateDispatch<IndicesOperationResponse>(p, d.TemplateMapping)
 			);
@@ -73,7 +73,7 @@ namespace Nest
 		/// <inheritdoc />
 		public IIndicesOperationResponse PutTemplate(IPutTemplateRequest putTemplateRequest)
 		{
-			return this.Dispatch<IPutTemplateRequest, PutTemplateRequestParameters, IndicesOperationResponse>(
+			return this.Dispatcher.Dispatch<IPutTemplateRequest, PutTemplateRequestParameters, IndicesOperationResponse>(
 				putTemplateRequest,
 				(p, d) => this.RawDispatch.IndicesPutTemplateDispatch<IndicesOperationResponse>(p, d.TemplateMapping)
 			);
@@ -84,7 +84,7 @@ namespace Nest
 		{
 			putTemplateSelector.ThrowIfNull("putTemplateSelector");
 			var descriptor = putTemplateSelector(new PutTemplateDescriptor(_connectionSettings).Name(name));
-			return this.DispatchAsync<IPutTemplateRequest, PutTemplateRequestParameters, IndicesOperationResponse, IIndicesOperationResponse>(
+			return this.Dispatcher.DispatchAsync<IPutTemplateRequest, PutTemplateRequestParameters, IndicesOperationResponse, IIndicesOperationResponse>(
 					descriptor,
 					(p, d) => this.RawDispatch.IndicesPutTemplateDispatchAsync<IndicesOperationResponse>(p, d.TemplateMapping)
 				);
@@ -93,7 +93,7 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<IIndicesOperationResponse> PutTemplateAsync(IPutTemplateRequest putTemplateRequest)
 		{
-			return this.DispatchAsync<IPutTemplateRequest, PutTemplateRequestParameters, IndicesOperationResponse, IIndicesOperationResponse>(
+			return this.Dispatcher.DispatchAsync<IPutTemplateRequest, PutTemplateRequestParameters, IndicesOperationResponse, IIndicesOperationResponse>(
 					putTemplateRequest,
 					(p, d) => this.RawDispatch.IndicesPutTemplateDispatchAsync<IndicesOperationResponse>(p, d.TemplateMapping)
 				);
@@ -105,7 +105,7 @@ namespace Nest
 		public IIndicesOperationResponse DeleteTemplate(string name, Func<DeleteTemplateDescriptor, DeleteTemplateDescriptor> deleteTemplateSelector = null)
 		{
 			deleteTemplateSelector = deleteTemplateSelector ?? (s => s);
-			return this.Dispatch<DeleteTemplateDescriptor, DeleteTemplateRequestParameters, IndicesOperationResponse>(
+			return this.Dispatcher.Dispatch<DeleteTemplateDescriptor, DeleteTemplateRequestParameters, IndicesOperationResponse>(
 				d => deleteTemplateSelector(d.Name(name)),
 				(p, d) => this.RawDispatch.IndicesDeleteTemplateDispatch<IndicesOperationResponse>(p)
 			);
@@ -114,7 +114,7 @@ namespace Nest
 		/// <inheritdoc />
 		public IIndicesOperationResponse DeleteTemplate(IDeleteTemplateRequest deleteTemplateRequest)
 		{
-			return this.Dispatch<IDeleteTemplateRequest, DeleteTemplateRequestParameters, IndicesOperationResponse>(
+			return this.Dispatcher.Dispatch<IDeleteTemplateRequest, DeleteTemplateRequestParameters, IndicesOperationResponse>(
 				deleteTemplateRequest,
 				(p, d) => this.RawDispatch.IndicesDeleteTemplateDispatch<IndicesOperationResponse>(p)
 			);
@@ -131,7 +131,7 @@ namespace Nest
 		public Task<IIndicesOperationResponse> DeleteTemplateAsync(string name, Func<DeleteTemplateDescriptor, DeleteTemplateDescriptor> deleteTemplateSelector = null)
 		{
 			deleteTemplateSelector = deleteTemplateSelector ?? (s => s);
-			return this.DispatchAsync
+			return this.Dispatcher.DispatchAsync
 				<DeleteTemplateDescriptor, DeleteTemplateRequestParameters, IndicesOperationResponse, IIndicesOperationResponse>(
 					d => deleteTemplateSelector(d.Name(name)),
 					(p, d) => this.RawDispatch.IndicesDeleteTemplateDispatchAsync<IndicesOperationResponse>(p)
@@ -148,7 +148,7 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<IIndicesOperationResponse> DeleteTemplateAsync(IDeleteTemplateRequest deleteTemplateRequest)
 		{
-			return this.DispatchAsync<IDeleteTemplateRequest, DeleteTemplateRequestParameters, IndicesOperationResponse, IIndicesOperationResponse>(
+			return this.Dispatcher.DispatchAsync<IDeleteTemplateRequest, DeleteTemplateRequestParameters, IndicesOperationResponse, IIndicesOperationResponse>(
 					deleteTemplateRequest,
 					(p, d) => this.RawDispatch.IndicesDeleteTemplateDispatchAsync<IndicesOperationResponse>(p)
 				);

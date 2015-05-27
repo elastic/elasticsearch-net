@@ -8,7 +8,7 @@ namespace Nest
     {
         public IPutScriptResponse PutScript(Func<PutScriptDescriptor, PutScriptDescriptor> putScriptDescriptor)
         {
-            return this.Dispatch<PutScriptDescriptor, PutScriptRequestParameters, PutScriptResponse>(
+            return this.Dispatcher.Dispatch<PutScriptDescriptor, PutScriptRequestParameters, PutScriptResponse>(
                     putScriptDescriptor,
                     (p, d) => this.RawDispatch.PutScriptDispatch<PutScriptResponse>(p, d)
                 );
@@ -16,7 +16,7 @@ namespace Nest
 
         public Task<IPutScriptResponse> PutScriptAsync(Func<PutScriptDescriptor, PutScriptDescriptor> putScriptDescriptor)
         {
-            return this.DispatchAsync<PutScriptDescriptor, PutScriptRequestParameters, PutScriptResponse, IPutScriptResponse>(
+            return this.Dispatcher.DispatchAsync<PutScriptDescriptor, PutScriptRequestParameters, PutScriptResponse, IPutScriptResponse>(
                     putScriptDescriptor,
                     (p, d) => this.RawDispatch.PutScriptDispatchAsync<PutScriptResponse>(p, d)
                 );
@@ -24,7 +24,7 @@ namespace Nest
 
         public IGetScriptResponse GetScript(Func<GetScriptDescriptor, GetScriptDescriptor> getScriptDescriptor)
         {
-            return this.Dispatch<GetScriptDescriptor, GetScriptRequestParameters, GetScriptResponse>(
+            return this.Dispatcher.Dispatch<GetScriptDescriptor, GetScriptRequestParameters, GetScriptResponse>(
                     getScriptDescriptor,
                     (p, d) => this.RawDispatch.GetScriptDispatch<GetScriptResponse>(p)
                 );
@@ -32,7 +32,7 @@ namespace Nest
 
         public Task<IGetScriptResponse> GetScriptAsync(Func<GetScriptDescriptor, GetScriptDescriptor> getScriptDescriptor)
         {
-            return this.DispatchAsync<GetScriptDescriptor, GetScriptRequestParameters, GetScriptResponse, IGetScriptResponse>(
+            return this.Dispatcher.DispatchAsync<GetScriptDescriptor, GetScriptRequestParameters, GetScriptResponse, IGetScriptResponse>(
                     getScriptDescriptor,
                     (p, d) => this.RawDispatch.GetScriptDispatchAsync<GetScriptResponse>(p)
                 );
@@ -40,7 +40,7 @@ namespace Nest
 
         public IDeleteScriptResponse DeleteScript(Func<DeleteScriptDescriptor, DeleteScriptDescriptor> deleteScriptDescriptor)
         {
-            return this.Dispatch<DeleteScriptDescriptor, DeleteScriptRequestParameters, DeleteScriptResponse>(
+            return this.Dispatcher.Dispatch<DeleteScriptDescriptor, DeleteScriptRequestParameters, DeleteScriptResponse>(
                     deleteScriptDescriptor,
                     (p, d) => this.RawDispatch.DeleteScriptDispatch<DeleteScriptResponse>(p)
                 );
@@ -48,7 +48,7 @@ namespace Nest
 
         public Task<IDeleteScriptResponse> DeleteScriptAsync(Func<DeleteScriptDescriptor, DeleteScriptDescriptor> deleteScriptDescriptor)
         {
-            return this.DispatchAsync<DeleteScriptDescriptor, DeleteScriptRequestParameters, DeleteScriptResponse, IDeleteScriptResponse>(
+            return this.Dispatcher.DispatchAsync<DeleteScriptDescriptor, DeleteScriptRequestParameters, DeleteScriptResponse, IDeleteScriptResponse>(
                     deleteScriptDescriptor,
                     (p, d) => this.RawDispatch.DeleteScriptDispatchAsync<DeleteScriptResponse>(p)
                 );
