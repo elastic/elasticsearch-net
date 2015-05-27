@@ -213,8 +213,8 @@ namespace CodeGeneration.LowLevelClient.Domain
 							QueryStringParamName = queryStringParamName,
 							ReturnType = string.Format("ElasticsearchResponse<{0}>", defaultBoundGeneric),
 							ReturnTypeGeneric = null,
-							//CallTypeGeneric = defaultBoundGeneric == "DynamicDictionary" ? "Dictionary<string, object>" : defaultBoundGeneric,
-							CallTypeGeneric = defaultBoundGeneric,
+							CallTypeGeneric = defaultBoundGeneric == "DynamicDictionary" 
+								? "Dictionary<string, object>" : defaultBoundGeneric,
 							ReturnDescription = 
 								"ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary"
 								+ explanationOfDynamic,
@@ -234,8 +234,8 @@ namespace CodeGeneration.LowLevelClient.Domain
 							QueryStringParamName = queryStringParamName,
 							ReturnType = string.Format("Task<ElasticsearchResponse<{0}>>", defaultBoundGeneric),
 							ReturnTypeGeneric = null,
-							//CallTypeGeneric = defaultBoundGeneric == "DynamicDictionary" ? "Dictionary<string, object>" : defaultBoundGeneric,
-							CallTypeGeneric = defaultBoundGeneric,
+							CallTypeGeneric = defaultBoundGeneric == "DynamicDictionary" 
+								? "Dictionary<string, object>" : defaultBoundGeneric,
 							ReturnDescription = 
 								"Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary"
 								+ explanationOfDynamic,

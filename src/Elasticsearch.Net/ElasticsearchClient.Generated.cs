@@ -115,10 +115,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /_bench/abort/{name}
@@ -151,10 +151,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /_bulk
@@ -252,10 +252,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /_bulk
@@ -287,10 +287,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/_bulk
@@ -394,10 +394,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/_bulk
@@ -431,10 +431,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/{type}/_bulk
@@ -544,10 +544,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/{type}/_bulk
@@ -583,10 +583,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a PUT on /_bulk
@@ -684,10 +684,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"PUT", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a PUT on /_bulk
@@ -719,10 +719,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"PUT", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a PUT on /{index}/_bulk
@@ -826,10 +826,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"PUT", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a PUT on /{index}/_bulk
@@ -863,10 +863,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"PUT", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a PUT on /{index}/{type}/_bulk
@@ -976,10 +976,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"PUT", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a PUT on /{index}/{type}/_bulk
@@ -1015,10 +1015,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"PUT", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_cat/aliases
@@ -4610,10 +4610,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"DELETE", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a DELETE on /_search/scroll/{scroll_id}
@@ -4647,10 +4647,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"DELETE", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a DELETE on /_search/scroll
@@ -4748,10 +4748,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"DELETE", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a DELETE on /_search/scroll
@@ -4783,10 +4783,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"DELETE", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_cluster/settings
@@ -4881,10 +4881,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_cluster/settings
@@ -4915,10 +4915,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_cluster/health
@@ -5013,10 +5013,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_cluster/health
@@ -5047,10 +5047,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_cluster/health/{index}
@@ -5151,10 +5151,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_cluster/health/{index}
@@ -5187,10 +5187,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_cluster/pending_tasks
@@ -5285,10 +5285,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_cluster/pending_tasks
@@ -5319,10 +5319,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a PUT on /_cluster/settings
@@ -5420,10 +5420,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"PUT", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a PUT on /_cluster/settings
@@ -5455,10 +5455,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"PUT", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /_cluster/reroute
@@ -5556,10 +5556,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /_cluster/reroute
@@ -5591,10 +5591,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_cluster/state
@@ -5689,10 +5689,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_cluster/state
@@ -5723,10 +5723,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_cluster/state/{metric}
@@ -5827,10 +5827,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_cluster/state/{metric}
@@ -5863,10 +5863,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_cluster/state/{metric}/{index}
@@ -5973,10 +5973,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_cluster/state/{metric}/{index}
@@ -6011,10 +6011,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_cluster/stats
@@ -6109,10 +6109,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_cluster/stats
@@ -6143,10 +6143,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_cluster/stats/nodes/{node_id}
@@ -6247,10 +6247,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_cluster/stats/nodes/{node_id}
@@ -6283,10 +6283,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /_count
@@ -6384,10 +6384,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /_count
@@ -6419,10 +6419,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/_count
@@ -6526,10 +6526,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/_count
@@ -6563,10 +6563,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/{type}/_count
@@ -6676,10 +6676,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/{type}/_count
@@ -6715,10 +6715,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_count
@@ -6813,10 +6813,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_count
@@ -6847,10 +6847,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/_count
@@ -6951,10 +6951,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/_count
@@ -6987,10 +6987,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/{type}/_count
@@ -7097,10 +7097,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/{type}/_count
@@ -7135,10 +7135,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/{type}/_percolate/count
@@ -7245,10 +7245,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/{type}/_percolate/count
@@ -7283,10 +7283,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/{type}/{id}/_percolate/count
@@ -7399,10 +7399,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/{type}/{id}/_percolate/count
@@ -7439,10 +7439,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/{type}/_percolate/count
@@ -7552,10 +7552,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/{type}/_percolate/count
@@ -7591,10 +7591,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/{type}/{id}/_percolate/count
@@ -7710,10 +7710,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/{type}/{id}/_percolate/count
@@ -7751,10 +7751,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a DELETE on /{index}/{type}/{id}
@@ -7885,10 +7885,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"DELETE", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a DELETE on /{index}/{type}/{id}
@@ -7931,10 +7931,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"DELETE", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a DELETE on /{index}/_query
@@ -8038,10 +8038,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"DELETE", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a DELETE on /{index}/_query
@@ -8075,10 +8075,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"DELETE", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a DELETE on /{index}/{type}/_query
@@ -8188,10 +8188,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"DELETE", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a DELETE on /{index}/{type}/_query
@@ -8227,10 +8227,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"DELETE", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a DELETE on /_scripts/{lang}/{id}
@@ -8337,10 +8337,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"DELETE", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a DELETE on /_scripts/{lang}/{id}
@@ -8375,10 +8375,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"DELETE", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a DELETE on /_search/template/{id}
@@ -8479,10 +8479,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"DELETE", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a DELETE on /_search/template/{id}
@@ -8515,10 +8515,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"DELETE", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a HEAD on /{index}/{type}/{id}
@@ -8649,10 +8649,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"HEAD", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a HEAD on /{index}/{type}/{id}
@@ -8695,10 +8695,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"HEAD", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/{type}/{id}/_explain
@@ -8811,10 +8811,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/{type}/{id}/_explain
@@ -8851,10 +8851,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/{type}/{id}/_explain
@@ -8970,10 +8970,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/{type}/{id}/_explain
@@ -9011,10 +9011,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/{type}/{id}
@@ -9145,10 +9145,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/{type}/{id}
@@ -9191,10 +9191,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_scripts/{lang}/{id}
@@ -9301,10 +9301,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_scripts/{lang}/{id}
@@ -9339,10 +9339,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/{type}/{id}/_source
@@ -9455,10 +9455,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/{type}/{id}/_source
@@ -9495,10 +9495,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_search/template/{id}
@@ -9599,10 +9599,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_search/template/{id}
@@ -9635,10 +9635,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/{type}
@@ -9748,10 +9748,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/{type}
@@ -9787,10 +9787,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/{type}/{id}
@@ -9906,10 +9906,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/{type}/{id}
@@ -9947,10 +9947,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a PUT on /{index}/{type}
@@ -10060,10 +10060,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"PUT", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a PUT on /{index}/{type}
@@ -10099,10 +10099,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"PUT", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a PUT on /{index}/{type}/{id}
@@ -10218,10 +10218,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"PUT", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a PUT on /{index}/{type}/{id}
@@ -10259,10 +10259,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"PUT", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_analyze
@@ -10357,10 +10357,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_analyze
@@ -10391,10 +10391,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/_analyze
@@ -10495,10 +10495,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/_analyze
@@ -10531,10 +10531,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /_analyze
@@ -10632,10 +10632,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /_analyze
@@ -10667,10 +10667,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/_analyze
@@ -10774,10 +10774,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/_analyze
@@ -10811,10 +10811,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /_cache/clear
@@ -10909,10 +10909,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /_cache/clear
@@ -10943,10 +10943,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/_cache/clear
@@ -11047,10 +11047,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/_cache/clear
@@ -11083,10 +11083,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_cache/clear
@@ -11181,10 +11181,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_cache/clear
@@ -11215,10 +11215,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/_cache/clear
@@ -11319,10 +11319,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/_cache/clear
@@ -11355,10 +11355,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/_close
@@ -11459,10 +11459,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/_close
@@ -11495,10 +11495,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a PUT on /{index}
@@ -11602,10 +11602,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"PUT", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a PUT on /{index}
@@ -11639,10 +11639,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"PUT", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}
@@ -11746,10 +11746,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}
@@ -11783,10 +11783,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a DELETE on /{index}
@@ -11887,10 +11887,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"DELETE", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a DELETE on /{index}
@@ -11923,10 +11923,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"DELETE", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a DELETE on /{index}/_alias/{name}
@@ -12033,10 +12033,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"DELETE", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a DELETE on /{index}/_alias/{name}
@@ -12071,10 +12071,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"DELETE", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a DELETE on /{index}/{type}/_mapping
@@ -12181,10 +12181,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"DELETE", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a DELETE on /{index}/{type}/_mapping
@@ -12219,10 +12219,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"DELETE", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a DELETE on /_template/{name}
@@ -12323,10 +12323,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"DELETE", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a DELETE on /_template/{name}
@@ -12359,10 +12359,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"DELETE", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a DELETE on /{index}/_warmer/{name}
@@ -12469,10 +12469,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"DELETE", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a DELETE on /{index}/_warmer/{name}
@@ -12507,10 +12507,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"DELETE", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a HEAD on /{index}
@@ -12629,10 +12629,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"HEAD", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a HEAD on /{index}
@@ -12671,10 +12671,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"HEAD", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a HEAD on /_alias/{name}
@@ -12793,10 +12793,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"HEAD", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a HEAD on /_alias/{name}
@@ -12835,10 +12835,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"HEAD", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a HEAD on /{index}/_alias/{name}
@@ -12963,10 +12963,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"HEAD", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a HEAD on /{index}/_alias/{name}
@@ -13007,10 +13007,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"HEAD", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a HEAD on /{index}/_alias
@@ -13129,10 +13129,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"HEAD", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a HEAD on /{index}/_alias
@@ -13171,10 +13171,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"HEAD", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a HEAD on /_template/{name}
@@ -13293,10 +13293,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"HEAD", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a HEAD on /_template/{name}
@@ -13335,10 +13335,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"HEAD", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a HEAD on /{index}/{type}
@@ -13463,10 +13463,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"HEAD", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a HEAD on /{index}/{type}
@@ -13507,10 +13507,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"HEAD", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /_flush
@@ -13605,10 +13605,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /_flush
@@ -13639,10 +13639,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/_flush
@@ -13743,10 +13743,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/_flush
@@ -13779,10 +13779,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_flush
@@ -13877,10 +13877,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_flush
@@ -13911,10 +13911,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/_flush
@@ -14015,10 +14015,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/_flush
@@ -14051,10 +14051,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}
@@ -14155,10 +14155,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}
@@ -14191,10 +14191,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/{feature}
@@ -14301,10 +14301,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/{feature}
@@ -14339,10 +14339,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_alias
@@ -14437,10 +14437,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_alias
@@ -14471,10 +14471,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_alias/{name}
@@ -14575,10 +14575,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_alias/{name}
@@ -14611,10 +14611,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/_alias/{name}
@@ -14721,10 +14721,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/_alias/{name}
@@ -14759,10 +14759,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/_alias
@@ -14863,10 +14863,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/_alias
@@ -14899,10 +14899,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_aliases
@@ -14997,10 +14997,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_aliases
@@ -15031,10 +15031,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/_aliases
@@ -15135,10 +15135,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/_aliases
@@ -15171,10 +15171,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/_aliases/{name}
@@ -15281,10 +15281,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/_aliases/{name}
@@ -15319,10 +15319,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_aliases/{name}
@@ -15423,10 +15423,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_aliases/{name}
@@ -15459,10 +15459,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_mapping/field/{field}
@@ -15563,10 +15563,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_mapping/field/{field}
@@ -15599,10 +15599,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/_mapping/field/{field}
@@ -15709,10 +15709,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/_mapping/field/{field}
@@ -15747,10 +15747,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_mapping/{type}/field/{field}
@@ -15857,10 +15857,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_mapping/{type}/field/{field}
@@ -15895,10 +15895,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/_mapping/{type}/field/{field}
@@ -16011,10 +16011,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/_mapping/{type}/field/{field}
@@ -16051,10 +16051,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_mapping
@@ -16149,10 +16149,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_mapping
@@ -16183,10 +16183,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/_mapping
@@ -16287,10 +16287,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/_mapping
@@ -16323,10 +16323,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_mapping/{type}
@@ -16427,10 +16427,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_mapping/{type}
@@ -16463,10 +16463,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/_mapping/{type}
@@ -16573,10 +16573,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/_mapping/{type}
@@ -16611,10 +16611,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_settings
@@ -16709,10 +16709,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_settings
@@ -16743,10 +16743,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/_settings
@@ -16847,10 +16847,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/_settings
@@ -16883,10 +16883,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/_settings/{name}
@@ -16993,10 +16993,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/_settings/{name}
@@ -17031,10 +17031,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_settings/{name}
@@ -17135,10 +17135,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_settings/{name}
@@ -17171,10 +17171,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_template
@@ -17269,10 +17269,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_template
@@ -17303,10 +17303,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_template/{name}
@@ -17407,10 +17407,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_template/{name}
@@ -17443,10 +17443,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_upgrade
@@ -17541,10 +17541,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_upgrade
@@ -17575,10 +17575,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/_upgrade
@@ -17679,10 +17679,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/_upgrade
@@ -17715,10 +17715,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_warmer
@@ -17813,10 +17813,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_warmer
@@ -17847,10 +17847,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/_warmer
@@ -17951,10 +17951,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/_warmer
@@ -17987,10 +17987,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/_warmer/{name}
@@ -18097,10 +18097,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/_warmer/{name}
@@ -18135,10 +18135,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_warmer/{name}
@@ -18239,10 +18239,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_warmer/{name}
@@ -18275,10 +18275,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/{type}/_warmer/{name}
@@ -18391,10 +18391,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/{type}/_warmer/{name}
@@ -18431,10 +18431,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/_open
@@ -18535,10 +18535,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/_open
@@ -18571,10 +18571,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /_optimize
@@ -18669,10 +18669,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /_optimize
@@ -18703,10 +18703,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/_optimize
@@ -18807,10 +18807,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/_optimize
@@ -18843,10 +18843,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_optimize
@@ -18941,10 +18941,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_optimize
@@ -18975,10 +18975,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/_optimize
@@ -19079,10 +19079,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/_optimize
@@ -19115,10 +19115,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a PUT on /{index}/_alias/{name}
@@ -19228,10 +19228,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"PUT", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a PUT on /{index}/_alias/{name}
@@ -19267,10 +19267,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"PUT", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/_alias/{name}
@@ -19380,10 +19380,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/_alias/{name}
@@ -19419,10 +19419,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a PUT on /{index}/{type}/_mapping
@@ -19532,10 +19532,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"PUT", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a PUT on /{index}/{type}/_mapping
@@ -19571,10 +19571,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"PUT", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a PUT on /_mapping/{type}
@@ -19678,10 +19678,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"PUT", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a PUT on /_mapping/{type}
@@ -19715,10 +19715,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"PUT", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/{type}/_mapping
@@ -19828,10 +19828,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/{type}/_mapping
@@ -19867,10 +19867,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /_mapping/{type}
@@ -19974,10 +19974,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /_mapping/{type}
@@ -20011,10 +20011,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a PUT on /_settings
@@ -20112,10 +20112,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"PUT", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a PUT on /_settings
@@ -20147,10 +20147,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"PUT", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a PUT on /{index}/_settings
@@ -20254,10 +20254,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"PUT", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a PUT on /{index}/_settings
@@ -20291,10 +20291,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"PUT", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a PUT on /_template/{name}
@@ -20398,10 +20398,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"PUT", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a PUT on /_template/{name}
@@ -20435,10 +20435,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"PUT", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /_template/{name}
@@ -20542,10 +20542,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /_template/{name}
@@ -20579,10 +20579,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a PUT on /_warmer/{name}
@@ -20686,10 +20686,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"PUT", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a PUT on /_warmer/{name}
@@ -20723,10 +20723,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"PUT", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a PUT on /{index}/_warmer/{name}
@@ -20836,10 +20836,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"PUT", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a PUT on /{index}/_warmer/{name}
@@ -20875,10 +20875,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"PUT", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a PUT on /{index}/{type}/_warmer/{name}
@@ -20994,10 +20994,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"PUT", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a PUT on /{index}/{type}/_warmer/{name}
@@ -21035,10 +21035,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"PUT", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /_warmer/{name}
@@ -21142,10 +21142,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /_warmer/{name}
@@ -21179,10 +21179,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/_warmer/{name}
@@ -21292,10 +21292,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/_warmer/{name}
@@ -21331,10 +21331,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/{type}/_warmer/{name}
@@ -21450,10 +21450,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/{type}/_warmer/{name}
@@ -21491,10 +21491,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_recovery
@@ -21589,10 +21589,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_recovery
@@ -21623,10 +21623,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/_recovery
@@ -21727,10 +21727,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/_recovery
@@ -21763,10 +21763,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /_refresh
@@ -21861,10 +21861,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /_refresh
@@ -21895,10 +21895,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/_refresh
@@ -21999,10 +21999,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/_refresh
@@ -22035,10 +22035,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_refresh
@@ -22133,10 +22133,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_refresh
@@ -22167,10 +22167,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/_refresh
@@ -22271,10 +22271,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/_refresh
@@ -22307,10 +22307,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_segments
@@ -22405,10 +22405,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_segments
@@ -22439,10 +22439,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/_segments
@@ -22543,10 +22543,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/_segments
@@ -22579,10 +22579,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_stats
@@ -22677,10 +22677,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_stats
@@ -22711,10 +22711,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_stats/{metric}
@@ -22815,10 +22815,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_stats/{metric}
@@ -22851,10 +22851,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/_stats
@@ -22955,10 +22955,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/_stats
@@ -22991,10 +22991,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/_stats/{metric}
@@ -23101,10 +23101,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/_stats/{metric}
@@ -23139,10 +23139,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_status
@@ -23237,10 +23237,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_status
@@ -23271,10 +23271,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/_status
@@ -23375,10 +23375,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/_status
@@ -23411,10 +23411,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /_aliases
@@ -23512,10 +23512,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /_aliases
@@ -23547,10 +23547,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /_upgrade
@@ -23645,10 +23645,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /_upgrade
@@ -23679,10 +23679,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/_upgrade
@@ -23783,10 +23783,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/_upgrade
@@ -23819,10 +23819,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_validate/query
@@ -23917,10 +23917,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_validate/query
@@ -23951,10 +23951,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/_validate/query
@@ -24055,10 +24055,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/_validate/query
@@ -24091,10 +24091,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/{type}/_validate/query
@@ -24201,10 +24201,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/{type}/_validate/query
@@ -24239,10 +24239,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /_validate/query
@@ -24340,10 +24340,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /_validate/query
@@ -24375,10 +24375,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/_validate/query
@@ -24482,10 +24482,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/_validate/query
@@ -24519,10 +24519,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/{type}/_validate/query
@@ -24632,10 +24632,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/{type}/_validate/query
@@ -24671,10 +24671,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /
@@ -24769,10 +24769,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /
@@ -24803,10 +24803,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_bench
@@ -24901,10 +24901,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_bench
@@ -24935,10 +24935,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/_bench
@@ -25039,10 +25039,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/_bench
@@ -25075,10 +25075,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/{type}/_bench
@@ -25185,10 +25185,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/{type}/_bench
@@ -25223,10 +25223,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_mget
@@ -25321,10 +25321,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_mget
@@ -25355,10 +25355,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/_mget
@@ -25459,10 +25459,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/_mget
@@ -25495,10 +25495,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/{type}/_mget
@@ -25605,10 +25605,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/{type}/_mget
@@ -25643,10 +25643,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /_mget
@@ -25744,10 +25744,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /_mget
@@ -25779,10 +25779,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/_mget
@@ -25886,10 +25886,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/_mget
@@ -25923,10 +25923,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/{type}/_mget
@@ -26036,10 +26036,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/{type}/_mget
@@ -26075,10 +26075,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/{type}/{id}/_mlt
@@ -26191,10 +26191,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/{type}/{id}/_mlt
@@ -26231,10 +26231,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/{type}/{id}/_mlt
@@ -26350,10 +26350,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/{type}/{id}/_mlt
@@ -26391,10 +26391,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_mpercolate
@@ -26489,10 +26489,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_mpercolate
@@ -26523,10 +26523,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/_mpercolate
@@ -26627,10 +26627,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/_mpercolate
@@ -26663,10 +26663,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/{type}/_mpercolate
@@ -26773,10 +26773,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/{type}/_mpercolate
@@ -26811,10 +26811,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /_mpercolate
@@ -26912,10 +26912,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /_mpercolate
@@ -26947,10 +26947,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/_mpercolate
@@ -27054,10 +27054,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/_mpercolate
@@ -27091,10 +27091,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/{type}/_mpercolate
@@ -27204,10 +27204,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/{type}/_mpercolate
@@ -27243,10 +27243,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_msearch
@@ -27341,10 +27341,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_msearch
@@ -27375,10 +27375,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/_msearch
@@ -27479,10 +27479,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/_msearch
@@ -27515,10 +27515,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/{type}/_msearch
@@ -27625,10 +27625,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/{type}/_msearch
@@ -27663,10 +27663,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /_msearch
@@ -27764,10 +27764,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /_msearch
@@ -27799,10 +27799,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/_msearch
@@ -27906,10 +27906,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/_msearch
@@ -27943,10 +27943,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/{type}/_msearch
@@ -28056,10 +28056,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/{type}/_msearch
@@ -28095,10 +28095,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_mtermvectors
@@ -28193,10 +28193,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_mtermvectors
@@ -28227,10 +28227,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/_mtermvectors
@@ -28331,10 +28331,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/_mtermvectors
@@ -28367,10 +28367,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/{type}/_mtermvectors
@@ -28477,10 +28477,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/{type}/_mtermvectors
@@ -28515,10 +28515,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /_mtermvectors
@@ -28616,10 +28616,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /_mtermvectors
@@ -28651,10 +28651,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/_mtermvectors
@@ -28758,10 +28758,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/_mtermvectors
@@ -28795,10 +28795,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/{type}/_mtermvectors
@@ -28908,10 +28908,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/{type}/_mtermvectors
@@ -28947,10 +28947,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_cluster/nodes/hotthreads
@@ -29045,10 +29045,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_cluster/nodes/hotthreads
@@ -29079,10 +29079,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_cluster/nodes/{node_id}/hotthreads
@@ -29183,10 +29183,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_cluster/nodes/{node_id}/hotthreads
@@ -29219,10 +29219,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_nodes
@@ -29317,10 +29317,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_nodes
@@ -29351,10 +29351,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_nodes/{node_id}
@@ -29455,10 +29455,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_nodes/{node_id}
@@ -29491,10 +29491,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_nodes/{metric}
@@ -29595,10 +29595,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_nodes/{metric}
@@ -29631,10 +29631,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_nodes/{node_id}/{metric}
@@ -29741,10 +29741,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_nodes/{node_id}/{metric}
@@ -29779,10 +29779,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /_shutdown
@@ -29877,10 +29877,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /_shutdown
@@ -29911,10 +29911,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /_cluster/nodes/{node_id}/_shutdown
@@ -30015,10 +30015,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /_cluster/nodes/{node_id}/_shutdown
@@ -30051,10 +30051,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_nodes/stats
@@ -30149,10 +30149,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_nodes/stats
@@ -30183,10 +30183,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_nodes/{node_id}/stats
@@ -30287,10 +30287,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_nodes/{node_id}/stats
@@ -30323,10 +30323,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_nodes/stats/{metric}
@@ -30427,10 +30427,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_nodes/stats/{metric}
@@ -30463,10 +30463,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_nodes/{node_id}/stats/{metric}
@@ -30573,10 +30573,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_nodes/{node_id}/stats/{metric}
@@ -30611,10 +30611,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_nodes/stats/{metric}/{index_metric}
@@ -30721,10 +30721,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_nodes/stats/{metric}/{index_metric}
@@ -30759,10 +30759,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_nodes/{node_id}/stats/{metric}/{index_metric}
@@ -30875,10 +30875,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_nodes/{node_id}/stats/{metric}/{index_metric}
@@ -30915,10 +30915,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/{type}/_percolate
@@ -31025,10 +31025,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/{type}/_percolate
@@ -31063,10 +31063,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/{type}/{id}/_percolate
@@ -31179,10 +31179,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/{type}/{id}/_percolate
@@ -31219,10 +31219,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/{type}/_percolate
@@ -31332,10 +31332,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/{type}/_percolate
@@ -31371,10 +31371,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/{type}/{id}/_percolate
@@ -31490,10 +31490,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/{type}/{id}/_percolate
@@ -31531,10 +31531,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a HEAD on /
@@ -31629,10 +31629,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"HEAD", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a HEAD on /
@@ -31663,10 +31663,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"HEAD", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a PUT on /_scripts/{lang}/{id}
@@ -31776,10 +31776,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"PUT", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a PUT on /_scripts/{lang}/{id}
@@ -31815,10 +31815,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"PUT", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /_scripts/{lang}/{id}
@@ -31928,10 +31928,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /_scripts/{lang}/{id}
@@ -31967,10 +31967,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a PUT on /_search/template/{id}
@@ -32074,10 +32074,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"PUT", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a PUT on /_search/template/{id}
@@ -32111,10 +32111,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"PUT", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /_search/template/{id}
@@ -32218,10 +32218,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /_search/template/{id}
@@ -32255,10 +32255,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_search/scroll
@@ -32353,10 +32353,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_search/scroll
@@ -32387,10 +32387,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_search/scroll/{scroll_id}
@@ -32491,10 +32491,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_search/scroll/{scroll_id}
@@ -32527,10 +32527,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /_search/scroll
@@ -32628,10 +32628,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /_search/scroll
@@ -32663,10 +32663,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /_search/scroll/{scroll_id}
@@ -32770,10 +32770,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /_search/scroll/{scroll_id}
@@ -32807,10 +32807,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_search
@@ -32905,10 +32905,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_search
@@ -32939,10 +32939,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/_search
@@ -33043,10 +33043,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/_search
@@ -33079,10 +33079,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/{type}/_search
@@ -33189,10 +33189,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/{type}/_search
@@ -33227,10 +33227,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /_search
@@ -33328,10 +33328,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /_search
@@ -33363,10 +33363,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/_search
@@ -33470,10 +33470,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/_search
@@ -33507,10 +33507,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/{type}/_search
@@ -33620,10 +33620,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/{type}/_search
@@ -33659,10 +33659,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /_search/exists
@@ -33778,10 +33778,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /_search/exists
@@ -33819,10 +33819,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/_search/exists
@@ -33944,10 +33944,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/_search/exists
@@ -33987,10 +33987,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/{type}/_search/exists
@@ -34118,10 +34118,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/{type}/_search/exists
@@ -34163,10 +34163,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_search/exists
@@ -34279,10 +34279,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_search/exists
@@ -34319,10 +34319,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/_search/exists
@@ -34441,10 +34441,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/_search/exists
@@ -34483,10 +34483,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/{type}/_search/exists
@@ -34611,10 +34611,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/{type}/_search/exists
@@ -34655,10 +34655,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_search_shards
@@ -34753,10 +34753,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_search_shards
@@ -34787,10 +34787,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/_search_shards
@@ -34891,10 +34891,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/_search_shards
@@ -34927,10 +34927,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/{type}/_search_shards
@@ -35037,10 +35037,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/{type}/_search_shards
@@ -35075,10 +35075,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /_search_shards
@@ -35173,10 +35173,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /_search_shards
@@ -35207,10 +35207,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/_search_shards
@@ -35311,10 +35311,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/_search_shards
@@ -35347,10 +35347,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/{type}/_search_shards
@@ -35457,10 +35457,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/{type}/_search_shards
@@ -35495,10 +35495,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_search/template
@@ -35593,10 +35593,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_search/template
@@ -35627,10 +35627,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/_search/template
@@ -35731,10 +35731,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/_search/template
@@ -35767,10 +35767,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/{type}/_search/template
@@ -35877,10 +35877,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/{type}/_search/template
@@ -35915,10 +35915,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /_search/template
@@ -36016,10 +36016,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /_search/template
@@ -36051,10 +36051,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/_search/template
@@ -36158,10 +36158,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/_search/template
@@ -36195,10 +36195,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/{type}/_search/template
@@ -36308,10 +36308,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/{type}/_search/template
@@ -36347,10 +36347,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a PUT on /_snapshot/{repository}/{snapshot}
@@ -36460,10 +36460,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"PUT", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a PUT on /_snapshot/{repository}/{snapshot}
@@ -36499,10 +36499,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"PUT", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /_snapshot/{repository}/{snapshot}
@@ -36612,10 +36612,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /_snapshot/{repository}/{snapshot}
@@ -36651,10 +36651,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a PUT on /_snapshot/{repository}
@@ -36758,10 +36758,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"PUT", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a PUT on /_snapshot/{repository}
@@ -36795,10 +36795,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"PUT", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /_snapshot/{repository}
@@ -36902,10 +36902,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /_snapshot/{repository}
@@ -36939,10 +36939,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a DELETE on /_snapshot/{repository}/{snapshot}
@@ -37049,10 +37049,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"DELETE", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a DELETE on /_snapshot/{repository}/{snapshot}
@@ -37087,10 +37087,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"DELETE", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a DELETE on /_snapshot/{repository}
@@ -37191,10 +37191,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"DELETE", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a DELETE on /_snapshot/{repository}
@@ -37227,10 +37227,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"DELETE", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_snapshot/{repository}/{snapshot}
@@ -37337,10 +37337,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_snapshot/{repository}/{snapshot}
@@ -37375,10 +37375,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_snapshot
@@ -37473,10 +37473,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_snapshot
@@ -37507,10 +37507,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_snapshot/{repository}
@@ -37611,10 +37611,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_snapshot/{repository}
@@ -37647,10 +37647,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /_snapshot/{repository}/{snapshot}/_restore
@@ -37760,10 +37760,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /_snapshot/{repository}/{snapshot}/_restore
@@ -37799,10 +37799,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_snapshot/_status
@@ -37897,10 +37897,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_snapshot/_status
@@ -37931,10 +37931,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_snapshot/{repository}/_status
@@ -38035,10 +38035,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_snapshot/{repository}/_status
@@ -38071,10 +38071,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_snapshot/{repository}/{snapshot}/_status
@@ -38181,10 +38181,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_snapshot/{repository}/{snapshot}/_status
@@ -38219,10 +38219,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /_snapshot/{repository}/_verify
@@ -38323,10 +38323,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /_snapshot/{repository}/_verify
@@ -38359,10 +38359,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /_suggest
@@ -38460,10 +38460,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /_suggest
@@ -38495,10 +38495,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/_suggest
@@ -38602,10 +38602,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/_suggest
@@ -38639,10 +38639,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_suggest
@@ -38737,10 +38737,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /_suggest
@@ -38771,10 +38771,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/_suggest
@@ -38875,10 +38875,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/_suggest
@@ -38911,10 +38911,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/{type}/_termvector
@@ -39021,10 +39021,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/{type}/_termvector
@@ -39059,10 +39059,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/{type}/{id}/_termvector
@@ -39175,10 +39175,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a GET on /{index}/{type}/{id}/_termvector
@@ -39215,10 +39215,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"GET", url, data: null, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/{type}/_termvector
@@ -39328,10 +39328,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/{type}/_termvector
@@ -39367,10 +39367,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/{type}/{id}/_termvector
@@ -39486,10 +39486,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/{type}/{id}/_termvector
@@ -39527,10 +39527,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/{type}/{id}/_update
@@ -39646,10 +39646,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequest<DynamicDictionary>(
+			return ElasticsearchResponse.Wrap(this.DoRequest<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 		
 		///<summary>Represents a POST on /{index}/{type}/{id}/_update
@@ -39687,10 +39687,10 @@ namespace Elasticsearch.Net
 				
 
 
-			return this.DoRequestAsync<DynamicDictionary>(
+			return ElasticsearchResponse.WrapAsync(this.DoRequestAsync<Dictionary<string, object>>(
 				"POST", url, body, 
 				requestParameters: requestParams
-			);
+			));
 		}
 	
 	  }
