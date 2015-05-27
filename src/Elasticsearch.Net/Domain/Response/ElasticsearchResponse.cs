@@ -19,6 +19,7 @@ using Elasticsearch.Net.Serialization;
 
 namespace Elasticsearch.Net
 {
+	// TODO: Make this class internal in 2.0
 	public static class ElasticsearchResponse
 	{
 		internal static ElasticsearchResponse<TTo> CloneFrom<TTo>(IElasticsearchResponse from, TTo to)
