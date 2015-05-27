@@ -15,7 +15,7 @@ namespace Nest
 		public IRecoveryStatusResponse RecoveryStatus(Func<RecoveryStatusDescriptor, RecoveryStatusDescriptor> selector = null)
 		{
 			selector = selector ?? (s => s);
-			return this.Dispatch<RecoveryStatusDescriptor, RecoveryStatusRequestParameters, RecoveryStatusResponse>(
+			return this.Dispatcher.Dispatch<RecoveryStatusDescriptor, RecoveryStatusRequestParameters, RecoveryStatusResponse>(
 				selector,
 				(p, d) => this.RawDispatch.IndicesRecoveryDispatch<RecoveryStatusResponse>(
 					p.DeserializationState(new RecoveryStatusConverter(DeserializeRecoveryStatusResponse))
@@ -26,7 +26,7 @@ namespace Nest
 		/// <inheritdoc />
 		public IRecoveryStatusResponse RecoveryStatus(IRecoveryStatusRequest statusRequest)
 		{
-			return this.Dispatch<IRecoveryStatusRequest, RecoveryStatusRequestParameters, RecoveryStatusResponse>(
+			return this.Dispatcher.Dispatch<IRecoveryStatusRequest, RecoveryStatusRequestParameters, RecoveryStatusResponse>(
 				statusRequest,
 				(p, d) => this.RawDispatch.IndicesRecoveryDispatch<RecoveryStatusResponse>(
 					p.DeserializationState(new RecoveryStatusConverter(DeserializeRecoveryStatusResponse))
@@ -38,7 +38,7 @@ namespace Nest
 		public Task<IRecoveryStatusResponse> RecoveryStatusAsync(Func<RecoveryStatusDescriptor, RecoveryStatusDescriptor> selector = null)
 		{
 			selector = selector ?? (s => s);
-			return this.DispatchAsync<RecoveryStatusDescriptor, RecoveryStatusRequestParameters, RecoveryStatusResponse, IRecoveryStatusResponse>(
+			return this.Dispatcher.DispatchAsync<RecoveryStatusDescriptor, RecoveryStatusRequestParameters, RecoveryStatusResponse, IRecoveryStatusResponse>(
 				selector,
 				(p, d) => this.RawDispatch.IndicesRecoveryDispatchAsync<RecoveryStatusResponse>(
 					p.DeserializationState(new RecoveryStatusConverter(DeserializeRecoveryStatusResponse))
@@ -49,7 +49,7 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<IRecoveryStatusResponse> RecoveryStatusAsync(IRecoveryStatusRequest statusRequest)
 		{
-			return this.DispatchAsync<IRecoveryStatusRequest, RecoveryStatusRequestParameters, RecoveryStatusResponse, IRecoveryStatusResponse>(
+			return this.Dispatcher.DispatchAsync<IRecoveryStatusRequest, RecoveryStatusRequestParameters, RecoveryStatusResponse, IRecoveryStatusResponse>(
 				statusRequest,
 				(p, d) => this.RawDispatch.IndicesRecoveryDispatchAsync<RecoveryStatusResponse>(
 					p.DeserializationState(new RecoveryStatusConverter(DeserializeRecoveryStatusResponse))

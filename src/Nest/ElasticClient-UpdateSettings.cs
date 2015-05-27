@@ -10,7 +10,7 @@ namespace Nest
 		/// <inheritdoc />
 		public IAcknowledgedResponse UpdateSettings(Func<UpdateSettingsDescriptor, UpdateSettingsDescriptor> updateSettingsSelector)
 		{
-			return this.Dispatch<UpdateSettingsDescriptor, UpdateSettingsRequestParameters, AcknowledgedResponse>(
+			return this.Dispatcher.Dispatch<UpdateSettingsDescriptor, UpdateSettingsRequestParameters, AcknowledgedResponse>(
 				updateSettingsSelector,
 				(p, d) => this.RawDispatch.IndicesPutSettingsDispatch<AcknowledgedResponse>(p, d)
 			);
@@ -19,7 +19,7 @@ namespace Nest
 		/// <inheritdoc />
 		public IAcknowledgedResponse UpdateSettings(IUpdateSettingsRequest updateSettingsRequest)
 		{
-			return this.Dispatch<IUpdateSettingsRequest, UpdateSettingsRequestParameters, AcknowledgedResponse>(
+			return this.Dispatcher.Dispatch<IUpdateSettingsRequest, UpdateSettingsRequestParameters, AcknowledgedResponse>(
 				updateSettingsRequest,
 				(p, d) => this.RawDispatch.IndicesPutSettingsDispatch<AcknowledgedResponse>(p, d)
 			);
@@ -28,7 +28,7 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<IAcknowledgedResponse> UpdateSettingsAsync(Func<UpdateSettingsDescriptor, UpdateSettingsDescriptor> updateSettingsSelector)
 		{
-			return this.DispatchAsync<UpdateSettingsDescriptor, UpdateSettingsRequestParameters, AcknowledgedResponse, IAcknowledgedResponse>(
+			return this.Dispatcher.DispatchAsync<UpdateSettingsDescriptor, UpdateSettingsRequestParameters, AcknowledgedResponse, IAcknowledgedResponse>(
 					updateSettingsSelector,
 					(p, d) => this.RawDispatch.IndicesPutSettingsDispatchAsync<AcknowledgedResponse>(p, d)
 				);
@@ -37,7 +37,7 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<IAcknowledgedResponse> UpdateSettingsAsync(IUpdateSettingsRequest updateSettingsRequest)
 		{
-			return this.DispatchAsync<IUpdateSettingsRequest, UpdateSettingsRequestParameters, AcknowledgedResponse, IAcknowledgedResponse>(
+			return this.Dispatcher.DispatchAsync<IUpdateSettingsRequest, UpdateSettingsRequestParameters, AcknowledgedResponse, IAcknowledgedResponse>(
 					updateSettingsRequest,
 					(p, d) => this.RawDispatch.IndicesPutSettingsDispatchAsync<AcknowledgedResponse>(p, d)
 				);

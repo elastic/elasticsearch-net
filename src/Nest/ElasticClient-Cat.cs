@@ -319,7 +319,7 @@ namespace Nest
 			where TParams : FluentRequestParameters<TParams>, new()
 			where TRequest : class, IRequest<TParams>, new()
 		{
-			return this.DispatchAsync<TRequest, TParams, CatResponse<TCatRecord>, ICatResponse<TCatRecord>>(
+			return this.Dispatcher.DispatchAsync<TRequest, TParams, CatResponse<TCatRecord>, ICatResponse<TCatRecord>>(
 				this.ForceConfiguration(selector, c => c.ContentType = "application/json"),
 				(p, d) => dispatch(p.DeserializationState(
 					new Func<IElasticsearchResponse, Stream, CatResponse<TCatRecord>>(this.DeserializeCatResponse<TCatRecord>))
@@ -335,7 +335,7 @@ namespace Nest
 			where TParams : FluentRequestParameters<TParams>, new()
 			where TRequest : IRequest<TParams> 
 		{
-			return this.DispatchAsync<TRequest, TParams, CatResponse<TCatRecord>, ICatResponse<TCatRecord>>(
+			return this.Dispatcher.DispatchAsync<TRequest, TParams, CatResponse<TCatRecord>, ICatResponse<TCatRecord>>(
 				this.ForceConfiguration(request, c => c.ContentType = "application/json"),
 				(p, d) => dispatch(p.DeserializationState(
 					new Func<IElasticsearchResponse, Stream, CatResponse<TCatRecord>>(this.DeserializeCatResponse<TCatRecord>))
@@ -351,7 +351,7 @@ namespace Nest
 			where TParams : FluentRequestParameters<TParams>, new()
 			where TRequest : class, IRequest<TParams>, new()
 		{
-			return this.Dispatch<TRequest, TParams, CatResponse<TCatRecord>>(
+			return this.Dispatcher.Dispatch<TRequest, TParams, CatResponse<TCatRecord>>(
 				this.ForceConfiguration(selector, c => c.ContentType = "application/json"),
 				(p, d) => dispatch(p.DeserializationState(
 					new Func<IElasticsearchResponse, Stream, CatResponse<TCatRecord>>(this.DeserializeCatResponse<TCatRecord>))
@@ -367,7 +367,7 @@ namespace Nest
 			where TParams : FluentRequestParameters<TParams>, new()
 			where TRequest : IRequest<TParams> 
 		{
-			return this.Dispatch<TRequest, TParams, CatResponse<TCatRecord>>(
+			return this.Dispatcher.Dispatch<TRequest, TParams, CatResponse<TCatRecord>>(
 				this.ForceConfiguration(request, c => c.ContentType = "application/json"),
 				(p, d) => dispatch(p.DeserializationState(
 					new Func<IElasticsearchResponse, Stream, CatResponse<TCatRecord>>(this.DeserializeCatResponse<TCatRecord>))

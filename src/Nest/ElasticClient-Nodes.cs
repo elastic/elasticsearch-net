@@ -17,7 +17,7 @@ namespace Nest
 		public INodeInfoResponse NodesInfo(Func<NodesInfoDescriptor, NodesInfoDescriptor> selector = null)
 		{
 			selector = selector ?? (s => s);
-			return this.Dispatch<NodesInfoDescriptor, NodesInfoRequestParameters, NodeInfoResponse>(
+			return this.Dispatcher.Dispatch<NodesInfoDescriptor, NodesInfoRequestParameters, NodeInfoResponse>(
 				selector,
 				(p, d) => this.RawDispatch.NodesInfoDispatch<NodeInfoResponse>(p)
 			);
@@ -26,7 +26,7 @@ namespace Nest
 		/// <inheritdoc />
 		public INodeInfoResponse NodesInfo(INodesInfoRequest nodesInfoRequest)
 		{
-			return this.Dispatch<INodesInfoRequest, NodesInfoRequestParameters, NodeInfoResponse>(
+			return this.Dispatcher.Dispatch<INodesInfoRequest, NodesInfoRequestParameters, NodeInfoResponse>(
 				nodesInfoRequest,
 				(p, d) => this.RawDispatch.NodesInfoDispatch<NodeInfoResponse>(p)
 			);
@@ -36,7 +36,7 @@ namespace Nest
 		public Task<INodeInfoResponse> NodesInfoAsync(Func<NodesInfoDescriptor, NodesInfoDescriptor> selector = null)
 		{
 			selector = selector ?? (s => s);
-			return this.DispatchAsync<NodesInfoDescriptor, NodesInfoRequestParameters, NodeInfoResponse, INodeInfoResponse>(
+			return this.Dispatcher.DispatchAsync<NodesInfoDescriptor, NodesInfoRequestParameters, NodeInfoResponse, INodeInfoResponse>(
 				selector,
 				(p, d) => this.RawDispatch.NodesInfoDispatchAsync<NodeInfoResponse>(p)
 			);
@@ -45,7 +45,7 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<INodeInfoResponse> NodesInfoAsync(INodesInfoRequest nodesInfoRequest)
 		{
-			return this.DispatchAsync<INodesInfoRequest, NodesInfoRequestParameters, NodeInfoResponse, INodeInfoResponse>(
+			return this.Dispatcher.DispatchAsync<INodesInfoRequest, NodesInfoRequestParameters, NodeInfoResponse, INodeInfoResponse>(
 				nodesInfoRequest,
 				(p, d) => this.RawDispatch.NodesInfoDispatchAsync<NodeInfoResponse>(p)
 			);
@@ -58,7 +58,7 @@ namespace Nest
 		public INodeStatsResponse NodesStats(Func<NodesStatsDescriptor, NodesStatsDescriptor> selector = null)
 		{
 			selector = selector ?? (s => s);
-			return this.Dispatch<NodesStatsDescriptor, NodesStatsRequestParameters, NodeStatsResponse>(
+			return this.Dispatcher.Dispatch<NodesStatsDescriptor, NodesStatsRequestParameters, NodeStatsResponse>(
 				selector,
 				(p, d) => this.RawDispatch.NodesStatsDispatch<NodeStatsResponse>(p)
 			);
@@ -67,7 +67,7 @@ namespace Nest
 		/// <inheritdoc />
 		public INodeStatsResponse NodesStats(INodesStatsRequest nodesStatsRequest)
 		{
-			return this.Dispatch<INodesStatsRequest, NodesStatsRequestParameters, NodeStatsResponse>(
+			return this.Dispatcher.Dispatch<INodesStatsRequest, NodesStatsRequestParameters, NodeStatsResponse>(
 				nodesStatsRequest,
 				(p, d) => this.RawDispatch.NodesStatsDispatch<NodeStatsResponse>(p)
 			);
@@ -77,7 +77,7 @@ namespace Nest
 		public Task<INodeStatsResponse> NodesStatsAsync(Func<NodesStatsDescriptor, NodesStatsDescriptor> selector = null)
 		{
 			selector = selector ?? (s => s);
-			return this.DispatchAsync<NodesStatsDescriptor, NodesStatsRequestParameters, NodeStatsResponse, INodeStatsResponse>(
+			return this.Dispatcher.DispatchAsync<NodesStatsDescriptor, NodesStatsRequestParameters, NodeStatsResponse, INodeStatsResponse>(
 				selector,
 				(p, d) => this.RawDispatch.NodesStatsDispatchAsync<NodeStatsResponse>(p)
 			);
@@ -86,7 +86,7 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<INodeStatsResponse> NodesStatsAsync(INodesStatsRequest nodesStatsRequest)
 		{
-			return this.DispatchAsync<INodesStatsRequest, NodesStatsRequestParameters, NodeStatsResponse, INodeStatsResponse>(
+			return this.Dispatcher.DispatchAsync<INodesStatsRequest, NodesStatsRequestParameters, NodeStatsResponse, INodeStatsResponse>(
 				nodesStatsRequest,
 				(p, d) => this.RawDispatch.NodesStatsDispatchAsync<NodeStatsResponse>(p)
 			);
@@ -96,7 +96,7 @@ namespace Nest
 		public INodesHotThreadsResponse NodesHotThreads(Func<NodesHotThreadsDescriptor, NodesHotThreadsDescriptor> selector = null)
 		{
 			selector = selector ?? (s => s);
-			return this.Dispatch<NodesHotThreadsDescriptor, NodesHotThreadsRequestParameters, NodesHotThreadsResponse>(
+			return this.Dispatcher.Dispatch<NodesHotThreadsDescriptor, NodesHotThreadsRequestParameters, NodesHotThreadsResponse>(
 				selector,
 				(p, d) => this.RawDispatch.NodesHotThreadsDispatch<NodesHotThreadsResponse>(
 					p.DeserializationState(new NodesHotThreadConverter(DeserializeNodesHotThreadResponse)))
@@ -106,7 +106,7 @@ namespace Nest
 		/// <inheritdoc />
 		public INodesHotThreadsResponse NodesHotThreads(INodesHotThreadsRequest nodesHotThreadsRequest)
 		{
-			return this.Dispatch<INodesHotThreadsRequest, NodesHotThreadsRequestParameters, NodesHotThreadsResponse>(
+			return this.Dispatcher.Dispatch<INodesHotThreadsRequest, NodesHotThreadsRequestParameters, NodesHotThreadsResponse>(
 				nodesHotThreadsRequest,
 				(p, d) => this.RawDispatch.NodesHotThreadsDispatch<NodesHotThreadsResponse>(
 					p.DeserializationState(new NodesHotThreadConverter(DeserializeNodesHotThreadResponse)))
@@ -117,7 +117,7 @@ namespace Nest
 		public Task<INodesHotThreadsResponse> NodesHotThreadsAsync(Func<NodesHotThreadsDescriptor, NodesHotThreadsDescriptor> selector = null)
 		{
 			selector = selector ?? (s => s);
-			return this.DispatchAsync<NodesHotThreadsDescriptor, NodesHotThreadsRequestParameters, NodesHotThreadsResponse, INodesHotThreadsResponse>(
+			return this.Dispatcher.DispatchAsync<NodesHotThreadsDescriptor, NodesHotThreadsRequestParameters, NodesHotThreadsResponse, INodesHotThreadsResponse>(
 				selector,
 				(p, d) => this.RawDispatch.NodesHotThreadsDispatchAsync<NodesHotThreadsResponse>(
 					p.DeserializationState(new NodesHotThreadConverter(DeserializeNodesHotThreadResponse)))
@@ -127,7 +127,7 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<INodesHotThreadsResponse> NodesHotThreadsAsync(INodesHotThreadsRequest nodesHotThreadsRequest)
 		{
-			return this.DispatchAsync<INodesHotThreadsRequest, NodesHotThreadsRequestParameters, NodesHotThreadsResponse, INodesHotThreadsResponse>(
+			return this.Dispatcher.DispatchAsync<INodesHotThreadsRequest, NodesHotThreadsRequestParameters, NodesHotThreadsResponse, INodesHotThreadsResponse>(
 				nodesHotThreadsRequest,
 				(p, d) => this.RawDispatch.NodesHotThreadsDispatchAsync<NodesHotThreadsResponse>(
 					p.DeserializationState(new NodesHotThreadConverter(DeserializeNodesHotThreadResponse)))
@@ -138,7 +138,7 @@ namespace Nest
 		public INodesShutdownResponse NodesShutdown(Func<NodesShutdownDescriptor, NodesShutdownDescriptor> nodesShutdownSelector = null)
 		{
 			nodesShutdownSelector = nodesShutdownSelector ?? (s => s);
-			return this.Dispatch<NodesShutdownDescriptor, NodesShutdownRequestParameters, NodesShutdownResponse>(
+			return this.Dispatcher.Dispatch<NodesShutdownDescriptor, NodesShutdownRequestParameters, NodesShutdownResponse>(
 				nodesShutdownSelector,
 				(p, d) => this.RawDispatch.NodesShutdownDispatch<NodesShutdownResponse>(p)
 			);
@@ -148,7 +148,7 @@ namespace Nest
 		public Task<INodesShutdownResponse> NodesShutdownAsync(Func<NodesShutdownDescriptor, NodesShutdownDescriptor> nodesShutdownSelector = null)
 		{
 			nodesShutdownSelector = nodesShutdownSelector ?? (s => s);
-			return this.DispatchAsync<NodesShutdownDescriptor, NodesShutdownRequestParameters, NodesShutdownResponse, INodesShutdownResponse>(
+			return this.Dispatcher.DispatchAsync<NodesShutdownDescriptor, NodesShutdownRequestParameters, NodesShutdownResponse, INodesShutdownResponse>(
 				nodesShutdownSelector,
 				(p, d) => this.RawDispatch.NodesShutdownDispatchAsync<NodesShutdownResponse>(p)
 			);
@@ -157,7 +157,7 @@ namespace Nest
 		/// <inheritdoc />
 		public INodesShutdownResponse NodesShutdown(INodesShutdownRequest nodesShutdownRequest)
 		{
-			return this.Dispatch<INodesShutdownRequest, NodesShutdownRequestParameters, NodesShutdownResponse>(
+			return this.Dispatcher.Dispatch<INodesShutdownRequest, NodesShutdownRequestParameters, NodesShutdownResponse>(
 				nodesShutdownRequest,
 				(p, d) => this.RawDispatch.NodesShutdownDispatch<NodesShutdownResponse>(p)
 			);
@@ -166,7 +166,7 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<INodesShutdownResponse> NodesShutdownAsync(INodesShutdownRequest nodesShutdownRequest)
 		{
-			return this.DispatchAsync<INodesShutdownRequest, NodesShutdownRequestParameters, NodesShutdownResponse, INodesShutdownResponse>(
+			return this.Dispatcher.DispatchAsync<INodesShutdownRequest, NodesShutdownRequestParameters, NodesShutdownResponse, INodesShutdownResponse>(
 				nodesShutdownRequest,
 				(p, d) => this.RawDispatch.NodesShutdownDispatchAsync<NodesShutdownResponse>(p)
 			);

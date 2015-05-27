@@ -11,7 +11,7 @@ namespace Nest
 		public IValidateResponse Validate<T>(Func<ValidateQueryDescriptor<T>, ValidateQueryDescriptor<T>> querySelector)
 			where T : class
 		{
-			return this.Dispatch<ValidateQueryDescriptor<T>, ValidateQueryRequestParameters, ValidateResponse>(
+			return this.Dispatcher.Dispatch<ValidateQueryDescriptor<T>, ValidateQueryRequestParameters, ValidateResponse>(
 				querySelector,
 				(p, d) => this.RawDispatch.IndicesValidateQueryDispatch<ValidateResponse>(p, d)
 			);
@@ -20,7 +20,7 @@ namespace Nest
 		/// <inheritdoc />
 		public IValidateResponse Validate(IValidateQueryRequest validateQueryRequest)
 		{
-			return this.Dispatch<IValidateQueryRequest, ValidateQueryRequestParameters, ValidateResponse>(
+			return this.Dispatcher.Dispatch<IValidateQueryRequest, ValidateQueryRequestParameters, ValidateResponse>(
 				validateQueryRequest,
 				(p, d) => this.RawDispatch.IndicesValidateQueryDispatch<ValidateResponse>(p, d)
 			);
@@ -30,7 +30,7 @@ namespace Nest
 		public Task<IValidateResponse> ValidateAsync<T>(Func<ValidateQueryDescriptor<T>, ValidateQueryDescriptor<T>> querySelector)
 			where T : class
 		{
-			return this.DispatchAsync<ValidateQueryDescriptor<T>, ValidateQueryRequestParameters, ValidateResponse, IValidateResponse>(
+			return this.Dispatcher.DispatchAsync<ValidateQueryDescriptor<T>, ValidateQueryRequestParameters, ValidateResponse, IValidateResponse>(
 				querySelector,
 				(p, d) => this.RawDispatch.IndicesValidateQueryDispatchAsync<ValidateResponse>(p, d)
 			);
@@ -39,7 +39,7 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<IValidateResponse> ValidateAsync(IValidateQueryRequest validateQueryRequest)
 		{
-			return this.DispatchAsync<IValidateQueryRequest, ValidateQueryRequestParameters, ValidateResponse, IValidateResponse>(
+			return this.Dispatcher.DispatchAsync<IValidateQueryRequest, ValidateQueryRequestParameters, ValidateResponse, IValidateResponse>(
 				validateQueryRequest,
 				(p, d) => this.RawDispatch.IndicesValidateQueryDispatchAsync<ValidateResponse>(p, d)
 			);

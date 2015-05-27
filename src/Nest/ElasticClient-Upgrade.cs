@@ -14,7 +14,7 @@ namespace Nest
 	{
 		public IUpgradeResponse Upgrade(IUpgradeRequest upgradeRequest)
 		{
-			return this.Dispatch<IUpgradeRequest, UpgradeRequestParameters, UpgradeResponse>(
+			return this.Dispatcher.Dispatch<IUpgradeRequest, UpgradeRequestParameters, UpgradeResponse>(
 				upgradeRequest,
 				(p, d) => this.RawDispatch.IndicesUpgradeDispatch<UpgradeResponse>(p)
 			);	
@@ -23,7 +23,7 @@ namespace Nest
 		public IUpgradeResponse Upgrade(Func<UpgradeDescriptor, UpgradeDescriptor> upgradeDescriptor = null)
 		{
 			upgradeDescriptor = upgradeDescriptor ?? (s => s);
-			return this.Dispatch<UpgradeDescriptor, UpgradeRequestParameters, UpgradeResponse>(
+			return this.Dispatcher.Dispatch<UpgradeDescriptor, UpgradeRequestParameters, UpgradeResponse>(
 				upgradeDescriptor,
 				(p, d) => this.RawDispatch.IndicesUpgradeDispatch<UpgradeResponse>(p)
 			);
@@ -31,7 +31,7 @@ namespace Nest
 
 		public Task<IUpgradeResponse> UpgradeAsync(IUpgradeRequest upgradeRequest)
 		{
-			return this.DispatchAsync<IUpgradeRequest, UpgradeRequestParameters, UpgradeResponse, IUpgradeResponse>(
+			return this.Dispatcher.DispatchAsync<IUpgradeRequest, UpgradeRequestParameters, UpgradeResponse, IUpgradeResponse>(
 				upgradeRequest,
 				(p, d) => this.RawDispatch.IndicesUpgradeDispatchAsync<UpgradeResponse>(p)
 			);
@@ -40,7 +40,7 @@ namespace Nest
 		public Task<IUpgradeResponse> UpgradeAsync(Func<UpgradeDescriptor, UpgradeDescriptor> upgradeDescriptor = null)
 		{
 			upgradeDescriptor = upgradeDescriptor ?? (s => s);
-			return this.DispatchAsync<UpgradeDescriptor, UpgradeRequestParameters, UpgradeResponse, IUpgradeResponse>(
+			return this.Dispatcher.DispatchAsync<UpgradeDescriptor, UpgradeRequestParameters, UpgradeResponse, IUpgradeResponse>(
 				upgradeDescriptor,
 				(p, d) => this.RawDispatch.IndicesUpgradeDispatchAsync<UpgradeResponse>(p)
 			);
@@ -48,7 +48,7 @@ namespace Nest
 
 		public IUpgradeStatusResponse UpgradeStatus(IUpgradeStatusRequest upgradeStatusRequest)
 		{
-			return this.Dispatch<IUpgradeStatusRequest, UpgradeStatusRequestParameters, UpgradeStatusResponse>(
+			return this.Dispatcher.Dispatch<IUpgradeStatusRequest, UpgradeStatusRequestParameters, UpgradeStatusResponse>(
 				upgradeStatusRequest,
 				(p, d) => this.RawDispatch.IndicesGetUpgradeDispatch<UpgradeStatusResponse>(
 					p.DeserializationState(new UpgradeStatusResponseConverter((r, s) => DeserializeUpgradeStatusResponse(r, s)))
@@ -59,7 +59,7 @@ namespace Nest
 		public IUpgradeStatusResponse UpgradeStatus(Func<UpgradeStatusDescriptor, UpgradeStatusDescriptor> upgradeStatusDescriptor = null)
 		{
 			upgradeStatusDescriptor = upgradeStatusDescriptor ?? (s => s);
-			return this.Dispatch<UpgradeStatusDescriptor, UpgradeStatusRequestParameters, UpgradeStatusResponse>(
+			return this.Dispatcher.Dispatch<UpgradeStatusDescriptor, UpgradeStatusRequestParameters, UpgradeStatusResponse>(
 				upgradeStatusDescriptor,
 				(p, d) => this.RawDispatch.IndicesGetUpgradeDispatch<UpgradeStatusResponse>(
 					p.DeserializationState(new UpgradeStatusResponseConverter((r, s) => DeserializeUpgradeStatusResponse(r, s)))
@@ -69,7 +69,7 @@ namespace Nest
 
 		public Task<IUpgradeStatusResponse> UpgradeStatusAsync(IUpgradeStatusRequest upgradeStatusRequest)
 		{
-			return this.DispatchAsync<IUpgradeStatusRequest, UpgradeStatusRequestParameters, UpgradeStatusResponse, IUpgradeStatusResponse>(
+			return this.Dispatcher.DispatchAsync<IUpgradeStatusRequest, UpgradeStatusRequestParameters, UpgradeStatusResponse, IUpgradeStatusResponse>(
 				upgradeStatusRequest,
 				(p, d) => this.RawDispatch.IndicesGetUpgradeDispatchAsync<UpgradeStatusResponse>(
 					p.DeserializationState(new UpgradeStatusResponseConverter((r, s) => DeserializeUpgradeStatusResponse(r, s)))
@@ -80,7 +80,7 @@ namespace Nest
 		public Task<IUpgradeStatusResponse> UpgradeStatusAsync(Func<UpgradeStatusDescriptor, UpgradeStatusDescriptor> upgradeStatusDescriptor = null)
 		{
 			upgradeStatusDescriptor = upgradeStatusDescriptor ?? (s => s);
-			return this.DispatchAsync<UpgradeStatusDescriptor, UpgradeStatusRequestParameters, UpgradeStatusResponse, IUpgradeStatusResponse>(
+			return this.Dispatcher.DispatchAsync<UpgradeStatusDescriptor, UpgradeStatusRequestParameters, UpgradeStatusResponse, IUpgradeStatusResponse>(
 				upgradeStatusDescriptor,
 				(p, d) => this.RawDispatch.IndicesGetUpgradeDispatchAsync<UpgradeStatusResponse>(
 					p.DeserializationState(new UpgradeStatusResponseConverter((r, s) => DeserializeUpgradeStatusResponse(r, s)))

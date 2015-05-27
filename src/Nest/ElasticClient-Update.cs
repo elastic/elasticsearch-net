@@ -24,7 +24,7 @@ namespace Nest
 			where T : class
 			where K : class
 		{
-			return this.Dispatch<UpdateDescriptor<T, K>, UpdateRequestParameters, UpdateResponse>(
+			return this.Dispatcher.Dispatch<UpdateDescriptor<T, K>, UpdateRequestParameters, UpdateResponse>(
 				updateSelector,
 				(p, d) => this.RawDispatch.UpdateDispatch<UpdateResponse>(p, d)
 			);
@@ -34,7 +34,7 @@ namespace Nest
 			where T : class
 			where K : class
 		{
-			return this.Dispatch<IUpdateRequest<T, K>, UpdateRequestParameters, UpdateResponse>(
+			return this.Dispatcher.Dispatch<IUpdateRequest<T, K>, UpdateRequestParameters, UpdateResponse>(
 				updateSelector,
 				(p, d) => this.RawDispatch.UpdateDispatch<UpdateResponse>(p, d)
 			);
@@ -59,7 +59,7 @@ namespace Nest
 			where T : class
 			where K : class
 		{
-			return this.DispatchAsync<UpdateDescriptor<T, K>, UpdateRequestParameters, UpdateResponse, IUpdateResponse>(
+			return this.Dispatcher.DispatchAsync<UpdateDescriptor<T, K>, UpdateRequestParameters, UpdateResponse, IUpdateResponse>(
 				updateSelector,
 				(p, d) => this.RawDispatch.UpdateDispatchAsync<UpdateResponse>(p, d)
 			);
@@ -70,7 +70,7 @@ namespace Nest
 			where T : class
 			where K : class
 		{
-			return this.DispatchAsync<IUpdateRequest<T, K>, UpdateRequestParameters, UpdateResponse, IUpdateResponse>(
+			return this.Dispatcher.DispatchAsync<IUpdateRequest<T, K>, UpdateRequestParameters, UpdateResponse, IUpdateResponse>(
 				updateRequest,
 				(p, d) => this.RawDispatch.UpdateDispatchAsync<UpdateResponse>(p, d)
 			);

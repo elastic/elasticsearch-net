@@ -11,7 +11,7 @@ namespace Nest
 		public IDeleteResponse Delete<T>(Func<DeleteDescriptor<T>, DeleteDescriptor<T>> deleteSelector) 
 			where T : class
 		{
-			return this.Dispatch<DeleteDescriptor<T>, DeleteRequestParameters, DeleteResponse>(
+			return this.Dispatcher.Dispatch<DeleteDescriptor<T>, DeleteRequestParameters, DeleteResponse>(
 				deleteSelector,
 				(p, d) => this.RawDispatch.DeleteDispatch<DeleteResponse>(p)
 			);
@@ -20,7 +20,7 @@ namespace Nest
 		/// <inheritdoc />
 		public IDeleteResponse Delete(IDeleteRequest deleteRequest) 
 		{
-			return this.Dispatch<IDeleteRequest, DeleteRequestParameters, DeleteResponse>(
+			return this.Dispatcher.Dispatch<IDeleteRequest, DeleteRequestParameters, DeleteResponse>(
 				deleteRequest,
 				(p, d) => this.RawDispatch.DeleteDispatch<DeleteResponse>(p)
 			);
@@ -30,7 +30,7 @@ namespace Nest
 		public Task<IDeleteResponse> DeleteAsync<T>(Func<DeleteDescriptor<T>, DeleteDescriptor<T>> deleteSelector)
 			where T : class
 		{
-			return this.DispatchAsync<DeleteDescriptor<T>, DeleteRequestParameters, DeleteResponse, IDeleteResponse>(
+			return this.Dispatcher.DispatchAsync<DeleteDescriptor<T>, DeleteRequestParameters, DeleteResponse, IDeleteResponse>(
 				deleteSelector,
 				(p, d) => this.RawDispatch.DeleteDispatchAsync<DeleteResponse>(p)
 			);
@@ -39,7 +39,7 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<IDeleteResponse> DeleteAsync(IDeleteRequest deleteRequest)
 		{
-			return this.DispatchAsync<IDeleteRequest, DeleteRequestParameters, DeleteResponse, IDeleteResponse>(
+			return this.Dispatcher.DispatchAsync<IDeleteRequest, DeleteRequestParameters, DeleteResponse, IDeleteResponse>(
 				deleteRequest,
 				(p, d) => this.RawDispatch.DeleteDispatchAsync<DeleteResponse>(p)
 			);

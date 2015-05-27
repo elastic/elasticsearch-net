@@ -13,7 +13,7 @@ namespace Nest
 		public IClusterRerouteResponse ClusterReroute(Func<ClusterRerouteDescriptor, ClusterRerouteDescriptor> clusterRerouteSelector)
 		{
 			clusterRerouteSelector = clusterRerouteSelector ?? (s => s);
-			return this.Dispatch<ClusterRerouteDescriptor, ClusterRerouteRequestParameters, ClusterRerouteResponse>(
+			return this.Dispatcher.Dispatch<ClusterRerouteDescriptor, ClusterRerouteRequestParameters, ClusterRerouteResponse>(
 				clusterRerouteSelector,
 				(p, d) => this.RawDispatch.ClusterRerouteDispatch<ClusterRerouteResponse>(p, d)
 			);
@@ -23,7 +23,7 @@ namespace Nest
 		public Task<IClusterRerouteResponse> ClusterRerouteAsync(Func<ClusterRerouteDescriptor, ClusterRerouteDescriptor> clusterRerouteSelector)
 		{
 			clusterRerouteSelector = clusterRerouteSelector ?? (s => s);
-			return this.DispatchAsync<ClusterRerouteDescriptor, ClusterRerouteRequestParameters, ClusterRerouteResponse, IClusterRerouteResponse>(
+			return this.Dispatcher.DispatchAsync<ClusterRerouteDescriptor, ClusterRerouteRequestParameters, ClusterRerouteResponse, IClusterRerouteResponse>(
 				clusterRerouteSelector,
 				(p, d) => this.RawDispatch.ClusterRerouteDispatchAsync<ClusterRerouteResponse>(p, d)
 			);
@@ -32,7 +32,7 @@ namespace Nest
 		/// <inheritdoc />
 		public IClusterRerouteResponse ClusterReroute(IClusterRerouteRequest clusterRerouteRequest)
 		{
-			return this.Dispatch<IClusterRerouteRequest, ClusterRerouteRequestParameters, ClusterRerouteResponse>(
+			return this.Dispatcher.Dispatch<IClusterRerouteRequest, ClusterRerouteRequestParameters, ClusterRerouteResponse>(
 				clusterRerouteRequest,
 				(p, d) => this.RawDispatch.ClusterRerouteDispatch<ClusterRerouteResponse>(p, d)
 			);
@@ -41,7 +41,7 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<IClusterRerouteResponse> ClusterRerouteAsync(IClusterRerouteRequest clusterRerouteRequest)
 		{
-			return this.DispatchAsync<IClusterRerouteRequest, ClusterRerouteRequestParameters, ClusterRerouteResponse, IClusterRerouteResponse>(
+			return this.Dispatcher.DispatchAsync<IClusterRerouteRequest, ClusterRerouteRequestParameters, ClusterRerouteResponse, IClusterRerouteResponse>(
 				clusterRerouteRequest,
 				(p, d) => this.RawDispatch.ClusterRerouteDispatchAsync<ClusterRerouteResponse>(p, d)
 			);
