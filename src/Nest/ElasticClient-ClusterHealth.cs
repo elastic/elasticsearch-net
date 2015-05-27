@@ -11,7 +11,7 @@ namespace Nest
 		public IHealthResponse ClusterHealth(Func<ClusterHealthDescriptor, ClusterHealthDescriptor> clusterHealthSelector = null)
 		{
 			clusterHealthSelector = clusterHealthSelector ?? (s => s);
-			return this.Dispatch<ClusterHealthDescriptor, ClusterHealthRequestParameters, HealthResponse>(
+			return this.Dispatcher.Dispatch<ClusterHealthDescriptor, ClusterHealthRequestParameters, HealthResponse>(
 				clusterHealthSelector,
 				(p, d) => this.RawDispatch.ClusterHealthDispatch<HealthResponse>(p)
 			);
@@ -20,7 +20,7 @@ namespace Nest
 		/// <inheritdoc />
 		public IHealthResponse ClusterHealth(IClusterHealthRequest clusterHealthRequest)
 		{
-			return this.Dispatch<IClusterHealthRequest, ClusterHealthRequestParameters, HealthResponse>(
+			return this.Dispatcher.Dispatch<IClusterHealthRequest, ClusterHealthRequestParameters, HealthResponse>(
 				clusterHealthRequest,
 				(p, d) => this.RawDispatch.ClusterHealthDispatch<HealthResponse>(p)
 			);
@@ -30,7 +30,7 @@ namespace Nest
 		public Task<IHealthResponse> ClusterHealthAsync(Func<ClusterHealthDescriptor, ClusterHealthDescriptor> clusterHealthSelector = null)
 		{
 			clusterHealthSelector = clusterHealthSelector ?? (s => s);
-			return this.DispatchAsync<ClusterHealthDescriptor, ClusterHealthRequestParameters, HealthResponse, IHealthResponse>(
+			return this.Dispatcher.DispatchAsync<ClusterHealthDescriptor, ClusterHealthRequestParameters, HealthResponse, IHealthResponse>(
 				clusterHealthSelector,
 				(p, d) => this.RawDispatch.ClusterHealthDispatchAsync<HealthResponse>(p)
 			);
@@ -39,7 +39,7 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<IHealthResponse> ClusterHealthAsync(IClusterHealthRequest clusterHealthRequest)
 		{
-			return this.DispatchAsync<IClusterHealthRequest, ClusterHealthRequestParameters, HealthResponse, IHealthResponse>(
+			return this.Dispatcher.DispatchAsync<IClusterHealthRequest, ClusterHealthRequestParameters, HealthResponse, IHealthResponse>(
 				clusterHealthRequest,
 				(p, d) => this.RawDispatch.ClusterHealthDispatchAsync<HealthResponse>(p)
 			);

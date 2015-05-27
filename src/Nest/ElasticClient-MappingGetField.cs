@@ -16,7 +16,7 @@ namespace Nest
 			where T : class
 		{
 			selector = selector ?? (s => s);
-			return this.Dispatch<GetFieldMappingDescriptor<T>, GetFieldMappingRequestParameters, GetFieldMappingResponse>(
+			return this.Dispatcher.Dispatch<GetFieldMappingDescriptor<T>, GetFieldMappingRequestParameters, GetFieldMappingResponse>(
 				selector,
 				(p, d) => this.RawDispatch.IndicesGetFieldMappingDispatch<GetFieldMappingResponse>(
 					p.DeserializationState(new GetFieldMappingConverter((r, s) => DeserializeGetFieldMappingResponse(r, d, s)))
@@ -27,7 +27,7 @@ namespace Nest
 		/// <inheritdoc />
 		public IGetFieldMappingResponse GetFieldMapping(IGetFieldMappingRequest getFieldMappingRequest)
 		{
-			return this.Dispatch<IGetFieldMappingRequest, GetFieldMappingRequestParameters, GetFieldMappingResponse>(
+			return this.Dispatcher.Dispatch<IGetFieldMappingRequest, GetFieldMappingRequestParameters, GetFieldMappingResponse>(
 				getFieldMappingRequest,
 				(p, d) => this.RawDispatch.IndicesGetFieldMappingDispatch<GetFieldMappingResponse>(
 					p.DeserializationState(new GetFieldMappingConverter((r, s) => DeserializeGetFieldMappingResponse(r, d, s)))
@@ -40,7 +40,7 @@ namespace Nest
 			where T : class
 		{
 			selector = selector ?? (s => s);
-			return this.DispatchAsync<GetFieldMappingDescriptor<T>, GetFieldMappingRequestParameters, GetFieldMappingResponse, IGetFieldMappingResponse>(
+			return this.Dispatcher.DispatchAsync<GetFieldMappingDescriptor<T>, GetFieldMappingRequestParameters, GetFieldMappingResponse, IGetFieldMappingResponse>(
 				selector,
 				(p, d) => this.RawDispatch.IndicesGetFieldMappingDispatchAsync<GetFieldMappingResponse>(
 					p.DeserializationState(new GetFieldMappingConverter((r, s) => DeserializeGetFieldMappingResponse(r, d, s)))
@@ -51,7 +51,7 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<IGetFieldMappingResponse> GetFieldMappingAsync(IGetFieldMappingRequest getFieldMappingRequest)
 		{
-			return this.DispatchAsync<IGetFieldMappingRequest, GetFieldMappingRequestParameters, GetFieldMappingResponse, IGetFieldMappingResponse>(
+			return this.Dispatcher.DispatchAsync<IGetFieldMappingRequest, GetFieldMappingRequestParameters, GetFieldMappingResponse, IGetFieldMappingResponse>(
 				getFieldMappingRequest,
 				(p, d) => this.RawDispatch.IndicesGetFieldMappingDispatchAsync<GetFieldMappingResponse>(
 					p.DeserializationState(new GetFieldMappingConverter((r, s) => DeserializeGetFieldMappingResponse(r, d, s)))

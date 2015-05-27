@@ -16,7 +16,7 @@ namespace Nest
 		{
 			multiPercolateSelector.ThrowIfNull("MultiPercolateSelector");
 			var descriptor = multiPercolateSelector(new MultiPercolateDescriptor());
-			return this.Dispatch<MultiPercolateDescriptor, MultiPercolateRequestParameters, MultiPercolateResponse>(
+			return this.Dispatcher.Dispatch<MultiPercolateDescriptor, MultiPercolateRequestParameters, MultiPercolateResponse>(
 				descriptor,
 				(p, d) =>
 				{
@@ -29,7 +29,7 @@ namespace Nest
 		/// <inheritdoc />
 		public IMultiPercolateResponse MultiPercolate(IMultiPercolateRequest multiRequest)
 		{
-			return this.Dispatch<IMultiPercolateRequest, MultiPercolateRequestParameters, MultiPercolateResponse>(
+			return this.Dispatcher.Dispatch<IMultiPercolateRequest, MultiPercolateRequestParameters, MultiPercolateResponse>(
 				multiRequest,
 				(p, d) =>
 				{
@@ -44,7 +44,7 @@ namespace Nest
 		{
 			multiPercolateSelector.ThrowIfNull("MultiPercolateSelector");
 			var descriptor = multiPercolateSelector(new MultiPercolateDescriptor());
-			return this.DispatchAsync<MultiPercolateDescriptor, MultiPercolateRequestParameters, MultiPercolateResponse, IMultiPercolateResponse>(
+			return this.Dispatcher.DispatchAsync<MultiPercolateDescriptor, MultiPercolateRequestParameters, MultiPercolateResponse, IMultiPercolateResponse>(
 				descriptor,
 				(p, d) =>
 				{
@@ -57,7 +57,7 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<IMultiPercolateResponse> MultiPercolateAsync(IMultiPercolateRequest multiPercolateRequest)
 		{
-			return this.DispatchAsync<IMultiPercolateRequest, MultiPercolateRequestParameters, MultiPercolateResponse, IMultiPercolateResponse>(
+			return this.Dispatcher.DispatchAsync<IMultiPercolateRequest, MultiPercolateRequestParameters, MultiPercolateResponse, IMultiPercolateResponse>(
 				multiPercolateRequest,
 				(p, d) =>
 				{

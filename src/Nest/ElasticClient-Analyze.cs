@@ -9,7 +9,7 @@ namespace Nest
 		/// <inheritdoc />
 		public IAnalyzeResponse Analyze(Func<AnalyzeDescriptor, AnalyzeDescriptor> analyzeSelector)
 		{
-			return this.Dispatch<AnalyzeDescriptor, AnalyzeRequestParameters, AnalyzeResponse>(
+			return this.Dispatcher.Dispatch<AnalyzeDescriptor, AnalyzeRequestParameters, AnalyzeResponse>(
 				analyzeSelector,
 				(p, d) =>
 				{
@@ -24,7 +24,7 @@ namespace Nest
 		/// <inheritdoc />
 		public IAnalyzeResponse Analyze(IAnalyzeRequest analyzeRequest)
 		{
-			return this.Dispatch<IAnalyzeRequest, AnalyzeRequestParameters, AnalyzeResponse>(
+			return this.Dispatcher.Dispatch<IAnalyzeRequest, AnalyzeRequestParameters, AnalyzeResponse>(
 				analyzeRequest,
 				(p, d) =>
 				{
@@ -39,7 +39,7 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<IAnalyzeResponse> AnalyzeAsync(Func<AnalyzeDescriptor, AnalyzeDescriptor> analyzeSelector)
 		{
-			return this.DispatchAsync<AnalyzeDescriptor, AnalyzeRequestParameters, AnalyzeResponse, IAnalyzeResponse>(
+			return this.Dispatcher.DispatchAsync<AnalyzeDescriptor, AnalyzeRequestParameters, AnalyzeResponse, IAnalyzeResponse>(
 				analyzeSelector,
 				(p, d) =>
 				{
@@ -54,7 +54,7 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<IAnalyzeResponse> AnalyzeAsync(IAnalyzeRequest analyzeRequest)
 		{
-			return this.DispatchAsync<IAnalyzeRequest, AnalyzeRequestParameters, AnalyzeResponse, IAnalyzeResponse>(
+			return this.Dispatcher.DispatchAsync<IAnalyzeRequest, AnalyzeRequestParameters, AnalyzeResponse, IAnalyzeResponse>(
 				analyzeRequest,
 				(p, d) =>
 				{

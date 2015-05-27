@@ -11,7 +11,7 @@ namespace Nest
 		public IClusterPutSettingsResponse ClusterSettings(Func<ClusterSettingsDescriptor, ClusterSettingsDescriptor> selector)
 		{
 			selector = selector ?? (s => s);
-			return this.Dispatch<ClusterSettingsDescriptor, ClusterSettingsRequestParameters, ClusterPutSettingsResponse>(
+			return this.Dispatcher.Dispatch<ClusterSettingsDescriptor, ClusterSettingsRequestParameters, ClusterPutSettingsResponse>(
 				selector,
 				(p, d) => this.RawDispatch.ClusterPutSettingsDispatch<ClusterPutSettingsResponse>(p, d)
 			);
@@ -21,7 +21,7 @@ namespace Nest
 		public Task<IClusterPutSettingsResponse> ClusterSettingsAsync(Func<ClusterSettingsDescriptor, ClusterSettingsDescriptor> selector)
 		{
 			selector = selector ?? (s => s);
-			return this.DispatchAsync<ClusterSettingsDescriptor, ClusterSettingsRequestParameters, ClusterPutSettingsResponse, IClusterPutSettingsResponse >(
+			return this.Dispatcher.DispatchAsync<ClusterSettingsDescriptor, ClusterSettingsRequestParameters, ClusterPutSettingsResponse, IClusterPutSettingsResponse >(
 				selector,
 				(p, d) => this.RawDispatch.ClusterPutSettingsDispatchAsync<ClusterPutSettingsResponse>(p, d)
 			);
@@ -30,7 +30,7 @@ namespace Nest
 		/// <inheritdoc />
 		public IClusterPutSettingsResponse ClusterSettings(IClusterSettingsRequest clusterSettingsRequest)
 		{
-			return this.Dispatch<IClusterSettingsRequest, ClusterSettingsRequestParameters, ClusterPutSettingsResponse>(
+			return this.Dispatcher.Dispatch<IClusterSettingsRequest, ClusterSettingsRequestParameters, ClusterPutSettingsResponse>(
 				clusterSettingsRequest,
 				(p, d) => this.RawDispatch.ClusterPutSettingsDispatch<ClusterPutSettingsResponse>(p, d)
 			);
@@ -39,7 +39,7 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<IClusterPutSettingsResponse> ClusterSettingsAsync(IClusterSettingsRequest clusterSettingsRequest)
 		{
-			return this.DispatchAsync<IClusterSettingsRequest, ClusterSettingsRequestParameters, ClusterPutSettingsResponse, IClusterPutSettingsResponse >(
+			return this.Dispatcher.DispatchAsync<IClusterSettingsRequest, ClusterSettingsRequestParameters, ClusterPutSettingsResponse, IClusterPutSettingsResponse >(
 				clusterSettingsRequest,
 				(p, d) => this.RawDispatch.ClusterPutSettingsDispatchAsync<ClusterPutSettingsResponse>(p, d)
 			);
@@ -49,7 +49,7 @@ namespace Nest
 		public IClusterGetSettingsResponse ClusterGetSettings(Func<ClusterGetSettingsDescriptor, ClusterGetSettingsDescriptor> selector = null)
 		{
 			selector = selector ?? (s => s);
-			return this.Dispatch<ClusterGetSettingsDescriptor, ClusterGetSettingsRequestParameters, ClusterGetSettingsResponse>(
+			return this.Dispatcher.Dispatch<ClusterGetSettingsDescriptor, ClusterGetSettingsRequestParameters, ClusterGetSettingsResponse>(
 				selector,
 				(p, d) => this.RawDispatch.ClusterGetSettingsDispatch<ClusterGetSettingsResponse>(p)
 			);
@@ -59,7 +59,7 @@ namespace Nest
 		public Task<IClusterGetSettingsResponse> ClusterGetSettingsAsync(Func<ClusterGetSettingsDescriptor, ClusterGetSettingsDescriptor> selector)
 		{
 			selector = selector ?? (s => s);
-			return this.DispatchAsync<ClusterGetSettingsDescriptor, ClusterGetSettingsRequestParameters, ClusterGetSettingsResponse, IClusterGetSettingsResponse>(
+			return this.Dispatcher.DispatchAsync<ClusterGetSettingsDescriptor, ClusterGetSettingsRequestParameters, ClusterGetSettingsResponse, IClusterGetSettingsResponse>(
 				selector,
 				(p, d) => this.RawDispatch.ClusterGetSettingsDispatchAsync<ClusterGetSettingsResponse>(p)
 			);
@@ -68,7 +68,7 @@ namespace Nest
 		/// <inheritdoc />
 		public IClusterGetSettingsResponse ClusterGetSettings(IClusterGetSettingsRequest clusterSettingsRequest)
 		{
-			return this.Dispatch<IClusterGetSettingsRequest, ClusterGetSettingsRequestParameters, ClusterGetSettingsResponse>(
+			return this.Dispatcher.Dispatch<IClusterGetSettingsRequest, ClusterGetSettingsRequestParameters, ClusterGetSettingsResponse>(
 				clusterSettingsRequest ?? new ClusterGetSettingsRequest(),
 				(p, d) => this.RawDispatch.ClusterGetSettingsDispatch<ClusterGetSettingsResponse>(p)
 			);
@@ -77,7 +77,7 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<IClusterGetSettingsResponse> ClusterGetSettingsAsync(IClusterGetSettingsRequest clusterSettingsRequest = null)
 		{
-			return this.DispatchAsync<IClusterGetSettingsRequest, ClusterGetSettingsRequestParameters, ClusterGetSettingsResponse, IClusterGetSettingsResponse>(
+			return this.Dispatcher.DispatchAsync<IClusterGetSettingsRequest, ClusterGetSettingsRequestParameters, ClusterGetSettingsResponse, IClusterGetSettingsResponse>(
 				clusterSettingsRequest ?? new ClusterGetSettingsRequest(),
 				(p, d) => this.RawDispatch.ClusterGetSettingsDispatchAsync<ClusterGetSettingsResponse>(p)
 			);

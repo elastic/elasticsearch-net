@@ -13,7 +13,7 @@ namespace Nest
 		/// <inheritdoc />
 		public ISearchShardsResponse SearchShards<T>(Func<SearchShardsDescriptor<T>, SearchShardsDescriptor<T>> searchSelector) where T : class
 		{
-			return this.Dispatch<SearchShardsDescriptor<T>, SearchShardsRequestParameters, SearchShardsResponse>(
+			return this.Dispatcher.Dispatch<SearchShardsDescriptor<T>, SearchShardsRequestParameters, SearchShardsResponse>(
 				searchSelector,
 				(p, d) => this.RawDispatch.SearchShardsDispatch<SearchShardsResponse>(p)
 			);
@@ -22,7 +22,7 @@ namespace Nest
 		/// <inheritdoc />
 		public ISearchShardsResponse SearchShards(ISearchShardsRequest request)
 		{
-			return this.Dispatch<ISearchShardsRequest, SearchShardsRequestParameters, SearchShardsResponse>(
+			return this.Dispatcher.Dispatch<ISearchShardsRequest, SearchShardsRequestParameters, SearchShardsResponse>(
 				request,
 				(p, d) => this.RawDispatch.SearchShardsDispatch<SearchShardsResponse>(p)
 			);
@@ -32,7 +32,7 @@ namespace Nest
 		public Task<ISearchShardsResponse> SearchShardsAsync<T>(Func<SearchShardsDescriptor<T>, SearchShardsDescriptor<T>> searchSelector)
 			where T : class
 		{
-			return this.DispatchAsync<SearchShardsDescriptor<T>, SearchShardsRequestParameters, SearchShardsResponse, ISearchShardsResponse>(
+			return this.Dispatcher.DispatchAsync<SearchShardsDescriptor<T>, SearchShardsRequestParameters, SearchShardsResponse, ISearchShardsResponse>(
 				searchSelector,
 				(p, d) => this.RawDispatch.SearchShardsDispatchAsync<SearchShardsResponse>(p)
 			);
@@ -41,7 +41,7 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<ISearchShardsResponse> SearchShardsAsync(ISearchShardsRequest request)
 		{
-			return this.DispatchAsync<ISearchShardsRequest, SearchShardsRequestParameters, SearchShardsResponse, ISearchShardsResponse>(
+			return this.Dispatcher.DispatchAsync<ISearchShardsRequest, SearchShardsRequestParameters, SearchShardsResponse, ISearchShardsResponse>(
 				request,
 				(p, d) => this.RawDispatch.SearchShardsDispatchAsync<SearchShardsResponse>(p)
 			);

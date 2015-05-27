@@ -14,7 +14,7 @@ namespace Nest
 		/// <inheritdoc />
 		public IExistsResponse AliasExists(Func<AliasExistsDescriptor, AliasExistsDescriptor> selector)
 		{
-			return this.Dispatch<AliasExistsDescriptor, AliasExistsRequestParameters, ExistsResponse>(
+			return this.Dispatcher.Dispatch<AliasExistsDescriptor, AliasExistsRequestParameters, ExistsResponse>(
 				selector,
 				(p, d) => this.RawDispatch.IndicesExistsAliasDispatch<ExistsResponse>(
 					p.DeserializationState(new AliasExistConverter(DeserializeExistsResponse))
@@ -25,7 +25,7 @@ namespace Nest
 		/// <inheritdoc />
 		public IExistsResponse AliasExists(IAliasExistsRequest AliasRequest)
 		{
-			return this.Dispatch<IAliasExistsRequest, AliasExistsRequestParameters, ExistsResponse>(
+			return this.Dispatcher.Dispatch<IAliasExistsRequest, AliasExistsRequestParameters, ExistsResponse>(
 				AliasRequest,
 				(p, d) => this.RawDispatch.IndicesExistsAliasDispatch<ExistsResponse>(
 					p.DeserializationState(new AliasExistConverter(DeserializeExistsResponse))
@@ -36,7 +36,7 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<IExistsResponse> AliasExistsAsync(Func<AliasExistsDescriptor, AliasExistsDescriptor> selector)
 		{
-			return this.DispatchAsync<AliasExistsDescriptor, AliasExistsRequestParameters, ExistsResponse, IExistsResponse>(
+			return this.Dispatcher.DispatchAsync<AliasExistsDescriptor, AliasExistsRequestParameters, ExistsResponse, IExistsResponse>(
 				selector,
 				(p, d) => this.RawDispatch.IndicesExistsAliasDispatchAsync<ExistsResponse>(
 					p.DeserializationState(new AliasExistConverter(DeserializeExistsResponse))
@@ -47,7 +47,7 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<IExistsResponse> AliasExistsAsync(IAliasExistsRequest AliasRequest)
 		{
-			return this.DispatchAsync<IAliasExistsRequest, AliasExistsRequestParameters, ExistsResponse, IExistsResponse>(
+			return this.Dispatcher.DispatchAsync<IAliasExistsRequest, AliasExistsRequestParameters, ExistsResponse, IExistsResponse>(
 				AliasRequest,
 				(p, d) => this.RawDispatch.IndicesExistsAliasDispatchAsync<ExistsResponse>(
 					p.DeserializationState(new AliasExistConverter(DeserializeExistsResponse))

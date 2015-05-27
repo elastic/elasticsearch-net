@@ -13,7 +13,7 @@ namespace Nest
 		public IAcknowledgedResponse CreateRepository(string name, Func<CreateRepositoryDescriptor, CreateRepositoryDescriptor> selector)
 		{
 			name.ThrowIfNullOrEmpty("name");
-			return this.Dispatch<CreateRepositoryDescriptor, CreateRepositoryRequestParameters, AcknowledgedResponse>(
+			return this.Dispatcher.Dispatch<CreateRepositoryDescriptor, CreateRepositoryRequestParameters, AcknowledgedResponse>(
 				s => selector(s.Repository(name)),
 				(p, d) => this.RawDispatch.SnapshotCreateRepositoryDispatch<AcknowledgedResponse>(p, ((ICreateRepositoryRequest)d).Repository)
 			);
@@ -22,7 +22,7 @@ namespace Nest
 		/// <inheritdoc />
 		public IAcknowledgedResponse CreateRepository(ICreateRepositoryRequest request)
 		{
-			return this.Dispatch<ICreateRepositoryRequest, CreateRepositoryRequestParameters, AcknowledgedResponse>(
+			return this.Dispatcher.Dispatch<ICreateRepositoryRequest, CreateRepositoryRequestParameters, AcknowledgedResponse>(
 				request,
 				(p, d) => this.RawDispatch.SnapshotCreateRepositoryDispatch<AcknowledgedResponse>(p, ((ICreateRepositoryRequest)d).Repository)
 			);
@@ -32,7 +32,7 @@ namespace Nest
 		public Task<IAcknowledgedResponse> CreateRepositoryAsync(string name, Func<CreateRepositoryDescriptor, CreateRepositoryDescriptor> selector)
 		{
 			name.ThrowIfNullOrEmpty("name");
-			return this.DispatchAsync<CreateRepositoryDescriptor, CreateRepositoryRequestParameters, AcknowledgedResponse, IAcknowledgedResponse>(
+			return this.Dispatcher.DispatchAsync<CreateRepositoryDescriptor, CreateRepositoryRequestParameters, AcknowledgedResponse, IAcknowledgedResponse>(
 				s => selector(s.Repository(name)),
 				(p, d) => this.RawDispatch.SnapshotCreateRepositoryDispatchAsync<AcknowledgedResponse>(p, ((ICreateRepositoryRequest)d).Repository)
 			);
@@ -41,7 +41,7 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<IAcknowledgedResponse> CreateRepositoryAsync(ICreateRepositoryRequest request)
 		{
-			return this.DispatchAsync<ICreateRepositoryRequest, CreateRepositoryRequestParameters, AcknowledgedResponse, IAcknowledgedResponse>(
+			return this.Dispatcher.DispatchAsync<ICreateRepositoryRequest, CreateRepositoryRequestParameters, AcknowledgedResponse, IAcknowledgedResponse>(
 				request,
 				(p, d) => this.RawDispatch.SnapshotCreateRepositoryDispatchAsync<AcknowledgedResponse>(p, ((ICreateRepositoryRequest)d).Repository)
 			);
@@ -50,7 +50,7 @@ namespace Nest
 		/// <inheritdoc />
 		public IGetRepositoryResponse GetRepository(Func<GetRepositoryDescriptor, GetRepositoryDescriptor> selector)
 		{
-			return this.Dispatch<GetRepositoryDescriptor, GetRepositoryRequestParameters, GetRepositoryResponse>(
+			return this.Dispatcher.Dispatch<GetRepositoryDescriptor, GetRepositoryRequestParameters, GetRepositoryResponse>(
 				selector,
 				(p, d) => this.RawDispatch.SnapshotGetRepositoryDispatch<GetRepositoryResponse>(p)
 			);
@@ -59,7 +59,7 @@ namespace Nest
 		/// <inheritdoc />
 		public IGetRepositoryResponse GetRepository(IGetRepositoryRequest request)
 		{
-			return this.Dispatch<IGetRepositoryRequest, GetRepositoryRequestParameters, GetRepositoryResponse>(
+			return this.Dispatcher.Dispatch<IGetRepositoryRequest, GetRepositoryRequestParameters, GetRepositoryResponse>(
 				request,
 				(p, d) => this.RawDispatch.SnapshotGetRepositoryDispatch<GetRepositoryResponse>(p)
 			);
@@ -68,7 +68,7 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<IGetRepositoryResponse> GetRepositoryAsync(Func<GetRepositoryDescriptor, GetRepositoryDescriptor> selector)
 		{
-			return this.DispatchAsync<GetRepositoryDescriptor, GetRepositoryRequestParameters, GetRepositoryResponse, IGetRepositoryResponse>(
+			return this.Dispatcher.DispatchAsync<GetRepositoryDescriptor, GetRepositoryRequestParameters, GetRepositoryResponse, IGetRepositoryResponse>(
 				selector,
 				(p, d) => this.RawDispatch.SnapshotGetRepositoryDispatchAsync<GetRepositoryResponse>(p)
 			);
@@ -77,7 +77,7 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<IGetRepositoryResponse> GetRepositoryAsync(IGetRepositoryRequest request)
 		{
-			return this.DispatchAsync<IGetRepositoryRequest, GetRepositoryRequestParameters, GetRepositoryResponse, IGetRepositoryResponse>(
+			return this.Dispatcher.DispatchAsync<IGetRepositoryRequest, GetRepositoryRequestParameters, GetRepositoryResponse, IGetRepositoryResponse>(
 				request,
 				(p, d) => this.RawDispatch.SnapshotGetRepositoryDispatchAsync<GetRepositoryResponse>(p)
 			);
@@ -88,7 +88,7 @@ namespace Nest
 		{
 			name.ThrowIfNullOrEmpty("name");
 			selector = selector ?? (s => s);
-			return this.Dispatch<DeleteRepositoryDescriptor, DeleteRepositoryRequestParameters, AcknowledgedResponse>(
+			return this.Dispatcher.Dispatch<DeleteRepositoryDescriptor, DeleteRepositoryRequestParameters, AcknowledgedResponse>(
 				s => selector(s.Repository(name)),
 				(p, d) => this.RawDispatch.SnapshotDeleteRepositoryDispatch<AcknowledgedResponse>(p)
 			);
@@ -97,7 +97,7 @@ namespace Nest
 		/// <inheritdoc />
 		public IAcknowledgedResponse DeleteRepository(IDeleteRepositoryRequest deleteRepositoryRequest)
 		{
-			return this.Dispatch<IDeleteRepositoryRequest, DeleteRepositoryRequestParameters, AcknowledgedResponse>(
+			return this.Dispatcher.Dispatch<IDeleteRepositoryRequest, DeleteRepositoryRequestParameters, AcknowledgedResponse>(
 				deleteRepositoryRequest,
 				(p, d) => this.RawDispatch.SnapshotDeleteRepositoryDispatch<AcknowledgedResponse>(p)
 			);
@@ -108,7 +108,7 @@ namespace Nest
 		{
 			name.ThrowIfNullOrEmpty("name");
 			selector = selector ?? (s => s);
-			return this.DispatchAsync<DeleteRepositoryDescriptor, DeleteRepositoryRequestParameters, AcknowledgedResponse, IAcknowledgedResponse>(
+			return this.Dispatcher.DispatchAsync<DeleteRepositoryDescriptor, DeleteRepositoryRequestParameters, AcknowledgedResponse, IAcknowledgedResponse>(
 				s => selector(s.Repository(name)),
 				(p, d) => this.RawDispatch.SnapshotDeleteRepositoryDispatchAsync<AcknowledgedResponse>(p)
 			);
@@ -117,7 +117,7 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<IAcknowledgedResponse> DeleteRepositoryAsync(IDeleteRepositoryRequest deleteRepositoryRequest)
 		{
-			return this.DispatchAsync<IDeleteRepositoryRequest, DeleteRepositoryRequestParameters, AcknowledgedResponse, IAcknowledgedResponse>(
+			return this.Dispatcher.DispatchAsync<IDeleteRepositoryRequest, DeleteRepositoryRequestParameters, AcknowledgedResponse, IAcknowledgedResponse>(
 				deleteRepositoryRequest,
 				(p, d) => this.RawDispatch.SnapshotDeleteRepositoryDispatchAsync<AcknowledgedResponse>(p)
 			);
@@ -128,7 +128,7 @@ namespace Nest
 		{
 			name.ThrowIfNullOrEmpty("name");
 			selector = selector ?? (s => s);
-			return this.Dispatch<VerifyRepositoryDescriptor, VerifyRepositoryRequestParameters, VerifyRepositoryResponse>(
+			return this.Dispatcher.Dispatch<VerifyRepositoryDescriptor, VerifyRepositoryRequestParameters, VerifyRepositoryResponse>(
 				s => selector(s.Repository(name)),
 				(p, d) => this.RawDispatch.SnapshotVerifyRepositoryDispatch<VerifyRepositoryResponse>(p)
 			);
@@ -137,7 +137,7 @@ namespace Nest
 		/// <inheritdoc />
 		public IVerifyRepositoryResponse VerifyRepository(IVerifyRepositoryRequest verifyRepositoryRequest)
 		{
-			return this.Dispatch<IVerifyRepositoryRequest, VerifyRepositoryRequestParameters, VerifyRepositoryResponse>(
+			return this.Dispatcher.Dispatch<IVerifyRepositoryRequest, VerifyRepositoryRequestParameters, VerifyRepositoryResponse>(
 				verifyRepositoryRequest,
 				(p, d) => this.RawDispatch.SnapshotVerifyRepositoryDispatch<VerifyRepositoryResponse>(p)
 			);
@@ -148,7 +148,7 @@ namespace Nest
 		{
 			name.ThrowIfNullOrEmpty("name");
 			selector = selector ?? (s => s);
-			return this.DispatchAsync<VerifyRepositoryDescriptor, VerifyRepositoryRequestParameters, VerifyRepositoryResponse, IVerifyRepositoryResponse>(
+			return this.Dispatcher.DispatchAsync<VerifyRepositoryDescriptor, VerifyRepositoryRequestParameters, VerifyRepositoryResponse, IVerifyRepositoryResponse>(
 				s => selector(s.Repository(name)),
 				(p, d) => this.RawDispatch.SnapshotVerifyRepositoryDispatchAsync<VerifyRepositoryResponse>(p)
 			);
@@ -157,7 +157,7 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<IVerifyRepositoryResponse> VerifyRepositoryAsync(IVerifyRepositoryRequest verifyRepositoryRequest)
 		{
-			return this.DispatchAsync<IVerifyRepositoryRequest, VerifyRepositoryRequestParameters, VerifyRepositoryResponse, IVerifyRepositoryResponse>(
+			return this.Dispatcher.DispatchAsync<IVerifyRepositoryRequest, VerifyRepositoryRequestParameters, VerifyRepositoryResponse, IVerifyRepositoryResponse>(
 				verifyRepositoryRequest,
 				(p, d) => this.RawDispatch.SnapshotVerifyRepositoryDispatchAsync<VerifyRepositoryResponse>(p)
 			);

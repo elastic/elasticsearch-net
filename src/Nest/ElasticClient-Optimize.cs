@@ -11,7 +11,7 @@ namespace Nest
 		public IShardsOperationResponse Optimize(Func<OptimizeDescriptor, OptimizeDescriptor> optimizeSelector = null)
 		{
 			optimizeSelector = optimizeSelector ?? (s => s);
-			return this.Dispatch<OptimizeDescriptor, OptimizeRequestParameters, ShardsOperationResponse>(
+			return this.Dispatcher.Dispatch<OptimizeDescriptor, OptimizeRequestParameters, ShardsOperationResponse>(
 				optimizeSelector,
 				(p, d) => this.RawDispatch.IndicesOptimizeDispatch<ShardsOperationResponse>(p)
 			);
@@ -20,7 +20,7 @@ namespace Nest
 		/// <inheritdoc />
 		public IShardsOperationResponse Optimize(IOptimizeRequest optimizeRequest)
 		{
-			return this.Dispatch<IOptimizeRequest, OptimizeRequestParameters, ShardsOperationResponse>(
+			return this.Dispatcher.Dispatch<IOptimizeRequest, OptimizeRequestParameters, ShardsOperationResponse>(
 				optimizeRequest,
 				(p, d) => this.RawDispatch.IndicesOptimizeDispatch<ShardsOperationResponse>(p)
 			);
@@ -30,7 +30,7 @@ namespace Nest
 		public Task<IShardsOperationResponse> OptimizeAsync(Func<OptimizeDescriptor, OptimizeDescriptor> optimizeSelector = null)
 		{
 			optimizeSelector = optimizeSelector ?? (s => s);
-			return this.DispatchAsync<OptimizeDescriptor, OptimizeRequestParameters, ShardsOperationResponse, IShardsOperationResponse>(
+			return this.Dispatcher.DispatchAsync<OptimizeDescriptor, OptimizeRequestParameters, ShardsOperationResponse, IShardsOperationResponse>(
 				optimizeSelector,
 				(p, d) => this.RawDispatch.IndicesOptimizeDispatchAsync<ShardsOperationResponse>(p)
 			);
@@ -39,7 +39,7 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<IShardsOperationResponse> OptimizeAsync(IOptimizeRequest optimizeRequest)
 		{
-			return this.DispatchAsync<IOptimizeRequest, OptimizeRequestParameters, ShardsOperationResponse, IShardsOperationResponse>(
+			return this.Dispatcher.DispatchAsync<IOptimizeRequest, OptimizeRequestParameters, ShardsOperationResponse, IShardsOperationResponse>(
 				optimizeRequest,
 				(p, d) => this.RawDispatch.IndicesOptimizeDispatchAsync<ShardsOperationResponse>(p)
 			);
