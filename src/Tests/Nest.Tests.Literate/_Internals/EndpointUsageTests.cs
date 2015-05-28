@@ -60,7 +60,7 @@ namespace Nest.Tests.Literate
 		protected virtual ConnectionSettings GetConnectionSettings(ConnectionSettings settings) => settings; 
 		protected virtual IElasticClient GetClient() => TestClient.GetClient(GetConnectionSettings, DefaultPort); 
 
-		private async Task AssertOnAllResponses(Action<TResponse> assert)
+		protected async Task AssertOnAllResponses(Action<TResponse> assert)
 		{
 			foreach (var kv in await this._responses)
 			{

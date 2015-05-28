@@ -1,6 +1,7 @@
 ﻿using System;
 using FluentAssertions;
 using Nest.Tests.Literate._Internals.Integration;
+using Xunit;
 
 namespace Nest.Tests.Literate.SearchAPIs.RequestBodySearch
 {
@@ -27,6 +28,13 @@ namespace Nest.Tests.Literate.SearchAPIs.RequestBodySearch
 
 			protected override Func<SearchDescriptor<object>, ISearchRequest> Fluent => s => s
 				.PostFilter(f => f.MatchAll());
+
+			[IntegrationFact]
+			public async void ShouldHaveHits() => await AssertOnAllResponses((r) =>
+			{
+				r.Hits.Should().NotBeNull();
+			});
+
 		}
 	}
 }
