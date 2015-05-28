@@ -141,7 +141,10 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 
 			//When we are not using pooling we forcefully rethrow the exception
 			if (!requestState.UsingPooling && innerException != null && maxRetries == 0)
-				throw innerException;
+			{
+				innerException.RethrowKeepingStackTrace();
+				return;
+			}
 		
 			var exceptionMessage = tookToLong 
 				? CreateTookTooLongExceptionMessage(requestState, innerException) 

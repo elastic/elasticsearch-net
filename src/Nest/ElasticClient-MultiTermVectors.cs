@@ -13,7 +13,7 @@ namespace Nest
 		public IMultiTermVectorResponse MultiTermVectors<T>(Func<MultiTermVectorsDescriptor<T>, MultiTermVectorsDescriptor<T>> multiTermVectorsSelector)
 			where T : class
 		{
-			return this.Dispatch<MultiTermVectorsDescriptor<T>, MultiTermVectorsRequestParameters, MultiTermVectorResponse>(
+			return this.Dispatcher.Dispatch<MultiTermVectorsDescriptor<T>, MultiTermVectorsRequestParameters, MultiTermVectorResponse>(
 				multiTermVectorsSelector,
 				(p, d) => this.RawDispatch.MtermvectorsDispatch<MultiTermVectorResponse>(p, d)
 			);
@@ -22,7 +22,7 @@ namespace Nest
 		///<inheritdoc />
 		public IMultiTermVectorResponse MultiTermVectors(IMultiTermVectorsRequest multiTermVectorsRequest)
 		{
-			return this.Dispatch<IMultiTermVectorsRequest, MultiTermVectorsRequestParameters, MultiTermVectorResponse>(
+			return this.Dispatcher.Dispatch<IMultiTermVectorsRequest, MultiTermVectorsRequestParameters, MultiTermVectorResponse>(
 				multiTermVectorsRequest,
 				(p, d) => this.RawDispatch.MtermvectorsDispatch<MultiTermVectorResponse>(p, d)
 			);
@@ -32,7 +32,7 @@ namespace Nest
 		public Task<IMultiTermVectorResponse> MultiTermVectorsAsync<T>(Func<MultiTermVectorsDescriptor<T>, MultiTermVectorsDescriptor<T>> multiTermVectorsSelector)
 			where T : class
 		{
-			return this.DispatchAsync<MultiTermVectorsDescriptor<T>, MultiTermVectorsRequestParameters, MultiTermVectorResponse, IMultiTermVectorResponse>(
+			return this.Dispatcher.DispatchAsync<MultiTermVectorsDescriptor<T>, MultiTermVectorsRequestParameters, MultiTermVectorResponse, IMultiTermVectorResponse>(
 				multiTermVectorsSelector,
 				(p, d) => this.RawDispatch.MtermvectorsDispatchAsync<MultiTermVectorResponse>(p, d)
 			);
@@ -41,7 +41,7 @@ namespace Nest
 		///<inheritdoc />
 		public Task<IMultiTermVectorResponse> MultiTermVectorsAsync(IMultiTermVectorsRequest multiTermVectorsRequest)
 		{
-			return this.DispatchAsync<IMultiTermVectorsRequest, MultiTermVectorsRequestParameters, MultiTermVectorResponse, IMultiTermVectorResponse>(
+			return this.Dispatcher.DispatchAsync<IMultiTermVectorsRequest, MultiTermVectorsRequestParameters, MultiTermVectorResponse, IMultiTermVectorResponse>(
 				multiTermVectorsRequest,
 				(p, d) => this.RawDispatch.MtermvectorsDispatchAsync<MultiTermVectorResponse>(p, d)
 			);

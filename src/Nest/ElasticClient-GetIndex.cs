@@ -14,7 +14,7 @@ namespace Nest
 		/// <inheritdoc />
 		public IGetIndexResponse GetIndex(Func<GetIndexDescriptor, GetIndexDescriptor> getIndexSelector)
 		{
-			return this.Dispatch<GetIndexDescriptor, GetIndexRequestParameters, GetIndexResponse>(
+			return this.Dispatcher.Dispatch<GetIndexDescriptor, GetIndexRequestParameters, GetIndexResponse>(
 				getIndexSelector,
 				(p, d) => this.RawDispatch.IndicesGetDispatch<GetIndexResponse>(
 					p.DeserializationState(new GetIndexResponseConverter(this.DeserializeGetIndexResponse))
@@ -25,7 +25,7 @@ namespace Nest
 		/// <inheritdoc />
 		public IGetIndexResponse GetIndex(IGetIndexRequest createIndexRequest)
 		{
-			return this.Dispatch<IGetIndexRequest, GetIndexRequestParameters, GetIndexResponse>(
+			return this.Dispatcher.Dispatch<IGetIndexRequest, GetIndexRequestParameters, GetIndexResponse>(
 				createIndexRequest,
 				(p, d) => this.RawDispatch.IndicesGetDispatch<GetIndexResponse>(
 					p.DeserializationState(new GetIndexResponseConverter(this.DeserializeGetIndexResponse))
@@ -36,7 +36,7 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<IGetIndexResponse> GetIndexAsync(Func<GetIndexDescriptor, GetIndexDescriptor> getIndexSelector)
 		{
-			return this.DispatchAsync<GetIndexDescriptor, GetIndexRequestParameters, GetIndexResponse, IGetIndexResponse>(
+			return this.Dispatcher.DispatchAsync<GetIndexDescriptor, GetIndexRequestParameters, GetIndexResponse, IGetIndexResponse>(
 				getIndexSelector,
 				(p, d) => this.RawDispatch.IndicesGetDispatchAsync<GetIndexResponse>(
 					p.DeserializationState(new GetIndexResponseConverter(this.DeserializeGetIndexResponse))
@@ -47,7 +47,7 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<IGetIndexResponse> GetIndexAsync(IGetIndexRequest createIndexRequest)
 		{
-			return this.DispatchAsync<IGetIndexRequest, GetIndexRequestParameters, GetIndexResponse, IGetIndexResponse>(
+			return this.Dispatcher.DispatchAsync<IGetIndexRequest, GetIndexRequestParameters, GetIndexResponse, IGetIndexResponse>(
 				createIndexRequest,
 				(p, d) => this.RawDispatch.IndicesGetDispatchAsync<GetIndexResponse>(
 					p.DeserializationState(new GetIndexResponseConverter(this.DeserializeGetIndexResponse))

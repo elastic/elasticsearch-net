@@ -12,7 +12,7 @@ namespace Nest
 		public IStatusResponse Status(Func<IndicesStatusDescriptor, IndicesStatusDescriptor> selector = null)
 		{
 			selector = selector ?? (s => s);
-			return this.Dispatch<IndicesStatusDescriptor, IndicesStatusRequestParameters, StatusResponse>(
+			return this.Dispatcher.Dispatch<IndicesStatusDescriptor, IndicesStatusRequestParameters, StatusResponse>(
 				selector,
 				(p, d) => this.RawDispatch.IndicesStatusDispatch<StatusResponse>(p)
 			);
@@ -21,7 +21,7 @@ namespace Nest
 		/// <inheritdoc />
 		public IStatusResponse Status(IIndicesStatusRequest statusRequest)
 		{
-			return this.Dispatch<IIndicesStatusRequest, IndicesStatusRequestParameters, StatusResponse>(
+			return this.Dispatcher.Dispatch<IIndicesStatusRequest, IndicesStatusRequestParameters, StatusResponse>(
 				statusRequest,
 				(p, d) => this.RawDispatch.IndicesStatusDispatch<StatusResponse>(p)
 			);
@@ -31,7 +31,7 @@ namespace Nest
 		public Task<IStatusResponse> StatusAsync(Func<IndicesStatusDescriptor, IndicesStatusDescriptor> selector = null)
 		{
 			selector = selector ?? (s => s);
-			return this.DispatchAsync<IndicesStatusDescriptor, IndicesStatusRequestParameters, StatusResponse, IStatusResponse>(
+			return this.Dispatcher.DispatchAsync<IndicesStatusDescriptor, IndicesStatusRequestParameters, StatusResponse, IStatusResponse>(
 				selector,
 				(p, d) => this.RawDispatch.IndicesStatusDispatchAsync<StatusResponse>(p)
 			);
@@ -40,7 +40,7 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<IStatusResponse> StatusAsync(IIndicesStatusRequest statusRequest)
 		{
-			return this.DispatchAsync<IIndicesStatusRequest, IndicesStatusRequestParameters, StatusResponse, IStatusResponse>(
+			return this.Dispatcher.DispatchAsync<IIndicesStatusRequest, IndicesStatusRequestParameters, StatusResponse, IStatusResponse>(
 				statusRequest,
 				(p, d) => this.RawDispatch.IndicesStatusDispatchAsync<StatusResponse>(p)
 			);

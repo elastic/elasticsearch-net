@@ -205,7 +205,7 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 			//If we are not using any pooling and we see an exception we rethrow
 			if (!requestState.UsingPooling && t.IsFaulted && t.Exception != null && maxRetries == 0)
 			{
-				t.Exception.RethrowKeepingStackTrace();
+				t.Exception.Flatten().InnerException.RethrowKeepingStackTrace();
 				return null; //won't be hit
 			}
 

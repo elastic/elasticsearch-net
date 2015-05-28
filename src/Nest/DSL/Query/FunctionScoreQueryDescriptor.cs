@@ -117,7 +117,7 @@ namespace Nest
 			get
 			{
 				return _forcedConditionless
-				       || ((Self.Query == null || Self.Query.IsConditionless || Self.Filter == null || Self.Filter.IsConditionless)
+				       || (((Self.Query == null || Self.Query.IsConditionless) && (Self.Filter == null || Self.Filter.IsConditionless))
 				           && Self.RandomScore == null && Self.ScriptScore == null && !Self.Functions.HasAny());
 			}
 		}

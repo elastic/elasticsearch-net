@@ -14,7 +14,7 @@ namespace Nest
 			@object.ThrowIfNull("object");
 			indexSelector = indexSelector ?? (s => s);
 			var descriptor = indexSelector(new IndexDescriptor<T>().IdFrom(@object));
-			return this.Dispatch<IndexDescriptor<T>, IndexRequestParameters, IndexResponse>(
+			return this.Dispatcher.Dispatch<IndexDescriptor<T>, IndexRequestParameters, IndexResponse>(
 				descriptor,
 				(p, d) => this.RawDispatch.IndexDispatch<IndexResponse>(p, @object));
 		}
@@ -23,7 +23,7 @@ namespace Nest
 		public IIndexResponse Index<T>(IIndexRequest<T> indexRequest)
 			where T : class
 		{
-			return this.Dispatch<IIndexRequest<T>, IndexRequestParameters, IndexResponse>(
+			return this.Dispatcher.Dispatch<IIndexRequest<T>, IndexRequestParameters, IndexResponse>(
 				indexRequest,
 				(p, d) => this.RawDispatch.IndexDispatch<IndexResponse>(p, indexRequest.Document));
 		}
@@ -35,7 +35,7 @@ namespace Nest
 			@object.ThrowIfNull("object");
 			indexSelector = indexSelector ?? (s => s);
 			var descriptor = indexSelector(new IndexDescriptor<T>().IdFrom(@object));
-			return this.DispatchAsync<IndexDescriptor<T>, IndexRequestParameters, IndexResponse, IIndexResponse>(
+			return this.Dispatcher.DispatchAsync<IndexDescriptor<T>, IndexRequestParameters, IndexResponse, IIndexResponse>(
 				descriptor,
 				(p, d) => this.RawDispatch.IndexDispatchAsync<IndexResponse>(p, @object));
 		}
@@ -44,7 +44,7 @@ namespace Nest
 		public Task<IIndexResponse> IndexAsync<T>(IIndexRequest<T> indexRequest)
 			where T : class
 		{
-			return this.DispatchAsync<IIndexRequest<T>, IndexRequestParameters, IndexResponse, IIndexResponse>(
+			return this.Dispatcher.DispatchAsync<IIndexRequest<T>, IndexRequestParameters, IndexResponse, IIndexResponse>(
 				indexRequest,
 				(p, d) => this.RawDispatch.IndexDispatchAsync<IndexResponse>(p, indexRequest.Document));
 		}

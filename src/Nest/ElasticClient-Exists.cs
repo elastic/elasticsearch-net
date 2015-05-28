@@ -1,27 +1,35 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 
 namespace Nest
 {
+	using ExistConverter = Func<IElasticsearchResponse, Stream, ExistsResponse>;
+
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
 		public IExistsResponse DocumentExists<T>(Func<DocumentExistsDescriptor<T>, DocumentExistsDescriptor<T>> existsSelector)
 			where T : class
 		{
-			return this.Dispatch<DocumentExistsDescriptor<T>, DocumentExistsRequestParameters, ExistsResponse>(
+			return this.Dispatcher.Dispatch<DocumentExistsDescriptor<T>, DocumentExistsRequestParameters, ExistsResponse>(
 				d => existsSelector(d.RequestConfiguration(r=>r.AllowedStatusCodes(404))),
-				(p, d) => ToExistsResponse(this.RawDispatch.ExistsDispatch<VoidResponse>(p))
+				(p, d) => this.RawDispatch.ExistsDispatch<ExistsResponse>(p
+					.DeserializationState(new ExistConverter(this.DeserializeExistsResponse))
+				)
 			);
 		}
 
 		/// <inheritdoc />
 		public IExistsResponse DocumentExists(IDocumentExistsRequest documentExistsRequest)
 		{
-			return this.Dispatch<IDocumentExistsRequest, DocumentExistsRequestParameters, ExistsResponse>(
+			return this.Dispatcher.Dispatch<IDocumentExistsRequest, DocumentExistsRequestParameters, ExistsResponse>(
 				documentExistsRequest,
-				(p, d) => ToExistsResponse(this.RawDispatch.ExistsDispatch<VoidResponse>(p))
+				(p, d) => this.RawDispatch.ExistsDispatch<ExistsResponse>(p
+					.DeserializationState(new ExistConverter(this.DeserializeExistsResponse))
+				)
 			);
 		}
 
@@ -29,24 +37,23 @@ namespace Nest
 		public Task<IExistsResponse> DocumentExistsAsync<T>(Func<DocumentExistsDescriptor<T>, DocumentExistsDescriptor<T>> existsSelector)
 			where T : class
 		{
-			return this.DispatchAsync<DocumentExistsDescriptor<T>, DocumentExistsRequestParameters, ExistsResponse, IExistsResponse>(
+			return this.Dispatcher.DispatchAsync<DocumentExistsDescriptor<T>, DocumentExistsRequestParameters, ExistsResponse, IExistsResponse>(
 				d => existsSelector(d.RequestConfiguration(r=>r.AllowedStatusCodes(404))),
-				(p, d) => this.RawDispatch.ExistsDispatchAsync<ExistsResponse>(p)
+				(p, d) => this.RawDispatch.ExistsDispatchAsync<ExistsResponse>(p
+					.DeserializationState(new ExistConverter(this.DeserializeExistsResponse))
+				)
 			);
 		}
 
 		/// <inheritdoc />
 		public Task<IExistsResponse> DocumentExistsAsync(IDocumentExistsRequest documentExistsRequest)
 		{
-			return this.DispatchAsync<IDocumentExistsRequest, DocumentExistsRequestParameters, ExistsResponse, IExistsResponse>(
+			return this.Dispatcher.DispatchAsync<IDocumentExistsRequest, DocumentExistsRequestParameters, ExistsResponse, IExistsResponse>(
 				documentExistsRequest,
-				(p, d) => this.RawDispatch.ExistsDispatchAsync<ExistsResponse>(p)
+				(p, d) => this.RawDispatch.ExistsDispatchAsync<ExistsResponse>(p
+					.DeserializationState(new ExistConverter(this.DeserializeExistsResponse))
+				)
 			);
-		}
-
-		private ElasticsearchResponse<ExistsResponse> ToExistsResponse(IElasticsearchResponse existsDispatch)
-		{
-			return ElasticsearchResponse.CloneFrom<ExistsResponse>(existsDispatch, new ExistsResponse(existsDispatch));
 		}
 	}
 }

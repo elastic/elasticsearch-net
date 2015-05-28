@@ -19,30 +19,10 @@ using Elasticsearch.Net.Serialization;
 
 namespace Elasticsearch.Net
 {
-	//TODO document and possibly rename some of the properties
-
+	// TODO: Make this class internal in 2.0
 	public static class ElasticsearchResponse
 	{
-		public static Task<ElasticsearchResponse<DynamicDictionary>> WrapAsync(Task<ElasticsearchResponse<Dictionary<string, object>>> responseTask)
-		{
-			return responseTask
-				.ContinueWith(t =>
-				{
-					if (t.IsFaulted && t.Exception != null)
-					{
-						t.Exception.Flatten().InnerException.RethrowKeepingStackTrace();
-						return null; //won't be hit
-					}
-					return ToDynamicResponse(t.Result);
-				});
-		}
-
-		public static ElasticsearchResponse<DynamicDictionary> Wrap(ElasticsearchResponse<Dictionary<string, object>> response)
-		{
-			return ToDynamicResponse(response);
-		}
-
-		public static ElasticsearchResponse<TTo> CloneFrom<TTo>(IElasticsearchResponse from, TTo to)
+		internal static ElasticsearchResponse<TTo> CloneFrom<TTo>(IElasticsearchResponse from, TTo to)
 		{
 			var response = new ElasticsearchResponse<TTo>(from.Settings)
 			{
@@ -63,13 +43,7 @@ namespace Elasticsearch.Net
 				tt.RequestInformation = response;
  			return response;
 		}
-
-		public static ElasticsearchResponse<DynamicDictionary> ToDynamicResponse(ElasticsearchResponse<Dictionary<string, object>> response)
-		{
-			return CloneFrom(response, response.Response != null ? DynamicDictionary.Create(response.Response) : null);
-		}
 	}
-
 
 	public class ElasticsearchResponse<T> : IElasticsearchResponse
 	{

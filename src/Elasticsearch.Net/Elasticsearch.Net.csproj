@@ -130,6 +130,7 @@
     <Compile Include="Purify\Purify.cs" />
     <Compile Include="Purify\UriInfo.cs" />
     <Compile Include="Serialization\ElasticsearchDefaultSerializer.cs" />
+    <Compile Include="Serialization\ElasticsearchNetJsonStrategy.cs" />
     <Compile Include="Serialization\IElasticsearchSerializer.cs" />
     <Compile Include="Serialization\SerializationFormatting.cs" />
     <Compile Include="Serialization\SimpleJson.cs" />

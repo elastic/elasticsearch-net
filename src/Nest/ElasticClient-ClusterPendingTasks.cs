@@ -13,7 +13,7 @@ namespace Nest
 		public IClusterPendingTasksResponse ClusterPendingTasks(Func<ClusterPendingTasksDescriptor, ClusterPendingTasksDescriptor> pendingTasksSelector = null)
 		{
 			pendingTasksSelector = pendingTasksSelector ?? (s => s);
-			return this.Dispatch<ClusterPendingTasksDescriptor, ClusterPendingTasksRequestParameters, ClusterPendingTasksResponse>(
+			return this.Dispatcher.Dispatch<ClusterPendingTasksDescriptor, ClusterPendingTasksRequestParameters, ClusterPendingTasksResponse>(
 				pendingTasksSelector,
 				(p, d) => this.RawDispatch.ClusterPendingTasksDispatch<ClusterPendingTasksResponse>(p)
 			);
@@ -23,7 +23,7 @@ namespace Nest
 		public Task<IClusterPendingTasksResponse> ClusterPendingTasksAsync(Func<ClusterPendingTasksDescriptor, ClusterPendingTasksDescriptor> pendingTasksSelector = null)
 		{
 			pendingTasksSelector = pendingTasksSelector ?? (s => s);
-			return this.DispatchAsync<ClusterPendingTasksDescriptor, ClusterPendingTasksRequestParameters, ClusterPendingTasksResponse, IClusterPendingTasksResponse>(
+			return this.Dispatcher.DispatchAsync<ClusterPendingTasksDescriptor, ClusterPendingTasksRequestParameters, ClusterPendingTasksResponse, IClusterPendingTasksResponse>(
 				pendingTasksSelector,
 				(p, d) => this.RawDispatch.ClusterPendingTasksDispatchAsync<ClusterPendingTasksResponse>(p)
 			);
@@ -32,7 +32,7 @@ namespace Nest
 		/// <inheritdoc />
 		public IClusterPendingTasksResponse ClusterPendingTasks(IClusterPendingTasksRequest pendingTasksRequest)
 		{
-			return this.Dispatch<IClusterPendingTasksRequest, ClusterPendingTasksRequestParameters, ClusterPendingTasksResponse>(
+			return this.Dispatcher.Dispatch<IClusterPendingTasksRequest, ClusterPendingTasksRequestParameters, ClusterPendingTasksResponse>(
 				pendingTasksRequest,
 				(p, d) => this.RawDispatch.ClusterPendingTasksDispatch<ClusterPendingTasksResponse>(p)
 			);
@@ -41,7 +41,7 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<IClusterPendingTasksResponse> ClusterPendingTasksAsync(IClusterPendingTasksRequest pendingTasksRequest)
 		{
-			return this.DispatchAsync<IClusterPendingTasksRequest, ClusterPendingTasksRequestParameters, ClusterPendingTasksResponse, IClusterPendingTasksResponse>(
+			return this.Dispatcher.DispatchAsync<IClusterPendingTasksRequest, ClusterPendingTasksRequestParameters, ClusterPendingTasksResponse, IClusterPendingTasksResponse>(
 				pendingTasksRequest,
 				(p, d) => this.RawDispatch.ClusterPendingTasksDispatchAsync<ClusterPendingTasksResponse>(p)
 			);

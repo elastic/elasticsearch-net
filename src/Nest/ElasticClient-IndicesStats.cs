@@ -12,7 +12,7 @@ namespace Nest
 		public IGlobalStatsResponse IndicesStats(Func<IndicesStatsDescriptor, IndicesStatsDescriptor> selector = null)
 		{
 			selector = selector ?? (s => s);
-			return this.Dispatch<IndicesStatsDescriptor, IndicesStatsRequestParameters, GlobalStatsResponse>(
+			return this.Dispatcher.Dispatch<IndicesStatsDescriptor, IndicesStatsRequestParameters, GlobalStatsResponse>(
 				selector,
 				(p, d) => this.RawDispatch.IndicesStatsDispatch<GlobalStatsResponse>(p)
 			);
@@ -21,7 +21,7 @@ namespace Nest
 		/// <inheritdoc />
 		public IGlobalStatsResponse IndicesStats(IIndicesStatsRequest statsRequest)
 		{
-			return this.Dispatch<IIndicesStatsRequest, IndicesStatsRequestParameters, GlobalStatsResponse>(
+			return this.Dispatcher.Dispatch<IIndicesStatsRequest, IndicesStatsRequestParameters, GlobalStatsResponse>(
 				statsRequest,
 				(p, d) => this.RawDispatch.IndicesStatsDispatch<GlobalStatsResponse>(p)
 			);
@@ -31,7 +31,7 @@ namespace Nest
 		public Task<IGlobalStatsResponse> IndicesStatsAsync(Func<IndicesStatsDescriptor, IndicesStatsDescriptor> selector = null)
 		{
 			selector = selector ?? (s => s);
-			return this.DispatchAsync<IndicesStatsDescriptor, IndicesStatsRequestParameters, GlobalStatsResponse, IGlobalStatsResponse>(
+			return this.Dispatcher.DispatchAsync<IndicesStatsDescriptor, IndicesStatsRequestParameters, GlobalStatsResponse, IGlobalStatsResponse>(
 				selector,
 				(p, d) => this.RawDispatch.IndicesStatsDispatchAsync<GlobalStatsResponse>(p)
 			);
@@ -40,7 +40,7 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<IGlobalStatsResponse> IndicesStatsAsync(IIndicesStatsRequest statsRequest)
 		{
-			return this.DispatchAsync<IIndicesStatsRequest, IndicesStatsRequestParameters, GlobalStatsResponse, IGlobalStatsResponse>(
+			return this.Dispatcher.DispatchAsync<IIndicesStatsRequest, IndicesStatsRequestParameters, GlobalStatsResponse, IGlobalStatsResponse>(
 				statsRequest,
 				(p, d) => this.RawDispatch.IndicesStatsDispatchAsync<GlobalStatsResponse>(p)
 			);

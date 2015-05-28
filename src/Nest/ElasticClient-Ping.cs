@@ -16,7 +16,7 @@ namespace Nest
 		public IPingResponse Ping(Func<PingDescriptor, PingDescriptor> pingSelector = null)
 		{
 			pingSelector = pingSelector ?? (s => s);
-			return this.Dispatch<PingDescriptor, PingRequestParameters, PingResponse>(
+			return this.Dispatcher.Dispatch<PingDescriptor, PingRequestParameters, PingResponse>(
 				pingSelector,
 				(p, d) => 
 				{	
@@ -33,7 +33,7 @@ namespace Nest
 		public Task<IPingResponse> PingAsync(Func<PingDescriptor, PingDescriptor> pingSelector = null)
 		{
 			pingSelector = pingSelector ?? (s => s);
-			return this.DispatchAsync<PingDescriptor, PingRequestParameters, PingResponse, IPingResponse>(
+			return this.Dispatcher.DispatchAsync<PingDescriptor, PingRequestParameters, PingResponse, IPingResponse>(
 				pingSelector,
 				(p, d) =>
 				{
@@ -48,7 +48,7 @@ namespace Nest
 		/// <inheritdoc />
 		public IPingResponse Ping(IPingRequest pingRequest)
 		{
-			return this.Dispatch<IPingRequest, PingRequestParameters, PingResponse>(
+			return this.Dispatcher.Dispatch<IPingRequest, PingRequestParameters, PingResponse>(
 				pingRequest,
 				(p, d) =>
 				{
@@ -63,7 +63,7 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<IPingResponse> PingAsync(IPingRequest pingRequest)
 		{
-			return this.DispatchAsync<IPingRequest, PingRequestParameters, PingResponse, IPingResponse>(
+			return this.Dispatcher.DispatchAsync<IPingRequest, PingRequestParameters, PingResponse, IPingResponse>(
 				pingRequest,
 				(p, d) =>
 				{
