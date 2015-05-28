@@ -18,5 +18,10 @@ namespace Nest
 		where TCatRecord : ICatRecord
 	{
 		public IEnumerable<TCatRecord> Records { get; internal set; }
+
+		public CatResponse(IElasticsearchResponse response)
+		{
+			this.IsValid = response.Success && response.HttpStatusCode == 200;
+		}
 	}
 }

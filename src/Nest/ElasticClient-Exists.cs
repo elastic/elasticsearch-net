@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 
 namespace Nest
 {
-	using ExistConverter = Func<IElasticsearchResponse, Stream, ExistsResponse>;
-
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
@@ -16,9 +12,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<DocumentExistsDescriptor<T>, DocumentExistsRequestParameters, ExistsResponse>(
 				d => existsSelector(d.RequestConfiguration(r=>r.AllowedStatusCodes(404))),
-				(p, d) => this.RawDispatch.ExistsDispatch<ExistsResponse>(p
-					.DeserializationState(new ExistConverter(this.DeserializeExistsResponse))
-				)
+				(p, d) => ToExistsResponse(this.RawDispatch.ExistsDispatch<VoidResponse>(p))
 			);
 		}
 
@@ -27,9 +21,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<IDocumentExistsRequest, DocumentExistsRequestParameters, ExistsResponse>(
 				documentExistsRequest,
-				(p, d) => this.RawDispatch.ExistsDispatch<ExistsResponse>(p
-					.DeserializationState(new ExistConverter(this.DeserializeExistsResponse))
-				)
+				(p, d) => ToExistsResponse(this.RawDispatch.ExistsDispatch<VoidResponse>(p))
 			);
 		}
 
@@ -39,9 +31,7 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<DocumentExistsDescriptor<T>, DocumentExistsRequestParameters, ExistsResponse, IExistsResponse>(
 				d => existsSelector(d.RequestConfiguration(r=>r.AllowedStatusCodes(404))),
-				(p, d) => this.RawDispatch.ExistsDispatchAsync<ExistsResponse>(p
-					.DeserializationState(new ExistConverter(this.DeserializeExistsResponse))
-				)
+				(p, d) => this.RawDispatch.ExistsDispatchAsync<ExistsResponse>(p)
 			);
 		}
 
@@ -50,10 +40,13 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<IDocumentExistsRequest, DocumentExistsRequestParameters, ExistsResponse, IExistsResponse>(
 				documentExistsRequest,
-				(p, d) => this.RawDispatch.ExistsDispatchAsync<ExistsResponse>(p
-					.DeserializationState(new ExistConverter(this.DeserializeExistsResponse))
-				)
+				(p, d) => this.RawDispatch.ExistsDispatchAsync<ExistsResponse>(p)
 			);
+		}
+
+		private ElasticsearchResponse<ExistsResponse> ToExistsResponse(IElasticsearchResponse existsDispatch)
+		{
+			return ElasticsearchResponse.CloneFrom<ExistsResponse>(existsDispatch, new ExistsResponse(existsDispatch));
 		}
 	}
 }

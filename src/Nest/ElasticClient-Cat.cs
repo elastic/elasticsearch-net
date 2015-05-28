@@ -307,8 +307,7 @@ namespace Nest
 			where TCatRecord : ICatRecord
 		{
 			var records = this.Serializer.Deserialize<IEnumerable<TCatRecord>>(stream);
-			var isValid = response.Success && response.HttpStatusCode == 200;
-			return new CatResponse<TCatRecord> { IsValid = isValid, Records = records };
+			return new CatResponse<TCatRecord>(response) { Records = records };
 		}
 
 
