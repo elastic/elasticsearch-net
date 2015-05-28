@@ -9,9 +9,11 @@ namespace Elasticsearch.Net.Serialization
 {
 	public class ElasticsearchDefaultSerializer : IElasticsearchSerializer
 	{
+		private static readonly ElasticsearchNetJsonStrategy Strategy = new ElasticsearchNetJsonStrategy();
+
 		public T Deserialize<T>(byte[] bytes) where T : class
 		{
-			return SimpleJson.DeserializeObject<T>(bytes.Utf8String());
+			return SimpleJson.DeserializeObject<T>(bytes.Utf8String(), ElasticsearchDefaultSerializer.Strategy);
 		}
 		public T Deserialize<T>(Stream stream)
 		{
@@ -24,7 +26,7 @@ namespace Elasticsearch.Net.Serialization
 				byte[] buffer = ms.ToArray();
 				if (buffer.Length <= 1)
 					return default(T);
-				return SimpleJson.DeserializeObject<T>(buffer.Utf8String());
+				return SimpleJson.DeserializeObject<T>(buffer.Utf8String(), ElasticsearchDefaultSerializer.Strategy);
 			}
 		}
 
@@ -68,7 +70,7 @@ namespace Elasticsearch.Net.Serialization
 					json = ms.ToArray().Utf8String();
 				}
 			}
-			var r = SimpleJson.DeserializeObject<T>(json);
+			var r = SimpleJson.DeserializeObject<T>(json, ElasticsearchDefaultSerializer.Strategy);
 			tcs.SetResult(r);
 		}
 
