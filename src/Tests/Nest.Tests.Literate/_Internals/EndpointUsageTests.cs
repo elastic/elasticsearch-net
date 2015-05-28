@@ -42,9 +42,9 @@ namespace Nest.Tests.Literate
 			Func<IElasticClient, TInitializer, Task<TResponse>> requestAsync
 		)
 		{
-			var client = this.GetClient();
 			this._responses = new AsyncLazy<IDictionary<string, TResponse>>(async () =>
 			{
+				var client = this.GetClient();
 				var dict = new Dictionary<string, TResponse>();
 				if (!TestClient.RunIntegrationTests) return dict;
 
@@ -56,8 +56,9 @@ namespace Nest.Tests.Literate
 			});
 		}
 
+		protected int DefaultPort { get; set; } = 9200;
 		protected virtual ConnectionSettings GetConnectionSettings(ConnectionSettings settings) => settings; 
-		protected virtual IElasticClient GetClient() => TestClient.GetClient(GetConnectionSettings); 
+		protected virtual IElasticClient GetClient() => TestClient.GetClient(GetConnectionSettings, DefaultPort); 
 
 		private async Task AssertOnAllResponses(Action<TResponse> assert)
 		{

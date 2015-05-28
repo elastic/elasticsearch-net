@@ -1,5 +1,6 @@
 ﻿using System;
 using FluentAssertions;
+using Nest.Tests.Literate._Internals.Integration;
 
 namespace Nest.Tests.Literate.SearchAPIs.RequestBodySearch
 {
@@ -13,6 +14,8 @@ namespace Nest.Tests.Literate.SearchAPIs.RequestBodySearch
 
 		public class Usage : SearchUsageBase
 		{
+			public Usage(ReadonlyIntegration i) : base(i) {} 
+
 			protected override object ExpectedJson =>
 				new { from = 10, size = 12 };
 

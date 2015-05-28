@@ -23,8 +23,6 @@ namespace Elasticsearch.Net.JsonNet
 		public virtual T Deserialize<T>(Stream stream) 
 		{
 			var settings = this._settings;
-		
-
 			return _Deserialize<T>(stream, settings);
 		}
 		public virtual Task<T> DeserializeAsync<T>(Stream stream)

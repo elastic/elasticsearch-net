@@ -9,9 +9,9 @@ namespace Nest.Tests.Literate
 	{
 		private static bool _runIntegrationTests = true;
 
-		public static IElasticClient GetClient(Func<ConnectionSettings, ConnectionSettings> modifySettings = null)
+		public static IElasticClient GetClient(Func<ConnectionSettings, ConnectionSettings> modifySettings = null, int port = 9200 )
 		{
-			var defaultSettings = new ConnectionSettings((CreateBaseUri()));
+			var defaultSettings = new ConnectionSettings((CreateBaseUri(port)));
 			var settings = modifySettings != null ? modifySettings(defaultSettings) : defaultSettings;
 			return new ElasticClient(settings, CreateConnection(settings));
 		}

@@ -19,7 +19,7 @@ namespace Nest
 		/// <inheritdoc />
 		public IDeleteByQueryResponse DeleteByQuery(IDeleteByQueryRequest deleteByQueryRequest) 
 		{
-			return this.Dispatcher.Dispatch<IDeleteByQueryRequest, DeleteByQueryRequestParameters, DeleteByQuerResponse>(
+			return this.Dispatcher.Dispatch<IDeleteByQueryRequest, DeleteByQueryRequestParameters, DeleteByQueryResponse>(
 				deleteByQueryRequest,
 				(p, d) => this.RawDispatch.DeleteByQueryDispatch<DeleteByQueryResponse>(p, d)
 			);
