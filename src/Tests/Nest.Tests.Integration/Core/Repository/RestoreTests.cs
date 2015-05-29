@@ -132,8 +132,7 @@ namespace Nest.Tests.Integration.Core.Repository
 
 			var indexSettingsResponse = this.Client.GetIndexSettings(descriptor => descriptor.Index(_restoredIndexName));
 			indexSettingsResponse.IsValid.Should().BeTrue();
-			indexSettingsResponse.IndexSettings.Settings[UpdatableSettings.RefreshInterval].Should().Be("123s");
-			indexSettingsResponse.IndexSettings.Settings[UpdatableSettings.BlocksWrite].Should().BeNull();
+			indexSettingsResponse.IndexSettings.Settings["refresh_interval"].Should().Be("123s");
 		}
 
 		[Test]

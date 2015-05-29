@@ -242,7 +242,19 @@ namespace Nest.Resolvers.Converters.Aggregations
 				reader.Read();
 				reader.Read();
 			}
-
+			while (reader.TokenType != JsonToken.EndObject && (reader.Value as string).Contains("_as_string"))
+			{
+				// std_deviation_bounds is an object, so we need to skip its properties
+				if ((reader.Value as string).Equals("std_deviation_bounds_as_string"))
+				{
+					reader.Read();
+					reader.Read();
+					reader.Read();
+					reader.Read();
+				}
+				reader.Read();
+				reader.Read();
+			}
 			return extendedStatsMetric;
 		}
 
