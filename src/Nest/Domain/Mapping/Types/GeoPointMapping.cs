@@ -29,5 +29,8 @@ namespace Nest
 
 		[JsonProperty("fielddata")]
 		public FieldDataNonStringMapping FieldData { get; set; }
+
+		[JsonProperty("doc_values")]
+		public bool? DocValues { get; set; }
 	}
 }
