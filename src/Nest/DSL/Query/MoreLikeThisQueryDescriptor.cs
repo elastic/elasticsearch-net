@@ -145,7 +145,9 @@ namespace Nest
 		{
 			get
 			{
-				return this.Self.LikeText.IsNullOrEmpty();
+				return this.Self.LikeText.IsNullOrEmpty()
+					&& (this.Self.Ids == null || !this.Self.Ids.Any())
+					&& (this.Self.Documents == null || !this.Self.Documents.Any());
 			}
 		}
 
