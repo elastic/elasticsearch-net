@@ -105,36 +105,5 @@ namespace Nest.Tests.Unit.Reproduce
 			this.JsonEquals(result.ConnectionStatus.Request, MethodBase.GetCurrentMethod(), "OISAggs");
 		}
 
-		[Test]
-		public void Using()
-		{
-			var aggregations = new Dictionary<string, IAggregationContainer>
-			{
-				{
-					"my_aggregation", new AggregationContainer
-					{
-						Filter = new FilterAggregator
-						{
-							Filter = new QueryFilter
-							{
-								Query = new QueryStringQuery
-								{
-									Query = "Just an example"
-								}.ToContainer()
-							}.ToContainer()
-						} //Aggregator is missing ToContainer()
-					}
-				}
-			};
-
-			var result = this._client.Search<ElasticsearchProject>(new SearchRequest<ElasticsearchProject>
-			{
-				Aggregations = aggregations
-			});
-
-			this.JsonEquals(result.ConnectionStatus.Request, MethodBase.GetCurrentMethod(), "OISAggs");
-		}
-
-
 	}
 }
