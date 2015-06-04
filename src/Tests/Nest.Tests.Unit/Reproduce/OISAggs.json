@@ -1,0 +1,15 @@
+﻿{
+  "aggs": {
+    "my_aggregation": {
+      "filter": {
+        "fquery": {
+          "query": {
+            "query_string": {
+              "query": "Just an example"
+            }
+          }
+        }
+      }
+    }
+  }
+}
