@@ -6,6 +6,7 @@ namespace Nest
 		internal string _ToIndexName { get; set; }
 		internal string _FromIndexName { get; set; }
 		internal string _Scroll { get; set; }
+		internal int? _Size { get; set; }
 		
 		internal Func<QueryDescriptor<T>, QueryContainer> _QuerySelector { get; set; }
 
@@ -40,6 +41,25 @@ namespace Nest
 		{
 			scrollTime.ThrowIfNullOrEmpty("scrollTime");
 			this._Scroll = scrollTime;
+			return this;
+		}
+
+		/// <summary>
+		/// The number of hits to return. Defaults to 100. When using scroll search type,
+		/// size is actually multiplied by the number of shards!
+		/// </summary>
+		public ReindexDescriptor<T> Size(int size)
+		{
+			this._Size = size;
+			return this;
+		}
+
+		/// <summary>
+		/// The number of hits to return. Defaults to 100.
+		/// </summary>
+		public ReindexDescriptor<T> Take(int take)
+		{
+			this.Size(take);
 			return this;
 		}
 

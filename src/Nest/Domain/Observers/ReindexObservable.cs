@@ -37,6 +37,7 @@ namespace Nest
 			var fromIndex = this._reindexDescriptor._FromIndexName;
 			var toIndex = this._reindexDescriptor._ToIndexName;
 			var scroll = this._reindexDescriptor._Scroll ?? "2m";
+			var size = this._reindexDescriptor._Size ?? 100;
 
 			fromIndex.ThrowIfNullOrEmpty("fromIndex");
 			toIndex.ThrowIfNullOrEmpty("toIndex");
@@ -56,7 +57,7 @@ namespace Nest
 					.Index(fromIndex)
 					.AllTypes()
 					.From(0)
-					.Take(100)
+					.Size(size)
 					.Query(this._reindexDescriptor._QuerySelector ?? (q=>q.MatchAll()))
 					.SearchType(SearchType.Scan)
 					.Scroll(scroll)
