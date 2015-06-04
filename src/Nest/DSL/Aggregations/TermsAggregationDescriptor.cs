@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
@@ -152,12 +153,25 @@ namespace Nest
 			Self.Include = new TermsIncludeExclude() { Pattern = includePattern, Flags = regexFlags };
 			return this;
 		}
+
+		public TermsAggregationDescriptor<T> Include(IEnumerable<string> values)
+		{
+			Self.Include = new TermsIncludeExclude { Values = values };
+			return this;
+		}
 		
 		public TermsAggregationDescriptor<T> Exclude(string excludePattern, string regexFlags = null)
 		{
 			Self.Exclude = new TermsIncludeExclude() { Pattern = excludePattern, Flags = regexFlags };
 			return this;
 		}
+
+		public TermsAggregationDescriptor<T> Exclude(IEnumerable<string> values)
+		{
+			Self.Exclude = new TermsIncludeExclude { Values = values };
+			return this;
+		}
+
 		public TermsAggregationDescriptor<T> CollectMode(TermsAggregationCollectMode collectMode)
 		{
 			Self.CollectMode = collectMode;

@@ -55,5 +55,11 @@ namespace Nest
 			this._Mapping.FieldData = fieldData;
 			return this;
 		}
+
+		public GeoPointMappingDescriptor<T> DocValues(bool docValues = true)
+		{
+			this._Mapping.DocValues = docValues;
+			return this;
+		}
 	}
 }

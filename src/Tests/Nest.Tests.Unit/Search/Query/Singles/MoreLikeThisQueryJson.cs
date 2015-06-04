@@ -88,7 +88,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 					.Document<MoreLikeThisTestDoc>(new MoreLikeThisTestDoc { Name = "foo" }, "myindex", "mytype")
 				);
 			var json = TestElasticClient.Serialize(s);
-
+			
 			const string expected = @"{
 				fields: [ ""name""],
 				docs: [
@@ -135,6 +135,7 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 			}";
 
             Verify<MoreLikeThisQueryDescriptor<object>>(json, expected);
+			Assert.AreEqual(false, ((IQuery)s).IsConditionless);
 		}
 
 		[Test]
