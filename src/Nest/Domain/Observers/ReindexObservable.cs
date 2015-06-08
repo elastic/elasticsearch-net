@@ -52,16 +52,26 @@ namespace Nest
 				throw new ReindexException(createIndexResponse.ConnectionStatus);
 
 			var page = 0;
+			Func<SearchDescriptor<T>, SearchDescriptor<T>> searchDescriptor = s => s.Index(fromIndex);
+
+			if (typeof (T).Name.Equals(typeof (object).Name))
+			{
+				searchDescriptor = s => searchDescriptor(s).AllTypes();
+			}
+			else
+			{
+				searchDescriptor = s => searchDescriptor(s).Type<T>();
+			}
+
+
 			var searchResult = this.CurrentClient.Search<T>(
-				s => s
-					.Index(fromIndex)
-					.AllTypes()
+				s => searchDescriptor(s)
 					.From(0)
 					.Size(size)
 					.Query(this._reindexDescriptor._QuerySelector ?? (q=>q.MatchAll()))
 					.SearchType(SearchType.Scan)
-					.Scroll(scroll)
-				);
+					.Scroll(scroll));
+
 			if (searchResult.Total <= 0)
 				throw new ReindexException(searchResult.ConnectionStatus, "index " + fromIndex + " has no documents!");
 			IBulkResponse indexResult = null;
