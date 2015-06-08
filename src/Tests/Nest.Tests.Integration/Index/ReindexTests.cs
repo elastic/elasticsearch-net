@@ -13,7 +13,7 @@ namespace Nest.Tests.Integration.Index
 		public void ReindexMinimal()
 		{
 			var toIndex = ElasticsearchConfiguration.NewUniqueIndexName();
-			var observable = this.Client.Reindex<object>(r => r
+			var observable = this.Client.Reindex(r => r
 				.FromIndex(ElasticsearchConfiguration.DefaultIndex)
 				.ToIndex(toIndex)
 			);
@@ -42,7 +42,7 @@ namespace Nest.Tests.Integration.Index
 		public void Reindex()
 		{
 			var toIndex = ElasticsearchConfiguration.NewUniqueIndexName();
-			var observable = this.Client.Reindex<object>(r => r
+			var observable = this.Client.Reindex(r => r
 				.FromIndex(ElasticsearchConfiguration.DefaultIndex)
 				.ToIndex(toIndex)
 				.Query(q=>q.MatchAll())
