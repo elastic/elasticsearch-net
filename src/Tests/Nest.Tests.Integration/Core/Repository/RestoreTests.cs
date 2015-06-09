@@ -46,7 +46,7 @@ namespace Nest.Tests.Integration.Core.Repository
 
 			var bulkResponse = this.Client.Bulk(d => descriptor);
 
-			this.Client.CreateRepository(_repositoryName, r => r
+			var result = this.Client.CreateRepository(_repositoryName, r => r
 				.FileSystem(@"local\\path", o => o
 					.Compress()
 					.ConcurrentStreams(10)));
@@ -80,7 +80,7 @@ namespace Nest.Tests.Integration.Core.Repository
 				.RenamePattern(d + "_(.+)")
 				.RenameReplacement(d + "_restored_$1")
 				.Index(_indexName)
-				.IgnoreUnavailable(true));
+			);
 
 			_restoredIndexName = _indexName.Replace(d + "_", d + "_restored_");
 			restoreResponse.IsValid.Should().BeTrue();
@@ -109,7 +109,6 @@ namespace Nest.Tests.Integration.Core.Repository
 			var snapshotResponse = this.Client.Snapshot(_repositoryName, _snapshotName, selector: f => f
 				.Index(_indexName)
 				.WaitForCompletion(true)
-				.IgnoreUnavailable()
 				.Partial());
 			snapshotResponse.IsValid.Should().BeTrue();
 
@@ -119,9 +118,9 @@ namespace Nest.Tests.Integration.Core.Repository
 				.RenamePattern(d + "_(.+)")
 				.RenameReplacement(d + "_restored_$1")
 				.Index(_indexName)
-				.IgnoreUnavailable(true)
 				.IndexSettings(descriptor => descriptor
-					.RefreshInterval("123s"))
+					.RefreshInterval("123s")
+				)
 				.IgnoreIndexSettings(UpdatableSettings.BlocksWrite));
 
 			restoreResponse.IsValid.Should().BeTrue();
@@ -200,7 +199,7 @@ namespace Nest.Tests.Integration.Core.Repository
 				.RenamePattern(d + "_(.+)")
 				.RenameReplacement(d + "_restored_$1")
 				.Index(_indexName)
-				.IgnoreUnavailable(true));
+			);
 
 			bool restoreCompleted = false;
 			var restoreObserver = new RestoreObserver(
