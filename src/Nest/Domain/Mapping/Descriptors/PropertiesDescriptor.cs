@@ -173,6 +173,17 @@ namespace Nest
 			this.Properties.Add(customMapping.Name, customMapping);
 			return this;
 		}
+
+		public PropertiesDescriptor<T> Murmur3Hash(Func<MurmurHashMappingDescriptor<T>, MurmurHashMappingDescriptor<T>> selector)
+		{
+			selector.ThrowIfNull("selector");
+			var d = selector(new MurmurHashMappingDescriptor<T>());
+			if (d == null || d._Mapping.Name.IsConditionless())
+				throw new Exception("Could not get field name for mumur hash mapping");
+			this.Properties.Add(d._Mapping.Name, d._Mapping);
+			return this;
+		}
+
 		//Reminder if you are adding a new mapping type, may one appear in the future
 		//Add them to PropertiesDescriptor, CorePropertiesDescriptor (if its a new core type), SingleMappingDescriptor
 	}

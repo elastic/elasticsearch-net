@@ -199,6 +199,7 @@ namespace Nest.Tests.Unit.Core.Map.Properties
 						.Fields(pprops => pprops
 							.String(ps => ps.Name(p => p.Name).Index(FieldIndexOption.NotAnalyzed))
 							.String(ps => ps.Name(p => p.Name.Suffix("searchable")).Index(FieldIndexOption.Analyzed))
+							.Murmur3Hash(ps => ps.Name(p => p.Name.Suffix("hash")))
 						)
 					)
 				)
@@ -366,6 +367,19 @@ namespace Nest.Tests.Unit.Core.Map.Properties
 								.Default("u33")
 							)
 						)
+					)
+				)
+			);
+			this.JsonEquals(result.ConnectionStatus.Request, MethodInfo.GetCurrentMethod());
+		}
+
+		[Test]
+		public void MurmurHashProperty()
+		{
+			var result = this._client.Map<ElasticsearchProject>(m => m
+				.Properties(props => props
+					.Murmur3Hash(mh => mh
+						.Name("hash")
 					)
 				)
 			);

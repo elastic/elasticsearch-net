@@ -247,6 +247,8 @@ namespace Nest.Resolvers.Writers
 					return "nested";
 				case FieldType.Object:
 					return "object";
+				case FieldType.Murmur3Hash:
+					return "murmur3";
 				default:
 					return null;
 			}

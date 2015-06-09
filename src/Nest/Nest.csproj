@@ -134,6 +134,7 @@
     <Compile Include="Domain\Geo\GeoLocation.cs" />
     <Compile Include="Domain\Geo\GeoPrecision.cs" />
     <Compile Include="Domain\Hit\ExplainGet.cs" />
+    <Compile Include="Domain\Mapping\Descriptors\MurmurHashMappingDescriptor.cs" />
     <Compile Include="Domain\Mapping\PropertyMapping.cs" />
     <Compile Include="Domain\Mapping\Descriptors\FieldDataFilterDescriptor.cs" />
     <Compile Include="Domain\Mapping\Descriptors\FieldDataFrequencyFilterDescriptor.cs" />
@@ -162,6 +163,7 @@
     <Compile Include="Domain\Mapping\SubMappings\FieldData\FieldDataStringMapping.cs" />
     <Compile Include="Domain\Mapping\SubMappings\NormsMapping.cs" />
     <Compile Include="Domain\Mapping\SubMappings\MappingTransform.cs" />
+    <Compile Include="Domain\Mapping\Types\Murmur3HashMapping.cs" />
     <Compile Include="Domain\Observers\RestoreObserver.cs" />
     <Compile Include="Domain\Observers\SnapshotObserver.cs" />
     <Compile Include="Domain\Repository\SnapshotShardFailure.cs" />

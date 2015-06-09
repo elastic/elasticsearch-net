@@ -137,6 +137,15 @@ namespace Nest
             return d._Mapping;
         }
 
+		public IElasticType Murmur3Hash(Func<MurmurHashMappingDescriptor<T>, MurmurHashMappingDescriptor<T>> selector)
+		{
+			selector.ThrowIfNull("selector");
+			var d = selector(new MurmurHashMappingDescriptor<T>());
+			if (d == null)
+				throw new Exception("Could not get murmur hash mapping");
+			return d._Mapping;
+		}
+
 		//Reminder if you are adding a new mapping type, may one appear in the future
 		//Add them to PropertiesDescriptor, CorePropertiesDescriptor (if its a new core type), SingleMappingDescriptor
 	}
