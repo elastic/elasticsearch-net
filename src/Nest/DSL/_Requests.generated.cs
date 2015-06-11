@@ -21,6 +21,22 @@ namespace Nest
 	///</summary>
 	public partial class AbortBenchmarkRequest  : BasePathRequest<AbortBenchmarkRequestParameters>
 			{
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<AbortBenchmarkRequestParameters> pathInfo)
 		{
@@ -32,7 +48,7 @@ namespace Nest
 		
 	///<summary>Request parameters for Bulk
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-bulk.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-bulk.html
 	///</pre>
 	///</summary>
 	public partial class BulkRequest 
@@ -85,12 +101,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("type", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for CatAliases
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-alias.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-alias.html
 	///</pre>
 	///</summary>
 	public partial class CatAliasesRequest 
@@ -135,12 +167,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("v", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for CatAllocation
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-allocation.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-allocation.html
 	///</pre>
 	///</summary>
 	public partial class CatAllocationRequest 
@@ -193,12 +241,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("v", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for CatCount
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-count.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-count.html
 	///</pre>
 	///</summary>
 	public partial class CatCountRequest 
@@ -243,12 +307,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("v", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for CatFielddata
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/cat-fielddata.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-fielddata.html
 	///</pre>
 	///</summary>
 	public partial class CatFielddataRequest 
@@ -309,12 +389,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("fields", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for CatHealth
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-health.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-health.html
 	///</pre>
 	///</summary>
 	public partial class CatHealthRequest 
@@ -367,12 +463,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("v", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for CatHelp
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat.html
 	///</pre>
 	///</summary>
 	public partial class CatHelpRequest  : BasePathRequest<CatHelpRequestParameters>
@@ -383,6 +495,22 @@ namespace Nest
 		{ 
 			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("help"); } 
 			set { this.Request.RequestParameters.AddQueryString("help", value); }
+		}
+		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
 		}
 		
 
@@ -396,7 +524,7 @@ namespace Nest
 		
 	///<summary>Request parameters for CatIndices
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-indices.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-indices.html
 	///</pre>
 	///</summary>
 	public partial class CatIndicesRequest 
@@ -457,12 +585,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("v", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for CatMaster
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-master.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-master.html
 	///</pre>
 	///</summary>
 	public partial class CatMasterRequest 
@@ -507,12 +651,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("v", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for CatNodes
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-nodes.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-nodes.html
 	///</pre>
 	///</summary>
 	public partial class CatNodesRequest 
@@ -557,12 +717,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("v", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for CatPendingTasks
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-pending-tasks.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-pending-tasks.html
 	///</pre>
 	///</summary>
 	public partial class CatPendingTasksRequest 
@@ -607,12 +783,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("v", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for CatPlugins
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/cat-plugins.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-plugins.html
 	///</pre>
 	///</summary>
 	public partial class CatPluginsRequest 
@@ -657,12 +849,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("v", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for CatRecovery
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-recovery.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-recovery.html
 	///</pre>
 	///</summary>
 	public partial class CatRecoveryRequest 
@@ -707,12 +915,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("v", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for CatSegments
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/cat-segments.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-segments.html
 	///</pre>
 	///</summary>
 	public partial class CatSegmentsRequest 
@@ -741,12 +965,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("v", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for CatShards
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-shards.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-shards.html
 	///</pre>
 	///</summary>
 	public partial class CatShardsRequest 
@@ -791,12 +1031,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("v", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for CatThreadPool
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/cat-thread-pool.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-thread-pool.html
 	///</pre>
 	///</summary>
 	public partial class CatThreadPoolRequest 
@@ -849,22 +1105,54 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("full_id", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for ClearScroll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-request-scroll.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-request-scroll.html
 	///</pre>
 	///</summary>
 	public partial class ClearScrollRequest 
 			{
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for ClusterGetSettings
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-update-settings.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-update-settings.html
 	///</pre>
 	///</summary>
 	public partial class ClusterGetSettingsRequest 
@@ -893,12 +1181,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("timeout", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for ClusterHealth
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-health.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-health.html
 	///</pre>
 	///</summary>
 	public partial class ClusterHealthRequest 
@@ -967,12 +1271,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("wait_for_status", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for ClusterPendingTasks
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-pending.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-pending.html
 	///</pre>
 	///</summary>
 	public partial class ClusterPendingTasksRequest 
@@ -993,12 +1313,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("master_timeout", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for ClusterPutSettings
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-update-settings.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-update-settings.html
 	///</pre>
 	///</summary>
 	public partial class ClusterSettingsRequest 
@@ -1027,12 +1363,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("timeout", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for ClusterReroute
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-reroute.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-reroute.html
 	///</pre>
 	///</summary>
 	public partial class ClusterRerouteRequest 
@@ -1077,12 +1429,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("timeout", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for ClusterState
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-state.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-state.html
 	///</pre>
 	///</summary>
 	public partial class ClusterStateRequest 
@@ -1135,12 +1503,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for ClusterStats
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-stats.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-stats.html
 	///</pre>
 	///</summary>
 	public partial class ClusterStatsRequest 
@@ -1161,12 +1545,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("human", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for Count
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-count.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-count.html
 	///</pre>
 	///</summary>
 	public partial class CountRequest<T> 
@@ -1220,23 +1620,61 @@ namespace Nest
 		}
 		
 		
-		///<summary>The URL-encoded query definition (instead of using the request body)</summary>
-		public string Source 
+		///<summary>Query in the Lucene query string syntax</summary>
+		public string Q 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("q"); } 
+			set { this.Request.RequestParameters.AddQueryString("q", value); }
 		}
 		
-	}
-	
 		
-	///<summary>Request parameters for CountPercolateGet
-	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-percolate.html
-	///</pre>
-	///</summary>
-	public partial class PercolateCountRequest<TDocument> 
-			{
+		///<summary>The analyzer to use for the query string</summary>
+		public string Analyzer 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("analyzer"); } 
+			set { this.Request.RequestParameters.AddQueryString("analyzer", value); }
+		}
+		
+		
+		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
+		public bool AnalyzeWildcard 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("analyze_wildcard"); } 
+			set { this.Request.RequestParameters.AddQueryString("analyze_wildcard", value); }
+		}
+		
+		
+		///<summary>The default operator for query string query (AND or OR)</summary>
+		public DefaultOperator DefaultOperator 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<DefaultOperator>("default_operator"); } 
+			set { this.Request.RequestParameters.AddQueryString("default_operator", value); }
+		}
+		
+		
+		///<summary>The field to use as default where no field prefix is given in the query string</summary>
+		public string Df 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("df"); } 
+			set { this.Request.RequestParameters.AddQueryString("df", value); }
+		}
+		
+		
+		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
+		public bool Lenient 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("lenient"); } 
+			set { this.Request.RequestParameters.AddQueryString("lenient", value); }
+		}
+		
+		
+		///<summary>Specify whether query terms should be lowercased</summary>
+		public bool LowercaseExpandedTerms 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("lowercase_expanded_terms"); } 
+			set { this.Request.RequestParameters.AddQueryString("lowercase_expanded_terms", value); }
+		}
+		
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source 
@@ -1245,6 +1683,24 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("source", value); }
 		}
 		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
+	}
+	
+		
+	///<summary>Request parameters for CountPercolateGet
+	///<pre>
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html
+	///</pre>
+	///</summary>
+	public partial class PercolateCountRequest<TDocument> 
+			{
 		
 		///<summary>A comma-separated list of specific routing values</summary>
 		public  string[] Routing 
@@ -1317,12 +1773,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("version_type", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for Delete
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-delete.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-delete.html
 	///</pre>
 	///</summary>
 	public partial class DeleteRequest<T> 
@@ -1391,12 +1863,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("version_type", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for DeleteByQuery
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-delete-by-query.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-delete-by-query.html
 	///</pre>
 	///</summary>
 	public partial class DeleteByQueryRequest<T> 
@@ -1482,14 +1970,6 @@ namespace Nest
 		}
 		
 		
-		///<summary>The URL-encoded query definition (instead of using the request body)</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
-		
 		///<summary>Explicit operation timeout</summary>
 		public string Timeout 
 		{ 
@@ -1497,12 +1977,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("timeout", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for DeleteScript
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html
 	///</pre>
 	///</summary>
 	public partial class DeleteScriptRequest 
@@ -1523,12 +2019,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("version_type", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for DeleteTemplate
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/master/search-template.html
 	///</pre>
 	///</summary>
 	public partial class DeleteTemplateRequest 
@@ -1549,12 +2061,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("version_type", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for Exists
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-get.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-get.html
 	///</pre>
 	///</summary>
 	public partial class DocumentExistsRequest<T> 
@@ -1599,12 +2127,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("routing", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for ExplainGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-explain.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-explain.html
 	///</pre>
 	///</summary>
 	public partial class ExplainRequest<T> 
@@ -1698,14 +2242,6 @@ namespace Nest
 		}
 		
 		
-		///<summary>The URL-encoded query definition (instead of using the request body)</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
-		
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
 		[Obsolete("Scheduled to be removed in 2.0, use EnableSource instead")]
 		public  string[] SourceEnabled 
@@ -1738,12 +2274,100 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("_source_include", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
+	}
+	
+		
+	///<summary>Request parameters for FieldStatsGet
+	///<pre>
+	///http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-stats.html
+	///</pre>
+	///</summary>
+	public partial class FieldStatsRequest  : BasePathRequest<FieldStatsRequestParameters>
+			{
+		
+		///<summary>A comma-separated list of fields for to get field statistics for (min value, max value, and more)</summary>
+		public IList<PropertyPathMarker> Fields 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("fields"); } 
+			set { this.Request.RequestParameters.AddQueryString("fields", value); }
+		}
+		
+		
+		///<summary>Defines if field stats should be returned on a per index level or on a cluster wide level</summary>
+		public Level Level 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<Level>("level"); } 
+			set { this.Request.RequestParameters.AddQueryString("level", value); }
+		}
+		
+		
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public bool IgnoreUnavailable 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("ignore_unavailable"); } 
+			set { this.Request.RequestParameters.AddQueryString("ignore_unavailable", value); }
+		}
+		
+		
+		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		public bool AllowNoIndices 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("allow_no_indices"); } 
+			set { this.Request.RequestParameters.AddQueryString("allow_no_indices", value); }
+		}
+		
+		
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public ExpandWildcards ExpandWildcards 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
+			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
+		}
+		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
+
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<FieldStatsRequestParameters> pathInfo)
+		{
+			throw new NotImplementedException();
+		}
+
 	}
 	
 		
 	///<summary>Request parameters for Get
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-get.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-get.html
 	///</pre>
 	///</summary>
 	public partial class GetRequest<T> 
@@ -1845,12 +2469,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("version_type", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for GetScript
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html
 	///</pre>
 	///</summary>
 	public partial class GetScriptRequest 
@@ -1871,12 +2511,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("version_type", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for GetSource
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-get.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-get.html
 	///</pre>
 	///</summary>
 	public partial class SourceRequest<T> 
@@ -1970,12 +2626,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("version_type", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for GetTemplate
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/master/search-template.html
 	///</pre>
 	///</summary>
 	public partial class GetTemplateRequest 
@@ -1996,12 +2668,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("version_type", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for Index
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-index_.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-index_.html
 	///</pre>
 	///</summary>
 	public partial class IndexRequest<TDocument> 
@@ -2094,16 +2782,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("version_type", value); }
 		}
 		
-	}
-	
-		
-	///<summary>Request parameters for IndicesAnalyzeGetForAll
-	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-analyze.html
-	///</pre>
-	///</summary>
-	public partial class AnalyzeRequest 
-			{
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source 
@@ -2112,6 +2790,24 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("source", value); }
 		}
 		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
+	}
+	
+		
+	///<summary>Request parameters for IndicesAnalyzeGetForAll
+	///<pre>
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-analyze.html
+	///</pre>
+	///</summary>
+	public partial class AnalyzeRequest 
+			{
 		
 		///<summary>The name of the analyzer to use</summary>
 		public string Analyzer 
@@ -2184,12 +2880,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("format", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for IndicesClearCacheForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-clearcache.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-clearcache.html
 	///</pre>
 	///</summary>
 	public partial class ClearCacheRequest 
@@ -2298,12 +3010,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("query_cache", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for IndicesClose
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-open-close.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-open-close.html
 	///</pre>
 	///</summary>
 	public partial class CloseIndexRequest 
@@ -2348,12 +3076,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for IndicesCreate
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-create-index.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-create-index.html
 	///</pre>
 	///</summary>
 	public partial class CreateIndexRequest 
@@ -2374,12 +3118,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("master_timeout", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for IndicesDelete
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-delete-index.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-delete-index.html
 	///</pre>
 	///</summary>
 	public partial class DeleteIndexRequest 
@@ -2400,12 +3160,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("master_timeout", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for IndicesDeleteAlias
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html
 	///</pre>
 	///</summary>
 	public partial class DeleteAliasRequest 
@@ -2426,12 +3202,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("master_timeout", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for IndicesDeleteMapping
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-delete-mapping.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-delete-mapping.html
 	///</pre>
 	///</summary>
 	public partial class DeleteMappingRequest<T> 
@@ -2444,12 +3236,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("master_timeout", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for IndicesDeleteWarmer
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-warmers.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-warmers.html
 	///</pre>
 	///</summary>
 	public partial class DeleteWarmerRequest 
@@ -2462,12 +3270,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("master_timeout", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for IndicesExists
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-exists.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-exists.html
 	///</pre>
 	///</summary>
 	public partial class IndexExistsRequest 
@@ -2504,12 +3328,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("local", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for IndicesExistsAliasForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html
 	///</pre>
 	///</summary>
 	public partial class AliasExistsRequest 
@@ -2546,12 +3386,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("local", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for IndicesExistsTemplateForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-templates.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-templates.html
 	///</pre>
 	///</summary>
 	public partial class TemplateExistsRequest 
@@ -2572,12 +3428,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("local", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for IndicesExistsType
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-types-exists.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-types-exists.html
 	///</pre>
 	///</summary>
 	public partial class TypeExistsRequest 
@@ -2614,12 +3486,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("local", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for IndicesFlushForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-flush.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-flush.html
 	///</pre>
 	///</summary>
 	public partial class FlushRequest 
@@ -2664,12 +3552,60 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
+	}
+	
+		
+	///<summary>Request parameters for IndicesFlushSyncedForAll
+	///<pre>
+	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-flush.html
+	///</pre>
+	///</summary>
+	public partial class IndicesFlushSyncedRequest  : BasePathRequest<IndicesFlushSyncedRequestParameters>
+			{
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
+
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<IndicesFlushSyncedRequestParameters> pathInfo)
+		{
+			throw new NotImplementedException();
+		}
+
 	}
 	
 		
 	///<summary>Request parameters for IndicesGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-get-index.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-index.html
 	///</pre>
 	///</summary>
 	public partial class GetIndexRequest 
@@ -2706,12 +3642,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for IndicesGetAliasForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html
 	///</pre>
 	///</summary>
 	public partial class GetAliasRequest 
@@ -2748,12 +3700,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("local", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for IndicesGetAliasesForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html
 	///</pre>
 	///</summary>
 	public partial class GetAliasesRequest 
@@ -2774,12 +3742,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("local", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for IndicesGetFieldMappingForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-get-field-mapping.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-field-mapping.html
 	///</pre>
 	///</summary>
 	public partial class GetFieldMappingRequest<T> 
@@ -2824,12 +3808,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("local", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for IndicesGetMappingForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-get-mapping.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-mapping.html
 	///</pre>
 	///</summary>
 	public partial class GetMappingRequest<T> 
@@ -2866,12 +3866,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("local", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for IndicesGetSettingsForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-get-settings.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-settings.html
 	///</pre>
 	///</summary>
 	public partial class GetIndexSettingsRequest 
@@ -2916,12 +3932,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("local", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for IndicesGetUpgradeForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/indices-upgrade.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html
 	///</pre>
 	///</summary>
 	public partial class UpgradeStatusRequest 
@@ -2958,12 +3990,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("human", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for IndicesGetWarmerForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-warmers.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-warmers.html
 	///</pre>
 	///</summary>
 	public partial class GetWarmerRequest 
@@ -3000,12 +4048,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("local", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for IndicesOpen
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-open-close.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-open-close.html
 	///</pre>
 	///</summary>
 	public partial class OpenIndexRequest 
@@ -3050,12 +4114,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for IndicesOptimizeForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-optimize.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-optimize.html
 	///</pre>
 	///</summary>
 	public partial class OptimizeRequest 
@@ -3132,12 +4212,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("force", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for IndicesPutAlias
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html
 	///</pre>
 	///</summary>
 	public partial class PutAliasRequest 
@@ -3158,12 +4254,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("master_timeout", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for IndicesPutMapping
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-put-mapping.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-put-mapping.html
 	///</pre>
 	///</summary>
 	public partial class PutMappingRequest<T> 
@@ -3216,12 +4328,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for IndicesPutSettingsForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-update-settings.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-update-settings.html
 	///</pre>
 	///</summary>
 	public partial class UpdateSettingsRequest 
@@ -3266,12 +4394,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("flat_settings", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for IndicesPutTemplateForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-templates.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-templates.html
 	///</pre>
 	///</summary>
 	public partial class PutTemplateRequest 
@@ -3308,12 +4452,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("flat_settings", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for IndicesPutWarmerForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-warmers.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-warmers.html
 	///</pre>
 	///</summary>
 	public partial class PutWarmerRequest 
@@ -3350,12 +4510,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for IndicesRecoveryForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/indices-recovery.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-recovery.html
 	///</pre>
 	///</summary>
 	public partial class RecoveryStatusRequest 
@@ -3384,12 +4560,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("human", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for IndicesRefreshForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-refresh.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-refresh.html
 	///</pre>
 	///</summary>
 	public partial class RefreshRequest 
@@ -3434,12 +4626,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("operation_threading", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for IndicesSegmentsForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-segments.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-segments.html
 	///</pre>
 	///</summary>
 	public partial class SegmentsRequest 
@@ -3484,12 +4692,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("operation_threading", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for IndicesStatsForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-stats.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-stats.html
 	///</pre>
 	///</summary>
 	public partial class IndicesStatsRequest 
@@ -3542,12 +4766,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("level", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for IndicesStatusForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-status.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-status.html
 	///</pre>
 	///</summary>
 	public partial class IndicesStatusRequest 
@@ -3608,12 +4848,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("snapshot", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for IndicesUpdateAliasesForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html
 	///</pre>
 	///</summary>
 	public partial class AliasRequest 
@@ -3634,12 +4890,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("master_timeout", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for IndicesUpgradeForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/indices-upgrade.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html
 	///</pre>
 	///</summary>
 	public partial class UpgradeRequest 
@@ -3676,12 +4948,36 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("wait_for_completion", value); }
 		}
 		
+		
+		///<summary>If true, only ancient (an older Lucene major release) segments will be upgraded</summary>
+		public bool OnlyAncientSegments 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("only_ancient_segments"); } 
+			set { this.Request.RequestParameters.AddQueryString("only_ancient_segments", value); }
+		}
+		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for IndicesValidateQueryGetForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-validate.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-validate.html
 	///</pre>
 	///</summary>
 	public partial class ValidateQueryRequest<T> 
@@ -3727,14 +5023,6 @@ namespace Nest
 		}
 		
 		
-		///<summary>The URL-encoded query definition (instead of using the request body)</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
-		
 		///<summary>Query in the Lucene query string syntax</summary>
 		public string Q 
 		{ 
@@ -3742,16 +5030,96 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("q", value); }
 		}
 		
+		
+		///<summary>The analyzer to use for the query string</summary>
+		public string Analyzer 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("analyzer"); } 
+			set { this.Request.RequestParameters.AddQueryString("analyzer", value); }
+		}
+		
+		
+		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
+		public bool AnalyzeWildcard 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("analyze_wildcard"); } 
+			set { this.Request.RequestParameters.AddQueryString("analyze_wildcard", value); }
+		}
+		
+		
+		///<summary>The default operator for query string query (AND or OR)</summary>
+		public DefaultOperator DefaultOperator 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<DefaultOperator>("default_operator"); } 
+			set { this.Request.RequestParameters.AddQueryString("default_operator", value); }
+		}
+		
+		
+		///<summary>The field to use as default where no field prefix is given in the query string</summary>
+		public string Df 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("df"); } 
+			set { this.Request.RequestParameters.AddQueryString("df", value); }
+		}
+		
+		
+		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
+		public bool Lenient 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("lenient"); } 
+			set { this.Request.RequestParameters.AddQueryString("lenient", value); }
+		}
+		
+		
+		///<summary>Specify whether query terms should be lowercased</summary>
+		public bool LowercaseExpandedTerms 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("lowercase_expanded_terms"); } 
+			set { this.Request.RequestParameters.AddQueryString("lowercase_expanded_terms", value); }
+		}
+		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for Info
 	///<pre>
-	///http://www.elasticsearch.org/guide/
+	///http://www.elastic.co/guide/
 	///</pre>
 	///</summary>
 	public partial class InfoRequest 
 			{
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
@@ -3762,6 +5130,22 @@ namespace Nest
 	///</summary>
 	public partial class ListBenchmarksRequest  : BasePathRequest<ListBenchmarksRequestParameters>
 			{
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ListBenchmarksRequestParameters> pathInfo)
 		{
@@ -3773,19 +5157,11 @@ namespace Nest
 		
 	///<summary>Request parameters for MgetGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-multi-get.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-multi-get.html
 	///</pre>
 	///</summary>
 	public partial class MultiGetRequest 
 			{
-		
-		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
 		
 		///<summary>A comma-separated list of fields to return in the response</summary>
 		public IList<PropertyPathMarker> Fields 
@@ -3851,16 +5227,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("_source_include", value); }
 		}
 		
-	}
-	
-		
-	///<summary>Request parameters for MltGet
-	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-more-like-this.html
-	///</pre>
-	///</summary>
-	public partial class MoreLikeThisRequest<T> 
-			{
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source 
@@ -3869,6 +5235,24 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("source", value); }
 		}
 		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
+	}
+	
+		
+	///<summary>Request parameters for MltGet
+	///<pre>
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-more-like-this.html
+	///</pre>
+	///</summary>
+	public partial class MoreLikeThisRequest<T> 
+			{
 		
 		///<summary>The boost factor</summary>
 		public double BoostTerms 
@@ -4013,16 +5397,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("stop_words", value); }
 		}
 		
-	}
-	
-		
-	///<summary>Request parameters for MpercolateGet
-	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-percolate.html
-	///</pre>
-	///</summary>
-	public partial class MultiPercolateRequest 
-			{
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source 
@@ -4031,6 +5405,24 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("source", value); }
 		}
 		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
+	}
+	
+		
+	///<summary>Request parameters for MpercolateGet
+	///<pre>
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html
+	///</pre>
+	///</summary>
+	public partial class MultiPercolateRequest 
+			{
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool IgnoreUnavailable 
@@ -4055,16 +5447,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
 		}
 		
-	}
-	
-		
-	///<summary>Request parameters for MsearchGet
-	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-multi-search.html
-	///</pre>
-	///</summary>
-	public partial class MultiSearchRequest 
-			{
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source 
@@ -4073,6 +5455,24 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("source", value); }
 		}
 		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
+	}
+	
+		
+	///<summary>Request parameters for MsearchGet
+	///<pre>
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-multi-search.html
+	///</pre>
+	///</summary>
+	public partial class MultiSearchRequest 
+			{
 		
 		///<summary>Search operation type</summary>
 		public SearchType SearchType 
@@ -4081,16 +5481,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("search_type", value); }
 		}
 		
-	}
-	
-		
-	///<summary>Request parameters for MtermvectorsGet
-	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-multi-termvectors.html
-	///</pre>
-	///</summary>
-	public partial class MultiTermVectorsRequest 
-			{
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source 
@@ -4099,6 +5489,24 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("source", value); }
 		}
 		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
+	}
+	
+		
+	///<summary>Request parameters for MtermvectorsGet
+	///<pre>
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-multi-termvectors.html
+	///</pre>
+	///</summary>
+	public partial class MultiTermVectorsRequest 
+			{
 		
 		///<summary>Specifies if total term frequency and document frequency should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
 		public bool TermStatistics 
@@ -4179,12 +5587,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("realtime", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for NodesHotThreadsForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-nodes-hot-threads.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-hot-threads.html
 	///</pre>
 	///</summary>
 	public partial class NodesHotThreadsRequest 
@@ -4229,12 +5653,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("type", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for NodesInfoForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-nodes-info.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-info.html
 	///</pre>
 	///</summary>
 	public partial class NodesInfoRequest 
@@ -4255,12 +5695,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("human", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for NodesShutdownForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-nodes-shutdown.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-shutdown.html
 	///</pre>
 	///</summary>
 	public partial class NodesShutdownRequest 
@@ -4281,12 +5737,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("exit", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for NodesStatsForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-nodes-stats.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-stats.html
 	///</pre>
 	///</summary>
 	public partial class NodesStatsRequest 
@@ -4347,16 +5819,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("types", value); }
 		}
 		
-	}
-	
-		
-	///<summary>Request parameters for PercolateGet
-	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-percolate.html
-	///</pre>
-	///</summary>
-	public partial class PercolateRequest<TDocument> 
-			{
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source 
@@ -4365,6 +5827,24 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("source", value); }
 		}
 		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
+	}
+	
+		
+	///<summary>Request parameters for PercolateGet
+	///<pre>
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html
+	///</pre>
+	///</summary>
+	public partial class PercolateRequest<TDocument> 
+			{
 		
 		///<summary>A comma-separated list of specific routing values</summary>
 		public  string[] Routing 
@@ -4461,22 +5941,54 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("version_type", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for Ping
 	///<pre>
-	///http://www.elasticsearch.org/guide/
+	///http://www.elastic.co/guide/
 	///</pre>
 	///</summary>
 	public partial class PingRequest 
 			{
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for PutScript
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html
 	///</pre>
 	///</summary>
 	public partial class PutScriptRequest 
@@ -4505,12 +6017,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("version_type", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for ScrollGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-request-scroll.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-request-scroll.html
 	///</pre>
 	///</summary>
 	public partial class ScrollRequest 
@@ -4523,12 +6051,20 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("source", value); }
 		}
 		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for SearchGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-search.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-search.html
 	///</pre>
 	///</summary>
 	public partial class SearchRequest<T> 
@@ -4685,12 +6221,20 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("query_cache", value); }
 		}
 		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for SearchExists
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-exists.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/master/search-exists.html
 	///</pre>
 	///</summary>
 	public partial class SearchExistsRequest<T> 
@@ -4744,11 +6288,75 @@ namespace Nest
 		}
 		
 		
-		///<summary>The URL-encoded query definition (instead of using the request body)</summary>
+		///<summary>Query in the Lucene query string syntax</summary>
+		public string Q 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("q"); } 
+			set { this.Request.RequestParameters.AddQueryString("q", value); }
+		}
+		
+		
+		///<summary>The analyzer to use for the query string</summary>
+		public string Analyzer 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("analyzer"); } 
+			set { this.Request.RequestParameters.AddQueryString("analyzer", value); }
+		}
+		
+		
+		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
+		public bool AnalyzeWildcard 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("analyze_wildcard"); } 
+			set { this.Request.RequestParameters.AddQueryString("analyze_wildcard", value); }
+		}
+		
+		
+		///<summary>The default operator for query string query (AND or OR)</summary>
+		public DefaultOperator DefaultOperator 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<DefaultOperator>("default_operator"); } 
+			set { this.Request.RequestParameters.AddQueryString("default_operator", value); }
+		}
+		
+		
+		///<summary>The field to use as default where no field prefix is given in the query string</summary>
+		public string Df 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("df"); } 
+			set { this.Request.RequestParameters.AddQueryString("df", value); }
+		}
+		
+		
+		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
+		public bool Lenient 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("lenient"); } 
+			set { this.Request.RequestParameters.AddQueryString("lenient", value); }
+		}
+		
+		
+		///<summary>Specify whether query terms should be lowercased</summary>
+		public bool LowercaseExpandedTerms 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("lowercase_expanded_terms"); } 
+			set { this.Request.RequestParameters.AddQueryString("lowercase_expanded_terms", value); }
+		}
+		
+		
+		///<summary>The URL-encoded request definition</summary>
 		public string Source 
 		{ 
 			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
 			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
 		}
 		
 	}
@@ -4756,7 +6364,7 @@ namespace Nest
 		
 	///<summary>Request parameters for SearchShardsGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-shards.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html
 	///</pre>
 	///</summary>
 	public partial class SearchShardsRequest<T> 
@@ -4809,16 +6417,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
 		}
 		
-	}
-	
-		
-	///<summary>Request parameters for SearchTemplateGet
-	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-template.html
-	///</pre>
-	///</summary>
-	public partial class SearchTemplateRequest<T> 
-			{
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source 
@@ -4827,6 +6425,24 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("source", value); }
 		}
 		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
+	}
+	
+		
+	///<summary>Request parameters for SearchTemplateGet
+	///<pre>
+	///http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html
+	///</pre>
+	///</summary>
+	public partial class SearchTemplateRequest<T> 
+			{
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool IgnoreUnavailable 
@@ -4883,12 +6499,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("search_type", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for SnapshotCreate
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html
 	///</pre>
 	///</summary>
 	public partial class SnapshotRequest 
@@ -4909,12 +6541,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("wait_for_completion", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for SnapshotCreateRepository
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html
 	///</pre>
 	///</summary>
 	public partial class CreateRepositoryRequest 
@@ -4943,12 +6591,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("verify", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for SnapshotDelete
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html
 	///</pre>
 	///</summary>
 	public partial class DeleteSnapshotRequest 
@@ -4961,12 +6625,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("master_timeout", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for SnapshotDeleteRepository
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html
 	///</pre>
 	///</summary>
 	public partial class DeleteRepositoryRequest 
@@ -4987,12 +6667,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("timeout", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for SnapshotGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html
 	///</pre>
 	///</summary>
 	public partial class GetSnapshotRequest 
@@ -5005,12 +6701,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("master_timeout", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for SnapshotGetRepository
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html
 	///</pre>
 	///</summary>
 	public partial class GetRepositoryRequest 
@@ -5031,12 +6743,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("local", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for SnapshotRestore
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html
 	///</pre>
 	///</summary>
 	public partial class RestoreRequest 
@@ -5057,12 +6785,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("wait_for_completion", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for SnapshotStatus
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-snapshots.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html
 	///</pre>
 	///</summary>
 	public partial class SnapshotStatusRequest 
@@ -5075,12 +6819,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("master_timeout", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for SnapshotVerifyRepository
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-snapshots.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html
 	///</pre>
 	///</summary>
 	public partial class VerifyRepositoryRequest 
@@ -5101,12 +6861,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("timeout", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for Suggest
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-suggesters.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-suggesters.html
 	///</pre>
 	///</summary>
 	public partial class SuggestRequest 
@@ -5152,24 +6928,6 @@ namespace Nest
 		}
 		
 		
-		///<summary>The URL-encoded request definition (instead of using request body)</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
-	}
-	
-		
-	///<summary>Request parameters for TermvectorGet
-	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-termvectors.html
-	///</pre>
-	///</summary>
-	public partial class TermvectorRequest<T> 
-			{
-		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source 
 		{ 
@@ -5177,6 +6935,24 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("source", value); }
 		}
 		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
+	}
+	
+		
+	///<summary>Request parameters for TermvectorGet
+	///<pre>
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-termvectors.html
+	///</pre>
+	///</summary>
+	public partial class TermvectorRequest<T> 
+			{
 		
 		///<summary>Specifies if total term frequency and document frequency should be returned.</summary>
 		public bool TermStatistics 
@@ -5257,12 +7033,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("realtime", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for Update
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-update.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-update.html
 	///</pre>
 	///</summary>
 	public partial class UpdateRequest<TDocument,TPartialDocument> 
@@ -5284,7 +7076,7 @@ namespace Nest
 		}
 		
 		
-		///<summary>ID of the parent document</summary>
+		///<summary>ID of the parent document. Is is only used for routing and when for the upsert request</summary>
 		public string Parent 
 		{ 
 			get { return this.Request.RequestParameters.GetQueryStringValue<string>("parent"); } 
@@ -5387,12 +7179,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("version_type", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for Count
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-count.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-count.html
 	///</pre>
 	///</summary>
 	public partial class CountRequest 
@@ -5446,11 +7254,75 @@ namespace Nest
 		}
 		
 		
-		///<summary>The URL-encoded query definition (instead of using the request body)</summary>
+		///<summary>Query in the Lucene query string syntax</summary>
+		public string Q 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("q"); } 
+			set { this.Request.RequestParameters.AddQueryString("q", value); }
+		}
+		
+		
+		///<summary>The analyzer to use for the query string</summary>
+		public string Analyzer 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("analyzer"); } 
+			set { this.Request.RequestParameters.AddQueryString("analyzer", value); }
+		}
+		
+		
+		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
+		public bool AnalyzeWildcard 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("analyze_wildcard"); } 
+			set { this.Request.RequestParameters.AddQueryString("analyze_wildcard", value); }
+		}
+		
+		
+		///<summary>The default operator for query string query (AND or OR)</summary>
+		public DefaultOperator DefaultOperator 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<DefaultOperator>("default_operator"); } 
+			set { this.Request.RequestParameters.AddQueryString("default_operator", value); }
+		}
+		
+		
+		///<summary>The field to use as default where no field prefix is given in the query string</summary>
+		public string Df 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("df"); } 
+			set { this.Request.RequestParameters.AddQueryString("df", value); }
+		}
+		
+		
+		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
+		public bool Lenient 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("lenient"); } 
+			set { this.Request.RequestParameters.AddQueryString("lenient", value); }
+		}
+		
+		
+		///<summary>Specify whether query terms should be lowercased</summary>
+		public bool LowercaseExpandedTerms 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("lowercase_expanded_terms"); } 
+			set { this.Request.RequestParameters.AddQueryString("lowercase_expanded_terms", value); }
+		}
+		
+		
+		///<summary>The URL-encoded request definition</summary>
 		public string Source 
 		{ 
 			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
 			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
 		}
 		
 	}
@@ -5458,7 +7330,7 @@ namespace Nest
 		
 	///<summary>Request parameters for Delete
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-delete.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-delete.html
 	///</pre>
 	///</summary>
 	public partial class DeleteRequest 
@@ -5527,12 +7399,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("version_type", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for DeleteByQuery
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-delete-by-query.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-delete-by-query.html
 	///</pre>
 	///</summary>
 	public partial class DeleteByQueryRequest 
@@ -5618,14 +7506,6 @@ namespace Nest
 		}
 		
 		
-		///<summary>The URL-encoded query definition (instead of using the request body)</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
-		
 		///<summary>Explicit operation timeout</summary>
 		public string Timeout 
 		{ 
@@ -5633,12 +7513,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("timeout", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for Exists
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-get.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-get.html
 	///</pre>
 	///</summary>
 	public partial class DocumentExistsRequest 
@@ -5683,12 +7579,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("routing", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for ExplainGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-explain.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-explain.html
 	///</pre>
 	///</summary>
 	public partial class ExplainRequest 
@@ -5782,14 +7694,6 @@ namespace Nest
 		}
 		
 		
-		///<summary>The URL-encoded query definition (instead of using the request body)</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
-		
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
 		[Obsolete("Scheduled to be removed in 2.0, use EnableSource instead")]
 		public  string[] SourceEnabled 
@@ -5822,12 +7726,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("_source_include", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for Get
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-get.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-get.html
 	///</pre>
 	///</summary>
 	public partial class GetRequest 
@@ -5929,12 +7849,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("version_type", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for GetSource
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-get.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-get.html
 	///</pre>
 	///</summary>
 	public partial class SourceRequest 
@@ -6028,12 +7964,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("version_type", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for IndicesDeleteMapping
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-delete-mapping.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-delete-mapping.html
 	///</pre>
 	///</summary>
 	public partial class DeleteMappingRequest 
@@ -6046,12 +7998,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("master_timeout", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for IndicesGetFieldMappingForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-get-field-mapping.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-field-mapping.html
 	///</pre>
 	///</summary>
 	public partial class GetFieldMappingRequest 
@@ -6096,12 +8064,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("local", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for IndicesGetMappingForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-get-mapping.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-mapping.html
 	///</pre>
 	///</summary>
 	public partial class GetMappingRequest 
@@ -6138,12 +8122,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("local", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for IndicesPutMapping
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-put-mapping.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-put-mapping.html
 	///</pre>
 	///</summary>
 	public partial class PutMappingRequest 
@@ -6196,12 +8196,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for IndicesValidateQueryGetForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-validate.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-validate.html
 	///</pre>
 	///</summary>
 	public partial class ValidateQueryRequest 
@@ -6247,14 +8263,6 @@ namespace Nest
 		}
 		
 		
-		///<summary>The URL-encoded query definition (instead of using the request body)</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
-		
 		///<summary>Query in the Lucene query string syntax</summary>
 		public string Q 
 		{ 
@@ -6262,16 +8270,54 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("q", value); }
 		}
 		
-	}
-	
 		
-	///<summary>Request parameters for MltGet
-	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-more-like-this.html
-	///</pre>
-	///</summary>
-	public partial class MoreLikeThisRequest 
-			{
+		///<summary>The analyzer to use for the query string</summary>
+		public string Analyzer 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("analyzer"); } 
+			set { this.Request.RequestParameters.AddQueryString("analyzer", value); }
+		}
+		
+		
+		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
+		public bool AnalyzeWildcard 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("analyze_wildcard"); } 
+			set { this.Request.RequestParameters.AddQueryString("analyze_wildcard", value); }
+		}
+		
+		
+		///<summary>The default operator for query string query (AND or OR)</summary>
+		public DefaultOperator DefaultOperator 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<DefaultOperator>("default_operator"); } 
+			set { this.Request.RequestParameters.AddQueryString("default_operator", value); }
+		}
+		
+		
+		///<summary>The field to use as default where no field prefix is given in the query string</summary>
+		public string Df 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("df"); } 
+			set { this.Request.RequestParameters.AddQueryString("df", value); }
+		}
+		
+		
+		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
+		public bool Lenient 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("lenient"); } 
+			set { this.Request.RequestParameters.AddQueryString("lenient", value); }
+		}
+		
+		
+		///<summary>Specify whether query terms should be lowercased</summary>
+		public bool LowercaseExpandedTerms 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("lowercase_expanded_terms"); } 
+			set { this.Request.RequestParameters.AddQueryString("lowercase_expanded_terms", value); }
+		}
+		
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source 
@@ -6280,6 +8326,24 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("source", value); }
 		}
 		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
+	}
+	
+		
+	///<summary>Request parameters for MltGet
+	///<pre>
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-more-like-this.html
+	///</pre>
+	///</summary>
+	public partial class MoreLikeThisRequest 
+			{
 		
 		///<summary>The boost factor</summary>
 		public double BoostTerms 
@@ -6424,12 +8488,28 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("stop_words", value); }
 		}
 		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for SearchGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-search.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-search.html
 	///</pre>
 	///</summary>
 	public partial class SearchRequest 
@@ -6586,12 +8666,20 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("query_cache", value); }
 		}
 		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
 	}
 	
 		
 	///<summary>Request parameters for SearchExists
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-exists.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/master/search-exists.html
 	///</pre>
 	///</summary>
 	public partial class SearchExistsRequest 
@@ -6645,11 +8733,75 @@ namespace Nest
 		}
 		
 		
-		///<summary>The URL-encoded query definition (instead of using the request body)</summary>
+		///<summary>Query in the Lucene query string syntax</summary>
+		public string Q 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("q"); } 
+			set { this.Request.RequestParameters.AddQueryString("q", value); }
+		}
+		
+		
+		///<summary>The analyzer to use for the query string</summary>
+		public string Analyzer 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("analyzer"); } 
+			set { this.Request.RequestParameters.AddQueryString("analyzer", value); }
+		}
+		
+		
+		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
+		public bool AnalyzeWildcard 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("analyze_wildcard"); } 
+			set { this.Request.RequestParameters.AddQueryString("analyze_wildcard", value); }
+		}
+		
+		
+		///<summary>The default operator for query string query (AND or OR)</summary>
+		public DefaultOperator DefaultOperator 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<DefaultOperator>("default_operator"); } 
+			set { this.Request.RequestParameters.AddQueryString("default_operator", value); }
+		}
+		
+		
+		///<summary>The field to use as default where no field prefix is given in the query string</summary>
+		public string Df 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("df"); } 
+			set { this.Request.RequestParameters.AddQueryString("df", value); }
+		}
+		
+		
+		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
+		public bool Lenient 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("lenient"); } 
+			set { this.Request.RequestParameters.AddQueryString("lenient", value); }
+		}
+		
+		
+		///<summary>Specify whether query terms should be lowercased</summary>
+		public bool LowercaseExpandedTerms 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("lowercase_expanded_terms"); } 
+			set { this.Request.RequestParameters.AddQueryString("lowercase_expanded_terms", value); }
+		}
+		
+		
+		///<summary>The URL-encoded request definition</summary>
 		public string Source 
 		{ 
 			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
 			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
 		}
 		
 	}
@@ -6657,7 +8809,7 @@ namespace Nest
 		
 	///<summary>Request parameters for SearchShardsGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-shards.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html
 	///</pre>
 	///</summary>
 	public partial class SearchShardsRequest 
@@ -6710,16 +8862,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
 		}
 		
-	}
-	
-		
-	///<summary>Request parameters for SearchTemplateGet
-	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-template.html
-	///</pre>
-	///</summary>
-	public partial class SearchTemplateRequest 
-			{
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source 
@@ -6728,6 +8870,24 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("source", value); }
 		}
 		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
+	}
+	
+		
+	///<summary>Request parameters for SearchTemplateGet
+	///<pre>
+	///http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html
+	///</pre>
+	///</summary>
+	public partial class SearchTemplateRequest 
+			{
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool IgnoreUnavailable 
@@ -6784,16 +8944,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("search_type", value); }
 		}
 		
-	}
-	
-		
-	///<summary>Request parameters for TermvectorGet
-	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-termvectors.html
-	///</pre>
-	///</summary>
-	public partial class TermvectorRequest 
-			{
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source 
@@ -6802,6 +8952,24 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("source", value); }
 		}
 		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		}
+		
+	}
+	
+		
+	///<summary>Request parameters for TermvectorGet
+	///<pre>
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-termvectors.html
+	///</pre>
+	///</summary>
+	public partial class TermvectorRequest 
+			{
 		
 		///<summary>Specifies if total term frequency and document frequency should be returned.</summary>
 		public bool TermStatistics 
@@ -6880,6 +9048,22 @@ namespace Nest
 		{ 
 			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("realtime"); } 
 			set { this.Request.RequestParameters.AddQueryString("realtime", value); }
+		}
+		
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
+			set { this.Request.RequestParameters.AddQueryString("source", value); }
+		}
+		
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
+			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
 		}
 		
 	}

@@ -13,13 +13,14 @@ using CsQuery;
 using CsQuery.ExtensionMethods.Internal;
 using Newtonsoft.Json;
 using Xipton.Razor;
+using CodeGeneration.LowLevelClient.Overrides.Global;
 
 namespace CodeGeneration.LowLevelClient
 {
 	public static class ApiGenerator
 	{
-		private readonly static string _listingUrl = "https://github.com/elastic/elasticsearch/tree/v1.5.2/rest-api-spec/api";
-		private readonly static string _rawUrlPrefix = "https://raw.github.com/elastic/elasticsearch/v1.5.2/rest-api-spec/api/";
+		private readonly static string _listingUrl = "https://github.com/elastic/elasticsearch/tree/v1.6.0/rest-api-spec/api";
+		private readonly static string _rawUrlPrefix = "https://raw.github.com/elastic/elasticsearch/v1.6.0/rest-api-spec/api/";
 		private readonly static string _nestFolder = @"..\..\..\..\..\src\Nest\";
 		private readonly static string _esNetFolder = @"..\..\..\..\..\src\Elasticsearch.Net\";
 		private readonly static string _viewFolder = @"..\..\Views\";
@@ -148,6 +149,12 @@ namespace CodeGeneration.LowLevelClient
 			method.FullName =
 				Regex.Replace(method.FullName, m, (a) => a.Index != method.FullName.IndexOf(m) ? "" : m);
 
+			foreach (var param in GlobalQueryParameters.Parameters)
+			{
+				if (!method.Url.Params.ContainsKey(param.Key))
+					method.Url.Params.Add(param.Key, param.Value);
+			}
+
 			string manualOverride;
 			var key = method.QueryStringParamName.Replace("RequestParameters", "");
 			if (MethodNameOverrides.TryGetValue(key, out manualOverride))
@@ -183,7 +190,6 @@ namespace CodeGeneration.LowLevelClient
 						renameList = overrides.RenameQueryStringParams ?? renameList;
 					}
 				}
-
 
 				var globalQueryStringRenames = new Dictionary<string, string>
 				{
