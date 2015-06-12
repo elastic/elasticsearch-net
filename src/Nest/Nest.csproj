@@ -72,7 +72,6 @@
     <Compile Include="ConvenienceExtensions\DeleteManyExtensions.cs" />
     <Compile Include="ConvenienceExtensions\GetManyExtensions.cs" />
     <Compile Include="ConvenienceExtensions\CreateIndexExtensions.cs" />
-    <Compile Include="ConvenienceExtensions\MultiSortExtensions.cs" />
     <Compile Include="ConvenienceExtensions\OpenCloseIndexExtensions.cs" />
     <Compile Include="ConvenienceExtensions\ExistsExtensions.cs" />
     <Compile Include="ConvenienceExtensions\ScrollExtensions.cs" />
