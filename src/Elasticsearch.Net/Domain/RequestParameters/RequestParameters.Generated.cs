@@ -4308,12 +4308,12 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-flush.html
 	///</pre>
 	///</summary>
-	public class IndicesFlushSyncedRequestParameters : FluentRequestParameters<IndicesFlushSyncedRequestParameters> 
+	public class SyncedFlushRequestParameters : FluentRequestParameters<SyncedFlushRequestParameters> 
 	{
 		
 		internal string _source { get; set; }
 		///<summary>The URL-encoded request definition</summary>
-		public IndicesFlushSyncedRequestParameters Source(string source)
+		public SyncedFlushRequestParameters Source(string source)
 		{
 			this._source = source;
 			this.AddQueryString("source", this._source);
@@ -4323,7 +4323,7 @@ namespace Elasticsearch.Net
 		
 		internal string _filter_path { get; set; }
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public IndicesFlushSyncedRequestParameters FilterPath(string filter_path)
+		public SyncedFlushRequestParameters FilterPath(string filter_path)
 		{
 			this._filter_path = filter_path;
 			this.AddQueryString("filter_path", this._filter_path);

@@ -3860,13 +3860,13 @@ namespace Nest
 	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-flush.html
 	///</pre>
 	///</summary>
-	public partial class IndicesFlushSyncedDescriptor  : BaseRequest<IndicesFlushSyncedRequestParameters>
+	public partial class SyncedFlushDescriptor 
 	{
 		
 	
 
 		///<summary>The URL-encoded request definition</summary>
-		public IndicesFlushSyncedDescriptor Source(string source)
+		public SyncedFlushDescriptor Source(string source)
 		{
 			this.Request.RequestParameters.Source(source);
 			return this;
@@ -3874,16 +3874,10 @@ namespace Nest
 		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public IndicesFlushSyncedDescriptor FilterPath(string filter_path)
+		public SyncedFlushDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-		}
-		
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<IndicesFlushSyncedRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
 		}
 		
 	

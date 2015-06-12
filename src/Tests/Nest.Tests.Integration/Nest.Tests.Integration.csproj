@@ -132,6 +132,7 @@
     <Compile Include="Core\Exists\TypeExistsTests.cs" />
     <Compile Include="Indices\GetIndexTests.cs" />
     <Compile Include="Indices\StatusTests.cs" />
+    <Compile Include="Indices\SyncedFlushTests.cs" />
     <Compile Include="Indices\UpgradeTests.cs" />
     <Compile Include="IntegrationTests.cs" />
     <Compile Include="Cluster\HealthTests.cs" />

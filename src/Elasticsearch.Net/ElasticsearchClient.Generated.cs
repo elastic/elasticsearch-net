@@ -14615,14 +14615,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesFlushSyncedForAll<T>(Func<IndicesFlushSyncedRequestParameters, IndicesFlushSyncedRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> IndicesFlushSyncedForAll<T>(Func<SyncedFlushRequestParameters, SyncedFlushRequestParameters> requestParameters = null)
 		{
 			var url = "_flush/synced";
 			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesFlushSyncedRequestParameters());
+				requestParams = requestParameters(new SyncedFlushRequestParameters());
 			}
 				
 
@@ -14647,14 +14647,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesFlushSyncedForAllAsync<T>(Func<IndicesFlushSyncedRequestParameters, IndicesFlushSyncedRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> IndicesFlushSyncedForAllAsync<T>(Func<SyncedFlushRequestParameters, SyncedFlushRequestParameters> requestParameters = null)
 		{
 			var url = "_flush/synced";
 			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesFlushSyncedRequestParameters());
+				requestParams = requestParameters(new SyncedFlushRequestParameters());
 			}
 				
 
@@ -14681,14 +14681,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesFlushSyncedForAll(Func<IndicesFlushSyncedRequestParameters, IndicesFlushSyncedRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesFlushSyncedForAll(Func<SyncedFlushRequestParameters, SyncedFlushRequestParameters> requestParameters = null)
 		{
 			var url = "_flush/synced";
 			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesFlushSyncedRequestParameters());
+				requestParams = requestParameters(new SyncedFlushRequestParameters());
 			}
 				
 
@@ -14715,14 +14715,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesFlushSyncedForAllAsync(Func<IndicesFlushSyncedRequestParameters, IndicesFlushSyncedRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesFlushSyncedForAllAsync(Func<SyncedFlushRequestParameters, SyncedFlushRequestParameters> requestParameters = null)
 		{
 			var url = "_flush/synced";
 			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesFlushSyncedRequestParameters());
+				requestParams = requestParameters(new SyncedFlushRequestParameters());
 			}
 				
 
@@ -14748,7 +14748,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesFlushSynced<T>(string index, Func<IndicesFlushSyncedRequestParameters, IndicesFlushSyncedRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> IndicesFlushSynced<T>(string index, Func<SyncedFlushRequestParameters, SyncedFlushRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_flush/synced".F(Encoded(index));
@@ -14756,7 +14756,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesFlushSyncedRequestParameters());
+				requestParams = requestParameters(new SyncedFlushRequestParameters());
 			}
 				
 
@@ -14782,7 +14782,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesFlushSyncedAsync<T>(string index, Func<IndicesFlushSyncedRequestParameters, IndicesFlushSyncedRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> IndicesFlushSyncedAsync<T>(string index, Func<SyncedFlushRequestParameters, SyncedFlushRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_flush/synced".F(Encoded(index));
@@ -14790,7 +14790,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesFlushSyncedRequestParameters());
+				requestParams = requestParameters(new SyncedFlushRequestParameters());
 			}
 				
 
@@ -14818,7 +14818,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesFlushSynced(string index, Func<IndicesFlushSyncedRequestParameters, IndicesFlushSyncedRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesFlushSynced(string index, Func<SyncedFlushRequestParameters, SyncedFlushRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_flush/synced".F(Encoded(index));
@@ -14826,7 +14826,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesFlushSyncedRequestParameters());
+				requestParams = requestParameters(new SyncedFlushRequestParameters());
 			}
 				
 
@@ -14854,7 +14854,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesFlushSyncedAsync(string index, Func<IndicesFlushSyncedRequestParameters, IndicesFlushSyncedRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesFlushSyncedAsync(string index, Func<SyncedFlushRequestParameters, SyncedFlushRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_flush/synced".F(Encoded(index));
@@ -14862,7 +14862,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesFlushSyncedRequestParameters());
+				requestParams = requestParameters(new SyncedFlushRequestParameters());
 			}
 				
 
@@ -14887,14 +14887,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesFlushSyncedGetForAll<T>(Func<IndicesFlushSyncedRequestParameters, IndicesFlushSyncedRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> IndicesFlushSyncedGetForAll<T>(Func<SyncedFlushRequestParameters, SyncedFlushRequestParameters> requestParameters = null)
 		{
 			var url = "_flush/synced";
 			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesFlushSyncedRequestParameters());
+				requestParams = requestParameters(new SyncedFlushRequestParameters());
 			}
 				
 
@@ -14919,14 +14919,14 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesFlushSyncedGetForAllAsync<T>(Func<IndicesFlushSyncedRequestParameters, IndicesFlushSyncedRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> IndicesFlushSyncedGetForAllAsync<T>(Func<SyncedFlushRequestParameters, SyncedFlushRequestParameters> requestParameters = null)
 		{
 			var url = "_flush/synced";
 			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesFlushSyncedRequestParameters());
+				requestParams = requestParameters(new SyncedFlushRequestParameters());
 			}
 				
 
@@ -14953,14 +14953,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesFlushSyncedGetForAll(Func<IndicesFlushSyncedRequestParameters, IndicesFlushSyncedRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesFlushSyncedGetForAll(Func<SyncedFlushRequestParameters, SyncedFlushRequestParameters> requestParameters = null)
 		{
 			var url = "_flush/synced";
 			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesFlushSyncedRequestParameters());
+				requestParams = requestParameters(new SyncedFlushRequestParameters());
 			}
 				
 
@@ -14987,14 +14987,14 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesFlushSyncedGetForAllAsync(Func<IndicesFlushSyncedRequestParameters, IndicesFlushSyncedRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesFlushSyncedGetForAllAsync(Func<SyncedFlushRequestParameters, SyncedFlushRequestParameters> requestParameters = null)
 		{
 			var url = "_flush/synced";
 			IRequestParameters requestParams = null;
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesFlushSyncedRequestParameters());
+				requestParams = requestParameters(new SyncedFlushRequestParameters());
 			}
 				
 
@@ -15020,7 +15020,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public ElasticsearchResponse<T> IndicesFlushSyncedGet<T>(string index, Func<IndicesFlushSyncedRequestParameters, IndicesFlushSyncedRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> IndicesFlushSyncedGet<T>(string index, Func<SyncedFlushRequestParameters, SyncedFlushRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_flush/synced".F(Encoded(index));
@@ -15028,7 +15028,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesFlushSyncedRequestParameters());
+				requestParams = requestParameters(new SyncedFlushRequestParameters());
 			}
 				
 
@@ -15054,7 +15054,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type byte[] deserialization will be shortcircuited</para>
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
-		public Task<ElasticsearchResponse<T>> IndicesFlushSyncedGetAsync<T>(string index, Func<IndicesFlushSyncedRequestParameters, IndicesFlushSyncedRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> IndicesFlushSyncedGetAsync<T>(string index, Func<SyncedFlushRequestParameters, SyncedFlushRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_flush/synced".F(Encoded(index));
@@ -15062,7 +15062,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesFlushSyncedRequestParameters());
+				requestParams = requestParameters(new SyncedFlushRequestParameters());
 			}
 				
 
@@ -15090,7 +15090,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public ElasticsearchResponse<DynamicDictionary> IndicesFlushSyncedGet(string index, Func<IndicesFlushSyncedRequestParameters, IndicesFlushSyncedRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<DynamicDictionary> IndicesFlushSyncedGet(string index, Func<SyncedFlushRequestParameters, SyncedFlushRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_flush/synced".F(Encoded(index));
@@ -15098,7 +15098,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesFlushSyncedRequestParameters());
+				requestParams = requestParameters(new SyncedFlushRequestParameters());
 			}
 				
 
@@ -15126,7 +15126,7 @@ namespace Elasticsearch.Net
 		///<para> - i.e result.Response.hits.hits[0].property.nested["nested_deeper"]</para>
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
-		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesFlushSyncedGetAsync(string index, Func<IndicesFlushSyncedRequestParameters, IndicesFlushSyncedRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<DynamicDictionary>> IndicesFlushSyncedGetAsync(string index, Func<SyncedFlushRequestParameters, SyncedFlushRequestParameters> requestParameters = null)
 		{
 			index.ThrowIfNullOrEmpty("index");
 			var url = "{0}/_flush/synced".F(Encoded(index));
@@ -15134,7 +15134,7 @@ namespace Elasticsearch.Net
 				
 			if (requestParameters != null)
 			{
-				requestParams = requestParameters(new IndicesFlushSyncedRequestParameters());
+				requestParams = requestParameters(new SyncedFlushRequestParameters());
 			}
 				
 

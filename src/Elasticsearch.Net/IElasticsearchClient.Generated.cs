@@ -7599,7 +7599,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
 		
-		ElasticsearchResponse<T> IndicesFlushSyncedForAll<T>(Func<IndicesFlushSyncedRequestParameters, IndicesFlushSyncedRequestParameters> requestParameters = null);
+		ElasticsearchResponse<T> IndicesFlushSyncedForAll<T>(Func<SyncedFlushRequestParameters, SyncedFlushRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a POST on /_flush/synced
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -7616,7 +7616,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<T>> IndicesFlushSyncedForAllAsync<T>(Func<IndicesFlushSyncedRequestParameters, IndicesFlushSyncedRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<T>> IndicesFlushSyncedForAllAsync<T>(Func<SyncedFlushRequestParameters, SyncedFlushRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a POST on /_flush/synced
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
@@ -7635,7 +7635,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		ElasticsearchResponse<DynamicDictionary> IndicesFlushSyncedForAll(Func<IndicesFlushSyncedRequestParameters, IndicesFlushSyncedRequestParameters> requestParameters = null);
+		ElasticsearchResponse<DynamicDictionary> IndicesFlushSyncedForAll(Func<SyncedFlushRequestParameters, SyncedFlushRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a POST on /_flush/synced
 		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
@@ -7654,7 +7654,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<DynamicDictionary>> IndicesFlushSyncedForAllAsync(Func<IndicesFlushSyncedRequestParameters, IndicesFlushSyncedRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<DynamicDictionary>> IndicesFlushSyncedForAllAsync(Func<SyncedFlushRequestParameters, SyncedFlushRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a POST on /{index}/_flush/synced
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -7672,7 +7672,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
 		
-		ElasticsearchResponse<T> IndicesFlushSynced<T>(string index, Func<IndicesFlushSyncedRequestParameters, IndicesFlushSyncedRequestParameters> requestParameters = null);
+		ElasticsearchResponse<T> IndicesFlushSynced<T>(string index, Func<SyncedFlushRequestParameters, SyncedFlushRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a POST on /{index}/_flush/synced
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -7690,7 +7690,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<T>> IndicesFlushSyncedAsync<T>(string index, Func<IndicesFlushSyncedRequestParameters, IndicesFlushSyncedRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<T>> IndicesFlushSyncedAsync<T>(string index, Func<SyncedFlushRequestParameters, SyncedFlushRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a POST on /{index}/_flush/synced
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
@@ -7710,7 +7710,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		ElasticsearchResponse<DynamicDictionary> IndicesFlushSynced(string index, Func<IndicesFlushSyncedRequestParameters, IndicesFlushSyncedRequestParameters> requestParameters = null);
+		ElasticsearchResponse<DynamicDictionary> IndicesFlushSynced(string index, Func<SyncedFlushRequestParameters, SyncedFlushRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a POST on /{index}/_flush/synced
 		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
@@ -7730,7 +7730,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<DynamicDictionary>> IndicesFlushSyncedAsync(string index, Func<IndicesFlushSyncedRequestParameters, IndicesFlushSyncedRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<DynamicDictionary>> IndicesFlushSyncedAsync(string index, Func<SyncedFlushRequestParameters, SyncedFlushRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /_flush/synced
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -7747,7 +7747,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
 		
-		ElasticsearchResponse<T> IndicesFlushSyncedGetForAll<T>(Func<IndicesFlushSyncedRequestParameters, IndicesFlushSyncedRequestParameters> requestParameters = null);
+		ElasticsearchResponse<T> IndicesFlushSyncedGetForAll<T>(Func<SyncedFlushRequestParameters, SyncedFlushRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /_flush/synced
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -7764,7 +7764,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<T>> IndicesFlushSyncedGetForAllAsync<T>(Func<IndicesFlushSyncedRequestParameters, IndicesFlushSyncedRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<T>> IndicesFlushSyncedGetForAllAsync<T>(Func<SyncedFlushRequestParameters, SyncedFlushRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /_flush/synced
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
@@ -7783,7 +7783,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		ElasticsearchResponse<DynamicDictionary> IndicesFlushSyncedGetForAll(Func<IndicesFlushSyncedRequestParameters, IndicesFlushSyncedRequestParameters> requestParameters = null);
+		ElasticsearchResponse<DynamicDictionary> IndicesFlushSyncedGetForAll(Func<SyncedFlushRequestParameters, SyncedFlushRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /_flush/synced
 		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
@@ -7802,7 +7802,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<DynamicDictionary>> IndicesFlushSyncedGetForAllAsync(Func<IndicesFlushSyncedRequestParameters, IndicesFlushSyncedRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<DynamicDictionary>> IndicesFlushSyncedGetForAllAsync(Func<SyncedFlushRequestParameters, SyncedFlushRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /{index}/_flush/synced
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -7820,7 +7820,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
 		
-		ElasticsearchResponse<T> IndicesFlushSyncedGet<T>(string index, Func<IndicesFlushSyncedRequestParameters, IndicesFlushSyncedRequestParameters> requestParameters = null);
+		ElasticsearchResponse<T> IndicesFlushSyncedGet<T>(string index, Func<SyncedFlushRequestParameters, SyncedFlushRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /{index}/_flush/synced
 		///<para></para>Returns: A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.
@@ -7838,7 +7838,7 @@ namespace Elasticsearch.Net
 		///<para> - If T is of type VoidResponse the response stream will be ignored completely</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<T>> IndicesFlushSyncedGetAsync<T>(string index, Func<IndicesFlushSyncedRequestParameters, IndicesFlushSyncedRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<T>> IndicesFlushSyncedGetAsync<T>(string index, Func<SyncedFlushRequestParameters, SyncedFlushRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /{index}/_flush/synced
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary
@@ -7858,7 +7858,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		ElasticsearchResponse<DynamicDictionary> IndicesFlushSyncedGet(string index, Func<IndicesFlushSyncedRequestParameters, IndicesFlushSyncedRequestParameters> requestParameters = null);
+		ElasticsearchResponse<DynamicDictionary> IndicesFlushSyncedGet(string index, Func<SyncedFlushRequestParameters, SyncedFlushRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /{index}/_flush/synced
 		///<para></para>Returns: Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary
@@ -7878,7 +7878,7 @@ namespace Elasticsearch.Net
 		///<para> - can be safely dispatched to a nullable type even if intermediate properties do not exist</para>
 		///</returns>
 		
-		Task<ElasticsearchResponse<DynamicDictionary>> IndicesFlushSyncedGetAsync(string index, Func<IndicesFlushSyncedRequestParameters, IndicesFlushSyncedRequestParameters> requestParameters = null);
+		Task<ElasticsearchResponse<DynamicDictionary>> IndicesFlushSyncedGetAsync(string index, Func<SyncedFlushRequestParameters, SyncedFlushRequestParameters> requestParameters = null);
 		
 		///<summary>Represents a GET on /{index}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T.

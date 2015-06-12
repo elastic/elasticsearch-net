@@ -3576,7 +3576,7 @@ namespace Nest
 	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-flush.html
 	///</pre>
 	///</summary>
-	public partial class IndicesFlushSyncedRequest  : BasePathRequest<IndicesFlushSyncedRequestParameters>
+	public partial class SyncedFlushRequest 
 			{
 		
 		///<summary>The URL-encoded request definition</summary>
@@ -3594,12 +3594,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<IndicesFlushSyncedRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		
