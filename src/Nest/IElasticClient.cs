@@ -1786,5 +1786,11 @@ namespace Nest
 		ICatResponse<CatSegmentsRecord> CatSegments(ICatSegmentsRequest request);
 		Task<ICatResponse<CatSegmentsRecord>> CatSegmentsAsync(Func<CatSegmentsDescriptor, CatSegmentsDescriptor> selector = null);
 		Task<ICatResponse<CatSegmentsRecord>> CatSegmentsAsync(ICatSegmentsRequest request);
+
+		/// <inheritdoc />
+		IFieldStatsResponse FieldStats(Func<FieldStatsDescriptor, FieldStatsDescriptor> selector);
+		IFieldStatsResponse FieldStats(IFieldStatsRequest request);
+		Task<IFieldStatsResponse> FieldStatsAsync(Func<FieldStatsDescriptor, FieldStatsDescriptor> selector);
+		Task<IFieldStatsResponse> FieldStatsAsync(IFieldStatsRequest request);
 	}
 }

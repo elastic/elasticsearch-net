@@ -2298,7 +2298,7 @@ namespace Nest
 	///http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-stats.html
 	///</pre>
 	///</summary>
-	public partial class FieldStatsRequest  : BasePathRequest<FieldStatsRequestParameters>
+	public partial class FieldStatsRequest 
 			{
 		
 		///<summary>A comma-separated list of fields for to get field statistics for (min value, max value, and more)</summary>
@@ -2356,12 +2356,6 @@ namespace Nest
 			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
 		}
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<FieldStatsRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 	
 		

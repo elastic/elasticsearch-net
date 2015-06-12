@@ -2439,7 +2439,7 @@ namespace Nest
 	///http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-stats.html
 	///</pre>
 	///</summary>
-	public partial class FieldStatsDescriptor  : BaseRequest<FieldStatsRequestParameters>
+	public partial class FieldStatsDescriptor 
 	{
 		
 	
@@ -2508,12 +2508,6 @@ namespace Nest
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-		}
-		
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<FieldStatsRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
 		}
 		
 	
