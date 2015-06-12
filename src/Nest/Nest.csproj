@@ -406,6 +406,7 @@
     <Compile Include="Enums\GeoShapeRelation.cs" />
     <Compile Include="Enums\HighlighterType.cs" />
     <Compile Include="Enums\NormsLoading.cs" />
+    <Compile Include="Enums\NumericResolutionUnit.cs" />
     <Compile Include="Enums\RangeExecution.cs" />
     <Compile Include="Enums\RoutingAllocationEnableOption.cs" />
     <Compile Include="Enums\ScriptLang.cs" />

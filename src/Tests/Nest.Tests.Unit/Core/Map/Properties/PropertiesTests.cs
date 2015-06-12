@@ -92,6 +92,8 @@ namespace Nest.Tests.Unit.Core.Map.Properties
 						.PrecisionStep(4)
 						.Store()
 						.Boost(1.3)
+						.DocValues()
+						.NumericResolution(NumericResolutionUnit.Seconds)
 					)
 				)
 			);
