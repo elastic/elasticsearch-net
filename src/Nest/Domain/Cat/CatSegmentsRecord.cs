@@ -21,6 +21,9 @@ namespace Nest
 		[JsonProperty("ip")]
 		public string Ip { get; set; }
 
+		[JsonProperty("id")]
+		public string Id { get; set; }
+
 		[JsonProperty("segment")]
 		public string Segment { get; set; }
 
