@@ -1,5 +1,4 @@
-﻿using Nest.DSL.Descriptors;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;

@@ -1,5 +1,4 @@
 ﻿using Elasticsearch.Net;
-using Nest.DSL.Descriptors;
 using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using System;
