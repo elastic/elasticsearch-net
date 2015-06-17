@@ -4305,7 +4305,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for IndicesFlushSyncedForAll
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-flush.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush.html
 	///</pre>
 	///</summary>
 	public class SyncedFlushRequestParameters : FluentRequestParameters<SyncedFlushRequestParameters> 
@@ -6117,6 +6117,16 @@ namespace Elasticsearch.Net
 		{
 			this._lowercase_expanded_terms = lowercase_expanded_terms;
 			this.AddQueryString("lowercase_expanded_terms", this._lowercase_expanded_terms);
+			return this;
+		}
+		
+		
+		internal bool _rewrite { get; set; }
+		///<summary>Provide a more detailed explanation showing the actual Lucene query that will be executed.</summary>
+		public ValidateQueryRequestParameters Rewrite(bool rewrite)
+		{
+			this._rewrite = rewrite;
+			this.AddQueryString("rewrite", this._rewrite);
 			return this;
 		}
 		

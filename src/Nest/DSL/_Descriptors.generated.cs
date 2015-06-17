@@ -3851,7 +3851,7 @@ namespace Nest
 	
 	///<summary>descriptor for IndicesFlushSyncedForAll
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-flush.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush.html
 	///</pre>
 	///</summary>
 	public partial class SyncedFlushDescriptor 
@@ -5451,6 +5451,14 @@ namespace Nest
 		public ValidateQueryDescriptor<T> LowercaseExpandedTerms(bool lowercase_expanded_terms = true)
 		{
 			this.Request.RequestParameters.LowercaseExpandedTerms(lowercase_expanded_terms);
+			return this;
+		}
+		
+
+		///<summary>Provide a more detailed explanation showing the actual Lucene query that will be executed.</summary>
+		public ValidateQueryDescriptor<T> Rewrite(bool rewrite = true)
+		{
+			this.Request.RequestParameters.Rewrite(rewrite);
 			return this;
 		}
 		

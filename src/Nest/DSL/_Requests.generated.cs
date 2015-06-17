@@ -3567,7 +3567,7 @@ namespace Nest
 		
 	///<summary>Request parameters for IndicesFlushSyncedForAll
 	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-flush.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush.html
 	///</pre>
 	///</summary>
 	public partial class SyncedFlushRequest 
@@ -5064,6 +5064,14 @@ namespace Nest
 		{ 
 			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("lowercase_expanded_terms"); } 
 			set { this.Request.RequestParameters.AddQueryString("lowercase_expanded_terms", value); }
+		}
+		
+		
+		///<summary>Provide a more detailed explanation showing the actual Lucene query that will be executed.</summary>
+		public bool Rewrite 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("rewrite"); } 
+			set { this.Request.RequestParameters.AddQueryString("rewrite", value); }
 		}
 		
 		
@@ -8304,6 +8312,14 @@ namespace Nest
 		{ 
 			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("lowercase_expanded_terms"); } 
 			set { this.Request.RequestParameters.AddQueryString("lowercase_expanded_terms", value); }
+		}
+		
+		
+		///<summary>Provide a more detailed explanation showing the actual Lucene query that will be executed.</summary>
+		public bool Rewrite 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("rewrite"); } 
+			set { this.Request.RequestParameters.AddQueryString("rewrite", value); }
 		}
 		
 		
