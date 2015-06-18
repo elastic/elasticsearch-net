@@ -621,6 +621,9 @@
     <None Include="Core\Map\Properties\NestedObjectProperty.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Core\Map\Properties\MurmurHashProperty.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Core\Map\Properties\ObjectProperty.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
