@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Nest.Resolvers.Converters;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -9,14 +10,20 @@ namespace Nest
 	{
 		[JsonProperty("index")]
 		public IndexNameMarker Index { get; set; }
+
 		[JsonProperty("alias")]
 		public string Alias { get; set; }
+
 		[JsonProperty("filter")]
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<FilterContainer>, CustomJsonConverter>))]
 		public FilterContainer FilterDescriptor { get; set; }
+
 		[JsonProperty("routing")]
 		public string Routing { get; set; }
+
 		[JsonProperty("index_routing")]
 		public string IndexRouting { get; set; }
+
 		[JsonProperty("search_routing")]
 		public string SearchRouting { get; set; }
 	}

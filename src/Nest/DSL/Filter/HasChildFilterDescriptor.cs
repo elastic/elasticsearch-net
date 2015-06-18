@@ -17,6 +17,7 @@ namespace Nest
 		IQueryContainer Query { get; set; }
 
 		[JsonProperty("filter")]
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<FilterContainer>, CustomJsonConverter>))]
 		IFilterContainer Filter { get; set; }
 
 		[JsonProperty("inner_hits")]

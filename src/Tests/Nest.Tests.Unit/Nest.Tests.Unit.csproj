@@ -261,6 +261,7 @@
     <Compile Include="Internals\Serialize\NullValueHandlingTests.cs" />
     <Compile Include="Internals\Serialize\OptOutTests.cs" />
     <Compile Include="Internals\Serialize\CustomConvertersTests.cs" />
+    <Compile Include="ObjectInitializer\Aliases\AliasFilterRequestTests.cs" />
     <Compile Include="ObjectInitializer\Aliases\GetAliasMoreUrlTests.cs" />
     <Compile Include="ObjectInitializer\Aliases\GetAliasesMoreUrlTests.cs" />
     <Compile Include="ObjectInitializer\Aliases\GetAliasRequestTests.cs" />
@@ -733,6 +734,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Internals\Serialize\OptOutDuringMapping.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ObjectInitializer\Aliases\AliasFilterBody.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="ObjectInitializer\Aliases\AliasBody.json">

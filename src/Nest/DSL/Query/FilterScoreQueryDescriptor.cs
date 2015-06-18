@@ -11,6 +11,7 @@ namespace Nest.DSL.Query
 	public interface IFilterScoreQuery : IQuery
 	{
 		[JsonProperty(PropertyName = "filter")]
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<FilterContainer>, CustomJsonConverter>))]
 		FilterContainer Filter { get; set; }
 		
 		[JsonProperty(PropertyName = "lang")]
