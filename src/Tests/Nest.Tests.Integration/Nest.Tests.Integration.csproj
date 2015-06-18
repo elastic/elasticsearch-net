@@ -100,6 +100,7 @@
     <Compile Include="Core\Exists\SearchExistsTests.cs" />
     <Compile Include="Core\Explain\ExplainTests.cs" />
     <Compile Include="Core\Exists\AliasExists.cs" />
+    <Compile Include="Core\FieldStatsTests.cs" />
     <Compile Include="Core\GetFieldMapping\GetFieldMappingTests.cs" />
     <Compile Include="Core\MultiPercolate\MultiPercolateTests.cs" />
     <Compile Include="Core\Percolate\PercolateTests.cs" />
@@ -132,6 +133,7 @@
     <Compile Include="Core\Exists\TypeExistsTests.cs" />
     <Compile Include="Indices\GetIndexTests.cs" />
     <Compile Include="Indices\StatusTests.cs" />
+    <Compile Include="Indices\SyncedFlushTests.cs" />
     <Compile Include="Indices\UpgradeTests.cs" />
     <Compile Include="IntegrationTests.cs" />
     <Compile Include="Cluster\HealthTests.cs" />

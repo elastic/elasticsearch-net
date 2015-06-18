@@ -5,6 +5,9 @@ namespace Nest
 	[JsonObject]
 	public class CatPluginsRecord : ICatRecord
 	{
+		[JsonProperty("id")]
+		public string Id { get; set; }
+
 		[JsonProperty("name")]
 		public string Name  { get; set; }
 
@@ -23,6 +26,7 @@ namespace Nest
 		[JsonProperty("url")]
 		public string Url { get; set; }
 
-
+		[JsonProperty("description")]
+		public string Description { get; set; }
 	}
 }

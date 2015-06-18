@@ -64,6 +64,18 @@ namespace Nest
 		}
 		
 		
+		///<summary>A comma-separated list of fields for to get field statistics for (min value, max value, and more)</summary>
+			internal static FieldStatsRequestParameters _Fields<T>(
+				this FieldStatsRequestParameters qs,
+				IEnumerable<Expression<Func<T, object>>>  fields)
+			where T : class
+		{
+			var _fields = fields.Select(e=>(PropertyPathMarker)e);
+			qs.AddQueryString("fields", _fields);
+			return qs;
+		}
+		
+		
 		///<summary>A comma-separated list of fields to return in the response</summary>
 			internal static GetRequestParameters _Fields<T>(
 				this GetRequestParameters qs,
