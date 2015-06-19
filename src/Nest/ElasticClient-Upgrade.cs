@@ -8,8 +8,6 @@ using System.Threading.Tasks;
 
 namespace Nest
 {
-	using UpgradeStatusResponseConverter = Func<IElasticsearchResponse, Stream, UpgradeStatusResponse>;
-
 	public partial class ElasticClient
 	{
 		public IUpgradeResponse Upgrade(IUpgradeRequest upgradeRequest)
@@ -50,9 +48,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<IUpgradeStatusRequest, UpgradeStatusRequestParameters, UpgradeStatusResponse>(
 				upgradeStatusRequest,
-				(p, d) => this.RawDispatch.IndicesGetUpgradeDispatch<UpgradeStatusResponse>(
-					p.DeserializationState(new UpgradeStatusResponseConverter((r, s) => DeserializeUpgradeStatusResponse(r, s)))
-				)
+				(p, d) => this.RawDispatch.IndicesGetUpgradeDispatch<UpgradeStatusResponse>(p)
 			);	
 		}
 
@@ -61,9 +57,7 @@ namespace Nest
 			upgradeStatusDescriptor = upgradeStatusDescriptor ?? (s => s);
 			return this.Dispatcher.Dispatch<UpgradeStatusDescriptor, UpgradeStatusRequestParameters, UpgradeStatusResponse>(
 				upgradeStatusDescriptor,
-				(p, d) => this.RawDispatch.IndicesGetUpgradeDispatch<UpgradeStatusResponse>(
-					p.DeserializationState(new UpgradeStatusResponseConverter((r, s) => DeserializeUpgradeStatusResponse(r, s)))
-				)
+				(p, d) => this.RawDispatch.IndicesGetUpgradeDispatch<UpgradeStatusResponse>(p)
 			);
 		}
 
@@ -71,9 +65,7 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<IUpgradeStatusRequest, UpgradeStatusRequestParameters, UpgradeStatusResponse, IUpgradeStatusResponse>(
 				upgradeStatusRequest,
-				(p, d) => this.RawDispatch.IndicesGetUpgradeDispatchAsync<UpgradeStatusResponse>(
-					p.DeserializationState(new UpgradeStatusResponseConverter((r, s) => DeserializeUpgradeStatusResponse(r, s)))
-				)
+				(p, d) => this.RawDispatch.IndicesGetUpgradeDispatchAsync<UpgradeStatusResponse>(p)
 			);
 		}
 
@@ -82,18 +74,8 @@ namespace Nest
 			upgradeStatusDescriptor = upgradeStatusDescriptor ?? (s => s);
 			return this.Dispatcher.DispatchAsync<UpgradeStatusDescriptor, UpgradeStatusRequestParameters, UpgradeStatusResponse, IUpgradeStatusResponse>(
 				upgradeStatusDescriptor,
-				(p, d) => this.RawDispatch.IndicesGetUpgradeDispatchAsync<UpgradeStatusResponse>(
-					p.DeserializationState(new UpgradeStatusResponseConverter((r, s) => DeserializeUpgradeStatusResponse(r, s)))
-				)
+				(p, d) => this.RawDispatch.IndicesGetUpgradeDispatchAsync<UpgradeStatusResponse>(p)
 			);
-		}
-
-		private UpgradeStatusResponse DeserializeUpgradeStatusResponse(IElasticsearchResponse response, Stream stream)
-		{
-			return new UpgradeStatusResponse
-			{
-				Upgrades = this.Serializer.Deserialize<Dictionary<string, UpgradeStatus>>(stream)
-			};
 		}
 	}
 }
