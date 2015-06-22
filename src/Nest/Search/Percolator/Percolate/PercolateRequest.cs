@@ -41,7 +41,6 @@ namespace Nest
 		public bool? TrackScores { get; set; }
 		public TDocument Document { get; set; }
 		public IDictionary<PropertyPathMarker, ISort> Sort { get; set; }
-		public IDictionary<PropertyPathMarker, IFacetContainer> Facets { get; set; }
 
 		public PercolateRequest(TDocument document)
 		{
@@ -79,7 +78,6 @@ namespace Nest
 
 
 		IDictionary<PropertyPathMarker, ISort> IPercolateOperation.Sort { get; set; }
-		IDictionary<PropertyPathMarker, IFacetContainer> IPercolateOperation.Facets { get; set; }
 		IDictionary<string, IAggregationContainer> IPercolateOperation.Aggregations { get; set; }
 		
 		IRequestParameters IPercolateOperation.GetRequestParameters()

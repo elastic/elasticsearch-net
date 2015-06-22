@@ -116,21 +116,6 @@ namespace Nest.Tests.Integration.Search
 			Assert.NotNull(results.FieldSelections);
 			Assert.GreaterOrEqual(results.FieldSelections.Count(), 1);
 		}
-		[Test]
-		public void TestTermFacet()
-		{
-			var results = this.Client.Search<ElasticsearchProject>(s => s
-				.From(0)
-				.Size(10)
-				.Fields(f => f.Id, f => f.Name)
-				.SortAscending(f => f.LOC)
-				.SortDescending(f => f.Name)
-				.MatchAll()
-				.FacetTerm(t => t.OnField(f => f.Country).Size(20))
-			);
-			Assert.Greater(results.Facet<TermFacet>(f => f.Country).Items.Count(), 0);
-			Assert.Greater(results.FacetItems<TermItem>(f => f.Country).Count(), 0);
-		}
 
 		[Test]
 		public void TestCommonTerms()

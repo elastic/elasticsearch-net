@@ -192,31 +192,5 @@ namespace Nest.Tests.Unit.Internals.Inferno
 			StringAssert.Contains("CreateDate", request);
 		}
 
-		[Test]
-		public void SearchDoesntLowercaseStringFieldOverload()
-		{
-			var result = this._client.Search<SomeOtherClass>(s => s
-			  .SortDescending("CreateDate2")
-			  .FacetDateHistogram("CreateDate2", fd => fd.OnField("CreateDate2").Interval(DateInterval.Hour))
-			  .MatchAll()
-			);
-			var request = result.ConnectionStatus.Request.Utf8String();
-			StringAssert.DoesNotContain("createDate2", request);
-		}
-		[Test]
-		public void SearchDoesntLowercaseStringFieldOverloadInSearch()
-		{
-			var result = this._client.Search<SomeOtherClass>(s => s
-			  .SortDescending("CreateDate2")
-			  .FacetDateHistogram("CreateDate2", fd => fd.OnField("CreateDate2").Interval(DateInterval.Hour))
-			  .Query(query => query.Range(r => r
-				  .OnField("CreateDate2")
-				  .Greater(DateTime.UtcNow.AddYears(-1))
-				)
-			  )
-			);
-			StringAssert.DoesNotContain("createDate2", result.ConnectionStatus.Request.Utf8String());
-		}
-
 	}
 }

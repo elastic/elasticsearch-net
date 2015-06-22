@@ -11,7 +11,6 @@ namespace Nest
 	{
 		ShardsMetaData Shards { get; }
 		HitsMetaData<T> HitsMetaData { get; }
-		IDictionary<string, Facet> Facets { get; }
 		IDictionary<string, IAggregation> Aggregations { get; }
 		AggregationsHelper Aggs { get; }
 		IDictionary<string, Suggest[]> Suggest { get; }
@@ -37,10 +36,6 @@ namespace Nest
 		/// </summary>
 		IEnumerable<FieldSelection<T>> FieldSelections { get; }
 		HighlightDocumentDictionary Highlights { get; }
-		F Facet<F>(Expression<Func<T, object>> expression) where F : class, IFacet;
-		F Facet<F>(string fieldName) where F : class, IFacet;
-		IEnumerable<F> FacetItems<F>(Expression<Func<T, object>> expression) where F : FacetItem;
-		IEnumerable<F> FacetItems<F>(string fieldName) where F : FacetItem;
 	}
 
 	[JsonObject]
@@ -50,7 +45,6 @@ namespace Nest
 		{
 			this.IsValid = true;
 			this.Aggregations = new Dictionary<string, IAggregation>();
-			this.Facets = new Dictionary<string, Facet>();
 		}
 
 		[JsonProperty(PropertyName = "_shards")]
@@ -59,10 +53,6 @@ namespace Nest
 		[JsonProperty(PropertyName = "hits")]
 		public HitsMetaData<T> HitsMetaData { get; internal set; }
 
-		[JsonProperty(PropertyName = "facets")]
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		public IDictionary<string, Facet> Facets { get; internal set; }
-		
 		[JsonProperty(PropertyName = "aggregations")]
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		public IDictionary<string, IAggregation> Aggregations { get; internal set; }
@@ -129,62 +119,6 @@ namespace Nest
 					.Where(f=>f != null)
 					.Select(f => new FieldSelection<T>(this.Settings, f.FieldValuesDictionary)); 
 			}
-		}
-
-
-		public F Facet<F>(Expression<Func<T, object>> expression) where F : class, IFacet
-		{
-			var fieldName = this.Infer.PropertyPath(expression);
-			return this.Facet<F>(fieldName);
-		}
-		public F Facet<F>(string fieldName) where F : class, IFacet
-		{
-			if (this.Facets == null
-				|| !this.Facets.Any()
-				|| !this.Facets.ContainsKey(fieldName))
-				return default(F);
-
-			var facet = this.Facets[fieldName];
-
-			return Convert.ChangeType(facet, typeof(F)) as F;
-		}
-
-		public IEnumerable<F> FacetItems<F>(Expression<Func<T, object>> expression) where F : FacetItem
-		{
-			var fieldName = this.Infer.PropertyPath(expression);
-			return this.FacetItems<F>(fieldName);
-		}
-
-		public IEnumerable<F> FacetItems<F>(string fieldName) where F : FacetItem
-		{
-			if (this.Facets == null
-				|| !this.Facets.Any()
-				|| !this.Facets.ContainsKey(fieldName))
-				return Enumerable.Empty<F>();
-
-			var facet = this.Facets[fieldName];
-			if (facet is DateHistogramFacet)
-				return ((DateHistogramFacet)facet).Items.Cast<F>();
-
-			if (facet is DateRangeFacet)
-				return ((DateRangeFacet)facet).Items.Cast<F>();
-
-			if (facet is GeoDistanceFacet)
-				return ((GeoDistanceFacet)facet).Items.Cast<F>();
-
-			if (facet is HistogramFacet)
-				return ((HistogramFacet)facet).Items.Cast<F>();
-
-			if (facet is RangeFacet)
-				return ((RangeFacet)facet).Items.Cast<F>();
-
-			if (facet is TermFacet)
-				return ((TermFacet)facet).Items.Cast<F>();
-
-			if (facet is TermStatsFacet)
-				return ((TermStatsFacet)facet).Items.Cast<F>();
-
-			return Enumerable.Empty<F>();
 		}
 
 		private HighlightDocumentDictionary _highlights = null;

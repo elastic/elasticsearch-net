@@ -102,23 +102,6 @@ namespace Nest.Tests.Unit.Search.InitializerSyntax
 						}
 					}
 				},
-				Facets = new Dictionary<PropertyPathMarker, IFacetContainer>()
-				{
-					{ "name", new FacetContainer
-					{
-						Terms = new TermFacetRequest
-						{
-							Field = "field",
-							Size = 10,
-							FacetFilter = new TermFilter()
-							{
-								Field = "other_field",
-								Value = "term"
-							}.ToContainer()
-						}
-					}
-					}
-				},
 				Aggregations = new Dictionary<string, IAggregationContainer>
 				{
 					{ "my_agg", new AggregationContainer

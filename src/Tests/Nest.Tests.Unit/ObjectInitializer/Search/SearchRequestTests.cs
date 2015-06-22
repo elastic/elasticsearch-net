@@ -43,23 +43,6 @@ namespace Nest.Tests.Unit.ObjectInitializer.Search
 				{
 					new Sort { Field = "field", Order = SortOrder.Ascending, Missing = "_first"}
 				},
-				Facets = new Dictionary<PropertyPathMarker, IFacetContainer>()
-				{
-					{ "name", new FacetContainer
-					{
-						Terms = new TermFacetRequest
-						{
-							Field = "field",
-							Size = 10,
-							FacetFilter = new TermFilter()
-							{
-								Field = "other_field",
-								Value = "term"
-							}.ToContainer()
-						}
-					}
-					}
-				},
 				Suggest = new Dictionary<string, ISuggestBucket>
 				{
 					{

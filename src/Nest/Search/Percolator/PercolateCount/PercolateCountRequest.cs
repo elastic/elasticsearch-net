@@ -33,7 +33,6 @@ namespace Nest
 		public int? Size { get; set; }
 		public bool? TrackScores { get; set; }
 		public IDictionary<PropertyPathMarker, ISort> Sort { get; set; }
-		public IDictionary<PropertyPathMarker, IFacetContainer> Facets { get; set; }
 		public IHighlightRequest Highlight { get; set; }
 		public QueryContainer Query { get; set; }
 		public FilterContainer Filter { get; set; }
@@ -73,7 +72,6 @@ namespace Nest
 
 
 		IDictionary<PropertyPathMarker, ISort> IPercolateOperation.Sort { get; set; }
-		IDictionary<PropertyPathMarker, IFacetContainer> IPercolateOperation.Facets { get; set; }
 		IDictionary<string, IAggregationContainer> IPercolateOperation.Aggregations { get; set; }
 		
 		IRequestParameters IPercolateOperation.GetRequestParameters()

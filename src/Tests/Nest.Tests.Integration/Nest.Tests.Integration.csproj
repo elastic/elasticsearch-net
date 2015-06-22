@@ -237,15 +237,6 @@
     <Compile Include="Search\NamedFilter\NamedFilterTests.cs" />
     <Compile Include="Search\PercolateTests.cs" />
     <Compile Include="Search\CountTests.cs" />
-    <Compile Include="Facet\GeoDistanceFacetResponseTests.cs" />
-    <Compile Include="Facet\TermFacetResponseTests.cs" />
-    <Compile Include="Facet\TermStatsFacetResponseTests.cs" />
-    <Compile Include="Facet\StatisticalFacetResponseTests.cs" />
-    <Compile Include="Facet\HistogramFacetResponseTests.cs" />
-    <Compile Include="Facet\RangeFacetResponseTests.cs" />
-    <Compile Include="Facet\BaseFacetTestFixture.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Core\DeleteTests.cs" />
     <Compile Include="Indices\IndicesTests.cs" />
     <Compile Include="Indices\AliasTests.cs" />

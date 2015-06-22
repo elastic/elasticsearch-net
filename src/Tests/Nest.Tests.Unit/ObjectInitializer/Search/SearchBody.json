@@ -15,15 +15,7 @@
       }
     }
   ],
-  "facets": {
-    "name": {
-      "terms": {
-        "field": "field",
-        "size": 10
-      }
-    }
-  },
-  "suggest": {
+ "suggest": {
     "suggestion": {
       "text": "suggest me",
       "completion": {

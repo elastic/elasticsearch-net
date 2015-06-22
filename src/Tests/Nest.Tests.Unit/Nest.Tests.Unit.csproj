@@ -464,18 +464,7 @@
     <Compile Include="Search\InnerHits\GlobalInnerHitsTests.cs" />
     <Compile Include="Search\SearchUrlTests.cs" />
     <Compile Include="Search\Rescoring\RescoreTests.cs" />
-    <Compile Include="Search\Facets\DateHistogramFacetJson.cs" />
-    <Compile Include="Search\Facets\FacetJson.cs" />
-    <Compile Include="Search\Facets\FilterFacetJson.cs" />
-    <Compile Include="Search\Facets\GeoDistanceFacetJson.cs" />
-    <Compile Include="Search\Facets\HistogramFacetJson.cs" />
-    <Compile Include="Search\Facets\QueryFacetJson.cs" />
-    <Compile Include="Search\Facets\RangeFacetJson.cs" />
-    <Compile Include="Search\Facets\StatisticalFacetJson.cs" />
-    <Compile Include="Search\Facets\TermsFacetJson.cs" />
-    <Compile Include="Search\Facets\TermsStatsFacetJson.cs" />
     <Compile Include="Search\Filter\BoolCombinations\BoolCombinationTests.cs" />
-    <Compile Include="Search\Filter\BoolFiltersInFacets\BoolFiltersInFacetsTests.cs" />
     <Compile Include="Search\Filter\Bool\StaticBoolFilterTests.cs" />
     <Compile Include="Search\Filter\ConditionlessBool\ConditionLessBooleanTests.cs" />
     <Compile Include="Search\Filter\ConditionLess\ConditionLessTests.cs" />
@@ -1040,33 +1029,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Search\Filter\BoolCombinations\RandomOrderOr.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Search\Filter\BoolFiltersInFacets\FacetDateHistogramFilter.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Search\Filter\BoolFiltersInFacets\FacetFilterOr.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Search\Filter\BoolFiltersInFacets\FacetGeoDistanceFilter.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Search\Filter\BoolFiltersInFacets\FacetHistogramFilter.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Search\Filter\BoolFiltersInFacets\FacetQueryFilter.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Search\Filter\BoolFiltersInFacets\FacetRangeFilter.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Search\Filter\BoolFiltersInFacets\FacetStatisticalFilter.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Search\Filter\BoolFiltersInFacets\FacetTermFilter.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Search\Filter\BoolFiltersInFacets\FacetTermsStatsFilter.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Search\Filter\Bool\BranchLambdaTest.json">

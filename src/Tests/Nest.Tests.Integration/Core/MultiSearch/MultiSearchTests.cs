@@ -61,13 +61,11 @@ namespace Nest.Tests.Integration.Core.MultiSearch
 					.IgnoreUnavailable()
 					.Query(q=>q.Term(p=>p.Name, "NEST"))
 					.PostFilter(f => f.Term(p => p.Name, "NEST"))
-					.FacetTerm(tf=>tf.OnField(p=>p.Name).Global())
 					.SortDescending(p=>p.LongValue)
 				)
 				.Search<Person>(s => s
 					.Query(q => q.Term(p => p.FirstName, "Ellie") || q.Term(p => p.FirstName, "Jessica"))
 					.PostFilter(f => f.Term(p => p.FirstName, "Jake") || f.Term(p => p.FirstName, "Lewis"))
-					.FacetTerm(tf => tf.OnField(p => p.FirstName).Global())
 					.SortDescending(p => p.FirstName)
 				)
 			);

@@ -47,10 +47,6 @@ namespace Nest
 		[JsonConverter(typeof(SortCollectionConverter))]
 		IList<ISort> Sort { get; set; }
 
-		[JsonProperty(PropertyName = "facets")]
-		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		IDictionary<PropertyPathMarker, IFacetContainer> Facets { get; set; }
-
 		[JsonProperty(PropertyName = "suggest")]
 		IDictionary<string, ISuggestBucket> Suggest { get; set; }
 
@@ -167,7 +163,6 @@ namespace Nest
 		public IDictionary<string, IInnerHitsContainer> InnerHits { get; set; }
 		public IQueryContainer Query { get; set; }
 		public IRescore Rescore { get; set; }
-		public IDictionary<PropertyPathMarker, IFacetContainer> Facets { get; set; }
 		public IDictionary<string, ISuggestBucket> Suggest { get; set; }
 		public IHighlightRequest Highlight { get; set; }
 		public IDictionary<string, IAggregationContainer> Aggregations { get; set; }
@@ -236,7 +231,6 @@ namespace Nest
 		public long? TerminateAfter { get; set; }
 		public IDictionary<IndexNameMarker, double> IndicesBoost { get; set; }
 		public IList<ISort> Sort { get; set; }
-		public IDictionary<PropertyPathMarker, IFacetContainer> Facets { get; set; }
 		public IDictionary<string, ISuggestBucket> Suggest { get; set; }
 		public IHighlightRequest Highlight { get; set; }
 		public IRescore Rescore { get; set; }
@@ -339,8 +333,6 @@ namespace Nest
 		IDictionary<IndexNameMarker, double> ISearchRequest.IndicesBoost { get; set; }
 
 		IList<ISort> ISearchRequest.Sort { get; set; }
-
-		IDictionary<PropertyPathMarker, IFacetContainer> ISearchRequest.Facets { get; set; }
 
 		IDictionary<string, ISuggestBucket> ISearchRequest.Suggest { get; set; }
 
@@ -804,250 +796,6 @@ namespace Nest
 			AddSort(descriptor);
 			return this;
 		}
-
-		private SearchDescriptor<T> _Facet<F, FI>(
-			string name,
-			Func<F, F> facet,
-			Func<FI, PropertyPathMarker> inferedFieldNameSelector,
-			Action<FacetContainer, F> fillBucket
-			)
-			where F : IFacetRequest, FI, new()
-			
-		{
-			facet.ThrowIfNull("facet");
-			inferedFieldNameSelector.ThrowIfNull("inferedFieldNameSelector");
-			fillBucket.ThrowIfNull("fillBucket");
-
-			if (Self.Facets == null)
-				Self.Facets = new Dictionary<PropertyPathMarker, IFacetContainer>();
-
-			var descriptor = new F();
-			var f = facet(descriptor);
-			var key = string.IsNullOrWhiteSpace(name) ? inferedFieldNameSelector(descriptor) : name;
-			if (key.IsConditionless())
-			{
-				throw new DslException(
-					"Couldn't infer name for facet of type {0}".F(typeof(F).Name)
-				);
-			}
-			var bucket = new FacetContainer();
-			bucket.Global = f.Global;
-			bucket.FacetFilter = f.FacetFilter;
-			f.FacetFilter = null;
-			bucket.Nested = f.Nested;
-			fillBucket(bucket, descriptor);
-			Self.Facets.Add(key, bucket);
-
-			return this;
-		}
-
-
-		/// <summary>
-		/// Allow to specify field facets that return the N most frequent terms.
-		/// </summary>
-		public SearchDescriptor<T> FacetTerm(string name, Func<TermFacetDescriptor<T>, TermFacetDescriptor<T>> facet)
-		{
-			return this.FacetTerm(facet, Name: name);
-		}
-
-		/// <summary>
-		/// Allow to specify field facets that return the N most frequent terms.
-		/// </summary>
-		public SearchDescriptor<T> FacetTerm(Func<TermFacetDescriptor<T>, TermFacetDescriptor<T>> facet, string Name = null)
-		{
-			return this._Facet<TermFacetDescriptor<T>, ITermFacetRequest>(
-				Name,
-				facet,
-				(d) => d.Field,
-				(b, d) => b.Terms = d
-			);
-		}
-
-		/// <summary>
-		/// range facet allow to specify a set of ranges and get both the number of docs (count) 
-		/// that fall within each range, and aggregated data either based on the field, or using another field
-		/// </summary>
-		/// <typeparam name="K">struct, (int, double, string, DateTime)</typeparam>
-		public SearchDescriptor<T> FacetRange<K>(string name, Func<RangeFacetDescriptor<T, K>, RangeFacetDescriptor<T, K>> facet) where K : struct
-		{
-			return this.FacetRange<K>(facet, Name: name);
-		}
-		/// <summary>
-		/// range facet allow to specify a set of ranges and get both the number of docs (count) 
-		/// that fall within each range, and aggregated data either based on the field, or using another field
-		/// </summary>
-		/// <typeparam name="K">struct, (int, double, string, DateTime)</typeparam>
-		public SearchDescriptor<T> FacetRange<K>(Func<RangeFacetDescriptor<T, K>, RangeFacetDescriptor<T, K>> facet, string Name = null) where K : struct
-		{
-			return this._Facet<RangeFacetDescriptor<T, K>, IRangeFacetRequest<K>>(
-				Name,
-				facet,
-				(d) => d.Field,
-				(b, d) => b.Range = d
-			);
-		}
-		/// <summary>
-		/// The histogram facet works with numeric data by building a histogram across intervals 
-		/// of the field values. Each value is “rounded” into an interval (or placed in a bucket), 
-		/// and statistics are provided per interval/bucket (count and total). 
-		/// </summary>
-		public SearchDescriptor<T> FacetHistogram(string name, Func<HistogramFacetDescriptor<T>, HistogramFacetDescriptor<T>> facet)
-		{
-			return this.FacetHistogram(facet, Name: name);
-		}
-		/// <summary>
-		/// The histogram facet works with numeric data by building a histogram across intervals 
-		/// of the field values. Each value is “rounded” into an interval (or placed in a bucket), 
-		/// and statistics are provided per interval/bucket (count and total). 
-		/// </summary>
-		public SearchDescriptor<T> FacetHistogram(Func<HistogramFacetDescriptor<T>, HistogramFacetDescriptor<T>> facet, string Name = null)
-		{
-			return this._Facet<HistogramFacetDescriptor<T>, IHistogramFacetRequest>(
-				Name,
-				facet,
-				(d) => d.Field,
-				(b, d) => b.Histogram = d
-			);
-		}
-		/// <summary>
-		/// A specific histogram facet that can work with date field types enhancing it over the regular histogram facet.
-		/// </summary>
-		public SearchDescriptor<T> FacetDateHistogram(string name, Func<DateHistogramFacetDescriptor<T>, DateHistogramFacetDescriptor<T>> facet)
-		{
-			return this.FacetDateHistogram(facet, Name: name);
-		}
-		/// <summary>
-		/// A specific histogram facet that can work with date field types enhancing it over the regular histogram facet.
-		/// </summary>
-		public SearchDescriptor<T> FacetDateHistogram(Func<DateHistogramFacetDescriptor<T>, DateHistogramFacetDescriptor<T>> facet, string Name = null)
-		{
-			return this._Facet<DateHistogramFacetDescriptor<T>, IDateHistogramFacetRequest>(
-				Name,
-				facet,
-				(d) => d.Field,
-				(b, d) => b.DateHistogram = d
-			);
-		}
-
-		/// <summary>
-		/// Statistical facet allows to compute statistical data on a numeric fields. 
-		/// The statistical data include count, total, sum of squares, 
-		/// mean (average), minimum, maximum, variance, and standard deviation. 
-		/// </summary>
-		public SearchDescriptor<T> FacetStatistical(string name, Func<StatisticalFacetDescriptor<T>, StatisticalFacetDescriptor<T>> facet)
-		{
-			return this.FacetStatistical(facet, Name: name);
-		}
-
-		/// <summary>
-		/// Statistical facet allows to compute statistical data on a numeric fields. 
-		/// The statistical data include count, total, sum of squares, 
-		/// mean (average), minimum, maximum, variance, and standard deviation. 
-		/// </summary>
-		public SearchDescriptor<T> FacetStatistical(Func<StatisticalFacetDescriptor<T>, StatisticalFacetDescriptor<T>> facet, string Name = null)
-		{
-			return this._Facet<StatisticalFacetDescriptor<T>, IStatisticalFacetRequest>(
-				Name,
-				facet,
-				(d) => d.Field,
-				(b, d) => b.Statistical = d
-			);
-		}
-
-		/// <summary>
-		/// The terms_stats facet combines both the terms and statistical allowing 
-		/// to compute stats computed on a field, per term value driven by another field.
-		/// </summary>
-		public SearchDescriptor<T> FacetTermsStats(string name, Func<TermsStatsFacetDescriptor<T>, TermsStatsFacetDescriptor<T>> facet)
-		{
-			return this.FacetTermsStats(facet, Name: name);
-		}
-
-		/// <summary>
-		/// The terms_stats facet combines both the terms and statistical allowing 
-		/// to compute stats computed on a field, per term value driven by another field.
-		/// </summary>
-		public SearchDescriptor<T> FacetTermsStats(Func<TermsStatsFacetDescriptor<T>, TermsStatsFacetDescriptor<T>> facet, string Name = null)
-		{
-			return this._Facet<TermsStatsFacetDescriptor<T>, ITermsStatsFacetRequest>(
-				Name,
-				facet,
-				(d) => d.KeyField,
-				(b, d) => b.TermsStats = d
-			);
-		}
-		/// <summary>
-		/// The geo_distance facet is a facet providing information for ranges of distances
-		/// from a provided geo_point including count of the number of hits that fall 
-		/// within each range, and aggregation information (like total).
-		/// </summary>
-		public SearchDescriptor<T> FacetGeoDistance(string name, Func<GeoDistanceFacetDescriptor<T>, GeoDistanceFacetDescriptor<T>> facet)
-		{
-			return this.FacetGeoDistance(facet, Name: name);
-		}
-
-		/// <summary>
-		/// The geo_distance facet is a facet providing information for ranges of distances
-		/// from a provided geo_point including count of the number of hits that fall 
-		/// within each range, and aggregation information (like total).
-		/// </summary>
-		public SearchDescriptor<T> FacetGeoDistance(Func<GeoDistanceFacetDescriptor<T>, GeoDistanceFacetDescriptor<T>> facet, string Name = null)
-		{
-			return this._Facet<GeoDistanceFacetDescriptor<T>, IGeoDistanceFacetRequest>(
-					Name,
-					facet,
-					(d) => d.ValueField ?? d.Field,
-					(b, d) => b.GeoDistance = d
-				);
-		}
-
-		/// <summary>
-		/// A facet query allows to return a count of the hits matching 
-		/// the facet query. The query itself can be expressed using the Query DSL.
-		/// </summary>
-		public SearchDescriptor<T> FacetQuery(string name, Func<QueryDescriptor<T>, QueryContainer> querySelector, bool? Global = null)
-		{
-			name.ThrowIfNullOrEmpty("name");
-			querySelector.ThrowIfNull("query");
-			if (Self.Facets == null)
-				Self.Facets = new Dictionary<PropertyPathMarker, IFacetContainer>();
-
-			var query = new QueryDescriptor<T>();
-			var q = querySelector(query);
-			Self.Facets.Add(name, new FacetContainer { Query = q });
-
-			return this;
-		}
-		/// <summary>
-		/// A filter facet (not to be confused with a facet filter) allows you to return a count of the h
-		/// its matching the filter. The filter itself can be expressed using the Query DSL.
-		/// Note, filter facet filters are faster than query facet when using native filters (non query wrapper ones).
-		/// </summary>
-		public SearchDescriptor<T> FacetFilter(string name, Func<FilterDescriptor<T>, FilterContainer> filterSelector)
-		{
-			name.ThrowIfNullOrEmpty("name");
-			filterSelector.ThrowIfNull("filterSelector");
-
-			if (Self.Facets == null)
-				Self.Facets = new Dictionary<PropertyPathMarker, IFacetContainer>();
-
-			var filter = new FilterDescriptor<T>();
-			var f = filterSelector(filter);
-			Self.Facets.Add(name, new FacetContainer { Filter = f });
-
-			return this;
-		}
-
-		///// <summary>
-		///// To avoid repetition of the suggest text, it is possible to define a global text.
-		///// </summary>
-		//public SearchDescriptor<T> SuggestGlobalText(string globalSuggestText)
-		//{
-		//	if (Self.Suggest == null)
-		//		Self.Suggest = new Dictionary<string, ISuggester>();
-		//	Self.Suggest.Add("text", globalSuggestText);
-		//	return this;
-		//}
 
 		/// <summary>
 		/// The term suggester suggests terms based on edit distance. The provided suggest text is analyzed before terms are suggested. 

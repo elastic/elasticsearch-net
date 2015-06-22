@@ -45,9 +45,6 @@ namespace Nest.Resolvers
 			else if (typeof(IDictionary).IsAssignableFrom(objectType))
 				contract.Converter = new DictionaryKeysAreNotPropertyNamesJsonConverter();
 
-			else if (objectType == typeof(Facet))
-				contract.Converter = new FacetConverter();
-			
 			else if (objectType == typeof(IAggregation))
 				contract.Converter = new AggregationConverter();
 			
@@ -101,7 +98,6 @@ namespace Nest.Resolvers
 			defaultProperties = PropertiesOf<IFilter>(type, memberSerialization, defaultProperties, lookup, append: true);
 			defaultProperties = PropertiesOf<IFilterContainer>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IRandomScoreFunction>(type, memberSerialization, defaultProperties, lookup);
-			defaultProperties = PropertiesOf<IFacetRequest>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IHighlightRequest>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IHighlightField>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IRescore>(type, memberSerialization, defaultProperties, lookup);

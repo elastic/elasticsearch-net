@@ -22,10 +22,6 @@ namespace Nest
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		IDictionary<PropertyPathMarker, ISort> Sort { get; set; }
 
-		[JsonProperty(PropertyName = "facets")]
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		IDictionary<PropertyPathMarker, IFacetContainer> Facets { get; set; }
-
 		[JsonProperty(PropertyName = "highlight")]
 		IHighlightRequest Highlight { get; set; }
 
