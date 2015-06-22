@@ -408,6 +408,7 @@
     <Compile Include="Reproduce\Reproduce1187Tests.cs" />
     <Compile Include="Reproduce\Reproduce901Tests.cs" />
     <Compile Include="Reproduce\Reproduce1320Tests.cs" />
+    <Compile Include="Reproduce\Reproduce1435Tests.cs" />
     <Compile Include="Reproduce\Reproduce990Tests.cs" />
     <Compile Include="Reproduce\Reproduce974Tests.cs" />
     <Compile Include="Reproduce\Reproduce928Tests.cs" />
@@ -420,7 +421,7 @@
     <Compile Include="Reproduce\Reproduce926Tests.cs" />
     <Compile Include="Search\Aggregations\ScriptedMetricJson.cs" />
     <Compile Include="Search\Aggregations\SingleBucketAggregationTests.cs" />
-    <Compile Include="Search\Aggregations\Terms\TermAggregationTests.cs" />
+    <Compile Include="Search\Aggregations\Terms\TermsAggregationTests.cs" />
     <Compile Include="Search\Failures\ShardFailureTests.cs" />
     <Compile Include="Search\Fields\FieldsTests.cs" />
     <Compile Include="Search\Filter\Modes\ConditionlessFilterJson.cs" />
@@ -831,6 +832,9 @@
     <None Include="QueryParsers\Filter\Term.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Reproduce\OISAggs.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Reproduce\FixDslThroughCustomInterfaceImplementation.json" />
     <None Include="Reproduce\Issue1199Index.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -856,7 +860,7 @@
     <None Include="Reproduce\PatchedTermsAggSort.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Search\Aggregations\Terms\TermAggregationSerializes.json">
+    <None Include="Search\Aggregations\Terms\TermsAggregationSerializes.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Search\Failures\ShardFailuresResult.json">

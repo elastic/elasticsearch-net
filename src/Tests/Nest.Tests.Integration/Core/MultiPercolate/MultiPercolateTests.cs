@@ -155,24 +155,15 @@ namespace Nest.Tests.Integration.Core.MultiPercolate
 			multiPercolateResponse.IsValid.Should().BeTrue();
 
 			var percolateResponses = multiPercolateResponse.Responses.ToList();
-			percolateResponses.Should().NotBeEmpty().And.HaveCount(4);
+			percolateResponses.Should().NotBeEmpty().And.HaveCount(2);
 
-			var percolateResponse = percolateResponses[0];
-			percolateResponse.Total.Should().Be(10);
-			percolateResponse.Matches.Should().HaveCount(10);
+			var percolateResponse1 = percolateResponses[0];
+			percolateResponse1.Total.Should().Be(10);
+			percolateResponse1.Matches.Should().HaveCount(10);
 
-			var existingResponse = percolateResponses[1];
-			existingResponse.Total.Should().Be(10);
-			existingResponse.Matches.Should().HaveCount(10);
-
-			var countResponse = percolateResponses[2];
-			countResponse.Total.Should().Be(2);
-			countResponse.Matches.Should().BeNull();
-
-			var errorResponse = percolateResponses[3];
-			errorResponse.Total.Should().Be(0);
-			errorResponse.ServerError.Error.Should().NotBeNullOrWhiteSpace();
-
+			var percolateResponse2 = percolateResponses[1];
+			percolateResponse2.Total.Should().Be(10);
+			percolateResponse2.Matches.Should().HaveCount(10);
 		}
 	}
 }

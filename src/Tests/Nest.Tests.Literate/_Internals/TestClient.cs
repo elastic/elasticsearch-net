@@ -7,7 +7,7 @@ namespace Nest.Tests.Literate
 {
 	public static class TestClient
 	{
-		private static bool _runIntegrationTests = true;
+		private static bool _runIntegrationTests = false;
 
 		public static IElasticClient GetClient(Func<ConnectionSettings, ConnectionSettings> modifySettings = null, int port = 9200 )
 		{

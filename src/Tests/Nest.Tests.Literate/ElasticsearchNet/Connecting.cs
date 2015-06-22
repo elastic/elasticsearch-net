@@ -10,7 +10,7 @@ namespace Nest.Tests.Literate.ElasticsearchNet
 	public class Connecting
 	{
 		/** # Connecting
-		 * Connecting to Elasticsearch with `Elasticsearch.Net` is quite easy but has a few toggles and options worth knowing.
+		 * Connecting to *Elasticsearch* with `Elasticsearch.Net` is quite easy but has a few toggles and options worth knowing.
 		 * 
 		 * # Choosing the right connection strategy
 		 * If you simply new an `ElasticsearchClient`, it will be a non-failover connection to `http://localhost:9200`
