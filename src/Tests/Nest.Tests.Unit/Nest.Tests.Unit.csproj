@@ -1316,6 +1316,9 @@
     <None Include="Search\ScriptFields\TestIndexedScriptField.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Search\ScriptFields\TestScriptFile.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Search\SearchTypeTests\SearchTypeDoesNotPolluteQueryObject.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
