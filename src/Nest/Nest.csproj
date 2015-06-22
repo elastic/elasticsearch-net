@@ -389,11 +389,11 @@
     <Compile Include="ElasticClient-ClusterReroute.cs" />
     <Compile Include="ElasticClient-Cat.cs" />
     <Compile Include="ElasticClient-DoRequest.cs" />
-    <Compile Include="ElasticClient-SearchExists.cs" />
+    <Compile Include="Search\SearchExists\ElasticClient-SearchExists.cs" />
     <Compile Include="ElasticClient-Scripts.cs" />
-    <Compile Include="ElasticClient-SearchShards.cs" />
+    <Compile Include="Search\SearchShards\ElasticClient-SearchShards.cs" />
     <Compile Include="ElasticClient-RecoveryStatus.cs" />
-    <Compile Include="ElasticClient-SearchTemplate.cs" />
+    <Compile Include="Search\SearchTemplate\ElasticClient-SearchTemplate.cs" />
     <Compile Include="ElasticClient-TemplateExists.cs" />
     <Compile Include="ElasticClient-AliasExists.cs" />
     <Compile Include="ElasticClient-ClusterSettings.cs" />
@@ -402,7 +402,7 @@
     <Compile Include="ElasticClient-MultiPercolate.cs" />
     <Compile Include="ElasticClient-Ping.cs" />
     <Compile Include="ElasticClient-TypeExists.cs" />
-    <Compile Include="ElasticClient-Explain.cs" />
+    <Compile Include="Search\Explain\ElasticClient-Explain.cs" />
     <Compile Include="ElasticClient-Upgrade.cs" />
     <Compile Include="Enums\FieldDataLoading.cs" />
     <Compile Include="Enums\FieldDataNonStringFormat.cs" />
@@ -561,13 +561,13 @@
     <Compile Include="DSL\UpdateSettingsDescriptor.cs" />
     <Compile Include="DSL\Paths\IndexOptionalPathDescriptor.cs" />
     <Compile Include="ElasticClient-Exists.cs" />
-    <Compile Include="ElasticClient-MultiTermVectors.cs" />
+    <Compile Include="MultiDocument\MultiTermVectors\ElasticClient-MultiTermVectors.cs" />
     <Compile Include="ElasticClient-Snapshot.cs" />
     <Compile Include="ElasticClient-Restore.cs" />
     <Compile Include="ElasticClient-Repository.cs" />
     <Compile Include="ElasticClient-Suggest.cs" />
     <Compile Include="ElasticClient-RootNodeInfo.cs" />
-    <Compile Include="ElasticClient-TermVector.cs" />
+    <Compile Include="Document\TermVectors\ElasticClient-TermVector.cs" />
     <Compile Include="ElasticClient-UpdateSettings.cs" />
     <Compile Include="DSL\MultiGet\IMultiGetOperation.cs" />
     <Compile Include="DSL\DeleteByQueryDescriptor.cs" />
@@ -665,7 +665,7 @@
     <Compile Include="Domain\Responses\MultiSearchResponse.cs" />
     <Compile Include="Domain\Responses\IBulkResponse.cs" />
     <Compile Include="Domain\Similarity\SimilaritySettings.cs" />
-    <Compile Include="ElasticClient-MultiSearch.cs" />
+    <Compile Include="Search\MultiSearch\ElasticClient-MultiSearch.cs" />
     <Compile Include="Domain\Mapping\Types\TemplateMapping.cs" />
     <Compile Include="Domain\Responses\TemplateResponse.cs" />
     <Compile Include="DSL\MultiSearchDescriptor.cs" />
@@ -676,7 +676,7 @@
     <Compile Include="DSL\BulkDescriptor.cs" />
     <Compile Include="DSL\Bulk\BulkIndexDescriptor.cs" />
     <Compile Include="DSL\Bulk\BulkDeleteDescriptor.cs" />
-    <Compile Include="ElasticClient-DeleteByQuery.cs" />
+    <Compile Include="MultiDocument\DeleteByQuery\ElasticClient-DeleteByQuery.cs" />
     <Compile Include="Domain\Analysis\Analyzers\Language.cs" />
     <Compile Include="Domain\Analysis\Analyzers\LanguageAnalyzer.cs" />
     <Compile Include="Domain\Analysis\Analyzers\KeywordAnalyzer.cs" />
@@ -731,7 +731,7 @@
     <Compile Include="Domain\Stats\ShardHealthStats.cs" />
     <Compile Include="DSL\MoreLikeThisDescriptor.cs" />
     <Compile Include="ElasticClient-ClusterHealth.cs" />
-    <Compile Include="ElasticClient-MoreLikeThis.cs" />
+    <Compile Include="Search\MoreLikeThis\ElasticClient-MoreLikeThis.cs" />
     <Compile Include="Domain\Mapping\Descriptors\AttachmentMappingDescriptor.cs" />
     <Compile Include="Domain\Mapping\Descriptors\BooleanMappingDescriptor.cs" />
     <Compile Include="Domain\Mapping\Descriptors\BinaryMappingDescriptor.cs" />
@@ -779,14 +779,14 @@
     <Compile Include="DSL\PutMappingDescriptor.cs" />
     <Compile Include="Domain\Responses\MultiGetResponse.cs" />
     <Compile Include="DSL\MultiGetDescriptor.cs" />
-    <Compile Include="ElasticClient-Get.cs" />
+    <Compile Include="Document\Get\ElasticClient-Get.cs" />
     <Compile Include="Domain\Paths\FieldSelection.cs" />
     <Compile Include="Domain\Responses\BulkResponse.cs" />
     <Compile Include="Domain\Responses\GetResponse.cs" />
     <Compile Include="Domain\Responses\DeleteResponse.cs" />
     <Compile Include="Domain\Responses\IndexResponse.cs" />
     <Compile Include="DSL\GetDescriptor.cs" />
-    <Compile Include="ElasticClient-MultiGet.cs" />
+    <Compile Include="MultiDocument\MultiGet\ElasticClient-MultiGet.cs" />
     <Compile Include="Domain\Analysis\TokenFilter\NgramTokenFilter.cs" />
     <Compile Include="Domain\Analysis\TokenFilter\SynonymTokenFilter.cs" />
     <Compile Include="ElasticClient-Nodes.cs" />
@@ -794,16 +794,16 @@
     <Compile Include="Domain\Hit\ValidationExplanation.cs" />
     <Compile Include="Domain\Responses\ValidateResponse.cs" />
     <Compile Include="DSL\ValidateQueryDescriptor.cs" />
-    <Compile Include="ElasticClient-Validate.cs" />
+    <Compile Include="Search\Validate\ElasticClient-Validate.cs" />
     <Compile Include="Domain\DSL\Filter.cs" />
     <Compile Include="Domain\DSL\Query.cs" />
-    <Compile Include="ElasticClient-Bulk.cs" />
+    <Compile Include="MultiDocument\Bulk\ElasticClient-Bulk.cs" />
     <Compile Include="Domain\Responses\UpdateResponse.cs" />
     <Compile Include="DSL\Filter\FilterContainer.cs" />
     <Compile Include="DSL\Filter\IFilterContainer.cs" />
     <Compile Include="DSL\Query\TermsQueryDescriptor.cs" />
     <Compile Include="DSL\UpdateDescriptor.cs" />
-    <Compile Include="ElasticClient-Update.cs" />
+    <Compile Include="Document\Update\ElasticClient-Update.cs" />
     <Compile Include="Domain\Facets\QueryFacet.cs" />
     <Compile Include="DSL\Search\HighlightDescriptor.cs" />
     <Compile Include="DSL\Search\HighlightFieldDescriptor.cs" />
@@ -911,7 +911,7 @@
     <Compile Include="Domain\Responses\RegisterPercolateResponse.cs" />
     <Compile Include="DSL\Query\QueryDescriptor.cs" />
     <Compile Include="DSL\SearchDescriptor.cs" />
-    <Compile Include="ElasticClient-Percolate.cs" />
+    <Compile Include="Search\Percolator\ElasticClient-Percolate.cs" />
     <Compile Include="Domain\Hit\IndexSegment.cs" />
     <Compile Include="ElasticClient-Segments.cs" />
     <Compile Include="Domain\Hit\ShardSegmentRouting.cs" />
@@ -1020,10 +1020,10 @@
     <Compile Include="ElasticClient-Count.cs" />
     <Compile Include="Domain\Analysis\TokenFilter\ShingleTokenFilter.cs" />
     <Compile Include="Domain\Analysis\TokenFilter\TokenFilterBase.cs" />
-    <Compile Include="ElasticClient-Delete.cs" />
+    <Compile Include="Document\Delete\ElasticClient-Delete.cs" />
     <Compile Include="ElasticClient-MappingType.cs" />
     <Compile Include="ElasticClient-Source.cs" />
-    <Compile Include="ElasticClient-Index.cs" />
+    <Compile Include="Document\Index\ElasticClient-Index.cs" />
     <Compile Include="ElasticClient.cs" />
     <Compile Include="Extensions\Extensions.cs" />
     <Compile Include="DSL\Query\IQuery.cs" />
@@ -1049,7 +1049,7 @@
     <Compile Include="DSL\Query\QueryStringDescriptor.cs" />
     <Compile Include="DSL\Query\TermQueryDescriptor.cs" />
     <Compile Include="DSL\Query\WildcardQueryDescriptor.cs" />
-    <Compile Include="ElasticClient-Search.cs" />
+    <Compile Include="Search\Search\ElasticClient-Search.cs" />
     <Compile Include="Resolvers\ElasticContractResolver.cs" />
     <Compile Include="Exception\DslException.cs" />
     <Compile Include="Enums\FieldType.cs" />
@@ -1091,6 +1091,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="paket.references" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Search\FieldStats\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
