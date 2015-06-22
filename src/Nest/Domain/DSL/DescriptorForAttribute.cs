@@ -2,6 +2,9 @@
 
 namespace Nest
 {
+	//TODO make this attribute private?
+
+
 	/// <summary>
 	/// DescriptorFor is a marker to rename unintuitive generated elasticsearch operation names
 	/// </summary>
