@@ -23,8 +23,9 @@ namespace Nest
 		where T : class
 	{
 		IFunctionScoreFunction Self { get { return this; } }
-		
+
 		[JsonProperty("filter")]
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<FilterContainer>, CustomJsonConverter>))]
 		FilterContainer IFunctionScoreFunction.Filter { get; set; }
 
 		long? IFunctionScoreFunction.Weight

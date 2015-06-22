@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -9,24 +10,24 @@ namespace Nest
 	/// <para>The custom analyzer accepts a logical/registered name of the tokenizer to use, and a list of logical/registered names of token filters.</para>
 	/// </summary>
 	public class CustomAnalyzer : AnalyzerBase
-    {
-	    public CustomAnalyzer(string type)
-	    {
-	        Type = type;
-	    }
+	{
+		public CustomAnalyzer(string type)
+		{
+			Type = type;
+		}
 
-        public CustomAnalyzer() : this("custom") {}
+		public CustomAnalyzer() : this("custom") { }
 
-	    [JsonProperty("tokenizer")]
-        public string Tokenizer { get; set; }
+		[JsonProperty("tokenizer")]
+		public string Tokenizer { get; set; }
 
-        [JsonProperty("filter")]
-        public IList<string> Filter { get; set; }
+		[JsonProperty("filter")]
+		public IList<string> Filter { get; set; }
 
-        [JsonProperty("char_filter")]
-        public IList<string> CharFilter { get; set; }
+		[JsonProperty("char_filter")]
+		public IList<string> CharFilter { get; set; }
 
 		[JsonProperty("alias")]
 		public IList<string> Alias { get; set; }
-    }
+	}
 }

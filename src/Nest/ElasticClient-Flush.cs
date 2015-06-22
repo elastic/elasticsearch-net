@@ -43,5 +43,40 @@ namespace Nest
 			);
 		}
 
+		/// <inheritdoc />
+		public IShardsOperationResponse SyncedFlush(Func<SyncedFlushDescriptor, SyncedFlushDescriptor> selector)
+		{
+			return this.Dispatcher.Dispatch<SyncedFlushDescriptor, SyncedFlushRequestParameters, ShardsOperationResponse>(
+				selector,
+				(p, d) => this.RawDispatch.IndicesFlushSyncedDispatch<ShardsOperationResponse>(p)
+			);
+		}
+
+		/// <inheritdoc />
+		public IShardsOperationResponse SyncedFlush(ISyncedFlushRequest flushRequest)
+		{
+			return this.Dispatcher.Dispatch<ISyncedFlushRequest, SyncedFlushRequestParameters, ShardsOperationResponse>(
+				flushRequest,
+				(p, d) => this.RawDispatch.IndicesFlushSyncedDispatch<ShardsOperationResponse>(p)
+			);
+		}
+
+		/// <inheritdoc />
+		public Task<IShardsOperationResponse> SyncedFlushAsync(Func<SyncedFlushDescriptor, SyncedFlushDescriptor> selector)
+		{
+			return this.Dispatcher.DispatchAsync<SyncedFlushDescriptor, SyncedFlushRequestParameters, ShardsOperationResponse, IShardsOperationResponse>(
+				selector,
+				(p, d) => this.RawDispatch.IndicesFlushSyncedDispatchAsync<ShardsOperationResponse>(p)
+			);
+		}
+
+		/// <inheritdoc />
+		public Task<IShardsOperationResponse> SyncedFlushAsync(ISyncedFlushRequest flushRequest)
+		{
+			return this.Dispatcher.DispatchAsync<ISyncedFlushRequest, SyncedFlushRequestParameters, ShardsOperationResponse, IShardsOperationResponse>(
+				flushRequest,
+				(p, d) => this.RawDispatch.IndicesFlushSyncedDispatchAsync<ShardsOperationResponse>(p)
+			);
+		}
 	}
 }

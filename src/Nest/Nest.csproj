@@ -134,6 +134,7 @@
     <Compile Include="Domain\Geo\GeoLocation.cs" />
     <Compile Include="Domain\Geo\GeoPrecision.cs" />
     <Compile Include="Domain\Hit\ExplainGet.cs" />
+    <Compile Include="Domain\Mapping\Descriptors\MurmurHashMappingDescriptor.cs" />
     <Compile Include="Domain\Mapping\PropertyMapping.cs" />
     <Compile Include="Domain\Mapping\Descriptors\FieldDataFilterDescriptor.cs" />
     <Compile Include="Domain\Mapping\Descriptors\FieldDataFrequencyFilterDescriptor.cs" />
@@ -164,6 +165,7 @@
     <Compile Include="Domain\Responses\DeleteByQueryResponse.cs" />
     <Compile Include="DSL\Facets\Ip4ExpressionRange.cs" />
     <Compile Include="Domain\Mapping\SubMappings\MappingTransform.cs" />
+    <Compile Include="Domain\Mapping\Types\Murmur3HashMapping.cs" />
     <Compile Include="Domain\Observers\RestoreObserver.cs" />
     <Compile Include="Domain\Observers\SnapshotObserver.cs" />
     <Compile Include="Domain\Repository\SnapshotShardFailure.cs" />
@@ -179,6 +181,7 @@
     <Compile Include="Domain\Responses\ClusterStatsResponse.cs" />
     <Compile Include="Domain\Responses\ClusterPendingTasksResponse.cs" />
     <Compile Include="Domain\Responses\DeleteAliasResponse.cs" />
+    <Compile Include="Domain\Responses\FieldStatsResponse.cs" />
     <Compile Include="Domain\Responses\GetIndexResponse.cs" />
     <Compile Include="Domain\Responses\DeleteScriptResponse.cs" />
     <Compile Include="Domain\Responses\DeleteSearchTemplateResponse.cs" />
@@ -239,8 +242,10 @@
     <Compile Include="DSL\Aggregations\TopHitsAggregationDescriptor.cs" />
     <Compile Include="DSL\Aggregations\GeoBoundsAggregationDescriptor.cs" />
     <Compile Include="DSL\Aggregations\ReverseNestedAggregationDescriptor.cs" />
+    <Compile Include="DSL\FieldStatsDescriptor.cs" />
     <Compile Include="DSL\Filter\IndicesFilterDescriptor.cs" />
     <Compile Include="Domain\DSL\NoMatchShortcut.cs" />
+    <Compile Include="DSL\SyncedFlushDescriptor.cs" />
     <Compile Include="DSL\Query\Functions\WeightFunction.cs" />
     <Compile Include="DSL\Search\IGlobalInnerHit.cs" />
     <Compile Include="DSL\Search\IInnerHitsContainer.cs" />
@@ -252,6 +257,7 @@
     <Compile Include="DSL\Filter\GeoHashCellFilterDescriptor.cs" />
     <Compile Include="DSL\DeleteScriptDescriptor.cs" />
     <Compile Include="ElasticClient-GetIndex.cs" />
+    <Compile Include="ElasticClient-FieldStats.cs" />
     <Compile Include="Enums\GeoOrientation.cs" />
     <Compile Include="Enums\GeoPrecisionUnit.cs" />
     <Compile Include="Enums\GetIndexFeature.cs" />
@@ -404,6 +410,7 @@
     <Compile Include="Enums\GeoShapeRelation.cs" />
     <Compile Include="Enums\HighlighterType.cs" />
     <Compile Include="Enums\NormsLoading.cs" />
+    <Compile Include="Enums\NumericResolutionUnit.cs" />
     <Compile Include="Enums\RangeExecution.cs" />
     <Compile Include="Enums\RoutingAllocationEnableOption.cs" />
     <Compile Include="Enums\ScriptLang.cs" />
@@ -999,6 +1006,8 @@
     <Compile Include="Resolvers\Converters\TokenizerCollectionConverter.cs" />
     <Compile Include="Resolvers\Converters\TypeNameMarkerConverter.cs" />
     <Compile Include="Resolvers\Converters\GeoPrecisionConverter.cs" />
+    <Compile Include="Resolvers\Converters\UpgradeStatusResponseConverter.cs" />
+    <Compile Include="Resolvers\Converters\UriJsonConverter.cs" />
     <Compile Include="Resolvers\Converters\WarmerMappingConverter.cs" />
     <Compile Include="Resolvers\Converters\ShardsSegmentConverter.cs" />
     <Compile Include="Resolvers\Converters\MultiGetHitConverter.cs" />

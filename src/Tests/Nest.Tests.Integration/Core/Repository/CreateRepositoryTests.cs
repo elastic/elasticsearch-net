@@ -80,7 +80,6 @@ namespace Nest.Tests.Integration.Core.Repository
 			var backupName = ElasticsearchConfiguration.NewUniqueIndexName();
 			var snapshotResponse = this.Client.Snapshot(repositoryName, backupName, selector: f => f
 				.Index(ElasticsearchConfiguration.NewUniqueIndexName())
-				.IgnoreUnavailable()
 				.Partial());
 			snapshotResponse.IsValid.Should().BeTrue();
 			snapshotResponse.Accepted.Should().BeTrue();

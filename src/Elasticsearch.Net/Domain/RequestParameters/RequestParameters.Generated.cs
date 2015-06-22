@@ -20,12 +20,32 @@ namespace Elasticsearch.Net
 	///</summary>
 	public class AbortBenchmarkRequestParameters : FluentRequestParameters<AbortBenchmarkRequestParameters> 
 	{
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public AbortBenchmarkRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public AbortBenchmarkRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for Bulk
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-bulk.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-bulk.html
 	///</pre>
 	///</summary>
 	public class BulkRequestParameters : FluentRequestParameters<BulkRequestParameters> 
@@ -90,12 +110,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public BulkRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public BulkRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for CatAliases
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-alias.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-alias.html
 	///</pre>
 	///</summary>
 	public class CatAliasesRequestParameters : FluentRequestParameters<CatAliasesRequestParameters> 
@@ -150,12 +190,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public CatAliasesRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public CatAliasesRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for CatAllocation
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-allocation.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-allocation.html
 	///</pre>
 	///</summary>
 	public class CatAllocationRequestParameters : FluentRequestParameters<CatAllocationRequestParameters> 
@@ -220,12 +280,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public CatAllocationRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public CatAllocationRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for CatCount
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-count.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-count.html
 	///</pre>
 	///</summary>
 	public class CatCountRequestParameters : FluentRequestParameters<CatCountRequestParameters> 
@@ -280,12 +360,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public CatCountRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public CatCountRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for CatFielddata
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/cat-fielddata.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-fielddata.html
 	///</pre>
 	///</summary>
 	public class CatFielddataRequestParameters : FluentRequestParameters<CatFielddataRequestParameters> 
@@ -360,12 +460,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public CatFielddataRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public CatFielddataRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for CatHealth
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-health.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-health.html
 	///</pre>
 	///</summary>
 	public class CatHealthRequestParameters : FluentRequestParameters<CatHealthRequestParameters> 
@@ -430,12 +550,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public CatHealthRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public CatHealthRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for CatHelp
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat.html
 	///</pre>
 	///</summary>
 	public class CatHelpRequestParameters : FluentRequestParameters<CatHelpRequestParameters> 
@@ -450,12 +590,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public CatHelpRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public CatHelpRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for CatIndices
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-indices.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-indices.html
 	///</pre>
 	///</summary>
 	public class CatIndicesRequestParameters : FluentRequestParameters<CatIndicesRequestParameters> 
@@ -530,12 +690,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public CatIndicesRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public CatIndicesRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for CatMaster
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-master.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-master.html
 	///</pre>
 	///</summary>
 	public class CatMasterRequestParameters : FluentRequestParameters<CatMasterRequestParameters> 
@@ -590,12 +770,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public CatMasterRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public CatMasterRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for CatNodes
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-nodes.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-nodes.html
 	///</pre>
 	///</summary>
 	public class CatNodesRequestParameters : FluentRequestParameters<CatNodesRequestParameters> 
@@ -650,12 +850,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public CatNodesRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public CatNodesRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for CatPendingTasks
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-pending-tasks.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-pending-tasks.html
 	///</pre>
 	///</summary>
 	public class CatPendingTasksRequestParameters : FluentRequestParameters<CatPendingTasksRequestParameters> 
@@ -710,12 +930,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public CatPendingTasksRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public CatPendingTasksRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for CatPlugins
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/cat-plugins.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-plugins.html
 	///</pre>
 	///</summary>
 	public class CatPluginsRequestParameters : FluentRequestParameters<CatPluginsRequestParameters> 
@@ -770,12 +1010,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public CatPluginsRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public CatPluginsRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for CatRecovery
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-recovery.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-recovery.html
 	///</pre>
 	///</summary>
 	public class CatRecoveryRequestParameters : FluentRequestParameters<CatRecoveryRequestParameters> 
@@ -830,12 +1090,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public CatRecoveryRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public CatRecoveryRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for CatSegments
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/cat-segments.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-segments.html
 	///</pre>
 	///</summary>
 	public class CatSegmentsRequestParameters : FluentRequestParameters<CatSegmentsRequestParameters> 
@@ -870,12 +1150,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public CatSegmentsRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public CatSegmentsRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for CatShards
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cat-shards.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-shards.html
 	///</pre>
 	///</summary>
 	public class CatShardsRequestParameters : FluentRequestParameters<CatShardsRequestParameters> 
@@ -930,12 +1230,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public CatShardsRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public CatShardsRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for CatThreadPool
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/cat-thread-pool.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-thread-pool.html
 	///</pre>
 	///</summary>
 	public class CatThreadPoolRequestParameters : FluentRequestParameters<CatThreadPoolRequestParameters> 
@@ -1000,22 +1320,62 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public CatThreadPoolRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public CatThreadPoolRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for ClearScroll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-request-scroll.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-request-scroll.html
 	///</pre>
 	///</summary>
 	public class ClearScrollRequestParameters : FluentRequestParameters<ClearScrollRequestParameters> 
 	{
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public ClearScrollRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public ClearScrollRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for ClusterGetSettings
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-update-settings.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-update-settings.html
 	///</pre>
 	///</summary>
 	public class ClusterGetSettingsRequestParameters : FluentRequestParameters<ClusterGetSettingsRequestParameters> 
@@ -1050,12 +1410,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public ClusterGetSettingsRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public ClusterGetSettingsRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for ClusterHealth
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-health.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-health.html
 	///</pre>
 	///</summary>
 	public class ClusterHealthRequestParameters : FluentRequestParameters<ClusterHealthRequestParameters> 
@@ -1140,12 +1520,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public ClusterHealthRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public ClusterHealthRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for ClusterPendingTasks
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-pending.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-pending.html
 	///</pre>
 	///</summary>
 	public class ClusterPendingTasksRequestParameters : FluentRequestParameters<ClusterPendingTasksRequestParameters> 
@@ -1170,12 +1570,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public ClusterPendingTasksRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public ClusterPendingTasksRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for ClusterPutSettings
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-update-settings.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-update-settings.html
 	///</pre>
 	///</summary>
 	public class ClusterSettingsRequestParameters : FluentRequestParameters<ClusterSettingsRequestParameters> 
@@ -1210,12 +1630,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public ClusterSettingsRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public ClusterSettingsRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for ClusterReroute
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-reroute.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-reroute.html
 	///</pre>
 	///</summary>
 	public class ClusterRerouteRequestParameters : FluentRequestParameters<ClusterRerouteRequestParameters> 
@@ -1270,12 +1710,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public ClusterRerouteRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public ClusterRerouteRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for ClusterState
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-state.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-state.html
 	///</pre>
 	///</summary>
 	public class ClusterStateRequestParameters : FluentRequestParameters<ClusterStateRequestParameters> 
@@ -1340,12 +1800,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public ClusterStateRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public ClusterStateRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for ClusterStats
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-stats.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-stats.html
 	///</pre>
 	///</summary>
 	public class ClusterStatsRequestParameters : FluentRequestParameters<ClusterStatsRequestParameters> 
@@ -1370,12 +1850,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public ClusterStatsRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public ClusterStatsRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for Count
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-count.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-count.html
 	///</pre>
 	///</summary>
 	public class CountRequestParameters : FluentRequestParameters<CountRequestParameters> 
@@ -1441,12 +1941,92 @@ namespace Elasticsearch.Net
 		}
 		
 		
+		internal string _q { get; set; }
+		///<summary>Query in the Lucene query string syntax</summary>
+		public CountRequestParameters Q(string q)
+		{
+			this._q = q;
+			this.AddQueryString("q", this._q);
+			return this;
+		}
+		
+		
+		internal string _analyzer { get; set; }
+		///<summary>The analyzer to use for the query string</summary>
+		public CountRequestParameters Analyzer(string analyzer)
+		{
+			this._analyzer = analyzer;
+			this.AddQueryString("analyzer", this._analyzer);
+			return this;
+		}
+		
+		
+		internal bool _analyze_wildcard { get; set; }
+		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
+		public CountRequestParameters AnalyzeWildcard(bool analyze_wildcard)
+		{
+			this._analyze_wildcard = analyze_wildcard;
+			this.AddQueryString("analyze_wildcard", this._analyze_wildcard);
+			return this;
+		}
+		
+		
+		internal DefaultOperator _default_operator { get; set; }
+		///<summary>The default operator for query string query (AND or OR)</summary>
+		public CountRequestParameters DefaultOperator(DefaultOperator default_operator)
+		{
+			this._default_operator = default_operator;
+			this.AddQueryString("default_operator", this._default_operator);
+			return this;
+		}
+		
+		
+		internal string _df { get; set; }
+		///<summary>The field to use as default where no field prefix is given in the query string</summary>
+		public CountRequestParameters Df(string df)
+		{
+			this._df = df;
+			this.AddQueryString("df", this._df);
+			return this;
+		}
+		
+		
+		internal bool _lenient { get; set; }
+		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
+		public CountRequestParameters Lenient(bool lenient)
+		{
+			this._lenient = lenient;
+			this.AddQueryString("lenient", this._lenient);
+			return this;
+		}
+		
+		
+		internal bool _lowercase_expanded_terms { get; set; }
+		///<summary>Specify whether query terms should be lowercased</summary>
+		public CountRequestParameters LowercaseExpandedTerms(bool lowercase_expanded_terms)
+		{
+			this._lowercase_expanded_terms = lowercase_expanded_terms;
+			this.AddQueryString("lowercase_expanded_terms", this._lowercase_expanded_terms);
+			return this;
+		}
+		
+		
 		internal string _source { get; set; }
-		///<summary>The URL-encoded query definition (instead of using the request body)</summary>
+		///<summary>The URL-encoded request definition</summary>
 		public CountRequestParameters Source(string source)
 		{
 			this._source = source;
 			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public CountRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
 			return this;
 		}
 		
@@ -1455,21 +2035,11 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for CountPercolateGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-percolate.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html
 	///</pre>
 	///</summary>
 	public class PercolateCountRequestParameters : FluentRequestParameters<PercolateCountRequestParameters> 
 	{
-		
-		internal string _source { get; set; }
-		///<summary>The URL-encoded request definition</summary>
-		public PercolateCountRequestParameters Source(string source)
-		{
-			this._source = source;
-			this.AddQueryString("source", this._source);
-			return this;
-		}
-		
 		
 		internal  string[] _routing { get; set; }
 		///<summary>A comma-separated list of specific routing values</summary>
@@ -1560,12 +2130,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public PercolateCountRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public PercolateCountRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for Delete
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-delete.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-delete.html
 	///</pre>
 	///</summary>
 	public class DeleteRequestParameters : FluentRequestParameters<DeleteRequestParameters> 
@@ -1650,12 +2240,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public DeleteRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public DeleteRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for DeleteByQuery
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-delete-by-query.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-delete-by-query.html
 	///</pre>
 	///</summary>
 	public class DeleteByQueryRequestParameters : FluentRequestParameters<DeleteByQueryRequestParameters> 
@@ -1761,16 +2371,6 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal string _source { get; set; }
-		///<summary>The URL-encoded query definition (instead of using the request body)</summary>
-		public DeleteByQueryRequestParameters Source(string source)
-		{
-			this._source = source;
-			this.AddQueryString("source", this._source);
-			return this;
-		}
-		
-		
 		internal string _timeout { get; set; }
 		///<summary>Explicit operation timeout</summary>
 		public DeleteByQueryRequestParameters Timeout(string timeout)
@@ -1780,12 +2380,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public DeleteByQueryRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public DeleteByQueryRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for DeleteScript
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html
 	///</pre>
 	///</summary>
 	public class DeleteScriptRequestParameters : FluentRequestParameters<DeleteScriptRequestParameters> 
@@ -1810,12 +2430,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public DeleteScriptRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public DeleteScriptRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for DeleteTemplate
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/master/search-template.html
 	///</pre>
 	///</summary>
 	public class DeleteTemplateRequestParameters : FluentRequestParameters<DeleteTemplateRequestParameters> 
@@ -1840,12 +2480,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public DeleteTemplateRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public DeleteTemplateRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for Exists
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-get.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-get.html
 	///</pre>
 	///</summary>
 	public class DocumentExistsRequestParameters : FluentRequestParameters<DocumentExistsRequestParameters> 
@@ -1900,12 +2560,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public DocumentExistsRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public DocumentExistsRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for ExplainGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-explain.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-explain.html
 	///</pre>
 	///</summary>
 	public class ExplainRequestParameters : FluentRequestParameters<ExplainRequestParameters> 
@@ -2021,16 +2701,6 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal string _source { get; set; }
-		///<summary>The URL-encoded query definition (instead of using the request body)</summary>
-		public ExplainRequestParameters Source(string source)
-		{
-			this._source = source;
-			this.AddQueryString("source", this._source);
-			return this;
-		}
-		
-		
 		internal  string[] _source_enabled { get; set; }
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
 		public ExplainRequestParameters SourceEnabled(params string[] source_enabled)
@@ -2060,12 +2730,112 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public ExplainRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public ExplainRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
+	}
+	
+	
+	///<summary>Request parameters descriptor for FieldStatsGet
+	///<pre>
+	///http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-stats.html
+	///</pre>
+	///</summary>
+	public class FieldStatsRequestParameters : FluentRequestParameters<FieldStatsRequestParameters> 
+	{
+		
+		internal IEnumerable<object> _fields { get; set; }
+		///<summary>A comma-separated list of fields for to get field statistics for (min value, max value, and more)</summary>
+		public FieldStatsRequestParameters Fields(params string[] fields)
+		{
+			this._fields = fields.Select(f=>(object)f);
+			this.AddQueryString("fields", this._fields);
+			return this;
+		}
+		
+		
+		internal Level _level { get; set; }
+		///<summary>Defines if field stats should be returned on a per index level or on a cluster wide level</summary>
+		public FieldStatsRequestParameters Level(Level level)
+		{
+			this._level = level;
+			this.AddQueryString("level", this._level);
+			return this;
+		}
+		
+		
+		internal bool _ignore_unavailable { get; set; }
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public FieldStatsRequestParameters IgnoreUnavailable(bool ignore_unavailable)
+		{
+			this._ignore_unavailable = ignore_unavailable;
+			this.AddQueryString("ignore_unavailable", this._ignore_unavailable);
+			return this;
+		}
+		
+		
+		internal bool _allow_no_indices { get; set; }
+		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		public FieldStatsRequestParameters AllowNoIndices(bool allow_no_indices)
+		{
+			this._allow_no_indices = allow_no_indices;
+			this.AddQueryString("allow_no_indices", this._allow_no_indices);
+			return this;
+		}
+		
+		
+		internal ExpandWildcards _expand_wildcards { get; set; }
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public FieldStatsRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards)
+		{
+			this._expand_wildcards = expand_wildcards;
+			this.AddQueryString("expand_wildcards", this._expand_wildcards);
+			return this;
+		}
+		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public FieldStatsRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public FieldStatsRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for Get
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-get.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-get.html
 	///</pre>
 	///</summary>
 	public class GetRequestParameters : FluentRequestParameters<GetRequestParameters> 
@@ -2180,12 +2950,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public GetRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public GetRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for GetScript
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html
 	///</pre>
 	///</summary>
 	public class GetScriptRequestParameters : FluentRequestParameters<GetScriptRequestParameters> 
@@ -2210,12 +3000,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public GetScriptRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public GetScriptRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for GetSource
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-get.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-get.html
 	///</pre>
 	///</summary>
 	public class SourceRequestParameters : FluentRequestParameters<SourceRequestParameters> 
@@ -2320,12 +3130,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public SourceRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public SourceRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for GetTemplate
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/master/search-template.html
 	///</pre>
 	///</summary>
 	public class GetTemplateRequestParameters : FluentRequestParameters<GetTemplateRequestParameters> 
@@ -2350,12 +3180,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public GetTemplateRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public GetTemplateRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for Index
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-index_.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-index_.html
 	///</pre>
 	///</summary>
 	public class IndexRequestParameters : FluentRequestParameters<IndexRequestParameters> 
@@ -2470,26 +3320,36 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
-	}
-	
-	
-	///<summary>Request parameters descriptor for IndicesAnalyzeGetForAll
-	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-analyze.html
-	///</pre>
-	///</summary>
-	public class AnalyzeRequestParameters : FluentRequestParameters<AnalyzeRequestParameters> 
-	{
 		
 		internal string _source { get; set; }
 		///<summary>The URL-encoded request definition</summary>
-		public AnalyzeRequestParameters Source(string source)
+		public IndexRequestParameters Source(string source)
 		{
 			this._source = source;
 			this.AddQueryString("source", this._source);
 			return this;
 		}
 		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public IndexRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
+	}
+	
+	
+	///<summary>Request parameters descriptor for IndicesAnalyzeGetForAll
+	///<pre>
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-analyze.html
+	///</pre>
+	///</summary>
+	public class AnalyzeRequestParameters : FluentRequestParameters<AnalyzeRequestParameters> 
+	{
 		
 		internal string _analyzer { get; set; }
 		///<summary>The name of the analyzer to use</summary>
@@ -2580,12 +3440,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public AnalyzeRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public AnalyzeRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for IndicesClearCacheForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-clearcache.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-clearcache.html
 	///</pre>
 	///</summary>
 	public class ClearCacheRequestParameters : FluentRequestParameters<ClearCacheRequestParameters> 
@@ -2720,12 +3600,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public ClearCacheRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public ClearCacheRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for IndicesClose
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-open-close.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-open-close.html
 	///</pre>
 	///</summary>
 	public class CloseIndexRequestParameters : FluentRequestParameters<CloseIndexRequestParameters> 
@@ -2780,12 +3680,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public CloseIndexRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public CloseIndexRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for IndicesCreate
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-create-index.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-create-index.html
 	///</pre>
 	///</summary>
 	public class CreateIndexRequestParameters : FluentRequestParameters<CreateIndexRequestParameters> 
@@ -2810,12 +3730,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public CreateIndexRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public CreateIndexRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for IndicesDelete
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-delete-index.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-delete-index.html
 	///</pre>
 	///</summary>
 	public class DeleteIndexRequestParameters : FluentRequestParameters<DeleteIndexRequestParameters> 
@@ -2840,12 +3780,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public DeleteIndexRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public DeleteIndexRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for IndicesDeleteAlias
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html
 	///</pre>
 	///</summary>
 	public class DeleteAliasRequestParameters : FluentRequestParameters<DeleteAliasRequestParameters> 
@@ -2870,12 +3830,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public DeleteAliasRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public DeleteAliasRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for IndicesDeleteMapping
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-delete-mapping.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-delete-mapping.html
 	///</pre>
 	///</summary>
 	public class DeleteMappingRequestParameters : FluentRequestParameters<DeleteMappingRequestParameters> 
@@ -2890,12 +3870,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public DeleteMappingRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public DeleteMappingRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for IndicesDeleteWarmer
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-warmers.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-warmers.html
 	///</pre>
 	///</summary>
 	public class DeleteWarmerRequestParameters : FluentRequestParameters<DeleteWarmerRequestParameters> 
@@ -2910,12 +3910,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public DeleteWarmerRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public DeleteWarmerRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for IndicesExists
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-exists.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-exists.html
 	///</pre>
 	///</summary>
 	public class IndexExistsRequestParameters : FluentRequestParameters<IndexExistsRequestParameters> 
@@ -2960,12 +3980,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public IndexExistsRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public IndexExistsRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for IndicesExistsAliasForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html
 	///</pre>
 	///</summary>
 	public class AliasExistsRequestParameters : FluentRequestParameters<AliasExistsRequestParameters> 
@@ -3010,12 +4050,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public AliasExistsRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public AliasExistsRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for IndicesExistsTemplateForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-templates.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-templates.html
 	///</pre>
 	///</summary>
 	public class TemplateExistsRequestParameters : FluentRequestParameters<TemplateExistsRequestParameters> 
@@ -3040,12 +4100,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public TemplateExistsRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public TemplateExistsRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for IndicesExistsType
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-types-exists.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-types-exists.html
 	///</pre>
 	///</summary>
 	public class TypeExistsRequestParameters : FluentRequestParameters<TypeExistsRequestParameters> 
@@ -3090,12 +4170,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public TypeExistsRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public TypeExistsRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for IndicesFlushForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-flush.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-flush.html
 	///</pre>
 	///</summary>
 	public class FlushRequestParameters : FluentRequestParameters<FlushRequestParameters> 
@@ -3150,12 +4250,62 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public FlushRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public FlushRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
+	}
+	
+	
+	///<summary>Request parameters descriptor for IndicesFlushSyncedForAll
+	///<pre>
+	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush.html
+	///</pre>
+	///</summary>
+	public class SyncedFlushRequestParameters : FluentRequestParameters<SyncedFlushRequestParameters> 
+	{
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public SyncedFlushRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public SyncedFlushRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for IndicesGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-get-index.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-index.html
 	///</pre>
 	///</summary>
 	public class GetIndexRequestParameters : FluentRequestParameters<GetIndexRequestParameters> 
@@ -3200,12 +4350,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public GetIndexRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public GetIndexRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for IndicesGetAliasForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html
 	///</pre>
 	///</summary>
 	public class GetAliasRequestParameters : FluentRequestParameters<GetAliasRequestParameters> 
@@ -3250,12 +4420,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public GetAliasRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public GetAliasRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for IndicesGetAliasesForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html
 	///</pre>
 	///</summary>
 	public class GetAliasesRequestParameters : FluentRequestParameters<GetAliasesRequestParameters> 
@@ -3280,12 +4470,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public GetAliasesRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public GetAliasesRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for IndicesGetFieldMappingForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-get-field-mapping.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-field-mapping.html
 	///</pre>
 	///</summary>
 	public class GetFieldMappingRequestParameters : FluentRequestParameters<GetFieldMappingRequestParameters> 
@@ -3340,12 +4550,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public GetFieldMappingRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public GetFieldMappingRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for IndicesGetMappingForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-get-mapping.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-mapping.html
 	///</pre>
 	///</summary>
 	public class GetMappingRequestParameters : FluentRequestParameters<GetMappingRequestParameters> 
@@ -3390,12 +4620,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public GetMappingRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public GetMappingRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for IndicesGetSettingsForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-get-settings.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-settings.html
 	///</pre>
 	///</summary>
 	public class GetIndexSettingsRequestParameters : FluentRequestParameters<GetIndexSettingsRequestParameters> 
@@ -3450,12 +4700,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public GetIndexSettingsRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public GetIndexSettingsRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for IndicesGetUpgradeForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/indices-upgrade.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html
 	///</pre>
 	///</summary>
 	public class UpgradeStatusRequestParameters : FluentRequestParameters<UpgradeStatusRequestParameters> 
@@ -3500,12 +4770,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public UpgradeStatusRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public UpgradeStatusRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for IndicesGetWarmerForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-warmers.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-warmers.html
 	///</pre>
 	///</summary>
 	public class GetWarmerRequestParameters : FluentRequestParameters<GetWarmerRequestParameters> 
@@ -3550,12 +4840,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public GetWarmerRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public GetWarmerRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for IndicesOpen
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-open-close.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-open-close.html
 	///</pre>
 	///</summary>
 	public class OpenIndexRequestParameters : FluentRequestParameters<OpenIndexRequestParameters> 
@@ -3610,12 +4920,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public OpenIndexRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public OpenIndexRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for IndicesOptimizeForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-optimize.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-optimize.html
 	///</pre>
 	///</summary>
 	public class OptimizeRequestParameters : FluentRequestParameters<OptimizeRequestParameters> 
@@ -3710,12 +5040,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public OptimizeRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public OptimizeRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for IndicesPutAlias
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html
 	///</pre>
 	///</summary>
 	public class PutAliasRequestParameters : FluentRequestParameters<PutAliasRequestParameters> 
@@ -3740,12 +5090,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public PutAliasRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public PutAliasRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for IndicesPutMapping
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-put-mapping.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-put-mapping.html
 	///</pre>
 	///</summary>
 	public class PutMappingRequestParameters : FluentRequestParameters<PutMappingRequestParameters> 
@@ -3810,12 +5180,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public PutMappingRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public PutMappingRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for IndicesPutSettingsForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-update-settings.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-update-settings.html
 	///</pre>
 	///</summary>
 	public class UpdateSettingsRequestParameters : FluentRequestParameters<UpdateSettingsRequestParameters> 
@@ -3870,12 +5260,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public UpdateSettingsRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public UpdateSettingsRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for IndicesPutTemplateForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-templates.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-templates.html
 	///</pre>
 	///</summary>
 	public class PutTemplateRequestParameters : FluentRequestParameters<PutTemplateRequestParameters> 
@@ -3920,12 +5330,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public PutTemplateRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public PutTemplateRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for IndicesPutWarmerForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-warmers.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-warmers.html
 	///</pre>
 	///</summary>
 	public class PutWarmerRequestParameters : FluentRequestParameters<PutWarmerRequestParameters> 
@@ -3970,12 +5400,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public PutWarmerRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public PutWarmerRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for IndicesRecoveryForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/indices-recovery.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-recovery.html
 	///</pre>
 	///</summary>
 	public class RecoveryStatusRequestParameters : FluentRequestParameters<RecoveryStatusRequestParameters> 
@@ -4010,12 +5460,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public RecoveryStatusRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public RecoveryStatusRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for IndicesRefreshForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-refresh.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-refresh.html
 	///</pre>
 	///</summary>
 	public class RefreshRequestParameters : FluentRequestParameters<RefreshRequestParameters> 
@@ -4070,12 +5540,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public RefreshRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public RefreshRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for IndicesSegmentsForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-segments.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-segments.html
 	///</pre>
 	///</summary>
 	public class SegmentsRequestParameters : FluentRequestParameters<SegmentsRequestParameters> 
@@ -4130,12 +5620,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public SegmentsRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public SegmentsRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for IndicesStatsForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-stats.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-stats.html
 	///</pre>
 	///</summary>
 	public class IndicesStatsRequestParameters : FluentRequestParameters<IndicesStatsRequestParameters> 
@@ -4200,12 +5710,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public IndicesStatsRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public IndicesStatsRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for IndicesStatusForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-status.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-status.html
 	///</pre>
 	///</summary>
 	public class IndicesStatusRequestParameters : FluentRequestParameters<IndicesStatusRequestParameters> 
@@ -4280,12 +5810,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public IndicesStatusRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public IndicesStatusRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for IndicesUpdateAliasesForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/indices-aliases.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html
 	///</pre>
 	///</summary>
 	public class AliasRequestParameters : FluentRequestParameters<AliasRequestParameters> 
@@ -4310,12 +5860,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public AliasRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public AliasRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for IndicesUpgradeForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/indices-upgrade.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html
 	///</pre>
 	///</summary>
 	public class UpgradeRequestParameters : FluentRequestParameters<UpgradeRequestParameters> 
@@ -4360,12 +5930,42 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal bool _only_ancient_segments { get; set; }
+		///<summary>If true, only ancient (an older Lucene major release) segments will be upgraded</summary>
+		public UpgradeRequestParameters OnlyAncientSegments(bool only_ancient_segments)
+		{
+			this._only_ancient_segments = only_ancient_segments;
+			this.AddQueryString("only_ancient_segments", this._only_ancient_segments);
+			return this;
+		}
+		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public UpgradeRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public UpgradeRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for IndicesValidateQueryGetForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-validate.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-validate.html
 	///</pre>
 	///</summary>
 	public class ValidateQueryRequestParameters : FluentRequestParameters<ValidateQueryRequestParameters> 
@@ -4421,16 +6021,6 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal string _source { get; set; }
-		///<summary>The URL-encoded query definition (instead of using the request body)</summary>
-		public ValidateQueryRequestParameters Source(string source)
-		{
-			this._source = source;
-			this.AddQueryString("source", this._source);
-			return this;
-		}
-		
-		
 		internal string _q { get; set; }
 		///<summary>Query in the Lucene query string syntax</summary>
 		public ValidateQueryRequestParameters Q(string q)
@@ -4440,16 +6030,126 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _analyzer { get; set; }
+		///<summary>The analyzer to use for the query string</summary>
+		public ValidateQueryRequestParameters Analyzer(string analyzer)
+		{
+			this._analyzer = analyzer;
+			this.AddQueryString("analyzer", this._analyzer);
+			return this;
+		}
+		
+		
+		internal bool _analyze_wildcard { get; set; }
+		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
+		public ValidateQueryRequestParameters AnalyzeWildcard(bool analyze_wildcard)
+		{
+			this._analyze_wildcard = analyze_wildcard;
+			this.AddQueryString("analyze_wildcard", this._analyze_wildcard);
+			return this;
+		}
+		
+		
+		internal DefaultOperator _default_operator { get; set; }
+		///<summary>The default operator for query string query (AND or OR)</summary>
+		public ValidateQueryRequestParameters DefaultOperator(DefaultOperator default_operator)
+		{
+			this._default_operator = default_operator;
+			this.AddQueryString("default_operator", this._default_operator);
+			return this;
+		}
+		
+		
+		internal string _df { get; set; }
+		///<summary>The field to use as default where no field prefix is given in the query string</summary>
+		public ValidateQueryRequestParameters Df(string df)
+		{
+			this._df = df;
+			this.AddQueryString("df", this._df);
+			return this;
+		}
+		
+		
+		internal bool _lenient { get; set; }
+		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
+		public ValidateQueryRequestParameters Lenient(bool lenient)
+		{
+			this._lenient = lenient;
+			this.AddQueryString("lenient", this._lenient);
+			return this;
+		}
+		
+		
+		internal bool _lowercase_expanded_terms { get; set; }
+		///<summary>Specify whether query terms should be lowercased</summary>
+		public ValidateQueryRequestParameters LowercaseExpandedTerms(bool lowercase_expanded_terms)
+		{
+			this._lowercase_expanded_terms = lowercase_expanded_terms;
+			this.AddQueryString("lowercase_expanded_terms", this._lowercase_expanded_terms);
+			return this;
+		}
+		
+		
+		internal bool _rewrite { get; set; }
+		///<summary>Provide a more detailed explanation showing the actual Lucene query that will be executed.</summary>
+		public ValidateQueryRequestParameters Rewrite(bool rewrite)
+		{
+			this._rewrite = rewrite;
+			this.AddQueryString("rewrite", this._rewrite);
+			return this;
+		}
+		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public ValidateQueryRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public ValidateQueryRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for Info
 	///<pre>
-	///http://www.elasticsearch.org/guide/
+	///http://www.elastic.co/guide/
 	///</pre>
 	///</summary>
 	public class InfoRequestParameters : FluentRequestParameters<InfoRequestParameters> 
 	{
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public InfoRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public InfoRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
@@ -4460,26 +6160,36 @@ namespace Elasticsearch.Net
 	///</summary>
 	public class ListBenchmarksRequestParameters : FluentRequestParameters<ListBenchmarksRequestParameters> 
 	{
-	}
-	
-	
-	///<summary>Request parameters descriptor for MgetGet
-	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-multi-get.html
-	///</pre>
-	///</summary>
-	public class MultiGetRequestParameters : FluentRequestParameters<MultiGetRequestParameters> 
-	{
 		
 		internal string _source { get; set; }
 		///<summary>The URL-encoded request definition</summary>
-		public MultiGetRequestParameters Source(string source)
+		public ListBenchmarksRequestParameters Source(string source)
 		{
 			this._source = source;
 			this.AddQueryString("source", this._source);
 			return this;
 		}
 		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public ListBenchmarksRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
+	}
+	
+	
+	///<summary>Request parameters descriptor for MgetGet
+	///<pre>
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-multi-get.html
+	///</pre>
+	///</summary>
+	public class MultiGetRequestParameters : FluentRequestParameters<MultiGetRequestParameters> 
+	{
 		
 		internal IEnumerable<object> _fields { get; set; }
 		///<summary>A comma-separated list of fields to return in the response</summary>
@@ -4550,26 +6260,36 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
-	}
-	
-	
-	///<summary>Request parameters descriptor for MltGet
-	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-more-like-this.html
-	///</pre>
-	///</summary>
-	public class MoreLikeThisRequestParameters : FluentRequestParameters<MoreLikeThisRequestParameters> 
-	{
 		
 		internal string _source { get; set; }
 		///<summary>The URL-encoded request definition</summary>
-		public MoreLikeThisRequestParameters Source(string source)
+		public MultiGetRequestParameters Source(string source)
 		{
 			this._source = source;
 			this.AddQueryString("source", this._source);
 			return this;
 		}
 		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public MultiGetRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
+	}
+	
+	
+	///<summary>Request parameters descriptor for MltGet
+	///<pre>
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-more-like-this.html
+	///</pre>
+	///</summary>
+	public class MoreLikeThisRequestParameters : FluentRequestParameters<MoreLikeThisRequestParameters> 
+	{
 		
 		internal double _boost_terms { get; set; }
 		///<summary>The boost factor</summary>
@@ -4750,26 +6470,36 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
-	}
-	
-	
-	///<summary>Request parameters descriptor for MpercolateGet
-	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-percolate.html
-	///</pre>
-	///</summary>
-	public class MultiPercolateRequestParameters : FluentRequestParameters<MultiPercolateRequestParameters> 
-	{
 		
 		internal string _source { get; set; }
 		///<summary>The URL-encoded request definition</summary>
-		public MultiPercolateRequestParameters Source(string source)
+		public MoreLikeThisRequestParameters Source(string source)
 		{
 			this._source = source;
 			this.AddQueryString("source", this._source);
 			return this;
 		}
 		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public MoreLikeThisRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
+	}
+	
+	
+	///<summary>Request parameters descriptor for MpercolateGet
+	///<pre>
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html
+	///</pre>
+	///</summary>
+	public class MultiPercolateRequestParameters : FluentRequestParameters<MultiPercolateRequestParameters> 
+	{
 		
 		internal bool _ignore_unavailable { get; set; }
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -4800,16 +6530,46 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public MultiPercolateRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public MultiPercolateRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for MsearchGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-multi-search.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-multi-search.html
 	///</pre>
 	///</summary>
 	public class MultiSearchRequestParameters : FluentRequestParameters<MultiSearchRequestParameters> 
 	{
+		
+		internal SearchType _search_type { get; set; }
+		///<summary>Search operation type</summary>
+		public MultiSearchRequestParameters SearchType(SearchType search_type)
+		{
+			this._search_type = search_type;
+			this.AddQueryString("search_type", this._search_type);
+			return this;
+		}
+		
 		
 		internal string _source { get; set; }
 		///<summary>The URL-encoded request definition</summary>
@@ -4821,12 +6581,12 @@ namespace Elasticsearch.Net
 		}
 		
 		
-		internal SearchType _search_type { get; set; }
-		///<summary>Search operation type</summary>
-		public MultiSearchRequestParameters SearchType(SearchType search_type)
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public MultiSearchRequestParameters FilterPath(string filter_path)
 		{
-			this._search_type = search_type;
-			this.AddQueryString("search_type", this._search_type);
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
 			return this;
 		}
 		
@@ -4835,21 +6595,11 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for MtermvectorsGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-multi-termvectors.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-multi-termvectors.html
 	///</pre>
 	///</summary>
 	public class MultiTermVectorsRequestParameters : FluentRequestParameters<MultiTermVectorsRequestParameters> 
 	{
-		
-		internal string _source { get; set; }
-		///<summary>The URL-encoded request definition</summary>
-		public MultiTermVectorsRequestParameters Source(string source)
-		{
-			this._source = source;
-			this.AddQueryString("source", this._source);
-			return this;
-		}
-		
 		
 		internal bool _term_statistics { get; set; }
 		///<summary>Specifies if total term frequency and document frequency should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
@@ -4950,12 +6700,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public MultiTermVectorsRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public MultiTermVectorsRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for NodesHotThreadsForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-nodes-hot-threads.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-hot-threads.html
 	///</pre>
 	///</summary>
 	public class NodesHotThreadsRequestParameters : FluentRequestParameters<NodesHotThreadsRequestParameters> 
@@ -5010,12 +6780,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public NodesHotThreadsRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public NodesHotThreadsRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for NodesInfoForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-nodes-info.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-info.html
 	///</pre>
 	///</summary>
 	public class NodesInfoRequestParameters : FluentRequestParameters<NodesInfoRequestParameters> 
@@ -5040,12 +6830,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public NodesInfoRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public NodesInfoRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for NodesShutdownForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-nodes-shutdown.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-shutdown.html
 	///</pre>
 	///</summary>
 	public class NodesShutdownRequestParameters : FluentRequestParameters<NodesShutdownRequestParameters> 
@@ -5070,12 +6880,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public NodesShutdownRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public NodesShutdownRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for NodesStatsForAll
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/cluster-nodes-stats.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-stats.html
 	///</pre>
 	///</summary>
 	public class NodesStatsRequestParameters : FluentRequestParameters<NodesStatsRequestParameters> 
@@ -5150,26 +6980,36 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
-	}
-	
-	
-	///<summary>Request parameters descriptor for PercolateGet
-	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-percolate.html
-	///</pre>
-	///</summary>
-	public class PercolateRequestParameters : FluentRequestParameters<PercolateRequestParameters> 
-	{
 		
 		internal string _source { get; set; }
 		///<summary>The URL-encoded request definition</summary>
-		public PercolateRequestParameters Source(string source)
+		public NodesStatsRequestParameters Source(string source)
 		{
 			this._source = source;
 			this.AddQueryString("source", this._source);
 			return this;
 		}
 		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public NodesStatsRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
+	}
+	
+	
+	///<summary>Request parameters descriptor for PercolateGet
+	///<pre>
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html
+	///</pre>
+	///</summary>
+	public class PercolateRequestParameters : FluentRequestParameters<PercolateRequestParameters> 
+	{
 		
 		internal  string[] _routing { get; set; }
 		///<summary>A comma-separated list of specific routing values</summary>
@@ -5290,22 +7130,62 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public PercolateRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public PercolateRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for Ping
 	///<pre>
-	///http://www.elasticsearch.org/guide/
+	///http://www.elastic.co/guide/
 	///</pre>
 	///</summary>
 	public class PingRequestParameters : FluentRequestParameters<PingRequestParameters> 
 	{
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public PingRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public PingRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for PutScript
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-scripting.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html
 	///</pre>
 	///</summary>
 	public class PutScriptRequestParameters : FluentRequestParameters<PutScriptRequestParameters> 
@@ -5340,12 +7220,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public PutScriptRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public PutScriptRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for ScrollGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-request-scroll.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-request-scroll.html
 	///</pre>
 	///</summary>
 	public class ScrollRequestParameters : FluentRequestParameters<ScrollRequestParameters> 
@@ -5360,12 +7260,22 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public ScrollRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for SearchGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-search.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-search.html
 	///</pre>
 	///</summary>
 	public class SearchRequestParameters : FluentRequestParameters<SearchRequestParameters> 
@@ -5560,12 +7470,22 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public SearchRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for SearchExists
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-exists.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/master/search-exists.html
 	///</pre>
 	///</summary>
 	public class SearchExistsRequestParameters : FluentRequestParameters<SearchExistsRequestParameters> 
@@ -5631,12 +7551,92 @@ namespace Elasticsearch.Net
 		}
 		
 		
+		internal string _q { get; set; }
+		///<summary>Query in the Lucene query string syntax</summary>
+		public SearchExistsRequestParameters Q(string q)
+		{
+			this._q = q;
+			this.AddQueryString("q", this._q);
+			return this;
+		}
+		
+		
+		internal string _analyzer { get; set; }
+		///<summary>The analyzer to use for the query string</summary>
+		public SearchExistsRequestParameters Analyzer(string analyzer)
+		{
+			this._analyzer = analyzer;
+			this.AddQueryString("analyzer", this._analyzer);
+			return this;
+		}
+		
+		
+		internal bool _analyze_wildcard { get; set; }
+		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
+		public SearchExistsRequestParameters AnalyzeWildcard(bool analyze_wildcard)
+		{
+			this._analyze_wildcard = analyze_wildcard;
+			this.AddQueryString("analyze_wildcard", this._analyze_wildcard);
+			return this;
+		}
+		
+		
+		internal DefaultOperator _default_operator { get; set; }
+		///<summary>The default operator for query string query (AND or OR)</summary>
+		public SearchExistsRequestParameters DefaultOperator(DefaultOperator default_operator)
+		{
+			this._default_operator = default_operator;
+			this.AddQueryString("default_operator", this._default_operator);
+			return this;
+		}
+		
+		
+		internal string _df { get; set; }
+		///<summary>The field to use as default where no field prefix is given in the query string</summary>
+		public SearchExistsRequestParameters Df(string df)
+		{
+			this._df = df;
+			this.AddQueryString("df", this._df);
+			return this;
+		}
+		
+		
+		internal bool _lenient { get; set; }
+		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
+		public SearchExistsRequestParameters Lenient(bool lenient)
+		{
+			this._lenient = lenient;
+			this.AddQueryString("lenient", this._lenient);
+			return this;
+		}
+		
+		
+		internal bool _lowercase_expanded_terms { get; set; }
+		///<summary>Specify whether query terms should be lowercased</summary>
+		public SearchExistsRequestParameters LowercaseExpandedTerms(bool lowercase_expanded_terms)
+		{
+			this._lowercase_expanded_terms = lowercase_expanded_terms;
+			this.AddQueryString("lowercase_expanded_terms", this._lowercase_expanded_terms);
+			return this;
+		}
+		
+		
 		internal string _source { get; set; }
-		///<summary>The URL-encoded query definition (instead of using the request body)</summary>
+		///<summary>The URL-encoded request definition</summary>
 		public SearchExistsRequestParameters Source(string source)
 		{
 			this._source = source;
 			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public SearchExistsRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
 			return this;
 		}
 		
@@ -5645,7 +7645,7 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for SearchShardsGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-shards.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html
 	///</pre>
 	///</summary>
 	public class SearchShardsRequestParameters : FluentRequestParameters<SearchShardsRequestParameters> 
@@ -5710,26 +7710,36 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
-	}
-	
-	
-	///<summary>Request parameters descriptor for SearchTemplateGet
-	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-template.html
-	///</pre>
-	///</summary>
-	public class SearchTemplateRequestParameters : FluentRequestParameters<SearchTemplateRequestParameters> 
-	{
 		
 		internal string _source { get; set; }
 		///<summary>The URL-encoded request definition</summary>
-		public SearchTemplateRequestParameters Source(string source)
+		public SearchShardsRequestParameters Source(string source)
 		{
 			this._source = source;
 			this.AddQueryString("source", this._source);
 			return this;
 		}
 		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public SearchShardsRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
+	}
+	
+	
+	///<summary>Request parameters descriptor for SearchTemplateGet
+	///<pre>
+	///http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html
+	///</pre>
+	///</summary>
+	public class SearchTemplateRequestParameters : FluentRequestParameters<SearchTemplateRequestParameters> 
+	{
 		
 		internal bool _ignore_unavailable { get; set; }
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -5800,12 +7810,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public SearchTemplateRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public SearchTemplateRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for SnapshotCreate
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html
 	///</pre>
 	///</summary>
 	public class SnapshotRequestParameters : FluentRequestParameters<SnapshotRequestParameters> 
@@ -5830,12 +7860,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public SnapshotRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public SnapshotRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for SnapshotCreateRepository
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html
 	///</pre>
 	///</summary>
 	public class CreateRepositoryRequestParameters : FluentRequestParameters<CreateRepositoryRequestParameters> 
@@ -5870,12 +7920,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public CreateRepositoryRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public CreateRepositoryRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for SnapshotDelete
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html
 	///</pre>
 	///</summary>
 	public class DeleteSnapshotRequestParameters : FluentRequestParameters<DeleteSnapshotRequestParameters> 
@@ -5890,12 +7960,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public DeleteSnapshotRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public DeleteSnapshotRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for SnapshotDeleteRepository
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html
 	///</pre>
 	///</summary>
 	public class DeleteRepositoryRequestParameters : FluentRequestParameters<DeleteRepositoryRequestParameters> 
@@ -5920,12 +8010,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public DeleteRepositoryRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public DeleteRepositoryRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for SnapshotGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html
 	///</pre>
 	///</summary>
 	public class GetSnapshotRequestParameters : FluentRequestParameters<GetSnapshotRequestParameters> 
@@ -5940,12 +8050,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public GetSnapshotRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public GetSnapshotRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for SnapshotGetRepository
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html
 	///</pre>
 	///</summary>
 	public class GetRepositoryRequestParameters : FluentRequestParameters<GetRepositoryRequestParameters> 
@@ -5970,12 +8100,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public GetRepositoryRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public GetRepositoryRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for SnapshotRestore
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/modules-snapshots.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html
 	///</pre>
 	///</summary>
 	public class RestoreRequestParameters : FluentRequestParameters<RestoreRequestParameters> 
@@ -6000,12 +8150,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public RestoreRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public RestoreRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for SnapshotStatus
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-snapshots.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html
 	///</pre>
 	///</summary>
 	public class SnapshotStatusRequestParameters : FluentRequestParameters<SnapshotStatusRequestParameters> 
@@ -6020,12 +8190,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public SnapshotStatusRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public SnapshotStatusRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for SnapshotVerifyRepository
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/modules-snapshots.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html
 	///</pre>
 	///</summary>
 	public class VerifyRepositoryRequestParameters : FluentRequestParameters<VerifyRepositoryRequestParameters> 
@@ -6050,12 +8240,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public VerifyRepositoryRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public VerifyRepositoryRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for Suggest
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/search-suggesters.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-suggesters.html
 	///</pre>
 	///</summary>
 	public class SuggestRequestParameters : FluentRequestParameters<SuggestRequestParameters> 
@@ -6112,11 +8322,21 @@ namespace Elasticsearch.Net
 		
 		
 		internal string _source { get; set; }
-		///<summary>The URL-encoded request definition (instead of using request body)</summary>
+		///<summary>The URL-encoded request definition</summary>
 		public SuggestRequestParameters Source(string source)
 		{
 			this._source = source;
 			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public SuggestRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
 			return this;
 		}
 		
@@ -6125,21 +8345,11 @@ namespace Elasticsearch.Net
 	
 	///<summary>Request parameters descriptor for TermvectorGet
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-termvectors.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-termvectors.html
 	///</pre>
 	///</summary>
 	public class TermvectorRequestParameters : FluentRequestParameters<TermvectorRequestParameters> 
 	{
-		
-		internal string _source { get; set; }
-		///<summary>The URL-encoded request definition</summary>
-		public TermvectorRequestParameters Source(string source)
-		{
-			this._source = source;
-			this.AddQueryString("source", this._source);
-			return this;
-		}
-		
 		
 		internal bool _term_statistics { get; set; }
 		///<summary>Specifies if total term frequency and document frequency should be returned.</summary>
@@ -6240,12 +8450,32 @@ namespace Elasticsearch.Net
 			return this;
 		}
 		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public TermvectorRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public TermvectorRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
+			return this;
+		}
+		
 	}
 	
 	
 	///<summary>Request parameters descriptor for Update
 	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-update.html
+	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-update.html
 	///</pre>
 	///</summary>
 	public class UpdateRequestParameters : FluentRequestParameters<UpdateRequestParameters> 
@@ -6272,7 +8502,7 @@ namespace Elasticsearch.Net
 		
 		
 		internal string _parent { get; set; }
-		///<summary>ID of the parent document</summary>
+		///<summary>ID of the parent document. Is is only used for routing and when for the upsert request</summary>
 		public UpdateRequestParameters Parent(string parent)
 		{
 			this._parent = parent;
@@ -6397,6 +8627,26 @@ namespace Elasticsearch.Net
 		{
 			this._version_type = version_type;
 			this.AddQueryString("version_type", this._version_type);
+			return this;
+		}
+		
+		
+		internal string _source { get; set; }
+		///<summary>The URL-encoded request definition</summary>
+		public UpdateRequestParameters Source(string source)
+		{
+			this._source = source;
+			this.AddQueryString("source", this._source);
+			return this;
+		}
+		
+		
+		internal string _filter_path { get; set; }
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public UpdateRequestParameters FilterPath(string filter_path)
+		{
+			this._filter_path = filter_path;
+			this.AddQueryString("filter_path", this._filter_path);
 			return this;
 		}
 		

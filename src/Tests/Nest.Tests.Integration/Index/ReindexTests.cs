@@ -47,6 +47,7 @@ namespace Nest.Tests.Integration.Index
 				.ToIndex(toIndex)
 				.Query(q=>q.MatchAll())
 				.Scroll("10s")
+				.Size(100)
 				.CreateIndex(c=>c
 					.NumberOfReplicas(0)
 					.NumberOfShards(1)
