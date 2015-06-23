@@ -57,17 +57,6 @@ namespace Nest
 
 		}
 
-		public static void Warmup()
-		{
-			var client = new ElasticClient(connection: new InMemoryConnection());
-			var stream = new MemoryStream("{}".Utf8Bytes());
-			client.Serializer.Serialize(new SearchDescriptor<object>());
-			client.Serializer.Deserialize<SearchDescriptor<object>>(stream);
-			var connection = new HttpConnection(new ConnectionSettings());
-			client.RootNodeInfo();
-			client.Search<object>(s => s.MatchAll().Index("someindex"));
-		}
-
 		/// <summary>
 		/// Perform any request you want over the configured IConnection while taking advantage of the cluster failover.
 		/// </summary>
