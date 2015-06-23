@@ -491,7 +491,6 @@
     <Compile Include="_Generated\_Requests.generated.cs" />
     <Compile Include="Cluster\ClusterReroute\ElasticClient-ClusterReroute.cs" />
     <Compile Include="Cat\CatAliases\ElasticClient-CatAliases.cs" />
-    <Compile Include="ElasticClient-DoRequest.cs" />
     <Compile Include="Search\Percolator\PercolateCount\ElasticClient-PercolateCount.cs" />
     <Compile Include="Search\Percolator\RegisterPercolator\ElasticClient-RegisterPecolator.cs" />
     <Compile Include="Search\Percolator\UnregisterPercolator\ElasticClient-UnregisterPercolate.cs" />
