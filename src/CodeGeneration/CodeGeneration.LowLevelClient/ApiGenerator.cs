@@ -101,7 +101,7 @@ namespace CodeGeneration.LowLevelClient
 			}
 		}
 		private static readonly Dictionary<string, string> MethodNameOverrides =
-			(from f in new DirectoryInfo(_nestFolder + "/DSL").GetFiles("*.cs", SearchOption.TopDirectoryOnly)
+			(from f in new DirectoryInfo(_nestFolder + "/_Generated").GetFiles("*.cs", SearchOption.TopDirectoryOnly)
 			 where f.FullName.EndsWith("Descriptor.cs")
 			 let contents = File.ReadAllText(f.FullName)
 			 let c = Regex.Replace(contents, @"^.+\[DescriptorFor\(""([^ \r\n]+)""\)\].*$", "$1", RegexOptions.Singleline)
@@ -111,7 +111,7 @@ namespace CodeGeneration.LowLevelClient
 			.ToDictionary(k => k.Key, v => v.Value);
 
 		private static readonly Dictionary<string, string> KnownDescriptors =
-			(from f in new DirectoryInfo(_nestFolder + "/DSL").GetFiles("*.cs", SearchOption.TopDirectoryOnly)
+			(from f in new DirectoryInfo(_nestFolder + "/_Generated").GetFiles("*.cs", SearchOption.TopDirectoryOnly)
 			 where f.FullName.EndsWith("Descriptor.cs")
 			 let contents = File.ReadAllText(f.FullName)
 			 let c = Regex.Replace(contents, @"^.+class ([^ \r\n]+).*$", "$1", RegexOptions.Singleline)
@@ -120,7 +120,7 @@ namespace CodeGeneration.LowLevelClient
 			.ToDictionary(k => k.Key, v => v.Value);
 
 		private static readonly Dictionary<string, string> KnownRequests =
-			(from f in new DirectoryInfo(_nestFolder + "/DSL").GetFiles("*.cs", SearchOption.TopDirectoryOnly)
+			(from f in new DirectoryInfo(_nestFolder + "/_Generated").GetFiles("*.cs", SearchOption.TopDirectoryOnly)
 			 where f.FullName.EndsWith("Descriptor.cs")
 			 let contents = File.ReadAllText(f.FullName)
 			 let c = Regex.Replace(contents, @"^.+interface ([^ \r\n]+).*$", "$1", RegexOptions.Singleline)
@@ -256,7 +256,7 @@ namespace CodeGeneration.LowLevelClient
 
 		public static void GenerateRawDispatch(RestApiSpec model)
 		{
-			var targetFile = _nestFolder + @"RawDispatch.Generated.cs";
+			var targetFile = _nestFolder + @"_Generated/RawDispatch.Generated.cs";
 			var source = _razorMachine.Execute(File.ReadAllText(_viewFolder + @"RawDispatch.Generated.cshtml"), model).ToString();
 			File.WriteAllText(targetFile, source);
 		}
@@ -269,14 +269,14 @@ namespace CodeGeneration.LowLevelClient
 
 		public static void GenerateDescriptors(RestApiSpec model)
 		{
-			var targetFile = _nestFolder + @"DSL\_Descriptors.Generated.cs";
+			var targetFile = _nestFolder + @"_Generated\_Descriptors.Generated.cs";
 			var source = _razorMachine.Execute(File.ReadAllText(_viewFolder + @"_Descriptors.Generated.cshtml"), model).ToString();
 			File.WriteAllText(targetFile, source);
 		}
 
 		public static void GenerateRequests(RestApiSpec model)
 		{
-			var targetFile = _nestFolder + @"DSL\_Requests.Generated.cs";
+			var targetFile = _nestFolder + @"_Generated\_Requests.Generated.cs";
 			var source = _razorMachine.Execute(File.ReadAllText(_viewFolder + @"_Requests.Generated.cshtml"), model).ToString();
 			File.WriteAllText(targetFile, source);
 		}

@@ -488,7 +488,7 @@
     <Compile Include="QueryDsl\Visitor\QueryFilterWalker.cs" />
     <Compile Include="QueryDsl\Visitor\QueryVisitor.cs" />
     <Compile Include="QueryDsl\Visitor\VisitorScope.cs" />
-    <Compile Include="DSL\_Requests.generated.cs" />
+    <Compile Include="_Generated\_Requests.generated.cs" />
     <Compile Include="Cluster\ClusterReroute\ElasticClient-ClusterReroute.cs" />
     <Compile Include="Cat\CatAliases\ElasticClient-CatAliases.cs" />
     <Compile Include="ElasticClient-DoRequest.cs" />
@@ -675,7 +675,7 @@
     <Compile Include="Document\Multiple\DeleteByQuery\DeleteByQueryRequest.cs" />
     <Compile Include="CommonAbstractions\Request\Paths\DocumentPathDescriptor.cs" />
     <Compile Include="Document\Multiple\MultiGet\MultiGetOperationDescriptor.cs" />
-    <Compile Include="DSL\_Descriptors.generated.cs" />
+    <Compile Include="_Generated\_Descriptors.generated.cs" />
     <Compile Include="Enums\TermsAggregationExecutionHint.cs" />
     <Compile Include="Enums\GeoHashPrecision.cs" />
     <Compile Include="Exception\DispatchException.cs" />
@@ -683,7 +683,7 @@
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\SuffixExtensions.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
-    <Compile Include="RawDispatch.generated.cs" />
+    <Compile Include="_Generated\RawDispatch.generated.cs" />
     <Compile Include="CommonAbstractions\RawDispatch\RawDispatch.cs" />
     <Compile Include="Domain\Geo\IndexedGeoShape.cs" />
     <Compile Include="Mapping\CoreTypes\CompletionMappingDescriptor.cs" />
