@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Elasticsearch.Net.Connection.RequestState;
@@ -96,7 +97,7 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 
 		private Task<ReadResponse<T>> ReturnVoidResponse<T>(ElasticsearchResponse<Stream> streamResponse)
 		{
-			streamResponse.Response.Close();
+			streamResponse.Response.Dispose();
 			var voidResponse = ElasticsearchResponse.CloneFrom<VoidResponse>(streamResponse, null);
 			return this.ReturnCompletedTaskFor(new ReadResponse<T>() { Response = voidResponse as ElasticsearchResponse<T> });
 		}
@@ -115,7 +116,7 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 					.ContinueWith(streamReadTask =>
 					{
 						response.Bytes = streamReadTask.Result.ToArray();
-						streamResponse.Response.Close();
+						streamResponse.Response.Dispose();
 						streamReadTask.Result.Position = 0;
 						return streamReadTask.Result as Stream;
 					});
@@ -133,13 +134,15 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 				{
 					response.Error = GetErrorFromStream<T>(gotStream.Result);
 					this.SetStringOrByteResult(typedResponse, response.Bytes);
-					if (gotStream.Result != null) gotStream.Result.Close();
+					if (gotStream.Result != null)
+						gotStream.Result.Dispose();
 					response.Response = typedResponse;
 					return this.ReturnCompletedTaskFor(response);
 				}
 				if (this.SetStringOrByteResult(typedResponse, response.Bytes))
 				{
-					if (gotStream.Result != null) gotStream.Result.Close();
+					if (gotStream.Result != null)
+						gotStream.Result.Dispose();
 					response.Response = typedResponse;
 					return this.ReturnCompletedTaskFor(response);
 				}
@@ -363,7 +366,11 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 			{
 				while (responseStream != null)
 				{
+#if DNXCORE50
+					var read = responseStream.ReadAsync(buffer, 0, BufferSize);
+#else
 					var read = Task<int>.Factory.FromAsync(responseStream.BeginRead, responseStream.EndRead, buffer, 0, BufferSize, null);
+#endif
 					yield return read.ContinueWith(t => memoryStream);
 					if (read.Result == 0) break;
 					memoryStream.Write(buffer, 0, read.Result);

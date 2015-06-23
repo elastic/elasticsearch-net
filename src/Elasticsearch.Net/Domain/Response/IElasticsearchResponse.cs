@@ -52,10 +52,14 @@ namespace Elasticsearch.Net
 		/// <summary>
 		/// The raw byte response, only set when IncludeRawResponse() is set on Connection configuration
 		/// </summary>
+#if !DNXCORE50
 		[DebuggerDisplay("{ResponseRaw != null ? System.Text.Encoding.UTF8.GetString(ResponseRaw) : null,nq}")]
+#endif
 		byte[] ResponseRaw { get; }
 
+#if !DNXCORE50
 		[DebuggerDisplay("{Request != null ? System.Text.Encoding.UTF8.GetString(Request) : null,nq}")]
+#endif
 		byte[] Request { get; }
 	}
 

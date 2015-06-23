@@ -266,10 +266,10 @@ namespace Nest.Resolvers.Writers
 			if (propertyType == typeof(string))
 				return FieldType.String;
 
-			if (propertyType.IsEnum)
+			if (propertyType.IsEnumType())
 				return FieldType.Integer;
 
-			if (propertyType.IsValueType)
+			if (propertyType.IsValue())
 			{
 				switch (propertyType.Name)
 				{
@@ -298,7 +298,7 @@ namespace Nest.Resolvers.Writers
 			if (type.IsArray)
 				return type.GetElementType();
 
-			if (type.IsGenericType && type.GetGenericArguments().Length == 1 && (type.GetInterface("IEnumerable") != null || Nullable.GetUnderlyingType(type) != null))
+			if (type.IsGeneric() && type.GetGenericArguments().Length == 1 && (type.GetSpecifiedInterface("IEnumerable") != null || Nullable.GetUnderlyingType(type) != null))
 				return type.GetGenericArguments()[0];
 
 			return type;

@@ -63,7 +63,7 @@ namespace Nest
 				_snapshotStatusHumbleObject.Completed += onCompleted;
 				_snapshotStatusHumbleObject.Error += onError;
 
-				_timer = new Timer(Snapshot, observer, (long)_interval.TotalMilliseconds, Timeout.Infinite);
+				_timer = new Timer(Snapshot, observer, (int)_interval.TotalMilliseconds, Timeout.Infinite);
 			}
 			catch (Exception exception)
 			{
@@ -86,7 +86,7 @@ namespace Nest
 
 				_snapshotStatusHumbleObject.CheckStatus();
 
-				_timer.Change(Math.Max(0, (long)_interval.TotalMilliseconds - watch.ElapsedMilliseconds), Timeout.Infinite);
+				_timer.Change((int)Math.Max(0, (long)_interval.TotalMilliseconds - watch.ElapsedMilliseconds), Timeout.Infinite);
 			}
 			catch (Exception exception)
 			{

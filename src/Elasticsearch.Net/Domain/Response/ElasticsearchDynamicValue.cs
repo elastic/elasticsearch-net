@@ -12,7 +12,10 @@ using Binder = Microsoft.CSharp.RuntimeBinder.Binder;
 
 namespace Elasticsearch.Net
 {
-	public class ElasticsearchDynamicValue : DynamicObject, IEquatable<ElasticsearchDynamicValue>, IConvertible
+	public class ElasticsearchDynamicValue : DynamicObject, IEquatable<ElasticsearchDynamicValue>
+#if !DNXCORE50
+		, IConvertible
+#endif
 	{
 		internal readonly object value;
 
@@ -52,7 +55,7 @@ namespace Elasticsearch.Net
 				result = new ElasticsearchDynamicValue(ds[name]);
 				return true;
 			}
-			
+
 			result = new ElasticsearchDynamicValue(this.Value);
 			return true;
 		}
@@ -70,7 +73,7 @@ namespace Elasticsearch.Net
 			{
 				object r;
 				Dispatch(out r, name);
-				return (ElasticsearchDynamicValue) r;
+				return (ElasticsearchDynamicValue)r;
 			}
 		}
 
@@ -81,7 +84,7 @@ namespace Elasticsearch.Net
 				if (!this.HasValue)
 					return new ElasticsearchDynamicValue(null);
 				var l = this.Value as IList;
-				if (l != null && l.Count -1 >= i)
+				if (l != null && l.Count - 1 >= i)
 				{
 					return new ElasticsearchDynamicValue(l[i]);
 				}
@@ -149,7 +152,7 @@ namespace Elasticsearch.Net
 		/// <typeparam name="T">When no default value is supplied, required to supply the default type</typeparam>
 		/// <param name="defaultValue">Optional parameter for default value, if not given it returns default of type T</param>
 		/// <returns>If value is not null, value is returned, else default value is returned</returns>
-		public T TryParse<T>(T defaultValue = default (T))
+		public T TryParse<T>(T defaultValue = default(T))
 		{
 			if (this.HasValue)
 			{
@@ -175,15 +178,22 @@ namespace Elasticsearch.Net
 					else if (stringValue != null)
 					{
 						var converter = TypeDescriptor.GetConverter(TType);
-
+#if DNXCORE50
+						return (T)converter.ConvertFromInvariantString(stringValue);
+#else
 						if (converter.IsValid(stringValue))
 						{
 							return (T)converter.ConvertFromInvariantString(stringValue);
 						}
+#endif
 					}
 					else if (TType == typeof(string))
 					{
+#if DNXCORE50
+						return (T)Convert.ChangeType(value, typeof(string), CultureInfo.InvariantCulture);
+#else
 						return (T)Convert.ChangeType(value, TypeCode.String, CultureInfo.InvariantCulture);
+#endif
 					}
 				}
 				catch
@@ -210,7 +220,7 @@ namespace Elasticsearch.Net
 			return !(dynamicValue == compareValue);
 		}
 
-		
+
 		/// <summary>
 		/// Indicates whether the current object is equal to another object of the same type.
 		/// </summary>
@@ -330,12 +340,12 @@ namespace Elasticsearch.Net
 			}
 			else
 			{
-				if (binderType.IsGenericType && binderType.GetGenericTypeDefinition() == typeof(Nullable<>))
+				if (binderType.IsGeneric() && binderType.GetGenericTypeDefinition() == typeof(Nullable<>))
 				{
 					binderType = binderType.GetGenericArguments()[0];
 				}
 
-				var typeCode = Type.GetTypeCode(binderType);
+				var typeCode = binderType.GetTypeCode();
 
 				if (typeCode == TypeCode.Object)
 				{
@@ -349,8 +359,11 @@ namespace Elasticsearch.Net
 						return false;
 					}
 				}
-
+#if DNXCORE50
+				result = Convert.ChangeType(value, binderType);
+#else
 				result = Convert.ChangeType(value, typeCode);
+#endif
 
 				return true;
 			}
@@ -362,14 +375,14 @@ namespace Elasticsearch.Net
 			return this.value == null ? base.ToString() : Convert.ToString(this.value);
 		}
 
-		public static implicit operator bool(ElasticsearchDynamicValue dynamicValue)
+		public static implicit operator bool (ElasticsearchDynamicValue dynamicValue)
 		{
 			if (!dynamicValue.HasValue)
 			{
 				return false;
 			}
 
-			if (dynamicValue.value.GetType().IsValueType)
+			if (dynamicValue.value.GetType().IsValue())
 			{
 				return (Convert.ToBoolean(dynamicValue.value));
 			}
@@ -383,16 +396,16 @@ namespace Elasticsearch.Net
 			return true;
 		}
 
-		public static implicit operator string(ElasticsearchDynamicValue dynamicValue)
+		public static implicit operator string (ElasticsearchDynamicValue dynamicValue)
 		{
 			return dynamicValue.HasValue
 					   ? Convert.ToString(dynamicValue.value)
 					   : null;
 		}
 
-		public static implicit operator int(ElasticsearchDynamicValue dynamicValue)
+		public static implicit operator int (ElasticsearchDynamicValue dynamicValue)
 		{
-			if (dynamicValue.value.GetType().IsValueType)
+			if (dynamicValue.value.GetType().IsValue())
 			{
 				return Convert.ToInt32(dynamicValue.value);
 			}
@@ -430,9 +443,9 @@ namespace Elasticsearch.Net
 			return TimeSpan.Parse(dynamicValue.ToString());
 		}
 
-		public static implicit operator long(ElasticsearchDynamicValue dynamicValue)
+		public static implicit operator long (ElasticsearchDynamicValue dynamicValue)
 		{
-			if (dynamicValue.value.GetType().IsValueType)
+			if (dynamicValue.value.GetType().IsValue())
 			{
 				return Convert.ToInt64(dynamicValue.value);
 			}
@@ -440,9 +453,9 @@ namespace Elasticsearch.Net
 			return long.Parse(dynamicValue.ToString());
 		}
 
-		public static implicit operator float(ElasticsearchDynamicValue dynamicValue)
+		public static implicit operator float (ElasticsearchDynamicValue dynamicValue)
 		{
-			if (dynamicValue.value.GetType().IsValueType)
+			if (dynamicValue.value.GetType().IsValue())
 			{
 				return Convert.ToSingle(dynamicValue.value);
 			}
@@ -450,9 +463,9 @@ namespace Elasticsearch.Net
 			return float.Parse(dynamicValue.ToString());
 		}
 
-		public static implicit operator decimal(ElasticsearchDynamicValue dynamicValue)
+		public static implicit operator decimal (ElasticsearchDynamicValue dynamicValue)
 		{
-			if (dynamicValue.value.GetType().IsValueType)
+			if (dynamicValue.value.GetType().IsValue())
 			{
 				return Convert.ToDecimal(dynamicValue.value);
 			}
@@ -460,9 +473,9 @@ namespace Elasticsearch.Net
 			return decimal.Parse(dynamicValue.ToString());
 		}
 
-		public static implicit operator double(ElasticsearchDynamicValue dynamicValue)
+		public static implicit operator double (ElasticsearchDynamicValue dynamicValue)
 		{
-			if (dynamicValue.value.GetType().IsValueType)
+			if (dynamicValue.value.GetType().IsValue())
 			{
 				return Convert.ToDouble(dynamicValue.value);
 			}
@@ -482,7 +495,7 @@ namespace Elasticsearch.Net
 		public TypeCode GetTypeCode()
 		{
 			if (value == null) return TypeCode.Empty;
-			return Type.GetTypeCode(value.GetType());
+			return value.GetType().GetTypeCode();
 		}
 
 		/// <summary>

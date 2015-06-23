@@ -46,15 +46,14 @@
 
 // original json parsing code from http://techblog.procurios.nl/k/618/news/view/14605/14863/How-do-I-write-my-own-parser-for-JSON.html
 
-#if NETFX_CORE
+#if NETFX_CORE || DNXCORE50
 #define SIMPLE_JSON_TYPEINFO
 #endif
+
 using System;
-using System.CodeDom.Compiler;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
 using System.Dynamic;
 using System.Globalization;
 using System.Linq.Expressions;
@@ -62,8 +61,27 @@ using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
 
+
+
 namespace Elasticsearch.Net.Serialization
 {
+#if !DNXCORE50
+using System.CodeDom.Compiler;
+using System.Diagnostics.CodeAnalysis;
+#else
+	internal class GeneratedCodeAttribute : Attribute
+	{
+		public GeneratedCodeAttribute(string simpleJson, string s) { }
+	}
+	internal class SuppressMessageAttribute : Attribute
+	{
+		public string Justification { get; set; }
+
+		public SuppressMessageAttribute(string simpleJson, string s) { }
+	}
+#endif
+
+
 // ReSharper disable LoopCanBeConvertedToQuery
 // ReSharper disable RedundantExplicitArrayCreation
 // ReSharper disable SuggestUseVarKeywordEvident
@@ -101,7 +119,7 @@ namespace Elasticsearch.Net.Serialization
 		}
 	}
 
-	/// <summary>
+		/// <summary>
 	/// Represents the json object.
 	/// </summary>
 	[GeneratedCode("simple-json", "1.0.0")]

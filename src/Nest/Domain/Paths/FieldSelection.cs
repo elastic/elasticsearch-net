@@ -75,7 +75,7 @@ namespace Nest.Domain
 			if (fieldValues != null && fieldValues.TryGetValue(path, out o))
 			{
 				var t = typeof(K);
-				if (o is JArray && t.GetInterfaces().Contains(typeof(IEnumerable)))
+				if (o is JArray && t.GetAllInterfaces().Contains(typeof(IEnumerable)))
 				{
 					var array = (JArray)o;
 					return array.ToObject<K>();

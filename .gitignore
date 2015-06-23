@@ -60,3 +60,6 @@ YamlCache
 
 *.DS_Store
 *.sln.ide
+
+.vs
+*.lock.json
