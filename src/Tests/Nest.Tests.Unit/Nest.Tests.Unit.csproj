@@ -406,9 +406,13 @@
     <Compile Include="QueryParsers\Visitor\DslPrettyPrintVisitor.cs" />
     <Compile Include="QueryParsers\Visitor\VisitorDemoUseCase.cs" />
     <Compile Include="QueryParsers\Visitor\VisitorTests.cs" />
+    <None Include="Reproduce\Issue1464.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <Compile Include="Reproduce\Reproduce1396Tests.cs" />
     <Compile Include="Reproduce\Reproduce1199Tests.cs" />
     <Compile Include="Reproduce\Reproduce1146Tests.cs" />
+    <Compile Include="Reproduce\Reproduce1464Tests.cs" />
     <Compile Include="Reproduce\Reproduce629Tests.cs" />
     <Compile Include="Reproduce\Reproduce1187Tests.cs" />
     <Compile Include="Reproduce\Reproduce901Tests.cs" />
