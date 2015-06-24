@@ -123,7 +123,8 @@ namespace Nest.Resolvers
 			//defaultProperties = PropertiesOf<IGlobalInnerHit>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IInnerHits>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<INestSerializable>(type, memberSerialization, defaultProperties, lookup);
-			return defaultProperties;
+			
+			return defaultProperties.GroupBy(p => p.PropertyName).Select(p => p.First()).ToList();
 		}
 
 		private IList<JsonProperty> PropertiesOf<T>(Type type, MemberSerialization memberSerialization, IList<JsonProperty> defaultProperties, ILookup<string, JsonProperty> lookup, bool append = false)
@@ -144,7 +145,7 @@ namespace Nest.Resolvers
 				}
 				return defaultProperties;
 			}
-			return jsonProperties.Concat(defaultProperties).GroupBy(p=>p.PropertyName).Select(g=>g.First()).ToList();
+			return jsonProperties.Concat(defaultProperties).ToList();
 		}
 
 		protected override string ResolvePropertyName(string propertyName)

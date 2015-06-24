@@ -11,7 +11,7 @@ nuget FluentAssertions 2.2.0.0
 nuget FubuCore 1.0.0.225
 nuget FubuCsProjFile 1.1.0.83
 nuget Moq 4.2.1312.1622
-nuget Newtonsoft.Json 6.0.1
+nuget Newtonsoft.Json 7.0.1
 nuget NUnit 2.6.4
 nuget RazorMachine 2.6.1
 nuget ShellProgressBar 1.0.0.0
