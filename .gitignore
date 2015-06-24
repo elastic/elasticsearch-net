@@ -41,6 +41,8 @@ build/tools/*
 !build/tools/sn
 !build/tools/sn/*
 !build/tools/ilmerge
+!build/tools/nuget
+!build/tools/nuget/*
 !build/*.fsx
 !build/*.fsx
 !build/*.ps1
