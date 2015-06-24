@@ -36,6 +36,10 @@ namespace Nest.Tests.Unit.Internals.Inferno
 
 		internal class BaseIdClass { public int Id { get; set; } }
 
+		internal class TypedIdClass { public int TypedIdClassId { get; set; } }
+
+		internal class TypedUnderscoreIdClass { public int TypedUnderscoreIdClass_Id { get; set; } }
+
 		internal class InheritedIdClass : BaseIdClass { public string Name { get; set; } }
 
 		[Test]
@@ -97,6 +101,24 @@ namespace Nest.Tests.Unit.Internals.Inferno
 			var id = this._idResolver.GetIdFor(expected);
 			id = this._idResolver.GetIdFor(expected);
 			Assert.AreEqual(expected.Id.ToString(), id);
+		}
+
+		[Test]
+		public void TestTypedIdLookup()
+		{
+			var expected = new TypedIdClass() { TypedIdClassId = 123 };
+			var id = this._idResolver.GetIdFor(expected);
+			Assert.AreNotEqual(expected.TypedIdClassId, id);
+			Assert.AreEqual(id, null);
+		}
+
+		[Test]
+		public void TestTypedUnderscoreIdLookup()
+		{
+			var expected = new TypedUnderscoreIdClass() { TypedUnderscoreIdClass_Id = 123 };
+			var id = this._idResolver.GetIdFor(expected);
+			Assert.AreNotEqual(expected.TypedUnderscoreIdClass_Id, id);
+			Assert.AreEqual(id, null);
 		}
 
 		[Test]
