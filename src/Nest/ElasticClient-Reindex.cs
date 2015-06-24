@@ -16,7 +16,7 @@ namespace Nest
 		}
 
 		/// <inheritdoc />
-		public IObservable<IReindexResponse<object>> Reindex(Func<ReindexDescriptor<object>, ReindexDescriptor<object>> reindexSelector)
+		public IObservable<IReindexResponse<IDocument>> Reindex(Func<ReindexDescriptor<object>, ReindexDescriptor<object>> reindexSelector)
 		{
 			return Reindex<object>(reindexSelector);
 		}
