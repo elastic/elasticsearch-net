@@ -1,0 +1,9 @@
+  {
+    "elasticsearchprojects": {
+      "properties": {
+        "hash": { 
+          "type": "murmur3"
+        }
+      }
+    }
+}

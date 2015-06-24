@@ -1,0 +1,11 @@
+{
+  "actions": [
+    {
+      "add": {
+        "index": "myindex-2014-2-2",
+        "alias": "myindex",
+        "filter":  { "term" : { "test" : "this_test" } }
+      }
+    }
+  ]
+}

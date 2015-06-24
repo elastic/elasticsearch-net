@@ -82,5 +82,24 @@ namespace Nest.Tests.Unit.Search.ScriptFields
 
             this.JsonEquals(s, System.Reflection.MethodInfo.GetCurrentMethod());
         }
+
+		[Test]
+		public void TestScriptFile()
+		{
+			var s = new SearchDescriptor<ElasticsearchProject>()
+				.From(0)
+				.Size(10)
+				.ScriptFields(sf => sf
+					.Add("test1", sff => sff
+						.ScriptFile("my_script")
+						.Lang("groovy")
+						.Params(sp => sp
+							.Add("multiplier", 4)
+						)
+					)
+				);
+
+			this.JsonEquals(s, System.Reflection.MethodInfo.GetCurrentMethod());
+		}
 	}
 }

@@ -751,6 +751,35 @@ namespace Nest
 		}
 
 		/// <summary>
+		/// <para>SortMulti allows multiple sorts to be provided on one search descriptor
+		/// </para>
+		/// </summary>
+		public SearchDescriptor<T> SortMulti(params Func<SortFieldDescriptor<T>, IFieldSort>[] sorts)
+		{
+			foreach (var sort in sorts)
+			{
+				this.Sort(sort);
+			}
+
+			return this;
+		}
+
+		/// <summary>
+		/// <para>SortMulti allows multiple sorts to be provided on one search descriptor
+		/// </para>
+		/// </summary>
+		public SearchDescriptor<T> SortMulti(IEnumerable<SortFieldDescriptor<T>> sorts)
+		{
+			foreach (var sort in sorts)
+			{
+				var copy = sort;
+				this.Sort(s => copy);
+			}
+
+			return this;
+		}
+
+		/// <summary>
 		/// <para>SortGeoDistance() allows you to sort by a distance from a geo point.
 		/// </para>
 		/// </summary>

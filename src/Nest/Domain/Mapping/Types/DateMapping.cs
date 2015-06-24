@@ -41,5 +41,8 @@ namespace Nest
 
 		[JsonProperty("doc_values")]
 		public bool? DocValues { get; set; }
+
+		[JsonProperty("numeric_resolution")]
+		public NumericResolutionUnit? NumericResolution { get; set; }
 	}
 }

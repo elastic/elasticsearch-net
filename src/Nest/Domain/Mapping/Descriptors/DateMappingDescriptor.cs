@@ -94,5 +94,11 @@ namespace Nest
 			this._Mapping.DocValues = docValues;
 			return this;
 		}
+
+		public DateMappingDescriptor<T> NumericResolution(NumericResolutionUnit unit)
+		{
+			this._Mapping.NumericResolution = unit;
+			return this;
+		}
 	}
 }

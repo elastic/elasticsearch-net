@@ -1,15 +1,15 @@
 {
   "termvector" : {
-    "documentation" : "http://www.elasticsearch.org/guide/en/elasticsearch/reference/1.x/docs-termvectors.html",
+    "documentation" : "http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-termvectors.html",
     "methods" : ["GET", "POST"],
     "url" : {
       "path" : "/{index}/{type}/_termvector",
       "paths" : ["/{index}/{type}/_termvector", "/{index}/{type}/{id}/_termvector"],
       "parts" : {
         "index" : {
-          "type" : "string",
-          "description" : "The index in which the document resides.",
-          "required" : true
+         "type" : "string",
+         "description" : "The index in which the document resides.",
+         "required" : true
         },
         "type" : {
           "type" : "string",
@@ -17,15 +17,11 @@
           "required" : true
         },
         "id" : {
-          "type" : "string",
-          "description" : "The id of the document, when not specified a doc param should be supplied."
-        }
+           "type" : "string",
+           "description" : "The id of the document."
+         }
       },
       "params": {
-        "source": {
-          "type" : "string",
-          "description" : "The URL-encoded request definition"
-        },
         "term_statistics" : {
           "type" : "boolean",
           "description" : "Specifies if total term frequency and document frequency should be returned.",
@@ -33,10 +29,10 @@
           "required" : false
         },
         "field_statistics" : {
-          "type" : "boolean",
-          "description" : "Specifies if document count, sum of document frequencies and sum of total term frequencies should be returned.",
-          "default" : true,
-          "required" : false
+           "type" : "boolean",
+           "description" : "Specifies if document count, sum of document frequencies and sum of total term frequencies should be returned.",
+           "default" : true,
+           "required" : false
         },
         "fields" : {
           "type" : "list",
@@ -84,7 +80,7 @@
       }
     },
     "body": {
-      "description" : "Define parameters and or supply a document to get termvectors for. See documentation.",
+      "description" : "Define parameters. See documentation.",
       "required" : false
     }
   }
