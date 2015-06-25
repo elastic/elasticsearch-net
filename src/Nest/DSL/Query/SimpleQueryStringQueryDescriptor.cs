@@ -23,7 +23,7 @@ namespace Nest
 		IEnumerable<PropertyPathMarker> Fields { get; set; }
 
 		[JsonProperty(PropertyName = "default_operator")]
-		[JsonConverter(typeof (StringEnumConverter))]
+		[JsonConverter(typeof(StringEnumConverter))]
 		Operator? DefaultOperator { get; set; }
 
 		[JsonProperty(PropertyName = "analyzer")]
@@ -43,6 +43,9 @@ namespace Nest
 
 		[JsonProperty("minimum_should_match")]
 		string MinimumShouldMatch { get; set; }
+
+		[JsonProperty(PropertyName = "boost")]
+		double? Boost { get; set; }
 	}
 
 	public class SimpleQueryStringQuery : PlainQuery, ISimpleQueryStringQuery
@@ -63,6 +66,7 @@ namespace Nest
 		public string Flags { get; set; }
 		public string Locale { get; set; }
 		public string MinimumShouldMatch { get; set; }
+		public double? Boost { get; set; }
 	}
 
 	public class SimpleQueryStringQueryDescriptor<T> : ISimpleQueryStringQuery where T : class
@@ -70,23 +74,26 @@ namespace Nest
 		private ISimpleQueryStringQuery Self { get { return this; } }
 
 		string ISimpleQueryStringQuery.Query { get; set; }
-		
+
 		PropertyPathMarker ISimpleQueryStringQuery.DefaultField { get; set; }
-		
+
 		IEnumerable<PropertyPathMarker> ISimpleQueryStringQuery.Fields { get; set; }
-		
+
 		Operator? ISimpleQueryStringQuery.DefaultOperator { get; set; }
-		
+
 		string ISimpleQueryStringQuery.Analyzer { get; set; }
-		
+
 		bool? ISimpleQueryStringQuery.AnalyzeWildcard { get; set; }
-		
+
 		bool? ISimpleQueryStringQuery.LowercaseExpendedTerms { get; set; }
-		
+
 		string ISimpleQueryStringQuery.Flags { get; set; }
-		
+
 		string ISimpleQueryStringQuery.Locale { get; set; }
+
 		string ISimpleQueryStringQuery.MinimumShouldMatch { get; set; }
+
+		double? ISimpleQueryStringQuery.Boost { get; set; }
 
 		string IQuery.Name { get; set; }
 
@@ -104,27 +111,37 @@ namespace Nest
 			return this;
 		}
 
+		public SimpleQueryStringQueryDescriptor<T> Boost(double boost)
+		{
+			Self.Boost = boost;
+			return this;
+		}
+
 		public SimpleQueryStringQueryDescriptor<T> DefaultField(string field)
 		{
 			Self.DefaultField = field;
 			return this;
 		}
+
 		public SimpleQueryStringQueryDescriptor<T> DefaultField(Expression<Func<T, object>> objectPath)
 		{
 			Self.DefaultField = objectPath;
 			return this;
 		}
+
 		public SimpleQueryStringQueryDescriptor<T> OnFields(IEnumerable<string> fields)
 		{
-			Self.Fields = fields.Select(f=>(PropertyPathMarker)f);
+			Self.Fields = fields.Select(f => (PropertyPathMarker)f);
 			return this;
 		}
+
 		public SimpleQueryStringQueryDescriptor<T> OnFields(
 			params Expression<Func<T, object>>[] objectPaths)
 		{
-			Self.Fields = objectPaths.Select(e=>(PropertyPathMarker)e);
+			Self.Fields = objectPaths.Select(e => (PropertyPathMarker)e);
 			return this;
 		}
+
 		public SimpleQueryStringQueryDescriptor<T> OnFieldsWithBoost(Action<FluentDictionary<Expression<Func<T, object>>, double?>> boostableSelector)
 		{
 			var d = new FluentDictionary<Expression<Func<T, object>>, double?>();
@@ -132,7 +149,8 @@ namespace Nest
 			Self.Fields = d.Select(o => PropertyPathMarker.Create(o.Key, o.Value));
 			return this;
 		}
-		public SimpleQueryStringQueryDescriptor<T> OnFieldsWithBoost(Action<FluentDictionary<string, double?>> boostableSelector) 
+
+		public SimpleQueryStringQueryDescriptor<T> OnFieldsWithBoost(Action<FluentDictionary<string, double?>> boostableSelector)
 		{
 			var d = new FluentDictionary<string, double?>();
 			boostableSelector(d);
@@ -145,31 +163,37 @@ namespace Nest
 			Self.Query = query;
 			return this;
 		}
+
 		public SimpleQueryStringQueryDescriptor<T> DefaultOperator(Operator op)
 		{
 			Self.DefaultOperator = op;
 			return this;
 		}
+
 		public SimpleQueryStringQueryDescriptor<T> Analyzer(string analyzer)
 		{
 			Self.Analyzer = analyzer;
 			return this;
 		}
+
 		public SimpleQueryStringQueryDescriptor<T> Flags(string flags)
 		{
 			Self.Flags = flags;
 			return this;
 		}
-		public SimpleQueryStringQueryDescriptor<T> LowercaseExpendedTerms(bool lowercaseExpendedTerms= true)
+
+		public SimpleQueryStringQueryDescriptor<T> LowercaseExpendedTerms(bool lowercaseExpendedTerms = true)
 		{
 			Self.LowercaseExpendedTerms = lowercaseExpendedTerms;
 			return this;
 		}
+
 		public SimpleQueryStringQueryDescriptor<T> AnalyzeWildcard(bool analyzeWildcard = true)
 		{
 			Self.AnalyzeWildcard = analyzeWildcard;
 			return this;
 		}
+
 		public SimpleQueryStringQueryDescriptor<T> Locale(string locale)
 		{
 			Self.Locale = locale;
@@ -187,5 +211,5 @@ namespace Nest
 			Self.MinimumShouldMatch = minimumShouldMatch;
 			return this;
 		}
-    }
+	}
 }

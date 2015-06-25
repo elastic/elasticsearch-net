@@ -30,6 +30,8 @@ namespace Nest
 		[JsonConverter(typeof(ReadAsTypeConverter<InnerHits>))]
 		IInnerHits InnerHits { get; set; }
 
+		[JsonProperty(PropertyName = "boost")]
+		double? Boost { get; set; }
 	}
 
 	public class NestedQuery : PlainQuery, INestedQuery
@@ -46,6 +48,7 @@ namespace Nest
 		public IQueryContainer Query { get; set; }
 		public PropertyPathMarker Path { get; set; }
 		public IInnerHits InnerHits { get; set; }
+		public double? Boost { get; set; }
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -63,6 +66,8 @@ namespace Nest
 
 		IInnerHits INestedQuery.InnerHits { get; set; }
 
+		double? INestedQuery.Boost { get; set; }
+
 		bool IQuery.IsConditionless
 		{
 			get
@@ -79,6 +84,13 @@ namespace Nest
 			Self.Name = name;
 			return this;
 		}
+
+		public NestedQueryDescriptor<T> Boost(double boost)
+		{
+			Self.Boost = boost;
+			return this;
+		}
+
 		public NestedQueryDescriptor<T> Filter(Func<FilterDescriptor<T>, FilterContainer> filterSelector)
 		{
 			var q = new FilterDescriptor<T>();
@@ -98,6 +110,7 @@ namespace Nest
 			Self.Score = score;
 			return this;
 		}
+
 		public NestedQueryDescriptor<T> Path(string path)
 		{
 			Self.Path = path;

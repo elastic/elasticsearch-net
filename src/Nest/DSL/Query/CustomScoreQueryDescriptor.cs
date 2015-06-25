@@ -23,6 +23,7 @@ namespace Nest
 		[JsonProperty(PropertyName = "query")]
 		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryDescriptor<object>>, CustomJsonConverter>))]
 		IQueryContainer Query { get; set; }
+
 	}
 
 	public class CustomScoreQuery : PlainQuery, ICustomScoreQuery
@@ -33,10 +34,15 @@ namespace Nest
 		}
 
 		public string Name { get; set; }
+
 		bool IQuery.IsConditionless { get { return false; } }
+
 		public string Lang { get; set; }
+
 		public string Script { get; set; }
+
 		public Dictionary<string, object> Params { get; set; }
+
 		public IQueryContainer Query { get; set; }
 	}
 

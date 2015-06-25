@@ -15,7 +15,7 @@ namespace Nest
 		TypeNameMarker Type { get; set; }
 
 		[JsonProperty("score_type")]
-		[JsonConverter(typeof (StringEnumConverter))]
+		[JsonConverter(typeof(StringEnumConverter))]
 		ChildScoreType? ScoreType { get; set; }
 
 		[JsonProperty("min_children")]
@@ -32,8 +32,10 @@ namespace Nest
 		[JsonConverter(typeof(ReadAsTypeConverter<InnerHits>))]
 		IInnerHits InnerHits { get; set; }
 
+		[JsonProperty("boost")]
+		double? Boost { get; set; }
 	}
-	
+
 	public class HasChildQuery : PlainQuery, IHasChildQuery
 	{
 		protected override void WrapInContainer(IQueryContainer container)
@@ -49,6 +51,7 @@ namespace Nest
 		public int? MaxChildren { get; set; }
 		public IQueryContainer Query { get; set; }
 		public IInnerHits InnerHits { get; set; }
+		public double? Boost { get; set; }
 	}
 
 	public class HasChildQueryDescriptor<T> : IHasChildQuery where T : class
@@ -66,6 +69,8 @@ namespace Nest
 		IQueryContainer IHasChildQuery.Query { get; set; }
 
 		IInnerHits IHasChildQuery.InnerHits { get; set; }
+
+		double? IHasChildQuery.Boost { get; set; }
 
 		string IQuery.Name { get; set; }
 

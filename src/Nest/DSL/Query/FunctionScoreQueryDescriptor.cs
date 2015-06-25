@@ -47,6 +47,10 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "min_score")]
 		float? MinScore { get; set; }
+
+		[JsonProperty(PropertyName = "boost")]
+		double? Boost { get; set; }
+
 	}
 
 	public class FunctionScoreQuery : PlainQuery, IFunctionScoreQuery
@@ -75,6 +79,7 @@ namespace Nest
 		}
 
 		public double? WeightAsDouble { get; set; }
+		public double? Boost { get; set; }
 		public float? MinScore { get; set; }
 	}
 
@@ -106,7 +111,10 @@ namespace Nest
 
 		// TODO: Remove in 2.0 and change Weight to double
 		double? IFunctionScoreQuery.WeightAsDouble { get; set; }
+
 		float? IFunctionScoreQuery.MinScore { get; set; }
+
+		double? IFunctionScoreQuery.Boost { get; set; }
 
 		string IQuery.Name { get; set; }
 
@@ -128,10 +136,15 @@ namespace Nest
 			return this;
 		}
 
-
 		public FunctionScoreQueryDescriptor<T> Name(string name)
 		{
 			Self.Name = name;
+			return this;
+		}
+
+		public FunctionScoreQueryDescriptor<T> Boost(double boost)
+		{
+			Self.Boost = boost;
 			return this;
 		}
 

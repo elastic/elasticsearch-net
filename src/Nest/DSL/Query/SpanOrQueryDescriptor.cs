@@ -12,8 +12,8 @@ namespace Nest
 	{
 		[JsonProperty(PropertyName = "clauses")]
 		IEnumerable<ISpanQuery> Clauses { get; set; }
-        [JsonProperty(PropertyName = "boost")]
-        double? Boost { get; set; }
+		[JsonProperty(PropertyName = "boost")]
+		double? Boost { get; set; }
 
 	}
 
@@ -27,7 +27,7 @@ namespace Nest
 		public string Name { get; set; }
 		bool IQuery.IsConditionless { get { return false; } }
 		public IEnumerable<ISpanQuery> Clauses { get; set; }
-        public double? Boost { get; set; }
+		public double? Boost { get; set; }
 	}
 
 	public class SpanOrQueryDescriptor<T> : ISpanOrQuery where T : class
@@ -36,13 +36,13 @@ namespace Nest
 
 		IEnumerable<ISpanQuery> ISpanOrQuery.Clauses { get; set; }
 
-        double? ISpanOrQuery.Boost { get; set; }
+		double? ISpanOrQuery.Boost { get; set; }
 
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				return !Self.Clauses.HasAny() 
+				return !Self.Clauses.HasAny()
 					|| Self.Clauses.Cast<IQuery>().All(q => q.IsConditionless);
 			}
 		}
@@ -59,20 +59,20 @@ namespace Nest
 		{
 			selectors.ThrowIfNull("selector");
 			var descriptors = (
-				from selector in selectors 
-				let span = new SpanQuery<T>() 
-				select selector(span) into q 
-				where !(q as IQuery).IsConditionless 
+				from selector in selectors
+				let span = new SpanQuery<T>()
+				select selector(span) into q
+				where !(q as IQuery).IsConditionless
 				select q
 			).ToList();
 			Self.Clauses = descriptors.HasAny() ? descriptors : null;
 			return this;
 		}
 
-        public ISpanOrQuery Boost(double boost)
-        {
-            Self.Boost = boost;
-            return this;
-        }
+		public ISpanOrQuery Boost(double boost)
+		{
+			Self.Boost = boost;
+			return this;
+		}
 	}
 }

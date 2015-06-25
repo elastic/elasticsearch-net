@@ -15,6 +15,9 @@ namespace Nest
 	{
 		[JsonProperty("shape")]
 		IMultiLineStringGeoShape Shape { get; set; }
+
+		[JsonProperty(PropertyName = "boost")]
+		double? Boost { get; set; }
 	}
 
 	public class GeoShapeMultiLineStringQuery : PlainQuery, IGeoShapeMultiLineStringQuery
@@ -25,6 +28,9 @@ namespace Nest
 		}
 
 		public string Name { get; set; }
+
+		public double? Boost { get; set; }
+
 		bool IQuery.IsConditionless { get { return false; } }
 
 		PropertyPathMarker IFieldNameQuery.GetFieldName()
@@ -50,6 +56,8 @@ namespace Nest
 		
 		IMultiLineStringGeoShape IGeoShapeMultiLineStringQuery.Shape { get; set; }
 
+		double? IGeoShapeMultiLineStringQuery.Boost { get; set; }
+
 		bool IQuery.IsConditionless
 		{
 			get
@@ -64,6 +72,7 @@ namespace Nest
 		{
 			((IGeoShapeQuery)this).Field = fieldName;
 		}
+
 		PropertyPathMarker IFieldNameQuery.GetFieldName()
 		{
 			return ((IGeoShapeQuery)this).Field;
@@ -75,11 +84,18 @@ namespace Nest
 			return this;
 		}
 		
+		public GeoShapeMultiLineStringQueryDescriptor<T> Boost(double boost)
+		{
+			Self.Boost = boost;
+			return this;
+		}
+		
 		public GeoShapeMultiLineStringQueryDescriptor<T> OnField(string field)
 		{
 			((IGeoShapeQuery)this).Field = field;
 			return this;
 		}
+
 		public GeoShapeMultiLineStringQueryDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
 		{
 			((IGeoShapeQuery)this).Field = objectPath;

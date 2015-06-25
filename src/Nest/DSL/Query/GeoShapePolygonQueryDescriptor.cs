@@ -15,6 +15,9 @@ namespace Nest
 	{
 		[JsonProperty("shape")]
 		IPolygonGeoShape Shape { get; set; }
+
+		[JsonProperty(PropertyName = "boost")]
+		double? Boost { get; set; }
 	}
 
 	public class GeoShapePolygonQuery : PlainQuery, IGeoShapePolygonQuery
@@ -25,6 +28,8 @@ namespace Nest
 		}
 
 		public string Name { get; set; }
+
+		public double? Boost { get; set; }
 
 		bool IQuery.IsConditionless { get { return false; } }
 
@@ -50,6 +55,8 @@ namespace Nest
 		PropertyPathMarker IGeoShapeQuery.Field { get; set; }
 		
 		IPolygonGeoShape IGeoShapePolygonQuery.Shape { get; set; }
+
+		double? IGeoShapePolygonQuery.Boost { get; set; }
 
 		bool IQuery.IsConditionless
 		{
@@ -78,11 +85,18 @@ namespace Nest
 			return this;
 		}
 
+		public GeoShapePolygonQueryDescriptor<T> Boost(double boost)
+		{
+			Self.Boost = boost;
+			return this;
+		}
+
 		public GeoShapePolygonQueryDescriptor<T> OnField(string field)
 		{
 			((IGeoShapeQuery)this).Field = field;
 			return this;
 		}
+
 		public GeoShapePolygonQueryDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
 		{
 			((IGeoShapeQuery)this).Field = objectPath;

@@ -26,6 +26,9 @@ namespace Nest
 		[JsonConverter(typeof(ReadAsTypeConverter<InnerHits>))]
 		IInnerHits InnerHits { get; set; }
 
+		[JsonProperty(PropertyName = "boost")]
+		double? Boost { get; set; }
+
 	}
 
 	public class HasParentQuery : PlainQuery, IHasParentQuery
@@ -41,6 +44,7 @@ namespace Nest
 		public ParentScoreType? ScoreType { get; set; }
 		public IQueryContainer Query { get; set; }
 		public IInnerHits InnerHits { get; set; }
+		public double? Boost { get; set; }
 	}
 
 	public class HasParentQueryDescriptor<T> : IHasParentQuery where T : class
@@ -53,6 +57,8 @@ namespace Nest
 
 		IInnerHits IHasParentQuery.InnerHits { get; set; }
 		
+		double? IHasParentQuery.Boost { get; set; }
+
 		string IQuery.Name { get; set; }
 
 		IQueryContainer IHasParentQuery.Query { get; set; }
@@ -76,12 +82,19 @@ namespace Nest
 			return this;
 		}
 
+		public HasParentQueryDescriptor<T> Boost(double boost)
+		{
+			Self.Boost = boost;
+			return this;
+		}
+
 		public HasParentQueryDescriptor<T> Query(Func<QueryDescriptor<T>, QueryContainer> querySelector)
 		{
 			var q = new QueryDescriptor<T>();
 			Self.Query = querySelector(q);
 			return this;
 		}
+
 		public HasParentQueryDescriptor<T> Type(string type)
 		{
 			Self.Type = type;

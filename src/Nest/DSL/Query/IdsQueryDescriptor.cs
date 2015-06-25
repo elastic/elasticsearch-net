@@ -16,6 +16,10 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "values")]
 		IEnumerable<string> Values { get; set; }
+
+		[JsonProperty(PropertyName = "boost")]
+		double? Boost { get; set; }
+
 	}
 	
 	public class IdsQuery : PlainQuery, IIdsQuery
@@ -29,6 +33,7 @@ namespace Nest
 		bool IQuery.IsConditionless { get { return false; } }
 		public IEnumerable<string> Type { get; set; }
 		public IEnumerable<string> Values { get; set; }
+		public double? Boost { get; set; }
 	}
 
 	[Obsolete("Scheduled to be renamed in 2.0")]
@@ -37,8 +42,13 @@ namespace Nest
 		private IIdsQuery Self { get { return this; }}
 
 		IEnumerable<string> IIdsQuery.Values { get; set; }
+
 		IEnumerable<string> IIdsQuery.Type { get; set; }
+
 		string IQuery.Name { get; set; }
+
+		double? IIdsQuery.Boost { get; set; }
+
 		bool IQuery.IsConditionless
 		{
 			get
@@ -50,6 +60,12 @@ namespace Nest
 		public IdsQueryProperDescriptor Name(string name)
 		{
 			Self.Name = name;
+			return this;
+		}
+
+		public IdsQueryProperDescriptor Boost(double boost)
+		{
+			Self.Boost = boost;
 			return this;
 		}
 
@@ -99,6 +115,9 @@ namespace Nest
 		public IEnumerable<string> Type { get; set; }
 		[JsonProperty(PropertyName = "values")]
 		public IEnumerable<string> Values { get; set; }
+
+		[JsonProperty(PropertyName = "boost")]
+		public double? Boost { get; set; }
 
 		bool IQuery.IsConditionless
 		{

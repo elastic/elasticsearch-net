@@ -22,8 +22,8 @@ namespace Nest
 		[JsonProperty(PropertyName = "collect_payloads")]
 		bool? CollectPayloads { get; set; }
 
-        [JsonProperty(PropertyName = "boost")]
-	    double? Boost { get; set; }
+		[JsonProperty(PropertyName = "boost")]
+		double? Boost { get; set; }
 	}
 
 	public class SpanNearQuery : PlainQuery, ISpanNearQuery
@@ -39,12 +39,12 @@ namespace Nest
 		public int? Slop { get; set; }
 		public bool? InOrder { get; set; }
 		public bool? CollectPayloads { get; set; }
-	    public double? Boost { get; set; }
+		public double? Boost { get; set; }
 	}
 
 	public class SpanNearQueryDescriptor<T> : ISpanNearQuery where T : class
 	{
-		private ISpanNearQuery Self { get { return this; }}
+		private ISpanNearQuery Self { get { return this; } }
 
 		IEnumerable<ISpanQuery> ISpanNearQuery.Clauses { get; set; }
 
@@ -54,15 +54,15 @@ namespace Nest
 
 		bool? ISpanNearQuery.CollectPayloads { get; set; }
 
-        double? ISpanNearQuery.Boost { get; set; }
+		double? ISpanNearQuery.Boost { get; set; }
 
-		string IQuery.Name { get; set; }	
+		string IQuery.Name { get; set; }
 
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				return !Self.Clauses.HasAny() 
+				return !Self.Clauses.HasAny()
 					|| Self.Clauses.Cast<IQuery>().All(q => q.IsConditionless);
 			}
 		}
@@ -106,10 +106,10 @@ namespace Nest
 			return this;
 		}
 
-	    public SpanNearQueryDescriptor<T> Boost(double boost)
-	    {
-	        Self.Boost = boost;
-	        return this;
-	    }
+		public SpanNearQueryDescriptor<T> Boost(double boost)
+		{
+			Self.Boost = boost;
+			return this;
+		}
 	}
 }

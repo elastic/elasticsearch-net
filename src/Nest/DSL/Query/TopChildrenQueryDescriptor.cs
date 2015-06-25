@@ -31,6 +31,9 @@ namespace Nest
 		[Obsolete("invalid mapping scheduled to be removed in 2.0")]
 		bool? Cache { get; set; }
 
+		[JsonProperty("boost")]
+		double? Boost { get; set; }
+
 	}
 
 	public class TopChildrenQuery : PlainQuery, ITopChildrenQuery
@@ -46,6 +49,7 @@ namespace Nest
 		public int? Factor { get; set; }
 		public int? IncrementalFactor { get; set; }
 		public IQueryContainer Query { get; set; }
+		public double? Boost { get; set; }
 		[Obsolete("invalid mapping scheduled to be removed in 2.0")]
 		public bool? Cache { get; set; }
 		public string Name { get; set; }
@@ -93,6 +97,8 @@ namespace Nest
 
 		IQueryContainer ITopChildrenQuery.Query { get; set; }
 
+		double? ITopChildrenQuery.Boost { get; set; }
+
 		bool? ITopChildrenQuery.Cache { get; set; }
 
 		/// <summary>
@@ -113,6 +119,16 @@ namespace Nest
 		public TopChildrenQueryDescriptor<T> Factor(int factor)
 		{
 			((ITopChildrenQuery)this).Factor = factor;
+			return this;
+		}
+		
+		/// <summary>
+		/// How many hits are asked for in the first child query run is controlled using the factor parameter (defaults to 5).
+		/// </summary>
+		/// <param name="factor">The factor that controls how many hits are asked for</param>
+		public TopChildrenQueryDescriptor<T> Boost(double boost)
+		{
+			((ITopChildrenQuery)this).Boost = boost;
 			return this;
 		}
 		

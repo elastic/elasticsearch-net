@@ -25,6 +25,10 @@ namespace Nest
 		[JsonProperty("no_match_query")]
 		[JsonConverter(typeof(NoMatchQueryConverter))]
 		IQueryContainer NoMatchQuery { get; set; }
+
+		[JsonProperty(PropertyName = "boost")]
+		double? Boost { get; set; }
+
 	}
 
 	public class NoMatchQueryConverter : CompositeJsonConverter<ReadAsTypeConverter<QueryDescriptor<object>>, CustomJsonConverter>
@@ -67,6 +71,7 @@ namespace Nest
 		public IQueryContainer Query { get; set; }
 		public IQueryContainer NoMatchQuery { get; set; }
 		public IEnumerable<string> Indices { get; set; }
+		public double? Boost { get; set; }
 	}
 
 	public class IndicesQueryDescriptor<T> : IIndicesQuery where T : class
@@ -78,6 +83,8 @@ namespace Nest
 		IQueryContainer IIndicesQuery.Query { get; set; }
 
 		IQueryContainer IIndicesQuery.NoMatchQuery { get; set; }
+
+		double? IIndicesQuery.Boost { get; set; }
 
 		IEnumerable<string> IIndicesQuery.Indices { get; set; }
 
@@ -94,6 +101,12 @@ namespace Nest
 		public IndicesQueryDescriptor<T> Name(string name)
 		{
 			Self.Name = name;
+			return this;
+		}
+
+		public IndicesQueryDescriptor<T> Boost(double boost)
+		{
+			Self.Boost = boost;
 			return this;
 		}
 
@@ -135,6 +148,7 @@ namespace Nest
 			Self.NoMatchQuery = q;
 			return this;
 		}
+
 		public IndicesQueryDescriptor<T> NoMatchQuery<K>(Func<QueryDescriptor<K>, IQueryContainer> querySelector) where K : class
 		{
 			var qd = new QueryDescriptor<K>();
@@ -145,6 +159,7 @@ namespace Nest
 			Self.NoMatchQuery = q;
 			return this;
 		}
+
 		public IndicesQueryDescriptor<T> Indices(IEnumerable<string> indices)
 		{
 			Self.Indices = indices;

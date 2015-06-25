@@ -15,6 +15,9 @@ namespace Nest
 	{
 		[JsonProperty("shape")]
 		IMultiPolygonGeoShape Shape { get; set; }
+
+		[JsonProperty(PropertyName = "boost")]
+		double? Boost { get; set; }
 	}
 
 	public class GeoShapeMultiPolygonQuery : PlainQuery, IGeoShapeMultiPolygonQuery
@@ -25,6 +28,9 @@ namespace Nest
 		}
 
 		public string Name { get; set; }
+
+		public double? Boost { get; set; }
+
 		bool IQuery.IsConditionless { get { return false; } }
 
 		PropertyPathMarker IFieldNameQuery.GetFieldName()
@@ -50,6 +56,8 @@ namespace Nest
 		
 		IMultiPolygonGeoShape IGeoShapeMultiPolygonQuery.Shape { get; set; }
 
+		double? IGeoShapeMultiPolygonQuery.Boost { get; set; }
+
 		bool IQuery.IsConditionless
 		{
 			get
@@ -64,6 +72,7 @@ namespace Nest
 		{
 			((IGeoShapeQuery)this).Field = fieldName;
 		}
+
 		PropertyPathMarker IFieldNameQuery.GetFieldName()
 		{
 			return ((IGeoShapeQuery)this).Field;
@@ -74,6 +83,7 @@ namespace Nest
 			((IGeoShapeQuery)this).Field = field;
 			return this;
 		}
+
 		public GeoShapeMultiPolygonQueryDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
 		{
 			((IGeoShapeQuery)this).Field = objectPath;
@@ -83,6 +93,12 @@ namespace Nest
 		public GeoShapeMultiPolygonQueryDescriptor<T> Name(string name)
 		{
 			Self.Name = name;
+			return this;
+		}
+
+		public GeoShapeMultiPolygonQueryDescriptor<T> Boost(double boost)
+		{
+			Self.Boost = boost;
 			return this;
 		}
 
