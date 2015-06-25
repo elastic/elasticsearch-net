@@ -37,32 +37,32 @@ Defines a single bucket of all the documents within the search execution context
 
 	var request = new SearchRequest
 	{
-		Query = new QueryContainer(new MatchQuery
-				{
-					Field = "country",
-					Query = "Malaysia"
-				}
-		),
-		Aggregations = new Dictionary<string, IAggregationContainer>
-		{
-			{ "global_bucket", new AggregationContainer
-				{
-					Aggregations = new Dictionary<string, IAggregationContainer>
-					{
-						{ "bool_count", new AggregationContainer
-							{
-								Terms = new TermsAggregator
-								{
-									Field = "boolValue"
-								}
-							}
-						}
-					}
-				}
-			}
-		}
+    	Query = new QueryContainer(new MatchQuery
+    	{
+        	Field = "country",
+        	Query = "Malaysia"
+    	}),
+    	Aggregations = new Dictionary<string, IAggregationContainer>
+    	{
+        	{ "global_bucket", new AggregationContainer
+            	{
+                	Global = new GlobalAggregator(),
+                	Aggregations = new Dictionary<string, IAggregationContainer>
+                	{
+                    	{ "bool_count", new AggregationContainer
+                        	{
+                            	Terms = new TermsAggregator
+                            	{
+                                	Field = "boolValue"
+                            	}
+                        	}
+                    	}
+                	}
+            	}
+        	}
+    	}
 	};
-
+	
 	var result = client.Search<ElasticsearchProject>(request);
 
 	var agg = result.Aggs.Global("global_bucket");

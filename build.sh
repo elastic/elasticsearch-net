@@ -8,7 +8,7 @@ SOURCELINK="build/tools/SourceLink.Fake/SourceLink.Fake.nupkg"
 if [[ ! -f "$NUGET" ]]; then
    echo NUGET not found.. Download...
    mkdir -p build/tools/nuget
-   curl -o $NUGET https://nugetbuild.cloudapp.net/drops/client/master/NuGet.exe
+   curl -o $NUGET https://api.nuget.org/downloads/nuget.exe
 fi
 
 #we need FAKE to process our build scripts

@@ -12,6 +12,7 @@ namespace Nest.Tests.Integration.Reproduce
 	public class Reproduce1457Tests : IntegrationTests
 	{
 		[Test]
+		[SkipVersion("0 - 1.3.9", "Analyzer type required on ES <= 1.3")]
 		public void AnalyzerMissingType_ShouldNotThrow_And_DeserializeAsCustom()
 		{
 			var indexName = "issue1457-repro";
