@@ -19,21 +19,4 @@ namespace Nest
         [JsonProperty("failures")]
         public IEnumerable<ShardsFailureReason> Failures { get; internal set; }
     }
-
-	[JsonObject]
-	public class ShardsFailureReason
-	{
-		[JsonProperty("index")]
-		public string Index { get; internal set; }
-
-		[JsonProperty("shard")]
-		public int Shard { get; internal set; }
-
-		[JsonProperty("status")]
-		public int Status { get; internal set; }
-
-		[JsonProperty("reason")]
-		public string Reason { get; internal set; }
-
-	}
 }

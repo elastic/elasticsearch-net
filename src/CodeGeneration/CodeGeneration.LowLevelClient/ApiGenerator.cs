@@ -290,7 +290,7 @@ namespace CodeGeneration.LowLevelClient
 
 		public static void GenerateRequestParametersExtensions(RestApiSpec model)
 		{
-			var targetFile = _nestFolder + @"Domain\RequestParametersExtensions.Generated.cs";
+			var targetFile = _nestFolder + @"_Generated\RequestParametersExtensions.Generated.cs";
 			var source = _razorMachine.Execute(File.ReadAllText(_viewFolder + @"RequestParametersExtensions.Generated.cshtml"), model).ToString();
 			File.WriteAllText(targetFile, source);
 		}
