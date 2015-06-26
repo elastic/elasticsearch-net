@@ -10,6 +10,7 @@ namespace Nest
 
 		public IList<TBucketItem> Items { get; set; }
 	}
+
 	public class Bucket : IAggregation
 	{
 		public IEnumerable<IAggregation> Items { get; set; }

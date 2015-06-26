@@ -46,15 +46,16 @@ namespace Nest
 
 		public string Name { get; set; }
 
-		public bool IsConditionless { get { return QueryCondition.IsConditionless(this); } }
+		public bool IsConditionless => QueryCondition.IsConditionless(this);
 	}
 
 	// TODO: finish implementing
 	public class MissingQueryDescriptor : IMissingQuery
 	{
-		private IMissingQuery Self { get { return this; } }
-		 
-		bool IQuery.IsConditionless { get { return QueryCondition.IsConditionless(this); } }
+		private IMissingQuery Self => this;
+
+		bool IQuery.IsConditionless => QueryCondition.IsConditionless(this);
+
 		PropertyPathMarker IMissingQuery.Field { get; set;}
 		bool? IMissingQuery.Existence { get; set; }
 		bool? IMissingQuery.NullValue { get; set; }
