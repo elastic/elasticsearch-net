@@ -1,4 +1,0 @@
-{"index":"my-index"}
-{"query":{"term":{"name":{"value":"NEST"}}}}
-{"index":"nest_test_data"}
-{"query":{"term":{"contributors.lastName":{"value":"Laarman"}}}}

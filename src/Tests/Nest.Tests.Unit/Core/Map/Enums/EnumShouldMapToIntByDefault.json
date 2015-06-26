@@ -1,9 +1,0 @@
-{
-  "myclass": {
-    "properties": {
-      "myEnum": {
-        "type": "integer"
-      }
-    }
-  }
-}

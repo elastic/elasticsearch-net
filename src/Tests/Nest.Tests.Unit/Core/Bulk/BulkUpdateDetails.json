@@ -1,4 +1,0 @@
-{ "update" :  {"_index":"nest_test_data","_type":"elasticsearchprojects","_id":"3", "_retry_on_conflict" : 4} }
-{"doc":{"name":"NEST"}}
-{ "index" :  {"_index":"nest_test_data","_type":"elasticsearchprojects","_id":"90", "_percolate": "percolateme"} }
-{"id":90,"name":"yodawg","loc":0,"startedOn":"0001-01-01T00:00:00","longValue":0,"floatValue":0.0,"doubleValue":0.0,"boolValue":false,"locScriptField":0,"stupidIntIWantAsLong":0}

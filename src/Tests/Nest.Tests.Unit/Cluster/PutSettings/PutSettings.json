@@ -1,8 +1,0 @@
-{
-  "persistent": {
-    "persistent.config.value": 2
-  },
-  "transient": {
-    "transient.value": "string"
-  }
-}
