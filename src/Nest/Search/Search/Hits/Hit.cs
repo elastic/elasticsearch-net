@@ -68,7 +68,7 @@ namespace Nest
 				if (_Highlight == null)
 					return new HighlightFieldDictionary();
 
-				var highlights = _Highlight.Select(kv => new Highlight
+				var highlights = _Highlight.Select(kv => new HighlightHit
 				{
 					DocumentId = this.Id,
 					Field = kv.Key,

@@ -190,6 +190,8 @@
     <Compile Include="Analysis\Tokenizer\TokenizerBase.cs" />
     <Compile Include="Analysis\Tokenizer\UaxEmailUrlTokenizer.cs" />
     <Compile Include="Analysis\Tokenizer\WhitespaceTokenizer.cs" />
+    <Compile Include="Search\Search\Hits\InnerHitsMetaData.cs" />
+    <Compile Include="Search\Search\Hits\InnerHitsResult.cs" />
     <Compile Include="Indices\AliasManagement\CreateAlias.cs" />
     <Compile Include="Indices\AliasManagement\AliasAdd.cs" />
     <Compile Include="Indices\AliasManagement\AliasAddOperation.cs" />
@@ -300,7 +302,7 @@
     <Compile Include="Cluster\ClusterStats\CompletionStats.cs" />
     <Compile Include="Cluster\ClusterStats\FieldDataStats.cs" />
     <Compile Include="Cluster\ClusterStats\FilterCacheStats.cs" />
-    <Compile Include="Domain\Stats\IdCacheStats.cs" />
+    <Compile Include="Cluster\ClusterStats\IdCacheStats.cs" />
     <Compile Include="Cluster\ClusterStats\IndicesStats.cs" />
     <Compile Include="Cluster\ClusterStats\PercolateStats.cs" />
     <Compile Include="Domain\Stats\PluginStats.cs" />
@@ -663,7 +665,7 @@
     <Compile Include="Mapping\CoreTypes\CompletionMapping.cs" />
     <Compile Include="Cluster\RootNodeInfo\RootVersionInfoResponse.cs" />
     <Compile Include="Indices\Monitoring\Status\StatusResponse.cs" />
-    <Compile Include="Domain\Stats\IndexDocStats.cs" />
+    <Compile Include="Indices\Monitoring\Status\IndexDocStats.cs" />
     <Compile Include="Indices\Monitoring\Status\IndexStatus.cs" />
     <Compile Include="QueryDsl\ConditionlessQuery.cs" />
     <Compile Include="Search\Suggesters\CompletionSuggester\FuzzySuggest.cs" />
@@ -744,10 +746,10 @@
     <Compile Include="Cluster\ClusterHealth\HealthResponse.cs" />
     <Compile Include="Cluster\NodesInfo\NodeInfoResponse.cs" />
     <Compile Include="Cluster\NodeStats\NodeStatsResponse.cs" />
-    <Compile Include="Domain\Stats\IndexHealthStats.cs" />
+    <Compile Include="Cluster\ClusterHealth\IndexHealthStats.cs" />
     <Compile Include="Cluster\NodesInfo\NodeInfo.cs" />
     <Compile Include="Cluster\NodeStats\NodeStats.cs" />
-    <Compile Include="Domain\Stats\ShardHealthStats.cs" />
+    <Compile Include="Cluster\ClusterHealth\ShardHealthStats.cs" />
     <Compile Include="Search\MoreLikeThis\MoreLikeThisRequest.cs" />
     <Compile Include="Cluster\ClusterHealth\ElasticClient-ClusterHealth.cs" />
     <Compile Include="Search\MoreLikeThis\ElasticClient-MoreLikeThis.cs" />
@@ -772,7 +774,7 @@
     <Compile Include="Mapping\CoreTypes\IElasticCoreType.cs" />
     <Compile Include="Indices\MappingManagement\GetMapping\ElasticClient-MappingGet.cs" />
     <Compile Include="Indices\MappingManagement\DeleteMapping\ElasticClient-MappingDelete.cs" />
-    <Compile Include="Domain\Hit\MultiGetHit.cs" />
+    <Compile Include="Document\Multiple\MultiGet\MultiGetHit.cs" />
     <Compile Include="Mapping\MetadataFields\AnalyzerFieldMapping.cs" />
     <Compile Include="Mapping\MetadataFields\AllFieldMapping.cs" />
     <Compile Include="Mapping\MetadataFields\BoostFieldMapping.cs" />
@@ -796,7 +798,7 @@
     <Compile Include="Document\Multiple\MultiGet\ElasticClient-MultiGet.cs" />
     <Compile Include="Cluster\NodesHotThreads\ElasticClient-NodesHotThreads.cs" />
     <Compile Include="Search\Scroll\ElasticClient-Scroll.cs" />
-    <Compile Include="Domain\Hit\ValidationExplanation.cs" />
+    <Compile Include="Search\Validate\ValidationExplanation.cs" />
     <Compile Include="Search\Validate\ValidateResponse.cs" />
     <Compile Include="Search\Validate\ValidateQueryRequest.cs" />
     <Compile Include="Search\Validate\ElasticClient-Validate.cs" />
@@ -869,7 +871,7 @@
     <Compile Include="Search\Percolator\RegisterPercolator\RegisterPercolateResponse.cs" />
     <Compile Include="Search\Search\SearchRequest.cs" />
     <Compile Include="Search\Percolator\Percolate\ElasticClient-Percolate.cs" />
-    <Compile Include="Domain\Hit\IndexSegment.cs" />
+    <Compile Include="Indices\Monitoring\IndicesSegments\IndexSegment.cs" />
     <Compile Include="Indices\Monitoring\IndicesSegments\ElasticClient-Segments.cs" />
     <Compile Include="Domain\Hit\ShardSegmentRouting.cs" />
     <Compile Include="Domain\Hit\Segment.cs" />
@@ -896,7 +898,6 @@
     <Compile Include="Indices\IndexSettings\GetSettings\ElasticClient-GetIndexSettings.cs" />
     <Compile Include="Indices\StatusManagement\ClearCache\ElasticClient-ClearCache.cs" />
     <Compile Include="Indices\IndexSettings\Analyze\AnalyzeToken.cs" />
-    <Compile Include="Domain\Hit\MultiHit.cs" />
     <Compile Include="Mapping\AttributeBased\ElasticPropertyAttribute.cs" />
     <Compile Include="Mapping\CoreTypes\IElasticType.cs" />
     <Compile Include="Mapping\AttributeBased\ElasticTypeAttribute.cs" />
@@ -915,11 +916,11 @@
     <Compile Include="Indices\StatusManagement\Flush\ElasticClient-Flush.cs" />
     <Compile Include="Indices\IndexManagement\OpenCloseIndex\CloseIndex\ElasticClient-CloseIndex.cs" />
     <Compile Include="Indices\StatusManagement\Refresh\ElasticClient-Refresh.cs" />
-    <Compile Include="Domain\Hit\Highlight.cs" />
+    <Compile Include="Domain\Hit\HighlightHit.cs" />
     <Compile Include="Search\Explain\Explanation.cs" />
     <Compile Include="Search\Explain\ExplanationDetail.cs" />
-    <Compile Include="Domain\Hit\Hit.cs" />
-    <Compile Include="Domain\Hit\HitsMetaData.cs" />
+    <Compile Include="Search\Search\Hits\Hit.cs" />
+    <Compile Include="Search\Search\Hits\HitsMetaData.cs" />
     <Compile Include="IElasticClient.cs" />
     <Compile Include="Properties\ClsCompiancy.cs" />
     <Compile Include="Resolvers\Converters\BulkOperationResponseItemConverter.cs" />
@@ -1018,7 +1019,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Aggregations\Pipeline\" />
-    <Folder Include="Domain\Geo\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

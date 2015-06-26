@@ -7,9 +7,9 @@ namespace Nest
 {
 
 	[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-	public class HighlightFieldDictionary : Dictionary<string, Highlight>
+	public class HighlightFieldDictionary : Dictionary<string, HighlightHit>
 	{
-		public HighlightFieldDictionary(IDictionary<string, Highlight> dictionary = null)
+		public HighlightFieldDictionary(IDictionary<string, HighlightHit> dictionary = null)
 		{
 			if (dictionary == null)
 				return;
