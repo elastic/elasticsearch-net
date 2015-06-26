@@ -72,105 +72,68 @@ namespace Nest
 
 	public class CommonTermsQueryDescriptor<T> : ICommonTermsQuery where T : class
 	{
-		private ICommonTermsQuery Self { get { return this; }}
+		ICommonTermsQuery Self => this;
+
+		bool IQuery.IsConditionless => Self.Field.IsConditionless() || Self.Query.IsNullOrEmpty();
+
+		CommonTermsQueryDescriptor<T> Assign(Action<ICommonTermsQuery> assign)
+		{
+			assign(Self);
+			return this;
+		}
+
 		string IQuery.Name { get; set; }
-		bool IQuery.IsConditionless
-		{
-			get
-			{
-				return Self.Field.IsConditionless() || Self.Query.IsNullOrEmpty();
-			}
-		}
-		string ICommonTermsQuery.Query { get; set; }
-		PropertyPathMarker ICommonTermsQuery.Field { get; set; }
-		double? ICommonTermsQuery.CutoffFrequency { get; set; }
-		Operator? ICommonTermsQuery.LowFrequencyOperator { get; set; }
-		Operator? ICommonTermsQuery.HighFrequencyOperator { get; set; }
-		string ICommonTermsQuery.MinimumShouldMatch { get; set; }
+		//<inheritdoc/>
+		public CommonTermsQueryDescriptor<T> Name(string name) => Assign(a => a.Name = name);
+
 		double? ICommonTermsQuery.Boost { get; set; }
+		//<inheritdoc/>
+		public CommonTermsQueryDescriptor<T> Boost(double boost) => Assign(a=>a.Boost = boost);
+
+		PropertyPathMarker ICommonTermsQuery.Field { get; set; }
+		//<inheritdoc/>
+		public CommonTermsQueryDescriptor<T> OnField(string field) => Assign(a => a.Field = field);
+
+		//<inheritdoc/>
+		public CommonTermsQueryDescriptor<T> OnField(Expression<Func<T, object>> objectPath) =>
+			Assign(a => a.Field = objectPath);
+
+		void IFieldNameQuery.SetFieldName(string fieldName) => Self.Field = fieldName;
+
+		PropertyPathMarker IFieldNameQuery.GetFieldName() => Self.Field;
+
+		string ICommonTermsQuery.Query { get; set; }
+		//<inheritdoc/>
+		public CommonTermsQueryDescriptor<T> Query(string query) => Assign(a => a.Query = query);
+
+		Operator? ICommonTermsQuery.LowFrequencyOperator { get; set; }
+		//<inheritdoc/>
+		public CommonTermsQueryDescriptor<T> LowFrequencyOperator(Operator op) => Assign(a => a.LowFrequencyOperator = op);
+
+		Operator? ICommonTermsQuery.HighFrequencyOperator { get; set; }
+		//<inheritdoc/>
+		public CommonTermsQueryDescriptor<T> HighFrequencyOperator(Operator op) => Assign(a => a.HighFrequencyOperator = op);
+
 		string ICommonTermsQuery.Analyzer { get; set; }
+		//<inheritdoc/>
+		public CommonTermsQueryDescriptor<T> Analyzer(string analyzer) => Assign(a => a.Analyzer = analyzer);
+
+		double? ICommonTermsQuery.CutoffFrequency { get; set; }
+		//<inheritdoc/>
+		public CommonTermsQueryDescriptor<T> CutoffFrequency(double cutOffFrequency) => 
+			Assign(a => a.CutoffFrequency = cutOffFrequency);
+
+		string ICommonTermsQuery.MinimumShouldMatch { get; set; }
+		//<inheritdoc/>
+		public CommonTermsQueryDescriptor<T> MinimumShouldMatch(string minimumShouldMatch) =>
+			Assign(a => a.MinimumShouldMatch = minimumShouldMatch);
+
+		//<inheritdoc/>
+		public CommonTermsQueryDescriptor<T> MinimumShouldMatch(int minimumShouldMatch) =>
+			Assign(a=>a.MinimumShouldMatch = minimumShouldMatch.ToString(CultureInfo.InvariantCulture));
+
 		bool? ICommonTermsQuery.DisableCoord { get; set; }
-
-		void IFieldNameQuery.SetFieldName(string fieldName)
-		{
-			Self.Field = fieldName;
-		}
-
-		PropertyPathMarker IFieldNameQuery.GetFieldName()
-		{
-			return Self.Field;
-		}
-
-		public CommonTermsQueryDescriptor<T> Name(string name)
-		{
-			Self.Name = name;
-			return this;
-		}
-
-		public CommonTermsQueryDescriptor<T> OnField(string field)
-		{
-			Self.Field = field;
-			return this;
-		}
-
-		public CommonTermsQueryDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
-		{
-			Self.Field = objectPath;
-			return this;
-		}
-
-		public CommonTermsQueryDescriptor<T> Query(string query)
-		{
-			Self.Query = query;
-			return this;
-		}
-
-		public CommonTermsQueryDescriptor<T> LowFrequencyOperator(Operator op)
-		{
-			Self.LowFrequencyOperator = op;
-			return this;
-		}
-
-		public CommonTermsQueryDescriptor<T> HighFrequencyOperator(Operator op)
-		{
-			Self.HighFrequencyOperator = op;
-			return this;
-		}
-
-		public CommonTermsQueryDescriptor<T> Analyzer(string analyzer)
-		{
-			Self.Analyzer = analyzer;
-			return this;
-		}
-		
-		public CommonTermsQueryDescriptor<T> CutoffFrequency(double cutOffFrequency)
-		{
-			Self.CutoffFrequency = cutOffFrequency;
-			return this;
-		}
-
-		public CommonTermsQueryDescriptor<T> MinimumShouldMatch(string minimumShouldMatch)
-		{
-			Self.MinimumShouldMatch = minimumShouldMatch;
-			return this;
-		}
-
-		public CommonTermsQueryDescriptor<T> MinimumShouldMatch(int minimumShouldMatch)
-		{
-			Self.MinimumShouldMatch = minimumShouldMatch.ToString(CultureInfo.InvariantCulture);
-			return this;
-		}
-
-		public CommonTermsQueryDescriptor<T> Boost(double boost)
-		{
-			Self.Boost = boost;
-			return this;
-		}
-
-		public CommonTermsQueryDescriptor<T> DisableCoord(bool disable = true)
-		{
-			Self.DisableCoord = disable;
-			return this;
-		}
+		//<inheritdoc/>
+		public CommonTermsQueryDescriptor<T> DisableCoord(bool disable = true) => Assign(a => a.DisableCoord = disable);
 	}
 }
