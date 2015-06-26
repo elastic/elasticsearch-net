@@ -26,9 +26,9 @@ namespace Nest
 			return this;
 		}
 
-		public FieldDataStringMappingDescriptor Filter(Func<FieldDataFilterDescriptor, FieldDataFilterDescriptor> filterSelector)
+		public FieldDataStringMappingDescriptor Filter(Func<FieldDataQueryDescriptor, FieldDataQueryDescriptor> filterSelector)
 		{
-			var selector = filterSelector(new FieldDataFilterDescriptor());
+			var selector = filterSelector(new FieldDataQueryDescriptor());
 			this.FieldData.Filter = selector.Filter;
 			return this;
 		}

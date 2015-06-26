@@ -11,22 +11,22 @@ namespace Nest
 	public interface IFiltersAggregator : IBucketAggregator
 	{
 		[JsonProperty("filters")]
-		IEnumerable<IFilterContainer> Filters { get; set; }
+		IEnumerable<IQueryContainer> Filters { get; set; }
 	}
 
 	public class FiltersAggregator : BucketAggregator, IFiltersAggregator
 	{
-		public IEnumerable<IFilterContainer> Filters { get; set; }
+		public IEnumerable<IQueryContainer> Filters { get; set; }
 	}
 
 	public class FiltersAggregationDescriptor<T> : BucketAggregationBaseDescriptor<FiltersAggregationDescriptor<T>, T>, IFiltersAggregator
 		where T : class
 	{
-		IEnumerable<IFilterContainer> IFiltersAggregator.Filters { get; set; }
+		IEnumerable<IQueryContainer> IFiltersAggregator.Filters { get; set; }
 
-		public FiltersAggregationDescriptor<T> Filters(params Func<FilterDescriptor<T>, FilterContainer>[] filterDescriptors)
+		public FiltersAggregationDescriptor<T> Filters(params Func<QueryDescriptor<T>, QueryContainer>[] queryDescriptors)
 		{
-			((IFiltersAggregator)this).Filters = filterDescriptors.Select(f => f.Invoke(new FilterDescriptor<T>())).ToList();
+			((IFiltersAggregator)this).Filters = queryDescriptors.Select(f => f.Invoke(new QueryDescriptor<T>())).ToList();
 			return this;
 		}
 	}

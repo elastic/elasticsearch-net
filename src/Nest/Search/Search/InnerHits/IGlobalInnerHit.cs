@@ -37,7 +37,7 @@ namespace Nest
 		ISourceFilter IInnerHits.Source { get; set; }
 		bool? IInnerHits.Version { get; set; }
 		IList<PropertyPathMarker> IInnerHits.FielddataFields { get; set; }
-		IDictionary<string, IScriptFilter> IInnerHits.ScriptFields { get; set; }
+		IDictionary<string, IScriptQuery> IInnerHits.ScriptFields { get; set; }
 
 		public GlobalInnerHitDescriptor<T> Query(Func<QueryDescriptor<T>, IQueryContainer> querySelector)
 		{
@@ -159,23 +159,23 @@ namespace Nest
 		}
 
 		public GlobalInnerHitDescriptor<T> ScriptFields(
-				Func<FluentDictionary<string, Func<ScriptFilterDescriptor, ScriptFilterDescriptor>>,
-				 FluentDictionary<string, Func<ScriptFilterDescriptor, ScriptFilterDescriptor>>> scriptFields)
+				Func<FluentDictionary<string, Func<ScriptQueryDescriptor, ScriptQueryDescriptor>>,
+				 FluentDictionary<string, Func<ScriptQueryDescriptor, ScriptQueryDescriptor>>> scriptFields)
 		{
 			if (scriptFields == null) return null;
 
-			var scriptFieldDescriptors = scriptFields(new FluentDictionary<string, Func<ScriptFilterDescriptor, ScriptFilterDescriptor>>());
+			var scriptFieldDescriptors = scriptFields(new FluentDictionary<string, Func<ScriptQueryDescriptor, ScriptQueryDescriptor>>());
 			if (scriptFieldDescriptors == null || scriptFieldDescriptors.All(d => d.Value == null))
 			{
 				Self.ScriptFields = null;
 				return this;
 			}
-			Self.ScriptFields = new FluentDictionary<string, IScriptFilter>();
+			Self.ScriptFields = new FluentDictionary<string, IScriptQuery>();
 			foreach (var d in scriptFieldDescriptors)
 			{
 				if (d.Value == null)
 					continue;
-				Self.ScriptFields.Add(d.Key, d.Value(new ScriptFilterDescriptor()));
+				Self.ScriptFields.Add(d.Key, d.Value(new ScriptQueryDescriptor()));
 			}
 			return this;
 		}

@@ -5,28 +5,28 @@ using System.Text;
 
 namespace Nest
 {
-	public class FieldDataFrequencyFilterDescriptor
+	public class FieldDataFrequencyQueryDescriptor
 	{
 		internal FieldDataFrequencyFilter FrequencyFilter { get; private set; }
 
-		public FieldDataFrequencyFilterDescriptor()
+		public FieldDataFrequencyQueryDescriptor()
 		{
 			this.FrequencyFilter = new FieldDataFrequencyFilter();
 		}
 
-		public FieldDataFrequencyFilterDescriptor Min(double min)
+		public FieldDataFrequencyQueryDescriptor Min(double min)
 		{
 			this.FrequencyFilter.Min = min;
 			return this;
 		}
 
-		public FieldDataFrequencyFilterDescriptor Max(double max)
+		public FieldDataFrequencyQueryDescriptor Max(double max)
 		{
 			this.FrequencyFilter.Max = max;
 			return this;
 		}
 
-		public FieldDataFrequencyFilterDescriptor MinSegmentSize(int minSegmentSize)
+		public FieldDataFrequencyQueryDescriptor MinSegmentSize(int minSegmentSize)
 		{
 			this.FrequencyFilter.MinSegmentSize = minSegmentSize;
 			return this;

@@ -46,7 +46,7 @@ namespace Nest
 		SortMode? Mode { get; set; }
 
 		[JsonProperty("nested_filter")]
-		FilterContainer NestedFilter { get; set; }
+		QueryContainer NestedFilter { get; set; }
 
 		[JsonProperty("nested_path")]
 		PropertyPathMarker NestedPath { get; set; }
@@ -57,7 +57,7 @@ namespace Nest
 		public string Missing { get; set; }
 		public SortOrder? Order { get; set; }
 		public SortMode? Mode { get; set; }
-		public FilterContainer NestedFilter { get; set; }
+		public QueryContainer NestedFilter { get; set; }
 		public PropertyPathMarker NestedPath { get; set; }
 		public bool? IgnoreUnmappedFields { get; set; }
 		public abstract PropertyPathMarker SortKey { get; }
@@ -74,7 +74,7 @@ namespace Nest
 
 		SortMode? ISort.Mode { get; set; }
 
-		FilterContainer ISort.NestedFilter { get; set; }
+		QueryContainer ISort.NestedFilter { get; set; }
 
 		PropertyPathMarker ISort.NestedPath { get; set; }
 
@@ -104,11 +104,11 @@ namespace Nest
 			return (TDescriptor)this;
 		}
 
-		public virtual TDescriptor NestedFilter(Func<FilterDescriptor<T>, FilterContainer> filterSelector)
+		public virtual TDescriptor NestedFilter(Func<QueryDescriptor<T>, QueryContainer> filterSelector)
 		{
 			filterSelector.ThrowIfNull("filterSelector");
 
-			var filter = new FilterDescriptor<T>();
+			var filter = new QueryDescriptor<T>();
 			Self.NestedFilter = filterSelector(filter);
 			return (TDescriptor)this;
 		}

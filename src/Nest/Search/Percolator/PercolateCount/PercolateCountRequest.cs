@@ -35,7 +35,7 @@ namespace Nest
 		public IDictionary<PropertyPathMarker, ISort> Sort { get; set; }
 		public IHighlightRequest Highlight { get; set; }
 		public QueryContainer Query { get; set; }
-		public FilterContainer Filter { get; set; }
+		public QueryContainer Filter { get; set; }
 		public IDictionary<string, IAggregationContainer> Aggregations { get; set; }
 
 		public TDocument Document { get; set; }
@@ -62,7 +62,7 @@ namespace Nest
 
 		IHighlightRequest IPercolateOperation.Highlight { get; set; }
 		QueryContainer IPercolateOperation.Query { get; set; }
-		FilterContainer IPercolateOperation.Filter { get; set; }
+		QueryContainer IPercolateOperation.Filter { get; set; }
 
 		string IPercolateOperation.Id { get; set; }
 		int? IPercolateOperation.Size { get; set; }
@@ -273,10 +273,10 @@ namespace Nest
 		/// <summary>
 		/// Filter search using a filter descriptor lambda
 		/// </summary>
-		public PercolateCountDescriptor<T> Filter(Func<FilterDescriptor<T>, FilterContainer> filter)
+		public PercolateCountDescriptor<T> Filter(Func<QueryDescriptor<T>, QueryContainer> filter)
 		{
 			filter.ThrowIfNull("filter");
-			var f = new FilterDescriptor<T>();
+			var f = new QueryDescriptor<T>();
 
 			var bf = filter(f);
 			if (bf == null)
@@ -291,10 +291,10 @@ namespace Nest
 		/// <summary>
 		/// Filter search
 		/// </summary>
-		public PercolateCountDescriptor<T> Filter(FilterContainer filterDescriptor)
+		public PercolateCountDescriptor<T> Filter(QueryContainer QueryDescriptor)
 		{
-			filterDescriptor.ThrowIfNull("filter");
-			Self.Filter = filterDescriptor;
+			QueryDescriptor.ThrowIfNull("filter");
+			Self.Filter = QueryDescriptor;
 			return this;
 		}
 		

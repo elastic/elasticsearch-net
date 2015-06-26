@@ -47,7 +47,7 @@ namespace Nest
 		ScriptedHeuristic Script { get; set; }
 
 		[JsonProperty("background_filter")]
-		IFilterContainer BackgroundFilter { get; set; }
+		IQueryContainer BackgroundFilter { get; set; }
 
 	}
 
@@ -65,7 +65,7 @@ namespace Nest
 		public GoogleNormalizedDistanceHeuristic GoogleNormalizedDistance { get; set; }
 		public PercentageScoreHeuristic PercentageScore { get; set; }
 		public ScriptedHeuristic Script { get; set; }
-		public IFilterContainer BackgroundFilter { get; set; }
+		public IQueryContainer BackgroundFilter { get; set; }
 	}
 
 	public class SignificantTermsAggregationDescriptor<T> : BucketAggregationBaseDescriptor<SignificantTermsAggregationDescriptor<T>, T>, ISignificantTermsAggregator where T : class
@@ -96,7 +96,7 @@ namespace Nest
 
 		ScriptedHeuristic ISignificantTermsAggregator.Script { get; set; }
 
-		IFilterContainer ISignificantTermsAggregator.BackgroundFilter { get; set; }
+		IQueryContainer ISignificantTermsAggregator.BackgroundFilter { get; set; }
 
 		public SignificantTermsAggregationDescriptor<T> Field(string field)
 		{
@@ -191,9 +191,9 @@ namespace Nest
 			return this;
 		}
 
-		public SignificantTermsAggregationDescriptor<T> BackgroundFilter(Func<FilterDescriptor<T>, FilterContainer> selector)
+		public SignificantTermsAggregationDescriptor<T> BackgroundFilter(Func<QueryDescriptor<T>, QueryContainer> selector)
 		{
-			this.Self.BackgroundFilter = selector(new FilterDescriptor<T>());
+			this.Self.BackgroundFilter = selector(new QueryDescriptor<T>());
 			return this;
 		}
 	}

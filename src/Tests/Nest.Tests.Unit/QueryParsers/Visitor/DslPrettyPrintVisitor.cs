@@ -259,7 +259,7 @@ namespace Nest.Tests.Unit.QueryParsers.Visitor
 	
 		
 
-		public virtual void Visit(ITypeFilter filter)
+		public virtual void Visit(ITypeQuery filter)
 		{
 			Write("type");
 		}
@@ -274,7 +274,7 @@ namespace Nest.Tests.Unit.QueryParsers.Visitor
 			Write("term", filter.Field);
 		}
 
-		public virtual void Visit(IScriptFilter filter)
+		public virtual void Visit(IScriptQuery filter)
 		{
 			Write("script");
 		}
@@ -304,7 +304,7 @@ namespace Nest.Tests.Unit.QueryParsers.Visitor
 			Write("or");
 		}
 
-		public virtual void Visit(INotFilter filter)
+		public virtual void Visit(INotQuery filter)
 		{
 			Write("not");
 		}
@@ -314,7 +314,7 @@ namespace Nest.Tests.Unit.QueryParsers.Visitor
 			Write("nested");
 		}
 
-		public virtual void Visit(IMissingFilter filter)
+		public virtual void Visit(IMissingQuery filter)
 		{
 			Write("missing");
 		}
@@ -349,32 +349,32 @@ namespace Nest.Tests.Unit.QueryParsers.Visitor
 			Write("geo_shape");
 		}
 
-		public virtual void Visit(IGeoPolygonFilter filter)
+		public virtual void Visit(IGeoPolygonQuery filter)
 		{
 			Write("geo_polygon");
 		}
 
-		public virtual void Visit(IGeoDistanceRangeFilter filter)
+		public virtual void Visit(IGeoDistanceRangeQuery filter)
 		{
 			Write("geo_distance_range");
 		}
 
-		public virtual void Visit(IGeoDistanceFilter filter)
+		public virtual void Visit(IGeoDistanceQuery filter)
 		{
 			Write("geo_distance");
 		}
 
-        public virtual void Visit(IGeoHashCellFilter filter)
+        public virtual void Visit(IGeoHashCellQuery filter)
         {
             Write("geohash_cell");
         }
 
-		public virtual void Visit(IGeoBoundingBoxFilter filter)
+		public virtual void Visit(IGeoBoundingBoxQuery filter)
 		{
 			Write("geo_bounding_box");
 		}
 
-		public virtual void Visit(IExistsFilter filter)
+		public virtual void Visit(IExistsQuery filter)
 		{
 			Write("exists");
 		}
@@ -384,7 +384,7 @@ namespace Nest.Tests.Unit.QueryParsers.Visitor
 			Write("bool");
 		}
 
-		public virtual void Visit(IAndFilter filter)
+		public virtual void Visit(IAndQuery filter)
 		{
 			Write("and");
 		}

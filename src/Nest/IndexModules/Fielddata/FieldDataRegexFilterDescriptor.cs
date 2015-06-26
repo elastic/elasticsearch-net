@@ -6,16 +6,16 @@ using System.Text;
 
 namespace Nest
 {
-	public class FieldDataRegexFilterDescriptor
+	public class FieldDataRegexQueryDescriptor
 	{
 		internal FieldDataRegexFilter RegexFilter { get; private set; }
 
-		public FieldDataRegexFilterDescriptor()
+		public FieldDataRegexQueryDescriptor()
 		{
 			this.RegexFilter = new FieldDataRegexFilter();
 		}
 
-		public FieldDataRegexFilterDescriptor Pattern(string pattern)
+		public FieldDataRegexQueryDescriptor Pattern(string pattern)
 		{
 			this.RegexFilter.Pattern = pattern;
 			return this;

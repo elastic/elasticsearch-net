@@ -7,8 +7,8 @@ namespace Nest
 	public interface ICreateAliasOperation
 	{
 		[JsonProperty("filter")]
-		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<FilterContainer>, CustomJsonConverter>))]
-		FilterContainer Filter { get; set; }
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryContainer>, CustomJsonConverter>))]
+		QueryContainer Filter { get; set; }
 
 		[JsonProperty("routing")]
 		string Routing { get; set; }
@@ -22,7 +22,7 @@ namespace Nest
 
 	public class CreateAliasOperation : ICreateAliasOperation
 	{
-		public FilterContainer Filter { get; set; }
+		public QueryContainer Filter { get; set; }
 		public string Routing { get; set; }
 		public string IndexRouting { get; set; }
 		public string SearchRouting { get; set; }
@@ -33,7 +33,7 @@ namespace Nest
 		private ICreateAliasOperation Self { get { return this; }}
 
 
-		FilterContainer ICreateAliasOperation.Filter { get; set; }
+		QueryContainer ICreateAliasOperation.Filter { get; set; }
 		string ICreateAliasOperation.Routing { get; set; }
 		string ICreateAliasOperation.IndexRouting { get; set; }
 		string ICreateAliasOperation.SearchRouting { get; set; }
@@ -53,12 +53,12 @@ namespace Nest
 			Self.SearchRouting = searchRouting;
 			return this;
 		}
-		public CreateAliasDescriptor Filter<T>(Func<FilterDescriptor<T>, FilterContainer> filterSelector)
+		public CreateAliasDescriptor Filter<T>(Func<QueryDescriptor<T>, QueryContainer> filterSelector)
 			where T : class
 		{
 			filterSelector.ThrowIfNull("filterSelector");
 
-			Self.Filter = filterSelector(new FilterDescriptor<T>());
+			Self.Filter = filterSelector(new QueryDescriptor<T>());
 			return this;
 		}
 

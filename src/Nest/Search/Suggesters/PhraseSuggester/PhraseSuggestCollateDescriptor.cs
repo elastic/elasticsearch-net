@@ -14,8 +14,8 @@ namespace Nest
 		IQueryContainer Query { get; set; }
 
 		[JsonProperty(PropertyName = "filter")]
-		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<FilterContainer>, CustomJsonConverter>))]
-		IFilterContainer Filter { get; set; }
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryContainer>, CustomJsonConverter>))]
+		IQueryContainer Filter { get; set; }
 
 		[JsonProperty(PropertyName = "params")]
 		IDictionary<string, object> Params { get; set; }
@@ -28,7 +28,7 @@ namespace Nest
 	{
 		public IQueryContainer Query { get; set; }
 
-		public IFilterContainer Filter { get; set; }
+		public IQueryContainer Filter { get; set; }
 
 		public IDictionary<string, object> Params { get; set; }
 
@@ -42,7 +42,7 @@ namespace Nest
 
 		IQueryContainer IPhraseSuggestCollate.Query { get; set; }
 
-		IFilterContainer IPhraseSuggestCollate.Filter { get; set; }
+		IQueryContainer IPhraseSuggestCollate.Filter { get; set; }
 
 		IDictionary<string, object> IPhraseSuggestCollate.Params { get; set; }
 
@@ -54,9 +54,9 @@ namespace Nest
 			return this;
 		}
 
-		public PhraseSuggestCollateDescriptor<T> Filter(Func<FilterDescriptor<T>, FilterContainer> filter)
+		public PhraseSuggestCollateDescriptor<T> Filter(Func<QueryDescriptor<T>, QueryContainer> filter)
 		{
-			this.Collate.Filter = filter(new FilterDescriptor<T>());
+			this.Collate.Filter = filter(new QueryDescriptor<T>());
 			return this;
 		}
 

@@ -53,11 +53,6 @@ namespace Nest
 			return new QueryDescriptor<T>().FuzzyDate(selector);
 		}
 
-		public static QueryContainer FuzzyLikeThis(Action<FuzzyLikeThisQueryDescriptor<T>> selector)
-		{
-			return new QueryDescriptor<T>().FuzzyLikeThis(selector);
-		}
-
 		public static QueryContainer FuzzyNumeric(Action<FuzzyNumericQueryDescriptor<T>> selector)
 		{
 			return new QueryDescriptor<T>().FuzzyNumeric(selector);
@@ -250,12 +245,6 @@ namespace Nest
 		public static QueryContainer MultiMatch(Action<MultiMatchQueryDescriptor<T>> selector)
 		{
 			return new QueryDescriptor<T>().MultiMatch(selector);
-		}
-
-
-		public static QueryContainer TopChildren<K>(Action<TopChildrenQueryDescriptor<K>> selector) where K : class
-		{
-			return new QueryDescriptor<T>().TopChildren<K>(selector);
 		}
 
 		public static QueryContainer Wildcard(Expression<Func<T, object>> fieldDescriptor, string value, double? Boost = null)

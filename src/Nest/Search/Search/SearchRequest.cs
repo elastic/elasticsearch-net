@@ -64,7 +64,7 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "script_fields")]
 		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		IDictionary<string, IScriptFilter> ScriptFields { get; set; }
+		IDictionary<string, IScriptQuery> ScriptFields { get; set; }
 
 		[JsonProperty(PropertyName = "_source")]
 		[JsonConverter(typeof(ReadAsTypeConverter<SourceFilter>))]
@@ -79,8 +79,8 @@ namespace Nest
 		IQueryContainer Query { get; set; }
 
 		[JsonProperty(PropertyName = "post_filter")]
-		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<FilterContainer>, CustomJsonConverter>))]
-		IFilterContainer PostFilter { get; set; }
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryContainer>, CustomJsonConverter>))]
+		IQueryContainer PostFilter { get; set; }
 
 		[JsonProperty(PropertyName = "inner_hits")]
 		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
@@ -155,11 +155,11 @@ namespace Nest
 		public long? TerminateAfter { get; set; }
 		public IList<PropertyPathMarker> Fields { get; set; }
 		public IList<PropertyPathMarker> FielddataFields { get; set; }
-		public IDictionary<string, IScriptFilter> ScriptFields { get; set; }
+		public IDictionary<string, IScriptQuery> ScriptFields { get; set; }
 		public ISourceFilter Source { get; set; }
 		public IList<ISort> Sort { get; set; }
 		public IDictionary<IndexNameMarker, double> IndicesBoost { get; set; }
-		public IFilterContainer PostFilter { get; set; }
+		public IQueryContainer PostFilter { get; set; }
 		public IDictionary<string, IInnerHitsContainer> InnerHits { get; set; }
 		public IQueryContainer Query { get; set; }
 		public IRescore Rescore { get; set; }
@@ -236,12 +236,12 @@ namespace Nest
 		public IRescore Rescore { get; set; }
 		public IList<PropertyPathMarker> Fields { get; set; }
 		public IList<PropertyPathMarker> FielddataFields { get; set; }
-		public IDictionary<string, IScriptFilter> ScriptFields { get; set; }
+		public IDictionary<string, IScriptQuery> ScriptFields { get; set; }
 		public ISourceFilter Source { get; set; }
 		public IDictionary<string, IInnerHitsContainer> InnerHits { get; set; }
 		public IDictionary<string, IAggregationContainer> Aggregations { get; set; }
 		public IQueryContainer Query { get; set; }
-		public IFilterContainer PostFilter { get; set; }
+		public IQueryContainer PostFilter { get; set; }
 		SearchType? ISearchRequest.SearchType
 		{
 			get { return  this.QueryString == null ? null : this.QueryString.GetQueryStringValue<SearchType?>("search_type");  }
@@ -342,13 +342,13 @@ namespace Nest
 
 		IQueryContainer ISearchRequest.Query { get; set; }
 
-		IFilterContainer ISearchRequest.PostFilter { get; set; }
+		IQueryContainer ISearchRequest.PostFilter { get; set; }
 
 		IList<PropertyPathMarker> ISearchRequest.Fields { get; set; }
 
 		IList<PropertyPathMarker> ISearchRequest.FielddataFields { get; set; }
 
-		IDictionary<string, IScriptFilter> ISearchRequest.ScriptFields { get; set; }
+		IDictionary<string, IScriptQuery> ISearchRequest.ScriptFields { get; set; }
 
 		ISourceFilter ISearchRequest.Source { get; set; }
 
@@ -645,22 +645,22 @@ namespace Nest
 		}
 
 		public SearchDescriptor<T> ScriptFields(
-				Func<FluentDictionary<string, Func<ScriptFilterDescriptor, ScriptFilterDescriptor>>,
-				 FluentDictionary<string, Func<ScriptFilterDescriptor, ScriptFilterDescriptor>>> scriptFields)
+				Func<FluentDictionary<string, Func<ScriptQueryDescriptor, ScriptQueryDescriptor>>,
+				 FluentDictionary<string, Func<ScriptQueryDescriptor, ScriptQueryDescriptor>>> scriptFields)
 		{
 			scriptFields.ThrowIfNull("scriptFields");
-			var scriptFieldDescriptors = scriptFields(new FluentDictionary<string, Func<ScriptFilterDescriptor, ScriptFilterDescriptor>>());
+			var scriptFieldDescriptors = scriptFields(new FluentDictionary<string, Func<ScriptQueryDescriptor, ScriptQueryDescriptor>>());
 			if (scriptFieldDescriptors == null || scriptFieldDescriptors.All(d => d.Value == null))
 			{
 				Self.ScriptFields = null;
 				return this;
 			}
-			Self.ScriptFields = new FluentDictionary<string, IScriptFilter>();
+			Self.ScriptFields = new FluentDictionary<string, IScriptQuery>();
 			foreach (var d in scriptFieldDescriptors)
 			{
 				if (d.Value == null)
 					continue;
-				Self.ScriptFields.Add(d.Key, d.Value(new ScriptFilterDescriptor()));
+				Self.ScriptFields.Add(d.Key, d.Value(new ScriptQueryDescriptor()));
 			}
 			return this;
 		}
@@ -916,10 +916,10 @@ namespace Nest
 		/// <summary>
 		/// Filter search using a filter descriptor lambda
 		/// </summary>
-		public SearchDescriptor<T> PostFilter(Func<FilterDescriptor<T>, FilterContainer> filter)
+		public SearchDescriptor<T> PostFilter(Func<QueryDescriptor<T>, QueryContainer> filter)
 		{
 			filter.ThrowIfNull("filter");
-			var f = new FilterDescriptor<T>().Strict(this._Strict);
+			var f = new QueryDescriptor<T>().Strict(this._Strict);
 
 			var bf = filter(f);
 			if (bf == null)
@@ -938,10 +938,10 @@ namespace Nest
 		/// <summary>
 		/// Filter search
 		/// </summary>
-		public SearchDescriptor<T> PostFilter(FilterContainer filterDescriptor)
+		public SearchDescriptor<T> PostFilter(QueryContainer QueryDescriptor)
 		{
-			filterDescriptor.ThrowIfNull("filter");
-			Self.PostFilter = filterDescriptor;
+			QueryDescriptor.ThrowIfNull("filter");
+			Self.PostFilter = QueryDescriptor;
 			return this;
 		}
 
@@ -950,7 +950,7 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> FilterRaw(string rawFilter)
 		{
-			Self.PostFilter = new FilterDescriptor<T>().Raw(rawFilter);
+			Self.PostFilter = new QueryDescriptor<T>().Raw(rawFilter);
 			return this;
 		}
 

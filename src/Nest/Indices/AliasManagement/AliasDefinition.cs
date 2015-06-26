@@ -8,8 +8,8 @@ namespace Nest
 		public string Name { get; set; }
 
 		[JsonProperty("filter")]
-		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<FilterContainer>, CustomJsonConverter>))]
-		public IFilterContainer Filter { get; internal set; }
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryContainer>, CustomJsonConverter>))]
+		public IQueryContainer Filter { get; internal set; }
 	
 		[JsonProperty("routing")]
 		public string Routing { get; internal set; }

@@ -5,27 +5,27 @@ using System.Text;
 
 namespace Nest
 {
-	public class FieldDataFilterDescriptor
+	public class FieldDataQueryDescriptor
 	{
 		internal FieldDataFilter Filter { get; private set; }
 
-		public FieldDataFilterDescriptor()
+		public FieldDataQueryDescriptor()
 		{
 			this.Filter = new FieldDataFilter();
 		}
 
-		public FieldDataFilterDescriptor Frequency(
-			Func<FieldDataFrequencyFilterDescriptor, FieldDataFrequencyFilterDescriptor> frequencyFilterSelector)
+		public FieldDataQueryDescriptor Frequency(
+			Func<FieldDataFrequencyQueryDescriptor, FieldDataFrequencyQueryDescriptor> frequencyFilterSelector)
 		{
-			var selector = frequencyFilterSelector(new FieldDataFrequencyFilterDescriptor());
+			var selector = frequencyFilterSelector(new FieldDataFrequencyQueryDescriptor());
 			this.Filter.Frequency = selector.FrequencyFilter;
 			return this;
 		}
 
-		public FieldDataFilterDescriptor Regex(
-			Func<FieldDataRegexFilterDescriptor, FieldDataRegexFilterDescriptor> regexFilterSelector)
+		public FieldDataQueryDescriptor Regex(
+			Func<FieldDataRegexQueryDescriptor, FieldDataRegexQueryDescriptor> regexFilterSelector)
 		{
-			var selector = regexFilterSelector(new FieldDataRegexFilterDescriptor());
+			var selector = regexFilterSelector(new FieldDataRegexQueryDescriptor());
 			this.Filter.Regex = selector.RegexFilter;
 			return this;
 		}

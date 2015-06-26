@@ -16,8 +16,8 @@ namespace Nest
 		string Routing { get; set; }
 
 		[JsonProperty("filter")]
-		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<FilterContainer>, CustomJsonConverter>))]
-		IFilterContainer Filter { get; set; }
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryContainer>, CustomJsonConverter>))]
+		IQueryContainer Filter { get; set; }
 	}
 
 	internal static class PutAliasPathInfo
@@ -36,7 +36,7 @@ namespace Nest
 
 		public string Routing { get; set; }
 
-		public IFilterContainer Filter { get; set; }
+		public IQueryContainer Filter { get; set; }
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<PutAliasRequestParameters> pathInfo)
 		{
@@ -51,7 +51,7 @@ namespace Nest
 	{
 		IPutAliasRequest Self { get { return this; } }
 		string IPutAliasRequest.Routing { get; set; }
-		IFilterContainer IPutAliasRequest.Filter { get; set; }
+		IQueryContainer IPutAliasRequest.Filter { get; set; }
 		
 		public PutAliasDescriptor Routing(string routing)
 		{
@@ -59,11 +59,11 @@ namespace Nest
 			return this;
 		}
 
-		public PutAliasDescriptor Filter<T>(Func<FilterDescriptor<T>, FilterContainer> filterSelector)
+		public PutAliasDescriptor Filter<T>(Func<QueryDescriptor<T>, QueryContainer> filterSelector)
 			where T : class
 		{
 			filterSelector.ThrowIfNull("filterSelector");
-			Self.Filter = filterSelector(new FilterDescriptor<T>());
+			Self.Filter = filterSelector(new QueryDescriptor<T>());
 			return this;
 		}
 

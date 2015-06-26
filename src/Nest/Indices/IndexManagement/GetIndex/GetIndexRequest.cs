@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Elasticsearch.Net;
-using Nest.DSL.Query;
 using Newtonsoft.Json;
 
 namespace Nest

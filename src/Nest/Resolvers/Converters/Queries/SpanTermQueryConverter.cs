@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using Nest.DSL.Query.Behaviour;
 using Nest.Resolvers;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;

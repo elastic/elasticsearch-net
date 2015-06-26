@@ -8,25 +8,23 @@ namespace Nest
 	[JsonConverter(typeof(FilterAggregatorConverter))]
 	public interface IFilterAggregator : IBucketAggregator
 	{
-		IFilterContainer Filter { get; set; }
+		IQueryContainer Filter { get; set; }
 	}
 
 	public class FilterAggregator : BucketAggregator, IFilterAggregator
 	{
-		public IFilterContainer Filter { get; set; }
+		public IQueryContainer Filter { get; set; }
 	}
 
 	public class FilterAggregationDescriptor<T> : BucketAggregationBaseDescriptor<FilterAggregationDescriptor<T>, T> , IFilterAggregator 
 		where T : class
 	{
-		IFilterContainer IFilterAggregator.Filter { get; set; }
+		IQueryContainer IFilterAggregator.Filter { get; set; }
 
-		public FilterAggregationDescriptor<T> Filter(Func<FilterDescriptor<T>, FilterContainer> selector)
+		public FilterAggregationDescriptor<T> Filter(Func<QueryDescriptor<T>, QueryContainer> selector)
 		{
-			((IFilterAggregator)this).Filter = selector(new FilterDescriptor<T>());
+			((IFilterAggregator)this).Filter = selector(new QueryDescriptor<T>());
 			return this;
 		}
-
-
 	}
 }

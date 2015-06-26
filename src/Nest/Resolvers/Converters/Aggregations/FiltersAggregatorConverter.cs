@@ -21,12 +21,13 @@ namespace Nest.Resolvers.Converters.Aggregations
 			writer.WriteStartObject();
 			writer.WritePropertyName("filters");
 
-			if (!f.Filters.Any(filter => String.IsNullOrEmpty(filter.FilterName)))
+			if (!f.Filters.Any(filter => filter == null))
 			{
 				writer.WriteStartObject();
 				foreach (var filter in f.Filters)
 				{
-					writer.WritePropertyName(filter.FilterName);
+					// TODO
+					// writer.WritePropertyName(filter.FilterName);
 					serializer.Serialize(writer, filter);
 				}
 				writer.WriteEndObject();

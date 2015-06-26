@@ -33,7 +33,7 @@ namespace Nest
 
 		[JsonProperty("script_fields")]
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		IDictionary<string, IScriptFilter> ScriptFields { get; set; }
+		IDictionary<string, IScriptQuery> ScriptFields { get; set; }
 
 		[JsonProperty("fielddata_fields")]
 		IEnumerable<PropertyPathMarker> FieldDataFields { get; set; }
@@ -50,7 +50,7 @@ namespace Nest
 		public ISourceFilter Source { get; set; }
 		public IHighlightRequest Highlight { get; set; }
 		public bool? Explain { get; set; }
-		public IDictionary<string, IScriptFilter> ScriptFields { get; set; }
+		public IDictionary<string, IScriptQuery> ScriptFields { get; set; }
 		public IEnumerable<PropertyPathMarker> FieldDataFields { get; set; }
 		public bool? Version { get; set; }
 	}
@@ -73,7 +73,7 @@ namespace Nest
 
 		bool? ITopHitsAggregator.Explain { get; set; }
 
-		IDictionary<string, IScriptFilter> ITopHitsAggregator.ScriptFields { get; set; }
+		IDictionary<string, IScriptQuery> ITopHitsAggregator.ScriptFields { get; set; }
 
 		IEnumerable<PropertyPathMarker> ITopHitsAggregator.FieldDataFields { get; set; }
 
@@ -134,22 +134,22 @@ namespace Nest
 		}
 
 		public TopHitsAggregationDescriptor<T> ScriptFields(
-			Func<FluentDictionary<string, Func<ScriptFilterDescriptor, ScriptFilterDescriptor>>,
-		 FluentDictionary<string, Func<ScriptFilterDescriptor, ScriptFilterDescriptor>>> scriptFields)
+			Func<FluentDictionary<string, Func<ScriptQueryDescriptor, ScriptQueryDescriptor>>,
+		 FluentDictionary<string, Func<ScriptQueryDescriptor, ScriptQueryDescriptor>>> scriptFields)
 		{
 			scriptFields.ThrowIfNull("scriptFields");
-			var scriptFieldDescriptors = scriptFields(new FluentDictionary<string, Func<ScriptFilterDescriptor, ScriptFilterDescriptor>>());
+			var scriptFieldDescriptors = scriptFields(new FluentDictionary<string, Func<ScriptQueryDescriptor, ScriptQueryDescriptor>>());
 			if (scriptFieldDescriptors == null || scriptFieldDescriptors.All(d => d.Value == null))
 			{
 				Self.ScriptFields = null;
 				return this;
 			}
-			Self.ScriptFields = new FluentDictionary<string, IScriptFilter>();
+			Self.ScriptFields = new FluentDictionary<string, IScriptQuery>();
 			foreach (var d in scriptFieldDescriptors)
 			{
 				if (d.Value == null)
 					continue;
-				Self.ScriptFields.Add(d.Key, d.Value(new ScriptFilterDescriptor()));
+				Self.ScriptFields.Add(d.Key, d.Value(new ScriptQueryDescriptor()));
 			}
 			return this;
 		}

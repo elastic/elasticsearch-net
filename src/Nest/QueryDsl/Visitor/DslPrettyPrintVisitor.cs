@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Nest.DSL.Visitor
+namespace Nest.QueryDsl.Visitor
 {
 	public class DslPrettyPrintVisitor : IQueryVisitor
 	{
@@ -40,21 +40,12 @@ namespace Nest.DSL.Visitor
 			this.IsStrict = baseQuery.IsStrict;
 			this.IsVerbatim = baseQuery.IsVerbatim;
 		}
+
 		public virtual void Visit(IQuery query)
 		{
 			//Write("");
 		}
-		public virtual void Visit(IFilterContainer filter)
-		{
-			this.IsConditionless = filter.IsConditionless;
-			this.IsStrict = filter.IsStrict;
-			this.IsVerbatim = filter.IsVerbatim;
-		}
-		public virtual void Visit(IFilter filter)
-		{
-		}
-		
-		
+
 		private void Write(string queryType, Dictionary<string, string> properties)
 		{
 			properties = properties ?? new Dictionary<string, string>();
@@ -90,21 +81,6 @@ namespace Nest.DSL.Visitor
 			Write("constant_score");
 		}
 
-		public virtual void Visit(ICustomBoostFactorQuery query)
-		{
-			Write("custom_boost_factor");
-		}
-
-		public virtual void Visit(ICustomFiltersScoreQuery query)
-		{
-			Write("custom_filters_score");
-		}
-
-		public virtual void Visit(ICustomScoreQuery query)
-		{
-			Write("custom_score");
-		}
-
 		public virtual void Visit(IDisMaxQuery query)
 		{
 			Write("dis_max");
@@ -123,11 +99,6 @@ namespace Nest.DSL.Visitor
 		public virtual void Visit(IFuzzyQuery query)
 		{
 			Write("fuzzy", query.Field);
-		}
-
-		public virtual void Visit(IFuzzyLikeThisQuery query)
-		{
-			Write("fuzzy_like_this");
 		}
 
 		public virtual void Visit(IGeoShapeQuery query)
@@ -245,144 +216,49 @@ namespace Nest.DSL.Visitor
 			Write("terms");
 		}
 
-		public virtual void Visit(ITopChildrenQuery query)
-		{
-			Write("top_children");
-		}
-
-	
-		
-
-		public virtual void Visit(ITypeFilter filter)
+		public virtual void Visit(ITypeQuery filter)
 		{
 			Write("type");
 		}
 
-		public virtual void Visit(ITermsBaseFilter filter)
-		{
-			Write("terms");
-		}
-
-		public virtual void Visit(ITermFilter filter)
-		{
-			Write("term", filter.Field);
-		}
-
-		public virtual void Visit(IScriptFilter filter)
-		{
-			Write("script");
-		}
-
-		public virtual void Visit(IRegexpFilter filter)
-		{
-			Write("regexp");
-		}
-
-		public virtual void Visit(IRangeFilter filter)
-		{
-			Write("range");
-		}
-
-		public virtual void Visit(IQueryFilter filter)
-		{
-			Write("query");
-		}
-
-		public virtual void Visit(IPrefixFilter filter)
-		{
-			Write("prefix");
-		}
-
-		public virtual void Visit(IOrFilter filter)
-		{
-			Write("or");
-		}
-
-		public virtual void Visit(INotFilter filter)
-		{
-			Write("not");
-		}
-
-		public virtual void Visit(INestedFilter filter)
-		{
-			Write("nested");
-		}
-
-		public virtual void Visit(IMissingFilter filter)
+		public virtual void Visit(IMissingQuery filter)
 		{
 			Write("missing");
 		}
 
-		public virtual void Visit(IMatchAllFilter filter)
-		{
-			Write("match_all");
-		}
-
-		public virtual void Visit(ILimitFilter filter)
-		{
-			Write("limit");
-		}
-
-		public virtual void Visit(IIdsFilter filter)
-		{
-			Write("ids");
-		}
-
-		public virtual void Visit(IHasParentFilter filter)
-		{
-			Write("has_parent");
-		}
-
-		public virtual void Visit(IHasChildFilter filter)
-		{
-			Write("has_child");
-		}
-
-		public virtual void Visit(IGeoShapeBaseFilter filter)
-		{
-			Write("geo_shape");
-		}
-
-		public virtual void Visit(IGeoPolygonFilter filter)
+		public virtual void Visit(IGeoPolygonQuery filter)
 		{
 			Write("geo_polygon");
 		}
 
-		public virtual void Visit(IGeoDistanceRangeFilter filter)
+		public virtual void Visit(IGeoDistanceRangeQuery filter)
 		{
 			Write("geo_distance_range");
 		}
 
-		public virtual void Visit(IGeoDistanceFilter filter)
+		public virtual void Visit(IGeoDistanceQuery filter)
 		{
 			Write("geo_distance");
 		}
 
-        public virtual void Visit(IGeoHashCellFilter filter)
+        public virtual void Visit(IGeoHashCellQuery filter)
         {
             Write("geohash_cell");
         }
 
-		public virtual void Visit(IGeoBoundingBoxFilter filter)
+		public virtual void Visit(IGeoBoundingBoxQuery filter)
 		{
 			Write("geo_bounding_box");
 		}
 
-		public virtual void Visit(IExistsFilter filter)
+		public virtual void Visit(IExistsQuery filter)
 		{
 			Write("exists");
 		}
 
-		public virtual void Visit(IBoolFilter filter)
+		public void Visit(IScriptQuery filter)
 		{
-			Write("bool");
+			Write("script");
 		}
-
-		public virtual void Visit(IAndFilter filter)
-		{
-			Write("and");
-		}
-
-
 	}
 }

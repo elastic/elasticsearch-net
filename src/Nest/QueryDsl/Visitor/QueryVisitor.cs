@@ -1,4 +1,4 @@
-﻿namespace Nest.DSL.Visitor
+﻿namespace Nest.QueryDsl.Visitor
 {
 	public interface IQueryVisitor
 	{
@@ -23,31 +23,15 @@
 		/// </summary>
 		/// <param name="query">The IQuery object that will be visited</param>
 		void Visit(IQuery query);
-		
-		/// <summary>
-		/// Visit the filter container just before we dispatch into the filter it holds
-		/// </summary>
-		/// <param name="filterDescriptor"></param>
-		void Visit(IFilterContainer filterDescriptor);
-
-		/// <summary>
-		/// Visit every filer item just before they are visited by their specialized Visit() implementation
-		/// </summary>
-		/// <param name="filter">The IFilterBase object that will be visited</param>
-		void Visit(IFilter filter);
 	
 		void Visit(IBoolQuery query);
 		void Visit(IBoostingQuery query);
 		void Visit(ICommonTermsQuery query);
 		void Visit(IConstantScoreQuery query);
-		void Visit(ICustomBoostFactorQuery query);
-		void Visit(ICustomFiltersScoreQuery query);
-		void Visit(ICustomScoreQuery query);
 		void Visit(IDisMaxQuery query);
 		void Visit(IFilteredQuery query);
 		void Visit(IFunctionScoreQuery query);
 		void Visit(IFuzzyQuery query);
-		void Visit(IFuzzyLikeThisQuery query);
 		void Visit(IGeoShapeQuery query);
 		void Visit(IHasChildQuery query);
 		void Visit(IHasParentQuery query);
@@ -71,35 +55,14 @@
 		void Visit(ITermQuery query);
 		void Visit(IWildcardQuery query);
 		void Visit(ITermsQuery query);
-		void Visit(ITopChildrenQuery query);
-
-
-		void Visit(ITypeFilter filter);
-		void Visit(ITermsBaseFilter filter);
-		void Visit(ITermFilter filter);
-		void Visit(IScriptFilter filter);
-		void Visit(IRegexpFilter filter);
-		void Visit(IRangeFilter filter);
-		void Visit(IQueryFilter filter);
-		void Visit(IPrefixFilter filter);
-		void Visit(IOrFilter filter);
-		void Visit(INotFilter filter);
-		void Visit(INestedFilter filter);
-		void Visit(IMissingFilter filter);
-		void Visit(IMatchAllFilter filter);
-		void Visit(ILimitFilter filter);
-		void Visit(IIdsFilter filter);
-		void Visit(IHasParentFilter filter);
-		void Visit(IHasChildFilter filter);
-		void Visit(IGeoShapeBaseFilter filter);
-		void Visit(IGeoPolygonFilter filter);
-		void Visit(IGeoDistanceRangeFilter filter);
-		void Visit(IGeoDistanceFilter filter);
-		void Visit(IGeoBoundingBoxFilter filter);
-		void Visit(IExistsFilter filter);
-		void Visit(IBoolFilter filter);
-		void Visit(IAndFilter filter);
-
+		void Visit(ITypeQuery filter);
+		void Visit(IScriptQuery filter);
+		void Visit(IMissingQuery filter);
+		void Visit(IGeoPolygonQuery filter);
+		void Visit(IGeoDistanceRangeQuery filter);
+		void Visit(IGeoDistanceQuery filter);
+		void Visit(IGeoBoundingBoxQuery filter);
+		void Visit(IExistsQuery filter);
 	}
 
 	public class QueryVisitor : IQueryVisitor
@@ -121,16 +84,6 @@
 		{
 		}
 
-		public virtual void Visit(IFilterContainer customFiltersScore)
-		{
-		}
-
-		public virtual void Visit(IFilter customFiltersScore)
-		{
-		}
-
-		
-	
 		public virtual void Visit(IBoolQuery baseQuery)
 		{
 		}
@@ -147,18 +100,6 @@
 		{
 		}
 
-		public virtual void Visit(ICustomBoostFactorQuery customBoostFactor)
-		{
-		}
-
-		public virtual void Visit(ICustomFiltersScoreQuery customFiltersScore)
-		{
-		}
-
-		public virtual void Visit(ICustomScoreQuery customFiltersScore)
-		{
-		}
-
 		public virtual void Visit(IDisMaxQuery customFiltersScore)
 		{
 		}
@@ -172,10 +113,6 @@
 		}
 
 		public virtual void Visit(IFuzzyQuery customFiltersScore)
-		{
-		}
-
-		public virtual void Visit(IFuzzyLikeThisQuery customFiltersScore)
 		{
 		}
 
@@ -271,116 +208,41 @@
 		{
 		}
 
-		public virtual void Visit(ITopChildrenQuery customFiltersScore)
+
+		public virtual void Visit(ITypeQuery customFiltersScore)
 		{
 		}
 
-		
-
-		public virtual void Visit(ITypeFilter customFiltersScore)
+		public virtual void Visit(IScriptQuery customFiltersScore)
 		{
 		}
 
-		public void Visit(ITermsBaseFilter customFiltersScore)
+		public virtual void Visit(IMissingQuery customFiltersScore)
 		{
 		}
 
-		public virtual void Visit(ITermFilter customFiltersScore)
+		public virtual void Visit(IGeoPolygonQuery customFiltersScore)
 		{
 		}
 
-		public virtual void Visit(IScriptFilter customFiltersScore)
+		public virtual void Visit(IGeoDistanceRangeQuery customFiltersScore)
 		{
 		}
 
-		public virtual void Visit(IRegexpFilter customFiltersScore)
+		public virtual void Visit(IGeoDistanceQuery customFiltersScore)
 		{
 		}
 
-		public virtual void Visit(IRangeFilter customFiltersScore)
-		{
-		}
-
-		public virtual void Visit(IQueryFilter customFiltersScore)
-		{
-		}
-
-		public virtual void Visit(IPrefixFilter customFiltersScore)
-		{
-		}
-
-		public virtual void Visit(IOrFilter customFiltersScore)
-		{
-		}
-
-		public virtual void Visit(INotFilter customFiltersScore)
-		{
-		}
-
-		public virtual void Visit(INestedFilter customFiltersScore)
-		{
-		}
-
-		public virtual void Visit(IMissingFilter customFiltersScore)
-		{
-		}
-
-		public virtual void Visit(IMatchAllFilter customFiltersScore)
-		{
-		}
-
-		public virtual void Visit(ILimitFilter customFiltersScore)
-		{
-		}
-
-		public virtual void Visit(IIdsFilter customFiltersScore)
-		{
-		}
-
-		public virtual void Visit(IHasParentFilter customFiltersScore)
-		{
-		}
-
-		public virtual void Visit(IHasChildFilter customFiltersScore)
-		{
-		}
-
-		public virtual void Visit(IGeoShapeBaseFilter customFiltersScore)
-		{
-		}
-
-		public virtual void Visit(IGeoPolygonFilter customFiltersScore)
-		{
-		}
-
-		public virtual void Visit(IGeoDistanceRangeFilter customFiltersScore)
-		{
-		}
-
-		public virtual void Visit(IGeoDistanceFilter customFiltersScore)
-		{
-		}
-
-        public virtual void Visit(IGeoHashCellFilter filter)
+        public virtual void Visit(IGeoHashCellQuery filter)
         {
         }
 
-		public virtual void Visit(IGeoBoundingBoxFilter customFiltersScore)
+		public virtual void Visit(IGeoBoundingBoxQuery customFiltersScore)
 		{
 		}
 
-		public virtual void Visit(IExistsFilter customFiltersScore)
+		public virtual void Visit(IExistsQuery customFiltersScore)
 		{
 		}
-
-		public virtual void Visit(IBoolFilter customFiltersScore)
-		{
-		}
-
-		public virtual void Visit(IAndFilter customFiltersScore)
-		{
-		}
-
-	
 	}
 }

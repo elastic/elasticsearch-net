@@ -3,9 +3,6 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	/// <summary>
-	/// 
-	/// </summary>
 	public class AliasAddOperation
 	{
 		[JsonProperty("index")]
@@ -15,8 +12,8 @@ namespace Nest
 		public string Alias { get; set; }
 
 		[JsonProperty("filter")]
-		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<FilterContainer>, CustomJsonConverter>))]
-		public FilterContainer FilterDescriptor { get; set; }
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryContainer>, CustomJsonConverter>))]
+		public QueryContainer QueryDescriptor { get; set; }
 
 		[JsonProperty("routing")]
 		public string Routing { get; set; }
