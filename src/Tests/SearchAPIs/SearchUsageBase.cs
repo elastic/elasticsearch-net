@@ -1,7 +1,9 @@
-﻿using Nest.Tests.Literate._Internals.Integration;
+﻿using Nest;
+using Tests._Internals;
+using Tests._Internals.Integration;
 using Xunit;
 
-namespace Nest.Tests.Literate.SearchAPIs
+namespace Tests.SearchAPIs
 {
 	[Collection(IntegrationContext.ReadOnly)]
 	public abstract class SearchUsageBase : EndpointUsageTests<ISearchResponse<object>, ISearchRequest, SearchDescriptor<object>, SearchRequest>

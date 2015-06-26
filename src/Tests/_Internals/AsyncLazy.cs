@@ -2,7 +2,7 @@ using System;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
-namespace Nest.Tests.Literate
+namespace Tests._Internals
 {
 	/// <summary>
 	/// Provides support for asynchronous lazy initialization. This type is fully threadsafe.

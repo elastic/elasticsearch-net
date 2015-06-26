@@ -1,6 +1,6 @@
 using Xunit;
 
-namespace Nest.Tests.Literate
+namespace Tests._Internals
 {
 	public class IntegrationFact : FactAttribute
 	{

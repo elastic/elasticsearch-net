@@ -1,7 +1,8 @@
 using System;
+using Nest;
 using Xunit;
 
-namespace Nest.Tests.Literate
+namespace Tests._Internals
 {
 	public abstract class GeneralUsageTests<TInterface, TDescriptor, TInitializer> : SerializationTests
 		where TDescriptor : TInterface, new()

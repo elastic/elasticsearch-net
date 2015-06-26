@@ -1,8 +1,9 @@
 ﻿using System;
 using FluentAssertions;
-using Nest.Tests.Literate._Internals.Integration;
+using Nest;
+using Tests._Internals.Integration;
 
-namespace Nest.Tests.Literate.SearchAPIs.RequestBodySearch
+namespace Tests.SearchAPIs.RequestBodySearch
 {
 	public class FromAndSize
 	{

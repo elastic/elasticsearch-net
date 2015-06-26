@@ -4,8 +4,9 @@ using System.Net;
 using Elasticsearch.Net;
 using Elasticsearch.Net.Connection;
 using Elasticsearch.Net.ConnectionPool;
+using Nest;
 
-namespace Nest.Tests.Literate.ElasticsearchNet
+namespace Tests.ElasticsearchNet
 {
 	public class Connecting
 	{

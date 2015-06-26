@@ -1,16 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using FluentAssertions;
 using Newtonsoft.Json.Linq;
 using Ploeh.AutoFixture;
-using Xunit;
-using Xunit.Sdk;
 
-namespace Nest.Tests.Literate
+namespace Tests._Internals
 {
 
 	public abstract class SerializationTests

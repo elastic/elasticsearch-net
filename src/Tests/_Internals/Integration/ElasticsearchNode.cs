@@ -11,7 +11,7 @@ using System.Reactive.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
 
-namespace Nest.Tests.Literate._Internals.Integration
+namespace Tests._Internals.Integration
 {
 	public class ElasticsearchNode : IDisposable
 	{

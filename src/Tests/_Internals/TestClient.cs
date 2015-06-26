@@ -2,8 +2,9 @@
 using System.Diagnostics;
 using System.Linq;
 using Elasticsearch.Net.Connection;
+using Nest;
 
-namespace Nest.Tests.Literate
+namespace Tests._Internals
 {
 	public static class TestClient
 	{

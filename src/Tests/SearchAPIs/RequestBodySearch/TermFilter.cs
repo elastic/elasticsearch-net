@@ -1,6 +1,8 @@
 ﻿using System;
+using Nest;
+using Tests._Internals;
 
-namespace Nest.Tests.Literate.SearchAPIs.RequestBodySearch
+namespace Tests.SearchAPIs.RequestBodySearch
 {
 	public class TermQueryTests
 	{
