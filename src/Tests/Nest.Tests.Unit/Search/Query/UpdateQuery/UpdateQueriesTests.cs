@@ -32,8 +32,8 @@ namespace Nest.Tests.Unit.Search.Query.UpdateQuery
 				.Query(q=>q
 					.Filtered(fq =>
 						fq.Filter(ff =>
-							Filter<ElasticsearchProject>.Term(f => f.Name, "foo")
-							|| Filter<ElasticsearchProject>.Term(f => f.Name, "bar")
+							Query<ElasticsearchProject>.Term(f => f.Name, "foo")
+							|| Query<ElasticsearchProject>.Term(f => f.Name, "bar")
 						)
 					)
 				);

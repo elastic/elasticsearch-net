@@ -179,8 +179,8 @@ namespace Nest.Tests.Unit.Internals.Inferno
 			  .Query(query => query
 				.Bool(bq => bq
 				  .Must(
-					mq => mq.ConstantScore(cs => cs.Filter(filter => filter.Term(x => x.MyCustomClass.MyProperty, "meesageid"))),
-					mp => mp.ConstantScore(cs => cs.Filter(filter => filter.Term(x => x.MyCustomOtherClass.MyProperty, "serverid")))
+					mq => mq.ConstantScore(cs => cs.Query(filter => filter.Term(x => x.MyCustomClass.MyProperty, "meesageid"))),
+					mp => mp.ConstantScore(cs => cs.Query(filter => filter.Term(x => x.MyCustomOtherClass.MyProperty, "serverid")))
 				  )
 				)
 				&& query.Term(f => f.CreateDate, "x")

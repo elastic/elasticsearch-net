@@ -30,27 +30,6 @@ namespace Nest.Tests.Unit.Search.Query.Singles
 			}";
 			Assert.True(json.JsonEquals(expected), json);		
 		}
-		[Test]
-		public void ConstantScoreQueryWithFilter()
-		{
-			var s = new SearchDescriptor<ElasticsearchProject>().From(0).Size(10)
-				.Query(q => q
-					.ConstantScore(cs => cs
-						.Filter(qq => qq.MatchAll())
-						.Boost(1.2)
-					)
-			);
 
-			var json = TestElasticClient.Serialize(s);
-			var expected = @"{ from: 0, size: 10, 
-				query : {
-						constant_score : { 
-							filter : { match_all : {} },
-							boost: 1.2
-						}
-					}
-			}";
-			Assert.True(json.JsonEquals(expected), json);		
-		}
 	}
 }

@@ -191,7 +191,7 @@ namespace Nest.Tests.Unit.Search.Sorting
 		{
 			IFunctionScoreFunction boost = new BoostFactorFunction<ElasticsearchProject>(2);
 			boost.WeightAsDouble = 0.5;
-			boost.Filter = new TermFilter {Field = Property.Path<ElasticsearchProject>(p => p.Name), Value = "termValue"};
+			boost.Filter = new TermQuery { Field = Property.Path<ElasticsearchProject>(p => p.Name), Value = "termValue"};
 			QueryContainer q = new FunctionScoreQuery()
 			{
 				WeightAsDouble = 1.0,
@@ -224,7 +224,7 @@ namespace Nest.Tests.Unit.Search.Sorting
 		{
 			IFunctionScoreFunction boost = new BoostFactorFunction<ElasticsearchProject>(2);
 			boost.Weight = 1;
-			boost.Filter = new TermFilter {Field = Property.Path<ElasticsearchProject>(p => p.Name), Value = "termValue"};
+			boost.Filter = new TermQuery {Field = Property.Path<ElasticsearchProject>(p => p.Name), Value = "termValue"};
 			QueryContainer q = new FunctionScoreQuery()
 			{
 				Weight = 4,

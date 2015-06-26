@@ -26,7 +26,7 @@ namespace Nest.Tests.Unit.ObjectInitializer.Template
 					{
 						{"my-alias", new CreateAliasOperation
 						{
-							Filter = Filter<ElasticsearchProject>.Term("name", "term")
+							Filter = Query<ElasticsearchProject>.Term("name", "term")
 						}}
 					}
 				}

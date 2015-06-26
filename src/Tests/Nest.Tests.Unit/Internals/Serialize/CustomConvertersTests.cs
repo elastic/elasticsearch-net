@@ -61,7 +61,7 @@ namespace Nest.Tests.Unit.Internals.Serialize
 		[Test]
 		public void StringificationTakesConvertersIntoAccount()
 		{
-			var query = new FilterDescriptor<MyObject>().Term(t => t.MyEnum, MyEnum.Foo);
+			var query = new QueryDescriptor<MyObject>().Term(t => t.MyEnum, MyEnum.Foo);
 			var serialized = _serializationClient.Serializer.Serialize(query).Utf8String();
 			serialized.JsonEquals(@"
 				{

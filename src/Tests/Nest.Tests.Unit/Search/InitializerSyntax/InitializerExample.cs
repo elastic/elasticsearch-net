@@ -46,12 +46,11 @@ namespace Nest.Tests.Unit.Search.InitializerSyntax
 					Property.Path<ElasticsearchProject>(p=>p.Name)
 				},
 				Query = query,
-				PostFilter = new FilterContainer(new BoolFilter
+				PostFilter = new QueryContainer(new BoolQuery
 				{
-					Cache = true,
-					Must = new FilterContainer[]
+					Must = new QueryContainer[]
 					{
-						new TermFilter { Field = "value", Value = "asdasd"}
+						new TermQuery { Field = "value", Value = "asdasd"}
 					}
 				}),
 				TrackScores = true,

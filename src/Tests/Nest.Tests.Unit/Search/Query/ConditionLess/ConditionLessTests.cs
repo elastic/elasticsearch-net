@@ -115,12 +115,6 @@ namespace Nest.Tests.Unit.Search.Query.ConditionLess
 		}
 
 		[Test]
-		public void FuzzyLikeThis()
-		{
-			this.DoConditionlessQuery(q => q.FuzzyLikeThis(fq => fq.OnFields(p => p.Name).LikeText(this._c.Name1)));
-		}
-
-		[Test]
 		public void MoreLikeThis()
 		{
 			this.DoConditionlessQuery(q => q.MoreLikeThis(mlt => mlt.OnFields(p => p.Name).LikeText(this._c.Name1)));
@@ -133,18 +127,6 @@ namespace Nest.Tests.Unit.Search.Query.ConditionLess
 				.HasChild<Person>(hcq => hcq
 					.Query(qq => qq
 						.Terms(p => p.FirstName, new [] {this._c.Name1})
-					)
-				)
-			);
-		}
-
-		[Test]
-		public void TopChildren()
-		{
-			this.DoConditionlessQuery(q => q
-				.TopChildren<Person>(hcq => hcq
-					.Query(qq => qq
-						.Terms(p => p.FirstName, new [] {this._c.Name1 })
 					)
 				)
 			);

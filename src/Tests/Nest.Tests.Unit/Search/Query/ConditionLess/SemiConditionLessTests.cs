@@ -62,18 +62,6 @@ namespace Nest.Tests.Unit.Search.Query.ConditionLess
 		}
 
 		[Test]
-		public void TopChildren()
-		{
-			this.DoSemiConditionlessQuery(q => q
-				.TopChildren<Person>(hcq => hcq
-					.Query(qq => qq
-						.Terms(p => p.FirstName, new [] {this._c.Name1, "myterm"})
-					)
-				)
-			);
-		}
-
-		[Test]
 		public void Filtered()
 		{
 			this.DoSemiConditionlessQuery(q => q

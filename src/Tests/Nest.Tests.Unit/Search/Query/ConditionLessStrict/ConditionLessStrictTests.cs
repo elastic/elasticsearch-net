@@ -114,13 +114,6 @@ namespace Nest.Tests.Unit.Search.Query.ConditionLessStrict
 			//From and to are allowed to be null only field is not not
 			this.DoConditionlessQuery(q => q.Range(rq => rq.OnField(string.Empty).Greater(0).Lower(1)));
 		}
-
-		[Test]
-		public void FuzzyLikeThis()
-		{
-			this.DoConditionlessQuery(q => q.FuzzyLikeThis(fq => fq.OnFields(p => p.Name).LikeText(this._c.Name1)));
-		}
-
 		[Test]
 		public void MoreLikeThis()
 		{
@@ -131,12 +124,6 @@ namespace Nest.Tests.Unit.Search.Query.ConditionLessStrict
 		public void HasChild()
 		{
 			this.DoConditionlessQuery(q => q.HasChild<Person>(hcq => hcq.Query(qq => qq.Term(p => p.FirstName, this._c.Name1))));
-		}
-
-		[Test]
-		public void TopChildren()
-		{
-			this.DoConditionlessQuery(q => q.TopChildren<Person>(hcq => hcq.Query(qq => qq.Term(p => p.FirstName, this._c.Name1))));
 		}
 
 		[Test]

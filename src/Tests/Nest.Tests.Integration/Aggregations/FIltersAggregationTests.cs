@@ -14,14 +14,14 @@ namespace Nest.Tests.Integration.Aggregations
 		[SkipVersion("0 - 1.3.9", "Filters aggregation added in ES 1.4")]
 		public void NamedFilters()
 		{
-
+			//TODO Reintroduce name on Filters
 			var results = this.Client.Search<ElasticsearchProject>(s => s
 				.Size(0)
 				.Aggregations(a => a
 					.Filters("filtersAggregation", t => t
 						.Filters(
-							x => x.Name("first").Term(p => p.Name.Suffix("sort"), _indexedName),
-							x => x.Name("second").Term(p => p.Country, _indexedCountry)
+							x => x.Term(p => p.Name.Suffix("sort"), _indexedName),
+							x => x.Term(p => p.Country, _indexedCountry)
 						)
 						.Aggregations(n => n.Average("avg", d => d.Field(x => x.Id)))
 					)

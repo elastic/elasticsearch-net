@@ -85,6 +85,7 @@ namespace Nest
 			return this.Raw.DoRequestAsync<T>(method, path, data, requestParameters);
 		}
 
+
 		R IHighLevelToLowLevelDispatcher.Dispatch<D, Q, R>(D descriptor, Func<ElasticsearchPathInfo<Q>, D, ElasticsearchResponse<R>> dispatch)
 		{
 			var pathInfo = descriptor.ToPathInfo(this._connectionSettings);

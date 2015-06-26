@@ -84,7 +84,7 @@ namespace Nest.Tests.Integration.Indices
 			var alias = index.Aliases[aliasName];
 			alias.IndexRouting.Should().Be("routing");
 			alias.SearchRouting.Should().Be("routing");
-			IFilterContainer filter = alias.Filter;
+			IQueryContainer filter = alias.Filter;
 			filter.Should().NotBeNull();
 			filter.Term.Should().NotBeNull();
 			filter.Term.Field.Should().Be("country");

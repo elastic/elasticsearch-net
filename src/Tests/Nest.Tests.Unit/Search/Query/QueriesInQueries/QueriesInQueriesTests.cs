@@ -7,23 +7,6 @@ namespace Nest.Tests.Unit.Search.Query.QueriesInQueries
 	public class QueriesInQueriesTests : BaseJsonTests
 	{
 		[Test]
-		public void TopChildrenQuery()
-		{
-			var s = new SearchDescriptor<ElasticsearchProject>()
-				.From(0)
-				.Take(10)
-				.Query(q => q
-				.TopChildren<Person>(tcq => tcq
-					.Query(qq =>
-					qq.Term(f => f.FirstName, "foo") || qq.Term(f => f.FirstName, "bar")
-					)
-				)
-				);
-
-			this.JsonEquals(s, System.Reflection.MethodInfo.GetCurrentMethod());
-		}
-
-		[Test]
 		public void NestedQuery()
 		{
 			var s = new SearchDescriptor<ElasticsearchProject>()

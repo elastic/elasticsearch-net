@@ -13,9 +13,9 @@ namespace Nest.Tests.Unit.QueryParsers.Queries
 		protected QueryContainer Query2 = Query<object>.Term("y", "z");
 		protected QueryContainer Query3 = Query<object>.Term("a", "b");
 		
-		protected FilterContainer Filter1 = Filter<object>.Term("w", "x");
-		protected FilterContainer Filter2 = Filter<object>.Term("y", "z");
-		protected FilterContainer Filter3 = Filter<object>.Term("a", "b");
+		protected QueryContainer Filter1 = Query<object>.Term("w", "x");
+		protected QueryContainer Filter2 = Query<object>.Term("y", "z");
+		protected QueryContainer Filter3 = Query<object>.Term("a", "b");
 		
 		protected T SerializeThenDeserialize<T>(
 			Func<IQueryContainer, T> queryBaseDescriptor,

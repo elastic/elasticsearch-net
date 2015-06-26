@@ -23,7 +23,7 @@ namespace Nest.Tests.Literate.SearchAPIs.RequestBodySearch
 			protected override SearchRequest Initializer =>
 				new SearchRequest()
 				{
-					PostFilter = new FilterContainer(new MatchAllFilter())
+					PostFilter = new QueryContainer(new MatchAllQuery())
 				};
 
 			protected override Func<SearchDescriptor<object>, ISearchRequest> Fluent => s => s

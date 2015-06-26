@@ -32,12 +32,12 @@ namespace Nest.Tests.Unit.ObjectInitializer.MoreLikeThis
 				From = 0,
 				Size = 20,
 				Query = query,
-				PostFilter = new FilterContainer(new BoolFilter
+				PostFilter = new QueryContainer(new BoolQuery
 				{
-					Cache = true,
-					Must = new FilterContainer[]
+					//TODO Cache = true,
+					Must = new QueryContainer[]
 					{
-						new TermFilter { Field = "value", Value = "asdasd"}
+						new TermQuery { Field = "value", Value = "asdasd"}
 					}
 				}),
 				TrackScores = true,

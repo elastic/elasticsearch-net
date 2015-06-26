@@ -341,43 +341,12 @@
     <Compile Include="ObjectInitializer\Warmers\GetWarmerRequestTests.cs" />
     <Compile Include="ObjectInitializer\Warmers\PutWarmerRequestTests.cs" />
     <Compile Include="QueryParsers\BaseParserTests.cs" />
-    <Compile Include="QueryParsers\Filter\AndFilterTests.cs" />
-    <Compile Include="QueryParsers\Filter\BoolFilterTests.cs" />
-    <Compile Include="QueryParsers\Filter\ExistsFilterTests.cs" />
-    <Compile Include="QueryParsers\Filter\GeoBoundingBoxFilterTests.cs" />
-    <Compile Include="QueryParsers\Filter\GeoDistanceFilterTests.cs" />
-    <Compile Include="QueryParsers\Filter\GeoDistanceRangeFilterTests.cs" />
-    <Compile Include="QueryParsers\Filter\GeoHashCellFilterTests.cs" />
-    <Compile Include="QueryParsers\Filter\GeoIndexShapeFilterTests.cs" />
-    <Compile Include="QueryParsers\Filter\GeoPolygonFilterTests.cs" />
-    <Compile Include="QueryParsers\Filter\GeoShapeFilterTests.cs" />
-    <Compile Include="QueryParsers\Filter\HasChildFilterTests.cs" />
-    <Compile Include="QueryParsers\Filter\HasParentFilterTests.cs" />
-    <Compile Include="QueryParsers\Filter\IdsFilterTests.cs" />
-    <Compile Include="QueryParsers\Filter\LimitFilterTests.cs" />
-    <Compile Include="QueryParsers\Filter\MatchAllFilterTests.cs" />
-    <Compile Include="QueryParsers\Filter\MissingFilterTests.cs" />
-    <Compile Include="QueryParsers\Filter\NestedFilterTests.cs" />
-    <Compile Include="QueryParsers\Filter\NotFilterTests.cs" />
-    <Compile Include="QueryParsers\Filter\OrFilterTests.cs" />
-    <Compile Include="QueryParsers\Filter\ParseFilterTests.cs" />
-    <Compile Include="QueryParsers\Filter\PrefixFilterTests.cs" />
-    <Compile Include="QueryParsers\Filter\QueryFilterTests.cs" />
-    <Compile Include="QueryParsers\Filter\RangeFilterTests.cs" />
-    <Compile Include="QueryParsers\Filter\RegexpFilterTests.cs" />
-    <Compile Include="QueryParsers\Filter\ScriptFilterTests.cs" />
-    <Compile Include="QueryParsers\Filter\TermFilterTests.cs" />
-    <Compile Include="QueryParsers\Filter\TermsFilterTests.cs" />
-    <Compile Include="QueryParsers\Filter\TypeFilterTests.cs" />
     <Compile Include="QueryParsers\Queries\BoolQueryTests.cs" />
     <Compile Include="QueryParsers\Queries\BoostingQueryTests.cs" />
     <Compile Include="QueryParsers\Queries\CommonTermsQueryTests.cs" />
-    <Compile Include="QueryParsers\Queries\ConstantScoreQueryTests.cs" />
-    <Compile Include="QueryParsers\Queries\CustomFiltersScoreQueryTests.cs" />
     <Compile Include="QueryParsers\Queries\DisMaxQueryTests.cs" />
     <Compile Include="QueryParsers\Queries\FilteredQueryTests.cs" />
     <Compile Include="QueryParsers\Queries\FunctionScoreQueryTests.cs" />
-    <Compile Include="QueryParsers\Queries\FuzzyLikeThisQueryTests.cs" />
     <Compile Include="QueryParsers\Queries\FuzzyQueryTests.cs" />
     <Compile Include="QueryParsers\Queries\GeoShapeQueryTests.cs" />
     <Compile Include="QueryParsers\Queries\HasChildQueryTests.cs" />
@@ -403,46 +372,14 @@
     <Compile Include="QueryParsers\Queries\TermQueryTests.cs" />
     <Compile Include="QueryParsers\Queries\TermsQueryTests.cs" />
     <Compile Include="QueryParsers\Queries\WildCardQueryTests.cs" />
-    <Compile Include="QueryParsers\Visitor\DslPrettyPrintVisitor.cs" />
-    <Compile Include="QueryParsers\Visitor\VisitorDemoUseCase.cs" />
-    <Compile Include="QueryParsers\Visitor\VisitorTests.cs" />
-    <Compile Include="Reproduce\Reproduce1396Tests.cs" />
-    <Compile Include="Reproduce\Reproduce1199Tests.cs" />
-    <Compile Include="Reproduce\Reproduce1146Tests.cs" />
-    <Compile Include="Reproduce\Reproduce629Tests.cs" />
-    <Compile Include="Reproduce\Reproduce1187Tests.cs" />
-    <Compile Include="Reproduce\Reproduce901Tests.cs" />
-    <Compile Include="Reproduce\Reproduce1320Tests.cs" />
-    <Compile Include="Reproduce\Reproduce1435Tests.cs" />
-    <Compile Include="Reproduce\Reproduce990Tests.cs" />
-    <Compile Include="Reproduce\Reproduce974Tests.cs" />
-    <Compile Include="Reproduce\Reproduce928Tests.cs" />
-    <Compile Include="Reproduce\Reproduce902Tests.cs" />
-    <Compile Include="Reproduce\Reproduce646Tests.cs" />
-    <Compile Include="Reproduce\Reproduce579Tests.cs" />
-    <Compile Include="Reproduce\Reproduce860Tests.cs" />
-    <Compile Include="Reproduce\Reproduce806Tests.cs" />
-    <Compile Include="Reproduce\Reproduce876Tests.cs" />
-    <Compile Include="Reproduce\Reproduce926Tests.cs" />
     <Compile Include="Search\Aggregations\ScriptedMetricJson.cs" />
     <Compile Include="Search\Aggregations\SingleBucketAggregationTests.cs" />
     <Compile Include="Search\Aggregations\Terms\TermsAggregationTests.cs" />
     <Compile Include="Search\Failures\ShardFailureTests.cs" />
     <Compile Include="Search\Fields\FieldsTests.cs" />
-    <Compile Include="Search\Filter\Modes\ConditionlessFilterJson.cs" />
-    <Compile Include="Search\Filter\Modes\FilterModesTests.cs" />
-    <Compile Include="Search\Filter\Singles\GeoHashCellFilterJson.cs" />
-    <Compile Include="Search\Filter\Singles\IndicesFilterJson.cs" />
-    <Compile Include="Search\Filter\Singles\TermsLookupFilterJson.cs" />
-    <Compile Include="Search\Filter\Singles\GeoIndexedShapeFilterJson.cs" />
-    <Compile Include="Search\Filter\Singles\GeoShapeFilterJson.cs" />
-    <Compile Include="Search\Filter\Singles\RegexpFilterJson.cs" />
     <Compile Include="Search\InitializerSyntax\InitializerExample.cs" />
     <Compile Include="Search\Query\BoolQueryMerges\BoolQueryMergesTests.cs" />
-    <Compile Include="Search\Filter\BoolFilterMerges\BoolFilterMergesTests.cs" />
-    <Compile Include="Search\Filter\Singles\HasParentFilterJson.cs" />
     <Compile Include="Search\Query\Modes\ConditionlessQueryJson.cs" />
-    <Compile Include="Search\Query\Properties\PropertiesTests.cs" />
     <Compile Include="Search\Query\Singles\FunctionScoreQueryJson.cs" />
     <Compile Include="Search\Query\Singles\CommonTerms\CommonTermsTests.cs" />
     <Compile Include="Search\Query\Singles\GeoShape\GeoShapeCircleJson.cs" />
@@ -464,35 +401,6 @@
     <Compile Include="Search\InnerHits\GlobalInnerHitsTests.cs" />
     <Compile Include="Search\SearchUrlTests.cs" />
     <Compile Include="Search\Rescoring\RescoreTests.cs" />
-    <Compile Include="Search\Filter\BoolCombinations\BoolCombinationTests.cs" />
-    <Compile Include="Search\Filter\Bool\StaticBoolFilterTests.cs" />
-    <Compile Include="Search\Filter\ConditionlessBool\ConditionLessBooleanTests.cs" />
-    <Compile Include="Search\Filter\ConditionLess\ConditionLessTests.cs" />
-    <Compile Include="Search\Filter\FilterCalls\FilterCallsTests.cs" />
-    <Compile Include="Search\Filter\FiltersInQueries\FiltersInQueriesTests.cs" />
-    <Compile Include="Search\Filter\InsideBoolCalls\InsideBoolCallsTests.cs" />
-    <Compile Include="Search\Filter\Singles\AndFilterJson.cs" />
-    <Compile Include="Search\Filter\Singles\BoolFilterJson.cs" />
-    <Compile Include="Search\Filter\Singles\ExistFilterJson.cs" />
-    <Compile Include="Search\Filter\Singles\GeoBoundingBoxFilterJson.cs" />
-    <Compile Include="Search\Filter\Singles\GeoDistanceFilterJson.cs" />
-    <Compile Include="Search\Filter\Singles\GeoDistanceRangeFilterJson.cs" />
-    <Compile Include="Search\Filter\Singles\GeoPolygonFilterJson.cs" />
-    <Compile Include="Search\Filter\Singles\HasChildFilterJson.cs" />
-    <Compile Include="Search\Filter\Singles\IdsFilterJson.cs" />
-    <Compile Include="Search\Filter\Singles\LimitFilterJson.cs" />
-    <Compile Include="Search\Filter\Singles\MatchAllFilterJson.cs" />
-    <Compile Include="Search\Filter\Singles\MissingFilterJson.cs" />
-    <Compile Include="Search\Filter\Singles\NestedFilterJson.cs" />
-    <Compile Include="Search\Filter\Singles\NotFilterJson.cs" />
-    <Compile Include="Search\Filter\Singles\OrFilterJson.cs" />
-    <Compile Include="Search\Filter\Singles\PrefixFilterJson.cs" />
-    <Compile Include="Search\Filter\Singles\QueryFilterJson.cs" />
-    <Compile Include="Search\Filter\Singles\RangeFilterJson.cs" />
-    <Compile Include="Search\Filter\Singles\ScriptFilterJson.cs" />
-    <Compile Include="Search\Filter\Singles\TermFilterJson.cs" />
-    <Compile Include="Search\Filter\Singles\TermsFilterJson.cs" />
-    <Compile Include="Search\Filter\Singles\TypeFilterJson.cs" />
     <Compile Include="Internals\Inferno\IdLookupTests.cs" />
     <Compile Include="Internals\Inferno\PropertyNameResolverTests.cs" />
     <Compile Include="Core\AttributeBasedMap\BaseAttributeMappingTests.cs" />
@@ -514,7 +422,6 @@
     <Compile Include="Search\Query\Singles\DismaxQueryJson.cs" />
     <Compile Include="Search\Query\Singles\FilteredQueryJson.cs" />
     <Compile Include="Search\Query\Singles\FuzzyDateQueryJson.cs" />
-    <Compile Include="Search\Query\Singles\FuzzyLikeThisQueryJson.cs" />
     <Compile Include="Search\Query\Singles\FuzzyNumericQueryJson.cs" />
     <Compile Include="Search\Query\Singles\FuzzyQueryJson.cs" />
     <Compile Include="Search\Query\Singles\HasChildQueryJson.cs" />
@@ -533,7 +440,6 @@
     <Compile Include="Search\Query\Singles\SpanTermQueryJson.cs" />
     <Compile Include="Search\Query\Singles\Term\TermQueryJson.cs" />
     <Compile Include="Search\Query\Singles\Terms\TermsQueryJson.cs" />
-    <Compile Include="Search\Query\Singles\TopChildrenQueryJson.cs" />
     <Compile Include="Search\Query\Singles\WildcardQueryJson.cs" />
     <Compile Include="Search\Query\BoolCombinations\BoolCombinationTests.cs" />
     <Compile Include="Search\Query\Bool\StaticBoolQueryTests.cs" />
@@ -820,46 +726,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="paket.references" />
-    <None Include="QueryParsers\Filter\GeoBoundingBox\LatLon.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="QueryParsers\Filter\GeoBoundingBox\Vertices.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="QueryParsers\Filter\GeoBoundingBox\Array.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="QueryParsers\Filter\Term.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Reproduce\OISAggs.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Reproduce\FixDslThroughCustomInterfaceImplementation.json" />
-    <None Include="Reproduce\Issue1199Index.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Reproduce\Issue579.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Reproduce\Issue1199Mapping.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Reproduce\EnumQueryDefaultsToInt.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Reproduce\Issue928.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Reproduce\Issue902.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Reproduce\Issue876.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Reproduce\PatchedTermsAggSort.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="Search\Aggregations\Terms\TermsAggregationSerializes.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -867,18 +733,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Search\Fields\FixedCovariantSearchResult.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Search\Filter\BoolFilterMerges\ShouldNotJoinTermIntoMustStrictFilter.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Search\Filter\FilterCalls\CacheSettingsDoNotSurviceBoolOp.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Search\Filter\FilterCalls\CacheSettingsDoNotSurviceBoolOpNew.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Search\Filter\Modes\VerbatimDoesNotThrowOnEmptyTerm.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Search\Query\BoolCombinations\CombineTwoNots.json">
@@ -909,27 +763,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Search\Query\BoolQueryMerges\ShouldNotJoinIntoStrictShouldQuery.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Search\Filter\BoolFilterMerges\ShouldJoinIntoMustFilter.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Search\Filter\BoolFilterMerges\ShouldJoinIntoNonStrictShouldFilter.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Search\Filter\BoolFilterMerges\ShouldJoinMustNotIntoMustFilter.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Search\Filter\BoolFilterMerges\ShouldNotJoinIntoStrictMustFilter.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Search\Filter\BoolFilterMerges\ShouldNotJoinIntoStrictShouldFilter.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Search\Filter\BoolFilterMerges\ShouldNotJoinMustNotIntoMustStrictFilter.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Search\Filter\BoolFilterMerges\ShouldNotJoinMustNotIntoMustStrictFilterInverse.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Search\Query\QueriesInQueries\FilteredQueryConditionless.json">
@@ -999,126 +832,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Search\Rescoring\RescoreSerializes.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Search\Filter\BoolCombinations\CombineNotAnd.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Search\Filter\BoolCombinations\CombineNotAndShould.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Search\Filter\BoolCombinations\ForceBranchAnd.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Search\Filter\BoolCombinations\ForceBranchOr.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Search\Filter\BoolCombinations\OrSimpleLambda.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Search\Filter\BoolCombinations\OrWithExists.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Search\Filter\BoolCombinations\OrWithExistsLambda.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Search\Filter\BoolCombinations\OrWithExistsLambdaSimple.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Search\Filter\BoolCombinations\RandomOrderAnd.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Search\Filter\BoolCombinations\RandomOrderOr.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Search\Filter\Bool\BranchLambdaTest.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Search\Filter\Bool\SearchDescriptorPicksUpBaseFilterTest.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Search\Filter\Bool\SearchDescriptorPicksUpBaseFilterWithinComplexLambdaTest.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Search\Filter\Bool\SearchDescriptorPicksUpBaseFilterWithinLambdaTest.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Search\Filter\Bool\StaticBoolAssignMultipleOrCombineWithAndTest.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Search\Filter\Bool\StaticBoolAssignMultipleOrTest.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Search\Filter\Bool\StaticBoolAssignMultipleTest.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Search\Filter\Bool\StaticBoolAssignNotTest.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Search\Filter\Bool\StaticBoolAssignTest.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Search\Filter\Bool\StaticBoolTest.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Search\Filter\ConditionlessBool\Combination1.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Search\Filter\ConditionlessBool\Combination2.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Search\Filter\ConditionlessBool\Combination3.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Search\Filter\ConditionlessBool\MatchAll.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Search\Filter\ConditionlessBool\MyTerm.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Search\Filter\ConditionlessBool\MyTermNot.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Search\Filter\ConditionlessBool\MyTermsAnd.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Search\Filter\ConditionlessBool\MyTermsNot.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Search\Filter\ConditionlessBool\MyTermsOr.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Search\Filter\ConditionLess\MatchAll.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Search\Filter\FilterCalls\AndFilterCombines.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Search\Filter\FilterCalls\AndFilterMultipleCombines.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Search\Filter\FilterCalls\NotFilterCombines.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Search\Filter\FilterCalls\OrFilterCombines.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Search\Filter\FilterCalls\OrFilterMultipleCombines.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Search\Filter\FiltersInQueries\ConstantScoreQueryCombines.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Search\Filter\FiltersInQueries\FilteredQueryCombines.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Search\Filter\InsideBoolCalls\InsideMust.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Search\Filter\InsideBoolCalls\InsideMustNot.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Search\Filter\InsideBoolCalls\InsideShould.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Search\Query\BoolCombinations\CombineNotAnd.json">
