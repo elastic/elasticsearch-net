@@ -34,11 +34,6 @@ namespace Nest
 
 	public class NestedQuery : PlainQuery, INestedQuery
 	{
-		protected override void WrapInContainer(IQueryContainer container)
-		{
-			container.Nested = this;
-		}
-		
 		public string Name { get; set; }
 		bool IQuery.IsConditionless { get { return false; } }
 		public NestedScore? Score { get; set; }
@@ -46,23 +41,18 @@ namespace Nest
 		public IQueryContainer Query { get; set; }
 		public PropertyPathMarker Path { get; set; }
 		public IInnerHits InnerHits { get; set; }
+
+		protected override void WrapInContainer(IQueryContainer container)
+		{
+			container.Nested = this;
+		}
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class NestedQueryDescriptor<T> : INestedQuery where T : class
 	{
 		private INestedQuery Self { get { return this; } }
-
-		NestedScore? INestedQuery.Score { get; set; }
-
-		IQueryContainer INestedQuery.Filter { get; set; }
-
-		IQueryContainer INestedQuery.Query { get; set; }
-
-		PropertyPathMarker INestedQuery.Path { get; set; }
-
-		IInnerHits INestedQuery.InnerHits { get; set; }
-
+		string IQuery.Name { get; set; }
 		bool IQuery.IsConditionless
 		{
 			get
@@ -71,14 +61,18 @@ namespace Nest
 				       && (Self.Filter == null || Self.Filter.IsConditionless);
 			}
 		}
-
-		string IQuery.Name { get; set; }
+		NestedScore? INestedQuery.Score { get; set; }
+		IQueryContainer INestedQuery.Filter { get; set; }
+		IQueryContainer INestedQuery.Query { get; set; }
+		PropertyPathMarker INestedQuery.Path { get; set; }
+		IInnerHits INestedQuery.InnerHits { get; set; }
 
 		public NestedQueryDescriptor<T> Name(string name)
 		{
 			Self.Name = name;
 			return this;
 		}
+
 		public NestedQueryDescriptor<T> Filter(Func<QueryDescriptor<T>, QueryContainer> filterSelector)
 		{
 			var q = new QueryDescriptor<T>();

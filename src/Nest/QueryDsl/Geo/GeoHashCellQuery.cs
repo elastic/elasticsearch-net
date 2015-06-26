@@ -2,6 +2,7 @@
 using System.Globalization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using System.Linq.Expressions;
 
 namespace Nest
 {
@@ -24,6 +25,14 @@ namespace Nest
 
     public class GeoHashCellQuery : PlainQuery, IGeoHashCellQuery
     {
+		public string Name { get; set; }
+		bool IQuery.IsConditionless { get { return QueryCondition.IsConditionless(this); } }
+		public PropertyPathMarker Field { get; set; }
+        public string Location { get; set; }
+        public object Precision { get; set; }
+        public GeoUnit? Unit { get; set; }
+        public bool Neighbors { get; set; }
+
         protected override void WrapInContainer(IQueryContainer container)
         {
             container.GeoHashCell = this;
@@ -38,68 +47,71 @@ namespace Nest
 		{
 			Field = fieldName;
 		}
-
-		public PropertyPathMarker Field { get; set; }
-        public string Location { get; set; }
-        public object Precision { get; set; }
-        public GeoUnit? Unit { get; set; }
-        public bool Neighbors { get; set; }
-		public string Name { get; set; }
-		bool IQuery.IsConditionless { get { return QueryCondition.IsConditionless(this); } }
 	}
 
-	// TODO : Finish implementing
-	public class GeoHashCellQueryDescriptor : IGeoHashCellQuery
+	public class GeoHashCellQueryDescriptor<T> : IGeoHashCellQuery
     {
-		private IGeoHashCellQuery _ { get { return this; } }
+		private IGeoHashCellQuery Self { get { return this; } }
+		string IQuery.Name { get; set; }
+        bool IQuery.IsConditionless { get { return QueryCondition.IsConditionless(this); } }
         PropertyPathMarker IGeoHashCellQuery.Field { get; set; }
         string IGeoHashCellQuery.Location { get; set; }
         object IGeoHashCellQuery.Precision { get; set; }
         GeoUnit? IGeoHashCellQuery.Unit { get; set; }
         bool IGeoHashCellQuery.Neighbors { get; set; }
-        bool IQuery.IsConditionless { get { return QueryCondition.IsConditionless(this); } }
-		string IQuery.Name { get; set; }
 
-        public GeoHashCellQueryDescriptor Location(double lat, double lon)
+		public GeoHashCellQueryDescriptor<T> Field(string field)
+		{
+			Self.Field = field;
+			return this;
+		}
+
+		public GeoHashCellQueryDescriptor<T> Field(Expression<Func<T, object>> field)
+		{
+			Self.Field = field;
+			return this;
+		}
+
+        public GeoHashCellQueryDescriptor<T> Location(double lat, double lon)
         {
             var c = CultureInfo.InvariantCulture;
-            _.Location = "{{ lat: {0}, lon: {1} }}".F(lat.ToString(c), lon.ToString(c));
+            Self.Location = "{{ lat: {0}, lon: {1} }}".F(lat.ToString(c), lon.ToString(c));
             return this;
         }
 
-        public GeoHashCellQueryDescriptor Location(string geoHash)
+        public GeoHashCellQueryDescriptor<T> Location(string geoHash)
         {
-            _.Location = geoHash;
+            Self.Location = geoHash;
             return this;
         }
 
-        public GeoHashCellQueryDescriptor Precision(int precision)
+        public GeoHashCellQueryDescriptor<T> Precision(int precision)
         {
-            _.Precision = precision;
+            Self.Precision = precision;
             return this;
         }
 
-        public GeoHashCellQueryDescriptor Distance(double distance, GeoUnit unit)
+        public GeoHashCellQueryDescriptor<T> Distance(double distance, GeoUnit unit)
         {
-            _.Precision = distance;
-            _.Unit = unit;
+            Self.Precision = distance;
+            Self.Unit = unit;
             return this;
         }
 
-        public GeoHashCellQueryDescriptor Neighbors(bool neighbors)
+        public GeoHashCellQueryDescriptor<T> Neighbors(bool neighbors)
         {
-            _.Neighbors = neighbors;
+            Self.Neighbors = neighbors;
             return this;
         }
 
 		public PropertyPathMarker GetFieldName()
 		{
-			return _.Field;
+			return Self.Field;
 		}
 
 		public void SetFieldName(string fieldName)
 		{
-			_.Field = fieldName;
+			Self.Field = fieldName;
 		}
 	}
 }

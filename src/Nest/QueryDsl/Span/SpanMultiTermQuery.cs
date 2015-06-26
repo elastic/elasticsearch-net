@@ -15,27 +15,23 @@ namespace Nest
 
 	public class SpanMultiTermQuery : PlainQuery, ISpanMultiTermQuery
 	{
+		public string Name { get; set; }
+		bool IQuery.IsConditionless { get { return false; } }
+		public IQueryContainer Match { get; set; }
+
 		protected override void WrapInContainer(IQueryContainer container)
 		{
 			container.SpanMultiTerm = this;
 		}
-
-		public IQueryContainer Match { get; set; }
-
-		public string Name { get; set; }
-
-		//TODO change to explicit IQuery implenentation in 2.0?
-		public bool IsConditionless { get { return false; } }
 	}
 
 	public class SpanMultiTermQueryDescriptor<T> : ISpanMultiTermQuery
 		where T : class
 	{
 		private ISpanMultiTermQuery Self { get { return this; } }
-		IQueryContainer ISpanMultiTermQuery.Match { get; set; }
-
-		bool IQuery.IsConditionless { get { return false; } }
 		string IQuery.Name { get; set; }
+		bool IQuery.IsConditionless { get { return false; } }
+		IQueryContainer ISpanMultiTermQuery.Match { get; set; }
 
 		public SpanMultiTermQueryDescriptor<T> Name(string name)
 		{

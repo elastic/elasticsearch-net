@@ -65,7 +65,7 @@ namespace Nest
 			return fn;
 		}
 
-		public FunctionScoreFunction<T> ScriptScore(Action<ScriptQueryDescriptor> scriptSelector)
+		public FunctionScoreFunction<T> ScriptScore(Action<ScriptQueryDescriptor<T>> scriptSelector)
 		{
 			var fn = new ScriptScoreFunction<T>(scriptSelector);
 			this._Functions.Add(fn);

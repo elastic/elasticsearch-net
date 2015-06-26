@@ -66,13 +66,8 @@ namespace Nest
 
 	public class MultiMatchQuery : PlainQuery, IMultiMatchQuery
 	{
-		protected override void WrapInContainer(IQueryContainer container)
-		{
-			container.MultiMatch = this;
-		}
-
-		bool IQuery.IsConditionless { get { return false; } }
 		public string Name { get; set; }
+		bool IQuery.IsConditionless { get { return false; } }
 		public TextQueryType? Type { get; set; }
 		public string Query { get; set; }
 		public string Analyzer { get; set; }
@@ -89,45 +84,18 @@ namespace Nest
 		public string MinimumShouldMatch { get; set; }
 		public Operator? Operator { get; set; }
 		public IEnumerable<PropertyPathMarker> Fields { get; set; }
+
+		protected override void WrapInContainer(IQueryContainer container)
+		{
+			container.MultiMatch = this;
+		}
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class MultiMatchQueryDescriptor<T> : IMultiMatchQuery where T : class
 	{
 		private IMultiMatchQuery Self { get { return this; }}
-
-		TextQueryType? IMultiMatchQuery.Type { get; set; }
-
-		string IMultiMatchQuery.Query { get; set; }
-
-		string IMultiMatchQuery.Analyzer { get; set; }
-
-		RewriteMultiTerm? IMultiMatchQuery.Rewrite { get; set; }
-
-		double? IMultiMatchQuery.Fuzziness { get; set; }
-
-		double? IMultiMatchQuery.CutoffFrequency { get; set; }
-
-		int? IMultiMatchQuery.PrefixLength { get; set; }
-
-		int? IMultiMatchQuery.MaxExpansions { get; set; }
-
-		int? IMultiMatchQuery.Slop { get; set; }
-
-		double? IMultiMatchQuery.Boost { get; set; }
-
-		bool? IMultiMatchQuery.Lenient { get; set; }
-
-		bool? IMultiMatchQuery.UseDisMax { get; set; }
-
-		double? IMultiMatchQuery.TieBreaker { get; set; }
-
-		string IMultiMatchQuery.MinimumShouldMatch { get; set; }
-
-		Operator? IMultiMatchQuery.Operator { get; set; }
-
-		IEnumerable<PropertyPathMarker> IMultiMatchQuery.Fields { get; set; }
-
+		string IQuery.Name { get; set; }
 		bool IQuery.IsConditionless
 		{
 			get
@@ -135,25 +103,42 @@ namespace Nest
 				return !Self.Fields.HasAny() || Self.Fields.All(f => f.IsConditionless()) || Self.Query.IsNullOrEmpty();
 			}
 		}
-
-		string IQuery.Name { get; set; }
+		TextQueryType? IMultiMatchQuery.Type { get; set; }
+		string IMultiMatchQuery.Query { get; set; }
+		string IMultiMatchQuery.Analyzer { get; set; }
+		RewriteMultiTerm? IMultiMatchQuery.Rewrite { get; set; }
+		double? IMultiMatchQuery.Fuzziness { get; set; }
+		double? IMultiMatchQuery.CutoffFrequency { get; set; }
+		int? IMultiMatchQuery.PrefixLength { get; set; }
+		int? IMultiMatchQuery.MaxExpansions { get; set; }
+		int? IMultiMatchQuery.Slop { get; set; }
+		double? IMultiMatchQuery.Boost { get; set; }
+		bool? IMultiMatchQuery.Lenient { get; set; }
+		bool? IMultiMatchQuery.UseDisMax { get; set; }
+		double? IMultiMatchQuery.TieBreaker { get; set; }
+		string IMultiMatchQuery.MinimumShouldMatch { get; set; }
+		Operator? IMultiMatchQuery.Operator { get; set; }
+		IEnumerable<PropertyPathMarker> IMultiMatchQuery.Fields { get; set; }
 
 		public MultiMatchQueryDescriptor<T> Name(string name)
 		{
 			Self.Name = name;
 			return this;
 		}
+
 		public MultiMatchQueryDescriptor<T> OnFields(IEnumerable<string> fields)
 		{
 			Self.Fields = fields.Select(f => (PropertyPathMarker)f);
 			return this;
 		}
+
 		public MultiMatchQueryDescriptor<T> OnFields(
 			params Expression<Func<T, object>>[] objectPaths)
 		{
 			Self.Fields = objectPaths.Select(e => (PropertyPathMarker)e);
 			return this;
 		}
+
 		public MultiMatchQueryDescriptor<T> OnFieldsWithBoost(Action<FluentDictionary<Expression<Func<T, object>>, double?>> boostableSelector)
 		{
 			var d = new FluentDictionary<Expression<Func<T, object>>, double?>();
@@ -161,6 +146,7 @@ namespace Nest
 			Self.Fields = d.Select(o => PropertyPathMarker.Create(o.Key, o.Value));
 			return this;
 		}
+
 		public MultiMatchQueryDescriptor<T> OnFieldsWithBoost(Action<FluentDictionary<string, double?>> boostableSelector)
 		{
 			var d = new FluentDictionary<string, double?>();
@@ -180,11 +166,13 @@ namespace Nest
 			Self.Analyzer = analyzer;
 			return this;
 		}
+
 		public MultiMatchQueryDescriptor<T> Fuzziness(double fuzziness)
 		{
 			Self.Fuzziness = fuzziness;
 			return this;
 		}
+
 		public MultiMatchQueryDescriptor<T> CutoffFrequency(double cutoffFrequency)
 		{
 			Self.CutoffFrequency = cutoffFrequency;
@@ -219,16 +207,19 @@ namespace Nest
 			Self.PrefixLength = prefixLength;
 			return this;
 		}
+
 		public MultiMatchQueryDescriptor<T> MaxExpansions(int maxExpansions)
 		{
 			Self.MaxExpansions = maxExpansions;
 			return this;
 		}
+
 		public MultiMatchQueryDescriptor<T> Slop(int slop)
 		{
 			Self.Slop = slop;
 			return this;
 		}
+
 		public MultiMatchQueryDescriptor<T> Operator(Operator op)
 		{
 			Self.Operator = op;

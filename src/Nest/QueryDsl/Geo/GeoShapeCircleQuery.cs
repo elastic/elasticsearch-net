@@ -21,13 +21,15 @@ namespace Nest
 
 	public class GeoShapeCircleQuery : PlainQuery, IGeoShapeCircleQuery
 	{
+		public string Name { get; set; }
+		bool IQuery.IsConditionless { get { return false; } }
+		public PropertyPathMarker Field { get; set; }
+		public ICircleGeoShape Shape { get; set; }
+
 		protected override void WrapInContainer(IQueryContainer container)
 		{
 			container.GeoShape = this;
 		}
-
-		public string Name { get; set; }
-		bool IQuery.IsConditionless { get { return false; } }
 
 		PropertyPathMarker IFieldNameQuery.GetFieldName()
 		{
@@ -38,20 +40,12 @@ namespace Nest
 		{
 			this.Field = fieldName;
 		}
-
-		public PropertyPathMarker Field { get; set; }
-
-		public ICircleGeoShape Shape { get; set; }
 	}
 
 	public class GeoShapeCircleQueryDescriptor<T> : IGeoShapeCircleQuery where T : class
 	{
 		private IGeoShapeCircleQuery Self { get { return this; } }
-
-		PropertyPathMarker IGeoShapeQuery.Field { get; set; }
-		
-		ICircleGeoShape IGeoShapeCircleQuery.Shape { get; set; }
-
+		string IQuery.Name { get; set; }
 		bool IQuery.IsConditionless
 		{
 			get
@@ -60,17 +54,8 @@ namespace Nest
 			}
 
 		}
-
-		string IQuery.Name { get; set; }
-
-		void IFieldNameQuery.SetFieldName(string fieldName)
-		{
-			((IGeoShapeQuery)this).Field = fieldName;
-		}
-		PropertyPathMarker IFieldNameQuery.GetFieldName()
-		{
-			return ((IGeoShapeQuery)this).Field;
-		}
+		PropertyPathMarker IGeoShapeQuery.Field { get; set; }
+		ICircleGeoShape IGeoShapeCircleQuery.Shape { get; set; }
 
 		public GeoShapeCircleQueryDescriptor<T> Name(string name)
 		{
@@ -80,13 +65,13 @@ namespace Nest
 
 		public GeoShapeCircleQueryDescriptor<T> OnField(string field)
 		{
-			((IGeoShapeQuery)this).Field = field;
+			Self.Field = field;
 			return this;
 		}
 
 		public GeoShapeCircleQueryDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
 		{
-			((IGeoShapeQuery)this).Field = objectPath;
+			Self.Field = objectPath;
 			return this;
 		}
 
@@ -104,6 +89,16 @@ namespace Nest
 				Self.Shape = new CircleGeoShape();
 			Self.Shape.Radius = radius;
 			return this;
+		}
+
+		void IFieldNameQuery.SetFieldName(string fieldName)
+		{
+			Self.Field = fieldName;
+		}
+
+		PropertyPathMarker IFieldNameQuery.GetFieldName()
+		{
+			return Self.Field;
 		}
 	}
 }

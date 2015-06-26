@@ -159,12 +159,12 @@ namespace Nest
 		}
 
 		public GlobalInnerHitDescriptor<T> ScriptFields(
-				Func<FluentDictionary<string, Func<ScriptQueryDescriptor, ScriptQueryDescriptor>>,
-				 FluentDictionary<string, Func<ScriptQueryDescriptor, ScriptQueryDescriptor>>> scriptFields)
+				Func<FluentDictionary<string, Func<ScriptQueryDescriptor<T>, ScriptQueryDescriptor<T>>>,
+				 FluentDictionary<string, Func<ScriptQueryDescriptor<T>, ScriptQueryDescriptor<T>>>> scriptFields)
 		{
 			if (scriptFields == null) return null;
 
-			var scriptFieldDescriptors = scriptFields(new FluentDictionary<string, Func<ScriptQueryDescriptor, ScriptQueryDescriptor>>());
+			var scriptFieldDescriptors = scriptFields(new FluentDictionary<string, Func<ScriptQueryDescriptor<T>, ScriptQueryDescriptor<T>>>());
 			if (scriptFieldDescriptors == null || scriptFieldDescriptors.All(d => d.Value == null))
 			{
 				Self.ScriptFields = null;
@@ -175,10 +175,9 @@ namespace Nest
 			{
 				if (d.Value == null)
 					continue;
-				Self.ScriptFields.Add(d.Key, d.Value(new ScriptQueryDescriptor()));
+				Self.ScriptFields.Add(d.Key, d.Value(new ScriptQueryDescriptor<T>()));
 			}
 			return this;
 		}
-
 	}
 }

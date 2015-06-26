@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
+using System.Linq.Expressions;
 
 namespace Nest
 {
@@ -16,6 +17,11 @@ namespace Nest
 
 	public class GeoPolygonQuery : PlainQuery, IGeoPolygonQuery
 	{
+		public string Name { get; set; }
+		bool IQuery.IsConditionless { get { return QueryCondition.IsConditionless(this); } }
+		public PropertyPathMarker Field { get; set; }
+		public IEnumerable<string> Points { get; set; }
+
 		protected override void WrapInContainer(IQueryContainer container)
 		{
 			container.GeoPolygon = this;
@@ -30,31 +36,48 @@ namespace Nest
 		{
 			Field = fieldName;
 		}
-
-		public string Name { get; set; }
-		bool IQuery.IsConditionless { get { return QueryCondition.IsConditionless(this); } }
-		public PropertyPathMarker Field { get; set; }
-		public IEnumerable<string> Points { get; set; }
 	}
 
-	// TODO : Finish implementing
-	public class GeoPolygonQueryDescriptor : IGeoPolygonQuery
+	public class GeoPolygonQueryDescriptor<T> : IGeoPolygonQuery
 	{
-		private IGeoPolygonQuery _ { get { return this; } }
-
+		private IGeoPolygonQuery Self { get { return this; } }
+		string IQuery.Name { get; set; }
 		bool IQuery.IsConditionless { get { return QueryCondition.IsConditionless(this); } }
 		PropertyPathMarker IGeoPolygonQuery.Field { get; set; }
 		IEnumerable<string> IGeoPolygonQuery.Points { get; set; }
-		string IQuery.Name { get; set; }
+
+		public GeoPolygonQueryDescriptor<T> Field(string field)
+		{
+			Self.Field = field;
+			return this;
+		}
+
+		public GeoPolygonQueryDescriptor<T> Field(Expression<Func<T, object>> field)
+		{
+			Self.Field = field;
+			return this;
+		}
+
+		public GeoPolygonQueryDescriptor<T> Points(IEnumerable<string> points)
+		{
+			Self.Points = points;
+			return this;
+		}
+
+		public GeoPolygonQueryDescriptor<T> Points(params string[] points)
+		{
+			Self.Points = points;
+			return this;
+		}
 
 		public PropertyPathMarker GetFieldName()
 		{
-			return _.Field;
+			return Self.Field;
 		}
 
 		public void SetFieldName(string fieldName)
 		{
-			_.Field = fieldName;
+			Self.Field = fieldName;
 		}
 	}
 }

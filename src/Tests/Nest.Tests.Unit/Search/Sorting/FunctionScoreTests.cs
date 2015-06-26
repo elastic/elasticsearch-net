@@ -194,9 +194,8 @@ namespace Nest.Tests.Unit.Search.Sorting
 			boost.Filter = new TermQuery { Field = Property.Path<ElasticsearchProject>(p => p.Name), Value = "termValue"};
 			QueryContainer q = new FunctionScoreQuery()
 			{
-				WeightAsDouble = 1.0,
+				Weight = 1.0,
 				Functions = new[] {boost}
-
 			};
 			var json = TestElasticClient.Serialize(q);
 			var expected = @"{

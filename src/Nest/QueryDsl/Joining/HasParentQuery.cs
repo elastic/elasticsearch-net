@@ -30,33 +30,23 @@ namespace Nest
 
 	public class HasParentQuery : PlainQuery, IHasParentQuery
 	{
-		protected override void WrapInContainer(IQueryContainer container)
-		{
-			container.HasParent = this;
-		}
 		public string Name { get; set; }
-
 		bool IQuery.IsConditionless { get { return false; } }
 		public TypeNameMarker Type { get; set; }
 		public ParentScoreType? ScoreType { get; set; }
 		public IQueryContainer Query { get; set; }
 		public IInnerHits InnerHits { get; set; }
+
+		protected override void WrapInContainer(IQueryContainer container)
+		{
+			container.HasParent = this;
+		}
 	}
 
 	public class HasParentQueryDescriptor<T> : IHasParentQuery where T : class
 	{
 		private IHasParentQuery Self { get { return this; }}
-
-		TypeNameMarker IHasParentQuery.Type { get; set; }
-
-		ParentScoreType? IHasParentQuery.ScoreType { get; set; }
-
-		IInnerHits IHasParentQuery.InnerHits { get; set; }
-		
 		string IQuery.Name { get; set; }
-
-		IQueryContainer IHasParentQuery.Query { get; set; }
-
 		bool IQuery.IsConditionless
 		{
 			get
@@ -64,6 +54,10 @@ namespace Nest
 				return Self.Query == null || Self.Query.IsConditionless;
 			}
 		}
+		TypeNameMarker IHasParentQuery.Type { get; set; }
+		ParentScoreType? IHasParentQuery.ScoreType { get; set; }
+		IInnerHits IHasParentQuery.InnerHits { get; set; }
+		IQueryContainer IHasParentQuery.Query { get; set; }
 
 		public HasParentQueryDescriptor()
 		{
@@ -106,6 +100,5 @@ namespace Nest
 			Self.InnerHits = innerHitsSelector(new InnerHitsDescriptor<T>());
 			return this;
 		}
-
 	}
 }

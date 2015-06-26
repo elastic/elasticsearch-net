@@ -16,13 +16,17 @@ namespace Nest
 
 	public class TermQuery : PlainQuery, ITermQuery
 	{
+		public string Name { get; set; }
+		bool IQuery.IsConditionless { get { return false; } }
+		public PropertyPathMarker Field { get; set; }
+		public object Value { get; set; }
+		public double? Boost { get; set; }
+
 		protected override void WrapInContainer(IQueryContainer container)
 		{
 			container.Term = this;
 		}
 
-		public string Name { get; set; }
-		bool IQuery.IsConditionless { get { return false; } }
 		PropertyPathMarker IFieldNameQuery.GetFieldName()
 		{
 			return this.Field;
@@ -32,24 +36,14 @@ namespace Nest
 		{
 			this.Field = fieldName;
 		}
-
-		public PropertyPathMarker Field { get; set; }
-		public object Value { get; set; }
-		public double? Boost { get; set; }
 	}
 
 	public class TermQueryDescriptorBase<TDescriptor, T> : ITermQuery
 		where TDescriptor : TermQueryDescriptorBase<TDescriptor, T>
 		where T : class
 	{
-		private ITermQuery Self { get { return this; }}
-
-		PropertyPathMarker ITermQuery.Field { get; set; }
-		object ITermQuery.Value { get; set; }
-		double? ITermQuery.Boost { get; set; }
-
+		private ITermQuery Self { get { return this; } }
 		string IQuery.Name { get; set; }
-
 		bool IQuery.IsConditionless
 		{
 			get
@@ -57,6 +51,9 @@ namespace Nest
 				return Self.Value == null || Self.Value.ToString().IsNullOrEmpty() || Self.Field.IsConditionless();
 			}
 		}
+		PropertyPathMarker ITermQuery.Field { get; set; }
+		object ITermQuery.Value { get; set; }
+		double? ITermQuery.Boost { get; set; }
 
 		public TDescriptor Name(string name)
 		{
@@ -69,27 +66,30 @@ namespace Nest
 			Self.Field = field;
 			return (TDescriptor)this;
 		}
+
 		public TDescriptor OnField(Expression<Func<T, object>> field)
 		{
 			Self.Field = field;
 			return (TDescriptor)this;
 		}
+
 		public TDescriptor OnField<K>(Expression<Func<T, K>> field)
 		{
 			Self.Field = field;
 			return (TDescriptor)this;
 		}
+
 		public TDescriptor Value(object value)
 		{
 			Self.Value = value;
 			return (TDescriptor)this;
 		}
+
 		public TDescriptor Boost(double boost)
 		{
 			Self.Boost = boost;
 			return (TDescriptor)this;
 		}
-
 		public PropertyPathMarker GetFieldName()
 		{
 			return Self.Field;
@@ -101,10 +101,8 @@ namespace Nest
 		}
 	}
 
-
 	public class TermQueryDescriptor<T> : TermQueryDescriptorBase<TermQueryDescriptor<T>, T>
 		where T : class
-	{
-		
+	{	
 	}
 }

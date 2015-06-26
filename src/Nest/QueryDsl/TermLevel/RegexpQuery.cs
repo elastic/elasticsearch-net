@@ -24,13 +24,19 @@ namespace Nest
 
 	public class RegexpQuery : PlainQuery, IRegexpQuery
 	{
+		public string Name { get; set; }
+		bool IQuery.IsConditionless { get { return false; } }
+		public string Value { get; set; }
+		public string Flags { get; set; }
+		public int? MaximumDeterminizedStates { get; set; }
+		public PropertyPathMarker Field { get; set; }
+		public double? Boost { get; set; }
+
 		protected override void WrapInContainer(IQueryContainer container)
 		{
 			container.Regexp = this;
 		}
 
-		public string Name { get; set; }
-		bool IQuery.IsConditionless { get { return false; } }
 		PropertyPathMarker IFieldNameQuery.GetFieldName()
 		{
 			return this.Field;
@@ -40,28 +46,12 @@ namespace Nest
 		{
 			this.Field = fieldName;
 		}
-
-		public string Value { get; set; }
-		public string Flags { get; set; }
-		public int? MaximumDeterminizedStates { get; set; }
-		public PropertyPathMarker Field { get; set; }
-		public double? Boost { get; set; }
 	}
 
 	public class RegexpQueryDescriptor<T> : IRegexpQuery where T : class
 	{
 		private IRegexpQuery Self { get { return this; } }
-
-		string IRegexpQuery.Value { get; set; }
-
-		string IRegexpQuery.Flags { get; set; }
-
-		int? IRegexpQuery.MaximumDeterminizedStates { get; set; }
-
-		PropertyPathMarker IRegexpQuery.Field { get; set; }
-
-		double? IRegexpQuery.Boost { get; set; }
-
+		string IQuery.Name { get; set; }
 		bool IQuery.IsConditionless
 		{
 			get
@@ -69,43 +59,42 @@ namespace Nest
 				return Self.Field.IsConditionless() || Self.Value.IsNullOrEmpty();
 			}
 		}
-
-		string IQuery.Name { get; set; }
-
-		void IFieldNameQuery.SetFieldName(string fieldName)
-		{
-			Self.Field = fieldName;
-		}
-		PropertyPathMarker IFieldNameQuery.GetFieldName()
-		{
-			return Self.Field;
-		}
+		string IRegexpQuery.Value { get; set; }
+		string IRegexpQuery.Flags { get; set; }
+		int? IRegexpQuery.MaximumDeterminizedStates { get; set; }
+		PropertyPathMarker IRegexpQuery.Field { get; set; }
+		double? IRegexpQuery.Boost { get; set; }
 
 		public RegexpQueryDescriptor<T> Name(string name)
 		{
 			Self.Name = name;
 			return this;
 		}
+		
 		public RegexpQueryDescriptor<T> MaximumDeterminizedStates(int maxDeterminizedStates)
 		{
 			Self.MaximumDeterminizedStates = maxDeterminizedStates;
 			return this;
 		}
+
 		public RegexpQueryDescriptor<T> Value(string regex)
 		{
 			Self.Value = regex;
 			return this;
 		}
+
 		public RegexpQueryDescriptor<T> Flags(string flags)
 		{
 			Self.Flags = flags;
 			return this;
 		}
+
 		public RegexpQueryDescriptor<T> OnField(string path)
 		{
 			Self.Field = path;
 			return this;
 		}
+
 		public RegexpQueryDescriptor<T> Boost(double boost)
 		{
 			Self.Boost = boost;
@@ -118,5 +107,14 @@ namespace Nest
 			return this;
 		}
 
+		void IFieldNameQuery.SetFieldName(string fieldName)
+		{
+			Self.Field = fieldName;
+		}
+
+		PropertyPathMarker IFieldNameQuery.GetFieldName()
+		{
+			return Self.Field;
+		}
 	}
 }

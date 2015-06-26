@@ -13,14 +13,18 @@ namespace Nest
 
 	public class PrefixQuery : PlainQuery, IPrefixQuery
 	{
+		public string Name { get; set; }
+		bool IQuery.IsConditionless { get { return false; } }
+		public PropertyPathMarker Field { get; set; }
+		public object Value { get; set; }
+		public double? Boost { get; set; }
+		public RewriteMultiTerm? Rewrite { get; set; }
+
 		protected override void WrapInContainer(IQueryContainer container)
 		{
 			container.Prefix = this;
 		}
 
-		public string Name { get; set; }
-
-		bool IQuery.IsConditionless { get { return false; } }
 		PropertyPathMarker IFieldNameQuery.GetFieldName()
 		{
 			return this.Field;
@@ -30,23 +34,19 @@ namespace Nest
 		{
 			this.Field = fieldName;
 		}
-
-		public PropertyPathMarker Field { get; set; }
-		public object Value { get; set; }
-		public double? Boost { get; set; }
-		public RewriteMultiTerm? Rewrite { get; set; }
 	}
 
 	public class PrefixQueryDescriptor<T> : TermQueryDescriptorBase<PrefixQueryDescriptor<T>, T>, 
 		IPrefixQuery where T : class
 	{
+		private IPrefixQuery Self { get { return this; } }
+
 		RewriteMultiTerm? IPrefixQuery.Rewrite { get; set; }
 
 		public PrefixQueryDescriptor<T> Rewrite(RewriteMultiTerm rewrite)
 		{
-			((IPrefixQuery)this).Rewrite = rewrite;
+			Self.Rewrite = rewrite;
 			return this;
 		}
-		
 	}
 }

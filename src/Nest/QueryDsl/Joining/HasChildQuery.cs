@@ -31,16 +31,10 @@ namespace Nest
 		[JsonProperty("inner_hits")]
 		[JsonConverter(typeof(ReadAsTypeConverter<InnerHits>))]
 		IInnerHits InnerHits { get; set; }
-
 	}
 	
 	public class HasChildQuery : PlainQuery, IHasChildQuery
 	{
-		protected override void WrapInContainer(IQueryContainer container)
-		{
-			container.HasChild = this;
-		}
-
 		public string Name { get; set; }
 		bool IQuery.IsConditionless { get { return false; } }
 		public TypeNameMarker Type { get; set; }
@@ -49,26 +43,17 @@ namespace Nest
 		public int? MaxChildren { get; set; }
 		public IQueryContainer Query { get; set; }
 		public IInnerHits InnerHits { get; set; }
+
+		protected override void WrapInContainer(IQueryContainer container)
+		{
+			container.HasChild = this;
+		}
 	}
 
 	public class HasChildQueryDescriptor<T> : IHasChildQuery where T : class
 	{
 		private IHasChildQuery Self { get { return this; } }
-
-		TypeNameMarker IHasChildQuery.Type { get; set; }
-
-		ChildScoreType? IHasChildQuery.ScoreType { get; set; }
-
-		int? IHasChildQuery.MinChildren { get; set; }
-
-		int? IHasChildQuery.MaxChildren { get; set; }
-
-		IQueryContainer IHasChildQuery.Query { get; set; }
-
-		IInnerHits IHasChildQuery.InnerHits { get; set; }
-
 		string IQuery.Name { get; set; }
-
 		bool IQuery.IsConditionless
 		{
 			get
@@ -76,6 +61,12 @@ namespace Nest
 				return Self.Query == null || Self.Query.IsConditionless;
 			}
 		}
+		TypeNameMarker IHasChildQuery.Type { get; set; }
+		ChildScoreType? IHasChildQuery.ScoreType { get; set; }
+		int? IHasChildQuery.MinChildren { get; set; }
+		int? IHasChildQuery.MaxChildren { get; set; }
+		IQueryContainer IHasChildQuery.Query { get; set; }
+		IInnerHits IHasChildQuery.InnerHits { get; set; }
 
 		public HasChildQueryDescriptor()
 		{

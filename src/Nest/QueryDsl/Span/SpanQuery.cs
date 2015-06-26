@@ -45,21 +45,7 @@ namespace Nest
 	public class SpanQuery<T> : ISpanQuery where T : class
 	{
 		private ISpanQuery Self { get { return this; } }
-
-		ISpanTermQuery ISpanQuery.SpanTermQueryDescriptor { get; set; }
-
-		ISpanFirstQuery ISpanQuery.SpanFirst { get; set; }
-
-		ISpanNearQuery ISpanQuery.SpanNear { get; set; }
-
-		ISpanOrQuery ISpanQuery.SpanOr { get; set; }
-
-		ISpanNotQuery ISpanQuery.SpanNot { get; set; }
-
-		ISpanMultiTermQuery ISpanQuery.SpanMultiTerm { get; set; }
-
 		string IQuery.Name { get; set; }
-
 		bool IQuery.IsConditionless
 		{
 			get
@@ -76,6 +62,12 @@ namespace Nest
 				return queries.All(q => q == null || q.IsConditionless);
 			}
 		}
+		ISpanTermQuery ISpanQuery.SpanTermQueryDescriptor { get; set; }
+		ISpanFirstQuery ISpanQuery.SpanFirst { get; set; }
+		ISpanNearQuery ISpanQuery.SpanNear { get; set; }
+		ISpanOrQuery ISpanQuery.SpanOr { get; set; }
+		ISpanNotQuery ISpanQuery.SpanNot { get; set; }
+		ISpanMultiTermQuery ISpanQuery.SpanMultiTerm { get; set; }
 
 		public SpanQuery<T> SpanTerm(Expression<Func<T, object>> fieldDescriptor
 			, string value	

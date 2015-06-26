@@ -60,7 +60,7 @@ namespace Nest.Tests.Unit.Search.InitializerSyntax
 					{ Infer.Index<ElasticsearchProject>(), 2.3 }
 				},
 				ScriptFields = new FluentDictionary<string, IScriptQuery>()
-					.Add("script_field_name", new ScriptFilter
+					.Add("script_field_name", new ScriptQuery
 					{
 						Script = "doc['loc'].value * multiplier",
 						Params = new Dictionary<string, object>

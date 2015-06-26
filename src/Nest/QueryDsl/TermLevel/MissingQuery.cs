@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ReadAsTypeConverter<MissingQueryDescriptor>))]
+	[JsonConverter(typeof(ReadAsTypeConverter<MissingQuery>))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IMissingQuery : IFieldNameQuery
 	{
@@ -23,6 +23,12 @@ namespace Nest
 
 	public class MissingQuery : PlainQuery, IMissingQuery
 	{
+		public string Name { get; set; }
+		public bool IsConditionless { get { return QueryCondition.IsConditionless(this); } }
+		public PropertyPathMarker Field { get; set; }
+		public bool? Existence { get; set; }
+		public bool? NullValue { get; set; }
+
 		protected override void WrapInContainer(IQueryContainer container)
 		{
 			container.Missing = this;
@@ -37,36 +43,42 @@ namespace Nest
 		{
 			Field = fieldName;
 		}
-
-		public PropertyPathMarker Field { get; set; }
-
-		public bool? Existence { get; set; }
-
-		public bool? NullValue { get; set; }
-
-		public string Name { get; set; }
-
-		public bool IsConditionless { get { return QueryCondition.IsConditionless(this); } }
 	}
 
-	// TODO: finish implementing
-	public class MissingQueryDescriptor : IMissingQuery
+	public class MissingQueryDescriptor<T> : IMissingQuery where T : class
 	{
 		private IMissingQuery Self { get { return this; } }
-		 
+		string IQuery.Name { get; set; }
 		bool IQuery.IsConditionless { get { return QueryCondition.IsConditionless(this); } }
 		PropertyPathMarker IMissingQuery.Field { get; set;}
 		bool? IMissingQuery.Existence { get; set; }
 		bool? IMissingQuery.NullValue { get; set; }
-		string IQuery.Name { get; set; }
 
-		public MissingQueryDescriptor Existence(bool existence = true)
+		public MissingQueryDescriptor<T> Name(string name)
+		{
+			Self.Name = name;
+			return this;
+		}
+
+		public MissingQueryDescriptor<T> Field(string field)
+		{
+			Self.Field = field;
+			return this;
+		}
+
+		public MissingQueryDescriptor<T> Field(Expression<Func<T, object>> field)
+		{
+			Self.Field = field;
+			return this;
+		}
+
+		public MissingQueryDescriptor<T> Existence(bool existence = true)
 		{
 			Self.Existence = existence;
 			return this;
 		}
 
-		public MissingQueryDescriptor NullValue(bool nullValue = true)
+		public MissingQueryDescriptor<T> NullValue(bool nullValue = true)
 		{
 			Self.NullValue = nullValue;
 			return this;

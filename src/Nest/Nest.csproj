@@ -411,7 +411,6 @@
     <Compile Include="CommonAbstractions\Request\Paths\IndexOptionalNamePath.cs" />
     <Compile Include="CommonAbstractions\Request\Paths\IndicesOptionalTypesNamePathDecriptor.cs" />
     <Compile Include="Cluster\Ping\PingRequest.cs" />
-    <Compile Include="QueryDsl\Specialized\MoreLikeThisQueryDocuments.cs" />
     <Compile Include="QueryDsl\Span\SpanMultiTermQuery.cs" />
     <Compile Include="Indices\MappingManagement\TypesExists\TypeExistsRequest.cs" />
     <Compile Include="QueryDsl\Compound\Functions\FieldValueFactor.cs" />

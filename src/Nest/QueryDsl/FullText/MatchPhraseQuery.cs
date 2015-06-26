@@ -13,6 +13,5 @@ namespace Nest
 	{
 
 		protected override string MatchQueryType { get { return "phrase"; } }
-		
 	}
 }

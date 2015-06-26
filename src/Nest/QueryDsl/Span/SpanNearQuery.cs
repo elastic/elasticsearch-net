@@ -28,11 +28,6 @@ namespace Nest
 
 	public class SpanNearQuery : PlainQuery, ISpanNearQuery
 	{
-		protected override void WrapInContainer(IQueryContainer container)
-		{
-			container.SpanNear = this;
-		}
-
 		public string Name { get; set; }
 		bool IQuery.IsConditionless { get { return false; } }
 		public IEnumerable<ISpanQuery> Clauses { get; set; }
@@ -40,24 +35,17 @@ namespace Nest
 		public bool? InOrder { get; set; }
 		public bool? CollectPayloads { get; set; }
 	    public double? Boost { get; set; }
+
+		protected override void WrapInContainer(IQueryContainer container)
+		{
+			container.SpanNear = this;
+		}
 	}
 
 	public class SpanNearQueryDescriptor<T> : ISpanNearQuery where T : class
 	{
 		private ISpanNearQuery Self { get { return this; }}
-
-		IEnumerable<ISpanQuery> ISpanNearQuery.Clauses { get; set; }
-
-		int? ISpanNearQuery.Slop { get; set; }
-
-		bool? ISpanNearQuery.InOrder { get; set; }
-
-		bool? ISpanNearQuery.CollectPayloads { get; set; }
-
-        double? ISpanNearQuery.Boost { get; set; }
-
 		string IQuery.Name { get; set; }	
-
 		bool IQuery.IsConditionless
 		{
 			get
@@ -66,6 +54,11 @@ namespace Nest
 					|| Self.Clauses.Cast<IQuery>().All(q => q.IsConditionless);
 			}
 		}
+		IEnumerable<ISpanQuery> ISpanNearQuery.Clauses { get; set; }
+		int? ISpanNearQuery.Slop { get; set; }
+		bool? ISpanNearQuery.InOrder { get; set; }
+		bool? ISpanNearQuery.CollectPayloads { get; set; }
+        double? ISpanNearQuery.Boost { get; set; }
 
 		public SpanNearQueryDescriptor<T> Name(string name)
 		{
@@ -90,16 +83,19 @@ namespace Nest
 			Self.Clauses = descriptors.HasAny() ? descriptors : null;
 			return this;
 		}
+
 		public SpanNearQueryDescriptor<T> Slop(int slop)
 		{
 			Self.Slop = slop;
 			return this;
 		}
+
 		public SpanNearQueryDescriptor<T> InOrder(bool inOrder)
 		{
 			Self.InOrder = inOrder;
 			return this;
 		}
+
 		public SpanNearQueryDescriptor<T> CollectPayloads(bool collectPayloads)
 		{
 			Self.CollectPayloads = collectPayloads;

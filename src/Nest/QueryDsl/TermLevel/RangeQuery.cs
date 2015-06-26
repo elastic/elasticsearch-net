@@ -35,14 +35,26 @@ namespace Nest
 
 		PropertyPathMarker Field { get; set; }
 	}
+
 	public class RangeQuery : PlainQuery, IRangeQuery
 	{
+		public string Name { get; set; }
+		bool IQuery.IsConditionless { get { return false; } }
+		public string GreaterThanOrEqualTo { get; set; }
+		public string LowerThanOrEqualTo { get; set; }
+		public string GreaterThan { get; set; }
+		public string LowerThan { get; set; }
+		public double? Boost { get; set; }
+		public bool? Cache { get; set; }
+		public string TimeZone { get; set; }
+		public string Format { get; set; }
+		public PropertyPathMarker Field { get; set; }
+
 		protected override void WrapInContainer(IQueryContainer container)
 		{
 			container.Range = this;
 		}
 
-		bool IQuery.IsConditionless { get { return false; } }
 		PropertyPathMarker IFieldNameQuery.GetFieldName()
 		{
 			return this.Field;
@@ -52,41 +64,13 @@ namespace Nest
 		{
 			this.Field = fieldName;
 		}
-
-		public string GreaterThanOrEqualTo { get; set; }
-		public string LowerThanOrEqualTo { get; set; }
-		public string GreaterThan { get; set; }
-		public string LowerThan { get; set; }
-		public double? Boost { get; set; }
-		public bool? Cache { get; set; }
-		public string Name { get; set; }
-		public string TimeZone { get; set; }
-		public string Format { get; set; }
-		public PropertyPathMarker Field { get; set; }
 	}
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class RangeQueryDescriptor<T> : IRangeQuery where T : class
 	{
 		private IRangeQuery Self { get { return this; } }
-
-		string IRangeQuery.GreaterThanOrEqualTo { get; set; }
-	
-		string IRangeQuery.LowerThanOrEqualTo { get; set; }
-		
-		string IRangeQuery.GreaterThan { get; set; }
-	
-		string IRangeQuery.LowerThan { get; set; }
-		
-		double? IRangeQuery.Boost { get; set; }
-		
-		bool? IRangeQuery.Cache { get; set; }
-
-		string IRangeQuery.TimeZone { get; set; }
-
-		string IRangeQuery.Format { get; set; }
-
-		PropertyPathMarker IRangeQuery.Field { get; set; }
-		
+		string IQuery.Name { get; set; }
 		bool IQuery.IsConditionless
 		{
 			get
@@ -100,8 +84,21 @@ namespace Nest
 					);
 			}
 		}
+		string IRangeQuery.GreaterThanOrEqualTo { get; set; }
+		string IRangeQuery.LowerThanOrEqualTo { get; set; }
+		string IRangeQuery.GreaterThan { get; set; }
+		string IRangeQuery.LowerThan { get; set; }
+		double? IRangeQuery.Boost { get; set; }
+		bool? IRangeQuery.Cache { get; set; }
+		string IRangeQuery.TimeZone { get; set; }
+		string IRangeQuery.Format { get; set; }
+		PropertyPathMarker IRangeQuery.Field { get; set; }
 
-		string IQuery.Name { get; set; }
+		public RangeQueryDescriptor<T> Name(string name)
+		{
+			Self.Name = name;
+			return this;
+		}
 
 		void IFieldNameQuery.SetFieldName(string fieldName)
 		{
@@ -113,11 +110,6 @@ namespace Nest
 			return this.Self.Field;
 		}
 
-		public RangeQueryDescriptor<T> Name(string name)
-		{
-			Self.Name = name;
-			return this;
-		}
 		public RangeQueryDescriptor<T> OnField(string field)
 		{
 			this.Self.Field = field;
@@ -145,11 +137,13 @@ namespace Nest
 			this.Self.GreaterThan = from.HasValue ? from.Value.ToString(CultureInfo.InvariantCulture) : null;
 			return this;
 		}
+
 		public RangeQueryDescriptor<T> GreaterOrEquals(double? from)
 		{
 			this.Self.GreaterThanOrEqualTo = from.HasValue ? from.Value.ToString(CultureInfo.InvariantCulture) : null;
 			return this;
 		}
+
 		public RangeQueryDescriptor<T> Lower(double? to)
 		{
 			this.Self.LowerThan = to.HasValue ? to.Value.ToString(CultureInfo.InvariantCulture) : null;
@@ -172,11 +166,13 @@ namespace Nest
 			this.Self.GreaterThanOrEqualTo = from;
 			return this;
 		}
+
 		public RangeQueryDescriptor<T> Lower(string to)
 		{
 			this.Self.LowerThan = to;
 			return this;
 		}
+
 		public RangeQueryDescriptor<T> LowerOrEquals(string to)
 		{
 			this.Self.LowerThanOrEqualTo = to;
@@ -218,7 +214,5 @@ namespace Nest
 			this.Self.Format = format;
 			return this;
 		}
-
-
 	}
 }

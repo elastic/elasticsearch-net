@@ -18,13 +18,15 @@ namespace Nest
 
 	public class GeoShapeEnvelopeQuery : PlainQuery, IGeoShapeEnvelopeQuery
 	{
+		public string Name { get; set; }
+		bool IQuery.IsConditionless { get { return false; } }
+		public PropertyPathMarker Field { get; set; }
+		public IEnvelopeGeoShape Shape { get; set; }
+
 		protected override void WrapInContainer(IQueryContainer container)
 		{
 			container.GeoShape = this;
 		}
-
-		public string Name { get; set; }
-		bool IQuery.IsConditionless { get { return false; } }
 
 		PropertyPathMarker IFieldNameQuery.GetFieldName()
 		{
@@ -35,20 +37,12 @@ namespace Nest
 		{
 			this.Field = fieldName;
 		}
-
-		public PropertyPathMarker Field { get; set; }
-
-		public IEnvelopeGeoShape Shape { get; set; }
 	}
 
 	public class GeoShapeEnvelopeQueryDescriptor<T> : IGeoShapeEnvelopeQuery where T : class
 	{
 		private IGeoShapeEnvelopeQuery Self { get { return this; } }
-
-		PropertyPathMarker IGeoShapeQuery.Field { get; set; }
-		
-		IEnvelopeGeoShape IGeoShapeEnvelopeQuery.Shape { get; set; }
-
+		string IQuery.Name { get; set; }
 		bool IQuery.IsConditionless
 		{
 			get
@@ -56,17 +50,8 @@ namespace Nest
 				return Self.Field.IsConditionless() || Self.Shape == null || !Self.Shape.Coordinates.HasAny();
 			}
 		}
-
-		string IQuery.Name { get; set; }
-
-		void IFieldNameQuery.SetFieldName(string fieldName)
-		{
-			Self.Field = fieldName;
-		}
-		PropertyPathMarker IFieldNameQuery.GetFieldName()
-		{
-			return Self.Field;
-		}
+		PropertyPathMarker IGeoShapeQuery.Field { get; set; }
+		IEnvelopeGeoShape IGeoShapeEnvelopeQuery.Shape { get; set; }
 
 		public GeoShapeEnvelopeQueryDescriptor<T> Name(string name)
 		{
@@ -92,6 +77,16 @@ namespace Nest
 				Self.Shape = new EnvelopeGeoShape();
 			Self.Shape.Coordinates = coordinates;
 			return this;
+		}
+
+		void IFieldNameQuery.SetFieldName(string fieldName)
+		{
+			Self.Field = fieldName;
+		}
+
+		PropertyPathMarker IFieldNameQuery.GetFieldName()
+		{
+			return Self.Field;
 		}
 	}
 }

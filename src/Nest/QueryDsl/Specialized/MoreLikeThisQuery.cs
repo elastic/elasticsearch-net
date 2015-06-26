@@ -77,13 +77,8 @@ namespace Nest
 
 	public class MoreLikeThisQuery : PlainQuery, IMoreLikeThisQuery
 	{
-		protected override void WrapInContainer(IQueryContainer container)
-		{
-			container.MoreLikeThis = this;
-		}
-
-		bool IQuery.IsConditionless { get { return false; } }
 		public string Name { get; set; }
+		bool IQuery.IsConditionless { get { return false; } }
 		public IEnumerable<PropertyPathMarker> Fields { get; set; }
 		public string LikeText { get; set; }
 		public double? TermMatchPercentage { get; set; }
@@ -101,46 +96,17 @@ namespace Nest
 		public IEnumerable<string> Ids { get; set; }
 		public IEnumerable<IMultiGetOperation> Documents { get; set; }
 		public bool? Include { get; set; }
+
+		protected override void WrapInContainer(IQueryContainer container)
+		{
+			container.MoreLikeThis = this;
+		}
 	}
 
 	public class MoreLikeThisQueryDescriptor<T> : IMoreLikeThisQuery where T : class
 	{
 		private IMoreLikeThisQuery Self { get { return this; }}
-
-		IEnumerable<PropertyPathMarker> IMoreLikeThisQuery.Fields { get; set; }
-		
-		string IMoreLikeThisQuery.LikeText { get; set; }
-
-		double? IMoreLikeThisQuery.TermMatchPercentage { get; set; }
-
-		string IMoreLikeThisQuery.MinimumShouldMatch { get; set; }
-		
-		IEnumerable<string> IMoreLikeThisQuery.StopWords { get; set; }
-		
-		int? IMoreLikeThisQuery.MinTermFrequency { get; set; }
-		
-		int? IMoreLikeThisQuery.MaxQueryTerms { get; set; }
-		
-		int? IMoreLikeThisQuery.MinDocumentFrequency { get; set; }
-		
-		int? IMoreLikeThisQuery.MaxDocumentFrequency { get; set; }
-		
-		int? IMoreLikeThisQuery.MinWordLength { get; set; }
-		
-		int? IMoreLikeThisQuery.MaxWordLength { get; set; }
-		
-		double? IMoreLikeThisQuery.BoostTerms { get; set; }
-		
-		double? IMoreLikeThisQuery.Boost { get; set; }
-		
-		string IMoreLikeThisQuery.Analyzer { get; set; }
-		
-		IEnumerable<string> IMoreLikeThisQuery.Ids { get; set; }
-
-		IEnumerable<IMultiGetOperation> IMoreLikeThisQuery.Documents { get; set; }
-
-		bool? IMoreLikeThisQuery.Include { get; set; }
-
+		string IQuery.Name { get; set; }
 		bool IQuery.IsConditionless
 		{
 			get
@@ -150,30 +116,49 @@ namespace Nest
 					&& (this.Self.Documents == null || !this.Self.Documents.Any());
 			}
 		}
-
-		string IQuery.Name { get; set; }
+		IEnumerable<PropertyPathMarker> IMoreLikeThisQuery.Fields { get; set; }
+		string IMoreLikeThisQuery.LikeText { get; set; }
+		double? IMoreLikeThisQuery.TermMatchPercentage { get; set; }
+		string IMoreLikeThisQuery.MinimumShouldMatch { get; set; }
+		IEnumerable<string> IMoreLikeThisQuery.StopWords { get; set; }
+		int? IMoreLikeThisQuery.MinTermFrequency { get; set; }
+		int? IMoreLikeThisQuery.MaxQueryTerms { get; set; }
+		int? IMoreLikeThisQuery.MinDocumentFrequency { get; set; }
+		int? IMoreLikeThisQuery.MaxDocumentFrequency { get; set; }
+		int? IMoreLikeThisQuery.MinWordLength { get; set; }
+		int? IMoreLikeThisQuery.MaxWordLength { get; set; }
+		double? IMoreLikeThisQuery.BoostTerms { get; set; }
+		double? IMoreLikeThisQuery.Boost { get; set; }
+		string IMoreLikeThisQuery.Analyzer { get; set; }
+		IEnumerable<string> IMoreLikeThisQuery.Ids { get; set; }
+		IEnumerable<IMultiGetOperation> IMoreLikeThisQuery.Documents { get; set; }
+		bool? IMoreLikeThisQuery.Include { get; set; }
 
 		public MoreLikeThisQueryDescriptor<T> Name(string name)
 		{
 			Self.Name = name;
 			return this;
 		}
+
 		public MoreLikeThisQueryDescriptor<T> OnFields(IEnumerable<string> fields)
 		{
 			this.Self.Fields = fields.Select(f=>(PropertyPathMarker)f);
 			return this;
 		}
+
 		public MoreLikeThisQueryDescriptor<T> OnFields(
 			params Expression<Func<T, object>>[] objectPaths)
 		{
 			this.Self.Fields = objectPaths.Select(e=>(PropertyPathMarker)e);
 			return this;
 		}
+
 		public MoreLikeThisQueryDescriptor<T> LikeText(string likeText)
 		{
 			this.Self.LikeText = likeText;
 			return this;
 		}
+
 		public MoreLikeThisQueryDescriptor<T> StopWords(IEnumerable<string> stopWords)
 		{
 			this.Self.StopWords = stopWords;
@@ -185,36 +170,43 @@ namespace Nest
 			this.Self.MaxQueryTerms = maxQueryTerms;
 			return this;
 		}
+
 		public MoreLikeThisQueryDescriptor<T> MinTermFrequency(int minTermFrequency)
 		{
 			this.Self.MinTermFrequency = minTermFrequency;
 			return this;
 		}
+
 		public MoreLikeThisQueryDescriptor<T> MinDocumentFrequency(int minDocumentFrequency)
 		{
 			this.Self.MinDocumentFrequency = minDocumentFrequency;
 			return this;
 		}
+
 		public MoreLikeThisQueryDescriptor<T> MaxDocumentFrequency(int maxDocumentFrequency)
 		{
 			this.Self.MaxDocumentFrequency = maxDocumentFrequency;
 			return this;
 		}
+
 		public MoreLikeThisQueryDescriptor<T> MinWordLength(int minWordLength)
 		{
 			this.Self.MinWordLength = minWordLength;
 			return this;
 		}
+
 		public MoreLikeThisQueryDescriptor<T> MaxWordLength(int maxWordLength)
 		{
 			this.Self.MaxWordLength = maxWordLength;
 			return this;
 		}
+
 		public MoreLikeThisQueryDescriptor<T> BoostTerms(double boostTerms)
 		{
 			this.Self.BoostTerms = boostTerms;
 			return this;
 		}
+
 		public MoreLikeThisQueryDescriptor<T> TermMatchPercentage(double termMatchPercentage)
 		{
 			this.Self.TermMatchPercentage = termMatchPercentage;
@@ -238,6 +230,7 @@ namespace Nest
 			this.Self.Boost = boost;
 			return this;
 		}
+
 		public MoreLikeThisQueryDescriptor<T> Analyzer(string analyzer)
 		{
 			this.Self.Analyzer = analyzer;
@@ -282,6 +275,83 @@ namespace Nest
 			var descriptor = getDocumentsSelector(new MoreLikeThisQueryDocumentsDescriptor<T>(false));
 			descriptor.ThrowIfNull("descriptor");
 			Self.Documents = descriptor.GetOperations;
+			return this;
+		}
+	}
+
+	public class MoreLikeThisQueryDocumentsDescriptor<T> where T : class
+	{
+		private readonly bool _allowExplicitIndex;
+		internal IList<IMultiGetOperation> GetOperations { get; set; }
+
+		public MoreLikeThisQueryDocumentsDescriptor(bool allowExplicitIndex = true)
+		{
+			_allowExplicitIndex = allowExplicitIndex;
+			this.GetOperations = new List<IMultiGetOperation>();
+		}
+
+		/// <summary>
+		/// Describe a get operation for the mlt_query docs property
+		/// </summary>
+		public MoreLikeThisQueryDocumentsDescriptor<T> Get(long id, Func<MultiGetOperationDescriptor<T>, MultiGetOperationDescriptor<T>> getSelector = null)
+		{
+			return this.Get(id.ToString(CultureInfo.InvariantCulture), getSelector);
+		}
+
+		/// <summary>
+		/// Describe a get operation for the mlt_query docs property
+		/// </summary>
+		public MoreLikeThisQueryDocumentsDescriptor<T> Get(string id, Func<MultiGetOperationDescriptor<T>, MultiGetOperationDescriptor<T>> getSelector = null) 
+		{
+			getSelector = getSelector ?? (s => s);
+			var descriptor = getSelector(new MultiGetOperationDescriptor<T>(_allowExplicitIndex).Id(id));
+			this.GetOperations.Add(descriptor);
+			return this;
+		}
+
+		/// <summary>
+		/// Describe a get operation for the mlt_query docs property
+		/// </summary>
+		/// <typeparam name="TDocument">Use a different type to lookup</typeparam>
+		public MoreLikeThisQueryDocumentsDescriptor<T> Get<TDocument>(long id, Func<MultiGetOperationDescriptor<TDocument>, MultiGetOperationDescriptor<TDocument>> getSelector = null)
+			where TDocument : class
+		{
+			return this.Get<TDocument>(id.ToString(CultureInfo.InvariantCulture), getSelector);
+		}
+		
+		/// <summary>
+		/// Describe a get operation for the mlt_query docs property
+		/// </summary>
+		/// <typeparam name="TDocument">Use a different type to lookup</typeparam>
+		public MoreLikeThisQueryDocumentsDescriptor<T> Get<TDocument>(string id, Func<MultiGetOperationDescriptor<TDocument>, MultiGetOperationDescriptor<TDocument>> getSelector = null) 
+			where TDocument : class
+		{
+			getSelector = getSelector ?? (s => s);
+			var descriptor = getSelector(new MultiGetOperationDescriptor<TDocument>(_allowExplicitIndex).Id(id));
+			this.GetOperations.Add(descriptor);
+			return this;
+
+		}
+
+		public MoreLikeThisQueryDocumentsDescriptor<T> Get<TDocument>(Func<MultiGetOperationDescriptor<TDocument>, MultiGetOperationDescriptor<TDocument>> getSelector)
+			where TDocument : class
+		{
+			getSelector = getSelector ?? (s => s);
+			var descriptor = getSelector(new MultiGetOperationDescriptor<TDocument>(_allowExplicitIndex));
+			this.GetOperations.Add(descriptor);
+			return this;
+		}
+
+		public MoreLikeThisQueryDocumentsDescriptor<T> Document<TDocument>(TDocument document, string index = null, string type = null)
+			where TDocument : class
+		{
+			var descriptor = new MultiGetOperationDescriptor<TDocument>(_allowExplicitIndex)
+				.Document(document);
+			if (!string.IsNullOrEmpty(index))
+				descriptor.Index(index);
+			if (!string.IsNullOrEmpty(type))
+				descriptor.Type(type);
+			this.GetOperations.Add(descriptor);
 			return this;
 		}
 	}

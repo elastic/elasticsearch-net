@@ -14,28 +14,45 @@ namespace Nest
 		TypeNameMarker Value { get; set; }
 	}
 
-	public class TypeFilter : PlainQuery, ITypeQuery
+	public class TypeQuery : PlainQuery, ITypeQuery
 	{
+		public string Name { get; set; }
+		bool IQuery.IsConditionless { get { return QueryCondition.IsConditionless(this); } }
+		public TypeNameMarker Value { get; set; }
+
 		protected override void WrapInContainer(IQueryContainer container)
 		{
 			container.Type = this;
 		}
-
-		public TypeNameMarker Value { get; set; }
-
-		public string Name { get; set; }
-
-		bool IQuery.IsConditionless { get { return QueryCondition.IsConditionless(this); } }
 	}
 	
-	// TODO: finish implementing
 	public class TypeQueryDescriptor : ITypeQuery
 	{
+		private ITypeQuery Self { get { return this; } }
+
 		string IQuery.Name { get; set; }
 
 		bool IQuery.IsConditionless { get { return QueryCondition.IsConditionless(this); } }
 
 		[JsonProperty(PropertyName = "value")]
 		TypeNameMarker ITypeQuery.Value { get; set; }
+
+		public TypeQueryDescriptor Name(string name)
+		{
+			Self.Name = name;
+			return this;
+		}
+
+		public TypeQueryDescriptor Value<T>()
+		{
+			Self.Value = typeof(T);
+			return this;
+		}
+
+		public TypeQueryDescriptor Value(string type)
+		{
+			Self.Value = type;
+			return this;
+		}
 	}
 }

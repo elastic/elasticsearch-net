@@ -31,9 +31,15 @@ namespace Nest
 		GeoExecution? Type { get; set; }
 	}
 	
-	// TODO : Finish implementing
 	public class GeoBoundingBoxQuery : PlainQuery, IGeoBoundingBoxQuery
 	{
+		public string Name { get; set; }
+		bool IQuery.IsConditionless { get { return GeoBoundingBoxCondition.IsConditionless(this); } }
+		public PropertyPathMarker Field { get; set; }
+		public string TopLeft { get; set; }
+		public string BottomRight { get; set; }
+		public GeoExecution? Type { get; set; }
+
 		protected override void WrapInContainer(IQueryContainer container)
 		{
 			container.GeoBoundingBox = this;
@@ -48,29 +54,16 @@ namespace Nest
 		{
 			this.Field = fieldName;
 		}
-
-		public string Name { get; set; }
-		bool IQuery.IsConditionless { get { return GeoBoundingBoxCondition.IsConditionless(this); } }
-		public PropertyPathMarker Field { get; set; }
-		public string TopLeft { get; set; }
-		public string BottomRight { get; set; }
-		public GeoExecution? Type { get; set; }
 	}
 
 	public class GeoBoundingBoxQueryDescriptor<T> : IGeoBoundingBoxQuery where T : class
 	{
 		private IGeoBoundingBoxQuery Self { get { return this; } }
-
-		bool IQuery.IsConditionless { get { return GeoBoundingBoxCondition.IsConditionless(this); } }
-
 		string IQuery.Name { get; set; }
-
+		bool IQuery.IsConditionless { get { return GeoBoundingBoxCondition.IsConditionless(this); } }
 		PropertyPathMarker IGeoBoundingBoxQuery.Field { get; set; }
-
 		string IGeoBoundingBoxQuery.TopLeft { get; set; }
-
 		string IGeoBoundingBoxQuery.BottomRight { get; set; }
-
 		GeoExecution? IGeoBoundingBoxQuery.Type { get; set; }
 
 		public GeoBoundingBoxQueryDescriptor<T> Name (string name)

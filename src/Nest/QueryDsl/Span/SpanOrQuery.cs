@@ -14,30 +14,25 @@ namespace Nest
 		IEnumerable<ISpanQuery> Clauses { get; set; }
         [JsonProperty(PropertyName = "boost")]
         double? Boost { get; set; }
-
 	}
 
 	public class SpanOrQuery : PlainQuery, ISpanOrQuery
 	{
-		protected override void WrapInContainer(IQueryContainer container)
-		{
-			container.SpanOr = this;
-		}
-
 		public string Name { get; set; }
 		bool IQuery.IsConditionless { get { return false; } }
 		public IEnumerable<ISpanQuery> Clauses { get; set; }
         public double? Boost { get; set; }
+
+		protected override void WrapInContainer(IQueryContainer container)
+		{
+			container.SpanOr = this;
+		}
 	}
 
 	public class SpanOrQueryDescriptor<T> : ISpanOrQuery where T : class
 	{
 		private ISpanOrQuery Self { get { return this; } }
-
-		IEnumerable<ISpanQuery> ISpanOrQuery.Clauses { get; set; }
-
-        double? ISpanOrQuery.Boost { get; set; }
-
+		string IQuery.Name { get; set; }
 		bool IQuery.IsConditionless
 		{
 			get
@@ -46,8 +41,8 @@ namespace Nest
 					|| Self.Clauses.Cast<IQuery>().All(q => q.IsConditionless);
 			}
 		}
-
-		string IQuery.Name { get; set; }
+		IEnumerable<ISpanQuery> ISpanOrQuery.Clauses { get; set; }
+        double? ISpanOrQuery.Boost { get; set; }
 
 		public SpanOrQueryDescriptor<T> Name(string name)
 		{

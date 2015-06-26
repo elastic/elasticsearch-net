@@ -687,7 +687,7 @@ namespace Nest
 		/// </summary>
 		public QueryContainer Ids(IEnumerable<string> values)
 		{
-			var ids = new IdsQueryDescriptor { Values = values };
+			var ids = new IdsQuery { Values = values };
 			return this.New(ids, q => q.Ids = ids);
 		}
 
@@ -699,7 +699,7 @@ namespace Nest
 		public QueryContainer Ids(string type, IEnumerable<string> values)
 		{
 			type.ThrowIfNullOrEmpty("type");
-			var ids = new IdsQueryDescriptor { Values = values, Type = new[] { type } };
+			var ids = new IdsQuery { Values = values, Type = new[] { type } };
 			return this.New(ids, q => q.Ids = ids);
 		}
 
@@ -710,7 +710,7 @@ namespace Nest
 		/// </summary>
 		public QueryContainer Ids(IEnumerable<string> types, IEnumerable<string> values)
 		{
-			var ids = new IdsQueryDescriptor { Values = values, Type = types };
+			var ids = new IdsQuery { Values = values, Type = types };
 			return this.New(ids, q => q.Ids = ids);
 		}
 
@@ -719,9 +719,9 @@ namespace Nest
 		/// Note, this filter does not require the _id field to be indexed since 
 		/// it works using the _uid field.
 		/// </summary>
-		public QueryContainer Ids(Func<IdsQueryProperDescriptor, IdsQueryProperDescriptor> selector)
+		public QueryContainer Ids(Func<IdsQueryDescriptor, IdsQueryDescriptor> selector)
 		{
-			var ids = selector(new IdsQueryProperDescriptor());
+			var ids = selector(new IdsQueryDescriptor());
 			return this.New(ids, c => c.Ids = ids);
 		}
 
@@ -846,9 +846,9 @@ namespace Nest
 
 		}
 
-		public QueryContainer Template(Action<TemplateQueryDescriptor> selector)
+		public QueryContainer Template(Action<TemplateQueryDescriptor<T>> selector)
 		{
-			var query = new TemplateQueryDescriptor();
+			var query = new TemplateQueryDescriptor<T>();
 			selector(query);
 			return this.New(query, q => q.Template = query);
 		}

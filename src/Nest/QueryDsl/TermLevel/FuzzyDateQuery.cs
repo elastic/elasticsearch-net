@@ -16,15 +16,8 @@ namespace Nest
 	
 	public class FuzzyDateQuery : PlainQuery, IFuzzyDateQuery
 	{
-		protected override void WrapInContainer(IQueryContainer container)
-		{
-			container.Fuzzy = this;
-		}
 		public string Name { get; set; }
 		bool IQuery.IsConditionless { get { return false; } }
-		PropertyPathMarker IFieldNameQuery.GetFieldName() { return this.Field; }
-		void IFieldNameQuery.SetFieldName(string fieldName) { this.Field = fieldName; }
-
 		public PropertyPathMarker Field { get; set; }
 		public double? Boost { get; set; }
 		public string Fuzziness { get; set; }
@@ -33,30 +26,27 @@ namespace Nest
 		public bool? Transpositions { get; set; }
 		public bool? UnicodeAware { get; set; }
 		public DateTime? Value { get; set; }
+
+		protected override void WrapInContainer(IQueryContainer container)
+		{
+			container.Fuzzy = this;
+		}
+
+		PropertyPathMarker IFieldNameQuery.GetFieldName()
+		{
+			return this.Field;
+		}
+
+		void IFieldNameQuery.SetFieldName(string fieldName)
+		{
+			this.Field = fieldName;
+		}
 	}
 
 	public class FuzzyDateQueryDescriptor<T> : IFuzzyDateQuery where T : class
 	{
 		private IFuzzyDateQuery Self { get { return this; } }
-
-		PropertyPathMarker IFuzzyQuery.Field { get; set; }
-		
-		double? IFuzzyQuery.Boost { get; set; }
-		
-		int? IFuzzyQuery.MaxExpansions { get; set; }
-		
-		string IFuzzyQuery.Fuzziness { get; set; }
-		
-		DateTime? IFuzzyDateQuery.Value { get; set; }
-
-		bool? IFuzzyQuery.Transpositions { get; set; }
-
-		bool? IFuzzyQuery.UnicodeAware { get; set; }
-
-		RewriteMultiTerm? IFuzzyQuery.Rewrite { get; set; }
-		
 		string IQuery.Name { get; set; }
-
 		bool IQuery.IsConditionless
 		{
 			get
@@ -64,17 +54,15 @@ namespace Nest
 				return Self.Field.IsConditionless() || Self.Value == null;
 			}
 		}
-
-		void IFieldNameQuery.SetFieldName(string fieldName)
-		{
-			Self.Field = fieldName;
-		}
-
-		PropertyPathMarker IFieldNameQuery.GetFieldName()
-		{
-			return Self.Field;
-		}
-
+		PropertyPathMarker IFuzzyQuery.Field { get; set; }
+		double? IFuzzyQuery.Boost { get; set; }
+		int? IFuzzyQuery.MaxExpansions { get; set; }
+		string IFuzzyQuery.Fuzziness { get; set; }
+		DateTime? IFuzzyDateQuery.Value { get; set; }
+		bool? IFuzzyQuery.Transpositions { get; set; }
+		bool? IFuzzyQuery.UnicodeAware { get; set; }
+		RewriteMultiTerm? IFuzzyQuery.Rewrite { get; set; }
+		
 		public FuzzyDateQueryDescriptor<T> Name(string name)
 		{
 			Self.Name = name;
@@ -134,6 +122,16 @@ namespace Nest
 		{
 			Self.Value = value;
 			return this;
+		}
+
+		void IFieldNameQuery.SetFieldName(string fieldName)
+		{
+			Self.Field = fieldName;
+		}
+
+		PropertyPathMarker IFieldNameQuery.GetFieldName()
+		{
+			return Self.Field;
 		}
 	}
 }

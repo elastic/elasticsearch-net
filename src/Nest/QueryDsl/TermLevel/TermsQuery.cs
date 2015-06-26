@@ -22,11 +22,6 @@ namespace Nest
 
 	public class TermsQuery : PlainQuery, ITermsQuery
 	{
-		protected override void WrapInContainer(IQueryContainer container)
-		{
-			container.Terms = this;
-		}
-
 		public string Name { get; set; }
 		bool IQuery.IsConditionless { get { return false; } }
 		public PropertyPathMarker Field { get; set; }
@@ -35,6 +30,11 @@ namespace Nest
 		public IEnumerable<object> Terms { get; set; }
 		public IExternalFieldDeclaration ExternalField { get; set; }
 		public double? Boost { get; set; }
+
+		protected override void WrapInContainer(IQueryContainer container)
+		{
+			container.Terms = this;
+		}
 	}
 
 	/// <summary>
@@ -46,13 +46,7 @@ namespace Nest
 	public class TermsQueryDescriptor<T, K> : ITermsQuery where T : class
 	{
 		private ITermsQuery Self { get { return this; }}
-		PropertyPathMarker ITermsQuery.Field { get; set; }
-		string ITermsQuery.MinimumShouldMatch { get; set; }
-		bool? ITermsQuery.DisableCoord { get; set; }
-		IEnumerable<object> ITermsQuery.Terms { get; set; }
-		IExternalFieldDeclaration ITermsQuery.ExternalField { get; set; }
-		double? ITermsQuery.Boost { get; set; }
-
+		string IQuery.Name { get; set; }
 		bool IQuery.IsConditionless
 		{
 			get
@@ -61,14 +55,19 @@ namespace Nest
 					|| (!Self.Terms.HasAny() && Self.ExternalField == null);
 			}
 		}
-
-		string IQuery.Name { get; set; }
+		PropertyPathMarker ITermsQuery.Field { get; set; }
+		string ITermsQuery.MinimumShouldMatch { get; set; }
+		bool? ITermsQuery.DisableCoord { get; set; }
+		IEnumerable<object> ITermsQuery.Terms { get; set; }
+		IExternalFieldDeclaration ITermsQuery.ExternalField { get; set; }
+		double? ITermsQuery.Boost { get; set; }
 
 		public TermsQueryDescriptor<T, K> Name(string name)
 		{
 			Self.Name = name;
 			return this;
 		}
+
 		public TermsQueryDescriptor<T, K> Boost(double boost)
 		{
 			Self.Boost = boost;
@@ -109,12 +108,12 @@ namespace Nest
 			Self.MinimumShouldMatch = minMatch;
 			return this;
 		}
+
 		public TermsQueryDescriptor<T, K> MinimumShouldMatch(int minMatch)
 		{
 			Self.MinimumShouldMatch = minMatch.ToString(CultureInfo.InvariantCulture);
 			return this;
 		}
-
 
 		public TermsQueryDescriptor<T, K> DisableCoord()
 		{
@@ -122,7 +121,6 @@ namespace Nest
 			return this;
 		}
 
-		
 		public TermsQueryDescriptor<T, K> Terms(IEnumerable<string> terms)
 		{
 			if (terms.HasAny())
@@ -131,6 +129,7 @@ namespace Nest
 			Self.Terms = terms;
 			return this;
 		}
+
 		public TermsQueryDescriptor<T, K> Terms(IEnumerable<K> terms)
 		{
 			if (terms.HasAny())
@@ -139,6 +138,5 @@ namespace Nest
 			Self.Terms = terms.Cast<object>();
 			return this;
 		}
-
 	}
 }

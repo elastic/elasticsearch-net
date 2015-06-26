@@ -16,15 +16,8 @@ namespace Nest
 
 	public class FuzzyNumericQuery : PlainQuery, IFuzzyNumericQuery
 	{
-		protected override void WrapInContainer(IQueryContainer container)
-		{
-			container.Fuzzy = this;
-		}
 		public string Name { get; set; }
 		bool IQuery.IsConditionless { get { return false; } }
-		PropertyPathMarker IFieldNameQuery.GetFieldName() { return this.Field; }
-		void IFieldNameQuery.SetFieldName(string fieldName) { this.Field = fieldName; }
-
 		public PropertyPathMarker Field { get; set; }
 		public double? Boost { get; set; }
 		public string Fuzziness { get; set; }
@@ -33,30 +26,27 @@ namespace Nest
 		public bool? Transpositions { get; set; }
 		public bool? UnicodeAware { get; set; }
 		public double? Value { get; set; }
+
+		protected override void WrapInContainer(IQueryContainer container)
+		{
+			container.Fuzzy = this;
+		}
+
+		PropertyPathMarker IFieldNameQuery.GetFieldName()
+		{
+			return this.Field;
+		}
+
+		void IFieldNameQuery.SetFieldName(string fieldName)
+		{
+			this.Field = fieldName;
+		}
 	}
 
 	public class FuzzyNumericQueryDescriptor<T> : IFuzzyNumericQuery where T : class
 	{
 		private IFuzzyNumericQuery Self { get { return this; } }
-
-		PropertyPathMarker IFuzzyQuery.Field { get; set; }
-		
-		double? IFuzzyQuery.Boost { get; set; }
-		
-		int? IFuzzyQuery.MaxExpansions { get; set; }
-		
-		string IFuzzyQuery.Fuzziness { get; set; }
-	
-		double? IFuzzyNumericQuery.Value { get; set; }
-
-		bool? IFuzzyQuery.Transpositions { get; set; }
-
-		bool? IFuzzyQuery.UnicodeAware { get; set; }
-
-		RewriteMultiTerm? IFuzzyQuery.Rewrite { get; set; }
-
 		string IQuery.Name { get; set; }
-
 		bool IQuery.IsConditionless
 		{
 			get
@@ -64,6 +54,14 @@ namespace Nest
 				return Self.Field.IsConditionless() || Self.Value == null;
 			}
 		}
+		PropertyPathMarker IFuzzyQuery.Field { get; set; }
+		double? IFuzzyQuery.Boost { get; set; }
+		int? IFuzzyQuery.MaxExpansions { get; set; }
+		string IFuzzyQuery.Fuzziness { get; set; }
+		double? IFuzzyNumericQuery.Value { get; set; }
+		bool? IFuzzyQuery.Transpositions { get; set; }
+		bool? IFuzzyQuery.UnicodeAware { get; set; }
+		RewriteMultiTerm? IFuzzyQuery.Rewrite { get; set; }
 
 		public FuzzyNumericQueryDescriptor<T> Name(string name)
 		{
@@ -75,6 +73,7 @@ namespace Nest
 		{
 			Self.Field = fieldName;
 		}
+
 		PropertyPathMarker IFieldNameQuery.GetFieldName()
 		{
 			return Self.Field;
@@ -85,21 +84,25 @@ namespace Nest
 			Self.Field = field;
 			return this;
 		}
+
 		public FuzzyNumericQueryDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
 		{
 			Self.Field = objectPath;
 			return this;
 		}
+
 		public FuzzyNumericQueryDescriptor<T> Boost(double boost)
 		{
 			Self.Boost = boost;
 			return this;
 		}
+
 		public FuzzyNumericQueryDescriptor<T> Fuzziness(double fuzziness)
 		{
 			Self.Fuzziness = fuzziness.ToString(CultureInfo.InvariantCulture);
 			return this;
 		}
+
 		public FuzzyNumericQueryDescriptor<T> Fuzziness(string fuzziness)
 		{
 			Self.Fuzziness = fuzziness;
@@ -117,16 +120,19 @@ namespace Nest
 			Self.Transpositions = enable;
 			return this;
 		}
+
 		public FuzzyNumericQueryDescriptor<T> UnicodeAware(bool enable = true)
 		{
 			Self.UnicodeAware = enable;
 			return this;
 		}
+
 		public FuzzyNumericQueryDescriptor<T> Rewrite(RewriteMultiTerm rewrite)
 		{
 			Self.Rewrite = rewrite;
 			return this;
 		}
+
 		public FuzzyNumericQueryDescriptor<T> Value(int? value)
 		{
 			Self.Value = value;

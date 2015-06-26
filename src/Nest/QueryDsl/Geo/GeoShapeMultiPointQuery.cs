@@ -18,13 +18,15 @@ namespace Nest
 
 	public class GeoShapeMultiPointQuery : PlainQuery, IGeoShapeMultiPointQuery
 	{
+		public string Name { get; set; }
+		bool IQuery.IsConditionless { get { return false; } }
+		public PropertyPathMarker Field { get; set; }
+		public IMultiPointGeoShape Shape { get; set; }
+
 		protected override void WrapInContainer(IQueryContainer container)
 		{
 			container.GeoShape = this;
 		}
-
-		public string Name { get; set; }
-		bool IQuery.IsConditionless { get { return false; } }
 
 		PropertyPathMarker IFieldNameQuery.GetFieldName()
 		{
@@ -35,22 +37,12 @@ namespace Nest
 		{
 			this.Field = fieldName;
 		}
-
-		public PropertyPathMarker Field { get; set; }
-
-		public IMultiPointGeoShape Shape { get; set; }
 	}
 
 	public class GeoShapeMultiPointQueryDescriptor<T> : IGeoShapeMultiPointQuery where T : class
 	{
 		private IGeoShapeMultiPointQuery Self { get { return this; }}
-
-		PropertyPathMarker IGeoShapeQuery.Field { get; set; }
-		
-		IMultiPointGeoShape IGeoShapeMultiPointQuery.Shape { get; set; }
-			
 		string IQuery.Name { get; set; }
-
 		bool IQuery.IsConditionless
 		{
 			get
@@ -58,29 +50,24 @@ namespace Nest
 				return ((IGeoShapeQuery)this).Field.IsConditionless() || Self.Shape == null || !Self.Shape.Coordinates.HasAny();
 			}
 		}
-
-		void IFieldNameQuery.SetFieldName(string fieldName)
-		{
-			((IGeoShapeQuery)this).Field = fieldName;
-		}
-		PropertyPathMarker IFieldNameQuery.GetFieldName()
-		{
-			return ((IGeoShapeQuery)this).Field;
-		}
+		PropertyPathMarker IGeoShapeQuery.Field { get; set; }
+		IMultiPointGeoShape IGeoShapeMultiPointQuery.Shape { get; set; }
 
 		public GeoShapeMultiPointQueryDescriptor<T> Name(string name)
 		{
 			Self.Name = name;
 			return this;
 		}
+
 		public GeoShapeMultiPointQueryDescriptor<T> OnField(string field)
 		{
-			((IGeoShapeQuery)this).Field = field;
+			Self.Field = field;
 			return this;
 		}
+
 		public GeoShapeMultiPointQueryDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
 		{
-			((IGeoShapeQuery)this).Field = objectPath;
+			Self.Field = objectPath;
 			return this;
 		}
 
@@ -90,6 +77,16 @@ namespace Nest
 				Self.Shape = new MultiPointGeoShape();
 			Self.Shape.Coordinates = coordinates;
 			return this;
+		}
+
+		void IFieldNameQuery.SetFieldName(string fieldName)
+		{
+			Self.Field = fieldName;
+		}
+
+		PropertyPathMarker IFieldNameQuery.GetFieldName()
+		{
+			return Self.Field;
 		}
 	}
 }

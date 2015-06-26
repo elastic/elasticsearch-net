@@ -22,30 +22,22 @@ namespace Nest
 
 	public class SpanFirstQuery : PlainQuery, ISpanFirstQuery
 	{
+		public string Name { get; set; }
+		bool IQuery.IsConditionless { get { return false; } }
+		public ISpanQuery Match { get; set; }
+		public int? End { get; set; }
+	    public double? Boost { get; set; }
+
 		protected override void WrapInContainer(IQueryContainer container)
 		{
 			container.SpanFirst = this;
 		}
-
-		public string Name { get; set; }
-		bool IQuery.IsConditionless { get { return false; } }
-
-		public ISpanQuery Match { get; set; }
-		public int? End { get; set; }
-	    public double? Boost { get; set; }
 	}
 
 	public class SpanFirstQueryDescriptor<T> : ISpanFirstQuery where T : class
 	{
 		private ISpanFirstQuery Self { get { return this; }}
-
-		ISpanQuery ISpanFirstQuery.Match { get; set; }
-
-		int? ISpanFirstQuery.End { get; set; }
-        double? ISpanFirstQuery.Boost { get; set; }
-
 		string IQuery.Name { get; set; }
-
 		bool IQuery.IsConditionless
 		{
 			get
@@ -53,7 +45,10 @@ namespace Nest
 				var query = Self.Match as IQuery;
 				return query != null && (Self.Match == null || query.IsConditionless);
 			}
-		}
+		}	
+		ISpanQuery ISpanFirstQuery.Match { get; set; }
+		int? ISpanFirstQuery.End { get; set; }
+        double? ISpanFirstQuery.Boost { get; set; }
 
 		public SpanFirstQueryDescriptor<T> Name(string name)
 		{
@@ -70,6 +65,7 @@ namespace Nest
 			Self.Match = span;
 			return this;
 		}
+
 		public SpanFirstQueryDescriptor<T> MatchTerm(string field, string value, double? Boost = null)
 		{
 			var span = new SpanQuery<T>();
@@ -77,12 +73,14 @@ namespace Nest
 			Self.Match = span;
 			return this;
 		}
+
 		public SpanFirstQueryDescriptor<T> Match(Func<SpanQuery<T>, SpanQuery<T>> selector)
 		{
 			selector.ThrowIfNull("selector");
 			Self.Match = selector(new SpanQuery<T>());
 			return this;
 		}
+
 		public SpanFirstQueryDescriptor<T> End(int end)
 		{
 			Self.End = end;
@@ -94,6 +92,5 @@ namespace Nest
             Self.Boost = boost;
             return this;
         }
-
 	}
 }

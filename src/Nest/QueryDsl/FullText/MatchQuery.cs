@@ -61,24 +61,8 @@ namespace Nest
 	
 	public class MatchQuery : PlainQuery, IMatchQuery
 	{
-		protected override void WrapInContainer(IQueryContainer container)
-		{
-			container.Match = this;
-		}
-
-		bool IQuery.IsConditionless { get { return false; } }
-
-		PropertyPathMarker IFieldNameQuery.GetFieldName()
-		{
-			return this.Field;
-		}
-
-		void IFieldNameQuery.SetFieldName(string fieldName)
-		{
-			this.Field = fieldName;
-		}
-
 		public string Name { get; set; }
+		bool IQuery.IsConditionless { get { return false; } }
 		public string Type { get; set; }
 		public string Query { get; set; }
 		public string Analyzer { get; set; }
@@ -94,45 +78,29 @@ namespace Nest
 		public string MinimumShouldMatch { get; set; }
 		public Operator? Operator { get; set; }
 		public PropertyPathMarker Field { get; set; }
-	}
 
+		protected override void WrapInContainer(IQueryContainer container)
+		{
+			container.Match = this;
+		}
+
+		PropertyPathMarker IFieldNameQuery.GetFieldName()
+		{
+			return this.Field;
+		}
+
+		void IFieldNameQuery.SetFieldName(string fieldName)
+		{
+			this.Field = fieldName;
+		}
+	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class MatchQueryDescriptor<T> : IMatchQuery where T : class
 	{
 		protected virtual string MatchQueryType { get { return null; } }
-
 		private IMatchQuery Self { get { return this; } }
-
-		string IMatchQuery.Type { get { return MatchQueryType; } }
-
-		string IMatchQuery.Query { get; set; }
-
-		string IMatchQuery.Analyzer { get; set; }
-
-		string IMatchQuery.MinimumShouldMatch { get; set; }
-
-		RewriteMultiTerm? IMatchQuery.Rewrite { get; set; }
-
-		IFuzziness IMatchQuery.Fuzziness { get; set; }
-		bool? IMatchQuery.FuzzyTranspositions { get; set; }
-
-		double? IMatchQuery.CutoffFrequency { get; set; }
-
-		int? IMatchQuery.PrefixLength { get; set; }
-
-		int? IMatchQuery.MaxExpansions { get; set; }
-
-		int? IMatchQuery.Slop { get; set; }
-
-		double? IMatchQuery.Boost { get; set; }
-
-		bool? IMatchQuery.Lenient { get; set; }
-		
-		Operator? IMatchQuery.Operator { get; set; }
-
-		PropertyPathMarker IMatchQuery.Field { get; set; }
-
+		string IQuery.Name { get; set; }
 		bool IQuery.IsConditionless
 		{
 			get
@@ -140,12 +108,27 @@ namespace Nest
 				return Self.Field.IsConditionless() || Self.Query.IsNullOrEmpty();
 			}
 		}
-		string IQuery.Name { get; set; }
+		string IMatchQuery.Type { get { return MatchQueryType; } }
+		string IMatchQuery.Query { get; set; }
+		string IMatchQuery.Analyzer { get; set; }
+		string IMatchQuery.MinimumShouldMatch { get; set; }
+		RewriteMultiTerm? IMatchQuery.Rewrite { get; set; }
+		IFuzziness IMatchQuery.Fuzziness { get; set; }
+		bool? IMatchQuery.FuzzyTranspositions { get; set; }
+		double? IMatchQuery.CutoffFrequency { get; set; }
+		int? IMatchQuery.PrefixLength { get; set; }
+		int? IMatchQuery.MaxExpansions { get; set; }
+		int? IMatchQuery.Slop { get; set; }
+		double? IMatchQuery.Boost { get; set; }
+		bool? IMatchQuery.Lenient { get; set; }
+		Operator? IMatchQuery.Operator { get; set; }
+		PropertyPathMarker IMatchQuery.Field { get; set; }
 
 		void IFieldNameQuery.SetFieldName(string fieldName)
 		{
 			Self.Field = fieldName;
 		}
+
 		PropertyPathMarker IFieldNameQuery.GetFieldName()
 		{
 			return Self.Field;
@@ -156,6 +139,7 @@ namespace Nest
 			Self.Name = name;
 			return this;
 		}
+
 		public MatchQueryDescriptor<T> OnField(string field)
 		{
 			Self.Field = field;
@@ -191,6 +175,7 @@ namespace Nest
 			Self.Fuzziness = Nest.Fuzziness.Ratio(ratio);
 			return this;
 		}
+
 		public MatchQueryDescriptor<T> Fuzziness()
 		{
 			Self.Fuzziness = Nest.Fuzziness.Auto;
@@ -202,7 +187,6 @@ namespace Nest
 			Self.Fuzziness = Nest.Fuzziness.EditDistance(editDistance);
 			return this;
 		}
-		
 
 		public MatchQueryDescriptor<T> FuzzyTranspositions(bool fuzzyTranspositions = true)
 		{
@@ -257,6 +241,5 @@ namespace Nest
 			Self.Operator = op;
 			return this;
 		}
-	
 	}
 }

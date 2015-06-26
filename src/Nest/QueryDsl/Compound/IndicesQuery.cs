@@ -56,31 +56,23 @@ namespace Nest
 
 	public class IndicesQuery : PlainQuery, IIndicesQuery
 	{
-		protected override void WrapInContainer(IQueryContainer container)
-		{
-			container.Indices = this;
-		}
-
-		bool IQuery.IsConditionless { get { return false; } }
 		public string Name { get; set; }
+		bool IQuery.IsConditionless { get { return false; } }
 		public NestedScore? Score { get; set; }
 		public IQueryContainer Query { get; set; }
 		public IQueryContainer NoMatchQuery { get; set; }
 		public IEnumerable<string> Indices { get; set; }
+
+		protected override void WrapInContainer(IQueryContainer container)
+		{
+			container.Indices = this;
+		}
 	}
 
 	public class IndicesQueryDescriptor<T> : IIndicesQuery where T : class
 	{
 		private IIndicesQuery Self { get { return this; }}
-
-		NestedScore? IIndicesQuery.Score { get; set; }
-
-		IQueryContainer IIndicesQuery.Query { get; set; }
-
-		IQueryContainer IIndicesQuery.NoMatchQuery { get; set; }
-
-		IEnumerable<string> IIndicesQuery.Indices { get; set; }
-
+		string IQuery.Name { get; set; }
 		bool IQuery.IsConditionless
 		{
 			get
@@ -88,8 +80,10 @@ namespace Nest
 				return Self.NoMatchQuery == null && Self.Query == null;
 			}
 		}
-
-		string IQuery.Name { get; set; }
+		NestedScore? IIndicesQuery.Score { get; set; }
+		IQueryContainer IIndicesQuery.Query { get; set; }
+		IQueryContainer IIndicesQuery.NoMatchQuery { get; set; }
+		IEnumerable<string> IIndicesQuery.Indices { get; set; }
 
 		public IndicesQueryDescriptor<T> Name(string name)
 		{
@@ -135,6 +129,7 @@ namespace Nest
 			Self.NoMatchQuery = q;
 			return this;
 		}
+
 		public IndicesQueryDescriptor<T> NoMatchQuery<K>(Func<QueryDescriptor<K>, IQueryContainer> querySelector) where K : class
 		{
 			var qd = new QueryDescriptor<K>();
@@ -145,6 +140,7 @@ namespace Nest
 			Self.NoMatchQuery = q;
 			return this;
 		}
+
 		public IndicesQueryDescriptor<T> Indices(IEnumerable<string> indices)
 		{
 			Self.Indices = indices;

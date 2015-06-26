@@ -81,7 +81,7 @@ namespace Nest.Tests.Unit.ObjectInitializer.Search
 					Property.Path<ElasticsearchProject>(p=>p.Name)
 				},
 				ScriptFields = new FluentDictionary<string, IScriptQuery>()
-					.Add("script_field_name", new ScriptFilter
+					.Add("script_field_name", new ScriptQuery
 					{
 						Script = "doc['loc'].value * multiplier",
 						Params = new Dictionary<string, object>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
 using System.Globalization;
+using System.Linq.Expressions;
 
 namespace Nest
 {
@@ -34,9 +35,20 @@ namespace Nest
 		bool? IncludeUpper { get; set; }
 	}
 
-	// TODO : Finish implementing
-	public class GeoDistanceRangeFilter : PlainQuery, IGeoDistanceRangeQuery
+	public class GeoDistanceRangeQuery : PlainQuery, IGeoDistanceRangeQuery
 	{
+		public string Name { get; set; }
+		public bool IsConditionless { get { return QueryCondition.IsConditionless(this);  } }
+		public PropertyPathMarker Field { get; set; }
+		public string Location { get; set; }
+		public object From { get; set; }
+		public object To { get; set; }
+		public GeoUnit? Unit { get; set; }
+		public GeoDistance? DistanceType { get; set; }
+		public GeoOptimizeBBox? OptimizeBoundingBox { get; set; }
+		public bool? IncludeLower { get; set; }
+		public bool? IncludeUpper { get; set; }
+
 		protected override void WrapInContainer(IQueryContainer container)
 		{
 			container.GeoDistanceRange = this;
@@ -51,24 +63,13 @@ namespace Nest
 		{
 			Field = fieldName;
 		}
-
-		public PropertyPathMarker Field { get; set; }
-		public string Location { get; set; }
-		public object From { get; set; }
-		public object To { get; set; }
-		public GeoUnit? Unit { get; set; }
-		public GeoDistance? DistanceType { get; set; }
-		public GeoOptimizeBBox? OptimizeBoundingBox { get; set; }
-		public bool? IncludeLower { get; set; }
-		public bool? IncludeUpper { get; set; }
-
-		public string Name { get; set; }
-
-		public bool IsConditionless { get { return QueryCondition.IsConditionless(this);  } }
 	}
 
-	public class GeoDistanceRangeQueryDescriptor : IGeoDistanceRangeQuery
+	public class GeoDistanceRangeQueryDescriptor<T> : IGeoDistanceRangeQuery where T : class
 	{
+		private IGeoDistanceRangeQuery Self { get { return this; } }
+		string IQuery.Name { get; set; }
+		bool IQuery.IsConditionless { get { return QueryCondition.IsConditionless(this); } }
 		PropertyPathMarker IGeoDistanceRangeQuery.Field { get; set; }
 		string IGeoDistanceRangeQuery.Location { get; set; }
 		object IGeoDistanceRangeQuery.From { get; set; }
@@ -78,79 +79,85 @@ namespace Nest
 		GeoDistance? IGeoDistanceRangeQuery.DistanceType { get; set; }
 		GeoOptimizeBBox? IGeoDistanceRangeQuery.OptimizeBoundingBox { get; set; }
 		GeoUnit? IGeoDistanceRangeQuery.Unit { get; set; }
-		private IGeoDistanceRangeQuery _ { get { return this; } }
 
-		bool IQuery.IsConditionless { get { return QueryCondition.IsConditionless(this); } }
+		public GeoDistanceRangeQueryDescriptor<T> Field(string field)
+		{
+			Self.Field = field;
+			return this;
+		}
 
-		string IQuery.Name { get; set; }
+		public GeoDistanceRangeQueryDescriptor<T> Field(Expression<Func<T, object>> field)
+		{
+			Self.Field = field;
+			return this;
+		}
 
-
-		public GeoDistanceRangeQueryDescriptor Location(double Lat, double Lon)
+		public GeoDistanceRangeQueryDescriptor<T> Location(double Lat, double Lon)
 		{
 			var c = CultureInfo.InvariantCulture;
-			_.Location = "{0}, {1}".F(Lat.ToString(c), Lon.ToString(c));
+			Self.Location = "{0}, {1}".F(Lat.ToString(c), Lon.ToString(c));
 			return this;
 		}
 
-		public GeoDistanceRangeQueryDescriptor Location(string geoHash)
+		public GeoDistanceRangeQueryDescriptor<T> Location(string geoHash)
 		{
-			_.Location = geoHash;
+			Self.Location = geoHash;
 			return this;
 		}
 
-		public GeoDistanceRangeQueryDescriptor Distance(string From, string To)
+		public GeoDistanceRangeQueryDescriptor<T> Distance(string From, string To)
 		{
-			_.From = From;
-			_.To = To;
+			Self.From = From;
+			Self.To = To;
 			return this;
 		}
 
-		public GeoDistanceRangeQueryDescriptor Distance(double From, double To, GeoUnit Unit)
+		public GeoDistanceRangeQueryDescriptor<T> Distance(double From, double To, GeoUnit Unit)
 		{
-			_.From = From;
-			_.To = To;
-			_.Unit = Unit;
+			Self.From = From;
+			Self.To = To;
+			Self.Unit = Unit;
 			return this;
 		}
 
-		public GeoDistanceRangeQueryDescriptor Optimize(GeoOptimizeBBox optimize)
+		public GeoDistanceRangeQueryDescriptor<T> Optimize(GeoOptimizeBBox optimize)
 		{
-			_.OptimizeBoundingBox = optimize;
+			Self.OptimizeBoundingBox = optimize;
 			return this;
 		}
 		
-		public GeoDistanceRangeQueryDescriptor DistanceType(GeoDistance geoDistance)
+		public GeoDistanceRangeQueryDescriptor<T> DistanceType(GeoDistance geoDistance)
 		{
-			_.DistanceType = geoDistance;
+			Self.DistanceType = geoDistance;
 			return this;
 		}
 
 		/// <summary>
 		/// Forces the 'From()' to be exclusive (which is inclusive by default).
 		/// </summary>
-		public GeoDistanceRangeQueryDescriptor FromExclusive()
+		public GeoDistanceRangeQueryDescriptor<T> FromExclusive()
 		{
-			_.IncludeLower = false;
+			Self.IncludeLower = false;
 			return this;
 		}
 
 		/// <summary>
 		/// Forces the 'To()' to be exclusive (which is inclusive by default).
 		/// </summary>
-		public GeoDistanceRangeQueryDescriptor ToExclusive()
+		public GeoDistanceRangeQueryDescriptor<T> ToExclusive()
 		{
-			_.IncludeUpper = false;
+			Self.IncludeUpper = false;
 			return this;
 		}
 
 		public PropertyPathMarker GetFieldName()
 		{
-			return _.Field;
+			return Self.Field;
 		}
 
 		public void SetFieldName(string fieldName)
 		{
-			_.Field = fieldName;
+			Self.Field = fieldName;
 		}
 	}
 }

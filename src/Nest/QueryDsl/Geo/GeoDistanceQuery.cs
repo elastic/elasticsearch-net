@@ -4,11 +4,12 @@ using Newtonsoft.Json;
 using System.Globalization;
 using System;
 using Newtonsoft.Json.Converters;
+using System.Linq.Expressions;
 
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IGeoDistanceQuery : IQuery
+	public interface IGeoDistanceQuery : IFieldNameQuery
 	{
 		PropertyPathMarker Field { get; set; }
 
@@ -38,27 +39,38 @@ namespace Nest
 		}
 	}
 
-	public class GeoDistanceFilter : PlainQuery, IGeoDistanceQuery
+	public class GeoDistanceQuery : PlainQuery, IGeoDistanceQuery
 	{
-		protected override void WrapInContainer(IQueryContainer container)
-		{
-			container.GeoDistance = this;
-		}
-
 		public string Name { get; set; }
 		bool IQuery.IsConditionless { get { return GeoDistanceCondition.IsConditionless(this); } }
-
 		public PropertyPathMarker Field { get; set; }
 		public string Location { get; set; }
 		public object Distance { get; set; }
 		public GeoUnit? Unit { get; set; }
 		public GeoOptimizeBBox? OptimizeBoundingBox { get; set; }
 		public GeoDistance? DistanceType { get; set; }
+
+		protected override void WrapInContainer(IQueryContainer container)
+		{
+			container.GeoDistance = this;
+		}
+
+		public PropertyPathMarker GetFieldName()
+		{
+			return Field;
+        }
+
+		public void SetFieldName(string fieldName)
+		{
+			Field = fieldName;
+		}
 	}
 
-	// TODO : Finish implementing
-	public class GeoDistanceQueryDescriptor : IGeoDistanceQuery
+	public class GeoDistanceQueryDescriptor<T> : IGeoDistanceQuery where T : class
 	{
+		private IGeoDistanceQuery Self { get { return this; } }
+		string IQuery.Name { get; set; }
+		bool IQuery.IsConditionless { get { return GeoDistanceCondition.IsConditionless(this); } }
 		PropertyPathMarker IGeoDistanceQuery.Field { get; set; }
 		string IGeoDistanceQuery.Location { get; set; }
 		object IGeoDistanceQuery.Distance { get; set; }
@@ -66,40 +78,64 @@ namespace Nest
 		GeoDistance? IGeoDistanceQuery.DistanceType { get; set; }
 		GeoOptimizeBBox? IGeoDistanceQuery.OptimizeBoundingBox { get; set; }
 
-		string IQuery.Name { get; set; }
-		bool IQuery.IsConditionless { get { return GeoDistanceCondition.IsConditionless(this); } }
+		public GeoDistanceQueryDescriptor<T> Field(string field)
+		{
+			Self.Field = field;
+			return this;
+		}
 
-		public GeoDistanceQueryDescriptor Location(double Lat, double Lon)
+		public GeoDistanceQueryDescriptor<T> Field(Expression<Func<T, object>> field)
+		{
+			Self.Field = field;
+			return this;
+		}
+
+		public GeoDistanceQueryDescriptor<T> Location(double Lat, double Lon)
 		{
 			var c = CultureInfo.InvariantCulture;
-			((IGeoDistanceQuery)this).Location = "{0}, {1}".F(Lat.ToString(c), Lon.ToString(c));
+			Self.Location = "{0}, {1}".F(Lat.ToString(c), Lon.ToString(c));
 			return this;
 		}
-		public GeoDistanceQueryDescriptor Location(string geoHash)
+
+		public GeoDistanceQueryDescriptor<T> Location(string geoHash)
 		{
-			((IGeoDistanceQuery)this).Location = geoHash;
+			Self.Location = geoHash;
 			return this;
 		}
-		public GeoDistanceQueryDescriptor Distance(string distance)
+
+		public GeoDistanceQueryDescriptor<T> Distance(string distance)
 		{
-			((IGeoDistanceQuery)this).Distance = distance;
+			Self.Distance = distance;
 			return this;
 		}
-		public GeoDistanceQueryDescriptor Distance(double distance, GeoUnit unit)
+
+		public GeoDistanceQueryDescriptor<T> Distance(double distance, GeoUnit unit)
 		{
-			((IGeoDistanceQuery)this).Distance = distance;
-			((IGeoDistanceQuery)this).Unit = unit;
+			Self.Distance = distance;
+			Self.Unit = unit;
 			return this;
 		}
-		public GeoDistanceQueryDescriptor Optimize(GeoOptimizeBBox optimize)
+
+		public GeoDistanceQueryDescriptor<T> Optimize(GeoOptimizeBBox optimize)
 		{
-			((IGeoDistanceQuery)this).OptimizeBoundingBox = optimize;
+			Self.OptimizeBoundingBox = optimize;
 			return this;
 		}
-		public GeoDistanceQueryDescriptor DistanceType(GeoDistance type)
+
+		public GeoDistanceQueryDescriptor<T> DistanceType(GeoDistance type)
 		{
-			((IGeoDistanceQuery)this).DistanceType = type;
+			Self.DistanceType = type;
 			return this;
+		}
+
+		public PropertyPathMarker GetFieldName()
+		{
+			return Self.Field;	
+		}
+
+		public void SetFieldName(string fieldName)
+		{
+			Self.Field = fieldName;	
 		}
 	}
 }

@@ -20,11 +20,6 @@ namespace Nest
 
 	public class ConstantScoreQuery : PlainQuery, IConstantScoreQuery
 	{
-		protected override void WrapInContainer(IQueryContainer container)
-		{
-			container.ConstantScore = this;
-		}
-
 		public string Name { get; set; }
 		bool IQuery.IsConditionless { get { return false; } }
 		public string Lang { get; set; }
@@ -32,25 +27,26 @@ namespace Nest
 		public Dictionary<string, object> Params { get; set; }
 		public IQueryContainer Query { get; set; }
 		public double? Boost { get; set; }
+
+		protected override void WrapInContainer(IQueryContainer container)
+		{
+			container.ConstantScore = this;
+		}
 	}
 
 	public class ConstantScoreQueryDescriptor<T> : IConstantScoreQuery where T : class
 	{
 		private IConstantScoreQuery Self { get { return this; }}
-
-		IQueryContainer IConstantScoreQuery.Query { get; set; }
-
-		double? IConstantScoreQuery.Boost { get; set; }
-		
 		string IQuery.Name { get; set; }
-
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				return Self.Query == null;	
+				return Self.Query == null;
 			}
 		}
+		IQueryContainer IConstantScoreQuery.Query { get; set; }
+		double? IConstantScoreQuery.Boost { get; set; }
 
 		public ConstantScoreQueryDescriptor<T> Name(string name)
 		{

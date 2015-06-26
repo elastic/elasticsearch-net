@@ -99,11 +99,6 @@ namespace Nest
 			return this;
 		}
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="minimumShouldMatches"></param>
-		/// <returns></returns>
 		public BoolQueryDescriptor<T> Name(string name)
 		{
 			((IBoolQuery) this).Name = name;

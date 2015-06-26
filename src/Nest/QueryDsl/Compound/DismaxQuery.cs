@@ -23,30 +23,22 @@ namespace Nest
 
 	public class DismaxQuery : PlainQuery, IDisMaxQuery
 	{
-		protected override void WrapInContainer(IQueryContainer container)
-		{
-			container.DisMax = this;
-		}
-
 		public string Name { get; set; }
 		bool IQuery.IsConditionless { get { return false; } }
 		public double? TieBreaker { get; set; }
 		public double? Boost { get; set; }
 		public IEnumerable<QueryContainer> Queries { get; set; }
+
+		protected override void WrapInContainer(IQueryContainer container)
+		{
+			container.DisMax = this;
+		}
 	}
 
 	public class DisMaxQueryDescriptor<T> : IDisMaxQuery where T : class
 	{
 		private IDisMaxQuery Self { get { return this; } }
-
-		double? IDisMaxQuery.TieBreaker { get; set; }
-
-		double? IDisMaxQuery.Boost { get; set; }
-
 		string IQuery.Name { get; set; }
-
-		IEnumerable<QueryContainer> IDisMaxQuery.Queries { get; set; }
-
 		bool IQuery.IsConditionless
 		{
 			get
@@ -54,6 +46,9 @@ namespace Nest
 				return !Self.Queries.HasAny() || Self.Queries.All(q => q.IsConditionless);
 			}
 		}
+		double? IDisMaxQuery.TieBreaker { get; set; }
+		double? IDisMaxQuery.Boost { get; set; }
+		IEnumerable<QueryContainer> IDisMaxQuery.Queries { get; set; }
 
 		public DisMaxQueryDescriptor<T> Name(string name)
 		{

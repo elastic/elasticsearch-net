@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 
-	[JsonConverter(typeof(ReadAsTypeConverter<ScriptQueryDescriptor>))]
+	[JsonConverter(typeof(ReadAsTypeConverter<ScriptQuery>))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IScriptQuery : IQuery
 	{
@@ -28,49 +28,37 @@ namespace Nest
 		string Lang { get; set; }
 	}
 
-	public class ScriptFilter : PlainQuery, IScriptQuery
+	public class ScriptQuery : PlainQuery, IScriptQuery
 	{
-		protected override void WrapInContainer(IQueryContainer container)
-		{
-			container.Script = this;
-		}
-
+		public string Name { get; set; }
+		bool IQuery.IsConditionless { get { return QueryCondition.IsConditionless(this); } }
 		public string Script { get; set; }
 	    public string ScriptId { get; set; }
 		public string ScriptFile { get; set; }
 	    public Dictionary<string, object> Params { get; set; }
 		public string Lang { get; set; }
 
-		public string Name { get; set; }
-		bool IQuery.IsConditionless { get { return QueryCondition.IsConditionless(this); } }
+		protected override void WrapInContainer(IQueryContainer container)
+		{
+			container.Script = this;
+		}
 	}
 
-	/// <summary>
-	/// A filter allowing to define scripts as filters.
-	/// Ex: "doc['num1'].value > 1"
-	/// </summary>
-	public class ScriptQueryDescriptor : IScriptQuery
+	public class ScriptQueryDescriptor<T> : IScriptQuery where T : class
 	{
 		private IScriptQuery Self { get { return this; } }
-
-        string IScriptQuery.Script { get; set; }
-
-        string IScriptQuery.ScriptId { get; set; }
-
-		string IScriptQuery.ScriptFile { get; set; }
-
-        string IScriptQuery.Lang { get; set; }
-
-		Dictionary<string, object> IScriptQuery.Params { get; set; }
-
 		string IQuery.Name { get; set; }
-
 		bool IQuery.IsConditionless { get { return QueryCondition.IsConditionless(this); } }
+		string IScriptQuery.Script { get; set; }
+        string IScriptQuery.ScriptId { get; set; }
+		string IScriptQuery.ScriptFile { get; set; }
+        string IScriptQuery.Lang { get; set; }
+		Dictionary<string, object> IScriptQuery.Params { get; set; }
 		
 		/// <summary>
 		/// Inline script to execute
 		/// </summary>
-		public ScriptQueryDescriptor Script(string script)
+		public ScriptQueryDescriptor<T> Script(string script)
 		{
 			this.Self.Script = script;
 			return this;
@@ -79,7 +67,7 @@ namespace Nest
         /// <summary>
         /// Id of an indexed script to execute
         /// </summary
-	    public ScriptQueryDescriptor ScriptId(string scriptId)
+	    public ScriptQueryDescriptor<T> ScriptId(string scriptId)
         {
             scriptId.ThrowIfNull("scriptId");
             this.Self.ScriptId = scriptId;
@@ -89,7 +77,7 @@ namespace Nest
 		/// <summary>
 		/// File name of a script to execute
 		/// </summary>
-		public ScriptQueryDescriptor ScriptFile(string scriptFile)
+		public ScriptQueryDescriptor<T> ScriptFile(string scriptFile)
 		{
 			scriptFile.ThrowIfNull("scriptFile");
 			this.Self.ScriptFile = scriptFile;	
@@ -106,7 +94,7 @@ namespace Nest
 		/// </summary>
 		/// <param name="paramDictionary">param</param>
 		/// <returns>this</returns>
-		public ScriptQueryDescriptor Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramDictionary)
+		public ScriptQueryDescriptor<T> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramDictionary)
 		{
 			paramDictionary.ThrowIfNull("paramDictionary");
 			this.Self.Params = paramDictionary(new FluentDictionary<string, object>());
@@ -118,7 +106,7 @@ namespace Nest
 		/// </summary>
 		/// <param name="lang">language</param>
 		/// <returns>this</returns>
-		public ScriptQueryDescriptor Lang(string lang)
+		public ScriptQueryDescriptor<T> Lang(string lang)
 		{
 			lang.ThrowIfNull("lang");
 			this.Self.Lang = lang;
@@ -130,7 +118,7 @@ namespace Nest
         /// </summary>
         /// <param name="lang">language</param>
         /// <returns>this</returns>
-        public ScriptQueryDescriptor Lang(ScriptLang lang)
+        public ScriptQueryDescriptor<T> Lang(ScriptLang lang)
         {
             lang.ThrowIfNull("lang");
             this.Self.Lang = lang.GetStringValue();

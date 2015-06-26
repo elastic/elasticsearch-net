@@ -21,27 +21,21 @@ namespace Nest
 
 	public class FilteredQuery : PlainQuery, IFilteredQuery
 	{
-		protected override void WrapInContainer(IQueryContainer container)
-		{
-			container.Filtered = this;
-		}
-
 		public string Name { get; set; }
 		bool IQuery.IsConditionless { get {return false;}}
 		public IQueryContainer Query { get; set; }
 		public IQueryContainer Filter { get; set; }
+
+		protected override void WrapInContainer(IQueryContainer container)
+		{
+			container.Filtered = this;
+		}
 	}
 
 	public class FilteredQueryDescriptor<T> : IFilteredQuery where T : class
 	{
 		private IFilteredQuery Self { get { return this; } }
-
-		IQueryContainer IFilteredQuery.Query { get; set; }
-
-		IQueryContainer IFilteredQuery.Filter { get; set; }
-
 		string IQuery.Name { get; set; }
-
 		bool IQuery.IsConditionless
 		{
 			get
@@ -55,12 +49,15 @@ namespace Nest
 				return Self.Query.IsConditionless && Self.Filter.IsConditionless;
 			}
 		}
+		IQueryContainer IFilteredQuery.Query { get; set; }
+		IQueryContainer IFilteredQuery.Filter { get; set; }
 
 		public FilteredQueryDescriptor<T> Name(string name)
 		{
 			Self.Name = name;
 			return this;
 		}
+
 		public FilteredQueryDescriptor<T> Query(Func<QueryDescriptor<T>, QueryContainer> querySelector)
 		{
 			querySelector.ThrowIfNull("querySelector");
