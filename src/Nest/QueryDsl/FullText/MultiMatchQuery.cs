@@ -67,7 +67,7 @@ namespace Nest
 	public class MultiMatchQuery : PlainQuery, IMultiMatchQuery
 	{
 		public string Name { get; set; }
-		bool IQuery.IsConditionless { get { return false; } }
+		bool IQuery.IsConditionless => IsConditionless(this);
 		public TextQueryType? Type { get; set; }
 		public string Query { get; set; }
 		public string Analyzer { get; set; }
@@ -85,9 +85,11 @@ namespace Nest
 		public Operator? Operator { get; set; }
 		public IEnumerable<PropertyPathMarker> Fields { get; set; }
 
-		protected override void WrapInContainer(IQueryContainer container)
+		protected override void WrapInContainer(IQueryContainer c) => c.MultiMatch = this;
+
+		internal static bool IsConditionless(IMultiMatchQuery q)
 		{
-			container.MultiMatch = this;
+			return !q.Fields.HasAny() || q.Fields.All(f => f.IsConditionless()) || q.Query.IsNullOrEmpty();
 		}
 	}
 
@@ -96,13 +98,7 @@ namespace Nest
 	{
 		private IMultiMatchQuery Self { get { return this; }}
 		string IQuery.Name { get; set; }
-		bool IQuery.IsConditionless
-		{
-			get
-			{
-				return !Self.Fields.HasAny() || Self.Fields.All(f => f.IsConditionless()) || Self.Query.IsNullOrEmpty();
-			}
-		}
+		bool IQuery.IsConditionless => MultiMatchQuery.IsConditionless(this);
 		TextQueryType? IMultiMatchQuery.Type { get; set; }
 		string IMultiMatchQuery.Query { get; set; }
 		string IMultiMatchQuery.Analyzer { get; set; }

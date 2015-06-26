@@ -81,7 +81,7 @@ namespace Nest
 	public class QueryStringQuery : PlainQuery, IQueryStringQuery
 	{
 		public string Name { get; set; }
-		bool IQuery.IsConditionless { get { return false; } }
+		bool IQuery.IsConditionless => IsConditionless(this);
 		public string Query { get; set; }
 		public string Timezone { get; set; }
 		public PropertyPathMarker DefaultField { get; set; }
@@ -104,10 +104,8 @@ namespace Nest
 		public int? MaximumDeterminizedStates { get; set; }
 		public RewriteMultiTerm? Rewrite { get; set; }
 
-		protected override void WrapInContainer(IQueryContainer container)
-		{
-			container.QueryString = this;
-		}
+		protected override void WrapInContainer(IQueryContainer c) => c.QueryString = this;
+		internal static bool IsConditionless(IQueryStringQuery q) => q.Query.IsNullOrEmpty();
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -115,13 +113,7 @@ namespace Nest
 	{
 		private IQueryStringQuery Self { get { return this; }}
 		string IQuery.Name { get; set; }
-		bool IQuery.IsConditionless
-		{
-			get
-			{
-				return ((IQueryStringQuery)this).Query.IsNullOrEmpty();
-			}
-		}
+		bool IQuery.IsConditionless => QueryStringQuery.IsConditionless(this);
 		string IQueryStringQuery.Query { get; set; }
 		string IQueryStringQuery.Timezone { get; set; }
 		PropertyPathMarker IQueryStringQuery.DefaultField { get; set; }

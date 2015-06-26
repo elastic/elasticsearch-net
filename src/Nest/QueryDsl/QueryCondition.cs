@@ -7,11 +7,6 @@ namespace Nest
 {
 	internal static class QueryCondition
 	{
-		public static bool IsConditionless(IGeoDistanceRangeQuery query)
-		{
-			return query.Location.IsNullOrEmpty() || (query.To == null && query.From == null);
-		}
-
 		public static bool IsConditionless(IGeoHashCellQuery query)
 		{
 			return query.Location.IsNullOrEmpty();

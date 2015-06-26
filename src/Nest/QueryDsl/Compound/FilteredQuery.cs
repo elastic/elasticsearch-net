@@ -22,13 +22,21 @@ namespace Nest
 	public class FilteredQuery : PlainQuery, IFilteredQuery
 	{
 		public string Name { get; set; }
-		bool IQuery.IsConditionless { get {return false;}}
+		bool IQuery.IsConditionless => IsConditionless(this);
 		public IQueryContainer Query { get; set; }
 		public IQueryContainer Filter { get; set; }
 
-		protected override void WrapInContainer(IQueryContainer container)
+		protected override void WrapInContainer(IQueryContainer c) => c.Filtered = this;
+
+		internal static bool IsConditionless(IFilteredQuery q)
 		{
-			container.Filtered = this;
+			if (q.Query == null && q.Filter == null)
+				return true;
+			if (q.Filter == null && q.Query != null)
+				return q.Query.IsConditionless;
+			if (q.Filter != null && q.Query == null)
+				return q.Filter.IsConditionless;
+			return q.Query.IsConditionless && q.Filter.IsConditionless;
 		}
 	}
 
@@ -36,19 +44,7 @@ namespace Nest
 	{
 		private IFilteredQuery Self { get { return this; } }
 		string IQuery.Name { get; set; }
-		bool IQuery.IsConditionless
-		{
-			get
-			{
-				if (Self.Query == null && Self.Filter == null)
-					return true;
-				if (Self.Filter == null && Self.Query != null)
-					return Self.Query.IsConditionless;
-				if (Self.Filter != null && Self.Query == null)
-					return Self.Filter.IsConditionless;
-				return Self.Query.IsConditionless && Self.Filter.IsConditionless;
-			}
-		}
+		bool IQuery.IsConditionless => FilteredQuery.IsConditionless(this);
 		IQueryContainer IFilteredQuery.Query { get; set; }
 		IQueryContainer IFilteredQuery.Filter { get; set; }
 

@@ -21,30 +21,22 @@ namespace Nest
 	public class ConstantScoreQuery : PlainQuery, IConstantScoreQuery
 	{
 		public string Name { get; set; }
-		bool IQuery.IsConditionless { get { return false; } }
+		bool IQuery.IsConditionless => IsConditionless(this);
 		public string Lang { get; set; }
 		public string Script { get; set; }
 		public Dictionary<string, object> Params { get; set; }
 		public IQueryContainer Query { get; set; }
 		public double? Boost { get; set; }
 
-		protected override void WrapInContainer(IQueryContainer container)
-		{
-			container.ConstantScore = this;
-		}
+		protected override void WrapInContainer(IQueryContainer c) => c.ConstantScore = this;
+		internal static bool IsConditionless(IConstantScoreQuery q) => q.Query == null;
 	}
 
 	public class ConstantScoreQueryDescriptor<T> : IConstantScoreQuery where T : class
 	{
 		private IConstantScoreQuery Self { get { return this; }}
 		string IQuery.Name { get; set; }
-		bool IQuery.IsConditionless
-		{
-			get
-			{
-				return Self.Query == null;
-			}
-		}
+		bool IQuery.IsConditionless => ConstantScoreQuery.IsConditionless(this);
 		IQueryContainer IConstantScoreQuery.Query { get; set; }
 		double? IConstantScoreQuery.Boost { get; set; }
 

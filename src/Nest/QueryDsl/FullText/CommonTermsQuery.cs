@@ -43,7 +43,7 @@ namespace Nest
 	public class CommonTermsQuery : PlainQuery, ICommonTermsQuery
 	{
 		public string Name { get; set; }
-		bool IQuery.IsConditionless { get { return false; } }
+		bool IQuery.IsConditionless => IsConditionless(this);
 		public string Query { get; set; }
 		public PropertyPathMarker Field { get; set; }
 		public double? CutoffFrequency { get; set; }
@@ -54,33 +54,17 @@ namespace Nest
 		public string Analyzer { get; set; }
 		public bool? DisableCoord { get; set; }
 
-		protected override void WrapInContainer(IQueryContainer container)
-		{
-			container.CommonTerms = this;
-		}
-
-		PropertyPathMarker IFieldNameQuery.GetFieldName()
-		{
-			return this.Field;
-		}
-
-		void IFieldNameQuery.SetFieldName(string fieldName)
-		{
-			this.Field = fieldName;
-		}
+		protected override void WrapInContainer(IQueryContainer c) => c.CommonTerms = this;
+		PropertyPathMarker IFieldNameQuery.GetFieldName() => Field;
+		void IFieldNameQuery.SetFieldName(string fieldName) => Field = fieldName;
+		internal static bool IsConditionless(ICommonTermsQuery q) => q.Field.IsConditionless() || q.Query.IsNullOrEmpty();
 	}
 
 	public class CommonTermsQueryDescriptor<T> : ICommonTermsQuery where T : class
 	{
-		private ICommonTermsQuery Self { get { return this; }}
+		private ICommonTermsQuery Self { get { return this; } }
 		string IQuery.Name { get; set; }
-		bool IQuery.IsConditionless
-		{
-			get
-			{
-				return Self.Field.IsConditionless() || Self.Query.IsNullOrEmpty();
-			}
-		}
+		bool IQuery.IsConditionless => CommonTermsQuery.IsConditionless(this);
 		string ICommonTermsQuery.Query { get; set; }
 		PropertyPathMarker ICommonTermsQuery.Field { get; set; }
 		double? ICommonTermsQuery.CutoffFrequency { get; set; }
@@ -91,15 +75,8 @@ namespace Nest
 		string ICommonTermsQuery.Analyzer { get; set; }
 		bool? ICommonTermsQuery.DisableCoord { get; set; }
 
-		void IFieldNameQuery.SetFieldName(string fieldName)
-		{
-			Self.Field = fieldName;
-		}
-
-		PropertyPathMarker IFieldNameQuery.GetFieldName()
-		{
-			return Self.Field;
-		}
+		void IFieldNameQuery.SetFieldName(string fieldName) => Self.Field = fieldName;
+		PropertyPathMarker IFieldNameQuery.GetFieldName() => Self.Field;
 
 		public CommonTermsQueryDescriptor<T> Name(string name)
 		{

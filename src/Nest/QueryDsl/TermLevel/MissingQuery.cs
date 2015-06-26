@@ -28,21 +28,9 @@ namespace Nest
 		public PropertyPathMarker Field { get; set; }
 		public bool? Existence { get; set; }
 		public bool? NullValue { get; set; }
-
-		protected override void WrapInContainer(IQueryContainer container)
-		{
-			container.Missing = this;
-		}
-
-		public PropertyPathMarker GetFieldName()
-		{
-			return Field;
-		}
-
-		public void SetFieldName(string fieldName)
-		{
-			Field = fieldName;
-		}
+		protected override void WrapInContainer(IQueryContainer container) => container.Missing = this;
+		public PropertyPathMarker GetFieldName() => Field;
+		public void SetFieldName(string fieldName) => Field = fieldName;
 	}
 
 	public class MissingQueryDescriptor<T> : IMissingQuery where T : class
@@ -84,14 +72,8 @@ namespace Nest
 			return this;
 		}
 
-		public PropertyPathMarker GetFieldName()
-		{
-			return Self.Field;
-		}
+		public PropertyPathMarker GetFieldName() => Self.Field;
 
-		public void SetFieldName(string fieldName)
-		{
-			Self.Field = fieldName;
-		}
+		public void SetFieldName(string fieldName) => Self.Field = fieldName;
 	}
 }

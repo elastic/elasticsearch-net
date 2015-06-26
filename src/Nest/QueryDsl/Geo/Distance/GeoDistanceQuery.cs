@@ -31,18 +31,10 @@ namespace Nest
 		GeoDistance? DistanceType { get; set; }
 	}
 
-	internal static class GeoDistanceCondition
-	{
-		public static bool IsConditionless(IGeoDistanceQuery self)
-		{
-			return self.Location.IsNullOrEmpty() || self.Distance == null;
-		}
-	}
-
 	public class GeoDistanceQuery : PlainQuery, IGeoDistanceQuery
 	{
 		public string Name { get; set; }
-		bool IQuery.IsConditionless { get { return GeoDistanceCondition.IsConditionless(this); } }
+		bool IQuery.IsConditionless => IsConditionless(this);
 		public PropertyPathMarker Field { get; set; }
 		public string Location { get; set; }
 		public object Distance { get; set; }
@@ -50,33 +42,26 @@ namespace Nest
 		public GeoOptimizeBBox? OptimizeBoundingBox { get; set; }
 		public GeoDistance? DistanceType { get; set; }
 
-		protected override void WrapInContainer(IQueryContainer container)
-		{
-			container.GeoDistance = this;
-		}
-
-		public PropertyPathMarker GetFieldName()
-		{
-			return Field;
-        }
-
-		public void SetFieldName(string fieldName)
-		{
-			Field = fieldName;
-		}
+		protected override void WrapInContainer(IQueryContainer c) => c.GeoDistance = this;
+		public PropertyPathMarker GetFieldName() => Field;
+		public void SetFieldName(string fieldName) => Field = fieldName;
+		internal static bool IsConditionless(IGeoDistanceQuery q) => q.Location.IsNullOrEmpty() || q.Distance == null;
 	}
 
 	public class GeoDistanceQueryDescriptor<T> : IGeoDistanceQuery where T : class
 	{
 		private IGeoDistanceQuery Self { get { return this; } }
 		string IQuery.Name { get; set; }
-		bool IQuery.IsConditionless { get { return GeoDistanceCondition.IsConditionless(this); } }
+		bool IQuery.IsConditionless => GeoDistanceQuery.IsConditionless(this);
 		PropertyPathMarker IGeoDistanceQuery.Field { get; set; }
 		string IGeoDistanceQuery.Location { get; set; }
 		object IGeoDistanceQuery.Distance { get; set; }
 		GeoUnit? IGeoDistanceQuery.Unit { get; set; }
 		GeoDistance? IGeoDistanceQuery.DistanceType { get; set; }
 		GeoOptimizeBBox? IGeoDistanceQuery.OptimizeBoundingBox { get; set; }
+
+		public PropertyPathMarker GetFieldName() => Self.Field;
+		public void SetFieldName(string fieldName) => Self.Field = fieldName;
 
 		public GeoDistanceQueryDescriptor<T> Field(string field)
 		{
@@ -126,16 +111,6 @@ namespace Nest
 		{
 			Self.DistanceType = type;
 			return this;
-		}
-
-		public PropertyPathMarker GetFieldName()
-		{
-			return Self.Field;	
-		}
-
-		public void SetFieldName(string fieldName)
-		{
-			Self.Field = fieldName;	
 		}
 	}
 }

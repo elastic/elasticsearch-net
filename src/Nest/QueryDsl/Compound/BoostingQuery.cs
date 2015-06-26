@@ -24,31 +24,27 @@ namespace Nest
 	public class BoostingQuery : PlainQuery, IBoostingQuery
 	{
 		public string Name { get; set; }
-		bool IQuery.IsConditionless { get { return false; } }
+		bool IQuery.IsConditionless => IsConditionless(this);
 		public QueryContainer PositiveQuery { get; set; }
 		public QueryContainer NegativeQuery { get; set; }
 		public double? NegativeBoost { get; set; }
 
-		protected override void WrapInContainer(IQueryContainer container)
+		protected override void WrapInContainer(IQueryContainer c) => c.Boosting = this;
+
+		internal static bool IsConditionless(IBoostingQuery q)
 		{
-			container.Boosting = this;
+			if (q.NegativeQuery == null && q.PositiveQuery == null)
+				return true;
+
+			return (q.PositiveQuery == null && q.NegativeQuery.IsConditionless)
+				|| (q.NegativeQuery == null && q.PositiveQuery.IsConditionless);
 		}
 	}
 
 	public class BoostingQueryDescriptor<T> : IBoostingQuery where T : class
 	{
 		private IBoostingQuery Self { get { return this; } }
-		bool IQuery.IsConditionless
-		{
-			get
-			{
-				if (Self.NegativeQuery == null && Self.PositiveQuery == null)
-					return true;
-
-				return (Self.PositiveQuery == null && Self.NegativeQuery.IsConditionless)
-					|| (Self.NegativeQuery == null && Self.PositiveQuery.IsConditionless);
-			}
-		}
+		bool IQuery.IsConditionless => BoostingQuery.IsConditionless(this);
 		string IQuery.Name { get; set; }
 		QueryContainer IBoostingQuery.PositiveQuery { get; set; }
 		QueryContainer IBoostingQuery.NegativeQuery { get; set; }

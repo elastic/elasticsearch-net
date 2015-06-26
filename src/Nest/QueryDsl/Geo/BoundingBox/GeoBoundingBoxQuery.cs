@@ -6,16 +6,6 @@ using System.Linq.Expressions;
 
 namespace Nest
 {
-	internal static class GeoBoundingBoxCondition
-	{
-		public static bool IsConditionless(IGeoBoundingBoxQuery self)
-		{
-			return self.Field.IsConditionless() 
-				|| self.TopLeft.IsNullOrEmpty() 
-				|| self.BottomRight.IsNullOrEmpty();
-		}
-	}
-
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IGeoBoundingBoxQuery : IFieldNameQuery
 	{
@@ -34,25 +24,21 @@ namespace Nest
 	public class GeoBoundingBoxQuery : PlainQuery, IGeoBoundingBoxQuery
 	{
 		public string Name { get; set; }
-		bool IQuery.IsConditionless { get { return GeoBoundingBoxCondition.IsConditionless(this); } }
+		bool IQuery.IsConditionless => IsConditionless(this);
 		public PropertyPathMarker Field { get; set; }
 		public string TopLeft { get; set; }
 		public string BottomRight { get; set; }
 		public GeoExecution? Type { get; set; }
 
-		protected override void WrapInContainer(IQueryContainer container)
-		{
-			container.GeoBoundingBox = this;
-		}
+		protected override void WrapInContainer(IQueryContainer c) => c.GeoBoundingBox = this;
+		public PropertyPathMarker GetFieldName() => Field;
+		public void SetFieldName(string fieldName) => Field = fieldName;
 
-		public PropertyPathMarker GetFieldName()
+		internal static bool IsConditionless(IGeoBoundingBoxQuery q)
 		{
-			return this.Field;
-		}
-
-		public void SetFieldName(string fieldName)
-		{
-			this.Field = fieldName;
+			return q.Field.IsConditionless() 
+				|| q.TopLeft.IsNullOrEmpty() 
+				|| q.BottomRight.IsNullOrEmpty();
 		}
 	}
 
@@ -60,7 +46,7 @@ namespace Nest
 	{
 		private IGeoBoundingBoxQuery Self { get { return this; } }
 		string IQuery.Name { get; set; }
-		bool IQuery.IsConditionless { get { return GeoBoundingBoxCondition.IsConditionless(this); } }
+		bool IQuery.IsConditionless => GeoBoundingBoxQuery.IsConditionless(this);
 		PropertyPathMarker IGeoBoundingBoxQuery.Field { get; set; }
 		string IGeoBoundingBoxQuery.TopLeft { get; set; }
 		string IGeoBoundingBoxQuery.BottomRight { get; set; }
@@ -102,14 +88,7 @@ namespace Nest
 			return this;
 		}
 
-		public PropertyPathMarker GetFieldName()
-		{
-			return Self.Field;
-		}
-
-		public void SetFieldName(string fieldName)
-		{
-			Self.Field = fieldName;
-		}
-	}
+		public PropertyPathMarker GetFieldName() => Self.Field;
+		public void SetFieldName(string fieldName) => Self.Field = fieldName;
+    }
 }

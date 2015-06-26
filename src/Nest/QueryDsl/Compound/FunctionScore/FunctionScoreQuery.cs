@@ -48,7 +48,7 @@ namespace Nest
 
 	public class FunctionScoreQuery : PlainQuery, IFunctionScoreQuery
 	{
-		bool IQuery.IsConditionless { get { return false; } }
+		bool IQuery.IsConditionless => IsConditionless(this);
 		public string Name { get; set; }
 		public IEnumerable<IFunctionScoreFunction> Functions { get; set; }
 		public IQueryContainer Query { get; set; }
@@ -61,9 +61,13 @@ namespace Nest
 		public double? Weight { get; set; }
 		public float? MinScore { get; set; }
 
-		protected override void WrapInContainer(IQueryContainer container)
+		protected override void WrapInContainer(IQueryContainer c) => c.FunctionScore = this;
+
+		internal static bool IsConditionless(IFunctionScoreQuery q, bool force = false)
 		{
-			container.FunctionScore = this;
+			return force
+				|| (((q.Query == null || q.Query.IsConditionless) && (q.Filter == null || q.Filter.IsConditionless))
+				&& q.RandomScore == null && q.ScriptScore == null && !q.Functions.HasAny());
 		}
 	}
 
@@ -72,15 +76,7 @@ namespace Nest
 		private IFunctionScoreQuery Self { get { return this; }}
 		string IQuery.Name { get; set; }
 		private bool _forcedConditionless = false;
-		bool IQuery.IsConditionless
-		{
-			get
-			{
-				return _forcedConditionless
-					   || (((Self.Query == null || Self.Query.IsConditionless) && (Self.Filter == null || Self.Filter.IsConditionless))
-						   && Self.RandomScore == null && Self.ScriptScore == null && !Self.Functions.HasAny());
-			}
-		}
+		bool IQuery.IsConditionless => FunctionScoreQuery.IsConditionless(this, _forcedConditionless);
 		IEnumerable<IFunctionScoreFunction> IFunctionScoreQuery.Functions { get; set; }
 		IQueryContainer IFunctionScoreQuery.Query { get; set; }
 		IQueryContainer IFunctionScoreQuery.Filter { get; set; }

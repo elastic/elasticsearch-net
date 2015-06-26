@@ -36,17 +36,7 @@ namespace Nest
 	public class BoolQuery : PlainQuery, IBoolQuery
 	{
 		public string Name { get; set; }
-		bool IQuery.IsConditionless
-		{
-			get
-			{
-				if (!Must.HasAny() && !Should.HasAny() && !MustNot.HasAny())
-					return true;
-				return (MustNot.HasAny() && MustNot.All(q => q.IsConditionless))
-					|| (Should.HasAny() && Should.All(q => q.IsConditionless))
-					|| (Must.HasAny() && Must.All(q => q.IsConditionless));
-			}
-		}
+		bool IQuery.IsConditionless => IsConditionless(this);
 		public IEnumerable<IQueryContainer> Must { get; set; }
 		public IEnumerable<IQueryContainer> MustNot { get; set; }
 		public IEnumerable<IQueryContainer> Should { get; set; }
@@ -54,9 +44,16 @@ namespace Nest
 		public bool? DisableCoord { get; set; }
 		public double? Boost { get; set; }
 
-		protected override void WrapInContainer(IQueryContainer container)
+		protected override void WrapInContainer(IQueryContainer c) => c.Bool = this;
+
+		internal static bool IsConditionless(IBoolQuery q)
 		{
-			container.Bool = this;
+			if (!q.Must.HasAny() && !q.Should.HasAny() && !q.MustNot.HasAny())
+				return true;
+
+			return (q.MustNot.HasAny() && q.MustNot.All(qq => qq.IsConditionless))
+				|| (q.Should.HasAny() && q.Should.All(qq => qq.IsConditionless))
+				|| (q.Must.HasAny() && q.Must.All(qq => qq.IsConditionless));
 		}
 	}
 
@@ -64,17 +61,7 @@ namespace Nest
 	{
 		private IBoolQuery Self { get { return this; } }
 		string IQuery.Name { get; set; }
-		bool IQuery.IsConditionless
-		{
-			get
-			{
-				if (!Self.Must.HasAny() && !Self.Should.HasAny() && !Self.MustNot.HasAny())
-					return true;
-				return (Self.MustNot.HasAny() && Self.MustNot.All(q => q.IsConditionless))
-					|| (Self.Should.HasAny() && Self.Should.All(q => q.IsConditionless))
-					|| (Self.Must.HasAny() && Self.Must.All(q => q.IsConditionless));
-			}
-		}
+		bool IQuery.IsConditionless => BoolQuery.IsConditionless(this);
 		IEnumerable<IQueryContainer> IBoolQuery.Must { get; set; }
 		IEnumerable<IQueryContainer> IBoolQuery.MustNot { get; set; }
 		IEnumerable<IQueryContainer> IBoolQuery.Should { get; set; }

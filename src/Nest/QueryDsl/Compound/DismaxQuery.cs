@@ -24,28 +24,20 @@ namespace Nest
 	public class DismaxQuery : PlainQuery, IDisMaxQuery
 	{
 		public string Name { get; set; }
-		bool IQuery.IsConditionless { get { return false; } }
+		bool IQuery.IsConditionless => IsConditionless(this);
 		public double? TieBreaker { get; set; }
 		public double? Boost { get; set; }
 		public IEnumerable<QueryContainer> Queries { get; set; }
 
-		protected override void WrapInContainer(IQueryContainer container)
-		{
-			container.DisMax = this;
-		}
+		protected override void WrapInContainer(IQueryContainer c) => c.DisMax = this;
+		internal static bool IsConditionless(IDisMaxQuery q) => !q.Queries.HasAny() || q.Queries.All(qq => qq.IsConditionless);
 	}
 
 	public class DisMaxQueryDescriptor<T> : IDisMaxQuery where T : class
 	{
 		private IDisMaxQuery Self { get { return this; } }
 		string IQuery.Name { get; set; }
-		bool IQuery.IsConditionless
-		{
-			get
-			{
-				return !Self.Queries.HasAny() || Self.Queries.All(q => q.IsConditionless);
-			}
-		}
+		bool IQuery.IsConditionless => DismaxQuery.IsConditionless(this);
 		double? IDisMaxQuery.TieBreaker { get; set; }
 		double? IDisMaxQuery.Boost { get; set; }
 		IEnumerable<QueryContainer> IDisMaxQuery.Queries { get; set; }

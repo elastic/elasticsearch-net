@@ -62,7 +62,7 @@ namespace Nest
 	public class MatchQuery : PlainQuery, IMatchQuery
 	{
 		public string Name { get; set; }
-		bool IQuery.IsConditionless { get { return false; } }
+		bool IQuery.IsConditionless => IsConditionless(this);
 		public string Type { get; set; }
 		public string Query { get; set; }
 		public string Analyzer { get; set; }
@@ -79,20 +79,10 @@ namespace Nest
 		public Operator? Operator { get; set; }
 		public PropertyPathMarker Field { get; set; }
 
-		protected override void WrapInContainer(IQueryContainer container)
-		{
-			container.Match = this;
-		}
-
-		PropertyPathMarker IFieldNameQuery.GetFieldName()
-		{
-			return this.Field;
-		}
-
-		void IFieldNameQuery.SetFieldName(string fieldName)
-		{
-			this.Field = fieldName;
-		}
+		protected override void WrapInContainer(IQueryContainer c) => c.Match = this;
+		PropertyPathMarker IFieldNameQuery.GetFieldName() => Field;
+		void IFieldNameQuery.SetFieldName(string fieldName) => Field = fieldName;
+		internal static bool IsConditionless(IMatchQuery q) => q.Field.IsConditionless() || q.Query.IsNullOrEmpty();
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -101,13 +91,7 @@ namespace Nest
 		protected virtual string MatchQueryType { get { return null; } }
 		private IMatchQuery Self { get { return this; } }
 		string IQuery.Name { get; set; }
-		bool IQuery.IsConditionless
-		{
-			get
-			{
-				return Self.Field.IsConditionless() || Self.Query.IsNullOrEmpty();
-			}
-		}
+		bool IQuery.IsConditionless => MatchQuery.IsConditionless(this);
 		string IMatchQuery.Type { get { return MatchQueryType; } }
 		string IMatchQuery.Query { get; set; }
 		string IMatchQuery.Analyzer { get; set; }
@@ -124,15 +108,8 @@ namespace Nest
 		Operator? IMatchQuery.Operator { get; set; }
 		PropertyPathMarker IMatchQuery.Field { get; set; }
 
-		void IFieldNameQuery.SetFieldName(string fieldName)
-		{
-			Self.Field = fieldName;
-		}
-
-		PropertyPathMarker IFieldNameQuery.GetFieldName()
-		{
-			return Self.Field;
-		}
+		void IFieldNameQuery.SetFieldName(string fieldName) => Self.Field = fieldName;
+		PropertyPathMarker IFieldNameQuery.GetFieldName() => Self.Field;
 
 		public MatchQueryDescriptor<T> Name(string name)
 		{

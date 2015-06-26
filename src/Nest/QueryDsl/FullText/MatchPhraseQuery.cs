@@ -11,7 +11,6 @@ namespace Nest
 	public class MatchPhraseQueryDescriptor<T> : MatchQueryDescriptor<T>
 		where T : class
 	{
-
 		protected override string MatchQueryType { get { return "phrase"; } }
 	}
 }
