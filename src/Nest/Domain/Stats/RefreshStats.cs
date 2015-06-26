@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject]
-	public class FlushStats
+	public class RefreshStats
 	{
 	
 		[JsonProperty(PropertyName = "total")]
