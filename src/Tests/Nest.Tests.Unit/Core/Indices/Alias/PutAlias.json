@@ -1,8 +1,0 @@
-﻿{
-  "routing": "12",
-  "filter":  {
-    "term":  {
-      "name": "nest"
-    }
-  }
-}

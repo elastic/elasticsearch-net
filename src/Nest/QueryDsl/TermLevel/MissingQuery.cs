@@ -24,7 +24,7 @@ namespace Nest
 	public class MissingQuery : PlainQuery, IMissingQuery
 	{
 		public string Name { get; set; }
-		public bool IsConditionless { get { return QueryCondition.IsConditionless(this); } }
+		public bool IsConditionless => QueryCondition.IsConditionless(this);
 		public PropertyPathMarker Field { get; set; }
 		public bool? Existence { get; set; }
 		public bool? NullValue { get; set; }
@@ -47,9 +47,9 @@ namespace Nest
 
 	public class MissingQueryDescriptor<T> : IMissingQuery where T : class
 	{
-		private IMissingQuery Self { get { return this; } }
+		private IMissingQuery Self => this;
 		string IQuery.Name { get; set; }
-		bool IQuery.IsConditionless { get { return QueryCondition.IsConditionless(this); } }
+		bool IQuery.IsConditionless => QueryCondition.IsConditionless(this);
 		PropertyPathMarker IMissingQuery.Field { get; set;}
 		bool? IMissingQuery.Existence { get; set; }
 		bool? IMissingQuery.NullValue { get; set; }

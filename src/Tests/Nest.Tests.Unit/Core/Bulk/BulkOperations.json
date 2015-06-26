@@ -1,7 +1,0 @@
-{ "index" :  {"_index":"nest_test_data","_type":"elasticsearchprojects","_id":"2","_version_type": "force"} }
-{"id":2,"loc":0,"startedOn":"0001-01-01T00:00:00","longValue":0,"floatValue":0.0,"doubleValue":0.0,"boolValue":false,"locScriptField":0,"stupidIntIWantAsLong":0}
-{ "create" :  {"_index":"nest_test_data","_type":"elasticsearchprojects","_id":"3","_version_type": "internal"} }
-{"id":3,"loc":0,"startedOn":"0001-01-01T00:00:00","longValue":0,"floatValue":0.0,"doubleValue":0.0,"boolValue":false,"locScriptField":0,"stupidIntIWantAsLong":0}
-{ "delete" :  {"_index":"nest_test_data","_type":"elasticsearchprojects","_id":"4","_version_type": "external_gte"} }
-{ "update" :  {"_index":"nest_test_data","_type":"elasticsearchprojects","_id":"3","_version_type": "external"} }
-{ "doc" : { "name" : "NEST" } }

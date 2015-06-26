@@ -53,10 +53,7 @@ namespace Nest
 				reader.Read();
 			} while (reader.Depth >= depth && reader.TokenType != JsonToken.EndObject);
 
-
 			return query;
-
-
 		}
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)

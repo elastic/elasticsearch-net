@@ -1,4 +1,0 @@
-{"percolate":{"index":"nest_test_data","type":"elasticsearchprojects","percolate_index":"percolate_index","percolate_type":"alternative_type","routing":["value"],"preference":"local","version":123}}
-{"track_scores":true,"score":{"loc":{"order":"asc"}},"query":{"query_string":{"query":"hello"}},"filter":{"term":{"field":"value"}},"aggs":{"name":{"terms":{"field":"name"}}}}
-{"count":{"index":"nest_test_data","type":"elasticsearchprojects"}}
-{"doc":{"id":0,"name":"nest","loc":0,"startedOn":"0001-01-01T00:00:00","longValue":0,"floatValue":0.0,"doubleValue":0.0,"boolValue":false,"locScriptField":0,"stupidIntIWantAsLong":0},"query":{"query_string":{"query":"hello"}}}

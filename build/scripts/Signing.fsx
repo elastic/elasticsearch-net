@@ -58,8 +58,6 @@ type Sign() =
             | DotNet40Project net40 -> 
                 validate net40dll name
                 validate net45dll name
-            | DotNet45Project net45 -> 
-                validate net45dll name
 
     static member CreateKeysIfAbsent() =
         if not (directoryExists Paths.KeysFolder) then CreateDir Paths.KeysFolder
