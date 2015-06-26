@@ -150,7 +150,7 @@ namespace Nest
 			if (queryContainer == null || queryContainer.IsConditionless) return CreateEmptyContainer();
 
 			IQueryContainer f = new QueryContainer();
-			f.Bool = new BoolBaseQueryDescriptor();
+			f.Bool = new BoolQuery();
 			f.Bool.MustNot = new[] { queryContainer };
 			return f as QueryContainer;
 		}

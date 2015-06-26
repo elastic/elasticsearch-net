@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ReadAsTypeConverter<BoolBaseQueryDescriptor>))]
+	[JsonConverter(typeof(ReadAsTypeConverter<BoolQuery>))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IBoolQuery : IQuery
 	{
@@ -35,73 +35,62 @@ namespace Nest
 
 	public class BoolQuery : PlainQuery, IBoolQuery
 	{
-		protected override void WrapInContainer(IQueryContainer container)
-		{
-			container.Bool = this;
-		}
-
 		public string Name { get; set; }
-
-		bool IQuery.IsConditionless { get { return false; } }
-
+		bool IQuery.IsConditionless
+		{
+			get
+			{
+				if (!Must.HasAny() && !Should.HasAny() && !MustNot.HasAny())
+					return true;
+				return (MustNot.HasAny() && MustNot.All(q => q.IsConditionless))
+					|| (Should.HasAny() && Should.All(q => q.IsConditionless))
+					|| (Must.HasAny() && Must.All(q => q.IsConditionless));
+			}
+		}
 		public IEnumerable<IQueryContainer> Must { get; set; }
 		public IEnumerable<IQueryContainer> MustNot { get; set; }
 		public IEnumerable<IQueryContainer> Should { get; set; }
 		public string MinimumShouldMatch { get; set; }
 		public bool? DisableCoord { get; set; }
 		public double? Boost { get; set; }
+
+		protected override void WrapInContainer(IQueryContainer container)
+		{
+			container.Bool = this;
+		}
 	}
 
-	//TODO 2.0 why is this separate from the descriptor
-	public class BoolBaseQueryDescriptor : IBoolQuery
+	public class BoolQueryDescriptor<T> : IBoolQuery where T : class
 	{
-		[JsonProperty("must")]
-		IEnumerable<IQueryContainer> IBoolQuery.Must { get; set; }
-
-		[JsonProperty("must_not")]
-		IEnumerable<IQueryContainer> IBoolQuery.MustNot { get; set; }
-
-		[JsonProperty("should")]
-		IEnumerable<IQueryContainer> IBoolQuery.Should { get; set; }
-
-		[JsonProperty("minimum_should_match")]
-		string IBoolQuery.MinimumShouldMatch { get; set; }
-		
-		[JsonProperty("disable_coord")]
-		bool? IBoolQuery.DisableCoord { get; set; }
-		
-		[JsonProperty("boost")]
-		double? IBoolQuery.Boost { get; set; }
-
-		[JsonProperty("_name")]
+		private IBoolQuery Self { get { return this; } }
 		string IQuery.Name { get; set; }
-
 		bool IQuery.IsConditionless
 		{
 			get
 			{
-				var bq = ((IBoolQuery)this);
-
-				if (!bq.Must.HasAny() && !bq.Should.HasAny() && !bq.MustNot.HasAny())
+				if (!Self.Must.HasAny() && !Self.Should.HasAny() && !Self.MustNot.HasAny())
 					return true;
-				return (bq.MustNot.HasAny() && bq.MustNot.All(q => q.IsConditionless))
-					|| (bq.Should.HasAny() && bq.Should.All(q => q.IsConditionless))
-					|| (bq.Must.HasAny() && bq.Must.All(q => q.IsConditionless));
+				return (Self.MustNot.HasAny() && Self.MustNot.All(q => q.IsConditionless))
+					|| (Self.Should.HasAny() && Self.Should.All(q => q.IsConditionless))
+					|| (Self.Must.HasAny() && Self.Must.All(q => q.IsConditionless));
 			}
 		}
-	}
+		IEnumerable<IQueryContainer> IBoolQuery.Must { get; set; }
+		IEnumerable<IQueryContainer> IBoolQuery.MustNot { get; set; }
+		IEnumerable<IQueryContainer> IBoolQuery.Should { get; set; }
+		string IBoolQuery.MinimumShouldMatch { get; set; }
+		bool? IBoolQuery.DisableCoord { get; set; }
+		double? IBoolQuery.Boost { get; set; }
 
-	public class BoolQueryDescriptor<T> : BoolBaseQueryDescriptor where T : class
-	{
 		public BoolQueryDescriptor<T> DisableCoord()
 		{
-			((IBoolQuery)this).DisableCoord = true;
+			Self.DisableCoord = true;
 			return this;
 		}
 
 		public BoolQueryDescriptor<T> Name(string name)
 		{
-			((IBoolQuery) this).Name = name;
+			Self.Name = name;
 			return this;
 		}
 		
@@ -112,7 +101,7 @@ namespace Nest
 		/// <returns></returns>
 		public BoolQueryDescriptor<T> MinimumShouldMatch(int minimumShouldMatches)
 		{
-			((IBoolQuery)this).MinimumShouldMatch = minimumShouldMatches.ToString(CultureInfo.InvariantCulture);
+			Self.MinimumShouldMatch = minimumShouldMatches.ToString(CultureInfo.InvariantCulture);
 			return this;
 		}
 		
@@ -123,7 +112,7 @@ namespace Nest
 		/// <returns></returns>
 		public BoolQueryDescriptor<T> MinimumShouldMatch(string minimumShouldMatches)
 		{
-			((IBoolQuery)this).MinimumShouldMatch = minimumShouldMatches;
+			Self.MinimumShouldMatch = minimumShouldMatches;
 			return this;
 		}
 
@@ -133,7 +122,7 @@ namespace Nest
 		/// <param name="boost"></param>
 		public BoolQueryDescriptor<T> Boost(double boost)
 		{
-			((IBoolQuery)this).Boost = boost;
+			Self.Boost = boost;
 			return this;
 		}
 
@@ -151,7 +140,7 @@ namespace Nest
 					continue;
 				descriptors.Add(q);
 			}
-			((IBoolQuery)this).Must = descriptors.HasAny() ? descriptors : null;
+			Self.Must = descriptors.HasAny() ? descriptors : null;
 			return this;
 		}
 
@@ -167,7 +156,7 @@ namespace Nest
 					continue;
 				descriptors.Add(q);
 			}
-			((IBoolQuery)this).Must = descriptors.HasAny() ? descriptors : null;
+			Self.Must = descriptors.HasAny() ? descriptors : null;
 			return this;
 		}
 
@@ -188,7 +177,7 @@ namespace Nest
 					continue;
 				descriptors.Add(q);
 			}
-			((IBoolQuery)this).MustNot = descriptors.HasAny() ? descriptors : null;
+			Self.MustNot = descriptors.HasAny() ? descriptors : null;
 			return this;
 		}
 		
@@ -207,7 +196,7 @@ namespace Nest
 					continue;
 				descriptors.Add(q);
 			}
-			((IBoolQuery)this).MustNot = descriptors.HasAny() ? descriptors : null;
+			Self.MustNot = descriptors.HasAny() ? descriptors : null;
 			return this;
 		}
 		
@@ -227,7 +216,7 @@ namespace Nest
 					continue;
 				descriptors.Add(q);
 			}
-			((IBoolQuery)this).Should = descriptors.HasAny() ? descriptors : null;
+			Self.Should = descriptors.HasAny() ? descriptors : null;
 			return this;
 		}
 
@@ -245,7 +234,7 @@ namespace Nest
 					continue;
 				descriptors.Add(q);
 			}
-			((IBoolQuery)this).Should = descriptors.HasAny() ? descriptors : null;
+			Self.Should = descriptors.HasAny() ? descriptors : null;
 			return this;
 		}
 	}

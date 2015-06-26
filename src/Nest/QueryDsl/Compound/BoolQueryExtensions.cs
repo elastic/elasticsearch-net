@@ -103,7 +103,7 @@ namespace Nest
 		internal static QueryContainer CreateShouldContainer(IList<IQueryContainer> shouldClauses)
 		{
 			IQueryContainer q = new QueryContainer();
-			q.Bool = new BoolBaseQueryDescriptor();
+			q.Bool = new BoolQuery();
 			q.Bool.Should = shouldClauses.NullIfEmpty();
 			return q as QueryContainer;
 		}
@@ -111,7 +111,7 @@ namespace Nest
 		internal static QueryContainer CreateMustContainer(IList<IQueryContainer> mustClauses, IEnumerable<IQueryContainer> mustNotClauses)
 		{
 			IQueryContainer q = new QueryContainer();
-			q.Bool = new BoolBaseQueryDescriptor();
+			q.Bool = new BoolQuery();
 			q.Bool.Must = mustClauses.NullIfEmpty();
 			q.Bool.MustNot = mustNotClauses.NullIfEmpty();
 			return q as QueryContainer;
