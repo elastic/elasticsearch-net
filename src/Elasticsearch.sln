@@ -10,8 +10,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Build", "_Build", "{432D55
 		..\.gitignore = ..\.gitignore
 		..\build.bat = ..\build.bat
 		..\build\download-nuget.ps1 = ..\build\download-nuget.ps1
-		..\build\Elasticsearch.Net.Connection.HttpClient.nuspec = ..\build\Elasticsearch.Net.Connection.HttpClient.nuspec
-		..\build\Elasticsearch.Net.Connection.Thrift.nuspec = ..\build\Elasticsearch.Net.Connection.Thrift.nuspec
 		..\build\Elasticsearch.Net.JsonNET.nuspec = ..\build\Elasticsearch.Net.JsonNET.nuspec
 		..\build\Elasticsearch.Net.nuspec = ..\build\Elasticsearch.Net.nuspec
 		..\build\NEST.nuspec = ..\build\NEST.nuspec
@@ -24,7 +22,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeGeneration.LowLevelClie
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elasticsearch.Net", "Elasticsearch.Net\Elasticsearch.Net.csproj", "{E97CCF40-0BA6-43FE-9F2D-58D454134088}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elasticsearch.Net.JsonNet", "Serialization\Elasticsearch.Net.JsonNet\Elasticsearch.Net.JsonNet.csproj", "{DD71352D-0EB2-4A02-8AC4-82A17E2A71A8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elasticsearch.Net.JsonNet", "Elasticsearch.Net.JsonNet\Elasticsearch.Net.JsonNet.csproj", "{DD71352D-0EB2-4A02-8AC4-82A17E2A71A8}"
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "scripts", "..\build\scripts\scripts.fsproj", "{28328694-2598-44D3-BB25-8B6C3FBDD3EF}"
 EndProject

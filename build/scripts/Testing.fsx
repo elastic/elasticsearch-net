@@ -7,11 +7,12 @@ open Paths
 
 type Tests() = 
     static member RunAll() =
-        !! Paths.Source("**/bin/Release/*.Tests.Unit.dll") 
-        |> NUnit (fun p ->
-          {p with
-             DisableShadowCopy = true;
-             OutputFile = Paths.Output("TestResults.xml") }
-         )
+       //!! Paths.Source("**/bin/Release/Tests.dll") 
+       //$|> NUnit (fun p ->
+       //  {p with
+       //      DisableShadowCopy = true;
+       //      OutputFile = Paths.Output("TestResults.xml") }
+       //)
+       traceFAKE "This branch no longer NUnit (atleast for now) redo testing in build script"
 
 
