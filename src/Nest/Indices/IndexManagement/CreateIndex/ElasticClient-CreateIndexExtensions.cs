@@ -3,9 +3,6 @@ using System.Threading.Tasks;
 
 namespace Nest
 {
-	/// <summary>
-	/// Provides convenience extension to open an index by string or type.
-	/// </summary>
 	public static class CreateIndexExtensions
 	{
 		/// <summary>

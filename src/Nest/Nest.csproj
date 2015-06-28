@@ -88,8 +88,8 @@
     <Compile Include="CommonOptions\Range\Ip4ExpressionRange.cs" />
     <Compile Include="CommonOptions\Range\Ip4Range.cs" />
     <Compile Include="CommonOptions\Range\Range.cs" />
-    <Compile Include="ConvenienceExtensions\AliasExtensions.cs" />
-    <Compile Include="ConvenienceExtensions\CountExtensions.cs" />
+    <Compile Include="Indices\AliasManagement\GetAliases\ElasticClient-GetIndicesPointingToAlias.cs" />
+    <Compile Include="Indices\AliasManagement\GetAliases\ElasticClient-GetAliasesPointingToIndex.cs" />
     <Compile Include="ConvenienceExtensions\DeleteExtensions.cs" />
     <Compile Include="ConvenienceExtensions\DeleteIndexExtensions.cs" />
     <Compile Include="ConvenienceExtensions\IndexManyExtensions.cs" />
@@ -507,8 +507,8 @@
     <Compile Include="Indices\IndexSettings\UpdateIndicesSettings\RoutingAllocationEnableOption.cs" />
     <Compile Include="Modules\Scripting\ScriptLang.cs" />
     <Compile Include="Aggregations\Bucket\TermsAggregationCollectMode.cs" />
-    <Compile Include="Exception\RestoreException.cs" />
-    <Compile Include="Exception\SnapshotException.cs" />
+    <Compile Include="CommonAbstractions\Exception\RestoreException.cs" />
+    <Compile Include="CommonAbstractions\Exception\SnapshotException.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\NestSerializer.cs" />
     <Compile Include="CommonOptions\Geo\GeoDistance.cs" />
     <Compile Include="CommonAbstractions\RawDispatch\IHighLevelToLowLevelDispatcher.cs" />
@@ -655,7 +655,7 @@
     <Compile Include="Document\Multiple\MultiGet\MultiGetOperation.cs" />
     <Compile Include="Aggregations\Bucket\TermsAggregationExecutionHint.cs" />
     <Compile Include="Aggregations\Bucket\GeoHash\GeoHashPrecision.cs" />
-    <Compile Include="Exception\DispatchException.cs" />
+    <Compile Include="CommonAbstractions\Exception\DispatchException.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\StatefulDeserialization\JsonConverterPiggyBackState.cs" />
     <Compile Include="CommonAbstractions\Extensions\StringExtensions.cs" />
     <Compile Include="CommonAbstractions\Extensions\SuffixExtensions.cs" />
@@ -685,7 +685,7 @@
     <Compile Include="Search\Suggesters\PhraseSuggester\PhraseSuggest.cs" />
     <Compile Include="Search\Suggesters\SuggestBucket.cs" />
     <Compile Include="Search\Suggesters\TermSuggester\TermSuggest.cs" />
-    <Compile Include="Exception\ReindexException.cs" />
+    <Compile Include="CommonAbstractions\Exception\ReindexException.cs" />
     <Compile Include="Document\Multiple\Reindex\ReindexObservable.cs" />
     <Compile Include="Document\Multiple\Reindex\ReindexObserver.cs" />
     <Compile Include="Document\Multiple\Reindex\ReindexResponse.cs" />
@@ -978,7 +978,7 @@
     <Compile Include="QueryDsl\TermLevel\WildcardQuery.cs" />
     <Compile Include="Search\Search\ElasticClient-Search.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\ElasticContractResolver.cs" />
-    <Compile Include="Exception\DslException.cs" />
+    <Compile Include="CommonAbstractions\Exception\DslException.cs" />
     <Compile Include="Mapping\FieldType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CommonAbstractions\Infer\PrropertyName\PropertyNameResolver.cs" />
