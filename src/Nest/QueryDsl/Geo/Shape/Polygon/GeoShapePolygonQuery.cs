@@ -41,7 +41,7 @@ namespace Nest
 
 	public class GeoShapePolygonQueryDescriptor<T> : IGeoShapePolygonQuery where T : class
 	{
-		private IGeoShapePolygonQuery Self { get { return this; } }
+		private IGeoShapePolygonQuery Self => this;
 		string IQuery.Name { get; set; }
 		bool IQuery.IsConditionless
 		{

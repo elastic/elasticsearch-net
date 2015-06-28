@@ -37,7 +37,7 @@ namespace Nest
 
 	public class FuzzySuggestDescriptor<T> : IFuzzySuggester where T : class 
     {
-		protected IFuzzySuggester Self { get { return this; } }
+		protected IFuzzySuggester Self => this;
 
         bool? IFuzzySuggester.Transpositions { get; set; }
 

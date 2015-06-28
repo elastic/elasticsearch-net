@@ -18,7 +18,7 @@ namespace Nest
 
 	public class AliasAddDescriptor : IAliasAddAction
 	{
-		private IAliasAddAction Self { get { return this; } }
+		private IAliasAddAction Self => this;
 
 		public AliasAddDescriptor()
 		{

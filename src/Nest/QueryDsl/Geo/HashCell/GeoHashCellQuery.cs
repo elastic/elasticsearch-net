@@ -51,7 +51,7 @@ namespace Nest
 
 	public class GeoHashCellQueryDescriptor<T> : IGeoHashCellQuery
     {
-		private IGeoHashCellQuery Self { get { return this; } }
+		private IGeoHashCellQuery Self => this;
 		string IQuery.Name { get; set; }
         bool IQuery.IsConditionless { get { return QueryCondition.IsConditionless(this); } }
         PropertyPathMarker IGeoHashCellQuery.Field { get; set; }

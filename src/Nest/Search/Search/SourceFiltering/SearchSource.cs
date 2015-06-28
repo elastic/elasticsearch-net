@@ -24,7 +24,7 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class SearchSourceDescriptor<T> : ISourceFilter where T : class 
  	{
-		private ISourceFilter Self { get { return this; } }
+		private ISourceFilter Self => this;
 
 		[JsonProperty("include")]
 		IEnumerable<PropertyPathMarker> ISourceFilter.Include { get; set; } 

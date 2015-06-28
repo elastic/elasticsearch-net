@@ -43,7 +43,7 @@ namespace Nest
 	public partial class PutWarmerDescriptor : IndicesOptionalTypesNamePathDescriptor<PutWarmerDescriptor, PutWarmerRequestParameters>
 		, IPutWarmerRequest
 	{
-		private IPutWarmerRequest Self { get { return this; } }
+		private IPutWarmerRequest Self => this;
 
 		ISearchRequest IPutWarmerRequest.SearchDescriptor { get; set; }
 

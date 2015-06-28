@@ -38,7 +38,7 @@ namespace Nest
 	public class PercentilesAggregationDescriptor<T> : BucketAggregationBaseDescriptor<PercentilesAggregationDescriptor<T>, T>, IPercentilesAggregator 
 		where T : class
 	{
-		private IPercentilesAggregator Self { get { return this; } }
+		private IPercentilesAggregator Self => this;
 
 		PropertyPathMarker IPercentilesAggregator.Field { get; set; }
 		

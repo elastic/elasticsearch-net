@@ -64,7 +64,7 @@ namespace Nest
 		where TDescriptor : RepositorySnapshotPathDescriptor<TDescriptor, TParameters> 
 		where TParameters : FluentRequestParameters<TParameters>, new()
 	{
-		private IRepositorySnapshotPath<TParameters> Self { get { return this; } }
+		private IRepositorySnapshotPath<TParameters> Self => this;
 
 		string IRepositorySnapshotPath<TParameters>.Repository { get; set; }
 

@@ -204,7 +204,7 @@ namespace Nest
 	public partial class UpdateSettingsDescriptor
 		: IndexOptionalPathDescriptorBase<UpdateSettingsDescriptor, UpdateSettingsRequestParameters>, IUpdateSettingsRequest
 	{
-		private IUpdateSettingsRequest Self { get { return this; } }
+		private IUpdateSettingsRequest Self => this;
 
 		int? IUpdateSettingsRequest.NumberOfReplicas { get; set; }
 

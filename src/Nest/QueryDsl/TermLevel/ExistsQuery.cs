@@ -39,7 +39,7 @@ namespace Nest
 
 	public class ExistsQueryDescriptor<T> : IExistsQuery where T : class
 	{
-		private IExistsQuery Self { get { return this; } }
+		private IExistsQuery Self => this;
 		string IQuery.Name { get; set; }
 		bool IQuery.IsConditionless { get { return QueryCondition.IsConditionless(this); } }
 		PropertyPathMarker IExistsQuery.Field { get; set;}

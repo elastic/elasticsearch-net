@@ -42,7 +42,7 @@ namespace Nest
 
 	public class FilteredQueryDescriptor<T> : IFilteredQuery where T : class
 	{
-		private IFilteredQuery Self { get { return this; } }
+		private IFilteredQuery Self => this;
 		string IQuery.Name { get; set; }
 		bool IQuery.IsConditionless => FilteredQuery.IsConditionless(this);
 		IQueryContainer IFilteredQuery.Query { get; set; }

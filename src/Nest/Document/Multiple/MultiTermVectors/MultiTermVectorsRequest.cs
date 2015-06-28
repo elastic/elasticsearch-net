@@ -41,7 +41,7 @@ namespace Nest
 	public partial class MultiTermVectorsDescriptor<T> : IndexTypePathDescriptor<MultiTermVectorsDescriptor<T>, MultiTermVectorsRequestParameters, T>, IMultiTermVectorsRequest
 		where T : class
 	{
-		private IMultiTermVectorsRequest Self { get { return this; } }
+		private IMultiTermVectorsRequest Self => this;
 
 		IEnumerable<MultiTermVectorDocument> IMultiTermVectorsRequest.Documents { get; set; }
 

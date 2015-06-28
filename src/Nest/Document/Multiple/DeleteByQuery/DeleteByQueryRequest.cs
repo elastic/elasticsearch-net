@@ -70,7 +70,7 @@ namespace Nest
 		: QueryPathDescriptorBase<DeleteByQueryDescriptor<T>, DeleteByQueryRequestParameters, T>, IDeleteByQueryRequest
 		where T : class
 	{
-		private IDeleteByQueryRequest Self { get { return this; } }
+		private IDeleteByQueryRequest Self => this;
 
 		IQueryContainer IDeleteByQueryRequest.Query { get; set; }
 

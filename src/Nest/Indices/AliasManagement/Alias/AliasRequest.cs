@@ -35,7 +35,7 @@ namespace Nest
 	[DescriptorFor("IndicesUpdateAliases")]
 	public partial class AliasDescriptor : BasePathDescriptor<AliasDescriptor, AliasRequestParameters>, IAliasRequest
 	{
-		private IAliasRequest Self { get { return this; } }
+		private IAliasRequest Self => this;
 
 		public AliasDescriptor()
 		{

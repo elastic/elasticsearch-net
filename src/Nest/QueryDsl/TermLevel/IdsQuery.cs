@@ -33,7 +33,7 @@ namespace Nest
 
 	public class IdsQueryDescriptor : IIdsQuery
 	{
-		private IIdsQuery Self { get { return this; } }
+		private IIdsQuery Self => this;
 		string IQuery.Name { get; set; }
 		bool IQuery.IsConditionless
 		{

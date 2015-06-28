@@ -280,7 +280,7 @@ namespace Nest
 	public partial class SearchDescriptor<T> : QueryPathDescriptorBase<SearchDescriptor<T>, SearchRequestParameters, T>, ISearchRequest 
 		where T : class
 	{
-		private ISearchRequest Self { get { return this; } }
+		private ISearchRequest Self => this;
 
 		SearchType? ISearchRequest.SearchType
 		{

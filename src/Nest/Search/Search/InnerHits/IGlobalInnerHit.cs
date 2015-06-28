@@ -24,7 +24,7 @@ namespace Nest
 
 	public class GlobalInnerHitDescriptor<T> : IGlobalInnerHit where T : class
 	{
-		private IGlobalInnerHit Self { get { return this; } }
+		private IGlobalInnerHit Self => this;
 
 		IQueryContainer IGlobalInnerHit.Query { get; set; }
 		IDictionary<string, IInnerHitsContainer> IGlobalInnerHit.InnerHits { get; set; }

@@ -35,7 +35,7 @@ namespace Nest
 	[DescriptorFor("Mget")]
 	public partial class MultiGetDescriptor : FixedIndexTypePathDescriptor<MultiGetDescriptor, MultiGetRequestParameters>, IMultiGetRequest
 	{
-		private IMultiGetRequest Self { get { return this; } }
+		private IMultiGetRequest Self => this;
 
 		IList<IMultiGetOperation> IMultiGetRequest.GetOperations { get; set; }
 

@@ -29,7 +29,7 @@ namespace Nest
 			this.Self.Type = typeof(T);
 		}
 
-		IChildrenAggregator Self { get { return this; } }
+		IChildrenAggregator Self => this;
 		
 		TypeNameMarker IChildrenAggregator.Type { get; set; }
 

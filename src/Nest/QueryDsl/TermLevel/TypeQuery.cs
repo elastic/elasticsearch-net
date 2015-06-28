@@ -28,7 +28,7 @@ namespace Nest
 	
 	public class TypeQueryDescriptor : ITypeQuery
 	{
-		private ITypeQuery Self { get { return this; } }
+		private ITypeQuery Self => this;
 
 		string IQuery.Name { get; set; }
 

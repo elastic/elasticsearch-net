@@ -48,7 +48,7 @@ namespace Nest
 		IHideObjectMembers
 		where T : class
 	{
-		private IScrollRequest Self { get { return this; } }
+		private IScrollRequest Self => this;
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ScrollRequestParameters> pathInfo)
 		{

@@ -97,7 +97,7 @@ namespace Nest
 		where TParameters : FluentRequestParameters<TParameters>, new()
 		where T : class
 	{
-		private IIndicesTypePath<TParameters> Self { get { return this; } }
+		private IIndicesTypePath<TParameters> Self => this;
 
 		bool? IIndicesTypePath<TParameters>.AllIndices { get; set; }
 		IEnumerable<IndexNameMarker> IIndicesTypePath<TParameters>.Indices { get; set; }

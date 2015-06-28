@@ -46,7 +46,7 @@ namespace Nest
 
 	public class ScriptQueryDescriptor<T> : IScriptQuery where T : class
 	{
-		private IScriptQuery Self { get { return this; } }
+		private IScriptQuery Self => this;
 		string IQuery.Name { get; set; }
 		bool IQuery.IsConditionless { get { return QueryCondition.IsConditionless(this); } }
 		string IScriptQuery.Script { get; set; }

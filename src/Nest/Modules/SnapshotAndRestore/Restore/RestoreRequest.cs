@@ -59,7 +59,7 @@ namespace Nest
 	[DescriptorFor("SnapshotRestore")]
 	public partial class RestoreDescriptor : RepositorySnapshotPathDescriptor<RestoreDescriptor, RestoreRequestParameters>, IRestoreRequest
 	{
-		private IRestoreRequest Self { get { return this; } }
+		private IRestoreRequest Self => this;
 
 		IEnumerable<IndexNameMarker> IRestoreRequest.Indices { get; set; }
 		bool? IRestoreRequest.IgnoreUnavailable { get; set; }

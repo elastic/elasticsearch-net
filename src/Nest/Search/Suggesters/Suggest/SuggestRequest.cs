@@ -73,7 +73,7 @@ namespace Nest
 	public partial class SuggestDescriptor<T> : IndicesOptionalExplicitAllPathDescriptor<SuggestDescriptor<T>, SuggestRequestParameters>, ISuggestRequest
 		where T : class
 	{
-		private ISuggestRequest Self { get { return this; } }
+		private ISuggestRequest Self => this;
 
 		object ICustomJson.GetCustomJson() { return SuggestPathInfo.GetCustomJson(this); }
 

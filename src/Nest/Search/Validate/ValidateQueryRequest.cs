@@ -68,7 +68,7 @@ namespace Nest
         : QueryPathDescriptorBase<ValidateQueryDescriptor<T>, ValidateQueryRequestParameters, T>, IValidateQueryRequest<T>
 		where T : class
 	{
-        private IValidateQueryRequest Self { get { return this; } }
+        private IValidateQueryRequest Self => this;
 
         IQueryContainer IValidateQueryRequest.Query { get; set; }
 

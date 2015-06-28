@@ -34,7 +34,7 @@ namespace Nest
 
 	public class GeoHashAggregationDescriptor<T> : BucketAggregationBaseDescriptor<GeoHashAggregationDescriptor<T>, T>, IGeoHashAggregator where T : class
 	{
-		private IGeoHashAggregator Self { get { return this; } }
+		private IGeoHashAggregator Self => this;
 
 		PropertyPathMarker IGeoHashAggregator.Field { get; set; }
 		

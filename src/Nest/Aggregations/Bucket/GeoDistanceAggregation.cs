@@ -43,7 +43,7 @@ namespace Nest
 
 	public class GeoDistanceAggregationDescriptor<T> : BucketAggregationBaseDescriptor<GeoDistanceAggregationDescriptor<T>, T>, IGeoDistanceAggregator where T : class
 	{
-		private IGeoDistanceAggregator Self { get { return this; } }
+		private IGeoDistanceAggregator Self => this;
 
 		PropertyPathMarker IGeoDistanceAggregator.Field { get; set; }
 		

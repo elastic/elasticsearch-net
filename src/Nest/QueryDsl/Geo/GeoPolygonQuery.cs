@@ -40,7 +40,7 @@ namespace Nest
 
 	public class GeoPolygonQueryDescriptor<T> : IGeoPolygonQuery
 	{
-		private IGeoPolygonQuery Self { get { return this; } }
+		private IGeoPolygonQuery Self => this;
 		string IQuery.Name { get; set; }
 		bool IQuery.IsConditionless { get { return QueryCondition.IsConditionless(this); } }
 		PropertyPathMarker IGeoPolygonQuery.Field { get; set; }

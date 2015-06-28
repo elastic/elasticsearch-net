@@ -66,7 +66,7 @@ namespace Nest
 	//TODO rename to SortDescriptorFieldBase in 2.0
 	public abstract class SortDescriptorBase<T, TDescriptor> : ISort where T : class where TDescriptor : SortDescriptorBase<T, TDescriptor>
 	{
-		private ISort Self { get { return this; } }
+		private ISort Self => this;
 
 		string ISort.Missing { get; set; }
 
@@ -264,7 +264,7 @@ namespace Nest
 
 	public class SortFieldDescriptor<T> : SortDescriptorBase<T, SortFieldDescriptor<T>>, IFieldSort where T : class
 	{
-		private IFieldSort Self { get { return this; } }
+		private IFieldSort Self => this;
 
 		PropertyPathMarker IFieldSort.Field { get; set; }
 

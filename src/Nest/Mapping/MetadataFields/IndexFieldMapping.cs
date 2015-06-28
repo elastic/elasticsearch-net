@@ -22,7 +22,7 @@ namespace Nest
 
 	public class IndexFieldMappingDescriptor : IIndexFieldMapping
 	{
-		private IIndexFieldMapping Self { get { return this; } }
+		private IIndexFieldMapping Self => this;
 
 		bool? IIndexFieldMapping.Enabled { get; set; }
 

@@ -37,7 +37,7 @@ namespace Nest
 	[DescriptorFor("Msearch")]
 	public partial class MultiSearchDescriptor : FixedIndexTypePathDescriptor<MultiSearchDescriptor, MultiSearchRequestParameters>, IMultiSearchRequest
 	{
-		private IMultiSearchRequest Self { get { return this; } }
+		private IMultiSearchRequest Self => this;
 
 		internal IDictionary<string, ISearchRequest> _operations = new Dictionary<string, ISearchRequest>();
 

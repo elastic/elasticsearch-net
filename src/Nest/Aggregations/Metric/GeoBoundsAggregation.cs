@@ -24,7 +24,7 @@ namespace Nest
 		: MetricAggregationBaseDescriptor<GeoBoundsAggregationDescriptor<T>, T>, IGeoBoundsAggregator
 		where T : class
 	{
-		IGeoBoundsAggregator Self { get { return this; } }
+		IGeoBoundsAggregator Self => this;
 		bool? IGeoBoundsAggregator.WrapLongitude { get; set; }
 
 		public GeoBoundsAggregationDescriptor<T> WrapLongitude(bool wrapLongitude = true)

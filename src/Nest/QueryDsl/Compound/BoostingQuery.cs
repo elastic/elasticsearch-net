@@ -43,7 +43,7 @@ namespace Nest
 
 	public class BoostingQueryDescriptor<T> : IBoostingQuery where T : class
 	{
-		private IBoostingQuery Self { get { return this; } }
+		private IBoostingQuery Self => this;
 		bool IQuery.IsConditionless => BoostingQuery.IsConditionless(this);
 		string IQuery.Name { get; set; }
 		QueryContainer IBoostingQuery.PositiveQuery { get; set; }

@@ -89,7 +89,7 @@ namespace Nest
 	public class MatchQueryDescriptor<T> : IMatchQuery where T : class
 	{
 		protected virtual string MatchQueryType { get { return null; } }
-		private IMatchQuery Self { get { return this; } }
+		private IMatchQuery Self => this;
 		string IQuery.Name { get; set; }
 		bool IQuery.IsConditionless => MatchQuery.IsConditionless(this);
 		string IMatchQuery.Type { get { return MatchQueryType; } }

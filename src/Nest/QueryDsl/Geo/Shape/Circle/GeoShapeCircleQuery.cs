@@ -44,7 +44,7 @@ namespace Nest
 
 	public class GeoShapeCircleQueryDescriptor<T> : IGeoShapeCircleQuery where T : class
 	{
-		private IGeoShapeCircleQuery Self { get { return this; } }
+		private IGeoShapeCircleQuery Self => this;
 		string IQuery.Name { get; set; }
 		bool IQuery.IsConditionless
 		{

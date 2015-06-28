@@ -50,7 +50,7 @@ namespace Nest
 
 	public class RegexpQueryDescriptor<T> : IRegexpQuery where T : class
 	{
-		private IRegexpQuery Self { get { return this; } }
+		private IRegexpQuery Self => this;
 		string IQuery.Name { get; set; }
 		bool IQuery.IsConditionless
 		{

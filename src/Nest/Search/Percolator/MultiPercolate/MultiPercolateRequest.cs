@@ -34,7 +34,7 @@ namespace Nest
 	[DescriptorFor("Mpercolate")]
 	public partial class MultiPercolateDescriptor : FixedIndexTypePathDescriptor<MultiPercolateDescriptor, MultiPercolateRequestParameters>, IMultiPercolateRequest
 	{
-		private IMultiPercolateRequest Self { get { return this; } }
+		private IMultiPercolateRequest Self => this;
 
 		IList<IPercolateOperation> IMultiPercolateRequest.Percolations { get; set; }
 

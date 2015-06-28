@@ -51,7 +51,7 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class NestedQueryDescriptor<T> : INestedQuery where T : class
 	{
-		private INestedQuery Self { get { return this; } }
+		private INestedQuery Self => this;
 		string IQuery.Name { get; set; }
 		bool IQuery.IsConditionless
 		{

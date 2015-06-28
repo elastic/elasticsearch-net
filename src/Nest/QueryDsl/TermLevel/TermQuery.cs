@@ -42,7 +42,7 @@ namespace Nest
 		where TDescriptor : TermQueryDescriptorBase<TDescriptor, T>
 		where T : class
 	{
-		private ITermQuery Self { get { return this; } }
+		private ITermQuery Self => this;
 		string IQuery.Name { get; set; }
 		bool IQuery.IsConditionless
 		{

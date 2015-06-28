@@ -49,7 +49,7 @@ namespace Nest
 
 	public class SpanNotQuery<T> : ISpanNotQuery where T : class
 	{
-		private ISpanNotQuery Self { get { return this; } }
+		private ISpanNotQuery Self => this;
 		string IQuery.Name { get; set; }
 		bool IQuery.IsConditionless
 		{

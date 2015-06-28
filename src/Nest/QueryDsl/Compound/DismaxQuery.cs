@@ -35,7 +35,7 @@ namespace Nest
 
 	public class DisMaxQueryDescriptor<T> : IDisMaxQuery where T : class
 	{
-		private IDisMaxQuery Self { get { return this; } }
+		private IDisMaxQuery Self => this;
 		string IQuery.Name { get; set; }
 		bool IQuery.IsConditionless => DismaxQuery.IsConditionless(this);
 		double? IDisMaxQuery.TieBreaker { get; set; }

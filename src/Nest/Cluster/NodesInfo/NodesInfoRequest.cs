@@ -37,7 +37,7 @@ namespace Nest
 	[DescriptorFor("NodesInfo")]
 	public partial class NodesInfoDescriptor : NodeIdOptionalDescriptor<NodesInfoDescriptor, NodesInfoRequestParameters>, INodesInfoRequest
 	{
-		private INodesInfoRequest Self { get { return this; } }
+		private INodesInfoRequest Self => this;
 		IEnumerable<NodesInfoMetric> INodesInfoRequest.Metrics { get; set; }
 
 		public NodesInfoDescriptor Metrics(params NodesInfoMetric[] metrics)

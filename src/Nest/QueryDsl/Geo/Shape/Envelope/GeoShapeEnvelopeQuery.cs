@@ -41,7 +41,7 @@ namespace Nest
 
 	public class GeoShapeEnvelopeQueryDescriptor<T> : IGeoShapeEnvelopeQuery where T : class
 	{
-		private IGeoShapeEnvelopeQuery Self { get { return this; } }
+		private IGeoShapeEnvelopeQuery Self => this;
 		string IQuery.Name { get; set; }
 		bool IQuery.IsConditionless
 		{

@@ -26,7 +26,7 @@ namespace Nest
 		: BucketAggregationBaseDescriptor<ReverseNestedAggregationDescriptor<T>, T>, IReverseNestedAggregator 
 		where T : class
 	{
-		IReverseNestedAggregator Self { get { return this; } }
+		IReverseNestedAggregator Self => this;
 		PropertyPathMarker IReverseNestedAggregator.Path { get; set; }
 
 		public ReverseNestedAggregationDescriptor<T> Path(string path)

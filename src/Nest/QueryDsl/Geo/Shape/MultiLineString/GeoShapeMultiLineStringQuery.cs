@@ -40,7 +40,7 @@ namespace Nest
 
 	public class GeoShapeMultiLineStringQueryDescriptor<T> : IGeoShapeMultiLineStringQuery where T : class
 	{
-		private IGeoShapeMultiLineStringQuery Self { get { return this; } }
+		private IGeoShapeMultiLineStringQuery Self => this;
 		string IQuery.Name { get; set; }
 		bool IQuery.IsConditionless
 		{

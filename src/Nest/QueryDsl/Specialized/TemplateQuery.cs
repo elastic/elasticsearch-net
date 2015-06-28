@@ -34,7 +34,7 @@ namespace Nest
 
 	public class TemplateQueryDescriptor<T> : ITemplateQuery where T : class
 	{
-		ITemplateQuery Self { get { return this; } }
+		ITemplateQuery Self => this;
 		string IQuery.Name { get; set; }
 		bool IQuery.IsConditionless { get { return this.Self.Query.IsNullOrEmpty(); } }
 		string ITemplateQuery.Query { get; set; }

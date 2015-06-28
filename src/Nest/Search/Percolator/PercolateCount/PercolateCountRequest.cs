@@ -58,7 +58,7 @@ namespace Nest
 		where T : class
 	{
 
-		private IPercolateCountRequest<T> Self { get { return this; } }
+		private IPercolateCountRequest<T> Self => this;
 
 		IHighlightRequest IPercolateOperation.Highlight { get; set; }
 		QueryContainer IPercolateOperation.Query { get; set; }

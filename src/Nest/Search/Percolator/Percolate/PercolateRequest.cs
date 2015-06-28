@@ -64,7 +64,7 @@ namespace Nest
 	public partial class PercolateDescriptor<T> : IndexTypePathDescriptor<PercolateDescriptor<T>, PercolateRequestParameters, T>, IPercolateRequest<T>
 		where T : class
 	{
-		private IPercolateRequest<T> Self { get { return this; } }
+		private IPercolateRequest<T> Self => this;
 
 		IHighlightRequest IPercolateOperation.Highlight { get; set; }
 		QueryContainer IPercolateOperation.Query { get; set; }

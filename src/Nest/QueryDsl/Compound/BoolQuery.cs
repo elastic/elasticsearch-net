@@ -59,7 +59,7 @@ namespace Nest
 
 	public class BoolQueryDescriptor<T> : IBoolQuery where T : class
 	{
-		private IBoolQuery Self { get { return this; } }
+		private IBoolQuery Self => this;
 		string IQuery.Name { get; set; }
 		bool IQuery.IsConditionless => BoolQuery.IsConditionless(this);
 		IEnumerable<IQueryContainer> IBoolQuery.Must { get; set; }

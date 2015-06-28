@@ -37,7 +37,7 @@ namespace Nest
 		: IndicesOptionalPathDescriptor<GetAliasDescriptor, GetAliasRequestParameters>, IGetAliasRequest
 	{
 
-		private IGetAliasRequest Self { get { return this; } }
+		private IGetAliasRequest Self => this;
 
 		string IGetAliasRequest.Alias { get; set; }
 

@@ -45,7 +45,7 @@ namespace Nest
 
 	public class FuzzyDateQueryDescriptor<T> : IFuzzyDateQuery where T : class
 	{
-		private IFuzzyDateQuery Self { get { return this; } }
+		private IFuzzyDateQuery Self => this;
 		string IQuery.Name { get; set; }
 		bool IQuery.IsConditionless
 		{

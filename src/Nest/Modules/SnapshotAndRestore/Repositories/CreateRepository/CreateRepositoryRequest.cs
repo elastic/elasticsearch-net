@@ -35,7 +35,7 @@ namespace Nest
 	[DescriptorFor("SnapshotCreateRepository")]
 	public partial class CreateRepositoryDescriptor : RepositoryPathDescriptor<CreateRepositoryDescriptor, CreateRepositoryRequestParameters>, ICreateRepositoryRequest
 	{
-		private ICreateRepositoryRequest Self { get { return this; } }
+		private ICreateRepositoryRequest Self => this;
 
 		IRepository ICreateRepositoryRequest.Repository { get; set; } 
 

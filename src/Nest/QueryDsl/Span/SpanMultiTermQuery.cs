@@ -28,7 +28,7 @@ namespace Nest
 	public class SpanMultiTermQueryDescriptor<T> : ISpanMultiTermQuery
 		where T : class
 	{
-		private ISpanMultiTermQuery Self { get { return this; } }
+		private ISpanMultiTermQuery Self => this;
 		string IQuery.Name { get; set; }
 		bool IQuery.IsConditionless { get { return false; } }
 		IQueryContainer ISpanMultiTermQuery.Match { get; set; }

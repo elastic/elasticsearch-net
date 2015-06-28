@@ -25,7 +25,7 @@ namespace Nest
 
 	public class AnalyzerFieldMappingDescriptor<T> : IAnalyzerFieldMapping
 	{
-		private IAnalyzerFieldMapping Self { get { return this; } }
+		private IAnalyzerFieldMapping Self => this;
 
 		bool? IAnalyzerFieldMapping.Index { get; set; }
 

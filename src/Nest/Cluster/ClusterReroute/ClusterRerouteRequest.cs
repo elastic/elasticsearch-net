@@ -38,7 +38,7 @@ namespace Nest
 	public partial class ClusterRerouteDescriptor 
 		: BasePathDescriptor<ClusterRerouteDescriptor, ClusterRerouteRequestParameters>, IClusterRerouteRequest
 	{
-		IClusterRerouteRequest Self { get { return this; } }
+		IClusterRerouteRequest Self => this;
 
 		IList<IClusterRerouteCommand> IClusterRerouteRequest.Commands { get; set; }
 

@@ -31,7 +31,7 @@ namespace Nest
 
 	public class SpanOrQueryDescriptor<T> : ISpanOrQuery where T : class
 	{
-		private ISpanOrQuery Self { get { return this; } }
+		private ISpanOrQuery Self => this;
 		string IQuery.Name { get; set; }
 		bool IQuery.IsConditionless
 		{

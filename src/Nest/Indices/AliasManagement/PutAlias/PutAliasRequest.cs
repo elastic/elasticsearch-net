@@ -49,7 +49,7 @@ namespace Nest
 	public partial class PutAliasDescriptor 
 		: IndexOptionalNamePathDescriptor<PutAliasDescriptor, PutAliasRequestParameters>, IPutAliasRequest
 	{
-		IPutAliasRequest Self { get { return this; } }
+		IPutAliasRequest Self => this;
 		string IPutAliasRequest.Routing { get; set; }
 		IQueryContainer IPutAliasRequest.Filter { get; set; }
 		

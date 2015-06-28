@@ -57,7 +57,7 @@ namespace Nest
 
 	public class GeoDistanceRangeQueryDescriptor<T> : IGeoDistanceRangeQuery where T : class
 	{
-		private IGeoDistanceRangeQuery Self { get { return this; } }
+		private IGeoDistanceRangeQuery Self => this;
 		string IQuery.Name { get; set; }
 		bool IQuery.IsConditionless => GeoDistanceRangeQuery.IsConditionless(this);
 		PropertyPathMarker IGeoDistanceRangeQuery.Field { get; set; }

@@ -153,7 +153,7 @@ namespace Nest
 		where TParameters : FluentRequestParameters<TParameters>, new()
         where T : class
 	{
-		private IQueryPath<TParameters> Self { get { return this; } }
+		private IQueryPath<TParameters> Self => this;
 
 		IEnumerable<IndexNameMarker> IQueryPath<TParameters>.Indices { get; set; }
 		IEnumerable<TypeNameMarker> IQueryPath<TParameters>.Types { get; set; }

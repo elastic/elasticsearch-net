@@ -101,7 +101,7 @@ namespace Nest
 		where TDocument : class
 		where TPartialDocument : class
 	{
-		private IBulkUpdateOperation<TDocument, TPartialDocument> Self { get { return this; } }
+		private IBulkUpdateOperation<TDocument, TPartialDocument> Self => this;
 
 		protected override string BulkOperationType { get { return "update"; } }
 		protected override Type BulkOperationClrType { get { return typeof(TDocument); } }

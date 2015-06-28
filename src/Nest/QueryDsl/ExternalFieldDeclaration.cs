@@ -18,7 +18,7 @@ namespace Nest
 	{
 		internal Type _ClrType { get { return typeof(T);  } }
 
-		private IExternalFieldDeclaration Self { get { return this; } }
+		private IExternalFieldDeclaration Self => this;
 
 		IndexNameMarker IExternalFieldDeclaration.Index { get; set; }
 		

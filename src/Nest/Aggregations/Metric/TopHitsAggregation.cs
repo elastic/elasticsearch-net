@@ -59,7 +59,7 @@ namespace Nest
 		: MetricAggregationBaseDescriptor<TopHitsAggregationDescriptor<T>, T>, ITopHitsAggregator
 		where T : class
 	{
-		ITopHitsAggregator Self { get { return this; } }
+		ITopHitsAggregator Self => this;
 
 		int? ITopHitsAggregator.From { get; set; }
 

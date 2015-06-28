@@ -20,7 +20,7 @@ namespace Nest
 
 	public class FieldNamesFieldMappingDescriptor<T> : IFieldNamesFieldMapping
 	{
-		private IFieldNamesFieldMapping Self { get { return this; } }
+		private IFieldNamesFieldMapping Self => this;
 
 		bool IFieldNamesFieldMapping.Enabled { get; set;}
 

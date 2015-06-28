@@ -81,7 +81,7 @@ namespace Nest
 
 	public class HighlightFieldDescriptor<T> : IHighlightField where T : class
 	{
-		protected IHighlightField Self { get { return this; } }
+		protected IHighlightField Self => this;
 
 		PropertyPathMarker IHighlightField.Field { get; set; }
 		

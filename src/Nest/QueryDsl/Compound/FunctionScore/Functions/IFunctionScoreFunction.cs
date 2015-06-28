@@ -22,7 +22,7 @@ namespace Nest
 	public class FunctionScoreFunction<T> : IFunctionScoreFunction
 		where T : class
 	{
-		IFunctionScoreFunction Self { get { return this; } }
+		IFunctionScoreFunction Self => this;
 
 		[JsonProperty("filter")]
 		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryContainer>, CustomJsonConverter>))]

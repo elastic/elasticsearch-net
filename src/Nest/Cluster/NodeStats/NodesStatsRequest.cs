@@ -39,7 +39,7 @@ namespace Nest
 	[DescriptorFor("NodesStats")]
 	public partial class NodesStatsDescriptor : NodeIdOptionalDescriptor<NodesStatsDescriptor, NodesStatsRequestParameters>, INodesStatsRequest
 	{
-		private INodesStatsRequest Self { get { return this; } }
+		private INodesStatsRequest Self => this;
 		IEnumerable<NodesStatsMetric> INodesStatsRequest.Metrics { get; set; }
 		IEnumerable<NodesStatsIndexMetric> INodesStatsRequest.IndexMetrics { get; set; }
 		

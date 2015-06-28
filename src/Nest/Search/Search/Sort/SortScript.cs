@@ -36,7 +36,7 @@ namespace Nest
 
 	public class SortScriptDescriptor<T> : SortDescriptorBase<T, SortScriptDescriptor<T>>, IScriptSort where T : class
 	{
-		public IScriptSort Self { get { return this; } }
+		public IScriptSort Self => this;
 
 		string IScriptSort.Type { get; set; }
 

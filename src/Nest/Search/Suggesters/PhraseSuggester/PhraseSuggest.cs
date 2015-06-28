@@ -50,7 +50,7 @@ namespace Nest
 
 	public class PhraseSuggestDescriptor<T> : BaseSuggestDescriptor<T>, IPhraseSuggester where T : class
 	{
-		protected IPhraseSuggester Self { get { return this; } }
+		protected IPhraseSuggester Self => this;
 
 		int? IPhraseSuggester.GramSize { get; set; }
 

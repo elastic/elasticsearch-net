@@ -66,7 +66,7 @@ namespace Nest
 
 	public class SimpleQueryStringQueryDescriptor<T> : ISimpleQueryStringQuery where T : class
 	{
-		private ISimpleQueryStringQuery Self { get { return this; } }
+		private ISimpleQueryStringQuery Self => this;
 		string IQuery.Name { get; set; }
 		bool IQuery.IsConditionless => SimpleQueryStringQuery.IsConditionless(this);
 		string ISimpleQueryStringQuery.Query { get; set; }

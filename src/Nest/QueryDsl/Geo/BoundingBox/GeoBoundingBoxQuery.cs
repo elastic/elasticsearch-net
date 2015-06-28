@@ -44,7 +44,7 @@ namespace Nest
 
 	public class GeoBoundingBoxQueryDescriptor<T> : IGeoBoundingBoxQuery where T : class
 	{
-		private IGeoBoundingBoxQuery Self { get { return this; } }
+		private IGeoBoundingBoxQuery Self => this;
 		string IQuery.Name { get; set; }
 		bool IQuery.IsConditionless => GeoBoundingBoxQuery.IsConditionless(this);
 		PropertyPathMarker IGeoBoundingBoxQuery.Field { get; set; }

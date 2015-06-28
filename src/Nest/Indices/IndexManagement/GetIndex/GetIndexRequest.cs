@@ -73,7 +73,7 @@ namespace Nest
 	[DescriptorFor("IndicesGet")]
 	public partial class GetIndexDescriptor : IndicesOptionalExplicitAllPathDescriptor<GetIndexDescriptor, GetIndexRequestParameters>, IGetIndexRequest
 	{
-		private IGetIndexRequest Self { get { return this; } }
+		private IGetIndexRequest Self => this;
 		GetIndexFeature IGetIndexRequest.Features { get; set; }
 		
 		/// <summary>

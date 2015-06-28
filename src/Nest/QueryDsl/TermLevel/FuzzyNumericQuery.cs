@@ -45,7 +45,7 @@ namespace Nest
 
 	public class FuzzyNumericQueryDescriptor<T> : IFuzzyNumericQuery where T : class
 	{
-		private IFuzzyNumericQuery Self { get { return this; } }
+		private IFuzzyNumericQuery Self => this;
 		string IQuery.Name { get; set; }
 		bool IQuery.IsConditionless
 		{

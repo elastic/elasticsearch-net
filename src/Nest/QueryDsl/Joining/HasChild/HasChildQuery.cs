@@ -52,7 +52,7 @@ namespace Nest
 
 	public class HasChildQueryDescriptor<T> : IHasChildQuery where T : class
 	{
-		private IHasChildQuery Self { get { return this; } }
+		private IHasChildQuery Self => this;
 		string IQuery.Name { get; set; }
 		bool IQuery.IsConditionless
 		{

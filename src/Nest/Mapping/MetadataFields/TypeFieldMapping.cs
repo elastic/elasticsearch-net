@@ -23,7 +23,7 @@ namespace Nest
 
 	public class TypeFieldMappingDescriptor : ITypeFieldMapping
 	{
-		private ITypeFieldMapping Self { get { return this; } } 
+		private ITypeFieldMapping Self => this; 
 
 		NonStringIndexOption? ITypeFieldMapping.Index { get; set; }
 

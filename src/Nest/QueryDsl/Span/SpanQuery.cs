@@ -44,7 +44,7 @@ namespace Nest
 
 	public class SpanQuery<T> : ISpanQuery where T : class
 	{
-		private ISpanQuery Self { get { return this; } }
+		private ISpanQuery Self => this;
 		string IQuery.Name { get; set; }
 		bool IQuery.IsConditionless
 		{

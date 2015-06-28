@@ -52,7 +52,7 @@ namespace Nest
 		IWildcardQuery 
 		where T : class
 	{
-		private IWildcardQuery Self { get { return this; } }
+		private IWildcardQuery Self => this;
 
 		RewriteMultiTerm? IWildcardQuery.Rewrite { get; set; }
 

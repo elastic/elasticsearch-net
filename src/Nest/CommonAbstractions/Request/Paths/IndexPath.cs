@@ -55,7 +55,7 @@ namespace Nest
 		where TDescriptor : IndexPathDescriptorBase<TDescriptor, TParameters>
 		where TParameters : FluentRequestParameters<TParameters>, new()
 	{
-		private IIndexPath<TParameters> Self { get { return this; } }
+		private IIndexPath<TParameters> Self => this;
 
 		IndexNameMarker IIndexPath<TParameters>.Index { get; set; }
 		

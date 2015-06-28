@@ -70,7 +70,7 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class InnerHitsDescriptor<T> : IInnerHits where T : class
  	{
-		private IInnerHits Self { get { return this; } }
+		private IInnerHits Self => this;
 		string IInnerHits.Name { get; set; }
 		int? IInnerHits.From { get; set; }
 		int? IInnerHits.Size { get; set; }
