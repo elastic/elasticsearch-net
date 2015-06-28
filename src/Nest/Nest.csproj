@@ -512,7 +512,7 @@
     <Compile Include="CommonAbstractions\SerializationBehavior\NestSerializer.cs" />
     <Compile Include="CommonOptions\Geo\GeoDistance.cs" />
     <Compile Include="CommonAbstractions\RawDispatch\IHighLevelToLowLevelDispatcher.cs" />
-    <Compile Include="Extensions\ExceptionExtensions.cs" />
+    <Compile Include="CommonAbstractions\Extensions\ExceptionExtensions.cs" />
     <Compile Include="Resolvers\Converters\Aggregations\FiltersAggregatorConverter.cs" />
     <Compile Include="Resolvers\Converters\Aggregations\FilterAggregatorConverter.cs" />
     <Compile Include="Resolvers\Converters\ClusterRerouteCommandCollectionConverter.cs" />
@@ -657,9 +657,9 @@
     <Compile Include="Aggregations\Bucket\GeoHash\GeoHashPrecision.cs" />
     <Compile Include="Exception\DispatchException.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\StatefulDeserialization\JsonConverterPiggyBackState.cs" />
-    <Compile Include="Extensions\StringExtensions.cs" />
-    <Compile Include="Extensions\SuffixExtensions.cs" />
-    <Compile Include="Extensions\TypeExtensions.cs" />
+    <Compile Include="CommonAbstractions\Extensions\StringExtensions.cs" />
+    <Compile Include="CommonAbstractions\Extensions\SuffixExtensions.cs" />
+    <Compile Include="CommonAbstractions\Extensions\TypeExtensions.cs" />
     <Compile Include="_Generated\RawDispatch.generated.cs" />
     <Compile Include="CommonAbstractions\RawDispatch\RawDispatch.cs" />
     <Compile Include="Mapping\CoreTypes\CompletionMapping.cs" />
@@ -705,7 +705,7 @@
     <Compile Include="QueryDsl\IExternalFieldDeclaration.cs" />
     <Compile Include="QueryDsl\FullText\MultiMatch\MultiMatchQuery.cs" />
     <Compile Include="Cluster\ClusterState\ElasticClient-ClusterState.cs" />
-    <Compile Include="Extensions\UriExtensions.cs" />
+    <Compile Include="CommonAbstractions\Extensions\UriExtensions.cs" />
     <Compile Include="Resolvers\Converters\AnalysisSettingsConverter.cs" />
     <Compile Include="Resolvers\Converters\AnalyzerCollectionConverter.cs" />
     <Compile Include="Resolvers\Converters\CharFilterCollectionConverter.cs" />
@@ -953,7 +953,7 @@
     <Compile Include="Document\Single\Source\ElasticClient-Source.cs" />
     <Compile Include="Document\Single\Index\ElasticClient-Index.cs" />
     <Compile Include="ElasticClient.cs" />
-    <Compile Include="Extensions\Extensions.cs" />
+    <Compile Include="CommonAbstractions\Extensions\Extensions.cs" />
     <Compile Include="QueryDsl\IQuery.cs" />
     <Compile Include="QueryDsl\MatchAllQuery.cs" />
     <Compile Include="QueryDsl\TermLevel\PrefixQuery.cs" />
