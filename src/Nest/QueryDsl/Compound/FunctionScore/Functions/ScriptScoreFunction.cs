@@ -7,15 +7,11 @@ namespace Nest
 	public class ScriptScoreFunction<T> : FunctionScoreFunction<T> where T : class
 	{
 		[JsonProperty(PropertyName = "script_score")]
-		internal ScriptQueryDescriptor<T> _ScriptScore { get; set; }
+		internal IScriptQuery _ScriptScore { get; set; }
 
-		public ScriptScoreFunction(Action<ScriptQueryDescriptor<T>> scriptSelector)
+		public ScriptScoreFunction(Func<ScriptQueryDescriptor<T>, IScriptQuery> scriptSelector)
 		{
-			var descriptor = new ScriptQueryDescriptor<T>();
-			if (scriptSelector != null)
-				scriptSelector(descriptor);
-
-			this._ScriptScore = descriptor;
+			this._ScriptScore = scriptSelector(new ScriptQueryDescriptor<T>());
 		}
 	}
 }

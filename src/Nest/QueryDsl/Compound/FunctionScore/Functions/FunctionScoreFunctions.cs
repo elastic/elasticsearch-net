@@ -16,42 +16,54 @@ namespace Nest
 			this._Functions = new List<FunctionScoreFunction<T>>();
 		}
 
-		public FunctionScoreFunction<T> Gauss(string field, Action<FunctionScoreDecayFieldDescriptor> descriptorBuilder)
+		public FunctionScoreFunction<T> Gauss(
+			string field, 
+			Func<FunctionScoreDecayFieldDescriptor, FunctionScoreDecayFieldDescriptor> descriptorBuilder)
 		{
 			var fn = new GaussFunction<T>(field, descriptorBuilder);
 			this._Functions.Add(fn);
 			return fn;
 		}
 
-		public FunctionScoreFunction<T> Gauss(Expression<Func<T, object>> objectPath, Action<FunctionScoreDecayFieldDescriptor> descriptorBuilder)
+		public FunctionScoreFunction<T> Gauss(
+			Expression<Func<T, object>> objectPath,
+			Func<FunctionScoreDecayFieldDescriptor, FunctionScoreDecayFieldDescriptor> descriptorBuilder)
 		{
 			var fn = new GaussFunction<T>(objectPath, descriptorBuilder);
 			this._Functions.Add(fn);
 			return fn;
 		}
 
-		public FunctionScoreFunction<T> Linear(string field, Action<FunctionScoreDecayFieldDescriptor> descriptorBuilder)
+		public FunctionScoreFunction<T> Linear(
+			string field,
+			Func<FunctionScoreDecayFieldDescriptor, FunctionScoreDecayFieldDescriptor> descriptorBuilder)
 		{
 			var fn = new LinearFunction<T>(field, descriptorBuilder);
 			this._Functions.Add(fn);
 			return fn;
 		}
 
-		public FunctionScoreFunction<T> Linear(Expression<Func<T, object>> objectPath, Action<FunctionScoreDecayFieldDescriptor> descriptorBuilder)
+		public FunctionScoreFunction<T> Linear(
+			Expression<Func<T, object>> objectPath,
+			Func<FunctionScoreDecayFieldDescriptor, FunctionScoreDecayFieldDescriptor> descriptorBuilder)
 		{
 			var fn = new LinearFunction<T>(objectPath, descriptorBuilder);
 			this._Functions.Add(fn);
 			return fn;
 		}
 
-		public FunctionScoreFunction<T> Exp(string field, Action<FunctionScoreDecayFieldDescriptor> descriptorBuilder)
+		public FunctionScoreFunction<T> Exp(
+			string field,
+			Func<FunctionScoreDecayFieldDescriptor, FunctionScoreDecayFieldDescriptor> descriptorBuilder)
 		{
 			var fn = new ExpFunction<T>(field, descriptorBuilder);
 			this._Functions.Add(fn);
 			return fn;
 		}
 
-		public FunctionScoreFunction<T> Exp(Expression<Func<T, object>> objectPath, Action<FunctionScoreDecayFieldDescriptor> descriptorBuilder)
+		public FunctionScoreFunction<T> Exp(
+			Expression<Func<T, object>> objectPath, 
+			Func<FunctionScoreDecayFieldDescriptor, FunctionScoreDecayFieldDescriptor> descriptorBuilder)
 		{
 			var fn = new ExpFunction<T>(objectPath, descriptorBuilder);
 			this._Functions.Add(fn);
@@ -65,14 +77,14 @@ namespace Nest
 			return fn;
 		}
 
-		public FunctionScoreFunction<T> ScriptScore(Action<ScriptQueryDescriptor<T>> scriptSelector)
+		public FunctionScoreFunction<T> ScriptScore(Func<ScriptQueryDescriptor<T>, IScriptQuery> scriptSelector)
 		{
 			var fn = new ScriptScoreFunction<T>(scriptSelector);
 			this._Functions.Add(fn);
 			return fn;
 		}
 
-		public FunctionScoreFunction<T> FieldValueFactor(Action<FieldValueFactorDescriptor<T>> db)
+		public FunctionScoreFunction<T> FieldValueFactor(Func<FieldValueFactorDescriptor<T>, FieldValueFactorDescriptor<T>> db)
 		{
 			var fn = new FieldValueFactor<T>(db);
 			this._Functions.Add(fn);

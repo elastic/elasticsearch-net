@@ -13,22 +13,26 @@ namespace Nest
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		internal IDictionary<PropertyPathMarker, FunctionScoreDecayFieldDescriptor> _GaussDescriptor { get; set; }
 
-		public GaussFunction(Expression<Func<T, object>> objectPath, Action<FunctionScoreDecayFieldDescriptor> descriptorBuilder)
+		public GaussFunction(
+			Expression<Func<T, object>> objectPath, 
+			Func<FunctionScoreDecayFieldDescriptor, FunctionScoreDecayFieldDescriptor> functionScoreDecaySelector
+		)
 		{
-			_GaussDescriptor = new Dictionary<PropertyPathMarker, FunctionScoreDecayFieldDescriptor>();
-
-			var descriptor = new FunctionScoreDecayFieldDescriptor();
-			descriptorBuilder(descriptor);
-			_GaussDescriptor[objectPath] = descriptor;
+			this._GaussDescriptor = new Dictionary<PropertyPathMarker, FunctionScoreDecayFieldDescriptor>
+			{
+				[objectPath] = functionScoreDecaySelector?.Invoke(new FunctionScoreDecayFieldDescriptor())
+			};
 		}
 
-		public GaussFunction(string field, Action<FunctionScoreDecayFieldDescriptor> descriptorBuilder)
+		public GaussFunction(
+			string field, 
+			Func<FunctionScoreDecayFieldDescriptor, FunctionScoreDecayFieldDescriptor> functionScoreDecaySelector
+			)
 		{
-			_GaussDescriptor = new Dictionary<PropertyPathMarker, FunctionScoreDecayFieldDescriptor>();
-
-			var descriptor = new FunctionScoreDecayFieldDescriptor();
-			descriptorBuilder(descriptor);
-			_GaussDescriptor[field] = descriptor;
+			this._GaussDescriptor = new Dictionary<PropertyPathMarker, FunctionScoreDecayFieldDescriptor>
+			{
+				[field] = functionScoreDecaySelector?.Invoke(new FunctionScoreDecayFieldDescriptor())
+			};
 		}
 	}
 }

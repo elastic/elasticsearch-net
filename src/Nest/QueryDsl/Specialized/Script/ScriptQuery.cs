@@ -13,15 +13,15 @@ namespace Nest
 	public interface IScriptQuery : IQuery
 	{
 		[JsonProperty(PropertyName = "script")]
-        string Script { get; set; }
-        [JsonProperty(PropertyName = "script_id")]
-        string ScriptId { get; set; }
+		string Script { get; set; }
+		[JsonProperty(PropertyName = "script_id")]
+		string ScriptId { get; set; }
 
 		[JsonProperty("script_file")]
 		string ScriptFile { get; set; }
 
 		[JsonProperty(PropertyName = "params")]
-		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		Dictionary<string, object> Params { get; set; }
 
 		[JsonProperty(PropertyName = "lang")]
@@ -33,9 +33,9 @@ namespace Nest
 		public string Name { get; set; }
 		bool IQuery.Conditionless { get { return QueryCondition.IsConditionless(this); } }
 		public string Script { get; set; }
-	    public string ScriptId { get; set; }
+		public string ScriptId { get; set; }
 		public string ScriptFile { get; set; }
-	    public Dictionary<string, object> Params { get; set; }
+		public Dictionary<string, object> Params { get; set; }
 		public string Lang { get; set; }
 
 		protected override void WrapInContainer(IQueryContainer container)
@@ -50,11 +50,11 @@ namespace Nest
 		string IQuery.Name { get; set; }
 		bool IQuery.Conditionless { get { return QueryCondition.IsConditionless(this); } }
 		string IScriptQuery.Script { get; set; }
-        string IScriptQuery.ScriptId { get; set; }
+		string IScriptQuery.ScriptId { get; set; }
 		string IScriptQuery.ScriptFile { get; set; }
-        string IScriptQuery.Lang { get; set; }
+		string IScriptQuery.Lang { get; set; }
 		Dictionary<string, object> IScriptQuery.Params { get; set; }
-		
+
 		/// <summary>
 		/// Inline script to execute
 		/// </summary>
@@ -64,15 +64,15 @@ namespace Nest
 			return this;
 		}
 
-        /// <summary>
-        /// Id of an indexed script to execute
-        /// </summary
-	    public ScriptQueryDescriptor<T> ScriptId(string scriptId)
-        {
-            scriptId.ThrowIfNull("scriptId");
-            this.Self.ScriptId = scriptId;
-            return this;
-	    }
+		/// <summary>
+		/// Id of an indexed script to execute
+		/// </summary
+		public ScriptQueryDescriptor<T> ScriptId(string scriptId)
+		{
+			scriptId.ThrowIfNull("scriptId");
+			this.Self.ScriptId = scriptId;
+			return this;
+		}
 
 		/// <summary>
 		/// File name of a script to execute
@@ -80,7 +80,7 @@ namespace Nest
 		public ScriptQueryDescriptor<T> ScriptFile(string scriptFile)
 		{
 			scriptFile.ThrowIfNull("scriptFile");
-			this.Self.ScriptFile = scriptFile;	
+			this.Self.ScriptFile = scriptFile;
 			return this;
 		}
 
@@ -113,16 +113,16 @@ namespace Nest
 			return this;
 		}
 
-        /// <summary>
-        /// Language of script.
-        /// </summary>
-        /// <param name="lang">language</param>
-        /// <returns>this</returns>
-        public ScriptQueryDescriptor<T> Lang(ScriptLang lang)
-        {
-            lang.ThrowIfNull("lang");
-            this.Self.Lang = lang.GetStringValue();
-            return this;
-        }
+		/// <summary>
+		/// Language of script.
+		/// </summary>
+		/// <param name="lang">language</param>
+		/// <returns>this</returns>
+		public ScriptQueryDescriptor<T> Lang(ScriptLang lang)
+		{
+			lang.ThrowIfNull("lang");
+			this.Self.Lang = lang.GetStringValue();
+			return this;
+		}
 	}
 }

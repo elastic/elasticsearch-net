@@ -172,7 +172,15 @@ namespace Nest
 			walker.Walk(this, visitor);
 		}
 
-		private static QueryContainer CreateEmptyContainer()
+		private readonly JsonSerializerSettings _jsonSettings = new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore };
+		protected string CreateConditionlessWhenStrictExceptionMessage<TQuery>(TQuery query) where TQuery : IQuery =>
+			"Query resulted in a conditionless {0} query (json by approx):\n{1}"
+				.F(
+					query.GetType().Name.Replace("Descriptor", "").Replace("`1", ""),
+					JsonConvert.SerializeObject(this, Formatting.Indented, _jsonSettings)
+
+				);
+		protected static QueryContainer CreateEmptyContainer()
 		{
 			var q = new QueryContainer();
 			((IQueryContainer)q).IsConditionless = true;

@@ -14,13 +14,11 @@ namespace Nest
 		[JsonProperty(PropertyName = "field_value_factor")]
 		internal FieldValueFactorDescriptor<T> _FieldValueFactor { get; set; }
 
-		public FieldValueFactor(Action<FieldValueFactorDescriptor<T>> descriptorBuilder)
+		public FieldValueFactor(Func<FieldValueFactorDescriptor<T>, FieldValueFactorDescriptor<T>> descriptorBuilder)
 		{
-			var descriptor = new FieldValueFactorDescriptor<T>();
-			descriptorBuilder(descriptor);
+			var descriptor = descriptorBuilder(new FieldValueFactorDescriptor<T>());
 			if (descriptor._Field.IsConditionless())
 				throw new DslException("Field name not set for field value factor function");
-
 			this._FieldValueFactor = descriptor;
 		}
 	}

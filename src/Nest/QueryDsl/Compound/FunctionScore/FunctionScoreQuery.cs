@@ -166,14 +166,9 @@ namespace Nest
 			return this;
 		}
 
-		public FunctionScoreQueryDescriptor<T> ScriptScore(Action<ScriptQueryDescriptor<T>> scriptSelector)
+		public FunctionScoreQueryDescriptor<T> ScriptScore(Func<ScriptQueryDescriptor<T>, IScriptQuery> scriptSelector)
 		{
-			var descriptor = new ScriptQueryDescriptor<T>();
-			if (scriptSelector != null)
-				scriptSelector(descriptor);
-
-			Self.ScriptScore = descriptor;
-
+			Self.ScriptScore = scriptSelector?.Invoke(new ScriptQueryDescriptor<T>());
 			return this;
 		}
 

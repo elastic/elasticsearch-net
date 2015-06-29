@@ -13,22 +13,24 @@ namespace Nest
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
 		internal IDictionary<PropertyPathMarker, FunctionScoreDecayFieldDescriptor> _ExpDescriptor { get; set; }
 
-		public ExpFunction(Expression<Func<T, object>> objectPath, Action<FunctionScoreDecayFieldDescriptor> descriptorBuilder)
+		public ExpFunction(
+			Expression<Func<T, object>> objectPath,
+			Func<FunctionScoreDecayFieldDescriptor, FunctionScoreDecayFieldDescriptor> functionScoreDecaySelector)
 		{
-			_ExpDescriptor = new Dictionary<PropertyPathMarker, FunctionScoreDecayFieldDescriptor>();
-
-			var descriptor = new FunctionScoreDecayFieldDescriptor();
-			descriptorBuilder(descriptor);
-			_ExpDescriptor[objectPath] = descriptor;
+			this._ExpDescriptor = new Dictionary<PropertyPathMarker, FunctionScoreDecayFieldDescriptor>
+			{
+				[objectPath] = functionScoreDecaySelector?.Invoke(new FunctionScoreDecayFieldDescriptor())
+			};
 		}
 
-		public ExpFunction(string field, Action<FunctionScoreDecayFieldDescriptor> descriptorBuilder)
+		public ExpFunction(
+			string field,
+			Func<FunctionScoreDecayFieldDescriptor, FunctionScoreDecayFieldDescriptor> functionScoreDecaySelector)
 		{
-			_ExpDescriptor = new Dictionary<PropertyPathMarker, FunctionScoreDecayFieldDescriptor>();
-
-			var descriptor = new FunctionScoreDecayFieldDescriptor();
-			descriptorBuilder(descriptor);
-			_ExpDescriptor[field] = descriptor;
+			this._ExpDescriptor = new Dictionary<PropertyPathMarker, FunctionScoreDecayFieldDescriptor>
+			{
+				[field] = functionScoreDecaySelector?.Invoke(new FunctionScoreDecayFieldDescriptor())
+			};
 		}
 	}
 }

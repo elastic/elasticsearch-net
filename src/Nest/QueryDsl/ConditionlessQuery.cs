@@ -5,41 +5,36 @@ using System.Linq;
 
 namespace Nest
 {
-	public class ConditionlessQueryDescriptor<T> : IQuery where T : class
+	public interface IConditionlessQuery : IQuery
 	{
-		internal QueryContainer _Query { get; set; }
+		QueryContainer Query { get; set; }
 
-		internal QueryContainer _Fallback { get; set; }
+		QueryContainer Fallback { get; set; }
 
-		bool IQuery.Conditionless
-		{
-			get
-			{
-				return (this._Query == null || this._Query.IsConditionless)
-					   && (this._Fallback == null || this._Fallback.IsConditionless);
+	}
 
-			}
-		}
+	public class ConditionlessQueryDescriptor<T> : IConditionlessQuery where T : class
+	{
+		private IConditionlessQuery Self => this;
+
+		QueryContainer IConditionlessQuery.Query { get; set; }
+
+		QueryContainer IConditionlessQuery.Fallback { get; set; }
+
+		bool IQuery.Conditionless => (Self.Query == null || Self.Query.IsConditionless)
+										&& (Self.Fallback == null || Self.Fallback.IsConditionless);
 
 		string IQuery.Name { get; set; }
 
 		public ConditionlessQueryDescriptor<T> Query(Func<QueryDescriptor<T>, QueryContainer> querySelector)
 		{
-			querySelector.ThrowIfNull("querySelector");
-			var query = new QueryDescriptor<T>();
-			var q = querySelector(query);
-
-			this._Query = q;
+			Self.Query = querySelector(new QueryDescriptor<T>());
 			return this;
 		}
 
 		public ConditionlessQueryDescriptor<T> Fallback(Func<QueryDescriptor<T>, QueryContainer> querySelector)
 		{
-			querySelector.ThrowIfNull("querySelector");
-			var query = new QueryDescriptor<T>();
-			var q = querySelector(query);
-
-			this._Fallback = q;
+			Self.Fallback = querySelector(new QueryDescriptor<T>());
 			return this;
 		}
 	}
