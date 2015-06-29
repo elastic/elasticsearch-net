@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 
 namespace Nest
 {
-
+	// TODO: Write a unit test for these using reflection to make sure all queries are covered
 	public static class Query<T> where T : class
 	{
 		public static QueryDescriptor<T> Strict(bool strict = true)
