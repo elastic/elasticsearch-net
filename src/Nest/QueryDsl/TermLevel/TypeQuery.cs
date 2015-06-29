@@ -17,7 +17,7 @@ namespace Nest
 	public class TypeQuery : PlainQuery, ITypeQuery
 	{
 		public string Name { get; set; }
-		bool IQuery.IsConditionless { get { return QueryCondition.IsConditionless(this); } }
+		bool IQuery.Conditionless { get { return QueryCondition.IsConditionless(this); } }
 		public TypeNameMarker Value { get; set; }
 
 		protected override void WrapInContainer(IQueryContainer container)
@@ -32,7 +32,7 @@ namespace Nest
 
 		string IQuery.Name { get; set; }
 
-		bool IQuery.IsConditionless { get { return QueryCondition.IsConditionless(this); } }
+		bool IQuery.Conditionless { get { return QueryCondition.IsConditionless(this); } }
 
 		[JsonProperty(PropertyName = "value")]
 		TypeNameMarker ITypeQuery.Value { get; set; }

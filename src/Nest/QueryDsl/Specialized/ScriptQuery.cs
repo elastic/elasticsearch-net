@@ -31,7 +31,7 @@ namespace Nest
 	public class ScriptQuery : PlainQuery, IScriptQuery
 	{
 		public string Name { get; set; }
-		bool IQuery.IsConditionless { get { return QueryCondition.IsConditionless(this); } }
+		bool IQuery.Conditionless { get { return QueryCondition.IsConditionless(this); } }
 		public string Script { get; set; }
 	    public string ScriptId { get; set; }
 		public string ScriptFile { get; set; }
@@ -48,7 +48,7 @@ namespace Nest
 	{
 		private IScriptQuery Self => this;
 		string IQuery.Name { get; set; }
-		bool IQuery.IsConditionless { get { return QueryCondition.IsConditionless(this); } }
+		bool IQuery.Conditionless { get { return QueryCondition.IsConditionless(this); } }
 		string IScriptQuery.Script { get; set; }
         string IScriptQuery.ScriptId { get; set; }
 		string IScriptQuery.ScriptFile { get; set; }

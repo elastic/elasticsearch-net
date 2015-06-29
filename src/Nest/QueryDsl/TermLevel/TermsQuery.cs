@@ -23,7 +23,7 @@ namespace Nest
 	public class TermsQuery : PlainQuery, ITermsQuery
 	{
 		public string Name { get; set; }
-		bool IQuery.IsConditionless { get { return false; } }
+		bool IQuery.Conditionless { get { return false; } }
 		public PropertyPathMarker Field { get; set; }
 		public string MinimumShouldMatch { get; set; }
 		public bool? DisableCoord { get; set; }
@@ -47,7 +47,7 @@ namespace Nest
 	{
 		private ITermsQuery Self { get { return this; }}
 		string IQuery.Name { get; set; }
-		bool IQuery.IsConditionless
+		bool IQuery.Conditionless
 		{
 			get
 			{

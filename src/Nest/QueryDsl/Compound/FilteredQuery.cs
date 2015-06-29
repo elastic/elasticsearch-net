@@ -22,7 +22,7 @@ namespace Nest
 	public class FilteredQuery : PlainQuery, IFilteredQuery
 	{
 		public string Name { get; set; }
-		bool IQuery.IsConditionless => IsConditionless(this);
+		bool IQuery.Conditionless => IsConditionless(this);
 		public IQueryContainer Query { get; set; }
 		public IQueryContainer Filter { get; set; }
 
@@ -44,7 +44,7 @@ namespace Nest
 	{
 		private IFilteredQuery Self => this;
 		string IQuery.Name { get; set; }
-		bool IQuery.IsConditionless => FilteredQuery.IsConditionless(this);
+		bool IQuery.Conditionless => FilteredQuery.IsConditionless(this);
 		IQueryContainer IFilteredQuery.Query { get; set; }
 		IQueryContainer IFilteredQuery.Filter { get; set; }
 

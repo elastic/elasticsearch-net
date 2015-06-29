@@ -22,11 +22,9 @@ namespace Nest
 		}
 	}
 
-	public class WildcardQuery : PlainQuery, IWildcardQuery
+	public class WildcardQuery : FieldNameQuery, IWildcardQuery
 	{
-		public string Name { get; set; }
-		bool IQuery.IsConditionless { get { return false; } }
-		public PropertyPathMarker Field { get; set; }
+		bool IQuery.Conditionless { get { return false; } }
 		public object Value { get; set; }
 		public double? Boost { get; set; }
 		public RewriteMultiTerm? Rewrite { get; set; }
@@ -34,16 +32,6 @@ namespace Nest
 		protected override void WrapInContainer(IQueryContainer container)
 		{
 			container.Wildcard = this;
-		}
-
-		PropertyPathMarker IFieldNameQuery.GetFieldName()
-		{
-			return this.Field;
-		}
-
-		void IFieldNameQuery.SetFieldName(string fieldName)
-		{
-			this.Field = fieldName;
 		}
 	}
 
@@ -60,16 +48,6 @@ namespace Nest
 		{
 			Self.Rewrite = rewrite;
 			return this;
-		}
-
-		PropertyPathMarker IFieldNameQuery.GetFieldName()
-		{
-			return Self.Field;
-		}
-
-		void IFieldNameQuery.SetFieldName(string fieldName)
-		{
-			Self.Field = fieldName;
 		}
 	}
 }

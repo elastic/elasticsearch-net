@@ -14,11 +14,9 @@ namespace Nest
 		double? Value { get; set; }
 	}
 
-	public class FuzzyNumericQuery : PlainQuery, IFuzzyNumericQuery
+	public class FuzzyNumericQuery : FieldNameQuery, IFuzzyNumericQuery
 	{
-		public string Name { get; set; }
-		bool IQuery.IsConditionless { get { return false; } }
-		public PropertyPathMarker Field { get; set; }
+		bool IQuery.Conditionless { get { return false; } }
 		public double? Boost { get; set; }
 		public string Fuzziness { get; set; }
 		public RewriteMultiTerm? Rewrite { get; set; }
@@ -31,30 +29,20 @@ namespace Nest
 		{
 			container.Fuzzy = this;
 		}
-
-		PropertyPathMarker IFieldNameQuery.GetFieldName()
-		{
-			return this.Field;
-		}
-
-		void IFieldNameQuery.SetFieldName(string fieldName)
-		{
-			this.Field = fieldName;
-		}
 	}
 
 	public class FuzzyNumericQueryDescriptor<T> : IFuzzyNumericQuery where T : class
 	{
 		private IFuzzyNumericQuery Self => this;
 		string IQuery.Name { get; set; }
-		bool IQuery.IsConditionless
+		bool IQuery.Conditionless
 		{
 			get
 			{
 				return Self.Field.IsConditionless() || Self.Value == null;
 			}
 		}
-		PropertyPathMarker IFuzzyQuery.Field { get; set; }
+		PropertyPathMarker IFieldNameQuery.Field { get; set; }
 		double? IFuzzyQuery.Boost { get; set; }
 		int? IFuzzyQuery.MaxExpansions { get; set; }
 		string IFuzzyQuery.Fuzziness { get; set; }
@@ -67,16 +55,6 @@ namespace Nest
 		{
 			Self.Name = name;
 			return this;
-		}
-
-		void IFieldNameQuery.SetFieldName(string fieldName)
-		{
-			Self.Field = fieldName;
-		}
-
-		PropertyPathMarker IFieldNameQuery.GetFieldName()
-		{
-			return Self.Field;
 		}
 		
 		public FuzzyNumericQueryDescriptor<T> OnField(string field)

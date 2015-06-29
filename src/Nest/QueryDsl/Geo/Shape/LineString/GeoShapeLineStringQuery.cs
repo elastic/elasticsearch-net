@@ -16,26 +16,14 @@ namespace Nest
 		ILineStringGeoShape Shape { get; set; }
 	}
 
-	public class GeoShapeLineStringQuery : PlainQuery, IGeoShapeLineStringQuery
+	public class GeoShapeLineStringQuery : FieldNameQuery, IGeoShapeLineStringQuery
 	{
-		public string Name { get; set; }
-		bool IQuery.IsConditionless { get { return false; } }
-		public PropertyPathMarker Field { get; set; }
+		bool IQuery.Conditionless { get { return false; } }
 		public ILineStringGeoShape Shape { get; set; }
 
 		protected override void WrapInContainer(IQueryContainer container)
 		{
 			container.GeoShape = this;
-		}
-
-		PropertyPathMarker IFieldNameQuery.GetFieldName()
-		{
-			return this.Field;
-		}
-
-		void IFieldNameQuery.SetFieldName(string fieldName)
-		{
-			this.Field = fieldName;
 		}
 	}
 
@@ -43,14 +31,14 @@ namespace Nest
 	{
 		private IGeoShapeLineStringQuery Self { get { return this;}}
 		string IQuery.Name { get; set; }
-		bool IQuery.IsConditionless
+		bool IQuery.Conditionless
 		{
 			get
 			{
 				return ((IGeoShapeQuery)this).Field.IsConditionless() || Self.Shape == null || !Self.Shape.Coordinates.HasAny();
 			}
 		}
-		PropertyPathMarker IGeoShapeQuery.Field { get; set; }
+		PropertyPathMarker IFieldNameQuery.Field { get; set; }
 		ILineStringGeoShape IGeoShapeLineStringQuery.Shape { get; set; }
 		
 		public GeoShapeLineStringQueryDescriptor<T> OnField(string field)
@@ -77,16 +65,6 @@ namespace Nest
 				Self.Shape = new LineStringGeoShape();
 			Self.Shape.Coordinates = coordinates;
 			return this;
-		}
-
-		void IFieldNameQuery.SetFieldName(string fieldName)
-		{
-			Self.Field = fieldName;
-		}
-
-		PropertyPathMarker IFieldNameQuery.GetFieldName()
-		{
-			return Self.Field;
 		}
 	}
 }

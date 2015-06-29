@@ -11,27 +11,15 @@ namespace Nest
 	{
 	}
 	
-	public class SpanTermQuery : PlainQuery, ISpanTermQuery
+	public class SpanTermQuery : FieldNameQuery, ISpanTermQuery
 	{
-		public string Name { get; set; }
-		bool IQuery.IsConditionless { get { return false; } }
-		public PropertyPathMarker Field { get; set; }
+		bool IQuery.Conditionless { get { return false; } }
 		public object Value { get; set; }
 		public double? Boost { get; set; }
 
 		protected override void WrapInContainer(IQueryContainer container)
 		{
 			container.SpanTerm = this;
-		}
-
-		PropertyPathMarker IFieldNameQuery.GetFieldName()
-		{
-			return this.Field;
-		}
-
-		void IFieldNameQuery.SetFieldName(string fieldName)
-		{
-			this.Field = fieldName;
 		}
 	}
 

@@ -16,16 +16,14 @@ namespace Nest
 		[JsonProperty(PropertyName = "max_determinized_states")]
 		int? MaximumDeterminizedStates { get; set; }
 
-		PropertyPathMarker Field { get; set; }
-
 		[JsonProperty("boost")]
 		double? Boost { get; set; }
 	}
 
-	public class RegexpQuery : PlainQuery, IRegexpQuery
+	public class RegexpQuery : FieldNameQuery, IRegexpQuery
 	{
 		public string Name { get; set; }
-		bool IQuery.IsConditionless { get { return false; } }
+		bool IQuery.Conditionless { get { return false; } }
 		public string Value { get; set; }
 		public string Flags { get; set; }
 		public int? MaximumDeterminizedStates { get; set; }
@@ -36,23 +34,13 @@ namespace Nest
 		{
 			container.Regexp = this;
 		}
-
-		PropertyPathMarker IFieldNameQuery.GetFieldName()
-		{
-			return this.Field;
-		}
-
-		void IFieldNameQuery.SetFieldName(string fieldName)
-		{
-			this.Field = fieldName;
-		}
 	}
 
 	public class RegexpQueryDescriptor<T> : IRegexpQuery where T : class
 	{
 		private IRegexpQuery Self => this;
 		string IQuery.Name { get; set; }
-		bool IQuery.IsConditionless
+		bool IQuery.Conditionless
 		{
 			get
 			{
@@ -62,7 +50,7 @@ namespace Nest
 		string IRegexpQuery.Value { get; set; }
 		string IRegexpQuery.Flags { get; set; }
 		int? IRegexpQuery.MaximumDeterminizedStates { get; set; }
-		PropertyPathMarker IRegexpQuery.Field { get; set; }
+		PropertyPathMarker IFieldNameQuery.Field { get; set; }
 		double? IRegexpQuery.Boost { get; set; }
 
 		public RegexpQueryDescriptor<T> Name(string name)
@@ -105,16 +93,6 @@ namespace Nest
 		{
 			Self.Field = objectPath;
 			return this;
-		}
-
-		void IFieldNameQuery.SetFieldName(string fieldName)
-		{
-			Self.Field = fieldName;
-		}
-
-		PropertyPathMarker IFieldNameQuery.GetFieldName()
-		{
-			return Self.Field;
 		}
 	}
 }

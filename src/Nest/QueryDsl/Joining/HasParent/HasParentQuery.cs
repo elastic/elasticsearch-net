@@ -31,7 +31,7 @@ namespace Nest
 	public class HasParentQuery : PlainQuery, IHasParentQuery
 	{
 		public string Name { get; set; }
-		bool IQuery.IsConditionless { get { return false; } }
+		bool IQuery.Conditionless { get { return false; } }
 		public TypeNameMarker Type { get; set; }
 		public ParentScoreType? ScoreType { get; set; }
 		public IQueryContainer Query { get; set; }
@@ -47,7 +47,7 @@ namespace Nest
 	{
 		private IHasParentQuery Self { get { return this; }}
 		string IQuery.Name { get; set; }
-		bool IQuery.IsConditionless
+		bool IQuery.Conditionless
 		{
 			get
 			{

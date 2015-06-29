@@ -85,10 +85,10 @@ namespace Nest
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
 			var v = value as IFieldNameQuery;
-			if (v == null || v.IsConditionless)
+			if (v == null || v.Conditionless)
 				return;
 
-			var fieldName = v.GetFieldName();
+			var fieldName = v.Field;
 			if (fieldName == null)
 				return;
 

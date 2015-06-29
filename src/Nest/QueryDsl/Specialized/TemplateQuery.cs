@@ -19,7 +19,7 @@ namespace Nest
 	public class TemplateQuery : PlainQuery, ITemplateQuery
 	{
 		public string Name { get; set; }
-		public bool IsConditionless
+		public bool Conditionless
 		{
 			get { return this.Query.IsNullOrEmpty(); }
 		}
@@ -36,7 +36,7 @@ namespace Nest
 	{
 		ITemplateQuery Self => this;
 		string IQuery.Name { get; set; }
-		bool IQuery.IsConditionless { get { return this.Self.Query.IsNullOrEmpty(); } }
+		bool IQuery.Conditionless { get { return this.Self.Query.IsNullOrEmpty(); } }
 		string ITemplateQuery.Query { get; set; }
 		IDictionary<string, object> ITemplateQuery.Params { get; set; }
 

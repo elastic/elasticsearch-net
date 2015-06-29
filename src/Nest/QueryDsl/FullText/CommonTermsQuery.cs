@@ -14,8 +14,6 @@ namespace Nest
 		[JsonProperty(PropertyName = "query")]
 		string Query { get; set; }
 
-		PropertyPathMarker Field { get; set; }
-
 		[JsonProperty(PropertyName = "cutoff_frequency")]
 		double? CutoffFrequency { get; set; }
 
@@ -40,12 +38,10 @@ namespace Nest
 		bool? DisableCoord { get; set; }
 	}
 
-	public class CommonTermsQuery : PlainQuery, ICommonTermsQuery
+	public class CommonTermsQuery : FieldNameQuery, ICommonTermsQuery
 	{
-		public string Name { get; set; }
-		bool IQuery.IsConditionless => IsConditionless(this);
+		bool IQuery.Conditionless => IsConditionless(this);
 		public string Query { get; set; }
-		public PropertyPathMarker Field { get; set; }
 		public double? CutoffFrequency { get; set; }
 		public Operator? LowFrequencyOperator { get; set; }
 		public Operator? HighFrequencyOperator { get; set; }
@@ -55,8 +51,6 @@ namespace Nest
 		public bool? DisableCoord { get; set; }
 
 		protected override void WrapInContainer(IQueryContainer c) => c.CommonTerms = this;
-		PropertyPathMarker IFieldNameQuery.GetFieldName() => Field;
-		void IFieldNameQuery.SetFieldName(string fieldName) => Field = fieldName;
 		internal static bool IsConditionless(ICommonTermsQuery q) => q.Field.IsConditionless() || q.Query.IsNullOrEmpty();
 	}
 
@@ -65,9 +59,9 @@ namespace Nest
 		ICommonTermsQuery Self => this;
 
 		string IQuery.Name { get; set; }
-		bool IQuery.IsConditionless => CommonTermsQuery.IsConditionless(this);
+		bool IQuery.Conditionless => CommonTermsQuery.IsConditionless(this);
 		string ICommonTermsQuery.Query { get; set; }
-		PropertyPathMarker ICommonTermsQuery.Field { get; set; }
+		PropertyPathMarker IFieldNameQuery.Field { get; set; }
 		double? ICommonTermsQuery.CutoffFrequency { get; set; }
 		Operator? ICommonTermsQuery.LowFrequencyOperator { get; set; }
 		Operator? ICommonTermsQuery.HighFrequencyOperator { get; set; }
@@ -75,9 +69,6 @@ namespace Nest
 		double? ICommonTermsQuery.Boost { get; set; }
 		string ICommonTermsQuery.Analyzer { get; set; }
 		bool? ICommonTermsQuery.DisableCoord { get; set; }
-
-		void IFieldNameQuery.SetFieldName(string fieldName) => Self.Field = fieldName;
-		PropertyPathMarker IFieldNameQuery.GetFieldName() => Self.Field;
 
 		CommonTermsQueryDescriptor<T> Assign(Action<ICommonTermsQuery> assign)
 		{

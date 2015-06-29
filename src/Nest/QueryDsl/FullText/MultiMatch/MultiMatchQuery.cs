@@ -67,7 +67,7 @@ namespace Nest
 	public class MultiMatchQuery : PlainQuery, IMultiMatchQuery
 	{
 		public string Name { get; set; }
-		bool IQuery.IsConditionless => IsConditionless(this);
+		bool IQuery.Conditionless => IsConditionless(this);
 		public TextQueryType? Type { get; set; }
 		public string Query { get; set; }
 		public string Analyzer { get; set; }
@@ -98,7 +98,7 @@ namespace Nest
 	{
 		private IMultiMatchQuery Self { get { return this; }}
 		string IQuery.Name { get; set; }
-		bool IQuery.IsConditionless => MultiMatchQuery.IsConditionless(this);
+		bool IQuery.Conditionless => MultiMatchQuery.IsConditionless(this);
 		TextQueryType? IMultiMatchQuery.Type { get; set; }
 		string IMultiMatchQuery.Query { get; set; }
 		string IMultiMatchQuery.Analyzer { get; set; }

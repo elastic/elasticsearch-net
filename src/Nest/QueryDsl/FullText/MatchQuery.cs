@@ -55,14 +55,11 @@ namespace Nest
 		[JsonProperty(PropertyName = "operator")]
 		[JsonConverter(typeof (StringEnumConverter))]
 		Operator? Operator { get; set; }
-
-		PropertyPathMarker Field { get; set; }
 	}
 	
-	public class MatchQuery : PlainQuery, IMatchQuery
+	public class MatchQuery : FieldNameQuery, IMatchQuery
 	{
-		public string Name { get; set; }
-		bool IQuery.IsConditionless => IsConditionless(this);
+		bool IQuery.Conditionless => IsConditionless(this);
 		public string Type { get; set; }
 		public string Query { get; set; }
 		public string Analyzer { get; set; }
@@ -77,11 +74,9 @@ namespace Nest
 		public bool? Lenient { get; set; }
 		public string MinimumShouldMatch { get; set; }
 		public Operator? Operator { get; set; }
-		public PropertyPathMarker Field { get; set; }
 
 		protected override void WrapInContainer(IQueryContainer c) => c.Match = this;
-		PropertyPathMarker IFieldNameQuery.GetFieldName() => Field;
-		void IFieldNameQuery.SetFieldName(string fieldName) => Field = fieldName;
+
 		internal static bool IsConditionless(IMatchQuery q) => q.Field.IsConditionless() || q.Query.IsNullOrEmpty();
 	}
 
@@ -91,7 +86,7 @@ namespace Nest
 		protected virtual string MatchQueryType { get { return null; } }
 		private IMatchQuery Self => this;
 		string IQuery.Name { get; set; }
-		bool IQuery.IsConditionless => MatchQuery.IsConditionless(this);
+		bool IQuery.Conditionless => MatchQuery.IsConditionless(this);
 		string IMatchQuery.Type { get { return MatchQueryType; } }
 		string IMatchQuery.Query { get; set; }
 		string IMatchQuery.Analyzer { get; set; }
@@ -106,10 +101,7 @@ namespace Nest
 		double? IMatchQuery.Boost { get; set; }
 		bool? IMatchQuery.Lenient { get; set; }
 		Operator? IMatchQuery.Operator { get; set; }
-		PropertyPathMarker IMatchQuery.Field { get; set; }
-
-		void IFieldNameQuery.SetFieldName(string fieldName) => Self.Field = fieldName;
-		PropertyPathMarker IFieldNameQuery.GetFieldName() => Self.Field;
+		PropertyPathMarker IFieldNameQuery.Field { get; set; }
 
 		public MatchQueryDescriptor<T> Name(string name)
 		{

@@ -26,7 +26,7 @@ namespace Nest
 
 		public string Name { get; set; }
 
-		bool IQuery.IsConditionless { get { return false; } }
+		bool IQuery.Conditionless { get { return false; } }
 
 		protected override void WrapInContainer(IQueryContainer container)
 		{

@@ -16,25 +16,14 @@ namespace Nest
 		IMultiLineStringGeoShape Shape { get; set; }
 	}
 
-	public class GeoShapeMultiLineStringQuery : PlainQuery, IGeoShapeMultiLineStringQuery
+	public class GeoShapeMultiLineStringQuery : FieldNameQuery, IGeoShapeMultiLineStringQuery
 	{
-		public string Name { get; set; }
-		bool IQuery.IsConditionless { get { return false; } }
-		public PropertyPathMarker Field { get; set; }
+		bool IQuery.Conditionless { get { return false; } }
 		public IMultiLineStringGeoShape Shape { get; set; }
 
 		protected override void WrapInContainer(IQueryContainer container)
 		{
 			container.GeoShape = this;
-		}
-		PropertyPathMarker IFieldNameQuery.GetFieldName()
-		{
-			return this.Field;
-		}
-
-		void IFieldNameQuery.SetFieldName(string fieldName)
-		{
-			this.Field = fieldName;
 		}
 	}
 
@@ -42,14 +31,14 @@ namespace Nest
 	{
 		private IGeoShapeMultiLineStringQuery Self => this;
 		string IQuery.Name { get; set; }
-		bool IQuery.IsConditionless
+		bool IQuery.Conditionless
 		{
 			get
 			{
 				return ((IGeoShapeQuery)this).Field.IsConditionless() || Self.Shape == null || !Self.Shape.Coordinates.HasAny();
 			}
 		}
-		PropertyPathMarker IGeoShapeQuery.Field { get; set; }
+		PropertyPathMarker IFieldNameQuery.Field { get; set; }
 		IMultiLineStringGeoShape IGeoShapeMultiLineStringQuery.Shape { get; set; }
 
 		public GeoShapeMultiLineStringQueryDescriptor<T> Name(string name)
@@ -75,16 +64,6 @@ namespace Nest
 				Self.Shape = new MultiLineStringGeoShape();
 			Self.Shape.Coordinates = coordinates;
 			return this;
-		}
-
-		void IFieldNameQuery.SetFieldName(string fieldName)
-		{
-			Self.Field = fieldName;
-		}
-
-		PropertyPathMarker IFieldNameQuery.GetFieldName()
-		{
-			return Self.Field;
 		}
 	}
 }

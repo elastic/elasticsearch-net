@@ -11,8 +11,6 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IGeoDistanceQuery : IFieldNameQuery
 	{
-		PropertyPathMarker Field { get; set; }
-
 		string Location { get; set; }
 		
 		[JsonProperty("distance")]
@@ -31,11 +29,9 @@ namespace Nest
 		GeoDistance? DistanceType { get; set; }
 	}
 
-	public class GeoDistanceQuery : PlainQuery, IGeoDistanceQuery
+	public class GeoDistanceQuery : FieldNameQuery, IGeoDistanceQuery
 	{
-		public string Name { get; set; }
-		bool IQuery.IsConditionless => IsConditionless(this);
-		public PropertyPathMarker Field { get; set; }
+		bool IQuery.Conditionless => IsConditionless(this);
 		public string Location { get; set; }
 		public object Distance { get; set; }
 		public GeoUnit? Unit { get; set; }
@@ -43,8 +39,7 @@ namespace Nest
 		public GeoDistance? DistanceType { get; set; }
 
 		protected override void WrapInContainer(IQueryContainer c) => c.GeoDistance = this;
-		public PropertyPathMarker GetFieldName() => Field;
-		public void SetFieldName(string fieldName) => Field = fieldName;
+
 		internal static bool IsConditionless(IGeoDistanceQuery q) => q.Location.IsNullOrEmpty() || q.Distance == null;
 	}
 
@@ -52,16 +47,13 @@ namespace Nest
 	{
 		private IGeoDistanceQuery Self => this;
 		string IQuery.Name { get; set; }
-		bool IQuery.IsConditionless => GeoDistanceQuery.IsConditionless(this);
-		PropertyPathMarker IGeoDistanceQuery.Field { get; set; }
+		bool IQuery.Conditionless => GeoDistanceQuery.IsConditionless(this);
+		PropertyPathMarker IFieldNameQuery.Field { get; set; }
 		string IGeoDistanceQuery.Location { get; set; }
 		object IGeoDistanceQuery.Distance { get; set; }
 		GeoUnit? IGeoDistanceQuery.Unit { get; set; }
 		GeoDistance? IGeoDistanceQuery.DistanceType { get; set; }
 		GeoOptimizeBBox? IGeoDistanceQuery.OptimizeBoundingBox { get; set; }
-
-		public PropertyPathMarker GetFieldName() => Self.Field;
-		public void SetFieldName(string fieldName) => Self.Field = fieldName;
 
 		public GeoDistanceQueryDescriptor<T> Field(string field)
 		{

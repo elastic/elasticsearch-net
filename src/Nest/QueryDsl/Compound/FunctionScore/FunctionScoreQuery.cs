@@ -48,7 +48,7 @@ namespace Nest
 
 	public class FunctionScoreQuery : PlainQuery, IFunctionScoreQuery
 	{
-		bool IQuery.IsConditionless => IsConditionless(this);
+		bool IQuery.Conditionless => IsConditionless(this);
 		public string Name { get; set; }
 		public IEnumerable<IFunctionScoreFunction> Functions { get; set; }
 		public IQueryContainer Query { get; set; }
@@ -76,7 +76,7 @@ namespace Nest
 		private IFunctionScoreQuery Self { get { return this; }}
 		string IQuery.Name { get; set; }
 		private bool _forcedConditionless = false;
-		bool IQuery.IsConditionless => FunctionScoreQuery.IsConditionless(this, _forcedConditionless);
+		bool IQuery.Conditionless => FunctionScoreQuery.IsConditionless(this, _forcedConditionless);
 		IEnumerable<IFunctionScoreFunction> IFunctionScoreQuery.Functions { get; set; }
 		IQueryContainer IFunctionScoreQuery.Query { get; set; }
 		IQueryContainer IFunctionScoreQuery.Filter { get; set; }

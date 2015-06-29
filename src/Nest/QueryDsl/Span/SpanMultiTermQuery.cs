@@ -16,7 +16,7 @@ namespace Nest
 	public class SpanMultiTermQuery : PlainQuery, ISpanMultiTermQuery
 	{
 		public string Name { get; set; }
-		bool IQuery.IsConditionless { get { return false; } }
+		bool IQuery.Conditionless { get { return false; } }
 		public IQueryContainer Match { get; set; }
 
 		protected override void WrapInContainer(IQueryContainer container)
@@ -30,7 +30,7 @@ namespace Nest
 	{
 		private ISpanMultiTermQuery Self => this;
 		string IQuery.Name { get; set; }
-		bool IQuery.IsConditionless { get { return false; } }
+		bool IQuery.Conditionless { get { return false; } }
 		IQueryContainer ISpanMultiTermQuery.Match { get; set; }
 
 		public SpanMultiTermQueryDescriptor<T> Name(string name)

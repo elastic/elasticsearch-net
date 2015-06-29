@@ -50,7 +50,7 @@ namespace Nest
 
 		private QueryDescriptor<T> New(IQuery query, Action<IQueryContainer> fillProperty)
 		{
-			if (query.IsConditionless && !this.IsVerbatim)
+			if (query.Conditionless && !this.IsVerbatim)
 				return CreateConditionlessQueryDescriptor(query);
 
 			var q = this.Clone();

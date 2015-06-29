@@ -36,7 +36,7 @@ namespace Nest
 	public class BoolQuery : PlainQuery, IBoolQuery
 	{
 		public string Name { get; set; }
-		bool IQuery.IsConditionless => IsConditionless(this);
+		bool IQuery.Conditionless => IsConditionless(this);
 		public IEnumerable<IQueryContainer> Must { get; set; }
 		public IEnumerable<IQueryContainer> MustNot { get; set; }
 		public IEnumerable<IQueryContainer> Should { get; set; }
@@ -61,7 +61,7 @@ namespace Nest
 	{
 		private IBoolQuery Self => this;
 		string IQuery.Name { get; set; }
-		bool IQuery.IsConditionless => BoolQuery.IsConditionless(this);
+		bool IQuery.Conditionless => BoolQuery.IsConditionless(this);
 		IEnumerable<IQueryContainer> IBoolQuery.Must { get; set; }
 		IEnumerable<IQueryContainer> IBoolQuery.MustNot { get; set; }
 		IEnumerable<IQueryContainer> IBoolQuery.Should { get; set; }

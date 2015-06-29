@@ -2,7 +2,6 @@
 {
 	public interface IFieldNameQuery : IQuery
 	{
-		PropertyPathMarker GetFieldName();
-		void SetFieldName(string fieldName);
+		PropertyPathMarker Field { get; set; }
 	}
 }

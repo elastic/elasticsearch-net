@@ -86,7 +86,7 @@ namespace Nest
 			if (v == null)
 				return;
 
-			var fieldName = v.GetFieldName();
+			var fieldName = v.Field;
 			if (fieldName == null)
 				return;
 

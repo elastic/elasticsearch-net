@@ -21,7 +21,7 @@ namespace Nest
 	public class IdsQuery : PlainQuery, IIdsQuery
 	{
 		public string Name { get; set; }
-		bool IQuery.IsConditionless { get { return false; } }
+		bool IQuery.Conditionless { get { return false; } }
 		public IEnumerable<string> Type { get; set; }
 		public IEnumerable<string> Values { get; set; }
 
@@ -35,7 +35,7 @@ namespace Nest
 	{
 		private IIdsQuery Self => this;
 		string IQuery.Name { get; set; }
-		bool IQuery.IsConditionless
+		bool IQuery.Conditionless
 		{
 			get
 			{

@@ -11,29 +11,15 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IExistsQuery : IFieldNameQuery
 	{
-		[JsonProperty(PropertyName = "field")]
-		PropertyPathMarker Field { get; set; }
 	}
 
-	public class ExistsQuery : PlainQuery, IExistsQuery
+	public class ExistsQuery : FieldNameQuery, IExistsQuery
 	{
-		public string Name { get; set; }
-		bool IQuery.IsConditionless { get { return QueryCondition.IsConditionless(this); } }
-		public PropertyPathMarker Field { get; set; }
+		bool IQuery.Conditionless { get { return QueryCondition.IsConditionless(this); } }
 
 		protected override void WrapInContainer(IQueryContainer container)
 		{
 			container.Exists = this;
-		}
-
-		public PropertyPathMarker GetFieldName()
-		{
-			return Field;
-		}
-
-		public void SetFieldName(string fieldName)
-		{
-			Field = fieldName;
 		}
 	}
 
@@ -41,8 +27,8 @@ namespace Nest
 	{
 		private IExistsQuery Self => this;
 		string IQuery.Name { get; set; }
-		bool IQuery.IsConditionless { get { return QueryCondition.IsConditionless(this); } }
-		PropertyPathMarker IExistsQuery.Field { get; set;}
+		bool IQuery.Conditionless { get { return QueryCondition.IsConditionless(this); } }
+		PropertyPathMarker IFieldNameQuery.Field { get; set;}
 
 		public ExistsQueryDescriptor<T> Field (string field)
 		{
@@ -60,16 +46,6 @@ namespace Nest
 		{
 			Self.Name = name;
 			return this;
-		}
-
-		public PropertyPathMarker GetFieldName()
-		{
-			return Self.Field;	
-		}
-
-		public void SetFieldName(string fieldName)
-		{
-			Self.Field = fieldName;
 		}
 	}
 }

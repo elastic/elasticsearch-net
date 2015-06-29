@@ -7,34 +7,21 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface ITermQuery : IFieldNameQuery
 	{
-		PropertyPathMarker Field { get; set; }
 		[JsonProperty("value")]
 		object Value { get; set; }
 		[JsonProperty("boost")]
 		double? Boost { get; set; }
 	}
 
-	public class TermQuery : PlainQuery, ITermQuery
+	public class TermQuery : FieldNameQuery, ITermQuery
 	{
-		public string Name { get; set; }
-		bool IQuery.IsConditionless { get { return false; } }
-		public PropertyPathMarker Field { get; set; }
+		bool IQuery.Conditionless { get { return false; } }
 		public object Value { get; set; }
 		public double? Boost { get; set; }
 
 		protected override void WrapInContainer(IQueryContainer container)
 		{
 			container.Term = this;
-		}
-
-		PropertyPathMarker IFieldNameQuery.GetFieldName()
-		{
-			return this.Field;
-		}
-
-		void IFieldNameQuery.SetFieldName(string fieldName)
-		{
-			this.Field = fieldName;
 		}
 	}
 
@@ -44,14 +31,14 @@ namespace Nest
 	{
 		private ITermQuery Self => this;
 		string IQuery.Name { get; set; }
-		bool IQuery.IsConditionless
+		bool IQuery.Conditionless
 		{
 			get
 			{
 				return Self.Value == null || Self.Value.ToString().IsNullOrEmpty() || Self.Field.IsConditionless();
 			}
 		}
-		PropertyPathMarker ITermQuery.Field { get; set; }
+		PropertyPathMarker IFieldNameQuery.Field { get; set; }
 		object ITermQuery.Value { get; set; }
 		double? ITermQuery.Boost { get; set; }
 
@@ -89,15 +76,6 @@ namespace Nest
 		{
 			Self.Boost = boost;
 			return (TDescriptor)this;
-		}
-		public PropertyPathMarker GetFieldName()
-		{
-			return Self.Field;
-		}
-
-		public void SetFieldName(string fieldName)
-		{
-			Self.Field = fieldName;
 		}
 	}
 

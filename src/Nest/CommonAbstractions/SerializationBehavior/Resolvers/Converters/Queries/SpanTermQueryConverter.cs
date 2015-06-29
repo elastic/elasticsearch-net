@@ -62,7 +62,7 @@ namespace Nest
 			var v = value as IFieldNameQuery;
 			if (v == null) return;
 
-			var fieldName = v.GetFieldName();
+			var fieldName = v.Field;
 			if (fieldName == null) return;
 
 			var sq = value as ISpanTermQuery;

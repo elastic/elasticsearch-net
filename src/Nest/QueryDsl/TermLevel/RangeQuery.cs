@@ -32,14 +32,11 @@ namespace Nest
 
 		[JsonProperty("format")]
 		string Format { get; set; }
-
-		PropertyPathMarker Field { get; set; }
 	}
 
-	public class RangeQuery : PlainQuery, IRangeQuery
+	public class RangeQuery : FieldNameQuery, IRangeQuery
 	{
-		public string Name { get; set; }
-		bool IQuery.IsConditionless { get { return false; } }
+		bool IQuery.Conditionless { get { return false; } }
 		public string GreaterThanOrEqualTo { get; set; }
 		public string LowerThanOrEqualTo { get; set; }
 		public string GreaterThan { get; set; }
@@ -48,21 +45,10 @@ namespace Nest
 		public bool? Cache { get; set; }
 		public string TimeZone { get; set; }
 		public string Format { get; set; }
-		public PropertyPathMarker Field { get; set; }
 
 		protected override void WrapInContainer(IQueryContainer container)
 		{
 			container.Range = this;
-		}
-
-		PropertyPathMarker IFieldNameQuery.GetFieldName()
-		{
-			return this.Field;
-		}
-
-		void IFieldNameQuery.SetFieldName(string fieldName)
-		{
-			this.Field = fieldName;
 		}
 	}
 
@@ -71,7 +57,7 @@ namespace Nest
 	{
 		private IRangeQuery Self => this;
 		string IQuery.Name { get; set; }
-		bool IQuery.IsConditionless
+		bool IQuery.Conditionless
 		{
 			get
 			{
@@ -92,22 +78,12 @@ namespace Nest
 		bool? IRangeQuery.Cache { get; set; }
 		string IRangeQuery.TimeZone { get; set; }
 		string IRangeQuery.Format { get; set; }
-		PropertyPathMarker IRangeQuery.Field { get; set; }
+		PropertyPathMarker IFieldNameQuery.Field { get; set; }
 
 		public RangeQueryDescriptor<T> Name(string name)
 		{
 			Self.Name = name;
 			return this;
-		}
-
-		void IFieldNameQuery.SetFieldName(string fieldName)
-		{
-			this.Self.Field = fieldName;
-		}
-
-		PropertyPathMarker IFieldNameQuery.GetFieldName()
-		{
-			return this.Self.Field;
 		}
 
 		public RangeQueryDescriptor<T> OnField(string field)

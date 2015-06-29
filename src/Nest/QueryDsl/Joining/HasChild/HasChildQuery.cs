@@ -36,7 +36,7 @@ namespace Nest
 	public class HasChildQuery : PlainQuery, IHasChildQuery
 	{
 		public string Name { get; set; }
-		bool IQuery.IsConditionless { get { return false; } }
+		bool IQuery.Conditionless { get { return false; } }
 		public TypeNameMarker Type { get; set; }
 		public ChildScoreType? ScoreType { get; set; }
 		public int? MinChildren { get; set; }
@@ -54,7 +54,7 @@ namespace Nest
 	{
 		private IHasChildQuery Self => this;
 		string IQuery.Name { get; set; }
-		bool IQuery.IsConditionless
+		bool IQuery.Conditionless
 		{
 			get
 			{

@@ -16,10 +16,10 @@ namespace Nest
 		IPolygonGeoShape Shape { get; set; }
 	}
 
-	public class GeoShapePolygonQuery : PlainQuery, IGeoShapePolygonQuery
+	public class GeoShapePolygonQuery : FieldNameQuery, IGeoShapePolygonQuery
 	{
 		public string Name { get; set; }
-		bool IQuery.IsConditionless { get { return false; } }
+		bool IQuery.Conditionless { get { return false; } }
 		public PropertyPathMarker Field { get; set; }
 		public IPolygonGeoShape Shape { get; set; }
 
@@ -27,23 +27,13 @@ namespace Nest
 		{
 			container.GeoShape = this;
 		}
-
-		PropertyPathMarker IFieldNameQuery.GetFieldName()
-		{
-			return this.Field;
-		}
-
-		void IFieldNameQuery.SetFieldName(string fieldName)
-		{
-			this.Field = fieldName;
-		}
 	}
 
 	public class GeoShapePolygonQueryDescriptor<T> : IGeoShapePolygonQuery where T : class
 	{
 		private IGeoShapePolygonQuery Self => this;
 		string IQuery.Name { get; set; }
-		bool IQuery.IsConditionless
+		bool IQuery.Conditionless
 		{
 			get
 			{
@@ -51,7 +41,7 @@ namespace Nest
 			}
 
 		}
-		PropertyPathMarker IGeoShapeQuery.Field { get; set; }
+		PropertyPathMarker IFieldNameQuery.Field { get; set; }
 		IPolygonGeoShape IGeoShapePolygonQuery.Shape { get; set; }
 
 		public GeoShapePolygonQueryDescriptor<T> Name(string name)
@@ -78,16 +68,6 @@ namespace Nest
 				Self.Shape = new PolygonGeoShape();
 			Self.Shape.Coordinates = coordinates;
 			return this;
-		}
-
-		void IFieldNameQuery.SetFieldName(string fieldName)
-		{
-			Self.Field = fieldName;
-		}
-
-		PropertyPathMarker IFieldNameQuery.GetFieldName()
-		{
-			return Self.Field;
 		}
 	}
 }
