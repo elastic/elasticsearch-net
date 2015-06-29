@@ -130,7 +130,7 @@
     <Compile Include="Aggregations\Bucket\KeyItem.cs" />
     <Compile Include="Aggregations\Bucket\SingleBucket.cs" />
     <Compile Include="Aggregations\Bucket\Range\RangeItem.cs" />
-    <Compile Include="Aggregations\Metric\Percentiles\PercentilesMetric.cs" />
+    <Compile Include="Aggregations\Bucket\Percentiles\PercentilesMetric.cs" />
     <Compile Include="Aggregations\Metric\Stats\StatsMetric.cs" />
     <Compile Include="Aggregations\Metric\ValueMetric.cs" />
     <Compile Include="Analysis\Analysis.cs" />
@@ -573,7 +573,7 @@
     <Compile Include="Aggregations\Bucket\Filter\FilterAggregation.cs" />
     <Compile Include="Aggregations\Bucket\GeoHash\GeoHashAggregation.cs" />
     <Compile Include="Aggregations\Bucket\Global\GlobalAggregation.cs" />
-    <Compile Include="Aggregations\Metric\Percentiles\PercentilesAggregation.cs" />
+    <Compile Include="Aggregations\Bucket\Percentiles\PercentilesAggregation.cs" />
     <Compile Include="Aggregations\Bucket\Ipv4Range\Ip4RangeAggregation.cs" />
     <Compile Include="Aggregations\Metric\ExtendedStats\ExtendedStatsAggregation.cs" />
     <Compile Include="Aggregations\Metric\MetricAggregationBase.cs" />

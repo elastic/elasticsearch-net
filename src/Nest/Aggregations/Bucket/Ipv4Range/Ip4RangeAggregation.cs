@@ -24,33 +24,22 @@ namespace Nest
 		public IEnumerable<Ip4ExpressionRange> Ranges { get; set; }
 	}
 
-	public class Ip4RangeAggregationDescriptor<T> : BucketAggregationBaseDescriptor<Ip4RangeAggregationDescriptor<T>, T>, IIp4RangeAggregator 
+	public class Ip4RangeAggregationDescriptor<T> : 
+		BucketAggregationBaseDescriptor<Ip4RangeAggregationDescriptor<T>,IIp4RangeAggregator, T>
+			, IIp4RangeAggregator 
 		where T : class
 	{
-
-		public IIp4RangeAggregator Self => this;
 
 		PropertyPathMarker IIp4RangeAggregator.Field { get; set; }
 
 		IEnumerable<Ip4ExpressionRange> IIp4RangeAggregator.Ranges { get; set; }
 
-		public Ip4RangeAggregationDescriptor<T> Field(string field)
-		{
-			Self.Field = field;
-			return this;
-		}
+		public Ip4RangeAggregationDescriptor<T> Field(string field) => Assign(a => a.Field = field);
 
-		public Ip4RangeAggregationDescriptor<T> Field(Expression<Func<T, object>> field)
-		{
-			Self.Field = field;
-			return this;
-		}
+		public Ip4RangeAggregationDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
 
-		public Ip4RangeAggregationDescriptor<T> Ranges(params Func<Ip4ExpressionRange, Ip4ExpressionRange>[] ranges)
-		{
-			var newRanges = from range in ranges let r = new Ip4ExpressionRange() select range(r);
-			Self.Ranges = newRanges;
-			return this;
-		}
+		public Ip4RangeAggregationDescriptor<T> Ranges(params Func<Ip4ExpressionRange, Ip4ExpressionRange>[] ranges) =>
+			Assign(a => a.Ranges = (from range in ranges let r = new Ip4ExpressionRange() select range(r)).ToListOrNullIfEmpty());
+
 	}
 }

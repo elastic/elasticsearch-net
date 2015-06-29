@@ -126,6 +126,8 @@ namespace Nest
 			foreach (T item in enumerable)
 				handler(item, idx++);
 		}
+		
+		//TODO also filter nulls
 
 		internal static IList<T> ToListOrNullIfEmpty<T>(this IEnumerable<T> xs, Func<T, bool> predicate) =>
 			!xs.HasAny(predicate) ? null : xs.ToList();

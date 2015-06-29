@@ -75,19 +75,21 @@ namespace Nest
 		public IDictionary<string, object> ExtendedBounds { get; set; }
 	}
 
-	public class DateHistogramAggregationDescriptor<T> : BucketAggregationBaseDescriptor<DateHistogramAggregationDescriptor<T>, T>, IDateHistogramAggregator where T : class
+	public class DateHistogramAggregationDescriptor<T>
+		: BucketAggregationBaseDescriptor<DateHistogramAggregationDescriptor<T>, IDateHistogramAggregator, T>
+			, IDateHistogramAggregator
+		where T : class
 	{
-		private IDateHistogramAggregator Self => this;
-
 		PropertyPathMarker IDateHistogramAggregator.Field { get; set; }
 
 		string IDateHistogramAggregator.Script { get; set; }
-		
+
 		IDictionary<string, object> IDateHistogramAggregator.Params { get; set; }
 
 		string IDateHistogramAggregator.Interval { get; set; }
 
-		string IDateHistogramAggregator.Format { get; set; }
+		//TODO is this default necessary?
+		string IDateHistogramAggregator.Format { get; set; } = "date_optional_time";
 
 		int? IDateHistogramAggregator.MinimumDocumentCount { get; set; }
 
@@ -109,121 +111,49 @@ namespace Nest
 
 		IDictionary<string, object> IDateHistogramAggregator.ExtendedBounds { get; set; }
 
-		public DateHistogramAggregationDescriptor()
-		{
-			this.Self.Format = "date_optional_time";
-		}
+		public DateHistogramAggregationDescriptor<T> Field(string field) => Assign(a => a.Field = field);
 
-		public DateHistogramAggregationDescriptor<T> Field(string field)
-		{
-			Self.Field = field;
-			return this;
-		}
+		public DateHistogramAggregationDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
 
-		public DateHistogramAggregationDescriptor<T> Field(Expression<Func<T, object>> field)
-		{
-			Self.Field = field;
-			return this;
-		}
+		public DateHistogramAggregationDescriptor<T> Script(string script) => Assign(a => a.Script = script);
 
-		public DateHistogramAggregationDescriptor<T> Script(string script)
-		{
-			Self.Script = script;
-			return this;
-		}
+		public DateHistogramAggregationDescriptor<T> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramSelector) =>
+			Assign(a => a.Params = paramSelector?.Invoke(new FluentDictionary<string, object>()).NullIfNoKeys());
 
-		public DateHistogramAggregationDescriptor<T> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramSelector)
-		{
-			Self.Params = paramSelector(new FluentDictionary<string, object>());
-			return this;
-		}
+		public DateHistogramAggregationDescriptor<T> Interval(string interval) => Assign(a => a.Interval = interval);
 
-		public DateHistogramAggregationDescriptor<T> Interval(string interval)
-		{
-			Self.Interval = interval;
-			return this;
-		}
+		public DateHistogramAggregationDescriptor<T> Interval(DateInterval interval) =>
+			Assign(a => a.Interval = interval.GetStringValue());
 
-		public DateHistogramAggregationDescriptor<T> Interval(DateInterval interval)
-		{
-			var intervalString = interval.GetStringValue();
-			Self.Interval = intervalString;
-			return this;
-		}
-	
-		public DateHistogramAggregationDescriptor<T> Format(string format)
-		{
-			if (format.IsNullOrEmpty())
-				return this;
-			Self.Format = format;
-			return this;
-		}
-			
-		public DateHistogramAggregationDescriptor<T> MinimumDocumentCount(int minimumDocumentCount)
-		{
-			Self.MinimumDocumentCount = minimumDocumentCount;
-			return this;
-		}
-		
-		public DateHistogramAggregationDescriptor<T> PreZone(string preZone)
-		{
-			Self.PreZone = preZone;
-			return this;
-		}
+		public DateHistogramAggregationDescriptor<T> Format(string format) => Assign(a => a.Format = format);
 
-		public DateHistogramAggregationDescriptor<T> PostZone(string postZone)
-		{
-			Self.PostZone = postZone;
-			return this;
-		}
+		public DateHistogramAggregationDescriptor<T> MinimumDocumentCount(int minimumDocumentCount) =>
+			Assign(a => a.MinimumDocumentCount = minimumDocumentCount);
 
-		public DateHistogramAggregationDescriptor<T> TimeZone(string timeZone)
-		{
-			Self.TimeZone = timeZone;
-			return this;
-		}
-		
-		public DateHistogramAggregationDescriptor<T> PreZoneAdjustLargeInterval(bool adjustLargeInterval = true)
-		{
-			Self.PreZoneAdjustLargeInterval = adjustLargeInterval;
-			return this;
-		}
-		
-		public DateHistogramAggregationDescriptor<T> Interval(int factor)
-		{
-			Self.Factor = factor;
-			return this;
-		}
+		public DateHistogramAggregationDescriptor<T> PreZone(string preZone) => Assign(a => a.PreZone = preZone);
 
-		public DateHistogramAggregationDescriptor<T> PreOffset(string preOffset)
-		{
-			Self.PreOffset = preOffset;
-			return this;
-		}
-		public DateHistogramAggregationDescriptor<T> PostOffset(string postOffset)
-		{
-			Self.PostOffset = postOffset;
-			return this;
-		}
-	
-		public DateHistogramAggregationDescriptor<T> OrderAscending(string key)
-		{
-			Self.Order = new Dictionary<string, string> { {key, "asc"}};
-			return this;
-		}
-	
-		public DateHistogramAggregationDescriptor<T> OrderDescending(string key)
-		{
-			Self.Order = new Dictionary<string, string> { {key, "desc"}};
-			return this;
-		}
+		public DateHistogramAggregationDescriptor<T> PostZone(string postZone) => Assign(a => a.PostZone = postZone);
+
+		public DateHistogramAggregationDescriptor<T> TimeZone(string timeZone) => Assign(a => a.TimeZone = timeZone);
+
+		public DateHistogramAggregationDescriptor<T> PreZoneAdjustLargeInterval(bool adjustLargeInterval = true) =>
+			Assign(a => a.PreZoneAdjustLargeInterval = adjustLargeInterval);
+
+		public DateHistogramAggregationDescriptor<T> Interval(int factor) => Assign(a => a.Factor = factor);
+
+		public DateHistogramAggregationDescriptor<T> PreOffset(string preOffset) => Assign(a => a.PreOffset = preOffset);
+
+		public DateHistogramAggregationDescriptor<T> PostOffset(string postOffset) => Assign(a => a.PostOffset = postOffset);
+
+		public DateHistogramAggregationDescriptor<T> OrderAscending(string key) =>
+			Assign(a => a.Order = new Dictionary<string, string> { { key, "asc" } });
+
+		public DateHistogramAggregationDescriptor<T> OrderDescending(string key) =>
+			Assign(a => a.Order = new Dictionary<string, string> { { key, "desc" } });
 
 
-		public DateHistogramAggregationDescriptor<T> ExtendedBounds(string min, string max)
-		{
-			Self.ExtendedBounds = new Dictionary<string, object> { { "min", min }, { "max", max } };
-			return this;
-		}
+		public DateHistogramAggregationDescriptor<T> ExtendedBounds(string min, string max) =>
+			Assign(a=>a.ExtendedBounds = new Dictionary<string, object> { { "min", min }, { "max", max } });
 
 	}
 }

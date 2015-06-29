@@ -28,42 +28,25 @@ namespace Nest
 		public IEnumerable<DateExpressionRange> Ranges { get; set; }
 	}
 
-	public class DateRangeAggregationDescriptor<T> : BucketAggregationBaseDescriptor<DateRangeAggregationDescriptor<T>, T>, IDateRangeAggregator where T : class
+	public class DateRangeAggregationDescriptor<T> 
+		: BucketAggregationBaseDescriptor<DateRangeAggregationDescriptor<T>, IDateRangeAggregator, T>
+			, IDateRangeAggregator 
+		where T : class
 	{
-		private IDateRangeAggregator Self => this;
-
-		[JsonProperty("field")]
 		PropertyPathMarker IDateRangeAggregator.Field { get; set; }
 		
-		[JsonProperty("format")]
 		string IDateRangeAggregator.Format { get; set; }
 
-		[JsonProperty(PropertyName = "ranges")]
 		IEnumerable<DateExpressionRange> IDateRangeAggregator.Ranges { get; set; }
-		
-		public DateRangeAggregationDescriptor<T> Field(string field)
-		{
-			Self.Field = field;
-			return this;
-		}
 
-		public DateRangeAggregationDescriptor<T> Field(Expression<Func<T, object>> field)
-		{
-			Self.Field = field;
-			return this;
-		}
+		public DateRangeAggregationDescriptor<T> Field(string field) => Assign(a => a.Field = field);
 
-		public DateRangeAggregationDescriptor<T> Format(string format)
-		{
-			Self.Format = format;
-			return this;
-		}
+		public DateRangeAggregationDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
 
-		public DateRangeAggregationDescriptor<T> Ranges(params Func<DateExpressionRange, DateExpressionRange>[] ranges)
-		{
-			var newRanges = from range in ranges let r = new DateExpressionRange() select range(r);
-			Self.Ranges = newRanges;
-			return this;
-		}
+		public DateRangeAggregationDescriptor<T> Format(string format) => Assign(a => a.Format = format);
+
+		public DateRangeAggregationDescriptor<T> Ranges(params Func<DateExpressionRange, DateExpressionRange>[] ranges) =>
+			Assign(a=>a.Ranges = (from range in ranges let r = new DateExpressionRange() select range(r)).ToListOrNullIfEmpty());
+
 	}
 }

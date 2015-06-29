@@ -23,22 +23,14 @@ namespace Nest
 	}
 
 	public class ReverseNestedAggregationDescriptor<T> 
-		: BucketAggregationBaseDescriptor<ReverseNestedAggregationDescriptor<T>, T>, IReverseNestedAggregator 
+		: BucketAggregationBaseDescriptor<ReverseNestedAggregationDescriptor<T>,IReverseNestedAggregator, T>
+			, IReverseNestedAggregator 
 		where T : class
 	{
-		IReverseNestedAggregator Self => this;
 		PropertyPathMarker IReverseNestedAggregator.Path { get; set; }
 
-		public ReverseNestedAggregationDescriptor<T> Path(string path)
-		{
-			this.Self.Path = path;
-			return this;
-		}
+		public ReverseNestedAggregationDescriptor<T> Path(string path) => Assign(a => a.Path = path);
 
-		public ReverseNestedAggregationDescriptor<T> Path(Expression<Func<T, object>> path)
-		{
-			this.Self.Path = path;
-			return this;
-		}
+		public ReverseNestedAggregationDescriptor<T> Path(Expression<Func<T, object>> path) => Assign(a => a.Path = path);
 	}
 }

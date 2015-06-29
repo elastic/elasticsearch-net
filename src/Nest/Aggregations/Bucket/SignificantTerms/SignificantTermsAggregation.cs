@@ -68,12 +68,13 @@ namespace Nest
 		public IQueryContainer BackgroundFilter { get; set; }
 	}
 
-	public class SignificantTermsAggregationDescriptor<T> : BucketAggregationBaseDescriptor<SignificantTermsAggregationDescriptor<T>, T>, ISignificantTermsAggregator where T : class
+	public class SignificantTermsAggregationDescriptor<T>
+		: BucketAggregationBaseDescriptor<SignificantTermsAggregationDescriptor<T>, ISignificantTermsAggregator, T>
+			, ISignificantTermsAggregator
+		where T : class
 	{
-		private ISignificantTermsAggregator Self => this;
-
 		PropertyPathMarker ISignificantTermsAggregator.Field { get; set; }
-		
+
 		int? ISignificantTermsAggregator.Size { get; set; }
 
 		int? ISignificantTermsAggregator.ShardSize { get; set; }
@@ -98,103 +99,43 @@ namespace Nest
 
 		IQueryContainer ISignificantTermsAggregator.BackgroundFilter { get; set; }
 
-		public SignificantTermsAggregationDescriptor<T> Field(string field)
-		{
-			Self.Field = field;
-			return this;
-		}
+		public SignificantTermsAggregationDescriptor<T> Field(string field) => Assign(a => a.Field = field);
 
-		public SignificantTermsAggregationDescriptor<T> Field(Expression<Func<T, object>> field)
-		{
-			Self.Field = field;
-			return this;
-		}
+		public SignificantTermsAggregationDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
 
-		public SignificantTermsAggregationDescriptor<T> Size(int size)
-		{
-			Self.Size = size;
-			return this;
-		}
-		
-		public SignificantTermsAggregationDescriptor<T> ShardSize(int shardSize)
-		{
-			Self.ShardSize = shardSize;
-			return this;
-		}
+		public SignificantTermsAggregationDescriptor<T> Size(int size) => Assign(a => a.Size = size);
 
-		public SignificantTermsAggregationDescriptor<T> MinimumDocumentCount(int minimumDocumentCount)
-		{
-			Self.MinimumDocumentCount = minimumDocumentCount;
-			return this;
-		}
-		
-		public SignificantTermsAggregationDescriptor<T> ExecutionHint(TermsAggregationExecutionHint executionHint)
-		{
-			Self.ExecutionHint = executionHint;
-			return this;
-		}
+		public SignificantTermsAggregationDescriptor<T> ShardSize(int shardSize) => Assign(a => a.ShardSize = shardSize);
 
-		public SignificantTermsAggregationDescriptor<T> Include(string includePattern, string regexFlags = null)
-		{
-			Self.Include = new Dictionary<string, string> { {"pattern", includePattern}};
-			if (!regexFlags.IsNullOrEmpty())
-				Self.Include.Add("pattern", regexFlags);
-			return this;
-		}
-		
-		public SignificantTermsAggregationDescriptor<T> Exclude(string excludePattern, string regexFlags = null)
-		{
-			Self.Exclude = new Dictionary<string, string> { {"pattern", excludePattern}};
-			if (!regexFlags.IsNullOrEmpty())
-				Self.Exclude.Add("pattern", regexFlags);
-			return this;
-		}
+		public SignificantTermsAggregationDescriptor<T> MinimumDocumentCount(int minimumDocumentCount) =>
+			Assign(a => a.MinimumDocumentCount = minimumDocumentCount);
 
-		public SignificantTermsAggregationDescriptor<T> MutualInformation(bool? backgroundIsSuperSet = null, bool? includeNegatives = null)
-		{
-			Self.MutualInformation = new MutualInformationHeuristic
+		public SignificantTermsAggregationDescriptor<T> MutualInformation(bool? backgroundIsSuperSet = null, bool? includeNegatives = null) =>
+			Assign(a => a.MutualInformation = new MutualInformationHeuristic
 			{
 				BackgroundIsSuperSet = backgroundIsSuperSet,
 				IncludeNegatives = includeNegatives
-			};
-			return this;
-		}
+			});
 
-		public SignificantTermsAggregationDescriptor<T> ChiSquare(bool? backgroundIsSuperSet = null, bool? includeNegatives = null)
-		{
-			Self.ChiSquare = new ChiSquareHeuristic
+		public SignificantTermsAggregationDescriptor<T> ChiSquare(bool? backgroundIsSuperSet = null, bool? includeNegatives = null) =>
+			Assign(a => a.ChiSquare = new ChiSquareHeuristic
 			{
 				BackgroundIsSuperSet = backgroundIsSuperSet,
 				IncludeNegatives = includeNegatives
-			};
-			return this;
-		}
+			});
 
-		public SignificantTermsAggregationDescriptor<T> GoogleNormalizedDistance(bool? backgroundIsSuperSet = null)
-		{
-			Self.GoogleNormalizedDistance = new GoogleNormalizedDistanceHeuristic
+		public SignificantTermsAggregationDescriptor<T> GoogleNormalizedDistance(bool? backgroundIsSuperSet = null) =>
+			Assign(a => a.GoogleNormalizedDistance = new GoogleNormalizedDistanceHeuristic
 			{
 				BackgroundIsSuperSet = backgroundIsSuperSet,
-			};
-			return this;
-		}
+			});
 
-		public SignificantTermsAggregationDescriptor<T> PercentageScore()
-		{
-			this.Self.PercentageScore = new PercentageScoreHeuristic();
-			return this;
-		}
+		public SignificantTermsAggregationDescriptor<T> PercentageScore() => Assign(a => a.PercentageScore = new PercentageScoreHeuristic());
 
-		public SignificantTermsAggregationDescriptor<T> Script(Func<ScriptedHeuristicDescriptor, ScriptedHeuristicDescriptor> scriptSelector)
-		{
-			this.Self.Script = scriptSelector(new ScriptedHeuristicDescriptor()).ScriptedHeuristic;
-			return this;
-		}
+		public SignificantTermsAggregationDescriptor<T> Script(Func<ScriptedHeuristicDescriptor, ScriptedHeuristicDescriptor> scriptSelector) =>
+			Assign(a => a.Script = scriptSelector?.Invoke(new ScriptedHeuristicDescriptor())?.ScriptedHeuristic);
 
-		public SignificantTermsAggregationDescriptor<T> BackgroundFilter(Func<QueryDescriptor<T>, QueryContainer> selector)
-		{
-			this.Self.BackgroundFilter = selector(new QueryDescriptor<T>());
-			return this;
-		}
+		public SignificantTermsAggregationDescriptor<T> BackgroundFilter(Func<QueryDescriptor<T>, QueryContainer> selector) =>
+			Assign(a => a.BackgroundFilter = selector(new QueryDescriptor<T>()));
 	}
 }

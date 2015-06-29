@@ -21,29 +21,16 @@ namespace Nest
 	}
 
 	public class ChildrenAggregationDescriptor<T> 
-		: BucketAggregationBaseDescriptor<ChildrenAggregationDescriptor<T>, T>, IChildrenAggregator
+		: BucketAggregationBaseDescriptor<ChildrenAggregationDescriptor<T>, IChildrenAggregator, T>, IChildrenAggregator
 		where T : class
 	{
-		public ChildrenAggregationDescriptor()
-		{
-			this.Self.Type = typeof(T);
-		}
 
-		IChildrenAggregator Self => this;
-		
-		TypeNameMarker IChildrenAggregator.Type { get; set; }
+		TypeNameMarker IChildrenAggregator.Type { get; set; } = typeof(T);
 
-		public ChildrenAggregationDescriptor<T> Type(TypeNameMarker type)
-		{
-			this.Self.Type = type;
-			return this;
-		}
+		public ChildrenAggregationDescriptor<T> Type(TypeNameMarker type) =>
+			Assign(a => a.Type = type);
 
-		public ChildrenAggregationDescriptor<T> Type<K>() 
-			where K : class
-		{
-			this.Self.Type = typeof(K);
-			return this;
-		}
+		public ChildrenAggregationDescriptor<T> Type<TChildType>() where TChildType : class =>
+			Assign(a => a.Type = typeof(TChildType));
 	}
 }

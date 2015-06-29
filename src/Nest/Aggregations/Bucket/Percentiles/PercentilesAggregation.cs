@@ -35,11 +35,11 @@ namespace Nest
 		public int? Compression { get; set; }
 	}
 
-	public class PercentilesAggregationDescriptor<T> : BucketAggregationBaseDescriptor<PercentilesAggregationDescriptor<T>, T>, IPercentilesAggregator 
+	public class PercentilesAggregationDescriptor<T> 
+		: BucketAggregationBaseDescriptor<PercentilesAggregationDescriptor<T>, IPercentilesAggregator, T>
+			, IPercentilesAggregator 
 		where T : class
 	{
-		private IPercentilesAggregator Self => this;
-
 		PropertyPathMarker IPercentilesAggregator.Field { get; set; }
 		
 		string IPercentilesAggregator.Script { get; set; }
@@ -50,40 +50,18 @@ namespace Nest
 
 		int? IPercentilesAggregator.Compression { get; set; }
 
-		public PercentilesAggregationDescriptor<T> Field(string field)
-		{
-			Self.Field = field;
-			return this;
-		}
+		public PercentilesAggregationDescriptor<T> Field(string field) => Assign(a => a.Field = field);
 
-		public PercentilesAggregationDescriptor<T> Field(Expression<Func<T, object>> field)
-		{
-			Self.Field = field;
-			return this;
-		}
+		public PercentilesAggregationDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
 
-		public PercentilesAggregationDescriptor<T> Script(string script)
-		{
-			Self.Script = script;
-			return this;
-		}
+		public PercentilesAggregationDescriptor<T> Script(string script) => Assign(a => a.Script = script);
 
-		public PercentilesAggregationDescriptor<T> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramSelector)
-		{
-			Self.Params = paramSelector(new FluentDictionary<string, object>());
-			return this;
-		}
+		public PercentilesAggregationDescriptor<T> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramSelector) =>
+			Assign(a => a.Params = paramSelector?.Invoke(new FluentDictionary<string, object>()));
 
-		public PercentilesAggregationDescriptor<T> Percentages(params double[] percentages)
-		{
-			Self.Percentages = percentages;
-			return this;
-		}
-		
-		public PercentilesAggregationDescriptor<T> Compression(int compression)
-		{
-			Self.Compression = compression;
-			return this;
-		}
+		public PercentilesAggregationDescriptor<T> Percentages(params double[] percentages) => Assign(a => a.Percentages = percentages);
+
+		public PercentilesAggregationDescriptor<T> Compression(int compression) => Assign(a => a.Compression = compression);
+
 	}
 }

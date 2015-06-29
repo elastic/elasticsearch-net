@@ -9,19 +9,19 @@ namespace Nest
 		protected BucketAggregationBase(IDictionary<string, IAggregation> aggregations) : base(aggregations) { }
 	}
 
-	public abstract class BucketAggregationBaseDescriptor<TBucketAggregation, T> 
-		: IAggregationDescriptor, IBucketAggregator 
-		where TBucketAggregation : BucketAggregationBaseDescriptor<TBucketAggregation, T>
+	public abstract class BucketAggregationBaseDescriptor<TBucketAggregation, TI, T>
+		: IAggregationDescriptor, IBucketAggregator
+		where TBucketAggregation : BucketAggregationBaseDescriptor<TBucketAggregation, TI, T>, TI, IBucketAggregator
 		where T : class
+		where TI : class, IBucketAggregator
 	{
 		IDictionary<string, IAggregationContainer> IBucketAggregator.Aggregations { get; set; }
 
-		public TBucketAggregation Aggregations(Func<AggregationDescriptor<T>, AggregationDescriptor<T>> selector)
-		{	
-			var aggs = selector(new AggregationDescriptor<T>());
-			if (aggs == null) return (TBucketAggregation)this;
-			((IBucketAggregator)this).Aggregations = ((IAggregationContainer)aggs).Aggregations;
-			return (TBucketAggregation)this;
-		}
+		protected TBucketAggregation Assign(Action<TI> assigner) => Fluent.Assign(((TBucketAggregation)this), assigner);
+
+		protected TI Self => (TI)(TBucketAggregation)this;
+
+		public TBucketAggregation Aggregations(Func<AggregationDescriptor<T>, IAggregationContainer> selector) =>
+			Assign(a => a.Aggregations = selector?.Invoke(new AggregationDescriptor<T>())?.Aggregations.NullIfNoKeys());
 	}
 }

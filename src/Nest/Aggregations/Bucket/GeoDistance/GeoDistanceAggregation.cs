@@ -23,7 +23,7 @@ namespace Nest
 
 		[JsonProperty("distance_type")]
 		GeoDistance? DistanceType { get; set; }
-		
+
 		[JsonProperty(PropertyName = "ranges")]
 		IEnumerable<Range<double>> Ranges { get; set; }
 	}
@@ -41,62 +41,38 @@ namespace Nest
 		public IEnumerable<Range<double>> Ranges { get; set; }
 	}
 
-	public class GeoDistanceAggregationDescriptor<T> : BucketAggregationBaseDescriptor<GeoDistanceAggregationDescriptor<T>, T>, IGeoDistanceAggregator where T : class
+	public class GeoDistanceAggregationDescriptor<T> :
+		BucketAggregationBaseDescriptor<GeoDistanceAggregationDescriptor<T>, IGeoDistanceAggregator, T>
+			, IGeoDistanceAggregator
+		where T : class
 	{
-		private IGeoDistanceAggregator Self => this;
-
 		PropertyPathMarker IGeoDistanceAggregator.Field { get; set; }
-		
+
 		string IGeoDistanceAggregator.Origin { get; set; }
-	
+
 		GeoUnit? IGeoDistanceAggregator.Unit { get; set; }
 
 		GeoDistance? IGeoDistanceAggregator.DistanceType { get; set; }
 
 		IEnumerable<Range<double>> IGeoDistanceAggregator.Ranges { get; set; }
 
-		public GeoDistanceAggregationDescriptor<T> Field(string field)
-		{
-			Self.Field = field;
-			return this;
-		}
+		public GeoDistanceAggregationDescriptor<T> Field(string field) => Assign(a => a.Field = field);
 
-		public GeoDistanceAggregationDescriptor<T> Field(Expression<Func<T, object>> field)
-		{
-			Self.Field = field;
-			return this;
-		}
+		public GeoDistanceAggregationDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
 
-		public GeoDistanceAggregationDescriptor<T> Origin(double Lat, double Lon)
-		{
-			var c = CultureInfo.InvariantCulture;
-			Self.Origin = "{0}, {1}".F(Lat.ToString(c), Lon.ToString(c));
-			return this;
-		}
+		public GeoDistanceAggregationDescriptor<T> Origin(double Lat, double Lon) =>
+			Assign(a => a.Origin = "{0}, {1}".F(
+				Lat.ToString(CultureInfo.InvariantCulture), Lon.ToString(CultureInfo.InvariantCulture)
+			));
 
-		public GeoDistanceAggregationDescriptor<T> Origin(string geoHash)
-		{
-			Self.Origin = geoHash;
-			return this;
-		}
+		public GeoDistanceAggregationDescriptor<T> Origin(string geoHash) => Assign(a => a.Origin = geoHash);
 
-		public GeoDistanceAggregationDescriptor<T> Unit(GeoUnit unit)
-		{
-			Self.Unit = unit;
-			return this;
-		}
-		
-		public GeoDistanceAggregationDescriptor<T> DistanceType(GeoDistance geoDistance)
-		{
-			Self.DistanceType = geoDistance;
-			return this;
-		}
+		public GeoDistanceAggregationDescriptor<T> Unit(GeoUnit unit) => Assign(a => a.Unit = unit);
 
-		public GeoDistanceAggregationDescriptor<T> Ranges(params Func<Range<double>, Range<double>>[] ranges)
-		{
-			var newRanges = from range in ranges let r = new Range<double>() select range(r);
-			Self.Ranges = newRanges;
-			return this;
-		}
+		public GeoDistanceAggregationDescriptor<T> DistanceType(GeoDistance geoDistance) => Assign(a => a.DistanceType = geoDistance);
+
+		public GeoDistanceAggregationDescriptor<T> Ranges(params Func<Range<double>, Range<double>>[] ranges) =>
+			Assign(a => a.Ranges = (from range in ranges let r = new Range<double>() select range(r)).ToListOrNullIfEmpty());
+
 	}
 }

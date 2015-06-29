@@ -32,48 +32,28 @@ namespace Nest
 		public IEnumerable<Range<double>> Ranges { get; set; }
 	}
 
-	public class RangeAggregationDescriptor<T> : BucketAggregationBaseDescriptor<RangeAggregationDescriptor<T>, T>, IRangeAggregator 
-		where T : class 
+	public class RangeAggregationDescriptor<T>
+		: BucketAggregationBaseDescriptor<RangeAggregationDescriptor<T>, IRangeAggregator, T>, IRangeAggregator
+		where T : class
 	{
-		private IRangeAggregator Self => this;
-
 		PropertyPathMarker IRangeAggregator.Field { get; set; }
-		
+
 		string IRangeAggregator.Script { get; set; }
 
 		FluentDictionary<string, object> IRangeAggregator.Params { get; set; }
 
 		IEnumerable<Range<double>> IRangeAggregator.Ranges { get; set; }
-		
-		public RangeAggregationDescriptor<T> Field(string field)
-		{
-			Self.Field = field;
-			return this;
-		}
 
-		public RangeAggregationDescriptor<T> Field(Expression<Func<T, object>> field)
-		{
-			Self.Field = field;
-			return this;
-		}
+		public RangeAggregationDescriptor<T> Field(string field) => Assign(a => a.Field = field);
 
-		public RangeAggregationDescriptor<T> Script(string script)
-		{
-			Self.Script = script;
-			return this;
-		}
+		public RangeAggregationDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
 
-		public RangeAggregationDescriptor<T> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramSelector)
-		{
-			Self.Params = paramSelector(new FluentDictionary<string, object>());
-			return this;
-		}
+		public RangeAggregationDescriptor<T> Script(string script) => Assign(a => a.Script = script);
 
-		public RangeAggregationDescriptor<T> Ranges(params Func<Range<double>, Range<double>>[] ranges)
-		{
-			var newRanges = from range in ranges let r = new Range<double>() select range(r);
-			Self.Ranges = newRanges;
-			return this;
-		}
+		public RangeAggregationDescriptor<T> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramSelector) =>
+			Assign(a => a.Params = paramSelector?.Invoke(new FluentDictionary<string, object>()));
+
+		public RangeAggregationDescriptor<T> Ranges(params Func<Range<double>, Range<double>>[] ranges) =>
+			Assign(a => a.Ranges = (from range in ranges let r = new Range<double>() select range(r)).ToListOrNullIfEmpty());
 	}
 }

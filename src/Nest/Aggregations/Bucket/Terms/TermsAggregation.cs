@@ -61,10 +61,11 @@ namespace Nest
 	}
 
 
-	public class TermsAggregationDescriptor<T> : BucketAggregationBaseDescriptor<TermsAggregationDescriptor<T>, T>, ITermsAggregator where T : class
+	public class TermsAggregationDescriptor<T> 
+		: BucketAggregationBaseDescriptor<TermsAggregationDescriptor<T>, ITermsAggregator, T>
+			, ITermsAggregator 
+		where T : class
 	{
-		private ITermsAggregator Self => this;
-
 		PropertyPathMarker ITermsAggregator.Field { get; set; }
 		
 		string ITermsAggregator.Script { get; set; }
@@ -86,96 +87,47 @@ namespace Nest
 		IDictionary<string, object> ITermsAggregator.Params { get; set; }
 
 		TermsAggregationCollectMode? ITermsAggregator.CollectMode { get; set; }
-		
-		public TermsAggregationDescriptor<T> Field(string field)
-		{
-			Self.Field = field;
-			return this;
-		}
 
-		public TermsAggregationDescriptor<T> Field(Expression<Func<T, object>> field)
-		{
-			Self.Field = field;
-			return this;
-		}
+		public TermsAggregationDescriptor<T> Field(string field) => Assign(a => a.Field = field);
+
+		public TermsAggregationDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
 
 
-		public TermsAggregationDescriptor<T> Script(string script)
-		{
-			Self.Script = script;
-			return this;
-		}
+		public TermsAggregationDescriptor<T> Script(string script) => Assign(a => a.Script = script);
 
-		public TermsAggregationDescriptor<T> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramSelector)
-		{
-			Self.Params = paramSelector(new FluentDictionary<string, object>());
-			return this;
-		}
+		public TermsAggregationDescriptor<T> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramSelector) =>
+			Assign(a=>a.Params = paramSelector?.Invoke(new FluentDictionary<string, object>()));
 
-		public TermsAggregationDescriptor<T> Size(int size)
-		{
-			Self.Size = size;
-			return this;
-		}
-		
-		public TermsAggregationDescriptor<T> ShardSize(int shardSize)
-		{
-			Self.ShardSize = shardSize;
-			return this;
-		}
+		public TermsAggregationDescriptor<T> Size(int size) => Assign(a => a.Size = size);
 
-		public TermsAggregationDescriptor<T> MinimumDocumentCount(int minimumDocumentCount)
-		{
-			Self.MinimumDocumentCount = minimumDocumentCount;
-			return this;
-		}
-		
-		public TermsAggregationDescriptor<T> ExecutionHint(TermsAggregationExecutionHint executionHint)
-		{
-			Self.ExecutionHint = executionHint;
-			return this;
-		}
+		public TermsAggregationDescriptor<T> ShardSize(int shardSize) => Assign(a => a.ShardSize = shardSize);
 
-		public TermsAggregationDescriptor<T> OrderAscending(string key)
-		{
-			Self.Order = new Dictionary<string, string> { {key, "asc"}};
-			return this;
-		}
-	
-		public TermsAggregationDescriptor<T> OrderDescending(string key)
-		{
-			Self.Order = new Dictionary<string, string> { {key, "desc"}};
-			return this;
-		}
+		public TermsAggregationDescriptor<T> MinimumDocumentCount(int minimumDocumentCount) =>
+			Assign(a => a.MinimumDocumentCount = minimumDocumentCount);
 
-		public TermsAggregationDescriptor<T> Include(string includePattern, string regexFlags = null)
-		{
-			Self.Include = new TermsIncludeExclude() { Pattern = includePattern, Flags = regexFlags };
-			return this;
-		}
+		public TermsAggregationDescriptor<T> ExecutionHint(TermsAggregationExecutionHint executionHint) =>
+			Assign(a => a.ExecutionHint = executionHint);
 
-		public TermsAggregationDescriptor<T> Include(IEnumerable<string> values)
-		{
-			Self.Include = new TermsIncludeExclude { Values = values };
-			return this;
-		}
-		
-		public TermsAggregationDescriptor<T> Exclude(string excludePattern, string regexFlags = null)
-		{
-			Self.Exclude = new TermsIncludeExclude() { Pattern = excludePattern, Flags = regexFlags };
-			return this;
-		}
+		public TermsAggregationDescriptor<T> OrderAscending(string key) =>
+			Assign(a => a.Order = new Dictionary<string, string> { { key, "asc" } });
 
-		public TermsAggregationDescriptor<T> Exclude(IEnumerable<string> values)
-		{
-			Self.Exclude = new TermsIncludeExclude { Values = values };
-			return this;
-		}
+		public TermsAggregationDescriptor<T> OrderDescending(string key) =>
+			Assign(a => a.Order = new Dictionary<string, string> { { key, "desc" } });
 
-		public TermsAggregationDescriptor<T> CollectMode(TermsAggregationCollectMode collectMode)
-		{
-			Self.CollectMode = collectMode;
-			return this;
-		}
+		public TermsAggregationDescriptor<T> Include(string includePattern, string regexFlags = null) =>
+			Assign(a => a.Include = new TermsIncludeExclude() { Pattern = includePattern, Flags = regexFlags });
+
+		public TermsAggregationDescriptor<T> Include(IEnumerable<string> values) =>
+			Assign(a => a.Include = new TermsIncludeExclude { Values = values });
+
+		public TermsAggregationDescriptor<T> Exclude(string excludePattern, string regexFlags = null) =>
+			Assign(a => a.Exclude = new TermsIncludeExclude() { Pattern = excludePattern, Flags = regexFlags });
+
+		public TermsAggregationDescriptor<T> Exclude(IEnumerable<string> values) =>
+			Assign(a => a.Exclude = new TermsIncludeExclude { Values = values });
+
+		public TermsAggregationDescriptor<T> CollectMode(TermsAggregationCollectMode collectMode) =>
+			Assign(a => a.CollectMode = collectMode);
+
 	}
 }
