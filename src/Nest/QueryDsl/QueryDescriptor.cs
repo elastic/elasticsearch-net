@@ -86,38 +86,37 @@ namespace Nest
 		/// A query that match on any (configurable) of the provided terms. This is a simpler syntax query for using a bool query with several term queries in the should clauses.
 		/// </summary>
 		public QueryContainer Terms(string field, IEnumerable<string> terms) =>
-			this.TermsDescriptor(t => t.OnField(field).Terms(terms));
+			this.Terms(t => t.OnField(field).Terms(terms));
 
 		/// <summary>
 		/// A query that match on any (configurable) of the provided terms. This is a simpler syntax query for using a bool query with several term queries in the should clauses.
 		/// </summary>
 		public QueryContainer Terms<K>(Expression<Func<T, K>> objectPath, IEnumerable<K> terms) =>
-			this.TermsDescriptor<K>(t => t.OnField(objectPath).Terms(terms));
+			this.Terms<K>(t => t.OnField(objectPath).Terms(terms));
 
 		/// <summary>
 		/// A query that match on any (configurable) of the provided terms. This is a simpler syntax query for using a bool query with several term queries in the should clauses.
 		/// </summary>
 		public QueryContainer Terms<K>(Expression<Func<T, IEnumerable<K>>> objectPath, IEnumerable<K> terms) =>
-			this.TermsDescriptor<K>(t => t.OnField(objectPath).Terms(terms));
+			this.Terms<K>(t => t.OnField(objectPath).Terms(terms));
 
 		/// <summary>
 		/// A query that match on any (configurable) of the provided terms. This is a simpler syntax query for using a bool query with several term queries in the should clauses.
 		/// </summary>
 		public QueryContainer Terms(Expression<Func<T, object>> objectPath, IEnumerable<string> terms) =>
-			this.TermsDescriptor(t => t.OnField(objectPath).Terms(terms));
+			this.Terms(t => t.OnField(objectPath).Terms(terms));
 
 		/// <summary>
 		/// A query that match on any (configurable) of the provided terms. This is a simpler syntax query for using a bool query with several term queries in the should clauses.
 		/// </summary>
-		public QueryContainer TermsDescriptor(Func<TermsQueryDescriptor<T, object>, ITermsQuery> selector) =>
-			this.TermsDescriptor<object>(selector);
+		public QueryContainer Terms(Func<TermsQueryDescriptor<T, object>, ITermsQuery> selector) =>
+			this.Terms<object>(selector);
 
 		/// <summary>
 		/// A query that match on any (configurable) of the provided terms. This is a simpler syntax query for using a bool query with several term queries in the should clauses.
 		/// </summary>
-		public QueryContainer TermsDescriptor<K>(Func<TermsQueryDescriptor<T, K>, ITermsQuery> selector) =>
+		public QueryContainer Terms<K>(Func<TermsQueryDescriptor<T, K>, ITermsQuery> selector) =>
 			this._assignSelector(selector, (query, container) => container.Terms = query);
-
 
 		/// <summary>
 		/// A fuzzy based query that uses similarity based on Levenshtein (edit distance) algorithm.
