@@ -48,7 +48,7 @@ namespace Nest
 	public class SimpleQueryStringQuery : PlainQuery, ISimpleQueryStringQuery
 	{
 		public string Name { get; set; }
-		bool IQuery.IsConditionless => IsConditionless(this);
+		bool IQuery.Conditionless => IsConditionless(this);
 		public string Query { get; set; }
 		public PropertyPathMarker DefaultField { get; set; }
 		public IEnumerable<PropertyPathMarker> Fields { get; set; }
@@ -66,9 +66,9 @@ namespace Nest
 
 	public class SimpleQueryStringQueryDescriptor<T> : ISimpleQueryStringQuery where T : class
 	{
-		private ISimpleQueryStringQuery Self { get { return this; } }
+		private ISimpleQueryStringQuery Self => this;
 		string IQuery.Name { get; set; }
-		bool IQuery.IsConditionless => SimpleQueryStringQuery.IsConditionless(this);
+		bool IQuery.Conditionless => SimpleQueryStringQuery.IsConditionless(this);
 		string ISimpleQueryStringQuery.Query { get; set; }
 		PropertyPathMarker ISimpleQueryStringQuery.DefaultField { get; set; }
 		IEnumerable<PropertyPathMarker> ISimpleQueryStringQuery.Fields { get; set; }

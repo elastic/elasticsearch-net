@@ -11,11 +11,9 @@ namespace Nest
 		RewriteMultiTerm? Rewrite { get; set; }
 	}
 
-	public class PrefixQuery : PlainQuery, IPrefixQuery
+	public class PrefixQuery : FieldNameQuery, IPrefixQuery
 	{
-		public string Name { get; set; }
-		bool IQuery.IsConditionless { get { return false; } }
-		public PropertyPathMarker Field { get; set; }
+		bool IQuery.Conditionless { get { return false; } }
 		public object Value { get; set; }
 		public double? Boost { get; set; }
 		public RewriteMultiTerm? Rewrite { get; set; }
@@ -24,23 +22,14 @@ namespace Nest
 		{
 			container.Prefix = this;
 		}
-
-		PropertyPathMarker IFieldNameQuery.GetFieldName()
-		{
-			return this.Field;
-		}
-
-		void IFieldNameQuery.SetFieldName(string fieldName)
-		{
-			this.Field = fieldName;
-		}
 	}
 
 	public class PrefixQueryDescriptor<T> : TermQueryDescriptorBase<PrefixQueryDescriptor<T>, T>, 
 		IPrefixQuery where T : class
 	{
-		private IPrefixQuery Self { get { return this; } }
+		private IPrefixQuery Self => this;
 
+		PropertyPathMarker IFieldNameQuery.Field { get; set; }
 		RewriteMultiTerm? IPrefixQuery.Rewrite { get; set; }
 
 		public PrefixQueryDescriptor<T> Rewrite(RewriteMultiTerm rewrite)

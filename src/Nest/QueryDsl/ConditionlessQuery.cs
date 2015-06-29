@@ -11,7 +11,7 @@ namespace Nest
 
 		internal QueryContainer _Fallback { get; set; }
 
-		bool IQuery.IsConditionless
+		bool IQuery.Conditionless
 		{
 			get
 			{

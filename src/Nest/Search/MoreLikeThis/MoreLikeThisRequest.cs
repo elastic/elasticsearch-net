@@ -56,7 +56,7 @@ namespace Nest
 		, IMoreLikeThisRequest
 		where T : class
 	{
-		private IMoreLikeThisRequest Self { get { return this; } }
+		private IMoreLikeThisRequest Self => this;
 
 		ISearchRequest IMoreLikeThisRequest.Search { get; set; }
 

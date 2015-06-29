@@ -108,7 +108,7 @@ namespace Nest
 		where TPartialDocument : class
 	{
 
-		private IUpdateRequest<TDocument, TPartialDocument> Self { get { return this; } }
+		private IUpdateRequest<TDocument, TPartialDocument> Self => this;
 
 		string IUpdateRequest<TDocument, TPartialDocument>.Script { get; set; }
 		

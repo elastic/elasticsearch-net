@@ -66,7 +66,7 @@ namespace Nest
 		, ITermvectorRequest
 		where T : class
 	{
-		private ITermvectorRequest Self { get { return this; } }
+		private ITermvectorRequest Self => this;
 		
 		object ITermvectorRequest.Document { get; set; }
 

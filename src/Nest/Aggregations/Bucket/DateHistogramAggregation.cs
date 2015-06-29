@@ -77,7 +77,7 @@ namespace Nest
 
 	public class DateHistogramAggregationDescriptor<T> : BucketAggregationBaseDescriptor<DateHistogramAggregationDescriptor<T>, T>, IDateHistogramAggregator where T : class
 	{
-		private IDateHistogramAggregator Self { get { return this; } }
+		private IDateHistogramAggregator Self => this;
 
 		PropertyPathMarker IDateHistogramAggregator.Field { get; set; }
 

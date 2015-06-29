@@ -77,7 +77,7 @@ namespace Nest
 	public partial class SearchExistsDescriptor<T> : QueryPathDescriptorBase<SearchExistsDescriptor<T>, SearchExistsRequestParameters, T>, ISearchExistsRequest
 		where T : class
 	{
-		private ISearchExistsRequest Self { get { return this; } }
+		private ISearchExistsRequest Self => this;
 
 		IQueryContainer ISearchExistsRequest.Query { get; set; }
 

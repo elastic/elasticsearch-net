@@ -35,7 +35,7 @@ namespace Nest
 
 	public partial class BulkDescriptor : FixedIndexTypePathDescriptor<BulkDescriptor, BulkRequestParameters>, IBulkRequest
 	{
-		private IBulkRequest Self { get { return this; } }
+		private IBulkRequest Self => this;
 
 		IList<IBulkOperation> IBulkRequest.Operations { get; set; }
 

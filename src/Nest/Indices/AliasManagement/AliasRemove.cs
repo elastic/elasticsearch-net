@@ -18,7 +18,7 @@ namespace Nest
 
 	public class AliasRemoveDescriptor : IAliasRemoveAction
 	{
-		private IAliasRemoveAction Self { get { return this; } }
+		private IAliasRemoveAction Self => this;
 		AliasRemoveOperation IAliasRemoveAction.Remove { get; set; }
 
 		public AliasRemoveDescriptor()

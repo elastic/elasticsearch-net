@@ -52,7 +52,7 @@ namespace Nest
 	public partial class SnapshotDescriptor 
         : RepositorySnapshotPathDescriptor<SnapshotDescriptor, SnapshotRequestParameters>, ISnapshotRequest
 	{
-        private ISnapshotRequest Self { get { return this; } }
+        private ISnapshotRequest Self => this;
 
         IEnumerable<IndexNameMarker> ISnapshotRequest.Indices { get; set; }
         bool? ISnapshotRequest.IgnoreUnavailable { get; set; }

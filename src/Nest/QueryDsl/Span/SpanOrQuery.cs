@@ -19,7 +19,7 @@ namespace Nest
 	public class SpanOrQuery : PlainQuery, ISpanOrQuery
 	{
 		public string Name { get; set; }
-		bool IQuery.IsConditionless { get { return false; } }
+		bool IQuery.Conditionless { get { return false; } }
 		public IEnumerable<ISpanQuery> Clauses { get; set; }
         public double? Boost { get; set; }
 
@@ -31,14 +31,14 @@ namespace Nest
 
 	public class SpanOrQueryDescriptor<T> : ISpanOrQuery where T : class
 	{
-		private ISpanOrQuery Self { get { return this; } }
+		private ISpanOrQuery Self => this;
 		string IQuery.Name { get; set; }
-		bool IQuery.IsConditionless
+		bool IQuery.Conditionless
 		{
 			get
 			{
 				return !Self.Clauses.HasAny() 
-					|| Self.Clauses.Cast<IQuery>().All(q => q.IsConditionless);
+					|| Self.Clauses.Cast<IQuery>().All(q => q.Conditionless);
 			}
 		}
 		IEnumerable<ISpanQuery> ISpanOrQuery.Clauses { get; set; }
@@ -57,7 +57,7 @@ namespace Nest
 				from selector in selectors 
 				let span = new SpanQuery<T>() 
 				select selector(span) into q 
-				where !(q as IQuery).IsConditionless 
+				where !(q as IQuery).Conditionless 
 				select q
 			).ToList();
 			Self.Clauses = descriptors.HasAny() ? descriptors : null;

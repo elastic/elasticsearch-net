@@ -71,7 +71,7 @@ namespace Nest
 	public class HighlightDescriptor<T> : IHighlightRequest
 		where T : class
 	{
-		protected IHighlightRequest Self { get { return this; } }
+		protected IHighlightRequest Self => this;
 
 		IEnumerable<string> IHighlightRequest.PreTags { get; set; }
 

@@ -81,7 +81,7 @@ namespace Nest
 	public class QueryStringQuery : PlainQuery, IQueryStringQuery
 	{
 		public string Name { get; set; }
-		bool IQuery.IsConditionless => IsConditionless(this);
+		bool IQuery.Conditionless => IsConditionless(this);
 		public string Query { get; set; }
 		public string Timezone { get; set; }
 		public PropertyPathMarker DefaultField { get; set; }
@@ -113,7 +113,7 @@ namespace Nest
 	{
 		private IQueryStringQuery Self { get { return this; }}
 		string IQuery.Name { get; set; }
-		bool IQuery.IsConditionless => QueryStringQuery.IsConditionless(this);
+		bool IQuery.Conditionless => QueryStringQuery.IsConditionless(this);
 		string IQueryStringQuery.Query { get; set; }
 		string IQueryStringQuery.Timezone { get; set; }
 		PropertyPathMarker IQueryStringQuery.DefaultField { get; set; }

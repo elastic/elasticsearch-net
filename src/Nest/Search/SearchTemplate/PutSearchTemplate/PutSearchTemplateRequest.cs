@@ -42,7 +42,7 @@ namespace Nest
 	public partial class PutSearchTemplateDescriptor
 		: NamePathDescriptor<PutSearchTemplateDescriptor, PutTemplateRequestParameters>, IPutSearchTemplateRequest
 	{
-		IPutSearchTemplateRequest Self { get { return this; } }
+		IPutSearchTemplateRequest Self => this;
 		string IPutSearchTemplateRequest.Template { get; set;}
 
 		public PutSearchTemplateDescriptor Template(string template)

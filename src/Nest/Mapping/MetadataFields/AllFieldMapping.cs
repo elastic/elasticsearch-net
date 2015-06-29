@@ -61,7 +61,7 @@ namespace Nest
 	public class AllFieldMappingDescriptor : IAllFieldMapping
 	{
 
-		private IAllFieldMapping Self { get { return this; } }
+		private IAllFieldMapping Self => this;
 
 		bool? IAllFieldMapping.Enabled { get; set; }
 		

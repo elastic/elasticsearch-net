@@ -24,7 +24,7 @@ namespace Nest
 		: MetricAggregationBaseDescriptor<PercentileRanksAggregationDescriptor<T>, T>, IPercentileRanksAggregaor
 		where T : class
 	{
-		IPercentileRanksAggregaor Self { get { return this; } }
+		IPercentileRanksAggregaor Self => this;
 		IEnumerable<double> IPercentileRanksAggregaor.Values { get; set; }
 
 		public PercentileRanksAggregationDescriptor<T> Values(IEnumerable<double> values)

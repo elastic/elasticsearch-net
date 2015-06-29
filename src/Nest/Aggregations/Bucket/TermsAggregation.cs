@@ -63,7 +63,7 @@ namespace Nest
 
 	public class TermsAggregationDescriptor<T> : BucketAggregationBaseDescriptor<TermsAggregationDescriptor<T>, T>, ITermsAggregator where T : class
 	{
-		private ITermsAggregator Self { get { return this; } }
+		private ITermsAggregator Self => this;
 
 		PropertyPathMarker ITermsAggregator.Field { get; set; }
 		

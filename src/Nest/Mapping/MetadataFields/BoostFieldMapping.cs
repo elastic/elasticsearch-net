@@ -25,7 +25,7 @@ namespace Nest
 
 	public class BoostFieldMappingDescriptor<T> : IBoostFieldMapping
 	{
-		private IBoostFieldMapping Self { get { return this; } }
+		private IBoostFieldMapping Self => this;
 
 		PropertyNameMarker IBoostFieldMapping.Name { get; set; }
 		

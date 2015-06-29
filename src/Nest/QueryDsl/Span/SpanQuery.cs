@@ -33,7 +33,7 @@ namespace Nest
 	public class SpanQuery : ISpanQuery
 	{
 		public string Name { get; set; }
-		bool IQuery.IsConditionless { get { return false; } }
+		bool IQuery.Conditionless { get { return false; } }
 		public ISpanTermQuery SpanTermQueryDescriptor { get; set; }
 		public ISpanFirstQuery SpanFirst { get; set; }
 		public ISpanNearQuery SpanNear { get; set; }
@@ -44,9 +44,9 @@ namespace Nest
 
 	public class SpanQuery<T> : ISpanQuery where T : class
 	{
-		private ISpanQuery Self { get { return this; } }
+		private ISpanQuery Self => this;
 		string IQuery.Name { get; set; }
-		bool IQuery.IsConditionless
+		bool IQuery.Conditionless
 		{
 			get
 			{
@@ -59,7 +59,7 @@ namespace Nest
 					Self.SpanNot as IQuery,
 					Self.SpanMultiTerm as IQuery
 				};
-				return queries.All(q => q == null || q.IsConditionless);
+				return queries.All(q => q == null || q.Conditionless);
 			}
 		}
 		ISpanTermQuery ISpanQuery.SpanTermQueryDescriptor { get; set; }
@@ -129,7 +129,7 @@ namespace Nest
 
 		private SpanQuery<T> CreateQuery<K>(K query, Action<ISpanQuery> setProperty) where K : ISpanSubQuery
 		{
-			if (((IQuery)(query)).IsConditionless)
+			if (((IQuery)(query)).Conditionless)
 				return this;
 
 			var newSpanQuery = new SpanQuery<T>();

@@ -9,41 +9,27 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IGeoPolygonQuery : IFieldNameQuery
 	{
-		PropertyPathMarker Field { get; set; }
-
 		[JsonProperty("points")]
 		IEnumerable<string> Points { get; set; }
 	}
 
-	public class GeoPolygonQuery : PlainQuery, IGeoPolygonQuery
+	public class GeoPolygonQuery : FieldNameQuery, IGeoPolygonQuery
 	{
-		public string Name { get; set; }
-		bool IQuery.IsConditionless { get { return QueryCondition.IsConditionless(this); } }
-		public PropertyPathMarker Field { get; set; }
+		bool IQuery.Conditionless { get { return QueryCondition.IsConditionless(this); } }
 		public IEnumerable<string> Points { get; set; }
 
 		protected override void WrapInContainer(IQueryContainer container)
 		{
 			container.GeoPolygon = this;
 		}
-
-		public PropertyPathMarker GetFieldName()
-		{
-			return Field;
-		}
-
-		public void SetFieldName(string fieldName)
-		{
-			Field = fieldName;
-		}
 	}
 
 	public class GeoPolygonQueryDescriptor<T> : IGeoPolygonQuery
 	{
-		private IGeoPolygonQuery Self { get { return this; } }
+		private IGeoPolygonQuery Self => this;
 		string IQuery.Name { get; set; }
-		bool IQuery.IsConditionless { get { return QueryCondition.IsConditionless(this); } }
-		PropertyPathMarker IGeoPolygonQuery.Field { get; set; }
+		bool IQuery.Conditionless { get { return QueryCondition.IsConditionless(this); } }
+		PropertyPathMarker IFieldNameQuery.Field { get; set; }
 		IEnumerable<string> IGeoPolygonQuery.Points { get; set; }
 
 		public GeoPolygonQueryDescriptor<T> Field(string field)
@@ -68,16 +54,6 @@ namespace Nest
 		{
 			Self.Points = points;
 			return this;
-		}
-
-		public PropertyPathMarker GetFieldName()
-		{
-			return Self.Field;
-		}
-
-		public void SetFieldName(string fieldName)
-		{
-			Self.Field = fieldName;
 		}
 	}
 }

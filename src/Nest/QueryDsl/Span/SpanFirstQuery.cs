@@ -23,7 +23,7 @@ namespace Nest
 	public class SpanFirstQuery : PlainQuery, ISpanFirstQuery
 	{
 		public string Name { get; set; }
-		bool IQuery.IsConditionless { get { return false; } }
+		bool IQuery.Conditionless { get { return false; } }
 		public ISpanQuery Match { get; set; }
 		public int? End { get; set; }
 	    public double? Boost { get; set; }
@@ -38,12 +38,12 @@ namespace Nest
 	{
 		private ISpanFirstQuery Self { get { return this; }}
 		string IQuery.Name { get; set; }
-		bool IQuery.IsConditionless
+		bool IQuery.Conditionless
 		{
 			get
 			{
 				var query = Self.Match as IQuery;
-				return query != null && (Self.Match == null || query.IsConditionless);
+				return query != null && (Self.Match == null || query.Conditionless);
 			}
 		}	
 		ISpanQuery ISpanFirstQuery.Match { get; set; }

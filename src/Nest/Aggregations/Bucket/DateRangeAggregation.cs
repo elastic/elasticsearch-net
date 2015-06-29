@@ -30,7 +30,7 @@ namespace Nest
 
 	public class DateRangeAggregationDescriptor<T> : BucketAggregationBaseDescriptor<DateRangeAggregationDescriptor<T>, T>, IDateRangeAggregator where T : class
 	{
-		private IDateRangeAggregator Self { get { return this; } }
+		private IDateRangeAggregator Self => this;
 
 		[JsonProperty("field")]
 		PropertyPathMarker IDateRangeAggregator.Field { get; set; }

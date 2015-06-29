@@ -33,7 +33,7 @@ namespace Nest
 	public class SpanNotQuery : PlainQuery, ISpanNotQuery
 	{
 		public string Name { get; set; }
-		bool IQuery.IsConditionless { get { return false; } }
+		bool IQuery.Conditionless { get { return false; } }
 		public ISpanQuery Include { get; set; }
 		public ISpanQuery Exclude { get; set; }
 		public double? Boost { get; set; }
@@ -49,9 +49,9 @@ namespace Nest
 
 	public class SpanNotQuery<T> : ISpanNotQuery where T : class
 	{
-		private ISpanNotQuery Self { get { return this; } }
+		private ISpanNotQuery Self => this;
 		string IQuery.Name { get; set; }
-		bool IQuery.IsConditionless
+		bool IQuery.Conditionless
 		{
 			get
 			{
@@ -59,9 +59,9 @@ namespace Nest
 				var includeQuery = Self.Include as IQuery;
 
 				return excludeQuery == null && includeQuery == null
-					|| (includeQuery == null && excludeQuery.IsConditionless)
-					|| (excludeQuery == null && includeQuery.IsConditionless)
-					|| (excludeQuery != null && excludeQuery.IsConditionless && includeQuery != null && includeQuery.IsConditionless);
+					|| (includeQuery == null && excludeQuery.Conditionless)
+					|| (excludeQuery == null && includeQuery.Conditionless)
+					|| (excludeQuery != null && excludeQuery.Conditionless && includeQuery != null && includeQuery.Conditionless);
 			}
 		}
 		ISpanQuery ISpanNotQuery.Include { get; set; }

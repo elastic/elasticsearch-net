@@ -66,7 +66,7 @@ namespace Nest
 			var boolQuery = container.Bool;
 			var hasMustClauses = boolQuery != null && boolQuery.Must.HasAny();
 			if (hasMustClauses) return boolQuery.Must;
-			if (boolQuery != null && boolQuery.IsConditionless)
+			if (boolQuery != null && boolQuery.Conditionless)
 				return Enumerable.Empty<IQueryContainer>();
 
 			return new[] {container};

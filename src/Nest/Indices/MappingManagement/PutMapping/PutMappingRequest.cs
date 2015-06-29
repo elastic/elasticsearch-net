@@ -74,7 +74,7 @@ namespace Nest
 		IndicesTypePathDescriptor<PutMappingDescriptor<T>, PutMappingRequestParameters, T>, IPutMappingRequest<T>
 		where T : class
 	{
-		private IPutMappingRequest Self { get { return this; } }
+		private IPutMappingRequest Self => this;
 
 		RootObjectMapping IPutMappingRequest.Mapping { get; set; }
 

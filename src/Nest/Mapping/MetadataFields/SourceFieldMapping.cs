@@ -34,7 +34,7 @@ namespace Nest
 
 	public class SourceFieldMappingDescriptor : ISourceFieldMapping
 	{
-		private ISourceFieldMapping Self { get { return this; } }
+		private ISourceFieldMapping Self => this;
 
         bool? ISourceFieldMapping.Enabled { get; set; }
 		

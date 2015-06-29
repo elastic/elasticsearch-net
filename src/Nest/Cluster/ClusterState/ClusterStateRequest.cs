@@ -36,7 +36,7 @@ namespace Nest
 
 	public partial class ClusterStateDescriptor : IndicesOptionalPathDescriptor<ClusterStateDescriptor, ClusterStateRequestParameters>, IClusterStateRequest
 	{
-		private IClusterStateRequest Self { get { return this; } }
+		private IClusterStateRequest Self => this;
 
 		IEnumerable<ClusterStateMetric> IClusterStateRequest.Metrics { get; set; }
 		public ClusterStateDescriptor Metrics(params ClusterStateMetric[] metrics)

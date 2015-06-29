@@ -31,7 +31,7 @@ namespace Nest
 
 	public class RescoreQueryDescriptor<T> : IRescoreQuery where T : class
 	{
-		public IRescoreQuery Self { get { return this; } }
+		public IRescoreQuery Self => this;
 
 		IQueryContainer IRescoreQuery.Query { get; set; }
 

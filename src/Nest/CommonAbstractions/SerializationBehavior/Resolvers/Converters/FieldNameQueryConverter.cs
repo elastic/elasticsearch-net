@@ -47,7 +47,7 @@ namespace Nest
 			var query = this._reader.ReadJson(reader, objectType, existingValue, serializer);
 			var setter = query as IFieldNameQuery;
 			if (setter != null)
-				setter.SetFieldName(fieldName);
+				setter.Field = fieldName;
 			do
 			{
 				reader.Read();
@@ -61,7 +61,7 @@ namespace Nest
 			var v = value as IFieldNameQuery;
 			if (v == null) return;
 
-			var fieldName = v.GetFieldName();
+			var fieldName = v.Field;
 			if (fieldName == null)
 				return;
 

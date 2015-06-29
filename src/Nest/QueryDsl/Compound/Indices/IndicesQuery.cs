@@ -57,7 +57,7 @@ namespace Nest
 	public class IndicesQuery : PlainQuery, IIndicesQuery
 	{
 		public string Name { get; set; }
-		bool IQuery.IsConditionless => IsConditionless(this);
+		bool IQuery.Conditionless => IsConditionless(this);
 		public NestedScore? Score { get; set; }
 		public IQueryContainer Query { get; set; }
 		public IQueryContainer NoMatchQuery { get; set; }
@@ -71,7 +71,7 @@ namespace Nest
 	{
 		private IIndicesQuery Self { get { return this; }}
 		string IQuery.Name { get; set; }
-		bool IQuery.IsConditionless => IndicesQuery.IsConditionless(this);
+		bool IQuery.Conditionless => IndicesQuery.IsConditionless(this);
 		NestedScore? IIndicesQuery.Score { get; set; }
 		IQueryContainer IIndicesQuery.Query { get; set; }
 		IQueryContainer IIndicesQuery.NoMatchQuery { get; set; }

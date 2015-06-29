@@ -72,7 +72,7 @@ namespace Nest
 		: MetricAggregationBaseDescriptor<ScriptedMetricAggregationDescriptor<T>, T>, IScriptedMetricAggregator
 		where T : class
 	{
-		IScriptedMetricAggregator Self { get { return this; } }
+		IScriptedMetricAggregator Self => this;
 
 		string IScriptedMetricAggregator.InitScript { get; set; }
 		string IScriptedMetricAggregator.InitScriptFile { get; set; }

@@ -25,7 +25,7 @@ namespace Nest
 
 	public class RoutingFieldMappingDescriptor<T> : IRoutingFieldMapping
 	{
-		private IRoutingFieldMapping Self { get { return this; } }
+		private IRoutingFieldMapping Self => this;
 
 		bool? IRoutingFieldMapping.Required { get; set;}
 

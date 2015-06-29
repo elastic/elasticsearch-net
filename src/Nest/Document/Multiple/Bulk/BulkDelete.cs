@@ -40,7 +40,7 @@ namespace Nest
 	public class BulkDeleteDescriptor<T> : BulkOperationDescriptorBase, IBulkDeleteOperation<T>
 		where T : class
 	{
-		private IBulkDeleteOperation<T> Self { get { return this; } } 
+		private IBulkDeleteOperation<T> Self => this; 
 
 		protected override string BulkOperationType { get { return "delete"; } }
 		protected override Type BulkOperationClrType { get { return typeof(T); } }

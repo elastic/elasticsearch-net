@@ -38,7 +38,7 @@ namespace Nest
 	[DescriptorFor("IndicesPutTemplate")]
 	public partial class PutTemplateDescriptor : NamePathDescriptor<PutTemplateDescriptor, PutTemplateRequestParameters>, IPutTemplateRequest
 	{
-		private IPutTemplateRequest Self { get { return this; } }
+		private IPutTemplateRequest Self => this;
 
 		private readonly IConnectionSettingsValues _connectionSettings;
 

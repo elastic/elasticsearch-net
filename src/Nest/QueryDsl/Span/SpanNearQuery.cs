@@ -29,7 +29,7 @@ namespace Nest
 	public class SpanNearQuery : PlainQuery, ISpanNearQuery
 	{
 		public string Name { get; set; }
-		bool IQuery.IsConditionless { get { return false; } }
+		bool IQuery.Conditionless { get { return false; } }
 		public IEnumerable<ISpanQuery> Clauses { get; set; }
 		public int? Slop { get; set; }
 		public bool? InOrder { get; set; }
@@ -46,12 +46,12 @@ namespace Nest
 	{
 		private ISpanNearQuery Self { get { return this; }}
 		string IQuery.Name { get; set; }	
-		bool IQuery.IsConditionless
+		bool IQuery.Conditionless
 		{
 			get
 			{
 				return !Self.Clauses.HasAny() 
-					|| Self.Clauses.Cast<IQuery>().All(q => q.IsConditionless);
+					|| Self.Clauses.Cast<IQuery>().All(q => q.Conditionless);
 			}
 		}
 		IEnumerable<ISpanQuery> ISpanNearQuery.Clauses { get; set; }
@@ -74,7 +74,7 @@ namespace Nest
 			{
 				var x = new SpanQuery<T>();
 				var q = selector(x);
-				if ((q as IQuery).IsConditionless)
+				if ((q as IQuery).Conditionless)
 					continue;
 
 				descriptors.Add(q);

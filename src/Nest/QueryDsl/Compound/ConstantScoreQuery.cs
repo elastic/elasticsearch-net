@@ -21,7 +21,7 @@ namespace Nest
 	public class ConstantScoreQuery : PlainQuery, IConstantScoreQuery
 	{
 		public string Name { get; set; }
-		bool IQuery.IsConditionless => IsConditionless(this);
+		bool IQuery.Conditionless => IsConditionless(this);
 		public string Lang { get; set; }
 		public string Script { get; set; }
 		public Dictionary<string, object> Params { get; set; }
@@ -36,7 +36,7 @@ namespace Nest
 	{
 		private IConstantScoreQuery Self { get { return this; }}
 		string IQuery.Name { get; set; }
-		bool IQuery.IsConditionless => ConstantScoreQuery.IsConditionless(this);
+		bool IQuery.Conditionless => ConstantScoreQuery.IsConditionless(this);
 		IQueryContainer IConstantScoreQuery.Query { get; set; }
 		double? IConstantScoreQuery.Boost { get; set; }
 

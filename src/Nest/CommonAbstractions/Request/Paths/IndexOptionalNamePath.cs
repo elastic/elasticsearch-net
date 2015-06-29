@@ -63,7 +63,7 @@ namespace Nest
 		where TDescriptor : IndexOptionalNamePathDescriptor<TDescriptor, TParameters>, new()
 		where TParameters : FluentRequestParameters<TParameters>, new()
 	{
-		private IIndexOptionalNamePath<TParameters> Self { get { return this; } }
+		private IIndexOptionalNamePath<TParameters> Self => this;
 
 		IndexNameMarker IIndexOptionalNamePath<TParameters>.Index { get; set; }
 		string IIndexOptionalNamePath<TParameters>.Name { get; set; }

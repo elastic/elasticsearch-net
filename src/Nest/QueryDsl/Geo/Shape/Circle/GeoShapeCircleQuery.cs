@@ -9,7 +9,6 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IGeoShapeQuery : IFieldNameQuery
 	{
-		PropertyPathMarker Field { get; set; }
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -19,34 +18,20 @@ namespace Nest
 		ICircleGeoShape Shape { get; set; }
 	}
 
-	public class GeoShapeCircleQuery : PlainQuery, IGeoShapeCircleQuery
+	public class GeoShapeCircleQuery : FieldNameQuery, IGeoShapeCircleQuery
 	{
-		public string Name { get; set; }
-		bool IQuery.IsConditionless { get { return false; } }
-		public PropertyPathMarker Field { get; set; }
+		bool IQuery.Conditionless { get { return false; } }
 		public ICircleGeoShape Shape { get; set; }
 
-		protected override void WrapInContainer(IQueryContainer container)
-		{
-			container.GeoShape = this;
-		}
-
-		PropertyPathMarker IFieldNameQuery.GetFieldName()
-		{
-			return this.Field;
-		}
-
-		void IFieldNameQuery.SetFieldName(string fieldName)
-		{
-			this.Field = fieldName;
-		}
+		protected override void WrapInContainer(IQueryContainer c) => c.GeoShape = this;
 	}
+
 
 	public class GeoShapeCircleQueryDescriptor<T> : IGeoShapeCircleQuery where T : class
 	{
-		private IGeoShapeCircleQuery Self { get { return this; } }
+		private IGeoShapeCircleQuery Self => this;
 		string IQuery.Name { get; set; }
-		bool IQuery.IsConditionless
+		bool IQuery.Conditionless
 		{
 			get
 			{
@@ -54,7 +39,7 @@ namespace Nest
 			}
 
 		}
-		PropertyPathMarker IGeoShapeQuery.Field { get; set; }
+		PropertyPathMarker IFieldNameQuery.Field { get; set; }
 		ICircleGeoShape IGeoShapeCircleQuery.Shape { get; set; }
 
 		public GeoShapeCircleQueryDescriptor<T> Name(string name)
@@ -89,16 +74,6 @@ namespace Nest
 				Self.Shape = new CircleGeoShape();
 			Self.Shape.Radius = radius;
 			return this;
-		}
-
-		void IFieldNameQuery.SetFieldName(string fieldName)
-		{
-			Self.Field = fieldName;
-		}
-
-		PropertyPathMarker IFieldNameQuery.GetFieldName()
-		{
-			return Self.Field;
 		}
 	}
 }

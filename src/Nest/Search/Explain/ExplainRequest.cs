@@ -59,7 +59,7 @@ namespace Nest
 	public partial class ExplainDescriptor<T> : DocumentPathDescriptor<ExplainDescriptor<T>, ExplainRequestParameters, T>, IExplainRequest<T>
 		where T : class
 	{
-        private IExplainRequest Self { get { return this; } }
+        private IExplainRequest Self => this;
 
         IQueryContainer IExplainRequest.Query { get; set; }
 

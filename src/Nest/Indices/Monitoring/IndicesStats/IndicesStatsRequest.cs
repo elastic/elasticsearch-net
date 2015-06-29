@@ -45,7 +45,7 @@ namespace Nest
 	[DescriptorFor("IndicesStats")]
 	public partial class IndicesStatsDescriptor : IndicesOptionalPathDescriptor<IndicesStatsDescriptor, IndicesStatsRequestParameters>, IIndicesStatsRequest
 	{
-		private IIndicesStatsRequest Self { get { return this; } }
+		private IIndicesStatsRequest Self => this;
 
 		IEnumerable<TypeNameMarker> IIndicesStatsRequest.Types { get; set; }
 		IEnumerable<IndicesStatsMetric> IIndicesStatsRequest.Metrics { get; set; }

@@ -23,7 +23,7 @@ namespace Nest
 
 	public class SizeFieldMappingDescriptor : ISizeFieldMapping
 	{
-		private ISizeFieldMapping Self { get { return this; } }
+		private ISizeFieldMapping Self => this;
 
 		bool? ISizeFieldMapping.Enabled { get; set; }
 

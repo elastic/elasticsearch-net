@@ -63,7 +63,7 @@ namespace Nest
 
 	public class DirectGeneratorDescriptor<T> : IDirectGenerator where T : class
 	{
-		private IDirectGenerator Self { get { return this; } }
+		private IDirectGenerator Self => this;
 
 		PropertyPathMarker IDirectGenerator.Field { get; set; }
 

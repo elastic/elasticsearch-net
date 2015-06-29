@@ -24,7 +24,7 @@ namespace Nest
 	public class BoostingQuery : PlainQuery, IBoostingQuery
 	{
 		public string Name { get; set; }
-		bool IQuery.IsConditionless => IsConditionless(this);
+		bool IQuery.Conditionless => IsConditionless(this);
 		public QueryContainer PositiveQuery { get; set; }
 		public QueryContainer NegativeQuery { get; set; }
 		public double? NegativeBoost { get; set; }
@@ -43,8 +43,8 @@ namespace Nest
 
 	public class BoostingQueryDescriptor<T> : IBoostingQuery where T : class
 	{
-		private IBoostingQuery Self { get { return this; } }
-		bool IQuery.IsConditionless => BoostingQuery.IsConditionless(this);
+		private IBoostingQuery Self => this;
+		bool IQuery.Conditionless => BoostingQuery.IsConditionless(this);
 		string IQuery.Name { get; set; }
 		QueryContainer IBoostingQuery.PositiveQuery { get; set; }
 		QueryContainer IBoostingQuery.NegativeQuery { get; set; }

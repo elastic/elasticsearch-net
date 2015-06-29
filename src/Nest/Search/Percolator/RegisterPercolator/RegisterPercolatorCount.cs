@@ -52,7 +52,7 @@ namespace Nest
 	public class RegisterPercolatorDescriptor<T> : IndexNamePathDescriptor<RegisterPercolatorDescriptor<T>, IndexRequestParameters, T>, IRegisterPercolatorRequest
 		where T : class
 	{
-		private IRegisterPercolatorRequest Self { get { return this; } }
+		private IRegisterPercolatorRequest Self => this;
 
 		QueryContainer IRegisterPercolatorRequest.Query { get; set; }
 

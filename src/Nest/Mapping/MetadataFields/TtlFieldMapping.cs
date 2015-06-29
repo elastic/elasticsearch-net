@@ -21,7 +21,7 @@ namespace Nest
 
 	public class TtlFieldMappingDescriptor : ITtlFieldMapping
 	{
-		private ITtlFieldMapping Self { get { return this; } }
+		private ITtlFieldMapping Self => this;
 
 		bool? ITtlFieldMapping.Enabled { get; set; }
 

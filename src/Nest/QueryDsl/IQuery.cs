@@ -12,6 +12,6 @@ namespace Nest
 		/// </summary>
 		[JsonProperty(PropertyName = "_name")]
 		string Name { get; set; }
-		bool IsConditionless { get; }
+		bool Conditionless { get; }
 	}
 }

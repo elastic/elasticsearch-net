@@ -10,7 +10,7 @@ namespace Nest
 	[JsonObject(MemberSerialization.OptIn)]
 	public class QueryContainer : IQueryContainer
 	{
-		private IQueryContainer Self { get { return this; } }
+		private IQueryContainer Self => this;
 
 		IBoolQuery IQueryContainer.Bool { get; set; }
 

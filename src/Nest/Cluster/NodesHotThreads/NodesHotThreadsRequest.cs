@@ -33,7 +33,7 @@ namespace Nest
 	public partial class NodesHotThreadsDescriptor 
 		: NodeIdOptionalPathBase<NodesHotThreadsRequestParameters>, INodesHotThreadsRequest
 	{
-		private INodesHotThreadsRequest Self { get { return this; } }
+		private INodesHotThreadsRequest Self => this;
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<NodesHotThreadsRequestParameters> pathInfo)
 		{

@@ -9,7 +9,6 @@ namespace Nest
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public interface IGeoHashCellQuery : IFieldNameQuery
     {
-        PropertyPathMarker Field { get; set; }
         string Location { get; set; }
 
         [JsonProperty("distance")]
@@ -23,11 +22,9 @@ namespace Nest
         bool Neighbors { get; set; }
     }
 
-    public class GeoHashCellQuery : PlainQuery, IGeoHashCellQuery
+    public class GeoHashCellQuery : FieldNameQuery, IGeoHashCellQuery
     {
-		public string Name { get; set; }
-		bool IQuery.IsConditionless { get { return QueryCondition.IsConditionless(this); } }
-		public PropertyPathMarker Field { get; set; }
+		bool IQuery.Conditionless { get { return QueryCondition.IsConditionless(this); } }
         public string Location { get; set; }
         public object Precision { get; set; }
         public GeoUnit? Unit { get; set; }
@@ -37,24 +34,14 @@ namespace Nest
         {
             container.GeoHashCell = this;
         }
-
-		public PropertyPathMarker GetFieldName()
-		{
-			return Field;
-		}
-
-		public void SetFieldName(string fieldName)
-		{
-			Field = fieldName;
-		}
 	}
 
 	public class GeoHashCellQueryDescriptor<T> : IGeoHashCellQuery
     {
-		private IGeoHashCellQuery Self { get { return this; } }
+		private IGeoHashCellQuery Self => this;
 		string IQuery.Name { get; set; }
-        bool IQuery.IsConditionless { get { return QueryCondition.IsConditionless(this); } }
-        PropertyPathMarker IGeoHashCellQuery.Field { get; set; }
+        bool IQuery.Conditionless { get { return QueryCondition.IsConditionless(this); } }
+        PropertyPathMarker IFieldNameQuery.Field { get; set; }
         string IGeoHashCellQuery.Location { get; set; }
         object IGeoHashCellQuery.Precision { get; set; }
         GeoUnit? IGeoHashCellQuery.Unit { get; set; }
@@ -103,15 +90,5 @@ namespace Nest
             Self.Neighbors = neighbors;
             return this;
         }
-
-		public PropertyPathMarker GetFieldName()
-		{
-			return Self.Field;
-		}
-
-		public void SetFieldName(string fieldName)
-		{
-			Self.Field = fieldName;
-		}
 	}
 }

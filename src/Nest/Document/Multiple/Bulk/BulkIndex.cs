@@ -42,7 +42,7 @@ namespace Nest
 	public class BulkIndexDescriptor<T> : BulkOperationDescriptorBase, IIndexOperation<T> 
 		where T : class
 	{
-		private IIndexOperation<T> Self { get { return this; } } 
+		private IIndexOperation<T> Self => this; 
 
 		protected override string BulkOperationType { get { return "index"; } }
 		protected override Type BulkOperationClrType { get { return typeof(T); } }

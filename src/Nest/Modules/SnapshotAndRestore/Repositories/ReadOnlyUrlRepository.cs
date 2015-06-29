@@ -13,7 +13,7 @@ namespace Nest
 		string IRepository.Type { get { return "url"; } }
 		IDictionary<string, object> IRepository.Settings { get; set; }
 
-		private IRepository Self { get { return this; } }
+		private IRepository Self => this;
 
 		public ReadOnlyUrlRepositoryDescriptor()
 		{

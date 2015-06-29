@@ -38,7 +38,7 @@ namespace Nest
 
 	public class TimestampFieldMappingDescriptor<T> : ITimestampFieldMapping
 	{
-		private ITimestampFieldMapping Self { get { return this; } }
+		private ITimestampFieldMapping Self => this;
 
 		bool ITimestampFieldMapping.Enabled { get; set;}
 

@@ -10,7 +10,6 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IGeoDistanceRangeQuery : IFieldNameQuery
 	{
-		PropertyPathMarker Field { get; set; }
 		string Location { get; set; }
 
 		[JsonProperty("from")]
@@ -35,11 +34,9 @@ namespace Nest
 		bool? IncludeUpper { get; set; }
 	}
 
-	public class GeoDistanceRangeQuery : PlainQuery, IGeoDistanceRangeQuery
+	public class GeoDistanceRangeQuery : FieldNameQuery, IGeoDistanceRangeQuery
 	{
-		public string Name { get; set; }
-		bool IQuery.IsConditionless => IsConditionless(this);
-		public PropertyPathMarker Field { get; set; }
+		bool IQuery.Conditionless => IsConditionless(this);
 		public string Location { get; set; }
 		public object From { get; set; }
 		public object To { get; set; }
@@ -50,17 +47,16 @@ namespace Nest
 		public bool? IncludeUpper { get; set; }
 
 		protected override void WrapInContainer(IQueryContainer c) => c.GeoDistanceRange = this;
-		public PropertyPathMarker GetFieldName() => Field;
-		public void SetFieldName(string fieldName) => Field = fieldName;
+
 		internal static bool IsConditionless(IGeoDistanceRangeQuery q) => q.Location.IsNullOrEmpty() || (q.To == null && q.From == null);
 	}
 
 	public class GeoDistanceRangeQueryDescriptor<T> : IGeoDistanceRangeQuery where T : class
 	{
-		private IGeoDistanceRangeQuery Self { get { return this; } }
+		private IGeoDistanceRangeQuery Self => this;
 		string IQuery.Name { get; set; }
-		bool IQuery.IsConditionless => GeoDistanceRangeQuery.IsConditionless(this);
-		PropertyPathMarker IGeoDistanceRangeQuery.Field { get; set; }
+		bool IQuery.Conditionless => GeoDistanceRangeQuery.IsConditionless(this);
+		PropertyPathMarker IFieldNameQuery.Field { get; set; }
 		string IGeoDistanceRangeQuery.Location { get; set; }
 		object IGeoDistanceRangeQuery.From { get; set; }
 		object IGeoDistanceRangeQuery.To { get; set; }
@@ -138,16 +134,6 @@ namespace Nest
 		{
 			Self.IncludeUpper = false;
 			return this;
-		}
-
-		public PropertyPathMarker GetFieldName()
-		{
-			return Self.Field;
-		}
-
-		public void SetFieldName(string fieldName)
-		{
-			Self.Field = fieldName;
 		}
 	}
 }

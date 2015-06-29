@@ -40,7 +40,7 @@ namespace Nest
 	public class MultiGetOperationDescriptor<T> : IMultiGetOperation
 		where T : class
 	{
-		private IMultiGetOperation Self { get { return this; } }
+		private IMultiGetOperation Self => this;
 
 		IndexNameMarker IMultiGetOperation.Index { get; set; }
 		TypeNameMarker IMultiGetOperation.Type { get; set; }

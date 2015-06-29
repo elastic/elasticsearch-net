@@ -35,7 +35,7 @@ namespace Nest
 	public class RangeAggregationDescriptor<T> : BucketAggregationBaseDescriptor<RangeAggregationDescriptor<T>, T>, IRangeAggregator 
 		where T : class 
 	{
-		private IRangeAggregator Self { get { return this; } }
+		private IRangeAggregator Self => this;
 
 		PropertyPathMarker IRangeAggregator.Field { get; set; }
 		

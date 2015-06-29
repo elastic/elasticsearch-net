@@ -75,7 +75,7 @@ namespace Nest
 		where TDescriptor : IndicesOptionalTypesNamePathDescriptor<TDescriptor, TParameters>, new()
 		where TParameters : FluentRequestParameters<TParameters>, new()
 	{
-		private IIndicesOptionalTypesNamePath<TParameters> Self { get { return this; } }
+		private IIndicesOptionalTypesNamePath<TParameters> Self => this;
 
 		bool? IIndicesOptionalTypesNamePath<TParameters>.AllIndices { get; set; }
 		IEnumerable<IndexNameMarker> IIndicesOptionalTypesNamePath<TParameters>.Indices { get; set; }

@@ -43,7 +43,7 @@ namespace Nest
 		BasePathDescriptor<ClusterSettingsDescriptor, ClusterSettingsRequestParameters>
 		, IClusterSettingsRequest
 	{
-		protected IClusterSettingsRequest Self { get { return this; } }
+		protected IClusterSettingsRequest Self => this;
 
 		IDictionary<string, object> IClusterSettingsRequest.Persistent { get; set; }
 

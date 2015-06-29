@@ -27,7 +27,7 @@ namespace Nest
 
 	public abstract class BulkOperationDescriptorBase : IBulkOperation
 	{
-		private IBulkOperation Self { get { return this; } }
+		private IBulkOperation Self => this;
 
 		protected abstract string BulkOperationType { get; }
 		string IBulkOperation.Operation { get { return this.BulkOperationType; } }

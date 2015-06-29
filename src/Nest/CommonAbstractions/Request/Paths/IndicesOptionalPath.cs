@@ -51,7 +51,7 @@ namespace Nest
 		where TParameters : FluentRequestParameters<TParameters>, new()
 	{
 
-		private IIndicesOptionalPath<TParameters> Self { get { return this; } }
+		private IIndicesOptionalPath<TParameters> Self => this;
 
 		IEnumerable<IndexNameMarker> IIndicesOptionalPath<TParameters>.Indices { get; set; }
 		

@@ -11,8 +11,6 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IMissingQuery : IFieldNameQuery
 	{
-		[JsonProperty(PropertyName = "field")]
-		PropertyPathMarker Field { get; set; }
 
 		[JsonProperty(PropertyName = "existence")]
 		bool? Existence { get; set; }
@@ -21,24 +19,22 @@ namespace Nest
 		bool? NullValue { get; set; }
 	}
 
-	public class MissingQuery : PlainQuery, IMissingQuery
+	public class MissingQuery : FieldNameQuery, IMissingQuery
 	{
 		public string Name { get; set; }
-		public bool IsConditionless => QueryCondition.IsConditionless(this);
+		public bool Conditionless => QueryCondition.IsConditionless(this);
 		public PropertyPathMarker Field { get; set; }
 		public bool? Existence { get; set; }
 		public bool? NullValue { get; set; }
 		protected override void WrapInContainer(IQueryContainer container) => container.Missing = this;
-		public PropertyPathMarker GetFieldName() => Field;
-		public void SetFieldName(string fieldName) => Field = fieldName;
 	}
 
 	public class MissingQueryDescriptor<T> : IMissingQuery where T : class
 	{
 		private IMissingQuery Self => this;
 		string IQuery.Name { get; set; }
-		bool IQuery.IsConditionless => QueryCondition.IsConditionless(this);
-		PropertyPathMarker IMissingQuery.Field { get; set;}
+		bool IQuery.Conditionless => QueryCondition.IsConditionless(this);
+		PropertyPathMarker IFieldNameQuery.Field { get; set;}
 		bool? IMissingQuery.Existence { get; set; }
 		bool? IMissingQuery.NullValue { get; set; }
 
@@ -71,9 +67,5 @@ namespace Nest
 			Self.NullValue = nullValue;
 			return this;
 		}
-
-		public PropertyPathMarker GetFieldName() => Self.Field;
-
-		public void SetFieldName(string fieldName) => Self.Field = fieldName;
 	}
 }

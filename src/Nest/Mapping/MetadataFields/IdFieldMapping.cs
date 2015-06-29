@@ -28,7 +28,7 @@ namespace Nest
 
 	public class IdFieldMappingDescriptor : IIdFieldMapping
 	{
-		private IIdFieldMapping Self { get { return this; } }
+		private IIdFieldMapping Self => this;
 
 		string IIdFieldMapping.Path { get; set; }
 

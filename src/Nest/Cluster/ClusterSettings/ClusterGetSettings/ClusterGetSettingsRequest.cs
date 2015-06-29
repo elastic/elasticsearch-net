@@ -32,7 +32,7 @@ namespace Nest
 	public partial class ClusterGetSettingsDescriptor : BasePathDescriptor<ClusterGetSettingsDescriptor, ClusterGetSettingsRequestParameters>
 		, IClusterGetSettingsRequest
 	{
-		protected IClusterGetSettingsRequest Self { get { return this; } }
+		protected IClusterGetSettingsRequest Self => this;
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ClusterGetSettingsRequestParameters> pathInfo)
 		{

@@ -52,7 +52,7 @@ namespace Nest
 
 	public class SortGeoDistanceDescriptor<T> : SortDescriptorBase<T, SortGeoDistanceDescriptor<T>>, IGeoDistanceSort where T : class
 	{
-		private IGeoDistanceSort Self { get { return this; } }
+		private IGeoDistanceSort Self => this;
 
 		PropertyPathMarker IGeoDistanceSort.Field { get; set; }
 

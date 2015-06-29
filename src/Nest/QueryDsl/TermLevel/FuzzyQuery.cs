@@ -9,8 +9,6 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IFuzzyQuery : IFieldNameQuery 
 	{
-		PropertyPathMarker Field { get; set; }
-
 		[JsonProperty(PropertyName = "boost")]
 		double? Boost { get; set; }
 		
@@ -40,11 +38,9 @@ namespace Nest
 		string Value { get; set; }
 	}
 
-	public class FuzzyStringQuery : PlainQuery, IStringFuzzyQuery
+	public class FuzzyStringQuery : FieldNameQuery, IStringFuzzyQuery
 	{
-		public string Name { get; set; }
-		bool IQuery.IsConditionless { get { return false; } }
-		public PropertyPathMarker Field { get; set; }
+		bool IQuery.Conditionless { get { return false; } }
 		public double? Boost { get; set; }
 		public string Fuzziness { get; set; }
 		public RewriteMultiTerm? Rewrite { get; set; }
@@ -58,30 +54,20 @@ namespace Nest
 		{
 			container.Fuzzy = this;
 		}
-
-		PropertyPathMarker IFieldNameQuery.GetFieldName()
-		{
-			return this.Field;
-		}
-
-		void IFieldNameQuery.SetFieldName(string fieldName)
-		{
-			this.Field = fieldName;
-		}
 	}
 
 	public class FuzzyQueryDescriptor<T> : IStringFuzzyQuery where T : class
 	{
-		private IStringFuzzyQuery Self { get { return this; } }
+		private IStringFuzzyQuery Self => this;
 		string IQuery.Name { get; set; }
-		bool IQuery.IsConditionless
+		bool IQuery.Conditionless
 		{
 			get
 			{
 				return Self.Field.IsConditionless() || Self.Value.IsNullOrEmpty();
 			}
 		}
-		PropertyPathMarker IFuzzyQuery.Field { get; set; }
+		PropertyPathMarker IFieldNameQuery.Field { get; set; }
 		double? IFuzzyQuery.Boost { get; set; }
 		string IFuzzyQuery.Fuzziness { get; set; }
 		string IStringFuzzyQuery.Value { get; set; }
@@ -161,16 +147,6 @@ namespace Nest
 		{
 			Self.Value = value;
 			return this;
-		}
-
-		void IFieldNameQuery.SetFieldName(string fieldName)
-		{
-			Self.Field = fieldName;
-		}
-
-		PropertyPathMarker IFieldNameQuery.GetFieldName()
-		{
-			return Self.Field;
 		}
 	}
 }

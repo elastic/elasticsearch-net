@@ -28,7 +28,7 @@ namespace Nest
 		where T : class
 	{
 
-		public IIp4RangeAggregator Self { get { return this; } }
+		public IIp4RangeAggregator Self => this;
 
 		PropertyPathMarker IIp4RangeAggregator.Field { get; set; }
 

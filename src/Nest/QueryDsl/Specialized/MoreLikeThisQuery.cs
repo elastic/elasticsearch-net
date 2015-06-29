@@ -78,7 +78,7 @@ namespace Nest
 	public class MoreLikeThisQuery : PlainQuery, IMoreLikeThisQuery
 	{
 		public string Name { get; set; }
-		bool IQuery.IsConditionless { get { return false; } }
+		bool IQuery.Conditionless { get { return false; } }
 		public IEnumerable<PropertyPathMarker> Fields { get; set; }
 		public string LikeText { get; set; }
 		public double? TermMatchPercentage { get; set; }
@@ -107,7 +107,7 @@ namespace Nest
 	{
 		private IMoreLikeThisQuery Self { get { return this; }}
 		string IQuery.Name { get; set; }
-		bool IQuery.IsConditionless
+		bool IQuery.Conditionless
 		{
 			get
 			{

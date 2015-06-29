@@ -37,7 +37,7 @@ namespace Nest
 	public class BulkCreateDescriptor<T> : BulkOperationDescriptorBase, IBulkCreateOperation<T> 
 		where T : class
 	{
-		private IBulkCreateOperation<T> Self { get { return this; } } 
+		private IBulkCreateOperation<T> Self => this; 
 
 		protected override string BulkOperationType { get { return "create"; } }
 		protected override Type BulkOperationClrType { get { return typeof(T); } }

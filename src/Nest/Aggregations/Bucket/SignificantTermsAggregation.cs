@@ -70,7 +70,7 @@ namespace Nest
 
 	public class SignificantTermsAggregationDescriptor<T> : BucketAggregationBaseDescriptor<SignificantTermsAggregationDescriptor<T>, T>, ISignificantTermsAggregator where T : class
 	{
-		private ISignificantTermsAggregator Self { get { return this; } }
+		private ISignificantTermsAggregator Self => this;
 
 		PropertyPathMarker ISignificantTermsAggregator.Field { get; set; }
 		

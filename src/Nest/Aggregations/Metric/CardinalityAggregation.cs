@@ -25,7 +25,7 @@ namespace Nest
 
 	public class CardinalityAggregationDescriptor<T> : MetricAggregationBaseDescriptor<CardinalityAggregationDescriptor<T>, T>, ICardinalityAggregator where T : class
 	{
-		private ICardinalityAggregator Self { get { return this; } }
+		private ICardinalityAggregator Self => this;
 
 		int? ICardinalityAggregator.PrecisionThreshold { get; set; }
 

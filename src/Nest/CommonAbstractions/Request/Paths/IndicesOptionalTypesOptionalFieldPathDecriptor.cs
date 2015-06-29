@@ -119,7 +119,7 @@ namespace Nest
 		where TParameters : FluentRequestParameters<TParameters>, new()
 		where T : class
 	{
-		private IIndicesOptionalTypesOptionalFieldsPath<TParameters, T> Self { get { return this; } }
+		private IIndicesOptionalTypesOptionalFieldsPath<TParameters, T> Self => this;
 
 		IEnumerable<IndexNameMarker> IIndicesOptionalTypesOptionalFieldsPath<TParameters>.Indices { get; set; }
 		IEnumerable<TypeNameMarker> IIndicesOptionalTypesOptionalFieldsPath<TParameters>.Types { get; set; }

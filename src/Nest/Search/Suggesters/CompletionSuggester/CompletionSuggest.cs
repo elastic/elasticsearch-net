@@ -24,7 +24,7 @@ namespace Nest
 
 	public class CompletionSuggestDescriptor<T> : BaseSuggestDescriptor<T>, ICompletionSuggester where T : class
 	{
-		public ICompletionSuggester Self { get { return this; } }
+		public ICompletionSuggester Self => this;
 
 		IFuzzySuggester ICompletionSuggester.Fuzzy { get; set; }
 

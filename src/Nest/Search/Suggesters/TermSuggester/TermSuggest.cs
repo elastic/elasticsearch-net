@@ -47,7 +47,7 @@ namespace Nest
 
 	public class TermSuggestDescriptor<T> : BaseSuggestDescriptor<T>, ITermSuggester where T : class
 	{
-		private ITermSuggester Self { get { return this; } }
+		private ITermSuggester Self => this;
 
 		int? ITermSuggester.PrefixLen { get; set; }
 

@@ -48,7 +48,7 @@ namespace Nest
 		where TDescriptor : NodeIdOptionalDescriptor<TDescriptor, TParameters> 
 		where TParameters : FluentRequestParameters<TParameters>, new()
 	{
-		private INodeIdOptionalPath<TParameters> Self { get { return this; } }
+		private INodeIdOptionalPath<TParameters> Self => this;
 		string INodeIdOptionalPath<TParameters>.NodeId { get; set; }
 
 		/// <summary>

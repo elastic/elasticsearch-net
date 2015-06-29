@@ -36,7 +36,7 @@ namespace Nest
 		where T : class
 	{
 
-		protected IDocumentOptionalPath<MultiTermVectorsRequestParameters> Self { get { return this; } }
+		protected IDocumentOptionalPath<MultiTermVectorsRequestParameters> Self => this;
 		
 		MultiTermVectorDocument IMultiTermVectorDocumentDescriptor.Document { get; set; }
 

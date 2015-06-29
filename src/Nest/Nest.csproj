@@ -100,6 +100,7 @@
     <Compile Include="Indices\IndexManagement\CreateIndex\ElasticClient-CreateIndexExtensions.cs" />
     <Compile Include="Indices\IndexManagement\OpenCloseIndex\ElasticClient-OpenCloseIndexExtensions.cs" />
     <Compile Include="Document\Single\Exists\ElasticClient-ExistsExtensions.cs" />
+    <Compile Include="QueryDsl\FieldNameQuery.cs" />
     <Compile Include="Search\Scroll\ElasticClient-ScrollExtensions.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\ElasticClient-Deserialize.cs" />
     <Compile Include="Document\Single\Source\ElasticClient-SourceExtensions.cs" />

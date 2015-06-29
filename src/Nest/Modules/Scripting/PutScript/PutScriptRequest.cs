@@ -40,7 +40,7 @@ namespace Nest
     [DescriptorFor("ScriptPut")]
     public partial class PutScriptDescriptor : BasePathDescriptor<PutScriptDescriptor, PutScriptRequestParameters>, IPutScriptRequest
     {
-        IPutScriptRequest Self { get { return this; } }
+        IPutScriptRequest Self => this;
         string IPutScriptRequest.Script { get; set; }
         string IPutScriptRequest.Id { get; set; }
         string IPutScriptRequest.Lang { get; set; }

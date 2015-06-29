@@ -104,7 +104,7 @@ namespace Nest
 		: QueryPathDescriptorBase<SearchTemplateDescriptor<T>, SearchTemplateRequestParameters, T>, ISearchTemplateRequest<T>
 		where T : class
 	{
-		ISearchTemplateRequest<T> Self { get { return this; } }
+		ISearchTemplateRequest<T> Self => this;
 
 		Type ISearchTemplateRequest.ClrType { get { return typeof(T); } }
 
