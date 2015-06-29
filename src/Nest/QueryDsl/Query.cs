@@ -1,10 +1,21 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
 namespace Nest
 {
+	public interface IQuery
+	{
+		/// <summary>
+		/// The _name of the query. this allows you to retrieve for each document what part of the query it matched on
+		/// </summary>
+		[JsonProperty(PropertyName = "_name")]
+		string Name { get; set; }
+		bool Conditionless { get; }
+	}
+
 	// TODO: Write a unit test for these using reflection to make sure all queries are covered
 	public static class Query<T> where T : class
 	{

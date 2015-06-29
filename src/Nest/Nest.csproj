@@ -527,8 +527,6 @@
     <Compile Include="CommonAbstractions\SerializationBehavior\Resolvers\Converters\CompositeJsonConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\CustomJson\ICustomJsonReader.cs" />
     <Compile Include="Modules\SnapshotAndRestore\Snapshot\GetSapshot\GetSnapshotRequest.cs" />
-    <Compile Include="QueryDsl\IQueryContainer.cs" />
-    <Compile Include="QueryDsl\IFieldNameQuery.cs" />
     <Compile Include="QueryDsl\Compound\FunctionScore\Functions\BoostFactorFunction.cs" />
     <Compile Include="QueryDsl\Compound\FunctionScore\Functions\ExpFunction.cs" />
     <Compile Include="QueryDsl\Compound\FunctionScore\Functions\FunctionBoostMode.cs" />
@@ -709,7 +707,6 @@
     <Compile Include="Search\Percolator\RegisterPercolator\RegisterPercolatorCount.cs" />
     <Compile Include="Search\Percolator\Percolate\PercolateRequest.cs" />
     <Compile Include="QueryDsl\ExternalFieldDeclaration.cs" />
-    <Compile Include="QueryDsl\IExternalFieldDeclaration.cs" />
     <Compile Include="QueryDsl\FullText\MultiMatch\MultiMatchQuery.cs" />
     <Compile Include="Cluster\ClusterState\ElasticClient-ClusterState.cs" />
     <Compile Include="CommonAbstractions\Extensions\UriExtensions.cs" />
@@ -958,7 +955,6 @@
     <Compile Include="Document\Single\Index\ElasticClient-Index.cs" />
     <Compile Include="ElasticClient.cs" />
     <Compile Include="CommonAbstractions\Extensions\Extensions.cs" />
-    <Compile Include="QueryDsl\IQuery.cs" />
     <Compile Include="QueryDsl\MatchAllQuery.cs" />
     <Compile Include="QueryDsl\TermLevel\Prefix\PrefixQuery.cs" />
     <Compile Include="Mapping\TermVectorOption.cs" />
