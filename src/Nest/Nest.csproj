@@ -973,7 +973,7 @@
     <Compile Include="CommonAbstractions\Infer\IndexName\IndexNameResolver.cs" />
     <Compile Include="CommonAbstractions\Infer\Id\IdResolver.cs" />
     <Compile Include="CommonAbstractions\ConnectionSettings\Inflector.cs" />
-    <Compile Include="QueryDsl\FullText\QueryString\QueryString.cs" />
+    <Compile Include="QueryDsl\FullText\QueryString\QueryStringQuery.cs" />
     <Compile Include="QueryDsl\TermLevel\Term\TermQuery.cs" />
     <Compile Include="QueryDsl\TermLevel\Wildcard\WildcardQuery.cs" />
     <Compile Include="Search\Search\ElasticClient-Search.cs" />
