@@ -424,7 +424,7 @@
     <Compile Include="CommonAbstractions\Request\Paths\IndexOptionalNamePath.cs" />
     <Compile Include="CommonAbstractions\Request\Paths\IndicesOptionalTypesNamePathDecriptor.cs" />
     <Compile Include="Cluster\Ping\PingRequest.cs" />
-    <Compile Include="QueryDsl\Span\SpanMultiTermQuery.cs" />
+    <Compile Include="QueryDsl\Span\MultiTerm\SpanMultiTermQuery.cs" />
     <Compile Include="Indices\MappingManagement\TypesExists\TypeExistsRequest.cs" />
     <Compile Include="QueryDsl\Compound\FunctionScore\Functions\FieldValueFactor.cs" />
     <Compile Include="QueryDsl\Geo\Shape\MultiPoint\GeoShapeMultiPointQuery.cs" />
@@ -822,12 +822,12 @@
     <Compile Include="QueryDsl\Compound\ConstantScore\ConstantScoreQuery.cs" />
     <Compile Include="QueryDsl\Compound\Indices\IndicesQuery.cs" />
     <Compile Include="QueryDsl\Joining\Nested\NestedQuery.cs" />
-    <Compile Include="QueryDsl\Span\SpanNotQuery.cs" />
-    <Compile Include="QueryDsl\Span\SpanOrQuery.cs" />
-    <Compile Include="QueryDsl\Span\SpanNearQuery.cs" />
-    <Compile Include="QueryDsl\Span\SpanFirstQuery.cs" />
+    <Compile Include="QueryDsl\Span\Not\SpanNotQuery.cs" />
+    <Compile Include="QueryDsl\Span\Or\SpanOrQuery.cs" />
+    <Compile Include="QueryDsl\Span\Near\SpanNearQuery.cs" />
+    <Compile Include="QueryDsl\Span\First\SpanFirstQuery.cs" />
     <Compile Include="QueryDsl\Span\SpanQuery.cs" />
-    <Compile Include="QueryDsl\Span\SpanTermQuery.cs" />
+    <Compile Include="QueryDsl\Span\Term\SpanTermQuery.cs" />
     <Compile Include="QueryDsl\Specialized\MoreLikeThis\MoreLikeThisQuery.cs" />
     <Compile Include="QueryDsl\TermLevel\Fuzzy\FuzzyDateQuery.cs" />
     <Compile Include="QueryDsl\TermLevel\Fuzzy\FuzzyNumericQuery.cs" />
