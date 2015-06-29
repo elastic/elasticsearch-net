@@ -15,9 +15,6 @@ namespace Nest
 		[JsonProperty("indices")]
 		IEnumerable<string> Indices { get; set; }
 
-		[JsonProperty("score_mode"), JsonConverter(typeof (StringEnumConverter))]
-		NestedScore? Score { get; set; }
-
 		[JsonProperty("query")]
 		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryDescriptor<object>>, CustomJsonConverter>))]
 		IQueryContainer Query { get; set; }
@@ -25,20 +22,6 @@ namespace Nest
 		[JsonProperty("no_match_query")]
 		[JsonConverter(typeof(NoMatchQueryConverter))]
 		IQueryContainer NoMatchQuery { get; set; }
-	}
-
-	public class NoMatchQueryConverter : CompositeJsonConverter<ReadAsTypeConverter<QueryDescriptor<object>>, CustomJsonConverter>
-	{
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-		{
-			if (reader.TokenType == JsonToken.String)
-			{
-				var en = serializer.Deserialize<NoMatchShortcut>(reader);
-				return new NoMatchQueryContainer {Shortcut = en};
-			}
-
-			return base.ReadJson(reader, objectType, existingValue, serializer);
-		}
 	}
 
 	public class NoMatchQueryContainer : QueryContainer, ICustomJson
@@ -58,7 +41,6 @@ namespace Nest
 	{
 		public string Name { get; set; }
 		bool IQuery.Conditionless => IsConditionless(this);
-		public NestedScore? Score { get; set; }
 		public IQueryContainer Query { get; set; }
 		public IQueryContainer NoMatchQuery { get; set; }
 		public IEnumerable<string> Indices { get; set; }
@@ -69,10 +51,9 @@ namespace Nest
 
 	public class IndicesQueryDescriptor<T> : IIndicesQuery where T : class
 	{
-		private IIndicesQuery Self { get { return this; }}
+		private IIndicesQuery Self => this;
 		string IQuery.Name { get; set; }
 		bool IQuery.Conditionless => IndicesQuery.IsConditionless(this);
-		NestedScore? IIndicesQuery.Score { get; set; }
 		IQueryContainer IIndicesQuery.Query { get; set; }
 		IQueryContainer IIndicesQuery.NoMatchQuery { get; set; }
 		IEnumerable<string> IIndicesQuery.Indices { get; set; }
