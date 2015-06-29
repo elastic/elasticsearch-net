@@ -239,6 +239,7 @@
     <Compile Include="QueryDsl\Geo\GeoPolygonQuery.cs" />
     <Compile Include="QueryDsl\QueryCondition.cs" />
     <Compile Include="QueryDsl\QueryDescriptor.cs" />
+    <Compile Include="CommonAbstractions\Fluent.cs" />
     <Compile Include="Search\Suggesters\SuggestContextMapping.cs" />
     <Compile Include="Mapping\IFieldMapping.cs" />
     <Compile Include="Mapping\MetadataFields\ISpecialField.cs" />

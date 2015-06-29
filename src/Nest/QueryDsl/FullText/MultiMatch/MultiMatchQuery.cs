@@ -96,7 +96,9 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class MultiMatchQueryDescriptor<T> : IMultiMatchQuery where T : class
 	{
-		private IMultiMatchQuery Self { get { return this; }}
+		MultiMatchQueryDescriptor<T> _assign(Action<IMultiMatchQuery> assigner) => Fluent.Assign(this, assigner);
+
+		private IMultiMatchQuery Self { get { return this; } }
 		string IQuery.Name { get; set; }
 		bool IQuery.Conditionless => MultiMatchQuery.IsConditionless(this);
 		TextQueryType? IMultiMatchQuery.Type { get; set; }
@@ -116,122 +118,59 @@ namespace Nest
 		Operator? IMultiMatchQuery.Operator { get; set; }
 		IEnumerable<PropertyPathMarker> IMultiMatchQuery.Fields { get; set; }
 
-		public MultiMatchQueryDescriptor<T> Name(string name)
-		{
-			Self.Name = name;
-			return this;
-		}
+		public MultiMatchQueryDescriptor<T> Name(string name) => _assign(a => a.Name = name);
 
-		public MultiMatchQueryDescriptor<T> OnFields(IEnumerable<string> fields)
-		{
-			Self.Fields = fields.Select(f => (PropertyPathMarker)f);
-			return this;
-		}
+		public MultiMatchQueryDescriptor<T> OnFields(IEnumerable<string> fields) =>
+			_assign(a => a.Fields = fields?.Select(f => (PropertyPathMarker)f).ToListOrNullIfEmpty());
 
-		public MultiMatchQueryDescriptor<T> OnFields(
-			params Expression<Func<T, object>>[] objectPaths)
-		{
-			Self.Fields = objectPaths.Select(e => (PropertyPathMarker)e);
-			return this;
-		}
+		public MultiMatchQueryDescriptor<T> OnFields(params Expression<Func<T, object>>[] objectPaths) =>
+			_assign(a => a.Fields = objectPaths?.Select(f => (PropertyPathMarker)f).ToListOrNullIfEmpty());
 
-		public MultiMatchQueryDescriptor<T> OnFieldsWithBoost(Action<FluentDictionary<Expression<Func<T, object>>, double?>> boostableSelector)
-		{
-			var d = new FluentDictionary<Expression<Func<T, object>>, double?>();
-			boostableSelector(d);
-			Self.Fields = d.Select(o => PropertyPathMarker.Create(o.Key, o.Value));
-			return this;
-		}
+		public MultiMatchQueryDescriptor<T> OnFieldsWithBoost(Func<
+			FluentDictionary<Expression<Func<T, object>>, double?>, IDictionary<Expression<Func<T, object>>, double?>> boostableSelector) =>
+				_assign(a => a.Fields = boostableSelector?
+					.Invoke(new FluentDictionary<Expression<Func<T, object>>, double?>())
+					.Select(o => PropertyPathMarker.Create(o.Key, o.Value))
+					.ToListOrNullIfEmpty()
+				);
 
-		public MultiMatchQueryDescriptor<T> OnFieldsWithBoost(Action<FluentDictionary<string, double?>> boostableSelector)
-		{
-			var d = new FluentDictionary<string, double?>();
-			boostableSelector(d);
-			Self.Fields = d.Select(o => PropertyPathMarker.Create(o.Key, o.Value));
-			return this;
-		}
+		public MultiMatchQueryDescriptor<T> OnFieldsWithBoost(
+			Func<FluentDictionary<string, double?>, IDictionary<Expression<Func<T, object>>, double?>> boostableSelector) =>
+				_assign(a => a.Fields = boostableSelector?
+					.Invoke(new FluentDictionary<string, double?>())
+					.Select(o => PropertyPathMarker.Create(o.Key, o.Value))
+					.ToListOrNullIfEmpty()
+				);
 
-		public MultiMatchQueryDescriptor<T> Query(string query)
-		{
-			Self.Query = query;
-			return this;
-		}
+		public MultiMatchQueryDescriptor<T> Query(string query) => _assign(a => a.Query = query);
 
-		public MultiMatchQueryDescriptor<T> Analyzer(string analyzer)
-		{
-			Self.Analyzer = analyzer;
-			return this;
-		}
+		public MultiMatchQueryDescriptor<T> Analyzer(string analyzer) => _assign(a => a.Analyzer = analyzer);
 
-		public MultiMatchQueryDescriptor<T> Fuzziness(double fuzziness)
-		{
-			Self.Fuzziness = fuzziness;
-			return this;
-		}
+		public MultiMatchQueryDescriptor<T> Fuzziness(double fuzziness) => _assign(a => a.Fuzziness = fuzziness);
 
 		public MultiMatchQueryDescriptor<T> CutoffFrequency(double cutoffFrequency)
-		{
-			Self.CutoffFrequency = cutoffFrequency;
-			return this;
-		}
+			=> _assign(a => a.CutoffFrequency = cutoffFrequency);
 
 		public MultiMatchQueryDescriptor<T> MinimumShouldMatch(string minimumShouldMatch)
-		{
-			Self.MinimumShouldMatch = minimumShouldMatch;
-			return this;
-		}
+			=> _assign(a => a.MinimumShouldMatch = minimumShouldMatch);
 
-		public MultiMatchQueryDescriptor<T> Rewrite(RewriteMultiTerm rewrite)
-		{
-			Self.Rewrite = rewrite;
-			return this;
-		}
+		public MultiMatchQueryDescriptor<T> Rewrite(RewriteMultiTerm rewrite) => _assign(a => a.Rewrite = rewrite);
 
-		public MultiMatchQueryDescriptor<T> Boost(double boost)
-		{
-			Self.Boost = boost;
-			return this;
-		}
+		public MultiMatchQueryDescriptor<T> Boost(double boost) => _assign(a => a.Boost = boost);
 
-		public MultiMatchQueryDescriptor<T> Lenient(bool lenient = true) {
-			Self.Lenient = lenient;
-			return this;
-		}
+		public MultiMatchQueryDescriptor<T> Lenient(bool lenient = true) => _assign(a => a.Lenient = lenient);
 
-		public MultiMatchQueryDescriptor<T> PrefixLength(int prefixLength)
-		{
-			Self.PrefixLength = prefixLength;
-			return this;
-		}
+		public MultiMatchQueryDescriptor<T> PrefixLength(int prefixLength) => _assign(a => a.PrefixLength = prefixLength);
 
-		public MultiMatchQueryDescriptor<T> MaxExpansions(int maxExpansions)
-		{
-			Self.MaxExpansions = maxExpansions;
-			return this;
-		}
+		public MultiMatchQueryDescriptor<T> MaxExpansions(int maxExpansions) => _assign(a => a.MaxExpansions = maxExpansions);
 
-		public MultiMatchQueryDescriptor<T> Slop(int slop)
-		{
-			Self.Slop = slop;
-			return this;
-		}
+		public MultiMatchQueryDescriptor<T> Slop(int slop) => _assign(a => a.Slop = slop);
 
-		public MultiMatchQueryDescriptor<T> Operator(Operator op)
-		{
-			Self.Operator = op;
-			return this;
-		}
+		public MultiMatchQueryDescriptor<T> Operator(Operator op) => _assign(a => a.Operator = op);
 
-		public MultiMatchQueryDescriptor<T> TieBreaker(double tieBreaker)
-		{
-			Self.TieBreaker = tieBreaker;
-			return this;
-		}
+		public MultiMatchQueryDescriptor<T> TieBreaker(double tieBreaker) => _assign(a => a.TieBreaker = tieBreaker);
 
-		public MultiMatchQueryDescriptor<T> Type(TextQueryType type)
-		{
-			Self.Type = type;
-			return this;
-		}
+		public MultiMatchQueryDescriptor<T> Type(TextQueryType type) => _assign(a => a.Type = type);
+
 	}
 }

@@ -73,6 +73,8 @@ namespace Nest
 	{
 		protected IHighlightRequest Self => this;
 
+		private HighlightDescriptor<T> _assign(Action<IHighlightRequest> assigner) => Fluent.Assign(this, assigner);
+
 		IEnumerable<string> IHighlightRequest.PreTags { get; set; }
 
 		IEnumerable<string> IHighlightRequest.PostTags { get; set; }
@@ -99,99 +101,43 @@ namespace Nest
 
 		IQueryContainer IHighlightRequest.HighlightQuery { get; set; }
 
-		public HighlightDescriptor<T> OnFields(params Action<HighlightFieldDescriptor<T>>[] fieldHighlighters)
-		{
-			fieldHighlighters.ThrowIfEmpty("fieldHighlighters");
+		public HighlightDescriptor<T> OnFields(params Func<HighlightFieldDescriptor<T>, IHighlightField>[] fieldHighlighters) =>
+			_assign(a => a.Fields = fieldHighlighters?
+				.Select(f =>
+					f(new HighlightFieldDescriptor<T>())
+						.ThrowWhen(p => p.Field == null, "Could not infer key for highlight field descriptor")
+				)
+				.ToDictionary(k => k.Field, v => v)
+				.NullIfNoKeys()
+			);
 
-			var descriptors = new List<IHighlightField>();
-			foreach (var selector in fieldHighlighters)
-			{
-				var filter = new HighlightFieldDescriptor<T>();
-				selector(filter);
-				descriptors.Add(filter);
-			}
-			Self.Fields = new Dictionary<PropertyPathMarker, IHighlightField>();
-			foreach (var d in descriptors)
-			{
-				var key = d.Field;
-				if (key == null)
-					throw new DslException("Could not infer key for highlight field descriptor");
+		public HighlightDescriptor<T> TagsSchema(string schema = "styled") => _assign(a => a.TagsSchema = schema);
 
-				Self.Fields.Add(key, d);
+		public HighlightDescriptor<T> PreTags(string preTags) => this.PreTags(new[] {preTags});
 
-			}
-			return this;
-		}
+		public HighlightDescriptor<T> PostTags(string postTags)=> this.PostTags(new[] {postTags});
 
-		public HighlightDescriptor<T> TagsSchema(string schema = "styled")
-		{
-			Self.TagsSchema = schema;
-			return this;
-		}
-		public HighlightDescriptor<T> PreTags(string preTags)
-		{
-			Self.PreTags = new[] { preTags };
-			return this;
-		}
-		public HighlightDescriptor<T> PostTags(string postTags)
-		{
-			Self.PostTags = new[] { postTags };
-			return this;
-		}
-		public HighlightDescriptor<T> PreTags(IEnumerable<string> preTags)
-		{
-			Self.PreTags = preTags;
-			return this;
-		}
-		public HighlightDescriptor<T> PostTags(IEnumerable<string> postTags)
-		{
-			Self.PostTags = postTags;
-			return this;
-		}
-		public HighlightDescriptor<T> FragmentSize(int fragmentSize)
-		{
-			Self.FragmentSize = fragmentSize;
-			return this;
-		}
-		public HighlightDescriptor<T> NumberOfFragments(int numberOfFragments)
-		{
-			Self.NumberOfFragments = numberOfFragments;
-			return this;
-		}
-		public HighlightDescriptor<T> FragmentOffset(int fragmentOffset)
-		{
-			Self.FragmentOffset = fragmentOffset;
-			return this;
-		}
-		public HighlightDescriptor<T> Encoder(string encoder)
-		{
-			Self.Encoder = encoder;
-			return this;
-		}
-		public HighlightDescriptor<T> Order(string order)
-		{
-			Self.Order = order;
-			return this;
-		}
-		public HighlightDescriptor<T> RequireFieldMatch(bool requireFieldMatch)
-		{
-			Self.RequireFieldMatch = requireFieldMatch;
-			return this;
-		}
-		public HighlightDescriptor<T> BoundaryCharacters(string boundaryCharacters)
-		{
-			Self.BoundaryChars = boundaryCharacters;
-			return this;
-		}
-		public HighlightDescriptor<T> BoundaryMaxSize(int boundaryMaxSize)
-		{
-			Self.BoundaryMaxSize = boundaryMaxSize;
-			return this;
-		}
-		public HighlightDescriptor<T> HighlightQuery(Func<QueryDescriptor<T>, QueryContainer> query)
-		{
-			Self.HighlightQuery = query(new QueryDescriptor<T>());
-			return this;
-		}
+		public HighlightDescriptor<T> PreTags(IEnumerable<string> preTags) => _assign(a => a.PreTags = preTags.ToListOrNullIfEmpty());
+
+		public HighlightDescriptor<T> PostTags(IEnumerable<string> postTags) => _assign(a => a.PostTags = postTags.ToListOrNullIfEmpty());
+
+		public HighlightDescriptor<T> FragmentSize(int fragmentSize) => _assign(a => a.FragmentSize = fragmentSize);
+
+		public HighlightDescriptor<T> NumberOfFragments(int numberOfFragments) => _assign(a => a.NumberOfFragments = numberOfFragments);
+
+		public HighlightDescriptor<T> FragmentOffset(int fragmentOffset) => _assign(a => a.FragmentOffset = fragmentOffset);
+
+		public HighlightDescriptor<T> Encoder(string encoder) => _assign(a => a.Encoder = encoder);
+
+		public HighlightDescriptor<T> Order(string order) => _assign(a => a.Order = order);
+
+		public HighlightDescriptor<T> RequireFieldMatch(bool requireFieldMatch) => _assign(a => a.RequireFieldMatch = requireFieldMatch);
+
+		public HighlightDescriptor<T> BoundaryCharacters(string boundaryCharacters) => _assign(a => a.BoundaryChars = boundaryCharacters);
+
+		public HighlightDescriptor<T> BoundaryMaxSize(int boundaryMaxSize) => _assign(a => a.BoundaryMaxSize = boundaryMaxSize);
+
+		public HighlightDescriptor<T> HighlightQuery(Func<QueryDescriptor<T>, QueryContainer> querySelector) =>
+			_assign(a => a.HighlightQuery = querySelector?.Invoke(new QueryDescriptor<T>()));
 	}
 }

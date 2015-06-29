@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Globalization;
 using Nest.Resolvers;
 using Newtonsoft.Json;
@@ -12,15 +13,9 @@ namespace Nest
 	/// </summary>
 	public class DictionaryKeysAreNotPropertyNamesJsonConverter : JsonConverter
 	{
-		public override bool CanConvert(Type objectType)
-		{
-			return typeof(IDictionary).IsAssignableFrom(objectType);
-		}
+		public override bool CanConvert(Type t) => typeof (IDictionary).IsAssignableFrom(t);
 
-		public override bool CanRead
-		{
-			get { return false; }
-		}
+		public override bool CanRead => false;
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
@@ -31,7 +26,7 @@ namespace Nest
 		{
 			var contract = serializer.ContractResolver as SettingsContractResolver;
 
-			IDictionary dictionary = (IDictionary) value;
+			IDictionary dictionary = (IDictionary)value;
 			writer.WriteStartObject();
 
 			foreach (DictionaryEntry entry in dictionary)

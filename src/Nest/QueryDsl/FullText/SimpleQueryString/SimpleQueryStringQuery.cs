@@ -66,7 +66,8 @@ namespace Nest
 
 	public class SimpleQueryStringQueryDescriptor<T> : ISimpleQueryStringQuery where T : class
 	{
-		private ISimpleQueryStringQuery Self => this;
+		private SimpleQueryStringQueryDescriptor<T> _assign(Action<ISimpleQueryStringQuery> assigner) => Fluent.Assign(this, assigner);
+
 		string IQuery.Name { get; set; }
 		bool IQuery.Conditionless => SimpleQueryStringQuery.IsConditionless(this);
 		string ISimpleQueryStringQuery.Query { get; set; }
@@ -80,105 +81,56 @@ namespace Nest
 		string ISimpleQueryStringQuery.Locale { get; set; }
 		string ISimpleQueryStringQuery.MinimumShouldMatch { get; set; }
 
-		public SimpleQueryStringQueryDescriptor<T> Name(string name)
-		{
-			Self.Name = name;
-			return this;
-		}
+		public SimpleQueryStringQueryDescriptor<T> Name(string name) => _assign(a => a.Name = name);
 
-		public SimpleQueryStringQueryDescriptor<T> DefaultField(string field)
-		{
-			Self.DefaultField = field;
-			return this;
-		}
+		public SimpleQueryStringQueryDescriptor<T> DefaultField(string field) => _assign(a => a.DefaultField = field);
 
-		public SimpleQueryStringQueryDescriptor<T> DefaultField(Expression<Func<T, object>> objectPath)
-		{
-			Self.DefaultField = objectPath;
-			return this;
-		}
+		public SimpleQueryStringQueryDescriptor<T> DefaultField(Expression<Func<T, object>> objectPath) => 
+			_assign(a => a.DefaultField = objectPath);
 
-		public SimpleQueryStringQueryDescriptor<T> OnFields(IEnumerable<string> fields)
-		{
-			Self.Fields = fields.Select(f=>(PropertyPathMarker)f);
-			return this;
-		}
+		public SimpleQueryStringQueryDescriptor<T> OnFields(IEnumerable<string> fields) =>
+			_assign(a => a.Fields = fields?.Select(f => (PropertyPathMarker) f).ToListOrNullIfEmpty());
 
-		public SimpleQueryStringQueryDescriptor<T> OnFields(
-			params Expression<Func<T, object>>[] objectPaths)
-		{
-			Self.Fields = objectPaths.Select(e=>(PropertyPathMarker)e);
-			return this;
-		}
+		public SimpleQueryStringQueryDescriptor<T> OnFields(params Expression<Func<T, object>>[] objectPaths) =>
+			_assign(a => a.Fields = objectPaths?.Select(f => (PropertyPathMarker) f).ToListOrNullIfEmpty());
 
-		public SimpleQueryStringQueryDescriptor<T> OnFieldsWithBoost(Action<FluentDictionary<Expression<Func<T, object>>, double?>> boostableSelector)
-		{
-			var d = new FluentDictionary<Expression<Func<T, object>>, double?>();
-			boostableSelector(d);
-			Self.Fields = d.Select(o => PropertyPathMarker.Create(o.Key, o.Value));
-			return this;
-		}
+		public SimpleQueryStringQueryDescriptor<T> OnFieldsWithBoost(Func<
+			FluentDictionary<Expression<Func<T, object>>, double?>, IDictionary<Expression<Func<T, object>>, double?>> boostableSelector) =>
+				_assign(a => a.Fields = boostableSelector?
+					.Invoke(new FluentDictionary<Expression<Func<T, object>>, double?>())
+					.Select(o => PropertyPathMarker.Create(o.Key, o.Value))
+					.ToListOrNullIfEmpty()
+				);
 
-		public SimpleQueryStringQueryDescriptor<T> OnFieldsWithBoost(Action<FluentDictionary<string, double?>> boostableSelector) 
-		{
-			var d = new FluentDictionary<string, double?>();
-			boostableSelector(d);
-			Self.Fields = d.Select(o => PropertyPathMarker.Create(o.Key, o.Value));
-			return this;
-		}
+		public SimpleQueryStringQueryDescriptor<T> OnFieldsWithBoost(
+			Func<FluentDictionary<string, double?>, IDictionary<Expression<Func<T, object>>, double?>> boostableSelector) =>
+				_assign(a => a.Fields = boostableSelector?
+					.Invoke(new FluentDictionary<string, double?>())
+					.Select(o => PropertyPathMarker.Create(o.Key, o.Value))
+					.ToListOrNullIfEmpty()
+				);
 
-		public SimpleQueryStringQueryDescriptor<T> Query(string query)
-		{
-			Self.Query = query;
-			return this;
-		}
+		public SimpleQueryStringQueryDescriptor<T> Query(string query) => _assign(a => a.Query = query);
 
-		public SimpleQueryStringQueryDescriptor<T> DefaultOperator(Operator op)
-		{
-			Self.DefaultOperator = op;
-			return this;
-		}
+		public SimpleQueryStringQueryDescriptor<T> DefaultOperator(Operator op) => _assign(a => a.DefaultOperator = op);
 
-		public SimpleQueryStringQueryDescriptor<T> Analyzer(string analyzer)
-		{
-			Self.Analyzer = analyzer;
-			return this;
-		}
+		public SimpleQueryStringQueryDescriptor<T> Analyzer(string analyzer) => _assign(a => a.Analyzer = analyzer);
 
-		public SimpleQueryStringQueryDescriptor<T> Flags(string flags)
-		{
-			Self.Flags = flags;
-			return this;
-		}
+		public SimpleQueryStringQueryDescriptor<T> Flags(string flags) => _assign(a => a.Flags = flags);
 
-		public SimpleQueryStringQueryDescriptor<T> LowercaseExpendedTerms(bool lowercaseExpendedTerms= true)
-		{
-			Self.LowercaseExpendedTerms = lowercaseExpendedTerms;
-			return this;
-		}
+		public SimpleQueryStringQueryDescriptor<T> LowercaseExpendedTerms(bool lowercaseExpendedTerms = true) =>
+			_assign(a => a.LowercaseExpendedTerms = lowercaseExpendedTerms);
 
-		public SimpleQueryStringQueryDescriptor<T> AnalyzeWildcard(bool analyzeWildcard = true)
-		{
-			Self.AnalyzeWildcard = analyzeWildcard;
-			return this;
-		}
+		public SimpleQueryStringQueryDescriptor<T> AnalyzeWildcard(bool analyzeWildcard = true) =>
+			_assign(a => a.AnalyzeWildcard = analyzeWildcard);
 
-		public SimpleQueryStringQueryDescriptor<T> Locale(string locale)
-		{
-			Self.Locale = locale;
-			return this;
-		}
+		public SimpleQueryStringQueryDescriptor<T> Locale(string locale) => _assign(a => a.Locale = locale);
 
-		public SimpleQueryStringQueryDescriptor<T> MinimumShouldMatch(int minimumShouldMatches)
-		{
-			((ISimpleQueryStringQuery)this).MinimumShouldMatch = minimumShouldMatches.ToString(CultureInfo.InvariantCulture);
-			return this;
-		}
+		public SimpleQueryStringQueryDescriptor<T> MinimumShouldMatch(int minimumShouldMatches) =>
+			_assign(a => a.MinimumShouldMatch = minimumShouldMatches.ToString(CultureInfo.InvariantCulture));
 
-		public SimpleQueryStringQueryDescriptor<T> MinimumShouldMatch(string minimumShouldMatch)
-		{
-			Self.MinimumShouldMatch = minimumShouldMatch;
-			return this;
-		}
+		public SimpleQueryStringQueryDescriptor<T> MinimumShouldMatch(string minimumShouldMatch) =>
+			_assign(a => a.MinimumShouldMatch = minimumShouldMatch);
+
     }
 }

@@ -104,7 +104,7 @@ namespace Nest
 		{
 			IQueryContainer q = new QueryContainer();
 			q.Bool = new BoolQuery();
-			q.Bool.Should = shouldClauses.NullIfEmpty();
+			q.Bool.Should = shouldClauses.ToListOrNullIfEmpty();
 			return q as QueryContainer;
 		}
 		
@@ -112,8 +112,8 @@ namespace Nest
 		{
 			IQueryContainer q = new QueryContainer();
 			q.Bool = new BoolQuery();
-			q.Bool.Must = mustClauses.NullIfEmpty();
-			q.Bool.MustNot = mustNotClauses.NullIfEmpty();
+			q.Bool.Must = mustClauses.ToListOrNullIfEmpty();
+			q.Bool.MustNot = mustNotClauses.ToListOrNullIfEmpty();
 			return q as QueryContainer;
 		}
 	}

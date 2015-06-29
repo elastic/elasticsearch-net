@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Reflection;
+using Nest;
 
-namespace Elasticsearch.Net
+namespace Nest
 {
     internal static class ExceptionExtensions
     {
@@ -20,5 +21,13 @@ namespace Elasticsearch.Net
             }
             throw exception;
         }
+
+		internal static T ThrowWhen<T>(this T @object, Predicate<T> predicate, string exceptionMessage)
+		{
+			if ((predicate?.Invoke(@object)).GetValueOrDefault(false))
+				throw new DslException(exceptionMessage);
+
+			return @object;
+		}
     }
 }

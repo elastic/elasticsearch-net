@@ -167,42 +167,22 @@ namespace Nest
 		public IHighlightRequest Highlight { get; set; }
 		public IDictionary<string, IAggregationContainer> Aggregations { get; set; }
 
-		SearchType? ISearchRequest.SearchType
-		{
-			get { return  this.QueryString == null ? null : this.QueryString.GetQueryStringValue<SearchType?>("search_type");  }
-		}
+		SearchType? ISearchRequest.SearchType => this.QueryString?.GetQueryStringValue<SearchType?>("search_type");
 
-		string ISearchRequest.Preference
-		{
-			get { return this.QueryString == null ? null : this.QueryString.GetQueryStringValue<string>("preference"); }
-		}
+		string ISearchRequest.Preference => this.QueryString?.GetQueryStringValue<string>("preference");
 
-		string ISearchRequest.Routing
-		{
-			get
-			{
-				if (this.QueryString == null)
-					return null;
-				var routing = this.QueryString.GetQueryStringValue<string[]>("routing");
-				return routing == null
-					? null
-					: string.Join(",", routing);
-			}
-		}
+		string ISearchRequest.Routing => this.QueryString?.GetQueryStringValue<string[]>("routing") == null
+			? null
+			: string.Join(",", this.QueryString?.GetQueryStringValue<string[]>("routing"));
 
-		bool? ISearchRequest.IgnoreUnavalable
-		{
-			get { return this.QueryString == null ? null : this.QueryString.GetQueryStringValue<bool?>("ignore_unavailable"); }
-		}
+		bool? ISearchRequest.IgnoreUnavalable => this.QueryString?.GetQueryStringValue<bool?>("ignore_unavailable");
 
 		public Func<dynamic, Hit<dynamic>, Type> TypeSelector { get; set; }
 
 		public SearchRequestParameters QueryString { get; set; }
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SearchRequestParameters> pathInfo)
-		{
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SearchRequestParameters> pathInfo) =>
 			SearchPathInfo.Update(settings, pathInfo, this);
-		}
 
 	}
 
@@ -215,12 +195,10 @@ namespace Nest
 
 		public SearchRequest(IEnumerable<IndexNameMarker> indices, IEnumerable<TypeNameMarker> types = null) : base(indices, types) { }
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SearchRequestParameters> pathInfo)
-		{
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SearchRequestParameters> pathInfo) =>
 			SearchPathInfo.Update(settings,pathInfo, this);
-		}
 
-		public Type ClrType { get { return typeof(T);  } }
+		public Type ClrType => typeof(T);
 		public string Timeout { get; set; }
 		public int? From { get; set; }
 		public int? Size { get; set; }
@@ -242,33 +220,15 @@ namespace Nest
 		public IDictionary<string, IAggregationContainer> Aggregations { get; set; }
 		public IQueryContainer Query { get; set; }
 		public IQueryContainer PostFilter { get; set; }
-		SearchType? ISearchRequest.SearchType
-		{
-			get { return  this.QueryString == null ? null : this.QueryString.GetQueryStringValue<SearchType?>("search_type");  }
-		}
+		SearchType? ISearchRequest.SearchType => this.QueryString?.GetQueryStringValue<SearchType?>("search_type");
 
-		string ISearchRequest.Preference
-		{
-			get { return this.QueryString == null ? null : this.QueryString.GetQueryStringValue<string>("preference"); }
-		}
+		string ISearchRequest.Preference => this.QueryString?.GetQueryStringValue<string>("preference");
 
-		string ISearchRequest.Routing
-		{
-			get
-			{
-				if (this.QueryString == null)
-					return null;
-				var routing = this.QueryString.GetQueryStringValue<string[]>("routing");
-				return routing == null
-					? null
-					: string.Join(",", routing);
-			}
-		}
+		string ISearchRequest.Routing => this.QueryString?.GetQueryStringValue<string[]>("routing") == null
+			? null
+			: string.Join(",", this.QueryString?.GetQueryStringValue<string[]>("routing"));
 
-		bool? ISearchRequest.IgnoreUnavalable
-		{
-			get { return this.QueryString == null ? null : this.QueryString.GetQueryStringValue<bool?>("ignore_unavailable");  }
-		}
+		bool? ISearchRequest.IgnoreUnavalable => this.QueryString?.GetQueryStringValue<bool?>("ignore_unavailable");
 
 		public Func<dynamic, Hit<dynamic>, Type> TypeSelector { get; set; }
 		public SearchRequestParameters QueryString { get; set; }
@@ -282,10 +242,9 @@ namespace Nest
 	{
 		private ISearchRequest Self => this;
 
-		SearchType? ISearchRequest.SearchType
-		{
-			get { return this.Request.RequestParameters.GetQueryStringValue<SearchType?>("search_type");  }
-		}
+		private SearchDescriptor<T> _assign(Action<ISearchRequest> assigner) => Fluent.Assign(this, assigner);
+
+		SearchType? ISearchRequest.SearchType => this.Request.RequestParameters.GetQueryStringValue<SearchType?>("search_type");
 
 		SearchRequestParameters ISearchRequest.QueryString
 		{
@@ -293,28 +252,14 @@ namespace Nest
 			set { this.Request.RequestParameters = value;  }
 		}
 
-		string ISearchRequest.Preference
-		{
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("preference"); }
-		}
+		string ISearchRequest.Preference => this.Request.RequestParameters.GetQueryStringValue<string>("preference");
 
-		string ISearchRequest.Routing
-		{
-			get
-			{
-				var routing = this.Request.RequestParameters.GetQueryStringValue<string[]>("routing");
-				return routing == null
-					? null
-					: string.Join(",", routing);
-			}
-		}
+		string ISearchRequest.Routing => this.Request.RequestParameters.GetQueryStringValue<string[]>("routing") == null
+			? null : string.Join(",", this.Request.RequestParameters.GetQueryStringValue<string[]>("routing"));
 
-		bool? ISearchRequest.IgnoreUnavalable
-		{
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool?>("ignore_unavailable"); }
-		}
+		bool? ISearchRequest.IgnoreUnavalable => this.Request.RequestParameters.GetQueryStringValue<bool?>("ignore_unavailable");
 
-		Type ISearchRequest.ClrType { get { return typeof(T); } }
+		Type ISearchRequest.ClrType => typeof(T);
 
 		/// <summary>
 		/// Whether conditionless queries are allowed or not
@@ -359,6 +304,7 @@ namespace Nest
 		Func<dynamic, Hit<dynamic>, Type> ISearchRequest.TypeSelector { get; set; }
 
 
+		//TODO probably remove this when we normalize sorting
 		private void AddSort(ISort sort)
 		{
 			Self.Sort = Self.Sort ?? new List<ISort>();
@@ -368,20 +314,12 @@ namespace Nest
 		/// <summary>
 		/// When strict is set, conditionless queries are treated as an exception. 
 		/// </summary>
-		public SearchDescriptor<T> Strict(bool strict = true)
-		{
-			this._Strict = strict;
-			return this;
-		}
+		public SearchDescriptor<T> Strict(bool strict = true) => _assign(a => this._Strict = strict);
 
-		public SearchDescriptor<T> Aggregations(Func<AggregationDescriptor<T>, AggregationDescriptor<T>> aggregationsSelector)
-		{
-			var aggs = aggregationsSelector(new AggregationDescriptor<T>());
-			if (aggs == null) return this;
-			Self.Aggregations = ((IAggregationContainer)aggs).Aggregations;
-			return this;
-		}
-
+		public SearchDescriptor<T> Aggregations(Func<AggregationDescriptor<T>, IAggregationContainer> aggregationsSelector) =>
+			_assign(a=>a.Aggregations = aggregationsSelector(new AggregationDescriptor<T>())?.Aggregations.NullIfNoKeys());
+		
+		//TODO refactor!
 		public SearchDescriptor<T> InnerHits(
 			Func<
 				FluentDictionary<string, Func<InnerHitsContainerDescriptor<T>, IInnerHitsContainer>>, 
@@ -407,110 +345,65 @@ namespace Nest
 			return this;
 		}
 
-		public SearchDescriptor<T> Source(bool include = true)
-		{
-			if (!include)
-			{
-				Self.Source = new SourceFilter
-				{
-					Exclude = new PropertyPathMarker[] {"*"}
-				};
-			}
-			else Self.Source = null;
-			return this;
-		}
-
-		public SearchDescriptor<T> Source(Func<SearchSourceDescriptor<T>, SearchSourceDescriptor<T>> sourceSelector)
-		{
-			Self.Source = sourceSelector(new SearchSourceDescriptor<T>());
-			return this;
-		}
+		public SearchDescriptor<T> Source(bool include = true)=> _assign(a => a.Source = !include ? SourceFilter.ExcludeAll : null);
+		
+		public SearchDescriptor<T> Source(Func<SearchSourceDescriptor<T>, SearchSourceDescriptor<T>> sourceSelector) =>
+			_assign(a => a.Source = sourceSelector?.Invoke(new SearchSourceDescriptor<T>()));
 
 		/// <summary>
 		/// The number of hits to return. Defaults to 10. When using scroll search type 
 		/// size is actually multiplied by the number of shards!
 		/// </summary>
-		public SearchDescriptor<T> Size(int size)
-		{
-			Self.Size = size;
-			return this;
-		}
+		public SearchDescriptor<T> Size(int size) => _assign(a => a.Size = size);
+
 		/// <summary>
 		/// The number of hits to return. Defaults to 10.
 		/// </summary>
-		public SearchDescriptor<T> Take(int take)
-		{
-			return this.Size(take);
-		}
+		public SearchDescriptor<T> Take(int take) => this.Size(take);
+
 		/// <summary>
 		/// The starting from index of the hits to return. Defaults to 0.
 		/// </summary>
-		public SearchDescriptor<T> From(int from)
-		{
-			Self.From = from;
-			return this;
-		}
+		public SearchDescriptor<T> From(int from) => _assign(a => a.From = from);
+
 		/// <summary>
 		/// The starting from index of the hits to return. Defaults to 0.
 		/// </summary>
-		public SearchDescriptor<T> Skip(int skip)
-		{
-			return this.From(skip);
-		}
+		public SearchDescriptor<T> Skip(int skip) => this.From(skip);
+
 		/// <summary>
 		/// A search timeout, bounding the search request to be executed within the 
 		/// specified time value and bail with the hits accumulated up
 		/// to that point when expired. Defaults to no timeout.
 		/// </summary>
-		public SearchDescriptor<T> Timeout(string timeout)
-		{
-			Self.Timeout = timeout;
-			return this;
-		}
-		
+		public SearchDescriptor<T> Timeout(string timeout) => _assign(a => a.Timeout = timeout);
+
 		/// <summary>
 		/// Enables explanation for each hit on how its score was computed. 
 		/// (Use .DocumentsWithMetaData on the return results)
 		/// </summary>
-		public SearchDescriptor<T> Explain(bool explain = true)
-		{
-			Self.Explain = explain;
-			return this;
-		}
+		public SearchDescriptor<T> Explain(bool explain = true) => _assign(a => a.Explain = explain);
+
 		/// <summary>
 		/// Returns a version for each search hit. (Use .DocumentsWithMetaData on the return results)
 		/// </summary>
-		public SearchDescriptor<T> Version(bool version = true)
-		{
-			Self.Version = version;
-			return this;
-		}
+		public SearchDescriptor<T> Version(bool version = true) => _assign(a => a.Version = version);
+
 		/// <summary>
 		/// Make sure we keep calculating score even if we are sorting on a field.
 		/// </summary>
-		public SearchDescriptor<T> TrackScores(bool trackscores = true)
-		{
-			Self.TrackScores = trackscores;
-			return this;
-		}
+		public SearchDescriptor<T> TrackScores(bool trackscores = true) => _assign(a => a.TrackScores = trackscores);
+
 		/// <summary>
 		/// Allows to filter out documents based on a minimum score:
 		/// </summary>
-		public SearchDescriptor<T> MinScore(double minScore)
-		{
-			Self.MinScore = minScore;
-			return this;
-		}
+		public SearchDescriptor<T> MinScore(double minScore) => _assign(a => a.MinScore = minScore);
 
 		/// <summary>
 		/// The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early. 
 		/// If set, the response will have a boolean field terminated_early to indicate whether the query execution has actually terminated_early. 
 		/// </summary>
-		public SearchDescriptor<T> TerminateAfter(long terminateAfter)
-		{
-			Self.TerminateAfter = terminateAfter;
-			return this;
-		}
+		public SearchDescriptor<T> TerminateAfter(long terminateAfter) => _assign(a => a.TerminateAfter = terminateAfter);
 
 		/// <summary>
 		/// <para>
@@ -521,10 +414,8 @@ namespace Nest
 		/// The operation will go and be executed only on the primary shards.
 		/// </para>
 		/// </summary>
-		public SearchDescriptor<T> ExecuteOnPrimary()
-		{
-			return this.Preference("_primary");
-		}
+		public SearchDescriptor<T> ExecuteOnPrimary() => this.Preference("_primary");
+
 		/// <summary>
 		/// <para>
 		/// Controls a preference of which shard replicas to execute the search request on. 
@@ -535,10 +426,8 @@ namespace Nest
 		/// will execute on other shards.
 		/// </para>
 		/// </summary>
-		public SearchDescriptor<T> ExecuteOnPrimaryFirst()
-		{
-			return this.Preference("_primary_first");
-		}
+		public SearchDescriptor<T> ExecuteOnPrimaryFirst() => this.Preference("_primary_first");
+
 		/// <summary>
 		/// <para>
 		/// Controls a preference of which shard replicas to execute the search request on. 
@@ -548,10 +437,8 @@ namespace Nest
 		/// The operation will prefer to be executed on a local allocated shard is possible.
 		/// </para>
 		/// </summary>
-		public SearchDescriptor<T> ExecuteOnLocalShard()
-		{
-			return this.Preference("_local");
-		}
+		public SearchDescriptor<T> ExecuteOnLocalShard() => this.Preference("_local");
+
 		/// <summary>
 		/// <para>
 		/// Controls a preference of which shard replicas to execute the search request on. 
@@ -561,11 +448,8 @@ namespace Nest
 		/// Restricts the search to execute only on a node with the provided node id
 		/// </para>
 		/// </summary>
-		public SearchDescriptor<T> ExecuteOnNode(string node)
-		{
-			node.ThrowIfNull("node");
-			return this.Preference("_only_node:" + node);
-		}
+		public SearchDescriptor<T> ExecuteOnNode(string node) => this.Preference($"_only_node:{node}");
+
 		/// <summary>
 		/// <para>
 		/// Controls a preference of which shard replicas to execute the search request on. 
@@ -578,72 +462,51 @@ namespace Nest
 		public SearchDescriptor<T> ExecuteOnPreferredNode(string node)
 		{
 			node.ThrowIfNull("node");
-			this.Preference(string.Format("_prefer_node:{0}", node));
-			return this;
+			return this.Preference(string.Format("_prefer_node:{0}", node));
 		}
+
 		/// <summary>
 		/// Allows to configure different boost level per index when searching across 
 		/// more than one indices. This is very handy when hits coming from one index
 		/// matter more than hits coming from another index (think social graph where each user has an index).
 		/// </summary>
-		public SearchDescriptor<T> IndicesBoost(
-			Func<FluentDictionary<IndexNameMarker, double>, FluentDictionary<IndexNameMarker, double>> boost)
-		{
-			boost.ThrowIfNull("boost");
-			Self.IndicesBoost = boost(new FluentDictionary<IndexNameMarker, double>());
-			return this;
-		}
+		public SearchDescriptor<T> IndicesBoost(Func<FluentDictionary<IndexNameMarker, double>, FluentDictionary<IndexNameMarker, double>> boost) =>
+			_assign(a => a.IndicesBoost = boost?.Invoke(new FluentDictionary<IndexNameMarker, double>()));
+
 		/// <summary>
 		/// Allows to selectively load specific fields for each document 
 		/// represented by a search hit. Defaults to load the internal _source field.
 		/// </summary>
-		public SearchDescriptor<T> Fields(params Expression<Func<T, object>>[] expressions)
-		{
-			Self.Fields = expressions.Select(e => (PropertyPathMarker)e).ToList();
-			return this;
-		}
-		
+		public SearchDescriptor<T> Fields(params Expression<Func<T, object>>[] expressions) =>
+			_assign(a => a.Fields = expressions?.Select(e => (PropertyPathMarker) e).ToListOrNullIfEmpty());
+
 		/// <summary>
 		/// Allows to selectively load specific fields for each document 
 		/// represented by a search hit. Defaults to load the internal _source field.
 		/// </summary>
-		public SearchDescriptor<T> Fields(Func<FluentFieldList<T>, FluentFieldList<T>> properties)
-		{
-			Self.Fields = properties(new FluentFieldList<T>()).ToList();
-			return this;
-		}
+		public SearchDescriptor<T> Fields(Func<FluentFieldList<T>, FluentFieldList<T>> properties) =>
+			_assign(a => a.Fields = Self.Fields = properties?.Invoke(new FluentFieldList<T>()).ToListOrNullIfEmpty());
+
 		/// <summary>
 		/// Allows to selectively load specific fields for each document 
 		/// represented by a search hit. Defaults to load the internal _source field.
 		/// </summary>
 		public SearchDescriptor<T> Fields(params string[] fields)
-		{
-			Self.Fields = fields.Select(f => (PropertyPathMarker)f).ToList();
-			return this;
-		}
+			=> _assign(a => a.Fields = fields?.Select(f => (PropertyPathMarker) f).ToListOrNullIfEmpty());
 
 		///<summary>
 		///A comma-separated list of fields to return as the field data representation of a field for each hit
 		///</summary>
-		public SearchDescriptor<T> FielddataFields(params string[] fielddataFields)
-		{
-			if (!fielddataFields.HasAny())
-				return this;
-			Self.FielddataFields = fielddataFields.Select(f => (PropertyPathMarker)f).ToList();
-			return this;
-		}
+		public SearchDescriptor<T> FielddataFields(params string[] fielddataFields) =>
+			_assign(a => a.FielddataFields = fielddataFields?.Select(f => (PropertyPathMarker) f).ToListOrNullIfEmpty());
 
 		///<summary>
 		///A comma-separated list of fields to return as the field data representation of a field for each hit
 		///</summary>
-		public SearchDescriptor<T> FielddataFields(params Expression<Func<T, object>>[] fielddataFields)
-		{
-			if (!fielddataFields.HasAny())
-				return this;
-			Self.FielddataFields = fielddataFields.Select(f => (PropertyPathMarker)f).ToList();
-			return this;
-		}
-
+		public SearchDescriptor<T> FielddataFields(params Expression<Func<T, object>>[] fielddataFields) =>
+			_assign(a => a.FielddataFields = fielddataFields?.Select(f => (PropertyPathMarker) f).ToListOrNullIfEmpty());
+		
+		//TODO scriptfields needs a seperate encapsulation
 		public SearchDescriptor<T> ScriptFields(
 				Func<FluentDictionary<string, Func<ScriptQueryDescriptor<T>, ScriptQueryDescriptor<T>>>,
 				 FluentDictionary<string, Func<ScriptQueryDescriptor<T>, ScriptQueryDescriptor<T>>>> scriptFields)
@@ -700,7 +563,6 @@ namespace Nest
 		public SearchDescriptor<T> SortDescending(Expression<Func<T, object>> objectPath)
 		{
 			AddSort(new Sort() { Field = objectPath, Order = SortOrder.Descending });
-
 			return this;
 		}
 
@@ -954,51 +816,28 @@ namespace Nest
 			return this;
 		}
 
-
 		/// <summary>
 		/// Allow to highlight search results on one or more fields. The implementation uses the either lucene fast-vector-highlighter or highlighter. 
 		/// </summary>
-		public SearchDescriptor<T> Highlight(Action<HighlightDescriptor<T>> highlightDescriptor)
-		{
-			highlightDescriptor.ThrowIfNull("highlightDescriptor");
-			var d = new HighlightDescriptor<T>();
-			highlightDescriptor(d);
-			Self.Highlight = d;
-			return this;
-		}
-
+		public SearchDescriptor<T> Highlight(Func<HighlightDescriptor<T>, IHighlightRequest> highlightSelector) =>
+			_assign(a => a.Highlight = highlightSelector?.Invoke(new HighlightDescriptor<T>()));
+		
 		/// <summary>
 		/// Allows you to specify a rescore query
 		/// </summary>
-		public SearchDescriptor<T> Rescore(Action<RescoreDescriptor<T>> rescoreSelector)
-		{
-			rescoreSelector.ThrowIfNull("rescoreSelector");
-			var d = new RescoreDescriptor<T>();
-			rescoreSelector(d);
-			Self.Rescore = d;
-			return this;
-		}
-
+		public SearchDescriptor<T> Rescore(Func<RescoreDescriptor<T>, IRescore> rescoreSelector) =>
+			_assign(a => a.Rescore = rescoreSelector?.Invoke(new RescoreDescriptor<T>()));
+		
 		/// <summary>
 		/// Shorthand for a match_all query without having to specify .Query(q=>q.MatchAll())
 		/// </summary>
-		public SearchDescriptor<T> MatchAll()
-		{
-			return this.Query(q => q.MatchAll());
-		}
+		public SearchDescriptor<T> MatchAll() => this.Query(q => q.MatchAll());
 
-		public SearchDescriptor<T> ConcreteTypeSelector(Func<dynamic, Hit<dynamic>, Type> typeSelector)
-		{
-			Self.TypeSelector = typeSelector;
-			return this;
-		}
+		public SearchDescriptor<T> ConcreteTypeSelector(Func<dynamic, Hit<dynamic>, Type> typeSelector) =>
+			_assign(a => a.TypeSelector = typeSelector);
 
-		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SearchRequestParameters> pathInfo)
-		{
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SearchRequestParameters> pathInfo) =>
 			SearchPathInfo.Update(settings,pathInfo, this);
-		}
 
 	}
 }

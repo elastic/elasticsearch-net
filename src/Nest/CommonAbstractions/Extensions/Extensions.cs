@@ -91,11 +91,7 @@ namespace Nest
 			return list != null && list.Any();
 		}
 
-		internal static IList<T> NullIfEmpty<T>(this IEnumerable<T> list)
-		{
-			return list.HasAny() ? list : null;
-		}
-		internal static void ThrowIfNull<T>(this T value, string name)
+				internal static void ThrowIfNull<T>(this T value, string name)
 		{
 			if (value == null)
 				throw new ArgumentNullException(name);
@@ -131,24 +127,21 @@ namespace Nest
 				handler(item, idx++);
 		}
 
-		internal static IList<T> ToListOrNull<T>(this IEnumerable<T> xs, Func<T, bool> predicate)
-		{
-			return !xs.HasAny(predicate) ? null : xs.ToList();
-		}
-		internal static IList<T> ToListOrNull<T>(this IEnumerable<T> xs)
-		{
-			return !xs.HasAny() ? null : xs.ToList();
-		}
+		internal static IList<T> ToListOrNullIfEmpty<T>(this IEnumerable<T> xs, Func<T, bool> predicate) =>
+			!xs.HasAny(predicate) ? null : xs.ToList();
 
-		internal static IEnumerable<T> EmptyIfNull<T>(this IEnumerable<T> xs)
-		{
-			if (xs == null)
-			{
-				return new T[0];
-			}
+		internal static IList<T> ToListOrNullIfEmpty<T>(this IEnumerable<T> enumerable) =>
+			enumerable.HasAny() ? enumerable.ToList() : null;
 
-			return xs;
-		}
+		internal static Dictionary<TKey, TValue> NullIfNoKeys<TKey, TValue>(this Dictionary<TKey, TValue> dictionary) =>
+			(dictionary?.Count).GetValueOrDefault(0) > 0 ? dictionary : null;
+
+		internal static IDictionary<TKey, TValue> NullIfNoKeys<TKey, TValue>(this IDictionary<TKey, TValue> dictionary) =>
+			(dictionary?.Count).GetValueOrDefault(0) > 0 ? dictionary : null;
+
+
+		internal static IEnumerable<T> EmptyIfNull<T>(this IEnumerable<T> xs) => xs ?? new T[0];
+
 	}
 
 

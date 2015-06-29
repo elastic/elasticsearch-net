@@ -17,6 +17,9 @@ namespace Nest
 
 	public class SourceFilter : ISourceFilter
 	{
+		public static SourceFilter ExcludeAll { get; } = new SourceFilter { Exclude = new PropertyPathMarker[] {"*"} };
+		public static SourceFilter IncludeAll { get; } = new SourceFilter { Include = new PropertyPathMarker[] {"*"} };
+
 		public IEnumerable<PropertyPathMarker> Include { get; set; }
 		public IEnumerable<PropertyPathMarker> Exclude { get; set; }
 	}

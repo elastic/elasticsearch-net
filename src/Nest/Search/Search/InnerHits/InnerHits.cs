@@ -91,17 +91,17 @@ namespace Nest
 		public InnerHitsDescriptor<T> Name(string name) => _assign(a => a.Name = name);
 
 		public InnerHitsDescriptor<T> FielddataFields(params string[] fielddataFields) =>
-			_assign(a => a.FielddataFields = fielddataFields?.Select(f => (PropertyPathMarker) f).ToListOrNull());
+			_assign(a => a.FielddataFields = fielddataFields?.Select(f => (PropertyPathMarker) f).ToListOrNullIfEmpty());
 		
 		public InnerHitsDescriptor<T> FielddataFields(params Expression<Func<T, object>>[] fielddataFields) =>
-			_assign(a => a.FielddataFields = fielddataFields?.Select(f => (PropertyPathMarker) f).ToListOrNull());
+			_assign(a => a.FielddataFields = fielddataFields?.Select(f => (PropertyPathMarker) f).ToListOrNullIfEmpty());
 
 		public InnerHitsDescriptor<T> Explain(bool explain = true) => _assign(a => a.Explain = explain);
 
 		public InnerHitsDescriptor<T> Version(bool version = true) => _assign(a => a.Version = version);
 
 		public InnerHitsDescriptor<T> Sort(Func<SortDescriptor<T>, SortDescriptor<T>> sortSelector) =>
-			_assign(a => a.Sort = sortSelector?.Invoke(new SortDescriptor<T>()).InternalSortState.NullIfEmpty());
+			_assign(a => a.Sort = sortSelector?.Invoke(new SortDescriptor<T>()).InternalSortState.ToListOrNullIfEmpty());
 		
 		/// <summary>
 		/// Allow to highlight search results on one or more fields. The implementation uses the either lucene fast-vector-highlighter or highlighter. 
@@ -109,12 +109,7 @@ namespace Nest
 		public InnerHitsDescriptor<T> Highlight(Func<HighlightDescriptor<T>, IHighlightRequest> highlightSelector) =>
 			_assign(a => a.Highlight = highlightSelector?.Invoke(new HighlightDescriptor<T>()));
 		
-		private static SourceFilter IncludeAllSourceFilter { get; } = new SourceFilter
-		{
-			Exclude = new PropertyPathMarker[] {"*"}
-		};
-
-		public InnerHitsDescriptor<T> Source(bool include = true) => _assign(a => a.Source = include ? IncludeAllSourceFilter : null);
+		public InnerHitsDescriptor<T> Source(bool include = true) => _assign(a => a.Source = !include ? SourceFilter.ExcludeAll : null);
 
 		public InnerHitsDescriptor<T> Source(Func<SearchSourceDescriptor<T>, SearchSourceDescriptor<T>> sourceSelector) =>
 			_assign(a => a.Source = sourceSelector?.Invoke(new SearchSourceDescriptor<T>()));

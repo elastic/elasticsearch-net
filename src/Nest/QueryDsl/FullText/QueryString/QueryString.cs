@@ -111,7 +111,10 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class QueryStringQueryDescriptor<T> : IQueryStringQuery where T : class
 	{
-		private IQueryStringQuery Self { get { return this; }}
+		QueryStringQueryDescriptor<T> _assign(Action<IQueryStringQuery> assigner) => Fluent.Assign(this, assigner);
+
+		private IQueryStringQuery Self => this;
+
 		string IQuery.Name { get; set; }
 		bool IQuery.Conditionless => QueryStringQuery.IsConditionless(this);
 		string IQueryStringQuery.Query { get; set; }
@@ -136,165 +139,81 @@ namespace Nest
 		int? IQueryStringQuery.MaximumDeterminizedStates { get; set; }
 		RewriteMultiTerm? IQueryStringQuery.Rewrite { get; set; }
 
-		public QueryStringQueryDescriptor<T> Name(string name)
-		{
-			Self.Name = name;
-			return this;
-		}
+		public QueryStringQueryDescriptor<T> Name(string name) => _assign(a => a.Name = name);
 
-		public QueryStringQueryDescriptor<T> DefaultField(string field)
-		{
-			Self.DefaultField = field;
-			return this;
-		}
+		public QueryStringQueryDescriptor<T> DefaultField(string field) => _assign(a => a.DefaultField = field);
 
-		public QueryStringQueryDescriptor<T> DefaultField(Expression<Func<T, object>> objectPath)
-		{
-			Self.DefaultField = objectPath;
-			return this;
-		}
+		public QueryStringQueryDescriptor<T> DefaultField(Expression<Func<T, object>> objectPath) =>
+			_assign(a => a.DefaultField = objectPath);
 
-		public QueryStringQueryDescriptor<T> OnFields(IEnumerable<string> fields)
-		{
-			Self.Fields = fields.Select(f=>(PropertyPathMarker)f);
-			return this;
-		}
+		public QueryStringQueryDescriptor<T> OnFields(IEnumerable<string> fields) =>
+			_assign(a => a.Fields = fields?.Select(f => (PropertyPathMarker) f).ToListOrNullIfEmpty());
 
-		public QueryStringQueryDescriptor<T> OnFields(
-			params Expression<Func<T, object>>[] objectPaths)
-		{
-			Self.Fields = objectPaths.Select(e=>(PropertyPathMarker)e);
-			return this;
-		}
+		public QueryStringQueryDescriptor<T> OnFields(params Expression<Func<T, object>>[] objectPaths) =>
+			_assign(a => a.Fields = objectPaths?.Select(f => (PropertyPathMarker) f).ToListOrNullIfEmpty());
 
-		public QueryStringQueryDescriptor<T> OnFieldsWithBoost(Action<FluentDictionary<Expression<Func<T, object>>, double?>> boostableSelector)
-		{
-			var d = new FluentDictionary<Expression<Func<T, object>>, double?>();
-			boostableSelector(d);
-			Self.Fields = d.Select(o => PropertyPathMarker.Create(o.Key, o.Value));
-			return this;
-		}
+		public QueryStringQueryDescriptor<T> OnFieldsWithBoost(Func<
+			FluentDictionary<Expression<Func<T, object>>, double?>, IDictionary<Expression<Func<T, object>>, double?>> boostableSelector) =>
+				_assign(a => a.Fields = boostableSelector?
+					.Invoke(new FluentDictionary<Expression<Func<T, object>>, double?>())
+					.Select(o => PropertyPathMarker.Create(o.Key, o.Value))
+					.ToListOrNullIfEmpty()
+				);
 
-		public QueryStringQueryDescriptor<T> OnFieldsWithBoost(Action<FluentDictionary<string, double?>> boostableSelector) 
-		{
-			var d = new FluentDictionary<string, double?>();
-			boostableSelector(d);
-			Self.Fields = d.Select(o => PropertyPathMarker.Create(o.Key, o.Value));
-			return this;
-		}
+		public QueryStringQueryDescriptor<T> OnFieldsWithBoost(
+			Func<FluentDictionary<string, double?>, IDictionary<Expression<Func<T, object>>, double?>> boostableSelector) =>
+				_assign(a => a.Fields = boostableSelector?
+					.Invoke(new FluentDictionary<string, double?>())
+					.Select(o => PropertyPathMarker.Create(o.Key, o.Value))
+					.ToListOrNullIfEmpty()
+				);
 
-		public QueryStringQueryDescriptor<T> Query(string query)
-		{
-			Self.Query = query;
-			return this;
-		}
+		public QueryStringQueryDescriptor<T> Query(string query) => _assign(a => a.Query = query);
 
-		public QueryStringQueryDescriptor<T> Timezone(string timezone)
-		{
-			Self.Timezone = timezone;
-			return this;
-		}
+		public QueryStringQueryDescriptor<T> Timezone(string timezone) => _assign(a => a.Timezone = timezone);
 
-		public QueryStringQueryDescriptor<T> DefaultOperator(Operator op)
-		{
-			Self.DefaultOperator = op;
-			return this;
-		}
+		public QueryStringQueryDescriptor<T> DefaultOperator(Operator op) => _assign(a => a.DefaultOperator = op);
 
-		public QueryStringQueryDescriptor<T> Analyzer(string analyzer)
-		{
-			Self.Analyzer = analyzer;
-			return this;
-		}
+		public QueryStringQueryDescriptor<T> Analyzer(string analyzer) => _assign(a => a.Analyzer = analyzer);
 
-		public QueryStringQueryDescriptor<T> AllowLeadingWildcard(bool allowLeadingWildcard = true)
-		{
-			Self.AllowLeadingWildcard = allowLeadingWildcard;
-			return this;
-		}
+		public QueryStringQueryDescriptor<T> AllowLeadingWildcard(bool allowLeadingWildcard = true) =>
+			_assign(a => a.AllowLeadingWildcard = allowLeadingWildcard);
 
-		public QueryStringQueryDescriptor<T> LowercaseExpendedTerms(bool lowercaseExpendedTerms = true)
-		{
-			Self.LowercaseExpendedTerms = lowercaseExpendedTerms;
-			return this;
-		}
+		public QueryStringQueryDescriptor<T> LowercaseExpendedTerms(bool lowercaseExpendedTerms = true) =>
+			_assign(a => a.LowercaseExpendedTerms = lowercaseExpendedTerms);
 
-		public QueryStringQueryDescriptor<T> EnablePositionIncrements(bool enablePositionIncrements = true)
-		{
-			Self.EnablePositionIncrements = enablePositionIncrements;
-			return this;
-		}
+		public QueryStringQueryDescriptor<T> EnablePositionIncrements(bool enablePositionIncrements = true) =>
+			_assign(a => a.EnablePositionIncrements = enablePositionIncrements);
 
-		public QueryStringQueryDescriptor<T> FuzzyPrefixLength(int fuzzyPrefixLength)
-		{
-			Self.FuzzyPrefixLength = fuzzyPrefixLength;
-			return this;
-		}
+		public QueryStringQueryDescriptor<T> FuzzyPrefixLength(int fuzzyPrefixLength) =>
+			_assign(a => a.FuzzyPrefixLength = fuzzyPrefixLength);
 
-		public QueryStringQueryDescriptor<T> FuzzyMinimumSimilarity(double fuzzyMinimumSimilarity)
-		{
-			Self.FuzzyMinimumSimilarity = fuzzyMinimumSimilarity;
-			return this;
-		}
+		public QueryStringQueryDescriptor<T> FuzzyMinimumSimilarity(double fuzzyMinimumSimilarity) =>
+			_assign(a => a.FuzzyMinimumSimilarity = fuzzyMinimumSimilarity);
 
-		public QueryStringQueryDescriptor<T> PhraseSlop(double phraseSlop)
-		{
-			Self.PhraseSlop = phraseSlop;
-			return this;
-		}
+		public QueryStringQueryDescriptor<T> PhraseSlop(double phraseSlop) => _assign(a => a.PhraseSlop = phraseSlop);
 
-		public QueryStringQueryDescriptor<T> Boost(double boost)
-		{
-			Self.Boost = boost;
-			return this;
-		}
+		public QueryStringQueryDescriptor<T> Boost(double boost) => _assign(a => a.Boost = boost);
 
-		public QueryStringQueryDescriptor<T> Rewrite(RewriteMultiTerm rewriteMultiTerm)
-		{
-			Self.Rewrite = rewriteMultiTerm;
-			return this;
-		}
+		public QueryStringQueryDescriptor<T> Rewrite(RewriteMultiTerm rewriteMultiTerm) => _assign(a => a.Rewrite = rewriteMultiTerm);
 
-		public QueryStringQueryDescriptor<T> Lenient(bool lenient = true)
-		{
-			Self.Lenient = lenient;
-			return this;
-		}
+		public QueryStringQueryDescriptor<T> Lenient(bool lenient = true) => _assign(a => a.Lenient = lenient);
 
 		public QueryStringQueryDescriptor<T> AnalyzeWildcard(bool analyzeWildcard = true)
-		{
-			Self.AnalyzeWildcard = analyzeWildcard;
-			return this;
-		}
+			=> _assign(a => a.AnalyzeWildcard = analyzeWildcard);
 
-		public QueryStringQueryDescriptor<T> AutoGeneratePhraseQueries(bool autoGeneratePhraseQueries = true)
-		{
-			Self.AutoGeneratePhraseQueries = autoGeneratePhraseQueries;
-			return this;
-		}
+		public QueryStringQueryDescriptor<T> AutoGeneratePhraseQueries(bool autoGeneratePhraseQueries = true) =>
+			_assign(a => a.AutoGeneratePhraseQueries = autoGeneratePhraseQueries);
 
-		public QueryStringQueryDescriptor<T> MinimumShouldMatchPercentage(int minimumShouldMatchPercentage)
-		{
-			Self.MinimumShouldMatchPercentage = "{0}%".F(minimumShouldMatchPercentage);
-			return this;
-		}
+		public QueryStringQueryDescriptor<T> MinimumShouldMatchPercentage(int minimumShouldMatchPercentage) =>
+			_assign(a => a.MinimumShouldMatchPercentage = "{0}%".F(minimumShouldMatchPercentage));
 
-		public QueryStringQueryDescriptor<T> UseDisMax(bool useDismax = true)
-		{
-			Self.UseDisMax = useDismax;
-			return this;
-		}
+		public QueryStringQueryDescriptor<T> UseDisMax(bool useDismax = true) => _assign(a => a.UseDisMax = useDismax);
 
-		public QueryStringQueryDescriptor<T> TieBreaker(double tieBreaker)
-		{
-			Self.TieBreaker = tieBreaker;
-			return this;
-		}
+		public QueryStringQueryDescriptor<T> TieBreaker(double tieBreaker) => _assign(a => a.TieBreaker = tieBreaker);
 
-		public QueryStringQueryDescriptor<T> MaximumDeterminizedStates(int maxDeterminizedStates)
-		{
-			Self.MaximumDeterminizedStates = maxDeterminizedStates;
-			return this;
-		}
+		public QueryStringQueryDescriptor<T> MaximumDeterminizedStates(int maxDeterminizedStates) =>
+			_assign(a => a.MaximumDeterminizedStates = maxDeterminizedStates);
+
 	}
 }
