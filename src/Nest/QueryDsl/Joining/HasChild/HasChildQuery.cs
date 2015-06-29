@@ -36,7 +36,7 @@ namespace Nest
 	public class HasChildQuery : PlainQuery, IHasChildQuery
 	{
 		public string Name { get; set; }
-		bool IQuery.Conditionless { get { return false; } }
+		bool IQuery.Conditionless => IsConditionless(this);
 		public TypeNameMarker Type { get; set; }
 		public ChildScoreType? ScoreType { get; set; }
 		public int? MinChildren { get; set; }
@@ -44,23 +44,15 @@ namespace Nest
 		public IQueryContainer Query { get; set; }
 		public IInnerHits InnerHits { get; set; }
 
-		protected override void WrapInContainer(IQueryContainer container)
-		{
-			container.HasChild = this;
-		}
+		protected override void WrapInContainer(IQueryContainer c) => c.HasChild = this;
+		internal static bool IsConditionless(IHasChildQuery q) => q.Query == null || q.Query.IsConditionless;
 	}
 
 	public class HasChildQueryDescriptor<T> : IHasChildQuery where T : class
 	{
 		private IHasChildQuery Self => this;
 		string IQuery.Name { get; set; }
-		bool IQuery.Conditionless
-		{
-			get
-			{
-				return Self.Query == null || Self.Query.IsConditionless;
-			}
-		}
+		bool IQuery.Conditionless => HasChildQuery.IsConditionless(this);
 		TypeNameMarker IHasChildQuery.Type { get; set; }
 		ChildScoreType? IHasChildQuery.ScoreType { get; set; }
 		int? IHasChildQuery.MinChildren { get; set; }

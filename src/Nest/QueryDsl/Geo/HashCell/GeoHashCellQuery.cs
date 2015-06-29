@@ -24,23 +24,22 @@ namespace Nest
 
     public class GeoHashCellQuery : FieldNameQuery, IGeoHashCellQuery
     {
-		bool IQuery.Conditionless { get { return QueryCondition.IsConditionless(this); } }
+		bool IQuery.Conditionless => IsConditionless(this);
         public string Location { get; set; }
         public object Precision { get; set; }
         public GeoUnit? Unit { get; set; }
         public bool Neighbors { get; set; }
 
-        protected override void WrapInContainer(IQueryContainer container)
-        {
-            container.GeoHashCell = this;
-        }
+		protected override void WrapInContainer(IQueryContainer c) => c.GeoHashCell = this;
+
+		internal static bool IsConditionless(IGeoHashCellQuery q) => q.Location.IsNullOrEmpty();
 	}
 
 	public class GeoHashCellQueryDescriptor<T> : IGeoHashCellQuery
     {
 		private IGeoHashCellQuery Self => this;
 		string IQuery.Name { get; set; }
-        bool IQuery.Conditionless { get { return QueryCondition.IsConditionless(this); } }
+        bool IQuery.Conditionless => GeoHashCellQuery.IsConditionless(this);
         PropertyPathMarker IFieldNameQuery.Field { get; set; }
         string IGeoHashCellQuery.Location { get; set; }
         object IGeoHashCellQuery.Precision { get; set; }

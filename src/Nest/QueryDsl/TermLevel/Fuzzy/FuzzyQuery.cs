@@ -5,10 +5,15 @@ using System.Globalization;
 
 namespace Nest
 {
-
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IFuzzyQuery : IFieldNameQuery 
+	public interface IFuzzyQuery : IFieldNameQuery
 	{
+		[JsonProperty(PropertyName = "prefix_length")]
+		int? PrefixLength { get; set; }
+		
+		[JsonProperty(PropertyName = "value")]
+		object Value { get; set; }
+
 		[JsonProperty(PropertyName = "boost")]
 		double? Boost { get; set; }
 		
@@ -28,19 +33,9 @@ namespace Nest
 		bool? UnicodeAware { get; set; }
 	}
 
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IStringFuzzyQuery : IFuzzyQuery
+	public class FuzzyQuery : FieldNameQuery, IFuzzyQuery
 	{
-		[JsonProperty(PropertyName = "prefix_length")]
-		int? PrefixLength { get; set; }
-		
-		[JsonProperty(PropertyName = "value")]
-		string Value { get; set; }
-	}
-
-	public class FuzzyStringQuery : FieldNameQuery, IStringFuzzyQuery
-	{
-		bool IQuery.Conditionless { get { return false; } }
+		bool IQuery.Conditionless => IsConditionless(this);
 		public double? Boost { get; set; }
 		public string Fuzziness { get; set; }
 		public RewriteMultiTerm? Rewrite { get; set; }
@@ -48,30 +43,22 @@ namespace Nest
 		public bool? Transpositions { get; set; }
 		public bool? UnicodeAware { get; set; }
 		public int? PrefixLength { get; set; }
-		public string Value { get; set; }
+		public object Value { get; set; }
 
-		protected override void WrapInContainer(IQueryContainer container)
-		{
-			container.Fuzzy = this;
-		}
+		protected override void WrapInContainer(IQueryContainer c) => c.Fuzzy = this;
+		internal static bool IsConditionless(IFuzzyQuery q) => q.Field.IsConditionless() || q.Value == null;
 	}
 
-	public class FuzzyQueryDescriptor<T> : IStringFuzzyQuery where T : class
+	public class FuzzyQueryDescriptor<T> : IFuzzyQuery where T : class
 	{
-		private IStringFuzzyQuery Self => this;
+		private IFuzzyQuery Self => this;
 		string IQuery.Name { get; set; }
-		bool IQuery.Conditionless
-		{
-			get
-			{
-				return Self.Field.IsConditionless() || Self.Value.IsNullOrEmpty();
-			}
-		}
+		bool IQuery.Conditionless => FuzzyQuery.IsConditionless(this);
 		PropertyPathMarker IFieldNameQuery.Field { get; set; }
 		double? IFuzzyQuery.Boost { get; set; }
 		string IFuzzyQuery.Fuzziness { get; set; }
-		string IStringFuzzyQuery.Value { get; set; }
-		int? IStringFuzzyQuery.PrefixLength { get; set; }
+		object IFuzzyQuery.Value { get; set; }
+		int? IFuzzyQuery.PrefixLength { get; set; }
 		int? IFuzzyQuery.MaxExpansions { get; set; }
 		bool? IFuzzyQuery.Transpositions { get; set; }
 		bool? IFuzzyQuery.UnicodeAware { get; set; }
@@ -144,6 +131,18 @@ namespace Nest
 		}
 
 		public FuzzyQueryDescriptor<T> Value(string value)
+		{
+			Self.Value = value;
+			return this;
+		}
+
+		public FuzzyQueryDescriptor<T> Value(double value)
+		{
+			Self.Value = value;
+			return this;
+		}
+
+		public FuzzyQueryDescriptor<T> Value(DateTime value)
 		{
 			Self.Value = value;
 			return this;

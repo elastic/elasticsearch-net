@@ -17,13 +17,11 @@ namespace Nest
 	public class TypeQuery : PlainQuery, ITypeQuery
 	{
 		public string Name { get; set; }
-		bool IQuery.Conditionless { get { return QueryCondition.IsConditionless(this); } }
+		bool IQuery.Conditionless => IsConditionless(this);
 		public TypeNameMarker Value { get; set; }
 
-		protected override void WrapInContainer(IQueryContainer container)
-		{
-			container.Type = this;
-		}
+		protected override void WrapInContainer(IQueryContainer c) => c.Type = this;
+		internal static bool IsConditionless(ITypeQuery q) => q.Value.IsConditionless();
 	}
 	
 	public class TypeQueryDescriptor : ITypeQuery
@@ -32,7 +30,7 @@ namespace Nest
 
 		string IQuery.Name { get; set; }
 
-		bool IQuery.Conditionless { get { return QueryCondition.IsConditionless(this); } }
+		bool IQuery.Conditionless => TypeQuery.IsConditionless(this);
 
 		[JsonProperty(PropertyName = "value")]
 		TypeNameMarker ITypeQuery.Value { get; set; }

@@ -2,9 +2,26 @@
 using System.Globalization;
 using System.Linq.Expressions;
 using Newtonsoft.Json;
+using Nest.Resolvers.Converters;
 
 namespace Nest
 {
+	[JsonConverter(typeof(ReadAsTypeConverter<ExternalFieldDeclaration>))]
+	public interface IExternalFieldDeclaration
+	{
+		[JsonProperty("index")]
+		IndexNameMarker Index { get; set; }
+		
+		[JsonProperty("type")]
+		TypeNameMarker Type { get; set; }
+		
+		[JsonProperty("id")]
+		string Id { get; set; }
+		
+		[JsonProperty("path")]
+		PropertyPathMarker Path { get; set; }
+	}
+
 	public class ExternalFieldDeclaration : IExternalFieldDeclaration
 	{
 		public IndexNameMarker Index { get; set; }

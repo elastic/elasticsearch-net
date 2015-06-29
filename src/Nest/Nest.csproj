@@ -236,8 +236,7 @@
     <Compile Include="QueryDsl\Geo\Distance\GeoDistanceQuery.cs" />
     <Compile Include="QueryDsl\Geo\DistanceRange\GeoDistanceRangeQuery.cs" />
     <Compile Include="QueryDsl\Geo\HashCell\GeoHashCellQuery.cs" />
-    <Compile Include="QueryDsl\Geo\GeoPolygonQuery.cs" />
-    <Compile Include="QueryDsl\QueryCondition.cs" />
+    <Compile Include="QueryDsl\Geo\Polygon\GeoPolygonQuery.cs" />
     <Compile Include="QueryDsl\QueryDescriptor.cs" />
     <Compile Include="CommonAbstractions\Fluent.cs" />
     <Compile Include="Search\Suggesters\SuggestContextMapping.cs" />
@@ -425,7 +424,7 @@
     <Compile Include="CommonAbstractions\Request\Paths\IndexOptionalNamePath.cs" />
     <Compile Include="CommonAbstractions\Request\Paths\IndicesOptionalTypesNamePathDecriptor.cs" />
     <Compile Include="Cluster\Ping\PingRequest.cs" />
-    <Compile Include="QueryDsl\Span\SpanMultiTermQuery.cs" />
+    <Compile Include="QueryDsl\Span\MultiTerm\SpanMultiTermQuery.cs" />
     <Compile Include="Indices\MappingManagement\TypesExists\TypeExistsRequest.cs" />
     <Compile Include="QueryDsl\Compound\FunctionScore\Functions\FieldValueFactor.cs" />
     <Compile Include="QueryDsl\Geo\Shape\MultiPoint\GeoShapeMultiPointQuery.cs" />
@@ -528,8 +527,6 @@
     <Compile Include="CommonAbstractions\SerializationBehavior\Resolvers\Converters\CompositeJsonConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\CustomJson\ICustomJsonReader.cs" />
     <Compile Include="Modules\SnapshotAndRestore\Snapshot\GetSapshot\GetSnapshotRequest.cs" />
-    <Compile Include="QueryDsl\IQueryContainer.cs" />
-    <Compile Include="QueryDsl\IFieldNameQuery.cs" />
     <Compile Include="QueryDsl\Compound\FunctionScore\Functions\BoostFactorFunction.cs" />
     <Compile Include="QueryDsl\Compound\FunctionScore\Functions\ExpFunction.cs" />
     <Compile Include="QueryDsl\Compound\FunctionScore\Functions\FunctionBoostMode.cs" />
@@ -710,7 +707,6 @@
     <Compile Include="Search\Percolator\RegisterPercolator\RegisterPercolatorCount.cs" />
     <Compile Include="Search\Percolator\Percolate\PercolateRequest.cs" />
     <Compile Include="QueryDsl\ExternalFieldDeclaration.cs" />
-    <Compile Include="QueryDsl\IExternalFieldDeclaration.cs" />
     <Compile Include="QueryDsl\FullText\MultiMatch\MultiMatchQuery.cs" />
     <Compile Include="Cluster\ClusterState\ElasticClient-ClusterState.cs" />
     <Compile Include="CommonAbstractions\Extensions\UriExtensions.cs" />
@@ -823,15 +819,13 @@
     <Compile Include="QueryDsl\Compound\ConstantScore\ConstantScoreQuery.cs" />
     <Compile Include="QueryDsl\Compound\Indices\IndicesQuery.cs" />
     <Compile Include="QueryDsl\Joining\Nested\NestedQuery.cs" />
-    <Compile Include="QueryDsl\Span\SpanNotQuery.cs" />
-    <Compile Include="QueryDsl\Span\SpanOrQuery.cs" />
-    <Compile Include="QueryDsl\Span\SpanNearQuery.cs" />
-    <Compile Include="QueryDsl\Span\SpanFirstQuery.cs" />
+    <Compile Include="QueryDsl\Span\Not\SpanNotQuery.cs" />
+    <Compile Include="QueryDsl\Span\Or\SpanOrQuery.cs" />
+    <Compile Include="QueryDsl\Span\Near\SpanNearQuery.cs" />
+    <Compile Include="QueryDsl\Span\First\SpanFirstQuery.cs" />
     <Compile Include="QueryDsl\Span\SpanQuery.cs" />
-    <Compile Include="QueryDsl\Span\SpanTermQuery.cs" />
+    <Compile Include="QueryDsl\Span\Term\SpanTermQuery.cs" />
     <Compile Include="QueryDsl\Specialized\MoreLikeThis\MoreLikeThisQuery.cs" />
-    <Compile Include="QueryDsl\TermLevel\Fuzzy\FuzzyDateQuery.cs" />
-    <Compile Include="QueryDsl\TermLevel\Fuzzy\FuzzyNumericQuery.cs" />
     <Compile Include="QueryDsl\TermLevel\Fuzzy\FuzzyQuery.cs" />
     <Compile Include="QueryDsl\Joining\HasChild\HasChildQuery.cs" />
     <Compile Include="QueryDsl\TermLevel\Range\RangeQuery.cs" />
@@ -961,7 +955,6 @@
     <Compile Include="Document\Single\Index\ElasticClient-Index.cs" />
     <Compile Include="ElasticClient.cs" />
     <Compile Include="CommonAbstractions\Extensions\Extensions.cs" />
-    <Compile Include="QueryDsl\IQuery.cs" />
     <Compile Include="QueryDsl\MatchAllQuery.cs" />
     <Compile Include="QueryDsl\TermLevel\Prefix\PrefixQuery.cs" />
     <Compile Include="Mapping\TermVectorOption.cs" />

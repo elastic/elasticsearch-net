@@ -23,7 +23,7 @@ namespace Nest
 	public class TermsQuery : PlainQuery, ITermsQuery
 	{
 		public string Name { get; set; }
-		bool IQuery.Conditionless { get { return false; } }
+		bool IQuery.Conditionless => IsConditionless(this);
 		public PropertyPathMarker Field { get; set; }
 		public string MinimumShouldMatch { get; set; }
 		public bool? DisableCoord { get; set; }
@@ -31,9 +31,10 @@ namespace Nest
 		public IExternalFieldDeclaration ExternalField { get; set; }
 		public double? Boost { get; set; }
 
-		protected override void WrapInContainer(IQueryContainer container)
+		protected override void WrapInContainer(IQueryContainer c) => c.Terms = this;
+		internal static bool IsConditionless(ITermsQuery q)
 		{
-			container.Terms = this;
+			return q.Field.IsConditionless() || (!q.Terms.HasAny() && q.ExternalField == null);
 		}
 	}
 
@@ -45,16 +46,9 @@ namespace Nest
 	/// <typeparam name="K">The type of the field that we want to specfify terms for</typeparam>
 	public class TermsQueryDescriptor<T, K> : ITermsQuery where T : class
 	{
-		private ITermsQuery Self { get { return this; }}
+		private ITermsQuery Self => this;
 		string IQuery.Name { get; set; }
-		bool IQuery.Conditionless
-		{
-			get
-			{
-				return Self.Field.IsConditionless() 
-					|| (!Self.Terms.HasAny() && Self.ExternalField == null);
-			}
-		}
+		bool IQuery.Conditionless => TermsQuery.IsConditionless(this);
 		PropertyPathMarker ITermsQuery.Field { get; set; }
 		string ITermsQuery.MinimumShouldMatch { get; set; }
 		bool? ITermsQuery.DisableCoord { get; set; }

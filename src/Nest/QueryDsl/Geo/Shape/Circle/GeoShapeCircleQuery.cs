@@ -20,25 +20,18 @@ namespace Nest
 
 	public class GeoShapeCircleQuery : FieldNameQuery, IGeoShapeCircleQuery
 	{
-		bool IQuery.Conditionless { get { return false; } }
+		bool IQuery.Conditionless => IsConditionless(this);
 		public ICircleGeoShape Shape { get; set; }
 
 		protected override void WrapInContainer(IQueryContainer c) => c.GeoShape = this;
+		internal static bool IsConditionless(IGeoShapeCircleQuery q) => q.Field.IsConditionless() || q.Shape == null || !q.Shape.Coordinates.HasAny();
 	}
-
 
 	public class GeoShapeCircleQueryDescriptor<T> : IGeoShapeCircleQuery where T : class
 	{
 		private IGeoShapeCircleQuery Self => this;
 		string IQuery.Name { get; set; }
-		bool IQuery.Conditionless
-		{
-			get
-			{
-				return ((IGeoShapeQuery)this).Field.IsConditionless() || Self.Shape == null || !Self.Shape.Coordinates.HasAny();
-			}
-
-		}
+		bool IQuery.Conditionless => GeoShapeCircleQuery.IsConditionless(this);
 		PropertyPathMarker IFieldNameQuery.Field { get; set; }
 		ICircleGeoShape IGeoShapeCircleQuery.Shape { get; set; }
 

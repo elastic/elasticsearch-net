@@ -31,24 +31,22 @@ namespace Nest
 	public class ScriptQuery : PlainQuery, IScriptQuery
 	{
 		public string Name { get; set; }
-		bool IQuery.Conditionless { get { return QueryCondition.IsConditionless(this); } }
+		bool IQuery.Conditionless => IsConditionless(this);
 		public string Script { get; set; }
 		public string ScriptId { get; set; }
 		public string ScriptFile { get; set; }
 		public Dictionary<string, object> Params { get; set; }
 		public string Lang { get; set; }
 
-		protected override void WrapInContainer(IQueryContainer container)
-		{
-			container.Script = this;
-		}
+		protected override void WrapInContainer(IQueryContainer c) => c.Script = this;
+		internal static bool IsConditionless(IScriptQuery q) => q.Script.IsNullOrEmpty();
 	}
 
 	public class ScriptQueryDescriptor<T> : IScriptQuery where T : class
 	{
 		private IScriptQuery Self => this;
 		string IQuery.Name { get; set; }
-		bool IQuery.Conditionless { get { return QueryCondition.IsConditionless(this); } }
+		bool IQuery.Conditionless => ScriptQuery.IsConditionless(this);
 		string IScriptQuery.Script { get; set; }
 		string IScriptQuery.ScriptId { get; set; }
 		string IScriptQuery.ScriptFile { get; set; }

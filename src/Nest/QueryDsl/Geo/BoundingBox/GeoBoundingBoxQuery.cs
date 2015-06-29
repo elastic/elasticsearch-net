@@ -21,7 +21,6 @@ namespace Nest
 	
 	public class GeoBoundingBoxQuery : FieldNameQuery, IGeoBoundingBoxQuery
 	{
-		public string Name { get; set; }
 		bool IQuery.Conditionless => IsConditionless(this);
 		public string TopLeft { get; set; }
 		public string BottomRight { get; set; }

@@ -24,15 +24,12 @@ namespace Nest
 
 	public class WildcardQuery : FieldNameQuery, IWildcardQuery
 	{
-		bool IQuery.Conditionless { get { return false; } }
+		bool IQuery.Conditionless => TermQuery.IsConditionless(this);
 		public object Value { get; set; }
 		public double? Boost { get; set; }
 		public RewriteMultiTerm? Rewrite { get; set; }
 
-		protected override void WrapInContainer(IQueryContainer container)
-		{
-			container.Wildcard = this;
-		}
+		protected override void WrapInContainer(IQueryContainer c) => c.Wildcard = this;
 	}
 
 	public class WildcardQueryDescriptor<T> : 

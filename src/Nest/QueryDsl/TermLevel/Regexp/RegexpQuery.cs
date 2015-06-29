@@ -22,31 +22,21 @@ namespace Nest
 
 	public class RegexpQuery : FieldNameQuery, IRegexpQuery
 	{
-		public string Name { get; set; }
-		bool IQuery.Conditionless { get { return false; } }
+		bool IQuery.Conditionless => IsConditionless(this);
 		public string Value { get; set; }
 		public string Flags { get; set; }
 		public int? MaximumDeterminizedStates { get; set; }
-		public PropertyPathMarker Field { get; set; }
 		public double? Boost { get; set; }
 
-		protected override void WrapInContainer(IQueryContainer container)
-		{
-			container.Regexp = this;
-		}
+		protected override void WrapInContainer(IQueryContainer c) => c.Regexp = this;
+		internal static bool IsConditionless(IRegexpQuery q) => q.Field.IsConditionless() || q.Value.IsNullOrEmpty();
 	}
 
 	public class RegexpQueryDescriptor<T> : IRegexpQuery where T : class
 	{
 		private IRegexpQuery Self => this;
 		string IQuery.Name { get; set; }
-		bool IQuery.Conditionless
-		{
-			get
-			{
-				return Self.Field.IsConditionless() || Self.Value.IsNullOrEmpty();
-			}
-		}
+		bool IQuery.Conditionless => RegexpQuery.IsConditionless(this);
 		string IRegexpQuery.Value { get; set; }
 		string IRegexpQuery.Flags { get; set; }
 		int? IRegexpQuery.MaximumDeterminizedStates { get; set; }

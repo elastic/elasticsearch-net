@@ -36,24 +36,15 @@ namespace Nest
 		public bool? CollectPayloads { get; set; }
 	    public double? Boost { get; set; }
 
-		protected override void WrapInContainer(IQueryContainer container)
-		{
-			container.SpanNear = this;
-		}
+		protected override void WrapInContainer(IQueryContainer c) => c.SpanNear = this;
+		internal static bool IsConditionless(ISpanNearQuery q) => !q.Clauses.HasAny() || q.Clauses.Cast<IQuery>().All(qq => qq.Conditionless);
 	}
 
 	public class SpanNearQueryDescriptor<T> : ISpanNearQuery where T : class
 	{
 		private ISpanNearQuery Self { get { return this; }}
 		string IQuery.Name { get; set; }	
-		bool IQuery.Conditionless
-		{
-			get
-			{
-				return !Self.Clauses.HasAny() 
-					|| Self.Clauses.Cast<IQuery>().All(q => q.Conditionless);
-			}
-		}
+		bool IQuery.Conditionless => SpanNearQuery.IsConditionless(this);
 		IEnumerable<ISpanQuery> ISpanNearQuery.Clauses { get; set; }
 		int? ISpanNearQuery.Slop { get; set; }
 		bool? ISpanNearQuery.InOrder { get; set; }

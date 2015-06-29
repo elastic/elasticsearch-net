@@ -18,29 +18,18 @@ namespace Nest
 
 	public class GeoShapePolygonQuery : FieldNameQuery, IGeoShapePolygonQuery
 	{
-		public string Name { get; set; }
-		bool IQuery.Conditionless { get { return false; } }
-		public PropertyPathMarker Field { get; set; }
+		bool IQuery.Conditionless => IsConditionless(this);
 		public IPolygonGeoShape Shape { get; set; }
 
-		protected override void WrapInContainer(IQueryContainer container)
-		{
-			container.GeoShape = this;
-		}
+		protected override void WrapInContainer(IQueryContainer c) => c.GeoShape = this;
+		internal static bool IsConditionless(IGeoShapePolygonQuery q) => q.Field.IsConditionless() || q.Shape == null || !q.Shape.Coordinates.HasAny();
 	}
 
 	public class GeoShapePolygonQueryDescriptor<T> : IGeoShapePolygonQuery where T : class
 	{
 		private IGeoShapePolygonQuery Self => this;
 		string IQuery.Name { get; set; }
-		bool IQuery.Conditionless
-		{
-			get
-			{
-				return Self.Field.IsConditionless() || Self.Shape == null || !Self.Shape.Coordinates.HasAny();
-			}
-
-		}
+		bool IQuery.Conditionless => GeoShapePolygonQuery.IsConditionless(this);
 		PropertyPathMarker IFieldNameQuery.Field { get; set; }
 		IPolygonGeoShape IGeoShapePolygonQuery.Shape { get; set; }
 

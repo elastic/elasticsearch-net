@@ -15,20 +15,18 @@ namespace Nest
 
 	public class GeoPolygonQuery : FieldNameQuery, IGeoPolygonQuery
 	{
-		bool IQuery.Conditionless { get { return QueryCondition.IsConditionless(this); } }
+		bool IQuery.Conditionless => IsConditionless(this);
 		public IEnumerable<string> Points { get; set; }
 
-		protected override void WrapInContainer(IQueryContainer container)
-		{
-			container.GeoPolygon = this;
-		}
+		protected override void WrapInContainer(IQueryContainer c) => c.GeoPolygon = this;
+		internal static bool IsConditionless(IGeoPolygonQuery q) => !q.Points.HasAny() || q.Points.All(p => p.IsNullOrEmpty());
 	}
 
 	public class GeoPolygonQueryDescriptor<T> : IGeoPolygonQuery
 	{
 		private IGeoPolygonQuery Self => this;
 		string IQuery.Name { get; set; }
-		bool IQuery.Conditionless { get { return QueryCondition.IsConditionless(this); } }
+		bool IQuery.Conditionless => GeoPolygonQuery.IsConditionless(this);
 		PropertyPathMarker IFieldNameQuery.Field { get; set; }
 		IEnumerable<string> IGeoPolygonQuery.Points { get; set; }
 

@@ -18,26 +18,18 @@ namespace Nest
 
 	public class GeoShapeMultiLineStringQuery : FieldNameQuery, IGeoShapeMultiLineStringQuery
 	{
-		bool IQuery.Conditionless { get { return false; } }
+		bool IQuery.Conditionless => IsConditionless(this);
 		public IMultiLineStringGeoShape Shape { get; set; }
 
-		protected override void WrapInContainer(IQueryContainer container)
-		{
-			container.GeoShape = this;
-		}
+		protected override void WrapInContainer(IQueryContainer c) => c.GeoShape = this;
+		internal static bool IsConditionless(IGeoShapeMultiLineStringQuery q) => q.Field.IsConditionless() || q.Shape == null || !q.Shape.Coordinates.HasAny();
 	}
 
 	public class GeoShapeMultiLineStringQueryDescriptor<T> : IGeoShapeMultiLineStringQuery where T : class
 	{
 		private IGeoShapeMultiLineStringQuery Self => this;
 		string IQuery.Name { get; set; }
-		bool IQuery.Conditionless
-		{
-			get
-			{
-				return ((IGeoShapeQuery)this).Field.IsConditionless() || Self.Shape == null || !Self.Shape.Coordinates.HasAny();
-			}
-		}
+		bool IQuery.Conditionless => GeoShapeMultiLineStringQuery.IsConditionless(this);
 		PropertyPathMarker IFieldNameQuery.Field { get; set; }
 		IMultiLineStringGeoShape IGeoShapeMultiLineStringQuery.Shape { get; set; }
 

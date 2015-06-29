@@ -19,28 +19,19 @@ namespace Nest
 	public class SpanOrQuery : PlainQuery, ISpanOrQuery
 	{
 		public string Name { get; set; }
-		bool IQuery.Conditionless { get { return false; } }
+		bool IQuery.Conditionless => IsConditionless(this);
 		public IEnumerable<ISpanQuery> Clauses { get; set; }
         public double? Boost { get; set; }
 
-		protected override void WrapInContainer(IQueryContainer container)
-		{
-			container.SpanOr = this;
-		}
+		protected override void WrapInContainer(IQueryContainer c) => c.SpanOr = this;
+		internal static bool IsConditionless(ISpanOrQuery q) => !q.Clauses.HasAny() || q.Clauses.Cast<IQuery>().All(qq => qq.Conditionless);
 	}
 
 	public class SpanOrQueryDescriptor<T> : ISpanOrQuery where T : class
 	{
 		private ISpanOrQuery Self => this;
 		string IQuery.Name { get; set; }
-		bool IQuery.Conditionless
-		{
-			get
-			{
-				return !Self.Clauses.HasAny() 
-					|| Self.Clauses.Cast<IQuery>().All(q => q.Conditionless);
-			}
-		}
+		bool IQuery.Conditionless => SpanOrQuery.IsConditionless(this);
 		IEnumerable<ISpanQuery> ISpanOrQuery.Clauses { get; set; }
         double? ISpanOrQuery.Boost { get; set; }
 

@@ -35,16 +35,18 @@ namespace Nest
 	public class NestedQuery : PlainQuery, INestedQuery
 	{
 		public string Name { get; set; }
-		bool IQuery.Conditionless { get { return false; } }
+		bool IQuery.Conditionless => IsConditionless(this);
 		public NestedScore? Score { get; set; }
 		public IQueryContainer Filter { get; set; }
 		public IQueryContainer Query { get; set; }
 		public PropertyPathMarker Path { get; set; }
 		public IInnerHits InnerHits { get; set; }
 
-		protected override void WrapInContainer(IQueryContainer container)
+		protected override void WrapInContainer(IQueryContainer c) => c.Nested = this;
+		internal static bool IsConditionless(INestedQuery q)
 		{
-			container.Nested = this;
+			return (q.Query == null || q.Query.IsConditionless)
+				&& (q.Filter == null || q.Filter.IsConditionless);
 		}
 	}
 
@@ -53,14 +55,7 @@ namespace Nest
 	{
 		private INestedQuery Self => this;
 		string IQuery.Name { get; set; }
-		bool IQuery.Conditionless
-		{
-			get
-			{
-				return (Self.Query == null || Self.Query.IsConditionless)
-				       && (Self.Filter == null || Self.Filter.IsConditionless);
-			}
-		}
+		bool IQuery.Conditionless => NestedQuery.IsConditionless(this);
 		NestedScore? INestedQuery.Score { get; set; }
 		IQueryContainer INestedQuery.Filter { get; set; }
 		IQueryContainer INestedQuery.Query { get; set; }
