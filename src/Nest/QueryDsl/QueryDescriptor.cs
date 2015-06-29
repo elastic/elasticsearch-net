@@ -127,19 +127,6 @@ namespace Nest
 			this._assignSelector(selector, (query, container) => container.Fuzzy = query);
 
 		/// <summary>
-		/// fuzzy query on a numeric field will result in a range query “around” the value using the min_similarity value
-		/// </summary>
-		public QueryContainer FuzzyNumeric(Func<FuzzyNumericQueryDescriptor<T>, IFuzzyNumericQuery> selector) =>
-			this._assignSelector(selector, (query, container) => container.Fuzzy = query);
-
-		/// <summary>
-		/// fuzzy query on a numeric field will result in a range query “around” the value using the min_similarity value
-		/// </summary>
-		/// <param name="selector"></param>
-		public QueryContainer FuzzyDate(Func<FuzzyDateQueryDescriptor<T>, IFuzzyDateQuery> selector) =>
-			this._assignSelector(selector, (query, container) => container.Fuzzy = query);
-
-		/// <summary>
 		/// The default text query is of type boolean. It means that the text provided is analyzed and the analysis 
 		/// process constructs a boolean query from the provided text.
 		/// </summary>

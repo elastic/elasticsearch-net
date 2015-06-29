@@ -829,8 +829,6 @@
     <Compile Include="QueryDsl\Span\SpanQuery.cs" />
     <Compile Include="QueryDsl\Span\Term\SpanTermQuery.cs" />
     <Compile Include="QueryDsl\Specialized\MoreLikeThis\MoreLikeThisQuery.cs" />
-    <Compile Include="QueryDsl\TermLevel\Fuzzy\FuzzyDateQuery.cs" />
-    <Compile Include="QueryDsl\TermLevel\Fuzzy\FuzzyNumericQuery.cs" />
     <Compile Include="QueryDsl\TermLevel\Fuzzy\FuzzyQuery.cs" />
     <Compile Include="QueryDsl\Joining\HasChild\HasChildQuery.cs" />
     <Compile Include="QueryDsl\TermLevel\Range\RangeQuery.cs" />

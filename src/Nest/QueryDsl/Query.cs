@@ -48,16 +48,6 @@ namespace Nest
 			return new QueryDescriptor<T>().Fuzzy(selector);
 		}
 
-		public static QueryContainer FuzzyDate(Func<FuzzyDateQueryDescriptor<T>, IFuzzyDateQuery> selector)
-		{
-			return new QueryDescriptor<T>().FuzzyDate(selector);
-		}
-
-		public static QueryContainer FuzzyNumeric(Func<FuzzyNumericQueryDescriptor<T>, IFuzzyNumericQuery> selector)
-		{
-			return new QueryDescriptor<T>().FuzzyNumeric(selector);
-		}
-
 		public static QueryContainer HasChild<K>(Func<HasChildQueryDescriptor<K>, IHasChildQuery> selector) where K : class
 		{
 			return new QueryDescriptor<T>().HasChild<K>(selector);

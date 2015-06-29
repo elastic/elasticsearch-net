@@ -37,13 +37,8 @@ namespace Nest
 
 			JToken v = null;
 			if (!jo.TryGetValue("value", out v)) return null;
-			
-			IFuzzyQuery fq = null;
-			if (v.Type == JTokenType.Date) fq = new FuzzyDateQueryDescriptor<object>();
-			else if (v.Type == JTokenType.String) fq = new FuzzyQueryDescriptor<object>();
-			else if (v.Type == JTokenType.Integer || v.Type == JTokenType.Float) fq = new FuzzyNumericQueryDescriptor<object>();
-			else return null;
 
+			IFuzzyQuery fq = new FuzzyQueryDescriptor<object>();
 			fq.Field = field;
 			fq.Boost = GetPropValue<double?>(jo, "boost");
 			fq.Fuzziness = GetPropValue<string>(jo, "fuzziness");
@@ -54,21 +49,22 @@ namespace Nest
 			if (!rewriteString.IsNullOrEmpty())
 				fq.Rewrite = rewriteString.ToEnum<RewriteMultiTerm>();
 			
-			if (fq is IStringFuzzyQuery)
+			if (v.Type == JTokenType.String)
 			{
-				var fqs = fq as IStringFuzzyQuery;
-				fqs.PrefixLength = GetPropValue<int?>(jo, "prefix_length"); 
-				fqs.Value = GetPropValue<string>(jo, "value"); 
+				fq.PrefixLength = GetPropValue<int?>(jo, "prefix_length"); 
+				fq.Value = GetPropValue<string>(jo, "value"); 
 			}
-			if (fq is IFuzzyDateQuery)
+			else if (v.Type == JTokenType.Date)
 			{
-				var fdq = fq as IFuzzyDateQuery;
-				fdq.Value = GetPropValue<DateTime?>(jo, "value"); 
+				fq.Value = GetPropValue<DateTime?>(jo, "value"); 
 			}
-			if (fq is IFuzzyNumericQuery)
+			else if (v.Type == JTokenType.Integer || v.Type == JTokenType.Float)
 			{
-				var fnq = fq as IFuzzyNumericQuery;
-				fnq.Value = GetPropValue<double?>(jo, "value");  
+				fq.Value = GetPropValue<double?>(jo, "value");  
+			}
+			else
+			{
+				return null;
 			}
 
 			return fq;
