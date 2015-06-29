@@ -43,7 +43,6 @@ namespace Nest
 		IDictionary<string, IScriptQuery> ScriptFields { get; set; }
 	}
 
-
 	public class InnerHits : IInnerHits
 	{
 		public string Name { get; set; }
@@ -71,6 +70,9 @@ namespace Nest
 	public class InnerHitsDescriptor<T> : IInnerHits where T : class
  	{
 		private IInnerHits Self => this;
+
+		private InnerHitsDescriptor<T> _assign(Action<IInnerHits> assigner) => Fluent.Assign(this, assigner);
+
 		string IInnerHits.Name { get; set; }
 		int? IInnerHits.From { get; set; }
 		int? IInnerHits.Size { get; set; }
@@ -82,94 +84,42 @@ namespace Nest
 		IList<PropertyPathMarker> IInnerHits.FielddataFields { get; set; }
 		IDictionary<string, IScriptQuery> IInnerHits.ScriptFields { get; set; }
 
-		public InnerHitsDescriptor<T> From(int? from)
-		{
-			Self.From = from;
-			return this;
-		}
+		public InnerHitsDescriptor<T> From(int? from) => _assign(a => a.From = from);
 
-		public InnerHitsDescriptor<T> Size(int? size)
-		{
-			Self.Size = size;
-			return this;
-		}
+		public InnerHitsDescriptor<T> Size(int? size) => _assign(a => a.Size = size);
 
-		public InnerHitsDescriptor<T> Name(string name)
-		{
-			Self.Name = name;
-			return this;
-		}
+		public InnerHitsDescriptor<T> Name(string name) => _assign(a => a.Name = name);
 
-		public InnerHitsDescriptor<T> FielddataFields(params string[] fielddataFields)
-		{
-			if (!fielddataFields.HasAny())
-				return this;
-			Self.FielddataFields = fielddataFields.Select(f => (PropertyPathMarker)f).ToList();
-			return this;
-		}
+		public InnerHitsDescriptor<T> FielddataFields(params string[] fielddataFields) =>
+			_assign(a => a.FielddataFields = fielddataFields?.Select(f => (PropertyPathMarker) f).ToListOrNull());
+		
+		public InnerHitsDescriptor<T> FielddataFields(params Expression<Func<T, object>>[] fielddataFields) =>
+			_assign(a => a.FielddataFields = fielddataFields?.Select(f => (PropertyPathMarker) f).ToListOrNull());
 
-		public InnerHitsDescriptor<T> FielddataFields(params Expression<Func<T, object>>[] fielddataFields)
-		{
-			if (!fielddataFields.HasAny())
-				return this;
-			Self.FielddataFields = fielddataFields.Select(e => (PropertyPathMarker)e).ToList();
-			return this;
-		}
+		public InnerHitsDescriptor<T> Explain(bool explain = true) => _assign(a => a.Explain = explain);
 
-		public InnerHitsDescriptor<T> Explain(bool explain = true)
-		{
-			Self.Explain = explain;
-			return this;
-		}
+		public InnerHitsDescriptor<T> Version(bool version = true) => _assign(a => a.Version = version);
 
-		public InnerHitsDescriptor<T> Version(bool version = true)
-		{
-			Self.Version = version;
-			return this;
-		}
-
-		public InnerHitsDescriptor<T> Sort(Func<SortDescriptor<T>, SortDescriptor<T>> sortSelector)
-		{
-			if (sortSelector == null) return this;
-
-			var descriptor = sortSelector(new SortDescriptor<T>());
-
-			Self.Sort = descriptor.InternalSortState.Count == 0 ? null : descriptor.InternalSortState;
-			return this;
-		}
-
+		public InnerHitsDescriptor<T> Sort(Func<SortDescriptor<T>, SortDescriptor<T>> sortSelector) =>
+			_assign(a => a.Sort = sortSelector?.Invoke(new SortDescriptor<T>()).InternalSortState.NullIfEmpty());
+		
 		/// <summary>
 		/// Allow to highlight search results on one or more fields. The implementation uses the either lucene fast-vector-highlighter or highlighter. 
 		/// </summary>
-		public InnerHitsDescriptor<T> Highlight(Action<HighlightDescriptor<T>> highlightDescriptor)
+		public InnerHitsDescriptor<T> Highlight(Func<HighlightDescriptor<T>, IHighlightRequest> highlightSelector) =>
+			_assign(a => a.Highlight = highlightSelector?.Invoke(new HighlightDescriptor<T>()));
+		
+		private static SourceFilter IncludeAllSourceFilter { get; } = new SourceFilter
 		{
-			highlightDescriptor.ThrowIfNull("highlightDescriptor");
-			var d = new HighlightDescriptor<T>();
-			highlightDescriptor(d);
-			Self.Highlight = d;
-			return this;
-		}
+			Exclude = new PropertyPathMarker[] {"*"}
+		};
 
-		public InnerHitsDescriptor<T> Source(bool include = true)
-		{
-			if (!include)
-			{
-				Self.Source = new SourceFilter
-				{
-					Exclude = new PropertyPathMarker[] {"*"}
-				};
-			}
-			else Self.Source = null;
-			return this;
-		}
+		public InnerHitsDescriptor<T> Source(bool include = true) => _assign(a => a.Source = include ? IncludeAllSourceFilter : null);
 
-		public InnerHitsDescriptor<T> Source(Func<SearchSourceDescriptor<T>, SearchSourceDescriptor<T>> sourceSelector)
-		{
-			if (sourceSelector == null) return this;
-			Self.Source = sourceSelector(new SearchSourceDescriptor<T>());
-			return this;
-		}
-
+		public InnerHitsDescriptor<T> Source(Func<SearchSourceDescriptor<T>, SearchSourceDescriptor<T>> sourceSelector) =>
+			_assign(a => a.Source = sourceSelector?.Invoke(new SearchSourceDescriptor<T>()));
+		
+		//TODO ScriptFileds needs an encapsulated descriptor
 		public InnerHitsDescriptor<T> ScriptFields(
 				Func<FluentDictionary<string, Func<ScriptQueryDescriptor<T>, ScriptQueryDescriptor<T>>>,
 				 FluentDictionary<string, Func<ScriptQueryDescriptor<T>, ScriptQueryDescriptor<T>>>> scriptFields)

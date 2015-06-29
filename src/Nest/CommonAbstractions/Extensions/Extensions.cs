@@ -91,7 +91,7 @@ namespace Nest
 			return list != null && list.Any();
 		}
 
-		internal static IEnumerable<T> NullIfEmpty<T>(this IEnumerable<T> list)
+		internal static IList<T> NullIfEmpty<T>(this IEnumerable<T> list)
 		{
 			return list.HasAny() ? list : null;
 		}
@@ -131,6 +131,14 @@ namespace Nest
 				handler(item, idx++);
 		}
 
+		internal static IList<T> ToListOrNull<T>(this IEnumerable<T> xs, Func<T, bool> predicate)
+		{
+			return !xs.HasAny(predicate) ? null : xs.ToList();
+		}
+		internal static IList<T> ToListOrNull<T>(this IEnumerable<T> xs)
+		{
+			return !xs.HasAny() ? null : xs.ToList();
+		}
 
 		internal static IEnumerable<T> EmptyIfNull<T>(this IEnumerable<T> xs)
 		{
