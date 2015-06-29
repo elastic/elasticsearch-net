@@ -40,7 +40,7 @@ namespace Nest
 
 	public class FuzzyStringQuery : FieldNameQuery, IStringFuzzyQuery
 	{
-		bool IQuery.Conditionless { get { return false; } }
+		bool IQuery.Conditionless => IsConditionless(this);
 		public double? Boost { get; set; }
 		public string Fuzziness { get; set; }
 		public RewriteMultiTerm? Rewrite { get; set; }
@@ -50,23 +50,15 @@ namespace Nest
 		public int? PrefixLength { get; set; }
 		public string Value { get; set; }
 
-		protected override void WrapInContainer(IQueryContainer container)
-		{
-			container.Fuzzy = this;
-		}
+		protected override void WrapInContainer(IQueryContainer c) => c.Fuzzy = this;
+		internal static bool IsConditionless(IStringFuzzyQuery q) => q.Field.IsConditionless() || q.Value.IsNullOrEmpty();
 	}
 
 	public class FuzzyQueryDescriptor<T> : IStringFuzzyQuery where T : class
 	{
 		private IStringFuzzyQuery Self => this;
 		string IQuery.Name { get; set; }
-		bool IQuery.Conditionless
-		{
-			get
-			{
-				return Self.Field.IsConditionless() || Self.Value.IsNullOrEmpty();
-			}
-		}
+		bool IQuery.Conditionless => FuzzyStringQuery.IsConditionless(this);
 		PropertyPathMarker IFieldNameQuery.Field { get; set; }
 		double? IFuzzyQuery.Boost { get; set; }
 		string IFuzzyQuery.Fuzziness { get; set; }

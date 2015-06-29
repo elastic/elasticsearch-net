@@ -21,27 +21,19 @@ namespace Nest
 	public class IdsQuery : PlainQuery, IIdsQuery
 	{
 		public string Name { get; set; }
-		bool IQuery.Conditionless { get { return false; } }
+		bool IQuery.Conditionless => IsConditionless(this);
 		public IEnumerable<string> Type { get; set; }
 		public IEnumerable<string> Values { get; set; }
 
-		protected override void WrapInContainer(IQueryContainer container)
-		{
-			container.Ids = this;
-		}
+		protected override void WrapInContainer(IQueryContainer c) => c.Ids = this;
+		internal static bool IsConditionless(IIdsQuery q) => !q.Values.HasAny() || q.Values.All(v => v.IsNullOrEmpty());
 	}
 
 	public class IdsQueryDescriptor : IIdsQuery
 	{
 		private IIdsQuery Self => this;
 		string IQuery.Name { get; set; }
-		bool IQuery.Conditionless
-		{
-			get
-			{
-				return !Self.Values.HasAny() || Self.Values.All(s=>s.IsNullOrEmpty());
-			}
-		}
+		bool IQuery.Conditionless => IdsQuery.IsConditionless(this);
 		IEnumerable<string> IIdsQuery.Values { get; set; }
 		IEnumerable<string> IIdsQuery.Type { get; set; }
 

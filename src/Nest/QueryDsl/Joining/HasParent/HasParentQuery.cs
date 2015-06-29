@@ -31,29 +31,21 @@ namespace Nest
 	public class HasParentQuery : PlainQuery, IHasParentQuery
 	{
 		public string Name { get; set; }
-		bool IQuery.Conditionless { get { return false; } }
+		bool IQuery.Conditionless => IsConditionless(this);
 		public TypeNameMarker Type { get; set; }
 		public ParentScoreType? ScoreType { get; set; }
 		public IQueryContainer Query { get; set; }
 		public IInnerHits InnerHits { get; set; }
 
-		protected override void WrapInContainer(IQueryContainer container)
-		{
-			container.HasParent = this;
-		}
+		protected override void WrapInContainer(IQueryContainer c) => c.HasParent = this;
+		internal static bool IsConditionless(IHasParentQuery q) => q.Query == null || q.Query.IsConditionless;
 	}
 
 	public class HasParentQueryDescriptor<T> : IHasParentQuery where T : class
 	{
 		private IHasParentQuery Self { get { return this; }}
 		string IQuery.Name { get; set; }
-		bool IQuery.Conditionless
-		{
-			get
-			{
-				return Self.Query == null || Self.Query.IsConditionless;
-			}
-		}
+		bool IQuery.Conditionless => HasParentQuery.IsConditionless(this);
 		TypeNameMarker IHasParentQuery.Type { get; set; }
 		ParentScoreType? IHasParentQuery.ScoreType { get; set; }
 		IInnerHits IHasParentQuery.InnerHits { get; set; }

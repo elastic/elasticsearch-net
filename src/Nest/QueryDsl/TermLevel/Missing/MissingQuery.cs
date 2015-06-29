@@ -21,19 +21,18 @@ namespace Nest
 
 	public class MissingQuery : FieldNameQuery, IMissingQuery
 	{
-		public string Name { get; set; }
-		public bool Conditionless => QueryCondition.IsConditionless(this);
-		public PropertyPathMarker Field { get; set; }
+		bool IQuery.Conditionless => IsConditionless(this);
 		public bool? Existence { get; set; }
 		public bool? NullValue { get; set; }
 		protected override void WrapInContainer(IQueryContainer container) => container.Missing = this;
+		internal static bool IsConditionless(IMissingQuery q) => q.Field.IsConditionless();
 	}
 
 	public class MissingQueryDescriptor<T> : IMissingQuery where T : class
 	{
 		private IMissingQuery Self => this;
 		string IQuery.Name { get; set; }
-		bool IQuery.Conditionless => QueryCondition.IsConditionless(this);
+		bool IQuery.Conditionless => MissingQuery.IsConditionless(this);
 		PropertyPathMarker IFieldNameQuery.Field { get; set;}
 		bool? IMissingQuery.Existence { get; set; }
 		bool? IMissingQuery.NullValue { get; set; }

@@ -16,7 +16,7 @@ namespace Nest
 
 	public class FuzzyNumericQuery : FieldNameQuery, IFuzzyNumericQuery
 	{
-		bool IQuery.Conditionless { get { return false; } }
+		bool IQuery.Conditionless => IsConditionless(this);
 		public double? Boost { get; set; }
 		public string Fuzziness { get; set; }
 		public RewriteMultiTerm? Rewrite { get; set; }
@@ -25,23 +25,15 @@ namespace Nest
 		public bool? UnicodeAware { get; set; }
 		public double? Value { get; set; }
 
-		protected override void WrapInContainer(IQueryContainer container)
-		{
-			container.Fuzzy = this;
-		}
+		protected override void WrapInContainer(IQueryContainer q) => q.Fuzzy = this;
+		internal static bool IsConditionless(IFuzzyNumericQuery q) => q.Field.IsConditionless() || q.Value == null;
 	}
 
 	public class FuzzyNumericQueryDescriptor<T> : IFuzzyNumericQuery where T : class
 	{
 		private IFuzzyNumericQuery Self => this;
 		string IQuery.Name { get; set; }
-		bool IQuery.Conditionless
-		{
-			get
-			{
-				return Self.Field.IsConditionless() || Self.Value == null;
-			}
-		}
+		bool IQuery.Conditionless => FuzzyNumericQuery.IsConditionless(this);
 		PropertyPathMarker IFieldNameQuery.Field { get; set; }
 		double? IFuzzyQuery.Boost { get; set; }
 		int? IFuzzyQuery.MaxExpansions { get; set; }

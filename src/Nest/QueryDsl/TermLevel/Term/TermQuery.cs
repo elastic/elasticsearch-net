@@ -15,14 +15,12 @@ namespace Nest
 
 	public class TermQuery : FieldNameQuery, ITermQuery
 	{
-		bool IQuery.Conditionless { get { return false; } }
+		bool IQuery.Conditionless => IsConditionless(this);
 		public object Value { get; set; }
 		public double? Boost { get; set; }
 
-		protected override void WrapInContainer(IQueryContainer container)
-		{
-			container.Term = this;
-		}
+		protected override void WrapInContainer(IQueryContainer c) => c.Term = this;
+		internal static bool IsConditionless(ITermQuery q) => q.Value == null || q.Value.ToString().IsNullOrEmpty() || q.Field.IsConditionless();
 	}
 
 	public class TermQueryDescriptorBase<TDescriptor, T> : ITermQuery
@@ -31,13 +29,7 @@ namespace Nest
 	{
 		private ITermQuery Self => this;
 		string IQuery.Name { get; set; }
-		bool IQuery.Conditionless
-		{
-			get
-			{
-				return Self.Value == null || Self.Value.ToString().IsNullOrEmpty() || Self.Field.IsConditionless();
-			}
-		}
+		bool IQuery.Conditionless => TermQuery.IsConditionless(this);
 		PropertyPathMarker IFieldNameQuery.Field { get; set; }
 		object ITermQuery.Value { get; set; }
 		double? ITermQuery.Boost { get; set; }

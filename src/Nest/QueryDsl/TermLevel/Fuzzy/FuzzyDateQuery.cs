@@ -16,7 +16,7 @@ namespace Nest
 	
 	public class FuzzyDateQuery : FieldNameQuery, IFuzzyDateQuery
 	{
-		bool IQuery.Conditionless { get { return false; } }
+		bool IQuery.Conditionless => IsConditionless(this);
 		public double? Boost { get; set; }
 		public string Fuzziness { get; set; }
 		public RewriteMultiTerm? Rewrite { get; set; }
@@ -25,23 +25,15 @@ namespace Nest
 		public bool? UnicodeAware { get; set; }
 		public DateTime? Value { get; set; }
 
-		protected override void WrapInContainer(IQueryContainer container)
-		{
-			container.Fuzzy = this;
-		}
+		protected override void WrapInContainer(IQueryContainer c) => c.Fuzzy = this;
+		internal static bool IsConditionless(IFuzzyDateQuery q) => q.Field.IsConditionless() || q.Value == null;
 	}
 
 	public class FuzzyDateQueryDescriptor<T> : IFuzzyDateQuery where T : class
 	{
 		private IFuzzyDateQuery Self => this;
 		string IQuery.Name { get; set; }
-		bool IQuery.Conditionless
-		{
-			get
-			{
-				return Self.Field.IsConditionless() || Self.Value == null;
-			}
-		}
+		bool IQuery.Conditionless => FuzzyDateQuery.IsConditionless(this);
 		PropertyPathMarker IFieldNameQuery.Field { get; set; }
 		double? IFuzzyQuery.Boost { get; set; }
 		int? IFuzzyQuery.MaxExpansions { get; set; }

@@ -78,7 +78,7 @@ namespace Nest
 	public class MoreLikeThisQuery : PlainQuery, IMoreLikeThisQuery
 	{
 		public string Name { get; set; }
-		bool IQuery.Conditionless { get { return false; } }
+		bool IQuery.Conditionless => IsConditionless(this);
 		public IEnumerable<PropertyPathMarker> Fields { get; set; }
 		public string LikeText { get; set; }
 		public double? TermMatchPercentage { get; set; }
@@ -97,9 +97,12 @@ namespace Nest
 		public IEnumerable<IMultiGetOperation> Documents { get; set; }
 		public bool? Include { get; set; }
 
-		protected override void WrapInContainer(IQueryContainer container)
+		protected override void WrapInContainer(IQueryContainer c) => c.MoreLikeThis = this;
+		internal static bool IsConditionless(IMoreLikeThisQuery q)
 		{
-			container.MoreLikeThis = this;
+			return q.LikeText.IsNullOrEmpty()
+				&& (q.Ids == null || !q.Ids.Any())
+				&& (q.Documents == null || !q.Documents.Any());
 		}
 	}
 
@@ -107,15 +110,7 @@ namespace Nest
 	{
 		private IMoreLikeThisQuery Self { get { return this; }}
 		string IQuery.Name { get; set; }
-		bool IQuery.Conditionless
-		{
-			get
-			{
-				return this.Self.LikeText.IsNullOrEmpty()
-					&& (this.Self.Ids == null || !this.Self.Ids.Any())
-					&& (this.Self.Documents == null || !this.Self.Documents.Any());
-			}
-		}
+		bool IQuery.Conditionless => MoreLikeThisQuery.IsConditionless(this);
 		IEnumerable<PropertyPathMarker> IMoreLikeThisQuery.Fields { get; set; }
 		string IMoreLikeThisQuery.LikeText { get; set; }
 		double? IMoreLikeThisQuery.TermMatchPercentage { get; set; }

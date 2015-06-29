@@ -236,8 +236,7 @@
     <Compile Include="QueryDsl\Geo\Distance\GeoDistanceQuery.cs" />
     <Compile Include="QueryDsl\Geo\DistanceRange\GeoDistanceRangeQuery.cs" />
     <Compile Include="QueryDsl\Geo\HashCell\GeoHashCellQuery.cs" />
-    <Compile Include="QueryDsl\Geo\GeoPolygonQuery.cs" />
-    <Compile Include="QueryDsl\QueryCondition.cs" />
+    <Compile Include="QueryDsl\Geo\Polygon\GeoPolygonQuery.cs" />
     <Compile Include="QueryDsl\QueryDescriptor.cs" />
     <Compile Include="CommonAbstractions\Fluent.cs" />
     <Compile Include="Search\Suggesters\SuggestContextMapping.cs" />

@@ -18,26 +18,18 @@ namespace Nest
 
 	public class GeoShapePointQuery : FieldNameQuery, IGeoShapePointQuery
 	{
-		bool IQuery.Conditionless { get { return false; } }
+		bool IQuery.Conditionless => IsConditionless(this);
 		public IPointGeoShape Shape { get; set; }
 
-		protected override void WrapInContainer(IQueryContainer container)
-		{
-			container.GeoShape = this;
-		}
+		protected override void WrapInContainer(IQueryContainer c) => c.GeoShape = this;
+		internal static bool IsConditionless(IGeoShapePointQuery q) => q.Field.IsConditionless() || q.Shape == null || !q.Shape.Coordinates.HasAny();
 	}
 
 	public class GeoShapePointQueryDescriptor<T> : IGeoShapePointQuery where T : class
 	{
 		private IGeoShapePointQuery Self { get { return this; }}
 		string IQuery.Name { get; set; }
-		bool IQuery.Conditionless
-		{
-			get
-			{
-				return Self.Field.IsConditionless() || Self.Shape == null || !Self.Shape.Coordinates.HasAny();
-			}
-		}
+		bool IQuery.Conditionless => GeoShapePointQuery.IsConditionless(this);
 		PropertyPathMarker IFieldNameQuery.Field { get; set; }
 		IPointGeoShape IGeoShapePointQuery.Shape { get; set; }
 		

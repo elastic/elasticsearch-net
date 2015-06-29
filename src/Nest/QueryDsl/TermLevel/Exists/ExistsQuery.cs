@@ -15,19 +15,17 @@ namespace Nest
 
 	public class ExistsQuery : FieldNameQuery, IExistsQuery
 	{
-		bool IQuery.Conditionless { get { return QueryCondition.IsConditionless(this); } }
+		bool IQuery.Conditionless => IsConditionless(this);
 
-		protected override void WrapInContainer(IQueryContainer container)
-		{
-			container.Exists = this;
-		}
+		protected override void WrapInContainer(IQueryContainer c) => c.Exists = this;
+		internal static bool IsConditionless(IExistsQuery q) => q.Field.IsConditionless();
 	}
 
 	public class ExistsQueryDescriptor<T> : IExistsQuery where T : class
 	{
 		private IExistsQuery Self => this;
 		string IQuery.Name { get; set; }
-		bool IQuery.Conditionless { get { return QueryCondition.IsConditionless(this); } }
+		bool IQuery.Conditionless => ExistsQuery.IsConditionless(this);
 		PropertyPathMarker IFieldNameQuery.Field { get; set;}
 
 		public ExistsQueryDescriptor<T> Field (string field)

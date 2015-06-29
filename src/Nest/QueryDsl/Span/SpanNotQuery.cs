@@ -33,7 +33,7 @@ namespace Nest
 	public class SpanNotQuery : PlainQuery, ISpanNotQuery
 	{
 		public string Name { get; set; }
-		bool IQuery.Conditionless { get { return false; } }
+		bool IQuery.Conditionless => IsConditionless(this);
 		public ISpanQuery Include { get; set; }
 		public ISpanQuery Exclude { get; set; }
 		public double? Boost { get; set; }
@@ -41,9 +41,16 @@ namespace Nest
 		public int? Post { get; set; }
 		public int? Dist { get; set; }
 
-		protected override void WrapInContainer(IQueryContainer container)
+		protected override void WrapInContainer(IQueryContainer c) => c.SpanNot = this;
+		internal static bool IsConditionless(ISpanNotQuery q)
 		{
-			container.SpanNot = this;
+			var exclude = q.Exclude as IQuery;
+			var include = q.Include as IQuery;
+
+			return (exclude == null && include == null)
+				|| (include == null && exclude.Conditionless)
+				|| (exclude == null && include.Conditionless)
+				|| (exclude != null && exclude.Conditionless && include != null && include.Conditionless);
 		}
 	}
 
@@ -51,19 +58,7 @@ namespace Nest
 	{
 		private ISpanNotQuery Self => this;
 		string IQuery.Name { get; set; }
-		bool IQuery.Conditionless
-		{
-			get
-			{
-				var excludeQuery = Self.Exclude as IQuery;
-				var includeQuery = Self.Include as IQuery;
-
-				return excludeQuery == null && includeQuery == null
-					|| (includeQuery == null && excludeQuery.Conditionless)
-					|| (excludeQuery == null && includeQuery.Conditionless)
-					|| (excludeQuery != null && excludeQuery.Conditionless && includeQuery != null && includeQuery.Conditionless);
-			}
-		}
+		bool IQuery.Conditionless => SpanNotQuery.IsConditionless(this);
 		ISpanQuery ISpanNotQuery.Include { get; set; }
 		ISpanQuery ISpanNotQuery.Exclude { get; set; }
 		double? ISpanNotQuery.Boost { get; set; }

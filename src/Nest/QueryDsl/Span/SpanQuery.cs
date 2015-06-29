@@ -33,35 +33,35 @@ namespace Nest
 	public class SpanQuery : ISpanQuery
 	{
 		public string Name { get; set; }
-		bool IQuery.Conditionless { get { return false; } }
+		bool IQuery.Conditionless => IsConditionless(this);
 		public ISpanTermQuery SpanTermQueryDescriptor { get; set; }
 		public ISpanFirstQuery SpanFirst { get; set; }
 		public ISpanNearQuery SpanNear { get; set; }
 		public ISpanOrQuery SpanOr { get; set; }
 		public ISpanNotQuery SpanNot { get; set; }
 		public ISpanMultiTermQuery SpanMultiTerm { get; set; }
+
+		internal static bool IsConditionless(ISpanQuery q)
+		{
+			var queries = new[]
+			{
+				q.SpanTermQueryDescriptor as IQuery,
+				q.SpanFirst as IQuery,
+				q.SpanNear as IQuery,
+				q.SpanOr as IQuery,
+				q.SpanNot as IQuery,
+				q.SpanMultiTerm as IQuery
+			};
+
+			return queries.All(sq => sq == null || sq.Conditionless);
+		}
 	}
 
 	public class SpanQuery<T> : ISpanQuery where T : class
 	{
 		private ISpanQuery Self => this;
 		string IQuery.Name { get; set; }
-		bool IQuery.Conditionless
-		{
-			get
-			{
-				var queries = new[]
-				{
-					Self.SpanTermQueryDescriptor as IQuery,
-					Self.SpanFirst as IQuery,
-					Self.SpanNear as IQuery,
-					Self.SpanOr as IQuery,
-					Self.SpanNot as IQuery,
-					Self.SpanMultiTerm as IQuery
-				};
-				return queries.All(q => q == null || q.Conditionless);
-			}
-		}
+		bool IQuery.Conditionless => SpanQuery.IsConditionless(this);
 		ISpanTermQuery ISpanQuery.SpanTermQueryDescriptor { get; set; }
 		ISpanFirstQuery ISpanQuery.SpanFirst { get; set; }
 		ISpanNearQuery ISpanQuery.SpanNear { get; set; }

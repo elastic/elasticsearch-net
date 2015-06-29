@@ -23,29 +23,20 @@ namespace Nest
 	public class SpanFirstQuery : PlainQuery, ISpanFirstQuery
 	{
 		public string Name { get; set; }
-		bool IQuery.Conditionless { get { return false; } }
+		bool IQuery.Conditionless => IsConditionless(this);
 		public ISpanQuery Match { get; set; }
 		public int? End { get; set; }
 	    public double? Boost { get; set; }
 
-		protected override void WrapInContainer(IQueryContainer container)
-		{
-			container.SpanFirst = this;
-		}
+		protected override void WrapInContainer(IQueryContainer c) => c.SpanFirst = this;
+		internal static bool IsConditionless(ISpanFirstQuery q) => q.Match == null || q.Match.Conditionless;
 	}
 
 	public class SpanFirstQueryDescriptor<T> : ISpanFirstQuery where T : class
 	{
 		private ISpanFirstQuery Self { get { return this; }}
 		string IQuery.Name { get; set; }
-		bool IQuery.Conditionless
-		{
-			get
-			{
-				var query = Self.Match as IQuery;
-				return query != null && (Self.Match == null || query.Conditionless);
-			}
-		}	
+		bool IQuery.Conditionless => SpanFirstQuery.IsConditionless(this);	
 		ISpanQuery ISpanFirstQuery.Match { get; set; }
 		int? ISpanFirstQuery.End { get; set; }
         double? ISpanFirstQuery.Boost { get; set; }

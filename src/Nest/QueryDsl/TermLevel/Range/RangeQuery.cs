@@ -36,7 +36,7 @@ namespace Nest
 
 	public class RangeQuery : FieldNameQuery, IRangeQuery
 	{
-		bool IQuery.Conditionless { get { return false; } }
+		bool IQuery.Conditionless => IsConditionless(this);
 		public string GreaterThanOrEqualTo { get; set; }
 		public string LowerThanOrEqualTo { get; set; }
 		public string GreaterThan { get; set; }
@@ -46,9 +46,15 @@ namespace Nest
 		public string TimeZone { get; set; }
 		public string Format { get; set; }
 
-		protected override void WrapInContainer(IQueryContainer container)
+		protected override void WrapInContainer(IQueryContainer c) => c.Range = this;
+
+		internal static bool IsConditionless(IRangeQuery q)
 		{
-			container.Range = this;
+			return q.Field.IsConditionless() 
+				|| (q.GreaterThanOrEqualTo == null
+				&& q.LowerThanOrEqualTo == null
+				&& q.GreaterThan == null
+				&& q.LowerThan == null);
 		}
 	}
 
@@ -57,19 +63,7 @@ namespace Nest
 	{
 		private IRangeQuery Self => this;
 		string IQuery.Name { get; set; }
-		bool IQuery.Conditionless
-		{
-			get
-			{
-				return this.Self.Field.IsConditionless() 
-					|| (
-						this.Self.GreaterThanOrEqualTo == null
-						&& this.Self.LowerThanOrEqualTo == null
-						&& this.Self.GreaterThan == null
-						&& this.Self.LowerThan == null
-					);
-			}
-		}
+		bool IQuery.Conditionless => RangeQuery.IsConditionless(this);
 		string IRangeQuery.GreaterThanOrEqualTo { get; set; }
 		string IRangeQuery.LowerThanOrEqualTo { get; set; }
 		string IRangeQuery.GreaterThan { get; set; }
