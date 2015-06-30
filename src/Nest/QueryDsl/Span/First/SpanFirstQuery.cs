@@ -22,7 +22,6 @@ namespace Nest
 
 	public class SpanFirstQuery : PlainQuery, ISpanFirstQuery
 	{
-		public string Name { get; set; }
 		bool IQuery.Conditionless => IsConditionless(this);
 		public ISpanQuery Match { get; set; }
 		public int? End { get; set; }

@@ -35,7 +35,6 @@ namespace Nest
 
 	public class BoolQuery : PlainQuery, IBoolQuery
 	{
-		public string Name { get; set; }
 		bool IQuery.Conditionless => IsConditionless(this);
 		public IEnumerable<IQueryContainer> Must { get; set; }
 		public IEnumerable<IQueryContainer> MustNot { get; set; }

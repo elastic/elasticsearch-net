@@ -4,6 +4,8 @@ namespace Nest
 {
 	public abstract class PlainQuery
 	{
+		public string Name { get; set; }
+
 		public static bool operator false(PlainQuery a)
 		{
 			return false;

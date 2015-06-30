@@ -18,7 +18,6 @@ namespace Nest
 
 	public class SpanOrQuery : PlainQuery, ISpanOrQuery
 	{
-		public string Name { get; set; }
 		bool IQuery.Conditionless => IsConditionless(this);
 		public IEnumerable<ISpanQuery> Clauses { get; set; }
         public double? Boost { get; set; }

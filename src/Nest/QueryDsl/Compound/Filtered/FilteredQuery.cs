@@ -21,7 +21,6 @@ namespace Nest
 
 	public class FilteredQuery : PlainQuery, IFilteredQuery
 	{
-		public string Name { get; set; }
 		bool IQuery.Conditionless => IsConditionless(this);
 		public IQueryContainer Query { get; set; }
 		public IQueryContainer Filter { get; set; }

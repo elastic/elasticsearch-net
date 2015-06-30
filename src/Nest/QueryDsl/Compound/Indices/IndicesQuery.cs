@@ -39,7 +39,6 @@ namespace Nest
 
 	public class IndicesQuery : PlainQuery, IIndicesQuery
 	{
-		public string Name { get; set; }
 		bool IQuery.Conditionless => IsConditionless(this);
 		public IQueryContainer Query { get; set; }
 		public IQueryContainer NoMatchQuery { get; set; }

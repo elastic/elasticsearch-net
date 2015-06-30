@@ -15,7 +15,6 @@ namespace Nest
 
 	public class SpanMultiTermQuery : PlainQuery, ISpanMultiTermQuery
 	{
-		public string Name { get; set; }
 		bool IQuery.Conditionless => IsConditionless(this);
 		public IQueryContainer Match { get; set; }
 

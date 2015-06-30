@@ -28,7 +28,6 @@ namespace Nest
 
 	public class SpanNearQuery : PlainQuery, ISpanNearQuery
 	{
-		public string Name { get; set; }
 		bool IQuery.Conditionless { get { return false; } }
 		public IEnumerable<ISpanQuery> Clauses { get; set; }
 		public int? Slop { get; set; }

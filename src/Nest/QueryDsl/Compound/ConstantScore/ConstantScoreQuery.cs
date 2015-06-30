@@ -20,7 +20,6 @@ namespace Nest
 
 	public class ConstantScoreQuery : PlainQuery, IConstantScoreQuery
 	{
-		public string Name { get; set; }
 		bool IQuery.Conditionless => IsConditionless(this);
 		public string Lang { get; set; }
 		public string Script { get; set; }

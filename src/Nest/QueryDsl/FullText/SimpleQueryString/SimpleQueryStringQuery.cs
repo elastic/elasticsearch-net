@@ -47,7 +47,6 @@ namespace Nest
 
 	public class SimpleQueryStringQuery : PlainQuery, ISimpleQueryStringQuery
 	{
-		public string Name { get; set; }
 		bool IQuery.Conditionless => IsConditionless(this);
 		public string Query { get; set; }
 		public PropertyPathMarker DefaultField { get; set; }

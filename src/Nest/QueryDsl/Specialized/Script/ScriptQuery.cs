@@ -30,7 +30,6 @@ namespace Nest
 
 	public class ScriptQuery : PlainQuery, IScriptQuery
 	{
-		public string Name { get; set; }
 		bool IQuery.Conditionless => IsConditionless(this);
 		public string Script { get; set; }
 		public string ScriptId { get; set; }

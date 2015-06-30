@@ -34,7 +34,6 @@ namespace Nest
 
 	public class NestedQuery : PlainQuery, INestedQuery
 	{
-		public string Name { get; set; }
 		bool IQuery.Conditionless => IsConditionless(this);
 		public NestedScore? Score { get; set; }
 		public IQueryContainer Filter { get; set; }

@@ -16,7 +16,6 @@ namespace Nest
 
 	public class TypeQuery : PlainQuery, ITypeQuery
 	{
-		public string Name { get; set; }
 		bool IQuery.Conditionless => IsConditionless(this);
 		public TypeNameMarker Value { get; set; }
 

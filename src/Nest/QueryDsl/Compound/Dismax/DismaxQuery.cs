@@ -23,7 +23,6 @@ namespace Nest
 
 	public class DismaxQuery : PlainQuery, IDisMaxQuery
 	{
-		public string Name { get; set; }
 		bool IQuery.Conditionless => IsConditionless(this);
 		public double? TieBreaker { get; set; }
 		public double? Boost { get; set; }

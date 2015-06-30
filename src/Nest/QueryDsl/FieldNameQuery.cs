@@ -13,7 +13,6 @@ namespace Nest
 	public abstract class FieldNameQuery : PlainQuery, IFieldNameQuery
 	{
 		public virtual bool Conditionless => false;
-		public string Name { get; set; }
 		public PropertyPathMarker Field { get; set; }
 	}
 }

@@ -49,7 +49,6 @@ namespace Nest
 	public class FunctionScoreQuery : PlainQuery, IFunctionScoreQuery
 	{
 		bool IQuery.Conditionless => IsConditionless(this);
-		public string Name { get; set; }
 		public IEnumerable<IFunctionScoreFunction> Functions { get; set; }
 		public IQueryContainer Query { get; set; }
 		public IQueryContainer Filter { get; set; }

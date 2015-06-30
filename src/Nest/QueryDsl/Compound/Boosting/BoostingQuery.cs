@@ -23,7 +23,6 @@ namespace Nest
 
 	public class BoostingQuery : PlainQuery, IBoostingQuery
 	{
-		public string Name { get; set; }
 		bool IQuery.Conditionless => IsConditionless(this);
 		public QueryContainer PositiveQuery { get; set; }
 		public QueryContainer NegativeQuery { get; set; }

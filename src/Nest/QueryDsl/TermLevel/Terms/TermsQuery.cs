@@ -22,7 +22,6 @@ namespace Nest
 
 	public class TermsQuery : PlainQuery, ITermsQuery
 	{
-		public string Name { get; set; }
 		bool IQuery.Conditionless => IsConditionless(this);
 		public PropertyPathMarker Field { get; set; }
 		public string MinimumShouldMatch { get; set; }

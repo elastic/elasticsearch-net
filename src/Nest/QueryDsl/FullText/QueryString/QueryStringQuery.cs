@@ -80,7 +80,6 @@ namespace Nest
 
 	public class QueryStringQuery : PlainQuery, IQueryStringQuery
 	{
-		public string Name { get; set; }
 		bool IQuery.Conditionless => IsConditionless(this);
 		public string Query { get; set; }
 		public string Timezone { get; set; }
