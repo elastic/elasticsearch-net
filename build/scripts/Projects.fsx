@@ -14,8 +14,6 @@ type ProjectName(msbuild: string) =
             Some "Elasticsearch.Net - oficial low level elasticsearch client"
         | f when f = "nest" -> 
             Some "NEST - oficial high level elasticsearch client"
-        | f when f = "elasticsearch.net.jsonnet" -> 
-            Some "IElasticsearchSerializer implementation that allows you to use Json.NET with the lowlevel client"
         | _ -> None
 
 type DotNetFramework = 
@@ -28,8 +26,7 @@ type DotNetFramework =
 type DotNet40Project =
     | Nest
     | ElasticsearchNet
-    | ElasticsearchNetJsonNet
-    static member All = [ElasticsearchNet; ElasticsearchNetJsonNet;  Nest] 
+    static member All = [ElasticsearchNet;  Nest] 
 
 type DotNetProject = 
     | DotNet40Project of DotNet40Project
@@ -44,7 +41,6 @@ type DotNetProject =
             match net40 with
             | Nest -> ProjectName "Nest"
             | ElasticsearchNet -> ProjectName "Elasticsearch.Net"
-            | ElasticsearchNetJsonNet -> ProjectName "Elasticsearch.Net.JsonNet"
    
     static member TryFindName (name: string) =
         DotNetProject.All
