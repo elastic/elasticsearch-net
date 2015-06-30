@@ -54,12 +54,11 @@ namespace Nest
 		internal static bool IsConditionless(ICommonTermsQuery q) => q.Field.IsConditionless() || q.Query.IsNullOrEmpty();
 	}
 
-	public class CommonTermsQueryDescriptor<T> : ICommonTermsQuery where T : class
+	public class CommonTermsQueryDescriptor<T> 
+		: FieldNameQueryDescriptor<CommonTermsQueryDescriptor<T>, ICommonTermsQuery, T>
+		, ICommonTermsQuery 
+		where T : class
 	{
-		ICommonTermsQuery Self => this;
-
-		CommonTermsQueryDescriptor<T> _assign(Action<ICommonTermsQuery> assigner) => Fluent.Assign(this, assigner);
-
 		string IQuery.Name { get; set; }
 		bool IQuery.Conditionless => CommonTermsQuery.IsConditionless(this);
 		string ICommonTermsQuery.Query { get; set; }
@@ -73,40 +72,30 @@ namespace Nest
 		bool? ICommonTermsQuery.DisableCoord { get; set; }
 
 		//<inheritdoc/>
-		public CommonTermsQueryDescriptor<T> Name(string name) => _assign(a => a.Name = name);
+		public CommonTermsQueryDescriptor<T> Boost(double boost) => Assign(a=>a.Boost = boost);
+
+			//<inheritdoc/>
+		public CommonTermsQueryDescriptor<T> Query(string query) => Assign(a => a.Query = query);
 
 		//<inheritdoc/>
-		public CommonTermsQueryDescriptor<T> Boost(double boost) => _assign(a=>a.Boost = boost);
+		public CommonTermsQueryDescriptor<T> HighFrequencyOperator(Operator op) => Assign(a => a.HighFrequencyOperator = op);
 
 		//<inheritdoc/>
-		public CommonTermsQueryDescriptor<T> OnField(string field) => _assign(a => a.Field = field);
-
-		//<inheritdoc/>
-		public CommonTermsQueryDescriptor<T> OnField(Expression<Func<T, object>> objectPath) =>
-			_assign(a => a.Field = objectPath);
-
-		//<inheritdoc/>
-		public CommonTermsQueryDescriptor<T> Query(string query) => _assign(a => a.Query = query);
-
-		//<inheritdoc/>
-		public CommonTermsQueryDescriptor<T> HighFrequencyOperator(Operator op) => _assign(a => a.HighFrequencyOperator = op);
-
-		//<inheritdoc/>
-		public CommonTermsQueryDescriptor<T> Analyzer(string analyzer) => _assign(a => a.Analyzer = analyzer);
+		public CommonTermsQueryDescriptor<T> Analyzer(string analyzer) => Assign(a => a.Analyzer = analyzer);
 
 		//<inheritdoc/>
 		public CommonTermsQueryDescriptor<T> CutoffFrequency(double cutOffFrequency) => 
-			_assign(a => a.CutoffFrequency = cutOffFrequency);
+			Assign(a => a.CutoffFrequency = cutOffFrequency);
 
 		//<inheritdoc/>
 		public CommonTermsQueryDescriptor<T> MinimumShouldMatch(string minimumShouldMatch) =>
-			_assign(a => a.MinimumShouldMatch = minimumShouldMatch);
+			Assign(a => a.MinimumShouldMatch = minimumShouldMatch);
 
 		//<inheritdoc/>
 		public CommonTermsQueryDescriptor<T> MinimumShouldMatch(int minimumShouldMatch) =>
-			_assign(a=>a.MinimumShouldMatch = minimumShouldMatch.ToString(CultureInfo.InvariantCulture));
+			Assign(a=>a.MinimumShouldMatch = minimumShouldMatch.ToString(CultureInfo.InvariantCulture));
 
 		//<inheritdoc/>
-		public CommonTermsQueryDescriptor<T> DisableCoord(bool disable = true) => _assign(a => a.DisableCoord = disable);
+		public CommonTermsQueryDescriptor<T> DisableCoord(bool disable = true) => Assign(a => a.DisableCoord = disable);
 	}
 }
