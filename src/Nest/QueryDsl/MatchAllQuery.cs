@@ -18,7 +18,7 @@ namespace Nest
 		string NormField { get; }
 	}
 
-	public class MatchAllQuery : PlainQuery, IMatchAllQuery
+	public class MatchAllQuery : Query, IMatchAllQuery
 	{
 		public double? Boost { get; internal set; }
 		public string NormField { get; internal set; }

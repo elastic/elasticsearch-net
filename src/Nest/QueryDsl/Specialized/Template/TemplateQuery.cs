@@ -16,7 +16,7 @@ namespace Nest
 		IDictionary<string, object> Params { get; set; } 
 	}
 
-	public class TemplateQuery : PlainQuery, ITemplateQuery
+	public class TemplateQuery : Query, ITemplateQuery
 	{
 		public bool Conditionless => IsConditionless(this);
 		public string Query { get; set; }

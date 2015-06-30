@@ -16,7 +16,7 @@ namespace Nest
         double? Boost { get; set; }
 	}
 
-	public class SpanOrQuery : PlainQuery, ISpanOrQuery
+	public class SpanOrQuery : Query, ISpanOrQuery
 	{
 		bool IQuery.Conditionless => IsConditionless(this);
 		public IEnumerable<ISpanQuery> Clauses { get; set; }

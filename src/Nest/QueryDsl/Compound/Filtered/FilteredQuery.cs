@@ -19,7 +19,7 @@ namespace Nest
 		IQueryContainer Filter { get; set; }
 	}
 
-	public class FilteredQuery : PlainQuery, IFilteredQuery
+	public class FilteredQuery : Query, IFilteredQuery
 	{
 		bool IQuery.Conditionless => IsConditionless(this);
 		public IQueryContainer Query { get; set; }

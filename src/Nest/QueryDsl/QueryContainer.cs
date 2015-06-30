@@ -264,14 +264,14 @@ namespace Nest
 
 		public QueryContainer() {}
 	
-		public QueryContainer(PlainQuery query)
+		public QueryContainer(Query query)
 		{
-			PlainQuery.ToContainer(query, this);
+			Query.ToContainer(query, this);
 		}
 	
-		public static QueryContainer From(PlainQuery query)
+		public static QueryContainer From(Query query)
 		{
-			return PlainQuery.ToContainer(query);
+			return Query.ToContainer(query);
 		}
 
 		public static QueryContainer operator &(QueryContainer leftContainer, QueryContainer rightContainer)

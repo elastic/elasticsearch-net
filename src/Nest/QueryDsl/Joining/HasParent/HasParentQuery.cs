@@ -28,7 +28,7 @@ namespace Nest
 
 	}
 
-	public class HasParentQuery : PlainQuery, IHasParentQuery
+	public class HasParentQuery : Query, IHasParentQuery
 	{
 		bool IQuery.Conditionless => IsConditionless(this);
 		public TypeNameMarker Type { get; set; }

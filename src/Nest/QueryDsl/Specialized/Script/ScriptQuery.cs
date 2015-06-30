@@ -28,7 +28,7 @@ namespace Nest
 		string Lang { get; set; }
 	}
 
-	public class ScriptQuery : PlainQuery, IScriptQuery
+	public class ScriptQuery : Query, IScriptQuery
 	{
 		bool IQuery.Conditionless => IsConditionless(this);
 		public string Script { get; set; }

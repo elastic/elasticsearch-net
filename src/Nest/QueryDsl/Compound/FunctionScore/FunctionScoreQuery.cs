@@ -46,7 +46,7 @@ namespace Nest
 		float? MinScore { get; set; }
 	}
 
-	public class FunctionScoreQuery : PlainQuery, IFunctionScoreQuery
+	public class FunctionScoreQuery : Query, IFunctionScoreQuery
 	{
 		bool IQuery.Conditionless => IsConditionless(this);
 		public IEnumerable<IFunctionScoreFunction> Functions { get; set; }

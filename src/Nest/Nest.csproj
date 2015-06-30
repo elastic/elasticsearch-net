@@ -470,7 +470,7 @@
     <Compile Include="Modules\SnapshotAndRestore\Snapshot\DeleteSnapshot\DeleteSnapshotRequest.cs" />
     <Compile Include="CommonAbstractions\Request\IRequest.cs" />
     <Compile Include="QueryDsl\Compound\FunctionScore\Functions\FieldValueFactorModifier.cs" />
-    <Compile Include="QueryDsl\PlainQuery.cs" />
+    <Compile Include="QueryDsl\Query.cs" />
     <Compile Include="QueryDsl\QueryContainer.cs" />
     <Compile Include="Search\Search\Rescoring\RescoreQuery.cs" />
     <Compile Include="Indices\IndexManagement\CreateIndex\Similarity.cs" />
@@ -808,7 +808,7 @@
     <Compile Include="Search\Validate\ValidateResponse.cs" />
     <Compile Include="Search\Validate\ValidateQueryRequest.cs" />
     <Compile Include="Search\Validate\ElasticClient-Validate.cs" />
-    <Compile Include="QueryDsl\Query.cs" />
+    <Compile Include="QueryDsl\QueryHelper.cs" />
     <Compile Include="Document\Multiple\Bulk\ElasticClient-Bulk.cs" />
     <Compile Include="Document\Single\Update\UpdateResponse.cs" />
     <Compile Include="QueryDsl\TermLevel\Terms\TermsQuery.cs" />
