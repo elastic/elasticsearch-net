@@ -115,12 +115,12 @@ namespace Nest
 		/// <summary>
 		/// The clause(s) that must appear in matching documents
 		/// </summary>
-		public BoolQueryDescriptor<T> Must(params Func<QueryDescriptor<T>, QueryContainer>[] queries)
+		public BoolQueryDescriptor<T> Must(params Func<QueryContainerDescriptor<T>, QueryContainer>[] queries)
 		{
 			var descriptors = new List<QueryContainer>();
 			foreach (var selector in queries)
 			{
-				var filter = new QueryDescriptor<T>();
+				var filter = new QueryContainerDescriptor<T>();
 				var q = selector(filter);
 				if (q.IsConditionless)
 					continue;
@@ -152,12 +152,12 @@ namespace Nest
 		/// </summary>
 		/// <param name="queries"></param>
 		/// <returns></returns>
-		public BoolQueryDescriptor<T> MustNot(params Func<QueryDescriptor<T>, QueryContainer>[] queries)
+		public BoolQueryDescriptor<T> MustNot(params Func<QueryContainerDescriptor<T>, QueryContainer>[] queries)
 		{
 			var descriptors = new List<QueryContainer>();
 			foreach (var selector in queries)
 			{
-				var filter = new QueryDescriptor<T>();
+				var filter = new QueryContainerDescriptor<T>();
 				var q = selector(filter);
 				if (q.IsConditionless)
 					continue;
@@ -191,12 +191,12 @@ namespace Nest
 		/// </summary>
 		/// <param name="queries"></param>
 		/// <returns></returns>
-		public BoolQueryDescriptor<T> Should(params Func<QueryDescriptor<T>, QueryContainer>[] queries)
+		public BoolQueryDescriptor<T> Should(params Func<QueryContainerDescriptor<T>, QueryContainer>[] queries)
 		{
 			var descriptors = new List<QueryContainer>();
 			foreach (var selector in queries)
 			{
-				var filter = new QueryDescriptor<T>();
+				var filter = new QueryContainerDescriptor<T>();
 				var q = selector(filter);
 				if (q.IsConditionless)
 					continue;

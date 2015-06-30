@@ -76,13 +76,13 @@ namespace Nest
 
 		public DeleteByQueryDescriptor<T> MatchAll()
 		{
-			Self.Query = new QueryDescriptor<T>().MatchAll();
+			Self.Query = new QueryContainerDescriptor<T>().MatchAll();
 			return this;
 		}
 
-		public DeleteByQueryDescriptor<T> Query(Func<QueryDescriptor<T>, QueryContainer> querySelector)
+		public DeleteByQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector)
 		{
-			Self.Query = querySelector(new QueryDescriptor<T>());
+			Self.Query = querySelector(new QueryContainerDescriptor<T>());
 			return this;
 		}
 

@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public class NoMatchQueryConverter : CompositeJsonConverter<ReadAsTypeConverter<QueryDescriptor<object>>, CustomJsonConverter>
+	public class NoMatchQueryConverter : CompositeJsonConverter<ReadAsTypeConverter<QueryContainerDescriptor<object>>, CustomJsonConverter>
 	{
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{

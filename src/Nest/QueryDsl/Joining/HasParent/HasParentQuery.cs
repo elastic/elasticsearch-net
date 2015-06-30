@@ -19,7 +19,7 @@ namespace Nest
 		ParentScoreType? ScoreType { get; set; }
 
 		[JsonProperty("query")]
-		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryDescriptor<object>>, CustomJsonConverter>))]
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryContainerDescriptor<object>>, CustomJsonConverter>))]
 		IQueryContainer Query { get; set; }
 
 		[JsonProperty("inner_hits")]
@@ -61,9 +61,9 @@ namespace Nest
 			return this;
 		}
 
-		public HasParentQueryDescriptor<T> Query(Func<QueryDescriptor<T>, QueryContainer> querySelector)
+		public HasParentQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector)
 		{
-			var q = new QueryDescriptor<T>();
+			var q = new QueryContainerDescriptor<T>();
 			Self.Query = querySelector(q);
 			return this;
 		}

@@ -104,11 +104,11 @@ namespace Nest
 			return (TDescriptor)this;
 		}
 
-		public virtual TDescriptor NestedFilter(Func<QueryDescriptor<T>, QueryContainer> filterSelector)
+		public virtual TDescriptor NestedFilter(Func<QueryContainerDescriptor<T>, QueryContainer> filterSelector)
 		{
 			filterSelector.ThrowIfNull("filterSelector");
 
-			var filter = new QueryDescriptor<T>();
+			var filter = new QueryContainerDescriptor<T>();
 			Self.NestedFilter = filterSelector(filter);
 			return (TDescriptor)this;
 		}

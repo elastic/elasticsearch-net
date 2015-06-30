@@ -137,7 +137,7 @@ namespace Nest
 
 		public HighlightDescriptor<T> BoundaryMaxSize(int boundaryMaxSize) => _assign(a => a.BoundaryMaxSize = boundaryMaxSize);
 
-		public HighlightDescriptor<T> HighlightQuery(Func<QueryDescriptor<T>, QueryContainer> querySelector) =>
-			_assign(a => a.HighlightQuery = querySelector?.Invoke(new QueryDescriptor<T>()));
+		public HighlightDescriptor<T> HighlightQuery(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector) =>
+			_assign(a => a.HighlightQuery = querySelector?.Invoke(new QueryContainerDescriptor<T>()));
 	}
 }

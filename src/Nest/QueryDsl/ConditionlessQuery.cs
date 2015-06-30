@@ -26,15 +26,15 @@ namespace Nest
 
 		string IQuery.Name { get; set; }
 
-		public ConditionlessQueryDescriptor<T> Query(Func<QueryDescriptor<T>, QueryContainer> querySelector)
+		public ConditionlessQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector)
 		{
-			Self.Query = querySelector(new QueryDescriptor<T>());
+			Self.Query = querySelector(new QueryContainerDescriptor<T>());
 			return this;
 		}
 
-		public ConditionlessQueryDescriptor<T> Fallback(Func<QueryDescriptor<T>, QueryContainer> querySelector)
+		public ConditionlessQueryDescriptor<T> Fallback(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector)
 		{
-			Self.Fallback = querySelector(new QueryDescriptor<T>());
+			Self.Fallback = querySelector(new QueryContainerDescriptor<T>());
 			return this;
 		}
 	}

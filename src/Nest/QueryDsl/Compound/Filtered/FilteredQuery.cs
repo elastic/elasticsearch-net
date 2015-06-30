@@ -11,7 +11,7 @@ namespace Nest
 	public interface IFilteredQuery : IQuery
 	{
 		[JsonProperty(PropertyName = "query")]
-		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryDescriptor<object>>, CustomJsonConverter>))]
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryContainerDescriptor<object>>, CustomJsonConverter>))]
 		IQueryContainer Query { get; set; }
 
 		[JsonProperty(PropertyName = "filter")]
@@ -53,20 +53,20 @@ namespace Nest
 			return this;
 		}
 
-		public FilteredQueryDescriptor<T> Query(Func<QueryDescriptor<T>, QueryContainer> querySelector)
+		public FilteredQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector)
 		{
 			querySelector.ThrowIfNull("querySelector");
-			var query = new QueryDescriptor<T>();
+			var query = new QueryContainerDescriptor<T>();
 			var q = querySelector(query);
 
 			Self.Query = q;
 			return this;
 		}
 
-		public FilteredQueryDescriptor<T> Filter(Func<QueryDescriptor<T>, QueryContainer> filterSelector)
+		public FilteredQueryDescriptor<T> Filter(Func<QueryContainerDescriptor<T>, QueryContainer> filterSelector)
 		{
 			filterSelector.ThrowIfNull("filterSelector");
-			var filter = new QueryDescriptor<T>();
+			var filter = new QueryContainerDescriptor<T>();
 			var f = filterSelector(filter);
 
 			Self.Filter = f;

@@ -102,10 +102,10 @@ namespace Nest
 		/// <summary>
 		/// Describe the query to perform using a query descriptor lambda
 		/// </summary>
-		public SearchExistsDescriptor<T> Query(Func<QueryDescriptor<T>, QueryContainer> query)
+		public SearchExistsDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> query)
 		{
 			query.ThrowIfNull("query");
-			var q = new QueryDescriptor<T>();
+			var q = new QueryContainerDescriptor<T>();
 			((IQueryContainer)q).IsStrict = this._Strict;
 			var bq = query(q);
 			return this.Query(bq);
@@ -148,7 +148,7 @@ namespace Nest
 		/// </summary>
 		public SearchExistsDescriptor<T> QueryRaw(string rawQuery)
 		{
-			Self.Query = new QueryDescriptor<T>().Raw(rawQuery);
+			Self.Query = new QueryContainerDescriptor<T>().Raw(rawQuery);
 			return this;
 		}
 

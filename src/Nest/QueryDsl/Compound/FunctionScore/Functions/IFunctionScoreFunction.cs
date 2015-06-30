@@ -37,10 +37,10 @@ namespace Nest
 		[JsonProperty("weight")]
 		double? IFunctionScoreFunction.WeightAsDouble { get; set; }
 
-		public FunctionScoreFunction<T> Filter(Func<QueryDescriptor<T>, QueryContainer> filterSelector)
+		public FunctionScoreFunction<T> Filter(Func<QueryContainerDescriptor<T>, QueryContainer> filterSelector)
 		{
 			filterSelector.ThrowIfNull("filterSelector");
-			var filter = new QueryDescriptor<T>();
+			var filter = new QueryContainerDescriptor<T>();
 			var f = filterSelector(filter);
 
 			this.Self.Filter = f;

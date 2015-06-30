@@ -27,7 +27,7 @@ namespace Tests.SearchAPIs.RequestBodySearch
 				term => term.OnField("field").Value("value");
 		}
 		
-		public class UsageInsideQueryDescriptor : GeneralUsageTests<IQueryContainer, QueryDescriptor<object>, QueryContainer>
+		public class UsageInsideQueryDescriptor : GeneralUsageTests<IQueryContainer, QueryContainerDescriptor<object>, QueryContainer>
 		{
 			protected override object ExpectedJson =>
 				new { term = new { field = "value" } };
@@ -39,7 +39,7 @@ namespace Tests.SearchAPIs.RequestBodySearch
 					Value = "value"
 				};
 
-			protected override Func<QueryDescriptor<object>, IQueryContainer> Fluent =>
+			protected override Func<QueryContainerDescriptor<object>, IQueryContainer> Fluent =>
 				filter => filter.Term("field" , "value");
 		}
 

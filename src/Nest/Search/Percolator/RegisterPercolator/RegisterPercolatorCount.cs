@@ -73,10 +73,10 @@ namespace Nest
 		/// <summary>
 		/// The query to perform the percolation
 		/// </summary>
-		public RegisterPercolatorDescriptor<T> Query(Func<QueryDescriptor<T>, QueryContainer> querySelector)
+		public RegisterPercolatorDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector)
 		{
 			querySelector.ThrowIfNull("querySelector");
-			var d = querySelector(new QueryDescriptor<T>());
+			var d = querySelector(new QueryContainerDescriptor<T>());
 			Self.Query = d;
 			return this;
 		}

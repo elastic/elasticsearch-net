@@ -61,17 +61,17 @@ namespace Nest
 			return this;
 		}
 
-		public BoostingQueryDescriptor<T> Positive(Func<QueryDescriptor<T>, QueryContainer> selector)
+		public BoostingQueryDescriptor<T> Positive(Func<QueryContainerDescriptor<T>, QueryContainer> selector)
 		{
-			var query = new QueryDescriptor<T>();
+			var query = new QueryContainerDescriptor<T>();
 			var q = selector(query);
 			Self.PositiveQuery = q;
 			return this;
 		}
 
-		public BoostingQueryDescriptor<T> Negative(Func<QueryDescriptor<T>, QueryContainer> selector)
+		public BoostingQueryDescriptor<T> Negative(Func<QueryContainerDescriptor<T>, QueryContainer> selector)
 		{
-			var query = new QueryDescriptor<T>();
+			var query = new QueryContainerDescriptor<T>();
 			var q = selector(query);
 			Self.NegativeQuery = q;
 			return this;
