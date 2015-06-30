@@ -105,6 +105,7 @@ namespace Nest.Resolvers.Converters.Aggregations
 				if (bottomRight != null)
 					geoBoundsMetric.Bounds.BottomRight = bottomRight;
 			}
+			reader.Read();
 			return geoBoundsMetric;
 		}
 
