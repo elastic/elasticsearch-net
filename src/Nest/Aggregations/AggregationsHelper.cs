@@ -19,10 +19,9 @@ namespace Nest
 			where TAggregation : class, IAggregation
 		{
 			IAggregation agg;
-			if (this.Aggregations.TryGetValue(key, out agg))
-				return agg as TAggregation;
-			return null;
-
+			return this.Aggregations.TryGetValue(key, out agg) 
+				? agg as TAggregation 
+				: null;
 		}
 
 		public ValueMetric Min(string key) => this.TryGet<ValueMetric>(key);

@@ -15,7 +15,6 @@ namespace Nest
 		public string Node { get; set; }
 		public string Total { get; set; }
 
-
 		public IDictionary<string, string> FieldSizes { get; set; }
 	}
 	

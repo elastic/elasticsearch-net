@@ -7,10 +7,10 @@ using System.Text;
 
 namespace Nest
 {
-	public interface ICatResponse<TCatRectord> : IResponse
-		where TCatRectord : ICatRecord
+	public interface ICatResponse<out TCatRecord> : IResponse
+		where TCatRecord : ICatRecord
 	{
-		IEnumerable<TCatRectord> Records { get; }
+		IEnumerable<TCatRecord> Records { get; }
 	}
 
 	[JsonObject]

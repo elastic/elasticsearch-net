@@ -9,30 +9,21 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public ICatResponse<CatMasterRecord> CatMaster(Func<CatMasterDescriptor, CatMasterDescriptor> selector = null)
-		{
-			return this.DoCat<CatMasterDescriptor, CatMasterRequestParameters, CatMasterRecord>(selector,
+		public ICatResponse<CatMasterRecord> CatMaster(Func<CatMasterDescriptor, CatMasterDescriptor> selector = null) =>
+			this.DoCat<CatMasterDescriptor, CatMasterRequestParameters, CatMasterRecord>(selector,
 				this.RawDispatch.CatMasterDispatch<CatResponse<CatMasterRecord>>);
-		}
 
-		public ICatResponse<CatMasterRecord> CatMaster(ICatMasterRequest request)
-		{
-			return this.DoCat<ICatMasterRequest, CatMasterRequestParameters, CatMasterRecord>(request,
+		public ICatResponse<CatMasterRecord> CatMaster(ICatMasterRequest request) =>
+			this.DoCat<ICatMasterRequest, CatMasterRequestParameters, CatMasterRecord>(request,
 				this.RawDispatch.CatMasterDispatch<CatResponse<CatMasterRecord>>);
-		}
 
-		public Task<ICatResponse<CatMasterRecord>> CatMasterAsync(
-			Func<CatMasterDescriptor, CatMasterDescriptor> selector = null)
-		{
-			return this.DoCatAsync<CatMasterDescriptor, CatMasterRequestParameters, CatMasterRecord>(selector,
+		public Task<ICatResponse<CatMasterRecord>> CatMasterAsync(Func<CatMasterDescriptor, CatMasterDescriptor> selector = null) =>
+			this.DoCatAsync<CatMasterDescriptor, CatMasterRequestParameters, CatMasterRecord>(selector,
 				this.RawDispatch.CatMasterDispatchAsync<CatResponse<CatMasterRecord>>);
-		}
 
-		public Task<ICatResponse<CatMasterRecord>> CatMasterAsync(ICatMasterRequest request)
-		{
-			return this.DoCatAsync<ICatMasterRequest, CatMasterRequestParameters, CatMasterRecord>(request,
+		public Task<ICatResponse<CatMasterRecord>> CatMasterAsync(ICatMasterRequest request) =>
+			this.DoCatAsync<ICatMasterRequest, CatMasterRequestParameters, CatMasterRecord>(request,
 				this.RawDispatch.CatMasterDispatchAsync<CatResponse<CatMasterRecord>>);
-		}
 	}
 }
 		
