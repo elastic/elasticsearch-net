@@ -9,8 +9,8 @@ namespace Nest
 
 	public class ExtendedStatsAggregator : MetricAggregator, IExtendedStatsAggregator { }
 
-	public class ExtendedStatsAggregationDescriptor<T> 
-		: MetricAggregationBaseDescriptor<ExtendedStatsAggregationDescriptor<T>, IExtendedStatsAggregator, T>
+	public class ExtendedStatsAggregatorDescriptor<T> 
+		: MetricAggregationBaseDescriptor<ExtendedStatsAggregatorDescriptor<T>, IExtendedStatsAggregator, T>
 			, IExtendedStatsAggregator 
 		where T : class { }
 

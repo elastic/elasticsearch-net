@@ -20,17 +20,17 @@ namespace Nest
 		public TypeNameMarker Type { get; set; }
 	}
 
-	public class ChildrenAggregationDescriptor<T> 
-		: BucketAggregatorBaseDescriptor<ChildrenAggregationDescriptor<T>, IChildrenAggregator, T>, IChildrenAggregator
+	public class ChildrenAggregatorDescriptor<T> 
+		: BucketAggregatorBaseDescriptor<ChildrenAggregatorDescriptor<T>, IChildrenAggregator, T>, IChildrenAggregator
 		where T : class
 	{
 
 		TypeNameMarker IChildrenAggregator.Type { get; set; } = typeof(T);
 
-		public ChildrenAggregationDescriptor<T> Type(TypeNameMarker type) =>
+		public ChildrenAggregatorDescriptor<T> Type(TypeNameMarker type) =>
 			Assign(a => a.Type = type);
 
-		public ChildrenAggregationDescriptor<T> Type<TChildType>() where TChildType : class =>
+		public ChildrenAggregatorDescriptor<T> Type<TChildType>() where TChildType : class =>
 			Assign(a => a.Type = typeof(TChildType));
 	}
 }

@@ -55,8 +55,8 @@ namespace Nest
 		public bool? Version { get; set; }
 	}
 
-	public class TopHitsAggregationDescriptor<T>
-		: MetricAggregationBaseDescriptor<TopHitsAggregationDescriptor<T>, ITopHitsAggregator, T>
+	public class TopHitsAggregatorDescriptor<T>
+		: MetricAggregationBaseDescriptor<TopHitsAggregatorDescriptor<T>, ITopHitsAggregator, T>
 			, ITopHitsAggregator
 		where T : class
 	{
@@ -79,11 +79,11 @@ namespace Nest
 
 		bool? ITopHitsAggregator.Version { get; set; }
 
-		public TopHitsAggregationDescriptor<T> From(int from) => Assign(a => a.From = from);
+		public TopHitsAggregatorDescriptor<T> From(int from) => Assign(a => a.From = from);
 
-		public TopHitsAggregationDescriptor<T> Size(int size) => Assign(a => a.Size = size);
+		public TopHitsAggregatorDescriptor<T> Size(int size) => Assign(a => a.Size = size);
 
-		public TopHitsAggregationDescriptor<T> Sort(Func<SortFieldDescriptor<T>, IFieldSort> sortSelector)
+		public TopHitsAggregatorDescriptor<T> Sort(Func<SortFieldDescriptor<T>, IFieldSort> sortSelector)
 		{
 			sortSelector.ThrowIfNull("sortSelector");
 
@@ -96,19 +96,19 @@ namespace Nest
 			return this;
 		}
 
-		public TopHitsAggregationDescriptor<T> Source(bool include = true) =>
+		public TopHitsAggregatorDescriptor<T> Source(bool include = true) =>
 			Assign(a => a.Source = !include ? SourceFilter.ExcludeAll : null);
 
-		public TopHitsAggregationDescriptor<T> Source(Func<SearchSourceDescriptor<T>, SearchSourceDescriptor<T>> sourceSelector) =>
+		public TopHitsAggregatorDescriptor<T> Source(Func<SearchSourceDescriptor<T>, SearchSourceDescriptor<T>> sourceSelector) =>
 			Assign(a => a.Source = sourceSelector?.Invoke(new SearchSourceDescriptor<T>()));
 
-		public TopHitsAggregationDescriptor<T> Highlight(Func<HighlightDescriptor<T>, HighlightDescriptor<T>> highlightDescriptor) =>
+		public TopHitsAggregatorDescriptor<T> Highlight(Func<HighlightDescriptor<T>, HighlightDescriptor<T>> highlightDescriptor) =>
 			Assign(a => a.Highlight = highlightDescriptor?.Invoke(new HighlightDescriptor<T>()));
 
-		public TopHitsAggregationDescriptor<T> Explain(bool explain = true) => Assign(a => a.Explain = explain);
+		public TopHitsAggregatorDescriptor<T> Explain(bool explain = true) => Assign(a => a.Explain = explain);
 		
 		//TODO scriptfields needs a better encapsulation (seperate descriptor)
-		public TopHitsAggregationDescriptor<T> ScriptFields(
+		public TopHitsAggregatorDescriptor<T> ScriptFields(
 			Func<FluentDictionary<string, Func<ScriptQueryDescriptor<T>, ScriptQueryDescriptor<T>>>,
 			 FluentDictionary<string, Func<ScriptQueryDescriptor<T>, ScriptQueryDescriptor<T>>>> scriptFields)
 		{
@@ -129,13 +129,13 @@ namespace Nest
 			return this;
 		}
 
-		public TopHitsAggregationDescriptor<T> FieldDataFields(params PropertyPathMarker[] fields) =>
+		public TopHitsAggregatorDescriptor<T> FieldDataFields(params PropertyPathMarker[] fields) =>
 			Assign(a => a.FieldDataFields = fields);
 
-		public TopHitsAggregationDescriptor<T> FieldDataFields(params Expression<Func<T, object>>[] objectPaths) =>
+		public TopHitsAggregatorDescriptor<T> FieldDataFields(params Expression<Func<T, object>>[] objectPaths) =>
 			Assign(a => a.FieldDataFields = objectPaths?.Select(e => (PropertyPathMarker) e).ToListOrNullIfEmpty());
 
-		public TopHitsAggregationDescriptor<T> Version(bool version = true) => Assign(a => a.Version = version);
+		public TopHitsAggregatorDescriptor<T> Version(bool version = true) => Assign(a => a.Version = version);
 
 	}
 }

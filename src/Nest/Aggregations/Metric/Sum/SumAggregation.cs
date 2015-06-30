@@ -12,8 +12,8 @@ namespace Nest
 
 	public class SumAggregator : MetricAggregator, ISumAggregator { }
 
-	public class SumAggregationDescriptor<T> 
-		: MetricAggregationBaseDescriptor<SumAggregationDescriptor<T>, ISumAggregator, T>
+	public class SumAggregatorDescriptor<T> 
+		: MetricAggregationBaseDescriptor<SumAggregatorDescriptor<T>, ISumAggregator, T>
 			, ISumAggregator 
 		where T : class { }
 }

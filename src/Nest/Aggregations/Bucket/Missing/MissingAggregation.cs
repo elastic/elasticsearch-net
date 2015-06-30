@@ -19,16 +19,16 @@ namespace Nest
 		public PropertyPathMarker Field { get; set; }
 	}
 
-	public class MissingAggregationDescriptor<T> 
-		: BucketAggregatorBaseDescriptor<MissingAggregationDescriptor<T>,IMissingAggregator, T>
+	public class MissingAggregatorDescriptor<T> 
+		: BucketAggregatorBaseDescriptor<MissingAggregatorDescriptor<T>,IMissingAggregator, T>
 			, IMissingAggregator 
 		where T : class
 	{
 		PropertyPathMarker IMissingAggregator.Field { get; set; }
 
-		public MissingAggregationDescriptor<T> Field(string field) => Assign(a => a.Field = field);
+		public MissingAggregatorDescriptor<T> Field(string field) => Assign(a => a.Field = field);
 
-		public MissingAggregationDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
+		public MissingAggregatorDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
 
 	}
 }

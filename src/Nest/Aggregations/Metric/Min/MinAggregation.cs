@@ -12,8 +12,8 @@ namespace Nest
 
 	public class MinAggregator : MetricAggregator, IMinAggregator { }
 
-	public class MinAggregationDescriptor<T> 
-		: MetricAggregationBaseDescriptor<MinAggregationDescriptor<T>, IMinAggregator, T>
+	public class MinAggregatorDescriptor<T> 
+		: MetricAggregationBaseDescriptor<MinAggregatorDescriptor<T>, IMinAggregator, T>
 			, IMinAggregator 
 		where T : class { }
 

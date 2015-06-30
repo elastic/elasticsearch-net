@@ -18,15 +18,15 @@ namespace Nest
 		public PropertyPathMarker Path { get; set; }
 	}
 
-	public class NestedAggregationDescriptor<T> 
-		: BucketAggregatorBaseDescriptor<NestedAggregationDescriptor<T>, INestedAggregator, T>
+	public class NestedAggregatorDescriptor<T> 
+		: BucketAggregatorBaseDescriptor<NestedAggregatorDescriptor<T>, INestedAggregator, T>
 			, INestedAggregator 
 		where T : class
 	{
 		PropertyPathMarker INestedAggregator.Path { get; set; }
 
-		public NestedAggregationDescriptor<T> Path(string path) => Assign(a => a.Path = path);
+		public NestedAggregatorDescriptor<T> Path(string path) => Assign(a => a.Path = path);
 
-		public NestedAggregationDescriptor<T> Path(Expression<Func<T, object>> path) => Assign(a => a.Path = path);
+		public NestedAggregatorDescriptor<T> Path(Expression<Func<T, object>> path) => Assign(a => a.Path = path);
 	}
 }

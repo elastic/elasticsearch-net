@@ -23,8 +23,8 @@ namespace Nest
 		public bool? Rehash { get; set; }
 	}
 
-	public class CardinalityAggregationDescriptor<T> 
-		: MetricAggregationBaseDescriptor<CardinalityAggregationDescriptor<T>, ICardinalityAggregator, T>
+	public class CardinalityAggregatorDescriptor<T> 
+		: MetricAggregationBaseDescriptor<CardinalityAggregatorDescriptor<T>, ICardinalityAggregator, T>
 			, ICardinalityAggregator 
 		where T : class
 	{
@@ -32,10 +32,10 @@ namespace Nest
 
 		bool? ICardinalityAggregator.Rehash { get; set; }
 
-		public CardinalityAggregationDescriptor<T> PrecisionThreshold(int precisionThreshold)
+		public CardinalityAggregatorDescriptor<T> PrecisionThreshold(int precisionThreshold)
 			=> Assign(a => a.PrecisionThreshold = precisionThreshold);
 
-		public CardinalityAggregationDescriptor<T> Rehash(bool rehash = true) => Assign(a => a.Rehash = rehash);
+		public CardinalityAggregatorDescriptor<T> Rehash(bool rehash = true) => Assign(a => a.Rehash = rehash);
 
 	}
 }

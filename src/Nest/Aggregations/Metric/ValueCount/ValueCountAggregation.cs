@@ -11,8 +11,8 @@ namespace Nest
 	
 	public class ValueCountAggregator : MetricAggregator, IValueCountAggregator { }
 
-	public class ValueCountAggregationDescriptor<T> 
-		: MetricAggregationBaseDescriptor<ValueCountAggregationDescriptor<T>, IValueCountAggregator, T>
+	public class ValueCountAggregatorDescriptor<T> 
+		: MetricAggregationBaseDescriptor<ValueCountAggregatorDescriptor<T>, IValueCountAggregator, T>
 			, IValueCountAggregator 
 		where T : class { }
 }

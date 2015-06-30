@@ -16,14 +16,14 @@ namespace Nest
 		public IQueryContainer Filter { get; set; }
 	}
 
-	public class FilterAggregationDescriptor<T> 
-		: BucketAggregatorBaseDescriptor<FilterAggregationDescriptor<T>,IFilterAggregator, T> 
+	public class FilterAggregatorDescriptor<T> 
+		: BucketAggregatorBaseDescriptor<FilterAggregatorDescriptor<T>,IFilterAggregator, T> 
 			, IFilterAggregator 
 		where T : class
 	{
 		IQueryContainer IFilterAggregator.Filter { get; set; }
 
-		public FilterAggregationDescriptor<T> Filter(Func<QueryDescriptor<T>, QueryContainer> selector) =>
+		public FilterAggregatorDescriptor<T> Filter(Func<QueryDescriptor<T>, QueryContainer> selector) =>
 			Assign(a=> a.Filter = selector?.Invoke(new QueryDescriptor<T>()));
 
 	}

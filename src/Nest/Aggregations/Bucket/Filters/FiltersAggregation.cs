@@ -19,14 +19,14 @@ namespace Nest
 		public IEnumerable<IQueryContainer> Filters { get; set; }
 	}
 
-	public class FiltersAggregationDescriptor<T> 
-		: BucketAggregatorBaseDescriptor<FiltersAggregationDescriptor<T>, IFiltersAggregator, T>
+	public class FiltersAggregatorDescriptor<T> 
+		: BucketAggregatorBaseDescriptor<FiltersAggregatorDescriptor<T>, IFiltersAggregator, T>
 		, IFiltersAggregator
 		where T : class
 	{
 		IEnumerable<IQueryContainer> IFiltersAggregator.Filters { get; set; }
 
-		public FiltersAggregationDescriptor<T> Filters(params Func<QueryDescriptor<T>, QueryContainer>[] queryDescriptors) =>
+		public FiltersAggregatorDescriptor<T> Filters(params Func<QueryDescriptor<T>, QueryContainer>[] queryDescriptors) =>
 			Assign(a=>a.Filters = queryDescriptors?.Select(f => f?.Invoke(new QueryDescriptor<T>()))?.ToListOrNullIfEmpty());
 
 	}

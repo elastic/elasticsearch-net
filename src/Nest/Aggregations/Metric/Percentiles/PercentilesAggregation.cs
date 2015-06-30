@@ -23,8 +23,8 @@ namespace Nest
 		public int? Compression { get; set; }
 	}
 
-	public class PercentilesAggregationDescriptor<T> 
-		: MetricAggregationBaseDescriptor<PercentilesAggregationDescriptor<T>, IPercentilesAggregator, T>
+	public class PercentilesAggregatorDescriptor<T> 
+		: MetricAggregationBaseDescriptor<PercentilesAggregatorDescriptor<T>, IPercentilesAggregator, T>
 			, IPercentilesAggregator 
 		where T : class
 	{
@@ -32,9 +32,9 @@ namespace Nest
 
 		int? IPercentilesAggregator.Compression { get; set; }
 
-		public PercentilesAggregationDescriptor<T> Percentages(params double[] percentages) => Assign(a => a.Percentages = percentages);
+		public PercentilesAggregatorDescriptor<T> Percentages(params double[] percentages) => Assign(a => a.Percentages = percentages);
 
-		public PercentilesAggregationDescriptor<T> Compression(int compression) => Assign(a => a.Compression = compression);
+		public PercentilesAggregatorDescriptor<T> Compression(int compression) => Assign(a => a.Compression = compression);
 
 	}
 }

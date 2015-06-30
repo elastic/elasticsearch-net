@@ -68,8 +68,8 @@ namespace Nest
 		public IQueryContainer BackgroundFilter { get; set; }
 	}
 
-	public class SignificantTermsAggregationDescriptor<T>
-		: BucketAggregatorBaseDescriptor<SignificantTermsAggregationDescriptor<T>, ISignificantTermsAggregator, T>
+	public class SignificantTermsAggregatorDescriptor<T>
+		: BucketAggregatorBaseDescriptor<SignificantTermsAggregatorDescriptor<T>, ISignificantTermsAggregator, T>
 			, ISignificantTermsAggregator
 		where T : class
 	{
@@ -99,43 +99,43 @@ namespace Nest
 
 		IQueryContainer ISignificantTermsAggregator.BackgroundFilter { get; set; }
 
-		public SignificantTermsAggregationDescriptor<T> Field(string field) => Assign(a => a.Field = field);
+		public SignificantTermsAggregatorDescriptor<T> Field(string field) => Assign(a => a.Field = field);
 
-		public SignificantTermsAggregationDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
+		public SignificantTermsAggregatorDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
 
-		public SignificantTermsAggregationDescriptor<T> Size(int size) => Assign(a => a.Size = size);
+		public SignificantTermsAggregatorDescriptor<T> Size(int size) => Assign(a => a.Size = size);
 
-		public SignificantTermsAggregationDescriptor<T> ShardSize(int shardSize) => Assign(a => a.ShardSize = shardSize);
+		public SignificantTermsAggregatorDescriptor<T> ShardSize(int shardSize) => Assign(a => a.ShardSize = shardSize);
 
-		public SignificantTermsAggregationDescriptor<T> MinimumDocumentCount(int minimumDocumentCount) =>
+		public SignificantTermsAggregatorDescriptor<T> MinimumDocumentCount(int minimumDocumentCount) =>
 			Assign(a => a.MinimumDocumentCount = minimumDocumentCount);
 
-		public SignificantTermsAggregationDescriptor<T> MutualInformation(bool? backgroundIsSuperSet = null, bool? includeNegatives = null) =>
+		public SignificantTermsAggregatorDescriptor<T> MutualInformation(bool? backgroundIsSuperSet = null, bool? includeNegatives = null) =>
 			Assign(a => a.MutualInformation = new MutualInformationHeuristic
 			{
 				BackgroundIsSuperSet = backgroundIsSuperSet,
 				IncludeNegatives = includeNegatives
 			});
 
-		public SignificantTermsAggregationDescriptor<T> ChiSquare(bool? backgroundIsSuperSet = null, bool? includeNegatives = null) =>
+		public SignificantTermsAggregatorDescriptor<T> ChiSquare(bool? backgroundIsSuperSet = null, bool? includeNegatives = null) =>
 			Assign(a => a.ChiSquare = new ChiSquareHeuristic
 			{
 				BackgroundIsSuperSet = backgroundIsSuperSet,
 				IncludeNegatives = includeNegatives
 			});
 
-		public SignificantTermsAggregationDescriptor<T> GoogleNormalizedDistance(bool? backgroundIsSuperSet = null) =>
+		public SignificantTermsAggregatorDescriptor<T> GoogleNormalizedDistance(bool? backgroundIsSuperSet = null) =>
 			Assign(a => a.GoogleNormalizedDistance = new GoogleNormalizedDistanceHeuristic
 			{
 				BackgroundIsSuperSet = backgroundIsSuperSet,
 			});
 
-		public SignificantTermsAggregationDescriptor<T> PercentageScore() => Assign(a => a.PercentageScore = new PercentageScoreHeuristic());
+		public SignificantTermsAggregatorDescriptor<T> PercentageScore() => Assign(a => a.PercentageScore = new PercentageScoreHeuristic());
 
-		public SignificantTermsAggregationDescriptor<T> Script(Func<ScriptedHeuristicDescriptor, ScriptedHeuristicDescriptor> scriptSelector) =>
+		public SignificantTermsAggregatorDescriptor<T> Script(Func<ScriptedHeuristicDescriptor, ScriptedHeuristicDescriptor> scriptSelector) =>
 			Assign(a => a.Script = scriptSelector?.Invoke(new ScriptedHeuristicDescriptor())?.ScriptedHeuristic);
 
-		public SignificantTermsAggregationDescriptor<T> BackgroundFilter(Func<QueryDescriptor<T>, QueryContainer> selector) =>
+		public SignificantTermsAggregatorDescriptor<T> BackgroundFilter(Func<QueryDescriptor<T>, QueryContainer> selector) =>
 			Assign(a => a.BackgroundFilter = selector(new QueryDescriptor<T>()));
 	}
 }

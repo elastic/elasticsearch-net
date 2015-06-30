@@ -32,8 +32,8 @@ namespace Nest
 		public IEnumerable<Range<double>> Ranges { get; set; }
 	}
 
-	public class RangeAggregationDescriptor<T>
-		: BucketAggregatorBaseDescriptor<RangeAggregationDescriptor<T>, IRangeAggregator, T>, IRangeAggregator
+	public class RangeAggregatorDescriptor<T>
+		: BucketAggregatorBaseDescriptor<RangeAggregatorDescriptor<T>, IRangeAggregator, T>, IRangeAggregator
 		where T : class
 	{
 		PropertyPathMarker IRangeAggregator.Field { get; set; }
@@ -44,16 +44,16 @@ namespace Nest
 
 		IEnumerable<Range<double>> IRangeAggregator.Ranges { get; set; }
 
-		public RangeAggregationDescriptor<T> Field(string field) => Assign(a => a.Field = field);
+		public RangeAggregatorDescriptor<T> Field(string field) => Assign(a => a.Field = field);
 
-		public RangeAggregationDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
+		public RangeAggregatorDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
 
-		public RangeAggregationDescriptor<T> Script(string script) => Assign(a => a.Script = script);
+		public RangeAggregatorDescriptor<T> Script(string script) => Assign(a => a.Script = script);
 
-		public RangeAggregationDescriptor<T> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramSelector) =>
+		public RangeAggregatorDescriptor<T> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramSelector) =>
 			Assign(a => a.Params = paramSelector?.Invoke(new FluentDictionary<string, object>()));
 
-		public RangeAggregationDescriptor<T> Ranges(params Func<Range<double>, Range<double>>[] ranges) =>
+		public RangeAggregatorDescriptor<T> Ranges(params Func<Range<double>, Range<double>>[] ranges) =>
 			Assign(a => a.Ranges = (from range in ranges let r = new Range<double>() select range(r)).ToListOrNullIfEmpty());
 	}
 }

@@ -24,8 +24,8 @@ namespace Nest
 		public IEnumerable<Ip4ExpressionRange> Ranges { get; set; }
 	}
 
-	public class Ip4RangeAggregationDescriptor<T> : 
-		BucketAggregatorBaseDescriptor<Ip4RangeAggregationDescriptor<T>,IIp4RangeAggregator, T>
+	public class Ip4RangeAggregatorDescriptor<T> : 
+		BucketAggregatorBaseDescriptor<Ip4RangeAggregatorDescriptor<T>,IIp4RangeAggregator, T>
 			, IIp4RangeAggregator 
 		where T : class
 	{
@@ -34,11 +34,11 @@ namespace Nest
 
 		IEnumerable<Ip4ExpressionRange> IIp4RangeAggregator.Ranges { get; set; }
 
-		public Ip4RangeAggregationDescriptor<T> Field(string field) => Assign(a => a.Field = field);
+		public Ip4RangeAggregatorDescriptor<T> Field(string field) => Assign(a => a.Field = field);
 
-		public Ip4RangeAggregationDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
+		public Ip4RangeAggregatorDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
 
-		public Ip4RangeAggregationDescriptor<T> Ranges(params Func<Ip4ExpressionRange, Ip4ExpressionRange>[] ranges) =>
+		public Ip4RangeAggregatorDescriptor<T> Ranges(params Func<Ip4ExpressionRange, Ip4ExpressionRange>[] ranges) =>
 			Assign(a => a.Ranges = (from range in ranges let r = new Ip4ExpressionRange() select range(r)).ToListOrNullIfEmpty());
 
 	}

@@ -28,8 +28,8 @@ namespace Nest
 		public IEnumerable<DateExpressionRange> Ranges { get; set; }
 	}
 
-	public class DateRangeAggregationDescriptor<T> 
-		: BucketAggregatorBaseDescriptor<DateRangeAggregationDescriptor<T>, IDateRangeAggregator, T>
+	public class DateRangeAggregatorDescriptor<T> 
+		: BucketAggregatorBaseDescriptor<DateRangeAggregatorDescriptor<T>, IDateRangeAggregator, T>
 			, IDateRangeAggregator 
 		where T : class
 	{
@@ -39,13 +39,13 @@ namespace Nest
 
 		IEnumerable<DateExpressionRange> IDateRangeAggregator.Ranges { get; set; }
 
-		public DateRangeAggregationDescriptor<T> Field(string field) => Assign(a => a.Field = field);
+		public DateRangeAggregatorDescriptor<T> Field(string field) => Assign(a => a.Field = field);
 
-		public DateRangeAggregationDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
+		public DateRangeAggregatorDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
 
-		public DateRangeAggregationDescriptor<T> Format(string format) => Assign(a => a.Format = format);
+		public DateRangeAggregatorDescriptor<T> Format(string format) => Assign(a => a.Format = format);
 
-		public DateRangeAggregationDescriptor<T> Ranges(params Func<DateExpressionRange, DateExpressionRange>[] ranges) =>
+		public DateRangeAggregatorDescriptor<T> Ranges(params Func<DateExpressionRange, DateExpressionRange>[] ranges) =>
 			Assign(a=>a.Ranges = (from range in ranges let r = new DateExpressionRange() select range(r)).ToListOrNullIfEmpty());
 
 	}

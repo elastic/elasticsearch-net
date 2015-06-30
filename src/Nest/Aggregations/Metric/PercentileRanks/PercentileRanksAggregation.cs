@@ -20,13 +20,13 @@ namespace Nest
 		public IEnumerable<double> Values { get; set; }
 	}
 
-	public class PercentileRanksAggregationDescriptor<T> 
-		: MetricAggregationBaseDescriptor<PercentileRanksAggregationDescriptor<T>, IPercentileRanksAggregator, T>, IPercentileRanksAggregator
+	public class PercentileRanksAggregatorDescriptor<T> 
+		: MetricAggregationBaseDescriptor<PercentileRanksAggregatorDescriptor<T>, IPercentileRanksAggregator, T>, IPercentileRanksAggregator
 		where T : class
 	{
 		IEnumerable<double> IPercentileRanksAggregator.Values { get; set; }
 
-		public PercentileRanksAggregationDescriptor<T> Values(IEnumerable<double> values) =>
+		public PercentileRanksAggregatorDescriptor<T> Values(IEnumerable<double> values) =>
 			Assign(a => a.Values = values.ToListOrNullIfEmpty());
 
 	}

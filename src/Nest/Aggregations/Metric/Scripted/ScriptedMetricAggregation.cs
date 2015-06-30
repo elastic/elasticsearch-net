@@ -70,8 +70,8 @@ namespace Nest
 		public IDictionary<string, object> ReduceParams { get; set; }
 	}
 
-	public class ScriptedMetricAggregationDescriptor<T>
-		: MetricAggregationBaseDescriptor<ScriptedMetricAggregationDescriptor<T>, IScriptedMetricAggregator, T>
+	public class ScriptedMetricAggregatorDescriptor<T>
+		: MetricAggregationBaseDescriptor<ScriptedMetricAggregatorDescriptor<T>, IScriptedMetricAggregator, T>
 		, IScriptedMetricAggregator
 		where T : class
 	{
@@ -90,33 +90,33 @@ namespace Nest
 		IDictionary<string, object> IScriptedMetricAggregator.ReduceParams { get; set; }
 
 		[Obsolete("Script() proxies to MapScript on ScriptedMetric, please consider using MapScript explicitly")]
-		public override ScriptedMetricAggregationDescriptor<T> Script(string script) => Assign(a => a.MapScript = script);
+		public override ScriptedMetricAggregatorDescriptor<T> Script(string script) => Assign(a => a.MapScript = script);
 
-		public ScriptedMetricAggregationDescriptor<T> InitScript(string script) => Assign(a => a.InitScript = script);
+		public ScriptedMetricAggregatorDescriptor<T> InitScript(string script) => Assign(a => a.InitScript = script);
 
-		public ScriptedMetricAggregationDescriptor<T> InitScriptFile(string file) => Assign(a => a.InitScriptFile = file);
+		public ScriptedMetricAggregatorDescriptor<T> InitScriptFile(string file) => Assign(a => a.InitScriptFile = file);
 
-		public ScriptedMetricAggregationDescriptor<T> InitScriptId(string id) => Assign(a => a.InitScriptId = id);
+		public ScriptedMetricAggregatorDescriptor<T> InitScriptId(string id) => Assign(a => a.InitScriptId = id);
 
-		public ScriptedMetricAggregationDescriptor<T> MapScript(string script) => Assign(a => a.MapScript = script);
+		public ScriptedMetricAggregatorDescriptor<T> MapScript(string script) => Assign(a => a.MapScript = script);
 
-		public ScriptedMetricAggregationDescriptor<T> MapScriptFile(string file) => Assign(a => a.MapScriptFile = file);
+		public ScriptedMetricAggregatorDescriptor<T> MapScriptFile(string file) => Assign(a => a.MapScriptFile = file);
 
-		public ScriptedMetricAggregationDescriptor<T> MapScriptId(string id) => Assign(a => a.MapScriptId = id);
+		public ScriptedMetricAggregatorDescriptor<T> MapScriptId(string id) => Assign(a => a.MapScriptId = id);
 
-		public ScriptedMetricAggregationDescriptor<T> CombineScript(string script) => Assign(a => a.CombineScript = script);
+		public ScriptedMetricAggregatorDescriptor<T> CombineScript(string script) => Assign(a => a.CombineScript = script);
 
-		public ScriptedMetricAggregationDescriptor<T> CombineScriptFile(string file) => Assign(a => a.CombineScriptFile = file);
+		public ScriptedMetricAggregatorDescriptor<T> CombineScriptFile(string file) => Assign(a => a.CombineScriptFile = file);
 
-		public ScriptedMetricAggregationDescriptor<T> CombineScriptId(string id) => Assign(a => a.CombineScriptId = id);
+		public ScriptedMetricAggregatorDescriptor<T> CombineScriptId(string id) => Assign(a => a.CombineScriptId = id);
 
-		public ScriptedMetricAggregationDescriptor<T> ReduceScript(string script) => Assign(a => a.ReduceScript = script);
+		public ScriptedMetricAggregatorDescriptor<T> ReduceScript(string script) => Assign(a => a.ReduceScript = script);
 
-		public ScriptedMetricAggregationDescriptor<T> ReduceScriptFile(string file) => Assign(a => a.ReduceScriptFile = file);
+		public ScriptedMetricAggregatorDescriptor<T> ReduceScriptFile(string file) => Assign(a => a.ReduceScriptFile = file);
 
-		public ScriptedMetricAggregationDescriptor<T> ReduceScriptId(string id) => Assign(a => a.InitScriptId = id);
+		public ScriptedMetricAggregatorDescriptor<T> ReduceScriptId(string id) => Assign(a => a.InitScriptId = id);
 
-		public ScriptedMetricAggregationDescriptor<T> ReduceParams(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramSelector) =>
+		public ScriptedMetricAggregatorDescriptor<T> ReduceParams(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramSelector) =>
 				Assign(a => a.ReduceParams = paramSelector(new FluentDictionary<string, object>()));
 	}
 }

@@ -41,8 +41,8 @@ namespace Nest
 		public IEnumerable<Range<double>> Ranges { get; set; }
 	}
 
-	public class GeoDistanceAggregationDescriptor<T> :
-		BucketAggregatorBaseDescriptor<GeoDistanceAggregationDescriptor<T>, IGeoDistanceAggregator, T>
+	public class GeoDistanceAggregatorDescriptor<T> :
+		BucketAggregatorBaseDescriptor<GeoDistanceAggregatorDescriptor<T>, IGeoDistanceAggregator, T>
 			, IGeoDistanceAggregator
 		where T : class
 	{
@@ -56,22 +56,22 @@ namespace Nest
 
 		IEnumerable<Range<double>> IGeoDistanceAggregator.Ranges { get; set; }
 
-		public GeoDistanceAggregationDescriptor<T> Field(string field) => Assign(a => a.Field = field);
+		public GeoDistanceAggregatorDescriptor<T> Field(string field) => Assign(a => a.Field = field);
 
-		public GeoDistanceAggregationDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
+		public GeoDistanceAggregatorDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
 
-		public GeoDistanceAggregationDescriptor<T> Origin(double Lat, double Lon) =>
+		public GeoDistanceAggregatorDescriptor<T> Origin(double Lat, double Lon) =>
 			Assign(a => a.Origin = "{0}, {1}".F(
 				Lat.ToString(CultureInfo.InvariantCulture), Lon.ToString(CultureInfo.InvariantCulture)
 			));
 
-		public GeoDistanceAggregationDescriptor<T> Origin(string geoHash) => Assign(a => a.Origin = geoHash);
+		public GeoDistanceAggregatorDescriptor<T> Origin(string geoHash) => Assign(a => a.Origin = geoHash);
 
-		public GeoDistanceAggregationDescriptor<T> Unit(GeoUnit unit) => Assign(a => a.Unit = unit);
+		public GeoDistanceAggregatorDescriptor<T> Unit(GeoUnit unit) => Assign(a => a.Unit = unit);
 
-		public GeoDistanceAggregationDescriptor<T> DistanceType(GeoDistance geoDistance) => Assign(a => a.DistanceType = geoDistance);
+		public GeoDistanceAggregatorDescriptor<T> DistanceType(GeoDistance geoDistance) => Assign(a => a.DistanceType = geoDistance);
 
-		public GeoDistanceAggregationDescriptor<T> Ranges(params Func<Range<double>, Range<double>>[] ranges) =>
+		public GeoDistanceAggregatorDescriptor<T> Ranges(params Func<Range<double>, Range<double>>[] ranges) =>
 			Assign(a => a.Ranges = (from range in ranges let r = new Range<double>() select range(r)).ToListOrNullIfEmpty());
 
 	}

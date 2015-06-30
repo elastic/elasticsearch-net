@@ -32,8 +32,8 @@ namespace Nest
 		public GeoHashPrecision? Precision { get; set; }
 	}
 
-	public class GeoHashAggregationDescriptor<T> 
-		: BucketAggregatorBaseDescriptor<GeoHashAggregationDescriptor<T>, IGeoHashAggregator, T>
+	public class GeoHashAggregatorDescriptor<T> 
+		: BucketAggregatorBaseDescriptor<GeoHashAggregatorDescriptor<T>, IGeoHashAggregator, T>
 			, IGeoHashAggregator 
 		where T : class
 	{
@@ -45,15 +45,15 @@ namespace Nest
 
 		GeoHashPrecision? IGeoHashAggregator.Precision { get; set; }
 
-		public GeoHashAggregationDescriptor<T> Field(string field) => Assign(a => a.Field = field);
+		public GeoHashAggregatorDescriptor<T> Field(string field) => Assign(a => a.Field = field);
 
-		public GeoHashAggregationDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
+		public GeoHashAggregatorDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
 
-		public GeoHashAggregationDescriptor<T> Size(int size) => Assign(a => a.Size = size);
+		public GeoHashAggregatorDescriptor<T> Size(int size) => Assign(a => a.Size = size);
 
-		public GeoHashAggregationDescriptor<T> ShardSize(int shardSize) => Assign(a => a.ShardSize = shardSize);
+		public GeoHashAggregatorDescriptor<T> ShardSize(int shardSize) => Assign(a => a.ShardSize = shardSize);
 
-		public GeoHashAggregationDescriptor<T> GeoHashPrecision(GeoHashPrecision precision) =>
+		public GeoHashAggregatorDescriptor<T> GeoHashPrecision(GeoHashPrecision precision) =>
 			Assign(a => a.Precision = precision);
 
 	}
