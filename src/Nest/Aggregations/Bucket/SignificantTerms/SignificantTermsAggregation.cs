@@ -135,7 +135,7 @@ namespace Nest
 		public SignificantTermsAggregatorDescriptor<T> Script(Func<ScriptedHeuristicDescriptor, ScriptedHeuristicDescriptor> scriptSelector) =>
 			Assign(a => a.Script = scriptSelector?.Invoke(new ScriptedHeuristicDescriptor())?.ScriptedHeuristic);
 
-		public SignificantTermsAggregatorDescriptor<T> BackgroundFilter(Func<QueryDescriptor<T>, QueryContainer> selector) =>
-			Assign(a => a.BackgroundFilter = selector(new QueryDescriptor<T>()));
+		public SignificantTermsAggregatorDescriptor<T> BackgroundFilter(Func<QueryContainerDescriptor<T>, QueryContainer> selector) =>
+			Assign(a => a.BackgroundFilter = selector(new QueryContainerDescriptor<T>()));
 	}
 }

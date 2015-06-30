@@ -59,11 +59,11 @@ namespace Nest
 			return this;
 		}
 
-		public PutAliasDescriptor Filter<T>(Func<QueryDescriptor<T>, QueryContainer> filterSelector)
+		public PutAliasDescriptor Filter<T>(Func<QueryContainerDescriptor<T>, QueryContainer> filterSelector)
 			where T : class
 		{
 			filterSelector.ThrowIfNull("filterSelector");
-			Self.Filter = filterSelector(new QueryDescriptor<T>());
+			Self.Filter = filterSelector(new QueryContainerDescriptor<T>());
 			return this;
 		}
 

@@ -36,9 +36,9 @@ namespace Nest
 			return this;
 		}
 		
-		public SpanMultiTermQueryDescriptor<T> Match(Func<QueryDescriptor<T>, QueryContainer> querySelector)
+		public SpanMultiTermQueryDescriptor<T> Match(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector)
 		{
-			var q = new QueryDescriptor<T>();
+			var q = new QueryContainerDescriptor<T>();
 			Self.Match = querySelector(q);
 			return this;
 		}

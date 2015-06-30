@@ -257,10 +257,10 @@ namespace Nest
 		/// <summary>
 		/// Describe the query to perform using a query descriptor lambda
 		/// </summary>
-		public PercolateDescriptor<T> Query(Func<QueryDescriptor<T>, QueryContainer> query)
+		public PercolateDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> query)
 		{
 			query.ThrowIfNull("query");
-			var q = new QueryDescriptor<T>();
+			var q = new QueryContainerDescriptor<T>();
 			var bq = query(q);
 			return this.Query(bq);
 		}
@@ -283,7 +283,7 @@ namespace Nest
 		/// </summary>
 		public PercolateDescriptor<T> QueryString(string userInput)
 		{
-			var q = new QueryDescriptor<T>();
+			var q = new QueryContainerDescriptor<T>();
 			QueryContainer bq;
 			if (userInput.IsNullOrEmpty())
 				bq = q.MatchAll();
@@ -296,10 +296,10 @@ namespace Nest
 		/// <summary>
 		/// Filter search using a filter descriptor lambda
 		/// </summary>
-		public PercolateDescriptor<T> Filter(Func<QueryDescriptor<T>, QueryContainer> filter)
+		public PercolateDescriptor<T> Filter(Func<QueryContainerDescriptor<T>, QueryContainer> filter)
 		{
 			filter.ThrowIfNull("filter");
-			var f = new QueryDescriptor<T>();
+			var f = new QueryContainerDescriptor<T>();
 
 			var bf = filter(f);
 			if (bf == null)

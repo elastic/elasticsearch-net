@@ -718,10 +718,10 @@ namespace Nest
 		/// <summary>
 		/// Describe the query to perform using a query descriptor lambda
 		/// </summary>
-		public SearchDescriptor<T> Query(Func<QueryDescriptor<T>, QueryContainer> query)
+		public SearchDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> query)
 		{
 			query.ThrowIfNull("query");
-			var q = new QueryDescriptor<T>();
+			var q = new QueryContainerDescriptor<T>();
 			((IQueryContainer)q).IsStrict = this._Strict;
 			var bq = query(q);
 			return this.Query(bq);
@@ -756,7 +756,7 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> QueryString(string userInput)
 		{
-			var q = new QueryDescriptor<T>();
+			var q = new QueryContainerDescriptor<T>();
 			QueryContainer bq;
 			if (userInput.IsNullOrEmpty())
 				bq = q.MatchAll();
@@ -771,17 +771,17 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> QueryRaw(string rawQuery)
 		{
-			Self.Query = new QueryDescriptor<T>().Raw(rawQuery);
+			Self.Query = new QueryContainerDescriptor<T>().Raw(rawQuery);
 			return this;
 		}
 
 		/// <summary>
 		/// Filter search using a filter descriptor lambda
 		/// </summary>
-		public SearchDescriptor<T> PostFilter(Func<QueryDescriptor<T>, QueryContainer> filter)
+		public SearchDescriptor<T> PostFilter(Func<QueryContainerDescriptor<T>, QueryContainer> filter)
 		{
 			filter.ThrowIfNull("filter");
-			var f = new QueryDescriptor<T>().Strict(this._Strict);
+			var f = new QueryContainerDescriptor<T>().Strict(this._Strict);
 
 			var bf = filter(f);
 			if (bf == null)
@@ -812,7 +812,7 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> FilterRaw(string rawFilter)
 		{
-			Self.PostFilter = new QueryDescriptor<T>().Raw(rawFilter);
+			Self.PostFilter = new QueryContainerDescriptor<T>().Raw(rawFilter);
 			return this;
 		}
 

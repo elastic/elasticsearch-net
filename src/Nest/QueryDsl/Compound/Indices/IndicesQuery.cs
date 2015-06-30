@@ -16,7 +16,7 @@ namespace Nest
 		IEnumerable<string> Indices { get; set; }
 
 		[JsonProperty("query")]
-		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryDescriptor<object>>, CustomJsonConverter>))]
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryContainerDescriptor<object>>, CustomJsonConverter>))]
 		IQueryContainer Query { get; set; }
 
 		[JsonProperty("no_match_query")]
@@ -63,9 +63,9 @@ namespace Nest
 			return this;
 		}
 
-		public IndicesQueryDescriptor<T> Query(Func<QueryDescriptor<T>, QueryContainer> querySelector)
+		public IndicesQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector)
 		{
-			var qd = new QueryDescriptor<T>();
+			var qd = new QueryContainerDescriptor<T>();
 			var q = querySelector(qd);
 			if (q.IsConditionless)
 				return this;
@@ -74,9 +74,9 @@ namespace Nest
 			return this;
 		}
 
-		public IndicesQueryDescriptor<T> Query<K>(Func<QueryDescriptor<K>, QueryContainer> querySelector) where K : class
+		public IndicesQueryDescriptor<T> Query<K>(Func<QueryContainerDescriptor<K>, QueryContainer> querySelector) where K : class
 		{
-			var qd = new QueryDescriptor<K>();
+			var qd = new QueryContainerDescriptor<K>();
 			var q = querySelector(qd);
 			if (q.IsConditionless)
 				return this;
@@ -91,9 +91,9 @@ namespace Nest
 			return this;
 		}
 
-		public IndicesQueryDescriptor<T> NoMatchQuery(Func<QueryDescriptor<T>, QueryContainer> querySelector)
+		public IndicesQueryDescriptor<T> NoMatchQuery(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector)
 		{
-			var qd = new QueryDescriptor<T>();
+			var qd = new QueryContainerDescriptor<T>();
 			var q = querySelector(qd);
 			if (q.IsConditionless)
 				return this;
@@ -102,9 +102,9 @@ namespace Nest
 			return this;
 		}
 
-		public IndicesQueryDescriptor<T> NoMatchQuery<K>(Func<QueryDescriptor<K>, IQueryContainer> querySelector) where K : class
+		public IndicesQueryDescriptor<T> NoMatchQuery<K>(Func<QueryContainerDescriptor<K>, IQueryContainer> querySelector) where K : class
 		{
-			var qd = new QueryDescriptor<K>();
+			var qd = new QueryContainerDescriptor<K>();
 			var q = querySelector(qd);
 			if (q.IsConditionless)
 				return this;

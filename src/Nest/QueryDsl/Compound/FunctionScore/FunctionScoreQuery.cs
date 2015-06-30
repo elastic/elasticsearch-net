@@ -15,7 +15,7 @@ namespace Nest
 		IEnumerable<IFunctionScoreFunction> Functions { get; set; }
 
 		[JsonProperty(PropertyName = "query")]
-		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryDescriptor<object>>, CustomJsonConverter>))]
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryContainerDescriptor<object>>, CustomJsonConverter>))]
 		IQueryContainer Query { get; set; }
 
 		[JsonProperty(PropertyName = "filter")]
@@ -99,19 +99,19 @@ namespace Nest
 			return this;
 		}
 
-		public FunctionScoreQueryDescriptor<T> Query(Func<QueryDescriptor<T>, QueryContainer> querySelector)
+		public FunctionScoreQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector)
 		{
 			querySelector.ThrowIfNull("querySelector");
-			var query = new QueryDescriptor<T>();
+			var query = new QueryContainerDescriptor<T>();
 			var q = querySelector(query);
 			Self.Query = q.IsConditionless ? null : q;
 			return this;
 		}
 
-		public FunctionScoreQueryDescriptor<T> Filter(Func<QueryDescriptor<T>, QueryContainer> filterSelector)
+		public FunctionScoreQueryDescriptor<T> Filter(Func<QueryContainerDescriptor<T>, QueryContainer> filterSelector)
 		{
 			filterSelector.ThrowIfNull("filterSelector");
-			var filter = new QueryDescriptor<T>();
+			var filter = new QueryContainerDescriptor<T>();
 			var f = filterSelector(filter);
 			Self.Filter = f.IsConditionless ? null : f;
 			return this;

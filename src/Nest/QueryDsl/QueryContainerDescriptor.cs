@@ -8,12 +8,12 @@ using System.Runtime.InteropServices;
 namespace Nest
 {
 	[JsonObject(MemberSerialization.OptIn)]
-	public class QueryDescriptor<T> : QueryContainer where T : class
+	public class QueryContainerDescriptor<T> : QueryContainer where T : class
 	{
 		private IQueryContainer Self => this;
 
-		QueryDescriptor<T> _assign(Action<IQueryContainer> assigner) =>
-			Fluent.Assign<QueryDescriptor<T>, IQueryContainer>(new QueryDescriptor<T>(), a =>
+		QueryContainerDescriptor<T> _assign(Action<IQueryContainer> assigner) =>
+			Fluent.Assign<QueryContainerDescriptor<T>, IQueryContainer>(new QueryContainerDescriptor<T>(), a =>
 			{
 				a.IsStrict = this.IsStrict;
 				a.IsVerbatim = this.IsVerbatim;
@@ -21,16 +21,16 @@ namespace Nest
 			});
 
 		//TODO remove all the shortcuts into descriptors except for .Term(s)()
-		public QueryDescriptor() { }
+		public QueryContainerDescriptor() { }
 
-		internal QueryDescriptor(bool forceConditionless)
+		internal QueryContainerDescriptor(bool forceConditionless)
 		{
 			Self.IsConditionless = forceConditionless;
 		}
 
-		public QueryDescriptor<T> Strict(bool strict = true) => _assign(a => a.IsStrict = strict);
+		public QueryContainerDescriptor<T> Strict(bool strict = true) => _assign(a => a.IsStrict = strict);
 
-		public QueryDescriptor<T> Verbatim(bool verbatim = true) => _assign(a =>
+		public QueryContainerDescriptor<T> Verbatim(bool verbatim = true) => _assign(a =>
 		{
 			//TODO do we need to set IsStrict to verbatim value here?
 			a.IsStrict = verbatim;

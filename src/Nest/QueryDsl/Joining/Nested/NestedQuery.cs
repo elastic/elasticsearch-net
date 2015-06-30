@@ -16,11 +16,11 @@ namespace Nest
 		NestedScore? Score { get; set; }
 
 		[JsonProperty("filter")]
-		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryDescriptor<object>>, CustomJsonConverter>))]
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryContainerDescriptor<object>>, CustomJsonConverter>))]
 		IQueryContainer Filter { get; set; }
 
 		[JsonProperty("query")]
-		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryDescriptor<object>>, CustomJsonConverter>))]
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryContainerDescriptor<object>>, CustomJsonConverter>))]
 		IQueryContainer Query { get; set; }
 
 		[JsonProperty("path")]
@@ -67,16 +67,16 @@ namespace Nest
 			return this;
 		}
 
-		public NestedQueryDescriptor<T> Filter(Func<QueryDescriptor<T>, QueryContainer> filterSelector)
+		public NestedQueryDescriptor<T> Filter(Func<QueryContainerDescriptor<T>, QueryContainer> filterSelector)
 		{
-			var q = new QueryDescriptor<T>();
+			var q = new QueryContainerDescriptor<T>();
 			Self.Filter = filterSelector(q);
 			return this;
 		}
 
-		public NestedQueryDescriptor<T> Query(Func<QueryDescriptor<T>, QueryContainer> querySelector)
+		public NestedQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector)
 		{
-			var q = new QueryDescriptor<T>();
+			var q = new QueryContainerDescriptor<T>();
 			Self.Query = querySelector(q);
 			return this;
 		}

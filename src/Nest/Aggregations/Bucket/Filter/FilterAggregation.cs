@@ -23,8 +23,8 @@ namespace Nest
 	{
 		IQueryContainer IFilterAggregator.Filter { get; set; }
 
-		public FilterAggregatorDescriptor<T> Filter(Func<QueryDescriptor<T>, QueryContainer> selector) =>
-			Assign(a=> a.Filter = selector?.Invoke(new QueryDescriptor<T>()));
+		public FilterAggregatorDescriptor<T> Filter(Func<QueryContainerDescriptor<T>, QueryContainer> selector) =>
+			Assign(a=> a.Filter = selector?.Invoke(new QueryContainerDescriptor<T>()));
 
 	}
 }

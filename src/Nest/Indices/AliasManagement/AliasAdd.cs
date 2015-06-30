@@ -62,12 +62,12 @@ namespace Nest
 			Self.Add.SearchRouting = searchRouting;
 			return this;
 		}
-		public AliasAddDescriptor Filter<T>(Func<QueryDescriptor<T>, QueryContainer> filterSelector)
+		public AliasAddDescriptor Filter<T>(Func<QueryContainerDescriptor<T>, QueryContainer> filterSelector)
 			where T : class
 		{
 			filterSelector.ThrowIfNull("filterSelector");
 
-			Self.Add.QueryDescriptor = filterSelector(new QueryDescriptor<T>());
+			Self.Add.QueryDescriptor = filterSelector(new QueryContainerDescriptor<T>());
 			return this;
 		}
 	}

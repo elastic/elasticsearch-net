@@ -59,10 +59,10 @@ namespace Nest
 			return this;
 		}
 
-		public virtual RescoreQueryDescriptor<T> Query(Func<QueryDescriptor<T>, QueryContainer> query)
+		public virtual RescoreQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> query)
 		{
 			query.ThrowIfNull("query");
-			var q = new QueryDescriptor<T>();
+			var q = new QueryContainerDescriptor<T>();
 
 			var bq = query(q);
 			IQueryContainer container = bq;

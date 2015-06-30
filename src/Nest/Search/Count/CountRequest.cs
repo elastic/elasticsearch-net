@@ -68,9 +68,9 @@ namespace Nest
 
 		IQueryContainer ICountRequest.Query { get; set; }
 
-		public CountDescriptor<T> Query(Func<QueryDescriptor<T>, QueryContainer> querySelector)
+		public CountDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector)
 		{
-			Self.Query = querySelector(new QueryDescriptor<T>());
+			Self.Query = querySelector(new QueryContainerDescriptor<T>());
 			return this;
 		}
 

@@ -47,12 +47,12 @@ namespace Nest
 			return this;
 		}
 
-		public DisMaxQueryDescriptor<T> Queries(params Func<QueryDescriptor<T>, QueryContainer>[] querySelectors)
+		public DisMaxQueryDescriptor<T> Queries(params Func<QueryContainerDescriptor<T>, QueryContainer>[] querySelectors)
 		{
 			var queries = new List<QueryContainer>();
 			foreach (var selector in querySelectors)
 			{
-				var query = new QueryDescriptor<T>();
+				var query = new QueryContainerDescriptor<T>();
 				var q = selector(query);
 				queries.Add(q);
 			}

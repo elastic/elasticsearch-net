@@ -41,8 +41,8 @@ namespace Nest
 		IList<PropertyPathMarker> IInnerHits.FielddataFields { get; set; }
 		IDictionary<string, IScriptQuery> IInnerHits.ScriptFields { get; set; }
 
-		public GlobalInnerHitDescriptor<T> Query(Func<QueryDescriptor<T>, IQueryContainer> querySelector) => 
-			_assign(a => a.Query = querySelector?.Invoke(new QueryDescriptor<T>()));
+		public GlobalInnerHitDescriptor<T> Query(Func<QueryContainerDescriptor<T>, IQueryContainer> querySelector) => 
+			_assign(a => a.Query = querySelector?.Invoke(new QueryContainerDescriptor<T>()));
 		
 		public GlobalInnerHitDescriptor<T> InnerHits(Func<
 				FluentDictionary<string, Func<InnerHitsContainerDescriptor<T>, IInnerHitsContainer>>, 

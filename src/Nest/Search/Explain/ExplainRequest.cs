@@ -63,9 +63,9 @@ namespace Nest
 
         IQueryContainer IExplainRequest.Query { get; set; }
 
-		public ExplainDescriptor<T> Query(Func<QueryDescriptor<T>, QueryContainer> querySelector)
+		public ExplainDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector)
 		{
-			Self.Query = querySelector(new QueryDescriptor<T>());
+			Self.Query = querySelector(new QueryContainerDescriptor<T>());
 			return this;
 		}
 

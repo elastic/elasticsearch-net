@@ -11,7 +11,7 @@ namespace Nest
 	public interface IConstantScoreQuery : IQuery
 	{
 		[JsonProperty(PropertyName = "query")]
-		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryDescriptor<object>>, CustomJsonConverter>))]
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryContainerDescriptor<object>>, CustomJsonConverter>))]
 		IQueryContainer Query { get; set; }
 
 		[JsonProperty(PropertyName = "boost")]
@@ -45,11 +45,11 @@ namespace Nest
 			return this;
 		}
 
-		public ConstantScoreQueryDescriptor<T> Query(Func<QueryDescriptor<T>, QueryContainer> querySelector)
+		public ConstantScoreQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector)
 		{
 			querySelector.ThrowIfNull("querySelector");
 			Self.Query = null;
-			var query = new QueryDescriptor<T>();
+			var query = new QueryContainerDescriptor<T>();
 			var q = querySelector(query);
 
 			Self.Query = q;

@@ -72,9 +72,9 @@ namespace Nest
 
         IQueryContainer IValidateQueryRequest.Query { get; set; }
 
-		public ValidateQueryDescriptor<T> Query(Func<QueryDescriptor<T>, QueryContainer> querySelector)
+		public ValidateQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector)
 		{
-			Self.Query = querySelector(new QueryDescriptor<T>());
+			Self.Query = querySelector(new QueryContainerDescriptor<T>());
 			return this;
 		}
 

@@ -26,8 +26,8 @@ namespace Nest
 	{
 		IEnumerable<IQueryContainer> IFiltersAggregator.Filters { get; set; }
 
-		public FiltersAggregatorDescriptor<T> Filters(params Func<QueryDescriptor<T>, QueryContainer>[] queryDescriptors) =>
-			Assign(a=>a.Filters = queryDescriptors?.Select(f => f?.Invoke(new QueryDescriptor<T>()))?.ToListOrNullIfEmpty());
+		public FiltersAggregatorDescriptor<T> Filters(params Func<QueryContainerDescriptor<T>, QueryContainer>[] queryDescriptors) =>
+			Assign(a=>a.Filters = queryDescriptors?.Select(f => f?.Invoke(new QueryContainerDescriptor<T>()))?.ToListOrNullIfEmpty());
 
 	}
 }
