@@ -19,28 +19,21 @@ namespace CodeGeneration.LowLevelClient
 			ApiGenerator.GenerateClientInterface(spec);
 
 			ApiGenerator.GenerateRequestParameters(spec);
-			
+
 			ApiGenerator.GenerateRequestParametersExtensions(spec);
-			
+
 			ApiGenerator.GenerateDescriptors(spec);
-			
+
 			ApiGenerator.GenerateRequests(spec);
 
 			ApiGenerator.GenerateEnums(spec);
 
 			ApiGenerator.GenerateRawClient(spec);
-			
+
 			ApiGenerator.GenerateRawDispatch(spec);
 
 			Console.WriteLine("Found {0} api documentation endpoints", spec.Endpoints.Count());
-
-			var x  = GetT<string>();
 		}
 
-
-		static T GetT<T>()
-		{
-			return default(T);
-		}
 	}
 }

@@ -13,7 +13,7 @@ namespace Nest.Litterateur
 
 		public static class LitUp
 		{
-			private readonly static string _testFolder = @"..\..\..\..\..\src\Tests\Nest.Tests.Literate";
+			private readonly static string _testFolder = @"..\..\..\..\..\src\Tests";
 			private readonly static string _docFolder = @"..\..\..\..\..\docs\contents\new";
 			private static readonly string[] _skipFolders = new[] { "Nest.Tests.Literate", "Debug", "Release" };
 
@@ -36,7 +36,7 @@ namespace Nest.Litterateur
 				var files = FindAll();
 				foreach(var file in files)
 				{
-					var path = Regex.Replace(file.FileName, @"(^.+\\Nest.Tests.Literate\\|\.cs$)", "") + ".md";
+					var path = Regex.Replace(file.FileName, @"(^.+\\Tests\\|\.cs$)", "") + ".md";
 					var docFileName = Path.GetFullPath(Path.Combine(_docFolder, path));
 					var fileInfo = new FileInfo(docFileName);
 					Directory.CreateDirectory(fileInfo.Directory.FullName);

@@ -5,7 +5,7 @@ menusection: concepts
 menuitem: breaking-changes
 ---
 # Connecting
-Connecting to Elasticsearch with `Elasticsearch.Net` is quite easy but has a few toggles and options worth knowing.
+Connecting to *Elasticsearch* with `Elasticsearch.Net` is quite easy but has a few toggles and options worth knowing.
 
 # Choosing the right connection strategy
 If you simply new an `ElasticsearchClient`, it will be a non-failover connection to `http://localhost:9200`
@@ -62,9 +62,9 @@ var config = new ConnectionConfiguration()
 Disable automatic proxy detection.  Defaults to true. 
 
 ```
-.EnableCompressedResponses()
+.EnableHttpCompression()
 ```
-Enable compressed responses from Elasticsearch (Note that nodes need to be configured 
+Enable compressed request and reesponses from Elasticsearch (Note that nodes need to be configured 
 to allow this.  See the [http module settings](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-http.html) for more info).
 
 ```
