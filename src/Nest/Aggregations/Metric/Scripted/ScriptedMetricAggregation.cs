@@ -9,7 +9,7 @@ namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ReadAsTypeConverter<ScriptedMetricsAggregator>))]
-	public interface IScriptedMetricAggregator
+	public interface IScriptedMetricAggregator : IMetricAggregator
 	{
 		[JsonProperty("init_script")]
 		string InitScript { get; set; }
@@ -53,6 +53,8 @@ namespace Nest
 
 	public class ScriptedMetricsAggregator : MetricAggregator, IScriptedMetricAggregator
 	{
+		[Obsolete("Script proxies to MapScript on ScriptedMetric, please consider using MapScript explicitly")]
+		public override string Script { get { return MapScript; } set { MapScript = value; } }
 		public string InitScript { get; set; }
 		public string InitScriptFile { get; set; }
 		public string InitScriptId { get; set; }
@@ -69,11 +71,10 @@ namespace Nest
 	}
 
 	public class ScriptedMetricAggregationDescriptor<T>
-		: MetricAggregationBaseDescriptor<ScriptedMetricAggregationDescriptor<T>, T>, IScriptedMetricAggregator
+		: MetricAggregationBaseDescriptor<ScriptedMetricAggregationDescriptor<T>, IScriptedMetricAggregator, T>
+		, IScriptedMetricAggregator
 		where T : class
 	{
-		IScriptedMetricAggregator Self => this;
-
 		string IScriptedMetricAggregator.InitScript { get; set; }
 		string IScriptedMetricAggregator.InitScriptFile { get; set; }
 		string IScriptedMetricAggregator.InitScriptId { get; set; }
@@ -88,82 +89,35 @@ namespace Nest
 		string IScriptedMetricAggregator.ReduceScriptId { get; set; }
 		IDictionary<string, object> IScriptedMetricAggregator.ReduceParams { get; set; }
 
-		public ScriptedMetricAggregationDescriptor<T> InitScript(string script)
-		{
-			this.Self.InitScript = script;
-			return this;
-		}
+		[Obsolete("Script() proxies to MapScript on ScriptedMetric, please consider using MapScript explicitly")]
+		public override ScriptedMetricAggregationDescriptor<T> Script(string script) => Assign(a => a.MapScript = script);
 
-		public ScriptedMetricAggregationDescriptor<T> InitScriptFile(string file)
-		{
-			this.Self.InitScriptFile = file;
-			return this;
-		}
+		public ScriptedMetricAggregationDescriptor<T> InitScript(string script) => Assign(a => a.InitScript = script);
 
-		public ScriptedMetricAggregationDescriptor<T> InitScriptId(string id)
-		{
-			this.Self.InitScriptId = id;
-			return this;
-		}
+		public ScriptedMetricAggregationDescriptor<T> InitScriptFile(string file) => Assign(a => a.InitScriptFile = file);
 
-		public ScriptedMetricAggregationDescriptor<T> MapScript(string script)
-		{
-			this.Self.MapScript = script;
-			return this;
-		}
+		public ScriptedMetricAggregationDescriptor<T> InitScriptId(string id) => Assign(a => a.InitScriptId = id);
 
-		public ScriptedMetricAggregationDescriptor<T> MapScriptFile(string file)
-		{
-			this.Self.MapScriptFile = file;
-			return this;
-		}
+		public ScriptedMetricAggregationDescriptor<T> MapScript(string script) => Assign(a => a.MapScript = script);
 
-		public ScriptedMetricAggregationDescriptor<T> MapScriptId(string id)
-		{
-			this.Self.MapScriptId = id;
-			return this;
-		}
+		public ScriptedMetricAggregationDescriptor<T> MapScriptFile(string file) => Assign(a => a.MapScriptFile = file);
 
-		public ScriptedMetricAggregationDescriptor<T> CombineScript(string script)
-		{
-			this.Self.CombineScript = script;
-			return this;
-		}
+		public ScriptedMetricAggregationDescriptor<T> MapScriptId(string id) => Assign(a => a.MapScriptId = id);
 
-		public ScriptedMetricAggregationDescriptor<T> CombineScriptFile(string file)
-		{
-			this.Self.CombineScriptFile = file;
-			return this;
-		}
+		public ScriptedMetricAggregationDescriptor<T> CombineScript(string script) => Assign(a => a.CombineScript = script);
 
-		public ScriptedMetricAggregationDescriptor<T> CombineScriptId(string id)
-		{
-			this.Self.CombineScriptId = id;
-			return this;
-		}
+		public ScriptedMetricAggregationDescriptor<T> CombineScriptFile(string file) => Assign(a => a.CombineScriptFile = file);
 
-		public ScriptedMetricAggregationDescriptor<T> ReduceScript(string script)
-		{
-			this.Self.ReduceScript = script;
-			return this;
-		}
+		public ScriptedMetricAggregationDescriptor<T> CombineScriptId(string id) => Assign(a => a.CombineScriptId = id);
 
-		public ScriptedMetricAggregationDescriptor<T> ReduceScriptFile(string file)
-		{
-			this.Self.ReduceScriptFile = file;
-			return this;
-		}
+		public ScriptedMetricAggregationDescriptor<T> ReduceScript(string script) => Assign(a => a.ReduceScript = script);
 
-		public ScriptedMetricAggregationDescriptor<T> ReduceScriptId(string id)
-		{
-			this.Self.ReduceScriptId = id;
-			return this;
-		}
+		public ScriptedMetricAggregationDescriptor<T> ReduceScriptFile(string file) => Assign(a => a.ReduceScriptFile = file);
 
-		public ScriptedMetricAggregationDescriptor<T> ReduceParams(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramSelector)
-		{
-			this.Self.ReduceParams = paramSelector(new FluentDictionary<string, object>());
-			return this;
-		}
+		public ScriptedMetricAggregationDescriptor<T> ReduceScriptId(string id) => Assign(a => a.InitScriptId = id);
+
+		public ScriptedMetricAggregationDescriptor<T> ReduceParams(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramSelector) =>
+				Assign(a => a.ReduceParams = paramSelector(new FluentDictionary<string, object>()));
+	}
 	}
 }

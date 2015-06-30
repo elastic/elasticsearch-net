@@ -8,16 +8,12 @@ namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ReadAsTypeConverter<SumAggregator>))]
-	public interface ISumAggregator : IMetricAggregator
-	{
-	}
+	public interface ISumAggregator : IMetricAggregator { }
 
-	public class SumAggregator : MetricAggregator, ISumAggregator
-	{
-	}
+	public class SumAggregator : MetricAggregator, ISumAggregator { }
 
-	public class SumAggregationDescriptor<T> : MetricAggregationBaseDescriptor<SumAggregationDescriptor<T>, T>, ISumAggregator where T : class
-	{
-		
-	}
+	public class SumAggregationDescriptor<T> 
+		: MetricAggregationBaseDescriptor<SumAggregationDescriptor<T>, ISumAggregator, T>
+			, ISumAggregator 
+		where T : class { }
 }

@@ -21,7 +21,7 @@ namespace Nest
 		double? NegativeBoost { get; set; }
 	}
 
-	public class BoostingQuery : Query, IBoostingQuery
+	public class BoostingQuery : QueryBase, IBoostingQuery
 	{
 		bool IQuery.Conditionless => IsConditionless(this);
 		public QueryContainer PositiveQuery { get; set; }

@@ -21,7 +21,7 @@ namespace Nest
 		IEnumerable<QueryContainer> Queries { get; set; }
 	}
 
-	public class DismaxQuery : Query, IDisMaxQuery
+	public class DismaxQuery : QueryBase, IDisMaxQuery
 	{
 		bool IQuery.Conditionless => IsConditionless(this);
 		public double? TieBreaker { get; set; }

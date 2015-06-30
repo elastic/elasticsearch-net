@@ -20,7 +20,7 @@ namespace Nest
         double? Boost { get; set; }
 	}
 
-	public class SpanFirstQuery : Query, ISpanFirstQuery
+	public class SpanFirstQuery : QueryBase, ISpanFirstQuery
 	{
 		bool IQuery.Conditionless => IsConditionless(this);
 		public ISpanQuery Match { get; set; }

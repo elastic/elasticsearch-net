@@ -78,7 +78,7 @@ namespace Nest
 		RewriteMultiTerm? Rewrite { get; set; }
 	}
 
-	public class QueryStringQuery : Query, IQueryStringQuery
+	public class QueryStringQuery : QueryBase, IQueryStringQuery
 	{
 		bool IQuery.Conditionless => IsConditionless(this);
 		public string Query { get; set; }

@@ -21,9 +21,7 @@ namespace Nest
 			});
 
 		//TODO remove all the shortcuts into descriptors except for .Term(s)()
-		public QueryDescriptor()
-		{
-		}
+		public QueryDescriptor() { }
 
 		internal QueryDescriptor(bool forceConditionless)
 		{
@@ -132,7 +130,6 @@ namespace Nest
 		/// </summary>
 		public QueryContainer Match(Func<MatchQueryDescriptor<T>, IMatchQuery> selector) =>
 			this._assignSelector(selector, (query, container) => container.Match = query);
-
 
 		/// <summary>
 		/// The text_phrase query analyzes the text and creates a phrase query out of the analyzed text. 

@@ -45,7 +45,7 @@ namespace Nest
 		string MinimumShouldMatch { get; set; }
 	}
 
-	public class SimpleQueryStringQuery : Query, ISimpleQueryStringQuery
+	public class SimpleQueryStringQuery : QueryBase, ISimpleQueryStringQuery
 	{
 		bool IQuery.Conditionless => IsConditionless(this);
 		public string Query { get; set; }

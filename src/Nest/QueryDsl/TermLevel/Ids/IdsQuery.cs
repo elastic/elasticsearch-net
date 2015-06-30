@@ -18,7 +18,7 @@ namespace Nest
 		IEnumerable<string> Values { get; set; }
 	}
 	
-	public class IdsQuery : Query, IIdsQuery
+	public class IdsQuery : QueryBase, IIdsQuery
 	{
 		bool IQuery.Conditionless => IsConditionless(this);
 		public IEnumerable<string> Type { get; set; }

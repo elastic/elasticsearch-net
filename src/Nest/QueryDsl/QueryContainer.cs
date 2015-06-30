@@ -264,14 +264,14 @@ namespace Nest
 
 		public QueryContainer() {}
 	
-		public QueryContainer(Query query)
+		public QueryContainer(QueryBase query)
 		{
-			Query.ToContainer(query, this);
+			QueryBase.ToContainer(query, this);
 		}
 	
-		public static QueryContainer From(Query query)
+		public static QueryContainer From(QueryBase query)
 		{
-			return Query.ToContainer(query);
+			return QueryBase.ToContainer(query);
 		}
 
 		public static QueryContainer operator &(QueryContainer leftContainer, QueryContainer rightContainer)
@@ -349,4 +349,5 @@ namespace Nest
 			return new RawJson(f.RawQuery);
 		}
 	}
+
 }

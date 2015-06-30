@@ -75,7 +75,7 @@ namespace Nest
 	}
 
 
-	public class MoreLikeThisQuery : Query, IMoreLikeThisQuery
+	public class MoreLikeThisQuery : QueryBase, IMoreLikeThisQuery
 	{
 		bool IQuery.Conditionless => IsConditionless(this);
 		public IEnumerable<PropertyPathMarker> Fields { get; set; }

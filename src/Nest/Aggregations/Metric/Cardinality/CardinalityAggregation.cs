@@ -23,25 +23,19 @@ namespace Nest
 		public bool? Rehash { get; set; }
 	}
 
-	public class CardinalityAggregationDescriptor<T> : MetricAggregationBaseDescriptor<CardinalityAggregationDescriptor<T>, T>, ICardinalityAggregator where T : class
+	public class CardinalityAggregationDescriptor<T> 
+		: MetricAggregationBaseDescriptor<CardinalityAggregationDescriptor<T>, ICardinalityAggregator, T>
+			, ICardinalityAggregator 
+		where T : class
 	{
-		private ICardinalityAggregator Self => this;
-
 		int? ICardinalityAggregator.PrecisionThreshold { get; set; }
 
 		bool? ICardinalityAggregator.Rehash { get; set; }
 
 		public CardinalityAggregationDescriptor<T> PrecisionThreshold(int precisionThreshold)
-		{
-			Self.PrecisionThreshold = precisionThreshold;
-			return this;
-		}
+			=> Assign(a => a.PrecisionThreshold = precisionThreshold);
 
-		public CardinalityAggregationDescriptor<T> Rehash(bool rehash = true)
-		{
-			Self.Rehash = rehash;
-			return this;
-		}
+		public CardinalityAggregationDescriptor<T> Rehash(bool rehash = true) => Assign(a => a.Rehash = rehash);
 
 	}
 }

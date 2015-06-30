@@ -38,7 +38,7 @@ namespace Nest
 		[JsonProperty("fielddata_fields")]
 		IEnumerable<PropertyPathMarker> FieldDataFields { get; set; }
 
-		[JsonProperty("version")] 
+		[JsonProperty("version")]
 		bool? Version { get; set; }
 	}
 
@@ -55,11 +55,11 @@ namespace Nest
 		public bool? Version { get; set; }
 	}
 
-	public class TopHitsAggregationDescriptor<T> 
-		: MetricAggregationBaseDescriptor<TopHitsAggregationDescriptor<T>, T>, ITopHitsAggregator
+	public class TopHitsAggregationDescriptor<T>
+		: MetricAggregationBaseDescriptor<TopHitsAggregationDescriptor<T>, ITopHitsAggregator, T>
+			, ITopHitsAggregator
 		where T : class
 	{
-		ITopHitsAggregator Self => this;
 
 		int? ITopHitsAggregator.From { get; set; }
 
@@ -79,17 +79,9 @@ namespace Nest
 
 		bool? ITopHitsAggregator.Version { get; set; }
 
-		public TopHitsAggregationDescriptor<T> From(int from)
-		{
-			this.Self.From = from;
-			return this;
-		}
+		public TopHitsAggregationDescriptor<T> From(int from) => Assign(a => a.From = from);
 
-		public TopHitsAggregationDescriptor<T> Size(int size)
-		{
-			this.Self.Size = size;
-			return this;
-		}
+		public TopHitsAggregationDescriptor<T> Size(int size) => Assign(a => a.Size = size);
 
 		public TopHitsAggregationDescriptor<T> Sort(Func<SortFieldDescriptor<T>, IFieldSort> sortSelector)
 		{
@@ -97,45 +89,28 @@ namespace Nest
 
 			if (Self.Sort == null)
 				Self.Sort = new List<KeyValuePair<PropertyPathMarker, ISort>>();
-			
+
 			var descriptor = sortSelector(new SortFieldDescriptor<T>());
 			this.Self.Sort.Add(new KeyValuePair<PropertyPathMarker, ISort>(descriptor.Field, descriptor));
-			
-			return this;
-		}
-
-		public TopHitsAggregationDescriptor<T> Source(bool include = true)
-		{
-			if (!include)
-				this.Self.Source = new SourceFilter { Exclude = new PropertyPathMarker[] { "*" } };
-			else
-				this.Self.Source = null;
 
 			return this;
 		}
 
-		public TopHitsAggregationDescriptor<T> Source(Func<SearchSourceDescriptor<T>, SearchSourceDescriptor<T>> sourceSelector)
-		{
-			this.Self.Source = sourceSelector(new SearchSourceDescriptor<T>());
-			return this;
-		}
+		public TopHitsAggregationDescriptor<T> Source(bool include = true) =>
+			Assign(a => a.Source = !include ? SourceFilter.ExcludeAll : null);
 
-		public TopHitsAggregationDescriptor<T> Highlight(Func<HighlightDescriptor<T>, HighlightDescriptor<T>> highlightDescriptor)
-		{
-			highlightDescriptor.ThrowIfNull("highlightDescriptor");
-			this.Self.Highlight = highlightDescriptor(new HighlightDescriptor<T>());
-			return this;
-		}
+		public TopHitsAggregationDescriptor<T> Source(Func<SearchSourceDescriptor<T>, SearchSourceDescriptor<T>> sourceSelector) =>
+			Assign(a => a.Source = sourceSelector?.Invoke(new SearchSourceDescriptor<T>()));
 
-		public TopHitsAggregationDescriptor<T> Explain(bool explain = true)
-		{
-			this.Self.Explain = explain;
-			return this;
-		}
+		public TopHitsAggregationDescriptor<T> Highlight(Func<HighlightDescriptor<T>, HighlightDescriptor<T>> highlightDescriptor) =>
+			Assign(a => a.Highlight = highlightDescriptor?.Invoke(new HighlightDescriptor<T>()));
 
+		public TopHitsAggregationDescriptor<T> Explain(bool explain = true) => Assign(a => a.Explain = explain);
+		
+		//TODO scriptfields needs a better encapsulation (seperate descriptor)
 		public TopHitsAggregationDescriptor<T> ScriptFields(
 			Func<FluentDictionary<string, Func<ScriptQueryDescriptor<T>, ScriptQueryDescriptor<T>>>,
-		 FluentDictionary<string, Func<ScriptQueryDescriptor<T>, ScriptQueryDescriptor<T>>>> scriptFields)
+			 FluentDictionary<string, Func<ScriptQueryDescriptor<T>, ScriptQueryDescriptor<T>>>> scriptFields)
 		{
 			scriptFields.ThrowIfNull("scriptFields");
 			var scriptFieldDescriptors = scriptFields(new FluentDictionary<string, Func<ScriptQueryDescriptor<T>, ScriptQueryDescriptor<T>>>());
@@ -154,22 +129,13 @@ namespace Nest
 			return this;
 		}
 
-		public TopHitsAggregationDescriptor<T> FieldDataFields(params PropertyPathMarker[] fields)
-		{
-			this.Self.FieldDataFields = fields;
-			return this;
-		}
+		public TopHitsAggregationDescriptor<T> FieldDataFields(params PropertyPathMarker[] fields) =>
+			Assign(a => a.FieldDataFields = fields);
 
-		public TopHitsAggregationDescriptor<T> FieldDataFields(params Expression<Func<T, object>>[] objectPaths)
-		{
-			this.Self.FieldDataFields = objectPaths.Select(e => (PropertyPathMarker)e);
-			return this;
-		}
+		public TopHitsAggregationDescriptor<T> FieldDataFields(params Expression<Func<T, object>>[] objectPaths) =>
+			Assign(a => a.FieldDataFields = objectPaths?.Select(e => (PropertyPathMarker) e).ToListOrNullIfEmpty());
 
-		public TopHitsAggregationDescriptor<T> Version (bool version = true)
-		{
-			this.Self.Version = version;
-			return this;
-		}
+		public TopHitsAggregationDescriptor<T> Version(bool version = true) => Assign(a => a.Version = version);
+
 	}
 }

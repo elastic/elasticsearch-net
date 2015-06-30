@@ -85,7 +85,7 @@ namespace Nest
 		IValueCountAggregator ValueCount { get; set; }
 
 		[JsonProperty("percentile_ranks")]
-		IPercentileRanksAggregaor PercentileRanks { get; set; }
+		IPercentileRanksAggregator PercentileRanks { get; set; }
 
 		[JsonProperty("top_hits")]
 		ITopHitsAggregator TopHits { get; set; }
@@ -121,7 +121,7 @@ namespace Nest
 		private IRangeAggregator _range;
 		private ITermsAggregator _terms;
 		private ISignificantTermsAggregator _significantTerms;
-		private IPercentileRanksAggregaor _percentileRanks;
+		private IPercentileRanksAggregator _percentileRanks;
 	    private IFiltersAggregator _filters;
 		private ITopHitsAggregator _topHits;
 		private IChildrenAggregator _children;
@@ -243,7 +243,7 @@ namespace Nest
 			set { _significantTerms = value; }
 		}
 		
-		public IPercentileRanksAggregaor PercentileRanks
+		public IPercentileRanksAggregator PercentileRanks
 		{
 			get { return _percentileRanks; }
 			set { _percentileRanks = value; }
@@ -329,7 +329,7 @@ namespace Nest
 		
 		ISignificantTermsAggregator IAggregationContainer.SignificantTerms { get; set; }
 
-		IPercentileRanksAggregaor IAggregationContainer.PercentileRanks { get;set; }
+		IPercentileRanksAggregator IAggregationContainer.PercentileRanks { get;set; }
 		
 		ITermsAggregator IAggregationContainer.Terms { get; set; }
 

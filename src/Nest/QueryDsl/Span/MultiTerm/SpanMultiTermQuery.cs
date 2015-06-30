@@ -13,7 +13,7 @@ namespace Nest
 		IQueryContainer Match { get; set; }
 	}
 
-	public class SpanMultiTermQuery : Query, ISpanMultiTermQuery
+	public class SpanMultiTermQuery : QueryBase, ISpanMultiTermQuery
 	{
 		bool IQuery.Conditionless => IsConditionless(this);
 		public IQueryContainer Match { get; set; }

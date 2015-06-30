@@ -9,28 +9,25 @@ namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ReadAsTypeConverter<CardinalityAggregator>))]
-	public interface IPercentileRanksAggregaor : IMetricAggregator
+	public interface IPercentileRanksAggregator : IMetricAggregator
 	{
 		[JsonProperty("values")]
 		IEnumerable<double> Values { get; set; }
 	}
 
-	public class PercentileRanksAggregation : MetricAggregator, IPercentileRanksAggregaor
+	public class PercentileRanksAggregation : MetricAggregator, IPercentileRanksAggregator
 	{
 		public IEnumerable<double> Values { get; set; }
 	}
 
 	public class PercentileRanksAggregationDescriptor<T> 
-		: MetricAggregationBaseDescriptor<PercentileRanksAggregationDescriptor<T>, T>, IPercentileRanksAggregaor
+		: MetricAggregationBaseDescriptor<PercentileRanksAggregationDescriptor<T>, IPercentileRanksAggregator, T>, IPercentileRanksAggregator
 		where T : class
 	{
-		IPercentileRanksAggregaor Self => this;
-		IEnumerable<double> IPercentileRanksAggregaor.Values { get; set; }
+		IEnumerable<double> IPercentileRanksAggregator.Values { get; set; }
 
-		public PercentileRanksAggregationDescriptor<T> Values(IEnumerable<double> values)
-		{
-			this.Self.Values = values;
-			return this;
-		}
+		public PercentileRanksAggregationDescriptor<T> Values(IEnumerable<double> values) =>
+			Assign(a => a.Values = values.ToListOrNullIfEmpty());
+
 	}
 }

@@ -5,14 +5,13 @@ namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ReadAsTypeConverter<ExtendedStatsAggregator>))]
-	public interface IExtendedStatsAggregator : IMetricAggregator
-	{
-	}
+	public interface IExtendedStatsAggregator : IMetricAggregator { }
 
 	public class ExtendedStatsAggregator : MetricAggregator, IExtendedStatsAggregator { }
 
-	public class ExtendedStatsAggregationDescriptor<T> : MetricAggregationBaseDescriptor<ExtendedStatsAggregationDescriptor<T>, T>, IExtendedStatsAggregator where T : class
-	{
-		
-	}
+	public class ExtendedStatsAggregationDescriptor<T> 
+		: MetricAggregationBaseDescriptor<ExtendedStatsAggregationDescriptor<T>, IExtendedStatsAggregator, T>
+			, IExtendedStatsAggregator 
+		where T : class { }
+
 }

@@ -20,7 +20,7 @@ namespace Nest
 		double? Boost { get; set; }
 	}
 
-	public class TermsQuery : Query, ITermsQuery
+	public class TermsQuery : QueryBase, ITermsQuery
 	{
 		bool IQuery.Conditionless => IsConditionless(this);
 		public PropertyPathMarker Field { get; set; }

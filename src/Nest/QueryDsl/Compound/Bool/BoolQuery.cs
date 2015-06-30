@@ -33,7 +33,7 @@ namespace Nest
 		double? Boost { get; set; }
 	}
 
-	public class BoolQuery : Query, IBoolQuery
+	public class BoolQuery : QueryBase, IBoolQuery
 	{
 		bool IQuery.Conditionless => IsConditionless(this);
 		public IEnumerable<IQueryContainer> Must { get; set; }

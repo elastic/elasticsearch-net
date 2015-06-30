@@ -9,13 +9,15 @@ namespace Nest
 {
 	public class TopHitsMetric : IMetricAggregation
 	{
-		private IEnumerable<JObject> _hits;
+		private readonly IEnumerable<JObject> _hits;
 
-		internal JsonSerializer _defaultSerializer;
+		private readonly JsonSerializer _defaultSerializer;
 
-		public TopHitsMetric()
-		{
-		}
+		public long Total { get; set; }
+
+		public double? MaxScore { get; set; }
+
+		public TopHitsMetric() { }
 		
 		internal TopHitsMetric(IEnumerable<JObject> hits)
 		{
@@ -28,22 +30,17 @@ namespace Nest
 			_defaultSerializer = serializer;
 		}
 
-		public long Total { get; set; }
-		public double? MaxScore { get; set; }
-
-		public IEnumerable<Hit<T>> Hits<T>(JsonSerializer serializer = null) where T : class
+		public IEnumerable<Hit<T>> Hits<T>(JsonSerializer serializer = null) 
+			where T : class
 		{
 			var s = serializer ?? _defaultSerializer;
 
-			if (s != null)
-				return _hits.Select(h => h.ToObject<Hit<T>>(s));
-
-			return _hits.Select(h => h.ToObject<Hit<T>>());
+			return s != null 
+				? _hits.Select(h => h.ToObject<Hit<T>>(s)) 
+				: _hits.Select(h => h.ToObject<Hit<T>>());
 		}
 
-		public IEnumerable<T> Documents<T>(JsonSerializer serializer = null) where T : class
-		{
-			return this.Hits<T>(serializer).Select(h => h.Source);
-		}
+		public IEnumerable<T> Documents<T>(JsonSerializer serializer = null) where T : class =>
+			this.Hits<T>(serializer).Select(h => h.Source);
 	}
 }

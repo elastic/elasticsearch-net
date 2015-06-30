@@ -21,16 +21,14 @@ namespace Nest
 	}
 
 	public class GeoBoundsAggregationDescriptor<T> 
-		: MetricAggregationBaseDescriptor<GeoBoundsAggregationDescriptor<T>, T>, IGeoBoundsAggregator
+		: MetricAggregationBaseDescriptor<GeoBoundsAggregationDescriptor<T>, IGeoBoundsAggregator, T>
+			, IGeoBoundsAggregator
 		where T : class
 	{
-		IGeoBoundsAggregator Self => this;
 		bool? IGeoBoundsAggregator.WrapLongitude { get; set; }
 
-		public GeoBoundsAggregationDescriptor<T> WrapLongitude(bool wrapLongitude = true)
-		{
-			this.Self.WrapLongitude = wrapLongitude;
-			return this;
-		}
+		public GeoBoundsAggregationDescriptor<T> WrapLongitude(bool wrapLongitude = true) =>
+			Assign(a => a.WrapLongitude = wrapLongitude);
+
 	}
 }

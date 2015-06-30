@@ -37,7 +37,7 @@ namespace Nest
 		}
 	}
 
-	public class IndicesQuery : Query, IIndicesQuery
+	public class IndicesQuery : QueryBase, IIndicesQuery
 	{
 		bool IQuery.Conditionless => IsConditionless(this);
 		public IQueryContainer Query { get; set; }

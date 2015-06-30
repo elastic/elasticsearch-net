@@ -33,7 +33,7 @@ namespace Nest
 	public class ExternalFieldDeclarationDescriptor<T> : IExternalFieldDeclaration 
 		where T : class
 	{
-		internal Type _ClrType { get { return typeof(T);  } }
+		internal Type _ClrType => typeof(T);
 
 		private IExternalFieldDeclaration Self => this;
 

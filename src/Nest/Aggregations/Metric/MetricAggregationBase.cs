@@ -25,16 +25,22 @@ namespace Nest
 	public abstract class MetricAggregator : IMetricAggregator
 	{
 		public PropertyPathMarker Field { get; set; }
-		public string Script { get; set; }
+		public virtual string Script { get; set; }
 		public IDictionary<string, object> Params { get; set; }
 		public string Language { get; set; }
 	}
 
-	public abstract class MetricAggregationBaseDescriptor<TMetricAggregation, T> : IAggregationDescriptor, IMetricAggregator 
-		where TMetricAggregation : MetricAggregationBaseDescriptor<TMetricAggregation, T>
+	public abstract class MetricAggregationBaseDescriptor<TMetricAggregation, TMetricAggregationInterface, T> 
+		: IAggregationDescriptor, IMetricAggregator 
+		where TMetricAggregation : MetricAggregationBaseDescriptor<TMetricAggregation, TMetricAggregationInterface, T>
+			, TMetricAggregationInterface, IMetricAggregator 
 		where T : class
+		where TMetricAggregationInterface : class, IMetricAggregator
 	{
-		private IMetricAggregator Self { get { return this;  } }
+		protected TMetricAggregation Assign(Action<TMetricAggregationInterface> assigner) =>
+			Fluent.Assign(((TMetricAggregation)this), assigner);
+
+		protected TMetricAggregationInterface Self => (TMetricAggregation)this;
 
 		PropertyPathMarker IMetricAggregator.Field { get; set; }
 		
@@ -44,35 +50,16 @@ namespace Nest
 
 		string IMetricAggregator.Language { get; set; }
 
-		public TMetricAggregation Field(string field)
-		{
-			Self.Field = field;
-			return (TMetricAggregation)this;
-		}
+		public TMetricAggregation Field(string field) => Assign(a => a.Field = field);
 
-		public TMetricAggregation Field(Expression<Func<T, object>> field)
-		{
-			Self.Field = field;
-			return (TMetricAggregation) this;
-		}
+		public TMetricAggregation Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
 
-		public TMetricAggregation Script(string script)
-		{
-			Self.Script = script;
-			return (TMetricAggregation)this;
-		}
+		public virtual TMetricAggregation Script(string script) => Assign(a => a.Script = script);
 
-		public TMetricAggregation Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramSelector)
-		{
-			Self.Params = paramSelector(new FluentDictionary<string, object>());
-			return (TMetricAggregation) this;
-		}
+		public TMetricAggregation Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramSelector) =>
+				Assign(a => a.Params = paramSelector?.Invoke(new FluentDictionary<string, object>()));
 
-		public TMetricAggregation Language(string language)
-		{
-			Self.Language = language;
-			return (TMetricAggregation)this;
-		}
+		public TMetricAggregation Language(string language) => Assign(a => a.Language = language);
 
 	}
 }

@@ -26,7 +26,7 @@ namespace Nest
 	    double? Boost { get; set; }
 	}
 
-	public class SpanNearQuery : Query, ISpanNearQuery
+	public class SpanNearQuery : QueryBase, ISpanNearQuery
 	{
 		bool IQuery.Conditionless { get { return false; } }
 		public IEnumerable<ISpanQuery> Clauses { get; set; }

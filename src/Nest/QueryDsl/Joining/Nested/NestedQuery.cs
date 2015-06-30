@@ -32,7 +32,7 @@ namespace Nest
 
 	}
 
-	public class NestedQuery : Query, INestedQuery
+	public class NestedQuery : QueryBase, INestedQuery
 	{
 		bool IQuery.Conditionless => IsConditionless(this);
 		public NestedScore? Score { get; set; }

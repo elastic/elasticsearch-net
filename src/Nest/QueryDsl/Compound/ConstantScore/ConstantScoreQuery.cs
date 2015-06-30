@@ -18,7 +18,7 @@ namespace Nest
 		double? Boost { get; set; }
 	}
 
-	public class ConstantScoreQuery : Query, IConstantScoreQuery
+	public class ConstantScoreQuery : QueryBase, IConstantScoreQuery
 	{
 		bool IQuery.Conditionless => IsConditionless(this);
 		public string Lang { get; set; }

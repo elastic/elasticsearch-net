@@ -33,7 +33,7 @@ namespace Nest
 		IInnerHits InnerHits { get; set; }
 	}
 	
-	public class HasChildQuery : Query, IHasChildQuery
+	public class HasChildQuery : QueryBase, IHasChildQuery
 	{
 		bool IQuery.Conditionless => IsConditionless(this);
 		public TypeNameMarker Type { get; set; }

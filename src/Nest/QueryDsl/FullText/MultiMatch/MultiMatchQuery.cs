@@ -64,7 +64,7 @@ namespace Nest
 		IEnumerable<PropertyPathMarker> Fields { get; set; }
 	}
 
-	public class MultiMatchQuery : Query, IMultiMatchQuery
+	public class MultiMatchQuery : QueryBase, IMultiMatchQuery
 	{
 		bool IQuery.Conditionless => IsConditionless(this);
 		public TextQueryType? Type { get; set; }

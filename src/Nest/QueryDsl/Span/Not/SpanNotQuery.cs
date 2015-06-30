@@ -30,7 +30,7 @@ namespace Nest
 
 	}
 
-	public class SpanNotQuery : Query, ISpanNotQuery
+	public class SpanNotQuery : QueryBase, ISpanNotQuery
 	{
 		bool IQuery.Conditionless => IsConditionless(this);
 		public ISpanQuery Include { get; set; }

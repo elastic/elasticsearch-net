@@ -10,7 +10,7 @@ namespace Nest
 		PropertyPathMarker Field { get; set; }
 	}
 
-	public abstract class FieldNameQuery : Query, IFieldNameQuery
+	public abstract class FieldNameQuery : QueryBase, IFieldNameQuery
 	{
 		public virtual bool Conditionless => false;
 		public PropertyPathMarker Field { get; set; }
