@@ -119,5 +119,4 @@ namespace Nest
 		public ScriptedMetricAggregationDescriptor<T> ReduceParams(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramSelector) =>
 				Assign(a => a.ReduceParams = paramSelector(new FluentDictionary<string, object>()));
 	}
-	}
 }

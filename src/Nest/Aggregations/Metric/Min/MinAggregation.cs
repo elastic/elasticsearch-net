@@ -8,16 +8,13 @@ namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ReadAsTypeConverter<MinAggregator>))]
-	public interface IMinAggregator : IMetricAggregator
-	{
-	}
+	public interface IMinAggregator : IMetricAggregator { }
 
-	public class MinAggregator : MetricAggregator, IMinAggregator
-	{
-	}
+	public class MinAggregator : MetricAggregator, IMinAggregator { }
 
-	public class MinAggregationDescriptor<T> : MetricAggregationBaseDescriptor<MinAggregationDescriptor<T>, T>, IMinAggregator where T : class
-	{
-		
-	}
+	public class MinAggregationDescriptor<T> 
+		: MetricAggregationBaseDescriptor<MinAggregationDescriptor<T>, IMinAggregator, T>
+			, IMinAggregator 
+		where T : class { }
+
 }
