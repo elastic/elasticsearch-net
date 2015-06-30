@@ -23,7 +23,7 @@ namespace Nest
 	}
 
 	public class ReverseNestedAggregationDescriptor<T> 
-		: BucketAggregationBaseDescriptor<ReverseNestedAggregationDescriptor<T>,IReverseNestedAggregator, T>
+		: BucketAggregatorBaseDescriptor<ReverseNestedAggregationDescriptor<T>,IReverseNestedAggregator, T>
 			, IReverseNestedAggregator 
 		where T : class
 	{

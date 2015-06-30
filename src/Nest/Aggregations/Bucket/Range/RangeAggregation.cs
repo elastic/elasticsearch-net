@@ -33,7 +33,7 @@ namespace Nest
 	}
 
 	public class RangeAggregationDescriptor<T>
-		: BucketAggregationBaseDescriptor<RangeAggregationDescriptor<T>, IRangeAggregator, T>, IRangeAggregator
+		: BucketAggregatorBaseDescriptor<RangeAggregationDescriptor<T>, IRangeAggregator, T>, IRangeAggregator
 		where T : class
 	{
 		PropertyPathMarker IRangeAggregator.Field { get; set; }

@@ -25,7 +25,7 @@ namespace Nest
 	}
 
 	public class Ip4RangeAggregationDescriptor<T> : 
-		BucketAggregationBaseDescriptor<Ip4RangeAggregationDescriptor<T>,IIp4RangeAggregator, T>
+		BucketAggregatorBaseDescriptor<Ip4RangeAggregationDescriptor<T>,IIp4RangeAggregator, T>
 			, IIp4RangeAggregator 
 		where T : class
 	{

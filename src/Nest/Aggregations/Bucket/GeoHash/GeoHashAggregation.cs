@@ -33,7 +33,7 @@ namespace Nest
 	}
 
 	public class GeoHashAggregationDescriptor<T> 
-		: BucketAggregationBaseDescriptor<GeoHashAggregationDescriptor<T>, IGeoHashAggregator, T>
+		: BucketAggregatorBaseDescriptor<GeoHashAggregationDescriptor<T>, IGeoHashAggregator, T>
 			, IGeoHashAggregator 
 		where T : class
 	{

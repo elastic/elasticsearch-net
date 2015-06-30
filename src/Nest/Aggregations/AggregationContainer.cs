@@ -7,7 +7,7 @@ namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ReadAsTypeConverter<AggregationContainer>))]
-	public interface IAggregationContainer 
+	public interface IAggregationContainer
 	{
 		[JsonProperty("avg")]
 		IAverageAggregator Average { get; set; }
@@ -27,8 +27,8 @@ namespace Nest
 		[JsonProperty("filter")]
 		IFilterAggregator Filter { get; set; }
 
-        [JsonProperty("filters")]
-        IFiltersAggregator Filters { get; set; }
+		[JsonProperty("filters")]
+		IFiltersAggregator Filters { get; set; }
 
 		[JsonProperty("geo_distance")]
 		IGeoDistanceAggregator GeoDistance { get; set; }
@@ -101,7 +101,6 @@ namespace Nest
 		IDictionary<string, IAggregationContainer> Aggregations { get; set; }
 	}
 
-
 	public class AggregationContainer : IAggregationContainer
 	{
 		private IDateHistogramAggregator _dateHistogram;
@@ -122,7 +121,7 @@ namespace Nest
 		private ITermsAggregator _terms;
 		private ISignificantTermsAggregator _significantTerms;
 		private IPercentileRanksAggregator _percentileRanks;
-	    private IFiltersAggregator _filters;
+		private IFiltersAggregator _filters;
 		private ITopHitsAggregator _topHits;
 		private IChildrenAggregator _children;
 
@@ -159,11 +158,11 @@ namespace Nest
 			set { _filter = value; }
 		}
 
-        public IFiltersAggregator Filters
-        {
-            get { return _filters; }
-            set { _filters = value; }
-        }
+		public IFiltersAggregator Filters
+		{
+			get { return _filters; }
+			set { _filters = value; }
+		}
 
 		public IGeoDistanceAggregator GeoDistance
 		{
@@ -242,7 +241,7 @@ namespace Nest
 			get { return _significantTerms; }
 			set { _significantTerms = value; }
 		}
-		
+
 		public IPercentileRanksAggregator PercentileRanks
 		{
 			get { return _percentileRanks; }
@@ -276,7 +275,7 @@ namespace Nest
 		public IDictionary<string, IAggregationContainer> Aggregations { get; set; }
 	}
 
-	public class AggregationDescriptor<T> : IAggregationContainer
+	public class AggregationContainerDescriptor<T> : IAggregationContainer
 		where T : class
 	{
 		IDictionary<string, IAggregationContainer> IAggregationContainer.Aggregations { get; set; }
@@ -284,53 +283,53 @@ namespace Nest
 		IAverageAggregator IAggregationContainer.Average { get; set; }
 
 		IDateHistogramAggregator IAggregationContainer.DateHistogram { get; set; }
-		
+
 		IPercentilesAggregator IAggregationContainer.Percentiles { get; set; }
-		
+
 		IDateRangeAggregator IAggregationContainer.DateRange { get; set; }
-		
+
 		IExtendedStatsAggregator IAggregationContainer.ExtendedStats { get; set; }
-		
+
 		IFilterAggregator IAggregationContainer.Filter { get; set; }
 
-        IFiltersAggregator IAggregationContainer.Filters { get; set; }
-		
+		IFiltersAggregator IAggregationContainer.Filters { get; set; }
+
 		IGeoDistanceAggregator IAggregationContainer.GeoDistance { get; set; }
-		
+
 		IGeoHashAggregator IAggregationContainer.GeoHash { get; set; }
 
 		IGeoBoundsAggregator IAggregationContainer.GeoBounds { get; set; }
 
 		IHistogramAggregator IAggregationContainer.Histogram { get; set; }
-		
+
 		IGlobalAggregator IAggregationContainer.Global { get; set; }
-		
+
 		IIp4RangeAggregator IAggregationContainer.IpRange { get; set; }
-		
+
 		IMaxAggregator IAggregationContainer.Max { get; set; }
-		
+
 		IMinAggregator IAggregationContainer.Min { get; set; }
-		
+
 		ICardinalityAggregator IAggregationContainer.Cardinality { get; set; }
-		
+
 		IMissingAggregator IAggregationContainer.Missing { get; set; }
-		
+
 		INestedAggregator IAggregationContainer.Nested { get; set; }
 
 		IReverseNestedAggregator IAggregationContainer.ReverseNested { get; set; }
-	
+
 		IRangeAggregator IAggregationContainer.Range { get; set; }
-		
+
 		IStatsAggregator IAggregationContainer.Stats { get; set; }
-		
+
 		ISumAggregator IAggregationContainer.Sum { get; set; }
-		
+
 		IValueCountAggregator IAggregationContainer.ValueCount { get; set; }
-		
+
 		ISignificantTermsAggregator IAggregationContainer.SignificantTerms { get; set; }
 
-		IPercentileRanksAggregator IAggregationContainer.PercentileRanks { get;set; }
-		
+		IPercentileRanksAggregator IAggregationContainer.PercentileRanks { get; set; }
+
 		ITermsAggregator IAggregationContainer.Terms { get; set; }
 
 		ITopHitsAggregator IAggregationContainer.TopHits { get; set; }
@@ -338,186 +337,124 @@ namespace Nest
 		IChildrenAggregator IAggregationContainer.Children { get; set; }
 
 		IScriptedMetricAggregator IAggregationContainer.ScriptedMetric { get; set; }
-		
-		public AggregationDescriptor<T> Average(string name, Func<AverageAggregationDescriptor<T>, AverageAggregationDescriptor<T>> selector)
-		{
-			return _SetInnerAggregation(name, selector, (a, d) => a.Average = d);
-		}
 
-		public AggregationDescriptor<T> DateHistogram(string name,
-			Func<DateHistogramAggregationDescriptor<T>, DateHistogramAggregationDescriptor<T>> selector)
-		{
-			return _SetInnerAggregation(name, selector, (a, d) => a.DateHistogram = d);
-		}
-		
-		public AggregationDescriptor<T> Percentiles(string name,
-			Func<PercentilesAggregationDescriptor<T>, PercentilesAggregationDescriptor<T>> selector)
-		{
-			return _SetInnerAggregation(name, selector, (a, d) => a.Percentiles = d);
-		}
+		public AggregationContainerDescriptor<T> Average(string name, Func<AverageAggregationDescriptor<T>, AverageAggregationDescriptor<T>> selector) =>
+			_SetInnerAggregation(name, selector, (a, d) => a.Average = d);
 
-		public AggregationDescriptor<T> PercentileRanks(string name,
-			Func<PercentileRanksAggregationDescriptor<T>, PercentileRanksAggregationDescriptor<T>> selector)
-		{
-			return _SetInnerAggregation(name, selector, (a, d) => a.PercentileRanks = d);
-		}
+		public AggregationContainerDescriptor<T> DateHistogram(string name,
+			Func<DateHistogramAggregationDescriptor<T>, DateHistogramAggregationDescriptor<T>> selector) =>
+			_SetInnerAggregation(name, selector, (a, d) => a.DateHistogram = d);
 
-		public AggregationDescriptor<T> DateRange(string name,
-			Func<DateRangeAggregationDescriptor<T>, DateRangeAggregationDescriptor<T>> selector)
-		{
-			return _SetInnerAggregation(name, selector, (a, d) => a.DateRange = d);
-		}
+		public AggregationContainerDescriptor<T> Percentiles(string name,
+			Func<PercentilesAggregationDescriptor<T>, PercentilesAggregationDescriptor<T>> selector) =>
+			_SetInnerAggregation(name, selector, (a, d) => a.Percentiles = d);
 
-		public AggregationDescriptor<T> ExtendedStats(string name,
-			Func<ExtendedStatsAggregationDescriptor<T>, ExtendedStatsAggregationDescriptor<T>> selector)
-		{
-			return _SetInnerAggregation(name, selector, (a, d) => a.ExtendedStats = d);
-		}
-	
-		public AggregationDescriptor<T> Filter(string name,
-			Func<FilterAggregationDescriptor<T>, FilterAggregationDescriptor<T>> selector)
-		{
-			return _SetInnerAggregation(name, selector, (a, d) => a.Filter = d);
-		}
+		public AggregationContainerDescriptor<T> PercentileRanks(string name,
+			Func<PercentileRanksAggregationDescriptor<T>, PercentileRanksAggregationDescriptor<T>> selector) =>
+			_SetInnerAggregation(name, selector, (a, d) => a.PercentileRanks = d);
 
-        public AggregationDescriptor<T> Filters(string name,
-            Func<FiltersAggregationDescriptor<T>, FiltersAggregationDescriptor<T>> selector)
-        {
-            return _SetInnerAggregation(name, selector, (a, d) => a.Filters = d);
-        }
-		
-		public AggregationDescriptor<T> GeoDistance(string name,
-			Func<GeoDistanceAggregationDescriptor<T>, GeoDistanceAggregationDescriptor<T>> selector)
-		{
-			return _SetInnerAggregation(name, selector, (a, d) => a.GeoDistance = d);
-		}
+		public AggregationContainerDescriptor<T> DateRange(string name,
+			Func<DateRangeAggregationDescriptor<T>, DateRangeAggregationDescriptor<T>> selector) =>
+			_SetInnerAggregation(name, selector, (a, d) => a.DateRange = d);
 
-		public AggregationDescriptor<T> GeoHash(string name,
-			Func<GeoHashAggregationDescriptor<T>, GeoHashAggregationDescriptor<T>> selector)
-		{
-			return _SetInnerAggregation(name, selector, (a, d) => a.GeoHash = d);
-		}
+		public AggregationContainerDescriptor<T> ExtendedStats(string name,
+			Func<ExtendedStatsAggregationDescriptor<T>, ExtendedStatsAggregationDescriptor<T>> selector) =>
+			_SetInnerAggregation(name, selector, (a, d) => a.ExtendedStats = d);
 
-		public AggregationDescriptor<T> GeoBounds(string name,
-			Func<GeoBoundsAggregationDescriptor<T>, GeoBoundsAggregationDescriptor<T>> selector)
-		{
-			return _SetInnerAggregation(name, selector, (a, d) => a.GeoBounds = d);
-		}
+		public AggregationContainerDescriptor<T> Filter(string name,
+			Func<FilterAggregationDescriptor<T>, FilterAggregationDescriptor<T>> selector) =>
+			_SetInnerAggregation(name, selector, (a, d) => a.Filter = d);
 
-		public AggregationDescriptor<T> Histogram(string name,
-			Func<HistogramAggregationDescriptor<T>, HistogramAggregationDescriptor<T>> selector)
-		{
-			return _SetInnerAggregation(name, selector, (a, d) => a.Histogram = d);
-		}
-		
-		public AggregationDescriptor<T> Global(string name,
-			Func<GlobalAggregationDescriptor<T>, GlobalAggregationDescriptor<T>> selector)
-		{
-			return _SetInnerAggregation(name, selector, (a, d) => a.Global = d);
-		}
+		public AggregationContainerDescriptor<T> Filters(string name,
+			Func<FiltersAggregationDescriptor<T>, FiltersAggregationDescriptor<T>> selector) =>
+			_SetInnerAggregation(name, selector, (a, d) => a.Filters = d);
 
-		public AggregationDescriptor<T> IpRange(string name,
-			Func<Ip4RangeAggregationDescriptor<T>, Ip4RangeAggregationDescriptor<T>> selector)
-		{
-			return _SetInnerAggregation(name, selector, (a, d) => a.IpRange = d);
-		}
+		public AggregationContainerDescriptor<T> GeoDistance(string name,
+			Func<GeoDistanceAggregationDescriptor<T>, GeoDistanceAggregationDescriptor<T>> selector) =>
+			_SetInnerAggregation(name, selector, (a, d) => a.GeoDistance = d);
 
-		public AggregationDescriptor<T> Max(string name, Func<MaxAggregationDescriptor<T>, MaxAggregationDescriptor<T>> selector)
-		{
-			return _SetInnerAggregation(name, selector, (a, d) => a.Max = d);
-		}
+		public AggregationContainerDescriptor<T> GeoHash(string name,
+			Func<GeoHashAggregationDescriptor<T>, GeoHashAggregationDescriptor<T>> selector) =>
+			_SetInnerAggregation(name, selector, (a, d) => a.GeoHash = d);
 
-		public AggregationDescriptor<T> Min(string name, Func<MinAggregationDescriptor<T>, MinAggregationDescriptor<T>> selector)
-		{
-			return _SetInnerAggregation(name, selector, (a, d) => a.Min = d);
-		}
-		
-		public AggregationDescriptor<T> Cardinality(string name, Func<CardinalityAggregationDescriptor<T>, CardinalityAggregationDescriptor<T>> selector)
-		{
-			return _SetInnerAggregation(name, selector, (a, d) => a.Cardinality = d);
-		}
+		public AggregationContainerDescriptor<T> GeoBounds(string name,
+			Func<GeoBoundsAggregationDescriptor<T>, GeoBoundsAggregationDescriptor<T>> selector) =>
+			_SetInnerAggregation(name, selector, (a, d) => a.GeoBounds = d);
 
-		public AggregationDescriptor<T> Missing(string name, Func<MissingAggregationDescriptor<T>, MissingAggregationDescriptor<T>> selector)
-		{
-			return _SetInnerAggregation(name, selector, (a, d) => a.Missing = d);
-		}
+		public AggregationContainerDescriptor<T> Histogram(string name,
+			Func<HistogramAggregationDescriptor<T>, HistogramAggregationDescriptor<T>> selector) =>
+			_SetInnerAggregation(name, selector, (a, d) => a.Histogram = d);
 
-		public AggregationDescriptor<T> Nested(string name, Func<NestedAggregationDescriptor<T>, NestedAggregationDescriptor<T>> selector)
-		{
-			return _SetInnerAggregation(name, selector, (a, d) => a.Nested = d);
-		}
+		public AggregationContainerDescriptor<T> Global(string name,
+			Func<GlobalAggregationDescriptor<T>, GlobalAggregationDescriptor<T>> selector) => 
+			_SetInnerAggregation(name, selector, (a, d) => a.Global = d);
 
-		public AggregationDescriptor<T> ReverseNested(string name, Func<ReverseNestedAggregationDescriptor<T>, ReverseNestedAggregationDescriptor<T>> selector)
-		{
-			return _SetInnerAggregation(name, selector, (a, d) => a.ReverseNested = d);
-		}
+		public AggregationContainerDescriptor<T> IpRange(string name,
+			Func<Ip4RangeAggregationDescriptor<T>, Ip4RangeAggregationDescriptor<T>> selector) =>
+			_SetInnerAggregation(name, selector, (a, d) => a.IpRange = d);
 
-		public AggregationDescriptor<T> Range(string name, Func<RangeAggregationDescriptor<T>, RangeAggregationDescriptor<T>> selector)
-		{
-			return _SetInnerAggregation(name, selector, (a, d) => a.Range = d);
-		}
+		public AggregationContainerDescriptor<T> Max(string name, Func<MaxAggregationDescriptor<T>, MaxAggregationDescriptor<T>> selector) =>
+			_SetInnerAggregation(name, selector, (a, d) => a.Max = d);
 
-		public AggregationDescriptor<T> Stats(string name, Func<StatsAggregationDescriptor<T>, StatsAggregationDescriptor<T>> selector)
-		{
-			return _SetInnerAggregation(name, selector, (a, d) => a.Stats = d);
-		}
+		public AggregationContainerDescriptor<T> Min(string name, Func<MinAggregationDescriptor<T>, MinAggregationDescriptor<T>> selector) =>
+			_SetInnerAggregation(name, selector, (a, d) => a.Min = d);
 
-		public AggregationDescriptor<T> Sum(string name, Func<SumAggregationDescriptor<T>, SumAggregationDescriptor<T>> selector)
-		{
-			return _SetInnerAggregation(name, selector, (a, d) => a.Sum = d);
-		}
+		public AggregationContainerDescriptor<T> Cardinality(string name, Func<CardinalityAggregationDescriptor<T>, CardinalityAggregationDescriptor<T>> selector) =>
+			_SetInnerAggregation(name, selector, (a, d) => a.Cardinality = d);
 
-		public AggregationDescriptor<T> Terms(string name, Func<TermsAggregationDescriptor<T>, TermsAggregationDescriptor<T>> selector)
-		{
-			return _SetInnerAggregation(name, selector, (a, d) => a.Terms = d);
-		}
-		
-		public AggregationDescriptor<T> SignificantTerms(string name, Func<SignificantTermsAggregationDescriptor<T>, SignificantTermsAggregationDescriptor<T>> selector)
-		{
-			return _SetInnerAggregation(name, selector, (a, d) => a.SignificantTerms = d);
-		}
+		public AggregationContainerDescriptor<T> Missing(string name, Func<MissingAggregationDescriptor<T>, MissingAggregationDescriptor<T>> selector) =>
+			_SetInnerAggregation(name, selector, (a, d) => a.Missing = d);
 
-		public AggregationDescriptor<T> ValueCount(string name,
-			Func<ValueCountAggregationDescriptor<T>, ValueCountAggregationDescriptor<T>> selector)
-		{
-			return _SetInnerAggregation(name, selector, (a, d) => a.ValueCount = d);
-		}
+		public AggregationContainerDescriptor<T> Nested(string name, Func<NestedAggregationDescriptor<T>, NestedAggregationDescriptor<T>> selector) =>
+			_SetInnerAggregation(name, selector, (a, d) => a.Nested = d);
 
-		public AggregationDescriptor<T> TopHits(string name,
-			Func<TopHitsAggregationDescriptor<T>, TopHitsAggregationDescriptor<T>> selector)
-		{
-			return _SetInnerAggregation(name, selector, (a, d) => a.TopHits = d);
-		}
+		public AggregationContainerDescriptor<T> ReverseNested(string name, Func<ReverseNestedAggregationDescriptor<T>, ReverseNestedAggregationDescriptor<T>> selector) =>
+			_SetInnerAggregation(name, selector, (a, d) => a.ReverseNested = d);
 
-		public AggregationDescriptor<T> Children(string name,
-			Func<ChildrenAggregationDescriptor<T>, ChildrenAggregationDescriptor<T>> selector)
-		{
-			return this.Children<T>(name, selector);
-		}
+		public AggregationContainerDescriptor<T> Range(string name, Func<RangeAggregationDescriptor<T>, RangeAggregationDescriptor<T>> selector) =>
+			_SetInnerAggregation(name, selector, (a, d) => a.Range = d);
 
-		public AggregationDescriptor<T> Children<K>(string name,
-			Func<ChildrenAggregationDescriptor<K>, ChildrenAggregationDescriptor<K>> selector)
-			where K : class
-		{
-			return _SetInnerAggregation(name, selector, (a, d) => a.Children = d);
-		}
+		public AggregationContainerDescriptor<T> Stats(string name, Func<StatsAggregationDescriptor<T>, StatsAggregationDescriptor<T>> selector) =>
+			_SetInnerAggregation(name, selector, (a, d) => a.Stats = d);
 
-		public AggregationDescriptor<T> ScriptedMetric(string name,
-			Func<ScriptedMetricAggregationDescriptor<T>, ScriptedMetricAggregationDescriptor<T>> selector)
-		{
-			return _SetInnerAggregation(name, selector, (a, d) => a.ScriptedMetric = d);
-		}
+		public AggregationContainerDescriptor<T> Sum(string name, Func<SumAggregationDescriptor<T>, SumAggregationDescriptor<T>> selector) =>
+			_SetInnerAggregation(name, selector, (a, d) => a.Sum = d);
 
-		private AggregationDescriptor<T> _SetInnerAggregation<TAggregation>(
+		public AggregationContainerDescriptor<T> Terms(string name, Func<TermsAggregationDescriptor<T>, TermsAggregationDescriptor<T>> selector) =>
+			_SetInnerAggregation(name, selector, (a, d) => a.Terms = d);
+
+		public AggregationContainerDescriptor<T> SignificantTerms(string name, Func<SignificantTermsAggregationDescriptor<T>, SignificantTermsAggregationDescriptor<T>> selector) =>
+			_SetInnerAggregation(name, selector, (a, d) => a.SignificantTerms = d);
+
+		public AggregationContainerDescriptor<T> ValueCount(string name,
+			Func<ValueCountAggregationDescriptor<T>, ValueCountAggregationDescriptor<T>> selector) =>
+			_SetInnerAggregation(name, selector, (a, d) => a.ValueCount = d);
+
+		public AggregationContainerDescriptor<T> TopHits(string name,
+			Func<TopHitsAggregationDescriptor<T>, TopHitsAggregationDescriptor<T>> selector) =>
+			_SetInnerAggregation(name, selector, (a, d) => a.TopHits = d);
+
+		public AggregationContainerDescriptor<T> Children(string name,
+			Func<ChildrenAggregationDescriptor<T>, ChildrenAggregationDescriptor<T>> selector) =>
+			this.Children<T>(name, selector);
+
+		public AggregationContainerDescriptor<T> Children<K>(string name,
+			Func<ChildrenAggregationDescriptor<K>, ChildrenAggregationDescriptor<K>> selector) where K : class =>
+			_SetInnerAggregation(name, selector, (a, d) => a.Children = d);
+
+		public AggregationContainerDescriptor<T> ScriptedMetric(string name,
+			Func<ScriptedMetricAggregationDescriptor<T>, ScriptedMetricAggregationDescriptor<T>> selector) =>
+			_SetInnerAggregation(name, selector, (a, d) => a.ScriptedMetric = d);
+
+		private AggregationContainerDescriptor<T> _SetInnerAggregation<TAggregation>(
 			string key,
 			Func<TAggregation, TAggregation> selector
-			, Action<IAggregationContainer, TAggregation> setter 
-			)
-			where TAggregation : IAggregationDescriptor, new()
-
+			, Action<IAggregationContainer, TAggregation> setter
+		)
+			where TAggregation : IAggregator, new()
 		{
 			var innerDescriptor = selector(new TAggregation());
-			var descriptor = new AggregationDescriptor<T>();
+			var descriptor = new AggregationContainerDescriptor<T>();
 			setter(descriptor, innerDescriptor);
 			var bucket = innerDescriptor as IBucketAggregator;
 			IAggregationContainer self = this;

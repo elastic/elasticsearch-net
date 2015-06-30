@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public interface IMetricAggregator
+	public interface IMetricAggregator : IAggregator
 	{
 		[JsonProperty("field")]
 		PropertyPathMarker Field { get; set; }
@@ -31,7 +31,7 @@ namespace Nest
 	}
 
 	public abstract class MetricAggregationBaseDescriptor<TMetricAggregation, TMetricAggregationInterface, T> 
-		: IAggregationDescriptor, IMetricAggregator 
+		:  IMetricAggregator 
 		where TMetricAggregation : MetricAggregationBaseDescriptor<TMetricAggregation, TMetricAggregationInterface, T>
 			, TMetricAggregationInterface, IMetricAggregator 
 		where T : class

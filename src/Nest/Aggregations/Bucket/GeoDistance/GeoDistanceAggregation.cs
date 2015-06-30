@@ -42,7 +42,7 @@ namespace Nest
 	}
 
 	public class GeoDistanceAggregationDescriptor<T> :
-		BucketAggregationBaseDescriptor<GeoDistanceAggregationDescriptor<T>, IGeoDistanceAggregator, T>
+		BucketAggregatorBaseDescriptor<GeoDistanceAggregationDescriptor<T>, IGeoDistanceAggregator, T>
 			, IGeoDistanceAggregator
 		where T : class
 	{

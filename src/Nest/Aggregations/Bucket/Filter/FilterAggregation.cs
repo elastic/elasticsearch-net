@@ -17,7 +17,7 @@ namespace Nest
 	}
 
 	public class FilterAggregationDescriptor<T> 
-		: BucketAggregationBaseDescriptor<FilterAggregationDescriptor<T>,IFilterAggregator, T> 
+		: BucketAggregatorBaseDescriptor<FilterAggregationDescriptor<T>,IFilterAggregator, T> 
 			, IFilterAggregator 
 		where T : class
 	{

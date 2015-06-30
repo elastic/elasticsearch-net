@@ -68,7 +68,7 @@
     <Compile Include="Aggregations\Bucket\SignificantTerms\Heuristics\GoogleNormalizedDistanceHeuristic.cs" />
     <Compile Include="Aggregations\Bucket\SignificantTerms\Heuristics\MutualInformationHeuristic.cs" />
     <Compile Include="Aggregations\Bucket\SignificantTerms\Heuristics\PercentageScoreHeuristic.cs" />
-    <Compile Include="Aggregations\IAggregationDescriptor.cs" />
+    <Compile Include="Aggregations\IAggregator.cs" />
     <Compile Include="Cat\CatAllocation\ElasticClient-CatAllocation.cs" />
     <Compile Include="Cat\CatCount\ElasticClient-CatCount.cs" />
     <Compile Include="Cat\CatFielddata\ElasticClient-CatFielddata.cs" />
@@ -115,8 +115,8 @@
     <Compile Include="Document\Single\Source\ElasticClient-SourceExtensions.cs" />
     <Compile Include="Aggregations\AggregationsHelper.cs" />
     <Compile Include="Aggregations\Bucket\SignificantTerms\Heuristics\ScriptedHeuristic.cs" />
-    <Compile Include="Aggregations\Bucket\Bucket.cs" />
-    <Compile Include="Aggregations\Bucket\BucketAggregationBase.cs" />
+    <Compile Include="Aggregations\Bucket\Buckets\Bucket.cs" />
+    <Compile Include="Aggregations\Bucket\BucketAggregation.cs" />
     <Compile Include="Aggregations\Bucket\Filters\FiltersBucket.cs" />
     <Compile Include="Aggregations\Metric\Scripted\ScriptedValueMetric.cs" />
     <Compile Include="Aggregations\Metric\TopHits\TopHitsMetric.cs" />
@@ -124,13 +124,12 @@
     <Compile Include="Aggregations\Bucket\Histogram\HistogramItem.cs" />
     <Compile Include="Aggregations\Metric\ExtendedStats\ExtendedStatsMetric.cs" />
     <Compile Include="Aggregations\IAggregation.cs" />
-    <Compile Include="Aggregations\Bucket\IBucketAggregation.cs" />
-    <Compile Include="Aggregations\Bucket\IBucketItem.cs" />
-    <Compile Include="Aggregations\Bucket\IBucketWithCountAggregation.cs" />
-    <Compile Include="Aggregations\Metric\IMetricAggregation.cs" />
+    <Compile Include="Aggregations\Bucket\Buckets\IBucketItem.cs" />
+    <Compile Include="Aggregations\Bucket\Buckets\IBucketWithCountAggregation.cs" />
+    <Compile Include="Aggregations\Metric\MetricAggregation.cs" />
     <Compile Include="Aggregations\Bucket\SignificantTerms\SignificantTermItem.cs" />
-    <Compile Include="Aggregations\Bucket\KeyItem.cs" />
-    <Compile Include="Aggregations\Bucket\SingleBucket.cs" />
+    <Compile Include="Aggregations\Bucket\Buckets\KeyItem.cs" />
+    <Compile Include="Aggregations\Bucket\Buckets\SingleBucket.cs" />
     <Compile Include="Aggregations\Bucket\Range\RangeItem.cs" />
     <Compile Include="Aggregations\Metric\Percentiles\PercentilesMetric.cs" />
     <Compile Include="Aggregations\Metric\Stats\StatsMetric.cs" />
@@ -567,7 +566,7 @@
     <Compile Include="Document\Single\TermVectors\Token.cs" />
     <Compile Include="CommonAbstractions\Response\EmptyResponse.cs" />
     <Compile Include="Search\Suggesters\Suggest\SuggestResponse.cs" />
-    <Compile Include="Aggregations\Aggregation.cs" />
+    <Compile Include="Aggregations\AggregationContainer.cs" />
     <Compile Include="Aggregations\Bucket\DateHistogram\DateHistogramAggregation.cs" />
     <Compile Include="Aggregations\Bucket\Filter\FilterAggregation.cs" />
     <Compile Include="Aggregations\Bucket\GeoHash\GeoHashAggregation.cs" />
@@ -575,7 +574,7 @@
     <Compile Include="Aggregations\Metric\Percentiles\PercentilesAggregation.cs" />
     <Compile Include="Aggregations\Bucket\Ipv4Range\Ip4RangeAggregation.cs" />
     <Compile Include="Aggregations\Metric\ExtendedStats\ExtendedStatsAggregation.cs" />
-    <Compile Include="Aggregations\Metric\MetricAggregationBase.cs" />
+    <Compile Include="Aggregations\Metric\MetricAggregator.cs" />
     <Compile Include="Aggregations\Bucket\Nested\NestedAggregation.cs" />
     <Compile Include="Aggregations\Bucket\DateRange\DateRangeAggregation.cs" />
     <Compile Include="Aggregations\Bucket\GeoDistance\GeoDistanceAggregation.cs" />

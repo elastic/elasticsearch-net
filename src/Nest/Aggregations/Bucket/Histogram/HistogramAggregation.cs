@@ -52,7 +52,7 @@ namespace Nest
 	}
 
 	public class HistogramAggregationDescriptor<T> 
-		: BucketAggregationBaseDescriptor<HistogramAggregationDescriptor<T>, IHistogramAggregator, T>, IHistogramAggregator 
+		: BucketAggregatorBaseDescriptor<HistogramAggregationDescriptor<T>, IHistogramAggregator, T>, IHistogramAggregator 
 		where T : class
 	{
 		PropertyPathMarker IHistogramAggregator.Field { get; set; }

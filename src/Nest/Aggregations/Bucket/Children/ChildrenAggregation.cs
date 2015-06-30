@@ -21,7 +21,7 @@ namespace Nest
 	}
 
 	public class ChildrenAggregationDescriptor<T> 
-		: BucketAggregationBaseDescriptor<ChildrenAggregationDescriptor<T>, IChildrenAggregator, T>, IChildrenAggregator
+		: BucketAggregatorBaseDescriptor<ChildrenAggregationDescriptor<T>, IChildrenAggregator, T>, IChildrenAggregator
 		where T : class
 	{
 

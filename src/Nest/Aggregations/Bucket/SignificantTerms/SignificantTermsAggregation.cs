@@ -69,7 +69,7 @@ namespace Nest
 	}
 
 	public class SignificantTermsAggregationDescriptor<T>
-		: BucketAggregationBaseDescriptor<SignificantTermsAggregationDescriptor<T>, ISignificantTermsAggregator, T>
+		: BucketAggregatorBaseDescriptor<SignificantTermsAggregationDescriptor<T>, ISignificantTermsAggregator, T>
 			, ISignificantTermsAggregator
 		where T : class
 	{

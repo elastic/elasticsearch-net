@@ -119,9 +119,9 @@ namespace Nest
 			return this;
 		}
 
-		public PercolateDescriptor<T> Aggregations(Func<AggregationDescriptor<T>, AggregationDescriptor<T>> aggregationsSelector)
+		public PercolateDescriptor<T> Aggregations(Func<AggregationContainerDescriptor<T>, AggregationContainerDescriptor<T>> aggregationsSelector)
 		{
-			var aggs = aggregationsSelector(new AggregationDescriptor<T>());
+			var aggs = aggregationsSelector(new AggregationContainerDescriptor<T>());
 			if (aggs == null) return this;
 			Self.Aggregations = ((IAggregationContainer)aggs).Aggregations;
 			return this;

@@ -8,10 +8,7 @@ namespace Nest
 	{
 		public IDictionary<string, IAggregation> Aggregations { get; internal protected set; }
 
-		public AggregationsHelper()
-		{
-
-		}
+		public AggregationsHelper() { }
 
 		public AggregationsHelper(IDictionary<string, IAggregation> aggregations)
 		{
@@ -28,77 +25,38 @@ namespace Nest
 
 		}
 
-		public ValueMetric Min(string key)
-		{
-			return this.TryGet<ValueMetric>(key);
-		}
+		public ValueMetric Min(string key) => this.TryGet<ValueMetric>(key);
 
-		public ValueMetric Max(string key)
-		{
-			return this.TryGet<ValueMetric>(key);
-		}
+		public ValueMetric Max(string key) => this.TryGet<ValueMetric>(key);
 
-		public ValueMetric Sum(string key)
-		{
-			return this.TryGet<ValueMetric>(key);
-		}
+		public ValueMetric Sum(string key) => this.TryGet<ValueMetric>(key);
 
-		public ValueMetric Cardinality(string key)
-		{
-			return this.TryGet<ValueMetric>(key);
-		}
+		public ValueMetric Cardinality(string key) => this.TryGet<ValueMetric>(key);
 
-		public ValueMetric Average(string key)
-		{
-			return this.TryGet<ValueMetric>(key);
-		}
+		public ValueMetric Average(string key) => this.TryGet<ValueMetric>(key);
 
-		public ValueMetric ValueCount(string key)
-		{
-			return this.TryGet<ValueMetric>(key);
-		}
+		public ValueMetric ValueCount(string key) => this.TryGet<ValueMetric>(key);
 
 		public ScriptedValueMetric ScriptedMetric(string key)
 		{
 			var valueMetric = this.TryGet<ValueMetric>(key);
 
-			if (valueMetric != null)
-			{
-				return new ScriptedValueMetric { _Value = valueMetric.Value };
-			}
-
-			return this.TryGet<ScriptedValueMetric>(key);
+			return valueMetric != null 
+				? new ScriptedValueMetric { _Value = valueMetric.Value } 
+				: this.TryGet<ScriptedValueMetric>(key);
 		}
 
-		public StatsMetric Stats(string key)
-		{
-			return this.TryGet<StatsMetric>(key);
-		}
+		public StatsMetric Stats(string key) => this.TryGet<StatsMetric>(key);
 
-		public ExtendedStatsMetric ExtendedStats(string key)
-		{
-			return this.TryGet<ExtendedStatsMetric>(key);
-		}
+		public ExtendedStatsMetric ExtendedStats(string key) => this.TryGet<ExtendedStatsMetric>(key);
 
-		public GeoBoundsMetric GeoBounds(string key)
-		{
-			return this.TryGet<GeoBoundsMetric>(key);
-		}
+		public GeoBoundsMetric GeoBounds(string key) => this.TryGet<GeoBoundsMetric>(key);
 
-		public PercentilesMetric Percentiles(string key)
-		{
-			return this.TryGet<PercentilesMetric>(key);
-		}
+		public PercentilesMetric Percentiles(string key) => this.TryGet<PercentilesMetric>(key);
 
-		public PercentilesMetric PercentilesRank(string key)
-		{
-			return this.TryGet<PercentilesMetric>(key);
-		}
+		public PercentilesMetric PercentilesRank(string key) => this.TryGet<PercentilesMetric>(key);
 
-		public TopHitsMetric TopHits(string key)
-		{
-			return this.TryGet<TopHitsMetric>(key);
-		}
+		public TopHitsMetric TopHits(string key) => this.TryGet<TopHitsMetric>(key);
 
 		public FiltersBucket Filters(string key)
 		{
@@ -107,143 +65,110 @@ namespace Nest
 				return named;
 
 			var anonymous = this.TryGet<Bucket>(key);
-			if (anonymous != null)
-				return new FiltersBucket(anonymous.Items);
-
-			return null;
+			return anonymous != null ? new FiltersBucket(anonymous.Items) : null;
 		}
 
-		public SingleBucket Global(string key)
-		{
-			return this.TryGet<SingleBucket>(key);
-		}
+		public SingleBucket Global(string key) => this.TryGet<SingleBucket>(key);
 
-		public SingleBucket Filter(string key)
-		{
-			return this.TryGet<SingleBucket>(key);
-		}
+		public SingleBucket Filter(string key) => this.TryGet<SingleBucket>(key);
 
-		public SingleBucket Missing(string key)
-		{
-			return this.TryGet<SingleBucket>(key);
-		}
+		public SingleBucket Missing(string key) => this.TryGet<SingleBucket>(key);
 
-		public SingleBucket Nested(string key)
-		{
-			return this.TryGet<SingleBucket>(key);
-		}
+		public SingleBucket Nested(string key) => this.TryGet<SingleBucket>(key);
 
-		public SingleBucket ReverseNested(string key)
-		{
-			return this.TryGet<SingleBucket>(key);
-		}
+		public SingleBucket ReverseNested(string key) => this.TryGet<SingleBucket>(key);
 
-		public SingleBucket Children(string key)
-		{
-			return this.TryGet<SingleBucket>(key);
-		}
+		public SingleBucket Children(string key) => this.TryGet<SingleBucket>(key);
 
 		public BucketWithDocCount<SignificantTermItem> SignificantTerms(string key)
 		{
 			var bucket = this.TryGet<BucketWithDocCount>(key);
-			if (bucket == null)
-				return null;
-			var b = new BucketWithDocCount<SignificantTermItem>();
-			b.DocCount = bucket.DocCount;
-			b.Items = bucket.Items.OfType<SignificantTermItem>().ToList();
-			return b;
+			return bucket == null
+				? null
+				: new BucketWithDocCount<SignificantTermItem>
+				{
+					DocCount = bucket.DocCount,
+					Items = bucket.Items.OfType<SignificantTermItem>().ToList()
+				};
 		}
 
 		public Bucket<KeyItem> Terms(string key)
 		{
 			var bucket = this.TryGet<Bucket>(key);
-			if (bucket == null)
-				return null;
-			var b = new Bucket<KeyItem>();
-			b.Items = bucket.Items.OfType<KeyItem>().ToList();
-			return b;
+			return bucket == null 
+				? null 
+				: new Bucket<KeyItem> {Items = bucket.Items.OfType<KeyItem>().ToList()};
 		}
 
 		public Bucket<HistogramItem> Histogram(string key)
 		{
 			var bucket = this.TryGet<Bucket>(key);
-			if (bucket == null)
-				return null;
-			var b = new Bucket<HistogramItem>();
-			b.Items = bucket.Items.OfType<HistogramItem>()
-				.Concat<HistogramItem>(bucket.Items.OfType<KeyItem>()
-				.Select(x =>
-					new HistogramItem
-						{
-							Key = long.Parse(x.Key),
-							KeyAsString = x.Key,
-							DocCount = x.DocCount,
-							Aggregations = x.Aggregations
-						}
-					)
-				)
-				.ToList();
-			return b;
+			return bucket == null
+				? null
+				: new Bucket<HistogramItem>
+				{
+					Items = bucket.Items.OfType<HistogramItem>()
+						.Concat<HistogramItem>(bucket.Items.OfType<KeyItem>()
+							.Select(x =>
+								new HistogramItem
+								{
+									Key = long.Parse(x.Key),
+									KeyAsString = x.Key,
+									DocCount = x.DocCount,
+									Aggregations = x.Aggregations
+								}
+							)
+						)
+						.ToList()
+				};
 		}
 
 		public Bucket<KeyItem> GeoHash(string key)
 		{
 			var bucket = this.TryGet<Bucket>(key);
-			if (bucket == null)
-				return null;
-			var b = new Bucket<KeyItem>();
-			b.Items = bucket.Items.OfType<KeyItem>().ToList();
-			return b;
+			return bucket == null 
+				? null 
+				: new Bucket<KeyItem> {Items = bucket.Items.OfType<KeyItem>().ToList()};
 		}
 
 		public Bucket<RangeItem> Range(string key)
 		{
 			var bucket = this.TryGet<Bucket>(key);
-			if (bucket == null)
-				return null;
-			var b = new Bucket<RangeItem>();
-			b.Items = bucket.Items.OfType<RangeItem>().ToList();
-			return b;
+			return bucket == null 
+				? null 
+				: new Bucket<RangeItem> {Items = bucket.Items.OfType<RangeItem>().ToList()};
 		}
 
 		public Bucket<RangeItem> DateRange(string key)
 		{
 			var bucket = this.TryGet<Bucket>(key);
-			if (bucket == null)
-				return null;
-			var b = new Bucket<RangeItem>();
-			b.Items = bucket.Items.OfType<RangeItem>().ToList();
-			return b;
+			return bucket == null 
+				? null 
+				: new Bucket<RangeItem> {Items = bucket.Items.OfType<RangeItem>().ToList()};
 		}
 
 		public Bucket<RangeItem> IpRange(string key)
 		{
 			var bucket = this.TryGet<Bucket>(key);
-			if (bucket == null)
-				return null;
-			var b = new Bucket<RangeItem>();
-			b.Items = bucket.Items.OfType<RangeItem>().ToList();
-			return b;
+			return bucket == null 
+				? null 
+				: new Bucket<RangeItem> {Items = bucket.Items.OfType<RangeItem>().ToList()};
 		}
 
 		public Bucket<RangeItem> GeoDistance(string key)
 		{
 			var bucket = this.TryGet<Bucket>(key);
-			if (bucket == null)
-				return null;
-			var b = new Bucket<RangeItem>();
-			b.Items = bucket.Items.OfType<RangeItem>().ToList();
-			return b;
+			return bucket == null 
+				? null 
+				: new Bucket<RangeItem> {Items = bucket.Items.OfType<RangeItem>().ToList()};
 		}
 
 		public Bucket<HistogramItem> DateHistogram(string key)
 		{
 			var bucket = this.TryGet<Bucket>(key);
-			if (bucket == null)
-				return null;
-			var b = new Bucket<HistogramItem>();
-			b.Items = bucket.Items.OfType<HistogramItem>().ToList();
-			return b;
+			return bucket == null 
+				? null 
+				: new Bucket<HistogramItem> {Items = bucket.Items.OfType<HistogramItem>().ToList()};
 		}
 	}
 }

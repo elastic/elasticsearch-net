@@ -29,7 +29,7 @@ namespace Nest
 	}
 
 	public class DateRangeAggregationDescriptor<T> 
-		: BucketAggregationBaseDescriptor<DateRangeAggregationDescriptor<T>, IDateRangeAggregator, T>
+		: BucketAggregatorBaseDescriptor<DateRangeAggregationDescriptor<T>, IDateRangeAggregator, T>
 			, IDateRangeAggregator 
 		where T : class
 	{

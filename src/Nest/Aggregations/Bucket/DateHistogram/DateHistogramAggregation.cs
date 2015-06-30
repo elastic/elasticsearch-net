@@ -76,7 +76,7 @@ namespace Nest
 	}
 
 	public class DateHistogramAggregationDescriptor<T>
-		: BucketAggregationBaseDescriptor<DateHistogramAggregationDescriptor<T>, IDateHistogramAggregator, T>
+		: BucketAggregatorBaseDescriptor<DateHistogramAggregationDescriptor<T>, IDateHistogramAggregator, T>
 			, IDateHistogramAggregator
 		where T : class
 	{

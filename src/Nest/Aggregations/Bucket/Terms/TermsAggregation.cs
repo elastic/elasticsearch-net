@@ -62,7 +62,7 @@ namespace Nest
 
 
 	public class TermsAggregationDescriptor<T> 
-		: BucketAggregationBaseDescriptor<TermsAggregationDescriptor<T>, ITermsAggregator, T>
+		: BucketAggregatorBaseDescriptor<TermsAggregationDescriptor<T>, ITermsAggregator, T>
 			, ITermsAggregator 
 		where T : class
 	{

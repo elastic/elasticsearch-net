@@ -20,7 +20,7 @@ namespace Nest
 	}
 
 	public class MissingAggregationDescriptor<T> 
-		: BucketAggregationBaseDescriptor<MissingAggregationDescriptor<T>,IMissingAggregator, T>
+		: BucketAggregatorBaseDescriptor<MissingAggregationDescriptor<T>,IMissingAggregator, T>
 			, IMissingAggregator 
 		where T : class
 	{

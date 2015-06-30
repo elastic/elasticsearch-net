@@ -19,7 +19,7 @@ namespace Nest
 	}
 
 	public class NestedAggregationDescriptor<T> 
-		: BucketAggregationBaseDescriptor<NestedAggregationDescriptor<T>, INestedAggregator, T>
+		: BucketAggregatorBaseDescriptor<NestedAggregationDescriptor<T>, INestedAggregator, T>
 			, INestedAggregator 
 		where T : class
 	{

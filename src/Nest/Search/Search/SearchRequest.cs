@@ -316,8 +316,8 @@ namespace Nest
 		/// </summary>
 		public SearchDescriptor<T> Strict(bool strict = true) => _assign(a => this._Strict = strict);
 
-		public SearchDescriptor<T> Aggregations(Func<AggregationDescriptor<T>, IAggregationContainer> aggregationsSelector) =>
-			_assign(a=>a.Aggregations = aggregationsSelector(new AggregationDescriptor<T>())?.Aggregations.NullIfNoKeys());
+		public SearchDescriptor<T> Aggregations(Func<AggregationContainerDescriptor<T>, IAggregationContainer> aggregationsSelector) =>
+			_assign(a=>a.Aggregations = aggregationsSelector(new AggregationContainerDescriptor<T>())?.Aggregations.NullIfNoKeys());
 		
 		//TODO refactor!
 		public SearchDescriptor<T> InnerHits(
