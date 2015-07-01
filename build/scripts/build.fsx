@@ -28,6 +28,22 @@ Target "BuildApp" <| fun _ -> Build.CompileAll()
 
 Target "Test"  <| fun _ -> Tests.RunAll()
 
+Target "QuickTest"  <| fun _ -> Tests.RunAll()
+
+Target "WatchTests"  <| fun _ -> 
+    traceFAKE "Starting quick test (incremental compile then test)"
+    use watcher = !! "src/**/*.cs" |> WatchChanges (fun changes -> 
+            printfn "%A" changes
+            Build.QuickCompile()
+            Tests.RunAll()
+        )
+    
+    System.Console.ReadLine() |> ignore //Needed to keep FAKE from exiting
+    
+    watcher.Dispose() // Use to stop the watch from elsewhere, ie another task.
+
+Target "QuickCompile"  <| fun _ -> Build.QuickCompile()
+
 Target "CreateKeysIfAbsent" <| fun _ -> Sign.CreateKeysIfAbsent()
 
 Target "Version" <| fun _ -> Versioning.PatchAssemblyInfos()
@@ -57,6 +73,10 @@ Target "Nightly" <| fun _ -> trace "build nightly"
   ==> "Release"
   ==> "Nightly"
 
+"QuickCompile"
+  ==> "QuickTest"
+
+"WatchTests"
 
 "Build"
   ==> "Release"

@@ -56,5 +56,13 @@ type Build() =
 
     static member CompileAll() = DotNetFramework.All |> Seq.iter Build.Compile |> ignore
 
+    static member QuickCompile() = 
+        let f = DotNetFramework.NET45
+        let properties = msbuildProperties |> List.append [("TargetFrameworkVersion", f.Identifier.MSBuild)] 
+
+        MSBuild null "Build" properties (seq { yield "src/Elasticsearch.sln" }) |> ignore
+
+
+
 
 

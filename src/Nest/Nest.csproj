@@ -87,6 +87,7 @@
     <Compile Include="Cluster\NodesInfo\ElasticClient-NodesInfo.cs" />
     <Compile Include="Cluster\NodesShutdown\ElasticClient-NodeShutdown.cs" />
     <Compile Include="Cluster\NodeStats\ElasticClient-NodeStats.cs" />
+    <Compile Include="CommonAbstractions\SerializationBehavior\Resolvers\Converters\ReserializeJsonConverter.cs" />
     <Compile Include="CommonOptions\DateInterval.cs" />
     <Compile Include="CommonOptions\Range\DateExpressionRange.cs" />
     <Compile Include="CommonOptions\Range\Ip4ExpressionRange.cs" />
