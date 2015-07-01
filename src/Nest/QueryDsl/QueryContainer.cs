@@ -68,7 +68,8 @@ namespace Nest
 		IFuzzyQuery Fuzzy { get; set; }
 
 		[JsonProperty(PropertyName = "geo_shape")]
-		[JsonConverter(typeof(CompositeJsonConverter<GeoShapeQueryJsonReader, FieldNameQueryConverter<EnvelopeGeoShape>>))]
+		//TODO BROKE this for now this should NOT use FieldNameQuery
+		//[JsonConverter(typeof(CompositeJsonConverter<GeoShapeQueryJsonReader, FieldNameQueryConverter<EnvelopeGeoShape>>))]
 		IGeoShapeQuery GeoShape { get; set; }
 
 		[JsonProperty(PropertyName = "common")]

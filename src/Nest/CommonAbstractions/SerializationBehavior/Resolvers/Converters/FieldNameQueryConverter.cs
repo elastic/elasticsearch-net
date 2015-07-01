@@ -5,63 +5,81 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-
-
-	/// <summary>
-	/// JSON converter for IDictionary that ignores the contract resolver (e.g. CamelCasePropertyNamesContractResolver)
-	/// when converting dictionary keys to property names.
-	/// </summary>
-	public class FieldNameQueryConverter<T>: JsonConverter
-		where T : class, new()
+	public abstract class ReserializeJsonConverter<TReadAs, TInterface> : JsonConverter
+		where TReadAs : class, TInterface, new()
+		where TInterface : class
 	{
-		private readonly ReadAsTypeConverter<T> _reader;
+		protected ReadAsTypeConverter<TReadAs> Reader { get; } = new ReadAsTypeConverter<TReadAs>();
 
-		public FieldNameQueryConverter()
-		{
-			this._reader = new ReadAsTypeConverter<T>();
-		}
+		public override bool CanRead => true;
 
-		public override bool CanConvert(Type objectType)
-		{
-			return typeof(IFieldNameQuery).IsAssignableFrom(objectType);
-		}
+		public override bool CanWrite => true;
 
-		public override bool CanRead
-		{
-			get { return true; }
-		}
-
-		public override bool CanWrite
-		{
-			get { return true; }
-		}
+		public override bool CanConvert(Type objectType) => typeof(TInterface).IsAssignableFrom(objectType);
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
+			if (reader.TokenType != JsonToken.StartObject) return null;
 			var depth = reader.Depth;
-			if (reader.TokenType != JsonToken.StartObject)
-				return null;
-			reader.Read();
-			var fieldName = reader.Value as string;
-			reader.Read();
-			var query = this._reader.ReadJson(reader, objectType, existingValue, serializer);
-			var setter = query as IFieldNameQuery;
-			if (setter != null)
-				setter.Field = fieldName;
+			var deserialized = this.DeserializeJson(reader, objectType, existingValue, serializer);
+			
+			//TODO this might not be necessary
 			do
 			{
 				reader.Read();
 			} while (reader.Depth >= depth && reader.TokenType != JsonToken.EndObject);
 
-			return query;
+			return deserialized;
 		}
+
+		protected TReadAs ReadAs(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer) =>
+			this.Reader.ReadJson(reader, objectType, existingValue, serializer) as TReadAs;
+
+		protected abstract object DeserializeJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer);
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-			var v = value as IFieldNameQuery;
-			if (v == null) return;
+			var v = value as TInterface;
+			if (v != null)
+			{
+				this.SerializeJson(writer, value, v, serializer);
+			}
+		}
+		protected abstract void SerializeJson(JsonWriter writer, object value, TInterface castValue, JsonSerializer serializer);
 
-			var fieldName = v.Field;
+		protected void Reserialize(JsonWriter writer, object value, JsonSerializer serializer)
+		{
+			var properties = value.GetCachedObjectProperties();
+			foreach (var p in properties)
+			{
+				if (p.Ignored) continue;
+				var vv = p.ValueProvider.GetValue(value);
+				if (vv == null) continue;
+				writer.WritePropertyName(p.PropertyName);
+				serializer.Serialize(writer, vv);
+			}
+		}
+	}
+
+	public class FieldNameQueryConverter<TReadAs> : ReserializeJsonConverter<TReadAs, IFieldNameQuery>
+		where TReadAs : class, IFieldNameQuery, new()
+	{
+		protected override object DeserializeJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		{
+			//{
+			reader.Read(); //property name
+			var fieldName = reader.Value as string;
+			reader.Read(); //{
+			var query = this.ReadAs(reader, objectType, existingValue, serializer);
+			if (query == null) return null;
+			query.Field = fieldName;
+
+			return query;
+		}
+
+		protected override void SerializeJson(JsonWriter writer, object value, IFieldNameQuery castValue, JsonSerializer serializer)
+		{
+			var fieldName = castValue.Field;
 			if (fieldName == null)
 				return;
 
@@ -72,21 +90,13 @@ namespace Nest
 			var field = contract.Infer.PropertyPath(fieldName);
 			if (field.IsNullOrEmpty())
 				return;
-			
+
 			writer.WriteStartObject();
 			{
 				writer.WritePropertyName(field);
 				writer.WriteStartObject();
 				{
-					var properties = value.GetCachedObjectProperties();
-					foreach (var p in properties)
-					{
-						if (p.Ignored) continue;
-						var vv = p.ValueProvider.GetValue(value);
-						if (vv == null) continue;
-						writer.WritePropertyName(p.PropertyName);
-						serializer.Serialize(writer, vv);
-					}
+					this.Reserialize(writer, value, serializer);
 				}
 				writer.WriteEndObject();
 			}
