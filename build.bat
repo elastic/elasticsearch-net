@@ -18,10 +18,9 @@ if not exist build\tools\gitlink\lib\net45\gitlink.exe (
 )
 
 REM we need xunit-console to run our tests
-if not exist build\tools\xunixt.runner.console\tools\xunit.console.exe (
+if not exist build\tools\xunit.runner.console\tools\xunit.console.exe (
     ECHO Xunit not found.. Installing
     "build\tools\nuget\nuget.exe" "install" "xunit.runner.console" "-OutputDirectory" "build\tools" "-ExcludeVersion" "-Prerelease"
-    "build\tools\nuget\nuget.exe" "install" "xunit.runner.utility" "-OutputDirectory" "build\tools" "-ExcludeVersion" "-Prerelease"
 )
 
 REM we need wintersmith to build our documentation which in turn needs npm/node

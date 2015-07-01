@@ -37,12 +37,14 @@ namespace Tests._Internals.Integration
 			this.RoamingFolder = Path.Combine(appdata, "NEST", this.Version);
 			this.RoamingClusterFolder = Path.Combine(this.RoamingFolder, "elasticsearch-" + elasticsearchVersion);
 			this.Binary = Path.Combine(this.RoamingClusterFolder, "bin", "elasticsearch") + ".bat";
-			
-			this.DownloadAndExtractElasticsearch();
+
+			if (TestClient.RunIntegrationTests)
+				this.DownloadAndExtractElasticsearch();
 		}
 
 		public IObservable<ElasticsearchMessage> Start()
 		{
+			if (!TestClient.RunIntegrationTests) return Observable.Empty<ElasticsearchMessage>();
 			var handle  = new ManualResetEvent(false);
 			this.Stop();
 
@@ -172,6 +174,7 @@ namespace Tests._Internals.Integration
 
 		public void Stop()
 		{
+			if (!TestClient.RunIntegrationTests) return;
 			this.Started = false;
 			if (this.Info != null)
 			{
