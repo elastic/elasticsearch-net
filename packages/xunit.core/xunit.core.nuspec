@@ -1,33 +1,42 @@
 <?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2013/01/nuspec.xsd">
-  <metadata minClientVersion="2.5">
+  <metadata minClientVersion="2.8.5">
     <id>xunit.core</id>
-    <version>2.0.0-beta5-build2785</version>
-    <title>xUnit.net [Core Library]</title>
-    <authors>James Newkirk, Brad Wilson</authors>
-    <owners>James Newkirk, Brad Wilson</owners>
+    <version>2.1.0-beta3-build3029</version>
+    <title>xUnit.net [Core Unit Testing Framework]</title>
+    <authors>James Newkirk,Brad Wilson</authors>
+    <owners>James Newkirk,Brad Wilson</owners>
     <licenseUrl>https://raw.githubusercontent.com/xunit/xunit/master/license.txt</licenseUrl>
     <projectUrl>https://github.com/xunit/xunit</projectUrl>
     <iconUrl>https://raw.githubusercontent.com/xunit/media/master/logo-512-transparent.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Includes the core unit testing framework from xUnit.net (xunit.core.dll).
-      Supported platforms: Desktop .NET 4.5+, ASP.NET Core 5+, Modern Windows 8+, Windows Phone 8+ (Silverlight), Windows Phone 8.1+ (Universal), MonoTouch, MonoAndroid, Portable Libraries (supporting Profile259).</description>
+    <description>Includes the libraries for writing unit tests with xUnit.net.
+      Supported platforms: Desktop .NET 4.5+, DNX 4.5.1+, DNX Core 5+, Windows Phone 8 (Silverlight), Universal (Windows Phone 8.1+, Windows 8.1+), MonoTouch, MonoAndroid, Xamarin iOS Universal, Portable Libraries (supporting Profile259).</description>
     <language>en-US</language>
     <dependencies>
       <group>
-        <dependency id="xunit.abstractions" version="[2.0.0-beta5-build2785]" />
+        <dependency id="xunit.extensibility.core" version="[2.1.0-beta3-build3029]" />
       </group>
-      <group targetFramework="Windows8.0">
-        <dependency id="xunit.abstractions" version="[2.0.0-beta5-build2785]" />
-        <dependency id="xunit.runner.visualstudio.win8" version="(0.99.8, 0.99.10)" />
+      <group targetFramework="DNX4.5.1">
+        <dependency id="xunit.extensibility.core" version="[2.1.0-beta3-build3029]" />
+        <dependency id="xunit.extensibility.execution" version="[2.1.0-beta3-build3029]" />
       </group>
-      <group targetFramework="WindowsPhoneApp8.1">
-        <dependency id="xunit.abstractions" version="[2.0.0-beta5-build2785]" />
-        <dependency id="xunit.runner.visualstudio.wpa81" version="(0.99.8, 0.99.10)" />
+      <group targetFramework="DNXCore5.0">
+        <dependency id="xunit.extensibility.core" version="[2.1.0-beta3-build3029]" />
+        <dependency id="xunit.extensibility.execution" version="[2.1.0-beta3-build3029]" />
+      </group>
+      <group targetFramework="Xamarin.iOS0.0">
+        <dependency id="xunit.extensibility.core" version="[2.1.0-beta3-build3029]" />
+        <dependency id="xunit.extensibility.execution" version="[2.1.0-beta3-build3029]" />
+      </group>
+      <group targetFramework="MonoTouch0.0">
+        <dependency id="xunit.extensibility.core" version="[2.1.0-beta3-build3029]" />
+        <dependency id="xunit.extensibility.execution" version="[2.1.0-beta3-build3029]" />
+      </group>
+      <group targetFramework="MonoAndroid0.0">
+        <dependency id="xunit.extensibility.core" version="[2.1.0-beta3-build3029]" />
+        <dependency id="xunit.extensibility.execution" version="[2.1.0-beta3-build3029]" />
       </group>
     </dependencies>
-    <references>
-      <reference file="xunit.core.dll" />
-    </references>
   </metadata>
 </package>

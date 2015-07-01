@@ -31,9 +31,13 @@ type Build() =
                 | DotNet40Project net40 -> 
                     let net40dir = sprintf "%s/net40" outputFolder
                     CopyDir net40dir srcFolder allFiles
+            | NET45 ->
+                let net45dir = sprintf "%s/net45" outputFolder
+                CopyDir net45dir srcFolder allFiles
 
     static let toTarget (f: DotNetFramework) =
         match f with 
+        | NET45 -> "Rebuild"
         | NET40 -> 
             DotNet40Project.All
             |> List.map(fun p-> (DotNet40Project p).ProjectName)

@@ -76,7 +76,19 @@ namespace Nest
 			writer.WriteStartObject();
 			{
 				writer.WritePropertyName(field);
-				serializer.Serialize(writer, value);
+				writer.WriteStartObject();
+				{
+					var properties = value.GetCachedObjectProperties();
+					foreach (var p in properties)
+					{
+						if (p.Ignored) continue;
+						var vv = p.ValueProvider.GetValue(value);
+						if (vv == null) continue;
+						writer.WritePropertyName(p.PropertyName);
+						serializer.Serialize(writer, vv);
+					}
+				}
+				writer.WriteEndObject();
 			}
 			writer.WriteEndObject();
 		}

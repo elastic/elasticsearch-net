@@ -18,10 +18,12 @@ type ProjectName(msbuild: string) =
 
 type DotNetFramework = 
     | NET40 
-    static member All = [NET40] 
+    | NET45 
+    static member All = [NET40; NET45] 
     member this.Identifier = 
         match this with
         | NET40 -> { MSBuild = "v4.0"; Nuget = "net40"; }
+        | NET45 -> { MSBuild = "v4.5"; Nuget = "net45"; }
     
 type DotNet40Project =
     | Nest

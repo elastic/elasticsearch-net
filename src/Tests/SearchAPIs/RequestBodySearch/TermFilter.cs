@@ -14,33 +14,33 @@ namespace Tests.SearchAPIs.RequestBodySearch
 		public class Usage : GeneralUsageTests<ITermQuery, TermQueryDescriptor<object>, TermQuery>
 		{
 			protected override object ExpectedJson => 
-				new  { field = "value" };
+				new  { myfield = new { value =  "myvalue"  } };
 
 			protected override TermQuery Initializer =>
 				new TermQuery
 				{
-					Field = "field",
-					Value = "value"
+					Field = "myfield",
+					Value = "myvalue"
 				};
 
 			protected override Func<TermQueryDescriptor<object>, ITermQuery> Fluent =>
-				term => term.OnField("field").Value("value");
+				term => term.OnField("myfield").Value("myvalue");
 		}
 		
-		public class UsageInsideQueryDescriptor : GeneralUsageTests<IQueryContainer, QueryContainerDescriptor<object>, QueryContainer>
+		public class UsageInsideQueryContainer : GeneralUsageTests<IQueryContainer, QueryContainerDescriptor<object>, QueryContainer>
 		{
 			protected override object ExpectedJson =>
-				new { term = new { field = "value" } };
+				new { term = new { myfield = new { value = "myvalue" } } };
 
 			protected override QueryContainer Initializer =>
 				new TermQuery
 				{
-					Field = "field",
-					Value = "value"
+					Field = "myfield",
+					Value = "myvalue"
 				};
 
 			protected override Func<QueryContainerDescriptor<object>, IQueryContainer> Fluent =>
-				filter => filter.Term("field" , "value");
+				filter => filter.Term("myfield" , "myvalue");
 		}
 
 	}

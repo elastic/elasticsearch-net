@@ -31,7 +31,6 @@ namespace Nest
 		IMatchAllQuery MatchAllQuery { get; set; }
 
 		[JsonProperty(PropertyName = "term")]
-		[JsonConverter(typeof (FieldNameQueryConverter<TermQuery>))]
 		ITermQuery Term { get; set; }
 
 		[JsonProperty(PropertyName = "wildcard")]

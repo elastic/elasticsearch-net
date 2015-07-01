@@ -41,8 +41,8 @@ namespace Nest
 		public static QueryContainer Indices(Func<IndicesQueryDescriptor<T>, IIndicesQuery> selector) => 
 			new QueryContainerDescriptor<T>().Indices(selector);
 
-		public static QueryContainer MatchAll(double? Boost = null, string NormField = null) => 
-			new QueryContainerDescriptor<T>().MatchAll(Boost, NormField);
+		public static QueryContainer MatchAll(Func<MatchAllQueryDescriptor, IMatchAllQuery> selector = null) => 
+			new QueryContainerDescriptor<T>().MatchAll(selector);
 
 		public static QueryContainer MoreLikeThis(Func<MoreLikeThisQueryDescriptor<T>, IMoreLikeThisQuery> selector) => 
 			new QueryContainerDescriptor<T>().MoreLikeThis(selector);

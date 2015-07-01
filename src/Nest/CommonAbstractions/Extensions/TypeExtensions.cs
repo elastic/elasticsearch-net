@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using Nest.Resolvers;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace Nest
 {
@@ -11,11 +14,18 @@ namespace Nest
 	{
 		private static MethodInfo GetActivatorMethodInfo = typeof(TypeExtensions).GetMethod("GetActivator", BindingFlags.Static | BindingFlags.NonPublic);
 
-		private static ConcurrentDictionary<string, ObjectActivator<object>> _cachedActivators = new ConcurrentDictionary<string, ObjectActivator<object>>(); 
+		private static ConcurrentDictionary<string, ObjectActivator<object>> _cachedActivators = new ConcurrentDictionary<string, ObjectActivator<object>>();
 		private static ConcurrentDictionary<string, Type> _cachedGenericClosedTypes = new ConcurrentDictionary<string, Type>();
 
+
+		private static ConcurrentDictionary<Type, IList<JsonProperty>> _cachedTypeProperties =
+			new ConcurrentDictionary<Type, IList<JsonProperty>>();
+
+		//this contract is only used to resolve properties in class WE OWN.
+		//these are not subject to change depending on what the user passes as connectionsettings
+		private static ElasticContractResolver _jsonContract = new ElasticContractResolver(new ConnectionSettings());
+
 		public delegate T ObjectActivator<out T>(params object[] args);
-		
 
 		internal static object CreateGenericInstance(this Type t, Type closeOver, params object[] args)
 		{
@@ -34,20 +44,20 @@ namespace Nest
 			ObjectActivator<object> activator;
 			var argLength = args.Count();
 			var key = argLength + "--" + t.FullName;
-			if (!_cachedActivators.TryGetValue(key, out activator))
-			{
-				var generic = GetActivatorMethodInfo.MakeGenericMethod(t);
+			if (_cachedActivators.TryGetValue(key, out activator))
+				return activator(args);
+			var generic = GetActivatorMethodInfo.MakeGenericMethod(t);
 
-				ConstructorInfo ctor = t.GetConstructors().FirstOrDefault(c=>c.GetParameters().Count() == argLength);
-				if (ctor == null)
-					throw new Exception("Cannot create an instance of " + t.FullName 
-						+ "because it has no constructor taking " + argLength + " arguments");
-				activator = (ObjectActivator<object>)generic.Invoke(null, new[] { ctor });
-				_cachedActivators.TryAdd(key, activator);
-			}
+			ConstructorInfo ctor = t.GetConstructors().FirstOrDefault(c => c.GetParameters().Count() == argLength);
+			if (ctor == null)
+				throw new Exception("Cannot create an instance of " + t.FullName
+				                    + "because it has no constructor taking " + argLength + " arguments");
+			activator = (ObjectActivator<object>)generic.Invoke(null, new[] { ctor });
+			_cachedActivators.TryAdd(key, activator);
 			return activator(args);
 		}
 
+		//do not remove this is referenced through GetActivatorMethod
 		private static ObjectActivator<T> GetActivator<T>(ConstructorInfo ctor)
 		{
 			Type type = ctor.DeclaringType;
@@ -89,5 +99,17 @@ namespace Nest
 			ObjectActivator<T> compiled = (ObjectActivator<T>)lambda.Compile();
 			return compiled;
 		}
+
+		internal static IList<JsonProperty> GetCachedObjectProperties(this object @instance)
+		{
+			var t = @instance.GetType();
+
+			IList<JsonProperty> propertyDictionary;
+			if (_cachedTypeProperties.TryGetValue(t, out propertyDictionary))
+				return propertyDictionary;
+
+			return  _jsonContract.PropertiesOfAllInterfaces(t,MemberSerialization.OptIn);
+		}
+
 	}
 }

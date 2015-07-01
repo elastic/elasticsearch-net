@@ -337,18 +337,8 @@ namespace Nest
 		/// boosting into account, the norms_field needs to be provided in order to explicitly specify which
 		/// field the boosting will be done on (Note, this will result in slower execution time).
 		/// </param>
-		public QueryContainer MatchAll(double? Boost = null, string NormField = null, string Name = null)
-		{
-			//TODO introduce a proper optional query descriptor
-			var query = new MatchAllQuery() { NormField = NormField };
-			if (Boost.HasValue)
-				query.Boost = Boost.Value;
-			query.Name = Name;
-			
-			//TODO we need a MatchAllQueryDescriptor
-			throw new NotImplementedException();
-			//return this.New(query, q => q.MatchAllQuery = query);
-		}
+		public QueryContainer MatchAll(Func<MatchAllQueryDescriptor, IMatchAllQuery> selector = null) =>
+			_assign(a => a.MatchAllQuery = selector?.Invoke(new MatchAllQueryDescriptor()) ?? new MatchAllQuery());
 
 		/// <summary>
 		/// Matches documents that have fields that contain a term (not analyzed). 
