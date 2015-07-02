@@ -5,13 +5,6 @@ open System
 open Fake 
 open Paths
 
-type DocumentationBlock =
-    | Markdown of string
-    | Code of string
-
-type DocumentationFile(ast: SyntaxTree, fileName: string) = 
-    member this.x = ""
-
 module Documentation = 
 
     let private wintersmith action =
