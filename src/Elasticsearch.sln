@@ -10,6 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Build", "_Build", "{432D55
 		..\.gitignore = ..\.gitignore
 		..\build.bat = ..\build.bat
 		..\build.fsx = ..\build.fsx
+		..\build.sh = ..\build.sh
 		..\build\download-nuget.ps1 = ..\build\download-nuget.ps1
 		..\build\Elasticsearch.Net.nuspec = ..\build\Elasticsearch.Net.nuspec
 		..\build\NEST.nuspec = ..\build\NEST.nuspec
@@ -47,9 +48,7 @@ Global
 		{E97CCF40-0BA6-43FE-9F2D-58D454134088}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E97CCF40-0BA6-43FE-9F2D-58D454134088}.Release|Any CPU.Build.0 = Release|Any CPU
 		{28328694-2598-44D3-BB25-8B6C3FBDD3EF}.Debug|Any CPU.ActiveCfg = Release|Any CPU
-		{28328694-2598-44D3-BB25-8B6C3FBDD3EF}.Debug|Any CPU.Build.0 = Release|Any CPU
 		{28328694-2598-44D3-BB25-8B6C3FBDD3EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{28328694-2598-44D3-BB25-8B6C3FBDD3EF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{37164C11-88EF-4428-803A-9AA24FB8B44D}.Debug|Any CPU.ActiveCfg = Release|Any CPU
 		{37164C11-88EF-4428-803A-9AA24FB8B44D}.Debug|Any CPU.Build.0 = Release|Any CPU
 		{37164C11-88EF-4428-803A-9AA24FB8B44D}.Release|Any CPU.ActiveCfg = Release|Any CPU
