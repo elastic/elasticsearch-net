@@ -108,6 +108,7 @@ module Tooling =
             if doesNotExist modulePath then
                 traceFAKE "npm module %s not found installing in %s" npmId modulePath
                 Node.Exec [npm; "install"; npmId; "--prefix"; "./build/tools" ]
+        member this.Path = binPath
         member this.Exec arguments =
                 traceFAKE "calling %s" binPath
                 Node.Exec <| binPath :: arguments

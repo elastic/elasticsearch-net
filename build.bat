@@ -18,6 +18,13 @@ if not exist build\tools\FSharp.Data\lib\net40\Fsharp.Data.dll (
     "build\tools\nuget\nuget.exe" "install" "FSharp.Data" "-OutputDirectory" "build\tools" "-ExcludeVersion" "-Prerelease"
 )
 
+REM we need Microsoft.CodeAnalysis.CSharp so we can use type providers in our build scripts
+if not exist build\tools\FAKE\tools\Microsoft.CodeAnalysis.CSharp (
+    ECHO Microsoft.CodeAnalysis.CSharp not found.. Installing..
+    "build\tools\nuget\nuget.exe" "install" "Microsoft.CodeAnalysis.CSharp" "-OutputDirectory" "build\tools\FAKE\tools" "-ExcludeVersion" "-Prerelease"
+)
+
+
 SET TARGET="Build"
 SET VERSION=
 
@@ -28,4 +35,4 @@ IF NOT [%2]==[] (set VERSION="%2")
 shift
 shift
 
-"build\tools\FAKE\tools\Fake.exe" "build\\scripts\\build.fsx" "target=%TARGET%" "version=%VERSION%"
+"build\tools\FAKE\tools\Fake.exe" "build\\scripts\\Targets.fsx" "target=%TARGET%" "version=%VERSION%"

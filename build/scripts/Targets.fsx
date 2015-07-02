@@ -38,9 +38,8 @@ Target "WatchTests"  <| fun _ ->
             Tests.RunContinuous()
         )
     
-    System.Console.ReadLine() |> ignore //Needed to keep FAKE from exiting
-    
-    watcher.Dispose() // Use to stop the watch from elsewhere, ie another task.
+    System.Console.ReadLine() |> ignore 
+    watcher.Dispose() 
 
 Target "QuickCompile"  <| fun _ -> Build.QuickCompile()
 
