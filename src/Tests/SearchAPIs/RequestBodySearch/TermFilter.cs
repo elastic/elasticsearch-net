@@ -13,8 +13,8 @@ namespace Tests.SearchAPIs.RequestBodySearch
 		 */
 		public class Usage : GeneralUsageTests<ITermQuery, TermQueryDescriptor<object>, TermQuery>
 		{
-			protected override object ExpectedJson => 
-				new  { myfield = new { value =  "myvalue"  } };
+			protected override object ExpectedJson =>
+				new { myfield = new { value = "myvalue" } };
 
 			protected override TermQuery Initializer =>
 				new TermQuery
@@ -26,7 +26,7 @@ namespace Tests.SearchAPIs.RequestBodySearch
 			protected override Func<TermQueryDescriptor<object>, ITermQuery> Fluent =>
 				term => term.OnField("myfield").Value("myvalue");
 		}
-		
+
 		public class UsageInsideQueryContainer : GeneralUsageTests<IQueryContainer, QueryContainerDescriptor<object>, QueryContainer>
 		{
 			protected override object ExpectedJson =>
@@ -40,7 +40,7 @@ namespace Tests.SearchAPIs.RequestBodySearch
 				};
 
 			protected override Func<QueryContainerDescriptor<object>, IQueryContainer> Fluent =>
-				filter => filter.Term("myfield" , "myvalue");
+				filter => filter.Term("myfield", "myvalue");
 		}
 
 	}

@@ -35,7 +35,7 @@ Target "WatchTests"  <| fun _ ->
     use watcher = !! "src/**/*.cs" |> WatchChanges (fun changes -> 
             printfn "%A" changes
             Build.QuickCompile()
-            Tests.RunAll()
+            Tests.RunContinuous()
         )
     
     System.Console.ReadLine() |> ignore //Needed to keep FAKE from exiting

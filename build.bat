@@ -9,39 +9,14 @@ if not exist build\tools\nuget\nuget.exe (
 REM we need FAKE to process our build scripts
 if not exist build\tools\FAKE\tools\Fake.exe (
     ECHO FAKE not found.. Installing..
-    "build\tools\nuget\nuget.exe" "install" "FAKE" "-OutputDirectory" "build\tools" "-Version" "3.35.5" "-ExcludeVersion"
+    "build\tools\nuget\nuget.exe" "install" "FAKE" "-OutputDirectory" "build\tools" "-ExcludeVersion" "-Prerelease"
 )
 
-if not exist build\tools\gitlink\lib\net45\gitlink.exe (
-    ECHO Local node not found.. Installing..
-    "build\tools\nuget\nuget.exe" "install" "gitlink" "-OutputDirectory" "build\tools" "-ExcludeVersion" "-Prerelease"
+REM we need FSharp.Data so we can use type providers in our build scripts
+if not exist build\tools\FSharp.Data\lib\net40\Fsharp.Data.dll (
+    ECHO FSharp.Data not found.. Installing..
+    "build\tools\nuget\nuget.exe" "install" "FSharp.Data" "-OutputDirectory" "build\tools" "-ExcludeVersion" "-Prerelease"
 )
-
-REM we need xunit-console to run our tests
-if not exist build\tools\xunit.runner.console\tools\xunit.console.exe (
-    ECHO Xunit not found.. Installing
-    "build\tools\nuget\nuget.exe" "install" "xunit.runner.console" "-OutputDirectory" "build\tools" "-ExcludeVersion" "-Prerelease"
-)
-
-REM we need wintersmith to build our documentation which in turn needs npm/node
-REM installing and calling this locally so that yours and CI's systems do not need to be configured prior to running build.bat
-
-
-if not exist build\tools\Node.js\node.exe (
-    ECHO Local node not found.. Installing..
-    "build\tools\nuget\nuget.exe" "install" "node.js" "-OutputDirectory" "build\tools" "-ExcludeVersion" "-Prerelease"
-)
-if not exist build\tools\Npm\node_modules\npm\cli.js (
-    ECHO Local npm not found.. Installing..
-    "build\tools\nuget\nuget.exe" "install" "npm" "-OutputDirectory" "build\tools" "-ExcludeVersion" "-Prerelease"
-)
-if not exist build\tools\node_modules\wintersmith\bin\wintersmith (
-    ECHO wintersmith not found.. Installing.. 
-    cd build\tools
-    "Node.js\node.exe" "Npm\node_modules\npm\cli.js" install wintersmith
-    cd ..\..
-)
-
 
 SET TARGET="Build"
 SET VERSION=

@@ -49,7 +49,7 @@ type Build() =
         let properties = msbuildProperties |> List.append [("TargetFrameworkVersion", f.MSBuild)] 
         let target = toTarget framework
 
-        CleanDirs <| Paths.MsBuildOutput()
+        CleanDirs <| Paths.MsBuildOutput
         MSBuild null target properties (seq { yield "src/Elasticsearch.sln" }) |> ignore
         if not isMono then gitLink()
         moveToBuildOutput(framework)
@@ -58,9 +58,18 @@ type Build() =
 
     static member QuickCompile() = 
         let f = DotNetFramework.NET45
-        let properties = msbuildProperties |> List.append [("TargetFrameworkVersion", f.Identifier.MSBuild)] 
-
-        MSBuild null "Build" properties (seq { yield "src/Elasticsearch.sln" }) |> ignore
+        let properties =  ("Verbosity", "Quiet") :: ("TargetFrameworkVersion", f.Identifier.MSBuild) :: msbuildProperties 
+        let setParams defaults =
+            { defaults with
+               // Verbosity = Some(Quiet)
+                Targets = ["Build"]
+                Properties =
+                    [
+                        "Configuration", "Release"
+                        "TargetFrameworkVersion", f.Identifier.MSBuild
+                    ]
+         }
+        build setParams "src/Elasticsearch.sln" |> ignore
 
 
 
