@@ -22,9 +22,10 @@ namespace Nest
             throw exception;
         }
 
-		internal static T ThrowWhen<T>(this T @object, Predicate<T> predicate, string exceptionMessage)
+		internal static T ThrowWhen<T>(this T @object, Func<T, bool> predicate, string exceptionMessage)
 		{
-			if ((predicate?.Invoke(@object)).GetValueOrDefault(false))
+			var x = predicate?.Invoke(@object);
+			if (x.GetValueOrDefault(false))
 				throw new DslException(exceptionMessage);
 
 			return @object;

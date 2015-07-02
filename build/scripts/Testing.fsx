@@ -1,7 +1,5 @@
 ﻿#I @"../tools/FAKE/tools"
-#I "../tools/Fsharp.Data/lib/net40"
 #r @"FakeLib.dll"
-#r "Fsharp.Data.dll"
 #r "System.Xml.Linq.dll"
 
 #load @"Paths.fsx"
@@ -10,7 +8,6 @@ open System
 open Fake 
 open Paths
 open Fake.Testing
-open FSharp.Data
 open System.Xml.Linq;
 
 // xunit console runner is broken on mono 4.0.2 better run with a nightly build:
@@ -31,7 +28,7 @@ module Tests =
         let assembly = results.Root.Element <| XName.Get "assembly"
         let attr name = 
             let a = assembly.Attribute <| XName.Get name
-            a.Value.AsInteger()
+            Int32.Parse(a.Value)
 
         let errors = attr "failed"
         let total = attr "total"

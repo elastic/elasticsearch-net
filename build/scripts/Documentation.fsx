@@ -17,6 +17,6 @@ module Documentation =
           ) 
           (TimeSpan.FromMinutes (if action = "preview" then 300.0 else 5.0)) |> ignore
 
-    let build = 
-        wintersmith "build"
+    let Execute action = 
+        wintersmith action
 

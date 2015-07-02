@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
@@ -285,7 +285,7 @@ namespace Tests._Internals.Integration
 
 		public ElasticsearchNodeInfo(string version, string pid, string build)
 		{
-			Version = version;
+			this.Version = version;
 			Pid = int.Parse(pid);
 			Build = build;
 		}

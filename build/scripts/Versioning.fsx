@@ -11,7 +11,6 @@ open Projects
 type Versioning() = 
     
     static let suffix = fun (prerelease: PreRelease) -> sprintf "-%s%i" prerelease.Name prerelease.Number.Value
-
     //returns the current version number 
     //when version is passed to script we always use that
     //otherwise we get the current version number and append -ci-datestamp

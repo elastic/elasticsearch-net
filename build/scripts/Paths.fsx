@@ -80,7 +80,7 @@ module Tooling =
         let fullTargetPath = sprintf "%s/%s" Paths.ToolsFolder location
         if doesNotExist fullTargetPath then
             traceFAKE "Tool %s not found installing in %s" nugetId fullTargetPath
-            exec path ["install"; nugetId; "-OutputDirectory build\\tools"; "-ExcludeVersion"]
+            exec path ["install"; nugetId; "-OutputDirectory build/tools"; "-ExcludeVersion"]
 
     type NugetTooling(nugetId, path) =
         do 
@@ -100,6 +100,15 @@ module Tooling =
     let Fake = new NugetTooling("FAKE", "FAKE/tools/FAKE.exe")
     let private FSharpData = new NugetTooling("FSharp.Data", "Fsharp.Data/lib/net40/Fsharp.Data.dll")
 
+    let execProcess proc arguments =
+        let args = arguments |> String.concat " "
+        ExecProcess (fun p ->
+            p.WorkingDirectory <- "."  
+            p.FileName <- proc
+            p.Arguments <- args
+          ) 
+          (TimeSpan.FromMinutes (5.0)) |> ignore
+
     type NpmTooling(npmId, binJs) =
         let modulePath =  sprintf "%s/node_modules/%s" Paths.ToolsFolder npmId
         let binPath =  sprintf "%s/%s" modulePath binJs
@@ -107,11 +116,18 @@ module Tooling =
         do
             if doesNotExist modulePath then
                 traceFAKE "npm module %s not found installing in %s" npmId modulePath
+                if (isMono) then
+                    execProcess "npm" ["install"; npmId; "--prefix"; "./build/tools" ]
+                else 
                 Node.Exec [npm; "install"; npmId; "--prefix"; "./build/tools" ]
         member this.Path = binPath
+
         member this.Exec arguments =
                 traceFAKE "calling %s" binPath
-                Node.Exec <| binPath :: arguments
+                if (isMono) then
+                    execProcess "node" <| binPath :: arguments
+                else
+                    exec "node" <| binPath :: arguments
 
     let Wintersmith = new NpmTooling("wintersmith", "wintersmith")
     let Notifier = new NpmTooling("node-notifier", "bin.js")
