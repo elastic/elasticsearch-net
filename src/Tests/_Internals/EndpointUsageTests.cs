@@ -41,7 +41,6 @@ namespace Tests._Internals
 			{
 				var client = this.GetClient();
 				var dict = new Dictionary<string, TResponse>();
-				if (!TestClient.RunIntegrationTests) return dict;
 
 				dict.Add("fluent", fluent(client, this.Fluent));
 				dict.Add("fluentAsync", await fluentAsync(client, this.Fluent));
@@ -57,7 +56,8 @@ namespace Tests._Internals
 
 		protected async Task AssertOnAllResponses(Action<TResponse> assert)
 		{
-			foreach (var kv in await this._responses)
+			var responses = await this._responses;
+			foreach (var kv in responses)
 			{
 				assert(kv.Value);
 			}
@@ -69,11 +69,11 @@ namespace Tests._Internals
 		[IntegrationFact] protected async void ReturnsExpectedIsValid() =>
 			await this.AssertOnAllResponses(r=>r.IsValid.Should().Be(this.ExpectIsValid));
 
-		[Fact] protected async void HitsTheCorrectUrl() =>
+		[Fact] protected async Task HitsTheCorrectUrl() =>
 			await this.AssertOnAllResponses(r=>this.AssertUrl(new Uri(r.ConnectionStatus.RequestUrl)));
 
 		[Fact] protected void SerializesInitializer() => this.AssertSerializesAndRoundTrips(this.Initializer);
-
+		 
 		[Fact] protected void SerializesFluent() => this.AssertSerializesAndRoundTrips(this.Fluent(new TDescriptor()));
 
 	}

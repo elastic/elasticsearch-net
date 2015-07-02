@@ -31,6 +31,8 @@ namespace Tests._Internals.Integration
 
 		public ElasticsearchNode(string elasticsearchVersion)
 		{
+			if (!TestClient.RunIntegrationTests) return;
+
 			this.Version = elasticsearchVersion;
 
 			var appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
@@ -38,8 +40,7 @@ namespace Tests._Internals.Integration
 			this.RoamingClusterFolder = Path.Combine(this.RoamingFolder, "elasticsearch-" + elasticsearchVersion);
 			this.Binary = Path.Combine(this.RoamingClusterFolder, "bin", "elasticsearch") + ".bat";
 
-			if (TestClient.RunIntegrationTests)
-				this.DownloadAndExtractElasticsearch();
+			this.DownloadAndExtractElasticsearch();
 		}
 
 		public IObservable<ElasticsearchMessage> Start()
