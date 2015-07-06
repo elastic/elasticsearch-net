@@ -54,6 +54,7 @@ namespace Tests._Internals.Integration
 				.Index<Project>()
 				.AddMapping<Project>(m=>m
 					.Properties(props=>props
+						.Date(d=>d.Name(p=>p.StartedOn))
 						.NestedObject<Tag>(mo=>mo
 							.Name(p=>p.Tags)
 							.Properties(TagProperties)
