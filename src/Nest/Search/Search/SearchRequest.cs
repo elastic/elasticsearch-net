@@ -100,7 +100,7 @@ namespace Nest
 	}
 
 	[JsonConverter(typeof(ReadAsTypeConverter<SearchRequest>))]
-	public interface ISearchRequest<T> : ISearchRequest {}
+	public interface ISearchRequest<T> : ISearchRequest {} 
 
 	internal static class SearchPathInfo
 	{
