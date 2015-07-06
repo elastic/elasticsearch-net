@@ -40,12 +40,14 @@ namespace Tests._Internals
 			this._responses = new AsyncLazy<IDictionary<string, TResponse>>(async () =>
 			{
 				var client = this.GetClient();
-				var dict = new Dictionary<string, TResponse>();
+				var dict = new Dictionary<string, TResponse>
+				{
+					{"fluent", fluent(client, this.Fluent)},
+					{"fluentAsync", await fluentAsync(client, this.Fluent)},
+					{"initializer", request(client, this.Initializer)},
+					{"initializerAsync", await requestAsync(client, this.Initializer)}
+				};
 
-				dict.Add("fluent", fluent(client, this.Fluent));
-				dict.Add("fluentAsync", await fluentAsync(client, this.Fluent));
-				dict.Add("initializer", request(client, this.Initializer));
-				dict.Add("initializerAsync", await requestAsync(client, this.Initializer));
 				return dict;
 			});
 		}
@@ -72,9 +74,11 @@ namespace Tests._Internals
 		[U] protected async Task HitsTheCorrectUrl() =>
 			await this.AssertOnAllResponses(r=>this.AssertUrl(new Uri(r.ConnectionStatus.RequestUrl)));
 
-		[U] protected void SerializesInitializer() => this.AssertSerializesAndRoundTrips(this.Initializer);
+		[U] protected void SerializesInitializer() => 
+			this.AssertSerializesAndRoundTrips<TInterface>(this.Initializer);
 		 
-		[U] protected void SerializesFluent() => this.AssertSerializesAndRoundTrips(this.Fluent(new TDescriptor()));
+		[U] protected void SerializesFluent() => 
+			this.AssertSerializesAndRoundTrips(this.Fluent(new TDescriptor()));
 
 	}
 }

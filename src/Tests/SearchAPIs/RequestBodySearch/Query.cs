@@ -36,12 +36,11 @@ namespace Tests.SearchAPIs.RequestBodySearch
 			protected override SearchRequest<Project> Initializer =>
 				new SearchRequest<Project>
 				{
-					Query = new QueryContainer(new TermQuery
+					Query = new TermQuery
 							{
 								Field = "name",
 								Value = "elasticsearch"
 							}
-					)
 				};
 
 			public override void AssertUrl(Uri requestUri) => requestUri.PathAndQuery.Should().Be("/project/project/_search");

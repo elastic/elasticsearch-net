@@ -23,8 +23,10 @@ namespace Tests._Internals
 		protected virtual ConnectionSettings ConnectionSettings(ConnectionSettings settings) => settings; 
 		protected virtual IElasticClient Client() => TestClient.GetClient(ConnectionSettings); 
 
-		[U] protected void SerializesInitializer() => this.AssertSerializesAndRoundTrips(this.Initializer);
+		[U] protected void SerializesInitializer() => 
+			this.AssertSerializesAndRoundTrips(this.Initializer);
 
-		[U] protected void SerializesFluent() => this.AssertSerializesAndRoundTrips(this.FluentInstance);
+		[U] protected void SerializesFluent() => 
+			this.AssertSerializesAndRoundTrips(this.FluentInstance);
 	}
 }
