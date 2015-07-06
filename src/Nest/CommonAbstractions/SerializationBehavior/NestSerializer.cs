@@ -103,8 +103,8 @@ namespace Nest
 			settings = settings ?? _serializationSettings;
 			var serializer = JsonSerializer.Create(settings);
 			var jsonTextReader = new JsonTextReader(new StreamReader(stream));
-			var t = (T)serializer.Deserialize(jsonTextReader, typeof(T));
-			return t;
+			var t = serializer.Deserialize(jsonTextReader, typeof(T));
+			return (T)t;
 		}
 
 		public virtual Task<T> DeserializeAsync<T>(Stream stream)

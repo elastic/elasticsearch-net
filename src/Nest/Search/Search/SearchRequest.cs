@@ -99,6 +99,7 @@ namespace Nest
 		SearchRequestParameters QueryString { get; set; }
 	}
 
+	[JsonConverter(typeof(ReadAsTypeConverter<SearchRequest>))]
 	public interface ISearchRequest<T> : ISearchRequest {}
 
 	internal static class SearchPathInfo

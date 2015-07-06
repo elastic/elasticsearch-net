@@ -240,9 +240,9 @@
             call is made.
             </summary>
         </member>
-        <member name="P:FakeItEasy.Configuration.BuildableCallRule.OutAndRefParametersValues">
+        <member name="P:FakeItEasy.Configuration.BuildableCallRule.OutAndRefParametersValueProducer">
             <summary>
-            Gets or sets values to apply to output and reference variables.
+            Gets or sets a function that provides values to apply to output and reference variables.
             </summary>
         </member>
         <member name="P:FakeItEasy.Configuration.BuildableCallRule.CallBaseMethod">
@@ -440,6 +440,13 @@
             <param name="assembly">The assembly to check.</param>
             <returns>Whether or not the assembly references FakeItEasy.</returns>
         </member>
+        <member name="M:FakeItEasy.Core.AssemblyExtensions.Name(System.Reflection.Assembly)">
+            <summary>
+            Gets the simple name of the assembly. Can be used in Silverlight solutions.
+            </summary>
+            <param name="assembly">The assembly.</param>
+            <returns>The simple name of the assembly.</returns>
+        </member>
         <member name="T:FakeItEasy.Core.BootstrapperLocator">
             <summary>
             Locate an <see cref="T:FakeItEasy.IBootstrapper"/> implementation.
@@ -458,6 +465,60 @@
             </summary>
             <returns>An instance of the first non-default IBootstrapper implementation found,
             or a DefaultBootstrapper.</returns>
+        </member>
+        <member name="T:FakeItEasy.Core.IFakeCallProcessor">
+            <summary>
+            Represents the target of intercepted calls of a fake proxy. An implementation of this interface receives calls, gets its arguments
+            and can provide return values.
+            </summary>
+        </member>
+        <member name="M:FakeItEasy.Core.IFakeCallProcessor.Process(FakeItEasy.Core.IWritableFakeObjectCall)">
+            <summary>
+            Processes an intercepted call of a fake proxy.
+            </summary>
+            <param name="fakeObjectCall">The call information (like which method has been called, its arguments, ...).</param>
+        </member>
+        <member name="T:FakeItEasy.Core.FakeManagerProvider">
+            <summary>
+            Implementation of <see cref="T:FakeItEasy.Core.IFakeCallProcessorProvider"/>, which returns a <see cref="T:FakeItEasy.Core.FakeManager"/> as "call processor" lazily (on
+            the first call of <see cref="M:FakeItEasy.Core.FakeManagerProvider.Fetch(System.Object)"/> or <see cref="M:FakeItEasy.Core.FakeManagerProvider.EnsureInitialized(System.Object)"/>).
+            </summary>
+            <remarks>
+            Note that we just need to serialize the <see cref="T:FakeItEasy.Core.FakeManager"/> + the lock (an "empty", *new* object will be deserialized)
+            because <see cref="T:FakeItEasy.Core.IFakeCallProcessorProvider"/> doesn't require serializability before the first call of <see cref="M:FakeItEasy.Core.FakeManagerProvider.Fetch(System.Object)"/> or
+            <see cref="M:FakeItEasy.Core.FakeManagerProvider.EnsureInitialized(System.Object)"/> (see remarks section of <see cref="T:FakeItEasy.Core.IFakeCallProcessorProvider"/>).
+            </remarks>
+        </member>
+        <member name="T:FakeItEasy.Core.IFakeCallProcessorProvider">
+            <summary>
+            The responsibility of this interface is to instantiate a new <see cref="T:FakeItEasy.Core.IFakeCallProcessor"/> and to fully initialize it (e.g. 
+            applying the initial configuration). This should happen one time on the first call of <see cref="M:FakeItEasy.Core.IFakeCallProcessorProvider.Fetch(System.Object)"/> or
+            <see cref="M:FakeItEasy.Core.IFakeCallProcessorProvider.EnsureInitialized(System.Object)"/>.
+            </summary>
+            <remarks>
+            <para>
+            Note that the implementation of this interface must be thread-safe and guarantee the one-time-initialization property when accessing 
+            the interface methods concurrently (could happen when using this provider in spawned threads in a proxy base constructor).
+            </para>
+            <para>
+            An implementation of this interface should also be serializable and the deserialized object should behave like the original one
+            *after* it has been initialized (i.e. after the first call of <see cref="M:FakeItEasy.Core.IFakeCallProcessorProvider.Fetch(System.Object)"/> or <see cref="M:FakeItEasy.Core.IFakeCallProcessorProvider.EnsureInitialized(System.Object)"/>) because 
+            we don't need to serialize a fake before it has been initialized (returned to the user).
+            </para>
+            </remarks>
+        </member>
+        <member name="M:FakeItEasy.Core.IFakeCallProcessorProvider.Fetch(System.Object)">
+            <summary>
+            Create and initialize a new <see cref="T:FakeItEasy.Core.IFakeCallProcessor"/> for <paramref name="proxy"/>.
+            </summary>
+            <param name="proxy">The corresponding proxy object of the new <see cref="T:FakeItEasy.Core.IFakeCallProcessor"/>.</param>
+            <returns>The created <see cref="T:FakeItEasy.Core.IFakeCallProcessor"/>.</returns>
+        </member>
+        <member name="M:FakeItEasy.Core.IFakeCallProcessorProvider.EnsureInitialized(System.Object)">
+            <summary>
+            Ensures that the <see cref="T:FakeItEasy.Core.IFakeCallProcessor"/> is initialized (and can be used via the proxy's tag later on).
+            </summary>
+            <param name="proxy">The corresponding proxy object of the new <see cref="T:FakeItEasy.Core.IFakeCallProcessor"/>.</param>
         </member>
         <member name="T:FakeItEasy.DefaultBootstrapper">
             <summary>
@@ -494,15 +555,146 @@
             <see cref="T:FakeItEasy.IDummyDefinition"/>s, <see cref="T:FakeItEasy.IArgumentValueFormatter"/>s, and 
             <see cref="T:FakeItEasy.IFakeConfigurator"/>s.
             </summary>
-            <remark>This implementation returns the absolute paths of all the DLLs in the
-            <see cref="P:System.Environment.CurrentDirectory"/>.
-            </remark>
-            <returns>A list of absolute paths of to assemblies to scan for extension points.</returns>
+            <returns>
+            An empty list, but may be overridden to provide a list of absolute paths
+            to assemblies to scan for extension points.
+            </returns>
+        </member>
+        <member name="T:FakeItEasy.Expressions.ArgumentConstraints.IArgumentValueProvider">
+            <summary>
+            An object that may provide argument values, for example as implicitly-defined values for
+            methods' out parameters.
+            </summary>
+        </member>
+        <member name="T:FakeItEasy.Core.IArgumentConstraint">
+            <summary>
+            Validates an argument, checks that it's valid in a specific fake call.
+            </summary>
+        </member>
+        <member name="M:FakeItEasy.Core.IArgumentConstraint.WriteDescription(FakeItEasy.IOutputWriter)">
+            <summary>
+            Writes a description of the argument constraint to the specified writer.
+            </summary>
+            <param name="writer">
+            The writer.
+            </param>
+        </member>
+        <member name="M:FakeItEasy.Core.IArgumentConstraint.IsValid(System.Object)">
+            <summary>
+            Gets whether the argument is valid.
+            </summary>
+            <param name="argument">The argument to validate.</param>
+            <returns>True if the argument is valid.</returns>
+        </member>
+        <member name="P:FakeItEasy.Expressions.ArgumentConstraints.OutArgumentConstraint.Value">
+            <summary>
+            Gets the value that was used when specifying the constraint.
+            Used for implicit assignment of out parameter values, not for matching.
+            Since the called method has no access to the incoming parameter value,
+            there's no use in accepting or rejecting calls based on the 
+            incoming parameter value.
+            </summary>
+        </member>
+        <member name="M:FakeItEasy.Expressions.ArgumentConstraints.RefArgumentConstraint.#ctor(FakeItEasy.Core.IArgumentConstraint,System.Object)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FakeItEasy.Expressions.ArgumentConstraints.RefArgumentConstraint"/> class by
+            wrapping an existing <see cref="T:FakeItEasy.Core.IArgumentConstraint"/>.
+            </summary>
+            <param name="baseConstraint">The original constraint, which will be used for argument validation.</param>
+            <param name="value">The value to be used when implicitly assigning values to a call's ref parameter.</param>
+        </member>
+        <member name="P:FakeItEasy.Expressions.ArgumentConstraints.RefArgumentConstraint.Value">
+            <summary>
+            Gets the value that was used when specifying the constraint.
+            Used for implicit assignment of ref parameter values.
+            </summary>
         </member>
         <member name="T:FakeItEasy.MethodBaseExtensions">
             <summary>
             Provides extension methods for <see cref="T:System.Reflection.MethodBase"/>.
             </summary>
+        </member>
+        <member name="T:FakeItEasy.OutAndRefParametersConfigurationExtensions">
+            <summary>
+            Provides extension methods for <see cref="T:FakeItEasy.Configuration.IOutAndRefParametersConfiguration"/>.
+            </summary>
+        </member>
+        <member name="M:FakeItEasy.OutAndRefParametersConfigurationExtensions.AssignsOutAndRefParameters(FakeItEasy.Configuration.IOutAndRefParametersConfiguration,System.Object[])">
+            <summary>
+            Specifies output values for out and ref parameters. The values should appear 
+            in the same order as the out and ref parameters in the configured call.
+            Any non out and ref parameters are ignored.
+            The function will be called each time this call is made and can return different values.
+            </summary>
+            <param name="configuration">The configuration to extend.</param>
+            <param name="values">The values.</param>
+            <returns>A configuration object.</returns>
+        </member>
+        <member name="M:FakeItEasy.OutAndRefParametersConfigurationExtensions.AssignsOutAndRefParametersLazily``1(FakeItEasy.Configuration.IOutAndRefParametersConfiguration,System.Func{``0,System.Object[]})">
+            <summary>
+            Specifies a function used to produce output values for out and ref parameters.
+            The values should appear in the same order as the out and ref parameters in the configured call.
+            Any non out and ref parameters are ignored.
+            The function will be called each time this call is made and can return different values.
+            </summary>
+            <typeparam name="T1">Type of the first argument of the faked method call.</typeparam>
+            <param name="configuration">The configuration to extend.</param>
+            <param name="valueProducer">A function that produces the output values.</param>
+            <returns>A configuration object.</returns>
+            <exception cref="T:FakeItEasy.Configuration.FakeConfigurationException">
+            The signatures of the faked method and the <paramref name="valueProducer"/> do not match.
+            </exception>
+        </member>
+        <member name="M:FakeItEasy.OutAndRefParametersConfigurationExtensions.AssignsOutAndRefParametersLazily``2(FakeItEasy.Configuration.IOutAndRefParametersConfiguration,System.Func{``0,``1,System.Object[]})">
+            <summary>
+            Specifies a function used to produce output values for out and ref parameters.
+            The values should appear in the same order as the out and ref parameters in the configured call.
+            Any non out and ref parameters are ignored.
+            The function will be called each time this call is made and can return different values.
+            </summary>
+            <typeparam name="T1">Type of the first argument of the faked method call.</typeparam>
+            <typeparam name="T2">Type of the second argument of the faked method call.</typeparam>
+            <param name="configuration">The configuration to extend.</param>
+            <param name="valueProducer">A function that produces the output values.</param>
+            <returns>A configuration object.</returns>
+            <exception cref="T:FakeItEasy.Configuration.FakeConfigurationException">
+            The signatures of the faked method and the <paramref name="valueProducer"/> do not match.
+            </exception>
+        </member>
+        <member name="M:FakeItEasy.OutAndRefParametersConfigurationExtensions.AssignsOutAndRefParametersLazily``3(FakeItEasy.Configuration.IOutAndRefParametersConfiguration,System.Func{``0,``1,``2,System.Object[]})">
+            <summary>
+            Specifies a function used to produce output values for out and ref parameters.
+            The values should appear in the same order as the out and ref parameters in the configured call.
+            Any non out and ref parameters are ignored.
+            The function will be called each time this call is made and can return different values.
+            </summary>
+            <typeparam name="T1">Type of the first argument of the faked method call.</typeparam>
+            <typeparam name="T2">Type of the second argument of the faked method call.</typeparam>
+            <typeparam name="T3">Type of the third argument of the faked method call.</typeparam>
+            <param name="configuration">The configuration to extend.</param>
+            <param name="valueProducer">A function that produces the output values.</param>
+            <returns>A configuration object.</returns>
+            <exception cref="T:FakeItEasy.Configuration.FakeConfigurationException">
+            The signatures of the faked method and the <paramref name="valueProducer"/> do not match.
+            </exception>
+        </member>
+        <member name="M:FakeItEasy.OutAndRefParametersConfigurationExtensions.AssignsOutAndRefParametersLazily``4(FakeItEasy.Configuration.IOutAndRefParametersConfiguration,System.Func{``0,``1,``2,``3,System.Object[]})">
+            <summary>
+            Specifies a function used to produce output values for out and ref parameters.
+            The values should appear in the same order as the out and ref parameters in the configured call.
+            Any non out and ref parameters are ignored.
+            The function will be called each time this call is made and can return different values.
+            </summary>
+            <typeparam name="T1">Type of the first argument of the faked method call.</typeparam>
+            <typeparam name="T2">Type of the second argument of the faked method call.</typeparam>
+            <typeparam name="T3">Type of the third argument of the faked method call.</typeparam>
+            <typeparam name="T4">Type of the fourth argument of the faked method call.</typeparam>
+            <param name="configuration">The configuration to extend.</param>
+            <param name="valueProducer">A function that produces the output values.</param>
+            <returns>A configuration object.</returns>
+            <exception cref="T:FakeItEasy.Configuration.FakeConfigurationException">
+            The signatures of the faked method and the <paramref name="valueProducer"/> do not match.
+            </exception>
         </member>
         <member name="T:FakeItEasy.TypeExtensions">
             <summary>
@@ -545,11 +737,12 @@
         </member>
         <member name="M:FakeItEasy.ReturnValueConfigurationExtensions.Returns``1(FakeItEasy.Configuration.IReturnValueConfiguration{System.Threading.Tasks.Task{``0}},``0)">
             <summary>
-            Specifies the value to return when the configured call is made.
+            Specifies the <see cref="P:System.Threading.Tasks.Task`1.Result"/> of the <see cref="T:System.Threading.Tasks.Task`1"/> which is returned when the configured call is made.
+            The <see cref="T:System.Threading.Tasks.Task`1"/> returned from the configured call will have a <see cref="P:System.Threading.Tasks.Task.Status"/> of <see cref="F:System.Threading.Tasks.TaskStatus.RanToCompletion"/>.
             </summary>
-            <typeparam name="T">The type of the return value.</typeparam>
+            <typeparam name="T">The type of the result produced by the <see cref="T:System.Threading.Tasks.Task`1"/>.</typeparam>
             <param name="configuration">The configuration to extend.</param>
-            <param name="value">The value to return.</param>
+            <param name="value">The <see cref="P:System.Threading.Tasks.Task`1.Result"/> of the <see cref="T:System.Threading.Tasks.Task`1"/>.</param>
             <returns>A configuration object.</returns>
         </member>
         <member name="M:FakeItEasy.ReturnValueConfigurationExtensions.ReturnsLazily``1(FakeItEasy.Configuration.IReturnValueConfiguration{``0},System.Func{``0})">
@@ -563,6 +756,17 @@
             <param name="valueProducer">A function that produces the return value.</param>
             <returns>A configuration object.</returns>
         </member>
+        <member name="M:FakeItEasy.ReturnValueConfigurationExtensions.ReturnsLazily``1(FakeItEasy.Configuration.IReturnValueConfiguration{System.Threading.Tasks.Task{``0}},System.Func{``0})">
+            <summary>
+            Specifies a function used to produce the <see cref="P:System.Threading.Tasks.Task`1.Result"/> of the <see cref="T:System.Threading.Tasks.Task`1"/> which is returned when the configured call is made.
+            The function will be called each time the configured call is made and can return different values each time.
+            The <see cref="T:System.Threading.Tasks.Task`1"/> returned from the configured call will have a <see cref="P:System.Threading.Tasks.Task.Status"/> of <see cref="F:System.Threading.Tasks.TaskStatus.RanToCompletion"/>.
+            </summary>
+            <typeparam name="T">The type of the result produced by the <see cref="T:System.Threading.Tasks.Task`1"/>.</typeparam>
+            <param name="configuration">The configuration to extend.</param>
+            <param name="valueProducer">A function that produces the <see cref="P:System.Threading.Tasks.Task`1.Result"/> of the <see cref="T:System.Threading.Tasks.Task`1"/>.</param>
+            <returns>A configuration object.</returns>
+        </member>
         <member name="M:FakeItEasy.ReturnValueConfigurationExtensions.ReturnsLazily``2(FakeItEasy.Configuration.IReturnValueConfiguration{``0},System.Func{``1,``0})">
             <summary>
             Specifies a function used to produce a return value when the configured call is made.
@@ -573,6 +777,19 @@
             <typeparam name="T1">Type of the first argument of the faked method call.</typeparam>
             <param name="configuration">The configuration to extend.</param>
             <param name="valueProducer">A function that produces the return value.</param>
+            <returns>A configuration object.</returns>
+            <exception cref="T:FakeItEasy.Configuration.FakeConfigurationException">The signatures of the faked method and the <paramref name="valueProducer"/> do not match.</exception>
+        </member>
+        <member name="M:FakeItEasy.ReturnValueConfigurationExtensions.ReturnsLazily``2(FakeItEasy.Configuration.IReturnValueConfiguration{System.Threading.Tasks.Task{``0}},System.Func{``1,``0})">
+            <summary>
+            Specifies a function used to produce the <see cref="P:System.Threading.Tasks.Task`1.Result"/> of the <see cref="T:System.Threading.Tasks.Task`1"/> which is returned when the configured call is made.
+            The function will be called each time the configured call is made and can return different values each time.
+            The <see cref="T:System.Threading.Tasks.Task`1"/> returned from the configured call will have a <see cref="P:System.Threading.Tasks.Task.Status"/> of <see cref="F:System.Threading.Tasks.TaskStatus.RanToCompletion"/>.
+            </summary>
+            <typeparam name="TReturnType">The type of the result produced by the <see cref="T:System.Threading.Tasks.Task`1"/>.</typeparam>
+            <typeparam name="T1">Type of the first argument of the faked method call.</typeparam>
+            <param name="configuration">The configuration to extend.</param>
+            <param name="valueProducer">A function that produces the <see cref="P:System.Threading.Tasks.Task`1.Result"/> of the <see cref="T:System.Threading.Tasks.Task`1"/>.</param>
             <returns>A configuration object.</returns>
             <exception cref="T:FakeItEasy.Configuration.FakeConfigurationException">The signatures of the faked method and the <paramref name="valueProducer"/> do not match.</exception>
         </member>
@@ -590,6 +807,20 @@
             <returns>A configuration object.</returns>
             <exception cref="T:FakeItEasy.Configuration.FakeConfigurationException">The signatures of the faked method and the <paramref name="valueProducer"/> do not match.</exception>
         </member>
+        <member name="M:FakeItEasy.ReturnValueConfigurationExtensions.ReturnsLazily``3(FakeItEasy.Configuration.IReturnValueConfiguration{System.Threading.Tasks.Task{``0}},System.Func{``1,``2,``0})">
+            <summary>
+            Specifies a function used to produce the <see cref="P:System.Threading.Tasks.Task`1.Result"/> of the <see cref="T:System.Threading.Tasks.Task`1"/> which is returned when the configured call is made.
+            The function will be called each time the configured call is made and can return different values each time.
+            The <see cref="T:System.Threading.Tasks.Task`1"/> returned from the configured call will have a <see cref="P:System.Threading.Tasks.Task.Status"/> of <see cref="F:System.Threading.Tasks.TaskStatus.RanToCompletion"/>.
+            </summary>
+            <typeparam name="TReturnType">The type of the result produced by the <see cref="T:System.Threading.Tasks.Task`1"/>.</typeparam>
+            <typeparam name="T1">Type of the first argument of the faked method call.</typeparam>
+            <typeparam name="T2">Type of the second argument of the faked method call.</typeparam>
+            <param name="configuration">The configuration to extend.</param>
+            <param name="valueProducer">A function that produces the <see cref="P:System.Threading.Tasks.Task`1.Result"/> of the <see cref="T:System.Threading.Tasks.Task`1"/>.</param>
+            <returns>A configuration object.</returns>
+            <exception cref="T:FakeItEasy.Configuration.FakeConfigurationException">The signatures of the faked method and the <paramref name="valueProducer"/> do not match.</exception>
+        </member>
         <member name="M:FakeItEasy.ReturnValueConfigurationExtensions.ReturnsLazily``4(FakeItEasy.Configuration.IReturnValueConfiguration{``0},System.Func{``1,``2,``3,``0})">
             <summary>
             Specifies a function used to produce a return value when the configured call is made.
@@ -602,6 +833,21 @@
             <typeparam name="T1">Type of the first argument of the faked method call.</typeparam>
             <typeparam name="T2">Type of the second argument of the faked method call.</typeparam>
             <typeparam name="T3">Type of the third argument of the faked method call.</typeparam>
+            <returns>A configuration object.</returns>
+            <exception cref="T:FakeItEasy.Configuration.FakeConfigurationException">The signatures of the faked method and the <paramref name="valueProducer"/> do not match.</exception>
+        </member>
+        <member name="M:FakeItEasy.ReturnValueConfigurationExtensions.ReturnsLazily``4(FakeItEasy.Configuration.IReturnValueConfiguration{System.Threading.Tasks.Task{``0}},System.Func{``1,``2,``3,``0})">
+            <summary>
+            Specifies a function used to produce the <see cref="P:System.Threading.Tasks.Task`1.Result"/> of the <see cref="T:System.Threading.Tasks.Task`1"/> which is returned when the configured call is made.
+            The function will be called each time the configured call is made and can return different values each time.
+            The <see cref="T:System.Threading.Tasks.Task`1"/> returned from the configured call will have a <see cref="P:System.Threading.Tasks.Task.Status"/> of <see cref="F:System.Threading.Tasks.TaskStatus.RanToCompletion"/>.
+            </summary>
+            <typeparam name="TReturnType">The type of the result produced by the <see cref="T:System.Threading.Tasks.Task`1"/>.</typeparam>
+            <typeparam name="T1">Type of the first argument of the faked method call.</typeparam>
+            <typeparam name="T2">Type of the second argument of the faked method call.</typeparam>
+            <typeparam name="T3">Type of the third argument of the faked method call.</typeparam>
+            <param name="configuration">The configuration to extend.</param>
+            <param name="valueProducer">A function that produces the <see cref="P:System.Threading.Tasks.Task`1.Result"/> of the <see cref="T:System.Threading.Tasks.Task`1"/>.</param>
             <returns>A configuration object.</returns>
             <exception cref="T:FakeItEasy.Configuration.FakeConfigurationException">The signatures of the faked method and the <paramref name="valueProducer"/> do not match.</exception>
         </member>
@@ -621,20 +867,41 @@
             <returns>A configuration object.</returns>
             <exception cref="T:FakeItEasy.Configuration.FakeConfigurationException">The signatures of the faked method and the <paramref name="valueProducer"/> do not match.</exception>
         </member>
+        <member name="M:FakeItEasy.ReturnValueConfigurationExtensions.ReturnsLazily``5(FakeItEasy.Configuration.IReturnValueConfiguration{System.Threading.Tasks.Task{``0}},System.Func{``1,``2,``3,``4,``0})">
+            <summary>
+            Specifies a function used to produce the <see cref="P:System.Threading.Tasks.Task`1.Result"/> of the <see cref="T:System.Threading.Tasks.Task`1"/> which is returned when the configured call is made.
+            The function will be called each time the configured call is made and can return different values each time.
+            The <see cref="T:System.Threading.Tasks.Task`1"/> returned from the configured call will have a <see cref="P:System.Threading.Tasks.Task.Status"/> of <see cref="F:System.Threading.Tasks.TaskStatus.RanToCompletion"/>.
+            </summary>
+            <typeparam name="TReturnType">The type of the result produced by the <see cref="T:System.Threading.Tasks.Task`1"/>.</typeparam>
+            <typeparam name="T1">Type of the first argument of the faked method call.</typeparam>
+            <typeparam name="T2">Type of the second argument of the faked method call.</typeparam>
+            <typeparam name="T3">Type of the third argument of the faked method call.</typeparam>
+            <typeparam name="T4">Type of the fourth argument of the faked method call.</typeparam>
+            <param name="configuration">The configuration to extend.</param>
+            <param name="valueProducer">A function that produces the <see cref="P:System.Threading.Tasks.Task`1.Result"/> of the <see cref="T:System.Threading.Tasks.Task`1"/>.</param>
+            <returns>A configuration object.</returns>
+            <exception cref="T:FakeItEasy.Configuration.FakeConfigurationException">The signatures of the faked method and the <paramref name="valueProducer"/> do not match.</exception>
+        </member>
         <member name="M:FakeItEasy.ReturnValueConfigurationExtensions.ReturnsNextFromSequence``1(FakeItEasy.Configuration.IReturnValueConfiguration{``0},``0[])">
             <summary>
-            Configures the call to return the next value from the specified sequence each time it's called. Null will
-            be returned when all the values in the sequence has been returned.
+            Configures the call to return the next value from the specified sequence each time it's called.
+            After the sequence has been exhausted, the call will revert to the previously configured behavior.
             </summary>
-            <typeparam name="T">
-            The type of return value.
-            </typeparam>
-            <param name="configuration">
-            The call configuration to extend.
-            </param>
-            <param name="values">
-            The values to return in sequence.
-            </param>
+            <typeparam name="T">The type of return value.</typeparam>
+            <param name="configuration">The call configuration to extend.</param>
+            <param name="values">The values to return in sequence.</param>
+        </member>
+        <member name="M:FakeItEasy.ReturnValueConfigurationExtensions.ReturnsNextFromSequence``1(FakeItEasy.Configuration.IReturnValueConfiguration{System.Threading.Tasks.Task{``0}},``0[])">
+            <summary>
+            Configures the call to return a <see cref="T:System.Threading.Tasks.Task`1"/> with a <see cref="P:System.Threading.Tasks.Task`1.Result"/> of
+            the next value from the specified sequence each time it's called.
+            After the sequence has been exhausted, the call will revert to the previously configured behavior.
+            Each <see cref="T:System.Threading.Tasks.Task`1"/> returned from the configured call will have a <see cref="P:System.Threading.Tasks.Task.Status"/> of <see cref="F:System.Threading.Tasks.TaskStatus.RanToCompletion"/>.
+            </summary>
+            <typeparam name="T">The type of the result produced by each <see cref="T:System.Threading.Tasks.Task`1"/>.</typeparam>
+            <param name="configuration">The call configuration to extend.</param>
+            <param name="values">The values to use for the <see cref="P:System.Threading.Tasks.Task`1.Result"/> of each <see cref="T:System.Threading.Tasks.Task`1"/> in sequence.</param>
         </member>
         <member name="T:FakeItEasy.ArgumentValidationConfigurationExtensions">
             <summary>
@@ -841,6 +1108,14 @@
             <param name="options">The configuration.</param>
             <returns>A configuration object.</returns>
         </member>
+        <member name="M:FakeItEasy.FakeOptionsBuilderExtensions.CallsBaseMethods``1(FakeItEasy.Creation.IFakeOptionsBuilder{``0})">
+            <summary>
+            Makes the fake default to calling base methods, so long as they aren't abstract.
+            </summary>
+            <typeparam name="T">The type of fake object.</typeparam>
+            <param name="options">The configuration.</param>
+            <returns>A configuration object.</returns>
+        </member>
         <member name="T:FakeItEasy.FakeObjectCallExtensions">
             <summary>
             Provides extension methods for <see cref="T:FakeItEasy.Core.IFakeObjectCall"/>.
@@ -996,6 +1271,11 @@
               Looks up a localized string similar to Unable to create fake object..
             </summary>
         </member>
+        <member name="P:FakeItEasy.ExceptionMessages.FakeManagerWasInitializedWithDifferentProxyMessage">
+            <summary>
+              Looks up a localized string similar to The fake manager was initialized for a different proxy..
+            </summary>
+        </member>
         <member name="P:FakeItEasy.ExceptionMessages.FakingNonAbstractClassWithArgumentsForConstructor">
             <summary>
               Looks up a localized string similar to Only abstract classes can be faked using the A.Fake-method that takes an enumerable of objects as arguments for constructor, use the overload that takes an expression instead..
@@ -1099,7 +1379,28 @@
             Gets the event arguments of the event.
             </summary>
         </member>
+        <member name="M:FakeItEasy.Raise`1.op_Implicit(FakeItEasy.Raise{`0})~System.EventHandler{`0}">
+            <summary>
+            Converts a raiser into an <see cref="T:System.EventHandler`1"/>
+            </summary>
+            <param name="raiser">The raiser to convert.</param>
+            <returns>The new event handler</returns>
+        </member>
+        <member name="M:FakeItEasy.Raise`1.op_Implicit(FakeItEasy.Raise{`0})~System.EventHandler">
+            <summary>
+            Converts a raiser into an <see cref="T:System.EventHandler"/>
+            </summary>
+            <param name="raiser">The raiser to convert.</param>
+            <returns>The new event handler</returns>
+        </member>
         <member name="M:FakeItEasy.Raise`1.Now(System.Object,`0)">
+            <summary>
+            Register this event handler to an event on a faked object in order to raise that event.
+            </summary>
+            <param name="sender">The sender of the event.</param>
+            <param name="e">Event args for the event.</param>
+        </member>
+        <member name="M:FakeItEasy.Raise`1.Now(System.Object,System.EventArgs)">
             <summary>
             Register this event handler to an event on a faked object in order to raise that event.
             </summary>
@@ -1251,12 +1552,14 @@
             Lets the developer configure output values of out and ref parameters.
             </summary>
         </member>
-        <member name="M:FakeItEasy.Configuration.IOutAndRefParametersConfiguration.AssignsOutAndRefParameters(System.Object[])">
+        <member name="M:FakeItEasy.Configuration.IOutAndRefParametersConfiguration.AssignsOutAndRefParametersLazily(System.Func{FakeItEasy.Core.IFakeObjectCall,System.Collections.Generic.ICollection{System.Object}})">
             <summary>
-            Specifies output values for out and ref parameters. Specify the values in the order
-            the ref and out parameters has in the configured call, any non out and ref parameters are ignored.
+            Specifies a function used to produce output values for out and ref parameters.
+            The values should appear in the same order as the out and ref parameters in the configured call.
+            Any non out and ref parameters are ignored.
+            The function will be called each time this call is made and can return different values.
             </summary>
-            <param name="values">The values.</param>
+            <param name="valueProducer">A function that produces the output values.</param>
             <returns>A configuration object.</returns>
         </member>
         <member name="M:FakeItEasy.Configuration.IVoidConfiguration.DoesNothing">
@@ -1475,23 +1778,6 @@
             and the type for which the formatted is registered.
             </summary>
         </member>
-        <member name="T:FakeItEasy.Core.CallInterceptedEventArgs">
-            <summary>
-            Represents an event that happens when a call has been intercepted by a proxy.
-            </summary>
-        </member>
-        <member name="M:FakeItEasy.Core.CallInterceptedEventArgs.#ctor(FakeItEasy.Core.IWritableFakeObjectCall)">
-            <summary>
-            Initializes a new instance of the <see cref="T:FakeItEasy.Core.CallInterceptedEventArgs"/> class.
-            </summary>
-            <param name="call">The call.</param>
-        </member>
-        <member name="P:FakeItEasy.Core.CallInterceptedEventArgs.Call">
-            <summary>
-            Gets the call that was intercepted.
-            </summary>
-            <value>The call.</value>
-        </member>
         <member name="T:FakeItEasy.Core.CallRuleMetadata">
             <summary>
             Keeps track of metadata for interceptions.
@@ -1532,26 +1818,6 @@
             Inverts the logic of the matches method.
             </summary>
         </member>
-        <member name="T:FakeItEasy.Core.IArgumentConstraint">
-            <summary>
-            Validates an argument, checks that it's valid in a specific fake call.
-            </summary>
-        </member>
-        <member name="M:FakeItEasy.Core.IArgumentConstraint.WriteDescription(FakeItEasy.IOutputWriter)">
-            <summary>
-            Writes a description of the argument constraint to the specified writer.
-            </summary>
-            <param name="writer">
-            The writer.
-            </param>
-        </member>
-        <member name="M:FakeItEasy.Core.IArgumentConstraint.IsValid(System.Object)">
-            <summary>
-            Gets whether the argument is valid.
-            </summary>
-            <param name="argument">The argument to validate.</param>
-            <returns>True if the argument is valid.</returns>
-        </member>
         <member name="T:FakeItEasy.Core.DefaultFakeManagerAccessor">
             <summary>
             Default implementation of <see cref="T:FakeItEasy.Core.IFakeManagerAccessor"/>.
@@ -1563,15 +1829,6 @@
             calls can be configured.
             </summary>
         </member>
-        <member name="M:FakeItEasy.Core.IFakeManagerAccessor.AttachFakeManagerToProxy(System.Type,System.Object,FakeItEasy.Creation.ICallInterceptedEventRaiser)">
-            <summary>
-            Attaches a <see cref="T:FakeItEasy.Core.FakeManager"/> to the specified proxy, listening to
-            the event raiser.
-            </summary>
-            <param name="typeOfFake">The type of the fake object proxy.</param>
-            <param name="proxy">The proxy to attach to.</param>
-            <param name="eventRaiser">The event raiser to listen to.</param>
-        </member>
         <member name="M:FakeItEasy.Core.IFakeManagerAccessor.GetFakeManager(System.Object)">
             <summary>
             Gets the fake manager associated with the proxy.
@@ -1579,14 +1836,12 @@
             <param name="proxy">The proxy to get the manager from.</param>
             <returns>A fake manager.</returns>
         </member>
-        <member name="M:FakeItEasy.Core.DefaultFakeManagerAccessor.AttachFakeManagerToProxy(System.Type,System.Object,FakeItEasy.Creation.ICallInterceptedEventRaiser)">
+        <member name="M:FakeItEasy.Core.IFakeManagerAccessor.TagProxy(System.Object,FakeItEasy.Core.FakeManager)">
             <summary>
-            Attaches a <see cref="T:FakeItEasy.Core.FakeManager"/> to the specified proxy, listening to
-            the event raiser.
+            Tags a proxy object, so that it can accessed later by <see cref="M:FakeItEasy.Core.IFakeManagerAccessor.GetFakeManager(System.Object)"/>.
             </summary>
-            <param name="typeOfFake">The type of the fake object proxy.</param>
-            <param name="proxy">The proxy to attach to.</param>
-            <param name="eventRaiser">The event raiser to listen to.</param>
+            <param name="proxy">The proxy to tag.</param>
+            <param name="manager">The fake manager.</param>
         </member>
         <member name="M:FakeItEasy.Core.DefaultFakeManagerAccessor.GetFakeManager(System.Object)">
             <summary>
@@ -1797,10 +2052,12 @@
             <content>Property behavior rule.</content>
             <content>Property setter rule.</content>
         </member>
-        <member name="M:FakeItEasy.Core.FakeManager.#ctor">
+        <member name="M:FakeItEasy.Core.FakeManager.#ctor(System.Type,System.Object)">
             <summary>
             Initializes a new instance of the <see cref="T:FakeItEasy.Core.FakeManager"/> class.
             </summary>
+            <param name="fakeObjectType">The faked type.</param>
+            <param name="proxy">The faked proxy object.</param>
         </member>
         <member name="M:FakeItEasy.Core.FakeManager.AddRuleFirst(FakeItEasy.Core.IFakeObjectCallRule)">
             <summary>
@@ -1833,7 +2090,7 @@
         </member>
         <member name="P:FakeItEasy.Core.FakeManager.Object">
             <summary>
-            Gets the faked object.
+            Gets the faked proxy object.
             </summary>
         </member>
         <member name="P:FakeItEasy.Core.FakeManager.FakeObjectType">
@@ -1855,6 +2112,8 @@
             <summary>
             A delegate responsible for creating FakeObject instances.
             </summary>
+            <param name="fakeObjectType">The faked type.</param>
+            <param name="proxy">The faked proxy object.</param>
             <returns>An instance of <see cref="T:FakeItEasy.Core.FakeManager"/>.</returns>
         </member>
         <member name="T:FakeItEasy.Core.IInterceptedFakeObjectCall">
@@ -2003,7 +2262,7 @@
             An interface to be implemented by classes that can generate proxies for FakeItEasy.
             </summary>
         </member>
-        <member name="M:FakeItEasy.Creation.IProxyGenerator.GenerateProxy(System.Type,System.Collections.Generic.IEnumerable{System.Type},System.Collections.Generic.IEnumerable{System.Object},System.Collections.Generic.IEnumerable{System.Reflection.Emit.CustomAttributeBuilder})">
+        <member name="M:FakeItEasy.Creation.IProxyGenerator.GenerateProxy(System.Type,System.Collections.Generic.IEnumerable{System.Type},System.Collections.Generic.IEnumerable{System.Object},System.Collections.Generic.IEnumerable{System.Reflection.Emit.CustomAttributeBuilder},FakeItEasy.Core.IFakeCallProcessorProvider)">
             <summary>
             Generates a proxy of the specified type and returns a result object containing information
             about the success of the generation and the proxy if it was generated.
@@ -2012,9 +2271,10 @@
             <param name="additionalInterfacesToImplement">Interfaces to be implemented by the proxy.</param>
             <param name="argumentsForConstructor">Arguments to pass to the constructor of the type in <paramref name="typeOfProxy" />.</param>
             <param name="customAttributeBuilders">The custom attribute builders.</param>
+            <param name="fakeCallProcessorProvider">The call processor provider.</param>
             <returns>A result containing the generated proxy.</returns>
         </member>
-        <member name="M:FakeItEasy.Creation.IProxyGenerator.GenerateProxy(System.Type,System.Collections.Generic.IEnumerable{System.Type},System.Collections.Generic.IEnumerable{System.Object})">
+        <member name="M:FakeItEasy.Creation.IProxyGenerator.GenerateProxy(System.Type,System.Collections.Generic.IEnumerable{System.Type},System.Collections.Generic.IEnumerable{System.Object},FakeItEasy.Core.IFakeCallProcessorProvider)">
             <summary>
             Generates a proxy of the specified type and returns a result object containing information
             about the success of the generation and the proxy if it was generated.
@@ -2022,6 +2282,7 @@
             <param name="typeOfProxy">The type of proxy to generate.</param>
             <param name="additionalInterfacesToImplement">Interfaces to be implemented by the proxy.</param>
             <param name="argumentsForConstructor">Arguments to pass to the constructor of the type in <paramref name="typeOfProxy" />.</param>
+            <param name="fakeCallProcessorProvider">The call processor provider.</param>
             <returns>A result containing the generated proxy.</returns>
         </member>
         <member name="M:FakeItEasy.Creation.IProxyGenerator.MethodCanBeInterceptedOnInstance(System.Reflection.MethodInfo,System.Object,System.String@)">
@@ -2032,16 +2293,6 @@
             <param name="callTarget">The instance the method will be called on.</param>
             <param name="failReason">The reason the method can not be intercepted.</param>
             <returns>True if the member can be intercepted.</returns>
-        </member>
-        <member name="T:FakeItEasy.Creation.ICallInterceptedEventRaiser">
-            <summary>
-            An object that raises an event every time a call to a proxy has been intercepted.
-            </summary>
-        </member>
-        <member name="E:FakeItEasy.Creation.ICallInterceptedEventRaiser.CallWasIntercepted">
-            <summary>
-            Raised when a call is intercepted.
-            </summary>
         </member>
         <member name="T:FakeItEasy.Core.ICompletedFakeObjectCall">
             <summary>
@@ -2493,7 +2744,7 @@
             The exception thrown from the creation attempt.
             </param>
         </member>
-        <member name="M:FakeItEasy.Creation.ProxyGeneratorResult.#ctor(System.Object,FakeItEasy.Creation.ICallInterceptedEventRaiser)">
+        <member name="M:FakeItEasy.Creation.ProxyGeneratorResult.#ctor(System.Object)">
             <summary>
             Initializes a new instance of the <see cref="T:FakeItEasy.Creation.ProxyGeneratorResult"/> class. 
             Creates a new instance representing a successful proxy
@@ -2501,10 +2752,6 @@
             </summary>
             <param name="generatedProxy">
             The proxy that was generated.
-            </param>
-            <param name="callInterceptedEventRaiser">
-            An event raiser that raises
-            events when calls are intercepted to the proxy.
             </param>
         </member>
         <member name="P:FakeItEasy.Creation.ProxyGeneratorResult.ProxyWasSuccessfullyGenerated">
@@ -2515,12 +2762,6 @@
         <member name="P:FakeItEasy.Creation.ProxyGeneratorResult.GeneratedProxy">
             <summary>
             Gets the generated proxy when it was successfully created.
-            </summary>
-        </member>
-        <member name="P:FakeItEasy.Creation.ProxyGeneratorResult.CallInterceptedEventRaiser">
-            <summary>
-            Gets the event raiser that raises events when calls to the proxy are
-            intercepted.
             </summary>
         </member>
         <member name="P:FakeItEasy.Creation.ProxyGeneratorResult.ReasonForFailure">

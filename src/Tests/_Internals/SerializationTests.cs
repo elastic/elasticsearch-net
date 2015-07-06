@@ -69,10 +69,10 @@ namespace Tests._Internals
 			if (!this.SerializesAndMatches(o, out serialized)) return;
 
 			//deserialize serialized json back again 
-			o = this.Deserialize<T>(serialized);
+			var oAgain = this.Deserialize<T>(serialized);
 			//now use deserialized `o` and serialize again making sure
 			//it still looks like this.ExpectedJson
-			this.SerializesAndMatches(o, out serialized);
+			this.SerializesAndMatches(oAgain, out serialized);
 		}
 	}
 }

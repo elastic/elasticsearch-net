@@ -1,15 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Globalization;
-using System.IO;
-using System.IO.Compression;
-using System.Net;
-using System.Reactive;
-using System.Reactive.Disposables;
-using System.Reactive.Linq;
-using System.Text.RegularExpressions;
-using System.Threading;
 using FluentAssertions;
 using Nest;
 using Tests._Internals.MockData;
