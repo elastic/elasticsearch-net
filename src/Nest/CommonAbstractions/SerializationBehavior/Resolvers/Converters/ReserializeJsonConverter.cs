@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public abstract class ReserializeJsonConverter<TReadAs, TInterface> : JsonConverter
+	public class ReserializeJsonConverter<TReadAs, TInterface> : JsonConverter
 		where TReadAs : class, TInterface, new()
 		where TInterface : class
 	{
@@ -21,12 +21,15 @@ namespace Nest
 			if (reader.TokenType != JsonToken.StartObject) return null;
 			var depth = reader.Depth;
 			var deserialized = this.DeserializeJson(reader, objectType, existingValue, serializer);
-			
+
 			//TODO this might not be necessary
-			do
+			if (reader.Depth > depth)
 			{
-				reader.Read();
-			} while (reader.Depth >= depth && reader.TokenType != JsonToken.EndObject);
+				do
+				{
+					reader.Read();
+				} while (reader.Depth >= depth && reader.TokenType != JsonToken.EndObject);
+			}
 
 			return deserialized;
 		}
@@ -34,21 +37,40 @@ namespace Nest
 		protected TReadAs ReadAs(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer) =>
 			this.Reader.ReadJson(reader, objectType, existingValue, serializer) as TReadAs;
 
-		protected abstract object DeserializeJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer);
+		protected virtual object DeserializeJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer) =>
+			this.ReadAs(reader, objectType, existingValue, serializer);
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
+			var custom = value as ICustomJson;
+			if (custom != null)
+			{
+				var json = custom.GetCustomJson();
+				var rawJson = json as RawJson;
+				if (rawJson != null)
+				{
+					writer.WriteRawValue(rawJson.Data);
+					return;
+				}
+			}
+
 			var v = value as TInterface;
 			if (v != null)
 			{
 				this.SerializeJson(writer, value, v, serializer);
 			}
 		}
-		protected abstract void SerializeJson(JsonWriter writer, object value, TInterface castValue, JsonSerializer serializer);
+
+		protected virtual void SerializeJson(JsonWriter writer, object value, TInterface castValue, JsonSerializer serializer)
+		{
+			this.Reserialize(writer, value, serializer);
+		}
 
 		protected void Reserialize(JsonWriter writer, object value, JsonSerializer serializer)
 		{
 			var properties = value.GetCachedObjectProperties();
+			if (properties.Count == 0) return;
+			writer.WriteStartObject();
 			foreach (var p in properties)
 			{
 				if (p.Ignored) continue;
@@ -57,6 +79,7 @@ namespace Nest
 				writer.WritePropertyName(p.PropertyName);
 				serializer.Serialize(writer, vv);
 			}
+			writer.WriteEndObject();
 		}
 	}
 }

@@ -75,11 +75,9 @@ namespace Nest
 		IDictionary<string, IAggregationContainer> Aggregations { get; set; }
 
 		[JsonProperty(PropertyName = "query")]
-		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryContainer>, CustomJsonConverter>))]
 		IQueryContainer Query { get; set; }
 
 		[JsonProperty(PropertyName = "post_filter")]
-		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryContainer>, CustomJsonConverter>))]
 		IQueryContainer PostFilter { get; set; }
 
 		[JsonProperty(PropertyName = "inner_hits")]
@@ -99,7 +97,6 @@ namespace Nest
 		SearchRequestParameters QueryString { get; set; }
 	}
 
-	[JsonConverter(typeof(ReadAsTypeConverter<SearchRequest>))]
 	public interface ISearchRequest<T> : ISearchRequest {} 
 
 	internal static class SearchPathInfo
@@ -187,10 +184,12 @@ namespace Nest
 
 	}
 
-	public partial class SearchRequest<T> : QueryPathBase<SearchRequestParameters, T>, ISearchRequest<T>
+	public partial class SearchRequest<T> : QueryPathBase<SearchRequestParameters, T>, ISearchRequest
 		where T : class
 	{
 		public SearchRequest() {}
+
+		private ISearchRequest Self => this;
 
 		public SearchRequest(IndexNameMarker index, TypeNameMarker type = null) : base(index, type) { }
 
@@ -219,8 +218,15 @@ namespace Nest
 		public ISourceFilter Source { get; set; }
 		public IDictionary<string, IInnerHitsContainer> InnerHits { get; set; }
 		public IDictionary<string, IAggregationContainer> Aggregations { get; set; }
-		public IQueryContainer Query { get; set; }
-		public IQueryContainer PostFilter { get; set; }
+
+		IQueryContainer ISearchRequest.Query { get; set; }
+		[JsonProperty(PropertyName = "query")]
+		public QueryContainer Query { get { return Self.Query as QueryContainer; } set { Self.Query = value; } }
+
+		IQueryContainer ISearchRequest.PostFilter { get; set; }
+		[JsonProperty(PropertyName = "post_filter")]
+		public QueryContainer PostFilter { get { return Self.PostFilter as QueryContainer; } set { Self.PostFilter = value; } }
+
 		SearchType? ISearchRequest.SearchType => this.QueryString?.GetQueryStringValue<SearchType?>("search_type");
 
 		string ISearchRequest.Preference => this.QueryString?.GetQueryStringValue<string>("preference");

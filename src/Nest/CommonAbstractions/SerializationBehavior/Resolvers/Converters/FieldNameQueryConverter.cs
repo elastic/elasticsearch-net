@@ -38,13 +38,11 @@ namespace Nest
 			writer.WriteStartObject();
 			{
 				writer.WritePropertyName(field);
-				writer.WriteStartObject();
 				{
 					this.Reserialize(writer, value, serializer);
 				}
 				writer.WriteEndObject();
 			}
-			writer.WriteEndObject();
 		}
 	}
 }
