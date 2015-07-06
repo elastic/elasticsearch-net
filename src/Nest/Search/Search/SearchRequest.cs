@@ -187,7 +187,7 @@ namespace Nest
 
 	}
 
-	public partial class SearchRequest<T> : QueryPathBase<SearchRequestParameters, T>, ISearchRequest
+	public partial class SearchRequest<T> : QueryPathBase<SearchRequestParameters, T>, ISearchRequest<T>
 		where T : class
 	{
 		public SearchRequest() {}

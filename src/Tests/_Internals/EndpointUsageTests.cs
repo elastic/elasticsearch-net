@@ -72,9 +72,11 @@ namespace Tests._Internals
 		[U] protected async Task HitsTheCorrectUrl() =>
 			await this.AssertOnAllResponses(r=>this.AssertUrl(new Uri(r.ConnectionStatus.RequestUrl)));
 
-		[U] protected void SerializesInitializer() => this.AssertSerializesAndRoundTrips(this.Initializer);
+		[U] protected void SerializesInitializer() => 
+			this.AssertSerializesAndRoundTrips<TInterface>(this.Initializer);
 		 
-		[U] protected void SerializesFluent() => this.AssertSerializesAndRoundTrips(this.Fluent(new TDescriptor()));
+		[U] protected void SerializesFluent() => 
+			this.AssertSerializesAndRoundTrips(this.Fluent(new TDescriptor()));
 
 	}
 }
