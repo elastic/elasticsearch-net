@@ -27,6 +27,8 @@ namespace Tests._Internals.Integration
 
 		public bool Started { get; private set; }
 		public bool RunningIntegrations { get; private set; }
+		public string ClusterName { get; } = Guid.NewGuid().ToString("N").Substring(0, 6);
+		public string NodeName { get; } = Guid.NewGuid().ToString("N").Substring(0, 6);
 
 		public ElasticsearchNodeInfo Info { get; private set; }
 		public int Port { get; private set; }
@@ -58,7 +60,11 @@ namespace Tests._Internals.Integration
 			var handle  = new ManualResetEvent(false);
 			this.Stop();
 
-			this._process = this.CreateProcess(new[] { ""});
+			this._process = this.CreateProcess(
+				$"-Des.cluster.name={this.ClusterName}",
+				$"-Des.node.name={this.NodeName}",
+				"-Des.discovery.zen.ping.multicast.enabled=false"
+			);
 
 			var observable = Observable.Using(() => _process, process => StartObservableProcess(process));
 			this._processListener = observable.Subscribe(onNext: s => HandleConsoleMessage(s, handle));
@@ -138,15 +144,17 @@ namespace Tests._Internals.Integration
 			}
 		}
 
-		private Process CreateProcess(IEnumerable<string> arguments)
+		private Process CreateProcess(params string[] arguments)
 		{
+			var a = string.Join(" ", arguments);
+			Console.WriteLine(a);
 			return new Process
 			{
 				EnableRaisingEvents = true,
 				StartInfo =
 				{
 					FileName = this.Binary,
-					Arguments = string.Join(" ", arguments),
+					Arguments = a,
 					CreateNoWindow = true,
 					UseShellExecute = false,
 					RedirectStandardOutput = true,
@@ -202,6 +210,20 @@ namespace Tests._Internals.Integration
 			this._process?.WaitForExit(2000);
 			this._process?.Close();
 			this._processListener?.Dispose();
+
+			var dataFolder = Path.Combine(this.RoamingClusterFolder, "data", this.ClusterName);
+			if (Directory.Exists(dataFolder))
+			{
+				Console.WriteLine($"attempting to delete cluster data: {dataFolder}");
+				Directory.Delete(dataFolder, true);
+			}
+			var logPath = Path.Combine(this.RoamingClusterFolder, "logs");
+			var files = Directory.GetFiles(logPath, this.ClusterName + "*.log");
+			foreach (var f in files)
+			{
+				Console.WriteLine($"attempting to delete log file: {f}");
+				File.Delete(f);
+			}
 		}
 
 		public void Dispose()
