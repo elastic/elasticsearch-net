@@ -81,7 +81,7 @@
     <Compile Include="_Internals\MockData\Project.cs" />
     <Compile Include="_Internals\TestAttributes.cs" />
     <Compile Include="_Internals\Integration\ElasticsearchNode.cs" />
-    <Compile Include="_Internals\Integration\ReadOnlyCollection.cs" />
+    <Compile Include="_Internals\Integration\ReadOnlyIntegration.cs" />
     <Compile Include="_Internals\SerializationTests.cs" />
     <Compile Include="_Internals\TestClient.cs" />
   </ItemGroup>

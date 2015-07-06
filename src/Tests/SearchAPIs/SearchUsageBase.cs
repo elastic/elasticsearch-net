@@ -10,7 +10,7 @@ namespace Tests.SearchAPIs
 	[Collection(IntegrationContext.ReadOnly)]
 	public abstract class SearchUsageBase : EndpointUsageTests<ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
 	{
-		protected SearchUsageBase(ReadonlyIntegration integration) { this.IntegrationPort = integration.Node.Port; }
+		protected SearchUsageBase(ReadOnlyIntegration integration) { this.IntegrationPort = integration.Node.Port; }
 
 		protected override void ClientUsage() =>
 			this.Calls(

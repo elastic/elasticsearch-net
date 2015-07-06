@@ -19,7 +19,7 @@ namespace Tests.SearchAPIs.RequestBodySearch
 
 		public class Usage : SearchUsageBase
 		{
-			public Usage(ReadonlyIntegration i) : base(i) { }
+			public Usage(ReadOnlyIntegration i) : base(i) { }
 
 			public override bool ExpectIsValid => true;
 

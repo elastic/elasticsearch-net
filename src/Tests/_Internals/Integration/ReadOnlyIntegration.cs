@@ -8,12 +8,12 @@ namespace Tests._Internals.Integration
 		public const string ReadOnly = "ReadOnly Collection";
 	}
 
-	public class ReadonlyIntegration: IDisposable
+	public class ReadOnlyIntegration: IDisposable
 	{
 		public ElasticsearchNode Node { get; }
 		private IObservable<ElasticsearchMessage> _consoleOut;
 
-		public ReadonlyIntegration()
+		public ReadOnlyIntegration()
 		{
 			this.Node = new ElasticsearchNode(TestClient.ElasticsearchVersion, TestClient.RunIntegrationTests);
 			this._consoleOut = this.Node.Start();
@@ -25,6 +25,6 @@ namespace Tests._Internals.Integration
 	}
 
 	[CollectionDefinition(IntegrationContext.ReadOnly)]
-	public class DatabaseCollection : ICollectionFixture<ReadonlyIntegration> { }
+	public class DatabaseCollection : ICollectionFixture<ReadOnlyIntegration> { }
 	
 }
