@@ -1,4 +1,5 @@
-﻿using Nest;
+﻿using System;
+using Nest;
 using Tests._Internals;
 using Tests._Internals.Integration;
 using Tests._Internals.MockData;
