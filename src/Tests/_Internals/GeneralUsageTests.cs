@@ -14,7 +14,7 @@ namespace Tests._Internals
 
 		protected TInterface FluentInstance { get; private set; }
 
-		public GeneralUsageTests()
+		protected GeneralUsageTests()
 		{
 			var client = this.Client();
 			this.FluentInstance = this.Fluent(new TDescriptor());
@@ -23,8 +23,8 @@ namespace Tests._Internals
 		protected virtual ConnectionSettings ConnectionSettings(ConnectionSettings settings) => settings; 
 		protected virtual IElasticClient Client() => TestClient.GetClient(ConnectionSettings); 
 
-		[Fact] protected void SerializesInitializer() => this.AssertSerializesAndRoundTrips(this.Initializer);
+		[U] protected void SerializesInitializer() => this.AssertSerializesAndRoundTrips(this.Initializer);
 
-		[Fact] protected void SerializesFluent() => this.AssertSerializesAndRoundTrips(this.FluentInstance);
+		[U] protected void SerializesFluent() => this.AssertSerializesAndRoundTrips(this.FluentInstance);
 	}
 }

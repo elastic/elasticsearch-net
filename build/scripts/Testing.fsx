@@ -19,9 +19,26 @@ open System.Xml.Linq;
 module Tests = 
     let xmlOutput = Paths.Output("TestResults.xml")
 
-    let RunAll() =
+    let RunAllUnitTests() =
         !! Paths.Source("**/bin/Release/Tests.dll") 
-            |> xUnit2 (fun p -> {p with XmlOutputPath = Some <| xmlOutput } )
+            |> xUnit2 (fun p -> 
+            {
+                p with 
+                    XmlOutputPath = Some <| xmlOutput 
+            } )
+
+    let RunAllIntegrationTests(commaSeparatedEsVersions) =
+        let esVersions = 
+            match commaSeparatedEsVersions with
+            | "" ->
+                failwith "when running integrate you have to pass a commaseperated list of elasticsearch versions to test"
+            | _ ->
+                commaSeparatedEsVersions.Split ',' |> Array.toList 
+        
+        for esVersion in esVersions do
+            setProcessEnvironVar "NEST_INTEGRATION_VERSION" esVersion
+            !! Paths.Source("**/bin/Release/Tests.dll") 
+                |> xUnit2 (fun p -> { p with XmlOutputPath = Some <| xmlOutput } )
 
     let private notify = fun _ -> 
         let results = XDocument.Load xmlOutput

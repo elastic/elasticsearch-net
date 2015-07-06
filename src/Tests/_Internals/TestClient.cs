@@ -10,6 +10,10 @@ namespace Tests._Internals
 	{
 		private static bool _runIntegrationTests = false;
 
+		public static string ElasticsearchVersion => Environment.GetEnvironmentVariable("NEST_INTEGRATION_VERSION");
+
+		public static bool RunIntegrationTests => _runIntegrationTests || !string.IsNullOrEmpty(ElasticsearchVersion);
+
 		public static IElasticClient GetClient(Func<ConnectionSettings, ConnectionSettings> modifySettings = null, int port = 9200 )
 		{
 			var defaultSettings = new ConnectionSettings((CreateBaseUri(port)));
@@ -30,17 +34,5 @@ namespace Tests._Internals
 			return uri;
 		}
 
-		public static bool RunIntegrationTests
-		{
-			get
-			{
-				if (_runIntegrationTests) return true;
-#if INTEGRATIONTESTS
-				return true;
-#else
-				return false;
-#endif
-			}
-		}
 	}
 }

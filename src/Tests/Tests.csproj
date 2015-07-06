@@ -75,7 +75,7 @@
     <Compile Include="_Internals\AsyncLazy.cs" />
     <Compile Include="_Internals\EndpointUsageTests.cs" />
     <Compile Include="_Internals\GeneralUsageTests.cs" />
-    <Compile Include="_Internals\IntegrationFact.cs" />
+    <Compile Include="_Internals\I.cs" />
     <Compile Include="_Internals\Integration\ElasticsearchNode.cs" />
     <Compile Include="_Internals\Integration\ReadOnlyCollection.cs" />
     <Compile Include="_Internals\SerializationTests.cs" />

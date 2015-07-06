@@ -50,9 +50,9 @@ namespace Tests._Internals
 			});
 		}
 
-		protected int DefaultPort { get; set; } = 9200;
+		protected int IntegrationPort { get; set; } = 9200;
 		protected virtual ConnectionSettings GetConnectionSettings(ConnectionSettings settings) => settings; 
-		protected virtual IElasticClient GetClient() => TestClient.GetClient(GetConnectionSettings, DefaultPort); 
+		protected virtual IElasticClient GetClient() => TestClient.GetClient(GetConnectionSettings, IntegrationPort); 
 
 		protected async Task AssertOnAllResponses(Action<TResponse> assert)
 		{
@@ -63,18 +63,18 @@ namespace Tests._Internals
 			}
 		}
 
-		[IntegrationFact] protected async void HandlesStatusCode() =>
+		[I] protected async void HandlesStatusCode() =>
 			await this.AssertOnAllResponses(r=>r.ConnectionStatus.HttpStatusCode.Should().Be(this.ExpectStatusCode));
 
-		[IntegrationFact] protected async void ReturnsExpectedIsValid() =>
+		[I] protected async void ReturnsExpectedIsValid() =>
 			await this.AssertOnAllResponses(r=>r.IsValid.Should().Be(this.ExpectIsValid));
 
-		[Fact] protected async Task HitsTheCorrectUrl() =>
+		[U] protected async Task HitsTheCorrectUrl() =>
 			await this.AssertOnAllResponses(r=>this.AssertUrl(new Uri(r.ConnectionStatus.RequestUrl)));
 
-		[Fact] protected void SerializesInitializer() => this.AssertSerializesAndRoundTrips(this.Initializer);
+		[U] protected void SerializesInitializer() => this.AssertSerializesAndRoundTrips(this.Initializer);
 		 
-		[Fact] protected void SerializesFluent() => this.AssertSerializesAndRoundTrips(this.Fluent(new TDescriptor()));
+		[U] protected void SerializesFluent() => this.AssertSerializesAndRoundTrips(this.Fluent(new TDescriptor()));
 
 	}
 }

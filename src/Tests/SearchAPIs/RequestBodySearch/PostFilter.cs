@@ -30,7 +30,7 @@ namespace Tests.SearchAPIs.RequestBodySearch
 			protected override Func<SearchDescriptor<object>, ISearchRequest> Fluent => s => s
 				.PostFilter(f => f.MatchAll());
 
-			[IntegrationFact]
+			[I]
 			public async void ShouldHaveHits() => await AssertOnAllResponses((r) =>
 			{
 				r.Hits.Should().NotBeNull();

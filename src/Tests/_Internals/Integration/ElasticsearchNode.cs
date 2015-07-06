@@ -15,7 +15,7 @@ namespace Tests._Internals.Integration
 {
 	public class ElasticsearchNode : IDisposable
 	{
-		private static object _lock = new object();
+		private static readonly object _lock = new object();
 		private Process _process;
 		private IDisposable _processListener;
 
@@ -26,26 +26,35 @@ namespace Tests._Internals.Integration
 		private string RoamingClusterFolder { get; }
 
 		public bool Started { get; private set; }
+		public bool RunningIntegrations { get; private set; }
+
 		public ElasticsearchNodeInfo Info { get; private set; }
 		public int Port { get; private set; }
 
-		public ElasticsearchNode(string elasticsearchVersion)
+		public ElasticsearchNode(string elasticsearchVersion, bool runningIntegrations)
 		{
-			if (!TestClient.RunIntegrationTests) return;
-
 			this.Version = elasticsearchVersion;
+			this.RunningIntegrations = runningIntegrations;
+
+			if (!runningIntegrations)
+			{
+				this.Port = 9200;
+				return;
+			}
 
 			var appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 			this.RoamingFolder = Path.Combine(appdata, "NEST", this.Version);
 			this.RoamingClusterFolder = Path.Combine(this.RoamingFolder, "elasticsearch-" + elasticsearchVersion);
 			this.Binary = Path.Combine(this.RoamingClusterFolder, "bin", "elasticsearch") + ".bat";
 
+			Console.WriteLine("========> {0}", this.RoamingFolder);
 			this.DownloadAndExtractElasticsearch();
 		}
 
 		public IObservable<ElasticsearchMessage> Start()
 		{
-			if (!TestClient.RunIntegrationTests) return Observable.Empty<ElasticsearchMessage>();
+			if (!this.RunningIntegrations) return Observable.Empty<ElasticsearchMessage>();
+
 			var handle  = new ManualResetEvent(false);
 			this.Stop();
 
@@ -89,11 +98,10 @@ namespace Tests._Internals.Integration
 			{
 				try
 				{
-					if (process.ExitCode != 0)
+					if (process?.ExitCode > 0)
 					{
 						observer.OnError(new Exception(
-							string.Format("Process '{0}' terminated with error code {1}",
-								process.StartInfo.FileName, process.ExitCode)));
+							$"Process '{process.StartInfo.FileName}' terminated with error code {process.ExitCode}"));
 					}
 					else
 					{
@@ -102,7 +110,7 @@ namespace Tests._Internals.Integration
 				}
 				finally
 				{
-					process.Close();
+					process?.Close();
 				}
 			});
 		}
@@ -110,7 +118,7 @@ namespace Tests._Internals.Integration
 		private void HandleConsoleMessage(ElasticsearchMessage s, ManualResetEvent handle)
 		{
 			//no need to snoop for metadata if we already started
-			if (this.Started) return;
+			if (!this.RunningIntegrations || this.Started) return;
 
 			ElasticsearchNodeInfo info;
 			int port;
@@ -175,13 +183,18 @@ namespace Tests._Internals.Integration
 
 		public void Stop()
 		{
-			if (!TestClient.RunIntegrationTests) return;
+			Console.WriteLine($"Stopping... ran integrations: {this.RunningIntegrations}");
+			Console.WriteLine($"Node started: {this.Started} on port: {this.Port} using PID: {this.Info?.Pid}");
+
+			if (!this.RunningIntegrations || !this.Started) return;
+
 			this.Started = false;
 			if (this.Info != null)
 			{
 				var esProcess = Process.GetProcessById(this.Info.Pid);
+				Console.WriteLine($"Killing elasticsearch PID {this.Info.Pid}");
 				esProcess.Kill();
-				esProcess.WaitForExit(2000);
+				esProcess.WaitForExit(5000);
 				esProcess.Close();
 			}
 
@@ -225,6 +238,8 @@ namespace Tests._Internals.Integration
 
 		public ElasticsearchMessage(string consoleLine)
 		{
+			Console.WriteLine(consoleLine);
+			if (string.IsNullOrEmpty(consoleLine)) return;
 			var match = ConsoleLineParser.Match(consoleLine);
 			if (!match.Success) return;
 			var dateString = match.Groups["date"].Value.Trim();

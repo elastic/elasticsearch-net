@@ -15,12 +15,12 @@ namespace Tests._Internals.Integration
 
 		public ReadonlyIntegration()
 		{
-			this.Node = new ElasticsearchNode("1.5.2");
+			this.Node = new ElasticsearchNode(TestClient.ElasticsearchVersion, TestClient.RunIntegrationTests);
 			this._consoleOut = this.Node.Start();
 		}
 
 		public void Dispose() =>
-			this.Node.Dispose();
+			this.Node?.Dispose();
 
 	}
 

@@ -26,9 +26,11 @@ Target "Clean" <| fun _ -> CleanDir Paths.BuildOutput
 
 Target "BuildApp" <| fun _ -> Build.CompileAll()
 
-Target "Test"  <| fun _ -> Tests.RunAll()
+Target "Test"  <| fun _ -> Tests.RunAllUnitTests()
 
-Target "QuickTest"  <| fun _ -> Tests.RunAll()
+Target "QuickTest"  <| fun _ -> Tests.RunAllUnitTests()
+
+Target "Integrate"  <| fun _ -> Tests.RunAllIntegrationTests(getBuildParamOrDefault "esversions" "")
 
 Target "WatchTests"  <| fun _ -> 
     traceFAKE "Starting quick test (incremental compile then test)"

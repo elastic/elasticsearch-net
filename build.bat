@@ -25,14 +25,21 @@ if not exist build\tools\FAKE\tools\Microsoft.CodeAnalysis.CSharp (
 )
 
 
-SET TARGET="Build"
+SET TARGET="build"
 SET VERSION=
+SET ESVERSIONS=
 
 IF NOT [%1]==[] (set TARGET="%1")
 
-IF NOT [%2]==[] (set VERSION="%2")
+IF "%1"=="release" (
+    IF NOT [%2]==[] ( set VERSION="%2" )
+)
+
+IF "%1%"=="integrate" (
+    IF NOT [%2]==[] (set ESVERSIONS="%2")
+)
 
 shift
 shift
 
-"build\tools\FAKE\tools\Fake.exe" "build\\scripts\\Targets.fsx" "target=%TARGET%" "version=%VERSION%"
+"build\tools\FAKE\tools\Fake.exe" "build\\scripts\\Targets.fsx" "target=%TARGET%" "version=%VERSION%" esversions=%ESVERSIONS%
