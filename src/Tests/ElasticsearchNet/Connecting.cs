@@ -10,7 +10,7 @@ namespace Tests.ElasticsearchNet
 {
 	public class Connecting
 	{
-		/** # Connecting
+		/** # Connecting Modified
 		 * Connecting to *Elasticsearch* with `Elasticsearch.Net` is quite easy but has a few toggles and options worth knowing.
 		 * 
 		 * # Choosing the right connection strategy

@@ -22,8 +22,8 @@ namespace Tests.SearchAPIs.RequestBodySearch
 
 			public override void AssertUrl(Uri u) => u.PathAndQuery.Should().EndWith("/_search");
 
-			protected override SearchRequest Initializer =>
-				new SearchRequest()
+			protected override SearchRequest<Project> Initializer =>
+				new SearchRequest<Project>()
 				{
 					PostFilter = new QueryContainer(new MatchAllQuery())
 				};

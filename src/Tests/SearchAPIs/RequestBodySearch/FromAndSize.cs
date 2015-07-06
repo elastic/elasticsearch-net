@@ -9,7 +9,7 @@ namespace Tests.SearchAPIs.RequestBodySearch
 	public class FromAndSize
 	{
 		/**
-		 * Pagination of results can be done by using the from and size parameters. 
+		 * Pagination 2 of results can be done by using the from and size parameters. 
 		 * The from parameter defines the offset from the first result you want to fetch. 
 		 * The size parameter allows you to configure the maximum amount of hits to be returned.
 		 */
@@ -25,10 +25,10 @@ namespace Tests.SearchAPIs.RequestBodySearch
 
 			public override bool ExpectIsValid => true;
 
-			public override void AssertUrl(Uri u) => u.PathAndQuery.Should().EndWith("/_search");
+			public override void AssertUrl(Uri u) => u.AbsolutePath.Should().Be("/project/project/_search");
 
-			protected override SearchRequest Initializer =>
-				new SearchRequest()
+			protected override SearchRequest<Project> Initializer =>
+				new SearchRequest<Project>()
 				{
 					From = 10,
 					Size = 12
