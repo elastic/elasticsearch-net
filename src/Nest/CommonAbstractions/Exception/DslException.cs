@@ -1,5 +1,8 @@
+using System;
+
 namespace Nest
 {
+	[Serializable]
 	public class DslException : System.Exception
 	{
 		public DslException(string msg) : base(msg)

@@ -135,6 +135,8 @@ namespace Tests._Internals.Integration
 			}
 			else if (s.TryGetStartedConfirmation())
 			{
+				var seeder = new Seeder(this.Port);
+				seeder.SeedNode();
 				handle.Set();
 				this.Started = true;
 			}
@@ -187,6 +189,11 @@ namespace Tests._Internals.Integration
 				}
 			}
 
+		}
+
+		private void SeedData()
+		{
+			
 		}
 
 		public void Stop()

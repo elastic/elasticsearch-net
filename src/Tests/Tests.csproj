@@ -75,7 +75,9 @@
     <Compile Include="_Internals\AsyncLazy.cs" />
     <Compile Include="_Internals\EndpointUsageTests.cs" />
     <Compile Include="_Internals\GeneralUsageTests.cs" />
-    <Compile Include="_Internals\I.cs" />
+    <Compile Include="_Internals\Integration\Seeder.cs" />
+    <Compile Include="_Internals\MockData\Project.cs" />
+    <Compile Include="_Internals\TestAttributes.cs" />
     <Compile Include="_Internals\Integration\ElasticsearchNode.cs" />
     <Compile Include="_Internals\Integration\ReadOnlyCollection.cs" />
     <Compile Include="_Internals\SerializationTests.cs" />
@@ -91,13 +93,14 @@
       <Name>Elasticsearch.Net</Name>
     </ProjectReference>
     <ProjectReference Include="..\Nest\Nest.csproj">
-      <Project>{072BA7DA-7B60-407D-8B6E-95E3186BE70C}</Project>
+      <Project>{072ba7da-7b60-407d-8b6e-95e3186be70c}</Project>
       <Name>Nest</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

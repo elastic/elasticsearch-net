@@ -23,11 +23,11 @@ namespace Nest
 
 	}
 
-    public class NestedObjectMappingDescriptor<TParent, TChild> 
+	public class NestedObjectMappingDescriptor<TParent, TChild>
 		where TParent : class
 		where TChild : class
 
-    {
+	{
 		private readonly IConnectionSettingsValues _connectionSettings;
 
 		internal NestedObjectMapping _Mapping { get; set; }
@@ -53,6 +53,11 @@ namespace Nest
 			return this;
 		}
 
+		public NestedObjectMappingDescriptor<TParent, TChild> Name(Expression<Func<TParent, IEnumerable<TChild>>> objectPath)
+		{
+			this._Mapping.Name = objectPath;
+			return this;
+		}
 		/// <summary>
 		/// Convenience method to map from most of the object from the attributes/properties.
 		/// Later calls on the fluent interface can override whatever is set is by this call. 
@@ -129,6 +134,6 @@ namespace Nest
 			}
 			return this;
 		}
-		
-    }
+
+	}
 }

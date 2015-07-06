@@ -3,6 +3,7 @@ using FluentAssertions;
 using Nest;
 using Tests._Internals;
 using Tests._Internals.Integration;
+using Tests._Internals.MockData;
 
 namespace Tests.SearchAPIs.RequestBodySearch
 {
@@ -27,7 +28,7 @@ namespace Tests.SearchAPIs.RequestBodySearch
 					PostFilter = new QueryContainer(new MatchAllQuery())
 				};
 
-			protected override Func<SearchDescriptor<object>, ISearchRequest> Fluent => s => s
+			protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
 				.PostFilter(f => f.MatchAll());
 
 			[I]

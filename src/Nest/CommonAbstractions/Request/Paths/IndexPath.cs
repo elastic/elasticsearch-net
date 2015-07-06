@@ -19,10 +19,12 @@ namespace Nest
 			ElasticsearchPathInfo<TParameters> pathInfo)
 			where TParameters : IRequestParameters, new()
 		{	
+			Console.WriteLine($"Set route params: {path.Index}");
 			if (path.Index == null)
 				throw new DslException("missing index route parameter");
 
 			var index = new ElasticInferrer(settings).IndexName(path.Index); 
+			Console.WriteLine($"resolved: {index}");
 			pathInfo.Index = index;
 		}
 	
@@ -79,6 +81,7 @@ namespace Nest
 
 		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
 		{
+			Console.WriteLine("Set route params");
 			IndexPathRouteParameters.SetRouteParameters(this, settings, pathInfo);
 		}
 	}

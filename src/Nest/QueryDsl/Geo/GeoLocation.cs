@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using Newtonsoft.Json;
 
 /*
  * Taken from SolrNet https://github.com/mausch/SolrNet/blob/master/SolrNet/Location.cs
@@ -19,12 +20,14 @@ namespace Nest
 		/// <summary>
 		/// Latitude
 		/// </summary>
+		[JsonProperty("lat")]
 		public double Latitude { get { return _latitude; } }
 		private readonly double _latitude;
 
 		/// <summary>
 		/// Longitude
 		/// </summary>
+		[JsonProperty("lon")]
 		public double Longtitude { get { return _longitude; } }
 		private readonly double _longitude;
 

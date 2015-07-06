@@ -84,6 +84,15 @@ namespace Nest
 			this._Mapping.Name = objectPath;
 			return this;
 		}
+		
+
+		/// <summary>
+		/// Shortcut into .Index(FieldIndexOption.NotAnalyzed)
+		/// </summary>
+		public StringMappingDescriptor<T> NotAnalyzed()
+		{
+			return this.Index(FieldIndexOption.NotAnalyzed);
+		}
 
 		public StringMappingDescriptor<T> Similarity(string similarity)
 		{

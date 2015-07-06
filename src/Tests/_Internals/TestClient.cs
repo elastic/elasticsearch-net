@@ -3,20 +3,37 @@ using System.Diagnostics;
 using System.Linq;
 using Elasticsearch.Net.Connection;
 using Nest;
+using Tests._Internals.MockData;
 
 namespace Tests._Internals
 {
 	public static class TestClient
 	{
-		private static bool _runIntegrationTests = false;
+		private static bool _integrationOverride = false;
+		private static string _manualOverrideVersion = "1.5.2";
 
-		public static string ElasticsearchVersion => Environment.GetEnvironmentVariable("NEST_INTEGRATION_VERSION");
+		public static string ElasticsearchVersion => 
+			Environment.GetEnvironmentVariable("NEST_INTEGRATION_VERSION") ?? (_integrationOverride ? _manualOverrideVersion : null);
 
-		public static bool RunIntegrationTests => _runIntegrationTests || !string.IsNullOrEmpty(ElasticsearchVersion);
+		public static bool RunIntegrationTests => _integrationOverride || !string.IsNullOrEmpty(ElasticsearchVersion);
 
 		public static IElasticClient GetClient(Func<ConnectionSettings, ConnectionSettings> modifySettings = null, int port = 9200 )
 		{
-			var defaultSettings = new ConnectionSettings((CreateBaseUri(port)));
+			var defaultSettings = new ConnectionSettings((CreateBaseUri(port)), "defaultindex")
+				.InferMappingFor<Project>(map=>map
+					.IndexName("project")
+					.IdProperty(p=>p.Name)
+				)
+				.InferMappingFor<CommitActivity>(map=>map
+					.IndexName("project")
+					.TypeName("commits")
+				)
+				.InferMappingFor<Developer>(map=>map
+					.Ignore(p=>p.PrivateValue)
+					.Rename(p=>p.OnlineHandle, "nickname")
+				)
+				;
+
 			var settings = modifySettings != null ? modifySettings(defaultSettings) : defaultSettings;
 			return new ElasticClient(settings, CreateConnection(settings));
 		}

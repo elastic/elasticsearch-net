@@ -3,36 +3,31 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Reflection.Emit;
+using Nest.CommonAbstractions.ConnectionSettings;
 using Nest.Resolvers;
 
 namespace Nest
 {
 	
-	public class PropertyMappingDescriptor<TDocument>
+	public class PropertyMappingDescriptor<TDocument>  where TDocument : class
 	{
-		
-		private readonly IList<KeyValuePair<Expression<Func<TDocument, object>>, PropertyMapping>> _mappings = new List<KeyValuePair<Expression<Func<TDocument, object>>, PropertyMapping>>();
-		
-		internal IList<KeyValuePair<Expression<Func<TDocument, object>>, PropertyMapping>> Mappings { get { return _mappings; } }
+		internal IList<IClrTypePropertyMapping<TDocument>> Mappings { get; } = new List<IClrTypePropertyMapping<TDocument>>();
 
 		public PropertyMappingDescriptor<TDocument> Rename(Expression<Func<TDocument, object>> property, string propertyName)
 		{
 			property.ThrowIfNull("property");
 			propertyName.ThrowIfNullOrEmpty("propertyName");
-			this._mappings.Add(new KeyValuePair<Expression<Func<TDocument, object>>, PropertyMapping>(property, propertyName));
+			this.Mappings.Add(new RenamePropertyMapping<TDocument>(property, propertyName));
 			return this;
 		}
 
 		public PropertyMappingDescriptor<TDocument> Ignore(Expression<Func<TDocument, object>> property)
 		{
 			property.ThrowIfNull("property");
-			this._mappings.Add(new KeyValuePair<Expression<Func<TDocument, object>>, PropertyMapping>(property, PropertyMapping.Ignored));
+			this.Mappings.Add(new IgnorePropertyMapping<TDocument>(property));
 			return this;
 		}
 	}
-
-
-
 
 	/// <summary>
 	/// This class allows you to map aspects of a Type's property

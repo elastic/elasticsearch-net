@@ -25,17 +25,17 @@ namespace Nest.Resolvers
 		{
 			if (settings != null)
 			{
-				PropertyMapping propertyMapping = null;
+				IPropertyMapping propertyMapping = null;
 				if (settings.PropertyMappings.TryGetValue(info, out propertyMapping))
-					return new ElasticPropertyAttribute {Name = propertyMapping.Name, OptOut = propertyMapping.Ignore};
+					return new ElasticPropertyAttribute {Name = propertyMapping.Name, OptOut = propertyMapping.OptOut};
 			}
 
 			var attributes = info.GetCustomAttributes(typeof(IElasticPropertyAttribute), true);
-			if (attributes != null && attributes.Any())
+			if (attributes.HasAny())
 				return ((IElasticPropertyAttribute)attributes.First());
 
 			var ignoreAttrutes = info.GetCustomAttributes(typeof(JsonIgnoreAttribute), true);
-			if (ignoreAttrutes != null && ignoreAttrutes.Any())
+			if (ignoreAttrutes.HasAny())
 				return new ElasticPropertyAttribute { OptOut = true };
 
 			return null;

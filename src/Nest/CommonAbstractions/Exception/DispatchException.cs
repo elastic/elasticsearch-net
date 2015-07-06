@@ -1,9 +1,12 @@
+using System;
+
 namespace Nest
 {
 	/// <summary>
 	/// Occurs when an IElasticClient call does not have 
 	/// enough information to dispatch into the raw client.
 	/// </summary>
+	[Serializable]
 	public class DispatchException : System.Exception
 	{
 		public DispatchException(string msg) : base(msg)

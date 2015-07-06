@@ -12,7 +12,7 @@ namespace Nest
 		FluentDictionary<Type, string> DefaultIndices { get; }
 		FluentDictionary<Type, string> DefaultTypeNames { get; }
 		FluentDictionary<Type, string> IdProperties { get; }
-		FluentDictionary<MemberInfo, PropertyMapping> PropertyMappings { get; }
+		FluentDictionary<MemberInfo, IPropertyMapping> PropertyMappings { get; }
 		string DefaultIndex { get; }
 		Func<string, string> DefaultPropertyNameInferrer { get; }
 		Func<Type, string> DefaultTypeNameInferrer { get; }
