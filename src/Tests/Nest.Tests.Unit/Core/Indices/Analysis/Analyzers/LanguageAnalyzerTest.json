@@ -5,7 +5,7 @@
         "analyzer": {
           "arabic": {
             "stopwords": ["foo"],
-            "stem_exclusion ": ["bar"],
+            "stem_exclusion": ["bar"],
             "stopwords_path": "/path/to/stopwords",
             "type": "arabic"
           }
