@@ -20,7 +20,7 @@ namespace Tests.Search.Request
 
 			public override int ExpectStatusCode => 200;
 
-			protected override object ExpectedJson => 
+			protected override object ExpectJson => 
 				new { query = new { term = new { name = new { value = "elasticsearch" } } } };
 
 			protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s

@@ -22,7 +22,7 @@ namespace Tests.Search.Request
 
 			public override int ExpectStatusCode => 200;
 
-			protected override object ExpectedJson => 
+			protected override object ExpectJson => 
 				new {
 					  sort = new object [] 
 					    {

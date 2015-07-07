@@ -18,7 +18,7 @@ namespace Tests.Search.Request
 		{
 			public Usage(ReadOnlyIntegration i) : base(i) {} 
 
-			protected override object ExpectedJson =>
+			protected override object ExpectJson =>
 				new { from = 10, size = 12 };
 
 			public override int ExpectStatusCode => 200;

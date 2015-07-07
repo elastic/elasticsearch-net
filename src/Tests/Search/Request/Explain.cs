@@ -23,7 +23,7 @@ namespace Tests.Search.Request
 
 			public override int ExpectStatusCode => 200;
 
-			protected override object ExpectedJson => 
+			protected override object ExpectJson => 
 				new { explain = true };
 
 			protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s

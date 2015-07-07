@@ -14,7 +14,7 @@ namespace Tests.Search.Request
 		{
 			public Usage(ReadOnlyIntegration i) : base(i) {} 
 
-			protected override object ExpectedJson =>
+			protected override object ExpectJson =>
 				new { post_filter = new { match_all = new { } } };
 
 			public override int ExpectStatusCode => 200;
