@@ -129,6 +129,6 @@ module Tooling =
                     exec "node" <| binPath :: arguments
                 traceFAKE "calling %s %A" binPath arguments 
 
-    let Wintersmith = new NpmTooling("wintersmith", "wintersmith")
+    let Wintersmith = new NpmTooling("wintersmith", "bin/wintersmith")
     let Notifier = new NpmTooling("node-notifier", "bin.js")
 

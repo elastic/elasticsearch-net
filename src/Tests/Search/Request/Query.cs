@@ -16,10 +16,6 @@ namespace Tests.Search.Request
 		{
 			public Usage(ReadOnlyIntegration i) : base(i) { }
 
-			public override bool ExpectIsValid => true;
-
-			public override int ExpectStatusCode => 200;
-
 			protected override object ExpectJson => 
 				new { query = new { term = new { name = new { value = "elasticsearch" } } } };
 
@@ -27,7 +23,6 @@ namespace Tests.Search.Request
 				.Query(q => q
 					.Term(p => p.Name, "elasticsearch")
 				);
-
 
 			protected override SearchRequest<Project> Initializer =>
 				new SearchRequest<Project>

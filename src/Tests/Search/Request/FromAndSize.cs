@@ -21,12 +21,6 @@ namespace Tests.Search.Request
 			protected override object ExpectJson =>
 				new { from = 10, size = 12 };
 
-			public override int ExpectStatusCode => 200;
-
-			public override bool ExpectIsValid => true;
-
-			public override string UrlPath => "/project/project/_search";
-
 			protected override SearchRequest<Project> Initializer =>
 				new SearchRequest<Project>()
 				{

@@ -1,0 +1,45 @@
+---
+template: layout.jade
+title: x
+menusection: concepts
+menuitem: breaking-changes
+---
+```
+var client = this.GetClient();
+var dict = new Dictionary<string, TResponse>
+				{
+					{"fluent", fluent(client, this.Fluent)},
+					{"fluentAsync", await fluentAsync(client, this.Fluent)},
+					{"initializer", request(client, this.Initializer)},
+					{"initializerAsync", await requestAsync(client, this.Initializer)}
+				};
+this._responses = new AsyncLazy<IDictionary<string, TResponse>>(async () =>
+			{
+				var client = this.GetClient();
+				var dict = new Dictionary<string, TResponse>
+				{
+					{"fluent", fluent(client, this.Fluent)},
+					{"fluentAsync", await fluentAsync(client, this.Fluent)},
+					{"initializer", request(client, this.Initializer)},
+					{"initializerAsync", await requestAsync(client, this.Initializer)}
+				};
+
+				return dict;
+			});
+var responses = await this._responses;
+assert(kv.Value);
+var paths = (this.UrlPath ?? "").Split(new [] { '?' }, 2);
+string path = paths.First(), query = string.Empty;
+query = paths.Last();
+var expectedUri = new UriBuilder("http","localhost", IntegrationPort, path, query).Uri;
+uriThatClientHit.AbsolutePath.Should().Be(expectedUri.AbsolutePath);
+var queries = new[] {uriThatClientHit.Query, expectedUri.Query};
+query.First().Should().Be(query.Last());
+var clientKeyValues = uriThatClientHit.Query.Split('&')
+				.SelectMany(v => v.Split('='))
+				.ToDictionary(k => k[0], v => v);
+var expectedKeyValues = expectedUri.Query.Split('&')
+				.SelectMany(v => v.Split('='))
+				.ToDictionary(k => k[0], v => v);
+clientKeyValues.Should().Equal(expectedKeyValues);
+```

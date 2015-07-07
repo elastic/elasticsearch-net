@@ -34,9 +34,10 @@ Target "Integrate"  <| fun _ -> Tests.RunAllIntegrationTests(getBuildParamOrDefa
 
 Target "WatchTests"  <| fun _ -> 
     traceFAKE "Starting quick test (incremental compile then test)"
-    use watcher = !! "src/Tests/**/*.cs" |> WatchChanges (fun changes -> 
+    use watcher = (!! "src/Tests/**/*.cs").And("src/Tests/**/*.md") |> WatchChanges (fun changes -> 
             printfn "%A" changes
             Build.QuickCompile()
+            Documentation.RunLitterateur()
             Tests.RunContinuous()
         )
     

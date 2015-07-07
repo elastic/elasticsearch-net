@@ -19,11 +19,7 @@ namespace Tests.Search.Request
 		{
 			public Usage(ReadOnlyIntegration i) : base(i) { }
 
-			public override bool ExpectIsValid => true;
-
-			public override int ExpectStatusCode => 200;
-
-			protected override object ExpectJson => 
+			protected override object ExpectJson =>
 				new { explain = true };
 
 			protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
@@ -32,17 +28,18 @@ namespace Tests.Search.Request
 			protected override SearchRequest<Project> Initializer =>
 				new SearchRequest<Project> { Explain = true };
 
-			[I] protected async void ExplanationIsSetOnHits() => await this.AssertOnAllResponses(r =>
+			[I]
+			protected async void ExplanationIsSetOnHits() => await this.AssertOnAllResponses(r =>
 			{
 				r.Hits.Should().NotBeEmpty();
 				r.Hits.Should().NotContain(hit => hit.Explanation == null);
+				//each hit has 
 				foreach (var explanation in r.Hits.Select(h => h.Explanation))
 				{
 					explanation.Description.Should().NotBeNullOrEmpty();
 					explanation.Value.Should().BeGreaterThan(0);
 				}
 			});
-
 
 
 		}

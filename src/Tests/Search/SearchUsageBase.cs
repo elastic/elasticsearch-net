@@ -12,6 +12,10 @@ namespace Tests.SearchAPIs
 	{
 		protected SearchUsageBase(ReadOnlyIntegration integration) { this.IntegrationPort = integration.Node.Port; }
 
+		public override bool ExpectIsValid => true;
+
+		public override int ExpectStatusCode => 200;
+
 		public override string UrlPath => "/project/project/_search";
 
 		protected override void ClientUsage() =>

@@ -18,16 +18,12 @@ namespace Tests.Search.Request
 		{
 			public Usage(ReadOnlyIntegration i) : base(i) { }
 
-			public override bool ExpectIsValid => true;
-
-			public override int ExpectStatusCode => 200;
-
 			protected override object ExpectJson => 
 				new {
-					  sort = new object [] 
-					    {
-						  new { startedOn = new { order = "asc" } },
-						  new { name = new { order = "desc" } }
+						sort = new object [] 
+						{
+							new { startedOn = new { order = "asc" } },
+							new { name = new { order = "desc" } }
 						}
 					};
 

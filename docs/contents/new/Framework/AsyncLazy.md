@@ -1,0 +1,63 @@
+---
+template: layout.jade
+title: x
+menusection: concepts
+menuitem: breaking-changes
+---
+
+
+Provides support for asynchronous lazy initialization. This type is fully threadsafe.
+
+
+
+
+The type of object that is being asynchronously initialized.
+
+
+
+
+The underlying lazy task.
+
+
+
+
+
+Initializes a new instance of the 
+
+class.
+
+
+
+
+The delegate that is invoked on a background thread to produce the value when it is needed.
+
+
+
+
+Initializes a new instance of the 
+
+class.
+
+
+
+
+The asynchronous delegate that is invoked on a background thread to produce the value when it is needed.
+
+
+
+
+Asynchronous infrastructure support. This method permits instances of 
+
+to be await'ed.
+
+
+
+
+
+Starts the asynchronous initialization, if it has not already started.
+
+
+
+```
+var unused = instance.Value;
+```
