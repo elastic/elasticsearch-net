@@ -59,6 +59,16 @@ namespace Nest
 		[EnumMember(Value = "long")]
 		Long,
 		/// <summary>
+		/// Short type.
+		/// </summary>
+		[EnumMember(Value = "short")]
+		Short,
+		/// <summary>
+		/// Byte type.
+		/// </summary>
+		[EnumMember(Value = "byte")]
+		Byte,
+		/// <summary>
 		/// Float type.
 		/// </summary>
 		[EnumMember(Value = "float")]

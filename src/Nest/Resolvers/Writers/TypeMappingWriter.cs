@@ -85,6 +85,7 @@ namespace Nest.Resolvers.Writers
 			using (var ms = new MemoryStream(nestedJson.Utf8Bytes()))
 				return this._elasticSerializer.Deserialize<RootObjectMapping>(ms);
 		}
+
 		internal ObjectMapping ObjectMappingFromAttributes()
 		{
 			var json = JObject.Parse(this.MapFromAttributes());
@@ -93,6 +94,7 @@ namespace Nest.Resolvers.Writers
 			using (var ms = new MemoryStream(nestedJson.Utf8Bytes()))
 				return this._elasticSerializer.Deserialize<ObjectMapping>(ms);
 		}
+
 		internal NestedObjectMapping NestedObjectMappingFromAttributes()
 		{
 			var json = JObject.Parse(this.MapFromAttributes());
@@ -101,6 +103,7 @@ namespace Nest.Resolvers.Writers
 			using (var ms = new MemoryStream(nestedJson.Utf8Bytes()))
 				return this._elasticSerializer.Deserialize<NestedObjectMapping>(ms);
 		}
+
 		public string MapFromAttributes()
 		{
 			var sb = new StringBuilder();
@@ -139,7 +142,7 @@ namespace Nest.Resolvers.Writers
 					continue;
 
 				var propertyName = this.Infer.PropertyName(p);
-				var type = GetElasticSearchType(att, p);
+				var type = GetElasticsearchTypeName(att, p);
 
 				if (type == null) //could not get type from attribute or infer from CLR type.
 					continue;
@@ -182,38 +185,37 @@ namespace Nest.Resolvers.Writers
 		}
 
 		/// <summary>
-		/// Get the Elastic Search Field Type Related.
+		/// Gets the Elasticsearch type name for a given ElasticPropertyAttribute.
 		/// </summary>
-		/// <param name="att">ElasticPropertyAttribute</param>
-		/// <param name="p">Property Field</param>
-		/// <returns>String with the type name or null if can not be inferres</returns>
-		private string GetElasticSearchType(IElasticPropertyAttribute att, PropertyInfo p)
+		/// <param name="attribute">ElasticPropertyAttribute</param>
+		/// <param name="propertyInfo">Property field</param>
+		/// <returns>String containing the type name, or null if can not be inferred.</returns>
+		private string GetElasticsearchTypeName(IElasticPropertyAttribute attribute, PropertyInfo propertyInfo)
 		{
 			FieldType? fieldType = null;
-			if (att != null)
-			{
-				fieldType = att.Type;
-			}
+			
+			if (attribute != null)
+				fieldType = attribute.Type;
 
 			if (fieldType == null || fieldType == FieldType.None)
 			{
-				fieldType = this.GetFieldTypeFromType(p.PropertyType);
-				if (fieldType == null && att != null)
+				fieldType = this.GetFieldType(propertyInfo.PropertyType);
+				if (fieldType == null && attribute != null)
 				{
-					var message = _noFieldTypeMessage.F(p.Name, this._type.Name);
+					var message = _noFieldTypeMessage.F(propertyInfo.Name, this._type.Name);
 					throw new DslException(message);
 				}
 			}
 
-			return this.GetElasticSearchTypeFromFieldType(fieldType);
+			return this.GetElasticsearchType(fieldType);
 		}
 
 		/// <summary>
-		/// Get the Elastic Search Field from a FieldType.
+		/// Gets the Elasticsearch type name for a given FieldType.
 		/// </summary>
 		/// <param name="fieldType">FieldType</param>
-		/// <returns>String with the type name or null if can not be inferres</returns>
-		private string GetElasticSearchTypeFromFieldType(FieldType? fieldType)
+		/// <returns>String containing the type name, or null if can not be inferred.</returns>
+		private string GetElasticsearchType(FieldType? fieldType)
 		{
 			switch (fieldType)
 			{
@@ -231,6 +233,10 @@ namespace Nest.Resolvers.Writers
 					return "string";
 				case FieldType.Integer:
 					return "integer";
+				case FieldType.Short:
+					return "short";
+				case FieldType.Byte:
+					return "byte";
 				case FieldType.Long:
 					return "long";
 				case FieldType.Float:
@@ -255,11 +261,11 @@ namespace Nest.Resolvers.Writers
 		}
 
 		/// <summary>
-		/// Inferes the FieldType from the type of the property.
+		/// Gets the FieldType for a given CLR type.
 		/// </summary>
-		/// <param name="propertyType">Type of the property</param>
-		/// <returns>FieldType or null if can not be inferred</returns>
-		private FieldType? GetFieldTypeFromType(Type propertyType)
+		/// <param name="propertyType">CLR type of the property</param>
+		/// <returns>The FieldType, or null if can not be inferred.</returns>
+		private FieldType? GetFieldType(Type propertyType)
 		{
 			propertyType = GetUnderlyingType(propertyType);
 
@@ -275,11 +281,13 @@ namespace Nest.Resolvers.Writers
 				{
 					case "Int32":
 					case "UInt32":
+						return FieldType.Integer;
 					case "Int16":
 					case "UInt16":
+						return FieldType.Short;
 					case "Byte":
 					case "SByte":
-						return FieldType.Integer;
+						return FieldType.Byte;
 					case "Int64":
 					case "UInt64":
 						return FieldType.Long;

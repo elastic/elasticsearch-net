@@ -1,0 +1,30 @@
+﻿{
+  "alltypes": {
+    "properties": {
+      "integerField": {
+        "type": "integer"
+      },
+      "shortField": {
+        "type": "short"
+      },
+      "byteField": {
+        "type": "byte"
+      },
+      "longField": {
+        "type": "long"
+      },
+      "floatField": {
+        "type": "float"
+      },
+      "doubleField": {
+        "type": "double"
+      },
+      "dateField": {
+        "type": "date"
+      },
+      "boolField": {
+        "type": "boolean"
+      }
+    }
+  }
+}
