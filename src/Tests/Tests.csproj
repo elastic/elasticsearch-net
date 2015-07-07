@@ -66,8 +66,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ElasticsearchNet\Connecting.cs" />
+    <Compile Include="ClientConcepts\LowLevel\Connecting.cs" />
     <Compile Include="Search\Request\PostFilter.cs" />
+    <Compile Include="Search\Request\Explain.cs" />
     <Compile Include="Search\Request\Query.cs" />
     <Compile Include="Search\Request\Sort.cs" />
     <Compile Include="Search\Request\TermFilter.cs" />
@@ -101,7 +102,27 @@
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Aggregations\Bucket\" />
+    <Folder Include="Aggregations\Metric\" />
+    <Folder Include="Aggregations\Pipeline\" />
+    <Folder Include="Analysis\Analyzers\" />
+    <Folder Include="Analysis\CharFilters\" />
+    <Folder Include="Analysis\TokenFilters\" />
+    <Folder Include="Analysis\Tokenizers\" />
+    <Folder Include="Cat\" />
+    <Folder Include="ClientConcepts\HighLevel\" />
+    <Folder Include="Cluster\" />
+    <Folder Include="Document\" />
+    <Folder Include="IndexModules\" />
+    <Folder Include="Indices\" />
+    <Folder Include="Mapping\" />
+    <Folder Include="Migration\" />
+    <Folder Include="Modules\" />
+    <Folder Include="QueryDsl\" />
+    <Folder Include="Search\Suggesters\" />
+    <Folder Include="Setup\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
@@ -115,6 +136,17 @@
       <ItemGroup>
         <Reference Include="Ploeh.AutoFixture">
           <HintPath>..\..\packages\AutoFixture\lib\net40\Ploeh.AutoFixture.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="($(TargetFrameworkIdentifier) == '.NETFramework' And ($(TargetFrameworkVersion) == 'v4.0' Or $(TargetFrameworkVersion) == 'v4.5' Or $(TargetFrameworkVersion) == 'v4.5.1' Or $(TargetFrameworkVersion) == 'v4.5.2' Or $(TargetFrameworkVersion) == 'v4.5.3' Or $(TargetFrameworkVersion) == 'v4.6')) Or ($(TargetFrameworkIdentifier) == 'MonoAndroid') Or ($(TargetFrameworkIdentifier) == 'MonoTouch')">
+      <ItemGroup>
+        <Reference Include="Bogus">
+          <HintPath>..\..\packages\Bogus\lib\net40\Bogus.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>

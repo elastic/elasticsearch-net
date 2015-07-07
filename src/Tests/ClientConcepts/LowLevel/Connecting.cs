@@ -6,7 +6,7 @@ using Elasticsearch.Net.Connection;
 using Elasticsearch.Net.ConnectionPool;
 using Nest;
 
-namespace Tests.ElasticsearchNet
+namespace Tests.ClientConcepts.LowLevel
 {
 	public class Connecting
 	{

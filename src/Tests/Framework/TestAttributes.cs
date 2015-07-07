@@ -6,12 +6,12 @@ using Xunit.Sdk;
 
 namespace Tests.Framework
 {
-	[XunitTestCaseDiscoverer("Tests._Internals.IntegrationTestDiscoverer", "Tests")]
+	[XunitTestCaseDiscoverer("Tests.Framework.IntegrationTestDiscoverer", "Tests")]
 	public class I : FactAttribute
 	{
 	}
 
-	[XunitTestCaseDiscoverer("Tests._Internals.UnitTestDiscoverer", "Tests")]
+	[XunitTestCaseDiscoverer("Tests.Framework.UnitTestDiscoverer", "Tests")]
 	public class U : FactAttribute
 	{
 	}

@@ -78,6 +78,11 @@ namespace Tests.Framework.Integration
 			);
 			createProjectIndex.IsValid.Should().BeTrue();
 
+			this.Client.IndexMany(Project.Projects);
+
+			this.Client.Refresh(r=>r.Index<Project>());
+
+
 		}
 
 		private static PropertiesDescriptor<Tag> TagProperties(PropertiesDescriptor<Tag> props) => props
