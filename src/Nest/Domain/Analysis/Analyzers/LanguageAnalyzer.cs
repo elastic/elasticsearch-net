@@ -26,7 +26,7 @@ namespace Nest
 		[JsonProperty("stopwords")]
 		public IEnumerable<string> StopWords { get; set; }
 
-		[JsonProperty("stem_exclusion ")]
+		[JsonProperty("stem_exclusion")]
 		public IEnumerable<string> StemExclusionList { get; set; }
 
 		/// <summary>
