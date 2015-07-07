@@ -67,6 +67,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClientConcepts\LowLevel\Connecting.cs" />
+    <Compile Include="Framework\MockData\CommitActivity.cs" />
+    <Compile Include="Framework\MockData\Developer.cs" />
+    <Compile Include="Framework\MockData\Gender.cs" />
+    <Compile Include="Framework\MockData\Gimme.cs" />
+    <Compile Include="Framework\MockData\Person.cs" />
+    <Compile Include="Framework\MockData\Tag.cs" />
     <Compile Include="Search\Request\PostFilter.cs" />
     <Compile Include="Search\Request\Explain.cs" />
     <Compile Include="Search\Request\Query.cs" />
