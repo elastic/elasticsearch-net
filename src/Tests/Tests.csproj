@@ -74,19 +74,18 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SearchAPIs\RequestBodySearch\FromAndSize.cs" />
     <Compile Include="SearchAPIs\SearchUsageBase.cs" />
-    <Compile Include="_Internals\AsyncLazy.cs" />
-    <Compile Include="_Internals\EndpointUsageTests.cs" />
-    <Compile Include="_Internals\GeneralUsageTests.cs" />
-    <Compile Include="_Internals\Integration\Seeder.cs" />
-    <Compile Include="_Internals\MockData\Project.cs" />
-    <Compile Include="_Internals\TestAttributes.cs" />
-    <Compile Include="_Internals\Integration\ElasticsearchNode.cs" />
-    <Compile Include="_Internals\Integration\ReadOnlyIntegration.cs" />
-    <Compile Include="_Internals\SerializationTests.cs" />
-    <Compile Include="_Internals\TestClient.cs" />
+    <Compile Include="Framework\AsyncLazy.cs" />
+    <Compile Include="Framework\EndpointUsageBase.cs" />
+    <Compile Include="Framework\GeneralUsageBase.cs" />
+    <Compile Include="Framework\Integration\Seeder.cs" />
+    <Compile Include="Framework\MockData\Project.cs" />
+    <Compile Include="Framework\TestAttributes.cs" />
+    <Compile Include="Framework\Integration\ElasticsearchNode.cs" />
+    <Compile Include="Framework\Integration\ReadOnlyIntegration.cs" />
+    <Compile Include="Framework\SerializationBase.cs" />
+    <Compile Include="Framework\TestClient.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
     <None Include="paket.references" />
   </ItemGroup>
   <ItemGroup>

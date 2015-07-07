@@ -1,8 +1,8 @@
 using FluentAssertions;
 using Nest;
-using Tests._Internals.MockData;
+using Tests.Framework.MockData;
 
-namespace Tests._Internals.Integration
+namespace Tests.Framework.Integration
 {
 	public class Seeder
 	{

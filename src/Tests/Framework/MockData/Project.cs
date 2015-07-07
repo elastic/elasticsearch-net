@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Nest;
 
-namespace Tests._Internals.MockData
+namespace Tests.Framework.MockData
 {
 	public class Project
 	{

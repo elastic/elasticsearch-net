@@ -1,6 +1,6 @@
 ﻿using System;
 using Nest;
-using Tests._Internals;
+using Tests.Framework;
 
 namespace Tests.SearchAPIs.RequestBodySearch
 {
@@ -11,7 +11,7 @@ namespace Tests.SearchAPIs.RequestBodySearch
 		 * The from parameter defines the offset from the first result you want to fetch. 
 		 * The size parameter allows you to configure the maximum amount of hits to be returned.
 		 */
-		public class Usage : GeneralUsageTests<ITermQuery, TermQueryDescriptor<object>, TermQuery>
+		public class Usage : GeneralUsageBase<ITermQuery, TermQueryDescriptor<object>, TermQuery>
 		{
 			protected override object ExpectedJson =>
 				new { myfield = new { value = "myvalue" } };
@@ -27,7 +27,7 @@ namespace Tests.SearchAPIs.RequestBodySearch
 				term => term.OnField("myfield").Value("myvalue");
 		}
 
-		public class UsageInsideQueryContainer : GeneralUsageTests<IQueryContainer, QueryContainerDescriptor<object>, QueryContainer>
+		public class UsageInsideQueryContainer : GeneralUsageBase<IQueryContainer, QueryContainerDescriptor<object>, QueryContainer>
 		{
 			protected override object ExpectedJson =>
 				new { term = new { myfield = new { value = "myvalue" } } };

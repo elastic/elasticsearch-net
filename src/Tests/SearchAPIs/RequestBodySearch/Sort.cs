@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Nest;
-using Tests._Internals.MockData;
-using Tests._Internals.Integration;
 using FluentAssertions;
+using Tests.Framework.Integration;
+using Tests.Framework.MockData;
 
 namespace Tests.SearchAPIs.RequestBodySearch
 {

@@ -5,10 +5,10 @@ using FluentAssertions;
 using Newtonsoft.Json.Linq;
 using Ploeh.AutoFixture;
 
-namespace Tests._Internals
+namespace Tests.Framework
 {
 
-	public abstract class SerializationTests
+	public abstract class SerializationBase
 	{
 		protected readonly Fixture _fixture = new Fixture();
 		protected static readonly Fixture Fix = new Fixture();
@@ -18,7 +18,7 @@ namespace Tests._Internals
 		private readonly string _expectedJsonString;
 		private readonly JObject _expectedJsonJObject;
 
-		public SerializationTests()
+		protected SerializationBase()
 		{
 			var o = this.ExpectedJson;
 			if (o == null)

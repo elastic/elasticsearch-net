@@ -1,8 +1,8 @@
 ﻿using System;
 using FluentAssertions;
 using Nest;
-using Tests._Internals.Integration;
-using Tests._Internals.MockData;
+using Tests.Framework.Integration;
+using Tests.Framework.MockData;
 
 namespace Tests.SearchAPIs.RequestBodySearch
 {

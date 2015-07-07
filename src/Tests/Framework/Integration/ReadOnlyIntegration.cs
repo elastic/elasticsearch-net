@@ -1,7 +1,7 @@
 ﻿using System;
 using Xunit;
 
-namespace Tests._Internals.Integration
+namespace Tests.Framework.Integration
 {
 	public static class IntegrationContext
 	{

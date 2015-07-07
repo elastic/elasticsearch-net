@@ -3,9 +3,9 @@ using System.Diagnostics;
 using System.Linq;
 using Elasticsearch.Net.Connection;
 using Nest;
-using Tests._Internals.MockData;
+using Tests.Framework.MockData;
 
-namespace Tests._Internals
+namespace Tests.Framework
 {
 	public static class TestClient
 	{

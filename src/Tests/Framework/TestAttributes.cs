@@ -4,7 +4,7 @@ using Xunit;
 using Xunit.Abstractions;
 using Xunit.Sdk;
 
-namespace Tests._Internals
+namespace Tests.Framework
 {
 	[XunitTestCaseDiscoverer("Tests._Internals.IntegrationTestDiscoverer", "Tests")]
 	public class I : FactAttribute

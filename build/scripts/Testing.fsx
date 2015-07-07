@@ -53,9 +53,11 @@ module Tests =
         match errors with
         | 0 ->
             let successMessage = sprintf "\"All %i tests are passing!\"" total
+            printfn "%s" successMessage
             Paths.Tooling.Notifier.Exec ["-t " + successMessage; "-m " + successMessage]
         | _ ->
             let errorMessage = sprintf "\"%i failed %i run, %i skipped\"" errors total skipped
+            printfn "%s" errorMessage
             Paths.Tooling.Notifier.Exec ["-t " + errorMessage; "-m " + errorMessage]
 
     let RunContinuous = fun _ ->

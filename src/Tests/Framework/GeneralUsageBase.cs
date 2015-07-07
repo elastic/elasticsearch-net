@@ -1,10 +1,9 @@
 using System;
 using Nest;
-using Xunit;
 
-namespace Tests._Internals
+namespace Tests.Framework
 {
-	public abstract class GeneralUsageTests<TInterface, TDescriptor, TInitializer> : SerializationTests
+	public abstract class GeneralUsageBase<TInterface, TDescriptor, TInitializer> : SerializationBase
 		where TDescriptor : TInterface, new()
 		where TInitializer : class, TInterface
 		where TInterface : class
@@ -14,7 +13,7 @@ namespace Tests._Internals
 
 		protected TInterface FluentInstance { get; private set; }
 
-		protected GeneralUsageTests()
+		protected GeneralUsageBase()
 		{
 			var client = this.Client();
 			this.FluentInstance = this.Fluent(new TDescriptor());
