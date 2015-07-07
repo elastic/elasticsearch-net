@@ -73,6 +73,7 @@
     <Compile Include="Framework\MockData\Gimme.cs" />
     <Compile Include="Framework\MockData\Person.cs" />
     <Compile Include="Framework\MockData\Tag.cs" />
+    <Compile Include="Search\Request\FielddataFields.cs" />
     <Compile Include="Search\Request\PostFilter.cs" />
     <Compile Include="Search\Request\Explain.cs" />
     <Compile Include="Search\Request\Query.cs" />

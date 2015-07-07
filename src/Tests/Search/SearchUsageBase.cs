@@ -5,7 +5,7 @@ using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using Xunit;
 
-namespace Tests.SearchAPIs
+namespace Tests.Search
 {
 	[Collection(IntegrationContext.ReadOnly)]
 	public abstract class SearchUsageBase : EndpointUsageBase<ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>

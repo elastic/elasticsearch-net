@@ -4,7 +4,6 @@ using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
-using Tests.SearchAPIs;
 
 namespace Tests.Search.Request
 {
