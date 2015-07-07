@@ -50,7 +50,7 @@ namespace Nest
 		string BoundaryChars { get; set; }
 
 		[JsonProperty("type")]
-		string Type { get; set; }
+		HighlighterType Type { get; set; }
 
 		[JsonProperty("force_source")]
 		bool? ForceSource { get; set; }
@@ -74,7 +74,7 @@ namespace Nest
 		public string TagsSchema { get; set; }
 		public bool? RequireFieldMatch { get; set; }
 		public string BoundaryChars { get; set; }
-		public string Type { get; set; }
+		public HighlighterType Type { get; set; }
 		public bool? ForceSource { get; set; }
 		public IEnumerable<PropertyPath> MatchedFields { get; set; }
 	}
@@ -109,7 +109,7 @@ namespace Nest
 
 		string IHighlightField.BoundaryChars { get; set; }
 
-		string IHighlightField.Type { get; set; }
+		HighlighterType IHighlightField.Type { get; set; }
 
 		bool? IHighlightField.ForceSource { get; set; }
 
@@ -139,14 +139,9 @@ namespace Nest
 			Self.ForceSource = force;
 			return this;
 		}
-		public HighlightFieldDescriptor<T> Type(string type)
-		{
-			Self.Type = type;
-			return this;
-		}
 		public HighlightFieldDescriptor<T> Type(HighlighterType type)
 		{
-			Self.Type = type.GetStringValue();
+			Self.Type = type;
 			return this;
 		}
 		public HighlightFieldDescriptor<T> PreTags(string preTags)
