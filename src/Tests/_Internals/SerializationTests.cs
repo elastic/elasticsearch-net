@@ -13,16 +13,16 @@ namespace Tests._Internals
 		protected readonly Fixture _fixture = new Fixture();
 		protected static readonly Fixture Fix = new Fixture();
 
-		protected abstract object ExpectedJson { get; }
+		protected abstract object ExpectJson { get; }
 
 		private readonly string _expectedJsonString;
 		private readonly JObject _expectedJsonJObject;
 
 		public SerializationTests()
 		{
-			var o = this.ExpectedJson;
+			var o = this.ExpectJson;
 			if (o == null)
-				throw new ArgumentNullException(nameof(this.ExpectedJson));
+				throw new ArgumentNullException(nameof(this.ExpectJson));
 
 			this._expectedJsonString = this.Serialize(o);
 			this._expectedJsonJObject = JObject.Parse(this._expectedJsonString);

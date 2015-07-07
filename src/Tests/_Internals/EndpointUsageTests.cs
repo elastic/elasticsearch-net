@@ -17,7 +17,7 @@ namespace Tests._Internals
 
 		public abstract int ExpectStatusCode { get; }
 		public abstract bool ExpectIsValid { get; }
-		public abstract string ExpectedPathAndQuery { get; }
+		public abstract string ExpectPathAndQuery { get; }
 
 		protected abstract TInitializer Initializer { get; }
 		protected abstract Func<TDescriptor, TInterface> Fluent { get; }
@@ -67,7 +67,7 @@ namespace Tests._Internals
 
 		public virtual void AssertPathAndQuery(Uri requestUri)
 		{
-			requestUri.PathAndQuery.Should().Be(this.ExpectedPathAndQuery);
+			requestUri.PathAndQuery.Should().Be(this.ExpectPathAndQuery);
 		}
 
 		[I] protected async void HandlesStatusCode() =>

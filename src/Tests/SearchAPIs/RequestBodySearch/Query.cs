@@ -24,9 +24,9 @@ namespace Tests.SearchAPIs.RequestBodySearch
 
 			public override int ExpectStatusCode => 200;
 
-			public override string ExpectedPathAndQuery => "/project/project/_search";
+			public override string ExpectPathAndQuery => "/project/project/_search";
 
-			protected override object ExpectedJson => 
+			protected override object ExpectJson => 
 				new { query = new { term = new { name = new { value = "elasticsearch" } } } };
 
 			protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s

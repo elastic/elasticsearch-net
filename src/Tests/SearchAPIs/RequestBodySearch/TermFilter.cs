@@ -13,7 +13,7 @@ namespace Tests.SearchAPIs.RequestBodySearch
 		 */
 		public class Usage : GeneralUsageTests<ITermQuery, TermQueryDescriptor<object>, TermQuery>
 		{
-			protected override object ExpectedJson =>
+			protected override object ExpectJson =>
 				new { myfield = new { value = "myvalue" } };
 
 			protected override TermQuery Initializer =>
@@ -29,7 +29,7 @@ namespace Tests.SearchAPIs.RequestBodySearch
 
 		public class UsageInsideQueryContainer : GeneralUsageTests<IQueryContainer, QueryContainerDescriptor<object>, QueryContainer>
 		{
-			protected override object ExpectedJson =>
+			protected override object ExpectJson =>
 				new { term = new { myfield = new { value = "myvalue" } } };
 
 			protected override QueryContainer Initializer =>

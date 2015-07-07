@@ -25,9 +25,9 @@ namespace Tests.SearchAPIs.RequestBodySearch
 
 			public override int ExpectStatusCode => 200;
 
-			public override string ExpectedPathAndQuery => "/project/project/_search";
+			public override string ExpectPathAndQuery => "/project/project/_search";
 
-			protected override object ExpectedJson => 
+			protected override object ExpectJson => 
 				new {
 					  sort = new object [] 
 					    {

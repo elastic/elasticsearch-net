@@ -13,14 +13,14 @@ namespace Tests.SearchAPIs.RequestBodySearch
 		{
 			public Usage(ReadOnlyIntegration i) : base(i) {} 
 
-			protected override object ExpectedJson =>
+			protected override object ExpectJson =>
 				new { post_filter = new { match_all = new { } } };
 
 			public override int ExpectStatusCode => 200;
 
 			public override bool ExpectIsValid => true;
 
-			public override string ExpectedPathAndQuery => "/project/project/_search";
+			public override string ExpectPathAndQuery => "/project/project/_search";
 
 			protected override SearchRequest<Project> Initializer =>
 				new SearchRequest<Project>()
