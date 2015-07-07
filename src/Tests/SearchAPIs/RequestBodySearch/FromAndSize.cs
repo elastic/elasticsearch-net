@@ -25,8 +25,8 @@ namespace Tests.SearchAPIs.RequestBodySearch
 
 			public override bool ExpectIsValid => true;
 
-			public override void AssertUrl(Uri u) => u.AbsolutePath.Should().Be("/project/project/_search");
-
+			public override string ExpectedPathAndQuery => "/project/project/_search";
+			
 			protected override SearchRequest<Project> Initializer =>
 				new SearchRequest<Project>()
 				{

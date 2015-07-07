@@ -24,6 +24,8 @@ namespace Tests.SearchAPIs.RequestBodySearch
 
 			public override int ExpectStatusCode => 200;
 
+			public override string ExpectedPathAndQuery => "/project/project/_search";
+
 			protected override object ExpectedJson => 
 				new { query = new { term = new { name = new { value = "elasticsearch" } } } };
 
@@ -42,8 +44,6 @@ namespace Tests.SearchAPIs.RequestBodySearch
 								Value = "elasticsearch"
 							}
 				};
-
-			public override void AssertUrl(Uri requestUri) => requestUri.PathAndQuery.Should().Be("/project/project/_search");
 		}
 	}
 }

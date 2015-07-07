@@ -17,7 +17,7 @@ namespace Tests._Internals
 
 		public abstract int ExpectStatusCode { get; }
 		public abstract bool ExpectIsValid { get; }
-		public abstract void AssertUrl(Uri requestUri);
+		public abstract string ExpectedPathAndQuery { get; }
 
 		protected abstract TInitializer Initializer { get; }
 		protected abstract Func<TDescriptor, TInterface> Fluent { get; }
@@ -65,6 +65,11 @@ namespace Tests._Internals
 			}
 		}
 
+		public virtual void AssertPathAndQuery(Uri requestUri)
+		{
+			requestUri.PathAndQuery.Should().Be(this.ExpectedPathAndQuery);
+		}
+
 		[I] protected async void HandlesStatusCode() =>
 			await this.AssertOnAllResponses(r=>r.ConnectionStatus.HttpStatusCode.Should().Be(this.ExpectStatusCode));
 
@@ -72,7 +77,7 @@ namespace Tests._Internals
 			await this.AssertOnAllResponses(r=>r.IsValid.Should().Be(this.ExpectIsValid));
 
 		[U] protected async Task HitsTheCorrectUrl() =>
-			await this.AssertOnAllResponses(r=>this.AssertUrl(new Uri(r.ConnectionStatus.RequestUrl)));
+			await this.AssertOnAllResponses(r=>this.AssertPathAndQuery(new Uri(r.ConnectionStatus.RequestUrl)));
 
 		[U] protected void SerializesInitializer() => 
 			this.AssertSerializesAndRoundTrips<TInterface>(this.Initializer);

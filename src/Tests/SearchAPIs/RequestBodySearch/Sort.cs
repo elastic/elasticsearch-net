@@ -25,6 +25,8 @@ namespace Tests.SearchAPIs.RequestBodySearch
 
 			public override int ExpectStatusCode => 200;
 
+			public override string ExpectedPathAndQuery => "/project/project/_search";
+
 			protected override object ExpectedJson => 
 				new {
 					  sort = new object [] 
@@ -61,8 +63,6 @@ namespace Tests.SearchAPIs.RequestBodySearch
 						}
 					}
 				};
-
-			public override void AssertUrl(Uri requestUri) => requestUri.AbsolutePath.Should().Be("/project/project/_search");
 		}
 	}
 }
