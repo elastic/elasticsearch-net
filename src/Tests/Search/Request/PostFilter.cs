@@ -4,8 +4,9 @@ using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
+using Tests.SearchAPIs;
 
-namespace Tests.SearchAPIs.RequestBodySearch
+namespace Tests.Search.Request
 {
 	public class PostFilter
 	{
@@ -20,7 +21,6 @@ namespace Tests.SearchAPIs.RequestBodySearch
 
 			public override bool ExpectIsValid => true;
 
-			public override void AssertUrl(Uri u) => u.PathAndQuery.Should().EndWith("/_search");
 
 			protected override SearchRequest<Project> Initializer =>
 				new SearchRequest<Project>()

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Nest;
@@ -16,7 +17,7 @@ namespace Tests.Framework
 
 		public abstract int ExpectStatusCode { get; }
 		public abstract bool ExpectIsValid { get; }
-		public abstract void AssertUrl(Uri requestUri);
+		public abstract string UrlPath { get; }
 
 		protected abstract TInitializer Initializer { get; }
 		protected abstract Func<TDescriptor, TInterface> Fluent { get; }
@@ -62,6 +63,34 @@ namespace Tests.Framework
 			{
 				assert(kv.Value);
 			}
+		}
+
+		private void AssertUrl(Uri uriThatClientHit)
+		{
+			var paths = (this.UrlPath ?? "").Split(new [] { '?' }, 2);
+			string path = paths.First(), query = string.Empty;
+			if (paths.Length > 1)
+				query = paths.Last();
+
+			var expectedUri = new UriBuilder("http","localhost", IntegrationPort, path, query).Uri;
+
+			uriThatClientHit.AbsolutePath.Should().Be(expectedUri.AbsolutePath);
+			var queries = new[] {uriThatClientHit.Query, expectedUri.Query};
+			if (queries.All(string.IsNullOrWhiteSpace)) return;
+			if (queries.Any(string.IsNullOrWhiteSpace))
+			{
+				query.First().Should().Be(query.Last());
+				return;
+			}
+
+			var clientKeyValues = uriThatClientHit.Query.Split('&')
+				.SelectMany(v => v.Split('='))
+				.ToDictionary(k => k[0], v => v);
+			var expectedKeyValues = expectedUri.Query.Split('&')
+				.SelectMany(v => v.Split('='))
+				.ToDictionary(k => k[0], v => v);
+
+			clientKeyValues.Should().Equal(expectedKeyValues);
 		}
 
 		[I] protected async void HandlesStatusCode() =>

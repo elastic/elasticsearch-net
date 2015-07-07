@@ -1,10 +1,10 @@
 ﻿using System;
-using FluentAssertions;
 using Nest;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
+using Tests.SearchAPIs;
 
-namespace Tests.SearchAPIs.RequestBodySearch
+namespace Tests.Search.Request
 {
 	public class FromAndSize
 	{
@@ -25,7 +25,7 @@ namespace Tests.SearchAPIs.RequestBodySearch
 
 			public override bool ExpectIsValid => true;
 
-			public override void AssertUrl(Uri u) => u.AbsolutePath.Should().Be("/project/project/_search");
+			public override string UrlPath => "/project/project/_search";
 
 			protected override SearchRequest<Project> Initializer =>
 				new SearchRequest<Project>()

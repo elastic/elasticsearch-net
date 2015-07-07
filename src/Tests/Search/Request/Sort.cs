@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Nest;
-using FluentAssertions;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
+using Tests.SearchAPIs;
 
-namespace Tests.SearchAPIs.RequestBodySearch
+namespace Tests.Search.Request
 {
 	public class Sort
 	{
@@ -62,7 +59,6 @@ namespace Tests.SearchAPIs.RequestBodySearch
 					}
 				};
 
-			public override void AssertUrl(Uri requestUri) => requestUri.AbsolutePath.Should().Be("/project/project/_search");
 		}
 	}
 }

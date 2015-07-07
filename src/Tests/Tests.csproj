@@ -67,13 +67,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ElasticsearchNet\Connecting.cs" />
-    <Compile Include="SearchAPIs\RequestBodySearch\PostFilter.cs" />
-    <Compile Include="SearchAPIs\RequestBodySearch\Query.cs" />
-    <Compile Include="SearchAPIs\RequestBodySearch\Sort.cs" />
-    <Compile Include="SearchAPIs\RequestBodySearch\TermFilter.cs" />
+    <Compile Include="Search\Request\PostFilter.cs" />
+    <Compile Include="Search\Request\Query.cs" />
+    <Compile Include="Search\Request\Sort.cs" />
+    <Compile Include="Search\Request\TermFilter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SearchAPIs\RequestBodySearch\FromAndSize.cs" />
-    <Compile Include="SearchAPIs\SearchUsageBase.cs" />
+    <Compile Include="Search\Request\FromAndSize.cs" />
+    <Compile Include="Search\SearchUsageBase.cs" />
     <Compile Include="Framework\AsyncLazy.cs" />
     <Compile Include="Framework\EndpointUsageBase.cs" />
     <Compile Include="Framework\GeneralUsageBase.cs" />

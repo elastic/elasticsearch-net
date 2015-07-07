@@ -12,6 +12,8 @@ namespace Tests.SearchAPIs
 	{
 		protected SearchUsageBase(ReadOnlyIntegration integration) { this.IntegrationPort = integration.Node.Port; }
 
+		public override string UrlPath => "/project/project/_search";
+
 		protected override void ClientUsage() =>
 			this.Calls(
 				fluent: (client, f) => client.Search<Project>(f),
