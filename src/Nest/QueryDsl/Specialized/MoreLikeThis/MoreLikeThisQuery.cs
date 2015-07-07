@@ -13,7 +13,7 @@ namespace Nest
 	public interface IMoreLikeThisQuery : IQuery
 	{
 		[JsonProperty(PropertyName = "fields")]
-		IEnumerable<PropertyPathMarker> Fields { get; set; }
+		IEnumerable<PropertyPath> Fields { get; set; }
 
 		[JsonProperty(PropertyName = "like_text")]
 		string LikeText { get; set; }
@@ -78,7 +78,7 @@ namespace Nest
 	public class MoreLikeThisQuery : QueryBase, IMoreLikeThisQuery
 	{
 		bool IQuery.Conditionless => IsConditionless(this);
-		public IEnumerable<PropertyPathMarker> Fields { get; set; }
+		public IEnumerable<PropertyPath> Fields { get; set; }
 		public string LikeText { get; set; }
 		public double? TermMatchPercentage { get; set; }
 		public string MinimumShouldMatch { get; set; }
@@ -110,7 +110,7 @@ namespace Nest
 		private IMoreLikeThisQuery Self { get { return this; }}
 		string IQuery.Name { get; set; }
 		bool IQuery.Conditionless => MoreLikeThisQuery.IsConditionless(this);
-		IEnumerable<PropertyPathMarker> IMoreLikeThisQuery.Fields { get; set; }
+		IEnumerable<PropertyPath> IMoreLikeThisQuery.Fields { get; set; }
 		string IMoreLikeThisQuery.LikeText { get; set; }
 		double? IMoreLikeThisQuery.TermMatchPercentage { get; set; }
 		string IMoreLikeThisQuery.MinimumShouldMatch { get; set; }
@@ -136,14 +136,14 @@ namespace Nest
 
 		public MoreLikeThisQueryDescriptor<T> OnFields(IEnumerable<string> fields)
 		{
-			this.Self.Fields = fields.Select(f=>(PropertyPathMarker)f);
+			this.Self.Fields = fields.Select(f=>(PropertyPath)f);
 			return this;
 		}
 
 		public MoreLikeThisQueryDescriptor<T> OnFields(
 			params Expression<Func<T, object>>[] objectPaths)
 		{
-			this.Self.Fields = objectPaths.Select(e=>(PropertyPathMarker)e);
+			this.Self.Fields = objectPaths.Select(e=>(PropertyPath)e);
 			return this;
 		}
 

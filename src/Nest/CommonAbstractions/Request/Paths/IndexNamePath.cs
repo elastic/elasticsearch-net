@@ -8,7 +8,7 @@ namespace Nest
 	public interface IIndexNamePath<TParameters> : IRequest<TParameters>
 		where TParameters : IRequestParameters, new()
 	{
-		IndexNameMarker Index { get; set; }
+		IndexName Index { get; set; }
 		string Name { get; set; }
 	}
 
@@ -47,10 +47,10 @@ namespace Nest
 	public abstract class IndexNamePathBase<TParameters> : BasePathRequest<TParameters>, IIndexNamePath<TParameters>
 		where TParameters : IRequestParameters, new()
 	{
-		public IndexNameMarker Index { get; set; }
+		public IndexName Index { get; set; }
 		public string Name { get; set; }
 		
-		public IndexNamePathBase(IndexNameMarker index, string name)
+		public IndexNamePathBase(IndexName index, string name)
 		{
 			this.Index = index;
 			this.Name = name;
@@ -66,7 +66,7 @@ namespace Nest
 		where TParameters : IRequestParameters, new()
 		where T : class
 	{
-		public IndexNameMarker Index { get; set; }
+		public IndexName Index { get; set; }
 		public string Name { get; set; }
 		
 		public IndexNamePathBase(string name)
@@ -94,7 +94,7 @@ namespace Nest
 	{
 		private IIndexNamePath<TParameters> Self => this;
 
-		IndexNameMarker IIndexNamePath<TParameters>.Index { get; set; }
+		IndexName IIndexNamePath<TParameters>.Index { get; set; }
 		string IIndexNamePath<TParameters>.Name { get; set; }
 		
 		public TDescriptor Index<TAlternative>() where TAlternative : class

@@ -35,9 +35,9 @@ namespace Nest
 	{
 		public DeleteByQueryRequest() {}
 
-		public DeleteByQueryRequest(IndexNameMarker index, TypeNameMarker type = null) : base(index, type) { }
+		public DeleteByQueryRequest(IndexName index, TypeName type = null) : base(index, type) { }
 
-		public DeleteByQueryRequest(IEnumerable<IndexNameMarker> indices, IEnumerable<TypeNameMarker> types = null) : base(indices, types) { }
+		public DeleteByQueryRequest(IEnumerable<IndexName> indices, IEnumerable<TypeName> types = null) : base(indices, types) { }
 
 		public IQueryContainer Query { get; set; }
 
@@ -53,9 +53,9 @@ namespace Nest
 	{
 		public DeleteByQueryRequest() {}
 
-		public DeleteByQueryRequest(IndexNameMarker index, TypeNameMarker type = null) : base(index, type) { }
+		public DeleteByQueryRequest(IndexName index, TypeName type = null) : base(index, type) { }
 
-		public DeleteByQueryRequest(IEnumerable<IndexNameMarker> indices, IEnumerable<TypeNameMarker> types = null) : base(indices, types) { }
+		public DeleteByQueryRequest(IEnumerable<IndexName> indices, IEnumerable<TypeName> types = null) : base(indices, types) { }
 
 		public IQueryContainer Query { get; set; }
 

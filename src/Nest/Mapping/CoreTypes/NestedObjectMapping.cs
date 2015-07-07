@@ -10,9 +10,9 @@ namespace Nest
 	public class NestedObjectMapping : ObjectMapping
 	{
 		[JsonProperty("type")]
-		public override TypeNameMarker Type
+		public override TypeName Type
 		{
-			get { return new TypeNameMarker { Name = "nested" }; }
+			get { return new TypeName { Name = "nested" }; }
 		}
 
 		[JsonProperty("include_in_parent")]
@@ -31,13 +31,13 @@ namespace Nest
 		private readonly IConnectionSettingsValues _connectionSettings;
 
 		internal NestedObjectMapping _Mapping { get; set; }
-		internal TypeNameMarker _TypeName { get; set; }
+		internal TypeName _TypeName { get; set; }
 		public ElasticInferrer Infer { get; set; }
 
 		public NestedObjectMappingDescriptor(IConnectionSettingsValues connectionSettings)
 		{
 			this._connectionSettings = connectionSettings;
-			this._TypeName = TypeNameMarker.Create<TChild>();
+			this._TypeName = TypeName.Create<TChild>();
 			this._Mapping = new NestedObjectMapping() { };
 			this.Infer = new ElasticInferrer(this._connectionSettings);
 		}
@@ -71,7 +71,7 @@ namespace Nest
 			if (mapping == null)
 				return this;
 			if (this._Mapping.Properties == null)
-				this._Mapping.Properties = new Dictionary<PropertyNameMarker, IElasticType>();
+				this._Mapping.Properties = new Dictionary<PropertyName, IElasticType>();
 
 			var properties = mapping.Properties;
 			foreach (var p in properties)
@@ -122,7 +122,7 @@ namespace Nest
 			propertiesSelector.ThrowIfNull("propertiesSelector");
 			var properties = propertiesSelector(new PropertiesDescriptor<TChild>(this._connectionSettings));
 			if (this._Mapping.Properties == null)
-				this._Mapping.Properties = new Dictionary<PropertyNameMarker, IElasticType>();
+				this._Mapping.Properties = new Dictionary<PropertyName, IElasticType>();
 
 			foreach (var t in properties._Deletes)
 			{

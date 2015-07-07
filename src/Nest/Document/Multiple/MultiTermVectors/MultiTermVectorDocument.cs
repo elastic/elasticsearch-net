@@ -10,15 +10,15 @@ namespace Nest
 	public class MultiTermVectorDocument
 	{
 		[JsonProperty("_index")]
-		public IndexNameMarker Index { get; set; }
+		public IndexName Index { get; set; }
 		[JsonProperty("_type")]
-		public TypeNameMarker Type { get; set; }
+		public TypeName Type { get; set; }
 		[JsonProperty("_id")]
 		public string Id { get; set; }
 		[JsonProperty("doc")]
 		public object Document { get; set; }
 		[JsonProperty("fields")]
-		public IEnumerable<PropertyPathMarker> Fields { get; set; }
+		public IEnumerable<PropertyPath> Fields { get; set; }
 		[JsonProperty("offsets")]
 		public bool? Offsets { get; set; }
 		[JsonProperty("payloads")]
@@ -67,11 +67,11 @@ namespace Nest
 
 		public MultiTermVectorDocumentDescriptor<T> Fields(params string[] fields)
 		{
-			return this.SetDocValue(d => d.Document.Fields = fields.Select(f => (PropertyPathMarker)f).ToList());
+			return this.SetDocValue(d => d.Document.Fields = fields.Select(f => (PropertyPath)f).ToList());
 		} 
 		public MultiTermVectorDocumentDescriptor<T> Fields(params Expression<Func<T, object>>[] fields)
 		{
-			return this.SetDocValue(d => d.Document.Fields = fields.Select(f => (PropertyPathMarker)f).ToList());
+			return this.SetDocValue(d => d.Document.Fields = fields.Select(f => (PropertyPath)f).ToList());
 		} 
 		public MultiTermVectorDocumentDescriptor<T> Fields(Func<FluentFieldList<T>, FluentFieldList<T>>  fields)
 		{

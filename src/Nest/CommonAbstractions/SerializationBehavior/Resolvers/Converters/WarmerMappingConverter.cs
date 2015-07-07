@@ -27,7 +27,7 @@ namespace Nest.Resolvers.Converters
 		{
 			var jObject = JObject.Load(reader);
 			var types = ((JArray)jObject.Property("types").Value).Values<string>().ToArray()
-				.Select(s=>(TypeNameMarker)s);
+				.Select(s=>(TypeName)s);
 
 			var source = serializer.Deserialize<SearchRequest>(jObject["source"].CreateReader());
 

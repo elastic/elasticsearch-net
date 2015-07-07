@@ -1,9 +1,9 @@
 ﻿namespace Nest
 {
-	public static class TypeNameMarkerExtensions
+	public static class TypeNameExtensions
 	{
 		
-		public static bool IsConditionless(this TypeNameMarker marker)
+		public static bool IsConditionless(this TypeName marker)
 		{
 			return marker == null || marker.Name.IsNullOrEmpty() && marker.Type == null;
 		}

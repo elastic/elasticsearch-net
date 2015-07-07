@@ -25,7 +25,7 @@ namespace Nest
 
 	public partial class CreateIndexRequest : IndexPathBase<CreateIndexRequestParameters>, ICreateIndexRequest
 	{
-		public CreateIndexRequest(IndexNameMarker index) : base(index) { }
+		public CreateIndexRequest(IndexName index) : base(index) { }
 
 		public IndexSettings IndexSettings { get; set; }
 
@@ -103,7 +103,7 @@ namespace Nest
 		/// </summary>
 		public CreateIndexDescriptor RemoveMapping(string typeName)
 		{
-			TypeNameMarker marker = typeName;
+			TypeName marker = typeName;
 			return this.RemoveMapping(marker);
 		}
 
@@ -112,7 +112,7 @@ namespace Nest
 		/// </summary>
 		public CreateIndexDescriptor RemoveMapping<T>() where T : class
 		{
-			TypeNameMarker marker = typeof(T);
+			TypeName marker = typeof(T);
 			return this.RemoveMapping(marker);
 		}
 
@@ -134,7 +134,7 @@ namespace Nest
 		}
 
 
-		private CreateIndexDescriptor RemoveMapping(TypeNameMarker marker)
+		private CreateIndexDescriptor RemoveMapping(TypeName marker)
 		{
 			this._indexSettings.Mappings = this._indexSettings.Mappings.Where(m => m.Type != marker).ToList();
 			return this;
@@ -152,7 +152,7 @@ namespace Nest
 
 			if (request.Type != null)
 			{
-				typeMapping.Name = request.Type.Name != null ? (PropertyNameMarker)request.Type.Name : request.Type.Type;
+				typeMapping.Name = request.Type.Name != null ? (PropertyName)request.Type.Name : request.Type.Type;
 			}
 			else
 			{
@@ -182,7 +182,7 @@ namespace Nest
 
 			if (request.Type != null)
 			{
-				typeMapping.Name = request.Type.Name != null ? (PropertyNameMarker)request.Type.Name : request.Type.Type;
+				typeMapping.Name = request.Type.Name != null ? (PropertyName)request.Type.Name : request.Type.Type;
 			}
 			else
 			{

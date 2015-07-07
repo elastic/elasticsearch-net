@@ -11,13 +11,13 @@ namespace Nest
 	{
 		[JsonProperty(PropertyName = "exp")]
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		internal IDictionary<PropertyPathMarker, FunctionScoreDecayFieldDescriptor> _ExpDescriptor { get; set; }
+		internal IDictionary<PropertyPath, FunctionScoreDecayFieldDescriptor> _ExpDescriptor { get; set; }
 
 		public ExpFunction(
 			Expression<Func<T, object>> objectPath,
 			Func<FunctionScoreDecayFieldDescriptor, FunctionScoreDecayFieldDescriptor> functionScoreDecaySelector)
 		{
-			this._ExpDescriptor = new Dictionary<PropertyPathMarker, FunctionScoreDecayFieldDescriptor>
+			this._ExpDescriptor = new Dictionary<PropertyPath, FunctionScoreDecayFieldDescriptor>
 			{
 				[objectPath] = functionScoreDecaySelector?.Invoke(new FunctionScoreDecayFieldDescriptor())
 			};
@@ -27,7 +27,7 @@ namespace Nest
 			string field,
 			Func<FunctionScoreDecayFieldDescriptor, FunctionScoreDecayFieldDescriptor> functionScoreDecaySelector)
 		{
-			this._ExpDescriptor = new Dictionary<PropertyPathMarker, FunctionScoreDecayFieldDescriptor>
+			this._ExpDescriptor = new Dictionary<PropertyPath, FunctionScoreDecayFieldDescriptor>
 			{
 				[field] = functionScoreDecaySelector?.Invoke(new FunctionScoreDecayFieldDescriptor())
 			};

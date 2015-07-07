@@ -12,12 +12,12 @@ namespace Nest
 	public interface IChildrenAggregator : IBucketAggregator
 	{
 		[JsonProperty("type")]
-		TypeNameMarker Type { get; set; }
+		TypeName Type { get; set; }
 	}
 
 	public class ChildrenAggregator : BucketAggregator, IChildrenAggregator
 	{
-		public TypeNameMarker Type { get; set; }
+		public TypeName Type { get; set; }
 	}
 
 	public class ChildrenAggregatorDescriptor<T> 
@@ -25,9 +25,9 @@ namespace Nest
 		where T : class
 	{
 
-		TypeNameMarker IChildrenAggregator.Type { get; set; } = typeof(T);
+		TypeName IChildrenAggregator.Type { get; set; } = typeof(T);
 
-		public ChildrenAggregatorDescriptor<T> Type(TypeNameMarker type) =>
+		public ChildrenAggregatorDescriptor<T> Type(TypeName type) =>
 			Assign(a => a.Type = type);
 
 		public ChildrenAggregatorDescriptor<T> Type<TChildType>() where TChildType : class =>

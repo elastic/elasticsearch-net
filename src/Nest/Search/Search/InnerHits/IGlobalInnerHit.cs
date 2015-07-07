@@ -33,12 +33,12 @@ namespace Nest
 		string IInnerHits.Name { get; set; }
 		int? IInnerHits.From { get; set; }
 		int? IInnerHits.Size { get; set; }
-		IList<KeyValuePair<PropertyPathMarker, ISort>> IInnerHits.Sort { get; set; }
+		IList<KeyValuePair<PropertyPath, ISort>> IInnerHits.Sort { get; set; }
 		IHighlightRequest IInnerHits.Highlight { get; set; }
 		bool? IInnerHits.Explain { get; set; }
 		ISourceFilter IInnerHits.Source { get; set; }
 		bool? IInnerHits.Version { get; set; }
-		IList<PropertyPathMarker> IInnerHits.FielddataFields { get; set; }
+		IList<PropertyPath> IInnerHits.FielddataFields { get; set; }
 		IDictionary<string, IScriptQuery> IInnerHits.ScriptFields { get; set; }
 
 		public GlobalInnerHitDescriptor<T> Query(Func<QueryContainerDescriptor<T>, IQueryContainer> querySelector) => 
@@ -75,10 +75,10 @@ namespace Nest
 		public GlobalInnerHitDescriptor<T> Name(string name) => _assign(a => a.Name = name);
 
 		public GlobalInnerHitDescriptor<T> FielddataFields(params string[] fielddataFields) =>
-			_assign(a => a.FielddataFields = fielddataFields?.Select(f => (PropertyPathMarker) f).ToListOrNullIfEmpty());
+			_assign(a => a.FielddataFields = fielddataFields?.Select(f => (PropertyPath) f).ToListOrNullIfEmpty());
 		
 		public GlobalInnerHitDescriptor<T> FielddataFields(params Expression<Func<T, object>>[] fielddataFields) =>
-			_assign(a => a.FielddataFields = fielddataFields?.Select(f => (PropertyPathMarker) f).ToListOrNullIfEmpty());
+			_assign(a => a.FielddataFields = fielddataFields?.Select(f => (PropertyPath) f).ToListOrNullIfEmpty());
 
 		public GlobalInnerHitDescriptor<T> Explain(bool explain = true) => _assign(a => a.Explain = explain);
 

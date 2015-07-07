@@ -163,7 +163,7 @@ namespace Nest.Resolvers.Converters
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
 										JsonSerializer serializer)
 		{
-			var r = new Dictionary<PropertyNameMarker, IElasticType>();
+			var r = new Dictionary<PropertyName, IElasticType>();
 
 			JObject o = JObject.Load(reader);
 

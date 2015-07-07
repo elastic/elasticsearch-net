@@ -11,7 +11,7 @@ namespace Nest
 
     public partial class SourceRequest : DocumentPathBase<SourceRequestParameters>, ISourceRequest
     {
-	    public SourceRequest(IndexNameMarker indexName, TypeNameMarker typeName, string id) : base(indexName, typeName, id)
+	    public SourceRequest(IndexName indexName, TypeName typeName, string id) : base(indexName, typeName, id)
 	    {
 	    }
 

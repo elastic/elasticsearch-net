@@ -21,7 +21,7 @@ namespace Nest
 	
 	public partial class GetFieldMappingRequest : IndicesOptionalTypesOptionalFieldsPathBase<GetFieldMappingRequestParameters>, IGetFieldMappingRequest
 	{
-		public GetFieldMappingRequest(params PropertyPathMarker[] fields) : base(fields) {}
+		public GetFieldMappingRequest(params PropertyPath[] fields) : base(fields) {}
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<GetFieldMappingRequestParameters> pathInfo)
 		{
@@ -32,7 +32,7 @@ namespace Nest
 	public partial class GetFieldMappingRequest<T> : IndicesOptionalTypesOptionalFieldsPathBase<GetFieldMappingRequestParameters, T>, IGetFieldMappingRequest
 		where T : class
 	{
-		public GetFieldMappingRequest(params PropertyPathMarker[] fields) : base(fields) { }
+		public GetFieldMappingRequest(params PropertyPath[] fields) : base(fields) { }
 
 		public GetFieldMappingRequest(params Expression<Func<T, object>>[] fields) : base(fields) { }
 

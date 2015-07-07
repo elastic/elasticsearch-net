@@ -10,16 +10,16 @@ namespace Nest
 	public interface IMultiGetOperation
 	{
 		[JsonProperty(PropertyName = "_index")]
-		IndexNameMarker Index { get; set; }
+		IndexName Index { get; set; }
 	
 		[JsonProperty(PropertyName = "_type")]
-		TypeNameMarker Type { get; set; }
+		TypeName Type { get; set; }
 		
 		[JsonProperty(PropertyName = "_id")]
 		string Id { get; set; }
 		
 		[JsonProperty(PropertyName = "fields")]
-		IList<PropertyPathMarker> Fields { get; set; }
+		IList<PropertyPath> Fields { get; set; }
 		
 		[JsonProperty(PropertyName = "_routing")]
 		string Routing { get; set; }
@@ -38,7 +38,7 @@ namespace Nest
 		// TODO: For 2.0, we should consider decoupling IMultiGetOperation from 
 		// MoreLikeThisQuery and have a dedicatd MoreLikeThisDocument object.
 		[JsonProperty(PropertyName = "per_field_analyzer")]
-		IDictionary<PropertyPathMarker, string> PerFieldAnalyzer { get; set; }
+		IDictionary<PropertyPath, string> PerFieldAnalyzer { get; set; }
 
 		Type ClrType { get; }
 	}

@@ -20,7 +20,7 @@ namespace Nest
 	
 	public partial class DeleteMappingRequest : IndexTypePathBase<DeleteMappingRequestParameters>, IDeleteMappingRequest
 	{
-		public DeleteMappingRequest(IndexNameMarker index, TypeNameMarker typeNameMarker) : base(index, typeNameMarker)
+		public DeleteMappingRequest(IndexName index, TypeName typeNameMarker) : base(index, typeNameMarker)
 		{
 		}
 

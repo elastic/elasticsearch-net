@@ -9,7 +9,7 @@ namespace Nest
 	public class RootObjectMapping : ObjectMapping
 	{
 		[JsonProperty("type")]
-		public override TypeNameMarker Type { get { return null; } }
+		public override TypeName Type { get { return null; } }
 
 		[JsonProperty("index_analyzer")]
 		public string IndexAnalyzer { get; set; }

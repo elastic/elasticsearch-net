@@ -29,7 +29,7 @@ namespace Nest
 		/// <summary>
 		/// Calls putmapping on /_all/{type}
 		/// </summary>
-		public PutMappingRequest(TypeNameMarker type)
+		public PutMappingRequest(TypeName type)
 		{
 			this.Type = type;
 			this.AllIndices = true;
@@ -38,7 +38,7 @@ namespace Nest
 		/// <summary>
 		/// Calls putmapping on /{indices}/{type}
 		/// </summary>
-		public PutMappingRequest(IEnumerable<IndexNameMarker> indices, TypeNameMarker type)
+		public PutMappingRequest(IEnumerable<IndexName> indices, TypeName type)
 		{
 			this.Type = type;
 			this.Indices = indices;
@@ -47,7 +47,7 @@ namespace Nest
 		/// <summary>
 		/// Calls putmapping on /{index}/{type}
 		/// </summary>
-		public PutMappingRequest(IndexNameMarker index, TypeNameMarker type)
+		public PutMappingRequest(IndexName index, TypeName type)
 		{
 			this.Type = type;
 			this.Indices = new [] { index };
@@ -113,7 +113,7 @@ namespace Nest
 				return this;
 			var properties = mapping.Properties;
 			if (Self.Mapping.Properties == null)
-				Self.Mapping.Properties = new Dictionary<PropertyNameMarker, IElasticType>();
+				Self.Mapping.Properties = new Dictionary<PropertyName, IElasticType>();
 
 			foreach (var p in properties)
 			{
@@ -155,7 +155,7 @@ namespace Nest
 		}
 		public PutMappingDescriptor<T> SetParent<K>() where K : class
 		{
-			var parentType = TypeNameMarker.Create<K>();
+			var parentType = TypeName.Create<K>();
 			Self.Mapping.Parent = new ParentFieldMapping { Type = parentType };
 			return this;
 		}
@@ -290,7 +290,7 @@ namespace Nest
 			propertiesSelector.ThrowIfNull("propertiesSelector");
 			var properties = propertiesSelector(new PropertiesDescriptor<T>(this._connectionSettings));
 			if (Self.Mapping.Properties == null)
-				Self.Mapping.Properties = new Dictionary<PropertyNameMarker, IElasticType>();
+				Self.Mapping.Properties = new Dictionary<PropertyName, IElasticType>();
 
 			foreach (var t in properties._Deletes)
 			{

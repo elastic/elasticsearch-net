@@ -13,6 +13,6 @@ namespace Nest
 		string Type { get; }
 
 		[JsonProperty("path")]
-		PropertyPathMarker Path { get; set; }
+		PropertyPath Path { get; set; }
 	}
 }

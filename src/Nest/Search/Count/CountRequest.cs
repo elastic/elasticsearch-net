@@ -31,9 +31,9 @@ namespace Nest
 	{
 		public CountRequest() {}
 
-		public CountRequest(IndexNameMarker index, TypeNameMarker type = null) : base(index, type) { }
+		public CountRequest(IndexName index, TypeName type = null) : base(index, type) { }
 
-		public CountRequest(IEnumerable<IndexNameMarker> indices, IEnumerable<TypeNameMarker> types = null) : base(indices, types) { }
+		public CountRequest(IEnumerable<IndexName> indices, IEnumerable<TypeName> types = null) : base(indices, types) { }
 
 		public IQueryContainer Query { get; set; }
 
@@ -48,9 +48,9 @@ namespace Nest
 	{
 		public CountRequest() {}
 
-		public CountRequest(IndexNameMarker index, TypeNameMarker type = null) : base(index, type) { }
+		public CountRequest(IndexName index, TypeName type = null) : base(index, type) { }
 
-		public CountRequest(IEnumerable<IndexNameMarker> indices, IEnumerable<TypeNameMarker> types = null) : base(indices, types) { }
+		public CountRequest(IEnumerable<IndexName> indices, IEnumerable<TypeName> types = null) : base(indices, types) { }
 
 		public IQueryContainer Query { get; set; }
 

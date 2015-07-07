@@ -7,12 +7,12 @@ namespace Nest
 	public class CorePropertiesDescriptor<T> where T : class
 	{
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		public IDictionary<PropertyNameMarker, IElasticType> Properties { get; private set; }
+		public IDictionary<PropertyName, IElasticType> Properties { get; private set; }
 		internal IList<string> _Deletes = new List<string>();
 
 		public CorePropertiesDescriptor()
 		{
-			this.Properties = new Dictionary<PropertyNameMarker, IElasticType>();
+			this.Properties = new Dictionary<PropertyName, IElasticType>();
 		}
 
 		public CorePropertiesDescriptor<T> Remove(string name)

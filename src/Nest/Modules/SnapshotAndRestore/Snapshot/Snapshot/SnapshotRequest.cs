@@ -9,7 +9,7 @@ namespace Nest
     public interface ISnapshotRequest : IRepositorySnapshotPath<SnapshotRequestParameters>
     {
         [JsonProperty("indices")]
-		IEnumerable<IndexNameMarker> Indices { get; set; }
+		IEnumerable<IndexName> Indices { get; set; }
 
 		[JsonProperty("ignore_unavailable")]
 		bool? IgnoreUnavailable { get; set; }
@@ -33,7 +33,7 @@ namespace Nest
     {
 	    public SnapshotRequest(string repository, string snapshot) : base(repository, snapshot) { }
 
-	    public IEnumerable<IndexNameMarker> Indices { get; set; }
+	    public IEnumerable<IndexName> Indices { get; set; }
 
         public bool? IgnoreUnavailable { get; set; }
 
@@ -54,7 +54,7 @@ namespace Nest
 	{
         private ISnapshotRequest Self => this;
 
-        IEnumerable<IndexNameMarker> ISnapshotRequest.Indices { get; set; }
+        IEnumerable<IndexName> ISnapshotRequest.Indices { get; set; }
         bool? ISnapshotRequest.IgnoreUnavailable { get; set; }
 
         bool? ISnapshotRequest.IncludeGlobalState { get; set; }
@@ -77,13 +77,13 @@ namespace Nest
 			
 		public SnapshotDescriptor Indices(params string[] indices)
 		{
-			this.Self.Indices = indices.Select(s=>(IndexNameMarker)s);
+			this.Self.Indices = indices.Select(s=>(IndexName)s);
 			return this;
 		}
 
 		public SnapshotDescriptor Indices(params Type[] indicesTypes)
 		{
-			this.Self.Indices = indicesTypes.Select(s=>(IndexNameMarker)s);
+			this.Self.Indices = indicesTypes.Select(s=>(IndexName)s);
 			return this;
 		}
 		public SnapshotDescriptor IgnoreUnavailable(bool ignoreUnavailable = true)

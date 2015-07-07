@@ -276,7 +276,7 @@ namespace Nest
 
 		AnalysisSettings IUpdateSettingsRequest.Analysis { get; set; }
 
-		IndexNameMarker IIndexOptionalPath<UpdateSettingsRequestParameters>.Index { get; set; }
+		IndexName IIndexOptionalPath<UpdateSettingsRequestParameters>.Index { get; set; }
 
 		bool? IIndexOptionalPath<UpdateSettingsRequestParameters>.AllIndices { get; set; }
 

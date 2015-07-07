@@ -29,7 +29,7 @@ namespace Nest
 
 	public class RegisterPercolatorRequest : IndexNamePathBase<IndexRequestParameters>, IRegisterPercolatorRequest
 	{
-		public RegisterPercolatorRequest(IndexNameMarker index, string name) : base(index, name)
+		public RegisterPercolatorRequest(IndexName index, string name) : base(index, name)
 		{
 		}
 

@@ -12,7 +12,7 @@ namespace Nest
 	public interface IGeoHashAggregator : IBucketAggregator
 	{
 		[JsonProperty("field")]
-		PropertyPathMarker Field { get; set; }
+		PropertyPath Field { get; set; }
 
 		[JsonProperty("size")]
 		int? Size { get; set; }
@@ -26,7 +26,7 @@ namespace Nest
 
 	public class GeoHashAggregator : BucketAggregator, IGeoHashAggregator
 	{
-		public PropertyPathMarker Field { get; set; }
+		public PropertyPath Field { get; set; }
 		public int? Size { get; set; }
 		public int? ShardSize { get; set; }
 		public GeoHashPrecision? Precision { get; set; }
@@ -37,7 +37,7 @@ namespace Nest
 			, IGeoHashAggregator 
 		where T : class
 	{
-		PropertyPathMarker IGeoHashAggregator.Field { get; set; }
+		PropertyPath IGeoHashAggregator.Field { get; set; }
 		
 		int? IGeoHashAggregator.Size { get; set; }
 

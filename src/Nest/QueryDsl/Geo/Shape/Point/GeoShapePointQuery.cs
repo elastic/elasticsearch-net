@@ -30,7 +30,7 @@ namespace Nest
 		private IGeoShapePointQuery Self { get { return this; }}
 		string IQuery.Name { get; set; }
 		bool IQuery.Conditionless => GeoShapePointQuery.IsConditionless(this);
-		PropertyPathMarker IFieldNameQuery.Field { get; set; }
+		PropertyPath IFieldNameQuery.Field { get; set; }
 		IPointGeoShape IGeoShapePointQuery.Shape { get; set; }
 		
 		public GeoShapePointQueryDescriptor<T> Name(string name)

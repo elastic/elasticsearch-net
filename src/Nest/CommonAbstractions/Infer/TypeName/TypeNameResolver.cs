@@ -36,7 +36,7 @@ namespace Nest.Resolvers
 		}
 
 
-		internal string GetTypeNameFor(TypeNameMarker t)
+		internal string GetTypeNameFor(TypeName t)
 		{
 			if (t == null) return null;
 

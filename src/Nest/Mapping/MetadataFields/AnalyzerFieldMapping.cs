@@ -12,14 +12,14 @@ namespace Nest
 		bool? Index { get; set; }
 
 		[JsonProperty("path")]
-		PropertyPathMarker Path { get; set; }
+		PropertyPath Path { get; set; }
 	}
 
 	public class AnalyzerFieldMapping : IAnalyzerFieldMapping
 	{
 		public bool? Index { get; set; }
 
-		public PropertyPathMarker Path { get; set; }
+		public PropertyPath Path { get; set; }
 	}
 
 
@@ -29,7 +29,7 @@ namespace Nest
 
 		bool? IAnalyzerFieldMapping.Index { get; set; }
 
-		PropertyPathMarker IAnalyzerFieldMapping.Path { get; set; }
+		PropertyPath IAnalyzerFieldMapping.Path { get; set; }
 
 		public AnalyzerFieldMappingDescriptor<T> Index(bool indexed = true)
 		{

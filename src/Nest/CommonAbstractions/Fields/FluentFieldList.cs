@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 
 namespace Nest
 {
-	public class FluentFieldList<T> : List<PropertyPathMarker> where T : class
+	public class FluentFieldList<T> : List<PropertyPath> where T : class
 	{
 		public FluentFieldList<T> Add(Expression<Func<T, object>> k)
 		{

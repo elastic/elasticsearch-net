@@ -30,7 +30,7 @@ namespace Nest
 		private IGeoShapeEnvelopeQuery Self => this;
 		string IQuery.Name { get; set; }
 		bool IQuery.Conditionless => GeoShapeEnvelopeQuery.IsConditionless(this);
-		PropertyPathMarker IFieldNameQuery.Field { get; set; }
+		PropertyPath IFieldNameQuery.Field { get; set; }
 		IEnvelopeGeoShape IGeoShapeEnvelopeQuery.Shape { get; set; }
 
 		public GeoShapeEnvelopeQueryDescriptor<T> Name(string name)

@@ -40,7 +40,7 @@ namespace Nest
 		string IRegexpQuery.Value { get; set; }
 		string IRegexpQuery.Flags { get; set; }
 		int? IRegexpQuery.MaximumDeterminizedStates { get; set; }
-		PropertyPathMarker IFieldNameQuery.Field { get; set; }
+		PropertyPath IFieldNameQuery.Field { get; set; }
 		double? IRegexpQuery.Boost { get; set; }
 
 		public RegexpQueryDescriptor<T> Name(string name)

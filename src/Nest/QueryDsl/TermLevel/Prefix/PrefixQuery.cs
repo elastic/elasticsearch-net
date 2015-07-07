@@ -26,7 +26,7 @@ namespace Nest
 	{
 		private IPrefixQuery Self => this;
 
-		PropertyPathMarker IFieldNameQuery.Field { get; set; }
+		PropertyPath IFieldNameQuery.Field { get; set; }
 		RewriteMultiTerm? IPrefixQuery.Rewrite { get; set; }
 
 		public PrefixQueryDescriptor<T> Rewrite(RewriteMultiTerm rewrite)

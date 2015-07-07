@@ -17,7 +17,7 @@ namespace Nest
 	public class CategorySuggestContext : ICategorySuggestContext
 	{
 		public string Type { get { return "category"; } }
-		public PropertyPathMarker Path { get; set; }
+		public PropertyPath Path { get; set; }
 		public IEnumerable<string> Default { get; set; }
 	}
 

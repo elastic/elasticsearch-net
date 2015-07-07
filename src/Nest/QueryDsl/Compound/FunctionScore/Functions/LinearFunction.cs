@@ -11,14 +11,14 @@ namespace Nest
 	{
 		[JsonProperty(PropertyName = "linear")]
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		internal IDictionary<PropertyPathMarker, FunctionScoreDecayFieldDescriptor> _LinearDescriptor { get; set; }
+		internal IDictionary<PropertyPath, FunctionScoreDecayFieldDescriptor> _LinearDescriptor { get; set; }
 
 		public LinearFunction(
 			Expression<Func<T, object>> objectPath, 
 			Func<FunctionScoreDecayFieldDescriptor, FunctionScoreDecayFieldDescriptor> functionScoreDecaySelector
 			)
 		{
-			this._LinearDescriptor = new Dictionary<PropertyPathMarker, FunctionScoreDecayFieldDescriptor>
+			this._LinearDescriptor = new Dictionary<PropertyPath, FunctionScoreDecayFieldDescriptor>
 			{
 				[objectPath] = functionScoreDecaySelector?.Invoke(new FunctionScoreDecayFieldDescriptor())
 			};
@@ -29,7 +29,7 @@ namespace Nest
 			Func<FunctionScoreDecayFieldDescriptor, FunctionScoreDecayFieldDescriptor> functionScoreDecaySelector
 			)
 		{
-			this._LinearDescriptor = new Dictionary<PropertyPathMarker, FunctionScoreDecayFieldDescriptor>
+			this._LinearDescriptor = new Dictionary<PropertyPath, FunctionScoreDecayFieldDescriptor>
 			{
 				[field] = functionScoreDecaySelector?.Invoke(new FunctionScoreDecayFieldDescriptor())
 			};

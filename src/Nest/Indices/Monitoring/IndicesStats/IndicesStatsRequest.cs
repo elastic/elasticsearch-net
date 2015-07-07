@@ -9,7 +9,7 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IIndicesStatsRequest : IIndicesOptionalPath<IndicesStatsRequestParameters>
 	{
-		IEnumerable<TypeNameMarker> Types { get; set; }
+		IEnumerable<TypeName> Types { get; set; }
 		IEnumerable<IndicesStatsMetric> Metrics { get; set; }
 
 	}
@@ -33,7 +33,7 @@ namespace Nest
 	public partial class IndicesStatsRequest : IndicesOptionalPathBase<IndicesStatsRequestParameters>, IIndicesStatsRequest
 	{
 		public IEnumerable<IndicesStatsMetric> Metrics { get; set; }
-		public IEnumerable<TypeNameMarker> Types { get; set; }
+		public IEnumerable<TypeName> Types { get; set; }
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<IndicesStatsRequestParameters> pathInfo)
 		{
@@ -47,11 +47,11 @@ namespace Nest
 	{
 		private IIndicesStatsRequest Self => this;
 
-		IEnumerable<TypeNameMarker> IIndicesStatsRequest.Types { get; set; }
+		IEnumerable<TypeName> IIndicesStatsRequest.Types { get; set; }
 		IEnumerable<IndicesStatsMetric> IIndicesStatsRequest.Metrics { get; set; }
 
 		//<summary>A comma-separated list of fields for `completion` metric (supports wildcards)</summary>
-		public IndicesStatsDescriptor Types(params TypeNameMarker[] types)
+		public IndicesStatsDescriptor Types(params TypeName[] types)
 		{
 			Self.Types = types;
 			return this;

@@ -8,7 +8,7 @@ namespace Nest
 	public interface IIndicesOptionalExplicitAllPath<TParameters> : IRequest<TParameters>
 		where TParameters : IRequestParameters, new()
 	{
-		IEnumerable<IndexNameMarker> Indices { get; set; }
+		IEnumerable<IndexName> Indices { get; set; }
 		bool? AllIndices { get; set; }
 	}
 
@@ -22,7 +22,7 @@ namespace Nest
 		{	
 			var inferrer = new ElasticInferrer(settings);
 			if (!path.AllIndices.HasValue && path.Indices == null)
-				path.Indices = new[] {(IndexNameMarker)inferrer.DefaultIndex};
+				path.Indices = new[] {(IndexName)inferrer.DefaultIndex};
 
 			string index = "_all";
 			if (!path.AllIndices.GetValueOrDefault(false))
@@ -37,7 +37,7 @@ namespace Nest
 	public abstract class IndicesOptionalExplicitAllPathBase<TParameters> : BasePathRequest<TParameters>, IIndicesOptionalExplicitAllPath<TParameters>
 		where TParameters : IRequestParameters, new()
 	{
-		public IEnumerable<IndexNameMarker> Indices { get; set; }
+		public IEnumerable<IndexName> Indices { get; set; }
 		public bool? AllIndices { get; set; }
 		
 		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
@@ -60,7 +60,7 @@ namespace Nest
 	{
 		private IIndicesOptionalExplicitAllPath<TParameters> Self => this;
 
-		IEnumerable<IndexNameMarker> IIndicesOptionalExplicitAllPath<TParameters>.Indices { get; set; }
+		IEnumerable<IndexName> IIndicesOptionalExplicitAllPath<TParameters>.Indices { get; set; }
 		
 		bool? IIndicesOptionalExplicitAllPath<TParameters>.AllIndices { get; set; }
 
@@ -82,13 +82,13 @@ namespace Nest
 			
 		public TDescriptor Indices(params string[] indices)
 		{
-			Self.Indices = indices.Select(s=>(IndexNameMarker)s);
+			Self.Indices = indices.Select(s=>(IndexName)s);
 			return (TDescriptor)this;
 		}
 
 		public TDescriptor Indices(params Type[] indicesTypes)
 		{
-			Self.Indices = indicesTypes.Select(s=>(IndexNameMarker)s);
+			Self.Indices = indicesTypes.Select(s=>(IndexName)s);
 			return (TDescriptor)this;
 		}
 

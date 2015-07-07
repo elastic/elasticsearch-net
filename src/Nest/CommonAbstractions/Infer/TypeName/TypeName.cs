@@ -4,35 +4,35 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(TypeNameMarkerConverter))]
-	public class TypeNameMarker : IEquatable<TypeNameMarker>
+	[JsonConverter(typeof(TypeNameConverter))]
+	public class TypeName : IEquatable<TypeName>
 	{
 		public string Name { get; set; }
 		public Type Type { get; set; }
 
-		public static TypeNameMarker Create(Type type)
+		public static TypeName Create(Type type)
 		{
 			return GetTypeNameForType(type);
 		}
 
-		public static TypeNameMarker Create<T>() where T : class
+		public static TypeName Create<T>() where T : class
 		{
 			return GetTypeNameForType(typeof(T));
 		}
 
-		private static TypeNameMarker GetTypeNameForType(Type type)
+		private static TypeName GetTypeNameForType(Type type)
 		{
-			return new TypeNameMarker { Type = type };
+			return new TypeName { Type = type };
 		}
 
-		public static implicit operator TypeNameMarker(string typeName)
+		public static implicit operator TypeName(string typeName)
 		{
-			return typeName == null ? null : new TypeNameMarker { Name = typeName };
+			return typeName == null ? null : new TypeName { Name = typeName };
 		}
 
-		public static implicit operator TypeNameMarker(Type type)
+		public static implicit operator TypeName(Type type)
 		{
-			return type == null ? null : new TypeNameMarker { Type = type };
+			return type == null ? null : new TypeName { Type = type };
 		}
 
 		public override int GetHashCode()
@@ -42,7 +42,7 @@ namespace Nest
 			return this.Type != null ? this.Type.GetHashCode() : 0;
 		}
 
-		bool IEquatable<TypeNameMarker>.Equals(TypeNameMarker other)
+		bool IEquatable<TypeName>.Equals(TypeName other)
 		{
 			return Equals(other);
 		}
@@ -51,13 +51,13 @@ namespace Nest
 		{
 			var s = obj as string;
 			if (!s.IsNullOrEmpty()) return this.EqualsString(s);
-			var pp = obj as TypeNameMarker;
+			var pp = obj as TypeName;
 			if (pp != null) return this.EqualsMarker(pp);
 
 			return base.Equals(obj);
 		}
 
-		public bool EqualsMarker(TypeNameMarker other)
+		public bool EqualsMarker(TypeName other)
 		{
 			if (!this.Name.IsNullOrEmpty() && other != null && !other.Name.IsNullOrEmpty())
 				return EqualsString(other.Name);

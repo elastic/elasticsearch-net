@@ -24,7 +24,7 @@ namespace Nest.Resolvers.Converters
 		}
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-			var marker = value as PropertyPathMarker;
+			var marker = value as PropertyPath;
 			if (marker == null)
 			{
 				writer.WriteNull();
@@ -56,7 +56,7 @@ namespace Nest.Resolvers.Converters
 		}
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-			var marker = value as PropertyNameMarker;
+			var marker = value as PropertyName;
 			if (marker == null)
 			{
 				writer.WriteNull();

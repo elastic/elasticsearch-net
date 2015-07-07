@@ -447,8 +447,8 @@
     <Compile Include="CommonAbstractions\SerializationBehavior\CustomJson\ICustomJson.cs" />
     <Compile Include="CommonAbstractions\Fields\FluentFieldList.cs" />
     <Compile Include="CommonAbstractions\Infer\Property.cs" />
-    <Compile Include="CommonAbstractions\Infer\PrropertyName\PropertyNameMarker.cs" />
-    <Compile Include="CommonAbstractions\Infer\PropertyPath\PropertyPathMarker.cs" />
+    <Compile Include="CommonAbstractions\Infer\PrropertyName\PropertyName.cs" />
+    <Compile Include="CommonAbstractions\Infer\PropertyPath\PropertyPath.cs" />
     <Compile Include="Modules\SnapshotAndRestore\Snapshot\Snapshot.cs" />
     <Compile Include="Modules\SnapshotAndRestore\Restore\SnapshotRestore.cs" />
     <Compile Include="Cluster\ClusterSettings\ClusterPutSettings\ClusterPutSettingsResponse.cs" />
@@ -937,11 +937,11 @@
     <Compile Include="CommonAbstractions\SerializationBehavior\Resolvers\Converters\PropertyPathMarkerConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\Resolvers\Converters\DynamicMappingOptionConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\Resolvers\Converters\DictionaryKeysAreNotPropertyNamesJsonConverter.cs" />
-    <Compile Include="CommonAbstractions\SerializationBehavior\Resolvers\Converters\IndexNameMarkerConverter.cs" />
+    <Compile Include="CommonAbstractions\SerializationBehavior\Resolvers\Converters\IndexNameConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\Resolvers\Converters\TermsIncludeExcludeConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\Resolvers\Converters\TokenFilterCollectionConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\Resolvers\Converters\TokenizerCollectionConverter.cs" />
-    <Compile Include="CommonAbstractions\SerializationBehavior\Resolvers\Converters\TypeNameMarkerConverter.cs" />
+    <Compile Include="CommonAbstractions\SerializationBehavior\Resolvers\Converters\TypeNameConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\Resolvers\Converters\GeoPrecisionConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\Resolvers\Converters\UpgradeStatusResponseConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\Resolvers\Converters\WarmerMappingConverter.cs" />
@@ -972,9 +972,9 @@
     <Compile Include="Cluster\ClusterStats\ElasticClient-ClusterStats.cs" />
     <Compile Include="Cluster\PendingClusterTasks\ElasticClient-ClusterPendingTasks.cs" />
     <Compile Include="CommonAbstractions\Infer\ExpressionVisitor.cs" />
-    <Compile Include="CommonAbstractions\Infer\IndexName\IndexNameMarker.cs" />
+    <Compile Include="CommonAbstractions\Infer\IndexName\IndexName.cs" />
     <Compile Include="CommonAbstractions\Request\Paths\PathInfoHttpMethod.cs" />
-    <Compile Include="CommonAbstractions\Infer\IndexName\IndexNameMarkerExtensions.cs" />
+    <Compile Include="CommonAbstractions\Infer\IndexName\IndexNameExtensions.cs" />
     <Compile Include="CommonAbstractions\Infer\IndexName\IndexNameResolver.cs" />
     <Compile Include="CommonAbstractions\Infer\Id\IdResolver.cs" />
     <Compile Include="CommonAbstractions\ConnectionSettings\Inflector.cs" />
@@ -988,8 +988,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CommonAbstractions\Infer\PrropertyName\PropertyNameResolver.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\SettingsContractResolver.cs" />
-    <Compile Include="CommonAbstractions\Infer\TypeName\TypeNameMarker.cs" />
-    <Compile Include="CommonAbstractions\Infer\TypeName\TypeNameMarkerExtensions.cs" />
+    <Compile Include="CommonAbstractions\Infer\TypeName\TypeName.cs" />
+    <Compile Include="CommonAbstractions\Infer\TypeName\TypeNameExtensions.cs" />
     <Compile Include="CommonAbstractions\Infer\TypeName\TypeNameResolver.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\Resolvers\Writers\TypeMappingWriter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\Resolvers\Writers\WritePropertiesFromAttributeVisitor.cs" />

@@ -12,7 +12,7 @@ namespace Nest
 	public interface IHasParentQuery : IQuery
 	{
 		[JsonProperty("type")]
-		TypeNameMarker Type { get; set; }
+		TypeName Type { get; set; }
 
 		[JsonProperty("score_type")]
 		[JsonConverter(typeof (StringEnumConverter))]
@@ -31,7 +31,7 @@ namespace Nest
 	public class HasParentQuery : QueryBase, IHasParentQuery
 	{
 		bool IQuery.Conditionless => IsConditionless(this);
-		public TypeNameMarker Type { get; set; }
+		public TypeName Type { get; set; }
 		public ParentScoreType? ScoreType { get; set; }
 		public IQueryContainer Query { get; set; }
 		public IInnerHits InnerHits { get; set; }
@@ -45,14 +45,14 @@ namespace Nest
 		private IHasParentQuery Self { get { return this; }}
 		string IQuery.Name { get; set; }
 		bool IQuery.Conditionless => HasParentQuery.IsConditionless(this);
-		TypeNameMarker IHasParentQuery.Type { get; set; }
+		TypeName IHasParentQuery.Type { get; set; }
 		ParentScoreType? IHasParentQuery.ScoreType { get; set; }
 		IInnerHits IHasParentQuery.InnerHits { get; set; }
 		IQueryContainer IHasParentQuery.Query { get; set; }
 
 		public HasParentQueryDescriptor()
 		{
-			Self.Type = TypeNameMarker.Create<T>();
+			Self.Type = TypeName.Create<T>();
 		}
 
 		public HasParentQueryDescriptor<T> Name(string name)

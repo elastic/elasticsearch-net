@@ -57,10 +57,10 @@ namespace Nest.Resolvers
 			else if (objectType == typeof(MultiGetResponse))
 				contract.Converter = new MultiGetHitConverter();
 
-			else if (objectType == typeof(PropertyNameMarker))
+			else if (objectType == typeof(PropertyName))
 				contract.Converter = new PropertyNameMarkerConverter(this.ConnectionSettings);
 			
-			else if (objectType == typeof(PropertyPathMarker))
+			else if (objectType == typeof(PropertyPath))
 				contract.Converter = new PropertyPathMarkerConverter(this.ConnectionSettings);
 
 			else if (objectType == typeof(SuggestResponse))

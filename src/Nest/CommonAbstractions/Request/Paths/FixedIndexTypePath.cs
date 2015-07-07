@@ -8,8 +8,8 @@ namespace Nest
 	public interface IFixedIndexTypePath<TParameters> : IRequest<TParameters>
 		where TParameters : IRequestParameters, new()
 	{
-		IndexNameMarker Index { get; set; }
-		TypeNameMarker Type { get; set; }
+		IndexName Index { get; set; }
+		TypeName Type { get; set; }
 	}
 
 	internal static class FixedIndexTypePathRouteParameters
@@ -33,8 +33,8 @@ namespace Nest
 	public abstract class FixedIndexTypePathBase<TParameters> : BasePathRequest<TParameters>, IFixedIndexTypePath<TParameters>
 		where TParameters : IRequestParameters, new()
 	{
-		public IndexNameMarker Index { get; set; }
-		public TypeNameMarker Type { get; set; }
+		public IndexName Index { get; set; }
+		public TypeName Type { get; set; }
 		
 		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
 		{	
@@ -58,8 +58,8 @@ namespace Nest
 	{
 		private IFixedIndexTypePath<TParameters> Self => this;
 
-		IndexNameMarker IFixedIndexTypePath<TParameters>.Index { get; set; }
-		TypeNameMarker IFixedIndexTypePath<TParameters>.Type { get; set; }
+		IndexName IFixedIndexTypePath<TParameters>.Index { get; set; }
+		TypeName IFixedIndexTypePath<TParameters>.Type { get; set; }
 
 		public TDescriptor FixedPath(string index, string type = null)
 		{

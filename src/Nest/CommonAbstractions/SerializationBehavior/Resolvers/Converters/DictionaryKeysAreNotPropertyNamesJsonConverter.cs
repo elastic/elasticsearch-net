@@ -34,10 +34,10 @@ namespace Nest
 				if (entry.Value == null && serializer.NullValueHandling == NullValueHandling.Ignore)
 					continue;
 				string key;
-				var pp = entry.Key as PropertyPathMarker;
-				var pn = entry.Key as PropertyNameMarker;
-				var im = entry.Key as IndexNameMarker;
-				var tm = entry.Key as TypeNameMarker;
+				var pp = entry.Key as PropertyPath;
+				var pn = entry.Key as PropertyName;
+				var im = entry.Key as IndexName;
+				var tm = entry.Key as TypeName;
 				if (contract == null)
 					key = Convert.ToString(entry.Key, CultureInfo.InvariantCulture);
 				else if (pp != null)

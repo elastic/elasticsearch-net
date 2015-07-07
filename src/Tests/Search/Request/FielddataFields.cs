@@ -30,7 +30,7 @@ namespace Tests.Search.Request
 			protected override SearchRequest<Project> Initializer => 
 				new SearchRequest<Project>
 				{
-					FielddataFields = new PropertyPathMarker[] { "name", "leadDeveloper", "startedOn" }
+					FielddataFields = new PropertyPath[] { "name", "leadDeveloper", "startedOn" }
 				};
 		}
 	}

@@ -32,9 +32,9 @@ namespace Nest
     {
 		public ValidateQueryRequest() {}
 
-	    public ValidateQueryRequest(IndexNameMarker index, TypeNameMarker type = null) : base(index, type) { }
+	    public ValidateQueryRequest(IndexName index, TypeName type = null) : base(index, type) { }
 
-	    public ValidateQueryRequest(IEnumerable<IndexNameMarker> indices, IEnumerable<TypeNameMarker> types = null) : base(indices, types) { }
+	    public ValidateQueryRequest(IEnumerable<IndexName> indices, IEnumerable<TypeName> types = null) : base(indices, types) { }
 
 	    public IQueryContainer Query { get; set; }
 
@@ -50,9 +50,9 @@ namespace Nest
 
 		public ValidateQueryRequest() {}
 
-	    public ValidateQueryRequest(IndexNameMarker index, TypeNameMarker type = null) : base(index, type) { }
+	    public ValidateQueryRequest(IndexName index, TypeName type = null) : base(index, type) { }
 
-	    public ValidateQueryRequest(IEnumerable<IndexNameMarker> indices, IEnumerable<TypeNameMarker> types = null) : base(indices, types) { }
+	    public ValidateQueryRequest(IEnumerable<IndexName> indices, IEnumerable<TypeName> types = null) : base(indices, types) { }
 
 	    public IQueryContainer Query { get; set; }
 

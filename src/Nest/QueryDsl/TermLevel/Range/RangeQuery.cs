@@ -72,7 +72,7 @@ namespace Nest
 		bool? IRangeQuery.Cache { get; set; }
 		string IRangeQuery.TimeZone { get; set; }
 		string IRangeQuery.Format { get; set; }
-		PropertyPathMarker IFieldNameQuery.Field { get; set; }
+		PropertyPath IFieldNameQuery.Field { get; set; }
 
 		public RangeQueryDescriptor<T> Name(string name)
 		{

@@ -65,7 +65,7 @@ namespace Nest
 			return nJson == nOtherJson;
 		}
 
-		internal static bool IsNullOrEmpty(this TypeNameMarker value)
+		internal static bool IsNullOrEmpty(this TypeName value)
 		{
 			return value == null || value.GetHashCode() == 0;
 		}

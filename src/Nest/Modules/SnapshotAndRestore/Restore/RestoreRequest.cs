@@ -10,7 +10,7 @@ namespace Nest
 	public interface IRestoreRequest : IRepositorySnapshotPath<RestoreRequestParameters>
 	{
 		[JsonProperty("indices")]
-		IEnumerable<IndexNameMarker> Indices { get; set; }
+		IEnumerable<IndexName> Indices { get; set; }
 		[JsonProperty("ignore_unavailable")]
 		bool? IgnoreUnavailable { get; set; }
 		[JsonProperty("include_global_state")]
@@ -37,7 +37,7 @@ namespace Nest
 	{
 		public RestoreRequest(string repository, string snapshot) : base(repository, snapshot) { }
 
-		public IEnumerable<IndexNameMarker> Indices { get; set; }
+		public IEnumerable<IndexName> Indices { get; set; }
 		
 		public bool? IgnoreUnavailable { get; set; }
 		
@@ -61,7 +61,7 @@ namespace Nest
 	{
 		private IRestoreRequest Self => this;
 
-		IEnumerable<IndexNameMarker> IRestoreRequest.Indices { get; set; }
+		IEnumerable<IndexName> IRestoreRequest.Indices { get; set; }
 		bool? IRestoreRequest.IgnoreUnavailable { get; set; }
 		bool? IRestoreRequest.IncludeGlobalState { get; set; }
 		string IRestoreRequest.RenamePattern { get; set; }
@@ -81,13 +81,13 @@ namespace Nest
 			
 		public RestoreDescriptor Indices(params string[] indices)
 		{
-			Self.Indices = indices.Select(s=>(IndexNameMarker)s);
+			Self.Indices = indices.Select(s=>(IndexName)s);
 			return this;
 		}
 
 		public RestoreDescriptor Indices(params Type[] indicesTypes)
 		{
-			Self.Indices = indicesTypes.Select(s=>(IndexNameMarker)s);
+			Self.Indices = indicesTypes.Select(s=>(IndexName)s);
 			return this;
 		}
 		public RestoreDescriptor IgnoreUnavailable(bool ignoreUnavailable = true)

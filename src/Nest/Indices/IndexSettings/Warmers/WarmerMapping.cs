@@ -12,7 +12,7 @@ namespace Nest
 
 		public string Name { get; internal set; }
 
-		public IEnumerable<TypeNameMarker> Types { get; internal set; }
+		public IEnumerable<TypeName> Types { get; internal set; }
 
 		public ISearchRequest Source { get; internal set; }
 

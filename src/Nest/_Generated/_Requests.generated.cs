@@ -383,9 +383,9 @@ namespace Nest
 		
 		
 		///<summary>A comma-separated list of fields to return in the output</summary>
-		public IList<PropertyPathMarker> Fields 
+		public IList<PropertyPath> Fields 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("fields"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPath>>("fields"); } 
 			set { this.Request.RequestParameters.AddQueryString("fields", value); }
 		}
 		
@@ -2187,9 +2187,9 @@ namespace Nest
 		
 		
 		///<summary>A comma-separated list of fields to return in the response</summary>
-		public IList<PropertyPathMarker> Fields 
+		public IList<PropertyPath> Fields 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("fields"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPath>>("fields"); } 
 			set { this.Request.RequestParameters.AddQueryString("fields", value); }
 		}
 		
@@ -2251,17 +2251,17 @@ namespace Nest
 		
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public IList<PropertyPathMarker> SourceExclude 
+		public IList<PropertyPath> SourceExclude 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("_source_exclude"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPath>>("_source_exclude"); } 
 			set { this.Request.RequestParameters.AddQueryString("_source_exclude", value); }
 		}
 		
 		
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public IList<PropertyPathMarker> SourceInclude 
+		public IList<PropertyPath> SourceInclude 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("_source_include"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPath>>("_source_include"); } 
 			set { this.Request.RequestParameters.AddQueryString("_source_include", value); }
 		}
 		
@@ -2293,9 +2293,9 @@ namespace Nest
 			{
 		
 		///<summary>A comma-separated list of fields for to get field statistics for (min value, max value, and more)</summary>
-		public IList<PropertyPathMarker> Fields 
+		public IList<PropertyPath> Fields 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("fields"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPath>>("fields"); } 
 			set { this.Request.RequestParameters.AddQueryString("fields", value); }
 		}
 		
@@ -2359,9 +2359,9 @@ namespace Nest
 			{
 		
 		///<summary>A comma-separated list of fields to return in the response</summary>
-		public IList<PropertyPathMarker> Fields 
+		public IList<PropertyPath> Fields 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("fields"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPath>>("fields"); } 
 			set { this.Request.RequestParameters.AddQueryString("fields", value); }
 		}
 		
@@ -2415,17 +2415,17 @@ namespace Nest
 		
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public IList<PropertyPathMarker> SourceExclude 
+		public IList<PropertyPath> SourceExclude 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("_source_exclude"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPath>>("_source_exclude"); } 
 			set { this.Request.RequestParameters.AddQueryString("_source_exclude", value); }
 		}
 		
 		
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public IList<PropertyPathMarker> SourceInclude 
+		public IList<PropertyPath> SourceInclude 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("_source_include"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPath>>("_source_include"); } 
 			set { this.Request.RequestParameters.AddQueryString("_source_include", value); }
 		}
 		
@@ -2563,17 +2563,17 @@ namespace Nest
 		
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public IList<PropertyPathMarker> SourceExclude 
+		public IList<PropertyPath> SourceExclude 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("_source_exclude"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPath>>("_source_exclude"); } 
 			set { this.Request.RequestParameters.AddQueryString("_source_exclude", value); }
 		}
 		
 		
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public IList<PropertyPathMarker> SourceInclude 
+		public IList<PropertyPath> SourceInclude 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("_source_include"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPath>>("_source_include"); } 
 			set { this.Request.RequestParameters.AddQueryString("_source_include", value); }
 		}
 		
@@ -2793,9 +2793,9 @@ namespace Nest
 		
 		
 		///<summary>Use the analyzer configured for this field (instead of passing the analyzer name)</summary>
-		public PropertyPathMarker Field 
+		public PropertyPath Field 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<PropertyPathMarker>("field"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<PropertyPath>("field"); } 
 			set { this.Request.RequestParameters.AddQueryString("field", value); }
 		}
 		
@@ -2883,9 +2883,9 @@ namespace Nest
 		
 		
 		///<summary>A comma-separated list of fields to clear when using the `field_data` parameter (default: all)</summary>
-		public IList<PropertyPathMarker> Fields 
+		public IList<PropertyPath> Fields 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("fields"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPath>>("fields"); } 
 			set { this.Request.RequestParameters.AddQueryString("fields", value); }
 		}
 		
@@ -4681,25 +4681,25 @@ namespace Nest
 			{
 		
 		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
-		public IList<PropertyPathMarker> CompletionFields 
+		public IList<PropertyPath> CompletionFields 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("completion_fields"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPath>>("completion_fields"); } 
 			set { this.Request.RequestParameters.AddQueryString("completion_fields", value); }
 		}
 		
 		
 		///<summary>A comma-separated list of fields for `fielddata` index metric (supports wildcards)</summary>
-		public IList<PropertyPathMarker> FielddataFields 
+		public IList<PropertyPath> FielddataFields 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("fielddata_fields"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPath>>("fielddata_fields"); } 
 			set { this.Request.RequestParameters.AddQueryString("fielddata_fields", value); }
 		}
 		
 		
 		///<summary>A comma-separated list of fields for `fielddata` and `completion` index metric (supports wildcards)</summary>
-		public IList<PropertyPathMarker> Fields 
+		public IList<PropertyPath> Fields 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("fields"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPath>>("fields"); } 
 			set { this.Request.RequestParameters.AddQueryString("fields", value); }
 		}
 		
@@ -5133,9 +5133,9 @@ namespace Nest
 			{
 		
 		///<summary>A comma-separated list of fields to return in the response</summary>
-		public IList<PropertyPathMarker> Fields 
+		public IList<PropertyPath> Fields 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("fields"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPath>>("fields"); } 
 			set { this.Request.RequestParameters.AddQueryString("fields", value); }
 		}
 		
@@ -5173,17 +5173,17 @@ namespace Nest
 		
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public IList<PropertyPathMarker> SourceExclude 
+		public IList<PropertyPath> SourceExclude 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("_source_exclude"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPath>>("_source_exclude"); } 
 			set { this.Request.RequestParameters.AddQueryString("_source_exclude", value); }
 		}
 		
 		
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public IList<PropertyPathMarker> SourceInclude 
+		public IList<PropertyPath> SourceInclude 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("_source_include"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPath>>("_source_include"); } 
 			set { this.Request.RequestParameters.AddQueryString("_source_include", value); }
 		}
 		
@@ -5271,9 +5271,9 @@ namespace Nest
 		
 		
 		///<summary>Specific fields to perform the query against</summary>
-		public IList<PropertyPathMarker> MltFields 
+		public IList<PropertyPath> MltFields 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("mlt_fields"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPath>>("mlt_fields"); } 
 			set { this.Request.RequestParameters.AddQueryString("mlt_fields", value); }
 		}
 		
@@ -5485,9 +5485,9 @@ namespace Nest
 		
 		
 		///<summary>A comma-separated list of fields to return. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public IList<PropertyPathMarker> Fields 
+		public IList<PropertyPath> Fields 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("fields"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPath>>("fields"); } 
 			set { this.Request.RequestParameters.AddQueryString("fields", value); }
 		}
 		
@@ -5725,25 +5725,25 @@ namespace Nest
 			{
 		
 		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
-		public IList<PropertyPathMarker> CompletionFields 
+		public IList<PropertyPath> CompletionFields 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("completion_fields"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPath>>("completion_fields"); } 
 			set { this.Request.RequestParameters.AddQueryString("completion_fields", value); }
 		}
 		
 		
 		///<summary>A comma-separated list of fields for `fielddata` index metric (supports wildcards)</summary>
-		public IList<PropertyPathMarker> FielddataFields 
+		public IList<PropertyPath> FielddataFields 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("fielddata_fields"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPath>>("fielddata_fields"); } 
 			set { this.Request.RequestParameters.AddQueryString("fielddata_fields", value); }
 		}
 		
 		
 		///<summary>A comma-separated list of fields for `fielddata` and `completion` index metric (supports wildcards)</summary>
-		public IList<PropertyPathMarker> Fields 
+		public IList<PropertyPath> Fields 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("fields"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPath>>("fields"); } 
 			set { this.Request.RequestParameters.AddQueryString("fields", value); }
 		}
 		
@@ -6143,9 +6143,9 @@ namespace Nest
 		
 		
 		///<summary>Specify which field to use for suggestions</summary>
-		public PropertyPathMarker SuggestField 
+		public PropertyPath SuggestField 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<PropertyPathMarker>("suggest_field"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<PropertyPath>("suggest_field"); } 
 			set { this.Request.RequestParameters.AddQueryString("suggest_field", value); }
 		}
 		
@@ -6931,9 +6931,9 @@ namespace Nest
 		
 		
 		///<summary>A comma-separated list of fields to return.</summary>
-		public IList<PropertyPathMarker> Fields 
+		public IList<PropertyPath> Fields 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("fields"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPath>>("fields"); } 
 			set { this.Request.RequestParameters.AddQueryString("fields", value); }
 		}
 		
@@ -7599,9 +7599,9 @@ namespace Nest
 		
 		
 		///<summary>A comma-separated list of fields to return in the response</summary>
-		public IList<PropertyPathMarker> Fields 
+		public IList<PropertyPath> Fields 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("fields"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPath>>("fields"); } 
 			set { this.Request.RequestParameters.AddQueryString("fields", value); }
 		}
 		
@@ -7663,17 +7663,17 @@ namespace Nest
 		
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public IList<PropertyPathMarker> SourceExclude 
+		public IList<PropertyPath> SourceExclude 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("_source_exclude"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPath>>("_source_exclude"); } 
 			set { this.Request.RequestParameters.AddQueryString("_source_exclude", value); }
 		}
 		
 		
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public IList<PropertyPathMarker> SourceInclude 
+		public IList<PropertyPath> SourceInclude 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("_source_include"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPath>>("_source_include"); } 
 			set { this.Request.RequestParameters.AddQueryString("_source_include", value); }
 		}
 		
@@ -7705,9 +7705,9 @@ namespace Nest
 			{
 		
 		///<summary>A comma-separated list of fields to return in the response</summary>
-		public IList<PropertyPathMarker> Fields 
+		public IList<PropertyPath> Fields 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("fields"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPath>>("fields"); } 
 			set { this.Request.RequestParameters.AddQueryString("fields", value); }
 		}
 		
@@ -7761,17 +7761,17 @@ namespace Nest
 		
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public IList<PropertyPathMarker> SourceExclude 
+		public IList<PropertyPath> SourceExclude 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("_source_exclude"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPath>>("_source_exclude"); } 
 			set { this.Request.RequestParameters.AddQueryString("_source_exclude", value); }
 		}
 		
 		
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public IList<PropertyPathMarker> SourceInclude 
+		public IList<PropertyPath> SourceInclude 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("_source_include"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPath>>("_source_include"); } 
 			set { this.Request.RequestParameters.AddQueryString("_source_include", value); }
 		}
 		
@@ -7867,17 +7867,17 @@ namespace Nest
 		
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public IList<PropertyPathMarker> SourceExclude 
+		public IList<PropertyPath> SourceExclude 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("_source_exclude"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPath>>("_source_exclude"); } 
 			set { this.Request.RequestParameters.AddQueryString("_source_exclude", value); }
 		}
 		
 		
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public IList<PropertyPathMarker> SourceInclude 
+		public IList<PropertyPath> SourceInclude 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("_source_include"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPath>>("_source_include"); } 
 			set { this.Request.RequestParameters.AddQueryString("_source_include", value); }
 		}
 		
@@ -8343,9 +8343,9 @@ namespace Nest
 		
 		
 		///<summary>Specific fields to perform the query against</summary>
-		public IList<PropertyPathMarker> MltFields 
+		public IList<PropertyPath> MltFields 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("mlt_fields"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPath>>("mlt_fields"); } 
 			set { this.Request.RequestParameters.AddQueryString("mlt_fields", value); }
 		}
 		
@@ -8569,9 +8569,9 @@ namespace Nest
 		
 		
 		///<summary>Specify which field to use for suggestions</summary>
-		public PropertyPathMarker SuggestField 
+		public PropertyPath SuggestField 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<PropertyPathMarker>("suggest_field"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<PropertyPath>("suggest_field"); } 
 			set { this.Request.RequestParameters.AddQueryString("suggest_field", value); }
 		}
 		
@@ -8929,9 +8929,9 @@ namespace Nest
 		
 		
 		///<summary>A comma-separated list of fields to return.</summary>
-		public IList<PropertyPathMarker> Fields 
+		public IList<PropertyPath> Fields 
 		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPathMarker>>("fields"); } 
+			get { return this.Request.RequestParameters.GetQueryStringValue<IList<PropertyPath>>("fields"); } 
 			set { this.Request.RequestParameters.AddQueryString("fields", value); }
 		}
 		

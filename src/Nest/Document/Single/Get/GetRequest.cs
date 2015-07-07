@@ -20,7 +20,7 @@ namespace Nest
 	
 	public partial class GetRequest : DocumentPathBase<GetRequestParameters>, IGetRequest 
 	{
-		public GetRequest(IndexNameMarker indexName, TypeNameMarker typeName, string id) : base(indexName, typeName, id) { }
+		public GetRequest(IndexName indexName, TypeName typeName, string id) : base(indexName, typeName, id) { }
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<GetRequestParameters> pathInfo)
 		{

@@ -10,11 +10,11 @@ namespace Nest
 	public interface IIndicesOptionalTypesOptionalFieldsPath<TParameters> : IRequest<TParameters>
 		where TParameters : IRequestParameters, new()
 	{
-		IEnumerable<IndexNameMarker> Indices { get; set; }
+		IEnumerable<IndexName> Indices { get; set; }
 
-		IEnumerable<TypeNameMarker> Types { get; set; }
+		IEnumerable<TypeName> Types { get; set; }
 
-		IEnumerable<PropertyPathMarker> Fields { get; set; }
+		IEnumerable<PropertyPath> Fields { get; set; }
 	}
 
 	public interface IIndicesOptionalTypesOptionalFieldsPath<TParameters, T> : IIndicesOptionalTypesOptionalFieldsPath<TParameters> 
@@ -64,13 +64,13 @@ namespace Nest
 		where TParameters : IRequestParameters, new()
 	{
 		
-		public IEnumerable<IndexNameMarker> Indices { get; set; }
-		public IEnumerable<TypeNameMarker> Types { get; set; }
-		public IEnumerable<PropertyPathMarker> Fields { get; set; }
+		public IEnumerable<IndexName> Indices { get; set; }
+		public IEnumerable<TypeName> Types { get; set; }
+		public IEnumerable<PropertyPath> Fields { get; set; }
 			
-		protected IndicesOptionalTypesOptionalFieldsPathBase(params PropertyPathMarker[] fields)
+		protected IndicesOptionalTypesOptionalFieldsPathBase(params PropertyPath[] fields)
 		{
-			this.Fields = fields.Select(f=>(PropertyPathMarker)f);
+			this.Fields = fields.Select(f=>(PropertyPath)f);
 		}
 
 		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
@@ -84,19 +84,19 @@ namespace Nest
 		where T : class
 	{
 		
-		public IEnumerable<IndexNameMarker> Indices { get; set; }
-		public IEnumerable<TypeNameMarker> Types { get; set; }
-		public IEnumerable<PropertyPathMarker> Fields { get; set; }
+		public IEnumerable<IndexName> Indices { get; set; }
+		public IEnumerable<TypeName> Types { get; set; }
+		public IEnumerable<PropertyPath> Fields { get; set; }
 		public bool AllIndices { get; set; }
 
-		protected IndicesOptionalTypesOptionalFieldsPathBase(params PropertyPathMarker[] fields)
+		protected IndicesOptionalTypesOptionalFieldsPathBase(params PropertyPath[] fields)
 		{
-			this.Fields = fields.Select(f=>(PropertyPathMarker)f);
+			this.Fields = fields.Select(f=>(PropertyPath)f);
 		}
 
 		protected IndicesOptionalTypesOptionalFieldsPathBase(params Expression<Func<T, object>>[] fields)
 		{
-			this.Fields = fields.Select(f=>(PropertyPathMarker)f);
+			this.Fields = fields.Select(f=>(PropertyPath)f);
 		}
 
 		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
@@ -121,9 +121,9 @@ namespace Nest
 	{
 		private IIndicesOptionalTypesOptionalFieldsPath<TParameters, T> Self => this;
 
-		IEnumerable<IndexNameMarker> IIndicesOptionalTypesOptionalFieldsPath<TParameters>.Indices { get; set; }
-		IEnumerable<TypeNameMarker> IIndicesOptionalTypesOptionalFieldsPath<TParameters>.Types { get; set; }
-		IEnumerable<PropertyPathMarker> IIndicesOptionalTypesOptionalFieldsPath<TParameters>.Fields { get; set; }
+		IEnumerable<IndexName> IIndicesOptionalTypesOptionalFieldsPath<TParameters>.Indices { get; set; }
+		IEnumerable<TypeName> IIndicesOptionalTypesOptionalFieldsPath<TParameters>.Types { get; set; }
+		IEnumerable<PropertyPath> IIndicesOptionalTypesOptionalFieldsPath<TParameters>.Fields { get; set; }
 		bool IIndicesOptionalTypesOptionalFieldsPath<TParameters, T>.AllIndices { get; set; }
 
 		/// <summary>
@@ -141,7 +141,7 @@ namespace Nest
 		public TDescriptor Indices(params string[] indices)
 		{
 			indices = indices ?? new string[]{};
-			Self.Indices = indices.Select(s=>(IndexNameMarker)s);
+			Self.Indices = indices.Select(s=>(IndexName)s);
 			return (TDescriptor) this;
 		}
 
@@ -152,7 +152,7 @@ namespace Nest
 		public TDescriptor Indices(params Type[] indices)
 		{
 			indices = indices ?? new Type[] {};
-			Self.Indices = indices.Select(s=>(IndexNameMarker)s);
+			Self.Indices = indices.Select(s=>(IndexName)s);
 			return (TDescriptor) this;
 		}
 		
@@ -183,7 +183,7 @@ namespace Nest
 		public TDescriptor Types(params string[] types)
 		{
 			types = types ?? new string[]{};
-			Self.Types = types.Select(t=>(TypeNameMarker)t);
+			Self.Types = types.Select(t=>(TypeName)t);
 			return (TDescriptor)this;
 		}
 		
@@ -193,7 +193,7 @@ namespace Nest
 		public TDescriptor Types(params Type[] types)
 		{
 			types = types ?? new Type[]{};
-			Self.Types = types.Select(t=>(TypeNameMarker)t);
+			Self.Types = types.Select(t=>(TypeName)t);
 			return (TDescriptor)this;
 		}
 
@@ -210,14 +210,14 @@ namespace Nest
 		/// </summary>
 		public TDescriptor Fields(params Expression<Func<T, object>>[] fields)
 		{
-			Self.Fields = fields.Select(f=>(PropertyPathMarker)f);
+			Self.Fields = fields.Select(f=>(PropertyPath)f);
 			return (TDescriptor)this;
 		}
 
 		/// <summary>
 		/// Specify the fields to operate on
 		/// </summary>
-		public TDescriptor Fields(params PropertyPathMarker[] fields)
+		public TDescriptor Fields(params PropertyPath[] fields)
 		{
 			Self.Fields = fields;
 			return (TDescriptor)this;

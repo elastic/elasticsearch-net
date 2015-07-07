@@ -6,6 +6,6 @@ namespace Nest
     public class ParentFieldMapping : ISpecialField
     {
         [JsonProperty("type")]
-		public TypeNameMarker Type { get; set; }
+		public TypeName Type { get; set; }
     }
 }

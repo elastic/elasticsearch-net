@@ -12,7 +12,7 @@ namespace Nest
 	public interface IHasChildQuery : IQuery
 	{
 		[JsonProperty("type")]
-		TypeNameMarker Type { get; set; }
+		TypeName Type { get; set; }
 
 		[JsonProperty("score_type")]
 		[JsonConverter(typeof (StringEnumConverter))]
@@ -36,7 +36,7 @@ namespace Nest
 	public class HasChildQuery : QueryBase, IHasChildQuery
 	{
 		bool IQuery.Conditionless => IsConditionless(this);
-		public TypeNameMarker Type { get; set; }
+		public TypeName Type { get; set; }
 		public ChildScoreType? ScoreType { get; set; }
 		public int? MinChildren { get; set; }
 		public int? MaxChildren { get; set; }
@@ -52,7 +52,7 @@ namespace Nest
 		private IHasChildQuery Self => this;
 		string IQuery.Name { get; set; }
 		bool IQuery.Conditionless => HasChildQuery.IsConditionless(this);
-		TypeNameMarker IHasChildQuery.Type { get; set; }
+		TypeName IHasChildQuery.Type { get; set; }
 		ChildScoreType? IHasChildQuery.ScoreType { get; set; }
 		int? IHasChildQuery.MinChildren { get; set; }
 		int? IHasChildQuery.MaxChildren { get; set; }
@@ -61,7 +61,7 @@ namespace Nest
 
 		public HasChildQueryDescriptor()
 		{
-			Self.Type = TypeNameMarker.Create<T>();
+			Self.Type = TypeName.Create<T>();
 		}
 
 		public HasChildQueryDescriptor<T> Name(string name)

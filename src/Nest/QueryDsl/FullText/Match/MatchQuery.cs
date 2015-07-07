@@ -101,7 +101,7 @@ namespace Nest
 		double? IMatchQuery.Boost { get; set; }
 		bool? IMatchQuery.Lenient { get; set; }
 		Operator? IMatchQuery.Operator { get; set; }
-		PropertyPathMarker IFieldNameQuery.Field { get; set; }
+		PropertyPath IFieldNameQuery.Field { get; set; }
 
 		public MatchQueryDescriptor<T> Name(string name)
 		{

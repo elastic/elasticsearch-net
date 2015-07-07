@@ -12,7 +12,7 @@ namespace Nest
 	public interface IDateRangeAggregator : IBucketAggregator
 	{
 		[JsonProperty("field")]
-		PropertyPathMarker Field { get; set; }
+		PropertyPath Field { get; set; }
 
 		[JsonProperty("format")]
 		string Format { get; set; }
@@ -23,7 +23,7 @@ namespace Nest
 
 	public class DateRangeAggregator : BucketAggregator, IDateRangeAggregator
 	{
-		public PropertyPathMarker Field { get; set; }
+		public PropertyPath Field { get; set; }
 		public string Format { get; set; }
 		public IEnumerable<DateExpressionRange> Ranges { get; set; }
 	}
@@ -33,7 +33,7 @@ namespace Nest
 			, IDateRangeAggregator 
 		where T : class
 	{
-		PropertyPathMarker IDateRangeAggregator.Field { get; set; }
+		PropertyPath IDateRangeAggregator.Field { get; set; }
 		
 		string IDateRangeAggregator.Format { get; set; }
 

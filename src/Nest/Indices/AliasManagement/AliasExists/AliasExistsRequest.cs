@@ -20,7 +20,7 @@ namespace Nest
 	public partial class AliasExistsRequest : IndexOptionalNamePathBase<AliasExistsRequestParameters>, IAliasExistsRequest
 	{
 		public AliasExistsRequest(string name) : base(name) { }
-		public AliasExistsRequest(IndexNameMarker index, string name) : base(index, name) { }
+		public AliasExistsRequest(IndexName index, string name) : base(index, name) { }
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<AliasExistsRequestParameters> pathInfo)
 		{

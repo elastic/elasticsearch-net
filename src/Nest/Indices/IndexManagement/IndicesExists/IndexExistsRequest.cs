@@ -19,7 +19,7 @@ namespace Nest
 	
 	public partial class IndexExistsRequest : IndexPathBase<IndexExistsRequestParameters>, IIndexExistsRequest
 	{
-		public IndexExistsRequest(IndexNameMarker index) : base(index) { }
+		public IndexExistsRequest(IndexName index) : base(index) { }
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<IndexExistsRequestParameters> pathInfo)
 		{

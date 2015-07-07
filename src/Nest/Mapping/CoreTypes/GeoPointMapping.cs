@@ -8,10 +8,10 @@ namespace Nest
 	[JsonObject(MemberSerialization.OptIn)]
 	public class GeoPointMapping : IElasticType
 	{
-		public PropertyNameMarker Name { get; set; }
+		public PropertyName Name { get; set; }
 
 		[JsonProperty("type")]
-		public virtual TypeNameMarker Type { get { return new TypeNameMarker { Name = "geo_point" }; } }
+		public virtual TypeName Type { get { return new TypeName { Name = "geo_point" }; } }
 
 		[JsonProperty("similarity")]
 		public string Similarity { get; set; }

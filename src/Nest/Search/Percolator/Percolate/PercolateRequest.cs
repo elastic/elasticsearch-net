@@ -40,7 +40,7 @@ namespace Nest
 		public int? Size { get; set; }
 		public bool? TrackScores { get; set; }
 		public TDocument Document { get; set; }
-		public IDictionary<PropertyPathMarker, ISort> Sort { get; set; }
+		public IDictionary<PropertyPath, ISort> Sort { get; set; }
 
 		public PercolateRequest(TDocument document)
 		{
@@ -77,7 +77,7 @@ namespace Nest
 		T IPercolateRequest<T>.Document { get; set; }
 
 
-		IDictionary<PropertyPathMarker, ISort> IPercolateOperation.Sort { get; set; }
+		IDictionary<PropertyPath, ISort> IPercolateOperation.Sort { get; set; }
 		IDictionary<string, IAggregationContainer> IPercolateOperation.Aggregations { get; set; }
 		
 		IRequestParameters IPercolateOperation.GetRequestParameters()
@@ -155,7 +155,7 @@ namespace Nest
 		/// </summary>
 		public PercolateDescriptor<T> SortAscending(Expression<Func<T, object>> objectPath)
 		{
-			if (Self.Sort == null) Self.Sort = new Dictionary<PropertyPathMarker, ISort>();
+			if (Self.Sort == null) Self.Sort = new Dictionary<PropertyPath, ISort>();
 
 			Self.Sort.Add(objectPath, new Sort() { Order = SortOrder.Ascending });
 			return this;
@@ -171,7 +171,7 @@ namespace Nest
 		/// </summary>
 		public PercolateDescriptor<T> SortDescending(Expression<Func<T, object>> objectPath)
 		{
-			if (Self.Sort == null) Self.Sort = new Dictionary<PropertyPathMarker, ISort>();
+			if (Self.Sort == null) Self.Sort = new Dictionary<PropertyPath, ISort>();
 
 			Self.Sort.Add(objectPath, new Sort() { Order = SortOrder.Descending });
 			return this;
@@ -187,7 +187,7 @@ namespace Nest
 		/// </summary>
 		public PercolateDescriptor<T> SortAscending(string field)
 		{
-			if (Self.Sort == null) Self.Sort = new Dictionary<PropertyPathMarker, ISort>();
+			if (Self.Sort == null) Self.Sort = new Dictionary<PropertyPath, ISort>();
 			Self.Sort.Add(field, new Sort() { Order = SortOrder.Ascending });
 			return this;
 		}
@@ -203,7 +203,7 @@ namespace Nest
 		public PercolateDescriptor<T> SortDescending(string field)
 		{
 			if (Self.Sort == null)
-				Self.Sort = new Dictionary<PropertyPathMarker, ISort>();
+				Self.Sort = new Dictionary<PropertyPath, ISort>();
 
 			Self.Sort.Add(field, new Sort() { Order = SortOrder.Descending });
 			return this;
@@ -216,7 +216,7 @@ namespace Nest
 		public PercolateDescriptor<T> Sort(Func<SortFieldDescriptor<T>, IFieldSort> sortSelector)
 		{
 			if (Self.Sort == null)
-				Self.Sort = new Dictionary<PropertyPathMarker, ISort>();
+				Self.Sort = new Dictionary<PropertyPath, ISort>();
 
 			sortSelector.ThrowIfNull("sortSelector");
 			var descriptor = sortSelector(new SortFieldDescriptor<T>());
@@ -231,7 +231,7 @@ namespace Nest
 		public PercolateDescriptor<T> SortGeoDistance(Func<SortGeoDistanceDescriptor<T>, IGeoDistanceSort> sortSelector)
 		{
 			if (Self.Sort == null)
-				Self.Sort = new Dictionary<PropertyPathMarker, ISort>();
+				Self.Sort = new Dictionary<PropertyPath, ISort>();
 
 			sortSelector.ThrowIfNull("sortSelector");
 			var descriptor = sortSelector(new SortGeoDistanceDescriptor<T>());
@@ -246,7 +246,7 @@ namespace Nest
 		public PercolateDescriptor<T> SortScript(Func<SortScriptDescriptor<T>, IScriptSort> sortSelector)
 		{
 			if (Self.Sort == null)
-				Self.Sort = new Dictionary<PropertyPathMarker, ISort>();
+				Self.Sort = new Dictionary<PropertyPath, ISort>();
 
 			sortSelector.ThrowIfNull("sortSelector");
 			var descriptor = sortSelector(new SortScriptDescriptor<T>());

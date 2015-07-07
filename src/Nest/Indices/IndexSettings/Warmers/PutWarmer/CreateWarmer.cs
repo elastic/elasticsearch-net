@@ -6,7 +6,7 @@ namespace Nest
 {
 	public class CreateWarmerDescriptor
 	{
-		internal IEnumerable<TypeNameMarker> _Types { get; set; }
+		internal IEnumerable<TypeName> _Types { get; set; }
 		internal string _WarmerName { get; set; }
 
 		internal ISearchRequest _SearchDescriptor { get; set; }
@@ -33,7 +33,7 @@ namespace Nest
 
 		public CreateWarmerDescriptor Types(IEnumerable<string> types)
 		{
-			this._Types = types.Select(s => (TypeNameMarker)s);
+			this._Types = types.Select(s => (TypeName)s);
 			return this;
 		}
 
@@ -44,7 +44,7 @@ namespace Nest
 
 		public CreateWarmerDescriptor Types(IEnumerable<Type> types)
 		{
-			this._Types = types.Select(t => (TypeNameMarker)t);
+			this._Types = types.Select(t => (TypeName)t);
 			return this;
 		}
 

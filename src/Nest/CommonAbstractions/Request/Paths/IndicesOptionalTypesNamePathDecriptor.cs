@@ -10,9 +10,9 @@ namespace Nest
 	{
 		bool? AllIndices { get; set; }
 
-		IEnumerable<IndexNameMarker> Indices { get; set; }
+		IEnumerable<IndexName> Indices { get; set; }
 
-		IEnumerable<TypeNameMarker> Types { get; set; }
+		IEnumerable<TypeName> Types { get; set; }
 
 		string Name { get; set; }
 	}
@@ -27,7 +27,7 @@ namespace Nest
 		{	
 			var inferrer = new ElasticInferrer(settings);
 			if (!path.AllIndices.HasValue && path.Indices == null)
-				path.Indices = new[] {(IndexNameMarker)inferrer.DefaultIndex};
+				path.Indices = new[] {(IndexName)inferrer.DefaultIndex};
 			if (path.Name.IsNullOrEmpty())
 				throw new DslException("missing Repository()");
 
@@ -53,8 +53,8 @@ namespace Nest
 	{
 		
 		public bool? AllIndices { get; set; }
-		public IEnumerable<IndexNameMarker> Indices { get; set; }
-		public IEnumerable<TypeNameMarker> Types { get; set; }
+		public IEnumerable<IndexName> Indices { get; set; }
+		public IEnumerable<TypeName> Types { get; set; }
 		public string Name { get; set; }
 
 		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
@@ -78,8 +78,8 @@ namespace Nest
 		private IIndicesOptionalTypesNamePath<TParameters> Self => this;
 
 		bool? IIndicesOptionalTypesNamePath<TParameters>.AllIndices { get; set; }
-		IEnumerable<IndexNameMarker> IIndicesOptionalTypesNamePath<TParameters>.Indices { get; set; }
-		IEnumerable<TypeNameMarker> IIndicesOptionalTypesNamePath<TParameters>.Types { get; set; }
+		IEnumerable<IndexName> IIndicesOptionalTypesNamePath<TParameters>.Indices { get; set; }
+		IEnumerable<TypeName> IIndicesOptionalTypesNamePath<TParameters>.Types { get; set; }
 		string IIndicesOptionalTypesNamePath<TParameters>.Name { get; set; }
 
 		public TDescriptor AllIndices(bool allIndices = true)
@@ -93,7 +93,7 @@ namespace Nest
 		public TDescriptor Indices(params string[] indices)
 		{
 			indices = indices ?? new string[]{};
-			Self.Indices = indices.Select(s=>(IndexNameMarker)s);
+			Self.Indices = indices.Select(s=>(IndexName)s);
 			return (TDescriptor) this;
 		}
 
@@ -104,7 +104,7 @@ namespace Nest
 		public TDescriptor Indices(params Type[] indices)
 		{
 			indices = indices ?? new Type[] {};
-			Self.Indices = indices.Select(s=>(IndexNameMarker)s);
+			Self.Indices = indices.Select(s=>(IndexName)s);
 			return (TDescriptor) this;
 		}
 		
@@ -135,7 +135,7 @@ namespace Nest
 		public TDescriptor Types(params string[] types)
 		{
 			types = types ?? new string[]{};
-			Self.Types = types.Select(t=>(TypeNameMarker)t);
+			Self.Types = types.Select(t=>(TypeName)t);
 			return (TDescriptor)this;
 		}
 		
@@ -145,7 +145,7 @@ namespace Nest
 		public TDescriptor Types(params Type[] types)
 		{
 			types = types ?? new Type[]{};
-			Self.Types = types.Select(t=>(TypeNameMarker)t);
+			Self.Types = types.Select(t=>(TypeName)t);
 			return (TDescriptor)this;
 		}
 

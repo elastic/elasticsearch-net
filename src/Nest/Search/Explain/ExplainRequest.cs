@@ -29,7 +29,7 @@ namespace Nest
 
     public partial class ExplainRequest : DocumentPathBase<ExplainRequestParameters>, IExplainRequest
     {
-	    public ExplainRequest(IndexNameMarker indexName, TypeNameMarker typeName, string id) : base(indexName, typeName, id) { }
+	    public ExplainRequest(IndexName indexName, TypeName typeName, string id) : base(indexName, typeName, id) { }
 
 	    public IQueryContainer Query { get; set; }
 

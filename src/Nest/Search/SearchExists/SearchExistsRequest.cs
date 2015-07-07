@@ -38,11 +38,11 @@ namespace Nest
 
 		protected SearchExistsRequest() : base() { }
 
-		protected SearchExistsRequest(IndexNameMarker index, TypeNameMarker type = null)
+		protected SearchExistsRequest(IndexName index, TypeName type = null)
 			: base(index, type) { }
 
 
-		protected SearchExistsRequest(IEnumerable<IndexNameMarker> indices, IEnumerable<TypeNameMarker> types = null)
+		protected SearchExistsRequest(IEnumerable<IndexName> indices, IEnumerable<TypeName> types = null)
 			: base(indices, types) { }
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SearchExistsRequestParameters> pathInfo)
@@ -61,10 +61,10 @@ namespace Nest
 
 		protected SearchExistsRequest() : base() { }
 
-		protected SearchExistsRequest(IndexNameMarker index, TypeNameMarker type = null)
+		protected SearchExistsRequest(IndexName index, TypeName type = null)
 			: base(index, type) { }
 
-		protected SearchExistsRequest(IEnumerable<IndexNameMarker> indices, IEnumerable<TypeNameMarker> types = null)
+		protected SearchExistsRequest(IEnumerable<IndexName> indices, IEnumerable<TypeName> types = null)
 			: base(indices, types) { }
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SearchExistsRequestParameters> pathInfo)

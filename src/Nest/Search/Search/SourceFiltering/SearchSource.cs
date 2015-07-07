@@ -9,19 +9,19 @@ namespace Nest
 	public interface ISourceFilter
 	{
 		[JsonProperty("include")]
-		IEnumerable<PropertyPathMarker> Include { get; set; }
+		IEnumerable<PropertyPath> Include { get; set; }
 
 		[JsonProperty("exclude")]
-		IEnumerable<PropertyPathMarker> Exclude { get; set; }
+		IEnumerable<PropertyPath> Exclude { get; set; }
 	}
 
 	public class SourceFilter : ISourceFilter
 	{
-		public static SourceFilter ExcludeAll { get; } = new SourceFilter { Exclude = new PropertyPathMarker[] {"*"} };
-		public static SourceFilter IncludeAll { get; } = new SourceFilter { Include = new PropertyPathMarker[] {"*"} };
+		public static SourceFilter ExcludeAll { get; } = new SourceFilter { Exclude = new PropertyPath[] {"*"} };
+		public static SourceFilter IncludeAll { get; } = new SourceFilter { Include = new PropertyPath[] {"*"} };
 
-		public IEnumerable<PropertyPathMarker> Include { get; set; }
-		public IEnumerable<PropertyPathMarker> Exclude { get; set; }
+		public IEnumerable<PropertyPath> Include { get; set; }
+		public IEnumerable<PropertyPath> Exclude { get; set; }
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -30,19 +30,19 @@ namespace Nest
 		private ISourceFilter Self => this;
 
 		[JsonProperty("include")]
-		IEnumerable<PropertyPathMarker> ISourceFilter.Include { get; set; } 
+		IEnumerable<PropertyPath> ISourceFilter.Include { get; set; } 
 
 		[JsonProperty("exclude")]
-		IEnumerable<PropertyPathMarker> ISourceFilter.Exclude { get; set; } 
+		IEnumerable<PropertyPath> ISourceFilter.Exclude { get; set; } 
 
 		public SearchSourceDescriptor<T> Include(params string[] fields)
 		{
-			Self.Include = fields.Select(f => (PropertyPathMarker) f).ToList();
+			Self.Include = fields.Select(f => (PropertyPath) f).ToList();
 			return this;
 		} 
 		public SearchSourceDescriptor<T> Include(params Expression<Func<T, object>>[] fields)
 		{
-			Self.Include = fields.Select(f => (PropertyPathMarker) f).ToList();
+			Self.Include = fields.Select(f => (PropertyPath) f).ToList();
 			return this;
 		} 
 		public SearchSourceDescriptor<T> Include(Func<FluentFieldList<T>, FluentFieldList<T>>  fields)
@@ -52,12 +52,12 @@ namespace Nest
 		}
 		public SearchSourceDescriptor<T> Exclude(params string[] fields)
 		{
-			Self.Exclude = fields.Select(f => (PropertyPathMarker) f).ToList();
+			Self.Exclude = fields.Select(f => (PropertyPath) f).ToList();
 			return this;
 		} 
 		public SearchSourceDescriptor<T> Exclude(params Expression<Func<T, object>>[] fields)
 		{
-			Self.Exclude = fields.Select(f => (PropertyPathMarker) f).ToList();
+			Self.Exclude = fields.Select(f => (PropertyPath) f).ToList();
 			return this;
 		} 
 		public SearchSourceDescriptor<T> Exclude(Func<FluentFieldList<T>, FluentFieldList<T>>  fields)

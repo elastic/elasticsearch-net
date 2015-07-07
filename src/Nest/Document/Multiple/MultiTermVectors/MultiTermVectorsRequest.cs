@@ -24,7 +24,7 @@ namespace Nest
 	
 	public partial class MultiTermVectorsRequest : IndexTypePathBase<MultiTermVectorsRequestParameters>, IMultiTermVectorsRequest
 	{
-		public MultiTermVectorsRequest(IndexNameMarker index, TypeNameMarker typeNameMarker) : base(index, typeNameMarker)
+		public MultiTermVectorsRequest(IndexName index, TypeName typeNameMarker) : base(index, typeNameMarker)
 		{
 		}
 

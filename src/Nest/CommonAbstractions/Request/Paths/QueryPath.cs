@@ -8,8 +8,8 @@ namespace Nest
 	public interface IQueryPath<TParameters> : IRequest<TParameters>
 		where TParameters : IRequestParameters, new()
 	{
-		IEnumerable<IndexNameMarker> Indices { get; set; }
-		IEnumerable<TypeNameMarker> Types { get; set; }
+		IEnumerable<IndexName> Indices { get; set; }
+		IEnumerable<TypeName> Types { get; set; }
 		bool? AllIndices { get; set; }
 		bool? AllTypes { get; set; }
 	}
@@ -81,7 +81,7 @@ namespace Nest
 			this.AllTypes = true;
 		}
 
-		protected QueryPathBase(IndexNameMarker index, TypeNameMarker type = null)
+		protected QueryPathBase(IndexName index, TypeName type = null)
 		{
 			this.Indices = new [] { index };
 			if (type != null)
@@ -89,7 +89,7 @@ namespace Nest
 			else this.AllTypes = true;
 		}
 
-		protected QueryPathBase(IEnumerable<IndexNameMarker> indices, IEnumerable<TypeNameMarker> types = null)
+		protected QueryPathBase(IEnumerable<IndexName> indices, IEnumerable<TypeName> types = null)
 		{
 			this.Indices = indices;
 			this.AllTypes = !types.HasAny();
@@ -102,8 +102,8 @@ namespace Nest
 			QueryPathRouteParameters.SetRouteParameters<TParameters>(this, settings, pathInfo);
 		}
 
-		public IEnumerable<IndexNameMarker> Indices { get; set; }
-		public IEnumerable<TypeNameMarker> Types { get; set; }
+		public IEnumerable<IndexName> Indices { get; set; }
+		public IEnumerable<TypeName> Types { get; set; }
 		public bool? AllIndices { get; set; }
 		public bool? AllTypes { get; set; }
 	}
@@ -119,14 +119,14 @@ namespace Nest
 			this.AllTypes = false;
 		}
 		
-		protected QueryPathBase(IndexNameMarker index, TypeNameMarker type = null)
+		protected QueryPathBase(IndexName index, TypeName type = null)
 		{
 			this.Indices = new [] { index };
 			if (type != null)
 				this.Types = new[] { type };
 		}
 
-		protected QueryPathBase(IEnumerable<IndexNameMarker> indices, IEnumerable<TypeNameMarker> types = null)
+		protected QueryPathBase(IEnumerable<IndexName> indices, IEnumerable<TypeName> types = null)
 		{
 			this.Indices = indices;
 			this.Types = types;
@@ -155,8 +155,8 @@ namespace Nest
 	{
 		private IQueryPath<TParameters> Self => this;
 
-		IEnumerable<IndexNameMarker> IQueryPath<TParameters>.Indices { get; set; }
-		IEnumerable<TypeNameMarker> IQueryPath<TParameters>.Types { get; set; }
+		IEnumerable<IndexName> IQueryPath<TParameters>.Indices { get; set; }
+		IEnumerable<TypeName> IQueryPath<TParameters>.Types { get; set; }
 		bool? IQueryPath<TParameters>.AllIndices { get; set; }
 		bool? IQueryPath<TParameters>.AllTypes { get; set; }
 
@@ -166,14 +166,14 @@ namespace Nest
 		public TDescriptor Indices(params Type[] indices)
 		{
 			if (indices == null) return (TDescriptor)this;
-			Self.Indices = indices.Select(s => (IndexNameMarker)s);
+			Self.Indices = indices.Select(s => (IndexName)s);
 			return (TDescriptor)this;
 		}
 
 		/// <summary>
 		/// The indices to execute the search on. Defaults to the default index
 		/// </summary>
-		public TDescriptor Indices(params IndexNameMarker[] indices)
+		public TDescriptor Indices(params IndexName[] indices)
 		{
 			if (indices == null) return (TDescriptor)this;
 			Self.Indices = indices;
@@ -186,7 +186,7 @@ namespace Nest
 		public TDescriptor Indices(params string[] indices)
 		{
 			if (indices == null) return (TDescriptor)this;
-			Self.Indices = indices.Select(s => (IndexNameMarker)s);
+			Self.Indices = indices.Select(s => (IndexName)s);
 			return (TDescriptor)this;
 		}
 
@@ -196,7 +196,7 @@ namespace Nest
 		public TDescriptor Indices(IEnumerable<Type> indices)
 		{
 			if (indices == null) return (TDescriptor)this;
-			Self.Indices = indices.Select(s => (IndexNameMarker)s);
+			Self.Indices = indices.Select(s => (IndexName)s);
 			return (TDescriptor)this;
 		}
 
@@ -206,7 +206,7 @@ namespace Nest
 		public TDescriptor Indices(IEnumerable<string> indices)
 		{
 			if (indices == null) return (TDescriptor)this;
-			Self.Indices = indices.Select(s => (IndexNameMarker)s);
+			Self.Indices = indices.Select(s => (IndexName)s);
 			return (TDescriptor)this;
 		}
 
@@ -230,7 +230,7 @@ namespace Nest
 		/// <summary>
 		/// The index to execute the search on. Defaults to the default index
 		/// </summary>
-		public TDescriptor Index(IndexNameMarker index)
+		public TDescriptor Index(IndexName index)
 		{
 			if (index == null) return (TDescriptor)this;
 			return this.Indices(index);
@@ -252,7 +252,7 @@ namespace Nest
 		public TDescriptor Types(IEnumerable<string> types)
 		{
 			if (types == null) return (TDescriptor)this;
-			Self.Types = types.Select(s => (TypeNameMarker)s); ;
+			Self.Types = types.Select(s => (TypeName)s); ;
 			return (TDescriptor)this;
 		}
 
@@ -273,7 +273,7 @@ namespace Nest
 		public TDescriptor Types(IEnumerable<Type> types)
 		{
 			if (types == null) return (TDescriptor)this;
-			Self.Types = types.Select(t => (TypeNameMarker)t);
+			Self.Types = types.Select(t => (TypeName)t);
 			return (TDescriptor)this;
 		}
 
@@ -281,7 +281,7 @@ namespace Nest
 		/// The types to execute the search on. Defaults to the inferred typename of T 
 		/// unless T is dynamic then a type (or AllTypes()) MUST be specified.
 		/// </summary>
-		public TDescriptor Types(params TypeNameMarker[] types)
+		public TDescriptor Types(params TypeName[] types)
 		{
 			if (types == null) return (TDescriptor)this;
 			Self.Types = types;
@@ -302,7 +302,7 @@ namespace Nest
 		/// The type to execute the search on. Defaults to the inferred typename of T 
 		/// unless T is dynamic then a type (or AllTypes()) MUST be specified.
 		/// </summary>
-		public TDescriptor Type(TypeNameMarker type)
+		public TDescriptor Type(TypeName type)
 		{
 			if (type == null) return (TDescriptor)this;
 			return this.Types(type);

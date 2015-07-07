@@ -63,7 +63,7 @@ namespace Nest
 		public int? PositionOffsetGap { get; set; }
 
 		[JsonProperty("copy_to")]
-		public IEnumerable<PropertyPathMarker> CopyTo { get; set; }
+		public IEnumerable<PropertyPath> CopyTo { get; set; }
 
 		[JsonProperty("fielddata")]
 		public FieldDataStringMapping FieldData { get; set; }
@@ -185,13 +185,13 @@ namespace Nest
 
 		public StringMappingDescriptor<T> CopyTo(params string[] fields)
 		{
-			this._Mapping.CopyTo = fields.Select(f => (PropertyPathMarker)f);
+			this._Mapping.CopyTo = fields.Select(f => (PropertyPath)f);
 			return this;
 		}
 
 		public StringMappingDescriptor<T> CopyTo(params Expression<Func<T, object>>[] objectPaths)
 		{
-			this._Mapping.CopyTo = objectPaths.Select(e => (PropertyPathMarker)e);
+			this._Mapping.CopyTo = objectPaths.Select(e => (PropertyPath)e);
 			return this;
 		}
 
@@ -210,7 +210,7 @@ namespace Nest
 				var value = p.Value as IElasticCoreType;
 				if (value == null)
 					continue;
-				if (_Mapping.Fields == null) _Mapping.Fields = new Dictionary<PropertyNameMarker, IElasticCoreType>();
+				if (_Mapping.Fields == null) _Mapping.Fields = new Dictionary<PropertyName, IElasticCoreType>();
 				_Mapping.Fields[p.Key] = value;
 			}
 			return this;

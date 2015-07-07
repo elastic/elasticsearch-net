@@ -56,7 +56,7 @@ namespace Nest
 		private IGeoDistanceRangeQuery Self => this;
 		string IQuery.Name { get; set; }
 		bool IQuery.Conditionless => GeoDistanceRangeQuery.IsConditionless(this);
-		PropertyPathMarker IFieldNameQuery.Field { get; set; }
+		PropertyPath IFieldNameQuery.Field { get; set; }
 		string IGeoDistanceRangeQuery.Location { get; set; }
 		object IGeoDistanceRangeQuery.From { get; set; }
 		object IGeoDistanceRangeQuery.To { get; set; }

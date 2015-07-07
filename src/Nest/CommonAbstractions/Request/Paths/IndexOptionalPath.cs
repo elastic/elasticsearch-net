@@ -8,7 +8,7 @@ namespace Nest
 	public interface IIndexOptionalPath<TParameters> : IRequest<TParameters>
 		where TParameters : IRequestParameters, new()
 	{
-		IndexNameMarker Index { get; set; }
+		IndexName Index { get; set; }
 		bool? AllIndices { get; set; }
 	}
 
@@ -36,7 +36,7 @@ namespace Nest
 	public abstract class IndexOptionalPathBase<TParameters> : BasePathRequest<TParameters>, IIndexOptionalPath<TParameters>
 		where TParameters : IRequestParameters, new()
 	{
-		public IndexNameMarker Index { get; set; }
+		public IndexName Index { get; set; }
 		public bool? AllIndices { get; set; }
 		
 		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
@@ -60,7 +60,7 @@ namespace Nest
 	{
 		private IIndexOptionalPath<TParameters> Self { get { return this;  } }
 
-		IndexNameMarker IIndexOptionalPath<TParameters>.Index { get; set; }
+		IndexName IIndexOptionalPath<TParameters>.Index { get; set; }
 		
 		bool? IIndexOptionalPath<TParameters>.AllIndices { get; set; }
 

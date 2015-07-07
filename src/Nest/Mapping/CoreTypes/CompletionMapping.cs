@@ -9,10 +9,10 @@ namespace Nest
 	[JsonObject(MemberSerialization.OptIn)]
 	public class CompletionMapping : IElasticType
 	{
-		public PropertyNameMarker Name { get; set; }
+		public PropertyName Name { get; set; }
 
 		[JsonProperty("type")]
-		public virtual TypeNameMarker Type { get { return new TypeNameMarker { Name = "completion" }; } }
+		public virtual TypeName Type { get { return new TypeName { Name = "completion" }; } }
 
 		[JsonProperty("similarity")]
 		public string Similarity { get; set; }

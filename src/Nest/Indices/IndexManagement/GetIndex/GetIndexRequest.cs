@@ -49,12 +49,12 @@ namespace Nest
 			this.AllIndices = true;
 		}
 
-		public GetIndexRequest(IndexNameMarker index) : this()
+		public GetIndexRequest(IndexName index) : this()
 		{
 			this.Indices = new[] {index};
 		}
 
-		public GetIndexRequest(IEnumerable<IndexNameMarker> indices) : this()
+		public GetIndexRequest(IEnumerable<IndexName> indices) : this()
 		{
 			this.Indices = indices;
 		}

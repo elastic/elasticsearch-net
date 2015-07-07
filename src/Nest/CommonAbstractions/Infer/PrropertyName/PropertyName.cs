@@ -8,7 +8,7 @@ namespace Nest
 	/// <summary>
 	/// Represents a typed container for property names i.e "property" in "field.nested.property";
 	/// </summary>
-	public class PropertyNameMarker : IEquatable<PropertyNameMarker>
+	public class PropertyName : IEquatable<PropertyName>
 	{
 		public string Name { get; set; }
 		public Expression Expression { get; set; }
@@ -17,34 +17,34 @@ namespace Nest
 
 		public double? Boost { get; set; }
 
-		public static PropertyNameMarker Create(string path, double? boost = null)
+		public static PropertyName Create(string path, double? boost = null)
 		{
-			PropertyNameMarker marker = path;
+			PropertyName marker = path;
 			marker.Boost = boost;
 			return marker;
 		}
 
-		public static PropertyNameMarker Create(Expression path, double? boost = null)
+		public static PropertyName Create(Expression path, double? boost = null)
 		{
-			PropertyNameMarker marker = path;
+			PropertyName marker = path;
 			marker.Boost = boost;
 			return marker;
 		}
-		public static implicit operator PropertyNameMarker(string typeName)
+		public static implicit operator PropertyName(string typeName)
 		{
-			return typeName == null ? null : new PropertyNameMarker { Name = typeName };
+			return typeName == null ? null : new PropertyName { Name = typeName };
 		}
 
-		public static implicit operator PropertyNameMarker(Expression type)
+		public static implicit operator PropertyName(Expression type)
 		{
-			return type == null ? null : new PropertyNameMarker { Expression = type };
+			return type == null ? null : new PropertyName { Expression = type };
 		}
-		public static implicit operator PropertyNameMarker(Type type)
+		public static implicit operator PropertyName(Type type)
 		{
-			return type == null ? null : new PropertyNameMarker { Type = type };
+			return type == null ? null : new PropertyName { Type = type };
 		}
 		
-		bool IEquatable<PropertyNameMarker>.Equals(PropertyNameMarker other)
+		bool IEquatable<PropertyName>.Equals(PropertyName other)
 		{
 			return Equals(other);
 		}
@@ -52,7 +52,7 @@ namespace Nest
 		{
 			var s = obj as string;
 			if (!s.IsNullOrEmpty()) return this.EqualsString(s);
-			var pp = obj as PropertyNameMarker;
+			var pp = obj as PropertyName;
 			if (pp != null) return this.EqualsMarker(pp);
 			return base.Equals(obj);
 		}
@@ -63,7 +63,7 @@ namespace Nest
 				return this.Name.GetHashCode();
 			return this.Expression != null ? this.Expression.GetHashCode() : 0;
 		}
-		public bool EqualsMarker(PropertyNameMarker other)
+		public bool EqualsMarker(PropertyName other)
 		{
 			if (!this.Name.IsNullOrEmpty() && other != null && !other.Name.IsNullOrEmpty())
 				return EqualsString(other.Name);
@@ -79,7 +79,7 @@ namespace Nest
 	}
 	public static class PropertyNameMarkerExtensions
 	{
-		internal static bool IsConditionless(this PropertyNameMarker marker)
+		internal static bool IsConditionless(this PropertyName marker)
 		{
 			return marker == null || (marker.Name.IsNullOrEmpty() && marker.Expression == null && marker.Type == null);
 		}

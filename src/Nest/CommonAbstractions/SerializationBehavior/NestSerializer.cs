@@ -47,10 +47,10 @@ namespace Nest
 				return string.Join(",", pns.Select(
 					oo =>
 					{
-						if (oo is PropertyNameMarker)
-							return this._infer.PropertyName(oo as PropertyNameMarker);
-						if (oo is PropertyPathMarker)
-							return this._infer.PropertyPath(oo as PropertyPathMarker);
+						if (oo is PropertyName)
+							return this._infer.PropertyName(oo as PropertyName);
+						if (oo is PropertyPath)
+							return this._infer.PropertyPath(oo as PropertyPath);
 						return oo.ToString();
 					})
 				);
@@ -60,11 +60,11 @@ namespace Nest
 			if (valueType is bool)
 				return ((bool)valueType) ? "true" : "false";
 
-			var pn = valueType as PropertyNameMarker;
+			var pn = valueType as PropertyName;
 			if (pn != null)
 				return this._infer.PropertyName(pn);
 
-			var pp = valueType as PropertyPathMarker;
+			var pp = valueType as PropertyPath;
 			if (pp != null)
 				return this._infer.PropertyPath(pp);
 
@@ -188,8 +188,8 @@ namespace Nest
 		
 		private class PercolateHeader
 		{
-			public IndexNameMarker index { get; set; }
-			public TypeNameMarker type { get; set; }
+			public IndexName index { get; set; }
+			public TypeName type { get; set; }
 			public string id { get; set; }
 			public string percolate_index { get; set; }
 			public string percolate_type { get; set; }

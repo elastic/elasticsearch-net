@@ -28,9 +28,9 @@ namespace Nest
 	{
 		public SearchShardsRequest() {}
 
-		public SearchShardsRequest(IndexNameMarker index, TypeNameMarker type = null) : base(index, type) { }
+		public SearchShardsRequest(IndexName index, TypeName type = null) : base(index, type) { }
 
-		public SearchShardsRequest(IEnumerable<IndexNameMarker> indices, IEnumerable<TypeNameMarker> types = null) : base(indices, types) { }
+		public SearchShardsRequest(IEnumerable<IndexName> indices, IEnumerable<TypeName> types = null) : base(indices, types) { }
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SearchShardsRequestParameters> pathInfo)
 		{
@@ -43,9 +43,9 @@ namespace Nest
 	{
 		public SearchShardsRequest() {}
 
-		public SearchShardsRequest(IndexNameMarker index, TypeNameMarker type = null) : base(index, type) { }
+		public SearchShardsRequest(IndexName index, TypeName type = null) : base(index, type) { }
 
-		public SearchShardsRequest(IEnumerable<IndexNameMarker> indices, IEnumerable<TypeNameMarker> types = null) : base(indices, types) { }
+		public SearchShardsRequest(IEnumerable<IndexName> indices, IEnumerable<TypeName> types = null) : base(indices, types) { }
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SearchShardsRequestParameters> pathInfo)
 		{

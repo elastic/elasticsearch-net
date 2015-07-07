@@ -19,7 +19,7 @@ namespace Nest
 	
 	public partial class TypeExistsRequest : IndexTypePathBase<TypeExistsRequestParameters>, ITypeExistsRequest
 	{
-		public TypeExistsRequest(IndexNameMarker index, TypeNameMarker typeNameMarker) : base(index, typeNameMarker)
+		public TypeExistsRequest(IndexName index, TypeName typeNameMarker) : base(index, typeNameMarker)
 		{
 		}
 

@@ -39,7 +39,7 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "fields")]
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		Dictionary<PropertyPathMarker, IHighlightField> Fields { get; set; }
+		Dictionary<PropertyPath, IHighlightField> Fields { get; set; }
 
 		[JsonProperty("require_field_match")]
 		bool? RequireFieldMatch { get; set; }
@@ -62,7 +62,7 @@ namespace Nest
 		public int? BoundaryMaxSize { get; set; }
 		public string Encoder { get; set; }
 		public string Order { get; set; }
-		public Dictionary<PropertyPathMarker, IHighlightField> Fields { get; set; }
+		public Dictionary<PropertyPath, IHighlightField> Fields { get; set; }
 		public bool? RequireFieldMatch { get; set; }
 		public string BoundaryChars { get; set; }
 		public IQueryContainer HighlightQuery { get; set; }
@@ -93,7 +93,7 @@ namespace Nest
 
 		string IHighlightRequest.Order { get; set; }
 
-		Dictionary<PropertyPathMarker, IHighlightField> IHighlightRequest.Fields { get; set; }
+		Dictionary<PropertyPath, IHighlightField> IHighlightRequest.Fields { get; set; }
 
 		bool? IHighlightRequest.RequireFieldMatch { get; set; }
 

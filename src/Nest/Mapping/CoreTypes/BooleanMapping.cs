@@ -33,7 +33,7 @@ namespace Nest
 		public bool? NullValue { get; set; }
 
 		[JsonProperty("copy_to")]
-		public IEnumerable<PropertyPathMarker> CopyTo { get; set; }
+		public IEnumerable<PropertyPath> CopyTo { get; set; }
 
 		[JsonProperty("doc_values")]
 		public bool? DocValues { get; set; }
@@ -89,13 +89,13 @@ namespace Nest
 
 		public BooleanMappingDescriptor<T> CopyTo(params string[] fields)
 		{
-			this._Mapping.CopyTo = fields.Select(f => (PropertyPathMarker)f);
+			this._Mapping.CopyTo = fields.Select(f => (PropertyPath)f);
 			return this;
 		}
 
 		public BooleanMappingDescriptor<T> CopyTo(params Expression<Func<T, object>>[] objectPaths)
 		{
-			this._Mapping.CopyTo = objectPaths.Select(e => (PropertyPathMarker)e);
+			this._Mapping.CopyTo = objectPaths.Select(e => (PropertyPath)e);
 			return this;
 		}
 

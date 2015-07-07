@@ -22,10 +22,10 @@ namespace Nest.Resolvers.Writers
 		private ElasticInferrer Infer { get; set; }
 
 		private int MaxRecursion { get; set; }
-		private TypeNameMarker TypeName { get; set; }
+		private TypeName TypeName { get; set; }
 		private ConcurrentDictionary<Type, int> SeenTypes { get; set; }
 
-		public TypeMappingWriter(Type t, TypeNameMarker typeName, IConnectionSettingsValues connectionSettings, int maxRecursion)
+		public TypeMappingWriter(Type t, TypeName typeName, IConnectionSettingsValues connectionSettings, int maxRecursion)
 		{
 			this._type = t;
 			this._connectionSettings = connectionSettings;

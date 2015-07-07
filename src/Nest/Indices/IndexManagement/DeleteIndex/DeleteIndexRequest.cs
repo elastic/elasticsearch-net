@@ -20,12 +20,12 @@ namespace Nest
 	public partial class DeleteIndexRequest : IndicesOptionalExplicitAllPathBase<DeleteIndexRequestParameters>, IDeleteIndexRequest
 	{
 
-		public DeleteIndexRequest(IEnumerable<IndexNameMarker> indices)
+		public DeleteIndexRequest(IEnumerable<IndexName> indices)
 		{
 			this.Indices = indices;
 			this.AllIndices = false;
 		}
-		public DeleteIndexRequest(IndexNameMarker index)
+		public DeleteIndexRequest(IndexName index)
 		{
 			this.Indices = new [] { index };
 		}

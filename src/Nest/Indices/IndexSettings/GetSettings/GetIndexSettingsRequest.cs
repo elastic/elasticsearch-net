@@ -19,7 +19,7 @@ namespace Nest
 	
 	public partial class GetIndexSettingsRequest : IndexPathBase<GetIndexSettingsRequestParameters>, IGetIndexSettingsRequest
 	{
-		public GetIndexSettingsRequest(IndexNameMarker index) : base(index) { }
+		public GetIndexSettingsRequest(IndexName index) : base(index) { }
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<GetIndexSettingsRequestParameters> pathInfo)
 		{

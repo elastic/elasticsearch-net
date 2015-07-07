@@ -12,7 +12,7 @@ namespace Nest
 		bool Enabled { get; set; }
 
 		[JsonProperty("path")]
-		PropertyPathMarker Path { get; set; }
+		PropertyPath Path { get; set; }
 
 		[JsonProperty("format")]
 		string Format { get; set; }
@@ -28,7 +28,7 @@ namespace Nest
 	{
 		public bool Enabled { get; set; }
 
-		public PropertyPathMarker Path { get; set; }
+		public PropertyPath Path { get; set; }
 
 		public string Format { get; set; }
 		public string Default { get; set; }
@@ -42,7 +42,7 @@ namespace Nest
 
 		bool ITimestampFieldMapping.Enabled { get; set;}
 
-		PropertyPathMarker ITimestampFieldMapping.Path { get; set;}
+		PropertyPath ITimestampFieldMapping.Path { get; set;}
 
 		string ITimestampFieldMapping.Format { get; set; }
 		string ITimestampFieldMapping.Default { get; set; }

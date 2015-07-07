@@ -12,7 +12,7 @@ namespace Nest
 	public interface IIp4RangeAggregator : IBucketAggregator
 	{
 		[JsonProperty("field")]
-		PropertyPathMarker Field { get; set; }
+		PropertyPath Field { get; set; }
 
 		[JsonProperty(PropertyName = "ranges")]
 		IEnumerable<Ip4ExpressionRange> Ranges { get; set; }
@@ -20,7 +20,7 @@ namespace Nest
 
 	public class Ip4RangeAggregator : BucketAggregator, IIp4RangeAggregator
 	{
-		public PropertyPathMarker Field { get; set; }
+		public PropertyPath Field { get; set; }
 		public IEnumerable<Ip4ExpressionRange> Ranges { get; set; }
 	}
 
@@ -30,7 +30,7 @@ namespace Nest
 		where T : class
 	{
 
-		PropertyPathMarker IIp4RangeAggregator.Field { get; set; }
+		PropertyPath IIp4RangeAggregator.Field { get; set; }
 
 		IEnumerable<Ip4ExpressionRange> IIp4RangeAggregator.Ranges { get; set; }
 

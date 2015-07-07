@@ -28,14 +28,14 @@ namespace Nest
 		/// <summary>
 		/// Does an _optimize on /{index}/_optimize
 		/// </summary>
-		public OptimizeRequest(IndexNameMarker index)
+		public OptimizeRequest(IndexName index)
 		{
 			this.Indices = new[] { index };
 		}
 		/// <summary>
 		/// Does an _optimize on /{indices}/_optimize
 		/// </summary>
-		public OptimizeRequest(IEnumerable<IndexNameMarker> indices)
+		public OptimizeRequest(IEnumerable<IndexName> indices)
 		{
 			this.Indices = indices;
 		}

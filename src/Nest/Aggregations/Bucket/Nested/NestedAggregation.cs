@@ -10,12 +10,12 @@ namespace Nest
 	public interface INestedAggregator : IBucketAggregator
 	{
 		[JsonProperty("path")] 
-		PropertyPathMarker Path { get; set;}
+		PropertyPath Path { get; set;}
 	}
 
 	public class NestedAggregator : BucketAggregator, INestedAggregator
 	{
-		public PropertyPathMarker Path { get; set; }
+		public PropertyPath Path { get; set; }
 	}
 
 	public class NestedAggregatorDescriptor<T> 
@@ -23,7 +23,7 @@ namespace Nest
 			, INestedAggregator 
 		where T : class
 	{
-		PropertyPathMarker INestedAggregator.Path { get; set; }
+		PropertyPath INestedAggregator.Path { get; set; }
 
 		public NestedAggregatorDescriptor<T> Path(string path) => Assign(a => a.Path = path);
 

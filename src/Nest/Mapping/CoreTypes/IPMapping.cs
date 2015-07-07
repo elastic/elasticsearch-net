@@ -9,13 +9,13 @@ namespace Nest
 	[JsonObject(MemberSerialization.OptIn)]
 	public class IPMapping : IElasticType
 	{
-		public PropertyNameMarker Name { get; set; }
+		public PropertyName Name { get; set; }
 
 		[JsonProperty("index_name")]
 		public string IndexName { get; set; }
 
 		[JsonProperty("type")]
-		public virtual TypeNameMarker Type { get { return new TypeNameMarker { Name = "ip" }; } }
+		public virtual TypeName Type { get { return new TypeName { Name = "ip" }; } }
 
 		[JsonProperty("similarity")]
 		public string Similarity { get; set; }

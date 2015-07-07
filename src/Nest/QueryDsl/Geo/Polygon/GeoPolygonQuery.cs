@@ -27,7 +27,7 @@ namespace Nest
 		private IGeoPolygonQuery Self => this;
 		string IQuery.Name { get; set; }
 		bool IQuery.Conditionless => GeoPolygonQuery.IsConditionless(this);
-		PropertyPathMarker IFieldNameQuery.Field { get; set; }
+		PropertyPath IFieldNameQuery.Field { get; set; }
 		IEnumerable<string> IGeoPolygonQuery.Points { get; set; }
 
 		public GeoPolygonQueryDescriptor<T> Field(string field)

@@ -26,7 +26,7 @@ namespace Nest
 	public class FieldValueFactorDescriptor<T>
 	{
 		[JsonProperty("field")]
-		internal PropertyPathMarker _Field { get; set; }
+		internal PropertyPath _Field { get; set; }
 
 		[JsonProperty("factor")]
 		internal double? _Factor { get; set; }

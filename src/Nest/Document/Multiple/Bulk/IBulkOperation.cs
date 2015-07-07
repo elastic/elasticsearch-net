@@ -12,10 +12,10 @@ namespace Nest
 		Type ClrType { get; }
 
 		[JsonProperty(PropertyName = "_index")]
-		IndexNameMarker Index { get; set; }
+		IndexName Index { get; set; }
 
 		[JsonProperty(PropertyName = "_type")]
-		TypeNameMarker Type { get; set; }
+		TypeName Type { get; set; }
 
 		[JsonProperty(PropertyName = "_id")]
 		string Id { get; set; }

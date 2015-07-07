@@ -36,7 +36,7 @@ namespace Nest.Resolvers
 		}
 
 
-		internal string GetIndexForType(IndexNameMarker i)
+		internal string GetIndexForType(IndexName i)
 		{
 			if (i == null) return this.GetIndexForType((Type)null);
 

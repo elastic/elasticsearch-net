@@ -13,7 +13,7 @@ namespace Nest
 	public interface IGeoDistanceAggregator : IBucketAggregator
 	{
 		[JsonProperty("field")]
-		PropertyPathMarker Field { get; set; }
+		PropertyPath Field { get; set; }
 
 		[JsonProperty("origin")]
 		string Origin { get; set; }
@@ -30,7 +30,7 @@ namespace Nest
 
 	public class GeoDistanceAggregator : BucketAggregator, IGeoDistanceAggregator
 	{
-		public PropertyPathMarker Field { get; set; }
+		public PropertyPath Field { get; set; }
 
 		public string Origin { get; set; }
 
@@ -46,7 +46,7 @@ namespace Nest
 			, IGeoDistanceAggregator
 		where T : class
 	{
-		PropertyPathMarker IGeoDistanceAggregator.Field { get; set; }
+		PropertyPath IGeoDistanceAggregator.Field { get; set; }
 
 		string IGeoDistanceAggregator.Origin { get; set; }
 

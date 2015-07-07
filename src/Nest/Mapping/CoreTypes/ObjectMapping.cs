@@ -10,12 +10,12 @@ namespace Nest
 	[JsonObject(MemberSerialization.OptIn)]
 	public class ObjectMapping : IElasticType
 	{
-		public PropertyNameMarker Name { get; set; }
+		public PropertyName Name { get; set; }
 
 		[JsonProperty("type")]
-		public virtual TypeNameMarker Type
+		public virtual TypeName Type
 		{
-			get { return new TypeNameMarker { Name = "object" }; }
+			get { return new TypeName { Name = "object" }; }
 		}
 
 		[JsonProperty("similarity")]
@@ -36,7 +36,7 @@ namespace Nest
 
 		[JsonProperty("properties", TypeNameHandling = TypeNameHandling.None)]
 		[JsonConverter(typeof(ElasticTypesConverter))]
-		public IDictionary<PropertyNameMarker, IElasticType> Properties { get; set; }
+		public IDictionary<PropertyName, IElasticType> Properties { get; set; }
 
 	}
 
@@ -47,12 +47,12 @@ namespace Nest
 		private readonly IConnectionSettingsValues _connectionSettings;
 
 		internal ObjectMapping _Mapping { get; set; }
-		internal TypeNameMarker _TypeName { get; set; }
+		internal TypeName _TypeName { get; set; }
 		public ElasticInferrer Infer { get; set; }
 
 		public ObjectMappingDescriptor(IConnectionSettingsValues connectionSettings)
 		{
-			this._TypeName = TypeNameMarker.Create<TChild>();
+			this._TypeName = TypeName.Create<TChild>();
 			this._Mapping = new ObjectMapping() { };
 			this._connectionSettings = connectionSettings;
 			this.Infer = new ElasticInferrer(this._connectionSettings);
@@ -83,7 +83,7 @@ namespace Nest
 				return this;
 			var properties = mapping.Properties;
 			if (this._Mapping.Properties == null)
-				this._Mapping.Properties = new Dictionary<PropertyNameMarker, IElasticType>();
+				this._Mapping.Properties = new Dictionary<PropertyName, IElasticType>();
 
 			foreach (var p in properties)
 			{
@@ -122,7 +122,7 @@ namespace Nest
 			propertiesSelector.ThrowIfNull("propertiesSelector");
 			var properties = propertiesSelector(new PropertiesDescriptor<TChild>(this._connectionSettings));
 			if (this._Mapping.Properties == null)
-				this._Mapping.Properties = new Dictionary<PropertyNameMarker, IElasticType>();
+				this._Mapping.Properties = new Dictionary<PropertyName, IElasticType>();
 
 			foreach (var t in properties._Deletes)
 			{

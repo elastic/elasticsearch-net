@@ -4,26 +4,26 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(IndexNameMarkerConverter))]
-	public class IndexNameMarker : IEquatable<IndexNameMarker>
+	[JsonConverter(typeof(IndexNameConverter))]
+	public class IndexName : IEquatable<IndexName>
 	{
 		public string Name { get; set; }
 		public Type Type { get; set; }
 
-		public static implicit operator IndexNameMarker(string typeName)
+		public static implicit operator IndexName(string typeName)
 		{
 			if (typeName == null)
 				return null;
-			return new IndexNameMarker { Name = typeName };
+			return new IndexName { Name = typeName };
 		}
-		public static implicit operator IndexNameMarker(Type type)
+		public static implicit operator IndexName(Type type)
 		{
 			if (type == null)
 				return null;
-			return new IndexNameMarker { Type = type };
+			return new IndexName { Type = type };
 		}
 
-		bool IEquatable<IndexNameMarker>.Equals(IndexNameMarker other)
+		bool IEquatable<IndexName>.Equals(IndexName other)
 		{
 			return Equals(other);
 		}
@@ -32,7 +32,7 @@ namespace Nest
 		{
 			var s = obj as string;
 			if (!s.IsNullOrEmpty()) return this.EqualsString(s);
-			var pp = obj as IndexNameMarker;
+			var pp = obj as IndexName;
 			if (pp != null) return this.EqualsMarker(pp);
 			return base.Equals(obj);
 		}
@@ -51,7 +51,7 @@ namespace Nest
 			return !other.IsNullOrEmpty() && other == this.Name;
 		}
 
-		public bool EqualsMarker(IndexNameMarker other)
+		public bool EqualsMarker(IndexName other)
 		{
 			if (!this.Name.IsNullOrEmpty() && other != null && !other.Name.IsNullOrEmpty())
 				return EqualsString(other.Name);

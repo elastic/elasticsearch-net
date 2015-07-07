@@ -2,10 +2,10 @@
 
 namespace Nest
 {
-	public static class IndexNameMarkerExtensions
+	public static class IndexNameExtensions
 	{
 		
-		public static string Resolve(this IndexNameMarker marker, IConnectionSettingsValues connectionSettings)
+		public static string Resolve(this IndexName marker, IConnectionSettingsValues connectionSettings)
 		{
 			if (marker == null)
 				return null;

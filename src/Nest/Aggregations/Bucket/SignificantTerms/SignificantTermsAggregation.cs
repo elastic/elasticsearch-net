@@ -11,7 +11,7 @@ namespace Nest
 	public interface ISignificantTermsAggregator : IBucketAggregator
 	{
 		[JsonProperty("field")]
-		PropertyPathMarker Field { get; set; }
+		PropertyPath Field { get; set; }
 
 		[JsonProperty("size")]
 		int? Size { get; set; }
@@ -53,7 +53,7 @@ namespace Nest
 
 	public class SignificantTermsAggregator : BucketAggregator, ISignificantTermsAggregator
 	{
-		public PropertyPathMarker Field { get; set; }
+		public PropertyPath Field { get; set; }
 		public int? Size { get; set; }
 		public int? ShardSize { get; set; }
 		public int? MinimumDocumentCount { get; set; }
@@ -73,7 +73,7 @@ namespace Nest
 			, ISignificantTermsAggregator
 		where T : class
 	{
-		PropertyPathMarker ISignificantTermsAggregator.Field { get; set; }
+		PropertyPath ISignificantTermsAggregator.Field { get; set; }
 
 		int? ISignificantTermsAggregator.Size { get; set; }
 

@@ -9,8 +9,8 @@ namespace Nest
 	public interface IDocumentOptionalPath<TParameters> : IRequest<TParameters>
 		where TParameters : IRequestParameters, new()
 	{
-		IndexNameMarker Index { get; set; }
-		TypeNameMarker Type { get; set; }
+		IndexName Index { get; set; }
+		TypeName Type { get; set; }
 		string Id { get; set; }
 	}
 
@@ -59,11 +59,11 @@ namespace Nest
 	public abstract class DocumentOptionalPathBase<TParameters> : BasePathRequest<TParameters>, IDocumentOptionalPath<TParameters>
 		where TParameters : IRequestParameters, new()
 	{
-		public IndexNameMarker Index { get; set; }
-		public TypeNameMarker Type { get; set; }
+		public IndexName Index { get; set; }
+		public TypeName Type { get; set; }
 		public string Id { get; set; }
 		
-		public DocumentOptionalPathBase(IndexNameMarker indexName, TypeNameMarker typeName, string id)
+		public DocumentOptionalPathBase(IndexName indexName, TypeName typeName, string id)
 		{
 			this.Index = indexName;
 			this.Type = typeName;
@@ -80,8 +80,8 @@ namespace Nest
 		where TParameters : IRequestParameters, new()
 		where T : class
 	{
-		public IndexNameMarker Index { get; set; }
-		public TypeNameMarker Type { get; set; }
+		public IndexName Index { get; set; }
+		public TypeName Type { get; set; }
 		public string Id { get; set; }
 		public T IdFrom { get; set; }
 
@@ -112,8 +112,8 @@ namespace Nest
 	{
 
 		private IDocumentOptionalPath<TParameters, T> Self => this;
-		IndexNameMarker IDocumentOptionalPath<TParameters>.Index { get; set; }
-		TypeNameMarker IDocumentOptionalPath<TParameters>.Type { get; set; }
+		IndexName IDocumentOptionalPath<TParameters>.Index { get; set; }
+		TypeName IDocumentOptionalPath<TParameters>.Type { get; set; }
 		string IDocumentOptionalPath<TParameters>.Id { get; set; }
 		T IDocumentOptionalPath<TParameters, T>.IdFrom { get; set; }
 

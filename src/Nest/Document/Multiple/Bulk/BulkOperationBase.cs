@@ -7,8 +7,8 @@ namespace Nest
 	{
 		public abstract string Operation { get; }
 		public abstract Type ClrType { get; }
-		public IndexNameMarker Index { get; set; }
-		public TypeNameMarker Type { get; set; }
+		public IndexName Index { get; set; }
+		public TypeName Type { get; set; }
 		public string Id { get; set; }
         public long? Version { get; set; }
 		public VersionType? VersionType { get; set; }
@@ -35,9 +35,9 @@ namespace Nest
 		protected abstract Type BulkOperationClrType { get; }
 		Type IBulkOperation.ClrType { get { return this.BulkOperationClrType;  } }
 
-		IndexNameMarker IBulkOperation.Index { get; set; }
+		IndexName IBulkOperation.Index { get; set; }
 
-		TypeNameMarker IBulkOperation.Type { get; set; }
+		TypeName IBulkOperation.Type { get; set; }
 
 		string IBulkOperation.Id { get; set; }
 

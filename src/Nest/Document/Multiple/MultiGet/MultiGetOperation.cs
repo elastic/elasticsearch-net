@@ -20,13 +20,13 @@ namespace Nest
 
 		Type IMultiGetOperation.ClrType { get { return typeof(T); } }
 		
-		public IndexNameMarker Index { get; set; }
+		public IndexName Index { get; set; }
 		
-		public TypeNameMarker Type { get; set; }
+		public TypeName Type { get; set; }
 		
 		public string Id { get; set; }
 		
-		public IList<PropertyPathMarker> Fields { get; set; }
+		public IList<PropertyPath> Fields { get; set; }
 		
 		public ISourceFilter Source { get; set; }
 
@@ -34,7 +34,7 @@ namespace Nest
 
 		public object Document { get; set; }
 
-		public IDictionary<PropertyPathMarker, string> PerFieldAnalyzer { get; set; }
+		public IDictionary<PropertyPath, string> PerFieldAnalyzer { get; set; }
 	}
 
 	public class MultiGetOperationDescriptor<T> : IMultiGetOperation
@@ -42,14 +42,14 @@ namespace Nest
 	{
 		private IMultiGetOperation Self => this;
 
-		IndexNameMarker IMultiGetOperation.Index { get; set; }
-		TypeNameMarker IMultiGetOperation.Type { get; set; }
+		IndexName IMultiGetOperation.Index { get; set; }
+		TypeName IMultiGetOperation.Type { get; set; }
 		string IMultiGetOperation.Id { get; set; }
 		string IMultiGetOperation.Routing { get; set; }
 		ISourceFilter IMultiGetOperation.Source { get; set; }
-		IList<PropertyPathMarker> IMultiGetOperation.Fields { get; set; }
+		IList<PropertyPath> IMultiGetOperation.Fields { get; set; }
 		object IMultiGetOperation.Document { get; set; }
-		IDictionary<PropertyPathMarker, string> IMultiGetOperation.PerFieldAnalyzer { get; set; }
+		IDictionary<PropertyPath, string> IMultiGetOperation.PerFieldAnalyzer { get; set; }
 		Type IMultiGetOperation.ClrType { get { return typeof(T); } }
 
 		public MultiGetOperationDescriptor()
@@ -148,7 +148,7 @@ namespace Nest
 		/// </summary>
 		public MultiGetOperationDescriptor<T> Fields(params Expression<Func<T, object>>[] expressions)
 		{
-			Self.Fields = expressions.Select(e => (PropertyPathMarker)e).ToList();
+			Self.Fields = expressions.Select(e => (PropertyPath)e).ToList();
 			return this;
 		}
 
@@ -158,7 +158,7 @@ namespace Nest
 		/// </summary>
 		public MultiGetOperationDescriptor<T> Fields(params string[] fields)
 		{
-			Self.Fields = fields.Select(f => (PropertyPathMarker)f).ToList();
+			Self.Fields = fields.Select(f => (PropertyPath)f).ToList();
 			return this;
 		}
 
@@ -179,7 +179,7 @@ namespace Nest
 		{
 			var d = new FluentDictionary<Expression<Func<T, object>>, string>();
 			analyzerSelector(d);
-			Self.PerFieldAnalyzer = d.ToDictionary(x => PropertyPathMarker.Create(x.Key), x => x.Value);
+			Self.PerFieldAnalyzer = d.ToDictionary(x => PropertyPath.Create(x.Key), x => x.Value);
 			return this;
 		}
 
@@ -187,9 +187,9 @@ namespace Nest
 		// artificial document field.
 		// TODO: For 2.0, we should consider decoupling IMultiGetOperation from 
 		// MoreLikeThisQuery and have a dedicatd MoreLikeThisDocument object.
-		public MultiGetOperationDescriptor<T> PerFieldAnalyzer(Func<FluentDictionary<PropertyPathMarker, string>, FluentDictionary<PropertyPathMarker, string>> analyzerSelector)
+		public MultiGetOperationDescriptor<T> PerFieldAnalyzer(Func<FluentDictionary<PropertyPath, string>, FluentDictionary<PropertyPath, string>> analyzerSelector)
 		{
-			Self.PerFieldAnalyzer = analyzerSelector(new FluentDictionary<PropertyPathMarker, string>());
+			Self.PerFieldAnalyzer = analyzerSelector(new FluentDictionary<PropertyPath, string>());
 			return this;
 		}
 	}

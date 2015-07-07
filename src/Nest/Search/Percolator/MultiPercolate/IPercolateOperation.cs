@@ -20,7 +20,7 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "score")]
 		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		IDictionary<PropertyPathMarker, ISort> Sort { get; set; }
+		IDictionary<PropertyPath, ISort> Sort { get; set; }
 
 		[JsonProperty(PropertyName = "highlight")]
 		IHighlightRequest Highlight { get; set; }

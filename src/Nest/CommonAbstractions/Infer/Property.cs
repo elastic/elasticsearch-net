@@ -12,10 +12,10 @@ namespace Nest.Resolvers
 		/// <typeparam name="T">The type of the object</typeparam>
 		/// <param name="path">The path we want to specify</param>
 		/// <param name="boost">An optional ^boost postfix, only make sense with queries</param>
-		public static PropertyPathMarker Path<T>(Expression<Func<T, object>> path, double? boost = null) 
+		public static PropertyPath Path<T>(Expression<Func<T, object>> path, double? boost = null) 
 			where T : class
 		{
-			return PropertyPathMarker.Create(path, boost);
+			return PropertyPath.Create(path, boost);
 		}
 		
 		/// <summary>
@@ -25,10 +25,10 @@ namespace Nest.Resolvers
 		/// <typeparam name="T">The type of the object</typeparam>
 		/// <param name="path">The path we want to specify</param>
 		/// <param name="boost">An optional ^boost postfix, only make sense with queries</param>
-		public static PropertyNameMarker Name<T>(Expression<Func<T, object>> path, double? boost = null) 
+		public static PropertyName Name<T>(Expression<Func<T, object>> path, double? boost = null) 
 			where T : class
 		{
-			return PropertyNameMarker.Create(path, boost);
+			return PropertyName.Create(path, boost);
 		}
 	}
 }

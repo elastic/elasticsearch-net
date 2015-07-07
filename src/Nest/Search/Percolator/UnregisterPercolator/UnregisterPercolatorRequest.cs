@@ -25,7 +25,7 @@ namespace Nest
 
     public partial class UnregisterPercolatorRequest : IndexNamePathBase<DeleteRequestParameters>, IUnregisterPercolatorRequest
     {
-	    public UnregisterPercolatorRequest(IndexNameMarker index, string name) : base(index, name)
+	    public UnregisterPercolatorRequest(IndexName index, string name) : base(index, name)
 	    {
 	    }
 

@@ -10,24 +10,24 @@ namespace Nest
 	public interface IExternalFieldDeclaration
 	{
 		[JsonProperty("index")]
-		IndexNameMarker Index { get; set; }
+		IndexName Index { get; set; }
 		
 		[JsonProperty("type")]
-		TypeNameMarker Type { get; set; }
+		TypeName Type { get; set; }
 		
 		[JsonProperty("id")]
 		string Id { get; set; }
 		
 		[JsonProperty("path")]
-		PropertyPathMarker Path { get; set; }
+		PropertyPath Path { get; set; }
 	}
 
 	public class ExternalFieldDeclaration : IExternalFieldDeclaration
 	{
-		public IndexNameMarker Index { get; set; }
-		public TypeNameMarker Type { get; set; }
+		public IndexName Index { get; set; }
+		public TypeName Type { get; set; }
 		public string Id { get; set; }
-		public PropertyPathMarker Path { get; set; }
+		public PropertyPath Path { get; set; }
 	}
 
 	public class ExternalFieldDeclarationDescriptor<T> : IExternalFieldDeclaration 
@@ -37,18 +37,18 @@ namespace Nest
 
 		private IExternalFieldDeclaration Self => this;
 
-		IndexNameMarker IExternalFieldDeclaration.Index { get; set; }
+		IndexName IExternalFieldDeclaration.Index { get; set; }
 		
-		TypeNameMarker IExternalFieldDeclaration.Type { get; set; }
+		TypeName IExternalFieldDeclaration.Type { get; set; }
 		
 		string IExternalFieldDeclaration.Id { get; set; }
 		
-		PropertyPathMarker IExternalFieldDeclaration.Path { get; set; }
+		PropertyPath IExternalFieldDeclaration.Path { get; set; }
 
 		public ExternalFieldDeclarationDescriptor()
 		{
-			Self.Type = new TypeNameMarker { Type = this._ClrType };
-			Self.Index = new IndexNameMarker { Type = this._ClrType };
+			Self.Type = new TypeName { Type = this._ClrType };
+			Self.Index = new IndexName { Type = this._ClrType };
 		}
 
 		public ExternalFieldDeclarationDescriptor<T> Index(string index)
@@ -68,7 +68,7 @@ namespace Nest
 		}
 		public ExternalFieldDeclarationDescriptor<T> Type(string type)
 		{
-			Self.Type = new TypeNameMarker() { Name = type };
+			Self.Type = new TypeName() { Name = type };
 			return this;
 		}
 		public ExternalFieldDeclarationDescriptor<T> Path(string path)

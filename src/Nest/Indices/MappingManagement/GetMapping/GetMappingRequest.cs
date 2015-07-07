@@ -20,7 +20,7 @@ namespace Nest
 	
 	public partial class GetMappingRequest : IndexTypePathBase<GetMappingRequestParameters>, IGetMappingRequest
 	{
-		public GetMappingRequest(IndexNameMarker index, TypeNameMarker typeNameMarker) : base(index, typeNameMarker)
+		public GetMappingRequest(IndexName index, TypeName typeNameMarker) : base(index, typeNameMarker)
 		{
 		}
 

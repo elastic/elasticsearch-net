@@ -9,7 +9,7 @@ namespace Nest
 	public interface IIndicesOptionalPath<TParameters> : IRequest<TParameters>
 		where TParameters : IRequestParameters, new()
 	{
-		IEnumerable<IndexNameMarker> Indices { get; set; }
+		IEnumerable<IndexName> Indices { get; set; }
 	}
 	
 	internal static class IndicesOptionalPathRouteParameters
@@ -29,7 +29,7 @@ namespace Nest
 	public abstract class IndicesOptionalPathBase<TParameters> : BasePathRequest<TParameters>, IIndicesOptionalPath<TParameters>
 		where TParameters : IRequestParameters, new()
 	{
-		public IEnumerable<IndexNameMarker> Indices { get; set; }
+		public IEnumerable<IndexName> Indices { get; set; }
 		
 		protected override void SetRouteParameters(
 			IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
@@ -53,7 +53,7 @@ namespace Nest
 
 		private IIndicesOptionalPath<TParameters> Self => this;
 
-		IEnumerable<IndexNameMarker> IIndicesOptionalPath<TParameters>.Indices { get; set; }
+		IEnumerable<IndexName> IIndicesOptionalPath<TParameters>.Indices { get; set; }
 		
 		public TDescriptor Index(string index)
 		{
@@ -67,13 +67,13 @@ namespace Nest
 			
 		public TDescriptor Indices(params string[] indices)
 		{
-			Self.Indices = indices.Select(s=>(IndexNameMarker)s);
+			Self.Indices = indices.Select(s=>(IndexName)s);
 			return (TDescriptor)this;
 		}
 
 		public TDescriptor Indices(params Type[] indicesTypes)
 		{
-			Self.Indices = indicesTypes.Select(s=>(IndexNameMarker)s);
+			Self.Indices = indicesTypes.Select(s=>(IndexName)s);
 			return (TDescriptor)this;
 		}
 

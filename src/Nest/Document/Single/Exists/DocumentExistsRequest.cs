@@ -21,7 +21,7 @@ namespace Nest
 	
 	public partial class DocumentExistsRequest : DocumentPathBase<DocumentExistsRequestParameters>, IDocumentExistsRequest
 	{
-		public DocumentExistsRequest(IndexNameMarker indexName, TypeNameMarker typeName, string id) : base(indexName, typeName, id)
+		public DocumentExistsRequest(IndexName indexName, TypeName typeName, string id) : base(indexName, typeName, id)
 		{
 		}
 

@@ -30,7 +30,7 @@ namespace Nest
 
 			if (returnType == null) return;
 
-			var types = (self.Types ?? Enumerable.Empty<TypeNameMarker>()).Where(t => t.Type != null).ToList();
+			var types = (self.Types ?? Enumerable.Empty<TypeName>()).Where(t => t.Type != null).ToList();
 			if (self.TypeSelector != null || !types.HasAny(t => t.Type != returnType))
 				return;
 

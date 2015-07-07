@@ -41,7 +41,7 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "indices_boost")]
 		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		IDictionary<IndexNameMarker, double> IndicesBoost { get; set; }
+		IDictionary<IndexName, double> IndicesBoost { get; set; }
 
 		[JsonProperty(PropertyName = "sort")]
 		[JsonConverter(typeof(SortCollectionConverter))]
@@ -57,10 +57,10 @@ namespace Nest
 		IRescore Rescore { get; set; }
 
 		[JsonProperty(PropertyName = "fields")]
-		IList<PropertyPathMarker> Fields { get; set; }
+		IList<PropertyPath> Fields { get; set; }
 
 		[JsonProperty(PropertyName = "fielddata_fields")]
-		IList<PropertyPathMarker> FielddataFields { get; set; }
+		IList<PropertyPath> FielddataFields { get; set; }
 
 		[JsonProperty(PropertyName = "script_fields")]
 		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
@@ -115,7 +115,7 @@ namespace Nest
 
 			if (returnType == null) return;
 
-			var types = (self.Types ?? Enumerable.Empty<TypeNameMarker>()).Where(t => t.Type != null).ToList();
+			var types = (self.Types ?? Enumerable.Empty<TypeName>()).Where(t => t.Type != null).ToList();
 			if (self.TypeSelector != null || !types.HasAny(t => t.Type != returnType))
 				return;
 			
@@ -136,9 +136,9 @@ namespace Nest
 	{
 		public SearchRequest() {}
 
-		public SearchRequest(IndexNameMarker index, TypeNameMarker type = null) : base(index, type) { }
+		public SearchRequest(IndexName index, TypeName type = null) : base(index, type) { }
 
-		public SearchRequest(IEnumerable<IndexNameMarker> indices, IEnumerable<TypeNameMarker> types = null) : base(indices, types) { }
+		public SearchRequest(IEnumerable<IndexName> indices, IEnumerable<TypeName> types = null) : base(indices, types) { }
 
 		private Type _clrType { get; set; }
 		Type ISearchRequest.ClrType { get { return _clrType; } }
@@ -151,12 +151,12 @@ namespace Nest
 		public bool? TrackScores { get; set; }
 		public double? MinScore { get; set; }
 		public long? TerminateAfter { get; set; }
-		public IList<PropertyPathMarker> Fields { get; set; }
-		public IList<PropertyPathMarker> FielddataFields { get; set; }
+		public IList<PropertyPath> Fields { get; set; }
+		public IList<PropertyPath> FielddataFields { get; set; }
 		public IDictionary<string, IScriptQuery> ScriptFields { get; set; }
 		public ISourceFilter Source { get; set; }
 		public IList<ISort> Sort { get; set; }
-		public IDictionary<IndexNameMarker, double> IndicesBoost { get; set; }
+		public IDictionary<IndexName, double> IndicesBoost { get; set; }
 		public IQueryContainer PostFilter { get; set; }
 		public IDictionary<string, IInnerHitsContainer> InnerHits { get; set; }
 		public IQueryContainer Query { get; set; }
@@ -191,9 +191,9 @@ namespace Nest
 
 		private ISearchRequest Self => this;
 
-		public SearchRequest(IndexNameMarker index, TypeNameMarker type = null) : base(index, type) { }
+		public SearchRequest(IndexName index, TypeName type = null) : base(index, type) { }
 
-		public SearchRequest(IEnumerable<IndexNameMarker> indices, IEnumerable<TypeNameMarker> types = null) : base(indices, types) { }
+		public SearchRequest(IEnumerable<IndexName> indices, IEnumerable<TypeName> types = null) : base(indices, types) { }
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SearchRequestParameters> pathInfo) =>
 			SearchPathInfo.Update(settings,pathInfo, this);
@@ -207,13 +207,13 @@ namespace Nest
 		public bool? TrackScores { get; set; }
 		public double? MinScore { get; set; }
 		public long? TerminateAfter { get; set; }
-		public IDictionary<IndexNameMarker, double> IndicesBoost { get; set; }
+		public IDictionary<IndexName, double> IndicesBoost { get; set; }
 		public IList<ISort> Sort { get; set; }
 		public IDictionary<string, ISuggestBucket> Suggest { get; set; }
 		public IHighlightRequest Highlight { get; set; }
 		public IRescore Rescore { get; set; }
-		public IList<PropertyPathMarker> Fields { get; set; }
-		public IList<PropertyPathMarker> FielddataFields { get; set; }
+		public IList<PropertyPath> Fields { get; set; }
+		public IList<PropertyPath> FielddataFields { get; set; }
 		public IDictionary<string, IScriptQuery> ScriptFields { get; set; }
 		public ISourceFilter Source { get; set; }
 		public IDictionary<string, IInnerHitsContainer> InnerHits { get; set; }
@@ -282,7 +282,7 @@ namespace Nest
 		double? ISearchRequest.MinScore { get; set; }
 		long? ISearchRequest.TerminateAfter { get; set; }
 
-		IDictionary<IndexNameMarker, double> ISearchRequest.IndicesBoost { get; set; }
+		IDictionary<IndexName, double> ISearchRequest.IndicesBoost { get; set; }
 
 		IList<ISort> ISearchRequest.Sort { get; set; }
 
@@ -296,9 +296,9 @@ namespace Nest
 
 		IQueryContainer ISearchRequest.PostFilter { get; set; }
 
-		IList<PropertyPathMarker> ISearchRequest.Fields { get; set; }
+		IList<PropertyPath> ISearchRequest.Fields { get; set; }
 
-		IList<PropertyPathMarker> ISearchRequest.FielddataFields { get; set; }
+		IList<PropertyPath> ISearchRequest.FielddataFields { get; set; }
 
 		IDictionary<string, IScriptQuery> ISearchRequest.ScriptFields { get; set; }
 
@@ -477,15 +477,15 @@ namespace Nest
 		/// more than one indices. This is very handy when hits coming from one index
 		/// matter more than hits coming from another index (think social graph where each user has an index).
 		/// </summary>
-		public SearchDescriptor<T> IndicesBoost(Func<FluentDictionary<IndexNameMarker, double>, FluentDictionary<IndexNameMarker, double>> boost) =>
-			_assign(a => a.IndicesBoost = boost?.Invoke(new FluentDictionary<IndexNameMarker, double>()));
+		public SearchDescriptor<T> IndicesBoost(Func<FluentDictionary<IndexName, double>, FluentDictionary<IndexName, double>> boost) =>
+			_assign(a => a.IndicesBoost = boost?.Invoke(new FluentDictionary<IndexName, double>()));
 
 		/// <summary>
 		/// Allows to selectively load specific fields for each document 
 		/// represented by a search hit. Defaults to load the internal _source field.
 		/// </summary>
 		public SearchDescriptor<T> Fields(params Expression<Func<T, object>>[] expressions) =>
-			_assign(a => a.Fields = expressions?.Select(e => (PropertyPathMarker) e).ToListOrNullIfEmpty());
+			_assign(a => a.Fields = expressions?.Select(e => (PropertyPath) e).ToListOrNullIfEmpty());
 
 		/// <summary>
 		/// Allows to selectively load specific fields for each document 
@@ -499,19 +499,19 @@ namespace Nest
 		/// represented by a search hit. Defaults to load the internal _source field.
 		/// </summary>
 		public SearchDescriptor<T> Fields(params string[] fields)
-			=> _assign(a => a.Fields = fields?.Select(f => (PropertyPathMarker) f).ToListOrNullIfEmpty());
+			=> _assign(a => a.Fields = fields?.Select(f => (PropertyPath) f).ToListOrNullIfEmpty());
 
 		///<summary>
 		///A comma-separated list of fields to return as the field data representation of a field for each hit
 		///</summary>
 		public SearchDescriptor<T> FielddataFields(params string[] fielddataFields) =>
-			_assign(a => a.FielddataFields = fielddataFields?.Select(f => (PropertyPathMarker) f).ToListOrNullIfEmpty());
+			_assign(a => a.FielddataFields = fielddataFields?.Select(f => (PropertyPath) f).ToListOrNullIfEmpty());
 
 		///<summary>
 		///A comma-separated list of fields to return as the field data representation of a field for each hit
 		///</summary>
 		public SearchDescriptor<T> FielddataFields(params Expression<Func<T, object>>[] fielddataFields) =>
-			_assign(a => a.FielddataFields = fielddataFields?.Select(f => (PropertyPathMarker) f).ToListOrNullIfEmpty());
+			_assign(a => a.FielddataFields = fielddataFields?.Select(f => (PropertyPath) f).ToListOrNullIfEmpty());
 		
 		//TODO scriptfields needs a seperate encapsulation
 		public SearchDescriptor<T> ScriptFields(
