@@ -31,7 +31,7 @@ namespace Nest.Domain
 			((IFieldSelection<T>)this).FieldValuesDictionary = valuesDictionary;
 		}
 
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]
 		IDictionary<string, object> IFieldSelection<T>.FieldValuesDictionary { get; set; }
 
 		/// <summary>
@@ -50,7 +50,7 @@ namespace Nest.Domain
 		public K[] FieldValues<TBindTo, K>(Expression<Func<TBindTo, object>> objectPath)
 			where TBindTo : class
 		{
-			var path = this.Infer.PropertyPath(objectPath);
+			var path = this.Infer.FieldName(objectPath);
 			return this.FieldArray<K[]>(path);
 		}
 
@@ -60,7 +60,7 @@ namespace Nest.Domain
 		/// </summary>
 		public K[] FieldValues<K>(Expression<Func<T, K>> objectPath)
 		{
-			var path = this.Infer.PropertyPath(objectPath);
+			var path = this.Infer.FieldName(objectPath);
 			return this.FieldArray<K[]>(path);
 		}
 

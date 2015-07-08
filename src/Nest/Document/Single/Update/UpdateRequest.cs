@@ -25,7 +25,7 @@ namespace Nest
 		string Language { get; set; }
 
 		[JsonProperty(PropertyName = "params")]
-		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		[JsonConverter(typeof (DictionaryKeysAreNotFieldNamesJsonConverter))]
 		Dictionary<string, object> Params { get; set; }
 
 		[JsonProperty(PropertyName = "upsert")]

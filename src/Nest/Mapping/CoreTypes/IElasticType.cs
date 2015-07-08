@@ -6,7 +6,7 @@ namespace Nest
 {
 	public interface IElasticType : IFieldMapping
 	{
-		PropertyName Name { get; set; }
+		FieldName Name { get; set; }
 		TypeName Type { get; }
 	}
 }

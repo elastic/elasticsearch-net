@@ -57,9 +57,9 @@ namespace Nest.Resolvers
 
 			var type = typeof(T);
 			Func<object, string> cachedLookup;
-			string propertyName;
+			string FieldName;
 
-			var preferLocal = this._connectionSettings.IdProperties.TryGetValue(type, out propertyName);
+			var preferLocal = this._connectionSettings.IdProperties.TryGetValue(type, out FieldName);
 			
 			if (LocalIdDelegates.TryGetValue(type, out cachedLookup))
 				return cachedLookup(@object);
@@ -101,37 +101,37 @@ namespace Nest.Resolvers
 			// if the type specifies through ElasticAttribute what the id prop is 
 			// use that no matter what
 
-			string propertyName;
-			this._connectionSettings.IdProperties.TryGetValue(type, out propertyName);
-			if (!propertyName.IsNullOrEmpty())
-				return GetPropertyCaseInsensitive(type, propertyName);
+			string FieldName;
+			this._connectionSettings.IdProperties.TryGetValue(type, out FieldName);
+			if (!FieldName.IsNullOrEmpty())
+				return GetPropertyCaseInsensitive(type, FieldName);
 
 			var esTypeAtt = ElasticAttributes.Type(type);
 			if (esTypeAtt != null && !string.IsNullOrWhiteSpace(esTypeAtt.IdProperty))
 				return GetPropertyCaseInsensitive(type, esTypeAtt.IdProperty);
 
-			propertyName = "Id";
+			FieldName = "Id";
 			//Try Id on its own case insensitive
-			var idProperty = GetPropertyCaseInsensitive(type, propertyName);
+			var idProperty = GetPropertyCaseInsensitive(type, FieldName);
 			if (idProperty != null)
 				return idProperty;
 
 			//TODO remove in 2.0 ?
 			//Try TypeNameId case insensitive
-			idProperty = GetPropertyCaseInsensitive(type, type.Name + propertyName);
+			idProperty = GetPropertyCaseInsensitive(type, type.Name + FieldName);
 			if (idProperty != null)
 				return idProperty;
 
 			//TODO remove in 2.0 ?
 			//Try TypeName_Id case insensitive
-			idProperty = GetPropertyCaseInsensitive(type, type.Name + "_" + propertyName);
+			idProperty = GetPropertyCaseInsensitive(type, type.Name + "_" + FieldName);
 
 			return idProperty;
 		}
 
-		PropertyInfo GetPropertyCaseInsensitive(Type type, string propertyName)
+		PropertyInfo GetPropertyCaseInsensitive(Type type, string FieldName)
 		{
-			return type.GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance | BindingFlags.IgnoreCase);
+			return type.GetProperty(FieldName, BindingFlags.Public | BindingFlags.Instance | BindingFlags.IgnoreCase);
 		}
 	}
 }

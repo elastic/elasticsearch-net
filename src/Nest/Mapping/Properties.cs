@@ -8,14 +8,14 @@ namespace Nest
 	{
 		private readonly IConnectionSettingsValues _connectionSettings;
 		
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		public IDictionary<PropertyName, IElasticType> Properties { get; private set; }
+		[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]
+		public IDictionary<FieldName, IElasticType> Properties { get; private set; }
 		internal IList<string> _Deletes = new List<string>();
 
 		public PropertiesDescriptor(IConnectionSettingsValues connectionSettings)
 		{
 			this._connectionSettings = connectionSettings;
-			this.Properties = new Dictionary<PropertyName, IElasticType>();
+			this.Properties = new Dictionary<FieldName, IElasticType>();
 		}
 
 		public PropertiesDescriptor<T> Remove(string name)

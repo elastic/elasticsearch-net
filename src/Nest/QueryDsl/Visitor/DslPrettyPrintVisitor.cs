@@ -54,11 +54,11 @@ namespace Nest.QueryDsl.Visitor
 			var scope = this.Scope.GetStringValue().ToLowerInvariant();
 			_sb.AppendFormat("{0}{1}: {2} ({3}){4}", indent, scope, queryType, props, Environment.NewLine);
 		}
-		private void Write(string queryType, PropertyPath fieldName = null)
+		private void Write(string queryType, FieldName fieldName = null)
 		{
 			this.Write(queryType, fieldName == null 
 				? null 
-				: new Dictionary<string, string> {{"field", this._infer.PropertyPath(fieldName)}});
+				: new Dictionary<string, string> {{"field", this._infer.FieldName(fieldName)}});
 		}
 
 		public virtual void Visit(IBoolQuery query)

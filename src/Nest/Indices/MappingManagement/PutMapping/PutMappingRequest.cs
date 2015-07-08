@@ -113,7 +113,7 @@ namespace Nest
 				return this;
 			var properties = mapping.Properties;
 			if (Self.Mapping.Properties == null)
-				Self.Mapping.Properties = new Dictionary<PropertyName, IElasticType>();
+				Self.Mapping.Properties = new Dictionary<FieldName, IElasticType>();
 
 			foreach (var p in properties)
 			{
@@ -290,7 +290,7 @@ namespace Nest
 			propertiesSelector.ThrowIfNull("propertiesSelector");
 			var properties = propertiesSelector(new PropertiesDescriptor<T>(this._connectionSettings));
 			if (Self.Mapping.Properties == null)
-				Self.Mapping.Properties = new Dictionary<PropertyName, IElasticType>();
+				Self.Mapping.Properties = new Dictionary<FieldName, IElasticType>();
 
 			foreach (var t in properties._Deletes)
 			{
@@ -298,7 +298,7 @@ namespace Nest
 			}
 			foreach (var p in properties.Properties)
 			{
-				var key = this._infer.PropertyName(p.Key);
+				var key = this._infer.FieldName(p.Key);
 				Self.Mapping.Properties[key] = p.Value;
 			}
 			return this;

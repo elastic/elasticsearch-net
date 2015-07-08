@@ -33,7 +33,7 @@ namespace Nest
 		private IMissingQuery Self => this;
 		string IQuery.Name { get; set; }
 		bool IQuery.Conditionless => MissingQuery.IsConditionless(this);
-		PropertyPath IFieldNameQuery.Field { get; set;}
+		FieldName IFieldNameQuery.Field { get; set;}
 		bool? IMissingQuery.Existence { get; set; }
 		bool? IMissingQuery.NullValue { get; set; }
 

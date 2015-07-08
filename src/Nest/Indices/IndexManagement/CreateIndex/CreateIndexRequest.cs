@@ -152,7 +152,7 @@ namespace Nest
 
 			if (request.Type != null)
 			{
-				typeMapping.Name = request.Type.Name != null ? (PropertyName)request.Type.Name : request.Type.Type;
+				typeMapping.Name = request.Type.Name != null ? (FieldName)request.Type.Name : request.Type.Type;
 			}
 			else
 			{
@@ -182,7 +182,7 @@ namespace Nest
 
 			if (request.Type != null)
 			{
-				typeMapping.Name = request.Type.Name != null ? (PropertyName)request.Type.Name : request.Type.Type;
+				typeMapping.Name = request.Type.Name != null ? (FieldName)request.Type.Name : request.Type.Type;
 			}
 			else
 			{

@@ -34,7 +34,7 @@ namespace Nest
 		private IdResolver IdResolver { get; set; }
 		private IndexNameResolver IndexNameResolver { get; set; }
 		private TypeNameResolver TypeNameResolver { get; set; }
-		private PropertyNameResolver PropertyNameResolver { get; set; }
+		private FieldNameResolver FieldNameResolver { get; set; }
 		public string DefaultIndex
 		{
 			get
@@ -50,50 +50,32 @@ namespace Nest
 			this.IdResolver = new IdResolver(this._connectionSettings);
 			this.IndexNameResolver = new IndexNameResolver(this._connectionSettings);
 			this.TypeNameResolver = new TypeNameResolver(this._connectionSettings);
-			this.PropertyNameResolver = new PropertyNameResolver(this._connectionSettings);
+			this.FieldNameResolver = new FieldNameResolver(this._connectionSettings);
 		}
 
-		public string PropertyPath(PropertyPath marker)
+		public string FieldName(FieldName field)
 		{
-			if (marker.IsConditionless())
+			if (field.IsConditionless())
 				return null;
-			var name = !marker.Name.IsNullOrEmpty() ? marker.Name : this.PropertyNameResolver.Resolve(marker.Expression);
-			if (marker.Boost.HasValue)
-				name += "^" + marker.Boost.Value.ToString(CultureInfo.InvariantCulture);
-
+			var name = !field.Name.IsNullOrEmpty() 
+				? field.Name 
+				: field.Expression != null 
+					? this.FieldNameResolver.ResolveToLastToken(field.Expression)
+					: this.TypeName(field.Type);
+			if (field.Boost.HasValue)
+				name += "^" + field.Boost.Value.ToString(CultureInfo.InvariantCulture);
 			return name;
 		}
 
-		public string PropertyPaths(IEnumerable<PropertyPath> fields)
+		public string FieldName(MemberInfo member)
 		{
-			if (!fields.HasAny() || fields.All(f=>f.IsConditionless())) return null;
-			return string.Join(",", fields.Select(PropertyPath).Where(f => !f.IsNullOrEmpty()));
-		}
-
-		public string PropertyPath(MemberInfo member)
-		{
-			return member == null ? null : this.PropertyNameResolver.Resolve(member);
-		}
-
-		public string PropertyName(PropertyName marker)
-		{
-			if (marker.IsConditionless())
-				return null;
-			return !marker.Name.IsNullOrEmpty() 
-				? marker.Name 
-				: marker.Expression != null 
-					? this.PropertyNameResolver.ResolveToLastToken(marker.Expression)
-					: this.TypeName(marker.Type);
+			return member == null ? null : this.FieldNameResolver.ResolveToLastToken(member);
 		}
 		
-		public string PropertyNames(IEnumerable<PropertyName> fields)
+		public string FieldNames(IEnumerable<FieldName> fields)
 		{
 			if (!fields.HasAny() || fields.All(f=>f.IsConditionless())) return null;
-			return string.Join(",", fields.Select(PropertyName).Where(f => !f.IsNullOrEmpty()));
-		}
-		public string PropertyName(MemberInfo member)
-		{
-			return member == null ? null : this.PropertyNameResolver.ResolveToLastToken(member);
+			return string.Join(",", fields.Select(FieldName).Where(f => !f.IsNullOrEmpty()));
 		}
 
 		public string IndexName<T>() where T : class
@@ -151,6 +133,7 @@ namespace Nest
 		{
 			return !typeNames.HasAny() ? null : this.TypeNames(typeNames.ToArray());
 		}
+
 		public string TypeName(TypeName type)
 		{
 			return type == null ? null : this.TypeNameResolver.GetTypeNameFor(type);

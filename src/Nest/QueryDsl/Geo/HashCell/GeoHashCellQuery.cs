@@ -40,7 +40,7 @@ namespace Nest
 		private IGeoHashCellQuery Self => this;
 		string IQuery.Name { get; set; }
         bool IQuery.Conditionless => GeoHashCellQuery.IsConditionless(this);
-        PropertyPath IFieldNameQuery.Field { get; set; }
+        FieldName IFieldNameQuery.Field { get; set; }
         string IGeoHashCellQuery.Location { get; set; }
         object IGeoHashCellQuery.Precision { get; set; }
         GeoUnit? IGeoHashCellQuery.Unit { get; set; }

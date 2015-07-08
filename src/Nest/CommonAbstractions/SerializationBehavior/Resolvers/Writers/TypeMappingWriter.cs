@@ -138,13 +138,13 @@ namespace Nest.Resolvers.Writers
 				if (att != null && att.OptOut)
 					continue;
 
-				var propertyName = this.Infer.PropertyName(p);
+				var FieldName = this.Infer.FieldName(p);
 				var type = GetElasticSearchType(att, p);
 
 				if (type == null) //could not get type from attribute or infer from CLR type.
 					continue;
 
-				jsonWriter.WritePropertyName(propertyName);
+				jsonWriter.WritePropertyName(FieldName);
 				jsonWriter.WriteStartObject();
 				{
 					if (att == null) //properties that follow can not be inferred from the CLR.
@@ -154,7 +154,7 @@ namespace Nest.Resolvers.Writers
 						//jsonWriter.WriteEnd();
 					}
 					if (att != null)
-						this.WritePropertiesFromAttribute(jsonWriter, att, propertyName, type);
+						this.WritePropertiesFromAttribute(jsonWriter, att, FieldName, type);
 					if (type == "object" || type == "nested")
 					{
 
@@ -174,9 +174,9 @@ namespace Nest.Resolvers.Writers
 			}
 		}
 
-		private void WritePropertiesFromAttribute(JsonWriter jsonWriter, IElasticPropertyAttribute att, string propertyName, string type)
+		private void WritePropertiesFromAttribute(JsonWriter jsonWriter, IElasticPropertyAttribute att, string FieldName, string type)
 		{
-			var visitor = new WritePropertiesFromAttributeVisitor(jsonWriter, propertyName, type);
+			var visitor = new WritePropertiesFromAttributeVisitor(jsonWriter, FieldName, type);
 			att.Accept(visitor);
 
 		}

@@ -12,14 +12,14 @@ namespace Nest
 		bool? Required { get; set; }
 
 		[JsonProperty("path")]
-		PropertyPath Path { get; set; }
+		FieldName Path { get; set; }
 	}
 
 	public class RoutingFieldMapping : IRoutingFieldMapping
 	{
 		public bool? Required { get; set; }
 
-		public PropertyPath Path { get; set; }
+		public FieldName Path { get; set; }
 	}
 
 
@@ -29,7 +29,7 @@ namespace Nest
 
 		bool? IRoutingFieldMapping.Required { get; set;}
 
-		PropertyPath IRoutingFieldMapping.Path { get; set; }
+		FieldName IRoutingFieldMapping.Path { get; set; }
 
 		public RoutingFieldMappingDescriptor<T> Required(bool required = true)
 		{

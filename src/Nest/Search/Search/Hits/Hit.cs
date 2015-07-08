@@ -37,7 +37,7 @@ namespace Nest
 		public string Index { get; internal set; }
 		
 		[JsonProperty(PropertyName = "inner_hits")]
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]
 		public IDictionary<string, InnerHitsResult> InnerHits { get; internal set; }
 		
 		//TODO in NEST 2.0 make the property itself double?
@@ -58,7 +58,7 @@ namespace Nest
 		public IEnumerable<object> Sorts { get; internal set; }
 
 		[JsonProperty(PropertyName = "highlight")]
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]
 		internal Dictionary<string, List<string>> _Highlight { get; set; }
 
 		public HighlightFieldDictionary Highlights

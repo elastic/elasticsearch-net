@@ -335,10 +335,10 @@ namespace Nest.Resolvers.Converters.Aggregations
 			var currentDepth = reader.Depth;
 			do
 			{
-				var propertyName = reader.Value as string;
+				var FieldName = reader.Value as string;
 				reader.Read();
 				var agg = this.ReadAggregation(reader, serializer);
-				nestedAggs.Add(propertyName, agg);
+				nestedAggs.Add(FieldName, agg);
 				reader.Read();
 				if (reader.Depth == currentDepth && reader.TokenType == JsonToken.EndObject || reader.Depth < currentDepth)
 					break;

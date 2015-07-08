@@ -42,7 +42,7 @@ namespace Nest
 		public T Source { get; private set; }
 
 
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]
 		[JsonProperty(PropertyName = "fields")]
 		internal IDictionary<string, object> FieldValues
 		{

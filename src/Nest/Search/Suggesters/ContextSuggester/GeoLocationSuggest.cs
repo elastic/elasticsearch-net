@@ -29,7 +29,7 @@ namespace Nest
 
 		public bool Neighbors { get; set; }
 
-		public PropertyPath Path { get; set; }
+		public FieldName Path { get; set; }
 
 		public object Default { get; set; }
 	}

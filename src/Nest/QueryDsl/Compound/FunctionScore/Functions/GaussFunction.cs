@@ -10,15 +10,15 @@ namespace Nest
 		where T : class
 	{
 		[JsonProperty(PropertyName = "gauss")]
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
-		internal IDictionary<PropertyPath, FunctionScoreDecayFieldDescriptor> _GaussDescriptor { get; set; }
+		[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]
+		internal IDictionary<FieldName, FunctionScoreDecayFieldDescriptor> _GaussDescriptor { get; set; }
 
 		public GaussFunction(
 			Expression<Func<T, object>> objectPath, 
 			Func<FunctionScoreDecayFieldDescriptor, FunctionScoreDecayFieldDescriptor> functionScoreDecaySelector
 		)
 		{
-			this._GaussDescriptor = new Dictionary<PropertyPath, FunctionScoreDecayFieldDescriptor>
+			this._GaussDescriptor = new Dictionary<FieldName, FunctionScoreDecayFieldDescriptor>
 			{
 				[objectPath] = functionScoreDecaySelector?.Invoke(new FunctionScoreDecayFieldDescriptor())
 			};
@@ -29,7 +29,7 @@ namespace Nest
 			Func<FunctionScoreDecayFieldDescriptor, FunctionScoreDecayFieldDescriptor> functionScoreDecaySelector
 			)
 		{
-			this._GaussDescriptor = new Dictionary<PropertyPath, FunctionScoreDecayFieldDescriptor>
+			this._GaussDescriptor = new Dictionary<FieldName, FunctionScoreDecayFieldDescriptor>
 			{
 				[field] = functionScoreDecaySelector?.Invoke(new FunctionScoreDecayFieldDescriptor())
 			};

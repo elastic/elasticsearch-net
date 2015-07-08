@@ -54,7 +54,7 @@ namespace Nest
 		private IFuzzyQuery Self => this;
 		string IQuery.Name { get; set; }
 		bool IQuery.Conditionless => FuzzyQuery.IsConditionless(this);
-		PropertyPath IFieldNameQuery.Field { get; set; }
+		FieldName IFieldNameQuery.Field { get; set; }
 		double? IFuzzyQuery.Boost { get; set; }
 		string IFuzzyQuery.Fuzziness { get; set; }
 		object IFuzzyQuery.Value { get; set; }

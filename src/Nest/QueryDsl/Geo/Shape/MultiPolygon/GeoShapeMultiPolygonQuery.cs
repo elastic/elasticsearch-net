@@ -30,7 +30,7 @@ namespace Nest
 		private IGeoShapeMultiPolygonQuery Self { get { return this; }}
 		string IQuery.Name { get; set; }
 		bool IQuery.Conditionless => GeoShapeMultiPolygonQuery.IsConditionless(this);
-		PropertyPath IFieldNameQuery.Field { get; set; }
+		FieldName IFieldNameQuery.Field { get; set; }
 		IMultiPolygonGeoShape IGeoShapeMultiPolygonQuery.Shape { get; set; }
 
 		public GeoShapeMultiPolygonQueryDescriptor<T> OnField(string field)

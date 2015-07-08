@@ -9,7 +9,7 @@ namespace Nest
 	public interface IMetricAggregator : IAggregator
 	{
 		[JsonProperty("field")]
-		PropertyPath Field { get; set; }
+		FieldName Field { get; set; }
 
 		[JsonProperty("script")]
 		string Script { get; set; }
@@ -24,7 +24,7 @@ namespace Nest
 	
 	public abstract class MetricAggregator : IMetricAggregator
 	{
-		public PropertyPath Field { get; set; }
+		public FieldName Field { get; set; }
 		public virtual string Script { get; set; }
 		public IDictionary<string, object> Params { get; set; }
 		public string Language { get; set; }
@@ -42,7 +42,7 @@ namespace Nest
 
 		protected TMetricAggregationInterface Self => (TMetricAggregation)this;
 
-		PropertyPath IMetricAggregator.Field { get; set; }
+		FieldName IMetricAggregator.Field { get; set; }
 		
 		string IMetricAggregator.Script { get; set; }
 

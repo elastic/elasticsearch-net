@@ -9,7 +9,7 @@ namespace Nest
 	[JsonObject(MemberSerialization.OptIn)]
 	public class AttachmentMapping : IElasticType
 	{
-		public PropertyName Name { get; set; }
+		public FieldName Name { get; set; }
 
 		[JsonProperty("type")]
 		public virtual TypeName Type { get { return new TypeName { Name = "attachment" }; } }
@@ -18,11 +18,11 @@ namespace Nest
 		public string Similarity { get; set; }
 
 		[JsonProperty("fields"), JsonConverter(typeof(ElasticCoreTypeConverter))]
-		public IDictionary<PropertyName, IElasticCoreType> Fields { get; set; }
+		public IDictionary<FieldName, IElasticCoreType> Fields { get; set; }
 
 		public AttachmentMapping()
 		{
-			this.Fields = new Dictionary<PropertyName, IElasticCoreType>();
+			this.Fields = new Dictionary<FieldName, IElasticCoreType>();
 		}
 
 	}

@@ -9,7 +9,7 @@ namespace Nest
 	public interface IBoostFieldMapping : ISpecialField
 	{
 		[JsonProperty("name")]
-		PropertyName Name { get; set; }
+		FieldName Name { get; set; }
 
 		[JsonProperty("null_value")]
 		double NullValue { get; set; }
@@ -17,7 +17,7 @@ namespace Nest
 
 	public class BoostFieldMapping : IBoostFieldMapping
 	{
-		public PropertyName Name { get; set; }
+		public FieldName Name { get; set; }
 
 		public double NullValue { get; set; }
 	}
@@ -27,7 +27,7 @@ namespace Nest
 	{
 		private IBoostFieldMapping Self => this;
 
-		PropertyName IBoostFieldMapping.Name { get; set; }
+		FieldName IBoostFieldMapping.Name { get; set; }
 		
 		double IBoostFieldMapping.NullValue { get; set; }
 

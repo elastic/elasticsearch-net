@@ -9,7 +9,7 @@ namespace Nest
 	[JsonObject(MemberSerialization.OptIn)]
 	public class GeoShapeMapping : IElasticType
 	{
-		public PropertyName Name { get; set; }
+		public FieldName Name { get; set; }
 
 		[JsonProperty("type")]
 		public virtual TypeName Type { get { return new TypeName { Name = "geo_shape" }; } }

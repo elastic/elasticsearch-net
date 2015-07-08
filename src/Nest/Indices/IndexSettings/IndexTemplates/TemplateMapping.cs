@@ -18,19 +18,19 @@ namespace Nest
 		public int? Order { get; set; }
 
 		[JsonProperty("settings")]
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]
 		public FluentDictionary<string, object> Settings { get; set; }
 
 		[JsonProperty("mappings")]
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]
 		public Dictionary<string, RootObjectMapping> Mappings { get; set; }
 
 		[JsonProperty("warmers")]
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]
 		public Dictionary<string, WarmerMapping> Warmers { get; set; }
 		
 		[JsonProperty("aliases")]
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]
 		public Dictionary<string, ICreateAliasOperation> Aliases { get; set; }
 	}
 }

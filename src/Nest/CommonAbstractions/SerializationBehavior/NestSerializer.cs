@@ -47,10 +47,10 @@ namespace Nest
 				return string.Join(",", pns.Select(
 					oo =>
 					{
-						if (oo is PropertyName)
-							return this._infer.PropertyName(oo as PropertyName);
-						if (oo is PropertyPath)
-							return this._infer.PropertyPath(oo as PropertyPath);
+						if (oo is FieldName)
+							return this._infer.FieldName(oo as FieldName);
+						if (oo is FieldName)
+							return this._infer.FieldName(oo as FieldName);
 						return oo.ToString();
 					})
 				);
@@ -60,13 +60,13 @@ namespace Nest
 			if (valueType is bool)
 				return ((bool)valueType) ? "true" : "false";
 
-			var pn = valueType as PropertyName;
+			var pn = valueType as FieldName;
 			if (pn != null)
-				return this._infer.PropertyName(pn);
+				return this._infer.FieldName(pn);
 
-			var pp = valueType as PropertyPath;
+			var pp = valueType as FieldName;
 			if (pp != null)
-				return this._infer.PropertyPath(pp);
+				return this._infer.FieldName(pp);
 
 			return valueType.ToString();
 		}

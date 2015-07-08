@@ -33,7 +33,7 @@ namespace Nest
 		public string CompressThreshold { get; set; }
 
 		[JsonProperty("copy_to")]
-		public IEnumerable<PropertyPath> CopyTo { get; set; }
+		public IEnumerable<FieldName> CopyTo { get; set; }
 	}
 
 	public class BinaryMappingDescriptor<T> where T : class
@@ -83,13 +83,13 @@ namespace Nest
 
 		public BinaryMappingDescriptor<T> CopyTo(params string[] fields)
 		{
-			this._Mapping.CopyTo = fields.Select(f => (PropertyPath)f);
+			this._Mapping.CopyTo = fields.Select(f => (FieldName)f);
 			return this;
 		}
 
 		public BinaryMappingDescriptor<T> CopyTo(params Expression<Func<T, object>>[] objectPaths)
 		{
-			this._Mapping.CopyTo = objectPaths.Select(e => (PropertyPath)e);
+			this._Mapping.CopyTo = objectPaths.Select(e => (FieldName)e);
 			return this;
 		}
 

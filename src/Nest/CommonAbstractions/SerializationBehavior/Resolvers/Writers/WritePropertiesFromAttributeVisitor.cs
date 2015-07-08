@@ -6,13 +6,13 @@ namespace Nest.Resolvers.Writers {
     public class WritePropertiesFromAttributeVisitor : IElasticPropertyVisitor
     {
         private readonly JsonWriter _jsonWriter;
-        private readonly string _propertyName;
+        private readonly string _FieldName;
         private readonly string _type;
 
-        public WritePropertiesFromAttributeVisitor(JsonWriter jsonWriter, string propertyName, string type)
+        public WritePropertiesFromAttributeVisitor(JsonWriter jsonWriter, string FieldName, string type)
         {
             this._jsonWriter = jsonWriter;
-            this._propertyName = propertyName;
+            this._FieldName = FieldName;
             this._type = type;
         }
 
@@ -28,7 +28,7 @@ namespace Nest.Resolvers.Writers {
                 this._jsonWriter.WriteValue("multi_field");
                 this._jsonWriter.WritePropertyName("fields");
                 this._jsonWriter.WriteStartObject();
-                this._jsonWriter.WritePropertyName(this._propertyName);
+                this._jsonWriter.WritePropertyName(this._FieldName);
                 this._jsonWriter.WriteStartObject();
             }
             if (att.NumericType != NumberType.Default)

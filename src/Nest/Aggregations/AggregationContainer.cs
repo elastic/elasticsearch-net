@@ -97,7 +97,7 @@ namespace Nest
 		IScriptedMetricAggregator ScriptedMetric { get; set; }
 
 		[JsonProperty("aggs")]
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]
 		IDictionary<string, IAggregationContainer> Aggregations { get; set; }
 	}
 

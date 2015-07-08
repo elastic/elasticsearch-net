@@ -40,7 +40,7 @@ namespace Nest
 		long? TerminateAfter { get; set; }
 
 		[JsonProperty(PropertyName = "indices_boost")]
-		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		[JsonConverter(typeof (DictionaryKeysAreNotFieldNamesJsonConverter))]
 		IDictionary<IndexName, double> IndicesBoost { get; set; }
 
 		[JsonProperty(PropertyName = "sort")]
@@ -57,13 +57,13 @@ namespace Nest
 		IRescore Rescore { get; set; }
 
 		[JsonProperty(PropertyName = "fields")]
-		IList<PropertyPath> Fields { get; set; }
+		IList<FieldName> Fields { get; set; }
 
 		[JsonProperty(PropertyName = "fielddata_fields")]
-		IList<PropertyPath> FielddataFields { get; set; }
+		IList<FieldName> FielddataFields { get; set; }
 
 		[JsonProperty(PropertyName = "script_fields")]
-		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		[JsonConverter(typeof (DictionaryKeysAreNotFieldNamesJsonConverter))]
 		IDictionary<string, IScriptQuery> ScriptFields { get; set; }
 
 		[JsonProperty(PropertyName = "_source")]
@@ -71,7 +71,7 @@ namespace Nest
 		ISourceFilter Source { get; set; }
 
 		[JsonProperty(PropertyName = "aggs")]
-		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		[JsonConverter(typeof (DictionaryKeysAreNotFieldNamesJsonConverter))]
 		IDictionary<string, IAggregationContainer> Aggregations { get; set; }
 
 		[JsonProperty(PropertyName = "query")]
@@ -81,7 +81,7 @@ namespace Nest
 		IQueryContainer PostFilter { get; set; }
 
 		[JsonProperty(PropertyName = "inner_hits")]
-		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		[JsonConverter(typeof (DictionaryKeysAreNotFieldNamesJsonConverter))]
 		IDictionary<string, IInnerHitsContainer> InnerHits { get; set; }
 
 		string Preference { get; }
@@ -151,8 +151,8 @@ namespace Nest
 		public bool? TrackScores { get; set; }
 		public double? MinScore { get; set; }
 		public long? TerminateAfter { get; set; }
-		public IList<PropertyPath> Fields { get; set; }
-		public IList<PropertyPath> FielddataFields { get; set; }
+		public IList<FieldName> Fields { get; set; }
+		public IList<FieldName> FielddataFields { get; set; }
 		public IDictionary<string, IScriptQuery> ScriptFields { get; set; }
 		public ISourceFilter Source { get; set; }
 		public IList<ISort> Sort { get; set; }
@@ -212,8 +212,8 @@ namespace Nest
 		public IDictionary<string, ISuggestBucket> Suggest { get; set; }
 		public IHighlightRequest Highlight { get; set; }
 		public IRescore Rescore { get; set; }
-		public IList<PropertyPath> Fields { get; set; }
-		public IList<PropertyPath> FielddataFields { get; set; }
+		public IList<FieldName> Fields { get; set; }
+		public IList<FieldName> FielddataFields { get; set; }
 		public IDictionary<string, IScriptQuery> ScriptFields { get; set; }
 		public ISourceFilter Source { get; set; }
 		public IDictionary<string, IInnerHitsContainer> InnerHits { get; set; }
@@ -296,9 +296,9 @@ namespace Nest
 
 		IQueryContainer ISearchRequest.PostFilter { get; set; }
 
-		IList<PropertyPath> ISearchRequest.Fields { get; set; }
+		IList<FieldName> ISearchRequest.Fields { get; set; }
 
-		IList<PropertyPath> ISearchRequest.FielddataFields { get; set; }
+		IList<FieldName> ISearchRequest.FielddataFields { get; set; }
 
 		IDictionary<string, IScriptQuery> ISearchRequest.ScriptFields { get; set; }
 
@@ -485,7 +485,7 @@ namespace Nest
 		/// represented by a search hit. Defaults to load the internal _source field.
 		/// </summary>
 		public SearchDescriptor<T> Fields(params Expression<Func<T, object>>[] expressions) =>
-			_assign(a => a.Fields = expressions?.Select(e => (PropertyPath) e).ToListOrNullIfEmpty());
+			_assign(a => a.Fields = expressions?.Select(e => (FieldName) e).ToListOrNullIfEmpty());
 
 		/// <summary>
 		/// Allows to selectively load specific fields for each document 
@@ -499,19 +499,19 @@ namespace Nest
 		/// represented by a search hit. Defaults to load the internal _source field.
 		/// </summary>
 		public SearchDescriptor<T> Fields(params string[] fields)
-			=> _assign(a => a.Fields = fields?.Select(f => (PropertyPath) f).ToListOrNullIfEmpty());
+			=> _assign(a => a.Fields = fields?.Select(f => (FieldName) f).ToListOrNullIfEmpty());
 
 		///<summary>
 		///A comma-separated list of fields to return as the field data representation of a field for each hit
 		///</summary>
 		public SearchDescriptor<T> FielddataFields(params string[] fielddataFields) =>
-			_assign(a => a.FielddataFields = fielddataFields?.Select(f => (PropertyPath) f).ToListOrNullIfEmpty());
+			_assign(a => a.FielddataFields = fielddataFields?.Select(f => (FieldName) f).ToListOrNullIfEmpty());
 
 		///<summary>
 		///A comma-separated list of fields to return as the field data representation of a field for each hit
 		///</summary>
 		public SearchDescriptor<T> FielddataFields(params Expression<Func<T, object>>[] fielddataFields) =>
-			_assign(a => a.FielddataFields = fielddataFields?.Select(f => (PropertyPath) f).ToListOrNullIfEmpty());
+			_assign(a => a.FielddataFields = fielddataFields?.Select(f => (FieldName) f).ToListOrNullIfEmpty());
 		
 		//TODO scriptfields needs a seperate encapsulation
 		public SearchDescriptor<T> ScriptFields(

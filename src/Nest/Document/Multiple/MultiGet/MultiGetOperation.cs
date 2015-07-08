@@ -26,7 +26,7 @@ namespace Nest
 		
 		public string Id { get; set; }
 		
-		public IList<PropertyPath> Fields { get; set; }
+		public IList<FieldName> Fields { get; set; }
 		
 		public ISourceFilter Source { get; set; }
 
@@ -34,7 +34,7 @@ namespace Nest
 
 		public object Document { get; set; }
 
-		public IDictionary<PropertyPath, string> PerFieldAnalyzer { get; set; }
+		public IDictionary<FieldName, string> PerFieldAnalyzer { get; set; }
 	}
 
 	public class MultiGetOperationDescriptor<T> : IMultiGetOperation
@@ -47,9 +47,9 @@ namespace Nest
 		string IMultiGetOperation.Id { get; set; }
 		string IMultiGetOperation.Routing { get; set; }
 		ISourceFilter IMultiGetOperation.Source { get; set; }
-		IList<PropertyPath> IMultiGetOperation.Fields { get; set; }
+		IList<FieldName> IMultiGetOperation.Fields { get; set; }
 		object IMultiGetOperation.Document { get; set; }
-		IDictionary<PropertyPath, string> IMultiGetOperation.PerFieldAnalyzer { get; set; }
+		IDictionary<FieldName, string> IMultiGetOperation.PerFieldAnalyzer { get; set; }
 		Type IMultiGetOperation.ClrType { get { return typeof(T); } }
 
 		public MultiGetOperationDescriptor()
@@ -148,7 +148,7 @@ namespace Nest
 		/// </summary>
 		public MultiGetOperationDescriptor<T> Fields(params Expression<Func<T, object>>[] expressions)
 		{
-			Self.Fields = expressions.Select(e => (PropertyPath)e).ToList();
+			Self.Fields = expressions.Select(e => (FieldName)e).ToList();
 			return this;
 		}
 
@@ -158,7 +158,7 @@ namespace Nest
 		/// </summary>
 		public MultiGetOperationDescriptor<T> Fields(params string[] fields)
 		{
-			Self.Fields = fields.Select(f => (PropertyPath)f).ToList();
+			Self.Fields = fields.Select(f => (FieldName)f).ToList();
 			return this;
 		}
 
@@ -179,7 +179,7 @@ namespace Nest
 		{
 			var d = new FluentDictionary<Expression<Func<T, object>>, string>();
 			analyzerSelector(d);
-			Self.PerFieldAnalyzer = d.ToDictionary(x => PropertyPath.Create(x.Key), x => x.Value);
+			Self.PerFieldAnalyzer = d.ToDictionary(x => FieldName.Create(x.Key), x => x.Value);
 			return this;
 		}
 
@@ -187,9 +187,9 @@ namespace Nest
 		// artificial document field.
 		// TODO: For 2.0, we should consider decoupling IMultiGetOperation from 
 		// MoreLikeThisQuery and have a dedicatd MoreLikeThisDocument object.
-		public MultiGetOperationDescriptor<T> PerFieldAnalyzer(Func<FluentDictionary<PropertyPath, string>, FluentDictionary<PropertyPath, string>> analyzerSelector)
+		public MultiGetOperationDescriptor<T> PerFieldAnalyzer(Func<FluentDictionary<FieldName, string>, FluentDictionary<FieldName, string>> analyzerSelector)
 		{
-			Self.PerFieldAnalyzer = analyzerSelector(new FluentDictionary<PropertyPath, string>());
+			Self.PerFieldAnalyzer = analyzerSelector(new FluentDictionary<FieldName, string>());
 			return this;
 		}
 	}

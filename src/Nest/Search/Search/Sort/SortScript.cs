@@ -14,7 +14,7 @@ namespace Nest
 		string Script { get; set; }
 
 		[JsonProperty(PropertyName = "params")]
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]
 		Dictionary<string, object> Params { get; set; }
 
 		[JsonProperty(PropertyName = "lang")]
@@ -29,7 +29,7 @@ namespace Nest
 		public string Type { get; set; }
 		public string Script { get; set; }
 		public Dictionary<string, object> Params { get; set; }
-		public override PropertyPath SortKey { get { return "_script"; } }
+		public override FieldName SortKey { get { return "_script"; } }
 		public string Language { get; set; }
 		public string File { get; set; }
 	}
@@ -46,7 +46,7 @@ namespace Nest
 
 		string IScriptSort.File { get; set; }
 
-		PropertyPath ISort.SortKey { get { return "_script"; } }
+		FieldName ISort.SortKey { get { return "_script"; } }
 
 		Dictionary<string, object> IScriptSort.Params { get; set; }
 

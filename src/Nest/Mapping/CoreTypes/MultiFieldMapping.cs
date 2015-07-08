@@ -13,7 +13,7 @@ namespace Nest
 
 		public MultiFieldMapping() 
 		{
-			this.Fields = new Dictionary<PropertyName, IElasticCoreType>();
+			this.Fields = new Dictionary<FieldName, IElasticCoreType>();
 			_defaultType = "multi_field";
 		}
 
@@ -22,7 +22,7 @@ namespace Nest
 			_defaultType = defaultType;
 		}
 
-		public PropertyName Name { get; set; }
+		public FieldName Name { get; set; }
 
 		private TypeName _typeOverride;
 
@@ -43,7 +43,7 @@ namespace Nest
 		public bool? IncludeInAll { get; set; }
 
 		[JsonProperty("fields", DefaultValueHandling = DefaultValueHandling.Ignore), JsonConverter(typeof(ElasticCoreTypeConverter))]
-		public IDictionary<PropertyName, IElasticCoreType> Fields { get; set; }
+		public IDictionary<FieldName, IElasticCoreType> Fields { get; set; }
 	}
 
     public class MultiFieldMappingPath

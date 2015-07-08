@@ -31,7 +31,7 @@ namespace Nest
 		private ITermQuery Self => this;
 		string IQuery.Name { get; set; }
 		bool IQuery.Conditionless => TermQuery.IsConditionless(this);
-		PropertyPath IFieldNameQuery.Field { get; set; }
+		FieldName IFieldNameQuery.Field { get; set; }
 		object ITermQuery.Value { get; set; }
 		double? ITermQuery.Boost { get; set; }
 

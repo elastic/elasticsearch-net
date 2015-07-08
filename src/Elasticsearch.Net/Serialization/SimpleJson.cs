@@ -1219,9 +1219,9 @@ namespace Elasticsearch.Net.Serialization
 			SetCache = new ReflectionUtils.ThreadSafeDictionary<Type, IDictionary<string, KeyValuePair<Type, ReflectionUtils.SetDelegate>>>(SetterValueFactory);
 		}
 
-		protected virtual string MapClrMemberNameToJsonFieldName(string clrPropertyName)
+		protected virtual string MapClrMemberNameToJsonFieldName(string clrFieldName)
 		{
-			return clrPropertyName;
+			return clrFieldName;
 		}
 
 		internal virtual ReflectionUtils.ConstructorDelegate ContructorDelegateFactory(Type key)

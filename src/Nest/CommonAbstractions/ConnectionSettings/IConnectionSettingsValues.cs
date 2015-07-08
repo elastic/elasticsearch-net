@@ -14,7 +14,7 @@ namespace Nest
 		FluentDictionary<Type, string> IdProperties { get; }
 		FluentDictionary<MemberInfo, IPropertyMapping> PropertyMappings { get; }
 		string DefaultIndex { get; }
-		Func<string, string> DefaultPropertyNameInferrer { get; }
+		Func<string, string> DefaultFieldNameInferrer { get; }
 		Func<Type, string> DefaultTypeNameInferrer { get; }
 		Action<JsonSerializerSettings> ModifyJsonSerializerSettings { get; }
 		ReadOnlyCollection<Func<Type, JsonConverter>> ContractConverters { get; }

@@ -116,7 +116,7 @@ namespace Nest
 		public IFieldMapping MappingFor<T>(Expression<Func<T, object>>  fieldName)
 			where T : class
 		{
-			var path = Settings.Inferrer.PropertyPath(fieldName);
+			var path = Settings.Inferrer.FieldName(fieldName);
 			return this.MappingFor<T>(path);
 			
 		}

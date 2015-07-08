@@ -12,7 +12,7 @@ namespace Nest
 	public interface ITermsAggregator : IBucketAggregator
 	{
 		[JsonProperty("field")]
-		PropertyPath Field { get; set; }
+		FieldName Field { get; set; }
 
 		[JsonProperty("script")]
 		string Script { get; set; }
@@ -47,7 +47,7 @@ namespace Nest
 
 	public class TermsAggregator : BucketAggregator, ITermsAggregator
 	{
-		public PropertyPath Field { get; set; }
+		public FieldName Field { get; set; }
 		public string Script { get; set; }
 		public int? Size { get; set; }
 		public int? ShardSize { get; set; }
@@ -66,7 +66,7 @@ namespace Nest
 			, ITermsAggregator 
 		where T : class
 	{
-		PropertyPath ITermsAggregator.Field { get; set; }
+		FieldName ITermsAggregator.Field { get; set; }
 		
 		string ITermsAggregator.Script { get; set; }
 		

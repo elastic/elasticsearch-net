@@ -30,7 +30,7 @@ namespace Nest
 		private IGeoShapePolygonQuery Self => this;
 		string IQuery.Name { get; set; }
 		bool IQuery.Conditionless => GeoShapePolygonQuery.IsConditionless(this);
-		PropertyPath IFieldNameQuery.Field { get; set; }
+		FieldName IFieldNameQuery.Field { get; set; }
 		IPolygonGeoShape IGeoShapePolygonQuery.Shape { get; set; }
 
 		public GeoShapePolygonQueryDescriptor<T> Name(string name)
