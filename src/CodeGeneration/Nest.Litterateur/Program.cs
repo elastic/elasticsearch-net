@@ -13,39 +13,24 @@ namespace Nest.Litterateur
 
 		public static class LitUp
 		{
-			private readonly static string _testFolder = @"..\..\..\..\..\src\Tests";
-			private readonly static string _docFolder = @"..\..\..\..\..\docs\contents\new";
-			private static readonly string[] _skipFolders = new[] { "Nest.Tests.Literate", "Debug", "Release" };
+			private readonly static string TestFolder = @"..\..\..\..\..\src\Tests";
+			private readonly static string[] SkipFolders = { "Nest.Tests.Literate", "Debug", "Release" };
 
-			public static IEnumerable<DocumentationFile> FindAll()
-			{
-				var csfiles = Directory.GetFiles(_testFolder, "*.cs", SearchOption.AllDirectories);
-				foreach (var csfile in csfiles)
-				{
-					var dirInfo = new DirectoryInfo(csfile);
-					var fileInfo = new FileInfo(csfile);
-					if (_skipFolders.Contains(dirInfo.Parent.Name))
-						continue;
-
-					yield return DocumentationFile.Load(csfile);
-				}
-			}
+			public static IEnumerable<DocumentationFile> FindAll(string extension) =>
+				from f in Directory.GetFiles(TestFolder, $"*.{extension}", SearchOption.AllDirectories)
+				let dir = new DirectoryInfo(f)
+				where dir?.Parent != null && !SkipFolders.Contains(dir.Parent.Name)
+				select DocumentationFile.Load(new FileInfo(f));
 
 			public static void Go()
 			{
-				var files = FindAll();
-				foreach(var file in files)
-				{
-					var path = Regex.Replace(file.FileName, @"(^.+\\Tests\\|\.cs$)", "") + ".md";
-					var docFileName = Path.GetFullPath(Path.Combine(_docFolder, path));
-					var fileInfo = new FileInfo(docFileName);
-					Directory.CreateDirectory(fileInfo.Directory.FullName);
-					File.WriteAllText(docFileName, file.Body);
-				}
+				var files = FindAll("cs").Concat(FindAll("md"));
+				foreach (var file in files)
+					file.SaveToDocumentationFolder();
 
 			}
 
-				
+
 		}
 	}
 }

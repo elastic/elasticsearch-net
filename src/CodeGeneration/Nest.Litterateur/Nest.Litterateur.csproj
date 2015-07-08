@@ -38,7 +38,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Documentation\DocumentationBlocks.cs" />
-    <Compile Include="Documentation\DocumentationFile.cs" />
+    <Compile Include="Documentation\CSharpDocumentationFile.cs" />
     <Compile Include="EnumerableExtensions.cs" />
     <Compile Include="Walkers\CodeWithDocumentationWalker.cs" />
     <Compile Include="Program.cs" />
