@@ -34,14 +34,14 @@ namespace Nest
 			var isFields = (mm.Contains("fields") || mm.Contains("source_include") || mm.Contains("source_exclude"));
 		  if (isFields && fieldType.Contains("string"))
 		  {
-			  fieldType = "IEnumerable<PropertyPathMarker>";
-			  setter = mm + ".Select(f=>(PropertyPathMarker)f)";
+			  fieldType = "IEnumerable<FieldName>";
+			  setter = mm + ".Select(f=>(FieldName)f)";
 		  }
 		  else if (mm.Contains("field") && fieldType.Contains("string"))
 		  {
-			  fieldType = "PropertyPathMarker";
+			  fieldType = "FieldName";
 		  }
-		if (isFields && fieldType.Contains("PropertyPath"))
+		if (isFields && fieldType.Contains("FieldName"))
 		 {
 		<text>
 		///<summary>@kv.Value.Description</summary>
@@ -50,13 +50,13 @@ namespace Nest
 				@Raw("IEnumerable<Expression<Func<T, object>>> ") @mm)
 			where T : class
 		{
-			var _@(mm) = @mm@Raw(".Select(e=>(PropertyPathMarker)e)");
+			var _@(mm) = @mm@Raw(".Select(e=>(FieldName)e)");
 			qs.AddQueryString("@kv.Value.OriginalQueryStringParamName", _@mm);
 			return qs;
 		}
 		</text>
 		 }
-		 else if (mm.Contains("field") && fieldType.Contains("PropertyPath"))
+		 else if (mm.Contains("field") && fieldType.Contains("FieldName"))
 		 {
 		<text>
 		///<summary>@kv.Value.Description</summary>
@@ -65,7 +65,7 @@ namespace Nest
 				@Raw("Expression<Func<T, object>>") @mm)
 			where T : class
 		{
-			var p = (PropertyPathMarker)@mm;
+			var p = (FieldName)@mm;
 			var _@(mm) = p;
 			qs.AddQueryString("@mm", _@mm);
 			return qs;
