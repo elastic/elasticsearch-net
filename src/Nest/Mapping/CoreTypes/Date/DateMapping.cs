@@ -44,7 +44,7 @@ namespace Nest
 		public bool? DocValues { get; set; }
 
 		[JsonProperty("numeric_resolution")]
-		public NumericResolutionUnit NumericResolution { get; set; }
+		public NumericResolutionUnit? NumericResolution { get; set; }
 	}
 
 	public class DateMappingDescriptor<T> where T : class
