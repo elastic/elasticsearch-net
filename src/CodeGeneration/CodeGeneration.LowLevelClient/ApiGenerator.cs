@@ -100,19 +100,18 @@ namespace CodeGeneration.LowLevelClient
 				WriteToEndpointsFolder(fileName, json);
 			}
 		}
+
 		private static readonly Dictionary<string, string> MethodNameOverrides =
-			(from f in new DirectoryInfo(_nestFolder + "/_Generated").GetFiles("*.cs", SearchOption.TopDirectoryOnly)
-			 where f.FullName.EndsWith("Descriptor.cs")
+			(from f in new DirectoryInfo(_nestFolder).GetFiles("*.cs", SearchOption.AllDirectories)
 			 let contents = File.ReadAllText(f.FullName)
 			 let c = Regex.Replace(contents, @"^.+\[DescriptorFor\(""([^ \r\n]+)""\)\].*$", "$1", RegexOptions.Singleline)
 			 where !c.Contains(" ") //filter results that did not match
-			 select new { Value = f.Name.Replace("Descriptor.cs", ""), Key = c })
+			 select new { Value = f.Name.Replace("Request", ""), Key = c })
 			.DistinctBy(v => v.Key)
-			.ToDictionary(k => k.Key, v => v.Value);
+			.ToDictionary(k => k.Key, v => v.Value.Replace(".cs", ""));
 
 		private static readonly Dictionary<string, string> KnownDescriptors =
-			(from f in new DirectoryInfo(_nestFolder + "/_Generated").GetFiles("*.cs", SearchOption.TopDirectoryOnly)
-			 where f.FullName.EndsWith("Descriptor.cs")
+			(from f in new DirectoryInfo(_nestFolder).GetFiles("*.cs", SearchOption.AllDirectories)
 			 let contents = File.ReadAllText(f.FullName)
 			 let c = Regex.Replace(contents, @"^.+class ([^ \r\n]+).*$", "$1", RegexOptions.Singleline)
 			 select new { Key = Regex.Replace(c, "<.*$", ""), Value = Regex.Replace(c, @"^.*?(?:(\<.+>).*?)?$", "$1") })
@@ -120,8 +119,7 @@ namespace CodeGeneration.LowLevelClient
 			.ToDictionary(k => k.Key, v => v.Value);
 
 		private static readonly Dictionary<string, string> KnownRequests =
-			(from f in new DirectoryInfo(_nestFolder + "/_Generated").GetFiles("*.cs", SearchOption.TopDirectoryOnly)
-			 where f.FullName.EndsWith("Descriptor.cs")
+			(from f in new DirectoryInfo(_nestFolder).GetFiles("*.cs", SearchOption.AllDirectories)
 			 let contents = File.ReadAllText(f.FullName)
 			 let c = Regex.Replace(contents, @"^.+interface ([^ \r\n]+).*$", "$1", RegexOptions.Singleline)
 			 where c.StartsWith("I") && c.Contains("Request")
