@@ -1007,7 +1007,6 @@
     <Compile Include="Resolvers\Converters\TypeNameMarkerConverter.cs" />
     <Compile Include="Resolvers\Converters\GeoPrecisionConverter.cs" />
     <Compile Include="Resolvers\Converters\UpgradeStatusResponseConverter.cs" />
-    <Compile Include="Resolvers\Converters\UriJsonConverter.cs" />
     <Compile Include="Resolvers\Converters\WarmerMappingConverter.cs" />
     <Compile Include="Resolvers\Converters\ShardsSegmentConverter.cs" />
     <Compile Include="Resolvers\Converters\MultiGetHitConverter.cs" />
