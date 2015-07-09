@@ -42,14 +42,14 @@ namespace Nest
 		{
 			<text>
 		///<summary>@kv.Value.Description</summary>
-		public @Raw(type) @mm@(Raw(typed ? "" : "<T>"))(params @Raw("Expression<Func<T, object>>[]") typedPathLookups) @Raw(typed ? "" : "where T : class") =>
-			_requestParams(p=>p._@(mm)(typedPathLookups));</text>
+		public @Raw(type) @mm@(Raw(typed ? "" : "<T>"))(params @Raw("Expression<Func<T, object>>[]") fields) @Raw(typed ? "" : "where T : class") =>
+			_requestParams(p=>p._@(mm)(fields));</text>
 		}
 		else if (mm.ToLowerInvariant().Contains("field") && t.Contains("string"))
 		{<text>
 		///<summary>@kv.Value.Description</summary>
-		public @Raw(type) @mm@(Raw(typed ? "" : "<T>"))(@Raw("Expression<Func<T, object>>") typedPathLookup) @Raw(typed ? "" : "where T : class") =>
-			_requestParams(p=>p._@(mm)(typedPathLookups));</text>
+		public @Raw(type) @mm@(Raw(typed ? "" : "<T>"))(@Raw("Expression<Func<T, object>>") field) @Raw(typed ? "" : "where T : class") =>
+			_requestParams(p=>p._@(mm)(field));</text>
 		}
 	}
 	if (method.Unmapped)

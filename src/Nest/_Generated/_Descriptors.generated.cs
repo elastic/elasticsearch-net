@@ -163,8 +163,8 @@ namespace Nest
 		public CatFielddataDescriptor Fields(params string[] fields) => _requestParams(p=>p.Fields(fields));
 			
 		///<summary>A comma-separated list of fields to return in the output</summary>
-		public CatFielddataDescriptor Fields<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class =>
-			_requestParams(p=>p._Fields(typedPathLookups));
+		public CatFielddataDescriptor Fields<T>(params Expression<Func<T, object>>[] fields) where T : class =>
+			_requestParams(p=>p._Fields(fields));
 
 		///<summary>The URL-encoded request definition</summary>
 		public CatFielddataDescriptor Source(string source) => _requestParams(p=>p.Source(source));
@@ -880,8 +880,8 @@ namespace Nest
 		public ExplainDescriptor<T> Fields(params string[] fields) => _requestParams(p=>p.Fields(fields));
 			
 		///<summary>A comma-separated list of fields to return in the response</summary>
-		public ExplainDescriptor<T> Fields(params Expression<Func<T, object>>[] typedPathLookups)  =>
-			_requestParams(p=>p._Fields(typedPathLookups));
+		public ExplainDescriptor<T> Fields(params Expression<Func<T, object>>[] fields)  =>
+			_requestParams(p=>p._Fields(fields));
 
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public ExplainDescriptor<T> Lenient(bool lenient = true) => _requestParams(p=>p.Lenient(lenient));
@@ -908,15 +908,15 @@ namespace Nest
 		public ExplainDescriptor<T> SourceExclude(params string[] source_exclude) => _requestParams(p=>p.SourceExclude(source_exclude));
 			
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public ExplainDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] typedPathLookups)  =>
-			_requestParams(p=>p._SourceExclude(typedPathLookups));
+		public ExplainDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields)  =>
+			_requestParams(p=>p._SourceExclude(fields));
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public ExplainDescriptor<T> SourceInclude(params string[] source_include) => _requestParams(p=>p.SourceInclude(source_include));
 			
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public ExplainDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] typedPathLookups)  =>
-			_requestParams(p=>p._SourceInclude(typedPathLookups));
+		public ExplainDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields)  =>
+			_requestParams(p=>p._SourceInclude(fields));
 
 		///<summary>The URL-encoded request definition</summary>
 		public ExplainDescriptor<T> Source(string source) => _requestParams(p=>p.Source(source));
@@ -933,8 +933,8 @@ namespace Nest
 		public FieldStatsDescriptor Fields(params string[] fields) => _requestParams(p=>p.Fields(fields));
 			
 		///<summary>A comma-separated list of fields for to get field statistics for (min value, max value, and more)</summary>
-		public FieldStatsDescriptor Fields<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class =>
-			_requestParams(p=>p._Fields(typedPathLookups));
+		public FieldStatsDescriptor Fields<T>(params Expression<Func<T, object>>[] fields) where T : class =>
+			_requestParams(p=>p._Fields(fields));
 
 		///<summary>Defines if field stats should be returned on a per index level or on a cluster wide level</summary>
 		public FieldStatsDescriptor Level(Level level) => _requestParams(p=>p.Level(level));
@@ -963,8 +963,8 @@ namespace Nest
 		public GetDescriptor<T> Fields(params string[] fields) => _requestParams(p=>p.Fields(fields));
 			
 		///<summary>A comma-separated list of fields to return in the response</summary>
-		public GetDescriptor<T> Fields(params Expression<Func<T, object>>[] typedPathLookups)  =>
-			_requestParams(p=>p._Fields(typedPathLookups));
+		public GetDescriptor<T> Fields(params Expression<Func<T, object>>[] fields)  =>
+			_requestParams(p=>p._Fields(fields));
 
 		///<summary>The ID of the parent document</summary>
 		public GetDescriptor<T> Parent(string parent) => _requestParams(p=>p.Parent(parent));
@@ -988,15 +988,15 @@ namespace Nest
 		public GetDescriptor<T> SourceExclude(params string[] source_exclude) => _requestParams(p=>p.SourceExclude(source_exclude));
 			
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public GetDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] typedPathLookups)  =>
-			_requestParams(p=>p._SourceExclude(typedPathLookups));
+		public GetDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields)  =>
+			_requestParams(p=>p._SourceExclude(fields));
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public GetDescriptor<T> SourceInclude(params string[] source_include) => _requestParams(p=>p.SourceInclude(source_include));
 			
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public GetDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] typedPathLookups)  =>
-			_requestParams(p=>p._SourceInclude(typedPathLookups));
+		public GetDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields)  =>
+			_requestParams(p=>p._SourceInclude(fields));
 
 		///<summary>Explicit version number for concurrency control</summary>
 		public GetDescriptor<T> Version(long version) => _requestParams(p=>p.Version(version));
@@ -1054,15 +1054,15 @@ namespace Nest
 		public SourceDescriptor<T> SourceExclude(params string[] source_exclude) => _requestParams(p=>p.SourceExclude(source_exclude));
 			
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public SourceDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] typedPathLookups)  =>
-			_requestParams(p=>p._SourceExclude(typedPathLookups));
+		public SourceDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] fields)  =>
+			_requestParams(p=>p._SourceExclude(fields));
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public SourceDescriptor<T> SourceInclude(params string[] source_include) => _requestParams(p=>p.SourceInclude(source_include));
 			
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public SourceDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] typedPathLookups)  =>
-			_requestParams(p=>p._SourceInclude(typedPathLookups));
+		public SourceDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] fields)  =>
+			_requestParams(p=>p._SourceInclude(fields));
 
 		///<summary>Explicit version number for concurrency control</summary>
 		public SourceDescriptor<T> Version(long version) => _requestParams(p=>p.Version(version));
@@ -1152,12 +1152,8 @@ namespace Nest
 		public AnalyzeDescriptor Field(string field) => _requestParams(p=>p.Field(field));
 
 		///<summary>Use the analyzer configured for this field (instead of passing the analyzer name)</summary>
-		public AnalyzeDescriptor Field<T>(Expression<Func<T, object>> typedPathLookup) where T : class
-		{
-			typedPathLookup.ThrowIfNull("typedPathLookup");
-			this.Request.RequestParameters._Field(typedPathLookup);
-			return this;
-		}
+		public AnalyzeDescriptor Field<T>(Expression<Func<T, object>> field) where T : class =>
+			_requestParams(p=>p._Field(field));
 
 		///<summary>A comma-separated list of filters to use for the analysis</summary>
 		public AnalyzeDescriptor Filters(params string[] filters) => _requestParams(p=>p.Filters(filters));
@@ -1195,8 +1191,8 @@ namespace Nest
 		public ClearCacheDescriptor Fields(params string[] fields) => _requestParams(p=>p.Fields(fields));
 			
 		///<summary>A comma-separated list of fields to clear when using the `field_data` parameter (default: all)</summary>
-		public ClearCacheDescriptor Fields<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class =>
-			_requestParams(p=>p._Fields(typedPathLookups));
+		public ClearCacheDescriptor Fields<T>(params Expression<Func<T, object>>[] fields) where T : class =>
+			_requestParams(p=>p._Fields(fields));
 
 		///<summary>Clear filter caches</summary>
 		public ClearCacheDescriptor Filter(bool filter = true) => _requestParams(p=>p.Filter(filter));
@@ -1912,22 +1908,22 @@ namespace Nest
 		public IndicesStatsDescriptor CompletionFields(params string[] completion_fields) => _requestParams(p=>p.CompletionFields(completion_fields));
 			
 		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
-		public IndicesStatsDescriptor CompletionFields<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class =>
-			_requestParams(p=>p._CompletionFields(typedPathLookups));
+		public IndicesStatsDescriptor CompletionFields<T>(params Expression<Func<T, object>>[] fields) where T : class =>
+			_requestParams(p=>p._CompletionFields(fields));
 
 		///<summary>A comma-separated list of fields for `fielddata` index metric (supports wildcards)</summary>
 		public IndicesStatsDescriptor FielddataFields(params string[] fielddata_fields) => _requestParams(p=>p.FielddataFields(fielddata_fields));
 			
 		///<summary>A comma-separated list of fields for `fielddata` index metric (supports wildcards)</summary>
-		public IndicesStatsDescriptor FielddataFields<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class =>
-			_requestParams(p=>p._FielddataFields(typedPathLookups));
+		public IndicesStatsDescriptor FielddataFields<T>(params Expression<Func<T, object>>[] fields) where T : class =>
+			_requestParams(p=>p._FielddataFields(fields));
 
 		///<summary>A comma-separated list of fields for `fielddata` and `completion` index metric (supports wildcards)</summary>
 		public IndicesStatsDescriptor Fields(params string[] fields) => _requestParams(p=>p.Fields(fields));
 			
 		///<summary>A comma-separated list of fields for `fielddata` and `completion` index metric (supports wildcards)</summary>
-		public IndicesStatsDescriptor Fields<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class =>
-			_requestParams(p=>p._Fields(typedPathLookups));
+		public IndicesStatsDescriptor Fields<T>(params Expression<Func<T, object>>[] fields) where T : class =>
+			_requestParams(p=>p._Fields(fields));
 
 		///<summary>A comma-separated list of search groups for `search` index metric</summary>
 		public IndicesStatsDescriptor Groups(params string[] groups) => _requestParams(p=>p.Groups(groups));
@@ -2105,8 +2101,8 @@ namespace Nest
 		public MultiGetDescriptor Fields(params string[] fields) => _requestParams(p=>p.Fields(fields));
 			
 		///<summary>A comma-separated list of fields to return in the response</summary>
-		public MultiGetDescriptor Fields<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class =>
-			_requestParams(p=>p._Fields(typedPathLookups));
+		public MultiGetDescriptor Fields<T>(params Expression<Func<T, object>>[] fields) where T : class =>
+			_requestParams(p=>p._Fields(fields));
 
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public MultiGetDescriptor Preference(string preference) => _requestParams(p=>p.Preference(preference));
@@ -2124,15 +2120,15 @@ namespace Nest
 		public MultiGetDescriptor SourceExclude(params string[] source_exclude) => _requestParams(p=>p.SourceExclude(source_exclude));
 			
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public MultiGetDescriptor SourceExclude<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class =>
-			_requestParams(p=>p._SourceExclude(typedPathLookups));
+		public MultiGetDescriptor SourceExclude<T>(params Expression<Func<T, object>>[] fields) where T : class =>
+			_requestParams(p=>p._SourceExclude(fields));
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
 		public MultiGetDescriptor SourceInclude(params string[] source_include) => _requestParams(p=>p.SourceInclude(source_include));
 			
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public MultiGetDescriptor SourceInclude<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class =>
-			_requestParams(p=>p._SourceInclude(typedPathLookups));
+		public MultiGetDescriptor SourceInclude<T>(params Expression<Func<T, object>>[] fields) where T : class =>
+			_requestParams(p=>p._SourceInclude(fields));
 
 		///<summary>The URL-encoded request definition</summary>
 		public MultiGetDescriptor Source(string source) => _requestParams(p=>p.Source(source));
@@ -2170,8 +2166,8 @@ namespace Nest
 		public MoreLikeThisDescriptor<T> MltFields(params string[] mlt_fields) => _requestParams(p=>p.MltFields(mlt_fields));
 			
 		///<summary>Specific fields to perform the query against</summary>
-		public MoreLikeThisDescriptor<T> MltFields(params Expression<Func<T, object>>[] typedPathLookups)  =>
-			_requestParams(p=>p._MltFields(typedPathLookups));
+		public MoreLikeThisDescriptor<T> MltFields(params Expression<Func<T, object>>[] fields)  =>
+			_requestParams(p=>p._MltFields(fields));
 
 		///<summary>How many terms have to match in order to consider the document a match (default: 0.3)</summary>
 		public MoreLikeThisDescriptor<T> PercentTermsToMatch(double percent_terms_to_match) => _requestParams(p=>p.PercentTermsToMatch(percent_terms_to_match));
@@ -2258,8 +2254,8 @@ namespace Nest
 		public MultiTermVectorsDescriptor<T> Fields(params string[] fields) => _requestParams(p=>p.Fields(fields));
 			
 		///<summary>A comma-separated list of fields to return. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public MultiTermVectorsDescriptor<T> Fields(params Expression<Func<T, object>>[] typedPathLookups)  =>
-			_requestParams(p=>p._Fields(typedPathLookups));
+		public MultiTermVectorsDescriptor<T> Fields(params Expression<Func<T, object>>[] fields)  =>
+			_requestParams(p=>p._Fields(fields));
 
 		///<summary>Specifies if term offsets should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
 		public MultiTermVectorsDescriptor<T> Offsets(bool offsets = true) => _requestParams(p=>p.Offsets(offsets));
@@ -2357,22 +2353,22 @@ namespace Nest
 		public NodesStatsDescriptor CompletionFields(params string[] completion_fields) => _requestParams(p=>p.CompletionFields(completion_fields));
 			
 		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
-		public NodesStatsDescriptor CompletionFields<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class =>
-			_requestParams(p=>p._CompletionFields(typedPathLookups));
+		public NodesStatsDescriptor CompletionFields<T>(params Expression<Func<T, object>>[] fields) where T : class =>
+			_requestParams(p=>p._CompletionFields(fields));
 
 		///<summary>A comma-separated list of fields for `fielddata` index metric (supports wildcards)</summary>
 		public NodesStatsDescriptor FielddataFields(params string[] fielddata_fields) => _requestParams(p=>p.FielddataFields(fielddata_fields));
 			
 		///<summary>A comma-separated list of fields for `fielddata` index metric (supports wildcards)</summary>
-		public NodesStatsDescriptor FielddataFields<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class =>
-			_requestParams(p=>p._FielddataFields(typedPathLookups));
+		public NodesStatsDescriptor FielddataFields<T>(params Expression<Func<T, object>>[] fields) where T : class =>
+			_requestParams(p=>p._FielddataFields(fields));
 
 		///<summary>A comma-separated list of fields for `fielddata` and `completion` index metric (supports wildcards)</summary>
 		public NodesStatsDescriptor Fields(params string[] fields) => _requestParams(p=>p.Fields(fields));
 			
 		///<summary>A comma-separated list of fields for `fielddata` and `completion` index metric (supports wildcards)</summary>
-		public NodesStatsDescriptor Fields<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class =>
-			_requestParams(p=>p._Fields(typedPathLookups));
+		public NodesStatsDescriptor Fields<T>(params Expression<Func<T, object>>[] fields) where T : class =>
+			_requestParams(p=>p._Fields(fields));
 
 		///<summary>A comma-separated list of search groups for `search` index metric</summary>
 		public NodesStatsDescriptor Groups(bool groups = true) => _requestParams(p=>p.Groups(groups));
@@ -2532,12 +2528,8 @@ namespace Nest
 		public SearchDescriptor<T> SuggestField(string suggest_field) => _requestParams(p=>p.SuggestField(suggest_field));
 
 		///<summary>Specify which field to use for suggestions</summary>
-		public SearchDescriptor<T> SuggestField(Expression<Func<T, object>> typedPathLookup) 
-		{
-			typedPathLookup.ThrowIfNull("typedPathLookup");
-			this.Request.RequestParameters._SuggestField(typedPathLookup);
-			return this;
-		}
+		public SearchDescriptor<T> SuggestField(Expression<Func<T, object>> field)  =>
+			_requestParams(p=>p._SuggestField(field));
 
 		///<summary>Specify suggest mode</summary>
 		public SearchDescriptor<T> SuggestMode(SuggestMode suggest_mode) => _requestParams(p=>p.SuggestMode(suggest_mode));
@@ -2853,8 +2845,8 @@ namespace Nest
 		public TermvectorDescriptor<T> Fields(params string[] fields) => _requestParams(p=>p.Fields(fields));
 			
 		///<summary>A comma-separated list of fields to return.</summary>
-		public TermvectorDescriptor<T> Fields(params Expression<Func<T, object>>[] typedPathLookups)  =>
-			_requestParams(p=>p._Fields(typedPathLookups));
+		public TermvectorDescriptor<T> Fields(params Expression<Func<T, object>>[] fields)  =>
+			_requestParams(p=>p._Fields(fields));
 
 		///<summary>Specifies if term offsets should be returned.</summary>
 		public TermvectorDescriptor<T> Offsets(bool offsets = true) => _requestParams(p=>p.Offsets(offsets));

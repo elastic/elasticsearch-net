@@ -7,12 +7,12 @@ namespace Nest
 	public abstract class BasePathRequest<TParameters> : BaseRequest<TParameters>
 		where TParameters : IRequestParameters, new()
 	{
-		
-		//[JsonIgnore]
-		//public IRequestConfiguration RequestConfiguration
-		//{	
-		//	get { return base._requestConfiguration; }
-		//	set { base._requestConfiguration = value; }
-		//}
+
+		protected TOut Q<TOut>(string name) =>
+			this.Request.RequestParameters.GetQueryStringValue<TOut>(name);
+
+		protected void Q(string name, object value) =>
+			this.Request.RequestParameters.AddQueryStringValue("source", value);
+
 	}
 }

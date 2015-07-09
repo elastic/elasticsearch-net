@@ -13,9002 +13,3418 @@ using Elasticsearch.Net;
 namespace Nest
 {
 
-		
-	///<summary>Request parameters for AbortBenchmark
-	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-benchmark.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for AbortBenchmark <pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-benchmark.html</pre></summary>
 	public partial class AbortBenchmarkRequest  : BasePathRequest<AbortBenchmarkRequestParameters>
-			{
-		
+	{
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
-		}
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
-
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<AbortBenchmarkRequestParameters> pathInfo)
 		{
 			throw new NotImplementedException();
 		}
-
-	}
 	
-		
-	///<summary>Request parameters for Bulk
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-bulk.html
-	///</pre>
-	///</summary>
+	}
+	///<summary>Request parameters for Bulk <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-bulk.html</pre></summary>
 	public partial class BulkRequest 
-			{
-		
+	{
 		///<summary>Explicit write consistency setting for the operation</summary>
-		public Consistency Consistency 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<Consistency>("consistency"); } 
-			set { this.Request.RequestParameters.AddQueryString("consistency", value); }
-		}
-		
+		public Consistency Consistency { get { return Q<Consistency>("consistency"); } set { Q("consistency", value); } }
 		
 		///<summary>Refresh the index after performing the operation</summary>
-		public bool Refresh 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("refresh"); } 
-			set { this.Request.RequestParameters.AddQueryString("refresh", value); }
-		}
-		
+		public bool Refresh { get { return Q<bool>("refresh"); } set { Q("refresh", value); } }
 		
 		///<summary>Explicitely set the replication type</summary>
-		public Replication Replication 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<Replication>("replication"); } 
-			set { this.Request.RequestParameters.AddQueryString("replication", value); }
-		}
-		
+		public Replication Replication { get { return Q<Replication>("replication"); } set { Q("replication", value); } }
 		
 		///<summary>Specific routing value</summary>
-		public string Routing 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("routing"); } 
-			set { this.Request.RequestParameters.AddQueryString("routing", value); }
-		}
-		
+		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Explicit operation timeout</summary>
-		public string Timeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("timeout", value); }
-		}
-		
+		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
 		
 		///<summary>Default document type for items which don&#39;t provide one</summary>
-		public string TypeQueryString 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("type"); } 
-			set { this.Request.RequestParameters.AddQueryString("type", value); }
-		}
-		
+		public string TypeQueryString { get { return Q<string>("type"); } set { Q("type", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for CatAliases
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-alias.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for CatAliases <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-alias.html</pre></summary>
 	public partial class CatAliasesRequest 
-			{
-		
+	{
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("local"); } 
-			set { this.Request.RequestParameters.AddQueryString("local", value); }
-		}
-		
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public string MasterTimeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("master_timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("master_timeout", value); }
-		}
-		
+		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public  string[] H 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("h"); } 
-			set { this.Request.RequestParameters.AddQueryString("h", value); }
-		}
-		
+		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
 		
 		///<summary>Return help information</summary>
-		public bool Help 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("help"); } 
-			set { this.Request.RequestParameters.AddQueryString("help", value); }
-		}
-		
+		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
 		
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool V 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("v"); } 
-			set { this.Request.RequestParameters.AddQueryString("v", value); }
-		}
-		
+		public bool V { get { return Q<bool>("v"); } set { Q("v", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for CatAllocation
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-allocation.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for CatAllocation <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-allocation.html</pre></summary>
 	public partial class CatAllocationRequest 
-			{
-		
+	{
 		///<summary>The unit in which to display byte values</summary>
-		public Bytes Bytes 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<Bytes>("bytes"); } 
-			set { this.Request.RequestParameters.AddQueryString("bytes", value); }
-		}
-		
+		public Bytes Bytes { get { return Q<Bytes>("bytes"); } set { Q("bytes", value); } }
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("local"); } 
-			set { this.Request.RequestParameters.AddQueryString("local", value); }
-		}
-		
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public string MasterTimeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("master_timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("master_timeout", value); }
-		}
-		
+		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public  string[] H 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("h"); } 
-			set { this.Request.RequestParameters.AddQueryString("h", value); }
-		}
-		
+		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
 		
 		///<summary>Return help information</summary>
-		public bool Help 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("help"); } 
-			set { this.Request.RequestParameters.AddQueryString("help", value); }
-		}
-		
+		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
 		
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool V 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("v"); } 
-			set { this.Request.RequestParameters.AddQueryString("v", value); }
-		}
-		
+		public bool V { get { return Q<bool>("v"); } set { Q("v", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for CatCount
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-count.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for CatCount <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-count.html</pre></summary>
 	public partial class CatCountRequest 
-			{
-		
+	{
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("local"); } 
-			set { this.Request.RequestParameters.AddQueryString("local", value); }
-		}
-		
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public string MasterTimeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("master_timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("master_timeout", value); }
-		}
-		
+		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public  string[] H 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("h"); } 
-			set { this.Request.RequestParameters.AddQueryString("h", value); }
-		}
-		
+		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
 		
 		///<summary>Return help information</summary>
-		public bool Help 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("help"); } 
-			set { this.Request.RequestParameters.AddQueryString("help", value); }
-		}
-		
+		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
 		
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool V 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("v"); } 
-			set { this.Request.RequestParameters.AddQueryString("v", value); }
-		}
-		
+		public bool V { get { return Q<bool>("v"); } set { Q("v", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for CatFielddata
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-fielddata.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for CatFielddata <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-fielddata.html</pre></summary>
 	public partial class CatFielddataRequest 
-			{
-		
+	{
 		///<summary>The unit in which to display byte values</summary>
-		public Bytes Bytes 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<Bytes>("bytes"); } 
-			set { this.Request.RequestParameters.AddQueryString("bytes", value); }
-		}
-		
+		public Bytes Bytes { get { return Q<Bytes>("bytes"); } set { Q("bytes", value); } }
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("local"); } 
-			set { this.Request.RequestParameters.AddQueryString("local", value); }
-		}
-		
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public string MasterTimeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("master_timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("master_timeout", value); }
-		}
-		
+		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public  string[] H 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("h"); } 
-			set { this.Request.RequestParameters.AddQueryString("h", value); }
-		}
-		
+		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
 		
 		///<summary>Return help information</summary>
-		public bool Help 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("help"); } 
-			set { this.Request.RequestParameters.AddQueryString("help", value); }
-		}
-		
+		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
 		
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool V 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("v"); } 
-			set { this.Request.RequestParameters.AddQueryString("v", value); }
-		}
-		
+		public bool V { get { return Q<bool>("v"); } set { Q("v", value); } }
 		
 		///<summary>A comma-separated list of fields to return in the output</summary>
-		public IList<FieldName> Fields 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<FieldName>>("fields"); } 
-			set { this.Request.RequestParameters.AddQueryString("fields", value); }
-		}
-		
+		public IList<FieldName> Fields { get { return Q<IList<FieldName>>("fields"); } set { Q("fields", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for CatHealth
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-health.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for CatHealth <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-health.html</pre></summary>
 	public partial class CatHealthRequest 
-			{
-		
+	{
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("local"); } 
-			set { this.Request.RequestParameters.AddQueryString("local", value); }
-		}
-		
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public string MasterTimeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("master_timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("master_timeout", value); }
-		}
-		
+		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public  string[] H 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("h"); } 
-			set { this.Request.RequestParameters.AddQueryString("h", value); }
-		}
-		
+		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
 		
 		///<summary>Return help information</summary>
-		public bool Help 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("help"); } 
-			set { this.Request.RequestParameters.AddQueryString("help", value); }
-		}
-		
+		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
 		
 		///<summary>Set to false to disable timestamping</summary>
-		public bool Ts 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("ts"); } 
-			set { this.Request.RequestParameters.AddQueryString("ts", value); }
-		}
-		
+		public bool Ts { get { return Q<bool>("ts"); } set { Q("ts", value); } }
 		
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool V 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("v"); } 
-			set { this.Request.RequestParameters.AddQueryString("v", value); }
-		}
-		
+		public bool V { get { return Q<bool>("v"); } set { Q("v", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for CatHelp
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for CatHelp <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat.html</pre></summary>
 	public partial class CatHelpRequest  : BasePathRequest<CatHelpRequestParameters>
-			{
-		
+	{
 		///<summary>Return help information</summary>
-		public bool Help 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("help"); } 
-			set { this.Request.RequestParameters.AddQueryString("help", value); }
-		}
-		
+		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
-		}
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CatHelpRequestParameters> pathInfo)
+	 	protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CatHelpRequestParameters> pathInfo)
 		{
 			throw new NotImplementedException();
 		}
-
-	}
 	
-		
-	///<summary>Request parameters for CatIndices
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-indices.html
-	///</pre>
-	///</summary>
+	}
+	///<summary>Request parameters for CatIndices <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-indices.html</pre></summary>
 	public partial class CatIndicesRequest 
-			{
-		
+	{
 		///<summary>The unit in which to display byte values</summary>
-		public Bytes Bytes 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<Bytes>("bytes"); } 
-			set { this.Request.RequestParameters.AddQueryString("bytes", value); }
-		}
-		
+		public Bytes Bytes { get { return Q<Bytes>("bytes"); } set { Q("bytes", value); } }
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("local"); } 
-			set { this.Request.RequestParameters.AddQueryString("local", value); }
-		}
-		
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public string MasterTimeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("master_timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("master_timeout", value); }
-		}
-		
+		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public  string[] H 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("h"); } 
-			set { this.Request.RequestParameters.AddQueryString("h", value); }
-		}
-		
+		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
 		
 		///<summary>Return help information</summary>
-		public bool Help 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("help"); } 
-			set { this.Request.RequestParameters.AddQueryString("help", value); }
-		}
-		
+		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
 		
 		///<summary>Set to true to return stats only for primary shards</summary>
-		public bool Pri 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("pri"); } 
-			set { this.Request.RequestParameters.AddQueryString("pri", value); }
-		}
-		
+		public bool Pri { get { return Q<bool>("pri"); } set { Q("pri", value); } }
 		
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool V 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("v"); } 
-			set { this.Request.RequestParameters.AddQueryString("v", value); }
-		}
-		
+		public bool V { get { return Q<bool>("v"); } set { Q("v", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for CatMaster
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-master.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for CatMaster <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-master.html</pre></summary>
 	public partial class CatMasterRequest 
-			{
-		
+	{
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("local"); } 
-			set { this.Request.RequestParameters.AddQueryString("local", value); }
-		}
-		
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public string MasterTimeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("master_timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("master_timeout", value); }
-		}
-		
+		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public  string[] H 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("h"); } 
-			set { this.Request.RequestParameters.AddQueryString("h", value); }
-		}
-		
+		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
 		
 		///<summary>Return help information</summary>
-		public bool Help 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("help"); } 
-			set { this.Request.RequestParameters.AddQueryString("help", value); }
-		}
-		
+		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
 		
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool V 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("v"); } 
-			set { this.Request.RequestParameters.AddQueryString("v", value); }
-		}
-		
+		public bool V { get { return Q<bool>("v"); } set { Q("v", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for CatNodes
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-nodes.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for CatNodes <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-nodes.html</pre></summary>
 	public partial class CatNodesRequest 
-			{
-		
+	{
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("local"); } 
-			set { this.Request.RequestParameters.AddQueryString("local", value); }
-		}
-		
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public string MasterTimeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("master_timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("master_timeout", value); }
-		}
-		
+		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public  string[] H 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("h"); } 
-			set { this.Request.RequestParameters.AddQueryString("h", value); }
-		}
-		
+		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
 		
 		///<summary>Return help information</summary>
-		public bool Help 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("help"); } 
-			set { this.Request.RequestParameters.AddQueryString("help", value); }
-		}
-		
+		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
 		
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool V 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("v"); } 
-			set { this.Request.RequestParameters.AddQueryString("v", value); }
-		}
-		
+		public bool V { get { return Q<bool>("v"); } set { Q("v", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for CatPendingTasks
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-pending-tasks.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for CatPendingTasks <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-pending-tasks.html</pre></summary>
 	public partial class CatPendingTasksRequest 
-			{
-		
+	{
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("local"); } 
-			set { this.Request.RequestParameters.AddQueryString("local", value); }
-		}
-		
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public string MasterTimeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("master_timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("master_timeout", value); }
-		}
-		
+		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public  string[] H 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("h"); } 
-			set { this.Request.RequestParameters.AddQueryString("h", value); }
-		}
-		
+		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
 		
 		///<summary>Return help information</summary>
-		public bool Help 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("help"); } 
-			set { this.Request.RequestParameters.AddQueryString("help", value); }
-		}
-		
+		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
 		
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool V 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("v"); } 
-			set { this.Request.RequestParameters.AddQueryString("v", value); }
-		}
-		
+		public bool V { get { return Q<bool>("v"); } set { Q("v", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for CatPlugins
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-plugins.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for CatPlugins <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-plugins.html</pre></summary>
 	public partial class CatPluginsRequest 
-			{
-		
+	{
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("local"); } 
-			set { this.Request.RequestParameters.AddQueryString("local", value); }
-		}
-		
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public string MasterTimeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("master_timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("master_timeout", value); }
-		}
-		
+		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public  string[] H 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("h"); } 
-			set { this.Request.RequestParameters.AddQueryString("h", value); }
-		}
-		
+		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
 		
 		///<summary>Return help information</summary>
-		public bool Help 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("help"); } 
-			set { this.Request.RequestParameters.AddQueryString("help", value); }
-		}
-		
+		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
 		
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool V 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("v"); } 
-			set { this.Request.RequestParameters.AddQueryString("v", value); }
-		}
-		
+		public bool V { get { return Q<bool>("v"); } set { Q("v", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for CatRecovery
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-recovery.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for CatRecovery <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-recovery.html</pre></summary>
 	public partial class CatRecoveryRequest 
-			{
-		
+	{
 		///<summary>The unit in which to display byte values</summary>
-		public Bytes Bytes 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<Bytes>("bytes"); } 
-			set { this.Request.RequestParameters.AddQueryString("bytes", value); }
-		}
-		
+		public Bytes Bytes { get { return Q<Bytes>("bytes"); } set { Q("bytes", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public string MasterTimeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("master_timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("master_timeout", value); }
-		}
-		
+		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public  string[] H 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("h"); } 
-			set { this.Request.RequestParameters.AddQueryString("h", value); }
-		}
-		
+		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
 		
 		///<summary>Return help information</summary>
-		public bool Help 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("help"); } 
-			set { this.Request.RequestParameters.AddQueryString("help", value); }
-		}
-		
+		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
 		
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool V 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("v"); } 
-			set { this.Request.RequestParameters.AddQueryString("v", value); }
-		}
-		
+		public bool V { get { return Q<bool>("v"); } set { Q("v", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for CatSegments
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-segments.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for CatSegments <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-segments.html</pre></summary>
 	public partial class CatSegmentsRequest 
-			{
-		
+	{
 		///<summary>Comma-separated list of column names to display</summary>
-		public  string[] H 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("h"); } 
-			set { this.Request.RequestParameters.AddQueryString("h", value); }
-		}
-		
+		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
 		
 		///<summary>Return help information</summary>
-		public bool Help 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("help"); } 
-			set { this.Request.RequestParameters.AddQueryString("help", value); }
-		}
-		
+		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
 		
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool V 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("v"); } 
-			set { this.Request.RequestParameters.AddQueryString("v", value); }
-		}
-		
+		public bool V { get { return Q<bool>("v"); } set { Q("v", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for CatShards
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-shards.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for CatShards <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-shards.html</pre></summary>
 	public partial class CatShardsRequest 
-			{
-		
+	{
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("local"); } 
-			set { this.Request.RequestParameters.AddQueryString("local", value); }
-		}
-		
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public string MasterTimeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("master_timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("master_timeout", value); }
-		}
-		
+		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public  string[] H 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("h"); } 
-			set { this.Request.RequestParameters.AddQueryString("h", value); }
-		}
-		
+		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
 		
 		///<summary>Return help information</summary>
-		public bool Help 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("help"); } 
-			set { this.Request.RequestParameters.AddQueryString("help", value); }
-		}
-		
+		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
 		
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool V 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("v"); } 
-			set { this.Request.RequestParameters.AddQueryString("v", value); }
-		}
-		
+		public bool V { get { return Q<bool>("v"); } set { Q("v", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for CatThreadPool
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-thread-pool.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for CatThreadPool <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-thread-pool.html</pre></summary>
 	public partial class CatThreadPoolRequest 
-			{
-		
+	{
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("local"); } 
-			set { this.Request.RequestParameters.AddQueryString("local", value); }
-		}
-		
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public string MasterTimeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("master_timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("master_timeout", value); }
-		}
-		
+		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Comma-separated list of column names to display</summary>
-		public  string[] H 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("h"); } 
-			set { this.Request.RequestParameters.AddQueryString("h", value); }
-		}
-		
+		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
 		
 		///<summary>Return help information</summary>
-		public bool Help 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("help"); } 
-			set { this.Request.RequestParameters.AddQueryString("help", value); }
-		}
-		
+		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
 		
 		///<summary>Verbose mode. Display column headers</summary>
-		public bool V 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("v"); } 
-			set { this.Request.RequestParameters.AddQueryString("v", value); }
-		}
-		
+		public bool V { get { return Q<bool>("v"); } set { Q("v", value); } }
 		
 		///<summary>Enables displaying the complete node ids</summary>
-		public bool FullId 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("full_id"); } 
-			set { this.Request.RequestParameters.AddQueryString("full_id", value); }
-		}
-		
+		public bool FullId { get { return Q<bool>("full_id"); } set { Q("full_id", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for ClearScroll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-request-scroll.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for ClearScroll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-request-scroll.html</pre></summary>
 	public partial class ClearScrollRequest 
-			{
-		
+	{
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for ClusterGetSettings
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-update-settings.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for ClusterGetSettings <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-update-settings.html</pre></summary>
 	public partial class ClusterGetSettingsRequest 
-			{
-		
+	{
 		///<summary>Return settings in flat format (default: false)</summary>
-		public bool FlatSettings 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("flat_settings"); } 
-			set { this.Request.RequestParameters.AddQueryString("flat_settings", value); }
-		}
-		
+		public bool FlatSettings { get { return Q<bool>("flat_settings"); } set { Q("flat_settings", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public string MasterTimeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("master_timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("master_timeout", value); }
-		}
-		
+		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Explicit operation timeout</summary>
-		public string Timeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("timeout", value); }
-		}
-		
+		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for ClusterHealth
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-health.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for ClusterHealth <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-health.html</pre></summary>
 	public partial class ClusterHealthRequest 
-			{
-		
+	{
 		///<summary>Specify the level of detail for returned information</summary>
-		public Level Level 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<Level>("level"); } 
-			set { this.Request.RequestParameters.AddQueryString("level", value); }
-		}
-		
+		public Level Level { get { return Q<Level>("level"); } set { Q("level", value); } }
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("local"); } 
-			set { this.Request.RequestParameters.AddQueryString("local", value); }
-		}
-		
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public string MasterTimeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("master_timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("master_timeout", value); }
-		}
-		
+		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Explicit operation timeout</summary>
-		public string Timeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("timeout", value); }
-		}
-		
+		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
 		
 		///<summary>Wait until the specified number of shards is active</summary>
-		public long WaitForActiveShards 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<long>("wait_for_active_shards"); } 
-			set { this.Request.RequestParameters.AddQueryString("wait_for_active_shards", value); }
-		}
-		
+		public long WaitForActiveShards { get { return Q<long>("wait_for_active_shards"); } set { Q("wait_for_active_shards", value); } }
 		
 		///<summary>Wait until the specified number of nodes is available</summary>
-		public string WaitForNodes 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("wait_for_nodes"); } 
-			set { this.Request.RequestParameters.AddQueryString("wait_for_nodes", value); }
-		}
-		
+		public string WaitForNodes { get { return Q<string>("wait_for_nodes"); } set { Q("wait_for_nodes", value); } }
 		
 		///<summary>Wait until the specified number of relocating shards is finished</summary>
-		public long WaitForRelocatingShards 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<long>("wait_for_relocating_shards"); } 
-			set { this.Request.RequestParameters.AddQueryString("wait_for_relocating_shards", value); }
-		}
-		
+		public long WaitForRelocatingShards { get { return Q<long>("wait_for_relocating_shards"); } set { Q("wait_for_relocating_shards", value); } }
 		
 		///<summary>Wait until cluster is in a specific state</summary>
-		public WaitForStatus WaitForStatus 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<WaitForStatus>("wait_for_status"); } 
-			set { this.Request.RequestParameters.AddQueryString("wait_for_status", value); }
-		}
-		
+		public WaitForStatus WaitForStatus { get { return Q<WaitForStatus>("wait_for_status"); } set { Q("wait_for_status", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for ClusterPendingTasks
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-pending.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for ClusterPendingTasks <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-pending.html</pre></summary>
 	public partial class ClusterPendingTasksRequest 
-			{
-		
+	{
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("local"); } 
-			set { this.Request.RequestParameters.AddQueryString("local", value); }
-		}
-		
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Specify timeout for connection to master</summary>
-		public string MasterTimeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("master_timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("master_timeout", value); }
-		}
-		
+		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for ClusterPutSettings
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-update-settings.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for ClusterPutSettings <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-update-settings.html</pre></summary>
 	public partial class ClusterSettingsRequest 
-			{
-		
+	{
 		///<summary>Return settings in flat format (default: false)</summary>
-		public bool FlatSettings 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("flat_settings"); } 
-			set { this.Request.RequestParameters.AddQueryString("flat_settings", value); }
-		}
-		
+		public bool FlatSettings { get { return Q<bool>("flat_settings"); } set { Q("flat_settings", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public string MasterTimeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("master_timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("master_timeout", value); }
-		}
-		
+		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Explicit operation timeout</summary>
-		public string Timeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("timeout", value); }
-		}
-		
+		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for ClusterReroute
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-reroute.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for ClusterReroute <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-reroute.html</pre></summary>
 	public partial class ClusterRerouteRequest 
-			{
-		
+	{
 		///<summary>Simulate the operation only and return the resulting state</summary>
-		public bool DryRun 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("dry_run"); } 
-			set { this.Request.RequestParameters.AddQueryString("dry_run", value); }
-		}
-		
+		public bool DryRun { get { return Q<bool>("dry_run"); } set { Q("dry_run", value); } }
 		
 		///<summary>Return an explanation of why the commands can or cannot be executed</summary>
-		public bool Explain 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("explain"); } 
-			set { this.Request.RequestParameters.AddQueryString("explain", value); }
-		}
-		
+		public bool Explain { get { return Q<bool>("explain"); } set { Q("explain", value); } }
 		
 		///<summary>Limit the information returned to the specified metrics. Defaults to all but metadata</summary>
-		public  string[] Metric 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("metric"); } 
-			set { this.Request.RequestParameters.AddQueryString("metric", value); }
-		}
-		
+		public  string[] Metric { get { return Q< string[]>("metric"); } set { Q("metric", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public string MasterTimeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("master_timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("master_timeout", value); }
-		}
-		
+		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Explicit operation timeout</summary>
-		public string Timeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("timeout", value); }
-		}
-		
+		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for ClusterState
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-state.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for ClusterState <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-state.html</pre></summary>
 	public partial class ClusterStateRequest 
-			{
-		
+	{
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("local"); } 
-			set { this.Request.RequestParameters.AddQueryString("local", value); }
-		}
-		
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Specify timeout for connection to master</summary>
-		public string MasterTimeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("master_timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("master_timeout", value); }
-		}
-		
+		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Return settings in flat format (default: false)</summary>
-		public bool FlatSettings 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("flat_settings"); } 
-			set { this.Request.RequestParameters.AddQueryString("flat_settings", value); }
-		}
-		
+		public bool FlatSettings { get { return Q<bool>("flat_settings"); } set { Q("flat_settings", value); } }
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("ignore_unavailable"); } 
-			set { this.Request.RequestParameters.AddQueryString("ignore_unavailable", value); }
-		}
-		
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("allow_no_indices"); } 
-			set { this.Request.RequestParameters.AddQueryString("allow_no_indices", value); }
-		}
-		
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
-			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
-		}
-		
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for ClusterStats
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-stats.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for ClusterStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-stats.html</pre></summary>
 	public partial class ClusterStatsRequest 
-			{
-		
+	{
 		///<summary>Return settings in flat format (default: false)</summary>
-		public bool FlatSettings 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("flat_settings"); } 
-			set { this.Request.RequestParameters.AddQueryString("flat_settings", value); }
-		}
-		
+		public bool FlatSettings { get { return Q<bool>("flat_settings"); } set { Q("flat_settings", value); } }
 		
 		///<summary>Whether to return time and byte values in human-readable format.</summary>
-		public bool Human 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("human"); } 
-			set { this.Request.RequestParameters.AddQueryString("human", value); }
-		}
-		
+		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for Count
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-count.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for Count <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-count.html</pre></summary>
 	public partial class CountRequest<T> 
-			{
-		
+	{
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("ignore_unavailable"); } 
-			set { this.Request.RequestParameters.AddQueryString("ignore_unavailable", value); }
-		}
-		
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("allow_no_indices"); } 
-			set { this.Request.RequestParameters.AddQueryString("allow_no_indices", value); }
-		}
-		
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
-			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
-		}
-		
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>Include only documents with a specific `_score` value in the result</summary>
-		public double MinScore 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<double>("min_score"); } 
-			set { this.Request.RequestParameters.AddQueryString("min_score", value); }
-		}
-		
+		public double MinScore { get { return Q<double>("min_score"); } set { Q("min_score", value); } }
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public string Preference 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("preference"); } 
-			set { this.Request.RequestParameters.AddQueryString("preference", value); }
-		}
-		
+		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
 		
 		///<summary>Specific routing value</summary>
-		public string Routing 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("routing"); } 
-			set { this.Request.RequestParameters.AddQueryString("routing", value); }
-		}
-		
+		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Query in the Lucene query string syntax</summary>
-		public string Q 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("q"); } 
-			set { this.Request.RequestParameters.AddQueryString("q", value); }
-		}
-		
+		public string Q { get { return Q<string>("q"); } set { Q("q", value); } }
 		
 		///<summary>The analyzer to use for the query string</summary>
-		public string Analyzer 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("analyzer"); } 
-			set { this.Request.RequestParameters.AddQueryString("analyzer", value); }
-		}
-		
+		public string Analyzer { get { return Q<string>("analyzer"); } set { Q("analyzer", value); } }
 		
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
-		public bool AnalyzeWildcard 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("analyze_wildcard"); } 
-			set { this.Request.RequestParameters.AddQueryString("analyze_wildcard", value); }
-		}
-		
+		public bool AnalyzeWildcard { get { return Q<bool>("analyze_wildcard"); } set { Q("analyze_wildcard", value); } }
 		
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public DefaultOperator DefaultOperator 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<DefaultOperator>("default_operator"); } 
-			set { this.Request.RequestParameters.AddQueryString("default_operator", value); }
-		}
-		
+		public DefaultOperator DefaultOperator { get { return Q<DefaultOperator>("default_operator"); } set { Q("default_operator", value); } }
 		
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
-		public string Df 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("df"); } 
-			set { this.Request.RequestParameters.AddQueryString("df", value); }
-		}
-		
+		public string Df { get { return Q<string>("df"); } set { Q("df", value); } }
 		
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
-		public bool Lenient 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("lenient"); } 
-			set { this.Request.RequestParameters.AddQueryString("lenient", value); }
-		}
-		
+		public bool Lenient { get { return Q<bool>("lenient"); } set { Q("lenient", value); } }
 		
 		///<summary>Specify whether query terms should be lowercased</summary>
-		public bool LowercaseExpandedTerms 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("lowercase_expanded_terms"); } 
-			set { this.Request.RequestParameters.AddQueryString("lowercase_expanded_terms", value); }
-		}
-		
+		public bool LowercaseExpandedTerms { get { return Q<bool>("lowercase_expanded_terms"); } set { Q("lowercase_expanded_terms", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for CountPercolateGet
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for CountPercolateGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html</pre></summary>
 	public partial class PercolateCountRequest<TDocument> 
-			{
-		
+	{
 		///<summary>A comma-separated list of specific routing values</summary>
-		public  string[] Routing 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("routing"); } 
-			set { this.Request.RequestParameters.AddQueryString("routing", value); }
-		}
-		
+		public  string[] Routing { get { return Q< string[]>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public string Preference 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("preference"); } 
-			set { this.Request.RequestParameters.AddQueryString("preference", value); }
-		}
-		
+		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("ignore_unavailable"); } 
-			set { this.Request.RequestParameters.AddQueryString("ignore_unavailable", value); }
-		}
-		
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("allow_no_indices"); } 
-			set { this.Request.RequestParameters.AddQueryString("allow_no_indices", value); }
-		}
-		
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
-			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
-		}
-		
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>The index to count percolate the document into. Defaults to index.</summary>
-		public string PercolateIndex 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("percolate_index"); } 
-			set { this.Request.RequestParameters.AddQueryString("percolate_index", value); }
-		}
-		
+		public string PercolateIndex { get { return Q<string>("percolate_index"); } set { Q("percolate_index", value); } }
 		
 		///<summary>The type to count percolate document into. Defaults to type.</summary>
-		public string PercolateType 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("percolate_type"); } 
-			set { this.Request.RequestParameters.AddQueryString("percolate_type", value); }
-		}
-		
+		public string PercolateType { get { return Q<string>("percolate_type"); } set { Q("percolate_type", value); } }
 		
 		///<summary>Explicit version number for concurrency control</summary>
-		public long Version 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<long>("version"); } 
-			set { this.Request.RequestParameters.AddQueryString("version", value); }
-		}
-		
+		public long Version { get { return Q<long>("version"); } set { Q("version", value); } }
 		
 		///<summary>Specific version type</summary>
-		public VersionType VersionType 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<VersionType>("version_type"); } 
-			set { this.Request.RequestParameters.AddQueryString("version_type", value); }
-		}
-		
+		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for Delete
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-delete.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for Delete <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-delete.html</pre></summary>
 	public partial class DeleteRequest<T> 
-			{
-		
+	{
 		///<summary>Specific write consistency setting for the operation</summary>
-		public Consistency Consistency 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<Consistency>("consistency"); } 
-			set { this.Request.RequestParameters.AddQueryString("consistency", value); }
-		}
-		
+		public Consistency Consistency { get { return Q<Consistency>("consistency"); } set { Q("consistency", value); } }
 		
 		///<summary>ID of parent document</summary>
-		public string Parent 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("parent"); } 
-			set { this.Request.RequestParameters.AddQueryString("parent", value); }
-		}
-		
+		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
 		
 		///<summary>Refresh the index after performing the operation</summary>
-		public bool Refresh 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("refresh"); } 
-			set { this.Request.RequestParameters.AddQueryString("refresh", value); }
-		}
-		
+		public bool Refresh { get { return Q<bool>("refresh"); } set { Q("refresh", value); } }
 		
 		///<summary>Specific replication type</summary>
-		public Replication Replication 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<Replication>("replication"); } 
-			set { this.Request.RequestParameters.AddQueryString("replication", value); }
-		}
-		
+		public Replication Replication { get { return Q<Replication>("replication"); } set { Q("replication", value); } }
 		
 		///<summary>Specific routing value</summary>
-		public string Routing 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("routing"); } 
-			set { this.Request.RequestParameters.AddQueryString("routing", value); }
-		}
-		
+		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Explicit operation timeout</summary>
-		public string Timeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("timeout", value); }
-		}
-		
+		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
 		
 		///<summary>Explicit version number for concurrency control</summary>
-		public long Version 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<long>("version"); } 
-			set { this.Request.RequestParameters.AddQueryString("version", value); }
-		}
-		
+		public long Version { get { return Q<long>("version"); } set { Q("version", value); } }
 		
 		///<summary>Specific version type</summary>
-		public VersionType VersionType 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<VersionType>("version_type"); } 
-			set { this.Request.RequestParameters.AddQueryString("version_type", value); }
-		}
-		
+		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for DeleteByQuery
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-delete-by-query.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for DeleteByQuery <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-delete-by-query.html</pre></summary>
 	public partial class DeleteByQueryRequest<T> 
-			{
-		
+	{
 		///<summary>The analyzer to use for the query string</summary>
-		public string Analyzer 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("analyzer"); } 
-			set { this.Request.RequestParameters.AddQueryString("analyzer", value); }
-		}
-		
+		public string Analyzer { get { return Q<string>("analyzer"); } set { Q("analyzer", value); } }
 		
 		///<summary>Specific write consistency setting for the operation</summary>
-		public Consistency Consistency 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<Consistency>("consistency"); } 
-			set { this.Request.RequestParameters.AddQueryString("consistency", value); }
-		}
-		
+		public Consistency Consistency { get { return Q<Consistency>("consistency"); } set { Q("consistency", value); } }
 		
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public DefaultOperator DefaultOperator 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<DefaultOperator>("default_operator"); } 
-			set { this.Request.RequestParameters.AddQueryString("default_operator", value); }
-		}
-		
+		public DefaultOperator DefaultOperator { get { return Q<DefaultOperator>("default_operator"); } set { Q("default_operator", value); } }
 		
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
-		public string Df 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("df"); } 
-			set { this.Request.RequestParameters.AddQueryString("df", value); }
-		}
-		
+		public string Df { get { return Q<string>("df"); } set { Q("df", value); } }
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("ignore_unavailable"); } 
-			set { this.Request.RequestParameters.AddQueryString("ignore_unavailable", value); }
-		}
-		
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("allow_no_indices"); } 
-			set { this.Request.RequestParameters.AddQueryString("allow_no_indices", value); }
-		}
-		
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
-			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
-		}
-		
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>Specific replication type</summary>
-		public Replication Replication 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<Replication>("replication"); } 
-			set { this.Request.RequestParameters.AddQueryString("replication", value); }
-		}
-		
+		public Replication Replication { get { return Q<Replication>("replication"); } set { Q("replication", value); } }
 		
 		///<summary>Query in the Lucene query string syntax</summary>
-		public string Q 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("q"); } 
-			set { this.Request.RequestParameters.AddQueryString("q", value); }
-		}
-		
+		public string Q { get { return Q<string>("q"); } set { Q("q", value); } }
 		
 		///<summary>Specific routing value</summary>
-		public string Routing 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("routing"); } 
-			set { this.Request.RequestParameters.AddQueryString("routing", value); }
-		}
-		
+		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Explicit operation timeout</summary>
-		public string Timeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("timeout", value); }
-		}
-		
+		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for DeleteScript
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for DeleteScript <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</pre></summary>
 	public partial class DeleteScriptRequest 
-			{
-		
+	{
 		///<summary>Explicit version number for concurrency control</summary>
-		public long Version 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<long>("version"); } 
-			set { this.Request.RequestParameters.AddQueryString("version", value); }
-		}
-		
+		public long Version { get { return Q<long>("version"); } set { Q("version", value); } }
 		
 		///<summary>Specific version type</summary>
-		public VersionType VersionType 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<VersionType>("version_type"); } 
-			set { this.Request.RequestParameters.AddQueryString("version_type", value); }
-		}
-		
+		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for DeleteTemplate
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/search-template.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for DeleteTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-template.html</pre></summary>
 	public partial class DeleteTemplateRequest 
-			{
-		
+	{
 		///<summary>Explicit version number for concurrency control</summary>
-		public long Version 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<long>("version"); } 
-			set { this.Request.RequestParameters.AddQueryString("version", value); }
-		}
-		
+		public long Version { get { return Q<long>("version"); } set { Q("version", value); } }
 		
 		///<summary>Specific version type</summary>
-		public VersionType VersionType 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<VersionType>("version_type"); } 
-			set { this.Request.RequestParameters.AddQueryString("version_type", value); }
-		}
-		
+		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for Exists
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-get.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for Exists <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-get.html</pre></summary>
 	public partial class DocumentExistsRequest<T> 
-			{
-		
+	{
 		///<summary>The ID of the parent document</summary>
-		public string Parent 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("parent"); } 
-			set { this.Request.RequestParameters.AddQueryString("parent", value); }
-		}
-		
+		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public string Preference 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("preference"); } 
-			set { this.Request.RequestParameters.AddQueryString("preference", value); }
-		}
-		
+		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
 		
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
-		public bool Realtime 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("realtime"); } 
-			set { this.Request.RequestParameters.AddQueryString("realtime", value); }
-		}
-		
+		public bool Realtime { get { return Q<bool>("realtime"); } set { Q("realtime", value); } }
 		
 		///<summary>Refresh the shard containing the document before performing the operation</summary>
-		public bool Refresh 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("refresh"); } 
-			set { this.Request.RequestParameters.AddQueryString("refresh", value); }
-		}
-		
+		public bool Refresh { get { return Q<bool>("refresh"); } set { Q("refresh", value); } }
 		
 		///<summary>Specific routing value</summary>
-		public string Routing 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("routing"); } 
-			set { this.Request.RequestParameters.AddQueryString("routing", value); }
-		}
-		
+		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for ExplainGet
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-explain.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for ExplainGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-explain.html</pre></summary>
 	public partial class ExplainRequest<T> 
-			{
-		
+	{
 		///<summary>Specify whether wildcards and prefix queries in the query string query should be analyzed (default: false)</summary>
-		public bool AnalyzeWildcard 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("analyze_wildcard"); } 
-			set { this.Request.RequestParameters.AddQueryString("analyze_wildcard", value); }
-		}
-		
+		public bool AnalyzeWildcard { get { return Q<bool>("analyze_wildcard"); } set { Q("analyze_wildcard", value); } }
 		
 		///<summary>The analyzer for the query string query</summary>
-		public string Analyzer 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("analyzer"); } 
-			set { this.Request.RequestParameters.AddQueryString("analyzer", value); }
-		}
-		
+		public string Analyzer { get { return Q<string>("analyzer"); } set { Q("analyzer", value); } }
 		
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public DefaultOperator DefaultOperator 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<DefaultOperator>("default_operator"); } 
-			set { this.Request.RequestParameters.AddQueryString("default_operator", value); }
-		}
-		
+		public DefaultOperator DefaultOperator { get { return Q<DefaultOperator>("default_operator"); } set { Q("default_operator", value); } }
 		
 		///<summary>The default field for query string query (default: _all)</summary>
-		public string Df 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("df"); } 
-			set { this.Request.RequestParameters.AddQueryString("df", value); }
-		}
-		
+		public string Df { get { return Q<string>("df"); } set { Q("df", value); } }
 		
 		///<summary>A comma-separated list of fields to return in the response</summary>
-		public IList<FieldName> Fields 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<FieldName>>("fields"); } 
-			set { this.Request.RequestParameters.AddQueryString("fields", value); }
-		}
-		
+		public IList<FieldName> Fields { get { return Q<IList<FieldName>>("fields"); } set { Q("fields", value); } }
 		
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
-		public bool Lenient 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("lenient"); } 
-			set { this.Request.RequestParameters.AddQueryString("lenient", value); }
-		}
-		
+		public bool Lenient { get { return Q<bool>("lenient"); } set { Q("lenient", value); } }
 		
 		///<summary>Specify whether query terms should be lowercased</summary>
-		public bool LowercaseExpandedTerms 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("lowercase_expanded_terms"); } 
-			set { this.Request.RequestParameters.AddQueryString("lowercase_expanded_terms", value); }
-		}
-		
+		public bool LowercaseExpandedTerms { get { return Q<bool>("lowercase_expanded_terms"); } set { Q("lowercase_expanded_terms", value); } }
 		
 		///<summary>The ID of the parent document</summary>
-		public string Parent 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("parent"); } 
-			set { this.Request.RequestParameters.AddQueryString("parent", value); }
-		}
-		
+		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public string Preference 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("preference"); } 
-			set { this.Request.RequestParameters.AddQueryString("preference", value); }
-		}
-		
+		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
 		
 		///<summary>Query in the Lucene query string syntax</summary>
-		public string Q 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("q"); } 
-			set { this.Request.RequestParameters.AddQueryString("q", value); }
-		}
-		
+		public string Q { get { return Q<string>("q"); } set { Q("q", value); } }
 		
 		///<summary>Specific routing value</summary>
-		public string Routing 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("routing"); } 
-			set { this.Request.RequestParameters.AddQueryString("routing", value); }
-		}
-		
+		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public  string[] SourceEnabled 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("_source"); } 
-			set { this.Request.RequestParameters.AddQueryString("_source", value); }
-		}
-		
+		public  string[] SourceEnabled { get { return Q< string[]>("_source"); } set { Q("_source", value); } }
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public IList<FieldName> SourceExclude 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<FieldName>>("_source_exclude"); } 
-			set { this.Request.RequestParameters.AddQueryString("_source_exclude", value); }
-		}
-		
+		public IList<FieldName> SourceExclude { get { return Q<IList<FieldName>>("_source_exclude"); } set { Q("_source_exclude", value); } }
 		
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public IList<FieldName> SourceInclude 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<FieldName>>("_source_include"); } 
-			set { this.Request.RequestParameters.AddQueryString("_source_include", value); }
-		}
-		
+		public IList<FieldName> SourceInclude { get { return Q<IList<FieldName>>("_source_include"); } set { Q("_source_include", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for FieldStatsGet
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-stats.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for FieldStatsGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-stats.html</pre></summary>
 	public partial class FieldStatsRequest 
-			{
-		
+	{
 		///<summary>A comma-separated list of fields for to get field statistics for (min value, max value, and more)</summary>
-		public IList<FieldName> Fields 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<FieldName>>("fields"); } 
-			set { this.Request.RequestParameters.AddQueryString("fields", value); }
-		}
-		
+		public IList<FieldName> Fields { get { return Q<IList<FieldName>>("fields"); } set { Q("fields", value); } }
 		
 		///<summary>Defines if field stats should be returned on a per index level or on a cluster wide level</summary>
-		public Level Level 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<Level>("level"); } 
-			set { this.Request.RequestParameters.AddQueryString("level", value); }
-		}
-		
+		public Level Level { get { return Q<Level>("level"); } set { Q("level", value); } }
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("ignore_unavailable"); } 
-			set { this.Request.RequestParameters.AddQueryString("ignore_unavailable", value); }
-		}
-		
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("allow_no_indices"); } 
-			set { this.Request.RequestParameters.AddQueryString("allow_no_indices", value); }
-		}
-		
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
-			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
-		}
-		
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for Get
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-get.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for Get <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-get.html</pre></summary>
 	public partial class GetRequest<T> 
-			{
-		
+	{
 		///<summary>A comma-separated list of fields to return in the response</summary>
-		public IList<FieldName> Fields 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<FieldName>>("fields"); } 
-			set { this.Request.RequestParameters.AddQueryString("fields", value); }
-		}
-		
+		public IList<FieldName> Fields { get { return Q<IList<FieldName>>("fields"); } set { Q("fields", value); } }
 		
 		///<summary>The ID of the parent document</summary>
-		public string Parent 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("parent"); } 
-			set { this.Request.RequestParameters.AddQueryString("parent", value); }
-		}
-		
+		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public string Preference 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("preference"); } 
-			set { this.Request.RequestParameters.AddQueryString("preference", value); }
-		}
-		
+		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
 		
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
-		public bool Realtime 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("realtime"); } 
-			set { this.Request.RequestParameters.AddQueryString("realtime", value); }
-		}
-		
+		public bool Realtime { get { return Q<bool>("realtime"); } set { Q("realtime", value); } }
 		
 		///<summary>Refresh the shard containing the document before performing the operation</summary>
-		public bool Refresh 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("refresh"); } 
-			set { this.Request.RequestParameters.AddQueryString("refresh", value); }
-		}
-		
+		public bool Refresh { get { return Q<bool>("refresh"); } set { Q("refresh", value); } }
 		
 		///<summary>Specific routing value</summary>
-		public string Routing 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("routing"); } 
-			set { this.Request.RequestParameters.AddQueryString("routing", value); }
-		}
-		
+		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public  string[] SourceEnabled 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("_source"); } 
-			set { this.Request.RequestParameters.AddQueryString("_source", value); }
-		}
-		
+		public  string[] SourceEnabled { get { return Q< string[]>("_source"); } set { Q("_source", value); } }
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public IList<FieldName> SourceExclude 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<FieldName>>("_source_exclude"); } 
-			set { this.Request.RequestParameters.AddQueryString("_source_exclude", value); }
-		}
-		
+		public IList<FieldName> SourceExclude { get { return Q<IList<FieldName>>("_source_exclude"); } set { Q("_source_exclude", value); } }
 		
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public IList<FieldName> SourceInclude 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<FieldName>>("_source_include"); } 
-			set { this.Request.RequestParameters.AddQueryString("_source_include", value); }
-		}
-		
+		public IList<FieldName> SourceInclude { get { return Q<IList<FieldName>>("_source_include"); } set { Q("_source_include", value); } }
 		
 		///<summary>Explicit version number for concurrency control</summary>
-		public long Version 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<long>("version"); } 
-			set { this.Request.RequestParameters.AddQueryString("version", value); }
-		}
-		
+		public long Version { get { return Q<long>("version"); } set { Q("version", value); } }
 		
 		///<summary>Specific version type</summary>
-		public VersionType VersionType 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<VersionType>("version_type"); } 
-			set { this.Request.RequestParameters.AddQueryString("version_type", value); }
-		}
-		
+		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for GetScript
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for GetScript <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</pre></summary>
 	public partial class GetScriptRequest 
-			{
-		
+	{
 		///<summary>Explicit version number for concurrency control</summary>
-		public long Version 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<long>("version"); } 
-			set { this.Request.RequestParameters.AddQueryString("version", value); }
-		}
-		
+		public long Version { get { return Q<long>("version"); } set { Q("version", value); } }
 		
 		///<summary>Specific version type</summary>
-		public VersionType VersionType 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<VersionType>("version_type"); } 
-			set { this.Request.RequestParameters.AddQueryString("version_type", value); }
-		}
-		
+		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for GetSource
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-get.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for GetSource <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-get.html</pre></summary>
 	public partial class SourceRequest<T> 
-			{
-		
+	{
 		///<summary>The ID of the parent document</summary>
-		public string Parent 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("parent"); } 
-			set { this.Request.RequestParameters.AddQueryString("parent", value); }
-		}
-		
+		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public string Preference 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("preference"); } 
-			set { this.Request.RequestParameters.AddQueryString("preference", value); }
-		}
-		
+		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
 		
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
-		public bool Realtime 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("realtime"); } 
-			set { this.Request.RequestParameters.AddQueryString("realtime", value); }
-		}
-		
+		public bool Realtime { get { return Q<bool>("realtime"); } set { Q("realtime", value); } }
 		
 		///<summary>Refresh the shard containing the document before performing the operation</summary>
-		public bool Refresh 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("refresh"); } 
-			set { this.Request.RequestParameters.AddQueryString("refresh", value); }
-		}
-		
+		public bool Refresh { get { return Q<bool>("refresh"); } set { Q("refresh", value); } }
 		
 		///<summary>Specific routing value</summary>
-		public string Routing 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("routing"); } 
-			set { this.Request.RequestParameters.AddQueryString("routing", value); }
-		}
-		
+		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public  string[] SourceEnabled 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("_source"); } 
-			set { this.Request.RequestParameters.AddQueryString("_source", value); }
-		}
-		
+		public  string[] SourceEnabled { get { return Q< string[]>("_source"); } set { Q("_source", value); } }
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public IList<FieldName> SourceExclude 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<FieldName>>("_source_exclude"); } 
-			set { this.Request.RequestParameters.AddQueryString("_source_exclude", value); }
-		}
-		
+		public IList<FieldName> SourceExclude { get { return Q<IList<FieldName>>("_source_exclude"); } set { Q("_source_exclude", value); } }
 		
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public IList<FieldName> SourceInclude 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<FieldName>>("_source_include"); } 
-			set { this.Request.RequestParameters.AddQueryString("_source_include", value); }
-		}
-		
+		public IList<FieldName> SourceInclude { get { return Q<IList<FieldName>>("_source_include"); } set { Q("_source_include", value); } }
 		
 		///<summary>Explicit version number for concurrency control</summary>
-		public long Version 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<long>("version"); } 
-			set { this.Request.RequestParameters.AddQueryString("version", value); }
-		}
-		
+		public long Version { get { return Q<long>("version"); } set { Q("version", value); } }
 		
 		///<summary>Specific version type</summary>
-		public VersionType VersionType 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<VersionType>("version_type"); } 
-			set { this.Request.RequestParameters.AddQueryString("version_type", value); }
-		}
-		
+		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for GetTemplate
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/search-template.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for GetTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-template.html</pre></summary>
 	public partial class GetTemplateRequest 
-			{
-		
+	{
 		///<summary>Explicit version number for concurrency control</summary>
-		public long Version 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<long>("version"); } 
-			set { this.Request.RequestParameters.AddQueryString("version", value); }
-		}
-		
+		public long Version { get { return Q<long>("version"); } set { Q("version", value); } }
 		
 		///<summary>Specific version type</summary>
-		public VersionType VersionType 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<VersionType>("version_type"); } 
-			set { this.Request.RequestParameters.AddQueryString("version_type", value); }
-		}
-		
+		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for Index
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-index_.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for Index <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-index_.html</pre></summary>
 	public partial class IndexRequest<TDocument> 
-			{
-		
+	{
 		///<summary>Explicit write consistency setting for the operation</summary>
-		public Consistency Consistency 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<Consistency>("consistency"); } 
-			set { this.Request.RequestParameters.AddQueryString("consistency", value); }
-		}
-		
+		public Consistency Consistency { get { return Q<Consistency>("consistency"); } set { Q("consistency", value); } }
 		
 		///<summary>Explicit operation type</summary>
-		public OpType OpType 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<OpType>("op_type"); } 
-			set { this.Request.RequestParameters.AddQueryString("op_type", value); }
-		}
-		
+		public OpType OpType { get { return Q<OpType>("op_type"); } set { Q("op_type", value); } }
 		
 		///<summary>ID of the parent document</summary>
-		public string Parent 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("parent"); } 
-			set { this.Request.RequestParameters.AddQueryString("parent", value); }
-		}
-		
+		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
 		
 		///<summary>Refresh the index after performing the operation</summary>
-		public bool Refresh 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("refresh"); } 
-			set { this.Request.RequestParameters.AddQueryString("refresh", value); }
-		}
-		
+		public bool Refresh { get { return Q<bool>("refresh"); } set { Q("refresh", value); } }
 		
 		///<summary>Specific replication type</summary>
-		public Replication Replication 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<Replication>("replication"); } 
-			set { this.Request.RequestParameters.AddQueryString("replication", value); }
-		}
-		
+		public Replication Replication { get { return Q<Replication>("replication"); } set { Q("replication", value); } }
 		
 		///<summary>Specific routing value</summary>
-		public string Routing 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("routing"); } 
-			set { this.Request.RequestParameters.AddQueryString("routing", value); }
-		}
-		
+		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Explicit operation timeout</summary>
-		public string Timeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("timeout", value); }
-		}
-		
+		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
 		
 		///<summary>Explicit timestamp for the document</summary>
-		public string Timestamp 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("timestamp"); } 
-			set { this.Request.RequestParameters.AddQueryString("timestamp", value); }
-		}
-		
+		public string Timestamp { get { return Q<string>("timestamp"); } set { Q("timestamp", value); } }
 		
 		///<summary>Expiration time for the document</summary>
-		public string Ttl 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("ttl"); } 
-			set { this.Request.RequestParameters.AddQueryString("ttl", value); }
-		}
-		
+		public string Ttl { get { return Q<string>("ttl"); } set { Q("ttl", value); } }
 		
 		///<summary>Explicit version number for concurrency control</summary>
-		public long Version 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<long>("version"); } 
-			set { this.Request.RequestParameters.AddQueryString("version", value); }
-		}
-		
+		public long Version { get { return Q<long>("version"); } set { Q("version", value); } }
 		
 		///<summary>Specific version type</summary>
-		public VersionType VersionType 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<VersionType>("version_type"); } 
-			set { this.Request.RequestParameters.AddQueryString("version_type", value); }
-		}
-		
+		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for IndicesAnalyzeGetForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-analyze.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for IndicesAnalyzeGetForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-analyze.html</pre></summary>
 	public partial class AnalyzeRequest 
-			{
-		
+	{
 		///<summary>The name of the analyzer to use</summary>
-		public string Analyzer 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("analyzer"); } 
-			set { this.Request.RequestParameters.AddQueryString("analyzer", value); }
-		}
-		
+		public string Analyzer { get { return Q<string>("analyzer"); } set { Q("analyzer", value); } }
 		
 		///<summary>A comma-separated list of character filters to use for the analysis</summary>
-		public  string[] CharFilters 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("char_filters"); } 
-			set { this.Request.RequestParameters.AddQueryString("char_filters", value); }
-		}
-		
+		public  string[] CharFilters { get { return Q< string[]>("char_filters"); } set { Q("char_filters", value); } }
 		
 		///<summary>Use the analyzer configured for this field (instead of passing the analyzer name)</summary>
-		public FieldName Field 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<FieldName>("field"); } 
-			set { this.Request.RequestParameters.AddQueryString("field", value); }
-		}
-		
+		public FieldName Field { get { return Q<FieldName>("field"); } set { Q("field", value); } }
 		
 		///<summary>A comma-separated list of filters to use for the analysis</summary>
-		public  string[] Filters 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("filters"); } 
-			set { this.Request.RequestParameters.AddQueryString("filters", value); }
-		}
-		
+		public  string[] Filters { get { return Q< string[]>("filters"); } set { Q("filters", value); } }
 		
 		///<summary>The name of the index to scope the operation</summary>
-		public string IndexQueryString 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("index"); } 
-			set { this.Request.RequestParameters.AddQueryString("index", value); }
-		}
-		
+		public string IndexQueryString { get { return Q<string>("index"); } set { Q("index", value); } }
 		
 		///<summary>With `true`, specify that a local shard should be used if available, with `false`, use a random shard (default: true)</summary>
-		public bool PreferLocal 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("prefer_local"); } 
-			set { this.Request.RequestParameters.AddQueryString("prefer_local", value); }
-		}
-		
+		public bool PreferLocal { get { return Q<bool>("prefer_local"); } set { Q("prefer_local", value); } }
 		
 		///<summary>The text on which the analysis should be performed (when request body is not used)</summary>
-		public string Text 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("text"); } 
-			set { this.Request.RequestParameters.AddQueryString("text", value); }
-		}
-		
+		public string Text { get { return Q<string>("text"); } set { Q("text", value); } }
 		
 		///<summary>The name of the tokenizer to use for the analysis</summary>
-		public string Tokenizer 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("tokenizer"); } 
-			set { this.Request.RequestParameters.AddQueryString("tokenizer", value); }
-		}
-		
+		public string Tokenizer { get { return Q<string>("tokenizer"); } set { Q("tokenizer", value); } }
 		
 		///<summary>Format of the output</summary>
-		public Format Format 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<Format>("format"); } 
-			set { this.Request.RequestParameters.AddQueryString("format", value); }
-		}
-		
+		public Format Format { get { return Q<Format>("format"); } set { Q("format", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for IndicesClearCacheForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-clearcache.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for IndicesClearCacheForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-clearcache.html</pre></summary>
 	public partial class ClearCacheRequest 
-			{
-		
+	{
 		///<summary>Clear field data</summary>
-		public bool FieldData 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("field_data"); } 
-			set { this.Request.RequestParameters.AddQueryString("field_data", value); }
-		}
-		
+		public bool FieldData { get { return Q<bool>("field_data"); } set { Q("field_data", value); } }
 		
 		///<summary>A comma-separated list of fields to clear when using the `field_data` parameter (default: all)</summary>
-		public IList<FieldName> Fields 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<FieldName>>("fields"); } 
-			set { this.Request.RequestParameters.AddQueryString("fields", value); }
-		}
-		
+		public IList<FieldName> Fields { get { return Q<IList<FieldName>>("fields"); } set { Q("fields", value); } }
 		
 		///<summary>Clear filter caches</summary>
-		public bool Filter 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("filter"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter", value); }
-		}
-		
+		public bool Filter { get { return Q<bool>("filter"); } set { Q("filter", value); } }
 		
 		///<summary>Clear filter caches</summary>
-		public bool FilterCache 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("filter_cache"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_cache", value); }
-		}
-		
+		public bool FilterCache { get { return Q<bool>("filter_cache"); } set { Q("filter_cache", value); } }
 		
 		///<summary>A comma-separated list of keys to clear when using the `filter_cache` parameter (default: all)</summary>
-		public bool FilterKeys 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("filter_keys"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_keys", value); }
-		}
-		
+		public bool FilterKeys { get { return Q<bool>("filter_keys"); } set { Q("filter_keys", value); } }
 		
 		///<summary>Clear ID caches for parent/child</summary>
-		public bool Id 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("id"); } 
-			set { this.Request.RequestParameters.AddQueryString("id", value); }
-		}
-		
+		public bool Id { get { return Q<bool>("id"); } set { Q("id", value); } }
 		
 		///<summary>Clear ID caches for parent/child</summary>
-		public bool IdCache 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("id_cache"); } 
-			set { this.Request.RequestParameters.AddQueryString("id_cache", value); }
-		}
-		
+		public bool IdCache { get { return Q<bool>("id_cache"); } set { Q("id_cache", value); } }
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("ignore_unavailable"); } 
-			set { this.Request.RequestParameters.AddQueryString("ignore_unavailable", value); }
-		}
-		
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("allow_no_indices"); } 
-			set { this.Request.RequestParameters.AddQueryString("allow_no_indices", value); }
-		}
-		
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
-			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
-		}
-		
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>A comma-separated list of index name to limit the operation</summary>
-		public  string[] IndexQueryString 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("index"); } 
-			set { this.Request.RequestParameters.AddQueryString("index", value); }
-		}
-		
+		public  string[] IndexQueryString { get { return Q< string[]>("index"); } set { Q("index", value); } }
 		
 		///<summary>Clear the recycler cache</summary>
-		public bool Recycler 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("recycler"); } 
-			set { this.Request.RequestParameters.AddQueryString("recycler", value); }
-		}
-		
+		public bool Recycler { get { return Q<bool>("recycler"); } set { Q("recycler", value); } }
 		
 		///<summary>Clear query cache</summary>
-		public bool QueryCache 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("query_cache"); } 
-			set { this.Request.RequestParameters.AddQueryString("query_cache", value); }
-		}
-		
+		public bool QueryCache { get { return Q<bool>("query_cache"); } set { Q("query_cache", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for IndicesClose
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-open-close.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for IndicesClose <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-open-close.html</pre></summary>
 	public partial class CloseIndexRequest 
-			{
-		
+	{
 		///<summary>Explicit operation timeout</summary>
-		public string Timeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("timeout", value); }
-		}
-		
+		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
 		
 		///<summary>Specify timeout for connection to master</summary>
-		public string MasterTimeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("master_timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("master_timeout", value); }
-		}
-		
+		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("ignore_unavailable"); } 
-			set { this.Request.RequestParameters.AddQueryString("ignore_unavailable", value); }
-		}
-		
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("allow_no_indices"); } 
-			set { this.Request.RequestParameters.AddQueryString("allow_no_indices", value); }
-		}
-		
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
-			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
-		}
-		
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for IndicesCreate
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-create-index.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for IndicesCreate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-create-index.html</pre></summary>
 	public partial class CreateIndexRequest 
-			{
-		
+	{
 		///<summary>Explicit operation timeout</summary>
-		public string Timeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("timeout", value); }
-		}
-		
+		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
 		
 		///<summary>Specify timeout for connection to master</summary>
-		public string MasterTimeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("master_timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("master_timeout", value); }
-		}
-		
+		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for IndicesDelete
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-delete-index.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for IndicesDelete <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-delete-index.html</pre></summary>
 	public partial class DeleteIndexRequest 
-			{
-		
+	{
 		///<summary>Explicit operation timeout</summary>
-		public string Timeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("timeout", value); }
-		}
-		
+		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
 		
 		///<summary>Specify timeout for connection to master</summary>
-		public string MasterTimeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("master_timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("master_timeout", value); }
-		}
-		
+		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for IndicesDeleteAlias
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for IndicesDeleteAlias <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</pre></summary>
 	public partial class DeleteAliasRequest 
-			{
-		
+	{
 		///<summary>Explicit timestamp for the document</summary>
-		public string Timeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("timeout", value); }
-		}
-		
+		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
 		
 		///<summary>Specify timeout for connection to master</summary>
-		public string MasterTimeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("master_timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("master_timeout", value); }
-		}
-		
+		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for IndicesDeleteMapping
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-delete-mapping.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for IndicesDeleteMapping <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-delete-mapping.html</pre></summary>
 	public partial class DeleteMappingRequest<T> 
-			{
-		
+	{
 		///<summary>Specify timeout for connection to master</summary>
-		public string MasterTimeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("master_timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("master_timeout", value); }
-		}
-		
+		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for IndicesDeleteWarmer
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-warmers.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for IndicesDeleteWarmer <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-warmers.html</pre></summary>
 	public partial class DeleteWarmerRequest 
-			{
-		
+	{
 		///<summary>Specify timeout for connection to master</summary>
-		public string MasterTimeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("master_timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("master_timeout", value); }
-		}
-		
+		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for IndicesExists
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-exists.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for IndicesExists <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-exists.html</pre></summary>
 	public partial class IndexExistsRequest 
-			{
-		
+	{
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("ignore_unavailable"); } 
-			set { this.Request.RequestParameters.AddQueryString("ignore_unavailable", value); }
-		}
-		
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("allow_no_indices"); } 
-			set { this.Request.RequestParameters.AddQueryString("allow_no_indices", value); }
-		}
-		
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
-			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
-		}
-		
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("local"); } 
-			set { this.Request.RequestParameters.AddQueryString("local", value); }
-		}
-		
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for IndicesExistsAliasForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for IndicesExistsAliasForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</pre></summary>
 	public partial class AliasExistsRequest 
-			{
-		
+	{
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("ignore_unavailable"); } 
-			set { this.Request.RequestParameters.AddQueryString("ignore_unavailable", value); }
-		}
-		
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("allow_no_indices"); } 
-			set { this.Request.RequestParameters.AddQueryString("allow_no_indices", value); }
-		}
-		
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
-			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
-		}
-		
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("local"); } 
-			set { this.Request.RequestParameters.AddQueryString("local", value); }
-		}
-		
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for IndicesExistsTemplateForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-templates.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for IndicesExistsTemplateForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-templates.html</pre></summary>
 	public partial class TemplateExistsRequest 
-			{
-		
+	{
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public string MasterTimeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("master_timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("master_timeout", value); }
-		}
-		
+		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("local"); } 
-			set { this.Request.RequestParameters.AddQueryString("local", value); }
-		}
-		
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for IndicesExistsType
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-types-exists.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for IndicesExistsType <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-types-exists.html</pre></summary>
 	public partial class TypeExistsRequest 
-			{
-		
+	{
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("ignore_unavailable"); } 
-			set { this.Request.RequestParameters.AddQueryString("ignore_unavailable", value); }
-		}
-		
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("allow_no_indices"); } 
-			set { this.Request.RequestParameters.AddQueryString("allow_no_indices", value); }
-		}
-		
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
-			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
-		}
-		
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("local"); } 
-			set { this.Request.RequestParameters.AddQueryString("local", value); }
-		}
-		
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for IndicesFlushForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-flush.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for IndicesFlushForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-flush.html</pre></summary>
 	public partial class FlushRequest 
-			{
-		
+	{
 		///<summary>Whether a flush should be forced even if it is not necessarily needed ie. if no changes will be committed to the index. This is useful if transaction log IDs should be incremented even if no uncommitted changes are present. (This setting can be considered as internal)</summary>
-		public bool Force 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("force"); } 
-			set { this.Request.RequestParameters.AddQueryString("force", value); }
-		}
-		
+		public bool Force { get { return Q<bool>("force"); } set { Q("force", value); } }
 		
 		///<summary>If set to true the flush operation will block until the flush can be executed if another flush operation is already executing. The default is false and will cause an exception to be thrown on the shard level if another flush operation is already running.</summary>
-		public bool WaitIfOngoing 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("wait_if_ongoing"); } 
-			set { this.Request.RequestParameters.AddQueryString("wait_if_ongoing", value); }
-		}
-		
+		public bool WaitIfOngoing { get { return Q<bool>("wait_if_ongoing"); } set { Q("wait_if_ongoing", value); } }
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("ignore_unavailable"); } 
-			set { this.Request.RequestParameters.AddQueryString("ignore_unavailable", value); }
-		}
-		
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("allow_no_indices"); } 
-			set { this.Request.RequestParameters.AddQueryString("allow_no_indices", value); }
-		}
-		
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
-			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
-		}
-		
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for IndicesFlushSyncedForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for IndicesFlushSyncedForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush.html</pre></summary>
 	public partial class SyncedFlushRequest 
-			{
-		
+	{
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for IndicesGet
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-index.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for IndicesGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-index.html</pre></summary>
 	public partial class GetIndexRequest 
-			{
-		
+	{
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("local"); } 
-			set { this.Request.RequestParameters.AddQueryString("local", value); }
-		}
-		
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Ignore unavailable indexes (default: false)</summary>
-		public bool IgnoreUnavailable 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("ignore_unavailable"); } 
-			set { this.Request.RequestParameters.AddQueryString("ignore_unavailable", value); }
-		}
-		
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Ignore if a wildcard expression resolves to no concrete indices (default: false)</summary>
-		public bool AllowNoIndices 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("allow_no_indices"); } 
-			set { this.Request.RequestParameters.AddQueryString("allow_no_indices", value); }
-		}
-		
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether wildcard expressions should get expanded to open or closed indices (default: open)</summary>
-		public ExpandWildcards ExpandWildcards 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
-			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
-		}
-		
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for IndicesGetAliasForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for IndicesGetAliasForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</pre></summary>
 	public partial class GetAliasRequest 
-			{
-		
+	{
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("ignore_unavailable"); } 
-			set { this.Request.RequestParameters.AddQueryString("ignore_unavailable", value); }
-		}
-		
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("allow_no_indices"); } 
-			set { this.Request.RequestParameters.AddQueryString("allow_no_indices", value); }
-		}
-		
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
-			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
-		}
-		
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("local"); } 
-			set { this.Request.RequestParameters.AddQueryString("local", value); }
-		}
-		
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for IndicesGetAliasesForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for IndicesGetAliasesForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</pre></summary>
 	public partial class GetAliasesRequest 
-			{
-		
+	{
 		///<summary>Explicit operation timeout</summary>
-		public string Timeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("timeout", value); }
-		}
-		
+		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("local"); } 
-			set { this.Request.RequestParameters.AddQueryString("local", value); }
-		}
-		
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for IndicesGetFieldMappingForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-field-mapping.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for IndicesGetFieldMappingForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-field-mapping.html</pre></summary>
 	public partial class GetFieldMappingRequest<T> 
-			{
-		
+	{
 		///<summary>Whether the default mapping values should be returned as well</summary>
-		public bool IncludeDefaults 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("include_defaults"); } 
-			set { this.Request.RequestParameters.AddQueryString("include_defaults", value); }
-		}
-		
+		public bool IncludeDefaults { get { return Q<bool>("include_defaults"); } set { Q("include_defaults", value); } }
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("ignore_unavailable"); } 
-			set { this.Request.RequestParameters.AddQueryString("ignore_unavailable", value); }
-		}
-		
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("allow_no_indices"); } 
-			set { this.Request.RequestParameters.AddQueryString("allow_no_indices", value); }
-		}
-		
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
-			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
-		}
-		
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("local"); } 
-			set { this.Request.RequestParameters.AddQueryString("local", value); }
-		}
-		
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for IndicesGetMappingForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-mapping.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for IndicesGetMappingForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-mapping.html</pre></summary>
 	public partial class GetMappingRequest<T> 
-			{
-		
+	{
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("ignore_unavailable"); } 
-			set { this.Request.RequestParameters.AddQueryString("ignore_unavailable", value); }
-		}
-		
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("allow_no_indices"); } 
-			set { this.Request.RequestParameters.AddQueryString("allow_no_indices", value); }
-		}
-		
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
-			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
-		}
-		
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("local"); } 
-			set { this.Request.RequestParameters.AddQueryString("local", value); }
-		}
-		
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for IndicesGetSettingsForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-settings.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for IndicesGetSettingsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-settings.html</pre></summary>
 	public partial class GetIndexSettingsRequest 
-			{
-		
+	{
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("ignore_unavailable"); } 
-			set { this.Request.RequestParameters.AddQueryString("ignore_unavailable", value); }
-		}
-		
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("allow_no_indices"); } 
-			set { this.Request.RequestParameters.AddQueryString("allow_no_indices", value); }
-		}
-		
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
-			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
-		}
-		
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>Return settings in flat format (default: false)</summary>
-		public bool FlatSettings 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("flat_settings"); } 
-			set { this.Request.RequestParameters.AddQueryString("flat_settings", value); }
-		}
-		
+		public bool FlatSettings { get { return Q<bool>("flat_settings"); } set { Q("flat_settings", value); } }
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("local"); } 
-			set { this.Request.RequestParameters.AddQueryString("local", value); }
-		}
-		
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for IndicesGetUpgradeForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for IndicesGetUpgradeForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</pre></summary>
 	public partial class UpgradeStatusRequest 
-			{
-		
+	{
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("ignore_unavailable"); } 
-			set { this.Request.RequestParameters.AddQueryString("ignore_unavailable", value); }
-		}
-		
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("allow_no_indices"); } 
-			set { this.Request.RequestParameters.AddQueryString("allow_no_indices", value); }
-		}
-		
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
-			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
-		}
-		
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>Whether to return time and byte values in human-readable format.</summary>
-		public bool Human 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("human"); } 
-			set { this.Request.RequestParameters.AddQueryString("human", value); }
-		}
-		
+		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for IndicesGetWarmerForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-warmers.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for IndicesGetWarmerForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-warmers.html</pre></summary>
 	public partial class GetWarmerRequest 
-			{
-		
+	{
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("ignore_unavailable"); } 
-			set { this.Request.RequestParameters.AddQueryString("ignore_unavailable", value); }
-		}
-		
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("allow_no_indices"); } 
-			set { this.Request.RequestParameters.AddQueryString("allow_no_indices", value); }
-		}
-		
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
-			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
-		}
-		
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("local"); } 
-			set { this.Request.RequestParameters.AddQueryString("local", value); }
-		}
-		
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for IndicesOpen
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-open-close.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for IndicesOpen <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-open-close.html</pre></summary>
 	public partial class OpenIndexRequest 
-			{
-		
+	{
 		///<summary>Explicit operation timeout</summary>
-		public string Timeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("timeout", value); }
-		}
-		
+		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
 		
 		///<summary>Specify timeout for connection to master</summary>
-		public string MasterTimeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("master_timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("master_timeout", value); }
-		}
-		
+		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("ignore_unavailable"); } 
-			set { this.Request.RequestParameters.AddQueryString("ignore_unavailable", value); }
-		}
-		
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("allow_no_indices"); } 
-			set { this.Request.RequestParameters.AddQueryString("allow_no_indices", value); }
-		}
-		
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
-			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
-		}
-		
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for IndicesOptimizeForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-optimize.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for IndicesOptimizeForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-optimize.html</pre></summary>
 	public partial class OptimizeRequest 
-			{
-		
+	{
 		///<summary>Specify whether the index should be flushed after performing the operation (default: true)</summary>
-		public bool Flush 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("flush"); } 
-			set { this.Request.RequestParameters.AddQueryString("flush", value); }
-		}
-		
+		public bool Flush { get { return Q<bool>("flush"); } set { Q("flush", value); } }
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("ignore_unavailable"); } 
-			set { this.Request.RequestParameters.AddQueryString("ignore_unavailable", value); }
-		}
-		
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("allow_no_indices"); } 
-			set { this.Request.RequestParameters.AddQueryString("allow_no_indices", value); }
-		}
-		
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
-			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
-		}
-		
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>The number of segments the index should be merged into (default: dynamic)</summary>
-		public long MaxNumSegments 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<long>("max_num_segments"); } 
-			set { this.Request.RequestParameters.AddQueryString("max_num_segments", value); }
-		}
-		
+		public long MaxNumSegments { get { return Q<long>("max_num_segments"); } set { Q("max_num_segments", value); } }
 		
 		///<summary>Specify whether the operation should only expunge deleted documents</summary>
-		public bool OnlyExpungeDeletes 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("only_expunge_deletes"); } 
-			set { this.Request.RequestParameters.AddQueryString("only_expunge_deletes", value); }
-		}
-		
+		public bool OnlyExpungeDeletes { get { return Q<bool>("only_expunge_deletes"); } set { Q("only_expunge_deletes", value); } }
 		
 		///<summary>TODO: ?</summary>
-		public string OperationThreading 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("operation_threading"); } 
-			set { this.Request.RequestParameters.AddQueryString("operation_threading", value); }
-		}
-		
+		public string OperationThreading { get { return Q<string>("operation_threading"); } set { Q("operation_threading", value); } }
 		
 		///<summary>Specify whether the request should block until the merge process is finished (default: true)</summary>
-		public bool WaitForMerge 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("wait_for_merge"); } 
-			set { this.Request.RequestParameters.AddQueryString("wait_for_merge", value); }
-		}
-		
+		public bool WaitForMerge { get { return Q<bool>("wait_for_merge"); } set { Q("wait_for_merge", value); } }
 		
 		///<summary>Force a merge operation to run, even if there is a single segment in the index (default: false)</summary>
-		public bool Force 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("force"); } 
-			set { this.Request.RequestParameters.AddQueryString("force", value); }
-		}
-		
+		public bool Force { get { return Q<bool>("force"); } set { Q("force", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for IndicesPutAlias
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for IndicesPutAlias <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</pre></summary>
 	public partial class PutAliasRequest 
-			{
-		
+	{
 		///<summary>Explicit timestamp for the document</summary>
-		public string Timeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("timeout", value); }
-		}
-		
+		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
 		
 		///<summary>Specify timeout for connection to master</summary>
-		public string MasterTimeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("master_timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("master_timeout", value); }
-		}
-		
+		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for IndicesPutMapping
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-put-mapping.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for IndicesPutMapping <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-put-mapping.html</pre></summary>
 	public partial class PutMappingRequest<T> 
-			{
-		
+	{
 		///<summary>Specify whether to ignore conflicts while updating the mapping (default: false)</summary>
-		public bool IgnoreConflicts 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("ignore_conflicts"); } 
-			set { this.Request.RequestParameters.AddQueryString("ignore_conflicts", value); }
-		}
-		
+		public bool IgnoreConflicts { get { return Q<bool>("ignore_conflicts"); } set { Q("ignore_conflicts", value); } }
 		
 		///<summary>Explicit operation timeout</summary>
-		public string Timeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("timeout", value); }
-		}
-		
+		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
 		
 		///<summary>Specify timeout for connection to master</summary>
-		public string MasterTimeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("master_timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("master_timeout", value); }
-		}
-		
+		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("ignore_unavailable"); } 
-			set { this.Request.RequestParameters.AddQueryString("ignore_unavailable", value); }
-		}
-		
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("allow_no_indices"); } 
-			set { this.Request.RequestParameters.AddQueryString("allow_no_indices", value); }
-		}
-		
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
-			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
-		}
-		
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for IndicesPutSettingsForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-update-settings.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for IndicesPutSettingsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-update-settings.html</pre></summary>
 	public partial class UpdateSettingsRequest 
-			{
-		
+	{
 		///<summary>Specify timeout for connection to master</summary>
-		public string MasterTimeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("master_timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("master_timeout", value); }
-		}
-		
+		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("ignore_unavailable"); } 
-			set { this.Request.RequestParameters.AddQueryString("ignore_unavailable", value); }
-		}
-		
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("allow_no_indices"); } 
-			set { this.Request.RequestParameters.AddQueryString("allow_no_indices", value); }
-		}
-		
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
-			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
-		}
-		
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>Return settings in flat format (default: false)</summary>
-		public bool FlatSettings 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("flat_settings"); } 
-			set { this.Request.RequestParameters.AddQueryString("flat_settings", value); }
-		}
-		
+		public bool FlatSettings { get { return Q<bool>("flat_settings"); } set { Q("flat_settings", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for IndicesPutTemplateForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-templates.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for IndicesPutTemplateForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-templates.html</pre></summary>
 	public partial class PutTemplateRequest 
-			{
-		
+	{
 		///<summary>Whether the index template should only be added if new or can also replace an existing one</summary>
-		public bool Create 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("create"); } 
-			set { this.Request.RequestParameters.AddQueryString("create", value); }
-		}
-		
+		public bool Create { get { return Q<bool>("create"); } set { Q("create", value); } }
 		
 		///<summary>Explicit operation timeout</summary>
-		public string Timeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("timeout", value); }
-		}
-		
+		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
 		
 		///<summary>Specify timeout for connection to master</summary>
-		public string MasterTimeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("master_timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("master_timeout", value); }
-		}
-		
+		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Return settings in flat format (default: false)</summary>
-		public bool FlatSettings 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("flat_settings"); } 
-			set { this.Request.RequestParameters.AddQueryString("flat_settings", value); }
-		}
-		
+		public bool FlatSettings { get { return Q<bool>("flat_settings"); } set { Q("flat_settings", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for IndicesPutWarmerForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-warmers.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for IndicesPutWarmerForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-warmers.html</pre></summary>
 	public partial class PutWarmerRequest 
-			{
-		
+	{
 		///<summary>Specify timeout for connection to master</summary>
-		public string MasterTimeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("master_timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("master_timeout", value); }
-		}
-		
+		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed) in the search request to warm</summary>
-		public bool IgnoreUnavailable 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("ignore_unavailable"); } 
-			set { this.Request.RequestParameters.AddQueryString("ignore_unavailable", value); }
-		}
-		
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices in the search request to warm. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("allow_no_indices"); } 
-			set { this.Request.RequestParameters.AddQueryString("allow_no_indices", value); }
-		}
-		
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both, in the search request to warm.</summary>
-		public ExpandWildcards ExpandWildcards 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
-			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
-		}
-		
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for IndicesRecoveryForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-recovery.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for IndicesRecoveryForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-recovery.html</pre></summary>
 	public partial class RecoveryStatusRequest 
-			{
-		
+	{
 		///<summary>Whether to display detailed information about shard recovery</summary>
-		public bool Detailed 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("detailed"); } 
-			set { this.Request.RequestParameters.AddQueryString("detailed", value); }
-		}
-		
+		public bool Detailed { get { return Q<bool>("detailed"); } set { Q("detailed", value); } }
 		
 		///<summary>Display only those recoveries that are currently on-going</summary>
-		public bool ActiveOnly 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("active_only"); } 
-			set { this.Request.RequestParameters.AddQueryString("active_only", value); }
-		}
-		
+		public bool ActiveOnly { get { return Q<bool>("active_only"); } set { Q("active_only", value); } }
 		
 		///<summary>Whether to return time and byte values in human-readable format.</summary>
-		public bool Human 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("human"); } 
-			set { this.Request.RequestParameters.AddQueryString("human", value); }
-		}
-		
+		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for IndicesRefreshForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-refresh.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for IndicesRefreshForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-refresh.html</pre></summary>
 	public partial class RefreshRequest 
-			{
-		
+	{
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("ignore_unavailable"); } 
-			set { this.Request.RequestParameters.AddQueryString("ignore_unavailable", value); }
-		}
-		
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("allow_no_indices"); } 
-			set { this.Request.RequestParameters.AddQueryString("allow_no_indices", value); }
-		}
-		
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
-			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
-		}
-		
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>Force a refresh even if not required</summary>
-		public bool Force 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("force"); } 
-			set { this.Request.RequestParameters.AddQueryString("force", value); }
-		}
-		
+		public bool Force { get { return Q<bool>("force"); } set { Q("force", value); } }
 		
 		///<summary>TODO: ?</summary>
-		public string OperationThreading 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("operation_threading"); } 
-			set { this.Request.RequestParameters.AddQueryString("operation_threading", value); }
-		}
-		
+		public string OperationThreading { get { return Q<string>("operation_threading"); } set { Q("operation_threading", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for IndicesSegmentsForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-segments.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for IndicesSegmentsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-segments.html</pre></summary>
 	public partial class SegmentsRequest 
-			{
-		
+	{
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("ignore_unavailable"); } 
-			set { this.Request.RequestParameters.AddQueryString("ignore_unavailable", value); }
-		}
-		
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("allow_no_indices"); } 
-			set { this.Request.RequestParameters.AddQueryString("allow_no_indices", value); }
-		}
-		
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
-			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
-		}
-		
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>Whether to return time and byte values in human-readable format.</summary>
-		public bool Human 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("human"); } 
-			set { this.Request.RequestParameters.AddQueryString("human", value); }
-		}
-		
+		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
 		
 		///<summary>TODO: ?</summary>
-		public string OperationThreading 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("operation_threading"); } 
-			set { this.Request.RequestParameters.AddQueryString("operation_threading", value); }
-		}
-		
+		public string OperationThreading { get { return Q<string>("operation_threading"); } set { Q("operation_threading", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for IndicesStatsForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-stats.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for IndicesStatsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-stats.html</pre></summary>
 	public partial class IndicesStatsRequest 
-			{
-		
+	{
 		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
-		public IList<FieldName> CompletionFields 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<FieldName>>("completion_fields"); } 
-			set { this.Request.RequestParameters.AddQueryString("completion_fields", value); }
-		}
-		
+		public IList<FieldName> CompletionFields { get { return Q<IList<FieldName>>("completion_fields"); } set { Q("completion_fields", value); } }
 		
 		///<summary>A comma-separated list of fields for `fielddata` index metric (supports wildcards)</summary>
-		public IList<FieldName> FielddataFields 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<FieldName>>("fielddata_fields"); } 
-			set { this.Request.RequestParameters.AddQueryString("fielddata_fields", value); }
-		}
-		
+		public IList<FieldName> FielddataFields { get { return Q<IList<FieldName>>("fielddata_fields"); } set { Q("fielddata_fields", value); } }
 		
 		///<summary>A comma-separated list of fields for `fielddata` and `completion` index metric (supports wildcards)</summary>
-		public IList<FieldName> Fields 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<FieldName>>("fields"); } 
-			set { this.Request.RequestParameters.AddQueryString("fields", value); }
-		}
-		
+		public IList<FieldName> Fields { get { return Q<IList<FieldName>>("fields"); } set { Q("fields", value); } }
 		
 		///<summary>A comma-separated list of search groups for `search` index metric</summary>
-		public  string[] Groups 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("groups"); } 
-			set { this.Request.RequestParameters.AddQueryString("groups", value); }
-		}
-		
+		public  string[] Groups { get { return Q< string[]>("groups"); } set { Q("groups", value); } }
 		
 		///<summary>Whether to return time and byte values in human-readable format.</summary>
-		public bool Human 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("human"); } 
-			set { this.Request.RequestParameters.AddQueryString("human", value); }
-		}
-		
+		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
 		
 		///<summary>Return stats aggregated at cluster, index or shard level</summary>
-		public Level Level 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<Level>("level"); } 
-			set { this.Request.RequestParameters.AddQueryString("level", value); }
-		}
-		
+		public Level Level { get { return Q<Level>("level"); } set { Q("level", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for IndicesStatusForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-status.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for IndicesStatusForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-status.html</pre></summary>
 	public partial class IndicesStatusRequest 
-			{
-		
+	{
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("ignore_unavailable"); } 
-			set { this.Request.RequestParameters.AddQueryString("ignore_unavailable", value); }
-		}
-		
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("allow_no_indices"); } 
-			set { this.Request.RequestParameters.AddQueryString("allow_no_indices", value); }
-		}
-		
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
-			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
-		}
-		
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>Whether to return time and byte values in human-readable format.</summary>
-		public bool Human 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("human"); } 
-			set { this.Request.RequestParameters.AddQueryString("human", value); }
-		}
-		
+		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
 		
 		///<summary>TODO: ?</summary>
-		public string OperationThreading 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("operation_threading"); } 
-			set { this.Request.RequestParameters.AddQueryString("operation_threading", value); }
-		}
-		
+		public string OperationThreading { get { return Q<string>("operation_threading"); } set { Q("operation_threading", value); } }
 		
 		///<summary>Return information about shard recovery</summary>
-		public bool Recovery 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("recovery"); } 
-			set { this.Request.RequestParameters.AddQueryString("recovery", value); }
-		}
-		
+		public bool Recovery { get { return Q<bool>("recovery"); } set { Q("recovery", value); } }
 		
 		///<summary>TODO: ?</summary>
-		public bool Snapshot 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("snapshot"); } 
-			set { this.Request.RequestParameters.AddQueryString("snapshot", value); }
-		}
-		
+		public bool Snapshot { get { return Q<bool>("snapshot"); } set { Q("snapshot", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for IndicesUpdateAliasesForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for IndicesUpdateAliasesForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</pre></summary>
 	public partial class AliasRequest 
-			{
-		
+	{
 		///<summary>Request timeout</summary>
-		public string Timeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("timeout", value); }
-		}
-		
+		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
 		
 		///<summary>Specify timeout for connection to master</summary>
-		public string MasterTimeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("master_timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("master_timeout", value); }
-		}
-		
+		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for IndicesUpgradeForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for IndicesUpgradeForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</pre></summary>
 	public partial class UpgradeRequest 
-			{
-		
+	{
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("allow_no_indices"); } 
-			set { this.Request.RequestParameters.AddQueryString("allow_no_indices", value); }
-		}
-		
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
-			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
-		}
-		
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("ignore_unavailable"); } 
-			set { this.Request.RequestParameters.AddQueryString("ignore_unavailable", value); }
-		}
-		
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Specify whether the request should block until the all segments are upgraded (default: true)</summary>
-		public bool WaitForCompletion 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("wait_for_completion"); } 
-			set { this.Request.RequestParameters.AddQueryString("wait_for_completion", value); }
-		}
-		
+		public bool WaitForCompletion { get { return Q<bool>("wait_for_completion"); } set { Q("wait_for_completion", value); } }
 		
 		///<summary>If true, only ancient (an older Lucene major release) segments will be upgraded</summary>
-		public bool OnlyAncientSegments 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("only_ancient_segments"); } 
-			set { this.Request.RequestParameters.AddQueryString("only_ancient_segments", value); }
-		}
-		
+		public bool OnlyAncientSegments { get { return Q<bool>("only_ancient_segments"); } set { Q("only_ancient_segments", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for IndicesValidateQueryGetForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-validate.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for IndicesValidateQueryGetForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-validate.html</pre></summary>
 	public partial class ValidateQueryRequest<T> 
-			{
-		
+	{
 		///<summary>Return detailed information about the error</summary>
-		public bool Explain 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("explain"); } 
-			set { this.Request.RequestParameters.AddQueryString("explain", value); }
-		}
-		
+		public bool Explain { get { return Q<bool>("explain"); } set { Q("explain", value); } }
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("ignore_unavailable"); } 
-			set { this.Request.RequestParameters.AddQueryString("ignore_unavailable", value); }
-		}
-		
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("allow_no_indices"); } 
-			set { this.Request.RequestParameters.AddQueryString("allow_no_indices", value); }
-		}
-		
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
-			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
-		}
-		
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>TODO: ?</summary>
-		public string OperationThreading 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("operation_threading"); } 
-			set { this.Request.RequestParameters.AddQueryString("operation_threading", value); }
-		}
-		
+		public string OperationThreading { get { return Q<string>("operation_threading"); } set { Q("operation_threading", value); } }
 		
 		///<summary>Query in the Lucene query string syntax</summary>
-		public string Q 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("q"); } 
-			set { this.Request.RequestParameters.AddQueryString("q", value); }
-		}
-		
+		public string Q { get { return Q<string>("q"); } set { Q("q", value); } }
 		
 		///<summary>The analyzer to use for the query string</summary>
-		public string Analyzer 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("analyzer"); } 
-			set { this.Request.RequestParameters.AddQueryString("analyzer", value); }
-		}
-		
+		public string Analyzer { get { return Q<string>("analyzer"); } set { Q("analyzer", value); } }
 		
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
-		public bool AnalyzeWildcard 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("analyze_wildcard"); } 
-			set { this.Request.RequestParameters.AddQueryString("analyze_wildcard", value); }
-		}
-		
+		public bool AnalyzeWildcard { get { return Q<bool>("analyze_wildcard"); } set { Q("analyze_wildcard", value); } }
 		
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public DefaultOperator DefaultOperator 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<DefaultOperator>("default_operator"); } 
-			set { this.Request.RequestParameters.AddQueryString("default_operator", value); }
-		}
-		
+		public DefaultOperator DefaultOperator { get { return Q<DefaultOperator>("default_operator"); } set { Q("default_operator", value); } }
 		
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
-		public string Df 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("df"); } 
-			set { this.Request.RequestParameters.AddQueryString("df", value); }
-		}
-		
+		public string Df { get { return Q<string>("df"); } set { Q("df", value); } }
 		
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
-		public bool Lenient 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("lenient"); } 
-			set { this.Request.RequestParameters.AddQueryString("lenient", value); }
-		}
-		
+		public bool Lenient { get { return Q<bool>("lenient"); } set { Q("lenient", value); } }
 		
 		///<summary>Specify whether query terms should be lowercased</summary>
-		public bool LowercaseExpandedTerms 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("lowercase_expanded_terms"); } 
-			set { this.Request.RequestParameters.AddQueryString("lowercase_expanded_terms", value); }
-		}
-		
+		public bool LowercaseExpandedTerms { get { return Q<bool>("lowercase_expanded_terms"); } set { Q("lowercase_expanded_terms", value); } }
 		
 		///<summary>Provide a more detailed explanation showing the actual Lucene query that will be executed.</summary>
-		public bool Rewrite 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("rewrite"); } 
-			set { this.Request.RequestParameters.AddQueryString("rewrite", value); }
-		}
-		
+		public bool Rewrite { get { return Q<bool>("rewrite"); } set { Q("rewrite", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for Info
-	///<pre>
-	///http://www.elastic.co/guide/
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for Info <pre>http://www.elastic.co/guide/</pre></summary>
 	public partial class InfoRequest 
-			{
-		
+	{
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for ListBenchmarks
-	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-benchmark.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for ListBenchmarks <pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-benchmark.html</pre></summary>
 	public partial class ListBenchmarksRequest  : BasePathRequest<ListBenchmarksRequestParameters>
-			{
-		
+	{
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
-		}
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ListBenchmarksRequestParameters> pathInfo)
+	 	protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ListBenchmarksRequestParameters> pathInfo)
 		{
 			throw new NotImplementedException();
 		}
-
-	}
 	
-		
-	///<summary>Request parameters for MgetGet
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-multi-get.html
-	///</pre>
-	///</summary>
+	}
+	///<summary>Request parameters for MgetGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-multi-get.html</pre></summary>
 	public partial class MultiGetRequest 
-			{
-		
+	{
 		///<summary>A comma-separated list of fields to return in the response</summary>
-		public IList<FieldName> Fields 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<FieldName>>("fields"); } 
-			set { this.Request.RequestParameters.AddQueryString("fields", value); }
-		}
-		
+		public IList<FieldName> Fields { get { return Q<IList<FieldName>>("fields"); } set { Q("fields", value); } }
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public string Preference 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("preference"); } 
-			set { this.Request.RequestParameters.AddQueryString("preference", value); }
-		}
-		
+		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
 		
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
-		public bool Realtime 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("realtime"); } 
-			set { this.Request.RequestParameters.AddQueryString("realtime", value); }
-		}
-		
+		public bool Realtime { get { return Q<bool>("realtime"); } set { Q("realtime", value); } }
 		
 		///<summary>Refresh the shard containing the document before performing the operation</summary>
-		public bool Refresh 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("refresh"); } 
-			set { this.Request.RequestParameters.AddQueryString("refresh", value); }
-		}
-		
+		public bool Refresh { get { return Q<bool>("refresh"); } set { Q("refresh", value); } }
 		
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public  string[] SourceEnabled 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("_source"); } 
-			set { this.Request.RequestParameters.AddQueryString("_source", value); }
-		}
-		
+		public  string[] SourceEnabled { get { return Q< string[]>("_source"); } set { Q("_source", value); } }
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public IList<FieldName> SourceExclude 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<FieldName>>("_source_exclude"); } 
-			set { this.Request.RequestParameters.AddQueryString("_source_exclude", value); }
-		}
-		
+		public IList<FieldName> SourceExclude { get { return Q<IList<FieldName>>("_source_exclude"); } set { Q("_source_exclude", value); } }
 		
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public IList<FieldName> SourceInclude 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<FieldName>>("_source_include"); } 
-			set { this.Request.RequestParameters.AddQueryString("_source_include", value); }
-		}
-		
+		public IList<FieldName> SourceInclude { get { return Q<IList<FieldName>>("_source_include"); } set { Q("_source_include", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for MltGet
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-more-like-this.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for MltGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-more-like-this.html</pre></summary>
 	public partial class MoreLikeThisRequest<T> 
-			{
-		
+	{
 		///<summary>The boost factor</summary>
-		public double BoostTerms 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<double>("boost_terms"); } 
-			set { this.Request.RequestParameters.AddQueryString("boost_terms", value); }
-		}
-		
+		public double BoostTerms { get { return Q<double>("boost_terms"); } set { Q("boost_terms", value); } }
 		
 		///<summary>The word occurrence frequency as count: words with higher occurrence in the corpus will be ignored</summary>
-		public long MaxDocFreq 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<long>("max_doc_freq"); } 
-			set { this.Request.RequestParameters.AddQueryString("max_doc_freq", value); }
-		}
-		
+		public long MaxDocFreq { get { return Q<long>("max_doc_freq"); } set { Q("max_doc_freq", value); } }
 		
 		///<summary>The maximum query terms to be included in the generated query</summary>
-		public long MaxQueryTerms 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<long>("max_query_terms"); } 
-			set { this.Request.RequestParameters.AddQueryString("max_query_terms", value); }
-		}
-		
+		public long MaxQueryTerms { get { return Q<long>("max_query_terms"); } set { Q("max_query_terms", value); } }
 		
 		///<summary>The minimum length of the word: longer words will be ignored</summary>
-		public long MaxWordLength 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<long>("max_word_length"); } 
-			set { this.Request.RequestParameters.AddQueryString("max_word_length", value); }
-		}
-		
+		public long MaxWordLength { get { return Q<long>("max_word_length"); } set { Q("max_word_length", value); } }
 		
 		///<summary>The word occurrence frequency as count: words with lower occurrence in the corpus will be ignored</summary>
-		public long MinDocFreq 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<long>("min_doc_freq"); } 
-			set { this.Request.RequestParameters.AddQueryString("min_doc_freq", value); }
-		}
-		
+		public long MinDocFreq { get { return Q<long>("min_doc_freq"); } set { Q("min_doc_freq", value); } }
 		
 		///<summary>The term frequency as percent: terms with lower occurence in the source document will be ignored</summary>
-		public long MinTermFreq 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<long>("min_term_freq"); } 
-			set { this.Request.RequestParameters.AddQueryString("min_term_freq", value); }
-		}
-		
+		public long MinTermFreq { get { return Q<long>("min_term_freq"); } set { Q("min_term_freq", value); } }
 		
 		///<summary>The minimum length of the word: shorter words will be ignored</summary>
-		public long MinWordLength 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<long>("min_word_length"); } 
-			set { this.Request.RequestParameters.AddQueryString("min_word_length", value); }
-		}
-		
+		public long MinWordLength { get { return Q<long>("min_word_length"); } set { Q("min_word_length", value); } }
 		
 		///<summary>Specific fields to perform the query against</summary>
-		public IList<FieldName> MltFields 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<FieldName>>("mlt_fields"); } 
-			set { this.Request.RequestParameters.AddQueryString("mlt_fields", value); }
-		}
-		
+		public IList<FieldName> MltFields { get { return Q<IList<FieldName>>("mlt_fields"); } set { Q("mlt_fields", value); } }
 		
 		///<summary>How many terms have to match in order to consider the document a match (default: 0.3)</summary>
-		public double PercentTermsToMatch 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<double>("percent_terms_to_match"); } 
-			set { this.Request.RequestParameters.AddQueryString("percent_terms_to_match", value); }
-		}
-		
+		public double PercentTermsToMatch { get { return Q<double>("percent_terms_to_match"); } set { Q("percent_terms_to_match", value); } }
 		
 		///<summary>Specific routing value</summary>
-		public string Routing 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("routing"); } 
-			set { this.Request.RequestParameters.AddQueryString("routing", value); }
-		}
-		
+		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>The offset from which to return results</summary>
-		public long SearchFrom 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<long>("search_from"); } 
-			set { this.Request.RequestParameters.AddQueryString("search_from", value); }
-		}
-		
+		public long SearchFrom { get { return Q<long>("search_from"); } set { Q("search_from", value); } }
 		
 		///<summary>A comma-separated list of indices to perform the query against (default: the index containing the document)</summary>
-		public  string[] SearchIndices 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("search_indices"); } 
-			set { this.Request.RequestParameters.AddQueryString("search_indices", value); }
-		}
-		
+		public  string[] SearchIndices { get { return Q< string[]>("search_indices"); } set { Q("search_indices", value); } }
 		
 		///<summary>A scroll search request definition</summary>
-		public string SearchScroll 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("search_scroll"); } 
-			set { this.Request.RequestParameters.AddQueryString("search_scroll", value); }
-		}
-		
+		public string SearchScroll { get { return Q<string>("search_scroll"); } set { Q("search_scroll", value); } }
 		
 		///<summary>The number of documents to return (default: 10)</summary>
-		public long SearchSize 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<long>("search_size"); } 
-			set { this.Request.RequestParameters.AddQueryString("search_size", value); }
-		}
-		
+		public long SearchSize { get { return Q<long>("search_size"); } set { Q("search_size", value); } }
 		
 		///<summary>A specific search request definition (instead of using the request body)</summary>
-		public string SearchSource 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("search_source"); } 
-			set { this.Request.RequestParameters.AddQueryString("search_source", value); }
-		}
-		
+		public string SearchSource { get { return Q<string>("search_source"); } set { Q("search_source", value); } }
 		
 		///<summary>Specific search type (eg. `dfs_then_fetch`, `count`, etc)</summary>
-		public string SearchType 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("search_type"); } 
-			set { this.Request.RequestParameters.AddQueryString("search_type", value); }
-		}
-		
+		public string SearchType { get { return Q<string>("search_type"); } set { Q("search_type", value); } }
 		
 		///<summary>A comma-separated list of types to perform the query against (default: the same type as the document)</summary>
-		public  string[] SearchTypes 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("search_types"); } 
-			set { this.Request.RequestParameters.AddQueryString("search_types", value); }
-		}
-		
+		public  string[] SearchTypes { get { return Q< string[]>("search_types"); } set { Q("search_types", value); } }
 		
 		///<summary>A list of stop words to be ignored</summary>
-		public  string[] StopWords 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("stop_words"); } 
-			set { this.Request.RequestParameters.AddQueryString("stop_words", value); }
-		}
-		
+		public  string[] StopWords { get { return Q< string[]>("stop_words"); } set { Q("stop_words", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for MpercolateGet
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for MpercolateGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html</pre></summary>
 	public partial class MultiPercolateRequest 
-			{
-		
+	{
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("ignore_unavailable"); } 
-			set { this.Request.RequestParameters.AddQueryString("ignore_unavailable", value); }
-		}
-		
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("allow_no_indices"); } 
-			set { this.Request.RequestParameters.AddQueryString("allow_no_indices", value); }
-		}
-		
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
-			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
-		}
-		
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for MsearchGet
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-multi-search.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for MsearchGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-multi-search.html</pre></summary>
 	public partial class MultiSearchRequest 
-			{
-		
+	{
 		///<summary>Search operation type</summary>
-		public SearchType SearchType 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<SearchType>("search_type"); } 
-			set { this.Request.RequestParameters.AddQueryString("search_type", value); }
-		}
-		
+		public SearchType SearchType { get { return Q<SearchType>("search_type"); } set { Q("search_type", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for MtermvectorsGet
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-multi-termvectors.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for MtermvectorsGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-multi-termvectors.html</pre></summary>
 	public partial class MultiTermVectorsRequest 
-			{
-		
+	{
 		///<summary>Specifies if total term frequency and document frequency should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public bool TermStatistics 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("term_statistics"); } 
-			set { this.Request.RequestParameters.AddQueryString("term_statistics", value); }
-		}
-		
+		public bool TermStatistics { get { return Q<bool>("term_statistics"); } set { Q("term_statistics", value); } }
 		
 		///<summary>Specifies if document count, sum of document frequencies and sum of total term frequencies should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public bool FieldStatistics 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("field_statistics"); } 
-			set { this.Request.RequestParameters.AddQueryString("field_statistics", value); }
-		}
-		
+		public bool FieldStatistics { get { return Q<bool>("field_statistics"); } set { Q("field_statistics", value); } }
 		
 		///<summary>A comma-separated list of fields to return. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public IList<FieldName> Fields 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<FieldName>>("fields"); } 
-			set { this.Request.RequestParameters.AddQueryString("fields", value); }
-		}
-		
+		public IList<FieldName> Fields { get { return Q<IList<FieldName>>("fields"); } set { Q("fields", value); } }
 		
 		///<summary>Specifies if term offsets should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public bool Offsets 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("offsets"); } 
-			set { this.Request.RequestParameters.AddQueryString("offsets", value); }
-		}
-		
+		public bool Offsets { get { return Q<bool>("offsets"); } set { Q("offsets", value); } }
 		
 		///<summary>Specifies if term positions should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public bool Positions 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("positions"); } 
-			set { this.Request.RequestParameters.AddQueryString("positions", value); }
-		}
-		
+		public bool Positions { get { return Q<bool>("positions"); } set { Q("positions", value); } }
 		
 		///<summary>Specifies if term payloads should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public bool Payloads 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("payloads"); } 
-			set { this.Request.RequestParameters.AddQueryString("payloads", value); }
-		}
-		
+		public bool Payloads { get { return Q<bool>("payloads"); } set { Q("payloads", value); } }
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random) .Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public string Preference 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("preference"); } 
-			set { this.Request.RequestParameters.AddQueryString("preference", value); }
-		}
-		
+		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
 		
 		///<summary>Specific routing value. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public string Routing 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("routing"); } 
-			set { this.Request.RequestParameters.AddQueryString("routing", value); }
-		}
-		
+		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Parent id of documents. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public string Parent 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("parent"); } 
-			set { this.Request.RequestParameters.AddQueryString("parent", value); }
-		}
-		
+		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
 		
 		///<summary>Specifies if requests are real-time as opposed to near-real-time (default: true).</summary>
-		public bool Realtime 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("realtime"); } 
-			set { this.Request.RequestParameters.AddQueryString("realtime", value); }
-		}
-		
+		public bool Realtime { get { return Q<bool>("realtime"); } set { Q("realtime", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for NodesHotThreadsForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-hot-threads.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for NodesHotThreadsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-hot-threads.html</pre></summary>
 	public partial class NodesHotThreadsRequest 
-			{
-		
+	{
 		///<summary>The interval for the second sampling of threads</summary>
-		public string Interval 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("interval"); } 
-			set { this.Request.RequestParameters.AddQueryString("interval", value); }
-		}
-		
+		public string Interval { get { return Q<string>("interval"); } set { Q("interval", value); } }
 		
 		///<summary>Number of samples of thread stacktrace (default: 10)</summary>
-		public long Snapshots 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<long>("snapshots"); } 
-			set { this.Request.RequestParameters.AddQueryString("snapshots", value); }
-		}
-		
+		public long Snapshots { get { return Q<long>("snapshots"); } set { Q("snapshots", value); } }
 		
 		///<summary>Specify the number of threads to provide information for (default: 3)</summary>
-		public long Threads 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<long>("threads"); } 
-			set { this.Request.RequestParameters.AddQueryString("threads", value); }
-		}
-		
+		public long Threads { get { return Q<long>("threads"); } set { Q("threads", value); } }
 		
 		///<summary>Don&#39;t show threads that are in known-idle places, such as waiting on a socket select or pulling from an empty task queue (default: true)</summary>
-		public bool IgnoreIdleThreads 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("ignore_idle_threads"); } 
-			set { this.Request.RequestParameters.AddQueryString("ignore_idle_threads", value); }
-		}
-		
+		public bool IgnoreIdleThreads { get { return Q<bool>("ignore_idle_threads"); } set { Q("ignore_idle_threads", value); } }
 		
 		///<summary>The type to sample (default: cpu)</summary>
-		public ThreadType ThreadType 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ThreadType>("type"); } 
-			set { this.Request.RequestParameters.AddQueryString("type", value); }
-		}
-		
+		public ThreadType ThreadType { get { return Q<ThreadType>("type"); } set { Q("type", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for NodesInfoForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-info.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for NodesInfoForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-info.html</pre></summary>
 	public partial class NodesInfoRequest 
-			{
-		
+	{
 		///<summary>Return settings in flat format (default: false)</summary>
-		public bool FlatSettings 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("flat_settings"); } 
-			set { this.Request.RequestParameters.AddQueryString("flat_settings", value); }
-		}
-		
+		public bool FlatSettings { get { return Q<bool>("flat_settings"); } set { Q("flat_settings", value); } }
 		
 		///<summary>Whether to return time and byte values in human-readable format.</summary>
-		public bool Human 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("human"); } 
-			set { this.Request.RequestParameters.AddQueryString("human", value); }
-		}
-		
+		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for NodesShutdownForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-shutdown.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for NodesShutdownForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-shutdown.html</pre></summary>
 	public partial class NodesShutdownRequest 
-			{
-		
+	{
 		///<summary>Set the delay for the operation (default: 1s)</summary>
-		public string Delay 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("delay"); } 
-			set { this.Request.RequestParameters.AddQueryString("delay", value); }
-		}
-		
+		public string Delay { get { return Q<string>("delay"); } set { Q("delay", value); } }
 		
 		///<summary>Exit the JVM as well (default: true)</summary>
-		public bool Exit 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("exit"); } 
-			set { this.Request.RequestParameters.AddQueryString("exit", value); }
-		}
-		
+		public bool Exit { get { return Q<bool>("exit"); } set { Q("exit", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for NodesStatsForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-stats.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for NodesStatsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-stats.html</pre></summary>
 	public partial class NodesStatsRequest 
-			{
-		
+	{
 		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
-		public IList<FieldName> CompletionFields 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<FieldName>>("completion_fields"); } 
-			set { this.Request.RequestParameters.AddQueryString("completion_fields", value); }
-		}
-		
+		public IList<FieldName> CompletionFields { get { return Q<IList<FieldName>>("completion_fields"); } set { Q("completion_fields", value); } }
 		
 		///<summary>A comma-separated list of fields for `fielddata` index metric (supports wildcards)</summary>
-		public IList<FieldName> FielddataFields 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<FieldName>>("fielddata_fields"); } 
-			set { this.Request.RequestParameters.AddQueryString("fielddata_fields", value); }
-		}
-		
+		public IList<FieldName> FielddataFields { get { return Q<IList<FieldName>>("fielddata_fields"); } set { Q("fielddata_fields", value); } }
 		
 		///<summary>A comma-separated list of fields for `fielddata` and `completion` index metric (supports wildcards)</summary>
-		public IList<FieldName> Fields 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<FieldName>>("fields"); } 
-			set { this.Request.RequestParameters.AddQueryString("fields", value); }
-		}
-		
+		public IList<FieldName> Fields { get { return Q<IList<FieldName>>("fields"); } set { Q("fields", value); } }
 		
 		///<summary>A comma-separated list of search groups for `search` index metric</summary>
-		public bool Groups 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("groups"); } 
-			set { this.Request.RequestParameters.AddQueryString("groups", value); }
-		}
-		
+		public bool Groups { get { return Q<bool>("groups"); } set { Q("groups", value); } }
 		
 		///<summary>Whether to return time and byte values in human-readable format.</summary>
-		public bool Human 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("human"); } 
-			set { this.Request.RequestParameters.AddQueryString("human", value); }
-		}
-		
+		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
 		
 		///<summary>Return indices stats aggregated at node, index or shard level</summary>
-		public Level Level 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<Level>("level"); } 
-			set { this.Request.RequestParameters.AddQueryString("level", value); }
-		}
-		
+		public Level Level { get { return Q<Level>("level"); } set { Q("level", value); } }
 		
 		///<summary>A comma-separated list of document types for the `indexing` index metric</summary>
-		public  string[] Types 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("types"); } 
-			set { this.Request.RequestParameters.AddQueryString("types", value); }
-		}
-		
+		public  string[] Types { get { return Q< string[]>("types"); } set { Q("types", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for PercolateGet
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for PercolateGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html</pre></summary>
 	public partial class PercolateRequest<TDocument> 
-			{
-		
+	{
 		///<summary>A comma-separated list of specific routing values</summary>
-		public  string[] Routing 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("routing"); } 
-			set { this.Request.RequestParameters.AddQueryString("routing", value); }
-		}
-		
+		public  string[] Routing { get { return Q< string[]>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public string Preference 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("preference"); } 
-			set { this.Request.RequestParameters.AddQueryString("preference", value); }
-		}
-		
+		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("ignore_unavailable"); } 
-			set { this.Request.RequestParameters.AddQueryString("ignore_unavailable", value); }
-		}
-		
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("allow_no_indices"); } 
-			set { this.Request.RequestParameters.AddQueryString("allow_no_indices", value); }
-		}
-		
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
-			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
-		}
-		
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>Return an array of matching query IDs instead of objects</summary>
-		public PercolateFormat PercolateFormat 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<PercolateFormat>("percolate_format"); } 
-			set { this.Request.RequestParameters.AddQueryString("percolate_format", value); }
-		}
-		
+		public PercolateFormat PercolateFormat { get { return Q<PercolateFormat>("percolate_format"); } set { Q("percolate_format", value); } }
 		
 		///<summary>The index to percolate the document into. Defaults to index.</summary>
-		public string PercolateIndex 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("percolate_index"); } 
-			set { this.Request.RequestParameters.AddQueryString("percolate_index", value); }
-		}
-		
+		public string PercolateIndex { get { return Q<string>("percolate_index"); } set { Q("percolate_index", value); } }
 		
 		///<summary>The type to percolate document into. Defaults to type.</summary>
-		public string PercolateType 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("percolate_type"); } 
-			set { this.Request.RequestParameters.AddQueryString("percolate_type", value); }
-		}
-		
+		public string PercolateType { get { return Q<string>("percolate_type"); } set { Q("percolate_type", value); } }
 		
 		///<summary>The routing value to use when percolating the existing document.</summary>
-		public string PercolateRouting 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("percolate_routing"); } 
-			set { this.Request.RequestParameters.AddQueryString("percolate_routing", value); }
-		}
-		
+		public string PercolateRouting { get { return Q<string>("percolate_routing"); } set { Q("percolate_routing", value); } }
 		
 		///<summary>Which shard to prefer when executing the percolate request.</summary>
-		public string PercolatePreference 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("percolate_preference"); } 
-			set { this.Request.RequestParameters.AddQueryString("percolate_preference", value); }
-		}
-		
+		public string PercolatePreference { get { return Q<string>("percolate_preference"); } set { Q("percolate_preference", value); } }
 		
 		///<summary>Explicit version number for concurrency control</summary>
-		public long Version 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<long>("version"); } 
-			set { this.Request.RequestParameters.AddQueryString("version", value); }
-		}
-		
+		public long Version { get { return Q<long>("version"); } set { Q("version", value); } }
 		
 		///<summary>Specific version type</summary>
-		public VersionType VersionType 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<VersionType>("version_type"); } 
-			set { this.Request.RequestParameters.AddQueryString("version_type", value); }
-		}
-		
+		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for Ping
-	///<pre>
-	///http://www.elastic.co/guide/
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for Ping <pre>http://www.elastic.co/guide/</pre></summary>
 	public partial class PingRequest 
-			{
-		
+	{
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for PutScript
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for PutScript <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</pre></summary>
 	public partial class PutScriptRequest 
-			{
-		
+	{
 		///<summary>Explicit operation type</summary>
-		public OpType OpType 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<OpType>("op_type"); } 
-			set { this.Request.RequestParameters.AddQueryString("op_type", value); }
-		}
-		
+		public OpType OpType { get { return Q<OpType>("op_type"); } set { Q("op_type", value); } }
 		
 		///<summary>Explicit version number for concurrency control</summary>
-		public long Version 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<long>("version"); } 
-			set { this.Request.RequestParameters.AddQueryString("version", value); }
-		}
-		
+		public long Version { get { return Q<long>("version"); } set { Q("version", value); } }
 		
 		///<summary>Specific version type</summary>
-		public VersionType VersionType 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<VersionType>("version_type"); } 
-			set { this.Request.RequestParameters.AddQueryString("version_type", value); }
-		}
-		
+		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for ScrollGet
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-request-scroll.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for ScrollGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-request-scroll.html</pre></summary>
 	public partial class ScrollRequest 
-			{
-		
+	{
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for SearchGet
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-search.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for SearchGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-search.html</pre></summary>
 	public partial class SearchRequest<T> 
-			{
-		
+	{
 		///<summary>The analyzer to use for the query string</summary>
-		public string Analyzer 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("analyzer"); } 
-			set { this.Request.RequestParameters.AddQueryString("analyzer", value); }
-		}
-		
+		public string Analyzer { get { return Q<string>("analyzer"); } set { Q("analyzer", value); } }
 		
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
-		public bool AnalyzeWildcard 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("analyze_wildcard"); } 
-			set { this.Request.RequestParameters.AddQueryString("analyze_wildcard", value); }
-		}
-		
+		public bool AnalyzeWildcard { get { return Q<bool>("analyze_wildcard"); } set { Q("analyze_wildcard", value); } }
 		
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public DefaultOperator DefaultOperator 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<DefaultOperator>("default_operator"); } 
-			set { this.Request.RequestParameters.AddQueryString("default_operator", value); }
-		}
-		
+		public DefaultOperator DefaultOperator { get { return Q<DefaultOperator>("default_operator"); } set { Q("default_operator", value); } }
 		
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
-		public string Df 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("df"); } 
-			set { this.Request.RequestParameters.AddQueryString("df", value); }
-		}
-		
+		public string Df { get { return Q<string>("df"); } set { Q("df", value); } }
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("ignore_unavailable"); } 
-			set { this.Request.RequestParameters.AddQueryString("ignore_unavailable", value); }
-		}
-		
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("allow_no_indices"); } 
-			set { this.Request.RequestParameters.AddQueryString("allow_no_indices", value); }
-		}
-		
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
-			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
-		}
-		
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
-		public bool Lenient 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("lenient"); } 
-			set { this.Request.RequestParameters.AddQueryString("lenient", value); }
-		}
-		
+		public bool Lenient { get { return Q<bool>("lenient"); } set { Q("lenient", value); } }
 		
 		///<summary>Specify whether query terms should be lowercased</summary>
-		public bool LowercaseExpandedTerms 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("lowercase_expanded_terms"); } 
-			set { this.Request.RequestParameters.AddQueryString("lowercase_expanded_terms", value); }
-		}
-		
+		public bool LowercaseExpandedTerms { get { return Q<bool>("lowercase_expanded_terms"); } set { Q("lowercase_expanded_terms", value); } }
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public string Preference 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("preference"); } 
-			set { this.Request.RequestParameters.AddQueryString("preference", value); }
-		}
-		
+		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
 		
 		///<summary>A comma-separated list of specific routing values</summary>
-		public  string[] Routing 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("routing"); } 
-			set { this.Request.RequestParameters.AddQueryString("routing", value); }
-		}
-		
+		public  string[] Routing { get { return Q< string[]>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
-		public string Scroll 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("scroll"); } 
-			set { this.Request.RequestParameters.AddQueryString("scroll", value); }
-		}
-		
+		public string Scroll { get { return Q<string>("scroll"); } set { Q("scroll", value); } }
 		
 		///<summary>Search operation type</summary>
-		public SearchType SearchType 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<SearchType>("search_type"); } 
-			set { this.Request.RequestParameters.AddQueryString("search_type", value); }
-		}
-		
+		public SearchType SearchType { get { return Q<SearchType>("search_type"); } set { Q("search_type", value); } }
 		
 		///<summary>Specific &#39;tag&#39; of the request for logging and statistical purposes</summary>
-		public  string[] Stats 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("stats"); } 
-			set { this.Request.RequestParameters.AddQueryString("stats", value); }
-		}
-		
+		public  string[] Stats { get { return Q< string[]>("stats"); } set { Q("stats", value); } }
 		
 		///<summary>Specify which field to use for suggestions</summary>
-		public FieldName SuggestField 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<FieldName>("suggest_field"); } 
-			set { this.Request.RequestParameters.AddQueryString("suggest_field", value); }
-		}
-		
+		public FieldName SuggestField { get { return Q<FieldName>("suggest_field"); } set { Q("suggest_field", value); } }
 		
 		///<summary>Specify suggest mode</summary>
-		public SuggestMode SuggestMode 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<SuggestMode>("suggest_mode"); } 
-			set { this.Request.RequestParameters.AddQueryString("suggest_mode", value); }
-		}
-		
+		public SuggestMode SuggestMode { get { return Q<SuggestMode>("suggest_mode"); } set { Q("suggest_mode", value); } }
 		
 		///<summary>How many suggestions to return in response</summary>
-		public long SuggestSize 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<long>("suggest_size"); } 
-			set { this.Request.RequestParameters.AddQueryString("suggest_size", value); }
-		}
-		
+		public long SuggestSize { get { return Q<long>("suggest_size"); } set { Q("suggest_size", value); } }
 		
 		///<summary>The source text for which the suggestions should be returned</summary>
-		public string SuggestText 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("suggest_text"); } 
-			set { this.Request.RequestParameters.AddQueryString("suggest_text", value); }
-		}
-		
+		public string SuggestText { get { return Q<string>("suggest_text"); } set { Q("suggest_text", value); } }
 		
 		///<summary>Specify if query cache should be used for this request or not, defaults to index level setting</summary>
-		public bool QueryCache 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("query_cache"); } 
-			set { this.Request.RequestParameters.AddQueryString("query_cache", value); }
-		}
-		
+		public bool QueryCache { get { return Q<bool>("query_cache"); } set { Q("query_cache", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for SearchExists
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/search-exists.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for SearchExists <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-exists.html</pre></summary>
 	public partial class SearchExistsRequest<T> 
-			{
-		
+	{
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("ignore_unavailable"); } 
-			set { this.Request.RequestParameters.AddQueryString("ignore_unavailable", value); }
-		}
-		
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("allow_no_indices"); } 
-			set { this.Request.RequestParameters.AddQueryString("allow_no_indices", value); }
-		}
-		
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
-			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
-		}
-		
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>Include only documents with a specific `_score` value in the result</summary>
-		public double MinScore 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<double>("min_score"); } 
-			set { this.Request.RequestParameters.AddQueryString("min_score", value); }
-		}
-		
+		public double MinScore { get { return Q<double>("min_score"); } set { Q("min_score", value); } }
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public string Preference 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("preference"); } 
-			set { this.Request.RequestParameters.AddQueryString("preference", value); }
-		}
-		
+		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
 		
 		///<summary>Specific routing value</summary>
-		public string Routing 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("routing"); } 
-			set { this.Request.RequestParameters.AddQueryString("routing", value); }
-		}
-		
+		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Query in the Lucene query string syntax</summary>
-		public string Q 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("q"); } 
-			set { this.Request.RequestParameters.AddQueryString("q", value); }
-		}
-		
+		public string Q { get { return Q<string>("q"); } set { Q("q", value); } }
 		
 		///<summary>The analyzer to use for the query string</summary>
-		public string Analyzer 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("analyzer"); } 
-			set { this.Request.RequestParameters.AddQueryString("analyzer", value); }
-		}
-		
+		public string Analyzer { get { return Q<string>("analyzer"); } set { Q("analyzer", value); } }
 		
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
-		public bool AnalyzeWildcard 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("analyze_wildcard"); } 
-			set { this.Request.RequestParameters.AddQueryString("analyze_wildcard", value); }
-		}
-		
+		public bool AnalyzeWildcard { get { return Q<bool>("analyze_wildcard"); } set { Q("analyze_wildcard", value); } }
 		
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public DefaultOperator DefaultOperator 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<DefaultOperator>("default_operator"); } 
-			set { this.Request.RequestParameters.AddQueryString("default_operator", value); }
-		}
-		
+		public DefaultOperator DefaultOperator { get { return Q<DefaultOperator>("default_operator"); } set { Q("default_operator", value); } }
 		
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
-		public string Df 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("df"); } 
-			set { this.Request.RequestParameters.AddQueryString("df", value); }
-		}
-		
+		public string Df { get { return Q<string>("df"); } set { Q("df", value); } }
 		
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
-		public bool Lenient 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("lenient"); } 
-			set { this.Request.RequestParameters.AddQueryString("lenient", value); }
-		}
-		
+		public bool Lenient { get { return Q<bool>("lenient"); } set { Q("lenient", value); } }
 		
 		///<summary>Specify whether query terms should be lowercased</summary>
-		public bool LowercaseExpandedTerms 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("lowercase_expanded_terms"); } 
-			set { this.Request.RequestParameters.AddQueryString("lowercase_expanded_terms", value); }
-		}
-		
+		public bool LowercaseExpandedTerms { get { return Q<bool>("lowercase_expanded_terms"); } set { Q("lowercase_expanded_terms", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for SearchShardsGet
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for SearchShardsGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html</pre></summary>
 	public partial class SearchShardsRequest<T> 
-			{
-		
+	{
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public string Preference 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("preference"); } 
-			set { this.Request.RequestParameters.AddQueryString("preference", value); }
-		}
-		
+		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
 		
 		///<summary>Specific routing value</summary>
-		public string Routing 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("routing"); } 
-			set { this.Request.RequestParameters.AddQueryString("routing", value); }
-		}
-		
+		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("local"); } 
-			set { this.Request.RequestParameters.AddQueryString("local", value); }
-		}
-		
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("ignore_unavailable"); } 
-			set { this.Request.RequestParameters.AddQueryString("ignore_unavailable", value); }
-		}
-		
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("allow_no_indices"); } 
-			set { this.Request.RequestParameters.AddQueryString("allow_no_indices", value); }
-		}
-		
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
-			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
-		}
-		
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for SearchTemplateGet
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for SearchTemplateGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html</pre></summary>
 	public partial class SearchTemplateRequest<T> 
-			{
-		
+	{
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("ignore_unavailable"); } 
-			set { this.Request.RequestParameters.AddQueryString("ignore_unavailable", value); }
-		}
-		
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("allow_no_indices"); } 
-			set { this.Request.RequestParameters.AddQueryString("allow_no_indices", value); }
-		}
-		
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
-			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
-		}
-		
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public string Preference 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("preference"); } 
-			set { this.Request.RequestParameters.AddQueryString("preference", value); }
-		}
-		
+		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
 		
 		///<summary>A comma-separated list of specific routing values</summary>
-		public  string[] Routing 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("routing"); } 
-			set { this.Request.RequestParameters.AddQueryString("routing", value); }
-		}
-		
+		public  string[] Routing { get { return Q< string[]>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
-		public string Scroll 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("scroll"); } 
-			set { this.Request.RequestParameters.AddQueryString("scroll", value); }
-		}
-		
+		public string Scroll { get { return Q<string>("scroll"); } set { Q("scroll", value); } }
 		
 		///<summary>Search operation type</summary>
-		public SearchType SearchType 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<SearchType>("search_type"); } 
-			set { this.Request.RequestParameters.AddQueryString("search_type", value); }
-		}
-		
+		public SearchType SearchType { get { return Q<SearchType>("search_type"); } set { Q("search_type", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for SnapshotCreate
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for SnapshotCreate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html</pre></summary>
 	public partial class SnapshotRequest 
-			{
-		
+	{
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public string MasterTimeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("master_timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("master_timeout", value); }
-		}
-		
+		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Should this request wait until the operation has completed before returning</summary>
-		public bool WaitForCompletion 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("wait_for_completion"); } 
-			set { this.Request.RequestParameters.AddQueryString("wait_for_completion", value); }
-		}
-		
+		public bool WaitForCompletion { get { return Q<bool>("wait_for_completion"); } set { Q("wait_for_completion", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for SnapshotCreateRepository
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for SnapshotCreateRepository <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html</pre></summary>
 	public partial class CreateRepositoryRequest 
-			{
-		
+	{
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public string MasterTimeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("master_timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("master_timeout", value); }
-		}
-		
+		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Explicit operation timeout</summary>
-		public string Timeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("timeout", value); }
-		}
-		
+		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
 		
 		///<summary>Whether to verify the repository after creation</summary>
-		public bool Verify 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("verify"); } 
-			set { this.Request.RequestParameters.AddQueryString("verify", value); }
-		}
-		
+		public bool Verify { get { return Q<bool>("verify"); } set { Q("verify", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for SnapshotDelete
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for SnapshotDelete <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html</pre></summary>
 	public partial class DeleteSnapshotRequest 
-			{
-		
+	{
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public string MasterTimeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("master_timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("master_timeout", value); }
-		}
-		
+		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for SnapshotDeleteRepository
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for SnapshotDeleteRepository <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html</pre></summary>
 	public partial class DeleteRepositoryRequest 
-			{
-		
+	{
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public string MasterTimeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("master_timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("master_timeout", value); }
-		}
-		
+		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Explicit operation timeout</summary>
-		public string Timeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("timeout", value); }
-		}
-		
+		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for SnapshotGet
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for SnapshotGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html</pre></summary>
 	public partial class GetSnapshotRequest 
-			{
-		
+	{
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public string MasterTimeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("master_timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("master_timeout", value); }
-		}
-		
+		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for SnapshotGetRepository
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for SnapshotGetRepository <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html</pre></summary>
 	public partial class GetRepositoryRequest 
-			{
-		
+	{
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public string MasterTimeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("master_timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("master_timeout", value); }
-		}
-		
+		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("local"); } 
-			set { this.Request.RequestParameters.AddQueryString("local", value); }
-		}
-		
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for SnapshotRestore
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for SnapshotRestore <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html</pre></summary>
 	public partial class RestoreRequest 
-			{
-		
+	{
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public string MasterTimeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("master_timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("master_timeout", value); }
-		}
-		
+		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Should this request wait until the operation has completed before returning</summary>
-		public bool WaitForCompletion 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("wait_for_completion"); } 
-			set { this.Request.RequestParameters.AddQueryString("wait_for_completion", value); }
-		}
-		
+		public bool WaitForCompletion { get { return Q<bool>("wait_for_completion"); } set { Q("wait_for_completion", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for SnapshotStatus
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for SnapshotStatus <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class SnapshotStatusRequest 
-			{
-		
+	{
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public string MasterTimeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("master_timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("master_timeout", value); }
-		}
-		
+		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for SnapshotVerifyRepository
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for SnapshotVerifyRepository <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class VerifyRepositoryRequest 
-			{
-		
+	{
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public string MasterTimeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("master_timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("master_timeout", value); }
-		}
-		
+		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Explicit operation timeout</summary>
-		public string Timeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("timeout", value); }
-		}
-		
+		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for Suggest
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-suggesters.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for Suggest <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-suggesters.html</pre></summary>
 	public partial class SuggestRequest 
-			{
-		
+	{
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("ignore_unavailable"); } 
-			set { this.Request.RequestParameters.AddQueryString("ignore_unavailable", value); }
-		}
-		
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("allow_no_indices"); } 
-			set { this.Request.RequestParameters.AddQueryString("allow_no_indices", value); }
-		}
-		
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
-			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
-		}
-		
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public string Preference 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("preference"); } 
-			set { this.Request.RequestParameters.AddQueryString("preference", value); }
-		}
-		
+		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
 		
 		///<summary>Specific routing value</summary>
-		public string Routing 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("routing"); } 
-			set { this.Request.RequestParameters.AddQueryString("routing", value); }
-		}
-		
+		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for TermvectorGet
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-termvectors.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for TermvectorGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-termvectors.html</pre></summary>
 	public partial class TermvectorRequest<T> 
-			{
-		
+	{
 		///<summary>Specifies if total term frequency and document frequency should be returned.</summary>
-		public bool TermStatistics 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("term_statistics"); } 
-			set { this.Request.RequestParameters.AddQueryString("term_statistics", value); }
-		}
-		
+		public bool TermStatistics { get { return Q<bool>("term_statistics"); } set { Q("term_statistics", value); } }
 		
 		///<summary>Specifies if document count, sum of document frequencies and sum of total term frequencies should be returned.</summary>
-		public bool FieldStatistics 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("field_statistics"); } 
-			set { this.Request.RequestParameters.AddQueryString("field_statistics", value); }
-		}
-		
+		public bool FieldStatistics { get { return Q<bool>("field_statistics"); } set { Q("field_statistics", value); } }
 		
 		///<summary>A comma-separated list of fields to return.</summary>
-		public IList<FieldName> Fields 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<FieldName>>("fields"); } 
-			set { this.Request.RequestParameters.AddQueryString("fields", value); }
-		}
-		
+		public IList<FieldName> Fields { get { return Q<IList<FieldName>>("fields"); } set { Q("fields", value); } }
 		
 		///<summary>Specifies if term offsets should be returned.</summary>
-		public bool Offsets 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("offsets"); } 
-			set { this.Request.RequestParameters.AddQueryString("offsets", value); }
-		}
-		
+		public bool Offsets { get { return Q<bool>("offsets"); } set { Q("offsets", value); } }
 		
 		///<summary>Specifies if term positions should be returned.</summary>
-		public bool Positions 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("positions"); } 
-			set { this.Request.RequestParameters.AddQueryString("positions", value); }
-		}
-		
+		public bool Positions { get { return Q<bool>("positions"); } set { Q("positions", value); } }
 		
 		///<summary>Specifies if term payloads should be returned.</summary>
-		public bool Payloads 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("payloads"); } 
-			set { this.Request.RequestParameters.AddQueryString("payloads", value); }
-		}
-		
+		public bool Payloads { get { return Q<bool>("payloads"); } set { Q("payloads", value); } }
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random).</summary>
-		public string Preference 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("preference"); } 
-			set { this.Request.RequestParameters.AddQueryString("preference", value); }
-		}
-		
+		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
 		
 		///<summary>Specific routing value.</summary>
-		public string Routing 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("routing"); } 
-			set { this.Request.RequestParameters.AddQueryString("routing", value); }
-		}
-		
+		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Parent id of documents.</summary>
-		public string Parent 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("parent"); } 
-			set { this.Request.RequestParameters.AddQueryString("parent", value); }
-		}
-		
+		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
 		
 		///<summary>Specifies if request is real-time as opposed to near-real-time (default: true).</summary>
-		public bool Realtime 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("realtime"); } 
-			set { this.Request.RequestParameters.AddQueryString("realtime", value); }
-		}
-		
+		public bool Realtime { get { return Q<bool>("realtime"); } set { Q("realtime", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for Update
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-update.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for Update <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-update.html</pre></summary>
 	public partial class UpdateRequest<TDocument,TPartialDocument> 
-			{
-		
+	{
 		///<summary>Explicit write consistency setting for the operation</summary>
-		public Consistency Consistency 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<Consistency>("consistency"); } 
-			set { this.Request.RequestParameters.AddQueryString("consistency", value); }
-		}
-		
+		public Consistency Consistency { get { return Q<Consistency>("consistency"); } set { Q("consistency", value); } }
 		
 		///<summary>The script language (default: groovy)</summary>
-		public string Lang 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("lang"); } 
-			set { this.Request.RequestParameters.AddQueryString("lang", value); }
-		}
-		
+		public string Lang { get { return Q<string>("lang"); } set { Q("lang", value); } }
 		
 		///<summary>ID of the parent document. Is is only used for routing and when for the upsert request</summary>
-		public string Parent 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("parent"); } 
-			set { this.Request.RequestParameters.AddQueryString("parent", value); }
-		}
-		
+		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
 		
 		///<summary>Refresh the index after performing the operation</summary>
-		public bool Refresh 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("refresh"); } 
-			set { this.Request.RequestParameters.AddQueryString("refresh", value); }
-		}
-		
+		public bool Refresh { get { return Q<bool>("refresh"); } set { Q("refresh", value); } }
 		
 		///<summary>Specific replication type</summary>
-		public Replication Replication 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<Replication>("replication"); } 
-			set { this.Request.RequestParameters.AddQueryString("replication", value); }
-		}
-		
+		public Replication Replication { get { return Q<Replication>("replication"); } set { Q("replication", value); } }
 		
 		///<summary>Specify how many times should the operation be retried when a conflict occurs (default: 0)</summary>
-		public long RetryOnConflict 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<long>("retry_on_conflict"); } 
-			set { this.Request.RequestParameters.AddQueryString("retry_on_conflict", value); }
-		}
-		
+		public long RetryOnConflict { get { return Q<long>("retry_on_conflict"); } set { Q("retry_on_conflict", value); } }
 		
 		///<summary>Specific routing value</summary>
-		public string Routing 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("routing"); } 
-			set { this.Request.RequestParameters.AddQueryString("routing", value); }
-		}
-		
+		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>The URL-encoded script definition (instead of using request body)</summary>
-		public string ScriptQueryString 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("script"); } 
-			set { this.Request.RequestParameters.AddQueryString("script", value); }
-		}
-		
+		public string ScriptQueryString { get { return Q<string>("script"); } set { Q("script", value); } }
 		
 		///<summary>The id of a stored script</summary>
-		public string ScriptId 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("script_id"); } 
-			set { this.Request.RequestParameters.AddQueryString("script_id", value); }
-		}
-		
+		public string ScriptId { get { return Q<string>("script_id"); } set { Q("script_id", value); } }
 		
 		///<summary>True if the script referenced in script or script_id should be called to perform inserts - defaults to false</summary>
-		public bool ScriptedUpsert 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("scripted_upsert"); } 
-			set { this.Request.RequestParameters.AddQueryString("scripted_upsert", value); }
-		}
-		
+		public bool ScriptedUpsert { get { return Q<bool>("scripted_upsert"); } set { Q("scripted_upsert", value); } }
 		
 		///<summary>Explicit operation timeout</summary>
-		public string Timeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("timeout", value); }
-		}
-		
+		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
 		
 		///<summary>Explicit timestamp for the document</summary>
-		public string Timestamp 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("timestamp"); } 
-			set { this.Request.RequestParameters.AddQueryString("timestamp", value); }
-		}
-		
+		public string Timestamp { get { return Q<string>("timestamp"); } set { Q("timestamp", value); } }
 		
 		///<summary>Expiration time for the document</summary>
-		public string Ttl 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("ttl"); } 
-			set { this.Request.RequestParameters.AddQueryString("ttl", value); }
-		}
-		
+		public string Ttl { get { return Q<string>("ttl"); } set { Q("ttl", value); } }
 		
 		///<summary>Explicit version number for concurrency control</summary>
-		public long Version 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<long>("version"); } 
-			set { this.Request.RequestParameters.AddQueryString("version", value); }
-		}
-		
+		public long Version { get { return Q<long>("version"); } set { Q("version", value); } }
 		
 		///<summary>Specific version type</summary>
-		public VersionType VersionType 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<VersionType>("version_type"); } 
-			set { this.Request.RequestParameters.AddQueryString("version_type", value); }
-		}
-		
+		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for Count
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-count.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for Count <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-count.html</pre></summary>
 	public partial class CountRequest 
-			{
-		
+	{
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("ignore_unavailable"); } 
-			set { this.Request.RequestParameters.AddQueryString("ignore_unavailable", value); }
-		}
-		
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("allow_no_indices"); } 
-			set { this.Request.RequestParameters.AddQueryString("allow_no_indices", value); }
-		}
-		
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
-			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
-		}
-		
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>Include only documents with a specific `_score` value in the result</summary>
-		public double MinScore 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<double>("min_score"); } 
-			set { this.Request.RequestParameters.AddQueryString("min_score", value); }
-		}
-		
+		public double MinScore { get { return Q<double>("min_score"); } set { Q("min_score", value); } }
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public string Preference 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("preference"); } 
-			set { this.Request.RequestParameters.AddQueryString("preference", value); }
-		}
-		
+		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
 		
 		///<summary>Specific routing value</summary>
-		public string Routing 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("routing"); } 
-			set { this.Request.RequestParameters.AddQueryString("routing", value); }
-		}
-		
+		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Query in the Lucene query string syntax</summary>
-		public string Q 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("q"); } 
-			set { this.Request.RequestParameters.AddQueryString("q", value); }
-		}
-		
+		public string Q { get { return Q<string>("q"); } set { Q("q", value); } }
 		
 		///<summary>The analyzer to use for the query string</summary>
-		public string Analyzer 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("analyzer"); } 
-			set { this.Request.RequestParameters.AddQueryString("analyzer", value); }
-		}
-		
+		public string Analyzer { get { return Q<string>("analyzer"); } set { Q("analyzer", value); } }
 		
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
-		public bool AnalyzeWildcard 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("analyze_wildcard"); } 
-			set { this.Request.RequestParameters.AddQueryString("analyze_wildcard", value); }
-		}
-		
+		public bool AnalyzeWildcard { get { return Q<bool>("analyze_wildcard"); } set { Q("analyze_wildcard", value); } }
 		
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public DefaultOperator DefaultOperator 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<DefaultOperator>("default_operator"); } 
-			set { this.Request.RequestParameters.AddQueryString("default_operator", value); }
-		}
-		
+		public DefaultOperator DefaultOperator { get { return Q<DefaultOperator>("default_operator"); } set { Q("default_operator", value); } }
 		
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
-		public string Df 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("df"); } 
-			set { this.Request.RequestParameters.AddQueryString("df", value); }
-		}
-		
+		public string Df { get { return Q<string>("df"); } set { Q("df", value); } }
 		
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
-		public bool Lenient 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("lenient"); } 
-			set { this.Request.RequestParameters.AddQueryString("lenient", value); }
-		}
-		
+		public bool Lenient { get { return Q<bool>("lenient"); } set { Q("lenient", value); } }
 		
 		///<summary>Specify whether query terms should be lowercased</summary>
-		public bool LowercaseExpandedTerms 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("lowercase_expanded_terms"); } 
-			set { this.Request.RequestParameters.AddQueryString("lowercase_expanded_terms", value); }
-		}
-		
+		public bool LowercaseExpandedTerms { get { return Q<bool>("lowercase_expanded_terms"); } set { Q("lowercase_expanded_terms", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for Delete
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-delete.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for Delete <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-delete.html</pre></summary>
 	public partial class DeleteRequest 
-			{
-		
+	{
 		///<summary>Specific write consistency setting for the operation</summary>
-		public Consistency Consistency 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<Consistency>("consistency"); } 
-			set { this.Request.RequestParameters.AddQueryString("consistency", value); }
-		}
-		
+		public Consistency Consistency { get { return Q<Consistency>("consistency"); } set { Q("consistency", value); } }
 		
 		///<summary>ID of parent document</summary>
-		public string Parent 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("parent"); } 
-			set { this.Request.RequestParameters.AddQueryString("parent", value); }
-		}
-		
+		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
 		
 		///<summary>Refresh the index after performing the operation</summary>
-		public bool Refresh 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("refresh"); } 
-			set { this.Request.RequestParameters.AddQueryString("refresh", value); }
-		}
-		
+		public bool Refresh { get { return Q<bool>("refresh"); } set { Q("refresh", value); } }
 		
 		///<summary>Specific replication type</summary>
-		public Replication Replication 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<Replication>("replication"); } 
-			set { this.Request.RequestParameters.AddQueryString("replication", value); }
-		}
-		
+		public Replication Replication { get { return Q<Replication>("replication"); } set { Q("replication", value); } }
 		
 		///<summary>Specific routing value</summary>
-		public string Routing 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("routing"); } 
-			set { this.Request.RequestParameters.AddQueryString("routing", value); }
-		}
-		
+		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Explicit operation timeout</summary>
-		public string Timeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("timeout", value); }
-		}
-		
+		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
 		
 		///<summary>Explicit version number for concurrency control</summary>
-		public long Version 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<long>("version"); } 
-			set { this.Request.RequestParameters.AddQueryString("version", value); }
-		}
-		
+		public long Version { get { return Q<long>("version"); } set { Q("version", value); } }
 		
 		///<summary>Specific version type</summary>
-		public VersionType VersionType 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<VersionType>("version_type"); } 
-			set { this.Request.RequestParameters.AddQueryString("version_type", value); }
-		}
-		
+		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for DeleteByQuery
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-delete-by-query.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for DeleteByQuery <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-delete-by-query.html</pre></summary>
 	public partial class DeleteByQueryRequest 
-			{
-		
+	{
 		///<summary>The analyzer to use for the query string</summary>
-		public string Analyzer 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("analyzer"); } 
-			set { this.Request.RequestParameters.AddQueryString("analyzer", value); }
-		}
-		
+		public string Analyzer { get { return Q<string>("analyzer"); } set { Q("analyzer", value); } }
 		
 		///<summary>Specific write consistency setting for the operation</summary>
-		public Consistency Consistency 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<Consistency>("consistency"); } 
-			set { this.Request.RequestParameters.AddQueryString("consistency", value); }
-		}
-		
+		public Consistency Consistency { get { return Q<Consistency>("consistency"); } set { Q("consistency", value); } }
 		
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public DefaultOperator DefaultOperator 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<DefaultOperator>("default_operator"); } 
-			set { this.Request.RequestParameters.AddQueryString("default_operator", value); }
-		}
-		
+		public DefaultOperator DefaultOperator { get { return Q<DefaultOperator>("default_operator"); } set { Q("default_operator", value); } }
 		
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
-		public string Df 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("df"); } 
-			set { this.Request.RequestParameters.AddQueryString("df", value); }
-		}
-		
+		public string Df { get { return Q<string>("df"); } set { Q("df", value); } }
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("ignore_unavailable"); } 
-			set { this.Request.RequestParameters.AddQueryString("ignore_unavailable", value); }
-		}
-		
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("allow_no_indices"); } 
-			set { this.Request.RequestParameters.AddQueryString("allow_no_indices", value); }
-		}
-		
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
-			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
-		}
-		
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>Specific replication type</summary>
-		public Replication Replication 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<Replication>("replication"); } 
-			set { this.Request.RequestParameters.AddQueryString("replication", value); }
-		}
-		
+		public Replication Replication { get { return Q<Replication>("replication"); } set { Q("replication", value); } }
 		
 		///<summary>Query in the Lucene query string syntax</summary>
-		public string Q 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("q"); } 
-			set { this.Request.RequestParameters.AddQueryString("q", value); }
-		}
-		
+		public string Q { get { return Q<string>("q"); } set { Q("q", value); } }
 		
 		///<summary>Specific routing value</summary>
-		public string Routing 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("routing"); } 
-			set { this.Request.RequestParameters.AddQueryString("routing", value); }
-		}
-		
+		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Explicit operation timeout</summary>
-		public string Timeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("timeout", value); }
-		}
-		
+		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for Exists
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-get.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for Exists <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-get.html</pre></summary>
 	public partial class DocumentExistsRequest 
-			{
-		
+	{
 		///<summary>The ID of the parent document</summary>
-		public string Parent 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("parent"); } 
-			set { this.Request.RequestParameters.AddQueryString("parent", value); }
-		}
-		
+		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public string Preference 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("preference"); } 
-			set { this.Request.RequestParameters.AddQueryString("preference", value); }
-		}
-		
+		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
 		
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
-		public bool Realtime 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("realtime"); } 
-			set { this.Request.RequestParameters.AddQueryString("realtime", value); }
-		}
-		
+		public bool Realtime { get { return Q<bool>("realtime"); } set { Q("realtime", value); } }
 		
 		///<summary>Refresh the shard containing the document before performing the operation</summary>
-		public bool Refresh 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("refresh"); } 
-			set { this.Request.RequestParameters.AddQueryString("refresh", value); }
-		}
-		
+		public bool Refresh { get { return Q<bool>("refresh"); } set { Q("refresh", value); } }
 		
 		///<summary>Specific routing value</summary>
-		public string Routing 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("routing"); } 
-			set { this.Request.RequestParameters.AddQueryString("routing", value); }
-		}
-		
+		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for ExplainGet
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-explain.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for ExplainGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-explain.html</pre></summary>
 	public partial class ExplainRequest 
-			{
-		
+	{
 		///<summary>Specify whether wildcards and prefix queries in the query string query should be analyzed (default: false)</summary>
-		public bool AnalyzeWildcard 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("analyze_wildcard"); } 
-			set { this.Request.RequestParameters.AddQueryString("analyze_wildcard", value); }
-		}
-		
+		public bool AnalyzeWildcard { get { return Q<bool>("analyze_wildcard"); } set { Q("analyze_wildcard", value); } }
 		
 		///<summary>The analyzer for the query string query</summary>
-		public string Analyzer 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("analyzer"); } 
-			set { this.Request.RequestParameters.AddQueryString("analyzer", value); }
-		}
-		
+		public string Analyzer { get { return Q<string>("analyzer"); } set { Q("analyzer", value); } }
 		
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public DefaultOperator DefaultOperator 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<DefaultOperator>("default_operator"); } 
-			set { this.Request.RequestParameters.AddQueryString("default_operator", value); }
-		}
-		
+		public DefaultOperator DefaultOperator { get { return Q<DefaultOperator>("default_operator"); } set { Q("default_operator", value); } }
 		
 		///<summary>The default field for query string query (default: _all)</summary>
-		public string Df 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("df"); } 
-			set { this.Request.RequestParameters.AddQueryString("df", value); }
-		}
-		
+		public string Df { get { return Q<string>("df"); } set { Q("df", value); } }
 		
 		///<summary>A comma-separated list of fields to return in the response</summary>
-		public IList<FieldName> Fields 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<FieldName>>("fields"); } 
-			set { this.Request.RequestParameters.AddQueryString("fields", value); }
-		}
-		
+		public IList<FieldName> Fields { get { return Q<IList<FieldName>>("fields"); } set { Q("fields", value); } }
 		
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
-		public bool Lenient 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("lenient"); } 
-			set { this.Request.RequestParameters.AddQueryString("lenient", value); }
-		}
-		
+		public bool Lenient { get { return Q<bool>("lenient"); } set { Q("lenient", value); } }
 		
 		///<summary>Specify whether query terms should be lowercased</summary>
-		public bool LowercaseExpandedTerms 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("lowercase_expanded_terms"); } 
-			set { this.Request.RequestParameters.AddQueryString("lowercase_expanded_terms", value); }
-		}
-		
+		public bool LowercaseExpandedTerms { get { return Q<bool>("lowercase_expanded_terms"); } set { Q("lowercase_expanded_terms", value); } }
 		
 		///<summary>The ID of the parent document</summary>
-		public string Parent 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("parent"); } 
-			set { this.Request.RequestParameters.AddQueryString("parent", value); }
-		}
-		
+		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public string Preference 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("preference"); } 
-			set { this.Request.RequestParameters.AddQueryString("preference", value); }
-		}
-		
+		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
 		
 		///<summary>Query in the Lucene query string syntax</summary>
-		public string Q 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("q"); } 
-			set { this.Request.RequestParameters.AddQueryString("q", value); }
-		}
-		
+		public string Q { get { return Q<string>("q"); } set { Q("q", value); } }
 		
 		///<summary>Specific routing value</summary>
-		public string Routing 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("routing"); } 
-			set { this.Request.RequestParameters.AddQueryString("routing", value); }
-		}
-		
+		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public  string[] SourceEnabled 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("_source"); } 
-			set { this.Request.RequestParameters.AddQueryString("_source", value); }
-		}
-		
+		public  string[] SourceEnabled { get { return Q< string[]>("_source"); } set { Q("_source", value); } }
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public IList<FieldName> SourceExclude 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<FieldName>>("_source_exclude"); } 
-			set { this.Request.RequestParameters.AddQueryString("_source_exclude", value); }
-		}
-		
+		public IList<FieldName> SourceExclude { get { return Q<IList<FieldName>>("_source_exclude"); } set { Q("_source_exclude", value); } }
 		
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public IList<FieldName> SourceInclude 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<FieldName>>("_source_include"); } 
-			set { this.Request.RequestParameters.AddQueryString("_source_include", value); }
-		}
-		
+		public IList<FieldName> SourceInclude { get { return Q<IList<FieldName>>("_source_include"); } set { Q("_source_include", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for Get
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-get.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for Get <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-get.html</pre></summary>
 	public partial class GetRequest 
-			{
-		
+	{
 		///<summary>A comma-separated list of fields to return in the response</summary>
-		public IList<FieldName> Fields 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<FieldName>>("fields"); } 
-			set { this.Request.RequestParameters.AddQueryString("fields", value); }
-		}
-		
+		public IList<FieldName> Fields { get { return Q<IList<FieldName>>("fields"); } set { Q("fields", value); } }
 		
 		///<summary>The ID of the parent document</summary>
-		public string Parent 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("parent"); } 
-			set { this.Request.RequestParameters.AddQueryString("parent", value); }
-		}
-		
+		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public string Preference 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("preference"); } 
-			set { this.Request.RequestParameters.AddQueryString("preference", value); }
-		}
-		
+		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
 		
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
-		public bool Realtime 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("realtime"); } 
-			set { this.Request.RequestParameters.AddQueryString("realtime", value); }
-		}
-		
+		public bool Realtime { get { return Q<bool>("realtime"); } set { Q("realtime", value); } }
 		
 		///<summary>Refresh the shard containing the document before performing the operation</summary>
-		public bool Refresh 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("refresh"); } 
-			set { this.Request.RequestParameters.AddQueryString("refresh", value); }
-		}
-		
+		public bool Refresh { get { return Q<bool>("refresh"); } set { Q("refresh", value); } }
 		
 		///<summary>Specific routing value</summary>
-		public string Routing 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("routing"); } 
-			set { this.Request.RequestParameters.AddQueryString("routing", value); }
-		}
-		
+		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public  string[] SourceEnabled 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("_source"); } 
-			set { this.Request.RequestParameters.AddQueryString("_source", value); }
-		}
-		
+		public  string[] SourceEnabled { get { return Q< string[]>("_source"); } set { Q("_source", value); } }
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public IList<FieldName> SourceExclude 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<FieldName>>("_source_exclude"); } 
-			set { this.Request.RequestParameters.AddQueryString("_source_exclude", value); }
-		}
-		
+		public IList<FieldName> SourceExclude { get { return Q<IList<FieldName>>("_source_exclude"); } set { Q("_source_exclude", value); } }
 		
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public IList<FieldName> SourceInclude 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<FieldName>>("_source_include"); } 
-			set { this.Request.RequestParameters.AddQueryString("_source_include", value); }
-		}
-		
+		public IList<FieldName> SourceInclude { get { return Q<IList<FieldName>>("_source_include"); } set { Q("_source_include", value); } }
 		
 		///<summary>Explicit version number for concurrency control</summary>
-		public long Version 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<long>("version"); } 
-			set { this.Request.RequestParameters.AddQueryString("version", value); }
-		}
-		
+		public long Version { get { return Q<long>("version"); } set { Q("version", value); } }
 		
 		///<summary>Specific version type</summary>
-		public VersionType VersionType 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<VersionType>("version_type"); } 
-			set { this.Request.RequestParameters.AddQueryString("version_type", value); }
-		}
-		
+		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for GetSource
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-get.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for GetSource <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-get.html</pre></summary>
 	public partial class SourceRequest 
-			{
-		
+	{
 		///<summary>The ID of the parent document</summary>
-		public string Parent 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("parent"); } 
-			set { this.Request.RequestParameters.AddQueryString("parent", value); }
-		}
-		
+		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public string Preference 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("preference"); } 
-			set { this.Request.RequestParameters.AddQueryString("preference", value); }
-		}
-		
+		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
 		
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
-		public bool Realtime 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("realtime"); } 
-			set { this.Request.RequestParameters.AddQueryString("realtime", value); }
-		}
-		
+		public bool Realtime { get { return Q<bool>("realtime"); } set { Q("realtime", value); } }
 		
 		///<summary>Refresh the shard containing the document before performing the operation</summary>
-		public bool Refresh 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("refresh"); } 
-			set { this.Request.RequestParameters.AddQueryString("refresh", value); }
-		}
-		
+		public bool Refresh { get { return Q<bool>("refresh"); } set { Q("refresh", value); } }
 		
 		///<summary>Specific routing value</summary>
-		public string Routing 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("routing"); } 
-			set { this.Request.RequestParameters.AddQueryString("routing", value); }
-		}
-		
+		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public  string[] SourceEnabled 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("_source"); } 
-			set { this.Request.RequestParameters.AddQueryString("_source", value); }
-		}
-		
+		public  string[] SourceEnabled { get { return Q< string[]>("_source"); } set { Q("_source", value); } }
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public IList<FieldName> SourceExclude 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<FieldName>>("_source_exclude"); } 
-			set { this.Request.RequestParameters.AddQueryString("_source_exclude", value); }
-		}
-		
+		public IList<FieldName> SourceExclude { get { return Q<IList<FieldName>>("_source_exclude"); } set { Q("_source_exclude", value); } }
 		
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public IList<FieldName> SourceInclude 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<FieldName>>("_source_include"); } 
-			set { this.Request.RequestParameters.AddQueryString("_source_include", value); }
-		}
-		
+		public IList<FieldName> SourceInclude { get { return Q<IList<FieldName>>("_source_include"); } set { Q("_source_include", value); } }
 		
 		///<summary>Explicit version number for concurrency control</summary>
-		public long Version 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<long>("version"); } 
-			set { this.Request.RequestParameters.AddQueryString("version", value); }
-		}
-		
+		public long Version { get { return Q<long>("version"); } set { Q("version", value); } }
 		
 		///<summary>Specific version type</summary>
-		public VersionType VersionType 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<VersionType>("version_type"); } 
-			set { this.Request.RequestParameters.AddQueryString("version_type", value); }
-		}
-		
+		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for IndicesDeleteMapping
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-delete-mapping.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for IndicesDeleteMapping <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-delete-mapping.html</pre></summary>
 	public partial class DeleteMappingRequest 
-			{
-		
+	{
 		///<summary>Specify timeout for connection to master</summary>
-		public string MasterTimeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("master_timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("master_timeout", value); }
-		}
-		
+		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for IndicesGetFieldMappingForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-field-mapping.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for IndicesGetFieldMappingForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-field-mapping.html</pre></summary>
 	public partial class GetFieldMappingRequest 
-			{
-		
+	{
 		///<summary>Whether the default mapping values should be returned as well</summary>
-		public bool IncludeDefaults 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("include_defaults"); } 
-			set { this.Request.RequestParameters.AddQueryString("include_defaults", value); }
-		}
-		
+		public bool IncludeDefaults { get { return Q<bool>("include_defaults"); } set { Q("include_defaults", value); } }
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("ignore_unavailable"); } 
-			set { this.Request.RequestParameters.AddQueryString("ignore_unavailable", value); }
-		}
-		
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("allow_no_indices"); } 
-			set { this.Request.RequestParameters.AddQueryString("allow_no_indices", value); }
-		}
-		
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
-			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
-		}
-		
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("local"); } 
-			set { this.Request.RequestParameters.AddQueryString("local", value); }
-		}
-		
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for IndicesGetMappingForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-mapping.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for IndicesGetMappingForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-mapping.html</pre></summary>
 	public partial class GetMappingRequest 
-			{
-		
+	{
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("ignore_unavailable"); } 
-			set { this.Request.RequestParameters.AddQueryString("ignore_unavailable", value); }
-		}
-		
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("allow_no_indices"); } 
-			set { this.Request.RequestParameters.AddQueryString("allow_no_indices", value); }
-		}
-		
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
-			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
-		}
-		
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("local"); } 
-			set { this.Request.RequestParameters.AddQueryString("local", value); }
-		}
-		
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for IndicesPutMapping
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-put-mapping.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for IndicesPutMapping <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-put-mapping.html</pre></summary>
 	public partial class PutMappingRequest 
-			{
-		
+	{
 		///<summary>Specify whether to ignore conflicts while updating the mapping (default: false)</summary>
-		public bool IgnoreConflicts 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("ignore_conflicts"); } 
-			set { this.Request.RequestParameters.AddQueryString("ignore_conflicts", value); }
-		}
-		
+		public bool IgnoreConflicts { get { return Q<bool>("ignore_conflicts"); } set { Q("ignore_conflicts", value); } }
 		
 		///<summary>Explicit operation timeout</summary>
-		public string Timeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("timeout", value); }
-		}
-		
+		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
 		
 		///<summary>Specify timeout for connection to master</summary>
-		public string MasterTimeout 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("master_timeout"); } 
-			set { this.Request.RequestParameters.AddQueryString("master_timeout", value); }
-		}
-		
+		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("ignore_unavailable"); } 
-			set { this.Request.RequestParameters.AddQueryString("ignore_unavailable", value); }
-		}
-		
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("allow_no_indices"); } 
-			set { this.Request.RequestParameters.AddQueryString("allow_no_indices", value); }
-		}
-		
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
-			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
-		}
-		
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for IndicesValidateQueryGetForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-validate.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for IndicesValidateQueryGetForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-validate.html</pre></summary>
 	public partial class ValidateQueryRequest 
-			{
-		
+	{
 		///<summary>Return detailed information about the error</summary>
-		public bool Explain 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("explain"); } 
-			set { this.Request.RequestParameters.AddQueryString("explain", value); }
-		}
-		
+		public bool Explain { get { return Q<bool>("explain"); } set { Q("explain", value); } }
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("ignore_unavailable"); } 
-			set { this.Request.RequestParameters.AddQueryString("ignore_unavailable", value); }
-		}
-		
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("allow_no_indices"); } 
-			set { this.Request.RequestParameters.AddQueryString("allow_no_indices", value); }
-		}
-		
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
-			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
-		}
-		
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>TODO: ?</summary>
-		public string OperationThreading 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("operation_threading"); } 
-			set { this.Request.RequestParameters.AddQueryString("operation_threading", value); }
-		}
-		
+		public string OperationThreading { get { return Q<string>("operation_threading"); } set { Q("operation_threading", value); } }
 		
 		///<summary>Query in the Lucene query string syntax</summary>
-		public string Q 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("q"); } 
-			set { this.Request.RequestParameters.AddQueryString("q", value); }
-		}
-		
+		public string Q { get { return Q<string>("q"); } set { Q("q", value); } }
 		
 		///<summary>The analyzer to use for the query string</summary>
-		public string Analyzer 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("analyzer"); } 
-			set { this.Request.RequestParameters.AddQueryString("analyzer", value); }
-		}
-		
+		public string Analyzer { get { return Q<string>("analyzer"); } set { Q("analyzer", value); } }
 		
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
-		public bool AnalyzeWildcard 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("analyze_wildcard"); } 
-			set { this.Request.RequestParameters.AddQueryString("analyze_wildcard", value); }
-		}
-		
+		public bool AnalyzeWildcard { get { return Q<bool>("analyze_wildcard"); } set { Q("analyze_wildcard", value); } }
 		
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public DefaultOperator DefaultOperator 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<DefaultOperator>("default_operator"); } 
-			set { this.Request.RequestParameters.AddQueryString("default_operator", value); }
-		}
-		
+		public DefaultOperator DefaultOperator { get { return Q<DefaultOperator>("default_operator"); } set { Q("default_operator", value); } }
 		
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
-		public string Df 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("df"); } 
-			set { this.Request.RequestParameters.AddQueryString("df", value); }
-		}
-		
+		public string Df { get { return Q<string>("df"); } set { Q("df", value); } }
 		
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
-		public bool Lenient 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("lenient"); } 
-			set { this.Request.RequestParameters.AddQueryString("lenient", value); }
-		}
-		
+		public bool Lenient { get { return Q<bool>("lenient"); } set { Q("lenient", value); } }
 		
 		///<summary>Specify whether query terms should be lowercased</summary>
-		public bool LowercaseExpandedTerms 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("lowercase_expanded_terms"); } 
-			set { this.Request.RequestParameters.AddQueryString("lowercase_expanded_terms", value); }
-		}
-		
+		public bool LowercaseExpandedTerms { get { return Q<bool>("lowercase_expanded_terms"); } set { Q("lowercase_expanded_terms", value); } }
 		
 		///<summary>Provide a more detailed explanation showing the actual Lucene query that will be executed.</summary>
-		public bool Rewrite 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("rewrite"); } 
-			set { this.Request.RequestParameters.AddQueryString("rewrite", value); }
-		}
-		
+		public bool Rewrite { get { return Q<bool>("rewrite"); } set { Q("rewrite", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for MltGet
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-more-like-this.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for MltGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-more-like-this.html</pre></summary>
 	public partial class MoreLikeThisRequest 
-			{
-		
+	{
 		///<summary>The boost factor</summary>
-		public double BoostTerms 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<double>("boost_terms"); } 
-			set { this.Request.RequestParameters.AddQueryString("boost_terms", value); }
-		}
-		
+		public double BoostTerms { get { return Q<double>("boost_terms"); } set { Q("boost_terms", value); } }
 		
 		///<summary>The word occurrence frequency as count: words with higher occurrence in the corpus will be ignored</summary>
-		public long MaxDocFreq 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<long>("max_doc_freq"); } 
-			set { this.Request.RequestParameters.AddQueryString("max_doc_freq", value); }
-		}
-		
+		public long MaxDocFreq { get { return Q<long>("max_doc_freq"); } set { Q("max_doc_freq", value); } }
 		
 		///<summary>The maximum query terms to be included in the generated query</summary>
-		public long MaxQueryTerms 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<long>("max_query_terms"); } 
-			set { this.Request.RequestParameters.AddQueryString("max_query_terms", value); }
-		}
-		
+		public long MaxQueryTerms { get { return Q<long>("max_query_terms"); } set { Q("max_query_terms", value); } }
 		
 		///<summary>The minimum length of the word: longer words will be ignored</summary>
-		public long MaxWordLength 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<long>("max_word_length"); } 
-			set { this.Request.RequestParameters.AddQueryString("max_word_length", value); }
-		}
-		
+		public long MaxWordLength { get { return Q<long>("max_word_length"); } set { Q("max_word_length", value); } }
 		
 		///<summary>The word occurrence frequency as count: words with lower occurrence in the corpus will be ignored</summary>
-		public long MinDocFreq 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<long>("min_doc_freq"); } 
-			set { this.Request.RequestParameters.AddQueryString("min_doc_freq", value); }
-		}
-		
+		public long MinDocFreq { get { return Q<long>("min_doc_freq"); } set { Q("min_doc_freq", value); } }
 		
 		///<summary>The term frequency as percent: terms with lower occurence in the source document will be ignored</summary>
-		public long MinTermFreq 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<long>("min_term_freq"); } 
-			set { this.Request.RequestParameters.AddQueryString("min_term_freq", value); }
-		}
-		
+		public long MinTermFreq { get { return Q<long>("min_term_freq"); } set { Q("min_term_freq", value); } }
 		
 		///<summary>The minimum length of the word: shorter words will be ignored</summary>
-		public long MinWordLength 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<long>("min_word_length"); } 
-			set { this.Request.RequestParameters.AddQueryString("min_word_length", value); }
-		}
-		
+		public long MinWordLength { get { return Q<long>("min_word_length"); } set { Q("min_word_length", value); } }
 		
 		///<summary>Specific fields to perform the query against</summary>
-		public IList<FieldName> MltFields 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<FieldName>>("mlt_fields"); } 
-			set { this.Request.RequestParameters.AddQueryString("mlt_fields", value); }
-		}
-		
+		public IList<FieldName> MltFields { get { return Q<IList<FieldName>>("mlt_fields"); } set { Q("mlt_fields", value); } }
 		
 		///<summary>How many terms have to match in order to consider the document a match (default: 0.3)</summary>
-		public double PercentTermsToMatch 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<double>("percent_terms_to_match"); } 
-			set { this.Request.RequestParameters.AddQueryString("percent_terms_to_match", value); }
-		}
-		
+		public double PercentTermsToMatch { get { return Q<double>("percent_terms_to_match"); } set { Q("percent_terms_to_match", value); } }
 		
 		///<summary>Specific routing value</summary>
-		public string Routing 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("routing"); } 
-			set { this.Request.RequestParameters.AddQueryString("routing", value); }
-		}
-		
+		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>The offset from which to return results</summary>
-		public long SearchFrom 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<long>("search_from"); } 
-			set { this.Request.RequestParameters.AddQueryString("search_from", value); }
-		}
-		
+		public long SearchFrom { get { return Q<long>("search_from"); } set { Q("search_from", value); } }
 		
 		///<summary>A comma-separated list of indices to perform the query against (default: the index containing the document)</summary>
-		public  string[] SearchIndices 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("search_indices"); } 
-			set { this.Request.RequestParameters.AddQueryString("search_indices", value); }
-		}
-		
+		public  string[] SearchIndices { get { return Q< string[]>("search_indices"); } set { Q("search_indices", value); } }
 		
 		///<summary>A scroll search request definition</summary>
-		public string SearchScroll 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("search_scroll"); } 
-			set { this.Request.RequestParameters.AddQueryString("search_scroll", value); }
-		}
-		
+		public string SearchScroll { get { return Q<string>("search_scroll"); } set { Q("search_scroll", value); } }
 		
 		///<summary>The number of documents to return (default: 10)</summary>
-		public long SearchSize 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<long>("search_size"); } 
-			set { this.Request.RequestParameters.AddQueryString("search_size", value); }
-		}
-		
+		public long SearchSize { get { return Q<long>("search_size"); } set { Q("search_size", value); } }
 		
 		///<summary>A specific search request definition (instead of using the request body)</summary>
-		public string SearchSource 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("search_source"); } 
-			set { this.Request.RequestParameters.AddQueryString("search_source", value); }
-		}
-		
+		public string SearchSource { get { return Q<string>("search_source"); } set { Q("search_source", value); } }
 		
 		///<summary>Specific search type (eg. `dfs_then_fetch`, `count`, etc)</summary>
-		public string SearchType 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("search_type"); } 
-			set { this.Request.RequestParameters.AddQueryString("search_type", value); }
-		}
-		
+		public string SearchType { get { return Q<string>("search_type"); } set { Q("search_type", value); } }
 		
 		///<summary>A comma-separated list of types to perform the query against (default: the same type as the document)</summary>
-		public  string[] SearchTypes 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("search_types"); } 
-			set { this.Request.RequestParameters.AddQueryString("search_types", value); }
-		}
-		
+		public  string[] SearchTypes { get { return Q< string[]>("search_types"); } set { Q("search_types", value); } }
 		
 		///<summary>A list of stop words to be ignored</summary>
-		public  string[] StopWords 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("stop_words"); } 
-			set { this.Request.RequestParameters.AddQueryString("stop_words", value); }
-		}
-		
+		public  string[] StopWords { get { return Q< string[]>("stop_words"); } set { Q("stop_words", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for SearchGet
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-search.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for SearchGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-search.html</pre></summary>
 	public partial class SearchRequest 
-			{
-		
+	{
 		///<summary>The analyzer to use for the query string</summary>
-		public string Analyzer 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("analyzer"); } 
-			set { this.Request.RequestParameters.AddQueryString("analyzer", value); }
-		}
-		
+		public string Analyzer { get { return Q<string>("analyzer"); } set { Q("analyzer", value); } }
 		
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
-		public bool AnalyzeWildcard 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("analyze_wildcard"); } 
-			set { this.Request.RequestParameters.AddQueryString("analyze_wildcard", value); }
-		}
-		
+		public bool AnalyzeWildcard { get { return Q<bool>("analyze_wildcard"); } set { Q("analyze_wildcard", value); } }
 		
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public DefaultOperator DefaultOperator 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<DefaultOperator>("default_operator"); } 
-			set { this.Request.RequestParameters.AddQueryString("default_operator", value); }
-		}
-		
+		public DefaultOperator DefaultOperator { get { return Q<DefaultOperator>("default_operator"); } set { Q("default_operator", value); } }
 		
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
-		public string Df 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("df"); } 
-			set { this.Request.RequestParameters.AddQueryString("df", value); }
-		}
-		
+		public string Df { get { return Q<string>("df"); } set { Q("df", value); } }
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("ignore_unavailable"); } 
-			set { this.Request.RequestParameters.AddQueryString("ignore_unavailable", value); }
-		}
-		
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("allow_no_indices"); } 
-			set { this.Request.RequestParameters.AddQueryString("allow_no_indices", value); }
-		}
-		
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
-			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
-		}
-		
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
-		public bool Lenient 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("lenient"); } 
-			set { this.Request.RequestParameters.AddQueryString("lenient", value); }
-		}
-		
+		public bool Lenient { get { return Q<bool>("lenient"); } set { Q("lenient", value); } }
 		
 		///<summary>Specify whether query terms should be lowercased</summary>
-		public bool LowercaseExpandedTerms 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("lowercase_expanded_terms"); } 
-			set { this.Request.RequestParameters.AddQueryString("lowercase_expanded_terms", value); }
-		}
-		
+		public bool LowercaseExpandedTerms { get { return Q<bool>("lowercase_expanded_terms"); } set { Q("lowercase_expanded_terms", value); } }
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public string Preference 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("preference"); } 
-			set { this.Request.RequestParameters.AddQueryString("preference", value); }
-		}
-		
+		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
 		
 		///<summary>A comma-separated list of specific routing values</summary>
-		public  string[] Routing 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("routing"); } 
-			set { this.Request.RequestParameters.AddQueryString("routing", value); }
-		}
-		
+		public  string[] Routing { get { return Q< string[]>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
-		public string Scroll 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("scroll"); } 
-			set { this.Request.RequestParameters.AddQueryString("scroll", value); }
-		}
-		
+		public string Scroll { get { return Q<string>("scroll"); } set { Q("scroll", value); } }
 		
 		///<summary>Search operation type</summary>
-		public SearchType SearchType 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<SearchType>("search_type"); } 
-			set { this.Request.RequestParameters.AddQueryString("search_type", value); }
-		}
-		
+		public SearchType SearchType { get { return Q<SearchType>("search_type"); } set { Q("search_type", value); } }
 		
 		///<summary>Specific &#39;tag&#39; of the request for logging and statistical purposes</summary>
-		public  string[] Stats 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("stats"); } 
-			set { this.Request.RequestParameters.AddQueryString("stats", value); }
-		}
-		
+		public  string[] Stats { get { return Q< string[]>("stats"); } set { Q("stats", value); } }
 		
 		///<summary>Specify which field to use for suggestions</summary>
-		public FieldName SuggestField 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<FieldName>("suggest_field"); } 
-			set { this.Request.RequestParameters.AddQueryString("suggest_field", value); }
-		}
-		
+		public FieldName SuggestField { get { return Q<FieldName>("suggest_field"); } set { Q("suggest_field", value); } }
 		
 		///<summary>Specify suggest mode</summary>
-		public SuggestMode SuggestMode 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<SuggestMode>("suggest_mode"); } 
-			set { this.Request.RequestParameters.AddQueryString("suggest_mode", value); }
-		}
-		
+		public SuggestMode SuggestMode { get { return Q<SuggestMode>("suggest_mode"); } set { Q("suggest_mode", value); } }
 		
 		///<summary>How many suggestions to return in response</summary>
-		public long SuggestSize 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<long>("suggest_size"); } 
-			set { this.Request.RequestParameters.AddQueryString("suggest_size", value); }
-		}
-		
+		public long SuggestSize { get { return Q<long>("suggest_size"); } set { Q("suggest_size", value); } }
 		
 		///<summary>The source text for which the suggestions should be returned</summary>
-		public string SuggestText 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("suggest_text"); } 
-			set { this.Request.RequestParameters.AddQueryString("suggest_text", value); }
-		}
-		
+		public string SuggestText { get { return Q<string>("suggest_text"); } set { Q("suggest_text", value); } }
 		
 		///<summary>Specify if query cache should be used for this request or not, defaults to index level setting</summary>
-		public bool QueryCache 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("query_cache"); } 
-			set { this.Request.RequestParameters.AddQueryString("query_cache", value); }
-		}
-		
+		public bool QueryCache { get { return Q<bool>("query_cache"); } set { Q("query_cache", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for SearchExists
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/search-exists.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for SearchExists <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-exists.html</pre></summary>
 	public partial class SearchExistsRequest 
-			{
-		
+	{
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("ignore_unavailable"); } 
-			set { this.Request.RequestParameters.AddQueryString("ignore_unavailable", value); }
-		}
-		
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("allow_no_indices"); } 
-			set { this.Request.RequestParameters.AddQueryString("allow_no_indices", value); }
-		}
-		
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
-			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
-		}
-		
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>Include only documents with a specific `_score` value in the result</summary>
-		public double MinScore 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<double>("min_score"); } 
-			set { this.Request.RequestParameters.AddQueryString("min_score", value); }
-		}
-		
+		public double MinScore { get { return Q<double>("min_score"); } set { Q("min_score", value); } }
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public string Preference 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("preference"); } 
-			set { this.Request.RequestParameters.AddQueryString("preference", value); }
-		}
-		
+		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
 		
 		///<summary>Specific routing value</summary>
-		public string Routing 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("routing"); } 
-			set { this.Request.RequestParameters.AddQueryString("routing", value); }
-		}
-		
+		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Query in the Lucene query string syntax</summary>
-		public string Q 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("q"); } 
-			set { this.Request.RequestParameters.AddQueryString("q", value); }
-		}
-		
+		public string Q { get { return Q<string>("q"); } set { Q("q", value); } }
 		
 		///<summary>The analyzer to use for the query string</summary>
-		public string Analyzer 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("analyzer"); } 
-			set { this.Request.RequestParameters.AddQueryString("analyzer", value); }
-		}
-		
+		public string Analyzer { get { return Q<string>("analyzer"); } set { Q("analyzer", value); } }
 		
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
-		public bool AnalyzeWildcard 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("analyze_wildcard"); } 
-			set { this.Request.RequestParameters.AddQueryString("analyze_wildcard", value); }
-		}
-		
+		public bool AnalyzeWildcard { get { return Q<bool>("analyze_wildcard"); } set { Q("analyze_wildcard", value); } }
 		
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public DefaultOperator DefaultOperator 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<DefaultOperator>("default_operator"); } 
-			set { this.Request.RequestParameters.AddQueryString("default_operator", value); }
-		}
-		
+		public DefaultOperator DefaultOperator { get { return Q<DefaultOperator>("default_operator"); } set { Q("default_operator", value); } }
 		
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
-		public string Df 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("df"); } 
-			set { this.Request.RequestParameters.AddQueryString("df", value); }
-		}
-		
+		public string Df { get { return Q<string>("df"); } set { Q("df", value); } }
 		
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
-		public bool Lenient 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("lenient"); } 
-			set { this.Request.RequestParameters.AddQueryString("lenient", value); }
-		}
-		
+		public bool Lenient { get { return Q<bool>("lenient"); } set { Q("lenient", value); } }
 		
 		///<summary>Specify whether query terms should be lowercased</summary>
-		public bool LowercaseExpandedTerms 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("lowercase_expanded_terms"); } 
-			set { this.Request.RequestParameters.AddQueryString("lowercase_expanded_terms", value); }
-		}
-		
+		public bool LowercaseExpandedTerms { get { return Q<bool>("lowercase_expanded_terms"); } set { Q("lowercase_expanded_terms", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for SearchShardsGet
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for SearchShardsGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html</pre></summary>
 	public partial class SearchShardsRequest 
-			{
-		
+	{
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public string Preference 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("preference"); } 
-			set { this.Request.RequestParameters.AddQueryString("preference", value); }
-		}
-		
+		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
 		
 		///<summary>Specific routing value</summary>
-		public string Routing 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("routing"); } 
-			set { this.Request.RequestParameters.AddQueryString("routing", value); }
-		}
-		
+		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("local"); } 
-			set { this.Request.RequestParameters.AddQueryString("local", value); }
-		}
-		
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("ignore_unavailable"); } 
-			set { this.Request.RequestParameters.AddQueryString("ignore_unavailable", value); }
-		}
-		
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("allow_no_indices"); } 
-			set { this.Request.RequestParameters.AddQueryString("allow_no_indices", value); }
-		}
-		
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
-			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
-		}
-		
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for SearchTemplateGet
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for SearchTemplateGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html</pre></summary>
 	public partial class SearchTemplateRequest 
-			{
-		
+	{
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("ignore_unavailable"); } 
-			set { this.Request.RequestParameters.AddQueryString("ignore_unavailable", value); }
-		}
-		
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("allow_no_indices"); } 
-			set { this.Request.RequestParameters.AddQueryString("allow_no_indices", value); }
-		}
-		
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<ExpandWildcards>("expand_wildcards"); } 
-			set { this.Request.RequestParameters.AddQueryString("expand_wildcards", value); }
-		}
-		
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public string Preference 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("preference"); } 
-			set { this.Request.RequestParameters.AddQueryString("preference", value); }
-		}
-		
+		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
 		
 		///<summary>A comma-separated list of specific routing values</summary>
-		public  string[] Routing 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue< string[]>("routing"); } 
-			set { this.Request.RequestParameters.AddQueryString("routing", value); }
-		}
-		
+		public  string[] Routing { get { return Q< string[]>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
-		public string Scroll 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("scroll"); } 
-			set { this.Request.RequestParameters.AddQueryString("scroll", value); }
-		}
-		
+		public string Scroll { get { return Q<string>("scroll"); } set { Q("scroll", value); } }
 		
 		///<summary>Search operation type</summary>
-		public SearchType SearchType 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<SearchType>("search_type"); } 
-			set { this.Request.RequestParameters.AddQueryString("search_type", value); }
-		}
-		
+		public SearchType SearchType { get { return Q<SearchType>("search_type"); } set { Q("search_type", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
 		}
-		
-	}
-	
-		
-	///<summary>Request parameters for TermvectorGet
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-termvectors.html
-	///</pre>
-	///</summary>
+	///<summary>Request parameters for TermvectorGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-termvectors.html</pre></summary>
 	public partial class TermvectorRequest 
-			{
-		
+	{
 		///<summary>Specifies if total term frequency and document frequency should be returned.</summary>
-		public bool TermStatistics 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("term_statistics"); } 
-			set { this.Request.RequestParameters.AddQueryString("term_statistics", value); }
-		}
-		
+		public bool TermStatistics { get { return Q<bool>("term_statistics"); } set { Q("term_statistics", value); } }
 		
 		///<summary>Specifies if document count, sum of document frequencies and sum of total term frequencies should be returned.</summary>
-		public bool FieldStatistics 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("field_statistics"); } 
-			set { this.Request.RequestParameters.AddQueryString("field_statistics", value); }
-		}
-		
+		public bool FieldStatistics { get { return Q<bool>("field_statistics"); } set { Q("field_statistics", value); } }
 		
 		///<summary>A comma-separated list of fields to return.</summary>
-		public IList<FieldName> Fields 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<IList<FieldName>>("fields"); } 
-			set { this.Request.RequestParameters.AddQueryString("fields", value); }
-		}
-		
+		public IList<FieldName> Fields { get { return Q<IList<FieldName>>("fields"); } set { Q("fields", value); } }
 		
 		///<summary>Specifies if term offsets should be returned.</summary>
-		public bool Offsets 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("offsets"); } 
-			set { this.Request.RequestParameters.AddQueryString("offsets", value); }
-		}
-		
+		public bool Offsets { get { return Q<bool>("offsets"); } set { Q("offsets", value); } }
 		
 		///<summary>Specifies if term positions should be returned.</summary>
-		public bool Positions 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("positions"); } 
-			set { this.Request.RequestParameters.AddQueryString("positions", value); }
-		}
-		
+		public bool Positions { get { return Q<bool>("positions"); } set { Q("positions", value); } }
 		
 		///<summary>Specifies if term payloads should be returned.</summary>
-		public bool Payloads 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("payloads"); } 
-			set { this.Request.RequestParameters.AddQueryString("payloads", value); }
-		}
-		
+		public bool Payloads { get { return Q<bool>("payloads"); } set { Q("payloads", value); } }
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random).</summary>
-		public string Preference 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("preference"); } 
-			set { this.Request.RequestParameters.AddQueryString("preference", value); }
-		}
-		
+		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
 		
 		///<summary>Specific routing value.</summary>
-		public string Routing 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("routing"); } 
-			set { this.Request.RequestParameters.AddQueryString("routing", value); }
-		}
-		
+		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Parent id of documents.</summary>
-		public string Parent 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("parent"); } 
-			set { this.Request.RequestParameters.AddQueryString("parent", value); }
-		}
-		
+		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
 		
 		///<summary>Specifies if request is real-time as opposed to near-real-time (default: true).</summary>
-		public bool Realtime 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("realtime"); } 
-			set { this.Request.RequestParameters.AddQueryString("realtime", value); }
-		}
-		
+		public bool Realtime { get { return Q<bool>("realtime"); } set { Q("realtime", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("source"); } 
-			set { this.Request.RequestParameters.AddQueryString("source", value); }
-		}
-		
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue<string>("filter_path"); } 
-			set { this.Request.RequestParameters.AddQueryString("filter_path", value); }
-		}
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
-	}
-	
-	
+		}
 }
  

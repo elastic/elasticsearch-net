@@ -28,59 +28,40 @@ namespace Nest
 }
 	@foreach (CsharpMethod method in methods)
 	{
-		
-		<text>
-	///<summary>Request parameters for @method.FullName
-	///<pre>
-	///@method.Documentation
-	///</pre>
-	///</summary>
+	<text>///<summary>Request parameters for @method.FullName <pre>@method.Documentation</pre></summary>
 	public partial class @Raw(method.RequestType + method.RequestTypeGeneric) @Raw(!method.RequestTypeUnmapped ?  "" : string.Format(" : BasePathRequest<{0}>", method.QueryStringParamName))
-			{
+	{
 	@foreach (KeyValuePair<string, ApiQueryParameters> kv in method.Url.Params)
 	{
-		  var original = kv.Value.OriginalQueryStringParamName;
-		  var cased = kv.Key.ToPascalCase();
-		  var mm = (cased != "Type" && cased != "Index" && cased != "Script") ? cased : cased + "QueryString";
-		  var fieldType = kv.Value.CsharpType(kv.Key).Replace("params", "");
-		  var isFields = (original.Contains("fields") || original.Contains("source_include") || original.Contains("source_exclude"));
-		  if (isFields && fieldType.Contains("string"))
-		  {
-			  fieldType = "IList<FieldName>";
-		  }
-		  else if (original.Contains("field") && fieldType.Contains("string"))
-		  {
-			  fieldType = "FieldName";
-		  }
-		<text>
-		///<summary>@kv.Value.Description</summary>
+		var original = kv.Value.OriginalQueryStringParamName;
+		var cased = kv.Key.ToPascalCase();
+		var mm = (cased != "Type" && cased != "Index" && cased != "Script") ? cased : cased + "QueryString";
+		var fieldType = kv.Value.CsharpType(kv.Key).Replace("params", "");
+		var isFields = (original.Contains("fields") || original.Contains("source_include") || original.Contains("source_exclude"));
+		if (isFields && fieldType.Contains("string"))
+		{
+			fieldType = "IList<FieldName>";
+		}
+		else if (original.Contains("field") && fieldType.Contains("string"))
+		{
+			fieldType = "FieldName";
+		}
+		<text>///<summary>@kv.Value.Description</summary>
 		@if(!string.IsNullOrWhiteSpace(kv.Value.DeprecatedInFavorOf))
 		{
 		<text>[Obsolete("Scheduled to be removed in 2.0, use @kv.Value.DeprecatedInFavorOf instead")]</text>
 		}
-		public @Raw(fieldType) @(mm) 
-		{ 
-			get { return this.Request.RequestParameters.GetQueryStringValue@(Raw("<" + fieldType + ">"))("@original"); } 
-			set { this.Request.RequestParameters.AddQueryString("@original", value); }
-		}
+		public @Raw(fieldType) @(mm) { get { return Q@(Raw("<" + fieldType + ">"))("@original"); } set { Q("@original", value); } }
 		</text>
-		
-		
-	  }
-@if (method.RequestTypeUnmapped)
-		{
-<text>
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo@(Raw(string.Format("<{0}>", method.QueryStringParamName))) pathInfo)
+	}
+	@if (method.RequestTypeUnmapped)
+	{<text>	protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo@(Raw(string.Format("<{0}>", method.QueryStringParamName))) pathInfo)
 		{
 			throw new NotImplementedException();
 		}
-</text>
-		}
-	}
 	</text>
-		
-	
 	}
-	
+	}</text>
+	}
 }
  
