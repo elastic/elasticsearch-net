@@ -1,0 +1,21 @@
+[source, csharp]
+----
+var defaultSettings = new ConnectionSettings((CreateBaseUri(port)), "defaultindex")
+				.InferMappingFor<Project>(map=>map
+					.IndexName("project")
+					.IdProperty(p=>p.Name)
+				)
+				.InferMappingFor<CommitActivity>(map=>map
+					.IndexName("project")
+					.TypeName("commits")
+				)
+				.InferMappingFor<Developer>(map=>map
+					.Ignore(p=>p.PrivateValue)
+					.Rename(p=>p.OnlineHandle, "nickname")
+				)
+				;
+var settings = modifySettings != null ? modifySettings(defaultSettings) : defaultSettings;
+var host = "localhost";
+host = "ipv4.fiddler";
+var uri = new UriBuilder("http", host, port.GetValueOrDefault(9200)).Uri;
+----

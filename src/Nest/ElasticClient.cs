@@ -18,7 +18,7 @@ namespace Nest
 		private readonly IConnectionSettingsValues _connectionSettings;
 
 		internal IHighLevelToLowLevelDispatcher Dispatcher { get { return this; } }
-		internal RawDispatch RawDispatch { get; set; }
+		internal LowLevelDispatch LowLevelDispatch { get; set; }
 		
 		public IConnection Connection { get; protected set; }
 		public INestSerializer Serializer { get; protected set; }
@@ -52,21 +52,39 @@ namespace Nest
 				transport, //default transport
 				this.Serializer
 			);
-			this.RawDispatch = new RawDispatch(this.Raw);
+			this.LowLevelDispatch = new LowLevelDispatch(this.Raw);
 			this.Infer = this._connectionSettings.Inferrer;
 
 		}
 
-		public static void Warmup()
+		/// <summary>
+		/// Perform any request you want over the configured IConnection while taking advantage of the cluster failover.
+		/// </summary>
+		/// <typeparam name="T">The type representing the response JSON</typeparam>
+		/// <param name="method">the HTTP Method to use</param>
+		/// <param name="path">The path of the the url that you would like to hit</param>
+		/// <param name="data">The body of the request, string and byte[] are posted as is other types will be serialized to JSON</param>
+		/// <param name="requestParameters">Optionally configure request specific timeouts, headers</param>
+		/// <returns>An ElasticsearchResponse of T where T represents the JSON response body</returns>
+		public ElasticsearchResponse<T> DoRequest<T>(string method, string path, object data = null, IRequestParameters requestParameters = null)
 		{
-			var client = new ElasticClient(connection: new InMemoryConnection());
-			var stream = new MemoryStream("{}".Utf8Bytes());
-			client.Serializer.Serialize(new SearchDescriptor<object>());
-			client.Serializer.Deserialize<SearchDescriptor<object>>(stream);
-			var connection = new HttpConnection(new ConnectionSettings());
-			client.RootNodeInfo();
-			client.Search<object>(s => s.MatchAll().Index("someindex"));
+			return this.Raw.DoRequest<T>(method, path, data, requestParameters);
 		}
+
+		/// <summary>
+		/// Perform any request you want over the configured IConnection asynchronously while taking advantage of the cluster failover.
+		/// </summary>
+		/// <typeparam name="T">The type representing the response JSON</typeparam>
+		/// <param name="method">the HTTP Method to use</param>
+		/// <param name="path">The path of the the url that you would like to hit</param>
+		/// <param name="data">The body of the request, string and byte[] are posted as is other types will be serialized to JSON</param>
+		/// <param name="requestParameters">Optionally configure request specific timeouts, headers</param>
+		/// <returns>A task of ElasticsearchResponse of T where T represents the JSON response body</returns>
+		public Task<ElasticsearchResponse<T>> DoRequestAsync<T>(string method, string path, object data = null, IRequestParameters requestParameters = null)
+		{
+			return this.Raw.DoRequestAsync<T>(method, path, data, requestParameters);
+		}
+
 
 		R IHighLevelToLowLevelDispatcher.Dispatch<D, Q, R>(D descriptor, Func<ElasticsearchPathInfo<Q>, D, ElasticsearchResponse<R>> dispatch)
 		{

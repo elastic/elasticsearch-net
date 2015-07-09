@@ -14,12 +14,6 @@ type ProjectName(msbuild: string) =
             Some "Elasticsearch.Net - oficial low level elasticsearch client"
         | f when f = "nest" -> 
             Some "NEST - oficial high level elasticsearch client"
-        | f when f = "elasticsearch.net.connection.thrift" -> 
-            Some "Add thrift support to elasticsearch."
-        | f when f = "elasticsearch.net.connection.httpclient" -> 
-            Some "IConnection implementation that uses HttpClient (.NET 4.5 only)"
-        | f when f = "elasticsearch.net.jsonnet" -> 
-            Some "IElasticsearchSerializer implementation that allows you to use Json.NET with the lowlevel client"
         | _ -> None
 
 type DotNetFramework = 
@@ -34,21 +28,13 @@ type DotNetFramework =
 type DotNet40Project =
     | Nest
     | ElasticsearchNet
-    | ElasticsearchNetJsonNet
-    | ElasticsearchNetConnectionThrift
-    static member All = [ElasticsearchNet; ElasticsearchNetJsonNet; ElasticsearchNetConnectionThrift; Nest] 
-
-type DotNet45Project = 
-    | ElasticsearchNetConnectionHttpClient
-    static member All = [ElasticsearchNetConnectionHttpClient] 
+    static member All = [ElasticsearchNet;  Nest] 
 
 type DotNetProject = 
     | DotNet40Project of DotNet40Project
-    | DotNet45Project of DotNet45Project
     static member All =
         Seq.concat [
             DotNet40Project.All |> List.map(fun p -> DotNet40Project p);
-            DotNet45Project.All |> List.map(fun p -> DotNet45Project p)
         ]
 
     member this.ProjectName =
@@ -57,12 +43,7 @@ type DotNetProject =
             match net40 with
             | Nest -> ProjectName "Nest"
             | ElasticsearchNet -> ProjectName "Elasticsearch.Net"
-            | ElasticsearchNetJsonNet -> ProjectName "Serialization\Elasticsearch.Net.JsonNet"
-            | ElasticsearchNetConnectionThrift -> ProjectName "Connections\Elasticsearch.Net.Connection.Thrift"
-        | DotNet45Project net45 -> 
-            match net45 with
-            | ElasticsearchNetConnectionHttpClient -> ProjectName "Connections\Elasticsearch.Net.Connection.HttpClient"
-    
+   
     static member TryFindName (name: string) =
         DotNetProject.All
         |> Seq.map(fun p -> p.ProjectName)

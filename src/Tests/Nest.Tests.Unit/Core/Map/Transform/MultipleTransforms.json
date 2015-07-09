@@ -1,8 +1,0 @@
-﻿{
-  "elasticsearchprojects": {
-    "transform": [
-      { "script": "ctx._source['suggest'] = ctx._source['content']" },
-      { "script": "ctx._source['foo'] = ctx._source['bar'];" }
-    ]
-  }
-}

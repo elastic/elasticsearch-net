@@ -1,9 +1,0 @@
-  {
-  "elasticsearchprojects": {
-    "_id": {
-      "path": "myOtherId",
-      "index": "not_analyzed",
-      "store": false
-    }
-  }
-}

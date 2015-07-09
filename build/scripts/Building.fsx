@@ -31,7 +31,6 @@ type Build() =
                 | DotNet40Project net40 -> 
                     let net40dir = sprintf "%s/net40" outputFolder
                     CopyDir net40dir srcFolder allFiles
-                | DotNet45Project net45 -> trace ""
             | NET45 ->
                 let net45dir = sprintf "%s/net45" outputFolder
                 CopyDir net45dir srcFolder allFiles
@@ -50,12 +49,29 @@ type Build() =
         let properties = msbuildProperties |> List.append [("TargetFrameworkVersion", f.MSBuild)] 
         let target = toTarget framework
 
-        CleanDirs <| Paths.MsBuildOutput()
+        CleanDirs <| Paths.MsBuildOutput
         MSBuild null target properties (seq { yield "src/Elasticsearch.sln" }) |> ignore
         if not isMono then gitLink()
         moveToBuildOutput(framework)
 
     static member CompileAll() = DotNetFramework.All |> Seq.iter Build.Compile |> ignore
+
+    static member QuickCompile() = 
+        let f = DotNetFramework.NET45
+        let properties =  ("Verbosity", "Quiet") :: ("TargetFrameworkVersion", f.Identifier.MSBuild) :: msbuildProperties 
+        let setParams defaults =
+            { defaults with
+                //Verbosity = Some(Quiet)
+                Targets = ["Build"]
+                Properties =
+                    [
+                        "Configuration", "Release"
+                        "TargetFrameworkVersion", f.Identifier.MSBuild
+                    ]
+         }
+        build setParams "src/Elasticsearch.sln" |> ignore
+
+
 
 
 

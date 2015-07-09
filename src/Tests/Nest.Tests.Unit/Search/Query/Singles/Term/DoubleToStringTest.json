@@ -1,9 +1,0 @@
-  {
-  "query": {
-    "term": {
-      "doubleValue": {
-        "value": 20.5
-      }
-    }
-  }
-}

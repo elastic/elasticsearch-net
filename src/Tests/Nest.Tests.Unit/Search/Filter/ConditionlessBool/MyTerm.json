@@ -1,9 +1,0 @@
-  {
-  "from": 0,
-  "size": 10,
-  "post_filter": {
-    "term": {
-      "name": "myterm"
-    }
-  }
-}

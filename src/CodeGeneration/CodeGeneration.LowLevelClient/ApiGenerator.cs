@@ -100,19 +100,18 @@ namespace CodeGeneration.LowLevelClient
 				WriteToEndpointsFolder(fileName, json);
 			}
 		}
+
 		private static readonly Dictionary<string, string> MethodNameOverrides =
-			(from f in new DirectoryInfo(_nestFolder + "/DSL").GetFiles("*.cs", SearchOption.TopDirectoryOnly)
-			 where f.FullName.EndsWith("Descriptor.cs")
+			(from f in new DirectoryInfo(_nestFolder).GetFiles("*.cs", SearchOption.AllDirectories)
 			 let contents = File.ReadAllText(f.FullName)
 			 let c = Regex.Replace(contents, @"^.+\[DescriptorFor\(""([^ \r\n]+)""\)\].*$", "$1", RegexOptions.Singleline)
 			 where !c.Contains(" ") //filter results that did not match
-			 select new { Value = f.Name.Replace("Descriptor.cs", ""), Key = c })
+			 select new { Value = f.Name.Replace("Request", ""), Key = c })
 			.DistinctBy(v => v.Key)
-			.ToDictionary(k => k.Key, v => v.Value);
+			.ToDictionary(k => k.Key, v => v.Value.Replace(".cs", ""));
 
 		private static readonly Dictionary<string, string> KnownDescriptors =
-			(from f in new DirectoryInfo(_nestFolder + "/DSL").GetFiles("*.cs", SearchOption.TopDirectoryOnly)
-			 where f.FullName.EndsWith("Descriptor.cs")
+			(from f in new DirectoryInfo(_nestFolder).GetFiles("*.cs", SearchOption.AllDirectories)
 			 let contents = File.ReadAllText(f.FullName)
 			 let c = Regex.Replace(contents, @"^.+class ([^ \r\n]+).*$", "$1", RegexOptions.Singleline)
 			 select new { Key = Regex.Replace(c, "<.*$", ""), Value = Regex.Replace(c, @"^.*?(?:(\<.+>).*?)?$", "$1") })
@@ -120,8 +119,7 @@ namespace CodeGeneration.LowLevelClient
 			.ToDictionary(k => k.Key, v => v.Value);
 
 		private static readonly Dictionary<string, string> KnownRequests =
-			(from f in new DirectoryInfo(_nestFolder + "/DSL").GetFiles("*.cs", SearchOption.TopDirectoryOnly)
-			 where f.FullName.EndsWith("Descriptor.cs")
+			(from f in new DirectoryInfo(_nestFolder).GetFiles("*.cs", SearchOption.AllDirectories)
 			 let contents = File.ReadAllText(f.FullName)
 			 let c = Regex.Replace(contents, @"^.+interface ([^ \r\n]+).*$", "$1", RegexOptions.Singleline)
 			 where c.StartsWith("I") && c.Contains("Request")
@@ -256,8 +254,8 @@ namespace CodeGeneration.LowLevelClient
 
 		public static void GenerateRawDispatch(RestApiSpec model)
 		{
-			var targetFile = _nestFolder + @"RawDispatch.Generated.cs";
-			var source = _razorMachine.Execute(File.ReadAllText(_viewFolder + @"RawDispatch.Generated.cshtml"), model).ToString();
+			var targetFile = _nestFolder + @"_Generated/_LowLevelDispatch.Generated.cs";
+			var source = _razorMachine.Execute(File.ReadAllText(_viewFolder + @"_LowLevelDispatch.Generated.cshtml"), model).ToString();
 			File.WriteAllText(targetFile, source);
 		}
 		public static void GenerateRawClient(RestApiSpec model)
@@ -269,14 +267,14 @@ namespace CodeGeneration.LowLevelClient
 
 		public static void GenerateDescriptors(RestApiSpec model)
 		{
-			var targetFile = _nestFolder + @"DSL\_Descriptors.Generated.cs";
+			var targetFile = _nestFolder + @"_Generated\_Descriptors.Generated.cs";
 			var source = _razorMachine.Execute(File.ReadAllText(_viewFolder + @"_Descriptors.Generated.cshtml"), model).ToString();
 			File.WriteAllText(targetFile, source);
 		}
 
 		public static void GenerateRequests(RestApiSpec model)
 		{
-			var targetFile = _nestFolder + @"DSL\_Requests.Generated.cs";
+			var targetFile = _nestFolder + @"_Generated\_Requests.Generated.cs";
 			var source = _razorMachine.Execute(File.ReadAllText(_viewFolder + @"_Requests.Generated.cshtml"), model).ToString();
 			File.WriteAllText(targetFile, source);
 		}
@@ -290,8 +288,8 @@ namespace CodeGeneration.LowLevelClient
 
 		public static void GenerateRequestParametersExtensions(RestApiSpec model)
 		{
-			var targetFile = _nestFolder + @"Domain\RequestParametersExtensions.Generated.cs";
-			var source = _razorMachine.Execute(File.ReadAllText(_viewFolder + @"RequestParametersExtensions.Generated.cshtml"), model).ToString();
+			var targetFile = _nestFolder + @"_Generated\_RequestParametersExtensions.Generated.cs";
+			var source = _razorMachine.Execute(File.ReadAllText(_viewFolder + @"_RequestParametersExtensions.Generated.cshtml"), model).ToString();
 			File.WriteAllText(targetFile, source);
 		}
 		public static void GenerateEnums(RestApiSpec model)
