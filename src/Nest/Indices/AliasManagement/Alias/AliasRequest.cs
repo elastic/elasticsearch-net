@@ -21,7 +21,7 @@ namespace Nest
 		}
 	}
 	
-	public partial class AliasRequest : BaseRequest<AliasRequestParameters>, IAliasRequest
+	public partial class AliasRequest : BasePathRequest<AliasRequestParameters>, IAliasRequest
 	{
 		public IList<IAliasAction> Actions { get; set; }
 		

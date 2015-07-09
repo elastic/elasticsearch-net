@@ -21,7 +21,7 @@ namespace Nest
 
 	}
 	
-	public partial class ClusterGetSettingsRequest : BaseRequest<ClusterGetSettingsRequestParameters>, IClusterGetSettingsRequest
+	public partial class ClusterGetSettingsRequest : BasePathRequest<ClusterGetSettingsRequestParameters>, IClusterGetSettingsRequest
 	{
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ClusterGetSettingsRequestParameters> pathInfo)
 		{

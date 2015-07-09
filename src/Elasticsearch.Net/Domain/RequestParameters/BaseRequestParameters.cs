@@ -27,5 +27,11 @@ namespace Elasticsearch.Net
 				return default(TOut);
 			return (TOut)value;
 		}
+
+		public void AddQueryStringValue(string name, object value)
+		{
+			if (value == null) return;
+			this.QueryString[name] = value;
+		}
 	}
 }

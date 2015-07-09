@@ -1,4 +1,6 @@
 using System;
+using System.Linq;
+using System.Text;
 
 namespace Nest
 {
@@ -9,12 +11,29 @@ namespace Nest
 	[Serializable]
 	public class DispatchException : System.Exception
 	{
-		public DispatchException(string msg) : base(msg)
+		public IElasticsearchPathInfo Provided { get; }
+
+		public DispatchException(string msg, IElasticsearchPathInfo provided) : base(msg)
 		{
+			Provided = provided;
 		}
 
 		public DispatchException(string msg, System.Exception exp) : base(msg, exp)
 		{
 		}
+
+		public static DispatchException Create(IElasticsearchPathInfo provided, string apiCall, string[] endpoints,
+			PathInfoHttpMethod[] methods)
+		{
+			var sb = new StringBuilder();
+			sb.AppendLine($"Dispatching {apiCall}() from NEST into to Elasticsearch.NET failed");
+			sb.AppendLine($"Recieved a request marked as ${provided.HttpMethod.GetStringValue()}");
+			sb.AppendLine($"This endpoint accepts ${string.Join(",", methods.Select(p=>p.GetStringValue()))}");
+			sb.AppendLine($"The request might not have enough information provided to make any of these endpoints:");
+			foreach (var endpoint in endpoints)
+				sb.AppendLine($"  - {endpoint}");
+			return new DispatchException(sb.ToString(), provided);
+		}
+
 	}
 }

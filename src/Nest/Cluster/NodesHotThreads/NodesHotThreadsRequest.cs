@@ -31,7 +31,7 @@ namespace Nest
 	}
 
 	public partial class NodesHotThreadsDescriptor 
-		: NodeIdOptionalPathBase<NodesHotThreadsRequestParameters>, INodesHotThreadsRequest
+		: NodeIdOptionalDescriptor<NodesHotThreadsDescriptor, NodesHotThreadsRequestParameters>, INodesHotThreadsRequest
 	{
 		private INodesHotThreadsRequest Self => this;
 

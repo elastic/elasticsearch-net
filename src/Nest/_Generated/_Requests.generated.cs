@@ -205,7 +205,7 @@ namespace Nest
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
-	 	protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CatHelpRequestParameters> pathInfo)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CatHelpRequestParameters> pathInfo)
 		{
 			throw new NotImplementedException();
 		}
@@ -1951,7 +1951,7 @@ namespace Nest
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
-	 	protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ListBenchmarksRequestParameters> pathInfo)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ListBenchmarksRequestParameters> pathInfo)
 		{
 			throw new NotImplementedException();
 		}

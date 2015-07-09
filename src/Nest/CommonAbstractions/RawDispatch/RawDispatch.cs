@@ -13,5 +13,7 @@ namespace Nest
 		{
 			this.Raw = rawElasticClient;
 		}
+
+		internal bool AllSet(params string[] pathVariables) => pathVariables.All(p => !p.IsNullOrEmpty());
 	}
 }

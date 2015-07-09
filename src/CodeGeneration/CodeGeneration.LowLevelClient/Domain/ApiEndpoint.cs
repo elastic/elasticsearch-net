@@ -16,7 +16,18 @@ namespace CodeGeneration.LowLevelClient.Domain
 					.Concat(new[] {"u => pathInfo.RequestParameters"});
 				return methodArgs;
 			}
-		} 
+		}
+
+		public string IfCheck
+		{
+			get
+			{
+				var parts = this.CsharpMethod.Parts.Where(p => p.Name != "body")
+					.Select(p => $"pathInfo.{p.Name.ToPascalCase()}").ToList();
+				if (!parts.Any()) return string.Empty;
+				return $"AllSet({string.Join(", ", parts)})";
+			}
+		}
 
 		public IEnumerable<string> IfChecks
 		{

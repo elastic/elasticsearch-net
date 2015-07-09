@@ -100,10 +100,10 @@ namespace Nest
 			return list != null && list.Any();
 		}
 
-				internal static void ThrowIfNull<T>(this T value, string name)
+		internal static void ThrowIfNull<T>(this T value, string name, string message = null)
 		{
-			if (value == null)
-				throw new ArgumentNullException(name);
+			if (value == null && message.IsNullOrEmpty()) throw new ArgumentNullException(name);
+			else if (value == null) throw new ArgumentNullException(name, message);
 		}
 
 		internal static string F(this string format, params object[] args)

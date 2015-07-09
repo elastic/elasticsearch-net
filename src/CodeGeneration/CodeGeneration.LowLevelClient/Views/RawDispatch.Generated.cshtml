@@ -14,15 +14,14 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	///<summary>
-	///Raw operations with elasticsearch
-	///</summary>
+	///<summary>This dispatches highlevel requests into the proper lowlevel client overload method</summary>
 	internal partial class RawDispatch
 	{
-	
 	@foreach (var kv in model.Endpoints)
 	{
 		var endpoint = kv.Value;
+		var endpointsException = string.Join(", ", endpoint.Url.Paths.Select(p=> "\"" + p + "\""));
+		var httpMethodsException = string.Join(", ", endpoint.RawDispatches.Select(p=> "PathInfoHttpMethod." + p.Key.ToUpper() ));
 		var peek = endpoint.GetCsharpMethods().FirstOrDefault();
 		if (peek == null)
 		{
@@ -35,8 +34,7 @@ namespace Nest
 		};
 		foreach(var gen in generate)
 		{
-		<text>
-		internal @Raw(gen.Returns) @(Raw(gen.Name))(ElasticsearchPathInfo<@peek.QueryStringParamName> pathInfo @if (endpoint.Body != null) {<text>, object body</text>})
+		<text>internal @Raw(gen.Returns) @(Raw(gen.Name))(ElasticsearchPathInfo<@peek.QueryStringParamName> pathInfo @if (endpoint.Body != null) {<text>, object body</text>})
 		{
 			switch(pathInfo.HttpMethod)
 			{
@@ -45,23 +43,23 @@ namespace Nest
 				var httpMethod = methodGroup.Key;
 				var dispatches = methodGroup.Value.ToList();
 				var totalDispatches = dispatches.Count();
-				var allWithIfChecks = dispatches.All(d => d.IfChecks.Any());
+				var allWithIfChecks = dispatches.All(d => !string.IsNullOrEmpty(d.IfCheck));
 				var i = 0;
 				<text>case PathInfoHttpMethod.@httpMethod.ToUpper():
 				@foreach (var dispatch in dispatches)
 				{
 					var method = dispatch.CsharpMethod;
 					var name = method.FullName + ((gen.Async) ? "Async<T>" : "<T>");
-					<text>//@method.HttpMethod @method.Path</text>
-					if (i == 0 && !dispatch.IfChecks.Any())
+					var hasIfCheck = !string.IsNullOrEmpty(dispatch.IfCheck); 
+					if (i == 0 && !hasIfCheck)
 					{
 					<text>return this.Raw.@(Raw(name))(@Raw(string.Join(",", dispatch.MethodArguments)));</text>
 					}
 					else
 					{
-						if (dispatch.IfChecks.Any())
+						if (hasIfCheck)
 						{
-					<text>if (@Raw(string.Join(" && ", dispatch.IfChecks)))
+					<text>if (@Raw(dispatch.IfCheck))
 						return this.Raw.@(Raw(name))(@Raw(string.Join(",", dispatch.MethodArguments)));</text>
 						}
 						else
@@ -77,7 +75,7 @@ namespace Nest
 				}</text>
 			}
 			}
-			throw new DispatchException("Could not dispatch IElasticClient.@(endpoint.CsharpMethodName)() into any of the following paths: \r\n - @string.Join("\\r\\n - ", endpoint.Url.Paths)");
+			throw DispatchException.Create(pathInfo, "@(endpoint.CsharpMethodName)", new [] { @Raw(endpointsException) }, new [] { @(httpMethodsException) });
 		}
 		</text>
 	} 
