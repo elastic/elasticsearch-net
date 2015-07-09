@@ -12,3021 +12,1145 @@ using Elasticsearch.Net;
 namespace Nest
 {
 	
-	///<summary>descriptor for AbortBenchmark
-	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-benchmark.html
-	///</pre>
-	///</summary>
-	public partial class AbortBenchmarkDescriptor  : BaseRequest<AbortBenchmarkRequestParameters>
+	///<summary>descriptor for AbortBenchmark <pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-benchmark.html</pre></summary>
+	public partial class AbortBenchmarkDescriptor  : BasePathDescriptor<AbortBenchmarkDescriptor,AbortBenchmarkRequestParameters>
 	{
-		
-	
-
 		///<summary>The URL-encoded request definition</summary>
-		public AbortBenchmarkDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public AbortBenchmarkDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public AbortBenchmarkDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
-		
+		public AbortBenchmarkDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
+
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<AbortBenchmarkRequestParameters> pathInfo)
 		{
 			throw new NotImplementedException();
-		}
-		
+		} 
 	
 	}
 	
-	
-	///<summary>descriptor for Bulk
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-bulk.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for Bulk <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-bulk.html</pre></summary>
 	public partial class BulkDescriptor 
 	{
-		
-	
-
 		///<summary>Explicit write consistency setting for the operation</summary>
-		public BulkDescriptor Consistency(Consistency consistency)
-		{
-			this.Request.RequestParameters.Consistency(consistency);
-			return this;
-		}
-		
+		public BulkDescriptor Consistency(Consistency consistency) => _requestParams(p=>p.Consistency(consistency));
 
 		///<summary>Refresh the index after performing the operation</summary>
-		public BulkDescriptor Refresh(bool refresh = true)
-		{
-			this.Request.RequestParameters.Refresh(refresh);
-			return this;
-		}
-		
+		public BulkDescriptor Refresh(bool refresh = true) => _requestParams(p=>p.Refresh(refresh));
 
 		///<summary>Explicitely set the replication type</summary>
-		public BulkDescriptor Replication(Replication replication)
-		{
-			this.Request.RequestParameters.Replication(replication);
-			return this;
-		}
-		
+		public BulkDescriptor Replication(Replication replication) => _requestParams(p=>p.Replication(replication));
 
 		///<summary>Specific routing value</summary>
-		public BulkDescriptor Routing(string routing)
-		{
-			this.Request.RequestParameters.Routing(routing);
-			return this;
-		}
-		
+		public BulkDescriptor Routing(string routing) => _requestParams(p=>p.Routing(routing));
 
 		///<summary>Explicit operation timeout</summary>
-		public BulkDescriptor Timeout(string timeout)
-		{
-			this.Request.RequestParameters.Timeout(timeout);
-			return this;
-		}
-		
+		public BulkDescriptor Timeout(string timeout) => _requestParams(p=>p.Timeout(timeout));
 
 		///<summary>Default document type for items which don&#39;t provide one</summary>
-		public BulkDescriptor TypeQueryString(string type)
-		{
-			this.Request.RequestParameters.Type(type);
-			return this;
-		}
-		
+		public BulkDescriptor TypeQueryString(string type) => _requestParams(p=>p.Type(type));
 
 		///<summary>The URL-encoded request definition</summary>
-		public BulkDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public BulkDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public BulkDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public BulkDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for CatAliases
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-alias.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for CatAliases <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-alias.html</pre></summary>
 	public partial class CatAliasesDescriptor 
 	{
-		
-	
-
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public CatAliasesDescriptor Local(bool local = true)
-		{
-			this.Request.RequestParameters.Local(local);
-			return this;
-		}
-		
+		public CatAliasesDescriptor Local(bool local = true) => _requestParams(p=>p.Local(local));
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatAliasesDescriptor MasterTimeout(string master_timeout)
-		{
-			this.Request.RequestParameters.MasterTimeout(master_timeout);
-			return this;
-		}
-		
+		public CatAliasesDescriptor MasterTimeout(string master_timeout) => _requestParams(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatAliasesDescriptor H(params string[] h)
-		{
-			this.Request.RequestParameters.H(h);
-			return this;
-		}
-		
+		public CatAliasesDescriptor H(params string[] h) => _requestParams(p=>p.H(h));
 
 		///<summary>Return help information</summary>
-		public CatAliasesDescriptor Help(bool help = true)
-		{
-			this.Request.RequestParameters.Help(help);
-			return this;
-		}
-		
+		public CatAliasesDescriptor Help(bool help = true) => _requestParams(p=>p.Help(help));
 
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatAliasesDescriptor V(bool v = true)
-		{
-			this.Request.RequestParameters.V(v);
-			return this;
-		}
-		
+		public CatAliasesDescriptor V(bool v = true) => _requestParams(p=>p.V(v));
 
 		///<summary>The URL-encoded request definition</summary>
-		public CatAliasesDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public CatAliasesDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CatAliasesDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public CatAliasesDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for CatAllocation
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-allocation.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for CatAllocation <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-allocation.html</pre></summary>
 	public partial class CatAllocationDescriptor 
 	{
-		
-	
-
 		///<summary>The unit in which to display byte values</summary>
-		public CatAllocationDescriptor Bytes(Bytes bytes)
-		{
-			this.Request.RequestParameters.Bytes(bytes);
-			return this;
-		}
-		
+		public CatAllocationDescriptor Bytes(Bytes bytes) => _requestParams(p=>p.Bytes(bytes));
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public CatAllocationDescriptor Local(bool local = true)
-		{
-			this.Request.RequestParameters.Local(local);
-			return this;
-		}
-		
+		public CatAllocationDescriptor Local(bool local = true) => _requestParams(p=>p.Local(local));
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatAllocationDescriptor MasterTimeout(string master_timeout)
-		{
-			this.Request.RequestParameters.MasterTimeout(master_timeout);
-			return this;
-		}
-		
+		public CatAllocationDescriptor MasterTimeout(string master_timeout) => _requestParams(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatAllocationDescriptor H(params string[] h)
-		{
-			this.Request.RequestParameters.H(h);
-			return this;
-		}
-		
+		public CatAllocationDescriptor H(params string[] h) => _requestParams(p=>p.H(h));
 
 		///<summary>Return help information</summary>
-		public CatAllocationDescriptor Help(bool help = true)
-		{
-			this.Request.RequestParameters.Help(help);
-			return this;
-		}
-		
+		public CatAllocationDescriptor Help(bool help = true) => _requestParams(p=>p.Help(help));
 
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatAllocationDescriptor V(bool v = true)
-		{
-			this.Request.RequestParameters.V(v);
-			return this;
-		}
-		
+		public CatAllocationDescriptor V(bool v = true) => _requestParams(p=>p.V(v));
 
 		///<summary>The URL-encoded request definition</summary>
-		public CatAllocationDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public CatAllocationDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CatAllocationDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public CatAllocationDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for CatCount
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-count.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for CatCount <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-count.html</pre></summary>
 	public partial class CatCountDescriptor 
 	{
-		
-	
-
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public CatCountDescriptor Local(bool local = true)
-		{
-			this.Request.RequestParameters.Local(local);
-			return this;
-		}
-		
+		public CatCountDescriptor Local(bool local = true) => _requestParams(p=>p.Local(local));
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatCountDescriptor MasterTimeout(string master_timeout)
-		{
-			this.Request.RequestParameters.MasterTimeout(master_timeout);
-			return this;
-		}
-		
+		public CatCountDescriptor MasterTimeout(string master_timeout) => _requestParams(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatCountDescriptor H(params string[] h)
-		{
-			this.Request.RequestParameters.H(h);
-			return this;
-		}
-		
+		public CatCountDescriptor H(params string[] h) => _requestParams(p=>p.H(h));
 
 		///<summary>Return help information</summary>
-		public CatCountDescriptor Help(bool help = true)
-		{
-			this.Request.RequestParameters.Help(help);
-			return this;
-		}
-		
+		public CatCountDescriptor Help(bool help = true) => _requestParams(p=>p.Help(help));
 
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatCountDescriptor V(bool v = true)
-		{
-			this.Request.RequestParameters.V(v);
-			return this;
-		}
-		
+		public CatCountDescriptor V(bool v = true) => _requestParams(p=>p.V(v));
 
 		///<summary>The URL-encoded request definition</summary>
-		public CatCountDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public CatCountDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CatCountDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public CatCountDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for CatFielddata
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-fielddata.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for CatFielddata <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-fielddata.html</pre></summary>
 	public partial class CatFielddataDescriptor 
 	{
-		
-	
-
 		///<summary>The unit in which to display byte values</summary>
-		public CatFielddataDescriptor Bytes(Bytes bytes)
-		{
-			this.Request.RequestParameters.Bytes(bytes);
-			return this;
-		}
-		
+		public CatFielddataDescriptor Bytes(Bytes bytes) => _requestParams(p=>p.Bytes(bytes));
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public CatFielddataDescriptor Local(bool local = true)
-		{
-			this.Request.RequestParameters.Local(local);
-			return this;
-		}
-		
+		public CatFielddataDescriptor Local(bool local = true) => _requestParams(p=>p.Local(local));
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatFielddataDescriptor MasterTimeout(string master_timeout)
-		{
-			this.Request.RequestParameters.MasterTimeout(master_timeout);
-			return this;
-		}
-		
+		public CatFielddataDescriptor MasterTimeout(string master_timeout) => _requestParams(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatFielddataDescriptor H(params string[] h)
-		{
-			this.Request.RequestParameters.H(h);
-			return this;
-		}
-		
+		public CatFielddataDescriptor H(params string[] h) => _requestParams(p=>p.H(h));
 
 		///<summary>Return help information</summary>
-		public CatFielddataDescriptor Help(bool help = true)
-		{
-			this.Request.RequestParameters.Help(help);
-			return this;
-		}
-		
+		public CatFielddataDescriptor Help(bool help = true) => _requestParams(p=>p.Help(help));
 
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatFielddataDescriptor V(bool v = true)
-		{
-			this.Request.RequestParameters.V(v);
-			return this;
-		}
-		
+		public CatFielddataDescriptor V(bool v = true) => _requestParams(p=>p.V(v));
 
 		///<summary>A comma-separated list of fields to return in the output</summary>
-		public CatFielddataDescriptor Fields(params string[] fields)
-		{
-			this.Request.RequestParameters.Fields(fields);
-			return this;
-		}
-		
+		public CatFielddataDescriptor Fields(params string[] fields) => _requestParams(p=>p.Fields(fields));
 			
 		///<summary>A comma-separated list of fields to return in the output</summary>
-		public CatFielddataDescriptor Fields<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class
-		{
-			if (!typedPathLookups.HasAny())
-				return this;
-
-			this.Request.RequestParameters._Fields(typedPathLookups);
-			return this;
-		}
-			
+		public CatFielddataDescriptor Fields<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class =>
+			_requestParams(p=>p._Fields(typedPathLookups));
 
 		///<summary>The URL-encoded request definition</summary>
-		public CatFielddataDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public CatFielddataDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CatFielddataDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public CatFielddataDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for CatHealth
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-health.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for CatHealth <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-health.html</pre></summary>
 	public partial class CatHealthDescriptor 
 	{
-		
-	
-
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public CatHealthDescriptor Local(bool local = true)
-		{
-			this.Request.RequestParameters.Local(local);
-			return this;
-		}
-		
+		public CatHealthDescriptor Local(bool local = true) => _requestParams(p=>p.Local(local));
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatHealthDescriptor MasterTimeout(string master_timeout)
-		{
-			this.Request.RequestParameters.MasterTimeout(master_timeout);
-			return this;
-		}
-		
+		public CatHealthDescriptor MasterTimeout(string master_timeout) => _requestParams(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatHealthDescriptor H(params string[] h)
-		{
-			this.Request.RequestParameters.H(h);
-			return this;
-		}
-		
+		public CatHealthDescriptor H(params string[] h) => _requestParams(p=>p.H(h));
 
 		///<summary>Return help information</summary>
-		public CatHealthDescriptor Help(bool help = true)
-		{
-			this.Request.RequestParameters.Help(help);
-			return this;
-		}
-		
+		public CatHealthDescriptor Help(bool help = true) => _requestParams(p=>p.Help(help));
 
 		///<summary>Set to false to disable timestamping</summary>
-		public CatHealthDescriptor Ts(bool ts = true)
-		{
-			this.Request.RequestParameters.Ts(ts);
-			return this;
-		}
-		
+		public CatHealthDescriptor Ts(bool ts = true) => _requestParams(p=>p.Ts(ts));
 
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatHealthDescriptor V(bool v = true)
-		{
-			this.Request.RequestParameters.V(v);
-			return this;
-		}
-		
+		public CatHealthDescriptor V(bool v = true) => _requestParams(p=>p.V(v));
 
 		///<summary>The URL-encoded request definition</summary>
-		public CatHealthDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public CatHealthDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CatHealthDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public CatHealthDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for CatHelp
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat.html
-	///</pre>
-	///</summary>
-	public partial class CatHelpDescriptor  : BaseRequest<CatHelpRequestParameters>
+	///<summary>descriptor for CatHelp <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat.html</pre></summary>
+	public partial class CatHelpDescriptor  : BasePathDescriptor<CatHelpDescriptor,CatHelpRequestParameters>
 	{
-		
-	
-
 		///<summary>Return help information</summary>
-		public CatHelpDescriptor Help(bool help = true)
-		{
-			this.Request.RequestParameters.Help(help);
-			return this;
-		}
-		
+		public CatHelpDescriptor Help(bool help = true) => _requestParams(p=>p.Help(help));
 
 		///<summary>The URL-encoded request definition</summary>
-		public CatHelpDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public CatHelpDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CatHelpDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
-		
+		public CatHelpDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
+
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CatHelpRequestParameters> pathInfo)
 		{
 			throw new NotImplementedException();
-		}
-		
+		} 
 	
 	}
 	
-	
-	///<summary>descriptor for CatIndices
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-indices.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for CatIndices <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-indices.html</pre></summary>
 	public partial class CatIndicesDescriptor 
 	{
-		
-	
-
 		///<summary>The unit in which to display byte values</summary>
-		public CatIndicesDescriptor Bytes(Bytes bytes)
-		{
-			this.Request.RequestParameters.Bytes(bytes);
-			return this;
-		}
-		
+		public CatIndicesDescriptor Bytes(Bytes bytes) => _requestParams(p=>p.Bytes(bytes));
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public CatIndicesDescriptor Local(bool local = true)
-		{
-			this.Request.RequestParameters.Local(local);
-			return this;
-		}
-		
+		public CatIndicesDescriptor Local(bool local = true) => _requestParams(p=>p.Local(local));
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatIndicesDescriptor MasterTimeout(string master_timeout)
-		{
-			this.Request.RequestParameters.MasterTimeout(master_timeout);
-			return this;
-		}
-		
+		public CatIndicesDescriptor MasterTimeout(string master_timeout) => _requestParams(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatIndicesDescriptor H(params string[] h)
-		{
-			this.Request.RequestParameters.H(h);
-			return this;
-		}
-		
+		public CatIndicesDescriptor H(params string[] h) => _requestParams(p=>p.H(h));
 
 		///<summary>Return help information</summary>
-		public CatIndicesDescriptor Help(bool help = true)
-		{
-			this.Request.RequestParameters.Help(help);
-			return this;
-		}
-		
+		public CatIndicesDescriptor Help(bool help = true) => _requestParams(p=>p.Help(help));
 
 		///<summary>Set to true to return stats only for primary shards</summary>
-		public CatIndicesDescriptor Pri(bool pri = true)
-		{
-			this.Request.RequestParameters.Pri(pri);
-			return this;
-		}
-		
+		public CatIndicesDescriptor Pri(bool pri = true) => _requestParams(p=>p.Pri(pri));
 
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatIndicesDescriptor V(bool v = true)
-		{
-			this.Request.RequestParameters.V(v);
-			return this;
-		}
-		
+		public CatIndicesDescriptor V(bool v = true) => _requestParams(p=>p.V(v));
 
 		///<summary>The URL-encoded request definition</summary>
-		public CatIndicesDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public CatIndicesDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CatIndicesDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public CatIndicesDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for CatMaster
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-master.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for CatMaster <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-master.html</pre></summary>
 	public partial class CatMasterDescriptor 
 	{
-		
-	
-
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public CatMasterDescriptor Local(bool local = true)
-		{
-			this.Request.RequestParameters.Local(local);
-			return this;
-		}
-		
+		public CatMasterDescriptor Local(bool local = true) => _requestParams(p=>p.Local(local));
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatMasterDescriptor MasterTimeout(string master_timeout)
-		{
-			this.Request.RequestParameters.MasterTimeout(master_timeout);
-			return this;
-		}
-		
+		public CatMasterDescriptor MasterTimeout(string master_timeout) => _requestParams(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatMasterDescriptor H(params string[] h)
-		{
-			this.Request.RequestParameters.H(h);
-			return this;
-		}
-		
+		public CatMasterDescriptor H(params string[] h) => _requestParams(p=>p.H(h));
 
 		///<summary>Return help information</summary>
-		public CatMasterDescriptor Help(bool help = true)
-		{
-			this.Request.RequestParameters.Help(help);
-			return this;
-		}
-		
+		public CatMasterDescriptor Help(bool help = true) => _requestParams(p=>p.Help(help));
 
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatMasterDescriptor V(bool v = true)
-		{
-			this.Request.RequestParameters.V(v);
-			return this;
-		}
-		
+		public CatMasterDescriptor V(bool v = true) => _requestParams(p=>p.V(v));
 
 		///<summary>The URL-encoded request definition</summary>
-		public CatMasterDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public CatMasterDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CatMasterDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public CatMasterDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for CatNodes
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-nodes.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for CatNodes <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-nodes.html</pre></summary>
 	public partial class CatNodesDescriptor 
 	{
-		
-	
-
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public CatNodesDescriptor Local(bool local = true)
-		{
-			this.Request.RequestParameters.Local(local);
-			return this;
-		}
-		
+		public CatNodesDescriptor Local(bool local = true) => _requestParams(p=>p.Local(local));
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatNodesDescriptor MasterTimeout(string master_timeout)
-		{
-			this.Request.RequestParameters.MasterTimeout(master_timeout);
-			return this;
-		}
-		
+		public CatNodesDescriptor MasterTimeout(string master_timeout) => _requestParams(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatNodesDescriptor H(params string[] h)
-		{
-			this.Request.RequestParameters.H(h);
-			return this;
-		}
-		
+		public CatNodesDescriptor H(params string[] h) => _requestParams(p=>p.H(h));
 
 		///<summary>Return help information</summary>
-		public CatNodesDescriptor Help(bool help = true)
-		{
-			this.Request.RequestParameters.Help(help);
-			return this;
-		}
-		
+		public CatNodesDescriptor Help(bool help = true) => _requestParams(p=>p.Help(help));
 
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatNodesDescriptor V(bool v = true)
-		{
-			this.Request.RequestParameters.V(v);
-			return this;
-		}
-		
+		public CatNodesDescriptor V(bool v = true) => _requestParams(p=>p.V(v));
 
 		///<summary>The URL-encoded request definition</summary>
-		public CatNodesDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public CatNodesDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CatNodesDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public CatNodesDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for CatPendingTasks
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-pending-tasks.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for CatPendingTasks <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-pending-tasks.html</pre></summary>
 	public partial class CatPendingTasksDescriptor 
 	{
-		
-	
-
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public CatPendingTasksDescriptor Local(bool local = true)
-		{
-			this.Request.RequestParameters.Local(local);
-			return this;
-		}
-		
+		public CatPendingTasksDescriptor Local(bool local = true) => _requestParams(p=>p.Local(local));
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatPendingTasksDescriptor MasterTimeout(string master_timeout)
-		{
-			this.Request.RequestParameters.MasterTimeout(master_timeout);
-			return this;
-		}
-		
+		public CatPendingTasksDescriptor MasterTimeout(string master_timeout) => _requestParams(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatPendingTasksDescriptor H(params string[] h)
-		{
-			this.Request.RequestParameters.H(h);
-			return this;
-		}
-		
+		public CatPendingTasksDescriptor H(params string[] h) => _requestParams(p=>p.H(h));
 
 		///<summary>Return help information</summary>
-		public CatPendingTasksDescriptor Help(bool help = true)
-		{
-			this.Request.RequestParameters.Help(help);
-			return this;
-		}
-		
+		public CatPendingTasksDescriptor Help(bool help = true) => _requestParams(p=>p.Help(help));
 
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatPendingTasksDescriptor V(bool v = true)
-		{
-			this.Request.RequestParameters.V(v);
-			return this;
-		}
-		
+		public CatPendingTasksDescriptor V(bool v = true) => _requestParams(p=>p.V(v));
 
 		///<summary>The URL-encoded request definition</summary>
-		public CatPendingTasksDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public CatPendingTasksDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CatPendingTasksDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public CatPendingTasksDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for CatPlugins
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-plugins.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for CatPlugins <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-plugins.html</pre></summary>
 	public partial class CatPluginsDescriptor 
 	{
-		
-	
-
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public CatPluginsDescriptor Local(bool local = true)
-		{
-			this.Request.RequestParameters.Local(local);
-			return this;
-		}
-		
+		public CatPluginsDescriptor Local(bool local = true) => _requestParams(p=>p.Local(local));
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatPluginsDescriptor MasterTimeout(string master_timeout)
-		{
-			this.Request.RequestParameters.MasterTimeout(master_timeout);
-			return this;
-		}
-		
+		public CatPluginsDescriptor MasterTimeout(string master_timeout) => _requestParams(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatPluginsDescriptor H(params string[] h)
-		{
-			this.Request.RequestParameters.H(h);
-			return this;
-		}
-		
+		public CatPluginsDescriptor H(params string[] h) => _requestParams(p=>p.H(h));
 
 		///<summary>Return help information</summary>
-		public CatPluginsDescriptor Help(bool help = true)
-		{
-			this.Request.RequestParameters.Help(help);
-			return this;
-		}
-		
+		public CatPluginsDescriptor Help(bool help = true) => _requestParams(p=>p.Help(help));
 
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatPluginsDescriptor V(bool v = true)
-		{
-			this.Request.RequestParameters.V(v);
-			return this;
-		}
-		
+		public CatPluginsDescriptor V(bool v = true) => _requestParams(p=>p.V(v));
 
 		///<summary>The URL-encoded request definition</summary>
-		public CatPluginsDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public CatPluginsDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CatPluginsDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public CatPluginsDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for CatRecovery
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-recovery.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for CatRecovery <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-recovery.html</pre></summary>
 	public partial class CatRecoveryDescriptor 
 	{
-		
-	
-
 		///<summary>The unit in which to display byte values</summary>
-		public CatRecoveryDescriptor Bytes(Bytes bytes)
-		{
-			this.Request.RequestParameters.Bytes(bytes);
-			return this;
-		}
-		
+		public CatRecoveryDescriptor Bytes(Bytes bytes) => _requestParams(p=>p.Bytes(bytes));
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatRecoveryDescriptor MasterTimeout(string master_timeout)
-		{
-			this.Request.RequestParameters.MasterTimeout(master_timeout);
-			return this;
-		}
-		
+		public CatRecoveryDescriptor MasterTimeout(string master_timeout) => _requestParams(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatRecoveryDescriptor H(params string[] h)
-		{
-			this.Request.RequestParameters.H(h);
-			return this;
-		}
-		
+		public CatRecoveryDescriptor H(params string[] h) => _requestParams(p=>p.H(h));
 
 		///<summary>Return help information</summary>
-		public CatRecoveryDescriptor Help(bool help = true)
-		{
-			this.Request.RequestParameters.Help(help);
-			return this;
-		}
-		
+		public CatRecoveryDescriptor Help(bool help = true) => _requestParams(p=>p.Help(help));
 
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatRecoveryDescriptor V(bool v = true)
-		{
-			this.Request.RequestParameters.V(v);
-			return this;
-		}
-		
+		public CatRecoveryDescriptor V(bool v = true) => _requestParams(p=>p.V(v));
 
 		///<summary>The URL-encoded request definition</summary>
-		public CatRecoveryDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public CatRecoveryDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CatRecoveryDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public CatRecoveryDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for CatSegments
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-segments.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for CatSegments <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-segments.html</pre></summary>
 	public partial class CatSegmentsDescriptor 
 	{
-		
-	
-
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatSegmentsDescriptor H(params string[] h)
-		{
-			this.Request.RequestParameters.H(h);
-			return this;
-		}
-		
+		public CatSegmentsDescriptor H(params string[] h) => _requestParams(p=>p.H(h));
 
 		///<summary>Return help information</summary>
-		public CatSegmentsDescriptor Help(bool help = true)
-		{
-			this.Request.RequestParameters.Help(help);
-			return this;
-		}
-		
+		public CatSegmentsDescriptor Help(bool help = true) => _requestParams(p=>p.Help(help));
 
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatSegmentsDescriptor V(bool v = true)
-		{
-			this.Request.RequestParameters.V(v);
-			return this;
-		}
-		
+		public CatSegmentsDescriptor V(bool v = true) => _requestParams(p=>p.V(v));
 
 		///<summary>The URL-encoded request definition</summary>
-		public CatSegmentsDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public CatSegmentsDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CatSegmentsDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public CatSegmentsDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for CatShards
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-shards.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for CatShards <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-shards.html</pre></summary>
 	public partial class CatShardsDescriptor 
 	{
-		
-	
-
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public CatShardsDescriptor Local(bool local = true)
-		{
-			this.Request.RequestParameters.Local(local);
-			return this;
-		}
-		
+		public CatShardsDescriptor Local(bool local = true) => _requestParams(p=>p.Local(local));
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatShardsDescriptor MasterTimeout(string master_timeout)
-		{
-			this.Request.RequestParameters.MasterTimeout(master_timeout);
-			return this;
-		}
-		
+		public CatShardsDescriptor MasterTimeout(string master_timeout) => _requestParams(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatShardsDescriptor H(params string[] h)
-		{
-			this.Request.RequestParameters.H(h);
-			return this;
-		}
-		
+		public CatShardsDescriptor H(params string[] h) => _requestParams(p=>p.H(h));
 
 		///<summary>Return help information</summary>
-		public CatShardsDescriptor Help(bool help = true)
-		{
-			this.Request.RequestParameters.Help(help);
-			return this;
-		}
-		
+		public CatShardsDescriptor Help(bool help = true) => _requestParams(p=>p.Help(help));
 
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatShardsDescriptor V(bool v = true)
-		{
-			this.Request.RequestParameters.V(v);
-			return this;
-		}
-		
+		public CatShardsDescriptor V(bool v = true) => _requestParams(p=>p.V(v));
 
 		///<summary>The URL-encoded request definition</summary>
-		public CatShardsDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public CatShardsDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CatShardsDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public CatShardsDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for CatThreadPool
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-thread-pool.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for CatThreadPool <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-thread-pool.html</pre></summary>
 	public partial class CatThreadPoolDescriptor 
 	{
-		
-	
-
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public CatThreadPoolDescriptor Local(bool local = true)
-		{
-			this.Request.RequestParameters.Local(local);
-			return this;
-		}
-		
+		public CatThreadPoolDescriptor Local(bool local = true) => _requestParams(p=>p.Local(local));
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CatThreadPoolDescriptor MasterTimeout(string master_timeout)
-		{
-			this.Request.RequestParameters.MasterTimeout(master_timeout);
-			return this;
-		}
-		
+		public CatThreadPoolDescriptor MasterTimeout(string master_timeout) => _requestParams(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Comma-separated list of column names to display</summary>
-		public CatThreadPoolDescriptor H(params string[] h)
-		{
-			this.Request.RequestParameters.H(h);
-			return this;
-		}
-		
+		public CatThreadPoolDescriptor H(params string[] h) => _requestParams(p=>p.H(h));
 
 		///<summary>Return help information</summary>
-		public CatThreadPoolDescriptor Help(bool help = true)
-		{
-			this.Request.RequestParameters.Help(help);
-			return this;
-		}
-		
+		public CatThreadPoolDescriptor Help(bool help = true) => _requestParams(p=>p.Help(help));
 
 		///<summary>Verbose mode. Display column headers</summary>
-		public CatThreadPoolDescriptor V(bool v = true)
-		{
-			this.Request.RequestParameters.V(v);
-			return this;
-		}
-		
+		public CatThreadPoolDescriptor V(bool v = true) => _requestParams(p=>p.V(v));
 
 		///<summary>Enables displaying the complete node ids</summary>
-		public CatThreadPoolDescriptor FullId(bool full_id = true)
-		{
-			this.Request.RequestParameters.FullId(full_id);
-			return this;
-		}
-		
+		public CatThreadPoolDescriptor FullId(bool full_id = true) => _requestParams(p=>p.FullId(full_id));
 
 		///<summary>The URL-encoded request definition</summary>
-		public CatThreadPoolDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public CatThreadPoolDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CatThreadPoolDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public CatThreadPoolDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for ClearScroll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-request-scroll.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for ClearScroll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-request-scroll.html</pre></summary>
 	public partial class ClearScrollDescriptor 
 	{
-		
-	
-
 		///<summary>The URL-encoded request definition</summary>
-		public ClearScrollDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public ClearScrollDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public ClearScrollDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public ClearScrollDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for ClusterGetSettings
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-update-settings.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for ClusterGetSettings <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-update-settings.html</pre></summary>
 	public partial class ClusterGetSettingsDescriptor 
 	{
-		
-	
-
 		///<summary>Return settings in flat format (default: false)</summary>
-		public ClusterGetSettingsDescriptor FlatSettings(bool flat_settings = true)
-		{
-			this.Request.RequestParameters.FlatSettings(flat_settings);
-			return this;
-		}
-		
+		public ClusterGetSettingsDescriptor FlatSettings(bool flat_settings = true) => _requestParams(p=>p.FlatSettings(flat_settings));
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public ClusterGetSettingsDescriptor MasterTimeout(string master_timeout)
-		{
-			this.Request.RequestParameters.MasterTimeout(master_timeout);
-			return this;
-		}
-		
+		public ClusterGetSettingsDescriptor MasterTimeout(string master_timeout) => _requestParams(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Explicit operation timeout</summary>
-		public ClusterGetSettingsDescriptor Timeout(string timeout)
-		{
-			this.Request.RequestParameters.Timeout(timeout);
-			return this;
-		}
-		
+		public ClusterGetSettingsDescriptor Timeout(string timeout) => _requestParams(p=>p.Timeout(timeout));
 
 		///<summary>The URL-encoded request definition</summary>
-		public ClusterGetSettingsDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public ClusterGetSettingsDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public ClusterGetSettingsDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public ClusterGetSettingsDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for ClusterHealth
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-health.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for ClusterHealth <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-health.html</pre></summary>
 	public partial class ClusterHealthDescriptor 
 	{
-		
-	
-
 		///<summary>Specify the level of detail for returned information</summary>
-		public ClusterHealthDescriptor Level(Level level)
-		{
-			this.Request.RequestParameters.Level(level);
-			return this;
-		}
-		
+		public ClusterHealthDescriptor Level(Level level) => _requestParams(p=>p.Level(level));
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public ClusterHealthDescriptor Local(bool local = true)
-		{
-			this.Request.RequestParameters.Local(local);
-			return this;
-		}
-		
+		public ClusterHealthDescriptor Local(bool local = true) => _requestParams(p=>p.Local(local));
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public ClusterHealthDescriptor MasterTimeout(string master_timeout)
-		{
-			this.Request.RequestParameters.MasterTimeout(master_timeout);
-			return this;
-		}
-		
+		public ClusterHealthDescriptor MasterTimeout(string master_timeout) => _requestParams(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Explicit operation timeout</summary>
-		public ClusterHealthDescriptor Timeout(string timeout)
-		{
-			this.Request.RequestParameters.Timeout(timeout);
-			return this;
-		}
-		
+		public ClusterHealthDescriptor Timeout(string timeout) => _requestParams(p=>p.Timeout(timeout));
 
 		///<summary>Wait until the specified number of shards is active</summary>
-		public ClusterHealthDescriptor WaitForActiveShards(long wait_for_active_shards)
-		{
-			this.Request.RequestParameters.WaitForActiveShards(wait_for_active_shards);
-			return this;
-		}
-		
+		public ClusterHealthDescriptor WaitForActiveShards(long wait_for_active_shards) => _requestParams(p=>p.WaitForActiveShards(wait_for_active_shards));
 
 		///<summary>Wait until the specified number of nodes is available</summary>
-		public ClusterHealthDescriptor WaitForNodes(string wait_for_nodes)
-		{
-			this.Request.RequestParameters.WaitForNodes(wait_for_nodes);
-			return this;
-		}
-		
+		public ClusterHealthDescriptor WaitForNodes(string wait_for_nodes) => _requestParams(p=>p.WaitForNodes(wait_for_nodes));
 
 		///<summary>Wait until the specified number of relocating shards is finished</summary>
-		public ClusterHealthDescriptor WaitForRelocatingShards(long wait_for_relocating_shards)
-		{
-			this.Request.RequestParameters.WaitForRelocatingShards(wait_for_relocating_shards);
-			return this;
-		}
-		
+		public ClusterHealthDescriptor WaitForRelocatingShards(long wait_for_relocating_shards) => _requestParams(p=>p.WaitForRelocatingShards(wait_for_relocating_shards));
 
 		///<summary>Wait until cluster is in a specific state</summary>
-		public ClusterHealthDescriptor WaitForStatus(WaitForStatus wait_for_status)
-		{
-			this.Request.RequestParameters.WaitForStatus(wait_for_status);
-			return this;
-		}
-		
+		public ClusterHealthDescriptor WaitForStatus(WaitForStatus wait_for_status) => _requestParams(p=>p.WaitForStatus(wait_for_status));
 
 		///<summary>The URL-encoded request definition</summary>
-		public ClusterHealthDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public ClusterHealthDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public ClusterHealthDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public ClusterHealthDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for ClusterPendingTasks
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-pending.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for ClusterPendingTasks <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-pending.html</pre></summary>
 	public partial class ClusterPendingTasksDescriptor 
 	{
-		
-	
-
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public ClusterPendingTasksDescriptor Local(bool local = true)
-		{
-			this.Request.RequestParameters.Local(local);
-			return this;
-		}
-		
+		public ClusterPendingTasksDescriptor Local(bool local = true) => _requestParams(p=>p.Local(local));
 
 		///<summary>Specify timeout for connection to master</summary>
-		public ClusterPendingTasksDescriptor MasterTimeout(string master_timeout)
-		{
-			this.Request.RequestParameters.MasterTimeout(master_timeout);
-			return this;
-		}
-		
+		public ClusterPendingTasksDescriptor MasterTimeout(string master_timeout) => _requestParams(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>The URL-encoded request definition</summary>
-		public ClusterPendingTasksDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public ClusterPendingTasksDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public ClusterPendingTasksDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public ClusterPendingTasksDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for ClusterPutSettings
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-update-settings.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for ClusterPutSettings <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-update-settings.html</pre></summary>
 	public partial class ClusterSettingsDescriptor 
 	{
-		
-	
-
 		///<summary>Return settings in flat format (default: false)</summary>
-		public ClusterSettingsDescriptor FlatSettings(bool flat_settings = true)
-		{
-			this.Request.RequestParameters.FlatSettings(flat_settings);
-			return this;
-		}
-		
+		public ClusterSettingsDescriptor FlatSettings(bool flat_settings = true) => _requestParams(p=>p.FlatSettings(flat_settings));
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public ClusterSettingsDescriptor MasterTimeout(string master_timeout)
-		{
-			this.Request.RequestParameters.MasterTimeout(master_timeout);
-			return this;
-		}
-		
+		public ClusterSettingsDescriptor MasterTimeout(string master_timeout) => _requestParams(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Explicit operation timeout</summary>
-		public ClusterSettingsDescriptor Timeout(string timeout)
-		{
-			this.Request.RequestParameters.Timeout(timeout);
-			return this;
-		}
-		
+		public ClusterSettingsDescriptor Timeout(string timeout) => _requestParams(p=>p.Timeout(timeout));
 
 		///<summary>The URL-encoded request definition</summary>
-		public ClusterSettingsDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public ClusterSettingsDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public ClusterSettingsDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public ClusterSettingsDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for ClusterReroute
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-reroute.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for ClusterReroute <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-reroute.html</pre></summary>
 	public partial class ClusterRerouteDescriptor 
 	{
-		
-	
-
 		///<summary>Simulate the operation only and return the resulting state</summary>
-		public ClusterRerouteDescriptor DryRun(bool dry_run = true)
-		{
-			this.Request.RequestParameters.DryRun(dry_run);
-			return this;
-		}
-		
+		public ClusterRerouteDescriptor DryRun(bool dry_run = true) => _requestParams(p=>p.DryRun(dry_run));
 
 		///<summary>Return an explanation of why the commands can or cannot be executed</summary>
-		public ClusterRerouteDescriptor Explain(bool explain = true)
-		{
-			this.Request.RequestParameters.Explain(explain);
-			return this;
-		}
-		
+		public ClusterRerouteDescriptor Explain(bool explain = true) => _requestParams(p=>p.Explain(explain));
 
 		///<summary>Limit the information returned to the specified metrics. Defaults to all but metadata</summary>
-		public ClusterRerouteDescriptor Metric(params string[] metric)
-		{
-			this.Request.RequestParameters.Metric(metric);
-			return this;
-		}
-		
+		public ClusterRerouteDescriptor Metric(params string[] metric) => _requestParams(p=>p.Metric(metric));
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public ClusterRerouteDescriptor MasterTimeout(string master_timeout)
-		{
-			this.Request.RequestParameters.MasterTimeout(master_timeout);
-			return this;
-		}
-		
+		public ClusterRerouteDescriptor MasterTimeout(string master_timeout) => _requestParams(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Explicit operation timeout</summary>
-		public ClusterRerouteDescriptor Timeout(string timeout)
-		{
-			this.Request.RequestParameters.Timeout(timeout);
-			return this;
-		}
-		
+		public ClusterRerouteDescriptor Timeout(string timeout) => _requestParams(p=>p.Timeout(timeout));
 
 		///<summary>The URL-encoded request definition</summary>
-		public ClusterRerouteDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public ClusterRerouteDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public ClusterRerouteDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public ClusterRerouteDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for ClusterState
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-state.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for ClusterState <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-state.html</pre></summary>
 	public partial class ClusterStateDescriptor 
 	{
-		
-	
-
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public ClusterStateDescriptor Local(bool local = true)
-		{
-			this.Request.RequestParameters.Local(local);
-			return this;
-		}
-		
+		public ClusterStateDescriptor Local(bool local = true) => _requestParams(p=>p.Local(local));
 
 		///<summary>Specify timeout for connection to master</summary>
-		public ClusterStateDescriptor MasterTimeout(string master_timeout)
-		{
-			this.Request.RequestParameters.MasterTimeout(master_timeout);
-			return this;
-		}
-		
+		public ClusterStateDescriptor MasterTimeout(string master_timeout) => _requestParams(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Return settings in flat format (default: false)</summary>
-		public ClusterStateDescriptor FlatSettings(bool flat_settings = true)
-		{
-			this.Request.RequestParameters.FlatSettings(flat_settings);
-			return this;
-		}
-		
+		public ClusterStateDescriptor FlatSettings(bool flat_settings = true) => _requestParams(p=>p.FlatSettings(flat_settings));
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public ClusterStateDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
-		{
-			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
-			return this;
-		}
-		
+		public ClusterStateDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => _requestParams(p=>p.IgnoreUnavailable(ignore_unavailable));
 
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public ClusterStateDescriptor AllowNoIndices(bool allow_no_indices = true)
-		{
-			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
-			return this;
-		}
-		
+		public ClusterStateDescriptor AllowNoIndices(bool allow_no_indices = true) => _requestParams(p=>p.AllowNoIndices(allow_no_indices));
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ClusterStateDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
-		{
-			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
-			return this;
-		}
-		
+		public ClusterStateDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => _requestParams(p=>p.ExpandWildcards(expand_wildcards));
 
 		///<summary>The URL-encoded request definition</summary>
-		public ClusterStateDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public ClusterStateDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public ClusterStateDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public ClusterStateDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for ClusterStats
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-stats.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for ClusterStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-stats.html</pre></summary>
 	public partial class ClusterStatsDescriptor 
 	{
-		
-	
-
 		///<summary>Return settings in flat format (default: false)</summary>
-		public ClusterStatsDescriptor FlatSettings(bool flat_settings = true)
-		{
-			this.Request.RequestParameters.FlatSettings(flat_settings);
-			return this;
-		}
-		
+		public ClusterStatsDescriptor FlatSettings(bool flat_settings = true) => _requestParams(p=>p.FlatSettings(flat_settings));
 
 		///<summary>Whether to return time and byte values in human-readable format.</summary>
-		public ClusterStatsDescriptor Human(bool human = true)
-		{
-			this.Request.RequestParameters.Human(human);
-			return this;
-		}
-		
+		public ClusterStatsDescriptor Human(bool human = true) => _requestParams(p=>p.Human(human));
 
 		///<summary>The URL-encoded request definition</summary>
-		public ClusterStatsDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public ClusterStatsDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public ClusterStatsDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public ClusterStatsDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for Count
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-count.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for Count <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-count.html</pre></summary>
 	public partial class CountDescriptor<T> 
 	{
-		
-	
-
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public CountDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true)
-		{
-			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
-			return this;
-		}
-		
+		public CountDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true) => _requestParams(p=>p.IgnoreUnavailable(ignore_unavailable));
 
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public CountDescriptor<T> AllowNoIndices(bool allow_no_indices = true)
-		{
-			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
-			return this;
-		}
-		
+		public CountDescriptor<T> AllowNoIndices(bool allow_no_indices = true) => _requestParams(p=>p.AllowNoIndices(allow_no_indices));
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public CountDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards)
-		{
-			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
-			return this;
-		}
-		
+		public CountDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards) => _requestParams(p=>p.ExpandWildcards(expand_wildcards));
 
 		///<summary>Include only documents with a specific `_score` value in the result</summary>
-		public CountDescriptor<T> MinScore(double min_score)
-		{
-			this.Request.RequestParameters.MinScore(min_score);
-			return this;
-		}
-		
+		public CountDescriptor<T> MinScore(double min_score) => _requestParams(p=>p.MinScore(min_score));
 
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public CountDescriptor<T> Preference(string preference)
-		{
-			this.Request.RequestParameters.Preference(preference);
-			return this;
-		}
-		
+		public CountDescriptor<T> Preference(string preference) => _requestParams(p=>p.Preference(preference));
 
 		///<summary>Specific routing value</summary>
-		public CountDescriptor<T> Routing(string routing)
-		{
-			this.Request.RequestParameters.Routing(routing);
-			return this;
-		}
-		
+		public CountDescriptor<T> Routing(string routing) => _requestParams(p=>p.Routing(routing));
 
 		///<summary>Query in the Lucene query string syntax</summary>
-		public CountDescriptor<T> Q(string q)
-		{
-			this.Request.RequestParameters.Q(q);
-			return this;
-		}
-		
+		public CountDescriptor<T> Q(string q) => _requestParams(p=>p.Q(q));
 
 		///<summary>The analyzer to use for the query string</summary>
-		public CountDescriptor<T> Analyzer(string analyzer)
-		{
-			this.Request.RequestParameters.Analyzer(analyzer);
-			return this;
-		}
-		
+		public CountDescriptor<T> Analyzer(string analyzer) => _requestParams(p=>p.Analyzer(analyzer));
 
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
-		public CountDescriptor<T> AnalyzeWildcard(bool analyze_wildcard = true)
-		{
-			this.Request.RequestParameters.AnalyzeWildcard(analyze_wildcard);
-			return this;
-		}
-		
+		public CountDescriptor<T> AnalyzeWildcard(bool analyze_wildcard = true) => _requestParams(p=>p.AnalyzeWildcard(analyze_wildcard));
 
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public CountDescriptor<T> DefaultOperator(DefaultOperator default_operator)
-		{
-			this.Request.RequestParameters.DefaultOperator(default_operator);
-			return this;
-		}
-		
+		public CountDescriptor<T> DefaultOperator(DefaultOperator default_operator) => _requestParams(p=>p.DefaultOperator(default_operator));
 
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
-		public CountDescriptor<T> Df(string df)
-		{
-			this.Request.RequestParameters.Df(df);
-			return this;
-		}
-		
+		public CountDescriptor<T> Df(string df) => _requestParams(p=>p.Df(df));
 
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
-		public CountDescriptor<T> Lenient(bool lenient = true)
-		{
-			this.Request.RequestParameters.Lenient(lenient);
-			return this;
-		}
-		
+		public CountDescriptor<T> Lenient(bool lenient = true) => _requestParams(p=>p.Lenient(lenient));
 
 		///<summary>Specify whether query terms should be lowercased</summary>
-		public CountDescriptor<T> LowercaseExpandedTerms(bool lowercase_expanded_terms = true)
-		{
-			this.Request.RequestParameters.LowercaseExpandedTerms(lowercase_expanded_terms);
-			return this;
-		}
-		
+		public CountDescriptor<T> LowercaseExpandedTerms(bool lowercase_expanded_terms = true) => _requestParams(p=>p.LowercaseExpandedTerms(lowercase_expanded_terms));
 
 		///<summary>The URL-encoded request definition</summary>
-		public CountDescriptor<T> Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public CountDescriptor<T> Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CountDescriptor<T> FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public CountDescriptor<T> FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for CountPercolateGet
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for CountPercolateGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html</pre></summary>
 	public partial class PercolateCountDescriptor<T> 
 	{
-		
-	
-
 		///<summary>A comma-separated list of specific routing values</summary>
-		public PercolateCountDescriptor<T> Routing(params string[] routing)
-		{
-			this.Request.RequestParameters.Routing(routing);
-			return this;
-		}
-		
+		public PercolateCountDescriptor<T> Routing(params string[] routing) => _requestParams(p=>p.Routing(routing));
 
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public PercolateCountDescriptor<T> Preference(string preference)
-		{
-			this.Request.RequestParameters.Preference(preference);
-			return this;
-		}
-		
+		public PercolateCountDescriptor<T> Preference(string preference) => _requestParams(p=>p.Preference(preference));
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public PercolateCountDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true)
-		{
-			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
-			return this;
-		}
-		
+		public PercolateCountDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true) => _requestParams(p=>p.IgnoreUnavailable(ignore_unavailable));
 
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public PercolateCountDescriptor<T> AllowNoIndices(bool allow_no_indices = true)
-		{
-			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
-			return this;
-		}
-		
+		public PercolateCountDescriptor<T> AllowNoIndices(bool allow_no_indices = true) => _requestParams(p=>p.AllowNoIndices(allow_no_indices));
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public PercolateCountDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards)
-		{
-			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
-			return this;
-		}
-		
+		public PercolateCountDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards) => _requestParams(p=>p.ExpandWildcards(expand_wildcards));
 
 		///<summary>The index to count percolate the document into. Defaults to index.</summary>
-		public PercolateCountDescriptor<T> PercolateIndex(string percolate_index)
-		{
-			this.Request.RequestParameters.PercolateIndex(percolate_index);
-			return this;
-		}
-		
+		public PercolateCountDescriptor<T> PercolateIndex(string percolate_index) => _requestParams(p=>p.PercolateIndex(percolate_index));
 
 		///<summary>The type to count percolate document into. Defaults to type.</summary>
-		public PercolateCountDescriptor<T> PercolateType(string percolate_type)
-		{
-			this.Request.RequestParameters.PercolateType(percolate_type);
-			return this;
-		}
-		
+		public PercolateCountDescriptor<T> PercolateType(string percolate_type) => _requestParams(p=>p.PercolateType(percolate_type));
 
 		///<summary>Explicit version number for concurrency control</summary>
-		public PercolateCountDescriptor<T> Version(long version)
-		{
-			this.Request.RequestParameters.Version(version);
-			return this;
-		}
-		
+		public PercolateCountDescriptor<T> Version(long version) => _requestParams(p=>p.Version(version));
 
 		///<summary>Specific version type</summary>
-		public PercolateCountDescriptor<T> VersionType(VersionType version_type)
-		{
-			this.Request.RequestParameters.VersionType(version_type);
-			return this;
-		}
-		
+		public PercolateCountDescriptor<T> VersionType(VersionType version_type) => _requestParams(p=>p.VersionType(version_type));
 
 		///<summary>The URL-encoded request definition</summary>
-		public PercolateCountDescriptor<T> Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public PercolateCountDescriptor<T> Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public PercolateCountDescriptor<T> FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public PercolateCountDescriptor<T> FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for Delete
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-delete.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for Delete <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-delete.html</pre></summary>
 	public partial class DeleteDescriptor<T> 
 	{
-		
-	
-
 		///<summary>Specific write consistency setting for the operation</summary>
-		public DeleteDescriptor<T> Consistency(Consistency consistency)
-		{
-			this.Request.RequestParameters.Consistency(consistency);
-			return this;
-		}
-		
+		public DeleteDescriptor<T> Consistency(Consistency consistency) => _requestParams(p=>p.Consistency(consistency));
 
 		///<summary>ID of parent document</summary>
-		public DeleteDescriptor<T> Parent(string parent)
-		{
-			this.Request.RequestParameters.Parent(parent);
-			return this;
-		}
-		
+		public DeleteDescriptor<T> Parent(string parent) => _requestParams(p=>p.Parent(parent));
 
 		///<summary>Refresh the index after performing the operation</summary>
-		public DeleteDescriptor<T> Refresh(bool refresh = true)
-		{
-			this.Request.RequestParameters.Refresh(refresh);
-			return this;
-		}
-		
+		public DeleteDescriptor<T> Refresh(bool refresh = true) => _requestParams(p=>p.Refresh(refresh));
 
 		///<summary>Specific replication type</summary>
-		public DeleteDescriptor<T> Replication(Replication replication)
-		{
-			this.Request.RequestParameters.Replication(replication);
-			return this;
-		}
-		
+		public DeleteDescriptor<T> Replication(Replication replication) => _requestParams(p=>p.Replication(replication));
 
 		///<summary>Specific routing value</summary>
-		public DeleteDescriptor<T> Routing(string routing)
-		{
-			this.Request.RequestParameters.Routing(routing);
-			return this;
-		}
-		
+		public DeleteDescriptor<T> Routing(string routing) => _requestParams(p=>p.Routing(routing));
 
 		///<summary>Explicit operation timeout</summary>
-		public DeleteDescriptor<T> Timeout(string timeout)
-		{
-			this.Request.RequestParameters.Timeout(timeout);
-			return this;
-		}
-		
+		public DeleteDescriptor<T> Timeout(string timeout) => _requestParams(p=>p.Timeout(timeout));
 
 		///<summary>Explicit version number for concurrency control</summary>
-		public DeleteDescriptor<T> Version(long version)
-		{
-			this.Request.RequestParameters.Version(version);
-			return this;
-		}
-		
+		public DeleteDescriptor<T> Version(long version) => _requestParams(p=>p.Version(version));
 
 		///<summary>Specific version type</summary>
-		public DeleteDescriptor<T> VersionType(VersionType version_type)
-		{
-			this.Request.RequestParameters.VersionType(version_type);
-			return this;
-		}
-		
+		public DeleteDescriptor<T> VersionType(VersionType version_type) => _requestParams(p=>p.VersionType(version_type));
 
 		///<summary>The URL-encoded request definition</summary>
-		public DeleteDescriptor<T> Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public DeleteDescriptor<T> Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public DeleteDescriptor<T> FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public DeleteDescriptor<T> FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for DeleteByQuery
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-delete-by-query.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for DeleteByQuery <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-delete-by-query.html</pre></summary>
 	public partial class DeleteByQueryDescriptor<T> 
 	{
-		
-	
-
 		///<summary>The analyzer to use for the query string</summary>
-		public DeleteByQueryDescriptor<T> Analyzer(string analyzer)
-		{
-			this.Request.RequestParameters.Analyzer(analyzer);
-			return this;
-		}
-		
+		public DeleteByQueryDescriptor<T> Analyzer(string analyzer) => _requestParams(p=>p.Analyzer(analyzer));
 
 		///<summary>Specific write consistency setting for the operation</summary>
-		public DeleteByQueryDescriptor<T> Consistency(Consistency consistency)
-		{
-			this.Request.RequestParameters.Consistency(consistency);
-			return this;
-		}
-		
+		public DeleteByQueryDescriptor<T> Consistency(Consistency consistency) => _requestParams(p=>p.Consistency(consistency));
 
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public DeleteByQueryDescriptor<T> DefaultOperator(DefaultOperator default_operator)
-		{
-			this.Request.RequestParameters.DefaultOperator(default_operator);
-			return this;
-		}
-		
+		public DeleteByQueryDescriptor<T> DefaultOperator(DefaultOperator default_operator) => _requestParams(p=>p.DefaultOperator(default_operator));
 
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
-		public DeleteByQueryDescriptor<T> Df(string df)
-		{
-			this.Request.RequestParameters.Df(df);
-			return this;
-		}
-		
+		public DeleteByQueryDescriptor<T> Df(string df) => _requestParams(p=>p.Df(df));
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public DeleteByQueryDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true)
-		{
-			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
-			return this;
-		}
-		
+		public DeleteByQueryDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true) => _requestParams(p=>p.IgnoreUnavailable(ignore_unavailable));
 
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public DeleteByQueryDescriptor<T> AllowNoIndices(bool allow_no_indices = true)
-		{
-			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
-			return this;
-		}
-		
+		public DeleteByQueryDescriptor<T> AllowNoIndices(bool allow_no_indices = true) => _requestParams(p=>p.AllowNoIndices(allow_no_indices));
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public DeleteByQueryDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards)
-		{
-			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
-			return this;
-		}
-		
+		public DeleteByQueryDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards) => _requestParams(p=>p.ExpandWildcards(expand_wildcards));
 
 		///<summary>Specific replication type</summary>
-		public DeleteByQueryDescriptor<T> Replication(Replication replication)
-		{
-			this.Request.RequestParameters.Replication(replication);
-			return this;
-		}
-		
+		public DeleteByQueryDescriptor<T> Replication(Replication replication) => _requestParams(p=>p.Replication(replication));
 
 		///<summary>Query in the Lucene query string syntax</summary>
-		public DeleteByQueryDescriptor<T> Q(string q)
-		{
-			this.Request.RequestParameters.Q(q);
-			return this;
-		}
-		
+		public DeleteByQueryDescriptor<T> Q(string q) => _requestParams(p=>p.Q(q));
 
 		///<summary>Specific routing value</summary>
-		public DeleteByQueryDescriptor<T> Routing(string routing)
-		{
-			this.Request.RequestParameters.Routing(routing);
-			return this;
-		}
-		
+		public DeleteByQueryDescriptor<T> Routing(string routing) => _requestParams(p=>p.Routing(routing));
 
 		///<summary>Explicit operation timeout</summary>
-		public DeleteByQueryDescriptor<T> Timeout(string timeout)
-		{
-			this.Request.RequestParameters.Timeout(timeout);
-			return this;
-		}
-		
+		public DeleteByQueryDescriptor<T> Timeout(string timeout) => _requestParams(p=>p.Timeout(timeout));
 
 		///<summary>The URL-encoded request definition</summary>
-		public DeleteByQueryDescriptor<T> Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public DeleteByQueryDescriptor<T> Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public DeleteByQueryDescriptor<T> FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public DeleteByQueryDescriptor<T> FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for DeleteScript
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for DeleteScript <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</pre></summary>
 	public partial class DeleteScriptDescriptor 
 	{
-		
-	
-
 		///<summary>Explicit version number for concurrency control</summary>
-		public DeleteScriptDescriptor Version(long version)
-		{
-			this.Request.RequestParameters.Version(version);
-			return this;
-		}
-		
+		public DeleteScriptDescriptor Version(long version) => _requestParams(p=>p.Version(version));
 
 		///<summary>Specific version type</summary>
-		public DeleteScriptDescriptor VersionType(VersionType version_type)
-		{
-			this.Request.RequestParameters.VersionType(version_type);
-			return this;
-		}
-		
+		public DeleteScriptDescriptor VersionType(VersionType version_type) => _requestParams(p=>p.VersionType(version_type));
 
 		///<summary>The URL-encoded request definition</summary>
-		public DeleteScriptDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public DeleteScriptDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public DeleteScriptDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public DeleteScriptDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for DeleteTemplate
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/search-template.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for DeleteTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-template.html</pre></summary>
 	public partial class DeleteTemplateDescriptor 
 	{
-		
-	
-
 		///<summary>Explicit version number for concurrency control</summary>
-		public DeleteTemplateDescriptor Version(long version)
-		{
-			this.Request.RequestParameters.Version(version);
-			return this;
-		}
-		
+		public DeleteTemplateDescriptor Version(long version) => _requestParams(p=>p.Version(version));
 
 		///<summary>Specific version type</summary>
-		public DeleteTemplateDescriptor VersionType(VersionType version_type)
-		{
-			this.Request.RequestParameters.VersionType(version_type);
-			return this;
-		}
-		
+		public DeleteTemplateDescriptor VersionType(VersionType version_type) => _requestParams(p=>p.VersionType(version_type));
 
 		///<summary>The URL-encoded request definition</summary>
-		public DeleteTemplateDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public DeleteTemplateDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public DeleteTemplateDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public DeleteTemplateDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for Exists
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-get.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for Exists <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-get.html</pre></summary>
 	public partial class DocumentExistsDescriptor<T> 
 	{
-		
-	
-
 		///<summary>The ID of the parent document</summary>
-		public DocumentExistsDescriptor<T> Parent(string parent)
-		{
-			this.Request.RequestParameters.Parent(parent);
-			return this;
-		}
-		
+		public DocumentExistsDescriptor<T> Parent(string parent) => _requestParams(p=>p.Parent(parent));
 
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public DocumentExistsDescriptor<T> Preference(string preference)
-		{
-			this.Request.RequestParameters.Preference(preference);
-			return this;
-		}
-		
+		public DocumentExistsDescriptor<T> Preference(string preference) => _requestParams(p=>p.Preference(preference));
 
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
-		public DocumentExistsDescriptor<T> Realtime(bool realtime = true)
-		{
-			this.Request.RequestParameters.Realtime(realtime);
-			return this;
-		}
-		
+		public DocumentExistsDescriptor<T> Realtime(bool realtime = true) => _requestParams(p=>p.Realtime(realtime));
 
 		///<summary>Refresh the shard containing the document before performing the operation</summary>
-		public DocumentExistsDescriptor<T> Refresh(bool refresh = true)
-		{
-			this.Request.RequestParameters.Refresh(refresh);
-			return this;
-		}
-		
+		public DocumentExistsDescriptor<T> Refresh(bool refresh = true) => _requestParams(p=>p.Refresh(refresh));
 
 		///<summary>Specific routing value</summary>
-		public DocumentExistsDescriptor<T> Routing(string routing)
-		{
-			this.Request.RequestParameters.Routing(routing);
-			return this;
-		}
-		
+		public DocumentExistsDescriptor<T> Routing(string routing) => _requestParams(p=>p.Routing(routing));
 
 		///<summary>The URL-encoded request definition</summary>
-		public DocumentExistsDescriptor<T> Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public DocumentExistsDescriptor<T> Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public DocumentExistsDescriptor<T> FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public DocumentExistsDescriptor<T> FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for ExplainGet
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-explain.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for ExplainGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-explain.html</pre></summary>
 	public partial class ExplainDescriptor<T> 
 	{
-		
-	
-
 		///<summary>Specify whether wildcards and prefix queries in the query string query should be analyzed (default: false)</summary>
-		public ExplainDescriptor<T> AnalyzeWildcard(bool analyze_wildcard = true)
-		{
-			this.Request.RequestParameters.AnalyzeWildcard(analyze_wildcard);
-			return this;
-		}
-		
+		public ExplainDescriptor<T> AnalyzeWildcard(bool analyze_wildcard = true) => _requestParams(p=>p.AnalyzeWildcard(analyze_wildcard));
 
 		///<summary>The analyzer for the query string query</summary>
-		public ExplainDescriptor<T> Analyzer(string analyzer)
-		{
-			this.Request.RequestParameters.Analyzer(analyzer);
-			return this;
-		}
-		
+		public ExplainDescriptor<T> Analyzer(string analyzer) => _requestParams(p=>p.Analyzer(analyzer));
 
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public ExplainDescriptor<T> DefaultOperator(DefaultOperator default_operator)
-		{
-			this.Request.RequestParameters.DefaultOperator(default_operator);
-			return this;
-		}
-		
+		public ExplainDescriptor<T> DefaultOperator(DefaultOperator default_operator) => _requestParams(p=>p.DefaultOperator(default_operator));
 
 		///<summary>The default field for query string query (default: _all)</summary>
-		public ExplainDescriptor<T> Df(string df)
-		{
-			this.Request.RequestParameters.Df(df);
-			return this;
-		}
-		
+		public ExplainDescriptor<T> Df(string df) => _requestParams(p=>p.Df(df));
 
 		///<summary>A comma-separated list of fields to return in the response</summary>
-		public ExplainDescriptor<T> Fields(params string[] fields)
-		{
-			this.Request.RequestParameters.Fields(fields);
-			return this;
-		}
-		
+		public ExplainDescriptor<T> Fields(params string[] fields) => _requestParams(p=>p.Fields(fields));
 			
 		///<summary>A comma-separated list of fields to return in the response</summary>
-		public ExplainDescriptor<T> Fields(params Expression<Func<T, object>>[] typedPathLookups) 
-		{
-			if (!typedPathLookups.HasAny())
-				return this;
-
-			this.Request.RequestParameters._Fields(typedPathLookups);
-			return this;
-		}
-			
+		public ExplainDescriptor<T> Fields(params Expression<Func<T, object>>[] typedPathLookups)  =>
+			_requestParams(p=>p._Fields(typedPathLookups));
 
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
-		public ExplainDescriptor<T> Lenient(bool lenient = true)
-		{
-			this.Request.RequestParameters.Lenient(lenient);
-			return this;
-		}
-		
+		public ExplainDescriptor<T> Lenient(bool lenient = true) => _requestParams(p=>p.Lenient(lenient));
 
 		///<summary>Specify whether query terms should be lowercased</summary>
-		public ExplainDescriptor<T> LowercaseExpandedTerms(bool lowercase_expanded_terms = true)
-		{
-			this.Request.RequestParameters.LowercaseExpandedTerms(lowercase_expanded_terms);
-			return this;
-		}
-		
+		public ExplainDescriptor<T> LowercaseExpandedTerms(bool lowercase_expanded_terms = true) => _requestParams(p=>p.LowercaseExpandedTerms(lowercase_expanded_terms));
 
 		///<summary>The ID of the parent document</summary>
-		public ExplainDescriptor<T> Parent(string parent)
-		{
-			this.Request.RequestParameters.Parent(parent);
-			return this;
-		}
-		
+		public ExplainDescriptor<T> Parent(string parent) => _requestParams(p=>p.Parent(parent));
 
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public ExplainDescriptor<T> Preference(string preference)
-		{
-			this.Request.RequestParameters.Preference(preference);
-			return this;
-		}
-		
+		public ExplainDescriptor<T> Preference(string preference) => _requestParams(p=>p.Preference(preference));
 
 		///<summary>Query in the Lucene query string syntax</summary>
-		public ExplainDescriptor<T> Q(string q)
-		{
-			this.Request.RequestParameters.Q(q);
-			return this;
-		}
-		
+		public ExplainDescriptor<T> Q(string q) => _requestParams(p=>p.Q(q));
 
 		///<summary>Specific routing value</summary>
-		public ExplainDescriptor<T> Routing(string routing)
-		{
-			this.Request.RequestParameters.Routing(routing);
-			return this;
-		}
-		
+		public ExplainDescriptor<T> Routing(string routing) => _requestParams(p=>p.Routing(routing));
 
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public ExplainDescriptor<T> SourceEnabled(params string[] source_enabled)
-		{
-			this.Request.RequestParameters.SourceEnabled(source_enabled);
-			return this;
-		}
-		
+		public ExplainDescriptor<T> SourceEnabled(params string[] source_enabled) => _requestParams(p=>p.SourceEnabled(source_enabled));
 
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public ExplainDescriptor<T> SourceExclude(params string[] source_exclude)
-		{
-			this.Request.RequestParameters.SourceExclude(source_exclude);
-			return this;
-		}
-		
+		public ExplainDescriptor<T> SourceExclude(params string[] source_exclude) => _requestParams(p=>p.SourceExclude(source_exclude));
 			
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public ExplainDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] typedPathLookups) 
-		{
-			if (!typedPathLookups.HasAny())
-				return this;
-
-			this.Request.RequestParameters._SourceExclude(typedPathLookups);
-			return this;
-		}
-			
+		public ExplainDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] typedPathLookups)  =>
+			_requestParams(p=>p._SourceExclude(typedPathLookups));
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public ExplainDescriptor<T> SourceInclude(params string[] source_include)
-		{
-			this.Request.RequestParameters.SourceInclude(source_include);
-			return this;
-		}
-		
+		public ExplainDescriptor<T> SourceInclude(params string[] source_include) => _requestParams(p=>p.SourceInclude(source_include));
 			
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public ExplainDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] typedPathLookups) 
-		{
-			if (!typedPathLookups.HasAny())
-				return this;
-
-			this.Request.RequestParameters._SourceInclude(typedPathLookups);
-			return this;
-		}
-			
+		public ExplainDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] typedPathLookups)  =>
+			_requestParams(p=>p._SourceInclude(typedPathLookups));
 
 		///<summary>The URL-encoded request definition</summary>
-		public ExplainDescriptor<T> Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public ExplainDescriptor<T> Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public ExplainDescriptor<T> FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public ExplainDescriptor<T> FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for FieldStatsGet
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-stats.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for FieldStatsGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-stats.html</pre></summary>
 	public partial class FieldStatsDescriptor 
 	{
-		
-	
-
 		///<summary>A comma-separated list of fields for to get field statistics for (min value, max value, and more)</summary>
-		public FieldStatsDescriptor Fields(params string[] fields)
-		{
-			this.Request.RequestParameters.Fields(fields);
-			return this;
-		}
-		
+		public FieldStatsDescriptor Fields(params string[] fields) => _requestParams(p=>p.Fields(fields));
 			
 		///<summary>A comma-separated list of fields for to get field statistics for (min value, max value, and more)</summary>
-		public FieldStatsDescriptor Fields<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class
-		{
-			if (!typedPathLookups.HasAny())
-				return this;
-
-			this.Request.RequestParameters._Fields(typedPathLookups);
-			return this;
-		}
-			
+		public FieldStatsDescriptor Fields<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class =>
+			_requestParams(p=>p._Fields(typedPathLookups));
 
 		///<summary>Defines if field stats should be returned on a per index level or on a cluster wide level</summary>
-		public FieldStatsDescriptor Level(Level level)
-		{
-			this.Request.RequestParameters.Level(level);
-			return this;
-		}
-		
+		public FieldStatsDescriptor Level(Level level) => _requestParams(p=>p.Level(level));
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public FieldStatsDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
-		{
-			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
-			return this;
-		}
-		
+		public FieldStatsDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => _requestParams(p=>p.IgnoreUnavailable(ignore_unavailable));
 
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public FieldStatsDescriptor AllowNoIndices(bool allow_no_indices = true)
-		{
-			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
-			return this;
-		}
-		
+		public FieldStatsDescriptor AllowNoIndices(bool allow_no_indices = true) => _requestParams(p=>p.AllowNoIndices(allow_no_indices));
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public FieldStatsDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
-		{
-			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
-			return this;
-		}
-		
+		public FieldStatsDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => _requestParams(p=>p.ExpandWildcards(expand_wildcards));
 
 		///<summary>The URL-encoded request definition</summary>
-		public FieldStatsDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public FieldStatsDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public FieldStatsDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public FieldStatsDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for Get
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-get.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for Get <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-get.html</pre></summary>
 	public partial class GetDescriptor<T> 
 	{
-		
-	
-
 		///<summary>A comma-separated list of fields to return in the response</summary>
-		public GetDescriptor<T> Fields(params string[] fields)
-		{
-			this.Request.RequestParameters.Fields(fields);
-			return this;
-		}
-		
+		public GetDescriptor<T> Fields(params string[] fields) => _requestParams(p=>p.Fields(fields));
 			
 		///<summary>A comma-separated list of fields to return in the response</summary>
-		public GetDescriptor<T> Fields(params Expression<Func<T, object>>[] typedPathLookups) 
-		{
-			if (!typedPathLookups.HasAny())
-				return this;
-
-			this.Request.RequestParameters._Fields(typedPathLookups);
-			return this;
-		}
-			
+		public GetDescriptor<T> Fields(params Expression<Func<T, object>>[] typedPathLookups)  =>
+			_requestParams(p=>p._Fields(typedPathLookups));
 
 		///<summary>The ID of the parent document</summary>
-		public GetDescriptor<T> Parent(string parent)
-		{
-			this.Request.RequestParameters.Parent(parent);
-			return this;
-		}
-		
+		public GetDescriptor<T> Parent(string parent) => _requestParams(p=>p.Parent(parent));
 
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public GetDescriptor<T> Preference(string preference)
-		{
-			this.Request.RequestParameters.Preference(preference);
-			return this;
-		}
-		
+		public GetDescriptor<T> Preference(string preference) => _requestParams(p=>p.Preference(preference));
 
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
-		public GetDescriptor<T> Realtime(bool realtime = true)
-		{
-			this.Request.RequestParameters.Realtime(realtime);
-			return this;
-		}
-		
+		public GetDescriptor<T> Realtime(bool realtime = true) => _requestParams(p=>p.Realtime(realtime));
 
 		///<summary>Refresh the shard containing the document before performing the operation</summary>
-		public GetDescriptor<T> Refresh(bool refresh = true)
-		{
-			this.Request.RequestParameters.Refresh(refresh);
-			return this;
-		}
-		
+		public GetDescriptor<T> Refresh(bool refresh = true) => _requestParams(p=>p.Refresh(refresh));
 
 		///<summary>Specific routing value</summary>
-		public GetDescriptor<T> Routing(string routing)
-		{
-			this.Request.RequestParameters.Routing(routing);
-			return this;
-		}
-		
+		public GetDescriptor<T> Routing(string routing) => _requestParams(p=>p.Routing(routing));
 
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public GetDescriptor<T> SourceEnabled(params string[] source_enabled)
-		{
-			this.Request.RequestParameters.SourceEnabled(source_enabled);
-			return this;
-		}
-		
+		public GetDescriptor<T> SourceEnabled(params string[] source_enabled) => _requestParams(p=>p.SourceEnabled(source_enabled));
 
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public GetDescriptor<T> SourceExclude(params string[] source_exclude)
-		{
-			this.Request.RequestParameters.SourceExclude(source_exclude);
-			return this;
-		}
-		
+		public GetDescriptor<T> SourceExclude(params string[] source_exclude) => _requestParams(p=>p.SourceExclude(source_exclude));
 			
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public GetDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] typedPathLookups) 
-		{
-			if (!typedPathLookups.HasAny())
-				return this;
-
-			this.Request.RequestParameters._SourceExclude(typedPathLookups);
-			return this;
-		}
-			
+		public GetDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] typedPathLookups)  =>
+			_requestParams(p=>p._SourceExclude(typedPathLookups));
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public GetDescriptor<T> SourceInclude(params string[] source_include)
-		{
-			this.Request.RequestParameters.SourceInclude(source_include);
-			return this;
-		}
-		
+		public GetDescriptor<T> SourceInclude(params string[] source_include) => _requestParams(p=>p.SourceInclude(source_include));
 			
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public GetDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] typedPathLookups) 
-		{
-			if (!typedPathLookups.HasAny())
-				return this;
-
-			this.Request.RequestParameters._SourceInclude(typedPathLookups);
-			return this;
-		}
-			
+		public GetDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] typedPathLookups)  =>
+			_requestParams(p=>p._SourceInclude(typedPathLookups));
 
 		///<summary>Explicit version number for concurrency control</summary>
-		public GetDescriptor<T> Version(long version)
-		{
-			this.Request.RequestParameters.Version(version);
-			return this;
-		}
-		
+		public GetDescriptor<T> Version(long version) => _requestParams(p=>p.Version(version));
 
 		///<summary>Specific version type</summary>
-		public GetDescriptor<T> VersionType(VersionType version_type)
-		{
-			this.Request.RequestParameters.VersionType(version_type);
-			return this;
-		}
-		
+		public GetDescriptor<T> VersionType(VersionType version_type) => _requestParams(p=>p.VersionType(version_type));
 
 		///<summary>The URL-encoded request definition</summary>
-		public GetDescriptor<T> Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public GetDescriptor<T> Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public GetDescriptor<T> FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public GetDescriptor<T> FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for GetScript
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for GetScript <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</pre></summary>
 	public partial class GetScriptDescriptor 
 	{
-		
-	
-
 		///<summary>Explicit version number for concurrency control</summary>
-		public GetScriptDescriptor Version(long version)
-		{
-			this.Request.RequestParameters.Version(version);
-			return this;
-		}
-		
+		public GetScriptDescriptor Version(long version) => _requestParams(p=>p.Version(version));
 
 		///<summary>Specific version type</summary>
-		public GetScriptDescriptor VersionType(VersionType version_type)
-		{
-			this.Request.RequestParameters.VersionType(version_type);
-			return this;
-		}
-		
+		public GetScriptDescriptor VersionType(VersionType version_type) => _requestParams(p=>p.VersionType(version_type));
 
 		///<summary>The URL-encoded request definition</summary>
-		public GetScriptDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public GetScriptDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public GetScriptDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public GetScriptDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for GetSource
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-get.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for GetSource <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-get.html</pre></summary>
 	public partial class SourceDescriptor<T> 
 	{
-		
-	
-
 		///<summary>The ID of the parent document</summary>
-		public SourceDescriptor<T> Parent(string parent)
-		{
-			this.Request.RequestParameters.Parent(parent);
-			return this;
-		}
-		
+		public SourceDescriptor<T> Parent(string parent) => _requestParams(p=>p.Parent(parent));
 
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public SourceDescriptor<T> Preference(string preference)
-		{
-			this.Request.RequestParameters.Preference(preference);
-			return this;
-		}
-		
+		public SourceDescriptor<T> Preference(string preference) => _requestParams(p=>p.Preference(preference));
 
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
-		public SourceDescriptor<T> Realtime(bool realtime = true)
-		{
-			this.Request.RequestParameters.Realtime(realtime);
-			return this;
-		}
-		
+		public SourceDescriptor<T> Realtime(bool realtime = true) => _requestParams(p=>p.Realtime(realtime));
 
 		///<summary>Refresh the shard containing the document before performing the operation</summary>
-		public SourceDescriptor<T> Refresh(bool refresh = true)
-		{
-			this.Request.RequestParameters.Refresh(refresh);
-			return this;
-		}
-		
+		public SourceDescriptor<T> Refresh(bool refresh = true) => _requestParams(p=>p.Refresh(refresh));
 
 		///<summary>Specific routing value</summary>
-		public SourceDescriptor<T> Routing(string routing)
-		{
-			this.Request.RequestParameters.Routing(routing);
-			return this;
-		}
-		
+		public SourceDescriptor<T> Routing(string routing) => _requestParams(p=>p.Routing(routing));
 
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public SourceDescriptor<T> SourceEnabled(params string[] source_enabled)
-		{
-			this.Request.RequestParameters.SourceEnabled(source_enabled);
-			return this;
-		}
-		
+		public SourceDescriptor<T> SourceEnabled(params string[] source_enabled) => _requestParams(p=>p.SourceEnabled(source_enabled));
 
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public SourceDescriptor<T> SourceExclude(params string[] source_exclude)
-		{
-			this.Request.RequestParameters.SourceExclude(source_exclude);
-			return this;
-		}
-		
+		public SourceDescriptor<T> SourceExclude(params string[] source_exclude) => _requestParams(p=>p.SourceExclude(source_exclude));
 			
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public SourceDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] typedPathLookups) 
-		{
-			if (!typedPathLookups.HasAny())
-				return this;
-
-			this.Request.RequestParameters._SourceExclude(typedPathLookups);
-			return this;
-		}
-			
+		public SourceDescriptor<T> SourceExclude(params Expression<Func<T, object>>[] typedPathLookups)  =>
+			_requestParams(p=>p._SourceExclude(typedPathLookups));
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public SourceDescriptor<T> SourceInclude(params string[] source_include)
-		{
-			this.Request.RequestParameters.SourceInclude(source_include);
-			return this;
-		}
-		
+		public SourceDescriptor<T> SourceInclude(params string[] source_include) => _requestParams(p=>p.SourceInclude(source_include));
 			
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public SourceDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] typedPathLookups) 
-		{
-			if (!typedPathLookups.HasAny())
-				return this;
-
-			this.Request.RequestParameters._SourceInclude(typedPathLookups);
-			return this;
-		}
-			
+		public SourceDescriptor<T> SourceInclude(params Expression<Func<T, object>>[] typedPathLookups)  =>
+			_requestParams(p=>p._SourceInclude(typedPathLookups));
 
 		///<summary>Explicit version number for concurrency control</summary>
-		public SourceDescriptor<T> Version(long version)
-		{
-			this.Request.RequestParameters.Version(version);
-			return this;
-		}
-		
+		public SourceDescriptor<T> Version(long version) => _requestParams(p=>p.Version(version));
 
 		///<summary>Specific version type</summary>
-		public SourceDescriptor<T> VersionType(VersionType version_type)
-		{
-			this.Request.RequestParameters.VersionType(version_type);
-			return this;
-		}
-		
+		public SourceDescriptor<T> VersionType(VersionType version_type) => _requestParams(p=>p.VersionType(version_type));
 
 		///<summary>The URL-encoded request definition</summary>
-		public SourceDescriptor<T> Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public SourceDescriptor<T> Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public SourceDescriptor<T> FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public SourceDescriptor<T> FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for GetTemplate
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/search-template.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for GetTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-template.html</pre></summary>
 	public partial class GetTemplateDescriptor 
 	{
-		
-	
-
 		///<summary>Explicit version number for concurrency control</summary>
-		public GetTemplateDescriptor Version(long version)
-		{
-			this.Request.RequestParameters.Version(version);
-			return this;
-		}
-		
+		public GetTemplateDescriptor Version(long version) => _requestParams(p=>p.Version(version));
 
 		///<summary>Specific version type</summary>
-		public GetTemplateDescriptor VersionType(VersionType version_type)
-		{
-			this.Request.RequestParameters.VersionType(version_type);
-			return this;
-		}
-		
+		public GetTemplateDescriptor VersionType(VersionType version_type) => _requestParams(p=>p.VersionType(version_type));
 
 		///<summary>The URL-encoded request definition</summary>
-		public GetTemplateDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public GetTemplateDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public GetTemplateDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public GetTemplateDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for Index
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-index_.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for Index <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-index_.html</pre></summary>
 	public partial class IndexDescriptor<T> 
 	{
-		
-	
-
 		///<summary>Explicit write consistency setting for the operation</summary>
-		public IndexDescriptor<T> Consistency(Consistency consistency)
-		{
-			this.Request.RequestParameters.Consistency(consistency);
-			return this;
-		}
-		
+		public IndexDescriptor<T> Consistency(Consistency consistency) => _requestParams(p=>p.Consistency(consistency));
 
 		///<summary>Explicit operation type</summary>
-		public IndexDescriptor<T> OpType(OpType op_type)
-		{
-			this.Request.RequestParameters.OpType(op_type);
-			return this;
-		}
-		
+		public IndexDescriptor<T> OpType(OpType op_type) => _requestParams(p=>p.OpType(op_type));
 
 		///<summary>ID of the parent document</summary>
-		public IndexDescriptor<T> Parent(string parent)
-		{
-			this.Request.RequestParameters.Parent(parent);
-			return this;
-		}
-		
+		public IndexDescriptor<T> Parent(string parent) => _requestParams(p=>p.Parent(parent));
 
 		///<summary>Refresh the index after performing the operation</summary>
-		public IndexDescriptor<T> Refresh(bool refresh = true)
-		{
-			this.Request.RequestParameters.Refresh(refresh);
-			return this;
-		}
-		
+		public IndexDescriptor<T> Refresh(bool refresh = true) => _requestParams(p=>p.Refresh(refresh));
 
 		///<summary>Specific replication type</summary>
-		public IndexDescriptor<T> Replication(Replication replication)
-		{
-			this.Request.RequestParameters.Replication(replication);
-			return this;
-		}
-		
+		public IndexDescriptor<T> Replication(Replication replication) => _requestParams(p=>p.Replication(replication));
 
 		///<summary>Specific routing value</summary>
-		public IndexDescriptor<T> Routing(string routing)
-		{
-			this.Request.RequestParameters.Routing(routing);
-			return this;
-		}
-		
+		public IndexDescriptor<T> Routing(string routing) => _requestParams(p=>p.Routing(routing));
 
 		///<summary>Explicit operation timeout</summary>
-		public IndexDescriptor<T> Timeout(string timeout)
-		{
-			this.Request.RequestParameters.Timeout(timeout);
-			return this;
-		}
-		
+		public IndexDescriptor<T> Timeout(string timeout) => _requestParams(p=>p.Timeout(timeout));
 
 		///<summary>Explicit timestamp for the document</summary>
-		public IndexDescriptor<T> Timestamp(string timestamp)
-		{
-			this.Request.RequestParameters.Timestamp(timestamp);
-			return this;
-		}
-		
+		public IndexDescriptor<T> Timestamp(string timestamp) => _requestParams(p=>p.Timestamp(timestamp));
 
 		///<summary>Expiration time for the document</summary>
-		public IndexDescriptor<T> Ttl(string ttl)
-		{
-			this.Request.RequestParameters.Ttl(ttl);
-			return this;
-		}
-		
+		public IndexDescriptor<T> Ttl(string ttl) => _requestParams(p=>p.Ttl(ttl));
 
 		///<summary>Explicit version number for concurrency control</summary>
-		public IndexDescriptor<T> Version(long version)
-		{
-			this.Request.RequestParameters.Version(version);
-			return this;
-		}
-		
+		public IndexDescriptor<T> Version(long version) => _requestParams(p=>p.Version(version));
 
 		///<summary>Specific version type</summary>
-		public IndexDescriptor<T> VersionType(VersionType version_type)
-		{
-			this.Request.RequestParameters.VersionType(version_type);
-			return this;
-		}
-		
+		public IndexDescriptor<T> VersionType(VersionType version_type) => _requestParams(p=>p.VersionType(version_type));
 
 		///<summary>The URL-encoded request definition</summary>
-		public IndexDescriptor<T> Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public IndexDescriptor<T> Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public IndexDescriptor<T> FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public IndexDescriptor<T> FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for IndicesAnalyzeGetForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-analyze.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for IndicesAnalyzeGetForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-analyze.html</pre></summary>
 	public partial class AnalyzeDescriptor 
 	{
-		
-	
-
 		///<summary>The name of the analyzer to use</summary>
-		public AnalyzeDescriptor Analyzer(string analyzer)
-		{
-			this.Request.RequestParameters.Analyzer(analyzer);
-			return this;
-		}
-		
+		public AnalyzeDescriptor Analyzer(string analyzer) => _requestParams(p=>p.Analyzer(analyzer));
 
 		///<summary>A comma-separated list of character filters to use for the analysis</summary>
-		public AnalyzeDescriptor CharFilters(params string[] char_filters)
-		{
-			this.Request.RequestParameters.CharFilters(char_filters);
-			return this;
-		}
-		
+		public AnalyzeDescriptor CharFilters(params string[] char_filters) => _requestParams(p=>p.CharFilters(char_filters));
 
 		///<summary>Use the analyzer configured for this field (instead of passing the analyzer name)</summary>
-		public AnalyzeDescriptor Field(string field)
-		{
-			this.Request.RequestParameters.Field(field);
-			return this;
-		}
-		
-			
+		public AnalyzeDescriptor Field(string field) => _requestParams(p=>p.Field(field));
+
 		///<summary>Use the analyzer configured for this field (instead of passing the analyzer name)</summary>
 		public AnalyzeDescriptor Field<T>(Expression<Func<T, object>> typedPathLookup) where T : class
 		{
@@ -3034,3646 +1158,1379 @@ namespace Nest
 			this.Request.RequestParameters._Field(typedPathLookup);
 			return this;
 		}
-			
 
 		///<summary>A comma-separated list of filters to use for the analysis</summary>
-		public AnalyzeDescriptor Filters(params string[] filters)
-		{
-			this.Request.RequestParameters.Filters(filters);
-			return this;
-		}
-		
+		public AnalyzeDescriptor Filters(params string[] filters) => _requestParams(p=>p.Filters(filters));
 
 		///<summary>The name of the index to scope the operation</summary>
-		public AnalyzeDescriptor IndexQueryString(string index)
-		{
-			this.Request.RequestParameters.Index(index);
-			return this;
-		}
-		
+		public AnalyzeDescriptor IndexQueryString(string index) => _requestParams(p=>p.Index(index));
 
 		///<summary>With `true`, specify that a local shard should be used if available, with `false`, use a random shard (default: true)</summary>
-		public AnalyzeDescriptor PreferLocal(bool prefer_local = true)
-		{
-			this.Request.RequestParameters.PreferLocal(prefer_local);
-			return this;
-		}
-		
+		public AnalyzeDescriptor PreferLocal(bool prefer_local = true) => _requestParams(p=>p.PreferLocal(prefer_local));
 
 		///<summary>The text on which the analysis should be performed (when request body is not used)</summary>
-		public AnalyzeDescriptor Text(string text)
-		{
-			this.Request.RequestParameters.Text(text);
-			return this;
-		}
-		
+		public AnalyzeDescriptor Text(string text) => _requestParams(p=>p.Text(text));
 
 		///<summary>The name of the tokenizer to use for the analysis</summary>
-		public AnalyzeDescriptor Tokenizer(string tokenizer)
-		{
-			this.Request.RequestParameters.Tokenizer(tokenizer);
-			return this;
-		}
-		
+		public AnalyzeDescriptor Tokenizer(string tokenizer) => _requestParams(p=>p.Tokenizer(tokenizer));
 
 		///<summary>Format of the output</summary>
-		public AnalyzeDescriptor Format(Format format)
-		{
-			this.Request.RequestParameters.Format(format);
-			return this;
-		}
-		
+		public AnalyzeDescriptor Format(Format format) => _requestParams(p=>p.Format(format));
 
 		///<summary>The URL-encoded request definition</summary>
-		public AnalyzeDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public AnalyzeDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public AnalyzeDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public AnalyzeDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for IndicesClearCacheForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-clearcache.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for IndicesClearCacheForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-clearcache.html</pre></summary>
 	public partial class ClearCacheDescriptor 
 	{
-		
-	
-
 		///<summary>Clear field data</summary>
-		public ClearCacheDescriptor FieldData(bool field_data = true)
-		{
-			this.Request.RequestParameters.FieldData(field_data);
-			return this;
-		}
-		
+		public ClearCacheDescriptor FieldData(bool field_data = true) => _requestParams(p=>p.FieldData(field_data));
 
 		///<summary>A comma-separated list of fields to clear when using the `field_data` parameter (default: all)</summary>
-		public ClearCacheDescriptor Fields(params string[] fields)
-		{
-			this.Request.RequestParameters.Fields(fields);
-			return this;
-		}
-		
+		public ClearCacheDescriptor Fields(params string[] fields) => _requestParams(p=>p.Fields(fields));
 			
 		///<summary>A comma-separated list of fields to clear when using the `field_data` parameter (default: all)</summary>
-		public ClearCacheDescriptor Fields<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class
-		{
-			if (!typedPathLookups.HasAny())
-				return this;
-
-			this.Request.RequestParameters._Fields(typedPathLookups);
-			return this;
-		}
-			
+		public ClearCacheDescriptor Fields<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class =>
+			_requestParams(p=>p._Fields(typedPathLookups));
 
 		///<summary>Clear filter caches</summary>
-		public ClearCacheDescriptor Filter(bool filter = true)
-		{
-			this.Request.RequestParameters.Filter(filter);
-			return this;
-		}
-		
+		public ClearCacheDescriptor Filter(bool filter = true) => _requestParams(p=>p.Filter(filter));
 
 		///<summary>Clear filter caches</summary>
-		public ClearCacheDescriptor FilterCache(bool filter_cache = true)
-		{
-			this.Request.RequestParameters.FilterCache(filter_cache);
-			return this;
-		}
-		
+		public ClearCacheDescriptor FilterCache(bool filter_cache = true) => _requestParams(p=>p.FilterCache(filter_cache));
 
 		///<summary>A comma-separated list of keys to clear when using the `filter_cache` parameter (default: all)</summary>
-		public ClearCacheDescriptor FilterKeys(bool filter_keys = true)
-		{
-			this.Request.RequestParameters.FilterKeys(filter_keys);
-			return this;
-		}
-		
+		public ClearCacheDescriptor FilterKeys(bool filter_keys = true) => _requestParams(p=>p.FilterKeys(filter_keys));
 
 		///<summary>Clear ID caches for parent/child</summary>
-		public ClearCacheDescriptor Id(bool id = true)
-		{
-			this.Request.RequestParameters.Id(id);
-			return this;
-		}
-		
+		public ClearCacheDescriptor Id(bool id = true) => _requestParams(p=>p.Id(id));
 
 		///<summary>Clear ID caches for parent/child</summary>
-		public ClearCacheDescriptor IdCache(bool id_cache = true)
-		{
-			this.Request.RequestParameters.IdCache(id_cache);
-			return this;
-		}
-		
+		public ClearCacheDescriptor IdCache(bool id_cache = true) => _requestParams(p=>p.IdCache(id_cache));
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public ClearCacheDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
-		{
-			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
-			return this;
-		}
-		
+		public ClearCacheDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => _requestParams(p=>p.IgnoreUnavailable(ignore_unavailable));
 
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public ClearCacheDescriptor AllowNoIndices(bool allow_no_indices = true)
-		{
-			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
-			return this;
-		}
-		
+		public ClearCacheDescriptor AllowNoIndices(bool allow_no_indices = true) => _requestParams(p=>p.AllowNoIndices(allow_no_indices));
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ClearCacheDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
-		{
-			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
-			return this;
-		}
-		
+		public ClearCacheDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => _requestParams(p=>p.ExpandWildcards(expand_wildcards));
 
 		///<summary>A comma-separated list of index name to limit the operation</summary>
-		public ClearCacheDescriptor IndexQueryString(params string[] index)
-		{
-			this.Request.RequestParameters.Index(index);
-			return this;
-		}
-		
+		public ClearCacheDescriptor IndexQueryString(params string[] index) => _requestParams(p=>p.Index(index));
 
 		///<summary>Clear the recycler cache</summary>
-		public ClearCacheDescriptor Recycler(bool recycler = true)
-		{
-			this.Request.RequestParameters.Recycler(recycler);
-			return this;
-		}
-		
+		public ClearCacheDescriptor Recycler(bool recycler = true) => _requestParams(p=>p.Recycler(recycler));
 
 		///<summary>Clear query cache</summary>
-		public ClearCacheDescriptor QueryCache(bool query_cache = true)
-		{
-			this.Request.RequestParameters.QueryCache(query_cache);
-			return this;
-		}
-		
+		public ClearCacheDescriptor QueryCache(bool query_cache = true) => _requestParams(p=>p.QueryCache(query_cache));
 
 		///<summary>The URL-encoded request definition</summary>
-		public ClearCacheDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public ClearCacheDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public ClearCacheDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public ClearCacheDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for IndicesClose
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-open-close.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for IndicesClose <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-open-close.html</pre></summary>
 	public partial class CloseIndexDescriptor 
 	{
-		
-	
-
 		///<summary>Explicit operation timeout</summary>
-		public CloseIndexDescriptor Timeout(string timeout)
-		{
-			this.Request.RequestParameters.Timeout(timeout);
-			return this;
-		}
-		
+		public CloseIndexDescriptor Timeout(string timeout) => _requestParams(p=>p.Timeout(timeout));
 
 		///<summary>Specify timeout for connection to master</summary>
-		public CloseIndexDescriptor MasterTimeout(string master_timeout)
-		{
-			this.Request.RequestParameters.MasterTimeout(master_timeout);
-			return this;
-		}
-		
+		public CloseIndexDescriptor MasterTimeout(string master_timeout) => _requestParams(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public CloseIndexDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
-		{
-			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
-			return this;
-		}
-		
+		public CloseIndexDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => _requestParams(p=>p.IgnoreUnavailable(ignore_unavailable));
 
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public CloseIndexDescriptor AllowNoIndices(bool allow_no_indices = true)
-		{
-			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
-			return this;
-		}
-		
+		public CloseIndexDescriptor AllowNoIndices(bool allow_no_indices = true) => _requestParams(p=>p.AllowNoIndices(allow_no_indices));
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public CloseIndexDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
-		{
-			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
-			return this;
-		}
-		
+		public CloseIndexDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => _requestParams(p=>p.ExpandWildcards(expand_wildcards));
 
 		///<summary>The URL-encoded request definition</summary>
-		public CloseIndexDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public CloseIndexDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CloseIndexDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public CloseIndexDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for IndicesCreate
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-create-index.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for IndicesCreate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-create-index.html</pre></summary>
 	public partial class CreateIndexDescriptor 
 	{
-		
-	
-
 		///<summary>Explicit operation timeout</summary>
-		public CreateIndexDescriptor Timeout(string timeout)
-		{
-			this.Request.RequestParameters.Timeout(timeout);
-			return this;
-		}
-		
+		public CreateIndexDescriptor Timeout(string timeout) => _requestParams(p=>p.Timeout(timeout));
 
 		///<summary>Specify timeout for connection to master</summary>
-		public CreateIndexDescriptor MasterTimeout(string master_timeout)
-		{
-			this.Request.RequestParameters.MasterTimeout(master_timeout);
-			return this;
-		}
-		
+		public CreateIndexDescriptor MasterTimeout(string master_timeout) => _requestParams(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>The URL-encoded request definition</summary>
-		public CreateIndexDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public CreateIndexDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CreateIndexDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public CreateIndexDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for IndicesDelete
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-delete-index.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for IndicesDelete <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-delete-index.html</pre></summary>
 	public partial class DeleteIndexDescriptor 
 	{
-		
-	
-
 		///<summary>Explicit operation timeout</summary>
-		public DeleteIndexDescriptor Timeout(string timeout)
-		{
-			this.Request.RequestParameters.Timeout(timeout);
-			return this;
-		}
-		
+		public DeleteIndexDescriptor Timeout(string timeout) => _requestParams(p=>p.Timeout(timeout));
 
 		///<summary>Specify timeout for connection to master</summary>
-		public DeleteIndexDescriptor MasterTimeout(string master_timeout)
-		{
-			this.Request.RequestParameters.MasterTimeout(master_timeout);
-			return this;
-		}
-		
+		public DeleteIndexDescriptor MasterTimeout(string master_timeout) => _requestParams(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>The URL-encoded request definition</summary>
-		public DeleteIndexDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public DeleteIndexDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public DeleteIndexDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public DeleteIndexDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for IndicesDeleteAlias
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for IndicesDeleteAlias <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</pre></summary>
 	public partial class DeleteAliasDescriptor<T> 
 	{
-		
-	
-
 		///<summary>Explicit timestamp for the document</summary>
-		public DeleteAliasDescriptor<T> Timeout(string timeout)
-		{
-			this.Request.RequestParameters.Timeout(timeout);
-			return this;
-		}
-		
+		public DeleteAliasDescriptor<T> Timeout(string timeout) => _requestParams(p=>p.Timeout(timeout));
 
 		///<summary>Specify timeout for connection to master</summary>
-		public DeleteAliasDescriptor<T> MasterTimeout(string master_timeout)
-		{
-			this.Request.RequestParameters.MasterTimeout(master_timeout);
-			return this;
-		}
-		
+		public DeleteAliasDescriptor<T> MasterTimeout(string master_timeout) => _requestParams(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>The URL-encoded request definition</summary>
-		public DeleteAliasDescriptor<T> Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public DeleteAliasDescriptor<T> Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public DeleteAliasDescriptor<T> FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public DeleteAliasDescriptor<T> FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for IndicesDeleteMapping
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-delete-mapping.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for IndicesDeleteMapping <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-delete-mapping.html</pre></summary>
 	public partial class DeleteMappingDescriptor<T> 
 	{
-		
-	
-
 		///<summary>Specify timeout for connection to master</summary>
-		public DeleteMappingDescriptor<T> MasterTimeout(string master_timeout)
-		{
-			this.Request.RequestParameters.MasterTimeout(master_timeout);
-			return this;
-		}
-		
+		public DeleteMappingDescriptor<T> MasterTimeout(string master_timeout) => _requestParams(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>The URL-encoded request definition</summary>
-		public DeleteMappingDescriptor<T> Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public DeleteMappingDescriptor<T> Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public DeleteMappingDescriptor<T> FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public DeleteMappingDescriptor<T> FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for IndicesDeleteWarmer
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-warmers.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for IndicesDeleteWarmer <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-warmers.html</pre></summary>
 	public partial class DeleteWarmerDescriptor 
 	{
-		
-	
-
 		///<summary>Specify timeout for connection to master</summary>
-		public DeleteWarmerDescriptor MasterTimeout(string master_timeout)
-		{
-			this.Request.RequestParameters.MasterTimeout(master_timeout);
-			return this;
-		}
-		
+		public DeleteWarmerDescriptor MasterTimeout(string master_timeout) => _requestParams(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>The URL-encoded request definition</summary>
-		public DeleteWarmerDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public DeleteWarmerDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public DeleteWarmerDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public DeleteWarmerDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for IndicesExists
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-exists.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for IndicesExists <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-exists.html</pre></summary>
 	public partial class IndexExistsDescriptor 
 	{
-		
-	
-
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public IndexExistsDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
-		{
-			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
-			return this;
-		}
-		
+		public IndexExistsDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => _requestParams(p=>p.IgnoreUnavailable(ignore_unavailable));
 
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public IndexExistsDescriptor AllowNoIndices(bool allow_no_indices = true)
-		{
-			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
-			return this;
-		}
-		
+		public IndexExistsDescriptor AllowNoIndices(bool allow_no_indices = true) => _requestParams(p=>p.AllowNoIndices(allow_no_indices));
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public IndexExistsDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
-		{
-			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
-			return this;
-		}
-		
+		public IndexExistsDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => _requestParams(p=>p.ExpandWildcards(expand_wildcards));
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public IndexExistsDescriptor Local(bool local = true)
-		{
-			this.Request.RequestParameters.Local(local);
-			return this;
-		}
-		
+		public IndexExistsDescriptor Local(bool local = true) => _requestParams(p=>p.Local(local));
 
 		///<summary>The URL-encoded request definition</summary>
-		public IndexExistsDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public IndexExistsDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public IndexExistsDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public IndexExistsDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for IndicesExistsAliasForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for IndicesExistsAliasForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</pre></summary>
 	public partial class AliasExistsDescriptor 
 	{
-		
-	
-
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public AliasExistsDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
-		{
-			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
-			return this;
-		}
-		
+		public AliasExistsDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => _requestParams(p=>p.IgnoreUnavailable(ignore_unavailable));
 
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public AliasExistsDescriptor AllowNoIndices(bool allow_no_indices = true)
-		{
-			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
-			return this;
-		}
-		
+		public AliasExistsDescriptor AllowNoIndices(bool allow_no_indices = true) => _requestParams(p=>p.AllowNoIndices(allow_no_indices));
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public AliasExistsDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
-		{
-			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
-			return this;
-		}
-		
+		public AliasExistsDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => _requestParams(p=>p.ExpandWildcards(expand_wildcards));
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public AliasExistsDescriptor Local(bool local = true)
-		{
-			this.Request.RequestParameters.Local(local);
-			return this;
-		}
-		
+		public AliasExistsDescriptor Local(bool local = true) => _requestParams(p=>p.Local(local));
 
 		///<summary>The URL-encoded request definition</summary>
-		public AliasExistsDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public AliasExistsDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public AliasExistsDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public AliasExistsDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for IndicesExistsTemplateForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-templates.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for IndicesExistsTemplateForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-templates.html</pre></summary>
 	public partial class TemplateExistsDescriptor 
 	{
-		
-	
-
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TemplateExistsDescriptor MasterTimeout(string master_timeout)
-		{
-			this.Request.RequestParameters.MasterTimeout(master_timeout);
-			return this;
-		}
-		
+		public TemplateExistsDescriptor MasterTimeout(string master_timeout) => _requestParams(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public TemplateExistsDescriptor Local(bool local = true)
-		{
-			this.Request.RequestParameters.Local(local);
-			return this;
-		}
-		
+		public TemplateExistsDescriptor Local(bool local = true) => _requestParams(p=>p.Local(local));
 
 		///<summary>The URL-encoded request definition</summary>
-		public TemplateExistsDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public TemplateExistsDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public TemplateExistsDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public TemplateExistsDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for IndicesExistsType
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-types-exists.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for IndicesExistsType <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-types-exists.html</pre></summary>
 	public partial class TypeExistsDescriptor 
 	{
-		
-	
-
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public TypeExistsDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
-		{
-			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
-			return this;
-		}
-		
+		public TypeExistsDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => _requestParams(p=>p.IgnoreUnavailable(ignore_unavailable));
 
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public TypeExistsDescriptor AllowNoIndices(bool allow_no_indices = true)
-		{
-			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
-			return this;
-		}
-		
+		public TypeExistsDescriptor AllowNoIndices(bool allow_no_indices = true) => _requestParams(p=>p.AllowNoIndices(allow_no_indices));
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public TypeExistsDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
-		{
-			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
-			return this;
-		}
-		
+		public TypeExistsDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => _requestParams(p=>p.ExpandWildcards(expand_wildcards));
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public TypeExistsDescriptor Local(bool local = true)
-		{
-			this.Request.RequestParameters.Local(local);
-			return this;
-		}
-		
+		public TypeExistsDescriptor Local(bool local = true) => _requestParams(p=>p.Local(local));
 
 		///<summary>The URL-encoded request definition</summary>
-		public TypeExistsDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public TypeExistsDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public TypeExistsDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public TypeExistsDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for IndicesFlushForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-flush.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for IndicesFlushForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-flush.html</pre></summary>
 	public partial class FlushDescriptor 
 	{
-		
-	
-
 		///<summary>Whether a flush should be forced even if it is not necessarily needed ie. if no changes will be committed to the index. This is useful if transaction log IDs should be incremented even if no uncommitted changes are present. (This setting can be considered as internal)</summary>
-		public FlushDescriptor Force(bool force = true)
-		{
-			this.Request.RequestParameters.Force(force);
-			return this;
-		}
-		
+		public FlushDescriptor Force(bool force = true) => _requestParams(p=>p.Force(force));
 
 		///<summary>If set to true the flush operation will block until the flush can be executed if another flush operation is already executing. The default is false and will cause an exception to be thrown on the shard level if another flush operation is already running.</summary>
-		public FlushDescriptor WaitIfOngoing(bool wait_if_ongoing = true)
-		{
-			this.Request.RequestParameters.WaitIfOngoing(wait_if_ongoing);
-			return this;
-		}
-		
+		public FlushDescriptor WaitIfOngoing(bool wait_if_ongoing = true) => _requestParams(p=>p.WaitIfOngoing(wait_if_ongoing));
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public FlushDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
-		{
-			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
-			return this;
-		}
-		
+		public FlushDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => _requestParams(p=>p.IgnoreUnavailable(ignore_unavailable));
 
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public FlushDescriptor AllowNoIndices(bool allow_no_indices = true)
-		{
-			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
-			return this;
-		}
-		
+		public FlushDescriptor AllowNoIndices(bool allow_no_indices = true) => _requestParams(p=>p.AllowNoIndices(allow_no_indices));
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public FlushDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
-		{
-			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
-			return this;
-		}
-		
+		public FlushDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => _requestParams(p=>p.ExpandWildcards(expand_wildcards));
 
 		///<summary>The URL-encoded request definition</summary>
-		public FlushDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public FlushDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public FlushDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public FlushDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for IndicesFlushSyncedForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for IndicesFlushSyncedForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush.html</pre></summary>
 	public partial class SyncedFlushDescriptor 
 	{
-		
-	
-
 		///<summary>The URL-encoded request definition</summary>
-		public SyncedFlushDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public SyncedFlushDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public SyncedFlushDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public SyncedFlushDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for IndicesGet
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-index.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for IndicesGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-index.html</pre></summary>
 	public partial class GetIndexDescriptor 
 	{
-		
-	
-
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public GetIndexDescriptor Local(bool local = true)
-		{
-			this.Request.RequestParameters.Local(local);
-			return this;
-		}
-		
+		public GetIndexDescriptor Local(bool local = true) => _requestParams(p=>p.Local(local));
 
 		///<summary>Ignore unavailable indexes (default: false)</summary>
-		public GetIndexDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
-		{
-			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
-			return this;
-		}
-		
+		public GetIndexDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => _requestParams(p=>p.IgnoreUnavailable(ignore_unavailable));
 
 		///<summary>Ignore if a wildcard expression resolves to no concrete indices (default: false)</summary>
-		public GetIndexDescriptor AllowNoIndices(bool allow_no_indices = true)
-		{
-			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
-			return this;
-		}
-		
+		public GetIndexDescriptor AllowNoIndices(bool allow_no_indices = true) => _requestParams(p=>p.AllowNoIndices(allow_no_indices));
 
 		///<summary>Whether wildcard expressions should get expanded to open or closed indices (default: open)</summary>
-		public GetIndexDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
-		{
-			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
-			return this;
-		}
-		
+		public GetIndexDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => _requestParams(p=>p.ExpandWildcards(expand_wildcards));
 
 		///<summary>The URL-encoded request definition</summary>
-		public GetIndexDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public GetIndexDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public GetIndexDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public GetIndexDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for IndicesGetAliasForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for IndicesGetAliasForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</pre></summary>
 	public partial class GetAliasDescriptor 
 	{
-		
-	
-
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public GetAliasDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
-		{
-			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
-			return this;
-		}
-		
+		public GetAliasDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => _requestParams(p=>p.IgnoreUnavailable(ignore_unavailable));
 
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public GetAliasDescriptor AllowNoIndices(bool allow_no_indices = true)
-		{
-			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
-			return this;
-		}
-		
+		public GetAliasDescriptor AllowNoIndices(bool allow_no_indices = true) => _requestParams(p=>p.AllowNoIndices(allow_no_indices));
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public GetAliasDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
-		{
-			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
-			return this;
-		}
-		
+		public GetAliasDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => _requestParams(p=>p.ExpandWildcards(expand_wildcards));
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public GetAliasDescriptor Local(bool local = true)
-		{
-			this.Request.RequestParameters.Local(local);
-			return this;
-		}
-		
+		public GetAliasDescriptor Local(bool local = true) => _requestParams(p=>p.Local(local));
 
 		///<summary>The URL-encoded request definition</summary>
-		public GetAliasDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public GetAliasDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public GetAliasDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public GetAliasDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for IndicesGetAliasesForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for IndicesGetAliasesForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</pre></summary>
 	public partial class GetAliasesDescriptor 
 	{
-		
-	
-
 		///<summary>Explicit operation timeout</summary>
-		public GetAliasesDescriptor Timeout(string timeout)
-		{
-			this.Request.RequestParameters.Timeout(timeout);
-			return this;
-		}
-		
+		public GetAliasesDescriptor Timeout(string timeout) => _requestParams(p=>p.Timeout(timeout));
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public GetAliasesDescriptor Local(bool local = true)
-		{
-			this.Request.RequestParameters.Local(local);
-			return this;
-		}
-		
+		public GetAliasesDescriptor Local(bool local = true) => _requestParams(p=>p.Local(local));
 
 		///<summary>The URL-encoded request definition</summary>
-		public GetAliasesDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public GetAliasesDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public GetAliasesDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public GetAliasesDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for IndicesGetFieldMappingForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-field-mapping.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for IndicesGetFieldMappingForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-field-mapping.html</pre></summary>
 	public partial class GetFieldMappingDescriptor<T> 
 	{
-		
-	
-
 		///<summary>Whether the default mapping values should be returned as well</summary>
-		public GetFieldMappingDescriptor<T> IncludeDefaults(bool include_defaults = true)
-		{
-			this.Request.RequestParameters.IncludeDefaults(include_defaults);
-			return this;
-		}
-		
+		public GetFieldMappingDescriptor<T> IncludeDefaults(bool include_defaults = true) => _requestParams(p=>p.IncludeDefaults(include_defaults));
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public GetFieldMappingDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true)
-		{
-			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
-			return this;
-		}
-		
+		public GetFieldMappingDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true) => _requestParams(p=>p.IgnoreUnavailable(ignore_unavailable));
 
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public GetFieldMappingDescriptor<T> AllowNoIndices(bool allow_no_indices = true)
-		{
-			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
-			return this;
-		}
-		
+		public GetFieldMappingDescriptor<T> AllowNoIndices(bool allow_no_indices = true) => _requestParams(p=>p.AllowNoIndices(allow_no_indices));
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public GetFieldMappingDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards)
-		{
-			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
-			return this;
-		}
-		
+		public GetFieldMappingDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards) => _requestParams(p=>p.ExpandWildcards(expand_wildcards));
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public GetFieldMappingDescriptor<T> Local(bool local = true)
-		{
-			this.Request.RequestParameters.Local(local);
-			return this;
-		}
-		
+		public GetFieldMappingDescriptor<T> Local(bool local = true) => _requestParams(p=>p.Local(local));
 
 		///<summary>The URL-encoded request definition</summary>
-		public GetFieldMappingDescriptor<T> Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public GetFieldMappingDescriptor<T> Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public GetFieldMappingDescriptor<T> FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public GetFieldMappingDescriptor<T> FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for IndicesGetMappingForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-mapping.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for IndicesGetMappingForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-mapping.html</pre></summary>
 	public partial class GetMappingDescriptor<T> 
 	{
-		
-	
-
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public GetMappingDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true)
-		{
-			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
-			return this;
-		}
-		
+		public GetMappingDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true) => _requestParams(p=>p.IgnoreUnavailable(ignore_unavailable));
 
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public GetMappingDescriptor<T> AllowNoIndices(bool allow_no_indices = true)
-		{
-			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
-			return this;
-		}
-		
+		public GetMappingDescriptor<T> AllowNoIndices(bool allow_no_indices = true) => _requestParams(p=>p.AllowNoIndices(allow_no_indices));
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public GetMappingDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards)
-		{
-			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
-			return this;
-		}
-		
+		public GetMappingDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards) => _requestParams(p=>p.ExpandWildcards(expand_wildcards));
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public GetMappingDescriptor<T> Local(bool local = true)
-		{
-			this.Request.RequestParameters.Local(local);
-			return this;
-		}
-		
+		public GetMappingDescriptor<T> Local(bool local = true) => _requestParams(p=>p.Local(local));
 
 		///<summary>The URL-encoded request definition</summary>
-		public GetMappingDescriptor<T> Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public GetMappingDescriptor<T> Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public GetMappingDescriptor<T> FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public GetMappingDescriptor<T> FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for IndicesGetSettingsForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-settings.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for IndicesGetSettingsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-settings.html</pre></summary>
 	public partial class GetIndexSettingsDescriptor 
 	{
-		
-	
-
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public GetIndexSettingsDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
-		{
-			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
-			return this;
-		}
-		
+		public GetIndexSettingsDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => _requestParams(p=>p.IgnoreUnavailable(ignore_unavailable));
 
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public GetIndexSettingsDescriptor AllowNoIndices(bool allow_no_indices = true)
-		{
-			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
-			return this;
-		}
-		
+		public GetIndexSettingsDescriptor AllowNoIndices(bool allow_no_indices = true) => _requestParams(p=>p.AllowNoIndices(allow_no_indices));
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public GetIndexSettingsDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
-		{
-			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
-			return this;
-		}
-		
+		public GetIndexSettingsDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => _requestParams(p=>p.ExpandWildcards(expand_wildcards));
 
 		///<summary>Return settings in flat format (default: false)</summary>
-		public GetIndexSettingsDescriptor FlatSettings(bool flat_settings = true)
-		{
-			this.Request.RequestParameters.FlatSettings(flat_settings);
-			return this;
-		}
-		
+		public GetIndexSettingsDescriptor FlatSettings(bool flat_settings = true) => _requestParams(p=>p.FlatSettings(flat_settings));
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public GetIndexSettingsDescriptor Local(bool local = true)
-		{
-			this.Request.RequestParameters.Local(local);
-			return this;
-		}
-		
+		public GetIndexSettingsDescriptor Local(bool local = true) => _requestParams(p=>p.Local(local));
 
 		///<summary>The URL-encoded request definition</summary>
-		public GetIndexSettingsDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public GetIndexSettingsDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public GetIndexSettingsDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public GetIndexSettingsDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for IndicesGetUpgradeForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for IndicesGetUpgradeForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</pre></summary>
 	public partial class UpgradeStatusDescriptor 
 	{
-		
-	
-
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public UpgradeStatusDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
-		{
-			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
-			return this;
-		}
-		
+		public UpgradeStatusDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => _requestParams(p=>p.IgnoreUnavailable(ignore_unavailable));
 
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public UpgradeStatusDescriptor AllowNoIndices(bool allow_no_indices = true)
-		{
-			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
-			return this;
-		}
-		
+		public UpgradeStatusDescriptor AllowNoIndices(bool allow_no_indices = true) => _requestParams(p=>p.AllowNoIndices(allow_no_indices));
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public UpgradeStatusDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
-		{
-			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
-			return this;
-		}
-		
+		public UpgradeStatusDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => _requestParams(p=>p.ExpandWildcards(expand_wildcards));
 
 		///<summary>Whether to return time and byte values in human-readable format.</summary>
-		public UpgradeStatusDescriptor Human(bool human = true)
-		{
-			this.Request.RequestParameters.Human(human);
-			return this;
-		}
-		
+		public UpgradeStatusDescriptor Human(bool human = true) => _requestParams(p=>p.Human(human));
 
 		///<summary>The URL-encoded request definition</summary>
-		public UpgradeStatusDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public UpgradeStatusDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public UpgradeStatusDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public UpgradeStatusDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for IndicesGetWarmerForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-warmers.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for IndicesGetWarmerForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-warmers.html</pre></summary>
 	public partial class GetWarmerDescriptor 
 	{
-		
-	
-
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public GetWarmerDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
-		{
-			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
-			return this;
-		}
-		
+		public GetWarmerDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => _requestParams(p=>p.IgnoreUnavailable(ignore_unavailable));
 
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public GetWarmerDescriptor AllowNoIndices(bool allow_no_indices = true)
-		{
-			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
-			return this;
-		}
-		
+		public GetWarmerDescriptor AllowNoIndices(bool allow_no_indices = true) => _requestParams(p=>p.AllowNoIndices(allow_no_indices));
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public GetWarmerDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
-		{
-			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
-			return this;
-		}
-		
+		public GetWarmerDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => _requestParams(p=>p.ExpandWildcards(expand_wildcards));
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public GetWarmerDescriptor Local(bool local = true)
-		{
-			this.Request.RequestParameters.Local(local);
-			return this;
-		}
-		
+		public GetWarmerDescriptor Local(bool local = true) => _requestParams(p=>p.Local(local));
 
 		///<summary>The URL-encoded request definition</summary>
-		public GetWarmerDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public GetWarmerDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public GetWarmerDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public GetWarmerDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for IndicesOpen
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-open-close.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for IndicesOpen <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-open-close.html</pre></summary>
 	public partial class OpenIndexDescriptor 
 	{
-		
-	
-
 		///<summary>Explicit operation timeout</summary>
-		public OpenIndexDescriptor Timeout(string timeout)
-		{
-			this.Request.RequestParameters.Timeout(timeout);
-			return this;
-		}
-		
+		public OpenIndexDescriptor Timeout(string timeout) => _requestParams(p=>p.Timeout(timeout));
 
 		///<summary>Specify timeout for connection to master</summary>
-		public OpenIndexDescriptor MasterTimeout(string master_timeout)
-		{
-			this.Request.RequestParameters.MasterTimeout(master_timeout);
-			return this;
-		}
-		
+		public OpenIndexDescriptor MasterTimeout(string master_timeout) => _requestParams(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public OpenIndexDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
-		{
-			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
-			return this;
-		}
-		
+		public OpenIndexDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => _requestParams(p=>p.IgnoreUnavailable(ignore_unavailable));
 
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public OpenIndexDescriptor AllowNoIndices(bool allow_no_indices = true)
-		{
-			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
-			return this;
-		}
-		
+		public OpenIndexDescriptor AllowNoIndices(bool allow_no_indices = true) => _requestParams(p=>p.AllowNoIndices(allow_no_indices));
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public OpenIndexDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
-		{
-			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
-			return this;
-		}
-		
+		public OpenIndexDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => _requestParams(p=>p.ExpandWildcards(expand_wildcards));
 
 		///<summary>The URL-encoded request definition</summary>
-		public OpenIndexDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public OpenIndexDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public OpenIndexDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public OpenIndexDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for IndicesOptimizeForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-optimize.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for IndicesOptimizeForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-optimize.html</pre></summary>
 	public partial class OptimizeDescriptor 
 	{
-		
-	
-
 		///<summary>Specify whether the index should be flushed after performing the operation (default: true)</summary>
-		public OptimizeDescriptor Flush(bool flush = true)
-		{
-			this.Request.RequestParameters.Flush(flush);
-			return this;
-		}
-		
+		public OptimizeDescriptor Flush(bool flush = true) => _requestParams(p=>p.Flush(flush));
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public OptimizeDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
-		{
-			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
-			return this;
-		}
-		
+		public OptimizeDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => _requestParams(p=>p.IgnoreUnavailable(ignore_unavailable));
 
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public OptimizeDescriptor AllowNoIndices(bool allow_no_indices = true)
-		{
-			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
-			return this;
-		}
-		
+		public OptimizeDescriptor AllowNoIndices(bool allow_no_indices = true) => _requestParams(p=>p.AllowNoIndices(allow_no_indices));
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public OptimizeDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
-		{
-			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
-			return this;
-		}
-		
+		public OptimizeDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => _requestParams(p=>p.ExpandWildcards(expand_wildcards));
 
 		///<summary>The number of segments the index should be merged into (default: dynamic)</summary>
-		public OptimizeDescriptor MaxNumSegments(long max_num_segments)
-		{
-			this.Request.RequestParameters.MaxNumSegments(max_num_segments);
-			return this;
-		}
-		
+		public OptimizeDescriptor MaxNumSegments(long max_num_segments) => _requestParams(p=>p.MaxNumSegments(max_num_segments));
 
 		///<summary>Specify whether the operation should only expunge deleted documents</summary>
-		public OptimizeDescriptor OnlyExpungeDeletes(bool only_expunge_deletes = true)
-		{
-			this.Request.RequestParameters.OnlyExpungeDeletes(only_expunge_deletes);
-			return this;
-		}
-		
+		public OptimizeDescriptor OnlyExpungeDeletes(bool only_expunge_deletes = true) => _requestParams(p=>p.OnlyExpungeDeletes(only_expunge_deletes));
 
 		///<summary>TODO: ?</summary>
-		public OptimizeDescriptor OperationThreading(string operation_threading)
-		{
-			this.Request.RequestParameters.OperationThreading(operation_threading);
-			return this;
-		}
-		
+		public OptimizeDescriptor OperationThreading(string operation_threading) => _requestParams(p=>p.OperationThreading(operation_threading));
 
 		///<summary>Specify whether the request should block until the merge process is finished (default: true)</summary>
-		public OptimizeDescriptor WaitForMerge(bool wait_for_merge = true)
-		{
-			this.Request.RequestParameters.WaitForMerge(wait_for_merge);
-			return this;
-		}
-		
+		public OptimizeDescriptor WaitForMerge(bool wait_for_merge = true) => _requestParams(p=>p.WaitForMerge(wait_for_merge));
 
 		///<summary>Force a merge operation to run, even if there is a single segment in the index (default: false)</summary>
-		public OptimizeDescriptor Force(bool force = true)
-		{
-			this.Request.RequestParameters.Force(force);
-			return this;
-		}
-		
+		public OptimizeDescriptor Force(bool force = true) => _requestParams(p=>p.Force(force));
 
 		///<summary>The URL-encoded request definition</summary>
-		public OptimizeDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public OptimizeDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public OptimizeDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public OptimizeDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for IndicesPutAlias
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for IndicesPutAlias <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</pre></summary>
 	public partial class PutAliasDescriptor 
 	{
-		
-	
-
 		///<summary>Explicit timestamp for the document</summary>
-		public PutAliasDescriptor Timeout(string timeout)
-		{
-			this.Request.RequestParameters.Timeout(timeout);
-			return this;
-		}
-		
+		public PutAliasDescriptor Timeout(string timeout) => _requestParams(p=>p.Timeout(timeout));
 
 		///<summary>Specify timeout for connection to master</summary>
-		public PutAliasDescriptor MasterTimeout(string master_timeout)
-		{
-			this.Request.RequestParameters.MasterTimeout(master_timeout);
-			return this;
-		}
-		
+		public PutAliasDescriptor MasterTimeout(string master_timeout) => _requestParams(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>The URL-encoded request definition</summary>
-		public PutAliasDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public PutAliasDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public PutAliasDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public PutAliasDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for IndicesPutMapping
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-put-mapping.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for IndicesPutMapping <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-put-mapping.html</pre></summary>
 	public partial class PutMappingDescriptor<T> 
 	{
-		
-	
-
 		///<summary>Specify whether to ignore conflicts while updating the mapping (default: false)</summary>
-		public PutMappingDescriptor<T> IgnoreConflicts(bool ignore_conflicts = true)
-		{
-			this.Request.RequestParameters.IgnoreConflicts(ignore_conflicts);
-			return this;
-		}
-		
+		public PutMappingDescriptor<T> IgnoreConflicts(bool ignore_conflicts = true) => _requestParams(p=>p.IgnoreConflicts(ignore_conflicts));
 
 		///<summary>Explicit operation timeout</summary>
-		public PutMappingDescriptor<T> Timeout(string timeout)
-		{
-			this.Request.RequestParameters.Timeout(timeout);
-			return this;
-		}
-		
+		public PutMappingDescriptor<T> Timeout(string timeout) => _requestParams(p=>p.Timeout(timeout));
 
 		///<summary>Specify timeout for connection to master</summary>
-		public PutMappingDescriptor<T> MasterTimeout(string master_timeout)
-		{
-			this.Request.RequestParameters.MasterTimeout(master_timeout);
-			return this;
-		}
-		
+		public PutMappingDescriptor<T> MasterTimeout(string master_timeout) => _requestParams(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public PutMappingDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true)
-		{
-			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
-			return this;
-		}
-		
+		public PutMappingDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true) => _requestParams(p=>p.IgnoreUnavailable(ignore_unavailable));
 
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public PutMappingDescriptor<T> AllowNoIndices(bool allow_no_indices = true)
-		{
-			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
-			return this;
-		}
-		
+		public PutMappingDescriptor<T> AllowNoIndices(bool allow_no_indices = true) => _requestParams(p=>p.AllowNoIndices(allow_no_indices));
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public PutMappingDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards)
-		{
-			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
-			return this;
-		}
-		
+		public PutMappingDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards) => _requestParams(p=>p.ExpandWildcards(expand_wildcards));
 
 		///<summary>The URL-encoded request definition</summary>
-		public PutMappingDescriptor<T> Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public PutMappingDescriptor<T> Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public PutMappingDescriptor<T> FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public PutMappingDescriptor<T> FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for IndicesPutSettingsForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-update-settings.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for IndicesPutSettingsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-update-settings.html</pre></summary>
 	public partial class UpdateSettingsDescriptor 
 	{
-		
-	
-
 		///<summary>Specify timeout for connection to master</summary>
-		public UpdateSettingsDescriptor MasterTimeout(string master_timeout)
-		{
-			this.Request.RequestParameters.MasterTimeout(master_timeout);
-			return this;
-		}
-		
+		public UpdateSettingsDescriptor MasterTimeout(string master_timeout) => _requestParams(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public UpdateSettingsDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
-		{
-			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
-			return this;
-		}
-		
+		public UpdateSettingsDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => _requestParams(p=>p.IgnoreUnavailable(ignore_unavailable));
 
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public UpdateSettingsDescriptor AllowNoIndices(bool allow_no_indices = true)
-		{
-			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
-			return this;
-		}
-		
+		public UpdateSettingsDescriptor AllowNoIndices(bool allow_no_indices = true) => _requestParams(p=>p.AllowNoIndices(allow_no_indices));
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public UpdateSettingsDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
-		{
-			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
-			return this;
-		}
-		
+		public UpdateSettingsDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => _requestParams(p=>p.ExpandWildcards(expand_wildcards));
 
 		///<summary>Return settings in flat format (default: false)</summary>
-		public UpdateSettingsDescriptor FlatSettings(bool flat_settings = true)
-		{
-			this.Request.RequestParameters.FlatSettings(flat_settings);
-			return this;
-		}
-		
+		public UpdateSettingsDescriptor FlatSettings(bool flat_settings = true) => _requestParams(p=>p.FlatSettings(flat_settings));
 
 		///<summary>The URL-encoded request definition</summary>
-		public UpdateSettingsDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public UpdateSettingsDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public UpdateSettingsDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public UpdateSettingsDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for IndicesPutTemplateForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-templates.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for IndicesPutTemplateForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-templates.html</pre></summary>
 	public partial class PutTemplateDescriptor 
 	{
-		
-	
-
 		///<summary>Whether the index template should only be added if new or can also replace an existing one</summary>
-		public PutTemplateDescriptor Create(bool create = true)
-		{
-			this.Request.RequestParameters.Create(create);
-			return this;
-		}
-		
+		public PutTemplateDescriptor Create(bool create = true) => _requestParams(p=>p.Create(create));
 
 		///<summary>Explicit operation timeout</summary>
-		public PutTemplateDescriptor Timeout(string timeout)
-		{
-			this.Request.RequestParameters.Timeout(timeout);
-			return this;
-		}
-		
+		public PutTemplateDescriptor Timeout(string timeout) => _requestParams(p=>p.Timeout(timeout));
 
 		///<summary>Specify timeout for connection to master</summary>
-		public PutTemplateDescriptor MasterTimeout(string master_timeout)
-		{
-			this.Request.RequestParameters.MasterTimeout(master_timeout);
-			return this;
-		}
-		
+		public PutTemplateDescriptor MasterTimeout(string master_timeout) => _requestParams(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Return settings in flat format (default: false)</summary>
-		public PutTemplateDescriptor FlatSettings(bool flat_settings = true)
-		{
-			this.Request.RequestParameters.FlatSettings(flat_settings);
-			return this;
-		}
-		
+		public PutTemplateDescriptor FlatSettings(bool flat_settings = true) => _requestParams(p=>p.FlatSettings(flat_settings));
 
 		///<summary>The URL-encoded request definition</summary>
-		public PutTemplateDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public PutTemplateDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public PutTemplateDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public PutTemplateDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for IndicesPutWarmerForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-warmers.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for IndicesPutWarmerForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-warmers.html</pre></summary>
 	public partial class PutWarmerDescriptor 
 	{
-		
-	
-
 		///<summary>Specify timeout for connection to master</summary>
-		public PutWarmerDescriptor MasterTimeout(string master_timeout)
-		{
-			this.Request.RequestParameters.MasterTimeout(master_timeout);
-			return this;
-		}
-		
+		public PutWarmerDescriptor MasterTimeout(string master_timeout) => _requestParams(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed) in the search request to warm</summary>
-		public PutWarmerDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
-		{
-			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
-			return this;
-		}
-		
+		public PutWarmerDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => _requestParams(p=>p.IgnoreUnavailable(ignore_unavailable));
 
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices in the search request to warm. (This includes `_all` string or when no indices have been specified)</summary>
-		public PutWarmerDescriptor AllowNoIndices(bool allow_no_indices = true)
-		{
-			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
-			return this;
-		}
-		
+		public PutWarmerDescriptor AllowNoIndices(bool allow_no_indices = true) => _requestParams(p=>p.AllowNoIndices(allow_no_indices));
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both, in the search request to warm.</summary>
-		public PutWarmerDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
-		{
-			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
-			return this;
-		}
-		
+		public PutWarmerDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => _requestParams(p=>p.ExpandWildcards(expand_wildcards));
 
 		///<summary>The URL-encoded request definition</summary>
-		public PutWarmerDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public PutWarmerDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public PutWarmerDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public PutWarmerDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for IndicesRecoveryForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-recovery.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for IndicesRecoveryForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-recovery.html</pre></summary>
 	public partial class RecoveryStatusDescriptor 
 	{
-		
-	
-
 		///<summary>Whether to display detailed information about shard recovery</summary>
-		public RecoveryStatusDescriptor Detailed(bool detailed = true)
-		{
-			this.Request.RequestParameters.Detailed(detailed);
-			return this;
-		}
-		
+		public RecoveryStatusDescriptor Detailed(bool detailed = true) => _requestParams(p=>p.Detailed(detailed));
 
 		///<summary>Display only those recoveries that are currently on-going</summary>
-		public RecoveryStatusDescriptor ActiveOnly(bool active_only = true)
-		{
-			this.Request.RequestParameters.ActiveOnly(active_only);
-			return this;
-		}
-		
+		public RecoveryStatusDescriptor ActiveOnly(bool active_only = true) => _requestParams(p=>p.ActiveOnly(active_only));
 
 		///<summary>Whether to return time and byte values in human-readable format.</summary>
-		public RecoveryStatusDescriptor Human(bool human = true)
-		{
-			this.Request.RequestParameters.Human(human);
-			return this;
-		}
-		
+		public RecoveryStatusDescriptor Human(bool human = true) => _requestParams(p=>p.Human(human));
 
 		///<summary>The URL-encoded request definition</summary>
-		public RecoveryStatusDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public RecoveryStatusDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public RecoveryStatusDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public RecoveryStatusDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for IndicesRefreshForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-refresh.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for IndicesRefreshForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-refresh.html</pre></summary>
 	public partial class RefreshDescriptor 
 	{
-		
-	
-
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public RefreshDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
-		{
-			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
-			return this;
-		}
-		
+		public RefreshDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => _requestParams(p=>p.IgnoreUnavailable(ignore_unavailable));
 
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public RefreshDescriptor AllowNoIndices(bool allow_no_indices = true)
-		{
-			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
-			return this;
-		}
-		
+		public RefreshDescriptor AllowNoIndices(bool allow_no_indices = true) => _requestParams(p=>p.AllowNoIndices(allow_no_indices));
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public RefreshDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
-		{
-			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
-			return this;
-		}
-		
+		public RefreshDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => _requestParams(p=>p.ExpandWildcards(expand_wildcards));
 
 		///<summary>Force a refresh even if not required</summary>
-		public RefreshDescriptor Force(bool force = true)
-		{
-			this.Request.RequestParameters.Force(force);
-			return this;
-		}
-		
+		public RefreshDescriptor Force(bool force = true) => _requestParams(p=>p.Force(force));
 
 		///<summary>TODO: ?</summary>
-		public RefreshDescriptor OperationThreading(string operation_threading)
-		{
-			this.Request.RequestParameters.OperationThreading(operation_threading);
-			return this;
-		}
-		
+		public RefreshDescriptor OperationThreading(string operation_threading) => _requestParams(p=>p.OperationThreading(operation_threading));
 
 		///<summary>The URL-encoded request definition</summary>
-		public RefreshDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public RefreshDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public RefreshDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public RefreshDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for IndicesSegmentsForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-segments.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for IndicesSegmentsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-segments.html</pre></summary>
 	public partial class SegmentsDescriptor 
 	{
-		
-	
-
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public SegmentsDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
-		{
-			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
-			return this;
-		}
-		
+		public SegmentsDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => _requestParams(p=>p.IgnoreUnavailable(ignore_unavailable));
 
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public SegmentsDescriptor AllowNoIndices(bool allow_no_indices = true)
-		{
-			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
-			return this;
-		}
-		
+		public SegmentsDescriptor AllowNoIndices(bool allow_no_indices = true) => _requestParams(p=>p.AllowNoIndices(allow_no_indices));
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public SegmentsDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
-		{
-			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
-			return this;
-		}
-		
+		public SegmentsDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => _requestParams(p=>p.ExpandWildcards(expand_wildcards));
 
 		///<summary>Whether to return time and byte values in human-readable format.</summary>
-		public SegmentsDescriptor Human(bool human = true)
-		{
-			this.Request.RequestParameters.Human(human);
-			return this;
-		}
-		
+		public SegmentsDescriptor Human(bool human = true) => _requestParams(p=>p.Human(human));
 
 		///<summary>TODO: ?</summary>
-		public SegmentsDescriptor OperationThreading(string operation_threading)
-		{
-			this.Request.RequestParameters.OperationThreading(operation_threading);
-			return this;
-		}
-		
+		public SegmentsDescriptor OperationThreading(string operation_threading) => _requestParams(p=>p.OperationThreading(operation_threading));
 
 		///<summary>The URL-encoded request definition</summary>
-		public SegmentsDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public SegmentsDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public SegmentsDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public SegmentsDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for IndicesStatsForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-stats.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for IndicesStatsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-stats.html</pre></summary>
 	public partial class IndicesStatsDescriptor 
 	{
-		
-	
-
 		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
-		public IndicesStatsDescriptor CompletionFields(params string[] completion_fields)
-		{
-			this.Request.RequestParameters.CompletionFields(completion_fields);
-			return this;
-		}
-		
+		public IndicesStatsDescriptor CompletionFields(params string[] completion_fields) => _requestParams(p=>p.CompletionFields(completion_fields));
 			
 		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
-		public IndicesStatsDescriptor CompletionFields<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class
-		{
-			if (!typedPathLookups.HasAny())
-				return this;
-
-			this.Request.RequestParameters._CompletionFields(typedPathLookups);
-			return this;
-		}
-			
+		public IndicesStatsDescriptor CompletionFields<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class =>
+			_requestParams(p=>p._CompletionFields(typedPathLookups));
 
 		///<summary>A comma-separated list of fields for `fielddata` index metric (supports wildcards)</summary>
-		public IndicesStatsDescriptor FielddataFields(params string[] fielddata_fields)
-		{
-			this.Request.RequestParameters.FielddataFields(fielddata_fields);
-			return this;
-		}
-		
+		public IndicesStatsDescriptor FielddataFields(params string[] fielddata_fields) => _requestParams(p=>p.FielddataFields(fielddata_fields));
 			
 		///<summary>A comma-separated list of fields for `fielddata` index metric (supports wildcards)</summary>
-		public IndicesStatsDescriptor FielddataFields<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class
-		{
-			if (!typedPathLookups.HasAny())
-				return this;
-
-			this.Request.RequestParameters._FielddataFields(typedPathLookups);
-			return this;
-		}
-			
+		public IndicesStatsDescriptor FielddataFields<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class =>
+			_requestParams(p=>p._FielddataFields(typedPathLookups));
 
 		///<summary>A comma-separated list of fields for `fielddata` and `completion` index metric (supports wildcards)</summary>
-		public IndicesStatsDescriptor Fields(params string[] fields)
-		{
-			this.Request.RequestParameters.Fields(fields);
-			return this;
-		}
-		
+		public IndicesStatsDescriptor Fields(params string[] fields) => _requestParams(p=>p.Fields(fields));
 			
 		///<summary>A comma-separated list of fields for `fielddata` and `completion` index metric (supports wildcards)</summary>
-		public IndicesStatsDescriptor Fields<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class
-		{
-			if (!typedPathLookups.HasAny())
-				return this;
-
-			this.Request.RequestParameters._Fields(typedPathLookups);
-			return this;
-		}
-			
+		public IndicesStatsDescriptor Fields<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class =>
+			_requestParams(p=>p._Fields(typedPathLookups));
 
 		///<summary>A comma-separated list of search groups for `search` index metric</summary>
-		public IndicesStatsDescriptor Groups(params string[] groups)
-		{
-			this.Request.RequestParameters.Groups(groups);
-			return this;
-		}
-		
+		public IndicesStatsDescriptor Groups(params string[] groups) => _requestParams(p=>p.Groups(groups));
 
 		///<summary>Whether to return time and byte values in human-readable format.</summary>
-		public IndicesStatsDescriptor Human(bool human = true)
-		{
-			this.Request.RequestParameters.Human(human);
-			return this;
-		}
-		
+		public IndicesStatsDescriptor Human(bool human = true) => _requestParams(p=>p.Human(human));
 
 		///<summary>Return stats aggregated at cluster, index or shard level</summary>
-		public IndicesStatsDescriptor Level(Level level)
-		{
-			this.Request.RequestParameters.Level(level);
-			return this;
-		}
-		
+		public IndicesStatsDescriptor Level(Level level) => _requestParams(p=>p.Level(level));
 
 		///<summary>The URL-encoded request definition</summary>
-		public IndicesStatsDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public IndicesStatsDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public IndicesStatsDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public IndicesStatsDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for IndicesStatusForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-status.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for IndicesStatusForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-status.html</pre></summary>
 	public partial class IndicesStatusDescriptor 
 	{
-		
-	
-
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public IndicesStatusDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
-		{
-			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
-			return this;
-		}
-		
+		public IndicesStatusDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => _requestParams(p=>p.IgnoreUnavailable(ignore_unavailable));
 
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public IndicesStatusDescriptor AllowNoIndices(bool allow_no_indices = true)
-		{
-			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
-			return this;
-		}
-		
+		public IndicesStatusDescriptor AllowNoIndices(bool allow_no_indices = true) => _requestParams(p=>p.AllowNoIndices(allow_no_indices));
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public IndicesStatusDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
-		{
-			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
-			return this;
-		}
-		
+		public IndicesStatusDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => _requestParams(p=>p.ExpandWildcards(expand_wildcards));
 
 		///<summary>Whether to return time and byte values in human-readable format.</summary>
-		public IndicesStatusDescriptor Human(bool human = true)
-		{
-			this.Request.RequestParameters.Human(human);
-			return this;
-		}
-		
+		public IndicesStatusDescriptor Human(bool human = true) => _requestParams(p=>p.Human(human));
 
 		///<summary>TODO: ?</summary>
-		public IndicesStatusDescriptor OperationThreading(string operation_threading)
-		{
-			this.Request.RequestParameters.OperationThreading(operation_threading);
-			return this;
-		}
-		
+		public IndicesStatusDescriptor OperationThreading(string operation_threading) => _requestParams(p=>p.OperationThreading(operation_threading));
 
 		///<summary>Return information about shard recovery</summary>
-		public IndicesStatusDescriptor Recovery(bool recovery = true)
-		{
-			this.Request.RequestParameters.Recovery(recovery);
-			return this;
-		}
-		
+		public IndicesStatusDescriptor Recovery(bool recovery = true) => _requestParams(p=>p.Recovery(recovery));
 
 		///<summary>TODO: ?</summary>
-		public IndicesStatusDescriptor Snapshot(bool snapshot = true)
-		{
-			this.Request.RequestParameters.Snapshot(snapshot);
-			return this;
-		}
-		
+		public IndicesStatusDescriptor Snapshot(bool snapshot = true) => _requestParams(p=>p.Snapshot(snapshot));
 
 		///<summary>The URL-encoded request definition</summary>
-		public IndicesStatusDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public IndicesStatusDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public IndicesStatusDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public IndicesStatusDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for IndicesUpdateAliasesForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for IndicesUpdateAliasesForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</pre></summary>
 	public partial class AliasDescriptor 
 	{
-		
-	
-
 		///<summary>Request timeout</summary>
-		public AliasDescriptor Timeout(string timeout)
-		{
-			this.Request.RequestParameters.Timeout(timeout);
-			return this;
-		}
-		
+		public AliasDescriptor Timeout(string timeout) => _requestParams(p=>p.Timeout(timeout));
 
 		///<summary>Specify timeout for connection to master</summary>
-		public AliasDescriptor MasterTimeout(string master_timeout)
-		{
-			this.Request.RequestParameters.MasterTimeout(master_timeout);
-			return this;
-		}
-		
+		public AliasDescriptor MasterTimeout(string master_timeout) => _requestParams(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>The URL-encoded request definition</summary>
-		public AliasDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public AliasDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public AliasDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public AliasDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for IndicesUpgradeForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for IndicesUpgradeForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</pre></summary>
 	public partial class UpgradeDescriptor 
 	{
-		
-	
-
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public UpgradeDescriptor AllowNoIndices(bool allow_no_indices = true)
-		{
-			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
-			return this;
-		}
-		
+		public UpgradeDescriptor AllowNoIndices(bool allow_no_indices = true) => _requestParams(p=>p.AllowNoIndices(allow_no_indices));
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public UpgradeDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
-		{
-			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
-			return this;
-		}
-		
+		public UpgradeDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => _requestParams(p=>p.ExpandWildcards(expand_wildcards));
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public UpgradeDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
-		{
-			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
-			return this;
-		}
-		
+		public UpgradeDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => _requestParams(p=>p.IgnoreUnavailable(ignore_unavailable));
 
 		///<summary>Specify whether the request should block until the all segments are upgraded (default: true)</summary>
-		public UpgradeDescriptor WaitForCompletion(bool wait_for_completion = true)
-		{
-			this.Request.RequestParameters.WaitForCompletion(wait_for_completion);
-			return this;
-		}
-		
+		public UpgradeDescriptor WaitForCompletion(bool wait_for_completion = true) => _requestParams(p=>p.WaitForCompletion(wait_for_completion));
 
 		///<summary>If true, only ancient (an older Lucene major release) segments will be upgraded</summary>
-		public UpgradeDescriptor OnlyAncientSegments(bool only_ancient_segments = true)
-		{
-			this.Request.RequestParameters.OnlyAncientSegments(only_ancient_segments);
-			return this;
-		}
-		
+		public UpgradeDescriptor OnlyAncientSegments(bool only_ancient_segments = true) => _requestParams(p=>p.OnlyAncientSegments(only_ancient_segments));
 
 		///<summary>The URL-encoded request definition</summary>
-		public UpgradeDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public UpgradeDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public UpgradeDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public UpgradeDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for IndicesValidateQueryGetForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-validate.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for IndicesValidateQueryGetForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-validate.html</pre></summary>
 	public partial class ValidateQueryDescriptor<T> 
 	{
-		
-	
-
 		///<summary>Return detailed information about the error</summary>
-		public ValidateQueryDescriptor<T> Explain(bool explain = true)
-		{
-			this.Request.RequestParameters.Explain(explain);
-			return this;
-		}
-		
+		public ValidateQueryDescriptor<T> Explain(bool explain = true) => _requestParams(p=>p.Explain(explain));
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public ValidateQueryDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true)
-		{
-			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
-			return this;
-		}
-		
+		public ValidateQueryDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true) => _requestParams(p=>p.IgnoreUnavailable(ignore_unavailable));
 
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public ValidateQueryDescriptor<T> AllowNoIndices(bool allow_no_indices = true)
-		{
-			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
-			return this;
-		}
-		
+		public ValidateQueryDescriptor<T> AllowNoIndices(bool allow_no_indices = true) => _requestParams(p=>p.AllowNoIndices(allow_no_indices));
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ValidateQueryDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards)
-		{
-			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
-			return this;
-		}
-		
+		public ValidateQueryDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards) => _requestParams(p=>p.ExpandWildcards(expand_wildcards));
 
 		///<summary>TODO: ?</summary>
-		public ValidateQueryDescriptor<T> OperationThreading(string operation_threading)
-		{
-			this.Request.RequestParameters.OperationThreading(operation_threading);
-			return this;
-		}
-		
+		public ValidateQueryDescriptor<T> OperationThreading(string operation_threading) => _requestParams(p=>p.OperationThreading(operation_threading));
 
 		///<summary>Query in the Lucene query string syntax</summary>
-		public ValidateQueryDescriptor<T> Q(string q)
-		{
-			this.Request.RequestParameters.Q(q);
-			return this;
-		}
-		
+		public ValidateQueryDescriptor<T> Q(string q) => _requestParams(p=>p.Q(q));
 
 		///<summary>The analyzer to use for the query string</summary>
-		public ValidateQueryDescriptor<T> Analyzer(string analyzer)
-		{
-			this.Request.RequestParameters.Analyzer(analyzer);
-			return this;
-		}
-		
+		public ValidateQueryDescriptor<T> Analyzer(string analyzer) => _requestParams(p=>p.Analyzer(analyzer));
 
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
-		public ValidateQueryDescriptor<T> AnalyzeWildcard(bool analyze_wildcard = true)
-		{
-			this.Request.RequestParameters.AnalyzeWildcard(analyze_wildcard);
-			return this;
-		}
-		
+		public ValidateQueryDescriptor<T> AnalyzeWildcard(bool analyze_wildcard = true) => _requestParams(p=>p.AnalyzeWildcard(analyze_wildcard));
 
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public ValidateQueryDescriptor<T> DefaultOperator(DefaultOperator default_operator)
-		{
-			this.Request.RequestParameters.DefaultOperator(default_operator);
-			return this;
-		}
-		
+		public ValidateQueryDescriptor<T> DefaultOperator(DefaultOperator default_operator) => _requestParams(p=>p.DefaultOperator(default_operator));
 
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
-		public ValidateQueryDescriptor<T> Df(string df)
-		{
-			this.Request.RequestParameters.Df(df);
-			return this;
-		}
-		
+		public ValidateQueryDescriptor<T> Df(string df) => _requestParams(p=>p.Df(df));
 
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
-		public ValidateQueryDescriptor<T> Lenient(bool lenient = true)
-		{
-			this.Request.RequestParameters.Lenient(lenient);
-			return this;
-		}
-		
+		public ValidateQueryDescriptor<T> Lenient(bool lenient = true) => _requestParams(p=>p.Lenient(lenient));
 
 		///<summary>Specify whether query terms should be lowercased</summary>
-		public ValidateQueryDescriptor<T> LowercaseExpandedTerms(bool lowercase_expanded_terms = true)
-		{
-			this.Request.RequestParameters.LowercaseExpandedTerms(lowercase_expanded_terms);
-			return this;
-		}
-		
+		public ValidateQueryDescriptor<T> LowercaseExpandedTerms(bool lowercase_expanded_terms = true) => _requestParams(p=>p.LowercaseExpandedTerms(lowercase_expanded_terms));
 
 		///<summary>Provide a more detailed explanation showing the actual Lucene query that will be executed.</summary>
-		public ValidateQueryDescriptor<T> Rewrite(bool rewrite = true)
-		{
-			this.Request.RequestParameters.Rewrite(rewrite);
-			return this;
-		}
-		
+		public ValidateQueryDescriptor<T> Rewrite(bool rewrite = true) => _requestParams(p=>p.Rewrite(rewrite));
 
 		///<summary>The URL-encoded request definition</summary>
-		public ValidateQueryDescriptor<T> Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public ValidateQueryDescriptor<T> Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public ValidateQueryDescriptor<T> FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public ValidateQueryDescriptor<T> FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for Info
-	///<pre>
-	///http://www.elastic.co/guide/
-	///</pre>
-	///</summary>
+	///<summary>descriptor for Info <pre>http://www.elastic.co/guide/</pre></summary>
 	public partial class InfoDescriptor 
 	{
-		
-	
-
 		///<summary>The URL-encoded request definition</summary>
-		public InfoDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public InfoDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public InfoDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public InfoDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for ListBenchmarks
-	///<pre>
-	///http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-benchmark.html
-	///</pre>
-	///</summary>
-	public partial class ListBenchmarksDescriptor  : BaseRequest<ListBenchmarksRequestParameters>
+	///<summary>descriptor for ListBenchmarks <pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-benchmark.html</pre></summary>
+	public partial class ListBenchmarksDescriptor  : BasePathDescriptor<ListBenchmarksDescriptor,ListBenchmarksRequestParameters>
 	{
-		
-	
-
 		///<summary>The URL-encoded request definition</summary>
-		public ListBenchmarksDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public ListBenchmarksDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public ListBenchmarksDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
-		
+		public ListBenchmarksDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
+
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ListBenchmarksRequestParameters> pathInfo)
 		{
 			throw new NotImplementedException();
-		}
-		
+		} 
 	
 	}
 	
-	
-	///<summary>descriptor for MgetGet
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-multi-get.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for MgetGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-multi-get.html</pre></summary>
 	public partial class MultiGetDescriptor 
 	{
-		
-	
-
 		///<summary>A comma-separated list of fields to return in the response</summary>
-		public MultiGetDescriptor Fields(params string[] fields)
-		{
-			this.Request.RequestParameters.Fields(fields);
-			return this;
-		}
-		
+		public MultiGetDescriptor Fields(params string[] fields) => _requestParams(p=>p.Fields(fields));
 			
 		///<summary>A comma-separated list of fields to return in the response</summary>
-		public MultiGetDescriptor Fields<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class
-		{
-			if (!typedPathLookups.HasAny())
-				return this;
-
-			this.Request.RequestParameters._Fields(typedPathLookups);
-			return this;
-		}
-			
+		public MultiGetDescriptor Fields<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class =>
+			_requestParams(p=>p._Fields(typedPathLookups));
 
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public MultiGetDescriptor Preference(string preference)
-		{
-			this.Request.RequestParameters.Preference(preference);
-			return this;
-		}
-		
+		public MultiGetDescriptor Preference(string preference) => _requestParams(p=>p.Preference(preference));
 
 		///<summary>Specify whether to perform the operation in realtime or search mode</summary>
-		public MultiGetDescriptor Realtime(bool realtime = true)
-		{
-			this.Request.RequestParameters.Realtime(realtime);
-			return this;
-		}
-		
+		public MultiGetDescriptor Realtime(bool realtime = true) => _requestParams(p=>p.Realtime(realtime));
 
 		///<summary>Refresh the shard containing the document before performing the operation</summary>
-		public MultiGetDescriptor Refresh(bool refresh = true)
-		{
-			this.Request.RequestParameters.Refresh(refresh);
-			return this;
-		}
-		
+		public MultiGetDescriptor Refresh(bool refresh = true) => _requestParams(p=>p.Refresh(refresh));
 
 		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public MultiGetDescriptor SourceEnabled(params string[] source_enabled)
-		{
-			this.Request.RequestParameters.SourceEnabled(source_enabled);
-			return this;
-		}
-		
+		public MultiGetDescriptor SourceEnabled(params string[] source_enabled) => _requestParams(p=>p.SourceEnabled(source_enabled));
 
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public MultiGetDescriptor SourceExclude(params string[] source_exclude)
-		{
-			this.Request.RequestParameters.SourceExclude(source_exclude);
-			return this;
-		}
-		
+		public MultiGetDescriptor SourceExclude(params string[] source_exclude) => _requestParams(p=>p.SourceExclude(source_exclude));
 			
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public MultiGetDescriptor SourceExclude<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class
-		{
-			if (!typedPathLookups.HasAny())
-				return this;
-
-			this.Request.RequestParameters._SourceExclude(typedPathLookups);
-			return this;
-		}
-			
+		public MultiGetDescriptor SourceExclude<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class =>
+			_requestParams(p=>p._SourceExclude(typedPathLookups));
 
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public MultiGetDescriptor SourceInclude(params string[] source_include)
-		{
-			this.Request.RequestParameters.SourceInclude(source_include);
-			return this;
-		}
-		
+		public MultiGetDescriptor SourceInclude(params string[] source_include) => _requestParams(p=>p.SourceInclude(source_include));
 			
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public MultiGetDescriptor SourceInclude<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class
-		{
-			if (!typedPathLookups.HasAny())
-				return this;
-
-			this.Request.RequestParameters._SourceInclude(typedPathLookups);
-			return this;
-		}
-			
+		public MultiGetDescriptor SourceInclude<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class =>
+			_requestParams(p=>p._SourceInclude(typedPathLookups));
 
 		///<summary>The URL-encoded request definition</summary>
-		public MultiGetDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public MultiGetDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public MultiGetDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public MultiGetDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for MltGet
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-more-like-this.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for MltGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-more-like-this.html</pre></summary>
 	public partial class MoreLikeThisDescriptor<T> 
 	{
-		
-	
-
 		///<summary>The boost factor</summary>
-		public MoreLikeThisDescriptor<T> BoostTerms(double boost_terms)
-		{
-			this.Request.RequestParameters.BoostTerms(boost_terms);
-			return this;
-		}
-		
+		public MoreLikeThisDescriptor<T> BoostTerms(double boost_terms) => _requestParams(p=>p.BoostTerms(boost_terms));
 
 		///<summary>The word occurrence frequency as count: words with higher occurrence in the corpus will be ignored</summary>
-		public MoreLikeThisDescriptor<T> MaxDocFreq(long max_doc_freq)
-		{
-			this.Request.RequestParameters.MaxDocFreq(max_doc_freq);
-			return this;
-		}
-		
+		public MoreLikeThisDescriptor<T> MaxDocFreq(long max_doc_freq) => _requestParams(p=>p.MaxDocFreq(max_doc_freq));
 
 		///<summary>The maximum query terms to be included in the generated query</summary>
-		public MoreLikeThisDescriptor<T> MaxQueryTerms(long max_query_terms)
-		{
-			this.Request.RequestParameters.MaxQueryTerms(max_query_terms);
-			return this;
-		}
-		
+		public MoreLikeThisDescriptor<T> MaxQueryTerms(long max_query_terms) => _requestParams(p=>p.MaxQueryTerms(max_query_terms));
 
 		///<summary>The minimum length of the word: longer words will be ignored</summary>
-		public MoreLikeThisDescriptor<T> MaxWordLength(long max_word_length)
-		{
-			this.Request.RequestParameters.MaxWordLength(max_word_length);
-			return this;
-		}
-		
+		public MoreLikeThisDescriptor<T> MaxWordLength(long max_word_length) => _requestParams(p=>p.MaxWordLength(max_word_length));
 
 		///<summary>The word occurrence frequency as count: words with lower occurrence in the corpus will be ignored</summary>
-		public MoreLikeThisDescriptor<T> MinDocFreq(long min_doc_freq)
-		{
-			this.Request.RequestParameters.MinDocFreq(min_doc_freq);
-			return this;
-		}
-		
+		public MoreLikeThisDescriptor<T> MinDocFreq(long min_doc_freq) => _requestParams(p=>p.MinDocFreq(min_doc_freq));
 
 		///<summary>The term frequency as percent: terms with lower occurence in the source document will be ignored</summary>
-		public MoreLikeThisDescriptor<T> MinTermFreq(long min_term_freq)
-		{
-			this.Request.RequestParameters.MinTermFreq(min_term_freq);
-			return this;
-		}
-		
+		public MoreLikeThisDescriptor<T> MinTermFreq(long min_term_freq) => _requestParams(p=>p.MinTermFreq(min_term_freq));
 
 		///<summary>The minimum length of the word: shorter words will be ignored</summary>
-		public MoreLikeThisDescriptor<T> MinWordLength(long min_word_length)
-		{
-			this.Request.RequestParameters.MinWordLength(min_word_length);
-			return this;
-		}
-		
+		public MoreLikeThisDescriptor<T> MinWordLength(long min_word_length) => _requestParams(p=>p.MinWordLength(min_word_length));
 
 		///<summary>Specific fields to perform the query against</summary>
-		public MoreLikeThisDescriptor<T> MltFields(params string[] mlt_fields)
-		{
-			this.Request.RequestParameters.MltFields(mlt_fields);
-			return this;
-		}
-		
+		public MoreLikeThisDescriptor<T> MltFields(params string[] mlt_fields) => _requestParams(p=>p.MltFields(mlt_fields));
 			
 		///<summary>Specific fields to perform the query against</summary>
-		public MoreLikeThisDescriptor<T> MltFields(params Expression<Func<T, object>>[] typedPathLookups) 
-		{
-			if (!typedPathLookups.HasAny())
-				return this;
-
-			this.Request.RequestParameters._MltFields(typedPathLookups);
-			return this;
-		}
-			
+		public MoreLikeThisDescriptor<T> MltFields(params Expression<Func<T, object>>[] typedPathLookups)  =>
+			_requestParams(p=>p._MltFields(typedPathLookups));
 
 		///<summary>How many terms have to match in order to consider the document a match (default: 0.3)</summary>
-		public MoreLikeThisDescriptor<T> PercentTermsToMatch(double percent_terms_to_match)
-		{
-			this.Request.RequestParameters.PercentTermsToMatch(percent_terms_to_match);
-			return this;
-		}
-		
+		public MoreLikeThisDescriptor<T> PercentTermsToMatch(double percent_terms_to_match) => _requestParams(p=>p.PercentTermsToMatch(percent_terms_to_match));
 
 		///<summary>Specific routing value</summary>
-		public MoreLikeThisDescriptor<T> Routing(string routing)
-		{
-			this.Request.RequestParameters.Routing(routing);
-			return this;
-		}
-		
+		public MoreLikeThisDescriptor<T> Routing(string routing) => _requestParams(p=>p.Routing(routing));
 
 		///<summary>The offset from which to return results</summary>
-		public MoreLikeThisDescriptor<T> SearchFrom(long search_from)
-		{
-			this.Request.RequestParameters.SearchFrom(search_from);
-			return this;
-		}
-		
+		public MoreLikeThisDescriptor<T> SearchFrom(long search_from) => _requestParams(p=>p.SearchFrom(search_from));
 
 		///<summary>A comma-separated list of indices to perform the query against (default: the index containing the document)</summary>
-		public MoreLikeThisDescriptor<T> SearchIndices(params string[] search_indices)
-		{
-			this.Request.RequestParameters.SearchIndices(search_indices);
-			return this;
-		}
-		
+		public MoreLikeThisDescriptor<T> SearchIndices(params string[] search_indices) => _requestParams(p=>p.SearchIndices(search_indices));
 
 		///<summary>A scroll search request definition</summary>
-		public MoreLikeThisDescriptor<T> SearchScroll(string search_scroll)
-		{
-			this.Request.RequestParameters.SearchScroll(search_scroll);
-			return this;
-		}
-		
+		public MoreLikeThisDescriptor<T> SearchScroll(string search_scroll) => _requestParams(p=>p.SearchScroll(search_scroll));
 
 		///<summary>The number of documents to return (default: 10)</summary>
-		public MoreLikeThisDescriptor<T> SearchSize(long search_size)
-		{
-			this.Request.RequestParameters.SearchSize(search_size);
-			return this;
-		}
-		
+		public MoreLikeThisDescriptor<T> SearchSize(long search_size) => _requestParams(p=>p.SearchSize(search_size));
 
 		///<summary>A specific search request definition (instead of using the request body)</summary>
-		public MoreLikeThisDescriptor<T> SearchSource(string search_source)
-		{
-			this.Request.RequestParameters.SearchSource(search_source);
-			return this;
-		}
-		
+		public MoreLikeThisDescriptor<T> SearchSource(string search_source) => _requestParams(p=>p.SearchSource(search_source));
 
 		///<summary>Specific search type (eg. `dfs_then_fetch`, `count`, etc)</summary>
-		public MoreLikeThisDescriptor<T> SearchType(string search_type)
-		{
-			this.Request.RequestParameters.SearchType(search_type);
-			return this;
-		}
-		
+		public MoreLikeThisDescriptor<T> SearchType(string search_type) => _requestParams(p=>p.SearchType(search_type));
 
 		///<summary>A comma-separated list of types to perform the query against (default: the same type as the document)</summary>
-		public MoreLikeThisDescriptor<T> SearchTypes(params string[] search_types)
-		{
-			this.Request.RequestParameters.SearchTypes(search_types);
-			return this;
-		}
-		
+		public MoreLikeThisDescriptor<T> SearchTypes(params string[] search_types) => _requestParams(p=>p.SearchTypes(search_types));
 
 		///<summary>A list of stop words to be ignored</summary>
-		public MoreLikeThisDescriptor<T> StopWords(params string[] stop_words)
-		{
-			this.Request.RequestParameters.StopWords(stop_words);
-			return this;
-		}
-		
+		public MoreLikeThisDescriptor<T> StopWords(params string[] stop_words) => _requestParams(p=>p.StopWords(stop_words));
 
 		///<summary>The URL-encoded request definition</summary>
-		public MoreLikeThisDescriptor<T> Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public MoreLikeThisDescriptor<T> Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public MoreLikeThisDescriptor<T> FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public MoreLikeThisDescriptor<T> FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for MpercolateGet
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for MpercolateGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html</pre></summary>
 	public partial class MultiPercolateDescriptor 
 	{
-		
-	
-
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public MultiPercolateDescriptor IgnoreUnavailable(bool ignore_unavailable = true)
-		{
-			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
-			return this;
-		}
-		
+		public MultiPercolateDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => _requestParams(p=>p.IgnoreUnavailable(ignore_unavailable));
 
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public MultiPercolateDescriptor AllowNoIndices(bool allow_no_indices = true)
-		{
-			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
-			return this;
-		}
-		
+		public MultiPercolateDescriptor AllowNoIndices(bool allow_no_indices = true) => _requestParams(p=>p.AllowNoIndices(allow_no_indices));
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public MultiPercolateDescriptor ExpandWildcards(ExpandWildcards expand_wildcards)
-		{
-			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
-			return this;
-		}
-		
+		public MultiPercolateDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => _requestParams(p=>p.ExpandWildcards(expand_wildcards));
 
 		///<summary>The URL-encoded request definition</summary>
-		public MultiPercolateDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public MultiPercolateDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public MultiPercolateDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public MultiPercolateDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for MsearchGet
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-multi-search.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for MsearchGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-multi-search.html</pre></summary>
 	public partial class MultiSearchDescriptor 
 	{
-		
-	
-
 		///<summary>Search operation type</summary>
-		public MultiSearchDescriptor SearchType(SearchType search_type)
-		{
-			this.Request.RequestParameters.SearchType(search_type);
-			return this;
-		}
-		
+		public MultiSearchDescriptor SearchType(SearchType search_type) => _requestParams(p=>p.SearchType(search_type));
 
 		///<summary>The URL-encoded request definition</summary>
-		public MultiSearchDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public MultiSearchDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public MultiSearchDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public MultiSearchDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for MtermvectorsGet
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-multi-termvectors.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for MtermvectorsGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-multi-termvectors.html</pre></summary>
 	public partial class MultiTermVectorsDescriptor<T> 
 	{
-		
-	
-
 		///<summary>Specifies if total term frequency and document frequency should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public MultiTermVectorsDescriptor<T> TermStatistics(bool term_statistics = true)
-		{
-			this.Request.RequestParameters.TermStatistics(term_statistics);
-			return this;
-		}
-		
+		public MultiTermVectorsDescriptor<T> TermStatistics(bool term_statistics = true) => _requestParams(p=>p.TermStatistics(term_statistics));
 
 		///<summary>Specifies if document count, sum of document frequencies and sum of total term frequencies should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public MultiTermVectorsDescriptor<T> FieldStatistics(bool field_statistics = true)
-		{
-			this.Request.RequestParameters.FieldStatistics(field_statistics);
-			return this;
-		}
-		
+		public MultiTermVectorsDescriptor<T> FieldStatistics(bool field_statistics = true) => _requestParams(p=>p.FieldStatistics(field_statistics));
 
 		///<summary>A comma-separated list of fields to return. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public MultiTermVectorsDescriptor<T> Fields(params string[] fields)
-		{
-			this.Request.RequestParameters.Fields(fields);
-			return this;
-		}
-		
+		public MultiTermVectorsDescriptor<T> Fields(params string[] fields) => _requestParams(p=>p.Fields(fields));
 			
 		///<summary>A comma-separated list of fields to return. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public MultiTermVectorsDescriptor<T> Fields(params Expression<Func<T, object>>[] typedPathLookups) 
-		{
-			if (!typedPathLookups.HasAny())
-				return this;
-
-			this.Request.RequestParameters._Fields(typedPathLookups);
-			return this;
-		}
-			
+		public MultiTermVectorsDescriptor<T> Fields(params Expression<Func<T, object>>[] typedPathLookups)  =>
+			_requestParams(p=>p._Fields(typedPathLookups));
 
 		///<summary>Specifies if term offsets should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public MultiTermVectorsDescriptor<T> Offsets(bool offsets = true)
-		{
-			this.Request.RequestParameters.Offsets(offsets);
-			return this;
-		}
-		
+		public MultiTermVectorsDescriptor<T> Offsets(bool offsets = true) => _requestParams(p=>p.Offsets(offsets));
 
 		///<summary>Specifies if term positions should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public MultiTermVectorsDescriptor<T> Positions(bool positions = true)
-		{
-			this.Request.RequestParameters.Positions(positions);
-			return this;
-		}
-		
+		public MultiTermVectorsDescriptor<T> Positions(bool positions = true) => _requestParams(p=>p.Positions(positions));
 
 		///<summary>Specifies if term payloads should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public MultiTermVectorsDescriptor<T> Payloads(bool payloads = true)
-		{
-			this.Request.RequestParameters.Payloads(payloads);
-			return this;
-		}
-		
+		public MultiTermVectorsDescriptor<T> Payloads(bool payloads = true) => _requestParams(p=>p.Payloads(payloads));
 
 		///<summary>Specify the node or shard the operation should be performed on (default: random) .Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public MultiTermVectorsDescriptor<T> Preference(string preference)
-		{
-			this.Request.RequestParameters.Preference(preference);
-			return this;
-		}
-		
+		public MultiTermVectorsDescriptor<T> Preference(string preference) => _requestParams(p=>p.Preference(preference));
 
 		///<summary>Specific routing value. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public MultiTermVectorsDescriptor<T> Routing(string routing)
-		{
-			this.Request.RequestParameters.Routing(routing);
-			return this;
-		}
-		
+		public MultiTermVectorsDescriptor<T> Routing(string routing) => _requestParams(p=>p.Routing(routing));
 
 		///<summary>Parent id of documents. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public MultiTermVectorsDescriptor<T> Parent(string parent)
-		{
-			this.Request.RequestParameters.Parent(parent);
-			return this;
-		}
-		
+		public MultiTermVectorsDescriptor<T> Parent(string parent) => _requestParams(p=>p.Parent(parent));
 
 		///<summary>Specifies if requests are real-time as opposed to near-real-time (default: true).</summary>
-		public MultiTermVectorsDescriptor<T> Realtime(bool realtime = true)
-		{
-			this.Request.RequestParameters.Realtime(realtime);
-			return this;
-		}
-		
+		public MultiTermVectorsDescriptor<T> Realtime(bool realtime = true) => _requestParams(p=>p.Realtime(realtime));
 
 		///<summary>The URL-encoded request definition</summary>
-		public MultiTermVectorsDescriptor<T> Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public MultiTermVectorsDescriptor<T> Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public MultiTermVectorsDescriptor<T> FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public MultiTermVectorsDescriptor<T> FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for NodesHotThreadsForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-hot-threads.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for NodesHotThreadsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-hot-threads.html</pre></summary>
 	public partial class NodesHotThreadsDescriptor 
 	{
-		
-	
-
 		///<summary>The interval for the second sampling of threads</summary>
-		public NodesHotThreadsDescriptor Interval(string interval)
-		{
-			this.Request.RequestParameters.Interval(interval);
-			return this;
-		}
-		
+		public NodesHotThreadsDescriptor Interval(string interval) => _requestParams(p=>p.Interval(interval));
 
 		///<summary>Number of samples of thread stacktrace (default: 10)</summary>
-		public NodesHotThreadsDescriptor Snapshots(long snapshots)
-		{
-			this.Request.RequestParameters.Snapshots(snapshots);
-			return this;
-		}
-		
+		public NodesHotThreadsDescriptor Snapshots(long snapshots) => _requestParams(p=>p.Snapshots(snapshots));
 
 		///<summary>Specify the number of threads to provide information for (default: 3)</summary>
-		public NodesHotThreadsDescriptor Threads(long threads)
-		{
-			this.Request.RequestParameters.Threads(threads);
-			return this;
-		}
-		
+		public NodesHotThreadsDescriptor Threads(long threads) => _requestParams(p=>p.Threads(threads));
 
 		///<summary>Don&#39;t show threads that are in known-idle places, such as waiting on a socket select or pulling from an empty task queue (default: true)</summary>
-		public NodesHotThreadsDescriptor IgnoreIdleThreads(bool ignore_idle_threads = true)
-		{
-			this.Request.RequestParameters.IgnoreIdleThreads(ignore_idle_threads);
-			return this;
-		}
-		
+		public NodesHotThreadsDescriptor IgnoreIdleThreads(bool ignore_idle_threads = true) => _requestParams(p=>p.IgnoreIdleThreads(ignore_idle_threads));
 
 		///<summary>The type to sample (default: cpu)</summary>
-		public NodesHotThreadsDescriptor ThreadType(ThreadType thread_type)
-		{
-			this.Request.RequestParameters.ThreadType(thread_type);
-			return this;
-		}
-		
+		public NodesHotThreadsDescriptor ThreadType(ThreadType thread_type) => _requestParams(p=>p.ThreadType(thread_type));
 
 		///<summary>The URL-encoded request definition</summary>
-		public NodesHotThreadsDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public NodesHotThreadsDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public NodesHotThreadsDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public NodesHotThreadsDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for NodesInfoForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-info.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for NodesInfoForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-info.html</pre></summary>
 	public partial class NodesInfoDescriptor 
 	{
-		
-	
-
 		///<summary>Return settings in flat format (default: false)</summary>
-		public NodesInfoDescriptor FlatSettings(bool flat_settings = true)
-		{
-			this.Request.RequestParameters.FlatSettings(flat_settings);
-			return this;
-		}
-		
+		public NodesInfoDescriptor FlatSettings(bool flat_settings = true) => _requestParams(p=>p.FlatSettings(flat_settings));
 
 		///<summary>Whether to return time and byte values in human-readable format.</summary>
-		public NodesInfoDescriptor Human(bool human = true)
-		{
-			this.Request.RequestParameters.Human(human);
-			return this;
-		}
-		
+		public NodesInfoDescriptor Human(bool human = true) => _requestParams(p=>p.Human(human));
 
 		///<summary>The URL-encoded request definition</summary>
-		public NodesInfoDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public NodesInfoDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public NodesInfoDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public NodesInfoDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for NodesShutdownForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-shutdown.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for NodesShutdownForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-shutdown.html</pre></summary>
 	public partial class NodesShutdownDescriptor 
 	{
-		
-	
-
 		///<summary>Set the delay for the operation (default: 1s)</summary>
-		public NodesShutdownDescriptor Delay(string delay)
-		{
-			this.Request.RequestParameters.Delay(delay);
-			return this;
-		}
-		
+		public NodesShutdownDescriptor Delay(string delay) => _requestParams(p=>p.Delay(delay));
 
 		///<summary>Exit the JVM as well (default: true)</summary>
-		public NodesShutdownDescriptor Exit(bool exit = true)
-		{
-			this.Request.RequestParameters.Exit(exit);
-			return this;
-		}
-		
+		public NodesShutdownDescriptor Exit(bool exit = true) => _requestParams(p=>p.Exit(exit));
 
 		///<summary>The URL-encoded request definition</summary>
-		public NodesShutdownDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public NodesShutdownDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public NodesShutdownDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public NodesShutdownDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for NodesStatsForAll
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-stats.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for NodesStatsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-stats.html</pre></summary>
 	public partial class NodesStatsDescriptor 
 	{
-		
-	
-
 		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
-		public NodesStatsDescriptor CompletionFields(params string[] completion_fields)
-		{
-			this.Request.RequestParameters.CompletionFields(completion_fields);
-			return this;
-		}
-		
+		public NodesStatsDescriptor CompletionFields(params string[] completion_fields) => _requestParams(p=>p.CompletionFields(completion_fields));
 			
 		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
-		public NodesStatsDescriptor CompletionFields<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class
-		{
-			if (!typedPathLookups.HasAny())
-				return this;
-
-			this.Request.RequestParameters._CompletionFields(typedPathLookups);
-			return this;
-		}
-			
+		public NodesStatsDescriptor CompletionFields<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class =>
+			_requestParams(p=>p._CompletionFields(typedPathLookups));
 
 		///<summary>A comma-separated list of fields for `fielddata` index metric (supports wildcards)</summary>
-		public NodesStatsDescriptor FielddataFields(params string[] fielddata_fields)
-		{
-			this.Request.RequestParameters.FielddataFields(fielddata_fields);
-			return this;
-		}
-		
+		public NodesStatsDescriptor FielddataFields(params string[] fielddata_fields) => _requestParams(p=>p.FielddataFields(fielddata_fields));
 			
 		///<summary>A comma-separated list of fields for `fielddata` index metric (supports wildcards)</summary>
-		public NodesStatsDescriptor FielddataFields<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class
-		{
-			if (!typedPathLookups.HasAny())
-				return this;
-
-			this.Request.RequestParameters._FielddataFields(typedPathLookups);
-			return this;
-		}
-			
+		public NodesStatsDescriptor FielddataFields<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class =>
+			_requestParams(p=>p._FielddataFields(typedPathLookups));
 
 		///<summary>A comma-separated list of fields for `fielddata` and `completion` index metric (supports wildcards)</summary>
-		public NodesStatsDescriptor Fields(params string[] fields)
-		{
-			this.Request.RequestParameters.Fields(fields);
-			return this;
-		}
-		
+		public NodesStatsDescriptor Fields(params string[] fields) => _requestParams(p=>p.Fields(fields));
 			
 		///<summary>A comma-separated list of fields for `fielddata` and `completion` index metric (supports wildcards)</summary>
-		public NodesStatsDescriptor Fields<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class
-		{
-			if (!typedPathLookups.HasAny())
-				return this;
-
-			this.Request.RequestParameters._Fields(typedPathLookups);
-			return this;
-		}
-			
+		public NodesStatsDescriptor Fields<T>(params Expression<Func<T, object>>[] typedPathLookups) where T : class =>
+			_requestParams(p=>p._Fields(typedPathLookups));
 
 		///<summary>A comma-separated list of search groups for `search` index metric</summary>
-		public NodesStatsDescriptor Groups(bool groups = true)
-		{
-			this.Request.RequestParameters.Groups(groups);
-			return this;
-		}
-		
+		public NodesStatsDescriptor Groups(bool groups = true) => _requestParams(p=>p.Groups(groups));
 
 		///<summary>Whether to return time and byte values in human-readable format.</summary>
-		public NodesStatsDescriptor Human(bool human = true)
-		{
-			this.Request.RequestParameters.Human(human);
-			return this;
-		}
-		
+		public NodesStatsDescriptor Human(bool human = true) => _requestParams(p=>p.Human(human));
 
 		///<summary>Return indices stats aggregated at node, index or shard level</summary>
-		public NodesStatsDescriptor Level(Level level)
-		{
-			this.Request.RequestParameters.Level(level);
-			return this;
-		}
-		
+		public NodesStatsDescriptor Level(Level level) => _requestParams(p=>p.Level(level));
 
 		///<summary>A comma-separated list of document types for the `indexing` index metric</summary>
-		public NodesStatsDescriptor Types(params string[] types)
-		{
-			this.Request.RequestParameters.Types(types);
-			return this;
-		}
-		
+		public NodesStatsDescriptor Types(params string[] types) => _requestParams(p=>p.Types(types));
 
 		///<summary>The URL-encoded request definition</summary>
-		public NodesStatsDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public NodesStatsDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public NodesStatsDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public NodesStatsDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for PercolateGet
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for PercolateGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html</pre></summary>
 	public partial class PercolateDescriptor<T> 
 	{
-		
-	
-
 		///<summary>A comma-separated list of specific routing values</summary>
-		public PercolateDescriptor<T> Routing(params string[] routing)
-		{
-			this.Request.RequestParameters.Routing(routing);
-			return this;
-		}
-		
+		public PercolateDescriptor<T> Routing(params string[] routing) => _requestParams(p=>p.Routing(routing));
 
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public PercolateDescriptor<T> Preference(string preference)
-		{
-			this.Request.RequestParameters.Preference(preference);
-			return this;
-		}
-		
+		public PercolateDescriptor<T> Preference(string preference) => _requestParams(p=>p.Preference(preference));
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public PercolateDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true)
-		{
-			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
-			return this;
-		}
-		
+		public PercolateDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true) => _requestParams(p=>p.IgnoreUnavailable(ignore_unavailable));
 
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public PercolateDescriptor<T> AllowNoIndices(bool allow_no_indices = true)
-		{
-			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
-			return this;
-		}
-		
+		public PercolateDescriptor<T> AllowNoIndices(bool allow_no_indices = true) => _requestParams(p=>p.AllowNoIndices(allow_no_indices));
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public PercolateDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards)
-		{
-			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
-			return this;
-		}
-		
+		public PercolateDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards) => _requestParams(p=>p.ExpandWildcards(expand_wildcards));
 
 		///<summary>Return an array of matching query IDs instead of objects</summary>
-		public PercolateDescriptor<T> PercolateFormat(PercolateFormat percolate_format)
-		{
-			this.Request.RequestParameters.PercolateFormat(percolate_format);
-			return this;
-		}
-		
+		public PercolateDescriptor<T> PercolateFormat(PercolateFormat percolate_format) => _requestParams(p=>p.PercolateFormat(percolate_format));
 
 		///<summary>The index to percolate the document into. Defaults to index.</summary>
-		public PercolateDescriptor<T> PercolateIndex(string percolate_index)
-		{
-			this.Request.RequestParameters.PercolateIndex(percolate_index);
-			return this;
-		}
-		
+		public PercolateDescriptor<T> PercolateIndex(string percolate_index) => _requestParams(p=>p.PercolateIndex(percolate_index));
 
 		///<summary>The type to percolate document into. Defaults to type.</summary>
-		public PercolateDescriptor<T> PercolateType(string percolate_type)
-		{
-			this.Request.RequestParameters.PercolateType(percolate_type);
-			return this;
-		}
-		
+		public PercolateDescriptor<T> PercolateType(string percolate_type) => _requestParams(p=>p.PercolateType(percolate_type));
 
 		///<summary>The routing value to use when percolating the existing document.</summary>
-		public PercolateDescriptor<T> PercolateRouting(string percolate_routing)
-		{
-			this.Request.RequestParameters.PercolateRouting(percolate_routing);
-			return this;
-		}
-		
+		public PercolateDescriptor<T> PercolateRouting(string percolate_routing) => _requestParams(p=>p.PercolateRouting(percolate_routing));
 
 		///<summary>Which shard to prefer when executing the percolate request.</summary>
-		public PercolateDescriptor<T> PercolatePreference(string percolate_preference)
-		{
-			this.Request.RequestParameters.PercolatePreference(percolate_preference);
-			return this;
-		}
-		
+		public PercolateDescriptor<T> PercolatePreference(string percolate_preference) => _requestParams(p=>p.PercolatePreference(percolate_preference));
 
 		///<summary>Explicit version number for concurrency control</summary>
-		public PercolateDescriptor<T> Version(long version)
-		{
-			this.Request.RequestParameters.Version(version);
-			return this;
-		}
-		
+		public PercolateDescriptor<T> Version(long version) => _requestParams(p=>p.Version(version));
 
 		///<summary>Specific version type</summary>
-		public PercolateDescriptor<T> VersionType(VersionType version_type)
-		{
-			this.Request.RequestParameters.VersionType(version_type);
-			return this;
-		}
-		
+		public PercolateDescriptor<T> VersionType(VersionType version_type) => _requestParams(p=>p.VersionType(version_type));
 
 		///<summary>The URL-encoded request definition</summary>
-		public PercolateDescriptor<T> Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public PercolateDescriptor<T> Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public PercolateDescriptor<T> FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public PercolateDescriptor<T> FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for Ping
-	///<pre>
-	///http://www.elastic.co/guide/
-	///</pre>
-	///</summary>
+	///<summary>descriptor for Ping <pre>http://www.elastic.co/guide/</pre></summary>
 	public partial class PingDescriptor 
 	{
-		
-	
-
 		///<summary>The URL-encoded request definition</summary>
-		public PingDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public PingDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public PingDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public PingDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for PutScript
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for PutScript <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</pre></summary>
 	public partial class PutScriptDescriptor 
 	{
-		
-	
-
 		///<summary>Explicit operation type</summary>
-		public PutScriptDescriptor OpType(OpType op_type)
-		{
-			this.Request.RequestParameters.OpType(op_type);
-			return this;
-		}
-		
+		public PutScriptDescriptor OpType(OpType op_type) => _requestParams(p=>p.OpType(op_type));
 
 		///<summary>Explicit version number for concurrency control</summary>
-		public PutScriptDescriptor Version(long version)
-		{
-			this.Request.RequestParameters.Version(version);
-			return this;
-		}
-		
+		public PutScriptDescriptor Version(long version) => _requestParams(p=>p.Version(version));
 
 		///<summary>Specific version type</summary>
-		public PutScriptDescriptor VersionType(VersionType version_type)
-		{
-			this.Request.RequestParameters.VersionType(version_type);
-			return this;
-		}
-		
+		public PutScriptDescriptor VersionType(VersionType version_type) => _requestParams(p=>p.VersionType(version_type));
 
 		///<summary>The URL-encoded request definition</summary>
-		public PutScriptDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public PutScriptDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public PutScriptDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public PutScriptDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for ScrollGet
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-request-scroll.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for ScrollGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-request-scroll.html</pre></summary>
 	public partial class ScrollDescriptor<T> 
 	{
-		
-	
-
 		///<summary>The URL-encoded request definition</summary>
-		public ScrollDescriptor<T> Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public ScrollDescriptor<T> Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public ScrollDescriptor<T> FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public ScrollDescriptor<T> FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for SearchGet
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-search.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for SearchGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-search.html</pre></summary>
 	public partial class SearchDescriptor<T> 
 	{
-		
-	
-
 		///<summary>The analyzer to use for the query string</summary>
-		public SearchDescriptor<T> Analyzer(string analyzer)
-		{
-			this.Request.RequestParameters.Analyzer(analyzer);
-			return this;
-		}
-		
+		public SearchDescriptor<T> Analyzer(string analyzer) => _requestParams(p=>p.Analyzer(analyzer));
 
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
-		public SearchDescriptor<T> AnalyzeWildcard(bool analyze_wildcard = true)
-		{
-			this.Request.RequestParameters.AnalyzeWildcard(analyze_wildcard);
-			return this;
-		}
-		
+		public SearchDescriptor<T> AnalyzeWildcard(bool analyze_wildcard = true) => _requestParams(p=>p.AnalyzeWildcard(analyze_wildcard));
 
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public SearchDescriptor<T> DefaultOperator(DefaultOperator default_operator)
-		{
-			this.Request.RequestParameters.DefaultOperator(default_operator);
-			return this;
-		}
-		
+		public SearchDescriptor<T> DefaultOperator(DefaultOperator default_operator) => _requestParams(p=>p.DefaultOperator(default_operator));
 
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
-		public SearchDescriptor<T> Df(string df)
-		{
-			this.Request.RequestParameters.Df(df);
-			return this;
-		}
-		
+		public SearchDescriptor<T> Df(string df) => _requestParams(p=>p.Df(df));
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public SearchDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true)
-		{
-			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
-			return this;
-		}
-		
+		public SearchDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true) => _requestParams(p=>p.IgnoreUnavailable(ignore_unavailable));
 
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public SearchDescriptor<T> AllowNoIndices(bool allow_no_indices = true)
-		{
-			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
-			return this;
-		}
-		
+		public SearchDescriptor<T> AllowNoIndices(bool allow_no_indices = true) => _requestParams(p=>p.AllowNoIndices(allow_no_indices));
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public SearchDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards)
-		{
-			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
-			return this;
-		}
-		
+		public SearchDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards) => _requestParams(p=>p.ExpandWildcards(expand_wildcards));
 
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
-		public SearchDescriptor<T> Lenient(bool lenient = true)
-		{
-			this.Request.RequestParameters.Lenient(lenient);
-			return this;
-		}
-		
+		public SearchDescriptor<T> Lenient(bool lenient = true) => _requestParams(p=>p.Lenient(lenient));
 
 		///<summary>Specify whether query terms should be lowercased</summary>
-		public SearchDescriptor<T> LowercaseExpandedTerms(bool lowercase_expanded_terms = true)
-		{
-			this.Request.RequestParameters.LowercaseExpandedTerms(lowercase_expanded_terms);
-			return this;
-		}
-		
+		public SearchDescriptor<T> LowercaseExpandedTerms(bool lowercase_expanded_terms = true) => _requestParams(p=>p.LowercaseExpandedTerms(lowercase_expanded_terms));
 
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public SearchDescriptor<T> Preference(string preference)
-		{
-			this.Request.RequestParameters.Preference(preference);
-			return this;
-		}
-		
+		public SearchDescriptor<T> Preference(string preference) => _requestParams(p=>p.Preference(preference));
 
 		///<summary>A comma-separated list of specific routing values</summary>
-		public SearchDescriptor<T> Routing(params string[] routing)
-		{
-			this.Request.RequestParameters.Routing(routing);
-			return this;
-		}
-		
+		public SearchDescriptor<T> Routing(params string[] routing) => _requestParams(p=>p.Routing(routing));
 
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
-		public SearchDescriptor<T> Scroll(string scroll)
-		{
-			this.Request.RequestParameters.Scroll(scroll);
-			return this;
-		}
-		
+		public SearchDescriptor<T> Scroll(string scroll) => _requestParams(p=>p.Scroll(scroll));
 
 		///<summary>Search operation type</summary>
-		public SearchDescriptor<T> SearchType(SearchType search_type)
-		{
-			this.Request.RequestParameters.SearchType(search_type);
-			return this;
-		}
-		
+		public SearchDescriptor<T> SearchType(SearchType search_type) => _requestParams(p=>p.SearchType(search_type));
 
 		///<summary>Specific &#39;tag&#39; of the request for logging and statistical purposes</summary>
-		public SearchDescriptor<T> Stats(params string[] stats)
-		{
-			this.Request.RequestParameters.Stats(stats);
-			return this;
-		}
-		
+		public SearchDescriptor<T> Stats(params string[] stats) => _requestParams(p=>p.Stats(stats));
 
 		///<summary>Specify which field to use for suggestions</summary>
-		public SearchDescriptor<T> SuggestField(string suggest_field)
-		{
-			this.Request.RequestParameters.SuggestField(suggest_field);
-			return this;
-		}
-		
-			
+		public SearchDescriptor<T> SuggestField(string suggest_field) => _requestParams(p=>p.SuggestField(suggest_field));
+
 		///<summary>Specify which field to use for suggestions</summary>
 		public SearchDescriptor<T> SuggestField(Expression<Func<T, object>> typedPathLookup) 
 		{
@@ -6681,1071 +2538,406 @@ namespace Nest
 			this.Request.RequestParameters._SuggestField(typedPathLookup);
 			return this;
 		}
-			
 
 		///<summary>Specify suggest mode</summary>
-		public SearchDescriptor<T> SuggestMode(SuggestMode suggest_mode)
-		{
-			this.Request.RequestParameters.SuggestMode(suggest_mode);
-			return this;
-		}
-		
+		public SearchDescriptor<T> SuggestMode(SuggestMode suggest_mode) => _requestParams(p=>p.SuggestMode(suggest_mode));
 
 		///<summary>How many suggestions to return in response</summary>
-		public SearchDescriptor<T> SuggestSize(long suggest_size)
-		{
-			this.Request.RequestParameters.SuggestSize(suggest_size);
-			return this;
-		}
-		
+		public SearchDescriptor<T> SuggestSize(long suggest_size) => _requestParams(p=>p.SuggestSize(suggest_size));
 
 		///<summary>The source text for which the suggestions should be returned</summary>
-		public SearchDescriptor<T> SuggestText(string suggest_text)
-		{
-			this.Request.RequestParameters.SuggestText(suggest_text);
-			return this;
-		}
-		
+		public SearchDescriptor<T> SuggestText(string suggest_text) => _requestParams(p=>p.SuggestText(suggest_text));
 
 		///<summary>Specify if query cache should be used for this request or not, defaults to index level setting</summary>
-		public SearchDescriptor<T> QueryCache(bool query_cache = true)
-		{
-			this.Request.RequestParameters.QueryCache(query_cache);
-			return this;
-		}
-		
+		public SearchDescriptor<T> QueryCache(bool query_cache = true) => _requestParams(p=>p.QueryCache(query_cache));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public SearchDescriptor<T> FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public SearchDescriptor<T> FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for SearchExists
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/search-exists.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for SearchExists <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-exists.html</pre></summary>
 	public partial class SearchExistsDescriptor<T> 
 	{
-		
-	
-
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public SearchExistsDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true)
-		{
-			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
-			return this;
-		}
-		
+		public SearchExistsDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true) => _requestParams(p=>p.IgnoreUnavailable(ignore_unavailable));
 
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public SearchExistsDescriptor<T> AllowNoIndices(bool allow_no_indices = true)
-		{
-			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
-			return this;
-		}
-		
+		public SearchExistsDescriptor<T> AllowNoIndices(bool allow_no_indices = true) => _requestParams(p=>p.AllowNoIndices(allow_no_indices));
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public SearchExistsDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards)
-		{
-			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
-			return this;
-		}
-		
+		public SearchExistsDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards) => _requestParams(p=>p.ExpandWildcards(expand_wildcards));
 
 		///<summary>Include only documents with a specific `_score` value in the result</summary>
-		public SearchExistsDescriptor<T> MinScore(double min_score)
-		{
-			this.Request.RequestParameters.MinScore(min_score);
-			return this;
-		}
-		
+		public SearchExistsDescriptor<T> MinScore(double min_score) => _requestParams(p=>p.MinScore(min_score));
 
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public SearchExistsDescriptor<T> Preference(string preference)
-		{
-			this.Request.RequestParameters.Preference(preference);
-			return this;
-		}
-		
+		public SearchExistsDescriptor<T> Preference(string preference) => _requestParams(p=>p.Preference(preference));
 
 		///<summary>Specific routing value</summary>
-		public SearchExistsDescriptor<T> Routing(string routing)
-		{
-			this.Request.RequestParameters.Routing(routing);
-			return this;
-		}
-		
+		public SearchExistsDescriptor<T> Routing(string routing) => _requestParams(p=>p.Routing(routing));
 
 		///<summary>Query in the Lucene query string syntax</summary>
-		public SearchExistsDescriptor<T> Q(string q)
-		{
-			this.Request.RequestParameters.Q(q);
-			return this;
-		}
-		
+		public SearchExistsDescriptor<T> Q(string q) => _requestParams(p=>p.Q(q));
 
 		///<summary>The analyzer to use for the query string</summary>
-		public SearchExistsDescriptor<T> Analyzer(string analyzer)
-		{
-			this.Request.RequestParameters.Analyzer(analyzer);
-			return this;
-		}
-		
+		public SearchExistsDescriptor<T> Analyzer(string analyzer) => _requestParams(p=>p.Analyzer(analyzer));
 
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
-		public SearchExistsDescriptor<T> AnalyzeWildcard(bool analyze_wildcard = true)
-		{
-			this.Request.RequestParameters.AnalyzeWildcard(analyze_wildcard);
-			return this;
-		}
-		
+		public SearchExistsDescriptor<T> AnalyzeWildcard(bool analyze_wildcard = true) => _requestParams(p=>p.AnalyzeWildcard(analyze_wildcard));
 
 		///<summary>The default operator for query string query (AND or OR)</summary>
-		public SearchExistsDescriptor<T> DefaultOperator(DefaultOperator default_operator)
-		{
-			this.Request.RequestParameters.DefaultOperator(default_operator);
-			return this;
-		}
-		
+		public SearchExistsDescriptor<T> DefaultOperator(DefaultOperator default_operator) => _requestParams(p=>p.DefaultOperator(default_operator));
 
 		///<summary>The field to use as default where no field prefix is given in the query string</summary>
-		public SearchExistsDescriptor<T> Df(string df)
-		{
-			this.Request.RequestParameters.Df(df);
-			return this;
-		}
-		
+		public SearchExistsDescriptor<T> Df(string df) => _requestParams(p=>p.Df(df));
 
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
-		public SearchExistsDescriptor<T> Lenient(bool lenient = true)
-		{
-			this.Request.RequestParameters.Lenient(lenient);
-			return this;
-		}
-		
+		public SearchExistsDescriptor<T> Lenient(bool lenient = true) => _requestParams(p=>p.Lenient(lenient));
 
 		///<summary>Specify whether query terms should be lowercased</summary>
-		public SearchExistsDescriptor<T> LowercaseExpandedTerms(bool lowercase_expanded_terms = true)
-		{
-			this.Request.RequestParameters.LowercaseExpandedTerms(lowercase_expanded_terms);
-			return this;
-		}
-		
+		public SearchExistsDescriptor<T> LowercaseExpandedTerms(bool lowercase_expanded_terms = true) => _requestParams(p=>p.LowercaseExpandedTerms(lowercase_expanded_terms));
 
 		///<summary>The URL-encoded request definition</summary>
-		public SearchExistsDescriptor<T> Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public SearchExistsDescriptor<T> Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public SearchExistsDescriptor<T> FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public SearchExistsDescriptor<T> FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for SearchShardsGet
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for SearchShardsGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html</pre></summary>
 	public partial class SearchShardsDescriptor<T> 
 	{
-		
-	
-
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public SearchShardsDescriptor<T> Preference(string preference)
-		{
-			this.Request.RequestParameters.Preference(preference);
-			return this;
-		}
-		
+		public SearchShardsDescriptor<T> Preference(string preference) => _requestParams(p=>p.Preference(preference));
 
 		///<summary>Specific routing value</summary>
-		public SearchShardsDescriptor<T> Routing(string routing)
-		{
-			this.Request.RequestParameters.Routing(routing);
-			return this;
-		}
-		
+		public SearchShardsDescriptor<T> Routing(string routing) => _requestParams(p=>p.Routing(routing));
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public SearchShardsDescriptor<T> Local(bool local = true)
-		{
-			this.Request.RequestParameters.Local(local);
-			return this;
-		}
-		
+		public SearchShardsDescriptor<T> Local(bool local = true) => _requestParams(p=>p.Local(local));
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public SearchShardsDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true)
-		{
-			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
-			return this;
-		}
-		
+		public SearchShardsDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true) => _requestParams(p=>p.IgnoreUnavailable(ignore_unavailable));
 
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public SearchShardsDescriptor<T> AllowNoIndices(bool allow_no_indices = true)
-		{
-			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
-			return this;
-		}
-		
+		public SearchShardsDescriptor<T> AllowNoIndices(bool allow_no_indices = true) => _requestParams(p=>p.AllowNoIndices(allow_no_indices));
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public SearchShardsDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards)
-		{
-			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
-			return this;
-		}
-		
+		public SearchShardsDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards) => _requestParams(p=>p.ExpandWildcards(expand_wildcards));
 
 		///<summary>The URL-encoded request definition</summary>
-		public SearchShardsDescriptor<T> Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public SearchShardsDescriptor<T> Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public SearchShardsDescriptor<T> FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public SearchShardsDescriptor<T> FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for SearchTemplateGet
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for SearchTemplateGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html</pre></summary>
 	public partial class SearchTemplateDescriptor<T> 
 	{
-		
-	
-
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public SearchTemplateDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true)
-		{
-			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
-			return this;
-		}
-		
+		public SearchTemplateDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true) => _requestParams(p=>p.IgnoreUnavailable(ignore_unavailable));
 
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public SearchTemplateDescriptor<T> AllowNoIndices(bool allow_no_indices = true)
-		{
-			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
-			return this;
-		}
-		
+		public SearchTemplateDescriptor<T> AllowNoIndices(bool allow_no_indices = true) => _requestParams(p=>p.AllowNoIndices(allow_no_indices));
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public SearchTemplateDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards)
-		{
-			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
-			return this;
-		}
-		
+		public SearchTemplateDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards) => _requestParams(p=>p.ExpandWildcards(expand_wildcards));
 
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public SearchTemplateDescriptor<T> Preference(string preference)
-		{
-			this.Request.RequestParameters.Preference(preference);
-			return this;
-		}
-		
+		public SearchTemplateDescriptor<T> Preference(string preference) => _requestParams(p=>p.Preference(preference));
 
 		///<summary>A comma-separated list of specific routing values</summary>
-		public SearchTemplateDescriptor<T> Routing(params string[] routing)
-		{
-			this.Request.RequestParameters.Routing(routing);
-			return this;
-		}
-		
+		public SearchTemplateDescriptor<T> Routing(params string[] routing) => _requestParams(p=>p.Routing(routing));
 
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
-		public SearchTemplateDescriptor<T> Scroll(string scroll)
-		{
-			this.Request.RequestParameters.Scroll(scroll);
-			return this;
-		}
-		
+		public SearchTemplateDescriptor<T> Scroll(string scroll) => _requestParams(p=>p.Scroll(scroll));
 
 		///<summary>Search operation type</summary>
-		public SearchTemplateDescriptor<T> SearchType(SearchType search_type)
-		{
-			this.Request.RequestParameters.SearchType(search_type);
-			return this;
-		}
-		
+		public SearchTemplateDescriptor<T> SearchType(SearchType search_type) => _requestParams(p=>p.SearchType(search_type));
 
 		///<summary>The URL-encoded request definition</summary>
-		public SearchTemplateDescriptor<T> Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public SearchTemplateDescriptor<T> Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public SearchTemplateDescriptor<T> FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public SearchTemplateDescriptor<T> FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for SnapshotCreate
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for SnapshotCreate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html</pre></summary>
 	public partial class SnapshotDescriptor 
 	{
-		
-	
-
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public SnapshotDescriptor MasterTimeout(string master_timeout)
-		{
-			this.Request.RequestParameters.MasterTimeout(master_timeout);
-			return this;
-		}
-		
+		public SnapshotDescriptor MasterTimeout(string master_timeout) => _requestParams(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Should this request wait until the operation has completed before returning</summary>
-		public SnapshotDescriptor WaitForCompletion(bool wait_for_completion = true)
-		{
-			this.Request.RequestParameters.WaitForCompletion(wait_for_completion);
-			return this;
-		}
-		
+		public SnapshotDescriptor WaitForCompletion(bool wait_for_completion = true) => _requestParams(p=>p.WaitForCompletion(wait_for_completion));
 
 		///<summary>The URL-encoded request definition</summary>
-		public SnapshotDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public SnapshotDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public SnapshotDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public SnapshotDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for SnapshotCreateRepository
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for SnapshotCreateRepository <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html</pre></summary>
 	public partial class CreateRepositoryDescriptor 
 	{
-		
-	
-
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public CreateRepositoryDescriptor MasterTimeout(string master_timeout)
-		{
-			this.Request.RequestParameters.MasterTimeout(master_timeout);
-			return this;
-		}
-		
+		public CreateRepositoryDescriptor MasterTimeout(string master_timeout) => _requestParams(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Explicit operation timeout</summary>
-		public CreateRepositoryDescriptor Timeout(string timeout)
-		{
-			this.Request.RequestParameters.Timeout(timeout);
-			return this;
-		}
-		
+		public CreateRepositoryDescriptor Timeout(string timeout) => _requestParams(p=>p.Timeout(timeout));
 
 		///<summary>Whether to verify the repository after creation</summary>
-		public CreateRepositoryDescriptor Verify(bool verify = true)
-		{
-			this.Request.RequestParameters.Verify(verify);
-			return this;
-		}
-		
+		public CreateRepositoryDescriptor Verify(bool verify = true) => _requestParams(p=>p.Verify(verify));
 
 		///<summary>The URL-encoded request definition</summary>
-		public CreateRepositoryDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public CreateRepositoryDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public CreateRepositoryDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public CreateRepositoryDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for SnapshotDelete
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for SnapshotDelete <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html</pre></summary>
 	public partial class DeleteSnapshotDescriptor 
 	{
-		
-	
-
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public DeleteSnapshotDescriptor MasterTimeout(string master_timeout)
-		{
-			this.Request.RequestParameters.MasterTimeout(master_timeout);
-			return this;
-		}
-		
+		public DeleteSnapshotDescriptor MasterTimeout(string master_timeout) => _requestParams(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>The URL-encoded request definition</summary>
-		public DeleteSnapshotDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public DeleteSnapshotDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public DeleteSnapshotDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public DeleteSnapshotDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for SnapshotDeleteRepository
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for SnapshotDeleteRepository <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html</pre></summary>
 	public partial class DeleteRepositoryDescriptor 
 	{
-		
-	
-
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public DeleteRepositoryDescriptor MasterTimeout(string master_timeout)
-		{
-			this.Request.RequestParameters.MasterTimeout(master_timeout);
-			return this;
-		}
-		
+		public DeleteRepositoryDescriptor MasterTimeout(string master_timeout) => _requestParams(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Explicit operation timeout</summary>
-		public DeleteRepositoryDescriptor Timeout(string timeout)
-		{
-			this.Request.RequestParameters.Timeout(timeout);
-			return this;
-		}
-		
+		public DeleteRepositoryDescriptor Timeout(string timeout) => _requestParams(p=>p.Timeout(timeout));
 
 		///<summary>The URL-encoded request definition</summary>
-		public DeleteRepositoryDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public DeleteRepositoryDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public DeleteRepositoryDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public DeleteRepositoryDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for SnapshotGet
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for SnapshotGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html</pre></summary>
 	public partial class GetSnapshotDescriptor 
 	{
-		
-	
-
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public GetSnapshotDescriptor MasterTimeout(string master_timeout)
-		{
-			this.Request.RequestParameters.MasterTimeout(master_timeout);
-			return this;
-		}
-		
+		public GetSnapshotDescriptor MasterTimeout(string master_timeout) => _requestParams(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>The URL-encoded request definition</summary>
-		public GetSnapshotDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public GetSnapshotDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public GetSnapshotDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public GetSnapshotDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for SnapshotGetRepository
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for SnapshotGetRepository <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html</pre></summary>
 	public partial class GetRepositoryDescriptor 
 	{
-		
-	
-
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public GetRepositoryDescriptor MasterTimeout(string master_timeout)
-		{
-			this.Request.RequestParameters.MasterTimeout(master_timeout);
-			return this;
-		}
-		
+		public GetRepositoryDescriptor MasterTimeout(string master_timeout) => _requestParams(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public GetRepositoryDescriptor Local(bool local = true)
-		{
-			this.Request.RequestParameters.Local(local);
-			return this;
-		}
-		
+		public GetRepositoryDescriptor Local(bool local = true) => _requestParams(p=>p.Local(local));
 
 		///<summary>The URL-encoded request definition</summary>
-		public GetRepositoryDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public GetRepositoryDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public GetRepositoryDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public GetRepositoryDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for SnapshotRestore
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for SnapshotRestore <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html</pre></summary>
 	public partial class RestoreDescriptor 
 	{
-		
-	
-
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public RestoreDescriptor MasterTimeout(string master_timeout)
-		{
-			this.Request.RequestParameters.MasterTimeout(master_timeout);
-			return this;
-		}
-		
+		public RestoreDescriptor MasterTimeout(string master_timeout) => _requestParams(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Should this request wait until the operation has completed before returning</summary>
-		public RestoreDescriptor WaitForCompletion(bool wait_for_completion = true)
-		{
-			this.Request.RequestParameters.WaitForCompletion(wait_for_completion);
-			return this;
-		}
-		
+		public RestoreDescriptor WaitForCompletion(bool wait_for_completion = true) => _requestParams(p=>p.WaitForCompletion(wait_for_completion));
 
 		///<summary>The URL-encoded request definition</summary>
-		public RestoreDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public RestoreDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public RestoreDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public RestoreDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for SnapshotStatus
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for SnapshotStatus <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class SnapshotStatusDescriptor 
 	{
-		
-	
-
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public SnapshotStatusDescriptor MasterTimeout(string master_timeout)
-		{
-			this.Request.RequestParameters.MasterTimeout(master_timeout);
-			return this;
-		}
-		
+		public SnapshotStatusDescriptor MasterTimeout(string master_timeout) => _requestParams(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>The URL-encoded request definition</summary>
-		public SnapshotStatusDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public SnapshotStatusDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public SnapshotStatusDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public SnapshotStatusDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for SnapshotVerifyRepository
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for SnapshotVerifyRepository <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class VerifyRepositoryDescriptor 
 	{
-		
-	
-
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public VerifyRepositoryDescriptor MasterTimeout(string master_timeout)
-		{
-			this.Request.RequestParameters.MasterTimeout(master_timeout);
-			return this;
-		}
-		
+		public VerifyRepositoryDescriptor MasterTimeout(string master_timeout) => _requestParams(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Explicit operation timeout</summary>
-		public VerifyRepositoryDescriptor Timeout(string timeout)
-		{
-			this.Request.RequestParameters.Timeout(timeout);
-			return this;
-		}
-		
+		public VerifyRepositoryDescriptor Timeout(string timeout) => _requestParams(p=>p.Timeout(timeout));
 
 		///<summary>The URL-encoded request definition</summary>
-		public VerifyRepositoryDescriptor Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public VerifyRepositoryDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public VerifyRepositoryDescriptor FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public VerifyRepositoryDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for Suggest
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-suggesters.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for Suggest <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-suggesters.html</pre></summary>
 	public partial class SuggestDescriptor<T> 
 	{
-		
-	
-
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public SuggestDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true)
-		{
-			this.Request.RequestParameters.IgnoreUnavailable(ignore_unavailable);
-			return this;
-		}
-		
+		public SuggestDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true) => _requestParams(p=>p.IgnoreUnavailable(ignore_unavailable));
 
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public SuggestDescriptor<T> AllowNoIndices(bool allow_no_indices = true)
-		{
-			this.Request.RequestParameters.AllowNoIndices(allow_no_indices);
-			return this;
-		}
-		
+		public SuggestDescriptor<T> AllowNoIndices(bool allow_no_indices = true) => _requestParams(p=>p.AllowNoIndices(allow_no_indices));
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public SuggestDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards)
-		{
-			this.Request.RequestParameters.ExpandWildcards(expand_wildcards);
-			return this;
-		}
-		
+		public SuggestDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards) => _requestParams(p=>p.ExpandWildcards(expand_wildcards));
 
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public SuggestDescriptor<T> Preference(string preference)
-		{
-			this.Request.RequestParameters.Preference(preference);
-			return this;
-		}
-		
+		public SuggestDescriptor<T> Preference(string preference) => _requestParams(p=>p.Preference(preference));
 
 		///<summary>Specific routing value</summary>
-		public SuggestDescriptor<T> Routing(string routing)
-		{
-			this.Request.RequestParameters.Routing(routing);
-			return this;
-		}
-		
+		public SuggestDescriptor<T> Routing(string routing) => _requestParams(p=>p.Routing(routing));
 
 		///<summary>The URL-encoded request definition</summary>
-		public SuggestDescriptor<T> Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public SuggestDescriptor<T> Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public SuggestDescriptor<T> FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public SuggestDescriptor<T> FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for TermvectorGet
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-termvectors.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for TermvectorGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-termvectors.html</pre></summary>
 	public partial class TermvectorDescriptor<T> 
 	{
-		
-	
-
 		///<summary>Specifies if total term frequency and document frequency should be returned.</summary>
-		public TermvectorDescriptor<T> TermStatistics(bool term_statistics = true)
-		{
-			this.Request.RequestParameters.TermStatistics(term_statistics);
-			return this;
-		}
-		
+		public TermvectorDescriptor<T> TermStatistics(bool term_statistics = true) => _requestParams(p=>p.TermStatistics(term_statistics));
 
 		///<summary>Specifies if document count, sum of document frequencies and sum of total term frequencies should be returned.</summary>
-		public TermvectorDescriptor<T> FieldStatistics(bool field_statistics = true)
-		{
-			this.Request.RequestParameters.FieldStatistics(field_statistics);
-			return this;
-		}
-		
+		public TermvectorDescriptor<T> FieldStatistics(bool field_statistics = true) => _requestParams(p=>p.FieldStatistics(field_statistics));
 
 		///<summary>A comma-separated list of fields to return.</summary>
-		public TermvectorDescriptor<T> Fields(params string[] fields)
-		{
-			this.Request.RequestParameters.Fields(fields);
-			return this;
-		}
-		
+		public TermvectorDescriptor<T> Fields(params string[] fields) => _requestParams(p=>p.Fields(fields));
 			
 		///<summary>A comma-separated list of fields to return.</summary>
-		public TermvectorDescriptor<T> Fields(params Expression<Func<T, object>>[] typedPathLookups) 
-		{
-			if (!typedPathLookups.HasAny())
-				return this;
-
-			this.Request.RequestParameters._Fields(typedPathLookups);
-			return this;
-		}
-			
+		public TermvectorDescriptor<T> Fields(params Expression<Func<T, object>>[] typedPathLookups)  =>
+			_requestParams(p=>p._Fields(typedPathLookups));
 
 		///<summary>Specifies if term offsets should be returned.</summary>
-		public TermvectorDescriptor<T> Offsets(bool offsets = true)
-		{
-			this.Request.RequestParameters.Offsets(offsets);
-			return this;
-		}
-		
+		public TermvectorDescriptor<T> Offsets(bool offsets = true) => _requestParams(p=>p.Offsets(offsets));
 
 		///<summary>Specifies if term positions should be returned.</summary>
-		public TermvectorDescriptor<T> Positions(bool positions = true)
-		{
-			this.Request.RequestParameters.Positions(positions);
-			return this;
-		}
-		
+		public TermvectorDescriptor<T> Positions(bool positions = true) => _requestParams(p=>p.Positions(positions));
 
 		///<summary>Specifies if term payloads should be returned.</summary>
-		public TermvectorDescriptor<T> Payloads(bool payloads = true)
-		{
-			this.Request.RequestParameters.Payloads(payloads);
-			return this;
-		}
-		
+		public TermvectorDescriptor<T> Payloads(bool payloads = true) => _requestParams(p=>p.Payloads(payloads));
 
 		///<summary>Specify the node or shard the operation should be performed on (default: random).</summary>
-		public TermvectorDescriptor<T> Preference(string preference)
-		{
-			this.Request.RequestParameters.Preference(preference);
-			return this;
-		}
-		
+		public TermvectorDescriptor<T> Preference(string preference) => _requestParams(p=>p.Preference(preference));
 
 		///<summary>Specific routing value.</summary>
-		public TermvectorDescriptor<T> Routing(string routing)
-		{
-			this.Request.RequestParameters.Routing(routing);
-			return this;
-		}
-		
+		public TermvectorDescriptor<T> Routing(string routing) => _requestParams(p=>p.Routing(routing));
 
 		///<summary>Parent id of documents.</summary>
-		public TermvectorDescriptor<T> Parent(string parent)
-		{
-			this.Request.RequestParameters.Parent(parent);
-			return this;
-		}
-		
+		public TermvectorDescriptor<T> Parent(string parent) => _requestParams(p=>p.Parent(parent));
 
 		///<summary>Specifies if request is real-time as opposed to near-real-time (default: true).</summary>
-		public TermvectorDescriptor<T> Realtime(bool realtime = true)
-		{
-			this.Request.RequestParameters.Realtime(realtime);
-			return this;
-		}
-		
+		public TermvectorDescriptor<T> Realtime(bool realtime = true) => _requestParams(p=>p.Realtime(realtime));
 
 		///<summary>The URL-encoded request definition</summary>
-		public TermvectorDescriptor<T> Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public TermvectorDescriptor<T> Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public TermvectorDescriptor<T> FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public TermvectorDescriptor<T> FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	
-	
-	///<summary>descriptor for Update
-	///<pre>
-	///http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-update.html
-	///</pre>
-	///</summary>
+	///<summary>descriptor for Update <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-update.html</pre></summary>
 	public partial class UpdateDescriptor<TDocument,TPartialDocument> 
 	{
-		
-	
-
 		///<summary>Explicit write consistency setting for the operation</summary>
-		public UpdateDescriptor<TDocument,TPartialDocument> Consistency(Consistency consistency)
-		{
-			this.Request.RequestParameters.Consistency(consistency);
-			return this;
-		}
-		
+		public UpdateDescriptor<TDocument,TPartialDocument> Consistency(Consistency consistency) => _requestParams(p=>p.Consistency(consistency));
 
 		///<summary>The script language (default: groovy)</summary>
-		public UpdateDescriptor<TDocument,TPartialDocument> Lang(string lang)
-		{
-			this.Request.RequestParameters.Lang(lang);
-			return this;
-		}
-		
+		public UpdateDescriptor<TDocument,TPartialDocument> Lang(string lang) => _requestParams(p=>p.Lang(lang));
 
 		///<summary>ID of the parent document. Is is only used for routing and when for the upsert request</summary>
-		public UpdateDescriptor<TDocument,TPartialDocument> Parent(string parent)
-		{
-			this.Request.RequestParameters.Parent(parent);
-			return this;
-		}
-		
+		public UpdateDescriptor<TDocument,TPartialDocument> Parent(string parent) => _requestParams(p=>p.Parent(parent));
 
 		///<summary>Refresh the index after performing the operation</summary>
-		public UpdateDescriptor<TDocument,TPartialDocument> Refresh(bool refresh = true)
-		{
-			this.Request.RequestParameters.Refresh(refresh);
-			return this;
-		}
-		
+		public UpdateDescriptor<TDocument,TPartialDocument> Refresh(bool refresh = true) => _requestParams(p=>p.Refresh(refresh));
 
 		///<summary>Specific replication type</summary>
-		public UpdateDescriptor<TDocument,TPartialDocument> Replication(Replication replication)
-		{
-			this.Request.RequestParameters.Replication(replication);
-			return this;
-		}
-		
+		public UpdateDescriptor<TDocument,TPartialDocument> Replication(Replication replication) => _requestParams(p=>p.Replication(replication));
 
 		///<summary>Specify how many times should the operation be retried when a conflict occurs (default: 0)</summary>
-		public UpdateDescriptor<TDocument,TPartialDocument> RetryOnConflict(long retry_on_conflict)
-		{
-			this.Request.RequestParameters.RetryOnConflict(retry_on_conflict);
-			return this;
-		}
-		
+		public UpdateDescriptor<TDocument,TPartialDocument> RetryOnConflict(long retry_on_conflict) => _requestParams(p=>p.RetryOnConflict(retry_on_conflict));
 
 		///<summary>Specific routing value</summary>
-		public UpdateDescriptor<TDocument,TPartialDocument> Routing(string routing)
-		{
-			this.Request.RequestParameters.Routing(routing);
-			return this;
-		}
-		
+		public UpdateDescriptor<TDocument,TPartialDocument> Routing(string routing) => _requestParams(p=>p.Routing(routing));
 
 		///<summary>The URL-encoded script definition (instead of using request body)</summary>
-		public UpdateDescriptor<TDocument,TPartialDocument> ScriptQueryString(string script)
-		{
-			this.Request.RequestParameters.Script(script);
-			return this;
-		}
-		
+		public UpdateDescriptor<TDocument,TPartialDocument> ScriptQueryString(string script) => _requestParams(p=>p.Script(script));
 
 		///<summary>The id of a stored script</summary>
-		public UpdateDescriptor<TDocument,TPartialDocument> ScriptId(string script_id)
-		{
-			this.Request.RequestParameters.ScriptId(script_id);
-			return this;
-		}
-		
+		public UpdateDescriptor<TDocument,TPartialDocument> ScriptId(string script_id) => _requestParams(p=>p.ScriptId(script_id));
 
 		///<summary>True if the script referenced in script or script_id should be called to perform inserts - defaults to false</summary>
-		public UpdateDescriptor<TDocument,TPartialDocument> ScriptedUpsert(bool scripted_upsert = true)
-		{
-			this.Request.RequestParameters.ScriptedUpsert(scripted_upsert);
-			return this;
-		}
-		
+		public UpdateDescriptor<TDocument,TPartialDocument> ScriptedUpsert(bool scripted_upsert = true) => _requestParams(p=>p.ScriptedUpsert(scripted_upsert));
 
 		///<summary>Explicit operation timeout</summary>
-		public UpdateDescriptor<TDocument,TPartialDocument> Timeout(string timeout)
-		{
-			this.Request.RequestParameters.Timeout(timeout);
-			return this;
-		}
-		
+		public UpdateDescriptor<TDocument,TPartialDocument> Timeout(string timeout) => _requestParams(p=>p.Timeout(timeout));
 
 		///<summary>Explicit timestamp for the document</summary>
-		public UpdateDescriptor<TDocument,TPartialDocument> Timestamp(string timestamp)
-		{
-			this.Request.RequestParameters.Timestamp(timestamp);
-			return this;
-		}
-		
+		public UpdateDescriptor<TDocument,TPartialDocument> Timestamp(string timestamp) => _requestParams(p=>p.Timestamp(timestamp));
 
 		///<summary>Expiration time for the document</summary>
-		public UpdateDescriptor<TDocument,TPartialDocument> Ttl(string ttl)
-		{
-			this.Request.RequestParameters.Ttl(ttl);
-			return this;
-		}
-		
+		public UpdateDescriptor<TDocument,TPartialDocument> Ttl(string ttl) => _requestParams(p=>p.Ttl(ttl));
 
 		///<summary>Explicit version number for concurrency control</summary>
-		public UpdateDescriptor<TDocument,TPartialDocument> Version(long version)
-		{
-			this.Request.RequestParameters.Version(version);
-			return this;
-		}
-		
+		public UpdateDescriptor<TDocument,TPartialDocument> Version(long version) => _requestParams(p=>p.Version(version));
 
 		///<summary>Specific version type</summary>
-		public UpdateDescriptor<TDocument,TPartialDocument> VersionType(VersionType version_type)
-		{
-			this.Request.RequestParameters.VersionType(version_type);
-			return this;
-		}
-		
+		public UpdateDescriptor<TDocument,TPartialDocument> VersionType(VersionType version_type) => _requestParams(p=>p.VersionType(version_type));
 
 		///<summary>The URL-encoded request definition</summary>
-		public UpdateDescriptor<TDocument,TPartialDocument> Source(string source)
-		{
-			this.Request.RequestParameters.Source(source);
-			return this;
-		}
-		
+		public UpdateDescriptor<TDocument,TPartialDocument> Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public UpdateDescriptor<TDocument,TPartialDocument> FilterPath(string filter_path)
-		{
-			this.Request.RequestParameters.FilterPath(filter_path);
-			return this;
-		}
-		
+		public UpdateDescriptor<TDocument,TPartialDocument> FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
-	
 }
- 

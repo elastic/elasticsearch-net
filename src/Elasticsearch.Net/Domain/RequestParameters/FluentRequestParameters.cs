@@ -43,6 +43,7 @@ namespace Elasticsearch.Net
 
 		public T AddQueryString(string name, object value)
 		{
+			if (value == null || name.IsNullOrEmpty()) return (T)this;
 			Self.QueryString[name] = value;
 			return (T)this;
 		}

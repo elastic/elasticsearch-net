@@ -20,82 +20,46 @@ namespace Nest
 	{
 		var type = method.DescriptorType + method.DescriptorTypeGeneric;
 	<text>
-	///<summary>descriptor for @method.FullName
-	///<pre>
-	///@method.Documentation
-	///</pre>
-	///</summary>
-	public partial class @Raw(type) @(Raw(!method.Unmapped ? "" : string.Format(" : BaseRequest<{0}>", method.QueryStringParamName)))
+	///<summary>descriptor for @method.FullName <pre>@method.Documentation</pre></summary>
+	public partial class @Raw(type) @(Raw(!method.Unmapped ? "" : string.Format(" : BasePathDescriptor<{0},{1}>", type, method.QueryStringParamName)))
+	{</text>foreach (KeyValuePair<string, ApiQueryParameters> kv in method.Url.Params)
 	{
-		
-	</text>
-	  foreach (KeyValuePair<string, ApiQueryParameters> kv in method.Url.Params)
-	  {
-		  
-		  
-		  
-			var t = @kv.Value.CsharpType(kv.Key);
-			var tSuffix = (t == "bool") ? " = true" : "";
-			var m = kv.Key.ToPascalCase();
-			var mm = (m != "Type" && m != "Index" && m != "Script") ? m : m + "QueryString";
-			var typed = !method.DescriptorTypeGeneric.IsNullOrEmpty();
-			var mml = mm.ToLowerInvariant();
-			var fieldMethod = (mml.Contains("fields") || mml.Contains("sourceinclude") || mml.Contains("sourceexclude") ) && t.Contains("string");
+		var t = @kv.Value.CsharpType(kv.Key);
+		var tSuffix = (t == "bool") ? " = true" : "";
+		var m = kv.Key.ToPascalCase();
+		var mm = (m != "Type" && m != "Index" && m != "Script") ? m : m + "QueryString";
+		var typed = !method.DescriptorTypeGeneric.IsNullOrEmpty();
+		var mml = mm.ToLowerInvariant();
+		var fieldMethod = (mml.Contains("fields") || mml.Contains("sourceinclude") || mml.Contains("sourceexclude") ) && t.Contains("string");
 		<text>
 		///<summary>@kv.Value.Description</summary>
-		@if(!string.IsNullOrWhiteSpace(kv.Value.DeprecatedInFavorOf))
-		{
-		<text>[Obsolete("Scheduled to be removed in 2.0, use @kv.Value.DeprecatedInFavorOf instead")]</text>
-		}
-		public @Raw(type) @(mm)(@t @kv.Key@tSuffix)
-		{
-			this.Request.RequestParameters.@(m)(@kv.Key);
-			return this;
-		}
-		</text>
+		@if (!string.IsNullOrWhiteSpace(kv.Value.DeprecatedInFavorOf))
+		{<text>
+		[Obsolete("Scheduled to be removed in 2.0, use @kv.Value.DeprecatedInFavorOf instead")]
+		</text>}
+		public @Raw(type) @(mm)(@t @kv.Key@tSuffix) => _requestParams(p=>p.@(m)(@kv.Key));</text>
 		if (fieldMethod)
 		{
 			<text>
 		///<summary>@kv.Value.Description</summary>
-		public @Raw(type) @mm@(Raw(typed ? "" : "<T>"))(params @Raw("Expression<Func<T, object>>[]") typedPathLookups) @Raw(typed ? "" : "where T : class")
-		{
-			if (!typedPathLookups.HasAny())
-				return this;
-
-			this.Request.RequestParameters._@(mm)(typedPathLookups);
-			return this;
+		public @Raw(type) @mm@(Raw(typed ? "" : "<T>"))(params @Raw("Expression<Func<T, object>>[]") typedPathLookups) @Raw(typed ? "" : "where T : class") =>
+			_requestParams(p=>p._@(mm)(typedPathLookups));</text>
 		}
-			</text>
-
-		 }
-		 else if (mm.ToLowerInvariant().Contains("field") && t.Contains("string"))
-		 {
-			<text>
+		else if (mm.ToLowerInvariant().Contains("field") && t.Contains("string"))
+		{<text>
 		///<summary>@kv.Value.Description</summary>
-		public @Raw(type) @mm@(Raw(typed ? "" : "<T>"))(@Raw("Expression<Func<T, object>>") typedPathLookup) @Raw(typed ? "" : "where T : class")
-		{
-			typedPathLookup.ThrowIfNull("typedPathLookup");
-			this.Request.RequestParameters._@(mm)(typedPathLookup);
-			return this;
+		public @Raw(type) @mm@(Raw(typed ? "" : "<T>"))(@Raw("Expression<Func<T, object>>") typedPathLookup) @Raw(typed ? "" : "where T : class") =>
+			_requestParams(p=>p._@(mm)(typedPathLookups));</text>
 		}
-			</text>
-
-		 }
-		 
-		
 	}
 	if (method.Unmapped)
-	{
-		<text>
+	{<text>
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, @Raw(string.Format("ElasticsearchPathInfo<{0}>", method.QueryStringParamName)) pathInfo)
 		{
 			throw new NotImplementedException();
-		}
-		</text>
+		} </text>
 	}	
 	<text>
+	}</text>
 	}
-	</text>
 }
-}
- 

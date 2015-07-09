@@ -8,6 +8,12 @@ namespace Nest
 		where TDescriptor : BasePathDescriptor<TDescriptor, TParameters>
 		where TParameters : FluentRequestParameters<TParameters>, new()
 	{
+		protected TDescriptor _requestParams(Action<TParameters> assigner)
+		{
+			assigner?.Invoke(this.Request.RequestParameters);
+			return (TDescriptor)this;
+		}
+
 		/// <summary>
 		/// Specify settings for this request alone, handy if you need a custom timeout or want to bypass sniffing, retries
 		/// </summary>
