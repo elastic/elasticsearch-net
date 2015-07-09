@@ -18,7 +18,7 @@ namespace Nest
 			selector = selector ?? (s => s);
 			return this.Dispatcher.Dispatch<GetFieldMappingDescriptor<T>, GetFieldMappingRequestParameters, GetFieldMappingResponse>(
 				selector,
-				(p, d) => this.RawDispatch.IndicesGetFieldMappingDispatch<GetFieldMappingResponse>(
+				(p, d) => this.LowLevelDispatch.IndicesGetFieldMappingDispatch<GetFieldMappingResponse>(
 					p.DeserializationState(new GetFieldMappingConverter((r, s) => DeserializeGetFieldMappingResponse(r, d, s)))
 				)
 			);
@@ -29,7 +29,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<IGetFieldMappingRequest, GetFieldMappingRequestParameters, GetFieldMappingResponse>(
 				getFieldMappingRequest,
-				(p, d) => this.RawDispatch.IndicesGetFieldMappingDispatch<GetFieldMappingResponse>(
+				(p, d) => this.LowLevelDispatch.IndicesGetFieldMappingDispatch<GetFieldMappingResponse>(
 					p.DeserializationState(new GetFieldMappingConverter((r, s) => DeserializeGetFieldMappingResponse(r, d, s)))
 				)
 			);
@@ -42,7 +42,7 @@ namespace Nest
 			selector = selector ?? (s => s);
 			return this.Dispatcher.DispatchAsync<GetFieldMappingDescriptor<T>, GetFieldMappingRequestParameters, GetFieldMappingResponse, IGetFieldMappingResponse>(
 				selector,
-				(p, d) => this.RawDispatch.IndicesGetFieldMappingDispatchAsync<GetFieldMappingResponse>(
+				(p, d) => this.LowLevelDispatch.IndicesGetFieldMappingDispatchAsync<GetFieldMappingResponse>(
 					p.DeserializationState(new GetFieldMappingConverter((r, s) => DeserializeGetFieldMappingResponse(r, d, s)))
 				)
 			);
@@ -53,7 +53,7 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<IGetFieldMappingRequest, GetFieldMappingRequestParameters, GetFieldMappingResponse, IGetFieldMappingResponse>(
 				getFieldMappingRequest,
-				(p, d) => this.RawDispatch.IndicesGetFieldMappingDispatchAsync<GetFieldMappingResponse>(
+				(p, d) => this.LowLevelDispatch.IndicesGetFieldMappingDispatchAsync<GetFieldMappingResponse>(
 					p.DeserializationState(new GetFieldMappingConverter((r, s) => DeserializeGetFieldMappingResponse(r, d, s)))
 				)
 			);

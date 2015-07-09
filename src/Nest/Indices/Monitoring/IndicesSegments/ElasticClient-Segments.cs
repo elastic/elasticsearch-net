@@ -13,7 +13,7 @@ namespace Nest
 			segmentsSelector = segmentsSelector ?? (s => s);
 			return this.Dispatcher.Dispatch<SegmentsDescriptor, SegmentsRequestParameters, SegmentsResponse>(
 				segmentsSelector,
-				(p, d) => this.RawDispatch.IndicesSegmentsDispatch<SegmentsResponse>(p)
+				(p, d) => this.LowLevelDispatch.IndicesSegmentsDispatch<SegmentsResponse>(p)
 			);
 		}
 
@@ -22,7 +22,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<ISegmentsRequest, SegmentsRequestParameters, SegmentsResponse>(
 				segmentsRequest,
-				(p, d) => this.RawDispatch.IndicesSegmentsDispatch<SegmentsResponse>(p)
+				(p, d) => this.LowLevelDispatch.IndicesSegmentsDispatch<SegmentsResponse>(p)
 			);
 		}
 
@@ -32,7 +32,7 @@ namespace Nest
 			segmentsSelector = segmentsSelector ?? (s => s);
 			return this.Dispatcher.DispatchAsync<SegmentsDescriptor, SegmentsRequestParameters, SegmentsResponse, ISegmentsResponse>(
 				segmentsSelector,
-				(p, d) => this.RawDispatch.IndicesSegmentsDispatchAsync<SegmentsResponse>(p)
+				(p, d) => this.LowLevelDispatch.IndicesSegmentsDispatchAsync<SegmentsResponse>(p)
 			);
 		}
 
@@ -41,7 +41,7 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<ISegmentsRequest, SegmentsRequestParameters, SegmentsResponse, ISegmentsResponse>(
 				segmentsRequest,
-				(p, d) => this.RawDispatch.IndicesSegmentsDispatchAsync<SegmentsResponse>(p)
+				(p, d) => this.LowLevelDispatch.IndicesSegmentsDispatchAsync<SegmentsResponse>(p)
 			);
 		}
 

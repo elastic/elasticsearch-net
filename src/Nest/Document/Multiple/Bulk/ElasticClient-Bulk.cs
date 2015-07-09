@@ -16,7 +16,7 @@ namespace Nest
 				(p, d) =>
 				{
 					var json = Serializer.SerializeBulkDescriptor(d);
-					return this.RawDispatch.BulkDispatch<BulkResponse>(p, json);
+					return this.LowLevelDispatch.BulkDispatch<BulkResponse>(p, json);
 				}
 			);
 		}
@@ -29,7 +29,7 @@ namespace Nest
 				(p, d) =>
 				{
 					var json = Serializer.SerializeBulkDescriptor(d);
-					return this.RawDispatch.BulkDispatch<BulkResponse>(p, json);
+					return this.LowLevelDispatch.BulkDispatch<BulkResponse>(p, json);
 				}
 			);
 		}
@@ -42,7 +42,7 @@ namespace Nest
 				(p, d) =>
 				{
 					var json = Serializer.SerializeBulkDescriptor(d);
-					return this.RawDispatch.BulkDispatchAsync<BulkResponse>(p, json);
+					return this.LowLevelDispatch.BulkDispatchAsync<BulkResponse>(p, json);
 				}
 			);
 		}
@@ -55,7 +55,7 @@ namespace Nest
 				(p, d) =>
 				{
 					var json = Serializer.SerializeBulkDescriptor(d);
-					return this.RawDispatch.BulkDispatchAsync<BulkResponse>(p, json);
+					return this.LowLevelDispatch.BulkDispatchAsync<BulkResponse>(p, json);
 				}
 			);
 		}

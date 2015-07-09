@@ -16,7 +16,7 @@ namespace Nest
 			selector = selector ?? (s => s);
 			return this.Dispatcher.Dispatch<DeleteRepositoryDescriptor, DeleteRepositoryRequestParameters, AcknowledgedResponse>(
 				s => selector(s.Repository(name)),
-				(p, d) => this.RawDispatch.SnapshotDeleteRepositoryDispatch<AcknowledgedResponse>(p)
+				(p, d) => this.LowLevelDispatch.SnapshotDeleteRepositoryDispatch<AcknowledgedResponse>(p)
 			);
 		}
 
@@ -25,7 +25,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<IDeleteRepositoryRequest, DeleteRepositoryRequestParameters, AcknowledgedResponse>(
 				deleteRepositoryRequest,
-				(p, d) => this.RawDispatch.SnapshotDeleteRepositoryDispatch<AcknowledgedResponse>(p)
+				(p, d) => this.LowLevelDispatch.SnapshotDeleteRepositoryDispatch<AcknowledgedResponse>(p)
 			);
 		}
 
@@ -36,7 +36,7 @@ namespace Nest
 			selector = selector ?? (s => s);
 			return this.Dispatcher.DispatchAsync<DeleteRepositoryDescriptor, DeleteRepositoryRequestParameters, AcknowledgedResponse, IAcknowledgedResponse>(
 				s => selector(s.Repository(name)),
-				(p, d) => this.RawDispatch.SnapshotDeleteRepositoryDispatchAsync<AcknowledgedResponse>(p)
+				(p, d) => this.LowLevelDispatch.SnapshotDeleteRepositoryDispatchAsync<AcknowledgedResponse>(p)
 			);
 		}
 
@@ -45,7 +45,7 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<IDeleteRepositoryRequest, DeleteRepositoryRequestParameters, AcknowledgedResponse, IAcknowledgedResponse>(
 				deleteRepositoryRequest,
-				(p, d) => this.RawDispatch.SnapshotDeleteRepositoryDispatchAsync<AcknowledgedResponse>(p)
+				(p, d) => this.LowLevelDispatch.SnapshotDeleteRepositoryDispatchAsync<AcknowledgedResponse>(p)
 			);
 		}
 	}

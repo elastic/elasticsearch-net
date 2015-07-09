@@ -26,7 +26,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<UpdateDescriptor<T, K>, UpdateRequestParameters, UpdateResponse>(
 				updateSelector,
-				(p, d) => this.RawDispatch.UpdateDispatch<UpdateResponse>(p, d)
+				(p, d) => this.LowLevelDispatch.UpdateDispatch<UpdateResponse>(p, d)
 			);
 		}
 		/// <inheritdoc />
@@ -36,7 +36,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<IUpdateRequest<T, K>, UpdateRequestParameters, UpdateResponse>(
 				updateSelector,
-				(p, d) => this.RawDispatch.UpdateDispatch<UpdateResponse>(p, d)
+				(p, d) => this.LowLevelDispatch.UpdateDispatch<UpdateResponse>(p, d)
 			);
 		}
 
@@ -61,7 +61,7 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<UpdateDescriptor<T, K>, UpdateRequestParameters, UpdateResponse, IUpdateResponse>(
 				updateSelector,
-				(p, d) => this.RawDispatch.UpdateDispatchAsync<UpdateResponse>(p, d)
+				(p, d) => this.LowLevelDispatch.UpdateDispatchAsync<UpdateResponse>(p, d)
 			);
 		}
 
@@ -72,7 +72,7 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<IUpdateRequest<T, K>, UpdateRequestParameters, UpdateResponse, IUpdateResponse>(
 				updateRequest,
-				(p, d) => this.RawDispatch.UpdateDispatchAsync<UpdateResponse>(p, d)
+				(p, d) => this.LowLevelDispatch.UpdateDispatchAsync<UpdateResponse>(p, d)
 			);
 		}
 

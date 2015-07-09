@@ -10,16 +10,16 @@ namespace Nest
 	{
 				/// <inheritdoc />
 		public ICatResponse<CatFielddataRecord> CatFielddata(Func<CatFielddataDescriptor, CatFielddataDescriptor> selector = null) =>
-			this.DoCat<CatFielddataDescriptor, CatFielddataRequestParameters, CatFielddataRecord>(selector, this.RawDispatch.CatFielddataDispatch<CatResponse<CatFielddataRecord>>);
+			this.DoCat<CatFielddataDescriptor, CatFielddataRequestParameters, CatFielddataRecord>(selector, this.LowLevelDispatch.CatFielddataDispatch<CatResponse<CatFielddataRecord>>);
 
 		public ICatResponse<CatFielddataRecord> CatFielddata(ICatFielddataRequest request) =>
-			this.DoCat<ICatFielddataRequest, CatFielddataRequestParameters, CatFielddataRecord>(request, this.RawDispatch.CatFielddataDispatch<CatResponse<CatFielddataRecord>>);
+			this.DoCat<ICatFielddataRequest, CatFielddataRequestParameters, CatFielddataRecord>(request, this.LowLevelDispatch.CatFielddataDispatch<CatResponse<CatFielddataRecord>>);
 
 		public Task<ICatResponse<CatFielddataRecord>> CatFielddataAsync(Func<CatFielddataDescriptor, CatFielddataDescriptor> selector = null) =>
-			this.DoCatAsync<CatFielddataDescriptor, CatFielddataRequestParameters, CatFielddataRecord>(selector, this.RawDispatch.CatFielddataDispatchAsync<CatResponse<CatFielddataRecord>>);
+			this.DoCatAsync<CatFielddataDescriptor, CatFielddataRequestParameters, CatFielddataRecord>(selector, this.LowLevelDispatch.CatFielddataDispatchAsync<CatResponse<CatFielddataRecord>>);
 
 		public Task<ICatResponse<CatFielddataRecord>> CatFielddataAsync(ICatFielddataRequest request) =>
-			this.DoCatAsync<ICatFielddataRequest, CatFielddataRequestParameters, CatFielddataRecord>(request, this.RawDispatch.CatFielddataDispatchAsync<CatResponse<CatFielddataRecord>>);
+			this.DoCatAsync<ICatFielddataRequest, CatFielddataRequestParameters, CatFielddataRecord>(request, this.LowLevelDispatch.CatFielddataDispatchAsync<CatResponse<CatFielddataRecord>>);
 
 	}
 }

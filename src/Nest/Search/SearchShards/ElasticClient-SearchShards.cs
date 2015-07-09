@@ -15,7 +15,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<SearchShardsDescriptor<T>, SearchShardsRequestParameters, SearchShardsResponse>(
 				searchSelector,
-				(p, d) => this.RawDispatch.SearchShardsDispatch<SearchShardsResponse>(p)
+				(p, d) => this.LowLevelDispatch.SearchShardsDispatch<SearchShardsResponse>(p)
 			);
 		}
 		
@@ -24,7 +24,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<ISearchShardsRequest, SearchShardsRequestParameters, SearchShardsResponse>(
 				request,
-				(p, d) => this.RawDispatch.SearchShardsDispatch<SearchShardsResponse>(p)
+				(p, d) => this.LowLevelDispatch.SearchShardsDispatch<SearchShardsResponse>(p)
 			);
 		}
 
@@ -34,7 +34,7 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<SearchShardsDescriptor<T>, SearchShardsRequestParameters, SearchShardsResponse, ISearchShardsResponse>(
 				searchSelector,
-				(p, d) => this.RawDispatch.SearchShardsDispatchAsync<SearchShardsResponse>(p)
+				(p, d) => this.LowLevelDispatch.SearchShardsDispatchAsync<SearchShardsResponse>(p)
 			);
 		}
 
@@ -43,7 +43,7 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<ISearchShardsRequest, SearchShardsRequestParameters, SearchShardsResponse, ISearchShardsResponse>(
 				request,
-				(p, d) => this.RawDispatch.SearchShardsDispatchAsync<SearchShardsResponse>(p)
+				(p, d) => this.LowLevelDispatch.SearchShardsDispatchAsync<SearchShardsResponse>(p)
 			);
 		}
 		

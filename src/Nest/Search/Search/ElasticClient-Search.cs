@@ -29,7 +29,7 @@ namespace Nest
 				.ToPathInfo(_connectionSettings)
 				.DeserializationState(this.CreateSearchDeserializer<T, TResult>(descriptor));
 
-			var status = this.RawDispatch.SearchDispatch<SearchResponse<TResult>>(pathInfo, descriptor);
+			var status = this.LowLevelDispatch.SearchDispatch<SearchResponse<TResult>>(pathInfo, descriptor);
 			return status.Success ? status.Response : CreateInvalidInstance<SearchResponse<TResult>>(status);
 		}
 
@@ -49,7 +49,7 @@ namespace Nest
 				.ToPathInfo(_connectionSettings)
 				.DeserializationState(this.CreateSearchDeserializer<T, TResult>(request));
 
-			var status = this.RawDispatch.SearchDispatch<SearchResponse<TResult>>(pathInfo, request);
+			var status = this.LowLevelDispatch.SearchDispatch<SearchResponse<TResult>>(pathInfo, request);
 			return status.Success ? status.Response : CreateInvalidInstance<SearchResponse<TResult>>(status);
 		}
 
@@ -73,7 +73,7 @@ namespace Nest
 				.ToPathInfo(_connectionSettings)
 				.DeserializationState(CreateSearchDeserializer<T, TResult>(descriptor));
 
-			return this.RawDispatch.SearchDispatchAsync<SearchResponse<TResult>>(pathInfo, descriptor)
+			return this.LowLevelDispatch.SearchDispatchAsync<SearchResponse<TResult>>(pathInfo, descriptor)
 				.ContinueWith<ISearchResponse<TResult>>(t => {
 					if (t.IsFaulted && t.Exception != null)
 					{
@@ -102,7 +102,7 @@ namespace Nest
 				.ToPathInfo(_connectionSettings)
 				.DeserializationState(this.CreateSearchDeserializer<T, TResult>(request));
 			
-			return this.RawDispatch.SearchDispatchAsync<SearchResponse<TResult>>(pathInfo, request)
+			return this.LowLevelDispatch.SearchDispatchAsync<SearchResponse<TResult>>(pathInfo, request)
 				.ContinueWith<ISearchResponse<TResult>>(t => {
 					if (t.IsFaulted && t.Exception != null)
 					{

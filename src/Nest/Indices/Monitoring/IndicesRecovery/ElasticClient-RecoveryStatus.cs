@@ -17,7 +17,7 @@ namespace Nest
 			selector = selector ?? (s => s);
 			return this.Dispatcher.Dispatch<RecoveryStatusDescriptor, RecoveryStatusRequestParameters, RecoveryStatusResponse>(
 				selector,
-				(p, d) => this.RawDispatch.IndicesRecoveryDispatch<RecoveryStatusResponse>(
+				(p, d) => this.LowLevelDispatch.IndicesRecoveryDispatch<RecoveryStatusResponse>(
 					p.DeserializationState(new RecoveryStatusConverter(DeserializeRecoveryStatusResponse))
 				)
 			);
@@ -28,7 +28,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<IRecoveryStatusRequest, RecoveryStatusRequestParameters, RecoveryStatusResponse>(
 				statusRequest,
-				(p, d) => this.RawDispatch.IndicesRecoveryDispatch<RecoveryStatusResponse>(
+				(p, d) => this.LowLevelDispatch.IndicesRecoveryDispatch<RecoveryStatusResponse>(
 					p.DeserializationState(new RecoveryStatusConverter(DeserializeRecoveryStatusResponse))
 				)
 			);
@@ -40,7 +40,7 @@ namespace Nest
 			selector = selector ?? (s => s);
 			return this.Dispatcher.DispatchAsync<RecoveryStatusDescriptor, RecoveryStatusRequestParameters, RecoveryStatusResponse, IRecoveryStatusResponse>(
 				selector,
-				(p, d) => this.RawDispatch.IndicesRecoveryDispatchAsync<RecoveryStatusResponse>(
+				(p, d) => this.LowLevelDispatch.IndicesRecoveryDispatchAsync<RecoveryStatusResponse>(
 					p.DeserializationState(new RecoveryStatusConverter(DeserializeRecoveryStatusResponse))
 				)
 			);
@@ -51,7 +51,7 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<IRecoveryStatusRequest, RecoveryStatusRequestParameters, RecoveryStatusResponse, IRecoveryStatusResponse>(
 				statusRequest,
-				(p, d) => this.RawDispatch.IndicesRecoveryDispatchAsync<RecoveryStatusResponse>(
+				(p, d) => this.LowLevelDispatch.IndicesRecoveryDispatchAsync<RecoveryStatusResponse>(
 					p.DeserializationState(new RecoveryStatusConverter(DeserializeRecoveryStatusResponse))
 				)
 			);

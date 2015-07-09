@@ -10,7 +10,7 @@ namespace Nest
         {
             return this.Dispatcher.Dispatch<PutScriptDescriptor, PutScriptRequestParameters, PutScriptResponse>(
                     putScriptDescriptor,
-                    (p, d) => this.RawDispatch.PutScriptDispatch<PutScriptResponse>(p, d)
+                    (p, d) => this.LowLevelDispatch.PutScriptDispatch<PutScriptResponse>(p, d)
                 );
         }
 
@@ -18,7 +18,7 @@ namespace Nest
         {
             return this.Dispatcher.DispatchAsync<PutScriptDescriptor, PutScriptRequestParameters, PutScriptResponse, IPutScriptResponse>(
                     putScriptDescriptor,
-                    (p, d) => this.RawDispatch.PutScriptDispatchAsync<PutScriptResponse>(p, d)
+                    (p, d) => this.LowLevelDispatch.PutScriptDispatchAsync<PutScriptResponse>(p, d)
                 );
         }
 

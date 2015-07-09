@@ -10,7 +10,7 @@ namespace Nest
         {
             return this.Dispatcher.Dispatch<GetScriptDescriptor, GetScriptRequestParameters, GetScriptResponse>(
                     getScriptDescriptor,
-                    (p, d) => this.RawDispatch.GetScriptDispatch<GetScriptResponse>(p)
+                    (p, d) => this.LowLevelDispatch.GetScriptDispatch<GetScriptResponse>(p)
                 );
         }
 
@@ -18,7 +18,7 @@ namespace Nest
         {
             return this.Dispatcher.DispatchAsync<GetScriptDescriptor, GetScriptRequestParameters, GetScriptResponse, IGetScriptResponse>(
                     getScriptDescriptor,
-                    (p, d) => this.RawDispatch.GetScriptDispatchAsync<GetScriptResponse>(p)
+                    (p, d) => this.LowLevelDispatch.GetScriptDispatchAsync<GetScriptResponse>(p)
                 );
         }
 

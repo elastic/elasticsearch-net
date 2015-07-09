@@ -16,7 +16,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<GetIndexDescriptor, GetIndexRequestParameters, GetIndexResponse>(
 				getIndexSelector,
-				(p, d) => this.RawDispatch.IndicesGetDispatch<GetIndexResponse>(
+				(p, d) => this.LowLevelDispatch.IndicesGetDispatch<GetIndexResponse>(
 					p.DeserializationState(new GetIndexResponseConverter(this.DeserializeGetIndexResponse))
 				)
 			);
@@ -27,7 +27,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<IGetIndexRequest, GetIndexRequestParameters, GetIndexResponse>(
 				createIndexRequest,
-				(p, d) => this.RawDispatch.IndicesGetDispatch<GetIndexResponse>(
+				(p, d) => this.LowLevelDispatch.IndicesGetDispatch<GetIndexResponse>(
 					p.DeserializationState(new GetIndexResponseConverter(this.DeserializeGetIndexResponse))
 				)
 			);
@@ -38,7 +38,7 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<GetIndexDescriptor, GetIndexRequestParameters, GetIndexResponse, IGetIndexResponse>(
 				getIndexSelector,
-				(p, d) => this.RawDispatch.IndicesGetDispatchAsync<GetIndexResponse>(
+				(p, d) => this.LowLevelDispatch.IndicesGetDispatchAsync<GetIndexResponse>(
 					p.DeserializationState(new GetIndexResponseConverter(this.DeserializeGetIndexResponse))
 				)
 			);
@@ -49,7 +49,7 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<IGetIndexRequest, GetIndexRequestParameters, GetIndexResponse, IGetIndexResponse>(
 				createIndexRequest,
-				(p, d) => this.RawDispatch.IndicesGetDispatchAsync<GetIndexResponse>(
+				(p, d) => this.LowLevelDispatch.IndicesGetDispatchAsync<GetIndexResponse>(
 					p.DeserializationState(new GetIndexResponseConverter(this.DeserializeGetIndexResponse))
 				)
 			);

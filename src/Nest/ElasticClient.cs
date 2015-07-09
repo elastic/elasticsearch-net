@@ -18,7 +18,7 @@ namespace Nest
 		private readonly IConnectionSettingsValues _connectionSettings;
 
 		internal IHighLevelToLowLevelDispatcher Dispatcher { get { return this; } }
-		internal RawDispatch RawDispatch { get; set; }
+		internal LowLevelDispatch LowLevelDispatch { get; set; }
 		
 		public IConnection Connection { get; protected set; }
 		public INestSerializer Serializer { get; protected set; }
@@ -52,7 +52,7 @@ namespace Nest
 				transport, //default transport
 				this.Serializer
 			);
-			this.RawDispatch = new RawDispatch(this.Raw);
+			this.LowLevelDispatch = new LowLevelDispatch(this.Raw);
 			this.Infer = this._connectionSettings.Inferrer;
 
 		}

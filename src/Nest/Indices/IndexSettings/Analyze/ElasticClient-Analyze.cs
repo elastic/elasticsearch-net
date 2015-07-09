@@ -16,7 +16,7 @@ namespace Nest
 					IRequest<AnalyzeRequestParameters> request = d;
 					var text = request.RequestParameters.GetQueryStringValue<string>("text");
 					request.RequestParameters.RemoveQueryString("text");
-					return this.RawDispatch.IndicesAnalyzeDispatch<AnalyzeResponse>(p, text);
+					return this.LowLevelDispatch.IndicesAnalyzeDispatch<AnalyzeResponse>(p, text);
 				}
 			);
 		}
@@ -31,7 +31,7 @@ namespace Nest
 					IRequest<AnalyzeRequestParameters> request = d;
 					var text = request.RequestParameters.GetQueryStringValue<string>("text");
 					request.RequestParameters.RemoveQueryString("text");
-					return this.RawDispatch.IndicesAnalyzeDispatch<AnalyzeResponse>(p, text);
+					return this.LowLevelDispatch.IndicesAnalyzeDispatch<AnalyzeResponse>(p, text);
 				}
 			);
 		}
@@ -46,7 +46,7 @@ namespace Nest
 					IRequest<AnalyzeRequestParameters> request = d;
 					var text = request.RequestParameters.GetQueryStringValue<string>("text");
 					request.RequestParameters.RemoveQueryString("text");
-					return this.RawDispatch.IndicesAnalyzeDispatchAsync<AnalyzeResponse>(p, text);
+					return this.LowLevelDispatch.IndicesAnalyzeDispatchAsync<AnalyzeResponse>(p, text);
 				}
 			);
 		}
@@ -61,7 +61,7 @@ namespace Nest
 					IRequest<AnalyzeRequestParameters> request = d;
 					var text = request.RequestParameters.GetQueryStringValue<string>("text");
 					request.RequestParameters.RemoveQueryString("text");
-					return this.RawDispatch.IndicesAnalyzeDispatchAsync<AnalyzeResponse>(p, text);
+					return this.LowLevelDispatch.IndicesAnalyzeDispatchAsync<AnalyzeResponse>(p, text);
 				}
 			);
 		}

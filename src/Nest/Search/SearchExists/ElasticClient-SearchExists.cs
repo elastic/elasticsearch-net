@@ -15,7 +15,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<SearchExistsDescriptor<T>, SearchExistsRequestParameters, ExistsResponse>(
 				selector,
-				(p, d) => this.RawDispatch.SearchExistsDispatch<ExistsResponse>(
+				(p, d) => this.LowLevelDispatch.SearchExistsDispatch<ExistsResponse>(
 					p.DeserializationState(new SearchExistConverter(DeserializeExistsResponse))
 					, d
 					)
@@ -27,7 +27,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<ISearchExistsRequest, SearchExistsRequestParameters, ExistsResponse>(
 				indexRequest,
-				(p, d) => this.RawDispatch.SearchExistsDispatch<ExistsResponse>(
+				(p, d) => this.LowLevelDispatch.SearchExistsDispatch<ExistsResponse>(
 					p.DeserializationState(new SearchExistConverter(DeserializeExistsResponse))
 					, d
 					)
@@ -40,7 +40,7 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<SearchExistsDescriptor<T>, SearchExistsRequestParameters, ExistsResponse, IExistsResponse>(
 				selector,
-				(p, d) => this.RawDispatch.SearchExistsDispatchAsync<ExistsResponse>(
+				(p, d) => this.LowLevelDispatch.SearchExistsDispatchAsync<ExistsResponse>(
 					p.DeserializationState(new SearchExistConverter(DeserializeExistsResponse))
 					, d
 					)
@@ -52,7 +52,7 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<ISearchExistsRequest, SearchExistsRequestParameters, ExistsResponse, IExistsResponse>(
 				indexRequest,
-				(p, d) => this.RawDispatch.SearchExistsDispatchAsync<ExistsResponse>(
+				(p, d) => this.LowLevelDispatch.SearchExistsDispatchAsync<ExistsResponse>(
 					p.DeserializationState(new SearchExistConverter(DeserializeExistsResponse))
 					, d
 					)

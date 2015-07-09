@@ -11,15 +11,15 @@ namespace Nest
 		
 		/// <inheritdoc />
 		public ICatResponse<CatHealthRecord> CatHealth(Func<CatHealthDescriptor, CatHealthDescriptor> selector = null) => 
-			DoCat<CatHealthDescriptor, CatHealthRequestParameters, CatHealthRecord>(selector, RawDispatch.CatHealthDispatch<CatResponse<CatHealthRecord>>);
+			DoCat<CatHealthDescriptor, CatHealthRequestParameters, CatHealthRecord>(selector, LowLevelDispatch.CatHealthDispatch<CatResponse<CatHealthRecord>>);
 
 		public ICatResponse<CatHealthRecord> CatHealth(ICatHealthRequest request) =>
-			DoCat<ICatHealthRequest, CatHealthRequestParameters, CatHealthRecord>(request, RawDispatch.CatHealthDispatch<CatResponse<CatHealthRecord>>);
+			DoCat<ICatHealthRequest, CatHealthRequestParameters, CatHealthRecord>(request, LowLevelDispatch.CatHealthDispatch<CatResponse<CatHealthRecord>>);
 
 		public Task<ICatResponse<CatHealthRecord>> CatHealthAsync(Func<CatHealthDescriptor, CatHealthDescriptor> selector = null) => 
-			DoCatAsync<CatHealthDescriptor, CatHealthRequestParameters, CatHealthRecord>(selector, RawDispatch.CatHealthDispatchAsync<CatResponse<CatHealthRecord>>);
+			DoCatAsync<CatHealthDescriptor, CatHealthRequestParameters, CatHealthRecord>(selector, LowLevelDispatch.CatHealthDispatchAsync<CatResponse<CatHealthRecord>>);
 
 		public Task<ICatResponse<CatHealthRecord>> CatHealthAsync(ICatHealthRequest request) => 
-			DoCatAsync<ICatHealthRequest, CatHealthRequestParameters, CatHealthRecord>(request, RawDispatch.CatHealthDispatchAsync<CatResponse<CatHealthRecord>>);
+			DoCatAsync<ICatHealthRequest, CatHealthRequestParameters, CatHealthRecord>(request, LowLevelDispatch.CatHealthDispatchAsync<CatResponse<CatHealthRecord>>);
 	}
 }

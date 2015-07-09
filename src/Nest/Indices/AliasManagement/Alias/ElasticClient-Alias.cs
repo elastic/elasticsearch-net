@@ -14,7 +14,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<IAliasRequest, AliasRequestParameters, IndicesOperationResponse>(
 				aliasRequest,
-				(p, d) => this.RawDispatch.IndicesUpdateAliasesDispatch<IndicesOperationResponse>(p, d)
+				(p, d) => this.LowLevelDispatch.IndicesUpdateAliasesDispatch<IndicesOperationResponse>(p, d)
 			);
 		}
 
@@ -23,7 +23,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<AliasDescriptor, AliasRequestParameters, IndicesOperationResponse>(
 				aliasSelector,
-				(p, d) => this.RawDispatch.IndicesUpdateAliasesDispatch<IndicesOperationResponse>(p, d)
+				(p, d) => this.LowLevelDispatch.IndicesUpdateAliasesDispatch<IndicesOperationResponse>(p, d)
 			);
 		}
 
@@ -32,7 +32,7 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<IAliasRequest, AliasRequestParameters, IndicesOperationResponse, IIndicesOperationResponse>(
 				aliasRequest,
-				(p, d) => this.RawDispatch.IndicesUpdateAliasesDispatchAsync<IndicesOperationResponse>(p, d)
+				(p, d) => this.LowLevelDispatch.IndicesUpdateAliasesDispatchAsync<IndicesOperationResponse>(p, d)
 			);
 		}
 
@@ -41,7 +41,7 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<AliasDescriptor, AliasRequestParameters, IndicesOperationResponse, IIndicesOperationResponse>(
 				aliasSelector,
-				(p, d) => this.RawDispatch.IndicesUpdateAliasesDispatchAsync<IndicesOperationResponse>(p, d)
+				(p, d) => this.LowLevelDispatch.IndicesUpdateAliasesDispatchAsync<IndicesOperationResponse>(p, d)
 			);
 		}
 

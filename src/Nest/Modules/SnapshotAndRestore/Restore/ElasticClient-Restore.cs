@@ -11,7 +11,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<IRestoreRequest, RestoreRequestParameters, RestoreResponse>(
 				restoreRequest,
-				(p, d) => this.RawDispatch.SnapshotRestoreDispatch<RestoreResponse>(p, d)
+				(p, d) => this.LowLevelDispatch.SnapshotRestoreDispatch<RestoreResponse>(p, d)
 			);
 		}
 
@@ -23,7 +23,7 @@ namespace Nest
 			selector = selector ?? (s => s);
 			return this.Dispatcher.Dispatch<RestoreDescriptor, RestoreRequestParameters, RestoreResponse>(
 				s => selector(s.Snapshot(snapshotName).Repository(repository)),
-				(p, d) => this.RawDispatch.SnapshotRestoreDispatch<RestoreResponse>(p, d)
+				(p, d) => this.LowLevelDispatch.SnapshotRestoreDispatch<RestoreResponse>(p, d)
 			);
 		}
 
@@ -32,7 +32,7 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<IRestoreRequest, RestoreRequestParameters, RestoreResponse, IRestoreResponse>(
 				restoreRequest,
-				(p, d) => this.RawDispatch.SnapshotRestoreDispatchAsync<RestoreResponse>(p, d)
+				(p, d) => this.LowLevelDispatch.SnapshotRestoreDispatchAsync<RestoreResponse>(p, d)
 			);
 		}
 
@@ -44,7 +44,7 @@ namespace Nest
 			selector = selector ?? (s => s);
 			return this.Dispatcher.DispatchAsync<RestoreDescriptor, RestoreRequestParameters, RestoreResponse, IRestoreResponse>(
 				s => selector(s.Snapshot(snapshotName).Repository(repository)),
-				(p, d) => this.RawDispatch.SnapshotRestoreDispatchAsync<RestoreResponse>(p, d)
+				(p, d) => this.LowLevelDispatch.SnapshotRestoreDispatchAsync<RestoreResponse>(p, d)
 			);
 		}
 

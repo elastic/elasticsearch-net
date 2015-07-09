@@ -15,7 +15,7 @@ using Elasticsearch.Net;
 namespace Nest
 {
 	///<summary>This dispatches highlevel requests into the proper lowlevel client overload method</summary>
-	internal partial class RawDispatch
+	internal partial class LowLevelDispatch
 	{
 	@foreach (var kv in model.Endpoints)
 	{
@@ -53,18 +53,18 @@ namespace Nest
 					var hasIfCheck = !string.IsNullOrEmpty(dispatch.IfCheck); 
 					if (i == 0 && !hasIfCheck)
 					{
-					<text>return this.Raw.@(Raw(name))(@Raw(string.Join(",", dispatch.MethodArguments)));</text>
+					<text>return this.LowLevelClient.@(Raw(name))(@Raw(string.Join(",", dispatch.MethodArguments)));</text>
 					}
 					else
 					{
 						if (hasIfCheck)
 						{
 					<text>if (@Raw(dispatch.IfCheck))
-						return this.Raw.@(Raw(name))(@Raw(string.Join(",", dispatch.MethodArguments)));</text>
+						return this.LowLevelClient.@(Raw(name))(@Raw(string.Join(",", dispatch.MethodArguments)));</text>
 						}
 						else
 						{
-					<text>return this.Raw.@(Raw(name))(@Raw(string.Join(",", dispatch.MethodArguments)));</text>
+					<text>return this.LowLevelClient.@(Raw(name))(@Raw(string.Join(",", dispatch.MethodArguments)));</text>
 						}
 					}
 					if (i == totalDispatches - 1 && allWithIfChecks)

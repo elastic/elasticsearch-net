@@ -28,7 +28,7 @@ namespace Nest
 					{
 						{p.Type, d.Mapping}
 					};
-					return this.RawDispatch.IndicesPutMappingDispatch<IndicesResponse>(p, o);
+					return this.LowLevelDispatch.IndicesPutMappingDispatch<IndicesResponse>(p, o);
 				}
 			);
 		}
@@ -53,7 +53,7 @@ namespace Nest
 					{
 						{p.Type, d.Mapping}
 					};
-					return this.RawDispatch.IndicesPutMappingDispatchAsync<IndicesResponse>(p, o);
+					return this.LowLevelDispatch.IndicesPutMappingDispatchAsync<IndicesResponse>(p, o);
 				}
 			);
 		}

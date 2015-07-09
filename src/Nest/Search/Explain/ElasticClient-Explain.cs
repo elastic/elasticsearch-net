@@ -13,7 +13,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<ExplainDescriptor<T>, ExplainRequestParameters, ExplainResponse<T>>(
 				querySelector,
-				(p, d) => this.RawDispatch.ExplainDispatch<ExplainResponse<T>>(p, d)
+				(p, d) => this.LowLevelDispatch.ExplainDispatch<ExplainResponse<T>>(p, d)
 			);
 		}
 
@@ -23,7 +23,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<IExplainRequest, ExplainRequestParameters, ExplainResponse<T>>(
 				explainRequest,
-				(p, d) => this.RawDispatch.ExplainDispatch<ExplainResponse<T>>(p, d)
+				(p, d) => this.LowLevelDispatch.ExplainDispatch<ExplainResponse<T>>(p, d)
 			);
 		}
 
@@ -33,7 +33,7 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<ExplainDescriptor<T>, ExplainRequestParameters, ExplainResponse<T>, IExplainResponse<T>>(
 				querySelector,
-				(p, d) => this.RawDispatch.ExplainDispatchAsync<ExplainResponse<T>>(p, d)
+				(p, d) => this.LowLevelDispatch.ExplainDispatchAsync<ExplainResponse<T>>(p, d)
 			);
 		}
 
@@ -43,7 +43,7 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<IExplainRequest, ExplainRequestParameters, ExplainResponse<T>, IExplainResponse<T>>(
 				explainRequest,
-				(p, d) => this.RawDispatch.ExplainDispatchAsync<ExplainResponse<T>>(p, d)
+				(p, d) => this.LowLevelDispatch.ExplainDispatchAsync<ExplainResponse<T>>(p, d)
 			);
 		}
 	}

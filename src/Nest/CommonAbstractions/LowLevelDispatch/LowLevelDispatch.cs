@@ -5,13 +5,13 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	internal partial class RawDispatch 
+	internal partial class LowLevelDispatch 
 	{
-		protected IElasticsearchClient Raw { get; set; }
+		protected IElasticsearchClient LowLevelClient { get; set; }
 
-		public RawDispatch(IElasticsearchClient rawElasticClient)
+		public LowLevelDispatch(IElasticsearchClient rawElasticClient)
 		{
-			this.Raw = rawElasticClient;
+			this.LowLevelClient = rawElasticClient;
 		}
 
 		internal bool AllSet(params string[] pathVariables) => pathVariables.All(p => !p.IsNullOrEmpty());

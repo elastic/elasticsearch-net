@@ -16,7 +16,7 @@ namespace Nest
 			var descriptor = indexSelector(new IndexDescriptor<T>().IdFrom(@object));
 			return this.Dispatcher.Dispatch<IndexDescriptor<T>, IndexRequestParameters, IndexResponse>(
 				descriptor,
-				(p, d) => this.RawDispatch.IndexDispatch<IndexResponse>(p, @object));
+				(p, d) => this.LowLevelDispatch.IndexDispatch<IndexResponse>(p, @object));
 		}
 
 		/// <inheritdoc />
@@ -25,7 +25,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<IIndexRequest<T>, IndexRequestParameters, IndexResponse>(
 				indexRequest,
-				(p, d) => this.RawDispatch.IndexDispatch<IndexResponse>(p, indexRequest.Document));
+				(p, d) => this.LowLevelDispatch.IndexDispatch<IndexResponse>(p, indexRequest.Document));
 		}
 
 		/// <inheritdoc />
@@ -37,7 +37,7 @@ namespace Nest
 			var descriptor = indexSelector(new IndexDescriptor<T>().IdFrom(@object));
 			return this.Dispatcher.DispatchAsync<IndexDescriptor<T>, IndexRequestParameters, IndexResponse, IIndexResponse>(
 				descriptor,
-				(p, d) => this.RawDispatch.IndexDispatchAsync<IndexResponse>(p, @object));
+				(p, d) => this.LowLevelDispatch.IndexDispatchAsync<IndexResponse>(p, @object));
 		}
 
 		/// <inheritdoc />
@@ -46,7 +46,7 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<IIndexRequest<T>, IndexRequestParameters, IndexResponse, IIndexResponse>(
 				indexRequest,
-				(p, d) => this.RawDispatch.IndexDispatchAsync<IndexResponse>(p, indexRequest.Document));
+				(p, d) => this.LowLevelDispatch.IndexDispatchAsync<IndexResponse>(p, indexRequest.Document));
 		}
 
 	}

@@ -19,7 +19,7 @@ namespace Nest
 			selector = selector ?? (s => s);
 			return this.Dispatcher.Dispatch<NodesHotThreadsDescriptor, NodesHotThreadsRequestParameters, NodesHotThreadsResponse>(
 				selector,
-				(p, d) => this.RawDispatch.NodesHotThreadsDispatch<NodesHotThreadsResponse>(
+				(p, d) => this.LowLevelDispatch.NodesHotThreadsDispatch<NodesHotThreadsResponse>(
 					p.DeserializationState(new NodesHotThreadConverter(DeserializeNodesHotThreadResponse)))
 				);
 		}
@@ -29,7 +29,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<INodesHotThreadsRequest, NodesHotThreadsRequestParameters, NodesHotThreadsResponse>(
 				nodesHotThreadsRequest,
-				(p, d) => this.RawDispatch.NodesHotThreadsDispatch<NodesHotThreadsResponse>(
+				(p, d) => this.LowLevelDispatch.NodesHotThreadsDispatch<NodesHotThreadsResponse>(
 					p.DeserializationState(new NodesHotThreadConverter(DeserializeNodesHotThreadResponse)))
 			);
 		}
@@ -40,7 +40,7 @@ namespace Nest
 			selector = selector ?? (s => s);
 			return this.Dispatcher.DispatchAsync<NodesHotThreadsDescriptor, NodesHotThreadsRequestParameters, NodesHotThreadsResponse, INodesHotThreadsResponse>(
 				selector,
-				(p, d) => this.RawDispatch.NodesHotThreadsDispatchAsync<NodesHotThreadsResponse>(
+				(p, d) => this.LowLevelDispatch.NodesHotThreadsDispatchAsync<NodesHotThreadsResponse>(
 					p.DeserializationState(new NodesHotThreadConverter(DeserializeNodesHotThreadResponse)))
 			);
 		}
@@ -50,7 +50,7 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<INodesHotThreadsRequest, NodesHotThreadsRequestParameters, NodesHotThreadsResponse, INodesHotThreadsResponse>(
 				nodesHotThreadsRequest,
-				(p, d) => this.RawDispatch.NodesHotThreadsDispatchAsync<NodesHotThreadsResponse>(
+				(p, d) => this.LowLevelDispatch.NodesHotThreadsDispatchAsync<NodesHotThreadsResponse>(
 					p.DeserializationState(new NodesHotThreadConverter(DeserializeNodesHotThreadResponse)))
 			);
 		}

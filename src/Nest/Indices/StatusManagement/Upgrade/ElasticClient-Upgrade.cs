@@ -14,7 +14,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<IUpgradeRequest, UpgradeRequestParameters, UpgradeResponse>(
 				upgradeRequest,
-				(p, d) => this.RawDispatch.IndicesUpgradeDispatch<UpgradeResponse>(p)
+				(p, d) => this.LowLevelDispatch.IndicesUpgradeDispatch<UpgradeResponse>(p)
 			);	
 		}
 
@@ -23,7 +23,7 @@ namespace Nest
 			upgradeDescriptor = upgradeDescriptor ?? (s => s);
 			return this.Dispatcher.Dispatch<UpgradeDescriptor, UpgradeRequestParameters, UpgradeResponse>(
 				upgradeDescriptor,
-				(p, d) => this.RawDispatch.IndicesUpgradeDispatch<UpgradeResponse>(p)
+				(p, d) => this.LowLevelDispatch.IndicesUpgradeDispatch<UpgradeResponse>(p)
 			);
 		}
 
@@ -31,7 +31,7 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<IUpgradeRequest, UpgradeRequestParameters, UpgradeResponse, IUpgradeResponse>(
 				upgradeRequest,
-				(p, d) => this.RawDispatch.IndicesUpgradeDispatchAsync<UpgradeResponse>(p)
+				(p, d) => this.LowLevelDispatch.IndicesUpgradeDispatchAsync<UpgradeResponse>(p)
 			);
 		}
 
@@ -40,7 +40,7 @@ namespace Nest
 			upgradeDescriptor = upgradeDescriptor ?? (s => s);
 			return this.Dispatcher.DispatchAsync<UpgradeDescriptor, UpgradeRequestParameters, UpgradeResponse, IUpgradeResponse>(
 				upgradeDescriptor,
-				(p, d) => this.RawDispatch.IndicesUpgradeDispatchAsync<UpgradeResponse>(p)
+				(p, d) => this.LowLevelDispatch.IndicesUpgradeDispatchAsync<UpgradeResponse>(p)
 			);
 		}
 

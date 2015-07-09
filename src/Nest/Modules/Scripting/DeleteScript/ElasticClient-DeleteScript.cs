@@ -10,7 +10,7 @@ namespace Nest
         {
             return this.Dispatcher.Dispatch<DeleteScriptDescriptor, DeleteScriptRequestParameters, DeleteScriptResponse>(
                     deleteScriptDescriptor,
-                    (p, d) => this.RawDispatch.DeleteScriptDispatch<DeleteScriptResponse>(p)
+                    (p, d) => this.LowLevelDispatch.DeleteScriptDispatch<DeleteScriptResponse>(p)
                 );
         }
 
@@ -18,7 +18,7 @@ namespace Nest
         {
             return this.Dispatcher.DispatchAsync<DeleteScriptDescriptor, DeleteScriptRequestParameters, DeleteScriptResponse, IDeleteScriptResponse>(
                     deleteScriptDescriptor,
-                    (p, d) => this.RawDispatch.DeleteScriptDispatchAsync<DeleteScriptResponse>(p)
+                    (p, d) => this.LowLevelDispatch.DeleteScriptDispatchAsync<DeleteScriptResponse>(p)
                 );
         }
     }

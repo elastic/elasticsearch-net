@@ -23,7 +23,7 @@ namespace Nest
 					var converter = CreateMultiSearchConverter(d);
 					var json = Serializer.SerializeMultiSearch(d);
 					var creator = new MultiSearchCreator((r, s) => this.DeserializeMultiSearchHit(r, s, converter));
-					return this.RawDispatch.MsearchDispatch<MultiSearchResponse>(p.DeserializationState(creator), json);
+					return this.LowLevelDispatch.MsearchDispatch<MultiSearchResponse>(p.DeserializationState(creator), json);
 				}
 			);
 		}
@@ -38,7 +38,7 @@ namespace Nest
 					var converter = CreateMultiSearchConverter(d);
 					var json = Serializer.SerializeMultiSearch(d);
 					var creator = new MultiSearchCreator((r, s) => this.DeserializeMultiSearchHit(r, s, converter));
-					return this.RawDispatch.MsearchDispatch<MultiSearchResponse>(p.DeserializationState(creator), json);
+					return this.LowLevelDispatch.MsearchDispatch<MultiSearchResponse>(p.DeserializationState(creator), json);
 				}
 			);
 		}
@@ -52,7 +52,7 @@ namespace Nest
 					var converter = CreateMultiSearchConverter(d);
 					var json = Serializer.SerializeMultiSearch(d);
 					var creator = new MultiSearchCreator((r, s) => this.DeserializeMultiSearchHit(r, s, converter));
-					return this.RawDispatch.MsearchDispatchAsync<MultiSearchResponse>(p.DeserializationState(creator), json);
+					return this.LowLevelDispatch.MsearchDispatchAsync<MultiSearchResponse>(p.DeserializationState(creator), json);
 				}
 			);
 		}
@@ -67,7 +67,7 @@ namespace Nest
 					var converter = CreateMultiSearchConverter(d);
 					var json = Serializer.SerializeMultiSearch(d);
 					var creator = new MultiSearchCreator((r, s) => this.DeserializeMultiSearchHit(r, s, converter));
-					return this.RawDispatch.MsearchDispatchAsync<MultiSearchResponse>(p.DeserializationState(creator), json);
+					return this.LowLevelDispatch.MsearchDispatchAsync<MultiSearchResponse>(p.DeserializationState(creator), json);
 				}
 			);
 		}

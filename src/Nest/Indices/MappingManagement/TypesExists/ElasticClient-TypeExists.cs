@@ -15,7 +15,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<TypeExistsDescriptor, TypeExistsRequestParameters, ExistsResponse>(
 				selector,
-				(p, d) => this.RawDispatch.IndicesExistsTypeDispatch<ExistsResponse>(
+				(p, d) => this.LowLevelDispatch.IndicesExistsTypeDispatch<ExistsResponse>(
 					p.DeserializationState(new TypeExistConverter(DeserializeExistsResponse))
 				)
 			);
@@ -26,7 +26,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<ITypeExistsRequest, TypeExistsRequestParameters, ExistsResponse>(
 				TypeRequest,
-				(p, d) => this.RawDispatch.IndicesExistsTypeDispatch<ExistsResponse>(
+				(p, d) => this.LowLevelDispatch.IndicesExistsTypeDispatch<ExistsResponse>(
 					p.DeserializationState(new TypeExistConverter(DeserializeExistsResponse))
 				)
 			);
@@ -37,7 +37,7 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<TypeExistsDescriptor, TypeExistsRequestParameters, ExistsResponse, IExistsResponse>(
 				selector,
-				(p, d) => this.RawDispatch.IndicesExistsTypeDispatchAsync<ExistsResponse>(
+				(p, d) => this.LowLevelDispatch.IndicesExistsTypeDispatchAsync<ExistsResponse>(
 					p.DeserializationState(new TypeExistConverter(DeserializeExistsResponse))
 				)
 			);
@@ -48,7 +48,7 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<ITypeExistsRequest, TypeExistsRequestParameters, ExistsResponse, IExistsResponse>(
 				TypeRequest,
-				(p, d) => this.RawDispatch.IndicesExistsTypeDispatchAsync<ExistsResponse>(
+				(p, d) => this.LowLevelDispatch.IndicesExistsTypeDispatchAsync<ExistsResponse>(
 					p.DeserializationState(new TypeExistConverter(DeserializeExistsResponse))
 				)
 			);

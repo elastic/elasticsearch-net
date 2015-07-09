@@ -523,7 +523,7 @@
     <Compile Include="CommonAbstractions\Exception\SnapshotException.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\NestSerializer.cs" />
     <Compile Include="CommonOptions\Geo\GeoDistance.cs" />
-    <Compile Include="CommonAbstractions\RawDispatch\IHighLevelToLowLevelDispatcher.cs" />
+    <Compile Include="CommonAbstractions\LowLevelDispatch\IHighLevelToLowLevelDispatcher.cs" />
     <Compile Include="CommonAbstractions\Extensions\ExceptionExtensions.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\Resolvers\Converters\Aggregations\FiltersAggregatorConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\Resolvers\Converters\Aggregations\FilterAggregatorConverter.cs" />
@@ -557,7 +557,7 @@
     <Compile Include="Modules\SnapshotAndRestore\Repositories\FileSystemRepository.cs" />
     <Compile Include="Modules\SnapshotAndRestore\Repositories\IRepository.cs" />
     <Compile Include="Modules\SnapshotAndRestore\Repositories\ReadOnlyUrlRepository.cs" />
-    <Compile Include="_Generated\RequestParametersExtensions.Generated.cs" />
+    <Compile Include="_Generated\_RequestParametersExtensions.Generated.cs" />
     <Compile Include="Indices\AliasManagement\GetAliases\GetAliasesResponse.cs" />
     <Compile Include="Indices\MappingManagement\GetMapping\GetMappingResponse.cs" />
     <Compile Include="Search\MultiSearch\IMultiSearchResponse.cs" />
@@ -670,8 +670,8 @@
     <Compile Include="CommonAbstractions\Extensions\StringExtensions.cs" />
     <Compile Include="CommonAbstractions\Extensions\SuffixExtensions.cs" />
     <Compile Include="CommonAbstractions\Extensions\TypeExtensions.cs" />
-    <Compile Include="_Generated\RawDispatch.generated.cs" />
-    <Compile Include="CommonAbstractions\RawDispatch\RawDispatch.cs" />
+    <Compile Include="_Generated\_LowLevelDispatch.generated.cs" />
+    <Compile Include="CommonAbstractions\LowLevelDispatch\LowLevelDispatch.cs" />
     <Compile Include="Mapping\CoreTypes\CompletionMapping.cs" />
     <Compile Include="Cluster\RootNodeInfo\RootVersionInfoResponse.cs" />
     <Compile Include="Indices\Monitoring\Status\StatusResponse.cs" />

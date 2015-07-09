@@ -11,7 +11,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<OpenIndexDescriptor, OpenIndexRequestParameters, IndicesOperationResponse>(
 				openIndexSelector,
-				(p, d) => this.RawDispatch.IndicesOpenDispatch<IndicesOperationResponse>(p)
+				(p, d) => this.LowLevelDispatch.IndicesOpenDispatch<IndicesOperationResponse>(p)
 			);
 		}
 
@@ -20,7 +20,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<IOpenIndexRequest, OpenIndexRequestParameters, IndicesOperationResponse>(
 				openIndexRequest,
-				(p, d) => this.RawDispatch.IndicesOpenDispatch<IndicesOperationResponse>(p)
+				(p, d) => this.LowLevelDispatch.IndicesOpenDispatch<IndicesOperationResponse>(p)
 			);
 		}
 
@@ -29,7 +29,7 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<OpenIndexDescriptor, OpenIndexRequestParameters, IndicesOperationResponse, IIndicesOperationResponse>(
 				openIndexSelector,
-				(p, d) => this.RawDispatch.IndicesOpenDispatchAsync<IndicesOperationResponse>(p)
+				(p, d) => this.LowLevelDispatch.IndicesOpenDispatchAsync<IndicesOperationResponse>(p)
 			);
 		}
 
@@ -38,7 +38,7 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<IOpenIndexRequest, OpenIndexRequestParameters, IndicesOperationResponse, IIndicesOperationResponse>(
 				openIndexRequest,
-				(p, d) => this.RawDispatch.IndicesOpenDispatchAsync<IndicesOperationResponse>(p)
+				(p, d) => this.LowLevelDispatch.IndicesOpenDispatchAsync<IndicesOperationResponse>(p)
 			);
 		}
 

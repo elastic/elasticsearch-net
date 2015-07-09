@@ -13,7 +13,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<DeleteDescriptor<T>, DeleteRequestParameters, DeleteResponse>(
 				deleteSelector,
-				(p, d) => this.RawDispatch.DeleteDispatch<DeleteResponse>(p)
+				(p, d) => this.LowLevelDispatch.DeleteDispatch<DeleteResponse>(p)
 			);
 		}
 
@@ -22,7 +22,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<IDeleteRequest, DeleteRequestParameters, DeleteResponse>(
 				deleteRequest,
-				(p, d) => this.RawDispatch.DeleteDispatch<DeleteResponse>(p)
+				(p, d) => this.LowLevelDispatch.DeleteDispatch<DeleteResponse>(p)
 			);
 		}
 
@@ -32,7 +32,7 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<DeleteDescriptor<T>, DeleteRequestParameters, DeleteResponse, IDeleteResponse>(
 				deleteSelector,
-				(p, d) => this.RawDispatch.DeleteDispatchAsync<DeleteResponse>(p)
+				(p, d) => this.LowLevelDispatch.DeleteDispatchAsync<DeleteResponse>(p)
 			);
 		}
 
@@ -41,7 +41,7 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<IDeleteRequest, DeleteRequestParameters, DeleteResponse, IDeleteResponse>(
 				deleteRequest,
-				(p, d) => this.RawDispatch.DeleteDispatchAsync<DeleteResponse>(p)
+				(p, d) => this.LowLevelDispatch.DeleteDispatchAsync<DeleteResponse>(p)
 			);
 		}
 

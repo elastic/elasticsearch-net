@@ -14,7 +14,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<TermvectorDescriptor<T>, TermvectorRequestParameters, TermVectorResponse>(
 				termVectorSelector,
-				(p, d) => this.RawDispatch.TermvectorDispatch<TermVectorResponse>(p, d)
+				(p, d) => this.LowLevelDispatch.TermvectorDispatch<TermVectorResponse>(p, d)
 			);
 		}
 
@@ -23,7 +23,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<ITermvectorRequest, TermvectorRequestParameters, TermVectorResponse>(
 				termvectorRequest,
-				(p, d) => this.RawDispatch.TermvectorDispatch<TermVectorResponse>(p, d)
+				(p, d) => this.LowLevelDispatch.TermvectorDispatch<TermVectorResponse>(p, d)
 			);
 		}
 
@@ -33,7 +33,7 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<TermvectorDescriptor<T>, TermvectorRequestParameters, TermVectorResponse, ITermVectorResponse>(
 				termVectorSelector,
-				(p, d) => this.RawDispatch.TermvectorDispatchAsync<TermVectorResponse>(p, d)
+				(p, d) => this.LowLevelDispatch.TermvectorDispatchAsync<TermVectorResponse>(p, d)
 			);
 		}
 
@@ -42,7 +42,7 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<ITermvectorRequest , TermvectorRequestParameters, TermVectorResponse, ITermVectorResponse>(
 				termvectorRequest,
-				(p, d) => this.RawDispatch.TermvectorDispatchAsync<TermVectorResponse>(p, d)
+				(p, d) => this.LowLevelDispatch.TermvectorDispatchAsync<TermVectorResponse>(p, d)
 			);
 		}
 

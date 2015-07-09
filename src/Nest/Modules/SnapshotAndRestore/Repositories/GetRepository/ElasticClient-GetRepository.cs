@@ -14,7 +14,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<GetRepositoryDescriptor, GetRepositoryRequestParameters, GetRepositoryResponse>(
 				selector,
-				(p, d) => this.RawDispatch.SnapshotGetRepositoryDispatch<GetRepositoryResponse>(p)
+				(p, d) => this.LowLevelDispatch.SnapshotGetRepositoryDispatch<GetRepositoryResponse>(p)
 			);
 		}
 
@@ -23,7 +23,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<IGetRepositoryRequest, GetRepositoryRequestParameters, GetRepositoryResponse>(
 				request,
-				(p, d) => this.RawDispatch.SnapshotGetRepositoryDispatch<GetRepositoryResponse>(p)
+				(p, d) => this.LowLevelDispatch.SnapshotGetRepositoryDispatch<GetRepositoryResponse>(p)
 			);
 		}
 
@@ -32,7 +32,7 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<GetRepositoryDescriptor, GetRepositoryRequestParameters, GetRepositoryResponse, IGetRepositoryResponse>(
 				selector,
-				(p, d) => this.RawDispatch.SnapshotGetRepositoryDispatchAsync<GetRepositoryResponse>(p)
+				(p, d) => this.LowLevelDispatch.SnapshotGetRepositoryDispatchAsync<GetRepositoryResponse>(p)
 			);
 		}
 		
@@ -41,7 +41,7 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<IGetRepositoryRequest, GetRepositoryRequestParameters, GetRepositoryResponse, IGetRepositoryResponse>(
 				request,
-				(p, d) => this.RawDispatch.SnapshotGetRepositoryDispatchAsync<GetRepositoryResponse>(p)
+				(p, d) => this.LowLevelDispatch.SnapshotGetRepositoryDispatchAsync<GetRepositoryResponse>(p)
 			);
 		}
 	}

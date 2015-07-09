@@ -15,7 +15,7 @@ namespace Nest
 			selector = selector ?? (s => s);
 			return this.Dispatcher.Dispatch<DeleteMappingDescriptor<T>, DeleteMappingRequestParameters, IndicesResponse>(
 				selector,
-				(p, d) => this.RawDispatch.IndicesDeleteMappingDispatch<IndicesResponse>(p)
+				(p, d) => this.LowLevelDispatch.IndicesDeleteMappingDispatch<IndicesResponse>(p)
 			);
 		}
 
@@ -24,7 +24,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<IDeleteMappingRequest, DeleteMappingRequestParameters, IndicesResponse>(
 				deleteMappingRequest,
-				(p, d) => this.RawDispatch.IndicesDeleteMappingDispatch<IndicesResponse>(p)
+				(p, d) => this.LowLevelDispatch.IndicesDeleteMappingDispatch<IndicesResponse>(p)
 			);
 		}
 
@@ -35,7 +35,7 @@ namespace Nest
 			selector = selector ?? (s => s);
 			return this.Dispatcher.DispatchAsync<DeleteMappingDescriptor<T>, DeleteMappingRequestParameters, IndicesResponse, IIndicesResponse>(
 				selector,
-				(p, d) => this.RawDispatch.IndicesDeleteMappingDispatchAsync<IndicesResponse>(p)
+				(p, d) => this.LowLevelDispatch.IndicesDeleteMappingDispatchAsync<IndicesResponse>(p)
 			);
 		}
 
@@ -44,7 +44,7 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<IDeleteMappingRequest, DeleteMappingRequestParameters, IndicesResponse, IIndicesResponse>(
 				deleteMappingRequest,
-				(p, d) => this.RawDispatch.IndicesDeleteMappingDispatchAsync<IndicesResponse>(p)
+				(p, d) => this.LowLevelDispatch.IndicesDeleteMappingDispatchAsync<IndicesResponse>(p)
 			);
 		}
 

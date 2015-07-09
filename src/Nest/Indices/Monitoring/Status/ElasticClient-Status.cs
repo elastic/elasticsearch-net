@@ -14,7 +14,7 @@ namespace Nest
 			selector = selector ?? (s => s);
 			return this.Dispatcher.Dispatch<IndicesStatusDescriptor, IndicesStatusRequestParameters, StatusResponse>(
 				selector,
-				(p, d) => this.RawDispatch.IndicesStatusDispatch<StatusResponse>(p)
+				(p, d) => this.LowLevelDispatch.IndicesStatusDispatch<StatusResponse>(p)
 			);
 		}
 
@@ -23,7 +23,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<IIndicesStatusRequest, IndicesStatusRequestParameters, StatusResponse>(
 				statusRequest,
-				(p, d) => this.RawDispatch.IndicesStatusDispatch<StatusResponse>(p)
+				(p, d) => this.LowLevelDispatch.IndicesStatusDispatch<StatusResponse>(p)
 			);
 		}
 
@@ -33,7 +33,7 @@ namespace Nest
 			selector = selector ?? (s => s);
 			return this.Dispatcher.DispatchAsync<IndicesStatusDescriptor, IndicesStatusRequestParameters, StatusResponse, IStatusResponse>(
 				selector,
-				(p, d) => this.RawDispatch.IndicesStatusDispatchAsync<StatusResponse>(p)
+				(p, d) => this.LowLevelDispatch.IndicesStatusDispatchAsync<StatusResponse>(p)
 			);
 		}
 
@@ -42,7 +42,7 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<IIndicesStatusRequest, IndicesStatusRequestParameters, StatusResponse, IStatusResponse>(
 				statusRequest,
-				(p, d) => this.RawDispatch.IndicesStatusDispatchAsync<StatusResponse>(p)
+				(p, d) => this.LowLevelDispatch.IndicesStatusDispatchAsync<StatusResponse>(p)
 			);
 		}
 

@@ -15,7 +15,7 @@ namespace Nest
 			percolateSelector = percolateSelector ?? (s => s);
 			return this.Dispatcher.Dispatch<PercolateDescriptor<T>, PercolateRequestParameters, PercolateResponse>(
 				percolateSelector,
-				(p, d) => this.RawDispatch.PercolateDispatch<PercolateResponse>(p, d)
+				(p, d) => this.LowLevelDispatch.PercolateDispatch<PercolateResponse>(p, d)
 			);
 		}
 
@@ -25,7 +25,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<IPercolateRequest<T>, PercolateRequestParameters, PercolateResponse>(
 				percolateRequest,
-				(p, d) => this.RawDispatch.PercolateDispatch<PercolateResponse>(p, d)
+				(p, d) => this.LowLevelDispatch.PercolateDispatch<PercolateResponse>(p, d)
 			);
 		}
 
@@ -36,7 +36,7 @@ namespace Nest
 			percolateSelector = percolateSelector ?? (s => s);
 			return this.Dispatcher.DispatchAsync<PercolateDescriptor<T>, PercolateRequestParameters, PercolateResponse, IPercolateResponse>(
 				percolateSelector,
-				(p, d) => this.RawDispatch.PercolateDispatchAsync<PercolateResponse>(p, d)
+				(p, d) => this.LowLevelDispatch.PercolateDispatchAsync<PercolateResponse>(p, d)
 			);
 		}
 
@@ -46,7 +46,7 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<IPercolateRequest<T>, PercolateRequestParameters, PercolateResponse, IPercolateResponse>(
 				percolateRequest,
-				(p, d) => this.RawDispatch.PercolateDispatchAsync<PercolateResponse>(p, d)
+				(p, d) => this.LowLevelDispatch.PercolateDispatchAsync<PercolateResponse>(p, d)
 			);
 		}
 

@@ -18,7 +18,7 @@ namespace Nest
 			selector.ThrowIfNull("selector");
 			return this.Dispatcher.Dispatch<PutWarmerDescriptor, PutWarmerRequestParameters, IndicesOperationResponse>(
 				d => selector(d.Name(name).AllIndices()),
-				(p, d) => this.RawDispatch.IndicesPutWarmerDispatch<IndicesOperationResponse>(p, d)
+				(p, d) => this.LowLevelDispatch.IndicesPutWarmerDispatch<IndicesOperationResponse>(p, d)
 			);
 		}
 
@@ -27,7 +27,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<IPutWarmerRequest, PutWarmerRequestParameters, IndicesOperationResponse>(
 				putWarmerRequest,
-				(p, d) => this.RawDispatch.IndicesPutWarmerDispatch<IndicesOperationResponse>(p, d)
+				(p, d) => this.LowLevelDispatch.IndicesPutWarmerDispatch<IndicesOperationResponse>(p, d)
 			);
 		}
 
@@ -37,7 +37,7 @@ namespace Nest
 			selector.ThrowIfNull("selector");
 			return this.Dispatcher.DispatchAsync<PutWarmerDescriptor, PutWarmerRequestParameters, IndicesOperationResponse, IIndicesOperationResponse>(
 				d => selector(d.Name(name).AllIndices()),
-				(p, d) => this.RawDispatch.IndicesPutWarmerDispatchAsync<IndicesOperationResponse>(p, d)
+				(p, d) => this.LowLevelDispatch.IndicesPutWarmerDispatchAsync<IndicesOperationResponse>(p, d)
 			);
 		}
 
@@ -46,7 +46,7 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<IPutWarmerRequest, PutWarmerRequestParameters, IndicesOperationResponse, IIndicesOperationResponse>(
 				putWarmerRequest,
-				(p, d) => this.RawDispatch.IndicesPutWarmerDispatchAsync<IndicesOperationResponse>(p, d)
+				(p, d) => this.LowLevelDispatch.IndicesPutWarmerDispatchAsync<IndicesOperationResponse>(p, d)
 			);
 		}
 

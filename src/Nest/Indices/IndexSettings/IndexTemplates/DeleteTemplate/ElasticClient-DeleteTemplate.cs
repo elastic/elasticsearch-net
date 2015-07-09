@@ -15,7 +15,7 @@ namespace Nest
 			deleteTemplateSelector = deleteTemplateSelector ?? (s => s);
 			return this.Dispatcher.Dispatch<DeleteTemplateDescriptor, DeleteTemplateRequestParameters, IndicesOperationResponse>(
 				d => deleteTemplateSelector(d.Name(name)),
-				(p, d) => this.RawDispatch.IndicesDeleteTemplateDispatch<IndicesOperationResponse>(p)
+				(p, d) => this.LowLevelDispatch.IndicesDeleteTemplateDispatch<IndicesOperationResponse>(p)
 			);
 		}
 
@@ -24,7 +24,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<IDeleteTemplateRequest, DeleteTemplateRequestParameters, IndicesOperationResponse>(
 				deleteTemplateRequest,
-				(p, d) => this.RawDispatch.IndicesDeleteTemplateDispatch<IndicesOperationResponse>(p)
+				(p, d) => this.LowLevelDispatch.IndicesDeleteTemplateDispatch<IndicesOperationResponse>(p)
 			);
 		}
 
@@ -35,7 +35,7 @@ namespace Nest
 			return this.Dispatcher.DispatchAsync
 				<DeleteTemplateDescriptor, DeleteTemplateRequestParameters, IndicesOperationResponse, IIndicesOperationResponse>(
 					d => deleteTemplateSelector(d.Name(name)),
-					(p, d) => this.RawDispatch.IndicesDeleteTemplateDispatchAsync<IndicesOperationResponse>(p)
+					(p, d) => this.LowLevelDispatch.IndicesDeleteTemplateDispatchAsync<IndicesOperationResponse>(p)
 				);
 		}
 
@@ -44,7 +44,7 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<IDeleteTemplateRequest, DeleteTemplateRequestParameters, IndicesOperationResponse, IIndicesOperationResponse>(
 					deleteTemplateRequest,
-					(p, d) => this.RawDispatch.IndicesDeleteTemplateDispatchAsync<IndicesOperationResponse>(p)
+					(p, d) => this.LowLevelDispatch.IndicesDeleteTemplateDispatchAsync<IndicesOperationResponse>(p)
 				);
 		}
 
