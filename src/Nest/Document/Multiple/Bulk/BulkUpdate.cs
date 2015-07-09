@@ -79,6 +79,8 @@ namespace Nest
 			{
 				_PartialUpdate = this.Doc,
 				_Script = this.Script,
+				_ScriptId = this.ScriptId,
+				_ScriptFile = this.ScriptFile,
 				_Lang = this.Lang,
 				_Params = this.Params,
 				_Upsert = this.Upsert,
@@ -130,6 +132,8 @@ namespace Nest
 			{
 				_PartialUpdate = Self.Doc,
 				_Script = Self.Script,
+				_ScriptId = Self.ScriptId,
+				_ScriptFile = Self.ScriptFile,
 				_Lang = Self.Lang,
 				_Params = Self.Params,
 				_Upsert = Self.Upsert,

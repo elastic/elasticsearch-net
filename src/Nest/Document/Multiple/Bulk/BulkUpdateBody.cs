@@ -18,7 +18,13 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "script")]
 		internal string _Script { get; set; }
+
+		[JsonProperty("script_id")]
+		internal string _ScriptId { get; set; }
 		
+		[JsonProperty("script_file")]
+		internal string _ScriptFile { get; set; }
+
 		[JsonProperty(PropertyName = "params")]
 		[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]
 		internal Dictionary<string, object> _Params { get; set; }
