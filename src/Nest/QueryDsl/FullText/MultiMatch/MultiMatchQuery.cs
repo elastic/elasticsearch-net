@@ -41,9 +41,6 @@ namespace Nest
 		[JsonProperty(PropertyName = "slop")]
 		int? Slop { get; set; }
 
-		[JsonProperty(PropertyName = "boost")]
-		double? Boost { get; set; }
-
 		[JsonProperty(PropertyName = "lenient")]
 		bool? Lenient { get; set; }
 
@@ -76,7 +73,6 @@ namespace Nest
 		public int? PrefixLength { get; set; }
 		public int? MaxExpansions { get; set; }
 		public int? Slop { get; set; }
-		public double? Boost { get; set; }
 		public bool? Lenient { get; set; }
 		public bool? UseDisMax { get; set; }
 		public double? TieBreaker { get; set; }
@@ -93,12 +89,13 @@ namespace Nest
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class MultiMatchQueryDescriptor<T> : IMultiMatchQuery where T : class
+	public class MultiMatchQueryDescriptor<T> 
+		: QueryDescriptorBase<MultiMatchQueryDescriptor<T>, IMultiMatchQuery> 
+		, IMultiMatchQuery where T : class
 	{
 		MultiMatchQueryDescriptor<T> _assign(Action<IMultiMatchQuery> assigner) => Fluent.Assign(this, assigner);
 
 		private IMultiMatchQuery Self { get { return this; } }
-		string IQuery.Name { get; set; }
 		bool IQuery.Conditionless => MultiMatchQuery.IsConditionless(this);
 		TextQueryType? IMultiMatchQuery.Type { get; set; }
 		string IMultiMatchQuery.Query { get; set; }
@@ -109,15 +106,12 @@ namespace Nest
 		int? IMultiMatchQuery.PrefixLength { get; set; }
 		int? IMultiMatchQuery.MaxExpansions { get; set; }
 		int? IMultiMatchQuery.Slop { get; set; }
-		double? IMultiMatchQuery.Boost { get; set; }
 		bool? IMultiMatchQuery.Lenient { get; set; }
 		bool? IMultiMatchQuery.UseDisMax { get; set; }
 		double? IMultiMatchQuery.TieBreaker { get; set; }
 		string IMultiMatchQuery.MinimumShouldMatch { get; set; }
 		Operator? IMultiMatchQuery.Operator { get; set; }
 		IEnumerable<FieldName> IMultiMatchQuery.Fields { get; set; }
-
-		public MultiMatchQueryDescriptor<T> Name(string name) => _assign(a => a.Name = name);
 
 		public MultiMatchQueryDescriptor<T> OnFields(IEnumerable<string> fields) =>
 			_assign(a => a.Fields = fields?.Select(f => (FieldName)f).ToListOrNullIfEmpty());
@@ -154,8 +148,6 @@ namespace Nest
 			=> _assign(a => a.MinimumShouldMatch = minimumShouldMatch);
 
 		public MultiMatchQueryDescriptor<T> Rewrite(RewriteMultiTerm rewrite) => _assign(a => a.Rewrite = rewrite);
-
-		public MultiMatchQueryDescriptor<T> Boost(double boost) => _assign(a => a.Boost = boost);
 
 		public MultiMatchQueryDescriptor<T> Lenient(bool lenient = true) => _assign(a => a.Lenient = lenient);
 

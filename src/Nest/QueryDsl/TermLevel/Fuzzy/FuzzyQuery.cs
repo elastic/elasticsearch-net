@@ -14,9 +14,6 @@ namespace Nest
 		[JsonProperty(PropertyName = "value")]
 		object Value { get; set; }
 
-		[JsonProperty(PropertyName = "boost")]
-		double? Boost { get; set; }
-		
 		[JsonProperty(PropertyName = "fuzziness")]
 		string Fuzziness { get; set; }
 
@@ -36,7 +33,6 @@ namespace Nest
 	public class FuzzyQuery : FieldNameQuery, IFuzzyQuery
 	{
 		bool IQuery.Conditionless => IsConditionless(this);
-		public double? Boost { get; set; }
 		public string Fuzziness { get; set; }
 		public RewriteMultiTerm? Rewrite { get; set; }
 		public int? MaxExpansions { get; set; }
@@ -49,13 +45,12 @@ namespace Nest
 		internal static bool IsConditionless(IFuzzyQuery q) => q.Field.IsConditionless() || q.Value == null;
 	}
 
-	public class FuzzyQueryDescriptor<T> : IFuzzyQuery where T : class
+	public class FuzzyQueryDescriptor<T> 
+		: FieldNameQueryDescriptor<FuzzyQueryDescriptor<T>, IFuzzyQuery, T>
+		, IFuzzyQuery where T : class
 	{
 		private IFuzzyQuery Self => this;
-		string IQuery.Name { get; set; }
 		bool IQuery.Conditionless => FuzzyQuery.IsConditionless(this);
-		FieldName IFieldNameQuery.Field { get; set; }
-		double? IFuzzyQuery.Boost { get; set; }
 		string IFuzzyQuery.Fuzziness { get; set; }
 		object IFuzzyQuery.Value { get; set; }
 		int? IFuzzyQuery.PrefixLength { get; set; }
@@ -63,30 +58,6 @@ namespace Nest
 		bool? IFuzzyQuery.Transpositions { get; set; }
 		bool? IFuzzyQuery.UnicodeAware { get; set; }
 		RewriteMultiTerm? IFuzzyQuery.Rewrite { get; set; }
-		
-		public FuzzyQueryDescriptor<T> OnField(string field)
-		{
-			Self.Field = field;
-			return this;
-		}
-
-		public FuzzyQueryDescriptor<T> Name(string name)
-		{
-			Self.Name = name;
-			return this;
-		}
-
-		public FuzzyQueryDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
-		{
-			Self.Field = objectPath;
-			return this;
-		}
-		
-		public FuzzyQueryDescriptor<T> Boost(double boost)
-		{
-			Self.Boost = boost;
-			return this;
-		}
 		
 		public FuzzyQueryDescriptor<T> Fuzziness(double fuzziness)
 		{

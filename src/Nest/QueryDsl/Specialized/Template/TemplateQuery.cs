@@ -26,19 +26,14 @@ namespace Nest
 		internal static bool IsConditionless(ITemplateQuery q) => q.Query.IsNullOrEmpty();
 	}
 
-	public class TemplateQueryDescriptor<T> : ITemplateQuery where T : class
+	public class TemplateQueryDescriptor<T> 
+		: QueryDescriptorBase<TemplateQueryDescriptor<T>, ITemplateQuery>
+		, ITemplateQuery where T : class
 	{
 		ITemplateQuery Self => this;
-		string IQuery.Name { get; set; }
 		bool IQuery.Conditionless => TemplateQuery.IsConditionless(this);
 		string ITemplateQuery.Query { get; set; }
 		IDictionary<string, object> ITemplateQuery.Params { get; set; }
-
-		public TemplateQueryDescriptor<T> Name(string name)
-		{
-			Self.Name = name;
-			return this;
-		}
 
 		public TemplateQueryDescriptor<T> Query(string query)
 		{

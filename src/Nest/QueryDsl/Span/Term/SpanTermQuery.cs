@@ -15,7 +15,6 @@ namespace Nest
 	{
 		bool IQuery.Conditionless => TermQuery.IsConditionless(this);
 		public object Value { get; set; }
-		public double? Boost { get; set; }
 
 		protected override void WrapInContainer(IQueryContainer c) => c.SpanTerm = this;
 	}

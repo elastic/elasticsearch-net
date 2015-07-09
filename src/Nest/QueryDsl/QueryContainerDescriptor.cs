@@ -89,20 +89,8 @@ namespace Nest
 		/// <summary>
 		/// A query that match on any (configurable) of the provided terms. This is a simpler syntax query for using a bool query with several term queries in the should clauses.
 		/// </summary>
-		public QueryContainer Terms<K>(Expression<Func<T, K>> objectPath, IEnumerable<K> terms) =>
+		public QueryContainer Terms<K>(Expression<Func<T, object>> objectPath, IEnumerable<K> terms) =>
 			this.Terms<K>(t => t.OnField(objectPath).Terms(terms));
-
-		/// <summary>
-		/// A query that match on any (configurable) of the provided terms. This is a simpler syntax query for using a bool query with several term queries in the should clauses.
-		/// </summary>
-		public QueryContainer Terms<K>(Expression<Func<T, IEnumerable<K>>> objectPath, IEnumerable<K> terms) =>
-			this.Terms<K>(t => t.OnField(objectPath).Terms(terms));
-
-		/// <summary>
-		/// A query that match on any (configurable) of the provided terms. This is a simpler syntax query for using a bool query with several term queries in the should clauses.
-		/// </summary>
-		public QueryContainer Terms(Expression<Func<T, object>> objectPath, IEnumerable<string> terms) =>
-			this.Terms(t => t.OnField(objectPath).Terms(terms));
 
 		/// <summary>
 		/// A query that match on any (configurable) of the provided terms. This is a simpler syntax query for using a bool query with several term queries in the should clauses.
@@ -110,6 +98,11 @@ namespace Nest
 		public QueryContainer Terms(Func<TermsQueryDescriptor<T, object>, ITermsQuery> selector) =>
 			this.Terms<object>(selector);
 
+		/// <summary>
+		/// A query that match on any (configurable) of the provided terms. This is a simpler syntax query for using a bool query with several term queries in the should clauses.
+		/// </summary>
+		public QueryContainer Terms(Expression<Func<T, object>> objectPath, IEnumerable<string> terms) =>
+			this.Terms(t => t.OnField(objectPath).Terms(terms));
 		/// <summary>
 		/// A query that match on any (configurable) of the provided terms. This is a simpler syntax query for using a bool query with several term queries in the should clauses.
 		/// </summary>
@@ -344,7 +337,7 @@ namespace Nest
 		/// Matches documents that have fields that contain a term (not analyzed). 
 		/// The term query maps to Lucene TermQuery. 
 		/// </summary>
-		public QueryContainer Term<K>(Expression<Func<T, K>> fieldDescriptor, K value, double? Boost = null)
+		public QueryContainer Term<K>(Expression<Func<T, object>> fieldDescriptor, K value, double? Boost = null)
 		{
 			return this.Term(t =>
 			{
@@ -540,7 +533,7 @@ namespace Nest
 		/// Removes matches which overlap with another span query. 
 		/// The span not query maps to Lucene SpanNotQuery.
 		/// </summary>
-		public QueryContainer SpanNot(Func<SpanNotQuery<T>, ISpanNotQuery> selector) =>
+		public QueryContainer SpanNot(Func<SpanNotQueryDescriptor<T>, ISpanNotQuery> selector) =>
 			this._assignSelector(selector, (query, container) => container.SpanNot = query);
 
 		/// <summary>

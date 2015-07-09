@@ -21,9 +21,6 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "collect_payloads")]
 		bool? CollectPayloads { get; set; }
-
-        [JsonProperty(PropertyName = "boost")]
-	    double? Boost { get; set; }
 	}
 
 	public class SpanNearQuery : QueryBase, ISpanNearQuery
@@ -33,36 +30,29 @@ namespace Nest
 		public int? Slop { get; set; }
 		public bool? InOrder { get; set; }
 		public bool? CollectPayloads { get; set; }
-	    public double? Boost { get; set; }
 
 		protected override void WrapInContainer(IQueryContainer c) => c.SpanNear = this;
 		internal static bool IsConditionless(ISpanNearQuery q) => !q.Clauses.HasAny() || q.Clauses.Cast<IQuery>().All(qq => qq.Conditionless);
 	}
 
-	public class SpanNearQueryDescriptor<T> : ISpanNearQuery where T : class
+	public class SpanNearQueryDescriptor<T> 
+		: QueryDescriptorBase<SpanNearQueryDescriptor<T>, ISpanNearQuery>
+		, ISpanNearQuery where T : class
 	{
-		private ISpanNearQuery Self { get { return this; }}
-		string IQuery.Name { get; set; }	
+		private ISpanNearQuery Self => this;
 		bool IQuery.Conditionless => SpanNearQuery.IsConditionless(this);
 		IEnumerable<ISpanQuery> ISpanNearQuery.Clauses { get; set; }
 		int? ISpanNearQuery.Slop { get; set; }
 		bool? ISpanNearQuery.InOrder { get; set; }
 		bool? ISpanNearQuery.CollectPayloads { get; set; }
-        double? ISpanNearQuery.Boost { get; set; }
 
-		public SpanNearQueryDescriptor<T> Name(string name)
-		{
-			Self.Name = name;
-			return this;
-		}
-
-		public SpanNearQueryDescriptor<T> Clauses(params Func<SpanQuery<T>, SpanQuery<T>>[] selectors)
+		public SpanNearQueryDescriptor<T> Clauses(params Func<SpanQueryDescriptor<T>, SpanQueryDescriptor<T>>[] selectors)
 		{
 			selectors.ThrowIfNull("selector");
-			var descriptors = new List<SpanQuery<T>>();
+			var descriptors = new List<SpanQueryDescriptor<T>>();
 			foreach (var selector in selectors)
 			{
-				var x = new SpanQuery<T>();
+				var x = new SpanQueryDescriptor<T>();
 				var q = selector(x);
 				if ((q as IQuery).Conditionless)
 					continue;
@@ -91,11 +81,5 @@ namespace Nest
 			Self.CollectPayloads = collectPayloads;
 			return this;
 		}
-
-	    public SpanNearQueryDescriptor<T> Boost(double boost)
-	    {
-	        Self.Boost = boost;
-	        return this;
-	    }
 	}
 }

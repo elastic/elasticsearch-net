@@ -63,11 +63,12 @@ namespace Nest
 		internal static bool IsConditionless(ISimpleQueryStringQuery q) => q.Query.IsNullOrEmpty();
 	}
 
-	public class SimpleQueryStringQueryDescriptor<T> : ISimpleQueryStringQuery where T : class
+	public class SimpleQueryStringQueryDescriptor<T> 
+		: QueryDescriptorBase<SimpleQueryStringQueryDescriptor<T>, ISimpleQueryStringQuery> 
+		, ISimpleQueryStringQuery where T : class
 	{
 		private SimpleQueryStringQueryDescriptor<T> _assign(Action<ISimpleQueryStringQuery> assigner) => Fluent.Assign(this, assigner);
 
-		string IQuery.Name { get; set; }
 		bool IQuery.Conditionless => SimpleQueryStringQuery.IsConditionless(this);
 		string ISimpleQueryStringQuery.Query { get; set; }
 		FieldName ISimpleQueryStringQuery.DefaultField { get; set; }
@@ -80,7 +81,6 @@ namespace Nest
 		string ISimpleQueryStringQuery.Locale { get; set; }
 		string ISimpleQueryStringQuery.MinimumShouldMatch { get; set; }
 
-		public SimpleQueryStringQueryDescriptor<T> Name(string name) => _assign(a => a.Name = name);
 
 		public SimpleQueryStringQueryDescriptor<T> DefaultField(string field) => _assign(a => a.DefaultField = field);
 

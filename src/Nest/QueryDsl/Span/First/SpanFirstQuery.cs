@@ -16,8 +16,6 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "end")]
 		int? End { get; set; }
-        [JsonProperty(PropertyName = "boost")]
-        double? Boost { get; set; }
 	}
 
 	public class SpanFirstQuery : QueryBase, ISpanFirstQuery
@@ -25,32 +23,25 @@ namespace Nest
 		bool IQuery.Conditionless => IsConditionless(this);
 		public ISpanQuery Match { get; set; }
 		public int? End { get; set; }
-	    public double? Boost { get; set; }
 
 		protected override void WrapInContainer(IQueryContainer c) => c.SpanFirst = this;
 		internal static bool IsConditionless(ISpanFirstQuery q) => q.Match == null || q.Match.Conditionless;
 	}
 
-	public class SpanFirstQueryDescriptor<T> : ISpanFirstQuery where T : class
+	public class SpanFirstQueryDescriptor<T> 
+		: QueryDescriptorBase<SpanFirstQueryDescriptor<T>, ISpanFirstQuery>
+		, ISpanFirstQuery where T : class
 	{
 		private ISpanFirstQuery Self { get { return this; }}
-		string IQuery.Name { get; set; }
 		bool IQuery.Conditionless => SpanFirstQuery.IsConditionless(this);	
 		ISpanQuery ISpanFirstQuery.Match { get; set; }
 		int? ISpanFirstQuery.End { get; set; }
-        double? ISpanFirstQuery.Boost { get; set; }
-
-		public SpanFirstQueryDescriptor<T> Name(string name)
-		{
-			Self.Name = name;
-			return this;
-		}
 
 		public SpanFirstQueryDescriptor<T> MatchTerm(Expression<Func<T, object>> fieldDescriptor
 			, string value
 			, double? Boost = null)
 		{
-			var span = new SpanQuery<T>();
+			var span = new SpanQueryDescriptor<T>();
 			span = span.SpanTerm(fieldDescriptor, value, Boost);
 			Self.Match = span;
 			return this;
@@ -58,16 +49,16 @@ namespace Nest
 
 		public SpanFirstQueryDescriptor<T> MatchTerm(string field, string value, double? Boost = null)
 		{
-			var span = new SpanQuery<T>();
+			var span = new SpanQueryDescriptor<T>();
 			span = span.SpanTerm(field, value, Boost);
 			Self.Match = span;
 			return this;
 		}
 
-		public SpanFirstQueryDescriptor<T> Match(Func<SpanQuery<T>, SpanQuery<T>> selector)
+		public SpanFirstQueryDescriptor<T> Match(Func<SpanQueryDescriptor<T>, SpanQueryDescriptor<T>> selector)
 		{
 			selector.ThrowIfNull("selector");
-			Self.Match = selector(new SpanQuery<T>());
+			Self.Match = selector(new SpanQueryDescriptor<T>());
 			return this;
 		}
 
@@ -76,11 +67,5 @@ namespace Nest
 			Self.End = end;
 			return this;
 		}
-
-        public SpanFirstQueryDescriptor<T> Boost(double boost)
-        {
-            Self.Boost = boost;
-            return this;
-        }
 	}
 }

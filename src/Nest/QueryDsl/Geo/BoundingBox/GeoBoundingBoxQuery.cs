@@ -36,33 +36,15 @@ namespace Nest
 		}
 	}
 
-	public class GeoBoundingBoxQueryDescriptor<T> : IGeoBoundingBoxQuery where T : class
+	public class GeoBoundingBoxQueryDescriptor<T> 
+		: FieldNameQueryDescriptor<GeoBoundingBoxQueryDescriptor<T>, IGeoBoundingBoxQuery, T>
+		, IGeoBoundingBoxQuery where T : class
 	{
 		private IGeoBoundingBoxQuery Self => this;
-		string IQuery.Name { get; set; }
 		bool IQuery.Conditionless => GeoBoundingBoxQuery.IsConditionless(this);
-		FieldName IFieldNameQuery.Field { get; set; }
 		string IGeoBoundingBoxQuery.TopLeft { get; set; }
 		string IGeoBoundingBoxQuery.BottomRight { get; set; }
 		GeoExecution? IGeoBoundingBoxQuery.Type { get; set; }
-
-		public GeoBoundingBoxQueryDescriptor<T> Name (string name)
-		{
-			Self.Name = name;
-			return this;
-		}
-
-		public GeoBoundingBoxQueryDescriptor<T> Field(string field)
-		{
-			Self.Field = field;
-			return this;
-		}
-
-		public GeoBoundingBoxQueryDescriptor<T> Field(Expression<Func<T, object>> field)
-		{
-			Self.Field = field;
-			return this;
-		}
 
 		public GeoBoundingBoxQueryDescriptor<T> TopLeft(string topLeft)
 		{

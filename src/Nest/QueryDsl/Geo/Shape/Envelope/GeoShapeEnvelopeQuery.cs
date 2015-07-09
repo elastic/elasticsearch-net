@@ -25,31 +25,13 @@ namespace Nest
 		internal static bool IsConditionless(IGeoShapeEnvelopeQuery q) => q.Field.IsConditionless() || q.Shape == null || !q.Shape.Coordinates.HasAny();
 	}
 
-	public class GeoShapeEnvelopeQueryDescriptor<T> : IGeoShapeEnvelopeQuery where T : class
+	public class GeoShapeEnvelopeQueryDescriptor<T> 
+		: FieldNameQueryDescriptor<GeoShapeEnvelopeQueryDescriptor<T>, IGeoShapeEnvelopeQuery, T>
+		, IGeoShapeEnvelopeQuery where T : class
 	{
 		private IGeoShapeEnvelopeQuery Self => this;
-		string IQuery.Name { get; set; }
 		bool IQuery.Conditionless => GeoShapeEnvelopeQuery.IsConditionless(this);
-		FieldName IFieldNameQuery.Field { get; set; }
 		IEnvelopeGeoShape IGeoShapeEnvelopeQuery.Shape { get; set; }
-
-		public GeoShapeEnvelopeQueryDescriptor<T> Name(string name)
-		{
-			Self.Name = name;
-			return this;
-		}
-		
-		public GeoShapeEnvelopeQueryDescriptor<T> OnField(string field)
-		{
-			Self.Field = field;
-			return this;
-		}
-
-		public GeoShapeEnvelopeQueryDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
-		{
-			Self.Field = objectPath;
-			return this;
-		}
 
 		public GeoShapeEnvelopeQueryDescriptor<T> Coordinates(IEnumerable<IEnumerable<double>> coordinates)
 		{

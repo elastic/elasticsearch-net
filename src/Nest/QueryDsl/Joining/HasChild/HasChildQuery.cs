@@ -47,10 +47,11 @@ namespace Nest
 		internal static bool IsConditionless(IHasChildQuery q) => q.Query == null || q.Query.IsConditionless;
 	}
 
-	public class HasChildQueryDescriptor<T> : IHasChildQuery where T : class
+	public class HasChildQueryDescriptor<T> 
+		: QueryDescriptorBase<HasChildQueryDescriptor<T>, IHasChildQuery>
+		, IHasChildQuery where T : class
 	{
 		private IHasChildQuery Self => this;
-		string IQuery.Name { get; set; }
 		bool IQuery.Conditionless => HasChildQuery.IsConditionless(this);
 		TypeName IHasChildQuery.Type { get; set; }
 		ChildScoreType? IHasChildQuery.ScoreType { get; set; }
@@ -62,12 +63,6 @@ namespace Nest
 		public HasChildQueryDescriptor()
 		{
 			Self.Type = TypeName.Create<T>();
-		}
-
-		public HasChildQueryDescriptor<T> Name(string name)
-		{
-			Self.Name = name;
-			return this;
 		}
 
 		public HasChildQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector)

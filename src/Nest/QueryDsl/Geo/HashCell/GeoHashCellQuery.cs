@@ -35,28 +35,16 @@ namespace Nest
 		internal static bool IsConditionless(IGeoHashCellQuery q) => q.Location.IsNullOrEmpty();
 	}
 
-	public class GeoHashCellQueryDescriptor<T> : IGeoHashCellQuery
+	public class GeoHashCellQueryDescriptor<T> 
+		: FieldNameQueryDescriptor<GeoHashCellQueryDescriptor<T>, IGeoHashCellQuery, T> 
+		, IGeoHashCellQuery where T : class
     {
 		private IGeoHashCellQuery Self => this;
-		string IQuery.Name { get; set; }
         bool IQuery.Conditionless => GeoHashCellQuery.IsConditionless(this);
-        FieldName IFieldNameQuery.Field { get; set; }
         string IGeoHashCellQuery.Location { get; set; }
         object IGeoHashCellQuery.Precision { get; set; }
         GeoUnit? IGeoHashCellQuery.Unit { get; set; }
         bool IGeoHashCellQuery.Neighbors { get; set; }
-
-		public GeoHashCellQueryDescriptor<T> Field(string field)
-		{
-			Self.Field = field;
-			return this;
-		}
-
-		public GeoHashCellQueryDescriptor<T> Field(Expression<Func<T, object>> field)
-		{
-			Self.Field = field;
-			return this;
-		}
 
         public GeoHashCellQueryDescriptor<T> Location(double lat, double lon)
         {

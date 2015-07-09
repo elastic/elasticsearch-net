@@ -22,25 +22,13 @@ namespace Nest
 		internal static bool IsConditionless(IGeoPolygonQuery q) => !q.Points.HasAny() || q.Points.All(p => p.IsNullOrEmpty());
 	}
 
-	public class GeoPolygonQueryDescriptor<T> : IGeoPolygonQuery
+	public class GeoPolygonQueryDescriptor<T> 
+		: FieldNameQueryDescriptor<GeoPolygonQueryDescriptor<T>, IGeoPolygonQuery, T>
+		, IGeoPolygonQuery where T : class
 	{
 		private IGeoPolygonQuery Self => this;
-		string IQuery.Name { get; set; }
 		bool IQuery.Conditionless => GeoPolygonQuery.IsConditionless(this);
-		FieldName IFieldNameQuery.Field { get; set; }
 		IEnumerable<string> IGeoPolygonQuery.Points { get; set; }
-
-		public GeoPolygonQueryDescriptor<T> Field(string field)
-		{
-			Self.Field = field;
-			return this;
-		}
-
-		public GeoPolygonQueryDescriptor<T> Field(Expression<Func<T, object>> field)
-		{
-			Self.Field = field;
-			return this;
-		}
 
 		public GeoPolygonQueryDescriptor<T> Points(IEnumerable<string> points)
 		{

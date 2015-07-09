@@ -48,20 +48,15 @@ namespace Nest
 		internal static bool IsConditionless(IIndicesQuery q) => q.NoMatchQuery == null && q.Query == null;
 	}
 
-	public class IndicesQueryDescriptor<T> : IIndicesQuery where T : class
+	public class IndicesQueryDescriptor<T> 
+		: QueryDescriptorBase<IndicesQueryDescriptor<T>, IIndicesQuery> 
+		, IIndicesQuery where T : class
 	{
 		private IIndicesQuery Self => this;
-		string IQuery.Name { get; set; }
 		bool IQuery.Conditionless => IndicesQuery.IsConditionless(this);
 		IQueryContainer IIndicesQuery.Query { get; set; }
 		IQueryContainer IIndicesQuery.NoMatchQuery { get; set; }
 		IEnumerable<string> IIndicesQuery.Indices { get; set; }
-
-		public IndicesQueryDescriptor<T> Name(string name)
-		{
-			Self.Name = name;
-			return this;
-		}
 
 		public IndicesQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector)
 		{

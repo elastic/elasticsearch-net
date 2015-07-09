@@ -98,7 +98,7 @@ namespace Nest
 		public static QueryContainer SpanNear(Func<SpanNearQueryDescriptor<T>, ISpanNearQuery> selector) => 
 			new QueryContainerDescriptor<T>().SpanNear(selector);
 
-		public static QueryContainer SpanNot(Func<SpanNotQuery<T>, ISpanNotQuery> selector) => 
+		public static QueryContainer SpanNot(Func<SpanNotQueryDescriptor<T>, ISpanNotQuery> selector) => 
 			new QueryContainerDescriptor<T>().SpanNot(selector);
 
 		public static QueryContainer SpanOr(Func<SpanOrQueryDescriptor<T>, ISpanOrQuery> selector) => 
@@ -113,17 +113,11 @@ namespace Nest
 		public static QueryContainer SpanMultiTerm(Func<SpanMultiTermQueryDescriptor<T>, ISpanMultiTermQuery> selector) => 
 			new QueryContainerDescriptor<T>().SpanMultiTerm(selector);
 
-		public static QueryContainer Term<K>(Expression<Func<T, K>> fieldDescriptor, K value, double? Boost = null) => 
+		public static QueryContainer Term<K>(Expression<Func<T, object>> fieldDescriptor, K value, double? Boost = null) => 
 			new QueryContainerDescriptor<T>().Term(fieldDescriptor, value, Boost);
 
 		public static QueryContainer Term<K>(string field, K value, double? Boost = null) => 
 			new QueryContainerDescriptor<T>().Term(field, value, Boost);
-
-		public static QueryContainer Terms<K>(Expression<Func<T, K>> objectPath, params K[] terms) => 
-			new QueryContainerDescriptor<T>().Terms<K>(objectPath, terms);
-
-		public static QueryContainer Terms(Expression<Func<T, object>> objectPath, params string[] terms) => 
-			new QueryContainerDescriptor<T>().Terms(objectPath, terms);
 
 		public static QueryContainer Terms(string field, params string[] terms) => 
 			new QueryContainerDescriptor<T>().Terms(field, terms);

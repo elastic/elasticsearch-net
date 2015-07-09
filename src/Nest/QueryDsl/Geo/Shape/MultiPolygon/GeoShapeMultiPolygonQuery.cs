@@ -25,31 +25,13 @@ namespace Nest
 		internal static bool IsConditionless(IGeoShapeMultiPolygonQuery q) => q.Field.IsConditionless() || q.Shape == null || !q.Shape.Coordinates.HasAny();
 	}
 
-	public class GeoShapeMultiPolygonQueryDescriptor<T> : IGeoShapeMultiPolygonQuery where T : class
+	public class GeoShapeMultiPolygonQueryDescriptor<T> 
+		: FieldNameQueryDescriptor<GeoShapeMultiPolygonQueryDescriptor<T>, IGeoShapeMultiPolygonQuery, T>
+		, IGeoShapeMultiPolygonQuery where T : class
 	{
 		private IGeoShapeMultiPolygonQuery Self { get { return this; }}
-		string IQuery.Name { get; set; }
 		bool IQuery.Conditionless => GeoShapeMultiPolygonQuery.IsConditionless(this);
-		FieldName IFieldNameQuery.Field { get; set; }
 		IMultiPolygonGeoShape IGeoShapeMultiPolygonQuery.Shape { get; set; }
-
-		public GeoShapeMultiPolygonQueryDescriptor<T> OnField(string field)
-		{
-			Self.Field = field;
-			return this;
-		}
-
-		public GeoShapeMultiPolygonQueryDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
-		{
-			Self.Field = objectPath;
-			return this;
-		}
-
-		public GeoShapeMultiPolygonQueryDescriptor<T> Name(string name)
-		{
-			Self.Name = name;
-			return this;
-		}
 
 		public GeoShapeMultiPolygonQueryDescriptor<T> Coordinates(IEnumerable<IEnumerable<IEnumerable<IEnumerable<double>>>> coordinates)
 		{

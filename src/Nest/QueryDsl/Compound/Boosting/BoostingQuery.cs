@@ -40,20 +40,15 @@ namespace Nest
 		}
 	}
 
-	public class BoostingQueryDescriptor<T> : IBoostingQuery where T : class
+	public class BoostingQueryDescriptor<T> 
+		: QueryDescriptorBase<BoostingQueryDescriptor<T>, IBoostingQuery>
+		, IBoostingQuery where T : class
 	{
 		private IBoostingQuery Self => this;
 		bool IQuery.Conditionless => BoostingQuery.IsConditionless(this);
-		string IQuery.Name { get; set; }
 		QueryContainer IBoostingQuery.PositiveQuery { get; set; }
 		QueryContainer IBoostingQuery.NegativeQuery { get; set; }
 		double? IBoostingQuery.NegativeBoost { get; set; }
-
-		public BoostingQueryDescriptor<T> Name(string name)
-		{
-			Self.Name = name;
-			return this;
-		}
 
 		public BoostingQueryDescriptor<T> NegativeBoost(double boost)
 		{

@@ -28,32 +28,14 @@ namespace Nest
 		internal static bool IsConditionless(IMissingQuery q) => q.Field.IsConditionless();
 	}
 
-	public class MissingQueryDescriptor<T> : IMissingQuery where T : class
+	public class MissingQueryDescriptor<T> 
+		: FieldNameQueryDescriptor<MissingQueryDescriptor<T>, IMissingQuery, T>
+		, IMissingQuery where T : class
 	{
 		private IMissingQuery Self => this;
-		string IQuery.Name { get; set; }
 		bool IQuery.Conditionless => MissingQuery.IsConditionless(this);
-		FieldName IFieldNameQuery.Field { get; set;}
 		bool? IMissingQuery.Existence { get; set; }
 		bool? IMissingQuery.NullValue { get; set; }
-
-		public MissingQueryDescriptor<T> Name(string name)
-		{
-			Self.Name = name;
-			return this;
-		}
-
-		public MissingQueryDescriptor<T> Field(string field)
-		{
-			Self.Field = field;
-			return this;
-		}
-
-		public MissingQueryDescriptor<T> Field(Expression<Func<T, object>> field)
-		{
-			Self.Field = field;
-			return this;
-		}
 
 		public MissingQueryDescriptor<T> Existence(bool existence = true)
 		{

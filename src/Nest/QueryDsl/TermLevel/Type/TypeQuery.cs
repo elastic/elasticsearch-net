@@ -23,22 +23,16 @@ namespace Nest
 		internal static bool IsConditionless(ITypeQuery q) => q.Value.IsConditionless();
 	}
 	
-	public class TypeQueryDescriptor : ITypeQuery
+	public class TypeQueryDescriptor 
+		: QueryDescriptorBase<TypeQueryDescriptor, ITypeQuery>
+		, ITypeQuery
 	{
 		private ITypeQuery Self => this;
-
-		string IQuery.Name { get; set; }
 
 		bool IQuery.Conditionless => TypeQuery.IsConditionless(this);
 
 		[JsonProperty(PropertyName = "value")]
 		TypeName ITypeQuery.Value { get; set; }
-
-		public TypeQueryDescriptor Name(string name)
-		{
-			Self.Name = name;
-			return this;
-		}
 
 		public TypeQueryDescriptor Value<T>()
 		{

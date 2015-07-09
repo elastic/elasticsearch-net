@@ -11,6 +11,9 @@ namespace Nest
 		[JsonProperty(PropertyName = "_name")]
 		string Name { get; set; }
 
+		[JsonProperty(PropertyName = "boost")]
+		double? Boost { get; set; }
+
 		[JsonIgnore]
 		bool Conditionless { get; }
 	}
@@ -18,6 +21,7 @@ namespace Nest
 	public abstract class QueryBase : IQuery
 	{
 		public string Name { get; set; }
+		public double? Boost { get; set; }
 		bool IQuery.Conditionless { get; }
 
 		//always evaluate to false so that each side of && equation is evaluated

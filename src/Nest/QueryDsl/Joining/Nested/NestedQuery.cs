@@ -50,22 +50,17 @@ namespace Nest
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class NestedQueryDescriptor<T> : INestedQuery where T : class
+	public class NestedQueryDescriptor<T> 
+		: QueryDescriptorBase<NestedQueryDescriptor<T>, INestedQuery>
+		, INestedQuery where T : class
 	{
 		private INestedQuery Self => this;
-		string IQuery.Name { get; set; }
 		bool IQuery.Conditionless => NestedQuery.IsConditionless(this);
 		NestedScore? INestedQuery.Score { get; set; }
 		IQueryContainer INestedQuery.Filter { get; set; }
 		IQueryContainer INestedQuery.Query { get; set; }
 		FieldName INestedQuery.Path { get; set; }
 		IInnerHits INestedQuery.InnerHits { get; set; }
-
-		public NestedQueryDescriptor<T> Name(string name)
-		{
-			Self.Name = name;
-			return this;
-		}
 
 		public NestedQueryDescriptor<T> Filter(Func<QueryContainerDescriptor<T>, QueryContainer> filterSelector)
 		{

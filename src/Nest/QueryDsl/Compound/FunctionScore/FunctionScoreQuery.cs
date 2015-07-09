@@ -70,10 +70,11 @@ namespace Nest
 		}
 	}
 
-	public class FunctionScoreQueryDescriptor<T> : IFunctionScoreQuery where T : class
+	public class FunctionScoreQueryDescriptor<T> 
+		: QueryDescriptorBase<FunctionScoreQueryDescriptor<T>, IFunctionScoreQuery>
+		, IFunctionScoreQuery where T : class
 	{
 		private IFunctionScoreQuery Self { get { return this; }}
-		string IQuery.Name { get; set; }
 		private bool _forcedConditionless = false;
 		bool IQuery.Conditionless => FunctionScoreQuery.IsConditionless(this, _forcedConditionless);
 		IEnumerable<IFunctionScoreFunction> IFunctionScoreQuery.Functions { get; set; }
@@ -90,12 +91,6 @@ namespace Nest
 		public FunctionScoreQueryDescriptor<T> ConditionlessWhen(bool isConditionless)
 		{
 			this._forcedConditionless = isConditionless;
-			return this;
-		}
-
-		public FunctionScoreQueryDescriptor<T> Name(string name)
-		{
-			Self.Name = name;
 			return this;
 		}
 

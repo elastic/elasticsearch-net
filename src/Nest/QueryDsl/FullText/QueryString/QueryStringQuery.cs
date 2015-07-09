@@ -93,7 +93,6 @@ namespace Nest
 		public int? FuzzyPrefixLength { get; set; }
 		public double? FuzzyMinimumSimilarity { get; set; }
 		public double? PhraseSlop { get; set; }
-		public double? Boost { get; set; }
 		public bool? Lenient { get; set; }
 		public bool? AnalyzeWildcard { get; set; }
 		public bool? AutoGeneratePhraseQueries { get; set; }
@@ -108,13 +107,14 @@ namespace Nest
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class QueryStringQueryDescriptor<T> : IQueryStringQuery where T : class
+	public class QueryStringQueryDescriptor<T> 
+		: QueryDescriptorBase<QueryStringQueryDescriptor<T>, IQueryStringQuery>
+		, IQueryStringQuery where T : class
 	{
 		QueryStringQueryDescriptor<T> _assign(Action<IQueryStringQuery> assigner) => Fluent.Assign(this, assigner);
 
 		private IQueryStringQuery Self => this;
 
-		string IQuery.Name { get; set; }
 		bool IQuery.Conditionless => QueryStringQuery.IsConditionless(this);
 		string IQueryStringQuery.Query { get; set; }
 		string IQueryStringQuery.Timezone { get; set; }
@@ -137,8 +137,6 @@ namespace Nest
 		double? IQueryStringQuery.TieBreaker { get; set; }
 		int? IQueryStringQuery.MaximumDeterminizedStates { get; set; }
 		RewriteMultiTerm? IQueryStringQuery.Rewrite { get; set; }
-
-		public QueryStringQueryDescriptor<T> Name(string name) => _assign(a => a.Name = name);
 
 		public QueryStringQueryDescriptor<T> DefaultField(string field) => _assign(a => a.DefaultField = field);
 
@@ -191,8 +189,6 @@ namespace Nest
 			_assign(a => a.FuzzyMinimumSimilarity = fuzzyMinimumSimilarity);
 
 		public QueryStringQueryDescriptor<T> PhraseSlop(double phraseSlop) => _assign(a => a.PhraseSlop = phraseSlop);
-
-		public QueryStringQueryDescriptor<T> Boost(double boost) => _assign(a => a.Boost = boost);
 
 		public QueryStringQueryDescriptor<T> Rewrite(RewriteMultiTerm rewriteMultiTerm) => _assign(a => a.Rewrite = rewriteMultiTerm);
 

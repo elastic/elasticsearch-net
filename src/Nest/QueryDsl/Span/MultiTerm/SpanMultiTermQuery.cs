@@ -22,20 +22,15 @@ namespace Nest
 		internal static bool IsConditionless(ISpanMultiTermQuery q) => q.Match == null || q.Match.IsConditionless;
 	}
 
-	public class SpanMultiTermQueryDescriptor<T> : ISpanMultiTermQuery
+	public class SpanMultiTermQueryDescriptor<T> 
+		: QueryDescriptorBase<SpanMultiTermQueryDescriptor<T>, ISpanMultiTermQuery>
+		, ISpanMultiTermQuery
 		where T : class
 	{
 		private ISpanMultiTermQuery Self => this;
-		string IQuery.Name { get; set; }
 		bool IQuery.Conditionless => SpanMultiTermQuery.IsConditionless(this);
 		IQueryContainer ISpanMultiTermQuery.Match { get; set; }
 
-		public SpanMultiTermQueryDescriptor<T> Name(string name)
-		{
-			Self.Name = name;
-			return this;
-		}
-		
 		public SpanMultiTermQueryDescriptor<T> Match(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector)
 		{
 			var q = new QueryContainerDescriptor<T>();

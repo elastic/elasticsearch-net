@@ -43,9 +43,6 @@ namespace Nest
 		[JsonProperty(PropertyName = "slop")]
 		int? Slop { get; set; }
 
-		[JsonProperty(PropertyName = "boost")]
-		double? Boost { get; set; }
-
 		[JsonProperty(PropertyName = "lenient")]
 		bool? Lenient { get; set; }
 		
@@ -70,7 +67,6 @@ namespace Nest
 		public int? PrefixLength { get; set; }
 		public int? MaxExpansions { get; set; }
 		public int? Slop { get; set; }
-		public double? Boost { get; set; }
 		public bool? Lenient { get; set; }
 		public string MinimumShouldMatch { get; set; }
 		public Operator? Operator { get; set; }
@@ -81,11 +77,12 @@ namespace Nest
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public class MatchQueryDescriptor<T> : IMatchQuery where T : class
+	public class MatchQueryDescriptor<T> 
+		: FieldNameQueryDescriptor<MatchQueryDescriptor<T>, IMatchQuery, T> 
+		, IMatchQuery where T : class
 	{
 		protected virtual string MatchQueryType { get { return null; } }
 		private IMatchQuery Self => this;
-		string IQuery.Name { get; set; }
 		bool IQuery.Conditionless => MatchQuery.IsConditionless(this);
 		string IMatchQuery.Type { get { return MatchQueryType; } }
 		string IMatchQuery.Query { get; set; }
@@ -98,28 +95,8 @@ namespace Nest
 		int? IMatchQuery.PrefixLength { get; set; }
 		int? IMatchQuery.MaxExpansions { get; set; }
 		int? IMatchQuery.Slop { get; set; }
-		double? IMatchQuery.Boost { get; set; }
 		bool? IMatchQuery.Lenient { get; set; }
 		Operator? IMatchQuery.Operator { get; set; }
-		FieldName IFieldNameQuery.Field { get; set; }
-
-		public MatchQueryDescriptor<T> Name(string name)
-		{
-			Self.Name = name;
-			return this;
-		}
-
-		public MatchQueryDescriptor<T> OnField(string field)
-		{
-			Self.Field = field;
-			return this;
-		}
-
-		public MatchQueryDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
-		{
-			Self.Field = objectPath;
-			return this;
-		}
 
 		public MatchQueryDescriptor<T> Query(string query)
 		{
@@ -175,12 +152,6 @@ namespace Nest
 			return this;
 		}
 
-		public MatchQueryDescriptor<T> Boost(double boost)
-		{
-			Self.Boost = boost;
-			return this;
-		}
-		
 		public MatchQueryDescriptor<T> PrefixLength(int prefixLength)
 		{
 			Self.PrefixLength = prefixLength;

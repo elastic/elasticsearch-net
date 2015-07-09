@@ -41,10 +41,11 @@ namespace Nest
 		internal static bool IsConditionless(IScriptQuery q) => q.Script.IsNullOrEmpty();
 	}
 
-	public class ScriptQueryDescriptor<T> : IScriptQuery where T : class
+	public class ScriptQueryDescriptor<T> 
+		: QueryDescriptorBase<ScriptQueryDescriptor<T>, IScriptQuery>
+		, IScriptQuery where T : class
 	{
 		private IScriptQuery Self => this;
-		string IQuery.Name { get; set; }
 		bool IQuery.Conditionless => ScriptQuery.IsConditionless(this);
 		string IScriptQuery.Script { get; set; }
 		string IScriptQuery.ScriptId { get; set; }

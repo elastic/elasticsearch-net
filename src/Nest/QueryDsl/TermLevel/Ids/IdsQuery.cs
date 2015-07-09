@@ -28,19 +28,14 @@ namespace Nest
 		internal static bool IsConditionless(IIdsQuery q) => !q.Values.HasAny() || q.Values.All(v => v.IsNullOrEmpty());
 	}
 
-	public class IdsQueryDescriptor : IIdsQuery
+	public class IdsQueryDescriptor 
+		: QueryDescriptorBase<IdsQueryDescriptor, IIdsQuery>
+		, IIdsQuery
 	{
 		private IIdsQuery Self => this;
-		string IQuery.Name { get; set; }
 		bool IQuery.Conditionless => IdsQuery.IsConditionless(this);
 		IEnumerable<string> IIdsQuery.Values { get; set; }
 		IEnumerable<string> IIdsQuery.Type { get; set; }
-
-		public IdsQueryDescriptor Name(string name)
-		{
-			Self.Name = name;
-			return this;
-		}
 
 		public IdsQueryDescriptor Type(params string[] types)
 		{

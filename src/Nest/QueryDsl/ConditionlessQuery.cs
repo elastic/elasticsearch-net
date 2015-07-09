@@ -13,7 +13,9 @@ namespace Nest
 
 	}
 
-	public class ConditionlessQueryDescriptor<T> : IConditionlessQuery where T : class
+	public class ConditionlessQueryDescriptor<T> 
+		: QueryDescriptorBase<ConditionlessQueryDescriptor<T>, IConditionlessQuery>
+		, IConditionlessQuery where T : class
 	{
 		private IConditionlessQuery Self => this;
 
@@ -23,8 +25,6 @@ namespace Nest
 
 		bool IQuery.Conditionless => (Self.Query == null || Self.Query.IsConditionless)
 										&& (Self.Fallback == null || Self.Fallback.IsConditionless);
-
-		string IQuery.Name { get; set; }
 
 		public ConditionlessQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector)
 		{

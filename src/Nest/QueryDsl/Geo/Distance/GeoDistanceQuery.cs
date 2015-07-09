@@ -43,29 +43,17 @@ namespace Nest
 		internal static bool IsConditionless(IGeoDistanceQuery q) => q.Location.IsNullOrEmpty() || q.Distance == null;
 	}
 
-	public class GeoDistanceQueryDescriptor<T> : IGeoDistanceQuery where T : class
+	public class GeoDistanceQueryDescriptor<T> 
+		: FieldNameQueryDescriptor<GeoDistanceQueryDescriptor<T>, IGeoDistanceQuery, T> 
+		, IGeoDistanceQuery where T : class
 	{
 		private IGeoDistanceQuery Self => this;
-		string IQuery.Name { get; set; }
 		bool IQuery.Conditionless => GeoDistanceQuery.IsConditionless(this);
-		FieldName IFieldNameQuery.Field { get; set; }
 		string IGeoDistanceQuery.Location { get; set; }
 		object IGeoDistanceQuery.Distance { get; set; }
 		GeoUnit? IGeoDistanceQuery.Unit { get; set; }
 		GeoDistance? IGeoDistanceQuery.DistanceType { get; set; }
 		GeoOptimizeBBox? IGeoDistanceQuery.OptimizeBoundingBox { get; set; }
-
-		public GeoDistanceQueryDescriptor<T> Field(string field)
-		{
-			Self.Field = field;
-			return this;
-		}
-
-		public GeoDistanceQueryDescriptor<T> Field(Expression<Func<T, object>> field)
-		{
-			Self.Field = field;
-			return this;
-		}
 
 		public GeoDistanceQueryDescriptor<T> Location(double Lat, double Lon)
 		{

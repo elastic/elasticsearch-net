@@ -48,9 +48,6 @@ namespace Nest
 		[JsonProperty(PropertyName = "boost_terms")]
 		double? BoostTerms { get; set; }
 
-		[JsonProperty(PropertyName = "boost")]
-		double? Boost { get; set; }
-
 		[JsonProperty(PropertyName = "analyzer")]
 		string Analyzer { get; set; }
 		
@@ -90,7 +87,6 @@ namespace Nest
 		public int? MinWordLength { get; set; }
 		public int? MaxWordLength { get; set; }
 		public double? BoostTerms { get; set; }
-		public double? Boost { get; set; }
 		public string Analyzer { get; set; }
 		public IEnumerable<string> Ids { get; set; }
 		public IEnumerable<IMultiGetOperation> Documents { get; set; }
@@ -105,10 +101,11 @@ namespace Nest
 		}
 	}
 
-	public class MoreLikeThisQueryDescriptor<T> : IMoreLikeThisQuery where T : class
+	public class MoreLikeThisQueryDescriptor<T> 
+		: QueryDescriptorBase<MoreLikeThisQueryDescriptor<T>, IMoreLikeThisQuery>
+		, IMoreLikeThisQuery where T : class
 	{
 		private IMoreLikeThisQuery Self { get { return this; }}
-		string IQuery.Name { get; set; }
 		bool IQuery.Conditionless => MoreLikeThisQuery.IsConditionless(this);
 		IEnumerable<FieldName> IMoreLikeThisQuery.Fields { get; set; }
 		string IMoreLikeThisQuery.LikeText { get; set; }
@@ -122,17 +119,10 @@ namespace Nest
 		int? IMoreLikeThisQuery.MinWordLength { get; set; }
 		int? IMoreLikeThisQuery.MaxWordLength { get; set; }
 		double? IMoreLikeThisQuery.BoostTerms { get; set; }
-		double? IMoreLikeThisQuery.Boost { get; set; }
 		string IMoreLikeThisQuery.Analyzer { get; set; }
 		IEnumerable<string> IMoreLikeThisQuery.Ids { get; set; }
 		IEnumerable<IMultiGetOperation> IMoreLikeThisQuery.Documents { get; set; }
 		bool? IMoreLikeThisQuery.Include { get; set; }
-
-		public MoreLikeThisQueryDescriptor<T> Name(string name)
-		{
-			Self.Name = name;
-			return this;
-		}
 
 		public MoreLikeThisQueryDescriptor<T> OnFields(IEnumerable<string> fields)
 		{
@@ -216,12 +206,6 @@ namespace Nest
 		public MoreLikeThisQueryDescriptor<T> MinimumShouldMatch(int minMatch)
 		{
 			this.Self.MinimumShouldMatch = minMatch.ToString();
-			return this;
-		}
-
-		public MoreLikeThisQueryDescriptor<T> Boost(double boost)
-		{
-			this.Self.Boost = boost;
 			return this;
 		}
 
