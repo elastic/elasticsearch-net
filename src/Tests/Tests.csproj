@@ -76,6 +76,7 @@
     <Compile Include="Search\Request\Fields.cs" />
     <Compile Include="Search\Request\FielddataFields.cs" />
     <Compile Include="Search\Request\Highlighting.cs" />
+    <Compile Include="Search\Request\IndexBoost.cs" />
     <Compile Include="Search\Request\PostFilter.cs" />
     <Compile Include="Search\Request\Explain.cs" />
     <Compile Include="Search\Request\Query.cs" />
