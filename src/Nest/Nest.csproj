@@ -557,7 +557,7 @@
     <Compile Include="Modules\SnapshotAndRestore\Repositories\FileSystemRepository.cs" />
     <Compile Include="Modules\SnapshotAndRestore\Repositories\IRepository.cs" />
     <Compile Include="Modules\SnapshotAndRestore\Repositories\ReadOnlyUrlRepository.cs" />
-    <Compile Include="_Generated\RequestParametersExtensions.Generated.cs" />
+    <Compile Include="_Generated\_RequestParametersExtensions.Generated.cs" />
     <Compile Include="Indices\AliasManagement\GetAliases\GetAliasesResponse.cs" />
     <Compile Include="Indices\MappingManagement\GetMapping\GetMappingResponse.cs" />
     <Compile Include="Search\MultiSearch\IMultiSearchResponse.cs" />

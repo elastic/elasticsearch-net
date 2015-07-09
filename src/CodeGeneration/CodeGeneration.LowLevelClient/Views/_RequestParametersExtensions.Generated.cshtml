@@ -27,55 +27,36 @@ namespace Nest
 			continue;
 		}
 		foreach (KeyValuePair<string, ApiQueryParameters> kv in method.Url.Params)
-	  {
-		  var mm = kv.Key;
-		  var fieldType = kv.Value.CsharpType(kv.Key).Replace("params", "");
-		  var setter = mm;
+		{
+		var mm = kv.Key;
+		var fieldType = kv.Value.CsharpType(kv.Key).Replace("params", "");
+		var setter = mm;
 			var isFields = (mm.Contains("fields") || mm.Contains("source_include") || mm.Contains("source_exclude"));
-		  if (isFields && fieldType.Contains("string"))
-		  {
-			  fieldType = "IEnumerable<FieldName>";
-			  setter = mm + ".Select(f=>(FieldName)f)";
-		  }
-		  else if (mm.Contains("field") && fieldType.Contains("string"))
-		  {
-			  fieldType = "FieldName";
-		  }
+		if (isFields && fieldType.Contains("string"))
+		{
+			fieldType = "IEnumerable<FieldName>";
+			setter = mm + ".Select(f=>(FieldName)f)";
+		}
+		else if (mm.Contains("field") && fieldType.Contains("string"))
+		{
+			fieldType = "FieldName";
+		}
 		if (isFields && fieldType.Contains("FieldName"))
-		 {
+		{
 		<text>
 		///<summary>@kv.Value.Description</summary>
-			internal static @method.QueryStringParamName _@(mm.ToPascalCase())@(Raw("<T>"))(
-				this @method.QueryStringParamName qs,
-				@Raw("IEnumerable<Expression<Func<T, object>>> ") @mm)
-			where T : class
-		{
-			var _@(mm) = @mm@Raw(".Select(e=>(FieldName)e)");
-			qs.AddQueryString("@kv.Value.OriginalQueryStringParamName", _@mm);
-			return qs;
+		internal static @method.QueryStringParamName _@(mm.ToPascalCase())@(Raw("<T>"))(this @method.QueryStringParamName qs, @Raw("IEnumerable<Expression<Func<T, object>>> ") @mm) where T : class =>
+			qs.AddQueryString("@kv.Value.OriginalQueryStringParamName", @mm@Raw(".Select(e=>(FieldName)e)"));</text>
 		}
-		</text>
-		 }
-		 else if (mm.Contains("field") && fieldType.Contains("FieldName"))
-		 {
+		else if (mm.Contains("field") && fieldType.Contains("FieldName"))
+		{
 		<text>
 		///<summary>@kv.Value.Description</summary>
-			internal static @method.QueryStringParamName _@(mm.ToPascalCase())@(Raw("<T>"))(
-				this @method.QueryStringParamName qs,
-				@Raw("Expression<Func<T, object>>") @mm)
-			where T : class
-		{
-			var p = (FieldName)@mm;
-			var _@(mm) = p;
-			qs.AddQueryString("@mm", _@mm);
-			return qs;
+		internal static @method.QueryStringParamName _@(mm.ToPascalCase())@(Raw("<T>"))(this @method.QueryStringParamName qs, @Raw("Expression<Func<T, object>>") @mm) where T : class =>
+			qs.AddQueryString("@mm", (FieldName)@mm);</text>
 		}
-		</text>
-		 }
-			
-
-	  }
 	}
-}
+	}
+	}
 }
  

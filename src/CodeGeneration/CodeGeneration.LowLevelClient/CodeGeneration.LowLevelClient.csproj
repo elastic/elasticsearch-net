@@ -95,7 +95,7 @@
     <None Include="App.config" />
     <None Include="paket.references" />
     <None Include="Views\_Requests.Generated.cshtml" />
-    <None Include="Views\RequestParametersExtensions.Generated.cshtml" />
+    <None Include="Views\_RequestParametersExtensions.Generated.cshtml" />
     <None Include="Views\_Descriptors.Generated.cshtml" />
     <None Include="Views\_LowLevelDispatch.Generated.cshtml" />
     <None Include="Views\ElasticsearchClient.Generated.cshtml" />

@@ -288,8 +288,8 @@ namespace CodeGeneration.LowLevelClient
 
 		public static void GenerateRequestParametersExtensions(RestApiSpec model)
 		{
-			var targetFile = _nestFolder + @"_Generated\RequestParametersExtensions.Generated.cs";
-			var source = _razorMachine.Execute(File.ReadAllText(_viewFolder + @"RequestParametersExtensions.Generated.cshtml"), model).ToString();
+			var targetFile = _nestFolder + @"_Generated\_RequestParametersExtensions.Generated.cs";
+			var source = _razorMachine.Execute(File.ReadAllText(_viewFolder + @"_RequestParametersExtensions.Generated.cshtml"), model).ToString();
 			File.WriteAllText(targetFile, source);
 		}
 		public static void GenerateEnums(RestApiSpec model)
