@@ -15,7 +15,7 @@ namespace Nest
 				{
 					string scrollId = p.ScrollId;
 					p.ScrollId = null;
-					return this.RawDispatch.ScrollDispatch<SearchResponse<T>>(p, scrollId);
+					return this.LowLevelDispatch.ScrollDispatch<SearchResponse<T>>(p, scrollId);
 				}
 			);
 		}
@@ -28,7 +28,7 @@ namespace Nest
 				{
 					string scrollId = p.ScrollId;
 					p.ScrollId = null;
-					return this.RawDispatch.ScrollDispatch<SearchResponse<T>>(p, scrollId);
+					return this.LowLevelDispatch.ScrollDispatch<SearchResponse<T>>(p, scrollId);
 				}
 			);
 		}
@@ -42,7 +42,7 @@ namespace Nest
 				{
 					string scrollId = p.ScrollId;
 					p.ScrollId = null;
-					return this.RawDispatch.ScrollDispatchAsync<SearchResponse<T>>(p, scrollId);
+					return this.LowLevelDispatch.ScrollDispatchAsync<SearchResponse<T>>(p, scrollId);
 				}
 			);
 		}
@@ -56,7 +56,7 @@ namespace Nest
 				{
 					string scrollId = p.ScrollId;
 					p.ScrollId = null;
-					return this.RawDispatch.ScrollDispatchAsync<SearchResponse<T>>(p, scrollId);
+					return this.LowLevelDispatch.ScrollDispatchAsync<SearchResponse<T>>(p, scrollId);
 				}
 			);
 		}

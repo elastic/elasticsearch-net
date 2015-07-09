@@ -12,7 +12,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<DeleteByQueryDescriptor<T>, DeleteByQueryRequestParameters, DeleteByQueryResponse>(
 				deleteByQuerySelector,
-				(p, d) => this.RawDispatch.DeleteByQueryDispatch<DeleteByQueryResponse>(p, d)
+				(p, d) => this.LowLevelDispatch.DeleteByQueryDispatch<DeleteByQueryResponse>(p, d)
 			);
 		}
 
@@ -21,7 +21,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<IDeleteByQueryRequest, DeleteByQueryRequestParameters, DeleteByQueryResponse>(
 				deleteByQueryRequest,
-				(p, d) => this.RawDispatch.DeleteByQueryDispatch<DeleteByQueryResponse>(p, d)
+				(p, d) => this.LowLevelDispatch.DeleteByQueryDispatch<DeleteByQueryResponse>(p, d)
 			);
 		}
 
@@ -30,7 +30,7 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<DeleteByQueryDescriptor<T>, DeleteByQueryRequestParameters, DeleteByQueryResponse, IDeleteByQueryResponse>(
 				deleteByQuerySelector,
-				(p, d) => this.RawDispatch.DeleteByQueryDispatchAsync<DeleteByQueryResponse>(p, d)
+				(p, d) => this.LowLevelDispatch.DeleteByQueryDispatchAsync<DeleteByQueryResponse>(p, d)
 			);
 		}
 
@@ -39,7 +39,7 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<IDeleteByQueryRequest, DeleteByQueryRequestParameters, DeleteByQueryResponse, IDeleteByQueryResponse>(
 				deleteByQueryRequest,
-				(p, d) => this.RawDispatch.DeleteByQueryDispatchAsync<DeleteByQueryResponse>(p, d)
+				(p, d) => this.LowLevelDispatch.DeleteByQueryDispatchAsync<DeleteByQueryResponse>(p, d)
 			);
 		}
 

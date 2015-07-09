@@ -22,7 +22,7 @@ namespace Nest
 			var customCreator = new MultiGetConverter((r, s) => this.DeserializeMultiGetResponse(r, s, converter));
 			return this.Dispatcher.Dispatch<MultiGetDescriptor, MultiGetRequestParameters, MultiGetResponse>(
 				descriptor,
-				(p, d) => this.RawDispatch.MgetDispatch<MultiGetResponse>(p.DeserializationState(customCreator), d)
+				(p, d) => this.LowLevelDispatch.MgetDispatch<MultiGetResponse>(p.DeserializationState(customCreator), d)
 			);
 		}
 
@@ -33,7 +33,7 @@ namespace Nest
 			var customCreator = new MultiGetConverter((r, s) => this.DeserializeMultiGetResponse(r, s, converter));
 			return this.Dispatcher.Dispatch<IMultiGetRequest, MultiGetRequestParameters, MultiGetResponse>(
 				multiRequest,
-				(p, d) => this.RawDispatch.MgetDispatch<MultiGetResponse>(p.DeserializationState(customCreator), d)
+				(p, d) => this.LowLevelDispatch.MgetDispatch<MultiGetResponse>(p.DeserializationState(customCreator), d)
 			);
 		}
 
@@ -46,7 +46,7 @@ namespace Nest
 			var customCreator = new MultiGetConverter((r, s) => this.DeserializeMultiGetResponse(r, s, converter));
 			return this.Dispatcher.DispatchAsync<MultiGetDescriptor, MultiGetRequestParameters, MultiGetResponse, IMultiGetResponse>(
 				descriptor,
-				(p, d) => this.RawDispatch.MgetDispatchAsync<MultiGetResponse>(p.DeserializationState(customCreator), d)
+				(p, d) => this.LowLevelDispatch.MgetDispatchAsync<MultiGetResponse>(p.DeserializationState(customCreator), d)
 			);
 		}
 
@@ -57,7 +57,7 @@ namespace Nest
 			var customCreator = new MultiGetConverter((r, s) => this.DeserializeMultiGetResponse(r, s, converter));
 			return this.Dispatcher.DispatchAsync<IMultiGetRequest, MultiGetRequestParameters, MultiGetResponse, IMultiGetResponse>(
 				multiGetRequest,
-				(p, d) => this.RawDispatch.MgetDispatchAsync<MultiGetResponse>(p.DeserializationState(customCreator), d)
+				(p, d) => this.LowLevelDispatch.MgetDispatchAsync<MultiGetResponse>(p.DeserializationState(customCreator), d)
 			);
 		}
 

@@ -15,7 +15,7 @@ namespace Nest
 			percolatorSelector.ThrowIfNull("percolatorSelector");
 			return this.Dispatcher.Dispatch<RegisterPercolatorDescriptor<T>, IndexRequestParameters, RegisterPercolateResponse>(
 				s => percolatorSelector(s.Name(name)),
-				(p, d) => this.RawDispatch.IndexDispatch<RegisterPercolateResponse>(p, d)
+				(p, d) => this.LowLevelDispatch.IndexDispatch<RegisterPercolateResponse>(p, d)
 			);
 		}
 
@@ -24,7 +24,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<IRegisterPercolatorRequest, IndexRequestParameters, RegisterPercolateResponse>(
 				registerPercolatorRequest,
-				(p, d) => this.RawDispatch.IndexDispatch<RegisterPercolateResponse>(p, d)
+				(p, d) => this.LowLevelDispatch.IndexDispatch<RegisterPercolateResponse>(p, d)
 			);
 		}
 
@@ -36,7 +36,7 @@ namespace Nest
 			return this.Dispatcher.DispatchAsync
 				<RegisterPercolatorDescriptor<T>, IndexRequestParameters, RegisterPercolateResponse, IRegisterPercolateResponse>(
 					s => percolatorSelector(s.Name(name)),
-					(p, d) => this.RawDispatch.IndexDispatchAsync<RegisterPercolateResponse>(p, d)
+					(p, d) => this.LowLevelDispatch.IndexDispatchAsync<RegisterPercolateResponse>(p, d)
 				);
 		}
 
@@ -45,7 +45,7 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<IRegisterPercolatorRequest, IndexRequestParameters, RegisterPercolateResponse, IRegisterPercolateResponse>(
 					registerPercolatorRequest,
-					(p, d) => this.RawDispatch.IndexDispatchAsync<RegisterPercolateResponse>(p, d)
+					(p, d) => this.LowLevelDispatch.IndexDispatchAsync<RegisterPercolateResponse>(p, d)
 				);
 		}
 

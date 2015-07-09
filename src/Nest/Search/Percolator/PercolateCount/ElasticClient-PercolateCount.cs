@@ -14,7 +14,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<PercolateCountDescriptor<T>, PercolateCountRequestParameters, PercolateCountResponse>(
 				percolateSelector,
-				(p, d) => this.RawDispatch.CountPercolateDispatch<PercolateCountResponse>(p, d)
+				(p, d) => this.LowLevelDispatch.CountPercolateDispatch<PercolateCountResponse>(p, d)
 			);
 		}
 
@@ -24,7 +24,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<IPercolateCountRequest<T>, PercolateCountRequestParameters, PercolateCountResponse>(
 				percolateCountRequest,
-				(p, d) => this.RawDispatch.CountPercolateDispatch<PercolateCountResponse>(p, d)
+				(p, d) => this.LowLevelDispatch.CountPercolateDispatch<PercolateCountResponse>(p, d)
 			);
 		}
 
@@ -34,7 +34,7 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<PercolateCountDescriptor<T>, PercolateCountRequestParameters, PercolateCountResponse, IPercolateCountResponse>(
 				percolateSelector,
-				(p, d) => this.RawDispatch.CountPercolateDispatchAsync<PercolateCountResponse>(p, d)
+				(p, d) => this.LowLevelDispatch.CountPercolateDispatchAsync<PercolateCountResponse>(p, d)
 			);
 		}
 
@@ -44,7 +44,7 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<IPercolateCountRequest<T>, PercolateCountRequestParameters, PercolateCountResponse, IPercolateCountResponse>(
 				percolateCountRequest,
-				(p, d) => this.RawDispatch.CountPercolateDispatchAsync<PercolateCountResponse>(p, d)
+				(p, d) => this.LowLevelDispatch.CountPercolateDispatchAsync<PercolateCountResponse>(p, d)
 			);
 		}
 

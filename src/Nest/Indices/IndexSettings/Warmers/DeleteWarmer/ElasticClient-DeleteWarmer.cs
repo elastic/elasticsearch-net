@@ -18,7 +18,7 @@ namespace Nest
 			selector = selector ?? (s => s);
 			return this.Dispatcher.Dispatch<DeleteWarmerDescriptor, DeleteWarmerRequestParameters, IndicesOperationResponse>(
 				d => selector(d.Name(name).AllIndices()),
-				(p, d) => this.RawDispatch.IndicesDeleteWarmerDispatch<IndicesOperationResponse>(p)
+				(p, d) => this.LowLevelDispatch.IndicesDeleteWarmerDispatch<IndicesOperationResponse>(p)
 			);
 		}
 
@@ -27,7 +27,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<IDeleteWarmerRequest, DeleteWarmerRequestParameters, IndicesOperationResponse>(
 				deleteWarmerRequest,
-				(p, d) => this.RawDispatch.IndicesDeleteWarmerDispatch<IndicesOperationResponse>(p)
+				(p, d) => this.LowLevelDispatch.IndicesDeleteWarmerDispatch<IndicesOperationResponse>(p)
 			);
 		}
 
@@ -38,7 +38,7 @@ namespace Nest
 			return this.Dispatcher.DispatchAsync
 				<DeleteWarmerDescriptor, DeleteWarmerRequestParameters, IndicesOperationResponse, IIndicesOperationResponse>(
 					d => selector(d.Name(name).AllIndices()),
-					(p, d) => this.RawDispatch.IndicesDeleteWarmerDispatchAsync<IndicesOperationResponse>(p)
+					(p, d) => this.LowLevelDispatch.IndicesDeleteWarmerDispatchAsync<IndicesOperationResponse>(p)
 				);
 		}
 
@@ -47,7 +47,7 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<IDeleteWarmerRequest, DeleteWarmerRequestParameters, IndicesOperationResponse, IIndicesOperationResponse>(
 					deleteWarmerRequest,
-					(p, d) => this.RawDispatch.IndicesDeleteWarmerDispatchAsync<IndicesOperationResponse>(p)
+					(p, d) => this.LowLevelDispatch.IndicesDeleteWarmerDispatchAsync<IndicesOperationResponse>(p)
 				);
 		}
 

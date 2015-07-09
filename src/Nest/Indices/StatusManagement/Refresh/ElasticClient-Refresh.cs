@@ -13,7 +13,7 @@ namespace Nest
 			refreshSelector = refreshSelector ?? (s => s);
 			return this.Dispatcher.Dispatch<RefreshDescriptor, RefreshRequestParameters, ShardsOperationResponse>(
 				refreshSelector,
-				(p, d) => this.RawDispatch.IndicesRefreshDispatch<ShardsOperationResponse>(p)
+				(p, d) => this.LowLevelDispatch.IndicesRefreshDispatch<ShardsOperationResponse>(p)
 			);
 		}
 
@@ -22,7 +22,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<IRefreshRequest, RefreshRequestParameters, ShardsOperationResponse>(
 				refreshRequest,
-				(p, d) => this.RawDispatch.IndicesRefreshDispatch<ShardsOperationResponse>(p)
+				(p, d) => this.LowLevelDispatch.IndicesRefreshDispatch<ShardsOperationResponse>(p)
 			);
 		}
 
@@ -32,7 +32,7 @@ namespace Nest
 			refreshSelector = refreshSelector ?? (s => s);
 			return this.Dispatcher.DispatchAsync<RefreshDescriptor, RefreshRequestParameters, ShardsOperationResponse, IShardsOperationResponse>(
 				refreshSelector,
-				(p, d) => this.RawDispatch.IndicesRefreshDispatchAsync<ShardsOperationResponse>(p)
+				(p, d) => this.LowLevelDispatch.IndicesRefreshDispatchAsync<ShardsOperationResponse>(p)
 			);
 		}
 
@@ -41,7 +41,7 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<IRefreshRequest, RefreshRequestParameters, ShardsOperationResponse, IShardsOperationResponse>(
 				refreshRequest,
-				(p, d) => this.RawDispatch.IndicesRefreshDispatchAsync<ShardsOperationResponse>(p)
+				(p, d) => this.LowLevelDispatch.IndicesRefreshDispatchAsync<ShardsOperationResponse>(p)
 			);
 		}
 

@@ -13,7 +13,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<DeleteIndexDescriptor, DeleteIndexRequestParameters, IndicesResponse>(
 				selector,
-				(p, d) => this.RawDispatch.IndicesDeleteDispatch<IndicesResponse>(p)
+				(p, d) => this.LowLevelDispatch.IndicesDeleteDispatch<IndicesResponse>(p)
 			);
 		}
 
@@ -22,7 +22,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<IDeleteIndexRequest, DeleteIndexRequestParameters, IndicesResponse>(
 				deleteIndexRequest,
-				(p, d) => this.RawDispatch.IndicesDeleteDispatch<IndicesResponse>(p)
+				(p, d) => this.LowLevelDispatch.IndicesDeleteDispatch<IndicesResponse>(p)
 			);
 		}
 
@@ -31,7 +31,7 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<DeleteIndexDescriptor, DeleteIndexRequestParameters, IndicesResponse, IIndicesResponse>(
 				selector,
-				(p, d) => this.RawDispatch.IndicesDeleteDispatchAsync<IndicesResponse>(p)
+				(p, d) => this.LowLevelDispatch.IndicesDeleteDispatchAsync<IndicesResponse>(p)
 			);
 		}
 
@@ -40,7 +40,7 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<IDeleteIndexRequest, DeleteIndexRequestParameters, IndicesResponse, IIndicesResponse>(
 				deleteIndexRequest,
-				(p, d) => this.RawDispatch.IndicesDeleteDispatchAsync<IndicesResponse>(p)
+				(p, d) => this.LowLevelDispatch.IndicesDeleteDispatchAsync<IndicesResponse>(p)
 			);
 		}
 

@@ -15,7 +15,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<IDeleteAliasRequest, DeleteAliasRequestParameters, DeleteAliasResponse>(
 				deleteAliasRequest,
-				(p, d) => this.RawDispatch.IndicesDeleteAliasDispatch<DeleteAliasResponse>(p)
+				(p, d) => this.LowLevelDispatch.IndicesDeleteAliasDispatch<DeleteAliasResponse>(p)
 			);
 		}
 
@@ -24,7 +24,7 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<IDeleteAliasRequest, DeleteAliasRequestParameters, DeleteAliasResponse, IDeleteAliasResponse>(
 				deleteAliasRequest,
-				(p, d) => this.RawDispatch.IndicesDeleteAliasDispatchAsync<DeleteAliasResponse>(p)
+				(p, d) => this.LowLevelDispatch.IndicesDeleteAliasDispatchAsync<DeleteAliasResponse>(p)
 			);
 		}
 
@@ -34,7 +34,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<DeleteAliasDescriptor<T>, DeleteAliasRequestParameters, DeleteAliasResponse>(
 				deleteAliasDescriptor,
-				(p, d) => this.RawDispatch.IndicesDeleteAliasDispatch<DeleteAliasResponse>(p)
+				(p, d) => this.LowLevelDispatch.IndicesDeleteAliasDispatch<DeleteAliasResponse>(p)
 			);
 		}
 
@@ -44,7 +44,7 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<DeleteAliasDescriptor<T>, DeleteAliasRequestParameters, DeleteAliasResponse, IDeleteAliasResponse>(
 				deleteAliasDescriptor,
-				(p, d) => this.RawDispatch.IndicesDeleteAliasDispatchAsync<DeleteAliasResponse>(p)
+				(p, d) => this.LowLevelDispatch.IndicesDeleteAliasDispatchAsync<DeleteAliasResponse>(p)
 			);
 		}
 

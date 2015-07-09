@@ -13,7 +13,7 @@ namespace Nest
 			selector = selector ?? (s => s);
 			return this.Dispatcher.Dispatch<ClusterGetSettingsDescriptor, ClusterGetSettingsRequestParameters, ClusterGetSettingsResponse>(
 				selector,
-				(p, d) => this.RawDispatch.ClusterGetSettingsDispatch<ClusterGetSettingsResponse>(p)
+				(p, d) => this.LowLevelDispatch.ClusterGetSettingsDispatch<ClusterGetSettingsResponse>(p)
 			);
 		}
 
@@ -23,7 +23,7 @@ namespace Nest
 			selector = selector ?? (s => s);
 			return this.Dispatcher.DispatchAsync<ClusterGetSettingsDescriptor, ClusterGetSettingsRequestParameters, ClusterGetSettingsResponse, IClusterGetSettingsResponse>(
 				selector,
-				(p, d) => this.RawDispatch.ClusterGetSettingsDispatchAsync<ClusterGetSettingsResponse>(p)
+				(p, d) => this.LowLevelDispatch.ClusterGetSettingsDispatchAsync<ClusterGetSettingsResponse>(p)
 			);
 		}
 
@@ -32,7 +32,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<IClusterGetSettingsRequest, ClusterGetSettingsRequestParameters, ClusterGetSettingsResponse>(
 				clusterSettingsRequest ?? new ClusterGetSettingsRequest(),
-				(p, d) => this.RawDispatch.ClusterGetSettingsDispatch<ClusterGetSettingsResponse>(p)
+				(p, d) => this.LowLevelDispatch.ClusterGetSettingsDispatch<ClusterGetSettingsResponse>(p)
 			);
 		}
 		
@@ -41,7 +41,7 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<IClusterGetSettingsRequest, ClusterGetSettingsRequestParameters, ClusterGetSettingsResponse, IClusterGetSettingsResponse>(
 				clusterSettingsRequest ?? new ClusterGetSettingsRequest(),
-				(p, d) => this.RawDispatch.ClusterGetSettingsDispatchAsync<ClusterGetSettingsResponse>(p)
+				(p, d) => this.LowLevelDispatch.ClusterGetSettingsDispatchAsync<ClusterGetSettingsResponse>(p)
 			);
 		}
 	}

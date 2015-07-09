@@ -16,7 +16,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<DocumentExistsDescriptor<T>, DocumentExistsRequestParameters, ExistsResponse>(
 				d => existsSelector(d.RequestConfiguration(r=>r.AllowedStatusCodes(404))),
-				(p, d) => this.RawDispatch.ExistsDispatch<ExistsResponse>(p
+				(p, d) => this.LowLevelDispatch.ExistsDispatch<ExistsResponse>(p
 					.DeserializationState(new ExistConverter(this.DeserializeExistsResponse))
 				)
 			);
@@ -27,7 +27,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<IDocumentExistsRequest, DocumentExistsRequestParameters, ExistsResponse>(
 				documentExistsRequest,
-				(p, d) => this.RawDispatch.ExistsDispatch<ExistsResponse>(p
+				(p, d) => this.LowLevelDispatch.ExistsDispatch<ExistsResponse>(p
 					.DeserializationState(new ExistConverter(this.DeserializeExistsResponse))
 				)
 			);
@@ -39,7 +39,7 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<DocumentExistsDescriptor<T>, DocumentExistsRequestParameters, ExistsResponse, IExistsResponse>(
 				d => existsSelector(d.RequestConfiguration(r=>r.AllowedStatusCodes(404))),
-				(p, d) => this.RawDispatch.ExistsDispatchAsync<ExistsResponse>(p
+				(p, d) => this.LowLevelDispatch.ExistsDispatchAsync<ExistsResponse>(p
 					.DeserializationState(new ExistConverter(this.DeserializeExistsResponse))
 				)
 			);
@@ -50,7 +50,7 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<IDocumentExistsRequest, DocumentExistsRequestParameters, ExistsResponse, IExistsResponse>(
 				documentExistsRequest,
-				(p, d) => this.RawDispatch.ExistsDispatchAsync<ExistsResponse>(p
+				(p, d) => this.LowLevelDispatch.ExistsDispatchAsync<ExistsResponse>(p
 					.DeserializationState(new ExistConverter(this.DeserializeExistsResponse))
 				)
 			);

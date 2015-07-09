@@ -21,7 +21,7 @@ namespace Nest
 				(p, d) =>
 				{
 					var json = Serializer.SerializeMultiPercolate(d);
-					return this.RawDispatch.MpercolateDispatch<MultiPercolateResponse>(p, json);
+					return this.LowLevelDispatch.MpercolateDispatch<MultiPercolateResponse>(p, json);
 				}
 			);
 		}
@@ -34,7 +34,7 @@ namespace Nest
 				(p, d) =>
 				{
 					var json = Serializer.SerializeMultiPercolate(d);
-					return this.RawDispatch.MpercolateDispatch<MultiPercolateResponse>(p, json);
+					return this.LowLevelDispatch.MpercolateDispatch<MultiPercolateResponse>(p, json);
 				}
 			);
 		}
@@ -49,7 +49,7 @@ namespace Nest
 				(p, d) =>
 				{
 					var json = Serializer.SerializeMultiPercolate(d);
-					return this.RawDispatch.MpercolateDispatchAsync<MultiPercolateResponse>(p, json);
+					return this.LowLevelDispatch.MpercolateDispatchAsync<MultiPercolateResponse>(p, json);
 				}
 			);
 		}
@@ -62,7 +62,7 @@ namespace Nest
 				(p, d) =>
 				{
 					var json = Serializer.SerializeMultiPercolate(d);
-					return this.RawDispatch.MpercolateDispatchAsync<MultiPercolateResponse>(p, json);
+					return this.LowLevelDispatch.MpercolateDispatchAsync<MultiPercolateResponse>(p, json);
 				}
 			);
 		}

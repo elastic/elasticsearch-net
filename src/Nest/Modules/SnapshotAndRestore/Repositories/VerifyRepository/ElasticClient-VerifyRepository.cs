@@ -16,7 +16,7 @@ namespace Nest
 			selector = selector ?? (s => s);
 			return this.Dispatcher.Dispatch<VerifyRepositoryDescriptor, VerifyRepositoryRequestParameters, VerifyRepositoryResponse>(
 				s => selector(s.Repository(name)),
-				(p, d) => this.RawDispatch.SnapshotVerifyRepositoryDispatch<VerifyRepositoryResponse>(p)
+				(p, d) => this.LowLevelDispatch.SnapshotVerifyRepositoryDispatch<VerifyRepositoryResponse>(p)
 			);
 		}
 
@@ -25,7 +25,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<IVerifyRepositoryRequest, VerifyRepositoryRequestParameters, VerifyRepositoryResponse>(
 				verifyRepositoryRequest,
-				(p, d) => this.RawDispatch.SnapshotVerifyRepositoryDispatch<VerifyRepositoryResponse>(p)
+				(p, d) => this.LowLevelDispatch.SnapshotVerifyRepositoryDispatch<VerifyRepositoryResponse>(p)
 			);
 		}
 
@@ -36,7 +36,7 @@ namespace Nest
 			selector = selector ?? (s => s);
 			return this.Dispatcher.DispatchAsync<VerifyRepositoryDescriptor, VerifyRepositoryRequestParameters, VerifyRepositoryResponse, IVerifyRepositoryResponse>(
 				s => selector(s.Repository(name)),
-				(p, d) => this.RawDispatch.SnapshotVerifyRepositoryDispatchAsync<VerifyRepositoryResponse>(p)
+				(p, d) => this.LowLevelDispatch.SnapshotVerifyRepositoryDispatchAsync<VerifyRepositoryResponse>(p)
 			);
 		}
 
@@ -45,7 +45,7 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<IVerifyRepositoryRequest, VerifyRepositoryRequestParameters, VerifyRepositoryResponse, IVerifyRepositoryResponse>(
 				verifyRepositoryRequest,
-				(p, d) => this.RawDispatch.SnapshotVerifyRepositoryDispatchAsync<VerifyRepositoryResponse>(p)
+				(p, d) => this.LowLevelDispatch.SnapshotVerifyRepositoryDispatchAsync<VerifyRepositoryResponse>(p)
 			);
 		}
 	}

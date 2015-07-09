@@ -19,7 +19,7 @@ namespace Nest
 			nodesShutdownSelector = nodesShutdownSelector ?? (s => s);
 			return this.Dispatcher.Dispatch<NodesShutdownDescriptor, NodesShutdownRequestParameters, NodesShutdownResponse>(
 				nodesShutdownSelector,
-				(p, d) => this.RawDispatch.NodesShutdownDispatch<NodesShutdownResponse>(p)
+				(p, d) => this.LowLevelDispatch.NodesShutdownDispatch<NodesShutdownResponse>(p)
 			);
 		}
 
@@ -29,7 +29,7 @@ namespace Nest
 			nodesShutdownSelector = nodesShutdownSelector ?? (s => s);
 			return this.Dispatcher.DispatchAsync<NodesShutdownDescriptor, NodesShutdownRequestParameters, NodesShutdownResponse, INodesShutdownResponse>(
 				nodesShutdownSelector,
-				(p, d) => this.RawDispatch.NodesShutdownDispatchAsync<NodesShutdownResponse>(p)
+				(p, d) => this.LowLevelDispatch.NodesShutdownDispatchAsync<NodesShutdownResponse>(p)
 			);
 		}
 
@@ -38,7 +38,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<INodesShutdownRequest, NodesShutdownRequestParameters, NodesShutdownResponse>(
 				nodesShutdownRequest,
-				(p, d) => this.RawDispatch.NodesShutdownDispatch<NodesShutdownResponse>(p)
+				(p, d) => this.LowLevelDispatch.NodesShutdownDispatch<NodesShutdownResponse>(p)
 			);
 		}
 
@@ -47,7 +47,7 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<INodesShutdownRequest, NodesShutdownRequestParameters, NodesShutdownResponse, INodesShutdownResponse>(
 				nodesShutdownRequest,
-				(p, d) => this.RawDispatch.NodesShutdownDispatchAsync<NodesShutdownResponse>(p)
+				(p, d) => this.LowLevelDispatch.NodesShutdownDispatchAsync<NodesShutdownResponse>(p)
 			);
 		}
 

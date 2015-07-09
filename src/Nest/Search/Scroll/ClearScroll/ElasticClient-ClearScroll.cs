@@ -15,7 +15,7 @@ namespace Nest
 				(p, d) =>
 				{
 					var body = PatchClearScroll(p);
-					return this.RawDispatch.ClearScrollDispatch<EmptyResponse>(p, body);
+					return this.LowLevelDispatch.ClearScrollDispatch<EmptyResponse>(p, body);
 				}
 				);
 		}
@@ -28,7 +28,7 @@ namespace Nest
 				(p, d) =>
 				{
 					var body = PatchClearScroll(p);
-					return this.RawDispatch.ClearScrollDispatch<EmptyResponse>(p, body);
+					return this.LowLevelDispatch.ClearScrollDispatch<EmptyResponse>(p, body);
 				}
 				);
 		}
@@ -41,7 +41,7 @@ namespace Nest
 				(p, d) =>
 				{
 					var body = PatchClearScroll(p);
-					return this.RawDispatch.ClearScrollDispatchAsync<EmptyResponse>(p, body);
+					return this.LowLevelDispatch.ClearScrollDispatchAsync<EmptyResponse>(p, body);
 				}
 			);
 		}
@@ -54,7 +54,7 @@ namespace Nest
 				(p, d) =>
 				{
 					var body = PatchClearScroll(p);
-					return this.RawDispatch.ClearScrollDispatchAsync<EmptyResponse>(p, body);
+					return this.LowLevelDispatch.ClearScrollDispatchAsync<EmptyResponse>(p, body);
 				}
 			);
 		}

@@ -15,7 +15,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<MultiTermVectorsDescriptor<T>, MultiTermVectorsRequestParameters, MultiTermVectorResponse>(
 				multiTermVectorsSelector,
-				(p, d) => this.RawDispatch.MtermvectorsDispatch<MultiTermVectorResponse>(p, d)
+				(p, d) => this.LowLevelDispatch.MtermvectorsDispatch<MultiTermVectorResponse>(p, d)
 			);
 		}
 
@@ -24,7 +24,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<IMultiTermVectorsRequest, MultiTermVectorsRequestParameters, MultiTermVectorResponse>(
 				multiTermVectorsRequest,
-				(p, d) => this.RawDispatch.MtermvectorsDispatch<MultiTermVectorResponse>(p, d)
+				(p, d) => this.LowLevelDispatch.MtermvectorsDispatch<MultiTermVectorResponse>(p, d)
 			);
 		}
 
@@ -34,7 +34,7 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<MultiTermVectorsDescriptor<T>, MultiTermVectorsRequestParameters, MultiTermVectorResponse, IMultiTermVectorResponse>(
 				multiTermVectorsSelector,
-				(p, d) => this.RawDispatch.MtermvectorsDispatchAsync<MultiTermVectorResponse>(p, d)
+				(p, d) => this.LowLevelDispatch.MtermvectorsDispatchAsync<MultiTermVectorResponse>(p, d)
 			);
 		}
 
@@ -43,7 +43,7 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<IMultiTermVectorsRequest, MultiTermVectorsRequestParameters, MultiTermVectorResponse, IMultiTermVectorResponse>(
 				multiTermVectorsRequest,
-				(p, d) => this.RawDispatch.MtermvectorsDispatchAsync<MultiTermVectorResponse>(p, d)
+				(p, d) => this.LowLevelDispatch.MtermvectorsDispatchAsync<MultiTermVectorResponse>(p, d)
 			);
 		}
 

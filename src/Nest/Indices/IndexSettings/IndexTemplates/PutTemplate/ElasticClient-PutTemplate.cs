@@ -17,7 +17,7 @@ namespace Nest
 			var descriptor = putTemplateSelector(new PutTemplateDescriptor(_connectionSettings).Name(name));
 			return this.Dispatcher.Dispatch<IPutTemplateRequest, PutTemplateRequestParameters, IndicesOperationResponse>(
 				descriptor,
-				(p, d) => this.RawDispatch.IndicesPutTemplateDispatch<IndicesOperationResponse>(p, d.TemplateMapping)
+				(p, d) => this.LowLevelDispatch.IndicesPutTemplateDispatch<IndicesOperationResponse>(p, d.TemplateMapping)
 			);
 		}
 
@@ -26,7 +26,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<IPutTemplateRequest, PutTemplateRequestParameters, IndicesOperationResponse>(
 				putTemplateRequest,
-				(p, d) => this.RawDispatch.IndicesPutTemplateDispatch<IndicesOperationResponse>(p, d.TemplateMapping)
+				(p, d) => this.LowLevelDispatch.IndicesPutTemplateDispatch<IndicesOperationResponse>(p, d.TemplateMapping)
 			);
 		}
 
@@ -37,7 +37,7 @@ namespace Nest
 			var descriptor = putTemplateSelector(new PutTemplateDescriptor(_connectionSettings).Name(name));
 			return this.Dispatcher.DispatchAsync<IPutTemplateRequest, PutTemplateRequestParameters, IndicesOperationResponse, IIndicesOperationResponse>(
 					descriptor,
-					(p, d) => this.RawDispatch.IndicesPutTemplateDispatchAsync<IndicesOperationResponse>(p, d.TemplateMapping)
+					(p, d) => this.LowLevelDispatch.IndicesPutTemplateDispatchAsync<IndicesOperationResponse>(p, d.TemplateMapping)
 				);
 		}
 
@@ -46,7 +46,7 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<IPutTemplateRequest, PutTemplateRequestParameters, IndicesOperationResponse, IIndicesOperationResponse>(
 					putTemplateRequest,
-					(p, d) => this.RawDispatch.IndicesPutTemplateDispatchAsync<IndicesOperationResponse>(p, d.TemplateMapping)
+					(p, d) => this.LowLevelDispatch.IndicesPutTemplateDispatchAsync<IndicesOperationResponse>(p, d.TemplateMapping)
 				);
 		}
 

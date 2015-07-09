@@ -15,7 +15,7 @@ namespace Nest
 			pendingTasksSelector = pendingTasksSelector ?? (s => s);
 			return this.Dispatcher.Dispatch<ClusterPendingTasksDescriptor, ClusterPendingTasksRequestParameters, ClusterPendingTasksResponse>(
 				pendingTasksSelector,
-				(p, d) => this.RawDispatch.ClusterPendingTasksDispatch<ClusterPendingTasksResponse>(p)
+				(p, d) => this.LowLevelDispatch.ClusterPendingTasksDispatch<ClusterPendingTasksResponse>(p)
 			);
 		}
 
@@ -25,7 +25,7 @@ namespace Nest
 			pendingTasksSelector = pendingTasksSelector ?? (s => s);
 			return this.Dispatcher.DispatchAsync<ClusterPendingTasksDescriptor, ClusterPendingTasksRequestParameters, ClusterPendingTasksResponse, IClusterPendingTasksResponse>(
 				pendingTasksSelector,
-				(p, d) => this.RawDispatch.ClusterPendingTasksDispatchAsync<ClusterPendingTasksResponse>(p)
+				(p, d) => this.LowLevelDispatch.ClusterPendingTasksDispatchAsync<ClusterPendingTasksResponse>(p)
 			);
 		}
 
@@ -34,7 +34,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<IClusterPendingTasksRequest, ClusterPendingTasksRequestParameters, ClusterPendingTasksResponse>(
 				pendingTasksRequest,
-				(p, d) => this.RawDispatch.ClusterPendingTasksDispatch<ClusterPendingTasksResponse>(p)
+				(p, d) => this.LowLevelDispatch.ClusterPendingTasksDispatch<ClusterPendingTasksResponse>(p)
 			);
 		}
 
@@ -43,7 +43,7 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<IClusterPendingTasksRequest, ClusterPendingTasksRequestParameters, ClusterPendingTasksResponse, IClusterPendingTasksResponse>(
 				pendingTasksRequest,
-				(p, d) => this.RawDispatch.ClusterPendingTasksDispatchAsync<ClusterPendingTasksResponse>(p)
+				(p, d) => this.LowLevelDispatch.ClusterPendingTasksDispatchAsync<ClusterPendingTasksResponse>(p)
 			);
 		}
 	}

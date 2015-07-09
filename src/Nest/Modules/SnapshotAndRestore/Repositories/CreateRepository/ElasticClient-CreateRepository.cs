@@ -16,7 +16,7 @@ namespace Nest
 			return this.Dispatcher.Dispatch<CreateRepositoryDescriptor, CreateRepositoryRequestParameters, AcknowledgedResponse>(
 				s => selector(s.Repository(name)),
 				(p, d) =>
-					this.RawDispatch.SnapshotCreateRepositoryDispatch<AcknowledgedResponse>(p,
+					this.LowLevelDispatch.SnapshotCreateRepositoryDispatch<AcknowledgedResponse>(p,
 						((ICreateRepositoryRequest) d).Repository)
 				);
 		}
@@ -27,7 +27,7 @@ namespace Nest
 			return this.Dispatcher.Dispatch<ICreateRepositoryRequest, CreateRepositoryRequestParameters, AcknowledgedResponse>(
 				request,
 				(p, d) =>
-					this.RawDispatch.SnapshotCreateRepositoryDispatch<AcknowledgedResponse>(p,
+					this.LowLevelDispatch.SnapshotCreateRepositoryDispatch<AcknowledgedResponse>(p,
 						((ICreateRepositoryRequest) d).Repository)
 				);
 		}
@@ -41,7 +41,7 @@ namespace Nest
 				<CreateRepositoryDescriptor, CreateRepositoryRequestParameters, AcknowledgedResponse, IAcknowledgedResponse>(
 					s => selector(s.Repository(name)),
 					(p, d) =>
-						this.RawDispatch.SnapshotCreateRepositoryDispatchAsync<AcknowledgedResponse>(p,
+						this.LowLevelDispatch.SnapshotCreateRepositoryDispatchAsync<AcknowledgedResponse>(p,
 							((ICreateRepositoryRequest) d).Repository)
 				);
 		}
@@ -54,7 +54,7 @@ namespace Nest
 				<ICreateRepositoryRequest, CreateRepositoryRequestParameters, AcknowledgedResponse, IAcknowledgedResponse>(
 					request,
 					(p, d) =>
-						this.RawDispatch.SnapshotCreateRepositoryDispatchAsync<AcknowledgedResponse>(p,
+						this.LowLevelDispatch.SnapshotCreateRepositoryDispatchAsync<AcknowledgedResponse>(p,
 							((ICreateRepositoryRequest) d).Repository)
 				);
 		}

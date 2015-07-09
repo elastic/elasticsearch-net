@@ -12,7 +12,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<UpdateSettingsDescriptor, UpdateSettingsRequestParameters, AcknowledgedResponse>(
 				updateSettingsSelector,
-				(p, d) => this.RawDispatch.IndicesPutSettingsDispatch<AcknowledgedResponse>(p, d)
+				(p, d) => this.LowLevelDispatch.IndicesPutSettingsDispatch<AcknowledgedResponse>(p, d)
 			);
 		}
 
@@ -21,7 +21,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<IUpdateSettingsRequest, UpdateSettingsRequestParameters, AcknowledgedResponse>(
 				updateSettingsRequest,
-				(p, d) => this.RawDispatch.IndicesPutSettingsDispatch<AcknowledgedResponse>(p, d)
+				(p, d) => this.LowLevelDispatch.IndicesPutSettingsDispatch<AcknowledgedResponse>(p, d)
 			);
 		}
 
@@ -30,7 +30,7 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<UpdateSettingsDescriptor, UpdateSettingsRequestParameters, AcknowledgedResponse, IAcknowledgedResponse>(
 					updateSettingsSelector,
-					(p, d) => this.RawDispatch.IndicesPutSettingsDispatchAsync<AcknowledgedResponse>(p, d)
+					(p, d) => this.LowLevelDispatch.IndicesPutSettingsDispatchAsync<AcknowledgedResponse>(p, d)
 				);
 		}
 
@@ -39,7 +39,7 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<IUpdateSettingsRequest, UpdateSettingsRequestParameters, AcknowledgedResponse, IAcknowledgedResponse>(
 					updateSettingsRequest,
-					(p, d) => this.RawDispatch.IndicesPutSettingsDispatchAsync<AcknowledgedResponse>(p, d)
+					(p, d) => this.LowLevelDispatch.IndicesPutSettingsDispatchAsync<AcknowledgedResponse>(p, d)
 				);
 		}
 

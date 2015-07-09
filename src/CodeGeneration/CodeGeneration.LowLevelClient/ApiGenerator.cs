@@ -254,8 +254,8 @@ namespace CodeGeneration.LowLevelClient
 
 		public static void GenerateRawDispatch(RestApiSpec model)
 		{
-			var targetFile = _nestFolder + @"_Generated/RawDispatch.Generated.cs";
-			var source = _razorMachine.Execute(File.ReadAllText(_viewFolder + @"RawDispatch.Generated.cshtml"), model).ToString();
+			var targetFile = _nestFolder + @"_Generated/_LowLevelDispatch.Generated.cs";
+			var source = _razorMachine.Execute(File.ReadAllText(_viewFolder + @"_LowLevelDispatch.Generated.cshtml"), model).ToString();
 			File.WriteAllText(targetFile, source);
 		}
 		public static void GenerateRawClient(RestApiSpec model)

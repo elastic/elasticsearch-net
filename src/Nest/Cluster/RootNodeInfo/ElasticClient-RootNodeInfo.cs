@@ -13,7 +13,7 @@ namespace Nest
 			selector = selector ?? (i => i);
 			return this.Dispatcher.Dispatch<InfoDescriptor, InfoRequestParameters, RootInfoResponse>(
 				selector,
-				(p, d) => this.RawDispatch.InfoDispatch<RootInfoResponse>(p)
+				(p, d) => this.LowLevelDispatch.InfoDispatch<RootInfoResponse>(p)
 			);
 		}
 
@@ -22,7 +22,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<IInfoRequest, InfoRequestParameters, RootInfoResponse>(
 				infoRequest,
-				(p, d) => this.RawDispatch.InfoDispatch<RootInfoResponse>(p)
+				(p, d) => this.LowLevelDispatch.InfoDispatch<RootInfoResponse>(p)
 				);
 		}
 
@@ -32,7 +32,7 @@ namespace Nest
 			selector = selector ?? (i => i);
 			return this.Dispatcher.DispatchAsync<InfoDescriptor, InfoRequestParameters, RootInfoResponse, IRootInfoResponse>(
 				selector,
-				(p, d) => this.RawDispatch.InfoDispatchAsync<RootInfoResponse>(p)
+				(p, d) => this.LowLevelDispatch.InfoDispatchAsync<RootInfoResponse>(p)
 			);
 		}
 
@@ -41,7 +41,7 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<IInfoRequest, InfoRequestParameters, RootInfoResponse, IRootInfoResponse>(
 				inforRequest,
-				(p, d) => this.RawDispatch.InfoDispatchAsync<RootInfoResponse>(p)
+				(p, d) => this.LowLevelDispatch.InfoDispatchAsync<RootInfoResponse>(p)
 			);
 		}
 

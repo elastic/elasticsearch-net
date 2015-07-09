@@ -11,19 +11,19 @@ namespace Nest
 		/// <inheritdoc />
 		public ICatResponse<CatMasterRecord> CatMaster(Func<CatMasterDescriptor, CatMasterDescriptor> selector = null) =>
 			this.DoCat<CatMasterDescriptor, CatMasterRequestParameters, CatMasterRecord>(selector,
-				this.RawDispatch.CatMasterDispatch<CatResponse<CatMasterRecord>>);
+				this.LowLevelDispatch.CatMasterDispatch<CatResponse<CatMasterRecord>>);
 
 		public ICatResponse<CatMasterRecord> CatMaster(ICatMasterRequest request) =>
 			this.DoCat<ICatMasterRequest, CatMasterRequestParameters, CatMasterRecord>(request,
-				this.RawDispatch.CatMasterDispatch<CatResponse<CatMasterRecord>>);
+				this.LowLevelDispatch.CatMasterDispatch<CatResponse<CatMasterRecord>>);
 
 		public Task<ICatResponse<CatMasterRecord>> CatMasterAsync(Func<CatMasterDescriptor, CatMasterDescriptor> selector = null) =>
 			this.DoCatAsync<CatMasterDescriptor, CatMasterRequestParameters, CatMasterRecord>(selector,
-				this.RawDispatch.CatMasterDispatchAsync<CatResponse<CatMasterRecord>>);
+				this.LowLevelDispatch.CatMasterDispatchAsync<CatResponse<CatMasterRecord>>);
 
 		public Task<ICatResponse<CatMasterRecord>> CatMasterAsync(ICatMasterRequest request) =>
 			this.DoCatAsync<ICatMasterRequest, CatMasterRequestParameters, CatMasterRecord>(request,
-				this.RawDispatch.CatMasterDispatchAsync<CatResponse<CatMasterRecord>>);
+				this.LowLevelDispatch.CatMasterDispatchAsync<CatResponse<CatMasterRecord>>);
 	}
 }
 		

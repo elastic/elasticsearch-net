@@ -14,7 +14,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<IPutAliasRequest, PutAliasRequestParameters, PutAliasResponse>(
 				putAliasRequest,
-				(p, d) => this.RawDispatch.IndicesPutAliasDispatch<PutAliasResponse>(p, d)
+				(p, d) => this.LowLevelDispatch.IndicesPutAliasDispatch<PutAliasResponse>(p, d)
 			);
 		}
 
@@ -23,7 +23,7 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<IPutAliasRequest, PutAliasRequestParameters, PutAliasResponse, IPutAliasResponse>(
 				putAliasRequest,
-				(p, d) => this.RawDispatch.IndicesPutAliasDispatchAsync<PutAliasResponse>(p, d)
+				(p, d) => this.LowLevelDispatch.IndicesPutAliasDispatchAsync<PutAliasResponse>(p, d)
 			);
 		}
 
@@ -32,7 +32,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<PutAliasDescriptor, PutAliasRequestParameters, PutAliasResponse>(
 				putAliasDescriptor,
-				(p, d) => this.RawDispatch.IndicesPutAliasDispatch<PutAliasResponse>(p, d)
+				(p, d) => this.LowLevelDispatch.IndicesPutAliasDispatch<PutAliasResponse>(p, d)
 			);
 		}
 
@@ -41,7 +41,7 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<PutAliasDescriptor, PutAliasRequestParameters, PutAliasResponse, IPutAliasResponse>(
 				putAliasDescriptor,
-				(p, d) => this.RawDispatch.IndicesPutAliasDispatchAsync<PutAliasResponse>(p, d)
+				(p, d) => this.LowLevelDispatch.IndicesPutAliasDispatchAsync<PutAliasResponse>(p, d)
 			);
 		}
 	}

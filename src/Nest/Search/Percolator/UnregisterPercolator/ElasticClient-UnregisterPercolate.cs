@@ -15,7 +15,7 @@ namespace Nest
 			selector = selector ?? (s => s);
 			return this.Dispatcher.Dispatch<UnregisterPercolatorDescriptor<T>, DeleteRequestParameters, UnregisterPercolateResponse>(
 				s => selector(s.Name(name)),
-				(p, d) => this.RawDispatch.DeleteDispatch<UnregisterPercolateResponse>(p)
+				(p, d) => this.LowLevelDispatch.DeleteDispatch<UnregisterPercolateResponse>(p)
 			);
 		}
 
@@ -24,7 +24,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<IUnregisterPercolatorRequest, DeleteRequestParameters, UnregisterPercolateResponse>(
 				unregisterPercolatorRequest,
-				(p, d) => this.RawDispatch.DeleteDispatch<UnregisterPercolateResponse>(p)
+				(p, d) => this.LowLevelDispatch.DeleteDispatch<UnregisterPercolateResponse>(p)
 			);
 		}
 
@@ -35,7 +35,7 @@ namespace Nest
 			selector = selector ?? (s => s);
 			return this.Dispatcher.DispatchAsync<UnregisterPercolatorDescriptor<T>, DeleteRequestParameters, UnregisterPercolateResponse, IUnregisterPercolateResponse>(
 					s => selector(s.Name(name)),
-					(p, d) => this.RawDispatch.DeleteDispatchAsync<UnregisterPercolateResponse>(p)
+					(p, d) => this.LowLevelDispatch.DeleteDispatchAsync<UnregisterPercolateResponse>(p)
 				);
 		}
 
@@ -44,7 +44,7 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<IUnregisterPercolatorRequest, DeleteRequestParameters, UnregisterPercolateResponse, IUnregisterPercolateResponse>(
 					unregisterPercolatorRequest,
-					(p, d) => this.RawDispatch.DeleteDispatchAsync<UnregisterPercolateResponse>(p)
+					(p, d) => this.LowLevelDispatch.DeleteDispatchAsync<UnregisterPercolateResponse>(p)
 				);
 		}
 

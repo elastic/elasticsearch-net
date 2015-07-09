@@ -10,15 +10,15 @@ namespace Nest
 	{
 		/// <inheritdoc />
 		public ICatResponse<CatThreadPoolRecord> CatThreadPool(Func<CatThreadPoolDescriptor, CatThreadPoolDescriptor> selector = null) =>
-			this.DoCat<CatThreadPoolDescriptor, CatThreadPoolRequestParameters, CatThreadPoolRecord>(selector, this.RawDispatch.CatThreadPoolDispatch<CatResponse<CatThreadPoolRecord>>);
+			this.DoCat<CatThreadPoolDescriptor, CatThreadPoolRequestParameters, CatThreadPoolRecord>(selector, this.LowLevelDispatch.CatThreadPoolDispatch<CatResponse<CatThreadPoolRecord>>);
 
 		public ICatResponse<CatThreadPoolRecord> CatThreadPool(ICatThreadPoolRequest request) =>
-			this.DoCat<ICatThreadPoolRequest, CatThreadPoolRequestParameters, CatThreadPoolRecord>(request, this.RawDispatch.CatThreadPoolDispatch<CatResponse<CatThreadPoolRecord>>);
+			this.DoCat<ICatThreadPoolRequest, CatThreadPoolRequestParameters, CatThreadPoolRecord>(request, this.LowLevelDispatch.CatThreadPoolDispatch<CatResponse<CatThreadPoolRecord>>);
 
 		public Task<ICatResponse<CatThreadPoolRecord>> CatThreadPoolAsync(Func<CatThreadPoolDescriptor, CatThreadPoolDescriptor> selector = null) =>
-			this.DoCatAsync<CatThreadPoolDescriptor, CatThreadPoolRequestParameters, CatThreadPoolRecord>(selector, this.RawDispatch.CatThreadPoolDispatchAsync<CatResponse<CatThreadPoolRecord>>);
+			this.DoCatAsync<CatThreadPoolDescriptor, CatThreadPoolRequestParameters, CatThreadPoolRecord>(selector, this.LowLevelDispatch.CatThreadPoolDispatchAsync<CatResponse<CatThreadPoolRecord>>);
 
 		public Task<ICatResponse<CatThreadPoolRecord>> CatThreadPoolAsync(ICatThreadPoolRequest request) =>
-			this.DoCatAsync<ICatThreadPoolRequest, CatThreadPoolRequestParameters, CatThreadPoolRecord>(request, this.RawDispatch.CatThreadPoolDispatchAsync<CatResponse<CatThreadPoolRecord>>);
+			this.DoCatAsync<ICatThreadPoolRequest, CatThreadPoolRequestParameters, CatThreadPoolRecord>(request, this.LowLevelDispatch.CatThreadPoolDispatchAsync<CatResponse<CatThreadPoolRecord>>);
 	}
 }

@@ -13,7 +13,7 @@ namespace Nest
 			var descriptor = createIndexSelector(new CreateIndexDescriptor(this._connectionSettings)); 
 			return this.Dispatcher.Dispatch<ICreateIndexRequest, CreateIndexRequestParameters, IndicesOperationResponse>(
 				descriptor,
-				(p, d) => this.RawDispatch.IndicesCreateDispatch<IndicesOperationResponse>(p, d.IndexSettings)
+				(p, d) => this.LowLevelDispatch.IndicesCreateDispatch<IndicesOperationResponse>(p, d.IndexSettings)
 			);
 		} 
 
@@ -22,7 +22,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<ICreateIndexRequest, CreateIndexRequestParameters, IndicesOperationResponse>(
 				createIndexRequest,
-				(p, d) => this.RawDispatch.IndicesCreateDispatch<IndicesOperationResponse>(p, d.IndexSettings)
+				(p, d) => this.LowLevelDispatch.IndicesCreateDispatch<IndicesOperationResponse>(p, d.IndexSettings)
 			);
 		} 
 
@@ -32,7 +32,7 @@ namespace Nest
 			var descriptor = createIndexSelector(new CreateIndexDescriptor(this._connectionSettings)); 
 			return this.Dispatcher.DispatchAsync<ICreateIndexRequest, CreateIndexRequestParameters, IndicesOperationResponse, IIndicesOperationResponse>(
 					descriptor,
-					(p, d) => this.RawDispatch.IndicesCreateDispatchAsync<IndicesOperationResponse>(p, d.IndexSettings)
+					(p, d) => this.LowLevelDispatch.IndicesCreateDispatchAsync<IndicesOperationResponse>(p, d.IndexSettings)
 				);
 		}
 
@@ -41,7 +41,7 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<ICreateIndexRequest, CreateIndexRequestParameters, IndicesOperationResponse, IIndicesOperationResponse>(
 				createIndexRequest,
-				(p, d) => this.RawDispatch.IndicesCreateDispatchAsync<IndicesOperationResponse>(p, d.IndexSettings)
+				(p, d) => this.LowLevelDispatch.IndicesCreateDispatchAsync<IndicesOperationResponse>(p, d.IndexSettings)
 			);
 		}
 

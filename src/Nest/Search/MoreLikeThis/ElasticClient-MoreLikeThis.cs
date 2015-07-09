@@ -17,7 +17,7 @@ namespace Nest
 				{
 					IMoreLikeThisRequest r = d;
 					CopySearchRequestParameters(d);
-					return this.RawDispatch.MltDispatch<SearchResponse<T>>(p, r.Search);
+					return this.LowLevelDispatch.MltDispatch<SearchResponse<T>>(p, r.Search);
 				}
 			);
 		}
@@ -31,7 +31,7 @@ namespace Nest
 				(p, d) =>
 				{
 					CopySearchRequestParameters(d);
-					return this.RawDispatch.MltDispatch<SearchResponse<T>>(p, d.Search);
+					return this.LowLevelDispatch.MltDispatch<SearchResponse<T>>(p, d.Search);
 				}
 			);
 		}
@@ -46,7 +46,7 @@ namespace Nest
 				{
 					IMoreLikeThisRequest r = d;
 					CopySearchRequestParameters(d);
-					return this.RawDispatch.MltDispatchAsync<SearchResponse<T>>(p, r.Search);
+					return this.LowLevelDispatch.MltDispatchAsync<SearchResponse<T>>(p, r.Search);
 				}
 			);
 		}
@@ -60,7 +60,7 @@ namespace Nest
 				(p, d) =>
 				{
 					CopySearchRequestParameters(d);
-					return this.RawDispatch.MltDispatchAsync<SearchResponse<T>>(p, d.Search);
+					return this.LowLevelDispatch.MltDispatchAsync<SearchResponse<T>>(p, d.Search);
 				}
 			);
 		}

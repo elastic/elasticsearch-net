@@ -19,7 +19,7 @@ namespace Nest
 			selector = selector ?? (s => s);
 			return this.Dispatcher.Dispatch<GetWarmerDescriptor, GetWarmerRequestParameters, WarmerResponse>(
 				d => selector(d.Name(name).AllIndices()),
-				(p, d) => this.RawDispatch.IndicesGetWarmerDispatch<WarmerResponse>(
+				(p, d) => this.LowLevelDispatch.IndicesGetWarmerDispatch<WarmerResponse>(
 					p.DeserializationState(new GetWarmerConverter(DeserializeWarmerResponse))
 				)
 			);
@@ -30,7 +30,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<IGetWarmerRequest, GetWarmerRequestParameters, WarmerResponse>(
 				getWarmerRequest,
-				(p, d) => this.RawDispatch.IndicesGetWarmerDispatch<WarmerResponse>(
+				(p, d) => this.LowLevelDispatch.IndicesGetWarmerDispatch<WarmerResponse>(
 					p.DeserializationState(new GetWarmerConverter(DeserializeWarmerResponse))
 				)
 			);
@@ -42,7 +42,7 @@ namespace Nest
 			selector = selector ?? (s => s);
 			return this.Dispatcher.DispatchAsync<GetWarmerDescriptor, GetWarmerRequestParameters, WarmerResponse, IWarmerResponse>(
 				d => selector(d.Name(name).AllIndices()),
-				(p, d) => this.RawDispatch.IndicesGetWarmerDispatchAsync<WarmerResponse>(
+				(p, d) => this.LowLevelDispatch.IndicesGetWarmerDispatchAsync<WarmerResponse>(
 					p.DeserializationState(new GetWarmerConverter(DeserializeWarmerResponse))
 				)
 			);
@@ -53,7 +53,7 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<IGetWarmerRequest, GetWarmerRequestParameters, WarmerResponse, IWarmerResponse>(
 				getWarmerRequest,
-				(p, d) => this.RawDispatch.IndicesGetWarmerDispatchAsync<WarmerResponse>(
+				(p, d) => this.LowLevelDispatch.IndicesGetWarmerDispatchAsync<WarmerResponse>(
 					p.DeserializationState(new GetWarmerConverter(DeserializeWarmerResponse))
 				)
 			);

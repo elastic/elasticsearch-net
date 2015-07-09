@@ -13,7 +13,7 @@ namespace Nest
 			clusterHealthSelector = clusterHealthSelector ?? (s => s);
 			return this.Dispatcher.Dispatch<ClusterHealthDescriptor, ClusterHealthRequestParameters, HealthResponse>(
 				clusterHealthSelector,
-				(p, d) => this.RawDispatch.ClusterHealthDispatch<HealthResponse>(p)
+				(p, d) => this.LowLevelDispatch.ClusterHealthDispatch<HealthResponse>(p)
 			);
 		}
 
@@ -22,7 +22,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<IClusterHealthRequest, ClusterHealthRequestParameters, HealthResponse>(
 				clusterHealthRequest,
-				(p, d) => this.RawDispatch.ClusterHealthDispatch<HealthResponse>(p)
+				(p, d) => this.LowLevelDispatch.ClusterHealthDispatch<HealthResponse>(p)
 			);
 		}
 
@@ -32,7 +32,7 @@ namespace Nest
 			clusterHealthSelector = clusterHealthSelector ?? (s => s);
 			return this.Dispatcher.DispatchAsync<ClusterHealthDescriptor, ClusterHealthRequestParameters, HealthResponse, IHealthResponse>(
 				clusterHealthSelector,
-				(p, d) => this.RawDispatch.ClusterHealthDispatchAsync<HealthResponse>(p)
+				(p, d) => this.LowLevelDispatch.ClusterHealthDispatchAsync<HealthResponse>(p)
 			);
 		}
 
@@ -41,7 +41,7 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<IClusterHealthRequest, ClusterHealthRequestParameters, HealthResponse, IHealthResponse>(
 				clusterHealthRequest,
-				(p, d) => this.RawDispatch.ClusterHealthDispatchAsync<HealthResponse>(p)
+				(p, d) => this.LowLevelDispatch.ClusterHealthDispatchAsync<HealthResponse>(p)
 			);
 		}
 

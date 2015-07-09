@@ -21,7 +21,7 @@ namespace Nest
 				(p, d) => 
 				{	
 					SetRequestTimeout(d);
-					return this.RawDispatch.PingDispatch<PingResponse>(
+					return this.LowLevelDispatch.PingDispatch<PingResponse>(
 						p.DeserializationState(new PingConverter(DeserializePingResponse))
 					);
 				}
@@ -38,7 +38,7 @@ namespace Nest
 				(p, d) =>
 				{
 					SetRequestTimeout(d);
-					return this.RawDispatch.PingDispatchAsync<PingResponse>(
+					return this.LowLevelDispatch.PingDispatchAsync<PingResponse>(
 					   p.DeserializationState(new PingConverter(DeserializePingResponse))
 					);
 				}
@@ -53,7 +53,7 @@ namespace Nest
 				(p, d) =>
 				{
 					SetRequestTimeout(d);
-					return this.RawDispatch.PingDispatch<PingResponse>(
+					return this.LowLevelDispatch.PingDispatch<PingResponse>(
 						p.DeserializationState(new PingConverter(DeserializePingResponse))
 					);
 				}
@@ -68,7 +68,7 @@ namespace Nest
 				(p, d) =>
 				{
 					SetRequestTimeout(d);
-					return this.RawDispatch.PingDispatchAsync<PingResponse>(
+					return this.LowLevelDispatch.PingDispatchAsync<PingResponse>(
 						p.DeserializationState(new PingConverter(DeserializePingResponse))
 					);
 				}

@@ -13,7 +13,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<GetDescriptor<T>, GetRequestParameters, GetResponse<T>>(
 				getSelector,
-				(p, d) => this.RawDispatch.GetDispatch<GetResponse<T>>(p)
+				(p, d) => this.LowLevelDispatch.GetDispatch<GetResponse<T>>(p)
 			);
 		}
 
@@ -22,7 +22,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<IGetRequest, GetRequestParameters, GetResponse<T>>(
 				getRequest,
-				(p, d) => this.RawDispatch.GetDispatch<GetResponse<T>>(p)
+				(p, d) => this.LowLevelDispatch.GetDispatch<GetResponse<T>>(p)
 			);
 		}
 
@@ -31,7 +31,7 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<GetDescriptor<T>, GetRequestParameters, GetResponse<T>, IGetResponse<T>>(
 				getSelector,
-				(p, d) => this.RawDispatch.GetDispatchAsync<GetResponse<T>>(p)
+				(p, d) => this.LowLevelDispatch.GetDispatchAsync<GetResponse<T>>(p)
 			);
 		}
 
@@ -40,7 +40,7 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<IGetRequest, GetRequestParameters, GetResponse<T>, IGetResponse<T>>(
 				getRequest,
-				(p, d) => this.RawDispatch.GetDispatchAsync<GetResponse<T>>(p)
+				(p, d) => this.LowLevelDispatch.GetDispatchAsync<GetResponse<T>>(p)
 			);
 		}
 

@@ -14,7 +14,7 @@ namespace Nest
 			selector = selector ?? (s => s);
 			return this.Dispatcher.Dispatch<SnapshotDescriptor, SnapshotRequestParameters, SnapshotResponse>(
 				s => selector(s.Snapshot(snapshotName).Repository(repository)),
-				(p, d) => this.RawDispatch.SnapshotCreateDispatch<SnapshotResponse>(p, d)
+				(p, d) => this.LowLevelDispatch.SnapshotCreateDispatch<SnapshotResponse>(p, d)
 			);
 		}
 
@@ -23,7 +23,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<ISnapshotRequest, SnapshotRequestParameters, SnapshotResponse>(
 				snapshotRequest,
-				(p, d) => this.RawDispatch.SnapshotCreateDispatch<SnapshotResponse>(p, d)
+				(p, d) => this.LowLevelDispatch.SnapshotCreateDispatch<SnapshotResponse>(p, d)
 			);
 		}
 
@@ -35,7 +35,7 @@ namespace Nest
 			selector = selector ?? (s => s);
 			return this.Dispatcher.DispatchAsync<SnapshotDescriptor, SnapshotRequestParameters, SnapshotResponse, ISnapshotResponse>(
 				s => selector(s.Snapshot(snapshotName).Repository(repository)),
-				(p, d) => this.RawDispatch.SnapshotCreateDispatchAsync<SnapshotResponse>(p, d)
+				(p, d) => this.LowLevelDispatch.SnapshotCreateDispatchAsync<SnapshotResponse>(p, d)
 			);
 		}
 
@@ -44,7 +44,7 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<ISnapshotRequest, SnapshotRequestParameters, SnapshotResponse, ISnapshotResponse>(
 				snapshotRequest,
-				(p, d) => this.RawDispatch.SnapshotCreateDispatchAsync<SnapshotResponse>(p, d)
+				(p, d) => this.LowLevelDispatch.SnapshotCreateDispatchAsync<SnapshotResponse>(p, d)
 			);
 		}
 
