@@ -1,10 +1,5 @@
----
-template: layout.jade
-title: x
-menusection: concepts
-menuitem: breaking-changes
----
-```
+[source, csharp]
+----
 var client = this.GetClient();
 var dict = new Dictionary<string, TResponse>
 				{
@@ -42,4 +37,4 @@ var expectedKeyValues = expectedUri.Query.Split('&')
 				.SelectMany(v => v.Split('='))
 				.ToDictionary(k => k[0], v => v);
 clientKeyValues.Should().Equal(expectedKeyValues);
-```
+----

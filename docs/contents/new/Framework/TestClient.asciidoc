@@ -1,10 +1,5 @@
----
-template: layout.jade
-title: x
-menusection: concepts
-menuitem: breaking-changes
----
-```
+[source, csharp]
+----
 var defaultSettings = new ConnectionSettings((CreateBaseUri(port)), "defaultindex")
 				.InferMappingFor<Project>(map=>map
 					.IndexName("project")
@@ -23,4 +18,4 @@ var settings = modifySettings != null ? modifySettings(defaultSettings) : defaul
 var host = "localhost";
 host = "ipv4.fiddler";
 var uri = new UriBuilder("http", host, port.GetValueOrDefault(9200)).Uri;
-```
+----

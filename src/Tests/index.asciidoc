@@ -1,11 +1,4 @@
-﻿---
-template: index.jade
-title: Introduction
-menusection: concepts
-menuitem: introduction
----
-
-# Introduction
+﻿# Introduction
 
 You've reached the documentation page for `Elasticsearch.Net` and `NEST`. The two official .NET clients for Elasticsearch. So why two clients I hear you say?
 
@@ -24,7 +17,6 @@ Please read the getting started guide for both.
 * [Kiln](http://www.fogcreek.com/kiln/) FogCreek's version control & code review tooling. 
   They are so pleased with Elasticsearch that [they made a video about how pleased they are!](http://blog.fogcreek.com/kiln-powered-by-elasticsearch/)
 
-
 ## Other resources
 
 [@joelabrahamsson](http://twitter.com/joelabrahamsson) wrote a great [intro into elasticsearch on .NET](http://joelabrahamsson.com/entry/extending-aspnet-mvc-music-store-with-elasticsearch)
@@ -40,8 +32,7 @@ All of these are more then welcome on the github issues pages! We try to to at l
 We also monitor question tagged with ['nest' on stackoverflow](http://stackoverflow.com/questions/tagged/nest) or 
 ['elasticsearch-net' on stackoverflow](http://stackoverflow.com/questions/tagged/elasticsearch-net)
 
-
-## License
+# License
 
 This software is licensed under the Apache 2 license, quoted below.
 

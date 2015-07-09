@@ -1,10 +1,5 @@
----
-template: layout.jade
-title: x
-menusection: concepts
-menuitem: breaking-changes
----
-```
+[source, csharp]
+----
 serialized = null;
 serialized = this.Serialize(o);
 var actualJson = JObject.Parse(serialized);
@@ -14,4 +9,4 @@ var bytes = TestClient.GetClient().Serializer.Serialize(o);
 string serialized;
 var oAgain = this.Deserialize<T>(serialized);
 this.SerializesAndMatches(oAgain, out serialized);
-```
+----

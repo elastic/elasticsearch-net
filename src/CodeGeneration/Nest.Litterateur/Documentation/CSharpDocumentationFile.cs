@@ -31,10 +31,10 @@ namespace Nest.Litterateur.Documentation
 			var extension = fileLocation?.Extension;
 			switch (extension)
 			{
-				case "cs":
+				case ".cs":
 					return new CSharpDocumentationFile(fileLocation);
-				case "md":
-					return new MarkdownDocumentationFile(fileLocation);
+				case ".asciidoc":
+					return new AsciiDocumentationFile(fileLocation);
 			}
 			throw new ArgumentOutOfRangeException(nameof(fileLocation),
 				$"We currently only support cs and md files, you provided: {extension}");
@@ -44,7 +44,7 @@ namespace Nest.Litterateur.Documentation
 		{
 			var testFullPath = this.FileLocation.FullName;
 			var testInDocumenationFolder = 
-				Regex.Replace(testFullPath, @"(^.+\\Tests\\|\." + this.Extension + "@$)", "") + ".md";
+				Regex.Replace(testFullPath, @"(^.+\\Tests\\|\" + this.Extension + "$)", "") + ".asciidoc";
 
 			var documenationTargetPath = Path.GetFullPath(Path.Combine(DocFolder, testInDocumenationFolder));
 			var fileInfo = new FileInfo(documenationTargetPath);
@@ -53,15 +53,15 @@ namespace Nest.Litterateur.Documentation
 		}
 	}
 
-	class MarkdownDocumentationFile : DocumentationFile
+	class AsciiDocumentationFile : DocumentationFile
 	{
-		public MarkdownDocumentationFile(FileInfo fileLocation) : base(fileLocation) { }
+		public AsciiDocumentationFile(FileInfo fileLocation) : base(fileLocation) { }
 
 		public override void SaveToDocumentationFolder()
 		{
 			//we simply do a copy of the markdown file
 			var docFileName = this.CreateDocumentationLocation();
-			this.FileLocation.CopyTo(docFileName.FullName);
+			this.FileLocation.CopyTo(docFileName.FullName, true);
 		}
 	}
 
@@ -74,23 +74,9 @@ namespace Nest.Litterateur.Documentation
 
 		}
 
-		private string RenderBlocksToDocumentation(IList<IDocumentationBlock> blocks)
+		private string RenderBlocksToDocumentation(IEnumerable<IDocumentationBlock> blocks)
 		{
-			/*
----
-template: layout.jade
-title: Breaking Changes
-menusection: concepts
-menuitem: breaking-changes
----*/
-
 			var sb = new StringBuilder();
-			sb.AppendLine("---");
-			sb.AppendLine("template: layout.jade");
-			sb.AppendLine("title: x");
-			sb.AppendLine("menusection: concepts");
-			sb.AppendLine("menuitem: breaking-changes");
-			sb.AppendLine("---");
 			foreach (var block in blocks)
 			{
 				if (block is TextBlock)
@@ -99,9 +85,10 @@ menuitem: breaking-changes
 				}
 				else if (block is CodeBlock)
 				{
-					sb.AppendLine("```");
+					sb.AppendLine("[source, csharp]");
+					sb.AppendLine("----");
 					sb.AppendLine(block.Value);
-					sb.AppendLine("```");
+					sb.AppendLine("----");
 				}
 			}
 			return sb.ToString();

@@ -1,9 +1,3 @@
----
-template: layout.jade
-title: x
-menusection: concepts
-menuitem: breaking-changes
----
 
 
 Provides support for asynchronous lazy initialization. This type is fully threadsafe.
@@ -58,6 +52,7 @@ Starts the asynchronous initialization, if it has not already started.
 
 
 
-```
+[source, csharp]
+----
 var unused = instance.Value;
-```
+----

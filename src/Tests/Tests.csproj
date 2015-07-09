@@ -96,6 +96,7 @@
     <Compile Include="Framework\TestClient.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="index.asciidoc" />
     <None Include="paket.references" />
   </ItemGroup>
   <ItemGroup>

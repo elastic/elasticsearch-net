@@ -1,10 +1,5 @@
----
-template: layout.jade
-title: x
-menusection: concepts
-menuitem: breaking-changes
----
-```
+[source, csharp]
+----
 this.CreateIndicesAndMappings();
 var putTemplateResult = this.Client.PutTemplate("raw_fields", p => p
 				.Template("*") //match on all created indices
@@ -61,4 +56,4 @@ var createProjectIndex = this.Client.CreateIndex(c => c
 createProjectIndex.IsValid.Should().BeTrue();
 this.Client.IndexMany(Project.Projects);
 this.Client.Refresh(r=>r.Index<Project>());
-```
+----
