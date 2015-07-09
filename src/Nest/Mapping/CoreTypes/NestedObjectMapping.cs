@@ -71,12 +71,12 @@ namespace Nest
 			if (mapping == null)
 				return this;
 			if (this._Mapping.Properties == null)
-				this._Mapping.Properties = new Dictionary<PropertyName, IElasticType>();
+				this._Mapping.Properties = new Dictionary<FieldName, IElasticType>();
 
 			var properties = mapping.Properties;
 			foreach (var p in properties)
 			{
-				var key = this.Infer.PropertyName(p.Key);
+				var key = this.Infer.FieldName(p.Key);
 				this._Mapping.Properties[key] = p.Value;
 			}
 			return this;
@@ -122,7 +122,7 @@ namespace Nest
 			propertiesSelector.ThrowIfNull("propertiesSelector");
 			var properties = propertiesSelector(new PropertiesDescriptor<TChild>(this._connectionSettings));
 			if (this._Mapping.Properties == null)
-				this._Mapping.Properties = new Dictionary<PropertyName, IElasticType>();
+				this._Mapping.Properties = new Dictionary<FieldName, IElasticType>();
 
 			foreach (var t in properties._Deletes)
 			{

@@ -72,10 +72,10 @@ namespace Nest
 			return tmp;
 		}
 
-		public TReturn GetPropValue<TReturn>(JObject jObject, string propertyName)
+		public TReturn GetPropValue<TReturn>(JObject jObject, string FieldName)
 		{
 			JToken jToken = null;
-			return !jObject.TryGetValue(propertyName, out jToken) 
+			return !jObject.TryGetValue(FieldName, out jToken) 
 				? default(TReturn) 
 				: jToken.Value<TReturn>();
 		}
@@ -94,7 +94,7 @@ namespace Nest
 			if (contract == null)
 				return;
 
-			var field = contract.Infer.PropertyPath(fieldName);
+			var field = contract.Infer.FieldName(fieldName);
 			if (field.IsNullOrEmpty())
 				return;
 			

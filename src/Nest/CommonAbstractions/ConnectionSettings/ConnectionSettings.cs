@@ -74,8 +74,8 @@ namespace Nest
 		private FluentDictionary<Type, string> _defaultTypeNames;
 		FluentDictionary<Type, string> IConnectionSettingsValues.DefaultTypeNames => _defaultTypeNames;
 
-		private Func<string, string> _defaultPropertyNameInferrer;
-		Func<string, string> IConnectionSettingsValues.DefaultPropertyNameInferrer => _defaultPropertyNameInferrer;
+		private Func<string, string> _defaultFieldNameInferrer;
+		Func<string, string> IConnectionSettingsValues.DefaultFieldNameInferrer => _defaultFieldNameInferrer;
 
 		//Serializer settings
 		private Action<JsonSerializerSettings> _modifyJsonSerializerSettings;
@@ -97,7 +97,7 @@ namespace Nest
 				this.SetDefaultIndex(defaultIndex);
 
 			this._defaultTypeNameInferrer = (t => t.Name.ToLowerInvariant());
-			this._defaultPropertyNameInferrer = (p => p.ToCamelCase());
+			this._defaultFieldNameInferrer = (p => p.ToCamelCase());
 			this._defaultIndices = new FluentDictionary<Type, string>();
 			this._defaultTypeNames = new FluentDictionary<Type, string>();
 
@@ -160,15 +160,15 @@ namespace Nest
 		}
 
 		/// <summary>
-		/// By default NEST camelCases property names (EmailAddress => emailAddress) that do not have an explicit propertyname 
+		/// By default NEST camelCases property names (EmailAddress => emailAddress) that do not have an explicit FieldName 
 		/// either via an ElasticProperty attribute or because they are part of Dictionary where the keys should be treated verbatim.
 		/// <pre>
-		/// Here you can register a function that transforms propertynames (default casing, pre- or suffixing)
+		/// Here you can register a function that transforms FieldNames (default casing, pre- or suffixing)
 		/// </pre>
 		/// </summary>
-		public TConnectionSettings SetDefaultPropertyNameInferrer(Func<string, string> propertyNameSelector)
+		public TConnectionSettings SetDefaultFieldNameInferrer(Func<string, string> FieldNameSelector)
 		{
-			this._defaultPropertyNameInferrer = propertyNameSelector;
+			this._defaultFieldNameInferrer = FieldNameSelector;
 			return (TConnectionSettings)this;
 		}
 
@@ -206,18 +206,18 @@ namespace Nest
 			objectPath.ThrowIfNull("objectPath");
 
 			var memberInfo = new MemberInfoResolver(this, objectPath);
-			var propertyName = memberInfo.Members.Single().Name;
+			var FieldName = memberInfo.Members.Single().Name;
 
 			if (this._idProperties.ContainsKey(typeof(TDocument)))
 			{
-				if (this._idProperties[typeof(TDocument)].Equals(propertyName))
+				if (this._idProperties[typeof(TDocument)].Equals(FieldName))
 					return (TConnectionSettings)this;
 
 				throw new ArgumentException("Cannot map '{0}' as the id property for type '{1}': it already has '{2}' mapped."
-					.F(propertyName, typeof(TDocument).Name, this._idProperties[typeof(TDocument)]));
+					.F(FieldName, typeof(TDocument).Name, this._idProperties[typeof(TDocument)]));
 			}
 
-			this._idProperties.Add(typeof(TDocument), propertyName);
+			this._idProperties.Add(typeof(TDocument), FieldName);
 
 			return (TConnectionSettings)this;
 		}
@@ -240,7 +240,7 @@ namespace Nest
 				var e = mapping.Property;
 				var memberInfoResolver = new MemberInfoResolver(this, e);
 				if (memberInfoResolver.Members.Count > 1)
-					throw new ArgumentException("MapPropertyNameFor can only map direct properties");
+					throw new ArgumentException("MapFieldNameFor can only map direct properties");
 
 				if (memberInfoResolver.Members.Count < 1)
 					throw new ArgumentException("Expression {0} does contain any member access".F(e));

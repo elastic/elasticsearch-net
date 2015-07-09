@@ -16,21 +16,21 @@ namespace Nest
 		public string TransportAddress { get; internal set; }
 
 		[JsonProperty("attributes")]
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]
 		public Dictionary<string, string> Attributes { get; internal set; }
 	}
 
 	public class RoutingTableState
 	{
 		[JsonProperty("indices")]
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]
 		public Dictionary<string, IndexRoutingTable> Indices { get; internal set; }
 	}
 
 	public class IndexRoutingTable
 	{
 		[JsonProperty("shards")]
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]
 		public Dictionary<string, List<RoutingShard>> Shards { get; internal set; }
 	}
 
@@ -74,7 +74,7 @@ namespace Nest
 		//public ?? Templates { get; internal set; }
 
 		[JsonProperty("indices")]
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]
 		public Dictionary<string, MetadataIndexState> Indices { get; internal set; }
 	}
 
@@ -84,11 +84,11 @@ namespace Nest
 		public string State { get; internal set; }
 
 		[JsonProperty("settings")]
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]
 		public DynamicDictionary Settings { get; internal set; }
 
 		[JsonProperty("mappings")]
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]
 		public Dictionary<string, ObjectMapping> Mappings { get; internal set; }
 
 		[JsonProperty("aliases")]

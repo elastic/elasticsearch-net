@@ -16,7 +16,7 @@ namespace Nest
 	public class DeleteByQueryResponse : BaseResponse, IDeleteByQueryResponse
 	{
 		[JsonProperty("_indices")]
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]
 		public IDictionary<string, DeleteByQueryIndices> Indices { get; set; }
 	}
 

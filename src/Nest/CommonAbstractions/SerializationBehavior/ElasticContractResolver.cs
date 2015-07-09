@@ -43,7 +43,7 @@ namespace Nest.Resolvers
 				contract.Converter = new CharFilterCollectionConverter();
 
 			else if (typeof(IDictionary).IsAssignableFrom(objectType))
-				contract.Converter = new DictionaryKeysAreNotPropertyNamesJsonConverter();
+				contract.Converter = new DictionaryKeysAreNotFieldNamesJsonConverter();
 
 			else if (objectType == typeof(IAggregation))
 				contract.Converter = new AggregationConverter();
@@ -57,11 +57,11 @@ namespace Nest.Resolvers
 			else if (objectType == typeof(MultiGetResponse))
 				contract.Converter = new MultiGetHitConverter();
 
-			else if (objectType == typeof(PropertyName))
-				contract.Converter = new PropertyNameMarkerConverter(this.ConnectionSettings);
+			else if (objectType == typeof(FieldName))
+				contract.Converter = new FieldNameConverter(this.ConnectionSettings);
 			
-			else if (objectType == typeof(PropertyPath))
-				contract.Converter = new PropertyPathMarkerConverter(this.ConnectionSettings);
+			else if (objectType == typeof(FieldName))
+				contract.Converter = new FieldNameConverter(this.ConnectionSettings);
 
 			else if (objectType == typeof(SuggestResponse))
 				contract.Converter = new SuggestResponseConverter();
@@ -153,12 +153,12 @@ namespace Nest.Resolvers
 			return jsonProperties.Concat(defaultProperties).ToList();
 		}
 
-		protected override string ResolvePropertyName(string propertyName)
+		protected override string ResolvePropertyName(string FieldName)
 		{
-			if (this.ConnectionSettings.DefaultPropertyNameInferrer != null)
-				return this.ConnectionSettings.DefaultPropertyNameInferrer(propertyName);
+			if (this.ConnectionSettings.DefaultFieldNameInferrer != null)
+				return this.ConnectionSettings.DefaultFieldNameInferrer(FieldName);
 
-			return propertyName.ToCamelCase();
+			return FieldName.ToCamelCase();
 		}
 
 		protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)

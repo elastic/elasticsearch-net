@@ -10,7 +10,7 @@ namespace Nest
 	[JsonObject(MemberSerialization.OptIn)]
 	public class ObjectMapping : IElasticType
 	{
-		public PropertyName Name { get; set; }
+		public FieldName Name { get; set; }
 
 		[JsonProperty("type")]
 		public virtual TypeName Type
@@ -36,7 +36,7 @@ namespace Nest
 
 		[JsonProperty("properties", TypeNameHandling = TypeNameHandling.None)]
 		[JsonConverter(typeof(ElasticTypesConverter))]
-		public IDictionary<PropertyName, IElasticType> Properties { get; set; }
+		public IDictionary<FieldName, IElasticType> Properties { get; set; }
 
 	}
 
@@ -83,7 +83,7 @@ namespace Nest
 				return this;
 			var properties = mapping.Properties;
 			if (this._Mapping.Properties == null)
-				this._Mapping.Properties = new Dictionary<PropertyName, IElasticType>();
+				this._Mapping.Properties = new Dictionary<FieldName, IElasticType>();
 
 			foreach (var p in properties)
 			{
@@ -122,7 +122,7 @@ namespace Nest
 			propertiesSelector.ThrowIfNull("propertiesSelector");
 			var properties = propertiesSelector(new PropertiesDescriptor<TChild>(this._connectionSettings));
 			if (this._Mapping.Properties == null)
-				this._Mapping.Properties = new Dictionary<PropertyName, IElasticType>();
+				this._Mapping.Properties = new Dictionary<FieldName, IElasticType>();
 
 			foreach (var t in properties._Deletes)
 			{
@@ -130,7 +130,7 @@ namespace Nest
 			}
 			foreach (var p in properties.Properties)
 			{
-				var key = this.Infer.PropertyName(p.Key);
+				var key = this.Infer.FieldName(p.Key);
 				_Mapping.Properties[key] = p.Value;
 			}
 			return this;

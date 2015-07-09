@@ -18,7 +18,7 @@ namespace Nest
 		[JsonProperty("doc")]
 		public object Document { get; set; }
 		[JsonProperty("fields")]
-		public IEnumerable<PropertyPath> Fields { get; set; }
+		public IEnumerable<FieldName> Fields { get; set; }
 		[JsonProperty("offsets")]
 		public bool? Offsets { get; set; }
 		[JsonProperty("payloads")]
@@ -67,11 +67,11 @@ namespace Nest
 
 		public MultiTermVectorDocumentDescriptor<T> Fields(params string[] fields)
 		{
-			return this.SetDocValue(d => d.Document.Fields = fields.Select(f => (PropertyPath)f).ToList());
+			return this.SetDocValue(d => d.Document.Fields = fields.Select(f => (FieldName)f).ToList());
 		} 
 		public MultiTermVectorDocumentDescriptor<T> Fields(params Expression<Func<T, object>>[] fields)
 		{
-			return this.SetDocValue(d => d.Document.Fields = fields.Select(f => (PropertyPath)f).ToList());
+			return this.SetDocValue(d => d.Document.Fields = fields.Select(f => (FieldName)f).ToList());
 		} 
 		public MultiTermVectorDocumentDescriptor<T> Fields(Func<FluentFieldList<T>, FluentFieldList<T>>  fields)
 		{

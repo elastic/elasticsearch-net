@@ -19,7 +19,7 @@ namespace Nest
 		string Id { get; set; }
 		
 		[JsonProperty("path")]
-		PropertyPath Path { get; set; }
+		FieldName Path { get; set; }
 	}
 
 	public class ExternalFieldDeclaration : IExternalFieldDeclaration
@@ -27,7 +27,7 @@ namespace Nest
 		public IndexName Index { get; set; }
 		public TypeName Type { get; set; }
 		public string Id { get; set; }
-		public PropertyPath Path { get; set; }
+		public FieldName Path { get; set; }
 	}
 
 	public class ExternalFieldDeclarationDescriptor<T> : IExternalFieldDeclaration 
@@ -43,7 +43,7 @@ namespace Nest
 		
 		string IExternalFieldDeclaration.Id { get; set; }
 		
-		PropertyPath IExternalFieldDeclaration.Path { get; set; }
+		FieldName IExternalFieldDeclaration.Path { get; set; }
 
 		public ExternalFieldDeclarationDescriptor()
 		{

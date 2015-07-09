@@ -61,7 +61,7 @@ namespace Nest
 		Operator? Operator { get; set; }
 
 		[JsonProperty(PropertyName = "fields")]
-		IEnumerable<PropertyPath> Fields { get; set; }
+		IEnumerable<FieldName> Fields { get; set; }
 	}
 
 	public class MultiMatchQuery : QueryBase, IMultiMatchQuery
@@ -82,7 +82,7 @@ namespace Nest
 		public double? TieBreaker { get; set; }
 		public string MinimumShouldMatch { get; set; }
 		public Operator? Operator { get; set; }
-		public IEnumerable<PropertyPath> Fields { get; set; }
+		public IEnumerable<FieldName> Fields { get; set; }
 
 		protected override void WrapInContainer(IQueryContainer c) => c.MultiMatch = this;
 
@@ -115,21 +115,21 @@ namespace Nest
 		double? IMultiMatchQuery.TieBreaker { get; set; }
 		string IMultiMatchQuery.MinimumShouldMatch { get; set; }
 		Operator? IMultiMatchQuery.Operator { get; set; }
-		IEnumerable<PropertyPath> IMultiMatchQuery.Fields { get; set; }
+		IEnumerable<FieldName> IMultiMatchQuery.Fields { get; set; }
 
 		public MultiMatchQueryDescriptor<T> Name(string name) => _assign(a => a.Name = name);
 
 		public MultiMatchQueryDescriptor<T> OnFields(IEnumerable<string> fields) =>
-			_assign(a => a.Fields = fields?.Select(f => (PropertyPath)f).ToListOrNullIfEmpty());
+			_assign(a => a.Fields = fields?.Select(f => (FieldName)f).ToListOrNullIfEmpty());
 
 		public MultiMatchQueryDescriptor<T> OnFields(params Expression<Func<T, object>>[] objectPaths) =>
-			_assign(a => a.Fields = objectPaths?.Select(f => (PropertyPath)f).ToListOrNullIfEmpty());
+			_assign(a => a.Fields = objectPaths?.Select(f => (FieldName)f).ToListOrNullIfEmpty());
 
 		public MultiMatchQueryDescriptor<T> OnFieldsWithBoost(Func<
 			FluentDictionary<Expression<Func<T, object>>, double?>, IDictionary<Expression<Func<T, object>>, double?>> boostableSelector) =>
 				_assign(a => a.Fields = boostableSelector?
 					.Invoke(new FluentDictionary<Expression<Func<T, object>>, double?>())
-					.Select(o => PropertyPath.Create(o.Key, o.Value))
+					.Select(o => FieldName.Create(o.Key, o.Value))
 					.ToListOrNullIfEmpty()
 				);
 
@@ -137,7 +137,7 @@ namespace Nest
 			Func<FluentDictionary<string, double?>, IDictionary<Expression<Func<T, object>>, double?>> boostableSelector) =>
 				_assign(a => a.Fields = boostableSelector?
 					.Invoke(new FluentDictionary<string, double?>())
-					.Select(o => PropertyPath.Create(o.Key, o.Value))
+					.Select(o => FieldName.Create(o.Key, o.Value))
 					.ToListOrNullIfEmpty()
 				);
 

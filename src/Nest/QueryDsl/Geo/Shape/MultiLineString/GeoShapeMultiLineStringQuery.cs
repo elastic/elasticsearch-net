@@ -30,7 +30,7 @@ namespace Nest
 		private IGeoShapeMultiLineStringQuery Self => this;
 		string IQuery.Name { get; set; }
 		bool IQuery.Conditionless => GeoShapeMultiLineStringQuery.IsConditionless(this);
-		PropertyPath IFieldNameQuery.Field { get; set; }
+		FieldName IFieldNameQuery.Field { get; set; }
 		IMultiLineStringGeoShape IGeoShapeMultiLineStringQuery.Shape { get; set; }
 
 		public GeoShapeMultiLineStringQueryDescriptor<T> Name(string name)

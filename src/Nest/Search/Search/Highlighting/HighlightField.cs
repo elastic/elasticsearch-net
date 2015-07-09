@@ -11,7 +11,7 @@ namespace Nest
 	[JsonConverter(typeof(ReadAsTypeConverter<HighlightField>))]
 	public interface IHighlightField
 	{
-		PropertyPath Field { get; set; }
+		FieldName Field { get; set; }
 
 		[JsonProperty("pre_tags")]
 		IEnumerable<string> PreTags { get; set; }
@@ -56,12 +56,12 @@ namespace Nest
 		bool? ForceSource { get; set; }
 
 		[JsonProperty("matched_fields")]
-		IEnumerable<PropertyPath> MatchedFields { get; set; }
+		IEnumerable<FieldName> MatchedFields { get; set; }
 	}
 
 	public class HighlightField : IHighlightField
 	{
-		public PropertyPath Field { get; set; }
+		public FieldName Field { get; set; }
 		public IEnumerable<string> PreTags { get; set; }
 		public IEnumerable<string> PostTags { get; set; }
 		public int? FragmentSize { get; set; }
@@ -76,14 +76,14 @@ namespace Nest
 		public string BoundaryChars { get; set; }
 		public HighlighterType Type { get; set; }
 		public bool? ForceSource { get; set; }
-		public IEnumerable<PropertyPath> MatchedFields { get; set; }
+		public IEnumerable<FieldName> MatchedFields { get; set; }
 	}
 
 	public class HighlightFieldDescriptor<T> : IHighlightField where T : class
 	{
 		protected IHighlightField Self => this;
 
-		PropertyPath IHighlightField.Field { get; set; }
+		FieldName IHighlightField.Field { get; set; }
 		
 		IEnumerable<string> IHighlightField.PreTags { get; set; }
 
@@ -113,7 +113,7 @@ namespace Nest
 
 		bool? IHighlightField.ForceSource { get; set; }
 
-		IEnumerable<PropertyPath> IHighlightField.MatchedFields { get; set; }
+		IEnumerable<FieldName> IHighlightField.MatchedFields { get; set; }
 		
 		public HighlightFieldDescriptor<T> OnField(string field)
 		{
@@ -211,12 +211,12 @@ namespace Nest
 		}
 		public HighlightFieldDescriptor<T> MatchedFields(IEnumerable<string> fields)
 		{
-			Self.MatchedFields = fields.Select(f => (PropertyPath)f);
+			Self.MatchedFields = fields.Select(f => (FieldName)f);
 			return this;
 		}
 		public HighlightFieldDescriptor<T> MatchedFields(params Expression<Func<T, object>>[] objectPaths)
 		{
-			Self.MatchedFields = objectPaths.Select(f => (PropertyPath)f);
+			Self.MatchedFields = objectPaths.Select(f => (FieldName)f);
 			return this;
 		}
 	}

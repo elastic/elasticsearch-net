@@ -26,7 +26,7 @@ namespace Nest
 		private IExistsQuery Self => this;
 		string IQuery.Name { get; set; }
 		bool IQuery.Conditionless => ExistsQuery.IsConditionless(this);
-		PropertyPath IFieldNameQuery.Field { get; set;}
+		FieldName IFieldNameQuery.Field { get; set;}
 
 		public ExistsQueryDescriptor<T> Field (string field)
 		{

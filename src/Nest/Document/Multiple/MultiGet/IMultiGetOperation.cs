@@ -19,7 +19,7 @@ namespace Nest
 		string Id { get; set; }
 		
 		[JsonProperty(PropertyName = "fields")]
-		IList<PropertyPath> Fields { get; set; }
+		IList<FieldName> Fields { get; set; }
 		
 		[JsonProperty(PropertyName = "_routing")]
 		string Routing { get; set; }
@@ -38,7 +38,7 @@ namespace Nest
 		// TODO: For 2.0, we should consider decoupling IMultiGetOperation from 
 		// MoreLikeThisQuery and have a dedicatd MoreLikeThisDocument object.
 		[JsonProperty(PropertyName = "per_field_analyzer")]
-		IDictionary<PropertyPath, string> PerFieldAnalyzer { get; set; }
+		IDictionary<FieldName, string> PerFieldAnalyzer { get; set; }
 
 		Type ClrType { get; }
 	}

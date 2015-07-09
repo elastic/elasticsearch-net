@@ -65,7 +65,7 @@ namespace Tests.Search.Request
 					{
 						PreTags = new [] { "<tag1>" },
 						PostTags = new [] { "</tag1>" },
-						Fields = new Dictionary<PropertyPath, IHighlightField>
+						Fields = new Dictionary<FieldName, IHighlightField>
 						{
 							{ "name", new HighlightField
 								{

@@ -23,7 +23,7 @@ namespace Nest
 
 
 		[JsonProperty(PropertyName = "settings")]
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]
 		public DynamicDictionary Settings { get; internal set; }
 
 		[JsonProperty(PropertyName = "os")]
@@ -36,7 +36,7 @@ namespace Nest
 		public NodeInfoJVM JVM { get; internal set; }
 
 		[JsonProperty(PropertyName = "thread_pool")]
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]
 		public Dictionary<string, NodeInfoThreadPoolThreadInfo> ThreadPool { get; internal set; }
 
 		[JsonProperty(PropertyName = "network")]

@@ -111,15 +111,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public BulkDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -180,15 +180,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public CatAliasesDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -257,15 +257,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public CatAllocationDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -326,15 +326,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public CatCountDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -422,15 +422,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public CatFielddataDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -499,15 +499,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public CatHealthDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -627,15 +627,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public CatIndicesDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -696,15 +696,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public CatMasterDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -765,15 +765,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public CatNodesDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -834,15 +834,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public CatPendingTasksDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -903,15 +903,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public CatPluginsDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -972,15 +972,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public CatRecoveryDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -1025,15 +1025,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public CatSegmentsDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -1094,15 +1094,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public CatShardsDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -1171,15 +1171,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public CatThreadPoolDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -1200,15 +1200,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public ClearScrollDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -1253,15 +1253,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public ClusterGetSettingsDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -1346,15 +1346,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public ClusterHealthDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -1391,15 +1391,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public ClusterPendingTasksDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -1444,15 +1444,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public ClusterSettingsDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -1513,15 +1513,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public ClusterRerouteDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -1590,15 +1590,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public ClusterStateDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -1635,15 +1635,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public ClusterStatsDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -1776,7 +1776,7 @@ namespace Nest
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
 		}
-	
+		
 	
 	}
 	
@@ -1869,15 +1869,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public PercolateCountDescriptor<T> FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -1962,15 +1962,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public DeleteDescriptor<T> FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -2124,15 +2124,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public DeleteScriptDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -2169,15 +2169,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public DeleteTemplateDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -2238,15 +2238,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public DocumentExistsDescriptor<T> FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -2412,15 +2412,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public ExplainDescriptor<T> FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -2642,15 +2642,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public GetDescriptor<T> FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -2687,15 +2687,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public GetScriptDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -2818,15 +2818,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public SourceDescriptor<T> FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -2863,15 +2863,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public GetTemplateDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -2980,15 +2980,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public IndexDescriptor<T> FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -3090,15 +3090,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public AnalyzeDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -3234,15 +3234,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public ClearCacheDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -3303,15 +3303,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public CloseIndexDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -3348,15 +3348,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public CreateIndexDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -3393,15 +3393,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public DeleteIndexDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -3438,15 +3438,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public DeleteAliasDescriptor<T> FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -3475,15 +3475,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public DeleteMappingDescriptor<T> FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -3512,15 +3512,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public DeleteWarmerDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -3573,15 +3573,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public IndexExistsDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -3634,15 +3634,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public AliasExistsDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -3679,15 +3679,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public TemplateExistsDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -3740,15 +3740,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public TypeExistsDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -3809,15 +3809,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public FlushDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -3899,15 +3899,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public GetIndexDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -3960,15 +3960,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public GetAliasDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -4005,15 +4005,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public GetAliasesDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -4074,15 +4074,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public GetFieldMappingDescriptor<T> FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -4135,15 +4135,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public GetMappingDescriptor<T> FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -4204,15 +4204,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public GetIndexSettingsDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -4265,15 +4265,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public UpgradeStatusDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -4326,15 +4326,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public GetWarmerDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -4395,15 +4395,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public OpenIndexDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -4496,15 +4496,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public OptimizeDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -4541,15 +4541,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public PutAliasDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -4618,15 +4618,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public PutMappingDescriptor<T> FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -4687,15 +4687,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public UpdateSettingsDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -4748,15 +4748,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public PutTemplateDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -4809,15 +4809,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public PutWarmerDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -4862,15 +4862,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public RecoveryStatusDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -4931,15 +4931,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public RefreshDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -5000,15 +5000,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public SegmentsDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -5110,15 +5110,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public IndicesStatsDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -5195,15 +5195,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public IndicesStatusDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -5240,15 +5240,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public AliasDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -5301,15 +5301,15 @@ namespace Nest
 			this.Request.RequestParameters.OnlyAncientSegments(only_ancient_segments);
 			return this;
 		}
-	
+		
 
 		///<summary>The URL-encoded request definition</summary>
 		public UpgradeDescriptor Source(string source)
 		{
 			this.Request.RequestParameters.Source(source);
 			return this;
-	}
-	
+		}
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public UpgradeDescriptor FilterPath(string filter_path)
@@ -5317,7 +5317,7 @@ namespace Nest
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
 		}
-	
+		
 	
 	}
 	
@@ -5471,15 +5471,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public InfoDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -5624,15 +5624,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public MultiGetDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -5808,15 +5808,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public MoreLikeThisDescriptor<T> FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -5861,15 +5861,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public MultiPercolateDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -6018,15 +6018,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public MultiTermVectorsDescriptor<T> FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -6087,15 +6087,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public NodesHotThreadsDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -6132,15 +6132,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public NodesInfoDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -6177,15 +6177,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public NodesShutdownDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -6295,15 +6295,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public NodesStatsDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -6420,15 +6420,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public PercolateDescriptor<T> FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -6449,15 +6449,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public PingDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -6502,15 +6502,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public PutScriptDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -6539,7 +6539,7 @@ namespace Nest
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
 		}
-	
+		
 	
 	}
 	
@@ -6721,7 +6721,7 @@ namespace Nest
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
 		}
-	
+		
 	
 	}
 	
@@ -6854,7 +6854,7 @@ namespace Nest
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
 		}
-	
+		
 	
 	}
 	
@@ -6923,15 +6923,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public SearchShardsDescriptor<T> FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -7008,15 +7008,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public SearchTemplateDescriptor<T> FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -7053,15 +7053,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public SnapshotDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -7106,15 +7106,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public CreateRepositoryDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -7143,15 +7143,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public DeleteSnapshotDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -7188,15 +7188,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public DeleteRepositoryDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -7225,15 +7225,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public GetSnapshotDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -7270,15 +7270,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public GetRepositoryDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -7315,15 +7315,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public RestoreDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -7352,15 +7352,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public SnapshotStatusDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -7397,15 +7397,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public VerifyRepositoryDescriptor FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -7474,7 +7474,7 @@ namespace Nest
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
 		}
-	
+		
 	
 	}
 	
@@ -7586,15 +7586,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public TermvectorDescriptor<T> FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	
@@ -7735,15 +7735,15 @@ namespace Nest
 			this.Request.RequestParameters.Source(source);
 			return this;
 		}
-	
+		
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public UpdateDescriptor<TDocument,TPartialDocument> FilterPath(string filter_path)
 		{
 			this.Request.RequestParameters.FilterPath(filter_path);
 			return this;
-	}
-	
+		}
+		
 	
 	}
 	

@@ -31,7 +31,7 @@ namespace Nest
 			if (contract == null)
 				return;
 
-			var field = contract.Infer.PropertyPath(fieldName);
+			var field = contract.Infer.FieldName(fieldName);
 			if (field.IsNullOrEmpty())
 				return;
 

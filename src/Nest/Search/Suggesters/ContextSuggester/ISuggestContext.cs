@@ -13,6 +13,6 @@ namespace Nest
 		string Type { get; }
 
 		[JsonProperty("path")]
-		PropertyPath Path { get; set; }
+		FieldName Path { get; set; }
 	}
 }

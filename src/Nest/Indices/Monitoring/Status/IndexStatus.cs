@@ -26,7 +26,7 @@ namespace Nest
         public FlushStats Flush { get; set; }
     
         [JsonProperty(PropertyName = "shards")]
-        [JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+        [JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]
         public Dictionary<string, dynamic> Shards { get; internal set; }
     
 

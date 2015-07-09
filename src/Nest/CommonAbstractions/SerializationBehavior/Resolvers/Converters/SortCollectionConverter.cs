@@ -83,7 +83,7 @@ namespace Nest.Resolvers.Converters
 			{
 
 				writer.WriteStartObject();
-				var fieldName = contract.Infer.PropertyPath(sort.SortKey);
+				var fieldName = contract.Infer.FieldName(sort.SortKey);
 				writer.WritePropertyName(fieldName);
 				serializer.Serialize(writer, sort);
 				writer.WriteEndObject();

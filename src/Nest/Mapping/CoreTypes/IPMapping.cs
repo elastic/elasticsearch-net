@@ -9,7 +9,7 @@ namespace Nest
 	[JsonObject(MemberSerialization.OptIn)]
 	public class IPMapping : IElasticType
 	{
-		public PropertyName Name { get; set; }
+		public FieldName Name { get; set; }
 
 		[JsonProperty("index_name")]
 		public string IndexName { get; set; }

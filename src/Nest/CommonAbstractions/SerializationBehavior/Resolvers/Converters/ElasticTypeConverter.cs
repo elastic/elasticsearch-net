@@ -86,8 +86,8 @@ namespace Nest.Resolvers.Converters
 
 	public class FieldMappingConverter : JsonConverter
 	{
-		private readonly DictionaryKeysAreNotPropertyNamesJsonConverter _dictionaryConverter =
-			new DictionaryKeysAreNotPropertyNamesJsonConverter();
+		private readonly DictionaryKeysAreNotFieldNamesJsonConverter _dictionaryConverter =
+			new DictionaryKeysAreNotFieldNamesJsonConverter();
 
 		private readonly ElasticTypeConverter _elasticTypeConverter = new ElasticTypeConverter();
 
@@ -146,7 +146,7 @@ namespace Nest.Resolvers.Converters
 
 	public class ElasticTypesConverter : JsonConverter
 	{
-		private readonly DictionaryKeysAreNotPropertyNamesJsonConverter _dictionaryConverter = new DictionaryKeysAreNotPropertyNamesJsonConverter();
+		private readonly DictionaryKeysAreNotFieldNamesJsonConverter _dictionaryConverter = new DictionaryKeysAreNotFieldNamesJsonConverter();
 		private readonly ElasticTypeConverter _elasticTypeConverter = new ElasticTypeConverter();
 
 		public override bool CanWrite
@@ -163,7 +163,7 @@ namespace Nest.Resolvers.Converters
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
 										JsonSerializer serializer)
 		{
-			var r = new Dictionary<PropertyName, IElasticType>();
+			var r = new Dictionary<FieldName, IElasticType>();
 
 			JObject o = JObject.Load(reader);
 

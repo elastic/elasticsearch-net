@@ -56,10 +56,10 @@ namespace Nest
 		//TODO NEST 2.0 change this to dictionary to better reflect the actual elasticsearch structure
 		public IList<RootObjectMapping> Mappings { get; set; }
 
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]
 		public Dictionary<string, ICreateAliasOperation> Aliases { get; set; }
 			
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]
 		public Dictionary<string, WarmerMapping> Warmers { get; set; }
 
 		public SimilaritySettings Similarity { get; internal set; }

@@ -20,7 +20,7 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "sort")]
 		[JsonConverter(typeof(SortCollectionConverter))]
-		IList<KeyValuePair<PropertyPath, ISort>> Sort { get; set; }
+		IList<KeyValuePair<FieldName, ISort>> Sort { get; set; }
 
 		[JsonProperty(PropertyName = "highlight")]
 		IHighlightRequest Highlight { get; set; }
@@ -36,10 +36,10 @@ namespace Nest
 		bool? Version { get; set; }
 
 		[JsonProperty(PropertyName = "fielddata_fields")]
-		IList<PropertyPath> FielddataFields { get; set; }
+		IList<FieldName> FielddataFields { get; set; }
 
 		[JsonProperty(PropertyName = "script_fields")]
-		[JsonConverter(typeof (DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		[JsonConverter(typeof (DictionaryKeysAreNotFieldNamesJsonConverter))]
 		IDictionary<string, IScriptQuery> ScriptFields { get; set; }
 	}
 
@@ -51,7 +51,7 @@ namespace Nest
 
 		public int? Size { get; set; }
 
-		public IList<KeyValuePair<PropertyPath, ISort>> Sort { get; set; }
+		public IList<KeyValuePair<FieldName, ISort>> Sort { get; set; }
 
 		public IHighlightRequest Highlight { get; set; }
 
@@ -61,7 +61,7 @@ namespace Nest
 
 		public bool? Version { get; set; }
 
-		public IList<PropertyPath> FielddataFields { get; set; }
+		public IList<FieldName> FielddataFields { get; set; }
 
 		public IDictionary<string, IScriptQuery> ScriptFields { get; set; }
 	}
@@ -76,12 +76,12 @@ namespace Nest
 		string IInnerHits.Name { get; set; }
 		int? IInnerHits.From { get; set; }
 		int? IInnerHits.Size { get; set; }
-		IList<KeyValuePair<PropertyPath, ISort>> IInnerHits.Sort { get; set; }
+		IList<KeyValuePair<FieldName, ISort>> IInnerHits.Sort { get; set; }
 		IHighlightRequest IInnerHits.Highlight { get; set; }
 		bool? IInnerHits.Explain { get; set; }
 		ISourceFilter IInnerHits.Source { get; set; }
 		bool? IInnerHits.Version { get; set; }
-		IList<PropertyPath> IInnerHits.FielddataFields { get; set; }
+		IList<FieldName> IInnerHits.FielddataFields { get; set; }
 		IDictionary<string, IScriptQuery> IInnerHits.ScriptFields { get; set; }
 
 		public InnerHitsDescriptor<T> From(int? from) => _assign(a => a.From = from);
@@ -91,10 +91,10 @@ namespace Nest
 		public InnerHitsDescriptor<T> Name(string name) => _assign(a => a.Name = name);
 
 		public InnerHitsDescriptor<T> FielddataFields(params string[] fielddataFields) =>
-			_assign(a => a.FielddataFields = fielddataFields?.Select(f => (PropertyPath) f).ToListOrNullIfEmpty());
+			_assign(a => a.FielddataFields = fielddataFields?.Select(f => (FieldName) f).ToListOrNullIfEmpty());
 		
 		public InnerHitsDescriptor<T> FielddataFields(params Expression<Func<T, object>>[] fielddataFields) =>
-			_assign(a => a.FielddataFields = fielddataFields?.Select(f => (PropertyPath) f).ToListOrNullIfEmpty());
+			_assign(a => a.FielddataFields = fielddataFields?.Select(f => (FieldName) f).ToListOrNullIfEmpty());
 
 		public InnerHitsDescriptor<T> Explain(bool explain = true) => _assign(a => a.Explain = explain);
 

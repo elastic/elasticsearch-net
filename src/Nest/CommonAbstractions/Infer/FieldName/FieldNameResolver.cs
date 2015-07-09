@@ -55,11 +55,11 @@ namespace Nest.Resolvers
 		}
 	}
 
-	public class PropertyNameResolver : ExpressionVisitor
+	public class FieldNameResolver : ExpressionVisitor
 	{
 
 		private readonly IConnectionSettingsValues _settings;
-		public PropertyNameResolver(IConnectionSettingsValues settings)
+		public FieldNameResolver(IConnectionSettingsValues settings)
 		{
 			if (settings == null)
 				throw new ArgumentNullException("settings");
@@ -77,13 +77,13 @@ namespace Nest.Resolvers
 			if (att != null && !att.Name.IsNullOrEmpty())
 				return att.Name;
 
-			return _settings.DefaultPropertyNameInferrer(name);
+			return _settings.DefaultFieldNameInferrer(name);
 		}
 
 		public string ResolveToLastToken(MemberInfo info)
 		{
-			var propertyName = this.Resolve(info);
-			return propertyName == null ? null : propertyName.Split(',').Last();
+			var FieldName = this.Resolve(info);
+			return FieldName == null ? null : FieldName.Split(',').Last();
 		}
 
 		public string Resolve(Expression expression)
@@ -184,7 +184,7 @@ namespace Nest.Resolvers
 	/// <summary>
 	/// Resolves member infos in an expression, instance may NOT be shared.
 	/// </summary>
-	public class MemberInfoResolver : PropertyNameResolver
+	public class MemberInfoResolver : FieldNameResolver
 	{
 		private readonly IList<MemberInfo> _members = new List<MemberInfo>();
 		public IList<MemberInfo> Members { get { return _members; } } 

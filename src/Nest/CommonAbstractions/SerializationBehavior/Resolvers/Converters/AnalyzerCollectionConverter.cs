@@ -27,7 +27,7 @@ namespace Nest
 
 			foreach (var childProperty in o.Children<JProperty>())
 			{
-				var propertyName = childProperty.Name;
+				var FieldName = childProperty.Name;
 				var typeProperty = ((JObject)childProperty.Value).Property("type");
 				if (typeProperty != null)
 					typeProperty.Remove();
@@ -58,7 +58,7 @@ namespace Nest
 					continue;
 				}
 
-				result[propertyName] = item;
+				result[FieldName] = item;
 			}
 			return result;
 		}

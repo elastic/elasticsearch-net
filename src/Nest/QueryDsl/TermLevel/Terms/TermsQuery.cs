@@ -12,7 +12,7 @@ namespace Nest
 	[JsonConverter(typeof(TermsQueryJsonConverter))]
 	public interface ITermsQuery : IQuery
 	{
-		PropertyPath Field { get; set; }
+		FieldName Field { get; set; }
 		string MinimumShouldMatch { get; set; }
 		bool? DisableCoord { get; set; }
 		IEnumerable<object> Terms { get; set; }
@@ -23,7 +23,7 @@ namespace Nest
 	public class TermsQuery : QueryBase, ITermsQuery
 	{
 		bool IQuery.Conditionless => IsConditionless(this);
-		public PropertyPath Field { get; set; }
+		public FieldName Field { get; set; }
 		public string MinimumShouldMatch { get; set; }
 		public bool? DisableCoord { get; set; }
 		public IEnumerable<object> Terms { get; set; }
@@ -48,7 +48,7 @@ namespace Nest
 		private ITermsQuery Self => this;
 		string IQuery.Name { get; set; }
 		bool IQuery.Conditionless => TermsQuery.IsConditionless(this);
-		PropertyPath ITermsQuery.Field { get; set; }
+		FieldName ITermsQuery.Field { get; set; }
 		string ITermsQuery.MinimumShouldMatch { get; set; }
 		bool? ITermsQuery.DisableCoord { get; set; }
 		IEnumerable<object> ITermsQuery.Terms { get; set; }
@@ -73,7 +73,7 @@ namespace Nest
 			return this;
 		}
 
-		public TermsQueryDescriptor<T, K> OnField(PropertyPath field)
+		public TermsQueryDescriptor<T, K> OnField(FieldName field)
 		{
 			Self.Field = field;
 			return this;

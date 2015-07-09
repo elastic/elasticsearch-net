@@ -15,7 +15,7 @@ namespace Nest
 		internal string Id { get; set; }
 		
 		[JsonProperty(PropertyName = "fields")]
-		internal IEnumerable<PropertyPath> Fields { get; set; }
+		internal IEnumerable<FieldName> Fields { get; set; }
 		
 		[JsonProperty(PropertyName = "_routing")]
 		internal string Routing { get; set; }

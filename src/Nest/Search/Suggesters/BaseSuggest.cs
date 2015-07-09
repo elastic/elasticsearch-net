@@ -7,7 +7,7 @@ namespace Nest
 		string Text { get; set; }
 
 		[JsonProperty(PropertyName = "field")]
-		PropertyPath Field { get; set; }
+		FieldName Field { get; set; }
 
 		[JsonProperty(PropertyName = "analyzer")]
 		string Analyzer { get; set; }
@@ -22,7 +22,7 @@ namespace Nest
 	public abstract class Suggester : ISuggester
 	{
 		public string Text { get; set; }
-		public PropertyPath Field { get; set; }
+		public FieldName Field { get; set; }
 		public string Analyzer { get; set; }
 		public int? Size { get; set; }
 		public int? ShardSize { get; set; }
@@ -33,7 +33,7 @@ namespace Nest
 	{
 		string ISuggester.Text { get; set; }
 
-		PropertyPath ISuggester.Field { get; set; }
+		FieldName ISuggester.Field { get; set; }
 
 		string ISuggester.Analyzer { get; set; }
 

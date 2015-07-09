@@ -16,7 +16,7 @@ namespace Nest.Resolvers.Converters
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-			new DictionaryKeysAreNotPropertyNamesJsonConverter().WriteJson(writer, value, serializer);
+			new DictionaryKeysAreNotFieldNamesJsonConverter().WriteJson(writer, value, serializer);
 		}
 
 		private IElasticCoreType GetTypeFromJObject(JObject po, JsonSerializer serializer)
@@ -51,7 +51,7 @@ namespace Nest.Resolvers.Converters
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
 										JsonSerializer serializer)
 		{
-			var r = new Dictionary<PropertyName, IElasticCoreType>();
+			var r = new Dictionary<FieldName, IElasticCoreType>();
 
 			JObject o = JObject.Load(reader);
 

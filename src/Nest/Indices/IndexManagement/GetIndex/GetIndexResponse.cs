@@ -32,10 +32,10 @@ namespace Nest
 
 		public IDictionary<string, RootObjectMapping> Mappings { get; set; }
 
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]
 		public Dictionary<string, CreateAliasOperation> Aliases { get; set; }
 			
-		[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+		[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]
 		public Dictionary<string, WarmerMapping> Warmers { get; set; }
 
 		public SimilaritySettings Similarity { get; internal set; }

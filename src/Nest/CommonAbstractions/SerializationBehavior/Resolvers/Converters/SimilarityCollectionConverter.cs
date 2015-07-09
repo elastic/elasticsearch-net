@@ -20,7 +20,7 @@ namespace Nest.Resolvers.Converters
 
 			foreach (var childProperty in o.Children<JProperty>())
 			{
-				var propertyName = childProperty.Name;
+				var FieldName = childProperty.Name;
 				var typeProperty = ((JObject)childProperty.Value).Property("type");
 				typeProperty.Remove();
 
@@ -38,7 +38,7 @@ namespace Nest.Resolvers.Converters
 					continue;
 				}
 
-				result[propertyName] = item;
+				result[FieldName] = item;
 			}
 
 			return result;

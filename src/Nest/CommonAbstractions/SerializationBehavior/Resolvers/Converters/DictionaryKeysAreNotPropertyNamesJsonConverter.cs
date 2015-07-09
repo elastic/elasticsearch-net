@@ -8,10 +8,10 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	/// <summary>
-	/// JSON converter for IDictionary that ignores the contract resolver (e.g. CamelCasePropertyNamesContractResolver)
+	/// JSON converter for IDictionary that ignores the contract resolver (e.g. CamelCaseFieldNamesContractResolver)
 	/// when converting dictionary keys to property names.
 	/// </summary>
-	public class DictionaryKeysAreNotPropertyNamesJsonConverter : JsonConverter
+	public class DictionaryKeysAreNotFieldNamesJsonConverter : JsonConverter
 	{
 		public override bool CanConvert(Type t) => typeof (IDictionary).IsAssignableFrom(t);
 
@@ -34,16 +34,16 @@ namespace Nest
 				if (entry.Value == null && serializer.NullValueHandling == NullValueHandling.Ignore)
 					continue;
 				string key;
-				var pp = entry.Key as PropertyPath;
-				var pn = entry.Key as PropertyName;
+				var pp = entry.Key as FieldName;
+				var pn = entry.Key as FieldName;
 				var im = entry.Key as IndexName;
 				var tm = entry.Key as TypeName;
 				if (contract == null)
 					key = Convert.ToString(entry.Key, CultureInfo.InvariantCulture);
 				else if (pp != null)
-					key = contract.Infer.PropertyPath(pp);
+					key = contract.Infer.FieldName(pp);
 				else if (pn != null)
-					key = contract.Infer.PropertyName(pn);
+					key = contract.Infer.FieldName(pn);
 				else if (im != null)
 					key = contract.Infer.IndexName(im);
 				else if (tm != null)

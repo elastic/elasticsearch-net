@@ -90,6 +90,8 @@
     <Compile Include="Cluster\NodesShutdown\ElasticClient-NodeShutdown.cs" />
     <Compile Include="Cluster\NodeStats\ElasticClient-NodeStats.cs" />
     <Compile Include="CommonAbstractions\ConnectionSettings\ClrTypeMapping.cs" />
+    <Compile Include="CommonAbstractions\Infer\FieldName\FieldName.cs" />
+    <Compile Include="CommonAbstractions\Infer\FieldName\FieldNameExtensions.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\Resolvers\Converters\ReserializeJsonConverter.cs" />
     <Compile Include="CommonOptions\DateInterval.cs" />
     <Compile Include="CommonOptions\Range\DateExpressionRange.cs" />
@@ -447,8 +449,6 @@
     <Compile Include="CommonAbstractions\SerializationBehavior\CustomJson\ICustomJson.cs" />
     <Compile Include="CommonAbstractions\Fields\FluentFieldList.cs" />
     <Compile Include="CommonAbstractions\Infer\Property.cs" />
-    <Compile Include="CommonAbstractions\Infer\PrropertyName\PropertyName.cs" />
-    <Compile Include="CommonAbstractions\Infer\PropertyPath\PropertyPath.cs" />
     <Compile Include="Modules\SnapshotAndRestore\Snapshot\Snapshot.cs" />
     <Compile Include="Modules\SnapshotAndRestore\Restore\SnapshotRestore.cs" />
     <Compile Include="Cluster\ClusterSettings\ClusterPutSettings\ClusterPutSettingsResponse.cs" />
@@ -934,7 +934,7 @@
     <Compile Include="CommonAbstractions\SerializationBehavior\Resolvers\Converters\SimilaritySettingsConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\Resolvers\Converters\SortCollectionConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\Resolvers\Converters\SuggestResponseConverter.cs" />
-    <Compile Include="CommonAbstractions\SerializationBehavior\Resolvers\Converters\PropertyPathMarkerConverter.cs" />
+    <Compile Include="CommonAbstractions\SerializationBehavior\Resolvers\Converters\FieldNameConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\Resolvers\Converters\DynamicMappingOptionConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\Resolvers\Converters\DictionaryKeysAreNotPropertyNamesJsonConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\Resolvers\Converters\IndexNameConverter.cs" />
@@ -986,7 +986,7 @@
     <Compile Include="CommonAbstractions\Exception\DslException.cs" />
     <Compile Include="Mapping\FieldType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="CommonAbstractions\Infer\PrropertyName\PropertyNameResolver.cs" />
+    <Compile Include="CommonAbstractions\Infer\FieldName\FieldNameResolver.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\SettingsContractResolver.cs" />
     <Compile Include="CommonAbstractions\Infer\TypeName\TypeName.cs" />
     <Compile Include="CommonAbstractions\Infer\TypeName\TypeNameExtensions.cs" />

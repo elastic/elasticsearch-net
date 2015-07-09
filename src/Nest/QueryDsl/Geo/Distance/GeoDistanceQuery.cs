@@ -48,7 +48,7 @@ namespace Nest
 		private IGeoDistanceQuery Self => this;
 		string IQuery.Name { get; set; }
 		bool IQuery.Conditionless => GeoDistanceQuery.IsConditionless(this);
-		PropertyPath IFieldNameQuery.Field { get; set; }
+		FieldName IFieldNameQuery.Field { get; set; }
 		string IGeoDistanceQuery.Location { get; set; }
 		object IGeoDistanceQuery.Distance { get; set; }
 		GeoUnit? IGeoDistanceQuery.Unit { get; set; }

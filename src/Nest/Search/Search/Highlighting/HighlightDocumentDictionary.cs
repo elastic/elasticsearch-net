@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 
-	[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+	[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]
 	public class HighlightFieldDictionary : Dictionary<string, HighlightHit>
 	{
 		public HighlightFieldDictionary(IDictionary<string, HighlightHit> dictionary = null)
@@ -20,7 +20,7 @@ namespace Nest
 		}
 	}
 
-	[JsonConverter(typeof(DictionaryKeysAreNotPropertyNamesJsonConverter))]
+	[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]
 	public class HighlightDocumentDictionary : Dictionary<string, HighlightFieldDictionary>
 	{
 

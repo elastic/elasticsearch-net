@@ -32,7 +32,7 @@ namespace Nest
 		private IGeoShapeCircleQuery Self => this;
 		string IQuery.Name { get; set; }
 		bool IQuery.Conditionless => GeoShapeCircleQuery.IsConditionless(this);
-		PropertyPath IFieldNameQuery.Field { get; set; }
+		FieldName IFieldNameQuery.Field { get; set; }
 		ICircleGeoShape IGeoShapeCircleQuery.Shape { get; set; }
 
 		public GeoShapeCircleQueryDescriptor<T> Name(string name)
