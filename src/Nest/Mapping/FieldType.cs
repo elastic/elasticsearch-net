@@ -18,14 +18,8 @@ namespace Nest
 		/// </summary>
 		[EnumMember(Value = "none")]
 		None,
-		/// <summary>
-		/// Geo based points.
-		/// </summary>
 		[EnumMember(Value = "geo_point")]
 		GeoPoint,
-		/// <summary>
-		/// Geo shape type.
-		/// </summary>
 		[EnumMember(Value = "geo_shape")]
 		GeoShape,
 		/// <summary>
@@ -43,49 +37,26 @@ namespace Nest
 		/// </summary>
 		[EnumMember(Value = "binary")]
 		Binary,
-		/// <summary>
-		/// Text based string type.
-		/// </summary>
 		[EnumMember(Value = "string")]
 		String,
-		/// <summary>
-		/// Integer type.
-		/// </summary>
 		[EnumMember(Value = "integer")]
 		Integer,
-		/// <summary>
-		/// Long type.
-		/// </summary>
 		[EnumMember(Value = "long")]
 		Long,
-		/// <summary>
-		/// Float type.
-		/// </summary>
+		[EnumMember(Value = "short")]
+		Short,
+		[EnumMember(Value = "byte")]
+		Byte,
 		[EnumMember(Value = "float")]
 		Float,
-		/// <summary>
-		/// Double type.
-		/// </summary>
 		[EnumMember(Value = "double")]
 		Double,
-		/// <summary>
-		/// Date type.
-		/// </summary>
 		[EnumMember(Value = "date")]
 		Date,
-		/// <summary>
-		/// Boolean type.
-		/// </summary>
 		[EnumMember(Value = "boolean")]
 		Boolean,
-		/// <summary>
-		/// Completion type.
-		/// </summary>
 		[EnumMember(Value = "completion")]
 		Completion,
-		/// <summary>
-		/// Nested type.
-		/// </summary>
 		[EnumMember(Value = "nested")]
 		Nested,
 		/// <summary>
