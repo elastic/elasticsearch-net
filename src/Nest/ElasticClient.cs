@@ -17,7 +17,7 @@ namespace Nest
 	{
 		private readonly IConnectionSettingsValues _connectionSettings;
 
-		internal IHighLevelToLowLevelDispatcher Dispatcher { get { return this; } }
+		internal IHighLevelToLowLevelDispatcher Dispatcher => this;
 		internal LowLevelDispatch LowLevelDispatch { get; set; }
 		
 		public IConnection Connection { get; protected set; }

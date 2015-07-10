@@ -51,7 +51,6 @@ var createProjectIndex = this.Client.CreateIndex(c => c
 						.String(prop=>prop.Name(p=>p.ProjectName).NotAnalyzed())
 					)
 				)
-
 			);
 createProjectIndex.IsValid.Should().BeTrue();
 this.Client.IndexMany(Project.Projects);

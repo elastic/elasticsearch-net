@@ -1,6 +1,8 @@
 ﻿using System;
 using Nest;
 using Tests.Framework;
+using Tests.Framework.MockData;
+using static Nest.Property;
 
 namespace Tests.Search.Request
 {
@@ -11,27 +13,28 @@ namespace Tests.Search.Request
 		 * The from parameter defines the offset from the first result you want to fetch. 
 		 * The size parameter allows you to configure the maximum amount of hits to be returned.
 		 */
-		public class Usage : GeneralUsageBase<ITermQuery, TermQueryDescriptor<object>, TermQuery>
+		public class Usage : GeneralUsageBase<ITermQuery, TermQueryDescriptor<Project>, TermQuery>
 		{
 			protected override object ExpectJson =>
-				new { myfield = new { value = "myvalue" } };
+				new { name = new { value = "myvalue" } };
 
 			protected override TermQuery Initializer =>
 				new TermQuery
 				{
-					Field = "myfield",
+					Field = Field<Project>(p=>p.Name),
 					Value = "myvalue"
 				};
 
-			protected override Func<TermQueryDescriptor<object>, ITermQuery> Fluent =>
-				term => term.OnField("myfield").Value("myvalue");
+			protected override Func<TermQueryDescriptor<Project>, ITermQuery> Fluent =>
+				term => term.OnField("name").Value("myvalue");
 		}
 
-		public class UsageInsideQueryContainer : GeneralUsageBase<IQueryContainer, QueryContainerDescriptor<object>, QueryContainer>
+		public class UsageInsideQueryContainer : GeneralUsageBase<IQueryContainer, QueryContainerDescriptor<Project>, QueryContainer>
 		{
 			protected override object ExpectJson =>
 				new { term = new { myfield = new { value = "myvalue" } } };
 
+			//implemenations of IQuery such TermQuery implictly convert to `QueryContainer`
 			protected override QueryContainer Initializer =>
 				new TermQuery
 				{
@@ -39,7 +42,7 @@ namespace Tests.Search.Request
 					Value = "myvalue"
 				};
 
-			protected override Func<QueryContainerDescriptor<object>, IQueryContainer> Fluent =>
+			protected override Func<QueryContainerDescriptor<Project>, IQueryContainer> Fluent =>
 				filter => filter.Term("myfield", "myvalue");
 		}
 

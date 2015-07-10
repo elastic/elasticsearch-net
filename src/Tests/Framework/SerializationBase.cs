@@ -1,6 +1,10 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Text;
+using DiffPlex;
+using DiffPlex.DiffBuilder;
+using DiffPlex.DiffBuilder.Model;
 using FluentAssertions;
 using Newtonsoft.Json.Linq;
 using Ploeh.AutoFixture;
@@ -44,8 +48,22 @@ namespace Tests.Framework
 			var matches = JToken.DeepEquals(this._expectedJsonJObject, actualJson);
 			if (matches) return true;
 
-			this.ShouldBeEquivalentTo(serialized);
-			return false;
+			var d = new Differ();
+			var inlineBuilder = new InlineDiffBuilder(d);
+			var result = inlineBuilder.BuildDiffModel(_expectedJsonString, serialized);
+			var diff = result.Lines.Aggregate(new StringBuilder(), (sb, line) =>
+			{
+				if (line.Type == ChangeType.Inserted)
+					sb.Append("+ ");
+				else if (line.Type == ChangeType.Deleted)
+					sb.Append("- ");
+				else
+					sb.Append("  ");
+				sb.AppendLine(line.Text);
+				return sb;
+			}, sb => sb.ToString());
+
+			throw new Exception(diff);
 		}
 
 		protected static TReturn Create<TReturn>()

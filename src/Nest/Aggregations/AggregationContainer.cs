@@ -103,30 +103,6 @@ namespace Nest
 
 	public class AggregationContainer : IAggregationContainer
 	{
-		private IDateHistogramAggregator _dateHistogram;
-		private IPercentilesAggregator _percentiles;
-		private IDateRangeAggregator _dateRange;
-		private IFilterAggregator _filter;
-		private IGeoDistanceAggregator _geoDistance;
-		private IGeoHashAggregator _geoHash;
-		private IGeoBoundsAggregator _geoBounds;
-		private IHistogramAggregator _histogram;
-		private IGlobalAggregator _global;
-		private IIp4RangeAggregator _ipRange;
-		private ICardinalityAggregator _cardinality;
-		private IMissingAggregator _missing;
-		private INestedAggregator _nested;
-		private IReverseNestedAggregator _reverseNested;
-		private IRangeAggregator _range;
-		private ITermsAggregator _terms;
-		private ISignificantTermsAggregator _significantTerms;
-		private IPercentileRanksAggregator _percentileRanks;
-		private IFiltersAggregator _filters;
-		private ITopHitsAggregator _topHits;
-		private IChildrenAggregator _children;
-
-		private IScriptedMetricAggregator _scriptedMetric;
-
 		public IAverageAggregator Average { get; set; }
 		public IValueCountAggregator ValueCount { get; set; }
 		public IMaxAggregator Max { get; set; }
@@ -134,143 +110,49 @@ namespace Nest
 		public IStatsAggregator Stats { get; set; }
 		public ISumAggregator Sum { get; set; }
 		public IExtendedStatsAggregator ExtendedStats { get; set; }
-		public IDateHistogramAggregator DateHistogram
-		{
-			get { return _dateHistogram; }
-			set { _dateHistogram = value; }
-		}
+		public IDateHistogramAggregator DateHistogram { get; set; }
 
-		public IPercentilesAggregator Percentiles
-		{
-			get { return _percentiles; }
-			set { _percentiles = value; }
-		}
+		public IPercentilesAggregator Percentiles { get; set; }
 
-		public IDateRangeAggregator DateRange
-		{
-			get { return _dateRange; }
-			set { _dateRange = value; }
-		}
+		public IDateRangeAggregator DateRange { get; set; }
 
-		public IFilterAggregator Filter
-		{
-			get { return _filter; }
-			set { _filter = value; }
-		}
+		public IFilterAggregator Filter { get; set; }
 
-		public IFiltersAggregator Filters
-		{
-			get { return _filters; }
-			set { _filters = value; }
-		}
+		public IFiltersAggregator Filters { get; set; }
 
-		public IGeoDistanceAggregator GeoDistance
-		{
-			get { return _geoDistance; }
-			set { _geoDistance = value; }
-		}
+		public IGeoDistanceAggregator GeoDistance { get; set; }
 
-		public IGeoHashAggregator GeoHash
-		{
-			get { return _geoHash; }
-			set { _geoHash = value; }
-		}
+		public IGeoHashAggregator GeoHash { get; set; }
 
-		public IGeoBoundsAggregator GeoBounds
-		{
-			get { return _geoBounds; }
-			set { _geoBounds = value; }
-		}
+		public IGeoBoundsAggregator GeoBounds { get; set; }
 
-		public IHistogramAggregator Histogram
-		{
-			get { return _histogram; }
-			set { _histogram = value; }
-		}
+		public IHistogramAggregator Histogram { get; set; }
 
-		public IGlobalAggregator Global
-		{
-			get { return _global; }
-			set { _global = value; }
-		}
+		public IGlobalAggregator Global { get; set; }
 
-		public IIp4RangeAggregator IpRange
-		{
-			get { return _ipRange; }
-			set { _ipRange = value; }
-		}
+		public IIp4RangeAggregator IpRange { get; set; }
 
-		public ICardinalityAggregator Cardinality
-		{
-			get { return _cardinality; }
-			set { _cardinality = value; }
-		}
+		public ICardinalityAggregator Cardinality { get; set; }
 
-		public IMissingAggregator Missing
-		{
-			get { return _missing; }
-			set { _missing = value; }
-		}
+		public IMissingAggregator Missing { get; set; }
 
-		public INestedAggregator Nested
-		{
-			get { return _nested; }
-			set { _nested = value; }
-		}
+		public INestedAggregator Nested { get; set; }
 
-		public IReverseNestedAggregator ReverseNested
-		{
-			get { return _reverseNested; }
-			set { _reverseNested = value; }
-		}
+		public IReverseNestedAggregator ReverseNested { get; set; }
 
-		public IRangeAggregator Range
-		{
-			get { return _range; }
-			set { _range = value; }
-		}
+		public IRangeAggregator Range { get; set; }
 
-		public ITermsAggregator Terms
-		{
-			get { return _terms; }
-			set { _terms = value; }
-		}
+		public ITermsAggregator Terms { get; set; }
 
-		public ISignificantTermsAggregator SignificantTerms
-		{
-			get { return _significantTerms; }
-			set { _significantTerms = value; }
-		}
+		public ISignificantTermsAggregator SignificantTerms { get; set; }
 
-		public IPercentileRanksAggregator PercentileRanks
-		{
-			get { return _percentileRanks; }
-			set { _percentileRanks = value; }
-		}
+		public IPercentileRanksAggregator PercentileRanks { get; set; }
 
-		public ITopHitsAggregator TopHits
-		{
-			get { return _topHits; }
-			set { _topHits = value; }
-		}
+		public ITopHitsAggregator TopHits { get; set; }
 
-		public IChildrenAggregator Children
-		{
-			get { return _children; }
-			set { _children = value; }
-		}
+		public IChildrenAggregator Children { get; set; }
 
-		public IScriptedMetricAggregator ScriptedMetric
-		{
-			get { return _scriptedMetric; }
-			set { _scriptedMetric = value; }
-		}
-
-		private void LiftAggregations(IBucketAggregator bucket)
-		{
-			if (bucket == null) return;
-			this.Aggregations = bucket.Aggregations;
-		}
+		public IScriptedMetricAggregator ScriptedMetric { get; set; }
 
 		public IDictionary<string, IAggregationContainer> Aggregations { get; set; }
 	}
@@ -446,12 +328,8 @@ namespace Nest
 			Func<TopHitsAggregatorDescriptor<T>, ITopHitsAggregator> selector) =>
 			_SetInnerAggregation(name, selector, (a, d) => a.TopHits = d);
 
-		public AggregationContainerDescriptor<T> Children(string name,
-			Func<ChildrenAggregatorDescriptor<T>, IChildrenAggregator> selector) =>
-			this.Children<T>(name, selector);
-
-		public AggregationContainerDescriptor<T> Children<K>(string name,
-			Func<ChildrenAggregatorDescriptor<K>, IChildrenAggregator> selector) where K : class =>
+		public AggregationContainerDescriptor<T> Children<TChild>(string name,
+			Func<ChildrenAggregatorDescriptor<TChild>, IChildrenAggregator> selector) where TChild : class =>
 			_SetInnerAggregation(name, selector, (a, d) => a.Children = d);
 
 		public AggregationContainerDescriptor<T> ScriptedMetric(string name,
