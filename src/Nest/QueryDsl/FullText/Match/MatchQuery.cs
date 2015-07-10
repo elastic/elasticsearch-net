@@ -9,7 +9,7 @@ using System.Linq.Expressions;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeConverter<MatchQueryDescriptor<object>>))]
+	[JsonConverter(typeof (FieldNameQueryConverter<MatchQuery>))]
 	public interface IMatchQuery : IFieldNameQuery 
 	{
 		[JsonProperty(PropertyName = "type")]
