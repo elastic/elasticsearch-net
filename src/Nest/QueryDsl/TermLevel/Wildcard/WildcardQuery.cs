@@ -26,7 +26,6 @@ namespace Nest
 	{
 		bool IQuery.Conditionless => TermQuery.IsConditionless(this);
 		public object Value { get; set; }
-		public double? Boost { get; set; }
 		public RewriteMultiTerm? Rewrite { get; set; }
 
 		protected override void WrapInContainer(IQueryContainer c) => c.Wildcard = this;

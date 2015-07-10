@@ -28,9 +28,6 @@ namespace Nest
 		[JsonProperty(PropertyName = "minimum_should_match")]
 		string MinimumShouldMatch { get; set; }
 
-		[JsonProperty(PropertyName = "boost")]
-		double? Boost { get; set; }
-
 		[JsonProperty(PropertyName = "analyzer")]
 		string Analyzer { get; set; }
 
@@ -46,7 +43,6 @@ namespace Nest
 		public Operator? LowFrequencyOperator { get; set; }
 		public Operator? HighFrequencyOperator { get; set; }
 		public string MinimumShouldMatch { get; set; }
-		public double? Boost { get; set; }
 		public string Analyzer { get; set; }
 		public bool? DisableCoord { get; set; }
 
@@ -67,14 +63,10 @@ namespace Nest
 		Operator? ICommonTermsQuery.LowFrequencyOperator { get; set; }
 		Operator? ICommonTermsQuery.HighFrequencyOperator { get; set; }
 		string ICommonTermsQuery.MinimumShouldMatch { get; set; }
-		double? ICommonTermsQuery.Boost { get; set; }
 		string ICommonTermsQuery.Analyzer { get; set; }
 		bool? ICommonTermsQuery.DisableCoord { get; set; }
 
 		//<inheritdoc/>
-		public CommonTermsQueryDescriptor<T> Boost(double boost) => Assign(a=>a.Boost = boost);
-
-			//<inheritdoc/>
 		public CommonTermsQueryDescriptor<T> Query(string query) => Assign(a => a.Query = query);
 
 		//<inheritdoc/>

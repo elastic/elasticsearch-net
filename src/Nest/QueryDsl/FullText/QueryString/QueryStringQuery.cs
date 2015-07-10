@@ -48,10 +48,6 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "phrase_slop")]
 		double? PhraseSlop { get; set; }
-
-		[JsonProperty(PropertyName = "boost")]
-		double? Boost { get; set; }
-
 		[JsonProperty(PropertyName = "lenient")]
 		bool? Lenient { get; set; }
 
@@ -128,7 +124,6 @@ namespace Nest
 		int? IQueryStringQuery.FuzzyPrefixLength { get; set; }
 		double? IQueryStringQuery.FuzzyMinimumSimilarity { get; set; }
 		double? IQueryStringQuery.PhraseSlop { get; set; }
-		double? IQueryStringQuery.Boost { get; set; }
 		bool? IQueryStringQuery.Lenient { get; set; }
 		bool? IQueryStringQuery.AnalyzeWildcard { get; set; }
 		bool? IQueryStringQuery.AutoGeneratePhraseQueries { get; set; }

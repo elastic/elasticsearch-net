@@ -28,9 +28,6 @@ namespace Nest
 
 		[JsonProperty("disable_coord")]
 		bool? DisableCoord { get; set; }
-
-		[JsonProperty("boost")]
-		double? Boost { get; set; }
 	}
 
 	public class BoolQuery : QueryBase, IBoolQuery
@@ -41,7 +38,6 @@ namespace Nest
 		public IEnumerable<IQueryContainer> Should { get; set; }
 		public string MinimumShouldMatch { get; set; }
 		public bool? DisableCoord { get; set; }
-		public double? Boost { get; set; }
 
 		protected override void WrapInContainer(IQueryContainer c) => c.Bool = this;
 
@@ -67,7 +63,6 @@ namespace Nest
 		IEnumerable<IQueryContainer> IBoolQuery.Should { get; set; }
 		string IBoolQuery.MinimumShouldMatch { get; set; }
 		bool? IBoolQuery.DisableCoord { get; set; }
-		double? IBoolQuery.Boost { get; set; }
 
 		public BoolQueryDescriptor<T> DisableCoord()
 		{
@@ -75,12 +70,6 @@ namespace Nest
 			return this;
 		}
 
-		public BoolQueryDescriptor<T> Name(string name)
-		{
-			Self.Name = name;
-			return this;
-		}
-		
 		/// <summary>
 		/// Specifies a minimum number of the optional BooleanClauses which must be satisfied.
 		/// </summary>
@@ -100,16 +89,6 @@ namespace Nest
 		public BoolQueryDescriptor<T> MinimumShouldMatch(string minimumShouldMatches)
 		{
 			Self.MinimumShouldMatch = minimumShouldMatches;
-			return this;
-		}
-
-		/// <summary>
-		/// Boost this results matching this query.
-		/// </summary>
-		/// <param name="boost"></param>
-		public BoolQueryDescriptor<T> Boost(double boost)
-		{
-			Self.Boost = boost;
 			return this;
 		}
 

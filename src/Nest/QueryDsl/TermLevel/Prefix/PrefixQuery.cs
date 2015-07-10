@@ -15,7 +15,6 @@ namespace Nest
 	{
 		bool IQuery.Conditionless => TermQuery.IsConditionless(this);
 		public object Value { get; set; }
-		public double? Boost { get; set; }
 		public RewriteMultiTerm? Rewrite { get; set; }
 
 		protected override void WrapInContainer(IQueryContainer c) => c.Prefix = this;
@@ -26,7 +25,6 @@ namespace Nest
 	{
 		private IPrefixQuery Self => this;
 
-		FieldName IFieldNameQuery.Field { get; set; }
 		RewriteMultiTerm? IPrefixQuery.Rewrite { get; set; }
 
 		public PrefixQueryDescriptor<T> Rewrite(RewriteMultiTerm rewrite)
