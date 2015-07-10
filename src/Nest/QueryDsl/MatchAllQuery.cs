@@ -12,16 +12,12 @@ namespace Nest
 	[JsonConverter(typeof(ReadAsTypeConverter<MatchAllQuery>))]
 	public interface IMatchAllQuery : IQuery
 	{
-		[JsonProperty(PropertyName = "boost")]
-		double? Boost { get; set; }
-
 		[JsonProperty(PropertyName = "norm_field")]
 		string NormField { get; set; }
 	}
 
 	public class MatchAllQuery : QueryBase, IMatchAllQuery
 	{
-		public double? Boost { get;  set; }
 		public string NormField { get;  set; }
 
 		bool IQuery.Conditionless => false;
@@ -34,17 +30,11 @@ namespace Nest
 
 	public class MatchAllQueryDescriptor
 		: QueryDescriptorBase<MatchAllQueryDescriptor, IMatchAllQuery>
-			, IMatchAllQuery 
+		, IMatchAllQuery 
 	{
 		bool IQuery.Conditionless => false;
 
-		string IQuery.Name { get; set; }
-
-		double? IMatchAllQuery.Boost { get; set; }
-
 		string IMatchAllQuery.NormField { get; set; }
-
-		public MatchAllQueryDescriptor Boost(double? boost) => Assign(a => a.Boost = boost);
 
 		public MatchAllQueryDescriptor NormField(string normField) => Assign(a => a.NormField = normField);
 	}
