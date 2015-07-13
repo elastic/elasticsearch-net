@@ -18,7 +18,7 @@ namespace Nest
 
 		public IEnumerable<CompletionOption<T>> GetCompletionOptions<T>()
 		{
-			return Options.Select(x => new CompletionOption<T>(x));
+			return Options?.Select(x => new CompletionOption<T>(x)) ?? Enumerable.Empty<CompletionOption<T>>();
 		}
 	}
 }
