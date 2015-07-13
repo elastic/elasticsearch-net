@@ -47,6 +47,10 @@ namespace Tests.Aggregations.Bucket
 							average_per_child = new
 							{
 								avg = new { field = "confidenceFactor" }
+							},
+							max_per_child = new
+							{
+								max = new { field = "confidenceFactor" }
 							}
 						}
 					}
@@ -58,6 +62,7 @@ namespace Tests.Aggregations.Bucket
 					.Children<CommitActivity>("name_of_child_agg", child => child
 						.Aggregations(childAggs=>childAggs
 							.Average("average_per_child", avg=>avg.Field(p=>p.ConfidenceFactor))
+							.Max("max_per_child", avg=>avg.Field(p=>p.ConfidenceFactor))
 						)
 					)
 				);
@@ -78,6 +83,10 @@ namespace Tests.Aggregations.Bucket
 								{"average_per_child", new AggregationContainer
 								{
 									Average = new AverageAggregator { Field = "confidenceFactor"}
+								} },
+								{"max_per_child", new AggregationContainer
+								{
+									Max = new MaxAggregator { Field = "confidenceFactor"}
 								} }
 							}
 						}
@@ -95,7 +104,9 @@ namespace Tests.Aggregations.Bucket
 				{
 					Aggregations = new ChildrenAgg("name_of_child_agg", typeof(CommitActivity))
 					{
-						Aggregations = new AverageAgg("average_per_child", Field<CommitActivity>(p=>p.ConfidenceFactor))
+						Aggregations = 
+							new AverageAgg("average_per_child", Field<CommitActivity>(p=>p.ConfidenceFactor))
+							&& new MaxAgg("max_per_child", Field<CommitActivity>(p=>p.ConfidenceFactor))
 					}
 				};
 		}

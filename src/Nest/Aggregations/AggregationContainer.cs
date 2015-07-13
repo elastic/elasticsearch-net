@@ -6,13 +6,14 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof (DictionaryKeysAreNotFieldNamesJsonConverter))]
+	[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]
 	public class AggregationDictionary : ProxyDictionary<string, IAggregationContainer>
 	{
 		public AggregationDictionary() : base() { }
 		public AggregationDictionary(IDictionary<string, IAggregationContainer> container) : base(container) { }
-		public AggregationDictionary(Dictionary<string, AggregationContainer> container) 
-			: base(container.Select(kv=>kv).ToDictionary(kv=>kv.Key, kv=>(IAggregationContainer)kv.Value)) { }
+		public AggregationDictionary(Dictionary<string, AggregationContainer> container)
+			: base(container.Select(kv => kv).ToDictionary(kv => kv.Key, kv => (IAggregationContainer)kv.Value))
+		{ }
 
 		public static implicit operator AggregationDictionary(Dictionary<string, IAggregationContainer> container) =>
 			new AggregationDictionary(container);
@@ -22,11 +23,27 @@ namespace Nest
 
 		public static implicit operator AggregationDictionary(AggregatorBase aggregator)
 		{
-			IAggregatorBase b = aggregator;
-			if (b.Name.IsNullOrEmpty()) 
-				throw new ArgumentException($"{aggregator.GetType().Name} .Name is not set!" );
-			return new Dictionary<string, AggregationContainer> { { b.Name, aggregator }};
+			IAggregatorBase b = null;
+			var combinator = aggregator as AggregatorCombinator;
+			if (combinator != null)
+			{
+				var dict = new Dictionary<string, AggregationContainer>();
+				foreach (var agg in combinator.Aggregations)
+				{
+					b =  agg;
+					if (b.Name.IsNullOrEmpty())
+						throw new ArgumentException($"{aggregator.GetType().Name} .Name is not set!");
+					dict.Add(b.Name, agg);
+				}
+				return dict;
+			}
+
+			b = aggregator;
+			if (b.Name.IsNullOrEmpty())
+				throw new ArgumentException($"{aggregator.GetType().Name} .Name is not set!");
+			return new Dictionary<string, AggregationContainer> { { b.Name, aggregator } };
 		}
+
 
 	}
 
@@ -258,7 +275,7 @@ namespace Nest
 
 		IScriptedMetricAggregator IAggregationContainer.ScriptedMetric { get; set; }
 
-		public AggregationContainerDescriptor<T> Average(string name, 
+		public AggregationContainerDescriptor<T> Average(string name,
 			Func<AverageAggregatorDescriptor<T>, IAverageAggregator> selector) =>
 			_SetInnerAggregation(name, selector, (a, d) => a.Average = d);
 
@@ -307,54 +324,54 @@ namespace Nest
 			_SetInnerAggregation(name, selector, (a, d) => a.Histogram = d);
 
 		public AggregationContainerDescriptor<T> Global(string name,
-			Func<GlobalAggregatorDescriptor<T>, IGlobalAggregator> selector) => 
+			Func<GlobalAggregatorDescriptor<T>, IGlobalAggregator> selector) =>
 			_SetInnerAggregation(name, selector, (a, d) => a.Global = d);
 
 		public AggregationContainerDescriptor<T> IpRange(string name,
 			Func<Ip4RangeAggregatorDescriptor<T>, IIp4RangeAggregator> selector) =>
 			_SetInnerAggregation(name, selector, (a, d) => a.IpRange = d);
 
-		public AggregationContainerDescriptor<T> Max(string name, 
+		public AggregationContainerDescriptor<T> Max(string name,
 			Func<MaxAggregatorDescriptor<T>, IMaxAggregator> selector) =>
 			_SetInnerAggregation(name, selector, (a, d) => a.Max = d);
 
-		public AggregationContainerDescriptor<T> Min(string name, 
+		public AggregationContainerDescriptor<T> Min(string name,
 			Func<MinAggregatorDescriptor<T>, IMinAggregator> selector) =>
 			_SetInnerAggregation(name, selector, (a, d) => a.Min = d);
 
-		public AggregationContainerDescriptor<T> Cardinality(string name, 
+		public AggregationContainerDescriptor<T> Cardinality(string name,
 			Func<CardinalityAggregatorDescriptor<T>, ICardinalityAggregator> selector) =>
 			_SetInnerAggregation(name, selector, (a, d) => a.Cardinality = d);
 
-		public AggregationContainerDescriptor<T> Missing(string name, 
+		public AggregationContainerDescriptor<T> Missing(string name,
 			Func<MissingAggregatorDescriptor<T>, IMissingAggregator> selector) =>
 			_SetInnerAggregation(name, selector, (a, d) => a.Missing = d);
 
-		public AggregationContainerDescriptor<T> Nested(string name, 
+		public AggregationContainerDescriptor<T> Nested(string name,
 			Func<NestedAggregatorDescriptor<T>, INestedAggregator> selector) =>
 			_SetInnerAggregation(name, selector, (a, d) => a.Nested = d);
 
-		public AggregationContainerDescriptor<T> ReverseNested(string name, 
+		public AggregationContainerDescriptor<T> ReverseNested(string name,
 			Func<ReverseNestedAggregationDescriptor<T>, IReverseNestedAggregator> selector) =>
 			_SetInnerAggregation(name, selector, (a, d) => a.ReverseNested = d);
 
-		public AggregationContainerDescriptor<T> Range(string name, 
+		public AggregationContainerDescriptor<T> Range(string name,
 			Func<RangeAggregatorDescriptor<T>, IRangeAggregator> selector) =>
 			_SetInnerAggregation(name, selector, (a, d) => a.Range = d);
 
-		public AggregationContainerDescriptor<T> Stats(string name, 
+		public AggregationContainerDescriptor<T> Stats(string name,
 			Func<StatsAggregatorDescriptor<T>, IStatsAggregator> selector) =>
 			_SetInnerAggregation(name, selector, (a, d) => a.Stats = d);
 
-		public AggregationContainerDescriptor<T> Sum(string name, 
+		public AggregationContainerDescriptor<T> Sum(string name,
 			Func<SumAggregatorDescriptor<T>, ISumAggregator> selector) =>
 			_SetInnerAggregation(name, selector, (a, d) => a.Sum = d);
 
-		public AggregationContainerDescriptor<T> Terms(string name, 
+		public AggregationContainerDescriptor<T> Terms(string name,
 			Func<TermsAggregatorDescriptor<T>, ITermsAggregator> selector) =>
 			_SetInnerAggregation(name, selector, (a, d) => a.Terms = d);
 
-		public AggregationContainerDescriptor<T> SignificantTerms(string name, 
+		public AggregationContainerDescriptor<T> SignificantTerms(string name,
 			Func<SignificantTermsAggregatorDescriptor<T>, ISignificantTermsAggregator> selector) =>
 			_SetInnerAggregation(name, selector, (a, d) => a.SignificantTerms = d);
 
@@ -386,7 +403,7 @@ namespace Nest
 			where TAggregatorInterface : IAggregator
 		{
 			var aggregator = selector(new TAggregator());
-			
+
 			//create new isolated container for new aggregator and assign to the right property
 			var container = new AggregationContainer();
 			assignToProperty(container, aggregator);
