@@ -4,7 +4,24 @@ serialized = null;
 serialized = this.Serialize(o);
 var actualJson = JObject.Parse(serialized);
 var matches = JToken.DeepEquals(this._expectedJsonJObject, actualJson);
-this.ShouldBeEquivalentTo(serialized);
+var d = new Differ();
+var inlineBuilder = new InlineDiffBuilder(d);
+var result = inlineBuilder.BuildDiffModel(_expectedJsonString, serialized);
+var diff = result.Lines.Aggregate(new StringBuilder(), (sb, line) =>
+			{
+				if (line.Type == ChangeType.Inserted)
+					sb.Append("+ ");
+				else if (line.Type == ChangeType.Deleted)
+					sb.Append("- ");
+				else
+					sb.Append("  ");
+				sb.AppendLine(line.Text);
+				return sb;
+			}, sb => sb.ToString());
+sb.Append("+ ");
+sb.Append("- ");
+sb.Append("  ");
+sb.AppendLine(line.Text);
 var bytes = TestClient.GetClient().Serializer.Serialize(o);
 string serialized;
 var oAgain = this.Deserialize<T>(serialized);

@@ -1,0 +1,9 @@
+[source, csharp]
+----
+new SearchRequest<Project>()
+{
+	PostFilter = new QueryContainer(new MatchAllQuery())
+}
+s => s
+.PostFilter(f => f.MatchAll())
+----

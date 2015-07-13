@@ -17,6 +17,7 @@ namespace Nest.Litterateur.Walkers
 		private int ClassDepth { get; set; }
 		private bool InsideMultiLineDocumentation { get; set; }
 		private bool InsideAutoIncludeMethodBlock { get; set; }
+		private bool InsideFluentOrInitializerExample { get; set; }
 		public List<IDocumentationBlock> Blocks { get; } = new List<IDocumentationBlock>();
 
 		public override void VisitClassDeclaration(ClassDeclarationSyntax node)
@@ -24,6 +25,33 @@ namespace Nest.Litterateur.Walkers
 			++ClassDepth;
 			base.VisitClassDeclaration(node);
 			--ClassDepth;
+		}
+
+		public override void VisitPropertyDeclaration(PropertyDeclarationSyntax node)
+		{
+			var propertyName = node.Identifier.Text;
+			if (propertyName == "Fluent")
+			{
+				this.InsideFluentOrInitializerExample = true;
+				base.VisitPropertyDeclaration(node);
+				this.InsideFluentOrInitializerExample = false;
+			}
+			else if (propertyName == "Initializer")
+			{
+				this.InsideFluentOrInitializerExample = true;
+				base.VisitPropertyDeclaration(node);
+				this.InsideFluentOrInitializerExample = false;
+			}
+		}
+
+		public override void VisitArrowExpressionClause(ArrowExpressionClauseSyntax node)
+		{
+			if (!this.InsideFluentOrInitializerExample) return;
+			var syntaxNode = node?.ChildNodes()?.LastOrDefault()?.WithAdditionalAnnotations();
+			if (syntaxNode == null) return;
+			var walker = new CodeWithDocumentationWalker(ClassDepth);
+			walker.Visit(syntaxNode);
+			this.Blocks.AddRange(walker.Blocks);
 		}
 
 		public override void VisitMethodDeclaration(MethodDeclarationSyntax node)

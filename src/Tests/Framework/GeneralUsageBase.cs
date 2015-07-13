@@ -23,7 +23,7 @@ namespace Tests.Framework
 		protected virtual IElasticClient Client() => TestClient.GetClient(ConnectionSettings); 
 
 		[U] protected void SerializesInitializer() => 
-			this.AssertSerializesAndRoundTrips(this.Initializer);
+			this.AssertSerializesAndRoundTrips<TInterface>(this.Initializer);
 
 		[U] protected void SerializesFluent() => 
 			this.AssertSerializesAndRoundTrips(this.FluentInstance);
