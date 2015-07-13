@@ -14,11 +14,11 @@ namespace Nest
 		[JsonProperty("text")]
 		public string Text { get; internal set; }
 		[JsonProperty("options")]
-		public IEnumerable<SuggestOption> Options { get; internal set; }
+		public IEnumerable<SuggestOption<object>> Options { get; internal set; }
 
-		public IEnumerable<CompletionOption<T>> GetCompletionOptions<T>()
+		public IEnumerable<SuggestOption<T>> GetCompletionOptions<T>()
 		{
-			return Options?.Select(x => new CompletionOption<T>(x)) ?? Enumerable.Empty<CompletionOption<T>>();
+			return Options?.Select(x => new SuggestOption<T>(x)) ?? Enumerable.Empty<SuggestOption<T>>();
 		}
 	}
 }
