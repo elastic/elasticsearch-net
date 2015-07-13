@@ -14,7 +14,8 @@ namespace Tests.Aggregations.Bucket
 	public class ChildrenAggregation
 	{
 		/**
-		 * A special single bucket aggregation that enables aggregating from buckets on parent document types to buckets on child documents.
+		 * A special single bucket aggregation that enables aggregating from buckets on parent document types to
+		 * buckets on child documents.
 		 */
 
 		private void MappingExample()
