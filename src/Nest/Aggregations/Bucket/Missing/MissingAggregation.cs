@@ -19,6 +19,13 @@ namespace Nest
 		public FieldName Field { get; set; }
 	}
 
+	public class MissingAgg : BucketAgg, IMissingAggregator
+	{
+		public FieldName Field { get; set; }
+
+		public MissingAgg(string name) : base(name) { }
+	}
+
 	public class MissingAggregatorDescriptor<T> 
 		: BucketAggregatorBaseDescriptor<MissingAggregatorDescriptor<T>,IMissingAggregator, T>
 			, IMissingAggregator 

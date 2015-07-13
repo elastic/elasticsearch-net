@@ -55,6 +55,21 @@ namespace Nest
 		public bool? Version { get; set; }
 	}
 
+	public class TopHitsAgg : MetricAgg, ITopHitsAggregator
+	{
+		public int? From { get; set; }
+		public int? Size { get; set; }
+		public IList<KeyValuePair<FieldName, ISort>> Sort { get; set; }
+		public ISourceFilter Source { get; set; }
+		public IHighlightRequest Highlight { get; set; }
+		public bool? Explain { get; set; }
+		public IDictionary<string, IScriptQuery> ScriptFields { get; set; }
+		public IEnumerable<FieldName> FieldDataFields { get; set; }
+		public bool? Version { get; set; }
+
+		public TopHitsAgg(string name, FieldName field) : base(name, field) { }
+	}
+
 	public class TopHitsAggregatorDescriptor<T>
 		: MetricAggregationBaseDescriptor<TopHitsAggregatorDescriptor<T>, ITopHitsAggregator, T>
 			, ITopHitsAggregator

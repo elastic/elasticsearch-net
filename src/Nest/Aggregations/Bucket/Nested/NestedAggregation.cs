@@ -18,6 +18,13 @@ namespace Nest
 		public FieldName Path { get; set; }
 	}
 
+	public class NestedAgg : BucketAgg, INestedAggregator
+	{
+		public FieldName Path { get; set; }
+
+		public NestedAgg(string name) : base(name) { }
+	}
+
 	public class NestedAggregatorDescriptor<T> 
 		: BucketAggregatorBaseDescriptor<NestedAggregatorDescriptor<T>, INestedAggregator, T>
 			, INestedAggregator 

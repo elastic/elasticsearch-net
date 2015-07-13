@@ -51,6 +51,21 @@ namespace Nest
 		public long? PostOffset { get; set; }
 	}
 
+	public class HistogramAgg : BucketAgg, IHistogramAggregator
+	{
+		public FieldName Field { get; set; }
+		public string Script { get; set; }
+		public FluentDictionary<string, object> Params { get; set; }
+		public double? Interval { get; set; }
+		public int? MinimumDocumentCount { get; set; }
+		public IDictionary<string, string> Order { get; set; }
+		public IDictionary<string, object> ExtendedBounds { get; set; }
+		public long? PreOffset { get; set; }
+		public long? PostOffset { get; set; }
+
+		public HistogramAgg(string name) : base(name) { }
+	}
+
 	public class HistogramAggregatorDescriptor<T> 
 		: BucketAggregatorBaseDescriptor<HistogramAggregatorDescriptor<T>, IHistogramAggregator, T>, IHistogramAggregator 
 		where T : class

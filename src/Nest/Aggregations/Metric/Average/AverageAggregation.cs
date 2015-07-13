@@ -12,6 +12,11 @@ namespace Nest
 
 	public class AverageAggregator : MetricAggregator, IAverageAggregator { }
 
+	public class AverageAgg : MetricAgg, IAverageAggregator
+	{
+		public AverageAgg(string name, FieldName field) : base(name, field) { }
+	}
+
 	public class AverageAggregatorDescriptor<T> 
 		: MetricAggregationBaseDescriptor<AverageAggregatorDescriptor<T>, IAverageAggregator, T>
 			, IAverageAggregator 

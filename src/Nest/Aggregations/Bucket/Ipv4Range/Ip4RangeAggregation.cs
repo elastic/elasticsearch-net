@@ -24,6 +24,14 @@ namespace Nest
 		public IEnumerable<Ip4ExpressionRange> Ranges { get; set; }
 	}
 
+	public class Ip4RangeAgg : BucketAgg, IIp4RangeAggregator
+	{
+		public FieldName Field { get; set; }
+		public IEnumerable<Ip4ExpressionRange> Ranges { get; set; }
+
+		public Ip4RangeAgg(string name) : base(name) { }
+	}
+
 	public class Ip4RangeAggregatorDescriptor<T> : 
 		BucketAggregatorBaseDescriptor<Ip4RangeAggregatorDescriptor<T>,IIp4RangeAggregator, T>
 			, IIp4RangeAggregator 

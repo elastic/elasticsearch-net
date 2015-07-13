@@ -68,6 +68,25 @@ namespace Nest
 		public IQueryContainer BackgroundFilter { get; set; }
 	}
 
+	public class SignificantTermsAgg : BucketAgg, ISignificantTermsAggregator
+	{
+		public FieldName Field { get; set; }
+		public int? Size { get; set; }
+		public int? ShardSize { get; set; }
+		public int? MinimumDocumentCount { get; set; }
+		public TermsAggregationExecutionHint? ExecutionHint { get; set; }
+		public IDictionary<string, string> Include { get; set; }
+		public IDictionary<string, string> Exclude { get; set; }
+		public MutualInformationHeuristic MutualInformation { get; set; }
+		public ChiSquareHeuristic ChiSquare { get; set; }
+		public GoogleNormalizedDistanceHeuristic GoogleNormalizedDistance { get; set; }
+		public PercentageScoreHeuristic PercentageScore { get; set; }
+		public ScriptedHeuristic Script { get; set; }
+		public IQueryContainer BackgroundFilter { get; set; }
+
+		public SignificantTermsAgg(string name) : base(name) { }
+	}
+
 	public class SignificantTermsAggregatorDescriptor<T>
 		: BucketAggregatorBaseDescriptor<SignificantTermsAggregatorDescriptor<T>, ISignificantTermsAggregator, T>
 			, ISignificantTermsAggregator

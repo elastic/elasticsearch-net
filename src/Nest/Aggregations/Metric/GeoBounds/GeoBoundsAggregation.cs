@@ -20,6 +20,13 @@ namespace Nest
 		public bool? WrapLongitude { get; set; }
 	}
 
+	public class GeoBoundsAgg : MetricAgg, IGeoBoundsAggregator
+	{
+		public bool? WrapLongitude { get; set; }
+
+		public GeoBoundsAgg(string name, FieldName field) : base(name, field) { }
+	}
+
 	public class GeoBoundsAggregatorDescriptor<T> 
 		: MetricAggregationBaseDescriptor<GeoBoundsAggregatorDescriptor<T>, IGeoBoundsAggregator, T>
 			, IGeoBoundsAggregator

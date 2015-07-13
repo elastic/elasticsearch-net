@@ -32,6 +32,16 @@ namespace Nest
 		public IEnumerable<Range<double>> Ranges { get; set; }
 	}
 
+	public class RangeAgg : BucketAgg, IRangeAggregator
+	{
+		public FieldName Field { get; set; }
+		public string Script { get; set; }
+		public FluentDictionary<string, object> Params { get; set; }
+		public IEnumerable<Range<double>> Ranges { get; set; }
+
+		public RangeAgg(string name) : base(name) { }
+	}
+
 	public class RangeAggregatorDescriptor<T>
 		: BucketAggregatorBaseDescriptor<RangeAggregatorDescriptor<T>, IRangeAggregator, T>, IRangeAggregator
 		where T : class

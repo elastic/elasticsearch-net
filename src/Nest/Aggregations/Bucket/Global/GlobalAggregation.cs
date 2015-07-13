@@ -10,6 +10,11 @@ namespace Nest
 
 	public class GlobalAggregator : BucketAggregator, IGlobalAggregator { }
 
+	public class GlobalAgg : BucketAgg, IGlobalAggregator
+	{
+		public GlobalAgg(string name) : base(name) { }
+	}
+
 	public class GlobalAggregatorDescriptor<T> 
 		: BucketAggregatorBaseDescriptor<GlobalAggregatorDescriptor<T>, IGlobalAggregator, T>
 			, IGlobalAggregator

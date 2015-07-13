@@ -22,6 +22,14 @@ namespace Nest
 		public FieldName Path { get; set; }
 	}
 
+	public class ReverseNestedAgg : BucketAgg, IReverseNestedAggregator
+	{
+		[JsonProperty("path")]
+		public FieldName Path { get; set; }
+
+		public ReverseNestedAgg(string name) : base(name) { }
+	}
+
 	public class ReverseNestedAggregationDescriptor<T> 
 		: BucketAggregatorBaseDescriptor<ReverseNestedAggregationDescriptor<T>,IReverseNestedAggregator, T>
 			, IReverseNestedAggregator 

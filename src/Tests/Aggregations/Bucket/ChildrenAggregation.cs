@@ -7,6 +7,7 @@ using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
+using static Nest.Property;
 
 namespace Tests.Aggregations.Bucket
 {
@@ -50,7 +51,6 @@ namespace Tests.Aggregations.Bucket
 						}
 					}
 				}
-
 			};
 
 			protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
@@ -82,6 +82,20 @@ namespace Tests.Aggregations.Bucket
 							}
 						}
 						}
+					}
+				};
+		}
+
+		public class AggregationDslUsage : Usage
+		{
+			public AggregationDslUsage(ReadOnlyIntegration i) : base(i) { }
+
+			protected override SearchRequest<Project> Initializer =>
+				new SearchRequest<Project>
+				{
+					Aggregations = new ChildrenAgg("name_of_child_agg")
+					{
+						Aggregations = new AverageAgg("average_per_child", Field<CommitActivity>(p=>p.ConfidenceFactor))
 					}
 				};
 		}

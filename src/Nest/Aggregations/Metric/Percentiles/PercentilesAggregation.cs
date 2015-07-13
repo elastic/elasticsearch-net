@@ -23,6 +23,16 @@ namespace Nest
 		public int? Compression { get; set; }
 	}
 
+	public class PercentilesAgg : MetricAgg, IPercentilesAggregator
+	{
+		public IEnumerable<double> Percentages { get; set; }
+		public int? Compression { get; set; }
+
+		public PercentilesAgg(string name, FieldName field) : base(name, field)
+		{
+		}
+	}
+
 	public class PercentilesAggregatorDescriptor<T> 
 		: MetricAggregationBaseDescriptor<PercentilesAggregatorDescriptor<T>, IPercentilesAggregator, T>
 			, IPercentilesAggregator 

@@ -49,7 +49,7 @@ namespace Nest.Resolvers.Converters.Aggregations
 			var prop = reader.Value;
 			if ((string)reader.Value != "filter") return null;
 			reader.Read();
-			var agg = new FilterAggregator();
+			var agg = new FilterAggregator(null);
 			serializer.Populate(reader, agg);
 			return agg;
 		}

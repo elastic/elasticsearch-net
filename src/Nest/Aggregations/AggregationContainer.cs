@@ -5,6 +5,21 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	[JsonConverter(typeof (DictionaryKeysAreNotFieldNamesJsonConverter))]
+	public class AggregationDictionary : ProxyDictionary<string, IAggregationContainer>
+	{
+		public AggregationDictionary() : base() { }
+		public AggregationDictionary(IDictionary<string, IAggregationContainer> container) : base(container) { }
+
+		public static implicit operator AggregationDictionary(Dictionary<string, IAggregationContainer> container) =>
+			new AggregationDictionary(container);
+
+		public static implicit operator AggregationDictionary(AggregatorBase aggregator) =>
+			new AggregationDictionary();
+
+	}
+
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ReadAsTypeConverter<AggregationContainer>))]
 	public interface IAggregationContainer
@@ -97,8 +112,8 @@ namespace Nest
 		IScriptedMetricAggregator ScriptedMetric { get; set; }
 
 		[JsonProperty("aggs")]
-		[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]
-		IDictionary<string, IAggregationContainer> Aggregations { get; set; }
+		AggregationDictionary Aggregations { get; set; }
+
 	}
 
 	public class AggregationContainer : IAggregationContainer
@@ -154,13 +169,18 @@ namespace Nest
 
 		public IScriptedMetricAggregator ScriptedMetric { get; set; }
 
-		public IDictionary<string, IAggregationContainer> Aggregations { get; set; }
+		public AggregationDictionary Aggregations { get; set; }
+
+		public static implicit operator AggregationContainer(AggregatorBase aggregator) =>
+			new AggregationContainer();
+
+
 	}
 
 	public class AggregationContainerDescriptor<T> : IAggregationContainer
 		where T : class
 	{
-		IDictionary<string, IAggregationContainer> IAggregationContainer.Aggregations { get; set; }
+		AggregationDictionary IAggregationContainer.Aggregations { get; set; }
 
 		IAverageAggregator IAggregationContainer.Average { get; set; }
 

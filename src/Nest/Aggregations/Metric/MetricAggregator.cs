@@ -30,6 +30,20 @@ namespace Nest
 		public string Language { get; set; }
 	}
 
+	public abstract class MetricAgg : AggregatorBase, IMetricAggregator
+	{
+		FieldName IMetricAggregator.Field { get; set; }
+
+		protected MetricAgg(string name, FieldName field) : base(name)
+		{
+			((IMetricAggregator)this).Field = field;
+		}
+
+		public virtual string Script { get; set; }
+		public IDictionary<string, object> Params { get; set; }
+		public string Language { get; set; }
+	}
+
 	public abstract class MetricAggregationBaseDescriptor<TMetricAggregation, TMetricAggregationInterface, T> 
 		:  IMetricAggregator 
 		where TMetricAggregation : MetricAggregationBaseDescriptor<TMetricAggregation, TMetricAggregationInterface, T>

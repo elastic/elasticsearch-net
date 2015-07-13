@@ -32,6 +32,16 @@ namespace Nest
 		public GeoHashPrecision? Precision { get; set; }
 	}
 
+	public class GeoHashAgg : BucketAgg, IGeoHashAggregator
+	{
+		public FieldName Field { get; set; }
+		public int? Size { get; set; }
+		public int? ShardSize { get; set; }
+		public GeoHashPrecision? Precision { get; set; }
+
+		public GeoHashAgg(string name) : base(name) { }
+	}
+
 	public class GeoHashAggregatorDescriptor<T> 
 		: BucketAggregatorBaseDescriptor<GeoHashAggregatorDescriptor<T>, IGeoHashAggregator, T>
 			, IGeoHashAggregator 

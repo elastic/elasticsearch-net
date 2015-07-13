@@ -19,6 +19,13 @@ namespace Nest
 		public IEnumerable<IQueryContainer> Filters { get; set; }
 	}
 
+	public class FiltersAgg : BucketAgg, IFiltersAggregator
+	{
+		public IEnumerable<IQueryContainer> Filters { get; set; }
+
+		public FiltersAgg(string name) : base(name) { }
+	}
+
 	public class FiltersAggregatorDescriptor<T> 
 		: BucketAggregatorBaseDescriptor<FiltersAggregatorDescriptor<T>, IFiltersAggregator, T>
 		, IFiltersAggregator

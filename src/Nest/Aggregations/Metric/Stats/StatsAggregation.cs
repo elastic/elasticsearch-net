@@ -12,6 +12,11 @@ namespace Nest
 
 	public class StatsAggregator : MetricAggregator, IStatsAggregator { }
 
+	public class StatsAgg : MetricAgg, IStatsAggregator
+	{
+		public StatsAgg(string name, FieldName field) : base(name, field) { }
+	}
+
 	public class StatsAggregatorDescriptor<T>
 		: MetricAggregationBaseDescriptor<StatsAggregatorDescriptor<T>, IStatsAggregator, T>
 			, IStatsAggregator 

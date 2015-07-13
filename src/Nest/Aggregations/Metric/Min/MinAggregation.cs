@@ -12,6 +12,11 @@ namespace Nest
 
 	public class MinAggregator : MetricAggregator, IMinAggregator { }
 
+	public class MinAgg : MetricAgg, IMinAggregator
+	{
+		public MinAgg(string name, FieldName field) : base(name, field) { }
+	}
+
 	public class MinAggregatorDescriptor<T> 
 		: MetricAggregationBaseDescriptor<MinAggregatorDescriptor<T>, IMinAggregator, T>
 			, IMinAggregator 

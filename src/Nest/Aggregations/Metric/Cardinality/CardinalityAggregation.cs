@@ -23,6 +23,14 @@ namespace Nest
 		public bool? Rehash { get; set; }
 	}
 
+	public class CardinalityAgg : MetricAgg, ICardinalityAggregator
+	{
+		public int? PrecisionThreshold { get; set; }
+		public bool? Rehash { get; set; }
+
+		public CardinalityAgg(string name, FieldName field) : base(name, field) { }
+	}
+
 	public class CardinalityAggregatorDescriptor<T> 
 		: MetricAggregationBaseDescriptor<CardinalityAggregatorDescriptor<T>, ICardinalityAggregator, T>
 			, ICardinalityAggregator 

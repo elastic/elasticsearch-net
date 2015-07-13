@@ -12,6 +12,11 @@ namespace Nest
 
 	public class MaxAggregator : MetricAggregator, IMaxAggregator { }
 
+	public class MaxAgg : MetricAgg, IMaxAggregator
+	{
+		public MaxAgg(string name, FieldName field) : base(name, field) { }
+	}
+
 	public class MaxAggregatorDescriptor<T> 
 		: MetricAggregationBaseDescriptor<MaxAggregatorDescriptor<T>, IMaxAggregator, T>
 			, IMaxAggregator 
