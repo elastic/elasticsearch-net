@@ -19,6 +19,15 @@ namespace Nest
 		public FieldName Field { get; set; }
 	}
 
+	public class MissingAgg : BucketAgg, IMissingAggregator
+	{
+		public FieldName Field { get; set; }
+
+		public MissingAgg(string name) : base(name) { }
+
+		internal override void WrapInContainer(AggregationContainer c) => c.Missing = this;
+	}
+
 	public class MissingAggregatorDescriptor<T> 
 		: BucketAggregatorBaseDescriptor<MissingAggregatorDescriptor<T>,IMissingAggregator, T>
 			, IMissingAggregator 

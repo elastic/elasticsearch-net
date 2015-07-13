@@ -28,6 +28,17 @@ namespace Nest
 		public IEnumerable<DateExpressionRange> Ranges { get; set; }
 	}
 
+	public class DateRangeAgg : BucketAgg, IDateRangeAggregator
+	{
+		public FieldName Field { get; set; }
+		public string Format { get; set; }
+		public IEnumerable<DateExpressionRange> Ranges { get; set; }
+
+		public DateRangeAgg(string name) : base(name) { }
+
+		internal override void WrapInContainer(AggregationContainer c) => c.DateRange = this;
+	}
+
 	public class DateRangeAggregatorDescriptor<T> 
 		: BucketAggregatorBaseDescriptor<DateRangeAggregatorDescriptor<T>, IDateRangeAggregator, T>
 			, IDateRangeAggregator 

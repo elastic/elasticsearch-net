@@ -41,6 +41,23 @@ namespace Nest
 		public IEnumerable<Range<double>> Ranges { get; set; }
 	}
 
+	public class GeoDistanceAgg : BucketAgg, IGeoDistanceAggregator
+	{
+		public FieldName Field { get; set; }
+
+		public string Origin { get; set; }
+
+		public GeoUnit? Unit { get; set; }
+
+		public GeoDistance? DistanceType { get; set; }
+
+		public IEnumerable<Range<double>> Ranges { get; set; }
+
+		public GeoDistanceAgg(string name) : base(name) { }
+
+		internal override void WrapInContainer(AggregationContainer c) => c.GeoDistance = this;
+	}
+
 	public class GeoDistanceAggregatorDescriptor<T> :
 		BucketAggregatorBaseDescriptor<GeoDistanceAggregatorDescriptor<T>, IGeoDistanceAggregator, T>
 			, IGeoDistanceAggregator

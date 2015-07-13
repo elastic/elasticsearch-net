@@ -60,6 +60,25 @@ namespace Nest
 		public TermsAggregationCollectMode? CollectMode { get; set; }
 	}
 
+	public class TermsAgg : BucketAgg, ITermsAggregator
+	{
+		public FieldName Field { get; set; }
+		public string Script { get; set; }
+		public int? Size { get; set; }
+		public int? ShardSize { get; set; }
+		public int? MinimumDocumentCount { get; set; }
+		public TermsAggregationExecutionHint? ExecutionHint { get; set; }
+		public IDictionary<string, string> Order { get; set; }
+		public TermsIncludeExclude Include { get; set; }
+		public TermsIncludeExclude Exclude { get; set; }
+		public IDictionary<string, object> Params { get; set; }
+		public TermsAggregationCollectMode? CollectMode { get; set; }
+
+		public TermsAgg(string name) : base(name) { }
+
+		internal override void WrapInContainer(AggregationContainer c) => c.Terms = this;
+	}
+
 
 	public class TermsAggregatorDescriptor<T> 
 		: BucketAggregatorBaseDescriptor<TermsAggregatorDescriptor<T>, ITermsAggregator, T>

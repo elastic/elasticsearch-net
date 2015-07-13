@@ -23,14 +23,16 @@ namespace Tests.Search.Request
 				{
 					nested = new
 					{
-						path = "project.tags",
 						query = new
 						{
 							match = new
 							{
-								name = "1.0"
+								name = new {
+									query = "1.0"
+								}
 							}
 						},
+						path = "project.tags",
 						inner_hits = new { }
 					}
 				}
@@ -50,14 +52,14 @@ namespace Tests.Search.Request
 					)
 				);
 
-			protected override SearchRequest<Project> Initializer => 
+			protected override SearchRequest<Project> Initializer =>
 				new SearchRequest<Project>
 				{
 					Query = new NestedQuery
 					{
 						Path = "project.tags",
 						Query = new QueryContainer(new MatchQuery
-                        {
+						{
 							Field = "name",
 							Query = "1.0"
 						}),

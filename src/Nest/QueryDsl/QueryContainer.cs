@@ -61,7 +61,6 @@ namespace Nest
 		IMultiMatchQuery MultiMatch { get; set; }
 
 		[JsonProperty(PropertyName = "match")]
-		[JsonConverter(typeof (MatchQueryJsonConverter))]
 		IMatchQuery Match { get; set; }
 
 		[JsonProperty(PropertyName = "fuzzy")]

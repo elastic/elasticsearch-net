@@ -75,6 +75,29 @@ namespace Nest
 		public IDictionary<string, object> ExtendedBounds { get; set; }
 	}
 
+	public class DateHistogramAgg : BucketAgg, IDateHistogramAggregator
+	{
+		public FieldName Field { get; set; }
+		public string Script { get; set; }
+		public IDictionary<string, object> Params { get; set; }
+		public string Interval { get; set; }
+		public string Format { get; set; }
+		public int? MinimumDocumentCount { get; set; }
+		public string PreZone { get; set; }
+		public string PostZone { get; set; }
+		public string TimeZone { get; set; }
+		public bool? PreZoneAdjustLargeInterval { get; set; }
+		public int? Factor { get; set; }
+		public string PreOffset { get; set; }
+		public string PostOffset { get; set; }
+		public IDictionary<string, string> Order { get; set; }
+		public IDictionary<string, object> ExtendedBounds { get; set; }
+
+		public DateHistogramAgg(string name) : base(name) { }
+
+		internal override void WrapInContainer(AggregationContainer c) => c.DateHistogram = this;
+	}
+
 	public class DateHistogramAggregatorDescriptor<T>
 		: BucketAggregatorBaseDescriptor<DateHistogramAggregatorDescriptor<T>, IDateHistogramAggregator, T>
 			, IDateHistogramAggregator

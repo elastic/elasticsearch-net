@@ -70,6 +70,28 @@ namespace Nest
 		public IDictionary<string, object> ReduceParams { get; set; }
 	}
 
+	public class ScriptedMetricsAgg : MetricAgg, IScriptedMetricAggregator
+	{
+		[Obsolete("Script proxies to MapScript on ScriptedMetric, please consider using MapScript explicitly")]
+		public override string Script { get { return MapScript; } set { MapScript = value; } }
+		public string InitScript { get; set; }
+		public string InitScriptFile { get; set; }
+		public string InitScriptId { get; set; }
+		public string MapScript { get; set; }
+		public string MapScriptFile { get; set; }
+		public string MapScriptId { get; set; }
+		public string CombineScript { get; set; }
+		public string CombineScriptFile { get; set; }
+		public string CombineScriptId { get; set; }
+		public string ReduceScript { get; set; }
+		public string ReduceScriptFile { get; set; }
+		public string ReduceScriptId { get; set; }
+		public IDictionary<string, object> ReduceParams { get; set; }
+
+		public ScriptedMetricsAgg(string name, FieldName field) : base(name, field) { }
+
+		internal override void WrapInContainer(AggregationContainer c) => c.ScriptedMetric = this;
+	}
 	public class ScriptedMetricAggregatorDescriptor<T>
 		: MetricAggregationBaseDescriptor<ScriptedMetricAggregatorDescriptor<T>, IScriptedMetricAggregator, T>
 		, IScriptedMetricAggregator

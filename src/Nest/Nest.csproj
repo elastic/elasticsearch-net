@@ -71,6 +71,7 @@
     <Compile Include="Aggregations\Bucket\SignificantTerms\Heuristics\MutualInformationHeuristic.cs" />
     <Compile Include="Aggregations\Bucket\SignificantTerms\Heuristics\PercentageScoreHeuristic.cs" />
     <Compile Include="Aggregations\IAggregator.cs" />
+    <Compile Include="CommonAbstractions\ProxyDictionary.cs" />
     <Compile Include="Cat\CatAllocation\ElasticClient-CatAllocation.cs" />
     <Compile Include="Cat\CatCount\ElasticClient-CatCount.cs" />
     <Compile Include="Cat\CatFielddata\ElasticClient-CatFielddata.cs" />
@@ -448,7 +449,7 @@
     <Compile Include="CommonAbstractions\ForAttribute.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\CustomJson\ICustomJson.cs" />
     <Compile Include="CommonAbstractions\Fields\FluentFieldList.cs" />
-    <Compile Include="CommonAbstractions\Infer\Property.cs" />
+    <Compile Include="CommonAbstractions\Infer\Field.cs" />
     <Compile Include="Modules\SnapshotAndRestore\Snapshot\Snapshot.cs" />
     <Compile Include="Modules\SnapshotAndRestore\Restore\SnapshotRestore.cs" />
     <Compile Include="Cluster\ClusterSettings\ClusterPutSettings\ClusterPutSettingsResponse.cs" />
@@ -530,7 +531,6 @@
     <Compile Include="CommonAbstractions\SerializationBehavior\Resolvers\Converters\ClusterRerouteCommandCollectionConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\Resolvers\Converters\CatFielddataRecordConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\Resolvers\Converters\CompositeJsonConverter.cs" />
-    <Compile Include="CommonAbstractions\SerializationBehavior\CustomJson\ICustomJsonReader.cs" />
     <Compile Include="Modules\SnapshotAndRestore\Snapshot\GetSapshot\GetSnapshotRequest.cs" />
     <Compile Include="QueryDsl\Compound\FunctionScore\Functions\BoostFactorFunction.cs" />
     <Compile Include="QueryDsl\Compound\FunctionScore\Functions\ExpFunction.cs" />

@@ -75,7 +75,6 @@ namespace Tests.Framework.Integration
 						.String(prop=>prop.Name(p=>p.ProjectName).NotAnalyzed())
 					)
 				)
-
 			);
 			createProjectIndex.IsValid.Should().BeTrue();
 

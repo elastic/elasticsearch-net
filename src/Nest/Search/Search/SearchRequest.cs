@@ -71,8 +71,7 @@ namespace Nest
 		ISourceFilter Source { get; set; }
 
 		[JsonProperty(PropertyName = "aggs")]
-		[JsonConverter(typeof (DictionaryKeysAreNotFieldNamesJsonConverter))]
-		IDictionary<string, IAggregationContainer> Aggregations { get; set; }
+		AggregationDictionary Aggregations { get; set; }
 
 		[JsonProperty(PropertyName = "query")]
 		IQueryContainer Query { get; set; }
@@ -163,7 +162,7 @@ namespace Nest
 		public IRescore Rescore { get; set; }
 		public IDictionary<string, ISuggestBucket> Suggest { get; set; }
 		public IHighlightRequest Highlight { get; set; }
-		public IDictionary<string, IAggregationContainer> Aggregations { get; set; }
+		public AggregationDictionary Aggregations { get; set; }
 
 		SearchType? ISearchRequest.SearchType => this.QueryString?.GetQueryStringValue<SearchType?>("search_type");
 
@@ -217,7 +216,7 @@ namespace Nest
 		public IDictionary<string, IScriptQuery> ScriptFields { get; set; }
 		public ISourceFilter Source { get; set; }
 		public IDictionary<string, IInnerHitsContainer> InnerHits { get; set; }
-		public IDictionary<string, IAggregationContainer> Aggregations { get; set; }
+		public AggregationDictionary Aggregations { get; set; }
 
 		IQueryContainer ISearchRequest.Query { get; set; }
 		[JsonProperty(PropertyName = "query")]
@@ -304,7 +303,7 @@ namespace Nest
 
 		ISourceFilter ISearchRequest.Source { get; set; }
 
-		IDictionary<string, IAggregationContainer> ISearchRequest.Aggregations { get; set; }
+		AggregationDictionary ISearchRequest.Aggregations { get; set; }
 
 		IDictionary<string, IInnerHitsContainer> ISearchRequest.InnerHits { get; set; }
 
@@ -324,7 +323,7 @@ namespace Nest
 		public SearchDescriptor<T> Strict(bool strict = true) => _assign(a => this._Strict = strict);
 
 		public SearchDescriptor<T> Aggregations(Func<AggregationContainerDescriptor<T>, IAggregationContainer> aggregationsSelector) =>
-			_assign(a=>a.Aggregations = aggregationsSelector(new AggregationContainerDescriptor<T>())?.Aggregations.NullIfNoKeys());
+			_assign(a=>a.Aggregations = aggregationsSelector(new AggregationContainerDescriptor<T>())?.Aggregations);
 		
 		//TODO refactor!
 		public SearchDescriptor<T> InnerHits(

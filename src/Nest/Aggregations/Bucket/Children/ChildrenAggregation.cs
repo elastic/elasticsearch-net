@@ -20,11 +20,22 @@ namespace Nest
 		public TypeName Type { get; set; }
 	}
 
+	public class ChildrenAgg : BucketAgg, IChildrenAggregator
+	{
+		public TypeName Type { get; set; }
+
+		public ChildrenAgg(string name, TypeName type) : base(name)
+		{
+			this.Type = type;
+		}
+
+		internal override void WrapInContainer(AggregationContainer c) => c.Children = this;
+	}
+
 	public class ChildrenAggregatorDescriptor<T> 
 		: BucketAggregatorBaseDescriptor<ChildrenAggregatorDescriptor<T>, IChildrenAggregator, T>, IChildrenAggregator
 		where T : class
 	{
-
 		TypeName IChildrenAggregator.Type { get; set; } = typeof(T);
 
 		public ChildrenAggregatorDescriptor<T> Type(TypeName type) =>
