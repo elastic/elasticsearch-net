@@ -15,6 +15,8 @@ namespace Nest
 	public class AverageAgg : MetricAgg, IAverageAggregator
 	{
 		public AverageAgg(string name, FieldName field) : base(name, field) { }
+
+		internal override void WrapInContainer(AggregationContainer c) => c.Average = this;
 	}
 
 	public class AverageAggregatorDescriptor<T> 

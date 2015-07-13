@@ -93,7 +93,7 @@ namespace Tests.Aggregations.Bucket
 			protected override SearchRequest<Project> Initializer =>
 				new SearchRequest<Project>
 				{
-					Aggregations = new ChildrenAgg("name_of_child_agg")
+					Aggregations = new ChildrenAgg("name_of_child_agg", typeof(CommitActivity))
 					{
 						Aggregations = new AverageAgg("average_per_child", Field<CommitActivity>(p=>p.ConfidenceFactor))
 					}

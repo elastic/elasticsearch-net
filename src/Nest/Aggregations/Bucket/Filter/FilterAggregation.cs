@@ -21,6 +21,8 @@ namespace Nest
 		public IQueryContainer Filter { get; set; }
 
 		public FilterAgg(string name) : base(name) { }
+
+		internal override void WrapInContainer(AggregationContainer c) => c.Filter = this;
 	}
 
 	public class FilterAggregatorDescriptor<T> 

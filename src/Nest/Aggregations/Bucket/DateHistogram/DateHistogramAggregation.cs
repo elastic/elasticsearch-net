@@ -94,6 +94,8 @@ namespace Nest
 		public IDictionary<string, object> ExtendedBounds { get; set; }
 
 		public DateHistogramAgg(string name) : base(name) { }
+
+		internal override void WrapInContainer(AggregationContainer c) => c.DateHistogram = this;
 	}
 
 	public class DateHistogramAggregatorDescriptor<T>

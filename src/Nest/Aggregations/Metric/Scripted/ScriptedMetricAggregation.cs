@@ -89,6 +89,8 @@ namespace Nest
 		public IDictionary<string, object> ReduceParams { get; set; }
 
 		public ScriptedMetricsAgg(string name, FieldName field) : base(name, field) { }
+
+		internal override void WrapInContainer(AggregationContainer c) => c.ScriptedMetric = this;
 	}
 	public class ScriptedMetricAggregatorDescriptor<T>
 		: MetricAggregationBaseDescriptor<ScriptedMetricAggregatorDescriptor<T>, IScriptedMetricAggregator, T>

@@ -64,6 +64,8 @@ namespace Nest
 		public long? PostOffset { get; set; }
 
 		public HistogramAgg(string name) : base(name) { }
+
+		internal override void WrapInContainer(AggregationContainer c) => c.Histogram = this;
 	}
 
 	public class HistogramAggregatorDescriptor<T> 

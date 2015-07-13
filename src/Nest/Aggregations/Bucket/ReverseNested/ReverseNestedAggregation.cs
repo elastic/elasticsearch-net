@@ -28,6 +28,8 @@ namespace Nest
 		public FieldName Path { get; set; }
 
 		public ReverseNestedAgg(string name) : base(name) { }
+
+		internal override void WrapInContainer(AggregationContainer c) => c.ReverseNested = this;
 	}
 
 	public class ReverseNestedAggregationDescriptor<T> 

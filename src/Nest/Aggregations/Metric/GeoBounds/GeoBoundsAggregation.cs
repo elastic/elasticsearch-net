@@ -25,6 +25,8 @@ namespace Nest
 		public bool? WrapLongitude { get; set; }
 
 		public GeoBoundsAgg(string name, FieldName field) : base(name, field) { }
+
+		internal override void WrapInContainer(AggregationContainer c) => c.GeoBounds = this;
 	}
 
 	public class GeoBoundsAggregatorDescriptor<T> 

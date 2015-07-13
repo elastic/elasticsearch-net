@@ -74,9 +74,9 @@ namespace Nest
 		public IDictionary<string, object> Params { get; set; }
 		public TermsAggregationCollectMode? CollectMode { get; set; }
 
-		public TermsAgg(string name) : base(name)
-		{
-		}
+		public TermsAgg(string name) : base(name) { }
+
+		internal override void WrapInContainer(AggregationContainer c) => c.Terms = this;
 	}
 
 

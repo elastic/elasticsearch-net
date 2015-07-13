@@ -68,6 +68,8 @@ namespace Nest
 		public bool? Version { get; set; }
 
 		public TopHitsAgg(string name, FieldName field) : base(name, field) { }
+
+		internal override void WrapInContainer(AggregationContainer c) => c.TopHits = this;
 	}
 
 	public class TopHitsAggregatorDescriptor<T>

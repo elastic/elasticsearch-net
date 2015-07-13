@@ -85,6 +85,8 @@ namespace Nest
 		public IQueryContainer BackgroundFilter { get; set; }
 
 		public SignificantTermsAgg(string name) : base(name) { }
+
+		internal override void WrapInContainer(AggregationContainer c) => c.SignificantTerms = this;
 	}
 
 	public class SignificantTermsAggregatorDescriptor<T>

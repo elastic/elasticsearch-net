@@ -54,6 +54,8 @@ namespace Nest
 		public IEnumerable<Range<double>> Ranges { get; set; }
 
 		public GeoDistanceAgg(string name) : base(name) { }
+
+		internal override void WrapInContainer(AggregationContainer c) => c.GeoDistance = this;
 	}
 
 	public class GeoDistanceAggregatorDescriptor<T> :

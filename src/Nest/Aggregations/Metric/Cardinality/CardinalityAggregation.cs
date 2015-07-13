@@ -29,6 +29,8 @@ namespace Nest
 		public bool? Rehash { get; set; }
 
 		public CardinalityAgg(string name, FieldName field) : base(name, field) { }
+
+		internal override void WrapInContainer(AggregationContainer c) => c.Cardinality = this;
 	}
 
 	public class CardinalityAggregatorDescriptor<T> 

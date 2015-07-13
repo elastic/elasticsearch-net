@@ -30,6 +30,8 @@ namespace Nest
 		public IEnumerable<Ip4ExpressionRange> Ranges { get; set; }
 
 		public Ip4RangeAgg(string name) : base(name) { }
+
+		internal override void WrapInContainer(AggregationContainer c) => c.IpRange = this;
 	}
 
 	public class Ip4RangeAggregatorDescriptor<T> : 

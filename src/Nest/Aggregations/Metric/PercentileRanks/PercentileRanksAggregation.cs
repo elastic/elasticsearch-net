@@ -25,6 +25,8 @@ namespace Nest
 		public IEnumerable<double> Values { get; set; }
 
 		public PercentileRanksAgg(string name, FieldName field) : base(name, field) { }
+
+		internal override void WrapInContainer(AggregationContainer c) => c.PercentileRanks = this;
 	}
 
 	public class PercentileRanksAggregatorDescriptor<T> 

@@ -40,6 +40,8 @@ namespace Nest
 		public IEnumerable<Range<double>> Ranges { get; set; }
 
 		public RangeAgg(string name) : base(name) { }
+
+		internal override void WrapInContainer(AggregationContainer c) => c.Range = this;
 	}
 
 	public class RangeAggregatorDescriptor<T>

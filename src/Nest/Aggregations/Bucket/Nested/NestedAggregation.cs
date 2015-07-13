@@ -23,6 +23,8 @@ namespace Nest
 		public FieldName Path { get; set; }
 
 		public NestedAgg(string name) : base(name) { }
+
+		internal override void WrapInContainer(AggregationContainer c) => c.Nested = this;
 	}
 
 	public class NestedAggregatorDescriptor<T> 

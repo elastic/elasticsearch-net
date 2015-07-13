@@ -40,6 +40,8 @@ namespace Nest
 		public GeoHashPrecision? Precision { get; set; }
 
 		public GeoHashAgg(string name) : base(name) { }
+
+		internal override void WrapInContainer(AggregationContainer c) => c.GeoHash = this;
 	}
 
 	public class GeoHashAggregatorDescriptor<T> 

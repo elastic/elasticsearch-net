@@ -15,6 +15,8 @@ namespace Nest
 	public class StatsAgg : MetricAgg, IStatsAggregator
 	{
 		public StatsAgg(string name, FieldName field) : base(name, field) { }
+
+		internal override void WrapInContainer(AggregationContainer c) => c.Stats = this;
 	}
 
 	public class StatsAggregatorDescriptor<T>

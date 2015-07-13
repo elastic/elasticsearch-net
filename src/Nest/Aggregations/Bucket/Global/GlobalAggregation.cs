@@ -13,6 +13,8 @@ namespace Nest
 	public class GlobalAgg : BucketAgg, IGlobalAggregator
 	{
 		public GlobalAgg(string name) : base(name) { }
+
+		internal override void WrapInContainer(AggregationContainer c) => c.Global = this;
 	}
 
 	public class GlobalAggregatorDescriptor<T> 

@@ -1,3 +1,5 @@
+using System;
+
 namespace Nest
 {
 	/// <summary>
@@ -21,5 +23,8 @@ namespace Nest
 		{
 			((IAggregatorBase) this).Name = name;
 		}
+
+		internal abstract void WrapInContainer(AggregationContainer container);
+
 	}
 }

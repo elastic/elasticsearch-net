@@ -11,6 +11,7 @@ namespace Nest
 
 		protected ProxyDictionary() { this._backingDictionary = new Dictionary<TKey, TValue>(); }
 		protected ProxyDictionary(IDictionary<TKey, TValue> backingDictionary) { this._backingDictionary = backingDictionary; }
+		protected ProxyDictionary(Dictionary<TKey, TValue> backingDictionary) { this._backingDictionary = backingDictionary; }
 
 		void IDictionary.Clear() => _backingDictionary.Clear();
 

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 
@@ -10,12 +11,22 @@ namespace Nest
 	{
 		public AggregationDictionary() : base() { }
 		public AggregationDictionary(IDictionary<string, IAggregationContainer> container) : base(container) { }
+		public AggregationDictionary(Dictionary<string, AggregationContainer> container) 
+			: base(container.Select(kv=>kv).ToDictionary(kv=>kv.Key, kv=>(IAggregationContainer)kv.Value)) { }
 
 		public static implicit operator AggregationDictionary(Dictionary<string, IAggregationContainer> container) =>
 			new AggregationDictionary(container);
 
-		public static implicit operator AggregationDictionary(AggregatorBase aggregator) =>
-			new AggregationDictionary();
+		public static implicit operator AggregationDictionary(Dictionary<string, AggregationContainer> container) =>
+			new AggregationDictionary(container);
+
+		public static implicit operator AggregationDictionary(AggregatorBase aggregator)
+		{
+			IAggregatorBase b = aggregator;
+			if (b.Name.IsNullOrEmpty()) 
+				throw new ArgumentException($"{aggregator.GetType().Name} .Name is not set!" );
+			return new Dictionary<string, AggregationContainer> { { b.Name, aggregator }};
+		}
 
 	}
 
@@ -171,8 +182,15 @@ namespace Nest
 
 		public AggregationDictionary Aggregations { get; set; }
 
-		public static implicit operator AggregationContainer(AggregatorBase aggregator) =>
-			new AggregationContainer();
+		public static implicit operator AggregationContainer(AggregatorBase aggregator)
+		{
+			if (aggregator == null) return null;
+			var container = new AggregationContainer();
+			aggregator.WrapInContainer(container);
+			var bucket = aggregator as BucketAgg;
+			container.Aggregations = bucket?.Aggregations;
+			return container;
+		}
 
 
 	}
