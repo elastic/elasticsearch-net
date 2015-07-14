@@ -12,6 +12,9 @@ s => s
 	.OnField(p => p.Name)
 	.Order(SortOrder.Descending)
 )
+----
+[source, csharp]
+----
 new SearchRequest<Project>
 {
 	Sort = new List<ISort>

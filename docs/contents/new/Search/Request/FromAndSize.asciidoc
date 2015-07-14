@@ -9,6 +9,9 @@ new SearchRequest<Project>()
 	From = 10,
 	Size = 12
 }
+----
+[source, csharp]
+----
 s => s
 	.From(10)
 	.Size(12)

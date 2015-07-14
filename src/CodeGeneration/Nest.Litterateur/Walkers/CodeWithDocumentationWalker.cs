@@ -19,15 +19,17 @@ namespace Nest.Litterateur.Walkers
 		private bool _firstVisit = true;
 		private string _code;
 		public int ClassDepth { get; }
+		private readonly int? _lineNumberOverride;
 		
 		/// <summary>
 		/// We want to support inlining /** */ documentations because its super handy 
 		/// to document fluent code, what ensues is total hackery
 		/// </summary>
 		/// <param name="classDepth"></param>
-		public CodeWithDocumentationWalker(int classDepth = 1) : base(SyntaxWalkerDepth.StructuredTrivia) 
+		public CodeWithDocumentationWalker(int classDepth = 1, int? lineNumber = null) : base(SyntaxWalkerDepth.StructuredTrivia) 
 		{
 			ClassDepth = classDepth;
+			_lineNumberOverride = lineNumber;
 		}
 
 		public override void Visit(SyntaxNode node)
@@ -39,16 +41,22 @@ namespace Nest.Litterateur.Walkers
 				_code = node.WithoutLeadingTrivia().WithTrailingTrivia().ToFullString()
 					.Replace(leadingTabs, "");
 
+				var nodeLine = node.SyntaxTree.GetLineSpan(node.Span).StartLinePosition.Line;
+
+				var line = _lineNumberOverride ?? nodeLine;
+
 				var codeBlocks = Regex.Split(_code, @"\/\*\*.*?\*\/", RegexOptions.Singleline)
 					.Select(b => b.TrimStart('\r', '\n').TrimEnd('\r', '\n', '\t'))
 					.Where(b => !string.IsNullOrEmpty(b) && b != ";")
-					.Select(b=>new CodeBlock(b))
+					.Select(b=>new CodeBlock(b, line))
 					.ToList();
 
 				base.Visit(node);
 
-				var blocks = codeBlocks.Intertwine<IDocumentationBlock>(this.TextBlocks);
-				this.Blocks.AddRange(blocks);
+				var nodeHasLeadingTriva = node.HasLeadingTrivia && node.GetLeadingTrivia()
+					.Any(c=>c.CSharpKind() == SyntaxKind.MultiLineDocumentationCommentTrivia);
+				var blocks = codeBlocks.Intertwine<IDocumentationBlock>(this.TextBlocks, swap: nodeHasLeadingTriva);
+				this.Blocks.Add(new CombinedBlock(blocks, line));
 				return;
 			}
 
@@ -57,11 +65,13 @@ namespace Nest.Litterateur.Walkers
 
 		public override void VisitXmlText(XmlTextSyntax node)
 		{
+			var nodeLine = node.SyntaxTree.GetLineSpan(node.Span).StartLinePosition.Line;
+			var line = _lineNumberOverride ?? nodeLine;
 			var text = node.TextTokens
 				.Where(n => n.CSharpKind() == SyntaxKind.XmlTextLiteralToken)
 				.Aggregate(new StringBuilder(), (a, t) => a.AppendLine(t.Text.TrimStart()), a => a.ToString());
 
-			this.TextBlocks.Add(new TextBlock(text));
+			this.TextBlocks.Add(new TextBlock(text, line));
 
 			base.VisitXmlText(node);
 		}

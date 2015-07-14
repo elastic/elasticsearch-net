@@ -49,7 +49,8 @@ namespace Nest.Litterateur.Walkers
 			if (!this.InsideFluentOrInitializerExample) return;
 			var syntaxNode = node?.ChildNodes()?.LastOrDefault()?.WithAdditionalAnnotations();
 			if (syntaxNode == null) return;
-			var walker = new CodeWithDocumentationWalker(ClassDepth);
+			var line = node.SyntaxTree.GetLineSpan(node.Span).StartLinePosition.Line;
+			var walker = new CodeWithDocumentationWalker(ClassDepth, line);
 			walker.Visit(syntaxNode);
 			this.Blocks.AddRange(walker.Blocks);
 		}
@@ -65,16 +66,17 @@ namespace Nest.Litterateur.Walkers
 		{
 			if (this.InsideAutoIncludeMethodBlock)
 			{
+				var line = node.SyntaxTree.GetLineSpan(node.Span).StartLinePosition.Line;
 				var allchildren = node.DescendantNodesAndTokens(descendIntoTrivia: true);
 				if (allchildren.Any(a => a.CSharpKind() == SyntaxKind.MultiLineDocumentationCommentTrivia))
 				{
-					var walker = new CodeWithDocumentationWalker(ClassDepth);
+					var walker = new CodeWithDocumentationWalker(ClassDepth, line);
 					walker.Visit(node.WithAdditionalAnnotations());
 					this.Blocks.AddRange(walker.Blocks);
 					return;
 				}
 				base.VisitExpressionStatement(node);
-				this.Blocks.Add(new CodeBlock(node.WithoutLeadingTrivia().ToFullString()));
+				this.Blocks.Add(new CodeBlock(node.WithoutLeadingTrivia().ToFullString(), line));
 			}
 			else base.VisitExpressionStatement(node);
 
@@ -85,14 +87,15 @@ namespace Nest.Litterateur.Walkers
 			if (this.InsideAutoIncludeMethodBlock)
 			{
 				var allchildren = node.DescendantNodesAndTokens(descendIntoTrivia: true);
+				var line = node.SyntaxTree.GetLineSpan(node.Span).StartLinePosition.Line;
 				if (allchildren.Any(a => a.CSharpKind() == SyntaxKind.MultiLineDocumentationCommentTrivia))
 				{
-					var walker = new CodeWithDocumentationWalker(ClassDepth);
+					var walker = new CodeWithDocumentationWalker(ClassDepth, line);
 					walker.Visit(node.WithAdditionalAnnotations());
 					this.Blocks.AddRange(walker.Blocks);
 					return;
 				}
-				this.Blocks.Add(new CodeBlock(node.WithoutLeadingTrivia().ToFullString()));
+				this.Blocks.Add(new CodeBlock(node.WithoutLeadingTrivia().ToFullString(), line));
 			}
 			base.VisitLocalDeclarationStatement(node);
 		}
@@ -103,7 +106,8 @@ namespace Nest.Litterateur.Walkers
 				.Where(n => n.CSharpKind() == SyntaxKind.XmlTextLiteralToken)
 				.Aggregate(new StringBuilder(), (a, t) => a.AppendLine(t.Text.TrimStart()), a => a.ToString());
 
-			this.Blocks.Add(new TextBlock(text));
+			var line = node.SyntaxTree.GetLineSpan(node.Span).StartLinePosition.Line;
+			this.Blocks.Add(new TextBlock(text, line));
 
 			base.VisitXmlText(node);
 		}

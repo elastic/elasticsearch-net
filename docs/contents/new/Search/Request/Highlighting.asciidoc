@@ -20,6 +20,9 @@ s => s
 			.Type(HighlighterType.Postings)
 	)
 )
+----
+[source, csharp]
+----
 new SearchRequest<Project>
 {
 	Highlight = new HighlightRequest

@@ -1,6 +1,11 @@
 A special single bucket aggregation that enables aggregating from buckets on parent document types to
 buckets on child documents.
 
+To use the child aggregation you have to make sure 
+a `_parent` mapping is in place, here we create the project
+index with two mapped types, `project` and `commitactivity` and 
+we add a `_parent` mapping from `commitactivity` to `parent` 
+
 [source, csharp]
 ----
 var createProjectIndex = TestClient.GetClient().CreateIndex(c => c
@@ -11,11 +16,6 @@ var createProjectIndex = TestClient.GetClient().CreateIndex(c => c
 	)
 );
 ----
-To use the child aggregation you have to make sure 
-a `_parent` mapping is in place, here we create the project
-index with two mapped types, `project` and `commitactivity` and 
-we add a `_parent` mapping from `commitactivity` to `parent` 
-
 [source, csharp]
 ----
 s => s
@@ -27,6 +27,9 @@ s => s
 		)
 	)
 )
+----
+[source, csharp]
+----
 new SearchRequest<Project>
 {
 	Aggregations = new Dictionary<string, IAggregationContainer>
@@ -52,6 +55,9 @@ Type = typeof(CommitActivity)
 		}
 	}
 }
+----
+[source, csharp]
+----
 new SearchRequest<Project>
 {
 	Aggregations = new ChildrenAgg("name_of_child_agg", typeof(CommitActivity))

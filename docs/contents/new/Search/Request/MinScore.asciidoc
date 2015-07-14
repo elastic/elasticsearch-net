@@ -1,8 +1,7 @@
-The query element within the search request body allows to define a query using the Query DSL.
-
 [source, csharp]
 ----
 s => s
+.MinScore(0.5)
 .Query(q => q
 	.Term(p => p.Name, "elasticsearch")
 )
@@ -11,10 +10,11 @@ s => s
 ----
 new SearchRequest<Project>
 {
+	MinScore = 0.5,
 	Query = new TermQuery
-			{
-Field = "name",
-Value = "elasticsearch"
-			}
+	{
+		Field = "name",
+		Value = "elasticsearch"
+	}
 }
 ----

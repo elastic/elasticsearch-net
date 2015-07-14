@@ -1,4 +1,4 @@
-# Connecting Modified
+# Connecting 
 Connecting to *Elasticsearch* with `Elasticsearch.Net` is quite easy but has a few toggles and options worth knowing.
 
 # Choosing the right connection strategy
@@ -54,6 +54,9 @@ The following is a list of available connection configuration options:
 [source, csharp]
 ----
 var client = new ElasticsearchClient();
+----
+[source, csharp]
+----
 var config = new ConnectionConfiguration()
 
 	.DisableAutomaticProxyDetection()
@@ -90,10 +93,13 @@ For debugging purposes it can be very useful to keep a copy of the raw response 
 ----
 var result = client.Search<SearchResponse<object>>(new { size = 12 });
 var raw = result.ResponseRaw;
-var stringResult = client.Search<string>(new { });
 ----
 This will only have a value if the client configuration has ExposeRawResponse set 
 
+[source, csharp]
+----
+var stringResult = client.Search<string>(new { });
+----
 
 Please note that this only make sense if you need a mapped response and the raw response at the same time. 
 If you need a `string` or `byte[]` response simply call:
@@ -160,22 +166,18 @@ the requests with i.e fiddler. This setting can be safely used in conjuction wit
 ----
 Sets the HTTP basic authentication credentials to specify with all requests. 
 
+**Note:** This can alternatively be specified on the node URI directly:
+
 [source, csharp]
 ----
 var uri = new Uri("http://username:password@localhost:9200");
 ----
-**Note:** This can alternatively be specified on the node URI directly:
-
 [source, csharp]
 ----
 var settings = new ConnectionConfiguration(uri);
 ----
 ...but may become tedious when using connection pooling with multiple nodes.
 
-[source, csharp]
-----
-ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, errors) => true;
-----
 ## Configuring SSL
 SSL must be configured outside of the client using .NET's 
 [ServicePointManager](http://msdn.microsoft.com/en-us/library/system.net.servicepointmanager%28v=vs.110%29.aspx)
@@ -184,6 +186,10 @@ property.
 
 The bare minimum to make .NET accept self-signed SSL certs that are not in the Window's CA store would be to have the callback simply return `true`:
 
+[source, csharp]
+----
+ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, errors) => true;
+----
 However, this will accept all requests from the AppDomain to untrusted SSL sites, 
 therefore we recommend doing some minimal introspection on the passed in certificate.
 

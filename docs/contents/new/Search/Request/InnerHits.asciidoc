@@ -13,6 +13,9 @@ s => s
 		.InnerHits()
 	)
 )
+----
+[source, csharp]
+----
 new SearchRequest<Project>
 {
 	Query = new NestedQuery

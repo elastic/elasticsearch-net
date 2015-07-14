@@ -1,13 +1,5 @@
 [source, csharp]
 ----
-var client = this.GetClient();
-var dict = new Dictionary<string, TResponse>
-				{
-					{"fluent", fluent(client, this.Fluent)},
-					{"fluentAsync", await fluentAsync(client, this.Fluent)},
-					{"initializer", request(client, this.Initializer)},
-					{"initializerAsync", await requestAsync(client, this.Initializer)}
-				};
 this._responses = new AsyncLazy<IDictionary<string, TResponse>>(async () =>
 			{
 				var client = this.GetClient();
@@ -21,6 +13,14 @@ this._responses = new AsyncLazy<IDictionary<string, TResponse>>(async () =>
 
 				return dict;
 			});
+var client = this.GetClient();
+var dict = new Dictionary<string, TResponse>
+				{
+					{"fluent", fluent(client, this.Fluent)},
+					{"fluentAsync", await fluentAsync(client, this.Fluent)},
+					{"initializer", request(client, this.Initializer)},
+					{"initializerAsync", await requestAsync(client, this.Initializer)}
+				};
 var responses = await this._responses;
 assert(kv.Value);
 var paths = (this.UrlPath ?? "").Split(new [] { '?' }, 2);

@@ -5,6 +5,9 @@ s => s
 	.Add("index1", 1.4)
 	.Add("index2", 1.3)
 )
+----
+[source, csharp]
+----
 new SearchRequest<Project>
 {
 	IndicesBoost = new Dictionary<IndexName, double>

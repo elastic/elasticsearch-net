@@ -9,11 +9,20 @@ new TermQuery
 	Field = Field<Project>(p=>p.Name),
 	Value = "myvalue"
 }
+----
+[source, csharp]
+----
 term => term.OnField("name").Value("myvalue")
+----
+[source, csharp]
+----
 new TermQuery
 {
 	Field = "myfield",
 	Value = "myvalue"
 }
+----
+[source, csharp]
+----
 filter => filter.Term("myfield", "myvalue")
 ----
