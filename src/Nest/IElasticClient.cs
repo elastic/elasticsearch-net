@@ -23,7 +23,7 @@ namespace Nest
 		/// Helper method that allows you to reindex from one index into another using SCAN and SCROLL.
 		/// </summary>
 		/// <returns>An IObservable you can subscribe to to listen to the progress of the reindexation process</returns>
-		IObservable<IReindexResponse<object>> Reindex(Func<ReindexDescriptor<object>, ReindexDescriptor<object>> reindexSelector);
+		IObservable<IReindexResponse<IDocument>> Reindex(Func<ReindexDescriptor<IDocument>, ReindexDescriptor<IDocument>> reindexSelector);
 
 		/// <summary>
 		/// A search request can be scrolled by specifying the scroll parameter. 

@@ -38,6 +38,7 @@ namespace Nest
 			var toIndex = this._reindexDescriptor._ToIndexName;
 			var scroll = this._reindexDescriptor._Scroll ?? "2m";
 			var size = this._reindexDescriptor._Size ?? 100;
+			var allTypes = this._reindexDescriptor._allTypes;
 
 			fromIndex.ThrowIfNullOrEmpty("fromIndex");
 			toIndex.ThrowIfNullOrEmpty("toIndex");
@@ -54,14 +55,10 @@ namespace Nest
 			var page = 0;
 			Func<SearchDescriptor<T>, SearchDescriptor<T>> searchDescriptor = s => s.Index(fromIndex);
 
-			if (typeof(T).Name.Equals(typeof(object).Name))
-			{
+			if (allTypes)
 				searchDescriptor = s => searchDescriptor(s).AllTypes();
-			}
 			else
-			{
 				searchDescriptor = s => searchDescriptor(s).Type<T>();
-			}
 
 
 			var searchResult = this.CurrentClient.Search<T>(

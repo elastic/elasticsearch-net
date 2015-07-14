@@ -13,7 +13,7 @@ namespace Nest.Tests.Integration.Index
 		public void ReindexMinimal()
 		{
 			var toIndex = ElasticsearchConfiguration.NewUniqueIndexName();
-			var observable = this.Client.Reindex(r => r
+			var observable = this.Client.Reindex<object>(r => r
 				.FromIndex(ElasticsearchConfiguration.DefaultIndex)
 				.ToIndex(toIndex)
 			);
@@ -53,7 +53,7 @@ namespace Nest.Tests.Integration.Index
 					.NumberOfShards(1)
 				)
 			);
-			var observer = new ReindexObserver<object>(
+			var observer = new ReindexObserver<IDocument>(
 				onNext: (r) =>
 				{
 					var scrollResults = r.SearchResponse;
