@@ -66,6 +66,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Aggregations\Bucket\DateHistogramAggregation.cs" />
     <Compile Include="Aggregations\Bucket\ChildrenAggregation.cs" />
     <Compile Include="Aggregations\AggregationUsageBase.cs" />
     <Compile Include="Aggregations\WritingAggregations.cs" />

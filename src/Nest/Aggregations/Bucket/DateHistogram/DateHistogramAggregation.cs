@@ -174,7 +174,6 @@ namespace Nest
 		public DateHistogramAggregatorDescriptor<T> OrderDescending(string key) =>
 			Assign(a => a.Order = new Dictionary<string, string> { { key, "desc" } });
 
-
 		public DateHistogramAggregatorDescriptor<T> ExtendedBounds(string min, string max) =>
 			Assign(a=>a.ExtendedBounds = new Dictionary<string, object> { { "min", min }, { "max", max } });
 
