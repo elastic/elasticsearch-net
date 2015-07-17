@@ -101,32 +101,18 @@ namespace Nest.Resolvers
 			// if the type specifies through ElasticAttribute what the id prop is 
 			// use that no matter what
 
-			string FieldName;
-			this._connectionSettings.IdProperties.TryGetValue(type, out FieldName);
-			if (!FieldName.IsNullOrEmpty())
-				return GetPropertyCaseInsensitive(type, FieldName);
+			string propertyName;
+			this._connectionSettings.IdProperties.TryGetValue(type, out propertyName);
+			if (!propertyName.IsNullOrEmpty())
+				return GetPropertyCaseInsensitive(type, propertyName);
 
 			var esTypeAtt = ElasticAttributes.Type(type);
 			if (esTypeAtt != null && !string.IsNullOrWhiteSpace(esTypeAtt.IdProperty))
 				return GetPropertyCaseInsensitive(type, esTypeAtt.IdProperty);
 
-			FieldName = "Id";
-			//Try Id on its own case insensitive
-			var idProperty = GetPropertyCaseInsensitive(type, FieldName);
-			if (idProperty != null)
-				return idProperty;
+			var idProperty = GetPropertyCaseInsensitive(type, "Id");
 
-			//TODO remove in 2.0 ?
-			//Try TypeNameId case insensitive
-			idProperty = GetPropertyCaseInsensitive(type, type.Name + FieldName);
-			if (idProperty != null)
-				return idProperty;
-
-			//TODO remove in 2.0 ?
-			//Try TypeName_Id case insensitive
-			idProperty = GetPropertyCaseInsensitive(type, type.Name + "_" + FieldName);
-
-			return idProperty;
+			return idProperty ?? null;
 		}
 
 		PropertyInfo GetPropertyCaseInsensitive(Type type, string FieldName)
