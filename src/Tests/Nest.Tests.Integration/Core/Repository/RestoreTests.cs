@@ -71,6 +71,9 @@ namespace Nest.Tests.Integration.Core.Repository
 			snapshotResponse.IsValid.Should().BeTrue();
 			snapshotResponse.Accepted.Should().BeTrue();
 			snapshotResponse.Snapshot.Should().NotBeNull();
+			if (ElasticsearchConfiguration.CurrentVersion >= new Version("1.7.0"))
+				snapshotResponse.Snapshot.VersionId.Should().BeGreaterThan(0);
+
 			snapshotResponse.Snapshot.EndTimeInMilliseconds.Should().BeGreaterThan(0);
 			snapshotResponse.Snapshot.StartTime.Should().BeAfter(DateTime.UtcNow.AddDays(-1));
 
