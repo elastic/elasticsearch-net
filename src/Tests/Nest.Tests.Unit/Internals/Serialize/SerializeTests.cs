@@ -1,9 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Reflection;
+using System.Threading;
 using NUnit.Framework;
 using Nest.Tests.MockData.Domain;
 using Elasticsearch.Net;
+using FluentAssertions;
 
 namespace Nest.Tests.Unit.Internals.Serialize
 {
@@ -46,6 +50,24 @@ namespace Nest.Tests.Unit.Internals.Serialize
 			};
 			var json = this._client.Serializer.Serialize(col).Utf8String();
 			this.JsonEquals(json, MethodInfo.GetCurrentMethod());
+		}
+
+		[Test]
+		public void DateTimeIgnoresCurrentCulture()
+		{
+			var t = new Thread(() =>
+			{
+				var cultureInfo = new CultureInfo("IT-it");
+				cultureInfo.DateTimeFormat.DateSeparator = ".";
+				cultureInfo.DateTimeFormat.TimeSeparator = ".";
+				Thread.CurrentThread.CurrentCulture = cultureInfo;
+				Thread.CurrentThread.CurrentUICulture = cultureInfo;
+
+				var serialized = _client.Serializer.Serialize(new DateTime(2015, 01, 30, 08, 52, 32, 443)).Utf8String();
+				serialized.Should().EndWith(":32.443\"");
+			});
+			t.Start();
+			t.Join(TimeSpan.FromSeconds(5));
 		}
 
 		[Test]

@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using System.Linq;
 using System.Reflection;
 using System.Collections;
+using System.Globalization;
 using Nest.Resolvers.Converters;
 
 namespace Nest.Resolvers
@@ -52,7 +53,7 @@ namespace Nest.Resolvers
 				contract.Converter = new AggregationConverter();
 			
 			else if (objectType == typeof(DateTime) || objectType == typeof(DateTime?))
-				contract.Converter = new IsoDateTimeConverter();
+				contract.Converter = new IsoDateTimeConverter() { Culture = CultureInfo.InvariantCulture };
 
 			else if (typeof(IHit<object>).IsAssignableFrom(objectType))
 				contract.Converter = new DefaultHitConverter();
