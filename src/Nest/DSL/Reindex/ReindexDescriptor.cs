@@ -7,6 +7,7 @@ namespace Nest
 		internal string _FromIndexName { get; set; }
 		internal string _Scroll { get; set; }
 		internal int? _Size { get; set; }
+		internal bool _allTypes { get; set; }
 		
 		internal Func<QueryDescriptor<T>, QueryContainer> _QuerySelector { get; set; }
 

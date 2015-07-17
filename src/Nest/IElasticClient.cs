@@ -20,6 +20,12 @@ namespace Nest
 			where T : class;
 
 		/// <summary>
+		/// Helper method that allows you to reindex from one index into another using SCAN and SCROLL.
+		/// </summary>
+		/// <returns>An IObservable you can subscribe to to listen to the progress of the reindexation process</returns>
+		IObservable<IReindexResponse<IDocument>> Reindex(Func<ReindexDescriptor<IDocument>, ReindexDescriptor<IDocument>> reindexSelector);
+
+		/// <summary>
 		/// A search request can be scrolled by specifying the scroll parameter. 
 		/// <para>The scroll parameter is a time value parameter (for example: scroll=5m), 
 		/// indicating for how long the nodes that participate in the search will maintain relevant resources in

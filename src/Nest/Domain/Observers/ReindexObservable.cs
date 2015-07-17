@@ -8,7 +8,7 @@ namespace Nest
 		private ReindexDescriptor<T> _reindexDescriptor;
 		private readonly IConnectionSettingsValues _connectionSettings;
 		internal IElasticClient CurrentClient { get; set; }
-		internal ReindexDescriptor<T> ReindexDescriptor { get; set; } 
+		internal ReindexDescriptor<T> ReindexDescriptor { get; set; }
 
 		public ReindexObservable(IElasticClient client, IConnectionSettingsValues connectionSettings, ReindexDescriptor<T> reindexDescriptor)
 		{
@@ -20,7 +20,7 @@ namespace Nest
 		public IDisposable Subscribe(IObserver<IReindexResponse<T>> observer)
 		{
 			observer.ThrowIfNull("observer");
-			try 
+			try
 			{
 				this.Reindex(observer);
 			}
@@ -38,11 +38,12 @@ namespace Nest
 			var toIndex = this._reindexDescriptor._ToIndexName;
 			var scroll = this._reindexDescriptor._Scroll ?? "2m";
 			var size = this._reindexDescriptor._Size ?? 100;
+			var allTypes = this._reindexDescriptor._allTypes;
 
 			fromIndex.ThrowIfNullOrEmpty("fromIndex");
 			toIndex.ThrowIfNullOrEmpty("toIndex");
 
-			var indexSettings = this.CurrentClient.GetIndexSettings(i=>i.Index(this._reindexDescriptor._FromIndexName));
+			var indexSettings = this.CurrentClient.GetIndexSettings(i => i.Index(this._reindexDescriptor._FromIndexName));
 			Func<CreateIndexDescriptor, CreateIndexDescriptor> settings =
 				this._reindexDescriptor._CreateIndexSelector ?? ((ci) => ci);
 
@@ -52,18 +53,24 @@ namespace Nest
 				throw new ReindexException(createIndexResponse.ConnectionStatus);
 
 			var page = 0;
+			Func<SearchDescriptor<T>, SearchDescriptor<T>> searchDescriptor = s => s.Index(fromIndex);
+
+			if (allTypes)
+				searchDescriptor = s => searchDescriptor(s).AllTypes();
+			else
+				searchDescriptor = s => searchDescriptor(s).Type<T>();
+
+
 			var searchResult = this.CurrentClient.Search<T>(
-				s => s
-					.Index(fromIndex)
-					.AllTypes()
+				s => searchDescriptor(s)
 					.From(0)
 					.Size(size)
-					.Query(this._reindexDescriptor._QuerySelector ?? (q=>q.MatchAll()))
+					.Query(this._reindexDescriptor._QuerySelector ?? (q => q.MatchAll()))
 					.SearchType(SearchType.Scan)
-					.Scroll(scroll)
-				);
+					.Scroll(scroll));
+
 			if (searchResult.Total <= 0)
-				throw new ReindexException(searchResult.ConnectionStatus, "index " + fromIndex + " has no documents!");
+				throw new ReindexException(searchResult.ConnectionStatus, string.Format("index {0} has no documents!", fromIndex));
 			IBulkResponse indexResult = null;
 			do
 			{
@@ -81,7 +88,7 @@ namespace Nest
 			observer.OnCompleted();
 		}
 
-		public IBulkResponse IndexSearchResults(ISearchResponse<T> searchResult,IObserver<IReindexResponse<T>> observer, string toIndex, int page)
+		public IBulkResponse IndexSearchResults(ISearchResponse<T> searchResult, IObserver<IReindexResponse<T>> observer, string toIndex, int page)
 		{
 			if (!searchResult.IsValid)
 				throw new ReindexException(searchResult.ConnectionStatus, "reindex failed on scroll #" + page);
@@ -93,11 +100,11 @@ namespace Nest
 				bb.Index<T>(bi => bi.Document(d1.Source).Type(d1.Type).Index(toIndex).Id(d.Id));
 			}
 
-			var indexResult = this.CurrentClient.Bulk(b=>bb);
+			var indexResult = this.CurrentClient.Bulk(b => bb);
 			if (!indexResult.IsValid)
 				throw new ReindexException(indexResult.ConnectionStatus, "reindex failed when indexing page " + page);
 
-			observer.OnNext(new ReindexResponse<T>()
+			observer.OnNext(new ReindexResponse<T>
 			{
 				BulkResponse = indexResult,
 				SearchResponse = searchResult,
