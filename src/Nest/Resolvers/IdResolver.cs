@@ -110,23 +110,11 @@ namespace Nest.Resolvers
 			if (esTypeAtt != null && !string.IsNullOrWhiteSpace(esTypeAtt.IdProperty))
 				return GetPropertyCaseInsensitive(type, esTypeAtt.IdProperty);
 
-			propertyName = "Id";
-			//Try Id on its own case insensitive
-			var idProperty = GetPropertyCaseInsensitive(type, propertyName);
+			var idProperty = GetPropertyCaseInsensitive(type, "Id");
 			if (idProperty != null)
 				return idProperty;
 
-			//TODO remove in 2.0 ?
-			//Try TypeNameId case insensitive
-			idProperty = GetPropertyCaseInsensitive(type, type.Name + propertyName);
-			if (idProperty != null)
-				return idProperty;
-
-			//TODO remove in 2.0 ?
-			//Try TypeName_Id case insensitive
-			idProperty = GetPropertyCaseInsensitive(type, type.Name + "_" + propertyName);
-
-			return idProperty;
+			return null;
 		}
 
 		PropertyInfo GetPropertyCaseInsensitive(Type type, string propertyName)
