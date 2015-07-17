@@ -14,6 +14,7 @@ namespace Nest.Tests.Integration.Mapping
 	{
 		class MapFromAttributeObject
 		{
+			public Guid Id { get; set; }
 			public string Name { get; set; }
 			[ElasticProperty(Type = FieldType.Nested, IncludeInParent = true)]
 			public List<NestedObject> NestedObjects { get; set; }
@@ -35,6 +36,8 @@ namespace Nest.Tests.Integration.Mapping
 
 			var typeMapping = this.Client.GetMapping<MapFromAttributeObject>(i => i.Type("mapfromattributeobject"));
 			typeMapping.Should().NotBeNull();
+
+			typeMapping.Mapping.Properties["id"].Type.Name.Should().Be("string");
 
 			typeMapping.Mapping.Properties["nestedObjects"].Type.Name.Should().Be("nested");
 			typeMapping.Mapping.Properties["nestedObjectsDontIncludeInParent"].Type.Name.Should().Be("nested");

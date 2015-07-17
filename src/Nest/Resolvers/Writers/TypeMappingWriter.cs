@@ -300,6 +300,8 @@ namespace Nest.Resolvers.Writers
 						return FieldType.Date;
 					case "Boolean":
 						return FieldType.Boolean;
+					case "Guid":
+						return FieldType.String;
 				}
 			}
 			else
