@@ -37,6 +37,12 @@ namespace Nest
 		[JsonProperty("failures")]
 		public IEnumerable<SnapshotShardFailure> ShardFailures { get; internal set; }
 
+		[JsonProperty("version_id")]
+		public int VersionId { get; internal set;  }
+
+		[JsonProperty("version")]
+		public string Version { get; internal set;  }
+
 		/// <summary>
 		/// Contains the reason for each shard failure.
 		/// </summary>
