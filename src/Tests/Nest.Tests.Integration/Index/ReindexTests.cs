@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
+using Nest.Tests.MockData.Domain;
 
 
 namespace Nest.Tests.Integration.Index
@@ -13,11 +14,11 @@ namespace Nest.Tests.Integration.Index
 		public void ReindexMinimal()
 		{
 			var toIndex = ElasticsearchConfiguration.NewUniqueIndexName();
-			var observable = this.Client.Reindex<object>(r => r
+			var observable = this.Client.Reindex(r => r
 				.FromIndex(ElasticsearchConfiguration.DefaultIndex)
 				.ToIndex(toIndex)
 			);
-			var observer = new ReindexObserver<object>(
+			var observer = new ReindexObserver(
 				onError: (e) => Assert.Fail(e.Message),
 				completed: () =>
 				{

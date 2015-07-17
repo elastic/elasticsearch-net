@@ -53,16 +53,16 @@ namespace Nest
 				throw new ReindexException(createIndexResponse.ConnectionStatus);
 
 			var page = 0;
-			Func<SearchDescriptor<T>, SearchDescriptor<T>> searchDescriptor = s => s.Index(fromIndex);
+			var searchDescriptor = new SearchDescriptor<T>().Index(fromIndex);
 
 			if (allTypes)
-				searchDescriptor = s => searchDescriptor(s).AllTypes();
+				searchDescriptor.AllTypes();
 			else
-				searchDescriptor = s => searchDescriptor(s).Type<T>();
+				searchDescriptor.Type<T>();
 
 
 			var searchResult = this.CurrentClient.Search<T>(
-				s => searchDescriptor(s)
+				s => searchDescriptor
 					.From(0)
 					.Size(size)
 					.Query(this._reindexDescriptor._QuerySelector ?? (q => q.MatchAll()))
