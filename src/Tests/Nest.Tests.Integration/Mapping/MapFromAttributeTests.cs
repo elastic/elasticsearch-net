@@ -15,6 +15,7 @@ namespace Nest.Tests.Integration.Mapping
 		class MapFromAttributeObject
 		{
 			public string Name { get; set; }
+			public int Number { get; set; }
 			[ElasticProperty(Type = FieldType.Nested, IncludeInParent = true)]
 			public List<NestedObject> NestedObjects { get; set; }
 			[ElasticProperty(Type = FieldType.Nested)]
@@ -45,5 +46,32 @@ namespace Nest.Tests.Integration.Mapping
 			nestedObject.IncludeInParent.Should().BeTrue();
 			nestedObjectDontincludeInParent.IncludeInParent.Should().NotHaveValue();
 		}
+
+		[Test]
+		public void NumberNotAnalyzedShouldBeNotAnalyzed()
+		{
+			var index = ElasticsearchConfiguration.NewUniqueIndexName();
+			var indicesResponse = this.Client.CreateIndex(c=>c
+				.Index(index)
+				.AddMapping<MapFromAttributeObject>(m=>m
+					.MapFromAttributes()
+					.Properties(prop=>prop
+						.Number(n=>n.Name(p=>p.Number).Index(NonStringIndexOption.NotAnalyzed))
+					)
+				)
+			
+			);
+
+			indicesResponse.IsValid.Should().BeTrue();
+
+			var typeMapping = this.Client.GetMapping<MapFromAttributeObject>(i => i.Index(index));
+			typeMapping.Should().NotBeNull();
+
+			var numberMapping = typeMapping.Mapping.Properties["number"] as NumberMapping;
+			numberMapping.Should().NotBeNull();
+			//index == null because not analyzed is default
+			numberMapping.Index.Should().NotBe(NonStringIndexOption.Analyzed).And.BeNull();
+		}
+
 	}
 }
