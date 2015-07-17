@@ -74,6 +74,12 @@ namespace Nest
 			return this;
 		}
 
+		public CountDescriptor<T> Query(IQueryContainer queryContainer)
+		{
+			Self.Query = queryContainer;
+			return this;
+		}
+
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CountRequestParameters> pathInfo)
 		{
 			CountPathInfo.Update(pathInfo, this);
