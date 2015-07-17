@@ -102,17 +102,17 @@ namespace Nest.Resolvers
 			// use that no matter what
 
 			string propertyName;
+
 			this._connectionSettings.IdProperties.TryGetValue(type, out propertyName);
 			if (!propertyName.IsNullOrEmpty())
 				return GetPropertyCaseInsensitive(type, propertyName);
 
 			var esTypeAtt = ElasticAttributes.Type(type);
-			if (esTypeAtt != null && !string.IsNullOrWhiteSpace(esTypeAtt.IdProperty))
-				return GetPropertyCaseInsensitive(type, esTypeAtt.IdProperty);
+			propertyName = esTypeAtt != null && !string.IsNullOrWhiteSpace(esTypeAtt.IdProperty)
+				? esTypeAtt.IdProperty
+				: "Id";
 
-			var idProperty = GetPropertyCaseInsensitive(type, "Id");
-
-			return idProperty ?? null;
+			return GetPropertyCaseInsensitive(type, propertyName);
 		}
 
 		PropertyInfo GetPropertyCaseInsensitive(Type type, string FieldName)
