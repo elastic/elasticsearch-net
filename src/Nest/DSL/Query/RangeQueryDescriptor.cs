@@ -188,25 +188,25 @@ namespace Nest
 
 		public RangeQueryDescriptor<T> Greater(DateTime? from, string format = "yyyy-MM-dd'T'HH:mm:ss.fff")
 		{
-			this.Self.GreaterThan = from.HasValue ? from.Value.ToString(format) : null;
+			this.Self.GreaterThan = from.HasValue ? from.Value.ToString(format, CultureInfo.InvariantCulture) : null;
 			return this;
 		}
 
 		public RangeQueryDescriptor<T> GreaterOrEquals(DateTime? from, string format = "yyyy-MM-dd'T'HH:mm:ss.fff")
 		{
-			this.Self.GreaterThanOrEqualTo = from.HasValue ? from.Value.ToString(format) : null;
+			this.Self.GreaterThanOrEqualTo = from.HasValue ? from.Value.ToString(format, CultureInfo.InvariantCulture) : null;
 			return this;
 		}
 
 		public RangeQueryDescriptor<T> Lower(DateTime? to, string format = "yyyy-MM-dd'T'HH:mm:ss.fff")
 		{
-			this.Self.LowerThan = to.HasValue ? to.Value.ToString(format) : null;
+			this.Self.LowerThan = to.HasValue ? to.Value.ToString(format, CultureInfo.InvariantCulture) : null;
 			return this;
 		}
 
 		public RangeQueryDescriptor<T> LowerOrEquals(DateTime? to, string format = "yyyy-MM-dd'T'HH:mm:ss.fff")
 		{
-			this.Self.LowerThanOrEqualTo = to.HasValue ? to.Value.ToString(format) : null;
+			this.Self.LowerThanOrEqualTo = to.HasValue ? to.Value.ToString(format, CultureInfo.InvariantCulture) : null;
 			return this;
 		}
 
