@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Elasticsearch.Net.Connection;
 using FluentAssertions;
 using Nest.Tests.MockData.Domain;
 using NUnit.Framework;
@@ -17,7 +18,7 @@ namespace Nest.Tests.Unit.Reproduce
 		[Test]
 		public void CountShouldNotThrowWhenNoDefaultIndexSpecified()
 		{
-			var client = new ElasticClient();
+			var client = new ElasticClient(connection: new InMemoryConnection(new ConnectionSettings()));
 			var request = client.Count<ElasticsearchProject>();
 			var path = new Uri(request.ConnectionStatus.RequestUrl).AbsolutePath;
 			path.Should().Be("/_all/elasticsearchprojects/_count");
