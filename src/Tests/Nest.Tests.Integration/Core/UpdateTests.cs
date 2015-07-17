@@ -16,17 +16,27 @@ namespace Nest.Tests.Integration.Core
 			Assert.NotNull(project);
 			Assert.Greater(project.LOC, 0);
 			var loc = project.LOC;
-			this.Client.Update<ElasticsearchProject>(u => u
-			  .IdFrom(project)
-			  .Script("ctx._source.loc += 10")
-			  .RetryOnConflict(5)
-			  .Refresh()
+			var update = this.Client.Update<ElasticsearchProject>(u => u
+				.IdFrom(project)
+				.Script("ctx._source.loc += 10")
+				.Fields("_source", "loc")
+				.RetryOnConflict(5)
+				.Refresh()
 			);
 			project = this.Client.Source<ElasticsearchProject>(s => s.Id(1));
 			Assert.AreEqual(project.LOC, loc + 10);
 			Assert.AreNotEqual(project.Version, "1");
+
+			update.Get.Should().NotBeNull();
+			update.Get.Found.Should().BeTrue();
+			update.Source<ElasticsearchProject>().Should().NotBeNull();
+			update.Source<ElasticsearchProject>().LOC.Should().Be(loc + 10);
+			var fieldLoc = update.Fields<ElasticsearchProject>().FieldValues(p => p.LOC);
+			fieldLoc.Should().HaveCount(1);
+			fieldLoc.First().Should().Be(loc + 10);
+
 		}
-		
+
 		[Test]
 		public void TestUpdate_ObjectInitializer()
 		{
@@ -49,7 +59,7 @@ namespace Nest.Tests.Integration.Core
 		public class ElasticsearchProjectLocUpdate
 		{
 			public int Id { get; set; }
-			[ElasticProperty(Name="loc",AddSortField=true)]
+			[ElasticProperty(Name = "loc", AddSortField = true)]
 			public int LOC { get; set; }
 		}
 
