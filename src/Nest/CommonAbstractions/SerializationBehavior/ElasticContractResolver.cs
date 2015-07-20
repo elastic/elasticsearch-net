@@ -133,6 +133,14 @@ namespace Nest.Resolvers
 
 		}
 
+		public IList<JsonProperty> PropertiesOfAll(Type t, MemberSerialization memberSerialization)
+		{
+			return base.CreateProperties(t, memberSerialization)
+				.Concat(PropertiesOfAllInterfaces(t, memberSerialization))
+				.DistinctBy(p=>p.PropertyName)
+				.ToList();
+
+		}
 		private IList<JsonProperty> PropertiesOf<T>(Type type, MemberSerialization memberSerialization, IList<JsonProperty> defaultProperties, ILookup<string, JsonProperty> lookup, bool append = false)
 		{
 			if (!typeof (T).IsAssignableFrom(type)) return defaultProperties;

@@ -18,11 +18,4 @@ namespace Nest
 
 		public long DocCount { get; set; }
 	}
-
-	public class ExtendedBounds<T>
-	{
-		public T Minimum { get; set; }
-
-		public T Maximum { get; set; }
-	}
 }

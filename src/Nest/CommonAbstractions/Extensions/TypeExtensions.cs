@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Text;
 using Nest.Resolvers;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
@@ -29,7 +30,13 @@ namespace Nest
 
 		internal static object CreateGenericInstance(this Type t, Type closeOver, params object[] args)
 		{
-			var key = t.FullName + "--" + closeOver.FullName;
+			return t.CreateGenericInstance(new[] {closeOver}, args);
+		}
+
+		internal static object CreateGenericInstance(this Type t, Type[] closeOver, params object[] args)
+		{
+			var argKey = closeOver.Aggregate(new StringBuilder(), (sb, gt) => sb.Append("--" + gt.FullName), sb => sb.ToString());
+			var key = t.FullName + argKey;
 			Type closedType;
 			if (!_cachedGenericClosedTypes.TryGetValue(key, out closedType))
 			{
@@ -38,7 +45,6 @@ namespace Nest
 			}
 			return closedType.CreateInstance(args);
 		}
-
 		internal static object CreateInstance(this Type t, params object[] args)
 		{
 			ObjectActivator<object> activator;
@@ -100,15 +106,13 @@ namespace Nest
 			return compiled;
 		}
 
-		internal static IList<JsonProperty> GetCachedObjectProperties(this object @instance)
+		internal static IList<JsonProperty> GetCachedObjectProperties(this Type t, MemberSerialization memberSerialization = MemberSerialization.OptIn)
 		{
-			var t = @instance.GetType();
-
 			IList<JsonProperty> propertyDictionary;
 			if (_cachedTypeProperties.TryGetValue(t, out propertyDictionary))
 				return propertyDictionary;
 
-			return  _jsonContract.PropertiesOfAllInterfaces(t,MemberSerialization.OptIn);
+			return  _jsonContract.PropertiesOfAll(t, memberSerialization);
 		}
 
 	}

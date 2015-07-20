@@ -66,6 +66,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Aggregations\Bucket\BucketAggregator.cs" />
+    <Compile Include="Aggregations\Bucket\Histogram\ExtendedBounds.cs" />
+    <Compile Include="Aggregations\Bucket\Histogram\HistogramOrder.cs" />
     <Compile Include="Aggregations\Bucket\SignificantTerms\Heuristics\ChiSquareHeuristic.cs" />
     <Compile Include="Aggregations\Bucket\SignificantTerms\Heuristics\GoogleNormalizedDistanceHeuristic.cs" />
     <Compile Include="Aggregations\Bucket\SignificantTerms\Heuristics\MutualInformationHeuristic.cs" />
@@ -93,12 +95,17 @@
     <Compile Include="CommonAbstractions\ConnectionSettings\ClrTypeMapping.cs" />
     <Compile Include="CommonAbstractions\Infer\FieldName\FieldName.cs" />
     <Compile Include="CommonAbstractions\Infer\FieldName\FieldNameExtensions.cs" />
-    <Compile Include="CommonAbstractions\SerializationBehavior\Resolvers\Converters\ReserializeJsonConverter.cs" />
+    <Compile Include="CommonAbstractions\SerializationBehavior\Generic\KeyValueConverter.cs" />
+    <Compile Include="CommonAbstractions\SerializationBehavior\Generic\ReserializeJsonConverter.cs" />
+    <Compile Include="CommonAbstractions\SerializationBehavior\Generic\UnionConverter.cs" />
+    <Compile Include="CommonAbstractions\Union.cs" />
     <Compile Include="CommonOptions\DateInterval.cs" />
     <Compile Include="CommonOptions\Range\DateExpressionRange.cs" />
     <Compile Include="CommonOptions\Range\Ip4ExpressionRange.cs" />
     <Compile Include="CommonOptions\Range\Ip4Range.cs" />
     <Compile Include="CommonOptions\Range\Range.cs" />
+    <Compile Include="CommonOptions\TimeUnit.cs" />
+    <Compile Include="CommonOptions\TimeUnitExpression.cs" />
     <Compile Include="Document\Multiple\MultiGet\ElasticClient-SourceMany.cs" />
     <Compile Include="Indices\AliasManagement\GetAliases\ElasticClient-GetIndicesPointingToAlias.cs" />
     <Compile Include="Indices\AliasManagement\GetAliases\ElasticClient-GetAliasesPointingToIndex.cs" />
@@ -929,7 +936,7 @@
     <Compile Include="Properties\ClsCompiancy.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\Resolvers\Converters\BulkOperationResponseItemConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\Resolvers\Converters\Aggregations\AggregationConverter.cs" />
-    <Compile Include="CommonAbstractions\SerializationBehavior\Resolvers\Converters\FieldNameQueryConverter.cs" />
+    <Compile Include="CommonAbstractions\SerializationBehavior\Generic\FieldNameQueryConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\Resolvers\Converters\IndexSettingsResponseConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\Resolvers\Converters\SimilaritySettingsConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\Resolvers\Converters\SortCollectionConverter.cs" />

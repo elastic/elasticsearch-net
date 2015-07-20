@@ -26,19 +26,24 @@ namespace Tests.Aggregations.Bucket
 			{
 				aggs = new
 				{
-					name_of_child_agg = new
+					projects_started_per_month = new
 					{
-						children = new {type = "commits"},
+						date_histogram = new
+						{
+							field = "startedOn",
+							interval = "month",
+							format = "MMM",
+							min_doc_count = 2,
+							order = new {_count = "asc"},
+							extended_bounds = new
+							{
+								min = FixedDate.AddYears(-1),
+								max = FixedDate.AddYears(1)
+							},
+						},
 						aggs = new
 						{
-							average_per_child = new
-							{
-								avg = new {field = "confidenceFactor"}
-							},
-							max_per_child = new
-							{
-								max = new {field = "confidenceFactor"}
-							}
+							project_tags = new {terms = new {field = "tags"}}
 						}
 					}
 				}
@@ -47,10 +52,12 @@ namespace Tests.Aggregations.Bucket
 			protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
 				.Aggregations(aggs => aggs
 					.DateHistogram("projects_started_per_month", date => date
-						.Field(p=>p.StartedOn)
+						.Field(p => p.StartedOn)
+						.Format("MMM")
 						.Interval(DateInterval.Month)
 						.MinimumDocumentCount(2)
-						.ExtendedBounds()
+						.ExtendedBounds(FixedDate.AddYears(-1), FixedDate.AddYears(1))
+						.Order(HistogramOrder.CountAscending)
 						.Aggregations(childAggs => childAggs
 							.Terms("project_tags", avg => avg.Field(p => p.Tags))
 						)
@@ -60,11 +67,20 @@ namespace Tests.Aggregations.Bucket
 			protected override SearchRequest<Project> Initializer =>
 				new SearchRequest<Project>
 				{
-					Aggregations = new ChildrenAgg("name_of_child_agg", typeof (CommitActivity))
+					Aggregations = new DateHistogramAgg("projects_started_per_month")
 					{
+						Field = Field<Project>(p=>p.StartedOn),
+						Format = "MMM",
+						Interval = DateInterval.Month,
+						MinimumDocumentCount = 2,
+						ExtendedBounds = new ExtendedBounds<DateTime>
+						{
+							Minimum = FixedDate.AddYears(-1),
+							Maximum = FixedDate.AddYears(1),
+						},
+						Order = HistogramOrder.CountAscending,
 						Aggregations =
-							new AverageAgg("average_per_child", Field<CommitActivity>(p => p.ConfidenceFactor))
-							&& new MaxAgg("max_per_child", Field<CommitActivity>(p => p.ConfidenceFactor))
+							new TermsAgg("project_tags") { Field = Field<Project>(p => p.Tags) }
 					}
 				};
 		}

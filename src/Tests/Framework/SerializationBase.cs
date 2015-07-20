@@ -36,6 +36,8 @@ namespace Tests.Framework
 
 		}
 
+		protected DateTime FixedDate => new DateTime(2015,06,06,12,01,02, 123);
+
 		protected void ShouldBeEquivalentTo(string serialized) =>
 			serialized.Should().BeEquivalentTo(_expectedJsonString);
 

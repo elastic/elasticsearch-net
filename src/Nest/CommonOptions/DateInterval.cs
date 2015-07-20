@@ -1,5 +1,4 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
@@ -26,5 +25,11 @@ namespace Nest
 		Quarter, 
 		[EnumMember(Value = "year")]
 		Year
+	}
+
+	public class DateIntervalExpression
+	{
+		private readonly DateInterval _interval;
+		private readonly TimeUnitExpression _timeUnit;
 	}
 }
