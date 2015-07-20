@@ -13,6 +13,9 @@ namespace Nest.Resolvers
 		private static ConcurrentDictionary<Type, Func<object, string>> IdDelegates = new ConcurrentDictionary<Type, Func<object, string>>();
 		private static MethodInfo MakeDelegateMethodInfo = typeof(IdResolver).GetMethod("MakeDelegate", BindingFlags.Static | BindingFlags.NonPublic);
 
+		PropertyInfo GetPropertyCaseInsensitive(Type type, string FieldName)
+			=> type.GetProperty(FieldName, BindingFlags.Public | BindingFlags.Instance | BindingFlags.IgnoreCase);
+
 		public IdResolver(IConnectionSettingsValues connectionSettings)
 		{
 			_connectionSettings = connectionSettings;
@@ -108,16 +111,9 @@ namespace Nest.Resolvers
 				return GetPropertyCaseInsensitive(type, propertyName);
 
 			var esTypeAtt = ElasticAttributes.Type(type);
-			propertyName = esTypeAtt != null && !string.IsNullOrWhiteSpace(esTypeAtt.IdProperty)
-				? esTypeAtt.IdProperty
-				: "Id";
+			propertyName = (esTypeAtt?.IdProperty.IsNullOrEmpty() ?? true ) ? "Id" : esTypeAtt?.IdProperty;
 
 			return GetPropertyCaseInsensitive(type, propertyName);
-		}
-
-		PropertyInfo GetPropertyCaseInsensitive(Type type, string FieldName)
-		{
-			return type.GetProperty(FieldName, BindingFlags.Public | BindingFlags.Instance | BindingFlags.IgnoreCase);
 		}
 	}
 }
