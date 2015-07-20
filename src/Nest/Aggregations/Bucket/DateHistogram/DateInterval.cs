@@ -27,9 +27,4 @@ namespace Nest
 		Year
 	}
 
-	public class DateIntervalExpression
-	{
-		private readonly DateInterval _interval;
-		private readonly TimeUnitExpression _timeUnit;
-	}
 }

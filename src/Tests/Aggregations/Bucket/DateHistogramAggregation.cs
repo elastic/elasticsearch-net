@@ -13,11 +13,6 @@ namespace Tests.Aggregations.Bucket
 {
 	public class DateHistogramAggregation
 	{
-		/**
-		 * A special single bucket aggregation that enables aggregating from buckets on parent document types to
-		 * buckets on child documents.
-		 */
-
 		public class Usage : AggregationUsageBase
 		{
 			public Usage(ReadOnlyIntegration i) : base(i) { }

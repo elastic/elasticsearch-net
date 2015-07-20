@@ -108,13 +108,8 @@ namespace Nest
 			return Equals((GeoLocation) obj);
 		}
 
-		public override int GetHashCode()
-		{
-			unchecked
-			{
-				return (_latitude.GetHashCode()*397) ^ _longitude.GetHashCode();
-			}
-		}
+		public override int GetHashCode() =>
+			unchecked((_latitude.GetHashCode()*397) ^ _longitude.GetHashCode());
 
 		public string ToString(string format, IFormatProvider formatProvider)
 		{

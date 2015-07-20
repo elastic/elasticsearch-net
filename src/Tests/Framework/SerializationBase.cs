@@ -11,7 +11,6 @@ using Ploeh.AutoFixture;
 
 namespace Tests.Framework
 {
-
 	public abstract class SerializationBase
 	{
 		protected readonly Fixture _fixture = new Fixture();
@@ -19,24 +18,22 @@ namespace Tests.Framework
 
 		protected abstract object ExpectJson { get; }
 
-		private readonly string _expectedJsonString;
-		private readonly JObject _expectedJsonJObject;
+		protected string _expectedJsonString;
+		protected JToken _expectedJsonJObject;
 
 		protected SerializationBase()
 		{
 			var o = this.ExpectJson;
-			if (o == null)
-				throw new ArgumentNullException(nameof(this.ExpectJson));
+			if (o == null) return;
 
 			this._expectedJsonString = this.Serialize(o);
-			this._expectedJsonJObject = JObject.Parse(this._expectedJsonString);
+			this._expectedJsonJObject = JToken.Parse(this._expectedJsonString);
 
 			if (string.IsNullOrEmpty(this._expectedJsonString))
 				throw new ArgumentNullException(nameof(this._expectedJsonString));
-
 		}
 
-		protected DateTime FixedDate => new DateTime(2015,06,06,12,01,02, 123);
+		protected DateTime FixedDate => new DateTime(2015, 06, 06, 12, 01, 02, 123);
 
 		protected void ShouldBeEquivalentTo(string serialized) =>
 			serialized.Should().BeEquivalentTo(_expectedJsonString);
@@ -45,7 +42,7 @@ namespace Tests.Framework
 		{
 			serialized = null;
 			serialized = this.Serialize(o);
-			var actualJson = JObject.Parse(serialized);
+			var actualJson = JToken.Parse(serialized);
 
 			var matches = JToken.DeepEquals(this._expectedJsonJObject, actualJson);
 			if (matches) return true;
@@ -74,15 +71,15 @@ namespace Tests.Framework
 		}
 
 		private TObject Deserialize<TObject>(string json) =>
-			TestClient.GetClient().Serializer.Deserialize<TObject>(new MemoryStream(Encoding.UTF8.GetBytes(json))); 
+			TestClient.GetClient().Serializer.Deserialize<TObject>(new MemoryStream(Encoding.UTF8.GetBytes(json)));
 
-		private string Serialize<TObject>(TObject o)
+		protected string Serialize<TObject>(TObject o)
 		{
 			var bytes = TestClient.GetClient().Serializer.Serialize(o);
 			return Encoding.UTF8.GetString(bytes);
 		}
 
-		protected void AssertSerializesAndRoundTrips<T>(T o) where T : class
+		protected void AssertSerializesAndRoundTrips<T>(T o) 
 		{
 			//first serialize to string and assert it looks like this.ExpectedJson
 			string serialized;
