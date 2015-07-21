@@ -2,7 +2,7 @@
 ----
 serialized = null;
 serialized = this.Serialize(o);
-var actualJson = JObject.Parse(serialized);
+var actualJson = JToken.Parse(serialized);
 var matches = JToken.DeepEquals(this._expectedJsonJObject, actualJson);
 var d = new Differ();
 var inlineBuilder = new InlineDiffBuilder(d);

@@ -23,12 +23,44 @@ namespace Tests.Framework
 			this._expectedJsonJObject = JToken.Parse(this._expectedJsonString);
 		}
 
-		public RoundTripper WhenSerializing<T>(T actual)
+		public virtual RoundTripper<T> WhenSerializing<T>(T actual)
 		{
-			this.AssertSerializesAndRoundTrips(actual);
-			return this;
+			var sut = this.AssertSerializesAndRoundTrips(actual);
+			return new RoundTripper<T>(this.ExpectJson, sut);
 		}
 
 		public static RoundTripper Expect(object expected) =>  new RoundTripper(expected);
+	}
+
+	public class RoundTripper<T> : RoundTripper
+	{
+		protected T Sut { get; set;  }
+
+		internal RoundTripper(object expected, T sut) : base(expected)
+		{
+			this.Sut = sut;
+		}
+
+		public RoundTripper<T> WhenSerializing(T actual)
+		{
+			Sut = this.AssertSerializesAndRoundTrips(actual);
+			return this;
+		}
+
+
+		public RoundTripper<T> Result(Action<T> assert)
+		{
+			assert(this.Sut);
+			return this;
+		}
+
+		public RoundTripper<T> Result<TOther>(Action<TOther> assert)
+			where TOther : T
+		{
+			assert((TOther)this.Sut);
+			return this;
+		}
+
+
 	}
 }

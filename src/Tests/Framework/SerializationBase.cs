@@ -79,17 +79,18 @@ namespace Tests.Framework
 			return Encoding.UTF8.GetString(bytes);
 		}
 
-		protected void AssertSerializesAndRoundTrips<T>(T o) 
+		protected T AssertSerializesAndRoundTrips<T>(T o) 
 		{
 			//first serialize to string and assert it looks like this.ExpectedJson
 			string serialized;
-			if (!this.SerializesAndMatches(o, out serialized)) return;
+			if (!this.SerializesAndMatches(o, out serialized)) return default(T);
 
 			//deserialize serialized json back again 
 			var oAgain = this.Deserialize<T>(serialized);
 			//now use deserialized `o` and serialize again making sure
 			//it still looks like this.ExpectedJson
 			this.SerializesAndMatches(oAgain, out serialized);
+			return oAgain;
 		}
 	}
 }

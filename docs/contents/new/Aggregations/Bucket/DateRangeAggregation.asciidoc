@@ -1,0 +1,64 @@
+A multi-bucket aggregation similar to the histogram except it can only be applied on date values. 
+From a functionality perspective, this histogram supports the same features as the normal histogram. 
+The main difference is that the interval can be specified by date/time expressions.
+Be sure to read the elasticsearch documentation {ref}/search-aggregations-bucket-datehistogram-aggregation.html[on this subject here]
+
+[source, csharp]
+----
+s => s
+.Aggregations(aggs => aggs
+	.DateRange("projects_date_ranges", date => date
+		.Field(p => p.StartedOn)
+		.Ranges(
+			r=>r.From(DateMath.Now).To(DateMath.Anchored(FixedDate).Add("2d")),
+			r=>r.From(DateMath.Now.Add(TimeSpan.FromDays(1)).Subtract("30m").RoundTo(TimeUnit.Hour)),
+			r=>r.To(DateMath.Anchored("2012-05-05").Add(TimeSpan.FromDays(1)).Subtract("1m"))
+		)
+		.Aggregations(childAggs => childAggs
+			.Terms("project_tags", avg => avg.Field(p => p.Tags))
+		)
+	)
+)
+----
+[source, csharp]
+----
+new SearchRequest<Project>
+{
+	Aggregations = new DateRangeAgg("projects_date_ranges")
+	{
+		Field = Field<Project>(p=>p.StartedOn),
+		Ranges = new List<DateRangeExpression>
+		{
+			{new DateRangeExpression { From = DateMath.Now, To = DateMath.Anchored(FixedDate).Add("2d") } },
+			{new DateRangeExpression { From = DateMath.Now.Add(TimeSpan.FromDays(1)).Subtract("30m").RoundTo(TimeUnit.Hour) } },
+			{new DateRangeExpression { To = DateMath.Anchored("2012-05-05").Add(TimeSpan.FromDays(1)).Subtract("1m") } }
+		},
+		Aggregations =
+			new TermsAgg("project_tags") { Field = Field<Project>(p => p.Tags) }
+	}
+}
+----
+Using the `.Agg` aggregation helper we can fetch our aggregation results easily 
+in the correct type. [Be sure to read more about `.Agg` vs `.Aggregations` on the response here]()
+
+Time units are specified as a union of either a `DateInterval` or `TimeUnitExpression`
+both of which implicitly convert to the `Union
+
+[source, csharp]
+----
+Expect("month").WhenSerializing<Union<DateInterval, TimeUnitExpression>>(DateInterval.Month);
+----
+` of these two.
+
+[source, csharp]
+----
+Expect("day").WhenSerializing<Union<DateInterval, TimeUnitExpression>>(DateInterval.Day);
+Expect("hour").WhenSerializing<Union<DateInterval, TimeUnitExpression>>(DateInterval.Hour);
+Expect("minute").WhenSerializing<Union<DateInterval, TimeUnitExpression>>(DateInterval.Minute);
+Expect("quarter").WhenSerializing<Union<DateInterval, TimeUnitExpression>>(DateInterval.Quarter);
+Expect("second").WhenSerializing<Union<DateInterval, TimeUnitExpression>>(DateInterval.Second);
+Expect("week").WhenSerializing<Union<DateInterval, TimeUnitExpression>>(DateInterval.Week);
+Expect("year").WhenSerializing<Union<DateInterval, TimeUnitExpression>>(DateInterval.Year);
+Expect("2d").WhenSerializing<Union<DateInterval, TimeUnitExpression>>((TimeUnitExpression)"2d");
+Expect("1.16w").WhenSerializing<Union<DateInterval, TimeUnitExpression>>((TimeUnitExpression)TimeSpan.FromDays(8.1));
+----

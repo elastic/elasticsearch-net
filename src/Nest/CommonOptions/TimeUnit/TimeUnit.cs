@@ -16,7 +16,7 @@ namespace Nest
 		Day,
 		[EnumMember(Value = "w")]
 		Week, 
-		[EnumMember(Value = "m")]
+		[EnumMember(Value = "M")]
 		Month, 
 		[EnumMember(Value = "y")]
 		Year

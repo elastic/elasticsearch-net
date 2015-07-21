@@ -143,6 +143,29 @@ namespace Nest
 
 		public static bool operator !=(TimeUnitExpression left, TimeUnitExpression right) => !left.Equals(right);
 
-		public bool Equals(TimeUnitExpression other) => this.Milliseconds == other?.Milliseconds;
+		public override string ToString()
+		{
+			if (this.Factor == null) return this.Milliseconds.ToString(CultureInfo.InvariantCulture);
+			return this.Factor.Value.ToString("0.##", CultureInfo.InvariantCulture) +
+				   this.Interval.GetValueOrDefault().GetStringValue();
+		}
+
+		public bool Equals(TimeUnitExpression other)
+		{
+			if (ReferenceEquals(null, other)) return false;
+			if (ReferenceEquals(this, other)) return true;
+			return Milliseconds == other.Milliseconds;
+		}
+		
+		public override bool Equals(object obj)
+		{
+			if (ReferenceEquals(null, obj)) return false;
+			if (ReferenceEquals(this, obj)) return true;
+			if (obj.GetType() != this.GetType()) return false;
+			return Equals((TimeUnitExpression) obj);
+		}
+
+		public override int GetHashCode() => this.Milliseconds.GetHashCode();
+
 	}
 }

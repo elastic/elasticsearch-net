@@ -1,0 +1,7 @@
+[source, csharp]
+----
+var sut = this.AssertSerializesAndRoundTrips(actual);
+Sut = this.AssertSerializesAndRoundTrips(actual);
+assert(this.Sut);
+assert((TOther)this.Sut);
+----

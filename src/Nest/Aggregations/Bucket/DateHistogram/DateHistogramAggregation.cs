@@ -91,8 +91,7 @@ namespace Nest
 
 		Union<DateInterval, TimeUnitExpression> IDateHistogramAggregator.Interval { get; set; }
 
-		//TODO is this default necessary?
-		string IDateHistogramAggregator.Format { get; set; } = "date_optional_time";
+		string IDateHistogramAggregator.Format { get; set; }
 
 		int? IDateHistogramAggregator.MinimumDocumentCount { get; set; }
 

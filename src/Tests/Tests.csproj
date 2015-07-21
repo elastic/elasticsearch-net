@@ -66,11 +66,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Aggregations\Bucket\DateRangeAggregation.cs" />
     <Compile Include="Aggregations\Bucket\DateHistogramAggregation.cs" />
     <Compile Include="Aggregations\Bucket\ChildrenAggregation.cs" />
     <Compile Include="Aggregations\AggregationUsageBase.cs" />
     <Compile Include="Aggregations\WritingAggregations.cs" />
     <Compile Include="ClientConcepts\LowLevel\Connecting.cs" />
+    <Compile Include="CommonOptions\DateMath\DateMathExpressions.cs" />
     <Compile Include="CommonOptions\TimeUnit\TimeUnits.cs" />
     <Compile Include="Framework\MockData\CommitActivity.cs" />
     <Compile Include="Framework\MockData\Developer.cs" />

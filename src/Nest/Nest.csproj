@@ -98,10 +98,14 @@
     <Compile Include="CommonAbstractions\SerializationBehavior\Generic\KeyValueConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\Generic\ReserializeJsonConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\Generic\UnionConverter.cs" />
+    <Compile Include="CommonAbstractions\SerializationBehavior\Resolvers\Converters\DateMathConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\Resolvers\Converters\TimeUnitExpressionConverter.cs" />
     <Compile Include="CommonAbstractions\Union.cs" />
     <Compile Include="Aggregations\Bucket\DateHistogram\DateInterval.cs" />
-    <Compile Include="CommonOptions\Range\DateExpressionRange.cs" />
+    <Compile Include="CommonOptions\DateMath\DateMath.cs" />
+    <Compile Include="CommonOptions\DateMath\DateMathExpression.cs" />
+    <Compile Include="CommonOptions\DateMath\DateMathOperation.cs" />
+    <Compile Include="Aggregations\Bucket\DateRange\DateRangeExpression.cs" />
     <Compile Include="CommonOptions\Range\Ip4ExpressionRange.cs" />
     <Compile Include="CommonOptions\Range\Ip4Range.cs" />
     <Compile Include="CommonOptions\Range\Range.cs" />

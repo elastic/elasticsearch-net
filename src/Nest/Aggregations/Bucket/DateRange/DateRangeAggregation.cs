@@ -18,21 +18,21 @@ namespace Nest
 		string Format { get; set; }
 
 		[JsonProperty(PropertyName = "ranges")]
-		IEnumerable<DateExpressionRange> Ranges { get; set; }
+		IEnumerable<IDateRangeExpression> Ranges { get; set; }
 	}
 
 	public class DateRangeAggregator : BucketAggregator, IDateRangeAggregator
 	{
 		public FieldName Field { get; set; }
 		public string Format { get; set; }
-		public IEnumerable<DateExpressionRange> Ranges { get; set; }
+		public IEnumerable<IDateRangeExpression> Ranges { get; set; }
 	}
 
 	public class DateRangeAgg : BucketAgg, IDateRangeAggregator
 	{
 		public FieldName Field { get; set; }
 		public string Format { get; set; }
-		public IEnumerable<DateExpressionRange> Ranges { get; set; }
+		public IEnumerable<IDateRangeExpression> Ranges { get; set; }
 
 		public DateRangeAgg(string name) : base(name) { }
 
@@ -48,7 +48,7 @@ namespace Nest
 		
 		string IDateRangeAggregator.Format { get; set; }
 
-		IEnumerable<DateExpressionRange> IDateRangeAggregator.Ranges { get; set; }
+		IEnumerable<IDateRangeExpression> IDateRangeAggregator.Ranges { get; set; }
 
 		public DateRangeAggregatorDescriptor<T> Field(string field) => Assign(a => a.Field = field);
 
@@ -56,8 +56,14 @@ namespace Nest
 
 		public DateRangeAggregatorDescriptor<T> Format(string format) => Assign(a => a.Format = format);
 
-		public DateRangeAggregatorDescriptor<T> Ranges(params Func<DateExpressionRange, DateExpressionRange>[] ranges) =>
-			Assign(a=>a.Ranges = (from range in ranges let r = new DateExpressionRange() select range(r)).ToListOrNullIfEmpty());
+		public DateRangeAggregatorDescriptor<T> Ranges(params IDateRangeExpression[] ranges) =>
+			Assign(a=>a.Ranges = ranges.ToListOrNullIfEmpty());
+
+		public DateRangeAggregatorDescriptor<T> Ranges(params Func<DateRangeExpressionDescriptor, IDateRangeExpression>[] ranges) =>
+			Assign(a=>a.Ranges = ranges?.Select(r=>r(new DateRangeExpressionDescriptor())).ToListOrNullIfEmpty());
+
+		public DateRangeAggregatorDescriptor<T> Ranges(IEnumerable<Func<DateRangeExpressionDescriptor, IDateRangeExpression>> ranges) =>
+			Assign(a=>a.Ranges = ranges?.Select(r=>r(new DateRangeExpressionDescriptor())).ToListOrNullIfEmpty());
 
 	}
 }

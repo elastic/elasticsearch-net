@@ -6,7 +6,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Nest.Resolvers.Converters
 {
-	public class TimeUnitExpressionConverter : JsonConverter
+	public class DateMathConverter : JsonConverter
 	{
 		public override bool CanWrite => true;
 
@@ -14,20 +14,19 @@ namespace Nest.Resolvers.Converters
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-			var v = value as TimeUnitExpression;
-			if (v.Factor.HasValue)
-				writer.WriteValue(v.ToString());
-			else writer.WriteValue(v.Milliseconds); 
+			var v = value as DateMath;
+			if (v == null) return;
+			writer.WriteValue(v.ToString());
 		}
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
 			if (reader.TokenType == JsonToken.String)
-				return new TimeUnitExpression(reader.Value as string);
-			if (reader.TokenType == JsonToken.Integer || reader.TokenType == JsonToken.Float)
+				return DateMath.FromString(reader.Value as string);
+			if (reader.TokenType == JsonToken.Date)
 			{
-				var milliseconds = Convert.ToInt64(reader.Value);
-				return new TimeUnitExpression(milliseconds);
+				var d = reader.Value as DateTime?;
+				return d.HasValue ? DateMath.Anchored(d.Value) : null;
 			}
 			return null;
 		}
