@@ -62,6 +62,9 @@ Target "DocsPreview" <| fun _ ->
 
 Target "Nightly" <| fun _ -> trace "build nightly" 
 
+BuildFailureTarget "NotifyTestFailures" <| fun _ -> Tests.Notify() |> ignore
+
+
 // Dependencies
 "Clean" 
   ==> "CreateKeysIfAbsent"

@@ -126,8 +126,7 @@ module Tooling =
                 if (isMono) then
                     execProcess "node" <| binPath :: arguments
                 else
-                    exec "node" <| binPath :: arguments
-                traceFAKE "calling %s %A" binPath arguments 
+                    exec Node.Path <| binPath :: arguments
 
     let Wintersmith = new NpmTooling("wintersmith", "bin/wintersmith")
     let Notifier = new NpmTooling("node-notifier", "bin.js")
