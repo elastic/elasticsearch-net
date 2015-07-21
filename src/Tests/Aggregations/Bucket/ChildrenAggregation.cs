@@ -16,6 +16,8 @@ namespace Tests.Aggregations.Bucket
 		/**
 		 * A special single bucket aggregation that enables aggregating from buckets on parent document types to
 		 * buckets on child documents.
+		 *
+		 * Be sure to read the elasticsearch documentation {ref}/search-aggregations-bucket-children-aggregation.html[on this subject here]
 		 */
 
 		private void MappingExample()

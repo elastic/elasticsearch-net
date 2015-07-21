@@ -19,6 +19,8 @@ namespace Tests.Aggregations.Bucket
 		 * A multi-bucket aggregation similar to the histogram except it can only be applied on date values. 
 		 * From a functionality perspective, this histogram supports the same features as the normal histogram. 
 		 * The main difference is that the interval can be specified by date/time expressions.
+		 *
+		 * Be sure to read the elasticsearch documentation {ref}/search-aggregations-bucket-datehistogram-aggregation.html[on this subject here]
 		*/
 		public class Usage : AggregationUsageBase
 		{
@@ -99,7 +101,7 @@ namespace Tests.Aggregations.Bucket
 				
 				/**
 				* Using the `.Agg` aggregation helper we can fetch our aggregation results easily 
-				* in the correct type. [Be sure to read more about `.Agg` vs `.Aggregation` on the response here]()
+				* in the correct type. [Be sure to read more about `.Agg` vs `.Aggregations` on the response here]()
 				*/
 				var dateHistogram = response.Aggs.DateHistogram("date_hist");
 				dateHistogram.Should().NotBeNull();
