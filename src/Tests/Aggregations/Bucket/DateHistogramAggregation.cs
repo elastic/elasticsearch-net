@@ -120,7 +120,7 @@ namespace Tests.Aggregations.Bucket
 		{
 			/**
 			* Time units are specified as a union of either a `DateInterval` or `TimeUnitExpression`
-			* both of which implicitly convert to the `Union<,>` of these two.
+			* both of which implicitly convert to the `Union` of these two.
 			*/
 			Expect("month").WhenSerializing<Union<DateInterval, TimeUnitExpression>>(DateInterval.Month);
 			Expect("day").WhenSerializing<Union<DateInterval, TimeUnitExpression>>(DateInterval.Day);

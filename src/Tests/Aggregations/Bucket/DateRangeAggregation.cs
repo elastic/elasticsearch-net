@@ -37,14 +37,14 @@ namespace Tests.Aggregations.Bucket
 							field = "startedOn",
 							ranges = new object[]
 							{
-								new { from = "now", to = "2015-06-06T12:01:02.123||+2d" },
-								new { from = "now+1d-30m/h" },
-								new { to = "2012-05-05||+1d-1m" },
+								new { to = "now", from = "2015-06-06T12:01:02.123||+2d" },
+								new { to = "now+1d-30m/h" },
+								new { from = "2012-05-05||+1d-1m" },
 							}
 						},
 						aggs = new
 						{
-							project_tags = new {terms = new {field = "tags"}}
+							project_tags = new { terms = new { field = "tags" } }
 						}
 					}
 				}
@@ -55,9 +55,9 @@ namespace Tests.Aggregations.Bucket
 					.DateRange("projects_date_ranges", date => date
 						.Field(p => p.StartedOn)
 						.Ranges(
-							r=>r.From(DateMath.Now).To(DateMath.Anchored(FixedDate).Add("2d")),
-							r=>r.From(DateMath.Now.Add(TimeSpan.FromDays(1)).Subtract("30m").RoundTo(TimeUnit.Hour)),
-							r=>r.To(DateMath.Anchored("2012-05-05").Add(TimeSpan.FromDays(1)).Subtract("1m"))
+							r => r.From(DateMath.Anchored(FixedDate).Add("2d")).To(DateMath.Now),
+							r => r.To(DateMath.Now.Add(TimeSpan.FromDays(1)).Subtract("30m").RoundTo(TimeUnit.Hour)),
+							r => r.From(DateMath.Anchored("2012-05-05").Add(TimeSpan.FromDays(1)).Subtract("1m"))
 						)
 						.Aggregations(childAggs => childAggs
 							.Terms("project_tags", avg => avg.Field(p => p.Tags))
@@ -70,64 +70,36 @@ namespace Tests.Aggregations.Bucket
 				{
 					Aggregations = new DateRangeAgg("projects_date_ranges")
 					{
-						Field = Field<Project>(p=>p.StartedOn),
+						Field = Field<Project>(p => p.StartedOn),
 						Ranges = new List<DateRangeExpression>
 						{
-							{new DateRangeExpression { From = DateMath.Now, To = DateMath.Anchored(FixedDate).Add("2d") } },
-							{new DateRangeExpression { From = DateMath.Now.Add(TimeSpan.FromDays(1)).Subtract("30m").RoundTo(TimeUnit.Hour) } },
-							{new DateRangeExpression { To = DateMath.Anchored("2012-05-05").Add(TimeSpan.FromDays(1)).Subtract("1m") } }
+							{new DateRangeExpression { From = DateMath.Anchored(FixedDate).Add("2d"), To = DateMath.Now} },
+							{new DateRangeExpression { To = DateMath.Now.Add(TimeSpan.FromDays(1)).Subtract("30m").RoundTo(TimeUnit.Hour) } },
+							{new DateRangeExpression { From = DateMath.Anchored("2012-05-05").Add(TimeSpan.FromDays(1)).Subtract("1m") } }
 						},
 						Aggregations =
 							new TermsAgg("project_tags") { Field = Field<Project>(p => p.Tags) }
 					}
 				};
 
-			[I] public void HandlingResponses()
+			[I] public async Task HandlingResponses() => await this.AssertOnAllResponses(response =>
 			{
-				var response = this.GetClient().Search<Project>(s => s
-					.Aggregations(aggs => aggs
-						.DateRange("date_hist", dh => dh
-							.Field(p => p.StartedOn)
-						)
-					)
-				);
-
 				response.IsValid.Should().BeTrue();
-				
-				/**
-				* Using the `.Agg` aggregation helper we can fetch our aggregation results easily 
-				* in the correct type. [Be sure to read more about `.Agg` vs `.Aggregations` on the response here]()
-				*/
-				var dateHistogram = response.Aggs.DateRange("date_hist");
+
+					/**
+					* Using the `.Agg` aggregation helper we can fetch our aggregation results easily 
+					* in the correct type. [Be sure to read more about `.Agg` vs `.Aggregations` on the response here]()
+					*/
+				var dateHistogram = response.Aggs.DateRange("projects_date_ranges");
 				dateHistogram.Should().NotBeNull();
 				dateHistogram.Items.Should().NotBeNull();
-				dateHistogram.Items.Count.Should().BeGreaterThan(10);
+					/** We specified three ranges so we expect to three of them in the response */
+				dateHistogram.Items.Count.Should().Be(3);
 				foreach (var item in dateHistogram.Items)
 				{
 					item.DocCount.Should().BeGreaterThan(0);
 				}
-			}
-		}
-
-
-		[U] public void UsingInterval()
-		{
-			/**
-			* Time units are specified as a union of either a `DateInterval` or `TimeUnitExpression`
-			* both of which implicitly convert to the `Union<,>` of these two.
-			*/
-			Expect("month").WhenSerializing<Union<DateInterval, TimeUnitExpression>>(DateInterval.Month);
-			Expect("day").WhenSerializing<Union<DateInterval, TimeUnitExpression>>(DateInterval.Day);
-			Expect("hour").WhenSerializing<Union<DateInterval, TimeUnitExpression>>(DateInterval.Hour);
-			Expect("minute").WhenSerializing<Union<DateInterval, TimeUnitExpression>>(DateInterval.Minute);
-			Expect("quarter").WhenSerializing<Union<DateInterval, TimeUnitExpression>>(DateInterval.Quarter);
-			Expect("second").WhenSerializing<Union<DateInterval, TimeUnitExpression>>(DateInterval.Second);
-			Expect("week").WhenSerializing<Union<DateInterval, TimeUnitExpression>>(DateInterval.Week);
-			Expect("year").WhenSerializing<Union<DateInterval, TimeUnitExpression>>(DateInterval.Year);
-
-
-			Expect("2d").WhenSerializing<Union<DateInterval, TimeUnitExpression>>((TimeUnitExpression)"2d");
-			Expect("1.16w").WhenSerializing<Union<DateInterval, TimeUnitExpression>>((TimeUnitExpression)TimeSpan.FromDays(8.1));
+			});
 		}
 	}
 }

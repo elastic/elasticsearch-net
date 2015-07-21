@@ -50,7 +50,7 @@ namespace Tests.CommonOptions
 			/** date's also implicitly convert to simple date math expressions */
 			var date = new DateTime(2015, 05, 05);
 			Expect("2015-05-05T00:00:00").WhenSerializing<DateMath>(date)
-				/** the anchor will be an actual DateTime, even after a serialization <=> deserialization round trip */
+				/** the anchor will be an actual DateTime, even after a serialization - deserialization round trip */
 				.Result(dateMath => ((IDateMath)dateMath)
 				.	Anchor.Match(
 						d => d.Should().Be(date), 

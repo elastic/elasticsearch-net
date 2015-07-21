@@ -55,7 +55,7 @@ var date = new DateTime(2015, 05, 05);
 ----
 Expect("2015-05-05T00:00:00").WhenSerializing<DateMath>(date)
 ----
-the anchor will be an actual DateTime, even after a serialization 
+the anchor will be an actual DateTime, even after a serialization - deserialization round trip 
 
 [source, csharp]
 ----
@@ -66,8 +66,6 @@ s => s.Should().BeNull()
 		)
 	);
 ----
-deserialization round trip 
-
 Ranges can be chained on to simple expressions 
 
 [source, csharp]

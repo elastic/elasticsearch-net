@@ -43,14 +43,12 @@ Using the `.Agg` aggregation helper we can fetch our aggregation results easily
 in the correct type. [Be sure to read more about `.Agg` vs `.Aggregations` on the response here]()
 
 Time units are specified as a union of either a `DateInterval` or `TimeUnitExpression`
-both of which implicitly convert to the `Union
+both of which implicitly convert to the `Union` of these two.
 
 [source, csharp]
 ----
 Expect("month").WhenSerializing<Union<DateInterval, TimeUnitExpression>>(DateInterval.Month);
 ----
-` of these two.
-
 [source, csharp]
 ----
 Expect("day").WhenSerializing<Union<DateInterval, TimeUnitExpression>>(DateInterval.Day);
