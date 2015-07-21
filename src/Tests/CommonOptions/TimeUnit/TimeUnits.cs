@@ -106,9 +106,5 @@ namespace Tests.CommonOptions
 			(twoDays != new TimeUnitExpression("2.1d")).Should().BeTrue();
 			(new TimeUnitExpression("2.1d") == new TimeUnitExpression(TimeSpan.FromDays(2.1))).Should().BeTrue();
 		}
-
-
-		
-		
 	}
 }

@@ -17,7 +17,7 @@ namespace Nest.Resolvers.Converters
 			var v = value as TimeUnitExpression;
 			if (v.Factor.HasValue)
 			{
-				writer.WriteValue(v.Factor.Value.ToString(CultureInfo.InvariantCulture) + v.Interval.GetValueOrDefault().GetStringValue());
+				writer.WriteValue(v.Factor.Value.ToString("0.##", CultureInfo.InvariantCulture) + v.Interval.GetValueOrDefault().GetStringValue());
 			} 
 			else writer.WriteValue(v.Milliseconds); 
 		}
