@@ -58,17 +58,26 @@ namespace Tests.CommonOptions
 		* ### Implicit conversion
 		* Alternatively `string`, `TimeSpan` and `long` can be implicitly assigned to `TimeUnitExpression` properties and variables 
 		*/
-		[U]
-		[SuppressMessage("ReSharper", "SuggestVarOrType_SimpleTypes")]
+
+		[U] [SuppressMessage("ReSharper", "SuggestVarOrType_SimpleTypes")]
 		public void ImplicitConversion()
 		{
 			TimeUnitExpression oneAndHalfYear = "1.5y";
 			TimeUnitExpression twoWeeks = TimeSpan.FromDays(14);
-			TimeUnitExpression twoDays = 1000 * 60 * 60 * 24 * 2;
-			
+			TimeUnitExpression twoDays = 1000*60*60*24*2;
+
 			Expect("1.5y").WhenSerializing(oneAndHalfYear);
 			Expect("2w").WhenSerializing(twoWeeks);
 			Expect(172800000).WhenSerializing(twoDays);
+		}
+
+
+		[U] [SuppressMessage("ReSharper", "SuggestVarOrType_SimpleTypes")]
+		public void EqualityAndComparable()
+		{
+			TimeUnitExpression oneAndHalfYear = "1.5y";
+			TimeUnitExpression twoWeeks = TimeSpan.FromDays(14);
+			TimeUnitExpression twoDays = 1000*60*60*24*2;
 
 			/**
 			* Milliseconds are calculated even when values are not passed as long
@@ -80,14 +89,22 @@ namespace Tests.CommonOptions
 			* This allows you to do comparisons on the expressions
 			*/
 			oneAndHalfYear.Should().BeGreaterThan(twoWeeks);
+			(oneAndHalfYear > twoWeeks).Should().BeTrue();
+			(oneAndHalfYear >= twoWeeks).Should().BeTrue();
+			(twoDays >= new TimeUnitExpression("2d")).Should().BeTrue();
+			
 			twoDays.Should().BeLessThan(twoWeeks);
+			(twoDays < twoWeeks).Should().BeTrue();
+			(twoDays <= twoWeeks).Should().BeTrue();
+			(twoDays <= new TimeUnitExpression("2d")).Should().BeTrue();
 			
 			/**
 			* And assert equality
 			*/
 			twoDays.Should().Be(new TimeUnitExpression("2d"));
-
-
+			(twoDays == new TimeUnitExpression("2d")).Should().BeTrue();
+			(twoDays != new TimeUnitExpression("2.1d")).Should().BeTrue();
+			(new TimeUnitExpression("2.1d") == new TimeUnitExpression(TimeSpan.FromDays(2.1))).Should().BeTrue();
 		}
 
 

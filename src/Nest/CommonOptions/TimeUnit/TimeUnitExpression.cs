@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.Text.RegularExpressions;
 using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
@@ -46,8 +47,8 @@ namespace Nest
 
 		public TimeUnitExpression(TimeSpan timeSpan)
 		{
-			var ms = (long)timeSpan.TotalMilliseconds;
-			this.Milliseconds = ms;
+			var ms = timeSpan.TotalMilliseconds;
+			this.Milliseconds = (long)ms;
 
 			if (ms >= _year)
 			{
@@ -99,7 +100,7 @@ namespace Nest
 			var match = _expressionRegex.Match(unitExpression);
 			if (!match.Success) throw new ArgumentException($"Time expression '{unitExpression}' string is invalid", nameof(unitExpression));
 
-			this.Factor = double.Parse(match.Groups["factor"].Value);
+			this.Factor = double.Parse(match.Groups["factor"].Value, CultureInfo.InvariantCulture);
 			if (match.Groups["interval"].Success)
 			{
 				this.Interval = match.Groups["interval"].Value.ToEnum<TimeUnit>();
@@ -107,23 +108,22 @@ namespace Nest
 			else this.Interval = TimeUnit.Millisecond; 
 			
 			if (this.Interval == TimeUnit.Year)
-				Milliseconds = (long)this.Factor*_year;
+				Milliseconds = (long)(this.Factor*_year);
 			else if (this.Interval == TimeUnit.Week)
-				Milliseconds = (long)this.Factor*_week;
+				Milliseconds = (long)(this.Factor*_week);
 			else if (this.Interval == TimeUnit.Day)
-				Milliseconds = (long)this.Factor*_day;
+				Milliseconds = (long)(this.Factor*_day);
 			else if (this.Interval == TimeUnit.Hour)
-				Milliseconds = (long)this.Factor*_hour;
+				Milliseconds = (long)(this.Factor*_hour);
 			else if (this.Interval == TimeUnit.Minute)
-				Milliseconds = (long)this.Factor*_minute;
+				Milliseconds = (long)(this.Factor*_minute);
 			else if (this.Interval == TimeUnit.Second)
-				Milliseconds = (long)this.Factor*_second;
+				Milliseconds = (long)(this.Factor*_second);
 			else //ms
 				Milliseconds = (long)this.Factor;
 		}
 
 		public TimeSpan ToTimeSpan() => TimeSpan.FromMilliseconds(this.Milliseconds);
-
 
 		public int CompareTo(TimeUnitExpression other)
 		{
@@ -134,8 +134,14 @@ namespace Nest
 		}
 
 		public static bool operator <(TimeUnitExpression left, TimeUnitExpression right) => left.CompareTo(right) < 0;
+		public static bool operator <=(TimeUnitExpression left, TimeUnitExpression right) => left.CompareTo(right) < 0 || left.Equals(right);
 
 		public static bool operator >(TimeUnitExpression left, TimeUnitExpression right) => left.CompareTo(right) > 0;
+		public static bool operator >=(TimeUnitExpression left, TimeUnitExpression right) => left.CompareTo(right) > 0 || left.Equals(right);
+
+		public static bool operator ==(TimeUnitExpression left, TimeUnitExpression right) => left.Equals(right);
+
+		public static bool operator !=(TimeUnitExpression left, TimeUnitExpression right) => !left.Equals(right);
 
 		public bool Equals(TimeUnitExpression other) => this.Milliseconds == other?.Milliseconds;
 	}
