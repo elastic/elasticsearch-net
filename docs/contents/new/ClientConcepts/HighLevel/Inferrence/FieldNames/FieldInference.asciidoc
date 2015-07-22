@@ -97,7 +97,79 @@ setup.Expect("Name").WhenSerializing(Field<Project>(p => p.Name));
 ----
 Complex field name expressions 
 
+You can follow your property expression to any depth, here we are traversing to the LeadDeveloper's (Person) FirstName 
+
 [source, csharp]
 ----
 Expect("leadDeveloper.firstName").WhenSerializing(Field<Project>(p => p.LeadDeveloper.FirstName));
+----
+When dealing with collection index access is ingnored allowing you to traverse into properties of collections 
+
+[source, csharp]
+----
+Expect("curatedTags").WhenSerializing(Field<Project>(p => p.CuratedTags[0]));
+----
+Similarly .First() also works, remember these are expressions and not actual code that will be executed 
+
+[source, csharp]
+----
+Expect("curatedTags").WhenSerializing(Field<Project>(p => p.CuratedTags.First()));
+----
+[source, csharp]
+----
+Expect("curatedTags.added").WhenSerializing(Field<Project>(p => p.CuratedTags[0].Added));
+Expect("curatedTags.name").WhenSerializing(Field<Project>(p => p.CuratedTags.First().Name));
+----
+When we see an indexer on a dictionary we assume they describe property names 
+
+[source, csharp]
+----
+Expect("metadata.hardcoded").WhenSerializing(Field<Project>(p => p.Metadata["hardcoded"]));
+----
+[source, csharp]
+----
+Expect("metadata.hardcoded.created").WhenSerializing(Field<Project>(p => p.Metadata["hardcoded"].Created));
+----
+A cool feature here is that we'll evaluate variables passed to these indexers 
+
+[source, csharp]
+----
+var variable = "var";
+----
+[source, csharp]
+----
+Expect("metadata.var").WhenSerializing(Field<Project>(p => p.Metadata[variable]));
+Expect("metadata.var.created").WhenSerializing(Field<Project>(p => p.Metadata[variable].Created));
+----
+If you are using elasticearch's multifield mapping (you really should!) these "virtual" sub fields 
+do not always map back on to your POCO, by calling .Suffix() you describe the sub fields that do not live in your c# objects
+
+[source, csharp]
+----
+Expect("leadDeveloper.firstName.raw").WhenSerializing(Field<Project>(p => p.LeadDeveloper.FirstName.Suffix("raw")));
+----
+[source, csharp]
+----
+Expect("curatedTags.raw").WhenSerializing(Field<Project>(p => p.CuratedTags[0].Suffix("raw")));
+Expect("curatedTags.raw").WhenSerializing(Field<Project>(p => p.CuratedTags.First().Suffix("raw")));
+Expect("curatedTags.added.raw").WhenSerializing(Field<Project>(p => p.CuratedTags[0].Added.Suffix("raw")));
+Expect("metadata.hardcoded.raw").WhenSerializing(Field<Project>(p => p.Metadata["hardcoded"].Suffix("raw")));
+Expect("metadata.hardcoded.created.raw").WhenSerializing(Field<Project>(p => p.Metadata["hardcoded"].Created.Suffix("raw")));
+----
+You can even chain them to any depth!
+
+[source, csharp]
+----
+Expect("curatedTags.name.raw.evendeeper").WhenSerializing(Field<Project>(p => p.CuratedTags.First().Name.Suffix("raw").Suffix("evendeeper")));
+----
+Variables passed to suffix will be evaluated as well 
+
+[source, csharp]
+----
+var suffix = "unanalyzed";
+----
+[source, csharp]
+----
+Expect("metadata.var.unanalyzed").WhenSerializing(Field<Project>(p => p.Metadata[variable].Suffix(suffix)));
+Expect("metadata.var.created.unanalyzed").WhenSerializing(Field<Project>(p => p.Metadata[variable].Created.Suffix(suffix)));
 ----
