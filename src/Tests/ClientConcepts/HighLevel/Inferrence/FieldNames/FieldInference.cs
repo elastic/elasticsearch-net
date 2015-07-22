@@ -3,6 +3,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using FluentAssertions;
 using Nest;
+using Newtonsoft.Json.Linq;
 using Tests.Framework;
 using Tests.Framework.MockData;
 using Xunit.Sdk;

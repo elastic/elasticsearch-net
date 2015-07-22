@@ -37,9 +37,9 @@ namespace Tests.Framework
 			Func<IElasticClient, TInitializer, Task<TResponse>> requestAsync
 		)
 		{
+			var client = this.GetClient();
 			this._responses = new AsyncLazy<IDictionary<string, TResponse>>(async () =>
 			{
-				var client = this.GetClient();
 				var dict = new Dictionary<string, TResponse>
 				{
 					{"fluent", fluent(client, this.Fluent)},

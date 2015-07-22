@@ -13,8 +13,16 @@ var defaultSettings = new ConnectionSettings((CreateBaseUri(port)), "defaultinde
 					.Ignore(p=>p.PrivateValue)
 					.Rename(p=>p.OnlineHandle, "nickname")
 				)
-				;
+				.SetGlobalHeaders(new NameValueCollection() { {"TestMethod", ExpensiveTestNameForIntegrationTests()} });
 var settings = modifySettings != null ? modifySettings(defaultSettings) : defaultSettings;
+var st = new StackTrace();
+var types = GetTypes(st);
+var types = (from f in st.GetFrames()
+				let method = f.GetMethod()
+				where method != null
+				let type = method.DeclaringType
+				where type.FullName.StartsWith("Tests.") && !type.FullName.StartsWith("Tests.Framework.")
+				select type).ToList();
 var host = "localhost";
 host = "ipv4.fiddler";
 var uri = new UriBuilder("http", host, port.GetValueOrDefault(9200)).Uri;

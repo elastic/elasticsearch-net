@@ -149,6 +149,11 @@ namespace Elasticsearch.Net.Connection
 		NameValueCollection QueryStringParameters { get; }
 
 		/// <summary>
+		/// Try to send these headers for every request
+		/// </summary>
+		NameValueCollection Headers { get; }
+
+		/// <summary>
 		/// Connection status handler that will be called everytime the connection receives anything.
 		/// </summary>
 		Action<IElasticsearchResponse> ConnectionStatusHandler { get; }

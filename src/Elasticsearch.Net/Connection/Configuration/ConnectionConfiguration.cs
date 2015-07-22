@@ -141,6 +141,9 @@ namespace Elasticsearch.Net.Connection
 		private NameValueCollection _queryString;
 		NameValueCollection IConnectionConfigurationValues.QueryStringParameters { get { return _queryString; } }
 
+		private NameValueCollection _headers;
+		NameValueCollection IConnectionConfigurationValues.Headers { get { return _headers; } }
+
 		IElasticsearchSerializer IConnectionConfigurationValues.Serializer { get; set; }
 
 		private BasicAuthorizationCredentials _basicAuthCredentials;
@@ -247,16 +250,22 @@ namespace Elasticsearch.Net.Connection
 			this._disablePings = disable;
 			return (T)this;
 		}
+
 		/// <summary>
 		/// This NameValueCollection will be appended to every url NEST calls, great if you need to pass i.e an API key.
 		/// </summary>
 		public T SetGlobalQueryStringParameters(NameValueCollection queryStringParameters)
 		{
-			if (this._queryString != null)
-			{
-				this._queryString.Add(queryStringParameters);
-			}
 			this._queryString = queryStringParameters;
+			return (T)this;
+		}
+
+		/// <summary>
+		/// a NameValueCollection that will be send as headers for each request
+		/// </summary>
+		public T SetGlobalHeaders(NameValueCollection headers)
+		{
+			this._headers = headers;
 			return (T)this;
 		}
 

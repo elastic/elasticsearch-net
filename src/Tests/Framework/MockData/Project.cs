@@ -22,7 +22,7 @@ namespace Tests.Framework.MockData
 				.RuleFor(p => p.LastActivity, p => p.Date.Recent())
 				.RuleFor(p => p.LeadDeveloper, p => Developer.Developers[Gimme.Random.Number(0, Developer.Developers.Count -1)])
 				.RuleFor(p => p.Tags, f => Tag.Generator.Generate(Gimme.Random.Number(1, 50)))
-				.RuleFor(p => p.CuratedTags, f => Tag.Generator.Generate(Gimme.Random.Number(1, 50)))
+				.RuleFor(p => p.CuratedTags, f => Tag.Generator.Generate(Gimme.Random.Number(1, 5)).ToList())
 			;
 
 		public static IList<Project> Projects { get; } =
