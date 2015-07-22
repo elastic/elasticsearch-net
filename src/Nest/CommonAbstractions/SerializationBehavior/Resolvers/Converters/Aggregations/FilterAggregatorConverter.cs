@@ -17,7 +17,11 @@ namespace Nest.Resolvers.Converters.Aggregations
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
 			var f = value as IFilterAggregator;
-			if (f == null || f.Filter == null) return;
+			if (f == null || f.Filter == null)
+			{
+				writer.WriteNull();
+				return;
+			};
 
 			serializer.Serialize(writer, f.Filter);
 		}
@@ -25,13 +29,11 @@ namespace Nest.Resolvers.Converters.Aggregations
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
 			if (reader.TokenType != JsonToken.StartObject) return null;
-			reader.Read();
-			if (reader.TokenType != JsonToken.PropertyName) return null;
-			var prop = reader.Value;
-			if ((string) reader.Value != "filter") return null;
-			reader.Read();
+			var container = new QueryContainer();
+			serializer.Populate(reader, container);
 			var agg = new FilterAggregator();
-			serializer.Populate(reader, agg);
+			agg.Filter = container;
+
 			return agg;
 		}
 	}

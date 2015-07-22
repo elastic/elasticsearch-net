@@ -461,7 +461,7 @@
     <Compile Include="CommonAbstractions\ForAttribute.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\CustomJson\ICustomJson.cs" />
     <Compile Include="CommonAbstractions\Fields\FluentFieldList.cs" />
-    <Compile Include="CommonAbstractions\Infer\Field.cs" />
+    <Compile Include="CommonAbstractions\Infer\FieldName\Field.cs" />
     <Compile Include="Modules\SnapshotAndRestore\Snapshot\Snapshot.cs" />
     <Compile Include="Modules\SnapshotAndRestore\Restore\SnapshotRestore.cs" />
     <Compile Include="Cluster\ClusterSettings\ClusterPutSettings\ClusterPutSettingsResponse.cs" />

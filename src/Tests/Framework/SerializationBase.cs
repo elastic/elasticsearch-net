@@ -6,6 +6,7 @@ using DiffPlex;
 using DiffPlex.DiffBuilder;
 using DiffPlex.DiffBuilder.Model;
 using FluentAssertions;
+using Nest;
 using Newtonsoft.Json.Linq;
 using Ploeh.AutoFixture;
 
@@ -13,13 +14,11 @@ namespace Tests.Framework
 {
 	public abstract class SerializationBase
 	{
-		protected readonly Fixture _fixture = new Fixture();
-		protected static readonly Fixture Fix = new Fixture();
-
 		protected abstract object ExpectJson { get; }
 
 		protected string _expectedJsonString;
 		protected JToken _expectedJsonJObject;
+		protected Func<ConnectionSettings, ConnectionSettings> _connectionSettingsModifier = null;
 
 		protected SerializationBase()
 		{
@@ -38,7 +37,7 @@ namespace Tests.Framework
 		protected void ShouldBeEquivalentTo(string serialized) =>
 			serialized.Should().BeEquivalentTo(_expectedJsonString);
 
-		protected bool SerializesAndMatches(object o, out string serialized)
+		private bool SerializesAndMatches(object o, int iteration, out string serialized)
 		{
 			serialized = null;
 			serialized = this.Serialize(o);
@@ -47,10 +46,14 @@ namespace Tests.Framework
 			var matches = JToken.DeepEquals(this._expectedJsonJObject, actualJson);
 			if (matches) return true;
 
+			var message = "This is the first time I am serializing";
+			if (iteration > 0)
+				message = "This is the second time I am serializing, this usually indicates a problem when deserializing";
+
 			var d = new Differ();
 			var inlineBuilder = new InlineDiffBuilder(d);
 			var result = inlineBuilder.BuildDiffModel(_expectedJsonString, serialized);
-			var diff = result.Lines.Aggregate(new StringBuilder(), (sb, line) =>
+			var diff = result.Lines.Aggregate(new StringBuilder().AppendLine(message), (sb, line) =>
 			{
 				if (line.Type == ChangeType.Inserted)
 					sb.Append("+ ");
@@ -61,35 +64,30 @@ namespace Tests.Framework
 				sb.AppendLine(line.Text);
 				return sb;
 			}, sb => sb.ToString());
-
 			throw new Exception(diff);
 		}
 
-		protected static TReturn Create<TReturn>()
-		{
-			return Fix.Create<TReturn>();
-		}
-
 		private TObject Deserialize<TObject>(string json) =>
-			TestClient.GetClient().Serializer.Deserialize<TObject>(new MemoryStream(Encoding.UTF8.GetBytes(json)));
+			TestClient.GetClient(_connectionSettingsModifier).Serializer.Deserialize<TObject>(new MemoryStream(Encoding.UTF8.GetBytes(json)));
 
 		protected string Serialize<TObject>(TObject o)
 		{
-			var bytes = TestClient.GetClient().Serializer.Serialize(o);
+			var bytes = TestClient.GetClient(_connectionSettingsModifier).Serializer.Serialize(o);
 			return Encoding.UTF8.GetString(bytes);
 		}
 
-		protected T AssertSerializesAndRoundTrips<T>(T o) 
+		protected T AssertSerializesAndRoundTrips<T>(T o)
 		{
+			int iteration = 0;
 			//first serialize to string and assert it looks like this.ExpectedJson
 			string serialized;
-			if (!this.SerializesAndMatches(o, out serialized)) return default(T);
+			if (!this.SerializesAndMatches(o, iteration, out serialized)) return default(T);
 
 			//deserialize serialized json back again 
 			var oAgain = this.Deserialize<T>(serialized);
 			//now use deserialized `o` and serialize again making sure
 			//it still looks like this.ExpectedJson
-			this.SerializesAndMatches(oAgain, out serialized);
+			this.SerializesAndMatches(oAgain, ++iteration,out serialized);
 			return oAgain;
 		}
 	}

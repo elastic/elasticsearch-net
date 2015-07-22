@@ -60,7 +60,7 @@ namespace Nest
 			var name = !field.Name.IsNullOrEmpty() 
 				? field.Name 
 				: field.Expression != null 
-					? this.FieldNameResolver.ResolveToLastToken(field.Expression)
+					? this.FieldNameResolver.Resolve(field.Expression)
 					: this.TypeName(field.Type);
 			if (field.Boost.HasValue)
 				name += "^" + field.Boost.Value.ToString(CultureInfo.InvariantCulture);
@@ -69,7 +69,7 @@ namespace Nest
 
 		public string FieldName(MemberInfo member)
 		{
-			return member == null ? null : this.FieldNameResolver.ResolveToLastToken(member);
+			return member == null ? null : this.FieldNameResolver.Resolve(member);
 		}
 		
 		public string FieldNames(IEnumerable<FieldName> fields)

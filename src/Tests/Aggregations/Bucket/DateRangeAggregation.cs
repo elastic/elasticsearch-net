@@ -86,14 +86,15 @@ namespace Tests.Aggregations.Bucket
 			{
 				response.IsValid.Should().BeTrue();
 
-					/**
-					* Using the `.Agg` aggregation helper we can fetch our aggregation results easily 
-					* in the correct type. [Be sure to read more about `.Agg` vs `.Aggregations` on the response here]()
-					*/
+				/**
+				* Using the `.Agg` aggregation helper we can fetch our aggregation results easily 
+				* in the correct type. [Be sure to read more about `.Agg` vs `.Aggregations` on the response here]()
+				*/
 				var dateHistogram = response.Aggs.DateRange("projects_date_ranges");
 				dateHistogram.Should().NotBeNull();
 				dateHistogram.Items.Should().NotBeNull();
-					/** We specified three ranges so we expect to three of them in the response */
+
+				/** We specified three ranges so we expect to three of them in the response */
 				dateHistogram.Items.Count.Should().Be(3);
 				foreach (var item in dateHistogram.Items)
 				{
