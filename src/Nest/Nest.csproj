@@ -66,6 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Aggregations\Bucket\BucketAggregator.cs" />
+    <Compile Include="Aggregations\Bucket\Filters\NamedFiltersContainerBase.cs" />
     <Compile Include="Aggregations\Bucket\Histogram\ExtendedBounds.cs" />
     <Compile Include="Aggregations\Bucket\Histogram\HistogramOrder.cs" />
     <Compile Include="Aggregations\Bucket\SignificantTerms\Heuristics\ChiSquareHeuristic.cs" />
@@ -538,7 +539,6 @@
     <Compile Include="CommonOptions\Geo\GeoDistance.cs" />
     <Compile Include="CommonAbstractions\LowLevelDispatch\IHighLevelToLowLevelDispatcher.cs" />
     <Compile Include="CommonAbstractions\Extensions\ExceptionExtensions.cs" />
-    <Compile Include="CommonAbstractions\SerializationBehavior\Resolvers\Converters\Aggregations\FiltersAggregatorConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\Resolvers\Converters\Aggregations\FilterAggregatorConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\Resolvers\Converters\ClusterRerouteCommandCollectionConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\Resolvers\Converters\CatFielddataRecordConverter.cs" />

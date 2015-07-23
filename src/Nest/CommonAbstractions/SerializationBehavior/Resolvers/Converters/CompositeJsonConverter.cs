@@ -10,8 +10,8 @@ namespace Nest
 		private TRead Read { get; set; }
 		private TWrite Write { get; set; }
 
-		public override bool CanRead { get { return true; } }
-		public override bool CanWrite { get { return true; } }
+		public override bool CanRead => true;
+		public override bool CanWrite => true;
 
 		public CompositeJsonConverter()
 		{

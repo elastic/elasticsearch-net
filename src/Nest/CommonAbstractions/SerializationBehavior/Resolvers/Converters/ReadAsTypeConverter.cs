@@ -8,8 +8,8 @@ namespace Nest.Resolvers.Converters
 {
 	public class ForceStringReader : JsonConverter
 	{
-		public override bool CanRead { get { return true; } }
-		public override bool CanWrite { get { return false; } }
+		public override bool CanRead => true;
+		public override bool CanWrite => false;
 
 		public override bool CanConvert(Type objectType)
 		{

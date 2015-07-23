@@ -68,6 +68,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Aggregations\Bucket\FiltersAggregation.cs" />
     <Compile Include="Aggregations\Bucket\FilterAggregation.cs" />
     <Compile Include="Aggregations\Bucket\DateRangeAggregation.cs" />
     <Compile Include="Aggregations\Bucket\DateHistogramAggregation.cs" />
