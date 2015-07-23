@@ -18,13 +18,14 @@ namespace Tests.Search.Request
 			public Usage(ReadOnlyCluster cluster, ApiUsage usage) : base(cluster, usage) { }
 
 			protected override object ExpectJson => 
-				new {
-						sort = new object [] 
-						{
-							new { startedOn = new { order = "asc" } },
-							new { name = new { order = "desc" } }
-						}
-					};
+				new
+				{
+					sort = new object [] 
+					{
+						new { startedOn = new { order = "asc" } },
+						new { name = new { order = "desc" } }
+					}
+				};
 
 			protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
 				.Sort(ss => ss

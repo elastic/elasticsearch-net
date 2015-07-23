@@ -29,7 +29,7 @@ namespace Tests.Aggregations.Bucket
 			{
 				aggs = new
 				{
-					projects_date_ranges = new
+					bethels_projects = new
 					{
 						filter = new {
 							term = new Dictionary<string, object>
@@ -39,7 +39,7 @@ namespace Tests.Aggregations.Bucket
 						},
                         aggs = new
 						{
-							project_tags = new { terms = new { field = "tags" } }
+							project_tags = new { terms = new { field = "curatedTags.name" } }
 						}
 					}
 				}
@@ -47,10 +47,10 @@ namespace Tests.Aggregations.Bucket
 
 			protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
 				.Aggregations(aggs => aggs
-					.Filter("projects_date_ranges", date => date
+					.Filter("bethels_projects", date => date
 						.Filter(q=>q.Term(p=>p.LeadDeveloper.FirstName, "bethel"))
 						.Aggregations(childAggs => childAggs
-							.Terms("project_tags", avg => avg.Field(p => p.Tags))
+							.Terms("project_tags", avg => avg.Field(p => p.CuratedTags.First().Name))
 						)
 					)
 				);
@@ -58,11 +58,11 @@ namespace Tests.Aggregations.Bucket
 			protected override SearchRequest<Project> Initializer =>
 				new SearchRequest<Project>
 				{
-					Aggregations = new FilterAgg("projects_date_ranges")
+					Aggregations = new FilterAgg("bethels_projects")
 					{
 						Filter = new TermQuery { Field = Field<Project>(p=>p.LeadDeveloper.FirstName), Value = "bethel"},
 						Aggregations =
-							new TermsAgg("project_tags") { Field = Field<Project>(p => p.Tags) }
+							new TermsAgg("project_tags") { Field = Field<Project>(p => p.CuratedTags.First().Name) }
 					}
 				};
 
@@ -74,8 +74,13 @@ namespace Tests.Aggregations.Bucket
 				* Using the `.Agg` aggregation helper we can fetch our aggregation results easily 
 				* in the correct type. [Be sure to read more about `.Agg` vs `.Aggregations` on the response here]()
 				*/
-				var filterAgg = response.Aggs.Filter("projects_date_ranges");
-		});
+				var filterAgg = response.Aggs.Filter("bethels_projects");
+				filterAgg.Should().NotBeNull();
+				filterAgg.DocCount.Should().Be(1);
+				var tags = filterAgg.Terms("project_tags");
+				tags.Should().NotBeNull();
+				tags.Items.Should().NotBeEmpty();
+			});
 		}
 	}
 }
