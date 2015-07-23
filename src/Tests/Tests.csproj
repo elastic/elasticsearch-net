@@ -106,7 +106,7 @@
     <Compile Include="Framework\MockData\Project.cs" />
     <Compile Include="Framework\TestAttributes.cs" />
     <Compile Include="Framework\Integration\ElasticsearchNode.cs" />
-    <Compile Include="Framework\Integration\ReadOnlyIntegration.cs" />
+    <Compile Include="Framework\Integration\ReadOnlyCluster.cs" />
     <Compile Include="Framework\SerializationBase.cs" />
     <Compile Include="Framework\TestClient.cs" />
   </ItemGroup>

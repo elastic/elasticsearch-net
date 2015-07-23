@@ -37,7 +37,7 @@ namespace Tests.Aggregations.Bucket
 
 		public class Usage : AggregationUsageBase
 		{
-			public Usage(ReadOnlyIntegration i) : base(i) { }
+			public Usage(ReadOnlyCluster i, ApiUsage usage) : base(i, usage) { }
 
 			protected override object ExpectJson => new
 			{
@@ -100,7 +100,7 @@ namespace Tests.Aggregations.Bucket
 
 		public class AggregationDslUsage : Usage
 		{
-			public AggregationDslUsage(ReadOnlyIntegration i) : base(i) { }
+			public AggregationDslUsage(ReadOnlyCluster i, ApiUsage usage) : base(i, usage) { }
 
 			protected override SearchRequest<Project> Initializer =>
 				new SearchRequest<Project>

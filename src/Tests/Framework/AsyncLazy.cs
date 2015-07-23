@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using Nest;
 
 namespace Tests.Framework
 {
@@ -8,7 +10,7 @@ namespace Tests.Framework
 	/// Provides support for asynchronous lazy initialization. This type is fully threadsafe.
 	/// </summary>
 	/// <typeparam name="T">The type of object that is being asynchronously initialized.</typeparam>
-	public sealed class AsyncLazy<T>
+	public class AsyncLazy<T>
 	{
 		/// <summary>
 		/// The underlying lazy task.
@@ -48,5 +50,12 @@ namespace Tests.Framework
 		{
 			var unused = instance.Value;
 		}
+	}
+
+	public class LazyResponses : AsyncLazy<Dictionary<string, IResponse>>
+	{
+		public LazyResponses(Func<Dictionary<string, IResponse>> factory) : base(factory) { }
+
+		public LazyResponses(Func<Task<Dictionary<string, IResponse>>> factory) : base(factory) { }
 	}
 }

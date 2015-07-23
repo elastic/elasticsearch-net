@@ -23,7 +23,7 @@ namespace Tests.Aggregations.Bucket
 		*/
 		public class Usage : AggregationUsageBase
 		{
-			public Usage(ReadOnlyIntegration i) : base(i) { }
+			public Usage(ReadOnlyCluster i, ApiUsage usage) : base(i, usage) { }
 
 			protected override object ExpectJson => new
 			{
@@ -34,7 +34,7 @@ namespace Tests.Aggregations.Bucket
 						filter = new {
 							term = new Dictionary<string, object>
 							{
-								{ "leadDeveloper.firstName", new { value = "x" }}
+								{ "leadDeveloper.firstName", new { value = "bethel" }}
 							}
 						},
                         aggs = new
@@ -48,7 +48,7 @@ namespace Tests.Aggregations.Bucket
 			protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
 				.Aggregations(aggs => aggs
 					.Filter("projects_date_ranges", date => date
-						.Filter(q=>q.Term(p=>p.LeadDeveloper.FirstName, "x"))
+						.Filter(q=>q.Term(p=>p.LeadDeveloper.FirstName, "bethel"))
 						.Aggregations(childAggs => childAggs
 							.Terms("project_tags", avg => avg.Field(p => p.Tags))
 						)
@@ -60,7 +60,7 @@ namespace Tests.Aggregations.Bucket
 				{
 					Aggregations = new FilterAgg("projects_date_ranges")
 					{
-						Filter = new TermQuery { Field = Field<Project>(p=>p.LeadDeveloper.FirstName), Value = "x"},
+						Filter = new TermQuery { Field = Field<Project>(p=>p.LeadDeveloper.FirstName), Value = "bethel"},
 						Aggregations =
 							new TermsAgg("project_tags") { Field = Field<Project>(p => p.Tags) }
 					}

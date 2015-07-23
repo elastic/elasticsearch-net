@@ -4,16 +4,17 @@ using System.Linq;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Nest;
+using Tests.Framework.Integration;
 
 namespace Tests.Framework
 {
 	public abstract class EndpointUsageBase<TResponse, TInterface, TDescriptor, TInitializer> : SerializationBase
-		where TResponse : IResponse
+		where TResponse : class, IResponse
 		where TDescriptor : class, TInterface, new() 
 		where TInitializer : class, TInterface
 		where TInterface : class
 	{
-		private AsyncLazy<IDictionary<string, TResponse>> _responses;
+		private LazyResponses _responses;
 
 		public abstract int ExpectStatusCode { get; }
 		public abstract bool ExpectIsValid { get; }
@@ -21,16 +22,16 @@ namespace Tests.Framework
 
 		protected abstract TInitializer Initializer { get; }
 		protected abstract Func<TDescriptor, TInterface> Fluent { get; }
-
-		protected abstract void ClientUsage();
-
-		protected EndpointUsageBase()
+		
+		protected EndpointUsageBase(IIntegrationCluster cluster, ApiUsage usage)
 		{
-			// ReSharper disable once DoNotCallOverridableMethodsInConstructor
-			this.ClientUsage();
+			 this.IntegrationPort = cluster.Node.Port;
+			 this._responses = usage.CallOnce(this.ClientUsage);
 		}
 
-		protected void Calls(
+		protected abstract LazyResponses ClientUsage();
+
+		protected LazyResponses Calls(
 			Func<IElasticClient, Func<TDescriptor, TInterface>, TResponse> fluent,
 			Func<IElasticClient, Func<TDescriptor, TInterface>, Task<TResponse>> fluentAsync,
 			Func<IElasticClient, TInitializer, TResponse> request,
@@ -38,9 +39,9 @@ namespace Tests.Framework
 		)
 		{
 			var client = this.GetClient();
-			this._responses = new AsyncLazy<IDictionary<string, TResponse>>(async () =>
+			return new LazyResponses(async () =>
 			{
-				var dict = new Dictionary<string, TResponse>
+				var dict = new Dictionary<string, IResponse>
 				{
 					{"fluent", fluent(client, this.Fluent)},
 					{"fluentAsync", await fluentAsync(client, this.Fluent)},
@@ -61,7 +62,8 @@ namespace Tests.Framework
 			var responses = await this._responses;
 			foreach (var kv in responses)
 			{
-				assert(kv.Value);
+				var response = kv.Value as TResponse;
+				assert(response);
 			}
 		}
 

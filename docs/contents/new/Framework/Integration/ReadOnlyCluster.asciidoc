@@ -1,0 +1,5 @@
+[source, csharp]
+----
+this._responses = clientUsage();
+_called = true;
+----
