@@ -13,6 +13,9 @@ namespace Nest.Resolvers
 		private static ConcurrentDictionary<Type, Func<object, string>> IdDelegates = new ConcurrentDictionary<Type, Func<object, string>>();
 		private static MethodInfo MakeDelegateMethodInfo = typeof(IdResolver).GetMethod("MakeDelegate", BindingFlags.Static | BindingFlags.NonPublic);
 
+		PropertyInfo GetPropertyCaseInsensitive(Type type, string fieldName)
+			=> type.GetProperty(fieldName, BindingFlags.Public | BindingFlags.Instance | BindingFlags.IgnoreCase);
+
 		public IdResolver(IConnectionSettingsValues connectionSettings)
 		{
 			_connectionSettings = connectionSettings;
@@ -101,37 +104,16 @@ namespace Nest.Resolvers
 			// if the type specifies through ElasticAttribute what the id prop is 
 			// use that no matter what
 
-			string FieldName;
-			this._connectionSettings.IdProperties.TryGetValue(type, out FieldName);
-			if (!FieldName.IsNullOrEmpty())
-				return GetPropertyCaseInsensitive(type, FieldName);
+			string propertyName;
+
+			this._connectionSettings.IdProperties.TryGetValue(type, out propertyName);
+			if (!propertyName.IsNullOrEmpty())
+				return GetPropertyCaseInsensitive(type, propertyName);
 
 			var esTypeAtt = ElasticAttributes.Type(type);
-			if (esTypeAtt != null && !string.IsNullOrWhiteSpace(esTypeAtt.IdProperty))
-				return GetPropertyCaseInsensitive(type, esTypeAtt.IdProperty);
+			propertyName = (esTypeAtt?.IdProperty.IsNullOrEmpty() ?? true ) ? "Id" : esTypeAtt?.IdProperty;
 
-			FieldName = "Id";
-			//Try Id on its own case insensitive
-			var idProperty = GetPropertyCaseInsensitive(type, FieldName);
-			if (idProperty != null)
-				return idProperty;
-
-			//TODO remove in 2.0 ?
-			//Try TypeNameId case insensitive
-			idProperty = GetPropertyCaseInsensitive(type, type.Name + FieldName);
-			if (idProperty != null)
-				return idProperty;
-
-			//TODO remove in 2.0 ?
-			//Try TypeName_Id case insensitive
-			idProperty = GetPropertyCaseInsensitive(type, type.Name + "_" + FieldName);
-
-			return idProperty;
-		}
-
-		PropertyInfo GetPropertyCaseInsensitive(Type type, string FieldName)
-		{
-			return type.GetProperty(FieldName, BindingFlags.Public | BindingFlags.Instance | BindingFlags.IgnoreCase);
+			return GetPropertyCaseInsensitive(type, propertyName);
 		}
 	}
 }
