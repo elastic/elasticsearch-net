@@ -13,12 +13,20 @@ namespace Nest
 
 	public class FilterAggregator : BucketAggregator, IFilterAggregator
 	{
-		public IQueryContainer Filter { get; set; }
+		private IFilterAggregator Self => this;
+
+		IQueryContainer IFilterAggregator.Filter { get; set; }
+		[JsonProperty(PropertyName = "filter")]
+		public QueryContainer Filter { get { return Self.Filter as QueryContainer; } set { Self.Filter = value; } }
 	}
 
 	public class FilterAgg : BucketAgg, IFilterAggregator
 	{
-		public IQueryContainer Filter { get; set; }
+		private IFilterAggregator Self => this;
+
+		IQueryContainer IFilterAggregator.Filter { get; set; }
+		[JsonProperty(PropertyName = "filter")]
+		public QueryContainer Filter { get { return Self.Filter as QueryContainer; } set { Self.Filter = value; } }
 
 		public FilterAgg(string name) : base(name) { }
 

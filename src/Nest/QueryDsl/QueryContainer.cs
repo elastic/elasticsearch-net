@@ -9,7 +9,6 @@ using Nest.Resolvers.Converters;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	//[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryContainer>, CustomJsonConverter>))]
 	[JsonConverter(typeof(ReserializeJsonConverter<QueryContainer, IQueryContainer>))]
 	public interface IQueryContainer : ICustomJson
 	{

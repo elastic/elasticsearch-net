@@ -16,6 +16,8 @@ namespace Tests.Aggregations.Bucket
 		/**
 		 * A special single bucket aggregation that enables aggregating from buckets on parent document types to
 		 * buckets on child documents.
+		 *
+		 * Be sure to read the elasticsearch documentation {ref}/search-aggregations-bucket-children-aggregation.html[on this subject here]
 		 */
 
 		private void MappingExample()
@@ -35,7 +37,7 @@ namespace Tests.Aggregations.Bucket
 
 		public class Usage : AggregationUsageBase
 		{
-			public Usage(ReadOnlyIntegration i) : base(i) { }
+			public Usage(ReadOnlyCluster i, ApiUsage usage) : base(i, usage) { }
 
 			protected override object ExpectJson => new
 			{
@@ -98,7 +100,7 @@ namespace Tests.Aggregations.Bucket
 
 		public class AggregationDslUsage : Usage
 		{
-			public AggregationDslUsage(ReadOnlyIntegration i) : base(i) { }
+			public AggregationDslUsage(ReadOnlyCluster i, ApiUsage usage) : base(i, usage) { }
 
 			protected override SearchRequest<Project> Initializer =>
 				new SearchRequest<Project>

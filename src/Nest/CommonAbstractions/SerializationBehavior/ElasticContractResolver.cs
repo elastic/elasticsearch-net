@@ -19,7 +19,6 @@ namespace Nest.Resolvers
 		public IConnectionSettingsValues ConnectionSettings { get; private set; }
 
 		public ElasticContractResolver(IConnectionSettingsValues connectionSettings)
-			: base(true)
 		{
 			this.ConnectionSettings = connectionSettings;
 		}
@@ -133,6 +132,14 @@ namespace Nest.Resolvers
 
 		}
 
+		public IList<JsonProperty> PropertiesOfAll(Type t, MemberSerialization memberSerialization)
+		{
+			return base.CreateProperties(t, memberSerialization)
+				.Concat(PropertiesOfAllInterfaces(t, memberSerialization))
+				.DistinctBy(p=>p.PropertyName)
+				.ToList();
+
+		}
 		private IList<JsonProperty> PropertiesOf<T>(Type type, MemberSerialization memberSerialization, IList<JsonProperty> defaultProperties, ILookup<string, JsonProperty> lookup, bool append = false)
 		{
 			if (!typeof (T).IsAssignableFrom(type)) return defaultProperties;
@@ -153,12 +160,12 @@ namespace Nest.Resolvers
 			return jsonProperties.Concat(defaultProperties).ToList();
 		}
 
-		protected override string ResolvePropertyName(string FieldName)
+		protected override string ResolvePropertyName(string fieldName)
 		{
 			if (this.ConnectionSettings.DefaultFieldNameInferrer != null)
-				return this.ConnectionSettings.DefaultFieldNameInferrer(FieldName);
+				return this.ConnectionSettings.DefaultFieldNameInferrer(fieldName);
 
-			return FieldName.ToCamelCase();
+			return fieldName.ToCamelCase();
 		}
 
 		protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)

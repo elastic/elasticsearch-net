@@ -26,10 +26,10 @@ namespace Nest
 		int? MinimumDocumentCount { get; set; }
 
 		[JsonProperty("order")]
-		IDictionary<string, string> Order { get; set; }
+		HistogramOrder Order { get; set; }
 
 		[JsonProperty("extended_bounds")]
-		IDictionary<string, object> ExtendedBounds { get; set; }
+		ExtendedBounds<double> ExtendedBounds { get; set; }
 
 		[JsonProperty("pre_offset")]
 		long? PreOffset { get; set; }
@@ -45,8 +45,8 @@ namespace Nest
 		public FluentDictionary<string, object> Params { get; set; }
 		public double? Interval { get; set; }
 		public int? MinimumDocumentCount { get; set; }
-		public IDictionary<string, string> Order { get; set; }
-		public IDictionary<string, object> ExtendedBounds { get; set; }
+		public HistogramOrder Order { get; set; }
+		public ExtendedBounds<double> ExtendedBounds { get; set; }
 		public long? PreOffset { get; set; }
 		public long? PostOffset { get; set; }
 	}
@@ -58,8 +58,8 @@ namespace Nest
 		public FluentDictionary<string, object> Params { get; set; }
 		public double? Interval { get; set; }
 		public int? MinimumDocumentCount { get; set; }
-		public IDictionary<string, string> Order { get; set; }
-		public IDictionary<string, object> ExtendedBounds { get; set; }
+		public HistogramOrder Order { get; set; }
+		public ExtendedBounds<double> ExtendedBounds { get; set; }
 		public long? PreOffset { get; set; }
 		public long? PostOffset { get; set; }
 
@@ -68,12 +68,12 @@ namespace Nest
 		internal override void WrapInContainer(AggregationContainer c) => c.Histogram = this;
 	}
 
-	public class HistogramAggregatorDescriptor<T> 
-		: BucketAggregatorBaseDescriptor<HistogramAggregatorDescriptor<T>, IHistogramAggregator, T>, IHistogramAggregator 
+	public class HistogramAggregatorDescriptor<T>
+		: BucketAggregatorBaseDescriptor<HistogramAggregatorDescriptor<T>, IHistogramAggregator, T>, IHistogramAggregator
 		where T : class
 	{
 		FieldName IHistogramAggregator.Field { get; set; }
-		
+
 		string IHistogramAggregator.Script { get; set; }
 
 		FluentDictionary<string, object> IHistogramAggregator.Params { get; set; }
@@ -82,9 +82,9 @@ namespace Nest
 
 		int? IHistogramAggregator.MinimumDocumentCount { get; set; }
 
-		IDictionary<string, string> IHistogramAggregator.Order { get; set; }
+		HistogramOrder IHistogramAggregator.Order { get; set; }
 
-		IDictionary<string, object> IHistogramAggregator.ExtendedBounds { get; set; }
+		ExtendedBounds<double> IHistogramAggregator.ExtendedBounds { get; set; }
 
 		long? IHistogramAggregator.PreOffset { get; set; }
 
@@ -103,18 +103,17 @@ namespace Nest
 
 		public HistogramAggregatorDescriptor<T> MinimumDocumentCount(int minimumDocumentCount) =>
 			Assign(a => a.MinimumDocumentCount = minimumDocumentCount);
-		
-		public HistogramAggregatorDescriptor<T> OrderAscending(string key)
-		{
-			Self.Order = new Dictionary<string, string> { {key, "asc"}};
-			return this;
-		}
-	
+
+		public HistogramAggregatorDescriptor<T> Order(HistogramOrder order) => Assign(a => a.Order = order);
+
+		public HistogramAggregatorDescriptor<T> OrderAscending(string key) =>
+			Assign(a => a.Order = new HistogramOrder { Key = key, Order = SortOrder.Descending });
+
 		public HistogramAggregatorDescriptor<T> OrderDescending(string key) =>
-			Assign(a=>a.Order = new Dictionary<string, string> { {key, "asc"}}.NullIfNoKeys());
+			Assign(a => a.Order = new HistogramOrder { Key = key, Order = SortOrder.Descending });
 
 		public HistogramAggregatorDescriptor<T> ExtendedBounds(double min, double max) =>
-			Assign(a => a.ExtendedBounds = new Dictionary<string, object> { { "min", min }, { "max", max } });
+			Assign(a => a.ExtendedBounds = new ExtendedBounds<double> { Minimum = min, Maximum = max });
 
 		public HistogramAggregatorDescriptor<T> PreOffset(long preOffset) => Assign(a => a.PreOffset = preOffset);
 

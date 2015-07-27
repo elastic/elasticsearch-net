@@ -10,7 +10,7 @@ namespace Tests.Aggregations
 	[Collection(IntegrationContext.ReadOnly)]
 	public abstract class AggregationUsageBase : EndpointUsageBase<ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
 	{
-		protected AggregationUsageBase(ReadOnlyIntegration integration) { this.IntegrationPort = integration.Node.Port; }
+		protected AggregationUsageBase(IIntegrationCluster cluster, ApiUsage usage) : base(cluster, usage) {}
 
 		public override bool ExpectIsValid => true;
 
@@ -18,12 +18,11 @@ namespace Tests.Aggregations
 
 		public override string UrlPath => "/project/project/_search";
 
-		protected override void ClientUsage() =>
-			this.Calls(
-				fluent: (client, f) => client.Search<Project>(f ),
-				fluentAsync: (client, f) => client.SearchAsync<Project>(f),
-				request: (client, r) => client.Search<Project>(r),
-				requestAsync: (client, r) => client.SearchAsync<Project>(r)
-			);
+		protected override LazyResponses ClientUsage() => Calls(
+			fluent: (client, f) => client.Search<Project>(f ),
+			fluentAsync: (client, f) => client.SearchAsync<Project>(f),
+			request: (client, r) => client.Search<Project>(r),
+			requestAsync: (client, r) => client.SearchAsync<Project>(r)
+		);
 	}
 }

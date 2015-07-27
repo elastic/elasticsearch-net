@@ -224,6 +224,10 @@ namespace Elasticsearch.Net.Connection
 				request.Accept = requestSpecificConfig.ContentType;
 				request.ContentType = requestSpecificConfig.ContentType;
 			}
+			if (this.ConnectionSettings.Headers != null && this.ConnectionSettings.Headers.HasKeys())
+			{
+				request.Headers.Add(this.ConnectionSettings.Headers);
+			}
 
 			var timeout = GetRequestTimeout(requestSpecificConfig);
 			request.Timeout = timeout;

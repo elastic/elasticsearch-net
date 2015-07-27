@@ -68,7 +68,7 @@ namespace Nest
 
 		protected void Reserialize(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-			var properties = value.GetCachedObjectProperties();
+			var properties = value.GetType().GetCachedObjectProperties();
 			if (properties.Count == 0) return;
 			writer.WriteStartObject();
 			foreach (var p in properties)

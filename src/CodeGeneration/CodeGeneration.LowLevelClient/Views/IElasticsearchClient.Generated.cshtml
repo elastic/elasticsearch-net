@@ -30,7 +30,6 @@ namespace Elasticsearch.Net
 			var endpoint = kv.Value;
 			foreach(var method in endpoint.GetCsharpMethods()) 
 			{
-
 		<text>///<summary>Represents a @method.HttpMethod on @method.Path
 		///<para></para>Returns: @Raw(method.ReturnDescription)
 		///<para>See also: @method.Documentation</para>	
@@ -39,13 +38,7 @@ namespace Elasticsearch.Net
 			{
 		<text>@Raw("///<param name=\""+part.Name+"\">")@part.Description@Raw("</param>")</text>
 			}
-		@Raw(@"///<param name=""requestParameters"">
-		///Optional function to specify any additional request parameters 
-		///<para>Querystring values, connection configuration specific to this request, deserialization state.</para>
-		///</param>")
-		@Raw("///<returns>"+method.ReturnDescription)
-		///@Raw("</returns>")
-		
+		@Raw(@"///<param name=""requestParameters"">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>")
 		@Raw(method.ReturnType) @(method.FullName)@(Raw(method.ReturnTypeGeneric))(@Raw(method.Arguments));
 		</text>
 			}

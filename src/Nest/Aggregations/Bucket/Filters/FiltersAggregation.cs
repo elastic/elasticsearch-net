@@ -1,27 +1,28 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Nest.Resolvers.Converters;
 using Nest.Resolvers.Converters.Aggregations;
 using Newtonsoft.Json;
 
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(FiltersAggregatorConverter))]
+	[JsonConverter(typeof(ReadAsTypeConverter<FiltersAggregator>))]
 	public interface IFiltersAggregator : IBucketAggregator
 	{
 		[JsonProperty("filters")]
-		IEnumerable<IQueryContainer> Filters { get; set; }
+		Union<INamedFiltersContainer, List<IQueryContainer>> Filters { get; set; }
 	}
 
 	public class FiltersAggregator : BucketAggregator, IFiltersAggregator
 	{
-		public IEnumerable<IQueryContainer> Filters { get; set; }
+		public Union<INamedFiltersContainer, List<IQueryContainer>> Filters { get; set; }
 	}
 
 	public class FiltersAgg : BucketAgg, IFiltersAggregator
 	{
-		public IEnumerable<IQueryContainer> Filters { get; set; }
+		public Union<INamedFiltersContainer, List<IQueryContainer>> Filters { get; set; }
 
 		public FiltersAgg(string name) : base(name) { }
 
@@ -33,10 +34,16 @@ namespace Nest
 		, IFiltersAggregator
 		where T : class
 	{
-		IEnumerable<IQueryContainer> IFiltersAggregator.Filters { get; set; }
+		Union<INamedFiltersContainer, List<IQueryContainer>> IFiltersAggregator.Filters { get; set; }
 
-		public FiltersAggregatorDescriptor<T> Filters(params Func<QueryContainerDescriptor<T>, QueryContainer>[] queryDescriptors) =>
-			Assign(a=>a.Filters = queryDescriptors?.Select(f => f?.Invoke(new QueryContainerDescriptor<T>()))?.ToListOrNullIfEmpty());
+		public FiltersAggregatorDescriptor<T> NamedFilters(Func<NamedFiltersContainerDescriptor<T>, NamedFiltersContainerBase> selector) =>
+			Assign(a => a.Filters = selector?.Invoke(new NamedFiltersContainerDescriptor<T>()));
+
+		public FiltersAggregatorDescriptor<T> AnonymousFilters(params Func<QueryContainerDescriptor<T>, IQueryContainer>[] selectors) =>
+			Assign(a => a.Filters = selectors.Select(s=>s?.Invoke(new QueryContainerDescriptor<T>())).ToListOrNullIfEmpty());
+
+		public FiltersAggregatorDescriptor<T> AnonymousFilters(IEnumerable<Func<QueryContainerDescriptor<T>, IQueryContainer>> selectors) =>
+			Assign(a => a.Filters = selectors.Select(s=>s?.Invoke(new QueryContainerDescriptor<T>())).ToListOrNullIfEmpty());
 
 	}
 }

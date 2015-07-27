@@ -19,6 +19,11 @@
             The current locale for the dataset.
             </summary>
         </member>
+        <member name="M:Bogus.DataSet.ResolveCategory(System.Type)">
+            <summary>
+            Resolves the 'category' type of a dataset type; respects the 'DataCategory' attribute.
+            </summary>
+        </member>
         <member name="M:Bogus.DataSet.#ctor(System.String)">
             <summary>
             Default constructor
@@ -61,7 +66,7 @@
         </member>
         <member name="P:Bogus.DataSet.Category">
             <summary>
-            The category name of inside the locale
+            The category name inside the locale
             </summary>
         </member>
         <member name="P:Bogus.DataSet.Locale">
@@ -85,7 +90,7 @@
             </summary>
             <param name="locale"></param>
         </member>
-        <member name="M:Bogus.DataSets.Address.ZipCode">
+        <member name="M:Bogus.DataSets.Address.ZipCode(System.String)">
             <summary>
             Get a zipcode.
             </summary>
@@ -146,6 +151,11 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:Bogus.DataSets.Address.CountryCode">
+            <summary>
+            Get a random country code.
+            </summary>
+        </member>
         <member name="M:Bogus.DataSets.Address.State">
             <summary>
             Get a state.
@@ -169,6 +179,10 @@
             Get a Longitude
             </summary>
             <returns></returns>
+        </member>
+        <member name="M:Bogus.DataSets.Commerce.Price(System.Decimal,System.Decimal,System.Int32,System.String)">
+            there is an easier way to do this.
+            check finance.amount
         </member>
         <member name="T:Bogus.DataSets.Company">
             <summary>
@@ -197,7 +211,12 @@
             Get a company name
             </summary>
             <param name="formatIndex">0: name + suffix, 1: name-name, 2: name, name and name."</param>
-            <returns></returns>
+        </member>
+        <member name="M:Bogus.DataSets.Company.CompanyName(System.String)">
+            <summary>
+            Get a company name. The only tokenized format data sets are company.* and name.*
+            </summary>
+            <param name="format">Example: "{{name.lastName}} {{company.companySuffix}}"</param>
         </member>
         <member name="M:Bogus.DataSets.Company.CatchPhrase">
             <summary>
@@ -267,6 +286,162 @@
             <param name="days">Number of days to go back.</param>
             <returns></returns>
         </member>
+        <member name="T:Bogus.DataSets.Images">
+            <summary>
+            Generates images URLs from lorempixel.com
+            </summary>
+        </member>
+        <member name="M:Bogus.DataSets.Images.#ctor(System.String)">
+            <summary>
+            Default constructor
+            </summary>
+            <param name="locale"></param>
+        </member>
+        <member name="M:Bogus.DataSets.Images.Image">
+            <summary>
+            Gets a random image.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Bogus.DataSets.Images.ImageUrl(System.String,System.Int32,System.Int32)">
+            <summary>
+            Creates an image URL with lorempixel.com.
+            </summary>
+        </member>
+        <member name="M:Bogus.DataSets.Images.Abstract(System.Int32,System.Int32)">
+            <summary>
+            Get an random image based on your category selection.
+            </summary>
+            <param name="width">Width</param>
+            <param name="height">Height</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bogus.DataSets.Images.Animals(System.Int32,System.Int32)">
+            <summary>
+            Get an random image based on your category selection.
+            </summary>
+            <param name="width">Width</param>
+            <param name="height">Height</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bogus.DataSets.Images.Business(System.Int32,System.Int32)">
+            <summary>
+            Get an random image based on your category selection.
+            </summary>
+            <param name="width">Width</param>
+            <param name="height">Height</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bogus.DataSets.Images.Cats(System.Int32,System.Int32)">
+            <summary>
+            Get an random image based on your category selection.
+            </summary>
+            <param name="width">Width</param>
+            <param name="height">Height</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bogus.DataSets.Images.City(System.Int32,System.Int32)">
+            <summary>
+            Get an random image based on your category selection.
+            </summary>
+            <param name="width">Width</param>
+            <param name="height">Height</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bogus.DataSets.Images.Food(System.Int32,System.Int32)">
+            <summary>
+            Get an random image based on your category selection.
+            </summary>
+            <param name="width">Width</param>
+            <param name="height">Height</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bogus.DataSets.Images.Nightlife(System.Int32,System.Int32)">
+            <summary>
+            Get an random image based on your category selection.
+            </summary>
+            <param name="width">Width</param>
+            <param name="height">Height</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bogus.DataSets.Images.Fashion(System.Int32,System.Int32)">
+            <summary>
+            Get an random image based on your category selection.
+            </summary>
+            <param name="width">Width</param>
+            <param name="height">Height</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bogus.DataSets.Images.People(System.Int32,System.Int32)">
+            <summary>
+            Get an random image based on your category selection.
+            </summary>
+            <param name="width">Width</param>
+            <param name="height">Height</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bogus.DataSets.Images.Nature(System.Int32,System.Int32)">
+            <summary>
+            Get an random image based on your category selection.
+            </summary>
+            <param name="width">Width</param>
+            <param name="height">Height</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bogus.DataSets.Images.Sports(System.Int32,System.Int32)">
+            <summary>
+            Get an random image based on your category selection.
+            </summary>
+            <param name="width">Width</param>
+            <param name="height">Height</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bogus.DataSets.Images.Technics(System.Int32,System.Int32)">
+            <summary>
+            Get an random image based on your category selection.
+            </summary>
+            <param name="width">Width</param>
+            <param name="height">Height</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bogus.DataSets.Images.Transport(System.Int32,System.Int32)">
+            <summary>
+            Get an random image based on your category selection.
+            </summary>
+            <param name="width">Width</param>
+            <param name="height">Height</param>
+            <returns></returns>
+        </member>
+        <member name="T:Bogus.DataSets.PhoneNumbers">
+            <summary>
+            Generates phone numbers
+            </summary>
+        </member>
+        <member name="M:Bogus.DataSets.PhoneNumbers.#ctor(System.String)">
+            <summary>
+            Default constructor
+            </summary>
+            <param name="locale"></param>
+        </member>
+        <member name="M:Bogus.DataSets.PhoneNumbers.PhoneNumber(System.String)">
+            <summary>
+            Get a phone number. 
+            </summary>
+            <param name="format">Format of phone number in any format. Replaces # characters with numbers. IE: '###-###-####' or '(###) ###-####'</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bogus.DataSets.PhoneNumbers.PhoneNumberFormat(System.Int32)">
+            <summary>
+            Gets a phone number via format array index as defined in a locale's phone_number.formats[] array.
+            </summary>
+            <param name="phoneFormatsArrayIndex"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Bogus.DataSets.PhoneNumbers.PhoneFormat">
+            <summary>
+            Gets the format of a phone number.
+            </summary>
+        </member>
         <member name="T:Bogus.Faker">
             <summary>
             A hub of all the categories merged into a single class to ease fluent syntax API.
@@ -280,6 +455,11 @@
         <member name="M:Bogus.Faker.#ctor(System.String)">
             <summary>
             Create a Faker with a specific locale.
+            </summary>
+        </member>
+        <member name="M:Bogus.Faker.Parse(System.String)">
+            <summary>
+            Can parse a handle bar expression like "{{name.lastName}}, {{name.firstName}} {{name.suffix}}".
             </summary>
         </member>
         <member name="M:Bogus.Faker.PickRandom``1(System.Collections.Generic.IEnumerable{``0})">
@@ -296,6 +476,11 @@
         <member name="P:Bogus.Faker.Person">
             <summary>
             A contextually relevant fields of a person.
+            </summary>
+        </member>
+        <member name="P:Bogus.Faker.Hacker">
+            <summary>
+            Creates hacker gibberish.
             </summary>
         </member>
         <member name="P:Bogus.Faker.Phone">
@@ -331,6 +516,11 @@
         <member name="P:Bogus.Faker.Date">
             <summary>
             Generate Dates
+            </summary>
+        </member>
+        <member name="P:Bogus.Faker.Company">
+            <summary>
+            Generates company names, titles and BS.
             </summary>
         </member>
         <member name="P:Bogus.Faker.Internet">
@@ -524,132 +714,6 @@
             The current locale.
             </summary>
         </member>
-        <member name="T:Bogus.DataSets.Images">
-            <summary>
-            Generates images URLs from lorempixel.com
-            </summary>
-        </member>
-        <member name="M:Bogus.DataSets.Images.#ctor(System.String)">
-            <summary>
-            Default constructor
-            </summary>
-            <param name="locale"></param>
-        </member>
-        <member name="M:Bogus.DataSets.Images.Image">
-            <summary>
-            Gets a random image.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Bogus.DataSets.Images.ImageUrl(System.String,System.Int32,System.Int32)">
-            <summary>
-            Creates an image URL with lorempixel.com.
-            </summary>
-        </member>
-        <member name="M:Bogus.DataSets.Images.Abstract(System.Int32,System.Int32)">
-            <summary>
-            Get an random image based on your category selection.
-            </summary>
-            <param name="width">Width</param>
-            <param name="height">Height</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bogus.DataSets.Images.Animals(System.Int32,System.Int32)">
-            <summary>
-            Get an random image based on your category selection.
-            </summary>
-            <param name="width">Width</param>
-            <param name="height">Height</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bogus.DataSets.Images.Business(System.Int32,System.Int32)">
-            <summary>
-            Get an random image based on your category selection.
-            </summary>
-            <param name="width">Width</param>
-            <param name="height">Height</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bogus.DataSets.Images.Cats(System.Int32,System.Int32)">
-            <summary>
-            Get an random image based on your category selection.
-            </summary>
-            <param name="width">Width</param>
-            <param name="height">Height</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bogus.DataSets.Images.City(System.Int32,System.Int32)">
-            <summary>
-            Get an random image based on your category selection.
-            </summary>
-            <param name="width">Width</param>
-            <param name="height">Height</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bogus.DataSets.Images.Food(System.Int32,System.Int32)">
-            <summary>
-            Get an random image based on your category selection.
-            </summary>
-            <param name="width">Width</param>
-            <param name="height">Height</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bogus.DataSets.Images.Nightlife(System.Int32,System.Int32)">
-            <summary>
-            Get an random image based on your category selection.
-            </summary>
-            <param name="width">Width</param>
-            <param name="height">Height</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bogus.DataSets.Images.Fashion(System.Int32,System.Int32)">
-            <summary>
-            Get an random image based on your category selection.
-            </summary>
-            <param name="width">Width</param>
-            <param name="height">Height</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bogus.DataSets.Images.People(System.Int32,System.Int32)">
-            <summary>
-            Get an random image based on your category selection.
-            </summary>
-            <param name="width">Width</param>
-            <param name="height">Height</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bogus.DataSets.Images.Nature(System.Int32,System.Int32)">
-            <summary>
-            Get an random image based on your category selection.
-            </summary>
-            <param name="width">Width</param>
-            <param name="height">Height</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bogus.DataSets.Images.Sports(System.Int32,System.Int32)">
-            <summary>
-            Get an random image based on your category selection.
-            </summary>
-            <param name="width">Width</param>
-            <param name="height">Height</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bogus.DataSets.Images.Technics(System.Int32,System.Int32)">
-            <summary>
-            Get an random image based on your category selection.
-            </summary>
-            <param name="width">Width</param>
-            <param name="height">Height</param>
-            <returns></returns>
-        </member>
-        <member name="M:Bogus.DataSets.Images.Transport(System.Int32,System.Int32)">
-            <summary>
-            Get an random image based on your category selection.
-            </summary>
-            <param name="width">Width</param>
-            <param name="height">Height</param>
-            <returns></returns>
-        </member>
         <member name="T:Bogus.DataSets.Internet">
             <summary>
             Random Internet things like email addresses
@@ -707,6 +771,11 @@
         <member name="M:Bogus.DataSets.Internet.Ip">
             <summary>
             Gets a random IP address.
+            </summary>
+        </member>
+        <member name="M:Bogus.DataSets.Internet.Mac">
+            <summary>
+            Gets a random mac address
             </summary>
         </member>
         <member name="M:Bogus.DataSets.Internet.Color(System.Byte,System.Byte,System.Byte)">
@@ -768,7 +837,7 @@
             <param name="count">The number of paragraphs</param>
             <returns></returns>
         </member>
-        <member name="M:Bogus.DataSets.Lorem.Paragraphs(System.Int32)">
+        <member name="M:Bogus.DataSets.Lorem.Paragraphs(System.Int32,System.String)">
             <summary>
             Get some paragraphs with tabs n all.
             </summary>
@@ -786,17 +855,19 @@
             </summary>
             <param name="locale"></param>
         </member>
-        <member name="M:Bogus.DataSets.Name.FirstName">
+        <member name="M:Bogus.DataSets.Name.FirstName(System.Nullable{Bogus.DataSets.Name.Gender})">
             <summary>
-            Gets a first name
+            Get a first name. Getting a gender specific name is only supported on locales that support it. Example, 'ru' supports
+            male/female names, but not 'en' english.
             </summary>
-            <returns></returns>
+            <param name="gender">For locale's that support Gender naming.</param>
         </member>
-        <member name="M:Bogus.DataSets.Name.LastName">
+        <member name="M:Bogus.DataSets.Name.LastName(System.Nullable{Bogus.DataSets.Name.Gender})">
             <summary>
-            Gets a last name
+            Get a first name. Getting a gender specific name is only supported on locales that support it. Example, Russian ('ru') supports
+            male/female names, but Enblish ('en') does not.
             </summary>
-            <returns></returns>
+            <param name="gender">For locale's that support Gender naming.</param>
         </member>
         <member name="M:Bogus.DataSets.Name.Prefix">
             <summary>
@@ -810,7 +881,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Bogus.DataSets.Name.FindName(System.String,System.String,System.Nullable{System.Boolean},System.Nullable{System.Boolean})">
+        <member name="M:Bogus.DataSets.Name.FindName(System.String,System.String,System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Nullable{Bogus.DataSets.Name.Gender})">
             <summary>
             Gets a full name
             </summary>
@@ -825,34 +896,29 @@
             Gets a random job title.
             </summary>
         </member>
-        <member name="T:Bogus.DataSets.PhoneNumbers">
+        <member name="M:Bogus.DataSets.Name.JobDescriptor">
             <summary>
-            Generates phone numbers
+            Get a job description.
             </summary>
         </member>
-        <member name="M:Bogus.DataSets.PhoneNumbers.#ctor(System.String)">
+        <member name="M:Bogus.DataSets.Name.JobArea">
             <summary>
-            Default constructor
+            Get a job area expertise.
             </summary>
-            <param name="locale"></param>
-        </member>
-        <member name="M:Bogus.DataSets.PhoneNumbers.PhoneNumber(System.String)">
-            <summary>
-            Get a phone number. 
-            </summary>
-            <param name="format">Format of phone number in any format. Replaces # characters with numbers. IE: '###-###-####' or '(###) ###-####'</param>
             <returns></returns>
         </member>
-        <member name="M:Bogus.DataSets.PhoneNumbers.PhoneNumberFormat(System.Int32)">
+        <member name="M:Bogus.DataSets.Name.JobType">
             <summary>
-            Gets a phone number via format array index as defined in a locale's phone_number.formats[] array.
+            Get a type of job.
             </summary>
-            <param name="phoneFormatsArrayIndex"></param>
-            <returns></returns>
         </member>
-        <member name="M:Bogus.DataSets.PhoneNumbers.PhoneFormat">
+        <member name="T:Bogus.DataCategoryAttribute">
             <summary>
-            Gets the format of a phone number.
+            DataCategory is used when resolving the final category name inside the locale.
+            For example, a 'phone_numbers' is the data set name in a locale, but the 
+            C# style DataSet is PhoneNumbers; When a dataset is marked with DataCategory,
+            you can specify that category name manually. If no data category is specified,
+            then the C# class name is used.
             </summary>
         </member>
         <member name="T:Bogus.Person">
@@ -917,13 +983,24 @@
             Helper method to get a random element inside a JArray
             </summary>
         </member>
-        <member name="M:Bogus.Randomizer.Replace(System.String,System.Char)">
+        <member name="M:Bogus.Randomizer.ReplaceNumbers(System.String,System.Char)">
             <summary>
             Replaces symbols with numbers. IE: ### -> 283
             </summary>
             <param name="format"></param>
             <param name="symbol"></param>
-            <returns></returns>
+        </member>
+        <member name="M:Bogus.Randomizer.Replace(System.String)">
+            <summary>
+            Replaces symbols with numbers and letters. IE: ###???# -> 283QED4
+            </summary>
+            <param name="format"></param>
+        </member>
+        <member name="M:Bogus.Randomizer.Enum``1">
+            <summary>
+            Picks a random Enum of T. Works only with Enums.
+            </summary>
+            <typeparam name="T">Must be an Enum</typeparam>
         </member>
         <member name="M:Bogus.Randomizer.Shuffle``1(System.Collections.Generic.IEnumerable{``0})">
             <summary>

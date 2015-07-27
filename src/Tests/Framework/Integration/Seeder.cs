@@ -55,6 +55,7 @@ namespace Tests.Framework.Integration
 				.AddMapping<Project>(m=>m
 					.Properties(props=>props
 						.Date(d=>d.Name(p=>p.StartedOn))
+						.String(d=>d.Name(p=>p.State).NotAnalyzed())
 						.NestedObject<Tag>(mo=>mo
 							.Name(p=>p.Tags)
 							.Properties(TagProperties)

@@ -61,7 +61,7 @@ type Build() =
         let properties =  ("Verbosity", "Quiet") :: ("TargetFrameworkVersion", f.Identifier.MSBuild) :: msbuildProperties 
         let setParams defaults =
             { defaults with
-                //Verbosity = Some(Quiet)
+                Verbosity = Some(Quiet)
                 Targets = ["Build"]
                 Properties =
                     [

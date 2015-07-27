@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\xunit.runner.visualstudio.2.1.0-beta3-build1069\build\net20\xunit.runner.visualstudio.props" Condition="Exists('..\packages\xunit.runner.visualstudio.2.1.0-beta3-build1069\build\net20\xunit.runner.visualstudio.props')" />
   <Import Project="..\..\dep\xunit.core.2.0.0-beta5-build2785\build\portable-net45+win+wpa81+wp80+monotouch+monoandroid\xunit.core.props" Condition="Exists('..\..\dep\xunit.core.2.0.0-beta5-build2785\build\portable-net45+win+wpa81+wp80+monotouch+monoandroid\xunit.core.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -13,7 +14,8 @@
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
-    <NuGetPackageImportStamp>fb79c2e7</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -66,21 +68,28 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Aggregations\Bucket\FiltersAggregation.cs" />
+    <Compile Include="Aggregations\Bucket\FilterAggregation.cs" />
+    <Compile Include="Aggregations\Bucket\DateRangeAggregation.cs" />
+    <Compile Include="Aggregations\Bucket\DateHistogramAggregation.cs" />
     <Compile Include="Aggregations\Bucket\ChildrenAggregation.cs" />
     <Compile Include="Aggregations\AggregationUsageBase.cs" />
     <Compile Include="Aggregations\WritingAggregations.cs" />
+    <Compile Include="ClientConcepts\HighLevel\Inferrence\FieldNames\FieldInference.cs" />
     <Compile Include="ClientConcepts\LowLevel\Connecting.cs" />
+    <Compile Include="CommonOptions\DateMath\DateMathExpressions.cs" />
+    <Compile Include="CommonOptions\TimeUnit\TimeUnits.cs" />
     <Compile Include="Framework\MockData\CommitActivity.cs" />
     <Compile Include="Framework\MockData\Developer.cs" />
     <Compile Include="Framework\MockData\Gender.cs" />
     <Compile Include="Framework\MockData\Gimme.cs" />
     <Compile Include="Framework\MockData\Person.cs" />
     <Compile Include="Framework\MockData\Tag.cs" />
+    <Compile Include="Framework\Roundtrip.cs" />
     <Compile Include="Search\Request\Fields.cs" />
     <Compile Include="Search\Request\FielddataFields.cs" />
     <Compile Include="Search\Request\Highlighting.cs" />
     <Compile Include="Search\Request\IndexBoost.cs" />
-    <Compile Include="Search\Request\InnerHits.cs" />
     <Compile Include="Search\Request\MinScore.cs" />
     <Compile Include="Search\Request\PostFilter.cs" />
     <Compile Include="Search\Request\Explain.cs" />
@@ -97,12 +106,13 @@
     <Compile Include="Framework\MockData\Project.cs" />
     <Compile Include="Framework\TestAttributes.cs" />
     <Compile Include="Framework\Integration\ElasticsearchNode.cs" />
-    <Compile Include="Framework\Integration\ReadOnlyIntegration.cs" />
+    <Compile Include="Framework\Integration\ReadOnlyCluster.cs" />
     <Compile Include="Framework\SerializationBase.cs" />
     <Compile Include="Framework\TestClient.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="index.asciidoc" />
+    <None Include="packages.config" />
     <None Include="paket.references" />
   </ItemGroup>
   <ItemGroup>
@@ -126,7 +136,6 @@
     <Folder Include="Analysis\TokenFilters\" />
     <Folder Include="Analysis\Tokenizers\" />
     <Folder Include="Cat\" />
-    <Folder Include="ClientConcepts\HighLevel\" />
     <Folder Include="Cluster\" />
     <Folder Include="Document\" />
     <Folder Include="IndexModules\" />
@@ -416,4 +425,10 @@
       </ItemGroup>
     </When>
   </Choose>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\xunit.runner.visualstudio.2.1.0-beta3-build1069\build\net20\xunit.runner.visualstudio.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\xunit.runner.visualstudio.2.1.0-beta3-build1069\build\net20\xunit.runner.visualstudio.props'))" />
+  </Target>
 </Project>

@@ -11,7 +11,7 @@ namespace Tests.Search.Request
 	{
 		public class Usage : SearchUsageBase
 		{
-			public Usage(ReadOnlyIntegration i) : base(i) {} 
+			public Usage(ReadOnlyCluster cluster, ApiUsage usage) : base(cluster, usage) { }
 
 			protected override object ExpectJson =>
 				new { post_filter = new { match_all = new { } } };
