@@ -25,7 +25,7 @@ namespace Nest
 	{
 		public static void Update(IConnectionSettingsValues settings, ElasticsearchPathInfo<TermvectorRequestParameters> pathInfo, ITermvectorRequest request)
 		{
-			pathInfo.HttpMethod = request.Document == null ? PathInfoHttpMethod.GET : PathInfoHttpMethod.POST;
+			pathInfo.HttpMethod = request.Document == null ? HttpMethod.GET : HttpMethod.POST;
 		}
 	}
 

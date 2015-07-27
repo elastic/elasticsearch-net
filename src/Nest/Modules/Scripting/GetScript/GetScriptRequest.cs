@@ -29,7 +29,7 @@ namespace Nest
         {
             pathInfo.Id = request.Id;
             pathInfo.Lang = request.Lang;
-            pathInfo.HttpMethod = PathInfoHttpMethod.GET;
+            pathInfo.HttpMethod = HttpMethod.GET;
         }
     }
 

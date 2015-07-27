@@ -40,7 +40,7 @@ namespace Nest
 	{
 		public static void Update(IConnectionSettingsValues settings, ElasticsearchPathInfo<SourceRequestParameters> pathInfo)
 		{
-			pathInfo.HttpMethod = PathInfoHttpMethod.GET;
+			pathInfo.HttpMethod = HttpMethod.GET;
 		}
 	}
 

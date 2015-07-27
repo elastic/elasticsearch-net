@@ -30,7 +30,7 @@ namespace Nest
         {
             pathInfo.Id = request.Id;
             pathInfo.Lang = request.Lang;
-            pathInfo.HttpMethod = PathInfoHttpMethod.DELETE;
+            pathInfo.HttpMethod = HttpMethod.DELETE;
         }
     }
 

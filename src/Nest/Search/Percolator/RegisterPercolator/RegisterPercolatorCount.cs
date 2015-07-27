@@ -20,7 +20,7 @@ namespace Nest
 	{
 		public static void Update(ElasticsearchPathInfo<IndexRequestParameters> pathInfo, IRegisterPercolatorRequest request)
 		{
-			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
+			pathInfo.HttpMethod = HttpMethod.POST;
 			pathInfo.Index = pathInfo.Index;
 			pathInfo.Id = pathInfo.Name;
 			pathInfo.Type = ".percolator";

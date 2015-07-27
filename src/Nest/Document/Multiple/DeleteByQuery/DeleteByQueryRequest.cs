@@ -19,7 +19,7 @@ namespace Nest
 	{
 		public static void Update(ElasticsearchPathInfo<DeleteByQueryRequestParameters> pathInfo, IDeleteByQueryRequest request)
 		{
-			pathInfo.HttpMethod = PathInfoHttpMethod.DELETE;
+			pathInfo.HttpMethod = HttpMethod.DELETE;
 			//query works a bit different in that if all types and all indices are specified the root 
 			//needs to be /_all/_query not just /_query
 			if (pathInfo.Index.IsNullOrEmpty() && pathInfo.Type.IsNullOrEmpty()

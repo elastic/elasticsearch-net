@@ -127,7 +127,7 @@ namespace Nest
 		}
 		public static void Update(IConnectionSettingsValues settings, ElasticsearchPathInfo<SearchRequestParameters> pathInfo, ISearchRequest request)
 		{
-			pathInfo.HttpMethod = request.RequestParameters.ContainsKey("source") ? PathInfoHttpMethod.GET : PathInfoHttpMethod.POST;
+			pathInfo.HttpMethod = request.RequestParameters.ContainsKey("source") ? HttpMethod.GET : HttpMethod.POST;
 		}
 	}
 	

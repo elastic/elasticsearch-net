@@ -12,8 +12,8 @@ namespace CodeGeneration.LowLevelClient.Domain
 			get
 			{
 				var methodArgs = CsharpMethod.Parts
-					.Select(p => (p.Name != "body") ? "pathInfo." + p.Name.ToPascalCase() : "body")
-					.Concat(new[] {"u => pathInfo.RequestParameters"});
+					.Select(p => (p.Name != "body") ? "p." + p.Name.ToPascalCase() : "body")
+					.Concat(new[] {"u => p.RequestParameters"});
 				return methodArgs;
 			}
 		}
@@ -23,7 +23,7 @@ namespace CodeGeneration.LowLevelClient.Domain
 			get
 			{
 				var parts = this.CsharpMethod.Parts.Where(p => p.Name != "body")
-					.Select(p => $"pathInfo.{p.Name.ToPascalCase()}").ToList();
+					.Select(p => $"p.{p.Name.ToPascalCase()}").ToList();
 				if (!parts.Any()) return string.Empty;
 				return $"AllSet({string.Join(", ", parts)})";
 			}
@@ -35,7 +35,7 @@ namespace CodeGeneration.LowLevelClient.Domain
 			{
 				return this.CsharpMethod.Parts.Select(p =>
 				{
-					var name = (p.Name == "body") ? "body" : "pathInfo." + p.Name.ToPascalCase();
+					var name = (p.Name == "body") ? "body" : "p." + p.Name.ToPascalCase();
 					switch (p.Type)
 					{
 						case "string":

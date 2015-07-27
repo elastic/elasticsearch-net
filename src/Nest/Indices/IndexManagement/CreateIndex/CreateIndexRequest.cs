@@ -19,7 +19,7 @@ namespace Nest
 	{
 		public static void Update(ElasticsearchPathInfo<CreateIndexRequestParameters> pathInfo, ICreateIndexRequest request)
 		{
-			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
+			pathInfo.HttpMethod = HttpMethod.POST;
 		}
 	}
 

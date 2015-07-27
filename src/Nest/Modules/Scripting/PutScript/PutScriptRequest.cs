@@ -33,7 +33,7 @@ namespace Nest
         {
             pathInfo.Id = putScriptRequest.Id;
             pathInfo.Lang = putScriptRequest.Lang;
-            pathInfo.HttpMethod = PathInfoHttpMethod.POST;
+            pathInfo.HttpMethod = HttpMethod.POST;
         }
     }
 

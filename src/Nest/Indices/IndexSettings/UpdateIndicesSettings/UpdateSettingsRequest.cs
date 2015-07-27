@@ -117,7 +117,7 @@ namespace Nest
 	{
 		public static void Update(IConnectionSettingsValues settings, ElasticsearchPathInfo<UpdateSettingsRequestParameters> pathInfo)
 		{
-			pathInfo.HttpMethod = PathInfoHttpMethod.PUT;
+			pathInfo.HttpMethod = HttpMethod.PUT;
 		}
 	}
 

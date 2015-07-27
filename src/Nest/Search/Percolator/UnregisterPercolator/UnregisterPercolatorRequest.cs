@@ -19,7 +19,7 @@ namespace Nest
             pathInfo.Index = pathInfo.Index;
             pathInfo.Id = pathInfo.Name;
             pathInfo.Type = ".percolator";
-            pathInfo.HttpMethod = PathInfoHttpMethod.DELETE;
+            pathInfo.HttpMethod = HttpMethod.DELETE;
         }
     }
 

@@ -17,7 +17,7 @@ namespace Nest
 	{
 		public static void Update(ElasticsearchPathInfo<MultiPercolateRequestParameters> pathInfo, IMultiPercolateRequest request)
 		{
-			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
+			pathInfo.HttpMethod = HttpMethod.POST;
 		}
 	}
 	

@@ -24,8 +24,8 @@ namespace Nest
 			var source = request.RequestParameters.GetQueryStringValue<string>("source");
 			var q = request.RequestParameters.GetQueryStringValue<string>("q");
 			pathInfo.HttpMethod = (!source.IsNullOrEmpty() || !q.IsNullOrEmpty())
-				? PathInfoHttpMethod.GET
-				: PathInfoHttpMethod.POST;
+				? HttpMethod.GET
+				: HttpMethod.POST;
 		}
 	}
 

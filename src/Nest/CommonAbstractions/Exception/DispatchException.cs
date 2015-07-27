@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 
 namespace Nest
@@ -18,12 +20,7 @@ namespace Nest
 			Provided = provided;
 		}
 
-		public DispatchException(string msg, System.Exception exp) : base(msg, exp)
-		{
-		}
-
-		public static DispatchException Create(IElasticsearchPathInfo provided, string apiCall, string[] endpoints,
-			PathInfoHttpMethod[] methods)
+		public static DispatchException InvalidDispatch(string apiCall, IElasticsearchPathInfo provided, HttpMethod[] methods, params string[] endpoints)
 		{
 			var sb = new StringBuilder();
 			sb.AppendLine($"Dispatching {apiCall}() from NEST into to Elasticsearch.NET failed");

@@ -18,7 +18,7 @@ namespace Nest
 	{
 		public static void Update(ElasticsearchPathInfo<MultiGetRequestParameters> pathInfo, IMultiGetRequest request)
 		{
-			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
+			pathInfo.HttpMethod = HttpMethod.POST;
 		}
 	}
 	

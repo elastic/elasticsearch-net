@@ -14,7 +14,7 @@ namespace Nest
 	{
 		public static void Update(ElasticsearchPathInfo<DeleteMappingRequestParameters> pathInfo, IDeleteMappingRequest request)
 		{
-			pathInfo.HttpMethod = PathInfoHttpMethod.DELETE;
+			pathInfo.HttpMethod = HttpMethod.DELETE;
 		}
 	}
 	

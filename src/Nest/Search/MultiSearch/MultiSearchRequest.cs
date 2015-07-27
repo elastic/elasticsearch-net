@@ -20,7 +20,7 @@ namespace Nest
 	{
 		public static void Update(ElasticsearchPathInfo<MultiSearchRequestParameters> pathInfo, IMultiSearchRequest request)
 		{
-			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
+			pathInfo.HttpMethod = HttpMethod.POST;
 		}
 	}
 	
@@ -65,7 +65,7 @@ namespace Nest
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<MultiSearchRequestParameters> pathInfo)
 		{
-			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
+			pathInfo.HttpMethod = HttpMethod.POST;
 		}
 
 	}

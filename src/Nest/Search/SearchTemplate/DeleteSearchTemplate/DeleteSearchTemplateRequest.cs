@@ -29,7 +29,7 @@ namespace Nest
 		public static void Update(ElasticsearchPathInfo<DeleteTemplateRequestParameters> pathInfo, IDeleteSearchTemplateRequest request)
 		{
 			pathInfo.Id = request.Name;
-			pathInfo.HttpMethod = PathInfoHttpMethod.DELETE;
+			pathInfo.HttpMethod = HttpMethod.DELETE;
 		}
 	}
 

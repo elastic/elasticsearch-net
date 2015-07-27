@@ -1,13 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using Elasticsearch.Net;
 
 namespace Nest
 {
-	public class ElasticsearchPathInfo<TParameters> : IElasticsearchPathInfo
+	public class ElasticsearchPathInfo<TParameters> : IElasticsearchPathInfo<TParameters>
 		where TParameters : IRequestParameters, new()
 	{
-		public PathInfoHttpMethod HttpMethod { get; set; }
+		public HttpMethod HttpMethod { get; set; }
 		public string Index { get; set; }
 		public string Type { get; set; }
 		public string Id { get; set; }
@@ -39,11 +40,15 @@ namespace Nest
 			this.RequestParameters.DeserializationState = customObjectCreation;
 			return this;
 		}
+
+		internal ElasticsearchResponse<T> CallWhen<T>(HttpMethod method, bool allSet, Func<IElasticsearchPathInfo<TParameters>, ElasticsearchResponse<T>> action) =>
+				allSet ? action(this) : null;
+
 	}
 
 	public interface IElasticsearchPathInfo
 	{
-		PathInfoHttpMethod HttpMethod { get; set; }
+		HttpMethod HttpMethod { get; set; }
 		string Index { get; set; }
 		string Type { get; set; }
 		string Id { get; set; }
@@ -58,5 +63,11 @@ namespace Nest
 		string Snapshot { get; set; }
 		string Metric { get; set; }
 		string IndexMetric { get; set; }
+	}
+
+	public interface IElasticsearchPathInfo<TParameters> : IElasticsearchPathInfo
+		where TParameters : IRequestParameters, new()
+	{
+		TParameters RequestParameters { get; set; }
 	}
 }

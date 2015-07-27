@@ -11,7 +11,7 @@ namespace Nest
 	{
 		public static void Update(ElasticsearchPathInfo<UpgradeRequestParameters> pathInfo)
 		{
-			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
+			pathInfo.HttpMethod = HttpMethod.POST;
 		}
 	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]

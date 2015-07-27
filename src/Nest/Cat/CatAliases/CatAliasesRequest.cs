@@ -10,7 +10,7 @@ namespace Nest
 	internal static class CatRequestPathInfo
 	{
 		public static void Update(IElasticsearchPathInfo pathInfo) =>
-			pathInfo.HttpMethod = PathInfoHttpMethod.GET;
+			pathInfo.HttpMethod = HttpMethod.GET;
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]

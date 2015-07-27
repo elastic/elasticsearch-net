@@ -55,7 +55,7 @@ namespace Nest
 					pathInfo.Id = settings.Inferrer.Id(self.Upsert);
 			}
 
-			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
+			pathInfo.HttpMethod = HttpMethod.POST;
 		}
 	}
 

@@ -14,7 +14,7 @@ namespace Nest
 	{
 		public static void Update(IConnectionSettingsValues settings, ElasticsearchPathInfo<SyncedFlushRequestParameters> pathInfo)
 		{
-			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
+			pathInfo.HttpMethod = HttpMethod.POST;
 		}
 	}
 

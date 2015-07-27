@@ -24,9 +24,9 @@ namespace Nest
 		public static void Update(ElasticsearchPathInfo<SearchExistsRequestParameters> pathInfo, ISearchExistsRequest request)
 		{
 			if (request.RequestParameters.ContainsKey("source") || request.RequestParameters.ContainsKey("q"))
-				pathInfo.HttpMethod = PathInfoHttpMethod.GET;
+				pathInfo.HttpMethod = HttpMethod.GET;
 			else
-				pathInfo.HttpMethod = request.Query != null ? PathInfoHttpMethod.POST : PathInfoHttpMethod.GET;
+				pathInfo.HttpMethod = request.Query != null ? HttpMethod.POST : HttpMethod.GET;
 		}
 	}
 	

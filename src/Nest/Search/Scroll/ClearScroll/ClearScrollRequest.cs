@@ -22,7 +22,7 @@ namespace Nest
 				throw new DslException("missing ScrollId()");
 
 			pathInfo.ScrollId = request.ScrollId;
-			pathInfo.HttpMethod = PathInfoHttpMethod.DELETE;
+			pathInfo.HttpMethod = HttpMethod.DELETE;
 		}
 	}
 	

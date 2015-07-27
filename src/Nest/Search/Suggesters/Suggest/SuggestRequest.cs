@@ -20,7 +20,7 @@ namespace Nest
 	{
 		public static void Update(ElasticsearchPathInfo<SuggestRequestParameters> pathInfo, ISuggestRequest request)
 		{
-			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
+			pathInfo.HttpMethod = HttpMethod.POST;
 		}
 
 		public static object GetCustomJson(ISuggestRequest suggestRequest)

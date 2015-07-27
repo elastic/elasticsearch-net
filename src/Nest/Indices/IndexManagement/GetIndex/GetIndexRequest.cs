@@ -24,7 +24,7 @@ namespace Nest
 			if (pathInfo.Index.IsNullOrEmpty())
 				throw new DslException("Can not call GetIndex without specifying one or more indices or explicitly calling .AllIndices()");
 
-			pathInfo.HttpMethod = PathInfoHttpMethod.GET;
+			pathInfo.HttpMethod = HttpMethod.GET;
 			if (request.Features == default(GetIndexFeature) || request.Features == GetIndexFeature.All)
 				return;
 

@@ -34,7 +34,7 @@ namespace Nest
 		public static void Update(ElasticsearchPathInfo<PutTemplateRequestParameters> pathInfo, IPutSearchTemplateRequest request)
 		{
 			pathInfo.Id = request.Name;
-			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
+			pathInfo.HttpMethod = HttpMethod.POST;
 		}
 	}
 

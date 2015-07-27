@@ -15,7 +15,7 @@ namespace Nest
 	{
 		public static void Update(ElasticsearchPathInfo<DocumentExistsRequestParameters> pathInfo, IDocumentExistsRequest request)
 		{
-			pathInfo.HttpMethod = PathInfoHttpMethod.HEAD;
+			pathInfo.HttpMethod = HttpMethod.HEAD;
 		}
 	}
 	

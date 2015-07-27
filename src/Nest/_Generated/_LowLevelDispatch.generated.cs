@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using static Nest.HttpMethod;
+using static Nest.DispatchException;
 
 //Generated File Please Do Not Edit Manually
 
@@ -14,3414 +16,3024 @@ namespace Nest
 	///<summary>This dispatches highlevel requests into the proper lowlevel client overload method</summary>
 	internal partial class LowLevelDispatch
 	{
-		internal ElasticsearchResponse<T> AbortBenchmarkDispatch<T>(ElasticsearchPathInfo<AbortBenchmarkRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> AbortBenchmarkDispatch<T>(ElasticsearchPathInfo<AbortBenchmarkRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Name))
-						return this.LowLevelClient.AbortBenchmark<T>(pathInfo.Name,u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Name)) return _lowLevel.AbortBenchmark<T>(p.Name,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "AbortBenchmark", new [] { "/_bench/abort/{name}" }, new [] { PathInfoHttpMethod.POST });
+			throw InvalidDispatch("AbortBenchmark", p, new [] { POST }, "/_bench/abort/{name}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> AbortBenchmarkDispatchAsync<T>(ElasticsearchPathInfo<AbortBenchmarkRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> AbortBenchmarkDispatchAsync<T>(ElasticsearchPathInfo<AbortBenchmarkRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Name))
-						return this.LowLevelClient.AbortBenchmarkAsync<T>(pathInfo.Name,u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Name)) return _lowLevel.AbortBenchmarkAsync<T>(p.Name,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "AbortBenchmark", new [] { "/_bench/abort/{name}" }, new [] { PathInfoHttpMethod.POST });
+			throw InvalidDispatch("AbortBenchmark", p, new [] { POST }, "/_bench/abort/{name}");
 		}
 		
-		internal ElasticsearchResponse<T> BulkDispatch<T>(ElasticsearchPathInfo<BulkRequestParameters> pathInfo , object body)
+		internal ElasticsearchResponse<T> BulkDispatch<T>(ElasticsearchPathInfo<BulkRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.Bulk<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.Bulk<T>(pathInfo.Index,body,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.Bulk<T>(body,u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Index, p.Type)) return _lowLevel.Bulk<T>(p.Index,p.Type,body,u => p.RequestParameters);
+					if (AllSet(p.Index)) return _lowLevel.Bulk<T>(p.Index,body,u => p.RequestParameters);
+					return _lowLevel.Bulk<T>(body,u => p.RequestParameters);
 
-				case PathInfoHttpMethod.PUT:
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.BulkPut<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.BulkPut<T>(pathInfo.Index,body,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.BulkPut<T>(body,u => pathInfo.RequestParameters);
+				case PUT:
+					if (AllSet(p.Index, p.Type)) return _lowLevel.BulkPut<T>(p.Index,p.Type,body,u => p.RequestParameters);
+					if (AllSet(p.Index)) return _lowLevel.BulkPut<T>(p.Index,body,u => p.RequestParameters);
+					return _lowLevel.BulkPut<T>(body,u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "Bulk", new [] { "/_bulk", "/{index}/_bulk", "/{index}/{type}/_bulk" }, new [] { PathInfoHttpMethod.POST, PathInfoHttpMethod.PUT });
+			throw InvalidDispatch("Bulk", p, new [] { POST, PUT }, "/_bulk", "/{index}/_bulk", "/{index}/{type}/_bulk");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> BulkDispatchAsync<T>(ElasticsearchPathInfo<BulkRequestParameters> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> BulkDispatchAsync<T>(ElasticsearchPathInfo<BulkRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.BulkAsync<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.BulkAsync<T>(pathInfo.Index,body,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.BulkAsync<T>(body,u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Index, p.Type)) return _lowLevel.BulkAsync<T>(p.Index,p.Type,body,u => p.RequestParameters);
+					if (AllSet(p.Index)) return _lowLevel.BulkAsync<T>(p.Index,body,u => p.RequestParameters);
+					return _lowLevel.BulkAsync<T>(body,u => p.RequestParameters);
 
-				case PathInfoHttpMethod.PUT:
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.BulkPutAsync<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.BulkPutAsync<T>(pathInfo.Index,body,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.BulkPutAsync<T>(body,u => pathInfo.RequestParameters);
+				case PUT:
+					if (AllSet(p.Index, p.Type)) return _lowLevel.BulkPutAsync<T>(p.Index,p.Type,body,u => p.RequestParameters);
+					if (AllSet(p.Index)) return _lowLevel.BulkPutAsync<T>(p.Index,body,u => p.RequestParameters);
+					return _lowLevel.BulkPutAsync<T>(body,u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "Bulk", new [] { "/_bulk", "/{index}/_bulk", "/{index}/{type}/_bulk" }, new [] { PathInfoHttpMethod.POST, PathInfoHttpMethod.PUT });
+			throw InvalidDispatch("Bulk", p, new [] { POST, PUT }, "/_bulk", "/{index}/_bulk", "/{index}/{type}/_bulk");
 		}
 		
-		internal ElasticsearchResponse<T> CatAliasesDispatch<T>(ElasticsearchPathInfo<CatAliasesRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> CatAliasesDispatch<T>(ElasticsearchPathInfo<CatAliasesRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Name))
-						return this.LowLevelClient.CatAliases<T>(pathInfo.Name,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.CatAliases<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Name)) return _lowLevel.CatAliases<T>(p.Name,u => p.RequestParameters);
+					return _lowLevel.CatAliases<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "CatAliases", new [] { "/_cat/aliases", "/_cat/aliases/{name}" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("CatAliases", p, new [] { GET }, "/_cat/aliases", "/_cat/aliases/{name}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> CatAliasesDispatchAsync<T>(ElasticsearchPathInfo<CatAliasesRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> CatAliasesDispatchAsync<T>(ElasticsearchPathInfo<CatAliasesRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Name))
-						return this.LowLevelClient.CatAliasesAsync<T>(pathInfo.Name,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.CatAliasesAsync<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Name)) return _lowLevel.CatAliasesAsync<T>(p.Name,u => p.RequestParameters);
+					return _lowLevel.CatAliasesAsync<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "CatAliases", new [] { "/_cat/aliases", "/_cat/aliases/{name}" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("CatAliases", p, new [] { GET }, "/_cat/aliases", "/_cat/aliases/{name}");
 		}
 		
-		internal ElasticsearchResponse<T> CatAllocationDispatch<T>(ElasticsearchPathInfo<CatAllocationRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> CatAllocationDispatch<T>(ElasticsearchPathInfo<CatAllocationRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.NodeId))
-						return this.LowLevelClient.CatAllocation<T>(pathInfo.NodeId,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.CatAllocation<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.NodeId)) return _lowLevel.CatAllocation<T>(p.NodeId,u => p.RequestParameters);
+					return _lowLevel.CatAllocation<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "CatAllocation", new [] { "/_cat/allocation", "/_cat/allocation/{node_id}" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("CatAllocation", p, new [] { GET }, "/_cat/allocation", "/_cat/allocation/{node_id}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> CatAllocationDispatchAsync<T>(ElasticsearchPathInfo<CatAllocationRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> CatAllocationDispatchAsync<T>(ElasticsearchPathInfo<CatAllocationRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.NodeId))
-						return this.LowLevelClient.CatAllocationAsync<T>(pathInfo.NodeId,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.CatAllocationAsync<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.NodeId)) return _lowLevel.CatAllocationAsync<T>(p.NodeId,u => p.RequestParameters);
+					return _lowLevel.CatAllocationAsync<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "CatAllocation", new [] { "/_cat/allocation", "/_cat/allocation/{node_id}" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("CatAllocation", p, new [] { GET }, "/_cat/allocation", "/_cat/allocation/{node_id}");
 		}
 		
-		internal ElasticsearchResponse<T> CatCountDispatch<T>(ElasticsearchPathInfo<CatCountRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> CatCountDispatch<T>(ElasticsearchPathInfo<CatCountRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.CatCount<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.CatCount<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index)) return _lowLevel.CatCount<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.CatCount<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "CatCount", new [] { "/_cat/count", "/_cat/count/{index}" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("CatCount", p, new [] { GET }, "/_cat/count", "/_cat/count/{index}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> CatCountDispatchAsync<T>(ElasticsearchPathInfo<CatCountRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> CatCountDispatchAsync<T>(ElasticsearchPathInfo<CatCountRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.CatCountAsync<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.CatCountAsync<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index)) return _lowLevel.CatCountAsync<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.CatCountAsync<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "CatCount", new [] { "/_cat/count", "/_cat/count/{index}" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("CatCount", p, new [] { GET }, "/_cat/count", "/_cat/count/{index}");
 		}
 		
-		internal ElasticsearchResponse<T> CatFielddataDispatch<T>(ElasticsearchPathInfo<CatFielddataRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> CatFielddataDispatch<T>(ElasticsearchPathInfo<CatFielddataRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					return this.LowLevelClient.CatFielddata<T>(u => pathInfo.RequestParameters);
+				case GET:
+					return _lowLevel.CatFielddata<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "CatFielddata", new [] { "/_cat/fielddata" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("CatFielddata", p, new [] { GET }, "/_cat/fielddata");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> CatFielddataDispatchAsync<T>(ElasticsearchPathInfo<CatFielddataRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> CatFielddataDispatchAsync<T>(ElasticsearchPathInfo<CatFielddataRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					return this.LowLevelClient.CatFielddataAsync<T>(u => pathInfo.RequestParameters);
+				case GET:
+					return _lowLevel.CatFielddataAsync<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "CatFielddata", new [] { "/_cat/fielddata" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("CatFielddata", p, new [] { GET }, "/_cat/fielddata");
 		}
 		
-		internal ElasticsearchResponse<T> CatHealthDispatch<T>(ElasticsearchPathInfo<CatHealthRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> CatHealthDispatch<T>(ElasticsearchPathInfo<CatHealthRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					return this.LowLevelClient.CatHealth<T>(u => pathInfo.RequestParameters);
+				case GET:
+					return _lowLevel.CatHealth<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "CatHealth", new [] { "/_cat/health" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("CatHealth", p, new [] { GET }, "/_cat/health");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> CatHealthDispatchAsync<T>(ElasticsearchPathInfo<CatHealthRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> CatHealthDispatchAsync<T>(ElasticsearchPathInfo<CatHealthRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					return this.LowLevelClient.CatHealthAsync<T>(u => pathInfo.RequestParameters);
+				case GET:
+					return _lowLevel.CatHealthAsync<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "CatHealth", new [] { "/_cat/health" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("CatHealth", p, new [] { GET }, "/_cat/health");
 		}
 		
-		internal ElasticsearchResponse<T> CatHelpDispatch<T>(ElasticsearchPathInfo<CatHelpRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> CatHelpDispatch<T>(ElasticsearchPathInfo<CatHelpRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					return this.LowLevelClient.CatHelp<T>(u => pathInfo.RequestParameters);
+				case GET:
+					return _lowLevel.CatHelp<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "CatHelp", new [] { "/_cat" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("CatHelp", p, new [] { GET }, "/_cat");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> CatHelpDispatchAsync<T>(ElasticsearchPathInfo<CatHelpRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> CatHelpDispatchAsync<T>(ElasticsearchPathInfo<CatHelpRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					return this.LowLevelClient.CatHelpAsync<T>(u => pathInfo.RequestParameters);
+				case GET:
+					return _lowLevel.CatHelpAsync<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "CatHelp", new [] { "/_cat" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("CatHelp", p, new [] { GET }, "/_cat");
 		}
 		
-		internal ElasticsearchResponse<T> CatIndicesDispatch<T>(ElasticsearchPathInfo<CatIndicesRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> CatIndicesDispatch<T>(ElasticsearchPathInfo<CatIndicesRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.CatIndices<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.CatIndices<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index)) return _lowLevel.CatIndices<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.CatIndices<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "CatIndices", new [] { "/_cat/indices", "/_cat/indices/{index}" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("CatIndices", p, new [] { GET }, "/_cat/indices", "/_cat/indices/{index}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> CatIndicesDispatchAsync<T>(ElasticsearchPathInfo<CatIndicesRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> CatIndicesDispatchAsync<T>(ElasticsearchPathInfo<CatIndicesRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.CatIndicesAsync<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.CatIndicesAsync<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index)) return _lowLevel.CatIndicesAsync<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.CatIndicesAsync<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "CatIndices", new [] { "/_cat/indices", "/_cat/indices/{index}" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("CatIndices", p, new [] { GET }, "/_cat/indices", "/_cat/indices/{index}");
 		}
 		
-		internal ElasticsearchResponse<T> CatMasterDispatch<T>(ElasticsearchPathInfo<CatMasterRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> CatMasterDispatch<T>(ElasticsearchPathInfo<CatMasterRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					return this.LowLevelClient.CatMaster<T>(u => pathInfo.RequestParameters);
+				case GET:
+					return _lowLevel.CatMaster<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "CatMaster", new [] { "/_cat/master" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("CatMaster", p, new [] { GET }, "/_cat/master");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> CatMasterDispatchAsync<T>(ElasticsearchPathInfo<CatMasterRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> CatMasterDispatchAsync<T>(ElasticsearchPathInfo<CatMasterRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					return this.LowLevelClient.CatMasterAsync<T>(u => pathInfo.RequestParameters);
+				case GET:
+					return _lowLevel.CatMasterAsync<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "CatMaster", new [] { "/_cat/master" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("CatMaster", p, new [] { GET }, "/_cat/master");
 		}
 		
-		internal ElasticsearchResponse<T> CatNodesDispatch<T>(ElasticsearchPathInfo<CatNodesRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> CatNodesDispatch<T>(ElasticsearchPathInfo<CatNodesRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					return this.LowLevelClient.CatNodes<T>(u => pathInfo.RequestParameters);
+				case GET:
+					return _lowLevel.CatNodes<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "CatNodes", new [] { "/_cat/nodes" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("CatNodes", p, new [] { GET }, "/_cat/nodes");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> CatNodesDispatchAsync<T>(ElasticsearchPathInfo<CatNodesRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> CatNodesDispatchAsync<T>(ElasticsearchPathInfo<CatNodesRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					return this.LowLevelClient.CatNodesAsync<T>(u => pathInfo.RequestParameters);
+				case GET:
+					return _lowLevel.CatNodesAsync<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "CatNodes", new [] { "/_cat/nodes" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("CatNodes", p, new [] { GET }, "/_cat/nodes");
 		}
 		
-		internal ElasticsearchResponse<T> CatPendingTasksDispatch<T>(ElasticsearchPathInfo<CatPendingTasksRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> CatPendingTasksDispatch<T>(ElasticsearchPathInfo<CatPendingTasksRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					return this.LowLevelClient.CatPendingTasks<T>(u => pathInfo.RequestParameters);
+				case GET:
+					return _lowLevel.CatPendingTasks<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "CatPendingTasks", new [] { "/_cat/pending_tasks" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("CatPendingTasks", p, new [] { GET }, "/_cat/pending_tasks");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> CatPendingTasksDispatchAsync<T>(ElasticsearchPathInfo<CatPendingTasksRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> CatPendingTasksDispatchAsync<T>(ElasticsearchPathInfo<CatPendingTasksRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					return this.LowLevelClient.CatPendingTasksAsync<T>(u => pathInfo.RequestParameters);
+				case GET:
+					return _lowLevel.CatPendingTasksAsync<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "CatPendingTasks", new [] { "/_cat/pending_tasks" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("CatPendingTasks", p, new [] { GET }, "/_cat/pending_tasks");
 		}
 		
-		internal ElasticsearchResponse<T> CatPluginsDispatch<T>(ElasticsearchPathInfo<CatPluginsRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> CatPluginsDispatch<T>(ElasticsearchPathInfo<CatPluginsRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					return this.LowLevelClient.CatPlugins<T>(u => pathInfo.RequestParameters);
+				case GET:
+					return _lowLevel.CatPlugins<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "CatPlugins", new [] { "/_cat/plugins" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("CatPlugins", p, new [] { GET }, "/_cat/plugins");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> CatPluginsDispatchAsync<T>(ElasticsearchPathInfo<CatPluginsRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> CatPluginsDispatchAsync<T>(ElasticsearchPathInfo<CatPluginsRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					return this.LowLevelClient.CatPluginsAsync<T>(u => pathInfo.RequestParameters);
+				case GET:
+					return _lowLevel.CatPluginsAsync<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "CatPlugins", new [] { "/_cat/plugins" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("CatPlugins", p, new [] { GET }, "/_cat/plugins");
 		}
 		
-		internal ElasticsearchResponse<T> CatRecoveryDispatch<T>(ElasticsearchPathInfo<CatRecoveryRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> CatRecoveryDispatch<T>(ElasticsearchPathInfo<CatRecoveryRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.CatRecovery<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.CatRecovery<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index)) return _lowLevel.CatRecovery<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.CatRecovery<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "CatRecovery", new [] { "/_cat/recovery", "/_cat/recovery/{index}" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("CatRecovery", p, new [] { GET }, "/_cat/recovery", "/_cat/recovery/{index}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> CatRecoveryDispatchAsync<T>(ElasticsearchPathInfo<CatRecoveryRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> CatRecoveryDispatchAsync<T>(ElasticsearchPathInfo<CatRecoveryRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.CatRecoveryAsync<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.CatRecoveryAsync<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index)) return _lowLevel.CatRecoveryAsync<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.CatRecoveryAsync<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "CatRecovery", new [] { "/_cat/recovery", "/_cat/recovery/{index}" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("CatRecovery", p, new [] { GET }, "/_cat/recovery", "/_cat/recovery/{index}");
 		}
 		
-		internal ElasticsearchResponse<T> CatSegmentsDispatch<T>(ElasticsearchPathInfo<CatSegmentsRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> CatSegmentsDispatch<T>(ElasticsearchPathInfo<CatSegmentsRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.CatSegments<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.CatSegments<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index)) return _lowLevel.CatSegments<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.CatSegments<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "CatSegments", new [] { "/_cat/segments", "/_cat/segments/{index}" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("CatSegments", p, new [] { GET }, "/_cat/segments", "/_cat/segments/{index}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> CatSegmentsDispatchAsync<T>(ElasticsearchPathInfo<CatSegmentsRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> CatSegmentsDispatchAsync<T>(ElasticsearchPathInfo<CatSegmentsRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.CatSegmentsAsync<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.CatSegmentsAsync<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index)) return _lowLevel.CatSegmentsAsync<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.CatSegmentsAsync<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "CatSegments", new [] { "/_cat/segments", "/_cat/segments/{index}" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("CatSegments", p, new [] { GET }, "/_cat/segments", "/_cat/segments/{index}");
 		}
 		
-		internal ElasticsearchResponse<T> CatShardsDispatch<T>(ElasticsearchPathInfo<CatShardsRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> CatShardsDispatch<T>(ElasticsearchPathInfo<CatShardsRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.CatShards<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.CatShards<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index)) return _lowLevel.CatShards<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.CatShards<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "CatShards", new [] { "/_cat/shards", "/_cat/shards/{index}" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("CatShards", p, new [] { GET }, "/_cat/shards", "/_cat/shards/{index}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> CatShardsDispatchAsync<T>(ElasticsearchPathInfo<CatShardsRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> CatShardsDispatchAsync<T>(ElasticsearchPathInfo<CatShardsRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.CatShardsAsync<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.CatShardsAsync<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index)) return _lowLevel.CatShardsAsync<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.CatShardsAsync<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "CatShards", new [] { "/_cat/shards", "/_cat/shards/{index}" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("CatShards", p, new [] { GET }, "/_cat/shards", "/_cat/shards/{index}");
 		}
 		
-		internal ElasticsearchResponse<T> CatThreadPoolDispatch<T>(ElasticsearchPathInfo<CatThreadPoolRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> CatThreadPoolDispatch<T>(ElasticsearchPathInfo<CatThreadPoolRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					return this.LowLevelClient.CatThreadPool<T>(u => pathInfo.RequestParameters);
+				case GET:
+					return _lowLevel.CatThreadPool<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "CatThreadPool", new [] { "/_cat/thread_pool" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("CatThreadPool", p, new [] { GET }, "/_cat/thread_pool");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> CatThreadPoolDispatchAsync<T>(ElasticsearchPathInfo<CatThreadPoolRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> CatThreadPoolDispatchAsync<T>(ElasticsearchPathInfo<CatThreadPoolRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					return this.LowLevelClient.CatThreadPoolAsync<T>(u => pathInfo.RequestParameters);
+				case GET:
+					return _lowLevel.CatThreadPoolAsync<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "CatThreadPool", new [] { "/_cat/thread_pool" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("CatThreadPool", p, new [] { GET }, "/_cat/thread_pool");
 		}
 		
-		internal ElasticsearchResponse<T> ClearScrollDispatch<T>(ElasticsearchPathInfo<ClearScrollRequestParameters> pathInfo , object body)
+		internal ElasticsearchResponse<T> ClearScrollDispatch<T>(ElasticsearchPathInfo<ClearScrollRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.DELETE:
-					if (AllSet(pathInfo.ScrollId))
-						return this.LowLevelClient.ClearScroll<T>(pathInfo.ScrollId,body,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.ClearScroll<T>(body,u => pathInfo.RequestParameters);
+				case DELETE:
+					if (AllSet(p.ScrollId)) return _lowLevel.ClearScroll<T>(p.ScrollId,body,u => p.RequestParameters);
+					return _lowLevel.ClearScroll<T>(body,u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "ClearScroll", new [] { "/_search/scroll/{scroll_id}", "/_search/scroll" }, new [] { PathInfoHttpMethod.DELETE });
+			throw InvalidDispatch("ClearScroll", p, new [] { DELETE }, "/_search/scroll/{scroll_id}", "/_search/scroll");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> ClearScrollDispatchAsync<T>(ElasticsearchPathInfo<ClearScrollRequestParameters> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> ClearScrollDispatchAsync<T>(ElasticsearchPathInfo<ClearScrollRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.DELETE:
-					if (AllSet(pathInfo.ScrollId))
-						return this.LowLevelClient.ClearScrollAsync<T>(pathInfo.ScrollId,body,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.ClearScrollAsync<T>(body,u => pathInfo.RequestParameters);
+				case DELETE:
+					if (AllSet(p.ScrollId)) return _lowLevel.ClearScrollAsync<T>(p.ScrollId,body,u => p.RequestParameters);
+					return _lowLevel.ClearScrollAsync<T>(body,u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "ClearScroll", new [] { "/_search/scroll/{scroll_id}", "/_search/scroll" }, new [] { PathInfoHttpMethod.DELETE });
+			throw InvalidDispatch("ClearScroll", p, new [] { DELETE }, "/_search/scroll/{scroll_id}", "/_search/scroll");
 		}
 		
-		internal ElasticsearchResponse<T> ClusterGetSettingsDispatch<T>(ElasticsearchPathInfo<ClusterGetSettingsRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> ClusterGetSettingsDispatch<T>(ElasticsearchPathInfo<ClusterGetSettingsRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					return this.LowLevelClient.ClusterGetSettings<T>(u => pathInfo.RequestParameters);
+				case GET:
+					return _lowLevel.ClusterGetSettings<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "ClusterGetSettings", new [] { "/_cluster/settings" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("ClusterGetSettings", p, new [] { GET }, "/_cluster/settings");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> ClusterGetSettingsDispatchAsync<T>(ElasticsearchPathInfo<ClusterGetSettingsRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> ClusterGetSettingsDispatchAsync<T>(ElasticsearchPathInfo<ClusterGetSettingsRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					return this.LowLevelClient.ClusterGetSettingsAsync<T>(u => pathInfo.RequestParameters);
+				case GET:
+					return _lowLevel.ClusterGetSettingsAsync<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "ClusterGetSettings", new [] { "/_cluster/settings" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("ClusterGetSettings", p, new [] { GET }, "/_cluster/settings");
 		}
 		
-		internal ElasticsearchResponse<T> ClusterHealthDispatch<T>(ElasticsearchPathInfo<ClusterHealthRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> ClusterHealthDispatch<T>(ElasticsearchPathInfo<ClusterHealthRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.ClusterHealth<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.ClusterHealth<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index)) return _lowLevel.ClusterHealth<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.ClusterHealth<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "ClusterHealth", new [] { "/_cluster/health", "/_cluster/health/{index}" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("ClusterHealth", p, new [] { GET }, "/_cluster/health", "/_cluster/health/{index}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> ClusterHealthDispatchAsync<T>(ElasticsearchPathInfo<ClusterHealthRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> ClusterHealthDispatchAsync<T>(ElasticsearchPathInfo<ClusterHealthRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.ClusterHealthAsync<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.ClusterHealthAsync<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index)) return _lowLevel.ClusterHealthAsync<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.ClusterHealthAsync<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "ClusterHealth", new [] { "/_cluster/health", "/_cluster/health/{index}" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("ClusterHealth", p, new [] { GET }, "/_cluster/health", "/_cluster/health/{index}");
 		}
 		
-		internal ElasticsearchResponse<T> ClusterPendingTasksDispatch<T>(ElasticsearchPathInfo<ClusterPendingTasksRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> ClusterPendingTasksDispatch<T>(ElasticsearchPathInfo<ClusterPendingTasksRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					return this.LowLevelClient.ClusterPendingTasks<T>(u => pathInfo.RequestParameters);
+				case GET:
+					return _lowLevel.ClusterPendingTasks<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "ClusterPendingTasks", new [] { "/_cluster/pending_tasks" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("ClusterPendingTasks", p, new [] { GET }, "/_cluster/pending_tasks");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> ClusterPendingTasksDispatchAsync<T>(ElasticsearchPathInfo<ClusterPendingTasksRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> ClusterPendingTasksDispatchAsync<T>(ElasticsearchPathInfo<ClusterPendingTasksRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					return this.LowLevelClient.ClusterPendingTasksAsync<T>(u => pathInfo.RequestParameters);
+				case GET:
+					return _lowLevel.ClusterPendingTasksAsync<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "ClusterPendingTasks", new [] { "/_cluster/pending_tasks" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("ClusterPendingTasks", p, new [] { GET }, "/_cluster/pending_tasks");
 		}
 		
-		internal ElasticsearchResponse<T> ClusterPutSettingsDispatch<T>(ElasticsearchPathInfo<ClusterSettingsRequestParameters> pathInfo , object body)
+		internal ElasticsearchResponse<T> ClusterPutSettingsDispatch<T>(ElasticsearchPathInfo<ClusterSettingsRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.PUT:
-					return this.LowLevelClient.ClusterPutSettings<T>(body,u => pathInfo.RequestParameters);
+				case PUT:
+					return _lowLevel.ClusterPutSettings<T>(body,u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "ClusterPutSettings", new [] { "/_cluster/settings" }, new [] { PathInfoHttpMethod.PUT });
+			throw InvalidDispatch("ClusterPutSettings", p, new [] { PUT }, "/_cluster/settings");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> ClusterPutSettingsDispatchAsync<T>(ElasticsearchPathInfo<ClusterSettingsRequestParameters> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> ClusterPutSettingsDispatchAsync<T>(ElasticsearchPathInfo<ClusterSettingsRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.PUT:
-					return this.LowLevelClient.ClusterPutSettingsAsync<T>(body,u => pathInfo.RequestParameters);
+				case PUT:
+					return _lowLevel.ClusterPutSettingsAsync<T>(body,u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "ClusterPutSettings", new [] { "/_cluster/settings" }, new [] { PathInfoHttpMethod.PUT });
+			throw InvalidDispatch("ClusterPutSettings", p, new [] { PUT }, "/_cluster/settings");
 		}
 		
-		internal ElasticsearchResponse<T> ClusterRerouteDispatch<T>(ElasticsearchPathInfo<ClusterRerouteRequestParameters> pathInfo , object body)
+		internal ElasticsearchResponse<T> ClusterRerouteDispatch<T>(ElasticsearchPathInfo<ClusterRerouteRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.POST:
-					return this.LowLevelClient.ClusterReroute<T>(body,u => pathInfo.RequestParameters);
+				case POST:
+					return _lowLevel.ClusterReroute<T>(body,u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "ClusterReroute", new [] { "/_cluster/reroute" }, new [] { PathInfoHttpMethod.POST });
+			throw InvalidDispatch("ClusterReroute", p, new [] { POST }, "/_cluster/reroute");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> ClusterRerouteDispatchAsync<T>(ElasticsearchPathInfo<ClusterRerouteRequestParameters> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> ClusterRerouteDispatchAsync<T>(ElasticsearchPathInfo<ClusterRerouteRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.POST:
-					return this.LowLevelClient.ClusterRerouteAsync<T>(body,u => pathInfo.RequestParameters);
+				case POST:
+					return _lowLevel.ClusterRerouteAsync<T>(body,u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "ClusterReroute", new [] { "/_cluster/reroute" }, new [] { PathInfoHttpMethod.POST });
+			throw InvalidDispatch("ClusterReroute", p, new [] { POST }, "/_cluster/reroute");
 		}
 		
-		internal ElasticsearchResponse<T> ClusterStateDispatch<T>(ElasticsearchPathInfo<ClusterStateRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> ClusterStateDispatch<T>(ElasticsearchPathInfo<ClusterStateRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Metric, pathInfo.Index))
-						return this.LowLevelClient.ClusterState<T>(pathInfo.Metric,pathInfo.Index,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Metric))
-						return this.LowLevelClient.ClusterState<T>(pathInfo.Metric,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.ClusterState<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Metric, p.Index)) return _lowLevel.ClusterState<T>(p.Metric,p.Index,u => p.RequestParameters);
+					if (AllSet(p.Metric)) return _lowLevel.ClusterState<T>(p.Metric,u => p.RequestParameters);
+					return _lowLevel.ClusterState<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "ClusterState", new [] { "/_cluster/state", "/_cluster/state/{metric}", "/_cluster/state/{metric}/{index}" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("ClusterState", p, new [] { GET }, "/_cluster/state", "/_cluster/state/{metric}", "/_cluster/state/{metric}/{index}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> ClusterStateDispatchAsync<T>(ElasticsearchPathInfo<ClusterStateRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> ClusterStateDispatchAsync<T>(ElasticsearchPathInfo<ClusterStateRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Metric, pathInfo.Index))
-						return this.LowLevelClient.ClusterStateAsync<T>(pathInfo.Metric,pathInfo.Index,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Metric))
-						return this.LowLevelClient.ClusterStateAsync<T>(pathInfo.Metric,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.ClusterStateAsync<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Metric, p.Index)) return _lowLevel.ClusterStateAsync<T>(p.Metric,p.Index,u => p.RequestParameters);
+					if (AllSet(p.Metric)) return _lowLevel.ClusterStateAsync<T>(p.Metric,u => p.RequestParameters);
+					return _lowLevel.ClusterStateAsync<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "ClusterState", new [] { "/_cluster/state", "/_cluster/state/{metric}", "/_cluster/state/{metric}/{index}" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("ClusterState", p, new [] { GET }, "/_cluster/state", "/_cluster/state/{metric}", "/_cluster/state/{metric}/{index}");
 		}
 		
-		internal ElasticsearchResponse<T> ClusterStatsDispatch<T>(ElasticsearchPathInfo<ClusterStatsRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> ClusterStatsDispatch<T>(ElasticsearchPathInfo<ClusterStatsRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.NodeId))
-						return this.LowLevelClient.ClusterStats<T>(pathInfo.NodeId,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.ClusterStats<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.NodeId)) return _lowLevel.ClusterStats<T>(p.NodeId,u => p.RequestParameters);
+					return _lowLevel.ClusterStats<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "ClusterStats", new [] { "/_cluster/stats", "/_cluster/stats/nodes/{node_id}" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("ClusterStats", p, new [] { GET }, "/_cluster/stats", "/_cluster/stats/nodes/{node_id}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> ClusterStatsDispatchAsync<T>(ElasticsearchPathInfo<ClusterStatsRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> ClusterStatsDispatchAsync<T>(ElasticsearchPathInfo<ClusterStatsRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.NodeId))
-						return this.LowLevelClient.ClusterStatsAsync<T>(pathInfo.NodeId,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.ClusterStatsAsync<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.NodeId)) return _lowLevel.ClusterStatsAsync<T>(p.NodeId,u => p.RequestParameters);
+					return _lowLevel.ClusterStatsAsync<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "ClusterStats", new [] { "/_cluster/stats", "/_cluster/stats/nodes/{node_id}" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("ClusterStats", p, new [] { GET }, "/_cluster/stats", "/_cluster/stats/nodes/{node_id}");
 		}
 		
-		internal ElasticsearchResponse<T> CountDispatch<T>(ElasticsearchPathInfo<CountRequestParameters> pathInfo , object body)
+		internal ElasticsearchResponse<T> CountDispatch<T>(ElasticsearchPathInfo<CountRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.Count<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.Count<T>(pathInfo.Index,body,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.Count<T>(body,u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Index, p.Type)) return _lowLevel.Count<T>(p.Index,p.Type,body,u => p.RequestParameters);
+					if (AllSet(p.Index)) return _lowLevel.Count<T>(p.Index,body,u => p.RequestParameters);
+					return _lowLevel.Count<T>(body,u => p.RequestParameters);
 
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.CountGet<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.CountGet<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.CountGet<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index, p.Type)) return _lowLevel.CountGet<T>(p.Index,p.Type,u => p.RequestParameters);
+					if (AllSet(p.Index)) return _lowLevel.CountGet<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.CountGet<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "Count", new [] { "/_count", "/{index}/_count", "/{index}/{type}/_count" }, new [] { PathInfoHttpMethod.POST, PathInfoHttpMethod.GET });
+			throw InvalidDispatch("Count", p, new [] { POST, GET }, "/_count", "/{index}/_count", "/{index}/{type}/_count");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> CountDispatchAsync<T>(ElasticsearchPathInfo<CountRequestParameters> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> CountDispatchAsync<T>(ElasticsearchPathInfo<CountRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.CountAsync<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.CountAsync<T>(pathInfo.Index,body,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.CountAsync<T>(body,u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Index, p.Type)) return _lowLevel.CountAsync<T>(p.Index,p.Type,body,u => p.RequestParameters);
+					if (AllSet(p.Index)) return _lowLevel.CountAsync<T>(p.Index,body,u => p.RequestParameters);
+					return _lowLevel.CountAsync<T>(body,u => p.RequestParameters);
 
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.CountGetAsync<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.CountGetAsync<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.CountGetAsync<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index, p.Type)) return _lowLevel.CountGetAsync<T>(p.Index,p.Type,u => p.RequestParameters);
+					if (AllSet(p.Index)) return _lowLevel.CountGetAsync<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.CountGetAsync<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "Count", new [] { "/_count", "/{index}/_count", "/{index}/{type}/_count" }, new [] { PathInfoHttpMethod.POST, PathInfoHttpMethod.GET });
+			throw InvalidDispatch("Count", p, new [] { POST, GET }, "/_count", "/{index}/_count", "/{index}/{type}/_count");
 		}
 		
-		internal ElasticsearchResponse<T> CountPercolateDispatch<T>(ElasticsearchPathInfo<PercolateCountRequestParameters> pathInfo , object body)
+		internal ElasticsearchResponse<T> CountPercolateDispatch<T>(ElasticsearchPathInfo<PercolateCountRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index, pathInfo.Type, pathInfo.Id))
-						return this.LowLevelClient.CountPercolateGet<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.CountPercolateGet<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index, p.Type, p.Id)) return _lowLevel.CountPercolateGet<T>(p.Index,p.Type,p.Id,u => p.RequestParameters);
+					if (AllSet(p.Index, p.Type)) return _lowLevel.CountPercolateGet<T>(p.Index,p.Type,u => p.RequestParameters);
 					break;
 
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Index, pathInfo.Type, pathInfo.Id))
-						return this.LowLevelClient.CountPercolate<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.CountPercolate<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Index, p.Type, p.Id)) return _lowLevel.CountPercolate<T>(p.Index,p.Type,p.Id,body,u => p.RequestParameters);
+					if (AllSet(p.Index, p.Type)) return _lowLevel.CountPercolate<T>(p.Index,p.Type,body,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "CountPercolate", new [] { "/{index}/{type}/_percolate/count", "/{index}/{type}/{id}/_percolate/count" }, new [] { PathInfoHttpMethod.GET, PathInfoHttpMethod.POST });
+			throw InvalidDispatch("CountPercolate", p, new [] { GET, POST }, "/{index}/{type}/_percolate/count", "/{index}/{type}/{id}/_percolate/count");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> CountPercolateDispatchAsync<T>(ElasticsearchPathInfo<PercolateCountRequestParameters> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> CountPercolateDispatchAsync<T>(ElasticsearchPathInfo<PercolateCountRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index, pathInfo.Type, pathInfo.Id))
-						return this.LowLevelClient.CountPercolateGetAsync<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.CountPercolateGetAsync<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index, p.Type, p.Id)) return _lowLevel.CountPercolateGetAsync<T>(p.Index,p.Type,p.Id,u => p.RequestParameters);
+					if (AllSet(p.Index, p.Type)) return _lowLevel.CountPercolateGetAsync<T>(p.Index,p.Type,u => p.RequestParameters);
 					break;
 
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Index, pathInfo.Type, pathInfo.Id))
-						return this.LowLevelClient.CountPercolateAsync<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.CountPercolateAsync<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Index, p.Type, p.Id)) return _lowLevel.CountPercolateAsync<T>(p.Index,p.Type,p.Id,body,u => p.RequestParameters);
+					if (AllSet(p.Index, p.Type)) return _lowLevel.CountPercolateAsync<T>(p.Index,p.Type,body,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "CountPercolate", new [] { "/{index}/{type}/_percolate/count", "/{index}/{type}/{id}/_percolate/count" }, new [] { PathInfoHttpMethod.GET, PathInfoHttpMethod.POST });
+			throw InvalidDispatch("CountPercolate", p, new [] { GET, POST }, "/{index}/{type}/_percolate/count", "/{index}/{type}/{id}/_percolate/count");
 		}
 		
-		internal ElasticsearchResponse<T> DeleteDispatch<T>(ElasticsearchPathInfo<DeleteRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> DeleteDispatch<T>(ElasticsearchPathInfo<DeleteRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.DELETE:
-					if (AllSet(pathInfo.Index, pathInfo.Type, pathInfo.Id))
-						return this.LowLevelClient.Delete<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,u => pathInfo.RequestParameters);
+				case DELETE:
+					if (AllSet(p.Index, p.Type, p.Id)) return _lowLevel.Delete<T>(p.Index,p.Type,p.Id,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "Delete", new [] { "/{index}/{type}/{id}" }, new [] { PathInfoHttpMethod.DELETE });
+			throw InvalidDispatch("Delete", p, new [] { DELETE }, "/{index}/{type}/{id}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> DeleteDispatchAsync<T>(ElasticsearchPathInfo<DeleteRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> DeleteDispatchAsync<T>(ElasticsearchPathInfo<DeleteRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.DELETE:
-					if (AllSet(pathInfo.Index, pathInfo.Type, pathInfo.Id))
-						return this.LowLevelClient.DeleteAsync<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,u => pathInfo.RequestParameters);
+				case DELETE:
+					if (AllSet(p.Index, p.Type, p.Id)) return _lowLevel.DeleteAsync<T>(p.Index,p.Type,p.Id,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "Delete", new [] { "/{index}/{type}/{id}" }, new [] { PathInfoHttpMethod.DELETE });
+			throw InvalidDispatch("Delete", p, new [] { DELETE }, "/{index}/{type}/{id}");
 		}
 		
-		internal ElasticsearchResponse<T> DeleteByQueryDispatch<T>(ElasticsearchPathInfo<DeleteByQueryRequestParameters> pathInfo , object body)
+		internal ElasticsearchResponse<T> DeleteByQueryDispatch<T>(ElasticsearchPathInfo<DeleteByQueryRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.DELETE:
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.DeleteByQuery<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.DeleteByQuery<T>(pathInfo.Index,body,u => pathInfo.RequestParameters);
+				case DELETE:
+					if (AllSet(p.Index, p.Type)) return _lowLevel.DeleteByQuery<T>(p.Index,p.Type,body,u => p.RequestParameters);
+					if (AllSet(p.Index)) return _lowLevel.DeleteByQuery<T>(p.Index,body,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "DeleteByQuery", new [] { "/{index}/_query", "/{index}/{type}/_query" }, new [] { PathInfoHttpMethod.DELETE });
+			throw InvalidDispatch("DeleteByQuery", p, new [] { DELETE }, "/{index}/_query", "/{index}/{type}/_query");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> DeleteByQueryDispatchAsync<T>(ElasticsearchPathInfo<DeleteByQueryRequestParameters> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> DeleteByQueryDispatchAsync<T>(ElasticsearchPathInfo<DeleteByQueryRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.DELETE:
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.DeleteByQueryAsync<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.DeleteByQueryAsync<T>(pathInfo.Index,body,u => pathInfo.RequestParameters);
+				case DELETE:
+					if (AllSet(p.Index, p.Type)) return _lowLevel.DeleteByQueryAsync<T>(p.Index,p.Type,body,u => p.RequestParameters);
+					if (AllSet(p.Index)) return _lowLevel.DeleteByQueryAsync<T>(p.Index,body,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "DeleteByQuery", new [] { "/{index}/_query", "/{index}/{type}/_query" }, new [] { PathInfoHttpMethod.DELETE });
+			throw InvalidDispatch("DeleteByQuery", p, new [] { DELETE }, "/{index}/_query", "/{index}/{type}/_query");
 		}
 		
-		internal ElasticsearchResponse<T> DeleteScriptDispatch<T>(ElasticsearchPathInfo<DeleteScriptRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> DeleteScriptDispatch<T>(ElasticsearchPathInfo<DeleteScriptRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.DELETE:
-					if (AllSet(pathInfo.Lang, pathInfo.Id))
-						return this.LowLevelClient.DeleteScript<T>(pathInfo.Lang,pathInfo.Id,u => pathInfo.RequestParameters);
+				case DELETE:
+					if (AllSet(p.Lang, p.Id)) return _lowLevel.DeleteScript<T>(p.Lang,p.Id,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "DeleteScript", new [] { "/_scripts/{lang}/{id}" }, new [] { PathInfoHttpMethod.DELETE });
+			throw InvalidDispatch("DeleteScript", p, new [] { DELETE }, "/_scripts/{lang}/{id}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> DeleteScriptDispatchAsync<T>(ElasticsearchPathInfo<DeleteScriptRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> DeleteScriptDispatchAsync<T>(ElasticsearchPathInfo<DeleteScriptRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.DELETE:
-					if (AllSet(pathInfo.Lang, pathInfo.Id))
-						return this.LowLevelClient.DeleteScriptAsync<T>(pathInfo.Lang,pathInfo.Id,u => pathInfo.RequestParameters);
+				case DELETE:
+					if (AllSet(p.Lang, p.Id)) return _lowLevel.DeleteScriptAsync<T>(p.Lang,p.Id,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "DeleteScript", new [] { "/_scripts/{lang}/{id}" }, new [] { PathInfoHttpMethod.DELETE });
+			throw InvalidDispatch("DeleteScript", p, new [] { DELETE }, "/_scripts/{lang}/{id}");
 		}
 		
-		internal ElasticsearchResponse<T> DeleteTemplateDispatch<T>(ElasticsearchPathInfo<DeleteTemplateRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> DeleteTemplateDispatch<T>(ElasticsearchPathInfo<DeleteTemplateRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.DELETE:
-					if (AllSet(pathInfo.Id))
-						return this.LowLevelClient.DeleteTemplate<T>(pathInfo.Id,u => pathInfo.RequestParameters);
+				case DELETE:
+					if (AllSet(p.Id)) return _lowLevel.DeleteTemplate<T>(p.Id,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "DeleteTemplate", new [] { "/_search/template/{id}" }, new [] { PathInfoHttpMethod.DELETE });
+			throw InvalidDispatch("DeleteTemplate", p, new [] { DELETE }, "/_search/template/{id}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> DeleteTemplateDispatchAsync<T>(ElasticsearchPathInfo<DeleteTemplateRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> DeleteTemplateDispatchAsync<T>(ElasticsearchPathInfo<DeleteTemplateRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.DELETE:
-					if (AllSet(pathInfo.Id))
-						return this.LowLevelClient.DeleteTemplateAsync<T>(pathInfo.Id,u => pathInfo.RequestParameters);
+				case DELETE:
+					if (AllSet(p.Id)) return _lowLevel.DeleteTemplateAsync<T>(p.Id,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "DeleteTemplate", new [] { "/_search/template/{id}" }, new [] { PathInfoHttpMethod.DELETE });
+			throw InvalidDispatch("DeleteTemplate", p, new [] { DELETE }, "/_search/template/{id}");
 		}
 		
-		internal ElasticsearchResponse<T> ExistsDispatch<T>(ElasticsearchPathInfo<DocumentExistsRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> ExistsDispatch<T>(ElasticsearchPathInfo<DocumentExistsRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.HEAD:
-					if (AllSet(pathInfo.Index, pathInfo.Type, pathInfo.Id))
-						return this.LowLevelClient.Exists<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,u => pathInfo.RequestParameters);
+				case HEAD:
+					if (AllSet(p.Index, p.Type, p.Id)) return _lowLevel.Exists<T>(p.Index,p.Type,p.Id,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "Exists", new [] { "/{index}/{type}/{id}" }, new [] { PathInfoHttpMethod.HEAD });
+			throw InvalidDispatch("Exists", p, new [] { HEAD }, "/{index}/{type}/{id}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> ExistsDispatchAsync<T>(ElasticsearchPathInfo<DocumentExistsRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> ExistsDispatchAsync<T>(ElasticsearchPathInfo<DocumentExistsRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.HEAD:
-					if (AllSet(pathInfo.Index, pathInfo.Type, pathInfo.Id))
-						return this.LowLevelClient.ExistsAsync<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,u => pathInfo.RequestParameters);
+				case HEAD:
+					if (AllSet(p.Index, p.Type, p.Id)) return _lowLevel.ExistsAsync<T>(p.Index,p.Type,p.Id,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "Exists", new [] { "/{index}/{type}/{id}" }, new [] { PathInfoHttpMethod.HEAD });
+			throw InvalidDispatch("Exists", p, new [] { HEAD }, "/{index}/{type}/{id}");
 		}
 		
-		internal ElasticsearchResponse<T> ExplainDispatch<T>(ElasticsearchPathInfo<ExplainRequestParameters> pathInfo , object body)
+		internal ElasticsearchResponse<T> ExplainDispatch<T>(ElasticsearchPathInfo<ExplainRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index, pathInfo.Type, pathInfo.Id))
-						return this.LowLevelClient.ExplainGet<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index, p.Type, p.Id)) return _lowLevel.ExplainGet<T>(p.Index,p.Type,p.Id,u => p.RequestParameters);
 					break;
 
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Index, pathInfo.Type, pathInfo.Id))
-						return this.LowLevelClient.Explain<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Index, p.Type, p.Id)) return _lowLevel.Explain<T>(p.Index,p.Type,p.Id,body,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "Explain", new [] { "/{index}/{type}/{id}/_explain" }, new [] { PathInfoHttpMethod.GET, PathInfoHttpMethod.POST });
+			throw InvalidDispatch("Explain", p, new [] { GET, POST }, "/{index}/{type}/{id}/_explain");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> ExplainDispatchAsync<T>(ElasticsearchPathInfo<ExplainRequestParameters> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> ExplainDispatchAsync<T>(ElasticsearchPathInfo<ExplainRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index, pathInfo.Type, pathInfo.Id))
-						return this.LowLevelClient.ExplainGetAsync<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index, p.Type, p.Id)) return _lowLevel.ExplainGetAsync<T>(p.Index,p.Type,p.Id,u => p.RequestParameters);
 					break;
 
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Index, pathInfo.Type, pathInfo.Id))
-						return this.LowLevelClient.ExplainAsync<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Index, p.Type, p.Id)) return _lowLevel.ExplainAsync<T>(p.Index,p.Type,p.Id,body,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "Explain", new [] { "/{index}/{type}/{id}/_explain" }, new [] { PathInfoHttpMethod.GET, PathInfoHttpMethod.POST });
+			throw InvalidDispatch("Explain", p, new [] { GET, POST }, "/{index}/{type}/{id}/_explain");
 		}
 		
-		internal ElasticsearchResponse<T> FieldStatsDispatch<T>(ElasticsearchPathInfo<FieldStatsRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> FieldStatsDispatch<T>(ElasticsearchPathInfo<FieldStatsRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.FieldStatsGet<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.FieldStatsGet<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index)) return _lowLevel.FieldStatsGet<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.FieldStatsGet<T>(u => p.RequestParameters);
 
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.FieldStats<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.FieldStats<T>(u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Index)) return _lowLevel.FieldStats<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.FieldStats<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "FieldStats", new [] { "/_field_stats", "/{index}/_field_stats" }, new [] { PathInfoHttpMethod.GET, PathInfoHttpMethod.POST });
+			throw InvalidDispatch("FieldStats", p, new [] { GET, POST }, "/_field_stats", "/{index}/_field_stats");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> FieldStatsDispatchAsync<T>(ElasticsearchPathInfo<FieldStatsRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> FieldStatsDispatchAsync<T>(ElasticsearchPathInfo<FieldStatsRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.FieldStatsGetAsync<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.FieldStatsGetAsync<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index)) return _lowLevel.FieldStatsGetAsync<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.FieldStatsGetAsync<T>(u => p.RequestParameters);
 
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.FieldStatsAsync<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.FieldStatsAsync<T>(u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Index)) return _lowLevel.FieldStatsAsync<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.FieldStatsAsync<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "FieldStats", new [] { "/_field_stats", "/{index}/_field_stats" }, new [] { PathInfoHttpMethod.GET, PathInfoHttpMethod.POST });
+			throw InvalidDispatch("FieldStats", p, new [] { GET, POST }, "/_field_stats", "/{index}/_field_stats");
 		}
 		
-		internal ElasticsearchResponse<T> GetDispatch<T>(ElasticsearchPathInfo<GetRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> GetDispatch<T>(ElasticsearchPathInfo<GetRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index, pathInfo.Type, pathInfo.Id))
-						return this.LowLevelClient.Get<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index, p.Type, p.Id)) return _lowLevel.Get<T>(p.Index,p.Type,p.Id,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "Get", new [] { "/{index}/{type}/{id}" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("Get", p, new [] { GET }, "/{index}/{type}/{id}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> GetDispatchAsync<T>(ElasticsearchPathInfo<GetRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> GetDispatchAsync<T>(ElasticsearchPathInfo<GetRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index, pathInfo.Type, pathInfo.Id))
-						return this.LowLevelClient.GetAsync<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index, p.Type, p.Id)) return _lowLevel.GetAsync<T>(p.Index,p.Type,p.Id,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "Get", new [] { "/{index}/{type}/{id}" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("Get", p, new [] { GET }, "/{index}/{type}/{id}");
 		}
 		
-		internal ElasticsearchResponse<T> GetScriptDispatch<T>(ElasticsearchPathInfo<GetScriptRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> GetScriptDispatch<T>(ElasticsearchPathInfo<GetScriptRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Lang, pathInfo.Id))
-						return this.LowLevelClient.GetScript<T>(pathInfo.Lang,pathInfo.Id,u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Lang, p.Id)) return _lowLevel.GetScript<T>(p.Lang,p.Id,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "GetScript", new [] { "/_scripts/{lang}/{id}" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("GetScript", p, new [] { GET }, "/_scripts/{lang}/{id}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> GetScriptDispatchAsync<T>(ElasticsearchPathInfo<GetScriptRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> GetScriptDispatchAsync<T>(ElasticsearchPathInfo<GetScriptRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Lang, pathInfo.Id))
-						return this.LowLevelClient.GetScriptAsync<T>(pathInfo.Lang,pathInfo.Id,u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Lang, p.Id)) return _lowLevel.GetScriptAsync<T>(p.Lang,p.Id,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "GetScript", new [] { "/_scripts/{lang}/{id}" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("GetScript", p, new [] { GET }, "/_scripts/{lang}/{id}");
 		}
 		
-		internal ElasticsearchResponse<T> GetSourceDispatch<T>(ElasticsearchPathInfo<SourceRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> GetSourceDispatch<T>(ElasticsearchPathInfo<SourceRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index, pathInfo.Type, pathInfo.Id))
-						return this.LowLevelClient.GetSource<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index, p.Type, p.Id)) return _lowLevel.GetSource<T>(p.Index,p.Type,p.Id,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "GetSource", new [] { "/{index}/{type}/{id}/_source" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("GetSource", p, new [] { GET }, "/{index}/{type}/{id}/_source");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> GetSourceDispatchAsync<T>(ElasticsearchPathInfo<SourceRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> GetSourceDispatchAsync<T>(ElasticsearchPathInfo<SourceRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index, pathInfo.Type, pathInfo.Id))
-						return this.LowLevelClient.GetSourceAsync<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index, p.Type, p.Id)) return _lowLevel.GetSourceAsync<T>(p.Index,p.Type,p.Id,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "GetSource", new [] { "/{index}/{type}/{id}/_source" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("GetSource", p, new [] { GET }, "/{index}/{type}/{id}/_source");
 		}
 		
-		internal ElasticsearchResponse<T> GetTemplateDispatch<T>(ElasticsearchPathInfo<GetTemplateRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> GetTemplateDispatch<T>(ElasticsearchPathInfo<GetTemplateRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Id))
-						return this.LowLevelClient.GetTemplate<T>(pathInfo.Id,u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Id)) return _lowLevel.GetTemplate<T>(p.Id,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "GetTemplate", new [] { "/_search/template/{id}" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("GetTemplate", p, new [] { GET }, "/_search/template/{id}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> GetTemplateDispatchAsync<T>(ElasticsearchPathInfo<GetTemplateRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> GetTemplateDispatchAsync<T>(ElasticsearchPathInfo<GetTemplateRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Id))
-						return this.LowLevelClient.GetTemplateAsync<T>(pathInfo.Id,u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Id)) return _lowLevel.GetTemplateAsync<T>(p.Id,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "GetTemplate", new [] { "/_search/template/{id}" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("GetTemplate", p, new [] { GET }, "/_search/template/{id}");
 		}
 		
-		internal ElasticsearchResponse<T> IndexDispatch<T>(ElasticsearchPathInfo<IndexRequestParameters> pathInfo , object body)
+		internal ElasticsearchResponse<T> IndexDispatch<T>(ElasticsearchPathInfo<IndexRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Index, pathInfo.Type, pathInfo.Id))
-						return this.LowLevelClient.Index<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.Index<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Index, p.Type, p.Id)) return _lowLevel.Index<T>(p.Index,p.Type,p.Id,body,u => p.RequestParameters);
+					if (AllSet(p.Index, p.Type)) return _lowLevel.Index<T>(p.Index,p.Type,body,u => p.RequestParameters);
 					break;
 
-				case PathInfoHttpMethod.PUT:
-					if (AllSet(pathInfo.Index, pathInfo.Type, pathInfo.Id))
-						return this.LowLevelClient.IndexPut<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.IndexPut<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.RequestParameters);
+				case PUT:
+					if (AllSet(p.Index, p.Type, p.Id)) return _lowLevel.IndexPut<T>(p.Index,p.Type,p.Id,body,u => p.RequestParameters);
+					if (AllSet(p.Index, p.Type)) return _lowLevel.IndexPut<T>(p.Index,p.Type,body,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "Index", new [] { "/{index}/{type}", "/{index}/{type}/{id}" }, new [] { PathInfoHttpMethod.POST, PathInfoHttpMethod.PUT });
+			throw InvalidDispatch("Index", p, new [] { POST, PUT }, "/{index}/{type}", "/{index}/{type}/{id}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndexDispatchAsync<T>(ElasticsearchPathInfo<IndexRequestParameters> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> IndexDispatchAsync<T>(ElasticsearchPathInfo<IndexRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Index, pathInfo.Type, pathInfo.Id))
-						return this.LowLevelClient.IndexAsync<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.IndexAsync<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Index, p.Type, p.Id)) return _lowLevel.IndexAsync<T>(p.Index,p.Type,p.Id,body,u => p.RequestParameters);
+					if (AllSet(p.Index, p.Type)) return _lowLevel.IndexAsync<T>(p.Index,p.Type,body,u => p.RequestParameters);
 					break;
 
-				case PathInfoHttpMethod.PUT:
-					if (AllSet(pathInfo.Index, pathInfo.Type, pathInfo.Id))
-						return this.LowLevelClient.IndexPutAsync<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.IndexPutAsync<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.RequestParameters);
+				case PUT:
+					if (AllSet(p.Index, p.Type, p.Id)) return _lowLevel.IndexPutAsync<T>(p.Index,p.Type,p.Id,body,u => p.RequestParameters);
+					if (AllSet(p.Index, p.Type)) return _lowLevel.IndexPutAsync<T>(p.Index,p.Type,body,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "Index", new [] { "/{index}/{type}", "/{index}/{type}/{id}" }, new [] { PathInfoHttpMethod.POST, PathInfoHttpMethod.PUT });
+			throw InvalidDispatch("Index", p, new [] { POST, PUT }, "/{index}/{type}", "/{index}/{type}/{id}");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesAnalyzeDispatch<T>(ElasticsearchPathInfo<AnalyzeRequestParameters> pathInfo , object body)
+		internal ElasticsearchResponse<T> IndicesAnalyzeDispatch<T>(ElasticsearchPathInfo<AnalyzeRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.IndicesAnalyzeGet<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.IndicesAnalyzeGetForAll<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index)) return _lowLevel.IndicesAnalyzeGet<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.IndicesAnalyzeGetForAll<T>(u => p.RequestParameters);
 
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.IndicesAnalyze<T>(pathInfo.Index,body,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.IndicesAnalyzeForAll<T>(body,u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Index)) return _lowLevel.IndicesAnalyze<T>(p.Index,body,u => p.RequestParameters);
+					return _lowLevel.IndicesAnalyzeForAll<T>(body,u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesAnalyze", new [] { "/_analyze", "/{index}/_analyze" }, new [] { PathInfoHttpMethod.GET, PathInfoHttpMethod.POST });
+			throw InvalidDispatch("IndicesAnalyze", p, new [] { GET, POST }, "/_analyze", "/{index}/_analyze");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesAnalyzeDispatchAsync<T>(ElasticsearchPathInfo<AnalyzeRequestParameters> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> IndicesAnalyzeDispatchAsync<T>(ElasticsearchPathInfo<AnalyzeRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.IndicesAnalyzeGetAsync<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.IndicesAnalyzeGetForAllAsync<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index)) return _lowLevel.IndicesAnalyzeGetAsync<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.IndicesAnalyzeGetForAllAsync<T>(u => p.RequestParameters);
 
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.IndicesAnalyzeAsync<T>(pathInfo.Index,body,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.IndicesAnalyzeForAllAsync<T>(body,u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Index)) return _lowLevel.IndicesAnalyzeAsync<T>(p.Index,body,u => p.RequestParameters);
+					return _lowLevel.IndicesAnalyzeForAllAsync<T>(body,u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesAnalyze", new [] { "/_analyze", "/{index}/_analyze" }, new [] { PathInfoHttpMethod.GET, PathInfoHttpMethod.POST });
+			throw InvalidDispatch("IndicesAnalyze", p, new [] { GET, POST }, "/_analyze", "/{index}/_analyze");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesClearCacheDispatch<T>(ElasticsearchPathInfo<ClearCacheRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> IndicesClearCacheDispatch<T>(ElasticsearchPathInfo<ClearCacheRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.IndicesClearCache<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.IndicesClearCacheForAll<T>(u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Index)) return _lowLevel.IndicesClearCache<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.IndicesClearCacheForAll<T>(u => p.RequestParameters);
 
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.IndicesClearCacheGet<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.IndicesClearCacheGetForAll<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index)) return _lowLevel.IndicesClearCacheGet<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.IndicesClearCacheGetForAll<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesClearCache", new [] { "/_cache/clear", "/{index}/_cache/clear" }, new [] { PathInfoHttpMethod.POST, PathInfoHttpMethod.GET });
+			throw InvalidDispatch("IndicesClearCache", p, new [] { POST, GET }, "/_cache/clear", "/{index}/_cache/clear");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesClearCacheDispatchAsync<T>(ElasticsearchPathInfo<ClearCacheRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> IndicesClearCacheDispatchAsync<T>(ElasticsearchPathInfo<ClearCacheRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.IndicesClearCacheAsync<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.IndicesClearCacheForAllAsync<T>(u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Index)) return _lowLevel.IndicesClearCacheAsync<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.IndicesClearCacheForAllAsync<T>(u => p.RequestParameters);
 
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.IndicesClearCacheGetAsync<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.IndicesClearCacheGetForAllAsync<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index)) return _lowLevel.IndicesClearCacheGetAsync<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.IndicesClearCacheGetForAllAsync<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesClearCache", new [] { "/_cache/clear", "/{index}/_cache/clear" }, new [] { PathInfoHttpMethod.POST, PathInfoHttpMethod.GET });
+			throw InvalidDispatch("IndicesClearCache", p, new [] { POST, GET }, "/_cache/clear", "/{index}/_cache/clear");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesCloseDispatch<T>(ElasticsearchPathInfo<CloseIndexRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> IndicesCloseDispatch<T>(ElasticsearchPathInfo<CloseIndexRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.IndicesClose<T>(pathInfo.Index,u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Index)) return _lowLevel.IndicesClose<T>(p.Index,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesClose", new [] { "/{index}/_close" }, new [] { PathInfoHttpMethod.POST });
+			throw InvalidDispatch("IndicesClose", p, new [] { POST }, "/{index}/_close");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesCloseDispatchAsync<T>(ElasticsearchPathInfo<CloseIndexRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> IndicesCloseDispatchAsync<T>(ElasticsearchPathInfo<CloseIndexRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.IndicesCloseAsync<T>(pathInfo.Index,u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Index)) return _lowLevel.IndicesCloseAsync<T>(p.Index,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesClose", new [] { "/{index}/_close" }, new [] { PathInfoHttpMethod.POST });
+			throw InvalidDispatch("IndicesClose", p, new [] { POST }, "/{index}/_close");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesCreateDispatch<T>(ElasticsearchPathInfo<CreateIndexRequestParameters> pathInfo , object body)
+		internal ElasticsearchResponse<T> IndicesCreateDispatch<T>(ElasticsearchPathInfo<CreateIndexRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.PUT:
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.IndicesCreate<T>(pathInfo.Index,body,u => pathInfo.RequestParameters);
+				case PUT:
+					if (AllSet(p.Index)) return _lowLevel.IndicesCreate<T>(p.Index,body,u => p.RequestParameters);
 					break;
 
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.IndicesCreatePost<T>(pathInfo.Index,body,u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Index)) return _lowLevel.IndicesCreatePost<T>(p.Index,body,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesCreate", new [] { "/{index}" }, new [] { PathInfoHttpMethod.PUT, PathInfoHttpMethod.POST });
+			throw InvalidDispatch("IndicesCreate", p, new [] { PUT, POST }, "/{index}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesCreateDispatchAsync<T>(ElasticsearchPathInfo<CreateIndexRequestParameters> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> IndicesCreateDispatchAsync<T>(ElasticsearchPathInfo<CreateIndexRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.PUT:
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.IndicesCreateAsync<T>(pathInfo.Index,body,u => pathInfo.RequestParameters);
+				case PUT:
+					if (AllSet(p.Index)) return _lowLevel.IndicesCreateAsync<T>(p.Index,body,u => p.RequestParameters);
 					break;
 
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.IndicesCreatePostAsync<T>(pathInfo.Index,body,u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Index)) return _lowLevel.IndicesCreatePostAsync<T>(p.Index,body,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesCreate", new [] { "/{index}" }, new [] { PathInfoHttpMethod.PUT, PathInfoHttpMethod.POST });
+			throw InvalidDispatch("IndicesCreate", p, new [] { PUT, POST }, "/{index}");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesDeleteDispatch<T>(ElasticsearchPathInfo<DeleteIndexRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> IndicesDeleteDispatch<T>(ElasticsearchPathInfo<DeleteIndexRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.DELETE:
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.IndicesDelete<T>(pathInfo.Index,u => pathInfo.RequestParameters);
+				case DELETE:
+					if (AllSet(p.Index)) return _lowLevel.IndicesDelete<T>(p.Index,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesDelete", new [] { "/{index}" }, new [] { PathInfoHttpMethod.DELETE });
+			throw InvalidDispatch("IndicesDelete", p, new [] { DELETE }, "/{index}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesDeleteDispatchAsync<T>(ElasticsearchPathInfo<DeleteIndexRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> IndicesDeleteDispatchAsync<T>(ElasticsearchPathInfo<DeleteIndexRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.DELETE:
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.IndicesDeleteAsync<T>(pathInfo.Index,u => pathInfo.RequestParameters);
+				case DELETE:
+					if (AllSet(p.Index)) return _lowLevel.IndicesDeleteAsync<T>(p.Index,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesDelete", new [] { "/{index}" }, new [] { PathInfoHttpMethod.DELETE });
+			throw InvalidDispatch("IndicesDelete", p, new [] { DELETE }, "/{index}");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesDeleteAliasDispatch<T>(ElasticsearchPathInfo<DeleteAliasRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> IndicesDeleteAliasDispatch<T>(ElasticsearchPathInfo<DeleteAliasRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.DELETE:
-					if (AllSet(pathInfo.Index, pathInfo.Name))
-						return this.LowLevelClient.IndicesDeleteAlias<T>(pathInfo.Index,pathInfo.Name,u => pathInfo.RequestParameters);
+				case DELETE:
+					if (AllSet(p.Index, p.Name)) return _lowLevel.IndicesDeleteAlias<T>(p.Index,p.Name,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesDeleteAlias", new [] { "/{index}/_alias/{name}", "/{index}/_aliases/{name}" }, new [] { PathInfoHttpMethod.DELETE });
+			throw InvalidDispatch("IndicesDeleteAlias", p, new [] { DELETE }, "/{index}/_alias/{name}", "/{index}/_aliases/{name}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesDeleteAliasDispatchAsync<T>(ElasticsearchPathInfo<DeleteAliasRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> IndicesDeleteAliasDispatchAsync<T>(ElasticsearchPathInfo<DeleteAliasRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.DELETE:
-					if (AllSet(pathInfo.Index, pathInfo.Name))
-						return this.LowLevelClient.IndicesDeleteAliasAsync<T>(pathInfo.Index,pathInfo.Name,u => pathInfo.RequestParameters);
+				case DELETE:
+					if (AllSet(p.Index, p.Name)) return _lowLevel.IndicesDeleteAliasAsync<T>(p.Index,p.Name,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesDeleteAlias", new [] { "/{index}/_alias/{name}", "/{index}/_aliases/{name}" }, new [] { PathInfoHttpMethod.DELETE });
+			throw InvalidDispatch("IndicesDeleteAlias", p, new [] { DELETE }, "/{index}/_alias/{name}", "/{index}/_aliases/{name}");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesDeleteMappingDispatch<T>(ElasticsearchPathInfo<DeleteMappingRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> IndicesDeleteMappingDispatch<T>(ElasticsearchPathInfo<DeleteMappingRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.DELETE:
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.IndicesDeleteMapping<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.RequestParameters);
+				case DELETE:
+					if (AllSet(p.Index, p.Type)) return _lowLevel.IndicesDeleteMapping<T>(p.Index,p.Type,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesDeleteMapping", new [] { "/{index}/{type}/_mapping", "/{index}/{type}", "/{index}/_mapping/{type}", "/{index}/{type}/_mappings", "/{index}/_mappings/{type}" }, new [] { PathInfoHttpMethod.DELETE });
+			throw InvalidDispatch("IndicesDeleteMapping", p, new [] { DELETE }, "/{index}/{type}/_mapping", "/{index}/{type}", "/{index}/_mapping/{type}", "/{index}/{type}/_mappings", "/{index}/_mappings/{type}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesDeleteMappingDispatchAsync<T>(ElasticsearchPathInfo<DeleteMappingRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> IndicesDeleteMappingDispatchAsync<T>(ElasticsearchPathInfo<DeleteMappingRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.DELETE:
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.IndicesDeleteMappingAsync<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.RequestParameters);
+				case DELETE:
+					if (AllSet(p.Index, p.Type)) return _lowLevel.IndicesDeleteMappingAsync<T>(p.Index,p.Type,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesDeleteMapping", new [] { "/{index}/{type}/_mapping", "/{index}/{type}", "/{index}/_mapping/{type}", "/{index}/{type}/_mappings", "/{index}/_mappings/{type}" }, new [] { PathInfoHttpMethod.DELETE });
+			throw InvalidDispatch("IndicesDeleteMapping", p, new [] { DELETE }, "/{index}/{type}/_mapping", "/{index}/{type}", "/{index}/_mapping/{type}", "/{index}/{type}/_mappings", "/{index}/_mappings/{type}");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesDeleteTemplateDispatch<T>(ElasticsearchPathInfo<DeleteTemplateRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> IndicesDeleteTemplateDispatch<T>(ElasticsearchPathInfo<DeleteTemplateRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.DELETE:
-					if (AllSet(pathInfo.Name))
-						return this.LowLevelClient.IndicesDeleteTemplateForAll<T>(pathInfo.Name,u => pathInfo.RequestParameters);
+				case DELETE:
+					if (AllSet(p.Name)) return _lowLevel.IndicesDeleteTemplateForAll<T>(p.Name,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesDeleteTemplate", new [] { "/_template/{name}" }, new [] { PathInfoHttpMethod.DELETE });
+			throw InvalidDispatch("IndicesDeleteTemplate", p, new [] { DELETE }, "/_template/{name}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesDeleteTemplateDispatchAsync<T>(ElasticsearchPathInfo<DeleteTemplateRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> IndicesDeleteTemplateDispatchAsync<T>(ElasticsearchPathInfo<DeleteTemplateRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.DELETE:
-					if (AllSet(pathInfo.Name))
-						return this.LowLevelClient.IndicesDeleteTemplateForAllAsync<T>(pathInfo.Name,u => pathInfo.RequestParameters);
+				case DELETE:
+					if (AllSet(p.Name)) return _lowLevel.IndicesDeleteTemplateForAllAsync<T>(p.Name,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesDeleteTemplate", new [] { "/_template/{name}" }, new [] { PathInfoHttpMethod.DELETE });
+			throw InvalidDispatch("IndicesDeleteTemplate", p, new [] { DELETE }, "/_template/{name}");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesDeleteWarmerDispatch<T>(ElasticsearchPathInfo<DeleteWarmerRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> IndicesDeleteWarmerDispatch<T>(ElasticsearchPathInfo<DeleteWarmerRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.DELETE:
-					if (AllSet(pathInfo.Index, pathInfo.Name))
-						return this.LowLevelClient.IndicesDeleteWarmer<T>(pathInfo.Index,pathInfo.Name,u => pathInfo.RequestParameters);
+				case DELETE:
+					if (AllSet(p.Index, p.Name)) return _lowLevel.IndicesDeleteWarmer<T>(p.Index,p.Name,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesDeleteWarmer", new [] { "/{index}/_warmer/{name}", "/{index}/_warmers/{name}" }, new [] { PathInfoHttpMethod.DELETE });
+			throw InvalidDispatch("IndicesDeleteWarmer", p, new [] { DELETE }, "/{index}/_warmer/{name}", "/{index}/_warmers/{name}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesDeleteWarmerDispatchAsync<T>(ElasticsearchPathInfo<DeleteWarmerRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> IndicesDeleteWarmerDispatchAsync<T>(ElasticsearchPathInfo<DeleteWarmerRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.DELETE:
-					if (AllSet(pathInfo.Index, pathInfo.Name))
-						return this.LowLevelClient.IndicesDeleteWarmerAsync<T>(pathInfo.Index,pathInfo.Name,u => pathInfo.RequestParameters);
+				case DELETE:
+					if (AllSet(p.Index, p.Name)) return _lowLevel.IndicesDeleteWarmerAsync<T>(p.Index,p.Name,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesDeleteWarmer", new [] { "/{index}/_warmer/{name}", "/{index}/_warmers/{name}" }, new [] { PathInfoHttpMethod.DELETE });
+			throw InvalidDispatch("IndicesDeleteWarmer", p, new [] { DELETE }, "/{index}/_warmer/{name}", "/{index}/_warmers/{name}");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesExistsDispatch<T>(ElasticsearchPathInfo<IndexExistsRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> IndicesExistsDispatch<T>(ElasticsearchPathInfo<IndexExistsRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.HEAD:
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.IndicesExists<T>(pathInfo.Index,u => pathInfo.RequestParameters);
+				case HEAD:
+					if (AllSet(p.Index)) return _lowLevel.IndicesExists<T>(p.Index,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesExists", new [] { "/{index}" }, new [] { PathInfoHttpMethod.HEAD });
+			throw InvalidDispatch("IndicesExists", p, new [] { HEAD }, "/{index}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesExistsDispatchAsync<T>(ElasticsearchPathInfo<IndexExistsRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> IndicesExistsDispatchAsync<T>(ElasticsearchPathInfo<IndexExistsRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.HEAD:
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.IndicesExistsAsync<T>(pathInfo.Index,u => pathInfo.RequestParameters);
+				case HEAD:
+					if (AllSet(p.Index)) return _lowLevel.IndicesExistsAsync<T>(p.Index,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesExists", new [] { "/{index}" }, new [] { PathInfoHttpMethod.HEAD });
+			throw InvalidDispatch("IndicesExists", p, new [] { HEAD }, "/{index}");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesExistsAliasDispatch<T>(ElasticsearchPathInfo<AliasExistsRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> IndicesExistsAliasDispatch<T>(ElasticsearchPathInfo<AliasExistsRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.HEAD:
-					if (AllSet(pathInfo.Index, pathInfo.Name))
-						return this.LowLevelClient.IndicesExistsAlias<T>(pathInfo.Index,pathInfo.Name,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Name))
-						return this.LowLevelClient.IndicesExistsAliasForAll<T>(pathInfo.Name,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.IndicesExistsAlias<T>(pathInfo.Index,u => pathInfo.RequestParameters);
+				case HEAD:
+					if (AllSet(p.Index, p.Name)) return _lowLevel.IndicesExistsAlias<T>(p.Index,p.Name,u => p.RequestParameters);
+					if (AllSet(p.Name)) return _lowLevel.IndicesExistsAliasForAll<T>(p.Name,u => p.RequestParameters);
+					if (AllSet(p.Index)) return _lowLevel.IndicesExistsAlias<T>(p.Index,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesExistsAlias", new [] { "/_alias/{name}", "/{index}/_alias/{name}", "/{index}/_alias" }, new [] { PathInfoHttpMethod.HEAD });
+			throw InvalidDispatch("IndicesExistsAlias", p, new [] { HEAD }, "/_alias/{name}", "/{index}/_alias/{name}", "/{index}/_alias");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesExistsAliasDispatchAsync<T>(ElasticsearchPathInfo<AliasExistsRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> IndicesExistsAliasDispatchAsync<T>(ElasticsearchPathInfo<AliasExistsRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.HEAD:
-					if (AllSet(pathInfo.Index, pathInfo.Name))
-						return this.LowLevelClient.IndicesExistsAliasAsync<T>(pathInfo.Index,pathInfo.Name,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Name))
-						return this.LowLevelClient.IndicesExistsAliasForAllAsync<T>(pathInfo.Name,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.IndicesExistsAliasAsync<T>(pathInfo.Index,u => pathInfo.RequestParameters);
+				case HEAD:
+					if (AllSet(p.Index, p.Name)) return _lowLevel.IndicesExistsAliasAsync<T>(p.Index,p.Name,u => p.RequestParameters);
+					if (AllSet(p.Name)) return _lowLevel.IndicesExistsAliasForAllAsync<T>(p.Name,u => p.RequestParameters);
+					if (AllSet(p.Index)) return _lowLevel.IndicesExistsAliasAsync<T>(p.Index,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesExistsAlias", new [] { "/_alias/{name}", "/{index}/_alias/{name}", "/{index}/_alias" }, new [] { PathInfoHttpMethod.HEAD });
+			throw InvalidDispatch("IndicesExistsAlias", p, new [] { HEAD }, "/_alias/{name}", "/{index}/_alias/{name}", "/{index}/_alias");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesExistsTemplateDispatch<T>(ElasticsearchPathInfo<TemplateExistsRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> IndicesExistsTemplateDispatch<T>(ElasticsearchPathInfo<TemplateExistsRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.HEAD:
-					if (AllSet(pathInfo.Name))
-						return this.LowLevelClient.IndicesExistsTemplateForAll<T>(pathInfo.Name,u => pathInfo.RequestParameters);
+				case HEAD:
+					if (AllSet(p.Name)) return _lowLevel.IndicesExistsTemplateForAll<T>(p.Name,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesExistsTemplate", new [] { "/_template/{name}" }, new [] { PathInfoHttpMethod.HEAD });
+			throw InvalidDispatch("IndicesExistsTemplate", p, new [] { HEAD }, "/_template/{name}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesExistsTemplateDispatchAsync<T>(ElasticsearchPathInfo<TemplateExistsRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> IndicesExistsTemplateDispatchAsync<T>(ElasticsearchPathInfo<TemplateExistsRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.HEAD:
-					if (AllSet(pathInfo.Name))
-						return this.LowLevelClient.IndicesExistsTemplateForAllAsync<T>(pathInfo.Name,u => pathInfo.RequestParameters);
+				case HEAD:
+					if (AllSet(p.Name)) return _lowLevel.IndicesExistsTemplateForAllAsync<T>(p.Name,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesExistsTemplate", new [] { "/_template/{name}" }, new [] { PathInfoHttpMethod.HEAD });
+			throw InvalidDispatch("IndicesExistsTemplate", p, new [] { HEAD }, "/_template/{name}");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesExistsTypeDispatch<T>(ElasticsearchPathInfo<TypeExistsRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> IndicesExistsTypeDispatch<T>(ElasticsearchPathInfo<TypeExistsRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.HEAD:
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.IndicesExistsType<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.RequestParameters);
+				case HEAD:
+					if (AllSet(p.Index, p.Type)) return _lowLevel.IndicesExistsType<T>(p.Index,p.Type,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesExistsType", new [] { "/{index}/{type}" }, new [] { PathInfoHttpMethod.HEAD });
+			throw InvalidDispatch("IndicesExistsType", p, new [] { HEAD }, "/{index}/{type}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesExistsTypeDispatchAsync<T>(ElasticsearchPathInfo<TypeExistsRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> IndicesExistsTypeDispatchAsync<T>(ElasticsearchPathInfo<TypeExistsRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.HEAD:
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.IndicesExistsTypeAsync<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.RequestParameters);
+				case HEAD:
+					if (AllSet(p.Index, p.Type)) return _lowLevel.IndicesExistsTypeAsync<T>(p.Index,p.Type,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesExistsType", new [] { "/{index}/{type}" }, new [] { PathInfoHttpMethod.HEAD });
+			throw InvalidDispatch("IndicesExistsType", p, new [] { HEAD }, "/{index}/{type}");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesFlushDispatch<T>(ElasticsearchPathInfo<FlushRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> IndicesFlushDispatch<T>(ElasticsearchPathInfo<FlushRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.IndicesFlush<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.IndicesFlushForAll<T>(u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Index)) return _lowLevel.IndicesFlush<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.IndicesFlushForAll<T>(u => p.RequestParameters);
 
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.IndicesFlushGet<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.IndicesFlushGetForAll<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index)) return _lowLevel.IndicesFlushGet<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.IndicesFlushGetForAll<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesFlush", new [] { "/_flush", "/{index}/_flush" }, new [] { PathInfoHttpMethod.POST, PathInfoHttpMethod.GET });
+			throw InvalidDispatch("IndicesFlush", p, new [] { POST, GET }, "/_flush", "/{index}/_flush");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesFlushDispatchAsync<T>(ElasticsearchPathInfo<FlushRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> IndicesFlushDispatchAsync<T>(ElasticsearchPathInfo<FlushRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.IndicesFlushAsync<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.IndicesFlushForAllAsync<T>(u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Index)) return _lowLevel.IndicesFlushAsync<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.IndicesFlushForAllAsync<T>(u => p.RequestParameters);
 
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.IndicesFlushGetAsync<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.IndicesFlushGetForAllAsync<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index)) return _lowLevel.IndicesFlushGetAsync<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.IndicesFlushGetForAllAsync<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesFlush", new [] { "/_flush", "/{index}/_flush" }, new [] { PathInfoHttpMethod.POST, PathInfoHttpMethod.GET });
+			throw InvalidDispatch("IndicesFlush", p, new [] { POST, GET }, "/_flush", "/{index}/_flush");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesFlushSyncedDispatch<T>(ElasticsearchPathInfo<SyncedFlushRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> IndicesFlushSyncedDispatch<T>(ElasticsearchPathInfo<SyncedFlushRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.IndicesFlushSynced<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.IndicesFlushSyncedForAll<T>(u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Index)) return _lowLevel.IndicesFlushSynced<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.IndicesFlushSyncedForAll<T>(u => p.RequestParameters);
 
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.IndicesFlushSyncedGet<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.IndicesFlushSyncedGetForAll<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index)) return _lowLevel.IndicesFlushSyncedGet<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.IndicesFlushSyncedGetForAll<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesFlushSynced", new [] { "/_flush/synced", "/{index}/_flush/synced" }, new [] { PathInfoHttpMethod.POST, PathInfoHttpMethod.GET });
+			throw InvalidDispatch("IndicesFlushSynced", p, new [] { POST, GET }, "/_flush/synced", "/{index}/_flush/synced");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesFlushSyncedDispatchAsync<T>(ElasticsearchPathInfo<SyncedFlushRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> IndicesFlushSyncedDispatchAsync<T>(ElasticsearchPathInfo<SyncedFlushRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.IndicesFlushSyncedAsync<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.IndicesFlushSyncedForAllAsync<T>(u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Index)) return _lowLevel.IndicesFlushSyncedAsync<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.IndicesFlushSyncedForAllAsync<T>(u => p.RequestParameters);
 
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.IndicesFlushSyncedGetAsync<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.IndicesFlushSyncedGetForAllAsync<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index)) return _lowLevel.IndicesFlushSyncedGetAsync<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.IndicesFlushSyncedGetForAllAsync<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesFlushSynced", new [] { "/_flush/synced", "/{index}/_flush/synced" }, new [] { PathInfoHttpMethod.POST, PathInfoHttpMethod.GET });
+			throw InvalidDispatch("IndicesFlushSynced", p, new [] { POST, GET }, "/_flush/synced", "/{index}/_flush/synced");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesGetDispatch<T>(ElasticsearchPathInfo<GetIndexRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> IndicesGetDispatch<T>(ElasticsearchPathInfo<GetIndexRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index, pathInfo.Feature))
-						return this.LowLevelClient.IndicesGet<T>(pathInfo.Index,pathInfo.Feature,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.IndicesGet<T>(pathInfo.Index,u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index, p.Feature)) return _lowLevel.IndicesGet<T>(p.Index,p.Feature,u => p.RequestParameters);
+					if (AllSet(p.Index)) return _lowLevel.IndicesGet<T>(p.Index,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesGet", new [] { "/{index}", "/{index}/{feature}" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("IndicesGet", p, new [] { GET }, "/{index}", "/{index}/{feature}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesGetDispatchAsync<T>(ElasticsearchPathInfo<GetIndexRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> IndicesGetDispatchAsync<T>(ElasticsearchPathInfo<GetIndexRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index, pathInfo.Feature))
-						return this.LowLevelClient.IndicesGetAsync<T>(pathInfo.Index,pathInfo.Feature,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.IndicesGetAsync<T>(pathInfo.Index,u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index, p.Feature)) return _lowLevel.IndicesGetAsync<T>(p.Index,p.Feature,u => p.RequestParameters);
+					if (AllSet(p.Index)) return _lowLevel.IndicesGetAsync<T>(p.Index,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesGet", new [] { "/{index}", "/{index}/{feature}" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("IndicesGet", p, new [] { GET }, "/{index}", "/{index}/{feature}");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesGetAliasDispatch<T>(ElasticsearchPathInfo<GetAliasRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> IndicesGetAliasDispatch<T>(ElasticsearchPathInfo<GetAliasRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index, pathInfo.Name))
-						return this.LowLevelClient.IndicesGetAlias<T>(pathInfo.Index,pathInfo.Name,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Name))
-						return this.LowLevelClient.IndicesGetAliasForAll<T>(pathInfo.Name,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.IndicesGetAlias<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.IndicesGetAliasForAll<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index, p.Name)) return _lowLevel.IndicesGetAlias<T>(p.Index,p.Name,u => p.RequestParameters);
+					if (AllSet(p.Name)) return _lowLevel.IndicesGetAliasForAll<T>(p.Name,u => p.RequestParameters);
+					if (AllSet(p.Index)) return _lowLevel.IndicesGetAlias<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.IndicesGetAliasForAll<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesGetAlias", new [] { "/_alias", "/_alias/{name}", "/{index}/_alias/{name}", "/{index}/_alias" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("IndicesGetAlias", p, new [] { GET }, "/_alias", "/_alias/{name}", "/{index}/_alias/{name}", "/{index}/_alias");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesGetAliasDispatchAsync<T>(ElasticsearchPathInfo<GetAliasRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> IndicesGetAliasDispatchAsync<T>(ElasticsearchPathInfo<GetAliasRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index, pathInfo.Name))
-						return this.LowLevelClient.IndicesGetAliasAsync<T>(pathInfo.Index,pathInfo.Name,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Name))
-						return this.LowLevelClient.IndicesGetAliasForAllAsync<T>(pathInfo.Name,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.IndicesGetAliasAsync<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.IndicesGetAliasForAllAsync<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index, p.Name)) return _lowLevel.IndicesGetAliasAsync<T>(p.Index,p.Name,u => p.RequestParameters);
+					if (AllSet(p.Name)) return _lowLevel.IndicesGetAliasForAllAsync<T>(p.Name,u => p.RequestParameters);
+					if (AllSet(p.Index)) return _lowLevel.IndicesGetAliasAsync<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.IndicesGetAliasForAllAsync<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesGetAlias", new [] { "/_alias", "/_alias/{name}", "/{index}/_alias/{name}", "/{index}/_alias" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("IndicesGetAlias", p, new [] { GET }, "/_alias", "/_alias/{name}", "/{index}/_alias/{name}", "/{index}/_alias");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesGetAliasesDispatch<T>(ElasticsearchPathInfo<GetAliasesRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> IndicesGetAliasesDispatch<T>(ElasticsearchPathInfo<GetAliasesRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index, pathInfo.Name))
-						return this.LowLevelClient.IndicesGetAliases<T>(pathInfo.Index,pathInfo.Name,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.IndicesGetAliases<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Name))
-						return this.LowLevelClient.IndicesGetAliasesForAll<T>(pathInfo.Name,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.IndicesGetAliasesForAll<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index, p.Name)) return _lowLevel.IndicesGetAliases<T>(p.Index,p.Name,u => p.RequestParameters);
+					if (AllSet(p.Index)) return _lowLevel.IndicesGetAliases<T>(p.Index,u => p.RequestParameters);
+					if (AllSet(p.Name)) return _lowLevel.IndicesGetAliasesForAll<T>(p.Name,u => p.RequestParameters);
+					return _lowLevel.IndicesGetAliasesForAll<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesGetAliases", new [] { "/_aliases", "/{index}/_aliases", "/{index}/_aliases/{name}", "/_aliases/{name}" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("IndicesGetAliases", p, new [] { GET }, "/_aliases", "/{index}/_aliases", "/{index}/_aliases/{name}", "/_aliases/{name}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesGetAliasesDispatchAsync<T>(ElasticsearchPathInfo<GetAliasesRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> IndicesGetAliasesDispatchAsync<T>(ElasticsearchPathInfo<GetAliasesRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index, pathInfo.Name))
-						return this.LowLevelClient.IndicesGetAliasesAsync<T>(pathInfo.Index,pathInfo.Name,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.IndicesGetAliasesAsync<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Name))
-						return this.LowLevelClient.IndicesGetAliasesForAllAsync<T>(pathInfo.Name,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.IndicesGetAliasesForAllAsync<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index, p.Name)) return _lowLevel.IndicesGetAliasesAsync<T>(p.Index,p.Name,u => p.RequestParameters);
+					if (AllSet(p.Index)) return _lowLevel.IndicesGetAliasesAsync<T>(p.Index,u => p.RequestParameters);
+					if (AllSet(p.Name)) return _lowLevel.IndicesGetAliasesForAllAsync<T>(p.Name,u => p.RequestParameters);
+					return _lowLevel.IndicesGetAliasesForAllAsync<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesGetAliases", new [] { "/_aliases", "/{index}/_aliases", "/{index}/_aliases/{name}", "/_aliases/{name}" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("IndicesGetAliases", p, new [] { GET }, "/_aliases", "/{index}/_aliases", "/{index}/_aliases/{name}", "/_aliases/{name}");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesGetFieldMappingDispatch<T>(ElasticsearchPathInfo<GetFieldMappingRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> IndicesGetFieldMappingDispatch<T>(ElasticsearchPathInfo<GetFieldMappingRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index, pathInfo.Type, pathInfo.Field))
-						return this.LowLevelClient.IndicesGetFieldMapping<T>(pathInfo.Index,pathInfo.Type,pathInfo.Field,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index, pathInfo.Field))
-						return this.LowLevelClient.IndicesGetFieldMapping<T>(pathInfo.Index,pathInfo.Field,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Type, pathInfo.Field))
-						return this.LowLevelClient.IndicesGetFieldMappingForAll<T>(pathInfo.Type,pathInfo.Field,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Field))
-						return this.LowLevelClient.IndicesGetFieldMappingForAll<T>(pathInfo.Field,u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index, p.Type, p.Field)) return _lowLevel.IndicesGetFieldMapping<T>(p.Index,p.Type,p.Field,u => p.RequestParameters);
+					if (AllSet(p.Index, p.Field)) return _lowLevel.IndicesGetFieldMapping<T>(p.Index,p.Field,u => p.RequestParameters);
+					if (AllSet(p.Type, p.Field)) return _lowLevel.IndicesGetFieldMappingForAll<T>(p.Type,p.Field,u => p.RequestParameters);
+					if (AllSet(p.Field)) return _lowLevel.IndicesGetFieldMappingForAll<T>(p.Field,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesGetFieldMapping", new [] { "/_mapping/field/{field}", "/{index}/_mapping/field/{field}", "/_mapping/{type}/field/{field}", "/{index}/_mapping/{type}/field/{field}" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("IndicesGetFieldMapping", p, new [] { GET }, "/_mapping/field/{field}", "/{index}/_mapping/field/{field}", "/_mapping/{type}/field/{field}", "/{index}/_mapping/{type}/field/{field}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesGetFieldMappingDispatchAsync<T>(ElasticsearchPathInfo<GetFieldMappingRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> IndicesGetFieldMappingDispatchAsync<T>(ElasticsearchPathInfo<GetFieldMappingRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index, pathInfo.Type, pathInfo.Field))
-						return this.LowLevelClient.IndicesGetFieldMappingAsync<T>(pathInfo.Index,pathInfo.Type,pathInfo.Field,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index, pathInfo.Field))
-						return this.LowLevelClient.IndicesGetFieldMappingAsync<T>(pathInfo.Index,pathInfo.Field,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Type, pathInfo.Field))
-						return this.LowLevelClient.IndicesGetFieldMappingForAllAsync<T>(pathInfo.Type,pathInfo.Field,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Field))
-						return this.LowLevelClient.IndicesGetFieldMappingForAllAsync<T>(pathInfo.Field,u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index, p.Type, p.Field)) return _lowLevel.IndicesGetFieldMappingAsync<T>(p.Index,p.Type,p.Field,u => p.RequestParameters);
+					if (AllSet(p.Index, p.Field)) return _lowLevel.IndicesGetFieldMappingAsync<T>(p.Index,p.Field,u => p.RequestParameters);
+					if (AllSet(p.Type, p.Field)) return _lowLevel.IndicesGetFieldMappingForAllAsync<T>(p.Type,p.Field,u => p.RequestParameters);
+					if (AllSet(p.Field)) return _lowLevel.IndicesGetFieldMappingForAllAsync<T>(p.Field,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesGetFieldMapping", new [] { "/_mapping/field/{field}", "/{index}/_mapping/field/{field}", "/_mapping/{type}/field/{field}", "/{index}/_mapping/{type}/field/{field}" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("IndicesGetFieldMapping", p, new [] { GET }, "/_mapping/field/{field}", "/{index}/_mapping/field/{field}", "/_mapping/{type}/field/{field}", "/{index}/_mapping/{type}/field/{field}");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesGetMappingDispatch<T>(ElasticsearchPathInfo<GetMappingRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> IndicesGetMappingDispatch<T>(ElasticsearchPathInfo<GetMappingRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.IndicesGetMapping<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.IndicesGetMapping<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Type))
-						return this.LowLevelClient.IndicesGetMappingForAll<T>(pathInfo.Type,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.IndicesGetMappingForAll<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index, p.Type)) return _lowLevel.IndicesGetMapping<T>(p.Index,p.Type,u => p.RequestParameters);
+					if (AllSet(p.Index)) return _lowLevel.IndicesGetMapping<T>(p.Index,u => p.RequestParameters);
+					if (AllSet(p.Type)) return _lowLevel.IndicesGetMappingForAll<T>(p.Type,u => p.RequestParameters);
+					return _lowLevel.IndicesGetMappingForAll<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesGetMapping", new [] { "/_mapping", "/{index}/_mapping", "/_mapping/{type}", "/{index}/_mapping/{type}" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("IndicesGetMapping", p, new [] { GET }, "/_mapping", "/{index}/_mapping", "/_mapping/{type}", "/{index}/_mapping/{type}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesGetMappingDispatchAsync<T>(ElasticsearchPathInfo<GetMappingRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> IndicesGetMappingDispatchAsync<T>(ElasticsearchPathInfo<GetMappingRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.IndicesGetMappingAsync<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.IndicesGetMappingAsync<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Type))
-						return this.LowLevelClient.IndicesGetMappingForAllAsync<T>(pathInfo.Type,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.IndicesGetMappingForAllAsync<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index, p.Type)) return _lowLevel.IndicesGetMappingAsync<T>(p.Index,p.Type,u => p.RequestParameters);
+					if (AllSet(p.Index)) return _lowLevel.IndicesGetMappingAsync<T>(p.Index,u => p.RequestParameters);
+					if (AllSet(p.Type)) return _lowLevel.IndicesGetMappingForAllAsync<T>(p.Type,u => p.RequestParameters);
+					return _lowLevel.IndicesGetMappingForAllAsync<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesGetMapping", new [] { "/_mapping", "/{index}/_mapping", "/_mapping/{type}", "/{index}/_mapping/{type}" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("IndicesGetMapping", p, new [] { GET }, "/_mapping", "/{index}/_mapping", "/_mapping/{type}", "/{index}/_mapping/{type}");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesGetSettingsDispatch<T>(ElasticsearchPathInfo<GetIndexSettingsRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> IndicesGetSettingsDispatch<T>(ElasticsearchPathInfo<GetIndexSettingsRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index, pathInfo.Name))
-						return this.LowLevelClient.IndicesGetSettings<T>(pathInfo.Index,pathInfo.Name,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.IndicesGetSettings<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Name))
-						return this.LowLevelClient.IndicesGetSettingsForAll<T>(pathInfo.Name,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.IndicesGetSettingsForAll<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index, p.Name)) return _lowLevel.IndicesGetSettings<T>(p.Index,p.Name,u => p.RequestParameters);
+					if (AllSet(p.Index)) return _lowLevel.IndicesGetSettings<T>(p.Index,u => p.RequestParameters);
+					if (AllSet(p.Name)) return _lowLevel.IndicesGetSettingsForAll<T>(p.Name,u => p.RequestParameters);
+					return _lowLevel.IndicesGetSettingsForAll<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesGetSettings", new [] { "/_settings", "/{index}/_settings", "/{index}/_settings/{name}", "/_settings/{name}" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("IndicesGetSettings", p, new [] { GET }, "/_settings", "/{index}/_settings", "/{index}/_settings/{name}", "/_settings/{name}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesGetSettingsDispatchAsync<T>(ElasticsearchPathInfo<GetIndexSettingsRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> IndicesGetSettingsDispatchAsync<T>(ElasticsearchPathInfo<GetIndexSettingsRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index, pathInfo.Name))
-						return this.LowLevelClient.IndicesGetSettingsAsync<T>(pathInfo.Index,pathInfo.Name,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.IndicesGetSettingsAsync<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Name))
-						return this.LowLevelClient.IndicesGetSettingsForAllAsync<T>(pathInfo.Name,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.IndicesGetSettingsForAllAsync<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index, p.Name)) return _lowLevel.IndicesGetSettingsAsync<T>(p.Index,p.Name,u => p.RequestParameters);
+					if (AllSet(p.Index)) return _lowLevel.IndicesGetSettingsAsync<T>(p.Index,u => p.RequestParameters);
+					if (AllSet(p.Name)) return _lowLevel.IndicesGetSettingsForAllAsync<T>(p.Name,u => p.RequestParameters);
+					return _lowLevel.IndicesGetSettingsForAllAsync<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesGetSettings", new [] { "/_settings", "/{index}/_settings", "/{index}/_settings/{name}", "/_settings/{name}" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("IndicesGetSettings", p, new [] { GET }, "/_settings", "/{index}/_settings", "/{index}/_settings/{name}", "/_settings/{name}");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesGetTemplateDispatch<T>(ElasticsearchPathInfo<GetTemplateRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> IndicesGetTemplateDispatch<T>(ElasticsearchPathInfo<GetTemplateRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Name))
-						return this.LowLevelClient.IndicesGetTemplateForAll<T>(pathInfo.Name,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.IndicesGetTemplateForAll<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Name)) return _lowLevel.IndicesGetTemplateForAll<T>(p.Name,u => p.RequestParameters);
+					return _lowLevel.IndicesGetTemplateForAll<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesGetTemplate", new [] { "/_template", "/_template/{name}" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("IndicesGetTemplate", p, new [] { GET }, "/_template", "/_template/{name}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesGetTemplateDispatchAsync<T>(ElasticsearchPathInfo<GetTemplateRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> IndicesGetTemplateDispatchAsync<T>(ElasticsearchPathInfo<GetTemplateRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Name))
-						return this.LowLevelClient.IndicesGetTemplateForAllAsync<T>(pathInfo.Name,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.IndicesGetTemplateForAllAsync<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Name)) return _lowLevel.IndicesGetTemplateForAllAsync<T>(p.Name,u => p.RequestParameters);
+					return _lowLevel.IndicesGetTemplateForAllAsync<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesGetTemplate", new [] { "/_template", "/_template/{name}" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("IndicesGetTemplate", p, new [] { GET }, "/_template", "/_template/{name}");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesGetUpgradeDispatch<T>(ElasticsearchPathInfo<UpgradeStatusRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> IndicesGetUpgradeDispatch<T>(ElasticsearchPathInfo<UpgradeStatusRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.IndicesGetUpgrade<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.IndicesGetUpgradeForAll<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index)) return _lowLevel.IndicesGetUpgrade<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.IndicesGetUpgradeForAll<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesGetUpgrade", new [] { "/_upgrade", "/{index}/_upgrade" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("IndicesGetUpgrade", p, new [] { GET }, "/_upgrade", "/{index}/_upgrade");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesGetUpgradeDispatchAsync<T>(ElasticsearchPathInfo<UpgradeStatusRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> IndicesGetUpgradeDispatchAsync<T>(ElasticsearchPathInfo<UpgradeStatusRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.IndicesGetUpgradeAsync<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.IndicesGetUpgradeForAllAsync<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index)) return _lowLevel.IndicesGetUpgradeAsync<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.IndicesGetUpgradeForAllAsync<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesGetUpgrade", new [] { "/_upgrade", "/{index}/_upgrade" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("IndicesGetUpgrade", p, new [] { GET }, "/_upgrade", "/{index}/_upgrade");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesGetWarmerDispatch<T>(ElasticsearchPathInfo<GetWarmerRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> IndicesGetWarmerDispatch<T>(ElasticsearchPathInfo<GetWarmerRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index, pathInfo.Type, pathInfo.Name))
-						return this.LowLevelClient.IndicesGetWarmer<T>(pathInfo.Index,pathInfo.Type,pathInfo.Name,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index, pathInfo.Name))
-						return this.LowLevelClient.IndicesGetWarmer<T>(pathInfo.Index,pathInfo.Name,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.IndicesGetWarmer<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Name))
-						return this.LowLevelClient.IndicesGetWarmerForAll<T>(pathInfo.Name,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.IndicesGetWarmerForAll<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index, p.Type, p.Name)) return _lowLevel.IndicesGetWarmer<T>(p.Index,p.Type,p.Name,u => p.RequestParameters);
+					if (AllSet(p.Index, p.Name)) return _lowLevel.IndicesGetWarmer<T>(p.Index,p.Name,u => p.RequestParameters);
+					if (AllSet(p.Index)) return _lowLevel.IndicesGetWarmer<T>(p.Index,u => p.RequestParameters);
+					if (AllSet(p.Name)) return _lowLevel.IndicesGetWarmerForAll<T>(p.Name,u => p.RequestParameters);
+					return _lowLevel.IndicesGetWarmerForAll<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesGetWarmer", new [] { "/_warmer", "/{index}/_warmer", "/{index}/_warmer/{name}", "/_warmer/{name}", "/{index}/{type}/_warmer/{name}" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("IndicesGetWarmer", p, new [] { GET }, "/_warmer", "/{index}/_warmer", "/{index}/_warmer/{name}", "/_warmer/{name}", "/{index}/{type}/_warmer/{name}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesGetWarmerDispatchAsync<T>(ElasticsearchPathInfo<GetWarmerRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> IndicesGetWarmerDispatchAsync<T>(ElasticsearchPathInfo<GetWarmerRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index, pathInfo.Type, pathInfo.Name))
-						return this.LowLevelClient.IndicesGetWarmerAsync<T>(pathInfo.Index,pathInfo.Type,pathInfo.Name,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index, pathInfo.Name))
-						return this.LowLevelClient.IndicesGetWarmerAsync<T>(pathInfo.Index,pathInfo.Name,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.IndicesGetWarmerAsync<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Name))
-						return this.LowLevelClient.IndicesGetWarmerForAllAsync<T>(pathInfo.Name,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.IndicesGetWarmerForAllAsync<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index, p.Type, p.Name)) return _lowLevel.IndicesGetWarmerAsync<T>(p.Index,p.Type,p.Name,u => p.RequestParameters);
+					if (AllSet(p.Index, p.Name)) return _lowLevel.IndicesGetWarmerAsync<T>(p.Index,p.Name,u => p.RequestParameters);
+					if (AllSet(p.Index)) return _lowLevel.IndicesGetWarmerAsync<T>(p.Index,u => p.RequestParameters);
+					if (AllSet(p.Name)) return _lowLevel.IndicesGetWarmerForAllAsync<T>(p.Name,u => p.RequestParameters);
+					return _lowLevel.IndicesGetWarmerForAllAsync<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesGetWarmer", new [] { "/_warmer", "/{index}/_warmer", "/{index}/_warmer/{name}", "/_warmer/{name}", "/{index}/{type}/_warmer/{name}" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("IndicesGetWarmer", p, new [] { GET }, "/_warmer", "/{index}/_warmer", "/{index}/_warmer/{name}", "/_warmer/{name}", "/{index}/{type}/_warmer/{name}");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesOpenDispatch<T>(ElasticsearchPathInfo<OpenIndexRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> IndicesOpenDispatch<T>(ElasticsearchPathInfo<OpenIndexRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.IndicesOpen<T>(pathInfo.Index,u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Index)) return _lowLevel.IndicesOpen<T>(p.Index,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesOpen", new [] { "/{index}/_open" }, new [] { PathInfoHttpMethod.POST });
+			throw InvalidDispatch("IndicesOpen", p, new [] { POST }, "/{index}/_open");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesOpenDispatchAsync<T>(ElasticsearchPathInfo<OpenIndexRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> IndicesOpenDispatchAsync<T>(ElasticsearchPathInfo<OpenIndexRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.IndicesOpenAsync<T>(pathInfo.Index,u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Index)) return _lowLevel.IndicesOpenAsync<T>(p.Index,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesOpen", new [] { "/{index}/_open" }, new [] { PathInfoHttpMethod.POST });
+			throw InvalidDispatch("IndicesOpen", p, new [] { POST }, "/{index}/_open");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesOptimizeDispatch<T>(ElasticsearchPathInfo<OptimizeRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> IndicesOptimizeDispatch<T>(ElasticsearchPathInfo<OptimizeRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.IndicesOptimize<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.IndicesOptimizeForAll<T>(u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Index)) return _lowLevel.IndicesOptimize<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.IndicesOptimizeForAll<T>(u => p.RequestParameters);
 
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.IndicesOptimizeGet<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.IndicesOptimizeGetForAll<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index)) return _lowLevel.IndicesOptimizeGet<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.IndicesOptimizeGetForAll<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesOptimize", new [] { "/_optimize", "/{index}/_optimize" }, new [] { PathInfoHttpMethod.POST, PathInfoHttpMethod.GET });
+			throw InvalidDispatch("IndicesOptimize", p, new [] { POST, GET }, "/_optimize", "/{index}/_optimize");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesOptimizeDispatchAsync<T>(ElasticsearchPathInfo<OptimizeRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> IndicesOptimizeDispatchAsync<T>(ElasticsearchPathInfo<OptimizeRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.IndicesOptimizeAsync<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.IndicesOptimizeForAllAsync<T>(u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Index)) return _lowLevel.IndicesOptimizeAsync<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.IndicesOptimizeForAllAsync<T>(u => p.RequestParameters);
 
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.IndicesOptimizeGetAsync<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.IndicesOptimizeGetForAllAsync<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index)) return _lowLevel.IndicesOptimizeGetAsync<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.IndicesOptimizeGetForAllAsync<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesOptimize", new [] { "/_optimize", "/{index}/_optimize" }, new [] { PathInfoHttpMethod.POST, PathInfoHttpMethod.GET });
+			throw InvalidDispatch("IndicesOptimize", p, new [] { POST, GET }, "/_optimize", "/{index}/_optimize");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesPutAliasDispatch<T>(ElasticsearchPathInfo<PutAliasRequestParameters> pathInfo , object body)
+		internal ElasticsearchResponse<T> IndicesPutAliasDispatch<T>(ElasticsearchPathInfo<PutAliasRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.PUT:
-					if (AllSet(pathInfo.Index, pathInfo.Name))
-						return this.LowLevelClient.IndicesPutAlias<T>(pathInfo.Index,pathInfo.Name,body,u => pathInfo.RequestParameters);
+				case PUT:
+					if (AllSet(p.Index, p.Name)) return _lowLevel.IndicesPutAlias<T>(p.Index,p.Name,body,u => p.RequestParameters);
 					break;
 
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Index, pathInfo.Name))
-						return this.LowLevelClient.IndicesPutAliasPost<T>(pathInfo.Index,pathInfo.Name,body,u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Index, p.Name)) return _lowLevel.IndicesPutAliasPost<T>(p.Index,p.Name,body,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesPutAlias", new [] { "/{index}/_alias/{name}", "/{index}/_aliases/{name}" }, new [] { PathInfoHttpMethod.PUT, PathInfoHttpMethod.POST });
+			throw InvalidDispatch("IndicesPutAlias", p, new [] { PUT, POST }, "/{index}/_alias/{name}", "/{index}/_aliases/{name}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesPutAliasDispatchAsync<T>(ElasticsearchPathInfo<PutAliasRequestParameters> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> IndicesPutAliasDispatchAsync<T>(ElasticsearchPathInfo<PutAliasRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.PUT:
-					if (AllSet(pathInfo.Index, pathInfo.Name))
-						return this.LowLevelClient.IndicesPutAliasAsync<T>(pathInfo.Index,pathInfo.Name,body,u => pathInfo.RequestParameters);
+				case PUT:
+					if (AllSet(p.Index, p.Name)) return _lowLevel.IndicesPutAliasAsync<T>(p.Index,p.Name,body,u => p.RequestParameters);
 					break;
 
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Index, pathInfo.Name))
-						return this.LowLevelClient.IndicesPutAliasPostAsync<T>(pathInfo.Index,pathInfo.Name,body,u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Index, p.Name)) return _lowLevel.IndicesPutAliasPostAsync<T>(p.Index,p.Name,body,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesPutAlias", new [] { "/{index}/_alias/{name}", "/{index}/_aliases/{name}" }, new [] { PathInfoHttpMethod.PUT, PathInfoHttpMethod.POST });
+			throw InvalidDispatch("IndicesPutAlias", p, new [] { PUT, POST }, "/{index}/_alias/{name}", "/{index}/_aliases/{name}");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesPutMappingDispatch<T>(ElasticsearchPathInfo<PutMappingRequestParameters> pathInfo , object body)
+		internal ElasticsearchResponse<T> IndicesPutMappingDispatch<T>(ElasticsearchPathInfo<PutMappingRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.PUT:
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.IndicesPutMapping<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Type))
-						return this.LowLevelClient.IndicesPutMappingForAll<T>(pathInfo.Type,body,u => pathInfo.RequestParameters);
+				case PUT:
+					if (AllSet(p.Index, p.Type)) return _lowLevel.IndicesPutMapping<T>(p.Index,p.Type,body,u => p.RequestParameters);
+					if (AllSet(p.Type)) return _lowLevel.IndicesPutMappingForAll<T>(p.Type,body,u => p.RequestParameters);
 					break;
 
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.IndicesPutMappingPost<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Type))
-						return this.LowLevelClient.IndicesPutMappingPostForAll<T>(pathInfo.Type,body,u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Index, p.Type)) return _lowLevel.IndicesPutMappingPost<T>(p.Index,p.Type,body,u => p.RequestParameters);
+					if (AllSet(p.Type)) return _lowLevel.IndicesPutMappingPostForAll<T>(p.Type,body,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesPutMapping", new [] { "/{index}/{type}/_mapping", "/{index}/_mapping/{type}", "/_mapping/{type}", "/{index}/{type}/_mappings", "/{index}/_mappings/{type}", "/_mappings/{type}" }, new [] { PathInfoHttpMethod.PUT, PathInfoHttpMethod.POST });
+			throw InvalidDispatch("IndicesPutMapping", p, new [] { PUT, POST }, "/{index}/{type}/_mapping", "/{index}/_mapping/{type}", "/_mapping/{type}", "/{index}/{type}/_mappings", "/{index}/_mappings/{type}", "/_mappings/{type}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesPutMappingDispatchAsync<T>(ElasticsearchPathInfo<PutMappingRequestParameters> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> IndicesPutMappingDispatchAsync<T>(ElasticsearchPathInfo<PutMappingRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.PUT:
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.IndicesPutMappingAsync<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Type))
-						return this.LowLevelClient.IndicesPutMappingForAllAsync<T>(pathInfo.Type,body,u => pathInfo.RequestParameters);
+				case PUT:
+					if (AllSet(p.Index, p.Type)) return _lowLevel.IndicesPutMappingAsync<T>(p.Index,p.Type,body,u => p.RequestParameters);
+					if (AllSet(p.Type)) return _lowLevel.IndicesPutMappingForAllAsync<T>(p.Type,body,u => p.RequestParameters);
 					break;
 
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.IndicesPutMappingPostAsync<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Type))
-						return this.LowLevelClient.IndicesPutMappingPostForAllAsync<T>(pathInfo.Type,body,u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Index, p.Type)) return _lowLevel.IndicesPutMappingPostAsync<T>(p.Index,p.Type,body,u => p.RequestParameters);
+					if (AllSet(p.Type)) return _lowLevel.IndicesPutMappingPostForAllAsync<T>(p.Type,body,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesPutMapping", new [] { "/{index}/{type}/_mapping", "/{index}/_mapping/{type}", "/_mapping/{type}", "/{index}/{type}/_mappings", "/{index}/_mappings/{type}", "/_mappings/{type}" }, new [] { PathInfoHttpMethod.PUT, PathInfoHttpMethod.POST });
+			throw InvalidDispatch("IndicesPutMapping", p, new [] { PUT, POST }, "/{index}/{type}/_mapping", "/{index}/_mapping/{type}", "/_mapping/{type}", "/{index}/{type}/_mappings", "/{index}/_mappings/{type}", "/_mappings/{type}");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesPutSettingsDispatch<T>(ElasticsearchPathInfo<UpdateSettingsRequestParameters> pathInfo , object body)
+		internal ElasticsearchResponse<T> IndicesPutSettingsDispatch<T>(ElasticsearchPathInfo<UpdateSettingsRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.PUT:
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.IndicesPutSettings<T>(pathInfo.Index,body,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.IndicesPutSettingsForAll<T>(body,u => pathInfo.RequestParameters);
+				case PUT:
+					if (AllSet(p.Index)) return _lowLevel.IndicesPutSettings<T>(p.Index,body,u => p.RequestParameters);
+					return _lowLevel.IndicesPutSettingsForAll<T>(body,u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesPutSettings", new [] { "/_settings", "/{index}/_settings" }, new [] { PathInfoHttpMethod.PUT });
+			throw InvalidDispatch("IndicesPutSettings", p, new [] { PUT }, "/_settings", "/{index}/_settings");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesPutSettingsDispatchAsync<T>(ElasticsearchPathInfo<UpdateSettingsRequestParameters> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> IndicesPutSettingsDispatchAsync<T>(ElasticsearchPathInfo<UpdateSettingsRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.PUT:
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.IndicesPutSettingsAsync<T>(pathInfo.Index,body,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.IndicesPutSettingsForAllAsync<T>(body,u => pathInfo.RequestParameters);
+				case PUT:
+					if (AllSet(p.Index)) return _lowLevel.IndicesPutSettingsAsync<T>(p.Index,body,u => p.RequestParameters);
+					return _lowLevel.IndicesPutSettingsForAllAsync<T>(body,u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesPutSettings", new [] { "/_settings", "/{index}/_settings" }, new [] { PathInfoHttpMethod.PUT });
+			throw InvalidDispatch("IndicesPutSettings", p, new [] { PUT }, "/_settings", "/{index}/_settings");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesPutTemplateDispatch<T>(ElasticsearchPathInfo<PutTemplateRequestParameters> pathInfo , object body)
+		internal ElasticsearchResponse<T> IndicesPutTemplateDispatch<T>(ElasticsearchPathInfo<PutTemplateRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.PUT:
-					if (AllSet(pathInfo.Name))
-						return this.LowLevelClient.IndicesPutTemplateForAll<T>(pathInfo.Name,body,u => pathInfo.RequestParameters);
+				case PUT:
+					if (AllSet(p.Name)) return _lowLevel.IndicesPutTemplateForAll<T>(p.Name,body,u => p.RequestParameters);
 					break;
 
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Name))
-						return this.LowLevelClient.IndicesPutTemplatePostForAll<T>(pathInfo.Name,body,u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Name)) return _lowLevel.IndicesPutTemplatePostForAll<T>(p.Name,body,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesPutTemplate", new [] { "/_template/{name}" }, new [] { PathInfoHttpMethod.PUT, PathInfoHttpMethod.POST });
+			throw InvalidDispatch("IndicesPutTemplate", p, new [] { PUT, POST }, "/_template/{name}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesPutTemplateDispatchAsync<T>(ElasticsearchPathInfo<PutTemplateRequestParameters> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> IndicesPutTemplateDispatchAsync<T>(ElasticsearchPathInfo<PutTemplateRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.PUT:
-					if (AllSet(pathInfo.Name))
-						return this.LowLevelClient.IndicesPutTemplateForAllAsync<T>(pathInfo.Name,body,u => pathInfo.RequestParameters);
+				case PUT:
+					if (AllSet(p.Name)) return _lowLevel.IndicesPutTemplateForAllAsync<T>(p.Name,body,u => p.RequestParameters);
 					break;
 
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Name))
-						return this.LowLevelClient.IndicesPutTemplatePostForAllAsync<T>(pathInfo.Name,body,u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Name)) return _lowLevel.IndicesPutTemplatePostForAllAsync<T>(p.Name,body,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesPutTemplate", new [] { "/_template/{name}" }, new [] { PathInfoHttpMethod.PUT, PathInfoHttpMethod.POST });
+			throw InvalidDispatch("IndicesPutTemplate", p, new [] { PUT, POST }, "/_template/{name}");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesPutWarmerDispatch<T>(ElasticsearchPathInfo<PutWarmerRequestParameters> pathInfo , object body)
+		internal ElasticsearchResponse<T> IndicesPutWarmerDispatch<T>(ElasticsearchPathInfo<PutWarmerRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.PUT:
-					if (AllSet(pathInfo.Index, pathInfo.Type, pathInfo.Name))
-						return this.LowLevelClient.IndicesPutWarmer<T>(pathInfo.Index,pathInfo.Type,pathInfo.Name,body,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index, pathInfo.Name))
-						return this.LowLevelClient.IndicesPutWarmer<T>(pathInfo.Index,pathInfo.Name,body,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Name))
-						return this.LowLevelClient.IndicesPutWarmerForAll<T>(pathInfo.Name,body,u => pathInfo.RequestParameters);
+				case PUT:
+					if (AllSet(p.Index, p.Type, p.Name)) return _lowLevel.IndicesPutWarmer<T>(p.Index,p.Type,p.Name,body,u => p.RequestParameters);
+					if (AllSet(p.Index, p.Name)) return _lowLevel.IndicesPutWarmer<T>(p.Index,p.Name,body,u => p.RequestParameters);
+					if (AllSet(p.Name)) return _lowLevel.IndicesPutWarmerForAll<T>(p.Name,body,u => p.RequestParameters);
 					break;
 
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Index, pathInfo.Type, pathInfo.Name))
-						return this.LowLevelClient.IndicesPutWarmerPost<T>(pathInfo.Index,pathInfo.Type,pathInfo.Name,body,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index, pathInfo.Name))
-						return this.LowLevelClient.IndicesPutWarmerPost<T>(pathInfo.Index,pathInfo.Name,body,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Name))
-						return this.LowLevelClient.IndicesPutWarmerPostForAll<T>(pathInfo.Name,body,u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Index, p.Type, p.Name)) return _lowLevel.IndicesPutWarmerPost<T>(p.Index,p.Type,p.Name,body,u => p.RequestParameters);
+					if (AllSet(p.Index, p.Name)) return _lowLevel.IndicesPutWarmerPost<T>(p.Index,p.Name,body,u => p.RequestParameters);
+					if (AllSet(p.Name)) return _lowLevel.IndicesPutWarmerPostForAll<T>(p.Name,body,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesPutWarmer", new [] { "/_warmer/{name}", "/{index}/_warmer/{name}", "/{index}/{type}/_warmer/{name}", "/_warmers/{name}", "/{index}/_warmers/{name}", "/{index}/{type}/_warmers/{name}" }, new [] { PathInfoHttpMethod.PUT, PathInfoHttpMethod.POST });
+			throw InvalidDispatch("IndicesPutWarmer", p, new [] { PUT, POST }, "/_warmer/{name}", "/{index}/_warmer/{name}", "/{index}/{type}/_warmer/{name}", "/_warmers/{name}", "/{index}/_warmers/{name}", "/{index}/{type}/_warmers/{name}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesPutWarmerDispatchAsync<T>(ElasticsearchPathInfo<PutWarmerRequestParameters> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> IndicesPutWarmerDispatchAsync<T>(ElasticsearchPathInfo<PutWarmerRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.PUT:
-					if (AllSet(pathInfo.Index, pathInfo.Type, pathInfo.Name))
-						return this.LowLevelClient.IndicesPutWarmerAsync<T>(pathInfo.Index,pathInfo.Type,pathInfo.Name,body,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index, pathInfo.Name))
-						return this.LowLevelClient.IndicesPutWarmerAsync<T>(pathInfo.Index,pathInfo.Name,body,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Name))
-						return this.LowLevelClient.IndicesPutWarmerForAllAsync<T>(pathInfo.Name,body,u => pathInfo.RequestParameters);
+				case PUT:
+					if (AllSet(p.Index, p.Type, p.Name)) return _lowLevel.IndicesPutWarmerAsync<T>(p.Index,p.Type,p.Name,body,u => p.RequestParameters);
+					if (AllSet(p.Index, p.Name)) return _lowLevel.IndicesPutWarmerAsync<T>(p.Index,p.Name,body,u => p.RequestParameters);
+					if (AllSet(p.Name)) return _lowLevel.IndicesPutWarmerForAllAsync<T>(p.Name,body,u => p.RequestParameters);
 					break;
 
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Index, pathInfo.Type, pathInfo.Name))
-						return this.LowLevelClient.IndicesPutWarmerPostAsync<T>(pathInfo.Index,pathInfo.Type,pathInfo.Name,body,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index, pathInfo.Name))
-						return this.LowLevelClient.IndicesPutWarmerPostAsync<T>(pathInfo.Index,pathInfo.Name,body,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Name))
-						return this.LowLevelClient.IndicesPutWarmerPostForAllAsync<T>(pathInfo.Name,body,u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Index, p.Type, p.Name)) return _lowLevel.IndicesPutWarmerPostAsync<T>(p.Index,p.Type,p.Name,body,u => p.RequestParameters);
+					if (AllSet(p.Index, p.Name)) return _lowLevel.IndicesPutWarmerPostAsync<T>(p.Index,p.Name,body,u => p.RequestParameters);
+					if (AllSet(p.Name)) return _lowLevel.IndicesPutWarmerPostForAllAsync<T>(p.Name,body,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesPutWarmer", new [] { "/_warmer/{name}", "/{index}/_warmer/{name}", "/{index}/{type}/_warmer/{name}", "/_warmers/{name}", "/{index}/_warmers/{name}", "/{index}/{type}/_warmers/{name}" }, new [] { PathInfoHttpMethod.PUT, PathInfoHttpMethod.POST });
+			throw InvalidDispatch("IndicesPutWarmer", p, new [] { PUT, POST }, "/_warmer/{name}", "/{index}/_warmer/{name}", "/{index}/{type}/_warmer/{name}", "/_warmers/{name}", "/{index}/_warmers/{name}", "/{index}/{type}/_warmers/{name}");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesRecoveryDispatch<T>(ElasticsearchPathInfo<RecoveryStatusRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> IndicesRecoveryDispatch<T>(ElasticsearchPathInfo<RecoveryStatusRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.IndicesRecovery<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.IndicesRecoveryForAll<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index)) return _lowLevel.IndicesRecovery<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.IndicesRecoveryForAll<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesRecovery", new [] { "/_recovery", "/{index}/_recovery" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("IndicesRecovery", p, new [] { GET }, "/_recovery", "/{index}/_recovery");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesRecoveryDispatchAsync<T>(ElasticsearchPathInfo<RecoveryStatusRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> IndicesRecoveryDispatchAsync<T>(ElasticsearchPathInfo<RecoveryStatusRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.IndicesRecoveryAsync<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.IndicesRecoveryForAllAsync<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index)) return _lowLevel.IndicesRecoveryAsync<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.IndicesRecoveryForAllAsync<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesRecovery", new [] { "/_recovery", "/{index}/_recovery" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("IndicesRecovery", p, new [] { GET }, "/_recovery", "/{index}/_recovery");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesRefreshDispatch<T>(ElasticsearchPathInfo<RefreshRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> IndicesRefreshDispatch<T>(ElasticsearchPathInfo<RefreshRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.IndicesRefresh<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.IndicesRefreshForAll<T>(u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Index)) return _lowLevel.IndicesRefresh<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.IndicesRefreshForAll<T>(u => p.RequestParameters);
 
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.IndicesRefreshGet<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.IndicesRefreshGetForAll<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index)) return _lowLevel.IndicesRefreshGet<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.IndicesRefreshGetForAll<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesRefresh", new [] { "/_refresh", "/{index}/_refresh" }, new [] { PathInfoHttpMethod.POST, PathInfoHttpMethod.GET });
+			throw InvalidDispatch("IndicesRefresh", p, new [] { POST, GET }, "/_refresh", "/{index}/_refresh");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesRefreshDispatchAsync<T>(ElasticsearchPathInfo<RefreshRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> IndicesRefreshDispatchAsync<T>(ElasticsearchPathInfo<RefreshRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.IndicesRefreshAsync<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.IndicesRefreshForAllAsync<T>(u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Index)) return _lowLevel.IndicesRefreshAsync<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.IndicesRefreshForAllAsync<T>(u => p.RequestParameters);
 
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.IndicesRefreshGetAsync<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.IndicesRefreshGetForAllAsync<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index)) return _lowLevel.IndicesRefreshGetAsync<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.IndicesRefreshGetForAllAsync<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesRefresh", new [] { "/_refresh", "/{index}/_refresh" }, new [] { PathInfoHttpMethod.POST, PathInfoHttpMethod.GET });
+			throw InvalidDispatch("IndicesRefresh", p, new [] { POST, GET }, "/_refresh", "/{index}/_refresh");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesSegmentsDispatch<T>(ElasticsearchPathInfo<SegmentsRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> IndicesSegmentsDispatch<T>(ElasticsearchPathInfo<SegmentsRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.IndicesSegments<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.IndicesSegmentsForAll<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index)) return _lowLevel.IndicesSegments<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.IndicesSegmentsForAll<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesSegments", new [] { "/_segments", "/{index}/_segments" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("IndicesSegments", p, new [] { GET }, "/_segments", "/{index}/_segments");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesSegmentsDispatchAsync<T>(ElasticsearchPathInfo<SegmentsRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> IndicesSegmentsDispatchAsync<T>(ElasticsearchPathInfo<SegmentsRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.IndicesSegmentsAsync<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.IndicesSegmentsForAllAsync<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index)) return _lowLevel.IndicesSegmentsAsync<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.IndicesSegmentsForAllAsync<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesSegments", new [] { "/_segments", "/{index}/_segments" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("IndicesSegments", p, new [] { GET }, "/_segments", "/{index}/_segments");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesStatsDispatch<T>(ElasticsearchPathInfo<IndicesStatsRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> IndicesStatsDispatch<T>(ElasticsearchPathInfo<IndicesStatsRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index, pathInfo.Metric))
-						return this.LowLevelClient.IndicesStats<T>(pathInfo.Index,pathInfo.Metric,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Metric))
-						return this.LowLevelClient.IndicesStatsForAll<T>(pathInfo.Metric,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.IndicesStats<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.IndicesStatsForAll<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index, p.Metric)) return _lowLevel.IndicesStats<T>(p.Index,p.Metric,u => p.RequestParameters);
+					if (AllSet(p.Metric)) return _lowLevel.IndicesStatsForAll<T>(p.Metric,u => p.RequestParameters);
+					if (AllSet(p.Index)) return _lowLevel.IndicesStats<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.IndicesStatsForAll<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesStats", new [] { "/_stats", "/_stats/{metric}", "/{index}/_stats", "/{index}/_stats/{metric}" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("IndicesStats", p, new [] { GET }, "/_stats", "/_stats/{metric}", "/{index}/_stats", "/{index}/_stats/{metric}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesStatsDispatchAsync<T>(ElasticsearchPathInfo<IndicesStatsRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> IndicesStatsDispatchAsync<T>(ElasticsearchPathInfo<IndicesStatsRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index, pathInfo.Metric))
-						return this.LowLevelClient.IndicesStatsAsync<T>(pathInfo.Index,pathInfo.Metric,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Metric))
-						return this.LowLevelClient.IndicesStatsForAllAsync<T>(pathInfo.Metric,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.IndicesStatsAsync<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.IndicesStatsForAllAsync<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index, p.Metric)) return _lowLevel.IndicesStatsAsync<T>(p.Index,p.Metric,u => p.RequestParameters);
+					if (AllSet(p.Metric)) return _lowLevel.IndicesStatsForAllAsync<T>(p.Metric,u => p.RequestParameters);
+					if (AllSet(p.Index)) return _lowLevel.IndicesStatsAsync<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.IndicesStatsForAllAsync<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesStats", new [] { "/_stats", "/_stats/{metric}", "/{index}/_stats", "/{index}/_stats/{metric}" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("IndicesStats", p, new [] { GET }, "/_stats", "/_stats/{metric}", "/{index}/_stats", "/{index}/_stats/{metric}");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesStatusDispatch<T>(ElasticsearchPathInfo<IndicesStatusRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> IndicesStatusDispatch<T>(ElasticsearchPathInfo<IndicesStatusRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.IndicesStatus<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.IndicesStatusForAll<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index)) return _lowLevel.IndicesStatus<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.IndicesStatusForAll<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesStatus", new [] { "/_status", "/{index}/_status" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("IndicesStatus", p, new [] { GET }, "/_status", "/{index}/_status");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesStatusDispatchAsync<T>(ElasticsearchPathInfo<IndicesStatusRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> IndicesStatusDispatchAsync<T>(ElasticsearchPathInfo<IndicesStatusRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.IndicesStatusAsync<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.IndicesStatusForAllAsync<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index)) return _lowLevel.IndicesStatusAsync<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.IndicesStatusForAllAsync<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesStatus", new [] { "/_status", "/{index}/_status" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("IndicesStatus", p, new [] { GET }, "/_status", "/{index}/_status");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesUpdateAliasesDispatch<T>(ElasticsearchPathInfo<AliasRequestParameters> pathInfo , object body)
+		internal ElasticsearchResponse<T> IndicesUpdateAliasesDispatch<T>(ElasticsearchPathInfo<AliasRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.POST:
-					return this.LowLevelClient.IndicesUpdateAliasesForAll<T>(body,u => pathInfo.RequestParameters);
+				case POST:
+					return _lowLevel.IndicesUpdateAliasesForAll<T>(body,u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesUpdateAliases", new [] { "/_aliases" }, new [] { PathInfoHttpMethod.POST });
+			throw InvalidDispatch("IndicesUpdateAliases", p, new [] { POST }, "/_aliases");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesUpdateAliasesDispatchAsync<T>(ElasticsearchPathInfo<AliasRequestParameters> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> IndicesUpdateAliasesDispatchAsync<T>(ElasticsearchPathInfo<AliasRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.POST:
-					return this.LowLevelClient.IndicesUpdateAliasesForAllAsync<T>(body,u => pathInfo.RequestParameters);
+				case POST:
+					return _lowLevel.IndicesUpdateAliasesForAllAsync<T>(body,u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesUpdateAliases", new [] { "/_aliases" }, new [] { PathInfoHttpMethod.POST });
+			throw InvalidDispatch("IndicesUpdateAliases", p, new [] { POST }, "/_aliases");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesUpgradeDispatch<T>(ElasticsearchPathInfo<UpgradeRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> IndicesUpgradeDispatch<T>(ElasticsearchPathInfo<UpgradeRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.IndicesUpgrade<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.IndicesUpgradeForAll<T>(u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Index)) return _lowLevel.IndicesUpgrade<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.IndicesUpgradeForAll<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesUpgrade", new [] { "/_upgrade", "/{index}/_upgrade" }, new [] { PathInfoHttpMethod.POST });
+			throw InvalidDispatch("IndicesUpgrade", p, new [] { POST }, "/_upgrade", "/{index}/_upgrade");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesUpgradeDispatchAsync<T>(ElasticsearchPathInfo<UpgradeRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> IndicesUpgradeDispatchAsync<T>(ElasticsearchPathInfo<UpgradeRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.IndicesUpgradeAsync<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.IndicesUpgradeForAllAsync<T>(u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Index)) return _lowLevel.IndicesUpgradeAsync<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.IndicesUpgradeForAllAsync<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesUpgrade", new [] { "/_upgrade", "/{index}/_upgrade" }, new [] { PathInfoHttpMethod.POST });
+			throw InvalidDispatch("IndicesUpgrade", p, new [] { POST }, "/_upgrade", "/{index}/_upgrade");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesValidateQueryDispatch<T>(ElasticsearchPathInfo<ValidateQueryRequestParameters> pathInfo , object body)
+		internal ElasticsearchResponse<T> IndicesValidateQueryDispatch<T>(ElasticsearchPathInfo<ValidateQueryRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.IndicesValidateQueryGet<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.IndicesValidateQueryGet<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.IndicesValidateQueryGetForAll<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index, p.Type)) return _lowLevel.IndicesValidateQueryGet<T>(p.Index,p.Type,u => p.RequestParameters);
+					if (AllSet(p.Index)) return _lowLevel.IndicesValidateQueryGet<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.IndicesValidateQueryGetForAll<T>(u => p.RequestParameters);
 
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.IndicesValidateQuery<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.IndicesValidateQuery<T>(pathInfo.Index,body,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.IndicesValidateQueryForAll<T>(body,u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Index, p.Type)) return _lowLevel.IndicesValidateQuery<T>(p.Index,p.Type,body,u => p.RequestParameters);
+					if (AllSet(p.Index)) return _lowLevel.IndicesValidateQuery<T>(p.Index,body,u => p.RequestParameters);
+					return _lowLevel.IndicesValidateQueryForAll<T>(body,u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesValidateQuery", new [] { "/_validate/query", "/{index}/_validate/query", "/{index}/{type}/_validate/query" }, new [] { PathInfoHttpMethod.GET, PathInfoHttpMethod.POST });
+			throw InvalidDispatch("IndicesValidateQuery", p, new [] { GET, POST }, "/_validate/query", "/{index}/_validate/query", "/{index}/{type}/_validate/query");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesValidateQueryDispatchAsync<T>(ElasticsearchPathInfo<ValidateQueryRequestParameters> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> IndicesValidateQueryDispatchAsync<T>(ElasticsearchPathInfo<ValidateQueryRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.IndicesValidateQueryGetAsync<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.IndicesValidateQueryGetAsync<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.IndicesValidateQueryGetForAllAsync<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index, p.Type)) return _lowLevel.IndicesValidateQueryGetAsync<T>(p.Index,p.Type,u => p.RequestParameters);
+					if (AllSet(p.Index)) return _lowLevel.IndicesValidateQueryGetAsync<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.IndicesValidateQueryGetForAllAsync<T>(u => p.RequestParameters);
 
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.IndicesValidateQueryAsync<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.IndicesValidateQueryAsync<T>(pathInfo.Index,body,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.IndicesValidateQueryForAllAsync<T>(body,u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Index, p.Type)) return _lowLevel.IndicesValidateQueryAsync<T>(p.Index,p.Type,body,u => p.RequestParameters);
+					if (AllSet(p.Index)) return _lowLevel.IndicesValidateQueryAsync<T>(p.Index,body,u => p.RequestParameters);
+					return _lowLevel.IndicesValidateQueryForAllAsync<T>(body,u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "IndicesValidateQuery", new [] { "/_validate/query", "/{index}/_validate/query", "/{index}/{type}/_validate/query" }, new [] { PathInfoHttpMethod.GET, PathInfoHttpMethod.POST });
+			throw InvalidDispatch("IndicesValidateQuery", p, new [] { GET, POST }, "/_validate/query", "/{index}/_validate/query", "/{index}/{type}/_validate/query");
 		}
 		
-		internal ElasticsearchResponse<T> InfoDispatch<T>(ElasticsearchPathInfo<InfoRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> InfoDispatch<T>(ElasticsearchPathInfo<InfoRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					return this.LowLevelClient.Info<T>(u => pathInfo.RequestParameters);
+				case GET:
+					return _lowLevel.Info<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "Info", new [] { "/" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("Info", p, new [] { GET }, "/");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> InfoDispatchAsync<T>(ElasticsearchPathInfo<InfoRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> InfoDispatchAsync<T>(ElasticsearchPathInfo<InfoRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					return this.LowLevelClient.InfoAsync<T>(u => pathInfo.RequestParameters);
+				case GET:
+					return _lowLevel.InfoAsync<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "Info", new [] { "/" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("Info", p, new [] { GET }, "/");
 		}
 		
-		internal ElasticsearchResponse<T> ListBenchmarksDispatch<T>(ElasticsearchPathInfo<ListBenchmarksRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> ListBenchmarksDispatch<T>(ElasticsearchPathInfo<ListBenchmarksRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.ListBenchmarks<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.ListBenchmarks<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.ListBenchmarks<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index, p.Type)) return _lowLevel.ListBenchmarks<T>(p.Index,p.Type,u => p.RequestParameters);
+					if (AllSet(p.Index)) return _lowLevel.ListBenchmarks<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.ListBenchmarks<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "ListBenchmarks", new [] { "/_bench", "/{index}/_bench", "/{index}/{type}/_bench" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("ListBenchmarks", p, new [] { GET }, "/_bench", "/{index}/_bench", "/{index}/{type}/_bench");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> ListBenchmarksDispatchAsync<T>(ElasticsearchPathInfo<ListBenchmarksRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> ListBenchmarksDispatchAsync<T>(ElasticsearchPathInfo<ListBenchmarksRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.ListBenchmarksAsync<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.ListBenchmarksAsync<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.ListBenchmarksAsync<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index, p.Type)) return _lowLevel.ListBenchmarksAsync<T>(p.Index,p.Type,u => p.RequestParameters);
+					if (AllSet(p.Index)) return _lowLevel.ListBenchmarksAsync<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.ListBenchmarksAsync<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "ListBenchmarks", new [] { "/_bench", "/{index}/_bench", "/{index}/{type}/_bench" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("ListBenchmarks", p, new [] { GET }, "/_bench", "/{index}/_bench", "/{index}/{type}/_bench");
 		}
 		
-		internal ElasticsearchResponse<T> MgetDispatch<T>(ElasticsearchPathInfo<MultiGetRequestParameters> pathInfo , object body)
+		internal ElasticsearchResponse<T> MgetDispatch<T>(ElasticsearchPathInfo<MultiGetRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.MgetGet<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.MgetGet<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.MgetGet<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index, p.Type)) return _lowLevel.MgetGet<T>(p.Index,p.Type,u => p.RequestParameters);
+					if (AllSet(p.Index)) return _lowLevel.MgetGet<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.MgetGet<T>(u => p.RequestParameters);
 
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.Mget<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.Mget<T>(pathInfo.Index,body,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.Mget<T>(body,u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Index, p.Type)) return _lowLevel.Mget<T>(p.Index,p.Type,body,u => p.RequestParameters);
+					if (AllSet(p.Index)) return _lowLevel.Mget<T>(p.Index,body,u => p.RequestParameters);
+					return _lowLevel.Mget<T>(body,u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "Mget", new [] { "/_mget", "/{index}/_mget", "/{index}/{type}/_mget" }, new [] { PathInfoHttpMethod.GET, PathInfoHttpMethod.POST });
+			throw InvalidDispatch("Mget", p, new [] { GET, POST }, "/_mget", "/{index}/_mget", "/{index}/{type}/_mget");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> MgetDispatchAsync<T>(ElasticsearchPathInfo<MultiGetRequestParameters> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> MgetDispatchAsync<T>(ElasticsearchPathInfo<MultiGetRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.MgetGetAsync<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.MgetGetAsync<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.MgetGetAsync<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index, p.Type)) return _lowLevel.MgetGetAsync<T>(p.Index,p.Type,u => p.RequestParameters);
+					if (AllSet(p.Index)) return _lowLevel.MgetGetAsync<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.MgetGetAsync<T>(u => p.RequestParameters);
 
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.MgetAsync<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.MgetAsync<T>(pathInfo.Index,body,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.MgetAsync<T>(body,u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Index, p.Type)) return _lowLevel.MgetAsync<T>(p.Index,p.Type,body,u => p.RequestParameters);
+					if (AllSet(p.Index)) return _lowLevel.MgetAsync<T>(p.Index,body,u => p.RequestParameters);
+					return _lowLevel.MgetAsync<T>(body,u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "Mget", new [] { "/_mget", "/{index}/_mget", "/{index}/{type}/_mget" }, new [] { PathInfoHttpMethod.GET, PathInfoHttpMethod.POST });
+			throw InvalidDispatch("Mget", p, new [] { GET, POST }, "/_mget", "/{index}/_mget", "/{index}/{type}/_mget");
 		}
 		
-		internal ElasticsearchResponse<T> MltDispatch<T>(ElasticsearchPathInfo<MoreLikeThisRequestParameters> pathInfo , object body)
+		internal ElasticsearchResponse<T> MltDispatch<T>(ElasticsearchPathInfo<MoreLikeThisRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index, pathInfo.Type, pathInfo.Id))
-						return this.LowLevelClient.MltGet<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index, p.Type, p.Id)) return _lowLevel.MltGet<T>(p.Index,p.Type,p.Id,u => p.RequestParameters);
 					break;
 
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Index, pathInfo.Type, pathInfo.Id))
-						return this.LowLevelClient.Mlt<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Index, p.Type, p.Id)) return _lowLevel.Mlt<T>(p.Index,p.Type,p.Id,body,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "Mlt", new [] { "/{index}/{type}/{id}/_mlt" }, new [] { PathInfoHttpMethod.GET, PathInfoHttpMethod.POST });
+			throw InvalidDispatch("Mlt", p, new [] { GET, POST }, "/{index}/{type}/{id}/_mlt");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> MltDispatchAsync<T>(ElasticsearchPathInfo<MoreLikeThisRequestParameters> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> MltDispatchAsync<T>(ElasticsearchPathInfo<MoreLikeThisRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index, pathInfo.Type, pathInfo.Id))
-						return this.LowLevelClient.MltGetAsync<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index, p.Type, p.Id)) return _lowLevel.MltGetAsync<T>(p.Index,p.Type,p.Id,u => p.RequestParameters);
 					break;
 
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Index, pathInfo.Type, pathInfo.Id))
-						return this.LowLevelClient.MltAsync<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Index, p.Type, p.Id)) return _lowLevel.MltAsync<T>(p.Index,p.Type,p.Id,body,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "Mlt", new [] { "/{index}/{type}/{id}/_mlt" }, new [] { PathInfoHttpMethod.GET, PathInfoHttpMethod.POST });
+			throw InvalidDispatch("Mlt", p, new [] { GET, POST }, "/{index}/{type}/{id}/_mlt");
 		}
 		
-		internal ElasticsearchResponse<T> MpercolateDispatch<T>(ElasticsearchPathInfo<MultiPercolateRequestParameters> pathInfo , object body)
+		internal ElasticsearchResponse<T> MpercolateDispatch<T>(ElasticsearchPathInfo<MultiPercolateRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.MpercolateGet<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.MpercolateGet<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.MpercolateGet<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index, p.Type)) return _lowLevel.MpercolateGet<T>(p.Index,p.Type,u => p.RequestParameters);
+					if (AllSet(p.Index)) return _lowLevel.MpercolateGet<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.MpercolateGet<T>(u => p.RequestParameters);
 
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.Mpercolate<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.Mpercolate<T>(pathInfo.Index,body,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.Mpercolate<T>(body,u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Index, p.Type)) return _lowLevel.Mpercolate<T>(p.Index,p.Type,body,u => p.RequestParameters);
+					if (AllSet(p.Index)) return _lowLevel.Mpercolate<T>(p.Index,body,u => p.RequestParameters);
+					return _lowLevel.Mpercolate<T>(body,u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "Mpercolate", new [] { "/_mpercolate", "/{index}/_mpercolate", "/{index}/{type}/_mpercolate" }, new [] { PathInfoHttpMethod.GET, PathInfoHttpMethod.POST });
+			throw InvalidDispatch("Mpercolate", p, new [] { GET, POST }, "/_mpercolate", "/{index}/_mpercolate", "/{index}/{type}/_mpercolate");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> MpercolateDispatchAsync<T>(ElasticsearchPathInfo<MultiPercolateRequestParameters> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> MpercolateDispatchAsync<T>(ElasticsearchPathInfo<MultiPercolateRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.MpercolateGetAsync<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.MpercolateGetAsync<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.MpercolateGetAsync<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index, p.Type)) return _lowLevel.MpercolateGetAsync<T>(p.Index,p.Type,u => p.RequestParameters);
+					if (AllSet(p.Index)) return _lowLevel.MpercolateGetAsync<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.MpercolateGetAsync<T>(u => p.RequestParameters);
 
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.MpercolateAsync<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.MpercolateAsync<T>(pathInfo.Index,body,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.MpercolateAsync<T>(body,u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Index, p.Type)) return _lowLevel.MpercolateAsync<T>(p.Index,p.Type,body,u => p.RequestParameters);
+					if (AllSet(p.Index)) return _lowLevel.MpercolateAsync<T>(p.Index,body,u => p.RequestParameters);
+					return _lowLevel.MpercolateAsync<T>(body,u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "Mpercolate", new [] { "/_mpercolate", "/{index}/_mpercolate", "/{index}/{type}/_mpercolate" }, new [] { PathInfoHttpMethod.GET, PathInfoHttpMethod.POST });
+			throw InvalidDispatch("Mpercolate", p, new [] { GET, POST }, "/_mpercolate", "/{index}/_mpercolate", "/{index}/{type}/_mpercolate");
 		}
 		
-		internal ElasticsearchResponse<T> MsearchDispatch<T>(ElasticsearchPathInfo<MultiSearchRequestParameters> pathInfo , object body)
+		internal ElasticsearchResponse<T> MsearchDispatch<T>(ElasticsearchPathInfo<MultiSearchRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.MsearchGet<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.MsearchGet<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.MsearchGet<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index, p.Type)) return _lowLevel.MsearchGet<T>(p.Index,p.Type,u => p.RequestParameters);
+					if (AllSet(p.Index)) return _lowLevel.MsearchGet<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.MsearchGet<T>(u => p.RequestParameters);
 
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.Msearch<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.Msearch<T>(pathInfo.Index,body,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.Msearch<T>(body,u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Index, p.Type)) return _lowLevel.Msearch<T>(p.Index,p.Type,body,u => p.RequestParameters);
+					if (AllSet(p.Index)) return _lowLevel.Msearch<T>(p.Index,body,u => p.RequestParameters);
+					return _lowLevel.Msearch<T>(body,u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "Msearch", new [] { "/_msearch", "/{index}/_msearch", "/{index}/{type}/_msearch" }, new [] { PathInfoHttpMethod.GET, PathInfoHttpMethod.POST });
+			throw InvalidDispatch("Msearch", p, new [] { GET, POST }, "/_msearch", "/{index}/_msearch", "/{index}/{type}/_msearch");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> MsearchDispatchAsync<T>(ElasticsearchPathInfo<MultiSearchRequestParameters> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> MsearchDispatchAsync<T>(ElasticsearchPathInfo<MultiSearchRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.MsearchGetAsync<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.MsearchGetAsync<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.MsearchGetAsync<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index, p.Type)) return _lowLevel.MsearchGetAsync<T>(p.Index,p.Type,u => p.RequestParameters);
+					if (AllSet(p.Index)) return _lowLevel.MsearchGetAsync<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.MsearchGetAsync<T>(u => p.RequestParameters);
 
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.MsearchAsync<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.MsearchAsync<T>(pathInfo.Index,body,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.MsearchAsync<T>(body,u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Index, p.Type)) return _lowLevel.MsearchAsync<T>(p.Index,p.Type,body,u => p.RequestParameters);
+					if (AllSet(p.Index)) return _lowLevel.MsearchAsync<T>(p.Index,body,u => p.RequestParameters);
+					return _lowLevel.MsearchAsync<T>(body,u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "Msearch", new [] { "/_msearch", "/{index}/_msearch", "/{index}/{type}/_msearch" }, new [] { PathInfoHttpMethod.GET, PathInfoHttpMethod.POST });
+			throw InvalidDispatch("Msearch", p, new [] { GET, POST }, "/_msearch", "/{index}/_msearch", "/{index}/{type}/_msearch");
 		}
 		
-		internal ElasticsearchResponse<T> MtermvectorsDispatch<T>(ElasticsearchPathInfo<MultiTermVectorsRequestParameters> pathInfo , object body)
+		internal ElasticsearchResponse<T> MtermvectorsDispatch<T>(ElasticsearchPathInfo<MultiTermVectorsRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.MtermvectorsGet<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.MtermvectorsGet<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.MtermvectorsGet<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index, p.Type)) return _lowLevel.MtermvectorsGet<T>(p.Index,p.Type,u => p.RequestParameters);
+					if (AllSet(p.Index)) return _lowLevel.MtermvectorsGet<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.MtermvectorsGet<T>(u => p.RequestParameters);
 
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.Mtermvectors<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.Mtermvectors<T>(pathInfo.Index,body,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.Mtermvectors<T>(body,u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Index, p.Type)) return _lowLevel.Mtermvectors<T>(p.Index,p.Type,body,u => p.RequestParameters);
+					if (AllSet(p.Index)) return _lowLevel.Mtermvectors<T>(p.Index,body,u => p.RequestParameters);
+					return _lowLevel.Mtermvectors<T>(body,u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "Mtermvectors", new [] { "/_mtermvectors", "/{index}/_mtermvectors", "/{index}/{type}/_mtermvectors" }, new [] { PathInfoHttpMethod.GET, PathInfoHttpMethod.POST });
+			throw InvalidDispatch("Mtermvectors", p, new [] { GET, POST }, "/_mtermvectors", "/{index}/_mtermvectors", "/{index}/{type}/_mtermvectors");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> MtermvectorsDispatchAsync<T>(ElasticsearchPathInfo<MultiTermVectorsRequestParameters> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> MtermvectorsDispatchAsync<T>(ElasticsearchPathInfo<MultiTermVectorsRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.MtermvectorsGetAsync<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.MtermvectorsGetAsync<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.MtermvectorsGetAsync<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index, p.Type)) return _lowLevel.MtermvectorsGetAsync<T>(p.Index,p.Type,u => p.RequestParameters);
+					if (AllSet(p.Index)) return _lowLevel.MtermvectorsGetAsync<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.MtermvectorsGetAsync<T>(u => p.RequestParameters);
 
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.MtermvectorsAsync<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.MtermvectorsAsync<T>(pathInfo.Index,body,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.MtermvectorsAsync<T>(body,u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Index, p.Type)) return _lowLevel.MtermvectorsAsync<T>(p.Index,p.Type,body,u => p.RequestParameters);
+					if (AllSet(p.Index)) return _lowLevel.MtermvectorsAsync<T>(p.Index,body,u => p.RequestParameters);
+					return _lowLevel.MtermvectorsAsync<T>(body,u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "Mtermvectors", new [] { "/_mtermvectors", "/{index}/_mtermvectors", "/{index}/{type}/_mtermvectors" }, new [] { PathInfoHttpMethod.GET, PathInfoHttpMethod.POST });
+			throw InvalidDispatch("Mtermvectors", p, new [] { GET, POST }, "/_mtermvectors", "/{index}/_mtermvectors", "/{index}/{type}/_mtermvectors");
 		}
 		
-		internal ElasticsearchResponse<T> NodesHotThreadsDispatch<T>(ElasticsearchPathInfo<NodesHotThreadsRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> NodesHotThreadsDispatch<T>(ElasticsearchPathInfo<NodesHotThreadsRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.NodeId))
-						return this.LowLevelClient.NodesHotThreads<T>(pathInfo.NodeId,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.NodesHotThreadsForAll<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.NodeId)) return _lowLevel.NodesHotThreads<T>(p.NodeId,u => p.RequestParameters);
+					return _lowLevel.NodesHotThreadsForAll<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "NodesHotThreads", new [] { "/_cluster/nodes/hotthreads", "/_cluster/nodes/hot_threads", "/_cluster/nodes/{node_id}/hotthreads", "/_cluster/nodes/{node_id}/hot_threads", "/_nodes/hotthreads", "/_nodes/hot_threads", "/_nodes/{node_id}/hotthreads", "/_nodes/{node_id}/hot_threads" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("NodesHotThreads", p, new [] { GET }, "/_cluster/nodes/hotthreads", "/_cluster/nodes/hot_threads", "/_cluster/nodes/{node_id}/hotthreads", "/_cluster/nodes/{node_id}/hot_threads", "/_nodes/hotthreads", "/_nodes/hot_threads", "/_nodes/{node_id}/hotthreads", "/_nodes/{node_id}/hot_threads");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> NodesHotThreadsDispatchAsync<T>(ElasticsearchPathInfo<NodesHotThreadsRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> NodesHotThreadsDispatchAsync<T>(ElasticsearchPathInfo<NodesHotThreadsRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.NodeId))
-						return this.LowLevelClient.NodesHotThreadsAsync<T>(pathInfo.NodeId,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.NodesHotThreadsForAllAsync<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.NodeId)) return _lowLevel.NodesHotThreadsAsync<T>(p.NodeId,u => p.RequestParameters);
+					return _lowLevel.NodesHotThreadsForAllAsync<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "NodesHotThreads", new [] { "/_cluster/nodes/hotthreads", "/_cluster/nodes/hot_threads", "/_cluster/nodes/{node_id}/hotthreads", "/_cluster/nodes/{node_id}/hot_threads", "/_nodes/hotthreads", "/_nodes/hot_threads", "/_nodes/{node_id}/hotthreads", "/_nodes/{node_id}/hot_threads" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("NodesHotThreads", p, new [] { GET }, "/_cluster/nodes/hotthreads", "/_cluster/nodes/hot_threads", "/_cluster/nodes/{node_id}/hotthreads", "/_cluster/nodes/{node_id}/hot_threads", "/_nodes/hotthreads", "/_nodes/hot_threads", "/_nodes/{node_id}/hotthreads", "/_nodes/{node_id}/hot_threads");
 		}
 		
-		internal ElasticsearchResponse<T> NodesInfoDispatch<T>(ElasticsearchPathInfo<NodesInfoRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> NodesInfoDispatch<T>(ElasticsearchPathInfo<NodesInfoRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.NodeId, pathInfo.Metric))
-						return this.LowLevelClient.NodesInfo<T>(pathInfo.NodeId,pathInfo.Metric,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.NodeId))
-						return this.LowLevelClient.NodesInfo<T>(pathInfo.NodeId,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Metric))
-						return this.LowLevelClient.NodesInfoForAll<T>(pathInfo.Metric,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.NodesInfoForAll<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.NodeId, p.Metric)) return _lowLevel.NodesInfo<T>(p.NodeId,p.Metric,u => p.RequestParameters);
+					if (AllSet(p.NodeId)) return _lowLevel.NodesInfo<T>(p.NodeId,u => p.RequestParameters);
+					if (AllSet(p.Metric)) return _lowLevel.NodesInfoForAll<T>(p.Metric,u => p.RequestParameters);
+					return _lowLevel.NodesInfoForAll<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "NodesInfo", new [] { "/_nodes", "/_nodes/{node_id}", "/_nodes/{metric}", "/_nodes/{node_id}/{metric}" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("NodesInfo", p, new [] { GET }, "/_nodes", "/_nodes/{node_id}", "/_nodes/{metric}", "/_nodes/{node_id}/{metric}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> NodesInfoDispatchAsync<T>(ElasticsearchPathInfo<NodesInfoRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> NodesInfoDispatchAsync<T>(ElasticsearchPathInfo<NodesInfoRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.NodeId, pathInfo.Metric))
-						return this.LowLevelClient.NodesInfoAsync<T>(pathInfo.NodeId,pathInfo.Metric,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.NodeId))
-						return this.LowLevelClient.NodesInfoAsync<T>(pathInfo.NodeId,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Metric))
-						return this.LowLevelClient.NodesInfoForAllAsync<T>(pathInfo.Metric,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.NodesInfoForAllAsync<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.NodeId, p.Metric)) return _lowLevel.NodesInfoAsync<T>(p.NodeId,p.Metric,u => p.RequestParameters);
+					if (AllSet(p.NodeId)) return _lowLevel.NodesInfoAsync<T>(p.NodeId,u => p.RequestParameters);
+					if (AllSet(p.Metric)) return _lowLevel.NodesInfoForAllAsync<T>(p.Metric,u => p.RequestParameters);
+					return _lowLevel.NodesInfoForAllAsync<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "NodesInfo", new [] { "/_nodes", "/_nodes/{node_id}", "/_nodes/{metric}", "/_nodes/{node_id}/{metric}" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("NodesInfo", p, new [] { GET }, "/_nodes", "/_nodes/{node_id}", "/_nodes/{metric}", "/_nodes/{node_id}/{metric}");
 		}
 		
-		internal ElasticsearchResponse<T> NodesShutdownDispatch<T>(ElasticsearchPathInfo<NodesShutdownRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> NodesShutdownDispatch<T>(ElasticsearchPathInfo<NodesShutdownRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.NodeId))
-						return this.LowLevelClient.NodesShutdown<T>(pathInfo.NodeId,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.NodesShutdownForAll<T>(u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.NodeId)) return _lowLevel.NodesShutdown<T>(p.NodeId,u => p.RequestParameters);
+					return _lowLevel.NodesShutdownForAll<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "NodesShutdown", new [] { "/_shutdown", "/_cluster/nodes/_shutdown", "/_cluster/nodes/{node_id}/_shutdown" }, new [] { PathInfoHttpMethod.POST });
+			throw InvalidDispatch("NodesShutdown", p, new [] { POST }, "/_shutdown", "/_cluster/nodes/_shutdown", "/_cluster/nodes/{node_id}/_shutdown");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> NodesShutdownDispatchAsync<T>(ElasticsearchPathInfo<NodesShutdownRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> NodesShutdownDispatchAsync<T>(ElasticsearchPathInfo<NodesShutdownRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.NodeId))
-						return this.LowLevelClient.NodesShutdownAsync<T>(pathInfo.NodeId,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.NodesShutdownForAllAsync<T>(u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.NodeId)) return _lowLevel.NodesShutdownAsync<T>(p.NodeId,u => p.RequestParameters);
+					return _lowLevel.NodesShutdownForAllAsync<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "NodesShutdown", new [] { "/_shutdown", "/_cluster/nodes/_shutdown", "/_cluster/nodes/{node_id}/_shutdown" }, new [] { PathInfoHttpMethod.POST });
+			throw InvalidDispatch("NodesShutdown", p, new [] { POST }, "/_shutdown", "/_cluster/nodes/_shutdown", "/_cluster/nodes/{node_id}/_shutdown");
 		}
 		
-		internal ElasticsearchResponse<T> NodesStatsDispatch<T>(ElasticsearchPathInfo<NodesStatsRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> NodesStatsDispatch<T>(ElasticsearchPathInfo<NodesStatsRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.NodeId, pathInfo.Metric, pathInfo.IndexMetric))
-						return this.LowLevelClient.NodesStats<T>(pathInfo.NodeId,pathInfo.Metric,pathInfo.IndexMetric,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.NodeId, pathInfo.Metric))
-						return this.LowLevelClient.NodesStats<T>(pathInfo.NodeId,pathInfo.Metric,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Metric, pathInfo.IndexMetric))
-						return this.LowLevelClient.NodesStatsForAll<T>(pathInfo.Metric,pathInfo.IndexMetric,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.NodeId))
-						return this.LowLevelClient.NodesStats<T>(pathInfo.NodeId,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Metric))
-						return this.LowLevelClient.NodesStatsForAll<T>(pathInfo.Metric,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.NodesStatsForAll<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.NodeId, p.Metric, p.IndexMetric)) return _lowLevel.NodesStats<T>(p.NodeId,p.Metric,p.IndexMetric,u => p.RequestParameters);
+					if (AllSet(p.NodeId, p.Metric)) return _lowLevel.NodesStats<T>(p.NodeId,p.Metric,u => p.RequestParameters);
+					if (AllSet(p.Metric, p.IndexMetric)) return _lowLevel.NodesStatsForAll<T>(p.Metric,p.IndexMetric,u => p.RequestParameters);
+					if (AllSet(p.NodeId)) return _lowLevel.NodesStats<T>(p.NodeId,u => p.RequestParameters);
+					if (AllSet(p.Metric)) return _lowLevel.NodesStatsForAll<T>(p.Metric,u => p.RequestParameters);
+					return _lowLevel.NodesStatsForAll<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "NodesStats", new [] { "/_nodes/stats", "/_nodes/{node_id}/stats", "/_nodes/stats/{metric}", "/_nodes/{node_id}/stats/{metric}", "/_nodes/stats/{metric}/{index_metric}", "/_nodes/{node_id}/stats/{metric}/{index_metric}" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("NodesStats", p, new [] { GET }, "/_nodes/stats", "/_nodes/{node_id}/stats", "/_nodes/stats/{metric}", "/_nodes/{node_id}/stats/{metric}", "/_nodes/stats/{metric}/{index_metric}", "/_nodes/{node_id}/stats/{metric}/{index_metric}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> NodesStatsDispatchAsync<T>(ElasticsearchPathInfo<NodesStatsRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> NodesStatsDispatchAsync<T>(ElasticsearchPathInfo<NodesStatsRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.NodeId, pathInfo.Metric, pathInfo.IndexMetric))
-						return this.LowLevelClient.NodesStatsAsync<T>(pathInfo.NodeId,pathInfo.Metric,pathInfo.IndexMetric,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.NodeId, pathInfo.Metric))
-						return this.LowLevelClient.NodesStatsAsync<T>(pathInfo.NodeId,pathInfo.Metric,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Metric, pathInfo.IndexMetric))
-						return this.LowLevelClient.NodesStatsForAllAsync<T>(pathInfo.Metric,pathInfo.IndexMetric,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.NodeId))
-						return this.LowLevelClient.NodesStatsAsync<T>(pathInfo.NodeId,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Metric))
-						return this.LowLevelClient.NodesStatsForAllAsync<T>(pathInfo.Metric,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.NodesStatsForAllAsync<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.NodeId, p.Metric, p.IndexMetric)) return _lowLevel.NodesStatsAsync<T>(p.NodeId,p.Metric,p.IndexMetric,u => p.RequestParameters);
+					if (AllSet(p.NodeId, p.Metric)) return _lowLevel.NodesStatsAsync<T>(p.NodeId,p.Metric,u => p.RequestParameters);
+					if (AllSet(p.Metric, p.IndexMetric)) return _lowLevel.NodesStatsForAllAsync<T>(p.Metric,p.IndexMetric,u => p.RequestParameters);
+					if (AllSet(p.NodeId)) return _lowLevel.NodesStatsAsync<T>(p.NodeId,u => p.RequestParameters);
+					if (AllSet(p.Metric)) return _lowLevel.NodesStatsForAllAsync<T>(p.Metric,u => p.RequestParameters);
+					return _lowLevel.NodesStatsForAllAsync<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "NodesStats", new [] { "/_nodes/stats", "/_nodes/{node_id}/stats", "/_nodes/stats/{metric}", "/_nodes/{node_id}/stats/{metric}", "/_nodes/stats/{metric}/{index_metric}", "/_nodes/{node_id}/stats/{metric}/{index_metric}" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("NodesStats", p, new [] { GET }, "/_nodes/stats", "/_nodes/{node_id}/stats", "/_nodes/stats/{metric}", "/_nodes/{node_id}/stats/{metric}", "/_nodes/stats/{metric}/{index_metric}", "/_nodes/{node_id}/stats/{metric}/{index_metric}");
 		}
 		
-		internal ElasticsearchResponse<T> PercolateDispatch<T>(ElasticsearchPathInfo<PercolateRequestParameters> pathInfo , object body)
+		internal ElasticsearchResponse<T> PercolateDispatch<T>(ElasticsearchPathInfo<PercolateRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index, pathInfo.Type, pathInfo.Id))
-						return this.LowLevelClient.PercolateGet<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.PercolateGet<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index, p.Type, p.Id)) return _lowLevel.PercolateGet<T>(p.Index,p.Type,p.Id,u => p.RequestParameters);
+					if (AllSet(p.Index, p.Type)) return _lowLevel.PercolateGet<T>(p.Index,p.Type,u => p.RequestParameters);
 					break;
 
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Index, pathInfo.Type, pathInfo.Id))
-						return this.LowLevelClient.Percolate<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.Percolate<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Index, p.Type, p.Id)) return _lowLevel.Percolate<T>(p.Index,p.Type,p.Id,body,u => p.RequestParameters);
+					if (AllSet(p.Index, p.Type)) return _lowLevel.Percolate<T>(p.Index,p.Type,body,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "Percolate", new [] { "/{index}/{type}/_percolate", "/{index}/{type}/{id}/_percolate" }, new [] { PathInfoHttpMethod.GET, PathInfoHttpMethod.POST });
+			throw InvalidDispatch("Percolate", p, new [] { GET, POST }, "/{index}/{type}/_percolate", "/{index}/{type}/{id}/_percolate");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> PercolateDispatchAsync<T>(ElasticsearchPathInfo<PercolateRequestParameters> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> PercolateDispatchAsync<T>(ElasticsearchPathInfo<PercolateRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index, pathInfo.Type, pathInfo.Id))
-						return this.LowLevelClient.PercolateGetAsync<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.PercolateGetAsync<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index, p.Type, p.Id)) return _lowLevel.PercolateGetAsync<T>(p.Index,p.Type,p.Id,u => p.RequestParameters);
+					if (AllSet(p.Index, p.Type)) return _lowLevel.PercolateGetAsync<T>(p.Index,p.Type,u => p.RequestParameters);
 					break;
 
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Index, pathInfo.Type, pathInfo.Id))
-						return this.LowLevelClient.PercolateAsync<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.PercolateAsync<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Index, p.Type, p.Id)) return _lowLevel.PercolateAsync<T>(p.Index,p.Type,p.Id,body,u => p.RequestParameters);
+					if (AllSet(p.Index, p.Type)) return _lowLevel.PercolateAsync<T>(p.Index,p.Type,body,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "Percolate", new [] { "/{index}/{type}/_percolate", "/{index}/{type}/{id}/_percolate" }, new [] { PathInfoHttpMethod.GET, PathInfoHttpMethod.POST });
+			throw InvalidDispatch("Percolate", p, new [] { GET, POST }, "/{index}/{type}/_percolate", "/{index}/{type}/{id}/_percolate");
 		}
 		
-		internal ElasticsearchResponse<T> PingDispatch<T>(ElasticsearchPathInfo<PingRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> PingDispatch<T>(ElasticsearchPathInfo<PingRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.HEAD:
-					return this.LowLevelClient.Ping<T>(u => pathInfo.RequestParameters);
+				case HEAD:
+					return _lowLevel.Ping<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "Ping", new [] { "/" }, new [] { PathInfoHttpMethod.HEAD });
+			throw InvalidDispatch("Ping", p, new [] { HEAD }, "/");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> PingDispatchAsync<T>(ElasticsearchPathInfo<PingRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> PingDispatchAsync<T>(ElasticsearchPathInfo<PingRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.HEAD:
-					return this.LowLevelClient.PingAsync<T>(u => pathInfo.RequestParameters);
+				case HEAD:
+					return _lowLevel.PingAsync<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "Ping", new [] { "/" }, new [] { PathInfoHttpMethod.HEAD });
+			throw InvalidDispatch("Ping", p, new [] { HEAD }, "/");
 		}
 		
-		internal ElasticsearchResponse<T> PutScriptDispatch<T>(ElasticsearchPathInfo<PutScriptRequestParameters> pathInfo , object body)
+		internal ElasticsearchResponse<T> PutScriptDispatch<T>(ElasticsearchPathInfo<PutScriptRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.PUT:
-					if (AllSet(pathInfo.Lang, pathInfo.Id))
-						return this.LowLevelClient.PutScript<T>(pathInfo.Lang,pathInfo.Id,body,u => pathInfo.RequestParameters);
+				case PUT:
+					if (AllSet(p.Lang, p.Id)) return _lowLevel.PutScript<T>(p.Lang,p.Id,body,u => p.RequestParameters);
 					break;
 
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Lang, pathInfo.Id))
-						return this.LowLevelClient.PutScriptPost<T>(pathInfo.Lang,pathInfo.Id,body,u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Lang, p.Id)) return _lowLevel.PutScriptPost<T>(p.Lang,p.Id,body,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "PutScript", new [] { "/_scripts/{lang}/{id}" }, new [] { PathInfoHttpMethod.PUT, PathInfoHttpMethod.POST });
+			throw InvalidDispatch("PutScript", p, new [] { PUT, POST }, "/_scripts/{lang}/{id}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> PutScriptDispatchAsync<T>(ElasticsearchPathInfo<PutScriptRequestParameters> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> PutScriptDispatchAsync<T>(ElasticsearchPathInfo<PutScriptRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.PUT:
-					if (AllSet(pathInfo.Lang, pathInfo.Id))
-						return this.LowLevelClient.PutScriptAsync<T>(pathInfo.Lang,pathInfo.Id,body,u => pathInfo.RequestParameters);
+				case PUT:
+					if (AllSet(p.Lang, p.Id)) return _lowLevel.PutScriptAsync<T>(p.Lang,p.Id,body,u => p.RequestParameters);
 					break;
 
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Lang, pathInfo.Id))
-						return this.LowLevelClient.PutScriptPostAsync<T>(pathInfo.Lang,pathInfo.Id,body,u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Lang, p.Id)) return _lowLevel.PutScriptPostAsync<T>(p.Lang,p.Id,body,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "PutScript", new [] { "/_scripts/{lang}/{id}" }, new [] { PathInfoHttpMethod.PUT, PathInfoHttpMethod.POST });
+			throw InvalidDispatch("PutScript", p, new [] { PUT, POST }, "/_scripts/{lang}/{id}");
 		}
 		
-		internal ElasticsearchResponse<T> PutTemplateDispatch<T>(ElasticsearchPathInfo<PutTemplateRequestParameters> pathInfo , object body)
+		internal ElasticsearchResponse<T> PutTemplateDispatch<T>(ElasticsearchPathInfo<PutTemplateRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.PUT:
-					if (AllSet(pathInfo.Id))
-						return this.LowLevelClient.PutTemplate<T>(pathInfo.Id,body,u => pathInfo.RequestParameters);
+				case PUT:
+					if (AllSet(p.Id)) return _lowLevel.PutTemplate<T>(p.Id,body,u => p.RequestParameters);
 					break;
 
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Id))
-						return this.LowLevelClient.PutTemplatePost<T>(pathInfo.Id,body,u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Id)) return _lowLevel.PutTemplatePost<T>(p.Id,body,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "PutTemplate", new [] { "/_search/template/{id}" }, new [] { PathInfoHttpMethod.PUT, PathInfoHttpMethod.POST });
+			throw InvalidDispatch("PutTemplate", p, new [] { PUT, POST }, "/_search/template/{id}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> PutTemplateDispatchAsync<T>(ElasticsearchPathInfo<PutTemplateRequestParameters> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> PutTemplateDispatchAsync<T>(ElasticsearchPathInfo<PutTemplateRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.PUT:
-					if (AllSet(pathInfo.Id))
-						return this.LowLevelClient.PutTemplateAsync<T>(pathInfo.Id,body,u => pathInfo.RequestParameters);
+				case PUT:
+					if (AllSet(p.Id)) return _lowLevel.PutTemplateAsync<T>(p.Id,body,u => p.RequestParameters);
 					break;
 
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Id))
-						return this.LowLevelClient.PutTemplatePostAsync<T>(pathInfo.Id,body,u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Id)) return _lowLevel.PutTemplatePostAsync<T>(p.Id,body,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "PutTemplate", new [] { "/_search/template/{id}" }, new [] { PathInfoHttpMethod.PUT, PathInfoHttpMethod.POST });
+			throw InvalidDispatch("PutTemplate", p, new [] { PUT, POST }, "/_search/template/{id}");
 		}
 		
-		internal ElasticsearchResponse<T> ScrollDispatch<T>(ElasticsearchPathInfo<ScrollRequestParameters> pathInfo , object body)
+		internal ElasticsearchResponse<T> ScrollDispatch<T>(ElasticsearchPathInfo<ScrollRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.ScrollId))
-						return this.LowLevelClient.ScrollGet<T>(pathInfo.ScrollId,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.ScrollGet<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.ScrollId)) return _lowLevel.ScrollGet<T>(p.ScrollId,u => p.RequestParameters);
+					return _lowLevel.ScrollGet<T>(u => p.RequestParameters);
 
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.ScrollId))
-						return this.LowLevelClient.Scroll<T>(pathInfo.ScrollId,body,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.Scroll<T>(body,u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.ScrollId)) return _lowLevel.Scroll<T>(p.ScrollId,body,u => p.RequestParameters);
+					return _lowLevel.Scroll<T>(body,u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "Scroll", new [] { "/_search/scroll", "/_search/scroll/{scroll_id}" }, new [] { PathInfoHttpMethod.GET, PathInfoHttpMethod.POST });
+			throw InvalidDispatch("Scroll", p, new [] { GET, POST }, "/_search/scroll", "/_search/scroll/{scroll_id}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> ScrollDispatchAsync<T>(ElasticsearchPathInfo<ScrollRequestParameters> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> ScrollDispatchAsync<T>(ElasticsearchPathInfo<ScrollRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.ScrollId))
-						return this.LowLevelClient.ScrollGetAsync<T>(pathInfo.ScrollId,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.ScrollGetAsync<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.ScrollId)) return _lowLevel.ScrollGetAsync<T>(p.ScrollId,u => p.RequestParameters);
+					return _lowLevel.ScrollGetAsync<T>(u => p.RequestParameters);
 
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.ScrollId))
-						return this.LowLevelClient.ScrollAsync<T>(pathInfo.ScrollId,body,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.ScrollAsync<T>(body,u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.ScrollId)) return _lowLevel.ScrollAsync<T>(p.ScrollId,body,u => p.RequestParameters);
+					return _lowLevel.ScrollAsync<T>(body,u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "Scroll", new [] { "/_search/scroll", "/_search/scroll/{scroll_id}" }, new [] { PathInfoHttpMethod.GET, PathInfoHttpMethod.POST });
+			throw InvalidDispatch("Scroll", p, new [] { GET, POST }, "/_search/scroll", "/_search/scroll/{scroll_id}");
 		}
 		
-		internal ElasticsearchResponse<T> SearchDispatch<T>(ElasticsearchPathInfo<SearchRequestParameters> pathInfo , object body)
+		internal ElasticsearchResponse<T> SearchDispatch<T>(ElasticsearchPathInfo<SearchRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.SearchGet<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.SearchGet<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.SearchGet<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index, p.Type)) return _lowLevel.SearchGet<T>(p.Index,p.Type,u => p.RequestParameters);
+					if (AllSet(p.Index)) return _lowLevel.SearchGet<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.SearchGet<T>(u => p.RequestParameters);
 
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.Search<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.Search<T>(pathInfo.Index,body,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.Search<T>(body,u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Index, p.Type)) return _lowLevel.Search<T>(p.Index,p.Type,body,u => p.RequestParameters);
+					if (AllSet(p.Index)) return _lowLevel.Search<T>(p.Index,body,u => p.RequestParameters);
+					return _lowLevel.Search<T>(body,u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "Search", new [] { "/_search", "/{index}/_search", "/{index}/{type}/_search" }, new [] { PathInfoHttpMethod.GET, PathInfoHttpMethod.POST });
+			throw InvalidDispatch("Search", p, new [] { GET, POST }, "/_search", "/{index}/_search", "/{index}/{type}/_search");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> SearchDispatchAsync<T>(ElasticsearchPathInfo<SearchRequestParameters> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> SearchDispatchAsync<T>(ElasticsearchPathInfo<SearchRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.SearchGetAsync<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.SearchGetAsync<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.SearchGetAsync<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index, p.Type)) return _lowLevel.SearchGetAsync<T>(p.Index,p.Type,u => p.RequestParameters);
+					if (AllSet(p.Index)) return _lowLevel.SearchGetAsync<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.SearchGetAsync<T>(u => p.RequestParameters);
 
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.SearchAsync<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.SearchAsync<T>(pathInfo.Index,body,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.SearchAsync<T>(body,u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Index, p.Type)) return _lowLevel.SearchAsync<T>(p.Index,p.Type,body,u => p.RequestParameters);
+					if (AllSet(p.Index)) return _lowLevel.SearchAsync<T>(p.Index,body,u => p.RequestParameters);
+					return _lowLevel.SearchAsync<T>(body,u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "Search", new [] { "/_search", "/{index}/_search", "/{index}/{type}/_search" }, new [] { PathInfoHttpMethod.GET, PathInfoHttpMethod.POST });
+			throw InvalidDispatch("Search", p, new [] { GET, POST }, "/_search", "/{index}/_search", "/{index}/{type}/_search");
 		}
 		
-		internal ElasticsearchResponse<T> SearchExistsDispatch<T>(ElasticsearchPathInfo<SearchExistsRequestParameters> pathInfo , object body)
+		internal ElasticsearchResponse<T> SearchExistsDispatch<T>(ElasticsearchPathInfo<SearchExistsRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.SearchExists<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.SearchExists<T>(pathInfo.Index,body,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.SearchExists<T>(body,u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Index, p.Type)) return _lowLevel.SearchExists<T>(p.Index,p.Type,body,u => p.RequestParameters);
+					if (AllSet(p.Index)) return _lowLevel.SearchExists<T>(p.Index,body,u => p.RequestParameters);
+					return _lowLevel.SearchExists<T>(body,u => p.RequestParameters);
 
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.SearchExistsGet<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.SearchExistsGet<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.SearchExistsGet<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index, p.Type)) return _lowLevel.SearchExistsGet<T>(p.Index,p.Type,u => p.RequestParameters);
+					if (AllSet(p.Index)) return _lowLevel.SearchExistsGet<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.SearchExistsGet<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "SearchExists", new [] { "/_search/exists", "/{index}/_search/exists", "/{index}/{type}/_search/exists" }, new [] { PathInfoHttpMethod.POST, PathInfoHttpMethod.GET });
+			throw InvalidDispatch("SearchExists", p, new [] { POST, GET }, "/_search/exists", "/{index}/_search/exists", "/{index}/{type}/_search/exists");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> SearchExistsDispatchAsync<T>(ElasticsearchPathInfo<SearchExistsRequestParameters> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> SearchExistsDispatchAsync<T>(ElasticsearchPathInfo<SearchExistsRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.SearchExistsAsync<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.SearchExistsAsync<T>(pathInfo.Index,body,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.SearchExistsAsync<T>(body,u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Index, p.Type)) return _lowLevel.SearchExistsAsync<T>(p.Index,p.Type,body,u => p.RequestParameters);
+					if (AllSet(p.Index)) return _lowLevel.SearchExistsAsync<T>(p.Index,body,u => p.RequestParameters);
+					return _lowLevel.SearchExistsAsync<T>(body,u => p.RequestParameters);
 
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.SearchExistsGetAsync<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.SearchExistsGetAsync<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.SearchExistsGetAsync<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index, p.Type)) return _lowLevel.SearchExistsGetAsync<T>(p.Index,p.Type,u => p.RequestParameters);
+					if (AllSet(p.Index)) return _lowLevel.SearchExistsGetAsync<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.SearchExistsGetAsync<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "SearchExists", new [] { "/_search/exists", "/{index}/_search/exists", "/{index}/{type}/_search/exists" }, new [] { PathInfoHttpMethod.POST, PathInfoHttpMethod.GET });
+			throw InvalidDispatch("SearchExists", p, new [] { POST, GET }, "/_search/exists", "/{index}/_search/exists", "/{index}/{type}/_search/exists");
 		}
 		
-		internal ElasticsearchResponse<T> SearchShardsDispatch<T>(ElasticsearchPathInfo<SearchShardsRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> SearchShardsDispatch<T>(ElasticsearchPathInfo<SearchShardsRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.SearchShardsGet<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.SearchShardsGet<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.SearchShardsGet<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index, p.Type)) return _lowLevel.SearchShardsGet<T>(p.Index,p.Type,u => p.RequestParameters);
+					if (AllSet(p.Index)) return _lowLevel.SearchShardsGet<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.SearchShardsGet<T>(u => p.RequestParameters);
 
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.SearchShards<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.SearchShards<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.SearchShards<T>(u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Index, p.Type)) return _lowLevel.SearchShards<T>(p.Index,p.Type,u => p.RequestParameters);
+					if (AllSet(p.Index)) return _lowLevel.SearchShards<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.SearchShards<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "SearchShards", new [] { "/_search_shards", "/{index}/_search_shards", "/{index}/{type}/_search_shards" }, new [] { PathInfoHttpMethod.GET, PathInfoHttpMethod.POST });
+			throw InvalidDispatch("SearchShards", p, new [] { GET, POST }, "/_search_shards", "/{index}/_search_shards", "/{index}/{type}/_search_shards");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> SearchShardsDispatchAsync<T>(ElasticsearchPathInfo<SearchShardsRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> SearchShardsDispatchAsync<T>(ElasticsearchPathInfo<SearchShardsRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.SearchShardsGetAsync<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.SearchShardsGetAsync<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.SearchShardsGetAsync<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index, p.Type)) return _lowLevel.SearchShardsGetAsync<T>(p.Index,p.Type,u => p.RequestParameters);
+					if (AllSet(p.Index)) return _lowLevel.SearchShardsGetAsync<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.SearchShardsGetAsync<T>(u => p.RequestParameters);
 
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.SearchShardsAsync<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.SearchShardsAsync<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.SearchShardsAsync<T>(u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Index, p.Type)) return _lowLevel.SearchShardsAsync<T>(p.Index,p.Type,u => p.RequestParameters);
+					if (AllSet(p.Index)) return _lowLevel.SearchShardsAsync<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.SearchShardsAsync<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "SearchShards", new [] { "/_search_shards", "/{index}/_search_shards", "/{index}/{type}/_search_shards" }, new [] { PathInfoHttpMethod.GET, PathInfoHttpMethod.POST });
+			throw InvalidDispatch("SearchShards", p, new [] { GET, POST }, "/_search_shards", "/{index}/_search_shards", "/{index}/{type}/_search_shards");
 		}
 		
-		internal ElasticsearchResponse<T> SearchTemplateDispatch<T>(ElasticsearchPathInfo<SearchTemplateRequestParameters> pathInfo , object body)
+		internal ElasticsearchResponse<T> SearchTemplateDispatch<T>(ElasticsearchPathInfo<SearchTemplateRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.SearchTemplateGet<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.SearchTemplateGet<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.SearchTemplateGet<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index, p.Type)) return _lowLevel.SearchTemplateGet<T>(p.Index,p.Type,u => p.RequestParameters);
+					if (AllSet(p.Index)) return _lowLevel.SearchTemplateGet<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.SearchTemplateGet<T>(u => p.RequestParameters);
 
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.SearchTemplate<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.SearchTemplate<T>(pathInfo.Index,body,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.SearchTemplate<T>(body,u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Index, p.Type)) return _lowLevel.SearchTemplate<T>(p.Index,p.Type,body,u => p.RequestParameters);
+					if (AllSet(p.Index)) return _lowLevel.SearchTemplate<T>(p.Index,body,u => p.RequestParameters);
+					return _lowLevel.SearchTemplate<T>(body,u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "SearchTemplate", new [] { "/_search/template", "/{index}/_search/template", "/{index}/{type}/_search/template" }, new [] { PathInfoHttpMethod.GET, PathInfoHttpMethod.POST });
+			throw InvalidDispatch("SearchTemplate", p, new [] { GET, POST }, "/_search/template", "/{index}/_search/template", "/{index}/{type}/_search/template");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> SearchTemplateDispatchAsync<T>(ElasticsearchPathInfo<SearchTemplateRequestParameters> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> SearchTemplateDispatchAsync<T>(ElasticsearchPathInfo<SearchTemplateRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.SearchTemplateGetAsync<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.SearchTemplateGetAsync<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.SearchTemplateGetAsync<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index, p.Type)) return _lowLevel.SearchTemplateGetAsync<T>(p.Index,p.Type,u => p.RequestParameters);
+					if (AllSet(p.Index)) return _lowLevel.SearchTemplateGetAsync<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.SearchTemplateGetAsync<T>(u => p.RequestParameters);
 
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.SearchTemplateAsync<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.SearchTemplateAsync<T>(pathInfo.Index,body,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.SearchTemplateAsync<T>(body,u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Index, p.Type)) return _lowLevel.SearchTemplateAsync<T>(p.Index,p.Type,body,u => p.RequestParameters);
+					if (AllSet(p.Index)) return _lowLevel.SearchTemplateAsync<T>(p.Index,body,u => p.RequestParameters);
+					return _lowLevel.SearchTemplateAsync<T>(body,u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "SearchTemplate", new [] { "/_search/template", "/{index}/_search/template", "/{index}/{type}/_search/template" }, new [] { PathInfoHttpMethod.GET, PathInfoHttpMethod.POST });
+			throw InvalidDispatch("SearchTemplate", p, new [] { GET, POST }, "/_search/template", "/{index}/_search/template", "/{index}/{type}/_search/template");
 		}
 		
-		internal ElasticsearchResponse<T> SnapshotCreateDispatch<T>(ElasticsearchPathInfo<SnapshotRequestParameters> pathInfo , object body)
+		internal ElasticsearchResponse<T> SnapshotCreateDispatch<T>(ElasticsearchPathInfo<SnapshotRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.PUT:
-					if (AllSet(pathInfo.Repository, pathInfo.Snapshot))
-						return this.LowLevelClient.SnapshotCreate<T>(pathInfo.Repository,pathInfo.Snapshot,body,u => pathInfo.RequestParameters);
+				case PUT:
+					if (AllSet(p.Repository, p.Snapshot)) return _lowLevel.SnapshotCreate<T>(p.Repository,p.Snapshot,body,u => p.RequestParameters);
 					break;
 
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Repository, pathInfo.Snapshot))
-						return this.LowLevelClient.SnapshotCreatePost<T>(pathInfo.Repository,pathInfo.Snapshot,body,u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Repository, p.Snapshot)) return _lowLevel.SnapshotCreatePost<T>(p.Repository,p.Snapshot,body,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "SnapshotCreate", new [] { "/_snapshot/{repository}/{snapshot}" }, new [] { PathInfoHttpMethod.PUT, PathInfoHttpMethod.POST });
+			throw InvalidDispatch("SnapshotCreate", p, new [] { PUT, POST }, "/_snapshot/{repository}/{snapshot}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> SnapshotCreateDispatchAsync<T>(ElasticsearchPathInfo<SnapshotRequestParameters> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> SnapshotCreateDispatchAsync<T>(ElasticsearchPathInfo<SnapshotRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.PUT:
-					if (AllSet(pathInfo.Repository, pathInfo.Snapshot))
-						return this.LowLevelClient.SnapshotCreateAsync<T>(pathInfo.Repository,pathInfo.Snapshot,body,u => pathInfo.RequestParameters);
+				case PUT:
+					if (AllSet(p.Repository, p.Snapshot)) return _lowLevel.SnapshotCreateAsync<T>(p.Repository,p.Snapshot,body,u => p.RequestParameters);
 					break;
 
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Repository, pathInfo.Snapshot))
-						return this.LowLevelClient.SnapshotCreatePostAsync<T>(pathInfo.Repository,pathInfo.Snapshot,body,u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Repository, p.Snapshot)) return _lowLevel.SnapshotCreatePostAsync<T>(p.Repository,p.Snapshot,body,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "SnapshotCreate", new [] { "/_snapshot/{repository}/{snapshot}" }, new [] { PathInfoHttpMethod.PUT, PathInfoHttpMethod.POST });
+			throw InvalidDispatch("SnapshotCreate", p, new [] { PUT, POST }, "/_snapshot/{repository}/{snapshot}");
 		}
 		
-		internal ElasticsearchResponse<T> SnapshotCreateRepositoryDispatch<T>(ElasticsearchPathInfo<CreateRepositoryRequestParameters> pathInfo , object body)
+		internal ElasticsearchResponse<T> SnapshotCreateRepositoryDispatch<T>(ElasticsearchPathInfo<CreateRepositoryRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.PUT:
-					if (AllSet(pathInfo.Repository))
-						return this.LowLevelClient.SnapshotCreateRepository<T>(pathInfo.Repository,body,u => pathInfo.RequestParameters);
+				case PUT:
+					if (AllSet(p.Repository)) return _lowLevel.SnapshotCreateRepository<T>(p.Repository,body,u => p.RequestParameters);
 					break;
 
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Repository))
-						return this.LowLevelClient.SnapshotCreateRepositoryPost<T>(pathInfo.Repository,body,u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Repository)) return _lowLevel.SnapshotCreateRepositoryPost<T>(p.Repository,body,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "SnapshotCreateRepository", new [] { "/_snapshot/{repository}" }, new [] { PathInfoHttpMethod.PUT, PathInfoHttpMethod.POST });
+			throw InvalidDispatch("SnapshotCreateRepository", p, new [] { PUT, POST }, "/_snapshot/{repository}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> SnapshotCreateRepositoryDispatchAsync<T>(ElasticsearchPathInfo<CreateRepositoryRequestParameters> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> SnapshotCreateRepositoryDispatchAsync<T>(ElasticsearchPathInfo<CreateRepositoryRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.PUT:
-					if (AllSet(pathInfo.Repository))
-						return this.LowLevelClient.SnapshotCreateRepositoryAsync<T>(pathInfo.Repository,body,u => pathInfo.RequestParameters);
+				case PUT:
+					if (AllSet(p.Repository)) return _lowLevel.SnapshotCreateRepositoryAsync<T>(p.Repository,body,u => p.RequestParameters);
 					break;
 
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Repository))
-						return this.LowLevelClient.SnapshotCreateRepositoryPostAsync<T>(pathInfo.Repository,body,u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Repository)) return _lowLevel.SnapshotCreateRepositoryPostAsync<T>(p.Repository,body,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "SnapshotCreateRepository", new [] { "/_snapshot/{repository}" }, new [] { PathInfoHttpMethod.PUT, PathInfoHttpMethod.POST });
+			throw InvalidDispatch("SnapshotCreateRepository", p, new [] { PUT, POST }, "/_snapshot/{repository}");
 		}
 		
-		internal ElasticsearchResponse<T> SnapshotDeleteDispatch<T>(ElasticsearchPathInfo<DeleteSnapshotRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> SnapshotDeleteDispatch<T>(ElasticsearchPathInfo<DeleteSnapshotRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.DELETE:
-					if (AllSet(pathInfo.Repository, pathInfo.Snapshot))
-						return this.LowLevelClient.SnapshotDelete<T>(pathInfo.Repository,pathInfo.Snapshot,u => pathInfo.RequestParameters);
+				case DELETE:
+					if (AllSet(p.Repository, p.Snapshot)) return _lowLevel.SnapshotDelete<T>(p.Repository,p.Snapshot,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "SnapshotDelete", new [] { "/_snapshot/{repository}/{snapshot}" }, new [] { PathInfoHttpMethod.DELETE });
+			throw InvalidDispatch("SnapshotDelete", p, new [] { DELETE }, "/_snapshot/{repository}/{snapshot}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> SnapshotDeleteDispatchAsync<T>(ElasticsearchPathInfo<DeleteSnapshotRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> SnapshotDeleteDispatchAsync<T>(ElasticsearchPathInfo<DeleteSnapshotRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.DELETE:
-					if (AllSet(pathInfo.Repository, pathInfo.Snapshot))
-						return this.LowLevelClient.SnapshotDeleteAsync<T>(pathInfo.Repository,pathInfo.Snapshot,u => pathInfo.RequestParameters);
+				case DELETE:
+					if (AllSet(p.Repository, p.Snapshot)) return _lowLevel.SnapshotDeleteAsync<T>(p.Repository,p.Snapshot,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "SnapshotDelete", new [] { "/_snapshot/{repository}/{snapshot}" }, new [] { PathInfoHttpMethod.DELETE });
+			throw InvalidDispatch("SnapshotDelete", p, new [] { DELETE }, "/_snapshot/{repository}/{snapshot}");
 		}
 		
-		internal ElasticsearchResponse<T> SnapshotDeleteRepositoryDispatch<T>(ElasticsearchPathInfo<DeleteRepositoryRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> SnapshotDeleteRepositoryDispatch<T>(ElasticsearchPathInfo<DeleteRepositoryRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.DELETE:
-					if (AllSet(pathInfo.Repository))
-						return this.LowLevelClient.SnapshotDeleteRepository<T>(pathInfo.Repository,u => pathInfo.RequestParameters);
+				case DELETE:
+					if (AllSet(p.Repository)) return _lowLevel.SnapshotDeleteRepository<T>(p.Repository,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "SnapshotDeleteRepository", new [] { "/_snapshot/{repository}" }, new [] { PathInfoHttpMethod.DELETE });
+			throw InvalidDispatch("SnapshotDeleteRepository", p, new [] { DELETE }, "/_snapshot/{repository}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> SnapshotDeleteRepositoryDispatchAsync<T>(ElasticsearchPathInfo<DeleteRepositoryRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> SnapshotDeleteRepositoryDispatchAsync<T>(ElasticsearchPathInfo<DeleteRepositoryRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.DELETE:
-					if (AllSet(pathInfo.Repository))
-						return this.LowLevelClient.SnapshotDeleteRepositoryAsync<T>(pathInfo.Repository,u => pathInfo.RequestParameters);
+				case DELETE:
+					if (AllSet(p.Repository)) return _lowLevel.SnapshotDeleteRepositoryAsync<T>(p.Repository,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "SnapshotDeleteRepository", new [] { "/_snapshot/{repository}" }, new [] { PathInfoHttpMethod.DELETE });
+			throw InvalidDispatch("SnapshotDeleteRepository", p, new [] { DELETE }, "/_snapshot/{repository}");
 		}
 		
-		internal ElasticsearchResponse<T> SnapshotGetDispatch<T>(ElasticsearchPathInfo<GetSnapshotRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> SnapshotGetDispatch<T>(ElasticsearchPathInfo<GetSnapshotRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Repository, pathInfo.Snapshot))
-						return this.LowLevelClient.SnapshotGet<T>(pathInfo.Repository,pathInfo.Snapshot,u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Repository, p.Snapshot)) return _lowLevel.SnapshotGet<T>(p.Repository,p.Snapshot,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "SnapshotGet", new [] { "/_snapshot/{repository}/{snapshot}" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("SnapshotGet", p, new [] { GET }, "/_snapshot/{repository}/{snapshot}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> SnapshotGetDispatchAsync<T>(ElasticsearchPathInfo<GetSnapshotRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> SnapshotGetDispatchAsync<T>(ElasticsearchPathInfo<GetSnapshotRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Repository, pathInfo.Snapshot))
-						return this.LowLevelClient.SnapshotGetAsync<T>(pathInfo.Repository,pathInfo.Snapshot,u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Repository, p.Snapshot)) return _lowLevel.SnapshotGetAsync<T>(p.Repository,p.Snapshot,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "SnapshotGet", new [] { "/_snapshot/{repository}/{snapshot}" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("SnapshotGet", p, new [] { GET }, "/_snapshot/{repository}/{snapshot}");
 		}
 		
-		internal ElasticsearchResponse<T> SnapshotGetRepositoryDispatch<T>(ElasticsearchPathInfo<GetRepositoryRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> SnapshotGetRepositoryDispatch<T>(ElasticsearchPathInfo<GetRepositoryRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Repository))
-						return this.LowLevelClient.SnapshotGetRepository<T>(pathInfo.Repository,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.SnapshotGetRepository<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Repository)) return _lowLevel.SnapshotGetRepository<T>(p.Repository,u => p.RequestParameters);
+					return _lowLevel.SnapshotGetRepository<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "SnapshotGetRepository", new [] { "/_snapshot", "/_snapshot/{repository}" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("SnapshotGetRepository", p, new [] { GET }, "/_snapshot", "/_snapshot/{repository}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> SnapshotGetRepositoryDispatchAsync<T>(ElasticsearchPathInfo<GetRepositoryRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> SnapshotGetRepositoryDispatchAsync<T>(ElasticsearchPathInfo<GetRepositoryRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Repository))
-						return this.LowLevelClient.SnapshotGetRepositoryAsync<T>(pathInfo.Repository,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.SnapshotGetRepositoryAsync<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Repository)) return _lowLevel.SnapshotGetRepositoryAsync<T>(p.Repository,u => p.RequestParameters);
+					return _lowLevel.SnapshotGetRepositoryAsync<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "SnapshotGetRepository", new [] { "/_snapshot", "/_snapshot/{repository}" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("SnapshotGetRepository", p, new [] { GET }, "/_snapshot", "/_snapshot/{repository}");
 		}
 		
-		internal ElasticsearchResponse<T> SnapshotRestoreDispatch<T>(ElasticsearchPathInfo<RestoreRequestParameters> pathInfo , object body)
+		internal ElasticsearchResponse<T> SnapshotRestoreDispatch<T>(ElasticsearchPathInfo<RestoreRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Repository, pathInfo.Snapshot))
-						return this.LowLevelClient.SnapshotRestore<T>(pathInfo.Repository,pathInfo.Snapshot,body,u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Repository, p.Snapshot)) return _lowLevel.SnapshotRestore<T>(p.Repository,p.Snapshot,body,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "SnapshotRestore", new [] { "/_snapshot/{repository}/{snapshot}/_restore" }, new [] { PathInfoHttpMethod.POST });
+			throw InvalidDispatch("SnapshotRestore", p, new [] { POST }, "/_snapshot/{repository}/{snapshot}/_restore");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> SnapshotRestoreDispatchAsync<T>(ElasticsearchPathInfo<RestoreRequestParameters> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> SnapshotRestoreDispatchAsync<T>(ElasticsearchPathInfo<RestoreRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Repository, pathInfo.Snapshot))
-						return this.LowLevelClient.SnapshotRestoreAsync<T>(pathInfo.Repository,pathInfo.Snapshot,body,u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Repository, p.Snapshot)) return _lowLevel.SnapshotRestoreAsync<T>(p.Repository,p.Snapshot,body,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "SnapshotRestore", new [] { "/_snapshot/{repository}/{snapshot}/_restore" }, new [] { PathInfoHttpMethod.POST });
+			throw InvalidDispatch("SnapshotRestore", p, new [] { POST }, "/_snapshot/{repository}/{snapshot}/_restore");
 		}
 		
-		internal ElasticsearchResponse<T> SnapshotStatusDispatch<T>(ElasticsearchPathInfo<SnapshotStatusRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> SnapshotStatusDispatch<T>(ElasticsearchPathInfo<SnapshotStatusRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Repository, pathInfo.Snapshot))
-						return this.LowLevelClient.SnapshotStatus<T>(pathInfo.Repository,pathInfo.Snapshot,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Repository))
-						return this.LowLevelClient.SnapshotStatus<T>(pathInfo.Repository,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.SnapshotStatus<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Repository, p.Snapshot)) return _lowLevel.SnapshotStatus<T>(p.Repository,p.Snapshot,u => p.RequestParameters);
+					if (AllSet(p.Repository)) return _lowLevel.SnapshotStatus<T>(p.Repository,u => p.RequestParameters);
+					return _lowLevel.SnapshotStatus<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "SnapshotStatus", new [] { "/_snapshot/_status", "/_snapshot/{repository}/_status", "/_snapshot/{repository}/{snapshot}/_status" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("SnapshotStatus", p, new [] { GET }, "/_snapshot/_status", "/_snapshot/{repository}/_status", "/_snapshot/{repository}/{snapshot}/_status");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> SnapshotStatusDispatchAsync<T>(ElasticsearchPathInfo<SnapshotStatusRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> SnapshotStatusDispatchAsync<T>(ElasticsearchPathInfo<SnapshotStatusRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Repository, pathInfo.Snapshot))
-						return this.LowLevelClient.SnapshotStatusAsync<T>(pathInfo.Repository,pathInfo.Snapshot,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Repository))
-						return this.LowLevelClient.SnapshotStatusAsync<T>(pathInfo.Repository,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.SnapshotStatusAsync<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Repository, p.Snapshot)) return _lowLevel.SnapshotStatusAsync<T>(p.Repository,p.Snapshot,u => p.RequestParameters);
+					if (AllSet(p.Repository)) return _lowLevel.SnapshotStatusAsync<T>(p.Repository,u => p.RequestParameters);
+					return _lowLevel.SnapshotStatusAsync<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "SnapshotStatus", new [] { "/_snapshot/_status", "/_snapshot/{repository}/_status", "/_snapshot/{repository}/{snapshot}/_status" }, new [] { PathInfoHttpMethod.GET });
+			throw InvalidDispatch("SnapshotStatus", p, new [] { GET }, "/_snapshot/_status", "/_snapshot/{repository}/_status", "/_snapshot/{repository}/{snapshot}/_status");
 		}
 		
-		internal ElasticsearchResponse<T> SnapshotVerifyRepositoryDispatch<T>(ElasticsearchPathInfo<VerifyRepositoryRequestParameters> pathInfo )
+		internal ElasticsearchResponse<T> SnapshotVerifyRepositoryDispatch<T>(ElasticsearchPathInfo<VerifyRepositoryRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Repository))
-						return this.LowLevelClient.SnapshotVerifyRepository<T>(pathInfo.Repository,u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Repository)) return _lowLevel.SnapshotVerifyRepository<T>(p.Repository,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "SnapshotVerifyRepository", new [] { "/_snapshot/{repository}/_verify" }, new [] { PathInfoHttpMethod.POST });
+			throw InvalidDispatch("SnapshotVerifyRepository", p, new [] { POST }, "/_snapshot/{repository}/_verify");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> SnapshotVerifyRepositoryDispatchAsync<T>(ElasticsearchPathInfo<VerifyRepositoryRequestParameters> pathInfo )
+		internal Task<ElasticsearchResponse<T>> SnapshotVerifyRepositoryDispatchAsync<T>(ElasticsearchPathInfo<VerifyRepositoryRequestParameters> p )
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Repository))
-						return this.LowLevelClient.SnapshotVerifyRepositoryAsync<T>(pathInfo.Repository,u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Repository)) return _lowLevel.SnapshotVerifyRepositoryAsync<T>(p.Repository,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "SnapshotVerifyRepository", new [] { "/_snapshot/{repository}/_verify" }, new [] { PathInfoHttpMethod.POST });
+			throw InvalidDispatch("SnapshotVerifyRepository", p, new [] { POST }, "/_snapshot/{repository}/_verify");
 		}
 		
-		internal ElasticsearchResponse<T> SuggestDispatch<T>(ElasticsearchPathInfo<SuggestRequestParameters> pathInfo , object body)
+		internal ElasticsearchResponse<T> SuggestDispatch<T>(ElasticsearchPathInfo<SuggestRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.Suggest<T>(pathInfo.Index,body,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.Suggest<T>(body,u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Index)) return _lowLevel.Suggest<T>(p.Index,body,u => p.RequestParameters);
+					return _lowLevel.Suggest<T>(body,u => p.RequestParameters);
 
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.SuggestGet<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.SuggestGet<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index)) return _lowLevel.SuggestGet<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.SuggestGet<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "Suggest", new [] { "/_suggest", "/{index}/_suggest" }, new [] { PathInfoHttpMethod.POST, PathInfoHttpMethod.GET });
+			throw InvalidDispatch("Suggest", p, new [] { POST, GET }, "/_suggest", "/{index}/_suggest");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> SuggestDispatchAsync<T>(ElasticsearchPathInfo<SuggestRequestParameters> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> SuggestDispatchAsync<T>(ElasticsearchPathInfo<SuggestRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.SuggestAsync<T>(pathInfo.Index,body,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.SuggestAsync<T>(body,u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Index)) return _lowLevel.SuggestAsync<T>(p.Index,body,u => p.RequestParameters);
+					return _lowLevel.SuggestAsync<T>(body,u => p.RequestParameters);
 
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index))
-						return this.LowLevelClient.SuggestGetAsync<T>(pathInfo.Index,u => pathInfo.RequestParameters);
-					return this.LowLevelClient.SuggestGetAsync<T>(u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index)) return _lowLevel.SuggestGetAsync<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.SuggestGetAsync<T>(u => p.RequestParameters);
 
 			}
-			throw DispatchException.Create(pathInfo, "Suggest", new [] { "/_suggest", "/{index}/_suggest" }, new [] { PathInfoHttpMethod.POST, PathInfoHttpMethod.GET });
+			throw InvalidDispatch("Suggest", p, new [] { POST, GET }, "/_suggest", "/{index}/_suggest");
 		}
 		
-		internal ElasticsearchResponse<T> TermvectorDispatch<T>(ElasticsearchPathInfo<TermvectorRequestParameters> pathInfo , object body)
+		internal ElasticsearchResponse<T> TermvectorDispatch<T>(ElasticsearchPathInfo<TermvectorRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index, pathInfo.Type, pathInfo.Id))
-						return this.LowLevelClient.TermvectorGet<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.TermvectorGet<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index, p.Type, p.Id)) return _lowLevel.TermvectorGet<T>(p.Index,p.Type,p.Id,u => p.RequestParameters);
+					if (AllSet(p.Index, p.Type)) return _lowLevel.TermvectorGet<T>(p.Index,p.Type,u => p.RequestParameters);
 					break;
 
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Index, pathInfo.Type, pathInfo.Id))
-						return this.LowLevelClient.Termvector<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.Termvector<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Index, p.Type, p.Id)) return _lowLevel.Termvector<T>(p.Index,p.Type,p.Id,body,u => p.RequestParameters);
+					if (AllSet(p.Index, p.Type)) return _lowLevel.Termvector<T>(p.Index,p.Type,body,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "Termvector", new [] { "/{index}/{type}/_termvector", "/{index}/{type}/{id}/_termvector" }, new [] { PathInfoHttpMethod.GET, PathInfoHttpMethod.POST });
+			throw InvalidDispatch("Termvector", p, new [] { GET, POST }, "/{index}/{type}/_termvector", "/{index}/{type}/{id}/_termvector");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> TermvectorDispatchAsync<T>(ElasticsearchPathInfo<TermvectorRequestParameters> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> TermvectorDispatchAsync<T>(ElasticsearchPathInfo<TermvectorRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.GET:
-					if (AllSet(pathInfo.Index, pathInfo.Type, pathInfo.Id))
-						return this.LowLevelClient.TermvectorGetAsync<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.TermvectorGetAsync<T>(pathInfo.Index,pathInfo.Type,u => pathInfo.RequestParameters);
+				case GET:
+					if (AllSet(p.Index, p.Type, p.Id)) return _lowLevel.TermvectorGetAsync<T>(p.Index,p.Type,p.Id,u => p.RequestParameters);
+					if (AllSet(p.Index, p.Type)) return _lowLevel.TermvectorGetAsync<T>(p.Index,p.Type,u => p.RequestParameters);
 					break;
 
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Index, pathInfo.Type, pathInfo.Id))
-						return this.LowLevelClient.TermvectorAsync<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.RequestParameters);
-					if (AllSet(pathInfo.Index, pathInfo.Type))
-						return this.LowLevelClient.TermvectorAsync<T>(pathInfo.Index,pathInfo.Type,body,u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Index, p.Type, p.Id)) return _lowLevel.TermvectorAsync<T>(p.Index,p.Type,p.Id,body,u => p.RequestParameters);
+					if (AllSet(p.Index, p.Type)) return _lowLevel.TermvectorAsync<T>(p.Index,p.Type,body,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "Termvector", new [] { "/{index}/{type}/_termvector", "/{index}/{type}/{id}/_termvector" }, new [] { PathInfoHttpMethod.GET, PathInfoHttpMethod.POST });
+			throw InvalidDispatch("Termvector", p, new [] { GET, POST }, "/{index}/{type}/_termvector", "/{index}/{type}/{id}/_termvector");
 		}
 		
-		internal ElasticsearchResponse<T> UpdateDispatch<T>(ElasticsearchPathInfo<UpdateRequestParameters> pathInfo , object body)
+		internal ElasticsearchResponse<T> UpdateDispatch<T>(ElasticsearchPathInfo<UpdateRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Index, pathInfo.Type, pathInfo.Id))
-						return this.LowLevelClient.Update<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Index, p.Type, p.Id)) return _lowLevel.Update<T>(p.Index,p.Type,p.Id,body,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "Update", new [] { "/{index}/{type}/{id}/_update" }, new [] { PathInfoHttpMethod.POST });
+			throw InvalidDispatch("Update", p, new [] { POST }, "/{index}/{type}/{id}/_update");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> UpdateDispatchAsync<T>(ElasticsearchPathInfo<UpdateRequestParameters> pathInfo , object body)
+		internal Task<ElasticsearchResponse<T>> UpdateDispatchAsync<T>(ElasticsearchPathInfo<UpdateRequestParameters> p , object body)
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
-				case PathInfoHttpMethod.POST:
-					if (AllSet(pathInfo.Index, pathInfo.Type, pathInfo.Id))
-						return this.LowLevelClient.UpdateAsync<T>(pathInfo.Index,pathInfo.Type,pathInfo.Id,body,u => pathInfo.RequestParameters);
+				case POST:
+					if (AllSet(p.Index, p.Type, p.Id)) return _lowLevel.UpdateAsync<T>(p.Index,p.Type,p.Id,body,u => p.RequestParameters);
 					break;
 
 			}
-			throw DispatchException.Create(pathInfo, "Update", new [] { "/{index}/{type}/{id}/_update" }, new [] { PathInfoHttpMethod.POST });
+			throw InvalidDispatch("Update", p, new [] { POST }, "/{index}/{type}/{id}/_update");
 		}
 		
 	}	

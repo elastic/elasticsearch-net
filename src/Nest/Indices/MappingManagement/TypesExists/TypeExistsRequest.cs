@@ -13,7 +13,7 @@ namespace Nest
 	{
 		public static void Update(ElasticsearchPathInfo<TypeExistsRequestParameters> pathInfo, ITypeExistsRequest request)
 		{
-			pathInfo.HttpMethod = PathInfoHttpMethod.HEAD;
+			pathInfo.HttpMethod = HttpMethod.HEAD;
 		}
 	}
 	

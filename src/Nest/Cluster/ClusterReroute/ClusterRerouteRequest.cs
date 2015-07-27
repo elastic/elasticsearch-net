@@ -20,7 +20,7 @@ namespace Nest
 	{
 		public static void Update(ElasticsearchPathInfo<ClusterRerouteRequestParameters> pathInfo)
 		{
-			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
+			pathInfo.HttpMethod = HttpMethod.POST;
 		}
 	}
 

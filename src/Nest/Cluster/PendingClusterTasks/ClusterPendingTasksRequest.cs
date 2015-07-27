@@ -10,7 +10,7 @@ namespace Nest
 	{
 		public static void Update(ElasticsearchPathInfo<ClusterPendingTasksRequestParameters> pathInfo)
 		{
-			pathInfo.HttpMethod = PathInfoHttpMethod.GET;
+			pathInfo.HttpMethod = HttpMethod.GET;
 		}
 	}
 

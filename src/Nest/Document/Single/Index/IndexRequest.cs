@@ -21,7 +21,7 @@ namespace Nest
 			pathInfo.Index.ThrowIfNull("index");
 			pathInfo.Type.ThrowIfNull("type");
 			var id = pathInfo.Id;
-			pathInfo.HttpMethod = id == null || id.IsNullOrEmpty() ? PathInfoHttpMethod.POST : PathInfoHttpMethod.PUT;
+			pathInfo.HttpMethod = id == null || id.IsNullOrEmpty() ? HttpMethod.POST : HttpMethod.PUT;
 		}
 	}
 	

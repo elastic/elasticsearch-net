@@ -20,7 +20,7 @@ namespace Nest
 	{
 		public static void Update(IConnectionSettingsValues settings, ElasticsearchPathInfo<SearchShardsRequestParameters> pathInfo, ISearchShardsRequest request)
 		{
-			pathInfo.HttpMethod = PathInfoHttpMethod.GET; 
+			pathInfo.HttpMethod = HttpMethod.GET; 
 		}
 	}
 	

@@ -19,7 +19,7 @@ namespace Nest
 			ElasticsearchPathInfo<ScrollRequestParameters> pathInfo)
 		{
 			// force POST scrollId can be quite big
-			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
+			pathInfo.HttpMethod = HttpMethod.POST;
 			pathInfo.ScrollId = request.ScrollId;
 			// force scroll id out of RequestParameters (potentially very large)
 			request.RequestParameters.RemoveQueryString("scroll_id");

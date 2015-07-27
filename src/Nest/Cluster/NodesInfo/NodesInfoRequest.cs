@@ -19,7 +19,7 @@ namespace Nest
 		{
 			if (request.Metrics != null)
 				pathInfo.Metric = request.Metrics.Cast<Enum>().GetStringValue();
-			pathInfo.HttpMethod = PathInfoHttpMethod.GET;
+			pathInfo.HttpMethod = HttpMethod.GET;
 		}
 	}
 	

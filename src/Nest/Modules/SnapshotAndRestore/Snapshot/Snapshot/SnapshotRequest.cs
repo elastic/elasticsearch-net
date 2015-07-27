@@ -25,7 +25,7 @@ namespace Nest
     {
         public static void Update(IConnectionSettingsValues settings, ElasticsearchPathInfo<SnapshotRequestParameters> pathInfo)
         {
-            pathInfo.HttpMethod = PathInfoHttpMethod.PUT;
+            pathInfo.HttpMethod = HttpMethod.PUT;
         }
     }
 
@@ -104,7 +104,7 @@ namespace Nest
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SnapshotRequestParameters> pathInfo)
 		{
-			pathInfo.HttpMethod = PathInfoHttpMethod.PUT;
+			pathInfo.HttpMethod = HttpMethod.PUT;
 		}
     }
 }

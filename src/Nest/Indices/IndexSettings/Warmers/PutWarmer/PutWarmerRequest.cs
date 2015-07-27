@@ -18,7 +18,7 @@ namespace Nest
 	{
 		public static void Update(ElasticsearchPathInfo<PutWarmerRequestParameters> pathInfo, IPutWarmerRequest request)
 		{
-			pathInfo.HttpMethod = PathInfoHttpMethod.PUT;
+			pathInfo.HttpMethod = HttpMethod.PUT;
 		}
 	}
 	

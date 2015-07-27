@@ -23,7 +23,7 @@ namespace Nest
 			where T : class
 		{
 			pathInfo.Id = request.Id;
-			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
+			pathInfo.HttpMethod = HttpMethod.POST;
 		}
 	}
 

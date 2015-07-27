@@ -96,6 +96,7 @@
     <Compile Include="CommonAbstractions\ConnectionSettings\ClrTypeMapping.cs" />
     <Compile Include="CommonAbstractions\Infer\FieldName\FieldName.cs" />
     <Compile Include="CommonAbstractions\Infer\FieldName\FieldNameExtensions.cs" />
+    <Compile Include="CommonAbstractions\Request\Paths\HttpMethod.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\Generic\KeyValueConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\Generic\ReserializeJsonConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\Generic\UnionConverter.cs" />
@@ -985,7 +986,6 @@
     <Compile Include="Cluster\PendingClusterTasks\ElasticClient-ClusterPendingTasks.cs" />
     <Compile Include="CommonAbstractions\Infer\ExpressionVisitor.cs" />
     <Compile Include="CommonAbstractions\Infer\IndexName\IndexName.cs" />
-    <Compile Include="CommonAbstractions\Request\Paths\PathInfoHttpMethod.cs" />
     <Compile Include="CommonAbstractions\Infer\IndexName\IndexNameExtensions.cs" />
     <Compile Include="CommonAbstractions\Infer\IndexName\IndexNameResolver.cs" />
     <Compile Include="CommonAbstractions\Infer\Id\IdResolver.cs" />

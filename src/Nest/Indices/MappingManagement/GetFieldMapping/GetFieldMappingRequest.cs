@@ -15,7 +15,7 @@ namespace Nest
 	{
 		public static void Update(ElasticsearchPathInfo<GetFieldMappingRequestParameters> pathInfo, IGetFieldMappingRequest request)
 		{
-			pathInfo.HttpMethod = PathInfoHttpMethod.GET;
+			pathInfo.HttpMethod = HttpMethod.GET;
 		}
 	}
 	

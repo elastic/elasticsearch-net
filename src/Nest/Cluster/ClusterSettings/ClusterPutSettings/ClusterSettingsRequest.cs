@@ -11,7 +11,7 @@ namespace Nest
 	{
 		public static void Update(ElasticsearchPathInfo<ClusterSettingsRequestParameters> pathInfo, IClusterSettingsRequest request)
 		{
-			pathInfo.HttpMethod = PathInfoHttpMethod.PUT;
+			pathInfo.HttpMethod = HttpMethod.PUT;
 		}
 	}
 

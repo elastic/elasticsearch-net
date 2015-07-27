@@ -29,7 +29,7 @@ namespace Nest
 	{
 		public static void Update(ElasticsearchPathInfo<RestoreRequestParameters> pathInfo, IRestoreRequest request)
 		{
-			pathInfo.HttpMethod = PathInfoHttpMethod.POST;
+			pathInfo.HttpMethod = HttpMethod.POST;
 		}
 	}
 	

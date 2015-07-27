@@ -17,7 +17,7 @@ namespace Nest
 	{
 		public static void Update(ElasticsearchPathInfo<GetAliasesRequestParameters> pathInfo, IGetAliasesRequest request)
 		{
-			pathInfo.HttpMethod = PathInfoHttpMethod.GET;
+			pathInfo.HttpMethod = HttpMethod.GET;
 			pathInfo.Name = request.Alias ?? "*";
 		}
 	}

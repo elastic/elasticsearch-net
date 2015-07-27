@@ -11,7 +11,7 @@ namespace Nest
 	{
 		public static void Update(ElasticsearchPathInfo<PingRequestParameters> pathInfo)
 		{
-			pathInfo.HttpMethod = PathInfoHttpMethod.HEAD;
+			pathInfo.HttpMethod = HttpMethod.HEAD;
 		}
 	}
 

@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using static Nest.HttpMethod;
+using static Nest.DispatchException;
 
 //Generated File Please Do Not Edit Manually
 @{ RestApiSpec model = Model; }
@@ -21,7 +23,7 @@ namespace Nest
 	{
 		var endpoint = kv.Value;
 		var endpointsException = string.Join(", ", endpoint.Url.Paths.Select(p=> "\"" + p + "\""));
-		var httpMethodsException = string.Join(", ", endpoint.RawDispatches.Select(p=> "PathInfoHttpMethod." + p.Key.ToUpper() ));
+		var httpMethodsException = string.Join(", ", endpoint.RawDispatches.Select(p=> p.Key.ToUpper() ));
 		var peek = endpoint.GetCsharpMethods().FirstOrDefault();
 		if (peek == null)
 		{
@@ -34,9 +36,9 @@ namespace Nest
 		};
 		foreach(var gen in generate)
 		{
-		<text>internal @Raw(gen.Returns) @(Raw(gen.Name))(ElasticsearchPathInfo<@peek.QueryStringParamName> pathInfo @if (endpoint.Body != null) {<text>, object body</text>})
+		<text>internal @Raw(gen.Returns) @(Raw(gen.Name))(ElasticsearchPathInfo<@peek.QueryStringParamName> p @if (endpoint.Body != null) {<text>, object body</text>})
 		{
-			switch(pathInfo.HttpMethod)
+			switch(p.HttpMethod)
 			{
 			@foreach (var methodGroup in endpoint.RawDispatches)
 			{
@@ -45,7 +47,7 @@ namespace Nest
 				var totalDispatches = dispatches.Count();
 				var allWithIfChecks = dispatches.All(d => !string.IsNullOrEmpty(d.IfCheck));
 				var i = 0;
-				<text>case PathInfoHttpMethod.@httpMethod.ToUpper():
+				<text>case @httpMethod.ToUpper():
 				@foreach (var dispatch in dispatches)
 				{
 					var method = dispatch.CsharpMethod;
@@ -53,18 +55,17 @@ namespace Nest
 					var hasIfCheck = !string.IsNullOrEmpty(dispatch.IfCheck); 
 					if (i == 0 && !hasIfCheck)
 					{
-					<text>return this.LowLevelClient.@(Raw(name))(@Raw(string.Join(",", dispatch.MethodArguments)));</text>
+					<text>return _lowLevel.@(Raw(name))(@Raw(string.Join(",", dispatch.MethodArguments)));</text>
 					}
 					else
 					{
 						if (hasIfCheck)
 						{
-					<text>if (@Raw(dispatch.IfCheck))
-						return this.LowLevelClient.@(Raw(name))(@Raw(string.Join(",", dispatch.MethodArguments)));</text>
+					<text>if (@Raw(dispatch.IfCheck)) return _lowLevel.@(Raw(name))(@Raw(string.Join(",", dispatch.MethodArguments)));</text>
 						}
 						else
 						{
-					<text>return this.LowLevelClient.@(Raw(name))(@Raw(string.Join(",", dispatch.MethodArguments)));</text>
+					<text>return _lowLevel.@(Raw(name))(@Raw(string.Join(",", dispatch.MethodArguments)));</text>
 						}
 					}
 					if (i == totalDispatches - 1 && allWithIfChecks)
@@ -75,7 +76,7 @@ namespace Nest
 				}</text>
 			}
 			}
-			throw DispatchException.Create(pathInfo, "@(endpoint.CsharpMethodName)", new [] { @Raw(endpointsException) }, new [] { @(httpMethodsException) });
+			throw InvalidDispatch("@(endpoint.CsharpMethodName)", p, new [] { @(httpMethodsException) }, @Raw(endpointsException));
 		}
 		</text>
 	} 
