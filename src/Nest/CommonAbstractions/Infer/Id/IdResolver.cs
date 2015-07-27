@@ -13,8 +13,8 @@ namespace Nest.Resolvers
 		private static ConcurrentDictionary<Type, Func<object, string>> IdDelegates = new ConcurrentDictionary<Type, Func<object, string>>();
 		private static MethodInfo MakeDelegateMethodInfo = typeof(IdResolver).GetMethod("MakeDelegate", BindingFlags.Static | BindingFlags.NonPublic);
 
-		PropertyInfo GetPropertyCaseInsensitive(Type type, string FieldName)
-			=> type.GetProperty(FieldName, BindingFlags.Public | BindingFlags.Instance | BindingFlags.IgnoreCase);
+		PropertyInfo GetPropertyCaseInsensitive(Type type, string fieldName)
+			=> type.GetProperty(fieldName, BindingFlags.Public | BindingFlags.Instance | BindingFlags.IgnoreCase);
 
 		public IdResolver(IConnectionSettingsValues connectionSettings)
 		{
