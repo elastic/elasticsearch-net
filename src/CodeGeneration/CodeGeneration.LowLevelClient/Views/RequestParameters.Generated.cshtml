@@ -14,10 +14,8 @@ using System.Linq.Expressions;
 
 namespace Elasticsearch.Net
 {
-	
 	@foreach (CsharpMethod method in Model.CsharpMethodsWithQueryStringInfo)
 	{
-		
 	<text>
 	///<summary>Request parameters descriptor for @method.FullName
 	///<pre>
@@ -41,20 +39,10 @@ namespace Elasticsearch.Net
 		  {
 			  fieldType = "object";
 		  }
-		<text>
-		internal @Raw(fieldType) _@(kv.Key) { get; set; }
-		///<summary>@kv.Value.Description</summary>
-		public @method.QueryStringParamName @(mm.ToPascalCase())(@kv.Value.CsharpType(mm) @mm)
-		{
-			this._@(mm) = @Raw(setter);
-			this.AddQueryString("@kv.Value.OriginalQueryStringParamName", this._@mm);
-			return this;
-		}
+		<text>///<summary>@kv.Value.Description</summary>
+		public @method.QueryStringParamName @(mm.ToPascalCase())(@kv.Value.CsharpType(mm) @mm) => this.AddQueryString("@kv.Value.OriginalQueryStringParamName", @mm);
 		</text>
 	  }
+	}</text>
 	}
-	</text>
-	}
-	
 }
- 
