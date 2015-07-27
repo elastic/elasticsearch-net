@@ -163,6 +163,7 @@ namespace CodeGeneration.LowLevelClient.Domain
 							+ paraIndent + "<para> - byte[], no deserialization, but the response stream will be closed</para>"
 							+ paraIndent + "<para> - Stream, no deserialization, response stream is your responsibility</para>"
 							+ paraIndent + "<para> - VoidResponse, no deserialization, response stream never read and closed</para>"
+							+ paraIndent + "<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth"
 							;
 						var apiMethod = new CsharpMethod
 						{
@@ -209,6 +210,7 @@ namespace CodeGeneration.LowLevelClient.Domain
 						ApiGenerator.PatchMethod(apiMethod);
 						yield return apiMethod;
 						
+						yield break;
 						//No need for deserialization state when returning dynamicdictionary
 
 						var explanationOfDynamic =
