@@ -65,9 +65,9 @@ namespace CodeGeneration.LowLevelClient.Domain
 		{
 			//we distinct by here to catch aliased endpoints like:
 			//  /_cluster/nodes/hotthreads and /_nodes/hotthreads
-			return Extensions.DistinctBy(
-				this.CsharpMethods.ToList(), 
-				m => m.ReturnType + "--" + m.FullName + "--" + m.Arguments
+			return this.CsharpMethods.ToList()
+				.Where(m=>m.CallTypeGeneric != "DynamicDictionary" && m.CallTypeGeneric != "string")
+				.DistinctBy(m => m.ReturnType + "--" + m.FullName + "--" + m.Arguments
 			);
 		}
 
@@ -210,7 +210,6 @@ namespace CodeGeneration.LowLevelClient.Domain
 						ApiGenerator.PatchMethod(apiMethod);
 						yield return apiMethod;
 						
-						yield break;
 						//No need for deserialization state when returning dynamicdictionary
 
 						var explanationOfDynamic =

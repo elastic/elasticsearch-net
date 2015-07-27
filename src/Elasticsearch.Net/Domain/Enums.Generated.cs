@@ -165,6 +165,159 @@ namespace Elasticsearch.Net
 		Always
 	}
 	
+	
+	public enum ClusterStateMetric 
+	{
+		  [EnumMember(Value = "_all")]
+		All,
+		[EnumMember(Value = "blocks")]
+		Blocks,
+		[EnumMember(Value = "metadata")]
+		Metadata,
+		[EnumMember(Value = "nodes")]
+		Nodes,
+		[EnumMember(Value = "routing_table")]
+		RoutingTable,
+		[EnumMember(Value = "routing_nodes")]
+		RoutingNodes,
+		[EnumMember(Value = "master_node")]
+		MasterNode,
+		[EnumMember(Value = "version")]
+		Version
+	}
+	
+	
+	public enum IndicesStatsMetric 
+	{
+		  [EnumMember(Value = "_all")]
+		All,
+		[EnumMember(Value = "completion")]
+		Completion,
+		[EnumMember(Value = "docs")]
+		Docs,
+		[EnumMember(Value = "fielddata")]
+		Fielddata,
+		[EnumMember(Value = "filter_cache")]
+		FilterCache,
+		[EnumMember(Value = "flush")]
+		Flush,
+		[EnumMember(Value = "get")]
+		Get,
+		[EnumMember(Value = "id_cache")]
+		IdCache,
+		[EnumMember(Value = "indexing")]
+		Indexing,
+		[EnumMember(Value = "merge")]
+		Merge,
+		[EnumMember(Value = "percolate")]
+		Percolate,
+		[EnumMember(Value = "query_cache")]
+		QueryCache,
+		[EnumMember(Value = "refresh")]
+		Refresh,
+		[EnumMember(Value = "search")]
+		Search,
+		[EnumMember(Value = "segments")]
+		Segments,
+		[EnumMember(Value = "store")]
+		Store,
+		[EnumMember(Value = "warmer")]
+		Warmer,
+		[EnumMember(Value = "suggest")]
+		Suggest
+	}
+	
+	
+	public enum NodesInfoMetric 
+	{
+		  [EnumMember(Value = "settings")]
+		Settings,
+		[EnumMember(Value = "os")]
+		Os,
+		[EnumMember(Value = "process")]
+		Process,
+		[EnumMember(Value = "jvm")]
+		Jvm,
+		[EnumMember(Value = "thread_pool")]
+		ThreadPool,
+		[EnumMember(Value = "network")]
+		Network,
+		[EnumMember(Value = "transport")]
+		Transport,
+		[EnumMember(Value = "http")]
+		Http,
+		[EnumMember(Value = "plugins")]
+		Plugins
+	}
+	
+	
+	public enum NodesStatsMetric 
+	{
+		  [EnumMember(Value = "_all")]
+		All,
+		[EnumMember(Value = "breaker")]
+		Breaker,
+		[EnumMember(Value = "fs")]
+		Fs,
+		[EnumMember(Value = "http")]
+		Http,
+		[EnumMember(Value = "indices")]
+		Indices,
+		[EnumMember(Value = "jvm")]
+		Jvm,
+		[EnumMember(Value = "network")]
+		Network,
+		[EnumMember(Value = "os")]
+		Os,
+		[EnumMember(Value = "process")]
+		Process,
+		[EnumMember(Value = "thread_pool")]
+		ThreadPool,
+		[EnumMember(Value = "transport")]
+		Transport
+	}
+	
+	
+	public enum NodesStatsIndexMetric 
+	{
+		  [EnumMember(Value = "_all")]
+		All,
+		[EnumMember(Value = "completion")]
+		Completion,
+		[EnumMember(Value = "docs")]
+		Docs,
+		[EnumMember(Value = "fielddata")]
+		Fielddata,
+		[EnumMember(Value = "filter_cache")]
+		FilterCache,
+		[EnumMember(Value = "flush")]
+		Flush,
+		[EnumMember(Value = "get")]
+		Get,
+		[EnumMember(Value = "id_cache")]
+		IdCache,
+		[EnumMember(Value = "indexing")]
+		Indexing,
+		[EnumMember(Value = "merge")]
+		Merge,
+		[EnumMember(Value = "percolate")]
+		Percolate,
+		[EnumMember(Value = "query_cache")]
+		QueryCache,
+		[EnumMember(Value = "refresh")]
+		Refresh,
+		[EnumMember(Value = "search")]
+		Search,
+		[EnumMember(Value = "segments")]
+		Segments,
+		[EnumMember(Value = "store")]
+		Store,
+		[EnumMember(Value = "warmer")]
+		Warmer,
+		[EnumMember(Value = "suggest")]
+		Suggest
+	}
+	
 
 	public static class KnownEnums
 	{
@@ -321,6 +474,110 @@ namespace Elasticsearch.Net
 					case SuggestMode.Missing: return "missing";
 					case SuggestMode.Popular: return "popular";
 					case SuggestMode.Always: return "always";
+				}
+			}
+			
+			
+			if (e is ClusterStateMetric)
+			{
+				switch((ClusterStateMetric)e)
+				{
+					case ClusterStateMetric.All: return "_all";
+					case ClusterStateMetric.Blocks: return "blocks";
+					case ClusterStateMetric.Metadata: return "metadata";
+					case ClusterStateMetric.Nodes: return "nodes";
+					case ClusterStateMetric.RoutingTable: return "routing_table";
+					case ClusterStateMetric.RoutingNodes: return "routing_nodes";
+					case ClusterStateMetric.MasterNode: return "master_node";
+					case ClusterStateMetric.Version: return "version";
+				}
+			}
+			
+			
+			if (e is IndicesStatsMetric)
+			{
+				switch((IndicesStatsMetric)e)
+				{
+					case IndicesStatsMetric.All: return "_all";
+					case IndicesStatsMetric.Completion: return "completion";
+					case IndicesStatsMetric.Docs: return "docs";
+					case IndicesStatsMetric.Fielddata: return "fielddata";
+					case IndicesStatsMetric.FilterCache: return "filter_cache";
+					case IndicesStatsMetric.Flush: return "flush";
+					case IndicesStatsMetric.Get: return "get";
+					case IndicesStatsMetric.IdCache: return "id_cache";
+					case IndicesStatsMetric.Indexing: return "indexing";
+					case IndicesStatsMetric.Merge: return "merge";
+					case IndicesStatsMetric.Percolate: return "percolate";
+					case IndicesStatsMetric.QueryCache: return "query_cache";
+					case IndicesStatsMetric.Refresh: return "refresh";
+					case IndicesStatsMetric.Search: return "search";
+					case IndicesStatsMetric.Segments: return "segments";
+					case IndicesStatsMetric.Store: return "store";
+					case IndicesStatsMetric.Warmer: return "warmer";
+					case IndicesStatsMetric.Suggest: return "suggest";
+				}
+			}
+			
+			
+			if (e is NodesInfoMetric)
+			{
+				switch((NodesInfoMetric)e)
+				{
+					case NodesInfoMetric.Settings: return "settings";
+					case NodesInfoMetric.Os: return "os";
+					case NodesInfoMetric.Process: return "process";
+					case NodesInfoMetric.Jvm: return "jvm";
+					case NodesInfoMetric.ThreadPool: return "thread_pool";
+					case NodesInfoMetric.Network: return "network";
+					case NodesInfoMetric.Transport: return "transport";
+					case NodesInfoMetric.Http: return "http";
+					case NodesInfoMetric.Plugins: return "plugins";
+				}
+			}
+			
+			
+			if (e is NodesStatsMetric)
+			{
+				switch((NodesStatsMetric)e)
+				{
+					case NodesStatsMetric.All: return "_all";
+					case NodesStatsMetric.Breaker: return "breaker";
+					case NodesStatsMetric.Fs: return "fs";
+					case NodesStatsMetric.Http: return "http";
+					case NodesStatsMetric.Indices: return "indices";
+					case NodesStatsMetric.Jvm: return "jvm";
+					case NodesStatsMetric.Network: return "network";
+					case NodesStatsMetric.Os: return "os";
+					case NodesStatsMetric.Process: return "process";
+					case NodesStatsMetric.ThreadPool: return "thread_pool";
+					case NodesStatsMetric.Transport: return "transport";
+				}
+			}
+			
+			
+			if (e is NodesStatsIndexMetric)
+			{
+				switch((NodesStatsIndexMetric)e)
+				{
+					case NodesStatsIndexMetric.All: return "_all";
+					case NodesStatsIndexMetric.Completion: return "completion";
+					case NodesStatsIndexMetric.Docs: return "docs";
+					case NodesStatsIndexMetric.Fielddata: return "fielddata";
+					case NodesStatsIndexMetric.FilterCache: return "filter_cache";
+					case NodesStatsIndexMetric.Flush: return "flush";
+					case NodesStatsIndexMetric.Get: return "get";
+					case NodesStatsIndexMetric.IdCache: return "id_cache";
+					case NodesStatsIndexMetric.Indexing: return "indexing";
+					case NodesStatsIndexMetric.Merge: return "merge";
+					case NodesStatsIndexMetric.Percolate: return "percolate";
+					case NodesStatsIndexMetric.QueryCache: return "query_cache";
+					case NodesStatsIndexMetric.Refresh: return "refresh";
+					case NodesStatsIndexMetric.Search: return "search";
+					case NodesStatsIndexMetric.Segments: return "segments";
+					case NodesStatsIndexMetric.Store: return "store";
+					case NodesStatsIndexMetric.Warmer: return "warmer";
+					case NodesStatsIndexMetric.Suggest: return "suggest";
 				}
 			}
 			
