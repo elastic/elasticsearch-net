@@ -90,7 +90,6 @@
     <Compile Include="Search\Request\FielddataFields.cs" />
     <Compile Include="Search\Request\Highlighting.cs" />
     <Compile Include="Search\Request\IndexBoost.cs" />
-    <Compile Include="Search\Request\InnerHits.cs" />
     <Compile Include="Search\Request\MinScore.cs" />
     <Compile Include="Search\Request\PostFilter.cs" />
     <Compile Include="Search\Request\Explain.cs" />

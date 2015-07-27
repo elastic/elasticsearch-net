@@ -21,6 +21,8 @@ namespace Tests.Aggregations.Bucket
 		 *
 		 * Be sure to read the elasticsearch documentation {ref}/search-aggregations-bucket-filters-aggregation.html[on this subject here]
 		*/
+
+		/** == Named filters **/
 		public class Usage : AggregationUsageBase
 		{
 			public Usage(ReadOnlyCluster i, ApiUsage usage) : base(i, usage) { }
@@ -28,7 +30,7 @@ namespace Tests.Aggregations.Bucket
 			protected override object ExpectJson => new
 			{
 				aggs = new {
-					bethels_projects = new {
+					projects_by_state = new {
 						filters = new {
 							filters = new {
 								belly_up = new { term = new { state = new { value = "BellyUp" } }},
@@ -45,8 +47,8 @@ namespace Tests.Aggregations.Bucket
 
 			protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
 				.Aggregations(aggs => aggs
-					.Filters("bethels_projects", agg => agg
-						.Filters(filters => filters
+					.Filters("projects_by_state", agg => agg
+						.NamedFilters(filters => filters
 							.Filter("belly_up", f=>f.Term(p=>p.State, StateOfBeing.BellyUp))
 							.Filter("stable", f=>f.Term(p=>p.State, StateOfBeing.Stable))
 							.Filter("very_active", f=>f.Term(p=>p.State, StateOfBeing.VeryActive))
@@ -60,7 +62,7 @@ namespace Tests.Aggregations.Bucket
 			protected override SearchRequest<Project> Initializer =>
 				new SearchRequest<Project>
 				{
-					Aggregations = new FiltersAgg("bethels_projects")
+					Aggregations = new FiltersAgg("projects_by_state")
 					{
 						Filters = new NamedFiltersContainer
 						{
@@ -81,9 +83,96 @@ namespace Tests.Aggregations.Bucket
 				* Using the `.Agg` aggregation helper we can fetch our aggregation results easily 
 				* in the correct type. [Be sure to read more about `.Agg` vs `.Aggregations` on the response here]()
 				*/
-				var filterAgg = response.Aggs.Filters("bethels_projects");
+				var filterAgg = response.Aggs.Filters("projects_by_state");
 				filterAgg.Should().NotBeNull();
+
+				var namedResult = filterAgg.NamedBucket("belly_up");
+				namedResult.Should().NotBeNull();
+				namedResult.DocCount.Should().BeGreaterThan(0);
+
+				namedResult = filterAgg.NamedBucket("stable");
+				namedResult.Should().NotBeNull();
+				namedResult.DocCount.Should().BeGreaterThan(0);
+
+				namedResult = filterAgg.NamedBucket("very_active");
+				namedResult.Should().NotBeNull();
+				namedResult.DocCount.Should().BeGreaterThan(0);
+
 			});
 		}
+
+		/** == Anonymous filters **/
+
+		public class AnonymousUsage : AggregationUsageBase
+		{
+			public AnonymousUsage(ReadOnlyCluster i, ApiUsage usage) : base(i, usage) { }
+
+			protected override object ExpectJson => new
+			{
+				aggs = new {
+					projects_by_state = new {
+						filters = new {
+							filters = new [] {
+								new { term = new { state = new { value = "BellyUp" } }},
+								new { term = new { state = new { value = "Stable" } }},
+								new { term = new { state = new { value = "VeryActive" } }},
+							}
+						},
+                        aggs = new {
+							project_tags = new { terms = new { field = "curatedTags.name" } }
+						}
+					}
+				}
+			};
+
+			protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
+				.Aggregations(aggs => aggs
+					.Filters("projects_by_state", agg => agg
+						.AnonymousFilters(
+							f=>f.Term(p=>p.State, StateOfBeing.BellyUp),
+							f=>f.Term(p=>p.State, StateOfBeing.Stable),
+							f=>f.Term(p=>p.State, StateOfBeing.VeryActive)
+						)
+						.Aggregations(childAggs => childAggs
+							.Terms("project_tags", avg => avg.Field(p => p.CuratedTags.First().Name))
+						)
+					)
+				);
+
+			protected override SearchRequest<Project> Initializer =>
+				new SearchRequest<Project>
+				{
+					Aggregations = new FiltersAgg("projects_by_state")
+					{
+						Filters = new List<IQueryContainer>
+						{
+							 Query<Project>.Term(p=>p.State, StateOfBeing.BellyUp) ,
+							 Query<Project>.Term(p=>p.State, StateOfBeing.Stable) ,
+							 Query<Project>.Term(p=>p.State, StateOfBeing.VeryActive) 
+						},
+						Aggregations =
+							new TermsAgg("project_tags") { Field = Field<Project>(p => p.CuratedTags.First().Name) }
+					}
+				};
+
+			[I] public async Task HandlingResponses() => await this.AssertOnAllResponses(response =>
+			{
+				response.IsValid.Should().BeTrue();
+
+				/**
+				* Using the `.Agg` aggregation helper we can fetch our aggregation results easily 
+				* in the correct type. [Be sure to read more about `.Agg` vs `.Aggregations` on the response here]()
+				*/
+				var filterAgg = response.Aggs.Filters("projects_by_state");
+				filterAgg.Should().NotBeNull();
+				var results = filterAgg.AnonymousBuckets();
+				results.Count.Should().Be(3);
+				foreach (var singleBucket in results)
+				{
+					singleBucket.DocCount.Should().BeGreaterThan(0);
+				}
+			});
+		}
+
 	}
 }

@@ -12,6 +12,7 @@ namespace Nest
 	{
 	}
 
+	[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<NamedFiltersContainer>, DictionaryKeysAreNotFieldNamesJsonConverter>))]
 	public abstract class NamedFiltersContainerBase : ProxyDictionary<string, IQueryContainer>, INamedFiltersContainer
 	{
 		protected NamedFiltersContainerBase () : base() { }

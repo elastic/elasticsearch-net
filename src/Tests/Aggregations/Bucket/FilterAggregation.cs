@@ -25,6 +25,8 @@ namespace Tests.Aggregations.Bucket
 		{
 			public Usage(ReadOnlyCluster i, ApiUsage usage) : base(i, usage) { }
 
+			public static string FirstNameToFind = Project.Projects.First().LeadDeveloper.FirstName.ToLowerInvariant();
+
 			protected override object ExpectJson => new
 			{
 				aggs = new
@@ -34,7 +36,7 @@ namespace Tests.Aggregations.Bucket
 						filter = new {
 							term = new Dictionary<string, object>
 							{
-								{ "leadDeveloper.firstName", new { value = "bethel" }}
+								{ "leadDeveloper.firstName", new { value = FirstNameToFind }}
 							}
 						},
                         aggs = new
@@ -48,7 +50,7 @@ namespace Tests.Aggregations.Bucket
 			protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
 				.Aggregations(aggs => aggs
 					.Filter("bethels_projects", date => date
-						.Filter(q=>q.Term(p=>p.LeadDeveloper.FirstName, "bethel"))
+						.Filter(q=>q.Term(p=>p.LeadDeveloper.FirstName, FirstNameToFind))
 						.Aggregations(childAggs => childAggs
 							.Terms("project_tags", avg => avg.Field(p => p.CuratedTags.First().Name))
 						)
@@ -60,7 +62,7 @@ namespace Tests.Aggregations.Bucket
 				{
 					Aggregations = new FilterAgg("bethels_projects")
 					{
-						Filter = new TermQuery { Field = Field<Project>(p=>p.LeadDeveloper.FirstName), Value = "bethel"},
+						Filter = new TermQuery { Field = Field<Project>(p=>p.LeadDeveloper.FirstName), Value = FirstNameToFind },
 						Aggregations =
 							new TermsAgg("project_tags") { Field = Field<Project>(p => p.CuratedTags.First().Name) }
 					}
@@ -76,7 +78,7 @@ namespace Tests.Aggregations.Bucket
 				*/
 				var filterAgg = response.Aggs.Filter("bethels_projects");
 				filterAgg.Should().NotBeNull();
-				filterAgg.DocCount.Should().Be(1);
+				filterAgg.DocCount.Should().BeGreaterThan(0);
 				var tags = filterAgg.Terms("project_tags");
 				tags.Should().NotBeNull();
 				tags.Items.Should().NotBeEmpty();

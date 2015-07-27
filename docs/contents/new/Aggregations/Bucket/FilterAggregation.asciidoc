@@ -7,7 +7,7 @@ Be sure to read the elasticsearch documentation {ref}/search-aggregations-bucket
 s => s
 .Aggregations(aggs => aggs
 	.Filter("bethels_projects", date => date
-		.Filter(q=>q.Term(p=>p.LeadDeveloper.FirstName, "bethel"))
+		.Filter(q=>q.Term(p=>p.LeadDeveloper.FirstName, FirstNameToFind))
 		.Aggregations(childAggs => childAggs
 			.Terms("project_tags", avg => avg.Field(p => p.CuratedTags.First().Name))
 		)
@@ -20,7 +20,7 @@ new SearchRequest<Project>
 {
 	Aggregations = new FilterAgg("bethels_projects")
 	{
-		Filter = new TermQuery { Field = Field<Project>(p=>p.LeadDeveloper.FirstName), Value = "bethel"},
+		Filter = new TermQuery { Field = Field<Project>(p=>p.LeadDeveloper.FirstName), Value = FirstNameToFind },
 		Aggregations =
 			new TermsAgg("project_tags") { Field = Field<Project>(p => p.CuratedTags.First().Name) }
 	}

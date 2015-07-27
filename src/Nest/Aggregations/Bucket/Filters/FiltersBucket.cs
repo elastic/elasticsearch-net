@@ -1,5 +1,6 @@
 ﻿
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Nest
 {
@@ -14,8 +15,13 @@ namespace Nest
 		{
 			Aggregations = helper;
 		}
-		public AggregationsHelper Aggregations { get; private set; }
 
-		public IEnumerable<IAggregation> Items { get; private set; }
+		public SingleBucket NamedBucket(string key) => this.Aggregations?.Global(key);
+
+		public IList<SingleBucket> AnonymousBuckets() => this.Items?.OfType<SingleBucket>().ToList();
+
+		private AggregationsHelper Aggregations { get; set; }
+
+		private IEnumerable<IAggregation> Items { get; set; }
 	}
 }

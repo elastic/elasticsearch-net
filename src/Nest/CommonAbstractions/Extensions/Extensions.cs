@@ -152,10 +152,10 @@ namespace Nest
 		
 		//TODO also filter nulls
 
-		internal static IList<T> ToListOrNullIfEmpty<T>(this IEnumerable<T> xs, Func<T, bool> predicate) =>
+		internal static List<T> ToListOrNullIfEmpty<T>(this IEnumerable<T> xs, Func<T, bool> predicate) =>
 			!xs.HasAny(predicate) ? null : xs.ToList();
 
-		internal static IList<T> ToListOrNullIfEmpty<T>(this IEnumerable<T> enumerable) =>
+		internal static List<T> ToListOrNullIfEmpty<T>(this IEnumerable<T> enumerable) =>
 			enumerable.HasAny() ? enumerable.ToList() : null;
 
 		internal static Dictionary<TKey, TValue> NullIfNoKeys<TKey, TValue>(this Dictionary<TKey, TValue> dictionary)

@@ -12,17 +12,17 @@ namespace Nest
 	public interface IFiltersAggregator : IBucketAggregator
 	{
 		[JsonProperty("filters")]
-		INamedFiltersContainer Filters { get; set; }
+		Union<INamedFiltersContainer, List<IQueryContainer>> Filters { get; set; }
 	}
 
 	public class FiltersAggregator : BucketAggregator, IFiltersAggregator
 	{
-		public INamedFiltersContainer Filters { get; set; }
+		public Union<INamedFiltersContainer, List<IQueryContainer>> Filters { get; set; }
 	}
 
 	public class FiltersAgg : BucketAgg, IFiltersAggregator
 	{
-		public INamedFiltersContainer Filters { get; set; }
+		public Union<INamedFiltersContainer, List<IQueryContainer>> Filters { get; set; }
 
 		public FiltersAgg(string name) : base(name) { }
 
@@ -34,10 +34,16 @@ namespace Nest
 		, IFiltersAggregator
 		where T : class
 	{
-		INamedFiltersContainer IFiltersAggregator.Filters { get; set; }
+		Union<INamedFiltersContainer, List<IQueryContainer>> IFiltersAggregator.Filters { get; set; }
 
-		public FiltersAggregatorDescriptor<T> Filters(Func<NamedFiltersContainerDescriptor<T>, INamedFiltersContainer> selector) =>
+		public FiltersAggregatorDescriptor<T> NamedFilters(Func<NamedFiltersContainerDescriptor<T>, NamedFiltersContainerBase> selector) =>
 			Assign(a => a.Filters = selector?.Invoke(new NamedFiltersContainerDescriptor<T>()));
+
+		public FiltersAggregatorDescriptor<T> AnonymousFilters(params Func<QueryContainerDescriptor<T>, IQueryContainer>[] selectors) =>
+			Assign(a => a.Filters = selectors.Select(s=>s?.Invoke(new QueryContainerDescriptor<T>())).ToListOrNullIfEmpty());
+
+		public FiltersAggregatorDescriptor<T> AnonymousFilters(IEnumerable<Func<QueryContainerDescriptor<T>, IQueryContainer>> selectors) =>
+			Assign(a => a.Filters = selectors.Select(s=>s?.Invoke(new QueryContainerDescriptor<T>())).ToListOrNullIfEmpty());
 
 	}
 }
