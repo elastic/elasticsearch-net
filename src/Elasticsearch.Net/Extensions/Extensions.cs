@@ -52,6 +52,13 @@ namespace Elasticsearch.Net
 			return camelCase;
 		}
 
+		internal static string NotNull(this string @object, string parameterName)
+		{
+			@object.ThrowIfNull(parameterName);
+			if (string.IsNullOrWhiteSpace(@object))
+				throw new ArgumentException("String argument is empty", parameterName);
+			return @object;
+		}
 
 		internal static void ThrowIfNullOrEmpty(this string @object, string parameterName)
 		{

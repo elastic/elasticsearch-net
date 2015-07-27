@@ -25,7 +25,7 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence.FieldNames
 		/** Using the constructor directly is possible but rather involved */
 		[U] public void UsingConstructors()
 		{
-			var fieldString = new FieldName() {Name = "name"};
+			var fieldString = new FieldName {Name = "name"};
 
 			/** especially when using C# expressions since these can not be simply new'ed*/
 			Expression<Func<Project, object>> expression = p => p.Name;
@@ -64,7 +64,9 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence.FieldNames
 			fieldExpression = Field<Project>(p=>p.Name);
 			/** Now this is much much terser then our first example using the constructor! */
 
-			Expect("name").WhenSerializing(fieldExpression);
+			Expect("name")
+				.WhenSerializing(fieldString)
+				.WhenSerializing(fieldExpression);
 		}
 		
 		/** By default NEST will camelCase all the field names to be more javascripty */

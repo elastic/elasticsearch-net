@@ -159,9 +159,11 @@ namespace CodeGeneration.LowLevelClient.Domain
 						queryStringParamName = this.CsharpMethodName + "RequestParameters";
 						var paraIndent = "\r\n\t\t///";
 						var explanationOfT =
-							paraIndent + "<para> - If T is of type byte[] deserialization will be shortcircuited</para>"
-							+ paraIndent + 
-								"<para> - If T is of type VoidResponse the response stream will be ignored completely</para>";
+							paraIndent + "<para> - T, an object you own that the elasticsearch response will be deserialized to /para>"
+							+ paraIndent + "<para> - byte[], no deserialization, but the response stream will be closed</para>"
+							+ paraIndent + "<para> - Stream, no deserialization, response stream is your responsibility</para>"
+							+ paraIndent + "<para> - VoidResponse, no deserialization, response stream never read and closed</para>"
+							;
 						var apiMethod = new CsharpMethod
 						{
 							QueryStringParamName = queryStringParamName,
@@ -169,7 +171,7 @@ namespace CodeGeneration.LowLevelClient.Domain
 							ReturnTypeGeneric = "<T>",
 							CallTypeGeneric = "T",
 							ReturnDescription = 
-								"ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T."
+								"ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:"
 								+ explanationOfT,
 							FullName = methodName,
 							HttpMethod = method,
@@ -194,7 +196,7 @@ namespace CodeGeneration.LowLevelClient.Domain
 							ReturnTypeGeneric = "<T>",
 							CallTypeGeneric = "T",
 							ReturnDescription = 
-								"A task that'll return an ElasticsearchResponse&lt;T&gt; holding the reponse body deserialized as T."
+								"A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:"
 								+ explanationOfT,
 							FullName = methodName + "Async",
 							HttpMethod = method,
@@ -227,7 +229,7 @@ namespace CodeGeneration.LowLevelClient.Domain
 							//CallTypeGeneric = defaultBoundGeneric == "DynamicDictionary" ? "Dictionary<string, object>" : defaultBoundGeneric,
 							CallTypeGeneric = defaultBoundGeneric,
 							ReturnDescription = 
-								"ElasticsearchResponse&lt;T&gt; holding the response body deserialized as DynamicDictionary"
+								"ElasticsearchResponse&lt;DynamicDictionary&gt;"
 								+ explanationOfDynamic,
 							FullName = methodName,
 							HttpMethod = method,
@@ -247,8 +249,8 @@ namespace CodeGeneration.LowLevelClient.Domain
 							ReturnTypeGeneric = null,
 							//CallTypeGeneric = defaultBoundGeneric == "DynamicDictionary" ? "Dictionary<string, object>" : defaultBoundGeneric,
 							CallTypeGeneric = defaultBoundGeneric,
-							ReturnDescription = 
-								"Task that'll return an ElasticsearchResponse&lt;T$gt; holding the response body deserialized as DynamicDictionary"
+							ReturnDescription =  
+								"A task of ElasticsearchResponse&lt;DynamicDictionary$gt;"
 								+ explanationOfDynamic,
 							FullName = methodName + "Async",
 							HttpMethod = method,

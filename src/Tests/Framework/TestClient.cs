@@ -12,7 +12,7 @@ namespace Tests.Framework
 {
 	public static class TestClient
 	{
-		private static bool _integrationOverride = true;
+		private static bool _integrationOverride = false;
 		private static string _manualOverrideVersion = "2.0.0";
 
 		public static string ElasticsearchVersion => 
@@ -37,7 +37,7 @@ namespace Tests.Framework
 					.Ignore(p=>p.PrivateValue)
 					.Rename(p=>p.OnlineHandle, "nickname")
 				)
-				.SetGlobalHeaders(new NameValueCollection() { {"TestMethod", ExpensiveTestNameForIntegrationTests()} });
+				.SetGlobalHeaders(new NameValueCollection { {"TestMethod", ExpensiveTestNameForIntegrationTests()} });
 
 			var settings = modifySettings != null ? modifySettings(defaultSettings) : defaultSettings;
 			return new ElasticClient(settings, CreateConnection(settings));

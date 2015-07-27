@@ -33,6 +33,7 @@ namespace Tests.ClientConcepts.LowLevel
 			var node = new Uri("http://mynode.example.com:8082/apiKey");
 			var config = new ConnectionConfiguration(node);
 			var client = new ElasticsearchClient(config);
+			client.AbortBenchmark<>()
 		}
 
 		/** 
