@@ -31,7 +31,7 @@ namespace Nest
 		string Format { get; set; }
 	}
 
-	public class RangeQuery : FieldNameQuery, IRangeQuery
+	public class RangeQuery : FieldNameQueryBase, IRangeQuery
 	{
 		bool IQuery.Conditionless => IsConditionless(this);
 		public string GreaterThanOrEqualTo { get; set; }
@@ -56,7 +56,7 @@ namespace Nest
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class RangeQueryDescriptor<T> 
-		: FieldNameQueryDescriptor<RangeQueryDescriptor<T>, IRangeQuery, T>
+		: FieldNameQueryDescriptorBase<RangeQueryDescriptor<T>, IRangeQuery, T>
 		, IRangeQuery where T : class
 	{
 		private IRangeQuery Self => this;

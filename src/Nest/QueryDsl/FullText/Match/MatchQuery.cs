@@ -54,7 +54,7 @@ namespace Nest
 		Operator? Operator { get; set; }
 	}
 	
-	public class MatchQuery : FieldNameQuery, IMatchQuery
+	public class MatchQuery : FieldNameQueryBase, IMatchQuery
 	{
 		bool IQuery.Conditionless => IsConditionless(this);
 		public string Type { get; set; }
@@ -78,7 +78,7 @@ namespace Nest
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public class MatchQueryDescriptor<T> 
-		: FieldNameQueryDescriptor<MatchQueryDescriptor<T>, IMatchQuery, T> 
+		: FieldNameQueryDescriptorBase<MatchQueryDescriptor<T>, IMatchQuery, T> 
 		, IMatchQuery where T : class
 	{
 		protected virtual string MatchQueryType { get { return null; } }

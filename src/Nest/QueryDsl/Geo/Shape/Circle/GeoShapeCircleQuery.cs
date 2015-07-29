@@ -18,7 +18,7 @@ namespace Nest
 		ICircleGeoShape Shape { get; set; }
 	}
 
-	public class GeoShapeCircleQuery : FieldNameQuery, IGeoShapeCircleQuery
+	public class GeoShapeCircleQuery : FieldNameQueryBase, IGeoShapeCircleQuery
 	{
 		bool IQuery.Conditionless => IsConditionless(this);
 		public ICircleGeoShape Shape { get; set; }
@@ -28,7 +28,7 @@ namespace Nest
 	}
 
 	public class GeoShapeCircleQueryDescriptor<T> 
-		: FieldNameQueryDescriptor<GeoShapeCircleQueryDescriptor<T>, IGeoShapeCircleQuery, T>
+		: FieldNameQueryDescriptorBase<GeoShapeCircleQueryDescriptor<T>, IGeoShapeCircleQuery, T>
 		, IGeoShapeCircleQuery where T : class
 	{
 		private IGeoShapeCircleQuery Self => this;

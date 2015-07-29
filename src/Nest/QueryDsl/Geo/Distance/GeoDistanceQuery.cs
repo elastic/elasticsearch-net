@@ -29,7 +29,7 @@ namespace Nest
 		GeoDistance? DistanceType { get; set; }
 	}
 
-	public class GeoDistanceQuery : FieldNameQuery, IGeoDistanceQuery
+	public class GeoDistanceQuery : FieldNameQueryBase, IGeoDistanceQuery
 	{
 		bool IQuery.Conditionless => IsConditionless(this);
 		public string Location { get; set; }
@@ -44,7 +44,7 @@ namespace Nest
 	}
 
 	public class GeoDistanceQueryDescriptor<T> 
-		: FieldNameQueryDescriptor<GeoDistanceQueryDescriptor<T>, IGeoDistanceQuery, T> 
+		: FieldNameQueryDescriptorBase<GeoDistanceQueryDescriptor<T>, IGeoDistanceQuery, T> 
 		, IGeoDistanceQuery where T : class
 	{
 		private IGeoDistanceQuery Self => this;

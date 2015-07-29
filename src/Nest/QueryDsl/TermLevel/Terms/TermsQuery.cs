@@ -18,7 +18,7 @@ namespace Nest
 		IExternalFieldDeclaration ExternalField { get; set; }
 	}
 
-	public class TermsQuery : FieldNameQuery, ITermsQuery
+	public class TermsQuery : FieldNameQueryBase, ITermsQuery
 	{
 		bool IQuery.Conditionless => IsConditionless(this);
 		public string MinimumShouldMatch { get; set; }
@@ -40,7 +40,7 @@ namespace Nest
 	/// <typeparam name="T">The type that represents the expected hit type</typeparam>
 	/// <typeparam name="K">The type of the field that we want to specfify terms for</typeparam>
 	public class TermsQueryDescriptor<T, K> 
-		: FieldNameQueryDescriptor<TermsQueryDescriptor<T, K>, ITermsQuery, T>
+		: FieldNameQueryDescriptorBase<TermsQueryDescriptor<T, K>, ITermsQuery, T>
 		, ITermsQuery where T : class
 	{
 		private ITermsQuery Self => this;

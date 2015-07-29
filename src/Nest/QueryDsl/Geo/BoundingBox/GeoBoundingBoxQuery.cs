@@ -19,7 +19,7 @@ namespace Nest
 		GeoExecution? Type { get; set; }
 	}
 	
-	public class GeoBoundingBoxQuery : FieldNameQuery, IGeoBoundingBoxQuery
+	public class GeoBoundingBoxQuery : FieldNameQueryBase, IGeoBoundingBoxQuery
 	{
 		bool IQuery.Conditionless => IsConditionless(this);
 		public string TopLeft { get; set; }
@@ -37,7 +37,7 @@ namespace Nest
 	}
 
 	public class GeoBoundingBoxQueryDescriptor<T> 
-		: FieldNameQueryDescriptor<GeoBoundingBoxQueryDescriptor<T>, IGeoBoundingBoxQuery, T>
+		: FieldNameQueryDescriptorBase<GeoBoundingBoxQueryDescriptor<T>, IGeoBoundingBoxQuery, T>
 		, IGeoBoundingBoxQuery where T : class
 	{
 		private IGeoBoundingBoxQuery Self => this;

@@ -35,7 +35,7 @@ namespace Nest
 		bool? DisableCoord { get; set; }
 	}
 
-	public class CommonTermsQuery : FieldNameQuery, ICommonTermsQuery
+	public class CommonTermsQuery : FieldNameQueryBase, ICommonTermsQuery
 	{
 		bool IQuery.Conditionless => IsConditionless(this);
 		public string Query { get; set; }
@@ -51,7 +51,7 @@ namespace Nest
 	}
 
 	public class CommonTermsQueryDescriptor<T> 
-		: FieldNameQueryDescriptor<CommonTermsQueryDescriptor<T>, ICommonTermsQuery, T>
+		: FieldNameQueryDescriptorBase<CommonTermsQueryDescriptor<T>, ICommonTermsQuery, T>
 		, ICommonTermsQuery 
 		where T : class
 	{

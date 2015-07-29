@@ -11,7 +11,7 @@ namespace Nest
 	{
 	}
 	
-	public class SpanTermQuery : FieldNameQuery, ISpanTermQuery
+	public class SpanTermQuery : FieldNameQueryBase, ISpanTermQuery
 	{
 		bool IQuery.Conditionless => TermQuery.IsConditionless(this);
 		public object Value { get; set; }

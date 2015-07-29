@@ -30,7 +30,7 @@ namespace Nest
 		bool? UnicodeAware { get; set; }
 	}
 
-	public class FuzzyQuery : FieldNameQuery, IFuzzyQuery
+	public class FuzzyQuery : FieldNameQueryBase, IFuzzyQuery
 	{
 		bool IQuery.Conditionless => IsConditionless(this);
 		public string Fuzziness { get; set; }
@@ -46,7 +46,7 @@ namespace Nest
 	}
 
 	public class FuzzyQueryDescriptor<T> 
-		: FieldNameQueryDescriptor<FuzzyQueryDescriptor<T>, IFuzzyQuery, T>
+		: FieldNameQueryDescriptorBase<FuzzyQueryDescriptor<T>, IFuzzyQuery, T>
 		, IFuzzyQuery where T : class
 	{
 		private IFuzzyQuery Self => this;

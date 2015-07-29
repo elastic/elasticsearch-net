@@ -13,7 +13,7 @@ namespace Nest
 		IEnumerable<string> Points { get; set; }
 	}
 
-	public class GeoPolygonQuery : FieldNameQuery, IGeoPolygonQuery
+	public class GeoPolygonQuery : FieldNameQueryBase, IGeoPolygonQuery
 	{
 		bool IQuery.Conditionless => IsConditionless(this);
 		public IEnumerable<string> Points { get; set; }
@@ -23,7 +23,7 @@ namespace Nest
 	}
 
 	public class GeoPolygonQueryDescriptor<T> 
-		: FieldNameQueryDescriptor<GeoPolygonQueryDescriptor<T>, IGeoPolygonQuery, T>
+		: FieldNameQueryDescriptorBase<GeoPolygonQueryDescriptor<T>, IGeoPolygonQuery, T>
 		, IGeoPolygonQuery where T : class
 	{
 		private IGeoPolygonQuery Self => this;

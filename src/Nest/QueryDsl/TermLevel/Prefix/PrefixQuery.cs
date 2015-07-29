@@ -11,7 +11,7 @@ namespace Nest
 		RewriteMultiTerm? Rewrite { get; set; }
 	}
 
-	public class PrefixQuery : FieldNameQuery, IPrefixQuery
+	public class PrefixQuery : FieldNameQueryBase, IPrefixQuery
 	{
 		bool IQuery.Conditionless => TermQuery.IsConditionless(this);
 		public object Value { get; set; }

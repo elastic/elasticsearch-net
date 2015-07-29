@@ -6,9 +6,9 @@ using System.Text;
 
 namespace Nest
 {
-	public abstract class FieldNameQueryDescriptor<TDescriptor, TInterface, T> 
+	public abstract class FieldNameQueryDescriptorBase<TDescriptor, TInterface, T> 
 		: QueryDescriptorBase<TDescriptor, TInterface>, IFieldNameQuery
-		where TDescriptor : FieldNameQueryDescriptor<TDescriptor, TInterface, T>, TInterface
+		where TDescriptor : FieldNameQueryDescriptorBase<TDescriptor, TInterface, T>, TInterface
 		where TInterface : class, IFieldNameQuery
 		where T : class
 	{

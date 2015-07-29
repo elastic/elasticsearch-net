@@ -17,7 +17,7 @@ namespace Nest
 		int? MaximumDeterminizedStates { get; set; }
 	}
 
-	public class RegexpQuery : FieldNameQuery, IRegexpQuery
+	public class RegexpQuery : FieldNameQueryBase, IRegexpQuery
 	{
 		bool IQuery.Conditionless => IsConditionless(this);
 		public string Value { get; set; }
@@ -29,7 +29,7 @@ namespace Nest
 	}
 
 	public class RegexpQueryDescriptor<T> 
-		: FieldNameQueryDescriptor<RegexpQueryDescriptor<T>, IRegexpQuery, T>
+		: FieldNameQueryDescriptorBase<RegexpQueryDescriptor<T>, IRegexpQuery, T>
 		, IRegexpQuery where T : class
 	{
 		private IRegexpQuery Self => this;

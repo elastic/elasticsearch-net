@@ -22,7 +22,7 @@ namespace Nest
         bool Neighbors { get; set; }
     }
 
-    public class GeoHashCellQuery : FieldNameQuery, IGeoHashCellQuery
+    public class GeoHashCellQuery : FieldNameQueryBase, IGeoHashCellQuery
     {
 		bool IQuery.Conditionless => IsConditionless(this);
         public string Location { get; set; }
@@ -36,7 +36,7 @@ namespace Nest
 	}
 
 	public class GeoHashCellQueryDescriptor<T> 
-		: FieldNameQueryDescriptor<GeoHashCellQueryDescriptor<T>, IGeoHashCellQuery, T> 
+		: FieldNameQueryDescriptorBase<GeoHashCellQueryDescriptor<T>, IGeoHashCellQuery, T> 
 		, IGeoHashCellQuery where T : class
     {
 		private IGeoHashCellQuery Self => this;

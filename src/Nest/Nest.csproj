@@ -128,8 +128,8 @@
     <Compile Include="QueryDsl\Compound\Bool\BoolQuery.cs" />
     <Compile Include="QueryDsl\Compound\Bool\BoolQueryExtensions.cs" />
     <Compile Include="QueryDsl\Compound\Indices\NoMatchQueryConverter.cs" />
-    <Compile Include="QueryDsl\FieldNameQuery.cs" />
-    <Compile Include="QueryDsl\FieldNameQueryDescriptor.cs" />
+    <Compile Include="QueryDsl\FieldNameQueryBase.cs" />
+    <Compile Include="QueryDsl\FieldNameQueryDescriptorBase.cs" />
     <Compile Include="QueryDsl\QueryDescriptorBase.cs" />
     <Compile Include="Search\Scroll\ElasticClient-ScrollExtensions.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\ElasticClient-Deserialize.cs" />

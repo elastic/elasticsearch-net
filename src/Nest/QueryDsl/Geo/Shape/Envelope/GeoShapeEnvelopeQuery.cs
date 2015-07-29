@@ -16,7 +16,7 @@ namespace Nest
 		IEnvelopeGeoShape Shape { get; set; }
 	}
 
-	public class GeoShapeEnvelopeQuery : FieldNameQuery, IGeoShapeEnvelopeQuery
+	public class GeoShapeEnvelopeQuery : FieldNameQueryBase, IGeoShapeEnvelopeQuery
 	{
 		bool IQuery.Conditionless => IsConditionless(this);
 		public IEnvelopeGeoShape Shape { get; set; }
@@ -26,7 +26,7 @@ namespace Nest
 	}
 
 	public class GeoShapeEnvelopeQueryDescriptor<T> 
-		: FieldNameQueryDescriptor<GeoShapeEnvelopeQueryDescriptor<T>, IGeoShapeEnvelopeQuery, T>
+		: FieldNameQueryDescriptorBase<GeoShapeEnvelopeQueryDescriptor<T>, IGeoShapeEnvelopeQuery, T>
 		, IGeoShapeEnvelopeQuery where T : class
 	{
 		private IGeoShapeEnvelopeQuery Self => this;

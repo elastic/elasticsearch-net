@@ -16,7 +16,7 @@ namespace Nest
 		IMultiPolygonGeoShape Shape { get; set; }
 	}
 
-	public class GeoShapeMultiPolygonQuery : FieldNameQuery, IGeoShapeMultiPolygonQuery
+	public class GeoShapeMultiPolygonQuery : FieldNameQueryBase, IGeoShapeMultiPolygonQuery
 	{
 		bool IQuery.Conditionless => IsConditionless(this);
 		public IMultiPolygonGeoShape Shape { get; set; }
@@ -26,7 +26,7 @@ namespace Nest
 	}
 
 	public class GeoShapeMultiPolygonQueryDescriptor<T> 
-		: FieldNameQueryDescriptor<GeoShapeMultiPolygonQueryDescriptor<T>, IGeoShapeMultiPolygonQuery, T>
+		: FieldNameQueryDescriptorBase<GeoShapeMultiPolygonQueryDescriptor<T>, IGeoShapeMultiPolygonQuery, T>
 		, IGeoShapeMultiPolygonQuery where T : class
 	{
 		private IGeoShapeMultiPolygonQuery Self { get { return this; }}

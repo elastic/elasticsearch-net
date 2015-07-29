@@ -12,7 +12,7 @@ namespace Nest
 		object Value { get; set; }
 	}
 
-	public class TermQuery : FieldNameQuery, ITermQuery
+	public class TermQuery : FieldNameQueryBase, ITermQuery
 	{
 		bool IQuery.Conditionless => IsConditionless(this);
 		public object Value { get; set; }
@@ -22,7 +22,7 @@ namespace Nest
 	}
 
 	public class TermQueryDescriptorBase<TDescriptor, T> 
-		: FieldNameQueryDescriptor<TermQueryDescriptorBase<TDescriptor, T>, ITermQuery, T>
+		: FieldNameQueryDescriptorBase<TermQueryDescriptorBase<TDescriptor, T>, ITermQuery, T>
 		, ITermQuery
 		where TDescriptor : TermQueryDescriptorBase<TDescriptor, T>
 		where T : class

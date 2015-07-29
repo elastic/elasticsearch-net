@@ -19,7 +19,7 @@ namespace Nest
 		bool? NullValue { get; set; }
 	}
 
-	public class MissingQuery : FieldNameQuery, IMissingQuery
+	public class MissingQuery : FieldNameQueryBase, IMissingQuery
 	{
 		bool IQuery.Conditionless => IsConditionless(this);
 		public bool? Existence { get; set; }
@@ -29,7 +29,7 @@ namespace Nest
 	}
 
 	public class MissingQueryDescriptor<T> 
-		: FieldNameQueryDescriptor<MissingQueryDescriptor<T>, IMissingQuery, T>
+		: FieldNameQueryDescriptorBase<MissingQueryDescriptor<T>, IMissingQuery, T>
 		, IMissingQuery where T : class
 	{
 		private IMissingQuery Self => this;

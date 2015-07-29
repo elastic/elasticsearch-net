@@ -16,7 +16,7 @@ namespace Nest
 		ILineStringGeoShape Shape { get; set; }
 	}
 
-	public class GeoShapeLineStringQuery : FieldNameQuery, IGeoShapeLineStringQuery
+	public class GeoShapeLineStringQuery : FieldNameQueryBase, IGeoShapeLineStringQuery
 	{
 		bool IQuery.Conditionless => IsConditionless(this);
 		public ILineStringGeoShape Shape { get; set; }
@@ -26,7 +26,7 @@ namespace Nest
 	}
 
 	public class GeoShapeLineStringQueryDescriptor<T> 
-		: FieldNameQueryDescriptor<GeoShapeLineStringQueryDescriptor<T>, IGeoShapeLineStringQuery, T>
+		: FieldNameQueryDescriptorBase<GeoShapeLineStringQueryDescriptor<T>, IGeoShapeLineStringQuery, T>
 		, IGeoShapeLineStringQuery where T : class
 	{
 		private IGeoShapeLineStringQuery Self => this;

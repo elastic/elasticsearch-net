@@ -34,7 +34,7 @@ namespace Nest
 		bool? IncludeUpper { get; set; }
 	}
 
-	public class GeoDistanceRangeQuery : FieldNameQuery, IGeoDistanceRangeQuery
+	public class GeoDistanceRangeQuery : FieldNameQueryBase, IGeoDistanceRangeQuery
 	{
 		bool IQuery.Conditionless => IsConditionless(this);
 		public string Location { get; set; }
@@ -52,7 +52,7 @@ namespace Nest
 	}
 
 	public class GeoDistanceRangeQueryDescriptor<T> 
-		: FieldNameQueryDescriptor<GeoDistanceRangeQueryDescriptor<T>, IGeoDistanceRangeQuery, T> 
+		: FieldNameQueryDescriptorBase<GeoDistanceRangeQueryDescriptor<T>, IGeoDistanceRangeQuery, T> 
 		, IGeoDistanceRangeQuery where T : class
 	{
 		private IGeoDistanceRangeQuery Self => this;

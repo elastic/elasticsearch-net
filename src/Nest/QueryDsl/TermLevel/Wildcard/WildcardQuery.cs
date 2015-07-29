@@ -22,7 +22,7 @@ namespace Nest
 		}
 	}
 
-	public class WildcardQuery : FieldNameQuery, IWildcardQuery
+	public class WildcardQuery : FieldNameQueryBase, IWildcardQuery
 	{
 		bool IQuery.Conditionless => TermQuery.IsConditionless(this);
 		public object Value { get; set; }
