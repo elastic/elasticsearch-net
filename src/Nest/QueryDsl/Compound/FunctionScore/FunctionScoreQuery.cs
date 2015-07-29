@@ -74,7 +74,6 @@ namespace Nest
 		: QueryDescriptorBase<FunctionScoreQueryDescriptor<T>, IFunctionScoreQuery>
 		, IFunctionScoreQuery where T : class
 	{
-		private IFunctionScoreQuery Self { get { return this; }}
 		private bool _forcedConditionless = false;
 		bool IQuery.Conditionless => FunctionScoreQuery.IsConditionless(this, _forcedConditionless);
 		IEnumerable<IFunctionScoreFunction> IFunctionScoreQuery.Functions { get; set; }
@@ -94,88 +93,50 @@ namespace Nest
 			return this;
 		}
 
-		public FunctionScoreQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector)
+		public FunctionScoreQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> selector) => Assign(a =>
 		{
-			querySelector.ThrowIfNull("querySelector");
+			selector.ThrowIfNull();
 			var query = new QueryContainerDescriptor<T>();
-			var q = querySelector(query);
-			Self.Query = q.IsConditionless ? null : q;
-			return this;
-		}
+			var q = selector(query);
+			a.Query = q.IsConditionless ? null : q;
+		});
 
-		public FunctionScoreQueryDescriptor<T> Filter(Func<QueryContainerDescriptor<T>, QueryContainer> filterSelector)
+		public FunctionScoreQueryDescriptor<T> Filter(Func<QueryContainerDescriptor<T>, QueryContainer> selector) => Assign(a =>
 		{
-			filterSelector.ThrowIfNull("filterSelector");
+			selector.ThrowIfNull();
 			var filter = new QueryContainerDescriptor<T>();
-			var f = filterSelector(filter);
-			Self.Filter = f.IsConditionless ? null : f;
-			return this;
-		} 
+			var f = selector(filter);
+			a.Filter = f.IsConditionless ? null : f;
+		});
 
-		public FunctionScoreQueryDescriptor<T> Functions(params Func<FunctionScoreFunctionsDescriptor<T>, FunctionScoreFunction<T>>[] functions)
+		public FunctionScoreQueryDescriptor<T> Functions(params Func<FunctionScoreFunctionsDescriptor<T>, FunctionScoreFunction<T>>[] functions) => Assign(a =>
 		{
 			var descriptor = new FunctionScoreFunctionsDescriptor<T>();
-
 			foreach (var f in functions)
-			{
 				f(descriptor);
-			}
+			a.Functions = descriptor;
+		});
 
-			Self.Functions = descriptor;
+		public FunctionScoreQueryDescriptor<T> Functions(IEnumerable<IFunctionScoreFunction> functions) => Assign(a => a.Functions = functions);
 
-			return this;
-		}
+		public FunctionScoreQueryDescriptor<T> ScoreMode(FunctionScoreMode mode) => Assign(a => a.ScoreMode = mode);
 
-		public FunctionScoreQueryDescriptor<T> Functions(IEnumerable<IFunctionScoreFunction> functions)
+		public FunctionScoreQueryDescriptor<T> BoostMode(FunctionBoostMode mode) => Assign(a => a.BoostMode = mode);
+
+		public FunctionScoreQueryDescriptor<T> MaxBoost(float maxBoost) => Assign(a => a.MaxBoost = maxBoost);
+
+		public FunctionScoreQueryDescriptor<T> RandomScore(int? seed = null) => Assign(a =>
 		{
-			Self.Functions = functions;
-			return this;
-		}
-
-		public FunctionScoreQueryDescriptor<T> ScoreMode(FunctionScoreMode mode)
-		{
-			Self.ScoreMode = mode;
-			return this;
-		}
-
-		public FunctionScoreQueryDescriptor<T> BoostMode(FunctionBoostMode mode)
-		{
-			Self.BoostMode = mode;
-			return this;
-		}
-
-		public FunctionScoreQueryDescriptor<T> MaxBoost(float maxBoost)
-		{
-			Self.MaxBoost = maxBoost;
-			return this;
-		}
-
-		public FunctionScoreQueryDescriptor<T> RandomScore(int? seed = null)
-		{
-			Self.RandomScore = new RandomScoreFunction();
+			a.RandomScore = new RandomScoreFunction();
 			if (seed.HasValue)
-			{
-				Self.RandomScore.Seed = seed.Value;
-			}
-			return this;
-		}
+				a.RandomScore.Seed = seed.Value;
+		});
 
-		public FunctionScoreQueryDescriptor<T> ScriptScore(Func<ScriptQueryDescriptor<T>, IScriptQuery> scriptSelector)
-		{
-			Self.ScriptScore = scriptSelector?.Invoke(new ScriptQueryDescriptor<T>());
-			return this;
-		}
+		public FunctionScoreQueryDescriptor<T> ScriptScore(Func<ScriptQueryDescriptor<T>, IScriptQuery> selector) => 
+			Assign(a => a.ScriptScore = selector?.Invoke(new ScriptQueryDescriptor<T>()));
 
-		public FunctionScoreQueryDescriptor<T> MinScore(float minScore)
-		{
-			Self.MinScore = minScore;
-			return this;
-		}
+		public FunctionScoreQueryDescriptor<T> MinScore(float minScore) => Assign(a => a.MinScore = minScore);
 
-		public FunctionScoreQueryDescriptor<T> Weight(double weight)
-		{
-			Self.Weight = weight;
-			return this;
-		}
+		public FunctionScoreQueryDescriptor<T> Weight(double weight) => Assign(a => a.Weight = weight);
 	}
 }

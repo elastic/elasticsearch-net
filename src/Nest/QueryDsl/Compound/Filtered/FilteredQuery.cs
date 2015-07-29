@@ -43,29 +43,14 @@ namespace Nest
 		: QueryDescriptorBase<FilteredQueryDescriptor<T>, IFilteredQuery>  
 		, IFilteredQuery where T : class
 	{
-		private IFilteredQuery Self => this;
 		bool IQuery.Conditionless => FilteredQuery.IsConditionless(this);
 		IQueryContainer IFilteredQuery.Query { get; set; }
 		IQueryContainer IFilteredQuery.Filter { get; set; }
 
-		public FilteredQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector)
-		{
-			querySelector.ThrowIfNull("querySelector");
-			var query = new QueryContainerDescriptor<T>();
-			var q = querySelector(query);
+		public FilteredQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> selector) => 
+			Assign(a => a.Query = selector(new QueryContainerDescriptor<T>()));
 
-			Self.Query = q;
-			return this;
-		}
-
-		public FilteredQueryDescriptor<T> Filter(Func<QueryContainerDescriptor<T>, QueryContainer> filterSelector)
-		{
-			filterSelector.ThrowIfNull("filterSelector");
-			var filter = new QueryContainerDescriptor<T>();
-			var f = filterSelector(filter);
-
-			Self.Filter = f;
-			return this;
-		}
+		public FilteredQueryDescriptor<T> Filter(Func<QueryContainerDescriptor<T>, QueryContainer> selector) => 
+			Assign(a => a.Filter = selector(new QueryContainerDescriptor<T>()));
 	}
 }

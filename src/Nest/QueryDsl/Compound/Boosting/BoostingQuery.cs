@@ -44,32 +44,17 @@ namespace Nest
 		: QueryDescriptorBase<BoostingQueryDescriptor<T>, IBoostingQuery>
 		, IBoostingQuery where T : class
 	{
-		private IBoostingQuery Self => this;
 		bool IQuery.Conditionless => BoostingQuery.IsConditionless(this);
 		QueryContainer IBoostingQuery.PositiveQuery { get; set; }
 		QueryContainer IBoostingQuery.NegativeQuery { get; set; }
 		double? IBoostingQuery.NegativeBoost { get; set; }
 
-		public BoostingQueryDescriptor<T> NegativeBoost(double boost)
-		{
-			Self.NegativeBoost = boost;
-			return this;
-		}
+		public BoostingQueryDescriptor<T> NegativeBoost(double boost) => Assign(a => a.NegativeBoost = boost);
 
-		public BoostingQueryDescriptor<T> Positive(Func<QueryContainerDescriptor<T>, QueryContainer> selector)
-		{
-			var query = new QueryContainerDescriptor<T>();
-			var q = selector(query);
-			Self.PositiveQuery = q;
-			return this;
-		}
+		public BoostingQueryDescriptor<T> Positive(Func<QueryContainerDescriptor<T>, QueryContainer> selector) 
+			=> Assign(a => a.PositiveQuery = selector(new QueryContainerDescriptor<T>()));
 
-		public BoostingQueryDescriptor<T> Negative(Func<QueryContainerDescriptor<T>, QueryContainer> selector)
-		{
-			var query = new QueryContainerDescriptor<T>();
-			var q = selector(query);
-			Self.NegativeQuery = q;
-			return this;
-		}
+		public BoostingQueryDescriptor<T> Negative(Func<QueryContainerDescriptor<T>, QueryContainer> selector) 
+			=> Assign(a => a.NegativeQuery = selector(new QueryContainerDescriptor<T>()));
 	}
 }

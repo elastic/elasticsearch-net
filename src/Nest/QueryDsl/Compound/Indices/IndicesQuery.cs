@@ -52,66 +52,42 @@ namespace Nest
 		: QueryDescriptorBase<IndicesQueryDescriptor<T>, IIndicesQuery> 
 		, IIndicesQuery where T : class
 	{
-		private IIndicesQuery Self => this;
 		bool IQuery.Conditionless => IndicesQuery.IsConditionless(this);
 		IQueryContainer IIndicesQuery.Query { get; set; }
 		IQueryContainer IIndicesQuery.NoMatchQuery { get; set; }
 		IEnumerable<string> IIndicesQuery.Indices { get; set; }
 
-		public IndicesQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector)
+		public IndicesQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> selector) => Assign(a =>
 		{
-			var qd = new QueryContainerDescriptor<T>();
-			var q = querySelector(qd);
-			if (q.IsConditionless)
-				return this;
+			var query = selector(new QueryContainerDescriptor<T>());
+			if (query.IsConditionless)
+				a.Query = query;
+		});
 
-			Self.Query = q;
-			return this;
-		}
-
-		public IndicesQueryDescriptor<T> Query<K>(Func<QueryContainerDescriptor<K>, QueryContainer> querySelector) where K : class
+		public IndicesQueryDescriptor<T> Query<K>(Func<QueryContainerDescriptor<K>, QueryContainer> selector) where K : class => Assign(a =>
 		{
-			var qd = new QueryContainerDescriptor<K>();
-			var q = querySelector(qd);
-			if (q.IsConditionless)
-				return this;
+			var query = selector(new QueryContainerDescriptor<K>());
+			if (query.IsConditionless)
+				a.Query = query;
+		});
 
-			Self.Query = q;
-			return this;
-		}
-		
-		public IndicesQueryDescriptor<T> NoMatchQuery(NoMatchShortcut shortcut)
+		public IndicesQueryDescriptor<T> NoMatchQuery(NoMatchShortcut shortcut) =>
+			Assign(a => a.NoMatchQuery = new NoMatchQueryContainer { Shortcut = shortcut });
+
+		public IndicesQueryDescriptor<T> NoMatchQuery(Func<QueryContainerDescriptor<T>, QueryContainer> selector) => Assign(a =>
 		{
-			Self.NoMatchQuery = new NoMatchQueryContainer { Shortcut = shortcut };
-			return this;
-		}
+			var query = selector(new QueryContainerDescriptor<T>());
+			if (query.IsConditionless)
+				a.NoMatchQuery = query;
+		});
 
-		public IndicesQueryDescriptor<T> NoMatchQuery(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector)
+		public IndicesQueryDescriptor<T> NoMatchQuery<K>(Func<QueryContainerDescriptor<K>, IQueryContainer> selector) where K : class => Assign(a =>
 		{
-			var qd = new QueryContainerDescriptor<T>();
-			var q = querySelector(qd);
-			if (q.IsConditionless)
-				return this;
+			var query = selector(new QueryContainerDescriptor<K>());
+			if (query.IsConditionless)
+				a.NoMatchQuery = query;
+		});
 
-			Self.NoMatchQuery = q;
-			return this;
-		}
-
-		public IndicesQueryDescriptor<T> NoMatchQuery<K>(Func<QueryContainerDescriptor<K>, IQueryContainer> querySelector) where K : class
-		{
-			var qd = new QueryContainerDescriptor<K>();
-			var q = querySelector(qd);
-			if (q.IsConditionless)
-				return this;
-
-			Self.NoMatchQuery = q;
-			return this;
-		}
-
-		public IndicesQueryDescriptor<T> Indices(IEnumerable<string> indices)
-		{
-			Self.Indices = indices;
-			return this;
-		}
+		public IndicesQueryDescriptor<T> Indices(IEnumerable<string> indices) => Assign(a => a.Indices = indices);
 	}
 }

@@ -31,19 +31,10 @@ namespace Nest
 		: QueryDescriptorBase<ConstantScoreQueryDescriptor<T>, IConstantScoreQuery>
 		, IConstantScoreQuery where T : class
 	{
-		private IConstantScoreQuery Self { get { return this; }}
 		bool IQuery.Conditionless => ConstantScoreQuery.IsConditionless(this);
 		IQueryContainer IConstantScoreQuery.Query { get; set; }
 
-		public ConstantScoreQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector)
-		{
-			querySelector.ThrowIfNull("querySelector");
-			Self.Query = null;
-			var query = new QueryContainerDescriptor<T>();
-			var q = querySelector(query);
-
-			Self.Query = q;
-			return this;
-		}
+		public ConstantScoreQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> selector) => 
+			Assign(a => a.Query = selector(new QueryContainerDescriptor<T>()));
 	}
 }

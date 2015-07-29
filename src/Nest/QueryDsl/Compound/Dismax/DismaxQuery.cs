@@ -32,12 +32,11 @@ namespace Nest
 		: QueryDescriptorBase<DisMaxQueryDescriptor<T>, IDisMaxQuery>
 		, IDisMaxQuery where T : class
 	{
-		private IDisMaxQuery Self => this;
 		bool IQuery.Conditionless => DismaxQuery.IsConditionless(this);
 		double? IDisMaxQuery.TieBreaker { get; set; }
 		IEnumerable<QueryContainer> IDisMaxQuery.Queries { get; set; }
 
-		public DisMaxQueryDescriptor<T> Queries(params Func<QueryContainerDescriptor<T>, QueryContainer>[] querySelectors)
+		public DisMaxQueryDescriptor<T> Queries(params Func<QueryContainerDescriptor<T>, QueryContainer>[] querySelectors) => Assign(a =>
 		{
 			var queries = new List<QueryContainer>();
 			foreach (var selector in querySelectors)
@@ -46,11 +45,10 @@ namespace Nest
 				var q = selector(query);
 				queries.Add(q);
 			}
-			Self.Queries = queries;
-			return this;
-		}
+			a.Queries = queries;
+		});
 
-		public DisMaxQueryDescriptor<T> Queries(params QueryContainer[] queries)
+		public DisMaxQueryDescriptor<T> Queries(params QueryContainer[] queries) => Assign(a =>
 		{
 			var descriptors = new List<QueryContainer>();
 			foreach (var q in queries)
@@ -59,14 +57,9 @@ namespace Nest
 					continue;
 				descriptors.Add(q);
 			}
-			((IDisMaxQuery)this).Queries = descriptors.HasAny() ? descriptors : null;
-			return this;
-		}
+			a.Queries = descriptors.HasAny() ? descriptors : null;
+		});
 
-		public DisMaxQueryDescriptor<T> TieBreaker(double tieBreaker)
-		{
-			Self.TieBreaker = tieBreaker;
-			return this;
-		}
+		public DisMaxQueryDescriptor<T> TieBreaker(double tieBreaker) => Assign(a => a.TieBreaker = tieBreaker);
 	}
 }

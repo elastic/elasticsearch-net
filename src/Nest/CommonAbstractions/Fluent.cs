@@ -10,7 +10,6 @@ namespace Nest
 			assign(self);
 			return self;
 		}
-
 	}
 
 }
