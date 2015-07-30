@@ -76,6 +76,7 @@
     <Compile Include="Aggregations\AggregationUsageBase.cs" />
     <Compile Include="Aggregations\WritingAggregations.cs" />
     <Compile Include="ClientConcepts\HighLevel\Inferrence\FieldNames\FieldInference.cs" />
+    <Compile Include="ClientConcepts\LowLevel\ConnectionPools\SslDetection.cs" />
     <Compile Include="ClientConcepts\LowLevel\Connecting.cs" />
     <Compile Include="CommonOptions\DateMath\DateMathExpressions.cs" />
     <Compile Include="CommonOptions\TimeUnit\TimeUnits.cs" />

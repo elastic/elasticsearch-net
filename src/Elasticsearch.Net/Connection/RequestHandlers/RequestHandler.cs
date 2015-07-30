@@ -60,9 +60,7 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 			return streamResponse;
 		}
 
-		private ElasticsearchResponse<T> ReturnStreamOrVoidResponse<T>(
-			TransportRequestState<T> requestState, ElasticsearchResponse<Stream> streamResponse)
-		{
+		private ElasticsearchResponse<T> ReturnStreamOrVoidResponse<T>( TransportRequestState<T> requestState, ElasticsearchResponse<Stream> streamResponse) {
 			// If the response never recieved a status code and has a caught exception make sure we throw it
 			if (streamResponse.HttpStatusCode.GetValueOrDefault(-1) <= 0 && streamResponse.OriginalException != null)
 			{

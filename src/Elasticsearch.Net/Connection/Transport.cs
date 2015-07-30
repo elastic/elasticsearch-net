@@ -45,8 +45,8 @@ namespace Elasticsearch.Net.Connection
 
 		public Transport(
 			IConnectionConfigurationValues configurationValues,
-			IConnection connection,
-			IElasticsearchSerializer serializer,
+			IConnection connection = null,
+			IElasticsearchSerializer serializer = null,
 			IDateTimeProvider dateTimeProvider = null,
 			IMemoryStreamProvider memoryStreamProvider = null
 			)

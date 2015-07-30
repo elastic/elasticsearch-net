@@ -8,6 +8,13 @@ namespace Elasticsearch.Net.ConnectionPool
 	public interface IConnectionPool
 	{
 		/// <summary>
+		/// Returns a readonly collection of all the nodes registered. This is meant as a view. 
+		/// If you want to update this list call UpdateNodeList(), each IConnectionPool needs to make sure that is threadsafe
+		/// GetNext() is also written in a way to deal with intermittent list updates.
+		/// </summary>
+		IReadOnlyCollection<Node> Nodes { get; }
+
+		/// <summary>
 		/// Returns the default maximum retries for the connection pool implementation.
 		/// Most implementation default to number of nodes, note that this can be overidden
 		/// in the connection settings
@@ -18,6 +25,8 @@ namespace Elasticsearch.Net.ConnectionPool
 		/// Signals that this implemenation can accept new nodes
 		/// </summary>
 		bool AcceptsUpdates { get; }
+
+		DateTime? LastUpdate { get; set; }
 
 		/// <summary>
 		/// Whether or not SSL is being using

@@ -18,6 +18,7 @@ namespace Elasticsearch.Net
 	public partial class ElasticsearchClient : IElasticsearchClient
 	{
 		private UrlFormatProvider _formatter;
+
 		public IConnectionConfigurationValues Settings { get { return this.Transport.Settings; } }
 		public IElasticsearchSerializer Serializer { get { return this.Transport.Serializer; } }
 
@@ -26,24 +27,17 @@ namespace Elasticsearch.Net
 		/// <summary>
 		/// Instantiate a new low level elasticsearch client
 		/// </summary>
-		/// <param name="settings">Specify how and where the client connects to elasticsearch, defaults to a static single node connectionpool 
-		/// to http://localhost:9200
-		/// </param>
-		/// <param name="connection">Provide an alternative connection handler</param>
-		/// <param name="transport">Provide a custom transport implementation that coordinates between IConnectionPool, IConnection and ISerializer</param>
-		/// <param name="serializer">Provide a custom serializer</param>
-		public ElasticsearchClient(
-			IConnectionConfigurationValues settings = null,
-			IConnection connection = null,
-			ITransport transport = null,
-			IElasticsearchSerializer serializer = null
-			)
+		/// <param name="settings">Specify how and where the client connects to elasticsearch, defaults to a static single node connectionpool to http://localhost:9200 </param>
+		public ElasticsearchClient(IConnectionConfigurationValues settings = null) : this(new Transport(settings ?? new ConnectionConfiguration())) { }
+		public ElasticsearchClient(ITransport transport)
 		{
-			settings = settings ?? new ConnectionConfiguration();
-			this.Transport = transport ?? new Transport(settings, connection, serializer);
-			//neccessary to pass the serializer to ElasticsearchResponse
-			this.Settings.Serializer = this.Transport.Serializer;
-			this._formatter = new UrlFormatProvider(this.Settings.Serializer);
+			transport.ThrowIfNull(nameof(transport));
+			transport.Settings.ThrowIfNull(nameof(transport.Settings));
+			transport.Serializer.ThrowIfNull(nameof(transport.Serializer));
+			transport.Settings.Serializer.ThrowIfNull(nameof(transport.Settings.Serializer));
+
+			this.Transport = transport;
+			this._formatter = new UrlFormatProvider(this.Transport.Settings.Serializer);
 		}
 
 		class UrlFormatProvider : IFormatProvider, ICustomFormatter
