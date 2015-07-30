@@ -95,7 +95,7 @@ namespace Nest
 
 		public FunctionScoreQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> selector) => Assign(a =>
 		{
-			selector.ThrowIfNull();
+			selector.ThrowIfNull(nameof(selector));
 			var query = new QueryContainerDescriptor<T>();
 			var q = selector(query);
 			a.Query = q.IsConditionless ? null : q;
@@ -103,7 +103,7 @@ namespace Nest
 
 		public FunctionScoreQueryDescriptor<T> Filter(Func<QueryContainerDescriptor<T>, QueryContainer> selector) => Assign(a =>
 		{
-			selector.ThrowIfNull();
+			selector.ThrowIfNull(nameof(selector));
 			var filter = new QueryContainerDescriptor<T>();
 			var f = selector(filter);
 			a.Filter = f.IsConditionless ? null : f;
