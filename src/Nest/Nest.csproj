@@ -131,6 +131,7 @@
     <Compile Include="QueryDsl\FieldNameQueryBase.cs" />
     <Compile Include="QueryDsl\FieldNameQueryDescriptorBase.cs" />
     <Compile Include="QueryDsl\QueryDescriptorBase.cs" />
+    <Compile Include="QueryDsl\Specialized\MoreLikeThis\MoreLikeThisQueryDocumentsDescriptor.cs" />
     <Compile Include="Search\Scroll\ElasticClient-ScrollExtensions.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\ElasticClient-Deserialize.cs" />
     <Compile Include="Document\Single\Source\ElasticClient-SourceExtensions.cs" />

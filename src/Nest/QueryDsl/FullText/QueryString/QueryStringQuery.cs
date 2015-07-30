@@ -107,10 +107,6 @@ namespace Nest
 		: QueryDescriptorBase<QueryStringQueryDescriptor<T>, IQueryStringQuery>
 		, IQueryStringQuery where T : class
 	{
-		QueryStringQueryDescriptor<T> _assign(Action<IQueryStringQuery> assigner) => Fluent.Assign(this, assigner);
-
-		private IQueryStringQuery Self => this;
-
 		bool IQuery.Conditionless => QueryStringQuery.IsConditionless(this);
 		string IQueryStringQuery.Query { get; set; }
 		string IQueryStringQuery.Timezone { get; set; }
@@ -133,20 +129,20 @@ namespace Nest
 		int? IQueryStringQuery.MaximumDeterminizedStates { get; set; }
 		RewriteMultiTerm? IQueryStringQuery.Rewrite { get; set; }
 
-		public QueryStringQueryDescriptor<T> DefaultField(string field) => _assign(a => a.DefaultField = field);
+		public QueryStringQueryDescriptor<T> DefaultField(string field) => Assign(a => a.DefaultField = field);
 
 		public QueryStringQueryDescriptor<T> DefaultField(Expression<Func<T, object>> objectPath) =>
-			_assign(a => a.DefaultField = objectPath);
+			Assign(a => a.DefaultField = objectPath);
 
 		public QueryStringQueryDescriptor<T> OnFields(IEnumerable<string> fields) =>
-			_assign(a => a.Fields = fields?.Select(f => (FieldName) f).ToListOrNullIfEmpty());
+			Assign(a => a.Fields = fields?.Select(f => (FieldName) f).ToListOrNullIfEmpty());
 
 		public QueryStringQueryDescriptor<T> OnFields(params Expression<Func<T, object>>[] objectPaths) =>
-			_assign(a => a.Fields = objectPaths?.Select(f => (FieldName) f).ToListOrNullIfEmpty());
+			Assign(a => a.Fields = objectPaths?.Select(f => (FieldName) f).ToListOrNullIfEmpty());
 
 		public QueryStringQueryDescriptor<T> OnFieldsWithBoost(Func<
 			FluentDictionary<Expression<Func<T, object>>, double?>, IDictionary<Expression<Func<T, object>>, double?>> boostableSelector) =>
-				_assign(a => a.Fields = boostableSelector?
+				Assign(a => a.Fields = boostableSelector?
 					.Invoke(new FluentDictionary<Expression<Func<T, object>>, double?>())
 					.Select(o => FieldName.Create(o.Key, o.Value))
 					.ToListOrNullIfEmpty()
@@ -154,56 +150,56 @@ namespace Nest
 
 		public QueryStringQueryDescriptor<T> OnFieldsWithBoost(
 			Func<FluentDictionary<string, double?>, IDictionary<Expression<Func<T, object>>, double?>> boostableSelector) =>
-				_assign(a => a.Fields = boostableSelector?
+				Assign(a => a.Fields = boostableSelector?
 					.Invoke(new FluentDictionary<string, double?>())
 					.Select(o => FieldName.Create(o.Key, o.Value))
 					.ToListOrNullIfEmpty()
 				);
 
-		public QueryStringQueryDescriptor<T> Query(string query) => _assign(a => a.Query = query);
+		public QueryStringQueryDescriptor<T> Query(string query) => Assign(a => a.Query = query);
 
-		public QueryStringQueryDescriptor<T> Timezone(string timezone) => _assign(a => a.Timezone = timezone);
+		public QueryStringQueryDescriptor<T> Timezone(string timezone) => Assign(a => a.Timezone = timezone);
 
-		public QueryStringQueryDescriptor<T> DefaultOperator(Operator op) => _assign(a => a.DefaultOperator = op);
+		public QueryStringQueryDescriptor<T> DefaultOperator(Operator op) => Assign(a => a.DefaultOperator = op);
 
-		public QueryStringQueryDescriptor<T> Analyzer(string analyzer) => _assign(a => a.Analyzer = analyzer);
+		public QueryStringQueryDescriptor<T> Analyzer(string analyzer) => Assign(a => a.Analyzer = analyzer);
 
 		public QueryStringQueryDescriptor<T> AllowLeadingWildcard(bool allowLeadingWildcard = true) =>
-			_assign(a => a.AllowLeadingWildcard = allowLeadingWildcard);
+			Assign(a => a.AllowLeadingWildcard = allowLeadingWildcard);
 
 		public QueryStringQueryDescriptor<T> LowercaseExpendedTerms(bool lowercaseExpendedTerms = true) =>
-			_assign(a => a.LowercaseExpendedTerms = lowercaseExpendedTerms);
+			Assign(a => a.LowercaseExpendedTerms = lowercaseExpendedTerms);
 
 		public QueryStringQueryDescriptor<T> EnablePositionIncrements(bool enablePositionIncrements = true) =>
-			_assign(a => a.EnablePositionIncrements = enablePositionIncrements);
+			Assign(a => a.EnablePositionIncrements = enablePositionIncrements);
 
 		public QueryStringQueryDescriptor<T> FuzzyPrefixLength(int fuzzyPrefixLength) =>
-			_assign(a => a.FuzzyPrefixLength = fuzzyPrefixLength);
+			Assign(a => a.FuzzyPrefixLength = fuzzyPrefixLength);
 
 		public QueryStringQueryDescriptor<T> FuzzyMinimumSimilarity(double fuzzyMinimumSimilarity) =>
-			_assign(a => a.FuzzyMinimumSimilarity = fuzzyMinimumSimilarity);
+			Assign(a => a.FuzzyMinimumSimilarity = fuzzyMinimumSimilarity);
 
-		public QueryStringQueryDescriptor<T> PhraseSlop(double phraseSlop) => _assign(a => a.PhraseSlop = phraseSlop);
+		public QueryStringQueryDescriptor<T> PhraseSlop(double phraseSlop) => Assign(a => a.PhraseSlop = phraseSlop);
 
-		public QueryStringQueryDescriptor<T> Rewrite(RewriteMultiTerm rewriteMultiTerm) => _assign(a => a.Rewrite = rewriteMultiTerm);
+		public QueryStringQueryDescriptor<T> Rewrite(RewriteMultiTerm rewriteMultiTerm) => Assign(a => a.Rewrite = rewriteMultiTerm);
 
-		public QueryStringQueryDescriptor<T> Lenient(bool lenient = true) => _assign(a => a.Lenient = lenient);
+		public QueryStringQueryDescriptor<T> Lenient(bool lenient = true) => Assign(a => a.Lenient = lenient);
 
-		public QueryStringQueryDescriptor<T> AnalyzeWildcard(bool analyzeWildcard = true)
-			=> _assign(a => a.AnalyzeWildcard = analyzeWildcard);
+		public QueryStringQueryDescriptor<T> AnalyzeWildcard(bool analyzeWildcard = true) =>
+			Assign(a => a.AnalyzeWildcard = analyzeWildcard);
 
 		public QueryStringQueryDescriptor<T> AutoGeneratePhraseQueries(bool autoGeneratePhraseQueries = true) =>
-			_assign(a => a.AutoGeneratePhraseQueries = autoGeneratePhraseQueries);
+			Assign(a => a.AutoGeneratePhraseQueries = autoGeneratePhraseQueries);
 
 		public QueryStringQueryDescriptor<T> MinimumShouldMatchPercentage(int minimumShouldMatchPercentage) =>
-			_assign(a => a.MinimumShouldMatchPercentage = "{0}%".F(minimumShouldMatchPercentage));
+			Assign(a => a.MinimumShouldMatchPercentage = "{0}%".F(minimumShouldMatchPercentage));
 
-		public QueryStringQueryDescriptor<T> UseDisMax(bool useDismax = true) => _assign(a => a.UseDisMax = useDismax);
+		public QueryStringQueryDescriptor<T> UseDisMax(bool useDismax = true) => Assign(a => a.UseDisMax = useDismax);
 
-		public QueryStringQueryDescriptor<T> TieBreaker(double tieBreaker) => _assign(a => a.TieBreaker = tieBreaker);
+		public QueryStringQueryDescriptor<T> TieBreaker(double tieBreaker) => Assign(a => a.TieBreaker = tieBreaker);
 
 		public QueryStringQueryDescriptor<T> MaximumDeterminizedStates(int maxDeterminizedStates) =>
-			_assign(a => a.MaximumDeterminizedStates = maxDeterminizedStates);
+			Assign(a => a.MaximumDeterminizedStates = maxDeterminizedStates);
 
 	}
 }

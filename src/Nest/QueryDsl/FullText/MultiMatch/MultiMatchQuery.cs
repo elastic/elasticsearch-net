@@ -82,10 +82,8 @@ namespace Nest
 
 		protected override void WrapInContainer(IQueryContainer c) => c.MultiMatch = this;
 
-		internal static bool IsConditionless(IMultiMatchQuery q)
-		{
-			return !q.Fields.HasAny() || q.Fields.All(f => f.IsConditionless()) || q.Query.IsNullOrEmpty();
-		}
+		internal static bool IsConditionless(IMultiMatchQuery q) 
+			=> !q.Fields.HasAny() || q.Fields.All(f => f.IsConditionless()) || q.Query.IsNullOrEmpty();
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -93,9 +91,6 @@ namespace Nest
 		: QueryDescriptorBase<MultiMatchQueryDescriptor<T>, IMultiMatchQuery> 
 		, IMultiMatchQuery where T : class
 	{
-		MultiMatchQueryDescriptor<T> _assign(Action<IMultiMatchQuery> assigner) => Fluent.Assign(this, assigner);
-
-		private IMultiMatchQuery Self { get { return this; } }
 		bool IQuery.Conditionless => MultiMatchQuery.IsConditionless(this);
 		TextQueryType? IMultiMatchQuery.Type { get; set; }
 		string IMultiMatchQuery.Query { get; set; }
@@ -114,14 +109,14 @@ namespace Nest
 		IEnumerable<FieldName> IMultiMatchQuery.Fields { get; set; }
 
 		public MultiMatchQueryDescriptor<T> OnFields(IEnumerable<string> fields) =>
-			_assign(a => a.Fields = fields?.Select(f => (FieldName)f).ToListOrNullIfEmpty());
+			Assign(a => a.Fields = fields?.Select(f => (FieldName)f).ToListOrNullIfEmpty());
 
 		public MultiMatchQueryDescriptor<T> OnFields(params Expression<Func<T, object>>[] objectPaths) =>
-			_assign(a => a.Fields = objectPaths?.Select(f => (FieldName)f).ToListOrNullIfEmpty());
+			Assign(a => a.Fields = objectPaths?.Select(f => (FieldName)f).ToListOrNullIfEmpty());
 
 		public MultiMatchQueryDescriptor<T> OnFieldsWithBoost(Func<
 			FluentDictionary<Expression<Func<T, object>>, double?>, IDictionary<Expression<Func<T, object>>, double?>> boostableSelector) =>
-				_assign(a => a.Fields = boostableSelector?
+				Assign(a => a.Fields = boostableSelector?
 					.Invoke(new FluentDictionary<Expression<Func<T, object>>, double?>())
 					.Select(o => FieldName.Create(o.Key, o.Value))
 					.ToListOrNullIfEmpty()
@@ -129,39 +124,38 @@ namespace Nest
 
 		public MultiMatchQueryDescriptor<T> OnFieldsWithBoost(
 			Func<FluentDictionary<string, double?>, IDictionary<Expression<Func<T, object>>, double?>> boostableSelector) =>
-				_assign(a => a.Fields = boostableSelector?
+				Assign(a => a.Fields = boostableSelector?
 					.Invoke(new FluentDictionary<string, double?>())
 					.Select(o => FieldName.Create(o.Key, o.Value))
 					.ToListOrNullIfEmpty()
 				);
 
-		public MultiMatchQueryDescriptor<T> Query(string query) => _assign(a => a.Query = query);
+		public MultiMatchQueryDescriptor<T> Query(string query) => Assign(a => a.Query = query);
 
-		public MultiMatchQueryDescriptor<T> Analyzer(string analyzer) => _assign(a => a.Analyzer = analyzer);
+		public MultiMatchQueryDescriptor<T> Analyzer(string analyzer) => Assign(a => a.Analyzer = analyzer);
 
-		public MultiMatchQueryDescriptor<T> Fuzziness(double fuzziness) => _assign(a => a.Fuzziness = fuzziness);
+		public MultiMatchQueryDescriptor<T> Fuzziness(double fuzziness) => Assign(a => a.Fuzziness = fuzziness);
 
 		public MultiMatchQueryDescriptor<T> CutoffFrequency(double cutoffFrequency)
-			=> _assign(a => a.CutoffFrequency = cutoffFrequency);
+			=> Assign(a => a.CutoffFrequency = cutoffFrequency);
 
 		public MultiMatchQueryDescriptor<T> MinimumShouldMatch(string minimumShouldMatch)
-			=> _assign(a => a.MinimumShouldMatch = minimumShouldMatch);
+			=> Assign(a => a.MinimumShouldMatch = minimumShouldMatch);
 
-		public MultiMatchQueryDescriptor<T> Rewrite(RewriteMultiTerm rewrite) => _assign(a => a.Rewrite = rewrite);
+		public MultiMatchQueryDescriptor<T> Rewrite(RewriteMultiTerm rewrite) => Assign(a => a.Rewrite = rewrite);
 
-		public MultiMatchQueryDescriptor<T> Lenient(bool lenient = true) => _assign(a => a.Lenient = lenient);
+		public MultiMatchQueryDescriptor<T> Lenient(bool lenient = true) => Assign(a => a.Lenient = lenient);
 
-		public MultiMatchQueryDescriptor<T> PrefixLength(int prefixLength) => _assign(a => a.PrefixLength = prefixLength);
+		public MultiMatchQueryDescriptor<T> PrefixLength(int prefixLength) => Assign(a => a.PrefixLength = prefixLength);
 
-		public MultiMatchQueryDescriptor<T> MaxExpansions(int maxExpansions) => _assign(a => a.MaxExpansions = maxExpansions);
+		public MultiMatchQueryDescriptor<T> MaxExpansions(int maxExpansions) => Assign(a => a.MaxExpansions = maxExpansions);
 
-		public MultiMatchQueryDescriptor<T> Slop(int slop) => _assign(a => a.Slop = slop);
+		public MultiMatchQueryDescriptor<T> Slop(int slop) => Assign(a => a.Slop = slop);
 
-		public MultiMatchQueryDescriptor<T> Operator(Operator op) => _assign(a => a.Operator = op);
+		public MultiMatchQueryDescriptor<T> Operator(Operator op) => Assign(a => a.Operator = op);
 
-		public MultiMatchQueryDescriptor<T> TieBreaker(double tieBreaker) => _assign(a => a.TieBreaker = tieBreaker);
+		public MultiMatchQueryDescriptor<T> TieBreaker(double tieBreaker) => Assign(a => a.TieBreaker = tieBreaker);
 
-		public MultiMatchQueryDescriptor<T> Type(TextQueryType type) => _assign(a => a.Type = type);
-
+		public MultiMatchQueryDescriptor<T> Type(TextQueryType type) => Assign(a => a.Type = type);
 	}
 }

@@ -49,7 +49,6 @@ namespace Nest
 		: FieldNameQueryDescriptorBase<FuzzyQueryDescriptor<T>, IFuzzyQuery, T>
 		, IFuzzyQuery where T : class
 	{
-		private IFuzzyQuery Self => this;
 		bool IQuery.Conditionless => FuzzyQuery.IsConditionless(this);
 		string IFuzzyQuery.Fuzziness { get; set; }
 		object IFuzzyQuery.Value { get; set; }
@@ -58,65 +57,26 @@ namespace Nest
 		bool? IFuzzyQuery.Transpositions { get; set; }
 		bool? IFuzzyQuery.UnicodeAware { get; set; }
 		RewriteMultiTerm? IFuzzyQuery.Rewrite { get; set; }
-		
-		public FuzzyQueryDescriptor<T> Fuzziness(double fuzziness)
-		{
-			Self.Fuzziness = fuzziness.ToString(CultureInfo.InvariantCulture);
-			return this;
-		}
 
-		public FuzzyQueryDescriptor<T> Fuzziness(string fuzziness)
-		{
-			Self.Fuzziness = fuzziness;
-			return this;
-		}
-		
-		public FuzzyQueryDescriptor<T> MaxExpansions(int maxExpansions)
-		{
-			Self.MaxExpansions = maxExpansions;
-			return this;
-		}
+		public FuzzyQueryDescriptor<T> Fuzziness(double fuzziness) => 
+			Assign(a => a.Fuzziness = fuzziness.ToString(CultureInfo.InvariantCulture));
 
-		public FuzzyQueryDescriptor<T> PrefixLength(int prefixLength)
-		{
-			Self.PrefixLength = prefixLength;
-			return this;
-		}
+		public FuzzyQueryDescriptor<T> Fuzziness(string fuzziness) => Assign(a => a.Fuzziness = fuzziness);
 
-		public FuzzyQueryDescriptor<T> Transpositions(bool enable = true)
-		{
-			Self.Transpositions = enable;
-			return this;
-		}
+		public FuzzyQueryDescriptor<T> MaxExpansions(int maxExpansions) => Assign(a => a.MaxExpansions = maxExpansions);
 
-		public FuzzyQueryDescriptor<T> UnicodeAware(bool enable = true)
-		{
-			Self.UnicodeAware = enable;
-			return this;
-		}
-		
-		public FuzzyQueryDescriptor<T> Rewrite(RewriteMultiTerm rewrite)
-		{
-			Self.Rewrite = rewrite;
-			return this;
-		}
+		public FuzzyQueryDescriptor<T> PrefixLength(int prefixLength) => Assign(a => a.PrefixLength = prefixLength);
 
-		public FuzzyQueryDescriptor<T> Value(string value)
-		{
-			Self.Value = value;
-			return this;
-		}
+		public FuzzyQueryDescriptor<T> Transpositions(bool enable = true) => Assign(a => a.Transpositions = enable);
 
-		public FuzzyQueryDescriptor<T> Value(double value)
-		{
-			Self.Value = value;
-			return this;
-		}
+		public FuzzyQueryDescriptor<T> UnicodeAware(bool enable = true) => Assign(a => a.UnicodeAware = enable);
 
-		public FuzzyQueryDescriptor<T> Value(DateTime value)
-		{
-			Self.Value = value;
-			return this;
-		}
+		public FuzzyQueryDescriptor<T> Rewrite(RewriteMultiTerm rewrite) => Assign(a => a.Rewrite = rewrite);
+
+		public FuzzyQueryDescriptor<T> Value(string value) => Assign(a => a.Value = value);
+
+		public FuzzyQueryDescriptor<T> Value(double value) => Assign(a => a.Value = value);
+
+		public FuzzyQueryDescriptor<T> Value(DateTime value) => Assign(a => a.Value = value);
 	}
 }

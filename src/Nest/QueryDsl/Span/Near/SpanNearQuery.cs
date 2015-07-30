@@ -39,47 +39,29 @@ namespace Nest
 		: QueryDescriptorBase<SpanNearQueryDescriptor<T>, ISpanNearQuery>
 		, ISpanNearQuery where T : class
 	{
-		private ISpanNearQuery Self => this;
 		bool IQuery.Conditionless => SpanNearQuery.IsConditionless(this);
 		IEnumerable<ISpanQuery> ISpanNearQuery.Clauses { get; set; }
 		int? ISpanNearQuery.Slop { get; set; }
 		bool? ISpanNearQuery.InOrder { get; set; }
 		bool? ISpanNearQuery.CollectPayloads { get; set; }
 
-		public SpanNearQueryDescriptor<T> Clauses(params Func<SpanQueryDescriptor<T>, SpanQueryDescriptor<T>>[] selectors)
+		public SpanNearQueryDescriptor<T> Clauses(params Func<SpanQueryDescriptor<T>, SpanQueryDescriptor<T>>[] selectors) => Assign(a =>
 		{
-			selectors.ThrowIfNull("selector");
-			var descriptors = new List<SpanQueryDescriptor<T>>();
+			var clauses = new List<SpanQueryDescriptor<T>>();
 			foreach (var selector in selectors)
 			{
-				var x = new SpanQueryDescriptor<T>();
-				var q = selector(x);
-				if ((q as IQuery).Conditionless)
+				var query = selector(new SpanQueryDescriptor<T>());
+				if ((query as IQuery).Conditionless)
 					continue;
-
-				descriptors.Add(q);
-
+				clauses.Add(query);
 			}
-			Self.Clauses = descriptors.HasAny() ? descriptors : null;
-			return this;
-		}
+			a.Clauses = clauses.HasAny() ? clauses : null;
+		});
 
-		public SpanNearQueryDescriptor<T> Slop(int slop)
-		{
-			Self.Slop = slop;
-			return this;
-		}
+		public SpanNearQueryDescriptor<T> Slop(int slop) => Assign(a => a.Slop = slop);
 
-		public SpanNearQueryDescriptor<T> InOrder(bool inOrder)
-		{
-			Self.InOrder = inOrder;
-			return this;
-		}
+		public SpanNearQueryDescriptor<T> InOrder(bool inOrder) => Assign(a => a.InOrder = inOrder);
 
-		public SpanNearQueryDescriptor<T> CollectPayloads(bool collectPayloads)
-		{
-			Self.CollectPayloads = collectPayloads;
-			return this;
-		}
+		public SpanNearQueryDescriptor<T> CollectPayloads(bool collectPayloads) => Assign(a => a.CollectPayloads = collectPayloads);
 	}
 }

@@ -25,7 +25,6 @@ namespace Nest
 		: FieldNameQueryDescriptorBase<ExistsQueryDescriptor<T>, IExistsQuery, T>
 		, IExistsQuery where T : class
 	{
-		private IExistsQuery Self => this;
 		bool IQuery.Conditionless => ExistsQuery.IsConditionless(this);
 	}
 }

@@ -29,16 +29,13 @@ namespace Nest
 		: FieldNameQueryDescriptorBase<GeoShapeLineStringQueryDescriptor<T>, IGeoShapeLineStringQuery, T>
 		, IGeoShapeLineStringQuery where T : class
 	{
-		private IGeoShapeLineStringQuery Self => this;
 		bool IQuery.Conditionless => GeoShapeLineStringQuery.IsConditionless(this);
 		ILineStringGeoShape IGeoShapeLineStringQuery.Shape { get; set; }
-		
-		public GeoShapeLineStringQueryDescriptor<T> Coordinates(IEnumerable<IEnumerable<double>> coordinates)
+
+		public GeoShapeLineStringQueryDescriptor<T> Coordinates(IEnumerable<IEnumerable<double>> coordinates) => Assign(a =>
 		{
-			if (Self.Shape == null)
-				Self.Shape = new LineStringGeoShape();
-			Self.Shape.Coordinates = coordinates;
-			return this;
-		}
+			a.Shape = a.Shape ?? new LineStringGeoShape();
+			a.Shape.Coordinates = coordinates;
+		});
 	}
 }

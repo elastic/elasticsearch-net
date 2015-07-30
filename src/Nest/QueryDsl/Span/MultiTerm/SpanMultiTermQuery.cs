@@ -27,15 +27,10 @@ namespace Nest
 		, ISpanMultiTermQuery
 		where T : class
 	{
-		private ISpanMultiTermQuery Self => this;
 		bool IQuery.Conditionless => SpanMultiTermQuery.IsConditionless(this);
 		IQueryContainer ISpanMultiTermQuery.Match { get; set; }
 
-		public SpanMultiTermQueryDescriptor<T> Match(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector)
-		{
-			var q = new QueryContainerDescriptor<T>();
-			Self.Match = querySelector(q);
-			return this;
-		}
+		public SpanMultiTermQueryDescriptor<T> Match(Func<QueryContainerDescriptor<T>, QueryContainer> selector) =>
+			Assign(a => a.Match = selector(new QueryContainerDescriptor<T>()));
 	}
 }

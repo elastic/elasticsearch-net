@@ -27,23 +27,13 @@ namespace Nest
 		: QueryDescriptorBase<TypeQueryDescriptor, ITypeQuery>
 		, ITypeQuery
 	{
-		private ITypeQuery Self => this;
-
 		bool IQuery.Conditionless => TypeQuery.IsConditionless(this);
 
 		[JsonProperty(PropertyName = "value")]
 		TypeName ITypeQuery.Value { get; set; }
 
-		public TypeQueryDescriptor Value<T>()
-		{
-			Self.Value = typeof(T);
-			return this;
-		}
+		public TypeQueryDescriptor Value<T>() => Assign(a => a.Value = typeof(T));
 
-		public TypeQueryDescriptor Value(string type)
-		{
-			Self.Value = type;
-			return this;
-		}
+		public TypeQueryDescriptor Value(string type) => Assign(a => a.Value = type);
 	}
 }

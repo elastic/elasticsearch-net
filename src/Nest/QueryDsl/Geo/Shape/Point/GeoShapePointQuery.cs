@@ -29,16 +29,10 @@ namespace Nest
 		: FieldNameQueryDescriptorBase<GeoShapePointQueryDescriptor<T>, IGeoShapePointQuery, T>
 		, IGeoShapePointQuery where T : class
 	{
-		private IGeoShapePointQuery Self => this;
 		bool IQuery.Conditionless => GeoShapePointQuery.IsConditionless(this);
 		IPointGeoShape IGeoShapePointQuery.Shape { get; set; }
-		
-		public GeoShapePointQueryDescriptor<T> Coordinates(IEnumerable<double> coordinates)
-		{
-			if (Self.Shape == null)
-				Self.Shape = new PointGeoShape();
-			Self.Shape.Coordinates = coordinates;
-			return this;
-		}
+
+		public GeoShapePointQueryDescriptor<T> Coordinates(IEnumerable<double> coordinates) =>
+			Assign(a => a.Shape = new PointGeoShape { Coordinates = coordinates });
 	}
 }

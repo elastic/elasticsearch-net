@@ -60,48 +60,21 @@ namespace Nest
 		FieldName INestedQuery.Path { get; set; }
 		IInnerHits INestedQuery.InnerHits { get; set; }
 
-		public NestedQueryDescriptor<T> Filter(Func<QueryContainerDescriptor<T>, QueryContainer> filterSelector)
-		{
-			var q = new QueryContainerDescriptor<T>();
-			Self.Filter = filterSelector(q);
-			return this;
-		}
+		public NestedQueryDescriptor<T> Filter(Func<QueryContainerDescriptor<T>, QueryContainer> selector) => 
+			Assign(a => a.Filter = selector(new QueryContainerDescriptor<T>()));
 
-		public NestedQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector)
-		{
-			var q = new QueryContainerDescriptor<T>();
-			Self.Query = querySelector(q);
-			return this;
-		}
+		public NestedQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> selector) => 
+			Assign(a => a.Query = selector(new QueryContainerDescriptor<T>()));
 
-		public NestedQueryDescriptor<T> Score(NestedScore score)
-		{
-			Self.Score = score;
-			return this;
-		}
-		public NestedQueryDescriptor<T> Path(string path)
-		{
-			Self.Path = path;
-			return this;
-		}
+		public NestedQueryDescriptor<T> Score(NestedScore score) => Assign(a => a.Score = score);
 
-		public NestedQueryDescriptor<T> Path(Expression<Func<T, object>> objectPath)
-		{
-			Self.Path = objectPath;
-			return this;
-		}
+		public NestedQueryDescriptor<T> Path(string path) => Assign(a => a.Path = path);
 
-		public NestedQueryDescriptor<T> InnerHits()
-		{
-			Self.InnerHits = new InnerHits();
-			return this;
-		}
+		public NestedQueryDescriptor<T> Path(Expression<Func<T, object>> objectPath) => Assign(a => a.Path = objectPath);
 
-		public NestedQueryDescriptor<T> InnerHits(Func<InnerHitsDescriptor<T>, IInnerHits> innerHitsSelector)
-		{
-			if (innerHitsSelector == null) return this;
-			Self.InnerHits = innerHitsSelector(new InnerHitsDescriptor<T>());
-			return this;
-		}
+		public NestedQueryDescriptor<T> InnerHits() => Assign(a => a.InnerHits = new InnerHits());
+
+		public NestedQueryDescriptor<T> InnerHits(Func<InnerHitsDescriptor<T>, IInnerHits> selector) => 
+			Assign(a => a.InnerHits = selector(new InnerHitsDescriptor<T>()));	
 	}
 }

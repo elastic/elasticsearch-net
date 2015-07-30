@@ -29,16 +29,13 @@ namespace Nest
 		: FieldNameQueryDescriptorBase<GeoShapeEnvelopeQueryDescriptor<T>, IGeoShapeEnvelopeQuery, T>
 		, IGeoShapeEnvelopeQuery where T : class
 	{
-		private IGeoShapeEnvelopeQuery Self => this;
 		bool IQuery.Conditionless => GeoShapeEnvelopeQuery.IsConditionless(this);
 		IEnvelopeGeoShape IGeoShapeEnvelopeQuery.Shape { get; set; }
 
-		public GeoShapeEnvelopeQueryDescriptor<T> Coordinates(IEnumerable<IEnumerable<double>> coordinates)
+		public GeoShapeEnvelopeQueryDescriptor<T> Coordinates(IEnumerable<IEnumerable<double>> coordinates) => Assign(a =>
 		{
-			if (Self.Shape == null)
-				Self.Shape = new EnvelopeGeoShape();
-			Self.Shape.Coordinates = coordinates;
-			return this;
-		}
+			a.Shape = a.Shape ?? new EnvelopeGeoShape();
+			a.Shape.Coordinates = coordinates;
+		});
 	}
 }

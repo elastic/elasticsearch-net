@@ -66,62 +66,32 @@ namespace Nest
 		GeoOptimizeBBox? IGeoDistanceRangeQuery.OptimizeBoundingBox { get; set; }
 		GeoUnit? IGeoDistanceRangeQuery.Unit { get; set; }
 
-		public GeoDistanceRangeQueryDescriptor<T> Location(double Lat, double Lon)
+		public GeoDistanceRangeQueryDescriptor<T> Location(double Lat, double Lon) => Assign(a =>
 		{
 			var c = CultureInfo.InvariantCulture;
-			Self.Location = "{0}, {1}".F(Lat.ToString(c), Lon.ToString(c));
-			return this;
-		}
+			a.Location = "{0}, {1}".F(Lat.ToString(c), Lon.ToString(c));
+		});
 
-		public GeoDistanceRangeQueryDescriptor<T> Location(string geoHash)
-		{
-			Self.Location = geoHash;
-			return this;
-		}
+		public GeoDistanceRangeQueryDescriptor<T> Location(string geoHash) => Assign(a => a.Location = geoHash);
 
-		public GeoDistanceRangeQueryDescriptor<T> Distance(string From, string To)
-		{
-			Self.From = From;
-			Self.To = To;
-			return this;
-		}
+		public GeoDistanceRangeQueryDescriptor<T> Distance(string from, string to) => Assign(a => { a.From = from; a.To = to; });
 
-		public GeoDistanceRangeQueryDescriptor<T> Distance(double From, double To, GeoUnit Unit)
-		{
-			Self.From = From;
-			Self.To = To;
-			Self.Unit = Unit;
-			return this;
-		}
+		public GeoDistanceRangeQueryDescriptor<T> Distance(double from, double to, GeoUnit unit) => 
+			Assign(a => { a.From = from; a.To = to; a.Unit = unit; });
 
-		public GeoDistanceRangeQueryDescriptor<T> Optimize(GeoOptimizeBBox optimize)
-		{
-			Self.OptimizeBoundingBox = optimize;
-			return this;
-		}
-		
-		public GeoDistanceRangeQueryDescriptor<T> DistanceType(GeoDistance geoDistance)
-		{
-			Self.DistanceType = geoDistance;
-			return this;
-		}
+
+		public GeoDistanceRangeQueryDescriptor<T> Optimize(GeoOptimizeBBox optimize) => Assign(a => a.OptimizeBoundingBox = optimize);
+
+		public GeoDistanceRangeQueryDescriptor<T> DistanceType(GeoDistance geoDistance) => Assign(a => a.DistanceType = geoDistance);
 
 		/// <summary>
 		/// Forces the 'From()' to be exclusive (which is inclusive by default).
 		/// </summary>
-		public GeoDistanceRangeQueryDescriptor<T> FromExclusive()
-		{
-			Self.IncludeLower = false;
-			return this;
-		}
+		public GeoDistanceRangeQueryDescriptor<T> FromExclusive() => Assign(a => a.IncludeLower = false);
 
 		/// <summary>
 		/// Forces the 'To()' to be exclusive (which is inclusive by default).
 		/// </summary>
-		public GeoDistanceRangeQueryDescriptor<T> ToExclusive()
-		{
-			Self.IncludeUpper = false;
-			return this;
-		}
+		public GeoDistanceRangeQueryDescriptor<T> ToExclusive() => Assign(a => a.IncludeUpper = false);
 	}
 }

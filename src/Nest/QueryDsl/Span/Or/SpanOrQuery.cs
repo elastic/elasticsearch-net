@@ -31,18 +31,15 @@ namespace Nest
 		bool IQuery.Conditionless => SpanOrQuery.IsConditionless(this);
 		IEnumerable<ISpanQuery> ISpanOrQuery.Clauses { get; set; }
 
-		public SpanOrQueryDescriptor<T> Clauses(params Func<SpanQueryDescriptor<T>, SpanQueryDescriptor<T>>[] selectors)
+		public SpanOrQueryDescriptor<T> Clauses(params Func<SpanQueryDescriptor<T>, SpanQueryDescriptor<T>>[] selectors) => Assign(a =>
 		{
-			selectors.ThrowIfNull("selector");
-			var descriptors = (
-				from selector in selectors 
-				let span = new SpanQueryDescriptor<T>() 
-				select selector(span) into q 
-				where !(q as IQuery).Conditionless 
+			var clauses = (
+				from selector in selectors
+				select selector(new SpanQueryDescriptor<T>()) into q
+				where !(q as IQuery).Conditionless
 				select q
 			).ToList();
-			Self.Clauses = descriptors.HasAny() ? descriptors : null;
-			return this;
-		}
+			a.Clauses = clauses.HasAny() ? clauses : null;
+		});
 	}
 }

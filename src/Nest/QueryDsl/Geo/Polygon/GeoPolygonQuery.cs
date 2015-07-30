@@ -26,20 +26,11 @@ namespace Nest
 		: FieldNameQueryDescriptorBase<GeoPolygonQueryDescriptor<T>, IGeoPolygonQuery, T>
 		, IGeoPolygonQuery where T : class
 	{
-		private IGeoPolygonQuery Self => this;
 		bool IQuery.Conditionless => GeoPolygonQuery.IsConditionless(this);
 		IEnumerable<string> IGeoPolygonQuery.Points { get; set; }
 
-		public GeoPolygonQueryDescriptor<T> Points(IEnumerable<string> points)
-		{
-			Self.Points = points;
-			return this;
-		}
+		public GeoPolygonQueryDescriptor<T> Points(IEnumerable<string> points) => Assign(a => a.Points = points);
 
-		public GeoPolygonQueryDescriptor<T> Points(params string[] points)
-		{
-			Self.Points = points;
-			return this;
-		}
+		public GeoPolygonQueryDescriptor<T> Points(params string[] points) => Assign(a => a.Points = points);
 	}
 }

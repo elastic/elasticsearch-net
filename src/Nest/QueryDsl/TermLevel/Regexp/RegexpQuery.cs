@@ -32,28 +32,16 @@ namespace Nest
 		: FieldNameQueryDescriptorBase<RegexpQueryDescriptor<T>, IRegexpQuery, T>
 		, IRegexpQuery where T : class
 	{
-		private IRegexpQuery Self => this;
 		bool IQuery.Conditionless => RegexpQuery.IsConditionless(this);
 		string IRegexpQuery.Value { get; set; }
 		string IRegexpQuery.Flags { get; set; }
 		int? IRegexpQuery.MaximumDeterminizedStates { get; set; }
 
-		public RegexpQueryDescriptor<T> MaximumDeterminizedStates(int maxDeterminizedStates)
-		{
-			Self.MaximumDeterminizedStates = maxDeterminizedStates;
-			return this;
-		}
+		public RegexpQueryDescriptor<T> MaximumDeterminizedStates(int maxDeterminizedStates) =>
+			Assign(a => a.MaximumDeterminizedStates = maxDeterminizedStates);
 
-		public RegexpQueryDescriptor<T> Value(string regex)
-		{
-			Self.Value = regex;
-			return this;
-		}
+		public RegexpQueryDescriptor<T> Value(string regex) => Assign(a => a.Value = regex);
 
-		public RegexpQueryDescriptor<T> Flags(string flags)
-		{
-			Self.Flags = flags;
-			return this;
-		}
+		public RegexpQueryDescriptor<T> Flags(string flags) => Assign(a => a.Flags = flags);
 	}
 }

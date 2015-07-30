@@ -33,12 +33,10 @@ namespace Nest
 		bool IQuery.Conditionless => GeoShapeMultiLineStringQuery.IsConditionless(this);
 		IMultiLineStringGeoShape IGeoShapeMultiLineStringQuery.Shape { get; set; }
 
-		public GeoShapeMultiLineStringQueryDescriptor<T> Coordinates(IEnumerable<IEnumerable<IEnumerable<double>>> coordinates)
+		public GeoShapeMultiLineStringQueryDescriptor<T> Coordinates(IEnumerable<IEnumerable<IEnumerable<double>>> coordinates) => Assign(a =>
 		{
-			if (Self.Shape == null)
-				Self.Shape = new MultiLineStringGeoShape();
-			Self.Shape.Coordinates = coordinates;
-			return this;
-		}
+			a.Shape = a.Shape ?? new MultiLineStringGeoShape();
+			a.Shape.Coordinates = coordinates;
+		});
 	}
 }

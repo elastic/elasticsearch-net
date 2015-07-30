@@ -51,7 +51,6 @@ namespace Nest
 		: QueryDescriptorBase<HasChildQueryDescriptor<T>, IHasChildQuery>
 		, IHasChildQuery where T : class
 	{
-		private IHasChildQuery Self => this;
 		bool IQuery.Conditionless => HasChildQuery.IsConditionless(this);
 		TypeName IHasChildQuery.Type { get; set; }
 		ChildScoreType? IHasChildQuery.ScoreType { get; set; }
@@ -62,51 +61,23 @@ namespace Nest
 
 		public HasChildQueryDescriptor()
 		{
-			Self.Type = TypeName.Create<T>();
+			((IHasChildQuery)this).Type = TypeName.Create<T>();
 		}
 
-		public HasChildQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector)
-		{
-			var q = new QueryContainerDescriptor<T>();
-			Self.Query = querySelector(q);
-			return this;
-		}
+		public HasChildQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> selector) => 
+			Assign(a => a.Query = selector(new QueryContainerDescriptor<T>()));
 
-		public HasChildQueryDescriptor<T> Type(string type)
-		{
-			Self.Type = type;
-			return this;
-		}
+		public HasChildQueryDescriptor<T> Type(string type) => Assign(a => a.Type = type);
 
-		public HasChildQueryDescriptor<T> Score(ChildScoreType? scoreType)
-		{
-			Self.ScoreType = scoreType;
-			return this;
-		}
+		public HasChildQueryDescriptor<T> Score(ChildScoreType? scoreType) => Assign(a => a.ScoreType = scoreType);
 
-		public HasChildQueryDescriptor<T> MinChildren(int minChildren)
-		{
-			Self.MinChildren = minChildren;
-			return this;
-		}
+		public HasChildQueryDescriptor<T> MinChildren(int minChildren) => Assign(a => a.MinChildren = minChildren);
 
-		public HasChildQueryDescriptor<T> MaxChildren(int maxChildren)
-		{
-			Self.MaxChildren = maxChildren;
-			return this;
-		}
+		public HasChildQueryDescriptor<T> MaxChildren(int maxChildren) => Assign(a => a.MaxChildren = maxChildren);
 
-		public HasChildQueryDescriptor<T> InnerHits()
-		{
-			Self.InnerHits = new InnerHits();
-			return this;
-		}
+		public HasChildQueryDescriptor<T> InnerHits() => Assign(a => a.InnerHits = new InnerHits());
 
-		public HasChildQueryDescriptor<T> InnerHits(Func<InnerHitsDescriptor<T>, IInnerHits> innerHitsSelector)
-		{
-			if (innerHitsSelector == null) return this;
-			Self.InnerHits = innerHitsSelector(new InnerHitsDescriptor<T>());
-			return this;
-		}
+		public HasChildQueryDescriptor<T> InnerHits(Func<InnerHitsDescriptor<T>, IInnerHits> selector) =>
+			Assign(a => a.InnerHits = selector(new InnerHitsDescriptor<T>()));
 	}
 }

@@ -32,44 +32,22 @@ namespace Nest
 		: QueryDescriptorBase<IdsQueryDescriptor, IIdsQuery>
 		, IIdsQuery
 	{
-		private IIdsQuery Self => this;
 		bool IQuery.Conditionless => IdsQuery.IsConditionless(this);
 		IEnumerable<string> IIdsQuery.Values { get; set; }
 		IEnumerable<string> IIdsQuery.Type { get; set; }
 
-		public IdsQueryDescriptor Type(params string[] types)
-		{
-			Self.Type = types;
-			return this;
-		}
+		public IdsQueryDescriptor Type(params string[] types) => Assign(a => a.Type = types);
 
-		public IdsQueryDescriptor Type(IEnumerable<string> values)
-		{
-			return this.Type(values.ToArray());
-		}
+		public IdsQueryDescriptor Type(IEnumerable<string> values) => Type(values.ToArray());
 
-		public IdsQueryDescriptor Values(params long[] values)
-		{
-			if (values == null) return this;
-			return this.Values(values.Select(v=>v.ToString(CultureInfo.InvariantCulture)).ToArray());
-		}
+		public IdsQueryDescriptor Values(params long[] values) =>
+			Assign(a => a.Values.Select(v => v.ToString(CultureInfo.InvariantCulture)).ToArray());
 
-		public IdsQueryDescriptor Values(IEnumerable<long> values)
-		{
-			if (values == null) return this;
-			return this.Values(values.Select(v=>v.ToString(CultureInfo.InvariantCulture)).ToArray());
-		}
-	
-		public IdsQueryDescriptor Values(params string[] values)
-		{
-			Self.Values = values;
-			return this;
-		}
+		public IdsQueryDescriptor Values(IEnumerable<long> values) =>
+			Values(values.Select(v => v.ToString(CultureInfo.InvariantCulture)).ToArray());
 
-		public IdsQueryDescriptor Values(IEnumerable<string> values)
-		{
-			if (values == null) return this;
-			return this.Values(values.ToArray());
-		}
+		public IdsQueryDescriptor Values(params string[] values) => Assign(a => a.Values = values);
+
+		public IdsQueryDescriptor Values(IEnumerable<string> values) => Values(values.ToArray());
 	}
 }

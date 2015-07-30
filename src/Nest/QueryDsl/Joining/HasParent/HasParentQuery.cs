@@ -44,7 +44,6 @@ namespace Nest
 		: QueryDescriptorBase<HasParentQueryDescriptor<T>, IHasParentQuery>
 		, IHasParentQuery where T : class
 	{
-		private IHasParentQuery Self { get { return this; }}
 		bool IQuery.Conditionless => HasParentQuery.IsConditionless(this);
 		TypeName IHasParentQuery.Type { get; set; }
 		ParentScoreType? IHasParentQuery.ScoreType { get; set; }
@@ -53,38 +52,19 @@ namespace Nest
 
 		public HasParentQueryDescriptor()
 		{
-			Self.Type = TypeName.Create<T>();
+			((IHasParentQuery)this).Type = TypeName.Create<T>();
 		}
 
-		public HasParentQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector)
-		{
-			var q = new QueryContainerDescriptor<T>();
-			Self.Query = querySelector(q);
-			return this;
-		}
-		public HasParentQueryDescriptor<T> Type(string type)
-		{
-			Self.Type = type;
-			return this;
-		}
+		public HasParentQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> selector) =>
+			Assign(a => a.Query = selector(new QueryContainerDescriptor<T>()));
 
-		public HasParentQueryDescriptor<T> Score(ParentScoreType? scoreType = ParentScoreType.Score)
-		{
-			Self.ScoreType = scoreType;
-			return this;
-		}
+		public HasParentQueryDescriptor<T> Type(string type) => Assign(a => a.Type = type);
 
-		public HasParentQueryDescriptor<T> InnerHits()
-		{
-			Self.InnerHits = new InnerHits();
-			return this;
-		}
+		public HasParentQueryDescriptor<T> Score(ParentScoreType? scoreType = ParentScoreType.Score) => Assign(a => a.ScoreType = scoreType);
 
-		public HasParentQueryDescriptor<T> InnerHits(Func<InnerHitsDescriptor<T>, IInnerHits> innerHitsSelector)
-		{
-			if (innerHitsSelector == null) return this;
-			Self.InnerHits = innerHitsSelector(new InnerHitsDescriptor<T>());
-			return this;
-		}
+		public HasParentQueryDescriptor<T> InnerHits() => Assign(a => a.InnerHits = new InnerHits());
+
+		public HasParentQueryDescriptor<T> InnerHits(Func<InnerHitsDescriptor<T>, IInnerHits> selector) =>
+			Assign(a => a.InnerHits = selector(new InnerHitsDescriptor<T>()));
 	}
 }

@@ -47,7 +47,6 @@ namespace Nest
 		: FieldNameQueryDescriptorBase<GeoDistanceQueryDescriptor<T>, IGeoDistanceQuery, T> 
 		, IGeoDistanceQuery where T : class
 	{
-		private IGeoDistanceQuery Self => this;
 		bool IQuery.Conditionless => GeoDistanceQuery.IsConditionless(this);
 		string IGeoDistanceQuery.Location { get; set; }
 		object IGeoDistanceQuery.Distance { get; set; }
@@ -55,42 +54,20 @@ namespace Nest
 		GeoDistance? IGeoDistanceQuery.DistanceType { get; set; }
 		GeoOptimizeBBox? IGeoDistanceQuery.OptimizeBoundingBox { get; set; }
 
-		public GeoDistanceQueryDescriptor<T> Location(double Lat, double Lon)
+		public GeoDistanceQueryDescriptor<T> Location(double Lat, double Lon) => Assign(a =>
 		{
 			var c = CultureInfo.InvariantCulture;
-			Self.Location = "{0}, {1}".F(Lat.ToString(c), Lon.ToString(c));
-			return this;
-		}
+			a.Location = "{0}, {1}".F(Lat.ToString(c), Lon.ToString(c));
+		});
 
-		public GeoDistanceQueryDescriptor<T> Location(string geoHash)
-		{
-			Self.Location = geoHash;
-			return this;
-		}
+		public GeoDistanceQueryDescriptor<T> Location(string geoHash) => Assign(a => a.Location = geoHash);
 
-		public GeoDistanceQueryDescriptor<T> Distance(string distance)
-		{
-			Self.Distance = distance;
-			return this;
-		}
+		public GeoDistanceQueryDescriptor<T> Distance(string distance) => Assign(a => a.Distance = distance);
 
-		public GeoDistanceQueryDescriptor<T> Distance(double distance, GeoUnit unit)
-		{
-			Self.Distance = distance;
-			Self.Unit = unit;
-			return this;
-		}
+		public GeoDistanceQueryDescriptor<T> Distance(double distance, GeoUnit unit) => Assign(a => { a.Distance = distance; a.Unit = unit; });
 
-		public GeoDistanceQueryDescriptor<T> Optimize(GeoOptimizeBBox optimize)
-		{
-			Self.OptimizeBoundingBox = optimize;
-			return this;
-		}
+		public GeoDistanceQueryDescriptor<T> Optimize(GeoOptimizeBBox optimize) => Assign(a => a.OptimizeBoundingBox = optimize);
 
-		public GeoDistanceQueryDescriptor<T> DistanceType(GeoDistance type)
-		{
-			Self.DistanceType = type;
-			return this;
-		}
+		public GeoDistanceQueryDescriptor<T> DistanceType(GeoDistance type) => Assign(a => a.DistanceType = type);
 	}
 }

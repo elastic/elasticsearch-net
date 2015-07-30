@@ -30,29 +30,15 @@ namespace Nest
 		: QueryDescriptorBase<TemplateQueryDescriptor<T>, ITemplateQuery>
 		, ITemplateQuery where T : class
 	{
-		ITemplateQuery Self => this;
 		bool IQuery.Conditionless => TemplateQuery.IsConditionless(this);
 		string ITemplateQuery.Query { get; set; }
 		IDictionary<string, object> ITemplateQuery.Params { get; set; }
 
-		public TemplateQueryDescriptor<T> Query(string query)
-		{
-			this.Self.Query = query;
-			return this;
-		}
+		public TemplateQueryDescriptor<T> Query(string query) => Assign(a => a.Query = query);
 
-		public TemplateQueryDescriptor<T> Params(IDictionary<string, object> paramsDictionary)
-		{
-			paramsDictionary.ThrowIfNull("paramsDictionary");
-			this.Self.Params = paramsDictionary;
-			return this;
-		}
+		public TemplateQueryDescriptor<T> Params(IDictionary<string, object> paramsDictionary) => Assign(a => a.Params = paramsDictionary);
 
-		public TemplateQueryDescriptor<T> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramsDictionary)
-		{
-			paramsDictionary.ThrowIfNull("paramsDictionary");
-			this.Self.Params = paramsDictionary(new FluentDictionary<string,object>());
-			return this;
-		}
+		public TemplateQueryDescriptor<T> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramsDictionary) =>
+			Assign(a => a.Params = paramsDictionary(new FluentDictionary<string, object>()));
 	}
 }

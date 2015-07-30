@@ -48,53 +48,31 @@ namespace Nest
 		string ITermsQuery.MinimumShouldMatch { get; set; }
 		bool? ITermsQuery.DisableCoord { get; set; }
 		IEnumerable<object> ITermsQuery.Terms { get; set; }
-		IExternalFieldDeclaration ITermsQuery.ExternalField { get; set; }	
+		IExternalFieldDeclaration ITermsQuery.ExternalField { get; set; }
 
 		public TermsQueryDescriptor<T, K> OnExternalField<TOther>(
-			Func<ExternalFieldDeclarationDescriptor<TOther>, ExternalFieldDeclarationDescriptor<TOther>> externalFieldSelector
-			)
-			where TOther : class
-		{
-			externalFieldSelector.ThrowIfNull("externalFieldSelector");
-			var descriptor = externalFieldSelector(new ExternalFieldDeclarationDescriptor<TOther>());
-			Self.ExternalField = descriptor;
-			return this;
-		}
+			Func<ExternalFieldDeclarationDescriptor<TOther>, ExternalFieldDeclarationDescriptor<TOther>> selector)
+			where TOther : class => Assign(a => a.ExternalField = selector(new ExternalFieldDeclarationDescriptor<TOther>()));
 
-		public TermsQueryDescriptor<T, K> MinimumShouldMatch(string minMatch)
-		{
-			Self.MinimumShouldMatch = minMatch;
-			return this;
-		}
+		public TermsQueryDescriptor<T, K> MinimumShouldMatch(string minMatch) => 
+			Assign(a => a.MinimumShouldMatch = minMatch);
 
-		public TermsQueryDescriptor<T, K> MinimumShouldMatch(int minMatch)
-		{
-			Self.MinimumShouldMatch = minMatch.ToString(CultureInfo.InvariantCulture);
-			return this;
-		}
+		public TermsQueryDescriptor<T, K> MinimumShouldMatch(int minMatch) => Assign(a => a.MinimumShouldMatch = minMatch.ToString(CultureInfo.InvariantCulture));
 
-		public TermsQueryDescriptor<T, K> DisableCoord()
-		{
-			Self.DisableCoord = true;
-			return this;
-		}
+		public TermsQueryDescriptor<T, K> DisableCoord() => Assign(a => a.DisableCoord = true);
 
-		public TermsQueryDescriptor<T, K> Terms(IEnumerable<string> terms)
+		public TermsQueryDescriptor<T, K> Terms(IEnumerable<string> terms) => Assign(a =>
 		{
 			if (terms.HasAny())
 				terms = terms.Where(t => !t.IsNullOrEmpty());
+			a.Terms = terms;
+		});
 
-			Self.Terms = terms;
-			return this;
-		}
-
-		public TermsQueryDescriptor<T, K> Terms(IEnumerable<K> terms)
+		public TermsQueryDescriptor<T, K> Terms(IEnumerable<K> terms) => Assign(a =>
 		{
 			if (terms.HasAny())
 				terms = terms.Where(t => t != null).ToArray();
-
-			Self.Terms = terms.Cast<object>();
-			return this;
-		}
+			a.Terms = terms.Cast<object>();
+		});
 	}
 }

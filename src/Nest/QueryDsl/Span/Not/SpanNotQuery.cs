@@ -53,7 +53,6 @@ namespace Nest
 		: QueryDescriptorBase<SpanNotQueryDescriptor<T>, ISpanNotQuery>
 		, ISpanNotQuery where T : class
 	{
-		private ISpanNotQuery Self => this;
 		bool IQuery.Conditionless => SpanNotQuery.IsConditionless(this);
 		ISpanQuery ISpanNotQuery.Include { get; set; }
 		ISpanQuery ISpanNotQuery.Exclude { get; set; }
@@ -61,38 +60,16 @@ namespace Nest
 		int? ISpanNotQuery.Post { get; set; }
 		int? ISpanNotQuery.Dist { get; set; }
 
-		public SpanNotQueryDescriptor<T> Include(Func<SpanQueryDescriptor<T>, SpanQueryDescriptor<T>> selector)
-		{
-			if (selector == null) return this;
-			var span = new SpanQueryDescriptor<T>();
-			Self.Include = selector(span); ;
-			return this;
-		}
+		public SpanNotQueryDescriptor<T> Include(Func<SpanQueryDescriptor<T>, SpanQueryDescriptor<T>> selector) =>
+			Assign(a => a.Include = selector(new SpanQueryDescriptor<T>()));
 
-		public SpanNotQueryDescriptor<T> Exclude(Func<SpanQueryDescriptor<T>, SpanQueryDescriptor<T>> selector)
-		{
-			if (selector == null) return this;
-			var span = new SpanQueryDescriptor<T>();
-			Self.Exclude = selector(span);;
-			return this;
-		}
+		public SpanNotQueryDescriptor<T> Exclude(Func<SpanQueryDescriptor<T>, SpanQueryDescriptor<T>> selector) =>
+			Assign(a => a.Exclude = selector(new SpanQueryDescriptor<T>()));
 
-		public SpanNotQueryDescriptor<T> Pre(int pre)
-		{
-			Self.Pre = pre;
-			return this;
-		}
+		public SpanNotQueryDescriptor<T> Pre(int pre) => Assign(a => a.Pre = pre);
 
-		public SpanNotQueryDescriptor<T> Post(int post)
-		{
-			Self.Post = post;
-			return this;
-		}
+		public SpanNotQueryDescriptor<T> Post(int post) => Assign(a => a.Post = post);
 
-		public SpanNotQueryDescriptor<T> Dist(int dist)
-		{
-			Self.Dist = dist;
-			return this;
-		}
+		public SpanNotQueryDescriptor<T> Dist(int dist) => Assign(a => a.Dist = dist);
 	}
 }

@@ -40,28 +40,15 @@ namespace Nest
 		: FieldNameQueryDescriptorBase<GeoBoundingBoxQueryDescriptor<T>, IGeoBoundingBoxQuery, T>
 		, IGeoBoundingBoxQuery where T : class
 	{
-		private IGeoBoundingBoxQuery Self => this;
 		bool IQuery.Conditionless => GeoBoundingBoxQuery.IsConditionless(this);
 		string IGeoBoundingBoxQuery.TopLeft { get; set; }
 		string IGeoBoundingBoxQuery.BottomRight { get; set; }
 		GeoExecution? IGeoBoundingBoxQuery.Type { get; set; }
 
-		public GeoBoundingBoxQueryDescriptor<T> TopLeft(string topLeft)
-		{
-			Self.TopLeft = topLeft;
-			return this;
-		}
+		public GeoBoundingBoxQueryDescriptor<T> TopLeft(string topLeft) => Assign(a => a.TopLeft = topLeft);
 
-		public GeoBoundingBoxQueryDescriptor<T> BottomRight(string bottomRight)
-		{
-			Self.BottomRight = bottomRight;
-			return this;
-		}
+		public GeoBoundingBoxQueryDescriptor<T> BottomRight(string bottomRight) => Assign(a => a.BottomRight = bottomRight);
 
-		public GeoBoundingBoxQueryDescriptor<T> Type(GeoExecution type)
-		{
-			Self.Type = type;
-			return this;
-		}
+		public GeoBoundingBoxQueryDescriptor<T> Type(GeoExecution type) => Assign(a => a.Type = type);
     }
 }

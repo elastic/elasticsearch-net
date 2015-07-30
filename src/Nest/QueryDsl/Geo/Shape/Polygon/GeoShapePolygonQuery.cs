@@ -33,12 +33,7 @@ namespace Nest
 		bool IQuery.Conditionless => GeoShapePolygonQuery.IsConditionless(this);
 		IPolygonGeoShape IGeoShapePolygonQuery.Shape { get; set; }
 
-		public GeoShapePolygonQueryDescriptor<T> Coordinates(IEnumerable<IEnumerable<IEnumerable<double>>> coordinates)
-		{
-			if (Self.Shape == null)
-				Self.Shape = new PolygonGeoShape();
-			Self.Shape.Coordinates = coordinates;
-			return this;
-		}
+		public GeoShapePolygonQueryDescriptor<T> Coordinates(IEnumerable<IEnumerable<IEnumerable<double>>> coordinates) =>
+			Assign(a => a.Shape = new PolygonGeoShape { Coordinates = coordinates });
 	}
 }

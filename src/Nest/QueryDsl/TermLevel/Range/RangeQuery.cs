@@ -69,87 +69,40 @@ namespace Nest
 		string IRangeQuery.TimeZone { get; set; }
 		string IRangeQuery.Format { get; set; }
 
-		public RangeQueryDescriptor<T> Greater(double? from)
-		{
-			this.Self.GreaterThan = from.HasValue ? from.Value.ToString(CultureInfo.InvariantCulture) : null;
-			return this;
-		}
+		public RangeQueryDescriptor<T> Greater(double? from) => 
+			Assign(a => a.GreaterThan = from.HasValue ? from.Value.ToString(CultureInfo.InvariantCulture) : null);
 
-		public RangeQueryDescriptor<T> GreaterOrEquals(double? from)
-		{
-			this.Self.GreaterThanOrEqualTo = from.HasValue ? from.Value.ToString(CultureInfo.InvariantCulture) : null;
-			return this;
-		}
+		public RangeQueryDescriptor<T> GreaterOrEquals(double? from) =>
+			Assign(a => a.GreaterThanOrEqualTo = from.HasValue ? from.Value.ToString(CultureInfo.InvariantCulture) : null);
 
-		public RangeQueryDescriptor<T> Lower(double? to)
-		{
-			this.Self.LowerThan = to.HasValue ? to.Value.ToString(CultureInfo.InvariantCulture) : null;
-			return this;
-		}
-		public RangeQueryDescriptor<T> LowerOrEquals(double? to)
-		{
-			this.Self.LowerThanOrEqualTo = to.HasValue ? to.Value.ToString(CultureInfo.InvariantCulture) : null;
-			return this;
-		}
+		public RangeQueryDescriptor<T> Lower(double? to) =>
+			Assign(a => a.LowerThan = to.HasValue ? to.Value.ToString(CultureInfo.InvariantCulture) : null);
 
-		public RangeQueryDescriptor<T> Greater(string from)
-		{
-			this.Self.GreaterThan = from;
-			return this;
-		}
+		public RangeQueryDescriptor<T> LowerOrEquals(double? to) =>
+			Assign(a => a.LowerThanOrEqualTo = to.HasValue ? to.Value.ToString(CultureInfo.InvariantCulture) : null);
 
-		public RangeQueryDescriptor<T> GreaterOrEquals(string from)
-		{
-			this.Self.GreaterThanOrEqualTo = from;
-			return this;
-		}
+		public RangeQueryDescriptor<T> Greater(string from) => Assign(a => a.GreaterThan = from);
 
-		public RangeQueryDescriptor<T> Lower(string to)
-		{
-			this.Self.LowerThan = to;
-			return this;
-		}
+		public RangeQueryDescriptor<T> GreaterOrEquals(string from) => Assign(a => a.GreaterThanOrEqualTo = from);
 
-		public RangeQueryDescriptor<T> LowerOrEquals(string to)
-		{
-			this.Self.LowerThanOrEqualTo = to;
-			return this;
-		}
+		public RangeQueryDescriptor<T> Lower(string to) => Assign(a => a.LowerThan = to);
 
-		public RangeQueryDescriptor<T> Greater(DateTime? from, string format = "yyyy-MM-dd'T'HH:mm:ss.fff")
-		{
-			this.Self.GreaterThan = from.HasValue ? from.Value.ToString(format) : null;
-			return this;
-		}
+		public RangeQueryDescriptor<T> LowerOrEquals(string to) => Assign(a => a.LowerThanOrEqualTo = to);
 
-		public RangeQueryDescriptor<T> GreaterOrEquals(DateTime? from, string format = "yyyy-MM-dd'T'HH:mm:ss.fff")
-		{
-			this.Self.GreaterThanOrEqualTo = from.HasValue ? from.Value.ToString(format) : null;
-			return this;
-		}
+		public RangeQueryDescriptor<T> Greater(DateTime? from, string format = "yyyy-MM-dd'T'HH:mm:ss.fff") =>
+			Assign(a => a.GreaterThan = from.HasValue ? from.Value.ToString(format) : null);
 
-		public RangeQueryDescriptor<T> Lower(DateTime? to, string format = "yyyy-MM-dd'T'HH:mm:ss.fff")
-		{
-			this.Self.LowerThan = to.HasValue ? to.Value.ToString(format) : null;
-			return this;
-		}
+		public RangeQueryDescriptor<T> GreaterOrEquals(DateTime? from, string format = "yyyy-MM-dd'T'HH:mm:ss.fff") =>
+			Assign(a => a.GreaterThanOrEqualTo = from.HasValue ? from.Value.ToString(format) : null);
 
-		public RangeQueryDescriptor<T> LowerOrEquals(DateTime? to, string format = "yyyy-MM-dd'T'HH:mm:ss.fff")
-		{
-			this.Self.LowerThanOrEqualTo = to.HasValue ? to.Value.ToString(format) : null;
-			return this;
-		}
+		public RangeQueryDescriptor<T> Lower(DateTime? to, string format = "yyyy-MM-dd'T'HH:mm:ss.fff") =>
+			Assign(a => a.LowerThan = to.HasValue ? to.Value.ToString(format) : null);
 
-		public RangeQueryDescriptor<T> TimeZone(string timeZone)
-		{
-			this.Self.TimeZone = timeZone;
-			return this;
-		}
+		public RangeQueryDescriptor<T> LowerOrEquals(DateTime? to, string format = "yyyy-MM-dd'T'HH:mm:ss.fff") =>
+			Assign(a => a.LowerThanOrEqualTo = to.HasValue ? to.Value.ToString(format) : null);
 
-		public RangeQueryDescriptor<T> Format(string format)
-		{
-			this.Self.Format = format;
-			return this;
-		}
+		public RangeQueryDescriptor<T> TimeZone(string timeZone) => Assign(a => a.TimeZone = timeZone);
+
+		public RangeQueryDescriptor<T> Format(string format) => Assign(a => a.Format = format);
 	}
 }

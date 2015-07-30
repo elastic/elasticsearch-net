@@ -33,12 +33,10 @@ namespace Nest
 		bool IQuery.Conditionless => GeoShapeMultiPointQuery.IsConditionless(this);
 		IMultiPointGeoShape IGeoShapeMultiPointQuery.Shape { get; set; }
 
-		public GeoShapeMultiPointQueryDescriptor<T> Coordinates(IEnumerable<IEnumerable<double>> coordinates)
+		public GeoShapeMultiPointQueryDescriptor<T> Coordinates(IEnumerable<IEnumerable<double>> coordinates) => Assign(a =>
 		{
-			if (Self.Shape == null)
-				Self.Shape = new MultiPointGeoShape();
-			Self.Shape.Coordinates = coordinates;
-			return this;
-		}
+			a.Shape = a.Shape ?? new MultiPointGeoShape();
+			a.Shape.Coordinates = coordinates;
+		});
 	}
 }

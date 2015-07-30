@@ -71,7 +71,6 @@ namespace Nest
 		bool? Include { get; set; }
 	}
 
-
 	public class MoreLikeThisQuery : QueryBase, IMoreLikeThisQuery
 	{
 		bool IQuery.Conditionless => IsConditionless(this);
@@ -105,7 +104,6 @@ namespace Nest
 		: QueryDescriptorBase<MoreLikeThisQueryDescriptor<T>, IMoreLikeThisQuery>
 		, IMoreLikeThisQuery where T : class
 	{
-		private IMoreLikeThisQuery Self { get { return this; }}
 		bool IQuery.Conditionless => MoreLikeThisQuery.IsConditionless(this);
 		IEnumerable<FieldName> IMoreLikeThisQuery.Fields { get; set; }
 		string IMoreLikeThisQuery.LikeText { get; set; }
@@ -124,213 +122,70 @@ namespace Nest
 		IEnumerable<IMultiGetOperation> IMoreLikeThisQuery.Documents { get; set; }
 		bool? IMoreLikeThisQuery.Include { get; set; }
 
-		public MoreLikeThisQueryDescriptor<T> OnFields(IEnumerable<string> fields)
-		{
-			this.Self.Fields = fields.Select(f=>(FieldName)f);
-			return this;
-		}
+		public MoreLikeThisQueryDescriptor<T> OnFields(IEnumerable<string> fields) => 
+			Assign(a => a.Fields = fields.Select(f => (FieldName)f));
 
-		public MoreLikeThisQueryDescriptor<T> OnFields(
-			params Expression<Func<T, object>>[] objectPaths)
-		{
-			this.Self.Fields = objectPaths.Select(e=>(FieldName)e);
-			return this;
-		}
+		public MoreLikeThisQueryDescriptor<T> OnFields(params Expression<Func<T, object>>[] objectPaths) =>
+			Assign(a => a.Fields = objectPaths.Select(e => (FieldName)e));
 
-		public MoreLikeThisQueryDescriptor<T> LikeText(string likeText)
-		{
-			this.Self.LikeText = likeText;
-			return this;
-		}
+		public MoreLikeThisQueryDescriptor<T> LikeText(string likeText) => 
+			Assign(a => a.LikeText = likeText);
 
-		public MoreLikeThisQueryDescriptor<T> StopWords(IEnumerable<string> stopWords)
-		{
-			this.Self.StopWords = stopWords;
-			return this;
-		}
-		
-		public MoreLikeThisQueryDescriptor<T> MaxQueryTerms(int maxQueryTerms)
-		{
-			this.Self.MaxQueryTerms = maxQueryTerms;
-			return this;
-		}
+		public MoreLikeThisQueryDescriptor<T> StopWords(IEnumerable<string> stopWords) => 
+			Assign(a => a.StopWords = stopWords);
 
-		public MoreLikeThisQueryDescriptor<T> MinTermFrequency(int minTermFrequency)
-		{
-			this.Self.MinTermFrequency = minTermFrequency;
-			return this;
-		}
+		public MoreLikeThisQueryDescriptor<T> MaxQueryTerms(int maxQueryTerms) => 
+			Assign(a => a.MaxQueryTerms = maxQueryTerms);
 
-		public MoreLikeThisQueryDescriptor<T> MinDocumentFrequency(int minDocumentFrequency)
-		{
-			this.Self.MinDocumentFrequency = minDocumentFrequency;
-			return this;
-		}
+		public MoreLikeThisQueryDescriptor<T> MinTermFrequency(int minTermFrequency) => 
+			Assign(a => a.MinTermFrequency = minTermFrequency);
 
-		public MoreLikeThisQueryDescriptor<T> MaxDocumentFrequency(int maxDocumentFrequency)
-		{
-			this.Self.MaxDocumentFrequency = maxDocumentFrequency;
-			return this;
-		}
+		public MoreLikeThisQueryDescriptor<T> MinDocumentFrequency(int minDocumentFrequency) =>
+			Assign(a => a.MinDocumentFrequency = minDocumentFrequency);
 
-		public MoreLikeThisQueryDescriptor<T> MinWordLength(int minWordLength)
-		{
-			this.Self.MinWordLength = minWordLength;
-			return this;
-		}
+		public MoreLikeThisQueryDescriptor<T> MaxDocumentFrequency(int maxDocumentFrequency) =>
+			Assign(a => a.MaxDocumentFrequency = maxDocumentFrequency);
 
-		public MoreLikeThisQueryDescriptor<T> MaxWordLength(int maxWordLength)
-		{
-			this.Self.MaxWordLength = maxWordLength;
-			return this;
-		}
+		public MoreLikeThisQueryDescriptor<T> MinWordLength(int minWordLength) => 
+			Assign(a => a.MinWordLength = minWordLength);
 
-		public MoreLikeThisQueryDescriptor<T> BoostTerms(double boostTerms)
-		{
-			this.Self.BoostTerms = boostTerms;
-			return this;
-		}
+		public MoreLikeThisQueryDescriptor<T> MaxWordLength(int maxWordLength) =>
+			Assign(a => a.MaxWordLength = maxWordLength);
 
-		public MoreLikeThisQueryDescriptor<T> TermMatchPercentage(double termMatchPercentage)
-		{
-			this.Self.TermMatchPercentage = termMatchPercentage;
-			return this;
-		}
+		public MoreLikeThisQueryDescriptor<T> BoostTerms(double boostTerms) =>
+			Assign(a => a.BoostTerms = boostTerms);
 
-		public MoreLikeThisQueryDescriptor<T> MinimumShouldMatch(string minMatch)
-		{
-			this.Self.MinimumShouldMatch = minMatch;
-			return this;
-		}
+		public MoreLikeThisQueryDescriptor<T> TermMatchPercentage(double termMatchPercentage) =>
+			Assign(a => a.TermMatchPercentage = termMatchPercentage);
 
-		public MoreLikeThisQueryDescriptor<T> MinimumShouldMatch(int minMatch)
-		{
-			this.Self.MinimumShouldMatch = minMatch.ToString();
-			return this;
-		}
+		public MoreLikeThisQueryDescriptor<T> MinimumShouldMatch(string minMatch) =>
+			Assign(a => a.MinimumShouldMatch = minMatch);
 
-		public MoreLikeThisQueryDescriptor<T> Analyzer(string analyzer)
-		{
-			this.Self.Analyzer = analyzer;
-			return this;
-		}
-		
-		public MoreLikeThisQueryDescriptor<T> Ids(IEnumerable<long> ids)
-		{
-			this.Self.Ids = ids.Select(i=>i.ToString(CultureInfo.InvariantCulture));
-			return this;
-		}
-	
-		public MoreLikeThisQueryDescriptor<T> Ids(IEnumerable<string> ids)
-		{
-			this.Self.Ids = ids;
-			return this;
-		}
+		public MoreLikeThisQueryDescriptor<T> MinimumShouldMatch(int minMatch) =>
+			Assign(a => a.MinimumShouldMatch = minMatch.ToString());
+
+		public MoreLikeThisQueryDescriptor<T> Analyzer(string analyzer) =>
+			Assign(a => a.Analyzer = analyzer);
+
+		public MoreLikeThisQueryDescriptor<T> Ids(IEnumerable<long> ids) =>
+			Assign(a => a.Ids = ids.Select(i => i.ToString(CultureInfo.InvariantCulture)));
+
+		public MoreLikeThisQueryDescriptor<T> Ids(IEnumerable<string> ids) =>
+			Assign(a => a.Ids = ids);
 
 		/// <summary>
 		/// Specify multiple documents to suply the more like this like text
 		/// </summary>
-		public MoreLikeThisQueryDescriptor<T> Documents(Func<MoreLikeThisQueryDocumentsDescriptor<T>, MoreLikeThisQueryDocumentsDescriptor<T>> getDocumentsSelector)
-		{
-			getDocumentsSelector.ThrowIfNull("getDocumentsSelector");
+		public MoreLikeThisQueryDescriptor<T> Documents(Func<MoreLikeThisQueryDocumentsDescriptor<T>, MoreLikeThisQueryDocumentsDescriptor<T>> selector) =>
+			Assign(a => a.Documents = selector(new MoreLikeThisQueryDocumentsDescriptor<T>(true)).GetOperations);
 
-			var descriptor = getDocumentsSelector(new MoreLikeThisQueryDocumentsDescriptor<T>(true));
-			descriptor.ThrowIfNull("descriptor");
-			Self.Documents = descriptor.GetOperations;
-			return this;
-		}
-		
 		/// <summary>
 		/// Specify multiple documents to supply the more like this text, but do not generate index: and type: on the get operations.
 		/// Useful if the node has rest.action.multi.allow_explicit_index set to false
 		/// </summary>
-		/// <param name="getDocumentsSelector"></param>
+		/// <param name="selector"></param>
 		/// <returns></returns>
-		public MoreLikeThisQueryDescriptor<T> DocumentsExplicit(Func<MoreLikeThisQueryDocumentsDescriptor<T>, MoreLikeThisQueryDocumentsDescriptor<T>> getDocumentsSelector)
-		{
-			getDocumentsSelector.ThrowIfNull("getDocumentsSelector");
-
-			var descriptor = getDocumentsSelector(new MoreLikeThisQueryDocumentsDescriptor<T>(false));
-			descriptor.ThrowIfNull("descriptor");
-			Self.Documents = descriptor.GetOperations;
-			return this;
-		}
-	}
-
-	public class MoreLikeThisQueryDocumentsDescriptor<T> where T : class
-	{
-		private readonly bool _allowExplicitIndex;
-		internal IList<IMultiGetOperation> GetOperations { get; set; }
-
-		public MoreLikeThisQueryDocumentsDescriptor(bool allowExplicitIndex = true)
-		{
-			_allowExplicitIndex = allowExplicitIndex;
-			this.GetOperations = new List<IMultiGetOperation>();
-		}
-
-		/// <summary>
-		/// Describe a get operation for the mlt_query docs property
-		/// </summary>
-		public MoreLikeThisQueryDocumentsDescriptor<T> Get(long id, Func<MultiGetOperationDescriptor<T>, MultiGetOperationDescriptor<T>> getSelector = null)
-		{
-			return this.Get(id.ToString(CultureInfo.InvariantCulture), getSelector);
-		}
-
-		/// <summary>
-		/// Describe a get operation for the mlt_query docs property
-		/// </summary>
-		public MoreLikeThisQueryDocumentsDescriptor<T> Get(string id, Func<MultiGetOperationDescriptor<T>, MultiGetOperationDescriptor<T>> getSelector = null) 
-		{
-			getSelector = getSelector ?? (s => s);
-			var descriptor = getSelector(new MultiGetOperationDescriptor<T>(_allowExplicitIndex).Id(id));
-			this.GetOperations.Add(descriptor);
-			return this;
-		}
-
-		/// <summary>
-		/// Describe a get operation for the mlt_query docs property
-		/// </summary>
-		/// <typeparam name="TDocument">Use a different type to lookup</typeparam>
-		public MoreLikeThisQueryDocumentsDescriptor<T> Get<TDocument>(long id, Func<MultiGetOperationDescriptor<TDocument>, MultiGetOperationDescriptor<TDocument>> getSelector = null)
-			where TDocument : class
-		{
-			return this.Get<TDocument>(id.ToString(CultureInfo.InvariantCulture), getSelector);
-		}
-		
-		/// <summary>
-		/// Describe a get operation for the mlt_query docs property
-		/// </summary>
-		/// <typeparam name="TDocument">Use a different type to lookup</typeparam>
-		public MoreLikeThisQueryDocumentsDescriptor<T> Get<TDocument>(string id, Func<MultiGetOperationDescriptor<TDocument>, MultiGetOperationDescriptor<TDocument>> getSelector = null) 
-			where TDocument : class
-		{
-			getSelector = getSelector ?? (s => s);
-			var descriptor = getSelector(new MultiGetOperationDescriptor<TDocument>(_allowExplicitIndex).Id(id));
-			this.GetOperations.Add(descriptor);
-			return this;
-
-		}
-
-		public MoreLikeThisQueryDocumentsDescriptor<T> Get<TDocument>(Func<MultiGetOperationDescriptor<TDocument>, MultiGetOperationDescriptor<TDocument>> getSelector)
-			where TDocument : class
-		{
-			getSelector = getSelector ?? (s => s);
-			var descriptor = getSelector(new MultiGetOperationDescriptor<TDocument>(_allowExplicitIndex));
-			this.GetOperations.Add(descriptor);
-			return this;
-		}
-
-		public MoreLikeThisQueryDocumentsDescriptor<T> Document<TDocument>(TDocument document, string index = null, string type = null)
-			where TDocument : class
-		{
-			var descriptor = new MultiGetOperationDescriptor<TDocument>(_allowExplicitIndex)
-				.Document(document);
-			if (!string.IsNullOrEmpty(index))
-				descriptor.Index(index);
-			if (!string.IsNullOrEmpty(type))
-				descriptor.Type(type);
-			this.GetOperations.Add(descriptor);
-			return this;
-		}
+		public MoreLikeThisQueryDescriptor<T> DocumentsExplicit(Func<MoreLikeThisQueryDocumentsDescriptor<T>, MoreLikeThisQueryDocumentsDescriptor<T>> selector) =>
+			Assign(a => a.Documents = selector(new MoreLikeThisQueryDocumentsDescriptor<T>(false)).GetOperations);
 	}
 }

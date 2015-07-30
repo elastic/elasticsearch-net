@@ -67,8 +67,6 @@ namespace Nest
 		: QueryDescriptorBase<SimpleQueryStringQueryDescriptor<T>, ISimpleQueryStringQuery> 
 		, ISimpleQueryStringQuery where T : class
 	{
-		private SimpleQueryStringQueryDescriptor<T> _assign(Action<ISimpleQueryStringQuery> assigner) => Fluent.Assign(this, assigner);
-
 		bool IQuery.Conditionless => SimpleQueryStringQuery.IsConditionless(this);
 		string ISimpleQueryStringQuery.Query { get; set; }
 		FieldName ISimpleQueryStringQuery.DefaultField { get; set; }
@@ -81,21 +79,20 @@ namespace Nest
 		string ISimpleQueryStringQuery.Locale { get; set; }
 		string ISimpleQueryStringQuery.MinimumShouldMatch { get; set; }
 
-
-		public SimpleQueryStringQueryDescriptor<T> DefaultField(string field) => _assign(a => a.DefaultField = field);
+		public SimpleQueryStringQueryDescriptor<T> DefaultField(string field) => Assign(a => a.DefaultField = field);
 
 		public SimpleQueryStringQueryDescriptor<T> DefaultField(Expression<Func<T, object>> objectPath) => 
-			_assign(a => a.DefaultField = objectPath);
+			Assign(a => a.DefaultField = objectPath);
 
 		public SimpleQueryStringQueryDescriptor<T> OnFields(IEnumerable<string> fields) =>
-			_assign(a => a.Fields = fields?.Select(f => (FieldName) f).ToListOrNullIfEmpty());
+			Assign(a => a.Fields = fields?.Select(f => (FieldName) f).ToListOrNullIfEmpty());
 
 		public SimpleQueryStringQueryDescriptor<T> OnFields(params Expression<Func<T, object>>[] objectPaths) =>
-			_assign(a => a.Fields = objectPaths?.Select(f => (FieldName) f).ToListOrNullIfEmpty());
+			Assign(a => a.Fields = objectPaths?.Select(f => (FieldName) f).ToListOrNullIfEmpty());
 
 		public SimpleQueryStringQueryDescriptor<T> OnFieldsWithBoost(Func<
 			FluentDictionary<Expression<Func<T, object>>, double?>, IDictionary<Expression<Func<T, object>>, double?>> boostableSelector) =>
-				_assign(a => a.Fields = boostableSelector?
+				Assign(a => a.Fields = boostableSelector?
 					.Invoke(new FluentDictionary<Expression<Func<T, object>>, double?>())
 					.Select(o => FieldName.Create(o.Key, o.Value))
 					.ToListOrNullIfEmpty()
@@ -103,33 +100,32 @@ namespace Nest
 
 		public SimpleQueryStringQueryDescriptor<T> OnFieldsWithBoost(
 			Func<FluentDictionary<string, double?>, IDictionary<Expression<Func<T, object>>, double?>> boostableSelector) =>
-				_assign(a => a.Fields = boostableSelector?
+				Assign(a => a.Fields = boostableSelector?
 					.Invoke(new FluentDictionary<string, double?>())
 					.Select(o => FieldName.Create(o.Key, o.Value))
 					.ToListOrNullIfEmpty()
 				);
 
-		public SimpleQueryStringQueryDescriptor<T> Query(string query) => _assign(a => a.Query = query);
+		public SimpleQueryStringQueryDescriptor<T> Query(string query) => Assign(a => a.Query = query);
 
-		public SimpleQueryStringQueryDescriptor<T> DefaultOperator(Operator op) => _assign(a => a.DefaultOperator = op);
+		public SimpleQueryStringQueryDescriptor<T> DefaultOperator(Operator op) => Assign(a => a.DefaultOperator = op);
 
-		public SimpleQueryStringQueryDescriptor<T> Analyzer(string analyzer) => _assign(a => a.Analyzer = analyzer);
+		public SimpleQueryStringQueryDescriptor<T> Analyzer(string analyzer) => Assign(a => a.Analyzer = analyzer);
 
-		public SimpleQueryStringQueryDescriptor<T> Flags(string flags) => _assign(a => a.Flags = flags);
+		public SimpleQueryStringQueryDescriptor<T> Flags(string flags) => Assign(a => a.Flags = flags);
 
 		public SimpleQueryStringQueryDescriptor<T> LowercaseExpendedTerms(bool lowercaseExpendedTerms = true) =>
-			_assign(a => a.LowercaseExpendedTerms = lowercaseExpendedTerms);
+			Assign(a => a.LowercaseExpendedTerms = lowercaseExpendedTerms);
 
 		public SimpleQueryStringQueryDescriptor<T> AnalyzeWildcard(bool analyzeWildcard = true) =>
-			_assign(a => a.AnalyzeWildcard = analyzeWildcard);
+			Assign(a => a.AnalyzeWildcard = analyzeWildcard);
 
-		public SimpleQueryStringQueryDescriptor<T> Locale(string locale) => _assign(a => a.Locale = locale);
+		public SimpleQueryStringQueryDescriptor<T> Locale(string locale) => Assign(a => a.Locale = locale);
 
 		public SimpleQueryStringQueryDescriptor<T> MinimumShouldMatch(int minimumShouldMatches) =>
-			_assign(a => a.MinimumShouldMatch = minimumShouldMatches.ToString(CultureInfo.InvariantCulture));
+			Assign(a => a.MinimumShouldMatch = minimumShouldMatches.ToString(CultureInfo.InvariantCulture));
 
 		public SimpleQueryStringQueryDescriptor<T> MinimumShouldMatch(string minimumShouldMatch) =>
-			_assign(a => a.MinimumShouldMatch = minimumShouldMatch);
-
+			Assign(a => a.MinimumShouldMatch = minimumShouldMatch);
     }
 }

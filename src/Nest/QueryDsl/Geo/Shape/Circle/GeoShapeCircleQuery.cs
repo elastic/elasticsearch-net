@@ -31,24 +31,19 @@ namespace Nest
 		: FieldNameQueryDescriptorBase<GeoShapeCircleQueryDescriptor<T>, IGeoShapeCircleQuery, T>
 		, IGeoShapeCircleQuery where T : class
 	{
-		private IGeoShapeCircleQuery Self => this;
 		bool IQuery.Conditionless => GeoShapeCircleQuery.IsConditionless(this);
 		ICircleGeoShape IGeoShapeCircleQuery.Shape { get; set; }
 
-		public GeoShapeCircleQueryDescriptor<T> Coordinates(IEnumerable<double> coordinates)
+		public GeoShapeCircleQueryDescriptor<T> Coordinates(IEnumerable<double> coordinates) => Assign(a =>
 		{
-			if (Self.Shape == null)
-				Self.Shape = new CircleGeoShape();
-			Self.Shape.Coordinates = coordinates;
-			return this;
-		}
+			a.Shape = a.Shape ?? new CircleGeoShape();
+			a.Shape.Coordinates = coordinates;
+		});
 
-		public GeoShapeCircleQueryDescriptor<T> Radius(string radius)
+		public GeoShapeCircleQueryDescriptor<T> Radius(string radius) => Assign(a =>
 		{
-			if (Self.Shape == null)
-				Self.Shape = new CircleGeoShape();
-			Self.Shape.Radius = radius;
-			return this;
-		}
+			a.Shape = a.Shape ?? new CircleGeoShape();
+			a.Shape.Radius = radius;
+		});
 	}
 }

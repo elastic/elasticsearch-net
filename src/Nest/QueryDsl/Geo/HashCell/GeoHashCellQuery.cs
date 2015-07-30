@@ -39,43 +39,24 @@ namespace Nest
 		: FieldNameQueryDescriptorBase<GeoHashCellQueryDescriptor<T>, IGeoHashCellQuery, T> 
 		, IGeoHashCellQuery where T : class
     {
-		private IGeoHashCellQuery Self => this;
         bool IQuery.Conditionless => GeoHashCellQuery.IsConditionless(this);
         string IGeoHashCellQuery.Location { get; set; }
         object IGeoHashCellQuery.Precision { get; set; }
         GeoUnit? IGeoHashCellQuery.Unit { get; set; }
         bool IGeoHashCellQuery.Neighbors { get; set; }
 
-        public GeoHashCellQueryDescriptor<T> Location(double lat, double lon)
-        {
-            var c = CultureInfo.InvariantCulture;
-            Self.Location = "{{ lat: {0}, lon: {1} }}".F(lat.ToString(c), lon.ToString(c));
-            return this;
-        }
+		public GeoHashCellQueryDescriptor<T> Location(double lat, double lon) => Assign(a =>
+		{
+			var c = CultureInfo.InvariantCulture;
+			a.Location = "{{ lat: {0}, lon: {1} }}".F(lat.ToString(c), lon.ToString(c));
+		});
 
-        public GeoHashCellQueryDescriptor<T> Location(string geoHash)
-        {
-            Self.Location = geoHash;
-            return this;
-        }
+		public GeoHashCellQueryDescriptor<T> Location(string geoHash) => Assign(a => a.Location = geoHash);
 
-        public GeoHashCellQueryDescriptor<T> Precision(int precision)
-        {
-            Self.Precision = precision;
-            return this;
-        }
+		public GeoHashCellQueryDescriptor<T> Precision(int precision) => Assign(a => a.Precision = precision);
 
-        public GeoHashCellQueryDescriptor<T> Distance(double distance, GeoUnit unit)
-        {
-            Self.Precision = distance;
-            Self.Unit = unit;
-            return this;
-        }
+		public GeoHashCellQueryDescriptor<T> Distance(double distance, GeoUnit unit) => Assign(a => { a.Precision = distance; a.Unit = unit; });
 
-        public GeoHashCellQueryDescriptor<T> Neighbors(bool neighbors)
-        {
-            Self.Neighbors = neighbors;
-            return this;
-        }
+		public GeoHashCellQueryDescriptor<T> Neighbors(bool neighbors) => Assign(a => a.Neighbors = neighbors);
 	}
 }

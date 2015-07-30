@@ -45,7 +45,6 @@ namespace Nest
 		: QueryDescriptorBase<ScriptQueryDescriptor<T>, IScriptQuery>
 		, IScriptQuery where T : class
 	{
-		private IScriptQuery Self => this;
 		bool IQuery.Conditionless => ScriptQuery.IsConditionless(this);
 		string IScriptQuery.Script { get; set; }
 		string IScriptQuery.ScriptId { get; set; }
@@ -56,31 +55,17 @@ namespace Nest
 		/// <summary>
 		/// Inline script to execute
 		/// </summary>
-		public ScriptQueryDescriptor<T> Script(string script)
-		{
-			this.Self.Script = script;
-			return this;
-		}
+		public ScriptQueryDescriptor<T> Script(string script) => Assign(a => a.Script = script);
 
 		/// <summary>
 		/// Id of an indexed script to execute
 		/// </summary
-		public ScriptQueryDescriptor<T> ScriptId(string scriptId)
-		{
-			scriptId.ThrowIfNull("scriptId");
-			this.Self.ScriptId = scriptId;
-			return this;
-		}
+		public ScriptQueryDescriptor<T> ScriptId(string scriptId) => Assign(a => a.ScriptId = scriptId);
 
 		/// <summary>
 		/// File name of a script to execute
 		/// </summary>
-		public ScriptQueryDescriptor<T> ScriptFile(string scriptFile)
-		{
-			scriptFile.ThrowIfNull("scriptFile");
-			this.Self.ScriptFile = scriptFile;
-			return this;
-		}
+		public ScriptQueryDescriptor<T> ScriptFile(string scriptFile) => Assign(a => a.ScriptFile = scriptFile);
 
 		/// <summary>
 		/// Scripts are compiled and cached for faster execution.
@@ -92,35 +77,21 @@ namespace Nest
 		/// </summary>
 		/// <param name="paramDictionary">param</param>
 		/// <returns>this</returns>
-		public ScriptQueryDescriptor<T> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramDictionary)
-		{
-			paramDictionary.ThrowIfNull("paramDictionary");
-			this.Self.Params = paramDictionary(new FluentDictionary<string, object>());
-			return this;
-		}
+		public ScriptQueryDescriptor<T> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramDictionary) =>
+			Assign(a => a.Params = paramDictionary(new FluentDictionary<string, object>()));
 
 		/// <summary>
 		/// Language of script.
 		/// </summary>
 		/// <param name="lang">language</param>
 		/// <returns>this</returns>
-		public ScriptQueryDescriptor<T> Lang(string lang)
-		{
-			lang.ThrowIfNull("lang");
-			this.Self.Lang = lang;
-			return this;
-		}
+		public ScriptQueryDescriptor<T> Lang(string lang) => Assign(a => a.Lang = lang);
 
 		/// <summary>
 		/// Language of script.
 		/// </summary>
 		/// <param name="lang">language</param>
 		/// <returns>this</returns>
-		public ScriptQueryDescriptor<T> Lang(ScriptLang lang)
-		{
-			lang.ThrowIfNull("lang");
-			this.Self.Lang = lang.GetStringValue();
-			return this;
-		}
+		public ScriptQueryDescriptor<T> Lang(ScriptLang lang) => Assign(a => a.Lang = lang.GetStringValue());
 	}
 }

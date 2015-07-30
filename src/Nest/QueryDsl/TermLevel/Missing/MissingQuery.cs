@@ -32,21 +32,12 @@ namespace Nest
 		: FieldNameQueryDescriptorBase<MissingQueryDescriptor<T>, IMissingQuery, T>
 		, IMissingQuery where T : class
 	{
-		private IMissingQuery Self => this;
 		bool IQuery.Conditionless => MissingQuery.IsConditionless(this);
 		bool? IMissingQuery.Existence { get; set; }
 		bool? IMissingQuery.NullValue { get; set; }
 
-		public MissingQueryDescriptor<T> Existence(bool existence = true)
-		{
-			Self.Existence = existence;
-			return this;
-		}
+		public MissingQueryDescriptor<T> Existence(bool existence = true) => Assign(a => a.Existence = existence);
 
-		public MissingQueryDescriptor<T> NullValue(bool nullValue = true)
-		{
-			Self.NullValue = nullValue;
-			return this;
-		}
+		public MissingQueryDescriptor<T> NullValue(bool nullValue = true) => Assign(a => a.NullValue = nullValue);
 	}
 }

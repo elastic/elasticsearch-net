@@ -82,7 +82,6 @@ namespace Nest
 		, IMatchQuery where T : class
 	{
 		protected virtual string MatchQueryType { get { return null; } }
-		private IMatchQuery Self => this;
 		bool IQuery.Conditionless => MatchQuery.IsConditionless(this);
 		string IMatchQuery.Type { get { return MatchQueryType; } }
 		string IMatchQuery.Query { get; set; }
@@ -98,88 +97,32 @@ namespace Nest
 		bool? IMatchQuery.Lenient { get; set; }
 		Operator? IMatchQuery.Operator { get; set; }
 
-		public MatchQueryDescriptor<T> Query(string query)
-		{
-			Self.Query = query;
-			return this;
-		}
+		public MatchQueryDescriptor<T> Query(string query) => Assign(a => a.Query = query);
+
+		public MatchQueryDescriptor<T> Lenient(bool lenient = true) => Assign(a => a.Lenient = lenient);
+
+		public MatchQueryDescriptor<T> Analyzer(string analyzer) => Assign(a => a.Analyzer = analyzer);
+
+		public MatchQueryDescriptor<T> Fuzziness(double ratio) => Assign(a => a.Fuzziness = Nest.Fuzziness.Ratio(ratio));
+
+		public MatchQueryDescriptor<T> Fuzziness() => Assign(a => a.Fuzziness = Nest.Fuzziness.Auto);
+
+		public MatchQueryDescriptor<T> Fuzziness(int editDistance) => Assign(a => a.Fuzziness = Nest.Fuzziness.EditDistance(editDistance));
+
+		public MatchQueryDescriptor<T> FuzzyTranspositions(bool fuzzyTranspositions = true) => Assign(a => a.FuzzyTranspositions = fuzzyTranspositions);
+
+		public MatchQueryDescriptor<T> CutoffFrequency(double cutoffFrequency) => Assign(a => a.CutoffFrequency = cutoffFrequency);
+
+		public MatchQueryDescriptor<T> Rewrite(RewriteMultiTerm rewrite) => Assign(a => a.Rewrite = rewrite);
+
+		public MatchQueryDescriptor<T> PrefixLength(int prefixLength) => Assign(a => a.PrefixLength = prefixLength);
+
+		public MatchQueryDescriptor<T> MaxExpansions(int maxExpansions) => Assign(a => a.MaxExpansions = maxExpansions);
+		
+		public MatchQueryDescriptor<T> Slop(int slop) => Assign(a => a.Slop = slop);
+		
+		public MatchQueryDescriptor<T> MinimumShouldMatch(string minimumShouldMatch) => Assign(a => a.MinimumShouldMatch = minimumShouldMatch);
 	
-		public MatchQueryDescriptor<T> Lenient(bool lenient = true)
-		{
-			Self.Lenient = lenient;
-			return this;
-		}
-		
-		public MatchQueryDescriptor<T> Analyzer(string analyzer)
-		{
-			Self.Analyzer = analyzer;
-			return this;
-		}
-
-		public MatchQueryDescriptor<T> Fuzziness(double ratio)
-		{
-			Self.Fuzziness = Nest.Fuzziness.Ratio(ratio);
-			return this;
-		}
-
-		public MatchQueryDescriptor<T> Fuzziness()
-		{
-			Self.Fuzziness = Nest.Fuzziness.Auto;
-			return this;
-		}
-
-		public MatchQueryDescriptor<T> Fuzziness(int editDistance)
-		{
-			Self.Fuzziness = Nest.Fuzziness.EditDistance(editDistance);
-			return this;
-		}
-
-		public MatchQueryDescriptor<T> FuzzyTranspositions(bool fuzzyTranspositions = true)
-		{
-			Self.FuzzyTranspositions = fuzzyTranspositions;
-			return this;
-		}
-
-		public MatchQueryDescriptor<T> CutoffFrequency(double cutoffFrequency)
-		{
-			Self.CutoffFrequency = cutoffFrequency;
-			return this;
-		}
-
-		public MatchQueryDescriptor<T> Rewrite(RewriteMultiTerm rewrite)
-		{
-			Self.Rewrite = rewrite;
-			return this;
-		}
-
-		public MatchQueryDescriptor<T> PrefixLength(int prefixLength)
-		{
-			Self.PrefixLength = prefixLength;
-			return this;
-		}
-		
-		public MatchQueryDescriptor<T> MaxExpansions(int maxExpansions)
-		{
-			Self.MaxExpansions = maxExpansions;
-			return this;
-		}
-		
-		public MatchQueryDescriptor<T> Slop(int slop)
-		{
-			Self.Slop = slop;
-			return this;
-		}
-		
-		public MatchQueryDescriptor<T> MinimumShouldMatch(string minimumShouldMatch)
-		{
-			Self.MinimumShouldMatch = minimumShouldMatch;
-			return this;
-		}
-	
-		public MatchQueryDescriptor<T> Operator(Operator op)
-		{
-			Self.Operator = op;
-			return this;
-		}
+		public MatchQueryDescriptor<T> Operator(Operator op) => Assign(a => a.Operator = op);
 	}
 }
