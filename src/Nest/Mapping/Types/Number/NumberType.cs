@@ -35,6 +35,7 @@ namespace Nest
 	{
 		public NumberType() : base(NumberTypeName.Double.GetStringValue()) { }
 		public NumberType(NumberTypeName typeName) : base(typeName.GetStringValue()) { }
+		protected NumberType(string typeName) : base(typeName) { }
 
 		public NonStringIndexOption Index { get; set; }
 		public double? Boost { get; set; }

@@ -14,7 +14,7 @@ namespace Nest
 	{
 		FieldName IElasticType.Name { get; set; }
 		public TDescriptor Name(FieldName name) => Assign(a => a.Name = name);
-		public TDescriptor Name(Expression<Func<TDescriptor, object>> objectPath) => Assign(a => a.Name = objectPath);
+		public TDescriptor Name(Expression<Func<T, object>> objectPath) => Assign(a => a.Name = objectPath);
 
 		TypeName IElasticType.Type { get; set; }
 

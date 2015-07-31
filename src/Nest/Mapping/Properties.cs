@@ -8,10 +8,11 @@ namespace Nest
 	{
 		private readonly IConnectionSettingsValues _connectionSettings;
 		
+		internal IList<string> _Deletes = new List<string>();
+
 		[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]
 		public IDictionary<FieldName, IElasticType> Properties { get; private set; }
 
-		internal IList<string> _Deletes = new List<string>();
 
 		public PropertiesDescriptor()
 		{
@@ -20,21 +21,21 @@ namespace Nest
 		
 		public PropertiesDescriptor(IConnectionSettingsValues connectionSettings) : this()
 		{
-			this._connectionSettings = connectionSettings;
+			_connectionSettings = connectionSettings;
 		}
 
 		public PropertiesDescriptor<T> Remove(string name)
 		{
-			this._Deletes.Add(name);
+			_Deletes.Add(name);
 			return this;
 		}
 
-		private PropertiesDescriptor<T> AddProperty<TDescriptor, TInterface>(Func<TDescriptor, TDescriptor> selector)
+		private PropertiesDescriptor<T> SetProperty<TDescriptor, TInterface>(Func<TDescriptor, TInterface> selector)
 			where TDescriptor : class, TInterface
 			where TInterface : class, IElasticType
 		{
 			selector.ThrowIfNull(nameof(selector));
-			var type = selector(Activator.CreateInstance<TDescriptor>()) as TInterface;
+			var type = selector(Activator.CreateInstance<TDescriptor>());
 			var typeName = typeof(TInterface).Name;
 			if (type == null || type.Name.IsConditionless())
 				throw new ArgumentException($"Could not get field name for {typeName} mapping");
@@ -42,58 +43,17 @@ namespace Nest
 			return this;
 		}
 
-		public PropertiesDescriptor<T> String(Func<StringTypeDescriptor<T>, StringTypeDescriptor<T>> selector)
-		{
-			selector.ThrowIfNull(nameof(selector));
-			var d = selector(new StringTypeDescriptor<T>());
-			if (d == null || d._Mapping.Name.IsConditionless())
-				throw new ArgumentException("Could not get field name for string mapping");
-			this.Properties[d._Mapping.Name] = d._Mapping;
-			return this;
-		}
+		public PropertiesDescriptor<T> String(Func<StringTypeDescriptor<T>, IStringType> selector) => SetProperty(selector);
 
-		public PropertiesDescriptor<T> Number(Func<NumberTypeDescriptor<T>, NumberTypeDescriptor<T>> selector) =>
-			AddProperty<NumberTypeDescriptor<T>, INumberType>(selector);
+		public PropertiesDescriptor<T> Number(Func<NumberTypeDescriptor<T>, INumberType> selector) => SetProperty(selector);
 
-		public PropertiesDescriptor<T> Date(Func<DateTypeDescriptor<T>, DateTypeDescriptor<T>> selector)
-		{
-			selector.ThrowIfNull(nameof(selector));
-			var d = selector(new DateTypeDescriptor<T>());
-			if (d == null || d._Mapping.Name.IsConditionless())
-				throw new Exception("Could not get field name for date mapping");
-			this.Properties[d._Mapping.Name] = d._Mapping;
-			return this;
-		}
+		public PropertiesDescriptor<T> Date(Func<DateTypeDescriptor<T>, IDateType> selector) => SetProperty(selector);
 
-		public PropertiesDescriptor<T> Boolean(Func<BooleanTypeDescriptor<T>, BooleanTypeDescriptor<T>> selector)
-		{
-			selector.ThrowIfNull(nameof(selector));
-			var d = selector(new BooleanTypeDescriptor<T>());
-			if (d == null || d._Mapping.Name.IsConditionless())
-				throw new Exception("Could not get field name for boolean mapping");
-			this.Properties[d._Mapping.Name] = d._Mapping;
-			return this;
-		}
+		public PropertiesDescriptor<T> Boolean(Func<BooleanTypeDescriptor<T>, IBooleanType> selector) => SetProperty(selector);
 
-		public PropertiesDescriptor<T> Binary(Func<BinaryTypeDescriptor<T>, BinaryTypeDescriptor<T>> selector)
-		{
-			selector.ThrowIfNull(nameof(selector));
-			var d = selector(new BinaryTypeDescriptor<T>());
-			if (d == null || d._Mapping.Name.IsConditionless())
-				throw new Exception("Could not get field name for binary mapping");
-			this.Properties[d._Mapping.Name] = d._Mapping;
-			return this;
-		}
+		public PropertiesDescriptor<T> Binary(Func<BinaryTypeDescriptor<T>, IBinaryType> selector) => SetProperty(selector);
 
-		public PropertiesDescriptor<T> Attachment(Func<AttachmentTypeDescriptor<T>, AttachmentTypeDescriptor<T>> selector)
-		{
-			selector.ThrowIfNull(nameof(selector));
-			var d = selector(new AttachmentTypeDescriptor<T>());
-			if (d == null || d._Mapping.Name.IsConditionless())
-				throw new Exception("Could not get field name for attachment mapping");
-			this.Properties[d._Mapping.Name] = d._Mapping;
-			return this;
-		}
+		public PropertiesDescriptor<T> Attachment(Func<AttachmentTypeDescriptor<T>, IAttachmentType> selector) => SetProperty(selector);
 
 		public PropertiesDescriptor<T> Object<TChild>(Func<ObjectTypeDescriptor<T, TChild>, ObjectTypeDescriptor<T, TChild>> selector)
 			where TChild : class

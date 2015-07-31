@@ -17,7 +17,7 @@ namespace Nest
 			var d = selector(new StringTypeDescriptor<T>());
 			if (d == null)
 				throw new Exception("Could not get string mapping");
-			return d._Mapping;
+			return d;
 		}
 
 		public IElasticType Number(Func<NumberTypeDescriptor<T>, NumberTypeDescriptor<T>> selector)
@@ -35,7 +35,7 @@ namespace Nest
 			var d = selector(new DateTypeDescriptor<T>());
 			if (d == null)
 				throw new Exception("Could not get date mapping");
-			return d._Mapping;
+			return d;
 		}
 
 		public IElasticType Boolean(Func<BooleanTypeDescriptor<T>, BooleanTypeDescriptor<T>> selector)
@@ -44,7 +44,7 @@ namespace Nest
 			var d = selector(new BooleanTypeDescriptor<T>());
 			if (d == null)
 				throw new Exception("Could not get boolean mapping");
-			return d._Mapping;
+			return d;
 		}
 
 		public IElasticType Binary(Func<BinaryTypeDescriptor<T>, BinaryTypeDescriptor<T>> selector)
@@ -53,7 +53,7 @@ namespace Nest
 			var d = selector(new BinaryTypeDescriptor<T>());
 			if (d == null)
 				throw new Exception("Could not get binary mapping");
-			return d._Mapping;
+			return d;
 		}
 		public IElasticType Attachment(Func<AttachmentTypeDescriptor<T>, AttachmentTypeDescriptor<T>> selector)
 		{
@@ -61,7 +61,7 @@ namespace Nest
 			var d = selector(new AttachmentTypeDescriptor<T>());
 			if (d == null)
 				throw new Exception("Could not get attachment mapping");
-			return d._Mapping;
+			return d;
 		}
 
 		public IElasticType Object<TChild>(Func<ObjectTypeDescriptor<T, TChild>, ObjectTypeDescriptor<T, TChild>> selector)
