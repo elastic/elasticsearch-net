@@ -135,7 +135,7 @@ namespace Nest
 			var d = selector(new Murmur3HashTypeDescriptor<T>());
 			if (d == null)
 				throw new Exception("Could not get murmur hash mapping");
-			return d._Mapping;
+			return d;
 		}
 	}
 }

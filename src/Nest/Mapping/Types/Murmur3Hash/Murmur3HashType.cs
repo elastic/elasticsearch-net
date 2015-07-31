@@ -9,7 +9,6 @@ namespace Nest
 {
 	public interface IMurmur3HashType : IElasticType
 	{
-
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
@@ -18,20 +17,9 @@ namespace Nest
 		public Murmur3HashType() : base("murmur3") { }
 	}
 
-	public class Murmur3HashTypeDescriptor<T> where T : class
+	public class Murmur3HashTypeDescriptor<T> 
+		: TypeDescriptorBase<Murmur3HashTypeDescriptor<T>, IMurmur3HashType, T>, IMurmur3HashType
+		where T : class
 	{
-		internal Murmur3HashType _Mapping = new Murmur3HashType();
-
-		public Murmur3HashTypeDescriptor<T> Name(string name)
-		{
-			this._Mapping.Name = name;
-			return this;
-		}
-
-		public Murmur3HashTypeDescriptor<T> Name(Expression<Func<T, object>> objectPath)
-		{
-			this._Mapping.Name = objectPath;
-			return this;
-		}
 	}
 }

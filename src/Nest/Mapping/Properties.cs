@@ -104,14 +104,6 @@ namespace Nest
 			return this;
 		}
 
-		public PropertiesDescriptor<T> Murmur3Hash(Func<Murmur3HashTypeDescriptor<T>, Murmur3HashTypeDescriptor<T>> selector)
-		{
-			selector.ThrowIfNull(nameof(selector));
-			var d = selector(new Murmur3HashTypeDescriptor<T>());
-			if (d == null || d._Mapping.Name.IsConditionless())
-				throw new Exception("Could not get field name for mumur hash mapping");
-			this.Properties.Add(d._Mapping.Name, d._Mapping);
-			return this;
-		}
+		public PropertiesDescriptor<T> Murmur3Hash(Func<Murmur3HashTypeDescriptor<T>, IMurmur3HashType> selector) => SetProperty(selector);
 	}
 }
