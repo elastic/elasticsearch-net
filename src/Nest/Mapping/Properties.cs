@@ -77,15 +77,7 @@ namespace Nest
 			return this;
 		}
 
-		public PropertiesDescriptor<T> Ip(Func<IpTypeDescriptor<T>, IpTypeDescriptor<T>> selector)
-		{
-			selector.ThrowIfNull(nameof(selector));
-			var d = selector(new IpTypeDescriptor<T>());
-			if (d == null || d._Mapping.Name.IsConditionless())
-				throw new Exception("Could not get field name for IP mapping");
-			this.Properties[d._Mapping.Name] = d._Mapping;
-			return this;
-		}
+		public PropertiesDescriptor<T> Ip(Func<IpTypeDescriptor<T>, IIpType> selector) => SetProperty(selector);
 
 		public PropertiesDescriptor<T> GeoPoint(Func<GeoPointTypeDescriptor<T>, GeoPointTypeDescriptor<T>> selector)
 		{

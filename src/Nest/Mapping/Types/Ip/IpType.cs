@@ -8,7 +8,20 @@ namespace Nest
 {
 	public interface IIpType : IElasticType
 	{
+		[JsonProperty("index")]
+		NonStringIndexOption? Index { get; set; }
 
+		[JsonProperty("precision_step")]
+		int? PrecisionStep { get; set; }
+
+		[JsonProperty("boost")]
+		double? Boost { get; set; }
+
+		[JsonProperty("null_value")]
+		string NullValue { get; set; }
+
+		[JsonProperty("include_in_all")]
+		bool? IncludeInAll { get; set; }
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
@@ -16,76 +29,31 @@ namespace Nest
 	{
 		public IpType() : base("ip") { }
 
-		[JsonProperty("index"), JsonConverter(typeof(YesNoBoolConverter))]
-		public bool? Index { get; set; }
-
-		[JsonProperty("precision_step")]
-		public int? PrecisionStep { get; set; }
-
-		[JsonProperty("boost")]
 		public double? Boost { get; set; }
-
-		[JsonProperty("null_value")]
-		public string NullValue { get; set; }
-
-		[JsonProperty("include_in_all")]
 		public bool? IncludeInAll { get; set; }
+		public NonStringIndexOption? Index { get; set; }
+		public string NullValue { get; set; }
+		public int? PrecisionStep { get; set; }
 	}
+
 	public class IpTypeDescriptor<T>
+		: TypeDescriptorBase<IpTypeDescriptor<T>, IIpType, T>, IIpType
+		where T : class
 	{
-		internal IpType _Mapping = new IpType();
+		NonStringIndexOption? IIpType.Index { get; set; }
+		int? IIpType.PrecisionStep { get; set; }
+		double? IIpType.Boost { get; set; }
+		string IIpType.NullValue { get; set; }
+		bool? IIpType.IncludeInAll { get; set; }
 
-		public IpTypeDescriptor<T> Name(string name)
-		{
-			this._Mapping.Name = name;
-			return this;
-		}
-		public IpTypeDescriptor<T> Name(Expression<Func<T, object>> objectPath)
-		{
-			this._Mapping.Name = objectPath;
-			return this;
-		}
+		public IpTypeDescriptor<T> Index(NonStringIndexOption? index) => Assign(a => a.Index = index);
 
-		public IpTypeDescriptor<T> IndexName(string indexName)
-		{
-			this._Mapping.IndexName = indexName;
-			return this;
-		}
-		public IpTypeDescriptor<T> NoIndex()
-		{
-			this._Mapping.Index = false;
-			return this;
-		}
-		public IpTypeDescriptor<T> Store(bool store = true)
-		{
-			this._Mapping.Store = store;
-			return this;
-		}
+		public IpTypeDescriptor<T> Boost(double boost) => Assign(a => a.Boost = boost);
 
-		
-		public IpTypeDescriptor<T> Boost(double boost)
-		{
-			this._Mapping.Boost = boost;
-			return this;
-		}
-		public IpTypeDescriptor<T> NullValue(string nullValue)
-		{
-			this._Mapping.NullValue = nullValue;
-			return this;
-		}
+		public IpTypeDescriptor<T> NullValue(string nullValue) => Assign(a => a.NullValue = nullValue);
 
-		public IpTypeDescriptor<T> PrecisionStep(int precisionStep)
-		{
-			this._Mapping.PrecisionStep = precisionStep;
-			return this;
-		}
+		public IpTypeDescriptor<T> PrecisionStep(int precisionStep) => Assign(a => a.PrecisionStep = precisionStep);
 
-		public IpTypeDescriptor<T> IncludeInAll(bool includeInAll = true)
-		{
-			this._Mapping.IncludeInAll = includeInAll;
-			return this;
-		}
-		
-
+		public IpTypeDescriptor<T> IncludeInAll(bool includeInAll = true) => Assign(a => a.IncludeInAll = includeInAll);
 	}
 }

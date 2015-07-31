@@ -90,7 +90,7 @@ namespace Nest
 			var d = selector(new IpTypeDescriptor<T>());
 			if (d == null)
 				throw new Exception("Could not get IP mapping");
-			return d._Mapping;
+			return d;
 		}
 
 		public IElasticType GeoPoint(Func<GeoPointTypeDescriptor<T>, GeoPointTypeDescriptor<T>> selector)
