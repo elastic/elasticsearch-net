@@ -79,25 +79,10 @@ namespace Nest
 
 		public PropertiesDescriptor<T> Ip(Func<IpTypeDescriptor<T>, IIpType> selector) => SetProperty(selector);
 
-		public PropertiesDescriptor<T> GeoPoint(Func<GeoPointTypeDescriptor<T>, GeoPointTypeDescriptor<T>> selector)
-		{
-			selector.ThrowIfNull(nameof(selector));
-			var d = selector(new GeoPointTypeDescriptor<T>());
-			if (d == null || d._Mapping.Name.IsConditionless())
-				throw new Exception("Could not get field name for geo point mapping");
-			this.Properties[d._Mapping.Name] = d._Mapping;
-			return this;
-		}
+		public PropertiesDescriptor<T> GeoPoint(Func<GeoPointTypeDescriptor<T>, IGeoPointType> selector) => SetProperty(selector);
 
-		public PropertiesDescriptor<T> GeoShape(Func<GeoShapeTypeDescriptor<T>, GeoShapeTypeDescriptor<T>> selector)
-		{
-			selector.ThrowIfNull(nameof(selector));
-			var d = selector(new GeoShapeTypeDescriptor<T>());
-			if (d == null || d._Mapping.Name.IsConditionless())
-				throw new Exception("Could not get field name for geo shape mapping");
-			this.Properties[d._Mapping.Name] = d._Mapping;
-			return this;
-		}
+		public PropertiesDescriptor<T> GeoShape(Func<GeoShapeTypeDescriptor<T>, GeoShapeTypeDescriptor<T>> selector) => SetProperty(selector);
+
 		public PropertiesDescriptor<T> Generic(Func<GenericMappingDescriptor<T>, GenericMappingDescriptor<T>> selector)
 		{
 			selector.ThrowIfNull(nameof(selector));

@@ -99,7 +99,7 @@ namespace Nest
 			var d = selector(new GeoPointTypeDescriptor<T>());
 			if (d == null)
 				throw new Exception("Could not get geo point mapping");
-			return d._Mapping;
+			return d;
 		}
 
 		public IElasticType GeoShape(Func<GeoShapeTypeDescriptor<T>, GeoShapeTypeDescriptor<T>> selector)
@@ -108,7 +108,7 @@ namespace Nest
 			var d = selector(new GeoShapeTypeDescriptor<T>());
 			if (d == null)
 				throw new Exception("Could not get geo shape mapping");
-			return d._Mapping;
+			return d;
 		}
 
 		public IElasticType Generic(Func<GenericMappingDescriptor<T>, GenericMappingDescriptor<T>> selector)

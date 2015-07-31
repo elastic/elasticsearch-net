@@ -5,86 +5,96 @@ using System.Linq.Expressions;
 
 namespace Nest
 {
+	[JsonObject(MemberSerialization.OptIn)]
 	public interface IGeoPointType : IElasticType
 	{
+		[JsonProperty("lat_lon")]
+		bool? LatLon { get; set; }
 
+		[JsonProperty("geohash")]
+		bool? GeoHash { get; set; }
+
+		[JsonProperty("geohash_precision")]
+		int? GeoHashPrecision { get; set; }
+
+		[JsonProperty("geohash_prefix")]
+        bool? GeoHashPrefix { get; set; }
+
+		[JsonProperty("validate")]
+		bool? Validate { get; set; }
+
+		[JsonProperty("validate_lat")]
+		bool? ValidateLatitude { get; set; }
+
+		[JsonProperty("validate_lon")]
+		bool? ValidateLongitude { get; set; }
+
+		[JsonProperty("normalize")]
+		bool? Normalize { get; set; }
+
+		[JsonProperty("normalize_lat")]
+		bool? NormalizeLatitude { get; set; }
+
+		[JsonProperty("normalize_lon")]
+		bool? NormalizeLongitude { get; set; }
+
+		[JsonProperty("precision_step")]
+		int? PrecisionStep { get; set; }
 	}
 
-	[JsonObject(MemberSerialization.OptIn)]
 	public class GeoPointType : ElasticType, IGeoPointType
 	{
 		public GeoPointType() : base("geo_point") { }
 
-		[JsonProperty("lat_lon")]
-		public bool? IndexLatLon { get; set; }
-
-		[JsonProperty("geohash")]
-		public bool? IndexGeoHash { get; set; }
-
-        [JsonProperty("geohash_prefix")]
+		public bool? LatLon { get; set; }
+		public bool? GeoHash { get; set; }
         public bool? GeoHashPrefix { get; set; }
-
-		[JsonProperty("geohash_precision")]
 		public int? GeoHashPrecision { get; set; }
+		public bool? Validate { get; set; }
+		public bool? ValidateLatitude { get; set; }
+		public bool? ValidateLongitude { get; set; }
+		public bool? Normalize { get; set; }
+		public bool? NormalizeLatitude { get; set; }
+		public bool? NormalizeLongitude { get; set; }
+		public int? PrecisionStep { get; set; }
 	}
 
 	public class GeoPointTypeDescriptor<T>
+		: TypeDescriptorBase<GeoPointTypeDescriptor<T>, IGeoPointType, T>, IGeoPointType
+		where T : class
 	{
-		internal GeoPointType _Mapping = new GeoPointType();
+		bool? IGeoPointType.LatLon { get; set; }
+		bool? IGeoPointType.GeoHash { get; set; }
+		int? IGeoPointType.GeoHashPrecision { get; set; }
+		bool? IGeoPointType.GeoHashPrefix { get; set; }
+		bool? IGeoPointType.Validate { get; set; }
+		bool? IGeoPointType.ValidateLatitude { get; set; }
+		bool? IGeoPointType.ValidateLongitude { get; set; }
+		bool? IGeoPointType.Normalize { get; set; }
+		bool? IGeoPointType.NormalizeLatitude { get; set; }
+		bool? IGeoPointType.NormalizeLongitude { get; set; }
+		int? IGeoPointType.PrecisionStep { get; set; }
 
-		public GeoPointTypeDescriptor<T> Name(string name)
-		{
-			this._Mapping.Name = name;
-			return this;
-		}
-		public GeoPointTypeDescriptor<T> Name(Expression<Func<T, object>> objectPath)
-		{
-			this._Mapping.Name = objectPath;
-			return this;
-		}
+		public GeoPointTypeDescriptor<T> LatLon(bool latLon = true) => Assign(a => a.LatLon = latLon);
 
-		public GeoPointTypeDescriptor<T> IndexLatLon(bool indexLatLon = true)
-		{
-			this._Mapping.IndexLatLon = indexLatLon;
-			return this;
-		}
+		public GeoPointTypeDescriptor<T> GeoHash(bool geoHash = true) => Assign(a => a.GeoHash = geoHash);
 
-		public GeoPointTypeDescriptor<T> IndexGeoHash(bool indexGeoHash = true)
-		{
-			this._Mapping.IndexGeoHash = indexGeoHash;
-			return this;
-		}
+		public GeoPointTypeDescriptor<T> GeoHashPrecision(int geoHashPrecision) => Assign(a => a.GeoHashPrecision = geoHashPrecision);
 
-		public GeoPointTypeDescriptor<T> GeoHashPrecision(int geoHashPrecision)
-		{
-			this._Mapping.GeoHashPrecision = geoHashPrecision;
-			return this;
-		}
+		public GeoPointTypeDescriptor<T> GeoHashPrefix(bool geoHashPrefix = true) => Assign(a => a.GeoHashPrefix = geoHashPrefix);
 
-        public GeoPointTypeDescriptor<T> GeoHashPrefix(bool geoHashPrefix = true)
-        {
-            this._Mapping.GeoHashPrefix = geoHashPrefix;
-            return this;
-        }
+		public GeoPointTypeDescriptor<T> Validate(bool validate) => Assign(a => a.Validate = validate);
 
-		//public GeoPointTypeDescriptor<T> FieldData(Func<FieldDataNonStringMappingDescriptor, FieldDataNonStringMappingDescriptor> fieldDataSelector)
-		//{
-		//	fieldDataSelector.ThrowIfNull("fieldDataSelector");
-		//	var selector = fieldDataSelector(new FieldDataNonStringMappingDescriptor());
-		//	this._Mapping.FieldData = selector.FieldData;
-		//	return this;
-		//}
+		public GeoPointTypeDescriptor<T> ValidateLongitude(bool validateLatitude) => Assign(a => a.ValidateLatitude = validateLatitude);
 
-		//public GeoPointTypeDescriptor<T> FieldData(FieldDataNonStringMapping fieldData)
-		//{
-		//	this._Mapping.FieldData = fieldData;
-		//	return this;
-		//}
+		public GeoPointTypeDescriptor<T> ValidateLatitude(bool validateLongitude) => Assign(a => a.ValidateLongitude = validateLongitude);
 
-		public GeoPointTypeDescriptor<T> DocValues(bool docValues = true)
-		{
-			this._Mapping.DocValues = docValues;
-			return this;
-		}
+		public GeoPointTypeDescriptor<T> Normalize(bool normalize) => Assign(a => a.Normalize = normalize);
+
+		public GeoPointTypeDescriptor<T> NormalizeLatitude(bool normalizeLatitude) => Assign(a => a.NormalizeLatitude = normalizeLatitude);
+
+		public GeoPointTypeDescriptor<T> NormalizeLongitude(bool normalizeLongitude) => Assign(a => a.NormalizeLongitude = normalizeLongitude);
+
+		public GeoPointTypeDescriptor<T> PrecisionStep(int precisionStep) => Assign(a => a.PrecisionStep = precisionStep);
 	}
 }
