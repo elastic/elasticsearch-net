@@ -6,9 +6,29 @@ using System.Linq.Expressions;
 
 namespace Nest
 {
+	[JsonObject(MemberSerialization.OptIn)]
 	public interface ICompletionType : IElasticType
 	{
+		[JsonProperty("search_analyzer")]
+		string SearchAnalyzer { get; set; }
 
+		[JsonProperty("analyzer")]
+		string Analyzer { get; set; }
+
+		[JsonProperty("payloads")]
+		bool? Payloads { get; set; }
+
+		[JsonProperty("preserve_separators")]
+		bool? PreserveSeparators { get; set; }
+
+		[JsonProperty("preserve_position_increments")]
+		bool? PreservePositionIncrements { get; set; }
+
+		[JsonProperty("max_input_length")]
+		int? MaxInputLength { get; set; }
+
+		[JsonProperty("context")]
+		IDictionary<string, ISuggestContext> Context { get ;set;}
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
@@ -16,97 +36,55 @@ namespace Nest
 	{
 		public CompletionType() : base("completion") { }
 
-		[JsonProperty("search_analyzer")]
 		public string SearchAnalyzer { get; set; }
-
-		[JsonProperty("index_analyzer")]
-		public string IndexAnalyzer { get; set; }
-
-		[JsonProperty("payloads")]
+		public string Analyzer { get; set; }
 		public bool? Payloads { get; set; }
-
-		[JsonProperty("preserve_separators")]
 		public bool? PreserveSeparators { get; set; }
-
-		[JsonProperty("preserve_position_increments")]
 		public bool? PreservePositionIncrements { get; set; }
-
-		[JsonProperty("max_input_len")]
 		public int? MaxInputLength { get; set; }
-
-		[JsonProperty("context")]
 		public IDictionary<string, ISuggestContext> Context { get ;set;}
 	}
 
     public class CompletionTypeDescriptor<T>
+		: TypeDescriptorBase<CompletionTypeDescriptor<T>, ICompletionType, T>, ICompletionType
 		where T : class
     {
-        internal CompletionType _Mapping = new CompletionType();
+		string ICompletionType.SearchAnalyzer { get; set; }
+		string ICompletionType.Analyzer { get; set; }
+		bool? ICompletionType.Payloads { get; set; }
+		bool? ICompletionType.PreserveSeparators { get; set; }
+		bool? ICompletionType.PreservePositionIncrements { get; set; }
+		int? ICompletionType.MaxInputLength { get; set; }
+		IDictionary<string, ISuggestContext> ICompletionType.Context { get; set; }
 
-        public CompletionTypeDescriptor<T> Name(string name)
-        {
-            this._Mapping.Name = name;
-            return this;
-        }
+		public CompletionTypeDescriptor<T> SearchAnalyzer(string searchAnalyzer) => 
+			Assign(a => a.SearchAnalyzer = searchAnalyzer);
 
-        public CompletionTypeDescriptor<T> Name(Expression<Func<T, object>> objectPath)
-        {
-            this._Mapping.Name = objectPath;
-            return this;
-        }
+		public CompletionTypeDescriptor<T> Analyzer(string analyzer) => Assign(a => a.Analyzer = analyzer);
 
-        public CompletionTypeDescriptor<T> SearchAnalyzer(string name)
-        {
-            this._Mapping.SearchAnalyzer = name;
-            return this;
-        }
+		public CompletionTypeDescriptor<T> Payloads(bool payloads = true) => Assign(a => a.Payloads = payloads);
 
-        public CompletionTypeDescriptor<T> IndexAnalyzer(string name)
-        {
-            this._Mapping.IndexAnalyzer = name;
-            return this;
-        }
+		public CompletionTypeDescriptor<T> PreserveSeparators(bool preserveSeparators = true) => 
+			Assign(a => a.PreserveSeparators = preserveSeparators);
 
-        public CompletionTypeDescriptor<T> Payloads(bool payloads = true)
-        {
-            this._Mapping.Payloads = payloads;
-            return this;
-        }
+		public CompletionTypeDescriptor<T> PreservePositionIncrements(bool preservePositionIncrements = true) => 
+			Assign(a => a.PreservePositionIncrements = preservePositionIncrements);
 
-        public CompletionTypeDescriptor<T> PreserveSeparators(bool preserveSeparators = true)
-        {
-            this._Mapping.PreserveSeparators = preserveSeparators;
-            return this;
-        }
+		public CompletionTypeDescriptor<T> MaxInputLength(int maxInputLength) => Assign(a => a.MaxInputLength = maxInputLength);
 
-        public CompletionTypeDescriptor<T> PreservePositionIncrements(bool preservePositionIncrements = true)
-        {
-            this._Mapping.PreservePositionIncrements = preservePositionIncrements;
-            return this;
-        }
-
-        public CompletionTypeDescriptor<T> MaxInputLength(int maxInputLength)
-        {
-            this._Mapping.MaxInputLength = maxInputLength;
-            return this;
-        }
-
-		public CompletionTypeDescriptor<T> Context(Func<SuggestContextMappingDescriptor<T>, SuggestContextMappingDescriptor<T>> contextDescriptor)
+		public CompletionTypeDescriptor<T> Context(Func<SuggestContextMappingDescriptor<T>, SuggestContextMappingDescriptor<T>> contextDescriptor) => Assign(a =>
 		{
-			if (this._Mapping.Context == null)
-				this._Mapping.Context = new Dictionary<string, ISuggestContext>();
+			a.Context = a.Context ?? new Dictionary<string, ISuggestContext>();
 
 			var selector = contextDescriptor(new SuggestContextMappingDescriptor<T>());
-			
+
 			foreach (var context in selector._Contexts)
 			{
-				if (this._Mapping.Context.ContainsKey(context.Key))
-					this._Mapping.Context[context.Key] = context.Value;
+				if (a.Context.ContainsKey(context.Key))
+					a.Context[context.Key] = context.Value;
 				else
-					this._Mapping.Context.Add(context.Key, context.Value);
+					a.Context.Add(context.Key, context.Value);
 			}
-
-			return this;
-		}
+		});
     }
 }

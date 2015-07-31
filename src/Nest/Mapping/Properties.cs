@@ -116,15 +116,7 @@ namespace Nest
 			return this;
 		}
 
-        public PropertiesDescriptor<T> Completion(Func<CompletionTypeDescriptor<T>, CompletionTypeDescriptor<T>> selector)
-        {
-            selector.ThrowIfNull(nameof(selector));
-            var d = selector(new CompletionTypeDescriptor<T>());
-            if (d == null || d._Mapping.Name.IsConditionless())
-                throw new Exception("Could not get field name for completion mapping");
-            this.Properties.Add(d._Mapping.Name, d._Mapping);
-            return this;
-        }
+		public PropertiesDescriptor<T> Completion(Func<CompletionTypeDescriptor<T>, ICompletionType> selector) => SetProperty(selector);
 
 		public PropertiesDescriptor<T> Custom(IElasticType customMapping)
 		{

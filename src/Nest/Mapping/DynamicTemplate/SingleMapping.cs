@@ -126,7 +126,7 @@ namespace Nest
             var d = selector(new CompletionTypeDescriptor<T>());
             if (d == null)
                 throw new Exception("Could not get completion mapping");
-            return d._Mapping;
+			return d;
         }
 
 		public IElasticType Murmur3Hash(Func<Murmur3HashTypeDescriptor<T>, Murmur3HashTypeDescriptor<T>> selector)
