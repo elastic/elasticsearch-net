@@ -39,7 +39,7 @@ namespace Tests.ClientConcepts.LowLevel
 			/**
 			* Plotting these defaults looks as followed:
 			*
-			[timeout]
+			*[[timeout]]
 			*.Timeout plot
 			*image::timeoutplot.png[dead timeout]	
 			*
