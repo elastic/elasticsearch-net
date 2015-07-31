@@ -38,7 +38,9 @@ namespace Tests.ClientConcepts.LowLevel
 
 			/**
 			* Plotting these defaults looks as followed:
-			* image::dead-timeout.png[dead timeout]	
+			*
+			*.Timeout plot
+			* image::timeoutplot.png[dead timeout]	
 			*
 			* The goal here is that whenever a node is resurected and is found to still be offline we send it
 			* back to the doghouse for an every increasingly long period untill we hit a bounded maximum.
