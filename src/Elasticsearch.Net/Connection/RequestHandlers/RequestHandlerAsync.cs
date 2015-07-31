@@ -237,8 +237,8 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 				this.OptionallyCloseResponseStreamAndSetSuccess(requestState, r.Error, r.Response, t.Result);
 				if (r.Error != null && this._settings.ThrowOnElasticsearchServerExceptions)
 					throw new ElasticsearchServerException(r.Error);
-				if (r.Response.SuccessOrKnownError)
-					this._connectionPool.MarkAlive(requestState.CurrentNode);
+				//if (r.Response.SuccessOrKnownError)
+				//	this._connectionPool.MarkAlive(requestState.CurrentNode);
 				return r.Response;
 			});
 		}
@@ -261,7 +261,7 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 		{
 			var maxRetries = this._delegator.GetMaximumRetries(requestState.RequestConfiguration);
 
-			this._connectionPool.MarkDead(requestState.CurrentNode, this._settings.DeadTimeout, this._settings.MaxDeadTimeout);
+			//this._connectionPool.MarkDead(requestState.CurrentNode, this._settings.DeadTimeout, this._settings.MaxDeadTimeout);
 
 			this._delegator.SniffOnConnectionFailure(requestState);
 

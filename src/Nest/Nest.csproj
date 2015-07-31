@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Nest</RootNamespace>
     <AssemblyName>Nest</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -26,6 +26,7 @@
     <DocumentationFile>bin\Debug\Nest.XML</DocumentationFile>
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <NoWarn>1591,1572,1571,1573,1587,1570</NoWarn>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -37,6 +38,7 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <DocumentationFile>bin\Release\Nest.XML</DocumentationFile>
     <NoWarn>1591,1572,1571,1573,1587,1570</NoWarn>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug - Generator|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
@@ -49,6 +51,7 @@
     <CodeAnalysisRuleSet>BasicCorrectnessRules.ruleset</CodeAnalysisRuleSet>
     <WarningLevel>4</WarningLevel>
     <Optimize>false</Optimize>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
@@ -101,8 +104,8 @@
     <Compile Include="CommonAbstractions\SerializationBehavior\Generic\UnionConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\Resolvers\Converters\DateMathConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\Resolvers\Converters\TimeUnitExpressionConverter.cs" />
-    <Compile Include="CommonAbstractions\Union.cs" />
     <Compile Include="Aggregations\Bucket\DateHistogram\DateInterval.cs" />
+    <Compile Include="CommonAbstractions\Union.cs" />
     <Compile Include="CommonOptions\DateMath\DateMath.cs" />
     <Compile Include="CommonOptions\DateMath\DateMathExpression.cs" />
     <Compile Include="CommonOptions\DateMath\DateMathOperation.cs" />

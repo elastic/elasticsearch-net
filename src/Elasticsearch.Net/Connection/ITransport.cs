@@ -12,17 +12,8 @@ namespace Elasticsearch.Net.Connection
 		IConnectionConfigurationValues Settings { get; }
 		IElasticsearchSerializer Serializer { get; }
 		
-		ElasticsearchResponse<T> DoRequest<T>(
-			string method, 
-			string path, 
-			object data = null, 
-			IRequestParameters requestParameters = null);
-
-		Task<ElasticsearchResponse<T>> DoRequestAsync<T>(
-			string method, 
-			string path, 
-			object data = null, 
-			IRequestParameters requestParameters = null);
+		ElasticsearchResponse<T> DoRequest<T>(HttpMethod method, string path, PostData<object> data = null, IRequestParameters requestParameters = null); 
+		Task<ElasticsearchResponse<T>> DoRequestAsync<T>(HttpMethod method, string path, PostData<object> data = null, IRequestParameters requestParameters = null);
 	}
 
 }

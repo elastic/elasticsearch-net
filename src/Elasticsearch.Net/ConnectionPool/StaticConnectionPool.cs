@@ -24,10 +24,11 @@ namespace Elasticsearch.Net.ConnectionPool
 
 		public bool SniffedOnStartup { get; set; }
 
-		public StaticConnectionPool(
-			IEnumerable<Uri> uris, 
-			bool randomizeOnStartup = true, 
-			IDateTimeProvider dateTimeProvider = null)
+		public IReadOnlyCollection<Node> Nodes { get; }
+
+		public DateTime? LastUpdate { get; set; }
+
+		public StaticConnectionPool(IEnumerable<Uri> uris, bool randomizeOnStartup = true, IDateTimeProvider dateTimeProvider = null)
 		{
 			_random = new Random(1337);
 			_dateTimeProvider = dateTimeProvider ?? new DateTimeProvider();
@@ -42,7 +43,7 @@ namespace Elasticsearch.Net.ConnectionPool
 			UriLookup = NodeUris.ToDictionary(k=>k, v=> new EndpointState());
 		}
 
-		public virtual Uri GetNext(int? initialSeed, out int seed, out bool shouldPingHint)
+		public virtual Node GetNext(int? initialSeed, out int seed)
 		{
 			var count = NodeUris.Count;
 			if (initialSeed.HasValue)
@@ -53,7 +54,6 @@ namespace Elasticsearch.Net.ConnectionPool
 			var initialOffset = initialSeed ?? increment;
 			int i = initialOffset % count, attempts = 0;
 			seed = i;
-			shouldPingHint = false;
 			Uri uri = null;
 			do
 			{
@@ -64,11 +64,8 @@ namespace Elasticsearch.Net.ConnectionPool
 					var now = _dateTimeProvider.Now();
 					if (state.Date <= now)
 					{
-						if (state.Attemps != 0)
-							shouldPingHint = true;
-
 						state.Attemps = 0;
-						return uri;
+						return new Node(uri);
 					}
 					Interlocked.Increment(ref Current);
 				}
@@ -79,31 +76,7 @@ namespace Elasticsearch.Net.ConnectionPool
 			} while (attempts < count);
 
 			//could not find a suitable node retrying on node that has been dead longest.
-			return this.NodeUris[i]; 
-		}
-
-		public virtual void MarkDead(Uri uri, int? deadTimeout, int? maxDeadTimeout)
-		{	
-			EndpointState state = null;
-			if (!this.UriLookup.TryGetValue(uri, out state))
-				return;
-			lock(state)
-			{
-				state.Date = this._dateTimeProvider.DeadTime(uri, state.Attemps, deadTimeout, maxDeadTimeout);
-			}
-		}
-
-		public virtual void MarkAlive(Uri uri)
-		{
-			EndpointState state = null;
-			if (!this.UriLookup.TryGetValue(uri, out state))
-				return;
-			lock (state)
-			{
-				var aliveTime =this._dateTimeProvider.AliveTime(uri, state.Attemps); 
-				state.Date = aliveTime;
-				state.Attemps = 0;
-			}
+			return new Node(this.NodeUris[i]);
 		}
 
 		public virtual void UpdateNodeList(IList<Uri> newClusterState, Uri sniffNode = null)

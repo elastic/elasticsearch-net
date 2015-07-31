@@ -178,8 +178,8 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 			finally
 			{
 				//make sure we always call markalive on the uri if the connection was succesful
-				if (!seenError && aliveResponse)
-					this._connectionPool.MarkAlive(requestState.CurrentNode);
+				//if (!seenError && aliveResponse)
+					//this._connectionPool.MarkAlive(requestState.CurrentNode);
 			}
 			return this.RetryRequest(requestState);
 		}
@@ -189,7 +189,7 @@ namespace Elasticsearch.Net.Connection.RequestHandlers
 
 			var maxRetries = this._delegator.GetMaximumRetries(requestState.RequestConfiguration);
 
-			this._connectionPool.MarkDead(requestState.CurrentNode, this._settings.DeadTimeout, this._settings.MaxDeadTimeout);
+			//this._connectionPool.MarkDead(requestState.CurrentNode, this._settings.DeadTimeout, this._settings.MaxDeadTimeout);
 
 			try
 			{

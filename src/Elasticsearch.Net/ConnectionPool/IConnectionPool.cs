@@ -45,19 +45,8 @@ namespace Elasticsearch.Net.ConnectionPool
 		///  predictable manner even when called in a multithreaded context</param>
 		/// <param name="seed">The seed this call started on</param>
 		/// <returns></returns>
-		Uri GetNext(int? initialSeed, out int seed, out bool shouldPingHint);
+		Node GetNext(int? initialSeed, out int seed);
 
-		/// <summary>
-		/// Mark the specified Uri as dead
-		/// </summary>
-		void MarkDead(Uri uri, int? deadTimeout = null, int? maxDeadtimeout = null);
-
-		/// <summary>
-		/// Bring the specified uri back to life.
-		/// </summary>
-		/// <param name="uri"></param>
-		void MarkAlive(Uri uri);
-		
 		/// <summary>
 		/// Update the node list manually, usually done by ITransport when sniffing was needed.
 		/// </summary>

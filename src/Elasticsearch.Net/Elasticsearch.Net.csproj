@@ -68,8 +68,11 @@
     <Compile Include="Connection\Configuration\IRequestConfiguration.cs" />
     <Compile Include="Connection\Configuration\RequestConfiguration.cs" />
     <Compile Include="Connection\Configuration\RequestConfigurationDescriptor.cs" />
+    <Compile Include="Connection\ElasticsearchException.cs" />
     <Compile Include="Connection\HttpMethod.cs" />
     <Compile Include="Connection\ITransportDelegator.cs" />
+    <Compile Include="Connection\PipelineFailure.cs" />
+    <Compile Include="Connection\Node.cs" />
     <Compile Include="Connection\RequestHandlers\RequestHandler.cs" />
     <Compile Include="Connection\RequestHandlers\RequestHandlerAsync.cs" />
     <Compile Include="Connection\RequestHandlers\RequestHandlerBase.cs" />
@@ -146,6 +149,7 @@
     <None Include="paket.references" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Connection\Transport\" />
     <Folder Include="Extensions\NewFolder1\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

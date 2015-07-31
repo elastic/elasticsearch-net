@@ -38,44 +38,16 @@ namespace Elasticsearch.Net.ConnectionPool
 			}
 		}
 
-		public override Uri GetNext(int? initialSeed, out int seed, out bool shouldPingHint)
+		public override Node GetNext(int? initialSeed, out int seed)
 		{
 			try
 			{
 				this._readerWriter.EnterReadLock();
-				return base.GetNext(initialSeed, out seed, out shouldPingHint);
+				return base.GetNext(initialSeed, out seed);
 			}
 			finally
 			{
 				this._readerWriter.ExitReadLock();
-			}
-		}
-
-		public override void MarkAlive(Uri uri)
-		{
-			try
-			{
-				this._readerWriter.EnterReadLock();
-				base.MarkAlive(uri);
-			}
-			finally
-			{
-				this._readerWriter.ExitReadLock();
-				
-			}
-		}
-
-		public override void MarkDead(Uri uri, int? deadTimeout, int? maxDeadTimeout)
-		{
-			try
-			{
-				this._readerWriter.EnterReadLock();
-				base.MarkDead(uri, deadTimeout, maxDeadTimeout);
-			}
-			finally
-			{
-				this._readerWriter.ExitReadLock();
-				
 			}
 		}
 

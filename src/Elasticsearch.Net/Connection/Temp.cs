@@ -12,7 +12,6 @@ using System.IO;
 
 namespace Elasticsearch.Net.Connection
 {
-
 	public class NewTransport : ITransport
 	{
 		//TODO discuss which should be public
@@ -25,16 +24,14 @@ namespace Elasticsearch.Net.Connection
 
 		public NewTransport(
 			IConnectionConfigurationValues configurationValues,
-			IConnection connection,
-			IElasticsearchSerializer serializer,
+			IConnection connection = null,
+			IElasticsearchSerializer serializer = null,
 			IDateTimeProvider dateTimeProvider = null,
 			IMemoryStreamProvider memoryStreamProvider = null
 			)
 		{
 			configurationValues.ThrowIfNull(nameof(configurationValues));
 			configurationValues.ConnectionPool.ThrowIfNull(nameof(configurationValues.ConnectionPool));
-			connection.ThrowIfNull(nameof(connection));
-			serializer.ThrowIfNull(nameof(serializer));
 
 			this.Settings = configurationValues;
 			this.Connection = connection ?? new HttpConnection(configurationValues);
@@ -46,10 +43,9 @@ namespace Elasticsearch.Net.Connection
 
 		}
 
-
-		public ElasticsearchResponse<T> DoRequest<T>(HttpMethod method, string path, object data = null, IRequestParameters requestParameters = null)
+		public ElasticsearchResponse<T> DoRequest<T>(HttpMethod method, string path, PostData<object> data = null, IRequestParameters requestParameters = null)
 		{
-			using (var pipeline = new RequestPipeline<T>(this.Connection, this.Settings, this.DateTimeProvider))
+			using (var pipeline = new RequestPipeline<T>(this.Connection, this.Settings, this.DateTimeProvider, requestParameters))
 			{
 				if (!pipeline.FirstPoolUsage())
 					pipeline.OutOfDateClusterInformation();
@@ -71,7 +67,7 @@ namespace Elasticsearch.Net.Connection
 					if (success && (pipeline.Result?.Success).GetValueOrDefault(false))
 					{
 						pipeline.CurrentNode.IsAlive = true;
-						return pipeline.Result;
+						return pipeline.TypedResult;
 					}
 
 					pipeline.BadResponse();
@@ -80,9 +76,9 @@ namespace Elasticsearch.Net.Connection
 			}
 		}
 
-		public async Task<ElasticsearchResponse<T>> DoRequestAsync<T>(HttpMethod method, string path, object data = null, IRequestParameters requestParameters = null)
+		public async Task<ElasticsearchResponse<T>> DoRequestAsync<T>(HttpMethod method, string path, PostData<object> data = null, IRequestParameters requestParameters = null)
 		{
-			using (var pipeline = new RequestPipeline<T>(this.Connection, this.Settings, this.DateTimeProvider))
+			using (var pipeline = new RequestPipeline<T>(this.Connection, this.Settings, this.DateTimeProvider, requestParameters))
 			{
 				if (await pipeline.FirstPoolUsageAsync())
 					await pipeline.OutOfDateClusterInformationAsync();
@@ -104,7 +100,7 @@ namespace Elasticsearch.Net.Connection
 					if (success && (pipeline.Result?.Success).GetValueOrDefault(false))
 					{
 						pipeline.CurrentNode.IsAlive = true;
-						return pipeline.Result;
+						return pipeline.TypedResult;
 					}
 					pipeline.BadResponse();
 
@@ -114,49 +110,9 @@ namespace Elasticsearch.Net.Connection
 		}
 	}
 
-	public class Node
-	{
-		public Uri Uri { get; }
-		public bool NeedsPing { get; }
-		public bool IsAlive { get; set; }
-		public bool IsDead { get; set; }
-
-		public Uri CreatePath(string path) => new Uri(this.Uri, path).Purify();
-	}
-
-	public enum PipelineFailure
-	{
-		BadAuthentication,
-		BadResponse,
-		BadPing,
-		BadSniff,
-		RetryTimeout,
-		RetryMaximum,
-		Unexpected
-	}
-
-	//TODO make sure we attach as much information from this pipeline to unrecoverable exceptions
-	public class ElasticsearchException : Exception
-	{
-		public PipelineFailure Cause { get; }
-		public IElasticsearchResponse Response { get; }
-		public bool Recoverable => Cause == PipelineFailure.BadResponse || Cause == PipelineFailure.Unexpected || Cause == PipelineFailure.BadPing;
-
-		//TODO exception messages
-		public ElasticsearchException(PipelineFailure cause, Exception innerException) : base("", innerException)
-		{
-			this.Cause = cause;
-		}
-
-		public ElasticsearchException(PipelineFailure cause, IElasticsearchResponse response)
-		{
-			this.Cause = cause;
-			this.Response = response;
-		}
-	}
-
 	public class RequestPipeline<T> : IDisposable
 	{
+		public ElasticsearchResponse<T> TypedResult { get; private set; }
 		public ElasticsearchResponse<Stream> Result { get; private set; }
 		public IConnectionConfigurationValues Settings { get; }
 		public IConnection Connection { get; }
@@ -255,10 +211,9 @@ namespace Elasticsearch.Net.Connection
 			if (this.Retried >= this.MaxRetries) return false;
 
 			//TODO move this out of GetNext;
-			bool shouldPingHint;
-			var baseUri = this.ConnectionPool.GetNext(_nodeSeed, out _nodeSeed, out shouldPingHint);
+			var node = this.ConnectionPool.GetNext(_nodeSeed, out _nodeSeed);
 			//todo make connectionpool return Node
-			this.CurrentNode = new Node();
+			this.CurrentNode = node;
 			return true;
 		}
 
@@ -413,11 +368,11 @@ namespace Elasticsearch.Net.Connection
 			throw new ElasticsearchException(PipelineFailure.BadSniff, new AggregateException(exceptions));
 		}
 
-		public void CallElasticsearch(HttpMethod method, string path, object post = null, IRequestParameters requestParameters = null)
+		public void CallElasticsearch(HttpMethod method, string path, PostData<object> post = null, IRequestParameters requestParameters = null)
 		{
 			var config = requestParameters?.RequestConfiguration;
 			var uri = this.CurrentNode.CreatePath(path);
-			var data = PostData(post);
+			var data = post.ToByteArray(this.Settings);
 			this.Result = this.Call(PipelineFailure.BadResponse, () =>
 			{
 				switch (method)
@@ -435,11 +390,11 @@ namespace Elasticsearch.Net.Connection
 			});
 		}
 
-		public async Task CallElasticsearchAsync(HttpMethod method, string path, object post = null, IRequestParameters requestParameters = null)
+		public async Task CallElasticsearchAsync(HttpMethod method, string path, PostData<object> post = null, IRequestParameters requestParameters = null)
 		{
 			var config = requestParameters?.RequestConfiguration;
 			var uri = this.CurrentNode.CreatePath(path);
-			var data = PostData(post);
+			var data = post.ToByteArray(this.Settings);
 			this.Result = await this.CallAsync(PipelineFailure.BadResponse, () =>
 			{
 				switch (method)
@@ -457,27 +412,54 @@ namespace Elasticsearch.Net.Connection
 			});
 		}
 
-		protected byte[] PostData(object data)
+		internal ElasticsearchResponse<T> ReturnInvalidResponseOrThrow()
 		{
-			if (data == null) return null;
-
-			var bytes = data as byte[];
-			if (bytes != null) return bytes;
-
-			var s = data as string;
-			if (s != null) return s.Utf8Bytes();
-
-			var ss = data as IEnumerable<string>;
-			if (ss != null) return (string.Join("\n", ss) + "\n").Utf8Bytes();
-
-			var so = data as IEnumerable<object>;
-			var indent = this.Settings.UsesPrettyRequests ? SerializationFormatting.Indented : SerializationFormatting.None;
-			if (so == null) return this.Settings.Serializer.Serialize(data, indent);
-			var joined = string.Join("\n", so
-				.Select(soo => this.Settings.Serializer.Serialize(soo, SerializationFormatting.None).Utf8String())) + "\n";
-			return joined.Utf8Bytes();
+			throw new NotImplementedException();
 		}
-
+	}
+	
+	public interface IPostData
+	{
+		byte[] ToByteArray(IConnectionConfigurationValues settings);
 	}
 
+	public class PostData<T> : IPostData
+	{
+		protected readonly byte[] ByteArray;
+		protected readonly string LiteralString;
+		protected readonly IEnumerable<string> EnumurabeOfStrings;
+		protected readonly IEnumerable<T> EnumerableOfObject;
+		protected readonly T Item5;
+
+		readonly int _tag;
+
+		public PostData(byte[] item) { ByteArray = item; _tag = 0; }
+		public PostData(string item) { LiteralString = item; _tag = 1; }
+		public PostData(IEnumerable<string> item) { EnumurabeOfStrings = item; _tag = 2; }
+		public PostData(IEnumerable<T> item) { EnumerableOfObject = item; _tag = 3; }
+		public PostData(T item) { Item5 = item; _tag = 4; }
+
+		public byte[] ToByteArray(IConnectionConfigurationValues settings)
+		{
+			var indent = settings.UsesPrettyRequests ? SerializationFormatting.Indented : SerializationFormatting.None;
+			switch (_tag)
+			{
+				case 0: return ByteArray;
+				case 1: return LiteralString?.Utf8Bytes();
+				case 2: return EnumurabeOfStrings?.HasAny() ?? false ? (string.Join("\n", EnumurabeOfStrings) + "\n").Utf8Bytes() : null;
+				case 3: return EnumurabeOfStrings?.HasAny() ?? false ? (string.Join("\n", EnumurabeOfStrings) + "\n").Utf8Bytes() : null;
+				case 4: return EnumerableOfObject?.HasAny() ?? false
+						? (string.Join("\n", EnumerableOfObject.Select(soo => settings.Serializer.Serialize(soo, SerializationFormatting.None).Utf8String())) + "\n").Utf8Bytes()
+						: null;
+				case 5: return settings.Serializer.Serialize(Item5, indent);
+			}
+			return null;
+		}
+
+		public static implicit operator PostData<T>(byte[] byteArray) => new PostData<T>(byteArray);
+		public static implicit operator PostData<T>(string literalString) => new PostData<T>(literalString);
+		public static implicit operator PostData<T>(List<string> listOfStrings) => new PostData<T>(listOfStrings);
+		public static implicit operator PostData<T>(List<T> listOfObjects) => new PostData<T>(listOfObjects);
+		public static implicit operator PostData<T>(T @object) => new PostData<T>(@object);
+	}
 }

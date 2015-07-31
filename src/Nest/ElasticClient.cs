@@ -58,7 +58,7 @@ namespace Nest
 		}
 
 		/// <summary>
-		/// Perform any request you want over the configured IConnection while taking advantage of the cluster failover.
+		/// stPerform any request you want over the configured IConnection while taking advantage of the cluster failover.
 		/// </summary>
 		/// <typeparam name="T">The type representing the response JSON</typeparam>
 		/// <param name="method">the HTTP Method to use</param>

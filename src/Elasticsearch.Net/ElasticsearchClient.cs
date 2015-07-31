@@ -28,7 +28,7 @@ namespace Elasticsearch.Net
 		/// Instantiate a new low level elasticsearch client
 		/// </summary>
 		/// <param name="settings">Specify how and where the client connects to elasticsearch, defaults to a static single node connectionpool to http://localhost:9200 </param>
-		public ElasticsearchClient(IConnectionConfigurationValues settings = null) : this(new Transport(settings ?? new ConnectionConfiguration())) { }
+		public ElasticsearchClient(IConnectionConfigurationValues settings = null) : this(new NewTransport(settings ?? new ConnectionConfiguration())) { }
 		public ElasticsearchClient(ITransport transport)
 		{
 			transport.ThrowIfNull(nameof(transport));
@@ -87,6 +87,9 @@ namespace Elasticsearch.Net
 			return requestParams;
 		}
 
+		//TODO these are just proxy methods, remove??
+
+
 		/// <summary>
 		/// Perform any request you want over the configured IConnection synchronously while taking advantage of the cluster failover.
 		/// </summary>
@@ -96,13 +99,13 @@ namespace Elasticsearch.Net
 		/// <param name="data">The body of the request, string and byte[] are posted as is other types will be serialized to JSON</param>
 		/// <param name="requestParameters">Optionally configure request specific timeouts, headers</param>
 		/// <returns>An ElasticsearchResponse of T where T represents the JSON response body</returns>
-		public ElasticsearchResponse<T> DoRequest<T>(string method, string path, object data = null, IRequestParameters requestParameters = null)
+		public ElasticsearchResponse<T> DoRequest<T>(HttpMethod method, string path, object data = null, IRequestParameters requestParameters = null)
 		{
 			return this.Transport.DoRequest<T>(method, path, data, requestParameters);
 		}
 
 		public ElasticsearchResponse<T> DoRequest<T, TRequestParams>(
-			string method, 
+			HttpMethod method, 
 			string path, 
 			Func<TRequestParams, TRequestParams> requestParameters = null,
 			object data = null, 
@@ -123,13 +126,13 @@ namespace Elasticsearch.Net
 		/// <param name="data">The body of the request, string and byte[] are posted as is other types will be serialized to JSON</param>
 		/// <param name="requestParameters">Optionally configure request specific timeouts, headers</param>
 		/// <returns>A task of ElasticsearchResponse of T where T represents the JSON response body</returns>
-		public Task<ElasticsearchResponse<T>> DoRequestAsync<T>(string method, string path, object data = null, IRequestParameters requestParameters = null)
+		public Task<ElasticsearchResponse<T>> DoRequestAsync<T>(HttpMethod method, string path, object data = null, IRequestParameters requestParameters = null)
 		{
 			return this.Transport.DoRequestAsync<T>(method, path, data, requestParameters);
 		}
 
 		public Task<ElasticsearchResponse<T>> DoRequestAsync<T, TRequestParams>(
-			string method, 
+			HttpMethod method, 
 			string path, 
 			Func<TRequestParams, TRequestParams> requestParameters = null,
 			object data = null, 

@@ -20,7 +20,7 @@ using PurifyNet;
 
 namespace Elasticsearch.Net.Connection
 {
-	public class Transport : ITransport, ITransportDelegator
+	public class Transport : ITransportDelegator
 	{
 
 		protected internal readonly IConnectionConfigurationValues ConfigurationValues;
@@ -315,12 +315,11 @@ namespace Elasticsearch.Net.Connection
 				return false;
 			}
 			int initialSeed;
-			bool shouldPingHint;
-			var baseUri = this._connectionPool.GetNext(requestState.Seed, out initialSeed, out shouldPingHint);
+			var baseUri = this._connectionPool.GetNext(requestState.Seed, out initialSeed);
 			requestState.Seed = initialSeed;
-			requestState.CurrentNode = baseUri;
-			return shouldPingHint
-				&& !this.ConfigurationValues.DisablePings
+			//requestState.CurrentNode = baseUri;
+			return 
+				 !this.ConfigurationValues.DisablePings
 				&& (requestState.RequestConfiguration == null
 					|| !requestState.RequestConfiguration.DisablePing.GetValueOrDefault(false));
 

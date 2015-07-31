@@ -6,46 +6,34 @@ namespace Elasticsearch.Net.ConnectionPool
 {
 	public class SingleNodeConnectionPool : IConnectionPool
 	{
-		private readonly Uri _uri;
-		public int MaxRetries { get { return 0;  } }
+		private readonly Node _node;
 
-		public bool AcceptsUpdates { get { return false; } }
+		public int MaxRetries => 0;
+
+		public bool AcceptsUpdates => false;
 		
-		public bool UsingSsl { get { return _uri.Scheme == Uri.UriSchemeHttps; } }
+		public bool UsingSsl { get; }
 
-		public bool SniffedOnStartup
-		{
-			get { return false; }
-			set {  }
-		}
+		public bool SniffedOnStartup { get { return true; } set {  } }
+
+		public IReadOnlyCollection<Node> Nodes { get; }
+
+		public DateTime? LastUpdate { get; set; }
 
 		public SingleNodeConnectionPool(Uri uri)
 		{
-			//this makes sure that paths stay relative i.e if the root uri is:
-			//http://my-saas-provider.com/instance
-			if (!uri.OriginalString.EndsWith("/"))
-				uri = new Uri(uri.OriginalString + "/");
-			_uri = uri;
+			this._node = new Node(uri);
+			this.UsingSsl = this._node.Uri.Scheme == "https";
+			this.Nodes = new List<Node> { this._node };
 		}
 
-		public Uri GetNext(int? initialSeed, out int seed, out bool shouldPingHint)
+		public Node GetNext(int? initialSeed, out int seed)
 		{
 			seed = 0;
-			shouldPingHint = false;
-			return _uri;
+			return this._node;
 		}
 
-		public void MarkDead(Uri uri, int? deadTimeout = null, int? maxDeadTimeout = null)
-		{
-		}
-
-		public void MarkAlive(Uri uri)
-		{
-		}
-
-		public void UpdateNodeList(IList<Uri> newClusterState, Uri sniffNode = null)
-		{
-		}
+		public void UpdateNodeList(IList<Uri> newClusterState, Uri sniffNode = null) { }
 
 	}
 }
