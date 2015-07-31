@@ -29,6 +29,19 @@ namespace Nest
 			return this;
 		}
 
+		private PropertiesDescriptor<T> AddProperty<TDescriptor, TInterface>(Func<TDescriptor, TDescriptor> selector)
+			where TDescriptor : class, TInterface
+			where TInterface : class, IElasticType
+		{
+			selector.ThrowIfNull(nameof(selector));
+			var type = selector(Activator.CreateInstance<TDescriptor>()) as TInterface;
+			var typeName = typeof(TInterface).Name;
+			if (type == null || type.Name.IsConditionless())
+				throw new ArgumentException($"Could not get field name for {typeName} mapping");
+			Properties[type.Name] = type;
+			return this;
+		}
+
 		public PropertiesDescriptor<T> String(Func<StringTypeDescriptor<T>, StringTypeDescriptor<T>> selector)
 		{
 			selector.ThrowIfNull(nameof(selector));
@@ -39,15 +52,8 @@ namespace Nest
 			return this;
 		}
 
-		public PropertiesDescriptor<T> Number(Func<NumberTypeDescriptor<T>, NumberTypeDescriptor<T>> selector)
-		{
-			selector.ThrowIfNull(nameof(selector));
-			var type = selector(new NumberTypeDescriptor<T>()) as IElasticType;
-			if (type == null || type.Name.IsConditionless())
-				throw new ArgumentException("Could not get field name for number mapping");
-			this.Properties[type.Name] = type;
-			return this;
-		}
+		public PropertiesDescriptor<T> Number(Func<NumberTypeDescriptor<T>, NumberTypeDescriptor<T>> selector) =>
+			AddProperty<NumberTypeDescriptor<T>, INumberType>(selector);
 
 		public PropertiesDescriptor<T> Date(Func<DateTypeDescriptor<T>, DateTypeDescriptor<T>> selector)
 		{
