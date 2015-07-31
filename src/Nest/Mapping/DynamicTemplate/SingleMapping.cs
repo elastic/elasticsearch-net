@@ -26,7 +26,7 @@ namespace Nest
 			var d = selector(new NumberTypeDescriptor<T>());
 			if (d == null)
 				throw new Exception("Could not get number mapping");
-			return d._Mapping;
+			return d;
 		}
 
 		public IElasticType Date(Func<DateTypeDescriptor<T>, DateTypeDescriptor<T>> selector)

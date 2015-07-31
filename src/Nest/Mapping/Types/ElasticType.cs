@@ -9,7 +9,7 @@ namespace Nest
 	public interface IElasticType : IFieldMapping
 	{
 		FieldName Name { get; set; }
-		TypeName Type { get; }
+		TypeName Type { get; set; }
 
 		[JsonProperty("index_name")]
 		string IndexName { get; set; }

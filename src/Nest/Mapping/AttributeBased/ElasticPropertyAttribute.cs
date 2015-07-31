@@ -36,7 +36,7 @@ namespace Nest
 		/// <summary>
 		/// Defaults to float so be sure to set this correctly!
 		/// </summary>
-		public NumericTypeName NumericType { get; set; }
+		public NumberTypeName NumericType { get; set; }
 		public int PrecisionStep { get; set; }
 
 		/// <summary>

@@ -5,7 +5,7 @@ using Newtonsoft.Json.Converters;
 namespace Nest
 {
 	[JsonConverter(typeof(StringEnumConverter))]
-	public enum NumericTypeName
+	public enum NumberTypeName
 	{
 		[EnumMember(Value = "default")]
 		Default,

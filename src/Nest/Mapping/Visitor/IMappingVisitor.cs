@@ -5,7 +5,7 @@
 		int Depth { get; set; }
 		void Visit(RootObjectMapping mapping);
 		void Visit(StringType mapping);
-		void Visit(NumericTypeName mapping);
+		void Visit(NumberTypeName mapping);
 		void Visit(DateType mapping);
 		void Visit(BooleanType mapping);
 		void Visit(BinaryType mapping);

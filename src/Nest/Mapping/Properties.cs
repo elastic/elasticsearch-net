@@ -42,10 +42,10 @@ namespace Nest
 		public PropertiesDescriptor<T> Number(Func<NumberTypeDescriptor<T>, NumberTypeDescriptor<T>> selector)
 		{
 			selector.ThrowIfNull(nameof(selector));
-			var d = selector(new NumberTypeDescriptor<T>());
-			if (d == null || d._Mapping.Name.IsConditionless())
+			var type = selector(new NumberTypeDescriptor<T>()) as IElasticType;
+			if (type == null || type.Name.IsConditionless())
 				throw new ArgumentException("Could not get field name for number mapping");
-			this.Properties[d._Mapping.Name] = d._Mapping;
+			this.Properties[type.Name] = type;
 			return this;
 		}
 

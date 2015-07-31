@@ -6,128 +6,70 @@ using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
+	[JsonObject(MemberSerialization.OptIn)]
 	public interface INumberType : IElasticType
 	{
-
-	}
-
-	[JsonObject(MemberSerialization.OptIn)]
-	public class NumberType : ElasticType, INumberType
-	{
-		public NumberType() : base("double") { }
-		
-		[JsonProperty("index"), JsonConverter(typeof(StringEnumConverter))]
-		public NonStringIndexOption? Index { get; set; }
-
-		[JsonProperty("precision_step")]
-		public int? PrecisionStep { get; set; }
+		[JsonProperty("index")]
+		NonStringIndexOption Index { get; set; }
 
 		[JsonProperty("boost")]
-		public double? Boost { get; set; }
+		double? Boost { get; set; }
 
 		[JsonProperty("null_value")]
-		public double? NullValue { get; set; }
+		double? NullValue { get; set; }
+
+		[JsonProperty("include_in_all")]
+		bool? IncludeInAll { get; set; }
+
+		[JsonProperty("precision_step")]
+		int? PrecisionStep { get; set; }
 
 		[JsonProperty("ignore_malformed")]
-		public bool? IgnoreMalformed { get; set; }
+		bool? IgnoreMalformed { get; set; }
 
 		[JsonProperty("coerce")]
+		bool? Coerce { get; set; }
+	}
+
+	public class NumberType : ElasticType, INumberType
+	{
+		public NumberType() : base(NumberTypeName.Double.GetStringValue()) { }
+		public NumberType(NumberTypeName typeName) : base(typeName.GetStringValue()) { }
+
+		public NonStringIndexOption Index { get; set; }
+		public double? Boost { get; set; }
+		public double? NullValue { get; set; }
+		public bool? IncludeInAll { get; set; }
+		public int? PrecisionStep { get; set; }
+		public bool? IgnoreMalformed { get; set; }
 		public bool? Coerce { get; set; }
 	}
 
-	public class NumberTypeDescriptor<T> where T : class
+	public class NumberTypeDescriptor<T> 
+		: TypeDescriptorBase<NumberTypeDescriptor<T>, INumberType, T>, INumberType
+		where T : class
 	{
-		internal NumberType _Mapping = new NumberType();
+		NonStringIndexOption INumberType.Index { get; set; }
+		double? INumberType.Boost { get; set; }
+		double? INumberType.NullValue { get; set; }
+		bool? INumberType.IncludeInAll { get; set; }
+		int? INumberType.PrecisionStep { get; set; }
+		bool? INumberType.IgnoreMalformed { get; set; }
+		bool? INumberType.Coerce { get; set; }
 
-		public NumberTypeDescriptor<T> Name(string name)
-		{
-			this._Mapping.Name = name;
-			return this;
-		}
-		public NumberTypeDescriptor<T> Name(Expression<Func<T, object>> objectPath)
-		{
-			this._Mapping.Name = objectPath;
-			return this;
-		}
+		public NumberTypeDescriptor<T> Type(NumberTypeName type) => Assign(a => a.Type = type.GetStringValue());
 
-		public NumberTypeDescriptor<T> Type(NumericTypeName type)
-		{
-			var stringType = type.GetStringValue();
-			this._Mapping.Type = stringType;
-			return this;
-		}
-		
+		public NumberTypeDescriptor<T> Index(NonStringIndexOption index = NonStringIndexOption.No) => Assign(a => a.Index = index);
 
-		public NumberTypeDescriptor<T> IndexName(string indexName)
-		{
-			this._Mapping.IndexName = indexName;
-			return this;
-		}
-		public NumberTypeDescriptor<T> Index(NonStringIndexOption index = NonStringIndexOption.No)
-		{
-			this._Mapping.Index = index;
-			return this;
-		}
-		public NumberTypeDescriptor<T> Store(bool store = true)
-		{
-			this._Mapping.Store = store;
-			return this;
-		}
+		public NumberTypeDescriptor<T> Boost(double boost) => Assign(a => a.Boost = boost);
 
-		public NumberTypeDescriptor<T> Boost(double boost)
-		{
-			this._Mapping.Boost = boost;
-			return this;
-		}
-		public NumberTypeDescriptor<T> NullValue(double nullValue)
-		{
-			this._Mapping.NullValue = nullValue;
-			return this;
-		}
+		public NumberTypeDescriptor<T> NullValue(double nullValue) => Assign(a => a.NullValue = nullValue);
 
-		public NumberTypeDescriptor<T> PrecisionStep(int precisionStep)
-		{
-			this._Mapping.PrecisionStep = precisionStep;
-			return this;
-		}
+		public NumberTypeDescriptor<T> PrecisionStep(int precisionStep) => Assign(a => a.PrecisionStep = precisionStep);
 
-		public NumberTypeDescriptor<T> DocValues(bool docValues = true)
-		{
-			this._Mapping.DocValues = docValues;
-			return this;
-		}
+		public NumberTypeDescriptor<T> IgnoreMalformed(bool ignoreMalformed = true) => Assign(a => a.IgnoreMalformed = ignoreMalformed);
 
-		//public NumberTypeDescriptor<T> IncludeInAll(bool includeInAll = true)
-		//{
-		//	this._Mapping.IncludeInAll = includeInAll;
-		//	return this;
-		//}
-
-		public NumberTypeDescriptor<T> IgnoreMalformed(bool ignoreMalformed = true)
-		{
-			this._Mapping.IgnoreMalformed = ignoreMalformed;
-			return this;
-		}
-		public NumberTypeDescriptor<T> Coerce(bool coerce = true)
-		{
-			this._Mapping.Coerce = coerce;
-			return this;
-		}
-
-		public NumberTypeDescriptor<T> Fields(Func<PropertiesDescriptor<T>, PropertiesDescriptor<T>> fieldSelector)
-		{
-			fieldSelector.ThrowIfNull("fieldSelector");
-			var properties = fieldSelector(new PropertiesDescriptor<T>());
-			foreach (var p in properties.Properties)
-			{
-				var value = p.Value as IElasticType;
-				if (value == null)
-					continue;
-
-				_Mapping.Fields[p.Key] = value;
-			}
-			return this;
-		}
+		public NumberTypeDescriptor<T> Coerce(bool coerce = true) => Assign(a => a.Coerce = coerce);
 
 		//public NumberTypeDescriptor<T> FieldData(Func<FieldDataNonStringMappingDescriptor, FieldDataNonStringMappingDescriptor> fieldDataSelector)
 		//{

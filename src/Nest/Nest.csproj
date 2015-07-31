@@ -74,6 +74,7 @@
     <Compile Include="Aggregations\Bucket\SignificantTerms\Heuristics\MutualInformationHeuristic.cs" />
     <Compile Include="Aggregations\Bucket\SignificantTerms\Heuristics\PercentageScoreHeuristic.cs" />
     <Compile Include="Aggregations\IAggregator.cs" />
+    <Compile Include="CommonAbstractions\Fluent\DescriptorBase.cs" />
     <Compile Include="CommonAbstractions\ProxyDictionary.cs" />
     <Compile Include="Cat\CatAllocation\ElasticClient-CatAllocation.cs" />
     <Compile Include="Cat\CatCount\ElasticClient-CatCount.cs" />
@@ -125,8 +126,9 @@
     <Compile Include="Indices\IndexManagement\CreateIndex\ElasticClient-CreateIndexExtensions.cs" />
     <Compile Include="Indices\IndexManagement\OpenCloseIndex\ElasticClient-OpenCloseIndexExtensions.cs" />
     <Compile Include="Document\Single\Exists\ElasticClient-ExistsExtensions.cs" />
-    <Compile Include="Mapping\Types\SimilarityOption.cs" />
+    <Compile Include="Mapping\SimilarityOption.cs" />
     <Compile Include="Mapping\Types\TokenCount\TokenCountType.cs" />
+    <Compile Include="Mapping\Types\TypeDescriptorBase.cs" />
     <Compile Include="QueryDsl\Compound\Bool\BoolQuery.cs" />
     <Compile Include="QueryDsl\Compound\Bool\BoolQueryExtensions.cs" />
     <Compile Include="QueryDsl\Compound\Indices\NoMatchQueryConverter.cs" />
@@ -263,7 +265,7 @@
     <Compile Include="QueryDsl\Geo\HashCell\GeoHashCellQuery.cs" />
     <Compile Include="QueryDsl\Geo\Polygon\GeoPolygonQuery.cs" />
     <Compile Include="QueryDsl\QueryContainerDescriptor.cs" />
-    <Compile Include="CommonAbstractions\Fluent.cs" />
+    <Compile Include="CommonAbstractions\Fluent\Fluent.cs" />
     <Compile Include="Search\Suggesters\SuggestContextMapping.cs" />
     <Compile Include="Mapping\IFieldMapping.cs" />
     <Compile Include="Mapping\Fields\ISpecialField.cs" />
@@ -661,7 +663,7 @@
     <Compile Include="Indices\StatusManagement\Refresh\RefreshRequest.cs" />
     <Compile Include="Indices\StatusManagement\Optimize\OptimizeRequest.cs" />
     <Compile Include="Indices\IndexManagement\OpenCloseIndex\OpenIndex\OpenIndexRequest.cs" />
-    <Compile Include="CommonAbstractions\FluentDictionary.cs" />
+    <Compile Include="CommonAbstractions\Fluent\FluentDictionary.cs" />
     <Compile Include="CommonAbstractions\Request\Paths\IndexPath.cs" />
     <Compile Include="Search\Scroll\ScrollRequest.cs" />
     <Compile Include="Indices\IndexSettings\UpdateIndicesSettings\UpdateSettingsRequest.cs" />
@@ -975,7 +977,7 @@
     <Compile Include="QueryDsl\TermLevel\Prefix\PrefixQuery.cs" />
     <Compile Include="Mapping\TermVectorOption.cs" />
     <Compile Include="Mapping\Types\String\FieldIndexOption.cs" />
-    <Compile Include="Mapping\Types\Number\NumericTypeName.cs" />
+    <Compile Include="Mapping\Types\Number\NumberTypeName.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\Resolvers\Converters\CustomJsonConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\Resolvers\Converters\UnixDateTimeConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\Resolvers\Converters\YesNoBoolConverter.cs" />

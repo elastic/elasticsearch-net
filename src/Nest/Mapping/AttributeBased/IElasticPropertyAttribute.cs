@@ -30,7 +30,7 @@
         /// <summary>
         /// Defaults to float so be sure to set this correctly!
         /// </summary>
-        NumericTypeName NumericType { get; set; }
+        NumberTypeName NumericType { get; set; }
         int PrecisionStep { get; set; }
 
         /// <summary>
