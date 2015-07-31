@@ -13,13 +13,13 @@ namespace Nest
 		[JsonProperty("type")]
 		TypeNameMarker Type { get; set; }
 
-        [JsonProperty("min_children")]
-        int? MinChildren { get; set; }
+		[JsonProperty("min_children")]
+		int? MinChildren { get; set; }
 
-        [JsonProperty("max_children")]
-        int? MaxChildren { get; set; }
+		[JsonProperty("max_children")]
+		int? MaxChildren { get; set; }
 
-        [JsonProperty("query")]
+		[JsonProperty("query")]
 		IQueryContainer Query { get; set; }
 
 		[JsonProperty("filter")]
@@ -31,7 +31,7 @@ namespace Nest
 		IInnerHits InnerHits { get; set; }
 
 	}
-	
+
 	public class HasChildFilter : PlainFilter, IHasChildFilter
 	{
 		protected internal override void WrapInContainer(IFilterContainer container)
@@ -40,9 +40,9 @@ namespace Nest
 		}
 
 		public TypeNameMarker Type { get; set; }
-        public int? MinChildren { get; set; }
-        public int? MaxChildren { get; set; }
-        public IQueryContainer Query { get; set; }
+		public int? MinChildren { get; set; }
+		public int? MaxChildren { get; set; }
+		public IQueryContainer Query { get; set; }
 		public IFilterContainer Filter { get; set; }
 		public IInnerHits InnerHits { get; set; }
 	}
@@ -65,11 +65,11 @@ namespace Nest
 
 		TypeNameMarker IHasChildFilter.Type { get; set; }
 
-        int? IHasChildFilter.MinChildren { get; set; }
+		int? IHasChildFilter.MinChildren { get; set; }
 
-        int? IHasChildFilter.MaxChildren { get; set; }
+		int? IHasChildFilter.MaxChildren { get; set; }
 
-        IQueryContainer IHasChildFilter.Query { get; set; }
+		IQueryContainer IHasChildFilter.Query { get; set; }
 
 		IFilterContainer IHasChildFilter.Filter { get; set; }
 
@@ -99,20 +99,20 @@ namespace Nest
 			Self.Type = type;
 			return this;
 		}
-        
-        public HasChildFilterDescriptor<T> MinChildren(int minChildren)
-        {
-            Self.MinChildren = minChildren;
-            return this;
-        }
 
-        public HasChildFilterDescriptor<T> MaxChildren(int maxChildren)
-        {
-            Self.MaxChildren = maxChildren;
-            return this;
-        }
+		public HasChildFilterDescriptor<T> MinChildren(int minChildren)
+		{
+			Self.MinChildren = minChildren;
+			return this;
+		}
 
-        public HasChildFilterDescriptor<T> InnerHits()
+		public HasChildFilterDescriptor<T> MaxChildren(int maxChildren)
+		{
+			Self.MaxChildren = maxChildren;
+			return this;
+		}
+
+		public HasChildFilterDescriptor<T> InnerHits()
 		{
 			Self.InnerHits = new InnerHits();
 			return this;
