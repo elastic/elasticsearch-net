@@ -31,7 +31,7 @@ namespace Nest.Resolvers.Writers {
                 this._jsonWriter.WritePropertyName(this._FieldName);
                 this._jsonWriter.WriteStartObject();
             }
-            if (att.NumericType != NumberType.Default)
+            if (att.NumericType != NumericTypeName.Default)
             {
                 this._jsonWriter.WritePropertyName("type");
                 var numericType = att.NumericType.GetStringValue();
@@ -134,7 +134,7 @@ namespace Nest.Resolvers.Writers {
                 this._jsonWriter.WritePropertyName("sort");
                 this._jsonWriter.WriteStartObject();
 
-                if (att.NumericType != NumberType.Default)
+                if (att.NumericType != NumericTypeName.Default)
                 {
                     this._jsonWriter.WritePropertyName("type");
                     string numericType = att.NumericType.GetStringValue();

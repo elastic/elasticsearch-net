@@ -36,7 +36,7 @@ namespace Nest.DSL.Visitor
 				switch (type.Name)
 				{
 					case "string":
-						var s = field as StringMapping;
+						var s = field as StringType;
 						if (s == null) continue;
 						this._visitor.Visit(s);
 						this.Accept(s.Fields);
@@ -47,31 +47,31 @@ namespace Nest.DSL.Visitor
 					case "short":
 					case "integer":
 					case "long":
-						var nu = field as NumberMapping;
+						var nu = field as NumberType;
 						if (nu == null) continue;
 						this._visitor.Visit(nu);
 						this.Accept(nu.Fields);
 						break;
 					case "date":
-						var d = field as DateMapping;
+						var d = field as DateType;
 						if (d == null) continue;
 						this._visitor.Visit(d);
 						this.Accept(d.Fields);
 						break;
 					case "boolean":
-						var bo = field as BooleanMapping;
+						var bo = field as BooleanType;
 						if (bo == null) continue;
 						this._visitor.Visit(bo);
 						this.Accept(bo.Fields);
 						break;
 					case "binary":
-						var bi = field as BinaryMapping;
+						var bi = field as BinaryType;
 						if (bi == null) continue;
 						this._visitor.Visit(bi);
 						this.Accept(bi.Fields);
 						break;
 					case "object":
-						var o = field as ObjectMapping;
+						var o = field as ObjectType;
 						if (o == null) continue;
 						this._visitor.Visit(o);
 						this._visitor.Depth += 1;
@@ -79,36 +79,30 @@ namespace Nest.DSL.Visitor
 						this._visitor.Depth -= 1;
 						break;
 					case "nested":
-						var n = field as NestedObjectMapping;
+						var n = field as NestedType;
 						if (n == null) continue;
 						this._visitor.Visit(n);
 						this._visitor.Depth += 1;
 						this.Accept(n.Properties);
 						this._visitor.Depth -= 1;
 						break;
-					case "multi_field":
-						var m = field as MultiFieldMapping;
-						if (m == null) continue;
-						this._visitor.Visit(m);
-						this.Accept(m.Fields);
-						break;
 					case "ip":
-						var i = field as IPMapping;
+						var i = field as IpType;
 						if (i == null) continue;
 						this._visitor.Visit(i);
 						break;
 					case "geo_point":
-						var gp = field as GeoPointMapping;
+						var gp = field as GeoPointType;
 						if (gp == null) continue;
 						this._visitor.Visit(gp);
 						break;
 					case "geo_shape":
-						var gs = field as GeoShapeMapping;
+						var gs = field as GeoShapeType;
 						if (gs == null) continue;
 						this._visitor.Visit(gs);
 						break;
 					case "attachment":
-						var a = field as AttachmentMapping;
+						var a = field as AttachmentType;
 						if (a == null) continue;
 						this._visitor.Visit(a);
 						break;
@@ -117,21 +111,21 @@ namespace Nest.DSL.Visitor
 			}
 		}
 
-		private void Accept(IDictionary<FieldName, IElasticCoreType> properties)
-		{
-			if (properties == null || properties.Count == 0) return;
-			this._visitor.Depth += 1;
+		//private void Accept(IDictionary<FieldName, IElasticType> properties)
+		//{
+		//	if (properties == null || properties.Count == 0) return;
+		//	this._visitor.Depth += 1;
 			
-			var dict = new Dictionary<FieldName, IElasticType>();
-			foreach (var kv in properties)
-			{
-				var t = kv.Value as IElasticType;
-				if (t == null) continue;
-				dict.Add(kv.Key, t);
-			}
+		//	var dict = new Dictionary<FieldName, IElasticType>();
+		//	foreach (var kv in properties)
+		//	{
+		//		var t = kv.Value as IElasticType;
+		//		if (t == null) continue;
+		//		dict.Add(kv.Key, t);
+		//	}
 
-			if (dict.Count == 0) return;
-			this._visitor.Depth -= 1;
-		}
+		//	if (dict.Count == 0) return;
+		//	this._visitor.Depth -= 1;
+		//}
 	}
 }

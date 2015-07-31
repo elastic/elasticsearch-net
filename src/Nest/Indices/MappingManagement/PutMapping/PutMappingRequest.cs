@@ -150,43 +150,43 @@ namespace Nest
 
 		public PutMappingDescriptor<T> SetParent(string parentType)
 		{
-			Self.Mapping.Parent = new ParentFieldMapping { Type = parentType };
+			Self.Mapping.Parent = new ParentField { Type = parentType };
 			return this;
 		}
 		public PutMappingDescriptor<T> SetParent<K>() where K : class
 		{
 			var parentType = TypeName.Create<K>();
-			Self.Mapping.Parent = new ParentFieldMapping { Type = parentType };
+			Self.Mapping.Parent = new ParentField { Type = parentType };
 			return this;
 		}
 
-		public PutMappingDescriptor<T> AllField(Func<AllFieldMappingDescriptor, AllFieldMappingDescriptor> allFieldSelector)
+		public PutMappingDescriptor<T> AllField(Func<AllFieldDescriptor, AllFieldDescriptor> allFieldSelector)
 		{
-			Self.Mapping.AllFieldMapping = allFieldSelector(new AllFieldMappingDescriptor());
+			Self.Mapping.AllFieldMapping = allFieldSelector(new AllFieldDescriptor());
 			return this;
 		}
 
-		public PutMappingDescriptor<T> IndexField(Func<IndexFieldMappingDescriptor, IndexFieldMappingDescriptor> indexFieldSelector)
+		public PutMappingDescriptor<T> IndexField(Func<IndexFieldDescriptor, IndexFieldDescriptor> indexFieldSelector)
 		{
-			Self.Mapping.IndexFieldMapping = indexFieldSelector(new IndexFieldMappingDescriptor());
+			Self.Mapping.IndexFieldMapping = indexFieldSelector(new IndexFieldDescriptor());
 			return this;
 		}
 
-		public PutMappingDescriptor<T> SizeField(Func<SizeFieldMappingDescriptor, SizeFieldMappingDescriptor> sizeFieldSelector)
+		public PutMappingDescriptor<T> SizeField(Func<SizeFieldDescriptor, SizeFieldDescriptor> sizeFieldSelector)
 		{
-			Self.Mapping.SizeFieldMapping = sizeFieldSelector(new SizeFieldMappingDescriptor());
+			Self.Mapping.SizeFieldMapping = sizeFieldSelector(new SizeFieldDescriptor());
 			return this;
 		}
 
 		public PutMappingDescriptor<T> DisableSizeField(bool disabled = true)
 		{
-			Self.Mapping.SizeFieldMapping = new SizeFieldMapping { Enabled = !disabled };
+			Self.Mapping.SizeFieldMapping = new SizeField { Enabled = !disabled };
 			return this;
 		}
 
 		public PutMappingDescriptor<T> DisableIndexField(bool disabled = true)
 		{
-			Self.Mapping.IndexFieldMapping = new IndexFieldMapping { Enabled = !disabled };
+			Self.Mapping.IndexFieldMapping = new IndexField { Enabled = !disabled };
 			return this;
 		}
 
@@ -227,62 +227,62 @@ namespace Nest
 			return this;
 		}
 
-		public PutMappingDescriptor<T> IdField(Func<IdFieldMappingDescriptor, IIdFieldMapping> idMapper)
+		public PutMappingDescriptor<T> IdField(Func<IdFieldDescriptor, IIdField> idMapper)
 		{
 			idMapper.ThrowIfNull("idMapper");
-			Self.Mapping.IdFieldMappingDescriptor = idMapper(new IdFieldMappingDescriptor());
+			Self.Mapping.IdFieldMappingDescriptor = idMapper(new IdFieldDescriptor());
 			return this;
 		}
 
-		public PutMappingDescriptor<T> TypeField(Func<TypeFieldMappingDescriptor, ITypeFieldMapping> typeMapper)
+		public PutMappingDescriptor<T> TypeField(Func<TypeFieldDescriptor, ITypeField> typeMapper)
 		{
 			typeMapper.ThrowIfNull("typeMapper");
-			Self.Mapping.TypeFieldMappingDescriptor = typeMapper(new TypeFieldMappingDescriptor());
+			Self.Mapping.TypeFieldMappingDescriptor = typeMapper(new TypeFieldDescriptor());
 			return this;
 		}
-		public PutMappingDescriptor<T> SourceField(Func<SourceFieldMappingDescriptor, ISourceFieldMapping> sourceMapper)
+		public PutMappingDescriptor<T> SourceField(Func<SourceFieldDescriptor, ISourceField> sourceMapper)
 		{
 			sourceMapper.ThrowIfNull("sourceMapper");
-			Self.Mapping.SourceFieldMappingDescriptor = sourceMapper(new SourceFieldMappingDescriptor());
+			Self.Mapping.SourceFieldMappingDescriptor = sourceMapper(new SourceFieldDescriptor());
 			return this;
 		}
 
-		public PutMappingDescriptor<T> AnalyzerField(Func<AnalyzerFieldMappingDescriptor<T>, IAnalyzerFieldMapping> analyzeMapper)
+		public PutMappingDescriptor<T> AnalyzerField(Func<AnalyzerFieldDescriptor<T>, IAnalyzerField> analyzeMapper)
 		{
 			analyzeMapper.ThrowIfNull("analyzeMapper");
-			Self.Mapping.AnalyzerFieldMapping = analyzeMapper(new AnalyzerFieldMappingDescriptor<T>());
+			Self.Mapping.AnalyzerFieldMapping = analyzeMapper(new AnalyzerFieldDescriptor<T>());
 			return this;
 		}
-		public PutMappingDescriptor<T> BoostField(Func<BoostFieldMappingDescriptor<T>, IBoostFieldMapping> boostMapper)
+		public PutMappingDescriptor<T> BoostField(Func<BoostFieldDescriptor<T>, IBoostField> boostMapper)
 		{
 			boostMapper.ThrowIfNull("boostMapper");
-			Self.Mapping.BoostFieldMapping = boostMapper(new BoostFieldMappingDescriptor<T>());
+			Self.Mapping.BoostFieldMapping = boostMapper(new BoostFieldDescriptor<T>());
 			return this;
 		}
-		public PutMappingDescriptor<T> RoutingField(Func<RoutingFieldMappingDescriptor<T>, IRoutingFieldMapping> routingMapper)
+		public PutMappingDescriptor<T> RoutingField(Func<RoutingFieldDescriptor<T>, IRoutingField> routingMapper)
 		{
 			routingMapper.ThrowIfNull("routingMapper");
-			Self.Mapping.RoutingFieldMapping = routingMapper(new RoutingFieldMappingDescriptor<T>());
+			Self.Mapping.RoutingFieldMapping = routingMapper(new RoutingFieldDescriptor<T>());
 			return this;
 		}
 
-		public PutMappingDescriptor<T> TimestampField(Func<TimestampFieldMappingDescriptor<T>, ITimestampFieldMapping> timestampMapper)
+		public PutMappingDescriptor<T> TimestampField(Func<TimestampFieldDescriptor<T>, ITimestampField> timestampMapper)
 		{
 			timestampMapper.ThrowIfNull("timestampMapper");
-			Self.Mapping.TimestampFieldMapping = timestampMapper(new TimestampFieldMappingDescriptor<T>());
+			Self.Mapping.TimestampFieldMapping = timestampMapper(new TimestampFieldDescriptor<T>());
 			return this;
 		}
 
-		public PutMappingDescriptor<T> FieldNamesField(Func<FieldNamesFieldMappingDescriptor<T>, IFieldNamesFieldMapping> fieldNamesMapper)
+		public PutMappingDescriptor<T> FieldNamesField(Func<FieldNamesFieldDescriptor<T>, IFieldNamesField> fieldNamesMapper)
 		{
-			Self.Mapping.FieldNamesFieldMapping = fieldNamesMapper == null ? null : fieldNamesMapper(new FieldNamesFieldMappingDescriptor<T>());
+			Self.Mapping.FieldNamesFieldMapping = fieldNamesMapper == null ? null : fieldNamesMapper(new FieldNamesFieldDescriptor<T>());
 			return this;
 		}
 
-		public PutMappingDescriptor<T> TtlField(Func<TtlFieldMappingDescriptor, ITtlFieldMapping> ttlFieldMapper)
+		public PutMappingDescriptor<T> TtlField(Func<TtlFieldDescriptor, ITtlField> ttlFieldMapper)
 		{
 			ttlFieldMapper.ThrowIfNull("ttlFieldMapper");
-			Self.Mapping.TtlFieldMappingDescriptor = ttlFieldMapper(new TtlFieldMappingDescriptor());
+			Self.Mapping.TtlFieldMappingDescriptor = ttlFieldMapper(new TtlFieldDescriptor());
 			return this;
 		}
 		public PutMappingDescriptor<T> Properties(Func<PropertiesDescriptor<T>, PropertiesDescriptor<T>> propertiesSelector)

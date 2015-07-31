@@ -35,34 +35,32 @@ namespace Nest.Resolvers.Converters
 			switch (type)
 			{
 				case "string":
-					return serializer.Deserialize(po.CreateReader(), typeof(StringMapping)) as StringMapping;
+					return serializer.Deserialize(po.CreateReader(), typeof(StringType)) as StringType;
 				case "float":
 				case "double":
 				case "byte":
 				case "short":
 				case "integer":
 				case "long":
-					return serializer.Deserialize(po.CreateReader(), typeof(NumberMapping)) as NumberMapping;
+					return serializer.Deserialize(po.CreateReader(), typeof(NumberType)) as NumberType;
 				case "date":
-					return serializer.Deserialize(po.CreateReader(), typeof(DateMapping)) as DateMapping;
+					return serializer.Deserialize(po.CreateReader(), typeof(DateType)) as DateType;
 				case "boolean":
-					return serializer.Deserialize(po.CreateReader(), typeof(BooleanMapping)) as BooleanMapping;
+					return serializer.Deserialize(po.CreateReader(), typeof(BooleanType)) as BooleanType;
 				case "binary":
-					return serializer.Deserialize(po.CreateReader(), typeof(BinaryMapping)) as BinaryMapping;
+					return serializer.Deserialize(po.CreateReader(), typeof(BinaryType)) as BinaryType;
 				case "object":
-					return serializer.Deserialize(po.CreateReader(), typeof(ObjectMapping)) as ObjectMapping;
+					return serializer.Deserialize(po.CreateReader(), typeof(ObjectType)) as ObjectType;
 				case "nested":
-					return serializer.Deserialize(po.CreateReader(), typeof(NestedObjectMapping)) as NestedObjectMapping;
-				case "multi_field":
-					return serializer.Deserialize(po.CreateReader(), typeof(MultiFieldMapping)) as MultiFieldMapping;
+					return serializer.Deserialize(po.CreateReader(), typeof(NestedType)) as NestedType;
 				case "ip":
-					return serializer.Deserialize(po.CreateReader(), typeof(IPMapping)) as IPMapping;
+					return serializer.Deserialize(po.CreateReader(), typeof(IpType)) as IpType;
 				case "geo_point":
-					return serializer.Deserialize(po.CreateReader(), typeof(GeoPointMapping)) as GeoPointMapping;
+					return serializer.Deserialize(po.CreateReader(), typeof(GeoPointType)) as GeoPointType;
 				case "geo_shape":
-					return serializer.Deserialize(po.CreateReader(), typeof(GeoShapeMapping)) as GeoShapeMapping;
+					return serializer.Deserialize(po.CreateReader(), typeof(GeoShapeType)) as GeoShapeType;
 				case "attachment":
-					return serializer.Deserialize(po.CreateReader(), typeof(AttachmentMapping)) as AttachmentMapping;
+					return serializer.Deserialize(po.CreateReader(), typeof(AttachmentType)) as AttachmentType;
 			}
 
 			return null;
@@ -113,17 +111,17 @@ namespace Nest.Resolvers.Converters
 					 as IFieldMapping;
 				if (mapping == null)
 				{
-					if (name == "_all") mapping = po.ToObject<AllFieldMapping>();
-					if (name == "_id") mapping = po.ToObject<IdFieldMapping>();
-					if (name == "_type") mapping = po.ToObject<TypeFieldMapping>();
-					if (name == "_source") mapping = po.ToObject<SourceFieldMapping>();
-					if (name == "_analyzer") mapping = po.ToObject<AnalyzerFieldMapping>();
-					if (name == "_routing") mapping = po.ToObject<RoutingFieldMapping>();
-					if (name == "_index") mapping = po.ToObject<IndexFieldMapping>();
-					if (name == "_size") mapping = po.ToObject<SizeFieldMapping>();
-					if (name == "_timestamp") mapping = po.ToObject<TimestampFieldMapping>();
-					if (name == "_ttl") mapping = po.ToObject<TtlFieldMapping>();
-					if (name == "_parent") mapping = po.ToObject<ParentFieldMapping>();
+					if (name == "_all") mapping = po.ToObject<AllField>();
+					if (name == "_id") mapping = po.ToObject<IdField>();
+					if (name == "_type") mapping = po.ToObject<TypeField>();
+					if (name == "_source") mapping = po.ToObject<SourceField>();
+					if (name == "_analyzer") mapping = po.ToObject<AnalyzerField>();
+					if (name == "_routing") mapping = po.ToObject<RoutingField>();
+					if (name == "_index") mapping = po.ToObject<IndexField>();
+					if (name == "_size") mapping = po.ToObject<SizeField>();
+					if (name == "_timestamp") mapping = po.ToObject<TimestampField>();
+					if (name == "_ttl") mapping = po.ToObject<TtlField>();
+					if (name == "_parent") mapping = po.ToObject<ParentField>();
 					//TODO _field_names does not seem to have a special mapping (just returns like _uid) needs CONFIRMATION
 				}
 				if (mapping == null) continue;

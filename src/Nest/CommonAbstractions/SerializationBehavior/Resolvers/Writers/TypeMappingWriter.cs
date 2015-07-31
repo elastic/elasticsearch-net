@@ -86,22 +86,22 @@ namespace Nest.Resolvers.Writers
 				return this._elasticSerializer.Deserialize<RootObjectMapping>(ms);
 		}
 
-		internal ObjectMapping ObjectMappingFromAttributes()
+		internal ObjectType ObjectMappingFromAttributes()
 		{
 			var json = JObject.Parse(this.MapFromAttributes());
 
 			var nestedJson = json.Properties().First().Value.ToString();
 			using (var ms = new MemoryStream(nestedJson.Utf8Bytes()))
-				return this._elasticSerializer.Deserialize<ObjectMapping>(ms);
+				return this._elasticSerializer.Deserialize<ObjectType>(ms);
 		}
 
-		internal NestedObjectMapping NestedObjectMappingFromAttributes()
+		internal NestedType NestedObjectMappingFromAttributes()
 		{
 			var json = JObject.Parse(this.MapFromAttributes());
 
 			var nestedJson = json.Properties().First().Value.ToString();
 			using (var ms = new MemoryStream(nestedJson.Utf8Bytes()))
-				return this._elasticSerializer.Deserialize<NestedObjectMapping>(ms);
+				return this._elasticSerializer.Deserialize<NestedType>(ms);
 		}
 
 		public string MapFromAttributes()
