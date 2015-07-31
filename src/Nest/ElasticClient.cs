@@ -46,12 +46,11 @@ namespace Nest
 			this.Connection = connection ?? new HttpConnection(this._connectionSettings);
 
 			this.Serializer = serializer ?? new NestSerializer(this._connectionSettings);
-			this.Raw = new ElasticsearchClient(
+			this.Raw = new ElasticsearchClient(new NewTransport(
 				this._connectionSettings,
 				this.Connection,
-				transport, //default transport
 				this.Serializer
-			);
+			));
 			this.LowLevelDispatch = new LowLevelDispatch(this.Raw);
 			this.Infer = this._connectionSettings.Inferrer;
 
@@ -66,7 +65,7 @@ namespace Nest
 		/// <param name="data">The body of the request, string and byte[] are posted as is other types will be serialized to JSON</param>
 		/// <param name="requestParameters">Optionally configure request specific timeouts, headers</param>
 		/// <returns>An ElasticsearchResponse of T where T represents the JSON response body</returns>
-		public ElasticsearchResponse<T> DoRequest<T>(string method, string path, object data = null, IRequestParameters requestParameters = null)
+		public ElasticsearchResponse<T> DoRequest<T>(HttpMethod method, string path, object data = null, IRequestParameters requestParameters = null)
 		{
 			return this.Raw.DoRequest<T>(method, path, data, requestParameters);
 		}
@@ -80,7 +79,7 @@ namespace Nest
 		/// <param name="data">The body of the request, string and byte[] are posted as is other types will be serialized to JSON</param>
 		/// <param name="requestParameters">Optionally configure request specific timeouts, headers</param>
 		/// <returns>A task of ElasticsearchResponse of T where T represents the JSON response body</returns>
-		public Task<ElasticsearchResponse<T>> DoRequestAsync<T>(string method, string path, object data = null, IRequestParameters requestParameters = null)
+		public Task<ElasticsearchResponse<T>> DoRequestAsync<T>(HttpMethod method, string path, object data = null, IRequestParameters requestParameters = null)
 		{
 			return this.Raw.DoRequestAsync<T>(method, path, data, requestParameters);
 		}

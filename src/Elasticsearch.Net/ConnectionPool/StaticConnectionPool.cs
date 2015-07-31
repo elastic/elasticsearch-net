@@ -10,78 +10,75 @@ namespace Elasticsearch.Net.ConnectionPool
 	public class StaticConnectionPool : IConnectionPool
 	{
 		private readonly IDateTimeProvider _dateTimeProvider;
-		
-		protected IDictionary<Uri, EndpointState> UriLookup;
-		protected IList<Uri> NodeUris;
-		protected int Current = -1;
-		private Random _random;
 
-		public int MaxRetries { get { return NodeUris.Count - 1;  } }
 
-		public virtual bool AcceptsUpdates { get { return false; } }
+		private List<Node> _nodes = new List<Node>();
+		public int MaxRetries => _nodes.Count - 1;
+		public virtual IReadOnlyCollection<Node> Nodes => this._nodes;
 
-		public bool UsingSsl { get; internal set; }
+		public virtual bool AcceptsUpdates => false;
+		public virtual void Update(IEnumerable<Node> nodes) { } //ignored
+
+		public bool UsingSsl { get; }
 
 		public bool SniffedOnStartup { get; set; }
-
-		public IReadOnlyCollection<Node> Nodes { get; }
 
 		public DateTime? LastUpdate { get; set; }
 
 		public StaticConnectionPool(IEnumerable<Uri> uris, bool randomizeOnStartup = true, IDateTimeProvider dateTimeProvider = null)
 		{
-			_random = new Random(1337);
-			_dateTimeProvider = dateTimeProvider ?? new DateTimeProvider();
-			var rnd = new Random();
-			uris.ThrowIfEmpty("uris");
-			NodeUris = uris.Distinct().ToList();
+			this._dateTimeProvider = dateTimeProvider ?? new DateTimeProvider();
+
+			uris.ThrowIfEmpty(nameof(uris));
 			if (uris.Select(u => u.Scheme).Distinct().Count() > 1)
-				throw new ArgumentException("Mixed URI schemes detected.");
-			this.UsingSsl = uris.All(uri => uri.Scheme == Uri.UriSchemeHttps);
-			if (randomizeOnStartup)
-				NodeUris = NodeUris.OrderBy((item) => rnd.Next()).ToList();
-			UriLookup = NodeUris.ToDictionary(k=>k, v=> new EndpointState());
+				throw new ArgumentException("Trying to instantiate a connection pool with mixed URI Schemes");
+
+			this.UsingSsl = uris.Any(uri => uri.Scheme == Uri.UriSchemeHttps);
+
+			var rnd = new Random();
+			this._nodes = uris
+				.OrderBy((item) => randomizeOnStartup ? rnd.Next() : 1)
+				.Distinct()
+				.Select(u => new Node(u))
+				.ToList();
 		}
 
-		public virtual Node GetNext(int? initialSeed, out int seed)
+		private int _globalCursor = -1;
+		/// <summary>
+		/// Get the next node in a thread safe fashion that tries to keep order over multiple threads. e.g Thread A might get 1,2,3,4,5 and thread B will get 2,3,4,5,1.
+		/// </summary>
+		/// <param name="cursor">On first use pass in null, this will take the global round cursor, on repeated uses pass in seed as a private cursor</param>
+		/// <param name="newCursor">A private cursor that can be used in repeated calls to GetNext</param>
+		public virtual Node GetNext(int? cursor, out int newCursor)
 		{
-			var count = NodeUris.Count;
-			if (initialSeed.HasValue)
-				initialSeed += 1;
+			var count = this._nodes.Count;
 
-			//always increment our round robin counter
-			int increment = Interlocked.Increment(ref Current);
-			var initialOffset = initialSeed ?? increment;
-			int i = initialOffset % count, attempts = 0;
-			seed = i;
-			Uri uri = null;
-			do
+			//if we have a local cursor use that otherwise use the globalcursor
+			int privateCursor;
+			if (cursor.HasValue) privateCursor = cursor.Value + 1;
+			else privateCursor = Interlocked.Increment(ref _globalCursor);
+
+			newCursor = privateCursor % count;
+
+			Node node = null;
+			for (int attempts = 0; attempts < count; attempts++)
 			{
-				uri = this.NodeUris[i];
-				var state = this.UriLookup[uri];
-				lock (state)
+				node = this._nodes[newCursor];
+				var now = _dateTimeProvider.Now();
+				//node is not dead or no longer dead
+				if (node.DeadUntil <= now)
 				{
-					var now = _dateTimeProvider.Now();
-					if (state.Date <= now)
-					{
-						state.Attemps = 0;
-						return new Node(uri);
-					}
-					Interlocked.Increment(ref Current);
+					//if this node is not alive mark it as resurrected
+					if (!node.IsAlive) node.IsResurrected = true;
+					return node;
 				}
-				Interlocked.Increment(ref state.Attemps);
-				++attempts;
-				i = (++initialOffset) % count;
-				seed = i;
-			} while (attempts < count);
+				newCursor = (++privateCursor) % count;
+			}
 
 			//could not find a suitable node retrying on node that has been dead longest.
-			return new Node(this.NodeUris[i]);
+			node = this._nodes[newCursor];
+			node.IsResurrected = true;
+			return node;
 		}
-
-		public virtual void UpdateNodeList(IList<Uri> newClusterState, Uri sniffNode = null)
-		{
-		}
-
 	}
 }

@@ -78,6 +78,7 @@
     <Compile Include="ClientConcepts\HighLevel\Inferrence\FieldNames\FieldInference.cs" />
     <Compile Include="ClientConcepts\LowLevel\ConnectionPools\SslDetection.cs" />
     <Compile Include="ClientConcepts\LowLevel\Connecting.cs" />
+    <Compile Include="ClientConcepts\LowLevel\Ressurection\DateTimeProviders.cs" />
     <Compile Include="ClientConcepts\LowLevel\PostData.cs" />
     <Compile Include="CommonOptions\DateMath\DateMathExpressions.cs" />
     <Compile Include="CommonOptions\TimeUnit\TimeUnits.cs" />
@@ -148,6 +149,9 @@
     <Folder Include="QueryDsl\" />
     <Folder Include="Search\Suggesters\" />
     <Folder Include="Setup\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ClientConcepts\LowLevel\Ressurection\dead-timeout.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -101,7 +101,6 @@
     <Compile Include="Exceptions\ElasticsearchServerException.cs" />
     <Compile Include="Exceptions\ConnectionException.cs" />
     <Compile Include="Connection\Configuration\ConnectionConfiguration.cs" />
-    <Compile Include="ConnectionPool\EndpointState.cs" />
     <Compile Include="ConnectionPool\IConnectionPool.cs" />
     <Compile Include="Providers\IDateTimeProvider.cs" />
     <Compile Include="ConnectionPool\SingleNodeConnectionPool.cs" />

@@ -224,7 +224,7 @@ namespace Elasticsearch.Net.Connection
 			if (!newClusterState.HasAny())
 				return;
 
-			this._connectionPool.UpdateNodeList(newClusterState);
+			//this._connectionPool.UpdateNodeList(newClusterState);
 			this._lastSniff = this._dateTimeProvider.Now();
 
 		}

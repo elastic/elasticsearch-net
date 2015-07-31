@@ -34,7 +34,7 @@ namespace Elasticsearch.Net.ConnectionPool
 		bool UsingSsl { get; }
 
 		/// <summary>
-		/// Bookkeeps wheter this connectionpool has seen a sniff on startup. 
+		/// Bookkeeps wheter this connectionpool has seen a sniff on startup. its up to to the callee to set this in a threadsafe fashion
 		/// </summary>
 		bool SniffedOnStartup { get; set; }
 
@@ -43,16 +43,14 @@ namespace Elasticsearch.Net.ConnectionPool
 		/// </summary>
 		/// <param name="initialSeed">pass the original seed when retrying, this guarantees that the nodes are walked in a
 		///  predictable manner even when called in a multithreaded context</param>
-		/// <param name="seed">The seed this call started on</param>
+		/// <param name="cursor">The seed this call started on</param>
 		/// <returns></returns>
-		Node GetNext(int? initialSeed, out int seed);
+		Node GetNext(int? cursor, out int newCursor);
 
 		/// <summary>
-		/// Update the node list manually, usually done by ITransport when sniffing was needed.
+		/// Update the node list, it's the IConnectionPool's responsibility to do so in a threadsafe fashion
 		/// </summary>
-		/// <param name="newClusterState"></param>
-		/// <param name="sniffNode">hint that the node we recieved the sniff from should not be pinged</param>
-		void UpdateNodeList(IList<Uri> newClusterState, Uri sniffNode = null);
+		void Update(IEnumerable<Node> nodes);
 
 	}
 }

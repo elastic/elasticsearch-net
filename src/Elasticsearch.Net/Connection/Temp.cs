@@ -129,7 +129,7 @@ namespace Elasticsearch.Net.Connection
 		private int _retried = 0;
 		public int Retried => _retried;
 
-		private int _nodeSeed = 0;
+		private int? _cursor = null;
 
 		const int DefaultPingTimeout = 1000;
 		readonly int SslDefaultPingTimeout = 2000;
@@ -211,7 +211,9 @@ namespace Elasticsearch.Net.Connection
 			if (this.Retried >= this.MaxRetries) return false;
 
 			//TODO move this out of GetNext;
-			var node = this.ConnectionPool.GetNext(_nodeSeed, out _nodeSeed);
+			int newCursor;
+			var node = this.ConnectionPool.GetNext(_cursor, out newCursor);
+			this._cursor = newCursor;
 			//todo make connectionpool return Node
 			this.CurrentNode = node;
 			return true;
@@ -319,7 +321,7 @@ namespace Elasticsearch.Net.Connection
 						if (!listOfNodes.HasAny())
 							throw new ElasticsearchException(PipelineFailure.BadResponse, response);
 
-						this.ConnectionPool.UpdateNodeList(listOfNodes);
+						this.ConnectionPool.Update(listOfNodes.Select(n=>new Node(n, this.DateTimeProvider)));
 					}
 				}
 				catch (ElasticsearchException e) when (e.Cause == PipelineFailure.BadAuthentication) //unrecoverable
@@ -351,7 +353,7 @@ namespace Elasticsearch.Net.Connection
 						if (!listOfNodes.HasAny())
 							throw new ElasticsearchException(PipelineFailure.BadResponse, response);
 
-						this.ConnectionPool.UpdateNodeList(listOfNodes);
+						this.ConnectionPool.Update(listOfNodes.Select(n=>new Node(n, this.DateTimeProvider)));
 					}
 				}
 				catch (ElasticsearchException e) when (e.Cause == PipelineFailure.BadAuthentication) //unrecoverable

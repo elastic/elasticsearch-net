@@ -21,16 +21,16 @@ namespace Elasticsearch.Net.ConnectionPool
 		{
 		}
 
-		public override void UpdateNodeList(IList<Uri> newClusterState, Uri sniffNode = null)
+		private List<Node> _nodes = new List<Node>();
+		public override IReadOnlyCollection<Node> Nodes => this._nodes;
+
+		public override void Update(IEnumerable<Node> nodes)
 		{
 			try
 			{
 				this._readerWriter.EnterWriteLock();
-				this.NodeUris = newClusterState;
-				this.UriLookup = newClusterState.ToDictionary(k => k, v => new EndpointState()
-				{
-					Attemps = v.Equals(sniffNode) ? 1 : 0
-				});
+				//TODO ToListOrNull()
+				this._nodes = nodes?.ToList() ?? _nodes;
 			}
 			finally
 			{
@@ -38,12 +38,12 @@ namespace Elasticsearch.Net.ConnectionPool
 			}
 		}
 
-		public override Node GetNext(int? initialSeed, out int seed)
+		public override Node GetNext(int? cursor, out int newCursor)
 		{
 			try
 			{
 				this._readerWriter.EnterReadLock();
-				return base.GetNext(initialSeed, out seed);
+				return base.GetNext(cursor, out newCursor);
 			}
 			finally
 			{

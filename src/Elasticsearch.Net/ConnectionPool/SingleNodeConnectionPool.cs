@@ -11,6 +11,7 @@ namespace Elasticsearch.Net.ConnectionPool
 		public int MaxRetries => 0;
 
 		public bool AcceptsUpdates => false;
+		public void Update(IEnumerable<Node> nodes) { } //ignored
 		
 		public bool UsingSsl { get; }
 
@@ -23,17 +24,16 @@ namespace Elasticsearch.Net.ConnectionPool
 		public SingleNodeConnectionPool(Uri uri)
 		{
 			this._node = new Node(uri);
-			this.UsingSsl = this._node.Uri.Scheme == "https";
+			this.UsingSsl = this._node.Uri.Scheme == Uri.UriSchemeHttps;
 			this.Nodes = new List<Node> { this._node };
 		}
 
-		public Node GetNext(int? initialSeed, out int seed)
+		public Node GetNext(int? cursor, out int newCursor)
 		{
-			seed = 0;
+			newCursor = 0;
 			return this._node;
 		}
 
-		public void UpdateNodeList(IList<Uri> newClusterState, Uri sniffNode = null) { }
 
 	}
 }
