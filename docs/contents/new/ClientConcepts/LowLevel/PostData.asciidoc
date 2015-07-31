@@ -1,0 +1,9 @@
+# 
+
+
+[source, csharp]
+----
+var fromString = ImplicitlyConvertsFrom("fromString");
+var fromByteArray = ImplicitlyConvertsFrom(Encoding.UTF8.GetBytes("fromByteArray"));
+var fromListOfString = ImplicitlyConvertsFrom(Encoding.UTF8.GetBytes("fromListOfStrings"));
+----
