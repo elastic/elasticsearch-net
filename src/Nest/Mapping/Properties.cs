@@ -46,6 +46,8 @@ namespace Nest
 
 		public PropertiesDescriptor<T> Number(Func<NumberTypeDescriptor<T>, INumberType> selector) => SetProperty(selector);
 
+		public PropertiesDescriptor<T> TokenCount(Func<TokenCountTypeDescriptor<T>, ITokenCountType> selector) => SetProperty(selector);
+
 		public PropertiesDescriptor<T> Date(Func<DateTypeDescriptor<T>, IDateType> selector) => SetProperty(selector);
 
 		public PropertiesDescriptor<T> Boolean(Func<BooleanTypeDescriptor<T>, IBooleanType> selector) => SetProperty(selector);
