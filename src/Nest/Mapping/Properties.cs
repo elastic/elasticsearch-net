@@ -66,17 +66,9 @@ namespace Nest
 
 		public PropertiesDescriptor<T> GeoShape(Func<GeoShapeTypeDescriptor<T>, GeoShapeTypeDescriptor<T>> selector) => SetProperty(selector);
 
-		public PropertiesDescriptor<T> Generic(Func<GenericMappingDescriptor<T>, GenericMappingDescriptor<T>> selector)
-		{
-			selector.ThrowIfNull(nameof(selector));
-			var d = selector(new GenericMappingDescriptor<T>());
-			if (d == null || d._Mapping.Name.IsConditionless())
-				throw new Exception("Could not get field name for generic mapping");
-			this.Properties.Add(d._Mapping.Name, d._Mapping);
-			return this;
-		}
-
 		public PropertiesDescriptor<T> Completion(Func<CompletionTypeDescriptor<T>, ICompletionType> selector) => SetProperty(selector);
+
+		public PropertiesDescriptor<T> Murmur3Hash(Func<Murmur3HashTypeDescriptor<T>, IMurmur3HashType> selector) => SetProperty(selector);
 
 		public PropertiesDescriptor<T> Custom(IElasticType customMapping)
 		{
@@ -86,7 +78,5 @@ namespace Nest
 			this.Properties.Add(customMapping.Name, customMapping);
 			return this;
 		}
-
-		public PropertiesDescriptor<T> Murmur3Hash(Func<Murmur3HashTypeDescriptor<T>, IMurmur3HashType> selector) => SetProperty(selector);
 	}
 }

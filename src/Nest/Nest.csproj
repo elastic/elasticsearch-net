@@ -783,7 +783,6 @@
     <Compile Include="Mapping\Types\Attachment\AttachmentType.cs" />
     <Compile Include="Mapping\Types\Boolean\BooleanType.cs" />
     <Compile Include="Mapping\Types\Binary\BinaryType.cs" />
-    <Compile Include="Mapping\Types\GenericMapping.cs" />
     <Compile Include="Mapping\DynamicTemplate\SingleMapping.cs" />
     <Compile Include="Mapping\Types\GeoShape\GeoShapeType.cs" />
     <Compile Include="Mapping\Types\GeoPoint\GeoPointType.cs" />

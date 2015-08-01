@@ -111,16 +111,7 @@ namespace Nest
 			return d;
 		}
 
-		public IElasticType Generic(Func<GenericMappingDescriptor<T>, GenericMappingDescriptor<T>> selector)
-		{
-			selector.ThrowIfNull("selector");
-			var d = selector(new GenericMappingDescriptor<T>());
-			if (d == null)
-				throw new Exception("Could not get generic mapping");
-			return d._Mapping;
-		}
-
-        public IElasticType Completion(Func<CompletionTypeDescriptor<T>, CompletionTypeDescriptor<T>> selector)
+		public IElasticType Completion(Func<CompletionTypeDescriptor<T>, CompletionTypeDescriptor<T>> selector)
         {
             selector.ThrowIfNull("selector");
             var d = selector(new CompletionTypeDescriptor<T>());
