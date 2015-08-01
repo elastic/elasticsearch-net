@@ -18,7 +18,7 @@ namespace Nest.DSL.Visitor
 			this.Accept(response.Mapping);
 		}
 
-		public void Accept(RootObjectMapping mapping)
+		public void Accept(RootObjectType mapping)
 		{
 			if (mapping == null) return;
 			this._visitor.Visit(mapping);

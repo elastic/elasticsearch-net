@@ -8,17 +8,17 @@ namespace Nest
 	public interface IGetMappingResponse : IResponse
 	{
 		Dictionary<string, IList<TypeMapping>> Mappings { get; }
-		RootObjectMapping Mapping { get; }
+		RootObjectType Mapping { get; }
 		void Accept(IMappingVisitor visitor);
 	}
 
 	public class TypeMapping
 	{
 		public string TypeName { get; internal set; }
-		public RootObjectMapping Mapping  { get; internal set; }
+		public RootObjectType Mapping  { get; internal set; }
 	}
 
-	internal class GetRootObjectMappingWrapping : Dictionary<string, Dictionary<string, Dictionary<string, RootObjectMapping>>>
+	internal class GetRootObjectMappingWrapping : Dictionary<string, Dictionary<string, Dictionary<string, RootObjectType>>>
 	{
 		
 	}
@@ -65,7 +65,7 @@ namespace Nest
 		}
 
 		public Dictionary<string, IList<TypeMapping>> Mappings { get; internal set; }
-		public RootObjectMapping Mapping { get; internal set; }
+		public RootObjectType Mapping { get; internal set; }
 
 		public void Accept(IMappingVisitor visitor)
 		{

@@ -156,7 +156,7 @@ namespace Nest.Resolvers.Converters
 			}
 			if (jsonObject["mappings"] != null)
 			{
-				var mappings = serializer.Deserialize<Dictionary<string, RootObjectMapping>>(jsonObject["mappings"].CreateReader());
+				var mappings = serializer.Deserialize<Dictionary<string, RootObjectType>>(jsonObject["mappings"].CreateReader());
 				result.Mappings = mappings.Select(kv =>
 				{
 					var name = kv.Key;

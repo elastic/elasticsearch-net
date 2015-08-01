@@ -24,7 +24,7 @@ namespace Nest
 				putMappingRequest,
 				(p, d) =>
 				{
-					var o = new Dictionary<string, RootObjectMapping>
+					var o = new Dictionary<string, RootObjectType>
 					{
 						{p.Type, d.Mapping}
 					};
@@ -49,7 +49,7 @@ namespace Nest
 				putMappingRequest,
 				(p, d) =>
 				{
-					var o = new Dictionary<string, RootObjectMapping>
+					var o = new Dictionary<string, RootObjectType>
 					{
 						{p.Type, d.Mapping}
 					};

@@ -9,7 +9,7 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IPutMappingRequest : IIndicesTypePath<PutMappingRequestParameters>
 	{
-		RootObjectMapping Mapping { get; set; }
+		RootObjectType Mapping { get; set; }
 	}
 
 	public interface IPutMappingRequest<T> : IPutMappingRequest where T : class {}
@@ -24,7 +24,7 @@ namespace Nest
 
 	public partial class PutMappingRequest : IndicesTypePathBase<PutMappingRequestParameters>, IPutMappingRequest
 	{
-		public RootObjectMapping Mapping { get; set; }
+		public RootObjectType Mapping { get; set; }
 		
 		/// <summary>
 		/// Calls putmapping on /_all/{type}
@@ -61,7 +61,7 @@ namespace Nest
 	public partial class PutMappingRequest<T> : IndicesTypePathBase<PutMappingRequestParameters, T>, IPutMappingRequest<T>
 		where T : class
 	{
-		public RootObjectMapping Mapping { get; set; }
+		public RootObjectType Mapping { get; set; }
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<PutMappingRequestParameters> pathInfo)
 		{
@@ -76,7 +76,7 @@ namespace Nest
 	{
 		private IPutMappingRequest Self => this;
 
-		RootObjectMapping IPutMappingRequest.Mapping { get; set; }
+		RootObjectType IPutMappingRequest.Mapping { get; set; }
 
 		private readonly IConnectionSettingsValues _connectionSettings;
 		private readonly ElasticInferrer _infer;
@@ -85,11 +85,11 @@ namespace Nest
 		{
 			this._connectionSettings = connectionSettings;
 			this._infer = new ElasticInferrer(this._connectionSettings);
-			Self.Mapping = new RootObjectMapping() {  };
+			Self.Mapping = new RootObjectType() {  };
 		}
 
 
-		public PutMappingDescriptor<T> InitializeUsing(RootObjectMapping rootObjectMapping)
+		public PutMappingDescriptor<T> InitializeUsing(RootObjectType rootObjectMapping)
 		{
 			if (rootObjectMapping == null)
 				return this;

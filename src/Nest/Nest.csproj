@@ -918,7 +918,7 @@
     <Compile Include="Mapping\AttributeBased\ElasticPropertyAttribute.cs" />
     <Compile Include="Mapping\Types\ElasticType.cs" />
     <Compile Include="Mapping\AttributeBased\ElasticTypeAttribute.cs" />
-    <Compile Include="Mapping\Types\RootObjectMapping.cs" />
+    <Compile Include="Mapping\Types\RootObjectType.cs" />
     <Compile Include="Mapping\Fields\Id\IdField.cs" />
     <Compile Include="Indices\IndexSettings\Analyze\AnalyzeResponse.cs" />
     <Compile Include="Search\Count\CountResponse.cs" />
