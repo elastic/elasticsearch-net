@@ -13,7 +13,6 @@ namespace Nest
 		[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]
 		public IDictionary<FieldName, IElasticType> Properties { get; private set; }
 
-
 		public PropertiesDescriptor()
 		{
 			this.Properties = new Dictionary<FieldName, IElasticType>();
@@ -56,26 +55,10 @@ namespace Nest
 		public PropertiesDescriptor<T> Attachment(Func<AttachmentTypeDescriptor<T>, IAttachmentType> selector) => SetProperty(selector);
 
 		public PropertiesDescriptor<T> Object<TChild>(Func<ObjectTypeDescriptor<T, TChild>, ObjectTypeDescriptor<T, TChild>> selector)
-			where TChild : class
-		{
-			selector.ThrowIfNull(nameof(selector));
-			var d = selector(new ObjectTypeDescriptor<T, TChild>(this._connectionSettings));
-			if (d == null || d._Mapping.Name.IsConditionless())
-				throw new Exception("Could not get field name for object mapping");
-			this.Properties[d._Mapping.Name] = d._Mapping;
-			return this;
-		}
-		
-		public PropertiesDescriptor<T> NestedObject<TChild>(Func<NestedObjectTypeDescriptor<T, TChild>, NestedObjectTypeDescriptor<T, TChild>> selector)
-			where TChild : class
-		{
-			selector.ThrowIfNull(nameof(selector));
-			var d = selector(new NestedObjectTypeDescriptor<T, TChild>(this._connectionSettings));
-			if (d == null || d._Mapping.Name.IsConditionless())
-				throw new Exception("Could not get field name for nested sobject mapping");
-			this.Properties[d._Mapping.Name] = d._Mapping;
-			return this;
-		}
+			where TChild : class => SetProperty(selector);
+
+		public PropertiesDescriptor<T> Nested<TChild>(Func<NestedObjectTypeDescriptor<T, TChild>, NestedObjectTypeDescriptor<T, TChild>> selector)
+			where TChild : class => SetProperty(selector);
 
 		public PropertiesDescriptor<T> Ip(Func<IpTypeDescriptor<T>, IIpType> selector) => SetProperty(selector);
 

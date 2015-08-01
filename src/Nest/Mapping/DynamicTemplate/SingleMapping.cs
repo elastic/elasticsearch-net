@@ -71,7 +71,7 @@ namespace Nest
 			var d = selector(new ObjectTypeDescriptor<T, TChild>(this._connectionSettings));
 			if (d == null)
 				throw new Exception("Could not get object mapping");
-			return d._Mapping;
+			return d;
 		}
 		
 		public IElasticType NestedObject<TChild>(Func<NestedObjectTypeDescriptor<T, TChild>, NestedObjectTypeDescriptor<T, TChild>> selector)
@@ -81,7 +81,7 @@ namespace Nest
 			var d = selector(new NestedObjectTypeDescriptor<T, TChild>(this._connectionSettings));
 			if (d == null)
 				throw new Exception("Could not get nested object mapping");
-			return d._Mapping;
+			return d;
 		}
 		
 		public IElasticType Ip(Func<IpTypeDescriptor<T>, IpTypeDescriptor<T>> selector)
