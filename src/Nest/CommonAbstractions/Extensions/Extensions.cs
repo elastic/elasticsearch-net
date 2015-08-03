@@ -9,13 +9,12 @@ using System.Runtime.InteropServices;
 using System.Security.Cryptography.X509Certificates;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using Elasticsearch.Net.Serialization;
 
 namespace Nest
 {
 	internal static class Extensions
 	{
-		internal static INestSerializer Serializer = new NestSerializer(new ConnectionSettings());
-
 		internal static string GetStringValue(this Enum enumValue)
 		{
 			var type = enumValue.GetType();
@@ -38,10 +37,6 @@ namespace Nest
 				return writer.Token.ToString();
 			}
 		}
-
-
-
-
 
 		public static IEnumerable<T> DistinctBy<T, TKey>(this IEnumerable<T> items, Func<T, TKey> property)
 		{

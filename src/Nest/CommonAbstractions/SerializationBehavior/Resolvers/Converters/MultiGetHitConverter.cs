@@ -35,6 +35,7 @@ namespace Nest.Resolvers.Converters
 		{
 			throw new NotSupportedException();
 		}
+
 		private static void CreateMultiHit<T>(MultiHitTuple tuple, JsonSerializer serializer, ICollection<IMultiGetHit<object>> collection) where T : class
 		{
 			var hit = new MultiGetHit<T>();

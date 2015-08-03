@@ -61,17 +61,10 @@ namespace Nest
 			);
 		}
 
+		private MultiGetResponse DeserializeMultiGetResponse(IElasticsearchResponse response, Stream stream, JsonConverter converter)=>
+			new NestSerializer(this.ConnectionSettings, converter).Deserialize<MultiGetResponse>(stream);
 
+		private JsonConverter CreateCovariantMultiGetConverter(IMultiGetRequest descriptor) => new MultiGetHitConverter(descriptor);
 
-		private MultiGetResponse DeserializeMultiGetResponse(IElasticsearchResponse response, Stream stream, JsonConverter converter)
-		{
-			return this.Serializer.DeserializeInternal<MultiGetResponse>(stream, converter);
-		}
-
-		private JsonConverter CreateCovariantMultiGetConverter(IMultiGetRequest descriptor)
-		{
-			var multiGetHitConverter = new MultiGetHitConverter(descriptor);
-			return multiGetHitConverter;
-		}
 	}
 }

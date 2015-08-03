@@ -17,6 +17,7 @@ namespace Elasticsearch.Net.ConnectionPool
 		public virtual IReadOnlyCollection<Node> Nodes => this._nodes;
 
 		public virtual bool AcceptsUpdates => false;
+		public virtual bool SupportsPinging => true;
 		public virtual void Update(IEnumerable<Node> nodes) { } //ignored
 
 		public bool UsingSsl { get; }
@@ -26,20 +27,23 @@ namespace Elasticsearch.Net.ConnectionPool
 		public DateTime? LastUpdate { get; set; }
 
 		public StaticConnectionPool(IEnumerable<Uri> uris, bool randomizeOnStartup = true, IDateTimeProvider dateTimeProvider = null)
+			: this(uris.Select(uri=>new Node(uri)), randomizeOnStartup, dateTimeProvider) { }
+
+		public StaticConnectionPool(IEnumerable<Node> nodes, bool randomizeOnStartup = true, IDateTimeProvider dateTimeProvider = null)
 		{
+			nodes.ThrowIfEmpty(nameof(nodes));
 			this._dateTimeProvider = dateTimeProvider ?? new DateTimeProvider();
 
-			uris.ThrowIfEmpty(nameof(uris));
+			var uris = nodes.Select(n => n.Uri).ToList();
 			if (uris.Select(u => u.Scheme).Distinct().Count() > 1)
 				throw new ArgumentException("Trying to instantiate a connection pool with mixed URI Schemes");
 
 			this.UsingSsl = uris.Any(uri => uri.Scheme == Uri.UriSchemeHttps);
 
 			var rnd = new Random();
-			this._nodes = uris
+			this._nodes = nodes
 				.OrderBy((item) => randomizeOnStartup ? rnd.Next() : 1)
-				.Distinct()
-				.Select(u => new Node(u))
+				.DistinctBy(n=>n.Uri)
 				.ToList();
 		}
 
@@ -80,5 +84,6 @@ namespace Elasticsearch.Net.ConnectionPool
 			node.IsResurrected = true;
 			return node;
 		}
+
 	}
 }

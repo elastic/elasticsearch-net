@@ -10,11 +10,15 @@ namespace Elasticsearch.Net.Connection
 
 	public interface IConnectionConfigurationValues
 	{
-		/// <summary>
-		/// The connection pool to use when talking with elasticsearch
-		/// </summary>
+		/// <summary> The connection pool to use when talking with elasticsearch </summary>
 		IConnectionPool ConnectionPool { get; }
 		
+		/// <summary> The connection implementation to use when talking with elasticsearch </summary>
+		IConnection Connection { get; }
+		
+		/// <summary>The serializer to use to serialize requests and deserialize responses</summary>
+		IElasticsearchSerializer Serializer { get; }
+
 		/// <summary>
 		/// When set to a value > 0, this will signal the IConnection what the maximum 
 		/// concurrent connections is, NEST favors IOCP ports over threads but in multi tenant 
@@ -25,27 +29,27 @@ namespace Elasticsearch.Net.Connection
 		/// <summary>
 		/// The timeout in milliseconds for each request to Elasticsearch
 		/// </summary>
-		int Timeout { get; }
+		TimeSpan Timeout { get; }
 
 		/// <summary>
 		/// The timeout in milliseconds to use for ping requests, which are issued to determine whether a node is alive
 		/// </summary>
-		int? PingTimeout { get; }
+		TimeSpan? PingTimeout { get; }
 
 		/// <summary>
 		/// The connect timeout in milliseconds
 		/// </summary>
-		int? ConnectTimeout { get; }
+		TimeSpan? ConnectTimeout { get; }
 		
 		/// <summary>
 		/// The time to put dead nodes out of rotation (this will be multiplied by the number of times they've been dead)
 		/// </summary>
-		int? DeadTimeout { get; }
+		TimeSpan? DeadTimeout { get; }
 		
 		/// <summary>
 		/// The maximum ammount of time a node is allowed to marked dead
 		/// </summary>
-		int? MaxDeadTimeout { get; }
+		TimeSpan? MaxDeadTimeout { get; }
 
 		/// <summary>
 		/// Limits the total runtime including retries separately from <see cref="Timeout"/>
@@ -159,11 +163,6 @@ namespace Elasticsearch.Net.Connection
 		Action<IElasticsearchResponse> ConnectionStatusHandler { get; }
 
 		/// <summary>
-		/// 
-		/// </summary>
-		IElasticsearchSerializer Serializer { get; set; }
-
-		/// <summary>
 		/// Basic access authorization credentials to specify with all requests.
 		/// </summary>
 		/// TODO: Rename to BasicAuthenticationCredentials in 2.0
@@ -173,13 +172,13 @@ namespace Elasticsearch.Net.Connection
 		/// KeepAliveTime - specifies the timeout, in milliseconds, with no
         /// activity until the first keep-alive packet is sent. 
 		/// </summary>
-		int? KeepAliveTime { get; }
+		TimeSpan? KeepAliveTime { get; }
 
 		/// <summary>
 		/// KeepAliveInterval - specifies the interval, in milliseconds, between
         /// when successive keep-alive packets are sent if no acknowledgement is
         /// received. 
 		/// </summary>
-		int? KeepAliveInterval { get; }
+		TimeSpan? KeepAliveInterval { get; }
 	}
 }

@@ -1,6 +1,7 @@
 using Elasticsearch.Net.Connection.Security;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace Elasticsearch.Net.Connection.Configuration
 {
@@ -8,9 +9,9 @@ namespace Elasticsearch.Net.Connection.Configuration
 	{
 		private IRequestConfiguration Self { get { return this; } }
 
-		int? IRequestConfiguration.RequestTimeout { get; set; }
+		TimeSpan? IRequestConfiguration.RequestTimeout { get; set; }
 
-		int? IRequestConfiguration.ConnectTimeout { get; set; }
+		TimeSpan? IRequestConfiguration.ConnectTimeout { get; set; }
 	
 		string IRequestConfiguration.ContentType { get; set; }
 		
@@ -28,15 +29,17 @@ namespace Elasticsearch.Net.Connection.Configuration
 
 		bool IRequestConfiguration.EnableHttpPipelining { get; set; }
 
-		public RequestConfigurationDescriptor RequestTimeout(int requestTimeoutInMilliseconds)
+		CancellationToken IRequestConfiguration.CancellationToken { get; set; }
+
+		public RequestConfigurationDescriptor RequestTimeout(TimeSpan requestTimeout)
 		{
-			Self.RequestTimeout = requestTimeoutInMilliseconds;
+			Self.RequestTimeout = requestTimeout;
 			return this;
 		}
 
-		public RequestConfigurationDescriptor ConnectTimeout(int connectTimeoutInMilliseconds)
+		public RequestConfigurationDescriptor ConnectTimeout(TimeSpan connectTimeout)
 		{
-			Self.ConnectTimeout = connectTimeoutInMilliseconds;
+			Self.ConnectTimeout = connectTimeout;
 			return this;
 		}
 
@@ -78,6 +81,11 @@ namespace Elasticsearch.Net.Connection.Configuration
 		public RequestConfigurationDescriptor MaxRetries(int retry)
 		{
 			Self.MaxRetries = retry;
+			return this;
+		}
+		public RequestConfigurationDescriptor CancellationToken(CancellationToken token)
+		{
+			Self.CancellationToken = token;
 			return this;
 		}
 

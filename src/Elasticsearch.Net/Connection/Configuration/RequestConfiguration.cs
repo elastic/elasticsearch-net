@@ -1,13 +1,14 @@
 using Elasticsearch.Net.Connection.Security;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace Elasticsearch.Net.Connection.Configuration
 {
 	public class RequestConfiguration : IRequestConfiguration
 	{
-		public int? RequestTimeout { get; set; }
-		public int? ConnectTimeout { get; set; }
+		public TimeSpan? RequestTimeout { get; set; }
+		public TimeSpan? ConnectTimeout { get; set; }
 		public string ContentType { get; set; }
 		public int? MaxRetries { get; set; }
 		public Uri ForceNode { get; set; }
@@ -16,5 +17,6 @@ namespace Elasticsearch.Net.Connection.Configuration
 		public IEnumerable<int> AllowedStatusCodes { get; set; }
 		public BasicAuthorizationCredentials BasicAuthorizationCredentials { get; set; }
 		public bool EnableHttpPipelining { get; set; }
+		public CancellationToken CancellationToken { get; set; }
 	}
 }

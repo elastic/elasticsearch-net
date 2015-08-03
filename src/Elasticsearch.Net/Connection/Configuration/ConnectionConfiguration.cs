@@ -23,10 +23,7 @@ namespace Elasticsearch.Net.Connection
 		/// </summary>
 		/// <param name="uri">The root of the elasticsearch node we want to connect to. Defaults to http://localhost:9200</param>
 		public ConnectionConfiguration(Uri uri = null)
-			: base(uri)
-		{
-
-		}
+			: this(new SingleNodeConnectionPool(uri ?? new Uri("http://localhost:9200"))) { }
 
 		/// <summary>
 		/// ConnectionConfiguration allows you to control how ElasticsearchClient behaves and where/how it connects 
@@ -34,293 +31,239 @@ namespace Elasticsearch.Net.Connection
 		/// </summary>
 		/// <param name="connectionPool">A connection pool implementation that'll tell the client what nodes are available</param>
 		public ConnectionConfiguration(IConnectionPool connectionPool)
-			: base(connectionPool)
-		{
+			: this(connectionPool, null, null) { }
 
-		}
+		public ConnectionConfiguration(IConnectionPool connectionPool, IConnection connection)
+			: this(connectionPool, connection, null) { }
+
+		public ConnectionConfiguration(IConnectionPool connectionPool, IElasticsearchSerializer serializer)
+			: this(connectionPool, null, serializer) { }
+
+		public ConnectionConfiguration(IConnectionPool connectionPool, IConnection connection, IElasticsearchSerializer serializer)
+			: base(connectionPool, connection, serializer) { }
+
+
 	}
 
 
 	[Browsable(false)]
 	[EditorBrowsable(EditorBrowsableState.Never)]
-	public class ConnectionConfiguration<T> : IConnectionConfigurationValues, IHideObjectMembers
+	public abstract class ConnectionConfiguration<T> : IConnectionConfigurationValues, IHideObjectMembers
 		where T : ConnectionConfiguration<T>
 	{
-		private IConnectionPool _connectionPool;
-		IConnectionPool IConnectionConfigurationValues.ConnectionPool { get { return _connectionPool; } }
+		TimeSpan _timeout;
+		TimeSpan IConnectionConfigurationValues.Timeout => _timeout;
 
-		private int _timeout;
-		int IConnectionConfigurationValues.Timeout { get { return _timeout; } }
+		TimeSpan? _pingTimeout;
+		TimeSpan? IConnectionConfigurationValues.PingTimeout => _pingTimeout;
 
-		private int? _pingTimeout;
-		int? IConnectionConfigurationValues.PingTimeout { get { return _pingTimeout; } }
+		TimeSpan? _connectTimeout;
+		TimeSpan? IConnectionConfigurationValues.ConnectTimeout => _connectTimeout;
 
-		private int? _connectTimeout;
-		int? IConnectionConfigurationValues.ConnectTimeout { get { return _connectTimeout; } }
+		TimeSpan? _deadTimeout;
+		TimeSpan? IConnectionConfigurationValues.DeadTimeout => _deadTimeout;
 
-		private int? _deadTimeout;
-		int? IConnectionConfigurationValues.DeadTimeout { get { return _deadTimeout; } }
+		TimeSpan? _maxDeadTimeout;
+		TimeSpan? IConnectionConfigurationValues.MaxDeadTimeout => _maxDeadTimeout;
 
-		private int? _maxDeadTimeout;
-		int? IConnectionConfigurationValues.MaxDeadTimeout { get { return _maxDeadTimeout; } }
+		TimeSpan? _maxRetryTimeout;
+		TimeSpan? IConnectionConfigurationValues.MaxRetryTimeout => _maxRetryTimeout;
 
-		private TimeSpan? _maxRetryTimeout;
-		TimeSpan? IConnectionConfigurationValues.MaxRetryTimeout { get { return _maxRetryTimeout; } }
+		TimeSpan? _keepAliveTime;
+		TimeSpan? IConnectionConfigurationValues.KeepAliveTime => _keepAliveTime;
 
-		private int? _keepAliveTime;
-		int? IConnectionConfigurationValues.KeepAliveTime { get{ return _keepAliveTime; } }
-	
-		private int? _keepAliveInterval;
-		int? IConnectionConfigurationValues.KeepAliveInterval { get{ return _keepAliveInterval; } }
-	
-		private string _proxyUsername;
-		string IConnectionConfigurationValues.ProxyUsername { get { return _proxyUsername; } }
+		TimeSpan? _keepAliveInterval;
+		TimeSpan? IConnectionConfigurationValues.KeepAliveInterval => _keepAliveInterval;
 
-		private string _proxyPassword;
-		string IConnectionConfigurationValues.ProxyPassword { get { return _proxyPassword; } }
+		string _proxyUsername;
+		string IConnectionConfigurationValues.ProxyUsername => _proxyUsername;
 
-		private bool _disablePings;
-		bool IConnectionConfigurationValues.DisablePings { get { return _disablePings; } }
+		string _proxyPassword;
+		string IConnectionConfigurationValues.ProxyPassword => _proxyPassword;
 
-		private string _proxyAddress;
-		string IConnectionConfigurationValues.ProxyAddress { get { return _proxyAddress; } }
+		bool _disablePings;
+		bool IConnectionConfigurationValues.DisablePings => _disablePings;
 
-		private bool _usePrettyResponses;
-		bool IConnectionConfigurationValues.UsesPrettyResponses { get { return _usePrettyResponses; } }
+		string _proxyAddress;
+		string IConnectionConfigurationValues.ProxyAddress => _proxyAddress;
 
-		private bool _usePrettyRequests;
-		bool IConnectionConfigurationValues.UsesPrettyRequests { get{ return _usePrettyRequests; } }
+		bool _usePrettyResponses;
+		bool IConnectionConfigurationValues.UsesPrettyResponses => _usePrettyResponses;
+
+		bool _usePrettyRequests;
+		bool IConnectionConfigurationValues.UsesPrettyRequests => _usePrettyRequests;
 
 #if DEBUG
 		private bool _keepRawResponse = true;
 #else
 		private bool _keepRawResponse = false;
 #endif
-		bool IConnectionConfigurationValues.KeepRawResponse { get { return _keepRawResponse; } }
+		bool IConnectionConfigurationValues.KeepRawResponse => _keepRawResponse;
 
 #if DEBUG
 		private bool _enableMetrics = true;
 #else
 		private bool _enableMetrics = false;
 #endif
-		bool IConnectionConfigurationValues.MetricsEnabled { get { return _enableMetrics; } }
+		bool IConnectionConfigurationValues.MetricsEnabled => _enableMetrics;
 
-		private bool _disableAutomaticProxyDetection = false;
-		bool IConnectionConfigurationValues.DisableAutomaticProxyDetection { get { return _disableAutomaticProxyDetection; } }
+		bool _disableAutomaticProxyDetection = false;
+		bool IConnectionConfigurationValues.DisableAutomaticProxyDetection => _disableAutomaticProxyDetection;
 
-		private int _maximumAsyncConnections;
-		int IConnectionConfigurationValues.MaximumAsyncConnections { get { return _maximumAsyncConnections; } }
+		int _maximumAsyncConnections;
+		int IConnectionConfigurationValues.MaximumAsyncConnections => _maximumAsyncConnections;
 
-		private int? _maxRetries;
-		int? IConnectionConfigurationValues.MaxRetries { get { return _maxRetries; } }
+		int? _maxRetries;
+		int? IConnectionConfigurationValues.MaxRetries => _maxRetries;
 
-		private bool _sniffOnStartup;
-		bool IConnectionConfigurationValues.SniffsOnStartup { get { return _sniffOnStartup; } }
+		bool _sniffOnStartup;
+		bool IConnectionConfigurationValues.SniffsOnStartup => _sniffOnStartup;
 
-		private bool _sniffOnConectionFault;
-		bool IConnectionConfigurationValues.SniffsOnConnectionFault { get { return _sniffOnConectionFault; } }
+		bool _sniffOnConectionFault;
+		bool IConnectionConfigurationValues.SniffsOnConnectionFault => _sniffOnConectionFault;
 
-		private TimeSpan? _sniffLifeSpan;
-		TimeSpan? IConnectionConfigurationValues.SniffInformationLifeSpan { get { return _sniffLifeSpan; } }
+		TimeSpan? _sniffLifeSpan;
+		TimeSpan? IConnectionConfigurationValues.SniffInformationLifeSpan => _sniffLifeSpan;
 
-		private bool _enableHttpCompression;
-		bool IConnectionConfigurationValues.EnableHttpCompression { get { return _enableHttpCompression; } }
+		bool _enableHttpCompression;
+		bool IConnectionConfigurationValues.EnableHttpCompression => _enableHttpCompression;
 
-		private bool _traceEnabled;
-		bool IConnectionConfigurationValues.TraceEnabled { get { return _traceEnabled; } }
+		bool _traceEnabled;
+		bool IConnectionConfigurationValues.TraceEnabled => _traceEnabled;
 
-		private bool _httpPipeliningEnabled;
-		bool IConnectionConfigurationValues.HttpPipeliningEnabled { get { return _httpPipeliningEnabled; } }
+		bool _httpPipeliningEnabled;
+		bool IConnectionConfigurationValues.HttpPipeliningEnabled => _httpPipeliningEnabled;
 
-		private bool _throwOnServerExceptions;
-		bool IConnectionConfigurationValues.ThrowOnElasticsearchServerExceptions { get { return _throwOnServerExceptions; } }
+		bool _throwOnServerExceptions;
+		bool IConnectionConfigurationValues.ThrowOnElasticsearchServerExceptions => _throwOnServerExceptions;
 
-		private Action<IElasticsearchResponse> _connectionStatusHandler;
-		Action<IElasticsearchResponse> IConnectionConfigurationValues.ConnectionStatusHandler { get { return _connectionStatusHandler; } }
+		Action<IElasticsearchResponse> _connectionStatusHandler;
+		Action<IElasticsearchResponse> IConnectionConfigurationValues.ConnectionStatusHandler => _connectionStatusHandler;
 
-		private NameValueCollection _queryString;
-		NameValueCollection IConnectionConfigurationValues.QueryStringParameters { get { return _queryString; } }
+		NameValueCollection _queryString = new NameValueCollection();
+		NameValueCollection IConnectionConfigurationValues.QueryStringParameters => _queryString;
 
-		private NameValueCollection _headers;
-		NameValueCollection IConnectionConfigurationValues.Headers { get { return _headers; } }
+		NameValueCollection _headers = new NameValueCollection();
+		NameValueCollection IConnectionConfigurationValues.Headers => _headers;
 
-		IElasticsearchSerializer IConnectionConfigurationValues.Serializer { get; set; }
+		BasicAuthorizationCredentials _basicAuthCredentials;
+		BasicAuthorizationCredentials IConnectionConfigurationValues.BasicAuthorizationCredentials => _basicAuthCredentials;
 
-		private BasicAuthorizationCredentials _basicAuthCredentials;
-		BasicAuthorizationCredentials IConnectionConfigurationValues.BasicAuthorizationCredentials { get { return _basicAuthCredentials; } }
+		/* */
 
-		public ConnectionConfiguration(IConnectionPool connectionPool)
+		protected IElasticsearchSerializer _serializer;
+		IElasticsearchSerializer IConnectionConfigurationValues.Serializer => _serializer;
+
+		IConnectionPool _connectionPool;
+		IConnectionPool IConnectionConfigurationValues.ConnectionPool => _connectionPool;
+
+		IConnection _connection;
+		IConnection IConnectionConfigurationValues.Connection => _connection;
+
+		[System.Diagnostics.CodeAnalysis.SuppressMessage(
+			"Potential Code Quality Issues", "RECS0021:Warns about calls to virtual member functions occuring in the constructor", 
+			Justification = "We want the virtual method to run on most derived")]
+		protected ConnectionConfiguration(IConnectionPool connectionPool, IConnection connection, IElasticsearchSerializer serializer)
 		{
-			this._timeout = 60 * 1000;
-			//this.UriSpecifiedBasicAuth = !uri.UserInfo.IsNullOrEmpty();
-			//this.Uri = uri;
+			this._connectionPool = connectionPool;
+			this._connection = connection ?? new HttpConnection();
+			this._serializer = serializer ?? this.DefaultSerializer();
+
+			this._timeout = TimeSpan.FromMinutes(1);
 			this._connectionStatusHandler = this.ConnectionStatusDefaultHandler;
 			this._maximumAsyncConnections = 0;
-			this._connectionPool = connectionPool;
 			this._usePrettyRequests = true;
 		}
 
-		public ConnectionConfiguration(Uri uri = null)
-			: this(new SingleNodeConnectionPool(uri ?? new Uri("http://localhost:9200")))
-		{
-			//this.Host = uri.Host;
-			//this.Port = uri.Port
-		}
+		T Assign(Action<ConnectionConfiguration<T>> assigner) => Fluent.Assign((T)this, assigner);
 
-		public T EnableTcpKeepAlive(int keepAliveTime, int keepAliveInterval)
-		{
-			this._keepAliveTime = keepAliveTime;
-			this._keepAliveInterval = keepAliveInterval;
-			return (T) this;
-		}
+		protected virtual IElasticsearchSerializer DefaultSerializer() => new ElasticsearchDefaultSerializer();
 
-		public T MaximumRetries(int maxRetries)
-		{
-			this._maxRetries = maxRetries;
-			return (T)this;
-		}
+		public T EnableTcpKeepAlive(TimeSpan keepAliveTime, TimeSpan keepAliveInterval) =>
+			Assign(a => { this._keepAliveTime = keepAliveTime; this._keepAliveInterval = keepAliveInterval; });
 
-		public T SniffOnConnectionFault(bool sniffsOnConnectionFault = true)
-		{
-			this._sniffOnConectionFault = sniffsOnConnectionFault;
-			return (T)this;
-		}
-		public T SniffOnStartup(bool sniffsOnStartup = true)
-		{
-			this._sniffOnStartup = sniffsOnStartup;
-			return (T)this;
-		}
-		public T SniffLifeSpan(TimeSpan sniffTimeSpan)
-		{
-			this._sniffLifeSpan = sniffTimeSpan;
-			return (T)this;
-		}
+		public T MaximumRetries(int maxRetries) => Assign(a => a._maxRetries = maxRetries);
+
+		public T SniffOnConnectionFault(bool sniffsOnConnectionFault = true) => Assign(a => a._sniffOnConectionFault = sniffsOnConnectionFault);
+
+		public T SniffOnStartup(bool sniffsOnStartup = true) => Assign(a => a._sniffOnStartup = sniffsOnStartup);
+
+		public T SniffLifeSpan(TimeSpan sniffLifeSpan) => Assign(a => a._sniffLifeSpan = sniffLifeSpan);
 
 		/// <summary>
 		/// Enable gzip compressed requests and responses, do note that you need to configure elasticsearch to set this
 		/// <see cref="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-http.html"/>
 		/// </summary>
-		public T EnableHttpCompression(bool enabled = true)
-		{
-			this._enableHttpCompression = enabled;
-			return (T)this;
-		}
+		public T EnableHttpCompression(bool enabled = true) => Assign(a => a._enableHttpCompression = enabled);
 
 		/// <summary>
 		/// Enable Trace signals to the IConnection that it should put debug information on the Trace.
 		/// </summary>
-		public T EnableTrace(bool enabled = true)
-		{
-			this._traceEnabled = enabled;
-			return (T)this;
-		}
+		public T EnableTrace(bool enabled = true) => Assign(a => this._traceEnabled = enabled);
 
-		public T DisableAutomaticProxyDetection(bool disable = true)
-		{
-			this._disableAutomaticProxyDetection = disable;
-			return (T)this;
-		}
+		public T DisableAutomaticProxyDetection(bool disable = true) => Assign(a => a._disableAutomaticProxyDetection = disable);
 
 		/// <summary>
 		/// By enabling metrics more metadata is returned per API call about requests (ping, sniff, failover) and general stats
 		/// </summary>
-		public T EnableMetrics(bool enabled = true)
-		{
-			this._enableMetrics = enabled;
-			return (T)this;
-		}
+		public T EnableMetrics(bool enabled = true) => Assign(a => a._enableMetrics = enabled);
 
 		/// <summary>
 		/// Instead of following a c/go like error checking on response.IsValid always throw an ElasticsearchServerException
 		/// on the client when a call resulted in an exception on the elasticsearch server. 
 		/// <para>Reasons for such exceptions could be search parser errors, index missing exceptions</para>
 		/// </summary>
-		public T ThrowOnElasticsearchServerExceptions(bool alwaysThrow = true)
-		{
-			this._throwOnServerExceptions = alwaysThrow;
-			return (T)this;
-		}
+		public T ThrowOnElasticsearchServerExceptions(bool alwaysThrow = true) => Assign(a => a._throwOnServerExceptions = alwaysThrow);
+
 		/// <summary>
 		/// When a node is used for the very first time or when it's used for the first time after it has been marked dead
 		/// a ping with a very low timeout is send to the node to make sure that when it's still dead it reports it as fast as possible.
 		/// You can disable these pings globally here if you rather have it fail on the possible slower original request
 		/// </summary>
-		public T DisablePing(bool disable = true)
-		{
-			this._disablePings = disable;
-			return (T)this;
-		}
+		public T DisablePing(bool disable = true) => Assign(a => a._disablePings = disable);
 
 		/// <summary>
 		/// This NameValueCollection will be appended to every url NEST calls, great if you need to pass i.e an API key.
 		/// </summary>
-		public T SetGlobalQueryStringParameters(NameValueCollection queryStringParameters)
-		{
-			this._queryString = queryStringParameters;
-			return (T)this;
-		}
+		public T SetGlobalQueryStringParameters(NameValueCollection queryStringParameters) => Assign(a => a._queryString.Add(queryStringParameters));
 
 		/// <summary>
 		/// a NameValueCollection that will be send as headers for each request
 		/// </summary>
-		public T SetGlobalHeaders(NameValueCollection headers)
-		{
-			this._headers = headers;
-			return (T)this;
-		}
+		public T SetGlobalHeaders(NameValueCollection headers) => Assign(a => a._headers.Add(headers));
 
 		/// <summary>
 		/// Sets the default timeout in milliseconds for each request to Elasticsearch.
 		/// NOTE: You can set this to a high value here, and specify the timeout on Elasticsearch's side.
 		/// </summary>
 		/// <param name="timeout">time out in milliseconds</param>
-		public T SetTimeout(int timeout)
-		{
-			this._timeout = timeout;
-			return (T)this;
-		}
+		public T SetTimeout(TimeSpan timeout) => Assign(a => a._timeout = timeout);
 
 		/// <summary>
 		/// Sets the default ping timeout in milliseconds for ping requests, which are used
 		/// to determine whether a node is alive. Pings should fail as fast as possible.
 		/// </summary>
 		/// <param name="timeout">The ping timeout in milliseconds defaults to 1000, or 2000 is using SSL.</param>
-		public T SetPingTimeout(int timeout)
-		{
-			this._pingTimeout = timeout;
-			return (T)this;
-		}
+		public T SetPingTimeout(TimeSpan timeout) => Assign(a => a._pingTimeout = timeout);
 
 		/// <summary>
 		/// Sets the default connection timeout in milliseconds.
 		/// </summary>
-		public T SetConnectTimeout(int timeout)
-		{
-			this._connectTimeout = timeout;
-			return (T)this;
-		}
+		public T SetConnectTimeout(TimeSpan timeout) => Assign(a => a._connectTimeout = timeout);
 
 		/// <summary>
 		/// Sets the default dead timeout factor when a node has been marked dead.
 		/// </summary>
 		/// <remarks>Some connection pools may use a flat timeout whilst others take this factor and increase it exponentially</remarks>
 		/// <param name="timeout"></param>
-		public T SetDeadTimeout(int timeout)
-		{
-			this._deadTimeout = timeout;
-			return (T)this;
-		}
+		public T SetDeadTimeout(TimeSpan timeout) => Assign(a => a._deadTimeout = timeout);
 
 		/// <summary>
 		/// Sets the maximum time a node can be marked dead. 
 		/// Different implementations of IConnectionPool may choose a different default.
 		/// </summary>
 		/// <param name="timeout">The timeout in milliseconds</param>
-		public T SetMaxDeadTimeout(int timeout)
-		{
-			this._maxDeadTimeout = timeout;
-			return (T)this;
-		}
+		public T SetMaxDeadTimeout(TimeSpan timeout) => Assign(a => a._maxDeadTimeout = timeout);
 
 		/// <summary>
 		/// Limits the total runtime including retries separately from <see cref="Timeout"/>
@@ -328,22 +271,14 @@ namespace Elasticsearch.Net.Connection
 		/// When not specified defaults to <see cref="Timeout"/> which itself defaults to 60seconds
 		/// </pre>
 		/// </summary>
-		public T SetMaxRetryTimeout(TimeSpan maxRetryTimeout)
-		{
-			this._maxRetryTimeout = maxRetryTimeout;
-			return (T)this;
-		}
+		public T SetMaxRetryTimeout(TimeSpan maxRetryTimeout) => Assign(a => a._maxRetryTimeout = maxRetryTimeout);
 
 		/// <summary>
 		/// Semaphore asynchronous connections automatically by giving
 		/// it a maximum concurrent connections. 
 		/// </summary>
 		/// <param name="maximum">defaults to 0 (unbounded)</param>
-		public T SetMaximumAsyncConnections(int maximum)
-		{
-			this._maximumAsyncConnections = maximum;
-			return (T)this;
-		}
+		public T SetMaximumAsyncConnections(int maximum) => Assign(a => a._maximumAsyncConnections = maximum);
 
 		/// <summary>
 		/// If your connection has to go through proxy use this method to specify the proxy url
@@ -363,19 +298,12 @@ namespace Elasticsearch.Net.Connection
 		/// </summary>
 		/// <param name="b"></param>
 		/// <returns></returns>
-		public T PrettyJson(bool b = true)
-		{
-			return this.UsePrettyRequests(b).UsePrettyResponses(b);
-		}
+		public T PrettyJson(bool b = true) => Assign(a => this.UsePrettyRequests(b).UsePrettyResponses(b));
 
 		/// <summary>
 		/// Defaults to true, wether to send formatted json to elasticsearch or not
 		/// </summary>
-		public T UsePrettyRequests(bool b = true)
-		{
-			this._usePrettyRequests = b;
-			return (T) this;
-		}
+		public T UsePrettyRequests(bool b = true) => Assign(a => this._usePrettyRequests = b);
 
 		/// <summary>
 		/// Append ?pretty=true to requests, this helps to debug send and received json.
@@ -391,33 +319,22 @@ namespace Elasticsearch.Net.Connection
 		/// Make sure the reponse bytes are always available on the ElasticsearchResponse object
 		/// <para>Note: that depending on the registered serializer this may cause the respond to be read in memory first</para>
 		/// </summary>
-		public T ExposeRawResponse(bool b = true)
-		{
-			this._keepRawResponse = b;
-			return (T)this;
-		}
-		protected void ConnectionStatusDefaultHandler(IElasticsearchResponse status)
-		{
-			return;
-		}
+		public T ExposeRawResponse(bool b = true) => Assign(a => a._keepRawResponse = b);
+
+		protected void ConnectionStatusDefaultHandler(IElasticsearchResponse status) { return; }
 
 		/// <summary>
 		/// Global callback for every response that NEST receives, useful for custom logging.
 		/// </summary>
-		public T SetConnectionStatusHandler(Action<IElasticsearchResponse> handler)
-		{
-			handler.ThrowIfNull("handler");
-			this._connectionStatusHandler = handler;
-			return (T)this;
-		}
+		public T SetConnectionStatusHandler(Action<IElasticsearchResponse> handler) =>
+			Assign(a => a._connectionStatusHandler = handler ?? ConnectionStatusDefaultHandler);
 
 		/// <summary>
 		/// Basic access authentication credentials to specify with all requests.
 		/// </summary>
 		public T SetBasicAuthentication(string userName, string password)
 		{
-			if (this._basicAuthCredentials == null)
-				this._basicAuthCredentials = new BasicAuthorizationCredentials();
+			this._basicAuthCredentials = new BasicAuthorizationCredentials();
 			this._basicAuthCredentials.UserName = userName;
 			this._basicAuthCredentials.Password = password;
 			return (T)this;
@@ -427,11 +344,7 @@ namespace Elasticsearch.Net.Connection
 		/// Allows for requests to be pipelined. http://en.wikipedia.org/wiki/HTTP_pipelining
 		/// <para>Note: HTTP pipelining must also be enabled in Elasticsearch for this to work properly.</para>
 		/// </summary>
-		public T HttpPipeliningEnabled(bool enabled = true)
-		{
-			this._httpPipeliningEnabled = enabled;
-			return (T)this;
-		}
+		public T HttpPipeliningEnabled(bool enabled = true) => Assign(a => a._httpPipeliningEnabled = enabled);
 	}
 }
 

@@ -1,0 +1,190 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>Microsoft.CSharp</name>
+  </assembly>
+  <members>
+    <member name="T:Microsoft.CSharp.RuntimeBinder.Binder">
+      <summary>Contains factory methods to create dynamic call site binders for CSharp.</summary>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.BinaryOperation(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.Linq.Expressions.ExpressionType,System.Type,System.Collections.Generic.IEnumerable{Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo})">
+      <summary>Initializes a new CSharp binary operation binder.</summary>
+      <returns>Returns a new CSharp binary operation binder.</returns>
+      <param name="flags">The flags with which to initialize the binder.</param>
+      <param name="operation">The binary operation kind.</param>
+      <param name="context">The <see cref="T:System.Type" /> object that indicates where this operation is used.</param>
+      <param name="argumentInfo">The sequence of <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> instances for the arguments to this operation.</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.Convert(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.Type,System.Type)">
+      <summary>Initializes a new CSharp convert binder.</summary>
+      <returns>Returns a new CSharp convert binder.</returns>
+      <param name="flags">The flags with which to initialize the binder.</param>
+      <param name="type">The type to convert to.</param>
+      <param name="context">The <see cref="T:System.Type" /> object that indicates where this operation is used.</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.GetIndex(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.Type,System.Collections.Generic.IEnumerable{Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo})">
+      <summary>Initializes a new CSharp get index binder.</summary>
+      <returns>Returns a new CSharp get index binder.</returns>
+      <param name="flags">The flags with which to initialize the binder.</param>
+      <param name="context">The <see cref="T:System.Type" /> that indicates where this operation is used.</param>
+      <param name="argumentInfo">The sequence of <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> instances for the arguments to this operation.</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.GetMember(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.String,System.Type,System.Collections.Generic.IEnumerable{Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo})">
+      <summary>Initializes a new CSharp get member binder.</summary>
+      <returns>Returns a new CSharp get member binder.</returns>
+      <param name="flags">The flags with which to initialize the binder.</param>
+      <param name="name">The name of the member to get.</param>
+      <param name="context">The <see cref="T:System.Type" /> that indicates where this operation is used.</param>
+      <param name="argumentInfo">The sequence of <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> instances for the arguments to this operation.</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.Invoke(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.Type,System.Collections.Generic.IEnumerable{Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo})">
+      <summary>Initializes a new CSharp invoke binder.</summary>
+      <returns>Returns a new CSharp invoke binder.</returns>
+      <param name="flags">The flags with which to initialize the binder.</param>
+      <param name="context">The <see cref="T:System.Type" /> that indicates where this operation is used.</param>
+      <param name="argumentInfo">The sequence of <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> instances for the arguments to this operation.</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.InvokeConstructor(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.Type,System.Collections.Generic.IEnumerable{Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo})">
+      <summary>Initializes a new CSharp invoke constructor binder.</summary>
+      <returns>Returns a new CSharp invoke constructor binder.</returns>
+      <param name="flags">The flags with which to initialize the binder.</param>
+      <param name="context">The <see cref="T:System.Type" /> that indicates where this operation is used.</param>
+      <param name="argumentInfo">The sequence of <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> instances for the arguments to this operation.</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.InvokeMember(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.String,System.Collections.Generic.IEnumerable{System.Type},System.Type,System.Collections.Generic.IEnumerable{Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo})">
+      <summary>Initializes a new CSharp invoke member binder.</summary>
+      <returns>Returns a new CSharp invoke member binder.</returns>
+      <param name="flags">The flags with which to initialize the binder.</param>
+      <param name="name">The name of the member to invoke.</param>
+      <param name="typeArguments">The list of type arguments specified for this invoke.</param>
+      <param name="context">The <see cref="T:System.Type" /> that indicates where this operation is used.</param>
+      <param name="argumentInfo">The sequence of <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> instances for the arguments to this operation.</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.IsEvent(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.String,System.Type)">
+      <summary>Initializes a new CSharp is event binder.</summary>
+      <returns>Returns a new CSharp is event binder.</returns>
+      <param name="flags">The flags with which to initialize the binder.</param>
+      <param name="name">The name of the event to look for.</param>
+      <param name="context">The <see cref="T:System.Type" /> that indicates where this operation is used.</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.SetIndex(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.Type,System.Collections.Generic.IEnumerable{Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo})">
+      <summary>Initializes a new CSharp set index binder.</summary>
+      <returns>Returns a new CSharp set index binder.</returns>
+      <param name="flags">The flags with which to initialize the binder.</param>
+      <param name="context">The <see cref="T:System.Type" /> that indicates where this operation is used.</param>
+      <param name="argumentInfo">The sequence of <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> instances for the arguments to this operation.</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.SetMember(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.String,System.Type,System.Collections.Generic.IEnumerable{Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo})">
+      <summary>Initializes a new CSharp set member binder.</summary>
+      <returns>Returns a new CSharp set member binder.</returns>
+      <param name="flags">The flags with which to initialize the binder.</param>
+      <param name="name">The name of the member to set.</param>
+      <param name="context">The <see cref="T:System.Type" /> that indicates where this operation is used.</param>
+      <param name="argumentInfo">The sequence of <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> instances for the arguments to this operation.</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.Binder.UnaryOperation(Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags,System.Linq.Expressions.ExpressionType,System.Type,System.Collections.Generic.IEnumerable{Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo})">
+      <summary>Initializes a new CSharp unary operation binder.</summary>
+      <returns>Returns a new CSharp unary operation binder.</returns>
+      <param name="flags">The flags with which to initialize the binder.</param>
+      <param name="operation">The unary operation kind.</param>
+      <param name="context">The <see cref="T:System.Type" /> object that indicates where this operation is used.</param>
+      <param name="argumentInfo">The sequence of <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> instances for the arguments to this operation.</param>
+    </member>
+    <member name="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo">
+      <summary>Represents information about C# dynamic operations that are specific to particular arguments at a call site. Instances of this class are generated by the C# compiler.</summary>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo.Create(Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfoFlags,System.String)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> class.</summary>
+      <returns>A new instance of the <see cref="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfo" /> class.</returns>
+      <param name="flags">The flags for the argument.</param>
+      <param name="name">The name of the argument, if named; otherwise null.</param>
+    </member>
+    <member name="T:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfoFlags">
+      <summary>Represents information about C# dynamic operations that are specific to particular arguments at a call site. Instances of this class are generated by the C# compiler.</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfoFlags.None">
+      <summary>No additional information to represent.</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfoFlags.UseCompileTimeType">
+      <summary>The argument's compile-time type should be considered during binding.</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfoFlags.Constant">
+      <summary>The argument is a constant.</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfoFlags.NamedArgument">
+      <summary>The argument is a named argument.</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfoFlags.IsRef">
+      <summary>The argument is passed to a ref parameter.</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfoFlags.IsOut">
+      <summary>The argument is passed to an out parameter.</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpArgumentInfoFlags.IsStaticType">
+      <summary>The argument is a <see cref="T:System.Type" /> indicating an actual type name used in source. Used only for target objects in static calls.</summary>
+    </member>
+    <member name="T:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags">
+      <summary>Represents information about C# dynamic operations that are not specific to particular arguments at a call site. Instances of this class are generated by the C# compiler.</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.None">
+      <summary>There is no additional information required for this binder.</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.CheckedContext">
+      <summary>The evaluation of this binder happens in a checked context.</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.InvokeSimpleName">
+      <summary>The binder represents an invoke on a simple name.</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.InvokeSpecialName">
+      <summary>The binder represents an invoke on a specialname.</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.BinaryOperationLogical">
+      <summary>The binder represents a logical AND or logical OR that is part of a conditional logical operator evaluation.</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.ConvertExplicit">
+      <summary>The binder represents an explicit conversion.</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.ConvertArrayIndex">
+      <summary>The binder represents an implicit conversion for use in an array creation expression.</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.ResultIndexed">
+      <summary>The result of any bind is going to be indexed get a set index or get index binder.</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.ValueFromCompoundAssignment">
+      <summary>The value in this set index or set member comes a compound assignment operator.</summary>
+    </member>
+    <member name="F:Microsoft.CSharp.RuntimeBinder.CSharpBinderFlags.ResultDiscarded">
+      <summary>The binder is used in a position that does not require a result, and can therefore bind to a void returning method.</summary>
+    </member>
+    <member name="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderException">
+      <summary>Represents an error that occurs when a dynamic bind in the C# runtime binder is processed.</summary>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.RuntimeBinderException.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderException" /> class.</summary>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.RuntimeBinderException.#ctor(System.String)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderException" /> class that has a specified error message.</summary>
+      <param name="message">The message that describes the exception. The caller of this constructor is required to ensure that this string has been localized for the current system culture.The error message that explains the reason for the exception.</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.RuntimeBinderException.#ctor(System.String,System.Exception)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderException" /> class that has a specified error message and a reference to the inner exception that is the cause of this exception.</summary>
+      <param name="message">The error message that explains the reason for the exception.</param>
+      <param name="innerException">The exception that is the cause of the current exception, or a null reference if no inner exception is specified.</param>
+    </member>
+    <member name="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderInternalCompilerException">
+      <summary>Represents an error that occurs when a dynamic bind in the C# runtime binder is processed.</summary>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.RuntimeBinderInternalCompilerException.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderInternalCompilerException" /> class with a system-supplied message that describes the error.</summary>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.RuntimeBinderInternalCompilerException.#ctor(System.String)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderInternalCompilerException" /> class with a specified message that describes the error.</summary>
+      <param name="message">The message that describes the exception. The caller of this constructor is required to ensure that this string has been localized for the current system culture.</param>
+    </member>
+    <member name="M:Microsoft.CSharp.RuntimeBinder.RuntimeBinderInternalCompilerException.#ctor(System.String,System.Exception)">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderInternalCompilerException" /> class that has a specified error message and a reference to the inner exception that is the cause of this exception.</summary>
+      <param name="message">The error message that explains the reason for the exception.</param>
+      <param name="innerException">The exception that is the cause of the current exception, or a null reference if no inner exception is specified.</param>
+    </member>
+  </members>
+</doc>

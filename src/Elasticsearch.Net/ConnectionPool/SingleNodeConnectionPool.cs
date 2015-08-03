@@ -11,6 +11,8 @@ namespace Elasticsearch.Net.ConnectionPool
 		public int MaxRetries => 0;
 
 		public bool AcceptsUpdates => false;
+		public bool SupportsPinging => false;
+
 		public void Update(IEnumerable<Node> nodes) { } //ignored
 		
 		public bool UsingSsl { get; }

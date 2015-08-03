@@ -1,6 +1,8 @@
+using Elasticsearch.Net.Connection;
 using System;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Elasticsearch.Net.Serialization
@@ -9,13 +11,22 @@ namespace Elasticsearch.Net.Serialization
 	{
 		T Deserialize<T>(Stream stream);
 
-		Task<T> DeserializeAsync<T>(Stream stream);
+		Task<T> DeserializeAsync<T>(Stream responseStream, CancellationToken cancellationToken = default(CancellationToken));
 
-		byte[] Serialize(object data, SerializationFormatting formatting = SerializationFormatting.Indented);
-
-		/// <summary>
-		/// Used to stringify valuetypes to string (i.e querystring parameters and route parameters).
-		/// </summary>
-		string Stringify(object valueType);
+		void Serialize(object data, Stream writableStream, SerializationFormatting formatting = SerializationFormatting.Indented);
 	}
+
+	public static class ElasticsearchSerializerExtensions
+	{
+		public static byte[] SerializeToBytes(this IElasticsearchSerializer serializer, object data, SerializationFormatting formatting = SerializationFormatting.Indented)
+		{
+			using (var ms = new MemoryStream())
+			{
+				serializer.Serialize(data, ms, formatting);
+				return ms.ToArray();
+			}
+		}
+
+	}
+
 }

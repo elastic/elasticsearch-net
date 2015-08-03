@@ -9,6 +9,7 @@ using FluentAssertions;
 using Nest;
 using Newtonsoft.Json.Linq;
 using Ploeh.AutoFixture;
+using Elasticsearch.Net.Serialization;
 
 namespace Tests.Framework
 {
@@ -72,7 +73,7 @@ namespace Tests.Framework
 
 		protected string Serialize<TObject>(TObject o)
 		{
-			var bytes = TestClient.GetClient(_connectionSettingsModifier).Serializer.Serialize(o);
+			var bytes = TestClient.GetClient(_connectionSettingsModifier).Serializer.SerializeToBytes(o);
 			return Encoding.UTF8.GetString(bytes);
 		}
 

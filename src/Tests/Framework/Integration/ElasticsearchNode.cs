@@ -134,10 +134,16 @@ namespace Tests.Framework.Integration
 			}
 			else if (s.TryGetStartedConfirmation())
 			{
-				var seeder = new Seeder(this.Port);
-				seeder.SeedNode();
-				handle.Set();
-				this.Started = true;
+				try
+				{
+					var seeder = new Seeder(this.Port);
+					seeder.SeedNode();
+					this.Started = true;
+				}
+				finally
+				{
+					handle.Set();
+				}
 			}
 			else if (s.TryGetPortNumber(out port))
 			{

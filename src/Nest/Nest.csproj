@@ -102,6 +102,7 @@
     <Compile Include="CommonAbstractions\SerializationBehavior\Generic\KeyValueConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\Generic\ReserializeJsonConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\Generic\UnionConverter.cs" />
+    <Compile Include="CommonAbstractions\SerializationBehavior\Resolvers\Converters\BulkRequestConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\Resolvers\Converters\DateMathConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\Resolvers\Converters\TimeUnitExpressionConverter.cs" />
     <Compile Include="Aggregations\Bucket\DateHistogram\DateInterval.cs" />
@@ -700,7 +701,6 @@
     <Compile Include="Search\Suggesters\CompletionSuggester\CompletionSuggest.cs" />
     <Compile Include="QueryDsl\Compound\FunctionScore\FunctionScoreQuery.cs" />
     <Compile Include="CommonAbstractions\Infer\ElasticInferrer.cs" />
-    <Compile Include="CommonAbstractions\SerializationBehavior\INestSerializer.cs" />
     <Compile Include="Document\Multiple\Reindex\IReindexResponse.cs" />
     <Compile Include="Search\Suggesters\Suggest.cs" />
     <Compile Include="Search\Suggesters\SuggestOption.cs" />

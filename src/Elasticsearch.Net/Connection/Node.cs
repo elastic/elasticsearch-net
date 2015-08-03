@@ -4,47 +4,55 @@ using Elasticsearch.Net.Providers;
 
 namespace Elasticsearch.Net.Connection
 {
+
 	public class Node
 	{
-		private readonly IDateTimeProvider _dateTimeProvider;
-
-		public Node(Uri uri, IDateTimeProvider dateTimeProvider = null)
+		public Node(Uri uri)
 		{
-			this._dateTimeProvider = dateTimeProvider ?? new DateTimeProvider();
-
-			//this makes sure that paths stay relative i.e if the root uri is:
+			//this makes sure that elasticsearch paths stay relative to the path passed in
 			//http://my-saas-provider.com/instance
 			if (!uri.OriginalString.EndsWith("/", StringComparison.Ordinal))
 				uri = new Uri(uri.OriginalString + "/");
 			this.Uri = uri.Purify();
+			this.IsAlive = true;
+			this.HoldsData = true;
+			this.MasterEligable = true;
+			this.IsResurrected = true;
 		}
 
 		public Uri Uri { get; }
 
-		public bool NeedsPing { get; }
+		/// <summary> When set this signals the transport that a ping before first usage would be wise</summary>
+		public bool IsResurrected { get; set; }
 
-		public DateTime DeadUntil { get; internal set; }
+		/// <summary>Indicates whether this node holds data, defaults to true when unknown/unspecified</summary>
+		public bool HoldsData { get; set; }
 
-		public bool IsAlive { get; internal set; }
+		/// <summary>Indicates whether this node is master eligable, defaults to true when unknown/unspecified</summary>
+		public bool MasterEligable { get; set; }
 
-		public bool IsResurrected { get; internal set; }
+		/// <summary> The number of failed attempts trying to use this node, resets when a node is marked alive</summary>
+		public int FailedAttempts { get; private set; }
+		
+		/// <summary> When marked dead this reflects the date that the node has to be taken out of rotation till</summary>
+		public DateTime DeadUntil { get; private set; }
 
-		public int Attempts { get; internal set; }
+		public bool IsAlive { get; private set; }
 
-		public void MarkDead(TimeSpan? timeout, TimeSpan? maxTimeout)
+		public void MarkDead(DateTime untill)
 		{
-			this.Attempts++;
+			this.FailedAttempts++;
 			this.IsAlive = false;
 			this.IsResurrected = false;
-			this.DeadUntil = this._dateTimeProvider.DeadTime(this.Attempts, timeout, maxTimeout);
+			this.DeadUntil = untill;
 		}
 
 		public void MarkAlive()
 		{
-			this.Attempts = 0;
+			this.FailedAttempts = 0;
 			this.IsAlive = true;
 			this.IsResurrected = false;
-			this.DeadUntil = this._dateTimeProvider.AliveTime(); //TODO really needed or did we have this for mocking ease?
+			this.DeadUntil = default(DateTime); 
 		}
 
 		public Uri CreatePath(string path) => new Uri(this.Uri, path).Purify();

@@ -11,15 +11,14 @@ namespace Elasticsearch.Net.ConnectionPool
 	{
 		private readonly ReaderWriterLockSlim _readerWriter = new ReaderWriterLockSlim();
 
-		public override bool AcceptsUpdates { get { return true; } }
+		public override bool AcceptsUpdates => true;
+		public override bool SupportsPinging => true;
 
-		public SniffingConnectionPool(
-			IEnumerable<Uri> uris, 
-			bool randomizeOnStartup = true, 
-			IDateTimeProvider dateTimeProvider = null)
-			: base(uris, randomizeOnStartup, dateTimeProvider)
-		{
-		}
+		public SniffingConnectionPool(IEnumerable<Uri> uris, bool randomizeOnStartup = true, IDateTimeProvider dateTimeProvider = null)
+			: base(uris, randomizeOnStartup, dateTimeProvider) { }
+
+		public SniffingConnectionPool(IEnumerable<Node> nodes, bool randomizeOnStartup = true, IDateTimeProvider dateTimeProvider = null)
+			: base (nodes, randomizeOnStartup, dateTimeProvider) { }
 
 		private List<Node> _nodes = new List<Node>();
 		public override IReadOnlyCollection<Node> Nodes => this._nodes;

@@ -20,56 +20,32 @@ namespace Elasticsearch.Net
 		private UrlFormatProvider _formatter;
 
 		public IConnectionConfigurationValues Settings { get { return this.Transport.Settings; } }
-		public IElasticsearchSerializer Serializer { get { return this.Transport.Serializer; } }
+		public IElasticsearchSerializer Serializer { get { return this.Transport.Settings.Serializer; } }
 
-		protected ITransport Transport { get; set; }
+		protected ITransport<IConnectionConfigurationValues> Transport { get; set; }
+
+		/// <summary>Instantiate a new low level elasticsearch client to http://localhost:9200</summary>
+		public ElasticsearchClient() : this(new Transport<IConnectionConfigurationValues>(new ConnectionConfiguration())) { }
+
+		/// <summary>Instantiate a new low level elasticsearch client using the specified settings</summary>
+		public ElasticsearchClient(IConnectionConfigurationValues settings) : this(new Transport<IConnectionConfigurationValues>(settings ?? new ConnectionConfiguration())) { }
 
 		/// <summary>
-		/// Instantiate a new low level elasticsearch client
+		/// Instantiate a new low level elasticsearch client explicitly specifying a custom transport setup
 		/// </summary>
-		/// <param name="settings">Specify how and where the client connects to elasticsearch, defaults to a static single node connectionpool to http://localhost:9200 </param>
-		public ElasticsearchClient(IConnectionConfigurationValues settings = null) : this(new NewTransport(settings ?? new ConnectionConfiguration())) { }
-		public ElasticsearchClient(ITransport transport)
+		public ElasticsearchClient(ITransport<IConnectionConfigurationValues> transport)
 		{
 			transport.ThrowIfNull(nameof(transport));
 			transport.Settings.ThrowIfNull(nameof(transport.Settings));
-			transport.Serializer.ThrowIfNull(nameof(transport.Serializer));
 			transport.Settings.Serializer.ThrowIfNull(nameof(transport.Settings.Serializer));
 
 			this.Transport = transport;
-			this._formatter = new UrlFormatProvider(this.Transport.Settings.Serializer);
-		}
-
-		class UrlFormatProvider : IFormatProvider, ICustomFormatter
-		{
-			private readonly IElasticsearchSerializer _serializer;
-
-			public UrlFormatProvider(IElasticsearchSerializer serializer)
-			{
-				_serializer = serializer;
-			}
-
-			public object GetFormat(Type formatType) => formatType == typeof(ICustomFormatter) ? this : null;
-
-			public string Format(string format, object arg, IFormatProvider formatProvider)
-			{
-				if (arg == null)
-					throw new ArgumentNullException();
-				if (format == "r")
-					return arg.ToString();
-				return Uri.EscapeDataString(this._serializer.Stringify(arg));
-			}
+			this._formatter = new UrlFormatProvider(this.Transport.Settings);
 		}
 
 		string Url(FormattableString formattable)
 		{
 			return formattable.ToString(_formatter);
-		}
-
-
-		public string Encoded(object o)
-		{
-			throw new NotImplementedException();
 		}
 
 		private TRequestParams CreateRequestParams<TRequestParams>(Func<TRequestParams, TRequestParams> requestParameters, bool allow404, string contentType)
@@ -79,16 +55,15 @@ namespace Elasticsearch.Net
 			if (!allow404 && contentType.IsNullOrEmpty()) return requestParams;
 
 			requestParams = requestParams ?? new TRequestParams();
-			if (requestParams.RequestConfiguration == null) requestParams.RequestConfiguration = new RequestConfiguration(); 
+			if (requestParams.RequestConfiguration == null) requestParams.RequestConfiguration = new RequestConfiguration();
 			if (allow404)
-				requestParams.RequestConfiguration.AllowedStatusCodes = new [] { 404 };
+				requestParams.RequestConfiguration.AllowedStatusCodes = new[] { 404 };
 			if (!contentType.IsNullOrEmpty())
 				requestParams.RequestConfiguration.ContentType = contentType;
 			return requestParams;
 		}
 
 		//TODO these are just proxy methods, remove??
-
 
 		/// <summary>
 		/// Perform any request you want over the configured IConnection synchronously while taking advantage of the cluster failover.
@@ -99,16 +74,16 @@ namespace Elasticsearch.Net
 		/// <param name="data">The body of the request, string and byte[] are posted as is other types will be serialized to JSON</param>
 		/// <param name="requestParameters">Optionally configure request specific timeouts, headers</param>
 		/// <returns>An ElasticsearchResponse of T where T represents the JSON response body</returns>
-		public ElasticsearchResponse<T> DoRequest<T>(HttpMethod method, string path, object data = null, IRequestParameters requestParameters = null)
+		public ElasticsearchResponse<T> DoRequest<T>(HttpMethod method, string path, PostData<object> data = null, IRequestParameters requestParameters = null)
 		{
 			return this.Transport.DoRequest<T>(method, path, data, requestParameters);
 		}
 
 		public ElasticsearchResponse<T> DoRequest<T, TRequestParams>(
-			HttpMethod method, 
-			string path, 
+			HttpMethod method,
+			string path,
 			Func<TRequestParams, TRequestParams> requestParameters = null,
-			object data = null, 
+			PostData<object> data = null,
 			bool allow404 = false,
 			string contentType = null
 			)
@@ -126,16 +101,16 @@ namespace Elasticsearch.Net
 		/// <param name="data">The body of the request, string and byte[] are posted as is other types will be serialized to JSON</param>
 		/// <param name="requestParameters">Optionally configure request specific timeouts, headers</param>
 		/// <returns>A task of ElasticsearchResponse of T where T represents the JSON response body</returns>
-		public Task<ElasticsearchResponse<T>> DoRequestAsync<T>(HttpMethod method, string path, object data = null, IRequestParameters requestParameters = null)
+		public Task<ElasticsearchResponse<T>> DoRequestAsync<T>(HttpMethod method, string path, PostData<object> data = null, IRequestParameters requestParameters = null)
 		{
 			return this.Transport.DoRequestAsync<T>(method, path, data, requestParameters);
 		}
 
 		public Task<ElasticsearchResponse<T>> DoRequestAsync<T, TRequestParams>(
-			HttpMethod method, 
-			string path, 
+			HttpMethod method,
+			string path,
 			Func<TRequestParams, TRequestParams> requestParameters = null,
-			object data = null, 
+			PostData<object> data = null,
 			bool allow404 = false,
 			string contentType = null
 			)

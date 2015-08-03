@@ -7,12 +7,13 @@ using System.Reflection;
 using Elasticsearch.Net.Connection;
 using Nest;
 using Tests.Framework.MockData;
+using Elasticsearch.Net.ConnectionPool;
 
 namespace Tests.Framework
 {
 	public static class TestClient
 	{
-		private static bool _integrationOverride = false;
+		private static bool _integrationOverride = true;
 		private static string _manualOverrideVersion = "2.0.0";
 
 		public static string ElasticsearchVersion => 
@@ -24,7 +25,8 @@ namespace Tests.Framework
 
 		public static IElasticClient GetClient(Func<ConnectionSettings, ConnectionSettings> modifySettings = null, int port = 9200 )
 		{
-			var defaultSettings = new ConnectionSettings((CreateBaseUri(port)), "defaultindex")
+			var defaultSettings = new ConnectionSettings(new SingleNodeConnectionPool(CreateNode(port)), CreateConnection())
+				.SetDefaultIndex("default-index")
 				.InferMappingFor<Project>(map=>map
 					.IndexName("project")
 					.IdProperty(p=>p.Name)
@@ -40,8 +42,13 @@ namespace Tests.Framework
 				.SetGlobalHeaders(new NameValueCollection { {"TestMethod", ExpensiveTestNameForIntegrationTests()} });
 
 			var settings = modifySettings != null ? modifySettings(defaultSettings) : defaultSettings;
-			return new ElasticClient(settings, CreateConnection(settings));
+			return new ElasticClient(settings);
 		}
+
+		public static Uri CreateNode(int? port = null) => 
+			new UriBuilder("http", (RunningFiddler) ? "ipv4.fiddler" : "localhost", port.GetValueOrDefault(9200)).Uri;
+
+		public static IConnection CreateConnection() => RunIntegrationTests ? new HttpConnection() : new InMemoryConnection();
 
 		public static string ExpensiveTestNameForIntegrationTests()
 		{
@@ -61,19 +68,6 @@ namespace Tests.Framework
 				where type.FullName.StartsWith("Tests.") && !type.FullName.StartsWith("Tests.Framework.")
 				select type).ToList();
 			return types;
-		}
-
-		public static IConnection CreateConnection(IConnectionSettingsValues connectionSettings) =>
-			RunIntegrationTests ? new HttpConnection(connectionSettings) : new InMemoryConnection(connectionSettings);
-
-		public static Uri CreateBaseUri(int? port = null)
-		{
-			var host = "localhost";
-			if (RunningFiddler)
-				host = "ipv4.fiddler";
-
-			var uri = new UriBuilder("http", host, port.GetValueOrDefault(9200)).Uri;
-			return uri;
 		}
 
 	}

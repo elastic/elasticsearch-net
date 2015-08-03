@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	using Elasticsearch.Net.Serialization;
 	using MultiSearchCreator = Func<IElasticsearchResponse, Stream, MultiSearchResponse>;
 
 	public partial class ElasticClient
@@ -21,8 +22,9 @@ namespace Nest
 				(p, d) =>
 				{
 					var converter = CreateMultiSearchConverter(d);
-					var json = Serializer.SerializeMultiSearch(d);
-					var creator = new MultiSearchCreator((r, s) => this.DeserializeMultiSearchHit(r, s, converter));
+					var serializer = new NestSerializer(this.ConnectionSettings, converter);
+					var json = serializer.SerializeToBytes(d).Utf8String();
+					var creator = new MultiSearchCreator((r, s) =>  serializer.Deserialize<MultiSearchResponse>(s));
 					return this.LowLevelDispatch.MsearchDispatch<MultiSearchResponse>(p.DeserializationState(creator), json);
 				}
 			);
@@ -36,8 +38,9 @@ namespace Nest
 				(p, d) =>
 				{
 					var converter = CreateMultiSearchConverter(d);
-					var json = Serializer.SerializeMultiSearch(d);
-					var creator = new MultiSearchCreator((r, s) => this.DeserializeMultiSearchHit(r, s, converter));
+					var serializer = new NestSerializer(this.ConnectionSettings, converter);
+					var json = serializer.SerializeToBytes(d).Utf8String();
+					var creator = new MultiSearchCreator((r, s) =>  serializer.Deserialize<MultiSearchResponse>(s));
 					return this.LowLevelDispatch.MsearchDispatch<MultiSearchResponse>(p.DeserializationState(creator), json);
 				}
 			);
@@ -50,8 +53,9 @@ namespace Nest
 				(p, d) =>
 				{
 					var converter = CreateMultiSearchConverter(d);
-					var json = Serializer.SerializeMultiSearch(d);
-					var creator = new MultiSearchCreator((r, s) => this.DeserializeMultiSearchHit(r, s, converter));
+					var serializer = new NestSerializer(this.ConnectionSettings, converter);
+					var json = serializer.SerializeToBytes(d).Utf8String();
+					var creator = new MultiSearchCreator((r, s) =>  serializer.Deserialize<MultiSearchResponse>(s));
 					return this.LowLevelDispatch.MsearchDispatchAsync<MultiSearchResponse>(p.DeserializationState(creator), json);
 				}
 			);
@@ -65,18 +69,12 @@ namespace Nest
 				(p, d) =>
 				{
 					var converter = CreateMultiSearchConverter(d);
-					var json = Serializer.SerializeMultiSearch(d);
-					var creator = new MultiSearchCreator((r, s) => this.DeserializeMultiSearchHit(r, s, converter));
-					return this.LowLevelDispatch.MsearchDispatchAsync<MultiSearchResponse>(p.DeserializationState(creator), json);
+					var serializer = new NestSerializer(this.ConnectionSettings, converter);
+					var json = serializer.SerializeToBytes(d).Utf8String();
+					var creator = new MultiSearchCreator((r, s) =>  serializer.Deserialize<MultiSearchResponse>(s));
+					return this.LowLevelDispatch.MsearchDispatchAsync<MultiSearchResponse>(p.DeserializationState(creator), d);
 				}
 			);
-		}
-
-
-
-		private MultiSearchResponse DeserializeMultiSearchHit(IElasticsearchResponse response, Stream stream, JsonConverter converter)
-		{
-			return this.Serializer.DeserializeInternal<MultiSearchResponse>(stream, converter);
 		}
 
 		private JsonConverter CreateMultiSearchConverter(IMultiSearchRequest descriptor)
@@ -87,8 +85,7 @@ namespace Nest
 					SearchPathInfo.CloseOverAutomagicCovariantResultSelector(this.Infer, kv.Value);				
 			}
 
-
-			var multiSearchConverter = new MultiSearchConverter(_connectionSettings, descriptor);
+			var multiSearchConverter = new MultiSearchConverter(ConnectionSettings, descriptor);
 			return multiSearchConverter;
 		}
 	}

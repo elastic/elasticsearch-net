@@ -36,7 +36,7 @@ namespace Elasticsearch.Net.Connection
 		/// and specify the timeout in various calls on Elasticsearch's side.
 		/// </summary>
 		/// <param name="timeout">time out in milliseconds</param>
-		T SetTimeout(int timeout);
+		T SetTimeout(TimeSpan timeout);
 		
 		/// <summary>
 		/// If your connection has to go through proxy use this method to specify the proxy url

@@ -14,7 +14,7 @@ namespace Nest
 		public IIndicesOperationResponse PutTemplate(string name, Func<PutTemplateDescriptor, PutTemplateDescriptor> putTemplateSelector)
 		{
 			putTemplateSelector.ThrowIfNull("putTemplateSelector");
-			var descriptor = putTemplateSelector(new PutTemplateDescriptor(_connectionSettings).Name(name));
+			var descriptor = putTemplateSelector(new PutTemplateDescriptor(ConnectionSettings).Name(name));
 			return this.Dispatcher.Dispatch<IPutTemplateRequest, PutTemplateRequestParameters, IndicesOperationResponse>(
 				descriptor,
 				(p, d) => this.LowLevelDispatch.IndicesPutTemplateDispatch<IndicesOperationResponse>(p, d.TemplateMapping)
@@ -34,7 +34,7 @@ namespace Nest
 		public Task<IIndicesOperationResponse> PutTemplateAsync(string name, Func<PutTemplateDescriptor, PutTemplateDescriptor> putTemplateSelector)
 		{
 			putTemplateSelector.ThrowIfNull("putTemplateSelector");
-			var descriptor = putTemplateSelector(new PutTemplateDescriptor(_connectionSettings).Name(name));
+			var descriptor = putTemplateSelector(new PutTemplateDescriptor(ConnectionSettings).Name(name));
 			return this.Dispatcher.DispatchAsync<IPutTemplateRequest, PutTemplateRequestParameters, IndicesOperationResponse, IIndicesOperationResponse>(
 					descriptor,
 					(p, d) => this.LowLevelDispatch.IndicesPutTemplateDispatchAsync<IndicesOperationResponse>(p, d.TemplateMapping)

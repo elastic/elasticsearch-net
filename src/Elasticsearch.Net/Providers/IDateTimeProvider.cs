@@ -6,6 +6,5 @@ namespace Elasticsearch.Net.Providers
 	{
 		DateTime Now();
 		DateTime DeadTime(int attempts, TimeSpan? timeoutFactor, TimeSpan? maxDeadTimeout);
-		DateTime AliveTime();
 	}
 }

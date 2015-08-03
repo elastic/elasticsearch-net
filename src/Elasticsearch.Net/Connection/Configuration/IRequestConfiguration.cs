@@ -2,6 +2,7 @@ using Elasticsearch.Net.Connection.Security;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 
 namespace Elasticsearch.Net.Connection.Configuration
 {
@@ -10,12 +11,12 @@ namespace Elasticsearch.Net.Connection.Configuration
 		/// <summary>
 		/// The timeout for this specific request, takes precedence over the global timeout settings
 		/// </summary>
-		int? RequestTimeout { get; set; }
+		TimeSpan? RequestTimeout { get; set; }
 
 		/// <summary>
 		/// The connect timeout for this specific request
 		/// </summary>
-		int? ConnectTimeout { get; set;  }
+		TimeSpan? ConnectTimeout { get; set;  }
 
 		/// <summary>
 		/// Force a difference content type header on the request
@@ -61,5 +62,10 @@ namespace Elasticsearch.Net.Connection.Configuration
 		/// <para>Note: HTTP pipelining must also be enabled in Elasticsearch for this to work properly.</para>
 		/// </summary>
 		bool EnableHttpPipelining { get; set; }
+
+		/// <summary>
+		/// The cancellation token to use to internally to cancel async operations
+		/// </summary>
+		CancellationToken CancellationToken { get; set; }
 	}
 }

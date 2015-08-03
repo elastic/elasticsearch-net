@@ -70,30 +70,28 @@
     <Compile Include="Connection\Configuration\RequestConfigurationDescriptor.cs" />
     <Compile Include="Connection\ElasticsearchException.cs" />
     <Compile Include="Connection\HttpMethod.cs" />
-    <Compile Include="Connection\ITransportDelegator.cs" />
+    <Compile Include="Connection\Pipeline\RequestPipeline.cs" />
+    <Compile Include="Connection\Pipeline\RequestData.cs" />
+    <Compile Include="Connection\Pipeline\IRequestPipeline.cs" />
     <Compile Include="Connection\PipelineFailure.cs" />
     <Compile Include="Connection\Node.cs" />
-    <Compile Include="Connection\RequestHandlers\RequestHandler.cs" />
-    <Compile Include="Connection\RequestHandlers\RequestHandlerAsync.cs" />
-    <Compile Include="Connection\RequestHandlers\RequestHandlerBase.cs" />
-    <Compile Include="Connection\RequestState\IRequestTimings.cs" />
-    <Compile Include="Connection\RequestState\ITransportRequestState.cs" />
-    <Compile Include="Connection\RequestState\NoopRequestTimings.cs" />
-    <Compile Include="Connection\RequestState\RequestTimings.cs" />
+    <Compile Include="Connection\Audit\RequestTimings.cs" />
     <Compile Include="Connection\Security\BasicAuthorizationCredentials.cs" />
-    <Compile Include="Connection\Temp.cs" />
+    <Compile Include="Connection\Transport\PostData.cs" />
+    <Compile Include="Connection\Transport\Transport.cs" />
     <Compile Include="Domain\RequestParameters\BaseRequestParameters.cs" />
     <Compile Include="Domain\Response\CallMetrics.cs" />
     <Compile Include="Domain\Response\IElasticsearchResponse.cs" />
     <Compile Include="Domain\IHideObjectMembers.cs" />
     <Compile Include="Domain\RequestParameters\IRequestParameters.cs" />
     <Compile Include="Domain\Response\RequestMetrics.cs" />
-    <Compile Include="Domain\Response\RequestType.cs" />
+    <Compile Include="Connection\Audit\RequestType.cs" />
     <Compile Include="Domain\Response\VoidResponse.cs" />
     <Compile Include="Domain\Response\ElasticsearchServerError.cs" />
     <Compile Include="Exceptions\OneToOneServerException.cs" />
     <Compile Include="Exceptions\ElasticsearchAuthException.cs" />
     <Compile Include="Extensions\ExceptionExtensions.cs" />
+    <Compile Include="Extensions\Fluent.cs" />
     <Compile Include="Extensions\FormattableString.cs" />
     <Compile Include="IElasticsearchClient.cs" />
     <Compile Include="Providers\DateTimeProvider.cs" />
@@ -102,17 +100,15 @@
     <Compile Include="Exceptions\ConnectionException.cs" />
     <Compile Include="Connection\Configuration\ConnectionConfiguration.cs" />
     <Compile Include="ConnectionPool\IConnectionPool.cs" />
+    <Compile Include="Providers\IRequestPipelineFactory.cs" />
     <Compile Include="Providers\IDateTimeProvider.cs" />
     <Compile Include="ConnectionPool\SingleNodeConnectionPool.cs" />
-    <Compile Include="Providers\IMemoryStreamProvider.cs" />
-    <Compile Include="Providers\MemoryStreamProvider.cs" />
+    <Compile Include="Providers\IMemoryStreamFactory.cs" />
     <Compile Include="Providers\Sniffer.cs" />
     <Compile Include="ConnectionPool\SniffingConnectionPool.cs" />
     <Compile Include="ConnectionPool\StaticConnectionPool.cs" />
-    <Compile Include="Connection\Transport.cs" />
-    <Compile Include="Connection\ITransport.cs" />
+    <Compile Include="Connection\Transport\ITransport.cs" />
     <Compile Include="Domain\Response\ElasticsearchResponse.cs" />
-    <Compile Include="Connection\RequestState\TransportRequestState.cs" />
     <Compile Include="Connection\IConnection.cs" />
     <Compile Include="Connection\Configuration\IConnectionConfigurationValues.cs" />
     <Compile Include="Connection\Configuration\IConnectionConfiguration.cs" />
@@ -140,16 +136,14 @@
     <Compile Include="Purify\UriInfo.cs" />
     <Compile Include="Serialization\ElasticsearchDefaultSerializer.cs" />
     <Compile Include="Serialization\ElasticsearchNetJsonStrategy.cs" />
+    <Compile Include="Serialization\IQueryStringValue.cs" />
+    <Compile Include="Serialization\UrlFormatProvider.cs" />
     <Compile Include="Serialization\IElasticsearchSerializer.cs" />
     <Compile Include="Serialization\SerializationFormatting.cs" />
     <Compile Include="Serialization\SimpleJson.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="paket.references" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Connection\Transport\" />
-    <Folder Include="Extensions\NewFolder1\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

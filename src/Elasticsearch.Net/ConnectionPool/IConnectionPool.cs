@@ -26,6 +26,8 @@ namespace Elasticsearch.Net.ConnectionPool
 		/// </summary>
 		bool AcceptsUpdates { get; }
 
+		bool SupportsPinging { get; }
+
 		DateTime? LastUpdate { get; set; }
 
 		/// <summary>

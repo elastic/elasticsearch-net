@@ -26,18 +26,17 @@ namespace Elasticsearch.Net
 		/// <summary>
 		/// The HTTP method used by the request
 		/// </summary>
-		string RequestMethod { get; }
+		HttpMethod RequestMethod { get; }
 		
 		/// <summary>
 		/// The url as requested 
 		/// </summary>
-		string RequestUrl { get; }
+		Uri RequestUri { get; }
 		
 		/// <summary>
 		/// The status code as returned by Elasticsearch 
 		/// </summary>
 		int? HttpStatusCode { get; }
-
 
 		/// <summary>
 		/// The number of times to request had to be retried before succeeding on a live node
