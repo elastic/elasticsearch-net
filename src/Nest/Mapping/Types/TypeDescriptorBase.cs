@@ -13,18 +13,22 @@ namespace Nest
 		where T : class
 	{
 		FieldName IElasticType.Name { get; set; }
+		TypeName IElasticType.Type { get; set; }
+		string IElasticType.IndexName { get; set; }
+		bool IElasticType.Store { get; set; }
+		bool IElasticType.DocValues { get; set; }
+		SimilarityOption IElasticType.Similarity { get; set; }
+		IEnumerable<FieldName> IElasticType.CopyTo { get; set; }
+		object IElasticType.Fielddata { get; set; }
+
 		public TDescriptor Name(FieldName name) => Assign(a => a.Name = name);
+
 		public TDescriptor Name(Expression<Func<T, object>> objectPath) => Assign(a => a.Name = objectPath);
 
-		TypeName IElasticType.Type { get; set; }
-
-		string IElasticType.IndexName { get; set; }
 		public TDescriptor IndexName(string indexName) => Assign(a => a.IndexName = indexName);
 
-		bool IElasticType.Store { get; set; }
 		public TDescriptor Store(bool store = true) => Assign(a => a.Store = store);
 
-		bool IElasticType.DocValues { get; set; }
 		public TDescriptor DocValues(bool docValues = true) => Assign(a => a.DocValues = docValues);
 
 		IDictionary<FieldName, IElasticType> IElasticType.Fields { get; set; }
@@ -41,13 +45,10 @@ namespace Nest
 			}
 		});
 
-		SimilarityOption IElasticType.Similarity { get; set; }
 		public TDescriptor Similarity(SimilarityOption similarity) => Assign(a => a.Similarity = similarity);
 
-		IEnumerable<FieldName> IElasticType.CopyTo { get; set; }
 		public TDescriptor CopyTo(IEnumerable<FieldName> copyTo) => Assign(a => a.CopyTo = copyTo);
 
-		object IElasticType.Fielddata { get; set; }
 		public TDescriptor Fielddata(object fieldData) => Assign(a => a.Fielddata = fieldData);
 	}
 }

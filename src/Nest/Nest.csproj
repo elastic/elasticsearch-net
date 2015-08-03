@@ -267,7 +267,7 @@
     <Compile Include="QueryDsl\QueryContainerDescriptor.cs" />
     <Compile Include="CommonAbstractions\Fluent\Fluent.cs" />
     <Compile Include="Search\Suggesters\SuggestContextMapping.cs" />
-    <Compile Include="Mapping\IFieldMapping.cs" />
+    <Compile Include="Mapping\Fields\IFieldMapping.cs" />
     <Compile Include="Mapping\Fields\ISpecialField.cs" />
     <Compile Include="QueryDsl\Geo\Shape\Circle\CircleGeoShape.cs" />
     <Compile Include="QueryDsl\Geo\Shape\Envelope\EnvelopeGeoShape.cs" />
@@ -975,7 +975,7 @@
     <Compile Include="QueryDsl\MatchAllQuery.cs" />
     <Compile Include="QueryDsl\TermLevel\Prefix\PrefixQuery.cs" />
     <Compile Include="Mapping\TermVectorOption.cs" />
-    <Compile Include="Mapping\Types\String\FieldIndexOption.cs" />
+    <Compile Include="Mapping\FieldIndexOption.cs" />
     <Compile Include="Mapping\Types\Number\NumberTypeName.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\Resolvers\Converters\CustomJsonConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\Resolvers\Converters\UnixDateTimeConverter.cs" />
@@ -995,7 +995,7 @@
     <Compile Include="Search\Search\ElasticClient-Search.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\ElasticContractResolver.cs" />
     <Compile Include="CommonAbstractions\Exception\DslException.cs" />
-    <Compile Include="Mapping\FieldType.cs" />
+    <Compile Include="Mapping\Types\FieldType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CommonAbstractions\Infer\FieldName\FieldNameResolver.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\SettingsContractResolver.cs" />
