@@ -254,11 +254,9 @@
     <Compile Include="QueryDsl\Geo\GeoPrecision.cs" />
     <Compile Include="Search\Explain\ExplainGet.cs" />
     <Compile Include="Mapping\CodeBased\PropertyMapping.cs" />
-    <Compile Include="IndexModules\Fielddata\FieldDataFilter.cs" />
-    <Compile Include="IndexModules\Fielddata\FieldDataFrequencyFilter.cs" />
-    <Compile Include="IndexModules\Fielddata\FieldDataNonStringMapping.cs" />
-    <Compile Include="IndexModules\Fielddata\FieldDataRegexFilter.cs" />
-    <Compile Include="IndexModules\Fielddata\FieldDataStringMapping.cs" />
+    <Compile Include="Modules\Indices\Fielddata\FielddataFilter.cs" />
+    <Compile Include="Modules\Indices\Fielddata\FielddataFrequencyFilter.cs" />
+    <Compile Include="Modules\Indices\Fielddata\FielddataRegexFilter.cs" />
     <Compile Include="QueryDsl\Geo\BoundingBox\GeoBoundingBoxQuery.cs" />
     <Compile Include="QueryDsl\Geo\Distance\GeoDistanceQuery.cs" />
     <Compile Include="QueryDsl\Geo\DistanceRange\GeoDistanceRangeQuery.cs" />
@@ -279,7 +277,7 @@
     <Compile Include="QueryDsl\Geo\Shape\Point\PointGeoShape.cs" />
     <Compile Include="QueryDsl\Geo\Shape\Polygon\PolygonGeoShape.cs" />
     <Compile Include="Mapping\Fields\FieldNames\FieldNamesField.cs" />
-    <Compile Include="IndexModules\Fielddata\FieldDataMapping.cs" />
+    <Compile Include="Modules\Indices\Fielddata\Fielddata.cs" />
     <Compile Include="Mapping\Norms\NormsMapping.cs" />
     <Compile Include="Document\Multiple\DeleteByQuery\DeleteByQueryResponse.cs" />
     <Compile Include="Mapping\Transform\MappingTransform.cs" />
@@ -529,9 +527,8 @@
     <Compile Include="Indices\MappingManagement\TypesExists\ElasticClient-TypeExists.cs" />
     <Compile Include="Search\Explain\ElasticClient-Explain.cs" />
     <Compile Include="Indices\StatusManagement\Upgrade\ElasticClient-Upgrade.cs" />
-    <Compile Include="IndexModules\Fielddata\FieldDataLoading.cs" />
-    <Compile Include="IndexModules\Fielddata\FieldDataNonStringFormat.cs" />
-    <Compile Include="IndexModules\Fielddata\FieldDataStringFormat.cs" />
+    <Compile Include="Modules\Indices\Fielddata\FielddataLoadingOption.cs" />
+    <Compile Include="Modules\Indices\Fielddata\FielddataFormatOption.cs" />
     <Compile Include="CommonOptions\Geo\GeoShapeRelation.cs" />
     <Compile Include="Search\Search\Highlighting\HighlighterType.cs" />
     <Compile Include="Mapping\Norms\NormsLoading.cs" />

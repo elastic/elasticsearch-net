@@ -9,12 +9,16 @@ using System.Text;
 namespace Nest
 {
 	[JsonConverter(typeof(StringEnumConverter))]
-	public enum FieldDataStringFormat
+	public enum FielddataFormatOption
 	{
+		[EnumMember(Value = "array")]
+		Array,
 		[EnumMember(Value = "paged_bytes")]
 		PagedBytes,
 		[EnumMember(Value = "fst")]
 		Fst,
+		[EnumMember(Value = "compressed")]
+		Compressed,
 		[EnumMember(Value = "doc_values")]
 		DocValues,
 		[EnumMember(Value = "disabled")]

@@ -29,9 +29,8 @@ namespace Nest
 		[JsonProperty("copy_to")]
 		IEnumerable<FieldName> CopyTo { get; set; }
 
-		// TODO
 		[JsonProperty("fielddata")]
-		object Fielddata { get; set; }
+		IFielddata Fielddata { get; set; }
 	}
 
 	public abstract class ElasticType : IElasticType
@@ -45,7 +44,7 @@ namespace Nest
 		public virtual TypeName Type { get; set; }
 		public IEnumerable<FieldName> CopyTo { get; set; }
 		public bool DocValues { get; set; }
-		public object Fielddata { get; set; }
+		public IFielddata Fielddata { get; set; }
 		public IDictionary<FieldName, IElasticType> Fields { get; set; }
 		public string IndexName { get; set; }
 		public SimilarityOption Similarity { get; set; }

@@ -9,15 +9,11 @@ using System.Text;
 namespace Nest
 {
 	[JsonConverter(typeof(StringEnumConverter))]
-	public enum FieldDataNonStringFormat
+	public enum FielddataLoadingOption
 	{
-		[EnumMember(Value = "array")]
-		Array,
-		[EnumMember(Value = "doc_values")]
-		DocValues,
-		[EnumMember(Value = "disabled")]
-		Disabled,
-		[EnumMember(Value = "compressed")]
-		Compressed
+		[EnumMember(Value = "eager")]
+		Eager,
+		[EnumMember(Value = "eager_global_ordinals")]
+		EagerGlobalOrdinals
 	}
 }
