@@ -23,29 +23,14 @@ namespace Nest
 	}
 
 
-	public class BoostFieldDescriptor<T> : IBoostField
+	public class BoostFieldDescriptor<T> 
+		: DescriptorBase<BoostFieldDescriptor<T>, IBoostField>, IBoostField
 	{
-		private IBoostField Self => this;
-
 		FieldName IBoostField.Name { get; set; }
-		
 		double IBoostField.NullValue { get; set; }
 
-		public BoostFieldDescriptor<T> NullValue(double boost)
-		{
-			Self.NullValue = boost;
-			return this;
-		}
-		public BoostFieldDescriptor<T> Name(string path)
-		{
-			Self.Name = path;
-			return this;
-		}
-		public BoostFieldDescriptor<T> Name(Expression<Func<T, object>> objectPath)
-		{
-			Self.Name = objectPath;
-			return this;
-		}
-
+		public BoostFieldDescriptor<T> NullValue(double nullValue) => Assign(a => a.NullValue = nullValue);
+		public BoostFieldDescriptor<T> Name(string name) => Assign(a => a.Name = name);
+		public BoostFieldDescriptor<T> Name(Expression<Func<T, object>> objectPath) => Assign(a => a.Name = objectPath);
 	}
 }

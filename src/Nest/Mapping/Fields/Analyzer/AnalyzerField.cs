@@ -22,28 +22,14 @@ namespace Nest
 		public FieldName Path { get; set; }
 	}
 
-	public class AnalyzerFieldDescriptor<T> : IAnalyzerField
+	public class AnalyzerFieldDescriptor<T> 
+		: DescriptorBase<AnalyzerFieldDescriptor<T>, IAnalyzerField>, IAnalyzerField
 	{
-		private IAnalyzerField Self => this;
-
 		bool? IAnalyzerField.Index { get; set; }
-
 		FieldName IAnalyzerField.Path { get; set; }
 
-		public AnalyzerFieldDescriptor<T> Index(bool indexed = true)
-		{
-			Self.Index = indexed;
-			return this;
-		}
-		public AnalyzerFieldDescriptor<T> Path(string path)
-		{
-			Self.Path = path;
-			return this;
-		}
-		public AnalyzerFieldDescriptor<T> Path(Expression<Func<T, object>> objectPath)
-		{
-			Self.Path = objectPath;
-			return this;
-		}
+		public AnalyzerFieldDescriptor<T> Index(bool index = true) => Assign(a => a.Index = index);
+		public AnalyzerFieldDescriptor<T> Path(string path) => Assign(a => a.Path = path);
+		public AnalyzerFieldDescriptor<T> Path(Expression<Func<T, object>> objectPath) => Assign(a => a.Path = objectPath);
 	}
 }

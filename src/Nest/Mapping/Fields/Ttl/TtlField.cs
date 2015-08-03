@@ -19,23 +19,14 @@ namespace Nest
 		public string Default { get; set; }
 	}
 
-	public class TtlFieldDescriptor : ITtlField
+	public class TtlFieldDescriptor 
+		: DescriptorBase<TtlFieldDescriptor, ITtlField>, ITtlField
 	{
-		private ITtlField Self => this;
-
 		bool? ITtlField.Enabled { get; set; }
-
 		string ITtlField.Default { get; set; }
 
-		public TtlFieldDescriptor Enable(bool enable = true)
-		{
-			Self.Enabled = enable;
-			return this;
-		}
-		public TtlFieldDescriptor Default(string defaultTtl)
-		{
-			Self.Default = defaultTtl;
-			return this;
-		}
+		public TtlFieldDescriptor Enable(bool enable = true) => Assign(a => a.Enabled = enable);
+
+		public TtlFieldDescriptor Default(string defaultTtl) => Assign(a => a.Default = defaultTtl);
 	}
 }

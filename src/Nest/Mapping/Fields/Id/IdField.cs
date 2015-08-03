@@ -25,30 +25,17 @@ namespace Nest
 		public bool? Store { get; set;}
 	}
 
-	public class IdFieldDescriptor : IIdField
+	public class IdFieldDescriptor 
+		: DescriptorBase<IdFieldDescriptor, IIdField>, IIdField
 	{
-		private IIdField Self => this;
-
 		string IIdField.Path { get; set; }
-
 		string IIdField.Index { get; set; }
-
 		bool? IIdField.Store { get; set; }
 
-		public IdFieldDescriptor Path(string path)
-		{
-			Self.Path = path;
-			return this;
-		}
-		public IdFieldDescriptor Index(string index)
-		{
-			Self.Index = index;
-			return this;
-		}
-		public IdFieldDescriptor Store(bool stored = true)
-		{
-			Self.Store = stored;
-			return this;
-		}
+		public IdFieldDescriptor Path(string path) => Assign(a => a.Path = path);
+
+		public IdFieldDescriptor Index(string index) => Assign(a => a.Index = index);
+
+		public IdFieldDescriptor Store(bool store = true) => Assign(a => a.Store = store);
 	}
 }

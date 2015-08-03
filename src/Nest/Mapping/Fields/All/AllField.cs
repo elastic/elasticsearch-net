@@ -31,9 +31,6 @@ namespace Nest
 		[JsonProperty("analyzer")]
 		string Analyzer { get; set; }
 
-		[JsonProperty("index_analyzer")]
-		string IndexAnalyzer { get; set; }
-
 		[JsonProperty("search_analyzer")]
 		string SearchAnalyzer { get; set; }
 
@@ -53,89 +50,40 @@ namespace Nest
 		public TermVectorOption? TermVector { get; set; }
 		public bool? OmitNorms { get; set; }
 		public string Analyzer { get; set; }
-		public string IndexAnalyzer { get; set; }
 		public string SearchAnalyzer { get; set; }
 		public string Similarity { get; set; }
 	}
 
-	public class AllFieldDescriptor : IAllField
+	public class AllFieldDescriptor 
+		: DescriptorBase<AllFieldDescriptor, IAllField>, IAllField
 	{
-		private IAllField Self => this;
-
 		bool? IAllField.Enabled { get; set; }
 		bool? IAllField.Store { get; set; }
 		bool? IAllField.StoreTermVectors { get; set; }
 		bool? IAllField.StoreTermVectorOffsets { get; set; }
 		bool? IAllField.StoreTermVectorPositions { get; set; }
 		bool? IAllField.StoreTermVectorPayloads { get; set; }
-
 		public bool? OmitNorms { get; set; }
-
 		string IAllField.Analyzer { get; set; }
-
-		string IAllField.IndexAnalyzer { get; set; }
-
 		string IAllField.SearchAnalyzer { get; set; }
 		string IAllField.Similarity { get; set; }
 
-		public AllFieldDescriptor Enabled(bool enabled = true)
-		{
-			Self.Enabled = enabled;
-			return this;
-		}
+		public AllFieldDescriptor Enabled(bool enabled = true) => Assign(a => a.Enabled = enabled);
 
-		public AllFieldDescriptor Store(bool store = true)
-		{
-			Self.Store = store;
-			return this;
-		}
-		
-		public AllFieldDescriptor StoreTermVectors(bool store = true)
-		{
-			Self.StoreTermVectors = store;
-			return this;
-		}
-		
-		public AllFieldDescriptor StoreTermVectorOffsets(bool store = true)
-		{
-			Self.StoreTermVectorOffsets = store;
-			return this;
-		}
-		
-		public AllFieldDescriptor StoreTermVectorPositions(bool store = true)
-		{
-			Self.StoreTermVectorPositions = store;
-			return this;
-		}
-		
-		public AllFieldDescriptor StoreTermVectorPayloads(bool store = true)
-		{
-			Self.StoreTermVectorPayloads = store;
-			return this;
-		}
+		public AllFieldDescriptor Store(bool store = true) => Assign(a => a.Store = store);
 
-		public AllFieldDescriptor Analyzer(string analyzer)
-		{
-			Self.Analyzer = analyzer;
-			return this;
-		}
+		public AllFieldDescriptor StoreTermVectors(bool store = true) => Assign(a => a.StoreTermVectors = store);
 
-		public AllFieldDescriptor IndexAnalyzer(string analyzer)
-		{
-			Self.IndexAnalyzer = analyzer;
-			return this;
-		}
+		public AllFieldDescriptor StoreTermVectorOffsets(bool store = true) => Assign(a => a.StoreTermVectorOffsets = store);
 
-		public AllFieldDescriptor SearchAnalyzer(string analyzer)
-		{
-			Self.SearchAnalyzer = analyzer;
-			return this;
-		}
+		public AllFieldDescriptor StoreTermVectorPositions(bool store = true) => Assign(a => a.StoreTermVectorPositions = store);
 
-		public AllFieldDescriptor Similarity(string similarity)
-		{
-			Self.Similarity = similarity;
-			return this;
-		}
+		public AllFieldDescriptor StoreTermVectorPayloads(bool store = true) => Assign(a => a.StoreTermVectorPayloads = store);
+
+		public AllFieldDescriptor Analyzer(string analyzer) => Assign(a => a.Analyzer = analyzer);
+
+		public AllFieldDescriptor SearchAnalyzer(string searchAnalyzer) => Assign(a => a.SearchAnalyzer = searchAnalyzer);
+
+		public AllFieldDescriptor Similarity(string similarity) => Assign(a => a.Similarity = similarity);
     }
 }

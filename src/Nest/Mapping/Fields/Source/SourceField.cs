@@ -32,49 +32,24 @@ namespace Nest
 		public IEnumerable<string> Excludes { get; set; }
 	}
 
-	public class SourceFieldDescriptor : ISourceField
+	public class SourceFieldDescriptor 
+		: DescriptorBase<SourceFieldDescriptor, ISourceField>, ISourceField
 	{
-		private ISourceField Self => this;
-
         bool? ISourceField.Enabled { get; set; }
-		
 		bool? ISourceField.Compress { get; set; }
-
 		string ISourceField.CompressThreshold { get; set; }
-
 		IEnumerable<string> ISourceField.Includes { get; set; }
-
 		IEnumerable<string> ISourceField.Excludes { get; set; }
 
-		public SourceFieldDescriptor Enabled(bool enabled = true)
-		{
-			Self.Enabled = enabled;
-			return this;
-		}
-	
-		public SourceFieldDescriptor Compress(bool compress = true)
-		{
-			Self.Compress = compress;
-			return this;
-		}
+		public SourceFieldDescriptor Enabled(bool enabled = true) => Assign(a => a.Enabled = enabled);
 
-		public SourceFieldDescriptor CompressionThreshold(string compressionThreshold)
-		{
-			Self.Compress = true;
-			Self.CompressThreshold = compressionThreshold;
-			return this;
-		}
+		public SourceFieldDescriptor Compress(bool compress = true) => Assign(a => a.Compress = compress);
 
-		public SourceFieldDescriptor Includes(IEnumerable<string> includes)
-		{
-			Self.Includes = includes;
-			return this;
-		}
+		public SourceFieldDescriptor CompressionThreshold(string compressionThreshold) =>
+			Assign(a => { a.Compress = true; a.CompressThreshold = compressionThreshold; });
 
-		public SourceFieldDescriptor Excludes(IEnumerable<string> excludes)
-		{
-			Self.Excludes = excludes;
-			return this;
-		}
+		public SourceFieldDescriptor Includes(IEnumerable<string> includes) => Assign(a => a.Includes = includes);
+
+		public SourceFieldDescriptor Excludes(IEnumerable<string> excludes) => Assign(a => a.Excludes = excludes);
     }
 }

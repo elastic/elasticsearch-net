@@ -17,17 +17,11 @@ namespace Nest
 		public bool Enabled { get; set; }
 	}
 
-	public class FieldNamesFieldDescriptor<T> : IFieldNamesField
+	public class FieldNamesFieldDescriptor<T> 
+		: DescriptorBase<FieldNamesFieldDescriptor<T>, IFieldNamesField>, IFieldNamesField
 	{
-		private IFieldNamesField Self => this;
-
 		bool IFieldNamesField.Enabled { get; set;}
 
-		public FieldNamesFieldDescriptor<T> Enabled(bool enabled = true)
-		{
-			Self.Enabled = enabled;
-			return this;
-		}
-		
+		public FieldNamesFieldDescriptor<T> Enabled(bool enabled = true) => Assign(a => a.Enabled = enabled);
 	}
 }

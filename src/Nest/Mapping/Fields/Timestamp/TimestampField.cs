@@ -27,62 +27,32 @@ namespace Nest
 	public class TimestampField : ITimestampField
 	{
 		public bool Enabled { get; set; }
-
 		public FieldName Path { get; set; }
-
 		public string Format { get; set; }
 		public string Default { get; set; }
 		public bool? IgnoreMissing { get; set; }
 	}
 
 
-	public class TimestampFieldDescriptor<T> : ITimestampField
+	public class TimestampFieldDescriptor<T> 
+		: DescriptorBase<TimestampFieldDescriptor<T>, ITimestampField>, ITimestampField
 	{
-		private ITimestampField Self => this;
-
 		bool ITimestampField.Enabled { get; set;}
-
 		FieldName ITimestampField.Path { get; set;}
-
 		string ITimestampField.Format { get; set; }
 		string ITimestampField.Default { get; set; }
 		bool? ITimestampField.IgnoreMissing { get; set; }
 
-		public TimestampFieldDescriptor<T> Enabled(bool enabled = true)
-		{
-			Self.Enabled = enabled;
-			return this;
-		}
-		public TimestampFieldDescriptor<T> Path(string path)
-		{
-			Self.Path = path;
-			return this;
-		}
-		public TimestampFieldDescriptor<T> Path(Expression<Func<T, object>> objectPath)
-		{
-			objectPath.ThrowIfNull("objectPath");
-			Self.Path = objectPath;
-			return this;
-		}
+		public TimestampFieldDescriptor<T> Enabled(bool enabled = true) => Assign(a => a.Enabled = enabled);
 
-		public TimestampFieldDescriptor<T> Format(string format)
-		{
-			Self.Format = format;
-			return this;
-		}
+		public TimestampFieldDescriptor<T> Path(string path) => Assign(a => a.Path = path);
 
-		public TimestampFieldDescriptor<T> Default(string defaultValue)
-		{
-			Self.Default = defaultValue;
-			return this;
-		}
+		public TimestampFieldDescriptor<T> Path(Expression<Func<T, object>> objectPath) => Assign(a => a.Path = objectPath);
 
-		public TimestampFieldDescriptor<T> IgnoreMissing(bool ignoreMissing = true)
-		{
-			Self.IgnoreMissing = ignoreMissing;
-			return this;
-		}
+		public TimestampFieldDescriptor<T> Format(string format) => Assign(a => a.Format = format);
 
-		
+		public TimestampFieldDescriptor<T> Default(string defaultValue) => Assign(a => a.Default = defaultValue);
+
+		public TimestampFieldDescriptor<T> IgnoreMissing(bool ignoreMissing = true) => Assign(a => a.IgnoreMissing = ignoreMissing);	
 	}
 }

@@ -21,7 +21,8 @@ namespace Nest
 		public bool? Store { get; set; }
 	}
 
-	public class TypeFieldDescriptor : ITypeField
+	public class TypeFieldDescriptor 
+		: DescriptorBase<TypeFieldDescriptor, ITypeField>, ITypeField
 	{
 		private ITypeField Self => this; 
 
@@ -29,15 +30,8 @@ namespace Nest
 
 		bool? ITypeField.Store { get; set; }
 
-		public TypeFieldDescriptor Index(NonStringIndexOption index = NonStringIndexOption.No)
-		{
-			Self.Index = index;
-			return this;
-		}
-		public TypeFieldDescriptor Store(bool stored = true)
-		{
-			Self.Store = stored;
-			return this;
-		}
+		public TypeFieldDescriptor Index(NonStringIndexOption index = NonStringIndexOption.No) => Assign(a => a.Index = index);
+
+		public TypeFieldDescriptor Store(bool store = true) => Assign(a => a.Store = store);
     }
 }

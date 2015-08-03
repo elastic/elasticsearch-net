@@ -20,24 +20,14 @@ namespace Nest
 		public bool? Store { get; set; }
 	}
 
-	public class IndexFieldDescriptor : IIndexField
+	public class IndexFieldDescriptor 
+		: DescriptorBase<IndexFieldDescriptor, IIndexField>, IIndexField
 	{
-		private IIndexField Self => this;
-
 		bool? IIndexField.Enabled { get; set; }
-
 		bool? IIndexField.Store { get; set; }
 
-		public IndexFieldDescriptor Store(bool store = true)
-		{
-			Self.Store = store;
-			return this;
-		}
+		public IndexFieldDescriptor Store(bool store = true) => Assign(a => a.Store = store);
 
-		public IndexFieldDescriptor Enabled(bool enabled = true)
-		{
-			Self.Enabled = enabled;
-			return this;
-		}
+		public IndexFieldDescriptor Enabled(bool enabled = true) => Assign(a => a.Enabled = enabled);
 	}
 }

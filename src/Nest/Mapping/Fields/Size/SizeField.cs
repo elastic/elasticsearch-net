@@ -21,24 +21,14 @@ namespace Nest
 		public bool? Store { get; set; }
 	}
 
-	public class SizeFieldDescriptor : ISizeField
+	public class SizeFieldDescriptor 
+		: DescriptorBase<SizeFieldDescriptor, ISizeField>, ISizeField
 	{
-		private ISizeField Self => this;
-
 		bool? ISizeField.Enabled { get; set; }
-
 		bool? ISizeField.Store { get; set; }
 
-		public SizeFieldDescriptor Enabled(bool enabled = true)
-		{
-			Self.Enabled = enabled;
-			return this;
-		}
+		public SizeFieldDescriptor Enabled(bool enabled = true) => Assign(a => a.Enabled = enabled);
 
-		public SizeFieldDescriptor Store(bool store = true)
-		{
-			Self.Store = store;
-			return this;
-		}
+		public SizeFieldDescriptor Store(bool store = true) => Assign(a => a.Store = store);
 	}
 }
