@@ -3,9 +3,15 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-    public class ParentField : ISpecialField
+	[JsonObject(MemberSerialization.OptIn)]
+	public interface IParentField : ISpecialField
+	{
+		[JsonProperty("type")]
+		TypeName Type { get; set; }
+	}
+
+    public class ParentField : IParentField
     {
-        [JsonProperty("type")]
 		public TypeName Type { get; set; }
     }
 }

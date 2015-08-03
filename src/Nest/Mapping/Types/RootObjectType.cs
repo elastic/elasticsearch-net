@@ -11,8 +11,8 @@ namespace Nest
 		[JsonProperty("type")]
 		public override TypeName Type { get { return null; } }
 
-		[JsonProperty("index_analyzer")]
-		public string IndexAnalyzer { get; set; }
+		[JsonProperty("analyzer")]
+		public string Analyzer { get; set; }
 
 		[JsonProperty("search_analyzer")]
 		public string SearchAnalyzer { get; set; }
@@ -30,46 +30,44 @@ namespace Nest
 		[JsonConverter(typeof(MappingTransformConverter))]
 		public IList<MappingTransform> Transform { get; set; }
 
-		//Special fields (From the documentation i cannot see that these also would apply to the base object mapping class
-
 		[JsonProperty("_id")]
-		public IIdField IdFieldMappingDescriptor { get; set; }
+		public IIdField IdField { get; set; }
 
 		[JsonProperty("_source")]
-		public ISourceField SourceFieldMappingDescriptor { get; set; }
+		public ISourceField SourceField { get; set; }
 
 		[JsonProperty("_type")]
-		public ITypeField TypeFieldMappingDescriptor { get; set; }
+		public ITypeField TypeField { get; set; }
 
 		[JsonProperty("_all")]
-		public IAllField AllFieldMapping { get; set; }
+		public IAllField AllField { get; set; }
 
 		[JsonProperty("_analyzer")]
-		public IAnalyzerField AnalyzerFieldMapping { get; set; }
+		public IAnalyzerField AnalyzerField { get; set; }
 
 		[JsonProperty("_boost")]
-		public IBoostField BoostFieldMapping { get; set; }
+		public IBoostField BoostField { get; set; }
 
 		[JsonProperty("_parent")]
-		public ParentField Parent { get; set; }
+		public IParentField ParentField { get; set; }
 
 		[JsonProperty("_routing")]
-		public IRoutingField RoutingFieldMapping { get; set; }
+		public IRoutingField RoutingField { get; set; }
 
 		[JsonProperty("_index")]
-		public IIndexField IndexFieldMapping { get; set; }
+		public IIndexField IndexField { get; set; }
 
 		[JsonProperty("_size")]
-		public ISizeField SizeFieldMapping { get; set; }
+		public ISizeField SizeField { get; set; }
 
 		[JsonProperty("_timestamp")]
-		public ITimestampField TimestampFieldMapping { get; set; }
+		public ITimestampField TimestampField { get; set; }
 
 		[JsonProperty("_field_names")]
-		public IFieldNamesField FieldNamesFieldMapping { get; set; }
+		public IFieldNamesField FieldNamesField { get; set; }
 
 		[JsonProperty("_ttl")]
-		public ITtlField TtlFieldMappingDescriptor { get; set; }
+		public ITtlField TtlField { get; set; }
 
 		[JsonProperty("_meta")]
 		[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]
