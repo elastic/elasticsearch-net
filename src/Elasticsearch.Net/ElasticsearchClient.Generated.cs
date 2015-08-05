@@ -30,7 +30,7 @@ namespace Elasticsearch.Net
 		///<param name="name">A benchmark name</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> AbortBenchmark<T>(string name, Func<AbortBenchmarkRequestParameters, AbortBenchmarkRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,AbortBenchmarkRequestParameters>(POST, Url($"_bench/abort/{name.NotNull("name")}"), requestParameters);
+			this.DoRequest<T>(POST, Url($"_bench/abort/{name.NotNull("name")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_bench/abort/{name} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -44,7 +44,7 @@ namespace Elasticsearch.Net
 		///<param name="name">A benchmark name</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> AbortBenchmarkAsync<T>(string name, Func<AbortBenchmarkRequestParameters, AbortBenchmarkRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,AbortBenchmarkRequestParameters>(POST, Url($"_bench/abort/{name.NotNull("name")}"), requestParameters);
+			this.DoRequestAsync<T>(POST, Url($"_bench/abort/{name.NotNull("name")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_bulk 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -58,7 +58,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> Bulk<T>(PostData<object> body, Func<BulkRequestParameters, BulkRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,BulkRequestParameters>(POST, Url($"_bulk"), requestParameters, body);
+			this.DoRequest<T>(POST, Url($"_bulk"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_bulk 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -72,7 +72,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> BulkAsync<T>(PostData<object> body, Func<BulkRequestParameters, BulkRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,BulkRequestParameters>(POST, Url($"_bulk"), requestParameters, body);
+			this.DoRequestAsync<T>(POST, Url($"_bulk"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_bulk 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -87,7 +87,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> Bulk<T>(string index, PostData<object> body, Func<BulkRequestParameters, BulkRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,BulkRequestParameters>(POST, Url($"{index.NotNull("index")}/_bulk"), requestParameters, body);
+			this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/_bulk"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_bulk 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -102,7 +102,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> BulkAsync<T>(string index, PostData<object> body, Func<BulkRequestParameters, BulkRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,BulkRequestParameters>(POST, Url($"{index.NotNull("index")}/_bulk"), requestParameters, body);
+			this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/_bulk"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/_bulk 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -118,7 +118,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> Bulk<T>(string index, string type, PostData<object> body, Func<BulkRequestParameters, BulkRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,BulkRequestParameters>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_bulk"), requestParameters, body);
+			this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_bulk"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/_bulk 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -134,7 +134,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> BulkAsync<T>(string index, string type, PostData<object> body, Func<BulkRequestParameters, BulkRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,BulkRequestParameters>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_bulk"), requestParameters, body);
+			this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_bulk"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /_bulk 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -148,7 +148,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> BulkPut<T>(PostData<object> body, Func<BulkRequestParameters, BulkRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,BulkRequestParameters>(PUT, Url($"_bulk"), requestParameters, body);
+			this.DoRequest<T>(PUT, Url($"_bulk"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /_bulk 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -162,7 +162,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> BulkPutAsync<T>(PostData<object> body, Func<BulkRequestParameters, BulkRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,BulkRequestParameters>(PUT, Url($"_bulk"), requestParameters, body);
+			this.DoRequestAsync<T>(PUT, Url($"_bulk"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /{index}/_bulk 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -177,7 +177,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> BulkPut<T>(string index, PostData<object> body, Func<BulkRequestParameters, BulkRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,BulkRequestParameters>(PUT, Url($"{index.NotNull("index")}/_bulk"), requestParameters, body);
+			this.DoRequest<T>(PUT, Url($"{index.NotNull("index")}/_bulk"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /{index}/_bulk 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -192,7 +192,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> BulkPutAsync<T>(string index, PostData<object> body, Func<BulkRequestParameters, BulkRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,BulkRequestParameters>(PUT, Url($"{index.NotNull("index")}/_bulk"), requestParameters, body);
+			this.DoRequestAsync<T>(PUT, Url($"{index.NotNull("index")}/_bulk"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /{index}/{type}/_bulk 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -208,7 +208,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> BulkPut<T>(string index, string type, PostData<object> body, Func<BulkRequestParameters, BulkRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,BulkRequestParameters>(PUT, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_bulk"), requestParameters, body);
+			this.DoRequest<T>(PUT, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_bulk"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /{index}/{type}/_bulk 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -224,7 +224,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The operation definition and data (action-data pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> BulkPutAsync<T>(string index, string type, PostData<object> body, Func<BulkRequestParameters, BulkRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,BulkRequestParameters>(PUT, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_bulk"), requestParameters, body);
+			this.DoRequestAsync<T>(PUT, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_bulk"), body, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_cat/aliases 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -237,7 +237,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> CatAliases<T>(Func<CatAliasesRequestParameters, CatAliasesRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,CatAliasesRequestParameters>(GET, Url($"_cat/aliases"), requestParameters, contentType: "text/plain");
+			this.DoRequest<T>(GET, Url($"_cat/aliases"), null, _params(requestParameters, contentType: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/aliases 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -250,7 +250,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> CatAliasesAsync<T>(Func<CatAliasesRequestParameters, CatAliasesRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,CatAliasesRequestParameters>(GET, Url($"_cat/aliases"), requestParameters, contentType: "text/plain");
+			this.DoRequestAsync<T>(GET, Url($"_cat/aliases"), null, _params(requestParameters, contentType: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/aliases/{name} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -264,7 +264,7 @@ namespace Elasticsearch.Net
 		///<param name="name">A comma-separated list of alias names to return</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> CatAliases<T>(string name, Func<CatAliasesRequestParameters, CatAliasesRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,CatAliasesRequestParameters>(GET, Url($"_cat/aliases/{name.NotNull("name")}"), requestParameters, contentType: "text/plain");
+			this.DoRequest<T>(GET, Url($"_cat/aliases/{name.NotNull("name")}"), null, _params(requestParameters, contentType: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/aliases/{name} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -278,7 +278,7 @@ namespace Elasticsearch.Net
 		///<param name="name">A comma-separated list of alias names to return</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> CatAliasesAsync<T>(string name, Func<CatAliasesRequestParameters, CatAliasesRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,CatAliasesRequestParameters>(GET, Url($"_cat/aliases/{name.NotNull("name")}"), requestParameters, contentType: "text/plain");
+			this.DoRequestAsync<T>(GET, Url($"_cat/aliases/{name.NotNull("name")}"), null, _params(requestParameters, contentType: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/allocation 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -291,7 +291,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> CatAllocation<T>(Func<CatAllocationRequestParameters, CatAllocationRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,CatAllocationRequestParameters>(GET, Url($"_cat/allocation"), requestParameters, contentType: "text/plain");
+			this.DoRequest<T>(GET, Url($"_cat/allocation"), null, _params(requestParameters, contentType: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/allocation 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -304,7 +304,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> CatAllocationAsync<T>(Func<CatAllocationRequestParameters, CatAllocationRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,CatAllocationRequestParameters>(GET, Url($"_cat/allocation"), requestParameters, contentType: "text/plain");
+			this.DoRequestAsync<T>(GET, Url($"_cat/allocation"), null, _params(requestParameters, contentType: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/allocation/{node_id} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -318,7 +318,7 @@ namespace Elasticsearch.Net
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> CatAllocation<T>(string node_id, Func<CatAllocationRequestParameters, CatAllocationRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,CatAllocationRequestParameters>(GET, Url($"_cat/allocation/{node_id.NotNull("node_id")}"), requestParameters, contentType: "text/plain");
+			this.DoRequest<T>(GET, Url($"_cat/allocation/{node_id.NotNull("node_id")}"), null, _params(requestParameters, contentType: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/allocation/{node_id} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -332,7 +332,7 @@ namespace Elasticsearch.Net
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> CatAllocationAsync<T>(string node_id, Func<CatAllocationRequestParameters, CatAllocationRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,CatAllocationRequestParameters>(GET, Url($"_cat/allocation/{node_id.NotNull("node_id")}"), requestParameters, contentType: "text/plain");
+			this.DoRequestAsync<T>(GET, Url($"_cat/allocation/{node_id.NotNull("node_id")}"), null, _params(requestParameters, contentType: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/count 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -345,7 +345,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> CatCount<T>(Func<CatCountRequestParameters, CatCountRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,CatCountRequestParameters>(GET, Url($"_cat/count"), requestParameters, contentType: "text/plain");
+			this.DoRequest<T>(GET, Url($"_cat/count"), null, _params(requestParameters, contentType: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/count 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -358,7 +358,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> CatCountAsync<T>(Func<CatCountRequestParameters, CatCountRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,CatCountRequestParameters>(GET, Url($"_cat/count"), requestParameters, contentType: "text/plain");
+			this.DoRequestAsync<T>(GET, Url($"_cat/count"), null, _params(requestParameters, contentType: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/count/{index} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -372,7 +372,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to limit the returned information</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> CatCount<T>(string index, Func<CatCountRequestParameters, CatCountRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,CatCountRequestParameters>(GET, Url($"_cat/count/{index.NotNull("index")}"), requestParameters, contentType: "text/plain");
+			this.DoRequest<T>(GET, Url($"_cat/count/{index.NotNull("index")}"), null, _params(requestParameters, contentType: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/count/{index} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -386,7 +386,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to limit the returned information</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> CatCountAsync<T>(string index, Func<CatCountRequestParameters, CatCountRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,CatCountRequestParameters>(GET, Url($"_cat/count/{index.NotNull("index")}"), requestParameters, contentType: "text/plain");
+			this.DoRequestAsync<T>(GET, Url($"_cat/count/{index.NotNull("index")}"), null, _params(requestParameters, contentType: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/fielddata 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -399,7 +399,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> CatFielddata<T>(Func<CatFielddataRequestParameters, CatFielddataRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,CatFielddataRequestParameters>(GET, Url($"_cat/fielddata"), requestParameters, contentType: "text/plain");
+			this.DoRequest<T>(GET, Url($"_cat/fielddata"), null, _params(requestParameters, contentType: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/fielddata 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -412,7 +412,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> CatFielddataAsync<T>(Func<CatFielddataRequestParameters, CatFielddataRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,CatFielddataRequestParameters>(GET, Url($"_cat/fielddata"), requestParameters, contentType: "text/plain");
+			this.DoRequestAsync<T>(GET, Url($"_cat/fielddata"), null, _params(requestParameters, contentType: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/health 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -425,7 +425,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> CatHealth<T>(Func<CatHealthRequestParameters, CatHealthRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,CatHealthRequestParameters>(GET, Url($"_cat/health"), requestParameters, contentType: "text/plain");
+			this.DoRequest<T>(GET, Url($"_cat/health"), null, _params(requestParameters, contentType: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/health 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -438,7 +438,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> CatHealthAsync<T>(Func<CatHealthRequestParameters, CatHealthRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,CatHealthRequestParameters>(GET, Url($"_cat/health"), requestParameters, contentType: "text/plain");
+			this.DoRequestAsync<T>(GET, Url($"_cat/health"), null, _params(requestParameters, contentType: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -451,7 +451,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> CatHelp<T>(Func<CatHelpRequestParameters, CatHelpRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,CatHelpRequestParameters>(GET, Url($"_cat"), requestParameters, contentType: "text/plain");
+			this.DoRequest<T>(GET, Url($"_cat"), null, _params(requestParameters, contentType: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -464,7 +464,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> CatHelpAsync<T>(Func<CatHelpRequestParameters, CatHelpRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,CatHelpRequestParameters>(GET, Url($"_cat"), requestParameters, contentType: "text/plain");
+			this.DoRequestAsync<T>(GET, Url($"_cat"), null, _params(requestParameters, contentType: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/indices 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -477,7 +477,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> CatIndices<T>(Func<CatIndicesRequestParameters, CatIndicesRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,CatIndicesRequestParameters>(GET, Url($"_cat/indices"), requestParameters, contentType: "text/plain");
+			this.DoRequest<T>(GET, Url($"_cat/indices"), null, _params(requestParameters, contentType: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/indices 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -490,7 +490,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> CatIndicesAsync<T>(Func<CatIndicesRequestParameters, CatIndicesRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,CatIndicesRequestParameters>(GET, Url($"_cat/indices"), requestParameters, contentType: "text/plain");
+			this.DoRequestAsync<T>(GET, Url($"_cat/indices"), null, _params(requestParameters, contentType: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/indices/{index} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -504,7 +504,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to limit the returned information</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> CatIndices<T>(string index, Func<CatIndicesRequestParameters, CatIndicesRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,CatIndicesRequestParameters>(GET, Url($"_cat/indices/{index.NotNull("index")}"), requestParameters, contentType: "text/plain");
+			this.DoRequest<T>(GET, Url($"_cat/indices/{index.NotNull("index")}"), null, _params(requestParameters, contentType: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/indices/{index} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -518,7 +518,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to limit the returned information</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> CatIndicesAsync<T>(string index, Func<CatIndicesRequestParameters, CatIndicesRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,CatIndicesRequestParameters>(GET, Url($"_cat/indices/{index.NotNull("index")}"), requestParameters, contentType: "text/plain");
+			this.DoRequestAsync<T>(GET, Url($"_cat/indices/{index.NotNull("index")}"), null, _params(requestParameters, contentType: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/master 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -531,7 +531,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> CatMaster<T>(Func<CatMasterRequestParameters, CatMasterRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,CatMasterRequestParameters>(GET, Url($"_cat/master"), requestParameters, contentType: "text/plain");
+			this.DoRequest<T>(GET, Url($"_cat/master"), null, _params(requestParameters, contentType: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/master 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -544,7 +544,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> CatMasterAsync<T>(Func<CatMasterRequestParameters, CatMasterRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,CatMasterRequestParameters>(GET, Url($"_cat/master"), requestParameters, contentType: "text/plain");
+			this.DoRequestAsync<T>(GET, Url($"_cat/master"), null, _params(requestParameters, contentType: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/nodes 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -557,7 +557,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> CatNodes<T>(Func<CatNodesRequestParameters, CatNodesRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,CatNodesRequestParameters>(GET, Url($"_cat/nodes"), requestParameters, contentType: "text/plain");
+			this.DoRequest<T>(GET, Url($"_cat/nodes"), null, _params(requestParameters, contentType: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/nodes 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -570,7 +570,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> CatNodesAsync<T>(Func<CatNodesRequestParameters, CatNodesRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,CatNodesRequestParameters>(GET, Url($"_cat/nodes"), requestParameters, contentType: "text/plain");
+			this.DoRequestAsync<T>(GET, Url($"_cat/nodes"), null, _params(requestParameters, contentType: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/pending_tasks 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -583,7 +583,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> CatPendingTasks<T>(Func<CatPendingTasksRequestParameters, CatPendingTasksRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,CatPendingTasksRequestParameters>(GET, Url($"_cat/pending_tasks"), requestParameters, contentType: "text/plain");
+			this.DoRequest<T>(GET, Url($"_cat/pending_tasks"), null, _params(requestParameters, contentType: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/pending_tasks 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -596,7 +596,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> CatPendingTasksAsync<T>(Func<CatPendingTasksRequestParameters, CatPendingTasksRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,CatPendingTasksRequestParameters>(GET, Url($"_cat/pending_tasks"), requestParameters, contentType: "text/plain");
+			this.DoRequestAsync<T>(GET, Url($"_cat/pending_tasks"), null, _params(requestParameters, contentType: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/plugins 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -609,7 +609,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> CatPlugins<T>(Func<CatPluginsRequestParameters, CatPluginsRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,CatPluginsRequestParameters>(GET, Url($"_cat/plugins"), requestParameters, contentType: "text/plain");
+			this.DoRequest<T>(GET, Url($"_cat/plugins"), null, _params(requestParameters, contentType: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/plugins 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -622,7 +622,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> CatPluginsAsync<T>(Func<CatPluginsRequestParameters, CatPluginsRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,CatPluginsRequestParameters>(GET, Url($"_cat/plugins"), requestParameters, contentType: "text/plain");
+			this.DoRequestAsync<T>(GET, Url($"_cat/plugins"), null, _params(requestParameters, contentType: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/recovery 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -635,7 +635,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> CatRecovery<T>(Func<CatRecoveryRequestParameters, CatRecoveryRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,CatRecoveryRequestParameters>(GET, Url($"_cat/recovery"), requestParameters, contentType: "text/plain");
+			this.DoRequest<T>(GET, Url($"_cat/recovery"), null, _params(requestParameters, contentType: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/recovery 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -648,7 +648,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> CatRecoveryAsync<T>(Func<CatRecoveryRequestParameters, CatRecoveryRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,CatRecoveryRequestParameters>(GET, Url($"_cat/recovery"), requestParameters, contentType: "text/plain");
+			this.DoRequestAsync<T>(GET, Url($"_cat/recovery"), null, _params(requestParameters, contentType: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/recovery/{index} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -662,7 +662,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to limit the returned information</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> CatRecovery<T>(string index, Func<CatRecoveryRequestParameters, CatRecoveryRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,CatRecoveryRequestParameters>(GET, Url($"_cat/recovery/{index.NotNull("index")}"), requestParameters, contentType: "text/plain");
+			this.DoRequest<T>(GET, Url($"_cat/recovery/{index.NotNull("index")}"), null, _params(requestParameters, contentType: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/recovery/{index} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -676,7 +676,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to limit the returned information</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> CatRecoveryAsync<T>(string index, Func<CatRecoveryRequestParameters, CatRecoveryRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,CatRecoveryRequestParameters>(GET, Url($"_cat/recovery/{index.NotNull("index")}"), requestParameters, contentType: "text/plain");
+			this.DoRequestAsync<T>(GET, Url($"_cat/recovery/{index.NotNull("index")}"), null, _params(requestParameters, contentType: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/segments 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -689,7 +689,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> CatSegments<T>(Func<CatSegmentsRequestParameters, CatSegmentsRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,CatSegmentsRequestParameters>(GET, Url($"_cat/segments"), requestParameters, contentType: "text/plain");
+			this.DoRequest<T>(GET, Url($"_cat/segments"), null, _params(requestParameters, contentType: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/segments 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -702,7 +702,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> CatSegmentsAsync<T>(Func<CatSegmentsRequestParameters, CatSegmentsRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,CatSegmentsRequestParameters>(GET, Url($"_cat/segments"), requestParameters, contentType: "text/plain");
+			this.DoRequestAsync<T>(GET, Url($"_cat/segments"), null, _params(requestParameters, contentType: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/segments/{index} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -716,7 +716,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to limit the returned information</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> CatSegments<T>(string index, Func<CatSegmentsRequestParameters, CatSegmentsRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,CatSegmentsRequestParameters>(GET, Url($"_cat/segments/{index.NotNull("index")}"), requestParameters, contentType: "text/plain");
+			this.DoRequest<T>(GET, Url($"_cat/segments/{index.NotNull("index")}"), null, _params(requestParameters, contentType: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/segments/{index} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -730,7 +730,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to limit the returned information</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> CatSegmentsAsync<T>(string index, Func<CatSegmentsRequestParameters, CatSegmentsRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,CatSegmentsRequestParameters>(GET, Url($"_cat/segments/{index.NotNull("index")}"), requestParameters, contentType: "text/plain");
+			this.DoRequestAsync<T>(GET, Url($"_cat/segments/{index.NotNull("index")}"), null, _params(requestParameters, contentType: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/shards 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -743,7 +743,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> CatShards<T>(Func<CatShardsRequestParameters, CatShardsRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,CatShardsRequestParameters>(GET, Url($"_cat/shards"), requestParameters, contentType: "text/plain");
+			this.DoRequest<T>(GET, Url($"_cat/shards"), null, _params(requestParameters, contentType: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/shards 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -756,7 +756,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> CatShardsAsync<T>(Func<CatShardsRequestParameters, CatShardsRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,CatShardsRequestParameters>(GET, Url($"_cat/shards"), requestParameters, contentType: "text/plain");
+			this.DoRequestAsync<T>(GET, Url($"_cat/shards"), null, _params(requestParameters, contentType: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/shards/{index} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -770,7 +770,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to limit the returned information</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> CatShards<T>(string index, Func<CatShardsRequestParameters, CatShardsRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,CatShardsRequestParameters>(GET, Url($"_cat/shards/{index.NotNull("index")}"), requestParameters, contentType: "text/plain");
+			this.DoRequest<T>(GET, Url($"_cat/shards/{index.NotNull("index")}"), null, _params(requestParameters, contentType: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/shards/{index} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -784,7 +784,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to limit the returned information</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> CatShardsAsync<T>(string index, Func<CatShardsRequestParameters, CatShardsRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,CatShardsRequestParameters>(GET, Url($"_cat/shards/{index.NotNull("index")}"), requestParameters, contentType: "text/plain");
+			this.DoRequestAsync<T>(GET, Url($"_cat/shards/{index.NotNull("index")}"), null, _params(requestParameters, contentType: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/thread_pool 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -797,7 +797,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> CatThreadPool<T>(Func<CatThreadPoolRequestParameters, CatThreadPoolRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,CatThreadPoolRequestParameters>(GET, Url($"_cat/thread_pool"), requestParameters, contentType: "text/plain");
+			this.DoRequest<T>(GET, Url($"_cat/thread_pool"), null, _params(requestParameters, contentType: "text/plain"));
 		
 		///<summary>Represents a GET on /_cat/thread_pool 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -810,7 +810,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> CatThreadPoolAsync<T>(Func<CatThreadPoolRequestParameters, CatThreadPoolRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,CatThreadPoolRequestParameters>(GET, Url($"_cat/thread_pool"), requestParameters, contentType: "text/plain");
+			this.DoRequestAsync<T>(GET, Url($"_cat/thread_pool"), null, _params(requestParameters, contentType: "text/plain"));
 		
 		///<summary>Represents a DELETE on /_search/scroll/{scroll_id} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -825,7 +825,7 @@ namespace Elasticsearch.Net
 		///<param name="body">A comma-separated list of scroll IDs to clear if none was specified via the scroll_id parameter</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> ClearScroll<T>(string scroll_id, PostData<object> body, Func<ClearScrollRequestParameters, ClearScrollRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,ClearScrollRequestParameters>(DELETE, Url($"_search/scroll/{scroll_id.NotNull("scroll_id")}"), requestParameters, body);
+			this.DoRequest<T>(DELETE, Url($"_search/scroll/{scroll_id.NotNull("scroll_id")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a DELETE on /_search/scroll/{scroll_id} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -840,7 +840,7 @@ namespace Elasticsearch.Net
 		///<param name="body">A comma-separated list of scroll IDs to clear if none was specified via the scroll_id parameter</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> ClearScrollAsync<T>(string scroll_id, PostData<object> body, Func<ClearScrollRequestParameters, ClearScrollRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,ClearScrollRequestParameters>(DELETE, Url($"_search/scroll/{scroll_id.NotNull("scroll_id")}"), requestParameters, body);
+			this.DoRequestAsync<T>(DELETE, Url($"_search/scroll/{scroll_id.NotNull("scroll_id")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a DELETE on /_search/scroll 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -854,7 +854,7 @@ namespace Elasticsearch.Net
 		///<param name="body">A comma-separated list of scroll IDs to clear if none was specified via the scroll_id parameter</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> ClearScroll<T>(PostData<object> body, Func<ClearScrollRequestParameters, ClearScrollRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,ClearScrollRequestParameters>(DELETE, Url($"_search/scroll"), requestParameters, body);
+			this.DoRequest<T>(DELETE, Url($"_search/scroll"), body, _params(requestParameters));
 		
 		///<summary>Represents a DELETE on /_search/scroll 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -868,7 +868,7 @@ namespace Elasticsearch.Net
 		///<param name="body">A comma-separated list of scroll IDs to clear if none was specified via the scroll_id parameter</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> ClearScrollAsync<T>(PostData<object> body, Func<ClearScrollRequestParameters, ClearScrollRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,ClearScrollRequestParameters>(DELETE, Url($"_search/scroll"), requestParameters, body);
+			this.DoRequestAsync<T>(DELETE, Url($"_search/scroll"), body, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_cluster/settings 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -881,7 +881,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> ClusterGetSettings<T>(Func<ClusterGetSettingsRequestParameters, ClusterGetSettingsRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,ClusterGetSettingsRequestParameters>(GET, Url($"_cluster/settings"), requestParameters);
+			this.DoRequest<T>(GET, Url($"_cluster/settings"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_cluster/settings 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -894,7 +894,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> ClusterGetSettingsAsync<T>(Func<ClusterGetSettingsRequestParameters, ClusterGetSettingsRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,ClusterGetSettingsRequestParameters>(GET, Url($"_cluster/settings"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"_cluster/settings"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_cluster/health 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -907,7 +907,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> ClusterHealth<T>(Func<ClusterHealthRequestParameters, ClusterHealthRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,ClusterHealthRequestParameters>(GET, Url($"_cluster/health"), requestParameters);
+			this.DoRequest<T>(GET, Url($"_cluster/health"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_cluster/health 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -920,7 +920,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> ClusterHealthAsync<T>(Func<ClusterHealthRequestParameters, ClusterHealthRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,ClusterHealthRequestParameters>(GET, Url($"_cluster/health"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"_cluster/health"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_cluster/health/{index} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -934,7 +934,7 @@ namespace Elasticsearch.Net
 		///<param name="index">Limit the information returned to a specific index</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> ClusterHealth<T>(string index, Func<ClusterHealthRequestParameters, ClusterHealthRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,ClusterHealthRequestParameters>(GET, Url($"_cluster/health/{index.NotNull("index")}"), requestParameters);
+			this.DoRequest<T>(GET, Url($"_cluster/health/{index.NotNull("index")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_cluster/health/{index} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -948,7 +948,7 @@ namespace Elasticsearch.Net
 		///<param name="index">Limit the information returned to a specific index</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> ClusterHealthAsync<T>(string index, Func<ClusterHealthRequestParameters, ClusterHealthRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,ClusterHealthRequestParameters>(GET, Url($"_cluster/health/{index.NotNull("index")}"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"_cluster/health/{index.NotNull("index")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_cluster/pending_tasks 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -961,7 +961,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> ClusterPendingTasks<T>(Func<ClusterPendingTasksRequestParameters, ClusterPendingTasksRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,ClusterPendingTasksRequestParameters>(GET, Url($"_cluster/pending_tasks"), requestParameters);
+			this.DoRequest<T>(GET, Url($"_cluster/pending_tasks"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_cluster/pending_tasks 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -974,7 +974,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> ClusterPendingTasksAsync<T>(Func<ClusterPendingTasksRequestParameters, ClusterPendingTasksRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,ClusterPendingTasksRequestParameters>(GET, Url($"_cluster/pending_tasks"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"_cluster/pending_tasks"), null, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /_cluster/settings 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -988,7 +988,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The settings to be updated. Can be either `transient` or `persistent` (survives cluster restart).</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> ClusterPutSettings<T>(PostData<object> body, Func<ClusterSettingsRequestParameters, ClusterSettingsRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,ClusterSettingsRequestParameters>(PUT, Url($"_cluster/settings"), requestParameters, body);
+			this.DoRequest<T>(PUT, Url($"_cluster/settings"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /_cluster/settings 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -1002,7 +1002,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The settings to be updated. Can be either `transient` or `persistent` (survives cluster restart).</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> ClusterPutSettingsAsync<T>(PostData<object> body, Func<ClusterSettingsRequestParameters, ClusterSettingsRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,ClusterSettingsRequestParameters>(PUT, Url($"_cluster/settings"), requestParameters, body);
+			this.DoRequestAsync<T>(PUT, Url($"_cluster/settings"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_cluster/reroute 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -1016,7 +1016,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The definition of `commands` to perform (`move`, `cancel`, `allocate`)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> ClusterReroute<T>(PostData<object> body, Func<ClusterRerouteRequestParameters, ClusterRerouteRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,ClusterRerouteRequestParameters>(POST, Url($"_cluster/reroute"), requestParameters, body);
+			this.DoRequest<T>(POST, Url($"_cluster/reroute"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_cluster/reroute 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -1030,7 +1030,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The definition of `commands` to perform (`move`, `cancel`, `allocate`)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> ClusterRerouteAsync<T>(PostData<object> body, Func<ClusterRerouteRequestParameters, ClusterRerouteRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,ClusterRerouteRequestParameters>(POST, Url($"_cluster/reroute"), requestParameters, body);
+			this.DoRequestAsync<T>(POST, Url($"_cluster/reroute"), body, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_cluster/state 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -1043,7 +1043,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> ClusterState<T>(Func<ClusterStateRequestParameters, ClusterStateRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,ClusterStateRequestParameters>(GET, Url($"_cluster/state"), requestParameters);
+			this.DoRequest<T>(GET, Url($"_cluster/state"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_cluster/state 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -1056,7 +1056,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> ClusterStateAsync<T>(Func<ClusterStateRequestParameters, ClusterStateRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,ClusterStateRequestParameters>(GET, Url($"_cluster/state"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"_cluster/state"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_cluster/state/{metric} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -1070,7 +1070,7 @@ namespace Elasticsearch.Net
 		///<param name="metric">Limit the information returned to the specified metrics</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> ClusterState<T>(string metric, Func<ClusterStateRequestParameters, ClusterStateRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,ClusterStateRequestParameters>(GET, Url($"_cluster/state/{metric.NotNull("metric")}"), requestParameters);
+			this.DoRequest<T>(GET, Url($"_cluster/state/{metric.NotNull("metric")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_cluster/state/{metric} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -1084,7 +1084,7 @@ namespace Elasticsearch.Net
 		///<param name="metric">Limit the information returned to the specified metrics</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> ClusterStateAsync<T>(string metric, Func<ClusterStateRequestParameters, ClusterStateRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,ClusterStateRequestParameters>(GET, Url($"_cluster/state/{metric.NotNull("metric")}"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"_cluster/state/{metric.NotNull("metric")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_cluster/state/{metric}/{index} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -1099,7 +1099,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> ClusterState<T>(string metric, string index, Func<ClusterStateRequestParameters, ClusterStateRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,ClusterStateRequestParameters>(GET, Url($"_cluster/state/{metric.NotNull("metric")}/{index.NotNull("index")}"), requestParameters);
+			this.DoRequest<T>(GET, Url($"_cluster/state/{metric.NotNull("metric")}/{index.NotNull("index")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_cluster/state/{metric}/{index} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -1114,7 +1114,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> ClusterStateAsync<T>(string metric, string index, Func<ClusterStateRequestParameters, ClusterStateRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,ClusterStateRequestParameters>(GET, Url($"_cluster/state/{metric.NotNull("metric")}/{index.NotNull("index")}"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"_cluster/state/{metric.NotNull("metric")}/{index.NotNull("index")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_cluster/stats 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -1127,7 +1127,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> ClusterStats<T>(Func<ClusterStatsRequestParameters, ClusterStatsRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,ClusterStatsRequestParameters>(GET, Url($"_cluster/stats"), requestParameters);
+			this.DoRequest<T>(GET, Url($"_cluster/stats"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_cluster/stats 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -1140,7 +1140,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> ClusterStatsAsync<T>(Func<ClusterStatsRequestParameters, ClusterStatsRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,ClusterStatsRequestParameters>(GET, Url($"_cluster/stats"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"_cluster/stats"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_cluster/stats/nodes/{node_id} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -1154,7 +1154,7 @@ namespace Elasticsearch.Net
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> ClusterStats<T>(string node_id, Func<ClusterStatsRequestParameters, ClusterStatsRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,ClusterStatsRequestParameters>(GET, Url($"_cluster/stats/nodes/{node_id.NotNull("node_id")}"), requestParameters);
+			this.DoRequest<T>(GET, Url($"_cluster/stats/nodes/{node_id.NotNull("node_id")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_cluster/stats/nodes/{node_id} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -1168,7 +1168,7 @@ namespace Elasticsearch.Net
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> ClusterStatsAsync<T>(string node_id, Func<ClusterStatsRequestParameters, ClusterStatsRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,ClusterStatsRequestParameters>(GET, Url($"_cluster/stats/nodes/{node_id.NotNull("node_id")}"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"_cluster/stats/nodes/{node_id.NotNull("node_id")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_count 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -1182,7 +1182,7 @@ namespace Elasticsearch.Net
 		///<param name="body">A query to restrict the results specified with the Query DSL (optional)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> Count<T>(PostData<object> body, Func<CountRequestParameters, CountRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,CountRequestParameters>(POST, Url($"_count"), requestParameters, body);
+			this.DoRequest<T>(POST, Url($"_count"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_count 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -1196,7 +1196,7 @@ namespace Elasticsearch.Net
 		///<param name="body">A query to restrict the results specified with the Query DSL (optional)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> CountAsync<T>(PostData<object> body, Func<CountRequestParameters, CountRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,CountRequestParameters>(POST, Url($"_count"), requestParameters, body);
+			this.DoRequestAsync<T>(POST, Url($"_count"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_count 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -1211,7 +1211,7 @@ namespace Elasticsearch.Net
 		///<param name="body">A query to restrict the results specified with the Query DSL (optional)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> Count<T>(string index, PostData<object> body, Func<CountRequestParameters, CountRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,CountRequestParameters>(POST, Url($"{index.NotNull("index")}/_count"), requestParameters, body);
+			this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/_count"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_count 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -1226,7 +1226,7 @@ namespace Elasticsearch.Net
 		///<param name="body">A query to restrict the results specified with the Query DSL (optional)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> CountAsync<T>(string index, PostData<object> body, Func<CountRequestParameters, CountRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,CountRequestParameters>(POST, Url($"{index.NotNull("index")}/_count"), requestParameters, body);
+			this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/_count"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/_count 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -1242,7 +1242,7 @@ namespace Elasticsearch.Net
 		///<param name="body">A query to restrict the results specified with the Query DSL (optional)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> Count<T>(string index, string type, PostData<object> body, Func<CountRequestParameters, CountRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,CountRequestParameters>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_count"), requestParameters, body);
+			this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_count"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/_count 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -1258,7 +1258,7 @@ namespace Elasticsearch.Net
 		///<param name="body">A query to restrict the results specified with the Query DSL (optional)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> CountAsync<T>(string index, string type, PostData<object> body, Func<CountRequestParameters, CountRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,CountRequestParameters>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_count"), requestParameters, body);
+			this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_count"), body, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_count 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -1271,7 +1271,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> CountGet<T>(Func<CountRequestParameters, CountRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,CountRequestParameters>(GET, Url($"_count"), requestParameters);
+			this.DoRequest<T>(GET, Url($"_count"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_count 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -1284,7 +1284,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> CountGetAsync<T>(Func<CountRequestParameters, CountRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,CountRequestParameters>(GET, Url($"_count"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"_count"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_count 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -1298,7 +1298,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of indices to restrict the results</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> CountGet<T>(string index, Func<CountRequestParameters, CountRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,CountRequestParameters>(GET, Url($"{index.NotNull("index")}/_count"), requestParameters);
+			this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/_count"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_count 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -1312,7 +1312,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of indices to restrict the results</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> CountGetAsync<T>(string index, Func<CountRequestParameters, CountRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,CountRequestParameters>(GET, Url($"{index.NotNull("index")}/_count"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/_count"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/{type}/_count 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -1327,7 +1327,7 @@ namespace Elasticsearch.Net
 		///<param name="type">A comma-separated list of types to restrict the results</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> CountGet<T>(string index, string type, Func<CountRequestParameters, CountRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,CountRequestParameters>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_count"), requestParameters);
+			this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_count"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/{type}/_count 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -1342,7 +1342,7 @@ namespace Elasticsearch.Net
 		///<param name="type">A comma-separated list of types to restrict the results</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> CountGetAsync<T>(string index, string type, Func<CountRequestParameters, CountRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,CountRequestParameters>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_count"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_count"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/{type}/_percolate/count 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -1357,7 +1357,7 @@ namespace Elasticsearch.Net
 		///<param name="type">The type of the document being count percolated.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> CountPercolateGet<T>(string index, string type, Func<PercolateCountRequestParameters, PercolateCountRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,PercolateCountRequestParameters>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_percolate/count"), requestParameters);
+			this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_percolate/count"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/{type}/_percolate/count 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -1372,7 +1372,7 @@ namespace Elasticsearch.Net
 		///<param name="type">The type of the document being count percolated.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> CountPercolateGetAsync<T>(string index, string type, Func<PercolateCountRequestParameters, PercolateCountRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,PercolateCountRequestParameters>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_percolate/count"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_percolate/count"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/{type}/{id}/_percolate/count 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -1388,7 +1388,7 @@ namespace Elasticsearch.Net
 		///<param name="id">Substitute the document in the request body with a document that is known by the specified id. On top of the id, the index and type parameter will be used to retrieve the document from within the cluster.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> CountPercolateGet<T>(string index, string type, string id, Func<PercolateCountRequestParameters, PercolateCountRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,PercolateCountRequestParameters>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}/_percolate/count"), requestParameters);
+			this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}/_percolate/count"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/{type}/{id}/_percolate/count 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -1404,7 +1404,7 @@ namespace Elasticsearch.Net
 		///<param name="id">Substitute the document in the request body with a document that is known by the specified id. On top of the id, the index and type parameter will be used to retrieve the document from within the cluster.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> CountPercolateGetAsync<T>(string index, string type, string id, Func<PercolateCountRequestParameters, PercolateCountRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,PercolateCountRequestParameters>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}/_percolate/count"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}/_percolate/count"), null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/_percolate/count 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -1420,7 +1420,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The count percolator request definition using the percolate DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> CountPercolate<T>(string index, string type, PostData<object> body, Func<PercolateCountRequestParameters, PercolateCountRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,PercolateCountRequestParameters>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_percolate/count"), requestParameters, body);
+			this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_percolate/count"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/_percolate/count 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -1436,7 +1436,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The count percolator request definition using the percolate DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> CountPercolateAsync<T>(string index, string type, PostData<object> body, Func<PercolateCountRequestParameters, PercolateCountRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,PercolateCountRequestParameters>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_percolate/count"), requestParameters, body);
+			this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_percolate/count"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/{id}/_percolate/count 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -1453,7 +1453,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The count percolator request definition using the percolate DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> CountPercolate<T>(string index, string type, string id, PostData<object> body, Func<PercolateCountRequestParameters, PercolateCountRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,PercolateCountRequestParameters>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}/_percolate/count"), requestParameters, body);
+			this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}/_percolate/count"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/{id}/_percolate/count 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -1470,7 +1470,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The count percolator request definition using the percolate DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> CountPercolateAsync<T>(string index, string type, string id, PostData<object> body, Func<PercolateCountRequestParameters, PercolateCountRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,PercolateCountRequestParameters>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}/_percolate/count"), requestParameters, body);
+			this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}/_percolate/count"), body, _params(requestParameters));
 		
 		///<summary>Represents a DELETE on /{index}/{type}/{id} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -1486,7 +1486,7 @@ namespace Elasticsearch.Net
 		///<param name="id">The document ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> Delete<T>(string index, string type, string id, Func<DeleteRequestParameters, DeleteRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,DeleteRequestParameters>(DELETE, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}"), requestParameters, allow404: true);
+			this.DoRequest<T>(DELETE, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}"), null, _params(requestParameters, allow404: true));
 		
 		///<summary>Represents a DELETE on /{index}/{type}/{id} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -1502,7 +1502,7 @@ namespace Elasticsearch.Net
 		///<param name="id">The document ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> DeleteAsync<T>(string index, string type, string id, Func<DeleteRequestParameters, DeleteRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,DeleteRequestParameters>(DELETE, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}"), requestParameters, allow404: true);
+			this.DoRequestAsync<T>(DELETE, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}"), null, _params(requestParameters, allow404: true));
 		
 		///<summary>Represents a DELETE on /{index}/_query 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -1517,7 +1517,7 @@ namespace Elasticsearch.Net
 		///<param name="body">A query to restrict the operation specified with the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> DeleteByQuery<T>(string index, PostData<object> body, Func<DeleteByQueryRequestParameters, DeleteByQueryRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,DeleteByQueryRequestParameters>(DELETE, Url($"{index.NotNull("index")}/_query"), requestParameters, body);
+			this.DoRequest<T>(DELETE, Url($"{index.NotNull("index")}/_query"), body, _params(requestParameters));
 		
 		///<summary>Represents a DELETE on /{index}/_query 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -1532,7 +1532,7 @@ namespace Elasticsearch.Net
 		///<param name="body">A query to restrict the operation specified with the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> DeleteByQueryAsync<T>(string index, PostData<object> body, Func<DeleteByQueryRequestParameters, DeleteByQueryRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,DeleteByQueryRequestParameters>(DELETE, Url($"{index.NotNull("index")}/_query"), requestParameters, body);
+			this.DoRequestAsync<T>(DELETE, Url($"{index.NotNull("index")}/_query"), body, _params(requestParameters));
 		
 		///<summary>Represents a DELETE on /{index}/{type}/_query 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -1548,7 +1548,7 @@ namespace Elasticsearch.Net
 		///<param name="body">A query to restrict the operation specified with the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> DeleteByQuery<T>(string index, string type, PostData<object> body, Func<DeleteByQueryRequestParameters, DeleteByQueryRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,DeleteByQueryRequestParameters>(DELETE, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_query"), requestParameters, body);
+			this.DoRequest<T>(DELETE, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_query"), body, _params(requestParameters));
 		
 		///<summary>Represents a DELETE on /{index}/{type}/_query 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -1564,7 +1564,7 @@ namespace Elasticsearch.Net
 		///<param name="body">A query to restrict the operation specified with the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> DeleteByQueryAsync<T>(string index, string type, PostData<object> body, Func<DeleteByQueryRequestParameters, DeleteByQueryRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,DeleteByQueryRequestParameters>(DELETE, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_query"), requestParameters, body);
+			this.DoRequestAsync<T>(DELETE, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_query"), body, _params(requestParameters));
 		
 		///<summary>Represents a DELETE on /_scripts/{lang}/{id} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -1579,7 +1579,7 @@ namespace Elasticsearch.Net
 		///<param name="id">Script ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> DeleteScript<T>(string lang, string id, Func<DeleteScriptRequestParameters, DeleteScriptRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,DeleteScriptRequestParameters>(DELETE, Url($"_scripts/{lang.NotNull("lang")}/{id.NotNull("id")}"), requestParameters);
+			this.DoRequest<T>(DELETE, Url($"_scripts/{lang.NotNull("lang")}/{id.NotNull("id")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a DELETE on /_scripts/{lang}/{id} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -1594,7 +1594,7 @@ namespace Elasticsearch.Net
 		///<param name="id">Script ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> DeleteScriptAsync<T>(string lang, string id, Func<DeleteScriptRequestParameters, DeleteScriptRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,DeleteScriptRequestParameters>(DELETE, Url($"_scripts/{lang.NotNull("lang")}/{id.NotNull("id")}"), requestParameters);
+			this.DoRequestAsync<T>(DELETE, Url($"_scripts/{lang.NotNull("lang")}/{id.NotNull("id")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a DELETE on /_search/template/{id} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -1608,7 +1608,7 @@ namespace Elasticsearch.Net
 		///<param name="id">Template ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> DeleteTemplate<T>(string id, Func<DeleteTemplateRequestParameters, DeleteTemplateRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,DeleteTemplateRequestParameters>(DELETE, Url($"_search/template/{id.NotNull("id")}"), requestParameters);
+			this.DoRequest<T>(DELETE, Url($"_search/template/{id.NotNull("id")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a DELETE on /_search/template/{id} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -1622,7 +1622,7 @@ namespace Elasticsearch.Net
 		///<param name="id">Template ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> DeleteTemplateAsync<T>(string id, Func<DeleteTemplateRequestParameters, DeleteTemplateRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,DeleteTemplateRequestParameters>(DELETE, Url($"_search/template/{id.NotNull("id")}"), requestParameters);
+			this.DoRequestAsync<T>(DELETE, Url($"_search/template/{id.NotNull("id")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a HEAD on /{index}/{type}/{id} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -1638,7 +1638,7 @@ namespace Elasticsearch.Net
 		///<param name="id">The document ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> Exists<T>(string index, string type, string id, Func<DocumentExistsRequestParameters, DocumentExistsRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,DocumentExistsRequestParameters>(HEAD, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}"), requestParameters, allow404: true);
+			this.DoRequest<T>(HEAD, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}"), null, _params(requestParameters, allow404: true));
 		
 		///<summary>Represents a HEAD on /{index}/{type}/{id} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -1654,7 +1654,7 @@ namespace Elasticsearch.Net
 		///<param name="id">The document ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> ExistsAsync<T>(string index, string type, string id, Func<DocumentExistsRequestParameters, DocumentExistsRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,DocumentExistsRequestParameters>(HEAD, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}"), requestParameters, allow404: true);
+			this.DoRequestAsync<T>(HEAD, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}"), null, _params(requestParameters, allow404: true));
 		
 		///<summary>Represents a GET on /{index}/{type}/{id}/_explain 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -1670,7 +1670,7 @@ namespace Elasticsearch.Net
 		///<param name="id">The document ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> ExplainGet<T>(string index, string type, string id, Func<ExplainRequestParameters, ExplainRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,ExplainRequestParameters>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}/_explain"), requestParameters);
+			this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}/_explain"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/{type}/{id}/_explain 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -1686,7 +1686,7 @@ namespace Elasticsearch.Net
 		///<param name="id">The document ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> ExplainGetAsync<T>(string index, string type, string id, Func<ExplainRequestParameters, ExplainRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,ExplainRequestParameters>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}/_explain"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}/_explain"), null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/{id}/_explain 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -1703,7 +1703,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The query definition using the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> Explain<T>(string index, string type, string id, PostData<object> body, Func<ExplainRequestParameters, ExplainRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,ExplainRequestParameters>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}/_explain"), requestParameters, body);
+			this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}/_explain"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/{id}/_explain 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -1720,7 +1720,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The query definition using the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> ExplainAsync<T>(string index, string type, string id, PostData<object> body, Func<ExplainRequestParameters, ExplainRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,ExplainRequestParameters>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}/_explain"), requestParameters, body);
+			this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}/_explain"), body, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_field_stats 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -1733,7 +1733,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> FieldStatsGet<T>(Func<FieldStatsRequestParameters, FieldStatsRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,FieldStatsRequestParameters>(GET, Url($"_field_stats"), requestParameters);
+			this.DoRequest<T>(GET, Url($"_field_stats"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_field_stats 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -1746,7 +1746,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> FieldStatsGetAsync<T>(Func<FieldStatsRequestParameters, FieldStatsRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,FieldStatsRequestParameters>(GET, Url($"_field_stats"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"_field_stats"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_field_stats 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -1760,7 +1760,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> FieldStatsGet<T>(string index, Func<FieldStatsRequestParameters, FieldStatsRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,FieldStatsRequestParameters>(GET, Url($"{index.NotNull("index")}/_field_stats"), requestParameters);
+			this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/_field_stats"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_field_stats 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -1774,7 +1774,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> FieldStatsGetAsync<T>(string index, Func<FieldStatsRequestParameters, FieldStatsRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,FieldStatsRequestParameters>(GET, Url($"{index.NotNull("index")}/_field_stats"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/_field_stats"), null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_field_stats 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -1787,7 +1787,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> FieldStats<T>(Func<FieldStatsRequestParameters, FieldStatsRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,FieldStatsRequestParameters>(POST, Url($"_field_stats"), requestParameters);
+			this.DoRequest<T>(POST, Url($"_field_stats"), null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_field_stats 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -1800,7 +1800,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> FieldStatsAsync<T>(Func<FieldStatsRequestParameters, FieldStatsRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,FieldStatsRequestParameters>(POST, Url($"_field_stats"), requestParameters);
+			this.DoRequestAsync<T>(POST, Url($"_field_stats"), null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_field_stats 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -1814,7 +1814,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> FieldStats<T>(string index, Func<FieldStatsRequestParameters, FieldStatsRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,FieldStatsRequestParameters>(POST, Url($"{index.NotNull("index")}/_field_stats"), requestParameters);
+			this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/_field_stats"), null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_field_stats 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -1828,7 +1828,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> FieldStatsAsync<T>(string index, Func<FieldStatsRequestParameters, FieldStatsRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,FieldStatsRequestParameters>(POST, Url($"{index.NotNull("index")}/_field_stats"), requestParameters);
+			this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/_field_stats"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/{type}/{id} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -1844,7 +1844,7 @@ namespace Elasticsearch.Net
 		///<param name="id">The document ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> Get<T>(string index, string type, string id, Func<GetRequestParameters, GetRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,GetRequestParameters>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}"), requestParameters, allow404: true);
+			this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}"), null, _params(requestParameters, allow404: true));
 		
 		///<summary>Represents a GET on /{index}/{type}/{id} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -1860,7 +1860,7 @@ namespace Elasticsearch.Net
 		///<param name="id">The document ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> GetAsync<T>(string index, string type, string id, Func<GetRequestParameters, GetRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,GetRequestParameters>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}"), requestParameters, allow404: true);
+			this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}"), null, _params(requestParameters, allow404: true));
 		
 		///<summary>Represents a GET on /_scripts/{lang}/{id} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -1875,7 +1875,7 @@ namespace Elasticsearch.Net
 		///<param name="id">Script ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> GetScript<T>(string lang, string id, Func<GetScriptRequestParameters, GetScriptRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,GetScriptRequestParameters>(GET, Url($"_scripts/{lang.NotNull("lang")}/{id.NotNull("id")}"), requestParameters);
+			this.DoRequest<T>(GET, Url($"_scripts/{lang.NotNull("lang")}/{id.NotNull("id")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_scripts/{lang}/{id} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -1890,7 +1890,7 @@ namespace Elasticsearch.Net
 		///<param name="id">Script ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> GetScriptAsync<T>(string lang, string id, Func<GetScriptRequestParameters, GetScriptRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,GetScriptRequestParameters>(GET, Url($"_scripts/{lang.NotNull("lang")}/{id.NotNull("id")}"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"_scripts/{lang.NotNull("lang")}/{id.NotNull("id")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/{type}/{id}/_source 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -1906,7 +1906,7 @@ namespace Elasticsearch.Net
 		///<param name="id">The document ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> GetSource<T>(string index, string type, string id, Func<SourceRequestParameters, SourceRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,SourceRequestParameters>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}/_source"), requestParameters);
+			this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}/_source"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/{type}/{id}/_source 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -1922,7 +1922,7 @@ namespace Elasticsearch.Net
 		///<param name="id">The document ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> GetSourceAsync<T>(string index, string type, string id, Func<SourceRequestParameters, SourceRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,SourceRequestParameters>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}/_source"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}/_source"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_search/template/{id} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -1936,7 +1936,7 @@ namespace Elasticsearch.Net
 		///<param name="id">Template ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> GetTemplate<T>(string id, Func<GetTemplateRequestParameters, GetTemplateRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,GetTemplateRequestParameters>(GET, Url($"_search/template/{id.NotNull("id")}"), requestParameters);
+			this.DoRequest<T>(GET, Url($"_search/template/{id.NotNull("id")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_search/template/{id} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -1950,7 +1950,7 @@ namespace Elasticsearch.Net
 		///<param name="id">Template ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> GetTemplateAsync<T>(string id, Func<GetTemplateRequestParameters, GetTemplateRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,GetTemplateRequestParameters>(GET, Url($"_search/template/{id.NotNull("id")}"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"_search/template/{id.NotNull("id")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -1966,7 +1966,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The document</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> Index<T>(string index, string type, PostData<object> body, Func<IndexRequestParameters, IndexRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,IndexRequestParameters>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}"), requestParameters, body);
+			this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -1982,7 +1982,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The document</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndexAsync<T>(string index, string type, PostData<object> body, Func<IndexRequestParameters, IndexRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,IndexRequestParameters>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}"), requestParameters, body);
+			this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/{id} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -1999,7 +1999,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The document</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> Index<T>(string index, string type, string id, PostData<object> body, Func<IndexRequestParameters, IndexRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,IndexRequestParameters>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}"), requestParameters, body);
+			this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/{id} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -2016,7 +2016,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The document</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndexAsync<T>(string index, string type, string id, PostData<object> body, Func<IndexRequestParameters, IndexRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,IndexRequestParameters>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}"), requestParameters, body);
+			this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /{index}/{type} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -2032,7 +2032,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The document</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndexPut<T>(string index, string type, PostData<object> body, Func<IndexRequestParameters, IndexRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,IndexRequestParameters>(PUT, Url($"{index.NotNull("index")}/{type.NotNull("type")}"), requestParameters, body);
+			this.DoRequest<T>(PUT, Url($"{index.NotNull("index")}/{type.NotNull("type")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /{index}/{type} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -2048,7 +2048,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The document</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndexPutAsync<T>(string index, string type, PostData<object> body, Func<IndexRequestParameters, IndexRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,IndexRequestParameters>(PUT, Url($"{index.NotNull("index")}/{type.NotNull("type")}"), requestParameters, body);
+			this.DoRequestAsync<T>(PUT, Url($"{index.NotNull("index")}/{type.NotNull("type")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /{index}/{type}/{id} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -2065,7 +2065,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The document</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndexPut<T>(string index, string type, string id, PostData<object> body, Func<IndexRequestParameters, IndexRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,IndexRequestParameters>(PUT, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}"), requestParameters, body);
+			this.DoRequest<T>(PUT, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /{index}/{type}/{id} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -2082,7 +2082,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The document</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndexPutAsync<T>(string index, string type, string id, PostData<object> body, Func<IndexRequestParameters, IndexRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,IndexRequestParameters>(PUT, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}"), requestParameters, body);
+			this.DoRequestAsync<T>(PUT, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_analyze 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -2095,7 +2095,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesAnalyzeGetForAll<T>(Func<AnalyzeRequestParameters, AnalyzeRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,AnalyzeRequestParameters>(GET, Url($"_analyze"), requestParameters);
+			this.DoRequest<T>(GET, Url($"_analyze"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_analyze 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -2108,7 +2108,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesAnalyzeGetForAllAsync<T>(Func<AnalyzeRequestParameters, AnalyzeRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,AnalyzeRequestParameters>(GET, Url($"_analyze"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"_analyze"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_analyze 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -2122,7 +2122,7 @@ namespace Elasticsearch.Net
 		///<param name="index">The name of the index to scope the operation</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesAnalyzeGet<T>(string index, Func<AnalyzeRequestParameters, AnalyzeRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,AnalyzeRequestParameters>(GET, Url($"{index.NotNull("index")}/_analyze"), requestParameters);
+			this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/_analyze"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_analyze 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -2136,7 +2136,7 @@ namespace Elasticsearch.Net
 		///<param name="index">The name of the index to scope the operation</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesAnalyzeGetAsync<T>(string index, Func<AnalyzeRequestParameters, AnalyzeRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,AnalyzeRequestParameters>(GET, Url($"{index.NotNull("index")}/_analyze"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/_analyze"), null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_analyze 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -2150,7 +2150,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The text on which the analysis should be performed</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesAnalyzeForAll<T>(PostData<object> body, Func<AnalyzeRequestParameters, AnalyzeRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,AnalyzeRequestParameters>(POST, Url($"_analyze"), requestParameters, body);
+			this.DoRequest<T>(POST, Url($"_analyze"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_analyze 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -2164,7 +2164,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The text on which the analysis should be performed</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesAnalyzeForAllAsync<T>(PostData<object> body, Func<AnalyzeRequestParameters, AnalyzeRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,AnalyzeRequestParameters>(POST, Url($"_analyze"), requestParameters, body);
+			this.DoRequestAsync<T>(POST, Url($"_analyze"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_analyze 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -2179,7 +2179,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The text on which the analysis should be performed</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesAnalyze<T>(string index, PostData<object> body, Func<AnalyzeRequestParameters, AnalyzeRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,AnalyzeRequestParameters>(POST, Url($"{index.NotNull("index")}/_analyze"), requestParameters, body);
+			this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/_analyze"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_analyze 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -2194,7 +2194,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The text on which the analysis should be performed</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesAnalyzeAsync<T>(string index, PostData<object> body, Func<AnalyzeRequestParameters, AnalyzeRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,AnalyzeRequestParameters>(POST, Url($"{index.NotNull("index")}/_analyze"), requestParameters, body);
+			this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/_analyze"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_cache/clear 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -2207,7 +2207,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesClearCacheForAll<T>(Func<ClearCacheRequestParameters, ClearCacheRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,ClearCacheRequestParameters>(POST, Url($"_cache/clear"), requestParameters);
+			this.DoRequest<T>(POST, Url($"_cache/clear"), null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_cache/clear 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -2220,7 +2220,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesClearCacheForAllAsync<T>(Func<ClearCacheRequestParameters, ClearCacheRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,ClearCacheRequestParameters>(POST, Url($"_cache/clear"), requestParameters);
+			this.DoRequestAsync<T>(POST, Url($"_cache/clear"), null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_cache/clear 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -2234,7 +2234,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index name to limit the operation</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesClearCache<T>(string index, Func<ClearCacheRequestParameters, ClearCacheRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,ClearCacheRequestParameters>(POST, Url($"{index.NotNull("index")}/_cache/clear"), requestParameters);
+			this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/_cache/clear"), null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_cache/clear 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -2248,7 +2248,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index name to limit the operation</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesClearCacheAsync<T>(string index, Func<ClearCacheRequestParameters, ClearCacheRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,ClearCacheRequestParameters>(POST, Url($"{index.NotNull("index")}/_cache/clear"), requestParameters);
+			this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/_cache/clear"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_cache/clear 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -2261,7 +2261,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesClearCacheGetForAll<T>(Func<ClearCacheRequestParameters, ClearCacheRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,ClearCacheRequestParameters>(GET, Url($"_cache/clear"), requestParameters);
+			this.DoRequest<T>(GET, Url($"_cache/clear"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_cache/clear 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -2274,7 +2274,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesClearCacheGetForAllAsync<T>(Func<ClearCacheRequestParameters, ClearCacheRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,ClearCacheRequestParameters>(GET, Url($"_cache/clear"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"_cache/clear"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_cache/clear 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -2288,7 +2288,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index name to limit the operation</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesClearCacheGet<T>(string index, Func<ClearCacheRequestParameters, ClearCacheRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,ClearCacheRequestParameters>(GET, Url($"{index.NotNull("index")}/_cache/clear"), requestParameters);
+			this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/_cache/clear"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_cache/clear 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -2302,7 +2302,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index name to limit the operation</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesClearCacheGetAsync<T>(string index, Func<ClearCacheRequestParameters, ClearCacheRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,ClearCacheRequestParameters>(GET, Url($"{index.NotNull("index")}/_cache/clear"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/_cache/clear"), null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_close 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -2316,7 +2316,7 @@ namespace Elasticsearch.Net
 		///<param name="index">The name of the index</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesClose<T>(string index, Func<CloseIndexRequestParameters, CloseIndexRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,CloseIndexRequestParameters>(POST, Url($"{index.NotNull("index")}/_close"), requestParameters);
+			this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/_close"), null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_close 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -2330,7 +2330,7 @@ namespace Elasticsearch.Net
 		///<param name="index">The name of the index</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesCloseAsync<T>(string index, Func<CloseIndexRequestParameters, CloseIndexRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,CloseIndexRequestParameters>(POST, Url($"{index.NotNull("index")}/_close"), requestParameters);
+			this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/_close"), null, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /{index} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -2345,7 +2345,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The configuration for the index (`settings` and `mappings`)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesCreate<T>(string index, PostData<object> body, Func<CreateIndexRequestParameters, CreateIndexRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,CreateIndexRequestParameters>(PUT, Url($"{index.NotNull("index")}"), requestParameters, body);
+			this.DoRequest<T>(PUT, Url($"{index.NotNull("index")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /{index} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -2360,7 +2360,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The configuration for the index (`settings` and `mappings`)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesCreateAsync<T>(string index, PostData<object> body, Func<CreateIndexRequestParameters, CreateIndexRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,CreateIndexRequestParameters>(PUT, Url($"{index.NotNull("index")}"), requestParameters, body);
+			this.DoRequestAsync<T>(PUT, Url($"{index.NotNull("index")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -2375,7 +2375,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The configuration for the index (`settings` and `mappings`)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesCreatePost<T>(string index, PostData<object> body, Func<CreateIndexRequestParameters, CreateIndexRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,CreateIndexRequestParameters>(POST, Url($"{index.NotNull("index")}"), requestParameters, body);
+			this.DoRequest<T>(POST, Url($"{index.NotNull("index")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -2390,7 +2390,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The configuration for the index (`settings` and `mappings`)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesCreatePostAsync<T>(string index, PostData<object> body, Func<CreateIndexRequestParameters, CreateIndexRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,CreateIndexRequestParameters>(POST, Url($"{index.NotNull("index")}"), requestParameters, body);
+			this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a DELETE on /{index} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -2404,7 +2404,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of indices to delete; use `_all` or `*` string to delete all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesDelete<T>(string index, Func<DeleteIndexRequestParameters, DeleteIndexRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,DeleteIndexRequestParameters>(DELETE, Url($"{index.NotNull("index")}"), requestParameters);
+			this.DoRequest<T>(DELETE, Url($"{index.NotNull("index")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a DELETE on /{index} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -2418,7 +2418,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of indices to delete; use `_all` or `*` string to delete all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesDeleteAsync<T>(string index, Func<DeleteIndexRequestParameters, DeleteIndexRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,DeleteIndexRequestParameters>(DELETE, Url($"{index.NotNull("index")}"), requestParameters);
+			this.DoRequestAsync<T>(DELETE, Url($"{index.NotNull("index")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a DELETE on /{index}/_alias/{name} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -2433,7 +2433,7 @@ namespace Elasticsearch.Net
 		///<param name="name">A comma-separated list of aliases to delete (supports wildcards); use `_all` to delete all aliases for the specified indices.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesDeleteAlias<T>(string index, string name, Func<DeleteAliasRequestParameters, DeleteAliasRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,DeleteAliasRequestParameters>(DELETE, Url($"{index.NotNull("index")}/_alias/{name.NotNull("name")}"), requestParameters);
+			this.DoRequest<T>(DELETE, Url($"{index.NotNull("index")}/_alias/{name.NotNull("name")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a DELETE on /{index}/_alias/{name} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -2448,7 +2448,7 @@ namespace Elasticsearch.Net
 		///<param name="name">A comma-separated list of aliases to delete (supports wildcards); use `_all` to delete all aliases for the specified indices.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesDeleteAliasAsync<T>(string index, string name, Func<DeleteAliasRequestParameters, DeleteAliasRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,DeleteAliasRequestParameters>(DELETE, Url($"{index.NotNull("index")}/_alias/{name.NotNull("name")}"), requestParameters);
+			this.DoRequestAsync<T>(DELETE, Url($"{index.NotNull("index")}/_alias/{name.NotNull("name")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a DELETE on /{index}/{type}/_mapping 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -2463,7 +2463,7 @@ namespace Elasticsearch.Net
 		///<param name="type">A comma-separated list of document types to delete (supports wildcards); use `_all` to delete all document types in the specified indices.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesDeleteMapping<T>(string index, string type, Func<DeleteMappingRequestParameters, DeleteMappingRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,DeleteMappingRequestParameters>(DELETE, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_mapping"), requestParameters);
+			this.DoRequest<T>(DELETE, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_mapping"), null, _params(requestParameters));
 		
 		///<summary>Represents a DELETE on /{index}/{type}/_mapping 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -2478,7 +2478,7 @@ namespace Elasticsearch.Net
 		///<param name="type">A comma-separated list of document types to delete (supports wildcards); use `_all` to delete all document types in the specified indices.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesDeleteMappingAsync<T>(string index, string type, Func<DeleteMappingRequestParameters, DeleteMappingRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,DeleteMappingRequestParameters>(DELETE, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_mapping"), requestParameters);
+			this.DoRequestAsync<T>(DELETE, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_mapping"), null, _params(requestParameters));
 		
 		///<summary>Represents a DELETE on /_template/{name} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -2492,7 +2492,7 @@ namespace Elasticsearch.Net
 		///<param name="name">The name of the template</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesDeleteTemplateForAll<T>(string name, Func<DeleteTemplateRequestParameters, DeleteTemplateRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,DeleteTemplateRequestParameters>(DELETE, Url($"_template/{name.NotNull("name")}"), requestParameters);
+			this.DoRequest<T>(DELETE, Url($"_template/{name.NotNull("name")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a DELETE on /_template/{name} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -2506,7 +2506,7 @@ namespace Elasticsearch.Net
 		///<param name="name">The name of the template</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesDeleteTemplateForAllAsync<T>(string name, Func<DeleteTemplateRequestParameters, DeleteTemplateRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,DeleteTemplateRequestParameters>(DELETE, Url($"_template/{name.NotNull("name")}"), requestParameters);
+			this.DoRequestAsync<T>(DELETE, Url($"_template/{name.NotNull("name")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a DELETE on /{index}/_warmer/{name} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -2521,7 +2521,7 @@ namespace Elasticsearch.Net
 		///<param name="name">A comma-separated list of warmer names to delete (supports wildcards); use `_all` to delete all warmers in the specified indices. You must specify a name either in the uri or in the parameters.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesDeleteWarmer<T>(string index, string name, Func<DeleteWarmerRequestParameters, DeleteWarmerRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,DeleteWarmerRequestParameters>(DELETE, Url($"{index.NotNull("index")}/_warmer/{name.NotNull("name")}"), requestParameters);
+			this.DoRequest<T>(DELETE, Url($"{index.NotNull("index")}/_warmer/{name.NotNull("name")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a DELETE on /{index}/_warmer/{name} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -2536,7 +2536,7 @@ namespace Elasticsearch.Net
 		///<param name="name">A comma-separated list of warmer names to delete (supports wildcards); use `_all` to delete all warmers in the specified indices. You must specify a name either in the uri or in the parameters.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesDeleteWarmerAsync<T>(string index, string name, Func<DeleteWarmerRequestParameters, DeleteWarmerRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,DeleteWarmerRequestParameters>(DELETE, Url($"{index.NotNull("index")}/_warmer/{name.NotNull("name")}"), requestParameters);
+			this.DoRequestAsync<T>(DELETE, Url($"{index.NotNull("index")}/_warmer/{name.NotNull("name")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a HEAD on /{index} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -2550,7 +2550,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of indices to check</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesExists<T>(string index, Func<IndexExistsRequestParameters, IndexExistsRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,IndexExistsRequestParameters>(HEAD, Url($"{index.NotNull("index")}"), requestParameters, allow404: true);
+			this.DoRequest<T>(HEAD, Url($"{index.NotNull("index")}"), null, _params(requestParameters, allow404: true));
 		
 		///<summary>Represents a HEAD on /{index} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -2564,7 +2564,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of indices to check</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesExistsAsync<T>(string index, Func<IndexExistsRequestParameters, IndexExistsRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,IndexExistsRequestParameters>(HEAD, Url($"{index.NotNull("index")}"), requestParameters, allow404: true);
+			this.DoRequestAsync<T>(HEAD, Url($"{index.NotNull("index")}"), null, _params(requestParameters, allow404: true));
 		
 		///<summary>Represents a HEAD on /_alias/{name} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -2578,7 +2578,7 @@ namespace Elasticsearch.Net
 		///<param name="name">A comma-separated list of alias names to return</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesExistsAliasForAll<T>(string name, Func<AliasExistsRequestParameters, AliasExistsRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,AliasExistsRequestParameters>(HEAD, Url($"_alias/{name.NotNull("name")}"), requestParameters, allow404: true);
+			this.DoRequest<T>(HEAD, Url($"_alias/{name.NotNull("name")}"), null, _params(requestParameters, allow404: true));
 		
 		///<summary>Represents a HEAD on /_alias/{name} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -2592,7 +2592,7 @@ namespace Elasticsearch.Net
 		///<param name="name">A comma-separated list of alias names to return</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesExistsAliasForAllAsync<T>(string name, Func<AliasExistsRequestParameters, AliasExistsRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,AliasExistsRequestParameters>(HEAD, Url($"_alias/{name.NotNull("name")}"), requestParameters, allow404: true);
+			this.DoRequestAsync<T>(HEAD, Url($"_alias/{name.NotNull("name")}"), null, _params(requestParameters, allow404: true));
 		
 		///<summary>Represents a HEAD on /{index}/_alias/{name} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -2607,7 +2607,7 @@ namespace Elasticsearch.Net
 		///<param name="name">A comma-separated list of alias names to return</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesExistsAlias<T>(string index, string name, Func<AliasExistsRequestParameters, AliasExistsRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,AliasExistsRequestParameters>(HEAD, Url($"{index.NotNull("index")}/_alias/{name.NotNull("name")}"), requestParameters, allow404: true);
+			this.DoRequest<T>(HEAD, Url($"{index.NotNull("index")}/_alias/{name.NotNull("name")}"), null, _params(requestParameters, allow404: true));
 		
 		///<summary>Represents a HEAD on /{index}/_alias/{name} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -2622,7 +2622,7 @@ namespace Elasticsearch.Net
 		///<param name="name">A comma-separated list of alias names to return</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesExistsAliasAsync<T>(string index, string name, Func<AliasExistsRequestParameters, AliasExistsRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,AliasExistsRequestParameters>(HEAD, Url($"{index.NotNull("index")}/_alias/{name.NotNull("name")}"), requestParameters, allow404: true);
+			this.DoRequestAsync<T>(HEAD, Url($"{index.NotNull("index")}/_alias/{name.NotNull("name")}"), null, _params(requestParameters, allow404: true));
 		
 		///<summary>Represents a HEAD on /{index}/_alias 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -2636,7 +2636,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to filter aliases</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesExistsAlias<T>(string index, Func<AliasExistsRequestParameters, AliasExistsRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,AliasExistsRequestParameters>(HEAD, Url($"{index.NotNull("index")}/_alias"), requestParameters, allow404: true);
+			this.DoRequest<T>(HEAD, Url($"{index.NotNull("index")}/_alias"), null, _params(requestParameters, allow404: true));
 		
 		///<summary>Represents a HEAD on /{index}/_alias 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -2650,7 +2650,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to filter aliases</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesExistsAliasAsync<T>(string index, Func<AliasExistsRequestParameters, AliasExistsRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,AliasExistsRequestParameters>(HEAD, Url($"{index.NotNull("index")}/_alias"), requestParameters, allow404: true);
+			this.DoRequestAsync<T>(HEAD, Url($"{index.NotNull("index")}/_alias"), null, _params(requestParameters, allow404: true));
 		
 		///<summary>Represents a HEAD on /_template/{name} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -2664,7 +2664,7 @@ namespace Elasticsearch.Net
 		///<param name="name">The name of the template</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesExistsTemplateForAll<T>(string name, Func<TemplateExistsRequestParameters, TemplateExistsRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,TemplateExistsRequestParameters>(HEAD, Url($"_template/{name.NotNull("name")}"), requestParameters, allow404: true);
+			this.DoRequest<T>(HEAD, Url($"_template/{name.NotNull("name")}"), null, _params(requestParameters, allow404: true));
 		
 		///<summary>Represents a HEAD on /_template/{name} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -2678,7 +2678,7 @@ namespace Elasticsearch.Net
 		///<param name="name">The name of the template</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesExistsTemplateForAllAsync<T>(string name, Func<TemplateExistsRequestParameters, TemplateExistsRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,TemplateExistsRequestParameters>(HEAD, Url($"_template/{name.NotNull("name")}"), requestParameters, allow404: true);
+			this.DoRequestAsync<T>(HEAD, Url($"_template/{name.NotNull("name")}"), null, _params(requestParameters, allow404: true));
 		
 		///<summary>Represents a HEAD on /{index}/{type} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -2693,7 +2693,7 @@ namespace Elasticsearch.Net
 		///<param name="type">A comma-separated list of document types to check</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesExistsType<T>(string index, string type, Func<TypeExistsRequestParameters, TypeExistsRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,TypeExistsRequestParameters>(HEAD, Url($"{index.NotNull("index")}/{type.NotNull("type")}"), requestParameters, allow404: true);
+			this.DoRequest<T>(HEAD, Url($"{index.NotNull("index")}/{type.NotNull("type")}"), null, _params(requestParameters, allow404: true));
 		
 		///<summary>Represents a HEAD on /{index}/{type} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -2708,7 +2708,7 @@ namespace Elasticsearch.Net
 		///<param name="type">A comma-separated list of document types to check</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesExistsTypeAsync<T>(string index, string type, Func<TypeExistsRequestParameters, TypeExistsRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,TypeExistsRequestParameters>(HEAD, Url($"{index.NotNull("index")}/{type.NotNull("type")}"), requestParameters, allow404: true);
+			this.DoRequestAsync<T>(HEAD, Url($"{index.NotNull("index")}/{type.NotNull("type")}"), null, _params(requestParameters, allow404: true));
 		
 		///<summary>Represents a POST on /_flush 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -2721,7 +2721,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesFlushForAll<T>(Func<FlushRequestParameters, FlushRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,FlushRequestParameters>(POST, Url($"_flush"), requestParameters);
+			this.DoRequest<T>(POST, Url($"_flush"), null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_flush 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -2734,7 +2734,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesFlushForAllAsync<T>(Func<FlushRequestParameters, FlushRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,FlushRequestParameters>(POST, Url($"_flush"), requestParameters);
+			this.DoRequestAsync<T>(POST, Url($"_flush"), null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_flush 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -2748,7 +2748,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string for all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesFlush<T>(string index, Func<FlushRequestParameters, FlushRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,FlushRequestParameters>(POST, Url($"{index.NotNull("index")}/_flush"), requestParameters);
+			this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/_flush"), null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_flush 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -2762,7 +2762,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string for all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesFlushAsync<T>(string index, Func<FlushRequestParameters, FlushRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,FlushRequestParameters>(POST, Url($"{index.NotNull("index")}/_flush"), requestParameters);
+			this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/_flush"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_flush 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -2775,7 +2775,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesFlushGetForAll<T>(Func<FlushRequestParameters, FlushRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,FlushRequestParameters>(GET, Url($"_flush"), requestParameters);
+			this.DoRequest<T>(GET, Url($"_flush"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_flush 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -2788,7 +2788,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesFlushGetForAllAsync<T>(Func<FlushRequestParameters, FlushRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,FlushRequestParameters>(GET, Url($"_flush"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"_flush"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_flush 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -2802,7 +2802,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string for all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesFlushGet<T>(string index, Func<FlushRequestParameters, FlushRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,FlushRequestParameters>(GET, Url($"{index.NotNull("index")}/_flush"), requestParameters);
+			this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/_flush"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_flush 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -2816,7 +2816,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string for all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesFlushGetAsync<T>(string index, Func<FlushRequestParameters, FlushRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,FlushRequestParameters>(GET, Url($"{index.NotNull("index")}/_flush"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/_flush"), null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_flush/synced 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -2829,7 +2829,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesFlushSyncedForAll<T>(Func<SyncedFlushRequestParameters, SyncedFlushRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,SyncedFlushRequestParameters>(POST, Url($"_flush/synced"), requestParameters);
+			this.DoRequest<T>(POST, Url($"_flush/synced"), null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_flush/synced 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -2842,7 +2842,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesFlushSyncedForAllAsync<T>(Func<SyncedFlushRequestParameters, SyncedFlushRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,SyncedFlushRequestParameters>(POST, Url($"_flush/synced"), requestParameters);
+			this.DoRequestAsync<T>(POST, Url($"_flush/synced"), null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_flush/synced 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -2856,7 +2856,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string for all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesFlushSynced<T>(string index, Func<SyncedFlushRequestParameters, SyncedFlushRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,SyncedFlushRequestParameters>(POST, Url($"{index.NotNull("index")}/_flush/synced"), requestParameters);
+			this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/_flush/synced"), null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_flush/synced 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -2870,7 +2870,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string for all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesFlushSyncedAsync<T>(string index, Func<SyncedFlushRequestParameters, SyncedFlushRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,SyncedFlushRequestParameters>(POST, Url($"{index.NotNull("index")}/_flush/synced"), requestParameters);
+			this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/_flush/synced"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_flush/synced 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -2883,7 +2883,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesFlushSyncedGetForAll<T>(Func<SyncedFlushRequestParameters, SyncedFlushRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,SyncedFlushRequestParameters>(GET, Url($"_flush/synced"), requestParameters);
+			this.DoRequest<T>(GET, Url($"_flush/synced"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_flush/synced 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -2896,7 +2896,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesFlushSyncedGetForAllAsync<T>(Func<SyncedFlushRequestParameters, SyncedFlushRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,SyncedFlushRequestParameters>(GET, Url($"_flush/synced"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"_flush/synced"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_flush/synced 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -2910,7 +2910,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string for all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesFlushSyncedGet<T>(string index, Func<SyncedFlushRequestParameters, SyncedFlushRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,SyncedFlushRequestParameters>(GET, Url($"{index.NotNull("index")}/_flush/synced"), requestParameters);
+			this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/_flush/synced"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_flush/synced 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -2924,7 +2924,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string for all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesFlushSyncedGetAsync<T>(string index, Func<SyncedFlushRequestParameters, SyncedFlushRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,SyncedFlushRequestParameters>(GET, Url($"{index.NotNull("index")}/_flush/synced"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/_flush/synced"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -2938,7 +2938,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesGet<T>(string index, Func<GetIndexRequestParameters, GetIndexRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,GetIndexRequestParameters>(GET, Url($"{index.NotNull("index")}"), requestParameters);
+			this.DoRequest<T>(GET, Url($"{index.NotNull("index")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -2952,7 +2952,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesGetAsync<T>(string index, Func<GetIndexRequestParameters, GetIndexRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,GetIndexRequestParameters>(GET, Url($"{index.NotNull("index")}"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/{feature} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -2967,7 +2967,7 @@ namespace Elasticsearch.Net
 		///<param name="feature">A comma-separated list of features</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesGet<T>(string index, string feature, Func<GetIndexRequestParameters, GetIndexRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,GetIndexRequestParameters>(GET, Url($"{index.NotNull("index")}/{feature.NotNull("feature")}"), requestParameters);
+			this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/{feature.NotNull("feature")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/{feature} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -2982,7 +2982,7 @@ namespace Elasticsearch.Net
 		///<param name="feature">A comma-separated list of features</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesGetAsync<T>(string index, string feature, Func<GetIndexRequestParameters, GetIndexRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,GetIndexRequestParameters>(GET, Url($"{index.NotNull("index")}/{feature.NotNull("feature")}"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/{feature.NotNull("feature")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_alias 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -2995,7 +2995,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesGetAliasForAll<T>(Func<GetAliasRequestParameters, GetAliasRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,GetAliasRequestParameters>(GET, Url($"_alias"), requestParameters);
+			this.DoRequest<T>(GET, Url($"_alias"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_alias 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -3008,7 +3008,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesGetAliasForAllAsync<T>(Func<GetAliasRequestParameters, GetAliasRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,GetAliasRequestParameters>(GET, Url($"_alias"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"_alias"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_alias/{name} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -3022,7 +3022,7 @@ namespace Elasticsearch.Net
 		///<param name="name">A comma-separated list of alias names to return</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesGetAliasForAll<T>(string name, Func<GetAliasRequestParameters, GetAliasRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,GetAliasRequestParameters>(GET, Url($"_alias/{name.NotNull("name")}"), requestParameters);
+			this.DoRequest<T>(GET, Url($"_alias/{name.NotNull("name")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_alias/{name} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -3036,7 +3036,7 @@ namespace Elasticsearch.Net
 		///<param name="name">A comma-separated list of alias names to return</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesGetAliasForAllAsync<T>(string name, Func<GetAliasRequestParameters, GetAliasRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,GetAliasRequestParameters>(GET, Url($"_alias/{name.NotNull("name")}"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"_alias/{name.NotNull("name")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_alias/{name} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -3051,7 +3051,7 @@ namespace Elasticsearch.Net
 		///<param name="name">A comma-separated list of alias names to return</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesGetAlias<T>(string index, string name, Func<GetAliasRequestParameters, GetAliasRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,GetAliasRequestParameters>(GET, Url($"{index.NotNull("index")}/_alias/{name.NotNull("name")}"), requestParameters);
+			this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/_alias/{name.NotNull("name")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_alias/{name} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -3066,7 +3066,7 @@ namespace Elasticsearch.Net
 		///<param name="name">A comma-separated list of alias names to return</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesGetAliasAsync<T>(string index, string name, Func<GetAliasRequestParameters, GetAliasRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,GetAliasRequestParameters>(GET, Url($"{index.NotNull("index")}/_alias/{name.NotNull("name")}"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/_alias/{name.NotNull("name")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_alias 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -3080,7 +3080,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to filter aliases</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesGetAlias<T>(string index, Func<GetAliasRequestParameters, GetAliasRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,GetAliasRequestParameters>(GET, Url($"{index.NotNull("index")}/_alias"), requestParameters);
+			this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/_alias"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_alias 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -3094,7 +3094,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to filter aliases</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesGetAliasAsync<T>(string index, Func<GetAliasRequestParameters, GetAliasRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,GetAliasRequestParameters>(GET, Url($"{index.NotNull("index")}/_alias"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/_alias"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_aliases 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -3107,7 +3107,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesGetAliasesForAll<T>(Func<GetAliasesRequestParameters, GetAliasesRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,GetAliasesRequestParameters>(GET, Url($"_aliases"), requestParameters);
+			this.DoRequest<T>(GET, Url($"_aliases"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_aliases 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -3120,7 +3120,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesGetAliasesForAllAsync<T>(Func<GetAliasesRequestParameters, GetAliasesRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,GetAliasesRequestParameters>(GET, Url($"_aliases"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"_aliases"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_aliases 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -3134,7 +3134,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to filter aliases</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesGetAliases<T>(string index, Func<GetAliasesRequestParameters, GetAliasesRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,GetAliasesRequestParameters>(GET, Url($"{index.NotNull("index")}/_aliases"), requestParameters);
+			this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/_aliases"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_aliases 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -3148,7 +3148,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to filter aliases</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesGetAliasesAsync<T>(string index, Func<GetAliasesRequestParameters, GetAliasesRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,GetAliasesRequestParameters>(GET, Url($"{index.NotNull("index")}/_aliases"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/_aliases"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_aliases/{name} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -3163,7 +3163,7 @@ namespace Elasticsearch.Net
 		///<param name="name">A comma-separated list of alias names to filter</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesGetAliases<T>(string index, string name, Func<GetAliasesRequestParameters, GetAliasesRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,GetAliasesRequestParameters>(GET, Url($"{index.NotNull("index")}/_aliases/{name.NotNull("name")}"), requestParameters);
+			this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/_aliases/{name.NotNull("name")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_aliases/{name} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -3178,7 +3178,7 @@ namespace Elasticsearch.Net
 		///<param name="name">A comma-separated list of alias names to filter</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesGetAliasesAsync<T>(string index, string name, Func<GetAliasesRequestParameters, GetAliasesRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,GetAliasesRequestParameters>(GET, Url($"{index.NotNull("index")}/_aliases/{name.NotNull("name")}"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/_aliases/{name.NotNull("name")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_aliases/{name} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -3192,7 +3192,7 @@ namespace Elasticsearch.Net
 		///<param name="name">A comma-separated list of alias names to filter</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesGetAliasesForAll<T>(string name, Func<GetAliasesRequestParameters, GetAliasesRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,GetAliasesRequestParameters>(GET, Url($"_aliases/{name.NotNull("name")}"), requestParameters);
+			this.DoRequest<T>(GET, Url($"_aliases/{name.NotNull("name")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_aliases/{name} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -3206,7 +3206,7 @@ namespace Elasticsearch.Net
 		///<param name="name">A comma-separated list of alias names to filter</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesGetAliasesForAllAsync<T>(string name, Func<GetAliasesRequestParameters, GetAliasesRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,GetAliasesRequestParameters>(GET, Url($"_aliases/{name.NotNull("name")}"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"_aliases/{name.NotNull("name")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_mapping/field/{field} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -3220,7 +3220,7 @@ namespace Elasticsearch.Net
 		///<param name="field">A comma-separated list of fields</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesGetFieldMappingForAll<T>(string field, Func<GetFieldMappingRequestParameters, GetFieldMappingRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,GetFieldMappingRequestParameters>(GET, Url($"_mapping/field/{field.NotNull("field")}"), requestParameters);
+			this.DoRequest<T>(GET, Url($"_mapping/field/{field.NotNull("field")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_mapping/field/{field} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -3234,7 +3234,7 @@ namespace Elasticsearch.Net
 		///<param name="field">A comma-separated list of fields</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesGetFieldMappingForAllAsync<T>(string field, Func<GetFieldMappingRequestParameters, GetFieldMappingRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,GetFieldMappingRequestParameters>(GET, Url($"_mapping/field/{field.NotNull("field")}"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"_mapping/field/{field.NotNull("field")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_mapping/field/{field} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -3249,7 +3249,7 @@ namespace Elasticsearch.Net
 		///<param name="field">A comma-separated list of fields</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesGetFieldMapping<T>(string index, string field, Func<GetFieldMappingRequestParameters, GetFieldMappingRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,GetFieldMappingRequestParameters>(GET, Url($"{index.NotNull("index")}/_mapping/field/{field.NotNull("field")}"), requestParameters);
+			this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/_mapping/field/{field.NotNull("field")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_mapping/field/{field} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -3264,7 +3264,7 @@ namespace Elasticsearch.Net
 		///<param name="field">A comma-separated list of fields</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesGetFieldMappingAsync<T>(string index, string field, Func<GetFieldMappingRequestParameters, GetFieldMappingRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,GetFieldMappingRequestParameters>(GET, Url($"{index.NotNull("index")}/_mapping/field/{field.NotNull("field")}"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/_mapping/field/{field.NotNull("field")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_mapping/{type}/field/{field} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -3279,7 +3279,7 @@ namespace Elasticsearch.Net
 		///<param name="field">A comma-separated list of fields</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesGetFieldMappingForAll<T>(string type, string field, Func<GetFieldMappingRequestParameters, GetFieldMappingRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,GetFieldMappingRequestParameters>(GET, Url($"_mapping/{type.NotNull("type")}/field/{field.NotNull("field")}"), requestParameters);
+			this.DoRequest<T>(GET, Url($"_mapping/{type.NotNull("type")}/field/{field.NotNull("field")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_mapping/{type}/field/{field} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -3294,7 +3294,7 @@ namespace Elasticsearch.Net
 		///<param name="field">A comma-separated list of fields</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesGetFieldMappingForAllAsync<T>(string type, string field, Func<GetFieldMappingRequestParameters, GetFieldMappingRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,GetFieldMappingRequestParameters>(GET, Url($"_mapping/{type.NotNull("type")}/field/{field.NotNull("field")}"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"_mapping/{type.NotNull("type")}/field/{field.NotNull("field")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_mapping/{type}/field/{field} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -3310,7 +3310,7 @@ namespace Elasticsearch.Net
 		///<param name="field">A comma-separated list of fields</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesGetFieldMapping<T>(string index, string type, string field, Func<GetFieldMappingRequestParameters, GetFieldMappingRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,GetFieldMappingRequestParameters>(GET, Url($"{index.NotNull("index")}/_mapping/{type.NotNull("type")}/field/{field.NotNull("field")}"), requestParameters);
+			this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/_mapping/{type.NotNull("type")}/field/{field.NotNull("field")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_mapping/{type}/field/{field} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -3326,7 +3326,7 @@ namespace Elasticsearch.Net
 		///<param name="field">A comma-separated list of fields</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesGetFieldMappingAsync<T>(string index, string type, string field, Func<GetFieldMappingRequestParameters, GetFieldMappingRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,GetFieldMappingRequestParameters>(GET, Url($"{index.NotNull("index")}/_mapping/{type.NotNull("type")}/field/{field.NotNull("field")}"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/_mapping/{type.NotNull("type")}/field/{field.NotNull("field")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_mapping 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -3339,7 +3339,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesGetMappingForAll<T>(Func<GetMappingRequestParameters, GetMappingRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,GetMappingRequestParameters>(GET, Url($"_mapping"), requestParameters);
+			this.DoRequest<T>(GET, Url($"_mapping"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_mapping 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -3352,7 +3352,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesGetMappingForAllAsync<T>(Func<GetMappingRequestParameters, GetMappingRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,GetMappingRequestParameters>(GET, Url($"_mapping"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"_mapping"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_mapping 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -3366,7 +3366,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesGetMapping<T>(string index, Func<GetMappingRequestParameters, GetMappingRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,GetMappingRequestParameters>(GET, Url($"{index.NotNull("index")}/_mapping"), requestParameters);
+			this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/_mapping"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_mapping 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -3380,7 +3380,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesGetMappingAsync<T>(string index, Func<GetMappingRequestParameters, GetMappingRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,GetMappingRequestParameters>(GET, Url($"{index.NotNull("index")}/_mapping"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/_mapping"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_mapping/{type} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -3394,7 +3394,7 @@ namespace Elasticsearch.Net
 		///<param name="type">A comma-separated list of document types</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesGetMappingForAll<T>(string type, Func<GetMappingRequestParameters, GetMappingRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,GetMappingRequestParameters>(GET, Url($"_mapping/{type.NotNull("type")}"), requestParameters);
+			this.DoRequest<T>(GET, Url($"_mapping/{type.NotNull("type")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_mapping/{type} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -3408,7 +3408,7 @@ namespace Elasticsearch.Net
 		///<param name="type">A comma-separated list of document types</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesGetMappingForAllAsync<T>(string type, Func<GetMappingRequestParameters, GetMappingRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,GetMappingRequestParameters>(GET, Url($"_mapping/{type.NotNull("type")}"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"_mapping/{type.NotNull("type")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_mapping/{type} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -3423,7 +3423,7 @@ namespace Elasticsearch.Net
 		///<param name="type">A comma-separated list of document types</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesGetMapping<T>(string index, string type, Func<GetMappingRequestParameters, GetMappingRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,GetMappingRequestParameters>(GET, Url($"{index.NotNull("index")}/_mapping/{type.NotNull("type")}"), requestParameters);
+			this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/_mapping/{type.NotNull("type")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_mapping/{type} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -3438,7 +3438,7 @@ namespace Elasticsearch.Net
 		///<param name="type">A comma-separated list of document types</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesGetMappingAsync<T>(string index, string type, Func<GetMappingRequestParameters, GetMappingRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,GetMappingRequestParameters>(GET, Url($"{index.NotNull("index")}/_mapping/{type.NotNull("type")}"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/_mapping/{type.NotNull("type")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_settings 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -3451,7 +3451,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesGetSettingsForAll<T>(Func<GetIndexSettingsRequestParameters, GetIndexSettingsRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,GetIndexSettingsRequestParameters>(GET, Url($"_settings"), requestParameters);
+			this.DoRequest<T>(GET, Url($"_settings"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_settings 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -3464,7 +3464,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesGetSettingsForAllAsync<T>(Func<GetIndexSettingsRequestParameters, GetIndexSettingsRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,GetIndexSettingsRequestParameters>(GET, Url($"_settings"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"_settings"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_settings 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -3478,7 +3478,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesGetSettings<T>(string index, Func<GetIndexSettingsRequestParameters, GetIndexSettingsRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,GetIndexSettingsRequestParameters>(GET, Url($"{index.NotNull("index")}/_settings"), requestParameters);
+			this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/_settings"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_settings 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -3492,7 +3492,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesGetSettingsAsync<T>(string index, Func<GetIndexSettingsRequestParameters, GetIndexSettingsRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,GetIndexSettingsRequestParameters>(GET, Url($"{index.NotNull("index")}/_settings"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/_settings"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_settings/{name} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -3507,7 +3507,7 @@ namespace Elasticsearch.Net
 		///<param name="name">The name of the settings that should be included</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesGetSettings<T>(string index, string name, Func<GetIndexSettingsRequestParameters, GetIndexSettingsRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,GetIndexSettingsRequestParameters>(GET, Url($"{index.NotNull("index")}/_settings/{name.NotNull("name")}"), requestParameters);
+			this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/_settings/{name.NotNull("name")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_settings/{name} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -3522,7 +3522,7 @@ namespace Elasticsearch.Net
 		///<param name="name">The name of the settings that should be included</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesGetSettingsAsync<T>(string index, string name, Func<GetIndexSettingsRequestParameters, GetIndexSettingsRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,GetIndexSettingsRequestParameters>(GET, Url($"{index.NotNull("index")}/_settings/{name.NotNull("name")}"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/_settings/{name.NotNull("name")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_settings/{name} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -3536,7 +3536,7 @@ namespace Elasticsearch.Net
 		///<param name="name">The name of the settings that should be included</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesGetSettingsForAll<T>(string name, Func<GetIndexSettingsRequestParameters, GetIndexSettingsRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,GetIndexSettingsRequestParameters>(GET, Url($"_settings/{name.NotNull("name")}"), requestParameters);
+			this.DoRequest<T>(GET, Url($"_settings/{name.NotNull("name")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_settings/{name} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -3550,7 +3550,7 @@ namespace Elasticsearch.Net
 		///<param name="name">The name of the settings that should be included</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesGetSettingsForAllAsync<T>(string name, Func<GetIndexSettingsRequestParameters, GetIndexSettingsRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,GetIndexSettingsRequestParameters>(GET, Url($"_settings/{name.NotNull("name")}"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"_settings/{name.NotNull("name")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_template 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -3563,7 +3563,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesGetTemplateForAll<T>(Func<GetTemplateRequestParameters, GetTemplateRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,GetTemplateRequestParameters>(GET, Url($"_template"), requestParameters);
+			this.DoRequest<T>(GET, Url($"_template"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_template 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -3576,7 +3576,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesGetTemplateForAllAsync<T>(Func<GetTemplateRequestParameters, GetTemplateRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,GetTemplateRequestParameters>(GET, Url($"_template"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"_template"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_template/{name} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -3590,7 +3590,7 @@ namespace Elasticsearch.Net
 		///<param name="name">The name of the template</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesGetTemplateForAll<T>(string name, Func<GetTemplateRequestParameters, GetTemplateRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,GetTemplateRequestParameters>(GET, Url($"_template/{name.NotNull("name")}"), requestParameters);
+			this.DoRequest<T>(GET, Url($"_template/{name.NotNull("name")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_template/{name} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -3604,7 +3604,7 @@ namespace Elasticsearch.Net
 		///<param name="name">The name of the template</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesGetTemplateForAllAsync<T>(string name, Func<GetTemplateRequestParameters, GetTemplateRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,GetTemplateRequestParameters>(GET, Url($"_template/{name.NotNull("name")}"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"_template/{name.NotNull("name")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_upgrade 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -3617,7 +3617,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesGetUpgradeForAll<T>(Func<UpgradeStatusRequestParameters, UpgradeStatusRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,UpgradeStatusRequestParameters>(GET, Url($"_upgrade"), requestParameters);
+			this.DoRequest<T>(GET, Url($"_upgrade"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_upgrade 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -3630,7 +3630,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesGetUpgradeForAllAsync<T>(Func<UpgradeStatusRequestParameters, UpgradeStatusRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,UpgradeStatusRequestParameters>(GET, Url($"_upgrade"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"_upgrade"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_upgrade 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -3644,7 +3644,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesGetUpgrade<T>(string index, Func<UpgradeStatusRequestParameters, UpgradeStatusRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,UpgradeStatusRequestParameters>(GET, Url($"{index.NotNull("index")}/_upgrade"), requestParameters);
+			this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/_upgrade"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_upgrade 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -3658,7 +3658,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesGetUpgradeAsync<T>(string index, Func<UpgradeStatusRequestParameters, UpgradeStatusRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,UpgradeStatusRequestParameters>(GET, Url($"{index.NotNull("index")}/_upgrade"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/_upgrade"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_warmer 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -3671,7 +3671,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesGetWarmerForAll<T>(Func<GetWarmerRequestParameters, GetWarmerRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,GetWarmerRequestParameters>(GET, Url($"_warmer"), requestParameters);
+			this.DoRequest<T>(GET, Url($"_warmer"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_warmer 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -3684,7 +3684,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesGetWarmerForAllAsync<T>(Func<GetWarmerRequestParameters, GetWarmerRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,GetWarmerRequestParameters>(GET, Url($"_warmer"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"_warmer"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_warmer 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -3698,7 +3698,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesGetWarmer<T>(string index, Func<GetWarmerRequestParameters, GetWarmerRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,GetWarmerRequestParameters>(GET, Url($"{index.NotNull("index")}/_warmer"), requestParameters);
+			this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/_warmer"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_warmer 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -3712,7 +3712,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesGetWarmerAsync<T>(string index, Func<GetWarmerRequestParameters, GetWarmerRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,GetWarmerRequestParameters>(GET, Url($"{index.NotNull("index")}/_warmer"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/_warmer"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_warmer/{name} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -3727,7 +3727,7 @@ namespace Elasticsearch.Net
 		///<param name="name">The name of the warmer (supports wildcards); leave empty to get all warmers</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesGetWarmer<T>(string index, string name, Func<GetWarmerRequestParameters, GetWarmerRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,GetWarmerRequestParameters>(GET, Url($"{index.NotNull("index")}/_warmer/{name.NotNull("name")}"), requestParameters);
+			this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/_warmer/{name.NotNull("name")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_warmer/{name} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -3742,7 +3742,7 @@ namespace Elasticsearch.Net
 		///<param name="name">The name of the warmer (supports wildcards); leave empty to get all warmers</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesGetWarmerAsync<T>(string index, string name, Func<GetWarmerRequestParameters, GetWarmerRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,GetWarmerRequestParameters>(GET, Url($"{index.NotNull("index")}/_warmer/{name.NotNull("name")}"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/_warmer/{name.NotNull("name")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_warmer/{name} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -3756,7 +3756,7 @@ namespace Elasticsearch.Net
 		///<param name="name">The name of the warmer (supports wildcards); leave empty to get all warmers</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesGetWarmerForAll<T>(string name, Func<GetWarmerRequestParameters, GetWarmerRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,GetWarmerRequestParameters>(GET, Url($"_warmer/{name.NotNull("name")}"), requestParameters);
+			this.DoRequest<T>(GET, Url($"_warmer/{name.NotNull("name")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_warmer/{name} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -3770,7 +3770,7 @@ namespace Elasticsearch.Net
 		///<param name="name">The name of the warmer (supports wildcards); leave empty to get all warmers</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesGetWarmerForAllAsync<T>(string name, Func<GetWarmerRequestParameters, GetWarmerRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,GetWarmerRequestParameters>(GET, Url($"_warmer/{name.NotNull("name")}"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"_warmer/{name.NotNull("name")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/{type}/_warmer/{name} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -3786,7 +3786,7 @@ namespace Elasticsearch.Net
 		///<param name="name">The name of the warmer (supports wildcards); leave empty to get all warmers</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesGetWarmer<T>(string index, string type, string name, Func<GetWarmerRequestParameters, GetWarmerRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,GetWarmerRequestParameters>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_warmer/{name.NotNull("name")}"), requestParameters);
+			this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_warmer/{name.NotNull("name")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/{type}/_warmer/{name} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -3802,7 +3802,7 @@ namespace Elasticsearch.Net
 		///<param name="name">The name of the warmer (supports wildcards); leave empty to get all warmers</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesGetWarmerAsync<T>(string index, string type, string name, Func<GetWarmerRequestParameters, GetWarmerRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,GetWarmerRequestParameters>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_warmer/{name.NotNull("name")}"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_warmer/{name.NotNull("name")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_open 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -3816,7 +3816,7 @@ namespace Elasticsearch.Net
 		///<param name="index">The name of the index</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesOpen<T>(string index, Func<OpenIndexRequestParameters, OpenIndexRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,OpenIndexRequestParameters>(POST, Url($"{index.NotNull("index")}/_open"), requestParameters);
+			this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/_open"), null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_open 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -3830,7 +3830,7 @@ namespace Elasticsearch.Net
 		///<param name="index">The name of the index</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesOpenAsync<T>(string index, Func<OpenIndexRequestParameters, OpenIndexRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,OpenIndexRequestParameters>(POST, Url($"{index.NotNull("index")}/_open"), requestParameters);
+			this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/_open"), null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_optimize 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -3843,7 +3843,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesOptimizeForAll<T>(Func<OptimizeRequestParameters, OptimizeRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,OptimizeRequestParameters>(POST, Url($"_optimize"), requestParameters);
+			this.DoRequest<T>(POST, Url($"_optimize"), null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_optimize 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -3856,7 +3856,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesOptimizeForAllAsync<T>(Func<OptimizeRequestParameters, OptimizeRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,OptimizeRequestParameters>(POST, Url($"_optimize"), requestParameters);
+			this.DoRequestAsync<T>(POST, Url($"_optimize"), null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_optimize 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -3870,7 +3870,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesOptimize<T>(string index, Func<OptimizeRequestParameters, OptimizeRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,OptimizeRequestParameters>(POST, Url($"{index.NotNull("index")}/_optimize"), requestParameters);
+			this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/_optimize"), null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_optimize 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -3884,7 +3884,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesOptimizeAsync<T>(string index, Func<OptimizeRequestParameters, OptimizeRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,OptimizeRequestParameters>(POST, Url($"{index.NotNull("index")}/_optimize"), requestParameters);
+			this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/_optimize"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_optimize 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -3897,7 +3897,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesOptimizeGetForAll<T>(Func<OptimizeRequestParameters, OptimizeRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,OptimizeRequestParameters>(GET, Url($"_optimize"), requestParameters);
+			this.DoRequest<T>(GET, Url($"_optimize"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_optimize 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -3910,7 +3910,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesOptimizeGetForAllAsync<T>(Func<OptimizeRequestParameters, OptimizeRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,OptimizeRequestParameters>(GET, Url($"_optimize"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"_optimize"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_optimize 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -3924,7 +3924,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesOptimizeGet<T>(string index, Func<OptimizeRequestParameters, OptimizeRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,OptimizeRequestParameters>(GET, Url($"{index.NotNull("index")}/_optimize"), requestParameters);
+			this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/_optimize"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_optimize 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -3938,7 +3938,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesOptimizeGetAsync<T>(string index, Func<OptimizeRequestParameters, OptimizeRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,OptimizeRequestParameters>(GET, Url($"{index.NotNull("index")}/_optimize"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/_optimize"), null, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /{index}/_alias/{name} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -3954,7 +3954,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The settings for the alias, such as `routing` or `filter`</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesPutAlias<T>(string index, string name, PostData<object> body, Func<PutAliasRequestParameters, PutAliasRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,PutAliasRequestParameters>(PUT, Url($"{index.NotNull("index")}/_alias/{name.NotNull("name")}"), requestParameters, body);
+			this.DoRequest<T>(PUT, Url($"{index.NotNull("index")}/_alias/{name.NotNull("name")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /{index}/_alias/{name} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -3970,7 +3970,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The settings for the alias, such as `routing` or `filter`</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesPutAliasAsync<T>(string index, string name, PostData<object> body, Func<PutAliasRequestParameters, PutAliasRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,PutAliasRequestParameters>(PUT, Url($"{index.NotNull("index")}/_alias/{name.NotNull("name")}"), requestParameters, body);
+			this.DoRequestAsync<T>(PUT, Url($"{index.NotNull("index")}/_alias/{name.NotNull("name")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_alias/{name} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -3986,7 +3986,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The settings for the alias, such as `routing` or `filter`</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesPutAliasPost<T>(string index, string name, PostData<object> body, Func<PutAliasRequestParameters, PutAliasRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,PutAliasRequestParameters>(POST, Url($"{index.NotNull("index")}/_alias/{name.NotNull("name")}"), requestParameters, body);
+			this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/_alias/{name.NotNull("name")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_alias/{name} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -4002,7 +4002,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The settings for the alias, such as `routing` or `filter`</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesPutAliasPostAsync<T>(string index, string name, PostData<object> body, Func<PutAliasRequestParameters, PutAliasRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,PutAliasRequestParameters>(POST, Url($"{index.NotNull("index")}/_alias/{name.NotNull("name")}"), requestParameters, body);
+			this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/_alias/{name.NotNull("name")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /{index}/{type}/_mapping 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -4018,7 +4018,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The mapping definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesPutMapping<T>(string index, string type, PostData<object> body, Func<PutMappingRequestParameters, PutMappingRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,PutMappingRequestParameters>(PUT, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_mapping"), requestParameters, body);
+			this.DoRequest<T>(PUT, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_mapping"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /{index}/{type}/_mapping 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -4034,7 +4034,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The mapping definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesPutMappingAsync<T>(string index, string type, PostData<object> body, Func<PutMappingRequestParameters, PutMappingRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,PutMappingRequestParameters>(PUT, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_mapping"), requestParameters, body);
+			this.DoRequestAsync<T>(PUT, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_mapping"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /_mapping/{type} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -4049,7 +4049,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The mapping definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesPutMappingForAll<T>(string type, PostData<object> body, Func<PutMappingRequestParameters, PutMappingRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,PutMappingRequestParameters>(PUT, Url($"_mapping/{type.NotNull("type")}"), requestParameters, body);
+			this.DoRequest<T>(PUT, Url($"_mapping/{type.NotNull("type")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /_mapping/{type} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -4064,7 +4064,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The mapping definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesPutMappingForAllAsync<T>(string type, PostData<object> body, Func<PutMappingRequestParameters, PutMappingRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,PutMappingRequestParameters>(PUT, Url($"_mapping/{type.NotNull("type")}"), requestParameters, body);
+			this.DoRequestAsync<T>(PUT, Url($"_mapping/{type.NotNull("type")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/_mapping 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -4080,7 +4080,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The mapping definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesPutMappingPost<T>(string index, string type, PostData<object> body, Func<PutMappingRequestParameters, PutMappingRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,PutMappingRequestParameters>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_mapping"), requestParameters, body);
+			this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_mapping"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/_mapping 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -4096,7 +4096,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The mapping definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesPutMappingPostAsync<T>(string index, string type, PostData<object> body, Func<PutMappingRequestParameters, PutMappingRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,PutMappingRequestParameters>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_mapping"), requestParameters, body);
+			this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_mapping"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_mapping/{type} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -4111,7 +4111,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The mapping definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesPutMappingPostForAll<T>(string type, PostData<object> body, Func<PutMappingRequestParameters, PutMappingRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,PutMappingRequestParameters>(POST, Url($"_mapping/{type.NotNull("type")}"), requestParameters, body);
+			this.DoRequest<T>(POST, Url($"_mapping/{type.NotNull("type")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_mapping/{type} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -4126,7 +4126,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The mapping definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesPutMappingPostForAllAsync<T>(string type, PostData<object> body, Func<PutMappingRequestParameters, PutMappingRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,PutMappingRequestParameters>(POST, Url($"_mapping/{type.NotNull("type")}"), requestParameters, body);
+			this.DoRequestAsync<T>(POST, Url($"_mapping/{type.NotNull("type")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /_settings 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -4140,7 +4140,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The index settings to be updated</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesPutSettingsForAll<T>(PostData<object> body, Func<UpdateSettingsRequestParameters, UpdateSettingsRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,UpdateSettingsRequestParameters>(PUT, Url($"_settings"), requestParameters, body);
+			this.DoRequest<T>(PUT, Url($"_settings"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /_settings 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -4154,7 +4154,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The index settings to be updated</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesPutSettingsForAllAsync<T>(PostData<object> body, Func<UpdateSettingsRequestParameters, UpdateSettingsRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,UpdateSettingsRequestParameters>(PUT, Url($"_settings"), requestParameters, body);
+			this.DoRequestAsync<T>(PUT, Url($"_settings"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /{index}/_settings 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -4169,7 +4169,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The index settings to be updated</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesPutSettings<T>(string index, PostData<object> body, Func<UpdateSettingsRequestParameters, UpdateSettingsRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,UpdateSettingsRequestParameters>(PUT, Url($"{index.NotNull("index")}/_settings"), requestParameters, body);
+			this.DoRequest<T>(PUT, Url($"{index.NotNull("index")}/_settings"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /{index}/_settings 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -4184,7 +4184,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The index settings to be updated</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesPutSettingsAsync<T>(string index, PostData<object> body, Func<UpdateSettingsRequestParameters, UpdateSettingsRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,UpdateSettingsRequestParameters>(PUT, Url($"{index.NotNull("index")}/_settings"), requestParameters, body);
+			this.DoRequestAsync<T>(PUT, Url($"{index.NotNull("index")}/_settings"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /_template/{name} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -4199,7 +4199,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The template definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesPutTemplateForAll<T>(string name, PostData<object> body, Func<PutTemplateRequestParameters, PutTemplateRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,PutTemplateRequestParameters>(PUT, Url($"_template/{name.NotNull("name")}"), requestParameters, body);
+			this.DoRequest<T>(PUT, Url($"_template/{name.NotNull("name")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /_template/{name} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -4214,7 +4214,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The template definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesPutTemplateForAllAsync<T>(string name, PostData<object> body, Func<PutTemplateRequestParameters, PutTemplateRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,PutTemplateRequestParameters>(PUT, Url($"_template/{name.NotNull("name")}"), requestParameters, body);
+			this.DoRequestAsync<T>(PUT, Url($"_template/{name.NotNull("name")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_template/{name} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -4229,7 +4229,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The template definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesPutTemplatePostForAll<T>(string name, PostData<object> body, Func<PutTemplateRequestParameters, PutTemplateRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,PutTemplateRequestParameters>(POST, Url($"_template/{name.NotNull("name")}"), requestParameters, body);
+			this.DoRequest<T>(POST, Url($"_template/{name.NotNull("name")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_template/{name} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -4244,7 +4244,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The template definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesPutTemplatePostForAllAsync<T>(string name, PostData<object> body, Func<PutTemplateRequestParameters, PutTemplateRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,PutTemplateRequestParameters>(POST, Url($"_template/{name.NotNull("name")}"), requestParameters, body);
+			this.DoRequestAsync<T>(POST, Url($"_template/{name.NotNull("name")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /_warmer/{name} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -4259,7 +4259,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The search request definition for the warmer (query, filters, facets, sorting, etc)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesPutWarmerForAll<T>(string name, PostData<object> body, Func<PutWarmerRequestParameters, PutWarmerRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,PutWarmerRequestParameters>(PUT, Url($"_warmer/{name.NotNull("name")}"), requestParameters, body);
+			this.DoRequest<T>(PUT, Url($"_warmer/{name.NotNull("name")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /_warmer/{name} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -4274,7 +4274,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The search request definition for the warmer (query, filters, facets, sorting, etc)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesPutWarmerForAllAsync<T>(string name, PostData<object> body, Func<PutWarmerRequestParameters, PutWarmerRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,PutWarmerRequestParameters>(PUT, Url($"_warmer/{name.NotNull("name")}"), requestParameters, body);
+			this.DoRequestAsync<T>(PUT, Url($"_warmer/{name.NotNull("name")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /{index}/_warmer/{name} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -4290,7 +4290,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The search request definition for the warmer (query, filters, facets, sorting, etc)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesPutWarmer<T>(string index, string name, PostData<object> body, Func<PutWarmerRequestParameters, PutWarmerRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,PutWarmerRequestParameters>(PUT, Url($"{index.NotNull("index")}/_warmer/{name.NotNull("name")}"), requestParameters, body);
+			this.DoRequest<T>(PUT, Url($"{index.NotNull("index")}/_warmer/{name.NotNull("name")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /{index}/_warmer/{name} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -4306,7 +4306,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The search request definition for the warmer (query, filters, facets, sorting, etc)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesPutWarmerAsync<T>(string index, string name, PostData<object> body, Func<PutWarmerRequestParameters, PutWarmerRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,PutWarmerRequestParameters>(PUT, Url($"{index.NotNull("index")}/_warmer/{name.NotNull("name")}"), requestParameters, body);
+			this.DoRequestAsync<T>(PUT, Url($"{index.NotNull("index")}/_warmer/{name.NotNull("name")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /{index}/{type}/_warmer/{name} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -4323,7 +4323,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The search request definition for the warmer (query, filters, facets, sorting, etc)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesPutWarmer<T>(string index, string type, string name, PostData<object> body, Func<PutWarmerRequestParameters, PutWarmerRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,PutWarmerRequestParameters>(PUT, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_warmer/{name.NotNull("name")}"), requestParameters, body);
+			this.DoRequest<T>(PUT, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_warmer/{name.NotNull("name")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /{index}/{type}/_warmer/{name} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -4340,7 +4340,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The search request definition for the warmer (query, filters, facets, sorting, etc)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesPutWarmerAsync<T>(string index, string type, string name, PostData<object> body, Func<PutWarmerRequestParameters, PutWarmerRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,PutWarmerRequestParameters>(PUT, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_warmer/{name.NotNull("name")}"), requestParameters, body);
+			this.DoRequestAsync<T>(PUT, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_warmer/{name.NotNull("name")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_warmer/{name} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -4355,7 +4355,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The search request definition for the warmer (query, filters, facets, sorting, etc)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesPutWarmerPostForAll<T>(string name, PostData<object> body, Func<PutWarmerRequestParameters, PutWarmerRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,PutWarmerRequestParameters>(POST, Url($"_warmer/{name.NotNull("name")}"), requestParameters, body);
+			this.DoRequest<T>(POST, Url($"_warmer/{name.NotNull("name")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_warmer/{name} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -4370,7 +4370,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The search request definition for the warmer (query, filters, facets, sorting, etc)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesPutWarmerPostForAllAsync<T>(string name, PostData<object> body, Func<PutWarmerRequestParameters, PutWarmerRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,PutWarmerRequestParameters>(POST, Url($"_warmer/{name.NotNull("name")}"), requestParameters, body);
+			this.DoRequestAsync<T>(POST, Url($"_warmer/{name.NotNull("name")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_warmer/{name} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -4386,7 +4386,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The search request definition for the warmer (query, filters, facets, sorting, etc)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesPutWarmerPost<T>(string index, string name, PostData<object> body, Func<PutWarmerRequestParameters, PutWarmerRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,PutWarmerRequestParameters>(POST, Url($"{index.NotNull("index")}/_warmer/{name.NotNull("name")}"), requestParameters, body);
+			this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/_warmer/{name.NotNull("name")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_warmer/{name} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -4402,7 +4402,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The search request definition for the warmer (query, filters, facets, sorting, etc)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesPutWarmerPostAsync<T>(string index, string name, PostData<object> body, Func<PutWarmerRequestParameters, PutWarmerRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,PutWarmerRequestParameters>(POST, Url($"{index.NotNull("index")}/_warmer/{name.NotNull("name")}"), requestParameters, body);
+			this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/_warmer/{name.NotNull("name")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/_warmer/{name} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -4419,7 +4419,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The search request definition for the warmer (query, filters, facets, sorting, etc)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesPutWarmerPost<T>(string index, string type, string name, PostData<object> body, Func<PutWarmerRequestParameters, PutWarmerRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,PutWarmerRequestParameters>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_warmer/{name.NotNull("name")}"), requestParameters, body);
+			this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_warmer/{name.NotNull("name")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/_warmer/{name} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -4436,7 +4436,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The search request definition for the warmer (query, filters, facets, sorting, etc)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesPutWarmerPostAsync<T>(string index, string type, string name, PostData<object> body, Func<PutWarmerRequestParameters, PutWarmerRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,PutWarmerRequestParameters>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_warmer/{name.NotNull("name")}"), requestParameters, body);
+			this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_warmer/{name.NotNull("name")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_recovery 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -4449,7 +4449,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesRecoveryForAll<T>(Func<RecoveryStatusRequestParameters, RecoveryStatusRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,RecoveryStatusRequestParameters>(GET, Url($"_recovery"), requestParameters);
+			this.DoRequest<T>(GET, Url($"_recovery"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_recovery 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -4462,7 +4462,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesRecoveryForAllAsync<T>(Func<RecoveryStatusRequestParameters, RecoveryStatusRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,RecoveryStatusRequestParameters>(GET, Url($"_recovery"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"_recovery"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_recovery 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -4476,7 +4476,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesRecovery<T>(string index, Func<RecoveryStatusRequestParameters, RecoveryStatusRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,RecoveryStatusRequestParameters>(GET, Url($"{index.NotNull("index")}/_recovery"), requestParameters);
+			this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/_recovery"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_recovery 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -4490,7 +4490,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesRecoveryAsync<T>(string index, Func<RecoveryStatusRequestParameters, RecoveryStatusRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,RecoveryStatusRequestParameters>(GET, Url($"{index.NotNull("index")}/_recovery"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/_recovery"), null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_refresh 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -4503,7 +4503,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesRefreshForAll<T>(Func<RefreshRequestParameters, RefreshRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,RefreshRequestParameters>(POST, Url($"_refresh"), requestParameters);
+			this.DoRequest<T>(POST, Url($"_refresh"), null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_refresh 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -4516,7 +4516,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesRefreshForAllAsync<T>(Func<RefreshRequestParameters, RefreshRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,RefreshRequestParameters>(POST, Url($"_refresh"), requestParameters);
+			this.DoRequestAsync<T>(POST, Url($"_refresh"), null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_refresh 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -4530,7 +4530,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesRefresh<T>(string index, Func<RefreshRequestParameters, RefreshRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,RefreshRequestParameters>(POST, Url($"{index.NotNull("index")}/_refresh"), requestParameters);
+			this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/_refresh"), null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_refresh 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -4544,7 +4544,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesRefreshAsync<T>(string index, Func<RefreshRequestParameters, RefreshRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,RefreshRequestParameters>(POST, Url($"{index.NotNull("index")}/_refresh"), requestParameters);
+			this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/_refresh"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_refresh 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -4557,7 +4557,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesRefreshGetForAll<T>(Func<RefreshRequestParameters, RefreshRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,RefreshRequestParameters>(GET, Url($"_refresh"), requestParameters);
+			this.DoRequest<T>(GET, Url($"_refresh"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_refresh 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -4570,7 +4570,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesRefreshGetForAllAsync<T>(Func<RefreshRequestParameters, RefreshRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,RefreshRequestParameters>(GET, Url($"_refresh"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"_refresh"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_refresh 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -4584,7 +4584,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesRefreshGet<T>(string index, Func<RefreshRequestParameters, RefreshRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,RefreshRequestParameters>(GET, Url($"{index.NotNull("index")}/_refresh"), requestParameters);
+			this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/_refresh"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_refresh 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -4598,7 +4598,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesRefreshGetAsync<T>(string index, Func<RefreshRequestParameters, RefreshRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,RefreshRequestParameters>(GET, Url($"{index.NotNull("index")}/_refresh"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/_refresh"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_segments 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -4611,7 +4611,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesSegmentsForAll<T>(Func<SegmentsRequestParameters, SegmentsRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,SegmentsRequestParameters>(GET, Url($"_segments"), requestParameters);
+			this.DoRequest<T>(GET, Url($"_segments"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_segments 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -4624,7 +4624,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesSegmentsForAllAsync<T>(Func<SegmentsRequestParameters, SegmentsRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,SegmentsRequestParameters>(GET, Url($"_segments"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"_segments"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_segments 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -4638,7 +4638,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesSegments<T>(string index, Func<SegmentsRequestParameters, SegmentsRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,SegmentsRequestParameters>(GET, Url($"{index.NotNull("index")}/_segments"), requestParameters);
+			this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/_segments"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_segments 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -4652,7 +4652,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesSegmentsAsync<T>(string index, Func<SegmentsRequestParameters, SegmentsRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,SegmentsRequestParameters>(GET, Url($"{index.NotNull("index")}/_segments"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/_segments"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_stats 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -4665,7 +4665,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesStatsForAll<T>(Func<IndicesStatsRequestParameters, IndicesStatsRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,IndicesStatsRequestParameters>(GET, Url($"_stats"), requestParameters);
+			this.DoRequest<T>(GET, Url($"_stats"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_stats 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -4678,7 +4678,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesStatsForAllAsync<T>(Func<IndicesStatsRequestParameters, IndicesStatsRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,IndicesStatsRequestParameters>(GET, Url($"_stats"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"_stats"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_stats/{metric} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -4692,7 +4692,7 @@ namespace Elasticsearch.Net
 		///<param name="metric">Limit the information returned the specific metrics.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesStatsForAll<T>(string metric, Func<IndicesStatsRequestParameters, IndicesStatsRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,IndicesStatsRequestParameters>(GET, Url($"_stats/{metric.NotNull("metric")}"), requestParameters);
+			this.DoRequest<T>(GET, Url($"_stats/{metric.NotNull("metric")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_stats/{metric} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -4706,7 +4706,7 @@ namespace Elasticsearch.Net
 		///<param name="metric">Limit the information returned the specific metrics.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesStatsForAllAsync<T>(string metric, Func<IndicesStatsRequestParameters, IndicesStatsRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,IndicesStatsRequestParameters>(GET, Url($"_stats/{metric.NotNull("metric")}"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"_stats/{metric.NotNull("metric")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_stats 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -4720,7 +4720,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesStats<T>(string index, Func<IndicesStatsRequestParameters, IndicesStatsRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,IndicesStatsRequestParameters>(GET, Url($"{index.NotNull("index")}/_stats"), requestParameters);
+			this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/_stats"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_stats 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -4734,7 +4734,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesStatsAsync<T>(string index, Func<IndicesStatsRequestParameters, IndicesStatsRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,IndicesStatsRequestParameters>(GET, Url($"{index.NotNull("index")}/_stats"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/_stats"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_stats/{metric} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -4749,7 +4749,7 @@ namespace Elasticsearch.Net
 		///<param name="metric">Limit the information returned the specific metrics.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesStats<T>(string index, string metric, Func<IndicesStatsRequestParameters, IndicesStatsRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,IndicesStatsRequestParameters>(GET, Url($"{index.NotNull("index")}/_stats/{metric.NotNull("metric")}"), requestParameters);
+			this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/_stats/{metric.NotNull("metric")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_stats/{metric} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -4764,7 +4764,7 @@ namespace Elasticsearch.Net
 		///<param name="metric">Limit the information returned the specific metrics.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesStatsAsync<T>(string index, string metric, Func<IndicesStatsRequestParameters, IndicesStatsRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,IndicesStatsRequestParameters>(GET, Url($"{index.NotNull("index")}/_stats/{metric.NotNull("metric")}"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/_stats/{metric.NotNull("metric")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_status 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -4777,7 +4777,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesStatusForAll<T>(Func<IndicesStatusRequestParameters, IndicesStatusRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,IndicesStatusRequestParameters>(GET, Url($"_status"), requestParameters);
+			this.DoRequest<T>(GET, Url($"_status"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_status 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -4790,7 +4790,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesStatusForAllAsync<T>(Func<IndicesStatusRequestParameters, IndicesStatusRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,IndicesStatusRequestParameters>(GET, Url($"_status"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"_status"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_status 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -4804,7 +4804,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesStatus<T>(string index, Func<IndicesStatusRequestParameters, IndicesStatusRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,IndicesStatusRequestParameters>(GET, Url($"{index.NotNull("index")}/_status"), requestParameters);
+			this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/_status"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_status 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -4818,7 +4818,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesStatusAsync<T>(string index, Func<IndicesStatusRequestParameters, IndicesStatusRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,IndicesStatusRequestParameters>(GET, Url($"{index.NotNull("index")}/_status"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/_status"), null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_aliases 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -4832,7 +4832,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The definition of `actions` to perform</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesUpdateAliasesForAll<T>(PostData<object> body, Func<AliasRequestParameters, AliasRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,AliasRequestParameters>(POST, Url($"_aliases"), requestParameters, body);
+			this.DoRequest<T>(POST, Url($"_aliases"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_aliases 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -4846,7 +4846,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The definition of `actions` to perform</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesUpdateAliasesForAllAsync<T>(PostData<object> body, Func<AliasRequestParameters, AliasRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,AliasRequestParameters>(POST, Url($"_aliases"), requestParameters, body);
+			this.DoRequestAsync<T>(POST, Url($"_aliases"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_upgrade 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -4859,7 +4859,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesUpgradeForAll<T>(Func<UpgradeRequestParameters, UpgradeRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,UpgradeRequestParameters>(POST, Url($"_upgrade"), requestParameters);
+			this.DoRequest<T>(POST, Url($"_upgrade"), null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_upgrade 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -4872,7 +4872,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesUpgradeForAllAsync<T>(Func<UpgradeRequestParameters, UpgradeRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,UpgradeRequestParameters>(POST, Url($"_upgrade"), requestParameters);
+			this.DoRequestAsync<T>(POST, Url($"_upgrade"), null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_upgrade 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -4886,7 +4886,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesUpgrade<T>(string index, Func<UpgradeRequestParameters, UpgradeRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,UpgradeRequestParameters>(POST, Url($"{index.NotNull("index")}/_upgrade"), requestParameters);
+			this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/_upgrade"), null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_upgrade 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -4900,7 +4900,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesUpgradeAsync<T>(string index, Func<UpgradeRequestParameters, UpgradeRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,UpgradeRequestParameters>(POST, Url($"{index.NotNull("index")}/_upgrade"), requestParameters);
+			this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/_upgrade"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_validate/query 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -4913,7 +4913,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesValidateQueryGetForAll<T>(Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,ValidateQueryRequestParameters>(GET, Url($"_validate/query"), requestParameters);
+			this.DoRequest<T>(GET, Url($"_validate/query"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_validate/query 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -4926,7 +4926,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesValidateQueryGetForAllAsync<T>(Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,ValidateQueryRequestParameters>(GET, Url($"_validate/query"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"_validate/query"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_validate/query 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -4940,7 +4940,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesValidateQueryGet<T>(string index, Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,ValidateQueryRequestParameters>(GET, Url($"{index.NotNull("index")}/_validate/query"), requestParameters);
+			this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/_validate/query"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_validate/query 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -4954,7 +4954,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesValidateQueryGetAsync<T>(string index, Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,ValidateQueryRequestParameters>(GET, Url($"{index.NotNull("index")}/_validate/query"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/_validate/query"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/{type}/_validate/query 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -4969,7 +4969,7 @@ namespace Elasticsearch.Net
 		///<param name="type">A comma-separated list of document types to restrict the operation; leave empty to perform the operation on all types</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesValidateQueryGet<T>(string index, string type, Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,ValidateQueryRequestParameters>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_validate/query"), requestParameters);
+			this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_validate/query"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/{type}/_validate/query 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -4984,7 +4984,7 @@ namespace Elasticsearch.Net
 		///<param name="type">A comma-separated list of document types to restrict the operation; leave empty to perform the operation on all types</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesValidateQueryGetAsync<T>(string index, string type, Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,ValidateQueryRequestParameters>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_validate/query"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_validate/query"), null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_validate/query 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -4998,7 +4998,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The query definition specified with the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesValidateQueryForAll<T>(PostData<object> body, Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,ValidateQueryRequestParameters>(POST, Url($"_validate/query"), requestParameters, body);
+			this.DoRequest<T>(POST, Url($"_validate/query"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_validate/query 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -5012,7 +5012,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The query definition specified with the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesValidateQueryForAllAsync<T>(PostData<object> body, Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,ValidateQueryRequestParameters>(POST, Url($"_validate/query"), requestParameters, body);
+			this.DoRequestAsync<T>(POST, Url($"_validate/query"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_validate/query 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -5027,7 +5027,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The query definition specified with the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesValidateQuery<T>(string index, PostData<object> body, Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,ValidateQueryRequestParameters>(POST, Url($"{index.NotNull("index")}/_validate/query"), requestParameters, body);
+			this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/_validate/query"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_validate/query 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -5042,7 +5042,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The query definition specified with the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesValidateQueryAsync<T>(string index, PostData<object> body, Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,ValidateQueryRequestParameters>(POST, Url($"{index.NotNull("index")}/_validate/query"), requestParameters, body);
+			this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/_validate/query"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/_validate/query 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -5058,7 +5058,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The query definition specified with the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> IndicesValidateQuery<T>(string index, string type, PostData<object> body, Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,ValidateQueryRequestParameters>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_validate/query"), requestParameters, body);
+			this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_validate/query"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/_validate/query 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -5074,7 +5074,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The query definition specified with the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> IndicesValidateQueryAsync<T>(string index, string type, PostData<object> body, Func<ValidateQueryRequestParameters, ValidateQueryRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,ValidateQueryRequestParameters>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_validate/query"), requestParameters, body);
+			this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_validate/query"), body, _params(requestParameters));
 		
 		///<summary>Represents a GET on / 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -5087,7 +5087,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> Info<T>(Func<InfoRequestParameters, InfoRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,InfoRequestParameters>(GET, Url($""), requestParameters);
+			this.DoRequest<T>(GET, Url($""), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on / 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -5100,7 +5100,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> InfoAsync<T>(Func<InfoRequestParameters, InfoRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,InfoRequestParameters>(GET, Url($""), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($""), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_bench 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -5113,7 +5113,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> ListBenchmarks<T>(Func<ListBenchmarksRequestParameters, ListBenchmarksRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,ListBenchmarksRequestParameters>(GET, Url($"_bench"), requestParameters);
+			this.DoRequest<T>(GET, Url($"_bench"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_bench 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -5126,7 +5126,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> ListBenchmarksAsync<T>(Func<ListBenchmarksRequestParameters, ListBenchmarksRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,ListBenchmarksRequestParameters>(GET, Url($"_bench"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"_bench"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_bench 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -5140,7 +5140,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> ListBenchmarks<T>(string index, Func<ListBenchmarksRequestParameters, ListBenchmarksRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,ListBenchmarksRequestParameters>(GET, Url($"{index.NotNull("index")}/_bench"), requestParameters);
+			this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/_bench"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_bench 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -5154,7 +5154,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> ListBenchmarksAsync<T>(string index, Func<ListBenchmarksRequestParameters, ListBenchmarksRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,ListBenchmarksRequestParameters>(GET, Url($"{index.NotNull("index")}/_bench"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/_bench"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/{type}/_bench 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -5169,7 +5169,7 @@ namespace Elasticsearch.Net
 		///<param name="type">The name of the document type</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> ListBenchmarks<T>(string index, string type, Func<ListBenchmarksRequestParameters, ListBenchmarksRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,ListBenchmarksRequestParameters>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_bench"), requestParameters);
+			this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_bench"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/{type}/_bench 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -5184,7 +5184,7 @@ namespace Elasticsearch.Net
 		///<param name="type">The name of the document type</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> ListBenchmarksAsync<T>(string index, string type, Func<ListBenchmarksRequestParameters, ListBenchmarksRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,ListBenchmarksRequestParameters>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_bench"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_bench"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_mget 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -5197,7 +5197,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> MgetGet<T>(Func<MultiGetRequestParameters, MultiGetRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,MultiGetRequestParameters>(GET, Url($"_mget"), requestParameters);
+			this.DoRequest<T>(GET, Url($"_mget"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_mget 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -5210,7 +5210,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> MgetGetAsync<T>(Func<MultiGetRequestParameters, MultiGetRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,MultiGetRequestParameters>(GET, Url($"_mget"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"_mget"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_mget 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -5224,7 +5224,7 @@ namespace Elasticsearch.Net
 		///<param name="index">The name of the index</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> MgetGet<T>(string index, Func<MultiGetRequestParameters, MultiGetRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,MultiGetRequestParameters>(GET, Url($"{index.NotNull("index")}/_mget"), requestParameters);
+			this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/_mget"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_mget 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -5238,7 +5238,7 @@ namespace Elasticsearch.Net
 		///<param name="index">The name of the index</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> MgetGetAsync<T>(string index, Func<MultiGetRequestParameters, MultiGetRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,MultiGetRequestParameters>(GET, Url($"{index.NotNull("index")}/_mget"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/_mget"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/{type}/_mget 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -5253,7 +5253,7 @@ namespace Elasticsearch.Net
 		///<param name="type">The type of the document</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> MgetGet<T>(string index, string type, Func<MultiGetRequestParameters, MultiGetRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,MultiGetRequestParameters>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_mget"), requestParameters);
+			this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_mget"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/{type}/_mget 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -5268,7 +5268,7 @@ namespace Elasticsearch.Net
 		///<param name="type">The type of the document</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> MgetGetAsync<T>(string index, string type, Func<MultiGetRequestParameters, MultiGetRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,MultiGetRequestParameters>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_mget"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_mget"), null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_mget 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -5282,7 +5282,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Document identifiers; can be either `docs` (containing full document information) or `ids` (when index and type is provided in the URL.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> Mget<T>(PostData<object> body, Func<MultiGetRequestParameters, MultiGetRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,MultiGetRequestParameters>(POST, Url($"_mget"), requestParameters, body);
+			this.DoRequest<T>(POST, Url($"_mget"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_mget 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -5296,7 +5296,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Document identifiers; can be either `docs` (containing full document information) or `ids` (when index and type is provided in the URL.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> MgetAsync<T>(PostData<object> body, Func<MultiGetRequestParameters, MultiGetRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,MultiGetRequestParameters>(POST, Url($"_mget"), requestParameters, body);
+			this.DoRequestAsync<T>(POST, Url($"_mget"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_mget 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -5311,7 +5311,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Document identifiers; can be either `docs` (containing full document information) or `ids` (when index and type is provided in the URL.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> Mget<T>(string index, PostData<object> body, Func<MultiGetRequestParameters, MultiGetRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,MultiGetRequestParameters>(POST, Url($"{index.NotNull("index")}/_mget"), requestParameters, body);
+			this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/_mget"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_mget 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -5326,7 +5326,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Document identifiers; can be either `docs` (containing full document information) or `ids` (when index and type is provided in the URL.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> MgetAsync<T>(string index, PostData<object> body, Func<MultiGetRequestParameters, MultiGetRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,MultiGetRequestParameters>(POST, Url($"{index.NotNull("index")}/_mget"), requestParameters, body);
+			this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/_mget"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/_mget 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -5342,7 +5342,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Document identifiers; can be either `docs` (containing full document information) or `ids` (when index and type is provided in the URL.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> Mget<T>(string index, string type, PostData<object> body, Func<MultiGetRequestParameters, MultiGetRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,MultiGetRequestParameters>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_mget"), requestParameters, body);
+			this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_mget"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/_mget 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -5358,7 +5358,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Document identifiers; can be either `docs` (containing full document information) or `ids` (when index and type is provided in the URL.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> MgetAsync<T>(string index, string type, PostData<object> body, Func<MultiGetRequestParameters, MultiGetRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,MultiGetRequestParameters>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_mget"), requestParameters, body);
+			this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_mget"), body, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/{type}/{id}/_mlt 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -5374,7 +5374,7 @@ namespace Elasticsearch.Net
 		///<param name="id">The document ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> MltGet<T>(string index, string type, string id, Func<MoreLikeThisRequestParameters, MoreLikeThisRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,MoreLikeThisRequestParameters>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}/_mlt"), requestParameters);
+			this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}/_mlt"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/{type}/{id}/_mlt 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -5390,7 +5390,7 @@ namespace Elasticsearch.Net
 		///<param name="id">The document ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> MltGetAsync<T>(string index, string type, string id, Func<MoreLikeThisRequestParameters, MoreLikeThisRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,MoreLikeThisRequestParameters>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}/_mlt"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}/_mlt"), null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/{id}/_mlt 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -5407,7 +5407,7 @@ namespace Elasticsearch.Net
 		///<param name="body">A specific search request definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> Mlt<T>(string index, string type, string id, PostData<object> body, Func<MoreLikeThisRequestParameters, MoreLikeThisRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,MoreLikeThisRequestParameters>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}/_mlt"), requestParameters, body);
+			this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}/_mlt"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/{id}/_mlt 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -5424,7 +5424,7 @@ namespace Elasticsearch.Net
 		///<param name="body">A specific search request definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> MltAsync<T>(string index, string type, string id, PostData<object> body, Func<MoreLikeThisRequestParameters, MoreLikeThisRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,MoreLikeThisRequestParameters>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}/_mlt"), requestParameters, body);
+			this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}/_mlt"), body, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_mpercolate 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -5437,7 +5437,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> MpercolateGet<T>(Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,MultiPercolateRequestParameters>(GET, Url($"_mpercolate"), requestParameters);
+			this.DoRequest<T>(GET, Url($"_mpercolate"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_mpercolate 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -5450,7 +5450,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> MpercolateGetAsync<T>(Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,MultiPercolateRequestParameters>(GET, Url($"_mpercolate"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"_mpercolate"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_mpercolate 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -5464,7 +5464,7 @@ namespace Elasticsearch.Net
 		///<param name="index">The index of the document being count percolated to use as default</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> MpercolateGet<T>(string index, Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,MultiPercolateRequestParameters>(GET, Url($"{index.NotNull("index")}/_mpercolate"), requestParameters);
+			this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/_mpercolate"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_mpercolate 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -5478,7 +5478,7 @@ namespace Elasticsearch.Net
 		///<param name="index">The index of the document being count percolated to use as default</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> MpercolateGetAsync<T>(string index, Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,MultiPercolateRequestParameters>(GET, Url($"{index.NotNull("index")}/_mpercolate"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/_mpercolate"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/{type}/_mpercolate 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -5493,7 +5493,7 @@ namespace Elasticsearch.Net
 		///<param name="type">The type of the document being percolated to use as default.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> MpercolateGet<T>(string index, string type, Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,MultiPercolateRequestParameters>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_mpercolate"), requestParameters);
+			this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_mpercolate"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/{type}/_mpercolate 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -5508,7 +5508,7 @@ namespace Elasticsearch.Net
 		///<param name="type">The type of the document being percolated to use as default.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> MpercolateGetAsync<T>(string index, string type, Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,MultiPercolateRequestParameters>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_mpercolate"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_mpercolate"), null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_mpercolate 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -5522,7 +5522,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The percolate request definitions (header &amp; body pair), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> Mpercolate<T>(PostData<object> body, Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,MultiPercolateRequestParameters>(POST, Url($"_mpercolate"), requestParameters, body);
+			this.DoRequest<T>(POST, Url($"_mpercolate"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_mpercolate 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -5536,7 +5536,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The percolate request definitions (header &amp; body pair), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> MpercolateAsync<T>(PostData<object> body, Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,MultiPercolateRequestParameters>(POST, Url($"_mpercolate"), requestParameters, body);
+			this.DoRequestAsync<T>(POST, Url($"_mpercolate"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_mpercolate 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -5551,7 +5551,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The percolate request definitions (header &amp; body pair), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> Mpercolate<T>(string index, PostData<object> body, Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,MultiPercolateRequestParameters>(POST, Url($"{index.NotNull("index")}/_mpercolate"), requestParameters, body);
+			this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/_mpercolate"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_mpercolate 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -5566,7 +5566,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The percolate request definitions (header &amp; body pair), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> MpercolateAsync<T>(string index, PostData<object> body, Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,MultiPercolateRequestParameters>(POST, Url($"{index.NotNull("index")}/_mpercolate"), requestParameters, body);
+			this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/_mpercolate"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/_mpercolate 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -5582,7 +5582,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The percolate request definitions (header &amp; body pair), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> Mpercolate<T>(string index, string type, PostData<object> body, Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,MultiPercolateRequestParameters>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_mpercolate"), requestParameters, body);
+			this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_mpercolate"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/_mpercolate 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -5598,7 +5598,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The percolate request definitions (header &amp; body pair), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> MpercolateAsync<T>(string index, string type, PostData<object> body, Func<MultiPercolateRequestParameters, MultiPercolateRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,MultiPercolateRequestParameters>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_mpercolate"), requestParameters, body);
+			this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_mpercolate"), body, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_msearch 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -5611,7 +5611,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> MsearchGet<T>(Func<MultiSearchRequestParameters, MultiSearchRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,MultiSearchRequestParameters>(GET, Url($"_msearch"), requestParameters);
+			this.DoRequest<T>(GET, Url($"_msearch"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_msearch 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -5624,7 +5624,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> MsearchGetAsync<T>(Func<MultiSearchRequestParameters, MultiSearchRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,MultiSearchRequestParameters>(GET, Url($"_msearch"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"_msearch"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_msearch 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -5638,7 +5638,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to use as default</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> MsearchGet<T>(string index, Func<MultiSearchRequestParameters, MultiSearchRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,MultiSearchRequestParameters>(GET, Url($"{index.NotNull("index")}/_msearch"), requestParameters);
+			this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/_msearch"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_msearch 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -5652,7 +5652,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to use as default</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> MsearchGetAsync<T>(string index, Func<MultiSearchRequestParameters, MultiSearchRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,MultiSearchRequestParameters>(GET, Url($"{index.NotNull("index")}/_msearch"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/_msearch"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/{type}/_msearch 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -5667,7 +5667,7 @@ namespace Elasticsearch.Net
 		///<param name="type">A comma-separated list of document types to use as default</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> MsearchGet<T>(string index, string type, Func<MultiSearchRequestParameters, MultiSearchRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,MultiSearchRequestParameters>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_msearch"), requestParameters);
+			this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_msearch"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/{type}/_msearch 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -5682,7 +5682,7 @@ namespace Elasticsearch.Net
 		///<param name="type">A comma-separated list of document types to use as default</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> MsearchGetAsync<T>(string index, string type, Func<MultiSearchRequestParameters, MultiSearchRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,MultiSearchRequestParameters>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_msearch"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_msearch"), null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_msearch 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -5696,7 +5696,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> Msearch<T>(PostData<object> body, Func<MultiSearchRequestParameters, MultiSearchRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,MultiSearchRequestParameters>(POST, Url($"_msearch"), requestParameters, body);
+			this.DoRequest<T>(POST, Url($"_msearch"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_msearch 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -5710,7 +5710,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> MsearchAsync<T>(PostData<object> body, Func<MultiSearchRequestParameters, MultiSearchRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,MultiSearchRequestParameters>(POST, Url($"_msearch"), requestParameters, body);
+			this.DoRequestAsync<T>(POST, Url($"_msearch"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_msearch 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -5725,7 +5725,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> Msearch<T>(string index, PostData<object> body, Func<MultiSearchRequestParameters, MultiSearchRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,MultiSearchRequestParameters>(POST, Url($"{index.NotNull("index")}/_msearch"), requestParameters, body);
+			this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/_msearch"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_msearch 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -5740,7 +5740,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> MsearchAsync<T>(string index, PostData<object> body, Func<MultiSearchRequestParameters, MultiSearchRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,MultiSearchRequestParameters>(POST, Url($"{index.NotNull("index")}/_msearch"), requestParameters, body);
+			this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/_msearch"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/_msearch 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -5756,7 +5756,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> Msearch<T>(string index, string type, PostData<object> body, Func<MultiSearchRequestParameters, MultiSearchRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,MultiSearchRequestParameters>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_msearch"), requestParameters, body);
+			this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_msearch"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/_msearch 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -5772,7 +5772,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The request definitions (metadata-search request definition pairs), separated by newlines</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> MsearchAsync<T>(string index, string type, PostData<object> body, Func<MultiSearchRequestParameters, MultiSearchRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,MultiSearchRequestParameters>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_msearch"), requestParameters, body);
+			this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_msearch"), body, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_mtermvectors 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -5785,7 +5785,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> MtermvectorsGet<T>(Func<MultiTermVectorsRequestParameters, MultiTermVectorsRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,MultiTermVectorsRequestParameters>(GET, Url($"_mtermvectors"), requestParameters);
+			this.DoRequest<T>(GET, Url($"_mtermvectors"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_mtermvectors 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -5798,7 +5798,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> MtermvectorsGetAsync<T>(Func<MultiTermVectorsRequestParameters, MultiTermVectorsRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,MultiTermVectorsRequestParameters>(GET, Url($"_mtermvectors"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"_mtermvectors"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_mtermvectors 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -5812,7 +5812,7 @@ namespace Elasticsearch.Net
 		///<param name="index">The index in which the document resides.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> MtermvectorsGet<T>(string index, Func<MultiTermVectorsRequestParameters, MultiTermVectorsRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,MultiTermVectorsRequestParameters>(GET, Url($"{index.NotNull("index")}/_mtermvectors"), requestParameters);
+			this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/_mtermvectors"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_mtermvectors 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -5826,7 +5826,7 @@ namespace Elasticsearch.Net
 		///<param name="index">The index in which the document resides.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> MtermvectorsGetAsync<T>(string index, Func<MultiTermVectorsRequestParameters, MultiTermVectorsRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,MultiTermVectorsRequestParameters>(GET, Url($"{index.NotNull("index")}/_mtermvectors"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/_mtermvectors"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/{type}/_mtermvectors 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -5841,7 +5841,7 @@ namespace Elasticsearch.Net
 		///<param name="type">The type of the document.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> MtermvectorsGet<T>(string index, string type, Func<MultiTermVectorsRequestParameters, MultiTermVectorsRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,MultiTermVectorsRequestParameters>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_mtermvectors"), requestParameters);
+			this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_mtermvectors"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/{type}/_mtermvectors 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -5856,7 +5856,7 @@ namespace Elasticsearch.Net
 		///<param name="type">The type of the document.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> MtermvectorsGetAsync<T>(string index, string type, Func<MultiTermVectorsRequestParameters, MultiTermVectorsRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,MultiTermVectorsRequestParameters>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_mtermvectors"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_mtermvectors"), null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_mtermvectors 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -5870,7 +5870,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Define ids, parameters or a list of parameters per document here. You must at least provide a list of document ids. See documentation.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> Mtermvectors<T>(PostData<object> body, Func<MultiTermVectorsRequestParameters, MultiTermVectorsRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,MultiTermVectorsRequestParameters>(POST, Url($"_mtermvectors"), requestParameters, body);
+			this.DoRequest<T>(POST, Url($"_mtermvectors"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_mtermvectors 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -5884,7 +5884,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Define ids, parameters or a list of parameters per document here. You must at least provide a list of document ids. See documentation.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> MtermvectorsAsync<T>(PostData<object> body, Func<MultiTermVectorsRequestParameters, MultiTermVectorsRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,MultiTermVectorsRequestParameters>(POST, Url($"_mtermvectors"), requestParameters, body);
+			this.DoRequestAsync<T>(POST, Url($"_mtermvectors"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_mtermvectors 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -5899,7 +5899,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Define ids, parameters or a list of parameters per document here. You must at least provide a list of document ids. See documentation.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> Mtermvectors<T>(string index, PostData<object> body, Func<MultiTermVectorsRequestParameters, MultiTermVectorsRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,MultiTermVectorsRequestParameters>(POST, Url($"{index.NotNull("index")}/_mtermvectors"), requestParameters, body);
+			this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/_mtermvectors"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_mtermvectors 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -5914,7 +5914,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Define ids, parameters or a list of parameters per document here. You must at least provide a list of document ids. See documentation.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> MtermvectorsAsync<T>(string index, PostData<object> body, Func<MultiTermVectorsRequestParameters, MultiTermVectorsRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,MultiTermVectorsRequestParameters>(POST, Url($"{index.NotNull("index")}/_mtermvectors"), requestParameters, body);
+			this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/_mtermvectors"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/_mtermvectors 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -5930,7 +5930,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Define ids, parameters or a list of parameters per document here. You must at least provide a list of document ids. See documentation.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> Mtermvectors<T>(string index, string type, PostData<object> body, Func<MultiTermVectorsRequestParameters, MultiTermVectorsRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,MultiTermVectorsRequestParameters>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_mtermvectors"), requestParameters, body);
+			this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_mtermvectors"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/_mtermvectors 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -5946,7 +5946,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Define ids, parameters or a list of parameters per document here. You must at least provide a list of document ids. See documentation.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> MtermvectorsAsync<T>(string index, string type, PostData<object> body, Func<MultiTermVectorsRequestParameters, MultiTermVectorsRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,MultiTermVectorsRequestParameters>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_mtermvectors"), requestParameters, body);
+			this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_mtermvectors"), body, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_cluster/nodes/hotthreads 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -5959,7 +5959,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> NodesHotThreadsForAll<T>(Func<NodesHotThreadsRequestParameters, NodesHotThreadsRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,NodesHotThreadsRequestParameters>(GET, Url($"_cluster/nodes/hotthreads"), requestParameters);
+			this.DoRequest<T>(GET, Url($"_cluster/nodes/hotthreads"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_cluster/nodes/hotthreads 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -5972,7 +5972,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> NodesHotThreadsForAllAsync<T>(Func<NodesHotThreadsRequestParameters, NodesHotThreadsRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,NodesHotThreadsRequestParameters>(GET, Url($"_cluster/nodes/hotthreads"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"_cluster/nodes/hotthreads"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_cluster/nodes/{node_id}/hotthreads 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -5986,7 +5986,7 @@ namespace Elasticsearch.Net
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> NodesHotThreads<T>(string node_id, Func<NodesHotThreadsRequestParameters, NodesHotThreadsRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,NodesHotThreadsRequestParameters>(GET, Url($"_cluster/nodes/{node_id.NotNull("node_id")}/hotthreads"), requestParameters);
+			this.DoRequest<T>(GET, Url($"_cluster/nodes/{node_id.NotNull("node_id")}/hotthreads"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_cluster/nodes/{node_id}/hotthreads 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -6000,7 +6000,7 @@ namespace Elasticsearch.Net
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> NodesHotThreadsAsync<T>(string node_id, Func<NodesHotThreadsRequestParameters, NodesHotThreadsRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,NodesHotThreadsRequestParameters>(GET, Url($"_cluster/nodes/{node_id.NotNull("node_id")}/hotthreads"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"_cluster/nodes/{node_id.NotNull("node_id")}/hotthreads"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_nodes 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -6013,7 +6013,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> NodesInfoForAll<T>(Func<NodesInfoRequestParameters, NodesInfoRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,NodesInfoRequestParameters>(GET, Url($"_nodes"), requestParameters);
+			this.DoRequest<T>(GET, Url($"_nodes"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_nodes 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -6026,7 +6026,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> NodesInfoForAllAsync<T>(Func<NodesInfoRequestParameters, NodesInfoRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,NodesInfoRequestParameters>(GET, Url($"_nodes"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"_nodes"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_nodes/{node_id} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -6040,7 +6040,7 @@ namespace Elasticsearch.Net
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> NodesInfo<T>(string node_id, Func<NodesInfoRequestParameters, NodesInfoRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,NodesInfoRequestParameters>(GET, Url($"_nodes/{node_id.NotNull("node_id")}"), requestParameters);
+			this.DoRequest<T>(GET, Url($"_nodes/{node_id.NotNull("node_id")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_nodes/{node_id} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -6054,7 +6054,7 @@ namespace Elasticsearch.Net
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> NodesInfoAsync<T>(string node_id, Func<NodesInfoRequestParameters, NodesInfoRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,NodesInfoRequestParameters>(GET, Url($"_nodes/{node_id.NotNull("node_id")}"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"_nodes/{node_id.NotNull("node_id")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_nodes/{metric} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -6068,7 +6068,7 @@ namespace Elasticsearch.Net
 		///<param name="metric">A comma-separated list of metrics you wish returned. Leave empty to return all.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> NodesInfoForAll<T>(string metric, Func<NodesInfoRequestParameters, NodesInfoRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,NodesInfoRequestParameters>(GET, Url($"_nodes/{metric.NotNull("metric")}"), requestParameters);
+			this.DoRequest<T>(GET, Url($"_nodes/{metric.NotNull("metric")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_nodes/{metric} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -6082,7 +6082,7 @@ namespace Elasticsearch.Net
 		///<param name="metric">A comma-separated list of metrics you wish returned. Leave empty to return all.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> NodesInfoForAllAsync<T>(string metric, Func<NodesInfoRequestParameters, NodesInfoRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,NodesInfoRequestParameters>(GET, Url($"_nodes/{metric.NotNull("metric")}"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"_nodes/{metric.NotNull("metric")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_nodes/{node_id}/{metric} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -6097,7 +6097,7 @@ namespace Elasticsearch.Net
 		///<param name="metric">A comma-separated list of metrics you wish returned. Leave empty to return all.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> NodesInfo<T>(string node_id, string metric, Func<NodesInfoRequestParameters, NodesInfoRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,NodesInfoRequestParameters>(GET, Url($"_nodes/{node_id.NotNull("node_id")}/{metric.NotNull("metric")}"), requestParameters);
+			this.DoRequest<T>(GET, Url($"_nodes/{node_id.NotNull("node_id")}/{metric.NotNull("metric")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_nodes/{node_id}/{metric} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -6112,7 +6112,7 @@ namespace Elasticsearch.Net
 		///<param name="metric">A comma-separated list of metrics you wish returned. Leave empty to return all.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> NodesInfoAsync<T>(string node_id, string metric, Func<NodesInfoRequestParameters, NodesInfoRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,NodesInfoRequestParameters>(GET, Url($"_nodes/{node_id.NotNull("node_id")}/{metric.NotNull("metric")}"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"_nodes/{node_id.NotNull("node_id")}/{metric.NotNull("metric")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_shutdown 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -6125,7 +6125,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> NodesShutdownForAll<T>(Func<NodesShutdownRequestParameters, NodesShutdownRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,NodesShutdownRequestParameters>(POST, Url($"_shutdown"), requestParameters);
+			this.DoRequest<T>(POST, Url($"_shutdown"), null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_shutdown 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -6138,7 +6138,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> NodesShutdownForAllAsync<T>(Func<NodesShutdownRequestParameters, NodesShutdownRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,NodesShutdownRequestParameters>(POST, Url($"_shutdown"), requestParameters);
+			this.DoRequestAsync<T>(POST, Url($"_shutdown"), null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_cluster/nodes/{node_id}/_shutdown 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -6152,7 +6152,7 @@ namespace Elasticsearch.Net
 		///<param name="node_id">A comma-separated list of node IDs or names to perform the operation on; use `_local` to perform the operation on the node you&#39;re connected to, leave empty to perform the operation on all nodes</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> NodesShutdown<T>(string node_id, Func<NodesShutdownRequestParameters, NodesShutdownRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,NodesShutdownRequestParameters>(POST, Url($"_cluster/nodes/{node_id.NotNull("node_id")}/_shutdown"), requestParameters);
+			this.DoRequest<T>(POST, Url($"_cluster/nodes/{node_id.NotNull("node_id")}/_shutdown"), null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_cluster/nodes/{node_id}/_shutdown 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -6166,7 +6166,7 @@ namespace Elasticsearch.Net
 		///<param name="node_id">A comma-separated list of node IDs or names to perform the operation on; use `_local` to perform the operation on the node you&#39;re connected to, leave empty to perform the operation on all nodes</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> NodesShutdownAsync<T>(string node_id, Func<NodesShutdownRequestParameters, NodesShutdownRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,NodesShutdownRequestParameters>(POST, Url($"_cluster/nodes/{node_id.NotNull("node_id")}/_shutdown"), requestParameters);
+			this.DoRequestAsync<T>(POST, Url($"_cluster/nodes/{node_id.NotNull("node_id")}/_shutdown"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_nodes/stats 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -6179,7 +6179,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> NodesStatsForAll<T>(Func<NodesStatsRequestParameters, NodesStatsRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,NodesStatsRequestParameters>(GET, Url($"_nodes/stats"), requestParameters);
+			this.DoRequest<T>(GET, Url($"_nodes/stats"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_nodes/stats 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -6192,7 +6192,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> NodesStatsForAllAsync<T>(Func<NodesStatsRequestParameters, NodesStatsRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,NodesStatsRequestParameters>(GET, Url($"_nodes/stats"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"_nodes/stats"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_nodes/{node_id}/stats 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -6206,7 +6206,7 @@ namespace Elasticsearch.Net
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> NodesStats<T>(string node_id, Func<NodesStatsRequestParameters, NodesStatsRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,NodesStatsRequestParameters>(GET, Url($"_nodes/{node_id.NotNull("node_id")}/stats"), requestParameters);
+			this.DoRequest<T>(GET, Url($"_nodes/{node_id.NotNull("node_id")}/stats"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_nodes/{node_id}/stats 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -6220,7 +6220,7 @@ namespace Elasticsearch.Net
 		///<param name="node_id">A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you&#39;re connecting to, leave empty to get information from all nodes</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> NodesStatsAsync<T>(string node_id, Func<NodesStatsRequestParameters, NodesStatsRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,NodesStatsRequestParameters>(GET, Url($"_nodes/{node_id.NotNull("node_id")}/stats"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"_nodes/{node_id.NotNull("node_id")}/stats"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_nodes/stats/{metric} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -6234,7 +6234,7 @@ namespace Elasticsearch.Net
 		///<param name="metric">Limit the information returned to the specified metrics</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> NodesStatsForAll<T>(string metric, Func<NodesStatsRequestParameters, NodesStatsRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,NodesStatsRequestParameters>(GET, Url($"_nodes/stats/{metric.NotNull("metric")}"), requestParameters);
+			this.DoRequest<T>(GET, Url($"_nodes/stats/{metric.NotNull("metric")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_nodes/stats/{metric} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -6248,7 +6248,7 @@ namespace Elasticsearch.Net
 		///<param name="metric">Limit the information returned to the specified metrics</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> NodesStatsForAllAsync<T>(string metric, Func<NodesStatsRequestParameters, NodesStatsRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,NodesStatsRequestParameters>(GET, Url($"_nodes/stats/{metric.NotNull("metric")}"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"_nodes/stats/{metric.NotNull("metric")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_nodes/{node_id}/stats/{metric} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -6263,7 +6263,7 @@ namespace Elasticsearch.Net
 		///<param name="metric">Limit the information returned to the specified metrics</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> NodesStats<T>(string node_id, string metric, Func<NodesStatsRequestParameters, NodesStatsRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,NodesStatsRequestParameters>(GET, Url($"_nodes/{node_id.NotNull("node_id")}/stats/{metric.NotNull("metric")}"), requestParameters);
+			this.DoRequest<T>(GET, Url($"_nodes/{node_id.NotNull("node_id")}/stats/{metric.NotNull("metric")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_nodes/{node_id}/stats/{metric} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -6278,7 +6278,7 @@ namespace Elasticsearch.Net
 		///<param name="metric">Limit the information returned to the specified metrics</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> NodesStatsAsync<T>(string node_id, string metric, Func<NodesStatsRequestParameters, NodesStatsRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,NodesStatsRequestParameters>(GET, Url($"_nodes/{node_id.NotNull("node_id")}/stats/{metric.NotNull("metric")}"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"_nodes/{node_id.NotNull("node_id")}/stats/{metric.NotNull("metric")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_nodes/stats/{metric}/{index_metric} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -6293,7 +6293,7 @@ namespace Elasticsearch.Net
 		///<param name="index_metric">Limit the information returned for `indices` metric to the specific index metrics. Isn&#39;t used if `indices` (or `all`) metric isn&#39;t specified.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> NodesStatsForAll<T>(string metric, string index_metric, Func<NodesStatsRequestParameters, NodesStatsRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,NodesStatsRequestParameters>(GET, Url($"_nodes/stats/{metric.NotNull("metric")}/{index_metric.NotNull("index_metric")}"), requestParameters);
+			this.DoRequest<T>(GET, Url($"_nodes/stats/{metric.NotNull("metric")}/{index_metric.NotNull("index_metric")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_nodes/stats/{metric}/{index_metric} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -6308,7 +6308,7 @@ namespace Elasticsearch.Net
 		///<param name="index_metric">Limit the information returned for `indices` metric to the specific index metrics. Isn&#39;t used if `indices` (or `all`) metric isn&#39;t specified.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> NodesStatsForAllAsync<T>(string metric, string index_metric, Func<NodesStatsRequestParameters, NodesStatsRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,NodesStatsRequestParameters>(GET, Url($"_nodes/stats/{metric.NotNull("metric")}/{index_metric.NotNull("index_metric")}"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"_nodes/stats/{metric.NotNull("metric")}/{index_metric.NotNull("index_metric")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_nodes/{node_id}/stats/{metric}/{index_metric} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -6324,7 +6324,7 @@ namespace Elasticsearch.Net
 		///<param name="index_metric">Limit the information returned for `indices` metric to the specific index metrics. Isn&#39;t used if `indices` (or `all`) metric isn&#39;t specified.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> NodesStats<T>(string node_id, string metric, string index_metric, Func<NodesStatsRequestParameters, NodesStatsRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,NodesStatsRequestParameters>(GET, Url($"_nodes/{node_id.NotNull("node_id")}/stats/{metric.NotNull("metric")}/{index_metric.NotNull("index_metric")}"), requestParameters);
+			this.DoRequest<T>(GET, Url($"_nodes/{node_id.NotNull("node_id")}/stats/{metric.NotNull("metric")}/{index_metric.NotNull("index_metric")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_nodes/{node_id}/stats/{metric}/{index_metric} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -6340,7 +6340,7 @@ namespace Elasticsearch.Net
 		///<param name="index_metric">Limit the information returned for `indices` metric to the specific index metrics. Isn&#39;t used if `indices` (or `all`) metric isn&#39;t specified.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> NodesStatsAsync<T>(string node_id, string metric, string index_metric, Func<NodesStatsRequestParameters, NodesStatsRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,NodesStatsRequestParameters>(GET, Url($"_nodes/{node_id.NotNull("node_id")}/stats/{metric.NotNull("metric")}/{index_metric.NotNull("index_metric")}"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"_nodes/{node_id.NotNull("node_id")}/stats/{metric.NotNull("metric")}/{index_metric.NotNull("index_metric")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/{type}/_percolate 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -6355,7 +6355,7 @@ namespace Elasticsearch.Net
 		///<param name="type">The type of the document being percolated.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> PercolateGet<T>(string index, string type, Func<PercolateRequestParameters, PercolateRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,PercolateRequestParameters>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_percolate"), requestParameters);
+			this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_percolate"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/{type}/_percolate 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -6370,7 +6370,7 @@ namespace Elasticsearch.Net
 		///<param name="type">The type of the document being percolated.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> PercolateGetAsync<T>(string index, string type, Func<PercolateRequestParameters, PercolateRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,PercolateRequestParameters>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_percolate"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_percolate"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/{type}/{id}/_percolate 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -6386,7 +6386,7 @@ namespace Elasticsearch.Net
 		///<param name="id">Substitute the document in the request body with a document that is known by the specified id. On top of the id, the index and type parameter will be used to retrieve the document from within the cluster.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> PercolateGet<T>(string index, string type, string id, Func<PercolateRequestParameters, PercolateRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,PercolateRequestParameters>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}/_percolate"), requestParameters);
+			this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}/_percolate"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/{type}/{id}/_percolate 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -6402,7 +6402,7 @@ namespace Elasticsearch.Net
 		///<param name="id">Substitute the document in the request body with a document that is known by the specified id. On top of the id, the index and type parameter will be used to retrieve the document from within the cluster.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> PercolateGetAsync<T>(string index, string type, string id, Func<PercolateRequestParameters, PercolateRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,PercolateRequestParameters>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}/_percolate"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}/_percolate"), null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/_percolate 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -6418,7 +6418,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The percolator request definition using the percolate DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> Percolate<T>(string index, string type, PostData<object> body, Func<PercolateRequestParameters, PercolateRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,PercolateRequestParameters>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_percolate"), requestParameters, body);
+			this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_percolate"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/_percolate 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -6434,7 +6434,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The percolator request definition using the percolate DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> PercolateAsync<T>(string index, string type, PostData<object> body, Func<PercolateRequestParameters, PercolateRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,PercolateRequestParameters>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_percolate"), requestParameters, body);
+			this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_percolate"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/{id}/_percolate 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -6451,7 +6451,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The percolator request definition using the percolate DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> Percolate<T>(string index, string type, string id, PostData<object> body, Func<PercolateRequestParameters, PercolateRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,PercolateRequestParameters>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}/_percolate"), requestParameters, body);
+			this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}/_percolate"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/{id}/_percolate 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -6468,7 +6468,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The percolator request definition using the percolate DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> PercolateAsync<T>(string index, string type, string id, PostData<object> body, Func<PercolateRequestParameters, PercolateRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,PercolateRequestParameters>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}/_percolate"), requestParameters, body);
+			this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}/_percolate"), body, _params(requestParameters));
 		
 		///<summary>Represents a HEAD on / 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -6481,7 +6481,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> Ping<T>(Func<PingRequestParameters, PingRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,PingRequestParameters>(HEAD, Url($""), requestParameters);
+			this.DoRequest<T>(HEAD, Url($""), null, _params(requestParameters));
 		
 		///<summary>Represents a HEAD on / 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -6494,7 +6494,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> PingAsync<T>(Func<PingRequestParameters, PingRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,PingRequestParameters>(HEAD, Url($""), requestParameters);
+			this.DoRequestAsync<T>(HEAD, Url($""), null, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /_scripts/{lang}/{id} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -6510,7 +6510,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The document</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> PutScript<T>(string lang, string id, PostData<object> body, Func<PutScriptRequestParameters, PutScriptRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,PutScriptRequestParameters>(PUT, Url($"_scripts/{lang.NotNull("lang")}/{id.NotNull("id")}"), requestParameters, body);
+			this.DoRequest<T>(PUT, Url($"_scripts/{lang.NotNull("lang")}/{id.NotNull("id")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /_scripts/{lang}/{id} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -6526,7 +6526,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The document</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> PutScriptAsync<T>(string lang, string id, PostData<object> body, Func<PutScriptRequestParameters, PutScriptRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,PutScriptRequestParameters>(PUT, Url($"_scripts/{lang.NotNull("lang")}/{id.NotNull("id")}"), requestParameters, body);
+			this.DoRequestAsync<T>(PUT, Url($"_scripts/{lang.NotNull("lang")}/{id.NotNull("id")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_scripts/{lang}/{id} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -6542,7 +6542,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The document</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> PutScriptPost<T>(string lang, string id, PostData<object> body, Func<PutScriptRequestParameters, PutScriptRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,PutScriptRequestParameters>(POST, Url($"_scripts/{lang.NotNull("lang")}/{id.NotNull("id")}"), requestParameters, body);
+			this.DoRequest<T>(POST, Url($"_scripts/{lang.NotNull("lang")}/{id.NotNull("id")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_scripts/{lang}/{id} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -6558,7 +6558,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The document</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> PutScriptPostAsync<T>(string lang, string id, PostData<object> body, Func<PutScriptRequestParameters, PutScriptRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,PutScriptRequestParameters>(POST, Url($"_scripts/{lang.NotNull("lang")}/{id.NotNull("id")}"), requestParameters, body);
+			this.DoRequestAsync<T>(POST, Url($"_scripts/{lang.NotNull("lang")}/{id.NotNull("id")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /_search/template/{id} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -6573,7 +6573,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The document</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> PutTemplate<T>(string id, PostData<object> body, Func<PutTemplateRequestParameters, PutTemplateRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,PutTemplateRequestParameters>(PUT, Url($"_search/template/{id.NotNull("id")}"), requestParameters, body);
+			this.DoRequest<T>(PUT, Url($"_search/template/{id.NotNull("id")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /_search/template/{id} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -6588,7 +6588,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The document</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> PutTemplateAsync<T>(string id, PostData<object> body, Func<PutTemplateRequestParameters, PutTemplateRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,PutTemplateRequestParameters>(PUT, Url($"_search/template/{id.NotNull("id")}"), requestParameters, body);
+			this.DoRequestAsync<T>(PUT, Url($"_search/template/{id.NotNull("id")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_search/template/{id} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -6603,7 +6603,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The document</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> PutTemplatePost<T>(string id, PostData<object> body, Func<PutTemplateRequestParameters, PutTemplateRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,PutTemplateRequestParameters>(POST, Url($"_search/template/{id.NotNull("id")}"), requestParameters, body);
+			this.DoRequest<T>(POST, Url($"_search/template/{id.NotNull("id")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_search/template/{id} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -6618,7 +6618,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The document</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> PutTemplatePostAsync<T>(string id, PostData<object> body, Func<PutTemplateRequestParameters, PutTemplateRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,PutTemplateRequestParameters>(POST, Url($"_search/template/{id.NotNull("id")}"), requestParameters, body);
+			this.DoRequestAsync<T>(POST, Url($"_search/template/{id.NotNull("id")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_search/scroll 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -6631,7 +6631,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> ScrollGet<T>(Func<ScrollRequestParameters, ScrollRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,ScrollRequestParameters>(GET, Url($"_search/scroll"), requestParameters);
+			this.DoRequest<T>(GET, Url($"_search/scroll"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_search/scroll 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -6644,7 +6644,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> ScrollGetAsync<T>(Func<ScrollRequestParameters, ScrollRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,ScrollRequestParameters>(GET, Url($"_search/scroll"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"_search/scroll"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_search/scroll/{scroll_id} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -6658,7 +6658,7 @@ namespace Elasticsearch.Net
 		///<param name="scroll_id">The scroll ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> ScrollGet<T>(string scroll_id, Func<ScrollRequestParameters, ScrollRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,ScrollRequestParameters>(GET, Url($"_search/scroll/{scroll_id.NotNull("scroll_id")}"), requestParameters);
+			this.DoRequest<T>(GET, Url($"_search/scroll/{scroll_id.NotNull("scroll_id")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_search/scroll/{scroll_id} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -6672,7 +6672,7 @@ namespace Elasticsearch.Net
 		///<param name="scroll_id">The scroll ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> ScrollGetAsync<T>(string scroll_id, Func<ScrollRequestParameters, ScrollRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,ScrollRequestParameters>(GET, Url($"_search/scroll/{scroll_id.NotNull("scroll_id")}"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"_search/scroll/{scroll_id.NotNull("scroll_id")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_search/scroll 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -6686,7 +6686,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The scroll ID if not passed by URL or query parameter.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> Scroll<T>(PostData<object> body, Func<ScrollRequestParameters, ScrollRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,ScrollRequestParameters>(POST, Url($"_search/scroll"), requestParameters, body);
+			this.DoRequest<T>(POST, Url($"_search/scroll"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_search/scroll 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -6700,7 +6700,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The scroll ID if not passed by URL or query parameter.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> ScrollAsync<T>(PostData<object> body, Func<ScrollRequestParameters, ScrollRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,ScrollRequestParameters>(POST, Url($"_search/scroll"), requestParameters, body);
+			this.DoRequestAsync<T>(POST, Url($"_search/scroll"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_search/scroll/{scroll_id} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -6715,7 +6715,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The scroll ID if not passed by URL or query parameter.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> Scroll<T>(string scroll_id, PostData<object> body, Func<ScrollRequestParameters, ScrollRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,ScrollRequestParameters>(POST, Url($"_search/scroll/{scroll_id.NotNull("scroll_id")}"), requestParameters, body);
+			this.DoRequest<T>(POST, Url($"_search/scroll/{scroll_id.NotNull("scroll_id")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_search/scroll/{scroll_id} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -6730,7 +6730,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The scroll ID if not passed by URL or query parameter.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> ScrollAsync<T>(string scroll_id, PostData<object> body, Func<ScrollRequestParameters, ScrollRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,ScrollRequestParameters>(POST, Url($"_search/scroll/{scroll_id.NotNull("scroll_id")}"), requestParameters, body);
+			this.DoRequestAsync<T>(POST, Url($"_search/scroll/{scroll_id.NotNull("scroll_id")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_search 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -6743,7 +6743,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> SearchGet<T>(Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,SearchRequestParameters>(GET, Url($"_search"), requestParameters);
+			this.DoRequest<T>(GET, Url($"_search"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_search 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -6756,7 +6756,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> SearchGetAsync<T>(Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,SearchRequestParameters>(GET, Url($"_search"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"_search"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_search 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -6770,7 +6770,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> SearchGet<T>(string index, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,SearchRequestParameters>(GET, Url($"{index.NotNull("index")}/_search"), requestParameters);
+			this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/_search"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_search 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -6784,7 +6784,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> SearchGetAsync<T>(string index, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,SearchRequestParameters>(GET, Url($"{index.NotNull("index")}/_search"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/_search"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/{type}/_search 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -6799,7 +6799,7 @@ namespace Elasticsearch.Net
 		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> SearchGet<T>(string index, string type, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,SearchRequestParameters>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_search"), requestParameters);
+			this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_search"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/{type}/_search 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -6814,7 +6814,7 @@ namespace Elasticsearch.Net
 		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> SearchGetAsync<T>(string index, string type, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,SearchRequestParameters>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_search"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_search"), null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_search 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -6828,7 +6828,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The search definition using the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> Search<T>(PostData<object> body, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,SearchRequestParameters>(POST, Url($"_search"), requestParameters, body);
+			this.DoRequest<T>(POST, Url($"_search"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_search 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -6842,7 +6842,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The search definition using the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> SearchAsync<T>(PostData<object> body, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,SearchRequestParameters>(POST, Url($"_search"), requestParameters, body);
+			this.DoRequestAsync<T>(POST, Url($"_search"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_search 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -6857,7 +6857,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The search definition using the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> Search<T>(string index, PostData<object> body, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,SearchRequestParameters>(POST, Url($"{index.NotNull("index")}/_search"), requestParameters, body);
+			this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/_search"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_search 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -6872,7 +6872,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The search definition using the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> SearchAsync<T>(string index, PostData<object> body, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,SearchRequestParameters>(POST, Url($"{index.NotNull("index")}/_search"), requestParameters, body);
+			this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/_search"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/_search 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -6888,7 +6888,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The search definition using the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> Search<T>(string index, string type, PostData<object> body, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,SearchRequestParameters>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_search"), requestParameters, body);
+			this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_search"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/_search 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -6904,7 +6904,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The search definition using the Query DSL</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> SearchAsync<T>(string index, string type, PostData<object> body, Func<SearchRequestParameters, SearchRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,SearchRequestParameters>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_search"), requestParameters, body);
+			this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_search"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_search/exists 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -6918,7 +6918,7 @@ namespace Elasticsearch.Net
 		///<param name="body">A query to restrict the results specified with the Query DSL (optional)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> SearchExists<T>(PostData<object> body, Func<SearchExistsRequestParameters, SearchExistsRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,SearchExistsRequestParameters>(POST, Url($"_search/exists"), requestParameters, body, allow404: true);
+			this.DoRequest<T>(POST, Url($"_search/exists"), body, _params(requestParameters, allow404: true));
 		
 		///<summary>Represents a POST on /_search/exists 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -6932,7 +6932,7 @@ namespace Elasticsearch.Net
 		///<param name="body">A query to restrict the results specified with the Query DSL (optional)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> SearchExistsAsync<T>(PostData<object> body, Func<SearchExistsRequestParameters, SearchExistsRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,SearchExistsRequestParameters>(POST, Url($"_search/exists"), requestParameters, body, allow404: true);
+			this.DoRequestAsync<T>(POST, Url($"_search/exists"), body, _params(requestParameters, allow404: true));
 		
 		///<summary>Represents a POST on /{index}/_search/exists 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -6947,7 +6947,7 @@ namespace Elasticsearch.Net
 		///<param name="body">A query to restrict the results specified with the Query DSL (optional)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> SearchExists<T>(string index, PostData<object> body, Func<SearchExistsRequestParameters, SearchExistsRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,SearchExistsRequestParameters>(POST, Url($"{index.NotNull("index")}/_search/exists"), requestParameters, body, allow404: true);
+			this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/_search/exists"), body, _params(requestParameters, allow404: true));
 		
 		///<summary>Represents a POST on /{index}/_search/exists 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -6962,7 +6962,7 @@ namespace Elasticsearch.Net
 		///<param name="body">A query to restrict the results specified with the Query DSL (optional)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> SearchExistsAsync<T>(string index, PostData<object> body, Func<SearchExistsRequestParameters, SearchExistsRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,SearchExistsRequestParameters>(POST, Url($"{index.NotNull("index")}/_search/exists"), requestParameters, body, allow404: true);
+			this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/_search/exists"), body, _params(requestParameters, allow404: true));
 		
 		///<summary>Represents a POST on /{index}/{type}/_search/exists 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -6978,7 +6978,7 @@ namespace Elasticsearch.Net
 		///<param name="body">A query to restrict the results specified with the Query DSL (optional)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> SearchExists<T>(string index, string type, PostData<object> body, Func<SearchExistsRequestParameters, SearchExistsRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,SearchExistsRequestParameters>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_search/exists"), requestParameters, body, allow404: true);
+			this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_search/exists"), body, _params(requestParameters, allow404: true));
 		
 		///<summary>Represents a POST on /{index}/{type}/_search/exists 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -6994,7 +6994,7 @@ namespace Elasticsearch.Net
 		///<param name="body">A query to restrict the results specified with the Query DSL (optional)</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> SearchExistsAsync<T>(string index, string type, PostData<object> body, Func<SearchExistsRequestParameters, SearchExistsRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,SearchExistsRequestParameters>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_search/exists"), requestParameters, body, allow404: true);
+			this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_search/exists"), body, _params(requestParameters, allow404: true));
 		
 		///<summary>Represents a GET on /_search/exists 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -7007,7 +7007,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> SearchExistsGet<T>(Func<SearchExistsRequestParameters, SearchExistsRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,SearchExistsRequestParameters>(GET, Url($"_search/exists"), requestParameters, allow404: true);
+			this.DoRequest<T>(GET, Url($"_search/exists"), null, _params(requestParameters, allow404: true));
 		
 		///<summary>Represents a GET on /_search/exists 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -7020,7 +7020,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> SearchExistsGetAsync<T>(Func<SearchExistsRequestParameters, SearchExistsRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,SearchExistsRequestParameters>(GET, Url($"_search/exists"), requestParameters, allow404: true);
+			this.DoRequestAsync<T>(GET, Url($"_search/exists"), null, _params(requestParameters, allow404: true));
 		
 		///<summary>Represents a GET on /{index}/_search/exists 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -7034,7 +7034,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of indices to restrict the results</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> SearchExistsGet<T>(string index, Func<SearchExistsRequestParameters, SearchExistsRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,SearchExistsRequestParameters>(GET, Url($"{index.NotNull("index")}/_search/exists"), requestParameters, allow404: true);
+			this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/_search/exists"), null, _params(requestParameters, allow404: true));
 		
 		///<summary>Represents a GET on /{index}/_search/exists 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -7048,7 +7048,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of indices to restrict the results</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> SearchExistsGetAsync<T>(string index, Func<SearchExistsRequestParameters, SearchExistsRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,SearchExistsRequestParameters>(GET, Url($"{index.NotNull("index")}/_search/exists"), requestParameters, allow404: true);
+			this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/_search/exists"), null, _params(requestParameters, allow404: true));
 		
 		///<summary>Represents a GET on /{index}/{type}/_search/exists 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -7063,7 +7063,7 @@ namespace Elasticsearch.Net
 		///<param name="type">A comma-separated list of types to restrict the results</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> SearchExistsGet<T>(string index, string type, Func<SearchExistsRequestParameters, SearchExistsRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,SearchExistsRequestParameters>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_search/exists"), requestParameters, allow404: true);
+			this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_search/exists"), null, _params(requestParameters, allow404: true));
 		
 		///<summary>Represents a GET on /{index}/{type}/_search/exists 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -7078,7 +7078,7 @@ namespace Elasticsearch.Net
 		///<param name="type">A comma-separated list of types to restrict the results</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> SearchExistsGetAsync<T>(string index, string type, Func<SearchExistsRequestParameters, SearchExistsRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,SearchExistsRequestParameters>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_search/exists"), requestParameters, allow404: true);
+			this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_search/exists"), null, _params(requestParameters, allow404: true));
 		
 		///<summary>Represents a GET on /_search_shards 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -7091,7 +7091,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> SearchShardsGet<T>(Func<SearchShardsRequestParameters, SearchShardsRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,SearchShardsRequestParameters>(GET, Url($"_search_shards"), requestParameters);
+			this.DoRequest<T>(GET, Url($"_search_shards"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_search_shards 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -7104,7 +7104,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> SearchShardsGetAsync<T>(Func<SearchShardsRequestParameters, SearchShardsRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,SearchShardsRequestParameters>(GET, Url($"_search_shards"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"_search_shards"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_search_shards 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -7118,7 +7118,7 @@ namespace Elasticsearch.Net
 		///<param name="index">The name of the index</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> SearchShardsGet<T>(string index, Func<SearchShardsRequestParameters, SearchShardsRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,SearchShardsRequestParameters>(GET, Url($"{index.NotNull("index")}/_search_shards"), requestParameters);
+			this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/_search_shards"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_search_shards 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -7132,7 +7132,7 @@ namespace Elasticsearch.Net
 		///<param name="index">The name of the index</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> SearchShardsGetAsync<T>(string index, Func<SearchShardsRequestParameters, SearchShardsRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,SearchShardsRequestParameters>(GET, Url($"{index.NotNull("index")}/_search_shards"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/_search_shards"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/{type}/_search_shards 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -7147,7 +7147,7 @@ namespace Elasticsearch.Net
 		///<param name="type">The type of the document</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> SearchShardsGet<T>(string index, string type, Func<SearchShardsRequestParameters, SearchShardsRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,SearchShardsRequestParameters>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_search_shards"), requestParameters);
+			this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_search_shards"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/{type}/_search_shards 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -7162,7 +7162,7 @@ namespace Elasticsearch.Net
 		///<param name="type">The type of the document</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> SearchShardsGetAsync<T>(string index, string type, Func<SearchShardsRequestParameters, SearchShardsRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,SearchShardsRequestParameters>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_search_shards"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_search_shards"), null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_search_shards 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -7175,7 +7175,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> SearchShards<T>(Func<SearchShardsRequestParameters, SearchShardsRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,SearchShardsRequestParameters>(POST, Url($"_search_shards"), requestParameters);
+			this.DoRequest<T>(POST, Url($"_search_shards"), null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_search_shards 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -7188,7 +7188,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> SearchShardsAsync<T>(Func<SearchShardsRequestParameters, SearchShardsRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,SearchShardsRequestParameters>(POST, Url($"_search_shards"), requestParameters);
+			this.DoRequestAsync<T>(POST, Url($"_search_shards"), null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_search_shards 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -7202,7 +7202,7 @@ namespace Elasticsearch.Net
 		///<param name="index">The name of the index</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> SearchShards<T>(string index, Func<SearchShardsRequestParameters, SearchShardsRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,SearchShardsRequestParameters>(POST, Url($"{index.NotNull("index")}/_search_shards"), requestParameters);
+			this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/_search_shards"), null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_search_shards 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -7216,7 +7216,7 @@ namespace Elasticsearch.Net
 		///<param name="index">The name of the index</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> SearchShardsAsync<T>(string index, Func<SearchShardsRequestParameters, SearchShardsRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,SearchShardsRequestParameters>(POST, Url($"{index.NotNull("index")}/_search_shards"), requestParameters);
+			this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/_search_shards"), null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/_search_shards 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -7231,7 +7231,7 @@ namespace Elasticsearch.Net
 		///<param name="type">The type of the document</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> SearchShards<T>(string index, string type, Func<SearchShardsRequestParameters, SearchShardsRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,SearchShardsRequestParameters>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_search_shards"), requestParameters);
+			this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_search_shards"), null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/_search_shards 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -7246,7 +7246,7 @@ namespace Elasticsearch.Net
 		///<param name="type">The type of the document</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> SearchShardsAsync<T>(string index, string type, Func<SearchShardsRequestParameters, SearchShardsRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,SearchShardsRequestParameters>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_search_shards"), requestParameters);
+			this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_search_shards"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_search/template 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -7259,7 +7259,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> SearchTemplateGet<T>(Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,SearchTemplateRequestParameters>(GET, Url($"_search/template"), requestParameters);
+			this.DoRequest<T>(GET, Url($"_search/template"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_search/template 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -7272,7 +7272,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> SearchTemplateGetAsync<T>(Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,SearchTemplateRequestParameters>(GET, Url($"_search/template"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"_search/template"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_search/template 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -7286,7 +7286,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> SearchTemplateGet<T>(string index, Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,SearchTemplateRequestParameters>(GET, Url($"{index.NotNull("index")}/_search/template"), requestParameters);
+			this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/_search/template"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_search/template 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -7300,7 +7300,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> SearchTemplateGetAsync<T>(string index, Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,SearchTemplateRequestParameters>(GET, Url($"{index.NotNull("index")}/_search/template"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/_search/template"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/{type}/_search/template 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -7315,7 +7315,7 @@ namespace Elasticsearch.Net
 		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> SearchTemplateGet<T>(string index, string type, Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,SearchTemplateRequestParameters>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_search/template"), requestParameters);
+			this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_search/template"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/{type}/_search/template 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -7330,7 +7330,7 @@ namespace Elasticsearch.Net
 		///<param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> SearchTemplateGetAsync<T>(string index, string type, Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,SearchTemplateRequestParameters>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_search/template"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_search/template"), null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_search/template 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -7344,7 +7344,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The search definition template and its params</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> SearchTemplate<T>(PostData<object> body, Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,SearchTemplateRequestParameters>(POST, Url($"_search/template"), requestParameters, body);
+			this.DoRequest<T>(POST, Url($"_search/template"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_search/template 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -7358,7 +7358,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The search definition template and its params</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> SearchTemplateAsync<T>(PostData<object> body, Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,SearchTemplateRequestParameters>(POST, Url($"_search/template"), requestParameters, body);
+			this.DoRequestAsync<T>(POST, Url($"_search/template"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_search/template 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -7373,7 +7373,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The search definition template and its params</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> SearchTemplate<T>(string index, PostData<object> body, Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,SearchTemplateRequestParameters>(POST, Url($"{index.NotNull("index")}/_search/template"), requestParameters, body);
+			this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/_search/template"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_search/template 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -7388,7 +7388,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The search definition template and its params</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> SearchTemplateAsync<T>(string index, PostData<object> body, Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,SearchTemplateRequestParameters>(POST, Url($"{index.NotNull("index")}/_search/template"), requestParameters, body);
+			this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/_search/template"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/_search/template 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -7404,7 +7404,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The search definition template and its params</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> SearchTemplate<T>(string index, string type, PostData<object> body, Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,SearchTemplateRequestParameters>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_search/template"), requestParameters, body);
+			this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_search/template"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/_search/template 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -7420,7 +7420,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The search definition template and its params</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> SearchTemplateAsync<T>(string index, string type, PostData<object> body, Func<SearchTemplateRequestParameters, SearchTemplateRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,SearchTemplateRequestParameters>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_search/template"), requestParameters, body);
+			this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_search/template"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /_snapshot/{repository}/{snapshot} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -7436,7 +7436,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The snapshot definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> SnapshotCreate<T>(string repository, string snapshot, PostData<object> body, Func<SnapshotRequestParameters, SnapshotRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,SnapshotRequestParameters>(PUT, Url($"_snapshot/{repository.NotNull("repository")}/{snapshot.NotNull("snapshot")}"), requestParameters, body);
+			this.DoRequest<T>(PUT, Url($"_snapshot/{repository.NotNull("repository")}/{snapshot.NotNull("snapshot")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /_snapshot/{repository}/{snapshot} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -7452,7 +7452,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The snapshot definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> SnapshotCreateAsync<T>(string repository, string snapshot, PostData<object> body, Func<SnapshotRequestParameters, SnapshotRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,SnapshotRequestParameters>(PUT, Url($"_snapshot/{repository.NotNull("repository")}/{snapshot.NotNull("snapshot")}"), requestParameters, body);
+			this.DoRequestAsync<T>(PUT, Url($"_snapshot/{repository.NotNull("repository")}/{snapshot.NotNull("snapshot")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_snapshot/{repository}/{snapshot} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -7468,7 +7468,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The snapshot definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> SnapshotCreatePost<T>(string repository, string snapshot, PostData<object> body, Func<SnapshotRequestParameters, SnapshotRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,SnapshotRequestParameters>(POST, Url($"_snapshot/{repository.NotNull("repository")}/{snapshot.NotNull("snapshot")}"), requestParameters, body);
+			this.DoRequest<T>(POST, Url($"_snapshot/{repository.NotNull("repository")}/{snapshot.NotNull("snapshot")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_snapshot/{repository}/{snapshot} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -7484,7 +7484,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The snapshot definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> SnapshotCreatePostAsync<T>(string repository, string snapshot, PostData<object> body, Func<SnapshotRequestParameters, SnapshotRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,SnapshotRequestParameters>(POST, Url($"_snapshot/{repository.NotNull("repository")}/{snapshot.NotNull("snapshot")}"), requestParameters, body);
+			this.DoRequestAsync<T>(POST, Url($"_snapshot/{repository.NotNull("repository")}/{snapshot.NotNull("snapshot")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /_snapshot/{repository} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -7499,7 +7499,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The repository definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> SnapshotCreateRepository<T>(string repository, PostData<object> body, Func<CreateRepositoryRequestParameters, CreateRepositoryRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,CreateRepositoryRequestParameters>(PUT, Url($"_snapshot/{repository.NotNull("repository")}"), requestParameters, body);
+			this.DoRequest<T>(PUT, Url($"_snapshot/{repository.NotNull("repository")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /_snapshot/{repository} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -7514,7 +7514,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The repository definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> SnapshotCreateRepositoryAsync<T>(string repository, PostData<object> body, Func<CreateRepositoryRequestParameters, CreateRepositoryRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,CreateRepositoryRequestParameters>(PUT, Url($"_snapshot/{repository.NotNull("repository")}"), requestParameters, body);
+			this.DoRequestAsync<T>(PUT, Url($"_snapshot/{repository.NotNull("repository")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_snapshot/{repository} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -7529,7 +7529,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The repository definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> SnapshotCreateRepositoryPost<T>(string repository, PostData<object> body, Func<CreateRepositoryRequestParameters, CreateRepositoryRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,CreateRepositoryRequestParameters>(POST, Url($"_snapshot/{repository.NotNull("repository")}"), requestParameters, body);
+			this.DoRequest<T>(POST, Url($"_snapshot/{repository.NotNull("repository")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_snapshot/{repository} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -7544,7 +7544,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The repository definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> SnapshotCreateRepositoryPostAsync<T>(string repository, PostData<object> body, Func<CreateRepositoryRequestParameters, CreateRepositoryRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,CreateRepositoryRequestParameters>(POST, Url($"_snapshot/{repository.NotNull("repository")}"), requestParameters, body);
+			this.DoRequestAsync<T>(POST, Url($"_snapshot/{repository.NotNull("repository")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a DELETE on /_snapshot/{repository}/{snapshot} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -7559,7 +7559,7 @@ namespace Elasticsearch.Net
 		///<param name="snapshot">A snapshot name</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> SnapshotDelete<T>(string repository, string snapshot, Func<DeleteSnapshotRequestParameters, DeleteSnapshotRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,DeleteSnapshotRequestParameters>(DELETE, Url($"_snapshot/{repository.NotNull("repository")}/{snapshot.NotNull("snapshot")}"), requestParameters);
+			this.DoRequest<T>(DELETE, Url($"_snapshot/{repository.NotNull("repository")}/{snapshot.NotNull("snapshot")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a DELETE on /_snapshot/{repository}/{snapshot} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -7574,7 +7574,7 @@ namespace Elasticsearch.Net
 		///<param name="snapshot">A snapshot name</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> SnapshotDeleteAsync<T>(string repository, string snapshot, Func<DeleteSnapshotRequestParameters, DeleteSnapshotRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,DeleteSnapshotRequestParameters>(DELETE, Url($"_snapshot/{repository.NotNull("repository")}/{snapshot.NotNull("snapshot")}"), requestParameters);
+			this.DoRequestAsync<T>(DELETE, Url($"_snapshot/{repository.NotNull("repository")}/{snapshot.NotNull("snapshot")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a DELETE on /_snapshot/{repository} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -7588,7 +7588,7 @@ namespace Elasticsearch.Net
 		///<param name="repository">A comma-separated list of repository names</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> SnapshotDeleteRepository<T>(string repository, Func<DeleteRepositoryRequestParameters, DeleteRepositoryRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,DeleteRepositoryRequestParameters>(DELETE, Url($"_snapshot/{repository.NotNull("repository")}"), requestParameters);
+			this.DoRequest<T>(DELETE, Url($"_snapshot/{repository.NotNull("repository")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a DELETE on /_snapshot/{repository} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -7602,7 +7602,7 @@ namespace Elasticsearch.Net
 		///<param name="repository">A comma-separated list of repository names</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> SnapshotDeleteRepositoryAsync<T>(string repository, Func<DeleteRepositoryRequestParameters, DeleteRepositoryRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,DeleteRepositoryRequestParameters>(DELETE, Url($"_snapshot/{repository.NotNull("repository")}"), requestParameters);
+			this.DoRequestAsync<T>(DELETE, Url($"_snapshot/{repository.NotNull("repository")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_snapshot/{repository}/{snapshot} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -7617,7 +7617,7 @@ namespace Elasticsearch.Net
 		///<param name="snapshot">A comma-separated list of snapshot names</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> SnapshotGet<T>(string repository, string snapshot, Func<GetSnapshotRequestParameters, GetSnapshotRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,GetSnapshotRequestParameters>(GET, Url($"_snapshot/{repository.NotNull("repository")}/{snapshot.NotNull("snapshot")}"), requestParameters);
+			this.DoRequest<T>(GET, Url($"_snapshot/{repository.NotNull("repository")}/{snapshot.NotNull("snapshot")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_snapshot/{repository}/{snapshot} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -7632,7 +7632,7 @@ namespace Elasticsearch.Net
 		///<param name="snapshot">A comma-separated list of snapshot names</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> SnapshotGetAsync<T>(string repository, string snapshot, Func<GetSnapshotRequestParameters, GetSnapshotRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,GetSnapshotRequestParameters>(GET, Url($"_snapshot/{repository.NotNull("repository")}/{snapshot.NotNull("snapshot")}"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"_snapshot/{repository.NotNull("repository")}/{snapshot.NotNull("snapshot")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_snapshot 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -7645,7 +7645,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> SnapshotGetRepository<T>(Func<GetRepositoryRequestParameters, GetRepositoryRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,GetRepositoryRequestParameters>(GET, Url($"_snapshot"), requestParameters);
+			this.DoRequest<T>(GET, Url($"_snapshot"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_snapshot 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -7658,7 +7658,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> SnapshotGetRepositoryAsync<T>(Func<GetRepositoryRequestParameters, GetRepositoryRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,GetRepositoryRequestParameters>(GET, Url($"_snapshot"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"_snapshot"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_snapshot/{repository} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -7672,7 +7672,7 @@ namespace Elasticsearch.Net
 		///<param name="repository">A comma-separated list of repository names</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> SnapshotGetRepository<T>(string repository, Func<GetRepositoryRequestParameters, GetRepositoryRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,GetRepositoryRequestParameters>(GET, Url($"_snapshot/{repository.NotNull("repository")}"), requestParameters);
+			this.DoRequest<T>(GET, Url($"_snapshot/{repository.NotNull("repository")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_snapshot/{repository} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -7686,7 +7686,7 @@ namespace Elasticsearch.Net
 		///<param name="repository">A comma-separated list of repository names</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> SnapshotGetRepositoryAsync<T>(string repository, Func<GetRepositoryRequestParameters, GetRepositoryRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,GetRepositoryRequestParameters>(GET, Url($"_snapshot/{repository.NotNull("repository")}"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"_snapshot/{repository.NotNull("repository")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_snapshot/{repository}/{snapshot}/_restore 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -7702,7 +7702,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Details of what to restore</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> SnapshotRestore<T>(string repository, string snapshot, PostData<object> body, Func<RestoreRequestParameters, RestoreRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,RestoreRequestParameters>(POST, Url($"_snapshot/{repository.NotNull("repository")}/{snapshot.NotNull("snapshot")}/_restore"), requestParameters, body);
+			this.DoRequest<T>(POST, Url($"_snapshot/{repository.NotNull("repository")}/{snapshot.NotNull("snapshot")}/_restore"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_snapshot/{repository}/{snapshot}/_restore 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -7718,7 +7718,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Details of what to restore</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> SnapshotRestoreAsync<T>(string repository, string snapshot, PostData<object> body, Func<RestoreRequestParameters, RestoreRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,RestoreRequestParameters>(POST, Url($"_snapshot/{repository.NotNull("repository")}/{snapshot.NotNull("snapshot")}/_restore"), requestParameters, body);
+			this.DoRequestAsync<T>(POST, Url($"_snapshot/{repository.NotNull("repository")}/{snapshot.NotNull("snapshot")}/_restore"), body, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_snapshot/_status 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -7731,7 +7731,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> SnapshotStatus<T>(Func<SnapshotStatusRequestParameters, SnapshotStatusRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,SnapshotStatusRequestParameters>(GET, Url($"_snapshot/_status"), requestParameters);
+			this.DoRequest<T>(GET, Url($"_snapshot/_status"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_snapshot/_status 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -7744,7 +7744,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> SnapshotStatusAsync<T>(Func<SnapshotStatusRequestParameters, SnapshotStatusRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,SnapshotStatusRequestParameters>(GET, Url($"_snapshot/_status"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"_snapshot/_status"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_snapshot/{repository}/_status 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -7758,7 +7758,7 @@ namespace Elasticsearch.Net
 		///<param name="repository">A repository name</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> SnapshotStatus<T>(string repository, Func<SnapshotStatusRequestParameters, SnapshotStatusRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,SnapshotStatusRequestParameters>(GET, Url($"_snapshot/{repository.NotNull("repository")}/_status"), requestParameters);
+			this.DoRequest<T>(GET, Url($"_snapshot/{repository.NotNull("repository")}/_status"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_snapshot/{repository}/_status 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -7772,7 +7772,7 @@ namespace Elasticsearch.Net
 		///<param name="repository">A repository name</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> SnapshotStatusAsync<T>(string repository, Func<SnapshotStatusRequestParameters, SnapshotStatusRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,SnapshotStatusRequestParameters>(GET, Url($"_snapshot/{repository.NotNull("repository")}/_status"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"_snapshot/{repository.NotNull("repository")}/_status"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_snapshot/{repository}/{snapshot}/_status 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -7787,7 +7787,7 @@ namespace Elasticsearch.Net
 		///<param name="snapshot">A comma-separated list of snapshot names</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> SnapshotStatus<T>(string repository, string snapshot, Func<SnapshotStatusRequestParameters, SnapshotStatusRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,SnapshotStatusRequestParameters>(GET, Url($"_snapshot/{repository.NotNull("repository")}/{snapshot.NotNull("snapshot")}/_status"), requestParameters);
+			this.DoRequest<T>(GET, Url($"_snapshot/{repository.NotNull("repository")}/{snapshot.NotNull("snapshot")}/_status"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_snapshot/{repository}/{snapshot}/_status 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -7802,7 +7802,7 @@ namespace Elasticsearch.Net
 		///<param name="snapshot">A comma-separated list of snapshot names</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> SnapshotStatusAsync<T>(string repository, string snapshot, Func<SnapshotStatusRequestParameters, SnapshotStatusRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,SnapshotStatusRequestParameters>(GET, Url($"_snapshot/{repository.NotNull("repository")}/{snapshot.NotNull("snapshot")}/_status"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"_snapshot/{repository.NotNull("repository")}/{snapshot.NotNull("snapshot")}/_status"), null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_snapshot/{repository}/_verify 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -7816,7 +7816,7 @@ namespace Elasticsearch.Net
 		///<param name="repository">A repository name</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> SnapshotVerifyRepository<T>(string repository, Func<VerifyRepositoryRequestParameters, VerifyRepositoryRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,VerifyRepositoryRequestParameters>(POST, Url($"_snapshot/{repository.NotNull("repository")}/_verify"), requestParameters);
+			this.DoRequest<T>(POST, Url($"_snapshot/{repository.NotNull("repository")}/_verify"), null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_snapshot/{repository}/_verify 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -7830,7 +7830,7 @@ namespace Elasticsearch.Net
 		///<param name="repository">A repository name</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> SnapshotVerifyRepositoryAsync<T>(string repository, Func<VerifyRepositoryRequestParameters, VerifyRepositoryRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,VerifyRepositoryRequestParameters>(POST, Url($"_snapshot/{repository.NotNull("repository")}/_verify"), requestParameters);
+			this.DoRequestAsync<T>(POST, Url($"_snapshot/{repository.NotNull("repository")}/_verify"), null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_suggest 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -7844,7 +7844,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The request definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> Suggest<T>(PostData<object> body, Func<SuggestRequestParameters, SuggestRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,SuggestRequestParameters>(POST, Url($"_suggest"), requestParameters, body);
+			this.DoRequest<T>(POST, Url($"_suggest"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_suggest 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -7858,7 +7858,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The request definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> SuggestAsync<T>(PostData<object> body, Func<SuggestRequestParameters, SuggestRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,SuggestRequestParameters>(POST, Url($"_suggest"), requestParameters, body);
+			this.DoRequestAsync<T>(POST, Url($"_suggest"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_suggest 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -7873,7 +7873,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The request definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> Suggest<T>(string index, PostData<object> body, Func<SuggestRequestParameters, SuggestRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,SuggestRequestParameters>(POST, Url($"{index.NotNull("index")}/_suggest"), requestParameters, body);
+			this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/_suggest"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/_suggest 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -7888,7 +7888,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The request definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> SuggestAsync<T>(string index, PostData<object> body, Func<SuggestRequestParameters, SuggestRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,SuggestRequestParameters>(POST, Url($"{index.NotNull("index")}/_suggest"), requestParameters, body);
+			this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/_suggest"), body, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_suggest 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -7901,7 +7901,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> SuggestGet<T>(Func<SuggestRequestParameters, SuggestRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,SuggestRequestParameters>(GET, Url($"_suggest"), requestParameters);
+			this.DoRequest<T>(GET, Url($"_suggest"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_suggest 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -7914,7 +7914,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> SuggestGetAsync<T>(Func<SuggestRequestParameters, SuggestRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,SuggestRequestParameters>(GET, Url($"_suggest"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"_suggest"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_suggest 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -7928,7 +7928,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> SuggestGet<T>(string index, Func<SuggestRequestParameters, SuggestRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,SuggestRequestParameters>(GET, Url($"{index.NotNull("index")}/_suggest"), requestParameters);
+			this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/_suggest"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/_suggest 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -7942,7 +7942,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> SuggestGetAsync<T>(string index, Func<SuggestRequestParameters, SuggestRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,SuggestRequestParameters>(GET, Url($"{index.NotNull("index")}/_suggest"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/_suggest"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/{type}/_termvector 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -7957,7 +7957,7 @@ namespace Elasticsearch.Net
 		///<param name="type">The type of the document.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> TermvectorGet<T>(string index, string type, Func<TermvectorRequestParameters, TermvectorRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,TermvectorRequestParameters>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_termvector"), requestParameters);
+			this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_termvector"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/{type}/_termvector 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -7972,7 +7972,7 @@ namespace Elasticsearch.Net
 		///<param name="type">The type of the document.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> TermvectorGetAsync<T>(string index, string type, Func<TermvectorRequestParameters, TermvectorRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,TermvectorRequestParameters>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_termvector"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_termvector"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/{type}/{id}/_termvector 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -7988,7 +7988,7 @@ namespace Elasticsearch.Net
 		///<param name="id">The id of the document.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> TermvectorGet<T>(string index, string type, string id, Func<TermvectorRequestParameters, TermvectorRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,TermvectorRequestParameters>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}/_termvector"), requestParameters);
+			this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}/_termvector"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /{index}/{type}/{id}/_termvector 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -8004,7 +8004,7 @@ namespace Elasticsearch.Net
 		///<param name="id">The id of the document.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> TermvectorGetAsync<T>(string index, string type, string id, Func<TermvectorRequestParameters, TermvectorRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,TermvectorRequestParameters>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}/_termvector"), requestParameters);
+			this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}/_termvector"), null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/_termvector 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -8020,7 +8020,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Define parameters. See documentation.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> Termvector<T>(string index, string type, PostData<object> body, Func<TermvectorRequestParameters, TermvectorRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,TermvectorRequestParameters>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_termvector"), requestParameters, body);
+			this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_termvector"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/_termvector 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -8036,7 +8036,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Define parameters. See documentation.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> TermvectorAsync<T>(string index, string type, PostData<object> body, Func<TermvectorRequestParameters, TermvectorRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,TermvectorRequestParameters>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_termvector"), requestParameters, body);
+			this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/_termvector"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/{id}/_termvector 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -8053,7 +8053,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Define parameters. See documentation.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> Termvector<T>(string index, string type, string id, PostData<object> body, Func<TermvectorRequestParameters, TermvectorRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,TermvectorRequestParameters>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}/_termvector"), requestParameters, body);
+			this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}/_termvector"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/{id}/_termvector 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -8070,7 +8070,7 @@ namespace Elasticsearch.Net
 		///<param name="body">Define parameters. See documentation.</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> TermvectorAsync<T>(string index, string type, string id, PostData<object> body, Func<TermvectorRequestParameters, TermvectorRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,TermvectorRequestParameters>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}/_termvector"), requestParameters, body);
+			this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}/_termvector"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/{id}/_update 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -8087,7 +8087,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The request definition using either `script` or partial `doc`</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public ElasticsearchResponse<T> Update<T>(string index, string type, string id, PostData<object> body, Func<UpdateRequestParameters, UpdateRequestParameters> requestParameters = null) =>
-			this.DoRequest<T,UpdateRequestParameters>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}/_update"), requestParameters, body);
+			this.DoRequest<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}/_update"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type}/{id}/_update 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -8104,7 +8104,7 @@ namespace Elasticsearch.Net
 		///<param name="body">The request definition using either `script` or partial `doc`</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		public Task<ElasticsearchResponse<T>> UpdateAsync<T>(string index, string type, string id, PostData<object> body, Func<UpdateRequestParameters, UpdateRequestParameters> requestParameters = null) =>
-			this.DoRequestAsync<T,UpdateRequestParameters>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}/_update"), requestParameters, body);
+			this.DoRequestAsync<T>(POST, Url($"{index.NotNull("index")}/{type.NotNull("type")}/{id.NotNull("id")}/_update"), body, _params(requestParameters));
 		
 	
 	  }

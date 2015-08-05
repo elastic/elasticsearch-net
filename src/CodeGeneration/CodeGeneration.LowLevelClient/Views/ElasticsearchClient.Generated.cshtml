@@ -48,7 +48,7 @@ namespace Elasticsearch.Net
 			}
 		<text>@Raw(@"///<param name=""requestParameters"">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>")</text>
 		<text>public @Raw(method.ReturnType) @(method.FullName)@(Raw(method.ReturnTypeGeneric))(@Raw(method.Arguments)) =>
-			this.@(requestMethod)@(Raw("<" + method.CallTypeGeneric + "," + method.QueryStringParamName +">"))(@method.HttpMethod, Url($"@(Raw(patchedUrl))"), requestParameters@(method.Parts.Any(pp=>pp.Name == "body") ? ", body" : "")@(method.Allow404 ? ", allow404: true" :"")@(Raw(url.StartsWith("_cat") ? ", contentType: \"text/plain\"" : "")));
+			this.@(requestMethod)@(Raw("<" + method.CallTypeGeneric +">"))(@method.HttpMethod, Url($"@(Raw(patchedUrl))"), @(method.Parts.Any(pp=>pp.Name == "body") ? "body" : "null"), _params(requestParameters@(method.Allow404 ? ", allow404: true" :"")@(Raw(url.StartsWith("_cat") ? ", contentType: \"text/plain\"" : ""))));
 		</text>
 		}
 	}
