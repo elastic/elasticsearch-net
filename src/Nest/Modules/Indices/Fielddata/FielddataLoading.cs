@@ -9,7 +9,7 @@ using System.Text;
 namespace Nest
 {
 	[JsonConverter(typeof(StringEnumConverter))]
-	public enum FielddataLoadingOption
+	public enum FielddataLoading
 	{
 		[EnumMember(Value = "eager")]
 		Eager,

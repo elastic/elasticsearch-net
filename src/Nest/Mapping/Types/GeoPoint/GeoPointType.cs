@@ -40,6 +40,9 @@ namespace Nest
 
 		[JsonProperty("precision_step")]
 		int? PrecisionStep { get; set; }
+
+		[JsonProperty("fielddata")]
+		IGeoPointFielddata Fielddata { get; set; }
 	}
 
 	public class GeoPointType : ElasticType, IGeoPointType
@@ -57,6 +60,7 @@ namespace Nest
 		public bool? NormalizeLatitude { get; set; }
 		public bool? NormalizeLongitude { get; set; }
 		public int? PrecisionStep { get; set; }
+		public IGeoPointFielddata Fielddata { get; set; }
 	}
 
 	public class GeoPointTypeDescriptor<T>
@@ -74,6 +78,7 @@ namespace Nest
 		bool? IGeoPointType.NormalizeLatitude { get; set; }
 		bool? IGeoPointType.NormalizeLongitude { get; set; }
 		int? IGeoPointType.PrecisionStep { get; set; }
+		IGeoPointFielddata IGeoPointType.Fielddata { get; set; }
 
 		public GeoPointTypeDescriptor<T> LatLon(bool latLon = true) => Assign(a => a.LatLon = latLon);
 
@@ -96,5 +101,8 @@ namespace Nest
 		public GeoPointTypeDescriptor<T> NormalizeLongitude(bool normalizeLongitude) => Assign(a => a.NormalizeLongitude = normalizeLongitude);
 
 		public GeoPointTypeDescriptor<T> PrecisionStep(int precisionStep) => Assign(a => a.PrecisionStep = precisionStep);
+
+		public GeoPointTypeDescriptor<T> Fielddata(Func<GeoPointFielddataDescriptor, IGeoPointFielddata> selector) =>
+			Assign(a => a.Fielddata = selector(new GeoPointFielddataDescriptor()));
 	}
 }

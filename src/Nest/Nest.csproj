@@ -129,6 +129,12 @@
     <Compile Include="Mapping\SimilarityOption.cs" />
     <Compile Include="Mapping\Types\TokenCount\TokenCountType.cs" />
     <Compile Include="Mapping\Types\TypeDescriptorBase.cs" />
+    <Compile Include="Modules\Indices\Fielddata\GeoPoint\GeoPointFielddata.cs" />
+    <Compile Include="Modules\Indices\Fielddata\GeoPoint\GeoPointFielddataFormat.cs" />
+    <Compile Include="Modules\Indices\Fielddata\Numeric\NumericFielddataFormat.cs" />
+    <Compile Include="Modules\Indices\Fielddata\Numeric\NumericFielddata.cs" />
+    <Compile Include="Modules\Indices\Fielddata\String\StringFielddata.cs" />
+    <Compile Include="Modules\Indices\Fielddata\String\StringFielddataFormat.cs" />
     <Compile Include="QueryDsl\Compound\Bool\BoolQuery.cs" />
     <Compile Include="QueryDsl\Compound\Bool\BoolQueryExtensions.cs" />
     <Compile Include="QueryDsl\Compound\Indices\NoMatchQueryConverter.cs" />
@@ -277,7 +283,7 @@
     <Compile Include="QueryDsl\Geo\Shape\Point\PointGeoShape.cs" />
     <Compile Include="QueryDsl\Geo\Shape\Polygon\PolygonGeoShape.cs" />
     <Compile Include="Mapping\Fields\FieldNames\FieldNamesField.cs" />
-    <Compile Include="Modules\Indices\Fielddata\Fielddata.cs" />
+    <Compile Include="Modules\Indices\Fielddata\FielddataBase.cs" />
     <Compile Include="Mapping\Norms\NormsMapping.cs" />
     <Compile Include="Document\Multiple\DeleteByQuery\DeleteByQueryResponse.cs" />
     <Compile Include="Mapping\Transform\MappingTransform.cs" />
@@ -527,8 +533,7 @@
     <Compile Include="Indices\MappingManagement\TypesExists\ElasticClient-TypeExists.cs" />
     <Compile Include="Search\Explain\ElasticClient-Explain.cs" />
     <Compile Include="Indices\StatusManagement\Upgrade\ElasticClient-Upgrade.cs" />
-    <Compile Include="Modules\Indices\Fielddata\FielddataLoadingOption.cs" />
-    <Compile Include="Modules\Indices\Fielddata\FielddataFormatOption.cs" />
+    <Compile Include="Modules\Indices\Fielddata\FielddataLoading.cs" />
     <Compile Include="CommonOptions\Geo\GeoShapeRelation.cs" />
     <Compile Include="Search\Search\Highlighting\HighlighterType.cs" />
     <Compile Include="Mapping\Norms\NormsLoading.cs" />

@@ -6,6 +6,7 @@ using System.Linq;
 
 namespace Nest
 {
+	[JsonObject(MemberSerialization.OptIn)]
 	public interface IElasticType : IFieldMapping
 	{
 		FieldName Name { get; set; }
@@ -28,23 +29,19 @@ namespace Nest
 
 		[JsonProperty("copy_to")]
 		IEnumerable<FieldName> CopyTo { get; set; }
-
-		[JsonProperty("fielddata")]
-		IFielddata Fielddata { get; set; }
 	}
 
 	public abstract class ElasticType : IElasticType
 	{
 		public ElasticType(TypeName typeName)
 		{
-			this.Type = typeName;
+			Type = typeName;
 		}
 
 		public FieldName Name { get; set; }
 		public virtual TypeName Type { get; set; }
 		public IEnumerable<FieldName> CopyTo { get; set; }
 		public bool DocValues { get; set; }
-		public IFielddata Fielddata { get; set; }
 		public IDictionary<FieldName, IElasticType> Fields { get; set; }
 		public string IndexName { get; set; }
 		public SimilarityOption Similarity { get; set; }

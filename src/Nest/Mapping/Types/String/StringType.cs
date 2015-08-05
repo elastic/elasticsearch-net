@@ -42,6 +42,9 @@ namespace Nest
 
 		[JsonProperty("position_offset_gap")]
 		int? PositionOffsetGap { get; set; }
+
+		[JsonProperty("fielddata")]
+		IStringFielddata Fielddata { get; set; }
 	}
 
 	public class StringType : ElasticType, IStringType
@@ -59,6 +62,7 @@ namespace Nest
 		public bool? IncludeInAll { get; set; }
 		public int? IgnoreAbove { get; set; }
 		public int? PositionOffsetGap { get; set; }
+		public IStringFielddata Fielddata { get; set; }
 	}
 
 	public class StringTypeDescriptor<T> 
@@ -76,7 +80,7 @@ namespace Nest
 		bool? IStringType.IncludeInAll { get; set; }
 		int? IStringType.IgnoreAbove { get; set; }
 		int? IStringType.PositionOffsetGap { get; set; }
-
+		IStringFielddata IStringType.Fielddata { get; set; }
 		/// <summary>
 		/// Shortcut into .Index(FieldIndexOption.NotAnalyzed)
 		/// </summary>
@@ -103,5 +107,8 @@ namespace Nest
 		public StringTypeDescriptor<T> IncludeInAll(bool includeInAll = true) => Assign(a => a.IncludeInAll = includeInAll);
 
 		public StringTypeDescriptor<T> PositionOffsetGap(int positionOffsetGap) => Assign(a => a.PositionOffsetGap = positionOffsetGap);
+
+		public StringTypeDescriptor<T> Fielddata(Func<StringFielddataDescriptor, IStringFielddata> selector) =>
+			Assign(a => selector(new StringFielddataDescriptor()));
 	}
 }

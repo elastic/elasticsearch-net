@@ -13,10 +13,15 @@ namespace Nest
 	{
 		[JsonProperty("index")]
 		NonStringIndexOption? Index { get; set; }
+
 		[JsonProperty("boost")]
 		double? Boost { get; set; }
+
 		[JsonProperty("null_value")]
 		bool? NullValue { get; set; }
+
+		[JsonProperty("fielddata")]
+		INumericFielddata Fielddata { get; set; }
 	}
 	
 	public class BooleanType : ElasticType, IBooleanType
@@ -26,6 +31,7 @@ namespace Nest
 		public NonStringIndexOption? Index { get; set; }
 		public double? Boost { get; set; }
 		public bool? NullValue { get; set; }
+		public INumericFielddata Fielddata { get; set; }
 	}
 
 	public class BooleanTypeDescriptor<T>
@@ -35,9 +41,12 @@ namespace Nest
 		double? IBooleanType.Boost { get; set; }
 		NonStringIndexOption? IBooleanType.Index { get; set; }
 		bool? IBooleanType.NullValue { get; set; }
+		INumericFielddata IBooleanType.Fielddata { get; set; }
 
 		public BooleanTypeDescriptor<T> Boost(double boost) => Assign(a => a.Boost = boost);
 		public BooleanTypeDescriptor<T> Index(NonStringIndexOption index) => Assign(a => a.Index = index);
 		public BooleanTypeDescriptor<T> NullValue(bool nullValue) => Assign(a => a.NullValue = nullValue);
+		public BooleanTypeDescriptor<T> Fielddata(Func<NumericFielddataDescriptor, INumericFielddata> selector) =>
+			Assign(a => a.Fielddata = selector(new NumericFielddataDescriptor()));
 	}
 }

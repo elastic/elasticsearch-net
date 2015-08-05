@@ -29,6 +29,9 @@ namespace Nest
 
 		[JsonProperty("coerce")]
 		bool? Coerce { get; set; }
+
+		[JsonProperty("fielddata")]
+		INumericFielddata Fielddata { get; set; }
 	}
 
 	public class NumberType : ElasticType, INumberType
@@ -44,6 +47,7 @@ namespace Nest
 		public int? PrecisionStep { get; set; }
 		public bool? IgnoreMalformed { get; set; }
 		public bool? Coerce { get; set; }
+		public INumericFielddata Fielddata { get; set; }
 	}
 
 	public class NumberTypeDescriptor<T> 
@@ -57,6 +61,7 @@ namespace Nest
 		int? INumberType.PrecisionStep { get; set; }
 		bool? INumberType.IgnoreMalformed { get; set; }
 		bool? INumberType.Coerce { get; set; }
+		INumericFielddata INumberType.Fielddata { get; set; }
 
 		public NumberTypeDescriptor<T> Type(NumberTypeName type) => Assign(a => a.Type = type.GetStringValue());
 
@@ -72,18 +77,7 @@ namespace Nest
 
 		public NumberTypeDescriptor<T> Coerce(bool coerce = true) => Assign(a => a.Coerce = coerce);
 
-		//public NumberTypeDescriptor<T> FieldData(Func<FieldDataNonStringMappingDescriptor, FieldDataNonStringMappingDescriptor> fieldDataSelector)
-		//{
-		//	fieldDataSelector.ThrowIfNull("fieldDataSelector");
-		//	var selector = fieldDataSelector(new FieldDataNonStringMappingDescriptor());
-		//	this._Mapping.FieldData = selector.FieldData;
-		//	return this;
-		//}
-
-		//public NumberTypeDescriptor<T> FieldData(FieldDataNonStringMapping fieldData)
-		//{
-		//	this._Mapping.FieldData = fieldData;
-		//	return this;
-		//}
+		public NumberTypeDescriptor<T> Fielddata(Func<NumericFielddataDescriptor, INumericFielddata> selector) =>
+			Assign(a => a.Fielddata = selector(new NumericFielddataDescriptor()));
 	}
 }

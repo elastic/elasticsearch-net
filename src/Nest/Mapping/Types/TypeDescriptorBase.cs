@@ -19,7 +19,6 @@ namespace Nest
 		bool IElasticType.DocValues { get; set; }
 		SimilarityOption IElasticType.Similarity { get; set; }
 		IEnumerable<FieldName> IElasticType.CopyTo { get; set; }
-		IFielddata IElasticType.Fielddata { get; set; }
 		IDictionary<FieldName, IElasticType> IElasticType.Fields { get; set; }
 
 		public TDescriptor Name(FieldName name) => Assign(a => a.Name = name);
@@ -48,8 +47,5 @@ namespace Nest
 		public TDescriptor Similarity(SimilarityOption similarity) => Assign(a => a.Similarity = similarity);
 
 		public TDescriptor CopyTo(IEnumerable<FieldName> copyTo) => Assign(a => a.CopyTo = copyTo);
-
-		public TDescriptor Fielddata(Func<FielddataDescriptor, IFielddata> selector) =>
-			Assign(a => a.Fielddata = selector(new FielddataDescriptor()));
 	}
 }

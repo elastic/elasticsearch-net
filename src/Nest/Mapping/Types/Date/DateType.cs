@@ -32,6 +32,9 @@ namespace Nest
 		
 		[JsonProperty("numeric_resolution")]
         NumericResolutionUnit? NumericResolution { get; set; }
+
+		[JsonProperty("fielddata")]
+		INumericFielddata Fielddata { get; set; }
 	}
 
 	public class DateType : ElasticType, IDateType
@@ -46,6 +49,7 @@ namespace Nest
 		public bool? IgnoreMalformed { get; set; }
 		public string Format { get; set; }
 		public NumericResolutionUnit? NumericResolution { get; set; }
+		public INumericFielddata Fielddata { get; set; }
 	}
 
 	public class DateTypeDescriptor<T> 
@@ -60,6 +64,7 @@ namespace Nest
 		bool? IDateType.IgnoreMalformed { get; set; }
 		string IDateType.Format { get; set; }
 		NumericResolutionUnit? IDateType.NumericResolution { get; set; }
+		INumericFielddata IDateType.Fielddata { get; set; }
 
 		public DateTypeDescriptor<T> Index(NonStringIndexOption index = NonStringIndexOption.No) => Assign(a => a.Index = index);
 		public DateTypeDescriptor<T> Boost(double boost) => Assign(a => a.Boost = boost);
@@ -69,5 +74,7 @@ namespace Nest
 		public DateTypeDescriptor<T> IgnoreMalformed(bool ignoreMalformed = true) => Assign(a => a.IgnoreMalformed = ignoreMalformed);
 		public DateTypeDescriptor<T> Format(string format) => Assign(a => a.Format = format);
 		public DateTypeDescriptor<T> NumericResolution(NumericResolutionUnit unit) => Assign(a => a.NumericResolution = unit);
+		public DateTypeDescriptor<T> Fielddata(Func<NumericFielddataDescriptor, INumericFielddata> selector) =>
+			Assign(a => a.Fielddata = selector(new NumericFielddataDescriptor()));
 	}
 }
