@@ -3,130 +3,57 @@ using System.Collections.Generic;
 
 namespace Nest
 {
-	public class SingleMappingDescriptor<T> where T : class
+	public class SingleMappingDescriptor<T> 
+		: IPropertiesDescriptor<T, IElasticType>
+		where T : class
 	{
-		private readonly IConnectionSettingsValues _connectionSettings;
+		private readonly IConnectionSettingsValues ConnectionSettings;
 
 		public SingleMappingDescriptor(IConnectionSettingsValues connectionSettings)
 		{
-			this._connectionSettings = connectionSettings;
-		}
-		public IElasticType String(Func<StringTypeDescriptor<T>, StringTypeDescriptor<T>> selector)
-		{
-			selector.ThrowIfNull("selector");
-			var d = selector(new StringTypeDescriptor<T>());
-			if (d == null)
-				throw new Exception("Could not get string mapping");
-			return d;
+			ConnectionSettings = connectionSettings;
 		}
 
-		public IElasticType Number(Func<NumberTypeDescriptor<T>, NumberTypeDescriptor<T>> selector)
-		{
-			selector.ThrowIfNull("selector");
-			var d = selector(new NumberTypeDescriptor<T>());
-			if (d == null)
-				throw new Exception("Could not get number mapping");
-			return d;
-		}
+		public IElasticType String(Func<StringTypeDescriptor<T>, IStringType> selector) =>
+			selector?.Invoke(new StringTypeDescriptor<T>());
 
-		public IElasticType Date(Func<DateTypeDescriptor<T>, DateTypeDescriptor<T>> selector)
-		{
-			selector.ThrowIfNull("selector");
-			var d = selector(new DateTypeDescriptor<T>());
-			if (d == null)
-				throw new Exception("Could not get date mapping");
-			return d;
-		}
+		public IElasticType Number(Func<NumberTypeDescriptor<T>, INumberType> selector) =>
+			selector?.Invoke(new NumberTypeDescriptor<T>());
 
-		public IElasticType Boolean(Func<BooleanTypeDescriptor<T>, BooleanTypeDescriptor<T>> selector)
-		{
-			selector.ThrowIfNull("selector");
-			var d = selector(new BooleanTypeDescriptor<T>());
-			if (d == null)
-				throw new Exception("Could not get boolean mapping");
-			return d;
-		}
+		public IElasticType Date(Func<DateTypeDescriptor<T>, IDateType> selector) =>
+			selector?.Invoke(new DateTypeDescriptor<T>());
 
-		public IElasticType Binary(Func<BinaryTypeDescriptor<T>, BinaryTypeDescriptor<T>> selector)
-		{
-			selector.ThrowIfNull("selector");
-			var d = selector(new BinaryTypeDescriptor<T>());
-			if (d == null)
-				throw new Exception("Could not get binary mapping");
-			return d;
-		}
-		public IElasticType Attachment(Func<AttachmentTypeDescriptor<T>, AttachmentTypeDescriptor<T>> selector)
-		{
-			selector.ThrowIfNull("selector");
-			var d = selector(new AttachmentTypeDescriptor<T>());
-			if (d == null)
-				throw new Exception("Could not get attachment mapping");
-			return d;
-		}
+		public IElasticType Boolean(Func<BooleanTypeDescriptor<T>, IBooleanType> selector) =>
+			selector?.Invoke(new BooleanTypeDescriptor<T>());
 
-		public IElasticType Object<TChild>(Func<ObjectTypeDescriptor<T, TChild>, ObjectTypeDescriptor<T, TChild>> selector)
-			where TChild : class
-		{
-			selector.ThrowIfNull("selector");
-			var d = selector(new ObjectTypeDescriptor<T, TChild>(this._connectionSettings));
-			if (d == null)
-				throw new Exception("Could not get object mapping");
-			return d;
-		}
-		
-		public IElasticType NestedObject<TChild>(Func<NestedObjectTypeDescriptor<T, TChild>, NestedObjectTypeDescriptor<T, TChild>> selector)
-			where TChild : class
-		{
-			selector.ThrowIfNull("selector");
-			var d = selector(new NestedObjectTypeDescriptor<T, TChild>(this._connectionSettings));
-			if (d == null)
-				throw new Exception("Could not get nested object mapping");
-			return d;
-		}
-		
-		public IElasticType Ip(Func<IpTypeDescriptor<T>, IpTypeDescriptor<T>> selector)
-		{
-			selector.ThrowIfNull("selector");
-			var d = selector(new IpTypeDescriptor<T>());
-			if (d == null)
-				throw new Exception("Could not get IP mapping");
-			return d;
-		}
+		public IElasticType Binary(Func<BinaryTypeDescriptor<T>, IBinaryType> selector) =>
+			selector?.Invoke(new BinaryTypeDescriptor<T>());
 
-		public IElasticType GeoPoint(Func<GeoPointTypeDescriptor<T>, GeoPointTypeDescriptor<T>> selector)
-		{
-			selector.ThrowIfNull("selector");
-			var d = selector(new GeoPointTypeDescriptor<T>());
-			if (d == null)
-				throw new Exception("Could not get geo point mapping");
-			return d;
-		}
+		public IElasticType Attachment(Func<AttachmentTypeDescriptor<T>, IAttachmentType> selector) =>
+			selector?.Invoke(new AttachmentTypeDescriptor<T>());
 
-		public IElasticType GeoShape(Func<GeoShapeTypeDescriptor<T>, GeoShapeTypeDescriptor<T>> selector)
-		{
-			selector.ThrowIfNull("selector");
-			var d = selector(new GeoShapeTypeDescriptor<T>());
-			if (d == null)
-				throw new Exception("Could not get geo shape mapping");
-			return d;
-		}
+		public IElasticType Object<TChild>(Func<ObjectTypeDescriptor<T, TChild>, IObjectType> selector)
+			where TChild : class => selector?.Invoke(new ObjectTypeDescriptor<T, TChild>(ConnectionSettings));
 
-		public IElasticType Completion(Func<CompletionTypeDescriptor<T>, CompletionTypeDescriptor<T>> selector)
-        {
-            selector.ThrowIfNull("selector");
-            var d = selector(new CompletionTypeDescriptor<T>());
-            if (d == null)
-                throw new Exception("Could not get completion mapping");
-			return d;
-        }
+		public IElasticType Nested<TChild>(Func<NestedObjectTypeDescriptor<T, TChild>, INestedType> selector)
+			where TChild : class => selector?.Invoke(new NestedObjectTypeDescriptor<T, TChild>(ConnectionSettings));
 
-		public IElasticType Murmur3Hash(Func<Murmur3HashTypeDescriptor<T>, Murmur3HashTypeDescriptor<T>> selector)
-		{
-			selector.ThrowIfNull("selector");
-			var d = selector(new Murmur3HashTypeDescriptor<T>());
-			if (d == null)
-				throw new Exception("Could not get murmur hash mapping");
-			return d;
-		}
+		public IElasticType Ip(Func<IpTypeDescriptor<T>, IIpType> selector) =>
+			selector?.Invoke(new IpTypeDescriptor<T>());
+
+		public IElasticType GeoPoint(Func<GeoPointTypeDescriptor<T>, IGeoPointType> selector) =>
+			selector?.Invoke(new GeoPointTypeDescriptor<T>());
+
+		public IElasticType GeoShape(Func<GeoShapeTypeDescriptor<T>, IGeoShapeType> selector) =>
+			selector?.Invoke(new GeoShapeTypeDescriptor<T>());
+
+		public IElasticType Completion(Func<CompletionTypeDescriptor<T>, ICompletionType> selector) =>
+			selector?.Invoke(new CompletionTypeDescriptor<T>());
+
+		public IElasticType Murmur3Hash(Func<Murmur3HashTypeDescriptor<T>, IMurmur3HashType> selector) =>
+			selector?.Invoke(new Murmur3HashTypeDescriptor<T>());
+
+		public IElasticType TokenCount(Func<TokenCountTypeDescriptor<T>, ITokenCountType> selector) =>
+			selector?.Invoke(new TokenCountTypeDescriptor<T>());
 	}
 }

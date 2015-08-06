@@ -4,11 +4,34 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public class PropertiesDescriptor<T> where T : class
+	public interface IPropertiesDescriptor<T, TReturnType>
+		where T : class
+		where TReturnType : class
 	{
-		private readonly IConnectionSettingsValues _connectionSettings;
-		
-		internal IList<string> _Deletes = new List<string>();
+		TReturnType String(Func<StringTypeDescriptor<T>, IStringType> selector);
+		TReturnType Number(Func<NumberTypeDescriptor<T>, INumberType> selector);
+		TReturnType TokenCount(Func<TokenCountTypeDescriptor<T>, ITokenCountType> selector);
+		TReturnType Date(Func<DateTypeDescriptor<T>, IDateType> selector);
+		TReturnType Boolean(Func<BooleanTypeDescriptor<T>, IBooleanType> selector);
+		TReturnType Binary(Func<BinaryTypeDescriptor<T>, IBinaryType> selector);
+		TReturnType Attachment(Func<AttachmentTypeDescriptor<T>, IAttachmentType> selector);
+		TReturnType Object<TChild>(Func<ObjectTypeDescriptor<T, TChild>, IObjectType> selector)
+			where TChild : class;
+		TReturnType Nested<TChild>(Func<NestedObjectTypeDescriptor<T, TChild>, INestedType> selector)
+			where TChild : class;
+		TReturnType Ip(Func<IpTypeDescriptor<T>, IIpType> selector);
+		TReturnType GeoPoint(Func<GeoPointTypeDescriptor<T>, IGeoPointType> selector);
+		TReturnType GeoShape(Func<GeoShapeTypeDescriptor<T>, IGeoShapeType> selector);
+		TReturnType Completion(Func<CompletionTypeDescriptor<T>, ICompletionType> selector);
+		TReturnType Murmur3Hash(Func<Murmur3HashTypeDescriptor<T>, IMurmur3HashType> selector);
+	}
+
+	public class PropertiesDescriptor<T> : IPropertiesDescriptor<T, PropertiesDescriptor<T>>
+		where T : class
+	{
+		private readonly IConnectionSettingsValues ConnectionSettings;
+
+		internal IList<string> Deletes = new List<string>();
 
 		[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]
 		public IDictionary<FieldName, IElasticType> Properties { get; private set; }
@@ -20,25 +43,12 @@ namespace Nest
 		
 		public PropertiesDescriptor(IConnectionSettingsValues connectionSettings) : this()
 		{
-			_connectionSettings = connectionSettings;
+			ConnectionSettings = connectionSettings;
 		}
 
 		public PropertiesDescriptor<T> Remove(string name)
 		{
-			_Deletes.Add(name);
-			return this;
-		}
-
-		private PropertiesDescriptor<T> SetProperty<TDescriptor, TInterface>(Func<TDescriptor, TInterface> selector)
-			where TDescriptor : class, TInterface
-			where TInterface : class, IElasticType
-		{
-			selector.ThrowIfNull(nameof(selector));
-			var type = selector(Activator.CreateInstance<TDescriptor>());
-			var typeName = typeof(TInterface).Name;
-			if (type == null || type.Name.IsConditionless())
-				throw new ArgumentException($"Could not get field name for {typeName} mapping");
-			Properties[type.Name] = type;
+			Deletes.Add(name);
 			return this;
 		}
 
@@ -56,28 +66,41 @@ namespace Nest
 
 		public PropertiesDescriptor<T> Attachment(Func<AttachmentTypeDescriptor<T>, IAttachmentType> selector) => SetProperty(selector);
 
-		public PropertiesDescriptor<T> Object<TChild>(Func<ObjectTypeDescriptor<T, TChild>, ObjectTypeDescriptor<T, TChild>> selector)
+		public PropertiesDescriptor<T> Object<TChild>(Func<ObjectTypeDescriptor<T, TChild>, IObjectType> selector)
 			where TChild : class => SetProperty(selector);
 
-		public PropertiesDescriptor<T> Nested<TChild>(Func<NestedObjectTypeDescriptor<T, TChild>, NestedObjectTypeDescriptor<T, TChild>> selector)
+		public PropertiesDescriptor<T> Nested<TChild>(Func<NestedObjectTypeDescriptor<T, TChild>, INestedType> selector)
 			where TChild : class => SetProperty(selector);
 
 		public PropertiesDescriptor<T> Ip(Func<IpTypeDescriptor<T>, IIpType> selector) => SetProperty(selector);
 
 		public PropertiesDescriptor<T> GeoPoint(Func<GeoPointTypeDescriptor<T>, IGeoPointType> selector) => SetProperty(selector);
 
-		public PropertiesDescriptor<T> GeoShape(Func<GeoShapeTypeDescriptor<T>, GeoShapeTypeDescriptor<T>> selector) => SetProperty(selector);
+		public PropertiesDescriptor<T> GeoShape(Func<GeoShapeTypeDescriptor<T>, IGeoShapeType> selector) => SetProperty(selector);
 
 		public PropertiesDescriptor<T> Completion(Func<CompletionTypeDescriptor<T>, ICompletionType> selector) => SetProperty(selector);
 
 		public PropertiesDescriptor<T> Murmur3Hash(Func<Murmur3HashTypeDescriptor<T>, IMurmur3HashType> selector) => SetProperty(selector);
 
-		public PropertiesDescriptor<T> Custom(IElasticType customMapping)
+		public PropertiesDescriptor<T> Custom(IElasticType customType) => SetProperty(customType);
+
+		private PropertiesDescriptor<T> SetProperty<TDescriptor, TInterface>(Func<TDescriptor, TInterface> selector)
+			where TDescriptor : class, TInterface
+			where TInterface : class, IElasticType
 		{
-			customMapping.ThrowIfNull(nameof(customMapping));
-			if (customMapping.Name.IsConditionless())
-                throw new Exception("Could not get field name for custom mapping");
-			this.Properties.Add(customMapping.Name, customMapping);
+			selector.ThrowIfNull(nameof(selector));
+			var type = selector(Activator.CreateInstance<TDescriptor>());
+			SetProperty(type);
+			return this;
+		}
+
+		private PropertiesDescriptor<T> SetProperty(IElasticType type)
+		{
+			type.ThrowIfNull(nameof(type));
+			var typeName = type.GetType().Name;
+			if (type.Name.IsConditionless())
+				throw new ArgumentException($"Could not get field name for {typeName} mapping");
+			Properties[type.Name] = type;
 			return this;
 		}
 	}
