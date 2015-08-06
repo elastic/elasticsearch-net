@@ -29,7 +29,7 @@ namespace Nest
 
 		public IElasticsearchClient Raw { get; }
 
-		public ElasticClient() : this(new ConnectionSettings()) { }
+		public ElasticClient(Uri uri) : this(new ConnectionSettings(uri)) { }
 		public ElasticClient(IConnectionSettingsValues connectionSettings) 
 			: this(new Transport<IConnectionSettingsValues>(connectionSettings ?? new ConnectionSettings())) { }
 

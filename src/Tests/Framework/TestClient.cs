@@ -13,7 +13,7 @@ namespace Tests.Framework
 {
 	public static class TestClient
 	{
-		private static bool _integrationOverride = true;
+		private static bool _integrationOverride = false;
 		private static string _manualOverrideVersion = "2.0.0";
 
 		public static string ElasticsearchVersion => 
@@ -39,6 +39,8 @@ namespace Tests.Framework
 					.Ignore(p=>p.PrivateValue)
 					.Rename(p=>p.OnlineHandle, "nickname")
 				)
+				//We try and fetch the test name during integration tests when running fiddler to send the name 
+				//as the TestMethod header, this allows us to quickly identify which test sent which request
 				.SetGlobalHeaders(new NameValueCollection { {"TestMethod", ExpensiveTestNameForIntegrationTests()} });
 
 			var settings = modifySettings != null ? modifySettings(defaultSettings) : defaultSettings;

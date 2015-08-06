@@ -24,7 +24,7 @@ namespace Elasticsearch.Net.ConnectionPool
 		/// <summary>
 		/// Signals that this implemenation can accept new nodes
 		/// </summary>
-		bool AcceptsUpdates { get; }
+		bool SupportsReseeding { get; }
 
 		bool SupportsPinging { get; }
 
@@ -47,12 +47,12 @@ namespace Elasticsearch.Net.ConnectionPool
 		///  predictable manner even when called in a multithreaded context</param>
 		/// <param name="cursor">The seed this call started on</param>
 		/// <returns></returns>
-		Node GetNext(int? cursor, out int newCursor);
+		Node GetNext(int? cursor, out int? newCursor);
 
 		/// <summary>
 		/// Update the node list, it's the IConnectionPool's responsibility to do so in a threadsafe fashion
 		/// </summary>
-		void Update(IEnumerable<Node> nodes);
+		void Reseed(IEnumerable<Node> nodes);
 
 	}
 }

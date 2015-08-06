@@ -10,10 +10,10 @@ namespace Elasticsearch.Net.ConnectionPool
 
 		public int MaxRetries => 0;
 
-		public bool AcceptsUpdates => false;
+		public bool SupportsReseeding => false;
 		public bool SupportsPinging => false;
 
-		public void Update(IEnumerable<Node> nodes) { } //ignored
+		public void Reseed(IEnumerable<Node> nodes) { } //ignored
 		
 		public bool UsingSsl { get; }
 
@@ -30,7 +30,7 @@ namespace Elasticsearch.Net.ConnectionPool
 			this.Nodes = new List<Node> { this._node };
 		}
 
-		public Node GetNext(int? cursor, out int newCursor)
+		public Node GetNext(int? cursor, out int? newCursor)
 		{
 			newCursor = 0;
 			return this._node;

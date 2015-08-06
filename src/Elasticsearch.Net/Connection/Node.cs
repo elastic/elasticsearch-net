@@ -4,7 +4,6 @@ using Elasticsearch.Net.Providers;
 
 namespace Elasticsearch.Net.Connection
 {
-
 	public class Node
 	{
 		public Node(Uri uri)
@@ -56,5 +55,17 @@ namespace Elasticsearch.Net.Connection
 		}
 
 		public Uri CreatePath(string path) => new Uri(this.Uri, path).Purify();
+
+		public Node Clone() =>
+			new Node(this.Uri)
+			{
+				IsResurrected = this.IsResurrected,
+				HoldsData = this.HoldsData,
+				MasterEligable = this.MasterEligable,
+				FailedAttempts = this.FailedAttempts,
+				DeadUntil = this.DeadUntil,
+				IsAlive = this.IsAlive
+			};
+
 	}
 }

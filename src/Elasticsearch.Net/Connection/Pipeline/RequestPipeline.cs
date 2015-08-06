@@ -66,7 +66,7 @@ namespace Elasticsearch.Net.Connection
 
 		public bool FirstPoolUsage()
 		{
-			if (!this._settings.SniffsOnStartup || !this._connectionPool.AcceptsUpdates || this._connectionPool.SniffedOnStartup)
+			if (!this._settings.SniffsOnStartup || !this._connectionPool.SupportsReseeding || this._connectionPool.SniffedOnStartup)
 				return false;
 
 			this.Sniff();
@@ -76,7 +76,7 @@ namespace Elasticsearch.Net.Connection
 
 		public async Task<bool> FirstPoolUsageAsync()
 		{
-			if (!this._settings.SniffsOnStartup || !this._connectionPool.AcceptsUpdates || this._connectionPool.SniffedOnStartup)
+			if (!this._settings.SniffsOnStartup || !this._connectionPool.SupportsReseeding || this._connectionPool.SniffedOnStartup)
 				return false;
 
 			await this.SniffAsync();
@@ -125,9 +125,7 @@ namespace Elasticsearch.Net.Connection
 			if (this.Retried >= this.MaxRetries + 1) return false;
 
 			//TODO move this out of GetNext;
-			int newCursor;
-			var node = this._connectionPool.GetNext(_cursor, out newCursor);
-			this._cursor = newCursor;
+			var node = this._connectionPool.GetNext(_cursor, out _cursor);
 			//todo make connectionpool return Node
 			this.CurrentNode = node;
 			return true;
@@ -223,7 +221,7 @@ namespace Elasticsearch.Net.Connection
 						if (!listOfNodes.HasAny())
 							throw new ElasticsearchException(PipelineFailure.BadResponse, response);
 
-						this._connectionPool.Update(listOfNodes.Select(n=>new Node(n)));
+						this._connectionPool.Reseed(listOfNodes.Select(n=>new Node(n)));
 					}
 				}
 				catch (ElasticsearchException e) when (e.Cause == PipelineFailure.BadAuthentication) //unrecoverable
@@ -258,7 +256,7 @@ namespace Elasticsearch.Net.Connection
 						if (!listOfNodes.HasAny())
 							throw new ElasticsearchException(PipelineFailure.BadResponse, response);
 
-						this._connectionPool.Update(listOfNodes.Select(n=>new Node(n)));
+						this._connectionPool.Reseed(listOfNodes.Select(n=>new Node(n)));
 					}
 				}
 				catch (ElasticsearchException e) when (e.Cause == PipelineFailure.BadAuthentication) //unrecoverable

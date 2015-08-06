@@ -34,7 +34,7 @@ namespace Tests.ClientConcepts.LowLevel.Ressurection
 		{
 			//TODO inject DateTimeProver
 			var nodes = seedNodesSelector?.Invoke(this._nodes) ?? this._nodes;
-			return new SealedVirtualCluster(this, new StaticConnectionPool(nodes, randomizeOnStartup: false));
+			return new SealedVirtualCluster(this, new StaticConnectionPool(nodes, randomize: false));
 		}
 
 	}
