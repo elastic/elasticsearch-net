@@ -64,8 +64,8 @@ namespace Tests.ClientConcepts.LowLevel
 			* What the above code just proved is that each call to GetNext(null) gets assigned the next available node.
 			* 
 			* Lets up the ante:
-			* - call get next over `numberOfNodes * 2` threads
-			* - on each thread call getnext `numberOfNodes * 10` times using a local cursor. 
+			* - call get next over `NumberOfNodes * 2` threads
+			* - on each thread call getnext `NumberOfNodes * 10` times using a local cursor. 
 			* We'll validate that each thread sees all the nodes and they they wrap over e.g after node 9209 
 			* comes 9200 again
 			*/
@@ -79,7 +79,7 @@ namespace Tests.ClientConcepts.LowLevel
 
 			/**
 			* Each thread reported the first node it started off lets make sure we see each node twice as the first node
-			* because we started `numberOfNodes * 2` threads
+			* because we started `NumberOfNodes * 2` threads
 			*/
 			var grouped = startingPositions.GroupBy(p => p);
 			grouped.Count().Should().Be(NumberOfNodes);
@@ -88,7 +88,8 @@ namespace Tests.ClientConcepts.LowLevel
 
 		public Thread CreateThreadCallingGetNext(IConnectionPool pool, List<int> startingPositions) => new Thread(() =>
 		{
-			var seenPorts = GetSeenPorts(pool).Take(NumberOfNodes * 10).ToList();
+			/** CallGetNext is a generator that calls GetNext() indefinitely using a local cursor */
+			var seenPorts = CallGetNext(pool).Take(NumberOfNodes * 10).ToList();
 			var startPosition = seenPorts.First();
 			startingPositions.Add(startPosition);
 			//first seenNode is e.g 9202 then start counting at 2;
@@ -97,7 +98,7 @@ namespace Tests.ClientConcepts.LowLevel
 				port.Should().Be(9200 + (i++ % NumberOfNodes));
 		});
 
-		public IEnumerable<int> GetSeenPorts(IConnectionPool pool)
+		private IEnumerable<int> CallGetNext(IConnectionPool pool)
 		{
 			int? localCursor = null;
 			var nextNode = pool.GetNext(localCursor, out localCursor);
