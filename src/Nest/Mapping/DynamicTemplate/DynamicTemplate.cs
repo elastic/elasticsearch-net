@@ -107,7 +107,7 @@ namespace Nest
 		public DynamicTemplateDescriptor<T> Mapping(Func<SingleMappingDescriptor<T>, IElasticType> mappingSelector)
 		{
 			mappingSelector.ThrowIfNull("mappingSelector");
-			var mapping = mappingSelector(new SingleMappingDescriptor<T>(this._connectionSettings));
+			var mapping = mappingSelector(new SingleMappingDescriptor<T>());
 
 			this._Template.Mapping = mapping;
 			return this;

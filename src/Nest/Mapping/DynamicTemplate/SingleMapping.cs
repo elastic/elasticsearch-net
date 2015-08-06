@@ -7,13 +7,6 @@ namespace Nest
 		: IPropertiesDescriptor<T, IElasticType>
 		where T : class
 	{
-		private readonly IConnectionSettingsValues ConnectionSettings;
-
-		public SingleMappingDescriptor(IConnectionSettingsValues connectionSettings)
-		{
-			ConnectionSettings = connectionSettings;
-		}
-
 		public IElasticType String(Func<StringTypeDescriptor<T>, IStringType> selector) =>
 			selector?.Invoke(new StringTypeDescriptor<T>());
 
@@ -33,10 +26,10 @@ namespace Nest
 			selector?.Invoke(new AttachmentTypeDescriptor<T>());
 
 		public IElasticType Object<TChild>(Func<ObjectTypeDescriptor<T, TChild>, IObjectType> selector)
-			where TChild : class => selector?.Invoke(new ObjectTypeDescriptor<T, TChild>(ConnectionSettings));
+			where TChild : class => selector?.Invoke(new ObjectTypeDescriptor<T, TChild>());
 
 		public IElasticType Nested<TChild>(Func<NestedObjectTypeDescriptor<T, TChild>, INestedType> selector)
-			where TChild : class => selector?.Invoke(new NestedObjectTypeDescriptor<T, TChild>(ConnectionSettings));
+			where TChild : class => selector?.Invoke(new NestedObjectTypeDescriptor<T, TChild>());
 
 		public IElasticType Ip(Func<IpTypeDescriptor<T>, IIpType> selector) =>
 			selector?.Invoke(new IpTypeDescriptor<T>());

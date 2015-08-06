@@ -30,9 +30,6 @@ namespace Nest
 		where TParent : class
 		where TChild : class
 	{
-		public NestedObjectTypeDescriptor(IConnectionSettingsValues connectionSettings)
-			: base(connectionSettings) { }
-
 		bool? INestedType.IncludeInParent { get; set; }
 		bool? INestedType.IncludeInRoot { get; set; }
 

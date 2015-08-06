@@ -29,19 +29,12 @@ namespace Nest
 	public class PropertiesDescriptor<T> : IPropertiesDescriptor<T, PropertiesDescriptor<T>>
 		where T : class
 	{
-		private readonly IConnectionSettingsValues ConnectionSettings;
-
 		[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]
 		public IDictionary<FieldName, IElasticType> Properties { get; private set; }
 
 		public PropertiesDescriptor()
 		{
 			this.Properties = new Dictionary<FieldName, IElasticType>();
-		}
-		
-		public PropertiesDescriptor(IConnectionSettingsValues connectionSettings) : this()
-		{
-			ConnectionSettings = connectionSettings;
 		}
 
 		public PropertiesDescriptor<T> String(Func<StringTypeDescriptor<T>, IStringType> selector) => SetProperty(selector);
@@ -77,11 +70,11 @@ namespace Nest
 		public PropertiesDescriptor<T> Custom(IElasticType customType) => SetProperty(customType);
 
 		private PropertiesDescriptor<T> SetProperty<TDescriptor, TInterface>(Func<TDescriptor, TInterface> selector)
-			where TDescriptor : class, TInterface
+			where TDescriptor : class, TInterface, new()
 			where TInterface : class, IElasticType
 		{
 			selector.ThrowIfNull(nameof(selector));
-			var type = selector(Activator.CreateInstance<TDescriptor>());
+			var type = selector(new TDescriptor());
 			SetProperty(type);
 			return this;
 		}

@@ -288,7 +288,7 @@ namespace Nest
 		public PutMappingDescriptor<T> Properties(Func<PropertiesDescriptor<T>, PropertiesDescriptor<T>> propertiesSelector)
 		{
 			propertiesSelector.ThrowIfNull("propertiesSelector");
-			var properties = propertiesSelector(new PropertiesDescriptor<T>(this._connectionSettings));
+			var properties = propertiesSelector(new PropertiesDescriptor<T>());
 			if (Self.Mapping.Properties == null)
 				Self.Mapping.Properties = new Dictionary<FieldName, IElasticType>();
 

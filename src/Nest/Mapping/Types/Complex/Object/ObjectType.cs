@@ -45,8 +45,6 @@ namespace Nest
 		where TParent : class
 		where TChild : class
 	{
-		public ObjectTypeDescriptor(IConnectionSettingsValues connectionSettings) 
-			: base(connectionSettings) { }
 	}
 
 	public abstract class ObjectTypeDescriptorBase<TDescriptor, TInterface, TParent, TChild>
@@ -56,10 +54,7 @@ namespace Nest
 		where TParent : class
 		where TChild : class
 	{
-		protected readonly IConnectionSettingsValues _connectionSettings;
-
 		internal TypeName _TypeName { get; set; }
-		public ElasticInferrer Infer { get; set; }
 
 		DynamicMappingOption? IObjectType.Dynamic { get; set; }
 		bool? IObjectType.Enabled { get; set; }
@@ -67,11 +62,9 @@ namespace Nest
 		string IObjectType.Path { get; set; }
 		IDictionary<FieldName, IElasticType> IObjectType.Properties { get; set; }
 	
-		public ObjectTypeDescriptorBase(IConnectionSettingsValues connectionSettings)
+		public ObjectTypeDescriptorBase()
 		{
 			_TypeName = TypeName.Create<TChild>();
-			_connectionSettings = connectionSettings;
-			Infer = new ElasticInferrer(_connectionSettings);
 		}
 
 		public TDescriptor Dynamic(DynamicMappingOption dynamic) =>
@@ -92,27 +85,26 @@ namespace Nest
 		public TDescriptor Properties(Func<PropertiesDescriptor<TChild>, PropertiesDescriptor<TChild>> selector) => Assign(a =>
 		{
 			selector.ThrowIfNull(nameof(selector));
-			var properties = selector(new PropertiesDescriptor<TChild>(this._connectionSettings));
+			var properties = selector(new PropertiesDescriptor<TChild>());
 			if (a.Properties == null)
 				a.Properties = new Dictionary<FieldName, IElasticType>();
 			foreach (var p in properties.Properties)
-			{
-				var key = this.Infer.FieldName(p.Key);
-				a.Properties[key] = p.Value;
-			}
+				a.Properties[p.Key] = p.Value;
 		});
 
 		public TDescriptor MapFromAttributes(int maxRecursion = 0) => Assign(a =>
 		{
-			var writer = new TypeMappingWriter(typeof(TChild), this._TypeName, this._connectionSettings, maxRecursion);
-			var mapping = writer.ObjectMappingFromAttributes();
-			if (mapping == null)
-				return;
-			var properties = mapping.Properties;
-			if (a.Properties == null)
-				a.Properties = new Dictionary<FieldName, IElasticType>();
-			foreach (var p in properties)
-				a.Properties[p.Key] = p.Value;
+			// TODO : Need to decouple ConnectionSettings from TypeMappingWriter
+			throw new NotImplementedException();
+			//var writer = new TypeMappingWriter(typeof(TChild), this._TypeName, this._connectionSettings, maxRecursion);
+			//var mapping = writer.ObjectMappingFromAttributes();
+			//if (mapping == null)
+			//	return;
+			//var properties = mapping.Properties;
+			//if (a.Properties == null)
+			//	a.Properties = new Dictionary<FieldName, IElasticType>();
+			//foreach (var p in properties)
+			//	a.Properties[p.Key] = p.Value;
 		});
 	}
 }
