@@ -31,8 +31,6 @@ namespace Nest
 	{
 		private readonly IConnectionSettingsValues ConnectionSettings;
 
-		internal IList<string> Deletes = new List<string>();
-
 		[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]
 		public IDictionary<FieldName, IElasticType> Properties { get; private set; }
 
@@ -44,12 +42,6 @@ namespace Nest
 		public PropertiesDescriptor(IConnectionSettingsValues connectionSettings) : this()
 		{
 			ConnectionSettings = connectionSettings;
-		}
-
-		public PropertiesDescriptor<T> Remove(string name)
-		{
-			Deletes.Add(name);
-			return this;
 		}
 
 		public PropertiesDescriptor<T> String(Func<StringTypeDescriptor<T>, IStringType> selector) => SetProperty(selector);

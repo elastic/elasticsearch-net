@@ -292,10 +292,6 @@ namespace Nest
 			if (Self.Mapping.Properties == null)
 				Self.Mapping.Properties = new Dictionary<FieldName, IElasticType>();
 
-			foreach (var t in properties.Deletes)
-			{
-				Self.Mapping.Properties.Remove(t);
-			}
 			foreach (var p in properties.Properties)
 			{
 				var key = this._infer.FieldName(p.Key);

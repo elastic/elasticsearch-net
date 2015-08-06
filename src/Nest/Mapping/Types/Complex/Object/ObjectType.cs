@@ -95,8 +95,6 @@ namespace Nest
 			var properties = selector(new PropertiesDescriptor<TChild>(this._connectionSettings));
 			if (a.Properties == null)
 				a.Properties = new Dictionary<FieldName, IElasticType>();
-			foreach (var t in properties.Deletes)
-				a.Properties.Remove(t);
 			foreach (var p in properties.Properties)
 			{
 				var key = this.Infer.FieldName(p.Key);
