@@ -58,7 +58,7 @@ namespace Elasticsearch.Net.Connection
 			this._formatter = new UrlFormatProvider(this.Settings);
 		}
 
-		public ElasticsearchResponse<TReturn> DoRequest<TReturn>(HttpMethod method, string path, PostData<object> data = null, IRequestParameters requestParameters = null)
+		public ElasticsearchResponse<TReturn> Request<TReturn>(HttpMethod method, string path, PostData<object> data = null, IRequestParameters requestParameters = null)
 		{
 			path = this.CreatePathWithQueryStrings(path, this.Settings, requestParameters);
 			using (var pipeline = this.PipelineProvider.Create(this.Settings, this.DateTimeProvider, this.MemoryStreamFactory, requestParameters))
@@ -92,7 +92,7 @@ namespace Elasticsearch.Net.Connection
 			}
 		}
 
-		public async Task<ElasticsearchResponse<TReturn>> DoRequestAsync<TReturn>(HttpMethod method, string path, PostData<object> data = null, IRequestParameters requestParameters = null)
+		public async Task<ElasticsearchResponse<TReturn>> RequestAsync<TReturn>(HttpMethod method, string path, PostData<object> data = null, IRequestParameters requestParameters = null)
 		{
 			path = this.CreatePathWithQueryStrings(path, this.Settings, requestParameters);
 			using (var pipeline = this.PipelineProvider.Create(this.Settings, this.DateTimeProvider, this.MemoryStreamFactory, requestParameters))

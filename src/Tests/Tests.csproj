@@ -75,6 +75,7 @@
     <Compile Include="Aggregations\Bucket\ChildrenAggregation.cs" />
     <Compile Include="Aggregations\AggregationUsageBase.cs" />
     <Compile Include="Aggregations\WritingAggregations.cs" />
+    <Compile Include="ClientConcepts\ConnectionPooling\BuildingBlocks\Transports.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\BuildingBlocks\RoundRobin.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\BuildingBlocks\ConnectionPooling.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\BuildingBlocks\RequestPipeline.cs" />

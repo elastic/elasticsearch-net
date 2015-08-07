@@ -11,8 +11,8 @@ namespace Elasticsearch.Net.Connection
 	{
 		TConnectionSettings Settings { get; }
 
-		ElasticsearchResponse<T> DoRequest<T>(HttpMethod method, string path, PostData<object> data = null, IRequestParameters requestParameters = null);
-		Task<ElasticsearchResponse<T>> DoRequestAsync<T>(HttpMethod method, string path, PostData<object> data = null, IRequestParameters requestParameters = null);
+		ElasticsearchResponse<T> Request<T>(HttpMethod method, string path, PostData<object> data = null, IRequestParameters requestParameters = null);
+		Task<ElasticsearchResponse<T>> RequestAsync<T>(HttpMethod method, string path, PostData<object> data = null, IRequestParameters requestParameters = null);
 	}
 
 }
