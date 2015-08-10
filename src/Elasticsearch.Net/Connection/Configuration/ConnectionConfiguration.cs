@@ -119,8 +119,8 @@ namespace Elasticsearch.Net.Connection
 		bool _sniffOnStartup;
 		bool IConnectionConfigurationValues.SniffsOnStartup => _sniffOnStartup;
 
-		bool _sniffOnConectionFault;
-		bool IConnectionConfigurationValues.SniffsOnConnectionFault => _sniffOnConectionFault;
+		bool _sniffOnConnectionFault;
+		bool IConnectionConfigurationValues.SniffsOnConnectionFault => _sniffOnConnectionFault;
 
 		TimeSpan? _sniffLifeSpan;
 		TimeSpan? IConnectionConfigurationValues.SniffInformationLifeSpan => _sniffLifeSpan;
@@ -173,6 +173,8 @@ namespace Elasticsearch.Net.Connection
 			this._connectionStatusHandler = this.ConnectionStatusDefaultHandler;
 			this._maximumAsyncConnections = 0;
 			this._usePrettyRequests = true;
+			this._sniffOnConnectionFault = true;
+			this._sniffOnStartup = true;
 		}
 
 		T Assign(Action<ConnectionConfiguration<T>> assigner) => Fluent.Assign((T)this, assigner);
@@ -184,11 +186,22 @@ namespace Elasticsearch.Net.Connection
 
 		public T MaximumRetries(int maxRetries) => Assign(a => a._maxRetries = maxRetries);
 
-		public T SniffOnConnectionFault(bool sniffsOnConnectionFault = true) => Assign(a => a._sniffOnConectionFault = sniffsOnConnectionFault);
+		/// <summary>
+		/// On connection pools that support reseeding setting this to true (default) will resniff the cluster when a call fails
+		/// </summary>
+		public T SniffOnConnectionFault(bool sniffsOnConnectionFault = true) => Assign(a => a._sniffOnConnectionFault = sniffsOnConnectionFault);
 
+		/// <summary>
+		/// Enables sniffing on first usage of a connection pool if that pool supports reseeding, defaults to true
+		/// </summary>
 		public T SniffOnStartup(bool sniffsOnStartup = true) => Assign(a => a._sniffOnStartup = sniffsOnStartup);
 
-		public T SniffLifeSpan(TimeSpan sniffLifeSpan) => Assign(a => a._sniffLifeSpan = sniffLifeSpan);
+		/// <summary>
+		/// Set the duration after which a cluster state is considered stale and a sniff should be performed again.
+		/// Set to null to disable completely. Sniffing will only ever happen on ConnectionPools that return true for SupportsReseeding
+		/// </summary>
+		/// <param name="sniffLifeSpan">The duration a clusterstate is considered fresh, set to null to disable periodic sniffing</param>
+		public T SniffLifeSpan(TimeSpan? sniffLifeSpan) => Assign(a => a._sniffLifeSpan = sniffLifeSpan);
 
 		/// <summary>
 		/// Enable gzip compressed requests and responses, do note that you need to configure elasticsearch to set this

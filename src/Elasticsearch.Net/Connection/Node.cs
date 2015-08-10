@@ -30,6 +30,12 @@ namespace Elasticsearch.Net.Connection
 		/// <summary>Indicates whether this node is master eligable, defaults to true when unknown/unspecified</summary>
 		public bool MasterEligable { get; set; }
 
+		/// <summary>The id of the node, defaults to null when unknown/unspecified</summary>
+		public string Id { get; set; } 
+
+		/// <summary>The name of the node, defaults to null when unknown/unspecified</summary>
+		public string Name { get; set; } 
+
 		/// <summary> The number of failed attempts trying to use this node, resets when a node is marked alive</summary>
 		public int FailedAttempts { get; private set; }
 		
@@ -60,6 +66,8 @@ namespace Elasticsearch.Net.Connection
 			new Node(this.Uri)
 			{
 				IsResurrected = this.IsResurrected,
+				Id = this.Id,
+				Name = this.Name,
 				HoldsData = this.HoldsData,
 				MasterEligable = this.MasterEligable,
 				FailedAttempts = this.FailedAttempts,

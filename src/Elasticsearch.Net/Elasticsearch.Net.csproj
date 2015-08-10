@@ -77,6 +77,7 @@
     <Compile Include="Connection\Node.cs" />
     <Compile Include="Connection\Audit\RequestTimings.cs" />
     <Compile Include="Connection\Security\BasicAuthorizationCredentials.cs" />
+    <Compile Include="Connection\Sniff\SniffResponse.cs" />
     <Compile Include="Connection\Transport\PostData.cs" />
     <Compile Include="Connection\Transport\Transport.cs" />
     <Compile Include="Domain\RequestParameters\BaseRequestParameters.cs" />

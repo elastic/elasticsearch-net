@@ -23,29 +23,33 @@ namespace Tests.Framework
 
 		public static bool RunningFiddler => Process.GetProcessesByName("fiddler").Any();
 
-		public static IElasticClient GetClient(Func<ConnectionSettings, ConnectionSettings> modifySettings = null, int port = 9200 )
+
+		public static ConnectionSettings CreateSettings(Func<ConnectionSettings, ConnectionSettings> modifySettings = null, int port = 9200)
 		{
 			var defaultSettings = new ConnectionSettings(new SingleNodeConnectionPool(CreateNode(port)), CreateConnection())
 				.SetDefaultIndex("default-index")
-				.InferMappingFor<Project>(map=>map
+				.InferMappingFor<Project>(map => map
 					.IndexName("project")
-					.IdProperty(p=>p.Name)
+					.IdProperty(p => p.Name)
 				)
-				.InferMappingFor<CommitActivity>(map=>map
+				.InferMappingFor<CommitActivity>(map => map
 					.IndexName("project")
 					.TypeName("commits")
 				)
-				.InferMappingFor<Developer>(map=>map
-					.Ignore(p=>p.PrivateValue)
-					.Rename(p=>p.OnlineHandle, "nickname")
+				.InferMappingFor<Developer>(map => map
+					.Ignore(p => p.PrivateValue)
+					.Rename(p => p.OnlineHandle, "nickname")
 				)
 				//We try and fetch the test name during integration tests when running fiddler to send the name 
 				//as the TestMethod header, this allows us to quickly identify which test sent which request
-				.SetGlobalHeaders(new NameValueCollection { {"TestMethod", ExpensiveTestNameForIntegrationTests()} });
+				.SetGlobalHeaders(new NameValueCollection { { "TestMethod", ExpensiveTestNameForIntegrationTests() } });
 
 			var settings = modifySettings != null ? modifySettings(defaultSettings) : defaultSettings;
-			return new ElasticClient(settings);
+			return settings;
 		}
+
+		public static IElasticClient GetClient(Func<ConnectionSettings, ConnectionSettings> modifySettings = null, int port = 9200) =>
+			new ElasticClient(CreateSettings(modifySettings, port));
 
 		public static Uri CreateNode(int? port = null) => 
 			new UriBuilder("http", (RunningFiddler) ? "ipv4.fiddler" : "localhost", port.GetValueOrDefault(9200)).Uri;

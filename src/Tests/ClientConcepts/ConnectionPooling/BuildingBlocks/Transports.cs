@@ -31,17 +31,16 @@ namespace Tests.ClientConcepts.LowLevel
 			* Transport is generically typed to a type that implements IConnectionConfigurationValues 
 			* This is the minimum ITransport needs to report back for the client to function.
 			*
-			* e.g in the lowlevel client transport is instantiated like this:
+			* e.g in the low level client transport is instantiated like this:
 			*/
 			var lowLevelTransport = new Transport<ConnectionConfiguration>(new ConnectionConfiguration());
 
-			/**
-			* In the high level client like this.
-			*/
+			/** In the high level client like this. */
 			var highlevelTransport = new Transport<ConnectionSettings>(new ConnectionSettings());
 
 			var connectionPool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
 			var inMemoryTransport = new Transport<ConnectionSettings>(new ConnectionSettings(connectionPool, new InMemoryConnection()));
+
 			/**
 			* The only two methods on ITransport are Request and DoRequestAsync, the default ITransport implementation is responsible for introducing
 			* many of the building blocks in the client, if these do not work for you can swap them out for your own custom ITransport implementation. 

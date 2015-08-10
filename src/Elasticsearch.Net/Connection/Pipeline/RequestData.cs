@@ -134,7 +134,7 @@ namespace Elasticsearch.Net.Connection
 		private ElasticsearchResponse<TReturn> InitializeResponse<TReturn>(int statusCode, Exception innerException)
 		{
 			var cs = new ElasticsearchResponse<TReturn>(this._settings, statusCode);
-			cs.Request = this.Data.ToByteArray(this._settings);
+			cs.Request = this.Data?.ToByteArray(this._settings);
 			cs.RequestUri = this.Uri;
 			cs.RequestMethod = this.Method;
 			cs.OriginalException = innerException;

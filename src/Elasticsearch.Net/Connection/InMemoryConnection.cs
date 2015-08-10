@@ -35,13 +35,13 @@ namespace Elasticsearch.Net.Connection
 		public override ElasticsearchResponse<TReturn> Request<TReturn>(RequestData requestData) => 
 			this.ReturnConnectionStatus<TReturn>(requestData);
 
-		private ElasticsearchResponse<TReturn> ReturnConnectionStatus<TReturn>(RequestData requestData)
+		protected ElasticsearchResponse<TReturn> ReturnConnectionStatus<TReturn>(RequestData requestData, byte[] fixedResult = null)
 		{
 			var request = this.CreateHttpWebRequest(requestData);
 			var method = request.Method;
 			var path = request.RequestUri.ToString();
 
-			var cs = requestData.CreateResponse<TReturn>(this._statusCode, new MemoryStream(_fixedResultBytes));
+			var cs = requestData.CreateResponse<TReturn>(this._statusCode, new MemoryStream(fixedResult ?? _fixedResultBytes));
 			if (this.RecordRequests)
 			{
 				this.Requests.Add(Tuple.Create(method, request.RequestUri, requestData.Data));

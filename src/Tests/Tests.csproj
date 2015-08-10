@@ -79,7 +79,10 @@
     <Compile Include="ClientConcepts\ConnectionPooling\BuildingBlocks\RoundRobin.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\BuildingBlocks\ConnectionPooling.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\BuildingBlocks\RequestPipeline.cs" />
+    <Compile Include="ClientConcepts\ConnectionPooling\Sniffing\OnStartup.cs" />
     <Compile Include="Framework\VirtualClustering\Cluster.cs" />
+    <Compile Include="Framework\VirtualClustering\FixedPipelineFactory.cs" />
+    <Compile Include="Framework\VirtualClustering\ISniffRule.cs" />
     <Compile Include="Framework\VirtualClustering\SealedVirtualCluster.cs" />
     <Compile Include="Framework\VirtualClustering\VirtualCluster.cs" />
     <Compile Include="Framework\VirtualClustering\VirtualizedCluster.cs" />

@@ -15,7 +15,7 @@ namespace Elasticsearch.Net.Providers
 			var timeout = timeoutFactor.GetValueOrDefault(DefaultTimeout);
 			var maxTimeout = maxDeadTimeout.GetValueOrDefault(MaximumTimeout);
 			var milliSeconds = Math.Min(timeout.TotalMilliseconds * 2 * Math.Pow(2, (attempts * 0.5 - 1)), maxTimeout.TotalMilliseconds);
-			return DateTime.UtcNow.AddMilliseconds(milliSeconds);
+			return Now().AddMilliseconds(milliSeconds);
 		}
 	}
 }

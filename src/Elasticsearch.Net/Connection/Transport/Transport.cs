@@ -11,6 +11,7 @@ using PurifyNet;
 using System.IO;
 using System.Collections.Specialized;
 using System.Threading;
+using Elasticsearch.Net.Connection.RequestState;
 
 namespace Elasticsearch.Net.Connection
 {
@@ -18,6 +19,7 @@ namespace Elasticsearch.Net.Connection
 		where TConnectionSettings : IConnectionConfigurationValues
 	{
 		private UrlFormatProvider _formatter;
+		private SemaphoreSlim _semaphore;
 
 		//TODO discuss which should be public
 		public TConnectionSettings Settings { get; }
@@ -38,12 +40,12 @@ namespace Elasticsearch.Net.Connection
 		/// <param name="configurationValues">The connectionsettings to use for this transport</param>
 		/// <param name="requestPipelineProvider">In charge of create a new pipeline, safe to pass null to use the default</param>
 		/// <param name="dateTimeProvider">The date time proved to use, safe to pass null to use the default</param>
-		/// <param name="memoryStreamProvider">The memory stream provider to use, safe to pass null to use the default</param>
+		/// <param name="memoryStreamFactory">The memory stream provider to use, safe to pass null to use the default</param>
 		public Transport(
 			TConnectionSettings configurationValues,
 			IRequestPipelineFactory pipelineProvider,
 			IDateTimeProvider dateTimeProvider,
-			IMemoryStreamFactory memoryStreamProvider
+			IMemoryStreamFactory memoryStreamFactory
 			)
 		{
 			configurationValues.ThrowIfNull(nameof(configurationValues));
@@ -54,8 +56,9 @@ namespace Elasticsearch.Net.Connection
 			this.Settings = configurationValues;
 			this.PipelineProvider = pipelineProvider ?? new RequestPipelineFactory();
 			this.DateTimeProvider = dateTimeProvider ?? new DateTimeProvider();
-			this.MemoryStreamFactory = memoryStreamProvider ?? new MemoryStreamFactory();
+			this.MemoryStreamFactory = memoryStreamFactory ?? new MemoryStreamFactory();
 			this._formatter = new UrlFormatProvider(this.Settings);
+			this._semaphore = new SemaphoreSlim(1, 1);
 		}
 
 		public ElasticsearchResponse<TReturn> Request<TReturn>(HttpMethod method, string path, PostData<object> data = null, IRequestParameters requestParameters = null)
@@ -63,8 +66,7 @@ namespace Elasticsearch.Net.Connection
 			path = this.CreatePathWithQueryStrings(path, this.Settings, requestParameters);
 			using (var pipeline = this.PipelineProvider.Create(this.Settings, this.DateTimeProvider, this.MemoryStreamFactory, requestParameters))
 			{
-				if (!pipeline.FirstPoolUsage())
-					pipeline.OutOfDateClusterInformation();
+				pipeline.FirstPoolUsage(this._semaphore);
 
 				var requestData = new RequestData(method, path, data, this.Settings, requestParameters?.RequestConfiguration, this.MemoryStreamFactory);
 				ElasticsearchResponse<TReturn> response = null;
@@ -97,8 +99,7 @@ namespace Elasticsearch.Net.Connection
 			path = this.CreatePathWithQueryStrings(path, this.Settings, requestParameters);
 			using (var pipeline = this.PipelineProvider.Create(this.Settings, this.DateTimeProvider, this.MemoryStreamFactory, requestParameters))
 			{
-				if (await pipeline.FirstPoolUsageAsync())
-					await pipeline.OutOfDateClusterInformationAsync();
+				await pipeline.FirstPoolUsageAsync(this._semaphore);
 
 				var requestData = new RequestData(method, path, data, this.Settings, requestParameters?.RequestConfiguration, this.MemoryStreamFactory);
 				ElasticsearchResponse<TReturn> response = null;

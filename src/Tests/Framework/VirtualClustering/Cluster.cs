@@ -2,7 +2,7 @@ using Elasticsearch.Net.Connection;
 using System;
 using System.Linq;
 
-namespace Tests.ClientConcepts.LowLevel.Ressurection
+namespace Tests.Framework
 {
 	public static class Cluster
 	{

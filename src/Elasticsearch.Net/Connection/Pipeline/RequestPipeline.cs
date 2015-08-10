@@ -1,14 +1,38 @@
 using Elasticsearch.Net.Connection.Configuration;
+using Elasticsearch.Net.Connection.Sniff;
 using Elasticsearch.Net.ConnectionPool;
 using Elasticsearch.Net.Providers;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Elasticsearch.Net.Connection
 {
+	public enum AuditEvent
+	{
+		SniffOnStartup,
+		SniffOnFail,
+		SniffOutOfDate,
+		Ping,
+		BadResponse,
+		HealhyResponse
+	}
+
+	public class Audit
+	{
+		public AuditEvent Event { get; }
+		public DateTime Occurred { get; }
+
+		public Audit(AuditEvent type, DateTime occured)
+		{
+			this.Event = type;
+			this.Occurred = occured;
+		}
+	}
+
 	public class RequestPipeline: IRequestPipeline
 	{
 		private readonly IConnectionConfigurationValues _settings;
@@ -16,13 +40,17 @@ namespace Elasticsearch.Net.Connection
 		private readonly IConnectionPool _connectionPool;
 		private readonly IDateTimeProvider _dateTimeProvider;
 		private readonly IMemoryStreamFactory _memoryStreamFactory;
+		private readonly CancellationToken _cancellationToken;
 
 		//todo these two terms are too similar come up with a better name
 		public IRequestParameters RequestParameters { get; }
 		public IRequestConfiguration RequestConfiguration { get; }
+		public DateTime StartedOn { get; }
+		public DateTime CompletedOn { get; }
+
+		public List<Audit> AuditTrail { get; } = new List<Audit>();
 
 		public Node CurrentNode { get; private set; }
-		public DateTime StartedOn { get; private set; }
 
 		public int MaxRetries { get; }
 		private int _retried = 0;
@@ -49,6 +77,7 @@ namespace Elasticsearch.Net.Connection
 			this.MaxRetries = this._settings.MaxRetries ?? this._connectionPool.MaxRetries;
 			this.RequestParameters = requestParameters;
 			this.RequestConfiguration = requestParameters?.RequestConfiguration;
+			this._cancellationToken = this.RequestConfiguration?.CancellationToken ?? CancellationToken.None;
 			this.StartedOn = dateTimeProvider.Now();
 		}
 
@@ -63,61 +92,77 @@ namespace Elasticsearch.Net.Connection
 			node.MarkDead(deadUntil);
 		}
 		public void MarkAlive() => this.CurrentNode.MarkAlive();
+		
+		public bool FirstPoolUsageNeedsSniffing =>
+			this._connectionPool.SupportsReseeding && this._settings.SniffsOnStartup  && !this._connectionPool.SniffedOnStartup;
 
-		public bool FirstPoolUsage()
+		public void FirstPoolUsage(SemaphoreSlim semaphore)
 		{
-			if (!this._settings.SniffsOnStartup || !this._connectionPool.SupportsReseeding || this._connectionPool.SniffedOnStartup)
-				return false;
-
-			this.Sniff();
-
-			return true;
-		}
-
-		public async Task<bool> FirstPoolUsageAsync()
-		{
-			if (!this._settings.SniffsOnStartup || !this._connectionPool.SupportsReseeding || this._connectionPool.SniffedOnStartup)
-				return false;
-
-			await this.SniffAsync();
-
-			return true;
-		}
-
-		public void OutOfDateClusterInformation()
-		{
-			var sniffLifeSpan = this._settings.SniffInformationLifeSpan;
-			if (!sniffLifeSpan.HasValue) return;
-
-			var now = this._dateTimeProvider.Now();
-			var lastSniff = this._connectionPool.LastUpdate;
-
-			if (!lastSniff.HasValue || (lastSniff.HasValue && sniffLifeSpan.Value < (now - lastSniff.Value)))
+			if (!this.FirstPoolUsageNeedsSniffing) return;
+			if (!semaphore.Wait(this._settings.Timeout))
+				throw new ElasticsearchException(PipelineFailure.CouldNotStartSniffOnStartup, (Exception)null);
+			if (!this.FirstPoolUsageNeedsSniffing) return;
+			try
+			{
+				this.Audit(AuditEvent.SniffOnStartup);
 				this.Sniff();
+				this._connectionPool.SniffedOnStartup = true;
+			}
+			finally
+			{
+				semaphore.Release();
+			}
 		}
 
-		public async Task OutOfDateClusterInformationAsync()
+		public async Task FirstPoolUsageAsync(SemaphoreSlim semaphore)
 		{
-			var sniffLifeSpan = this._settings.SniffInformationLifeSpan;
-			if (!sniffLifeSpan.HasValue) return;
+			if (!this.FirstPoolUsageNeedsSniffing) return;
+			var success = await semaphore.WaitAsync(this._settings.Timeout, this._cancellationToken);
+			if (!success)
+				throw new ElasticsearchException(PipelineFailure.CouldNotStartSniffOnStartup, (Exception)null);
 
-			var now = this._dateTimeProvider.Now();
-			var lastSniff = this._connectionPool.LastUpdate;
-
-			if (!lastSniff.HasValue || (lastSniff.HasValue && sniffLifeSpan.Value < (now - lastSniff.Value)))
+			if (!this.FirstPoolUsageNeedsSniffing) return;
+			try
+			{
+				this.Audit(AuditEvent.SniffOnStartup);
 				await this.SniffAsync();
+				this._connectionPool.SniffedOnStartup = true;
+			}
+			finally
+			{
+				semaphore.Release();
+			}
 		}
-		private bool TookToLong()
-		{
-			var timeout = this._settings.MaxRetryTimeout.GetValueOrDefault(this._settings.Timeout);
-			var now = this._dateTimeProvider.Now();
 
-			//we apply a soft margin so that if a request timesout at 59 seconds when the maximum is 60 we also abort.
-			var margin = (timeout.TotalMilliseconds / 100.0) * 98;
-			var marginTimeSpan = TimeSpan.FromMilliseconds(margin);
-			var timespanCall = (now - this.StartedOn);
-			var tookToLong = timespanCall >= marginTimeSpan;
-			return tookToLong;
+		public bool OutOfDateClusterInformation
+		{
+			get
+			{
+				if (!this._connectionPool.SupportsReseeding) return false;
+				var sniffLifeSpan = this._settings.SniffInformationLifeSpan;
+				if (!sniffLifeSpan.HasValue) return false;
+
+				var now = this._dateTimeProvider.Now();
+				var lastSniff = this._connectionPool.LastUpdate;
+
+				return !lastSniff.HasValue || (lastSniff.HasValue && sniffLifeSpan.Value < (now - lastSniff.Value));
+			}
+		}
+
+		public bool IsTakingTooLong
+		{
+			get
+			{
+				var timeout = this._settings.MaxRetryTimeout.GetValueOrDefault(this._settings.Timeout);
+				var now = this._dateTimeProvider.Now();
+
+				//we apply a soft margin so that if a request timesout at 59 seconds when the maximum is 60 we also abort.
+				var margin = (timeout.TotalMilliseconds / 100.0) * 98;
+				var marginTimeSpan = TimeSpan.FromMilliseconds(margin);
+				var timespanCall = (now - this.StartedOn);
+				var tookToLong = timespanCall >= marginTimeSpan;
+				return tookToLong;
+			}
 		}
 
 		public bool NextNode()
@@ -137,11 +182,10 @@ namespace Elasticsearch.Net.Connection
 			var currentRetryCount = this._retried;
 			this._retried++;
 			
-			var tookToLong = this.TookToLong();
-			if (!tookToLong || currentRetryCount < this.MaxRetries)
+			if (!this.IsTakingTooLong || currentRetryCount < this.MaxRetries)
 				return;
 			
-			if (tookToLong) throw new ElasticsearchException(PipelineFailure.RetryMaximum, response);
+			if (this.IsTakingTooLong) throw new ElasticsearchException(PipelineFailure.RetryTimeout, response);
 			throw new ElasticsearchException(PipelineFailure.RetryMaximum, response);
 		}
 
@@ -203,7 +247,7 @@ namespace Elasticsearch.Net.Connection
 			return response;
 		}
 
-		void Sniff()
+		public void Sniff()
 		{
 			var path = "_nodes/_all/clear?timeout=" + this.PingTimeout;
 			var exceptions = new List<ElasticsearchException>();
@@ -212,17 +256,13 @@ namespace Elasticsearch.Net.Connection
 				try
 				{
 					var requestData = new RequestData(HttpMethod.GET, path, null, this._settings, this._memoryStreamFactory);
-					requestData.Uri = this.CurrentNode.CreatePath(requestData.Path);
+					requestData.Uri = node.CreatePath(requestData.Path);
 
-					var response = this.Call(PipelineFailure.BadResponse, () => this._connection.Request<Stream>(requestData));
-					using (response.Response)
-					{
-						var listOfNodes = Sniffer.FromStream(response, response.Response, this._settings.Serializer);
-						if (!listOfNodes.HasAny())
-							throw new ElasticsearchException(PipelineFailure.BadResponse, response);
-
-						this._connectionPool.Reseed(listOfNodes.Select(n=>new Node(n)));
-					}
+					//var response = this.Call(PipelineFailure.BadResponse, () => this._connection.Request<Stream>(requestData));
+					var response = this._connection.Request<SniffResponse>(requestData);
+					//TODO validate ToNodes() and pass it to a filter folks can register
+					this._connectionPool.Reseed(response.Response.ToNodes(this._connectionPool.UsingSsl));
+					return;
 				}
 				catch (ElasticsearchException e) when (e.Cause == PipelineFailure.BadAuthentication) //unrecoverable
 				{
@@ -238,7 +278,7 @@ namespace Elasticsearch.Net.Connection
 			throw new ElasticsearchException(PipelineFailure.BadSniff, new AggregateException(exceptions));
 		}
 
-		async Task SniffAsync()
+		public async Task SniffAsync()
 		{
 			var path = "_nodes/_all/clear?timeout=" + this.PingTimeout;
 			var exceptions = new List<ElasticsearchException>();
@@ -247,7 +287,7 @@ namespace Elasticsearch.Net.Connection
 				try
 				{
 					var requestData = new RequestData(HttpMethod.GET, path, null, this._settings, this._memoryStreamFactory);
-					requestData.Uri = this.CurrentNode.CreatePath(requestData.Path);
+					requestData.Uri = node.CreatePath(requestData.Path);
 
 					var response = await this.CallAsync(PipelineFailure.BadResponse, () => this._connection.RequestAsync<Stream>(requestData));
 					using (response.Response)
@@ -286,5 +326,8 @@ namespace Elasticsearch.Net.Connection
 			requestData.Uri = uri;
 			return await this.CallAsync(PipelineFailure.BadResponse, () => this._connection.RequestAsync<TReturn>(requestData));
 		}
+
+		private void Audit(AuditEvent type) => this.AuditTrail.Add(new Audit(type, this._dateTimeProvider.Now()));
+
 	}
 }
