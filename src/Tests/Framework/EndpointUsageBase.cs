@@ -10,7 +10,7 @@ namespace Tests.Framework
 {
 	public abstract class EndpointUsageBase<TResponse, TInterface, TDescriptor, TInitializer> : SerializationBase
 		where TResponse : class, IResponse
-		where TDescriptor : class, TInterface, new() 
+		where TDescriptor : class, TInterface
 		where TInitializer : class, TInterface
 		where TInterface : class
 	{
@@ -30,6 +30,8 @@ namespace Tests.Framework
 		}
 
 		protected abstract LazyResponses ClientUsage();
+
+		protected abstract TDescriptor Descriptor();
 
 		protected LazyResponses Calls(
 			Func<IElasticClient, Func<TDescriptor, TInterface>, TResponse> fluent,
@@ -108,7 +110,6 @@ namespace Tests.Framework
 			this.AssertSerializesAndRoundTrips<TInterface>(this.Initializer);
 		 
 		[U] protected void SerializesFluent() => 
-			this.AssertSerializesAndRoundTrips(this.Fluent(new TDescriptor()));
-
+			this.AssertSerializesAndRoundTrips(this.Fluent(Descriptor()));
 	}
 }

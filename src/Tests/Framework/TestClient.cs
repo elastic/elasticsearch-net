@@ -22,9 +22,7 @@ namespace Tests.Framework
 
 		public static bool RunningFiddler => Process.GetProcessesByName("fiddler").Any();
 
-		public static IElasticClient GetClient(Func<ConnectionSettings, ConnectionSettings> modifySettings = null, int port = 9200 )
-		{
-			var defaultSettings = new ConnectionSettings((CreateBaseUri(port)), "defaultindex")
+		public static ConnectionSettings GetDefaultConnectionSettings(int port = 9200) => new ConnectionSettings(CreateBaseUri(port), "defaultIndex")
 				.InferMappingFor<Project>(map=>map
 					.IndexName("project")
 					.IdProperty(p=>p.Name)
@@ -39,6 +37,9 @@ namespace Tests.Framework
 				)
 				.SetGlobalHeaders(new NameValueCollection { {"TestMethod", ExpensiveTestNameForIntegrationTests()} });
 
+		public static IElasticClient GetClient(Func<ConnectionSettings, ConnectionSettings> modifySettings = null, int port = 9200 )
+		{
+			var defaultSettings = GetDefaultConnectionSettings(port);
 			var settings = modifySettings != null ? modifySettings(defaultSettings) : defaultSettings;
 			return new ElasticClient(settings, CreateConnection(settings));
 		}

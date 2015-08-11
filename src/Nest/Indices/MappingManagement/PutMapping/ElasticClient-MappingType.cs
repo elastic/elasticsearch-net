@@ -9,7 +9,7 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IIndicesResponse Map<T>(Func<PutMappingDescriptor<T>, PutMappingDescriptor<T>> mappingSelector) 
+		public IIndicesResponse Map<T>(Func<PutMappingDescriptor<T>, IPutMappingRequest> mappingSelector) 
 			where T : class
 		{
 			mappingSelector.ThrowIfNull("mappingSelector");
@@ -34,7 +34,7 @@ namespace Nest
 		}
 
 		/// <inheritdoc />
-		public Task<IIndicesResponse> MapAsync<T>(Func<PutMappingDescriptor<T>, PutMappingDescriptor<T>> mappingSelector)
+		public Task<IIndicesResponse> MapAsync<T>(Func<PutMappingDescriptor<T>, IPutMappingRequest> mappingSelector)
 			where T : class
 		{
 			mappingSelector.ThrowIfNull("mappingSelector");

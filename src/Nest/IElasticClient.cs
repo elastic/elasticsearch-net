@@ -400,14 +400,14 @@ namespace Nest
 		/// </summary>
 		/// <typeparam name="T">The type we want to map in elasticsearch</typeparam>
 		/// <param name="mappingSelector">A descriptor to describe the mapping of our type</param>
-		IIndicesResponse Map<T>(Func<PutMappingDescriptor<T>, PutMappingDescriptor<T>> mappingSelector)
+		IIndicesResponse Map<T>(Func<PutMappingDescriptor<T>, IPutMappingRequest> mappingSelector)
 			where T : class;
 
 		/// <inheritdoc />
 		IIndicesResponse Map(IPutMappingRequest putMappingRequest);
 
 		/// <inheritdoc />
-		Task<IIndicesResponse> MapAsync<T>(Func<PutMappingDescriptor<T>, PutMappingDescriptor<T>> mappingSelector)
+		Task<IIndicesResponse> MapAsync<T>(Func<PutMappingDescriptor<T>, IPutMappingRequest> mappingSelector)
 			where T : class;
 
 		/// <inheritdoc />

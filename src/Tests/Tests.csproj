@@ -86,6 +86,8 @@
     <Compile Include="Framework\MockData\Person.cs" />
     <Compile Include="Framework\MockData\Tag.cs" />
     <Compile Include="Framework\Roundtrip.cs" />
+    <Compile Include="Mapping\MapUsageBase.cs" />
+    <Compile Include="Mapping\Types\String.cs" />
     <Compile Include="Search\Request\Fields.cs" />
     <Compile Include="Search\Request\FielddataFields.cs" />
     <Compile Include="Search\Request\Highlighting.cs" />
@@ -140,7 +142,6 @@
     <Folder Include="Document\" />
     <Folder Include="IndexModules\" />
     <Folder Include="Indices\" />
-    <Folder Include="Mapping\" />
     <Folder Include="Migration\" />
     <Folder Include="Modules\" />
     <Folder Include="QueryDsl\" />
