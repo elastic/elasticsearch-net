@@ -12,6 +12,8 @@ namespace Tests.Framework
 		private IConnectionPool _connectionPool;
 
 		public List<ISniffRule> SniffingRules { get; } = new List<ISniffRule>();
+		public List<IRule> PingingRules { get; } = new List<IRule>();
+
 		public IReadOnlyList<Node> Nodes => _nodes;
 
 		public VirtualCluster(IEnumerable<Node> nodes)
@@ -30,6 +32,12 @@ namespace Tests.Framework
 		{
 			foreach (var node in this._nodes.Where(n => ports.Contains(n.Uri.Port)))
 				node.HoldsData = false;
+			return this;
+		}
+
+		public VirtualCluster Ping(Func<PingRule, IRule> selector)
+		{
+			this.PingingRules.Add(selector(new PingRule()));
 			return this;
 		}
 
@@ -54,49 +62,4 @@ namespace Tests.Framework
 		}
 	}
 
-	public class SniffRule : ISniffRule
-	{
-		private ISniffRule Self => this;
-		int? ISniffRule.OnPort { get; set; }
-		bool ISniffRule.Succeeds { get; set; }
-		bool? ISniffRule.AllCalls { get; set; }
-		int? ISniffRule.NthCall { get; set; }
-		VirtualCluster ISniffRule.NewClusterState { get; set; }
-
-		public SniffRule OnPort(int port)
-		{
-			Self.OnPort = port;
-			return this;
-		}
-		public SniffRule FailsOn(int call)
-		{
-			Self.NthCall = call;
-			Self.Succeeds = false;
-			return this;
-		}
-
-		public SniffRule SucceedsOn(int call, VirtualCluster cluster = null)
-		{
-			Self.NthCall = call;
-			Self.Succeeds = true;
-			Self.NewClusterState = cluster;
-			return this;
-		}
-
-		public SniffRule FailAlways()
-		{
-			Self.AllCalls = true;
-			Self.Succeeds = false;
-			return this;
-		}
-
-		public SniffRule SucceedAlways(VirtualCluster cluster = null)
-		{
-			Self.AllCalls = true;
-			Self.Succeeds = true;
-			Self.NewClusterState = cluster;
-			return this;
-		}
-
-	}
 }

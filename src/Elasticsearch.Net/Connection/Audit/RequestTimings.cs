@@ -4,26 +4,11 @@ using System.Diagnostics;
 
 namespace Elasticsearch.Net.Connection.RequestState
 {
-	public class Timeable : IDisposable
-	{
-		private readonly Stopwatch _stopwatch = Stopwatch.StartNew();
-		private readonly Action<TimeSpan> onDispose;
-
-		public Timeable(Action<TimeSpan> onDispose)
-		{
-			this.onDispose = onDispose;
-		}
-
-		public void Dispose()
-		{
-			_stopwatch.Stop();
-			this.onDispose?.Invoke(_stopwatch.Elapsed);
-		}
-	}
 	public interface IRequestTimings : IDisposable
 	{
 		void Finish(bool success, int? httpStatusCode);
 	}
+
 	internal class NoopRequestTimings : IRequestTimings
 	{
 		public static NoopRequestTimings Instance = new NoopRequestTimings();
@@ -36,7 +21,6 @@ namespace Elasticsearch.Net.Connection.RequestState
 		{
 		}
 	}
-
 
 	internal class RequestTimings : IRequestTimings
 	{
@@ -81,4 +65,5 @@ namespace Elasticsearch.Net.Connection.RequestState
 			});
 		}
 	}
+
 }
