@@ -56,6 +56,9 @@ namespace Elasticsearch.Net
 
 		[DebuggerDisplay("{Request != null ? System.Text.Encoding.UTF8.GetString(Request) : null,nq}")]
 		byte[] Request { get; }
+
+		List<Audit> AuditTrail { get; }
+
 	}
 
 

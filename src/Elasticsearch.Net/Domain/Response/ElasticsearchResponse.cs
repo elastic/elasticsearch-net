@@ -68,6 +68,8 @@ namespace Elasticsearch.Net
 
 		public IElasticsearchSerializer Serializer { get; protected internal set; }
 
+		public List<Audit> AuditTrail { get; internal set; }
+
 		/// <summary>
 		/// If the response is succesful or has a known error (400-500 range)
 		/// The client should not retry this call

@@ -80,6 +80,7 @@
     <Compile Include="ClientConcepts\ConnectionPooling\BuildingBlocks\ConnectionPooling.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\BuildingBlocks\RequestPipeline.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\Sniffing\OnStartup.cs" />
+    <Compile Include="Framework\Extensions\Numeric.cs" />
     <Compile Include="Framework\VirtualClustering\Cluster.cs" />
     <Compile Include="Framework\VirtualClustering\FixedPipelineFactory.cs" />
     <Compile Include="Framework\VirtualClustering\ISniffRule.cs" />
