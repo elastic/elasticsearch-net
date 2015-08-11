@@ -79,6 +79,9 @@
     <Compile Include="ClientConcepts\ConnectionPooling\BuildingBlocks\RoundRobin.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\BuildingBlocks\ConnectionPooling.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\BuildingBlocks\RequestPipeline.cs" />
+    <Compile Include="Framework\Audit\Audits.cs" />
+    <Compile Include="Framework\Audit\ClientCall.cs" />
+    <Compile Include="Framework\Audit\ClientCallAssertations.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\Sniffing\OnStartup.cs" />
     <Compile Include="Framework\Extensions\Numeric.cs" />
     <Compile Include="Framework\VirtualClustering\Cluster.cs" />

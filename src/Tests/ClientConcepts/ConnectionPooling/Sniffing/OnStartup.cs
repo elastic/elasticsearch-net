@@ -12,6 +12,7 @@ using Tests.Framework;
 using System.Linq;
 using System.Collections.Generic;
 using Tests.Framework.MockData;
+using System.Threading.Tasks;
 
 namespace Tests.ClientConcepts.LowLevel
 {
@@ -22,21 +23,45 @@ namespace Tests.ClientConcepts.LowLevel
 		* Connection pools that return true for `SupportsReseeding` by default sniff on startup.
 		*/
 
-		[U] public void RequestPipeline()
+		[U]
+		public async Task ASniffOnStartupHappens()
 		{
-			var cluster = Cluster.Nodes(10)
+			var virtualWorld = new AuditTrailTester();
+			virtualWorld.Cluster = () => Cluster
+				.Nodes(10)
 				.Sniff(s => s.FailAlways())
 				.Sniff(s => s.OnPort(9202).SucceedAlways())
 				.SniffingConnectionPool()
 				.AllDefaults();
 
-			var response = ClientCall.OnCluster(cluster).Sees(new Audits {
+			 await virtualWorld.Sees(new Audits {
 				{ AuditEvent.SniffOnStartup},
 				{ AuditEvent.SniffFail, 9200},
 				{ AuditEvent.SniffFail, 9201},
 				{ AuditEvent.SniffSuccess, 9202},
 				{ AuditEvent.Ping, 9200},
 				{ AuditEvent.HealhyResponse, 9200}
+			});
+		}
+
+		[U]
+		public async Task SniffOnStartUpTakesNewClusterState()
+		{
+			var virtualWorld = new AuditTrailTester();
+			virtualWorld.Cluster = () => Cluster
+				.Nodes(10)
+				.Sniff(s => s.FailAlways())
+				.Sniff(s => s.OnPort(9202).SucceedAlways(Cluster.Nodes(8, startFrom: 9202)))
+				.SniffingConnectionPool()
+				.AllDefaults();
+
+			 await virtualWorld.Sees(new Audits {
+				{ AuditEvent.SniffOnStartup},
+				{ AuditEvent.SniffFail, 9200},
+				{ AuditEvent.SniffFail, 9201},
+				{ AuditEvent.SniffSuccess, 9202},
+				{ AuditEvent.Ping, 9202},
+				{ AuditEvent.HealhyResponse, 9202}
 			});
 		}
 

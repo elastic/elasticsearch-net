@@ -300,7 +300,8 @@ namespace Elasticsearch.Net.Connection
 						//var response = this.Call(PipelineFailure.BadResponse, () => this._connection.Request<Stream>(requestData));
 						var response = this._connection.Request<SniffResponse>(requestData);
 						//TODO validate ToNodes() and pass it to a filter folks can register
-						this._connectionPool.Reseed(response.Response.ToNodes(this._connectionPool.UsingSsl));
+						var nodes = response.Response.ToNodes(this._connectionPool.UsingSsl);
+						this._connectionPool.Reseed(nodes);
 						return;
 					}
 					catch (ElasticsearchException e) when (e.Cause == PipelineFailure.BadAuthentication) //unrecoverable

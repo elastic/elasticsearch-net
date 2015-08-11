@@ -42,7 +42,7 @@ namespace Elasticsearch.Net.ConnectionPool
 
 		public override void Reseed(IEnumerable<Node> nodes)
 		{
-			if (nodes.HasAny()) return;
+			if (!nodes.HasAny()) return;
 
 			try
 			{

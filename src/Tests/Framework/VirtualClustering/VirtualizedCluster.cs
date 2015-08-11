@@ -2,6 +2,7 @@ using Elasticsearch.Net.ConnectionPool;
 using Elasticsearch.Net.Providers;
 using Nest;
 using System;
+using System.Threading.Tasks;
 using Tests.Framework.MockData;
 
 namespace Tests.Framework
@@ -24,10 +25,9 @@ namespace Tests.Framework
 			this._connectionPool = pool;
 		}
 
-		public ISearchResponse<Project> ClientCall()
-		{
-			return this._client.Search<Project>(s => s);
-		}
+		public ISearchResponse<Project> ClientCall() => this._client.Search<Project>(s => s);
+
+		public async Task<ISearchResponse<Project>> ClientCallAsync() => await this._client.SearchAsync<Project>(s => s);
 
 		public void ChangeTime(Func<DateTime, DateTime> change) => change(_dateTimeProvider.MutableNow);
 	}

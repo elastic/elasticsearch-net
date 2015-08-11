@@ -6,9 +6,9 @@ namespace Tests.Framework
 {
 	public static class Cluster
 	{
-		public static VirtualCluster Nodes(int numberOfNodes) =>
+		public static VirtualCluster Nodes(int numberOfNodes, int startFrom = 9200) =>
 			new VirtualCluster(
-				Enumerable.Range(9200, numberOfNodes).Select(n => new Node(new Uri($"http://localhost:{n}")))
+				Enumerable.Range(startFrom, numberOfNodes).Select(n => new Node(new Uri($"http://localhost:{n}")))
 			);
 	}
 }
