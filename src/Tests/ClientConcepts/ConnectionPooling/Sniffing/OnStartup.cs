@@ -23,8 +23,7 @@ namespace Tests.ClientConcepts.LowLevel
 		* Connection pools that return true for `SupportsReseeding` by default sniff on startup.
 		*/
 
-		[U]
-		public async Task ASniffOnStartupHappens()
+		[U] public async Task ASniffOnStartupHappens()
 		{
 			var virtualWorld = new AuditTrailTester();
 			virtualWorld.Cluster = () => Cluster
@@ -44,14 +43,13 @@ namespace Tests.ClientConcepts.LowLevel
 			});
 		}
 
-		[U]
-		public async Task SniffOnStartUpTakesNewClusterState()
+		[U] public async Task SniffOnStartUpTakesNewClusterState()
 		{
 			var virtualWorld = new AuditTrailTester();
 			virtualWorld.Cluster = () => Cluster
 				.Nodes(10)
 				.Sniff(s => s.FailAlways())
-				.Sniff(s => s.OnPort(9202).SucceedAlways(Cluster.Nodes(8, startFrom: 9202)))
+				.Sniff(s => s.OnPort(9202).SucceedAlways(Cluster.Nodes(8, startFrom: 9204)))
 				.SniffingConnectionPool()
 				.AllDefaults();
 
@@ -60,8 +58,8 @@ namespace Tests.ClientConcepts.LowLevel
 				{ AuditEvent.SniffFail, 9200},
 				{ AuditEvent.SniffFail, 9201},
 				{ AuditEvent.SniffSuccess, 9202},
-				{ AuditEvent.Ping, 9202},
-				{ AuditEvent.HealhyResponse, 9202}
+				{ AuditEvent.Ping, 9204},
+				{ AuditEvent.HealhyResponse, 9204}
 			});
 		}
 
