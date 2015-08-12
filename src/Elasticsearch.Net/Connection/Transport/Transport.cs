@@ -11,7 +11,6 @@ using PurifyNet;
 using System.IO;
 using System.Collections.Specialized;
 using System.Threading;
-using Elasticsearch.Net.Connection.RequestState;
 
 namespace Elasticsearch.Net.Connection
 {

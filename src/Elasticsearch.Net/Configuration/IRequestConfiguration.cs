@@ -54,8 +54,7 @@ namespace Elasticsearch.Net.Connection.Configuration
 		/// Basic access authorization credentials to specify with this request.
 		/// Overrides any credentials that are set at the global IConnectionSettings level.
 		/// </summary>
-		/// TODO: rename to BasicAuthenticationCredentials in 2.0
-		BasicAuthorizationCredentials BasicAuthorizationCredentials { get; set; }
+		BasicAuthorizationCredentials BasicAuthenticationCredentials { get; set; }
 
 		/// <summary>
 		/// Whether or not this request should be pipelined. http://en.wikipedia.org/wiki/HTTP_pipelining

@@ -65,17 +65,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Connection\Configuration\IRequestConfiguration.cs" />
-    <Compile Include="Connection\Configuration\RequestConfiguration.cs" />
-    <Compile Include="Connection\Configuration\RequestConfigurationDescriptor.cs" />
+    <Compile Include="Configuration\IRequestConfiguration.cs" />
+    <Compile Include="Configuration\RequestConfiguration.cs" />
+    <Compile Include="Configuration\RequestConfigurationDescriptor.cs" />
     <Compile Include="Connection\ElasticsearchException.cs" />
     <Compile Include="Connection\HttpMethod.cs" />
+    <Compile Include="Connection\Audit\Audit.cs" />
+    <Compile Include="Connection\Audit\Auditable.cs" />
+    <Compile Include="Connection\Audit\AuditEvent.cs" />
     <Compile Include="Connection\Pipeline\RequestPipeline.cs" />
     <Compile Include="Connection\Pipeline\RequestData.cs" />
     <Compile Include="Connection\Pipeline\IRequestPipeline.cs" />
     <Compile Include="Connection\PipelineFailure.cs" />
     <Compile Include="Connection\Node.cs" />
-    <Compile Include="Connection\Audit\RequestTimings.cs" />
     <Compile Include="Connection\Security\BasicAuthorizationCredentials.cs" />
     <Compile Include="Connection\Sniff\SniffResponse.cs" />
     <Compile Include="Connection\Transport\PostData.cs" />
@@ -86,8 +88,7 @@
     <Compile Include="Domain\IHideObjectMembers.cs" />
     <Compile Include="Domain\RequestParameters\IRequestParameters.cs" />
     <Compile Include="Domain\Response\RequestMetrics.cs" />
-    <Compile Include="Connection\Audit\RequestType.cs" />
-    <Compile Include="Domain\Response\VoidResponse.cs" />
+    <Compile Include="Connection\SpecialResponses\VoidResponse.cs" />
     <Compile Include="Domain\Response\ElasticsearchServerError.cs" />
     <Compile Include="Exceptions\OneToOneServerException.cs" />
     <Compile Include="Exceptions\ElasticsearchAuthException.cs" />
@@ -99,7 +100,7 @@
     <Compile Include="Connection\HttpConnection.cs" />
     <Compile Include="Exceptions\ElasticsearchServerException.cs" />
     <Compile Include="Exceptions\ConnectionException.cs" />
-    <Compile Include="Connection\Configuration\ConnectionConfiguration.cs" />
+    <Compile Include="Configuration\ConnectionConfiguration.cs" />
     <Compile Include="ConnectionPool\IConnectionPool.cs" />
     <Compile Include="Providers\IRequestPipelineFactory.cs" />
     <Compile Include="Providers\IDateTimeProvider.cs" />
@@ -111,12 +112,12 @@
     <Compile Include="Connection\Transport\ITransport.cs" />
     <Compile Include="Domain\Response\ElasticsearchResponse.cs" />
     <Compile Include="Connection\IConnection.cs" />
-    <Compile Include="Connection\Configuration\IConnectionConfigurationValues.cs" />
-    <Compile Include="Connection\Configuration\IConnectionConfiguration.cs" />
+    <Compile Include="Configuration\IConnectionConfigurationValues.cs" />
+    <Compile Include="Configuration\IConnectionConfiguration.cs" />
     <Compile Include="Connection\InMemoryConnection.cs" />
     <Compile Include="ElasticsearchClient.Generated.cs" />
-    <Compile Include="Domain\Response\DynamicDictionary.cs" />
-    <Compile Include="Domain\Response\ElasticsearchDynamicValue.cs" />
+    <Compile Include="Connection\SpecialResponses\DynamicDictionary.cs" />
+    <Compile Include="Connection\SpecialResponses\ElasticsearchDynamicValue.cs" />
     <Compile Include="Exceptions\MaxRetryException.cs" />
     <Compile Include="Extensions\DateExtensions.cs" />
     <Compile Include="Extensions\Extensions.cs" />
@@ -146,6 +147,7 @@
   <ItemGroup>
     <None Include="paket.references" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

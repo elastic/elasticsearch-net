@@ -13,7 +13,7 @@ namespace Elasticsearch.Net.Connection
 		public IElasticsearchResponse Response { get; }
 		public bool Recoverable => Cause == PipelineFailure.BadResponse || Cause == PipelineFailure.Unexpected || Cause == PipelineFailure.BadPing;
 
-		//TODO exception messages
+		//TODO make sure the exception messages are gorgeous
 		public ElasticsearchException(PipelineFailure cause, Exception innerException) : base("", innerException)
 		{
 			this.Cause = cause;

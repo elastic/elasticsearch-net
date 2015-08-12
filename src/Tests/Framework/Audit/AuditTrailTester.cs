@@ -16,7 +16,7 @@ namespace Tests.Framework
 		public ISearchResponse<Project> Response { get; internal set; }
 		public ISearchResponse<Project> ResponseAsync { get; internal set; }
 
-		public async Task Sees(Audits audits)
+		public async Task TraceCall(Audits audits)
 		{
 			this.Response = this.Cluster().ClientCall();
 			this.ResponseAsync = await this.Cluster().ClientCallAsync();

@@ -147,7 +147,7 @@ namespace Elasticsearch.Net.Connection
 		NameValueCollection IConnectionConfigurationValues.Headers => _headers;
 
 		BasicAuthorizationCredentials _basicAuthCredentials;
-		BasicAuthorizationCredentials IConnectionConfigurationValues.BasicAuthorizationCredentials => _basicAuthCredentials;
+		BasicAuthorizationCredentials IConnectionConfigurationValues.BasicAuthenticationCredentials => _basicAuthCredentials;
 
 		/* */
 

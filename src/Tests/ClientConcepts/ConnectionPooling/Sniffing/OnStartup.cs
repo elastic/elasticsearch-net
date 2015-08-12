@@ -33,7 +33,7 @@ namespace Tests.ClientConcepts.LowLevel
 				.SniffingConnectionPool()
 				.AllDefaults();
 
-			 await virtualWorld.Sees(new Audits {
+			 await virtualWorld.TraceCall(new Audits {
 				{ AuditEvent.SniffOnStartup},
 				{ AuditEvent.SniffFail, 9200},
 				{ AuditEvent.SniffFail, 9201},
@@ -53,13 +53,40 @@ namespace Tests.ClientConcepts.LowLevel
 				.SniffingConnectionPool()
 				.AllDefaults();
 
-			 await virtualWorld.Sees(new Audits {
+			 await virtualWorld.TraceCall(new Audits {
 				{ AuditEvent.SniffOnStartup},
 				{ AuditEvent.SniffFail, 9200},
 				{ AuditEvent.SniffFail, 9201},
 				{ AuditEvent.SniffSuccess, 9202},
 				{ AuditEvent.Ping, 9204},
 				{ AuditEvent.HealhyResponse, 9204}
+			});
+		}
+
+		[U] public async Task SniffTriesAllNodes()
+		{
+			var virtualWorld = new AuditTrailTester();
+			virtualWorld.Cluster = () => Cluster
+				.Nodes(10)
+				.Sniff(s => s.FailAlways())
+				.Sniff(s => s.OnPort(9209).SucceedAlways())
+				.SniffingConnectionPool()
+				.AllDefaults();
+
+			 await virtualWorld.TraceCall(new Audits {
+				{ AuditEvent.SniffOnStartup},
+				{ AuditEvent.SniffFail, 9200},
+				{ AuditEvent.SniffFail, 9201},
+				{ AuditEvent.SniffFail, 9202},
+				{ AuditEvent.SniffFail, 9203},
+				{ AuditEvent.SniffFail, 9204},
+				{ AuditEvent.SniffFail, 9205},
+				{ AuditEvent.SniffFail, 9206},
+				{ AuditEvent.SniffFail, 9207},
+				{ AuditEvent.SniffFail, 9208},
+				{ AuditEvent.SniffSuccess, 9209},
+				{ AuditEvent.Ping, 9200},
+				{ AuditEvent.HealhyResponse, 9200}
 			});
 		}
 

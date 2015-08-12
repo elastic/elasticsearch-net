@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace Elasticsearch.Net
 {
+	//TODO decide on this vs audit trail, combine?
 	public class CallMetrics
 	{
 		public string Path { get; set; }

@@ -6,8 +6,6 @@ using Elasticsearch.Net.Connection.Security;
 
 namespace Elasticsearch.Net.Connection
 {
-	//TODO change timeouts to TimeSpans in 2.0?
-
 	public interface IConnectionConfigurationValues
 	{
 		/// <summary> The connection pool to use when talking with elasticsearch </summary>
@@ -165,8 +163,7 @@ namespace Elasticsearch.Net.Connection
 		/// <summary>
 		/// Basic access authorization credentials to specify with all requests.
 		/// </summary>
-		/// TODO: Rename to BasicAuthenticationCredentials in 2.0
-		BasicAuthorizationCredentials BasicAuthorizationCredentials { get; }
+		BasicAuthorizationCredentials BasicAuthenticationCredentials { get; }
 		
 		/// <summary>
 		/// KeepAliveTime - specifies the timeout, in milliseconds, with no

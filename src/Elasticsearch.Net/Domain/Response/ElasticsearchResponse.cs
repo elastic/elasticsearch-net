@@ -57,6 +57,7 @@ namespace Elasticsearch.Net
 		public byte[] Request { get; protected internal set; }
 
 		public int NumberOfRetries { get; protected internal set; }
+
 		public CallMetrics Metrics { get; protected internal set; }
 
 		/// <summary>

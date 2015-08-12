@@ -67,7 +67,7 @@ namespace Elasticsearch.Net.Connection
 			this.ProxyUsername = global.ProxyUsername;
 			this.ProxyPassword = global.ProxyPassword;
 			this.DisableAutomaticProxyDetection = global.DisableAutomaticProxyDetection;
-			this.BasicAuthorizationCredentials = local?.BasicAuthorizationCredentials ?? global.BasicAuthorizationCredentials;
+			this.BasicAuthorizationCredentials = local?.BasicAuthenticationCredentials ?? global.BasicAuthenticationCredentials;
 			this.CancellationToken = local?.CancellationToken ?? CancellationToken.None;
 		}
 

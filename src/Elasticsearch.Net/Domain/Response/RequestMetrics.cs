@@ -4,7 +4,6 @@ namespace Elasticsearch.Net
 {
 	public class RequestMetrics
 	{
-		public RequestType RequestType { get; set; }
 		public Uri Node { get; set; }
 		public DateTime StartedOn { get; set; }
 		public long EllapsedMilliseconds { get; set; }
