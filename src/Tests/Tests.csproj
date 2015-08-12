@@ -84,6 +84,7 @@
     <Compile Include="Framework\Audit\ClientCall.cs" />
     <Compile Include="Framework\Audit\ClientCallAssertations.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\Sniffing\OnStartup.cs" />
+    <Compile Include="Framework\Extensions\DiffExtensions.cs" />
     <Compile Include="Framework\Extensions\Numeric.cs" />
     <Compile Include="Framework\Providers\TestableDateTimeProvider.cs" />
     <Compile Include="Framework\VirtualClustering\Cluster.cs" />

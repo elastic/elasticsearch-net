@@ -19,7 +19,7 @@ namespace Tests.Framework
 		}
 
 		public bool IsSniffRequest(RequestData requestData) =>
-		requestData.Path.StartsWith("_nodes/_all/clear", StringComparison.Ordinal);
+			requestData.Path.StartsWith("_nodes/_all/clear", StringComparison.Ordinal);
 
 		public override ElasticsearchResponse<TReturn> Request<TReturn>(RequestData requestData)
 		{
