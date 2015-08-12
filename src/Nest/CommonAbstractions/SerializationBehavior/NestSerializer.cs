@@ -35,7 +35,7 @@ namespace Nest
 
 		public void Serialize(object data, Stream writableStream, SerializationFormatting formatting = SerializationFormatting.Indented)
 		{
-			using (var writer = new StreamWriter(writableStream, _encoding))
+			using (var writer = new StreamWriter(writableStream, _encoding, 8096, leaveOpen: true))
 			using (var jsonWriter = new JsonTextWriter(writer))
 			{
 				var serializer = JsonSerializer.Create(this.CreateSettings());
@@ -49,9 +49,12 @@ namespace Nest
 		{
 			if (stream == null) return default(T);
 			var serializer = JsonSerializer.Create(this._serializationSettings);
-			var jsonTextReader = new JsonTextReader(new StreamReader(stream));
-			var t = serializer.Deserialize(jsonTextReader, typeof(T));
-			return (T)t;
+			using (var streamReader = new StreamReader(stream))
+			using (var jsonTextReader = new JsonTextReader(streamReader))
+			{
+				var t = serializer.Deserialize(jsonTextReader, typeof(T));
+				return (T)t;
+			}
 		}
 
 		public Task<T> DeserializeAsync<T>(Stream stream, CancellationToken cancellationToken = default(CancellationToken))

@@ -124,7 +124,7 @@ namespace Elasticsearch.Net.Connection
 		public ElasticsearchResponse<TReturn> CreateResponse<TReturn>(Exception e)
 		{
 			var cs = new ElasticsearchResponse<TReturn>(this._settings, e);
-			cs.Request = this.Data.ToByteArray(this._settings);
+			cs.Request = this.Data?.Bytes;
 			cs.RequestUri = this.Uri;
 			cs.RequestMethod = this.Method;
 			cs.OriginalException = e;
@@ -134,7 +134,7 @@ namespace Elasticsearch.Net.Connection
 		private ElasticsearchResponse<TReturn> InitializeResponse<TReturn>(int statusCode, Exception innerException)
 		{
 			var cs = new ElasticsearchResponse<TReturn>(this._settings, statusCode);
-			cs.Request = this.Data?.ToByteArray(this._settings);
+			cs.Request = this.Data?.Bytes;
 			cs.RequestUri = this.Uri;
 			cs.RequestMethod = this.Method;
 			cs.OriginalException = innerException;
@@ -143,7 +143,7 @@ namespace Elasticsearch.Net.Connection
 		}
 
 		private bool NeedsToEagerReadStream<TReturn>() =>
-			this._settings.KeepRawResponse || typeof(TReturn) == typeof(string) || typeof(TReturn) == typeof(byte[]);
+			this._settings.DisableDirectStreaming || typeof(TReturn) == typeof(string) || typeof(TReturn) == typeof(byte[]);
 
 		private byte[] SwapStreams(ref Stream responseStream, ref MemoryStream ms)
 		{
@@ -158,7 +158,7 @@ namespace Elasticsearch.Net.Connection
 		private bool SetSpecialTypes<TReturn>(Stream responseStream, ElasticsearchResponse<TReturn> cs, byte[] bytes)
 		{
 			var setSpecial = true;
-			if (this._settings.KeepRawResponse)
+			if (this._settings.DisableDirectStreaming)
 				cs.ResponseRaw = bytes;
 
 			if (cs.Response is string)

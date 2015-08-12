@@ -21,7 +21,6 @@ namespace Elasticsearch.Net.Connection
 		private readonly IMemoryStreamFactory _memoryStreamFactory;
 		private readonly CancellationToken _cancellationToken;
 
-		//todo these two terms are too similar come up with a better name
 		public IRequestParameters RequestParameters { get; }
 		public IRequestConfiguration RequestConfiguration { get; }
 		public DateTime StartedOn { get; }
@@ -36,10 +35,6 @@ namespace Elasticsearch.Net.Connection
 		public int Retried => _retried;
 
 		private int? _cursor = null;
-
-		//TODO static property on ConnectionConfiguration?
-		readonly TimeSpan DefaultPingTimeout = TimeSpan.FromSeconds(1);
-		readonly TimeSpan SslDefaultPingTimeout = TimeSpan.FromSeconds(2);
 
 		public RequestPipeline(
 			IConnectionConfigurationValues configurationValues,
@@ -58,6 +53,13 @@ namespace Elasticsearch.Net.Connection
 			this.RequestConfiguration = requestParameters?.RequestConfiguration;
 			this._cancellationToken = this.RequestConfiguration?.CancellationToken ?? CancellationToken.None;
 			this.StartedOn = dateTimeProvider.Now();
+		}
+
+		private RequestData CreateRequestData(HttpMethod method, string path, PostData<object> postData, IRequestConfiguration requestOverrides)
+		{
+			var requestData = new RequestData(method, path, postData, this._settings, requestOverrides, this._memoryStreamFactory);
+			requestData.Uri = this.CurrentNode.CreatePath(requestData.Path);
+			return requestData;
 		}
 
 		public void Dispose()
@@ -173,9 +175,7 @@ namespace Elasticsearch.Net.Connection
 		{
 			if (this.Retried >= this.MaxRetries + 1) return false;
 
-			//TODO move this out of GetNext;
 			var node = this._connectionPool.GetNext(_cursor, out _cursor);
-			//todo make connectionpool return Node
 			this.CurrentNode = node;
 			return true;
 		}
@@ -194,7 +194,9 @@ namespace Elasticsearch.Net.Connection
 		}
 
 		TimeSpan PingTimeout =>
-			 this.RequestConfiguration?.ConnectTimeout ?? this._settings.PingTimeout ?? (this._connectionPool.UsingSsl ? SslDefaultPingTimeout : DefaultPingTimeout);
+			 this.RequestConfiguration?.ConnectTimeout 
+			?? this._settings.PingTimeout 
+			?? (this._connectionPool.UsingSsl ? ConnectionConfiguration.DefaultPingTimeoutOnSSL : ConnectionConfiguration.DefaultPingTimeout);
 
 		public void Ping()
 		{
@@ -203,11 +205,11 @@ namespace Elasticsearch.Net.Connection
 			using (var audit = this.Audit(AuditEvent.Ping))
 			{
 				audit.Node = this.CurrentNode;
-				//TODO merge with this.RequestConfiguration
-				var requestOverrides = new RequestConfiguration { ConnectTimeout = PingTimeout, RequestTimeout = PingTimeout };
 
-				var requestData = new RequestData(HttpMethod.HEAD, "/", null, this._settings, requestOverrides, this._memoryStreamFactory);
-				requestData.Uri = this.CurrentNode.CreatePath(requestData.Path);
+				var requestOverrides = this.RequestConfiguration ?? new RequestConfiguration {};
+				requestOverrides.ConnectTimeout = requestOverrides.RequestTimeout = PingTimeout;
+
+				var requestData = CreateRequestData(HttpMethod.HEAD, "/", null, requestOverrides);
 				this._connection.Request<VoidResponse>(requestData);
 			}
 		}
@@ -216,13 +218,14 @@ namespace Elasticsearch.Net.Connection
 		{
 			if (this._settings.DisablePings || !this._connectionPool.SupportsPinging || !this.CurrentNode.IsResurrected) return;
 
-			//TODO merge with this.RequestConfiguration
 			using (var audit = this.Audit(AuditEvent.Ping))
 			{
 				audit.Node = this.CurrentNode;
-				var requestOverrides = new RequestConfiguration { ConnectTimeout = PingTimeout, RequestTimeout = PingTimeout };
-				var requestData = new RequestData(HttpMethod.HEAD, "/", null, this._settings, requestOverrides, this._memoryStreamFactory);
-				requestData.Uri = this.CurrentNode.CreatePath(requestData.Path);
+
+				var requestOverrides = this.RequestConfiguration ?? new RequestConfiguration { };
+				requestOverrides.ConnectTimeout = requestOverrides.RequestTimeout = PingTimeout;
+
+				var requestData = CreateRequestData(HttpMethod.HEAD, "/", null, requestOverrides);
 				await this._connection.RequestAsync<VoidResponse>(requestData);
 			}
 		}
@@ -243,9 +246,7 @@ namespace Elasticsearch.Net.Connection
 						var requestData = new RequestData(HttpMethod.GET, path, null, this._settings, this._memoryStreamFactory);
 						requestData.Uri = node.CreatePath(requestData.Path);
 
-						//var response = this.Call(PipelineFailure.BadResponse, () => this._connection.Request<Stream>(requestData));
 						var response = this._connection.Request<SniffResponse>(requestData);
-						//TODO validate ToNodes() and pass it to a filter folks can register
 						var nodes = response.Response.ToNodes(this._connectionPool.UsingSsl);
 						this._connectionPool.Reseed(nodes);
 						return;
@@ -282,7 +283,6 @@ namespace Elasticsearch.Net.Connection
 						requestData.Uri = node.CreatePath(requestData.Path);
 
 						var response = await this._connection.RequestAsync<SniffResponse>(requestData);
-						//TODO validate ToNodes() and pass it to a filter folks can register
 						this._connectionPool.Reseed(response.Response.ToNodes(this._connectionPool.UsingSsl));
 						return;
 					}

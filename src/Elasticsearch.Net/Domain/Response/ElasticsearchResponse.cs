@@ -52,6 +52,7 @@ namespace Elasticsearch.Net
 
 		public IConnectionConfigurationValues Settings { get; protected internal set; }
 
+		//TODO rename to body, response.response feels nuts
 		public T Response { get; protected internal set; }
 
 		public byte[] Request { get; protected internal set; }
@@ -118,7 +119,7 @@ namespace Elasticsearch.Net
 			string response = "<Response stream not captured or already read to completion by serializer, set ExposeRawResponse() on connectionsettings to force it to be set on>";
 			if (typeof(T) == typeof(string))
 				response = this.Response as string;
-			else if (this.Settings.KeepRawResponse)
+			else if (this.Settings.DisableDirectStreaming)
 				response = this.ResponseRaw.Utf8String();
 			else if (typeof(T) == typeof(byte[]))
 				response = (this.Response as byte[]).Utf8String();

@@ -51,11 +51,10 @@ namespace Elasticsearch.Net.Connection
 		T UsePrettyResponses(bool b = true);
 		
 		/// <summary>
-		/// Make sure the reponse bytes are always available on the ElasticsearchResponse object
-		/// <para>Note: that depending on the registered serializer this may cause the respond to be read in memory first</para>
+		/// When set to true will disable (de)serializing directly to the request and response stream and return a byte[]
+		/// copy of the raw request and response on elasticsearch calls. Defaults to true when #DEBUG is defined
 		/// </summary>
-		/// <returns></returns>
-		T ExposeRawResponse(bool b = true);
+		T DisableDirectStreaming(bool b = true);
 		
 		/// <summary>
 		/// Semaphore asynchronous connections automatically by giving

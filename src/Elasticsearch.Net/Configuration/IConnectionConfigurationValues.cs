@@ -104,10 +104,10 @@ namespace Elasticsearch.Net.Connection
 		bool UsesPrettyResponses { get; }
 
 		/// <summary>
-		/// Instructs the client to always keep a raw copy of the returned bytes on the response
-		/// , useful for debugging purposses.
+		/// When set to true will disable (de)serializing directly to the request and response stream and return a byte[]
+		/// copy of the raw request and response on elasticsearch calls. Defaults to  false
 		/// </summary>
-		bool KeepRawResponse { get; }
+		bool DisableDirectStreaming { get; }
 
 		/// <summary>
 		/// Disabled proxy detection on the webrequest, in some cases this may speed up the first connection

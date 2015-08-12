@@ -17,6 +17,11 @@ namespace Elasticsearch.Net.Connection
 		ConnectionConfiguration<ConnectionConfiguration>,
 		IConnectionConfiguration<ConnectionConfiguration>
 	{
+
+		public static TimeSpan DefaultTimeout = TimeSpan.FromMinutes(1);
+		public static TimeSpan DefaultPingTimeout = TimeSpan.FromSeconds(2);
+		public static TimeSpan DefaultPingTimeoutOnSSL = TimeSpan.FromSeconds(5);
+
 		/// <summary>
 		/// ConnectionConfiguration allows you to control how ElasticsearchClient behaves and where/how it connects 
 		/// to elasticsearch
@@ -44,7 +49,6 @@ namespace Elasticsearch.Net.Connection
 
 
 	}
-
 
 	[Browsable(false)]
 	[EditorBrowsable(EditorBrowsableState.Never)]
@@ -87,18 +91,15 @@ namespace Elasticsearch.Net.Connection
 		string _proxyAddress;
 		string IConnectionConfigurationValues.ProxyAddress => _proxyAddress;
 
+		//TODO usePretty only as one configurable truth
 		bool _usePrettyResponses;
 		bool IConnectionConfigurationValues.UsesPrettyResponses => _usePrettyResponses;
 
 		bool _usePrettyRequests;
 		bool IConnectionConfigurationValues.UsesPrettyRequests => _usePrettyRequests;
 
-#if DEBUG
-		private bool _keepRawResponse = true;
-#else
-		private bool _keepRawResponse = false;
-#endif
-		bool IConnectionConfigurationValues.KeepRawResponse => _keepRawResponse;
+		private bool _disableDirectStreaming = false;
+		bool IConnectionConfigurationValues.DisableDirectStreaming => _disableDirectStreaming;
 
 #if DEBUG
 		private bool _enableMetrics = true;
@@ -109,7 +110,9 @@ namespace Elasticsearch.Net.Connection
 
 		bool _disableAutomaticProxyDetection = false;
 		bool IConnectionConfigurationValues.DisableAutomaticProxyDetection => _disableAutomaticProxyDetection;
-
+		
+		//TODO remove we no longer listen to this, should be solved outside of the client by user IMO. 
+		//in 1.x in practice only our HttpConnection obeyed this
 		int _maximumAsyncConnections;
 		int IConnectionConfigurationValues.MaximumAsyncConnections => _maximumAsyncConnections;
 
@@ -169,7 +172,7 @@ namespace Elasticsearch.Net.Connection
 			this._connection = connection ?? new HttpConnection();
 			this._serializer = serializer ?? this.DefaultSerializer();
 
-			this._timeout = TimeSpan.FromMinutes(1);
+			this._timeout = ConnectionConfiguration.DefaultTimeout;
 			this._connectionStatusHandler = this.ConnectionStatusDefaultHandler;
 			this._maximumAsyncConnections = 0;
 			this._usePrettyRequests = true;
@@ -332,7 +335,7 @@ namespace Elasticsearch.Net.Connection
 		/// Make sure the reponse bytes are always available on the ElasticsearchResponse object
 		/// <para>Note: that depending on the registered serializer this may cause the respond to be read in memory first</para>
 		/// </summary>
-		public T ExposeRawResponse(bool b = true) => Assign(a => a._keepRawResponse = b);
+		public T DisableDirectStreaming(bool b = true) => Assign(a => a._disableDirectStreaming = b);
 
 		protected void ConnectionStatusDefaultHandler(IElasticsearchResponse status) { return; }
 
