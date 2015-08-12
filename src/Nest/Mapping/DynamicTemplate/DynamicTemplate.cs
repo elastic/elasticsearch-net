@@ -31,18 +31,12 @@ namespace Nest
 	{
 		internal IDictionary<string, DynamicTemplate>  Templates = new Dictionary<string, DynamicTemplate>();
 		internal IList<string> _Deletes = new List<string>();
-		private readonly IConnectionSettingsValues _connectionSettings;
-
-		public DynamicTemplatesDescriptor(IConnectionSettingsValues connectionSettings)
-		{
-			this._connectionSettings = connectionSettings;
-		}
 
 		public DynamicTemplatesDescriptor<T> Add(
 			Func<DynamicTemplateDescriptor<T>, DynamicTemplateDescriptor<T>> templateSelector)
 		{
 			templateSelector.ThrowIfNull("templateSelector");
-			var d = templateSelector(new DynamicTemplateDescriptor<T>(this._connectionSettings));
+			var d = templateSelector(new DynamicTemplateDescriptor<T>());
 			if (d == null || d._Name.IsNullOrEmpty())
 				throw new Exception("Could not get name for dynamic template");
 
@@ -57,15 +51,12 @@ namespace Nest
 	}
 	public class DynamicTemplateDescriptor<T> where T : class
 	{
-		private readonly IConnectionSettingsValues _connectionSettings;
-
 		internal string _Name { get; private set; }
 		internal DynamicTemplate _Template { get; private set; }
 
-		public DynamicTemplateDescriptor(IConnectionSettingsValues connectionSettings)
+		public DynamicTemplateDescriptor()
 		{
 			this._Template = new DynamicTemplate();
-			this._connectionSettings = connectionSettings;
 		}
 
 		public DynamicTemplateDescriptor<T> Name(string name)
@@ -112,7 +103,5 @@ namespace Nest
 			this._Template.Mapping = mapping;
 			return this;
 		}
-
-
 	}
 }

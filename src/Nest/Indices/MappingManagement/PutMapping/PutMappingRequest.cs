@@ -78,16 +78,10 @@ namespace Nest
 
 		RootObjectType IPutMappingRequest.Mapping { get; set; }
 
-		private readonly IConnectionSettingsValues _connectionSettings;
-		private readonly ElasticInferrer _infer;
-
-		public PutMappingDescriptor(IConnectionSettingsValues connectionSettings)
+		public PutMappingDescriptor()
 		{
-			this._connectionSettings = connectionSettings;
-			this._infer = new ElasticInferrer(this._connectionSettings);
-			Self.Mapping = new RootObjectType() {  };
+			Self.Mapping = new RootObjectType();
 		}
-
 
 		public PutMappingDescriptor<T> InitializeUsing(RootObjectType rootObjectMapping)
 		{
@@ -106,19 +100,19 @@ namespace Nest
 		/// </summary>
 		public PutMappingDescriptor<T> MapFromAttributes(int maxRecursion = 0)
 		{
-			//TODO no longer needed when we have an IPutMappingRequest
-			var writer = new TypeMappingWriter(typeof(T), Self.Type, this._connectionSettings, maxRecursion);
-			var mapping = writer.RootObjectMappingFromAttributes();
-			if (mapping == null)
-				return this;
-			var properties = mapping.Properties;
-			if (Self.Mapping.Properties == null)
-				Self.Mapping.Properties = new Dictionary<FieldName, IElasticType>();
+			// TODO
+			//var writer = new TypeMappingWriter(typeof(T), Self.Type, this._connectionSettings, maxRecursion);
+			//var mapping = writer.RootObjectMappingFromAttributes();
+			//if (mapping == null)
+			//	return this;
+			//var properties = mapping.Properties;
+			//if (Self.Mapping.Properties == null)
+			//	Self.Mapping.Properties = new Dictionary<FieldName, IElasticType>();
 
-			foreach (var p in properties)
-			{
-				Self.Mapping.Properties[p.Key] = p.Value;
-			}
+			//foreach (var p in properties)
+			//{
+			//	Self.Mapping.Properties[p.Key] = p.Value;
+			//}
 			return this;
 		}
 		
@@ -291,24 +285,22 @@ namespace Nest
 			var properties = propertiesSelector(new PropertiesDescriptor<T>());
 			if (Self.Mapping.Properties == null)
 				Self.Mapping.Properties = new Dictionary<FieldName, IElasticType>();
-
 			foreach (var p in properties.Properties)
-			{
-				var key = this._infer.FieldName(p.Key);
-				Self.Mapping.Properties[key] = p.Value;
-			}
+				Self.Mapping.Properties[p.Key] = p.Value;
 			return this;
 		}
+
 		public PutMappingDescriptor<T> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> metaSelector)
 		{
 			metaSelector.ThrowIfNull("metaSelector");
 			Self.Mapping.Meta = metaSelector(new FluentDictionary<string, object>());
 			return this;
 		}
+
 		public PutMappingDescriptor<T> DynamicTemplates(Func<DynamicTemplatesDescriptor<T>, DynamicTemplatesDescriptor<T>> dynamicTemplatesSelector)
 		{
 			dynamicTemplatesSelector.ThrowIfNull("dynamicTemplatesSelector");
-			var templates = dynamicTemplatesSelector(new DynamicTemplatesDescriptor<T>(this._connectionSettings));
+			var templates = dynamicTemplatesSelector(new DynamicTemplatesDescriptor<T>());
 			if (Self.Mapping.DynamicTemplates == null)
 				Self.Mapping.DynamicTemplates = new Dictionary<string, DynamicTemplate>();
 

@@ -87,7 +87,7 @@ namespace Nest
 			where T : class
 		{
 			mappingSelector.ThrowIfNull("mappingSelector");
-			var putMappingDescriptor = mappingSelector(new PutMappingDescriptor<T>(this._connectionSettings));
+			var putMappingDescriptor = mappingSelector(new PutMappingDescriptor<T>());
 			putMappingDescriptor.ThrowIfNull("rootObjectMappingDescriptor");
 
 			var inferrer = new ElasticInferrer(this._connectionSettings);

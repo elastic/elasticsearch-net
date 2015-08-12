@@ -29,8 +29,5 @@ namespace Tests.Mapping
 			request: (client, r) => client.Map(r),
 			requestAsync: (client, r) => client.MapAsync(r)
 		);
-
-		protected override PutMappingDescriptor<Project> Descriptor() => 
-			new PutMappingDescriptor<Project>(TestClient.GetDefaultConnectionSettings());
 	}
 }

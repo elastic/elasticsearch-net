@@ -24,7 +24,5 @@ namespace Tests.Aggregations
 			request: (client, r) => client.Search<Project>(r),
 			requestAsync: (client, r) => client.SearchAsync<Project>(r)
 		);
-
-		protected override SearchDescriptor<Project> Descriptor() => new SearchDescriptor<Project>();
 	}
 }
