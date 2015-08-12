@@ -12,12 +12,7 @@ namespace Nest
 		public IBulkResponse Bulk(IBulkRequest bulkRequest)
 		{
 			return this.Dispatcher.Dispatch<IBulkRequest, BulkRequestParameters, BulkResponse>(
-				bulkRequest,
-				(p, d) =>
-				{
-					var json = Serializer.SerializeBulkDescriptor(d);
-					return this.LowLevelDispatch.BulkDispatch<BulkResponse>(p, json);
-				}
+				bulkRequest, this.LowLevelDispatch.BulkDispatch<BulkResponse>
 			);
 		}
 		
@@ -25,12 +20,7 @@ namespace Nest
 		public IBulkResponse Bulk(Func<BulkDescriptor, BulkDescriptor> bulkSelector)
 		{
 			return this.Dispatcher.Dispatch<BulkDescriptor, BulkRequestParameters, BulkResponse>(
-				bulkSelector,
-				(p, d) =>
-				{
-					var json = Serializer.SerializeBulkDescriptor(d);
-					return this.LowLevelDispatch.BulkDispatch<BulkResponse>(p, json);
-				}
+				bulkSelector, this.LowLevelDispatch.BulkDispatch<BulkResponse>
 			);
 		}
 
@@ -38,12 +28,7 @@ namespace Nest
 		public Task<IBulkResponse> BulkAsync(IBulkRequest bulkRequest)
 		{
 			return this.Dispatcher.DispatchAsync<IBulkRequest, BulkRequestParameters, BulkResponse, IBulkResponse>(
-				bulkRequest,
-				(p, d) =>
-				{
-					var json = Serializer.SerializeBulkDescriptor(d);
-					return this.LowLevelDispatch.BulkDispatchAsync<BulkResponse>(p, json);
-				}
+				bulkRequest, this.LowLevelDispatch.BulkDispatchAsync<BulkResponse>
 			);
 		}
 
@@ -51,12 +36,7 @@ namespace Nest
 		public Task<IBulkResponse> BulkAsync(Func<BulkDescriptor, BulkDescriptor> bulkSelector)
 		{
 			return this.Dispatcher.DispatchAsync<BulkDescriptor, BulkRequestParameters, BulkResponse, IBulkResponse>(
-				bulkSelector,
-				(p, d) =>
-				{
-					var json = Serializer.SerializeBulkDescriptor(d);
-					return this.LowLevelDispatch.BulkDispatchAsync<BulkResponse>(p, json);
-				}
+				bulkSelector, this.LowLevelDispatch.BulkDispatchAsync<BulkResponse>
 			);
 		}
 	}

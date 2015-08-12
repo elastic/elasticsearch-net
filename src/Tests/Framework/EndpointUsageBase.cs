@@ -102,7 +102,7 @@ namespace Tests.Framework
 			await this.AssertOnAllResponses(r=>r.IsValid.Should().Be(this.ExpectIsValid));
 
 		[U] protected async Task HitsTheCorrectUrl() =>
-			await this.AssertOnAllResponses(r=>this.AssertUrl(new Uri(r.ConnectionStatus.RequestUrl)));
+			await this.AssertOnAllResponses(r=>this.AssertUrl(r.ConnectionStatus.RequestUri));
 
 		[U] protected void SerializesInitializer() => 
 			this.AssertSerializesAndRoundTrips<TInterface>(this.Initializer);

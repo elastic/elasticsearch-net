@@ -5,7 +5,7 @@ nuget AppDomainToolkit 1.0.4.1
 nuget Autofac.Extras.FakeItEasy 3.0.2
 nuget AutoPoco 1.0.0.0
 nuget CsQuery 1.3.4
-nuget FluentAssertions 2.2.0.0
+nuget FluentAssertions 3.5.0
 nuget FubuCsProjFile 1.1.0.83
 nuget Moq 4.2.1312.1622
 nuget Newtonsoft.Json 7.0.1

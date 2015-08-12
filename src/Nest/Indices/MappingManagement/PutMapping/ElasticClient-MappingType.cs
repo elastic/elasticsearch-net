@@ -13,7 +13,7 @@ namespace Nest
 			where T : class
 		{
 			mappingSelector.ThrowIfNull("mappingSelector");
-			var descriptor = mappingSelector(new PutMappingDescriptor<T>(_connectionSettings));
+			var descriptor = mappingSelector(new PutMappingDescriptor<T>(ConnectionSettings));
 			return this.Map(descriptor);
 		}
 
@@ -38,7 +38,7 @@ namespace Nest
 			where T : class
 		{
 			mappingSelector.ThrowIfNull("mappingSelector");
-			var descriptor = mappingSelector(new PutMappingDescriptor<T>(_connectionSettings));
+			var descriptor = mappingSelector(new PutMappingDescriptor<T>(ConnectionSettings));
 			return this.MapAsync(descriptor);
 		}
 

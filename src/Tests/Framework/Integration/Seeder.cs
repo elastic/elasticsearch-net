@@ -83,7 +83,6 @@ namespace Tests.Framework.Integration
 
 			this.Client.Refresh(r=>r.Index<Project>());
 
-
 		}
 
 		private static PropertiesDescriptor<Tag> TagProperties(PropertiesDescriptor<Tag> props) => props

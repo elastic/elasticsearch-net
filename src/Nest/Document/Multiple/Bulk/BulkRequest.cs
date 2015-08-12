@@ -4,11 +4,12 @@ using System.Globalization;
 using System.Linq;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
-
+using Nest.Resolvers.Converters;
 
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[JsonConverter(typeof(BulkRequestConverter))]
 	public interface IBulkRequest : IFixedIndexTypePath<BulkRequestParameters>
 	{
 		[JsonIgnore]

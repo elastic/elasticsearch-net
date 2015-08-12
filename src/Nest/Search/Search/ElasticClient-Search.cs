@@ -26,7 +26,7 @@ namespace Nest
 
 			IPathInfo<SearchRequestParameters> p = descriptor;
 			var pathInfo = p
-				.ToPathInfo(_connectionSettings)
+				.ToPathInfo(ConnectionSettings)
 				.DeserializationState(this.CreateSearchDeserializer<T, TResult>(descriptor));
 
 			var status = this.LowLevelDispatch.SearchDispatch<SearchResponse<TResult>>(pathInfo, descriptor);
@@ -46,7 +46,7 @@ namespace Nest
 			where TResult : class
 		{
 			var pathInfo = request
-				.ToPathInfo(_connectionSettings)
+				.ToPathInfo(ConnectionSettings)
 				.DeserializationState(this.CreateSearchDeserializer<T, TResult>(request));
 
 			var status = this.LowLevelDispatch.SearchDispatch<SearchResponse<TResult>>(pathInfo, request);
@@ -70,7 +70,7 @@ namespace Nest
 			
 			IPathInfo<SearchRequestParameters> p = descriptor;
 			var pathInfo = p
-				.ToPathInfo(_connectionSettings)
+				.ToPathInfo(ConnectionSettings)
 				.DeserializationState(CreateSearchDeserializer<T, TResult>(descriptor));
 
 			return this.LowLevelDispatch.SearchDispatchAsync<SearchResponse<TResult>>(pathInfo, descriptor)
@@ -99,7 +99,7 @@ namespace Nest
 			where TResult : class
 		{
 			var pathInfo = request
-				.ToPathInfo(_connectionSettings)
+				.ToPathInfo(ConnectionSettings)
 				.DeserializationState(this.CreateSearchDeserializer<T, TResult>(request));
 			
 			return this.LowLevelDispatch.SearchDispatchAsync<SearchResponse<TResult>>(pathInfo, request)
@@ -122,7 +122,7 @@ namespace Nest
 		{
 			var converter = this.CreateCovariantSearchSelector<T, TResult>(d);
 			var dict = response.Success
-				? Serializer.DeserializeInternal<SearchResponse<TResult>>(stream, converter)
+				? new NestSerializer(this.ConnectionSettings, converter).Deserialize<SearchResponse<TResult>>(stream)
 				: null;
 			return dict;
 		}

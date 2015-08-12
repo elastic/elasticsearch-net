@@ -33,7 +33,6 @@ namespace Tests.ClientConcepts.LowLevel
 			var node = new Uri("http://mynode.example.com:8082/apiKey");
 			var config = new ConnectionConfiguration(node);
 			var client = new ElasticsearchClient(config);
-
 		}
 
 		/** 
@@ -68,9 +67,9 @@ namespace Tests.ClientConcepts.LowLevel
 
 			var config = new ConnectionConfiguration(connectionPool)
 				.EnableTrace()
-				.ExposeRawResponse()
+				.DisableDirectStreaming()
 				.SetBasicAuthentication("user", "pass")
-				.SetTimeout(5000);
+				.SetTimeout(TimeSpan.FromSeconds(5));
 
 		}
 		/**
@@ -102,7 +101,7 @@ namespace Tests.ClientConcepts.LowLevel
 				* Will cause `Elasticsearch.Net` to write connection debug information on the TRACE output of your application.
 				*/
 
-				.ExposeRawResponse()
+				.DisableDirectStreaming()
 				/**
 				 * By default responses are deserialized off stream to the object you tell it to.
 				 * For debugging purposes it can be very useful to keep a copy of the raw response on the result object. 
@@ -143,7 +142,7 @@ namespace Tests.ClientConcepts.LowLevel
 				.SetProxy(new Uri("http://myproxy"), "username", "pass")
 				/** Sets proxy information on the connection. */
 
-				.SetTimeout(4000)
+				.SetTimeout(TimeSpan.FromSeconds(4))
 				/**
 				* Sets the global maximum time a connection may take.
 				 * Please note that this is the request timeout, the builtin .NET `WebRequest` has no way to set connection timeouts 

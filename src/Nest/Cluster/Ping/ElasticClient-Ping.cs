@@ -77,8 +77,8 @@ namespace Nest
 
 		private void SetRequestTimeout(IRequest<PingRequestParameters> pingRequest)
 		{
-			if (this._connectionSettings.PingTimeout.HasValue)
-				pingRequest.RequestConfiguration.RequestTimeout = this._connectionSettings.PingTimeout.Value;
+			if (this.ConnectionSettings.PingTimeout.HasValue)
+				pingRequest.RequestConfiguration.RequestTimeout = this.ConnectionSettings.PingTimeout.Value;
 		}
 
 		private PingResponse DeserializePingResponse(IElasticsearchResponse response, Stream stream)

@@ -26,11 +26,7 @@ type Build() =
             let outputFolder = Paths.Output(p.ProjectName.Nuget)
             let srcFolder = Paths.BinFolder(p.ProjectName.Location)
             match f with
-            | NET40 ->
-                match p with
-                | DotNet40Project net40 -> 
-                    let net40dir = sprintf "%s/net40" outputFolder
-                    CopyDir net40dir srcFolder allFiles
+            | NET40 -> printfn "ignored for now"
             | NET45 ->
                 let net45dir = sprintf "%s/net45" outputFolder
                 CopyDir net45dir srcFolder allFiles
@@ -38,11 +34,11 @@ type Build() =
     static let toTarget (f: DotNetFramework) =
         match f with 
         | NET45 -> "Rebuild"
-        | NET40 -> 
-            DotNet40Project.All
-            |> List.map(fun p-> (DotNet40Project p).ProjectName)
-            |> List.map (fun n -> sprintf "%s:Rebuild" n.MSBuild)
-            |> String.concat ";"
+        | NET40 -> "Rebuild"
+//            DotNet40Project.All
+//            |> List.map(fun p-> (DotNet40Project p).ProjectName)
+//            |> List.map (fun n -> sprintf "%s:Rebuild" n.MSBuild)
+//            |> String.concat ";"
     
     static member Compile(framework: DotNetFramework) =
         let f = framework.Identifier

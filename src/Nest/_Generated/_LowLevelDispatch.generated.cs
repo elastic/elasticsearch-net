@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
-using static Nest.HttpMethod;
+using static Elasticsearch.Net.HttpMethod;
 using static Nest.DispatchException;
 
 //Generated File Please Do Not Edit Manually

@@ -55,8 +55,8 @@ type Sign() =
             let net40dll = sprintf "%s/net40/%s.dll" outputFolder name
             let net45dll = sprintf "%s/net45/%s.dll" outputFolder name
             match p with
-            | DotNet40Project net40 -> 
-                validate net40dll name
+            | DotNet45Project net45 -> 
+                //validate net40dll name
                 validate net45dll name
 
     static member CreateKeysIfAbsent() =

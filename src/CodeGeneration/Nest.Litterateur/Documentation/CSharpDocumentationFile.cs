@@ -33,18 +33,20 @@ namespace Nest.Litterateur.Documentation
 			{
 				case ".cs":
 					return new CSharpDocumentationFile(fileLocation);
+				case ".gif":
+				case ".jpg":
+				case ".png":
 				case ".asciidoc":
-					return new AsciiDocumentationFile(fileLocation);
+					return new RawDocumentationFile(fileLocation);
 			}
 			throw new ArgumentOutOfRangeException(nameof(fileLocation),
-				$"We currently only support cs and md files, you provided: {extension}");
+				$"The extension you specified is currently not supported: {extension}");
 		}
 
-		protected FileInfo CreateDocumentationLocation()
+		protected virtual FileInfo CreateDocumentationLocation()
 		{
 			var testFullPath = this.FileLocation.FullName;
-			var testInDocumenationFolder =
-				Regex.Replace(testFullPath, @"(^.+\\Tests\\|\" + this.Extension + "$)", "") + ".asciidoc";
+			var testInDocumenationFolder = Regex.Replace(testFullPath, @"(^.+\\Tests\\|\" + this.Extension + "$)", "") + ".asciidoc";
 
 			var documenationTargetPath = Path.GetFullPath(Path.Combine(DocFolder, testInDocumenationFolder));
 			var fileInfo = new FileInfo(documenationTargetPath);
@@ -53,15 +55,26 @@ namespace Nest.Litterateur.Documentation
 		}
 	}
 
-	class AsciiDocumentationFile : DocumentationFile
+	class RawDocumentationFile : DocumentationFile
 	{
-		public AsciiDocumentationFile(FileInfo fileLocation) : base(fileLocation) { }
+		public RawDocumentationFile(FileInfo fileLocation) : base(fileLocation) { }
 
 		public override void SaveToDocumentationFolder()
 		{
 			//we simply do a copy of the markdown file
 			var docFileName = this.CreateDocumentationLocation();
 			this.FileLocation.CopyTo(docFileName.FullName, true);
+		}
+
+		protected override FileInfo CreateDocumentationLocation()
+		{
+			var testFullPath = this.FileLocation.FullName;
+			var testInDocumenationFolder = Regex.Replace(testFullPath, @"(^.+\\Tests\\|\" + this.Extension + "$)", "") + this.Extension;
+
+			var documenationTargetPath = Path.GetFullPath(Path.Combine(DocFolder, testInDocumenationFolder));
+			var fileInfo = new FileInfo(documenationTargetPath);
+			Directory.CreateDirectory(fileInfo.Directory.FullName);
+			return fileInfo;
 		}
 	}
 

@@ -24,7 +24,7 @@ namespace Nest.Litterateur
 
 			public static void Go()
 			{
-				var files = FindAll("cs").Concat(FindAll("asciidoc"));
+				var files = FindAll("cs").Concat(FindAll("asciidoc")).Concat(FindAll("png")).Concat(FindAll("gif"));
 				foreach (var file in files)
 					file.SaveToDocumentationFolder();
 

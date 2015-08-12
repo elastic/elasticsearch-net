@@ -10,6 +10,7 @@ using Elasticsearch.Net.ConnectionPool;
 using Nest.CommonAbstractions.ConnectionSettings;
 using Nest.Resolvers;
 using Newtonsoft.Json;
+using Elasticsearch.Net.Serialization;
 
 namespace Nest
 {
@@ -18,46 +19,29 @@ namespace Nest
 	/// </summary>
 	public class ConnectionSettings : ConnectionSettings<ConnectionSettings>
 	{
-		/// <summary>
-		/// Instantiate a new connectionsettings object that proves ElasticClient with configuration values
-		/// </summary>
-		/// <param name="uri">A single uri representing the root of the node you want to connect to
-		/// <para>defaults to http://localhost:9200</para>
-		/// </param>
-		/// <param name="defaultIndex">The default index/alias name used for operations that expect an index/alias name, 
-		/// By specifying it once alot of magic string can be avoided.
-		/// <para>You can also specify specific default index/alias names for types using .SetDefaultTypeIndices(</para>
-		/// <para>If you do not specify this, NEST might throw a runtime exception if an explicit indexname was not provided for a call</para>
-		/// </param>
-		public ConnectionSettings(Uri uri = null, string defaultIndex = null)
-			: base(uri, defaultIndex)
-		{
-		}
+		public ConnectionSettings(Uri uri = null)
+			: this(new SingleNodeConnectionPool(uri ?? new Uri("http://localhost:9200"))) { }
 
-		/// <summary>
-		/// Instantiate a new connectionsettings object that proves ElasticClient with configuration values
-		/// </summary>
-		/// <param name="connectionPool">A connection pool implementation that'll tell the client what nodes are available</param>
-		/// <param name="defaultIndex">The default index/alias name used for operations that expect an index/alias name, 
-		/// By specifying it once alot of magic string can be avoided.
-		/// <para>You can also specify specific default index/alias names for types using .SetDefaultTypeIndices(</para>
-		/// <para>If you do not specify this, NEST might throw a runtime exception if an explicit indexname was not provided for a call</para>
-		/// </param>
-		public ConnectionSettings(IConnectionPool connectionPool, string defaultIndex = null)
-			: base(connectionPool, defaultIndex)
-		{
+		public ConnectionSettings(IConnectionPool connectionPool)
+			: this(connectionPool, null, null) { }
 
-		}
+		public ConnectionSettings(IConnectionPool connectionPool, IConnection connection)
+			: this(connectionPool, connection, null) { }
+
+		public ConnectionSettings(IConnectionPool connectionPool, IElasticsearchSerializer serializer)
+			: this(connectionPool, null, serializer) { }
+
+		public ConnectionSettings(IConnectionPool connectionPool, IConnection connection, IElasticsearchSerializer serializer)
+			: base(connectionPool, connection, serializer) { }
 	}
 	/// <summary>
 	/// Control how NEST's behaviour.
 	/// </summary>
 	[Browsable(false)]
 	[EditorBrowsable(EditorBrowsableState.Never)]
-	public class ConnectionSettings<TConnectionSettings> : ConnectionConfiguration<TConnectionSettings>, IConnectionSettingsValues
+	public abstract class ConnectionSettings<TConnectionSettings> : ConnectionConfiguration<TConnectionSettings>, IConnectionSettingsValues
 		where TConnectionSettings : ConnectionSettings<TConnectionSettings>
 	{
-		ConnectionSettings<TConnectionSettings> _assign(Action<IConnectionSettingsValues> assigner) => Fluent.Assign(this, assigner);
 
 		private string _defaultIndex;
 		string IConnectionSettingsValues.DefaultIndex => this._defaultIndex;
@@ -90,12 +74,11 @@ namespace Nest
 		private FluentDictionary<MemberInfo, IPropertyMapping> _propertyMappings = new FluentDictionary<MemberInfo, IPropertyMapping>();
 		FluentDictionary<MemberInfo, IPropertyMapping> IConnectionSettingsValues.PropertyMappings => _propertyMappings;
 
-		public ConnectionSettings(IConnectionPool connectionPool, string defaultIndex)
-			: base(connectionPool)
-		{
-			if (!defaultIndex.IsNullOrEmpty())
-				this.SetDefaultIndex(defaultIndex);
+		ConnectionSettings<TConnectionSettings> _assign(Action<IConnectionSettingsValues> assigner) => Fluent.Assign(this, assigner);
 
+		protected ConnectionSettings(IConnectionPool connectionPool, IConnection connection, IElasticsearchSerializer serializer)
+			: base(connectionPool, connection, serializer)
+		{
 			this._defaultTypeNameInferrer = (t => t.Name.ToLowerInvariant());
 			this._defaultFieldNameInferrer = (p => p.ToCamelCase());
 			this._defaultIndices = new FluentDictionary<Type, string>();
@@ -106,11 +89,7 @@ namespace Nest
 			this._inferrer = new ElasticInferrer(this);
 		}
 
-		public ConnectionSettings(Uri uri, string defaultIndex)
-			: this(new SingleNodeConnectionPool(uri ?? new Uri("http://localhost:9200")), defaultIndex)
-		{
-
-		}
+		protected override IElasticsearchSerializer DefaultSerializer() => new NestSerializer(this);
 
 		/// <summary>
 		/// This calls SetDefaultTypenameInferrer with an implementation that will pluralize type names. This used to be the default prior to Nest 0.90

@@ -12,7 +12,7 @@ namespace Nest
 		public T Source<T>(Func<SourceDescriptor<T>, SourceDescriptor<T>> getSelector) where T : class
 		{
 			var descriptor = getSelector(new SourceDescriptor<T>());
-			var pathInfo = ((IPathInfo<SourceRequestParameters>) descriptor).ToPathInfo(_connectionSettings); 
+			var pathInfo = ((IPathInfo<SourceRequestParameters>) descriptor).ToPathInfo(ConnectionSettings); 
 			var response = this.LowLevelDispatch.GetSourceDispatch<T>(pathInfo);
 			return response.Response;
 		}
@@ -20,7 +20,7 @@ namespace Nest
 		/// <inheritdoc />
 		public T Source<T>(ISourceRequest sourceRequest) where T : class
 		{
-			var pathInfo = sourceRequest.ToPathInfo(_connectionSettings); 
+			var pathInfo = sourceRequest.ToPathInfo(ConnectionSettings); 
 			var response = this.LowLevelDispatch.GetSourceDispatch<T>(pathInfo);
 			return response.Response;
 		}
@@ -29,7 +29,7 @@ namespace Nest
 		public Task<T> SourceAsync<T>(Func<SourceDescriptor<T>, SourceDescriptor<T>> getSelector) where T : class
 		{
 			var descriptor = getSelector(new SourceDescriptor<T>());
-			var pathInfo = ((IPathInfo<SourceRequestParameters>) descriptor).ToPathInfo(_connectionSettings);
+			var pathInfo = ((IPathInfo<SourceRequestParameters>) descriptor).ToPathInfo(ConnectionSettings);
 			var response = this.LowLevelDispatch.GetSourceDispatchAsync<T>(pathInfo)
 				.ContinueWith(t =>
 				{
@@ -46,7 +46,7 @@ namespace Nest
 		/// <inheritdoc />
 		public Task<T> SourceAsync<T>(ISourceRequest sourceRequest) where T : class
 		{
-			var pathInfo = sourceRequest.ToPathInfo(_connectionSettings);
+			var pathInfo = sourceRequest.ToPathInfo(ConnectionSettings);
 			var response = this.LowLevelDispatch.GetSourceDispatchAsync<T>(pathInfo)
 				.ContinueWith(t =>
 				{

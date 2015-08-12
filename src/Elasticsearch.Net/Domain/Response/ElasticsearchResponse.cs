@@ -19,35 +19,10 @@ using Elasticsearch.Net.Serialization;
 
 namespace Elasticsearch.Net
 {
-	internal static class ElasticsearchResponse
-	{
-		internal static ElasticsearchResponse<TTo> CloneFrom<TTo>(IElasticsearchResponse from, TTo to)
-		{
-			var response = new ElasticsearchResponse<TTo>(from.Settings)
-			{
-				OriginalException = from.OriginalException,
-				HttpStatusCode = from.HttpStatusCode,
-				Request = from.Request,
-				RequestMethod = from.RequestMethod,
-				RequestUrl = from.RequestUrl,
-				Response = to,
-				ResponseRaw = from.ResponseRaw,
-				Serializer = from.Settings.Serializer,
-				Settings = from.Settings,
-				Success = from.Success,
-				Metrics = from.Metrics
-			};
-			var tt = to as IResponseWithRequestInformation;
-			if (tt != null)
-				tt.RequestInformation = response;
- 			return response;
-		}
-	}
-
 	public class ElasticsearchResponse<T> : IElasticsearchResponse
 	{
-		private static readonly string _printFormat;
-		private static readonly string _errorFormat;
+		private static readonly string _printFormat = "StatusCode: {1}, {0}\tMethod: {2}, {0}\tUrl: {3}, {0}\tRequest: {4}, {0}\tResponse: {5}";
+		private static readonly string _errorFormat = "{0}\tExceptionMessage: {1}{0}\t StackTrace: {2}";
 
 		public bool Success { get; protected internal set; }
 
@@ -71,17 +46,19 @@ namespace Elasticsearch.Net
 			}
 		}
 
-		public string RequestMethod { get; protected internal set; }
+		public HttpMethod RequestMethod { get; protected internal set; }
 
-		public string RequestUrl { get; protected internal set; }
+		public Uri RequestUri { get; protected internal set; }
 
 		public IConnectionConfigurationValues Settings { get; protected internal set; }
 
+		//TODO rename to body, response.response feels nuts
 		public T Response { get; protected internal set; }
 
 		public byte[] Request { get; protected internal set; }
 
 		public int NumberOfRetries { get; protected internal set; }
+
 		public CallMetrics Metrics { get; protected internal set; }
 
 		/// <summary>
@@ -92,6 +69,8 @@ namespace Elasticsearch.Net
 		public int? HttpStatusCode { get; protected internal set; }
 
 		public IElasticsearchSerializer Serializer { get; protected internal set; }
+
+		public List<Audit> AuditTrail { get; internal set; }
 
 		/// <summary>
 		/// If the response is succesful or has a known error (400-500 range)
@@ -113,7 +92,7 @@ namespace Elasticsearch.Net
 			}
 		}
 
-		public ElasticsearchResponse(IConnectionConfigurationValues settings)
+		protected ElasticsearchResponse(IConnectionConfigurationValues settings)
 		{
 			this.Settings = settings;
 			this.Serializer = settings.Serializer;
@@ -133,44 +112,6 @@ namespace Elasticsearch.Net
 			this.HttpStatusCode = statusCode;
 		}
 
-		public static ElasticsearchResponse<T> CreateError(IConnectionConfigurationValues settings, Exception e, string method, string path, byte[] request)
-		{
-			var cs = new ElasticsearchResponse<T>(settings, e);
-			cs.Request = request;
-			cs.RequestUrl = path;
-			cs.RequestMethod = method;
-			return cs;
-		}
-
-		public static ElasticsearchResponse<T> Create(
-			IConnectionConfigurationValues settings, int statusCode, string method, string path, byte[] request, Exception innerException = null)
-		{
-			var cs = new ElasticsearchResponse<T>(settings, statusCode);
-			cs.Request = request;
-			cs.RequestUrl = path;
-			cs.RequestMethod = method;
-			cs.OriginalException = innerException;
-			return cs;
-		}
-
-		public static ElasticsearchResponse<T> Create(
-			IConnectionConfigurationValues settings, int statusCode, string method, string path, byte[] request, T response, Exception innerException = null)
-		{
-			var cs = new ElasticsearchResponse<T>(settings, statusCode);
-			cs.Request = request;
-			cs.RequestUrl = path;
-			cs.RequestMethod = method;
-			cs.Response = response;
-			cs.OriginalException = innerException;
-			return cs;
-		}
-
-		static ElasticsearchResponse()
-		{
-			_printFormat = "StatusCode: {1}, {0}\tMethod: {2}, {0}\tUrl: {3}, {0}\tRequest: {4}, {0}\tResponse: {5}";
-			_errorFormat = "{0}\tExceptionMessage: {1}{0}\t StackTrace: {2}";
-		}
-
 		public override string ToString()
 		{
 			var r = this;
@@ -178,7 +119,7 @@ namespace Elasticsearch.Net
 			string response = "<Response stream not captured or already read to completion by serializer, set ExposeRawResponse() on connectionsettings to force it to be set on>";
 			if (typeof(T) == typeof(string))
 				response = this.Response as string;
-			else if (this.Settings.KeepRawResponse)
+			else if (this.Settings.DisableDirectStreaming)
 				response = this.ResponseRaw.Utf8String();
 			else if (typeof(T) == typeof(byte[]))
 				response = (this.Response as byte[]).Utf8String();
@@ -194,7 +135,7 @@ namespace Elasticsearch.Net
 			  Environment.NewLine,
 			  r.HttpStatusCode.HasValue ? r.HttpStatusCode.Value.ToString(CultureInfo.InvariantCulture) : "-1",
 			  r.RequestMethod,
-			  r.RequestUrl,
+			  r.RequestUri,
 			  requestJson,
 			  response
 			);

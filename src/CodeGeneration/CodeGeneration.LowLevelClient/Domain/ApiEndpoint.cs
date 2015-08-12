@@ -147,7 +147,7 @@ namespace CodeGeneration.LowLevelClient.Domain
 							parts.Add(new ApiUrlPart
 							{
 								Name = "body",
-								Type = "object",
+								Type = "PostData<object>",
 								Description = this.Body.Description
 							});
 						}

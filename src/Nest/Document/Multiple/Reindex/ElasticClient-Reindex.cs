@@ -11,7 +11,7 @@ namespace Nest
 		{
 			reindexSelector.ThrowIfNull("reindexSelector"); 
 			var reindexDescriptor = reindexSelector(new ReindexDescriptor<T>());
-			var observable = new ReindexObservable<T>(this, _connectionSettings, reindexDescriptor);
+			var observable = new ReindexObservable<T>(this, ConnectionSettings, reindexDescriptor);
 			return observable;
 		}
 	}

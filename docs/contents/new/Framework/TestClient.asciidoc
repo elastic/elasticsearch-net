@@ -13,7 +13,7 @@ var defaultSettings = new ConnectionSettings((CreateBaseUri(port)), "defaultinde
 					.Ignore(p=>p.PrivateValue)
 					.Rename(p=>p.OnlineHandle, "nickname")
 				)
-				.SetGlobalHeaders(new NameValueCollection() { {"TestMethod", ExpensiveTestNameForIntegrationTests()} });
+				.SetGlobalHeaders(new NameValueCollection { {"TestMethod", ExpensiveTestNameForIntegrationTests()} });
 var settings = modifySettings != null ? modifySettings(defaultSettings) : defaultSettings;
 var st = new StackTrace();
 var types = GetTypes(st);
