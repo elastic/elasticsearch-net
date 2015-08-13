@@ -7,7 +7,7 @@ namespace Nest
 	{
 		public bool AddSortField { get; set; }
 
-		public bool OptOut { get; set; }
+		public bool Ignore { get; set; }
 
 		public string Name { get; set; }
 

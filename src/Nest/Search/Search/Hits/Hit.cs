@@ -12,7 +12,6 @@ namespace Nest
 		IFieldSelection<T> Fields { get; }
 		T Source { get; }
 		string Index { get; }
-		double Score { get; }
 		string Type { get; }
 		long? Version { get; }
 		string Id { get; }
@@ -41,6 +40,7 @@ namespace Nest
 		public IDictionary<string, InnerHitsResult> InnerHits { get; internal set; }
 		
 		//TODO in NEST 2.0 make the property itself double?
+		//validate whether score is alway written in ES or not
 		[JsonProperty(PropertyName = "_score")]
 		internal double? _score { get; set; }
 		public double Score { get { return _score.GetValueOrDefault(0); } }

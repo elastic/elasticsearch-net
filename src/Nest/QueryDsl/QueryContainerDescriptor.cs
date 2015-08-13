@@ -279,6 +279,7 @@ namespace Nest
 			this._assignSelector(selector, (query, container) =>
 			{
 				//TODO THIS SHOULD BE HANDLED by the filtered descriptor
+				//this is done because filter and query can not be send as {} here
 				if (query.Query != null && query.Query.IsConditionless)
 					query.Query = null;
 

@@ -183,13 +183,11 @@ namespace Tests.Framework.Integration
 				Directory.CreateDirectory(this.RoamingFolder);
 				if (!File.Exists(localZip))
 				{
-					//TODO write progress on console optionally
 					new WebClient().DownloadFile(downloadUrl, localZip);
 				}
 
 				if (!Directory.Exists(this.RoamingClusterFolder))
 				{
-					//TODO write progress on console optionally
 					ZipFile.ExtractToDirectory(localZip, this.RoamingFolder);
 				}
 			}

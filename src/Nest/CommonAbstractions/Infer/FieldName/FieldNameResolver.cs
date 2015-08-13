@@ -27,7 +27,7 @@ namespace Nest.Resolvers
 			{
 				IPropertyMapping propertyMapping = null;
 				if (settings.PropertyMappings.TryGetValue(info, out propertyMapping))
-					return new ElasticPropertyAttribute {Name = propertyMapping.Name, OptOut = propertyMapping.OptOut};
+					return new ElasticPropertyAttribute {Name = propertyMapping.Name, Ignore = propertyMapping.Ignore};
 			}
 
 			var attributes = info.GetCustomAttributes(typeof(IElasticPropertyAttribute), true);
@@ -36,7 +36,7 @@ namespace Nest.Resolvers
 
 			var ignoreAttrutes = info.GetCustomAttributes(typeof(JsonIgnoreAttribute), true);
 			if (ignoreAttrutes.HasAny())
-				return new ElasticPropertyAttribute { OptOut = true };
+				return new ElasticPropertyAttribute { Ignore = true };
 
 			return null;
 		}

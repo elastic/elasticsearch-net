@@ -22,7 +22,6 @@ namespace Nest
 			var depth = reader.Depth;
 			var deserialized = this.DeserializeJson(reader, objectType, existingValue, serializer);
 
-			//TODO this might not be necessary
 			if (reader.Depth > depth)
 			{
 				do

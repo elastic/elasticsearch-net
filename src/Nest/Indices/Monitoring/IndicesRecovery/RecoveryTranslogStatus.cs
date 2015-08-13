@@ -19,8 +19,7 @@ namespace Nest
 		[JsonProperty("total_time")]
 		public string TotalTime { get; internal set; }
 
-		//TODO should be a long in 2.0
 		[JsonProperty("total_time_in_millis")]
-		public string TotalTimeInMilliseconds { get; internal set; }
+		public long TotalTimeInMilliseconds { get; internal set; }
 	}
 }

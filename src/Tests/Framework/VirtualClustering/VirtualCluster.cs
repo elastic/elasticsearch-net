@@ -13,6 +13,7 @@ namespace Tests.Framework
 
 		public List<ISniffRule> SniffingRules { get; } = new List<ISniffRule>();
 		public List<IRule> PingingRules { get; } = new List<IRule>();
+		public TestableDateTimeProvider DateTimeProvider { get; } = new TestableDateTimeProvider();
 
 		public IReadOnlyList<Node> Nodes => _nodes;
 
@@ -49,16 +50,14 @@ namespace Tests.Framework
 
 		public SealedVirtualCluster StaticConnectionPool(Func<IList<Node>, IEnumerable<Node>> seedNodesSelector = null)
 		{
-			//TODO inject DateTimeProver
 			var nodes = seedNodesSelector?.Invoke(this._nodes) ?? this._nodes;
-			return new SealedVirtualCluster(this, new StaticConnectionPool(nodes, randomize: false));
+			return new SealedVirtualCluster(this, new StaticConnectionPool(nodes, randomize: false, dateTimeProvider: this.DateTimeProvider));
 		}
 
 		public SealedVirtualCluster SniffingConnectionPool(Func<IList<Node>, IEnumerable<Node>> seedNodesSelector = null)
 		{
-			//TODO inject DateTimeProver
 			var nodes = seedNodesSelector?.Invoke(this._nodes) ?? this._nodes;
-			return new SealedVirtualCluster(this, new SniffingConnectionPool(nodes, randomize: false));
+			return new SealedVirtualCluster(this, new SniffingConnectionPool(nodes, randomize: false, dateTimeProvider: this.DateTimeProvider));
 		}
 	}
 

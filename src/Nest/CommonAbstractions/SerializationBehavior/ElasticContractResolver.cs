@@ -191,7 +191,7 @@ namespace Nest.Resolvers
 			if (!att.Name.IsNullOrEmpty())
 				property.PropertyName = att.Name;
 
-			property.Ignored = att.OptOut;
+			property.Ignored = att.Ignore;
 			return property;
 		}
 

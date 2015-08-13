@@ -138,7 +138,7 @@ namespace Nest.Resolvers.Writers
 			foreach (var p in properties)
 			{
 				var att = ElasticAttributes.Property(p, this._connectionSettings);
-				if (att != null && att.OptOut)
+				if (att != null && att.Ignore)
 					continue;
 
 				var propertyName = this.Infer.FieldName(p);

@@ -2,7 +2,8 @@
 using System.Globalization;
 using Newtonsoft.Json;
 
-namespace Nest.Resolvers.Writers {
+namespace Nest.Resolvers.Writers
+{
     public class WritePropertiesFromAttributeVisitor : IElasticPropertyVisitor
     {
         private readonly JsonWriter _jsonWriter;
