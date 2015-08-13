@@ -60,16 +60,12 @@ namespace Nest.Resolvers.Converters
 		{
 			if (this._request == null)
 			{
-				var elasticContractResolver = serializer.ContractResolver as SettingsContractResolver;
-				if (elasticContractResolver == null)
-					return new MultiGetResponse { IsValid = false };
-				var piggyBackState = elasticContractResolver.PiggyBackState;
-				if (piggyBackState == null || piggyBackState.ActualJsonConverter == null)
-					return new MultiGetResponse { IsValid = false };
-
-				var realConverter = piggyBackState.ActualJsonConverter as MultiGetHitConverter;
+				var realConverter = (
+					(serializer.ContractResolver as SettingsContractResolver)
+					?.PiggyBackState?.ActualJsonConverter as MultiGetHitConverter
+				);
 				if (realConverter == null)
-					return new MultiGetResponse { IsValid = false };
+					throw new DslException("could not find a stateful multigethit converter");
 
 				return realConverter.ReadJson(reader, objectType, existingValue, serializer);
 			}

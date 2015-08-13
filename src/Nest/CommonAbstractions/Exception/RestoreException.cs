@@ -5,9 +5,9 @@ namespace Nest
 {
 	public class RestoreException : Exception
 	{
-		public IElasticsearchResponse Status { get; private set; }
+		public IApiCallDetails Status { get; private set; }
 
-		public RestoreException(IElasticsearchResponse status, string message = null)
+		public RestoreException(IApiCallDetails status, string message = null)
 			: base(message)
 		{
 			this.Status = status;

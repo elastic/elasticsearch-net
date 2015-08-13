@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	using MultiGetConverter = Func<IElasticsearchResponse, Stream, MultiGetResponse>;
+	using MultiGetConverter = Func<IApiCallDetails, Stream, MultiGetResponse>;
 	
 	public partial class ElasticClient
 	{
@@ -61,7 +61,7 @@ namespace Nest
 			);
 		}
 
-		private MultiGetResponse DeserializeMultiGetResponse(IElasticsearchResponse response, Stream stream, JsonConverter converter)=>
+		private MultiGetResponse DeserializeMultiGetResponse(IApiCallDetails response, Stream stream, JsonConverter converter)=>
 			new NestSerializer(this.ConnectionSettings, converter).Deserialize<MultiGetResponse>(stream);
 
 		private JsonConverter CreateCovariantMultiGetConverter(IMultiGetRequest descriptor) => new MultiGetHitConverter(descriptor);

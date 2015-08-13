@@ -14,7 +14,7 @@ namespace Elasticsearch.Net
 	
 	public enum Consistency 
 	{
-		  [EnumMember(Value = "one")]
+		[EnumMember(Value = "one")]
 		One,
 		[EnumMember(Value = "quorum")]
 		Quorum,
@@ -25,7 +25,7 @@ namespace Elasticsearch.Net
 	
 	public enum Replication 
 	{
-		  [EnumMember(Value = "sync")]
+		[EnumMember(Value = "sync")]
 		Sync,
 		[EnumMember(Value = "async")]
 		Async
@@ -34,7 +34,7 @@ namespace Elasticsearch.Net
 	
 	public enum Bytes 
 	{
-		  [EnumMember(Value = "b")]
+		[EnumMember(Value = "b")]
 		B,
 		[EnumMember(Value = "k")]
 		K,
@@ -47,7 +47,7 @@ namespace Elasticsearch.Net
 	
 	public enum Level 
 	{
-		  [EnumMember(Value = "cluster")]
+		[EnumMember(Value = "cluster")]
 		Cluster,
 		[EnumMember(Value = "indices")]
 		Indices,
@@ -58,7 +58,7 @@ namespace Elasticsearch.Net
 	
 	public enum WaitForStatus 
 	{
-		  [EnumMember(Value = "green")]
+		[EnumMember(Value = "green")]
 		Green,
 		[EnumMember(Value = "yellow")]
 		Yellow,
@@ -69,7 +69,7 @@ namespace Elasticsearch.Net
 	
 	public enum ExpandWildcards 
 	{
-		  [EnumMember(Value = "open")]
+		[EnumMember(Value = "open")]
 		Open,
 		[EnumMember(Value = "closed")]
 		Closed,
@@ -82,7 +82,7 @@ namespace Elasticsearch.Net
 	
 	public enum DefaultOperator 
 	{
-		  [EnumMember(Value = "AND")]
+		[EnumMember(Value = "AND")]
 		And,
 		[EnumMember(Value = "OR")]
 		Or
@@ -91,7 +91,7 @@ namespace Elasticsearch.Net
 	
 	public enum VersionType 
 	{
-		  [EnumMember(Value = "internal")]
+		[EnumMember(Value = "internal")]
 		Internal,
 		[EnumMember(Value = "external")]
 		External,
@@ -104,7 +104,7 @@ namespace Elasticsearch.Net
 	
 	public enum OpType 
 	{
-		  [EnumMember(Value = "index")]
+		[EnumMember(Value = "index")]
 		Index,
 		[EnumMember(Value = "create")]
 		Create
@@ -113,7 +113,7 @@ namespace Elasticsearch.Net
 	
 	public enum Format 
 	{
-		  [EnumMember(Value = "detailed")]
+		[EnumMember(Value = "detailed")]
 		Detailed,
 		[EnumMember(Value = "text")]
 		Text
@@ -122,7 +122,7 @@ namespace Elasticsearch.Net
 	
 	public enum SearchType 
 	{
-		  [EnumMember(Value = "query_then_fetch")]
+		[EnumMember(Value = "query_then_fetch")]
 		QueryThenFetch,
 		[EnumMember(Value = "query_and_fetch")]
 		QueryAndFetch,
@@ -139,7 +139,7 @@ namespace Elasticsearch.Net
 	
 	public enum ThreadType 
 	{
-		  [EnumMember(Value = "cpu")]
+		[EnumMember(Value = "cpu")]
 		Cpu,
 		[EnumMember(Value = "wait")]
 		Wait,
@@ -150,14 +150,14 @@ namespace Elasticsearch.Net
 	
 	public enum PercolateFormat 
 	{
-		  [EnumMember(Value = "ids")]
+		[EnumMember(Value = "ids")]
 		Ids
 	}
 	
 	
 	public enum SuggestMode 
 	{
-		  [EnumMember(Value = "missing")]
+		[EnumMember(Value = "missing")]
 		Missing,
 		[EnumMember(Value = "popular")]
 		Popular,
@@ -168,7 +168,7 @@ namespace Elasticsearch.Net
 	
 	public enum ClusterStateMetric 
 	{
-		  [EnumMember(Value = "_all")]
+		[EnumMember(Value = "_all")]
 		All,
 		[EnumMember(Value = "blocks")]
 		Blocks,
@@ -189,7 +189,7 @@ namespace Elasticsearch.Net
 	
 	public enum IndicesStatsMetric 
 	{
-		  [EnumMember(Value = "_all")]
+		[EnumMember(Value = "_all")]
 		All,
 		[EnumMember(Value = "completion")]
 		Completion,
@@ -230,7 +230,7 @@ namespace Elasticsearch.Net
 	
 	public enum NodesInfoMetric 
 	{
-		  [EnumMember(Value = "settings")]
+		[EnumMember(Value = "settings")]
 		Settings,
 		[EnumMember(Value = "os")]
 		Os,
@@ -253,7 +253,7 @@ namespace Elasticsearch.Net
 	
 	public enum NodesStatsMetric 
 	{
-		  [EnumMember(Value = "_all")]
+		[EnumMember(Value = "_all")]
 		All,
 		[EnumMember(Value = "breaker")]
 		Breaker,
@@ -280,7 +280,7 @@ namespace Elasticsearch.Net
 	
 	public enum NodesStatsIndexMetric 
 	{
-		  [EnumMember(Value = "_all")]
+		[EnumMember(Value = "_all")]
 		All,
 		[EnumMember(Value = "completion")]
 		Completion,
@@ -321,6 +321,7 @@ namespace Elasticsearch.Net
 
 	public static class KnownEnums
 	{
+		public static string UnknownEnum { get; } = "_UNKNOWN_ENUM_";
 		public static string Resolve(Enum e)
 		{
 			
@@ -581,7 +582,7 @@ namespace Elasticsearch.Net
 				}
 			}
 			
-			return "UNKNOWNENUM";
+			return UnknownEnum;
 		}
 	}
 }

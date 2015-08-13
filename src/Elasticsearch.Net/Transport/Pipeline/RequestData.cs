@@ -92,7 +92,7 @@ namespace Elasticsearch.Net.Connection
 			}
 
 			if (!SetSpecialTypes(responseStream, cs, bytes))
-				cs.Response = this._settings.Serializer.Deserialize<TReturn>(responseStream);
+				cs.Body = this._settings.Serializer.Deserialize<TReturn>(responseStream);
 
 			return FinalizeReponse(cs);
 		}
@@ -109,22 +109,22 @@ namespace Elasticsearch.Net.Connection
 			}
 
 			if (!SetSpecialTypes(responseStream, cs, bytes))
-				cs.Response = await this._settings.Serializer.DeserializeAsync<TReturn>(responseStream, this.CancellationToken);
+				cs.Body = await this._settings.Serializer.DeserializeAsync<TReturn>(responseStream, this.CancellationToken);
 
 			return FinalizeReponse(cs);
 		}
 
 		private static ElasticsearchResponse<TReturn> FinalizeReponse<TReturn>(ElasticsearchResponse<TReturn> cs)
 		{
-			var passAlongConnectionStatus = cs.Response as IResponseWithRequestInformation;
-			if (passAlongConnectionStatus != null) passAlongConnectionStatus.RequestInformation = cs;
+			var passAlongConnectionStatus = cs.Body as IBodyWithApiCallDetails;
+			if (passAlongConnectionStatus != null) passAlongConnectionStatus.CallDetails = cs;
 			return cs;
 		}
 
 		public ElasticsearchResponse<TReturn> CreateResponse<TReturn>(Exception e)
 		{
-			var cs = new ElasticsearchResponse<TReturn>(this._settings, e);
-			cs.Request = this.Data?.Bytes;
+			var cs = new ElasticsearchResponse<TReturn>(e);
+			cs.RequestBodyInBytes = this.Data?.Bytes;
 			cs.RequestUri = this.Uri;
 			cs.RequestMethod = this.Method;
 			cs.OriginalException = e;
@@ -133,12 +133,11 @@ namespace Elasticsearch.Net.Connection
 
 		private ElasticsearchResponse<TReturn> InitializeResponse<TReturn>(int statusCode, Exception innerException)
 		{
-			var cs = new ElasticsearchResponse<TReturn>(this._settings, statusCode);
-			cs.Request = this.Data?.Bytes;
+			var cs = new ElasticsearchResponse<TReturn>(statusCode);
+			cs.RequestBodyInBytes = this.Data?.Bytes;
 			cs.RequestUri = this.Uri;
 			cs.RequestMethod = this.Method;
 			cs.OriginalException = innerException;
-
 			return cs;
 		}
 
@@ -159,33 +158,33 @@ namespace Elasticsearch.Net.Connection
 		{
 			var setSpecial = true;
 			if (this._settings.DisableDirectStreaming)
-				cs.ResponseRaw = bytes;
+				cs.ResponseBodyInBytes = bytes;
 
-			if (cs.Response is string)
+			if (cs.Body is string)
 				this.SetStringResult(cs as ElasticsearchResponse<string>, bytes);
-			else if (cs.Response is byte[])
+			else if (cs.Body is byte[])
 				this.SetByteResult(cs as ElasticsearchResponse<byte[]>, bytes);
-			else if (cs.Response is VoidResponse)
+			else if (cs.Body is VoidResponse)
 				this.SetVoidResult(cs as ElasticsearchResponse<VoidResponse>, responseStream);
-			else if (cs.Response is Stream)
+			else if (cs.Body is Stream)
 				this.SetStreamResult(cs as ElasticsearchResponse<Stream>, responseStream);
 			else
 				setSpecial = false;
 			return setSpecial;
 		}
 
-		private void SetStringResult(ElasticsearchResponse<string> result, byte[] bytes) => result.Response = bytes.Utf8String();
+		private void SetStringResult(ElasticsearchResponse<string> result, byte[] bytes) => result.Body = bytes.Utf8String();
 
-		private void SetByteResult(ElasticsearchResponse<byte[]> result, byte[] bytes) => result.Response = bytes;
+		private void SetByteResult(ElasticsearchResponse<byte[]> result, byte[] bytes) => result.Body = bytes;
 
-		private void SetStreamResult(ElasticsearchResponse<Stream> result, Stream response) => result.Response = response;
+		private void SetStreamResult(ElasticsearchResponse<Stream> result, Stream response) => result.Body = response;
 
 		private static VoidResponse _void = new VoidResponse();
 
 		private void SetVoidResult(ElasticsearchResponse<VoidResponse> result, Stream response)
 		{
 			response.Close();
-			result.Response = _void;
+			result.Body = _void;
 		}
 
 

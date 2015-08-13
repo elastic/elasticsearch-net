@@ -158,7 +158,7 @@ namespace Elasticsearch.Net.Connection
 		/// <summary>
 		/// Connection status handler that will be called everytime the connection receives anything.
 		/// </summary>
-		Action<IElasticsearchResponse> ConnectionStatusHandler { get; }
+		Action<IApiCallDetails> ConnectionStatusHandler { get; }
 
 		/// <summary>
 		/// Basic access authorization credentials to specify with all requests.

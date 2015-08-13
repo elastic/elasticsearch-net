@@ -49,7 +49,7 @@ namespace Nest
 			var createIndexResponse = this.CurrentClient.CreateIndex(
 				toIndex, (c) => settings(c.InitializeUsing(indexSettings.IndexSettings)));
 			if (!createIndexResponse.IsValid)
-				throw new ReindexException(createIndexResponse.ConnectionStatus);
+				throw new ReindexException(createIndexResponse.ApiCall);
 
 			var page = 0;
 			var searchResult = this.CurrentClient.Search<T>(
@@ -63,7 +63,7 @@ namespace Nest
 					.Scroll(scroll)
 				);
 			if (searchResult.Total <= 0)
-				throw new ReindexException(searchResult.ConnectionStatus, "index " + fromIndex + " has no documents!");
+				throw new ReindexException(searchResult.ApiCall, "index " + fromIndex + " has no documents!");
 			IBulkResponse indexResult = null;
 			do
 			{
@@ -84,7 +84,7 @@ namespace Nest
 		public IBulkResponse IndexSearchResults(ISearchResponse<T> searchResult,IObserver<IReindexResponse<T>> observer, string toIndex, int page)
 		{
 			if (!searchResult.IsValid)
-				throw new ReindexException(searchResult.ConnectionStatus, "reindex failed on scroll #" + page);
+				throw new ReindexException(searchResult.ApiCall, "reindex failed on scroll #" + page);
 
 			var bb = new BulkDescriptor();
 			foreach (var d in searchResult.Hits)
@@ -95,7 +95,7 @@ namespace Nest
 
 			var indexResult = this.CurrentClient.Bulk(b=>bb);
 			if (!indexResult.IsValid)
-				throw new ReindexException(indexResult.ConnectionStatus, "reindex failed when indexing page " + page);
+				throw new ReindexException(indexResult.ApiCall, "reindex failed when indexing page " + page);
 
 			observer.OnNext(new ReindexResponse<T>()
 			{

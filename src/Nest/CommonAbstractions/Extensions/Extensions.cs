@@ -10,6 +10,7 @@ using System.Security.Cryptography.X509Certificates;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Elasticsearch.Net.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -17,6 +18,9 @@ namespace Nest
 	{
 		internal static string GetStringValue(this Enum enumValue)
 		{
+			var knownEnum = KnownEnums.Resolve(enumValue);
+			if (knownEnum != KnownEnums.UnknownEnum) return knownEnum;
+
 			var type = enumValue.GetType();
 			var info = type.GetField(enumValue.ToString());
 			var da = (EnumMemberAttribute[])(info.GetCustomAttributes(typeof(EnumMemberAttribute), false));

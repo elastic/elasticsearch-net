@@ -12,6 +12,9 @@ namespace Elasticsearch.Net
 
 		internal static string GetStringValue(this Enum enumValue)
 		{
+			var knownEnum = KnownEnums.Resolve(enumValue);
+			if (knownEnum != KnownEnums.UnknownEnum) return knownEnum;
+
 			//TODO measure performance and cache 
 			var type = enumValue.GetType();
 			var info = type.GetField(enumValue.ToString());

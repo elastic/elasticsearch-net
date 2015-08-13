@@ -180,7 +180,7 @@ namespace Elasticsearch.Net.Connection
 			return true;
 		}
 
-		public void BadResponse(IElasticsearchResponse response)
+		public void BadResponse(IApiCallDetails response)
 		{
 			this.MarkDead();
 			var currentRetryCount = this._retried;
@@ -247,7 +247,7 @@ namespace Elasticsearch.Net.Connection
 						requestData.Uri = node.CreatePath(requestData.Path);
 
 						var response = this._connection.Request<SniffResponse>(requestData);
-						var nodes = response.Response.ToNodes(this._connectionPool.UsingSsl);
+						var nodes = response.Body.ToNodes(this._connectionPool.UsingSsl);
 						this._connectionPool.Reseed(nodes);
 						return;
 					}
@@ -283,7 +283,7 @@ namespace Elasticsearch.Net.Connection
 						requestData.Uri = node.CreatePath(requestData.Path);
 
 						var response = await this._connection.RequestAsync<SniffResponse>(requestData);
-						this._connectionPool.Reseed(response.Response.ToNodes(this._connectionPool.UsingSsl));
+						this._connectionPool.Reseed(response.Body.ToNodes(this._connectionPool.UsingSsl));
 						return;
 					}
 					catch (ElasticsearchException e) when (e.Cause == PipelineFailure.BadAuthentication) //unrecoverable
@@ -322,7 +322,7 @@ namespace Elasticsearch.Net.Connection
 				}
 				catch (Exception e)
 				{
-					(response as ElasticsearchResponse<Stream>)?.Response?.Dispose();
+					(response as ElasticsearchResponse<Stream>)?.Body?.Dispose();
 					audit.Event = AuditEvent.BadResponse;
 					throw new ElasticsearchException(PipelineFailure.BadResponse, e);
 				}
@@ -348,7 +348,7 @@ namespace Elasticsearch.Net.Connection
 				}
 				catch (Exception e)
 				{
-					(response as ElasticsearchResponse<Stream>)?.Response?.Dispose();
+					(response as ElasticsearchResponse<Stream>)?.Body?.Dispose();
 					audit.Event = AuditEvent.BadResponse;
 					throw new ElasticsearchException(PipelineFailure.BadResponse, e);
 				}

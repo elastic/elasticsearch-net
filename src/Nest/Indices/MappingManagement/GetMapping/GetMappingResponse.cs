@@ -25,16 +25,11 @@ namespace Nest
 
 	public class GetMappingResponse : BaseResponse, IGetMappingResponse
 	{
-		public GetMappingResponse()
-		{
-			this.IsValid = true;
-			this.Mappings = new Dictionary<string, IList<TypeMapping>>();
-		}
-
-
-		internal GetMappingResponse(IElasticsearchResponse status, GetRootObjectMappingWrapping dict)
+		internal GetMappingResponse(IApiCallDetails status, GetRootObjectMappingWrapping dict)
 		{
 			this.Mappings = new Dictionary<string, IList<TypeMapping>>();
+			//TODO can dict truely ever be null, whats the response look like when field mapping is not found.
+			//does status.Success not already reflect this?
 			this.IsValid = status.Success && dict != null && dict.Count > 0;
 			if (!this.IsValid) return;
 			foreach (var index in dict)
@@ -64,7 +59,8 @@ namespace Nest
 				.FirstOrDefault(t=>t != null);
 		}
 
-		public Dictionary<string, IList<TypeMapping>> Mappings { get; internal set; }
+		public Dictionary<string, IList<TypeMapping>> Mappings { get; internal set; }= new Dictionary<string, IList<TypeMapping>>();
+
 		public RootObjectMapping Mapping { get; internal set; }
 
 		public void Accept(IMappingVisitor visitor)

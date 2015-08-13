@@ -9,12 +9,11 @@ namespace Nest
 	public partial class ElasticClient
 	{
 
-		private CatResponse<TCatRecord> DeserializeCatResponse<TCatRecord>(IElasticsearchResponse response, Stream stream)
+		private CatResponse<TCatRecord> DeserializeCatResponse<TCatRecord>(IApiCallDetails response, Stream stream)
 			where TCatRecord : ICatRecord
 		{
 			var records = this.Serializer.Deserialize<IEnumerable<TCatRecord>>(stream);
-			var isValid = response.Success && response.HttpStatusCode == 200;
-			return new CatResponse<TCatRecord> { IsValid = isValid, Records = records };
+			return new CatResponse<TCatRecord> { Records = records };
 		}
 
 		private ICatResponse<TCatRecord> DoCat<TRequest, TParams, TCatRecord>(
@@ -23,11 +22,11 @@ namespace Nest
 			)
 			where TCatRecord : ICatRecord
 			where TParams : FluentRequestParameters<TParams>, new()
-			where TRequest : IRequest<TParams> 
-			=> this.Dispatcher.Dispatch<TRequest, TParams, CatResponse<TCatRecord>>(
+			where TRequest : IRequest<TParams> => 
+			this.Dispatcher.Dispatch<TRequest, TParams, CatResponse<TCatRecord>>(
 				this.ForceConfiguration(request, c => c.ContentType = "application/json"),
 				(p, d) => dispatch(p.DeserializationState(
-					new Func<IElasticsearchResponse, Stream, CatResponse<TCatRecord>>(this.DeserializeCatResponse<TCatRecord>))
+					new Func<IApiCallDetails, Stream, CatResponse<TCatRecord>>(this.DeserializeCatResponse<TCatRecord>))
 					)
 				);
 
@@ -37,11 +36,11 @@ namespace Nest
 			)
 			where TCatRecord : ICatRecord
 			where TParams : FluentRequestParameters<TParams>, new()
-			where TRequest : class, IRequest<TParams>, new()
-			=> Dispatcher.DispatchAsync<TRequest, TParams, CatResponse<TCatRecord>, ICatResponse<TCatRecord>>(
+			where TRequest : class, IRequest<TParams>, new() =>
+			this.Dispatcher.DispatchAsync<TRequest, TParams, CatResponse<TCatRecord>, ICatResponse<TCatRecord>>(
 				this.ForceConfiguration(selector, c => c.ContentType = "application/json"),
 				(p, d) => dispatch(p.DeserializationState(
-					new Func<IElasticsearchResponse, Stream, CatResponse<TCatRecord>>(this.DeserializeCatResponse<TCatRecord>))
+					new Func<IApiCallDetails, Stream, CatResponse<TCatRecord>>(this.DeserializeCatResponse<TCatRecord>))
 				)
 			);
 
@@ -51,11 +50,11 @@ namespace Nest
 			)
 			where TCatRecord : ICatRecord
 			where TParams : FluentRequestParameters<TParams>, new()
-			where TRequest : IRequest<TParams> 
-			=> this.Dispatcher.DispatchAsync<TRequest, TParams, CatResponse<TCatRecord>, ICatResponse<TCatRecord>>(
+			where TRequest : IRequest<TParams> => 
+			this.Dispatcher.DispatchAsync<TRequest, TParams, CatResponse<TCatRecord>, ICatResponse<TCatRecord>>(
 				this.ForceConfiguration(request, c => c.ContentType = "application/json"),
 				(p, d) => dispatch(p.DeserializationState(
-					new Func<IElasticsearchResponse, Stream, CatResponse<TCatRecord>>(this.DeserializeCatResponse<TCatRecord>))
+					new Func<IApiCallDetails, Stream, CatResponse<TCatRecord>>(this.DeserializeCatResponse<TCatRecord>))
 				)
 			);
 
@@ -65,11 +64,11 @@ namespace Nest
 			)
 			where TCatRecord : ICatRecord
 			where TParams : FluentRequestParameters<TParams>, new()
-			where TRequest : class, IRequest<TParams>, new()
-			=> this.Dispatcher.Dispatch<TRequest, TParams, CatResponse<TCatRecord>>(
+			where TRequest : class, IRequest<TParams>, new() => 
+			this.Dispatcher.Dispatch<TRequest, TParams, CatResponse<TCatRecord>>(
 				this.ForceConfiguration(selector, c => c.ContentType = "application/json"),
 				(p, d) => dispatch(p.DeserializationState(
-					new Func<IElasticsearchResponse, Stream, CatResponse<TCatRecord>>(this.DeserializeCatResponse<TCatRecord>))
+					new Func<IApiCallDetails, Stream, CatResponse<TCatRecord>>(this.DeserializeCatResponse<TCatRecord>))
 				)
 			);
 	

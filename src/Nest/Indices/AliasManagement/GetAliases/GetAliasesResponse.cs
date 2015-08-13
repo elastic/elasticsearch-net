@@ -9,12 +9,6 @@ namespace Nest
 
 	public class GetAliasesResponse : BaseResponse, IGetAliasesResponse
 	{
-		public GetAliasesResponse()
-		{
-			this.IsValid = true;
-			this.Indices = new Dictionary<string, IList<AliasDefinition>>();
-		}
-
-		public IDictionary<string, IList<AliasDefinition>> Indices { get; internal set; }
+		public IDictionary<string, IList<AliasDefinition>> Indices { get; internal set; } = new Dictionary<string, IList<AliasDefinition>>();
 	}
 }

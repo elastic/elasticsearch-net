@@ -7,7 +7,7 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	using GetFieldMappingConverter = Func<IElasticsearchResponse, Stream, GetFieldMappingResponse>;
+	using GetFieldMappingConverter = Func<IApiCallDetails, Stream, GetFieldMappingResponse>;
 
 	public partial class ElasticClient
 	{
@@ -59,7 +59,7 @@ namespace Nest
 			);
 		}
 
-		private GetFieldMappingResponse DeserializeGetFieldMappingResponse(IElasticsearchResponse response, IGetFieldMappingRequest d, Stream stream)
+		private GetFieldMappingResponse DeserializeGetFieldMappingResponse(IApiCallDetails response, IGetFieldMappingRequest d, Stream stream)
 		{
 			var dict = response.Success
 				? Serializer.Deserialize<IndexFieldMappings>(stream)

@@ -14,10 +14,6 @@ namespace Nest
 	[JsonObject]
 	public class RegisterPercolateResponse : BaseResponse, IRegisterPercolateResponse
 	{
-		public RegisterPercolateResponse()
-		{
-			this.IsValid = true;
-		}
 		[JsonProperty(PropertyName = "created")]
 		public bool Created { get; internal set; }
 

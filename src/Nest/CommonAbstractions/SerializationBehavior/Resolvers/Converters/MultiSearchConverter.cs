@@ -64,16 +64,12 @@ namespace Nest.Resolvers.Converters
 		{
 			if (this._settings == null)
 			{
-				var elasticContractResolver = serializer.ContractResolver as SettingsContractResolver;
-				if (elasticContractResolver == null)
-					return new MultiSearchResponse { IsValid = false };
-				var piggyBackState = elasticContractResolver.PiggyBackState;
-				if (piggyBackState == null || piggyBackState.ActualJsonConverter == null)
-					return new MultiSearchResponse { IsValid = false };
-
-				var realConverter = piggyBackState.ActualJsonConverter as MultiSearchConverter;
+				var realConverter = (
+					(serializer.ContractResolver as SettingsContractResolver)
+					?.PiggyBackState?.ActualJsonConverter as MultiSearchConverter
+				);
 				if (realConverter == null)
-					return new MultiSearchResponse { IsValid = false };
+					throw new DslException("could not find a stateful multi search converter");
 
 				var mr = realConverter.ReadJson(reader, objectType, existingValue, serializer) as MultiSearchResponse;
 				return mr;

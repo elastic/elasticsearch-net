@@ -13,11 +13,6 @@ namespace Nest
 	[JsonObject]
 	public class RootInfoResponse : BaseResponse, IRootInfoResponse
 	{
-		public RootInfoResponse()
-		{
-			this.IsValid = true;
-		}
-
 		[JsonProperty(PropertyName = "status")]
 		public int Status { get; internal set; }
 

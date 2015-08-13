@@ -125,22 +125,13 @@ namespace Nest
 			where D : IRequest<Q>
 			where R : BaseResponse
 		{
-			var config = descriptor.RequestConfiguration;
-			var statusCodeAllowed = config != null && config.AllowedStatusCodes.HasAny(i => i == c.HttpStatusCode);
-
-			if (c.Success || statusCodeAllowed)
-			{
-				c.Response.IsValid = true;
-				return c.Response;
-			}
-			var badResponse = CreateInvalidInstance<R>(c);
-			return badResponse;
+			return c.Body ?? CreateInvalidInstance<R>(c);
 		}
 
-		private static R CreateInvalidInstance<R>(IElasticsearchResponse response) where R : BaseResponse
+		private static R CreateInvalidInstance<R>(IApiCallDetails response) where R : BaseResponse
 		{
-			var r = (R)typeof(R).CreateInstance();
-			((IResponseWithRequestInformation)r).RequestInformation = response;
+			var r = typeof(R).CreateInstance<R>();
+			((IBodyWithApiCallDetails)r).CallDetails = response;
 			r.IsValid = false;
 			return r;
 		}

@@ -7,7 +7,7 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	using GetTemplateConverter = Func<IElasticsearchResponse, Stream, TemplateResponse>;
+	using GetTemplateConverter = Func<IApiCallDetails, Stream, TemplateResponse>;
 
 	public partial class ElasticClient
 	{
@@ -58,10 +58,10 @@ namespace Nest
 		}
 
 		private TemplateResponse DeserializeTemplateResponse(
-			IElasticsearchResponse response,
+			IApiCallDetails response,
 			Stream stream)
 		{
-			if (!response.Success) return new TemplateResponse {IsValid = false};
+			if (!response.Success) return new TemplateResponse();
 
 			var dict = this.Serializer.Deserialize<Dictionary<string, TemplateMapping>>(stream);
 			if (dict.Count == 0)
@@ -69,7 +69,6 @@ namespace Nest
 
 			return new TemplateResponse
 			{
-				IsValid = true,
 				Name = dict.First().Key,
 				TemplateMapping = dict.First().Value
 			};

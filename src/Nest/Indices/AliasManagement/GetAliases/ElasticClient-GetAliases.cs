@@ -7,7 +7,7 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	using GetAliasesConverter = Func<IElasticsearchResponse, Stream, GetAliasesResponse>;
+	using GetAliasesConverter = Func<IApiCallDetails, Stream, GetAliasesResponse>;
 	using CrazyAliasesResponse = Dictionary<string, Dictionary<string, Dictionary<string, AliasDefinition>>>;
 
 	public partial class ElasticClient
@@ -58,10 +58,10 @@ namespace Nest
 		}
 
 		/// <inheritdoc />
-		private GetAliasesResponse DeserializeGetAliasesResponse(IElasticsearchResponse connectionStatus, Stream stream)
+		private GetAliasesResponse DeserializeGetAliasesResponse(IApiCallDetails connectionStatus, Stream stream)
 		{
 			if (!connectionStatus.Success)
-				return new GetAliasesResponse() { IsValid = false };
+				return new GetAliasesResponse();
 
 			var dict = this.Serializer.Deserialize<CrazyAliasesResponse>(stream);
 
@@ -86,11 +86,7 @@ namespace Nest
 				d.Add(indexDict, aliases);
 			}
 
-			return new GetAliasesResponse()
-			{
-				IsValid = true,
-				Indices = d
-			};
+			return new GetAliasesResponse() { Indices = d };
 		}
 	}
 }

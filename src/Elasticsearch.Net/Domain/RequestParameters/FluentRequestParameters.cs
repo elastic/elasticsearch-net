@@ -21,7 +21,7 @@ namespace Elasticsearch.Net
 		private IRequestParameters Self { get { return this; } }
 
 		IDictionary<string, object> IRequestParameters.QueryString { get; set; }
-		Func<IElasticsearchResponse, Stream, object> IRequestParameters.DeserializationState { get; set; }
+		Func<IApiCallDetails, Stream, object> IRequestParameters.DeserializationState { get; set; }
 		IRequestConfiguration IRequestParameters.RequestConfiguration { get; set; }
 
 		public FluentRequestParameters()
@@ -65,7 +65,7 @@ namespace Elasticsearch.Net
 			return (T)this;
 		}
 		
-		public T DeserializationState(Func<IElasticsearchResponse, Stream, object> customResponseCreator)
+		public T DeserializationState(Func<IApiCallDetails, Stream, object> customResponseCreator)
 		{
 			Self.DeserializationState = customResponseCreator;
 			return (T)this;

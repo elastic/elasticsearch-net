@@ -14,11 +14,6 @@ namespace Nest
 	[JsonObject]
 	public class ValidateResponse : BaseResponse, IValidateResponse
 	{
-		public ValidateResponse()
-		{
-			this.IsValid = true;
-		}
-
 		[JsonProperty(PropertyName = "valid")]
 		public bool Valid { get; internal set; }
 

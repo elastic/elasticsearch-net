@@ -5,9 +5,9 @@ namespace Nest
 {
 	public class ReindexException: Exception
 	{
-		public IElasticsearchResponse Status { get; private set; }
+		public IApiCallDetails Status { get; private set; }
 
-		public ReindexException(IElasticsearchResponse status, string message = null) : base(message)
+		public ReindexException(IApiCallDetails status, string message = null) : base(message)
 		{
 			this.Status = status;
 		}

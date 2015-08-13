@@ -96,13 +96,13 @@ namespace Tests.Framework
 		}
 
 		[I] protected async void HandlesStatusCode() =>
-			await this.AssertOnAllResponses(r=>r.ConnectionStatus.HttpStatusCode.Should().Be(this.ExpectStatusCode));
+			await this.AssertOnAllResponses(r=>r.ApiCall.HttpStatusCode.Should().Be(this.ExpectStatusCode));
 
 		[I] protected async void ReturnsExpectedIsValid() =>
 			await this.AssertOnAllResponses(r=>r.IsValid.Should().Be(this.ExpectIsValid));
 
 		[U] protected async Task HitsTheCorrectUrl() =>
-			await this.AssertOnAllResponses(r=>this.AssertUrl(r.ConnectionStatus.RequestUri));
+			await this.AssertOnAllResponses(r=>this.AssertUrl(r.ApiCall.RequestUri));
 
 		[U] protected void SerializesInitializer() => 
 			this.AssertSerializesAndRoundTrips<TInterface>(this.Initializer);

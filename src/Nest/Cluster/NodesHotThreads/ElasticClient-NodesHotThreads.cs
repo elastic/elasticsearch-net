@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Nest
 {
-	using NodesHotThreadConverter = Func<IElasticsearchResponse, Stream, NodesHotThreadsResponse>;
+	using NodesHotThreadConverter = Func<IApiCallDetails, Stream, NodesHotThreadsResponse>;
 
 	public partial class ElasticClient
 	{
@@ -59,10 +59,10 @@ namespace Nest
 		/// Because the nodes.hot_threads endpoint returns plain text instead of JSON, we have to
 		/// manually parse the response text into a typed response object.
 		/// </summary>
-		private NodesHotThreadsResponse DeserializeNodesHotThreadResponse(IElasticsearchResponse response, Stream stream)
+		private NodesHotThreadsResponse DeserializeNodesHotThreadResponse(IApiCallDetails response, Stream stream)
 		{
 			var typedResponse = new NodesHotThreadsResponse();
-			var plainTextResponse = Encoding.UTF8.GetString(response.ResponseRaw);
+			var plainTextResponse = Encoding.UTF8.GetString(response.ResponseBodyInBytes);
 
 			// If the response doesn't start with :::, which is the pattern that delimits
 			// each node section in the response, then the response format isn't recognized.

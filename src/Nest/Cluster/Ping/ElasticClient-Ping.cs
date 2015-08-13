@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Nest
 {
-	using PingConverter = Func<IElasticsearchResponse, Stream, PingResponse>;
+	using PingConverter = Func<IApiCallDetails, Stream, PingResponse>;
 
 	public partial class ElasticClient
 	{
@@ -81,12 +81,7 @@ namespace Nest
 				pingRequest.RequestConfiguration.RequestTimeout = this.ConnectionSettings.PingTimeout.Value;
 		}
 
-		private PingResponse DeserializePingResponse(IElasticsearchResponse response, Stream stream)
-		{
-			return new PingResponse
-			{
-				IsValid = response.Success && response.HttpStatusCode == 200
-			};
-		}
+		private PingResponse DeserializePingResponse(IApiCallDetails response, Stream stream) => 
+			new PingResponse();
 	}
 }

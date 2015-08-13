@@ -5,17 +5,12 @@ using Elasticsearch.Net.Connection;
 
 namespace Elasticsearch.Net
 {
-	public interface IElasticsearchResponse
+	public interface IApiCallDetails
 	{
 		/// <summary>
 		/// The response status code is in the 200 range or is in the allowed list of status codes set on the request.
 		/// </summary>
 		bool Success { get; }
-		
-		/// <summary>
-		/// The request settings used by the request responsible for this response
-		/// </summary>
-		IConnectionConfigurationValues Settings { get; }
 		
 		/// <summary>
 		/// If Success is false this will hold the original exception.
@@ -39,31 +34,17 @@ namespace Elasticsearch.Net
 		int? HttpStatusCode { get; }
 
 		/// <summary>
-		/// The number of times to request had to be retried before succeeding on a live node
-		/// </summary>
-		int NumberOfRetries { get; }
-
-		/// <summary>
-		/// Returns timing and stats metric about the current API method invocation. 
-		/// </summary>
-		CallMetrics Metrics { get; }
-
-		/// <summary>
 		/// The raw byte response, only set when IncludeRawResponse() is set on Connection configuration
 		/// </summary>
 		[DebuggerDisplay("{ResponseRaw != null ? System.Text.Encoding.UTF8.GetString(ResponseRaw) : null,nq}")]
-		byte[] ResponseRaw { get; }
+		byte[] ResponseBodyInBytes { get; }
 
 		[DebuggerDisplay("{Request != null ? System.Text.Encoding.UTF8.GetString(Request) : null,nq}")]
-		byte[] Request { get; }
+		byte[] RequestBodyInBytes { get; }
 
 		List<Audit> AuditTrail { get; }
 
 	}
 
 
-	public interface IResponseWithRequestInformation
-	{
-		IElasticsearchResponse RequestInformation { get; set; }
-	}
 }

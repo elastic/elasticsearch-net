@@ -5,43 +5,41 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public interface IResponse : IResponseWithRequestInformation
+	public interface IResponse : IBodyWithApiCallDetails
 	{
 		[JsonIgnore]
 		bool IsValid { get; }
 
 		[JsonIgnore]
-		IElasticsearchResponse ConnectionStatus { get; }
-
-		[JsonIgnore]
-		ElasticInferrer Infer { get; }
+		IApiCallDetails ApiCall { get; }
 
 		[JsonIgnore]
 		ElasticsearchServerError ServerError { get; }
 	}
-		
+
+
 	public class BaseResponse : IResponse
 	{
-		private ElasticInferrer _infer;
-
-		public virtual bool IsValid { get; internal set; }
-
-		public BaseResponse()
+		private bool? _forcedIsValid = null;
+		public virtual bool IsValid
 		{
-			this.IsValid = true;
+			get
+			{
+				return _forcedIsValid ?? this.ApiCall?.Success ?? false;
+			}
+			internal set { _forcedIsValid = value; }
 		}
-		
-		IElasticsearchResponse IResponseWithRequestInformation.RequestInformation { get; set; }
 
-		public IElasticsearchResponse ConnectionStatus { get { return ((IResponseWithRequestInformation)this).RequestInformation;  } }
-		
+		IApiCallDetails IBodyWithApiCallDetails.CallDetails { get; set; }
+		public IApiCallDetails ApiCall => ((IBodyWithApiCallDetails)this).CallDetails;
+
 		public virtual ElasticsearchServerError ServerError
 		{
 			get
 			{
-				if (this.IsValid || this.ConnectionStatus == null || this.ConnectionStatus.OriginalException == null)
+				if (this.IsValid || this.ApiCall == null || this.ApiCall.OriginalException == null)
 					return null;
-				var e = this.ConnectionStatus.OriginalException as ElasticsearchServerException;
+				var e = this.ApiCall.OriginalException as ElasticsearchServerException;
 				if (e == null)
 					return null;
 				return new ElasticsearchServerError
@@ -50,33 +48,6 @@ namespace Nest
 					Error = e.Message,
 					ExceptionType = e.ExceptionType
 				};
-			}
-		}
-		
-		protected IConnectionSettingsValues Settings
-		{
-			get
-			{
-				if (this.ConnectionStatus == null)
-					return null;
-
-				var settings = this.ConnectionStatus.Settings as IConnectionSettingsValues;
-				return settings;
-			}
-		}
-
-		public ElasticInferrer Infer
-		{
-			get
-			{
-				if (this._infer != null)
-					return this._infer;
-
-				var settings = this.Settings;
-				if (settings == null)
-					return null;
-				this._infer = this.Settings.Inferrer;
-				return this._infer;
 			}
 		}
 

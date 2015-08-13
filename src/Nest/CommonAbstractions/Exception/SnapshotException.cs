@@ -5,9 +5,9 @@ namespace Nest
 {
 	public class SnapshotException : Exception
 	{
-		public IElasticsearchResponse Status { get; private set; }
+		public IApiCallDetails Status { get; private set; }
 
-		public SnapshotException(IElasticsearchResponse status, string message)
+		public SnapshotException(IApiCallDetails status, string message)
 			: base(message)
 		{
 			Status = status;

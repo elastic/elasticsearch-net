@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	using Elasticsearch.Net.Serialization;
-	using MultiSearchCreator = Func<IElasticsearchResponse, Stream, MultiSearchResponse>;
+	using MultiSearchCreator = Func<IApiCallDetails, Stream, MultiSearchResponse>;
 
 	public partial class ElasticClient
 	{

@@ -36,7 +36,7 @@ namespace Elasticsearch.Net.Providers
 		//TODO: broke this to make to make it compile for now
 		//TODO rewrite: not static, pluggable, taking master nodes into account and current scheme
 
-		public static IList<Uri> FromStream(IElasticsearchResponse response, Stream stream, IElasticsearchSerializer serializer)
+		public static IList<Uri> FromStream(IApiCallDetails response, Stream stream, IElasticsearchSerializer serializer)
 		{
 			var result = serializer.Deserialize<NodeInfoResponse>(stream);
 			return result.nodes.Values

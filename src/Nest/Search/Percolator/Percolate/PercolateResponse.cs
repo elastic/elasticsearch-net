@@ -10,7 +10,6 @@ namespace Nest
 		long Total { get; }
 	}
 
-
 	public interface IPercolateResponse : IPercolateCountResponse
 	{
 		IEnumerable<PercolatorMatch> Matches { get; }
@@ -19,10 +18,6 @@ namespace Nest
 	[JsonObject]
 	public class PercolateCountResponse : BaseResponse, IPercolateCountResponse
 	{
-		public PercolateCountResponse()
-		{
-			this.IsValid = true;
-		}
 
 		[JsonProperty(PropertyName = "took")]
 		public int Took { get; internal set; }
@@ -34,19 +29,6 @@ namespace Nest
 		/// </summary>
 		[JsonProperty(PropertyName = "error")]
 		internal string Error { get; set; }
-
-		public override ElasticsearchServerError ServerError
-		{
-			get
-			{
-				if (this.Error.IsNullOrEmpty()) return base.ServerError;
-				return new ElasticsearchServerError
-				{
-					Error = this.Error,
-					Status = 500
-				};
-			}
-		}
 	}
 
 	[JsonObject]

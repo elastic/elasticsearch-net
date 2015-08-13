@@ -14,7 +14,7 @@ namespace Nest
 			var descriptor = getSelector(new SourceDescriptor<T>());
 			var pathInfo = ((IPathInfo<SourceRequestParameters>) descriptor).ToPathInfo(ConnectionSettings); 
 			var response = this.LowLevelDispatch.GetSourceDispatch<T>(pathInfo);
-			return response.Response;
+			return response.Body;
 		}
 
 		/// <inheritdoc />
@@ -22,7 +22,7 @@ namespace Nest
 		{
 			var pathInfo = sourceRequest.ToPathInfo(ConnectionSettings); 
 			var response = this.LowLevelDispatch.GetSourceDispatch<T>(pathInfo);
-			return response.Response;
+			return response.Body;
 		}
 
 		/// <inheritdoc />
@@ -38,7 +38,7 @@ namespace Nest
 						t.Exception.Flatten().InnerException.RethrowKeepingStackTrace();
 						return null; //won't be hit
 					}
-					return t.Result.Response;
+					return t.Result.Body;
 				});
 			return response;
 		}
@@ -55,7 +55,7 @@ namespace Nest
 						t.Exception.Flatten().InnerException.RethrowKeepingStackTrace();
 						return null; //won't be hit
 					}
-					return t.Result.Response;
+					return t.Result.Body;
 				});
 			return response;
 		}

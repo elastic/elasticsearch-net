@@ -24,11 +24,6 @@ namespace Nest
 	[JsonObject]
 	public class HealthResponse : BaseResponse, IHealthResponse
 	{
-		public HealthResponse()
-		{
-			this.IsValid = true;
-		}
-
 		[JsonProperty(PropertyName = "cluster_name")]
 		public string ClusterName { get; internal set; }
 		[JsonProperty(PropertyName = "status")]

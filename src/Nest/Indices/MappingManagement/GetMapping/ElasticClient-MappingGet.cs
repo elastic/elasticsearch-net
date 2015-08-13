@@ -7,7 +7,7 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	using GetMappingConverter = Func<IElasticsearchResponse, Stream, GetMappingResponse>;
+	using GetMappingConverter = Func<IApiCallDetails, Stream, GetMappingResponse>;
 
 	public partial class ElasticClient
 	{
@@ -59,7 +59,7 @@ namespace Nest
 			);
 		}
 
-		private GetMappingResponse DeserializeGetMappingResponse(IElasticsearchResponse response, IGetMappingRequest d, Stream stream)
+		private GetMappingResponse DeserializeGetMappingResponse(IApiCallDetails response, IGetMappingRequest d, Stream stream)
 		{
 			var dict = response.Success
 				? Serializer.Deserialize<GetRootObjectMappingWrapping>(stream)

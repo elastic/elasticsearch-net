@@ -32,6 +32,6 @@ namespace Elasticsearch.Net.Connection
 		void Sniff();
 		Task SniffAsync();
 
-		void BadResponse(IElasticsearchResponse response);
+		void BadResponse(IApiCallDetails response);
 	}
 }

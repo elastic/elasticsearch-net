@@ -5,7 +5,7 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	using IndexExistConverter = Func<IElasticsearchResponse, Stream, ExistsResponse>;
+	using IndexExistConverter = Func<IApiCallDetails, Stream, ExistsResponse>;
 
 	public partial class ElasticClient
 	{
@@ -55,7 +55,7 @@ namespace Nest
 		}
 
 
-		private ExistsResponse DeserializeExistsResponse(IElasticsearchResponse response, Stream stream)
+		private ExistsResponse DeserializeExistsResponse(IApiCallDetails response, Stream stream)
 		{
 			return new ExistsResponse(response);
 		}

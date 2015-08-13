@@ -108,7 +108,7 @@ namespace Tests.ClientConcepts.LowLevel
 				 */;
 
 			var result = client.Search<SearchResponse<object>>(new { size = 12 });
-			var raw = result.ResponseRaw;
+			var raw = result.ResponseBodyInBytes;
 			/** This will only have a value if the client configuration has ExposeRawResponse set */
 
 			/** 

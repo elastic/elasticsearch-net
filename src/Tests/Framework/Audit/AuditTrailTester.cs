@@ -21,8 +21,8 @@ namespace Tests.Framework
 			this.Response = this.Cluster().ClientCall();
 			this.ResponseAsync = await this.Cluster().ClientCallAsync();
 
-			var auditTrail = this.Response.ConnectionStatus.AuditTrail;
-			var asyncAuditTrail = this.ResponseAsync.ConnectionStatus.AuditTrail;
+			var auditTrail = this.Response.ApiCall.AuditTrail;
+			var asyncAuditTrail = this.ResponseAsync.ApiCall.AuditTrail;
 
 			auditTrail.Count.Should().Be(asyncAuditTrail.Count, "calling async should have the same audit trail length as the sync call");
 

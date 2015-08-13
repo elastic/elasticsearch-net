@@ -30,7 +30,7 @@ namespace Nest
 				.DeserializationState(this.CreateSearchDeserializer<T, TResult>(descriptor));
 
 			var status = this.LowLevelDispatch.SearchDispatch<SearchResponse<TResult>>(pathInfo, descriptor);
-			return status.Success ? status.Response : CreateInvalidInstance<SearchResponse<TResult>>(status);
+			return status.Success ? status.Body : CreateInvalidInstance<SearchResponse<TResult>>(status);
 		}
 
 
@@ -50,7 +50,7 @@ namespace Nest
 				.DeserializationState(this.CreateSearchDeserializer<T, TResult>(request));
 
 			var status = this.LowLevelDispatch.SearchDispatch<SearchResponse<TResult>>(pathInfo, request);
-			return status.Success ? status.Response : CreateInvalidInstance<SearchResponse<TResult>>(status);
+			return status.Success ? status.Body : CreateInvalidInstance<SearchResponse<TResult>>(status);
 		}
 
 		/// <inheritdoc />
@@ -82,7 +82,7 @@ namespace Nest
 					}
 					
 					return t.Result.Success
-						? t.Result.Response
+						? t.Result.Body
 						: CreateInvalidInstance<SearchResponse<TResult>>(t.Result);
 				});
 		}
@@ -111,12 +111,12 @@ namespace Nest
 					}
 					
 					return t.Result.Success
-						? t.Result.Response
+						? t.Result.Body
 						: CreateInvalidInstance<SearchResponse<TResult>>(t.Result);
 				});
 		}
 
-		private SearchResponse<TResult> FieldsSearchDeserializer<T, TResult>(IElasticsearchResponse response, Stream stream, ISearchRequest d)
+		private SearchResponse<TResult> FieldsSearchDeserializer<T, TResult>(IApiCallDetails response, Stream stream, ISearchRequest d)
 			where T : class
 			where TResult : class
 		{
@@ -127,12 +127,12 @@ namespace Nest
 			return dict;
 		}
 		
-		private Func<IElasticsearchResponse, Stream, SearchResponse<TResult>> CreateSearchDeserializer<T, TResult>(ISearchRequest request)
+		private Func<IApiCallDetails, Stream, SearchResponse<TResult>> CreateSearchDeserializer<T, TResult>(ISearchRequest request)
 			where T : class
 			where TResult : class
 		{
 				
-			Func<IElasticsearchResponse, Stream, SearchResponse<TResult>> responseCreator = 
+			Func<IApiCallDetails, Stream, SearchResponse<TResult>> responseCreator = 
 					(r, s) => this.FieldsSearchDeserializer<T, TResult>(r, s, request);
 			return responseCreator;
 		}

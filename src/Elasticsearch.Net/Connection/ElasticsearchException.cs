@@ -10,7 +10,7 @@ namespace Elasticsearch.Net.Connection
 	public class ElasticsearchException : Exception
 	{
 		public PipelineFailure Cause { get; }
-		public IElasticsearchResponse Response { get; }
+		public IApiCallDetails Response { get; }
 		public bool Recoverable => Cause == PipelineFailure.BadResponse || Cause == PipelineFailure.Unexpected || Cause == PipelineFailure.BadPing;
 
 		//TODO make sure the exception messages are gorgeous
@@ -19,7 +19,7 @@ namespace Elasticsearch.Net.Connection
 			this.Cause = cause;
 		}
 
-		public ElasticsearchException(PipelineFailure cause, IElasticsearchResponse response)
+		public ElasticsearchException(PipelineFailure cause, IApiCallDetails response)
 		{
 			this.Cause = cause;
 			this.Response = response;

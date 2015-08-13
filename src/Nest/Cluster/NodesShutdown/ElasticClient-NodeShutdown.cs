@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Nest
 {
-	using NodesHotThreadConverter = Func<IElasticsearchResponse, Stream, NodesHotThreadsResponse>;
+	using NodesHotThreadConverter = Func<IApiCallDetails, Stream, NodesHotThreadsResponse>;
 
 	public partial class ElasticClient
 	{
