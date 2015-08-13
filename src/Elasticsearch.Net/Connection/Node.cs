@@ -4,7 +4,7 @@ using Elasticsearch.Net.Providers;
 
 namespace Elasticsearch.Net.Connection
 {
-	public class Node
+	public class Node : IEquatable<Node>
 	{
 		public Node(Uri uri)
 		{
@@ -75,5 +75,29 @@ namespace Elasticsearch.Net.Connection
 				IsAlive = this.IsAlive
 			};
 
+
+		public static bool operator ==(Node left, Node right) => left.Equals(right);
+
+		public static bool operator !=(Node left, Node right) => !left.Equals(right);
+
+		public static implicit operator Node(Uri uri) => new Node(uri);
+
+		//a Node is only unique by its Uri
+		public bool Equals(Node other)
+		{
+			if (ReferenceEquals(null, other)) return false;
+			if (ReferenceEquals(this, other)) return true;
+			return this.Uri == other.Uri;
+		}
+		
+		public override bool Equals(object obj)
+		{
+			if (ReferenceEquals(null, obj)) return false;
+			if (ReferenceEquals(this, obj)) return true;
+			if (obj.GetType() != this.GetType()) return false;
+			return Equals((Node) obj);
+		}
+
+		public override int GetHashCode() => this.Uri.GetHashCode();
 	}
 }

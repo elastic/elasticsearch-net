@@ -194,11 +194,6 @@ namespace Tests.Framework.Integration
 
 		}
 
-		private void SeedData()
-		{
-			
-		}
-
 		public void Stop()
 		{
 			Console.WriteLine($"Stopping... ran integrations: {this.RunningIntegrations}");
@@ -298,8 +293,6 @@ namespace Tests.Framework.Integration
 			var build = match.Groups["build"].Value.Trim();
 			nodeInfo = new ElasticsearchNodeInfo(version, pid, build);
 			return true;
-
-
 		}
 
 		public bool TryGetStartedConfirmation()

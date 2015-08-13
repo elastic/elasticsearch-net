@@ -76,6 +76,20 @@ namespace Tests.ClientConcepts.LowLevel.Ressurection
 			node.IsAlive.Should().BeTrue();
 		}
 
+		[U] public void Equality()
+		{
+			/** Nodes are considered equal if they have the same endpoint no matter what other metadata is associated */
+			var node = new Node(new Uri("http://localhost:9200")) { MasterEligable = false };
+			var nodeAsMaster = new Node(new Uri("http://localhost:9200")) { MasterEligable = true };
+			(node == nodeAsMaster).Should().BeTrue();
+			(node != nodeAsMaster).Should().BeFalse();
+			var uri = new Uri("http://localhost:9200");
+			(node == uri).Should().BeTrue();
+			var differentUri = new Uri("http://localhost:9201");
+			(node != differentUri).Should().BeTrue();
+		}
+
+
 	}
 
 
