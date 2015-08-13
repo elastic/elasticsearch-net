@@ -149,8 +149,8 @@ namespace Elasticsearch.Net.Connection
 		NameValueCollection _headers = new NameValueCollection();
 		NameValueCollection IConnectionConfigurationValues.Headers => _headers;
 
-		BasicAuthorizationCredentials _basicAuthCredentials;
-		BasicAuthorizationCredentials IConnectionConfigurationValues.BasicAuthenticationCredentials => _basicAuthCredentials;
+		BasicAuthenticationCredentials _basicAuthCredentials;
+		BasicAuthenticationCredentials IConnectionConfigurationValues.BasicAuthenticationCredentials => _basicAuthCredentials;
 
 		/* */
 
@@ -350,7 +350,7 @@ namespace Elasticsearch.Net.Connection
 		/// </summary>
 		public T SetBasicAuthentication(string userName, string password)
 		{
-			this._basicAuthCredentials = new BasicAuthorizationCredentials();
+			this._basicAuthCredentials = new BasicAuthenticationCredentials();
 			this._basicAuthCredentials.UserName = userName;
 			this._basicAuthCredentials.Password = password;
 			return (T)this;

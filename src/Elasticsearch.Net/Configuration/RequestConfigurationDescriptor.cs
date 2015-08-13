@@ -25,7 +25,7 @@ namespace Elasticsearch.Net.Connection.Configuration
 		
 		IEnumerable<int> IRequestConfiguration.AllowedStatusCodes { get; set; }
 
-		BasicAuthorizationCredentials IRequestConfiguration.BasicAuthenticationCredentials { get; set; }
+		BasicAuthenticationCredentials IRequestConfiguration.BasicAuthenticationCredentials { get; set; }
 
 		bool IRequestConfiguration.EnableHttpPipelining { get; set; }
 
@@ -92,7 +92,7 @@ namespace Elasticsearch.Net.Connection.Configuration
 		public RequestConfigurationDescriptor BasicAuthentication(string userName, string password)
 		{
 			if (Self.BasicAuthenticationCredentials == null)
-				Self.BasicAuthenticationCredentials = new BasicAuthorizationCredentials();
+				Self.BasicAuthenticationCredentials = new BasicAuthenticationCredentials();
 			Self.BasicAuthenticationCredentials.UserName = userName;
 			Self.BasicAuthenticationCredentials.Password = password;
 			return this;

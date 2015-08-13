@@ -53,7 +53,7 @@ namespace Tests.ClientConcepts.LowLevel
 			var fromListOfObject = ImplicitlyConvertsFrom(listOfObjects);
 			var fromObject = ImplicitlyConvertsFrom(@object);
 
-			/** postData Bytes will always be set if it originated from a string*/
+			/** postData Bytes will always be set if it originated from a byte*/
 			fromByteArray.Bytes.Should().BeSameAs(bytes);
 		}
 

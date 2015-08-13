@@ -35,7 +35,7 @@ namespace Elasticsearch.Net.Connection
 		public string ProxyUsername { get; }
 		public string ProxyPassword { get; }
 		public bool DisableAutomaticProxyDetection { get; }
-		public BasicAuthorizationCredentials BasicAuthorizationCredentials { get; }
+		public BasicAuthenticationCredentials BasicAuthorizationCredentials { get; }
 		public CancellationToken CancellationToken { get; }
 
 		private readonly IConnectionConfigurationValues _settings;

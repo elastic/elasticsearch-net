@@ -87,11 +87,7 @@ namespace Tests.ClientConcepts.LowLevel.Ressurection
 			(node == uri).Should().BeTrue();
 			var differentUri = new Uri("http://localhost:9201");
 			(node != differentUri).Should().BeTrue();
+			node.Should().Be(nodeAsMaster);
 		}
-
-
 	}
-
-
-	
 }

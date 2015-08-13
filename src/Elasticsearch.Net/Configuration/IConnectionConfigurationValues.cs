@@ -163,7 +163,7 @@ namespace Elasticsearch.Net.Connection
 		/// <summary>
 		/// Basic access authorization credentials to specify with all requests.
 		/// </summary>
-		BasicAuthorizationCredentials BasicAuthenticationCredentials { get; }
+		BasicAuthenticationCredentials BasicAuthenticationCredentials { get; }
 		
 		/// <summary>
 		/// KeepAliveTime - specifies the timeout, in milliseconds, with no

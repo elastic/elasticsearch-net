@@ -182,7 +182,7 @@ namespace Nest
 			hitDynamic.Sorts = d.sort;
 			hitDynamic._Highlight = d.highlight is Dictionary<string, List<string>> ? d.highlight : null;
 			hitDynamic.Explanation = d._explanation is Explanation ? d._explanation : null;
-			object o = d._source ?? DynamicDictionary.Create(fieldSelectionData) ?? new object {};
+			object o = d._source ?? DynamicResponse.Create(fieldSelectionData) ?? new object {};
 			var concreteType = selector(o, hitDynamic);
 			
 			Type fieldSelectionType;

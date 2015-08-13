@@ -6,7 +6,7 @@ using System.Text;
 namespace Elasticsearch.Net.Connection.Security
 {
 	// TODO: Rename to BasicAuthenticationCredentials in 2.0
-	public class BasicAuthorizationCredentials
+	public class BasicAuthenticationCredentials
 	{
 		public string UserName { get; set; }
 		public string Password { get; set; }

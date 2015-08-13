@@ -95,7 +95,7 @@ namespace Elasticsearch.Net.Connection
 			if (ReferenceEquals(null, obj)) return false;
 			if (ReferenceEquals(this, obj)) return true;
 			if (obj.GetType() != this.GetType()) return false;
-			return Equals((Node) obj);
+			return Equals((Node)obj);
 		}
 
 		public override int GetHashCode() => this.Uri.GetHashCode();

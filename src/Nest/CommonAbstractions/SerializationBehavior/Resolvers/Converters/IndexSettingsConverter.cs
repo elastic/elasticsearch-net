@@ -133,7 +133,7 @@ namespace Nest.Resolvers.Converters
 				var dictionary = new Dictionary<string, object>();
 				serializer.Populate(settings.CreateReader(), dictionary);
 				result.Settings = dictionary;
-				result.AsExpando = DynamicDictionary.Create(dictionary);
+				result.AsExpando = DynamicResponse.Create(dictionary);
 				
 				foreach (var rootProperty in settings.Children<JProperty>())
 				{

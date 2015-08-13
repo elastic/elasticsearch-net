@@ -24,7 +24,7 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "settings")]
 		[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]
-		public DynamicDictionary Settings { get; internal set; }
+		public DynamicResponse Settings { get; internal set; }
 
 		[JsonProperty(PropertyName = "os")]
 		public NodeInfoOS OS { get; internal set; }

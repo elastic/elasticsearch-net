@@ -12,9 +12,9 @@ namespace Elasticsearch.Net
 	/// <summary>
 	/// A dictionary that supports dynamic access.
 	/// </summary>
-	public class DynamicDictionary : 
+	public class DynamicResponse : 
 		DynamicObject, 
-		IEquatable<DynamicDictionary>, 
+		IEquatable<DynamicResponse>, 
 		IEnumerable<string>, 
 		IDictionary<string, object>
 	{
@@ -23,12 +23,12 @@ namespace Elasticsearch.Net
 		/// <summary>
 		/// Returns an empty dynamic dictionary.
 		/// </summary>
-		/// <value>A <see cref="DynamicDictionary"/> instance.</value>
-		public static DynamicDictionary Empty
+		/// <value>A <see cref="DynamicResponse"/> instance.</value>
+		public static DynamicResponse Empty
 		{
 			get
 			{
-				return new DynamicDictionary();
+				return new DynamicResponse();
 			}
 		}
 
@@ -36,10 +36,10 @@ namespace Elasticsearch.Net
 		/// Creates a dynamic dictionary from an <see cref="IDictionary{TKey,TValue}"/> instance.
 		/// </summary>
 		/// <param name="values">An <see cref="IDictionary{TKey,TValue}"/> instance, that the dynamic dictionary should be created from.</param>
-		/// <returns>An <see cref="DynamicDictionary"/> instance.</returns>
-		public static DynamicDictionary Create(IDictionary<string, object> values)
+		/// <returns>An <see cref="DynamicResponse"/> instance.</returns>
+		public static DynamicResponse Create(IDictionary<string, object> values)
 		{
-			var instance = new DynamicDictionary();
+			var instance = new DynamicResponse();
 			
 			foreach (var key in values.Keys)
 			{
@@ -129,11 +129,11 @@ namespace Elasticsearch.Net
 		}
 
 		/// <summary>
-		/// Indicates whether the current <see cref="DynamicDictionary"/> is equal to another object of the same type.
+		/// Indicates whether the current <see cref="DynamicResponse"/> is equal to another object of the same type.
 		/// </summary>
 		/// <returns><see langword="true"/> if the current instance is equal to the <paramref name="other"/> parameter; otherwise, <see langword="false"/>.</returns>
-		/// <param name="other">An <see cref="DynamicDictionary"/> instance to compare with this instance.</param>
-		public bool Equals(DynamicDictionary other)
+		/// <param name="other">An <see cref="DynamicResponse"/> instance to compare with this instance.</param>
+		public bool Equals(DynamicResponse other)
 		{
 			if (ReferenceEquals(null, other))
 			{
@@ -160,7 +160,7 @@ namespace Elasticsearch.Net
 				return true;
 			}
 
-			return obj.GetType() == typeof(DynamicDictionary) && this.Equals((DynamicDictionary)obj);
+			return obj.GetType() == typeof(DynamicResponse) && this.Equals((DynamicResponse)obj);
 		}
 
 		/// <summary>
@@ -173,16 +173,16 @@ namespace Elasticsearch.Net
 		}
 
 		/// <summary>
-		/// Returns a hash code for this <see cref="DynamicDictionary"/>.
+		/// Returns a hash code for this <see cref="DynamicResponse"/>.
 		/// </summary>
-		/// <returns> A hash code for this <see cref="DynamicDictionary"/>, suitable for use in hashing algorithms and data structures like a hash table.</returns>
+		/// <returns> A hash code for this <see cref="DynamicResponse"/>, suitable for use in hashing algorithms and data structures like a hash table.</returns>
 		public override int GetHashCode()
 		{
 			return (dictionary != null ? dictionary.GetHashCode() : 0);
 		}
 
 		/// <summary>
-		/// Adds an element with the provided key and value to the <see cref="DynamicDictionary"/>.
+		/// Adds an element with the provided key and value to the <see cref="DynamicResponse"/>.
 		/// </summary>
 		/// <param name="key">The object to use as the key of the element to add.</param>
 		/// <param name="value">The object to use as the value of the element to add.</param>
@@ -192,29 +192,29 @@ namespace Elasticsearch.Net
 		}
 
 		/// <summary>
-		/// Adds an item to the <see cref="DynamicDictionary"/>.
+		/// Adds an item to the <see cref="DynamicResponse"/>.
 		/// </summary>
-		/// <param name="item">The object to add to the <see cref="DynamicDictionary"/>.</param>
+		/// <param name="item">The object to add to the <see cref="DynamicResponse"/>.</param>
 		public void Add(KeyValuePair<string, dynamic> item)
 		{
 			this[item.Key] = item.Value;
 		}
 
 		/// <summary>
-		/// Determines whether the <see cref="DynamicDictionary"/> contains an element with the specified key.
+		/// Determines whether the <see cref="DynamicResponse"/> contains an element with the specified key.
 		/// </summary>
-		/// <returns><see langword="true" /> if the <see cref="DynamicDictionary"/> contains an element with the key; otherwise, <see langword="false" />.
+		/// <returns><see langword="true" /> if the <see cref="DynamicResponse"/> contains an element with the key; otherwise, <see langword="false" />.
 		/// </returns>
-		/// <param name="key">The key to locate in the <see cref="DynamicDictionary"/>.</param>
+		/// <param name="key">The key to locate in the <see cref="DynamicResponse"/>.</param>
 		public bool ContainsKey(string key)
 		{
 			return this.dictionary.ContainsKey(key);
 		}
 
 		/// <summary>
-		/// Gets an <see cref="T:System.Collections.Generic.ICollection`1"/> containing the keys of the <see cref="DynamicDictionary"/>.
+		/// Gets an <see cref="T:System.Collections.Generic.ICollection`1"/> containing the keys of the <see cref="DynamicResponse"/>.
 		/// </summary>
-		/// <returns>An <see cref="T:System.Collections.Generic.ICollection`1"/> containing the keys of the <see cref="DynamicDictionary"/>.</returns>
+		/// <returns>An <see cref="T:System.Collections.Generic.ICollection`1"/> containing the keys of the <see cref="DynamicResponse"/>.</returns>
 		public ICollection<string> Keys
 		{
 			get { return this.dictionary.Keys; }
@@ -223,7 +223,7 @@ namespace Elasticsearch.Net
 		/// <summary>
 		/// Gets the value associated with the specified key.
 		/// </summary>
-		/// <returns><see langword="true" /> if the <see cref="DynamicDictionary"/> contains an element with the specified key; otherwise, <see langword="false" />.</returns>
+		/// <returns><see langword="true" /> if the <see cref="DynamicResponse"/> contains an element with the specified key; otherwise, <see langword="false" />.</returns>
 		/// <param name="key">The key whose value to get.</param>
 		/// <param name="value">When this method returns, the value associated with the specified key, if the key is found; otherwise, the default value for the type of the <paramref name="value"/> parameter. This parameter is passed uninitialized.</param>
 		public bool TryGetValue(string key, out dynamic value)
@@ -232,7 +232,7 @@ namespace Elasticsearch.Net
 		}
 
 		/// <summary>
-		/// Removes all items from the <see cref="DynamicDictionary"/>.
+		/// Removes all items from the <see cref="DynamicResponse"/>.
 		/// </summary>
 		public void Clear()
 		{
@@ -240,20 +240,20 @@ namespace Elasticsearch.Net
 		}
 
 		/// <summary>
-		/// Gets the number of elements contained in the <see cref="DynamicDictionary"/>.
+		/// Gets the number of elements contained in the <see cref="DynamicResponse"/>.
 		/// </summary>
-		/// <returns>The number of elements contained in the <see cref="DynamicDictionary"/>.</returns>
+		/// <returns>The number of elements contained in the <see cref="DynamicResponse"/>.</returns>
 		public int Count
 		{
 			get { return this.dictionary.Count; }
 		}
 
 		/// <summary>
-		/// Determines whether the <see cref="DynamicDictionary"/> contains a specific value.
+		/// Determines whether the <see cref="DynamicResponse"/> contains a specific value.
 		/// </summary>
-		/// <returns><see langword="true" /> if <paramref name="item"/> is found in the <see cref="DynamicDictionary"/>; otherwise, <see langword="false" />.
+		/// <returns><see langword="true" /> if <paramref name="item"/> is found in the <see cref="DynamicResponse"/>; otherwise, <see langword="false" />.
 		/// </returns>
-		/// <param name="item">The object to locate in the <see cref="DynamicDictionary"/>.</param>
+		/// <param name="item">The object to locate in the <see cref="DynamicResponse"/>.</param>
 		public bool Contains(KeyValuePair<string, dynamic> item)
 		{
 			var dynamicValueKeyValuePair =
@@ -263,9 +263,9 @@ namespace Elasticsearch.Net
 		}
 
 		/// <summary>
-		/// Copies the elements of the <see cref="DynamicDictionary"/> to an <see cref="T:System.Array"/>, starting at a particular <see cref="T:System.Array"/> index.
+		/// Copies the elements of the <see cref="DynamicResponse"/> to an <see cref="T:System.Array"/>, starting at a particular <see cref="T:System.Array"/> index.
 		/// </summary>
-		/// <param name="array">The one-dimensional <see cref="T:System.Array"/> that is the destination of the elements copied from the <see cref="DynamicDictionary"/>. The <see cref="T:System.Array"/> must have zero-based indexing.</param>
+		/// <param name="array">The one-dimensional <see cref="T:System.Array"/> that is the destination of the elements copied from the <see cref="DynamicResponse"/>. The <see cref="T:System.Array"/> must have zero-based indexing.</param>
 		/// <param name="arrayIndex">The zero-based index in <paramref name="array"/> at which copying begins.</param>
 		public void CopyTo(KeyValuePair<string, dynamic>[] array, int arrayIndex)
 		{
@@ -273,7 +273,7 @@ namespace Elasticsearch.Net
 		}
 
 		/// <summary>
-		/// Gets a value indicating whether the <see cref="DynamicDictionary"/> is read-only.
+		/// Gets a value indicating whether the <see cref="DynamicResponse"/> is read-only.
 		/// </summary>
 		/// <returns>Always returns <see langword="false" />.</returns>
 		public bool IsReadOnly
@@ -282,7 +282,7 @@ namespace Elasticsearch.Net
 		}
 
 		/// <summary>
-		/// Removes the element with the specified key from the <see cref="DynamicDictionary"/>.
+		/// Removes the element with the specified key from the <see cref="DynamicResponse"/>.
 		/// </summary>
 		/// <returns><see langword="true" /> if the element is successfully removed; otherwise, <see langword="false" />.</returns>
 		/// <param name="key">The key of the element to remove.</param>
@@ -293,10 +293,10 @@ namespace Elasticsearch.Net
 		}
 
 		/// <summary>
-		/// Removes the first occurrence of a specific object from the <see cref="DynamicDictionary"/>.
+		/// Removes the first occurrence of a specific object from the <see cref="DynamicResponse"/>.
 		/// </summary>
-		/// <returns><see langword="true" /> if <paramref name="item"/> was successfully removed from the <see cref="DynamicDictionary"/>; otherwise, <see langword="false" />.</returns>
-		/// <param name="item">The object to remove from the <see cref="DynamicDictionary"/>.</param>
+		/// <returns><see langword="true" /> if <paramref name="item"/> was successfully removed from the <see cref="DynamicResponse"/>; otherwise, <see langword="false" />.</returns>
+		/// <param name="item">The object to remove from the <see cref="DynamicResponse"/>.</param>
 		public bool Remove(KeyValuePair<string, dynamic> item)
 		{
 			var dynamicValueKeyValuePair =
@@ -306,9 +306,9 @@ namespace Elasticsearch.Net
 		}
 
 		/// <summary>
-		/// Gets an <see cref="T:System.Collections.Generic.ICollection`1"/> containing the values in the <see cref="DynamicDictionary"/>.
+		/// Gets an <see cref="T:System.Collections.Generic.ICollection`1"/> containing the values in the <see cref="DynamicResponse"/>.
 		/// </summary>
-		/// <returns>An <see cref="T:System.Collections.Generic.ICollection`1"/> containing the values in the <see cref="DynamicDictionary"/>.</returns>
+		/// <returns>An <see cref="T:System.Collections.Generic.ICollection`1"/> containing the values in the <see cref="DynamicResponse"/>.</returns>
 		public ICollection<dynamic> Values
 		{
 			get { return this.dictionary.Values; }
