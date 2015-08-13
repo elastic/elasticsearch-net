@@ -12,9 +12,9 @@ namespace Nest
 	public class ExistsResponse : BaseResponse, IExistsResponse
 	{
 		//TODO I think .Exists should proxy IsValid or be removed completely
-		internal ExistsResponse(IApiCallDetails connectionStatus)
+		internal ExistsResponse(IApiCallDetails apiCallDetails)
 		{
-			this.Exists = connectionStatus.Success & connectionStatus.HttpStatusCode == 200;
+			this.Exists = apiCallDetails.Success & apiCallDetails.HttpStatusCode == 200;
 		}
 		public ExistsResponse()
 		{

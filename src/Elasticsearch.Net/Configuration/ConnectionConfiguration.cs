@@ -140,8 +140,8 @@ namespace Elasticsearch.Net.Connection
 		bool _throwOnServerExceptions;
 		bool IConnectionConfigurationValues.ThrowOnElasticsearchServerExceptions => _throwOnServerExceptions;
 
-		Action<IApiCallDetails> _connectionStatusHandler;
-		Action<IApiCallDetails> IConnectionConfigurationValues.ConnectionStatusHandler => _connectionStatusHandler;
+		Action<IApiCallDetails> _apiCallHandler;
+		Action<IApiCallDetails> IConnectionConfigurationValues.ApiCallHandler => _apiCallHandler;
 
 		NameValueCollection _queryString = new NameValueCollection();
 		NameValueCollection IConnectionConfigurationValues.QueryStringParameters => _queryString;
@@ -173,7 +173,7 @@ namespace Elasticsearch.Net.Connection
 			this._serializer = serializer ?? this.DefaultSerializer();
 
 			this._timeout = ConnectionConfiguration.DefaultTimeout;
-			this._connectionStatusHandler = this.ConnectionStatusDefaultHandler;
+			this._apiCallHandler = this.DefaultApiCallHandler;
 			this._maximumAsyncConnections = 0;
 			this._usePrettyRequests = true;
 			this._sniffOnConnectionFault = true;
@@ -337,13 +337,13 @@ namespace Elasticsearch.Net.Connection
 		/// </summary>
 		public T DisableDirectStreaming(bool b = true) => Assign(a => a._disableDirectStreaming = b);
 
-		protected void ConnectionStatusDefaultHandler(IApiCallDetails status) { return; }
+		protected void DefaultApiCallHandler(IApiCallDetails status) { return; }
 
 		/// <summary>
 		/// Global callback for every response that NEST receives, useful for custom logging.
 		/// </summary>
 		public T SetConnectionStatusHandler(Action<IApiCallDetails> handler) =>
-			Assign(a => a._connectionStatusHandler = handler ?? ConnectionStatusDefaultHandler);
+			Assign(a => a._apiCallHandler = handler ?? DefaultApiCallHandler);
 
 		/// <summary>
 		/// Basic access authentication credentials to specify with all requests.

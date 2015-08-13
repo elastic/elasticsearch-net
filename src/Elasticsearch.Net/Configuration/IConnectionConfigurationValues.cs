@@ -156,9 +156,9 @@ namespace Elasticsearch.Net.Connection
 		NameValueCollection Headers { get; }
 
 		/// <summary>
-		/// Connection status handler that will be called everytime the connection receives anything.
+		/// Allows you to register a callback every time a an API call is returned
 		/// </summary>
-		Action<IApiCallDetails> ConnectionStatusHandler { get; }
+		Action<IApiCallDetails> ApiCallHandler { get; }
 
 		/// <summary>
 		/// Basic access authorization credentials to specify with all requests.

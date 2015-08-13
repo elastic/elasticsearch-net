@@ -60,9 +60,9 @@ namespace Nest
 				//if (_fields != null)
 				//	return _fields;
 
-				//if (this.ConnectionStatus == null)
+				//if (this.ApiCall == null)
 				//	return null;
-				//var realSettings = this.ConnectionStatus.Settings as IConnectionSettingsValues;
+				//var realSettings = this.ApiCall.Settings as IConnectionSettingsValues;
 
 				//_fields = new FieldSelection<T>(realSettings, FieldValues);
 				//return _fields;

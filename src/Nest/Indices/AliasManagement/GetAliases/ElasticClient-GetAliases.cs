@@ -58,9 +58,9 @@ namespace Nest
 		}
 
 		/// <inheritdoc />
-		private GetAliasesResponse DeserializeGetAliasesResponse(IApiCallDetails connectionStatus, Stream stream)
+		private GetAliasesResponse DeserializeGetAliasesResponse(IApiCallDetails apiCallDetails, Stream stream)
 		{
-			if (!connectionStatus.Success)
+			if (!apiCallDetails.Success)
 				return new GetAliasesResponse();
 
 			var dict = this.Serializer.Deserialize<CrazyAliasesResponse>(stream);

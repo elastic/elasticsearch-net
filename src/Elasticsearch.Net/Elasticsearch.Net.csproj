@@ -73,6 +73,7 @@
     <Compile Include="Auditting\Audit.cs" />
     <Compile Include="Auditting\Auditable.cs" />
     <Compile Include="Auditting\AuditEvent.cs" />
+    <Compile Include="Responses\IBodyWithApiCallDetails.cs" />
     <Compile Include="Transport\Pipeline\RequestPipeline.cs" />
     <Compile Include="Transport\Pipeline\RequestData.cs" />
     <Compile Include="Transport\Pipeline\IRequestPipeline.cs" />
@@ -83,7 +84,7 @@
     <Compile Include="Transport\PostData.cs" />
     <Compile Include="Transport\Transport.cs" />
     <Compile Include="Domain\RequestParameters\BaseRequestParameters.cs" />
-    <Compile Include="Responses\IConnectionStatus.cs" />
+    <Compile Include="Responses\IApiCallDetails.cs" />
     <Compile Include="Domain\IHideObjectMembers.cs" />
     <Compile Include="Domain\RequestParameters\IRequestParameters.cs" />
     <Compile Include="Responses\VoidResponse.cs" />

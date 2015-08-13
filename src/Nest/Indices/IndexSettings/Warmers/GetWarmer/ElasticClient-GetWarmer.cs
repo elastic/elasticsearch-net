@@ -60,9 +60,9 @@ namespace Nest
 		}
 
 		/// <inheritdoc />
-		private WarmerResponse DeserializeWarmerResponse(IApiCallDetails connectionStatus, Stream stream)
+		private WarmerResponse DeserializeWarmerResponse(IApiCallDetails apiCallDetails, Stream stream)
 		{
-			if (!connectionStatus.Success) return new WarmerResponse ();
+			if (!apiCallDetails.Success) return new WarmerResponse ();
 
 			var dict = this.Serializer.Deserialize<CrazyWarmerResponse>(stream);
 			var indices = new Dictionary<string, Dictionary<string, WarmerMapping>>();
