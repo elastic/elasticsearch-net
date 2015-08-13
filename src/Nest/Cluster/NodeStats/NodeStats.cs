@@ -17,9 +17,8 @@ namespace Nest
 		[JsonProperty("transport_address")]
 		public string TransportAddress { get; internal set; }
 
-		// TODO: Rename to Host in 2.0
 		[JsonProperty("host")]
-		public string Hostname { get; internal set; } 
+		public string Host { get; internal set; } 
 
 		[JsonProperty("indices")]
 		public NodeStatsIndexes Indices { get; internal set; }
