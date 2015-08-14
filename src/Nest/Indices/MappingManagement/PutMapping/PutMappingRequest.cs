@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
-using Nest.Resolvers.Writers;
 
 namespace Nest
 {
@@ -98,25 +97,13 @@ namespace Nest
 		/// <pre>Class types default to object and Enums to int</pre>
 		/// <pre>Later calls can override whatever is set is by this call.</pre>
 		/// </summary>
-		public PutMappingDescriptor<T> MapFromAttributes(int maxRecursion = 0)
+		public PutMappingDescriptor<T> AutoMap(ITypeVisitor visitor = null)
 		{
-			// TODO
-			//var writer = new TypeMappingWriter(typeof(T), Self.Type, this._connectionSettings, maxRecursion);
-			//var mapping = writer.RootObjectMappingFromAttributes();
-			//if (mapping == null)
-			//	return this;
-			//var properties = mapping.Properties;
-			//if (Self.Mapping.Properties == null)
-			//	Self.Mapping.Properties = new Dictionary<FieldName, IElasticType>();
-
-			//foreach (var p in properties)
-			//{
-			//	Self.Mapping.Properties[p.Key] = p.Value;
-			//}
+			var walker = new PropertyWalker(typeof(T), visitor);
+			Self.Mapping.Properties = walker.GetProperties();
 			return this;
 		}
 		
-
 		public PutMappingDescriptor<T> Dynamic(DynamicMappingOption dynamic)
 		{
 			Self.Mapping.Dynamic = dynamic;

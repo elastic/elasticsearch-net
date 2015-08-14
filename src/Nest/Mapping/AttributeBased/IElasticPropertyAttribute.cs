@@ -12,7 +12,6 @@
         double Boost { get; set; }
 
         string Analyzer { get; set; }
-        string IndexAnalyzer { get; set; }
         string SearchAnalyzer { get; set; }
         string SortAnalyzer { get; set; }
         string NullValue { get; set; }
@@ -25,7 +24,7 @@
 
         bool DocValues { get; set; }
 
-        string Similarity { get; set; }
+        SimilarityOption? Similarity { get; set; }
 
         /// <summary>
         /// Defaults to float so be sure to set this correctly!

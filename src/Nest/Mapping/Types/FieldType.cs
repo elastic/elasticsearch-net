@@ -69,6 +69,8 @@ namespace Nest
 		/// Murmur hash type, for use with the cardinality aggregation.
 		/// </summary>
 		[EnumMember(Value = "murmur3")]
-		Murmur3Hash
+		Murmur3Hash,
+		[EnumMember(Value = "token_count")]
+		TokenCount,
 	}
 }

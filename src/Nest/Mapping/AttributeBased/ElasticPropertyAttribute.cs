@@ -19,11 +19,10 @@ namespace Nest
 		public double Boost { get; set; }
 
 		public string Analyzer { get; set; }
-		public string IndexAnalyzer { get; set; }
 		public string SearchAnalyzer { get; set; }
 		public string SortAnalyzer { get; set; }
 		public string NullValue { get; set; }
-		public string Similarity { get; set; }
+		public SimilarityOption? Similarity { get; set; }
 
 		public bool DocValues { get; set; }
 

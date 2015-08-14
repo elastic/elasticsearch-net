@@ -47,16 +47,6 @@ namespace Nest.Resolvers.Writers {
                 this._jsonWriter.WritePropertyName("analyzer");
                 this._jsonWriter.WriteValue(att.Analyzer);
             }
-            if (!att.IndexAnalyzer.IsNullOrEmpty())
-            {
-                this._jsonWriter.WritePropertyName("index_analyzer");
-                this._jsonWriter.WriteValue(att.IndexAnalyzer);
-            }
-            if (!att.IndexAnalyzer.IsNullOrEmpty())
-            {
-                this._jsonWriter.WritePropertyName("index_analyzer");
-                this._jsonWriter.WriteValue(att.IndexAnalyzer);
-            }
             if (!att.NullValue.IsNullOrEmpty())
             {
                 this._jsonWriter.WritePropertyName("null_value");
@@ -123,7 +113,7 @@ namespace Nest.Resolvers.Writers {
                 this._jsonWriter.WriteRawValue(att.PrecisionStep.ToString(CultureInfo.InvariantCulture));
             }
 
-            if (!att.Similarity.IsNullOrEmpty())
+            if (att.Similarity != null)
             {
               this._jsonWriter.WritePropertyName("similarity");
               this._jsonWriter.WriteValue(att.Similarity);

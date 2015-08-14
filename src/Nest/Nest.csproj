@@ -129,6 +129,9 @@
     <Compile Include="Mapping\SimilarityOption.cs" />
     <Compile Include="Mapping\Types\Specialized\TokenCount\TokenCountType.cs" />
     <Compile Include="Mapping\Types\TypeDescriptorBase.cs" />
+    <Compile Include="Mapping\Visitor\ITypeVisitor.cs" />
+    <Compile Include="Mapping\Visitor\NoopTypeVisitor.cs" />
+    <Compile Include="Mapping\Visitor\PropertyWalker.cs" />
     <Compile Include="Modules\Indices\Fielddata\GeoPoint\GeoPointFielddata.cs" />
     <Compile Include="Modules\Indices\Fielddata\GeoPoint\GeoPointFielddataFormat.cs" />
     <Compile Include="Modules\Indices\Fielddata\Numeric\NumericFielddataFormat.cs" />
@@ -1004,7 +1007,6 @@
     <Compile Include="CommonAbstractions\Infer\TypeName\TypeName.cs" />
     <Compile Include="CommonAbstractions\Infer\TypeName\TypeNameExtensions.cs" />
     <Compile Include="CommonAbstractions\Infer\TypeName\TypeNameResolver.cs" />
-    <Compile Include="CommonAbstractions\SerializationBehavior\Resolvers\Writers\TypeMappingWriter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\Resolvers\Writers\WritePropertiesFromAttributeVisitor.cs" />
   </ItemGroup>
   <ItemGroup>

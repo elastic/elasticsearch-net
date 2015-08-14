@@ -92,19 +92,10 @@ namespace Nest
 				a.Properties[p.Key] = p.Value;
 		});
 
-		public TDescriptor MapFromAttributes(int maxRecursion = 0) => Assign(a =>
+		public TDescriptor AutoMap(ITypeVisitor visitor = null) => Assign(a =>
 		{
-			// TODO : Need to decouple ConnectionSettings from TypeMappingWriter
-			throw new NotImplementedException();
-			//var writer = new TypeMappingWriter(typeof(TChild), this._TypeName, this._connectionSettings, maxRecursion);
-			//var mapping = writer.ObjectMappingFromAttributes();
-			//if (mapping == null)
-			//	return;
-			//var properties = mapping.Properties;
-			//if (a.Properties == null)
-			//	a.Properties = new Dictionary<FieldName, IElasticType>();
-			//foreach (var p in properties)
-			//	a.Properties[p.Key] = p.Value;
+			var mapper = new PropertyWalker(typeof(TChild), visitor);
+			a.Properties = mapper.GetProperties();	
 		});
 	}
 }

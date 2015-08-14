@@ -1,4 +1,4 @@
-﻿namespace Nest.DSL.Visitor
+﻿namespace Nest
 {
 	public interface IMappingVisitor
 	{
