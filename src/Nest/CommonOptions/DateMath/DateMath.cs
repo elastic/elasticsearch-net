@@ -101,7 +101,7 @@ namespace Nest
 			return sb.ToString();
 		}
 
-		public class Json : JsonConverter
+		private class Json : JsonConverter
 		{
 			public override bool CanConvert(Type objectType) => true;
 			public override bool CanWrite => true;
