@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 namespace Nest.Resolvers.Converters
 {
 
-	public class BulkOperationResponseItemConverter : JsonConverter
+	public class BulkResponseItemJsonConverter : JsonConverter
 	{
 		
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
@@ -58,7 +58,7 @@ namespace Nest.Resolvers.Converters
 
 		public override bool CanConvert(Type objectType)
 		{
-			return objectType == typeof(BulkOperationResponseItem);
+			return objectType == typeof(BulkResponseItem);
 		}
 	}
 }

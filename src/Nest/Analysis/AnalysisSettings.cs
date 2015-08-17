@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(AnalysisSettingsConverter))]
+	[JsonConverter(typeof(AnalysisSettingsJsonConverter))]
 	public class AnalysisSettings
 	{
 		public AnalysisSettings()
@@ -15,7 +15,9 @@ namespace Nest
 			this.CharFilters = new Dictionary<string, CharFilterBase>();
 		}
 
-		[JsonConverter(typeof(AnalyzerCollectionConverter))]
+		//TODO all these dictionaries should be ProxyDictionary subclasses
+
+		[JsonConverter(typeof(AnalyzerCollectionJsonConverter))]
 		public IDictionary<string, AnalyzerBase> Analyzers { get; set; }
 
 		[JsonConverter(typeof(TokenFilterCollectionConverter))]
@@ -24,7 +26,7 @@ namespace Nest
 		[JsonConverter(typeof(TokenizerCollectionConverter))]
 		public IDictionary<string, TokenizerBase> Tokenizers { get; set; }
 
-		[JsonConverter(typeof(CharFilterCollectionConverter))]
+		[JsonConverter(typeof(CharFilterCollectionJsonConverter))]
 		public IDictionary<string, CharFilterBase> CharFilters { get; set; }
 	}
 }

@@ -7,7 +7,7 @@ using Elasticsearch.Net.Serialization;
 namespace Nest.Resolvers.Converters
 {
 
-	public class BulkRequestConverter : JsonConverter
+	public class BulkRequestJsonConverter : JsonConverter
 	{
 		public override bool CanRead => false;
 		public override bool CanWrite => true;

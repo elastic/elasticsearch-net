@@ -10,11 +10,11 @@ namespace Nest
 	public interface IDateMath
 	{
 		Union<DateTime, string> Anchor { get; }
-		IList<Tuple<DateMathOperation, TimeUnitExpression>> Ranges { get; } 
+		IList<Tuple<DateMathOperation, TimeUnitExpression>> Ranges { get; }
 		TimeUnit? Round { get; }
 	}
 
-	[JsonConverter(typeof(DateMathConverter))]
+	[JsonConverter(typeof(DateMath.Json))]
 	public abstract class DateMath : IDateMath
 	{
 		protected IDateMath Self => this;
@@ -86,7 +86,7 @@ namespace Nest
 
 			var sb = new StringBuilder();
 			var anchor = Self.Anchor.Match(
-				d => d.ToJsonNetString() + separator, 
+				d => d.ToJsonNetString() + separator,
 				s => s == "now" || s.EndsWith("||") ? s : s + separator
 			);
 			sb.Append(anchor);
@@ -99,6 +99,32 @@ namespace Nest
 				sb.Append("/" + Self.Round.Value.GetStringValue());
 
 			return sb.ToString();
+		}
+
+		public class Json : JsonConverter
+		{
+			public override bool CanConvert(Type objectType) => true;
+			public override bool CanWrite => true;
+			public override bool CanRead => true;
+
+			public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+			{
+				var v = value as DateMath;
+				if (v == null) return;
+				writer.WriteValue(v.ToString());
+			}
+
+			public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+			{
+				if (reader.TokenType == JsonToken.String)
+					return DateMath.FromString(reader.Value as string);
+				if (reader.TokenType == JsonToken.Date)
+				{
+					var d = reader.Value as DateTime?;
+					return d.HasValue ? DateMath.Anchored(d.Value) : null;
+				}
+				return null;
+			}
 		}
 	}
 }

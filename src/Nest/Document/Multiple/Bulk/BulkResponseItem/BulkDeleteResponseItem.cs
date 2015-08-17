@@ -4,8 +4,8 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject]
-	[JsonConverter(typeof(BulkOperationResponseItemConverter))]
-	public class BulkCreateResponseItem : BulkOperationResponseItem
+	[JsonConverter(typeof(BulkResponseItemJsonConverter))]
+	public class BulkDeleteResponseItem : BulkResponseItem
 	{
 		public override string Operation { get; internal set; }
 		[JsonProperty("_index")]
@@ -18,6 +18,8 @@ namespace Nest
 		public override long Version { get; internal set; }
 		[JsonProperty("status")]
 		public override int Status { get; internal set; }
+		[JsonProperty("found")]
+		public bool Found { get; internal set; }
 		[JsonProperty("error")]
 		public override string Error { get; internal set; }
 	}

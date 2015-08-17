@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 
 namespace Nest.Resolvers.Converters
 {
+	//TODO this is overused I suspect its only needed in 1 or 2 places
 	public class CustomJsonConverter : JsonConverter
 	{
 		public override bool CanRead { get { return false; } }

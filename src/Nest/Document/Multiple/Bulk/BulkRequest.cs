@@ -9,7 +9,7 @@ using Nest.Resolvers.Converters;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(BulkRequestConverter))]
+	[JsonConverter(typeof(BulkRequestJsonConverter))]
 	public interface IBulkRequest : IFixedIndexTypePath<BulkRequestParameters>
 	{
 		[JsonIgnore]

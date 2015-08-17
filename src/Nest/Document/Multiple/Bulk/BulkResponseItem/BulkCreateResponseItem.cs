@@ -1,12 +1,11 @@
-﻿using System.Collections.Generic;
-using Nest.Resolvers.Converters;
+﻿using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 
 namespace Nest
 {
 	[JsonObject]
-	[JsonConverter(typeof(BulkOperationResponseItemConverter))]
-	public class BulkIndexResponseItem : BulkOperationResponseItem
+	[JsonConverter(typeof(BulkResponseItemJsonConverter))]
+	public class BulkCreateResponseItem : BulkResponseItem
 	{
 		public override string Operation { get; internal set; }
 		[JsonProperty("_index")]
@@ -21,11 +20,5 @@ namespace Nest
 		public override int Status { get; internal set; }
 		[JsonProperty("error")]
 		public override string Error { get; internal set; }
-
-        /// <summary>
-        /// Null if Percolation was not requested while indexing this doc, otherwise returns the percolator _ids that matched (if any)
-        /// </summary>
-        [JsonProperty(PropertyName = "matches")]
-        public IEnumerable<string> Matches { get; internal set; }
 	}
 }

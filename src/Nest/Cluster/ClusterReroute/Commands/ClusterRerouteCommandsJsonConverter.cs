@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Nest.Resolvers.Converters
 {
-	public class ClusterRerouteCommandCollectionConverter : JsonConverter
+	public class ClusterRerouteCommandsJsonConverter : JsonConverter
 	{
 		public override bool CanConvert(Type objectType)
 		{

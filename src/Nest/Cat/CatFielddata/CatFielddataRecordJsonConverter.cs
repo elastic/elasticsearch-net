@@ -8,7 +8,7 @@ using Newtonsoft.Json.Linq;
 namespace Nest.Resolvers.Converters
 {
 
-	public class CatFielddataRecordConverter : JsonConverter
+	public class CatFielddataRecordJsonConverter : JsonConverter
 	{
 		public override bool CanWrite
 		{

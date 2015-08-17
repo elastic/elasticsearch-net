@@ -30,7 +30,7 @@ namespace Nest.Resolvers
 			// this will only be called once and then cached
 
 			if (objectType == typeof(IDictionary<string, AnalyzerBase>))
-				contract.Converter = new AnalyzerCollectionConverter();
+				contract.Converter = new AnalyzerCollectionJsonConverter();
 
 			else if (objectType == typeof(IDictionary<string, TokenFilterBase>))
 				contract.Converter = new TokenFilterCollectionConverter();
@@ -39,7 +39,7 @@ namespace Nest.Resolvers
 				contract.Converter = new TokenizerCollectionConverter();
 
 			else if (objectType == typeof(IDictionary<string, CharFilterBase>))
-				contract.Converter = new CharFilterCollectionConverter();
+				contract.Converter = new CharFilterCollectionJsonConverter();
 
 			else if (typeof(IDictionary).IsAssignableFrom(objectType))
 				contract.Converter = new DictionaryKeysAreNotFieldNamesJsonConverter();

@@ -5,7 +5,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Nest.Resolvers.Converters
 {
-	public class AnalysisSettingsConverter : JsonConverter
+	public class AnalysisSettingsJsonConverter : JsonConverter
 	{
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{

@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject]
-	[JsonConverter(typeof(CatThreadPoolRecordConverter))]
+	[JsonConverter(typeof(CatThreadPoolRecordJsonConverter))]
 	public class CatThreadPoolRecord : ICatRecord
 	{
 		public string Id { get; set; }

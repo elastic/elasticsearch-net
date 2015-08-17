@@ -12,7 +12,7 @@ namespace Nest
 	public interface IClusterRerouteRequest : IRequest<ClusterRerouteRequestParameters>
 	{
 		[JsonProperty("commands")]
-		[JsonConverter(typeof(ClusterRerouteCommandCollectionConverter))]
+		[JsonConverter(typeof(ClusterRerouteCommandsJsonConverter))]
 		IList<IClusterRerouteCommand> Commands { get; set; }
 	}
 
