@@ -6,17 +6,18 @@ using Tests.Framework.MockData;
 using Xunit;
 using System.Collections.Generic;
 using Elasticsearch.Net;
+using System.Threading.Tasks;
+using System.Linq;
+using FluentAssertions;
 
-namespace Tests.Search
+namespace Tests.Document.Single
 {
 	[Collection(IntegrationContext.Indexing)]
-	public class IndexingUsage : EndpointUsageBase<IIndexResponse, IIndexRequest<Project>, IndexDescriptor<Project>, IndexRequest<Project>>
+	public class IndexingUsage : ApiCallExample<IIndexResponse, IIndexRequest<Project>, IndexDescriptor<Project>, IndexRequest<Project>>
 	{
 		public IndexingUsage(IndexingCluster cluster, ApiUsage usage) : base(cluster, usage) { }
 
-		public override string UrlPath => "/project/project/SomeProject?consistency=all&op_type=create&refresh=true&routing=route";
-		public override bool ExpectIsValid => true;
-		public override int ExpectStatusCode => 200;
+		public override string UrlPath => "/project/project/SomeProject?consistency=all&op_type=index&refresh=true&routing=route";
 		public override HttpMethod HttpMethod => HttpMethod.PUT;
 
 		protected override LazyResponses ClientUsage() => Calls(
@@ -47,7 +48,7 @@ namespace Tests.Search
 
 		protected override Func<IndexDescriptor<Project>, IIndexRequest<Project>> Fluent => s => s
 			.Consistency(Consistency.All)
-			.OpType(OpType.Create)
+			.OpType(OpType.Index)
 			.Refresh()
 			.Routing("route");
 
@@ -58,10 +59,46 @@ namespace Tests.Search
 			new IndexRequest<Project>(this.Document)
 			{
 				Refresh = true,
-				OpType = OpType.Create,
+				OpType = OpType.Index,
 				Consistency = Consistency.All,
 				Routing = "route"
 			};
 
 	}
+
+	[Collection(IntegrationContext.Indexing)]
+	public class Creation : SimpleIntegration
+	{
+		public Creation(IndexingCluster cluster) : base(cluster) { }
+
+		[I] public void Create()
+		{
+			var indexName = this.RandomString();
+			var project = Project.Generator.Generate(1).First();
+			var indexResult = this.Client.Index(project, f => f
+				.Index(indexName)
+				.OpType(OpType.Create)
+			);
+			indexResult.IsValid.Should().BeTrue();
+			indexResult.ApiCall.HttpStatusCode.Should().Be(201);
+			indexResult.Created.Should().BeTrue();
+			indexResult.Index.Should().Be(indexName);
+			indexResult.Type.Should().Be(this.Client.Infer.TypeName<Project>());
+			indexResult.Id.Should().Be(project.Name);
+
+			indexResult = this.Client.Index(project, f => f
+				.Index(indexName)
+				.OpType(OpType.Create)
+			);
+
+			indexResult.IsValid.Should().BeFalse();
+			indexResult.Created.Should().BeFalse();
+			indexResult.ApiCall.HttpStatusCode.Should().Be(409);
+
+		}
+
+	}
+
+
+
 }

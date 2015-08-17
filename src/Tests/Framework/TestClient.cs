@@ -23,7 +23,6 @@ namespace Tests.Framework
 
 		public static bool RunningFiddler => Process.GetProcessesByName("fiddler").Any();
 
-
 		public static ConnectionSettings CreateSettings(Func<ConnectionSettings, ConnectionSettings> modifySettings = null, int port = 9200)
 		{
 			var defaultSettings = new ConnectionSettings(new SingleNodeConnectionPool(CreateNode(port)), CreateConnection())

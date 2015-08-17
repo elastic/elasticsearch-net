@@ -9,7 +9,7 @@ using Elasticsearch.Net;
 
 namespace Tests.Framework
 {
-	public abstract class EndpointUsageBase<TResponse, TInterface, TDescriptor, TInitializer> : SerializationBase
+	public abstract class ApiCallExample<TResponse, TInterface, TDescriptor, TInitializer> : SerializationBase
 		where TResponse : class, IResponse
 		where TDescriptor : class, TInterface, new() 
 		where TInitializer : class, TInterface
@@ -17,19 +17,20 @@ namespace Tests.Framework
 	{
 		private LazyResponses _responses;
 
-		public abstract int ExpectStatusCode { get; }
-		public abstract bool ExpectIsValid { get; }
 		public abstract string UrlPath { get; }
 		public abstract HttpMethod HttpMethod { get; }
 
 		protected abstract TInitializer Initializer { get; }
 		protected abstract Func<TDescriptor, TInterface> Fluent { get; }
 		protected virtual TDescriptor ClientDoesThisInternally(TDescriptor d) => d;
-		
-		protected EndpointUsageBase(IIntegrationCluster cluster, ApiUsage usage)
+
+		readonly IIntegrationCluster _cluster;
+
+		protected ApiCallExample(IIntegrationCluster cluster, ApiUsage usage)
 		{
-			 this.IntegrationPort = cluster.Node.Port;
-			 this._responses = usage.CallOnce(this.ClientUsage);
+			this._cluster = cluster;
+			this.IntegrationPort = cluster.Node.Port;
+			this._responses = usage.CallOnce(this.ClientUsage);
 		}
 
 		protected abstract LazyResponses ClientUsage();
@@ -41,7 +42,7 @@ namespace Tests.Framework
 			Func<IElasticClient, TInitializer, Task<TResponse>> requestAsync
 		)
 		{
-			var client = this.GetClient();
+			var client = this.Client;
 			return new LazyResponses(async () =>
 			{
 				var dict = new Dictionary<string, IResponse>
@@ -57,8 +58,8 @@ namespace Tests.Framework
 		}
 
 		protected int IntegrationPort { get; set; } = 9200;
-		protected virtual ConnectionSettings GetConnectionSettings(ConnectionSettings settings) => settings; 
-		protected virtual IElasticClient GetClient() => TestClient.GetClient(GetConnectionSettings, IntegrationPort); 
+		protected virtual ConnectionSettings GetConnectionSettings(ConnectionSettings settings) => settings;
+		protected virtual IElasticClient Client => this._cluster.Client(GetConnectionSettings);
 
 		protected async Task AssertOnAllResponses(Action<TResponse> assert)
 		{
@@ -110,12 +111,6 @@ namespace Tests.Framework
 			clientKeyValues.Should().ContainKeys(expectedKeyValues.Keys.ToArray());
 			clientKeyValues.Should().Equal(expectedKeyValues);
 		}
-
-		[I] protected async void HandlesStatusCode() =>
-			await this.AssertOnAllResponses(r=>r.ApiCall.HttpStatusCode.Should().Be(this.ExpectStatusCode));
-
-		[I] protected async void ReturnsExpectedIsValid() =>
-			await this.AssertOnAllResponses(r=>r.IsValid.Should().Be(this.ExpectIsValid));
 
 		[U] protected async Task HitsTheCorrectUrl() =>
 			await this.AssertOnAllResponses(r=>this.AssertUrl(r.ApiCall.Uri));

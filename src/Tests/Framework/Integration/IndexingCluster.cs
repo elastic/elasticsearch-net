@@ -10,6 +10,6 @@ namespace Tests.Framework.Integration
 	[CollectionDefinition(IntegrationContext.Indexing)]
 	public class IndexingCluster : ClusterBase, ICollectionFixture<IndexingCluster>, IClassFixture<ApiUsage>
 	{
-		public override void Boostrap() => new Seeder(this.Node.Port).SeedNode();
+		public override void Boostrap() { }
 	}
 }

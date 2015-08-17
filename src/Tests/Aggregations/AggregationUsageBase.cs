@@ -9,7 +9,7 @@ using Elasticsearch.Net;
 namespace Tests.Aggregations
 {
 	[Collection(IntegrationContext.ReadOnly)]
-	public abstract class AggregationUsageBase : EndpointUsageBase<ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
+	public abstract class AggregationUsageBase : ApiCallIntegration<ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
 	{
 		protected AggregationUsageBase(IIntegrationCluster cluster, ApiUsage usage) : base(cluster, usage) {}
 

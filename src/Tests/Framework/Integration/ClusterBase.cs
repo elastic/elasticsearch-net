@@ -1,5 +1,6 @@
 using System;
 using System.Reactive.Linq;
+using Nest;
 
 namespace Tests.Framework.Integration
 {
@@ -22,5 +23,11 @@ namespace Tests.Framework.Integration
 		public virtual void Boostrap() { }
 
 		public void Dispose() => this.Node?.Dispose();
+
+		public IElasticClient Client(Func<ConnectionSettings, ConnectionSettings> settings = null)
+		{
+			var port = this.Node.Started ? this.Node.Port : 9200;
+			return TestClient.GetClient(settings, port);
+		}
 	}
 }

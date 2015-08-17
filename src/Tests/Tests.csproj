@@ -80,6 +80,8 @@
     <Compile Include="ClientConcepts\ConnectionPooling\BuildingBlocks\ConnectionPooling.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\BuildingBlocks\RequestPipeline.cs" />
     <Compile Include="Document\Single\Indexing.cs" />
+    <Compile Include="Framework\SimpleIntegration.cs" />
+    <Compile Include="Framework\ApiCallExample.cs" />
     <Compile Include="Framework\Audit\Audits.cs" />
     <Compile Include="Framework\Audit\AuditTrailTester.cs" />
     <Compile Include="Framework\Audit\ClientCall.cs" />
@@ -128,7 +130,7 @@
     <Compile Include="Search\Request\FromAndSize.cs" />
     <Compile Include="Search\SearchUsageBase.cs" />
     <Compile Include="Framework\AsyncLazy.cs" />
-    <Compile Include="Framework\EndpointUsageBase.cs" />
+    <Compile Include="Framework\ApiCallIntegration.cs" />
     <Compile Include="Framework\GeneralUsageBase.cs" />
     <Compile Include="Framework\Integration\Seeder.cs" />
     <Compile Include="Framework\MockData\Project.cs" />

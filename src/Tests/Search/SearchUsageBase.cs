@@ -9,7 +9,7 @@ using Elasticsearch.Net;
 namespace Tests.Search
 {
 	[Collection(IntegrationContext.ReadOnly)]
-	public abstract class SearchUsageBase : EndpointUsageBase<ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
+	public abstract class SearchUsageBase : ApiCallIntegration<ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
 	{
 		protected SearchUsageBase(ReadOnlyCluster cluster, ApiUsage usage) : base(cluster, usage) { }
 
