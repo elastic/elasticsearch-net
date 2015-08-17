@@ -28,6 +28,7 @@ namespace Tests.Framework
 		{
 			var defaultSettings = new ConnectionSettings(new SingleNodeConnectionPool(CreateNode(port)), CreateConnection())
 				.SetDefaultIndex("default-index")
+				.PrettyJson()
 				.InferMappingFor<Project>(map => map
 					.IndexName("project")
 					.IdProperty(p => p.Name)

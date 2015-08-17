@@ -112,7 +112,6 @@
     <Compile Include="Responses\ElasticsearchResponse.cs" />
     <Compile Include="Connection\IConnection.cs" />
     <Compile Include="Configuration\IConnectionConfigurationValues.cs" />
-    <Compile Include="Configuration\IConnectionConfiguration.cs" />
     <Compile Include="Connection\InMemoryConnection.cs" />
     <Compile Include="ElasticsearchClient.Generated.cs" />
     <Compile Include="Responses\DynamicResponse.cs" />

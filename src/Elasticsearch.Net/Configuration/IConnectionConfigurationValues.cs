@@ -93,15 +93,10 @@ namespace Elasticsearch.Net.Connection
 		bool MetricsEnabled { get; }
 
 		/// <summary>
-		/// Forces the client to pretty format the requests send to elasticsearch
-		/// defaults to true;
+		/// Forces all requests to have ?pretty=true, causing elasticsearch to return formatted json. 
+		/// Also forces the client to send out formatted json. Defaults to false
 		/// </summary>
-		bool UsesPrettyRequests { get; }
-
-		/// <summary>
-		/// Forces elasticsearch to send pretty json responses over the wire
-		/// </summary>
-		bool UsesPrettyResponses { get; }
+		bool PrettyJson { get; }
 
 		/// <summary>
 		/// When set to true will disable (de)serializing directly to the request and response stream and return a byte[]

@@ -26,22 +26,33 @@ namespace Tests.Search
 			requestAsync: (client, r) => client.IndexAsync<Project>(r)
 		);
 
-		protected int ProjectId => 1337;
-
 		public Project Document => new Project
 		{
+			State = StateOfBeing.Stable,
 			Name = "SomeProject",
+			StartedOn = FixedDate,
+			LastActivity = FixedDate,
 			CuratedTags = new List<Tag> { new Tag { Name = "x", Added = FixedDate } }
 		};
 
 		protected override object ExpectJson =>
-			new { explain = true };
+			new
+			{
+				name = "SomeProject",
+				state = "Stable",
+				startedOn = FixedDate,
+				lastActivity = FixedDate,
+				curatedTags = new[] { new { name = "x", added = FixedDate } },
+			};
 
 		protected override Func<IndexDescriptor<Project>, IIndexRequest<Project>> Fluent => s => s
 			.Consistency(Consistency.All)
 			.OpType(OpType.Create)
 			.Refresh()
 			.Routing("route");
+
+		protected override IndexDescriptor<Project> ClientDoesThisInternally(IndexDescriptor<Project> d) =>
+			d.Document(this.Document);
 
 		protected override IndexRequest<Project> Initializer =>
 			new IndexRequest<Project>(this.Document)

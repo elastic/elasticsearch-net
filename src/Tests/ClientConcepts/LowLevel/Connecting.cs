@@ -156,10 +156,9 @@ namespace Tests.ClientConcepts.LowLevel
 				 * such exceptions could be search parser errors and index missing exceptions.
 				*/
 
-				.UsePrettyResponses()
+				.PrettyJson()
 				/**
-				* Appends `pretty=true` to all the requests. Handy if you are debugging or listening to 
-				 * the requests with i.e fiddler. This setting can be safely used in conjuction with `SetGlobalQueryStringParameters`.
+				* Forces all serialization to be indedented and appends `pretty=true` to all the requests so that the responses are indented as well
 				*/
 
 				.SetBasicAuthentication("username", "password")

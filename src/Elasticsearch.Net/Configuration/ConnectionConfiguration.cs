@@ -13,9 +13,7 @@ namespace Elasticsearch.Net.Connection
 	/// ConnectionConfiguration allows you to control how ElasticsearchClient behaves and where/how it connects 
 	/// to elasticsearch
 	/// </summary>
-	public class ConnectionConfiguration :
-		ConnectionConfiguration<ConnectionConfiguration>,
-		IConnectionConfiguration<ConnectionConfiguration>
+	public class ConnectionConfiguration : ConnectionConfiguration<ConnectionConfiguration>
 	{
 
 		public static TimeSpan DefaultTimeout = TimeSpan.FromMinutes(1);
@@ -46,8 +44,6 @@ namespace Elasticsearch.Net.Connection
 
 		public ConnectionConfiguration(IConnectionPool connectionPool, IConnection connection, IElasticsearchSerializer serializer)
 			: base(connectionPool, connection, serializer) { }
-
-
 	}
 
 	[Browsable(false)]
@@ -91,21 +87,13 @@ namespace Elasticsearch.Net.Connection
 		string _proxyAddress;
 		string IConnectionConfigurationValues.ProxyAddress => _proxyAddress;
 
-		//TODO usePretty only as one configurable truth
-		bool _usePrettyResponses;
-		bool IConnectionConfigurationValues.UsesPrettyResponses => _usePrettyResponses;
-
-		bool _usePrettyRequests;
-		bool IConnectionConfigurationValues.UsesPrettyRequests => _usePrettyRequests;
+		bool _prettyJson;
+		bool IConnectionConfigurationValues.PrettyJson => _prettyJson;
 
 		private bool _disableDirectStreaming = false;
 		bool IConnectionConfigurationValues.DisableDirectStreaming => _disableDirectStreaming;
 
-#if DEBUG
-		private bool _enableMetrics = true;
-#else
 		private bool _enableMetrics = false;
-#endif
 		bool IConnectionConfigurationValues.MetricsEnabled => _enableMetrics;
 
 		bool _disableAutomaticProxyDetection = false;
@@ -140,7 +128,8 @@ namespace Elasticsearch.Net.Connection
 		bool _throwOnServerExceptions;
 		bool IConnectionConfigurationValues.ThrowOnElasticsearchServerExceptions => _throwOnServerExceptions;
 
-		Action<IApiCallDetails> _apiCallHandler;
+		protected static void DefaultApiCallHandler(IApiCallDetails status) { return; }
+		Action<IApiCallDetails> _apiCallHandler = DefaultApiCallHandler;
 		Action<IApiCallDetails> IConnectionConfigurationValues.ApiCallHandler => _apiCallHandler;
 
 		NameValueCollection _queryString = new NameValueCollection();
@@ -173,9 +162,7 @@ namespace Elasticsearch.Net.Connection
 			this._serializer = serializer ?? this.DefaultSerializer();
 
 			this._timeout = ConnectionConfiguration.DefaultTimeout;
-			this._apiCallHandler = this.DefaultApiCallHandler;
 			this._maximumAsyncConnections = 0;
-			this._usePrettyRequests = true;
 			this._sniffOnConnectionFault = true;
 			this._sniffOnStartup = true;
 		}
@@ -309,27 +296,13 @@ namespace Elasticsearch.Net.Connection
 		}
 
 		/// <summary>
-		/// Sets <see cref="UsePrettyRequests"/> and <see cref="UsePrettyResponses"/> in one go.
-		/// Whether we want to send and recieve formatted json
+		/// Forces all requests to have ?pretty=true, causing elasticsearch to return formatted json. 
+		/// Also forces the client to send out formatted json. Defaults to false
 		/// </summary>
-		/// <param name="b"></param>
-		/// <returns></returns>
-		public T PrettyJson(bool b = true) => Assign(a => this.UsePrettyRequests(b).UsePrettyResponses(b));
-
-		/// <summary>
-		/// Defaults to true, wether to send formatted json to elasticsearch or not
-		/// </summary>
-		public T UsePrettyRequests(bool b = true) => Assign(a => this._usePrettyRequests = b);
-
-		/// <summary>
-		/// Append ?pretty=true to requests, this helps to debug send and received json.
-		/// </summary>
-		public T UsePrettyResponses(bool b = true)
-		{
-			this._usePrettyResponses = b;
+		public T PrettyJson(bool b = true) => Assign(a => {
+			this._prettyJson = true;
 			this.SetGlobalQueryStringParameters(new NameValueCollection { { "pretty", b.ToString().ToLowerInvariant() } });
-			return (T)this;
-		}
+        });
 
 		/// <summary>
 		/// Make sure the reponse bytes are always available on the ElasticsearchResponse object
@@ -337,13 +310,13 @@ namespace Elasticsearch.Net.Connection
 		/// </summary>
 		public T DisableDirectStreaming(bool b = true) => Assign(a => a._disableDirectStreaming = b);
 
-		protected void DefaultApiCallHandler(IApiCallDetails status) { return; }
 
 		/// <summary>
 		/// Global callback for every response that NEST receives, useful for custom logging.
+		/// Calling this multiple times will register multiple listeners
 		/// </summary>
 		public T SetConnectionStatusHandler(Action<IApiCallDetails> handler) =>
-			Assign(a => a._apiCallHandler = handler ?? DefaultApiCallHandler);
+			Assign(a => a._apiCallHandler += handler ?? DefaultApiCallHandler);
 
 		/// <summary>
 		/// Basic access authentication credentials to specify with all requests.

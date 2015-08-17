@@ -24,6 +24,7 @@ namespace Tests.Framework
 
 		protected abstract TInitializer Initializer { get; }
 		protected abstract Func<TDescriptor, TInterface> Fluent { get; }
+		protected virtual TDescriptor ClientDoesThisInternally(TDescriptor d) => d;
 		
 		protected EndpointUsageBase(IIntegrationCluster cluster, ApiUsage usage)
 		{
@@ -76,7 +77,7 @@ namespace Tests.Framework
 			}
 		}
 
-		private void AssertUrl(Uri uriThatClientHit)
+		private void AssertUrl(Uri u)
 		{
 			var paths = (this.UrlPath ?? "").Split(new [] { '?' }, 2);
 			string path = paths.First(), query = string.Empty;
@@ -85,8 +86,10 @@ namespace Tests.Framework
 
 			var expectedUri = new UriBuilder("http","localhost", IntegrationPort, path,  "?" + query).Uri;
 
-			uriThatClientHit.AbsolutePath.Should().Be(expectedUri.AbsolutePath);
-			var queries = new[] {uriThatClientHit.Query, expectedUri.Query};
+			u.AbsolutePath.Should().Be(expectedUri.AbsolutePath);
+			u = new UriBuilder(u.Scheme, u.Host, u.Port, u.AbsolutePath, u.Query.Replace("pretty=true", "")).Uri;
+
+			var queries = new[] {u.Query, expectedUri.Query};
 			if (queries.All(string.IsNullOrWhiteSpace)) return;
 			if (queries.Any(string.IsNullOrWhiteSpace))
 			{
@@ -94,11 +97,13 @@ namespace Tests.Framework
 				return;
 			}
 
-			var clientKeyValues = uriThatClientHit.Query.Substring(1).Split('&')
+			var clientKeyValues = u.Query.Substring(1).Split('&')
 				.Select(v => v.Split('='))
+				.Where(k=>!string.IsNullOrWhiteSpace(k[0]))
 				.ToDictionary(k => k[0], v => v.Last());
 			var expectedKeyValues = expectedUri.Query.Substring(1).Split('&')
 				.Select(v => v.Split('='))
+				.Where(k=>!string.IsNullOrWhiteSpace(k[0]))
 				.ToDictionary(k => k[0], v => v.Last());
 
 			clientKeyValues.Count().Should().Be(expectedKeyValues.Count());
@@ -122,7 +127,7 @@ namespace Tests.Framework
 			this.AssertSerializesAndRoundTrips<TInterface>(this.Initializer);
 		 
 		[U] protected void SerializesFluent() => 
-			this.AssertSerializesAndRoundTrips(this.Fluent(new TDescriptor()));
+			this.AssertSerializesAndRoundTrips(this.Fluent(this.ClientDoesThisInternally(new TDescriptor())));
 
 	}
 }

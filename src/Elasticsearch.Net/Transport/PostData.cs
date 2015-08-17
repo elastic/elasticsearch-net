@@ -39,7 +39,7 @@ namespace Elasticsearch.Net.Connection
 
 		public void Write(Stream writableStream, IConnectionConfigurationValues settings)
 		{
-			var indent = settings.UsesPrettyRequests ? SerializationFormatting.Indented : SerializationFormatting.None;
+			var indent = settings.PrettyJson ? SerializationFormatting.Indented : SerializationFormatting.None;
 			MemoryStream ms = null; Stream stream = null;
 			switch (_tag)
 			{
@@ -88,7 +88,7 @@ namespace Elasticsearch.Net.Connection
 
 		public async Task WriteAsync(Stream writableStream, IConnectionConfigurationValues settings, CancellationToken cancellationToken = default(CancellationToken))
 		{
-			var indent = settings.UsesPrettyRequests ? SerializationFormatting.Indented : SerializationFormatting.None;
+			var indent = settings.PrettyJson ? SerializationFormatting.Indented : SerializationFormatting.None;
 			MemoryStream ms = null; Stream stream = null;
 			switch (_tag)
 			{

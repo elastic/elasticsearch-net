@@ -117,6 +117,7 @@
     <Compile Include="CommonOptions\TimeUnit\TimeUnit.cs" />
     <Compile Include="CommonOptions\TimeUnit\TimeUnitExpression.cs" />
     <Compile Include="Document\Multiple\MultiGet\ElasticClient-SourceMany.cs" />
+    <Compile Include="Document\Single\Index\IndexRequestJsonConverter.cs" />
     <Compile Include="Indices\AliasManagement\GetAliases\ElasticClient-GetIndicesPointingToAlias.cs" />
     <Compile Include="Indices\AliasManagement\GetAliases\ElasticClient-GetAliasesPointingToIndex.cs" />
     <Compile Include="Document\Single\Delete\ElasticClient-DeleteExtensions.cs" />

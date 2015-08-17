@@ -4,6 +4,7 @@ using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Reflection;
+using Elasticsearch.Net.Serialization;
 
 namespace Nest.Resolvers.Converters
 {
@@ -102,7 +103,7 @@ namespace Nest.Resolvers.Converters
 					var state = typeof(ConcreteTypeConverter<>).CreateGenericInstance(baseType, concreteTypeSelector) as JsonConverter;
 					if (state != null)
 					{
-						var settings = elasticSerializer.CreateSettings(piggyBackJsonConverter: state);
+						var settings = elasticSerializer.CreateSettings(SerializationFormatting.None, piggyBackJsonConverter: state);
 
 						var jsonSerializer = new JsonSerializer()
 						{

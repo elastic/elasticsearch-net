@@ -28,7 +28,8 @@ namespace Nest
 		public NestSerializer(IConnectionSettingsValues settings, JsonConverter stateFullConverter)
 		{
 			this._settings = settings;
-			this._serializationSettings = this.CreateSettings(stateFullConverter);
+			var formatting = settings.PrettyJson ? SerializationFormatting.Indented : SerializationFormatting.None;
+			this._serializationSettings = this.CreateSettings(formatting, stateFullConverter);
 			this._infer = new ElasticInferrer(this._settings);
 			this._defaultSerializer = JsonSerializer.Create(_serializationSettings);
 		}
@@ -38,7 +39,7 @@ namespace Nest
 			using (var writer = new StreamWriter(writableStream, _encoding, 8096, leaveOpen: true))
 			using (var jsonWriter = new JsonTextWriter(writer))
 			{
-				var serializer = JsonSerializer.Create(this.CreateSettings());
+				var serializer = JsonSerializer.Create(this.CreateSettings(formatting));
 				serializer.Serialize(jsonWriter, data);
 				writer.Flush();
 				jsonWriter.Flush();
@@ -64,11 +65,12 @@ namespace Nest
 			return Task.FromResult<T>(result);
 		}
 
-		internal JsonSerializerSettings CreateSettings(JsonConverter piggyBackJsonConverter = null)
+		internal JsonSerializerSettings CreateSettings(SerializationFormatting formatting, JsonConverter piggyBackJsonConverter = null)
 		{
 			var piggyBackState = new JsonConverterPiggyBackState { ActualJsonConverter = piggyBackJsonConverter };
 			var settings = new JsonSerializerSettings()
 			{
+				Formatting = formatting == SerializationFormatting.Indented ? Formatting.Indented : Formatting.None,
 				ContractResolver = new ElasticContractResolver(this._settings),
 				DefaultValueHandling = DefaultValueHandling.Include,
 				NullValueHandling = NullValueHandling.Ignore
