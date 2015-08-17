@@ -67,11 +67,11 @@ namespace Tests.Document.Single
 	}
 
 	[Collection(IntegrationContext.Indexing)]
-	public class Creation : SimpleIntegration
+	public class IndexIntegrationTests : SimpleIntegration
 	{
-		public Creation(IndexingCluster cluster) : base(cluster) { }
+		public IndexIntegrationTests(IndexingCluster cluster) : base(cluster) { }
 
-		[I] public void Create()
+		[I] public void OpTypeCreate()
 		{
 			var indexName = this.RandomString();
 			var project = Project.Generator.Generate(1).First();
@@ -94,7 +94,27 @@ namespace Tests.Document.Single
 			indexResult.IsValid.Should().BeFalse();
 			indexResult.Created.Should().BeFalse();
 			indexResult.ApiCall.HttpStatusCode.Should().Be(409);
+		}
 
+		[I] public void Index()
+		{
+			var indexName = this.RandomString();
+			var project = Project.Generator.Generate(1).First();
+			var indexResult = this.Client.Index(project, f => f .Index(indexName));
+			indexResult.IsValid.Should().BeTrue();
+			indexResult.ApiCall.HttpStatusCode.Should().Be(201);
+			indexResult.Created.Should().BeTrue();
+			indexResult.Index.Should().Be(indexName);
+			indexResult.Type.Should().Be(this.Client.Infer.TypeName<Project>());
+			indexResult.Id.Should().Be(project.Name);
+			indexResult.Version.Should().Be(1);
+
+			indexResult = this.Client.Index(project, f => f .Index(indexName));
+
+			indexResult.IsValid.Should().BeTrue();
+			indexResult.Created.Should().BeFalse();
+			indexResult.ApiCall.HttpStatusCode.Should().Be(200);
+			indexResult.Version.Should().Be(2);
 		}
 
 	}
