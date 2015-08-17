@@ -126,6 +126,21 @@
     <Compile Include="Indices\IndexManagement\CreateIndex\ElasticClient-CreateIndexExtensions.cs" />
     <Compile Include="Indices\IndexManagement\OpenCloseIndex\ElasticClient-OpenCloseIndexExtensions.cs" />
     <Compile Include="Document\Single\Exists\ElasticClient-ExistsExtensions.cs" />
+    <Compile Include="Mapping\AttributeBased\AttachmentAttribute.cs" />
+    <Compile Include="Mapping\AttributeBased\BinaryAttribute.cs" />
+    <Compile Include="Mapping\AttributeBased\BooleanAttribute.cs" />
+    <Compile Include="Mapping\AttributeBased\CompletionAttribute.cs" />
+    <Compile Include="Mapping\AttributeBased\DateAttribute.cs" />
+    <Compile Include="Mapping\AttributeBased\ElasticPropertyAttribute.cs" />
+    <Compile Include="Mapping\AttributeBased\ElasticTypeAttribute.cs" />
+    <Compile Include="Mapping\AttributeBased\GeoPointAttribute.cs" />
+    <Compile Include="Mapping\AttributeBased\GeoShapeAttribute.cs" />
+    <Compile Include="Mapping\AttributeBased\IpAttribute.cs" />
+    <Compile Include="Mapping\AttributeBased\NestedAttribute.cs" />
+    <Compile Include="Mapping\AttributeBased\NumberAttribute.cs" />
+    <Compile Include="Mapping\AttributeBased\ObjectAttribute.cs" />
+    <Compile Include="Mapping\AttributeBased\StringAttribute.cs" />
+    <Compile Include="Mapping\AttributeBased\TokenCountAttribute.cs" />
     <Compile Include="Mapping\SimilarityOption.cs" />
     <Compile Include="Mapping\Types\Specialized\TokenCount\TokenCountType.cs" />
     <Compile Include="Mapping\Types\TypeDescriptorBase.cs" />
@@ -742,8 +757,6 @@
     <Compile Include="CommonAbstractions\SerializationBehavior\Resolvers\Converters\AnalyzerCollectionConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\Resolvers\Converters\CharFilterCollectionConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\Resolvers\Converters\ConcreteTypeConverter.cs" />
-    <Compile Include="Mapping\AttributeBased\IElasticPropertyAttribute.cs" />
-    <Compile Include="Mapping\AttributeBased\IElasticPropertyVisitor.cs" />
     <Compile Include="Indices\IndexSettings\Warmers\WarmerMapping.cs" />
     <Compile Include="Indices\IndexSettings\Warmers\GetWarmer\WarmerResponse.cs">
       <SubType>Code</SubType>
@@ -920,9 +933,7 @@
     <Compile Include="Indices\IndexSettings\GetSettings\ElasticClient-GetIndexSettings.cs" />
     <Compile Include="Indices\StatusManagement\ClearCache\ElasticClient-ClearCache.cs" />
     <Compile Include="Indices\IndexSettings\Analyze\AnalyzeToken.cs" />
-    <Compile Include="Mapping\AttributeBased\ElasticPropertyAttribute.cs" />
     <Compile Include="Mapping\Types\ElasticType.cs" />
-    <Compile Include="Mapping\AttributeBased\ElasticTypeAttribute.cs" />
     <Compile Include="Mapping\Types\RootObjectType.cs" />
     <Compile Include="Mapping\Fields\Id\IdField.cs" />
     <Compile Include="Indices\IndexSettings\Analyze\AnalyzeResponse.cs" />
@@ -1007,7 +1018,6 @@
     <Compile Include="CommonAbstractions\Infer\TypeName\TypeName.cs" />
     <Compile Include="CommonAbstractions\Infer\TypeName\TypeNameExtensions.cs" />
     <Compile Include="CommonAbstractions\Infer\TypeName\TypeNameResolver.cs" />
-    <Compile Include="CommonAbstractions\SerializationBehavior\Resolvers\Writers\WritePropertiesFromAttributeVisitor.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

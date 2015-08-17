@@ -27,6 +27,14 @@ namespace Nest
 	public class BooleanType : ElasticType, IBooleanType
 	{
 		public BooleanType() : base("boolean") { }
+
+		internal BooleanType(BooleanAttribute attribute) 
+			: base("boolean", attribute)
+		{
+			Index = attribute.Index;
+			Boost = attribute.Boost;
+			NullValue = attribute.NullValue;
+		}
 		
 		public NonStringIndexOption? Index { get; set; }
 		public double? Boost { get; set; }

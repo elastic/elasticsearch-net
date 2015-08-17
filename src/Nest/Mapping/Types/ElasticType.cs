@@ -16,16 +16,16 @@ namespace Nest
 		string IndexName { get; set; }
 
 		[JsonProperty("store")]
-		bool Store { get; set; }
+		bool? Store { get; set; }
 
 		[JsonProperty("doc_values")]
-		bool DocValues { get; set; }
+		bool? DocValues { get; set; }
 
 		[JsonProperty("fields", DefaultValueHandling = DefaultValueHandling.Ignore), JsonConverter(typeof(ElasticTypeConverter))]
 		IDictionary<FieldName, IElasticType> Fields { get; set; }
 
 		[JsonProperty("similarity")]
-		SimilarityOption Similarity { get; set; }
+		SimilarityOption? Similarity { get; set; }
 
 		[JsonProperty("copy_to")]
 		IEnumerable<FieldName> CopyTo { get; set; }
@@ -38,13 +38,22 @@ namespace Nest
 			Type = typeName;
 		}
 
+		internal ElasticType(TypeName typeName, ElasticPropertyAttribute attribute)
+			: this(typeName)
+		{
+			DocValues = attribute.DocValues;
+			IndexName = attribute.IndexName;
+			Similarity = attribute.Similarity;
+			Store = attribute.Store;
+		}
+
 		public FieldName Name { get; set; }
 		public virtual TypeName Type { get; set; }
 		public IEnumerable<FieldName> CopyTo { get; set; }
-		public bool DocValues { get; set; }
+		public bool? DocValues { get; set; }
 		public IDictionary<FieldName, IElasticType> Fields { get; set; }
 		public string IndexName { get; set; }
-		public SimilarityOption Similarity { get; set; }
-		public bool Store { get; set; }
+		public SimilarityOption? Similarity { get; set; }
+		public bool? Store { get; set; }
 	}
 }

@@ -29,6 +29,15 @@ namespace Nest
 	{
 		public GeoShapeType() : base("geo_shape") { }
 		
+		internal GeoShapeType(GeoShapeAttribute attribute)
+			: base("geo_shape", attribute)
+		{
+			Tree = attribute.Tree;
+			Orientation = attribute.Orientation;
+			TreeLevels = attribute.TreeLevels;
+			DistanceErrorPercentage = attribute.DistanceErrorPercentage;
+		}
+
 		public GeoTree? Tree { get; set; }
 
 		public GeoPrecision Precision { get; set; }

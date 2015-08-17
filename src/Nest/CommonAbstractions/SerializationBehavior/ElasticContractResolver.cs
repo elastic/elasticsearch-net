@@ -186,14 +186,23 @@ namespace Nest.Resolvers
 				property.ShouldSerialize = property.ShouldSerialize == null ? shouldSerialize : (o => property.ShouldSerialize(o) && shouldSerialize(o));
 			}
 
-			var att = ElasticAttributes.Property(member, this.ConnectionSettings);
-			if (att == null) return property;
-			if (!att.Name.IsNullOrEmpty())
-				property.PropertyName = att.Name;
+			IPropertyMapping propertyMapping = null;
+			if (!this.ConnectionSettings.PropertyMappings.TryGetValue(member, out propertyMapping))
+				propertyMapping = ElasticPropertyAttribute.From(member);
 
-			property.Ignored = att.OptOut;
+			if (propertyMapping == null)
+			{
+				var jsonIgnoreAttribute = member.GetCustomAttributes(typeof(JsonIgnoreAttribute), true);
+				if (jsonIgnoreAttribute.HasAny())
+					property.Ignored = true;
+				return property;
+			}
+
+			if (!propertyMapping.Name.IsNullOrEmpty())
+				property.PropertyName = propertyMapping.Name;
+			property.Ignored = propertyMapping.Ignore;
+
 			return property;
 		}
-
 	}
 }

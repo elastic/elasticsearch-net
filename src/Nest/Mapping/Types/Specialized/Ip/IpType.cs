@@ -29,6 +29,16 @@ namespace Nest
 	{
 		public IpType() : base("ip") { }
 
+		internal IpType(IpAttribute attribute)
+			: base("ip", attribute)
+		{
+			Boost = attribute.Boost;
+			IncludeInAll = attribute.IncludeInAll;
+			Index = attribute.Index;
+			NullValue = attribute.NullValue;
+			PrecisionStep = attribute.PrecisionStep;
+		}
+
 		public double? Boost { get; set; }
 		public bool? IncludeInAll { get; set; }
 		public NonStringIndexOption? Index { get; set; }

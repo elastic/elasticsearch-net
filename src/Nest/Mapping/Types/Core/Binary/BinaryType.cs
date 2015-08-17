@@ -14,6 +14,7 @@ namespace Nest
 	public class BinaryType : ElasticType, IBinaryType
 	{
 		public BinaryType() : base("binary") { }
+		internal BinaryType(BinaryAttribute attribute) : base("binary", attribute) { }
 	}
 
 	public class BinaryTypeDescriptor<T> 

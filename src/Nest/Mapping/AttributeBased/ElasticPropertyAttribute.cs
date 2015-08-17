@@ -1,62 +1,29 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 
-namespace Nest
+namespace Nest 
 {
-	[AttributeUsage(System.AttributeTargets.Property, AllowMultiple = false)]
-	public class ElasticPropertyAttribute : Attribute, IElasticPropertyAttribute
+	[AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
+	public abstract class ElasticPropertyAttribute : Attribute, IPropertyMapping
 	{
-		public bool AddSortField { get; set; }
-
-		public bool OptOut { get; set; }
-
-		public string Name { get; set; }
-
-		public FieldType Type { get; set; }
-
-		public TermVectorOption TermVector { get; set; }
-		public FieldIndexOption Index { get; set; }
-
-		public double Boost { get; set; }
-
-		public string Analyzer { get; set; }
-		public string SearchAnalyzer { get; set; }
-		public string SortAnalyzer { get; set; }
-		public string NullValue { get; set; }
-		public SimilarityOption? Similarity { get; set; }
-
 		public bool DocValues { get; set; }
-
-		public bool OmitNorms { get; set; }
-		public bool OmitTermFrequencyAndPositions { get; set; }
-		public bool IncludeInAll { get; set; }
-		public bool IncludeInParent { get; set; }
+		public string IndexName { get; set; }
+		public string Name { get; set; }
+		public bool Ignore { get; set; }
+		public SimilarityOption? Similarity { get; set; }
 		public bool Store { get; set; }
 
-		/// <summary>
-		/// Defaults to float so be sure to set this correctly!
-		/// </summary>
-		public NumberTypeName NumericType { get; set; }
-		public int PrecisionStep { get; set; }
+		public abstract IElasticType ToElasticType();
 
-		/// <summary>
-		/// http://www.elasticsearch.org/guide/reference/mapping/date-format.html
-		/// </summary>
-		public string DateFormat { get; set; }
-
-		public ElasticPropertyAttribute()
+		public static ElasticPropertyAttribute From(MemberInfo memberInfo)
 		{
-			//make sure we match ES's defaults
-			this.Boost = 1;
-			this.TermVector = TermVectorOption.No;
-			this.Index = FieldIndexOption.Analyzed;
-
-			this.IncludeInAll = true;
-			this.PrecisionStep = 4;
-		}
-
-		public void Accept(IElasticPropertyVisitor visitor)
-		{
-			visitor.Visit(this);
+			var attributes = memberInfo.GetCustomAttributes(typeof(ElasticPropertyAttribute), true);
+			if (attributes.HasAny())
+				return ((ElasticPropertyAttribute)attributes.First());
+			return null;
 		}
 	}
 }

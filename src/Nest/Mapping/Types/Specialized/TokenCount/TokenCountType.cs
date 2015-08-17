@@ -15,6 +15,13 @@ namespace Nest
 	public class TokenCountType : NumberType, ITokenCountType
 	{
 		public TokenCountType() : base("token_count") { }
+
+		internal TokenCountType(TokenCountAttribute attribute)
+			: base("token_count", attribute)
+		{
+			Analyzer = attribute.Analyzer;
+		}
+
 		public string Analyzer { get; set; }
 	}
 

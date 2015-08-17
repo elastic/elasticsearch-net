@@ -24,6 +24,8 @@ namespace Nest
 	{
 		public AttachmentType() : base("attachment") { }
 
+		internal AttachmentType(AttachmentAttribute attribute) : base("attachment", attribute) { }
+
 		public IStringType AuthorField
 		{
 			get { return Fields["author"] as IStringType; }

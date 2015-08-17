@@ -36,6 +36,16 @@ namespace Nest
 	{
 		public CompletionType() : base("completion") { }
 
+		internal CompletionType(CompletionAttribute attribute)
+			: base("completion", attribute)
+		{
+			SearchAnalyzer = attribute.SearchAnalyzer;
+			Analyzer = attribute.Analyzer;
+			Payloads = attribute.Payloads;
+			PreserveSeparators = attribute.PreserveSeparators;
+			MaxInputLength = attribute.MaxInputLength;
+		}
+
 		public string SearchAnalyzer { get; set; }
 		public string Analyzer { get; set; }
 		public bool? Payloads { get; set; }

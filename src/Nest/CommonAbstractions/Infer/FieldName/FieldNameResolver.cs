@@ -14,47 +14,7 @@ using System.ComponentModel;
 namespace Nest.Resolvers
 {
 	//Shout out to http://tomlev2.wordpress.com/2010/10/03/entity-framework-using-include-with-lambda-expressions/
-	//replaces my sloppy 300+ lines (though working!) first attempt, thanks Thomas Levesque.
-
-	public static class ElasticAttributes
-	{
-		private static readonly ConcurrentDictionary<Type, ElasticTypeAttribute> CachedTypeLookups =
-			new ConcurrentDictionary<Type, ElasticTypeAttribute>();
-		
-		public static IElasticPropertyAttribute Property(MemberInfo info, IConnectionSettingsValues settings = null)
-		{
-			if (settings != null)
-			{
-				IPropertyMapping propertyMapping = null;
-				if (settings.PropertyMappings.TryGetValue(info, out propertyMapping))
-					return new ElasticPropertyAttribute {Name = propertyMapping.Name, OptOut = propertyMapping.OptOut};
-			}
-
-			var attributes = info.GetCustomAttributes(typeof(IElasticPropertyAttribute), true);
-			if (attributes.HasAny())
-				return ((IElasticPropertyAttribute)attributes.First());
-
-			var ignoreAttrutes = info.GetCustomAttributes(typeof(JsonIgnoreAttribute), true);
-			if (ignoreAttrutes.HasAny())
-				return new ElasticPropertyAttribute { OptOut = true };
-
-			return null;
-		}
-
-		public static ElasticTypeAttribute Type(Type type)
-		{
-			ElasticTypeAttribute attr = null;
-			if (CachedTypeLookups.TryGetValue(type, out attr))
-				return attr;
-
-			var attributes = type.GetCustomAttributes(typeof(ElasticTypeAttribute), true);
-			if (attributes.HasAny())
-				attr = ((ElasticTypeAttribute)attributes.First());
-			CachedTypeLookups.TryAdd(type, attr);
-			return attr;
-		}
-	}
-
+	//replaces my sloppy 300+ lines (though working!) first attempt, thanks Thomas Levesque.	
 	public class FieldNameResolver : ExpressionVisitor
 	{
 
@@ -73,7 +33,7 @@ namespace Nest.Resolvers
 			
 			var name = info.Name;
 
-			var att = ElasticAttributes.Property(info, _settings);
+			var att = ElasticPropertyAttribute.From(info);
 			if (att != null && !att.Name.IsNullOrEmpty())
 				return att.Name;
 
@@ -89,7 +49,7 @@ namespace Nest.Resolvers
 		public string Resolve(Expression expression)
 		{
 			var stack = new Stack<string>();
-			var properties = new Stack<IElasticPropertyAttribute>();
+			var properties = new Stack<ElasticPropertyAttribute>();
 			Visit(expression, stack, properties);
 			return stack
 				.Aggregate(
@@ -102,12 +62,12 @@ namespace Nest.Resolvers
 		public string ResolveToLastToken(Expression expression)
 		{
 			var stack = new Stack<string>();
-			var properties = new Stack<IElasticPropertyAttribute>();
+			var properties = new Stack<ElasticPropertyAttribute>();
 			Visit(expression, stack, properties);
 			return stack.Last();
 		}
 
-		protected override Expression VisitMemberAccess(MemberExpression expression, Stack<string> stack, Stack<IElasticPropertyAttribute> properties)
+		protected override Expression VisitMemberAccess(MemberExpression expression, Stack<string> stack, Stack<ElasticPropertyAttribute> properties)
 		{
 			if (stack != null)
 			{
@@ -117,7 +77,7 @@ namespace Nest.Resolvers
 			return base.VisitMemberAccess(expression, stack, properties);
 		}
 
-		protected override Expression VisitMethodCall(MethodCallExpression m, Stack<string> stack, Stack<IElasticPropertyAttribute> properties)
+		protected override Expression VisitMethodCall(MethodCallExpression m, Stack<string> stack, Stack<ElasticPropertyAttribute> properties)
 		{
 			if (m.Method.Name == "Suffix" && m.Arguments.Any())
 			{
@@ -192,11 +152,11 @@ namespace Nest.Resolvers
 		public MemberInfoResolver(IConnectionSettingsValues settings, Expression expression) : base(settings)
 		{
 			var stack = new Stack<string>();
-			var properties = new Stack<IElasticPropertyAttribute>();
+			var properties = new Stack<ElasticPropertyAttribute>();
 			base.Visit(expression, stack, properties);
 		}
 
-		protected override Expression VisitMemberAccess(MemberExpression expression, Stack<string> stack, Stack<IElasticPropertyAttribute> properties)
+		protected override Expression VisitMemberAccess(MemberExpression expression, Stack<string> stack, Stack<ElasticPropertyAttribute> properties)
 		{
 			this._members.Add(expression.Member);
 			return base.VisitMemberAccess(expression, stack, properties);

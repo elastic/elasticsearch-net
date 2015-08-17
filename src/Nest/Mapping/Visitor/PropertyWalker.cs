@@ -25,8 +25,8 @@ namespace Nest
 			var properties = new Dictionary<FieldName, IElasticType>();
 			foreach(var propertyInfo in _type.GetProperties())
 			{
-				var attribute = ElasticAttributes.Property(propertyInfo);
-				if (attribute != null && attribute.OptOut)
+				var attribute = ElasticPropertyAttribute.From(propertyInfo);
+				if (attribute != null && attribute.Ignore)
 					continue;
 				var property = GetProperty(propertyInfo, attribute);
 				properties.Add(propertyInfo.Name, property);
@@ -34,7 +34,7 @@ namespace Nest
 			return properties;
 		}
 
-		private IElasticType GetProperty(PropertyInfo propertyInfo, IElasticPropertyAttribute attribute)
+		private IElasticType GetProperty(PropertyInfo propertyInfo, ElasticPropertyAttribute attribute)
 		{
 			var elasticType = GetElasticType(propertyInfo, attribute);
 			var objectType = elasticType as IObjectType;
@@ -43,54 +43,21 @@ namespace Nest
 				var walker = new PropertyWalker(propertyInfo.PropertyType, _visitor);
 				objectType.Properties = walker.GetProperties();
 			}
-			FillAttributeValues(elasticType, attribute);
 			_visitor.Visit(elasticType, propertyInfo, attribute);
 			return elasticType;	
 		}
 
-		private void FillAttributeValues(IElasticType type, IElasticPropertyAttribute attribute)
-		{
-			// TODO
-		}
-
-		private IElasticType GetElasticType(PropertyInfo propertyInfo, IElasticPropertyAttribute attribute)
+		private IElasticType GetElasticType(PropertyInfo propertyInfo, ElasticPropertyAttribute attribute)
 		{
 			var elasticType = _visitor.Visit(propertyInfo, attribute);
 			if (elasticType != null)
 				return elasticType;
 			return (attribute != null) 
-				? GetElasticType(attribute) 
-				: GetElasticType(propertyInfo.PropertyType);
+				? attribute.ToElasticType() 
+				: InferElasticType(propertyInfo.PropertyType);
 		}
 
-		private IElasticType GetElasticType(IElasticPropertyAttribute attribute)
-		{
-			switch(attribute.Type)
-			{
-				case FieldType.Attachment: return new AttachmentType();
-				case FieldType.Binary: return new BinaryType();
-				case FieldType.Boolean: return new BooleanType();
-				case FieldType.Completion: return new CompletionType();
-				case FieldType.Date: return new DateType();
-				case FieldType.GeoPoint: return new GeoPointType();
-				case FieldType.GeoShape: return new GeoShapeType();
-				case FieldType.Ip: return new IpType();
-				case FieldType.Nested: return new NestedType();
-				case FieldType.Object: return new ObjectType();
-				case FieldType.String: return new StringType();
-				case FieldType.Byte: return new NumberType(NumberTypeName.Byte);
-				case FieldType.Double: return new NumberType(NumberTypeName.Double);
-				case FieldType.Float: return new NumberType(NumberTypeName.Float);
-				case FieldType.Integer: return new NumberType(NumberTypeName.Integer);
-				case FieldType.Long: return new NumberType(NumberTypeName.Long);
-				case FieldType.Short: return new NumberType(NumberTypeName.Short);
-				case FieldType.TokenCount: return new TokenCountType();
-				case FieldType.Murmur3Hash: return new Murmur3HashType();
-				default: throw new DslException(string.Format("A mapping from FieldType: {0} to IElasticType doesn't exist.", attribute.Type));
-			}
-		}
-
-		private IElasticType GetElasticType(Type type)
+		private IElasticType InferElasticType(Type type)
 		{
 			type = GetUnderlyingType(type);
 

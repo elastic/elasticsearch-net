@@ -15,9 +15,9 @@ namespace Nest
 		FieldName IElasticType.Name { get; set; }
 		TypeName IElasticType.Type { get; set; }
 		string IElasticType.IndexName { get; set; }
-		bool IElasticType.Store { get; set; }
-		bool IElasticType.DocValues { get; set; }
-		SimilarityOption IElasticType.Similarity { get; set; }
+		bool? IElasticType.Store { get; set; }
+		bool? IElasticType.DocValues { get; set; }
+		SimilarityOption? IElasticType.Similarity { get; set; }
 		IEnumerable<FieldName> IElasticType.CopyTo { get; set; }
 		IDictionary<FieldName, IElasticType> IElasticType.Fields { get; set; }
 

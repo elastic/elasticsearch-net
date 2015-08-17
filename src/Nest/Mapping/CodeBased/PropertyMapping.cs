@@ -44,7 +44,7 @@ namespace Nest
 		/// <pre>- When mapping automatically using MapFromAttributes()</pre>
 		/// <pre>- When Indexing this type do not serialize whatever this value hold</pre>
 		/// </summary>
-		bool OptOut { get; set; } //TODO Rename to Ignore when we get rid of IElasticPropertyAttribute
+		bool Ignore { get; set; }
 	}
 
 	/// <summary>
@@ -67,7 +67,7 @@ namespace Nest
 		/// </summary>
 		public bool Ignore { get; set; }
 
-		bool IPropertyMapping.OptOut
+		bool IPropertyMapping.Ignore
 		{
 			get { return this.Ignore; }
 			set { this.Ignore = value; }

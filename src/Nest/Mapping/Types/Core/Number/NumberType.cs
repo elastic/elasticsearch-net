@@ -10,7 +10,7 @@ namespace Nest
 	public interface INumberType : IElasticType
 	{
 		[JsonProperty("index")]
-		NonStringIndexOption Index { get; set; }
+		NonStringIndexOption? Index { get; set; }
 
 		[JsonProperty("boost")]
 		double? Boost { get; set; }
@@ -40,7 +40,24 @@ namespace Nest
 		public NumberType(NumberTypeName typeName) : base(typeName.GetStringValue()) { }
 		protected NumberType(string typeName) : base(typeName) { }
 
-		public NonStringIndexOption Index { get; set; }
+		internal NumberType(NumberAttribute attribute)
+			: base(attribute.NumberType.GetStringValue(), attribute)
+		{
+			Index = attribute.Index;
+			Boost = attribute.Boost;
+			NullValue = attribute.NullValue;
+			IncludeInAll = attribute.IncludeInAll;
+			PrecisionStep = attribute.PrecisionStep;
+			IgnoreMalformed = attribute.IgnoreMalformed;
+		}
+
+		internal NumberType(string typeName, NumberAttribute attribute)
+			: this(attribute)
+		{
+			Type = typeName;
+		}
+
+		public NonStringIndexOption? Index { get; set; }
 		public double? Boost { get; set; }
 		public double? NullValue { get; set; }
 		public bool? IncludeInAll { get; set; }
@@ -54,7 +71,7 @@ namespace Nest
 		: TypeDescriptorBase<NumberTypeDescriptor<T>, INumberType, T>, INumberType
 		where T : class
 	{
-		NonStringIndexOption INumberType.Index { get; set; }
+		NonStringIndexOption? INumberType.Index { get; set; }
 		double? INumberType.Boost { get; set; }
 		double? INumberType.NullValue { get; set; }
 		bool? INumberType.IncludeInAll { get; set; }

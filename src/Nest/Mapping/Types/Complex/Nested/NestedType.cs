@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using Nest.Resolvers.Writers;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -19,6 +18,12 @@ namespace Nest
 	public class NestedType : ObjectType, INestedType
 	{
 		public NestedType() : base("nested") { }
+		public NestedType(NestedAttribute attribute)
+			: base("nested", attribute)
+		{
+			IncludeInParent = attribute.IncludeInParent;
+			IncludeInRoot = attribute.IncludeInRoot;
+		}
 
 		public bool? IncludeInParent { get; set; }
 		public bool? IncludeInRoot { get; set; }

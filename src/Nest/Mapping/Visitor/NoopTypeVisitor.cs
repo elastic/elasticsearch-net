@@ -8,65 +8,65 @@ namespace Nest
 {
 	public class NoopTypeVisitor : ITypeVisitor
 	{
-		public virtual void Visit(IBooleanType type, PropertyInfo propertyInfo, IElasticPropertyAttribute attribute)
+		public virtual void Visit(IBooleanType type, PropertyInfo propertyInfo, ElasticPropertyAttribute attribute)
 		{
 		}
 
-		public virtual void Visit(IBinaryType type, PropertyInfo propertyInfo, IElasticPropertyAttribute attribute)
+		public virtual void Visit(IBinaryType type, PropertyInfo propertyInfo, ElasticPropertyAttribute attribute)
 		{
 		}
 
-		public virtual void Visit(IObjectType type, PropertyInfo propertyInfo, IElasticPropertyAttribute attribute)
+		public virtual void Visit(IObjectType type, PropertyInfo propertyInfo, ElasticPropertyAttribute attribute)
 		{
 		}
 
-		public virtual void Visit(IGeoShapeType type, PropertyInfo propertyInfo, IElasticPropertyAttribute attribute)
+		public virtual void Visit(IGeoShapeType type, PropertyInfo propertyInfo, ElasticPropertyAttribute attribute)
 		{
 		}
 
-		public virtual void Visit(ICompletionType type, PropertyInfo propertyInfo, IElasticPropertyAttribute attribute)
+		public virtual void Visit(ICompletionType type, PropertyInfo propertyInfo, ElasticPropertyAttribute attribute)
 		{
 		}
 
-		public virtual void Visit(IMurmur3HashType type, PropertyInfo propertyInfo, IElasticPropertyAttribute attribute)
+		public virtual void Visit(IMurmur3HashType type, PropertyInfo propertyInfo, ElasticPropertyAttribute attribute)
 		{
 		}
 
-		public virtual void Visit(ITokenCountType type, PropertyInfo propertyInfo, IElasticPropertyAttribute attribute)
+		public virtual void Visit(ITokenCountType type, PropertyInfo propertyInfo, ElasticPropertyAttribute attribute)
 		{
 		}
 
-		public virtual void Visit(IIpType type, PropertyInfo propertyInfo, IElasticPropertyAttribute attribute)
+		public virtual void Visit(IIpType type, PropertyInfo propertyInfo, ElasticPropertyAttribute attribute)
 		{
 		}
 
-		public virtual void Visit(IAttachmentType type, PropertyInfo propertyInfo, IElasticPropertyAttribute attribute)
+		public virtual void Visit(IAttachmentType type, PropertyInfo propertyInfo, ElasticPropertyAttribute attribute)
 		{
 		}
 
-		public virtual void Visit(IGeoPointType type, PropertyInfo propertyInfo, IElasticPropertyAttribute attribute)
+		public virtual void Visit(IGeoPointType type, PropertyInfo propertyInfo, ElasticPropertyAttribute attribute)
 		{
 		}
 
-		public virtual void Visit(INestedType type, PropertyInfo propertyInfo, IElasticPropertyAttribute attribute)
+		public virtual void Visit(INestedType type, PropertyInfo propertyInfo, ElasticPropertyAttribute attribute)
 		{
 		}
 
-		public virtual void Visit(IDateType type, PropertyInfo propertyInfo, IElasticPropertyAttribute attribute)
+		public virtual void Visit(IDateType type, PropertyInfo propertyInfo, ElasticPropertyAttribute attribute)
 		{
 		}
 
-		public virtual void Visit(INumberType type, PropertyInfo propertyInfo, IElasticPropertyAttribute attribute)
+		public virtual void Visit(INumberType type, PropertyInfo propertyInfo, ElasticPropertyAttribute attribute)
 		{
 		}
 
-		public virtual void Visit(IStringType type, PropertyInfo propertyInfo, IElasticPropertyAttribute attribute)
+		public virtual void Visit(IStringType type, PropertyInfo propertyInfo, ElasticPropertyAttribute attribute)
 		{
 		}
 
-		public virtual IElasticType Visit(PropertyInfo propertyInfo, IElasticPropertyAttribute attribute) => null;
+		public virtual IElasticType Visit(PropertyInfo propertyInfo, ElasticPropertyAttribute attribute) => null;
 
-		public void Visit(IElasticType type, PropertyInfo propertyInfo, IElasticPropertyAttribute attribute)
+		public void Visit(IElasticType type, PropertyInfo propertyInfo, ElasticPropertyAttribute attribute)
 		{
 			var nestedType = type as INestedType;
 			if (nestedType != null)

@@ -3,7 +3,6 @@ using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using System;
 using System.Linq.Expressions;
-using Nest.Resolvers.Writers;
 
 namespace Nest
 {
@@ -32,6 +31,19 @@ namespace Nest
 	{
 		public ObjectType() : base("object") { }
 		protected ObjectType(TypeName typeName) : base(typeName) { }
+		protected internal ObjectType(TypeName typeName, ObjectAttribute attribute)
+			: this(attribute)
+		{
+			Type = typeName;
+		}
+		internal ObjectType(ObjectAttribute attribute)
+			: base("object", attribute)
+		{
+			Dynamic = attribute.Dynamic;
+			Enabled = attribute.Enabled;
+			IncludeInAll = attribute.IncludeInAll;
+			Path = attribute.Path;
+		}
 
 		public DynamicMappingOption? Dynamic { get; set; }
 		public bool? Enabled { get; set; }
