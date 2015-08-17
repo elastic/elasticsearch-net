@@ -12,7 +12,7 @@ namespace Nest
 			this.Request.RequestParameters.GetQueryStringValue<TOut>(name);
 
 		protected void Q(string name, object value) =>
-			this.Request.RequestParameters.AddQueryStringValue("source", value);
+			this.Request.RequestParameters.AddQueryStringValue(name, value);
 
 	}
 }

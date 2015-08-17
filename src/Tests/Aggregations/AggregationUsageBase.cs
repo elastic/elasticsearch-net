@@ -4,6 +4,7 @@ using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using Xunit;
+using Elasticsearch.Net;
 
 namespace Tests.Aggregations
 {
@@ -15,6 +16,8 @@ namespace Tests.Aggregations
 		public override bool ExpectIsValid => true;
 
 		public override int ExpectStatusCode => 200;
+
+		public override HttpMethod HttpMethod => HttpMethod.POST;
 
 		public override string UrlPath => "/project/project/_search";
 

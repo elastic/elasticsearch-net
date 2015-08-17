@@ -1,0 +1,26 @@
+using System;
+using System.Reactive.Linq;
+
+namespace Tests.Framework.Integration
+{
+	public abstract class ClusterBase : IIntegrationCluster, IDisposable
+	{
+		public ElasticsearchNode Node { get; }
+		protected IObservable<ElasticsearchMessage> ConsoleOut { get; set; }
+
+		public ClusterBase()
+		{
+			this.Node = new ElasticsearchNode(TestClient.ElasticsearchVersion, TestClient.RunIntegrationTests);
+			this.Node.BootstrapWork.Subscribe(handle =>
+			{
+				this.Boostrap();
+				handle.Set();
+			});
+			this.ConsoleOut = this.Node.Start();
+		}
+
+		public virtual void Boostrap() { }
+
+		public void Dispose() => this.Node?.Dispose();
+	}
+}

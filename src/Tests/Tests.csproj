@@ -79,6 +79,7 @@
     <Compile Include="ClientConcepts\ConnectionPooling\BuildingBlocks\RoundRobin.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\BuildingBlocks\ConnectionPooling.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\BuildingBlocks\RequestPipeline.cs" />
+    <Compile Include="Document\Single\Indexing.cs" />
     <Compile Include="Framework\Audit\Audits.cs" />
     <Compile Include="Framework\Audit\AuditTrailTester.cs" />
     <Compile Include="Framework\Audit\ClientCall.cs" />
@@ -86,6 +87,11 @@
     <Compile Include="ClientConcepts\ConnectionPooling\Sniffing\OnStartup.cs" />
     <Compile Include="Framework\Extensions\DiffExtensions.cs" />
     <Compile Include="Framework\Extensions\Numeric.cs" />
+    <Compile Include="Framework\Integration\ApiUsage.cs" />
+    <Compile Include="Framework\Integration\ClusterBase.cs" />
+    <Compile Include="Framework\Integration\IIntegrationCluster.cs" />
+    <Compile Include="Framework\Integration\IntegrationContext.cs" />
+    <Compile Include="Framework\Integration\IndexingCluster.cs" />
     <Compile Include="Framework\Providers\TestableDateTimeProvider.cs" />
     <Compile Include="Framework\VirtualClustering\Cluster.cs" />
     <Compile Include="Framework\VirtualClustering\FixedPipelineFactory.cs" />
@@ -160,7 +166,6 @@
     <Folder Include="Cat\" />
     <Folder Include="ClientConcepts\ConnectionPooling\FailOver\" />
     <Folder Include="Cluster\" />
-    <Folder Include="Document\" />
     <Folder Include="IndexModules\" />
     <Folder Include="Indices\" />
     <Folder Include="Mapping\" />

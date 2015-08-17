@@ -26,9 +26,9 @@ namespace Elasticsearch.Net
 
 		public bool Success { get; internal set; }
 
-		public HttpMethod RequestMethod { get; internal set; }
+		public HttpMethod HttpMethod { get; internal set; }
 
-		public Uri RequestUri { get; internal set; }
+		public Uri Uri { get; internal set; }
 
 		/// <summary>The raw byte request message body, only set when DisableDirectStreaming() is set on Connection configuration</summary>
 		public byte[] RequestBodyInBytes { get; internal set; }
@@ -99,8 +99,8 @@ namespace Elasticsearch.Net
 			var print = _printFormat.F(
 				Environment.NewLine,
 				r.HttpStatusCode.HasValue ? r.HttpStatusCode.Value.ToString(CultureInfo.InvariantCulture) : "-1",
-				r.RequestMethod,
-				r.RequestUri,
+				r.HttpMethod,
+				r.Uri,
 				requestJson,
 				response
 			);

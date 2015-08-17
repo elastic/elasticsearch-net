@@ -7,8 +7,8 @@ using System.Threading;
 
 namespace Tests.Framework.Integration
 {
-	[CollectionDefinition(IntegrationContext.ReadOnly)]
-	public class ReadOnlyCluster : ClusterBase, ICollectionFixture<ReadOnlyCluster>, IClassFixture<ApiUsage>
+	[CollectionDefinition(IntegrationContext.Indexing)]
+	public class IndexingCluster : ClusterBase, ICollectionFixture<IndexingCluster>, IClassFixture<ApiUsage>
 	{
 		public override void Boostrap() => new Seeder(this.Node.Port).SeedNode();
 	}

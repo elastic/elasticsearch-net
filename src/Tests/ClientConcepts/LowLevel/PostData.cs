@@ -41,7 +41,7 @@ namespace Tests.ClientConcepts.LowLevel
 			this.multiObjectJson = Utf8Bytes(string.Join("\n", listOfObjects.Select(o=> json)) + "\n");
 		}
 
-		[U] public async Task ImplicitConversions()
+		[U] public void ImplicitConversions()
 		{
 			/** Even though the argument for postData on the low level client takes a PostData
 			* You can rely on C# implicit conversion to abstract the notion of PostData completely.

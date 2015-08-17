@@ -958,7 +958,7 @@ namespace Nest
 		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
 		/// <param name="object">The object to be indexed, Id will be inferred (Id property or IdProperty attribute on type)</param>
 		/// <param name="indexSelector">Optionally furter describe the index operation i.e override type/index/id</param>
-		IIndexResponse Index<T>(T @object, Func<IndexDescriptor<T>, IndexDescriptor<T>> indexSelector = null)
+		IIndexResponse Index<T>(T @object, Func<IndexDescriptor<T>, IIndexRequest<T>> indexSelector = null)
 			where T : class;
 
 		/// <inheritdoc />
@@ -966,7 +966,7 @@ namespace Nest
 			where T : class;
 
 		/// <inheritdoc />
-		Task<IIndexResponse> IndexAsync<T>(T @object, Func<IndexDescriptor<T>, IndexDescriptor<T>> indexSelector = null)
+		Task<IIndexResponse> IndexAsync<T>(T @object, Func<IndexDescriptor<T>, IIndexRequest<T>> indexSelector = null)
 			where T : class;
 
 		/// <inheritdoc />

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using FluentAssertions;
 using Nest;
 using Tests.Framework.Integration;
+using Elasticsearch.Net;
 
 namespace Tests.Framework
 {
@@ -19,6 +20,7 @@ namespace Tests.Framework
 		public abstract int ExpectStatusCode { get; }
 		public abstract bool ExpectIsValid { get; }
 		public abstract string UrlPath { get; }
+		public abstract HttpMethod HttpMethod { get; }
 
 		protected abstract TInitializer Initializer { get; }
 		protected abstract Func<TDescriptor, TInterface> Fluent { get; }
@@ -45,8 +47,8 @@ namespace Tests.Framework
 				{
 					{"fluent", fluent(client, this.Fluent)},
 					{"fluentAsync", await fluentAsync(client, this.Fluent)},
-					{"initializer", request(client, this.Initializer)},
-					{"initializerAsync", await requestAsync(client, this.Initializer)}
+					{"request", request(client, this.Initializer)},
+					{"requestAsync", await requestAsync(client, this.Initializer)}
 				};
 
 				return dict;
@@ -63,7 +65,14 @@ namespace Tests.Framework
 			foreach (var kv in responses)
 			{
 				var response = kv.Value as TResponse;
-				assert(response);
+				try
+				{
+					assert(response);
+				}
+				catch(Exception ex) when (false)
+				{
+					throw new Exception($"asserting over the response from: {kv.Key} failed: {ex.Message}", ex);
+				}
 			}
 		}
 
@@ -74,24 +83,26 @@ namespace Tests.Framework
 			if (paths.Length > 1)
 				query = paths.Last();
 
-			var expectedUri = new UriBuilder("http","localhost", IntegrationPort, path, query).Uri;
+			var expectedUri = new UriBuilder("http","localhost", IntegrationPort, path,  "?" + query).Uri;
 
 			uriThatClientHit.AbsolutePath.Should().Be(expectedUri.AbsolutePath);
 			var queries = new[] {uriThatClientHit.Query, expectedUri.Query};
 			if (queries.All(string.IsNullOrWhiteSpace)) return;
 			if (queries.Any(string.IsNullOrWhiteSpace))
 			{
-				query.First().Should().Be(query.Last());
+				queries.Last().Should().Be(queries.First());
 				return;
 			}
 
-			var clientKeyValues = uriThatClientHit.Query.Split('&')
-				.SelectMany(v => v.Split('='))
-				.ToDictionary(k => k[0], v => v);
-			var expectedKeyValues = expectedUri.Query.Split('&')
-				.SelectMany(v => v.Split('='))
-				.ToDictionary(k => k[0], v => v);
+			var clientKeyValues = uriThatClientHit.Query.Substring(1).Split('&')
+				.Select(v => v.Split('='))
+				.ToDictionary(k => k[0], v => v.Last());
+			var expectedKeyValues = expectedUri.Query.Substring(1).Split('&')
+				.Select(v => v.Split('='))
+				.ToDictionary(k => k[0], v => v.Last());
 
+			clientKeyValues.Count().Should().Be(expectedKeyValues.Count());
+			clientKeyValues.Should().ContainKeys(expectedKeyValues.Keys.ToArray());
 			clientKeyValues.Should().Equal(expectedKeyValues);
 		}
 
@@ -102,7 +113,10 @@ namespace Tests.Framework
 			await this.AssertOnAllResponses(r=>r.IsValid.Should().Be(this.ExpectIsValid));
 
 		[U] protected async Task HitsTheCorrectUrl() =>
-			await this.AssertOnAllResponses(r=>this.AssertUrl(r.ApiCall.RequestUri));
+			await this.AssertOnAllResponses(r=>this.AssertUrl(r.ApiCall.Uri));
+
+		[U] protected async Task UsesCorrectHttpMethod() =>
+			await this.AssertOnAllResponses(r=>r.CallDetails.HttpMethod.Should().Be(this.HttpMethod));
 
 		[U] protected void SerializesInitializer() => 
 			this.AssertSerializesAndRoundTrips<TInterface>(this.Initializer);

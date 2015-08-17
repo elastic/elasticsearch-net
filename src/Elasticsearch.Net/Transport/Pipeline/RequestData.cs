@@ -125,8 +125,8 @@ namespace Elasticsearch.Net.Connection
 		{
 			var cs = new ElasticsearchResponse<TReturn>(e);
 			cs.RequestBodyInBytes = this.Data?.Bytes;
-			cs.RequestUri = this.Uri;
-			cs.RequestMethod = this.Method;
+			cs.Uri = this.Uri;
+			cs.HttpMethod = this.Method;
 			cs.OriginalException = e;
 			return cs;
 		}
@@ -135,8 +135,8 @@ namespace Elasticsearch.Net.Connection
 		{
 			var cs = new ElasticsearchResponse<TReturn>(statusCode);
 			cs.RequestBodyInBytes = this.Data?.Bytes;
-			cs.RequestUri = this.Uri;
-			cs.RequestMethod = this.Method;
+			cs.Uri = this.Uri;
+			cs.HttpMethod = this.Method;
 			cs.OriginalException = innerException;
 			return cs;
 		}

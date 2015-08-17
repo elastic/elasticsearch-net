@@ -21,15 +21,15 @@ namespace Elasticsearch.Net
 		/// <summary>
 		/// The HTTP method used by the request
 		/// </summary>
-		HttpMethod RequestMethod { get; }
+		HttpMethod HttpMethod { get; }
 		
 		/// <summary>
 		/// The url as requested 
 		/// </summary>
-		Uri RequestUri { get; }
+		Uri Uri { get; }
 		
 		/// <summary>
-		/// The status code as returned by Elasticsearch 
+		/// The HTTP status code as returned by Elasticsearch 
 		/// </summary>
 		int? HttpStatusCode { get; }
 
