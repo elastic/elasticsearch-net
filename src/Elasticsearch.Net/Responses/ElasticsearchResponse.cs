@@ -72,7 +72,6 @@ namespace Elasticsearch.Net
 			}
 		}
 
-
 		public ElasticsearchResponse(Exception e)
 		{
 			this.Success = false;

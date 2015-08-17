@@ -7,6 +7,7 @@ using System.Net;
 using System.Reactive;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
+using System.Reactive.Subjects;
 using System.Text.RegularExpressions;
 using System.Threading;
 
@@ -32,10 +33,14 @@ namespace Tests.Framework.Integration
 		public ElasticsearchNodeInfo Info { get; private set; }
 		public int Port { get; private set; }
 
+		private Subject<ManualResetEvent> _blockingSubject = new Subject<ManualResetEvent>();
+		public IObservable<ManualResetEvent> BootstrapWork { get; }
+
 		public ElasticsearchNode(string elasticsearchVersion, bool runningIntegrations)
 		{
 			this.Version = elasticsearchVersion;
 			this.RunningIntegrations = runningIntegrations;
+			this.BootstrapWork = _blockingSubject;
 
 			if (!runningIntegrations)
 			{
@@ -136,13 +141,12 @@ namespace Tests.Framework.Integration
 			{
 				try
 				{
-					var seeder = new Seeder(this.Port);
-					seeder.SeedNode();
+					this._blockingSubject.OnNext(handle);
 					this.Started = true;
 				}
 				finally
 				{
-					handle.Set();
+					//handle.Set();
 				}
 			}
 			else if (s.TryGetPortNumber(out port))

@@ -17,7 +17,6 @@ namespace Nest
 		FieldSelection<T> Fields { get; }
 	}
 
-
 	[JsonObject(MemberSerialization.OptIn)]
 	public class GetResponse<T> : BaseResponse, IGetResponse<T> where T : class
 	{
