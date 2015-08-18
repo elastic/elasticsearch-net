@@ -36,6 +36,7 @@ namespace Elasticsearch.Net.Connection
 			this.ReturnConnectionStatus<TReturn>(requestData);
 
 		protected ElasticsearchResponse<TReturn> ReturnConnectionStatus<TReturn>(RequestData requestData, byte[] fixedResult = null)
+			where TReturn : class
 		{
 			var request = this.CreateHttpWebRequest(requestData);
 			var method = request.Method;

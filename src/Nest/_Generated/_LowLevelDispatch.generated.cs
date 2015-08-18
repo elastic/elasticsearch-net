@@ -16,7 +16,7 @@ namespace Nest
 	///<summary>This dispatches highlevel requests into the proper lowlevel client overload method</summary>
 	internal partial class LowLevelDispatch
 	{
-		internal ElasticsearchResponse<T> AbortBenchmarkDispatch<T>(ElasticsearchPathInfo<AbortBenchmarkRequestParameters> p )
+		internal ElasticsearchResponse<T> AbortBenchmarkDispatch<T>(ElasticsearchPathInfo<AbortBenchmarkRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -28,7 +28,7 @@ namespace Nest
 			throw InvalidDispatch("AbortBenchmark", p, new [] { POST }, "/_bench/abort/{name}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> AbortBenchmarkDispatchAsync<T>(ElasticsearchPathInfo<AbortBenchmarkRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> AbortBenchmarkDispatchAsync<T>(ElasticsearchPathInfo<AbortBenchmarkRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -40,7 +40,7 @@ namespace Nest
 			throw InvalidDispatch("AbortBenchmark", p, new [] { POST }, "/_bench/abort/{name}");
 		}
 		
-		internal ElasticsearchResponse<T> BulkDispatch<T>(ElasticsearchPathInfo<BulkRequestParameters> p , object body)
+		internal ElasticsearchResponse<T> BulkDispatch<T>(ElasticsearchPathInfo<BulkRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -58,7 +58,7 @@ namespace Nest
 			throw InvalidDispatch("Bulk", p, new [] { POST, PUT }, "/_bulk", "/{index}/_bulk", "/{index}/{type}/_bulk");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> BulkDispatchAsync<T>(ElasticsearchPathInfo<BulkRequestParameters> p , object body)
+		internal Task<ElasticsearchResponse<T>> BulkDispatchAsync<T>(ElasticsearchPathInfo<BulkRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -76,7 +76,7 @@ namespace Nest
 			throw InvalidDispatch("Bulk", p, new [] { POST, PUT }, "/_bulk", "/{index}/_bulk", "/{index}/{type}/_bulk");
 		}
 		
-		internal ElasticsearchResponse<T> CatAliasesDispatch<T>(ElasticsearchPathInfo<CatAliasesRequestParameters> p )
+		internal ElasticsearchResponse<T> CatAliasesDispatch<T>(ElasticsearchPathInfo<CatAliasesRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -88,7 +88,7 @@ namespace Nest
 			throw InvalidDispatch("CatAliases", p, new [] { GET }, "/_cat/aliases", "/_cat/aliases/{name}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> CatAliasesDispatchAsync<T>(ElasticsearchPathInfo<CatAliasesRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> CatAliasesDispatchAsync<T>(ElasticsearchPathInfo<CatAliasesRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -100,7 +100,7 @@ namespace Nest
 			throw InvalidDispatch("CatAliases", p, new [] { GET }, "/_cat/aliases", "/_cat/aliases/{name}");
 		}
 		
-		internal ElasticsearchResponse<T> CatAllocationDispatch<T>(ElasticsearchPathInfo<CatAllocationRequestParameters> p )
+		internal ElasticsearchResponse<T> CatAllocationDispatch<T>(ElasticsearchPathInfo<CatAllocationRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -112,7 +112,7 @@ namespace Nest
 			throw InvalidDispatch("CatAllocation", p, new [] { GET }, "/_cat/allocation", "/_cat/allocation/{node_id}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> CatAllocationDispatchAsync<T>(ElasticsearchPathInfo<CatAllocationRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> CatAllocationDispatchAsync<T>(ElasticsearchPathInfo<CatAllocationRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -124,7 +124,7 @@ namespace Nest
 			throw InvalidDispatch("CatAllocation", p, new [] { GET }, "/_cat/allocation", "/_cat/allocation/{node_id}");
 		}
 		
-		internal ElasticsearchResponse<T> CatCountDispatch<T>(ElasticsearchPathInfo<CatCountRequestParameters> p )
+		internal ElasticsearchResponse<T> CatCountDispatch<T>(ElasticsearchPathInfo<CatCountRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -136,7 +136,7 @@ namespace Nest
 			throw InvalidDispatch("CatCount", p, new [] { GET }, "/_cat/count", "/_cat/count/{index}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> CatCountDispatchAsync<T>(ElasticsearchPathInfo<CatCountRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> CatCountDispatchAsync<T>(ElasticsearchPathInfo<CatCountRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -148,7 +148,7 @@ namespace Nest
 			throw InvalidDispatch("CatCount", p, new [] { GET }, "/_cat/count", "/_cat/count/{index}");
 		}
 		
-		internal ElasticsearchResponse<T> CatFielddataDispatch<T>(ElasticsearchPathInfo<CatFielddataRequestParameters> p )
+		internal ElasticsearchResponse<T> CatFielddataDispatch<T>(ElasticsearchPathInfo<CatFielddataRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -159,7 +159,7 @@ namespace Nest
 			throw InvalidDispatch("CatFielddata", p, new [] { GET }, "/_cat/fielddata");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> CatFielddataDispatchAsync<T>(ElasticsearchPathInfo<CatFielddataRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> CatFielddataDispatchAsync<T>(ElasticsearchPathInfo<CatFielddataRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -170,7 +170,7 @@ namespace Nest
 			throw InvalidDispatch("CatFielddata", p, new [] { GET }, "/_cat/fielddata");
 		}
 		
-		internal ElasticsearchResponse<T> CatHealthDispatch<T>(ElasticsearchPathInfo<CatHealthRequestParameters> p )
+		internal ElasticsearchResponse<T> CatHealthDispatch<T>(ElasticsearchPathInfo<CatHealthRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -181,7 +181,7 @@ namespace Nest
 			throw InvalidDispatch("CatHealth", p, new [] { GET }, "/_cat/health");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> CatHealthDispatchAsync<T>(ElasticsearchPathInfo<CatHealthRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> CatHealthDispatchAsync<T>(ElasticsearchPathInfo<CatHealthRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -192,7 +192,7 @@ namespace Nest
 			throw InvalidDispatch("CatHealth", p, new [] { GET }, "/_cat/health");
 		}
 		
-		internal ElasticsearchResponse<T> CatHelpDispatch<T>(ElasticsearchPathInfo<CatHelpRequestParameters> p )
+		internal ElasticsearchResponse<T> CatHelpDispatch<T>(ElasticsearchPathInfo<CatHelpRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -203,7 +203,7 @@ namespace Nest
 			throw InvalidDispatch("CatHelp", p, new [] { GET }, "/_cat");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> CatHelpDispatchAsync<T>(ElasticsearchPathInfo<CatHelpRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> CatHelpDispatchAsync<T>(ElasticsearchPathInfo<CatHelpRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -214,7 +214,7 @@ namespace Nest
 			throw InvalidDispatch("CatHelp", p, new [] { GET }, "/_cat");
 		}
 		
-		internal ElasticsearchResponse<T> CatIndicesDispatch<T>(ElasticsearchPathInfo<CatIndicesRequestParameters> p )
+		internal ElasticsearchResponse<T> CatIndicesDispatch<T>(ElasticsearchPathInfo<CatIndicesRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -226,7 +226,7 @@ namespace Nest
 			throw InvalidDispatch("CatIndices", p, new [] { GET }, "/_cat/indices", "/_cat/indices/{index}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> CatIndicesDispatchAsync<T>(ElasticsearchPathInfo<CatIndicesRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> CatIndicesDispatchAsync<T>(ElasticsearchPathInfo<CatIndicesRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -238,7 +238,7 @@ namespace Nest
 			throw InvalidDispatch("CatIndices", p, new [] { GET }, "/_cat/indices", "/_cat/indices/{index}");
 		}
 		
-		internal ElasticsearchResponse<T> CatMasterDispatch<T>(ElasticsearchPathInfo<CatMasterRequestParameters> p )
+		internal ElasticsearchResponse<T> CatMasterDispatch<T>(ElasticsearchPathInfo<CatMasterRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -249,7 +249,7 @@ namespace Nest
 			throw InvalidDispatch("CatMaster", p, new [] { GET }, "/_cat/master");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> CatMasterDispatchAsync<T>(ElasticsearchPathInfo<CatMasterRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> CatMasterDispatchAsync<T>(ElasticsearchPathInfo<CatMasterRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -260,7 +260,7 @@ namespace Nest
 			throw InvalidDispatch("CatMaster", p, new [] { GET }, "/_cat/master");
 		}
 		
-		internal ElasticsearchResponse<T> CatNodesDispatch<T>(ElasticsearchPathInfo<CatNodesRequestParameters> p )
+		internal ElasticsearchResponse<T> CatNodesDispatch<T>(ElasticsearchPathInfo<CatNodesRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -271,7 +271,7 @@ namespace Nest
 			throw InvalidDispatch("CatNodes", p, new [] { GET }, "/_cat/nodes");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> CatNodesDispatchAsync<T>(ElasticsearchPathInfo<CatNodesRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> CatNodesDispatchAsync<T>(ElasticsearchPathInfo<CatNodesRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -282,7 +282,7 @@ namespace Nest
 			throw InvalidDispatch("CatNodes", p, new [] { GET }, "/_cat/nodes");
 		}
 		
-		internal ElasticsearchResponse<T> CatPendingTasksDispatch<T>(ElasticsearchPathInfo<CatPendingTasksRequestParameters> p )
+		internal ElasticsearchResponse<T> CatPendingTasksDispatch<T>(ElasticsearchPathInfo<CatPendingTasksRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -293,7 +293,7 @@ namespace Nest
 			throw InvalidDispatch("CatPendingTasks", p, new [] { GET }, "/_cat/pending_tasks");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> CatPendingTasksDispatchAsync<T>(ElasticsearchPathInfo<CatPendingTasksRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> CatPendingTasksDispatchAsync<T>(ElasticsearchPathInfo<CatPendingTasksRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -304,7 +304,7 @@ namespace Nest
 			throw InvalidDispatch("CatPendingTasks", p, new [] { GET }, "/_cat/pending_tasks");
 		}
 		
-		internal ElasticsearchResponse<T> CatPluginsDispatch<T>(ElasticsearchPathInfo<CatPluginsRequestParameters> p )
+		internal ElasticsearchResponse<T> CatPluginsDispatch<T>(ElasticsearchPathInfo<CatPluginsRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -315,7 +315,7 @@ namespace Nest
 			throw InvalidDispatch("CatPlugins", p, new [] { GET }, "/_cat/plugins");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> CatPluginsDispatchAsync<T>(ElasticsearchPathInfo<CatPluginsRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> CatPluginsDispatchAsync<T>(ElasticsearchPathInfo<CatPluginsRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -326,7 +326,7 @@ namespace Nest
 			throw InvalidDispatch("CatPlugins", p, new [] { GET }, "/_cat/plugins");
 		}
 		
-		internal ElasticsearchResponse<T> CatRecoveryDispatch<T>(ElasticsearchPathInfo<CatRecoveryRequestParameters> p )
+		internal ElasticsearchResponse<T> CatRecoveryDispatch<T>(ElasticsearchPathInfo<CatRecoveryRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -338,7 +338,7 @@ namespace Nest
 			throw InvalidDispatch("CatRecovery", p, new [] { GET }, "/_cat/recovery", "/_cat/recovery/{index}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> CatRecoveryDispatchAsync<T>(ElasticsearchPathInfo<CatRecoveryRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> CatRecoveryDispatchAsync<T>(ElasticsearchPathInfo<CatRecoveryRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -350,7 +350,7 @@ namespace Nest
 			throw InvalidDispatch("CatRecovery", p, new [] { GET }, "/_cat/recovery", "/_cat/recovery/{index}");
 		}
 		
-		internal ElasticsearchResponse<T> CatSegmentsDispatch<T>(ElasticsearchPathInfo<CatSegmentsRequestParameters> p )
+		internal ElasticsearchResponse<T> CatSegmentsDispatch<T>(ElasticsearchPathInfo<CatSegmentsRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -362,7 +362,7 @@ namespace Nest
 			throw InvalidDispatch("CatSegments", p, new [] { GET }, "/_cat/segments", "/_cat/segments/{index}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> CatSegmentsDispatchAsync<T>(ElasticsearchPathInfo<CatSegmentsRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> CatSegmentsDispatchAsync<T>(ElasticsearchPathInfo<CatSegmentsRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -374,7 +374,7 @@ namespace Nest
 			throw InvalidDispatch("CatSegments", p, new [] { GET }, "/_cat/segments", "/_cat/segments/{index}");
 		}
 		
-		internal ElasticsearchResponse<T> CatShardsDispatch<T>(ElasticsearchPathInfo<CatShardsRequestParameters> p )
+		internal ElasticsearchResponse<T> CatShardsDispatch<T>(ElasticsearchPathInfo<CatShardsRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -386,7 +386,7 @@ namespace Nest
 			throw InvalidDispatch("CatShards", p, new [] { GET }, "/_cat/shards", "/_cat/shards/{index}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> CatShardsDispatchAsync<T>(ElasticsearchPathInfo<CatShardsRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> CatShardsDispatchAsync<T>(ElasticsearchPathInfo<CatShardsRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -398,7 +398,7 @@ namespace Nest
 			throw InvalidDispatch("CatShards", p, new [] { GET }, "/_cat/shards", "/_cat/shards/{index}");
 		}
 		
-		internal ElasticsearchResponse<T> CatThreadPoolDispatch<T>(ElasticsearchPathInfo<CatThreadPoolRequestParameters> p )
+		internal ElasticsearchResponse<T> CatThreadPoolDispatch<T>(ElasticsearchPathInfo<CatThreadPoolRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -409,7 +409,7 @@ namespace Nest
 			throw InvalidDispatch("CatThreadPool", p, new [] { GET }, "/_cat/thread_pool");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> CatThreadPoolDispatchAsync<T>(ElasticsearchPathInfo<CatThreadPoolRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> CatThreadPoolDispatchAsync<T>(ElasticsearchPathInfo<CatThreadPoolRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -420,7 +420,7 @@ namespace Nest
 			throw InvalidDispatch("CatThreadPool", p, new [] { GET }, "/_cat/thread_pool");
 		}
 		
-		internal ElasticsearchResponse<T> ClearScrollDispatch<T>(ElasticsearchPathInfo<ClearScrollRequestParameters> p , object body)
+		internal ElasticsearchResponse<T> ClearScrollDispatch<T>(ElasticsearchPathInfo<ClearScrollRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -432,7 +432,7 @@ namespace Nest
 			throw InvalidDispatch("ClearScroll", p, new [] { DELETE }, "/_search/scroll/{scroll_id}", "/_search/scroll");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> ClearScrollDispatchAsync<T>(ElasticsearchPathInfo<ClearScrollRequestParameters> p , object body)
+		internal Task<ElasticsearchResponse<T>> ClearScrollDispatchAsync<T>(ElasticsearchPathInfo<ClearScrollRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -444,7 +444,7 @@ namespace Nest
 			throw InvalidDispatch("ClearScroll", p, new [] { DELETE }, "/_search/scroll/{scroll_id}", "/_search/scroll");
 		}
 		
-		internal ElasticsearchResponse<T> ClusterGetSettingsDispatch<T>(ElasticsearchPathInfo<ClusterGetSettingsRequestParameters> p )
+		internal ElasticsearchResponse<T> ClusterGetSettingsDispatch<T>(ElasticsearchPathInfo<ClusterGetSettingsRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -455,7 +455,7 @@ namespace Nest
 			throw InvalidDispatch("ClusterGetSettings", p, new [] { GET }, "/_cluster/settings");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> ClusterGetSettingsDispatchAsync<T>(ElasticsearchPathInfo<ClusterGetSettingsRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> ClusterGetSettingsDispatchAsync<T>(ElasticsearchPathInfo<ClusterGetSettingsRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -466,7 +466,7 @@ namespace Nest
 			throw InvalidDispatch("ClusterGetSettings", p, new [] { GET }, "/_cluster/settings");
 		}
 		
-		internal ElasticsearchResponse<T> ClusterHealthDispatch<T>(ElasticsearchPathInfo<ClusterHealthRequestParameters> p )
+		internal ElasticsearchResponse<T> ClusterHealthDispatch<T>(ElasticsearchPathInfo<ClusterHealthRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -478,7 +478,7 @@ namespace Nest
 			throw InvalidDispatch("ClusterHealth", p, new [] { GET }, "/_cluster/health", "/_cluster/health/{index}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> ClusterHealthDispatchAsync<T>(ElasticsearchPathInfo<ClusterHealthRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> ClusterHealthDispatchAsync<T>(ElasticsearchPathInfo<ClusterHealthRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -490,7 +490,7 @@ namespace Nest
 			throw InvalidDispatch("ClusterHealth", p, new [] { GET }, "/_cluster/health", "/_cluster/health/{index}");
 		}
 		
-		internal ElasticsearchResponse<T> ClusterPendingTasksDispatch<T>(ElasticsearchPathInfo<ClusterPendingTasksRequestParameters> p )
+		internal ElasticsearchResponse<T> ClusterPendingTasksDispatch<T>(ElasticsearchPathInfo<ClusterPendingTasksRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -501,7 +501,7 @@ namespace Nest
 			throw InvalidDispatch("ClusterPendingTasks", p, new [] { GET }, "/_cluster/pending_tasks");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> ClusterPendingTasksDispatchAsync<T>(ElasticsearchPathInfo<ClusterPendingTasksRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> ClusterPendingTasksDispatchAsync<T>(ElasticsearchPathInfo<ClusterPendingTasksRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -512,7 +512,7 @@ namespace Nest
 			throw InvalidDispatch("ClusterPendingTasks", p, new [] { GET }, "/_cluster/pending_tasks");
 		}
 		
-		internal ElasticsearchResponse<T> ClusterPutSettingsDispatch<T>(ElasticsearchPathInfo<ClusterSettingsRequestParameters> p , object body)
+		internal ElasticsearchResponse<T> ClusterPutSettingsDispatch<T>(ElasticsearchPathInfo<ClusterSettingsRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -523,7 +523,7 @@ namespace Nest
 			throw InvalidDispatch("ClusterPutSettings", p, new [] { PUT }, "/_cluster/settings");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> ClusterPutSettingsDispatchAsync<T>(ElasticsearchPathInfo<ClusterSettingsRequestParameters> p , object body)
+		internal Task<ElasticsearchResponse<T>> ClusterPutSettingsDispatchAsync<T>(ElasticsearchPathInfo<ClusterSettingsRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -534,7 +534,7 @@ namespace Nest
 			throw InvalidDispatch("ClusterPutSettings", p, new [] { PUT }, "/_cluster/settings");
 		}
 		
-		internal ElasticsearchResponse<T> ClusterRerouteDispatch<T>(ElasticsearchPathInfo<ClusterRerouteRequestParameters> p , object body)
+		internal ElasticsearchResponse<T> ClusterRerouteDispatch<T>(ElasticsearchPathInfo<ClusterRerouteRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -545,7 +545,7 @@ namespace Nest
 			throw InvalidDispatch("ClusterReroute", p, new [] { POST }, "/_cluster/reroute");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> ClusterRerouteDispatchAsync<T>(ElasticsearchPathInfo<ClusterRerouteRequestParameters> p , object body)
+		internal Task<ElasticsearchResponse<T>> ClusterRerouteDispatchAsync<T>(ElasticsearchPathInfo<ClusterRerouteRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -556,7 +556,7 @@ namespace Nest
 			throw InvalidDispatch("ClusterReroute", p, new [] { POST }, "/_cluster/reroute");
 		}
 		
-		internal ElasticsearchResponse<T> ClusterStateDispatch<T>(ElasticsearchPathInfo<ClusterStateRequestParameters> p )
+		internal ElasticsearchResponse<T> ClusterStateDispatch<T>(ElasticsearchPathInfo<ClusterStateRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -569,7 +569,7 @@ namespace Nest
 			throw InvalidDispatch("ClusterState", p, new [] { GET }, "/_cluster/state", "/_cluster/state/{metric}", "/_cluster/state/{metric}/{index}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> ClusterStateDispatchAsync<T>(ElasticsearchPathInfo<ClusterStateRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> ClusterStateDispatchAsync<T>(ElasticsearchPathInfo<ClusterStateRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -582,7 +582,7 @@ namespace Nest
 			throw InvalidDispatch("ClusterState", p, new [] { GET }, "/_cluster/state", "/_cluster/state/{metric}", "/_cluster/state/{metric}/{index}");
 		}
 		
-		internal ElasticsearchResponse<T> ClusterStatsDispatch<T>(ElasticsearchPathInfo<ClusterStatsRequestParameters> p )
+		internal ElasticsearchResponse<T> ClusterStatsDispatch<T>(ElasticsearchPathInfo<ClusterStatsRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -594,7 +594,7 @@ namespace Nest
 			throw InvalidDispatch("ClusterStats", p, new [] { GET }, "/_cluster/stats", "/_cluster/stats/nodes/{node_id}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> ClusterStatsDispatchAsync<T>(ElasticsearchPathInfo<ClusterStatsRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> ClusterStatsDispatchAsync<T>(ElasticsearchPathInfo<ClusterStatsRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -606,7 +606,7 @@ namespace Nest
 			throw InvalidDispatch("ClusterStats", p, new [] { GET }, "/_cluster/stats", "/_cluster/stats/nodes/{node_id}");
 		}
 		
-		internal ElasticsearchResponse<T> CountDispatch<T>(ElasticsearchPathInfo<CountRequestParameters> p , object body)
+		internal ElasticsearchResponse<T> CountDispatch<T>(ElasticsearchPathInfo<CountRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -624,7 +624,7 @@ namespace Nest
 			throw InvalidDispatch("Count", p, new [] { POST, GET }, "/_count", "/{index}/_count", "/{index}/{type}/_count");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> CountDispatchAsync<T>(ElasticsearchPathInfo<CountRequestParameters> p , object body)
+		internal Task<ElasticsearchResponse<T>> CountDispatchAsync<T>(ElasticsearchPathInfo<CountRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -642,7 +642,7 @@ namespace Nest
 			throw InvalidDispatch("Count", p, new [] { POST, GET }, "/_count", "/{index}/_count", "/{index}/{type}/_count");
 		}
 		
-		internal ElasticsearchResponse<T> CountPercolateDispatch<T>(ElasticsearchPathInfo<PercolateCountRequestParameters> p , object body)
+		internal ElasticsearchResponse<T> CountPercolateDispatch<T>(ElasticsearchPathInfo<PercolateCountRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -660,7 +660,7 @@ namespace Nest
 			throw InvalidDispatch("CountPercolate", p, new [] { GET, POST }, "/{index}/{type}/_percolate/count", "/{index}/{type}/{id}/_percolate/count");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> CountPercolateDispatchAsync<T>(ElasticsearchPathInfo<PercolateCountRequestParameters> p , object body)
+		internal Task<ElasticsearchResponse<T>> CountPercolateDispatchAsync<T>(ElasticsearchPathInfo<PercolateCountRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -678,7 +678,7 @@ namespace Nest
 			throw InvalidDispatch("CountPercolate", p, new [] { GET, POST }, "/{index}/{type}/_percolate/count", "/{index}/{type}/{id}/_percolate/count");
 		}
 		
-		internal ElasticsearchResponse<T> DeleteDispatch<T>(ElasticsearchPathInfo<DeleteRequestParameters> p )
+		internal ElasticsearchResponse<T> DeleteDispatch<T>(ElasticsearchPathInfo<DeleteRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -690,7 +690,7 @@ namespace Nest
 			throw InvalidDispatch("Delete", p, new [] { DELETE }, "/{index}/{type}/{id}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> DeleteDispatchAsync<T>(ElasticsearchPathInfo<DeleteRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> DeleteDispatchAsync<T>(ElasticsearchPathInfo<DeleteRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -702,7 +702,7 @@ namespace Nest
 			throw InvalidDispatch("Delete", p, new [] { DELETE }, "/{index}/{type}/{id}");
 		}
 		
-		internal ElasticsearchResponse<T> DeleteByQueryDispatch<T>(ElasticsearchPathInfo<DeleteByQueryRequestParameters> p , object body)
+		internal ElasticsearchResponse<T> DeleteByQueryDispatch<T>(ElasticsearchPathInfo<DeleteByQueryRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -715,7 +715,7 @@ namespace Nest
 			throw InvalidDispatch("DeleteByQuery", p, new [] { DELETE }, "/{index}/_query", "/{index}/{type}/_query");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> DeleteByQueryDispatchAsync<T>(ElasticsearchPathInfo<DeleteByQueryRequestParameters> p , object body)
+		internal Task<ElasticsearchResponse<T>> DeleteByQueryDispatchAsync<T>(ElasticsearchPathInfo<DeleteByQueryRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -728,7 +728,7 @@ namespace Nest
 			throw InvalidDispatch("DeleteByQuery", p, new [] { DELETE }, "/{index}/_query", "/{index}/{type}/_query");
 		}
 		
-		internal ElasticsearchResponse<T> DeleteScriptDispatch<T>(ElasticsearchPathInfo<DeleteScriptRequestParameters> p )
+		internal ElasticsearchResponse<T> DeleteScriptDispatch<T>(ElasticsearchPathInfo<DeleteScriptRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -740,7 +740,7 @@ namespace Nest
 			throw InvalidDispatch("DeleteScript", p, new [] { DELETE }, "/_scripts/{lang}/{id}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> DeleteScriptDispatchAsync<T>(ElasticsearchPathInfo<DeleteScriptRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> DeleteScriptDispatchAsync<T>(ElasticsearchPathInfo<DeleteScriptRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -752,7 +752,7 @@ namespace Nest
 			throw InvalidDispatch("DeleteScript", p, new [] { DELETE }, "/_scripts/{lang}/{id}");
 		}
 		
-		internal ElasticsearchResponse<T> DeleteTemplateDispatch<T>(ElasticsearchPathInfo<DeleteTemplateRequestParameters> p )
+		internal ElasticsearchResponse<T> DeleteTemplateDispatch<T>(ElasticsearchPathInfo<DeleteTemplateRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -764,7 +764,7 @@ namespace Nest
 			throw InvalidDispatch("DeleteTemplate", p, new [] { DELETE }, "/_search/template/{id}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> DeleteTemplateDispatchAsync<T>(ElasticsearchPathInfo<DeleteTemplateRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> DeleteTemplateDispatchAsync<T>(ElasticsearchPathInfo<DeleteTemplateRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -776,7 +776,7 @@ namespace Nest
 			throw InvalidDispatch("DeleteTemplate", p, new [] { DELETE }, "/_search/template/{id}");
 		}
 		
-		internal ElasticsearchResponse<T> ExistsDispatch<T>(ElasticsearchPathInfo<DocumentExistsRequestParameters> p )
+		internal ElasticsearchResponse<T> ExistsDispatch<T>(ElasticsearchPathInfo<DocumentExistsRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -788,7 +788,7 @@ namespace Nest
 			throw InvalidDispatch("Exists", p, new [] { HEAD }, "/{index}/{type}/{id}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> ExistsDispatchAsync<T>(ElasticsearchPathInfo<DocumentExistsRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> ExistsDispatchAsync<T>(ElasticsearchPathInfo<DocumentExistsRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -800,7 +800,7 @@ namespace Nest
 			throw InvalidDispatch("Exists", p, new [] { HEAD }, "/{index}/{type}/{id}");
 		}
 		
-		internal ElasticsearchResponse<T> ExplainDispatch<T>(ElasticsearchPathInfo<ExplainRequestParameters> p , object body)
+		internal ElasticsearchResponse<T> ExplainDispatch<T>(ElasticsearchPathInfo<ExplainRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -816,7 +816,7 @@ namespace Nest
 			throw InvalidDispatch("Explain", p, new [] { GET, POST }, "/{index}/{type}/{id}/_explain");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> ExplainDispatchAsync<T>(ElasticsearchPathInfo<ExplainRequestParameters> p , object body)
+		internal Task<ElasticsearchResponse<T>> ExplainDispatchAsync<T>(ElasticsearchPathInfo<ExplainRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -832,7 +832,7 @@ namespace Nest
 			throw InvalidDispatch("Explain", p, new [] { GET, POST }, "/{index}/{type}/{id}/_explain");
 		}
 		
-		internal ElasticsearchResponse<T> FieldStatsDispatch<T>(ElasticsearchPathInfo<FieldStatsRequestParameters> p )
+		internal ElasticsearchResponse<T> FieldStatsDispatch<T>(ElasticsearchPathInfo<FieldStatsRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -848,7 +848,7 @@ namespace Nest
 			throw InvalidDispatch("FieldStats", p, new [] { GET, POST }, "/_field_stats", "/{index}/_field_stats");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> FieldStatsDispatchAsync<T>(ElasticsearchPathInfo<FieldStatsRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> FieldStatsDispatchAsync<T>(ElasticsearchPathInfo<FieldStatsRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -864,7 +864,7 @@ namespace Nest
 			throw InvalidDispatch("FieldStats", p, new [] { GET, POST }, "/_field_stats", "/{index}/_field_stats");
 		}
 		
-		internal ElasticsearchResponse<T> GetDispatch<T>(ElasticsearchPathInfo<GetRequestParameters> p )
+		internal ElasticsearchResponse<T> GetDispatch<T>(ElasticsearchPathInfo<GetRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -876,7 +876,7 @@ namespace Nest
 			throw InvalidDispatch("Get", p, new [] { GET }, "/{index}/{type}/{id}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> GetDispatchAsync<T>(ElasticsearchPathInfo<GetRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> GetDispatchAsync<T>(ElasticsearchPathInfo<GetRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -888,7 +888,7 @@ namespace Nest
 			throw InvalidDispatch("Get", p, new [] { GET }, "/{index}/{type}/{id}");
 		}
 		
-		internal ElasticsearchResponse<T> GetScriptDispatch<T>(ElasticsearchPathInfo<GetScriptRequestParameters> p )
+		internal ElasticsearchResponse<T> GetScriptDispatch<T>(ElasticsearchPathInfo<GetScriptRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -900,7 +900,7 @@ namespace Nest
 			throw InvalidDispatch("GetScript", p, new [] { GET }, "/_scripts/{lang}/{id}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> GetScriptDispatchAsync<T>(ElasticsearchPathInfo<GetScriptRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> GetScriptDispatchAsync<T>(ElasticsearchPathInfo<GetScriptRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -912,7 +912,7 @@ namespace Nest
 			throw InvalidDispatch("GetScript", p, new [] { GET }, "/_scripts/{lang}/{id}");
 		}
 		
-		internal ElasticsearchResponse<T> GetSourceDispatch<T>(ElasticsearchPathInfo<SourceRequestParameters> p )
+		internal ElasticsearchResponse<T> GetSourceDispatch<T>(ElasticsearchPathInfo<SourceRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -924,7 +924,7 @@ namespace Nest
 			throw InvalidDispatch("GetSource", p, new [] { GET }, "/{index}/{type}/{id}/_source");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> GetSourceDispatchAsync<T>(ElasticsearchPathInfo<SourceRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> GetSourceDispatchAsync<T>(ElasticsearchPathInfo<SourceRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -936,7 +936,7 @@ namespace Nest
 			throw InvalidDispatch("GetSource", p, new [] { GET }, "/{index}/{type}/{id}/_source");
 		}
 		
-		internal ElasticsearchResponse<T> GetTemplateDispatch<T>(ElasticsearchPathInfo<GetTemplateRequestParameters> p )
+		internal ElasticsearchResponse<T> GetTemplateDispatch<T>(ElasticsearchPathInfo<GetTemplateRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -948,7 +948,7 @@ namespace Nest
 			throw InvalidDispatch("GetTemplate", p, new [] { GET }, "/_search/template/{id}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> GetTemplateDispatchAsync<T>(ElasticsearchPathInfo<GetTemplateRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> GetTemplateDispatchAsync<T>(ElasticsearchPathInfo<GetTemplateRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -960,7 +960,7 @@ namespace Nest
 			throw InvalidDispatch("GetTemplate", p, new [] { GET }, "/_search/template/{id}");
 		}
 		
-		internal ElasticsearchResponse<T> IndexDispatch<T>(ElasticsearchPathInfo<IndexRequestParameters> p , object body)
+		internal ElasticsearchResponse<T> IndexDispatch<T>(ElasticsearchPathInfo<IndexRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -978,7 +978,7 @@ namespace Nest
 			throw InvalidDispatch("Index", p, new [] { POST, PUT }, "/{index}/{type}", "/{index}/{type}/{id}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndexDispatchAsync<T>(ElasticsearchPathInfo<IndexRequestParameters> p , object body)
+		internal Task<ElasticsearchResponse<T>> IndexDispatchAsync<T>(ElasticsearchPathInfo<IndexRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -996,7 +996,7 @@ namespace Nest
 			throw InvalidDispatch("Index", p, new [] { POST, PUT }, "/{index}/{type}", "/{index}/{type}/{id}");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesAnalyzeDispatch<T>(ElasticsearchPathInfo<AnalyzeRequestParameters> p , object body)
+		internal ElasticsearchResponse<T> IndicesAnalyzeDispatch<T>(ElasticsearchPathInfo<AnalyzeRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1012,7 +1012,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesAnalyze", p, new [] { GET, POST }, "/_analyze", "/{index}/_analyze");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesAnalyzeDispatchAsync<T>(ElasticsearchPathInfo<AnalyzeRequestParameters> p , object body)
+		internal Task<ElasticsearchResponse<T>> IndicesAnalyzeDispatchAsync<T>(ElasticsearchPathInfo<AnalyzeRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1028,7 +1028,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesAnalyze", p, new [] { GET, POST }, "/_analyze", "/{index}/_analyze");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesClearCacheDispatch<T>(ElasticsearchPathInfo<ClearCacheRequestParameters> p )
+		internal ElasticsearchResponse<T> IndicesClearCacheDispatch<T>(ElasticsearchPathInfo<ClearCacheRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1044,7 +1044,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesClearCache", p, new [] { POST, GET }, "/_cache/clear", "/{index}/_cache/clear");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesClearCacheDispatchAsync<T>(ElasticsearchPathInfo<ClearCacheRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> IndicesClearCacheDispatchAsync<T>(ElasticsearchPathInfo<ClearCacheRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1060,7 +1060,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesClearCache", p, new [] { POST, GET }, "/_cache/clear", "/{index}/_cache/clear");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesCloseDispatch<T>(ElasticsearchPathInfo<CloseIndexRequestParameters> p )
+		internal ElasticsearchResponse<T> IndicesCloseDispatch<T>(ElasticsearchPathInfo<CloseIndexRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1072,7 +1072,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesClose", p, new [] { POST }, "/{index}/_close");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesCloseDispatchAsync<T>(ElasticsearchPathInfo<CloseIndexRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> IndicesCloseDispatchAsync<T>(ElasticsearchPathInfo<CloseIndexRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1084,7 +1084,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesClose", p, new [] { POST }, "/{index}/_close");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesCreateDispatch<T>(ElasticsearchPathInfo<CreateIndexRequestParameters> p , object body)
+		internal ElasticsearchResponse<T> IndicesCreateDispatch<T>(ElasticsearchPathInfo<CreateIndexRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1100,7 +1100,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesCreate", p, new [] { PUT, POST }, "/{index}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesCreateDispatchAsync<T>(ElasticsearchPathInfo<CreateIndexRequestParameters> p , object body)
+		internal Task<ElasticsearchResponse<T>> IndicesCreateDispatchAsync<T>(ElasticsearchPathInfo<CreateIndexRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1116,7 +1116,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesCreate", p, new [] { PUT, POST }, "/{index}");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesDeleteDispatch<T>(ElasticsearchPathInfo<DeleteIndexRequestParameters> p )
+		internal ElasticsearchResponse<T> IndicesDeleteDispatch<T>(ElasticsearchPathInfo<DeleteIndexRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1128,7 +1128,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesDelete", p, new [] { DELETE }, "/{index}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesDeleteDispatchAsync<T>(ElasticsearchPathInfo<DeleteIndexRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> IndicesDeleteDispatchAsync<T>(ElasticsearchPathInfo<DeleteIndexRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1140,7 +1140,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesDelete", p, new [] { DELETE }, "/{index}");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesDeleteAliasDispatch<T>(ElasticsearchPathInfo<DeleteAliasRequestParameters> p )
+		internal ElasticsearchResponse<T> IndicesDeleteAliasDispatch<T>(ElasticsearchPathInfo<DeleteAliasRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1152,7 +1152,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesDeleteAlias", p, new [] { DELETE }, "/{index}/_alias/{name}", "/{index}/_aliases/{name}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesDeleteAliasDispatchAsync<T>(ElasticsearchPathInfo<DeleteAliasRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> IndicesDeleteAliasDispatchAsync<T>(ElasticsearchPathInfo<DeleteAliasRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1164,7 +1164,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesDeleteAlias", p, new [] { DELETE }, "/{index}/_alias/{name}", "/{index}/_aliases/{name}");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesDeleteMappingDispatch<T>(ElasticsearchPathInfo<DeleteMappingRequestParameters> p )
+		internal ElasticsearchResponse<T> IndicesDeleteMappingDispatch<T>(ElasticsearchPathInfo<DeleteMappingRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1176,7 +1176,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesDeleteMapping", p, new [] { DELETE }, "/{index}/{type}/_mapping", "/{index}/{type}", "/{index}/_mapping/{type}", "/{index}/{type}/_mappings", "/{index}/_mappings/{type}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesDeleteMappingDispatchAsync<T>(ElasticsearchPathInfo<DeleteMappingRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> IndicesDeleteMappingDispatchAsync<T>(ElasticsearchPathInfo<DeleteMappingRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1188,7 +1188,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesDeleteMapping", p, new [] { DELETE }, "/{index}/{type}/_mapping", "/{index}/{type}", "/{index}/_mapping/{type}", "/{index}/{type}/_mappings", "/{index}/_mappings/{type}");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesDeleteTemplateDispatch<T>(ElasticsearchPathInfo<DeleteTemplateRequestParameters> p )
+		internal ElasticsearchResponse<T> IndicesDeleteTemplateDispatch<T>(ElasticsearchPathInfo<DeleteTemplateRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1200,7 +1200,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesDeleteTemplate", p, new [] { DELETE }, "/_template/{name}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesDeleteTemplateDispatchAsync<T>(ElasticsearchPathInfo<DeleteTemplateRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> IndicesDeleteTemplateDispatchAsync<T>(ElasticsearchPathInfo<DeleteTemplateRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1212,7 +1212,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesDeleteTemplate", p, new [] { DELETE }, "/_template/{name}");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesDeleteWarmerDispatch<T>(ElasticsearchPathInfo<DeleteWarmerRequestParameters> p )
+		internal ElasticsearchResponse<T> IndicesDeleteWarmerDispatch<T>(ElasticsearchPathInfo<DeleteWarmerRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1224,7 +1224,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesDeleteWarmer", p, new [] { DELETE }, "/{index}/_warmer/{name}", "/{index}/_warmers/{name}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesDeleteWarmerDispatchAsync<T>(ElasticsearchPathInfo<DeleteWarmerRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> IndicesDeleteWarmerDispatchAsync<T>(ElasticsearchPathInfo<DeleteWarmerRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1236,7 +1236,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesDeleteWarmer", p, new [] { DELETE }, "/{index}/_warmer/{name}", "/{index}/_warmers/{name}");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesExistsDispatch<T>(ElasticsearchPathInfo<IndexExistsRequestParameters> p )
+		internal ElasticsearchResponse<T> IndicesExistsDispatch<T>(ElasticsearchPathInfo<IndexExistsRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1248,7 +1248,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesExists", p, new [] { HEAD }, "/{index}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesExistsDispatchAsync<T>(ElasticsearchPathInfo<IndexExistsRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> IndicesExistsDispatchAsync<T>(ElasticsearchPathInfo<IndexExistsRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1260,7 +1260,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesExists", p, new [] { HEAD }, "/{index}");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesExistsAliasDispatch<T>(ElasticsearchPathInfo<AliasExistsRequestParameters> p )
+		internal ElasticsearchResponse<T> IndicesExistsAliasDispatch<T>(ElasticsearchPathInfo<AliasExistsRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1274,7 +1274,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesExistsAlias", p, new [] { HEAD }, "/_alias/{name}", "/{index}/_alias/{name}", "/{index}/_alias");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesExistsAliasDispatchAsync<T>(ElasticsearchPathInfo<AliasExistsRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> IndicesExistsAliasDispatchAsync<T>(ElasticsearchPathInfo<AliasExistsRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1288,7 +1288,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesExistsAlias", p, new [] { HEAD }, "/_alias/{name}", "/{index}/_alias/{name}", "/{index}/_alias");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesExistsTemplateDispatch<T>(ElasticsearchPathInfo<TemplateExistsRequestParameters> p )
+		internal ElasticsearchResponse<T> IndicesExistsTemplateDispatch<T>(ElasticsearchPathInfo<TemplateExistsRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1300,7 +1300,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesExistsTemplate", p, new [] { HEAD }, "/_template/{name}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesExistsTemplateDispatchAsync<T>(ElasticsearchPathInfo<TemplateExistsRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> IndicesExistsTemplateDispatchAsync<T>(ElasticsearchPathInfo<TemplateExistsRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1312,7 +1312,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesExistsTemplate", p, new [] { HEAD }, "/_template/{name}");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesExistsTypeDispatch<T>(ElasticsearchPathInfo<TypeExistsRequestParameters> p )
+		internal ElasticsearchResponse<T> IndicesExistsTypeDispatch<T>(ElasticsearchPathInfo<TypeExistsRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1324,7 +1324,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesExistsType", p, new [] { HEAD }, "/{index}/{type}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesExistsTypeDispatchAsync<T>(ElasticsearchPathInfo<TypeExistsRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> IndicesExistsTypeDispatchAsync<T>(ElasticsearchPathInfo<TypeExistsRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1336,7 +1336,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesExistsType", p, new [] { HEAD }, "/{index}/{type}");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesFlushDispatch<T>(ElasticsearchPathInfo<FlushRequestParameters> p )
+		internal ElasticsearchResponse<T> IndicesFlushDispatch<T>(ElasticsearchPathInfo<FlushRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1352,7 +1352,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesFlush", p, new [] { POST, GET }, "/_flush", "/{index}/_flush");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesFlushDispatchAsync<T>(ElasticsearchPathInfo<FlushRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> IndicesFlushDispatchAsync<T>(ElasticsearchPathInfo<FlushRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1368,7 +1368,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesFlush", p, new [] { POST, GET }, "/_flush", "/{index}/_flush");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesFlushSyncedDispatch<T>(ElasticsearchPathInfo<SyncedFlushRequestParameters> p )
+		internal ElasticsearchResponse<T> IndicesFlushSyncedDispatch<T>(ElasticsearchPathInfo<SyncedFlushRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1384,7 +1384,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesFlushSynced", p, new [] { POST, GET }, "/_flush/synced", "/{index}/_flush/synced");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesFlushSyncedDispatchAsync<T>(ElasticsearchPathInfo<SyncedFlushRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> IndicesFlushSyncedDispatchAsync<T>(ElasticsearchPathInfo<SyncedFlushRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1400,7 +1400,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesFlushSynced", p, new [] { POST, GET }, "/_flush/synced", "/{index}/_flush/synced");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesGetDispatch<T>(ElasticsearchPathInfo<GetIndexRequestParameters> p )
+		internal ElasticsearchResponse<T> IndicesGetDispatch<T>(ElasticsearchPathInfo<GetIndexRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1413,7 +1413,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesGet", p, new [] { GET }, "/{index}", "/{index}/{feature}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesGetDispatchAsync<T>(ElasticsearchPathInfo<GetIndexRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> IndicesGetDispatchAsync<T>(ElasticsearchPathInfo<GetIndexRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1426,7 +1426,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesGet", p, new [] { GET }, "/{index}", "/{index}/{feature}");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesGetAliasDispatch<T>(ElasticsearchPathInfo<GetAliasRequestParameters> p )
+		internal ElasticsearchResponse<T> IndicesGetAliasDispatch<T>(ElasticsearchPathInfo<GetAliasRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1440,7 +1440,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesGetAlias", p, new [] { GET }, "/_alias", "/_alias/{name}", "/{index}/_alias/{name}", "/{index}/_alias");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesGetAliasDispatchAsync<T>(ElasticsearchPathInfo<GetAliasRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> IndicesGetAliasDispatchAsync<T>(ElasticsearchPathInfo<GetAliasRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1454,7 +1454,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesGetAlias", p, new [] { GET }, "/_alias", "/_alias/{name}", "/{index}/_alias/{name}", "/{index}/_alias");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesGetAliasesDispatch<T>(ElasticsearchPathInfo<GetAliasesRequestParameters> p )
+		internal ElasticsearchResponse<T> IndicesGetAliasesDispatch<T>(ElasticsearchPathInfo<GetAliasesRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1468,7 +1468,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesGetAliases", p, new [] { GET }, "/_aliases", "/{index}/_aliases", "/{index}/_aliases/{name}", "/_aliases/{name}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesGetAliasesDispatchAsync<T>(ElasticsearchPathInfo<GetAliasesRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> IndicesGetAliasesDispatchAsync<T>(ElasticsearchPathInfo<GetAliasesRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1482,7 +1482,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesGetAliases", p, new [] { GET }, "/_aliases", "/{index}/_aliases", "/{index}/_aliases/{name}", "/_aliases/{name}");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesGetFieldMappingDispatch<T>(ElasticsearchPathInfo<GetFieldMappingRequestParameters> p )
+		internal ElasticsearchResponse<T> IndicesGetFieldMappingDispatch<T>(ElasticsearchPathInfo<GetFieldMappingRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1497,7 +1497,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesGetFieldMapping", p, new [] { GET }, "/_mapping/field/{field}", "/{index}/_mapping/field/{field}", "/_mapping/{type}/field/{field}", "/{index}/_mapping/{type}/field/{field}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesGetFieldMappingDispatchAsync<T>(ElasticsearchPathInfo<GetFieldMappingRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> IndicesGetFieldMappingDispatchAsync<T>(ElasticsearchPathInfo<GetFieldMappingRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1512,7 +1512,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesGetFieldMapping", p, new [] { GET }, "/_mapping/field/{field}", "/{index}/_mapping/field/{field}", "/_mapping/{type}/field/{field}", "/{index}/_mapping/{type}/field/{field}");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesGetMappingDispatch<T>(ElasticsearchPathInfo<GetMappingRequestParameters> p )
+		internal ElasticsearchResponse<T> IndicesGetMappingDispatch<T>(ElasticsearchPathInfo<GetMappingRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1526,7 +1526,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesGetMapping", p, new [] { GET }, "/_mapping", "/{index}/_mapping", "/_mapping/{type}", "/{index}/_mapping/{type}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesGetMappingDispatchAsync<T>(ElasticsearchPathInfo<GetMappingRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> IndicesGetMappingDispatchAsync<T>(ElasticsearchPathInfo<GetMappingRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1540,7 +1540,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesGetMapping", p, new [] { GET }, "/_mapping", "/{index}/_mapping", "/_mapping/{type}", "/{index}/_mapping/{type}");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesGetSettingsDispatch<T>(ElasticsearchPathInfo<GetIndexSettingsRequestParameters> p )
+		internal ElasticsearchResponse<T> IndicesGetSettingsDispatch<T>(ElasticsearchPathInfo<GetIndexSettingsRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1554,7 +1554,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesGetSettings", p, new [] { GET }, "/_settings", "/{index}/_settings", "/{index}/_settings/{name}", "/_settings/{name}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesGetSettingsDispatchAsync<T>(ElasticsearchPathInfo<GetIndexSettingsRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> IndicesGetSettingsDispatchAsync<T>(ElasticsearchPathInfo<GetIndexSettingsRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1568,7 +1568,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesGetSettings", p, new [] { GET }, "/_settings", "/{index}/_settings", "/{index}/_settings/{name}", "/_settings/{name}");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesGetTemplateDispatch<T>(ElasticsearchPathInfo<GetTemplateRequestParameters> p )
+		internal ElasticsearchResponse<T> IndicesGetTemplateDispatch<T>(ElasticsearchPathInfo<GetTemplateRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1580,7 +1580,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesGetTemplate", p, new [] { GET }, "/_template", "/_template/{name}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesGetTemplateDispatchAsync<T>(ElasticsearchPathInfo<GetTemplateRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> IndicesGetTemplateDispatchAsync<T>(ElasticsearchPathInfo<GetTemplateRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1592,7 +1592,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesGetTemplate", p, new [] { GET }, "/_template", "/_template/{name}");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesGetUpgradeDispatch<T>(ElasticsearchPathInfo<UpgradeStatusRequestParameters> p )
+		internal ElasticsearchResponse<T> IndicesGetUpgradeDispatch<T>(ElasticsearchPathInfo<UpgradeStatusRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1604,7 +1604,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesGetUpgrade", p, new [] { GET }, "/_upgrade", "/{index}/_upgrade");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesGetUpgradeDispatchAsync<T>(ElasticsearchPathInfo<UpgradeStatusRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> IndicesGetUpgradeDispatchAsync<T>(ElasticsearchPathInfo<UpgradeStatusRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1616,7 +1616,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesGetUpgrade", p, new [] { GET }, "/_upgrade", "/{index}/_upgrade");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesGetWarmerDispatch<T>(ElasticsearchPathInfo<GetWarmerRequestParameters> p )
+		internal ElasticsearchResponse<T> IndicesGetWarmerDispatch<T>(ElasticsearchPathInfo<GetWarmerRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1631,7 +1631,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesGetWarmer", p, new [] { GET }, "/_warmer", "/{index}/_warmer", "/{index}/_warmer/{name}", "/_warmer/{name}", "/{index}/{type}/_warmer/{name}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesGetWarmerDispatchAsync<T>(ElasticsearchPathInfo<GetWarmerRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> IndicesGetWarmerDispatchAsync<T>(ElasticsearchPathInfo<GetWarmerRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1646,7 +1646,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesGetWarmer", p, new [] { GET }, "/_warmer", "/{index}/_warmer", "/{index}/_warmer/{name}", "/_warmer/{name}", "/{index}/{type}/_warmer/{name}");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesOpenDispatch<T>(ElasticsearchPathInfo<OpenIndexRequestParameters> p )
+		internal ElasticsearchResponse<T> IndicesOpenDispatch<T>(ElasticsearchPathInfo<OpenIndexRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1658,7 +1658,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesOpen", p, new [] { POST }, "/{index}/_open");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesOpenDispatchAsync<T>(ElasticsearchPathInfo<OpenIndexRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> IndicesOpenDispatchAsync<T>(ElasticsearchPathInfo<OpenIndexRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1670,7 +1670,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesOpen", p, new [] { POST }, "/{index}/_open");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesOptimizeDispatch<T>(ElasticsearchPathInfo<OptimizeRequestParameters> p )
+		internal ElasticsearchResponse<T> IndicesOptimizeDispatch<T>(ElasticsearchPathInfo<OptimizeRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1686,7 +1686,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesOptimize", p, new [] { POST, GET }, "/_optimize", "/{index}/_optimize");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesOptimizeDispatchAsync<T>(ElasticsearchPathInfo<OptimizeRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> IndicesOptimizeDispatchAsync<T>(ElasticsearchPathInfo<OptimizeRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1702,7 +1702,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesOptimize", p, new [] { POST, GET }, "/_optimize", "/{index}/_optimize");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesPutAliasDispatch<T>(ElasticsearchPathInfo<PutAliasRequestParameters> p , object body)
+		internal ElasticsearchResponse<T> IndicesPutAliasDispatch<T>(ElasticsearchPathInfo<PutAliasRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1718,7 +1718,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesPutAlias", p, new [] { PUT, POST }, "/{index}/_alias/{name}", "/{index}/_aliases/{name}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesPutAliasDispatchAsync<T>(ElasticsearchPathInfo<PutAliasRequestParameters> p , object body)
+		internal Task<ElasticsearchResponse<T>> IndicesPutAliasDispatchAsync<T>(ElasticsearchPathInfo<PutAliasRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1734,7 +1734,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesPutAlias", p, new [] { PUT, POST }, "/{index}/_alias/{name}", "/{index}/_aliases/{name}");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesPutMappingDispatch<T>(ElasticsearchPathInfo<PutMappingRequestParameters> p , object body)
+		internal ElasticsearchResponse<T> IndicesPutMappingDispatch<T>(ElasticsearchPathInfo<PutMappingRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1752,7 +1752,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesPutMapping", p, new [] { PUT, POST }, "/{index}/{type}/_mapping", "/{index}/_mapping/{type}", "/_mapping/{type}", "/{index}/{type}/_mappings", "/{index}/_mappings/{type}", "/_mappings/{type}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesPutMappingDispatchAsync<T>(ElasticsearchPathInfo<PutMappingRequestParameters> p , object body)
+		internal Task<ElasticsearchResponse<T>> IndicesPutMappingDispatchAsync<T>(ElasticsearchPathInfo<PutMappingRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1770,7 +1770,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesPutMapping", p, new [] { PUT, POST }, "/{index}/{type}/_mapping", "/{index}/_mapping/{type}", "/_mapping/{type}", "/{index}/{type}/_mappings", "/{index}/_mappings/{type}", "/_mappings/{type}");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesPutSettingsDispatch<T>(ElasticsearchPathInfo<UpdateSettingsRequestParameters> p , object body)
+		internal ElasticsearchResponse<T> IndicesPutSettingsDispatch<T>(ElasticsearchPathInfo<UpdateSettingsRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1782,7 +1782,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesPutSettings", p, new [] { PUT }, "/_settings", "/{index}/_settings");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesPutSettingsDispatchAsync<T>(ElasticsearchPathInfo<UpdateSettingsRequestParameters> p , object body)
+		internal Task<ElasticsearchResponse<T>> IndicesPutSettingsDispatchAsync<T>(ElasticsearchPathInfo<UpdateSettingsRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1794,7 +1794,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesPutSettings", p, new [] { PUT }, "/_settings", "/{index}/_settings");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesPutTemplateDispatch<T>(ElasticsearchPathInfo<PutTemplateRequestParameters> p , object body)
+		internal ElasticsearchResponse<T> IndicesPutTemplateDispatch<T>(ElasticsearchPathInfo<PutTemplateRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1810,7 +1810,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesPutTemplate", p, new [] { PUT, POST }, "/_template/{name}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesPutTemplateDispatchAsync<T>(ElasticsearchPathInfo<PutTemplateRequestParameters> p , object body)
+		internal Task<ElasticsearchResponse<T>> IndicesPutTemplateDispatchAsync<T>(ElasticsearchPathInfo<PutTemplateRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1826,7 +1826,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesPutTemplate", p, new [] { PUT, POST }, "/_template/{name}");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesPutWarmerDispatch<T>(ElasticsearchPathInfo<PutWarmerRequestParameters> p , object body)
+		internal ElasticsearchResponse<T> IndicesPutWarmerDispatch<T>(ElasticsearchPathInfo<PutWarmerRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1846,7 +1846,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesPutWarmer", p, new [] { PUT, POST }, "/_warmer/{name}", "/{index}/_warmer/{name}", "/{index}/{type}/_warmer/{name}", "/_warmers/{name}", "/{index}/_warmers/{name}", "/{index}/{type}/_warmers/{name}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesPutWarmerDispatchAsync<T>(ElasticsearchPathInfo<PutWarmerRequestParameters> p , object body)
+		internal Task<ElasticsearchResponse<T>> IndicesPutWarmerDispatchAsync<T>(ElasticsearchPathInfo<PutWarmerRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1866,7 +1866,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesPutWarmer", p, new [] { PUT, POST }, "/_warmer/{name}", "/{index}/_warmer/{name}", "/{index}/{type}/_warmer/{name}", "/_warmers/{name}", "/{index}/_warmers/{name}", "/{index}/{type}/_warmers/{name}");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesRecoveryDispatch<T>(ElasticsearchPathInfo<RecoveryStatusRequestParameters> p )
+		internal ElasticsearchResponse<T> IndicesRecoveryDispatch<T>(ElasticsearchPathInfo<RecoveryStatusRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1878,7 +1878,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesRecovery", p, new [] { GET }, "/_recovery", "/{index}/_recovery");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesRecoveryDispatchAsync<T>(ElasticsearchPathInfo<RecoveryStatusRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> IndicesRecoveryDispatchAsync<T>(ElasticsearchPathInfo<RecoveryStatusRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1890,7 +1890,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesRecovery", p, new [] { GET }, "/_recovery", "/{index}/_recovery");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesRefreshDispatch<T>(ElasticsearchPathInfo<RefreshRequestParameters> p )
+		internal ElasticsearchResponse<T> IndicesRefreshDispatch<T>(ElasticsearchPathInfo<RefreshRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1906,7 +1906,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesRefresh", p, new [] { POST, GET }, "/_refresh", "/{index}/_refresh");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesRefreshDispatchAsync<T>(ElasticsearchPathInfo<RefreshRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> IndicesRefreshDispatchAsync<T>(ElasticsearchPathInfo<RefreshRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1922,7 +1922,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesRefresh", p, new [] { POST, GET }, "/_refresh", "/{index}/_refresh");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesSegmentsDispatch<T>(ElasticsearchPathInfo<SegmentsRequestParameters> p )
+		internal ElasticsearchResponse<T> IndicesSegmentsDispatch<T>(ElasticsearchPathInfo<SegmentsRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1934,7 +1934,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesSegments", p, new [] { GET }, "/_segments", "/{index}/_segments");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesSegmentsDispatchAsync<T>(ElasticsearchPathInfo<SegmentsRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> IndicesSegmentsDispatchAsync<T>(ElasticsearchPathInfo<SegmentsRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1946,7 +1946,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesSegments", p, new [] { GET }, "/_segments", "/{index}/_segments");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesStatsDispatch<T>(ElasticsearchPathInfo<IndicesStatsRequestParameters> p )
+		internal ElasticsearchResponse<T> IndicesStatsDispatch<T>(ElasticsearchPathInfo<IndicesStatsRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1960,7 +1960,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesStats", p, new [] { GET }, "/_stats", "/_stats/{metric}", "/{index}/_stats", "/{index}/_stats/{metric}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesStatsDispatchAsync<T>(ElasticsearchPathInfo<IndicesStatsRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> IndicesStatsDispatchAsync<T>(ElasticsearchPathInfo<IndicesStatsRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1974,7 +1974,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesStats", p, new [] { GET }, "/_stats", "/_stats/{metric}", "/{index}/_stats", "/{index}/_stats/{metric}");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesStatusDispatch<T>(ElasticsearchPathInfo<IndicesStatusRequestParameters> p )
+		internal ElasticsearchResponse<T> IndicesStatusDispatch<T>(ElasticsearchPathInfo<IndicesStatusRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1986,7 +1986,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesStatus", p, new [] { GET }, "/_status", "/{index}/_status");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesStatusDispatchAsync<T>(ElasticsearchPathInfo<IndicesStatusRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> IndicesStatusDispatchAsync<T>(ElasticsearchPathInfo<IndicesStatusRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1998,7 +1998,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesStatus", p, new [] { GET }, "/_status", "/{index}/_status");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesUpdateAliasesDispatch<T>(ElasticsearchPathInfo<AliasRequestParameters> p , object body)
+		internal ElasticsearchResponse<T> IndicesUpdateAliasesDispatch<T>(ElasticsearchPathInfo<AliasRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2009,7 +2009,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesUpdateAliases", p, new [] { POST }, "/_aliases");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesUpdateAliasesDispatchAsync<T>(ElasticsearchPathInfo<AliasRequestParameters> p , object body)
+		internal Task<ElasticsearchResponse<T>> IndicesUpdateAliasesDispatchAsync<T>(ElasticsearchPathInfo<AliasRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2020,7 +2020,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesUpdateAliases", p, new [] { POST }, "/_aliases");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesUpgradeDispatch<T>(ElasticsearchPathInfo<UpgradeRequestParameters> p )
+		internal ElasticsearchResponse<T> IndicesUpgradeDispatch<T>(ElasticsearchPathInfo<UpgradeRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2032,7 +2032,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesUpgrade", p, new [] { POST }, "/_upgrade", "/{index}/_upgrade");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesUpgradeDispatchAsync<T>(ElasticsearchPathInfo<UpgradeRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> IndicesUpgradeDispatchAsync<T>(ElasticsearchPathInfo<UpgradeRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2044,7 +2044,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesUpgrade", p, new [] { POST }, "/_upgrade", "/{index}/_upgrade");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesValidateQueryDispatch<T>(ElasticsearchPathInfo<ValidateQueryRequestParameters> p , object body)
+		internal ElasticsearchResponse<T> IndicesValidateQueryDispatch<T>(ElasticsearchPathInfo<ValidateQueryRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2062,7 +2062,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesValidateQuery", p, new [] { GET, POST }, "/_validate/query", "/{index}/_validate/query", "/{index}/{type}/_validate/query");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesValidateQueryDispatchAsync<T>(ElasticsearchPathInfo<ValidateQueryRequestParameters> p , object body)
+		internal Task<ElasticsearchResponse<T>> IndicesValidateQueryDispatchAsync<T>(ElasticsearchPathInfo<ValidateQueryRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2080,7 +2080,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesValidateQuery", p, new [] { GET, POST }, "/_validate/query", "/{index}/_validate/query", "/{index}/{type}/_validate/query");
 		}
 		
-		internal ElasticsearchResponse<T> InfoDispatch<T>(ElasticsearchPathInfo<InfoRequestParameters> p )
+		internal ElasticsearchResponse<T> InfoDispatch<T>(ElasticsearchPathInfo<InfoRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2091,7 +2091,7 @@ namespace Nest
 			throw InvalidDispatch("Info", p, new [] { GET }, "/");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> InfoDispatchAsync<T>(ElasticsearchPathInfo<InfoRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> InfoDispatchAsync<T>(ElasticsearchPathInfo<InfoRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2102,7 +2102,7 @@ namespace Nest
 			throw InvalidDispatch("Info", p, new [] { GET }, "/");
 		}
 		
-		internal ElasticsearchResponse<T> ListBenchmarksDispatch<T>(ElasticsearchPathInfo<ListBenchmarksRequestParameters> p )
+		internal ElasticsearchResponse<T> ListBenchmarksDispatch<T>(ElasticsearchPathInfo<ListBenchmarksRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2115,7 +2115,7 @@ namespace Nest
 			throw InvalidDispatch("ListBenchmarks", p, new [] { GET }, "/_bench", "/{index}/_bench", "/{index}/{type}/_bench");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> ListBenchmarksDispatchAsync<T>(ElasticsearchPathInfo<ListBenchmarksRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> ListBenchmarksDispatchAsync<T>(ElasticsearchPathInfo<ListBenchmarksRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2128,7 +2128,7 @@ namespace Nest
 			throw InvalidDispatch("ListBenchmarks", p, new [] { GET }, "/_bench", "/{index}/_bench", "/{index}/{type}/_bench");
 		}
 		
-		internal ElasticsearchResponse<T> MgetDispatch<T>(ElasticsearchPathInfo<MultiGetRequestParameters> p , object body)
+		internal ElasticsearchResponse<T> MgetDispatch<T>(ElasticsearchPathInfo<MultiGetRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2146,7 +2146,7 @@ namespace Nest
 			throw InvalidDispatch("Mget", p, new [] { GET, POST }, "/_mget", "/{index}/_mget", "/{index}/{type}/_mget");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> MgetDispatchAsync<T>(ElasticsearchPathInfo<MultiGetRequestParameters> p , object body)
+		internal Task<ElasticsearchResponse<T>> MgetDispatchAsync<T>(ElasticsearchPathInfo<MultiGetRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2164,7 +2164,7 @@ namespace Nest
 			throw InvalidDispatch("Mget", p, new [] { GET, POST }, "/_mget", "/{index}/_mget", "/{index}/{type}/_mget");
 		}
 		
-		internal ElasticsearchResponse<T> MltDispatch<T>(ElasticsearchPathInfo<MoreLikeThisRequestParameters> p , object body)
+		internal ElasticsearchResponse<T> MltDispatch<T>(ElasticsearchPathInfo<MoreLikeThisRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2180,7 +2180,7 @@ namespace Nest
 			throw InvalidDispatch("Mlt", p, new [] { GET, POST }, "/{index}/{type}/{id}/_mlt");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> MltDispatchAsync<T>(ElasticsearchPathInfo<MoreLikeThisRequestParameters> p , object body)
+		internal Task<ElasticsearchResponse<T>> MltDispatchAsync<T>(ElasticsearchPathInfo<MoreLikeThisRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2196,7 +2196,7 @@ namespace Nest
 			throw InvalidDispatch("Mlt", p, new [] { GET, POST }, "/{index}/{type}/{id}/_mlt");
 		}
 		
-		internal ElasticsearchResponse<T> MpercolateDispatch<T>(ElasticsearchPathInfo<MultiPercolateRequestParameters> p , object body)
+		internal ElasticsearchResponse<T> MpercolateDispatch<T>(ElasticsearchPathInfo<MultiPercolateRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2214,7 +2214,7 @@ namespace Nest
 			throw InvalidDispatch("Mpercolate", p, new [] { GET, POST }, "/_mpercolate", "/{index}/_mpercolate", "/{index}/{type}/_mpercolate");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> MpercolateDispatchAsync<T>(ElasticsearchPathInfo<MultiPercolateRequestParameters> p , object body)
+		internal Task<ElasticsearchResponse<T>> MpercolateDispatchAsync<T>(ElasticsearchPathInfo<MultiPercolateRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2232,7 +2232,7 @@ namespace Nest
 			throw InvalidDispatch("Mpercolate", p, new [] { GET, POST }, "/_mpercolate", "/{index}/_mpercolate", "/{index}/{type}/_mpercolate");
 		}
 		
-		internal ElasticsearchResponse<T> MsearchDispatch<T>(ElasticsearchPathInfo<MultiSearchRequestParameters> p , object body)
+		internal ElasticsearchResponse<T> MsearchDispatch<T>(ElasticsearchPathInfo<MultiSearchRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2250,7 +2250,7 @@ namespace Nest
 			throw InvalidDispatch("Msearch", p, new [] { GET, POST }, "/_msearch", "/{index}/_msearch", "/{index}/{type}/_msearch");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> MsearchDispatchAsync<T>(ElasticsearchPathInfo<MultiSearchRequestParameters> p , object body)
+		internal Task<ElasticsearchResponse<T>> MsearchDispatchAsync<T>(ElasticsearchPathInfo<MultiSearchRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2268,7 +2268,7 @@ namespace Nest
 			throw InvalidDispatch("Msearch", p, new [] { GET, POST }, "/_msearch", "/{index}/_msearch", "/{index}/{type}/_msearch");
 		}
 		
-		internal ElasticsearchResponse<T> MtermvectorsDispatch<T>(ElasticsearchPathInfo<MultiTermVectorsRequestParameters> p , object body)
+		internal ElasticsearchResponse<T> MtermvectorsDispatch<T>(ElasticsearchPathInfo<MultiTermVectorsRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2286,7 +2286,7 @@ namespace Nest
 			throw InvalidDispatch("Mtermvectors", p, new [] { GET, POST }, "/_mtermvectors", "/{index}/_mtermvectors", "/{index}/{type}/_mtermvectors");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> MtermvectorsDispatchAsync<T>(ElasticsearchPathInfo<MultiTermVectorsRequestParameters> p , object body)
+		internal Task<ElasticsearchResponse<T>> MtermvectorsDispatchAsync<T>(ElasticsearchPathInfo<MultiTermVectorsRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2304,7 +2304,7 @@ namespace Nest
 			throw InvalidDispatch("Mtermvectors", p, new [] { GET, POST }, "/_mtermvectors", "/{index}/_mtermvectors", "/{index}/{type}/_mtermvectors");
 		}
 		
-		internal ElasticsearchResponse<T> NodesHotThreadsDispatch<T>(ElasticsearchPathInfo<NodesHotThreadsRequestParameters> p )
+		internal ElasticsearchResponse<T> NodesHotThreadsDispatch<T>(ElasticsearchPathInfo<NodesHotThreadsRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2316,7 +2316,7 @@ namespace Nest
 			throw InvalidDispatch("NodesHotThreads", p, new [] { GET }, "/_cluster/nodes/hotthreads", "/_cluster/nodes/hot_threads", "/_cluster/nodes/{node_id}/hotthreads", "/_cluster/nodes/{node_id}/hot_threads", "/_nodes/hotthreads", "/_nodes/hot_threads", "/_nodes/{node_id}/hotthreads", "/_nodes/{node_id}/hot_threads");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> NodesHotThreadsDispatchAsync<T>(ElasticsearchPathInfo<NodesHotThreadsRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> NodesHotThreadsDispatchAsync<T>(ElasticsearchPathInfo<NodesHotThreadsRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2328,7 +2328,7 @@ namespace Nest
 			throw InvalidDispatch("NodesHotThreads", p, new [] { GET }, "/_cluster/nodes/hotthreads", "/_cluster/nodes/hot_threads", "/_cluster/nodes/{node_id}/hotthreads", "/_cluster/nodes/{node_id}/hot_threads", "/_nodes/hotthreads", "/_nodes/hot_threads", "/_nodes/{node_id}/hotthreads", "/_nodes/{node_id}/hot_threads");
 		}
 		
-		internal ElasticsearchResponse<T> NodesInfoDispatch<T>(ElasticsearchPathInfo<NodesInfoRequestParameters> p )
+		internal ElasticsearchResponse<T> NodesInfoDispatch<T>(ElasticsearchPathInfo<NodesInfoRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2342,7 +2342,7 @@ namespace Nest
 			throw InvalidDispatch("NodesInfo", p, new [] { GET }, "/_nodes", "/_nodes/{node_id}", "/_nodes/{metric}", "/_nodes/{node_id}/{metric}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> NodesInfoDispatchAsync<T>(ElasticsearchPathInfo<NodesInfoRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> NodesInfoDispatchAsync<T>(ElasticsearchPathInfo<NodesInfoRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2356,7 +2356,7 @@ namespace Nest
 			throw InvalidDispatch("NodesInfo", p, new [] { GET }, "/_nodes", "/_nodes/{node_id}", "/_nodes/{metric}", "/_nodes/{node_id}/{metric}");
 		}
 		
-		internal ElasticsearchResponse<T> NodesShutdownDispatch<T>(ElasticsearchPathInfo<NodesShutdownRequestParameters> p )
+		internal ElasticsearchResponse<T> NodesShutdownDispatch<T>(ElasticsearchPathInfo<NodesShutdownRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2368,7 +2368,7 @@ namespace Nest
 			throw InvalidDispatch("NodesShutdown", p, new [] { POST }, "/_shutdown", "/_cluster/nodes/_shutdown", "/_cluster/nodes/{node_id}/_shutdown");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> NodesShutdownDispatchAsync<T>(ElasticsearchPathInfo<NodesShutdownRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> NodesShutdownDispatchAsync<T>(ElasticsearchPathInfo<NodesShutdownRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2380,7 +2380,7 @@ namespace Nest
 			throw InvalidDispatch("NodesShutdown", p, new [] { POST }, "/_shutdown", "/_cluster/nodes/_shutdown", "/_cluster/nodes/{node_id}/_shutdown");
 		}
 		
-		internal ElasticsearchResponse<T> NodesStatsDispatch<T>(ElasticsearchPathInfo<NodesStatsRequestParameters> p )
+		internal ElasticsearchResponse<T> NodesStatsDispatch<T>(ElasticsearchPathInfo<NodesStatsRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2396,7 +2396,7 @@ namespace Nest
 			throw InvalidDispatch("NodesStats", p, new [] { GET }, "/_nodes/stats", "/_nodes/{node_id}/stats", "/_nodes/stats/{metric}", "/_nodes/{node_id}/stats/{metric}", "/_nodes/stats/{metric}/{index_metric}", "/_nodes/{node_id}/stats/{metric}/{index_metric}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> NodesStatsDispatchAsync<T>(ElasticsearchPathInfo<NodesStatsRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> NodesStatsDispatchAsync<T>(ElasticsearchPathInfo<NodesStatsRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2412,7 +2412,7 @@ namespace Nest
 			throw InvalidDispatch("NodesStats", p, new [] { GET }, "/_nodes/stats", "/_nodes/{node_id}/stats", "/_nodes/stats/{metric}", "/_nodes/{node_id}/stats/{metric}", "/_nodes/stats/{metric}/{index_metric}", "/_nodes/{node_id}/stats/{metric}/{index_metric}");
 		}
 		
-		internal ElasticsearchResponse<T> PercolateDispatch<T>(ElasticsearchPathInfo<PercolateRequestParameters> p , object body)
+		internal ElasticsearchResponse<T> PercolateDispatch<T>(ElasticsearchPathInfo<PercolateRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2430,7 +2430,7 @@ namespace Nest
 			throw InvalidDispatch("Percolate", p, new [] { GET, POST }, "/{index}/{type}/_percolate", "/{index}/{type}/{id}/_percolate");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> PercolateDispatchAsync<T>(ElasticsearchPathInfo<PercolateRequestParameters> p , object body)
+		internal Task<ElasticsearchResponse<T>> PercolateDispatchAsync<T>(ElasticsearchPathInfo<PercolateRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2448,7 +2448,7 @@ namespace Nest
 			throw InvalidDispatch("Percolate", p, new [] { GET, POST }, "/{index}/{type}/_percolate", "/{index}/{type}/{id}/_percolate");
 		}
 		
-		internal ElasticsearchResponse<T> PingDispatch<T>(ElasticsearchPathInfo<PingRequestParameters> p )
+		internal ElasticsearchResponse<T> PingDispatch<T>(ElasticsearchPathInfo<PingRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2459,7 +2459,7 @@ namespace Nest
 			throw InvalidDispatch("Ping", p, new [] { HEAD }, "/");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> PingDispatchAsync<T>(ElasticsearchPathInfo<PingRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> PingDispatchAsync<T>(ElasticsearchPathInfo<PingRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2470,7 +2470,7 @@ namespace Nest
 			throw InvalidDispatch("Ping", p, new [] { HEAD }, "/");
 		}
 		
-		internal ElasticsearchResponse<T> PutScriptDispatch<T>(ElasticsearchPathInfo<PutScriptRequestParameters> p , object body)
+		internal ElasticsearchResponse<T> PutScriptDispatch<T>(ElasticsearchPathInfo<PutScriptRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2486,7 +2486,7 @@ namespace Nest
 			throw InvalidDispatch("PutScript", p, new [] { PUT, POST }, "/_scripts/{lang}/{id}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> PutScriptDispatchAsync<T>(ElasticsearchPathInfo<PutScriptRequestParameters> p , object body)
+		internal Task<ElasticsearchResponse<T>> PutScriptDispatchAsync<T>(ElasticsearchPathInfo<PutScriptRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2502,7 +2502,7 @@ namespace Nest
 			throw InvalidDispatch("PutScript", p, new [] { PUT, POST }, "/_scripts/{lang}/{id}");
 		}
 		
-		internal ElasticsearchResponse<T> PutTemplateDispatch<T>(ElasticsearchPathInfo<PutTemplateRequestParameters> p , object body)
+		internal ElasticsearchResponse<T> PutTemplateDispatch<T>(ElasticsearchPathInfo<PutTemplateRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2518,7 +2518,7 @@ namespace Nest
 			throw InvalidDispatch("PutTemplate", p, new [] { PUT, POST }, "/_search/template/{id}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> PutTemplateDispatchAsync<T>(ElasticsearchPathInfo<PutTemplateRequestParameters> p , object body)
+		internal Task<ElasticsearchResponse<T>> PutTemplateDispatchAsync<T>(ElasticsearchPathInfo<PutTemplateRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2534,7 +2534,7 @@ namespace Nest
 			throw InvalidDispatch("PutTemplate", p, new [] { PUT, POST }, "/_search/template/{id}");
 		}
 		
-		internal ElasticsearchResponse<T> ScrollDispatch<T>(ElasticsearchPathInfo<ScrollRequestParameters> p , object body)
+		internal ElasticsearchResponse<T> ScrollDispatch<T>(ElasticsearchPathInfo<ScrollRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2550,7 +2550,7 @@ namespace Nest
 			throw InvalidDispatch("Scroll", p, new [] { GET, POST }, "/_search/scroll", "/_search/scroll/{scroll_id}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> ScrollDispatchAsync<T>(ElasticsearchPathInfo<ScrollRequestParameters> p , object body)
+		internal Task<ElasticsearchResponse<T>> ScrollDispatchAsync<T>(ElasticsearchPathInfo<ScrollRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2566,7 +2566,7 @@ namespace Nest
 			throw InvalidDispatch("Scroll", p, new [] { GET, POST }, "/_search/scroll", "/_search/scroll/{scroll_id}");
 		}
 		
-		internal ElasticsearchResponse<T> SearchDispatch<T>(ElasticsearchPathInfo<SearchRequestParameters> p , object body)
+		internal ElasticsearchResponse<T> SearchDispatch<T>(ElasticsearchPathInfo<SearchRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2584,7 +2584,7 @@ namespace Nest
 			throw InvalidDispatch("Search", p, new [] { GET, POST }, "/_search", "/{index}/_search", "/{index}/{type}/_search");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> SearchDispatchAsync<T>(ElasticsearchPathInfo<SearchRequestParameters> p , object body)
+		internal Task<ElasticsearchResponse<T>> SearchDispatchAsync<T>(ElasticsearchPathInfo<SearchRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2602,7 +2602,7 @@ namespace Nest
 			throw InvalidDispatch("Search", p, new [] { GET, POST }, "/_search", "/{index}/_search", "/{index}/{type}/_search");
 		}
 		
-		internal ElasticsearchResponse<T> SearchExistsDispatch<T>(ElasticsearchPathInfo<SearchExistsRequestParameters> p , object body)
+		internal ElasticsearchResponse<T> SearchExistsDispatch<T>(ElasticsearchPathInfo<SearchExistsRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2620,7 +2620,7 @@ namespace Nest
 			throw InvalidDispatch("SearchExists", p, new [] { POST, GET }, "/_search/exists", "/{index}/_search/exists", "/{index}/{type}/_search/exists");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> SearchExistsDispatchAsync<T>(ElasticsearchPathInfo<SearchExistsRequestParameters> p , object body)
+		internal Task<ElasticsearchResponse<T>> SearchExistsDispatchAsync<T>(ElasticsearchPathInfo<SearchExistsRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2638,7 +2638,7 @@ namespace Nest
 			throw InvalidDispatch("SearchExists", p, new [] { POST, GET }, "/_search/exists", "/{index}/_search/exists", "/{index}/{type}/_search/exists");
 		}
 		
-		internal ElasticsearchResponse<T> SearchShardsDispatch<T>(ElasticsearchPathInfo<SearchShardsRequestParameters> p )
+		internal ElasticsearchResponse<T> SearchShardsDispatch<T>(ElasticsearchPathInfo<SearchShardsRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2656,7 +2656,7 @@ namespace Nest
 			throw InvalidDispatch("SearchShards", p, new [] { GET, POST }, "/_search_shards", "/{index}/_search_shards", "/{index}/{type}/_search_shards");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> SearchShardsDispatchAsync<T>(ElasticsearchPathInfo<SearchShardsRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> SearchShardsDispatchAsync<T>(ElasticsearchPathInfo<SearchShardsRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2674,7 +2674,7 @@ namespace Nest
 			throw InvalidDispatch("SearchShards", p, new [] { GET, POST }, "/_search_shards", "/{index}/_search_shards", "/{index}/{type}/_search_shards");
 		}
 		
-		internal ElasticsearchResponse<T> SearchTemplateDispatch<T>(ElasticsearchPathInfo<SearchTemplateRequestParameters> p , object body)
+		internal ElasticsearchResponse<T> SearchTemplateDispatch<T>(ElasticsearchPathInfo<SearchTemplateRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2692,7 +2692,7 @@ namespace Nest
 			throw InvalidDispatch("SearchTemplate", p, new [] { GET, POST }, "/_search/template", "/{index}/_search/template", "/{index}/{type}/_search/template");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> SearchTemplateDispatchAsync<T>(ElasticsearchPathInfo<SearchTemplateRequestParameters> p , object body)
+		internal Task<ElasticsearchResponse<T>> SearchTemplateDispatchAsync<T>(ElasticsearchPathInfo<SearchTemplateRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2710,7 +2710,7 @@ namespace Nest
 			throw InvalidDispatch("SearchTemplate", p, new [] { GET, POST }, "/_search/template", "/{index}/_search/template", "/{index}/{type}/_search/template");
 		}
 		
-		internal ElasticsearchResponse<T> SnapshotCreateDispatch<T>(ElasticsearchPathInfo<SnapshotRequestParameters> p , object body)
+		internal ElasticsearchResponse<T> SnapshotCreateDispatch<T>(ElasticsearchPathInfo<SnapshotRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2726,7 +2726,7 @@ namespace Nest
 			throw InvalidDispatch("SnapshotCreate", p, new [] { PUT, POST }, "/_snapshot/{repository}/{snapshot}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> SnapshotCreateDispatchAsync<T>(ElasticsearchPathInfo<SnapshotRequestParameters> p , object body)
+		internal Task<ElasticsearchResponse<T>> SnapshotCreateDispatchAsync<T>(ElasticsearchPathInfo<SnapshotRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2742,7 +2742,7 @@ namespace Nest
 			throw InvalidDispatch("SnapshotCreate", p, new [] { PUT, POST }, "/_snapshot/{repository}/{snapshot}");
 		}
 		
-		internal ElasticsearchResponse<T> SnapshotCreateRepositoryDispatch<T>(ElasticsearchPathInfo<CreateRepositoryRequestParameters> p , object body)
+		internal ElasticsearchResponse<T> SnapshotCreateRepositoryDispatch<T>(ElasticsearchPathInfo<CreateRepositoryRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2758,7 +2758,7 @@ namespace Nest
 			throw InvalidDispatch("SnapshotCreateRepository", p, new [] { PUT, POST }, "/_snapshot/{repository}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> SnapshotCreateRepositoryDispatchAsync<T>(ElasticsearchPathInfo<CreateRepositoryRequestParameters> p , object body)
+		internal Task<ElasticsearchResponse<T>> SnapshotCreateRepositoryDispatchAsync<T>(ElasticsearchPathInfo<CreateRepositoryRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2774,7 +2774,7 @@ namespace Nest
 			throw InvalidDispatch("SnapshotCreateRepository", p, new [] { PUT, POST }, "/_snapshot/{repository}");
 		}
 		
-		internal ElasticsearchResponse<T> SnapshotDeleteDispatch<T>(ElasticsearchPathInfo<DeleteSnapshotRequestParameters> p )
+		internal ElasticsearchResponse<T> SnapshotDeleteDispatch<T>(ElasticsearchPathInfo<DeleteSnapshotRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2786,7 +2786,7 @@ namespace Nest
 			throw InvalidDispatch("SnapshotDelete", p, new [] { DELETE }, "/_snapshot/{repository}/{snapshot}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> SnapshotDeleteDispatchAsync<T>(ElasticsearchPathInfo<DeleteSnapshotRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> SnapshotDeleteDispatchAsync<T>(ElasticsearchPathInfo<DeleteSnapshotRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2798,7 +2798,7 @@ namespace Nest
 			throw InvalidDispatch("SnapshotDelete", p, new [] { DELETE }, "/_snapshot/{repository}/{snapshot}");
 		}
 		
-		internal ElasticsearchResponse<T> SnapshotDeleteRepositoryDispatch<T>(ElasticsearchPathInfo<DeleteRepositoryRequestParameters> p )
+		internal ElasticsearchResponse<T> SnapshotDeleteRepositoryDispatch<T>(ElasticsearchPathInfo<DeleteRepositoryRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2810,7 +2810,7 @@ namespace Nest
 			throw InvalidDispatch("SnapshotDeleteRepository", p, new [] { DELETE }, "/_snapshot/{repository}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> SnapshotDeleteRepositoryDispatchAsync<T>(ElasticsearchPathInfo<DeleteRepositoryRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> SnapshotDeleteRepositoryDispatchAsync<T>(ElasticsearchPathInfo<DeleteRepositoryRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2822,7 +2822,7 @@ namespace Nest
 			throw InvalidDispatch("SnapshotDeleteRepository", p, new [] { DELETE }, "/_snapshot/{repository}");
 		}
 		
-		internal ElasticsearchResponse<T> SnapshotGetDispatch<T>(ElasticsearchPathInfo<GetSnapshotRequestParameters> p )
+		internal ElasticsearchResponse<T> SnapshotGetDispatch<T>(ElasticsearchPathInfo<GetSnapshotRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2834,7 +2834,7 @@ namespace Nest
 			throw InvalidDispatch("SnapshotGet", p, new [] { GET }, "/_snapshot/{repository}/{snapshot}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> SnapshotGetDispatchAsync<T>(ElasticsearchPathInfo<GetSnapshotRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> SnapshotGetDispatchAsync<T>(ElasticsearchPathInfo<GetSnapshotRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2846,7 +2846,7 @@ namespace Nest
 			throw InvalidDispatch("SnapshotGet", p, new [] { GET }, "/_snapshot/{repository}/{snapshot}");
 		}
 		
-		internal ElasticsearchResponse<T> SnapshotGetRepositoryDispatch<T>(ElasticsearchPathInfo<GetRepositoryRequestParameters> p )
+		internal ElasticsearchResponse<T> SnapshotGetRepositoryDispatch<T>(ElasticsearchPathInfo<GetRepositoryRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2858,7 +2858,7 @@ namespace Nest
 			throw InvalidDispatch("SnapshotGetRepository", p, new [] { GET }, "/_snapshot", "/_snapshot/{repository}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> SnapshotGetRepositoryDispatchAsync<T>(ElasticsearchPathInfo<GetRepositoryRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> SnapshotGetRepositoryDispatchAsync<T>(ElasticsearchPathInfo<GetRepositoryRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2870,7 +2870,7 @@ namespace Nest
 			throw InvalidDispatch("SnapshotGetRepository", p, new [] { GET }, "/_snapshot", "/_snapshot/{repository}");
 		}
 		
-		internal ElasticsearchResponse<T> SnapshotRestoreDispatch<T>(ElasticsearchPathInfo<RestoreRequestParameters> p , object body)
+		internal ElasticsearchResponse<T> SnapshotRestoreDispatch<T>(ElasticsearchPathInfo<RestoreRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2882,7 +2882,7 @@ namespace Nest
 			throw InvalidDispatch("SnapshotRestore", p, new [] { POST }, "/_snapshot/{repository}/{snapshot}/_restore");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> SnapshotRestoreDispatchAsync<T>(ElasticsearchPathInfo<RestoreRequestParameters> p , object body)
+		internal Task<ElasticsearchResponse<T>> SnapshotRestoreDispatchAsync<T>(ElasticsearchPathInfo<RestoreRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2894,7 +2894,7 @@ namespace Nest
 			throw InvalidDispatch("SnapshotRestore", p, new [] { POST }, "/_snapshot/{repository}/{snapshot}/_restore");
 		}
 		
-		internal ElasticsearchResponse<T> SnapshotStatusDispatch<T>(ElasticsearchPathInfo<SnapshotStatusRequestParameters> p )
+		internal ElasticsearchResponse<T> SnapshotStatusDispatch<T>(ElasticsearchPathInfo<SnapshotStatusRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2907,7 +2907,7 @@ namespace Nest
 			throw InvalidDispatch("SnapshotStatus", p, new [] { GET }, "/_snapshot/_status", "/_snapshot/{repository}/_status", "/_snapshot/{repository}/{snapshot}/_status");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> SnapshotStatusDispatchAsync<T>(ElasticsearchPathInfo<SnapshotStatusRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> SnapshotStatusDispatchAsync<T>(ElasticsearchPathInfo<SnapshotStatusRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2920,7 +2920,7 @@ namespace Nest
 			throw InvalidDispatch("SnapshotStatus", p, new [] { GET }, "/_snapshot/_status", "/_snapshot/{repository}/_status", "/_snapshot/{repository}/{snapshot}/_status");
 		}
 		
-		internal ElasticsearchResponse<T> SnapshotVerifyRepositoryDispatch<T>(ElasticsearchPathInfo<VerifyRepositoryRequestParameters> p )
+		internal ElasticsearchResponse<T> SnapshotVerifyRepositoryDispatch<T>(ElasticsearchPathInfo<VerifyRepositoryRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2932,7 +2932,7 @@ namespace Nest
 			throw InvalidDispatch("SnapshotVerifyRepository", p, new [] { POST }, "/_snapshot/{repository}/_verify");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> SnapshotVerifyRepositoryDispatchAsync<T>(ElasticsearchPathInfo<VerifyRepositoryRequestParameters> p )
+		internal Task<ElasticsearchResponse<T>> SnapshotVerifyRepositoryDispatchAsync<T>(ElasticsearchPathInfo<VerifyRepositoryRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2944,7 +2944,7 @@ namespace Nest
 			throw InvalidDispatch("SnapshotVerifyRepository", p, new [] { POST }, "/_snapshot/{repository}/_verify");
 		}
 		
-		internal ElasticsearchResponse<T> SuggestDispatch<T>(ElasticsearchPathInfo<SuggestRequestParameters> p , object body)
+		internal ElasticsearchResponse<T> SuggestDispatch<T>(ElasticsearchPathInfo<SuggestRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2960,7 +2960,7 @@ namespace Nest
 			throw InvalidDispatch("Suggest", p, new [] { POST, GET }, "/_suggest", "/{index}/_suggest");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> SuggestDispatchAsync<T>(ElasticsearchPathInfo<SuggestRequestParameters> p , object body)
+		internal Task<ElasticsearchResponse<T>> SuggestDispatchAsync<T>(ElasticsearchPathInfo<SuggestRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2976,7 +2976,7 @@ namespace Nest
 			throw InvalidDispatch("Suggest", p, new [] { POST, GET }, "/_suggest", "/{index}/_suggest");
 		}
 		
-		internal ElasticsearchResponse<T> TermvectorDispatch<T>(ElasticsearchPathInfo<TermvectorRequestParameters> p , object body)
+		internal ElasticsearchResponse<T> TermvectorDispatch<T>(ElasticsearchPathInfo<TermvectorRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2994,7 +2994,7 @@ namespace Nest
 			throw InvalidDispatch("Termvector", p, new [] { GET, POST }, "/{index}/{type}/_termvector", "/{index}/{type}/{id}/_termvector");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> TermvectorDispatchAsync<T>(ElasticsearchPathInfo<TermvectorRequestParameters> p , object body)
+		internal Task<ElasticsearchResponse<T>> TermvectorDispatchAsync<T>(ElasticsearchPathInfo<TermvectorRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -3012,7 +3012,7 @@ namespace Nest
 			throw InvalidDispatch("Termvector", p, new [] { GET, POST }, "/{index}/{type}/_termvector", "/{index}/{type}/{id}/_termvector");
 		}
 		
-		internal ElasticsearchResponse<T> UpdateDispatch<T>(ElasticsearchPathInfo<UpdateRequestParameters> p , object body)
+		internal ElasticsearchResponse<T> UpdateDispatch<T>(ElasticsearchPathInfo<UpdateRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -3024,7 +3024,7 @@ namespace Nest
 			throw InvalidDispatch("Update", p, new [] { POST }, "/{index}/{type}/{id}/_update");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> UpdateDispatchAsync<T>(ElasticsearchPathInfo<UpdateRequestParameters> p , object body)
+		internal Task<ElasticsearchResponse<T>> UpdateDispatchAsync<T>(ElasticsearchPathInfo<UpdateRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{

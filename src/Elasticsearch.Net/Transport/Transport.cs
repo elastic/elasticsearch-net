@@ -17,7 +17,6 @@ namespace Elasticsearch.Net.Connection
 	public class Transport<TConnectionSettings> : ITransport<TConnectionSettings>
 		where TConnectionSettings : IConnectionConfigurationValues
 	{
-		private UrlFormatProvider _formatter;
 		private SemaphoreSlim _semaphore;
 
 		//TODO discuss which should be public
@@ -56,18 +55,17 @@ namespace Elasticsearch.Net.Connection
 			this.PipelineProvider = pipelineProvider ?? new RequestPipelineFactory();
 			this.DateTimeProvider = dateTimeProvider ?? new DateTimeProvider();
 			this.MemoryStreamFactory = memoryStreamFactory ?? new MemoryStreamFactory();
-			this._formatter = new UrlFormatProvider(this.Settings);
 			this._semaphore = new SemaphoreSlim(1, 1);
 		}
 
 		public ElasticsearchResponse<TReturn> Request<TReturn>(HttpMethod method, string path, PostData<object> data = null, IRequestParameters requestParameters = null)
+			where TReturn : class
 		{
-			path = this.CreatePathWithQueryStrings(path, this.Settings, requestParameters);
 			using (var pipeline = this.PipelineProvider.Create(this.Settings, this.DateTimeProvider, this.MemoryStreamFactory, requestParameters))
 			{
 				pipeline.FirstPoolUsage(this._semaphore);
 
-				var requestData = new RequestData(method, path, data, this.Settings, requestParameters?.RequestConfiguration, this.MemoryStreamFactory);
+				var requestData = new RequestData(method, path, data, this.Settings, requestParameters, this.MemoryStreamFactory);
 				ElasticsearchResponse<TReturn> response = null;
 
 				while (pipeline.NextNode())
@@ -94,13 +92,13 @@ namespace Elasticsearch.Net.Connection
 		}
 
 		public async Task<ElasticsearchResponse<TReturn>> RequestAsync<TReturn>(HttpMethod method, string path, PostData<object> data = null, IRequestParameters requestParameters = null)
+			where TReturn : class
 		{
-			path = this.CreatePathWithQueryStrings(path, this.Settings, requestParameters);
 			using (var pipeline = this.PipelineProvider.Create(this.Settings, this.DateTimeProvider, this.MemoryStreamFactory, requestParameters))
 			{
 				await pipeline.FirstPoolUsageAsync(this._semaphore);
 
-				var requestData = new RequestData(method, path, data, this.Settings, requestParameters?.RequestConfiguration, this.MemoryStreamFactory);
+				var requestData = new RequestData(method, path, data, this.Settings, requestParameters, this.MemoryStreamFactory);
 				ElasticsearchResponse<TReturn> response = null;
 
 				while (pipeline.NextNode())
@@ -126,17 +124,6 @@ namespace Elasticsearch.Net.Connection
 			}
 		}
 
-		private string CreatePathWithQueryStrings(string path, IConnectionConfigurationValues global, IRequestParameters request = null)
-		{
-			//Make sure we append global query string as well the request specific query string parameters
-			var copy = new NameValueCollection(global.QueryStringParameters);
-			copy.Add(request.QueryString.ToNameValueCollection(this._formatter));
-			if (!copy.HasKeys()) return path;
-
-			var queryString = copy.ToQueryString();
-			path += queryString;
-			return path;
-		}
 
 	}
 }

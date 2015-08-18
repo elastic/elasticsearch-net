@@ -119,7 +119,7 @@ namespace Elasticsearch.Net.Connection
 				request.Headers["Authorization"] = "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes(userInfo));
 		}
 
-		public virtual ElasticsearchResponse<TReturn> Request<TReturn>(RequestData requestData)
+		public virtual ElasticsearchResponse<TReturn> Request<TReturn>(RequestData requestData) where TReturn : class
 		{
 			try
 			{
@@ -156,7 +156,7 @@ namespace Elasticsearch.Net.Connection
 			}
 		}
 
-		public virtual async Task<ElasticsearchResponse<TReturn>> RequestAsync<TReturn>(RequestData requestData)
+		public virtual async Task<ElasticsearchResponse<TReturn>> RequestAsync<TReturn>(RequestData requestData) where TReturn : class
 		{
 			try
 			{

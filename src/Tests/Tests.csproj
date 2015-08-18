@@ -79,6 +79,7 @@
     <Compile Include="ClientConcepts\ConnectionPooling\BuildingBlocks\RoundRobin.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\BuildingBlocks\ConnectionPooling.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\BuildingBlocks\RequestPipeline.cs" />
+    <Compile Include="ClientConcepts\HighLevel\CovariantHits\CovariantSearchResults.cs" />
     <Compile Include="Document\Single\Indexing.cs" />
     <Compile Include="Framework\SimpleIntegration.cs" />
     <Compile Include="Framework\ApiCallExample.cs" />

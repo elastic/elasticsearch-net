@@ -303,7 +303,7 @@ namespace Elasticsearch.Net.Connection
 			throw new ElasticsearchException(PipelineFailure.BadSniff, new AggregateException(exceptions));
 		}
 
-		public ElasticsearchResponse<TReturn> CallElasticsearch<TReturn>(RequestData requestData)
+		public ElasticsearchResponse<TReturn> CallElasticsearch<TReturn>(RequestData requestData) where TReturn : class
 		{
 			using (var audit = this.Audit(AuditEvent.HealhyResponse))
 			{
@@ -329,7 +329,7 @@ namespace Elasticsearch.Net.Connection
 			}
 		}
 
-		public async Task<ElasticsearchResponse<TReturn>> CallElasticsearchAsync<TReturn>(RequestData requestData)
+		public async Task<ElasticsearchResponse<TReturn>> CallElasticsearchAsync<TReturn>(RequestData requestData) where TReturn : class
 		{
 			using (var audit = this.Audit(AuditEvent.HealhyResponse))
 			{

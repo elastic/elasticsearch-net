@@ -15,8 +15,8 @@ namespace Elasticsearch.Net.Connection
 		int Retried { get; }
 		int MaxRetries { get; }
 
-		ElasticsearchResponse<TReturn> CallElasticsearch<TReturn>(RequestData requestData);
-		Task<ElasticsearchResponse<TReturn>> CallElasticsearchAsync<TReturn>(RequestData requestData);
+		ElasticsearchResponse<TReturn> CallElasticsearch<TReturn>(RequestData requestData) where TReturn : class;
+		Task<ElasticsearchResponse<TReturn>> CallElasticsearchAsync<TReturn>(RequestData requestData) where TReturn : class;
 
 		void MarkAlive();
 		void MarkDead();

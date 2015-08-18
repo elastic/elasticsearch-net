@@ -12,9 +12,11 @@ namespace Nest
 		IElasticsearchClient Raw { get; }
 		ElasticInferrer Infer { get; }
 
-		ElasticsearchResponse<T> DoRequest<T>(HttpMethod method, string path, PostData<object> data = null, IRequestParameters requestParameters = null);
+		ElasticsearchResponse<T> DoRequest<T>(HttpMethod method, string path, PostData<object> data = null, IRequestParameters requestParameters = null)
+			where T : class;
 
-		Task<ElasticsearchResponse<T>> DoRequestAsync<T>(HttpMethod method, string path, PostData<object> data = null, IRequestParameters requestParameters = null);
+		Task<ElasticsearchResponse<T>> DoRequestAsync<T>(HttpMethod method, string path, PostData<object> data = null, IRequestParameters requestParameters = null)
+			where T : class;
 
 		/// <summary>
 		/// Helper method that allows you to reindex from one index into another using SCAN and SCROLL.

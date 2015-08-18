@@ -8,6 +8,7 @@ using System.Collections.Specialized;
 using Elasticsearch.Net.Connection.Security;
 using System.Threading;
 using System.IO.Compression;
+using Elasticsearch.Net.Serialization;
 
 namespace Elasticsearch.Net.Connection
 {
@@ -37,21 +38,32 @@ namespace Elasticsearch.Net.Connection
 		public bool DisableAutomaticProxyDetection { get; }
 		public BasicAuthenticationCredentials BasicAuthorizationCredentials { get; }
 		public CancellationToken CancellationToken { get; }
+		public Func<IApiCallDetails, Stream, object> CustomConverter { get; private set; }
 
 		private readonly IConnectionConfigurationValues _settings;
 		private readonly IMemoryStreamFactory _memoryStreamFactory;
+		private readonly UrlFormatProvider _formatter;
 
 		public RequestData(HttpMethod method, string path, PostData<object> data, IConnectionConfigurationValues global, IMemoryStreamFactory memoryStreamFactory)
-			: this(method, path, data, global, null, memoryStreamFactory)
+			: this(method, path, data, global, (IRequestConfiguration)null, memoryStreamFactory)
 		{ }
 
+		public RequestData(HttpMethod method, string path, PostData<object> data, IConnectionConfigurationValues global, IRequestParameters local, IMemoryStreamFactory memoryStreamFactory)
+			: this(method, path, data, global, (IRequestConfiguration)local?.RequestConfiguration, memoryStreamFactory)
+		{
+			this.CustomConverter = local?.DeserializationState;
+			if (this.Path.IsNullOrEmpty())
+				this.Path = this.CreatePathWithQueryStrings(path, this._settings, null);
+		}
 		public RequestData(HttpMethod method, string path, PostData<object> data, IConnectionConfigurationValues global, IRequestConfiguration local, IMemoryStreamFactory memoryStreamFactory)
 		{
 			this._settings = global;
 			this._memoryStreamFactory = memoryStreamFactory;
+			this._formatter = new UrlFormatProvider(this._settings);
 			this.Method = method;
 			this.Data = data;
-			this.Path = path;
+			if (this.Path.IsNullOrEmpty())
+				this.Path = this.CreatePathWithQueryStrings(path, this._settings, null);
 
 			//TODO default to true in 2.0?
 			this.Pipelined = global.HttpPipeliningEnabled || (local?.EnableHttpPipelining).GetValueOrDefault(false);
@@ -81,6 +93,7 @@ namespace Elasticsearch.Net.Connection
 		}
 
 		public ElasticsearchResponse<TReturn> CreateResponse<TReturn>(int statusCode, Stream responseStream, Exception innerException = null)
+			where TReturn : class
 		{
 			var cs = InitializeResponse<TReturn>(statusCode, innerException);
 			byte[] bytes = null;
@@ -92,12 +105,16 @@ namespace Elasticsearch.Net.Connection
 			}
 
 			if (!SetSpecialTypes(responseStream, cs, bytes))
-				cs.Body = this._settings.Serializer.Deserialize<TReturn>(responseStream);
+			{
+				if (this.CustomConverter != null) cs.Body = this.CustomConverter(cs, responseStream) as TReturn;
+				else cs.Body = this._settings.Serializer.Deserialize<TReturn>(responseStream);
+			}
 
 			return FinalizeReponse(cs);
 		}
 
 		public async Task<ElasticsearchResponse<TReturn>> CreateResponseAsync<TReturn>(int statusCode, Stream responseStream, Exception innerException = null)
+			where TReturn : class
 		{
 			var cs = InitializeResponse<TReturn>(statusCode, innerException);
 			byte[] bytes = null;
@@ -109,7 +126,10 @@ namespace Elasticsearch.Net.Connection
 			}
 
 			if (!SetSpecialTypes(responseStream, cs, bytes))
+			{
+				if (this.CustomConverter != null) cs.Body = this.CustomConverter(cs, responseStream) as TReturn;
 				cs.Body = await this._settings.Serializer.DeserializeAsync<TReturn>(responseStream, this.CancellationToken);
+			}
 
 			return FinalizeReponse(cs);
 		}
@@ -188,5 +208,17 @@ namespace Elasticsearch.Net.Connection
 		}
 
 
+		private string CreatePathWithQueryStrings(string path, IConnectionConfigurationValues global, IRequestParameters request = null)
+		{
+			//Make sure we append global query string as well the request specific query string parameters
+			var copy = new NameValueCollection(global.QueryStringParameters);
+			if (request != null)
+				copy.Add(request.QueryString.ToNameValueCollection(this._formatter));
+			if (!copy.HasKeys()) return path;
+
+			var queryString = copy.ToQueryString();
+			path += queryString;
+			return path;
+		}
 	}
 }

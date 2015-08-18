@@ -8,6 +8,8 @@ using Elasticsearch.Net.Connection;
 using Nest;
 using Tests.Framework.MockData;
 using Elasticsearch.Net.ConnectionPool;
+using System.IO;
+using System.Text;
 
 namespace Tests.Framework
 {
@@ -55,6 +57,23 @@ namespace Tests.Framework
 			new UriBuilder("http", (RunningFiddler) ? "ipv4.fiddler" : "localhost", port.GetValueOrDefault(9200)).Uri;
 
 		public static IConnection CreateConnection() => RunIntegrationTests ? new HttpConnection() : new InMemoryConnection();
+
+		public static IElasticClient GetFixedReturnClient(object responseJson)
+		{
+			var serializer = new NestSerializer(new ConnectionSettings());
+			string fixedResult = string.Empty;
+			using (var ms = new MemoryStream())
+			{
+				serializer.Serialize(responseJson, ms);
+				fixedResult =Encoding.UTF8.GetString(ms.ToArray());
+			}
+			var connection = new InMemoryConnection(fixedResult);
+			var connectionPool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
+			var settings = new ConnectionSettings(connectionPool, connection);
+			return new ElasticClient(settings);
+		}
+
+
 
 		public static string ExpensiveTestNameForIntegrationTests()
 		{

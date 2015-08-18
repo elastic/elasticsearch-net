@@ -33,8 +33,6 @@ namespace Nest
 			return status.Success ? status.Body : CreateInvalidInstance<SearchResponse<TResult>>(status);
 		}
 
-
-		
 		public ISearchResponse<T> Search<T>(ISearchRequest request)
 			where T : class
 		{

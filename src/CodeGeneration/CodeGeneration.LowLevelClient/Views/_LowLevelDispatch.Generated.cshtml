@@ -36,7 +36,7 @@ namespace Nest
 		};
 		foreach(var gen in generate)
 		{
-		<text>internal @Raw(gen.Returns) @(Raw(gen.Name))(ElasticsearchPathInfo<@peek.QueryStringParamName> p @if (endpoint.Body != null) {<text>, object body</text>})
+		<text>internal @Raw(gen.Returns) @(Raw(gen.Name))(ElasticsearchPathInfo<@peek.QueryStringParamName> p @if (endpoint.Body != null) {<text>, object body</text>}) where T : class
 		{
 			switch(p.HttpMethod)
 			{
