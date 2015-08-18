@@ -54,6 +54,7 @@ namespace Elasticsearch.Net.Connection
 			this.CustomConverter = local?.DeserializationState;
 			this.Path = this.CreatePathWithQueryStrings(path, this._settings, local);
 		}
+
 		public RequestData(HttpMethod method, string path, PostData<object> data, IConnectionConfigurationValues global, IRequestConfiguration local, IMemoryStreamFactory memoryStreamFactory)
 		{
 			this._settings = global;
@@ -85,6 +86,7 @@ namespace Elasticsearch.Net.Connection
 		{
 			this.Data.Write(writableStream, this._settings);
 		}
+
 		public Task WriteAsync(Stream writableStream)
 		{
 			return this.Data.WriteAsync(writableStream, this._settings, this.CancellationToken);
