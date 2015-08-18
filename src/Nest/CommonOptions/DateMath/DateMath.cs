@@ -101,18 +101,10 @@ namespace Nest
 			return sb.ToString();
 		}
 
-		private class Json : JsonConverter
+		private class Json : Json<DateMath>
 		{
-			public override bool CanConvert(Type objectType) => true;
-			public override bool CanWrite => true;
-			public override bool CanRead => true;
-
-			public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-			{
-				var v = value as DateMath;
-				if (v == null) return;
-				writer.WriteValue(v.ToString());
-			}
+			public override void WriteJson(JsonWriter writer, DateMath value, JsonSerializer serializer) =>
+				writer.WriteValue(value.ToString());
 
 			public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 			{

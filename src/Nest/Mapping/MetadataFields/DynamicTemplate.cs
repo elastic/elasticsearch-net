@@ -20,7 +20,7 @@ namespace Nest
 		[JsonProperty("path_unmatch")]
 		public string PathUnmatch { get; set; }
 
-		[JsonProperty("mapping"), JsonConverter(typeof(ElasticTypeConverter))]
+		[JsonProperty("mapping"), JsonConverter(typeof(ElasticTypeJsonConverter))]
 		public IElasticType Mapping { get; set; }
 
     }

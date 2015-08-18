@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 
-	[JsonConverter(typeof(ReadAsTypeConverter<ScriptQuery>))]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<ScriptQuery>))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IScriptQuery : IQuery
 	{

@@ -11,6 +11,7 @@ namespace Nest
 	}
 
 	[JsonObject]
+	[JsonConverter(typeof(SuggestResponseJsonConverter))]
 	public class SuggestResponse : BaseResponse, ISuggestResponse
 	{
 		public ShardsMetaData Shards { get; internal set; }

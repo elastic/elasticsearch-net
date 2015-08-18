@@ -5,7 +5,7 @@ using Nest.Resolvers.Converters;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ReadAsTypeConverter<RoutingFieldMapping>))]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<RoutingFieldMapping>))]
 	public interface IRoutingFieldMapping : ISpecialField
 	{
 		[JsonProperty("required")]

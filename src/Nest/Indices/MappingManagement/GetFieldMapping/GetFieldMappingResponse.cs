@@ -27,7 +27,7 @@ namespace Nest
 		public string FullName { get; set; }
 
 		[JsonProperty("mapping")]
-		[JsonConverter(typeof(FieldMappingConverter))]
+		[JsonConverter(typeof(FieldMappingJsonConverter))]
 		public Dictionary<string, IFieldMapping> Mapping { get; set; }
 
 	}

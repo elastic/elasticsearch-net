@@ -85,7 +85,7 @@ namespace Nest
 					SearchPathInfo.CloseOverAutomagicCovariantResultSelector(this.Infer, kv.Value);				
 			}
 
-			var multiSearchConverter = new MultiSearchConverter(ConnectionSettings, descriptor);
+			var multiSearchConverter = new MultiSearchJsonConverter(ConnectionSettings, descriptor);
 			return multiSearchConverter;
 		}
 	}

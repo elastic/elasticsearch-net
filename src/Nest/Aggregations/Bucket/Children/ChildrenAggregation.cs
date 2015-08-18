@@ -8,7 +8,7 @@ using System.Text;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeConverter<ChildrenAggregator>))]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<ChildrenAggregator>))]
 	public interface IChildrenAggregator : IBucketAggregator
 	{
 		[JsonProperty("type")]

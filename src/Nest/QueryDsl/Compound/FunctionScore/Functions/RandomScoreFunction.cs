@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeConverter<RandomScoreFunction>))]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<RandomScoreFunction>))]
 	public interface IRandomScoreFunction
 	{
 		[JsonProperty(PropertyName = "seed")]

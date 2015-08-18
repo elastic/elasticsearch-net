@@ -8,7 +8,7 @@ using Newtonsoft.Json.Converters;
 namespace Nest
 {
 	[JsonObject(MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeConverter<DirectGenerator>))]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<DirectGenerator>))]
 	public interface IDirectGenerator
 	{
 		[JsonProperty(PropertyName = "field")]

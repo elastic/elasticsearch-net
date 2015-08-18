@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeConverter<SpanQueryDescriptor<object>>))]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<SpanQueryDescriptor<object>>))]
 	public interface ISpanQuery : IQuery
 	{
 		[JsonProperty(PropertyName = "span_term")]

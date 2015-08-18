@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeConverter<PhraseSuggester>))]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<PhraseSuggester>))]
 	public interface IPhraseSuggester : ISuggester
 	{
 		[JsonProperty(PropertyName = "gram_size")]

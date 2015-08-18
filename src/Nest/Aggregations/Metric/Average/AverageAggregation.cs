@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeConverter<AverageAggregator>))]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<AverageAggregator>))]
 	public interface IAverageAggregator : IMetricAggregator { }
 
 	public class AverageAggregator : MetricAggregator, IAverageAggregator { }

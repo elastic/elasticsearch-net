@@ -10,7 +10,7 @@ namespace Nest
 {
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeConverter<SearchRequest>))]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<SearchRequest>))]
 	public interface ISearchRequest : IQueryPath<SearchRequestParameters>
 	{
 		Type ClrType { get; }
@@ -44,7 +44,7 @@ namespace Nest
 		IDictionary<IndexName, double> IndicesBoost { get; set; }
 
 		[JsonProperty(PropertyName = "sort")]
-		[JsonConverter(typeof(SortCollectionConverter))]
+		[JsonConverter(typeof(SortCollectionJsonConverter))]
 		IList<ISort> Sort { get; set; }
 
 		[JsonProperty(PropertyName = "suggest")]
@@ -67,7 +67,7 @@ namespace Nest
 		IDictionary<string, IScriptQuery> ScriptFields { get; set; }
 
 		[JsonProperty(PropertyName = "_source")]
-		[JsonConverter(typeof(ReadAsTypeConverter<SourceFilter>))]
+		[JsonConverter(typeof(ReadAsTypeJsonConverter<SourceFilter>))]
 		ISourceFilter Source { get; set; }
 
 		[JsonProperty(PropertyName = "aggs")]

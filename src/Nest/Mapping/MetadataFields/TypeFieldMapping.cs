@@ -4,7 +4,7 @@ using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ReadAsTypeConverter<TypeFieldMapping>))]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<TypeFieldMapping>))]
 	public interface ITypeFieldMapping : ISpecialField
 	{
 		[JsonProperty("index"), JsonConverter(typeof(StringEnumConverter))]

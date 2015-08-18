@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(IndexNameConverter))]
+	[JsonConverter(typeof(IndexNameJsonConverter))]
 	public class IndexName : IEquatable<IndexName>
 	{
 		public string Name { get; set; }

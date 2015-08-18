@@ -6,10 +6,9 @@ namespace Nest
 {
 
 	[JsonObject]
-	[JsonConverter(typeof(WarmerMappingConverter))]
+	[JsonConverter(typeof(WarmerMappingJsonConverter))]
 	public class WarmerMapping
 	{
-
 		public string Name { get; internal set; }
 
 		public IEnumerable<TypeName> Types { get; internal set; }

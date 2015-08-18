@@ -17,7 +17,7 @@ namespace Nest
 		[JsonProperty("similarity")]
 		public string Similarity { get; set; }
 
-		[JsonProperty("fields"), JsonConverter(typeof(ElasticCoreTypeConverter))]
+		[JsonProperty("fields"), JsonConverter(typeof(ElasticCoreTypeJsonConverter))]
 		public IDictionary<FieldName, IElasticCoreType> Fields { get; set; }
 
 		public AttachmentMapping()

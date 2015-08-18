@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ReadAsTypeConverter<AllFieldMapping>))]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<AllFieldMapping>))]
 	public interface IAllFieldMapping : ISpecialField
 	{
 		[JsonProperty("enabled")]

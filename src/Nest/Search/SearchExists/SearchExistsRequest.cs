@@ -11,7 +11,7 @@ namespace Nest
 	public interface ISearchExistsRequest : IQueryPath<SearchExistsRequestParameters>
 	{
 		[JsonProperty(PropertyName = "query")]
-		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryContainer>, CustomJsonConverter>))]
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeJsonConverter<QueryContainer>, CustomJsonConverter>))]
 		IQueryContainer Query { get; set; }
 
 		[JsonIgnore]

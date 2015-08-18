@@ -9,7 +9,7 @@ using Newtonsoft.Json.Converters;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeConverter<NestedQueryDescriptor<object>>))]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<NestedQueryDescriptor<object>>))]
 	public interface INestedQuery : IQuery
 	{
 		[JsonProperty("score_mode"), JsonConverter(typeof (StringEnumConverter))]
@@ -25,7 +25,7 @@ namespace Nest
 		FieldName Path { get; set; }
 
 		[JsonProperty("inner_hits")]
-		[JsonConverter(typeof(ReadAsTypeConverter<InnerHits>))]
+		[JsonConverter(typeof(ReadAsTypeJsonConverter<InnerHits>))]
 		IInnerHits InnerHits { get; set; }
 
 	}

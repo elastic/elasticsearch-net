@@ -8,7 +8,7 @@ using System.Text;
 namespace Nest
 {
 	[JsonObject(MemberSerialization.OptIn)]
-	[JsonConverter(typeof(UpgradeStatusResponseConverter))]
+	[JsonConverter(typeof(UpgradeStatusResponseJsonConverter))]
 	public interface IUpgradeStatusResponse : IResponse
 	{
 		long SizeInBytes { get; set; }

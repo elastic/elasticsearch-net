@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ReadAsTypeConverter<SnapshotRepository>))]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<SnapshotRepository>))]
 	public interface IRepository
 	{
 

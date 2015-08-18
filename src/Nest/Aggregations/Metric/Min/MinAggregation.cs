@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeConverter<MinAggregator>))]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<MinAggregator>))]
 	public interface IMinAggregator : IMetricAggregator { }
 
 	public class MinAggregator : MetricAggregator, IMinAggregator { }

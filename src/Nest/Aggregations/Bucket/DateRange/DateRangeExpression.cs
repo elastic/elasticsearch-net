@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ReadAsTypeConverter<DateRangeExpression>))]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<DateRangeExpression>))]
 	public interface IDateRangeExpression : INestSerializable
 	{
 		[JsonProperty(PropertyName = "from")]

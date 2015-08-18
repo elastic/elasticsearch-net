@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeConverter<PercentilesAggregator>))]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<PercentilesAggregator>))]
 	public interface IPercentilesAggregator : IMetricAggregator
 	{
 		[JsonProperty("percents")]

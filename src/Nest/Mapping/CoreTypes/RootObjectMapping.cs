@@ -27,7 +27,7 @@ namespace Nest
 		public bool? NumericDetection { get; set; }
 
 		[JsonProperty("transform")]
-		[JsonConverter(typeof(MappingTransformConverter))]
+		[JsonConverter(typeof(MappingTransformJsonConverter))]
 		public IList<MappingTransform> Transform { get; set; }
 
 		//Special fields (From the documentation i cannot see that these also would apply to the base object mapping class
@@ -76,7 +76,7 @@ namespace Nest
 		public FluentDictionary<string, object> Meta { get; set; }
 
 		[JsonProperty("dynamic_templates", TypeNameHandling = TypeNameHandling.None)]
-		[JsonConverter(typeof(DynamicTemplatesConverter))]
+		[JsonConverter(typeof(DynamicTemplatesJsonConverter))]
 		public IDictionary<string, DynamicTemplate> DynamicTemplates { get; set; }
 
 	}

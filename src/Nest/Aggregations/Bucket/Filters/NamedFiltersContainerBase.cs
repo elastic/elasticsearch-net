@@ -7,12 +7,12 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<NamedFiltersContainer>, DictionaryKeysAreNotFieldNamesJsonConverter>))]
+	[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeJsonConverter<NamedFiltersContainer>, DictionaryKeysAreNotFieldNamesJsonConverter>))]
 	public interface INamedFiltersContainer
 	{
 	}
 
-	[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<NamedFiltersContainer>, DictionaryKeysAreNotFieldNamesJsonConverter>))]
+	[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeJsonConverter<NamedFiltersContainer>, DictionaryKeysAreNotFieldNamesJsonConverter>))]
 	public abstract class NamedFiltersContainerBase : ProxyDictionary<string, IQueryContainer>, INamedFiltersContainer
 	{
 		protected NamedFiltersContainerBase () : base() { }

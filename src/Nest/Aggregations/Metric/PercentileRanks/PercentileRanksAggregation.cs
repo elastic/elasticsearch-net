@@ -8,7 +8,7 @@ using System.Text;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeConverter<PercentileRanksAggregator>))]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<PercentileRanksAggregator>))]
 	public interface IPercentileRanksAggregator : IMetricAggregator
 	{
 		[JsonProperty("values")]

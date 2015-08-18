@@ -20,10 +20,10 @@ namespace Nest
 		[JsonConverter(typeof(AnalyzerCollectionJsonConverter))]
 		public IDictionary<string, AnalyzerBase> Analyzers { get; set; }
 
-		[JsonConverter(typeof(TokenFilterCollectionConverter))]
+		[JsonConverter(typeof(TokenFilterCollectionJsonConverter))]
 		public IDictionary<string, TokenFilterBase> TokenFilters { get; set; }
 
-		[JsonConverter(typeof(TokenizerCollectionConverter))]
+		[JsonConverter(typeof(TokenizerCollectionJsonConverter))]
 		public IDictionary<string, TokenizerBase> Tokenizers { get; set; }
 
 		[JsonConverter(typeof(CharFilterCollectionJsonConverter))]

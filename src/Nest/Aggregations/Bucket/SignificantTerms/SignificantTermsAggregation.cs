@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeConverter<SignificantTermsAggregator>))]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<SignificantTermsAggregator>))]
 	public interface ISignificantTermsAggregator : IBucketAggregator
 	{
 		[JsonProperty("field")]

@@ -8,7 +8,7 @@ using Newtonsoft.Json.Converters;
 namespace Nest
 {
 	[JsonObject(MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeConverter<TermSuggester>))]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<TermSuggester>))]
 	public interface ITermSuggester : ISuggester
 	{
 		[JsonProperty(PropertyName = "prefix_len")]

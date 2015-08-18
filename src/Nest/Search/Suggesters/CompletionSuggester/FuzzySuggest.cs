@@ -7,7 +7,7 @@ using System.Linq;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeConverter<FuzzySuggester>))]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<FuzzySuggester>))]
 	public interface IFuzzySuggester
 	{
 		[JsonProperty(PropertyName = "transpositions")]

@@ -49,7 +49,7 @@ namespace Nest
 
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeConverter<AggregationContainer>))]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<AggregationContainer>))]
 	public interface IAggregationContainer
 	{
 		[JsonProperty("avg")]

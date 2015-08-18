@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Nest
 {
-	[JsonConverter(typeof(TermsIncludeExcludeConverter))]
+	[JsonConverter(typeof(TermsIncludeExcludeJsonConverter))]
 	public class TermsIncludeExclude
 	{
 		[JsonProperty("pattern")]

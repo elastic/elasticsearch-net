@@ -5,7 +5,7 @@ using Nest.Resolvers.Converters;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ReadAsTypeConverter<TimestampFieldMapping>))]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<TimestampFieldMapping>))]
 	public interface ITimestampFieldMapping : ISpecialField
 	{
 		[JsonProperty("enabled")]

@@ -19,7 +19,7 @@ namespace Nest
 		int? Size { get; set; }
 
 		[JsonProperty(PropertyName = "sort")]
-		[JsonConverter(typeof(SortCollectionConverter))]
+		[JsonConverter(typeof(SortCollectionJsonConverter))]
 		IList<KeyValuePair<FieldName, ISort>> Sort { get; set; }
 
 		[JsonProperty(PropertyName = "highlight")]
@@ -29,7 +29,7 @@ namespace Nest
 		bool? Explain { get; set; }
 
 		[JsonProperty(PropertyName = "_source")]
-		[JsonConverter(typeof(ReadAsTypeConverter<SourceFilter>))]
+		[JsonConverter(typeof(ReadAsTypeJsonConverter<SourceFilter>))]
 		ISourceFilter Source { get; set; }
 
 		[JsonProperty(PropertyName = "version")]

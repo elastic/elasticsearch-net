@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(TimeUnitExpressionConverter))]
+	[JsonConverter(typeof(TimeUnitExpressionJsonConverter))]
 	public class TimeUnitExpression : IComparable<TimeUnitExpression>, IEquatable<TimeUnitExpression>
 	{
 		public double? Factor { get; }

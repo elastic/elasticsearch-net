@@ -4,7 +4,7 @@ using Nest.Resolvers.Converters;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ReadAsTypeConverter<SourceFieldMapping>))]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<SourceFieldMapping>))]
 	public interface ISourceFieldMapping : ISpecialField
 	{
 		[JsonProperty("enabled")]

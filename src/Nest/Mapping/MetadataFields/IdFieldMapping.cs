@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ReadAsTypeConverter<IdFieldMapping>))]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<IdFieldMapping>))]
 	public interface IIdFieldMapping : ISpecialField
 	{
 		[JsonProperty("path")]

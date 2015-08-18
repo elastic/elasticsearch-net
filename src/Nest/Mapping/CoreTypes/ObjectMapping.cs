@@ -22,8 +22,8 @@ namespace Nest
 		public string Similarity { get; set; }
 
 		[JsonProperty("dynamic")]
-		[JsonConverter(typeof(DynamicMappingOptionConverter))]
-		public DynamicMappingOption? Dynamic { get; set; }
+		[JsonConverter(typeof(DynamicMappingJsonConverter))]
+		public DynamicMapping? Dynamic { get; set; }
 
 		[JsonProperty("enabled")]
 		public bool? Enabled { get; set; }
@@ -35,7 +35,7 @@ namespace Nest
 		public string Path { get; set; }
 
 		[JsonProperty("properties", TypeNameHandling = TypeNameHandling.None)]
-		[JsonConverter(typeof(ElasticTypesConverter))]
+		[JsonConverter(typeof(PropertiesJsonConverter))]
 		public IDictionary<FieldName, IElasticType> Properties { get; set; }
 
 	}
@@ -92,14 +92,14 @@ namespace Nest
 			return this;
 		}
 
-		public ObjectMappingDescriptor<TParent, TChild> Dynamic(DynamicMappingOption dynamic)
+		public ObjectMappingDescriptor<TParent, TChild> Dynamic(DynamicMapping dynamic)
 		{
 			this._Mapping.Dynamic = dynamic;
 			return this;
 		}
 		public ObjectMappingDescriptor<TParent, TChild> Dynamic(bool dynamic = true)
 		{
-			return this.Dynamic(dynamic ? DynamicMappingOption.Allow : DynamicMappingOption.Ignore);
+			return this.Dynamic(dynamic ? DynamicMapping.Allow : DynamicMapping.Ignore);
 		}
 		public ObjectMappingDescriptor<TParent, TChild> Enabled(bool enabled = true)
 		{

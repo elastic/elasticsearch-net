@@ -9,7 +9,7 @@ namespace Nest
 {
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeConverter<MatchAllQuery>))]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<MatchAllQuery>))]
 	public interface IMatchAllQuery : IQuery
 	{
 		[JsonProperty(PropertyName = "norm_field")]

@@ -6,7 +6,7 @@ using Nest.Resolvers.Converters;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ReadAsTypeConverter<ExternalFieldDeclaration>))]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<ExternalFieldDeclaration>))]
 	public interface IExternalFieldDeclaration
 	{
 		[JsonProperty("index")]

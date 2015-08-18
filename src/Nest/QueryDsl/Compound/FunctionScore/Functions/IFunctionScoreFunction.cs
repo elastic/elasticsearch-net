@@ -5,7 +5,7 @@ using System;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeConverter<FunctionScoreFunction<object>>))]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<FunctionScoreFunction<object>>))]
 	public interface IFunctionScoreFunction
 	{
 		QueryContainer Filter { get; set; }
@@ -25,7 +25,7 @@ namespace Nest
 		IFunctionScoreFunction Self => this;
 
 		[JsonProperty("filter")]
-		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryContainer>, CustomJsonConverter>))]
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeJsonConverter<QueryContainer>, CustomJsonConverter>))]
 		QueryContainer IFunctionScoreFunction.Filter { get; set; }
 
 		long? IFunctionScoreFunction.Weight

@@ -5,7 +5,7 @@ using Nest.Resolvers.Converters;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ReadAsTypeConverter<FieldNamesFieldMapping>))]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<FieldNamesFieldMapping>))]
 	public interface IFieldNamesFieldMapping : ISpecialField
 	{
 		[JsonProperty("enabled")]

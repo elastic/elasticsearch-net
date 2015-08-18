@@ -2,7 +2,7 @@
 
 namespace Nest
 {
-	[JsonConverter(typeof(KeyValueConverter<HistogramOrder, SortOrder>))]
+	[JsonConverter(typeof(KeyValueJsonConverter<HistogramOrder, SortOrder>))]
 	public class HistogramOrder
 	{
 		public string Key { get; set; }
