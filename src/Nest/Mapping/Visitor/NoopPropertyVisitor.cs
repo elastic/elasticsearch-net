@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Nest
 {
-	public class NoopTypeVisitor : ITypeVisitor
+	public class NoopPropertyVisitor : IPropertyVisitor
 	{
 		public virtual void Visit(IBooleanProperty type, PropertyInfo propertyInfo, ElasticPropertyAttribute attribute)
 		{

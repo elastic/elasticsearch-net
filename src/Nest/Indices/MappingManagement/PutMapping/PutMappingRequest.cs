@@ -97,7 +97,7 @@ namespace Nest
 		/// <pre>Class types default to object and Enums to int</pre>
 		/// <pre>Later calls can override whatever is set is by this call.</pre>
 		/// </summary>
-		public PutMappingDescriptor<T> AutoMap(ITypeVisitor visitor = null)
+		public PutMappingDescriptor<T> AutoMap(IPropertyVisitor visitor = null)
 		{
 			var walker = new PropertyWalker(typeof(T), visitor);
 			Self.Mapping.Properties = walker.GetProperties();

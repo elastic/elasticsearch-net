@@ -107,7 +107,7 @@ namespace Nest
 				a.Properties[p.Key] = p.Value;
 		});
 
-		public TDescriptor AutoMap(ITypeVisitor visitor = null) => Assign(a =>
+		public TDescriptor AutoMap(IPropertyVisitor visitor = null) => Assign(a =>
 		{
 			var mapper = new PropertyWalker(typeof(TChild), visitor);
 			a.Properties = mapper.GetProperties();	

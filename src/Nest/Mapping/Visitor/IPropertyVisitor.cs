@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Nest
 {
-	public interface ITypeVisitor 
+	public interface IPropertyVisitor 
 	{
 		void Visit(IStringProperty type, PropertyInfo propertyInfo, ElasticPropertyAttribute attribute);
 		void Visit(INumberProperty type, PropertyInfo propertyInfo, ElasticPropertyAttribute attribute);

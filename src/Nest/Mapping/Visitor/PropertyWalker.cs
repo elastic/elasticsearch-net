@@ -10,14 +10,14 @@ namespace Nest
 	public class PropertyWalker
 	{
 		private Type _type;
-		private ITypeVisitor _visitor;
+		private IPropertyVisitor _visitor;
 
 		public PropertyWalker(Type type) : this(type, null) { }
 
-		public PropertyWalker(Type type, ITypeVisitor visitor)
+		public PropertyWalker(Type type, IPropertyVisitor visitor)
 		{
 			_type = GetUnderlyingType(type);
-			_visitor = visitor ?? new NoopTypeVisitor();
+			_visitor = visitor ?? new NoopPropertyVisitor();
 		}
 
 		public Dictionary<FieldName, IElasticsearchProperty> GetProperties()
