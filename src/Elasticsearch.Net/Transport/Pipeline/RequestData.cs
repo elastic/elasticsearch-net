@@ -52,8 +52,7 @@ namespace Elasticsearch.Net.Connection
 			: this(method, path, data, global, (IRequestConfiguration)local?.RequestConfiguration, memoryStreamFactory)
 		{
 			this.CustomConverter = local?.DeserializationState;
-			if (this.Path.IsNullOrEmpty())
-				this.Path = this.CreatePathWithQueryStrings(path, this._settings, null);
+			this.Path = this.CreatePathWithQueryStrings(path, this._settings, local);
 		}
 		public RequestData(HttpMethod method, string path, PostData<object> data, IConnectionConfigurationValues global, IRequestConfiguration local, IMemoryStreamFactory memoryStreamFactory)
 		{
@@ -62,8 +61,7 @@ namespace Elasticsearch.Net.Connection
 			this._formatter = new UrlFormatProvider(this._settings);
 			this.Method = method;
 			this.Data = data;
-			if (this.Path.IsNullOrEmpty())
-				this.Path = this.CreatePathWithQueryStrings(path, this._settings, null);
+			this.Path = this.CreatePathWithQueryStrings(path, this._settings, null);
 
 			//TODO default to true in 2.0?
 			this.Pipelined = global.HttpPipeliningEnabled || (local?.EnableHttpPipelining).GetValueOrDefault(false);
