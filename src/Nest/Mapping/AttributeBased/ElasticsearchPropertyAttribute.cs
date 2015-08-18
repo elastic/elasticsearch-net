@@ -7,7 +7,7 @@ using System.Reflection;
 namespace Nest 
 {
 	[AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
-	public abstract class ElasticPropertyAttribute : Attribute, IPropertyMapping
+	public abstract class ElasticsearchPropertyAttribute : Attribute, IPropertyMapping
 	{
 		public bool DocValues { get; set; }
 		public string IndexName { get; set; }
@@ -18,11 +18,11 @@ namespace Nest
 
 		public abstract IElasticsearchProperty ToProperty();
 
-		public static ElasticPropertyAttribute From(MemberInfo memberInfo)
+		public static ElasticsearchPropertyAttribute From(MemberInfo memberInfo)
 		{
-			var attributes = memberInfo.GetCustomAttributes(typeof(ElasticPropertyAttribute), true);
+			var attributes = memberInfo.GetCustomAttributes(typeof(ElasticsearchPropertyAttribute), true);
 			if (attributes.HasAny())
-				return ((ElasticPropertyAttribute)attributes.First());
+				return ((ElasticsearchPropertyAttribute)attributes.First());
 			return null;
 		}
 	}

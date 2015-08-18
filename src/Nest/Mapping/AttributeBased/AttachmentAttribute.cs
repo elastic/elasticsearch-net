@@ -2,7 +2,7 @@
 
 namespace Nest
 {
-	public class AttachmentAttribute : ElasticPropertyAttribute
+	public class AttachmentAttribute : ElasticsearchPropertyAttribute
 	{
 		public override IElasticsearchProperty ToProperty() => new AttachmentProperty(this);
 	}

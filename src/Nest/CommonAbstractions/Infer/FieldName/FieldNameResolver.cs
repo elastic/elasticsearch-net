@@ -33,7 +33,7 @@ namespace Nest.Resolvers
 			
 			var name = info.Name;
 
-			var att = ElasticPropertyAttribute.From(info);
+			var att = ElasticsearchPropertyAttribute.From(info);
 			if (att != null && !att.Name.IsNullOrEmpty())
 				return att.Name;
 
@@ -49,7 +49,7 @@ namespace Nest.Resolvers
 		public string Resolve(Expression expression)
 		{
 			var stack = new Stack<string>();
-			var properties = new Stack<ElasticPropertyAttribute>();
+			var properties = new Stack<ElasticsearchPropertyAttribute>();
 			Visit(expression, stack, properties);
 			return stack
 				.Aggregate(
@@ -62,12 +62,12 @@ namespace Nest.Resolvers
 		public string ResolveToLastToken(Expression expression)
 		{
 			var stack = new Stack<string>();
-			var properties = new Stack<ElasticPropertyAttribute>();
+			var properties = new Stack<ElasticsearchPropertyAttribute>();
 			Visit(expression, stack, properties);
 			return stack.Last();
 		}
 
-		protected override Expression VisitMemberAccess(MemberExpression expression, Stack<string> stack, Stack<ElasticPropertyAttribute> properties)
+		protected override Expression VisitMemberAccess(MemberExpression expression, Stack<string> stack, Stack<ElasticsearchPropertyAttribute> properties)
 		{
 			if (stack != null)
 			{
@@ -77,7 +77,7 @@ namespace Nest.Resolvers
 			return base.VisitMemberAccess(expression, stack, properties);
 		}
 
-		protected override Expression VisitMethodCall(MethodCallExpression m, Stack<string> stack, Stack<ElasticPropertyAttribute> properties)
+		protected override Expression VisitMethodCall(MethodCallExpression m, Stack<string> stack, Stack<ElasticsearchPropertyAttribute> properties)
 		{
 			if (m.Method.Name == "Suffix" && m.Arguments.Any())
 			{
@@ -152,11 +152,11 @@ namespace Nest.Resolvers
 		public MemberInfoResolver(IConnectionSettingsValues settings, Expression expression) : base(settings)
 		{
 			var stack = new Stack<string>();
-			var properties = new Stack<ElasticPropertyAttribute>();
+			var properties = new Stack<ElasticsearchPropertyAttribute>();
 			base.Visit(expression, stack, properties);
 		}
 
-		protected override Expression VisitMemberAccess(MemberExpression expression, Stack<string> stack, Stack<ElasticPropertyAttribute> properties)
+		protected override Expression VisitMemberAccess(MemberExpression expression, Stack<string> stack, Stack<ElasticsearchPropertyAttribute> properties)
 		{
 			this._members.Add(expression.Member);
 			return base.VisitMemberAccess(expression, stack, properties);

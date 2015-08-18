@@ -2,7 +2,7 @@
 
 namespace Nest
 {
-	public class BinaryAttribute : ElasticPropertyAttribute
+	public class BinaryAttribute : ElasticsearchPropertyAttribute
 	{
 		public override IElasticsearchProperty ToProperty() => new BinaryProperty(this);
 	}	

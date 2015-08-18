@@ -2,7 +2,7 @@
 
 namespace Nest
 {
-	public class CompletionAttribute : ElasticPropertyAttribute 
+	public class CompletionAttribute : ElasticsearchPropertyAttribute 
 	{
 		public string SearchAnalyzer { get; set; }
 		public string Analyzer { get; set; }

@@ -2,7 +2,7 @@
 
 namespace Nest
 {
-	public class BooleanAttribute : ElasticPropertyAttribute 
+	public class BooleanAttribute : ElasticsearchPropertyAttribute 
 	{
 		public NonStringIndexOption? Index { get; set; }
 		public double Boost { get; set; }

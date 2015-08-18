@@ -188,7 +188,7 @@ namespace Nest.Resolvers
 
 			IPropertyMapping propertyMapping = null;
 			if (!this.ConnectionSettings.PropertyMappings.TryGetValue(member, out propertyMapping))
-				propertyMapping = ElasticPropertyAttribute.From(member);
+				propertyMapping = ElasticsearchPropertyAttribute.From(member);
 
 			if (propertyMapping == null)
 			{

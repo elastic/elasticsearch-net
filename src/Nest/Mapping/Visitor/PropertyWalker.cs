@@ -25,7 +25,7 @@ namespace Nest
 			var properties = new Dictionary<FieldName, IElasticsearchProperty>();
 			foreach(var propertyInfo in _type.GetProperties())
 			{
-				var attribute = ElasticPropertyAttribute.From(propertyInfo);
+				var attribute = ElasticsearchPropertyAttribute.From(propertyInfo);
 				if (attribute != null && attribute.Ignore)
 					continue;
 				var property = GetProperty(propertyInfo, attribute);
@@ -34,7 +34,7 @@ namespace Nest
 			return properties;
 		}
 
-		private IElasticsearchProperty GetProperty(PropertyInfo propertyInfo, ElasticPropertyAttribute attribute)
+		private IElasticsearchProperty GetProperty(PropertyInfo propertyInfo, ElasticsearchPropertyAttribute attribute)
 		{
 			var elasticType = GetElasticType(propertyInfo, attribute);
 			var objectType = elasticType as IObjectProperty;
@@ -47,7 +47,7 @@ namespace Nest
 			return elasticType;	
 		}
 
-		private IElasticsearchProperty GetElasticType(PropertyInfo propertyInfo, ElasticPropertyAttribute attribute)
+		private IElasticsearchProperty GetElasticType(PropertyInfo propertyInfo, ElasticsearchPropertyAttribute attribute)
 		{
 			var elasticType = _visitor.Visit(propertyInfo, attribute);
 			if (elasticType != null)

@@ -131,8 +131,8 @@
     <Compile Include="Mapping\AttributeBased\BooleanAttribute.cs" />
     <Compile Include="Mapping\AttributeBased\CompletionAttribute.cs" />
     <Compile Include="Mapping\AttributeBased\DateAttribute.cs" />
-    <Compile Include="Mapping\AttributeBased\ElasticPropertyAttribute.cs" />
-    <Compile Include="Mapping\AttributeBased\ElasticTypeAttribute.cs" />
+    <Compile Include="Mapping\AttributeBased\ElasticsearchPropertyAttribute.cs" />
+    <Compile Include="Mapping\AttributeBased\ElasticsearchTypeAttribute.cs" />
     <Compile Include="Mapping\AttributeBased\GeoPointAttribute.cs" />
     <Compile Include="Mapping\AttributeBased\GeoShapeAttribute.cs" />
     <Compile Include="Mapping\AttributeBased\IpAttribute.cs" />

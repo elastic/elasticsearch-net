@@ -2,7 +2,7 @@
 
 namespace Nest
 {
-	public class ObjectAttribute : ElasticPropertyAttribute
+	public class ObjectAttribute : ElasticsearchPropertyAttribute
 	{
 		public DynamicMappingOption Dynamic { get; set; }
 		public bool Enabled { get; set; }

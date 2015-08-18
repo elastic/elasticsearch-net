@@ -38,7 +38,7 @@ namespace Nest
 			Type = typeName;
 		}
 
-		internal ElasticsearchProperty(TypeName typeName, ElasticPropertyAttribute attribute)
+		internal ElasticsearchProperty(TypeName typeName, ElasticsearchPropertyAttribute attribute)
 			: this(typeName)
 		{
 			DocValues = attribute.DocValues;

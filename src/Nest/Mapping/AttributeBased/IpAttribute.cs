@@ -2,7 +2,7 @@
 
 namespace Nest
 {
-	public class IpAttribute : ElasticPropertyAttribute
+	public class IpAttribute : ElasticsearchPropertyAttribute
 	{
 		public double Boost { get; set; }
 		public bool IncludeInAll { get; set; }

@@ -2,7 +2,7 @@
 
 namespace Nest
 {
-	public class DateAttribute : ElasticPropertyAttribute 
+	public class DateAttribute : ElasticsearchPropertyAttribute 
 	{
 		public NonStringIndexOption? Index { get; set; }
 		public double Boost { get; set; }

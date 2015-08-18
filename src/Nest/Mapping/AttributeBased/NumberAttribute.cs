@@ -2,7 +2,7 @@
 
 namespace Nest
 {
-	public class NumberAttribute : ElasticPropertyAttribute
+	public class NumberAttribute : ElasticsearchPropertyAttribute
 	{
 		public NumberAttribute(NumberType type)
 		{

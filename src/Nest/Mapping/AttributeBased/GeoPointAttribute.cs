@@ -2,7 +2,7 @@
 
 namespace Nest
 {
-	public class GeoPointAttribute : ElasticPropertyAttribute
+	public class GeoPointAttribute : ElasticsearchPropertyAttribute
 	{
 		public bool LatLon { get; set; }
 		public bool GeoHash { get; set; }

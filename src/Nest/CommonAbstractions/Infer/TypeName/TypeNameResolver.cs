@@ -27,7 +27,7 @@ namespace Nest.Resolvers
 			if (_connectionSettings.DefaultTypeNames.TryGetValue(type, out typeName))
 				return typeName;
 
-			var att = ElasticTypeAttribute.From(type);
+			var att = ElasticsearchTypeAttribute.From(type);
 			if (att != null && !att.Name.IsNullOrEmpty())
 				typeName = att.Name;
 			else

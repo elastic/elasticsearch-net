@@ -3,7 +3,7 @@ using System;
 
 namespace Nest
 {
-	public class StringAttribute : ElasticPropertyAttribute
+	public class StringAttribute : ElasticsearchPropertyAttribute
 	{
 		public string Analyzer { get; set; }
 		public double Boost { get; set; }

@@ -2,7 +2,7 @@
 
 namespace Nest
 {
-	public class GeoShapeAttribute : ElasticPropertyAttribute 
+	public class GeoShapeAttribute : ElasticsearchPropertyAttribute 
 	{
 		public GeoTree Tree { get; set; }
 		public GeoOrientation Orientation { get; set; }
