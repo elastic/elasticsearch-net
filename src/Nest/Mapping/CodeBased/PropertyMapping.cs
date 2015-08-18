@@ -41,7 +41,7 @@ namespace Nest
 		string Name { get; set; }
 		/// <summary>
 		/// Ignore this property completely
-		/// <pre>- When mapping automatically using MapFromAttributes()</pre>
+		/// <pre>- When mapping automatically using AutoMap()</pre>
 		/// <pre>- When Indexing this type do not serialize whatever this value hold</pre>
 		/// </summary>
 		bool Ignore { get; set; }
@@ -62,7 +62,7 @@ namespace Nest
 
 		/// <summary>
 		/// Ignore this property completely
-		/// <pre>- When mapping automatically using MapFromAttributes()</pre>
+		/// <pre>- When mapping automatically using AutoMap()</pre>
 		/// <pre>- When Indexing this type do not serialize whatever this value hold</pre>
 		/// </summary>
 		public bool Ignore { get; set; }
