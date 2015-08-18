@@ -1,10 +1,9 @@
 using System;
-using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 
 namespace Nest
 {
-	public class ReserializeJsonConverter<TReadAs, TInterface> : JsonConverter
+	internal class ReserializeJsonConverter<TReadAs, TInterface> : JsonConverter
 		where TReadAs : class, TInterface, new()
 		where TInterface : class
 	{

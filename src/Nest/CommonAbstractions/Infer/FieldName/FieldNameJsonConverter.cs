@@ -4,9 +4,9 @@ using System.Linq;
 using Newtonsoft.Json;
 
 
-namespace Nest.Resolvers.Converters
+namespace Nest
 {
-	public class FieldNameJsonConverter : JsonConverter
+	internal class FieldNameJsonConverter : JsonConverter
 	{
 		private readonly ElasticInferrer _infer;
 		public FieldNameJsonConverter(IConnectionSettingsValues connectionSettings)

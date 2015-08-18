@@ -100,8 +100,8 @@
     <Compile Include="CommonAbstractions\ConnectionSettings\ClrTypeMapping.cs" />
     <Compile Include="CommonAbstractions\Infer\FieldName\FieldName.cs" />
     <Compile Include="CommonAbstractions\Infer\FieldName\FieldNameExtensions.cs" />
-    <Compile Include="CommonAbstractions\SerializationBehavior\Generic\KeyValueJsonConverter.cs" />
-    <Compile Include="CommonAbstractions\SerializationBehavior\Generic\ReserializeJsonConverter.cs" />
+    <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\KeyValueJsonConverter.cs" />
+    <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\ReserializeJsonConverter.cs" />
     <Compile Include="CommonAbstractions\Union\UnionJsonConverter.cs" />
     <Compile Include="Indices\MappingManagement\GetFieldMapping\FieldMappingJsonConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\Json.cs" />
@@ -134,7 +134,7 @@
     <Compile Include="Document\Single\Exists\ElasticClient-ExistsExtensions.cs" />
     <Compile Include="QueryDsl\Compound\Bool\BoolQuery.cs" />
     <Compile Include="QueryDsl\Compound\Bool\BoolQueryExtensions.cs" />
-    <Compile Include="QueryDsl\Compound\Indices\NoMatchQueryConverter.cs" />
+    <Compile Include="QueryDsl\Compound\Indices\NoMatchQueryJsonConverter.cs" />
     <Compile Include="QueryDsl\FieldNameQueryBase.cs" />
     <Compile Include="QueryDsl\FieldNameQueryDescriptorBase.cs" />
     <Compile Include="QueryDsl\QueryDescriptorBase.cs" />
@@ -881,7 +881,7 @@
     <Compile Include="IndexModules\Similarity\SimilarityCollectionJsonConverter.cs" />
     <Compile Include="CommonOptions\Fuzziness\FuzzinessJsonConverter.cs" />
     <Compile Include="QueryDsl\Geo\LatLon.cs" />
-    <Compile Include="QueryDsl\Span\SpanTermQueryConverter.cs" />
+    <Compile Include="QueryDsl\Span\SpanTermQueryJsonConverter.cs" />
     <Compile Include="QueryDsl\FullText\Match\MatchQueryJsonConverter.cs" />
     <Compile Include="QueryDsl\TermLevel\Fuzzy\FuzzyQueryJsonConverter.cs" />
     <Compile Include="QueryDsl\TermLevel\Terms\TermsQueryJsonConverter.cs" />
@@ -1035,7 +1035,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Aggregations\Pipeline\" />
-    <Folder Include="CommonAbstractions\SerializationBehavior\CustomJson\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

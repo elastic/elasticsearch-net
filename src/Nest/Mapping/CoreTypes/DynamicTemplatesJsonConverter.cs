@@ -4,10 +4,9 @@ using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Nest.Resolvers.Converters
+namespace Nest
 {
-
-	public class DynamicTemplatesJsonConverter : JsonConverter
+	internal class DynamicTemplatesJsonConverter : JsonConverter
 	{
 		public override bool CanWrite => true;
 

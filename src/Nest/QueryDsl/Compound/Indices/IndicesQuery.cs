@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -20,7 +19,7 @@ namespace Nest
 		IQueryContainer Query { get; set; }
 
 		[JsonProperty("no_match_query")]
-		[JsonConverter(typeof(NoMatchQueryConverter))]
+		[JsonConverter(typeof(NoMatchQueryJsonConverter))]
 		IQueryContainer NoMatchQuery { get; set; }
 	}
 

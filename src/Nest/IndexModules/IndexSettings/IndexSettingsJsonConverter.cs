@@ -4,10 +4,11 @@ using System.Linq;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Nest.Resolvers;
 
-namespace Nest.Resolvers.Converters
+namespace Nest
 {
-	public class IndexSettingsJsonConverter : JsonConverter
+	internal class IndexSettingsJsonConverter : JsonConverter
 	{
 		private void WriteSettingObject(JsonWriter writer, JObject obj)
 		{

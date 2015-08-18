@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using System;
 
@@ -43,9 +42,6 @@ namespace Nest
 
 		[JsonProperty("_all")]
 		public IAllFieldMapping AllFieldMapping { get; set; }
-
-		[JsonProperty("_analyzer")]
-		public IAnalyzerFieldMapping AnalyzerFieldMapping { get; set; }
 
 		[JsonProperty("_boost")]
 		public IBoostFieldMapping BoostFieldMapping { get; set; }

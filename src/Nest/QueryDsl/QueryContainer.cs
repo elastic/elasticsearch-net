@@ -4,7 +4,6 @@ using System.Linq;
 using Nest.DSL.Visitor;
 using Newtonsoft.Json;
 using Nest.QueryDsl.Visitor;
-using Nest.Resolvers.Converters;
 
 namespace Nest
 {

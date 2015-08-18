@@ -5,11 +5,11 @@ using Nest.Domain;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Reflection;
+using Nest.Resolvers;
 
-namespace Nest.Resolvers.Converters
+namespace Nest
 {
-
-	public class MultiGetHitJsonConverter : JsonConverter
+	internal class MultiGetHitJsonConverter : JsonConverter
 	{
 		private class MultiHitTuple
 		{

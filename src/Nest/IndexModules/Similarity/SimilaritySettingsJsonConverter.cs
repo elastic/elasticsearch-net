@@ -4,9 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Nest.Resolvers.Converters
+namespace Nest
 {
-	public class SimilaritySettingsJsonConverter : JsonConverter
+	internal class SimilaritySettingsJsonConverter : JsonConverter
 	{
 		public override bool CanConvert(Type objectType) => objectType == typeof(SimilaritySettings);
 

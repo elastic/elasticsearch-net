@@ -4,7 +4,6 @@ using System.Linq;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
 using System.Globalization;
-using Nest.Resolvers.Converters;
 
 namespace Nest
 {

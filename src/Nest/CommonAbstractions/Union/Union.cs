@@ -6,7 +6,6 @@ using System.Text;
 
 namespace Nest
 {
-
 	[JsonConverter(typeof(UnionJsonConverter))]
 	public sealed class Union<TFirst, TSecond>
 	{

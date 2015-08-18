@@ -11,7 +11,7 @@ namespace Nest
 	/// JSON converter for IDictionary that ignores the contract resolver (e.g. CamelCaseFieldNamesContractResolver)
 	/// when converting dictionary keys to property names.
 	/// </summary>
-	public class DictionaryKeysAreNotFieldNamesJsonConverter : JsonConverter
+	internal class DictionaryKeysAreNotFieldNamesJsonConverter : JsonConverter
 	{
 		public override bool CanConvert(Type t) => typeof (IDictionary).IsAssignableFrom(t);
 

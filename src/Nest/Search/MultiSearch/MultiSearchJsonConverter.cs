@@ -5,11 +5,11 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Reflection;
 using Elasticsearch.Net.Serialization;
+using Nest.Resolvers;
 
-namespace Nest.Resolvers.Converters
+namespace Nest
 {
-
-	public class MultiSearchJsonConverter : JsonConverter
+	internal class MultiSearchJsonConverter : JsonConverter
 	{
 		private class MultiHitTuple
 		{

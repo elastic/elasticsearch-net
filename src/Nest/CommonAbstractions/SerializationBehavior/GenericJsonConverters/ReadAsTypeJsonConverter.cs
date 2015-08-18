@@ -4,9 +4,9 @@ using System.Globalization;
 using System.Linq;
 using Newtonsoft.Json;
 
-namespace Nest.Resolvers.Converters
+namespace Nest
 {
-	public class ReadAsTypeJsonConverter<T> : JsonConverter
+	internal class ReadAsTypeJsonConverter<T> : JsonConverter
 		where T : class, new()
 	{
 		public override bool CanRead => true;

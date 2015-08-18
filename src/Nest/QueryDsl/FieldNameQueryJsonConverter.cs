@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public class FieldNameQueryJsonConverter<TReadAs> : ReserializeJsonConverter<TReadAs, IFieldNameQuery>
+	internal class FieldNameQueryJsonConverter<TReadAs> : ReserializeJsonConverter<TReadAs, IFieldNameQuery>
 		where TReadAs : class, IFieldNameQuery, new()
 	{
 		protected override object DeserializeJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)

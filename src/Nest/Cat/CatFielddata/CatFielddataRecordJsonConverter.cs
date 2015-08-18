@@ -5,10 +5,9 @@ using System.Threading;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Nest.Resolvers.Converters
+namespace Nest
 {
-
-	public class CatFielddataRecordJsonConverter : JsonConverter
+	internal class CatFielddataRecordJsonConverter : JsonConverter
 	{
 		public override bool CanWrite
 		{

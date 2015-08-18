@@ -2,7 +2,6 @@
 using System.Globalization;
 using System.Linq.Expressions;
 using Newtonsoft.Json;
-using Nest.Resolvers.Converters;
 
 namespace Nest
 {

@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using Nest.Resolvers.Converters.Aggregations;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
 using System.Linq;
 using System.Reflection;
 using System.Collections;
-using Nest.Resolvers.Converters;
 
 namespace Nest.Resolvers
 {

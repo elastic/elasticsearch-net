@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Nest.Resolvers.Converters
+namespace Nest
 {
-	public class UpgradeStatusResponseJsonConverter : JsonConverter
+	internal class UpgradeStatusResponseJsonConverter : JsonConverter
 	{
 		public override bool CanWrite => false;
 

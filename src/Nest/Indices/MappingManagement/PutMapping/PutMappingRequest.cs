@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
-using Nest.Resolvers.Writers;
 
 namespace Nest
 {
@@ -247,12 +246,6 @@ namespace Nest
 			return this;
 		}
 
-		public PutMappingDescriptor<T> AnalyzerField(Func<AnalyzerFieldMappingDescriptor<T>, IAnalyzerFieldMapping> analyzeMapper)
-		{
-			analyzeMapper.ThrowIfNull("analyzeMapper");
-			Self.Mapping.AnalyzerFieldMapping = analyzeMapper(new AnalyzerFieldMappingDescriptor<T>());
-			return this;
-		}
 		public PutMappingDescriptor<T> BoostField(Func<BoostFieldMappingDescriptor<T>, IBoostFieldMapping> boostMapper)
 		{
 			boostMapper.ThrowIfNull("boostMapper");

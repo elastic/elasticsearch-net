@@ -3,9 +3,9 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 
-namespace Nest.Resolvers.Converters
+namespace Nest
 {
-	public class FieldMappingJsonConverter : JsonConverter
+	internal class FieldMappingJsonConverter : JsonConverter
 	{
 		public override bool CanConvert(Type objectType) => objectType == typeof(IDictionary<string, IFieldMapping>);
 
@@ -40,7 +40,6 @@ namespace Nest.Resolvers.Converters
 					if (name == "_id") mapping = po.ToObject<IdFieldMapping>();
 					if (name == "_type") mapping = po.ToObject<TypeFieldMapping>();
 					if (name == "_source") mapping = po.ToObject<SourceFieldMapping>();
-					if (name == "_analyzer") mapping = po.ToObject<AnalyzerFieldMapping>();
 					if (name == "_routing") mapping = po.ToObject<RoutingFieldMapping>();
 					if (name == "_index") mapping = po.ToObject<IndexFieldMapping>();
 					if (name == "_size") mapping = po.ToObject<SizeFieldMapping>();

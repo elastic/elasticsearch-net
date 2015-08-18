@@ -3,11 +3,11 @@ using System.Linq;
 using Newtonsoft.Json;
 using System.IO;
 using Elasticsearch.Net.Serialization;
+using Nest.Resolvers;
 
-namespace Nest.Resolvers.Converters
+namespace Nest
 {
-
-	public class BulkRequestJsonConverter : JsonConverter
+	internal class BulkRequestJsonConverter : JsonConverter
 	{
 		public override bool CanRead => false;
 		public override bool CanWrite => true;

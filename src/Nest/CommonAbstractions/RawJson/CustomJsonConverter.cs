@@ -4,12 +4,10 @@ using System.Linq;
 using Newtonsoft.Json;
 
 
-namespace Nest.Resolvers.Converters
+namespace Nest
 {
-
-
 	//TODO this is overused I suspect its only needed in 1 or 2 places
-	public class CustomJsonConverter : JsonConverter
+	internal class CustomJsonConverter : JsonConverter
 	{
 		public override bool CanRead { get { return false; } }
 		public override bool CanWrite { get { return true; } }

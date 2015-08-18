@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
 
-namespace Nest.Resolvers.Converters.Aggregations
+namespace Nest
 {
-	public class FilterAggregatorJsonConverter : JsonConverter
+	internal class FilterAggregatorJsonConverter : JsonConverter
 	{
 		public override bool CanRead => true;
 

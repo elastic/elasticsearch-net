@@ -11,15 +11,15 @@ namespace Nest
 {
 	internal class UnionJsonConverter : JsonConverter
 	{
-		private static ConcurrentDictionary<Type, UnionConverterBase> KnownTypes = new ConcurrentDictionary<Type, UnionConverterBase>();  
+		private static ConcurrentDictionary<Type, UnionJsonConverterBase> KnownTypes = new ConcurrentDictionary<Type, UnionJsonConverterBase>();  
 
 		public override bool CanConvert(Type objectType) => true;
 		public override bool CanRead => true;
 		public override bool CanWrite => true;
 
-		public static UnionConverterBase CreateConverter(Type t)
+		public static UnionJsonConverterBase CreateConverter(Type t)
 		{
-			UnionConverterBase conversion;
+			UnionJsonConverterBase conversion;
 			if (KnownTypes.TryGetValue(t, out conversion))
 				return conversion;
 
@@ -27,7 +27,7 @@ namespace Nest
 			switch (genericArguments.Length)
 			{
 				case 2:
-					conversion = typeof (UnionConverter<,>).CreateGenericInstance(genericArguments) as UnionConverterBase;
+					conversion = typeof (UnionJsonConverter<,>).CreateGenericInstance(genericArguments) as UnionJsonConverterBase;
 					break;
 				default:
 					throw new Exception($"No union converter registered that takes {genericArguments.Length} type arguments");
@@ -53,7 +53,7 @@ namespace Nest
 		}
 	}
 
-	internal abstract class UnionConverterBase
+	internal abstract class UnionJsonConverterBase
 	{
 		public bool TryRead<T>(JsonReader reader, JsonSerializer serializer, out T v)
 		{
@@ -71,7 +71,7 @@ namespace Nest
 		public abstract object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer);
 	}
 
-	internal class UnionConverter<TFirst, TSecond> : UnionConverterBase
+	internal class UnionJsonConverter<TFirst, TSecond> : UnionJsonConverterBase
 	{
 		public override void WriteJson(JsonWriter writer, object v, JsonSerializer serializer)
 		{

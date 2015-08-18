@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using Nest.Resolvers.Converters.Queries;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
 

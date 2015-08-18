@@ -7,7 +7,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
-	public class MatchQueryJsonConverter: JsonConverter
+	internal class MatchQueryJsonConverter: JsonConverter
 	{
 		public override bool CanConvert(Type objectType) => true;
 

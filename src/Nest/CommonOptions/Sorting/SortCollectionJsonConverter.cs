@@ -1,13 +1,14 @@
-﻿using Newtonsoft.Json;
+﻿using Nest.Resolvers;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Nest.Resolvers.Converters
+namespace Nest
 {
-	public class SortCollectionJsonConverter : JsonConverter
+	internal class SortCollectionJsonConverter : JsonConverter
 	{
 		public override bool CanConvert(Type objectType) => typeof(IList<ISort>).IsAssignableFrom(objectType);
 

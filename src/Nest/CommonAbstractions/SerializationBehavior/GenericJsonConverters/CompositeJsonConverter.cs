@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public class CompositeJsonConverter<TRead, TWrite> : JsonConverter
+	internal class CompositeJsonConverter<TRead, TWrite> : JsonConverter
 		where TRead : JsonConverter, new()
 		where TWrite : JsonConverter, new()
 	{

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Nest.Resolvers.Converters.Queries
+namespace Nest
 {
-	public class DismaxQueryJsonConverter : ReadAsTypeJsonConverter<DisMaxQueryDescriptor<object>>
+	internal class DismaxQueryJsonConverter : ReadAsTypeJsonConverter<DisMaxQueryDescriptor<object>>
 	{
 		public override bool CanConvert(Type objectType) => true;
 

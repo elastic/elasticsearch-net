@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
+using Nest.Resolvers;
 
-
-namespace Nest.Resolvers.Converters
+namespace Nest
 {
-	public class IndexNameJsonConverter : JsonConverter
+	internal class IndexNameJsonConverter : JsonConverter
 	{
 		public override bool CanConvert(Type objectType) => typeof(IndexName) == objectType;
 

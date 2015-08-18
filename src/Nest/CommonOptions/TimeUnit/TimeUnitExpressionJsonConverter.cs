@@ -4,9 +4,9 @@ using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Nest.Resolvers.Converters
+namespace Nest
 {
-	public class TimeUnitExpressionJsonConverter : JsonConverter
+	internal class TimeUnitExpressionJsonConverter : JsonConverter
 	{
 		public override bool CanWrite => true;
 

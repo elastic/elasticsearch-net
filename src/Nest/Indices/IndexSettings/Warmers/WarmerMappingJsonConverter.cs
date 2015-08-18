@@ -4,9 +4,9 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 
-namespace Nest.Resolvers.Converters
+namespace Nest
 {
-	public class WarmerMappingJsonConverter : JsonConverter
+	internal class WarmerMappingJsonConverter : JsonConverter
 	{
 		public override bool CanConvert(Type objectType) => objectType == typeof(WarmerMapping);
 

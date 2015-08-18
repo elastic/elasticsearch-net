@@ -6,7 +6,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
-	public class FuzzyQueryJsonConverter: JsonConverter
+	internal class FuzzyQueryJsonConverter: JsonConverter
 	{
 		public override bool CanConvert(Type objectType) => true;
 

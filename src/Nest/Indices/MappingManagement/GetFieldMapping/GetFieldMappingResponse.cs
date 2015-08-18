@@ -5,7 +5,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
-using Nest.Resolvers.Converters;
 
 namespace Nest
 {

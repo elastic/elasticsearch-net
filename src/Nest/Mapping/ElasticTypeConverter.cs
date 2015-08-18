@@ -4,9 +4,9 @@ using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Nest.Resolvers.Converters
+namespace Nest
 {
-	public class ElasticTypeJsonConverter : JsonConverter
+	internal class ElasticTypeJsonConverter : JsonConverter
 	{
 		public override bool CanWrite => false;
 		public override bool CanConvert(Type objectType) => objectType == typeof(IElasticType);

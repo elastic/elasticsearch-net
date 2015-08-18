@@ -3,9 +3,9 @@ using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Nest.Resolvers.Converters
+namespace Nest
 {
-	public class FuzzinessJsonConverter : JsonConverter
+	internal class FuzzinessJsonConverter : JsonConverter
 	{
 		public override bool CanWrite => true;
 		public override bool CanConvert(Type objectType) => true;

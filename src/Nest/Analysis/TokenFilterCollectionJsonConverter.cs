@@ -5,7 +5,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
-	public class TokenFilterCollectionJsonConverter : JsonConverter
+	internal class TokenFilterCollectionJsonConverter : JsonConverter
 	{
 		public override bool CanConvert(Type objectType) => typeof(IDictionary<string, TokenFilterBase>).IsAssignableFrom(objectType);
 

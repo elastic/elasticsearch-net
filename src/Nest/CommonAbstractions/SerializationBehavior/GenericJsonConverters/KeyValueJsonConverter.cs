@@ -34,7 +34,7 @@ namespace Nest
 
 
 	//TODO this serializer feels to generalized since it relies on reflection and caching in KnownTypes :/
-	public class KeyValueJsonConverter<TContainer, TValue> : JsonConverter
+	internal class KeyValueJsonConverter<TContainer, TValue> : JsonConverter
 		where TContainer : class, new()
 	{
 

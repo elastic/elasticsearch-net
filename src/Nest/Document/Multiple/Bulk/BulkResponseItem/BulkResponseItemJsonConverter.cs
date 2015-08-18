@@ -2,10 +2,9 @@
 using System.Linq;
 using Newtonsoft.Json;
 
-namespace Nest.Resolvers.Converters
+namespace Nest
 {
-
-	public class BulkResponseItemJsonConverter : JsonConverter
+	internal class BulkResponseItemJsonConverter : JsonConverter
 	{
 		
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)

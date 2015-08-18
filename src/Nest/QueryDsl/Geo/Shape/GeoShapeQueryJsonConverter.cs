@@ -1,5 +1,4 @@
-﻿using Nest.Resolvers.Converters;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -8,7 +7,7 @@ using System.Text;
 
 namespace Nest
 {
-	public class GeoShapeQueryJsonConverter : JsonConverter
+	internal class GeoShapeQueryJsonConverter : JsonConverter
 	{
 		public override bool CanConvert(Type objectType) => true;
 		public override bool CanRead => true;

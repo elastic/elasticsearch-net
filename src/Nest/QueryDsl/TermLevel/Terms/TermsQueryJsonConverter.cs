@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Nest.Resolvers;
 
-namespace Nest.Resolvers.Converters.Queries
+namespace Nest
 {
-	public class TermsQueryJsonConverter : JsonConverter
+	internal class TermsQueryJsonConverter : JsonConverter
 	{
 		public override bool CanRead => true;
 

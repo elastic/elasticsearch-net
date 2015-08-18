@@ -6,9 +6,9 @@ using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Nest.Resolvers.Converters.Aggregations
+namespace Nest
 {
-	public class AggregationJsonConverter : JsonConverter
+	internal class AggregationJsonConverter : JsonConverter
 	{
 		private static Regex _numeric = new Regex(@"^[\d.]+(\.[\d.]+)?$");
 

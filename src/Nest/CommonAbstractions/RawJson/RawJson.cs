@@ -1,5 +1,4 @@
-﻿using Nest.Resolvers.Converters;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,10 +17,10 @@ namespace Nest
 			Data = rawJsonData;
 		}
 	}
-	
+
 	[JsonConverter(typeof(CustomJsonConverter))]
-	internal class RawJsonWrapper<T> 
+	internal class RawJsonWrapper<T>
 	{
-		
+
 	}
 }

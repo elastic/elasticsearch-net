@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Nest.Resolvers.Converters
+namespace Nest
 {
-	public class TermsIncludeExcludeJsonConverter : JsonConverter
+	internal class TermsIncludeExcludeJsonConverter : JsonConverter
 	{
 		public override bool CanConvert(Type objectType) => true;
 

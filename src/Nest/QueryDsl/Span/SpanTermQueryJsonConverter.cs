@@ -6,7 +6,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
-	public class SpanTermQueryConverter : JsonConverter
+	internal class SpanTermQueryJsonConverter : JsonConverter
 	{
 		public override bool CanConvert(Type objectType) => true;
 

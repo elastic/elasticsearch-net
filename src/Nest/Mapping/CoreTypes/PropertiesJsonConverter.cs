@@ -3,9 +3,9 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 
-namespace Nest.Resolvers.Converters
+namespace Nest
 {
-	public class PropertiesJsonConverter : JsonConverter
+	internal class PropertiesJsonConverter : JsonConverter
 	{
 		private readonly DictionaryKeysAreNotFieldNamesJsonConverter _dictionaryConverter = new DictionaryKeysAreNotFieldNamesJsonConverter();
 		private readonly ElasticTypeJsonConverter _elasticTypeConverter = new ElasticTypeJsonConverter();

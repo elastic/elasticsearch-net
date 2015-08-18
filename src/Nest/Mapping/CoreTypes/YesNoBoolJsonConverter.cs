@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
 
-namespace Nest.Resolvers.Converters
+namespace Nest
 {
 	//TODO Only used in IP mapping, these smells like a wrong mapping
 	//If not rename to IpMappingIndexJsonConverter ?
-	public class YesNoBoolJsonConverter : JsonConverter
+	internal class YesNoBoolJsonConverter : JsonConverter
 	{
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{

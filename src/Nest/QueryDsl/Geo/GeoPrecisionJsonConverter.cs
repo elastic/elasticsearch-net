@@ -4,9 +4,9 @@ using Newtonsoft.Json.Converters;
 using System.IO;
 using System.Text.RegularExpressions;
 
-namespace Nest.Resolvers.Converters
+namespace Nest
 {
-	public class GeoPrecisionJsonConverter : JsonConverter
+	internal class GeoPrecisionJsonConverter : JsonConverter
 	{
 		private static readonly Regex SplitRegex = new Regex(@"^(\d+(?:[.,]\d+)?)(\D+)$");
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)

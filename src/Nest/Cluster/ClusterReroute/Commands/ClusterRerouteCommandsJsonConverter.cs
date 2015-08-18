@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Nest.Resolvers.Converters
+namespace Nest
 {
-	public class ClusterRerouteCommandsJsonConverter : JsonConverter
+	internal class ClusterRerouteCommandsJsonConverter : JsonConverter
 	{
 		public override bool CanConvert(Type objectType)
 		{

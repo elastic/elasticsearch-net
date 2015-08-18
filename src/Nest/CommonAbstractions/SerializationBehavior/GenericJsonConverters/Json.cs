@@ -1,10 +1,9 @@
 using Newtonsoft.Json;
 using System;
 
-namespace Nest.Resolvers.Converters
+namespace Nest
 {
-	internal abstract class Json<T> : JsonConverter
-	where T : class
+	internal abstract class Json<T> : JsonConverter where T : class
 	{
 		public override bool CanConvert(Type objectType) => true;
 		public override bool CanWrite => true;

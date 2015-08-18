@@ -4,9 +4,9 @@ using System.Linq;
 using Newtonsoft.Json;
 
 
-namespace Nest.Resolvers.Converters
+namespace Nest
 {
-	public class GetRepositoryResponseJsonConverter : JsonConverter
+	internal class GetRepositoryResponseJsonConverter : JsonConverter
 	{
 		public override bool CanConvert(Type objectType) => true;
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
