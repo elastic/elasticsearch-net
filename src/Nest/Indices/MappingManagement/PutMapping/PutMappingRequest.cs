@@ -8,7 +8,7 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IPutMappingRequest : IIndicesTypePath<PutMappingRequestParameters>
 	{
-		RootObjectType Mapping { get; set; }
+		RootObjectProperty Mapping { get; set; }
 	}
 
 	public interface IPutMappingRequest<T> : IPutMappingRequest where T : class {}
@@ -23,7 +23,7 @@ namespace Nest
 
 	public partial class PutMappingRequest : IndicesTypePathBase<PutMappingRequestParameters>, IPutMappingRequest
 	{
-		public RootObjectType Mapping { get; set; }
+		public RootObjectProperty Mapping { get; set; }
 		
 		/// <summary>
 		/// Calls putmapping on /_all/{type}
@@ -60,7 +60,7 @@ namespace Nest
 	public partial class PutMappingRequest<T> : IndicesTypePathBase<PutMappingRequestParameters, T>, IPutMappingRequest<T>
 		where T : class
 	{
-		public RootObjectType Mapping { get; set; }
+		public RootObjectProperty Mapping { get; set; }
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<PutMappingRequestParameters> pathInfo)
 		{
@@ -75,14 +75,14 @@ namespace Nest
 	{
 		private IPutMappingRequest Self => this;
 
-		RootObjectType IPutMappingRequest.Mapping { get; set; }
+		RootObjectProperty IPutMappingRequest.Mapping { get; set; }
 
 		public PutMappingDescriptor()
 		{
-			Self.Mapping = new RootObjectType();
+			Self.Mapping = new RootObjectProperty();
 		}
 
-		public PutMappingDescriptor<T> InitializeUsing(RootObjectType rootObjectMapping)
+		public PutMappingDescriptor<T> InitializeUsing(RootObjectProperty rootObjectMapping)
 		{
 			if (rootObjectMapping == null)
 				return this;
@@ -271,7 +271,7 @@ namespace Nest
 			propertiesSelector.ThrowIfNull("propertiesSelector");
 			var properties = propertiesSelector(new PropertiesDescriptor<T>());
 			if (Self.Mapping.Properties == null)
-				Self.Mapping.Properties = new Dictionary<FieldName, IElasticType>();
+				Self.Mapping.Properties = new Dictionary<FieldName, IElasticsearchProperty>();
 			foreach (var p in properties.Properties)
 				Self.Mapping.Properties[p.Key] = p.Value;
 			return this;

@@ -16,6 +16,6 @@ namespace Nest
 		public bool NormalizeLongitude { get; set; }
 		public int PrecisionStep { get; set; }
 
-		public override IElasticType ToElasticType() => new GeoPointType(this);
+		public override IElasticsearchProperty ToProperty() => new GeoPointProperty(this);
 	}
 }

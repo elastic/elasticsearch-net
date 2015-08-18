@@ -6,7 +6,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Nest.Resolvers.Converters
 {
-	public class ElasticTypeConverter : JsonConverter
+	public class PropertyConverter : JsonConverter
 	{
 		public override bool CanWrite
 		{
@@ -18,7 +18,7 @@ namespace Nest.Resolvers.Converters
 			throw new NotSupportedException();
 		}
 
-		private IElasticType GetTypeFromJObject(JObject po, JsonSerializer serializer)
+		private IElasticsearchProperty GetTypeFromJObject(JObject po, JsonSerializer serializer)
 		{
 			JToken typeToken;
 			JToken propertiesToken;
@@ -35,32 +35,32 @@ namespace Nest.Resolvers.Converters
 			switch (type)
 			{
 				case "string":
-					return serializer.Deserialize(po.CreateReader(), typeof(StringType)) as StringType;
+					return serializer.Deserialize(po.CreateReader(), typeof(StringProperty)) as StringProperty;
 				case "float":
 				case "double":
 				case "byte":
 				case "short":
 				case "integer":
 				case "long":
-					return serializer.Deserialize(po.CreateReader(), typeof(NumberType)) as NumberType;
+					return serializer.Deserialize(po.CreateReader(), typeof(NumberProperty)) as NumberProperty;
 				case "date":
-					return serializer.Deserialize(po.CreateReader(), typeof(DateType)) as DateType;
+					return serializer.Deserialize(po.CreateReader(), typeof(DateProperty)) as DateProperty;
 				case "boolean":
-					return serializer.Deserialize(po.CreateReader(), typeof(BooleanType)) as BooleanType;
+					return serializer.Deserialize(po.CreateReader(), typeof(BooleanProperty)) as BooleanProperty;
 				case "binary":
-					return serializer.Deserialize(po.CreateReader(), typeof(BinaryType)) as BinaryType;
+					return serializer.Deserialize(po.CreateReader(), typeof(BinaryProperty)) as BinaryProperty;
 				case "object":
-					return serializer.Deserialize(po.CreateReader(), typeof(ObjectType)) as ObjectType;
+					return serializer.Deserialize(po.CreateReader(), typeof(ObjectProperty)) as ObjectProperty;
 				case "nested":
-					return serializer.Deserialize(po.CreateReader(), typeof(NestedType)) as NestedType;
+					return serializer.Deserialize(po.CreateReader(), typeof(NestedProperty)) as NestedProperty;
 				case "ip":
-					return serializer.Deserialize(po.CreateReader(), typeof(IpType)) as IpType;
+					return serializer.Deserialize(po.CreateReader(), typeof(IpProperty)) as IpProperty;
 				case "geo_point":
-					return serializer.Deserialize(po.CreateReader(), typeof(GeoPointType)) as GeoPointType;
+					return serializer.Deserialize(po.CreateReader(), typeof(GeoPointProperty)) as GeoPointProperty;
 				case "geo_shape":
-					return serializer.Deserialize(po.CreateReader(), typeof(GeoShapeType)) as GeoShapeType;
+					return serializer.Deserialize(po.CreateReader(), typeof(GeoShapeProperty)) as GeoShapeProperty;
 				case "attachment":
-					return serializer.Deserialize(po.CreateReader(), typeof(AttachmentType)) as AttachmentType;
+					return serializer.Deserialize(po.CreateReader(), typeof(AttachmentProperty)) as AttachmentProperty;
 			}
 
 			return null;
@@ -76,7 +76,7 @@ namespace Nest.Resolvers.Converters
 
 		public override bool CanConvert(Type objectType)
 		{
-			return objectType == typeof(IElasticType);
+			return objectType == typeof(IElasticsearchProperty);
 		}
 
 	}
@@ -87,7 +87,7 @@ namespace Nest.Resolvers.Converters
 		private readonly DictionaryKeysAreNotFieldNamesJsonConverter _dictionaryConverter =
 			new DictionaryKeysAreNotFieldNamesJsonConverter();
 
-		private readonly ElasticTypeConverter _elasticTypeConverter = new ElasticTypeConverter();
+		private readonly PropertyConverter _elasticTypeConverter = new PropertyConverter();
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
@@ -126,7 +126,7 @@ namespace Nest.Resolvers.Converters
 				}
 				if (mapping == null) continue;
 
-				var esType = mapping as IElasticType;
+				var esType = mapping as IElasticsearchProperty;
 				if (esType != null)
 				esType.Name = name;
 
@@ -145,7 +145,7 @@ namespace Nest.Resolvers.Converters
 	public class ElasticTypesConverter : JsonConverter
 	{
 		private readonly DictionaryKeysAreNotFieldNamesJsonConverter _dictionaryConverter = new DictionaryKeysAreNotFieldNamesJsonConverter();
-		private readonly ElasticTypeConverter _elasticTypeConverter = new ElasticTypeConverter();
+		private readonly PropertyConverter _elasticTypeConverter = new PropertyConverter();
 
 		public override bool CanWrite
 		{
@@ -161,7 +161,7 @@ namespace Nest.Resolvers.Converters
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
 										JsonSerializer serializer)
 		{
-			var r = new Dictionary<FieldName, IElasticType>();
+			var r = new Dictionary<FieldName, IElasticsearchProperty>();
 
 			JObject o = JObject.Load(reader);
 
@@ -173,7 +173,7 @@ namespace Nest.Resolvers.Converters
 					continue;
 
 				var mapping = _elasticTypeConverter.ReadJson(po.CreateReader(), objectType, existingValue, serializer)
-					 as IElasticType;
+					 as IElasticsearchProperty;
 				if (mapping == null)
 					continue;
 				mapping.Name = name;
@@ -186,7 +186,7 @@ namespace Nest.Resolvers.Converters
 
 		public override bool CanConvert(Type objectType)
 		{
-			return objectType == typeof(IDictionary<string, IElasticType>);
+			return objectType == typeof(IDictionary<string, IElasticsearchProperty>);
 		}
 
 	}

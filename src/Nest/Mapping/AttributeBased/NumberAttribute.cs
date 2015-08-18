@@ -4,17 +4,17 @@ namespace Nest
 {
 	public class NumberAttribute : ElasticPropertyAttribute
 	{
-		public NumberAttribute(NumberTypeName numberType)
+		public NumberAttribute(NumberType type)
 		{
-			NumberType = numberType;
+			Type = type;
 		}
 
 		public NumberAttribute()
 		{
-			NumberType = NumberTypeName.Double;
+			Type = NumberType.Double;
 		}
 
-		public NumberTypeName NumberType { get; set; }
+		public NumberType Type { get; set; }
 		public NonStringIndexOption? Index { get; set; }
 		public double Boost { get; set; }
 		public double NullValue { get; set; }
@@ -23,6 +23,6 @@ namespace Nest
 		public bool IgnoreMalformed { get; set; }
 		public bool Coerce { get; set; }
 
-		public override IElasticType ToElasticType() => new NumberType(this);
+		public override IElasticsearchProperty ToProperty() => new NumberProperty(this);
 	}
 }

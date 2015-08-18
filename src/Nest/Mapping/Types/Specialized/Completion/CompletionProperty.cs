@@ -7,7 +7,7 @@ using System.Linq.Expressions;
 namespace Nest
 {
 	[JsonObject(MemberSerialization.OptIn)]
-	public interface ICompletionType : IElasticType
+	public interface ICompletionProperty : IElasticsearchProperty
 	{
 		[JsonProperty("search_analyzer")]
 		string SearchAnalyzer { get; set; }
@@ -32,11 +32,11 @@ namespace Nest
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
-	public class CompletionType : ElasticType, ICompletionType
+	public class CompletionProperty : ElasticsearchProperty, ICompletionProperty
 	{
-		public CompletionType() : base("completion") { }
+		public CompletionProperty() : base("completion") { }
 
-		internal CompletionType(CompletionAttribute attribute)
+		internal CompletionProperty(CompletionAttribute attribute)
 			: base("completion", attribute)
 		{
 			SearchAnalyzer = attribute.SearchAnalyzer;
@@ -55,34 +55,34 @@ namespace Nest
 		public IDictionary<string, ISuggestContext> Context { get ;set;}
 	}
 
-    public class CompletionTypeDescriptor<T>
-		: TypeDescriptorBase<CompletionTypeDescriptor<T>, ICompletionType, T>, ICompletionType
+    public class CompletionPropertyDescriptor<T>
+		: PropertyDescriptorBase<CompletionPropertyDescriptor<T>, ICompletionProperty, T>, ICompletionProperty
 		where T : class
     {
-		string ICompletionType.SearchAnalyzer { get; set; }
-		string ICompletionType.Analyzer { get; set; }
-		bool? ICompletionType.Payloads { get; set; }
-		bool? ICompletionType.PreserveSeparators { get; set; }
-		bool? ICompletionType.PreservePositionIncrements { get; set; }
-		int? ICompletionType.MaxInputLength { get; set; }
-		IDictionary<string, ISuggestContext> ICompletionType.Context { get; set; }
+		string ICompletionProperty.SearchAnalyzer { get; set; }
+		string ICompletionProperty.Analyzer { get; set; }
+		bool? ICompletionProperty.Payloads { get; set; }
+		bool? ICompletionProperty.PreserveSeparators { get; set; }
+		bool? ICompletionProperty.PreservePositionIncrements { get; set; }
+		int? ICompletionProperty.MaxInputLength { get; set; }
+		IDictionary<string, ISuggestContext> ICompletionProperty.Context { get; set; }
 
-		public CompletionTypeDescriptor<T> SearchAnalyzer(string searchAnalyzer) => 
+		public CompletionPropertyDescriptor<T> SearchAnalyzer(string searchAnalyzer) => 
 			Assign(a => a.SearchAnalyzer = searchAnalyzer);
 
-		public CompletionTypeDescriptor<T> Analyzer(string analyzer) => Assign(a => a.Analyzer = analyzer);
+		public CompletionPropertyDescriptor<T> Analyzer(string analyzer) => Assign(a => a.Analyzer = analyzer);
 
-		public CompletionTypeDescriptor<T> Payloads(bool payloads = true) => Assign(a => a.Payloads = payloads);
+		public CompletionPropertyDescriptor<T> Payloads(bool payloads = true) => Assign(a => a.Payloads = payloads);
 
-		public CompletionTypeDescriptor<T> PreserveSeparators(bool preserveSeparators = true) => 
+		public CompletionPropertyDescriptor<T> PreserveSeparators(bool preserveSeparators = true) => 
 			Assign(a => a.PreserveSeparators = preserveSeparators);
 
-		public CompletionTypeDescriptor<T> PreservePositionIncrements(bool preservePositionIncrements = true) => 
+		public CompletionPropertyDescriptor<T> PreservePositionIncrements(bool preservePositionIncrements = true) => 
 			Assign(a => a.PreservePositionIncrements = preservePositionIncrements);
 
-		public CompletionTypeDescriptor<T> MaxInputLength(int maxInputLength) => Assign(a => a.MaxInputLength = maxInputLength);
+		public CompletionPropertyDescriptor<T> MaxInputLength(int maxInputLength) => Assign(a => a.MaxInputLength = maxInputLength);
 
-		public CompletionTypeDescriptor<T> Context(Func<SuggestContextMappingDescriptor<T>, SuggestContextMappingDescriptor<T>> contextDescriptor) => Assign(a =>
+		public CompletionPropertyDescriptor<T> Context(Func<SuggestContextMappingDescriptor<T>, SuggestContextMappingDescriptor<T>> contextDescriptor) => Assign(a =>
 		{
 			a.Context = a.Context ?? new Dictionary<string, ISuggestContext>();
 

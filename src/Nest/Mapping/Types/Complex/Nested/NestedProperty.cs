@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization.OptIn)]
-	public interface INestedType : IObjectType
+	public interface INestedProperty : IObjectProperty
 	{
 		[JsonProperty("include_in_parent")]
 		bool? IncludeInParent { get; set; }
@@ -15,10 +15,11 @@ namespace Nest
 		bool? IncludeInRoot { get; set; }
 	}
 
-	public class NestedType : ObjectType, INestedType
+	public class NestedProperty : ObjectProperty, INestedProperty
 	{
-		public NestedType() : base("nested") { }
-		public NestedType(NestedAttribute attribute)
+		public NestedProperty() : base("nested") { }
+
+		public NestedProperty(NestedAttribute attribute)
 			: base("nested", attribute)
 		{
 			IncludeInParent = attribute.IncludeInParent;
@@ -29,19 +30,19 @@ namespace Nest
 		public bool? IncludeInRoot { get; set; }
 	}
 
-	public class NestedObjectTypeDescriptor<TParent, TChild>
-		: ObjectTypeDescriptorBase<NestedObjectTypeDescriptor<TParent, TChild>, INestedType, TParent, TChild>
-		, INestedType
+	public class NestedPropertyDescriptor<TParent, TChild>
+		: ObjectPropertyDescriptorBase<NestedPropertyDescriptor<TParent, TChild>, INestedProperty, TParent, TChild>
+		, INestedProperty
 		where TParent : class
 		where TChild : class
 	{
-		bool? INestedType.IncludeInParent { get; set; }
-		bool? INestedType.IncludeInRoot { get; set; }
+		bool? INestedProperty.IncludeInParent { get; set; }
+		bool? INestedProperty.IncludeInRoot { get; set; }
 
-		public NestedObjectTypeDescriptor<TParent, TChild> IncludeInParent(bool includeInParent = true) =>
+		public NestedPropertyDescriptor<TParent, TChild> IncludeInParent(bool includeInParent = true) =>
 			Assign(a => a.IncludeInParent = includeInParent);
 
-		public NestedObjectTypeDescriptor<TParent, TChild> IncludeInRoot(bool includeInRoot = true) =>
+		public NestedPropertyDescriptor<TParent, TChild> IncludeInRoot(bool includeInRoot = true) =>
 			Assign(a => a.IncludeInRoot = includeInRoot);
 	}
 }

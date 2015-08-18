@@ -48,7 +48,7 @@ namespace Nest
 		{
 			_connectionSettings = connectionSettings;
 			Self.TemplateMapping = new TemplateMapping();
-			Self.TemplateMapping.Mappings = new Dictionary<string, RootObjectType>();
+			Self.TemplateMapping.Mappings = new Dictionary<string, RootObjectProperty>();
 			Self.TemplateMapping.Warmers = new Dictionary<string, WarmerMapping>();
 			Self.TemplateMapping.Settings = new FluentDictionary<string, object>();
 		}

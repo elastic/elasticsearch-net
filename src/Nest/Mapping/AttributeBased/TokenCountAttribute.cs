@@ -6,6 +6,6 @@ namespace Nest
 	{
 		public string Analyzer { get; set; }
 
-		public override IElasticType ToElasticType() => new TokenCountType(this);
+		public override IElasticsearchProperty ToProperty() => new TokenCountProperty(this);
 	}	
 }

@@ -46,11 +46,11 @@ namespace Tests.Mapping.Types
 			protected override PutMappingRequest<Project> Initializer => 
 				new PutMappingRequest<Project>
 				{
-					Mapping = new RootObjectType
+					Mapping = new RootObjectProperty
 					{
-						Properties = new Dictionary<FieldName, IElasticType>
+						Properties = new Dictionary<FieldName, IElasticsearchProperty>
 						{
-							{ "name", new StringType { Index = FieldIndexOption.NotAnalyzed } }
+							{ "name", new StringProperty { Index = FieldIndexOption.NotAnalyzed } }
 						}
 					}
 				};

@@ -168,7 +168,7 @@ namespace Nest
 		/// Add a new mapping using the first rootObjectMapping parameter as the base to construct the new mapping.
 		/// Handy if you wish to reuse a mapping.
 		/// </summary>
-		public CreateIndexDescriptor AddMapping<T>(RootObjectType rootObjectMapping, Func<PutMappingDescriptor<T>, PutMappingDescriptor<T>> typeMappingDescriptor) where T : class
+		public CreateIndexDescriptor AddMapping<T>(RootObjectProperty rootObjectMapping, Func<PutMappingDescriptor<T>, PutMappingDescriptor<T>> typeMappingDescriptor) where T : class
 		{
 			typeMappingDescriptor.ThrowIfNull("typeMappingDescriptor");
 

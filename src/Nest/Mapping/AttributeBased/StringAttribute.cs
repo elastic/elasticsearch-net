@@ -16,6 +16,6 @@ namespace Nest
 		public string SearchAnalyzer { get; set; }
 		public TermVectorOption TermVector { get; set; }
 
-		public override IElasticType ToElasticType() => new StringType(this);
+		public override IElasticsearchProperty ToProperty() => new StringProperty(this);
 	}
 }

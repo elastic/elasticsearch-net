@@ -7,16 +7,16 @@ using System.Text;
 namespace Nest
 {
 	[JsonObject(MemberSerialization.OptIn)]
-	public interface ITokenCountType : IElasticType
+	public interface ITokenCountProperty : IElasticsearchProperty
 	{
 		string Analyzer { get; set; }
 	}
 
-	public class TokenCountType : NumberType, ITokenCountType
+	public class TokenCountProperty : NumberProperty, ITokenCountProperty
 	{
-		public TokenCountType() : base("token_count") { }
+		public TokenCountProperty() : base("token_count") { }
 
-		internal TokenCountType(TokenCountAttribute attribute)
+		internal TokenCountProperty(TokenCountAttribute attribute)
 			: base("token_count", attribute)
 		{
 			Analyzer = attribute.Analyzer;
@@ -25,14 +25,14 @@ namespace Nest
 		public string Analyzer { get; set; }
 	}
 
-	public class TokenCountTypeDescriptor<T> : NumberTypeDescriptor<T>, ITokenCountType
+	public class TokenCountPropertyDescriptor<T> : NumberPropertyDescriptor<T>, ITokenCountProperty
 		where T : class
 	{
-		string ITokenCountType.Analyzer { get; set; }
+		string ITokenCountProperty.Analyzer { get; set; }
 
-		public TokenCountTypeDescriptor<T> Analyzer(string analyzer)
+		public TokenCountPropertyDescriptor<T> Analyzer(string analyzer)
 		{
-			((ITokenCountType)this).Analyzer = analyzer;
+			((ITokenCountProperty)this).Analyzer = analyzer;
 			return this;
 		}
 	}

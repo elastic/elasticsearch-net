@@ -11,6 +11,6 @@ namespace Nest
 		public bool PreservePositionIncrements { get; set; }
 		public int MaxInputLength { get; set; }
 
-		public override IElasticType ToElasticType() => new CompletionType(this);
+		public override IElasticsearchProperty ToProperty() => new CompletionProperty(this);
 	}	
 }

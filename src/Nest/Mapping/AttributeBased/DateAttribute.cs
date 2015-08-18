@@ -12,6 +12,6 @@ namespace Nest
 		public bool IgnoreMalformed { get; set; }
 		public string Format { get; set; }
 		public NumericResolutionUnit NumericResolution { get; set; }
-		public override IElasticType ToElasticType() => new DateType(this);
+		public override IElasticsearchProperty ToProperty() => new DateProperty(this);
 	}	
 }

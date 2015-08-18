@@ -7,7 +7,7 @@ using System.Linq.Expressions;
 namespace Nest
 {
 	[JsonObject(MemberSerialization.OptIn)]
-	public interface IObjectType : IElasticType
+	public interface IObjectProperty : IElasticsearchProperty
 	{
 		[JsonProperty("dynamic")]
 		[JsonConverter(typeof(DynamicMappingOptionConverter))]
@@ -24,19 +24,22 @@ namespace Nest
 
 		[JsonProperty("properties", TypeNameHandling = TypeNameHandling.None)]
 		[JsonConverter(typeof(ElasticTypesConverter))]
-		IDictionary<FieldName, IElasticType> Properties { get; set; }
+		IDictionary<FieldName, IElasticsearchProperty> Properties { get; set; }
 	}
 
-	public class ObjectType : ElasticType, IObjectType
+	public class ObjectProperty : ElasticsearchProperty, IObjectProperty
 	{
-		public ObjectType() : base("object") { }
-		protected ObjectType(TypeName typeName) : base(typeName) { }
-		protected internal ObjectType(TypeName typeName, ObjectAttribute attribute)
+		public ObjectProperty() : base("object") { }
+
+		protected ObjectProperty(TypeName typeName) : base(typeName) { }
+
+		protected internal ObjectProperty(TypeName typeName, ObjectAttribute attribute)
 			: this(attribute)
 		{
 			Type = typeName;
 		}
-		internal ObjectType(ObjectAttribute attribute)
+
+		internal ObjectProperty(ObjectAttribute attribute)
 			: base("object", attribute)
 		{
 			Dynamic = attribute.Dynamic;
@@ -49,32 +52,32 @@ namespace Nest
 		public bool? Enabled { get; set; }
 		public bool? IncludeInAll { get; set; }
 		public string Path { get; set; }
-		public IDictionary<FieldName, IElasticType> Properties { get; set; }
+		public IDictionary<FieldName, IElasticsearchProperty> Properties { get; set; }
 	}
 
 	public class ObjectTypeDescriptor<TParent, TChild>
-		: ObjectTypeDescriptorBase<ObjectTypeDescriptor<TParent, TChild>, IObjectType, TParent, TChild>, IObjectType
+		: ObjectPropertyDescriptorBase<ObjectTypeDescriptor<TParent, TChild>, IObjectProperty, TParent, TChild>, IObjectProperty
 		where TParent : class
 		where TChild : class
 	{
 	}
 
-	public abstract class ObjectTypeDescriptorBase<TDescriptor, TInterface, TParent, TChild>
-		: TypeDescriptorBase<TDescriptor, TInterface, TParent>, IObjectType
-		where TDescriptor : ObjectTypeDescriptorBase<TDescriptor, TInterface, TParent, TChild>, TInterface
-		where TInterface : class, IObjectType
+	public abstract class ObjectPropertyDescriptorBase<TDescriptor, TInterface, TParent, TChild>
+		: PropertyDescriptorBase<TDescriptor, TInterface, TParent>, IObjectProperty
+		where TDescriptor : ObjectPropertyDescriptorBase<TDescriptor, TInterface, TParent, TChild>, TInterface
+		where TInterface : class, IObjectProperty
 		where TParent : class
 		where TChild : class
 	{
 		internal TypeName _TypeName { get; set; }
 
-		DynamicMappingOption? IObjectType.Dynamic { get; set; }
-		bool? IObjectType.Enabled { get; set; }
-		bool? IObjectType.IncludeInAll { get; set; }
-		string IObjectType.Path { get; set; }
-		IDictionary<FieldName, IElasticType> IObjectType.Properties { get; set; }
+		DynamicMappingOption? IObjectProperty.Dynamic { get; set; }
+		bool? IObjectProperty.Enabled { get; set; }
+		bool? IObjectProperty.IncludeInAll { get; set; }
+		string IObjectProperty.Path { get; set; }
+		IDictionary<FieldName, IElasticsearchProperty> IObjectProperty.Properties { get; set; }
 	
-		public ObjectTypeDescriptorBase()
+		public ObjectPropertyDescriptorBase()
 		{
 			_TypeName = TypeName.Create<TChild>();
 		}
@@ -99,7 +102,7 @@ namespace Nest
 			selector.ThrowIfNull(nameof(selector));
 			var properties = selector(new PropertiesDescriptor<TChild>());
 			if (a.Properties == null)
-				a.Properties = new Dictionary<FieldName, IElasticType>();
+				a.Properties = new Dictionary<FieldName, IElasticsearchProperty>();
 			foreach (var p in properties.Properties)
 				a.Properties[p.Key] = p.Value;
 		});

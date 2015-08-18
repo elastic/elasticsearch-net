@@ -6,7 +6,7 @@ using System;
 namespace Nest
 {
 	[JsonObject(MemberSerialization.OptIn)]
-	public class RootObjectType : ObjectType
+	public class RootObjectProperty : ObjectProperty
 	{
 		[JsonProperty("type")]
 		public override TypeName Type { get { return null; } }

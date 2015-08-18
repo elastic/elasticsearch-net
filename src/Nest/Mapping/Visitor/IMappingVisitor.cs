@@ -3,18 +3,18 @@
 	public interface IMappingVisitor
 	{
 		int Depth { get; set; }
-		void Visit(RootObjectType mapping);
-		void Visit(StringType mapping);
-		void Visit(NumberTypeName mapping);
-		void Visit(DateType mapping);
-		void Visit(BooleanType mapping);
-		void Visit(BinaryType mapping);
-		void Visit(ObjectType mapping);
-		void Visit(NestedType mapping);
-		void Visit(IpType mapping);
-		void Visit(GeoPointType mapping);
-		void Visit(GeoShapeType mapping);
-		void Visit(AttachmentType mapping);
+		void Visit(RootObjectProperty mapping);
+		void Visit(StringProperty mapping);
 		void Visit(NumberType mapping);
+		void Visit(DateProperty mapping);
+		void Visit(BooleanProperty mapping);
+		void Visit(BinaryProperty mapping);
+		void Visit(ObjectProperty mapping);
+		void Visit(NestedProperty mapping);
+		void Visit(IpProperty mapping);
+		void Visit(GeoPointProperty mapping);
+		void Visit(GeoShapeProperty mapping);
+		void Visit(AttachmentProperty mapping);
+		void Visit(NumberProperty mapping);
 	}
 }

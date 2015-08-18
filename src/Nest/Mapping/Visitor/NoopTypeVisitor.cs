@@ -8,119 +8,119 @@ namespace Nest
 {
 	public class NoopTypeVisitor : ITypeVisitor
 	{
-		public virtual void Visit(IBooleanType type, PropertyInfo propertyInfo, ElasticPropertyAttribute attribute)
+		public virtual void Visit(IBooleanProperty type, PropertyInfo propertyInfo, ElasticPropertyAttribute attribute)
 		{
 		}
 
-		public virtual void Visit(IBinaryType type, PropertyInfo propertyInfo, ElasticPropertyAttribute attribute)
+		public virtual void Visit(IBinaryProperty type, PropertyInfo propertyInfo, ElasticPropertyAttribute attribute)
 		{
 		}
 
-		public virtual void Visit(IObjectType type, PropertyInfo propertyInfo, ElasticPropertyAttribute attribute)
+		public virtual void Visit(IObjectProperty type, PropertyInfo propertyInfo, ElasticPropertyAttribute attribute)
 		{
 		}
 
-		public virtual void Visit(IGeoShapeType type, PropertyInfo propertyInfo, ElasticPropertyAttribute attribute)
+		public virtual void Visit(IGeoShapeProperty type, PropertyInfo propertyInfo, ElasticPropertyAttribute attribute)
 		{
 		}
 
-		public virtual void Visit(ICompletionType type, PropertyInfo propertyInfo, ElasticPropertyAttribute attribute)
+		public virtual void Visit(ICompletionProperty type, PropertyInfo propertyInfo, ElasticPropertyAttribute attribute)
 		{
 		}
 
-		public virtual void Visit(IMurmur3HashType type, PropertyInfo propertyInfo, ElasticPropertyAttribute attribute)
+		public virtual void Visit(IMurmur3HashProperty type, PropertyInfo propertyInfo, ElasticPropertyAttribute attribute)
 		{
 		}
 
-		public virtual void Visit(ITokenCountType type, PropertyInfo propertyInfo, ElasticPropertyAttribute attribute)
+		public virtual void Visit(ITokenCountProperty type, PropertyInfo propertyInfo, ElasticPropertyAttribute attribute)
 		{
 		}
 
-		public virtual void Visit(IIpType type, PropertyInfo propertyInfo, ElasticPropertyAttribute attribute)
+		public virtual void Visit(IIpProperty type, PropertyInfo propertyInfo, ElasticPropertyAttribute attribute)
 		{
 		}
 
-		public virtual void Visit(IAttachmentType type, PropertyInfo propertyInfo, ElasticPropertyAttribute attribute)
+		public virtual void Visit(IAttachmentProperty type, PropertyInfo propertyInfo, ElasticPropertyAttribute attribute)
 		{
 		}
 
-		public virtual void Visit(IGeoPointType type, PropertyInfo propertyInfo, ElasticPropertyAttribute attribute)
+		public virtual void Visit(IGeoPointProperty type, PropertyInfo propertyInfo, ElasticPropertyAttribute attribute)
 		{
 		}
 
-		public virtual void Visit(INestedType type, PropertyInfo propertyInfo, ElasticPropertyAttribute attribute)
+		public virtual void Visit(INestedProperty type, PropertyInfo propertyInfo, ElasticPropertyAttribute attribute)
 		{
 		}
 
-		public virtual void Visit(IDateType type, PropertyInfo propertyInfo, ElasticPropertyAttribute attribute)
+		public virtual void Visit(IDateProperty type, PropertyInfo propertyInfo, ElasticPropertyAttribute attribute)
 		{
 		}
 
-		public virtual void Visit(INumberType type, PropertyInfo propertyInfo, ElasticPropertyAttribute attribute)
+		public virtual void Visit(INumberProperty type, PropertyInfo propertyInfo, ElasticPropertyAttribute attribute)
 		{
 		}
 
-		public virtual void Visit(IStringType type, PropertyInfo propertyInfo, ElasticPropertyAttribute attribute)
+		public virtual void Visit(IStringProperty type, PropertyInfo propertyInfo, ElasticPropertyAttribute attribute)
 		{
 		}
 
-		public virtual IElasticType Visit(PropertyInfo propertyInfo, ElasticPropertyAttribute attribute) => null;
+		public virtual IElasticsearchProperty Visit(PropertyInfo propertyInfo, ElasticPropertyAttribute attribute) => null;
 
-		public void Visit(IElasticType type, PropertyInfo propertyInfo, ElasticPropertyAttribute attribute)
+		public void Visit(IElasticsearchProperty type, PropertyInfo propertyInfo, ElasticPropertyAttribute attribute)
 		{
-			var nestedType = type as INestedType;
+			var nestedType = type as INestedProperty;
 			if (nestedType != null)
 				Visit(nestedType, propertyInfo, attribute);
 
-			var objectType = type as IObjectType;
+			var objectType = type as IObjectProperty;
 			if (objectType != null)
 				Visit(objectType, propertyInfo, attribute);
 
-			var binaryType = type as IBinaryType;
+			var binaryType = type as IBinaryProperty;
 			if (binaryType != null)
 				Visit(binaryType, propertyInfo, attribute);
 
-			var booleanType = type as IBooleanType;
+			var booleanType = type as IBooleanProperty;
 			if (booleanType != null)
 				Visit(booleanType, propertyInfo, attribute);
 
-			var dateType = type as IDateType;
+			var dateType = type as IDateProperty;
 			if (dateType != null)
 				Visit(dateType, propertyInfo, attribute);
 
-			var numberType = type as INumberType;
+			var numberType = type as INumberProperty;
 			if (numberType != null)
 				Visit(numberType, propertyInfo, attribute);
 
-			var stringType = type as IStringType;
+			var stringType = type as IStringProperty;
 			if (stringType != null)
 				Visit(stringType, propertyInfo, attribute);
 
-			var attachmentType = type as IAttachmentType;
+			var attachmentType = type as IAttachmentProperty;
 			if (attachmentType != null)
 				Visit(attachmentType, propertyInfo, attribute);
 
-			var geoShapeType = type as IGeoShapeType;
+			var geoShapeType = type as IGeoShapeProperty;
 			if (geoShapeType != null)
 				Visit(geoShapeType, propertyInfo, attribute);
 
-			var geoPointType = type as IGeoPointType;
+			var geoPointType = type as IGeoPointProperty;
 			if (geoPointType != null)
 				Visit(geoPointType, propertyInfo, attribute);
 
-			var completionType = type as ICompletionType;
+			var completionType = type as ICompletionProperty;
 			if (completionType != null)
 				Visit(completionType, propertyInfo, attribute);
 
-			var ipType = type as IIpType;
+			var ipType = type as IIpProperty;
 			if (ipType != null)
 				Visit(ipType, propertyInfo, attribute);
 
-			var murmurType = type as IMurmur3HashType;
+			var murmurType = type as IMurmur3HashProperty;
 			if (murmurType != null)
 				Visit(murmurType, propertyInfo, attribute);
 
-			var tokenCountType = type as ITokenCountType;
+			var tokenCountType = type as ITokenCountProperty;
 			if (tokenCountType != null)
 				Visit(tokenCountType, propertyInfo, attribute);
 		}

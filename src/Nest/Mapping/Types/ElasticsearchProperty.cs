@@ -7,7 +7,7 @@ using System.Linq;
 namespace Nest
 {
 	[JsonObject(MemberSerialization.OptIn)]
-	public interface IElasticType : IFieldMapping
+	public interface IElasticsearchProperty : IFieldMapping
 	{
 		FieldName Name { get; set; }
 		TypeName Type { get; set; }
@@ -21,8 +21,8 @@ namespace Nest
 		[JsonProperty("doc_values")]
 		bool? DocValues { get; set; }
 
-		[JsonProperty("fields", DefaultValueHandling = DefaultValueHandling.Ignore), JsonConverter(typeof(ElasticTypeConverter))]
-		IDictionary<FieldName, IElasticType> Fields { get; set; }
+		[JsonProperty("fields", DefaultValueHandling = DefaultValueHandling.Ignore), JsonConverter(typeof(PropertyConverter))]
+		IDictionary<FieldName, IElasticsearchProperty> Fields { get; set; }
 
 		[JsonProperty("similarity")]
 		SimilarityOption? Similarity { get; set; }
@@ -31,14 +31,14 @@ namespace Nest
 		IEnumerable<FieldName> CopyTo { get; set; }
 	}
 
-	public abstract class ElasticType : IElasticType
+	public abstract class ElasticsearchProperty : IElasticsearchProperty
 	{
-		public ElasticType(TypeName typeName)
+		public ElasticsearchProperty(TypeName typeName)
 		{
 			Type = typeName;
 		}
 
-		internal ElasticType(TypeName typeName, ElasticPropertyAttribute attribute)
+		internal ElasticsearchProperty(TypeName typeName, ElasticPropertyAttribute attribute)
 			: this(typeName)
 		{
 			DocValues = attribute.DocValues;
@@ -51,7 +51,7 @@ namespace Nest
 		public virtual TypeName Type { get; set; }
 		public IEnumerable<FieldName> CopyTo { get; set; }
 		public bool? DocValues { get; set; }
-		public IDictionary<FieldName, IElasticType> Fields { get; set; }
+		public IDictionary<FieldName, IElasticsearchProperty> Fields { get; set; }
 		public string IndexName { get; set; }
 		public SimilarityOption? Similarity { get; set; }
 		public bool? Store { get; set; }

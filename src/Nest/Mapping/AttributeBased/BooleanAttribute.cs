@@ -8,6 +8,6 @@ namespace Nest
 		public double Boost { get; set; }
 		public bool NullValue { get; set; }
 
-		public override IElasticType ToElasticType() => new BooleanType(this);
+		public override IElasticsearchProperty ToProperty() => new BooleanProperty(this);
 	}	
 }

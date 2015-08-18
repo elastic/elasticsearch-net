@@ -6,20 +6,20 @@ using System.Text;
 
 namespace Nest
 {
-	public abstract class TypeDescriptorBase<TDescriptor, TInterface, T>
-		: DescriptorBase<TDescriptor, TInterface>, IElasticType
-		where TDescriptor : TypeDescriptorBase<TDescriptor, TInterface, T>, TInterface
-		where TInterface : class, IElasticType
+	public abstract class PropertyDescriptorBase<TDescriptor, TInterface, T>
+		: DescriptorBase<TDescriptor, TInterface>, IElasticsearchProperty
+		where TDescriptor : PropertyDescriptorBase<TDescriptor, TInterface, T>, TInterface
+		where TInterface : class, IElasticsearchProperty
 		where T : class
 	{
-		FieldName IElasticType.Name { get; set; }
-		TypeName IElasticType.Type { get; set; }
-		string IElasticType.IndexName { get; set; }
-		bool? IElasticType.Store { get; set; }
-		bool? IElasticType.DocValues { get; set; }
-		SimilarityOption? IElasticType.Similarity { get; set; }
-		IEnumerable<FieldName> IElasticType.CopyTo { get; set; }
-		IDictionary<FieldName, IElasticType> IElasticType.Fields { get; set; }
+		FieldName IElasticsearchProperty.Name { get; set; }
+		TypeName IElasticsearchProperty.Type { get; set; }
+		string IElasticsearchProperty.IndexName { get; set; }
+		bool? IElasticsearchProperty.Store { get; set; }
+		bool? IElasticsearchProperty.DocValues { get; set; }
+		SimilarityOption? IElasticsearchProperty.Similarity { get; set; }
+		IEnumerable<FieldName> IElasticsearchProperty.CopyTo { get; set; }
+		IDictionary<FieldName, IElasticsearchProperty> IElasticsearchProperty.Fields { get; set; }
 
 		public TDescriptor Name(FieldName name) => Assign(a => a.Name = name);
 
@@ -37,7 +37,7 @@ namespace Nest
 			var properties = selector(new PropertiesDescriptor<T>());
 			foreach (var property in properties.Properties)
 			{
-				var value = property.Value as IElasticType;
+				var value = property.Value as IElasticsearchProperty;
 				if (value == null)
 					continue;
 				a.Fields[property.Key] = value;

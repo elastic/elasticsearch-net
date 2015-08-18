@@ -10,6 +10,6 @@ namespace Nest
 		public string NullValue { get; set; }
 		public int PrecisionStep { get; set; }
 
-		public override IElasticType ToElasticType() => new IpType(this);
+		public override IElasticsearchProperty ToProperty() => new IpProperty(this);
 	}	
 }

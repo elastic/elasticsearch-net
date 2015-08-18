@@ -20,9 +20,9 @@ namespace Nest
 			_visitor = visitor ?? new NoopTypeVisitor();
 		}
 
-		public Dictionary<FieldName, IElasticType> GetProperties()
+		public Dictionary<FieldName, IElasticsearchProperty> GetProperties()
 		{
-			var properties = new Dictionary<FieldName, IElasticType>();
+			var properties = new Dictionary<FieldName, IElasticsearchProperty>();
 			foreach(var propertyInfo in _type.GetProperties())
 			{
 				var attribute = ElasticPropertyAttribute.From(propertyInfo);
@@ -34,10 +34,10 @@ namespace Nest
 			return properties;
 		}
 
-		private IElasticType GetProperty(PropertyInfo propertyInfo, ElasticPropertyAttribute attribute)
+		private IElasticsearchProperty GetProperty(PropertyInfo propertyInfo, ElasticPropertyAttribute attribute)
 		{
 			var elasticType = GetElasticType(propertyInfo, attribute);
-			var objectType = elasticType as IObjectType;
+			var objectType = elasticType as IObjectProperty;
 			if (objectType != null)
 			{
 				var walker = new PropertyWalker(propertyInfo.PropertyType, _visitor);
@@ -47,25 +47,25 @@ namespace Nest
 			return elasticType;	
 		}
 
-		private IElasticType GetElasticType(PropertyInfo propertyInfo, ElasticPropertyAttribute attribute)
+		private IElasticsearchProperty GetElasticType(PropertyInfo propertyInfo, ElasticPropertyAttribute attribute)
 		{
 			var elasticType = _visitor.Visit(propertyInfo, attribute);
 			if (elasticType != null)
 				return elasticType;
 			return (attribute != null) 
-				? attribute.ToElasticType() 
+				? attribute.ToProperty() 
 				: InferElasticType(propertyInfo.PropertyType);
 		}
 
-		private IElasticType InferElasticType(Type type)
+		private IElasticsearchProperty InferElasticType(Type type)
 		{
 			type = GetUnderlyingType(type);
 
 			if (type == typeof(string))
-				return new StringType();
+				return new StringProperty();
 
 			if (type.IsEnum)
-				return new NumberType(NumberTypeName.Integer);
+				return new NumberProperty(NumberType.Integer);
 
 			if (type.IsValueType)
 			{
@@ -73,29 +73,29 @@ namespace Nest
 				{
 					case "Int32":
 					case "UInt32":
-						return new NumberType(NumberTypeName.Integer);
+						return new NumberProperty(NumberType.Integer);
 					case "Int16":
 					case "UInt16":
-						return new NumberType(NumberTypeName.Short);
+						return new NumberProperty(NumberType.Short);
 					case "Byte":
 					case "SByte":
-						return new NumberType(NumberTypeName.Byte);
+						return new NumberProperty(NumberType.Byte);
 					case "Int64":
 					case "UInt64":
-						return new NumberType(NumberTypeName.Long);
+						return new NumberProperty(NumberType.Long);
 					case "Single":
-						return new NumberType(NumberTypeName.Float);
+						return new NumberProperty(NumberType.Float);
 					case "Decimal":
 					case "Double":
-						return new NumberType(NumberTypeName.Double);
+						return new NumberProperty(NumberType.Double);
 					case "DateTime":
-						return new DateType();
+						return new DateProperty();
 					case "Boolean":
-						return new BooleanType();
+						return new BooleanProperty();
 				}
 			}
 			
-			return new ObjectType();
+			return new ObjectProperty();
 		}
 
 		private Type GetUnderlyingType(Type type)

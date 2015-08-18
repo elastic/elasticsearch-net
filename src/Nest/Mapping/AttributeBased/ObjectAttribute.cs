@@ -9,6 +9,6 @@ namespace Nest
 		public bool IncludeInAll { get; set; }
 		public string Path { get; set; }
 
-		public override IElasticType ToElasticType() => new ObjectType(this);
+		public override IElasticsearchProperty ToProperty() => new ObjectProperty(this);
 	}	
 }
