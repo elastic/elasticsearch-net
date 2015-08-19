@@ -111,6 +111,7 @@ namespace Nest
 		where T : class
 	{
 
+
 		private IDocumentOptionalPath<TParameters, T> Self => this;
 		IndexName IDocumentOptionalPath<TParameters>.Index { get; set; }
 		TypeName IDocumentOptionalPath<TParameters>.Type { get; set; }

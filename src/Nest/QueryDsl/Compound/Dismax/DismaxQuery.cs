@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
-using Nest.Resolvers.Converters.Queries;
 
 namespace Nest
 {

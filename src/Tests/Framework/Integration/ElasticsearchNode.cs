@@ -7,6 +7,7 @@ using System.Net;
 using System.Reactive;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
+using System.Reactive.Subjects;
 using System.Text.RegularExpressions;
 using System.Threading;
 
@@ -32,10 +33,14 @@ namespace Tests.Framework.Integration
 		public ElasticsearchNodeInfo Info { get; private set; }
 		public int Port { get; private set; }
 
+		private Subject<ManualResetEvent> _blockingSubject = new Subject<ManualResetEvent>();
+		public IObservable<ManualResetEvent> BootstrapWork { get; }
+
 		public ElasticsearchNode(string elasticsearchVersion, bool runningIntegrations)
 		{
 			this.Version = elasticsearchVersion;
 			this.RunningIntegrations = runningIntegrations;
+			this.BootstrapWork = _blockingSubject;
 
 			if (!runningIntegrations)
 			{
@@ -134,10 +139,15 @@ namespace Tests.Framework.Integration
 			}
 			else if (s.TryGetStartedConfirmation())
 			{
-				var seeder = new Seeder(this.Port);
-				seeder.SeedNode();
-				handle.Set();
-				this.Started = true;
+				try
+				{
+					this._blockingSubject.OnNext(handle);
+					this.Started = true;
+				}
+				finally
+				{
+					//handle.Set();
+				}
 			}
 			else if (s.TryGetPortNumber(out port))
 			{
@@ -177,22 +187,15 @@ namespace Tests.Framework.Integration
 				Directory.CreateDirectory(this.RoamingFolder);
 				if (!File.Exists(localZip))
 				{
-					//TODO write progress on console optionally
 					new WebClient().DownloadFile(downloadUrl, localZip);
 				}
 
 				if (!Directory.Exists(this.RoamingClusterFolder))
 				{
-					//TODO write progress on console optionally
 					ZipFile.ExtractToDirectory(localZip, this.RoamingFolder);
 				}
 			}
 
-		}
-
-		private void SeedData()
-		{
-			
 		}
 
 		public void Stop()
@@ -294,8 +297,6 @@ namespace Tests.Framework.Integration
 			var build = match.Groups["build"].Value.Trim();
 			nodeInfo = new ElasticsearchNodeInfo(version, pid, build);
 			return true;
-
-
 		}
 
 		public bool TryGetStartedConfirmation()

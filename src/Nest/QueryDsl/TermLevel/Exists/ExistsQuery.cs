@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ReadAsTypeConverter<ExistsQuery>))]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<ExistsQuery>))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IExistsQuery : IFieldNameQuery
 	{

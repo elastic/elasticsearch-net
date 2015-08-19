@@ -1,11 +1,10 @@
-using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 
 namespace Nest
 {
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeConverter<GlobalAggregator>))]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<GlobalAggregator>))]
 	public interface IGlobalAggregator : IBucketAggregator { }
 
 	public class GlobalAggregator : BucketAggregator, IGlobalAggregator { }

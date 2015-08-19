@@ -4,17 +4,20 @@ using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using Xunit;
+using Elasticsearch.Net;
 
 namespace Tests.Aggregations
 {
 	[Collection(IntegrationContext.ReadOnly)]
-	public abstract class AggregationUsageBase : EndpointUsageBase<ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
+	public abstract class AggregationUsageBase : ApiCallIntegration<ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
 	{
 		protected AggregationUsageBase(IIntegrationCluster cluster, ApiUsage usage) : base(cluster, usage) {}
 
 		public override bool ExpectIsValid => true;
 
 		public override int ExpectStatusCode => 200;
+
+		public override HttpMethod HttpMethod => HttpMethod.POST;
 
 		public override string UrlPath => "/project/project/_search";
 

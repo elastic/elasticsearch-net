@@ -104,14 +104,14 @@ namespace Nest
 			return this;
 		}
 		
-		public PutMappingDescriptor<T> Dynamic(DynamicMappingOption dynamic)
+		public PutMappingDescriptor<T> Dynamic(DynamicMapping dynamic)
 		{
 			Self.Mapping.Dynamic = dynamic;
 			return this;
 		}
 		public PutMappingDescriptor<T> Dynamic(bool dynamic = true)
 		{
-			return this.Dynamic(dynamic ? DynamicMappingOption.Allow : DynamicMappingOption.Ignore);
+			return this.Dynamic(dynamic ? DynamicMapping.Allow : DynamicMapping.Ignore);
 		}
 		public PutMappingDescriptor<T> Enabled(bool enabled = true)
 		{
@@ -228,12 +228,6 @@ namespace Nest
 			return this;
 		}
 
-		public PutMappingDescriptor<T> AnalyzerField(Func<AnalyzerFieldDescriptor<T>, IAnalyzerField> analyzeMapper)
-		{
-			analyzeMapper.ThrowIfNull("analyzeMapper");
-			Self.Mapping.AnalyzerField = analyzeMapper(new AnalyzerFieldDescriptor<T>());
-			return this;
-		}
 		public PutMappingDescriptor<T> BoostField(Func<BoostFieldDescriptor<T>, IBoostField> boostMapper)
 		{
 			boostMapper.ThrowIfNull("boostMapper");

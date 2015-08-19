@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeConverter<SpanNearQueryDescriptor<object>>))]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<SpanNearQueryDescriptor<object>>))]
 	public interface ISpanNearQuery : ISpanSubQuery
 	{
 		[JsonProperty(PropertyName = "clauses")]

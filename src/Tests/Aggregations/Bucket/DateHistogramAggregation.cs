@@ -87,7 +87,7 @@ namespace Tests.Aggregations.Bucket
 
 			[I] public void HandlingResponses()
 			{
-				var response = this.GetClient().Search<Project>(s => s
+				var response = this.Client.Search<Project>(s => s
 					.Aggregations(aggs => aggs
 						.DateHistogram("date_hist", dh => dh
 							.Field(p => p.StartedOn)

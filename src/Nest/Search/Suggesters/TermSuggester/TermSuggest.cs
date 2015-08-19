@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Linq.Expressions;
 using Elasticsearch.Net;
-using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
 	[JsonObject(MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeConverter<TermSuggester>))]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<TermSuggester>))]
 	public interface ITermSuggester : ISuggester
 	{
 		[JsonProperty(PropertyName = "prefix_len")]

@@ -63,8 +63,4 @@ namespace CodeGeneration.LowLevelClient.Domain
 			}
 		}
 	}
-
-
-	//extensions methods dont work because scriptcs wraps everything
-	//in its own class
 }

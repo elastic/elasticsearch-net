@@ -17,10 +17,6 @@ namespace Nest
 	[JsonObject]
 	public class ClusterStateResponse : BaseResponse, IClusterStateResponse
 	{
-		public ClusterStateResponse()
-		{
-			this.IsValid = true;
-		}
 		[JsonProperty("cluster_name")]
 		public string ClusterName { get; internal set; }
 		[JsonProperty("master_node")]

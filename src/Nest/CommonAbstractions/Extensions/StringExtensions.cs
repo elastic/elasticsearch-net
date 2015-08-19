@@ -40,5 +40,7 @@ namespace Nest
 
 			return camelCase;
 		}
+
+
 	}
 }

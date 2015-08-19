@@ -1,12 +1,11 @@
 using System;
 using System.Linq.Expressions;
-using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeConverter<NestedAggregator>))]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<NestedAggregator>))]
 	public interface INestedAggregator : IBucketAggregator
 	{
 		[JsonProperty("path")] 

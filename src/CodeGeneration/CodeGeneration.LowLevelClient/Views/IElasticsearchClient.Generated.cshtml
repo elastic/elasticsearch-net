@@ -39,7 +39,7 @@ namespace Elasticsearch.Net
 		<text>@Raw("///<param name=\""+part.Name+"\">")@part.Description@Raw("</param>")</text>
 			}
 		@Raw(@"///<param name=""requestParameters"">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>")
-		@Raw(method.ReturnType) @(method.FullName)@(Raw(method.ReturnTypeGeneric))(@Raw(method.Arguments));
+		@Raw(method.ReturnType) @(method.FullName)@(Raw(method.ReturnTypeGeneric))(@Raw(method.Arguments)) where @method.CallTypeGeneric : class;
 		</text>
 			}
 		}

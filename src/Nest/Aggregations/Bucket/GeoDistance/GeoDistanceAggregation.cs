@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
-using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeConverter<GeoDistanceAggregator>))]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<GeoDistanceAggregator>))]
 	public interface IGeoDistanceAggregator : IBucketAggregator
 	{
 		[JsonProperty("field")]

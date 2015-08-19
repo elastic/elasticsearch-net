@@ -1,10 +1,9 @@
-﻿using Nest.Resolvers.Converters;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeConverter<ExtendedStatsAggregator>))]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<ExtendedStatsAggregator>))]
 	public interface IExtendedStatsAggregator : IMetricAggregator { }
 
 	public class ExtendedStatsAggregator : MetricAggregator, IExtendedStatsAggregator { }

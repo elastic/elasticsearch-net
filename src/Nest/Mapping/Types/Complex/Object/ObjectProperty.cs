@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using System;
 using System.Linq.Expressions;
@@ -10,8 +9,7 @@ namespace Nest
 	public interface IObjectProperty : IElasticsearchProperty
 	{
 		[JsonProperty("dynamic")]
-		[JsonConverter(typeof(DynamicMappingOptionConverter))]
-		DynamicMappingOption? Dynamic { get; set; }
+		DynamicMapping? Dynamic { get; set; }
 
 		[JsonProperty("enabled")]
 		bool? Enabled { get; set; }
@@ -23,7 +21,7 @@ namespace Nest
 		string Path { get; set; }
 
 		[JsonProperty("properties", TypeNameHandling = TypeNameHandling.None)]
-		[JsonConverter(typeof(ElasticTypesConverter))]
+		[JsonConverter(typeof(PropertiesJsonConverter))]
 		IDictionary<FieldName, IElasticsearchProperty> Properties { get; set; }
 	}
 
@@ -48,7 +46,7 @@ namespace Nest
 			Path = attribute.Path;
 		}
 
-		public DynamicMappingOption? Dynamic { get; set; }
+		public DynamicMapping? Dynamic { get; set; }
 		public bool? Enabled { get; set; }
 		public bool? IncludeInAll { get; set; }
 		public string Path { get; set; }
@@ -71,7 +69,7 @@ namespace Nest
 	{
 		internal TypeName _TypeName { get; set; }
 
-		DynamicMappingOption? IObjectProperty.Dynamic { get; set; }
+		DynamicMapping? IObjectProperty.Dynamic { get; set; }
 		bool? IObjectProperty.Enabled { get; set; }
 		bool? IObjectProperty.IncludeInAll { get; set; }
 		string IObjectProperty.Path { get; set; }
@@ -82,11 +80,11 @@ namespace Nest
 			_TypeName = TypeName.Create<TChild>();
 		}
 
-		public TDescriptor Dynamic(DynamicMappingOption dynamic) =>
+		public TDescriptor Dynamic(DynamicMapping dynamic) =>
 			Assign(a => a.Dynamic = dynamic);
 
 		public TDescriptor Dynamic(bool dynamic = true) =>
-			Dynamic(dynamic ? DynamicMappingOption.Allow : DynamicMappingOption.Ignore);
+			Dynamic(dynamic ? DynamicMapping.Allow : DynamicMapping.Ignore);
 
 		public TDescriptor Enabled(bool enabled = true) =>
 			Assign(a => a.Enabled = enabled);

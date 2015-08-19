@@ -3,6 +3,7 @@ using Nest.Domain;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace Nest
 {
@@ -21,19 +22,14 @@ namespace Nest
 	public class ExplainResponse<T> : BaseResponse, IExplainResponse<T>
 		where T : class
 	{
-		public ExplainResponse()
-		{
-			this.IsValid = true;
-		}
-
 		[JsonProperty(PropertyName = "matched")]
 		public bool Matched { get; internal set; }
 
 		[JsonProperty(PropertyName = "explanation")]
-		public ExplanationDetail Explanation { get; internal set;}
+		public ExplanationDetail Explanation { get; internal set; }
 
 		[JsonProperty(PropertyName = "get")]
-		public ExplainGet<T> Get { get; internal set;}
+		public ExplainGet<T> Get { get; internal set; }
 
 		public T Source
 		{
@@ -48,8 +44,11 @@ namespace Nest
 		{
 			get
 			{
-				if (this.Get == null) return null;
-				return new FieldSelection<T>(this.Settings, this.Get._fields);
+				//TODO figure out a new way to get Fields 
+				//should probably be serialized using its own constructor take the settings from the json serializer
+				throw new NotImplementedException("responses no longer have settings");
+				//if (this.Get == null) return null;
+				//return new FieldSelection<T>(this.Settings, this.Get._fields);
 			}
 		}
 	}

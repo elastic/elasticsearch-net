@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Linq.Expressions;
 using Elasticsearch.Net;
-using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
 	[JsonObject(MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeConverter<DirectGenerator>))]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<DirectGenerator>))]
 	public interface IDirectGenerator
 	{
 		[JsonProperty(PropertyName = "field")]

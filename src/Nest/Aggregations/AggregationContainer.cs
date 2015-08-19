@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -49,7 +48,7 @@ namespace Nest
 
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeConverter<AggregationContainer>))]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<AggregationContainer>))]
 	public interface IAggregationContainer
 	{
 		[JsonProperty("avg")]

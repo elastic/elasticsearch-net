@@ -9,15 +9,22 @@ using System.Runtime.InteropServices;
 using System.Security.Cryptography.X509Certificates;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using Elasticsearch.Net.Serialization;
+using Elasticsearch.Net;
 
 namespace Nest
 {
 	internal static class Extensions
 	{
-		internal static INestSerializer Serializer = new NestSerializer(new ConnectionSettings());
+		internal static TReturn InvokeOrDefault<T, TReturn>(this Func<T, TReturn> func, T @default)
+			where T: class, TReturn where TReturn: class =>
+			func?.Invoke(@default) ?? @default;
 
 		internal static string GetStringValue(this Enum enumValue)
 		{
+			var knownEnum = KnownEnums.Resolve(enumValue);
+			if (knownEnum != KnownEnums.UnknownEnum) return knownEnum;
+
 			var type = enumValue.GetType();
 			var info = type.GetField(enumValue.ToString());
 			var da = (EnumMemberAttribute[])(info.GetCustomAttributes(typeof(EnumMemberAttribute), false));
@@ -38,10 +45,6 @@ namespace Nest
 				return writer.Token.ToString();
 			}
 		}
-
-
-
-
 
 		public static IEnumerable<T> DistinctBy<T, TKey>(this IEnumerable<T> items, Func<T, TKey> property)
 		{

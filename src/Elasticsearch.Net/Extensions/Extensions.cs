@@ -12,6 +12,10 @@ namespace Elasticsearch.Net
 
 		internal static string GetStringValue(this Enum enumValue)
 		{
+			var knownEnum = KnownEnums.Resolve(enumValue);
+			if (knownEnum != KnownEnums.UnknownEnum) return knownEnum;
+
+			//TODO measure performance and cache 
 			var type = enumValue.GetType();
 			var info = type.GetField(enumValue.ToString());
 			var da = (EnumMemberAttribute[])(info.GetCustomAttributes(typeof(EnumMemberAttribute), false));
@@ -111,6 +115,10 @@ namespace Elasticsearch.Net
 			return string.IsNullOrEmpty(value);
 		}
 		
+		internal static IEnumerable<T> DistinctBy<T, TKey>(this IEnumerable<T> items, Func<T, TKey> property)
+		{
+			return items.GroupBy(property).Select(x => x.First());
+		}
 
 		internal static void ForEachWithIndex<T>(this IEnumerable<T> enumerable, Action<T, int> handler)
 		{

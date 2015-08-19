@@ -7,7 +7,7 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	using TemplateExistConverter = Func<IElasticsearchResponse, Stream, ExistsResponse>;
+	using TemplateExistConverter = Func<IApiCallDetails, Stream, ExistsResponse>;
 
 	public partial class ElasticClient
 	{

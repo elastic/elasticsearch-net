@@ -1,5 +1,4 @@
-﻿using Nest.Resolvers.Converters;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -8,7 +7,7 @@ namespace Nest
 		public string Name { get; set; }
 
 		[JsonProperty("filter")]
-		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryContainer>, CustomJsonConverter>))]
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeJsonConverter<QueryContainer>, CustomJsonConverter>))]
 		public IQueryContainer Filter { get; internal set; }
 	
 		[JsonProperty("routing")]

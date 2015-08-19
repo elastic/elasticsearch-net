@@ -1,11 +1,10 @@
 ﻿using System;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
-using Nest.Resolvers.Converters;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ReadAsTypeConverter<FieldNamesField>))]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<FieldNamesField>))]
 	public interface IFieldNamesField : ISpecialField
 	{
 		[JsonProperty("enabled")]

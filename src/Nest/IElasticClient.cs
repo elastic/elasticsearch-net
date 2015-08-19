@@ -2,15 +2,21 @@
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 using Elasticsearch.Net.Connection;
+using Elasticsearch.Net.Serialization;
 
 namespace Nest
 {
 	public interface IElasticClient
 	{
-		IConnection Connection { get; }
-		INestSerializer Serializer { get; }
+		IElasticsearchSerializer Serializer { get; }
 		IElasticsearchClient Raw { get; }
 		ElasticInferrer Infer { get; }
+
+		ElasticsearchResponse<T> DoRequest<T>(HttpMethod method, string path, PostData<object> data = null, IRequestParameters requestParameters = null)
+			where T : class;
+
+		Task<ElasticsearchResponse<T>> DoRequestAsync<T>(HttpMethod method, string path, PostData<object> data = null, IRequestParameters requestParameters = null)
+			where T : class;
 
 		/// <summary>
 		/// Helper method that allows you to reindex from one index into another using SCAN and SCROLL.
@@ -954,7 +960,7 @@ namespace Nest
 		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
 		/// <param name="object">The object to be indexed, Id will be inferred (Id property or IdProperty attribute on type)</param>
 		/// <param name="indexSelector">Optionally furter describe the index operation i.e override type/index/id</param>
-		IIndexResponse Index<T>(T @object, Func<IndexDescriptor<T>, IndexDescriptor<T>> indexSelector = null)
+		IIndexResponse Index<T>(T @object, Func<IndexDescriptor<T>, IIndexRequest<T>> indexSelector = null)
 			where T : class;
 
 		/// <inheritdoc />
@@ -962,7 +968,7 @@ namespace Nest
 			where T : class;
 
 		/// <inheritdoc />
-		Task<IIndexResponse> IndexAsync<T>(T @object, Func<IndexDescriptor<T>, IndexDescriptor<T>> indexSelector = null)
+		Task<IIndexResponse> IndexAsync<T>(T @object, Func<IndexDescriptor<T>, IIndexRequest<T>> indexSelector = null)
 			where T : class;
 
 		/// <inheritdoc />
@@ -1563,28 +1569,6 @@ namespace Nest
 
 		/// <inheritdoc />
 		Task<IRecoveryStatusResponse> RecoveryStatusAsync(IRecoveryStatusRequest statusRequest);
-
-		/// <summary>
-		/// Perform any request you want over the configured IConnection synchronously while taking advantage of the cluster failover.
-		/// </summary>
-		/// <typeparam name="T">The type representing the response JSON</typeparam>
-		/// <param name="method">the HTTP Method to use</param>
-		/// <param name="path">The path of the the url that you would like to hit</param>
-		/// <param name="data">The body of the request, string and byte[] are posted as is other types will be serialized to JSON</param>
-		/// <param name="requestParameters">Optionally configure request specific timeouts, headers</param>
-		/// <returns>An ElasticsearchResponse of T where T represents the JSON response body</returns>
-		ElasticsearchResponse<T> DoRequest<T>(string method, string path, object data = null, IRequestParameters requestParameters = null);
-
-		/// <summary>
-		/// Perform any request you want over the configured IConnection asynchronously while taking advantage of the cluster failover.
-		/// </summary>
-		/// <typeparam name="T">The type representing the response JSON</typeparam>
-		/// <param name="method">the HTTP Method to use</param>
-		/// <param name="path">The path of the the url that you would like to hit</param>
-		/// <param name="data">The body of the request, string and byte[] are posted as is other types will be serialized to JSON</param>
-		/// <param name="requestParameters">Optionally configure request specific timeouts, headers</param>
-		/// <returns>A task of ElasticsearchResponse of T where T represents the JSON response body</returns>
-		Task<ElasticsearchResponse<T>> DoRequestAsync<T>(string method, string path, object data = null, IRequestParameters requestParameters = null);
 
 		/// <inheritdoc />
 		IPutScriptResponse PutScript(Func<PutScriptDescriptor, PutScriptDescriptor> putScriptDescriptor);

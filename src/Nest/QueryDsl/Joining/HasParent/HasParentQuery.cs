@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeConverter<HasParentQueryDescriptor<object>>))]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<HasParentQueryDescriptor<object>>))]
 	public interface IHasParentQuery : IQuery
 	{
 		[JsonProperty("type")]
@@ -19,11 +18,11 @@ namespace Nest
 		ParentScoreType? ScoreType { get; set; }
 
 		[JsonProperty("query")]
-		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryContainerDescriptor<object>>, CustomJsonConverter>))]
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeJsonConverter<QueryContainerDescriptor<object>>, CustomJsonConverter>))]
 		IQueryContainer Query { get; set; }
 
 		[JsonProperty("inner_hits")]
-		[JsonConverter(typeof(ReadAsTypeConverter<InnerHits>))]
+		[JsonConverter(typeof(ReadAsTypeJsonConverter<InnerHits>))]
 		IInnerHits InnerHits { get; set; }
 
 	}

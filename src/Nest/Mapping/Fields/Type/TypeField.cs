@@ -1,10 +1,9 @@
-﻿using Nest.Resolvers.Converters;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ReadAsTypeConverter<TypeField>))]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<TypeField>))]
 	public interface ITypeField : ISpecialField
 	{
 		[JsonProperty("index"), JsonConverter(typeof(StringEnumConverter))]

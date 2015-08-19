@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using Nest.Resolvers.Converters.Aggregations;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
 using System.Linq;
 using System.Reflection;
 using System.Collections;
-using Nest.Resolvers.Converters;
 
 namespace Nest.Resolvers
 {
@@ -29,45 +27,23 @@ namespace Nest.Resolvers
 
 			// this will only be called once and then cached
 
-			if (objectType == typeof(IDictionary<string, AnalyzerBase>))
-				contract.Converter = new AnalyzerCollectionConverter();
-
-			else if (objectType == typeof(IDictionary<string, TokenFilterBase>))
-				contract.Converter = new TokenFilterCollectionConverter();
-
-			else if (objectType == typeof(IDictionary<string, TokenizerBase>))
-				contract.Converter = new TokenizerCollectionConverter();
-
-			else if (objectType == typeof(IDictionary<string, CharFilterBase>))
-				contract.Converter = new CharFilterCollectionConverter();
-
-			else if (typeof(IDictionary).IsAssignableFrom(objectType))
+			if (typeof(IDictionary).IsAssignableFrom(objectType))
 				contract.Converter = new DictionaryKeysAreNotFieldNamesJsonConverter();
 
 			else if (objectType == typeof(IAggregation))
-				contract.Converter = new AggregationConverter();
+				contract.Converter = new AggregationJsonConverter();
 			
 			else if (objectType == typeof(DateTime) || objectType == typeof(DateTime?))
 				contract.Converter = new IsoDateTimeConverter();
 
-			else if (typeof(IHit<object>).IsAssignableFrom(objectType))
-				contract.Converter = new DefaultHitConverter();
+			else if (objectType == typeof(TypeName)) contract.Converter = new TypeNameJsonConverter();
+			else if (objectType == typeof(IndexName)) contract.Converter = new IndexNameJsonConverter();
+			else if (objectType == typeof(FieldName)) contract.Converter = new FieldNameJsonConverter(this.ConnectionSettings);
 
-			else if (objectType == typeof(MultiGetResponse))
-				contract.Converter = new MultiGetHitConverter();
-
-			else if (objectType == typeof(FieldName))
-				contract.Converter = new FieldNameConverter(this.ConnectionSettings);
-			
-			else if (objectType == typeof(FieldName))
-				contract.Converter = new FieldNameConverter(this.ConnectionSettings);
-
-			else if (objectType == typeof(SuggestResponse))
-				contract.Converter = new SuggestResponseConverter();
-
-			else if (objectType == typeof(MultiSearchResponse))
-				contract.Converter = new MultiSearchConverter();
-
+			//TODO these should not be necessary here
+			else if (objectType == typeof(MultiSearchResponse)) contract.Converter = new MultiSearchJsonConverter();
+			else if (objectType == typeof(MultiGetResponse)) contract.Converter = new MultiGetHitJsonConverter();
+			else if (typeof(IHit<object>).IsAssignableFrom(objectType)) contract.Converter = new DefaultHitJsonConverter();
 
 			if (this.ConnectionSettings.ContractConverters.HasAny())
 			{

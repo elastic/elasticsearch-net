@@ -7,6 +7,7 @@ using Elasticsearch.Net;
 using Elasticsearch.Net.Connection;
 using Elasticsearch.Net.Connection.Configuration;
 using Elasticsearch.Net.Exceptions;
+using Elasticsearch.Net.Serialization;
 
 namespace Nest
 {
@@ -15,50 +16,37 @@ namespace Nest
 	/// </summary>
 	public partial class ElasticClient : IElasticClient, IHighLevelToLowLevelDispatcher
 	{
-		private readonly IConnectionSettingsValues _connectionSettings;
 
 		internal IHighLevelToLowLevelDispatcher Dispatcher => this;
+
 		internal LowLevelDispatch LowLevelDispatch { get; set; }
-		
-		public IConnection Connection { get; protected set; }
-		public INestSerializer Serializer { get; protected set; }
-		public IElasticsearchClient Raw { get; protected set; }
-		public ElasticInferrer Infer { get; protected set; }
+	
+		private ITransport<IConnectionSettingsValues> Transport { get; }
 
+		public IElasticsearchSerializer Serializer => this.Transport.Settings.Serializer;
+		public ElasticInferrer Infer => this.Transport.Settings.Inferrer;
+		public IConnectionSettingsValues ConnectionSettings => this.Transport.Settings;
 
-		/// <summary>
-		/// Instantiate a new strongly typed connection to elasticsearch
-		/// </summary>
-		/// <param name="settings">An optional settings object telling the client how and where to connect to.
-		/// <para>Defaults to a static single node connection pool to http://localhost:9200</para>
-		/// <para>It's recommended to pass an explicit 'new ConnectionSettings()' instance</para>
-		/// </param>
-		/// <param name="connection">Optionally provide a different connection handler, defaults to http using HttpWebRequest</param>
-		/// <param name="serializer">Optionally provide a custom serializer responsible for taking a stream and turning into T</param>
-		/// <param name="transport">The transport coordinates requests between the client and the connection pool and the connection</param>
-		public ElasticClient(
-			IConnectionSettingsValues settings = null,
-			IConnection connection = null,
-			INestSerializer serializer = null,
-			ITransport transport = null)
+		public IElasticsearchClient Raw { get; }
+
+		public ElasticClient(Uri uri) : this(new ConnectionSettings(uri)) { }
+		public ElasticClient(IConnectionSettingsValues connectionSettings) 
+			: this(new Transport<IConnectionSettingsValues>(connectionSettings ?? new ConnectionSettings())) { }
+
+		public ElasticClient(ITransport<IConnectionSettingsValues> transport)
 		{
-			this._connectionSettings = settings ?? new ConnectionSettings();
-			this.Connection = connection ?? new HttpConnection(this._connectionSettings);
+			transport.ThrowIfNull(nameof(transport));
+			transport.Settings.ThrowIfNull(nameof(transport.Settings));
+			transport.Settings.Serializer.ThrowIfNull(nameof(transport.Settings.Serializer));
+			transport.Settings.Inferrer.ThrowIfNull(nameof(transport.Settings.Inferrer));
 
-			this.Serializer = serializer ?? new NestSerializer(this._connectionSettings);
-			this.Raw = new ElasticsearchClient(
-				this._connectionSettings,
-				this.Connection,
-				transport, //default transport
-				this.Serializer
-			);
+			this.Transport = transport;
+			this.Raw = new ElasticsearchClient(this.Transport);
 			this.LowLevelDispatch = new LowLevelDispatch(this.Raw);
-			this.Infer = this._connectionSettings.Inferrer;
-
 		}
 
 		/// <summary>
-		/// Perform any request you want over the configured IConnection while taking advantage of the cluster failover.
+		/// stPerform any request you want over the configured IConnection while taking advantage of the cluster failover.
 		/// </summary>
 		/// <typeparam name="T">The type representing the response JSON</typeparam>
 		/// <param name="method">the HTTP Method to use</param>
@@ -66,10 +54,8 @@ namespace Nest
 		/// <param name="data">The body of the request, string and byte[] are posted as is other types will be serialized to JSON</param>
 		/// <param name="requestParameters">Optionally configure request specific timeouts, headers</param>
 		/// <returns>An ElasticsearchResponse of T where T represents the JSON response body</returns>
-		public ElasticsearchResponse<T> DoRequest<T>(string method, string path, object data = null, IRequestParameters requestParameters = null)
-		{
-			return this.Raw.DoRequest<T>(method, path, data, requestParameters);
-		}
+		public ElasticsearchResponse<T> DoRequest<T>(HttpMethod method, string path, PostData<object> data = null, IRequestParameters requestParameters = null) 
+			where T : class => this.Raw.DoRequest<T>(method, path, data, requestParameters);
 
 		/// <summary>
 		/// Perform any request you want over the configured IConnection asynchronously while taking advantage of the cluster failover.
@@ -80,15 +66,13 @@ namespace Nest
 		/// <param name="data">The body of the request, string and byte[] are posted as is other types will be serialized to JSON</param>
 		/// <param name="requestParameters">Optionally configure request specific timeouts, headers</param>
 		/// <returns>A task of ElasticsearchResponse of T where T represents the JSON response body</returns>
-		public Task<ElasticsearchResponse<T>> DoRequestAsync<T>(string method, string path, object data = null, IRequestParameters requestParameters = null)
-		{
-			return this.Raw.DoRequestAsync<T>(method, path, data, requestParameters);
-		}
+		public Task<ElasticsearchResponse<T>> DoRequestAsync<T>(HttpMethod method, string path, PostData<object> data = null, IRequestParameters requestParameters = null)
+			where T : class => this.Raw.DoRequestAsync<T>(method, path, data, requestParameters);
 
 
 		R IHighLevelToLowLevelDispatcher.Dispatch<D, Q, R>(D descriptor, Func<ElasticsearchPathInfo<Q>, D, ElasticsearchResponse<R>> dispatch)
 		{
-			var pathInfo = descriptor.ToPathInfo(this._connectionSettings);
+			var pathInfo = descriptor.ToPathInfo(this.ConnectionSettings);
 			var response = dispatch(pathInfo, descriptor);
 			return ResultsSelector<D, Q, R>(response, descriptor);
 		}
@@ -102,7 +86,7 @@ namespace Nest
 
 		Task<I> IHighLevelToLowLevelDispatcher.DispatchAsync<D, Q, R, I>(D descriptor, Func<ElasticsearchPathInfo<Q>, D, Task<ElasticsearchResponse<R>>> dispatch)
 		{
-			var pathInfo = descriptor.ToPathInfo(this._connectionSettings);
+			var pathInfo = descriptor.ToPathInfo(this.ConnectionSettings);
 			return dispatch(pathInfo, descriptor)
 				.ContinueWith<I>(r =>
 				{
@@ -137,22 +121,13 @@ namespace Nest
 			where D : IRequest<Q>
 			where R : BaseResponse
 		{
-			var config = descriptor.RequestConfiguration;
-			var statusCodeAllowed = config != null && config.AllowedStatusCodes.HasAny(i => i == c.HttpStatusCode);
-
-			if (c.Success || statusCodeAllowed)
-			{
-				c.Response.IsValid = true;
-				return c.Response;
-			}
-			var badResponse = CreateInvalidInstance<R>(c);
-			return badResponse;
+			return c.Body ?? CreateInvalidInstance<R>(c);
 		}
 
-		private static R CreateInvalidInstance<R>(IElasticsearchResponse response) where R : BaseResponse
+		private static R CreateInvalidInstance<R>(IApiCallDetails response) where R : BaseResponse
 		{
-			var r = (R)typeof(R).CreateInstance();
-			((IResponseWithRequestInformation)r).RequestInformation = response;
+			var r = typeof(R).CreateInstance<R>();
+			((IBodyWithApiCallDetails)r).CallDetails = response;
 			r.IsValid = false;
 			return r;
 		}

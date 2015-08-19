@@ -7,6 +7,9 @@ using System.Reflection;
 using Elasticsearch.Net.Connection;
 using Nest;
 using Tests.Framework.MockData;
+using Elasticsearch.Net.ConnectionPool;
+using System.IO;
+using System.Text;
 
 namespace Tests.Framework
 {
@@ -22,26 +25,55 @@ namespace Tests.Framework
 
 		public static bool RunningFiddler => Process.GetProcessesByName("fiddler").Any();
 
-		public static IElasticClient GetClient(Func<ConnectionSettings, ConnectionSettings> modifySettings = null, int port = 9200 )
+		public static ConnectionSettings CreateSettings(Func<ConnectionSettings, ConnectionSettings> modifySettings = null, int port = 9200)
 		{
-			var defaultSettings = new ConnectionSettings(CreateBaseUri(port), "defaultIndex")
-				.InferMappingFor<Project>(map=>map
+			var defaultSettings = new ConnectionSettings(new SingleNodeConnectionPool(CreateNode(port)), CreateConnection())
+				.SetDefaultIndex("default-index")
+				.PrettyJson()
+				.InferMappingFor<Project>(map => map
 					.IndexName("project")
-					.IdProperty(p=>p.Name)
+					.IdProperty(p => p.Name)
 				)
-				.InferMappingFor<CommitActivity>(map=>map
+				.InferMappingFor<CommitActivity>(map => map
 					.IndexName("project")
 					.TypeName("commits")
 				)
-				.InferMappingFor<Developer>(map=>map
-					.Ignore(p=>p.PrivateValue)
-					.Rename(p=>p.OnlineHandle, "nickname")
+				.InferMappingFor<Developer>(map => map
+					.Ignore(p => p.PrivateValue)
+					.Rename(p => p.OnlineHandle, "nickname")
 				)
-				.SetGlobalHeaders(new NameValueCollection { {"TestMethod", ExpensiveTestNameForIntegrationTests()} });
+				//We try and fetch the test name during integration tests when running fiddler to send the name 
+				//as the TestMethod header, this allows us to quickly identify which test sent which request
+				.SetGlobalHeaders(new NameValueCollection { { "TestMethod", ExpensiveTestNameForIntegrationTests() } });
 			
 			var settings = modifySettings != null ? modifySettings(defaultSettings) : defaultSettings;
-			return new ElasticClient(settings, CreateConnection(settings));
+			return settings;
 		}
+
+		public static IElasticClient GetClient(Func<ConnectionSettings, ConnectionSettings> modifySettings = null, int port = 9200) =>
+			new ElasticClient(CreateSettings(modifySettings, port));
+
+		public static Uri CreateNode(int? port = null) => 
+			new UriBuilder("http", (RunningFiddler) ? "ipv4.fiddler" : "localhost", port.GetValueOrDefault(9200)).Uri;
+
+		public static IConnection CreateConnection() => RunIntegrationTests ? new HttpConnection() : new InMemoryConnection();
+
+		public static IElasticClient GetFixedReturnClient(object responseJson)
+		{
+			var serializer = new NestSerializer(new ConnectionSettings());
+			string fixedResult = string.Empty;
+			using (var ms = new MemoryStream())
+			{
+				serializer.Serialize(responseJson, ms);
+				fixedResult =Encoding.UTF8.GetString(ms.ToArray());
+			}
+			var connection = new InMemoryConnection(fixedResult);
+			var connectionPool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
+			var settings = new ConnectionSettings(connectionPool, connection);
+			return new ElasticClient(settings);
+		}
+
+
 
 		public static string ExpensiveTestNameForIntegrationTests()
 		{
@@ -63,18 +95,5 @@ namespace Tests.Framework
 			return types;
 		}
 
-		public static IConnection CreateConnection(IConnectionSettingsValues connectionSettings) =>
-			RunIntegrationTests ? new HttpConnection(connectionSettings) : new InMemoryConnection(connectionSettings);
-
-		public static Uri CreateBaseUri(int? port = null)
-		{
-			var host = "localhost";
-			if (RunningFiddler)
-				host = "ipv4.fiddler";
-
-			var uri = new UriBuilder("http", host, port.GetValueOrDefault(9200)).Uri;
-			return uri;
 		}
-
-	}
 }

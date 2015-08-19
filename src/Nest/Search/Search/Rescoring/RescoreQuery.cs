@@ -1,11 +1,10 @@
 ﻿using System;
-using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeConverter<RescoreQuery>))]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<RescoreQuery>))]
 	public interface IRescoreQuery
 	{
 		[JsonProperty("rescore_query")]

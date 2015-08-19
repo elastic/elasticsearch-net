@@ -35,7 +35,7 @@ namespace Nest
 			this.RequestParameters = new TParameters();
 		}
 
-		public ElasticsearchPathInfo<TParameters> DeserializationState(Func<IElasticsearchResponse, Stream, object> customObjectCreation)
+		public ElasticsearchPathInfo<TParameters> DeserializationState(Func<IApiCallDetails, Stream, object> customObjectCreation)
 		{
 			this.RequestParameters.DeserializationState = customObjectCreation;
 			return this;

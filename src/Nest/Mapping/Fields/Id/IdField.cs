@@ -1,9 +1,8 @@
-﻿using Nest.Resolvers.Converters;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ReadAsTypeConverter<IdField>))]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<IdField>))]
 	public interface IIdField : ISpecialField
 	{
 		[JsonProperty("path")]

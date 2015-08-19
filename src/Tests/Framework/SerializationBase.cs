@@ -9,6 +9,8 @@ using FluentAssertions;
 using Nest;
 using Newtonsoft.Json.Linq;
 using Ploeh.AutoFixture;
+using Elasticsearch.Net.Serialization;
+using Tests.Framework;
 
 namespace Tests.Framework
 {
@@ -50,9 +52,16 @@ namespace Tests.Framework
 			if (iteration > 0)
 				message = "This is the second time I am serializing, this usually indicates a problem when deserializing";
 
+			_expectedJsonString.Diff(serialized, message);
+			return false;
+
+		}
+
+		private void Diff(string expected, string actual, string message)
+		{
 			var d = new Differ();
 			var inlineBuilder = new InlineDiffBuilder(d);
-			var result = inlineBuilder.BuildDiffModel(_expectedJsonString, serialized);
+			var result = inlineBuilder.BuildDiffModel(expected, actual);
 			var diff = result.Lines.Aggregate(new StringBuilder().AppendLine(message), (sb, line) =>
 			{
 				if (line.Type == ChangeType.Inserted)
@@ -72,7 +81,7 @@ namespace Tests.Framework
 
 		protected string Serialize<TObject>(TObject o)
 		{
-			var bytes = TestClient.GetClient(_connectionSettingsModifier).Serializer.Serialize(o);
+			var bytes = TestClient.GetClient(_connectionSettingsModifier).Serializer.SerializeToBytes(o);
 			return Encoding.UTF8.GetString(bytes);
 		}
 

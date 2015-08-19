@@ -7,10 +7,10 @@ namespace Elasticsearch.Net.Serialization
 	{
 		public override object DeserializeObject(object value, Type type)
 		{
-			if (type == typeof(DynamicDictionary))
+			if (type == typeof(DynamicResponse))
 			{
 				var dict = base.DeserializeObject(value, typeof(Dictionary<string, object>)) as IDictionary<string, object>;
-				return dict == null ? null : DynamicDictionary.Create(dict);
+				return dict == null ? null : DynamicResponse.Create(dict);
 			}
 			return base.DeserializeObject(value, type);
 		}

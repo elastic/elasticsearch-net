@@ -7,67 +7,30 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	using MultiPercolateConverter = Func<IElasticsearchResponse, Stream, MultiPercolateResponse>;
-	
 	public partial class ElasticClient
 	{
 		/// <inheritdoc />
-		public IMultiPercolateResponse MultiPercolate(Func<MultiPercolateDescriptor, MultiPercolateDescriptor> multiPercolateSelector)
-		{
-			multiPercolateSelector.ThrowIfNull("MultiPercolateSelector");
-			var descriptor = multiPercolateSelector(new MultiPercolateDescriptor());
-			return this.Dispatcher.Dispatch<MultiPercolateDescriptor, MultiPercolateRequestParameters, MultiPercolateResponse>(
-				descriptor,
-				(p, d) =>
-				{
-					var json = Serializer.SerializeMultiPercolate(d);
-					return this.LowLevelDispatch.MpercolateDispatch<MultiPercolateResponse>(p, json);
-				}
+		public IMultiPercolateResponse MultiPercolate(Func<MultiPercolateDescriptor, MultiPercolateDescriptor> multiPercolateSelector) => 
+			this.Dispatcher.Dispatch<MultiPercolateDescriptor, MultiPercolateRequestParameters, MultiPercolateResponse>(
+				multiPercolateSelector, this.LowLevelDispatch.MpercolateDispatch<MultiPercolateResponse>
 			);
-		}
 
 		/// <inheritdoc />
-		public IMultiPercolateResponse MultiPercolate(IMultiPercolateRequest multiRequest)
-		{
-			return this.Dispatcher.Dispatch<IMultiPercolateRequest, MultiPercolateRequestParameters, MultiPercolateResponse>(
-				multiRequest,
-				(p, d) =>
-				{
-					var json = Serializer.SerializeMultiPercolate(d);
-					return this.LowLevelDispatch.MpercolateDispatch<MultiPercolateResponse>(p, json);
-				}
+		public IMultiPercolateResponse MultiPercolate(IMultiPercolateRequest multiRequest) => 
+			this.Dispatcher.Dispatch<IMultiPercolateRequest, MultiPercolateRequestParameters, MultiPercolateResponse>(
+				multiRequest, this.LowLevelDispatch.MpercolateDispatch<MultiPercolateResponse>
 			);
-		}
 
 		/// <inheritdoc />
-		public Task<IMultiPercolateResponse> MultiPercolateAsync(Func<MultiPercolateDescriptor, MultiPercolateDescriptor> multiPercolateSelector)
-		{
-			multiPercolateSelector.ThrowIfNull("MultiPercolateSelector");
-			var descriptor = multiPercolateSelector(new MultiPercolateDescriptor());
-			return this.Dispatcher.DispatchAsync<MultiPercolateDescriptor, MultiPercolateRequestParameters, MultiPercolateResponse, IMultiPercolateResponse>(
-				descriptor,
-				(p, d) =>
-				{
-					var json = Serializer.SerializeMultiPercolate(d);
-					return this.LowLevelDispatch.MpercolateDispatchAsync<MultiPercolateResponse>(p, json);
-				}
+		public Task<IMultiPercolateResponse> MultiPercolateAsync(Func<MultiPercolateDescriptor, MultiPercolateDescriptor> multiPercolateSelector) => 
+			this.Dispatcher.DispatchAsync<MultiPercolateDescriptor, MultiPercolateRequestParameters, MultiPercolateResponse, IMultiPercolateResponse>(
+				multiPercolateSelector, this.LowLevelDispatch.MpercolateDispatchAsync<MultiPercolateResponse>
 			);
-		}
 
 		/// <inheritdoc />
-		public Task<IMultiPercolateResponse> MultiPercolateAsync(IMultiPercolateRequest multiPercolateRequest)
-		{
-			return this.Dispatcher.DispatchAsync<IMultiPercolateRequest, MultiPercolateRequestParameters, MultiPercolateResponse, IMultiPercolateResponse>(
-				multiPercolateRequest,
-				(p, d) =>
-				{
-					var json = Serializer.SerializeMultiPercolate(d);
-					return this.LowLevelDispatch.MpercolateDispatchAsync<MultiPercolateResponse>(p, json);
-				}
+		public Task<IMultiPercolateResponse> MultiPercolateAsync(IMultiPercolateRequest multiPercolateRequest) => 
+			this.Dispatcher.DispatchAsync<IMultiPercolateRequest, MultiPercolateRequestParameters, MultiPercolateResponse, IMultiPercolateResponse>(
+				multiPercolateRequest, this.LowLevelDispatch.MpercolateDispatchAsync<MultiPercolateResponse>
 			);
-		}
-
-
-		
 	}
 }

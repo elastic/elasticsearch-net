@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using System;
 
@@ -27,7 +26,7 @@ namespace Nest
 		public bool? NumericDetection { get; set; }
 
 		[JsonProperty("transform")]
-		[JsonConverter(typeof(MappingTransformConverter))]
+		[JsonConverter(typeof(MappingTransformJsonConverter))]
 		public IList<MappingTransform> Transform { get; set; }
 
 		[JsonProperty("_id")]
@@ -41,9 +40,6 @@ namespace Nest
 
 		[JsonProperty("_all")]
 		public IAllField AllField { get; set; }
-
-		[JsonProperty("_analyzer")]
-		public IAnalyzerField AnalyzerField { get; set; }
 
 		[JsonProperty("_boost")]
 		public IBoostField BoostField { get; set; }
@@ -74,7 +70,7 @@ namespace Nest
 		public FluentDictionary<string, object> Meta { get; set; }
 
 		[JsonProperty("dynamic_templates", TypeNameHandling = TypeNameHandling.None)]
-		[JsonConverter(typeof(DynamicTemplatesConverter))]
+		[JsonConverter(typeof(DynamicTemplatesJsonConverter))]
 		public IDictionary<string, DynamicTemplate> DynamicTemplates { get; set; }
 
 	}

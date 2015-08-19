@@ -2,13 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeConverter<DateRangeAggregator>))]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<DateRangeAggregator>))]
 	public interface IDateRangeAggregator : IBucketAggregator
 	{
 		[JsonProperty("field")]

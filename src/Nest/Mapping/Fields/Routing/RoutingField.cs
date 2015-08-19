@@ -1,11 +1,10 @@
 ﻿using System;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
-using Nest.Resolvers.Converters;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ReadAsTypeConverter<RoutingField>))]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<RoutingField>))]
 	public interface IRoutingField : ISpecialField
 	{
 		[JsonProperty("required")]

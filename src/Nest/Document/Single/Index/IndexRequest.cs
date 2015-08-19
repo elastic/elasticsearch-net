@@ -6,11 +6,17 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	public interface IIndexRequest
+	{
+		object UntypedDocument { get; }
+	}
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IIndexRequest<TDocument> : IDocumentOptionalPath<IndexRequestParameters, TDocument> 
+	[JsonConverter(typeof(IndexRequestJsonConverter))]
+	public interface IIndexRequest<TDocument> : IIndexRequest, IDocumentOptionalPath<IndexRequestParameters, TDocument> 
 		where TDocument : class
 	{
-		TDocument Document { get; set;  }
+		TDocument Document { get; set; }
 	}
 
 	internal static class IndexPathInfo
@@ -28,6 +34,8 @@ namespace Nest
 	public partial class IndexRequest<TDocument> : DocumentPathBase<IndexRequestParameters, TDocument>, IIndexRequest<TDocument>
 		where TDocument : class
 	{
+		object IIndexRequest.UntypedDocument => this.Document;
+
 		public TDocument Document { get; set; }
 
 		public IndexRequest(TDocument document) : base(document)
@@ -39,13 +47,21 @@ namespace Nest
 		{
 			IndexPathInfo.Update(pathInfo, this);
 		}
-
 	}
 	
 	public partial class IndexDescriptor<T> : DocumentOptionalPathDescriptor<IndexDescriptor<T>, IndexRequestParameters, T>, IIndexRequest<T>
 		where T : class
 	{
+		public IndexDescriptor<T> Assign(Action<IIndexRequest<T>> assigner) => Fluent.Assign(this, assigner);
+
+		object IIndexRequest.UntypedDocument => ((IIndexRequest<T>)this).Document;
+
 		T IIndexRequest<T>.Document { get; set; }
+
+		public IndexDescriptor<T> Document(T document) => Assign(a => {
+			a.Document = document;
+			a.IdFrom = document;
+        });
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<IndexRequestParameters> pathInfo)
 		{

@@ -4,6 +4,14 @@ using System.Collections.Generic;
 
 namespace Nest
 {
+	public interface IBulkResponse : IResponse
+	{
+		int Took { get; }
+		bool Errors { get; }
+		IEnumerable<BulkResponseItem> Items { get; }
+		IEnumerable<BulkResponseItem> ItemsWithErrors { get; }
+	}
+
 	[JsonObject]
 	public class BulkResponse : BaseResponse, IBulkResponse
 	{
@@ -27,14 +35,14 @@ namespace Nest
 		public bool Errors { get; internal set; }
 
 		[JsonProperty("items")]
-		public IEnumerable<BulkOperationResponseItem> Items { get; internal set; }
+		public IEnumerable<BulkResponseItem> Items { get; internal set; }
 
 		[JsonIgnore]
-		public IEnumerable<BulkOperationResponseItem> ItemsWithErrors
+		public IEnumerable<BulkResponseItem> ItemsWithErrors
 		{
 			get
 			{
-				return !this.Items.HasAny() ? Enumerable.Empty<BulkOperationResponseItem>() : this.Items.Where(i => !i.IsValid);
+				return !this.Items.HasAny() ? Enumerable.Empty<BulkResponseItem>() : this.Items.Where(i => !i.IsValid);
 			}
 		}
 	}

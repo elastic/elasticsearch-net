@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Elasticsearch.Net;
-using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -11,7 +10,7 @@ namespace Nest
 	public interface ISearchExistsRequest : IQueryPath<SearchExistsRequestParameters>
 	{
 		[JsonProperty(PropertyName = "query")]
-		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryContainer>, CustomJsonConverter>))]
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeJsonConverter<QueryContainer>, CustomJsonConverter>))]
 		IQueryContainer Query { get; set; }
 
 		[JsonIgnore]

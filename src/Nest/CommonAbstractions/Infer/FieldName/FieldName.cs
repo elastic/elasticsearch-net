@@ -1,12 +1,14 @@
-﻿using System;
+﻿using Elasticsearch.Net.Serialization;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using Elasticsearch.Net.Connection;
 
 namespace Nest
 {
-	public class FieldName : IEquatable<FieldName>
+	public class FieldName : IEquatable<FieldName>, IQueryStringValue
 	{
 		public string Name { get; set; }
 		public Expression Expression { get; set; }
@@ -77,6 +79,16 @@ namespace Nest
 		public bool EqualsString(string other)
 		{
 			return !other.IsNullOrEmpty() && other == Name;
+		}
+
+		string IQueryStringValue.ToQueryStringValue(IConnectionConfigurationValues settings)
+		{
+			var nestSettings = settings as IConnectionSettingsValues;
+			if (nestSettings == null)
+				throw new Exception("Tried to pass field name on querysting but it could not be resolved because no nest settings are available");
+			var infer = new ElasticInferrer(nestSettings);
+			return infer.FieldName(this);
+
 		}
 	}
 }

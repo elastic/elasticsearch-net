@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ReadAsTypeConverter<TypeQueryDescriptor>))]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<TypeQueryDescriptor>))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface ITypeQuery : IQuery
 	{

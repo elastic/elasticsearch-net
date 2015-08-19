@@ -7,7 +7,7 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	using GetIndexResponseConverter = Func<IElasticsearchResponse, Stream, GetIndexResponse>;
+	using GetIndexResponseConverter = Func<IApiCallDetails, Stream, GetIndexResponse>;
 
 	public partial class ElasticClient
 	{
@@ -55,7 +55,7 @@ namespace Nest
 			);
 		}
 
-		private GetIndexResponse DeserializeGetIndexResponse(IElasticsearchResponse response, Stream stream)
+		private GetIndexResponse DeserializeGetIndexResponse(IApiCallDetails response, Stream stream)
 		{
 			return new GetIndexResponse
 			{

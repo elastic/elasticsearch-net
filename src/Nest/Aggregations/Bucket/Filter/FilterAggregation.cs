@@ -1,11 +1,10 @@
 using System;
-using Nest.Resolvers.Converters.Aggregations;
 using Newtonsoft.Json;
 
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(FilterAggregatorConverter))]
+	[JsonConverter(typeof(FilterAggregatorJsonConverter))]
 	public interface IFilterAggregator : IBucketAggregator
 	{
 		IQueryContainer Filter { get; set; }

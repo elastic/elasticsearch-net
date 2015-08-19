@@ -7,7 +7,7 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	using GetWarmerConverter = Func<IElasticsearchResponse, Stream, WarmerResponse>;
+	using GetWarmerConverter = Func<IApiCallDetails, Stream, WarmerResponse>;
 	using CrazyWarmerResponse = Dictionary<string, Dictionary<string, Dictionary<string, WarmerMapping>>>;
 
 	public partial class ElasticClient
@@ -60,10 +60,9 @@ namespace Nest
 		}
 
 		/// <inheritdoc />
-		private WarmerResponse DeserializeWarmerResponse(IElasticsearchResponse connectionStatus, Stream stream)
+		private WarmerResponse DeserializeWarmerResponse(IApiCallDetails apiCallDetails, Stream stream)
 		{
-			if (!connectionStatus.Success)
-				return new WarmerResponse { IsValid = false};
+			if (!apiCallDetails.Success) return new WarmerResponse ();
 
 			var dict = this.Serializer.Deserialize<CrazyWarmerResponse>(stream);
 			var indices = new Dictionary<string, Dictionary<string, WarmerMapping>>();
@@ -80,11 +79,7 @@ namespace Nest
 				indices.Add(kv.Key, warmers);
 			}
 
-			return new WarmerResponse
-			{
-				IsValid = true,
-				Indices = indices
-			};
+			return new WarmerResponse { Indices = indices };
 		}
 	}
 }

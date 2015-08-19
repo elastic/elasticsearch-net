@@ -1,5 +1,4 @@
 ﻿using Elasticsearch.Net;
-using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -12,7 +11,7 @@ namespace Nest
 	public interface IClusterRerouteRequest : IRequest<ClusterRerouteRequestParameters>
 	{
 		[JsonProperty("commands")]
-		[JsonConverter(typeof(ClusterRerouteCommandCollectionConverter))]
+		[JsonConverter(typeof(ClusterRerouteCommandsJsonConverter))]
 		IList<IClusterRerouteCommand> Commands { get; set; }
 	}
 

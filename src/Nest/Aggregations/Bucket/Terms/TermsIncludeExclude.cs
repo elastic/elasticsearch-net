@@ -1,10 +1,9 @@
-using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 
 namespace Nest
 {
-	[JsonConverter(typeof(TermsIncludeExcludeConverter))]
+	[JsonConverter(typeof(TermsIncludeExcludeJsonConverter))]
 	public class TermsIncludeExclude
 	{
 		[JsonProperty("pattern")]

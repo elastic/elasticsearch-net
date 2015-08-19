@@ -1,5 +1,4 @@
-﻿using Nest.Resolvers.Converters;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +20,7 @@ namespace Nest
 		[JsonProperty("doc_values")]
 		bool? DocValues { get; set; }
 
-		[JsonProperty("fields", DefaultValueHandling = DefaultValueHandling.Ignore), JsonConverter(typeof(PropertyConverter))]
+		[JsonProperty("fields", DefaultValueHandling = DefaultValueHandling.Ignore), JsonConverter(typeof(PropertyJsonConverter))]
 		IDictionary<FieldName, IElasticsearchProperty> Fields { get; set; }
 
 		[JsonProperty("similarity")]

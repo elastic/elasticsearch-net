@@ -2,25 +2,24 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ReadAsTypeConverter<BoolQuery>))]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<BoolQuery>))]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IBoolQuery : IQuery
 	{
 		[JsonProperty("must",
-			ItemConverterType = typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryContainer>, CustomJsonConverter>))]
+			ItemConverterType = typeof(CompositeJsonConverter<ReadAsTypeJsonConverter<QueryContainer>, CustomJsonConverter>))]
 		IEnumerable<IQueryContainer> Must { get; set; }
 
 		[JsonProperty("must_not",
-			ItemConverterType = typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryContainer>, CustomJsonConverter>))]
+			ItemConverterType = typeof(CompositeJsonConverter<ReadAsTypeJsonConverter<QueryContainer>, CustomJsonConverter>))]
 		IEnumerable<IQueryContainer> MustNot { get; set; }
 
 		[JsonProperty("should",
-			ItemConverterType = typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryContainer>, CustomJsonConverter>))]
+			ItemConverterType = typeof(CompositeJsonConverter<ReadAsTypeJsonConverter<QueryContainer>, CustomJsonConverter>))]
 		IEnumerable<IQueryContainer> Should { get; set; }
 
 		[JsonProperty("minimum_should_match")]

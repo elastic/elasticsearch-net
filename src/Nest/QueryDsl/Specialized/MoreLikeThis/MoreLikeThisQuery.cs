@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
 
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeConverter<MoreLikeThisQueryDescriptor<object>>))]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<MoreLikeThisQueryDescriptor<object>>))]
 	public interface IMoreLikeThisQuery : IQuery
 	{
 		[JsonProperty(PropertyName = "fields")]

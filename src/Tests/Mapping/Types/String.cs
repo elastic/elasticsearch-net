@@ -7,6 +7,7 @@ using Tests.Framework;
 using Nest;
 using Tests.Framework.MockData;
 using Tests.Framework.Integration;
+using Elasticsearch.Net;
 
 namespace Tests.Mapping.Types
 {
@@ -15,6 +16,7 @@ namespace Tests.Mapping.Types
 		public class Usage : MapUsageBase
 		{
 			public Usage(ReadOnlyCluster cluster, ApiUsage usage) : base(cluster, usage) { }
+
 
 			protected override object ExpectJson => new
 			{

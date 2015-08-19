@@ -33,7 +33,6 @@ namespace Tests.ClientConcepts.LowLevel
 			var node = new Uri("http://mynode.example.com:8082/apiKey");
 			var config = new ConnectionConfiguration(node);
 			var client = new ElasticsearchClient(config);
-
 		}
 
 		/** 
@@ -68,9 +67,9 @@ namespace Tests.ClientConcepts.LowLevel
 
 			var config = new ConnectionConfiguration(connectionPool)
 				.EnableTrace()
-				.ExposeRawResponse()
+				.DisableDirectStreaming()
 				.SetBasicAuthentication("user", "pass")
-				.SetTimeout(5000);
+				.SetTimeout(TimeSpan.FromSeconds(5));
 
 		}
 		/**
@@ -102,14 +101,14 @@ namespace Tests.ClientConcepts.LowLevel
 				* Will cause `Elasticsearch.Net` to write connection debug information on the TRACE output of your application.
 				*/
 
-				.ExposeRawResponse()
+				.DisableDirectStreaming()
 				/**
 				 * By default responses are deserialized off stream to the object you tell it to.
 				 * For debugging purposes it can be very useful to keep a copy of the raw response on the result object. 
 				 */;
 
 			var result = client.Search<SearchResponse<object>>(new { size = 12 });
-			var raw = result.ResponseRaw;
+			var raw = result.ResponseBodyInBytes;
 			/** This will only have a value if the client configuration has ExposeRawResponse set */
 
 			/** 
@@ -143,7 +142,7 @@ namespace Tests.ClientConcepts.LowLevel
 				.SetProxy(new Uri("http://myproxy"), "username", "pass")
 				/** Sets proxy information on the connection. */
 
-				.SetTimeout(4000)
+				.SetTimeout(TimeSpan.FromSeconds(4))
 				/**
 				* Sets the global maximum time a connection may take.
 				 * Please note that this is the request timeout, the builtin .NET `WebRequest` has no way to set connection timeouts 
@@ -157,10 +156,9 @@ namespace Tests.ClientConcepts.LowLevel
 				 * such exceptions could be search parser errors and index missing exceptions.
 				*/
 
-				.UsePrettyResponses()
+				.PrettyJson()
 				/**
-				* Appends `pretty=true` to all the requests. Handy if you are debugging or listening to 
-				 * the requests with i.e fiddler. This setting can be safely used in conjuction with `SetGlobalQueryStringParameters`.
+				* Forces all serialization to be indedented and appends `pretty=true` to all the requests so that the responses are indented as well
 				*/
 
 				.SetBasicAuthentication("username", "password")

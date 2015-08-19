@@ -1,12 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 
 namespace Nest
 {
 	[JsonObject]
-	[JsonConverter(typeof(CatFielddataRecordConverter))]
+	[JsonConverter(typeof(CatFielddataRecordJsonConverter))]
 	public class CatFielddataRecord : ICatRecord
 	{
 		public string Id { get; set; }

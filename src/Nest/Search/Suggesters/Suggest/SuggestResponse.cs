@@ -11,16 +11,11 @@ namespace Nest
 	}
 
 	[JsonObject]
+	[JsonConverter(typeof(SuggestResponseJsonConverter))]
 	public class SuggestResponse : BaseResponse, ISuggestResponse
 	{
-		public SuggestResponse()
-		{
-			this.IsValid = true;
-			this.Suggestions = new Dictionary<string, Suggest[]>();
-		}
-		
 		public ShardsMetaData Shards { get; internal set; }
 
-		public IDictionary<string, Suggest[]> Suggestions { get; set;}
+		public IDictionary<string, Suggest[]> Suggestions { get; set;} = new Dictionary<string, Suggest[]>();
 	}
 }

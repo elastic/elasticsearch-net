@@ -1,12 +1,11 @@
 using System;
 using System.Globalization;
 using System.Text.RegularExpressions;
-using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(TimeUnitExpressionConverter))]
+	[JsonConverter(typeof(TimeUnitExpressionJsonConverter))]
 	public class TimeUnitExpression : IComparable<TimeUnitExpression>, IEquatable<TimeUnitExpression>
 	{
 		public double? Factor { get; }

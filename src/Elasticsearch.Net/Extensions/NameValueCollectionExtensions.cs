@@ -34,16 +34,15 @@ namespace Elasticsearch.Net
 			return s == null ? null : Uri.EscapeDataString(s);
 		}
 
-		internal static NameValueCollection ToNameValueCollection(this IDictionary<string, object> dict, IElasticsearchSerializer stringifier)
+		internal static NameValueCollection ToNameValueCollection(this IDictionary<string, object> dict, IFormatProvider provider)
 		{
-			stringifier.ThrowIfNull("stringifier");
 			if (dict == null || dict.Count < 0)
 				return null;
 			
 			var nv = new NameValueCollection();
 			foreach (var kv in dict.Where(kv => !kv.Key.IsNullOrEmpty()))
 			{
-				nv.Add(kv.Key, stringifier.Stringify(kv.Value));
+				nv.Add(kv.Key, string.Format(provider, "{0}", kv.Value));
 			}
 			return nv;
 		}

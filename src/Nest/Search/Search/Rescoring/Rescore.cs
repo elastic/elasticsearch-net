@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeConverter<Rescore>))]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<Rescore>))]
 	public interface IRescore
 	{
 		[JsonProperty("window_size")]

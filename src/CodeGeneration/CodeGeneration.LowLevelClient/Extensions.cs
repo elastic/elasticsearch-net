@@ -12,6 +12,7 @@ namespace CodeGeneration.LowLevelClient
 		{
 			return items.GroupBy(property).Select(x => x.First());
 		}
+
 		/// <summary>
 		/// Removes _ . but not an underscore at the start of the string, unless the string is _all.
 		/// </summary>

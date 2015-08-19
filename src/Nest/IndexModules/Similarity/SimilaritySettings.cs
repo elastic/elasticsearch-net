@@ -1,12 +1,10 @@
-﻿
-using Nest.Resolvers.Converters;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 
 namespace Nest
 {
-	[JsonConverter(typeof(SimilaritySettingsConverter))]
+	[JsonConverter(typeof(SimilaritySettingsJsonConverter))]
 	public class SimilaritySettings
 	{
 		public SimilaritySettings()
@@ -16,7 +14,7 @@ namespace Nest
 
 		public string Default { get; set; }
 
-		[JsonConverter(typeof(SimilarityCollectionConverter))]
+		[JsonConverter(typeof(SimilarityCollectionJsonConverter))]
 		public IDictionary<string, SimilarityBase> CustomSimilarities { get; set; }
 	}
 }

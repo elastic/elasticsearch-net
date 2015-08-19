@@ -11,14 +11,13 @@ namespace Nest
 	[JsonObject]
 	public class ExistsResponse : BaseResponse, IExistsResponse
 	{
-		internal ExistsResponse(IElasticsearchResponse connectionStatus)
+		//TODO I think .Exists should proxy IsValid or be removed completely
+		internal ExistsResponse(IApiCallDetails apiCallDetails)
 		{
-			this.IsValid =connectionStatus.Success || connectionStatus.HttpStatusCode == 404;
-			this.Exists = connectionStatus.Success & connectionStatus.HttpStatusCode == 200;
+			this.Exists = apiCallDetails.Success & apiCallDetails.HttpStatusCode == 200;
 		}
 		public ExistsResponse()
 		{
-			this.IsValid = false;
 			this.Exists = false;
 		}
 

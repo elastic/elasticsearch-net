@@ -14,11 +14,6 @@ namespace Nest
 	[JsonObject]
 	public class NodeStatsResponse : BaseResponse, INodeStatsResponse
 	{
-		public NodeStatsResponse()
-		{
-			this.IsValid = true;
-		}
-
 		[JsonProperty(PropertyName = "cluster_name")]
 		public string ClusterName { get; internal set; }
 		[JsonProperty(PropertyName = "nodes")]

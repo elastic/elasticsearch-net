@@ -21,7 +21,6 @@ namespace Nest.Resolvers
 			_connectionSettings = connectionSettings;
 		}
 
-
 		internal Func<T, string> CreateIdSelector<T>() where T : class
 		{
 			Func<T, string> idSelector = (@object) => this.GetIdFor(@object);
@@ -31,7 +30,6 @@ namespace Nest.Resolvers
 		internal static Func<T, object> MakeDelegate<T, U>(MethodInfo @get)
 		{
 			var f = (Func<T, U>)Delegate.CreateDelegate(typeof(Func<T, U>), @get);
-
 			return t => f(t);
 		}
 

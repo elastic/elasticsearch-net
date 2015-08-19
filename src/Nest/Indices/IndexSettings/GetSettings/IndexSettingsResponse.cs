@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -11,7 +10,7 @@ namespace Nest
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
-	[JsonConverter(typeof(IndexSettingsResponseConverter))]
+	[JsonConverter(typeof(IndexSettingsResponseJsonConverter))]
 	public class IndexSettingsResponse : BaseResponse, IIndexSettingsResponse
 	{
 		[JsonIgnore]

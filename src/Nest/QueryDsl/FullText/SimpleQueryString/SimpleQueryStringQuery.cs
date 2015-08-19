@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
 using Newtonsoft.Json.Converters;
@@ -10,7 +9,7 @@ using Newtonsoft.Json.Converters;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeConverter<SimpleQueryStringQueryDescriptor<object>>))]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<SimpleQueryStringQueryDescriptor<object>>))]
 	public interface ISimpleQueryStringQuery : IQuery
 	{
 		[JsonProperty(PropertyName = "query")]

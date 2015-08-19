@@ -45,6 +45,9 @@ namespace Nest
 			}
 			return closedType.CreateInstance(args);
 		}
+
+		internal static T CreateInstance<T>(this Type t, params object[] args) => (T)t.CreateInstance();
+
 		internal static object CreateInstance(this Type t, params object[] args)
 		{
 			ObjectActivator<object> activator;

@@ -1,5 +1,4 @@
-﻿using Nest.Resolvers.Converters;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +7,7 @@ using System.Text;
 namespace Nest
 {
 	[JsonObject(MemberSerialization.OptIn)]
-	[JsonConverter(typeof(UpgradeStatusResponseConverter))]
+	[JsonConverter(typeof(UpgradeStatusResponseJsonConverter))]
 	public interface IUpgradeStatusResponse : IResponse
 	{
 		long SizeInBytes { get; set; }

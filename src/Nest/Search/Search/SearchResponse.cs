@@ -41,12 +41,6 @@ namespace Nest
 	[JsonObject]
 	public class SearchResponse<T> : BaseResponse, ISearchResponse<T> where T : class
 	{
-		public SearchResponse()
-		{
-			this.IsValid = true;
-			this.Aggregations = new Dictionary<string, IAggregation>();
-		}
-
 		[JsonProperty(PropertyName = "_shards")]
 		public ShardsMetaData Shards { get; internal set; }
 
@@ -55,7 +49,7 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "aggregations")]
 		[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]
-		public IDictionary<string, IAggregation> Aggregations { get; internal set; }
+		public IDictionary<string, IAggregation> Aggregations { get; internal set; } = new Dictionary<string, IAggregation>();
 		
 		private AggregationsHelper _agg = null;
 		[JsonIgnore]
@@ -113,11 +107,13 @@ namespace Nest
 		public IEnumerable<FieldSelection<T>> FieldSelections
 		{
 			get 
-			{ 
-				return this.Hits
-					.Select(h => h.Fields)
-					.Where(f=>f != null)
-					.Select(f => new FieldSelection<T>(this.Settings, f.FieldValuesDictionary)); 
+			{
+				//TODO fix field selections
+				throw new NotImplementedException("Fieldselections are broken in 2.0, responses no longer have settings");
+				//return this.Hits
+				//	.Select(h => h.Fields)
+				//	.Where(f=>f != null)
+				//	.Select(f => new FieldSelection<T>(this.Settings, f.FieldValuesDictionary)); 
 			}
 		}
 

@@ -5,20 +5,19 @@ using System.Linq;
 using System.Linq.Expressions;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
-using Nest.Resolvers.Converters;
 
 namespace Nest
 {
 
 	public class FieldMappingProperties : Dictionary<string, FieldMapping>
 	{
-		
+
 	}
 
-	public class TypeFieldMappings 
+	public class TypeFieldMappings
 	{
 		[JsonProperty("mappings")]
-		public Dictionary<string,FieldMappingProperties> Mappings { get; set; }
+		public Dictionary<string, FieldMappingProperties> Mappings { get; set; }
 
 	}
 	public class FieldMapping
@@ -27,14 +26,14 @@ namespace Nest
 		public string FullName { get; set; }
 
 		[JsonProperty("mapping")]
-		[JsonConverter(typeof(FieldMappingConverter))]
+		[JsonConverter(typeof(FieldMappingJsonConverter))]
 		public Dictionary<string, IFieldMapping> Mapping { get; set; }
 
 	}
 
 	public class IndexFieldMappings : Dictionary<string, TypeFieldMappings>
 	{
-		
+
 	}
 
 	public interface IGetFieldMappingResponse : IResponse
@@ -46,7 +45,7 @@ namespace Nest
 		IFieldMapping MappingFor<T>(string fieldName)
 			where T : class;
 
-		IFieldMapping MappingFor<T>(Expression<Func<T, object>>  fieldName)
+		IFieldMapping MappingFor<T>(Expression<Func<T, object>> fieldName)
 			where T : class;
 
 		FieldMappingProperties MappingsFor<T>(string indexName = null, string typeName = null)
@@ -62,9 +61,11 @@ namespace Nest
 			this.Indices = new IndexFieldMappings();
 		}
 
-		internal GetFieldMappingResponse(IElasticsearchResponse status, IndexFieldMappings dict)
+		internal GetFieldMappingResponse(IApiCallDetails status, IndexFieldMappings dict)
 		{
 			this.Indices = dict ?? new IndexFieldMappings();
+			//TODO can dict truely ever be null, whats the response look like when field mapping is not found.
+			//does status.Success not already reflect this?
 			this.IsValid = status.Success && dict != null && dict.Count > 0;
 		}
 
@@ -73,10 +74,13 @@ namespace Nest
 		public FieldMappingProperties MappingsFor<T>(string indexName = null, string typeName = null)
 			where T : class
 		{
-			indexName = indexName ?? Settings.Inferrer.IndexName<T>();
-			typeName = typeName ?? Settings.Inferrer.TypeName<T>();
 
-			return this.MappingsFor(indexName, typeName);
+			//TODO figure out a new way to get MappingsFor<T>.
+			throw new NotImplementedException("responses no longer have settings");
+			//indexName = indexName ?? Settings.Inferrer.IndexName<T>();
+			//typeName = typeName ?? Settings.Inferrer.TypeName<T>();
+
+			//return this.MappingsFor(indexName, typeName);
 		}
 
 		public FieldMappingProperties MappingsFor(string indexName, string typeName)
@@ -90,8 +94,6 @@ namespace Nest
 			return type;
 		}
 
-
-
 		public IFieldMapping MappingFor(string indexName, string typeName, string fieldName)
 		{
 			if (fieldName.IsNullOrEmpty()) return null;
@@ -101,7 +103,7 @@ namespace Nest
 
 			FieldMapping field;
 			if (!type.TryGetValue(fieldName, out field) || field.Mapping == null) return null;
-			
+
 			var name = fieldName.Split('.').Last();
 			return field.Mapping[name];
 		}
@@ -109,16 +111,20 @@ namespace Nest
 		public IFieldMapping MappingFor<T>(string fieldName)
 			where T : class
 		{
-			var indexName = Settings.Inferrer.IndexName<T>();
-			var typeName = Settings.Inferrer.TypeName<T>();
-			return this.MappingFor(indexName, typeName, fieldName);
+			//TODO figure out a new way to get MappingsFor<T>.
+			throw new NotImplementedException("responses no longer have settings");
+			//var indexName = Settings.Inferrer.IndexName<T>();
+			//var typeName = Settings.Inferrer.TypeName<T>();
+			//return this.MappingFor(indexName, typeName, fieldName);
 		}
-		public IFieldMapping MappingFor<T>(Expression<Func<T, object>>  fieldName)
+		public IFieldMapping MappingFor<T>(Expression<Func<T, object>> fieldName)
 			where T : class
 		{
-			var path = Settings.Inferrer.FieldName(fieldName);
-			return this.MappingFor<T>(path);
-			
+			//TODO figure out a new way to get MappingsFor<T>.
+			throw new NotImplementedException("responses no longer have settings");
+			//var path = Settings.Inferrer.FieldName(fieldName);
+			//return this.MappingFor<T>(path);
+
 		}
 	}
 }

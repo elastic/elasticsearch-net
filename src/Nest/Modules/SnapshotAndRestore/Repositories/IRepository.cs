@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
-using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ReadAsTypeConverter<SnapshotRepository>))]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<SnapshotRepository>))]
 	public interface IRepository
 	{
 

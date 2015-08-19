@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
 using Newtonsoft.Json.Converters;
@@ -9,7 +8,7 @@ using Newtonsoft.Json.Converters;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeConverter<NestedQueryDescriptor<object>>))]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<NestedQueryDescriptor<object>>))]
 	public interface INestedQuery : IQuery
 	{
 		[JsonProperty("score_mode"), JsonConverter(typeof (StringEnumConverter))]
@@ -25,7 +24,7 @@ namespace Nest
 		FieldName Path { get; set; }
 
 		[JsonProperty("inner_hits")]
-		[JsonConverter(typeof(ReadAsTypeConverter<InnerHits>))]
+		[JsonConverter(typeof(ReadAsTypeJsonConverter<InnerHits>))]
 		IInnerHits InnerHits { get; set; }
 
 	}

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -9,18 +8,18 @@ using Newtonsoft.Json.Converters;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeConverter<IndicesQueryDescriptor<object>>))]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<IndicesQueryDescriptor<object>>))]
 	public interface IIndicesQuery : IQuery
 	{
 		[JsonProperty("indices")]
 		IEnumerable<string> Indices { get; set; }
 
 		[JsonProperty("query")]
-		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryContainerDescriptor<object>>, CustomJsonConverter>))]
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeJsonConverter<QueryContainerDescriptor<object>>, CustomJsonConverter>))]
 		IQueryContainer Query { get; set; }
 
 		[JsonProperty("no_match_query")]
-		[JsonConverter(typeof(NoMatchQueryConverter))]
+		[JsonConverter(typeof(NoMatchQueryJsonConverter))]
 		IQueryContainer NoMatchQuery { get; set; }
 	}
 

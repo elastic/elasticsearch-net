@@ -21,7 +21,6 @@ namespace Tests.Framework.Integration
 			this.CreateIndicesAndMappings();
 		}
 
-
 		public void CreateIndicesAndMappings()
 		{
 			var putTemplateResult = this.Client.PutTemplate("raw_fields", p => p
@@ -82,7 +81,6 @@ namespace Tests.Framework.Integration
 			this.Client.IndexMany(Project.Projects);
 
 			this.Client.Refresh(r=>r.Index<Project>());
-
 
 		}
 

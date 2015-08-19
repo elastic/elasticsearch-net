@@ -2,22 +2,18 @@
 
 namespace Nest
 {
-    public interface IUnregisterPercolateResponse : IResponse
-    {
-        bool Found { get; }
-        string Index { get; }
-        string Type { get; }
-        string Id { get; }
-        int Version { get; }
-    }
+	public interface IUnregisterPercolateResponse : IResponse
+	{
+		bool Found { get; }
+		string Index { get; }
+		string Type { get; }
+		string Id { get; }
+		int Version { get; }
+	}
 
-    [JsonObject]
+	[JsonObject]
 	public class UnregisterPercolateResponse : BaseResponse, IUnregisterPercolateResponse
-    {
-		public UnregisterPercolateResponse()
-		{
-			this.IsValid = true;
-		}
+	{
 		[JsonProperty(PropertyName = "found")]
 		public bool Found { get; internal set; }
 

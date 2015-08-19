@@ -2,13 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeConverter<GeoHashAggregator>))]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<GeoHashAggregator>))]
 	public interface IGeoHashAggregator : IBucketAggregator
 	{
 		[JsonProperty("field")]

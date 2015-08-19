@@ -1,5 +1,4 @@
-﻿using Nest.Resolvers.Converters;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +6,7 @@ using System.Linq;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeConverter<FuzzySuggester>))]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<FuzzySuggester>))]
 	public interface IFuzzySuggester
 	{
 		[JsonProperty(PropertyName = "transpositions")]

@@ -17,7 +17,6 @@ namespace Nest
 		FieldSelection<T> Fields { get; }
 	}
 
-
 	[JsonObject(MemberSerialization.OptIn)]
 	public class GetResponse<T> : BaseResponse, IGetResponse<T> where T : class
 	{
@@ -55,15 +54,17 @@ namespace Nest
 		{
 			get
 			{
-				if (_fields != null)
-					return _fields;
+				//TODO fix field selections
+				throw new NotImplementedException("Fieldselections are broken in 2.0, responses no longer have settings");
+				//if (_fields != null)
+				//	return _fields;
 
-				if (this.ConnectionStatus == null)
-					return null;
-				var realSettings = this.ConnectionStatus.Settings as IConnectionSettingsValues;
+				//if (this.ApiCall == null)
+				//	return null;
+				//var realSettings = this.ApiCall.Settings as IConnectionSettingsValues;
 
-				_fields = new FieldSelection<T>(realSettings, FieldValues);
-				return _fields;
+				//_fields = new FieldSelection<T>(realSettings, FieldValues);
+				//return _fields;
 			}
 		}
 

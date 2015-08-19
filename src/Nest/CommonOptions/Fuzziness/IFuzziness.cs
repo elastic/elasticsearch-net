@@ -1,9 +1,8 @@
-﻿using Nest.Resolvers.Converters;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(FuzzinessConverter))]
+	[JsonConverter(typeof(FuzzinessJsonConverter))]
 	public interface IFuzziness
 	{
 		bool Auto { get;  }

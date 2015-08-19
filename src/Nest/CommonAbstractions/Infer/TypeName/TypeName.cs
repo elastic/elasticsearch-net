@@ -1,10 +1,9 @@
 ﻿using System;
-using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(TypeNameConverter))]
+	[JsonConverter(typeof(TypeNameJsonConverter))]
 	public class TypeName : IEquatable<TypeName>
 	{
 		public string Name { get; set; }

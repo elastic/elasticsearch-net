@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.Linq.Expressions;
@@ -9,7 +8,7 @@ using System.Linq.Expressions;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof (FieldNameQueryConverter<MatchQuery>))]
+	[JsonConverter(typeof (FieldNameQueryJsonConverter<MatchQuery>))]
 	public interface IMatchQuery : IFieldNameQuery 
 	{
 		[JsonProperty(PropertyName = "type")]

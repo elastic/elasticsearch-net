@@ -30,7 +30,7 @@ var index = client.Index(person);
 ```
 All the calls have async variants:
 ```csharp
-var result = client.IndexAsync(person); // returns a Task<ConnectionStatus>
+var result = client.IndexAsync(person); // returns a Task<IndexResponse>
 ```
 ### Searching
 NEST exposes a fluent interface and a [powerful query DSL](http://nest.azurewebsites.net/concepts/writing-queries.html)

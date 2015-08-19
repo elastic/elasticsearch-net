@@ -4,12 +4,11 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
-using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 
 namespace Nest
 {
-	using MultiGetConverter = Func<IElasticsearchResponse, Stream, MultiGetResponse>;
+	using MultiGetConverter = Func<IApiCallDetails, Stream, MultiGetResponse>;
 	
 	public partial class ElasticClient
 	{
@@ -61,17 +60,10 @@ namespace Nest
 			);
 		}
 
+		private MultiGetResponse DeserializeMultiGetResponse(IApiCallDetails response, Stream stream, JsonConverter converter)=>
+			new NestSerializer(this.ConnectionSettings, converter).Deserialize<MultiGetResponse>(stream);
 
+		private JsonConverter CreateCovariantMultiGetConverter(IMultiGetRequest descriptor) => new MultiGetHitJsonConverter(descriptor);
 
-		private MultiGetResponse DeserializeMultiGetResponse(IElasticsearchResponse response, Stream stream, JsonConverter converter)
-		{
-			return this.Serializer.DeserializeInternal<MultiGetResponse>(stream, converter);
-		}
-
-		private JsonConverter CreateCovariantMultiGetConverter(IMultiGetRequest descriptor)
-		{
-			var multiGetHitConverter = new MultiGetHitConverter(descriptor);
-			return multiGetHitConverter;
-		}
 	}
 }

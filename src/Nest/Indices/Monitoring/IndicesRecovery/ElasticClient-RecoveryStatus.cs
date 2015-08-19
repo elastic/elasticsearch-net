@@ -7,7 +7,7 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	using RecoveryStatusConverter = Func<IElasticsearchResponse, Stream, RecoveryStatusResponse>;
+	using RecoveryStatusConverter = Func<IApiCallDetails, Stream, RecoveryStatusResponse>;
 
 	public partial class ElasticClient
 	{
@@ -57,11 +57,11 @@ namespace Nest
 			);
 		}
 
-		private RecoveryStatusResponse DeserializeRecoveryStatusResponse(IElasticsearchResponse response, Stream stream)
+		private RecoveryStatusResponse DeserializeRecoveryStatusResponse(IApiCallDetails response, Stream stream)
 		{
 			if (!response.Success) return CreateInvalidInstance<RecoveryStatusResponse>(response);
 			var indices = this.Serializer.Deserialize<Dictionary<string, RecoveryStatus>>(stream);
-			return new RecoveryStatusResponse { IsValid = true, Indices = indices };
+			return new RecoveryStatusResponse { Indices = indices };
 		}
 	}
 }

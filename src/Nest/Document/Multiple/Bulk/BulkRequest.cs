@@ -5,10 +5,10 @@ using System.Linq;
 using Elasticsearch.Net;
 using Newtonsoft.Json;
 
-
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[JsonConverter(typeof(BulkRequestJsonConverter))]
 	public interface IBulkRequest : IFixedIndexTypePath<BulkRequestParameters>
 	{
 		[JsonIgnore]

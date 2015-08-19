@@ -3,11 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Nest.Resolvers.Converters;
 
 namespace Nest
 {
-	[JsonConverter(typeof(GeoPrecisionConverter))]
+	[JsonConverter(typeof(GeoPrecisionJsonConverter))]
 	public class GeoPrecision
 	{
 		public double Precision { get; private set; }

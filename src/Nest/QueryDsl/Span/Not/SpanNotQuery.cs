@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Nest.Resolvers.Converters;
 using Newtonsoft.Json;
 
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeConverter<SpanNotQuery>))]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<SpanNotQuery>))]
 	public interface ISpanNotQuery : ISpanSubQuery
 	{
 		[JsonProperty(PropertyName = "include")]

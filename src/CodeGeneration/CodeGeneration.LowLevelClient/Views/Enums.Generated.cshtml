@@ -33,13 +33,14 @@ namespace Elasticsearch.Net
 	<text>
 	public enum @e.Name 
 	{
-		  @Raw(string.Join(",\r\n\t\t", e.Options.Select(CreateEnum)))
+		@Raw(string.Join(",\r\n\t\t", e.Options.Select(CreateEnum)))
 	}
 	</text>
 	}
 
 	public static class KnownEnums
 	{
+		public static string UnknownEnum { get; } = "_UNKNOWN_ENUM_";
 		public static string Resolve(Enum e)
 		{
 			@foreach (EnumDescription e in Model.EnumsInTheSpec)
@@ -54,7 +55,7 @@ namespace Elasticsearch.Net
 			}
 			</text>
 			}
-			return "UNKNOWNENUM";
+			return UnknownEnum;
 		}
 	}
 }

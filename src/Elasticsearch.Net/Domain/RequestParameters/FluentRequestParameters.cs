@@ -18,11 +18,10 @@ namespace Elasticsearch.Net
 	public abstract class FluentRequestParameters<T> : IRequestParameters 
 		where T : FluentRequestParameters<T>
 	{
-
 		private IRequestParameters Self { get { return this; } }
 
 		IDictionary<string, object> IRequestParameters.QueryString { get; set; }
-		Func<IElasticsearchResponse, Stream, object> IRequestParameters.DeserializationState { get; set; }
+		Func<IApiCallDetails, Stream, object> IRequestParameters.DeserializationState { get; set; }
 		IRequestConfiguration IRequestParameters.RequestConfiguration { get; set; }
 
 		public FluentRequestParameters()
@@ -30,7 +29,7 @@ namespace Elasticsearch.Net
 			Self.QueryString = new Dictionary<string, object>();
 		}
 
-
+		//TODO only called once investigate removing the need for this
 		public T CopyQueryStringValuesFrom(IRequestParameters requestParameters)
 		{
 			if (requestParameters == null)
@@ -41,14 +40,21 @@ namespace Elasticsearch.Net
 			return (T)this;
 		}
 
-		public void AddQueryStringValue(string name, object value)
+		void IRequestParameters.AddQueryStringValue(string name, object value)
 		{
 			if (value == null || name.IsNullOrEmpty()) return;
 			Self.QueryString[name] = value;
 		}
+
 		public T AddQueryString(string name, object value)
 		{
-			this.AddQueryStringValue(name, value);
+			Self.AddQueryStringValue(name, value);
+			return (T)this;
+		}
+
+		public T RemoveQueryString(string name)
+		{
+			Self.QueryString.Remove(name);
 			return (T)this;
 		}
 
@@ -59,7 +65,7 @@ namespace Elasticsearch.Net
 			return (T)this;
 		}
 		
-		public T DeserializationState(Func<IElasticsearchResponse, Stream, object> customResponseCreator)
+		public T DeserializationState(Func<IApiCallDetails, Stream, object> customResponseCreator)
 		{
 			Self.DeserializationState = customResponseCreator;
 			return (T)this;
@@ -68,12 +74,6 @@ namespace Elasticsearch.Net
 		public bool ContainsKey(string name)
 		{
 			return Self.QueryString != null && Self.QueryString.ContainsKey(name);
-		}
-
-		public T RemoveQueryString(string name)
-		{
-			Self.QueryString.Remove(name);
-			return (T)this;
 		}
 
 		public TOut GetQueryStringValue<TOut>(string name)

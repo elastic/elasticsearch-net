@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
-using Nest.Resolvers.Converters;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ReadAsTypeConverter<SourceField>))]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<SourceField>))]
 	public interface ISourceField : ISpecialField
 	{
 		[JsonProperty("enabled")]

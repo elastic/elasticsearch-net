@@ -1,5 +1,4 @@
-﻿using Nest.Resolvers.Converters;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +7,7 @@ using System.Text;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeConverter<GeoBoundsAggregator>))]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<GeoBoundsAggregator>))]
 	public interface IGeoBoundsAggregator : IMetricAggregator
 	{
 		[JsonProperty("wrap_longitude")]
