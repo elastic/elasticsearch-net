@@ -90,14 +90,6 @@ namespace Nest
 			return this;
 		}
 
-		/// <summary>
-		/// Set up analysis tokenizers, filters, analyzers
-		/// </summary>
-		public CreateIndexDescriptor Analysis(Func<AnalysisDescriptor, AnalysisDescriptor> analysisSelector)
-		{
-			return this;
-		}
-
 		public CreateIndexDescriptor Similarity(Func<SimilarityDescriptor, SimilarityDescriptor> similaritySelector)
 		{
 			return this;

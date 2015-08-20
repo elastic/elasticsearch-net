@@ -4,6 +4,7 @@ using System.Linq;
 
 namespace Nest
 {
+	//TODO REMOVE
 	public class AnalysisDescriptor
 	{
 		internal readonly AnalysisSettings _AnalysisSettings;
@@ -20,11 +21,6 @@ namespace Nest
 		public AnalysisDescriptor Analyzers(
 			Func<FluentDictionary<string, AnalyzerBase>, FluentDictionary<string, AnalyzerBase>> analyzerSelector)
 		{
-			analyzerSelector.ThrowIfNull("analyzerSelector");
-			var analyzers = new FluentDictionary<string, AnalyzerBase>(this._AnalysisSettings.Analyzers);
-			var newAnalyzers = analyzerSelector(analyzers);
-			this._AnalysisSettings.Analyzers = newAnalyzers;
-
 			return this;
 		}
 		

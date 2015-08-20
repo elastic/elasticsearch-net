@@ -8,7 +8,6 @@ namespace Nest
 	/// <summary>
 	/// Writing these uses a custom converter that ignores the json props
 	/// </summary>
-	[JsonConverter(typeof(IndexSettingsJsonConverter))]
 	public class IndexState : IIndexState
 	{
 		public IndexState()

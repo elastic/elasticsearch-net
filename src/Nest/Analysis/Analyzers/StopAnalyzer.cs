@@ -6,23 +6,51 @@ namespace Nest
 	/// <summary>
 	/// An analyzer of type stop that is built using a Lower Case Tokenizer, with Stop Token Filter.
 	/// </summary>
-	public class StopAnalyzer : AnalyzerBase
-    {
-		public StopAnalyzer()
-        {
-            Type = "stop";
-        }
-
+	public interface IStopAnalyzer : IAnalyzer
+	{
 		/// <summary>
 		/// A list of stopword to initialize the stop filter with. Defaults to the english stop words.
 		/// </summary>
-        [JsonProperty("stopwords")]
-        public IEnumerable<string> StopWords { get; set; }
+		[JsonProperty("stopwords")]
+		IEnumerable<string> StopWords { get; set; }
 
 		/// <summary>
 		/// A path (either relative to config location, or absolute) to a stopwords file configuration.
 		/// </summary>
 		[JsonProperty("stopwords_path")]
+		string StopwordsPath { get; set; }
+	}
+
+	public class StopAnalyzer : AnalyzerBase, IStopAnalyzer
+	{
+		public StopAnalyzer()
+		{
+			Type = "stop";
+		}
+
+		/// </inheritdoc>
+		public IEnumerable<string> StopWords { get; set; }
+
+		/// </inheritdoc>
 		public string StopwordsPath { get; set; }
-    }
+	}
+
+	public class StopAnalyzerDescriptor :
+		AnalyzerDescriptorBase<StopAnalyzerDescriptor, IStopAnalyzer>, IStopAnalyzer
+	{
+		protected override string Type => "stop";
+
+		IEnumerable<string> IStopAnalyzer.StopWords { get; set; }
+		string IStopAnalyzer.StopwordsPath { get; set; }
+
+		public StopAnalyzerDescriptor StopWords(params string[] stopWords) =>
+			Assign(a => a.StopWords = stopWords);
+
+		public StopAnalyzerDescriptor StopWords(IEnumerable<string> stopWords) =>
+			Assign(a => a.StopWords = stopWords);
+
+		public StopAnalyzerDescriptor StopwordsPath(string path) => 
+			Assign(a => a.StopwordsPath = path);
+		
+	}
 }

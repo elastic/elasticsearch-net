@@ -77,6 +77,8 @@
     <Compile Include="Aggregations\Bucket\SignificantTerms\Heuristics\MutualInformationHeuristic.cs" />
     <Compile Include="Aggregations\Bucket\SignificantTerms\Heuristics\PercentageScoreHeuristic.cs" />
     <Compile Include="Aggregations\IAggregator.cs" />
+    <Compile Include="Analysis\Analyzers\Analyzers.cs" />
+    <Compile Include="Analysis\Languages\SnowballLanguage.cs" />
     <Compile Include="CommonAbstractions\Fluent\DescriptorBase.cs" />
     <Compile Include="CommonAbstractions\LazyDocument\LazyDocumentJsonConverter.cs" />
     <Compile Include="CommonAbstractions\WrapDictionary.cs" />
@@ -134,8 +136,13 @@
     <Compile Include="IndexModules\IndexSettings\Settings\SlowLog\ISlowLogSearchFetch.cs" />
     <Compile Include="IndexModules\IndexSettings\Settings\SlowLog\ISlowLogSearchQuery.cs" />
     <Compile Include="IndexModules\IndexSettings\Settings\RecoveryInitialShards.cs" />
-    <Compile Include="IndexModules\IndexSettings\Settings\SlowLogLevel.cs" />
+    <Compile Include="IndexModules\IndexSettings\Settings\SlowLog\SlowLogLevel.cs" />
     <Compile Include="IndexModules\IndexSettings\Settings\IndexSettingsConverter.cs" />
+    <Compile Include="IndexModules\IndexSettings\Settings\Store\FileSystemStorageImplementation.cs" />
+    <Compile Include="IndexModules\IndexSettings\Settings\Translog\TranslogWriteMode.cs" />
+    <Compile Include="IndexModules\IndexSettings\Settings\Translog\TranslogDurability.cs" />
+    <Compile Include="IndexModules\IndexSettings\Settings\Translog\TranslogFlushSettings.cs" />
+    <Compile Include="IndexModules\IndexSettings\Settings\Translog\TranslogSettings.cs" />
     <Compile Include="Indices\AliasManagement\GetAliases\ElasticClient-GetIndicesPointingToAlias.cs" />
     <Compile Include="Indices\AliasManagement\GetAliases\ElasticClient-GetAliasesPointingToIndex.cs" />
     <Compile Include="Document\Single\Delete\ElasticClient-DeleteExtensions.cs" />
@@ -212,7 +219,7 @@
     <Compile Include="Analysis\Analyzers\AnalyzerBase.cs" />
     <Compile Include="Analysis\Analyzers\CustomAnalyzer.cs" />
     <Compile Include="Analysis\Analyzers\KeywordAnalyzer.cs" />
-    <Compile Include="Analysis\Analyzers\Language.cs" />
+    <Compile Include="Analysis\Languages\Language.cs" />
     <Compile Include="Analysis\Analyzers\LanguageAnalyzer.cs" />
     <Compile Include="Analysis\Analyzers\PatternAnalyzer.cs" />
     <Compile Include="Analysis\Analyzers\SimpleAnalyzer.cs" />
@@ -775,7 +782,6 @@
     <Compile Include="QueryDsl\FullText\MultiMatch\MultiMatchQuery.cs" />
     <Compile Include="Cluster\ClusterState\ElasticClient-ClusterState.cs" />
     <Compile Include="CommonAbstractions\Extensions\UriExtensions.cs" />
-    <Compile Include="Analysis\AnalysisSettingsJsonConverter.cs" />
     <Compile Include="Analysis\AnalyzerCollectionJsonConverter.cs" />
     <Compile Include="Analysis\CharFilterCollectionJsonConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\StatefulDeserialization\ConcreteTypeConverter.cs" />
@@ -994,7 +1000,6 @@
     <Compile Include="Document\Multiple\MultiGet\Response\MultiGetHitJsonConverter.cs" />
     <Compile Include="Mapping\DynamicTemplate\DynamicTemplatesJsonConverter.cs" />
     <Compile Include="Search\MultiSearch\MultiSearchJsonConverter.cs" />
-    <Compile Include="IndexModules\IndexSettings\IndexSettingsJsonConverter.cs" />
     <Compile Include="CommonOptions\Hit\ShardsMetaData.cs" />
     <Compile Include="Search\Count\ElasticClient-Count.cs" />
     <Compile Include="Document\Single\Delete\ElasticClient-Delete.cs" />

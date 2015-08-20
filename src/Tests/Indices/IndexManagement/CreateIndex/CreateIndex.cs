@@ -48,10 +48,6 @@ namespace Tests.Indices.IndexManagement
 			.Settings(s => s
 				.NumberOfReplicas(1)
 				.NumberOfShards(1)
-			)
-			.Analysis(a => a
-				.Analyzers(an => an
-				)
 			);
 
 		protected override CreateIndexRequest Initializer => new CreateIndexRequest(this.IndexName)
@@ -192,8 +188,8 @@ namespace Tests.Indices.IndexManagement
 						.LogLevel(SlowLogLevel.Info)
 					)
 				)
-				.Translog(t=>t
-					.Flush(f=>f
+				.Translog(t => t
+					.Flush(f => f
 						.TresholdOps(2)
 						.TresholdSize("10mb")
 						.TresholdPeriod(TimeSpan.FromMinutes(30))
@@ -203,9 +199,24 @@ namespace Tests.Indices.IndexManagement
 					.Durability(TranslogDurability.Request)
 					.FileSystemType(TranslogWriteMode.Buffered)
 				)
-			)
-			.Analysis(a => a
-				.Analyzers(an => an
+				.Analysis(analysis => analysis
+					.Analyzers(analyzers => analyzers
+						.Custom("myCustom", a => a
+							.CustomType("typex")
+							.Filters("x", "y")
+							.CharFilters("a", "b")
+							.Tokenizer("tokeniza")
+						)
+						.Keyword("myKeyword")
+						.Pattern("myPattern", a => a.Pattern(@"\w"))
+						.Language("myLanguage", a => a.Language(Language.Dutch))
+						.Simple("mySimple")
+						.Snowball("mySnow", a => a.Language(SnowballLanguage.Dutch))
+						.Standard("myStandard", a => a.MaxTokenLength(2))
+						.Stop("myStop", a => a.StopwordsPath("somewhere"))
+						.Whitespace("myWhiteSpace")
+						.Whitespace("myWhiteSpace2")
+					)
 				)
 			);
 
