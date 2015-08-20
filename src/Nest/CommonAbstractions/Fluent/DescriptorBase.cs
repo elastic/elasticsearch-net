@@ -9,6 +9,6 @@ namespace Nest
 		where TDescriptor : DescriptorBase<TDescriptor, TInterface>, TInterface
 		where TInterface : class
 	{
-		public TDescriptor Assign(Action<TInterface> assigner) => Fluent.Assign((TDescriptor)this, assigner);
+		protected TDescriptor Assign(Action<TInterface> assigner) => Fluent.Assign((TDescriptor)this, assigner);
 	}
 }

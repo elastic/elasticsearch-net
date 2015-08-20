@@ -26,7 +26,7 @@ namespace Nest
 		}
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-			var indexSettings = (IndexSettings)value;
+			var indexSettings = (IndexState)value;
 
 			writer.WriteStartObject();
 
@@ -41,7 +41,7 @@ namespace Nest
 			writer.WriteEndObject();
 		}
 
-		private void WriteSettings(JsonWriter writer, JsonSerializer serializer, IndexSettings indexSettings)
+		private void WriteSettings(JsonWriter writer, JsonSerializer serializer, IndexState indexSettings)
 		{
 			writer.WritePropertyName("settings");
 			writer.WriteStartObject();
@@ -49,21 +49,21 @@ namespace Nest
 			writer.WriteEndObject();
 		}
 
-		private static void WriteAliases(JsonWriter writer, JsonSerializer serializer, IndexSettings indexSettings)
+		private static void WriteAliases(JsonWriter writer, JsonSerializer serializer, IndexState indexSettings)
 		{
 			if (indexSettings.Aliases == null || indexSettings.Aliases.Count <= 0) return;
 			writer.WritePropertyName("aliases");
 			serializer.Serialize(writer, indexSettings.Aliases);
 		}
 
-		private static void WriteWarmers(JsonWriter writer, JsonSerializer serializer, IndexSettings indexSettings)
+		private static void WriteWarmers(JsonWriter writer, JsonSerializer serializer, IndexState indexSettings)
 		{
 			if (indexSettings.Warmers.Count <= 0) return;
 			writer.WritePropertyName("warmers");
 			serializer.Serialize(writer, indexSettings.Warmers);
 		}
 
-		private static void WriteMappings(JsonWriter writer, JsonSerializer serializer, IndexSettings indexSettings)
+		private static void WriteMappings(JsonWriter writer, JsonSerializer serializer, IndexState indexSettings)
 		{
 			if (indexSettings.Mappings.Count <= 0) return;
 			var contract = serializer.ContractResolver as SettingsContractResolver;
@@ -82,7 +82,7 @@ namespace Nest
 			);
 		}
 
-		private void WriteIndexSettings(JsonWriter writer, JsonSerializer serializer, IndexSettings indexSettings)
+		private void WriteIndexSettings(JsonWriter writer, JsonSerializer serializer, IndexState indexSettings)
 		{
 			writer.WritePropertyName("index");
 			writer.WriteStartObject();
@@ -124,7 +124,7 @@ namespace Nest
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
 										JsonSerializer serializer)
 		{
-			var result = new IndexSettings();
+			var result = new IndexState();
 			if (reader.TokenType != JsonToken.StartObject) return result;
 
 			var jsonObject = JObject.Load(reader);
@@ -134,7 +134,6 @@ namespace Nest
 				var dictionary = new Dictionary<string, object>();
 				serializer.Populate(settings.CreateReader(), dictionary);
 				result.Settings = dictionary;
-				result.AsExpando = DynamicResponse.Create(dictionary);
 				
 				foreach (var rootProperty in settings.Children<JProperty>())
 				{
@@ -178,7 +177,7 @@ namespace Nest
 			return result;
 		}
 
-		private static Type _type = typeof(IndexSettings);
+		private static Type _type = typeof(IndexState);
 		public override bool CanConvert(Type objectType)
 		{
 			return objectType == _type;

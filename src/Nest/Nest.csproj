@@ -79,6 +79,7 @@
     <Compile Include="Aggregations\IAggregator.cs" />
     <Compile Include="CommonAbstractions\Fluent\DescriptorBase.cs" />
     <Compile Include="CommonAbstractions\LazyDocument\LazyDocumentJsonConverter.cs" />
+    <Compile Include="CommonAbstractions\WrapDictionary.cs" />
     <Compile Include="CommonAbstractions\ProxyDictionary.cs" />
     <Compile Include="Cat\CatAllocation\ElasticClient-CatAllocation.cs" />
     <Compile Include="Cat\CatCount\ElasticClient-CatCount.cs" />
@@ -121,6 +122,20 @@
     <Compile Include="CommonOptions\TimeUnit\TimeUnitExpression.cs" />
     <Compile Include="Document\Multiple\MultiGet\ElasticClient-SourceMany.cs" />
     <Compile Include="Document\Single\Index\IndexRequestJsonConverter.cs" />
+    <Compile Include="IndexModules\IndexSettings\IIndexState.cs" />
+    <Compile Include="IndexModules\IndexSettings\Settings\IDynamicIndexSettings.cs" />
+    <Compile Include="IndexModules\IndexSettings\Settings\Merge\MergePolicySettings.cs" />
+    <Compile Include="IndexModules\IndexSettings\Settings\Merge\MergeSchedulerSettings.cs" />
+    <Compile Include="IndexModules\IndexSettings\Settings\Merge\MergeSettings.cs" />
+    <Compile Include="IndexModules\IndexSettings\Settings\IndexSettings.cs" />
+    <Compile Include="IndexModules\IndexSettings\Settings\SlowLog\ISlowLog.cs" />
+    <Compile Include="IndexModules\IndexSettings\Settings\SlowLog\ISlowLogIndexing.cs" />
+    <Compile Include="IndexModules\IndexSettings\Settings\SlowLog\ISlowLogSearch.cs" />
+    <Compile Include="IndexModules\IndexSettings\Settings\SlowLog\ISlowLogSearchFetch.cs" />
+    <Compile Include="IndexModules\IndexSettings\Settings\SlowLog\ISlowLogSearchQuery.cs" />
+    <Compile Include="IndexModules\IndexSettings\Settings\RecoveryInitialShards.cs" />
+    <Compile Include="IndexModules\IndexSettings\Settings\SlowLogLevel.cs" />
+    <Compile Include="IndexModules\IndexSettings\Settings\IndexSettingsConverter.cs" />
     <Compile Include="Indices\AliasManagement\GetAliases\ElasticClient-GetIndicesPointingToAlias.cs" />
     <Compile Include="Indices\AliasManagement\GetAliases\ElasticClient-GetAliasesPointingToIndex.cs" />
     <Compile Include="Document\Single\Delete\ElasticClient-DeleteExtensions.cs" />
@@ -129,7 +144,6 @@
     <Compile Include="Document\Single\Get\ElasticClient-GetExtensions.cs" />
     <Compile Include="Document\Multiple\Bulk\ElasticClient-DeleteMany.cs" />
     <Compile Include="Document\Multiple\MultiGet\EllasticClient-GetMany.cs" />
-    <Compile Include="Indices\IndexManagement\CreateIndex\ElasticClient-CreateIndexExtensions.cs" />
     <Compile Include="Indices\IndexManagement\OpenCloseIndex\ElasticClient-OpenCloseIndexExtensions.cs" />
     <Compile Include="Document\Single\Exists\ElasticClient-ExistsExtensions.cs" />
     <Compile Include="Mapping\AttributeBased\AttachmentAttribute.cs" />
@@ -946,7 +960,7 @@
     <Compile Include="CommonAbstractions\Response\IndicesOperationResponse.cs" />
     <Compile Include="CommonAbstractions\Response\IndicesResponse.cs" />
     <Compile Include="Search\Search\SearchResponse.cs" />
-    <Compile Include="IndexModules\IndexSettings\IndexSettings.cs" />
+    <Compile Include="IndexModules\IndexSettings\IndexState.cs" />
     <Compile Include="Indices\IndexSettings\Analyze\ElasticClient-Analyze.cs" />
     <Compile Include="Indices\AliasManagement\Alias\ElasticClient-Alias.cs" />
     <Compile Include="Indices\StatusManagement\Optimize\ElasticClient-Optimize.cs" />

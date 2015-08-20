@@ -546,13 +546,13 @@ namespace Nest
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-create-index.html
 		/// </summary>
 		/// <param name="createIndexSelector">A descriptor that describes the parameters for the create index operation</param>
-		IIndicesOperationResponse CreateIndex(Func<CreateIndexDescriptor, CreateIndexDescriptor> createIndexSelector);
+		IIndicesOperationResponse CreateIndex(IndexName indexName, Func<CreateIndexDescriptor, ICreateIndexRequest> createIndexSelector = null);
 
 		/// <inheritdoc />
 		IIndicesOperationResponse CreateIndex(ICreateIndexRequest createIndexRequest);
 
 		/// <inheritdoc />
-		Task<IIndicesOperationResponse> CreateIndexAsync(Func<CreateIndexDescriptor, CreateIndexDescriptor> createIndexSelector);
+		Task<IIndicesOperationResponse> CreateIndexAsync(IndexName indexName, Func<CreateIndexDescriptor, ICreateIndexRequest> createIndexSelector = null);
 
 		/// <inheritdoc />
 		Task<IIndicesOperationResponse> CreateIndexAsync(ICreateIndexRequest createIndexRequest);

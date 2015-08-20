@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 using System;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -8,10 +9,9 @@ namespace Nest
 	/// Writing these uses a custom converter that ignores the json props
 	/// </summary>
 	[JsonConverter(typeof(IndexSettingsJsonConverter))]
-	public class IndexSettings  
+	public class IndexState : IIndexState
 	{
-
-		public IndexSettings()
+		public IndexState()
 		{
 			this.Analysis = new AnalysisSettings();
 			this.Similarity = new SimilaritySettings();
@@ -48,8 +48,8 @@ namespace Nest
 		/// Dynamic view of the settings object, useful for reading value from the settings
 		/// as it allows you to chain without nullrefs. Cannot be used to assign setting values though
 		/// </summary>
-		public dynamic AsExpando { get; internal set; }
 		
+		public dynamic AsExpando => DynamicResponse.Create(this.Settings);		
 		public AnalysisSettings Analysis { get; set; }
 
 		//TODO NEST 2.0 change this to dictionary to better reflect the actual elasticsearch structure
@@ -62,7 +62,10 @@ namespace Nest
 		public Dictionary<string, WarmerMapping> Warmers { get; set; }
 
 		public SimilaritySettings Similarity { get; internal set; }
-
-	
 	}
+
+
+
+
+
 }

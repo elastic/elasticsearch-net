@@ -16,7 +16,7 @@ namespace Nest
 		}
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
-			var dict = new Dictionary<string, IndexSettings>();
+			var dict = new Dictionary<string, IndexState>();
 			serializer.Populate(reader, dict);
 			var response = new IndexSettingsResponse();
 			response.Nodes = dict;

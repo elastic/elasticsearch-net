@@ -6,7 +6,7 @@ namespace Nest
 {
 	public interface IIndexSettingsResponse : IResponse
 	{
-		IndexSettings IndexSettings { get; }
+		IndexState IndexSettings { get; }
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
@@ -14,13 +14,13 @@ namespace Nest
 	public class IndexSettingsResponse : BaseResponse, IIndexSettingsResponse
 	{
 		[JsonIgnore]
-		public IndexSettings IndexSettings
+		public IndexState IndexSettings
 		{
 			get { return Nodes.HasAny() ? Nodes.First().Value : null; }
 		}
 
 		[JsonIgnore]
-		public Dictionary<string, IndexSettings> Nodes { get; set; }
+		public Dictionary<string, IndexState> Nodes { get; set; }
 
 	}
 }

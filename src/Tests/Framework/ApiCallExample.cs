@@ -29,8 +29,8 @@ namespace Tests.Framework
 		protected ApiCallExample(IIntegrationCluster cluster, ApiUsage usage)
 		{
 			this._cluster = cluster;
-			 this.IntegrationPort = cluster.Node.Port;
-			 this._responses = usage.CallOnce(this.ClientUsage);
+			this.IntegrationPort = cluster.Node.Port;
+			this._responses = usage.CallOnce(this.ClientUsage);
 		}
 
 		protected abstract LazyResponses ClientUsage();
@@ -45,21 +45,25 @@ namespace Tests.Framework
 			var client = this.Client;
 			return new LazyResponses(async () =>
 			{
-				var dict = new Dictionary<string, IResponse>
-				{
-					{"fluent", fluent(client, this.Fluent)},
-					{"fluentAsync", await fluentAsync(client, this.Fluent)},
-					{"request", request(client, this.Initializer)},
-					{"requestAsync", await requestAsync(client, this.Initializer)}
-				};
-
+				var dict = new Dictionary<string, IResponse>();
+				OnBeforeCall(client);
+			    dict.Add("fluent", fluent(client, this.Fluent));
+				OnBeforeCall(client);
+				dict.Add("fluentAsync", await fluentAsync(client, this.Fluent));
+				OnBeforeCall(client);
+				dict.Add("request", request(client, this.Initializer));
+				OnBeforeCall(client);
+				dict.Add("requestAsync", await requestAsync(client, this.Initializer));
 				return dict;
 			});
 		}
 
+		protected static string RandomString() => Guid.NewGuid().ToString("N").Substring(0, 8);
 		protected int IntegrationPort { get; set; } = 9200;
 		protected virtual ConnectionSettings GetConnectionSettings(ConnectionSettings settings) => settings;
 		protected virtual IElasticClient Client => this._cluster.Client(GetConnectionSettings);
+
+		protected virtual void OnBeforeCall(IElasticClient client) { }
 
 		protected async Task AssertOnAllResponses(Action<TResponse> assert)
 		{
@@ -69,28 +73,28 @@ namespace Tests.Framework
 				var response = kv.Value as TResponse;
 				try
 				{
-				assert(response);
-			}
-				catch(Exception ex) when (false)
+					assert(response);
+				}
+				catch (Exception ex) when (false)
 				{
 					throw new Exception($"asserting over the response from: {kv.Key} failed: {ex.Message}", ex);
-		}
+				}
 			}
 		}
 
 		private void AssertUrl(Uri u)
 		{
-			var paths = (this.UrlPath ?? "").Split(new [] { '?' }, 2);
+			var paths = (this.UrlPath ?? "").Split(new[] { '?' }, 2);
 			string path = paths.First(), query = string.Empty;
 			if (paths.Length > 1)
 				query = paths.Last();
 
-			var expectedUri = new UriBuilder("http","localhost", IntegrationPort, path,  "?" + query).Uri;
+			var expectedUri = new UriBuilder("http", "localhost", IntegrationPort, path, "?" + query).Uri;
 
 			u.AbsolutePath.Should().Be(expectedUri.AbsolutePath);
 			u = new UriBuilder(u.Scheme, u.Host, u.Port, u.AbsolutePath, u.Query.Replace("pretty=true", "")).Uri;
 
-			var queries = new[] {u.Query, expectedUri.Query};
+			var queries = new[] { u.Query, expectedUri.Query };
 			if (queries.All(string.IsNullOrWhiteSpace)) return;
 			if (queries.Any(string.IsNullOrWhiteSpace))
 			{
@@ -100,11 +104,11 @@ namespace Tests.Framework
 
 			var clientKeyValues = u.Query.Substring(1).Split('&')
 				.Select(v => v.Split('='))
-				.Where(k=>!string.IsNullOrWhiteSpace(k[0]))
+				.Where(k => !string.IsNullOrWhiteSpace(k[0]))
 				.ToDictionary(k => k[0], v => v.Last());
 			var expectedKeyValues = expectedUri.Query.Substring(1).Split('&')
 				.Select(v => v.Split('='))
-				.Where(k=>!string.IsNullOrWhiteSpace(k[0]))
+				.Where(k => !string.IsNullOrWhiteSpace(k[0]))
 				.ToDictionary(k => k[0], v => v.Last());
 
 			clientKeyValues.Count().Should().Be(expectedKeyValues.Count());
@@ -112,16 +116,20 @@ namespace Tests.Framework
 			clientKeyValues.Should().Equal(expectedKeyValues);
 		}
 
-		[U] protected async Task HitsTheCorrectUrl() =>
-			await this.AssertOnAllResponses(r=>this.AssertUrl(r.ApiCall.Uri));
+		[U]
+		protected async Task HitsTheCorrectUrl() =>
+			await this.AssertOnAllResponses(r => this.AssertUrl(r.ApiCall.Uri));
 
-		[U] protected async Task UsesCorrectHttpMethod() =>
-			await this.AssertOnAllResponses(r=>r.CallDetails.HttpMethod.Should().Be(this.HttpMethod));
+		[U]
+		protected async Task UsesCorrectHttpMethod() =>
+			await this.AssertOnAllResponses(r => r.CallDetails.HttpMethod.Should().Be(this.HttpMethod));
 
-		[U] protected void SerializesInitializer() => 
+		[U]
+		protected void SerializesInitializer() =>
 			this.AssertSerializesAndRoundTrips<TInterface>(this.Initializer);
-		 
-		[U] protected void SerializesFluent() => 
+
+		[U]
+		protected void SerializesFluent() =>
 			this.AssertSerializesAndRoundTrips(this.Fluent(this.ClientDoesThisInternally(new TDescriptor())));
 	}
 }
