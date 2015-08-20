@@ -23,10 +23,7 @@ namespace Nest
 
 	public class StopAnalyzer : AnalyzerBase, IStopAnalyzer
 	{
-		public StopAnalyzer()
-		{
-			Type = "stop";
-		}
+		public StopAnalyzer() { Type = "stop"; }
 
 		/// </inheritdoc>
 		public IEnumerable<string> StopWords { get; set; }

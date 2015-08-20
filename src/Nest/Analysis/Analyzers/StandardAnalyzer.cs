@@ -23,10 +23,7 @@ namespace Nest
 	
 	public class StandardAnalyzer : AnalyzerBase, IStandardAnalyzer
 	{
-		public StandardAnalyzer()
-		{
-			Type = "standard";
-		}
+		public StandardAnalyzer() { Type = "standard"; }
 
 		/// </inheritdoc>
 		public IEnumerable<string> StopWords { get; set; }

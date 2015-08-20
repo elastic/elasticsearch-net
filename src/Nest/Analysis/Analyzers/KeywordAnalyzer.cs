@@ -12,10 +12,7 @@ namespace Nest
 	}
 	public class KeywordAnalyzer : AnalyzerBase, IKeywordAnalyzer
 	{
-		public KeywordAnalyzer()
-		{
-			Type = "keyword";
-		}
+		public KeywordAnalyzer() { Type = "keyword"; }
 	}
 
 	public class KeywordAnalyzerDescriptor 

@@ -26,10 +26,7 @@ namespace Nest
  
 	public class PatternAnalyzer : AnalyzerBase, IPatternAnalyzer
 	{
-		public PatternAnalyzer()
-		{
-			Type = "pattern";
-		}
+		public PatternAnalyzer() { Type = "pattern"; }
 
 		public bool? Lowercase { get; set; }
 

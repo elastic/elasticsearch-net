@@ -9,10 +9,7 @@ namespace Nest
 
 	public class WhitespaceAnalyzer : AnalyzerBase, IWhitespaceAnalyzer
 	{
-		public WhitespaceAnalyzer()
-		{
-			Type = "whitespace";
-		}
+		public WhitespaceAnalyzer() { Type = "whitespace"; }
 	}
 
 	public class WhitespaceAnalyzerDescriptor :

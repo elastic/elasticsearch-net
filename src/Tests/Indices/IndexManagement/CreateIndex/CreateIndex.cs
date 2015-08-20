@@ -200,6 +200,11 @@ namespace Tests.Indices.IndexManagement
 					.FileSystemType(TranslogWriteMode.Buffered)
 				)
 				.Analysis(analysis => analysis
+					.CharFilters(charfilters => charfilters
+						.HtmlStrip("stripMe")
+						.PatternReplace("patterned", c => c.Pattern("x").Replacement("y"))
+						.Mapping("mapped", c => c.Mappings("a=>b"))
+					)
 					.Analyzers(analyzers => analyzers
 						.Custom("myCustom", a => a
 							.CustomType("typex")

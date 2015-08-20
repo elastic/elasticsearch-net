@@ -9,10 +9,7 @@ namespace Nest
 
 	public class SimpleAnalyzer : AnalyzerBase, ISimpleAnalyzer
 	{
-		public SimpleAnalyzer()
-		{
-			Type = "simple";
-		}
+		public SimpleAnalyzer() { Type = "simple"; }
 	}
 
 	public class SimpleAnalyzerDescriptor :
