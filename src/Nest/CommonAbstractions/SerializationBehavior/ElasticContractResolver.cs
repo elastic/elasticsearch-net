@@ -91,6 +91,7 @@ namespace Nest.Resolvers
 			defaultProperties = PropertiesOf<ICreateAliasOperation>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IInnerHitsContainer>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IInnerHits>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<IElasticsearchProperty>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<INestSerializable>(type, memberSerialization, defaultProperties, lookup);
 
 			return defaultProperties.GroupBy(p => p.PropertyName).Select(p => p.First()).ToList();

@@ -15,7 +15,7 @@ namespace Nest
 		{
 			this.Analysis = new AnalysisSettings();
 			this.Similarity = new SimilaritySettings();
-			this.Mappings = new List<RootObjectProperty>();
+			this.Mappings = new List<ITypeMapping>();
 			this.Warmers = new Dictionary<string, WarmerMapping>();
 			this.Settings = new Dictionary<string, object>();
 		}
@@ -53,7 +53,7 @@ namespace Nest
 		public AnalysisSettings Analysis { get; set; }
 
 		//TODO NEST 2.0 change this to dictionary to better reflect the actual elasticsearch structure
-		public IList<RootObjectProperty> Mappings { get; set; }
+		public IList<ITypeMapping> Mappings { get; set; }
 
 		[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]
 		public Dictionary<string, ICreateAliasOperation> Aliases { get; set; }

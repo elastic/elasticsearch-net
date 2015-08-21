@@ -143,54 +143,10 @@ namespace Nest
 		/// <summary>
 		/// Add a new mapping for T
 		/// </summary>
-		public CreateIndexDescriptor AddMapping<T>(Func<PutMappingDescriptor<T>, PutMappingDescriptor<T>> typeMappingDescriptor) where T : class
+		public CreateIndexDescriptor AddMapping<T>(Func<PutMappingDescriptor<T>, ITypeMapping> typeMappingDescriptor) where T : class
 		{
-			typeMappingDescriptor.ThrowIfNull("typeMappingDescriptor");
-			var d = typeMappingDescriptor(new PutMappingDescriptor<T>());
-			IPutMappingRequest request = d;
-			var typeMapping = request.Mapping;
-
-			if (request.Type != null)
-			{
-				typeMapping.Name = request.Type.Name != null ? (FieldName)request.Type.Name : request.Type.Type;
-			}
-			else
-			{
-				typeMapping.Name = typeof(T);
-			}
-
-			this._indexSettings.Mappings.Add(typeMapping);
-
-			return this;
-		}
-
-		/// <summary>
-		/// Add a new mapping using the first rootObjectMapping parameter as the base to construct the new mapping.
-		/// Handy if you wish to reuse a mapping.
-		/// </summary>
-		public CreateIndexDescriptor AddMapping<T>(RootObjectProperty rootObjectMapping, Func<PutMappingDescriptor<T>, PutMappingDescriptor<T>> typeMappingDescriptor) where T : class
-		{
-			typeMappingDescriptor.ThrowIfNull("typeMappingDescriptor");
-
-			var selectorIn = new PutMappingDescriptor<T>();
-			IPutMappingRequest selectorInRequest = selectorIn;
-			selectorInRequest.Mapping = rootObjectMapping;
-
-			var d = typeMappingDescriptor(selectorIn);
-			IPutMappingRequest request = d;
-			var typeMapping = request.Mapping;
-
-			if (request.Type != null)
-			{
-				typeMapping.Name = request.Type.Name != null ? (FieldName)request.Type.Name : request.Type.Type;
-			}
-			else
-			{
-				typeMapping.Name = typeof(T);
-			}
-
-			this._indexSettings.Mappings.Add(typeMapping);
-
+			typeMappingDescriptor.ThrowIfNull(nameof(typeMappingDescriptor));
+			this._indexSettings.Mappings.Add(typeMappingDescriptor(new PutMappingDescriptor<T>()));
 			return this;
 		}
 

@@ -22,5 +22,6 @@ namespace Nest
 		: PropertyDescriptorBase<BinaryPropertyDescriptor<T>, IBinaryProperty, T>, IBinaryProperty
 		where T : class
 	{
+		public BinaryPropertyDescriptor() : base("binary") { }
 	}
 }

@@ -30,7 +30,7 @@ namespace Nest
 		
 		public AnalysisSettings Analysis { get; set; }
 
-		public IDictionary<string, RootObjectProperty> Mappings { get; set; }
+		public IDictionary<string, TypeMapping> Mappings { get; set; }
 
 		[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]
 		public Dictionary<string, CreateAliasOperation> Aliases { get; set; }

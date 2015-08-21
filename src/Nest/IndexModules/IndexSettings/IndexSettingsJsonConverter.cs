@@ -74,7 +74,7 @@ namespace Nest
 				writer,
 				indexSettings.Mappings.ToDictionary(m =>
 				{
-					var name = contract.Infer.FieldName(m.Name);
+					var name = contract.Infer.FieldName(m.Type.Name);
 					if (name.IsNullOrEmpty())
 						throw new DslException("{0} should have a name!".F(m.GetType()));
 					return name;
@@ -157,11 +157,10 @@ namespace Nest
 			}
 			if (jsonObject["mappings"] != null)
 			{
-				var mappings = serializer.Deserialize<Dictionary<string, RootObjectProperty>>(jsonObject["mappings"].CreateReader());
+				var mappings = serializer.Deserialize<Dictionary<string, ITypeMapping>>(jsonObject["mappings"].CreateReader());
 				result.Mappings = mappings.Select(kv =>
 				{
-					var name = kv.Key;
-					kv.Value.Name = name;
+					kv.Value.Type = kv.Key; 
 					return kv.Value;
 				}).ToList();
 			}

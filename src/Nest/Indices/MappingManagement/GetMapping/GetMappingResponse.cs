@@ -8,19 +8,12 @@ namespace Nest
 	public interface IGetMappingResponse : IResponse
 	{
 		Dictionary<string, IList<TypeMapping>> Mappings { get; }
-		RootObjectProperty Mapping { get; }
+		TypeMapping Mapping { get; }
 		void Accept(IMappingVisitor visitor);
 	}
 
-	public class TypeMapping
+	internal class GetRootObjectMappingWrapping : Dictionary<string, Dictionary<string, Dictionary<string, TypeMapping>>>
 	{
-		public string TypeName { get; internal set; }
-		public RootObjectProperty Mapping  { get; internal set; }
-	}
-
-	internal class GetRootObjectMappingWrapping : Dictionary<string, Dictionary<string, Dictionary<string, RootObjectProperty>>>
-	{
-		
 	}
 
 	public class GetMappingResponse : BaseResponse, IGetMappingResponse
@@ -43,25 +36,18 @@ namespace Nest
 				foreach (var mapping in mappings)
 				{
 					if (mapping.Value == null) continue;
-					var typeMapping = new TypeMapping
-					{
-						TypeName = mapping.Key,
-						Mapping = mapping.Value
-					};
-					mapping.Value.Name = mapping.Key;
-					this.Mappings[index.Key].Add(typeMapping);
+					this.Mappings[index.Key].Add(mapping.Value);
 				}
 			}
 			
-			this.Mapping = this.Mappings.Where(kv=>kv.Value.HasAny(v=>v.Mapping != null))
+			this.Mapping = this.Mappings.Where(kv=>kv.Value.HasAny(v=>v != null))
 				.SelectMany(kv=>kv.Value)
-				.Select(tm=>tm.Mapping)
 				.FirstOrDefault(t=>t != null);
 		}
 
 		public Dictionary<string, IList<TypeMapping>> Mappings { get; internal set; }= new Dictionary<string, IList<TypeMapping>>();
 
-		public RootObjectProperty Mapping { get; internal set; }
+		public TypeMapping Mapping { get; internal set; }
 
 		public void Accept(IMappingVisitor visitor)
 		{

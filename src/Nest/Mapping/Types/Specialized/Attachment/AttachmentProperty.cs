@@ -96,6 +96,8 @@ namespace Nest
 
 		private IDictionary<FieldName, IElasticsearchProperty> _Fields { get { return ((IAttachmentProperty)this).Fields; } }
 
+		public AttachmentPropertyDescriptor() : base("attachment") { }
+
 		private AttachmentPropertyDescriptor<T> SetMetadataField<TDescriptor, TInterface>(Func<TDescriptor, TInterface> selector, string fieldName)
 			where TDescriptor : TInterface
 			where TInterface : IElasticsearchProperty

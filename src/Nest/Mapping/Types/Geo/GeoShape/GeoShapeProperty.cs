@@ -59,6 +59,8 @@ namespace Nest
 		int? IGeoShapeProperty.TreeLevels { get; set; }
 		double? IGeoShapeProperty.DistanceErrorPercentage { get; set; }
 
+		public GeoShapePropertyDescriptor() : base("geo_shape") { }
+
 		public GeoShapePropertyDescriptor<T> Tree(GeoTree tree) => Assign(a => a.Tree = tree);
 
 		public GeoShapePropertyDescriptor<T> TreeLevels(int treeLevels) => Assign(a => a.TreeLevels = treeLevels);

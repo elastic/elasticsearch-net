@@ -11,31 +11,26 @@ using Elasticsearch.Net;
 
 namespace Tests.Mapping.Types
 {
-	public class String 
+	public class String
 	{
 		public class Usage : MapUsageBase
 		{
 			public Usage(ReadOnlyCluster cluster, ApiUsage usage) : base(cluster, usage) { }
 
-
 			protected override object ExpectJson => new
 			{
-				mappings = new
+				project = new
 				{
-					project = new
+					properties = new
 					{
-						properties = new
+						name = new
 						{
-							name = new
-							{
-								type = "string",
-								index = "not_analyzed"
-							}
+							type = "string",
+							index = "not_analyzed"
 						}
 					}
 				}
 			};
-
 
 			protected override Func<PutMappingDescriptor<Project>, IPutMappingRequest> Fluent => m => m
 				.Properties(ps => ps
@@ -45,16 +40,13 @@ namespace Tests.Mapping.Types
 					)
 				);
 
-			protected override PutMappingRequest<Project> Initializer => 
+			protected override PutMappingRequest<Project> Initializer =>
 				new PutMappingRequest<Project>
 				{
-					Mapping = new RootObjectProperty
-					{
-						Properties = new Dictionary<FieldName, IElasticsearchProperty>
+					Properties = new Dictionary<FieldName, IElasticsearchProperty>
 						{
 							{ "name", new StringProperty { Index = FieldIndexOption.NotAnalyzed } }
 						}
-					}
 				};
 		}
 	}
