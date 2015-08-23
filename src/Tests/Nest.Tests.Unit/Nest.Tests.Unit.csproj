@@ -410,6 +410,9 @@
     <Compile Include="QueryParsers\Visitor\DslPrettyPrintVisitor.cs" />
     <Compile Include="QueryParsers\Visitor\VisitorDemoUseCase.cs" />
     <Compile Include="QueryParsers\Visitor\VisitorTests.cs" />
+    <None Include="Reproduce\Issue1528_ExplicitTypeAndIndex.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Reproduce\Issue1528.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

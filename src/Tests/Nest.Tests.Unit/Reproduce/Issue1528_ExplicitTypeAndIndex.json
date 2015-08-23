@@ -1,0 +1,10 @@
+﻿{ "index" :  {"_index":"default-index", "_type":"mytype","_id":"my_id_0"} }
+{"name":"my_id_0"}
+{ "index" :  {"_index":"default-index", "_type":"mytype","_id":"my_id_1"} }
+{"name":"my_id_1"}
+{ "index" :  {"_index":"default-index", "_type":"mytype","_id":"my_id_2"} }
+{"name":"my_id_2"}
+{ "index" :  {"_index":"default-index", "_type":"mytype","_id":"my_id_3"} }
+{"name":"my_id_3"}
+{ "index" :  {"_index":"default-index", "_type":"mytype","_id":"my_id_4"} }
+{"name":"my_id_4"}
