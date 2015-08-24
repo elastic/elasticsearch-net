@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(PutMappingRequest.Json))]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<PutMappingRequest>))]
 	public interface IPutMappingRequest : IIndicesTypePath<PutMappingRequestParameters>, ITypeMapping
 	{
 	}
@@ -22,7 +22,11 @@ namespace Nest
 	}
 
 	public partial class PutMappingRequest : IndicesTypePathBase<PutMappingRequestParameters>, IPutMappingRequest
-	{		
+	{
+		public PutMappingRequest()
+		{
+		}
+
 		/// <summary>
 		/// Calls putmapping on /_all/{type}
 		/// </summary>
@@ -77,68 +81,11 @@ namespace Nest
 		{
 			PutMappingPathInfo.Update(pathInfo, this);
 		}
-
-		internal class Json : JsonConverter
-		{
-			public override bool CanConvert(Type objectType) => true;
-
-			public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-			{
-				reader.Read();
-				var type = reader.Value as string;
-				reader.Read();
-				var mapping = serializer.Deserialize<TypeMapping>(reader);
-				var request = new PutMappingRequest(type)
-				{
-					DynamicDateFormats = mapping.DynamicDateFormats,
-					DateDetection = mapping.DateDetection,
-					NumericDetection = mapping.NumericDetection,
-					Transform = mapping.Transform,
-					Analyzer = mapping.Analyzer,
-					SearchAnalyzer = mapping.SearchAnalyzer,
-					IdField = mapping.IdField,
-					SourceField = mapping.SourceField,
-					TypeField = mapping.TypeField,
-					AllField = mapping.AllField,
-					BoostField = mapping.BoostField,
-					ParentField = mapping.ParentField,
-					RoutingField = mapping.RoutingField,
-					IndexField = mapping.IndexField,
-					SizeField = mapping.SizeField,
-					TimestampField = mapping.TimestampField,
-					TtlField = mapping.TtlField,
-					Meta = mapping.Meta,
-					DynamicTemplates = mapping.DynamicTemplates,
-					Dynamic = mapping.Dynamic,
-					Properties = mapping.Properties
-				};
-				return request;
-			}
-
-			public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-			{
-				var request = value as IPutMappingRequest;
-				if (request != null)
-				{
-					serializer.Serialize(writer,
-						new Dictionary<TypeName, IPutMappingRequest>
-						{
-							{ ((ITypeMapping)request).Type, request}
-						}
-					);
-				}
-			}
-		}
 	}
 
 	public partial class PutMappingRequest<T> : IndicesTypePathBase<PutMappingRequestParameters, T>, IPutMappingRequest<T>
 		where T : class
 	{
-		public PutMappingRequest()
-		{
-			this.Type = typeof(T);
-		}
-
 		public IAllField AllField { get; set; }
 		public IBoostField BoostField { get; set; }
 		public bool? DateDetection { get; set; }
@@ -173,8 +120,7 @@ namespace Nest
 		IndicesTypePathDescriptor<PutMappingDescriptor<T>, PutMappingRequestParameters, T>, IPutMappingRequest<T>
 		where T : class
 	{
-		private IPutMappingRequest Self => this;
-		private ITypeMapping Mapping => this;
+		private ITypeMapping Self => this;
 
 		IAllField ITypeMapping.AllField { get; set; }
 		IBoostField ITypeMapping.BoostField { get; set; }
@@ -198,13 +144,6 @@ namespace Nest
 		IList<MappingTransform> ITypeMapping.Transform { get; set; }
 		ITtlField ITypeMapping.TtlField { get; set; }
 		ITypeField ITypeMapping.TypeField { get; set; }
-		TypeName ITypeMapping.Type { get; set; }
-
-		public PutMappingDescriptor()
-		{
-			((IIndicesTypePath<PutMappingRequestParameters>)this).Type = typeof(T);
-			Mapping.Type = typeof(T);
-		}
 
 		/// <summary>
 		/// Convenience method to map as much as it can based on ElasticType attributes set on the type.
@@ -221,7 +160,7 @@ namespace Nest
 		
 		public PutMappingDescriptor<T> Dynamic(DynamicMapping dynamic)
 		{
-			Mapping.Dynamic = dynamic;
+			Self.Dynamic = dynamic;
 			return this;
 		}
 
@@ -232,74 +171,74 @@ namespace Nest
 
 		public PutMappingDescriptor<T> SetParent(string parentType)
 		{
-			Mapping.ParentField = new ParentField { Type = parentType };
+			Self.ParentField = new ParentField { Type = parentType };
 			return this;
 		}
 
 		public PutMappingDescriptor<T> SetParent<K>() where K : class
 		{
 			var parentType = TypeName.Create<K>();
-			Mapping.ParentField = new ParentField { Type = parentType };
+			Self.ParentField = new ParentField { Type = parentType };
 			return this;
 		}
 
 		public PutMappingDescriptor<T> Analyzer(string analyzer)
 		{
-			Mapping.Analyzer = analyzer;
+			Self.Analyzer = analyzer;
 			return this;
 		}
 
 		public PutMappingDescriptor<T> SearchAnalyzer(string searchAnalyzer)
 		{
-			Mapping.SearchAnalyzer = searchAnalyzer;
+			Self.SearchAnalyzer = searchAnalyzer;
 			return this;
 		}
 
 		public PutMappingDescriptor<T> AllField(Func<AllFieldDescriptor, AllFieldDescriptor> allFieldSelector)
 		{
-			Mapping.AllField = allFieldSelector(new AllFieldDescriptor());
+			Self.AllField = allFieldSelector(new AllFieldDescriptor());
 			return this;
 		}
 
 		public PutMappingDescriptor<T> IndexField(Func<IndexFieldDescriptor, IndexFieldDescriptor> indexFieldSelector)
 		{
-			Mapping.IndexField = indexFieldSelector(new IndexFieldDescriptor());
+			Self.IndexField = indexFieldSelector(new IndexFieldDescriptor());
 			return this;
 		}
 
 		public PutMappingDescriptor<T> SizeField(Func<SizeFieldDescriptor, SizeFieldDescriptor> sizeFieldSelector)
 		{
-			Mapping.SizeField = sizeFieldSelector(new SizeFieldDescriptor());
+			Self.SizeField = sizeFieldSelector(new SizeFieldDescriptor());
 			return this;
 		}
 
 		public PutMappingDescriptor<T> DisableSizeField(bool disabled = true)
 		{
-			Mapping.SizeField = new SizeField { Enabled = !disabled };
+			Self.SizeField = new SizeField { Enabled = !disabled };
 			return this;
 		}
 
 		public PutMappingDescriptor<T> DisableIndexField(bool disabled = true)
 		{
-			Mapping.IndexField = new IndexField { Enabled = !disabled };
+			Self.IndexField = new IndexField { Enabled = !disabled };
 			return this;
 		}
 
 		public PutMappingDescriptor<T> DynamicDateFormats(IEnumerable<string> dateFormats)
 		{
-			Mapping.DynamicDateFormats = dateFormats;
+			Self.DynamicDateFormats = dateFormats;
 			return this;
 		}
 
 		public PutMappingDescriptor<T> DateDetection(bool detect = true)
 		{
-			Mapping.DateDetection = detect;
+			Self.DateDetection = detect;
 			return this;
 		}
 
 		public PutMappingDescriptor<T> NumericDetection(bool detect = true)
 		{
-			Mapping.NumericDetection = detect;
+			Self.NumericDetection = detect;
 			return this;
 		}
 
@@ -307,64 +246,64 @@ namespace Nest
 		{
 			mappingTransformSelector.ThrowIfNull("mappingTransformSelector");
 			var transformDescriptor = mappingTransformSelector(new MappingTransformDescriptor());
-			if (Mapping.Transform == null)
-				Mapping.Transform = new List<MappingTransform>();
-			Mapping.Transform.Add(transformDescriptor._mappingTransform);
+			if (Self.Transform == null)
+				Self.Transform = new List<MappingTransform>();
+			Self.Transform.Add(transformDescriptor._mappingTransform);
 			return this;
 		}
 
 		public PutMappingDescriptor<T> IdField(Func<IdFieldDescriptor, IIdField> idMapper)
 		{
 			idMapper.ThrowIfNull("idMapper");
-			Mapping.IdField = idMapper(new IdFieldDescriptor());
+			Self.IdField = idMapper(new IdFieldDescriptor());
 			return this;
 		}
 
 		public PutMappingDescriptor<T> TypeField(Func<TypeFieldDescriptor, ITypeField> typeMapper)
 		{
 			typeMapper.ThrowIfNull("typeMapper");
-			Mapping.TypeField = typeMapper(new TypeFieldDescriptor());
+			Self.TypeField = typeMapper(new TypeFieldDescriptor());
 			return this;
 		}
 
 		public PutMappingDescriptor<T> SourceField(Func<SourceFieldDescriptor, ISourceField> sourceMapper)
 		{
 			sourceMapper.ThrowIfNull("sourceMapper");
-			Mapping.SourceField = sourceMapper(new SourceFieldDescriptor());
+			Self.SourceField = sourceMapper(new SourceFieldDescriptor());
 			return this;
 		}
 
 		public PutMappingDescriptor<T> BoostField(Func<BoostFieldDescriptor<T>, IBoostField> boostMapper)
 		{
 			boostMapper.ThrowIfNull("boostMapper");
-			Mapping.BoostField = boostMapper(new BoostFieldDescriptor<T>());
+			Self.BoostField = boostMapper(new BoostFieldDescriptor<T>());
 			return this;
 		}
 
 		public PutMappingDescriptor<T> RoutingField(Func<RoutingFieldDescriptor<T>, IRoutingField> routingMapper)
 		{
 			routingMapper.ThrowIfNull("routingMapper");
-			Mapping.RoutingField = routingMapper(new RoutingFieldDescriptor<T>());
+			Self.RoutingField = routingMapper(new RoutingFieldDescriptor<T>());
 			return this;
 		}
 
 		public PutMappingDescriptor<T> TimestampField(Func<TimestampFieldDescriptor<T>, ITimestampField> timestampMapper)
 		{
 			timestampMapper.ThrowIfNull("timestampMapper");
-			Mapping.TimestampField = timestampMapper(new TimestampFieldDescriptor<T>());
+			Self.TimestampField = timestampMapper(new TimestampFieldDescriptor<T>());
 			return this;
 		}
 
 		public PutMappingDescriptor<T> FieldNamesField(Func<FieldNamesFieldDescriptor<T>, IFieldNamesField> fieldNamesMapper)
 		{
-			Mapping.FieldNamesField = fieldNamesMapper == null ? null : fieldNamesMapper(new FieldNamesFieldDescriptor<T>());
+			Self.FieldNamesField = fieldNamesMapper == null ? null : fieldNamesMapper(new FieldNamesFieldDescriptor<T>());
 			return this;
 		}
 
 		public PutMappingDescriptor<T> TtlField(Func<TtlFieldDescriptor, ITtlField> ttlFieldMapper)
 		{
 			ttlFieldMapper.ThrowIfNull("ttlFieldMapper");
-			Mapping.TtlField = ttlFieldMapper(new TtlFieldDescriptor());
+			Self.TtlField = ttlFieldMapper(new TtlFieldDescriptor());
 			return this;
 		}
 
@@ -372,17 +311,17 @@ namespace Nest
 		{
 			propertiesSelector.ThrowIfNull("propertiesSelector");
 			var properties = propertiesSelector(new PropertiesDescriptor<T>());
-			if (Mapping.Properties == null)
-				Mapping.Properties = new Dictionary<FieldName, IElasticsearchProperty>();
+			if (Self.Properties == null)
+				Self.Properties = new Dictionary<FieldName, IElasticsearchProperty>();
 			foreach (var p in properties.Properties)
-				Mapping.Properties[p.Key] = p.Value;
+				Self.Properties[p.Key] = p.Value;
 			return this;
 		}
 
 		public PutMappingDescriptor<T> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> metaSelector)
 		{
 			metaSelector.ThrowIfNull("metaSelector");
-			Mapping.Meta = metaSelector(new FluentDictionary<string, object>());
+			Self.Meta = metaSelector(new FluentDictionary<string, object>());
 			return this;
 		}
 
@@ -390,12 +329,12 @@ namespace Nest
 		{
 			dynamicTemplatesSelector.ThrowIfNull("dynamicTemplatesSelector");
 			var templates = dynamicTemplatesSelector(new DynamicTemplatesDescriptor<T>());
-			if (Mapping.DynamicTemplates == null)
-				Mapping.DynamicTemplates = new Dictionary<string, DynamicTemplate>();
+			if (Self.DynamicTemplates == null)
+				Self.DynamicTemplates = new Dictionary<string, DynamicTemplate>();
 			foreach (var t in templates._Deletes)
-				Mapping.DynamicTemplates.Remove(t);
+				Self.DynamicTemplates.Remove(t);
 			foreach (var t in templates.Templates)
-				Mapping.DynamicTemplates[t.Key] = t.Value;
+				Self.DynamicTemplates[t.Key] = t.Value;
 			return this;
 		}
 

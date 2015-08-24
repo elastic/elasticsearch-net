@@ -160,7 +160,7 @@ namespace Nest
 				var mappings = serializer.Deserialize<Dictionary<string, ITypeMapping>>(jsonObject["mappings"].CreateReader());
 				result.Mappings = mappings.Select(kv =>
 				{
-					kv.Value.Type = kv.Key; 
+					kv.Value.Type = kv.Key;
 					return kv.Value;
 				}).ToList();
 			}

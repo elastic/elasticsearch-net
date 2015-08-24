@@ -8,10 +8,9 @@ using System.Threading.Tasks;
 namespace Nest
 {
 	[JsonObject(MemberSerialization.OptIn)]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<TypeMapping>))]
 	public interface ITypeMapping
 	{
-		TypeName Type { get; set; }
-
 		[JsonProperty("dynamic_date_formats")]
 		IEnumerable<string> DynamicDateFormats { get; set; }
 
@@ -85,7 +84,6 @@ namespace Nest
 
 	public class TypeMapping : ITypeMapping
 	{
-		public TypeName Type { get; set; }
 		public IAllField AllField { get; set; }
 		public string Analyzer { get; set; }
 		public IBoostField BoostField { get; set; }

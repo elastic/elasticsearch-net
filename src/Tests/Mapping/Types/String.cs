@@ -19,15 +19,12 @@ namespace Tests.Mapping.Types
 
 			protected override object ExpectJson => new
 			{
-				project = new
+				properties = new
 				{
-					properties = new
+					name = new
 					{
-						name = new
-						{
-							type = "string",
-							index = "not_analyzed"
-						}
+						type = "string",
+						index = "not_analyzed"
 					}
 				}
 			};
