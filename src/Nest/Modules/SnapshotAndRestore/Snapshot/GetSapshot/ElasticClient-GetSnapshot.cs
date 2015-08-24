@@ -6,7 +6,7 @@ namespace Nest
 {
 	public partial class ElasticClient
 	{
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public IGetSnapshotResponse GetSnapshot(string repository, string snapshotName, Func<GetSnapshotDescriptor, GetSnapshotDescriptor> selector = null)
 		{
 			snapshotName.ThrowIfNullOrEmpty("name");
@@ -18,7 +18,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public IGetSnapshotResponse GetSnapshot(IGetSnapshotRequest getSnapshotRequest)
 		{
 			return this.Dispatcher.Dispatch<IGetSnapshotRequest, GetSnapshotRequestParameters, GetSnapshotResponse>(
@@ -27,7 +27,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public Task<IGetSnapshotResponse> GetSnapshotAsync(string repository, string snapshotName, Func<GetSnapshotDescriptor, GetSnapshotDescriptor> selector = null)
 		{
 			snapshotName.ThrowIfNullOrEmpty("name");
@@ -39,7 +39,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public Task<IGetSnapshotResponse> GetSnapshotAsync(IGetSnapshotRequest getSnapshotRequest)
 		{
 			return this.Dispatcher.DispatchAsync<IGetSnapshotRequest, GetSnapshotRequestParameters, GetSnapshotResponse, IGetSnapshotResponse>(

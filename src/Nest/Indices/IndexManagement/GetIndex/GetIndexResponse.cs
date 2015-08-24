@@ -5,7 +5,7 @@ namespace Nest
 {
 	public interface IGetIndexResponse : IResponse
 	{
-		IDictionary<string, IndexSettings> Indices { get; set; }
+		IDictionary<string, IndexState> Indices { get; set; }
 	}
 
 	[JsonObject]
@@ -13,9 +13,9 @@ namespace Nest
 	{
 		public GetIndexResponse()
 		{
-			this.Indices = new Dictionary<string, IndexSettings>();
+			this.Indices = new Dictionary<string, IndexState>();
 		}
-		public IDictionary<string, IndexSettings> Indices { get; set; }
+		public IDictionary<string, IndexState> Indices { get; set; }
 	}
 
 	public class IndexMetadata

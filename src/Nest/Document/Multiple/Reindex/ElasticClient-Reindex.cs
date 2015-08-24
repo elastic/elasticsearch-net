@@ -5,7 +5,7 @@ namespace Nest
 {
 	public partial class ElasticClient
 	{
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public IObservable<IReindexResponse<T>> Reindex<T>(Func<ReindexDescriptor<T>, ReindexDescriptor<T>> reindexSelector)
 			where T : class
 		{

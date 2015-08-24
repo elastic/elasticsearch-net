@@ -1,18 +1,44 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Elasticsearch.Net;
+using Newtonsoft.Json;
 
 namespace Nest
 {
-    public abstract class TokenFilterBase : IAnalysisSetting
-    {
-        protected TokenFilterBase(string type)
-        {
-            this.Type = type;
-        }
-		
+	public interface ITokenFilter
+	{
 		[JsonProperty("version")]
-	    public string Version { get; set; }
+		string Version { get; set; }
 
-	    [JsonProperty("type")]
-        public string Type { get; protected set; }
-    }
+		[JsonProperty("type")]
+		string Type { get; }
+
+	}
+
+	public abstract class TokenFilterBase : IAnalysisSetting
+	{
+		protected TokenFilterBase(string type)
+		{
+			this.Type = type;
+		}
+
+		[JsonProperty("version")]
+		public string Version { get; set; }
+
+		[JsonProperty("type")]
+		public string Type { get; protected set; }
+	}
+
+	public abstract class TokenFilterDescriptorBase<TTokenFilter, TTokenFilterInterface> 
+		: DescriptorBase<TTokenFilter, TTokenFilterInterface>, ITokenFilter
+		where TTokenFilter : TokenFilterDescriptorBase<TTokenFilter, TTokenFilterInterface>, TTokenFilterInterface
+		where TTokenFilterInterface : class, ITokenFilter
+	{
+		string ITokenFilter.Version { get; set; }
+		string ITokenFilter.Type => this.Type;
+		protected abstract string Type { get; }
+		protected TTokenFilter Assign(Action<TTokenFilterInterface> assigner) =>
+			Fluent.Assign((TTokenFilter)this, assigner);
+
+		public TTokenFilter Version(string version) => Assign(a => a.Version = version);
+	}
 }

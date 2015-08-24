@@ -8,7 +8,7 @@ namespace Nest
 {
 	public partial class ElasticClient
 	{
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public IGetResponse<T> Get<T>(Func<GetDescriptor<T>, GetDescriptor<T>> getSelector) where T : class
 		{
 			return this.Dispatcher.Dispatch<GetDescriptor<T>, GetRequestParameters, GetResponse<T>>(
@@ -17,7 +17,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public IGetResponse<T> Get<T>(IGetRequest getRequest) where T : class
 		{
 			return this.Dispatcher.Dispatch<IGetRequest, GetRequestParameters, GetResponse<T>>(
@@ -26,7 +26,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public Task<IGetResponse<T>> GetAsync<T>(Func<GetDescriptor<T>, GetDescriptor<T>> getSelector) where T : class
 		{
 			return this.Dispatcher.DispatchAsync<GetDescriptor<T>, GetRequestParameters, GetResponse<T>, IGetResponse<T>>(
@@ -35,7 +35,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public Task<IGetResponse<T>> GetAsync<T>(IGetRequest getRequest) where T : class
 		{
 			return this.Dispatcher.DispatchAsync<IGetRequest, GetRequestParameters, GetResponse<T>, IGetResponse<T>>(

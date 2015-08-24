@@ -26,8 +26,7 @@ namespace Tests.Aggregations.Bucket
 			 *  a `_parent` mapping is in place, here we create the project
 			 *  index with two mapped types, `project` and `commitactivity` and 
 			 *  we add a `_parent` mapping from `commitactivity` to `parent` */
-			var createProjectIndex = TestClient.GetClient().CreateIndex(c => c
-				.Index<Project>()
+			var createProjectIndex = TestClient.GetClient().CreateIndex(typeof(Project), c => c
 				.AddMapping<Project>(m=>m.AutoMap())
 				.AddMapping<CommitActivity>(m=>m
 					.SetParent<Project>()

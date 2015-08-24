@@ -7,7 +7,7 @@ namespace Nest
 {
 	public partial class ElasticClient
 	{
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public IShardsOperationResponse Flush(Func<FlushDescriptor, FlushDescriptor> selector)
 		{
 			return this.Dispatcher.Dispatch<FlushDescriptor, FlushRequestParameters, ShardsOperationResponse>(
@@ -16,7 +16,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public IShardsOperationResponse Flush(IFlushRequest flushRequest)
 		{
 			return this.Dispatcher.Dispatch<IFlushRequest, FlushRequestParameters, ShardsOperationResponse>(
@@ -25,7 +25,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public Task<IShardsOperationResponse> FlushAsync(Func<FlushDescriptor, FlushDescriptor> selector)
 		{
 			return this.Dispatcher.DispatchAsync<FlushDescriptor, FlushRequestParameters, ShardsOperationResponse, IShardsOperationResponse>(
@@ -34,7 +34,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public Task<IShardsOperationResponse> FlushAsync(IFlushRequest flushRequest)
 		{
 			return this.Dispatcher.DispatchAsync<IFlushRequest, FlushRequestParameters, ShardsOperationResponse, IShardsOperationResponse>(

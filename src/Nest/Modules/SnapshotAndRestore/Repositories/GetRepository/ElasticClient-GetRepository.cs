@@ -9,7 +9,7 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public IGetRepositoryResponse GetRepository(Func<GetRepositoryDescriptor, GetRepositoryDescriptor> selector)
 		{
 			return this.Dispatcher.Dispatch<GetRepositoryDescriptor, GetRepositoryRequestParameters, GetRepositoryResponse>(
@@ -18,7 +18,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public IGetRepositoryResponse GetRepository(IGetRepositoryRequest request)
 		{
 			return this.Dispatcher.Dispatch<IGetRepositoryRequest, GetRepositoryRequestParameters, GetRepositoryResponse>(
@@ -27,7 +27,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public Task<IGetRepositoryResponse> GetRepositoryAsync(Func<GetRepositoryDescriptor, GetRepositoryDescriptor> selector)
 		{
 			return this.Dispatcher.DispatchAsync<GetRepositoryDescriptor, GetRepositoryRequestParameters, GetRepositoryResponse, IGetRepositoryResponse>(
@@ -36,7 +36,7 @@ namespace Nest
 			);
 		}
 		
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public Task<IGetRepositoryResponse> GetRepositoryAsync(IGetRepositoryRequest request)
 		{
 			return this.Dispatcher.DispatchAsync<IGetRepositoryRequest, GetRepositoryRequestParameters, GetRepositoryResponse, IGetRepositoryResponse>(

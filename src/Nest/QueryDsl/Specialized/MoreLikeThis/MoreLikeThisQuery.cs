@@ -24,7 +24,7 @@ namespace Nest
 		string MinimumShouldMatch { get; set; }
 
 		[JsonProperty(PropertyName = "stop_words")]
-		IEnumerable<string> StopWords { get; set; }
+		StopWords StopWords { get; set; }
 
 		[JsonProperty(PropertyName = "min_term_freq")]
 		int? MinTermFrequency { get; set; }
@@ -77,7 +77,7 @@ namespace Nest
 		public string LikeText { get; set; }
 		public double? TermMatchPercentage { get; set; }
 		public string MinimumShouldMatch { get; set; }
-		public IEnumerable<string> StopWords { get; set; }
+		public StopWords StopWords { get; set; }
 		public int? MinTermFrequency { get; set; }
 		public int? MaxQueryTerms { get; set; }
 		public int? MinDocumentFrequency { get; set; }
@@ -108,7 +108,7 @@ namespace Nest
 		string IMoreLikeThisQuery.LikeText { get; set; }
 		double? IMoreLikeThisQuery.TermMatchPercentage { get; set; }
 		string IMoreLikeThisQuery.MinimumShouldMatch { get; set; }
-		IEnumerable<string> IMoreLikeThisQuery.StopWords { get; set; }
+		StopWords IMoreLikeThisQuery.StopWords { get; set; }
 		int? IMoreLikeThisQuery.MinTermFrequency { get; set; }
 		int? IMoreLikeThisQuery.MaxQueryTerms { get; set; }
 		int? IMoreLikeThisQuery.MinDocumentFrequency { get; set; }
@@ -131,6 +131,12 @@ namespace Nest
 			Assign(a => a.LikeText = likeText);
 
 		public MoreLikeThisQueryDescriptor<T> StopWords(IEnumerable<string> stopWords) => 
+			Assign(a => a.StopWords = stopWords.ToListOrNullIfEmpty());
+
+		public MoreLikeThisQueryDescriptor<T> StopWords(params string[] stopWords) => 
+			Assign(a => a.StopWords = stopWords);
+
+		public MoreLikeThisQueryDescriptor<T> StopWords(StopWords stopWords) => 
 			Assign(a => a.StopWords = stopWords);
 
 		public MoreLikeThisQueryDescriptor<T> MaxQueryTerms(int maxQueryTerms) => 

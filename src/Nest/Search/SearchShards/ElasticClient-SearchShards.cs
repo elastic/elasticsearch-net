@@ -10,7 +10,7 @@ namespace Nest
 {
 	public partial class ElasticClient
 	{
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public ISearchShardsResponse SearchShards<T>(Func<SearchShardsDescriptor<T>, SearchShardsDescriptor<T>> searchSelector) where T : class
 		{
 			return this.Dispatcher.Dispatch<SearchShardsDescriptor<T>, SearchShardsRequestParameters, SearchShardsResponse>(
@@ -19,7 +19,7 @@ namespace Nest
 			);
 		}
 		
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public ISearchShardsResponse SearchShards(ISearchShardsRequest request)
 		{
 			return this.Dispatcher.Dispatch<ISearchShardsRequest, SearchShardsRequestParameters, SearchShardsResponse>(
@@ -28,7 +28,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public Task<ISearchShardsResponse> SearchShardsAsync<T>(Func<SearchShardsDescriptor<T>, SearchShardsDescriptor<T>> searchSelector)
 			where T : class
 		{
@@ -38,7 +38,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public Task<ISearchShardsResponse> SearchShardsAsync(ISearchShardsRequest request)
 		{
 			return this.Dispatcher.DispatchAsync<ISearchShardsRequest, SearchShardsRequestParameters, SearchShardsResponse, ISearchShardsResponse>(

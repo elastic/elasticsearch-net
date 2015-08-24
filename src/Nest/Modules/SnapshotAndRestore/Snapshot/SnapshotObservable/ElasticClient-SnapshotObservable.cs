@@ -6,7 +6,7 @@ namespace Nest
 {
 	public partial class ElasticClient
 	{
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public IObservable<ISnapshotStatusResponse> SnapshotObservable(TimeSpan interval, Func<SnapshotDescriptor, SnapshotDescriptor> snapshotSelector = null)
 		{
 			snapshotSelector.ThrowIfNull("snapshotSelector");
@@ -16,7 +16,7 @@ namespace Nest
 			return observable;
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public IObservable<ISnapshotStatusResponse> SnapshotObservable(TimeSpan interval, ISnapshotRequest snapshotRequest)
 		{
 			snapshotRequest.ThrowIfNull("snapshotRequest");

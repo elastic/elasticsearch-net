@@ -7,7 +7,7 @@ namespace Nest
 {
 	public partial class ElasticClient
 	{
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public ICountResponse Count<T>(Func<CountDescriptor<T>, CountDescriptor<T>> countSelector = null) 
 			where T : class
 		{
@@ -18,7 +18,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public ICountResponse Count<T>(ICountRequest countRequest) 
 			where T : class
 		{
@@ -28,7 +28,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public Task<ICountResponse> CountAsync<T>(Func<CountDescriptor<T>, CountDescriptor<T>> countSelector = null)
 			where T : class
 		{
@@ -39,7 +39,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public Task<ICountResponse> CountAsync<T>(ICountRequest countRequest)
 			where T : class
 		{

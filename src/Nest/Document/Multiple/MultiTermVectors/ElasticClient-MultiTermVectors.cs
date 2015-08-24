@@ -9,7 +9,7 @@ namespace Nest
 	public partial class ElasticClient
 	{
 
-		///<inheritdoc />
+		///<inheritdoc/>
 		public IMultiTermVectorResponse MultiTermVectors<T>(Func<MultiTermVectorsDescriptor<T>, MultiTermVectorsDescriptor<T>> multiTermVectorsSelector)
 			where T : class
 		{
@@ -19,7 +19,7 @@ namespace Nest
 			);
 		}
 
-		///<inheritdoc />
+		///<inheritdoc/>
 		public IMultiTermVectorResponse MultiTermVectors(IMultiTermVectorsRequest multiTermVectorsRequest)
 		{
 			return this.Dispatcher.Dispatch<IMultiTermVectorsRequest, MultiTermVectorsRequestParameters, MultiTermVectorResponse>(
@@ -28,7 +28,7 @@ namespace Nest
 			);
 		}
 
-		///<inheritdoc />
+		///<inheritdoc/>
 		public Task<IMultiTermVectorResponse> MultiTermVectorsAsync<T>(Func<MultiTermVectorsDescriptor<T>, MultiTermVectorsDescriptor<T>> multiTermVectorsSelector)
 			where T : class
 		{
@@ -38,7 +38,7 @@ namespace Nest
 			);
 		}
 
-		///<inheritdoc />
+		///<inheritdoc/>
 		public Task<IMultiTermVectorResponse> MultiTermVectorsAsync(IMultiTermVectorsRequest multiTermVectorsRequest)
 		{
 			return this.Dispatcher.DispatchAsync<IMultiTermVectorsRequest, MultiTermVectorsRequestParameters, MultiTermVectorResponse, IMultiTermVectorResponse>(

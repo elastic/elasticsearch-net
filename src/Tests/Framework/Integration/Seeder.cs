@@ -49,8 +49,7 @@ namespace Tests.Framework.Integration
 			);
 			putTemplateResult.IsValid.Should().BeTrue();
 
-			var createProjectIndex = this.Client.CreateIndex(c => c
-				.Index<Project>()
+			var createProjectIndex = this.Client.CreateIndex(typeof(Project), c => c
 				.AddMapping<Project>(m=>m
 					.Properties(props=>props
 						.Date(d=>d.Name(p=>p.StartedOn))

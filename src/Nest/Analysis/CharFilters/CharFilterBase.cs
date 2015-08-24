@@ -1,18 +1,39 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 
 namespace Nest
 {
-    public abstract class CharFilterBase : IAnalysisSetting
-    {
-        protected CharFilterBase(string type)
-        {
-            this.Type = type;
-        }
-		
+	public interface ICharFilter
+	{
 		[JsonProperty("version")]
-	    public string Version { get; set; }
+		string Version { get; set; }
 
-	    [JsonProperty("type")]
-        public string Type { get; protected set; }
-    }
+		[JsonProperty("type")]
+		string Type { get; }
+	}
+
+
+	public abstract class CharFilterBase : ICharFilter
+	{
+		protected CharFilterBase(string type)
+		{
+			this.Type = type;
+		}
+		public string Version { get; set; }
+
+		public string Type { get; protected set; }
+	}
+
+	public abstract class CharFilterDescriptorBase<TCharFilter, TCharFilterInterface>: ICharFilter
+		where TCharFilter : CharFilterDescriptorBase<TCharFilter, TCharFilterInterface>, TCharFilterInterface
+		where TCharFilterInterface : class, ICharFilter
+	{
+		string ICharFilter.Version { get; set; }
+		string ICharFilter.Type => this.Type;
+		protected abstract string Type { get; }
+		protected TCharFilter Assign(Action<TCharFilterInterface> assigner) =>
+			Fluent.Assign((TCharFilter)this, assigner);
+
+		public TCharFilter Version(string version) => Assign(a => a.Version = version);
+	}
 }

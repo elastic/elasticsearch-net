@@ -11,7 +11,7 @@ namespace Nest
 
 	public partial class ElasticClient
 	{
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public IGetIndexResponse GetIndex(Func<GetIndexDescriptor, GetIndexDescriptor> getIndexSelector)
 		{
 			return this.Dispatcher.Dispatch<GetIndexDescriptor, GetIndexRequestParameters, GetIndexResponse>(
@@ -22,7 +22,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public IGetIndexResponse GetIndex(IGetIndexRequest createIndexRequest)
 		{
 			return this.Dispatcher.Dispatch<IGetIndexRequest, GetIndexRequestParameters, GetIndexResponse>(
@@ -33,7 +33,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public Task<IGetIndexResponse> GetIndexAsync(Func<GetIndexDescriptor, GetIndexDescriptor> getIndexSelector)
 		{
 			return this.Dispatcher.DispatchAsync<GetIndexDescriptor, GetIndexRequestParameters, GetIndexResponse, IGetIndexResponse>(
@@ -44,7 +44,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public Task<IGetIndexResponse> GetIndexAsync(IGetIndexRequest createIndexRequest)
 		{
 			return this.Dispatcher.DispatchAsync<IGetIndexRequest, GetIndexRequestParameters, GetIndexResponse, IGetIndexResponse>(
@@ -59,7 +59,7 @@ namespace Nest
 		{
 			return new GetIndexResponse
 			{
-				Indices = this.Serializer.Deserialize<Dictionary<string, IndexSettings>>(stream)
+				Indices = this.Serializer.Deserialize<Dictionary<string, IndexState>>(stream)
 			};
 		}
 

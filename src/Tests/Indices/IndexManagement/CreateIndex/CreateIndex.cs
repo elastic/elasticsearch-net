@@ -33,22 +33,31 @@ namespace Tests.Indices.IndexManagement
 		public override bool ExpectIsValid => true;
 		public override int ExpectStatusCode => 200;
 		public override HttpMethod HttpMethod => HttpMethod.POST;
-		public override string UrlPath => "/x/x/x";
+		public override string UrlPath => $"/{IndexName}";
 
-		protected override object ExpectJson { get; } = new object
+		protected override object ExpectJson { get; } = new
 		{
-
+			settings = new Dictionary<string, object>
+			{
+				{ "index.number_of_replicas", 1 },
+				{ "index.number_of_shards", 1 },
+			}
 		};
 
 		protected override Func<CreateIndexDescriptor, ICreateIndexRequest> Fluent => d => d
-			.Analysis(a => a
-				.Analyzers(an => an
-				)
+			.Settings(s => s
+				.NumberOfReplicas(1)
+				.NumberOfShards(1)
 			);
 
 		protected override CreateIndexRequest Initializer => new CreateIndexRequest(this.IndexName)
 		{
+			Settings = new IndexSettings()
+			{
+				NumberOfReplicas = 1,
+				NumberOfShards = 1,
+			}
 		};
-
 	}
+
 }

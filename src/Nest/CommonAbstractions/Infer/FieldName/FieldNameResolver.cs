@@ -88,12 +88,6 @@ namespace Nest.Resolvers
 				base.VisitExpressionList(callingMember, stack, properties);
 				return m;
 			}
-			else if (m.Method.Name == "FullyQualified" && m.Arguments.Any())
-			{
-				var type = m.Method.ReturnType;
-				var typeName = this._settings.Inferrer.TypeName(type);
-				stack.Push(typeName);
-			}
 			else if (m.Method.Name == "get_Item" && m.Arguments.Any())
 			{
 				var t = m.Object.Type;
