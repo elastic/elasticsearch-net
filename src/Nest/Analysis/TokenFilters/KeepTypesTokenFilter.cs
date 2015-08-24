@@ -6,18 +6,20 @@ namespace Nest
 	/// <summary>
 	/// A token filter of type keep that only keeps tokens with text contained in a predefined set of words.
 	/// </summary>
-	public class KeepTypesTokenFilter : TokenFilterBase
+	public interface IKeepTypesTokenFilter : ITokenFilter
 	{
-		public KeepTypesTokenFilter()
-			: base("keep_types")
-		{
-
-		}
-
 		/// <summary>
 		/// A list of types to keep.
 		/// </summary>
 		[JsonProperty("types")]
+		IEnumerable<string> Types { get; set; }
+	}
+	/// <inheritdoc/>
+	public class KeepTypesTokenFilter : TokenFilterBase
+	{
+		public KeepTypesTokenFilter() : base("keep_types") { }
+
+		/// <inheritdoc/>
 		public IEnumerable<string> Types { get; set; }
 
 	}

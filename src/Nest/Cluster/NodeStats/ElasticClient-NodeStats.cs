@@ -14,7 +14,7 @@ namespace Nest
 	public partial class ElasticClient
 	{
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public INodeStatsResponse NodesStats(Func<NodesStatsDescriptor, NodesStatsDescriptor> selector = null)
 		{
 			selector = selector ?? (s => s);
@@ -24,7 +24,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public INodeStatsResponse NodesStats(INodesStatsRequest nodesStatsRequest)
 		{
 			return this.Dispatcher.Dispatch<INodesStatsRequest, NodesStatsRequestParameters, NodeStatsResponse>(
@@ -33,7 +33,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public Task<INodeStatsResponse> NodesStatsAsync(Func<NodesStatsDescriptor, NodesStatsDescriptor> selector = null)
 		{
 			selector = selector ?? (s => s);
@@ -43,7 +43,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public Task<INodeStatsResponse> NodesStatsAsync(INodesStatsRequest nodesStatsRequest)
 		{
 			return this.Dispatcher.DispatchAsync<INodesStatsRequest, NodesStatsRequestParameters, NodeStatsResponse, INodeStatsResponse>(

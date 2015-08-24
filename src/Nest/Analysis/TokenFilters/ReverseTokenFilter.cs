@@ -3,14 +3,11 @@
 	/// <summary>
 	/// A token filter of type reverse that simply reverses the tokens.
 	/// </summary>
-	public class ReverseTokenFilter : TokenFilterBase
+	public interface IReverseTokenFilter : ITokenFilter { }
+	/// <inheritdoc/>
+	public class ReverseTokenFilter : TokenFilterBase, IReverseTokenFilter
 	{
-		public ReverseTokenFilter()
-			: base("reverse")
-		{
-
-		}
-
+		public ReverseTokenFilter() : base("reverse") { }
 	}
 
 }

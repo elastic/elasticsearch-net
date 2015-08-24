@@ -28,13 +28,13 @@ namespace Nest
 
 	public class TranslogFlushSettings : ITranslogFlushSettings
 	{
-		/// </inheritdoc>
+		/// <inheritdoc/>
 		public TimeUnitExpression Interval { get; set; }
-		/// </inheritdoc>
+		/// <inheritdoc/>
 		public int? TresholdOps { get; set; }
-		/// </inheritdoc>
+		/// <inheritdoc/>
 		public TimeUnitExpression TresholdPeriod { get; set; }
-		/// </inheritdoc>
+		/// <inheritdoc/>
 		public string TresholdSize { get; set; }
 	}
 
@@ -48,17 +48,17 @@ namespace Nest
 		TimeUnitExpression ITranslogFlushSettings.TresholdPeriod { get; set; }
 		string ITranslogFlushSettings.TresholdSize { get; set; }
 
-		/// </inheritdoc>
+		/// <inheritdoc/>
 		public TranslogFlushSettingsDescriptor TresholdSize(string size) => Assign(a => a.TresholdSize = size);
 
-		/// </inheritdoc>
+		/// <inheritdoc/>
 		public TranslogFlushSettingsDescriptor TresholdOps(int? operations) => Assign(a => a.TresholdOps = operations);
 
-		/// </inheritdoc>
+		/// <inheritdoc/>
 		public TranslogFlushSettingsDescriptor TresholdPeriod(TimeUnitExpression time) => 
 			Assign(a => a.TresholdPeriod = time);
 
-		/// </inheritdoc>
+		/// <inheritdoc/>
 		public TranslogFlushSettingsDescriptor Interval(TimeUnitExpression time) => Assign(a => a.Interval = time);
 	}
 }

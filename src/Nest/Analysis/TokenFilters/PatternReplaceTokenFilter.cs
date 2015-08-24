@@ -2,16 +2,32 @@
 
 namespace Nest
 {
-    public class PatternReplaceTokenFilter : TokenFilterBase
-    {
-        public PatternReplaceTokenFilter() : base("pattern_replace")
-        {
-        }
+	/// <summary>
+	/// The pattern_replace token filter allows to easily handle string replacements based on a regular expression. 
+	/// </summary>
+	public interface IPatternReplaceTokenFilter : ITokenFilter
+	{
+		/// <summary>
+		/// The regular expression
+		/// </summary>
+		[JsonProperty("pattern")]
+		string Pattern { get; set; }
 
-        [JsonProperty("pattern")]
-        public string Pattern { get; set; }
+		/// <summary>
+		/// Replacement string
+		/// </summary>
+		[JsonProperty("replacement")]
+		string Replacement { get; set; }
+	}
+	/// <inheritdoc/>
+	public class PatternReplaceTokenFilter : TokenFilterBase, IPatternReplaceTokenFilter
+	{
+		public PatternReplaceTokenFilter() : base("pattern_replace") { }
 
-        [JsonProperty("replacement")]
-        public string Replacement { get; set; }
-    }
+		/// <inheritdoc/>
+		public string Pattern { get; set; }
+
+		/// <inheritdoc/>
+		public string Replacement { get; set; }
+	}
 }

@@ -8,7 +8,7 @@ namespace Nest
 {
 	public partial class ElasticClient
 	{
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public ICatResponse<CatThreadPoolRecord> CatThreadPool(Func<CatThreadPoolDescriptor, CatThreadPoolDescriptor> selector = null) =>
 			this.DoCat<CatThreadPoolDescriptor, CatThreadPoolRequestParameters, CatThreadPoolRecord>(selector, this.LowLevelDispatch.CatThreadPoolDispatch<CatResponse<CatThreadPoolRecord>>);
 

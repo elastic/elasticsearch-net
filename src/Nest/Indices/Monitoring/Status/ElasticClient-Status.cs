@@ -8,7 +8,7 @@ namespace Nest
 {
 	public partial class ElasticClient
 	{
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public IStatusResponse Status(Func<IndicesStatusDescriptor, IndicesStatusDescriptor> selector = null)
 		{
 			selector = selector ?? (s => s);
@@ -18,7 +18,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public IStatusResponse Status(IIndicesStatusRequest statusRequest)
 		{
 			return this.Dispatcher.Dispatch<IIndicesStatusRequest, IndicesStatusRequestParameters, StatusResponse>(
@@ -27,7 +27,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public Task<IStatusResponse> StatusAsync(Func<IndicesStatusDescriptor, IndicesStatusDescriptor> selector = null)
 		{
 			selector = selector ?? (s => s);
@@ -37,7 +37,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public Task<IStatusResponse> StatusAsync(IIndicesStatusRequest statusRequest)
 		{
 			return this.Dispatcher.DispatchAsync<IIndicesStatusRequest, IndicesStatusRequestParameters, StatusResponse, IStatusResponse>(

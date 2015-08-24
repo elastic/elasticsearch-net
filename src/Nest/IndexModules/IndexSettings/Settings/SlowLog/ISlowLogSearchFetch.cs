@@ -27,16 +27,16 @@ namespace Nest
 		TimeUnitExpression ISlowLogSearchFetch.TresholdTrace { get; set; }
 		TimeUnitExpression ISlowLogSearchFetch.TresholdWarn { get; set; }
 
-		/// </inheritdoc>
+		/// <inheritdoc/>
 		public SlowLogSearchFetchDescriptor TresholdDebug(TimeUnitExpression time) => Assign(a => a.TresholdDebug = time);
 
-		/// </inheritdoc>
+		/// <inheritdoc/>
 		public SlowLogSearchFetchDescriptor TresholdInfo(TimeUnitExpression time) => Assign(a => a.TresholdInfo = time);
 
-		/// </inheritdoc>
+		/// <inheritdoc/>
 		public SlowLogSearchFetchDescriptor TresholdTrace(TimeUnitExpression time) => Assign(a => a.TresholdTrace = time);
 
-		/// </inheritdoc>
+		/// <inheritdoc/>
 		public SlowLogSearchFetchDescriptor TresholdWarn(TimeUnitExpression time) => Assign(a => a.TresholdWarn = time);
 
 

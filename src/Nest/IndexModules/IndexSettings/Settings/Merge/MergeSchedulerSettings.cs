@@ -24,10 +24,10 @@ namespace Nest
 
 	public class MergeSchedulerSettings : IMergeSchedulerSettings
 	{
-		/// </inheritdoc>
+		/// <inheritdoc/>
 		public bool? AutoThrottle { get; set; }
 
-		/// </inheritdoc>
+		/// <inheritdoc/>
 		public int? MaxThreadCount { get; set; }
 	}
 
@@ -38,11 +38,11 @@ namespace Nest
 		bool? IMergeSchedulerSettings.AutoThrottle { get; set; }
 		int? IMergeSchedulerSettings.MaxThreadCount { get; set; }
 
-		/// </inheritdoc>
+		/// <inheritdoc/>
 		public MergeSchedulerSettingsDescriptor AutoThrottle(bool? throttle = true) =>
 			Assign(a => a.AutoThrottle = throttle);
 
-		/// </inheritdoc>
+		/// <inheritdoc/>
 		public MergeSchedulerSettingsDescriptor MaxThreadCount(int? maxThreadCount) =>
 			Assign(a => a.MaxThreadCount = maxThreadCount);
 

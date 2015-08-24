@@ -10,10 +10,10 @@ namespace Nest
 
 	public class MergeSettings : IMergeSettings
 	{
-		/// </inheritdoc>
+		/// <inheritdoc/>
 		public IMergePolicySettings Policy { get; set; }
 
-		/// </inheritdoc>
+		/// <inheritdoc/>
 		public IMergeSchedulerSettings Scheduler { get; set; }
 	}
 
@@ -23,11 +23,11 @@ namespace Nest
 		IMergePolicySettings IMergeSettings.Policy { get; set; }
 		IMergeSchedulerSettings IMergeSettings.Scheduler { get; set; }
 
-		/// </inheritdoc>
+		/// <inheritdoc/>
 		public MergeSettingsDescriptor Policy(Func<MergePolicySettingsDescriptor, IMergePolicySettings> selector) =>
 			Assign(a => a.Policy = selector?.Invoke(new MergePolicySettingsDescriptor()));
 
-		/// </inheritdoc>
+		/// <inheritdoc/>
 		public MergeSettingsDescriptor Scheduler(Func<MergeSchedulerSettingsDescriptor, IMergeSchedulerSettings> selector) =>
 			Assign(a => a.Scheduler = selector?.Invoke(new MergeSchedulerSettingsDescriptor()));
 

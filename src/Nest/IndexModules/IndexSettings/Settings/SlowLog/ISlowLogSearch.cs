@@ -26,14 +26,14 @@ namespace Nest
 		ISlowLogSearchFetch ISlowLogSearch.Fetch { get; set; }
 		SlowLogLevel? ISlowLogSearch.LogLevel { get; set; }
 
-		/// </inheritdoc>
+		/// <inheritdoc/>
 		public SlowLogSearchDescriptor LogLevel(SlowLogLevel? level) => Assign(a => a.LogLevel = level);
 
-		/// </inheritdoc>
+		/// <inheritdoc/>
 		public SlowLogSearchDescriptor Query(Func<SlowLogSearchQueryDescriptor, ISlowLogSearchQuery> selector) =>
 			Assign(a => a.Query = selector?.Invoke(new SlowLogSearchQueryDescriptor()));
 
-		/// </inheritdoc>
+		/// <inheritdoc/>
 		public SlowLogSearchDescriptor Fetch(Func<SlowLogSearchFetchDescriptor, ISlowLogSearchFetch> selector) =>
 			Assign(a => a.Fetch = selector?.Invoke(new SlowLogSearchFetchDescriptor()));
 	}

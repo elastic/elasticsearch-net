@@ -9,7 +9,7 @@ namespace Nest
 	public partial class ElasticClient
 	{
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public IAcknowledgedResponse CreateRepository(string name, Func<CreateRepositoryDescriptor, CreateRepositoryDescriptor> selector)
 		{
 			name.ThrowIfNullOrEmpty("name");
@@ -21,7 +21,7 @@ namespace Nest
 				);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public IAcknowledgedResponse CreateRepository(ICreateRepositoryRequest request)
 		{
 			return this.Dispatcher.Dispatch<ICreateRepositoryRequest, CreateRepositoryRequestParameters, AcknowledgedResponse>(
@@ -32,7 +32,7 @@ namespace Nest
 				);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public Task<IAcknowledgedResponse> CreateRepositoryAsync(string name, Func<CreateRepositoryDescriptor, CreateRepositoryDescriptor> selector)
 		{
 			name.ThrowIfNullOrEmpty("name");
@@ -46,7 +46,7 @@ namespace Nest
 				);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public Task<IAcknowledgedResponse> CreateRepositoryAsync(ICreateRepositoryRequest request)
 		{
 			return this.Dispatcher

@@ -25,10 +25,10 @@ namespace Nest
 	{
 		public StandardAnalyzer() { Type = "standard"; }
 
-		/// </inheritdoc>
+		/// <inheritdoc/>
 		public IEnumerable<string> StopWords { get; set; }
 
-		/// </inheritdoc>
+		/// <inheritdoc/>
 		public int? MaxTokenLength { get; set; }
 	}
 

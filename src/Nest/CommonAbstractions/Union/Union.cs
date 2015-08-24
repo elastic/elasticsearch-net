@@ -7,7 +7,7 @@ using System.Text;
 namespace Nest
 {
 	[JsonConverter(typeof(UnionJsonConverter))]
-	public sealed class Union<TFirst, TSecond>
+	public class Union<TFirst, TSecond>
 	{
 		internal readonly TFirst Item1;
 		internal readonly TSecond Item2;

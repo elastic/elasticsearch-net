@@ -7,7 +7,7 @@ namespace Nest
 {
 	public partial class ElasticClient
 	{
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public ISearchResponse<T> MoreLikeThis<T>(Func<MoreLikeThisDescriptor<T>, MoreLikeThisDescriptor<T>> mltSelector)
 			where T : class
 		{
@@ -22,7 +22,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public ISearchResponse<T> MoreLikeThis<T>(IMoreLikeThisRequest moreLikeThisRequest)
 			where T : class
 		{
@@ -36,7 +36,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public Task<ISearchResponse<T>> MoreLikeThisAsync<T>(Func<MoreLikeThisDescriptor<T>, MoreLikeThisDescriptor<T>> mltSelector) 
 			where T : class
 		{
@@ -51,7 +51,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public Task<ISearchResponse<T>> MoreLikeThisAsync<T>(IMoreLikeThisRequest moreLikeThisRequest) 
 			where T : class
 		{

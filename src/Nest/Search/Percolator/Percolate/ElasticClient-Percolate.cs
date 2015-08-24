@@ -8,7 +8,7 @@ namespace Nest
 	public partial class ElasticClient
 	{
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public IPercolateResponse Percolate<T>(Func<PercolateDescriptor<T>, PercolateDescriptor<T>> percolateSelector)
 			where T : class
 		{
@@ -19,7 +19,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public IPercolateResponse Percolate<T>(IPercolateRequest<T> percolateRequest)
 			where T : class
 		{
@@ -29,7 +29,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public Task<IPercolateResponse> PercolateAsync<T>(Func<PercolateDescriptor<T>, PercolateDescriptor<T>> percolateSelector)
 			where T : class
 		{
@@ -40,7 +40,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public Task<IPercolateResponse> PercolateAsync<T>(IPercolateRequest<T> percolateRequest)
 			where T : class
 		{

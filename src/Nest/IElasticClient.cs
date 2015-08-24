@@ -39,15 +39,15 @@ namespace Nest
 		ISearchResponse<T> Scroll<T>(IScrollRequest scrollRequest)
 			where T : class;
 
-		///<inheritdoc />
+		///<inheritdoc/>
 		ISearchResponse<T> Scroll<T>(Func<ScrollDescriptor<T>, ScrollDescriptor<T>> scrollSelector)
 			where T : class;
 
-		///<inheritdoc />
+		///<inheritdoc/>
 		Task<ISearchResponse<T>> ScrollAsync<T>(IScrollRequest scrollRequest)
 			where T : class;
 
-		///<inheritdoc />
+		///<inheritdoc/>
 		Task<ISearchResponse<T>> ScrollAsync<T>(Func<ScrollDescriptor<T>, ScrollDescriptor<T>> scrollSelector)
 			where T : class;
 
@@ -64,34 +64,34 @@ namespace Nest
 		IUpdateResponse Update<T>(Func<UpdateDescriptor<T, T>, UpdateDescriptor<T, T>> updateSelector)
 			where T : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IUpdateResponse Update<T, K>(Func<UpdateDescriptor<T, K>, UpdateDescriptor<T, K>> updateSelector)
 			where T : class
 			where K : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IUpdateResponse Update<T>(IUpdateRequest<T, T> updateRequest)
 			where T : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IUpdateResponse Update<T, K>(IUpdateRequest<T, K> updateRequest)
 			where T : class
 			where K : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IUpdateResponse> UpdateAsync<T>(Func<UpdateDescriptor<T, T>, UpdateDescriptor<T, T>> updateSelector)
 			where T : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IUpdateResponse> UpdateAsync<T>(IUpdateRequest<T, T> updateRequest)
 			where T : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IUpdateResponse> UpdateAsync<T, K>(Func<UpdateDescriptor<T, K>, UpdateDescriptor<T, K>> updateSelector)
 			where T : class
 			where K : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IUpdateResponse> UpdateAsync<T, K>(IUpdateRequest<T, K> updateRequest)
 			where T : class
 			where K : class;
@@ -103,13 +103,13 @@ namespace Nest
 		/// <param name="updateSettingsSelector">A descriptor that strongly types all the updateable settings</param>
 		IAcknowledgedResponse UpdateSettings(Func<UpdateSettingsDescriptor, UpdateSettingsDescriptor> updateSettingsSelector);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IAcknowledgedResponse UpdateSettings(IUpdateSettingsRequest updateSettingsRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IAcknowledgedResponse> UpdateSettingsAsync(Func<UpdateSettingsDescriptor, UpdateSettingsDescriptor> updateSettingsSelector);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IAcknowledgedResponse> UpdateSettingsAsync(IUpdateSettingsRequest updateSettingsRequest);
 
 		/// <summary>
@@ -121,14 +121,14 @@ namespace Nest
 		IValidateResponse Validate<T>(Func<ValidateQueryDescriptor<T>, ValidateQueryDescriptor<T>> querySelector)
 			where T : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IValidateResponse Validate(IValidateQueryRequest validateQueryRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IValidateResponse> ValidateAsync<T>(Func<ValidateQueryDescriptor<T>, ValidateQueryDescriptor<T>> querySelector)
 			where T : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IValidateResponse> ValidateAsync(IValidateQueryRequest validateQueryRequest);
 
 		/// <summary>
@@ -141,13 +141,13 @@ namespace Nest
 		/// <param name="openIndexSelector">A descriptor thata describes the open index operation</param>
 		IIndicesOperationResponse OpenIndex(Func<OpenIndexDescriptor, OpenIndexDescriptor> openIndexSelector);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IIndicesOperationResponse OpenIndex(IOpenIndexRequest openIndexRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IIndicesOperationResponse> OpenIndexAsync(Func<OpenIndexDescriptor, OpenIndexDescriptor> openIndexSelector);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IIndicesOperationResponse> OpenIndexAsync(IOpenIndexRequest openIndexRequest);
 
 		/// <summary>
@@ -160,13 +160,13 @@ namespace Nest
 		/// <param name="closeIndexSelector">A descriptor thata describes the close index operation</param>
 		IIndicesOperationResponse CloseIndex(Func<CloseIndexDescriptor, CloseIndexDescriptor> closeIndexSelector);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IIndicesOperationResponse CloseIndex(ICloseIndexRequest closeIndexRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IIndicesOperationResponse> CloseIndexAsync(Func<CloseIndexDescriptor, CloseIndexDescriptor> closeIndexSelector);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IIndicesOperationResponse> CloseIndexAsync(ICloseIndexRequest closeIndexRequest);
 
 		/// <summary>
@@ -177,13 +177,13 @@ namespace Nest
 		/// <param name="refreshSelector">A descriptor that describes the parameters for the refresh operation</param>
 		IShardsOperationResponse Refresh(Func<RefreshDescriptor, RefreshDescriptor> refreshSelector = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IShardsOperationResponse Refresh(IRefreshRequest refreshRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IShardsOperationResponse> RefreshAsync(Func<RefreshDescriptor, RefreshDescriptor> refreshSelector = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IShardsOperationResponse> RefreshAsync(IRefreshRequest refreshRequest);
 
 		/// <summary>
@@ -195,13 +195,13 @@ namespace Nest
 		/// <param name="segmentsSelector">A descriptor that describes the parameters for the segments operation</param>
 		ISegmentsResponse Segments(Func<SegmentsDescriptor, SegmentsDescriptor> segmentsSelector = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		ISegmentsResponse Segments(ISegmentsRequest segmentsRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<ISegmentsResponse> SegmentsAsync(Func<SegmentsDescriptor, SegmentsDescriptor> segmentsSelector = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<ISegmentsResponse> SegmentsAsync(ISegmentsRequest segmentsRequest);
 
 		/// <summary>
@@ -211,13 +211,13 @@ namespace Nest
 		/// <param name="clusterStateSelector">A descriptor that describes the parameters for the cluster state operation</param>
 		IClusterStateResponse ClusterState(Func<ClusterStateDescriptor, ClusterStateDescriptor> clusterStateSelector = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IClusterStateResponse ClusterState(IClusterStateRequest clusterStateRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IClusterStateResponse> ClusterStateAsync(Func<ClusterStateDescriptor, ClusterStateDescriptor> clusterStateSelector = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IClusterStateResponse> ClusterStateAsync(IClusterStateRequest clusterStateRequest);
 
 		/// <summary>
@@ -230,13 +230,13 @@ namespace Nest
 		/// <param name="selector">A descriptor that further describes what the warmer should look like</param>
 		IIndicesOperationResponse PutWarmer(string name, Func<PutWarmerDescriptor, PutWarmerDescriptor> selector);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IIndicesOperationResponse PutWarmer(IPutWarmerRequest putWarmerRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IIndicesOperationResponse> PutWarmerAsync(string name, Func<PutWarmerDescriptor, PutWarmerDescriptor> selector);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IIndicesOperationResponse> PutWarmerAsync(IPutWarmerRequest putWarmerRequest);
 
 		/// <summary>
@@ -247,13 +247,13 @@ namespace Nest
 		/// <param name="selector">An optional selector specifying additional parameters for the get warmer operation</param>
 		IWarmerResponse GetWarmer(string name, Func<GetWarmerDescriptor, GetWarmerDescriptor> selector = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IWarmerResponse GetWarmer(IGetWarmerRequest getWarmerRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IWarmerResponse> GetWarmerAsync(string name, Func<GetWarmerDescriptor, GetWarmerDescriptor> selector = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IWarmerResponse> GetWarmerAsync(IGetWarmerRequest getWarmerRequest);
 
 		/// <summary>
@@ -264,13 +264,13 @@ namespace Nest
 		/// <param name="selector">An optional selector specifying additional parameters for the delete warmer operation</param>
 		IIndicesOperationResponse DeleteWarmer(string name, Func<DeleteWarmerDescriptor, DeleteWarmerDescriptor> selector = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IIndicesOperationResponse DeleteWarmer(IDeleteWarmerRequest deleteWarmerRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IIndicesOperationResponse> DeleteWarmerAsync(string name, Func<DeleteWarmerDescriptor, DeleteWarmerDescriptor> selector = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IIndicesOperationResponse> DeleteWarmerAsync(IDeleteWarmerRequest deleteWarmerRequest);
 
 		/// <summary>
@@ -281,13 +281,13 @@ namespace Nest
 		/// <param name="getTemplateSelector">An optional selector specifying additional parameters for the get template operation</param>
 		ITemplateResponse GetTemplate(string name, Func<GetTemplateDescriptor, GetTemplateDescriptor> getTemplateSelector = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		ITemplateResponse GetTemplate(IGetTemplateRequest getTemplateRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<ITemplateResponse> GetTemplateAsync(string name, Func<GetTemplateDescriptor, GetTemplateDescriptor> getTemplateSelector = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<ITemplateResponse> GetTemplateAsync(IGetTemplateRequest getTemplateRequest);
 
 		/// <summary>
@@ -300,13 +300,13 @@ namespace Nest
 		/// <param name="putTemplateSelector">An optional selector specifying additional parameters for the put template operation</param>
 		IIndicesOperationResponse PutTemplate(string name, Func<PutTemplateDescriptor, PutTemplateDescriptor> putTemplateSelector);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IIndicesOperationResponse PutTemplate(IPutTemplateRequest putTemplateRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IIndicesOperationResponse> PutTemplateAsync(string name, Func<PutTemplateDescriptor, PutTemplateDescriptor> putTemplateSelector);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IIndicesOperationResponse> PutTemplateAsync(IPutTemplateRequest putTemplateRequest);
 
 		/// <summary>
@@ -317,13 +317,13 @@ namespace Nest
 		/// <param name="deleteTemplateSelector">An optional selector specifying additional parameters for the delete template operation</param>
 		IIndicesOperationResponse DeleteTemplate(string name, Func<DeleteTemplateDescriptor, DeleteTemplateDescriptor> deleteTemplateSelector = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IIndicesOperationResponse DeleteTemplate(IDeleteTemplateRequest deleteTemplateRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IIndicesOperationResponse> DeleteTemplateAsync(string name, Func<DeleteTemplateDescriptor, DeleteTemplateDescriptor> deleteTemplateSelector = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IIndicesOperationResponse> DeleteTemplateAsync(IDeleteTemplateRequest deleteTemplateRequest);
 
 		/// <summary>
@@ -335,14 +335,14 @@ namespace Nest
 		IUnregisterPercolateResponse UnregisterPercolator<T>(string name, Func<UnregisterPercolatorDescriptor<T>, UnregisterPercolatorDescriptor<T>> selector = null)
 			where T : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IUnregisterPercolateResponse UnregisterPercolator(IUnregisterPercolatorRequest unregisterPercolatorRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IUnregisterPercolateResponse> UnregisterPercolatorAsync<T>(string name, Func<UnregisterPercolatorDescriptor<T>, UnregisterPercolatorDescriptor<T>> selector = null)
 			where T : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IUnregisterPercolateResponse> UnregisterPercolatorAsync(IUnregisterPercolatorRequest unregisterPercolatorRequest);
 
 		/// <summary>
@@ -355,14 +355,14 @@ namespace Nest
 		IRegisterPercolateResponse RegisterPercolator<T>(string name, Func<RegisterPercolatorDescriptor<T>, RegisterPercolatorDescriptor<T>> percolatorSelector)
 			where T : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IRegisterPercolateResponse RegisterPercolator(IRegisterPercolatorRequest registerPercolatorRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IRegisterPercolateResponse> RegisterPercolatorAsync<T>(string name, Func<RegisterPercolatorDescriptor<T>, RegisterPercolatorDescriptor<T>> percolatorSelector)
 			where T : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IRegisterPercolateResponse> RegisterPercolatorAsync(IRegisterPercolatorRequest registerPercolatorRequest);
 
 		/// <summary>
@@ -374,29 +374,29 @@ namespace Nest
 		IPercolateResponse Percolate<T>(Func<PercolateDescriptor<T>, PercolateDescriptor<T>> percolateSelector)
 			where T : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IPercolateResponse Percolate<T>(IPercolateRequest<T> percolateRequest)
 			where T : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IPercolateResponse> PercolateAsync<T>(Func<PercolateDescriptor<T>, PercolateDescriptor<T>> percolateSelector)
 			where T : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IPercolateResponse> PercolateAsync<T>(IPercolateRequest<T> percolateRequest)
 			where T : class;
 
 		IPercolateCountResponse PercolateCount<T>(Func<PercolateCountDescriptor<T>, PercolateCountDescriptor<T>> percolateSelector)
 			where T : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IPercolateCountResponse PercolateCount<T>(IPercolateCountRequest<T> percolateCountRequest)
 			where T : class;
 
 		Task<IPercolateCountResponse> PercolateCountAsync<T>(Func<PercolateCountDescriptor<T>, PercolateCountDescriptor<T>> percolateSelector = null)
 			where T : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IPercolateCountResponse> PercolateCountAsync<T>(IPercolateCountRequest<T> percolateCountRequest)
 			where T : class;
 
@@ -409,14 +409,14 @@ namespace Nest
 		IIndicesResponse Map<T>(Func<PutMappingDescriptor<T>, IPutMappingRequest> mappingSelector)
 			where T : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IIndicesResponse Map(IPutMappingRequest putMappingRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IIndicesResponse> MapAsync<T>(Func<PutMappingDescriptor<T>, IPutMappingRequest> mappingSelector)
 			where T : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IIndicesResponse> MapAsync(IPutMappingRequest putMappingRequest);
 
 		/// <summary>
@@ -426,14 +426,14 @@ namespace Nest
 		/// <param name="selector">A descriptor that describes the parameters for the get mapping operation</param>
 		IGetMappingResponse GetMapping<T>(Func<GetMappingDescriptor<T>, GetMappingDescriptor<T>> selector = null) where T : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IGetMappingResponse GetMapping(IGetMappingRequest getMappingRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IGetMappingResponse> GetMappingAsync<T>(Func<GetMappingDescriptor<T>, GetMappingDescriptor<T>> selector = null)
 			where T : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IGetMappingResponse> GetMappingAsync(IGetMappingRequest getMappingRequest);
 
 		/// <summary>
@@ -444,14 +444,14 @@ namespace Nest
 		IIndicesResponse DeleteMapping<T>(Func<DeleteMappingDescriptor<T>, DeleteMappingDescriptor<T>> selector = null)
 			where T : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IIndicesResponse DeleteMapping(IDeleteMappingRequest deleteMappingRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IIndicesResponse> DeleteMappingAsync<T>(Func<DeleteMappingDescriptor<T>, DeleteMappingDescriptor<T>> selector = null)
 			where T : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IIndicesResponse> DeleteMappingAsync(IDeleteMappingRequest deleteMappingRequest);
 
 		/// <summary>
@@ -464,13 +464,13 @@ namespace Nest
 		/// <param name="selector">A descriptor that describes the parameters for the flush operation</param>
 		IShardsOperationResponse Flush(Func<FlushDescriptor, FlushDescriptor> selector);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IShardsOperationResponse Flush(IFlushRequest flushRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IShardsOperationResponse> FlushAsync(Func<FlushDescriptor, FlushDescriptor> selector);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IShardsOperationResponse> FlushAsync(IFlushRequest flushRequest);
 
 		/// <summary>
@@ -483,13 +483,13 @@ namespace Nest
 		/// <returns></returns>
 		IShardsOperationResponse SyncedFlush(Func<SyncedFlushDescriptor, SyncedFlushDescriptor> selector);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IShardsOperationResponse SyncedFlush(ISyncedFlushRequest flushRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IShardsOperationResponse> SyncedFlushAsync(Func<SyncedFlushDescriptor, SyncedFlushDescriptor> selector);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IShardsOperationResponse> SyncedFlushAsync(ISyncedFlushRequest flushRequest);
 
 		/// <summary>
@@ -499,13 +499,13 @@ namespace Nest
 		/// <param name="selector">A descriptor that describes the parameters for the get index settings operation</param>
 		IIndexSettingsResponse GetIndexSettings(Func<GetIndexSettingsDescriptor, GetIndexSettingsDescriptor> selector);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IIndexSettingsResponse GetIndexSettings(IGetIndexSettingsRequest getIndexSettingsRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IIndexSettingsResponse> GetIndexSettingsAsync(Func<GetIndexSettingsDescriptor, GetIndexSettingsDescriptor> selector);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IIndexSettingsResponse> GetIndexSettingsAsync(IGetIndexSettingsRequest getIndexSettingsRequest);
 
 		/// <summary>
@@ -515,13 +515,13 @@ namespace Nest
 		/// <param name="selector">A descriptor that describes the parameters for the delete index operation</param>
 		IIndicesResponse DeleteIndex(Func<DeleteIndexDescriptor, DeleteIndexDescriptor> selector);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IIndicesResponse DeleteIndex(IDeleteIndexRequest deleteIndexRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IIndicesResponse> DeleteIndexAsync(Func<DeleteIndexDescriptor, DeleteIndexDescriptor> selector);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IIndicesResponse> DeleteIndexAsync(IDeleteIndexRequest deleteIndexRequest);
 
 		/// <summary>
@@ -531,13 +531,13 @@ namespace Nest
 		/// <param name="selector">A descriptor that describes the parameters for the clear cache operation</param>
 		IShardsOperationResponse ClearCache(Func<ClearCacheDescriptor, ClearCacheDescriptor> selector = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IShardsOperationResponse ClearCache(IClearCacheRequest clearCacheRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IShardsOperationResponse> ClearCacheAsync(Func<ClearCacheDescriptor, ClearCacheDescriptor> selector = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IShardsOperationResponse> ClearCacheAsync(IClearCacheRequest clearCacheRequest);
 
 		/// <summary>
@@ -548,13 +548,13 @@ namespace Nest
 		/// <param name="createIndexSelector">A descriptor that describes the parameters for the create index operation</param>
 		IIndicesOperationResponse CreateIndex(IndexName indexName, Func<CreateIndexDescriptor, ICreateIndexRequest> createIndexSelector = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IIndicesOperationResponse CreateIndex(ICreateIndexRequest createIndexRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IIndicesOperationResponse> CreateIndexAsync(IndexName indexName, Func<CreateIndexDescriptor, ICreateIndexRequest> createIndexSelector = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IIndicesOperationResponse> CreateIndexAsync(ICreateIndexRequest createIndexRequest);
 
 		/// <summary>
@@ -563,13 +563,13 @@ namespace Nest
 		/// <param name="selector">A descriptor to further describe the root operation</param>
 		IRootInfoResponse RootNodeInfo(Func<InfoDescriptor, InfoDescriptor> selector = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IRootInfoResponse RootNodeInfo(IInfoRequest infoRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IRootInfoResponse> RootNodeInfoAsync(Func<InfoDescriptor, InfoDescriptor> selector = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IRootInfoResponse> RootNodeInfoAsync(IInfoRequest infoRequest);
 
 		/// <summary>
@@ -580,13 +580,13 @@ namespace Nest
 		/// <param name="selector">Optionaly further describe the indices stats operation</param>
 		IGlobalStatsResponse IndicesStats(Func<IndicesStatsDescriptor, IndicesStatsDescriptor> selector = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IGlobalStatsResponse IndicesStats(IIndicesStatsRequest indicesStatsRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IGlobalStatsResponse> IndicesStatsAsync(Func<IndicesStatsDescriptor, IndicesStatsDescriptor> selector = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IGlobalStatsResponse> IndicesStatsAsync(IIndicesStatsRequest indicesStatsRequest);
 
 		/// <summary>
@@ -596,13 +596,13 @@ namespace Nest
 		/// <param name="selector">An optional descriptor to further describe the nodes info operation</param>
 		INodeInfoResponse NodesInfo(Func<NodesInfoDescriptor, NodesInfoDescriptor> selector = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		INodeInfoResponse NodesInfo(INodesInfoRequest nodesInfoRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<INodeInfoResponse> NodesInfoAsync(Func<NodesInfoDescriptor, NodesInfoDescriptor> selector = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<INodeInfoResponse> NodesInfoAsync(INodesInfoRequest nodesInfoRequest);
 
 		/// <summary>
@@ -612,13 +612,13 @@ namespace Nest
 		/// <param name="selector">An optional descriptor to further describe the nodes stats operation</param>
 		INodeStatsResponse NodesStats(Func<NodesStatsDescriptor, NodesStatsDescriptor> selector = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		INodeStatsResponse NodesStats(INodesStatsRequest nodesStatsRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<INodeStatsResponse> NodesStatsAsync(Func<NodesStatsDescriptor, NodesStatsDescriptor> selector = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<INodeStatsResponse> NodesStatsAsync(INodesStatsRequest nodesStatsRequest);
 
 		/// <summary>
@@ -628,13 +628,13 @@ namespace Nest
 		/// <returns>An optional descriptor to further describe the nodes hot threads operation</returns>
 		INodesHotThreadsResponse NodesHotThreads(Func<NodesHotThreadsDescriptor, NodesHotThreadsDescriptor> selector = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		INodesHotThreadsResponse NodesHotThreads(INodesHotThreadsRequest nodesHotThreadsRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<INodesHotThreadsResponse> NodesHotThreadsAsync(Func<NodesHotThreadsDescriptor, NodesHotThreadsDescriptor> selector = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<INodesHotThreadsResponse> NodesHotThreadsAsync(INodesHotThreadsRequest nodesHotThreadsRequest);
 
 		/// <summary>
@@ -644,13 +644,13 @@ namespace Nest
 		/// <param name="nodesShutdownSelector">A descriptor that describes the nodes shutdown operation</param>
 		INodesShutdownResponse NodesShutdown(Func<NodesShutdownDescriptor, NodesShutdownDescriptor> nodesShutdownSelector = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<INodesShutdownResponse> NodesShutdownAsync(Func<NodesShutdownDescriptor, NodesShutdownDescriptor> nodesShutdownSelector = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		INodesShutdownResponse NodesShutdown(INodesShutdownRequest nodesShutdownRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<INodesShutdownResponse> NodesShutdownAsync(INodesShutdownRequest nodesShutdownRequest);
 
 		/// <summary>
@@ -660,13 +660,13 @@ namespace Nest
 		/// <param name="selector">A descriptor that describes the index exist operation</param>
 		IExistsResponse IndexExists(Func<IndexExistsDescriptor, IndexExistsDescriptor> selector);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IExistsResponse IndexExists(IIndexExistsRequest indexExistsRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IExistsResponse> IndexExistsAsync(Func<IndexExistsDescriptor, IndexExistsDescriptor> selector);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IExistsResponse> IndexExistsAsync(IIndexExistsRequest indexExistsRequest);
 
 		/// <summary>
@@ -678,15 +678,15 @@ namespace Nest
 		ISearchResponse<T> MoreLikeThis<T>(Func<MoreLikeThisDescriptor<T>, MoreLikeThisDescriptor<T>> mltSelector)
 			where T : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		ISearchResponse<T> MoreLikeThis<T>(IMoreLikeThisRequest moreLikeThisRequest)
 			where T : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<ISearchResponse<T>> MoreLikeThisAsync<T>(Func<MoreLikeThisDescriptor<T>, MoreLikeThisDescriptor<T>> mltSelector)
 			where T : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<ISearchResponse<T>> MoreLikeThisAsync<T>(IMoreLikeThisRequest moreLikeThisRequest)
 			where T : class;
 
@@ -697,13 +697,13 @@ namespace Nest
 		/// <param name="clusterHealthSelector">An optional descriptor to further describe the cluster health operation</param>
 		IHealthResponse ClusterHealth(Func<ClusterHealthDescriptor, ClusterHealthDescriptor> clusterHealthSelector = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IHealthResponse ClusterHealth(IClusterHealthRequest clusterHealthRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IHealthResponse> ClusterHealthAsync(Func<ClusterHealthDescriptor, ClusterHealthDescriptor> clusterHealthSelector = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IHealthResponse> ClusterHealthAsync(IClusterHealthRequest clusterHealthRequest);
 
 		/// <summary>
@@ -714,13 +714,13 @@ namespace Nest
 		/// <param name="clusterStatsSelector">A descriptor that describes the cluster stats operation</param>
 		IClusterStatsResponse ClusterStats(Func<ClusterStatsDescriptor, ClusterStatsDescriptor> clusterStatsSelector = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IClusterStatsResponse> ClusterStatsAsync(Func<ClusterStatsDescriptor, ClusterStatsDescriptor> clusterStatsSelector = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IClusterStatsResponse ClusterStats(IClusterStatsRequest clusterStatsRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IClusterStatsResponse> ClusterStatsAsync(IClusterStatsRequest clusterStatsRequest);
 
 		/// <summary>
@@ -730,13 +730,13 @@ namespace Nest
 		/// </summary>
 		IClusterRerouteResponse ClusterReroute(Func<ClusterRerouteDescriptor, ClusterRerouteDescriptor> clusterRerouteSelector);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IClusterRerouteResponse> ClusterRerouteAsync(Func<ClusterRerouteDescriptor, ClusterRerouteDescriptor> clusterRerouteSelector);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IClusterRerouteResponse ClusterReroute(IClusterRerouteRequest clusterRerouteRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IClusterRerouteResponse> ClusterRerouteAsync(IClusterRerouteRequest clusterRerouteRequest);
 
 		/// <summary>
@@ -746,13 +746,13 @@ namespace Nest
 		/// <param name="analyzeSelector">A descriptor that describes the analyze operation</param>
 		IAnalyzeResponse Analyze(Func<AnalyzeDescriptor, AnalyzeDescriptor> analyzeSelector);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IAnalyzeResponse Analyze(IAnalyzeRequest analyzeRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IAnalyzeResponse> AnalyzeAsync(Func<AnalyzeDescriptor, AnalyzeDescriptor> analyzeSelector);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IAnalyzeResponse> AnalyzeAsync(IAnalyzeRequest analyzeRequest);
 
 		/// <summary>
@@ -764,36 +764,36 @@ namespace Nest
 		ISearchResponse<T> Search<T>(Func<SearchDescriptor<T>, ISearchRequest> searchSelector)
 			where T : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		ISearchResponse<T> Search<T>(ISearchRequest request)
 			where T : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		ISearchResponse<TResult> Search<T, TResult>(Func<SearchDescriptor<T>, ISearchRequest> searchSelector)
 			where T : class
 			where TResult : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		ISearchResponse<TResult> Search<T, TResult>(ISearchRequest request)
 			where T : class
 			where TResult : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		/// <typeparam name="T">The type used to infer the index and typename as well describe the query strongly typed</typeparam>
 		/// <param name="searchSelector">A descriptor that describes the parameters for the search operation</param>
 		Task<ISearchResponse<T>> SearchAsync<T>(Func<SearchDescriptor<T>, ISearchRequest> searchSelector)
 			where T : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<ISearchResponse<T>> SearchAsync<T>(ISearchRequest request)
 			where T : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<ISearchResponse<TResult>> SearchAsync<T, TResult>(Func<SearchDescriptor<T>, ISearchRequest> searchSelector)
 			where T : class
 			where TResult : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<ISearchResponse<TResult>> SearchAsync<T, TResult>(ISearchRequest request)
 			where T : class
 			where TResult : class;
@@ -808,72 +808,72 @@ namespace Nest
 		ISearchResponse<T> SearchTemplate<T>(Func<SearchTemplateDescriptor<T>, SearchTemplateDescriptor<T>> selector)
 			where T : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		ISearchResponse<TResult> SearchTemplate<T, TResult>(Func<SearchTemplateDescriptor<T>, SearchTemplateDescriptor<T>> selector)
 			where T : class
 			where TResult : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		ISearchResponse<T> SearchTemplate<T>(ISearchTemplateRequest request)
 			where T : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		ISearchResponse<TResult> SearchTemplate<T, TResult>(ISearchTemplateRequest request)
 			where T : class
 			where TResult : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<ISearchResponse<T>> SearchTemplateAsync<T>(Func<SearchTemplateDescriptor<T>, SearchTemplateDescriptor<T>> selector)
 			where T : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<ISearchResponse<TResult>> SearchTemplateAsync<T, TResult>(Func<SearchTemplateDescriptor<T>, SearchTemplateDescriptor<T>> selector)
 			where T : class
 			where TResult : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<ISearchResponse<T>> SearchTemplateAsync<T>(ISearchTemplateRequest request)
 			where T : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<ISearchResponse<TResult>> SearchTemplateAsync<T, TResult>(ISearchTemplateRequest request)
 			where T : class
 			where TResult : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IGetSearchTemplateResponse GetSearchTemplate(string name, Func<GetSearchTemplateDescriptor, GetSearchTemplateDescriptor> selector = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IGetSearchTemplateResponse GetSearchTemplate(IGetSearchTemplateRequest request);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IGetSearchTemplateResponse> GetSearchTemplateAsync(string name, Func<GetSearchTemplateDescriptor, GetSearchTemplateDescriptor> selector = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IGetSearchTemplateResponse> GetSearchTemplateAsync(IGetSearchTemplateRequest request);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IPutSearchTemplateResponse PutSearchTemplate(string name, Func<PutSearchTemplateDescriptor, PutSearchTemplateDescriptor> selector = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IPutSearchTemplateResponse PutSearchTemplate(IPutSearchTemplateRequest request);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IPutSearchTemplateResponse> PutSearchTemplateAsync(string name, Func<PutSearchTemplateDescriptor, PutSearchTemplateDescriptor> selector = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IPutSearchTemplateResponse> PutSearchTemplateAsync(IPutSearchTemplateRequest request);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IDeleteSearchTemplateResponse DeleteSearchTemplate(string name, Func<DeleteSearchTemplateDescriptor, DeleteSearchTemplateDescriptor> selector = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IDeleteSearchTemplateResponse DeleteSearchTemplate(IDeleteSearchTemplateRequest request);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IDeleteSearchTemplateResponse> DeleteSearchTemplateAsync(string name, Func<DeleteSearchTemplateDescriptor, DeleteSearchTemplateDescriptor> selector = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IDeleteSearchTemplateResponse> DeleteSearchTemplateAsync(IDeleteSearchTemplateRequest request);
 
 		/// <summary>
@@ -883,13 +883,13 @@ namespace Nest
 		/// <param name="multiSearchSelector">A descriptor that describes the search operations on the multi search api</param>
 		IMultiSearchResponse MultiSearch(Func<MultiSearchDescriptor, MultiSearchDescriptor> multiSearchSelector);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IMultiSearchResponse MultiSearch(IMultiSearchRequest multiSearchRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IMultiSearchResponse> MultiSearchAsync(Func<MultiSearchDescriptor, MultiSearchDescriptor> multiSearchSelector);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IMultiSearchResponse> MultiSearchAsync(IMultiSearchRequest multiSearchRequest);
 
 		/// <summary>
@@ -903,15 +903,15 @@ namespace Nest
 		ICountResponse Count<T>(Func<CountDescriptor<T>, CountDescriptor<T>> countSelector = null)
 			where T : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		ICountResponse Count<T>(ICountRequest countRequest)
 			where T : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<ICountResponse> CountAsync<T>(Func<CountDescriptor<T>, CountDescriptor<T>> countSelector = null)
 			where T : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<ICountResponse> CountAsync<T>(ICountRequest countRequest)
 			where T : class;
 
@@ -925,14 +925,14 @@ namespace Nest
 		IDeleteByQueryResponse DeleteByQuery<T>(Func<DeleteByQueryDescriptor<T>, DeleteByQueryDescriptor<T>> deleteByQuerySelector)
 			where T : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IDeleteByQueryResponse DeleteByQuery(IDeleteByQueryRequest deleteByQueryRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IDeleteByQueryResponse> DeleteByQueryAsync<T>(Func<DeleteByQueryDescriptor<T>, DeleteByQueryDescriptor<T>> deleteByQuerySelector)
 			where T : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IDeleteByQueryResponse> DeleteByQueryAsync(IDeleteByQueryRequest deleteByQueryRequest);
 
 		/// <summary>
@@ -943,13 +943,13 @@ namespace Nest
 		/// <param name="bulkRequest">A descriptor the describe the index/create/delete operation for this bulk operation</param>
 		IBulkResponse Bulk(IBulkRequest bulkRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IBulkResponse Bulk(Func<BulkDescriptor, BulkDescriptor> bulkSelector);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IBulkResponse> BulkAsync(IBulkRequest bulkRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IBulkResponse> BulkAsync(Func<BulkDescriptor, BulkDescriptor> bulkSelector);
 
 
@@ -963,15 +963,15 @@ namespace Nest
 		IIndexResponse Index<T>(T @object, Func<IndexDescriptor<T>, IIndexRequest<T>> indexSelector = null)
 			where T : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IIndexResponse Index<T>(IIndexRequest<T> indexRequest)
 			where T : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IIndexResponse> IndexAsync<T>(T @object, Func<IndexDescriptor<T>, IIndexRequest<T>> indexSelector = null)
 			where T : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IIndexResponse> IndexAsync<T>(IIndexRequest<T> indexRequest)
 			where T : class;
 
@@ -984,14 +984,14 @@ namespace Nest
 		IDeleteResponse Delete<T>(Func<DeleteDescriptor<T>, DeleteDescriptor<T>> deleteSelector)
 			where T : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IDeleteResponse Delete(IDeleteRequest deleteRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IDeleteResponse> DeleteAsync<T>(Func<DeleteDescriptor<T>, DeleteDescriptor<T>> deleteSelector)
 			where T : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IDeleteResponse> DeleteAsync(IDeleteRequest deleteRequest);
 
 		/// <summary>
@@ -1003,13 +1003,13 @@ namespace Nest
 		/// <param name="multiGetSelector">A descriptor describing which documents should be fetched</param>
 		IMultiGetResponse MultiGet(Func<MultiGetDescriptor, MultiGetDescriptor> multiGetSelector);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IMultiGetResponse MultiGet(IMultiGetRequest multiGetRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IMultiGetResponse> MultiGetAsync(Func<MultiGetDescriptor, MultiGetDescriptor> multiGetSelector);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IMultiGetResponse> MultiGetAsync(IMultiGetRequest multiGetRequest);
 
 		/// <summary>
@@ -1022,15 +1022,15 @@ namespace Nest
 		T Source<T>(Func<SourceDescriptor<T>, SourceDescriptor<T>> getSelector)
 			where T : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		T Source<T>(ISourceRequest sourceRequest)
 			where T : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<T> SourceAsync<T>(Func<SourceDescriptor<T>, SourceDescriptor<T>> getSelector)
 			where T : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<T> SourceAsync<T>(ISourceRequest sourceRequest)
 			where T : class;
 
@@ -1043,15 +1043,15 @@ namespace Nest
 		IGetResponse<T> Get<T>(Func<GetDescriptor<T>, GetDescriptor<T>> getSelector)
 			where T : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IGetResponse<T> Get<T>(IGetRequest getRequest)
 			where T : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IGetResponse<T>> GetAsync<T>(Func<GetDescriptor<T>, GetDescriptor<T>> getSelector)
 			where T : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IGetResponse<T>> GetAsync<T>(IGetRequest getRequest)
 			where T : class;
 
@@ -1066,13 +1066,13 @@ namespace Nest
 		/// <param name="aliasSelector">A desriptor that describes the parameters for the alias operation</param>
 		IIndicesOperationResponse Alias(Func<AliasDescriptor, AliasDescriptor> aliasSelector);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IIndicesOperationResponse Alias(IAliasRequest aliasRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IIndicesOperationResponse> AliasAsync(Func<AliasDescriptor, AliasDescriptor> aliasSelector);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IIndicesOperationResponse> AliasAsync(IAliasRequest aliasRequest);
 
 		/// <summary>
@@ -1084,13 +1084,13 @@ namespace Nest
 		/// <param name="getAliasDescriptor">A descriptor that describes which aliases/indexes we are interested int</param>
 		IGetAliasesResponse GetAlias(Func<GetAliasDescriptor, GetAliasDescriptor> getAliasDescriptor);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IGetAliasesResponse GetAlias(IGetAliasRequest getAliasRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IGetAliasesResponse> GetAliasAsync(Func<GetAliasDescriptor, GetAliasDescriptor> getAliasDescriptor);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IGetAliasesResponse> GetAliasAsync(IGetAliasRequest getAliasRequest);
 
 		/// <summary>
@@ -1101,13 +1101,13 @@ namespace Nest
 		/// <param name="getAliasesDescriptor">A descriptor that describes which aliases/indexes we are interested int</param>
 		IGetAliasesResponse GetAliases(Func<GetAliasesDescriptor, GetAliasesDescriptor> getAliasesDescriptor);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IGetAliasesResponse GetAliases(IGetAliasesRequest getAliasesRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IGetAliasesResponse> GetAliasesAsync(Func<GetAliasesDescriptor, GetAliasesDescriptor> getAliasesDescriptor);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IGetAliasesResponse> GetAliasesAsync(IGetAliasesRequest getAliasesRequest);
 
 		/// <summary>
@@ -1117,13 +1117,13 @@ namespace Nest
 		/// <param name="putAliasRequest">A descriptor that describes the put alias request</param>
 		IPutAliasResponse PutAlias(IPutAliasRequest putAliasRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IPutAliasResponse> PutAliasAsync(IPutAliasRequest putAliasRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IPutAliasResponse PutAlias(Func<PutAliasDescriptor, PutAliasDescriptor> putAliasDescriptor);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IPutAliasResponse> PutAliasAsync(Func<PutAliasDescriptor, PutAliasDescriptor> putAliasDescriptor);
 
 		/// <summary>
@@ -1133,13 +1133,13 @@ namespace Nest
 		/// <param name="deleteAliasRequest">A descriptor that describes the delete alias request</param>
 		IDeleteAliasResponse DeleteAlias(IDeleteAliasRequest deleteAliasRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IDeleteAliasResponse> DeleteAliasAsync(IDeleteAliasRequest deleteAliasRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IDeleteAliasResponse DeleteAlias<T>(Func<DeleteAliasDescriptor<T>, DeleteAliasDescriptor<T>> deleteAliasDescriptor) where T : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IDeleteAliasResponse> DeleteAliasAsync<T>(Func<DeleteAliasDescriptor<T>, DeleteAliasDescriptor<T>> deleteAliasDescriptor) where T : class;
 
 		/// <summary>
@@ -1151,13 +1151,13 @@ namespace Nest
 		/// <param name="optimizeSelector">An optional descriptor that further describes the optimize operation, i.e limit it to one index</param>
 		IShardsOperationResponse Optimize(Func<OptimizeDescriptor, OptimizeDescriptor> optimizeSelector = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IShardsOperationResponse Optimize(IOptimizeRequest optimizeRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IShardsOperationResponse> OptimizeAsync(Func<OptimizeDescriptor, OptimizeDescriptor> optimizeSelector = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IShardsOperationResponse> OptimizeAsync(IOptimizeRequest optimizeRequest);
 
 		/// <summary>
@@ -1167,13 +1167,13 @@ namespace Nest
 		/// <param name="selector">An optional descriptor that further describes the status operation, i.e limiting it to certain indices</param>
 		IStatusResponse Status(Func<IndicesStatusDescriptor, IndicesStatusDescriptor> selector = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IStatusResponse Status(IIndicesStatusRequest statusRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IStatusResponse> StatusAsync(Func<IndicesStatusDescriptor, IndicesStatusDescriptor> selector = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IStatusResponse> StatusAsync(IIndicesStatusRequest statusRequest);
 
 		/// <summary>
@@ -1185,14 +1185,14 @@ namespace Nest
 		ITermVectorResponse TermVector<T>(Func<TermvectorDescriptor<T>, TermvectorDescriptor<T>> termVectorSelector)
 			where T : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		ITermVectorResponse TermVector(ITermvectorRequest termvectorRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<ITermVectorResponse> TermVectorAsync<T>(Func<TermvectorDescriptor<T>, TermvectorDescriptor<T>> termVectorSelector)
 			where T : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<ITermVectorResponse> TermVectorAsync(ITermvectorRequest termvectorRequest);
 
 		/// <summary>
@@ -1204,14 +1204,14 @@ namespace Nest
 		IMultiTermVectorResponse MultiTermVectors<T>(Func<MultiTermVectorsDescriptor<T>, MultiTermVectorsDescriptor<T>> multiTermVectorsSelector)
 			where T : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IMultiTermVectorResponse MultiTermVectors(IMultiTermVectorsRequest multiTermVectorsRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IMultiTermVectorResponse> MultiTermVectorsAsync<T>(Func<MultiTermVectorsDescriptor<T>, MultiTermVectorsDescriptor<T>> multiTermVectorsSelector)
 			where T : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IMultiTermVectorResponse> MultiTermVectorsAsync(IMultiTermVectorsRequest multiTermVectorsRequest);
 
 		/// <summary>
@@ -1223,14 +1223,14 @@ namespace Nest
 		ISuggestResponse Suggest<T>(Func<SuggestDescriptor<T>, SuggestDescriptor<T>> selector)
 			where T : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		ISuggestResponse Suggest(ISuggestRequest suggestRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<ISuggestResponse> SuggestAsync<T>(Func<SuggestDescriptor<T>, SuggestDescriptor<T>> selector)
 			where T : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<ISuggestResponse> SuggestAsync(ISuggestRequest suggestRequest);
 
 
@@ -1241,13 +1241,13 @@ namespace Nest
 		/// <param name="clearScrollSelector">Specify the scroll id as well as request specific configuration</param>
 		IEmptyResponse ClearScroll(Func<ClearScrollDescriptor, ClearScrollDescriptor> clearScrollSelector);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IEmptyResponse ClearScroll(IClearScrollRequest clearScrollRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IEmptyResponse> ClearScrollAsync(Func<ClearScrollDescriptor, ClearScrollDescriptor> clearScrollSelector);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IEmptyResponse> ClearScrollAsync(IClearScrollRequest clearScrollRequest);
 
 		/// <summary>
@@ -1259,14 +1259,14 @@ namespace Nest
 		IExistsResponse DocumentExists<T>(Func<DocumentExistsDescriptor<T>, DocumentExistsDescriptor<T>> existsSelector)
 			where T : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IExistsResponse DocumentExists(IDocumentExistsRequest documentExistsRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IExistsResponse> DocumentExistsAsync<T>(Func<DocumentExistsDescriptor<T>, DocumentExistsDescriptor<T>> existsSelector)
 			where T : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IExistsResponse> DocumentExistsAsync(IDocumentExistsRequest documentExistsRequest);
 
 		/// <summary>
@@ -1277,13 +1277,13 @@ namespace Nest
 		/// <param name="selector">describe what the repository looks like</param>
 		IAcknowledgedResponse CreateRepository(string repository, Func<CreateRepositoryDescriptor, CreateRepositoryDescriptor> selector);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IAcknowledgedResponse CreateRepository(ICreateRepositoryRequest createRepositoryRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IAcknowledgedResponse> CreateRepositoryAsync(string repository, Func<CreateRepositoryDescriptor, CreateRepositoryDescriptor> selector);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IAcknowledgedResponse> CreateRepositoryAsync(ICreateRepositoryRequest createRepositoryRequest);
 
 		/// <summary>
@@ -1294,13 +1294,13 @@ namespace Nest
 		/// <param name="selector">Optionaly provide the delete operation with more details</param>>
 		IAcknowledgedResponse DeleteRepository(string repository, Func<DeleteRepositoryDescriptor, DeleteRepositoryDescriptor> selector = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IAcknowledgedResponse DeleteRepository(IDeleteRepositoryRequest deleteRepositoryRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IAcknowledgedResponse> DeleteRepositoryAsync(string repository, Func<DeleteRepositoryDescriptor, DeleteRepositoryDescriptor> selector = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IAcknowledgedResponse> DeleteRepositoryAsync(IDeleteRepositoryRequest deleteRepositoryRequest);
 
 		/// <summary>
@@ -1312,19 +1312,19 @@ namespace Nest
 		/// <param name="selector">Optionally provide more details about the snapshot operation</param>
 		ISnapshotResponse Snapshot(string repository, string snapshotName, Func<SnapshotDescriptor, SnapshotDescriptor> selector = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		ISnapshotResponse Snapshot(ISnapshotRequest snapshotRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<ISnapshotResponse> SnapshotAsync(string repository, string snapshotName, Func<SnapshotDescriptor, SnapshotDescriptor> selector = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<ISnapshotResponse> SnapshotAsync(ISnapshotRequest snapshotRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IObservable<ISnapshotStatusResponse> SnapshotObservable(TimeSpan interval, Func<SnapshotDescriptor, SnapshotDescriptor> snapshotSelector = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IObservable<ISnapshotStatusResponse> SnapshotObservable(TimeSpan interval, ISnapshotRequest snapshotRequest);
 
 		/// <summary>
@@ -1336,13 +1336,13 @@ namespace Nest
 		/// <param name="selector">Optionally further describe the delete snapshot operation</param>
 		IAcknowledgedResponse DeleteSnapshot(string repository, string snapshotName, Func<DeleteSnapshotDescriptor, DeleteSnapshotDescriptor> selector = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IAcknowledgedResponse DeleteSnapshot(IDeleteSnapshotRequest deleteSnapshotRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IAcknowledgedResponse> DeleteSnapshotAsync(string repository, string snapshotName, Func<DeleteSnapshotDescriptor, DeleteSnapshotDescriptor> selector = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IAcknowledgedResponse> DeleteSnapshotAsync(IDeleteSnapshotRequest deleteSnapshotRequest);
 
 		/// <summary>
@@ -1354,13 +1354,13 @@ namespace Nest
 		/// <param name="selector">Optionally further describe the get snapshot operation</param>
 		IGetSnapshotResponse GetSnapshot(string repository, string snapshotName, Func<GetSnapshotDescriptor, GetSnapshotDescriptor> selector = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IGetSnapshotResponse GetSnapshot(IGetSnapshotRequest getSnapshotRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IGetSnapshotResponse> GetSnapshotAsync(string repository, string snapshotName, Func<GetSnapshotDescriptor, GetSnapshotDescriptor> selector = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IGetSnapshotResponse> GetSnapshotAsync(IGetSnapshotRequest getSnapshotRequest);
 
 		/// <summary>
@@ -1372,19 +1372,19 @@ namespace Nest
 		/// <param name="selector">Optionally further describe the restore operation</param>
 		IRestoreResponse Restore(string repository, string snapshotName, Func<RestoreDescriptor, RestoreDescriptor> selector = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IRestoreResponse Restore(IRestoreRequest restoreRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IRestoreResponse> RestoreAsync(string repository, string snapshotName, Func<RestoreDescriptor, RestoreDescriptor> selector = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IRestoreResponse> RestoreAsync(IRestoreRequest restoreRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IObservable<IRecoveryStatusResponse> RestoreObservable(TimeSpan interval, Func<RestoreDescriptor, RestoreDescriptor> selector = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IObservable<IRecoveryStatusResponse> RestoreObservable(TimeSpan interval, IRestoreRequest restoreRequest);
 
 		/// <summary>
@@ -1394,13 +1394,13 @@ namespace Nest
 		/// </summary>
 		IClusterPutSettingsResponse ClusterSettings(Func<ClusterSettingsDescriptor, ClusterSettingsDescriptor> clusterHealthSelector);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IClusterPutSettingsResponse> ClusterSettingsAsync(Func<ClusterSettingsDescriptor, ClusterSettingsDescriptor> clusterHealthSelector);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IClusterPutSettingsResponse ClusterSettings(IClusterSettingsRequest clusterSettingsRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IClusterPutSettingsResponse> ClusterSettingsAsync(IClusterSettingsRequest clusterSettingsRequest);
 
 		/// <summary>
@@ -1410,13 +1410,13 @@ namespace Nest
 		/// </summary>
 		IClusterGetSettingsResponse ClusterGetSettings(Func<ClusterGetSettingsDescriptor, ClusterGetSettingsDescriptor> selector);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IClusterGetSettingsResponse> ClusterGetSettingsAsync(Func<ClusterGetSettingsDescriptor, ClusterGetSettingsDescriptor> selector);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IClusterGetSettingsResponse ClusterGetSettings(IClusterGetSettingsRequest clusterSettingsRequest = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IClusterGetSettingsResponse> ClusterGetSettingsAsync(IClusterGetSettingsRequest clusterSettingsRequest = null);
 
 		/// <summary>
@@ -1424,91 +1424,91 @@ namespace Nest
 		/// </summary>
 		IClusterPendingTasksResponse ClusterPendingTasks(Func<ClusterPendingTasksDescriptor, ClusterPendingTasksDescriptor> pendingTasksSelector = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IClusterPendingTasksResponse> ClusterPendingTasksAsync(Func<ClusterPendingTasksDescriptor, ClusterPendingTasksDescriptor> pendingTasksSelector = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IClusterPendingTasksResponse ClusterPendingTasks(IClusterPendingTasksRequest pendingTasksRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IClusterPendingTasksResponse> ClusterPendingTasksAsync(IClusterPendingTasksRequest pendingTasksRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IExistsResponse AliasExists(Func<AliasExistsDescriptor, AliasExistsDescriptor> selector);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IExistsResponse AliasExists(IAliasExistsRequest AliasRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IExistsResponse> AliasExistsAsync(Func<AliasExistsDescriptor, AliasExistsDescriptor> selector);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IExistsResponse> AliasExistsAsync(IAliasExistsRequest AliasRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IExistsResponse TypeExists(Func<TypeExistsDescriptor, TypeExistsDescriptor> selector);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IExistsResponse TypeExists(ITypeExistsRequest TypeRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IExistsResponse> TypeExistsAsync(Func<TypeExistsDescriptor, TypeExistsDescriptor> selector);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IExistsResponse> TypeExistsAsync(ITypeExistsRequest TypeRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IExplainResponse<T> Explain<T>(Func<ExplainDescriptor<T>, ExplainDescriptor<T>> querySelector)
 			where T : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IExplainResponse<T> Explain<T>(IExplainRequest explainRequest)
 			where T : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IExplainResponse<T>> ExplainAsync<T>(Func<ExplainDescriptor<T>, ExplainDescriptor<T>> querySelector)
 			where T : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IExplainResponse<T>> ExplainAsync<T>(IExplainRequest explainRequest)
 			where T : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IMultiPercolateResponse MultiPercolate(Func<MultiPercolateDescriptor, MultiPercolateDescriptor> multiPercolateSelector);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IMultiPercolateResponse MultiPercolate(IMultiPercolateRequest multiRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IMultiPercolateResponse> MultiPercolateAsync(Func<MultiPercolateDescriptor, MultiPercolateDescriptor> multiPercolateSelector);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IMultiPercolateResponse> MultiPercolateAsync(IMultiPercolateRequest multiPercolateRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IGetFieldMappingResponse GetFieldMapping<T>(Func<GetFieldMappingDescriptor<T>, GetFieldMappingDescriptor<T>> selector = null)
 			where T : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IGetFieldMappingResponse GetFieldMapping(IGetFieldMappingRequest getFieldMappingRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IGetFieldMappingResponse> GetFieldMappingAsync<T>(Func<GetFieldMappingDescriptor<T>, GetFieldMappingDescriptor<T>> selector = null)
 			where T : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IGetFieldMappingResponse> GetFieldMappingAsync(IGetFieldMappingRequest getFieldMappingRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IExistsResponse TemplateExists(Func<TemplateExistsDescriptor, TemplateExistsDescriptor> selector);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IExistsResponse TemplateExists(ITemplateExistsRequest templateRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IExistsResponse> TemplateExistsAsync(Func<TemplateExistsDescriptor, TemplateExistsDescriptor> selector);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IExistsResponse> TemplateExistsAsync(ITemplateExistsRequest templateRequest);
 
 		/// <summary>
@@ -1516,238 +1516,238 @@ namespace Nest
 		/// </summary>
 		IPingResponse Ping(Func<PingDescriptor, PingDescriptor> pingSelector = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IPingResponse> PingAsync(Func<PingDescriptor, PingDescriptor> pingSelector = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IPingResponse Ping(IPingRequest pingRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IPingResponse> PingAsync(IPingRequest pingRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		ISearchShardsResponse SearchShards<T>(Func<SearchShardsDescriptor<T>, SearchShardsDescriptor<T>> searchSelector) where T : class;
 
 		ISearchShardsResponse SearchShards(ISearchShardsRequest request);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<ISearchShardsResponse> SearchShardsAsync<T>(Func<SearchShardsDescriptor<T>, SearchShardsDescriptor<T>> searchSelector)
 			where T : class;
 
 		Task<ISearchShardsResponse> SearchShardsAsync(ISearchShardsRequest request);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IGetRepositoryResponse GetRepository(Func<GetRepositoryDescriptor, GetRepositoryDescriptor> selector);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IGetRepositoryResponse GetRepository(IGetRepositoryRequest request);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IGetRepositoryResponse> GetRepositoryAsync(Func<GetRepositoryDescriptor, GetRepositoryDescriptor> selector);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IGetRepositoryResponse> GetRepositoryAsync(IGetRepositoryRequest request);
 
 		ISnapshotStatusResponse SnapshotStatus(Func<SnapshotStatusDescriptor, SnapshotStatusDescriptor> selector = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		ISnapshotStatusResponse SnapshotStatus(ISnapshotStatusRequest getSnapshotRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<ISnapshotStatusResponse> SnapshotStatusAsync(Func<SnapshotStatusDescriptor, SnapshotStatusDescriptor> selector = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<ISnapshotStatusResponse> SnapshotStatusAsync(ISnapshotStatusRequest getSnapshotRequest);
 
 		IRecoveryStatusResponse RecoveryStatus(Func<RecoveryStatusDescriptor, RecoveryStatusDescriptor> selector = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IRecoveryStatusResponse RecoveryStatus(IRecoveryStatusRequest statusRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IRecoveryStatusResponse> RecoveryStatusAsync(Func<RecoveryStatusDescriptor, RecoveryStatusDescriptor> selector = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IRecoveryStatusResponse> RecoveryStatusAsync(IRecoveryStatusRequest statusRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IPutScriptResponse PutScript(Func<PutScriptDescriptor, PutScriptDescriptor> putScriptDescriptor);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IPutScriptResponse> PutScriptAsync(Func<PutScriptDescriptor, PutScriptDescriptor> putScriptDescriptor);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IGetScriptResponse GetScript(Func<GetScriptDescriptor, GetScriptDescriptor> getScriptDescriptor);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IGetScriptResponse> GetScriptAsync(Func<GetScriptDescriptor, GetScriptDescriptor> getScriptDescriptor);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IDeleteScriptResponse DeleteScript(Func<DeleteScriptDescriptor, DeleteScriptDescriptor> deleteScriptDescriptor);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IDeleteScriptResponse> DeleteScriptAsync(Func<DeleteScriptDescriptor, DeleteScriptDescriptor> deleteScriptDescriptor);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IGetIndexResponse GetIndex(Func<GetIndexDescriptor, GetIndexDescriptor> getIndexSelector);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IGetIndexResponse GetIndex(IGetIndexRequest createIndexRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IGetIndexResponse> GetIndexAsync(Func<GetIndexDescriptor, GetIndexDescriptor> getIndexSelector);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IGetIndexResponse> GetIndexAsync(IGetIndexRequest createIndexRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IExistsResponse SearchExists<T>(Func<SearchExistsDescriptor<T>, SearchExistsDescriptor<T>> selector)
 			where T : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IExistsResponse SearchExists(ISearchExistsRequest indexRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IExistsResponse> SearchExistsAsync<T>(Func<SearchExistsDescriptor<T>, SearchExistsDescriptor<T>> selector)
 			where T : class;
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IExistsResponse> SearchExistsAsync(ISearchExistsRequest indexRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IVerifyRepositoryResponse VerifyRepository(string name, Func<VerifyRepositoryDescriptor, VerifyRepositoryDescriptor> selector = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IVerifyRepositoryResponse VerifyRepository(IVerifyRepositoryRequest verifyRepositoryRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IVerifyRepositoryResponse> VerifyRepositoryAsync(string name, Func<VerifyRepositoryDescriptor, VerifyRepositoryDescriptor> selector = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IVerifyRepositoryResponse> VerifyRepositoryAsync(IVerifyRepositoryRequest verifyRepositoryRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IUpgradeResponse Upgrade(IUpgradeRequest upgradeRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IUpgradeResponse Upgrade(Func<UpgradeDescriptor, UpgradeDescriptor> upgradeDescriptor = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IUpgradeResponse> UpgradeAsync(IUpgradeRequest upgradeRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IUpgradeResponse> UpgradeAsync(Func<UpgradeDescriptor, UpgradeDescriptor> upgradeDescriptor = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IUpgradeStatusResponse UpgradeStatus(IUpgradeStatusRequest upgradeRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IUpgradeStatusResponse UpgradeStatus(Func<UpgradeStatusDescriptor, UpgradeStatusDescriptor> upgradeDescriptor = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IUpgradeStatusResponse> UpgradeStatusAsync(IUpgradeStatusRequest upgradeRequest);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		Task<IUpgradeStatusResponse> UpgradeStatusAsync(Func<UpgradeStatusDescriptor, UpgradeStatusDescriptor> upgradeDescriptor = null);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		ICatResponse<CatAliasesRecord> CatAliases(Func<CatAliasesDescriptor, CatAliasesDescriptor> selector = null);
 
 		ICatResponse<CatAliasesRecord> CatAliases(ICatAliasesRequest request);
 		Task<ICatResponse<CatAliasesRecord>> CatAliasesAsync(Func<CatAliasesDescriptor, CatAliasesDescriptor> selector = null);
 		Task<ICatResponse<CatAliasesRecord>> CatAliasesAsync(ICatAliasesRequest request);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		ICatResponse<CatAllocationRecord> CatAllocation(Func<CatAllocationDescriptor, CatAllocationDescriptor> selector = null);
 
 		ICatResponse<CatAllocationRecord> CatAllocation(ICatAllocationRequest request);
 		Task<ICatResponse<CatAllocationRecord>> CatAllocationAsync(Func<CatAllocationDescriptor, CatAllocationDescriptor> selector = null);
 		Task<ICatResponse<CatAllocationRecord>> CatAllocationAsync(ICatAllocationRequest request);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		ICatResponse<CatCountRecord> CatCount(Func<CatCountDescriptor, CatCountDescriptor> selector = null);
 
 		ICatResponse<CatCountRecord> CatCount(ICatCountRequest request);
 		Task<ICatResponse<CatCountRecord>> CatCountAsync(Func<CatCountDescriptor, CatCountDescriptor> selector = null);
 		Task<ICatResponse<CatCountRecord>> CatCountAsync(ICatCountRequest request);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		ICatResponse<CatHealthRecord> CatHealth(Func<CatHealthDescriptor, CatHealthDescriptor> selector = null);
 
 		ICatResponse<CatHealthRecord> CatHealth(ICatHealthRequest request);
 		Task<ICatResponse<CatHealthRecord>> CatHealthAsync(Func<CatHealthDescriptor, CatHealthDescriptor> selector = null);
 		Task<ICatResponse<CatHealthRecord>> CatHealthAsync(ICatHealthRequest request);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		ICatResponse<CatIndicesRecord> CatIndices(Func<CatIndicesDescriptor, CatIndicesDescriptor> selector = null);
 
 		ICatResponse<CatIndicesRecord> CatIndices(ICatIndicesRequest request);
 		Task<ICatResponse<CatIndicesRecord>> CatIndicesAsync(Func<CatIndicesDescriptor, CatIndicesDescriptor> selector = null);
 		Task<ICatResponse<CatIndicesRecord>> CatIndicesAsync(ICatIndicesRequest request);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		ICatResponse<CatMasterRecord> CatMaster(Func<CatMasterDescriptor, CatMasterDescriptor> selector = null);
 
 		ICatResponse<CatMasterRecord> CatMaster(ICatMasterRequest request);
 		Task<ICatResponse<CatMasterRecord>> CatMasterAsync(Func<CatMasterDescriptor, CatMasterDescriptor> selector = null);
 		Task<ICatResponse<CatMasterRecord>> CatMasterAsync(ICatMasterRequest request);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		ICatResponse<CatNodesRecord> CatNodes(Func<CatNodesDescriptor, CatNodesDescriptor> selector = null);
 
 		ICatResponse<CatNodesRecord> CatNodes(ICatNodesRequest request);
 		Task<ICatResponse<CatNodesRecord>> CatNodesAsync(Func<CatNodesDescriptor, CatNodesDescriptor> selector = null);
 		Task<ICatResponse<CatNodesRecord>> CatNodesAsync(ICatNodesRequest request);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		ICatResponse<CatPendingTasksRecord> CatPendingTasks(Func<CatPendingTasksDescriptor, CatPendingTasksDescriptor> selector = null);
 
 		ICatResponse<CatPendingTasksRecord> CatPendingTasks(ICatPendingTasksRequest request);
 		Task<ICatResponse<CatPendingTasksRecord>> CatPendingTasksAsync(Func<CatPendingTasksDescriptor, CatPendingTasksDescriptor> selector = null);
 		Task<ICatResponse<CatPendingTasksRecord>> CatPendingTasksAsync(ICatPendingTasksRequest request);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		ICatResponse<CatPluginsRecord> CatPlugins(Func<CatPluginsDescriptor, CatPluginsDescriptor> selector = null);
 
 		ICatResponse<CatPluginsRecord> CatPlugins(ICatPluginsRequest request);
 		Task<ICatResponse<CatPluginsRecord>> CatPluginsAsync(Func<CatPluginsDescriptor, CatPluginsDescriptor> selector = null);
 		Task<ICatResponse<CatPluginsRecord>> CatPluginsAsync(ICatPluginsRequest request);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		ICatResponse<CatRecoveryRecord> CatRecovery(Func<CatRecoveryDescriptor, CatRecoveryDescriptor> selector = null);
 
 		ICatResponse<CatRecoveryRecord> CatRecovery(ICatRecoveryRequest request);
 		Task<ICatResponse<CatRecoveryRecord>> CatRecoveryAsync(Func<CatRecoveryDescriptor, CatRecoveryDescriptor> selector = null);
 		Task<ICatResponse<CatRecoveryRecord>> CatRecoveryAsync(ICatRecoveryRequest request);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		ICatResponse<CatThreadPoolRecord> CatThreadPool(Func<CatThreadPoolDescriptor, CatThreadPoolDescriptor> selector = null);
 
 		ICatResponse<CatThreadPoolRecord> CatThreadPool(ICatThreadPoolRequest request);
 		Task<ICatResponse<CatThreadPoolRecord>> CatThreadPoolAsync(Func<CatThreadPoolDescriptor, CatThreadPoolDescriptor> selector = null);
 		Task<ICatResponse<CatThreadPoolRecord>> CatThreadPoolAsync(ICatThreadPoolRequest request);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		ICatResponse<CatShardsRecord> CatShards(Func<CatShardsDescriptor, CatShardsDescriptor> selector = null);
 
 		ICatResponse<CatShardsRecord> CatShards(ICatShardsRequest request);
 		Task<ICatResponse<CatShardsRecord>> CatShardsAsync(Func<CatShardsDescriptor, CatShardsDescriptor> selector = null);
 		Task<ICatResponse<CatShardsRecord>> CatShardsAsync(ICatShardsRequest request);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		ICatResponse<CatFielddataRecord> CatFielddata(Func<CatFielddataDescriptor, CatFielddataDescriptor> selector = null);
 
 		ICatResponse<CatFielddataRecord> CatFielddata(ICatFielddataRequest request);
 		Task<ICatResponse<CatFielddataRecord>> CatFielddataAsync(Func<CatFielddataDescriptor, CatFielddataDescriptor> selector = null);
 		Task<ICatResponse<CatFielddataRecord>> CatFielddataAsync(ICatFielddataRequest request);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		ICatResponse<CatSegmentsRecord> CatSegments(Func<CatSegmentsDescriptor, CatSegmentsDescriptor> selector = null);
 		ICatResponse<CatSegmentsRecord> CatSegments(ICatSegmentsRequest request);
 		Task<ICatResponse<CatSegmentsRecord>> CatSegmentsAsync(Func<CatSegmentsDescriptor, CatSegmentsDescriptor> selector = null);
 		Task<ICatResponse<CatSegmentsRecord>> CatSegmentsAsync(ICatSegmentsRequest request);
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		IFieldStatsResponse FieldStats(Func<FieldStatsDescriptor, FieldStatsDescriptor> selector);
 		IFieldStatsResponse FieldStats(IFieldStatsRequest request);
 		Task<IFieldStatsResponse> FieldStatsAsync(Func<FieldStatsDescriptor, FieldStatsDescriptor> selector);

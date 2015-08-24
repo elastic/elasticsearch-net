@@ -7,7 +7,7 @@ namespace Nest
 {
 	public partial class ElasticClient
 	{
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public IAcknowledgedResponse UpdateSettings(Func<UpdateSettingsDescriptor, UpdateSettingsDescriptor> updateSettingsSelector)
 		{
 			return this.Dispatcher.Dispatch<UpdateSettingsDescriptor, UpdateSettingsRequestParameters, AcknowledgedResponse>(
@@ -16,7 +16,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public IAcknowledgedResponse UpdateSettings(IUpdateSettingsRequest updateSettingsRequest)
 		{
 			return this.Dispatcher.Dispatch<IUpdateSettingsRequest, UpdateSettingsRequestParameters, AcknowledgedResponse>(
@@ -25,7 +25,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public Task<IAcknowledgedResponse> UpdateSettingsAsync(Func<UpdateSettingsDescriptor, UpdateSettingsDescriptor> updateSettingsSelector)
 		{
 			return this.Dispatcher.DispatchAsync<UpdateSettingsDescriptor, UpdateSettingsRequestParameters, AcknowledgedResponse, IAcknowledgedResponse>(
@@ -34,7 +34,7 @@ namespace Nest
 				);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public Task<IAcknowledgedResponse> UpdateSettingsAsync(IUpdateSettingsRequest updateSettingsRequest)
 		{
 			return this.Dispatcher.DispatchAsync<IUpdateSettingsRequest, UpdateSettingsRequestParameters, AcknowledgedResponse, IAcknowledgedResponse>(

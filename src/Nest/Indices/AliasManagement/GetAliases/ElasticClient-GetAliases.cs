@@ -13,7 +13,7 @@ namespace Nest
 	public partial class ElasticClient
 	{
 	
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public IGetAliasesResponse GetAliases(Func<GetAliasesDescriptor, GetAliasesDescriptor> getAliasesDescriptor)
 		{
 			return this.Dispatcher.Dispatch<GetAliasesDescriptor, GetAliasesRequestParameters, GetAliasesResponse>(
@@ -24,7 +24,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public IGetAliasesResponse GetAliases(IGetAliasesRequest getAliasesRequest)
 		{
 			return this.Dispatcher.Dispatch<IGetAliasesRequest, GetAliasesRequestParameters, GetAliasesResponse>(
@@ -35,7 +35,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public Task<IGetAliasesResponse> GetAliasesAsync(Func<GetAliasesDescriptor, GetAliasesDescriptor> getAliasesDescriptor)
 		{
 			return this.Dispatcher.DispatchAsync<GetAliasesDescriptor, GetAliasesRequestParameters, GetAliasesResponse, IGetAliasesResponse>(
@@ -46,7 +46,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public Task<IGetAliasesResponse> GetAliasesAsync(IGetAliasesRequest getAliasesRequest)
 		{
 			return this.Dispatcher.DispatchAsync<IGetAliasesRequest, GetAliasesRequestParameters, GetAliasesResponse, IGetAliasesResponse>(
@@ -57,7 +57,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		private GetAliasesResponse DeserializeGetAliasesResponse(IApiCallDetails apiCallDetails, Stream stream)
 		{
 			if (!apiCallDetails.Success)

@@ -7,7 +7,7 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public IEmptyResponse ClearScroll(Func<ClearScrollDescriptor, ClearScrollDescriptor> clearScrollSelector)
 		{
 			return this.Dispatcher.Dispatch<ClearScrollDescriptor, ClearScrollRequestParameters, EmptyResponse>(
@@ -20,7 +20,7 @@ namespace Nest
 				);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public IEmptyResponse ClearScroll(IClearScrollRequest clearScrollRequest)
 		{
 			return this.Dispatcher.Dispatch<IClearScrollRequest, ClearScrollRequestParameters, EmptyResponse>(
@@ -33,7 +33,7 @@ namespace Nest
 				);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public Task<IEmptyResponse> ClearScrollAsync(Func<ClearScrollDescriptor, ClearScrollDescriptor> clearScrollSelector)
 		{
 			return this.Dispatcher.DispatchAsync<ClearScrollDescriptor, ClearScrollRequestParameters, EmptyResponse, IEmptyResponse>(
@@ -46,7 +46,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public Task<IEmptyResponse> ClearScrollAsync(IClearScrollRequest clearScrollRequest)
 		{
 			return this.Dispatcher.DispatchAsync<IClearScrollRequest, ClearScrollRequestParameters, EmptyResponse, IEmptyResponse>(

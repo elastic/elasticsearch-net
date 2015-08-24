@@ -8,7 +8,7 @@ namespace Nest
 {
 	public partial class ElasticClient
 	{
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public ICatResponse<CatPendingTasksRecord> CatPendingTasks(Func<CatPendingTasksDescriptor, CatPendingTasksDescriptor> selector = null) =>
 			this.DoCat<CatPendingTasksDescriptor, CatPendingTasksRequestParameters, CatPendingTasksRecord>(selector, this.LowLevelDispatch.CatPendingTasksDispatch<CatResponse<CatPendingTasksRecord>>);
 

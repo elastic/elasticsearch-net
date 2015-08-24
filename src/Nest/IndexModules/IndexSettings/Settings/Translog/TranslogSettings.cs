@@ -27,13 +27,13 @@ namespace Nest
 
 	public class TranslogSettings : ITranslogSettings
 	{
-		/// </inheritdoc>
+		/// <inheritdoc/>
 		public ITranslogFlushSettings Flush { get; set; }
-		/// </inheritdoc>
+		/// <inheritdoc/>
 		public TimeUnitExpression SyncInterval { get; set; }
-		/// </inheritdoc>
+		/// <inheritdoc/>
 		public TranslogDurability? Durability { get; set; }
-		/// </inheritdoc>
+		/// <inheritdoc/>
 		public TranslogWriteMode? FileSystemType { get; set; }
 	}
 
@@ -46,19 +46,19 @@ namespace Nest
 		TranslogDurability? ITranslogSettings.Durability { get; set; }
 		TranslogWriteMode? ITranslogSettings.FileSystemType { get; set; }
 
-		/// </inheritdoc>
+		/// <inheritdoc/>
 		public TranslogSettingsDescriptor Flush(Func<TranslogFlushSettingsDescriptor, ITranslogFlushSettings> selector) =>
 			Assign(a => a.Flush = selector?.Invoke(new TranslogFlushSettingsDescriptor()));
 
-		/// </inheritdoc>
+		/// <inheritdoc/>
 		public TranslogSettingsDescriptor Durability(TranslogDurability? durability) =>
 			Assign(a => a.Durability = durability);
 
-		/// </inheritdoc>
+		/// <inheritdoc/>
 		public TranslogSettingsDescriptor SyncInterval(TimeUnitExpression time) =>
 			Assign(a => a.SyncInterval = time);
 
-		/// </inheritdoc>
+		/// <inheritdoc/>
 		public TranslogSettingsDescriptor FileSystemType(TranslogWriteMode? writeMode) =>
 			Assign(a => a.FileSystemType = writeMode);
 

@@ -8,7 +8,7 @@ namespace Nest
 {
 	public partial class ElasticClient
 	{
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public ICatResponse<CatPluginsRecord> CatPlugins(Func<CatPluginsDescriptor, CatPluginsDescriptor> selector = null) =>
 			this.DoCat<CatPluginsDescriptor, CatPluginsRequestParameters, CatPluginsRecord>(selector, this.LowLevelDispatch.CatPluginsDispatch<CatResponse<CatPluginsRecord>>);
 

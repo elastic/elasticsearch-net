@@ -1,0 +1,57 @@
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
+
+namespace Nest
+{
+	/// <summary>
+	/// A token filter of type stop that removes stop words from token streams.
+	/// </summary>
+	public interface IStopTokenFilter : ITokenFilter
+	{
+		/// <summary>
+		/// A list of stop words to use. Defaults to `_english_` stop words.
+		/// </summary>
+		[JsonProperty("stopwords")]
+		StopWords Stopwords { get; set; }
+
+		/// <summary>
+		/// Set to true to lower case all words first. Defaults to false.
+		/// </summary>
+		[JsonProperty("ignore_case")]
+		bool? IgnoreCase { get; set; }
+
+		/// <summary>
+		/// A path (either relative to config location, or absolute) to a stopwords 
+		/// file configuration. Each stop word should be in its own "line" 
+		/// (separated by a line break). The file must be UTF-8 encoded.
+		/// </summary>
+		[JsonProperty("stopwords_path")]
+		string StopwordsPath { get; set; }
+
+		/// <summary>
+		/// Set to false in order to not ignore the last term of a search if it is a stop word. 
+		/// This is very useful for  the completion suggester as a query like green a can
+		/// be extended to green apple even though  you remove stop words in general. Defaults to true.
+		/// </summary>
+		[JsonProperty("remove_trailing")]
+		bool? RemoveTrailing { get; set; }
+	}
+
+	/// <inheritdoc/>
+	public class StopTokenFilter : TokenFilterBase, IStopTokenFilter
+	{
+		public StopTokenFilter() : base("stop") { }
+
+		/// <inheritdoc/>
+		public StopWords Stopwords { get; set; }
+
+		/// <inheritdoc/>
+		public bool? IgnoreCase { get; set; }
+
+		/// <inheritdoc/>
+		public string StopwordsPath { get; set; }
+
+		/// <inheritdoc/>
+		public bool? RemoveTrailing { get; set; }
+	}
+}

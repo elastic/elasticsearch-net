@@ -6,17 +6,21 @@ namespace Nest
 	/// <summary>
 	/// A token filter which removes elisions. For example, “l’avion” (the plane) will tokenized as “avion” (plane).
 	/// </summary>
-    public class ElisionTokenFilter : TokenFilterBase
-    {
-		public ElisionTokenFilter()
-			: base("elision")
-        {
-        }
-
+	public interface IElisionTokenFilter : ITokenFilter
+	{
 		/// <summary>
 		/// Accepts articles setting which is a set of stop words articles
 		/// </summary>
-        [JsonProperty("articles")]
-        public IEnumerable<string> Articles { get; set; }
-    }
+		[JsonProperty("articles")]
+		IEnumerable<string> Articles { get; set; }
+	}
+
+	/// <inheritdoc/>
+	public class ElisionTokenFilter : TokenFilterBase, IElisionTokenFilter
+	{
+		public ElisionTokenFilter() : base("elision") { }
+
+		/// <inheritdoc/>
+		public IEnumerable<string> Articles { get; set; }
+	}
 }

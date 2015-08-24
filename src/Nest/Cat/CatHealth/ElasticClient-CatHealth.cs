@@ -9,7 +9,7 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public ICatResponse<CatHealthRecord> CatHealth(Func<CatHealthDescriptor, CatHealthDescriptor> selector = null) => 
 			DoCat<CatHealthDescriptor, CatHealthRequestParameters, CatHealthRecord>(selector, LowLevelDispatch.CatHealthDispatch<CatResponse<CatHealthRecord>>);
 

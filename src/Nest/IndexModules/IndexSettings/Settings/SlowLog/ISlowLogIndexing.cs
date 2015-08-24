@@ -37,22 +37,22 @@ namespace Nest
 		TimeUnitExpression ISlowLogIndexing.TresholdTrace { get; set; }
 		TimeUnitExpression ISlowLogIndexing.TresholdWarn { get; set; }
 
-		/// </inheritdoc>
+		/// <inheritdoc/>
 		public SlowLogIndexingDescriptor LogLevel(SlowLogLevel? level) => Assign(a => a.LogLevel = level);
 
-		/// </inheritdoc>
+		/// <inheritdoc/>
 		public SlowLogIndexingDescriptor Source(int? source) => Assign(a => a.Source = source);
 
-		/// </inheritdoc>
+		/// <inheritdoc/>
 		public SlowLogIndexingDescriptor TresholdDebug(TimeUnitExpression time) => Assign(a => a.TresholdDebug = time);
 
-		/// </inheritdoc>
+		/// <inheritdoc/>
 		public SlowLogIndexingDescriptor TresholdInfo(TimeUnitExpression time) => Assign(a => a.TresholdInfo = time);
 
-		/// </inheritdoc>
+		/// <inheritdoc/>
 		public SlowLogIndexingDescriptor TresholdTrace(TimeUnitExpression time) => Assign(a => a.TresholdTrace = time);
 
-		/// </inheritdoc>
+		/// <inheritdoc/>
 		public SlowLogIndexingDescriptor TresholdWarn(TimeUnitExpression time) => Assign(a => a.TresholdWarn = time);
 
 

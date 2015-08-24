@@ -13,7 +13,7 @@ namespace Nest
 
 	public partial class ElasticClient
 	{
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public INodesShutdownResponse NodesShutdown(Func<NodesShutdownDescriptor, NodesShutdownDescriptor> nodesShutdownSelector = null)
 		{
 			nodesShutdownSelector = nodesShutdownSelector ?? (s => s);
@@ -23,7 +23,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public Task<INodesShutdownResponse> NodesShutdownAsync(Func<NodesShutdownDescriptor, NodesShutdownDescriptor> nodesShutdownSelector = null)
 		{
 			nodesShutdownSelector = nodesShutdownSelector ?? (s => s);
@@ -33,7 +33,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public INodesShutdownResponse NodesShutdown(INodesShutdownRequest nodesShutdownRequest)
 		{
 			return this.Dispatcher.Dispatch<INodesShutdownRequest, NodesShutdownRequestParameters, NodesShutdownResponse>(
@@ -42,7 +42,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public Task<INodesShutdownResponse> NodesShutdownAsync(INodesShutdownRequest nodesShutdownRequest)
 		{
 			return this.Dispatcher.DispatchAsync<INodesShutdownRequest, NodesShutdownRequestParameters, NodesShutdownResponse, INodesShutdownResponse>(

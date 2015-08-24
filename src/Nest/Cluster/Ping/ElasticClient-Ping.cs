@@ -12,7 +12,7 @@ namespace Nest
 
 	public partial class ElasticClient
 	{
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public IPingResponse Ping(Func<PingDescriptor, PingDescriptor> pingSelector = null)
 		{
 			pingSelector = pingSelector ?? (s => s);
@@ -29,7 +29,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public Task<IPingResponse> PingAsync(Func<PingDescriptor, PingDescriptor> pingSelector = null)
 		{
 			pingSelector = pingSelector ?? (s => s);
@@ -45,7 +45,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public IPingResponse Ping(IPingRequest pingRequest)
 		{
 			return this.Dispatcher.Dispatch<IPingRequest, PingRequestParameters, PingResponse>(
@@ -60,7 +60,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public Task<IPingResponse> PingAsync(IPingRequest pingRequest)
 		{
 			return this.Dispatcher.DispatchAsync<IPingRequest, PingRequestParameters, PingResponse, IPingResponse>(

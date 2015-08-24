@@ -52,19 +52,19 @@ namespace Nest
 
 	public class MergePolicySettings : IMergePolicySettings
 	{
-		///</inheritdoc>
+		///<inheritdoc/>
 		public int? ExpungeDeletesAllowed { get; set; }
-		///</inheritdoc>
+		///<inheritdoc/>
 		public string FloorSegment { get; set; }
-		///</inheritdoc>
+		///<inheritdoc/>
 		public int? MaxMergeAtOnce { get; set; }
-		///</inheritdoc>
+		///<inheritdoc/>
 		public int? MaxMergeAtOnceExplicit { get; set; }
-		///</inheritdoc>
+		///<inheritdoc/>
 		public string MaxMergedSegment { get; set; }
-		///</inheritdoc>
+		///<inheritdoc/>
 		public double? ReclaimDeletesWeight { get; set; }
-		///</inheritdoc>
+		///<inheritdoc/>
 		public int? SegmentsPerTier { get; set; }
 	}
 
@@ -79,31 +79,31 @@ namespace Nest
 		double? IMergePolicySettings.ReclaimDeletesWeight { get; set; }
 		int? IMergePolicySettings.SegmentsPerTier { get; set; }
 
-		///</inheritdoc>
+		///<inheritdoc/>
 		public MergePolicySettingsDescriptor ExpungeDeletesAllowed(int? allowed) => 
 			Assign(a => a.ExpungeDeletesAllowed = allowed);
 
-		///</inheritdoc>
+		///<inheritdoc/>
 		public MergePolicySettingsDescriptor FloorSegment(string floorSegment) => 
 			Assign(a => a.FloorSegment = floorSegment);
 
-		///</inheritdoc>
+		///<inheritdoc/>
 		public MergePolicySettingsDescriptor MaxMergeAtOnce(int? maxMergeAtOnce) => 
 			Assign(a => a.MaxMergeAtOnce = maxMergeAtOnce);
 
-		///</inheritdoc>
+		///<inheritdoc/>
 		public MergePolicySettingsDescriptor MaxMergeAtOnceExplicit(int? maxMergeOnceAtOnceExplicit) => 
 			Assign(a => a.MaxMergeAtOnceExplicit = maxMergeOnceAtOnceExplicit);
 
-		///</inheritdoc>
+		///<inheritdoc/>
 		public MergePolicySettingsDescriptor MaxMergedSegement(string maxMergedSegment) => 
 			Assign(a => a.MaxMergedSegment = maxMergedSegment);
 
-		///</inheritdoc>
+		///<inheritdoc/>
 		public MergePolicySettingsDescriptor ReclaimDeletesWeight(double? weight) => 
 			Assign(a => a.ReclaimDeletesWeight = weight);
 
-		///</inheritdoc>
+		///<inheritdoc/>
 		public MergePolicySettingsDescriptor SegmentsPerTier(int? segmentsPerTier) => 
 			Assign(a => a.SegmentsPerTier = segmentsPerTier);
 

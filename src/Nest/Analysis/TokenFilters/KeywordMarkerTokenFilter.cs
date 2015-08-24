@@ -6,20 +6,39 @@ namespace Nest
 	/// <summary>
 	/// Protects words from being modified by stemmers. Must be placed before any stemming filters.
 	/// </summary>
-    public class KeywordMarkerTokenFilter : TokenFilterBase
-    {
-		public KeywordMarkerTokenFilter()
-			: base("keyword_marker")
-        {
-        }
+	public interface IKeywordMarkerTokenFilter: ITokenFilter
+	{
+		/// <summary>
+		/// A list of words to use.
+		/// </summary>
+		[JsonProperty("keywords")]
+		IEnumerable<string> Keywords { get; set; }
 
-        [JsonProperty("keywords")]
-        public IEnumerable<string> Keywords { get; set; }
-
+		/// <summary>
+		/// A path (either relative to config location, or absolute) to a list of words.
+		/// </summary>
 		[JsonProperty("keywords_path")]
-        public string KeywordsPath { get; set; }
+		string KeywordsPath { get; set; }
 
+		/// <summary>
+		/// Set to true to lower case all words first. Defaults to false.
+		/// </summary>
 		[JsonProperty("ignore_case")]
+		bool? IgnoreCase { get; set; }
+	}
+
+	/// <inheritdoc/>
+	public class KeywordMarkerTokenFilter : TokenFilterBase, IKeywordMarkerTokenFilter
+	{
+		public KeywordMarkerTokenFilter() : base("keyword_marker") { }
+
+		/// <inheritdoc/>
+		public IEnumerable<string> Keywords { get; set; }
+
+		/// <inheritdoc/>
+		public string KeywordsPath { get; set; }
+
+		/// <inheritdoc/>
 		public bool? IgnoreCase { get; set; }
-    }
+	}
 }

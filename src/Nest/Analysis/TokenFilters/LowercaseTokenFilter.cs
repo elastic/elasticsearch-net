@@ -2,19 +2,24 @@
 
 namespace Nest
 {
-    /// <summary>
+	/// <summary>
 	/// A token filter of type lowercase that normalizes token text to lower case.
 	///<para> Lowercase token filter supports Greek and Turkish lowercase token filters through the language parameter.</para>
-    /// </summary>
-    public class LowercaseTokenFilter : TokenFilterBase
-    {
-		public LowercaseTokenFilter()
-            : base("lowercase")
-        {
+	/// </summary>
+	public interface ILowercaseTokenFilter : ITokenFilter
+	{
+		/// <summary>
+		/// Lowercase token filter supports Greek, Irish, and Turkish lowercase token filters through the language parameter
+		/// </summary>
+		[JsonProperty("language")]
+		string Language { get; set; }
+	}
+	/// <inheritdoc/>
+	public class LowercaseTokenFilter : TokenFilterBase, ILowercaseTokenFilter
+	{
+		public LowercaseTokenFilter() : base("lowercase") { }
 
-        }
-
-        [JsonProperty("language")]
-        public string Language { get; set; }
-    }
+		/// <inheritdoc/>
+		public string Language { get; set; }
+	}
 }

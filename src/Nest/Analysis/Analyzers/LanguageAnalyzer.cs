@@ -37,13 +37,13 @@ namespace Nest
 			Type = langName;
 		}
 
-		/// </inheritdoc>
+		/// <inheritdoc/>
 		public IEnumerable<string> StopWords { get; set; }
 
-		/// </inheritdoc>
+		/// <inheritdoc/>
 		public IEnumerable<string> StemExclusionList { get; set; }
 
-		/// </inheritdoc>
+		/// <inheritdoc/>
 		public string StopwordsPath { get; set; }
 	}
 

@@ -25,10 +25,10 @@ namespace Nest
 	{
 		public StopAnalyzer() { Type = "stop"; }
 
-		/// </inheritdoc>
+		/// <inheritdoc/>
 		public IEnumerable<string> StopWords { get; set; }
 
-		/// </inheritdoc>
+		/// <inheritdoc/>
 		public string StopwordsPath { get; set; }
 	}
 

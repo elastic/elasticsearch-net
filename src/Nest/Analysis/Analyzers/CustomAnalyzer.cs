@@ -44,16 +44,16 @@ namespace Nest
 		public CustomAnalyzer(string type) { Type = type; }
 		public CustomAnalyzer() : this("custom") { }
 
-		/// </inheritdoc>
+		/// <inheritdoc/>
 		public string Tokenizer { get; set; }
 
-		/// </inheritdoc>
+		/// <inheritdoc/>
 		public IEnumerable<string> Filter { get; set; }
 
-		/// </inheritdoc>
+		/// <inheritdoc/>
 		public IEnumerable<string> CharFilter { get; set; }
 
-		/// </inheritdoc>
+		/// <inheritdoc/>
 		public int? PositionOffsetGap { get; set; }
 	}
 
@@ -75,22 +75,22 @@ namespace Nest
 			return this;
 		}
 
-		/// </inheritdoc>
+		/// <inheritdoc/>
 		public CustomAnalyzerDescriptor Filters(params string[] filters) => Assign(a => a.Filter = filters);
 
-		/// </inheritdoc>
+		/// <inheritdoc/>
 		public CustomAnalyzerDescriptor Filters(IEnumerable<string> filters) => Assign(a => a.Filter = filters);
 
-		/// </inheritdoc>
+		/// <inheritdoc/>
 		public CustomAnalyzerDescriptor CharFilters(params string[] charFilters) => Assign(a => a.CharFilter = charFilters);
 
-		/// </inheritdoc>
+		/// <inheritdoc/>
 		public CustomAnalyzerDescriptor CharFilters(IEnumerable<string> charFilters) => Assign(a => a.CharFilter = charFilters);
 
-		/// </inheritdoc>
+		/// <inheritdoc/>
 		public CustomAnalyzerDescriptor Tokenizer(string tokenizer) => Assign(a => a.Tokenizer = tokenizer);
 
-		/// </inheritdoc>
+		/// <inheritdoc/>
 		public CustomAnalyzerDescriptor PositionOffsetGap(int? positionOffsetGap) => 
 			Assign(a => a.PositionOffsetGap = positionOffsetGap);
 
