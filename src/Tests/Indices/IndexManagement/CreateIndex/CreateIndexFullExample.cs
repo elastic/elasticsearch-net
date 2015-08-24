@@ -295,6 +295,33 @@ namespace Tests.Indices.IndexManagement
 							.StemEnglishPossessive()
 						)
 					)
+					.Tokenizers(tokenizers => tokenizers
+						.EdgeNGram("endgen", t=>t
+							.MaxGram(2)
+							.MinGram(1)
+							.TokenChars(TokenChar.Digit, TokenChar.Letter)
+						)
+						.NGram("ng", t=>t
+							.MaxGram(2)
+							.MinGram(1)
+							.TokenChars(TokenChar.Digit, TokenChar.Letter)
+						)
+						.PathHierarchy("path", t=>t
+							.BufferSize(2048)
+							.Delimiter("|")
+							.Replacement("||")
+							.Reverse()
+							.Skip(1)
+						)
+						.Pattern("pattern", t=>t
+							.Flags("CASE_INSENSITIVE")
+							.Group(1)
+							.Pattern(@"\W+")
+						)
+						.Standard("standard")
+						.UaxEmailUrl("uax", t=>t.MaxTokenLength(12))
+						.Whitespace("whitespace")
+					)
 				)
 			);
 

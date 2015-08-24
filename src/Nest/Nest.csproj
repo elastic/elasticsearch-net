@@ -86,6 +86,8 @@
     <Compile Include="Analysis\TokenFilters\Phonetic\PhoneticEncoder.cs" />
     <Compile Include="Analysis\TokenFilters\Synonym\SynonymFormat.cs" />
     <Compile Include="Analysis\TokenFilters\TokenFilters.cs" />
+    <Compile Include="Analysis\Tokenizers\NGram\TokenChar.cs" />
+    <Compile Include="Analysis\Tokenizers\Tokenizers.cs" />
     <Compile Include="CommonAbstractions\Fluent\DescriptorBase.cs" />
     <Compile Include="CommonAbstractions\LazyDocument\LazyDocumentJsonConverter.cs" />
     <Compile Include="CommonAbstractions\WrapDictionary.cs" />
@@ -275,11 +277,11 @@
     <Compile Include="Analysis\TokenFilters\UniqueTokenFilter.cs" />
     <Compile Include="Analysis\TokenFilters\UppercaseTokenFilter.cs" />
     <Compile Include="Analysis\TokenFilters\WordDelimiter\WordDelimiterTokenFilter.cs" />
-    <Compile Include="Analysis\Tokenizers\EdgeNGramTokenizer.cs" />
+    <Compile Include="Analysis\Tokenizers\NGram\EdgeNGramTokenizer.cs" />
     <Compile Include="Analysis\Tokenizers\KeywordTokenizer.cs" />
     <Compile Include="Analysis\Tokenizers\LetterTokenizer.cs" />
     <Compile Include="Analysis\Tokenizers\LowercaseTokenizer.cs" />
-    <Compile Include="Analysis\Tokenizers\NGramTokenizer.cs" />
+    <Compile Include="Analysis\Tokenizers\NGram\NGramTokenizer.cs" />
     <Compile Include="Analysis\Tokenizers\PathHierarchyTokenizer.cs" />
     <Compile Include="Analysis\Tokenizers\PatternTokenizer.cs" />
     <Compile Include="Analysis\Tokenizers\StandardTokenizer.cs" />

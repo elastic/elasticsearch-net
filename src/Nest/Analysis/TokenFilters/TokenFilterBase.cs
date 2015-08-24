@@ -36,9 +36,8 @@ namespace Nest
 		string ITokenFilter.Version { get; set; }
 		string ITokenFilter.Type => this.Type;
 		protected abstract string Type { get; }
-		protected TTokenFilter Assign(Action<TTokenFilterInterface> assigner) =>
-			Fluent.Assign((TTokenFilter)this, assigner);
 
 		public TTokenFilter Version(string version) => Assign(a => a.Version = version);
 	}
+
 }

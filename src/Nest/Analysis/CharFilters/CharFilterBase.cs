@@ -24,15 +24,14 @@ namespace Nest
 		public string Type { get; protected set; }
 	}
 
-	public abstract class CharFilterDescriptorBase<TCharFilter, TCharFilterInterface>: ICharFilter
+	public abstract class CharFilterDescriptorBase<TCharFilter, TCharFilterInterface>
+		: DescriptorBase<TCharFilter, TCharFilterInterface>, ICharFilter
 		where TCharFilter : CharFilterDescriptorBase<TCharFilter, TCharFilterInterface>, TCharFilterInterface
 		where TCharFilterInterface : class, ICharFilter
 	{
 		string ICharFilter.Version { get; set; }
 		string ICharFilter.Type => this.Type;
 		protected abstract string Type { get; }
-		protected TCharFilter Assign(Action<TCharFilterInterface> assigner) =>
-			Fluent.Assign((TCharFilter)this, assigner);
 
 		public TCharFilter Version(string version) => Assign(a => a.Version = version);
 	}

@@ -5,12 +5,32 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public abstract class TokenizerBase : IAnalysisSetting
+	public interface ITokenizer
 	{
 		[JsonProperty(PropertyName = "version")]
-		public string Version { get; set; }
-		
+		string Version { get; set; }
+
 		[JsonProperty(PropertyName = "type")]
+		string Type { get; }
+	}
+
+	public abstract class TokenizerBase : IAnalysisSetting
+	{
+		public string Version { get; set; }
+
 		public string Type { get; protected set; }
 	}
+
+	public abstract class TokenizerDescriptorBase<TTokenizer, TTokenizerInterface> 
+		: DescriptorBase<TTokenizer, TTokenizerInterface>, ITokenizer
+		where TTokenizer : TokenizerDescriptorBase<TTokenizer, TTokenizerInterface>, TTokenizerInterface
+		where TTokenizerInterface : class, ITokenizer
+	{
+		string ITokenizer.Version { get; set; }
+		string ITokenizer.Type => this.Type;
+		protected abstract string Type { get; }
+
+		public TTokenizer Version(string version) => Assign(a => a.Version = version);
+	}
+
 }

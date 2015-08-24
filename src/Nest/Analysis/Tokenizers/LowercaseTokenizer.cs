@@ -8,11 +8,16 @@ namespace Nest
 	/// <para>While it is functionally equivalent to the combination of Letter Tokenizer and Lower Case Token Filter, </para>
 	/// <para>there is a performance advantage to doing the two tasks at once, hence this (redundant) implementation.</para>
 	/// </summary>
-	public class LowercaseTokenizer : TokenizerBase
+	public interface ILowercaseTokenizer : ITokenizer { }
+	/// <inheritdoc/>
+	public class LowercaseTokenizer : TokenizerBase, ILowercaseTokenizer
     {
-		public LowercaseTokenizer()
-        {
-            Type = "lowercase";
-        }
-    }
+		public LowercaseTokenizer() { Type = "lowercase"; }
+	}
+	/// <inheritdoc/>
+	public class LowercaseTokenizerDescriptor 
+		: TokenizerDescriptorBase<LowercaseTokenizerDescriptor, ILowercaseTokenizer>, ILowercaseTokenizer
+	{
+		protected override string Type => "lowercase";
+	}
 }

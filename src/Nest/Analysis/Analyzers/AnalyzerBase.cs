@@ -21,15 +21,14 @@ namespace Nest
 		public string Type { get; protected set; }
 	}
 
-	public abstract class AnalyzerDescriptorBase<TAnalyzer, TAnalyzerInterface>: IAnalyzer
+	public abstract class AnalyzerDescriptorBase<TAnalyzer, TAnalyzerInterface>
+		: DescriptorBase<TAnalyzer, TAnalyzerInterface>, IAnalyzer
 		where TAnalyzer : AnalyzerDescriptorBase<TAnalyzer, TAnalyzerInterface>, TAnalyzerInterface
 		where TAnalyzerInterface : class, IAnalyzer
 	{
 		string IAnalyzer.Version { get; set; }
 		string IAnalyzer.Type => this.Type;
 		protected abstract string Type { get; }
-		protected TAnalyzer Assign(Action<TAnalyzerInterface> assigner) =>
-			Fluent.Assign((TAnalyzer)this, assigner);
 
 		public TAnalyzer Version(string version) => Assign(a => a.Version = version);
 	}
