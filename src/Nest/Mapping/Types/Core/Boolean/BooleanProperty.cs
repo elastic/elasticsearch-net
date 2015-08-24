@@ -51,6 +51,8 @@ namespace Nest
 		bool? IBooleanProperty.NullValue { get; set; }
 		INumericFielddata IBooleanProperty.Fielddata { get; set; }
 
+		public BooleanPropertyDescriptor() : base("boolean") { }
+
 		public BooleanPropertyDescriptor<T> Boost(double boost) => Assign(a => a.Boost = boost);
 		public BooleanPropertyDescriptor<T> Index(NonStringIndexOption index) => Assign(a => a.Index = index);
 		public BooleanPropertyDescriptor<T> NullValue(bool nullValue) => Assign(a => a.NullValue = nullValue);

@@ -23,7 +23,7 @@ namespace Nest
 
 		[JsonProperty("mappings")]
 		[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]
-		public Dictionary<string, RootObjectProperty> Mappings { get; set; }
+		public Dictionary<string, ITypeMapping> Mappings { get; set; }
 
 		[JsonProperty("warmers")]
 		[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]

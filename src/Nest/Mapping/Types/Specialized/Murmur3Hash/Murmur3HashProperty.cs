@@ -21,5 +21,6 @@ namespace Nest
 		: PropertyDescriptorBase<Murmur3HashPropertyDescriptor<T>, IMurmur3HashProperty, T>, IMurmur3HashProperty
 		where T : class
 	{
+		public Murmur3HashPropertyDescriptor() : base("murmur3") { }
 	}
 }

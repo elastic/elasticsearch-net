@@ -67,6 +67,8 @@ namespace Nest
 		int? ICompletionProperty.MaxInputLength { get; set; }
 		IDictionary<string, ISuggestContext> ICompletionProperty.Context { get; set; }
 
+		public CompletionPropertyDescriptor() : base("completion") { }
+
 		public CompletionPropertyDescriptor<T> SearchAnalyzer(string searchAnalyzer) => 
 			Assign(a => a.SearchAnalyzer = searchAnalyzer);
 

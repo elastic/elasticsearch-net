@@ -48,7 +48,7 @@ namespace Nest
 		{
 			_connectionSettings = connectionSettings;
 			Self.TemplateMapping = new TemplateMapping();
-			Self.TemplateMapping.Mappings = new Dictionary<string, RootObjectProperty>();
+			Self.TemplateMapping.Mappings = new Dictionary<string, ITypeMapping>();
 			Self.TemplateMapping.Warmers = new Dictionary<string, WarmerMapping>();
 			Self.TemplateMapping.Settings = new FluentDictionary<string, object>();
 		}
@@ -88,14 +88,14 @@ namespace Nest
 		{
 			mappingSelector.ThrowIfNull("mappingSelector");
 			var putMappingDescriptor = mappingSelector(new PutMappingDescriptor<T>());
-			putMappingDescriptor.ThrowIfNull("rootObjectMappingDescriptor");
+			putMappingDescriptor.ThrowIfNull(nameof(mappingSelector));
 
 			var inferrer = new ElasticInferrer(this._connectionSettings);
 			IPutMappingRequest request = putMappingDescriptor;
-			var typeName = inferrer.TypeName(request.Type ?? typeof(T));
+			var typeName = inferrer.TypeName(typeof(T));
 			if (typeName == null)
 				return this;
-			Self.TemplateMapping.Mappings[typeName] = request.Mapping;
+			Self.TemplateMapping.Mappings[typeName] = request;
 			return this;
 		}
 

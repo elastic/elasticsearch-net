@@ -75,7 +75,7 @@ namespace Nest
 		string IObjectProperty.Path { get; set; }
 		IDictionary<FieldName, IElasticsearchProperty> IObjectProperty.Properties { get; set; }
 	
-		public ObjectPropertyDescriptorBase()
+		public ObjectPropertyDescriptorBase() : base("object")
 		{
 			_TypeName = TypeName.Create<TChild>();
 		}

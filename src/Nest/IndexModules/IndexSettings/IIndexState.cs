@@ -8,7 +8,7 @@ namespace Nest
 
 		Dictionary<string, ICreateAliasOperation> Aliases { get; set; }
 		AnalysisSettings Analysis { get; set; }
-		IList<RootObjectProperty> Mappings { get; set; }
+		IList<TypeMapping> Mappings { get; set; }
 		int? NumberOfReplicas { get; set; }
 		int? NumberOfShards { get; set; }
 		IDictionary<string, object> Settings { get; set; }

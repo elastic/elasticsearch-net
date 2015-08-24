@@ -95,6 +95,8 @@ namespace Nest
 		int? IGeoPointProperty.PrecisionStep { get; set; }
 		IGeoPointFielddata IGeoPointProperty.Fielddata { get; set; }
 
+		public GeoPointPropertyDescriptor() : base("geo_point") { }
+		
 		public GeoPointPropertyDescriptor<T> LatLon(bool latLon = true) => Assign(a => a.LatLon = latLon);
 
 		public GeoPointPropertyDescriptor<T> GeoHash(bool geoHash = true) => Assign(a => a.GeoHash = geoHash);

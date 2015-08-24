@@ -22,14 +22,7 @@ namespace Nest
 		{
 			return this.Dispatcher.Dispatch<IPutMappingRequest, PutMappingRequestParameters, IndicesResponse>(
 				putMappingRequest,
-				(p, d) =>
-				{
-					var o = new Dictionary<string, RootObjectProperty>
-					{
-						{p.Type, d.Mapping}
-					};
-					return this.LowLevelDispatch.IndicesPutMappingDispatch<IndicesResponse>(p, o);
-				}
+				(p, d) => this.LowLevelDispatch.IndicesPutMappingDispatch<IndicesResponse>(p, d)
 			);
 		}
 
@@ -47,14 +40,7 @@ namespace Nest
 		{
 			return this.Dispatcher.DispatchAsync<IPutMappingRequest, PutMappingRequestParameters, IndicesResponse, IIndicesResponse>(
 				putMappingRequest,
-				(p, d) =>
-				{
-					var o = new Dictionary<string, RootObjectProperty>
-					{
-						{p.Type, d.Mapping}
-					};
-					return this.LowLevelDispatch.IndicesPutMappingDispatchAsync<IndicesResponse>(p, o);
-				}
+				(p, d) => this.LowLevelDispatch.IndicesPutMappingDispatchAsync<IndicesResponse>(p, d)
 			);
 		}
 

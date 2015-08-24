@@ -79,6 +79,8 @@ namespace Nest
 		NumericResolutionUnit? IDateProperty.NumericResolution { get; set; }
 		INumericFielddata IDateProperty.Fielddata { get; set; }
 
+		public DatePropertyDescriptor() : base("date") { }
+
 		public DatePropertyDescriptor<T> Index(NonStringIndexOption index = NonStringIndexOption.No) => Assign(a => a.Index = index);
 		public DatePropertyDescriptor<T> Boost(double boost) => Assign(a => a.Boost = boost);
 		public DatePropertyDescriptor<T> NullValue(DateTime nullValue) => Assign(a => a.NullValue = nullValue);

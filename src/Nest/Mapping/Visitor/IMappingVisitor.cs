@@ -3,7 +3,7 @@
 	public interface IMappingVisitor
 	{
 		int Depth { get; set; }
-		void Visit(RootObjectProperty mapping);
+		void Visit(TypeMapping mapping);
 		void Visit(StringProperty mapping);
 		void Visit(NumberType mapping);
 		void Visit(DateProperty mapping);

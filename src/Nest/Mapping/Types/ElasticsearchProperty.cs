@@ -9,6 +9,8 @@ namespace Nest
 	public interface IElasticsearchProperty : IFieldMapping
 	{
 		FieldName Name { get; set; }
+
+		[JsonProperty("type")]
 		TypeName Type { get; set; }
 
 		[JsonProperty("index_name")]

@@ -96,6 +96,9 @@ namespace Nest
 		int? IStringProperty.IgnoreAbove { get; set; }
 		int? IStringProperty.PositionOffsetGap { get; set; }
 		IStringFielddata IStringProperty.Fielddata { get; set; }
+
+		public StringPropertyDescriptor() : base("string") { }
+
 		/// <summary>
 		/// Shortcut into .Index(FieldIndexOption.NotAnalyzed)
 		/// </summary>

@@ -66,7 +66,7 @@ namespace Nest
 		/// <summary>
 		/// Add a new mapping for T
 		/// </summary>
-		public CreateIndexDescriptor AddMapping<T>(Func<PutMappingDescriptor<T>, PutMappingDescriptor<T>> typeMappingDescriptor) where T : class
+		public CreateIndexDescriptor AddMapping<T>(Func<PutMappingDescriptor<T>, ITypeMapping> typeMappingDescriptor) where T : class
 		{
 			return this;
 		}
@@ -75,7 +75,7 @@ namespace Nest
 		/// Add a new mapping using the first rootObjectMapping parameter as the base to construct the new mapping.
 		/// Handy if you wish to reuse a mapping.
 		/// </summary>
-		public CreateIndexDescriptor AddMapping<T>(RootObjectProperty rootObjectMapping, Func<PutMappingDescriptor<T>, PutMappingDescriptor<T>> typeMappingDescriptor) where T : class
+		public CreateIndexDescriptor AddMapping<T>(ITypeMapping mapping, Func<PutMappingDescriptor<T>, PutMappingDescriptor<T>> typeMappingDescriptor) where T : class
 		{
 			return this;
 		}
