@@ -12,7 +12,7 @@ namespace Nest
 		/// A list of stop words to use. Defaults to `_english_` stop words.
 		/// </summary>
 		[JsonProperty("stopwords")]
-		StopWords Stopwords { get; set; }
+		StopWords StopWords { get; set; }
 
 		/// <summary>
 		/// Set to true to lower case all words first. Defaults to false.
@@ -26,7 +26,7 @@ namespace Nest
 		/// (separated by a line break). The file must be UTF-8 encoded.
 		/// </summary>
 		[JsonProperty("stopwords_path")]
-		string StopwordsPath { get; set; }
+		string StopWordsPath { get; set; }
 
 		/// <summary>
 		/// Set to false in order to not ignore the last term of a search if it is a stop word. 
@@ -43,13 +43,13 @@ namespace Nest
 		public StopTokenFilter() : base("stop") { }
 
 		/// <inheritdoc/>
-		public StopWords Stopwords { get; set; }
+		public StopWords StopWords { get; set; }
 
 		/// <inheritdoc/>
 		public bool? IgnoreCase { get; set; }
 
 		/// <inheritdoc/>
-		public string StopwordsPath { get; set; }
+		public string StopWordsPath { get; set; }
 
 		/// <inheritdoc/>
 		public bool? RemoveTrailing { get; set; }
@@ -62,8 +62,8 @@ namespace Nest
 
 		bool? IStopTokenFilter.IgnoreCase { get; set; }
 		bool? IStopTokenFilter.RemoveTrailing { get; set; }
-		StopWords IStopTokenFilter.Stopwords { get; set; }
-		string IStopTokenFilter.StopwordsPath { get; set; }
+		StopWords IStopTokenFilter.StopWords { get; set; }
+		string IStopTokenFilter.StopWordsPath { get; set; }
 
 		///<inheritdoc/>
 		public StopTokenFilterDescriptor IgnoreCase(bool? ignoreCase = true) => Assign(a => a.IgnoreCase = ignoreCase);
@@ -72,16 +72,16 @@ namespace Nest
 		public StopTokenFilterDescriptor RemoveTrailing(bool? removeTrailing = true) => Assign(a => a.RemoveTrailing = removeTrailing);
 
 		///<inheritdoc/>
-		public StopTokenFilterDescriptor Stopwords(StopWords stopWords) => Assign(a => a.Stopwords = stopWords);
+		public StopTokenFilterDescriptor StopWords(StopWords stopWords) => Assign(a => a.StopWords = stopWords);
 
 		///<inheritdoc/>
-		public StopTokenFilterDescriptor Stopwords(IEnumerable<string> stopWords) => Assign(a => a.Stopwords = stopWords.ToListOrNullIfEmpty());
+		public StopTokenFilterDescriptor StopWords(IEnumerable<string> stopWords) => Assign(a => a.StopWords = stopWords.ToListOrNullIfEmpty());
 
 		///<inheritdoc/>
-		public StopTokenFilterDescriptor Stopwords(params string[] stopWords) => Assign(a => a.Stopwords = stopWords);
+		public StopTokenFilterDescriptor StopWords(params string[] stopWords) => Assign(a => a.StopWords = stopWords);
 
 		///<inheritdoc/>
-		public StopTokenFilterDescriptor StopwordsPath(string path) => Assign(a => a.StopwordsPath = path);
+		public StopTokenFilterDescriptor StopWordsPath(string path) => Assign(a => a.StopWordsPath = path);
 
 	}
 

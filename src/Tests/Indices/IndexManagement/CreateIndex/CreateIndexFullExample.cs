@@ -268,7 +268,7 @@ namespace Tests.Indices.IndexManagement
 						.Stop("stop", t => t
 							.IgnoreCase()
 							.RemoveTrailing()
-							.Stopwords("x", "y", "z")
+							.StopWords("x", "y", "z")
 						)
 						.Synonym("syn", t => t
 							.Expand()

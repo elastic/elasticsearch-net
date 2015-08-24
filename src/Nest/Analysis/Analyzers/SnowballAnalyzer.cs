@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -11,10 +12,8 @@ namespace Nest
 		[JsonProperty("language")]
 		SnowballLanguage? Language { get; set; }
 
-		//TODO validate Stopwords trhoughout, is it list, string or union of both?
-		//TODO Rename all StopWords to Stopwords
 		[JsonProperty("stopwords")]
-		string StopWords { get; set; }
+		StopWords StopWords { get; set; }
 	}
 	public class SnowballAnalyzer : AnalyzerBase, ISnowballAnalyzer
 	{
@@ -22,18 +21,19 @@ namespace Nest
 
 		public SnowballLanguage? Language { get; set; }
 
-		public string StopWords { get; set; }
+		public StopWords StopWords { get; set; }
 	}
 	public class SnowballAnalyzerDescriptor :
 		AnalyzerDescriptorBase<SnowballAnalyzerDescriptor, ISnowballAnalyzer>, ISnowballAnalyzer
 	{
 		protected override string Type => "snowball";
 
-		string ISnowballAnalyzer.StopWords { get; set; }
+		StopWords ISnowballAnalyzer.StopWords { get; set; }
 		SnowballLanguage? ISnowballAnalyzer.Language { get; set; }
 
-		public SnowballAnalyzerDescriptor StopWords(string stopWords) =>
-			Assign(a => a.StopWords = stopWords);
+		public SnowballAnalyzerDescriptor StopWords(StopWords stopWords) => Assign(a => a.StopWords = stopWords);
+		public SnowballAnalyzerDescriptor StopWords(IEnumerable<string> stopWords) => Assign(a => a.StopWords = stopWords.ToListOrNullIfEmpty());
+		public SnowballAnalyzerDescriptor StopWords(params string[] stopWords) => Assign(a => a.StopWords = stopWords.ToListOrNullIfEmpty());
 
 		public SnowballAnalyzerDescriptor Language(SnowballLanguage language) => Assign(a => a.Language = language);
 

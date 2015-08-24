@@ -13,7 +13,7 @@ namespace Nest
 		/// A list of stopword to initialize the stop filter with. Defaults to the english stop words.
 		/// </summary>
 		[JsonProperty("stopwords")]
-		IEnumerable<string> StopWords { get; set; }
+		StopWords StopWords { get; set; }
 
 		/// <summary>
 		/// The stem_exclusion parameter allows you to specify an array of lowercase words that should not be stemmed. 
@@ -38,7 +38,7 @@ namespace Nest
 		}
 
 		/// <inheritdoc/>
-		public IEnumerable<string> StopWords { get; set; }
+		public StopWords StopWords { get; set; }
 
 		/// <inheritdoc/>
 		public IEnumerable<string> StemExclusionList { get; set; }
@@ -53,7 +53,7 @@ namespace Nest
 		private string _type = "language";
 		protected override string Type => _type;
 
-		IEnumerable<string> ILanguageAnalyzer.StopWords { get; set; }
+		StopWords ILanguageAnalyzer.StopWords { get; set; }
 		IEnumerable<string> ILanguageAnalyzer.StemExclusionList { get; set; }
 		string ILanguageAnalyzer.StopwordsPath { get; set; }
 
@@ -64,11 +64,15 @@ namespace Nest
 			_type = langName;
 			return this;
 		}
+
+		public LanguageAnalyzerDescriptor StopWords(StopWords stopWords) =>
+			Assign(a => a.StopWords = stopWords);
+
 		public LanguageAnalyzerDescriptor StopWords(params string[] stopWords) =>
 			Assign(a => a.StopWords = stopWords);
 
 		public LanguageAnalyzerDescriptor StopWords(IEnumerable<string> stopWords) =>
-			Assign(a => a.StopWords = stopWords);
+			Assign(a => a.StopWords = stopWords.ToListOrNullIfEmpty());
 
 	}
 }

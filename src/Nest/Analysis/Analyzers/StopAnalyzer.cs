@@ -12,7 +12,7 @@ namespace Nest
 		/// A list of stopword to initialize the stop filter with. Defaults to the english stop words.
 		/// </summary>
 		[JsonProperty("stopwords")]
-		IEnumerable<string> StopWords { get; set; }
+		StopWords StopWords { get; set; }
 
 		/// <summary>
 		/// A path (either relative to config location, or absolute) to a stopwords file configuration.
@@ -26,7 +26,7 @@ namespace Nest
 		public StopAnalyzer() { Type = "stop"; }
 
 		/// <inheritdoc/>
-		public IEnumerable<string> StopWords { get; set; }
+		public StopWords StopWords { get; set; }
 
 		/// <inheritdoc/>
 		public string StopwordsPath { get; set; }
@@ -37,17 +37,17 @@ namespace Nest
 	{
 		protected override string Type => "stop";
 
-		IEnumerable<string> IStopAnalyzer.StopWords { get; set; }
+		StopWords IStopAnalyzer.StopWords { get; set; }
 		string IStopAnalyzer.StopwordsPath { get; set; }
 
-		public StopAnalyzerDescriptor StopWords(params string[] stopWords) =>
-			Assign(a => a.StopWords = stopWords);
+		public StopAnalyzerDescriptor StopWords(params string[] stopWords) => Assign(a => a.StopWords = stopWords);
 
 		public StopAnalyzerDescriptor StopWords(IEnumerable<string> stopWords) =>
-			Assign(a => a.StopWords = stopWords);
+			Assign(a => a.StopWords = stopWords.ToListOrNullIfEmpty());
 
-		public StopAnalyzerDescriptor StopwordsPath(string path) => 
-			Assign(a => a.StopwordsPath = path);
+		public StopAnalyzerDescriptor StopWords(StopWords stopWords) => Assign(a => a.StopWords = stopWords);
+
+		public StopAnalyzerDescriptor StopwordsPath(string path) => Assign(a => a.StopwordsPath = path);
 		
 	}
 }

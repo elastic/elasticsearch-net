@@ -21,7 +21,7 @@ namespace Nest
 		/// A list of stopword to initialize the stop filter with. Defaults to an empty list
 		/// </summary>
 		[JsonProperty("stopwords")]
-		IEnumerable<string> StopWords { get; set; }
+		StopWords StopWords { get; set; }
 	}	
  
 	public class PatternAnalyzer : AnalyzerBase, IPatternAnalyzer
@@ -34,7 +34,7 @@ namespace Nest
 
 		public string Flags { get; set; }
 		
-		public IEnumerable<string> StopWords { get; set; }
+		public StopWords StopWords { get; set; }
 	}
 
 	public class PatternAnalyzerDescriptor :
@@ -42,16 +42,17 @@ namespace Nest
 	{
 		protected override string Type => "pattern";
 
-		IEnumerable<string> IPatternAnalyzer.StopWords { get; set; }
+		StopWords IPatternAnalyzer.StopWords { get; set; }
 		string IPatternAnalyzer.Pattern { get; set; }
 		string IPatternAnalyzer.Flags { get; set; }
 		bool? IPatternAnalyzer.Lowercase { get; set; }
 
-		public PatternAnalyzerDescriptor StopWords(params string[] stopWords) =>
-			Assign(a => a.StopWords = stopWords);
+		public PatternAnalyzerDescriptor StopWords(params string[] stopWords) => Assign(a => a.StopWords = stopWords);
 
 		public PatternAnalyzerDescriptor StopWords(IEnumerable<string> stopWords) =>
-			Assign(a => a.StopWords = stopWords);
+			Assign(a => a.StopWords = stopWords.ToListOrNullIfEmpty());
+
+		public PatternAnalyzerDescriptor StopWords(StopWords stopWords) => Assign(a => a.StopWords = stopWords);
 
 		public PatternAnalyzerDescriptor Pattern(string pattern) => Assign(a => a.Pattern = pattern);
 		

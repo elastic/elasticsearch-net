@@ -12,7 +12,7 @@ namespace Nest
 		/// A list of stopword to initialize the stop filter with. Defaults to the english stop words.
 		/// </summary>
 		[JsonProperty("stopwords")]
-		IEnumerable<string> StopWords { get; set; }
+		StopWords StopWords { get; set; }
 
 		/// <summary>
 		/// The maximum token length. If a token is seen that exceeds this length then it is discarded. Defaults to 255.
@@ -26,7 +26,7 @@ namespace Nest
 		public StandardAnalyzer() { Type = "standard"; }
 
 		/// <inheritdoc/>
-		public IEnumerable<string> StopWords { get; set; }
+		public StopWords StopWords { get; set; }
 
 		/// <inheritdoc/>
 		public int? MaxTokenLength { get; set; }
@@ -37,14 +37,16 @@ namespace Nest
 	{
 		protected override string Type => "standard";
 
-		IEnumerable<string> IStandardAnalyzer.StopWords { get; set; }
+		StopWords IStandardAnalyzer.StopWords { get; set; }
 		int? IStandardAnalyzer.MaxTokenLength { get; set; }
 
 		public StandardAnalyzerDescriptor StopWords(params string[] stopWords) =>
 			Assign(a => a.StopWords = stopWords);
 
 		public StandardAnalyzerDescriptor StopWords(IEnumerable<string> stopWords) =>
-			Assign(a => a.StopWords = stopWords);
+			Assign(a => a.StopWords = stopWords.ToListOrNullIfEmpty());
+
+		public StandardAnalyzerDescriptor StopWords(StopWords stopWords) => Assign(a => a.StopWords = stopWords);
 
 		public StandardAnalyzerDescriptor MaxTokenLength(int? maxTokenLength) => 
 			Assign(a => a.MaxTokenLength = maxTokenLength);
