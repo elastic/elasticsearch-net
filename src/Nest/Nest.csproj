@@ -792,8 +792,6 @@
     <Compile Include="QueryDsl\FullText\MultiMatch\MultiMatchQuery.cs" />
     <Compile Include="Cluster\ClusterState\ElasticClient-ClusterState.cs" />
     <Compile Include="CommonAbstractions\Extensions\UriExtensions.cs" />
-    <Compile Include="Analysis\AnalyzerCollectionJsonConverter.cs" />
-    <Compile Include="Analysis\CharFilterCollectionJsonConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\StatefulDeserialization\ConcreteTypeConverter.cs" />
     <Compile Include="Indices\IndexSettings\Warmers\WarmerMapping.cs" />
     <Compile Include="Indices\IndexSettings\Warmers\GetWarmer\WarmerResponse.cs">
@@ -1000,8 +998,6 @@
     <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\DictionaryKeysAreNotPropertyNamesJsonConverter.cs" />
     <Compile Include="CommonAbstractions\Infer\IndexName\IndexNameJsonConverter.cs" />
     <Compile Include="Aggregations\Bucket\Terms\TermsIncludeExcludeJsonConverter.cs" />
-    <Compile Include="Analysis\TokenFilterCollectionJsonConverter.cs" />
-    <Compile Include="Analysis\TokenizerCollectionJsonConverter.cs" />
     <Compile Include="CommonAbstractions\Infer\TypeName\TypeNameJsonConverter.cs" />
     <Compile Include="QueryDsl\Geo\GeoPrecisionJsonConverter.cs" />
     <Compile Include="Indices\StatusManagement\Upgrade\UpgradeStatus\UpgradeStatusResponseJsonConverter.cs" />

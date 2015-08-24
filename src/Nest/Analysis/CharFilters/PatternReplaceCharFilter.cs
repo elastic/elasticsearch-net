@@ -14,14 +14,18 @@ namespace Nest
 		string Replacement { get; set; }
 	}
 	
+	/// <inheritdoc/>
 	public class PatternReplaceCharFilter : CharFilterBase, ICharFilter
 	{
 		public PatternReplaceCharFilter() : base("pattern_replace") { }
 
+		/// <inheritdoc/>
 		public string Pattern { get; set; }
 
+		/// <inheritdoc/>
 		public string Replacement { get; set; }
 	}
+	/// <inheritdoc/>
 	public class PatternReplaceCharFilterDescriptor 
 		: CharFilterDescriptorBase<PatternReplaceCharFilterDescriptor, IPatternReplaceCharFilter>, IPatternReplaceCharFilter
 	{
@@ -29,9 +33,11 @@ namespace Nest
 		string IPatternReplaceCharFilter.Pattern { get; set; }
 		string IPatternReplaceCharFilter.Replacement { get; set; }
 
+		/// <inheritdoc/>
 		public PatternReplaceCharFilterDescriptor Pattern(string pattern) =>
 			Assign(a => a.Pattern = pattern);
 
+		/// <inheritdoc/>
 		public PatternReplaceCharFilterDescriptor Replacement(string replacement) =>
 			Assign(a => a.Replacement = replacement);
 

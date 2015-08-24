@@ -21,6 +21,7 @@ namespace Nest
 		int? MaxTokenLength { get; set; }
 	}
 	
+	/// <inheritdoc/>
 	public class StandardAnalyzer : AnalyzerBase, IStandardAnalyzer
 	{
 		public StandardAnalyzer() { Type = "standard"; }
@@ -32,6 +33,7 @@ namespace Nest
 		public int? MaxTokenLength { get; set; }
 	}
 
+	/// <inheritdoc/>
 	public class StandardAnalyzerDescriptor :
 		AnalyzerDescriptorBase<StandardAnalyzerDescriptor, IStandardAnalyzer>, IStandardAnalyzer
 	{

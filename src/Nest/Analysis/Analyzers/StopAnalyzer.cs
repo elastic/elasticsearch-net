@@ -21,6 +21,7 @@ namespace Nest
 		string StopwordsPath { get; set; }
 	}
 
+	/// <inheritdoc/>
 	public class StopAnalyzer : AnalyzerBase, IStopAnalyzer
 	{
 		public StopAnalyzer() { Type = "stop"; }
@@ -32,6 +33,7 @@ namespace Nest
 		public string StopwordsPath { get; set; }
 	}
 
+	/// <inheritdoc/>
 	public class StopAnalyzerDescriptor :
 		AnalyzerDescriptorBase<StopAnalyzerDescriptor, IStopAnalyzer>, IStopAnalyzer
 	{

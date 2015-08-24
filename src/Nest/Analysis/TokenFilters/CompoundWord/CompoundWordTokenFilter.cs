@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -19,6 +20,12 @@ namespace Nest
 		/// </summary>
 		[JsonProperty("word_list_path")]
 		string WordListPath { get; set; }
+
+		/// <summary>
+		/// A path (either relative to config location, or absolute) to a FOP XML hyphenation pattern file.
+		/// </summary>
+		[JsonProperty("hyphenation_patterns_path")]
+		string HyphenationPatternsPath { get; set; }
 
 		/// <summary>
 		/// Minimum word size.
@@ -66,6 +73,8 @@ namespace Nest
 
 		/// <inheritdoc/>
 		public bool? OnlyLongestMatch { get; set; }
+
+		public string HyphenationPatternsPath { get; set; }
 	}
 
 	///<inheritdoc/>
@@ -80,6 +89,7 @@ namespace Nest
 		int? ICompoundWordTokenFilter.MinSubwordSize { get; set; }
 		int? ICompoundWordTokenFilter.MaxSubwordSize { get; set; }
 		bool? ICompoundWordTokenFilter.OnlyLongestMatch { get; set; }
+		string ICompoundWordTokenFilter.HyphenationPatternsPath { get; set; }
 
 		///<inheritdoc/>
 		public TCompound WordList(IEnumerable<string> wordList) => Assign(a => a.WordList = wordList);
@@ -89,6 +99,9 @@ namespace Nest
 
 		///<inheritdoc/>
 		public TCompound WordListPath(string path) => Assign(a => a.WordListPath = path);
+
+		///<inheritdoc/>
+		public TCompound HyphenationPatternsPath(string path) => Assign(a => a.HyphenationPatternsPath = path);
 
 		///<inheritdoc/>
 		public TCompound MinWordSize(int? minWordSize) => Assign(a => a.MinWordSize = minWordSize);

@@ -28,6 +28,7 @@ namespace Nest
 		string StopwordsPath { get; set; }
 	} 
 
+	/// <inheritdoc/>
 	public class LanguageAnalyzer : AnalyzerBase, ILanguageAnalyzer
 	{
 		public LanguageAnalyzer(Language language)
@@ -47,6 +48,7 @@ namespace Nest
 		public string StopwordsPath { get; set; }
 	}
 
+	/// <inheritdoc/>
 	public class LanguageAnalyzerDescriptor :
 		AnalyzerDescriptorBase<LanguageAnalyzerDescriptor, ILanguageAnalyzer>, ILanguageAnalyzer
 	{

@@ -14,15 +14,19 @@ namespace Nest
 		[JsonProperty("mappings_path")]
 		string MappingsPath { get; set; }
 	}
+	/// <inheritdoc/>
 	public class MappingCharFilter : CharFilterBase, IMappingCharFilter
 	{
 		public MappingCharFilter() : base("mapping") { }
 
+		/// <inheritdoc/>
 		public IEnumerable<string> Mappings { get; set; }
 
+		/// <inheritdoc/>
 		public string MappingsPath { get; set; }
 	}
 
+	/// <inheritdoc/>
 	public class MappingCharFilterDescriptor 
 		: CharFilterDescriptorBase<MappingCharFilterDescriptor, IMappingCharFilter>, IMappingCharFilter
 	{
@@ -30,12 +34,15 @@ namespace Nest
 		IEnumerable<string> IMappingCharFilter.Mappings { get; set; }
 		string IMappingCharFilter.MappingsPath { get; set; }
 
+		/// <inheritdoc/>
 		public MappingCharFilterDescriptor Mappings(params string[] mappings) =>
 			Assign(a => a.Mappings = mappings);
 
+		/// <inheritdoc/>
 		public MappingCharFilterDescriptor Mappings(IEnumerable<string> mappings) =>
 			Assign(a => a.Mappings = mappings);
 
+		/// <inheritdoc/>
 		public MappingCharFilterDescriptor MappingsPath(string path) =>
 			Assign(a => a.MappingsPath = path);
 

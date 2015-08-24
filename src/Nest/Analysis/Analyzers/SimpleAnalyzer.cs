@@ -7,11 +7,13 @@ namespace Nest
 	/// </summary>
 	public interface ISimpleAnalyzer : IAnalyzer { }
 
+	/// <inheritdoc/>
 	public class SimpleAnalyzer : AnalyzerBase, ISimpleAnalyzer
 	{
 		public SimpleAnalyzer() { Type = "simple"; }
 	}
 
+	/// <inheritdoc/>
 	public class SimpleAnalyzerDescriptor :
 		AnalyzerDescriptorBase<SimpleAnalyzerDescriptor, ISimpleAnalyzer>, ISimpleAnalyzer
 	{

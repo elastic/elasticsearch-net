@@ -1,5 +1,8 @@
 namespace Nest
 {
+	/// <summary>
+	/// Token filters that allow to decompose compound words.
+	/// </summary>
 	public interface IHyphenationDecompounderTokenFilter : ICompoundWordTokenFilter { }
 	/// <inheritdoc/>
 	public class HyphenationDecompounderTokenFilter : CompoundWordTokenFilter, IHyphenationDecompounderTokenFilter

@@ -7,11 +7,13 @@ namespace Nest
 	/// </summary>
 	public interface IWhitespaceAnalyzer : IAnalyzer { } 
 
+	/// <inheritdoc/>
 	public class WhitespaceAnalyzer : AnalyzerBase, IWhitespaceAnalyzer
 	{
 		public WhitespaceAnalyzer() { Type = "whitespace"; }
 	}
 
+	/// <inheritdoc/>
 	public class WhitespaceAnalyzerDescriptor :
 		AnalyzerDescriptorBase<WhitespaceAnalyzerDescriptor, IWhitespaceAnalyzer>, IWhitespaceAnalyzer
 	{

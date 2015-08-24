@@ -15,6 +15,7 @@ namespace Nest
 		[JsonProperty("stopwords")]
 		StopWords StopWords { get; set; }
 	}
+	/// <inheritdoc/>
 	public class SnowballAnalyzer : AnalyzerBase, ISnowballAnalyzer
 	{
 		public SnowballAnalyzer() { this.Type = "snowball"; }
@@ -23,6 +24,7 @@ namespace Nest
 
 		public StopWords StopWords { get; set; }
 	}
+	/// <inheritdoc/>
 	public class SnowballAnalyzerDescriptor :
 		AnalyzerDescriptorBase<SnowballAnalyzerDescriptor, ISnowballAnalyzer>, ISnowballAnalyzer
 	{

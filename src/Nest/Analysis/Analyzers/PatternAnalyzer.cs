@@ -23,7 +23,8 @@ namespace Nest
 		[JsonProperty("stopwords")]
 		StopWords StopWords { get; set; }
 	}	
- 
+	
+	/// <inheritdoc/>
 	public class PatternAnalyzer : AnalyzerBase, IPatternAnalyzer
 	{
 		public PatternAnalyzer() { Type = "pattern"; }
@@ -37,6 +38,7 @@ namespace Nest
 		public StopWords StopWords { get; set; }
 	}
 
+	/// <inheritdoc/>
 	public class PatternAnalyzerDescriptor :
 		AnalyzerDescriptorBase<PatternAnalyzerDescriptor, IPatternAnalyzer>, IPatternAnalyzer
 	{
