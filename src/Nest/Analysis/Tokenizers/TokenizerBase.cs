@@ -14,7 +14,7 @@ namespace Nest
 		string Type { get; }
 	}
 
-	public abstract class TokenizerBase : IAnalysisSetting
+	public abstract class TokenizerBase : ITokenizer
 	{
 		public string Version { get; set; }
 

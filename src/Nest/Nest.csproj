@@ -241,7 +241,6 @@
     <Compile Include="Analysis\CharFilters\HtmlStripCharFilter.cs" />
     <Compile Include="Analysis\CharFilters\MappingCharFilter.cs" />
     <Compile Include="Analysis\CharFilters\PatternReplaceCharFilter.cs" />
-    <Compile Include="Analysis\IAnalysisSetting.cs" />
     <Compile Include="Analysis\TokenFilters\AsciiFoldingTokenFilter.cs" />
     <Compile Include="Analysis\TokenFilters\CommonGramsTokenFilter.cs" />
     <Compile Include="Analysis\TokenFilters\CompoundWord\CompoundWordTokenFilter.cs" />

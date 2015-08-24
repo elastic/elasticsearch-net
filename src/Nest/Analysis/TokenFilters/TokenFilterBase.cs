@@ -14,7 +14,7 @@ namespace Nest
 
 	}
 
-	public abstract class TokenFilterBase : IAnalysisSetting
+	public abstract class TokenFilterBase : ITokenFilter
 	{
 		protected TokenFilterBase(string type)
 		{
