@@ -71,6 +71,8 @@ namespace Nest
 		: PropertyDescriptorBase<NumberPropertyDescriptor<T>, INumberProperty, T>, INumberProperty
 		where T : class
 	{
+		public NumberPropertyDescriptor() : base("double") { }
+
 		NonStringIndexOption? INumberProperty.Index { get; set; }
 		double? INumberProperty.Boost { get; set; }
 		double? INumberProperty.NullValue { get; set; }

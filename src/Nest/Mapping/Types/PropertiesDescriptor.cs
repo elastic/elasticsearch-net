@@ -71,7 +71,7 @@ namespace Nest
 
 		private PropertiesDescriptor<T> SetProperty<TDescriptor, TInterface>(Func<TDescriptor, TInterface> selector)
 			where TDescriptor : class, TInterface, new()
-			where TInterface : class, IElasticsearchProperty
+			where TInterface : IElasticsearchProperty
 		{
 			selector.ThrowIfNull(nameof(selector));
 			var type = selector(new TDescriptor());

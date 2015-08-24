@@ -55,6 +55,8 @@ namespace Nest
 		string IIpProperty.NullValue { get; set; }
 		bool? IIpProperty.IncludeInAll { get; set; }
 
+		public IpPropertyDescriptor() : base("ip") { }
+
 		public IpPropertyDescriptor<T> Index(NonStringIndexOption? index) => Assign(a => a.Index = index);
 
 		public IpPropertyDescriptor<T> Boost(double boost) => Assign(a => a.Boost = boost);

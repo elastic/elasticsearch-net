@@ -13,7 +13,8 @@ using Elasticsearch.Net;
 namespace Tests.Mapping
 {
 	[Collection(IntegrationContext.ReadOnly)]
-	public abstract class MapUsageBase : ApiCallIntegration<IIndicesResponse, IPutMappingRequest, PutMappingDescriptor<Project>, PutMappingRequest<Project>>
+	public abstract class MapUsageBase 
+		: ApiCallIntegration<IIndicesResponse, IPutMappingRequest, PutMappingDescriptor<Project>, PutMappingRequest<Project>>
 	{
 		protected MapUsageBase(ReadOnlyCluster cluster, ApiUsage usage) : base(cluster, usage) { }
 

@@ -176,6 +176,7 @@
     <Compile Include="Mapping\AttributeBased\StringAttribute.cs" />
     <Compile Include="Mapping\AttributeBased\TokenCountAttribute.cs" />
     <Compile Include="Indices\MappingManagement\GetFieldMapping\FieldMappingJsonConverter.cs" />
+    <Compile Include="Mapping\ITypeMapping.cs" />
     <Compile Include="Mapping\Types\PropertiesJsonConverter.cs" />
     <Compile Include="Mapping\Types\PropertyJsonConverter.cs" />
     <Compile Include="Mapping\SimilarityOption.cs" />
@@ -965,7 +966,6 @@
     <Compile Include="Indices\StatusManagement\ClearCache\ElasticClient-ClearCache.cs" />
     <Compile Include="Indices\IndexSettings\Analyze\AnalyzeToken.cs" />
     <Compile Include="Mapping\Types\ElasticsearchProperty.cs" />
-    <Compile Include="Mapping\Types\RootObjectProperty.cs" />
     <Compile Include="Mapping\Fields\Id\IdField.cs" />
     <Compile Include="Indices\IndexSettings\Analyze\AnalyzeResponse.cs" />
     <Compile Include="Search\Count\CountResponse.cs" />
@@ -1010,7 +1010,7 @@
     <Compile Include="CommonOptions\Hit\ShardsMetaData.cs" />
     <Compile Include="Search\Count\ElasticClient-Count.cs" />
     <Compile Include="Document\Single\Delete\ElasticClient-Delete.cs" />
-    <Compile Include="Indices\MappingManagement\PutMapping\ElasticClient-MappingType.cs" />
+    <Compile Include="Indices\MappingManagement\PutMapping\ElasticClient-Map.cs" />
     <Compile Include="Document\Single\Source\ElasticClient-Source.cs" />
     <Compile Include="Document\Single\Index\ElasticClient-Index.cs" />
     <Compile Include="ElasticClient.cs" />

@@ -21,6 +21,8 @@ namespace Nest
 		IEnumerable<FieldName> IElasticsearchProperty.CopyTo { get; set; }
 		IDictionary<FieldName, IElasticsearchProperty> IElasticsearchProperty.Fields { get; set; }
 
+		public PropertyDescriptorBase(string type) { ((IElasticsearchProperty)this).Type = type; }
+
 		public TDescriptor Name(FieldName name) => Assign(a => a.Name = name);
 
 		public TDescriptor Name(Expression<Func<T, object>> objectPath) => Assign(a => a.Name = objectPath);
