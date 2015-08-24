@@ -9,4 +9,11 @@
 	{
 		public KeywordRepeatTokenFilter() : base("keyword_repeat") { }
 	}
+	///<inheritdoc/>
+	public class KeywordRepeatTokenFilterDescriptor 
+		: TokenFilterDescriptorBase<KeywordRepeatTokenFilterDescriptor, IKeywordRepeatTokenFilter>, IKeywordRepeatTokenFilter
+	{
+		protected override string Type => "keyword_repeat";
+	}
+
 }

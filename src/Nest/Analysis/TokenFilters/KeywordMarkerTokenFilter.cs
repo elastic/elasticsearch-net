@@ -41,4 +41,26 @@ namespace Nest
 		/// <inheritdoc/>
 		public bool? IgnoreCase { get; set; }
 	}
+	///<inheritdoc/>
+	public class KeywordMarkerTokenFilterDescriptor 
+		: TokenFilterDescriptorBase<KeywordMarkerTokenFilterDescriptor, IKeywordMarkerTokenFilter>, IKeywordMarkerTokenFilter
+	{
+		protected override string Type => "keyword_marker";
+
+		IEnumerable<string> IKeywordMarkerTokenFilter.Keywords { get; set; }
+		string IKeywordMarkerTokenFilter.KeywordsPath { get; set; }
+		bool? IKeywordMarkerTokenFilter.IgnoreCase { get; set; }
+
+		///<inheritdoc/>
+		public KeywordMarkerTokenFilterDescriptor IgnoreCase(bool? ignoreCase = true) => Assign(a => a.IgnoreCase = ignoreCase);
+
+		///<inheritdoc/>
+		public KeywordMarkerTokenFilterDescriptor KeywordsPath(string path) => Assign(a => a.KeywordsPath = path);
+
+		///<inheritdoc/>
+		public KeywordMarkerTokenFilterDescriptor Keywords(IEnumerable<string> keywords) => Assign(a => a.Keywords = keywords);
+
+		///<inheritdoc/>
+		public KeywordMarkerTokenFilterDescriptor Keywords(params string[] keywords) => Assign(a => a.Keywords = keywords);
+	}
 }

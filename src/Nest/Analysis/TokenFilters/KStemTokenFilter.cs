@@ -10,4 +10,11 @@
 	{
 		public KStemTokenFilter() : base("kstem") { }
 	}
+	///<inheritdoc/>
+	public class KStemTokenFilterDescriptor 
+		: TokenFilterDescriptorBase<KStemTokenFilterDescriptor, IKStemTokenFilter>, IKStemTokenFilter
+	{
+		protected override string Type => "kstem";
+	}
+
 }

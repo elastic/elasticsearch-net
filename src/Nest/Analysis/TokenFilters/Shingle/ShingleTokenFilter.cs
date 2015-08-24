@@ -69,4 +69,37 @@ namespace Nest
 		/// <inheritdoc/>
 		public string FillerToken { get; set; }
 	}
+	///<inheritdoc/>
+	public class ShingleTokenFilterDescriptor 
+		: TokenFilterDescriptorBase<ShingleTokenFilterDescriptor, IShingleTokenFilter>, IShingleTokenFilter
+	{
+		protected override string Type => "shingle";
+
+		bool? IShingleTokenFilter.OutputUnigrams { get; set; }
+		bool? IShingleTokenFilter.OutputUnigramsIfNoShingles { get; set; }
+		int? IShingleTokenFilter.MinShingleSize { get; set; }
+		int? IShingleTokenFilter.MaxShingleSize { get; set; }
+		string IShingleTokenFilter.TokenSeparator { get; set; }
+		string IShingleTokenFilter.FillerToken { get; set; }
+
+		///<inheritdoc/>
+		public ShingleTokenFilterDescriptor OutputUnigrams(bool? output = true) => Assign(a => a.OutputUnigrams = output);
+
+		///<inheritdoc/>
+		public ShingleTokenFilterDescriptor OutputUnigramsIfNoShingles(bool? outputIfNo = true) => Assign(a => a.OutputUnigramsIfNoShingles = outputIfNo);
+
+		///<inheritdoc/>
+		public ShingleTokenFilterDescriptor MinShingleSize(int? minShingleSize) => Assign(a => a.MinShingleSize = minShingleSize);
+
+		///<inheritdoc/>
+		public ShingleTokenFilterDescriptor MaxShingleSize(int? maxShingleSize) => Assign(a => a.MaxShingleSize = maxShingleSize);
+
+		///<inheritdoc/>
+		public ShingleTokenFilterDescriptor TokenSeparator(string separator) => Assign(a => a.TokenSeparator = separator);
+
+		///<inheritdoc/>
+		public ShingleTokenFilterDescriptor FillerToken(string filler) => Assign(a => a.FillerToken = filler);
+
+	}
+
 }

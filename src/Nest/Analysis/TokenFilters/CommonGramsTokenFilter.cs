@@ -32,7 +32,6 @@ namespace Nest
 		/// </summary>
 		[JsonProperty("query_mode")]
 		bool? QueryMode { get; set; }
-
 	}
 
 	/// <inheritdoc/>
@@ -51,6 +50,34 @@ namespace Nest
 
 		/// <inheritdoc/>
 		public bool? QueryMode { get; set; }
+
+	}
+
+	///<inheritdoc/>
+	public class CommonGramsTokenFilterDescriptor 
+		: TokenFilterDescriptorBase<CommonGramsTokenFilterDescriptor, ICommonGramsTokenFilter>, ICommonGramsTokenFilter
+	{
+		protected override string Type => "common_grams";
+
+		IEnumerable<string> ICommonGramsTokenFilter.CommonWords { get; set; }
+		string ICommonGramsTokenFilter.CommonWordsPath { get; set; }
+		bool? ICommonGramsTokenFilter.IgnoreCase { get; set; }
+		bool? ICommonGramsTokenFilter.QueryMode { get; set; }
+
+		///<inheritdoc/>
+		public CommonGramsTokenFilterDescriptor QueryMode(bool? queryMode = true) => Assign(a => a.QueryMode = queryMode);
+
+		///<inheritdoc/>
+		public CommonGramsTokenFilterDescriptor IgnoreCase(bool? ignoreCase = true) => Assign(a => a.IgnoreCase = ignoreCase);
+
+		///<inheritdoc/>
+		public CommonGramsTokenFilterDescriptor CommonWordsPath(string path) => Assign(a => a.CommonWordsPath = path);
+
+		///<inheritdoc/>
+		public CommonGramsTokenFilterDescriptor CommonWords(IEnumerable<string> commonWords) => Assign(a => a.CommonWords = commonWords);
+
+		///<inheritdoc/>
+		public CommonGramsTokenFilterDescriptor CommonWords(string[] commonWords) => Assign(a => a.CommonWords = commonWords);
 
 	}
 

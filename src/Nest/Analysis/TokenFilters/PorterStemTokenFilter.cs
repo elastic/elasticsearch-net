@@ -7,6 +7,13 @@
 	/// <inheritdoc/>
 	public class PorterStemTokenFilter : TokenFilterBase, IPorterStemTokenFilter
 	{
-		public PorterStemTokenFilter() : base("porterStem") { }
+		public PorterStemTokenFilter() : base("porter_stem") { }
 	}
+	///<inheritdoc/>
+	public class PorterStemTokenFilterDescriptor 
+		: TokenFilterDescriptorBase<PorterStemTokenFilterDescriptor, IPorterStemTokenFilter>, IPorterStemTokenFilter
+	{
+		protected override string Type => "porter_stem";
+	}
+
 }

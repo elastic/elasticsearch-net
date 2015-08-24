@@ -5,7 +5,7 @@ namespace Nest
 	/// <summary>
 	/// A token filter of type nGram.
 	/// </summary>
-	public interface INgramTokenFilter : ITokenFilter
+	public interface INGramTokenFilter : ITokenFilter
 	{
 		/// <summary>
 		/// Defaults to 1. 
@@ -21,9 +21,9 @@ namespace Nest
 	}
 
 	/// <inheritdoc/>
-	public class NgramTokenFilter : TokenFilterBase
+	public class NGramTokenFilter : TokenFilterBase
 	{
-		public NgramTokenFilter() : base("nGram") { }
+		public NGramTokenFilter() : base("ngram") { }
 
 		/// <inheritdoc/>
 		public int? MinGram { get; set; }
@@ -31,4 +31,21 @@ namespace Nest
 		/// <inheritdoc/>
 		public int? MaxGram { get; set; }
 	}
+	///<inheritdoc/>
+	public class NGramTokenFilterDescriptor 
+		: TokenFilterDescriptorBase<NGramTokenFilterDescriptor, INGramTokenFilter>, INGramTokenFilter
+	{
+		protected override string Type => "ngram";
+
+		int? INGramTokenFilter.MinGram { get; set; }
+		int? INGramTokenFilter.MaxGram { get; set; }
+
+		///<inheritdoc/>
+		public NGramTokenFilterDescriptor MinGram(int? minGram) => Assign(a => a.MinGram = minGram);
+
+		///<inheritdoc/>
+		public NGramTokenFilterDescriptor MaxGram(int? maxGram) => Assign(a => a.MaxGram = maxGram);
+
+	}
+
 }

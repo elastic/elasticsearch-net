@@ -54,4 +54,29 @@ namespace Nest
 		/// <inheritdoc/>
 		public bool? RemoveTrailing { get; set; }
 	}
+	///<inheritdoc/>
+	public class StopTokenFilterDescriptor 
+		: TokenFilterDescriptorBase<StopTokenFilterDescriptor, IStopTokenFilter>, IStopTokenFilter
+	{
+		protected override string Type => "stop";
+
+		bool? IStopTokenFilter.IgnoreCase { get; set; }
+		bool? IStopTokenFilter.RemoveTrailing { get; set; }
+		StopWords IStopTokenFilter.Stopwords { get; set; }
+		string IStopTokenFilter.StopwordsPath { get; set; }
+
+		///<inheritdoc/>
+		public StopTokenFilterDescriptor IgnoreCase(bool? ignoreCase = true) => Assign(a => a.IgnoreCase = ignoreCase);
+
+		///<inheritdoc/>
+		public StopTokenFilterDescriptor RemoveTrailing(bool? removeTrailing = true) => Assign(a => a.RemoveTrailing = removeTrailing);
+
+		///<inheritdoc/>
+		public StopTokenFilterDescriptor Stopwords(StopWords stopWords) => Assign(a => a.Stopwords = stopWords);
+
+		///<inheritdoc/>
+		public StopTokenFilterDescriptor StopwordsPath(string path) => Assign(a => a.StopwordsPath = path);
+
+	}
+
 }

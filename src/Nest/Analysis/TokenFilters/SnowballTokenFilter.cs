@@ -8,7 +8,7 @@ namespace Nest
 	public interface ISnowballTokenFilter : ITokenFilter
 	{
 		[JsonProperty("language")]
-		SnowballLanguage Language { get; set; }
+		SnowballLanguage? Language { get; set; }
 	}
 
 	/// <inheritdoc/>
@@ -16,8 +16,21 @@ namespace Nest
 	{
 		public SnowballTokenFilter() : base("snowball") { }
 
+		///<inheritdoc/>
 		[JsonProperty("language")]
-		public SnowballLanguage Language { get; set; }
+		public SnowballLanguage? Language { get; set; }
 
 	}
+	///<inheritdoc/>
+	public class SnowballTokenFilterDescriptor 
+		: TokenFilterDescriptorBase<SnowballTokenFilterDescriptor, ISnowballTokenFilter>, ISnowballTokenFilter
+	{
+		protected override string Type => "snowball";
+
+		SnowballLanguage? ISnowballTokenFilter.Language { get; set; }
+
+		///<inheritdoc/>
+		public SnowballTokenFilterDescriptor Language(SnowballLanguage? language) => Assign(a => a.Language = language);
+	}
+
 }

@@ -42,4 +42,28 @@ namespace Nest
 		public bool? KeepWordsCase { get; set; }
 
 	}
+	///<inheritdoc/>
+	public class KeepWordsTokenFilterDescriptor 
+		: TokenFilterDescriptorBase<KeepWordsTokenFilterDescriptor, IKeepWordsTokenFilter>, IKeepWordsTokenFilter
+	{
+		protected override string Type => "keep";
+
+		bool? IKeepWordsTokenFilter.KeepWordsCase { get; set; }
+		string IKeepWordsTokenFilter.KeepWordsPath { get; set; }
+		IEnumerable<string> IKeepWordsTokenFilter.KeepWords { get; set; }
+
+		///<inheritdoc/>
+		public KeepWordsTokenFilterDescriptor KeepWordsCase(bool? keepCase = true) => Assign(a => a.KeepWordsCase = keepCase);
+
+		///<inheritdoc/>
+		public KeepWordsTokenFilterDescriptor KeepWordsPath(string path) => Assign(a => a.KeepWordsPath = path);
+
+		///<inheritdoc/>
+		public KeepWordsTokenFilterDescriptor KeepWords(IEnumerable<string> keepWords) => Assign(a => a.KeepWords = keepWords);
+
+		///<inheritdoc/>
+		public KeepWordsTokenFilterDescriptor KeepWords(params string[] keepWords) => Assign(a => a.KeepWords = keepWords);
+
+	}
+
 }

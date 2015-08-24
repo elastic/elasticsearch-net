@@ -10,5 +10,10 @@
 	{
 		public TrimTokenFilter() : base("trim") { }
 	}
-
+	///<inheritdoc/>
+	public class TrimTokenFilterDescriptor 
+		: TokenFilterDescriptorBase<TrimTokenFilterDescriptor, ITrimTokenFilter>, ITrimTokenFilter
+	{
+		protected override string Type => "trim";
+	}
 }

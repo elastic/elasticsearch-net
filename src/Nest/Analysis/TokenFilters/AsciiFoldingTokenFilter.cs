@@ -20,4 +20,17 @@ namespace Nest
 
 		public bool? PreserveOriginal { get; set; }
 	}
+
+	///<inheritdoc/>
+	public class AsciiFoldingTokenFilterDescriptor 
+		: TokenFilterDescriptorBase<AsciiFoldingTokenFilterDescriptor, IAsciiFoldingTokenFilter>, IAsciiFoldingTokenFilter
+	{
+		protected override string Type => "asciifolding";
+
+		bool? IAsciiFoldingTokenFilter.PreserveOriginal { get; set; }
+
+		///<inheritdoc/>
+		public AsciiFoldingTokenFilterDescriptor PreserveOriginal(bool? preserve = true) => Assign(a => a.PreserveOriginal = preserve);
+	}
+
 }

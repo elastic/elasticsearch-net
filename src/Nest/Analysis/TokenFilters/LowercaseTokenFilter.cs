@@ -22,4 +22,16 @@ namespace Nest
 		/// <inheritdoc/>
 		public string Language { get; set; }
 	}
+	///<inheritdoc/>
+	public class LowercaseTokenFilterDescriptor 
+		: TokenFilterDescriptorBase<LowercaseTokenFilterDescriptor, ILowercaseTokenFilter>, ILowercaseTokenFilter
+	{
+		protected override string Type => "lowercase";
+
+		string ILowercaseTokenFilter.Language { get; set; }
+
+		///<inheritdoc/>
+		public LowercaseTokenFilterDescriptor Language(string language) => Assign(a => a.Language = language);
+	}
+
 }

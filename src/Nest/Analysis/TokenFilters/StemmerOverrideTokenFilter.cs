@@ -32,4 +32,24 @@ namespace Nest
 		public string RulesPath { get; set; }
 
 	}
+	///<inheritdoc/>
+	public class StemmerOverrideTokenFilterDescriptor 
+		: TokenFilterDescriptorBase<StemmerOverrideTokenFilterDescriptor, IStemmerOverrideTokenFilter>, IStemmerOverrideTokenFilter
+	{
+		protected override string Type => "stemmer_override";
+
+		IEnumerable<string> IStemmerOverrideTokenFilter.Rules { get; set; }
+		string IStemmerOverrideTokenFilter.RulesPath { get; set; }
+
+		///<inheritdoc/>
+		public StemmerOverrideTokenFilterDescriptor Rules(IEnumerable<string> rules) => Assign(a => a.Rules = rules);
+
+		///<inheritdoc/>
+		public StemmerOverrideTokenFilterDescriptor Rules(params string[] rules) => Assign(a => a.Rules = rules);
+
+		///<inheritdoc/>
+		public StemmerOverrideTokenFilterDescriptor RulesPath(string path) => Assign(a => a.RulesPath = path);
+
+	}
+
 }

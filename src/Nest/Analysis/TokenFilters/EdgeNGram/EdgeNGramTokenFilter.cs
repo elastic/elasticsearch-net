@@ -29,7 +29,7 @@ namespace Nest
 	/// <inheritdoc/>
 	public class EdgeNGramTokenFilter : TokenFilterBase, IEdgeNGramTokenFilter
 	{
-		public EdgeNGramTokenFilter() : base("edgeNGram") { }
+		public EdgeNGramTokenFilter() : base("edge_ngram") { }
 
 		/// <inheritdoc/>
 		public int? MinGram { get; set; }
@@ -40,4 +40,25 @@ namespace Nest
 		/// <inheritdoc/>
 		public EdgeNGramSide? Side { get; set; }
 	}
+	///<inheritdoc/>
+	public class EdgeNGramTokenFilterDescriptor 
+		: TokenFilterDescriptorBase<EdgeNGramTokenFilterDescriptor, IEdgeNGramTokenFilter>, IEdgeNGramTokenFilter
+	{
+		protected override string Type => "edge_ngram";
+
+		int? IEdgeNGramTokenFilter.MinGram { get; set; }
+		int? IEdgeNGramTokenFilter.MaxGram { get; set; }
+		EdgeNGramSide? IEdgeNGramTokenFilter.Side { get; set; }
+
+		///<inheritdoc/>
+		public EdgeNGramTokenFilterDescriptor MinGram(int? minGram) => Assign(a => a.MinGram = minGram);
+
+		///<inheritdoc/>
+		public EdgeNGramTokenFilterDescriptor MaxGram(int? maxGram) => Assign(a => a.MaxGram = maxGram);
+
+		///<inheritdoc/>
+		public EdgeNGramTokenFilterDescriptor Side(EdgeNGramSide? side) => Assign(a => a.Side = side);
+
+	}
+
 }

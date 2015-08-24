@@ -23,4 +23,17 @@ namespace Nest
 		/// <inheritdoc/>
 		public bool? OnlyOnSamePosition { get; set; }
 	}
+
+	///<inheritdoc/>
+	public class UniqueTokenFilterDescriptor 
+		: TokenFilterDescriptorBase<UniqueTokenFilterDescriptor, IUniqueTokenFilter>, IUniqueTokenFilter
+	{
+		protected override string Type => "unique";
+
+		bool? IUniqueTokenFilter.OnlyOnSamePosition { get; set; }
+
+		///<inheritdoc/>
+		public UniqueTokenFilterDescriptor OnlyOnSamePosition(bool? samePositionOnly = true) => Assign(a => a.OnlyOnSamePosition = samePositionOnly);
+	}
+
 }

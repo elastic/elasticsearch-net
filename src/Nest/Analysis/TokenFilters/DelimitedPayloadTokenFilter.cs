@@ -35,4 +35,21 @@ namespace Nest
 
 	}
 
+	///<inheritdoc/>
+	public class DelimitedPayloadTokenFilterDescriptor 
+		: TokenFilterDescriptorBase<DelimitedPayloadTokenFilterDescriptor, IDelimitedPayloadTokenFilter>, IDelimitedPayloadTokenFilter
+	{
+		protected override string Type => "delimited_payload_filter";
+
+		char IDelimitedPayloadTokenFilter.Delimiter { get; set; }
+		string IDelimitedPayloadTokenFilter.Encoding { get; set; }
+
+		///<inheritdoc/>
+		public DelimitedPayloadTokenFilterDescriptor Delimiter(char delimiter) => Assign(a => a.Delimiter = delimiter);
+
+		///<inheritdoc/>
+		public DelimitedPayloadTokenFilterDescriptor Encoding(string encoding) => Assign(a => a.Encoding = encoding);
+
+	}
+
 }

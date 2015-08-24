@@ -30,4 +30,21 @@ namespace Nest
 		/// <inheritdoc/>
 		public bool? ConsumeAllTokens { get; set; }
 	}
+	///<inheritdoc/>
+	public class LimitTokenCountTokenFilterDescriptor 
+		: TokenFilterDescriptorBase<LimitTokenCountTokenFilterDescriptor, ILimitTokenCountTokenFilter>, ILimitTokenCountTokenFilter
+	{
+		protected override string Type => "limit";
+
+		int? ILimitTokenCountTokenFilter.MaxTokenCount { get; set; }
+		bool? ILimitTokenCountTokenFilter.ConsumeAllTokens { get; set; }
+
+		///<inheritdoc/>
+		public LimitTokenCountTokenFilterDescriptor ConsumeAllToken(bool? consumeAllTokens = true) => Assign(a => a.ConsumeAllTokens = consumeAllTokens);
+
+		///<inheritdoc/>
+		public LimitTokenCountTokenFilterDescriptor MaxTokenCount(int? maxTokenCount) => Assign(a => a.MaxTokenCount = maxTokenCount);
+
+	}
+
 }

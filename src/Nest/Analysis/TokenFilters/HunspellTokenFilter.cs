@@ -21,7 +21,8 @@ namespace Nest
 		string Locale { get; set; }
 
 		/// <summary>
-		/// The name of a dictionary.
+		/// The name of a dictionary.The path to your hunspell dictionaries should be configured via 
+		/// `indices.analysis.hunspell.dictionary.location` before.
 		/// </summary>
 		[JsonProperty("dictionary")]
 		string Dictionary { get; set; }
@@ -60,6 +61,35 @@ namespace Nest
 		/// <inheritdoc/>
 		public bool? LongestOnly { get; set; }
 
+
+	}
+
+	///<inheritdoc/>
+	public class HunspellTokenFilterDescriptor 
+		: TokenFilterDescriptorBase<HunspellTokenFilterDescriptor, IHunspellTokenFilter>, IHunspellTokenFilter
+	{
+		protected override string Type => "hunspell";
+
+		bool? IHunspellTokenFilter.LongestOnly { get; set; }
+		bool? IHunspellTokenFilter.Dedup { get; set; }
+		bool? IHunspellTokenFilter.IgnoreCase { get; set; }
+		string IHunspellTokenFilter.Locale { get; set; }
+		string IHunspellTokenFilter.Dictionary { get; set; }
+
+		///<inheritdoc/>
+		public HunspellTokenFilterDescriptor LongestOnly(bool? longestOnly = true) => Assign(a => a.LongestOnly = longestOnly);
+
+		///<inheritdoc/>
+		public HunspellTokenFilterDescriptor Dedup(bool? dedup = true) => Assign(a => a.Dedup = dedup);
+
+		///<inheritdoc/>
+		public HunspellTokenFilterDescriptor IgnoreCase(bool? ignoreCase = true) => Assign(a => a.IgnoreCase = ignoreCase);
+
+		///<inheritdoc/>
+		public HunspellTokenFilterDescriptor Locale(string locale) => Assign(a => a.Locale = locale);
+
+		///<inheritdoc/>
+		public HunspellTokenFilterDescriptor Dictionary(string dictionary) => Assign(a => a.Dictionary = dictionary);
 
 	}
 

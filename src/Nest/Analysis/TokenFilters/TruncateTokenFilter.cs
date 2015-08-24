@@ -24,4 +24,16 @@ namespace Nest
 		/// <inheritdoc/>
 		public int? Length { get; set; }
 	}
+	///<inheritdoc/>
+	public class TruncateTokenFilterDescriptor 
+		: TokenFilterDescriptorBase<TruncateTokenFilterDescriptor, ITruncateTokenFilter>, ITruncateTokenFilter
+	{
+		protected override string Type => "truncate";
+
+		int? ITruncateTokenFilter.Length { get; set; }
+
+		///<inheritdoc/>
+		public TruncateTokenFilterDescriptor Length(int? length) => Assign(a => a.Length = length);
+	}
+
 }

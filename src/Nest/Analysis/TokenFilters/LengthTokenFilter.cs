@@ -11,13 +11,13 @@ namespace Nest
 		/// The minimum number. Defaults to 0. 
 		/// </summary>
 		[JsonProperty("min")]
-		int? Minimum { get; set; }
+		int? Min { get; set; }
 
 		/// <summary>
 		/// The maximum number. Defaults to Integer.MAX_VALUE.
 		/// </summary>
 		[JsonProperty("max")]
-		int? Maximum { get; set; }
+		int? Max { get; set; }
 	}
 	/// <inheritdoc/>
 	public class LengthTokenFilter : TokenFilterBase, ILengthTokenFilter
@@ -25,9 +25,26 @@ namespace Nest
 		public LengthTokenFilter() : base("length") { }
 
 		/// <inheritdoc/>
-		public int? Minimum { get; set; }
+		public int? Min { get; set; }
 
 		/// <inheritdoc/>
-		public int? Maximum { get; set; }
+		public int? Max { get; set; }
 	}
+	///<inheritdoc/>
+	public class LengthTokenFilterDescriptor 
+		: TokenFilterDescriptorBase<LengthTokenFilterDescriptor, ILengthTokenFilter>, ILengthTokenFilter
+	{
+		protected override string Type => "length";
+
+		int? ILengthTokenFilter.Min { get; set; }
+		int? ILengthTokenFilter.Max { get; set; }
+
+		///<inheritdoc/>
+		public LengthTokenFilterDescriptor Minimum(int? minimum) => Assign(a => a.Min = minimum);
+
+		///<inheritdoc/>
+		public LengthTokenFilterDescriptor Max(int? maximum) => Assign(a => a.Max = maximum);
+
+	}
+
 }

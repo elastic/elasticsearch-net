@@ -24,27 +24,28 @@ namespace Nest
 		/// Minimum word size.
 		/// </summary>
 		[JsonProperty("min_word_size")]
-		int MinWordSize { get; set; }
+		int? MinWordSize { get; set; }
 
 		/// <summary>
 		/// Minimum subword size.
 		/// </summary>
 		[JsonProperty("min_subword_size")]
-		int MinSubwordSize { get; set; }
+		int? MinSubwordSize { get; set; }
 
 		/// <summary>
 		/// Maximum subword size.
 		/// </summary>
 		[JsonProperty("max_subword_size")]
-		int MaxSubwordSize { get; set; }
+		int? MaxSubwordSize { get; set; }
 
 		/// <summary>
 		/// Only matching the longest.
 		/// </summary>
 		[JsonProperty("only_longest_match")]
-		bool OnlyLongestMatch { get; set; }
+		bool? OnlyLongestMatch { get; set; }
 	}
-	public abstract class CompoundWordTokenFilter : TokenFilterBase
+
+	public abstract class CompoundWordTokenFilter : TokenFilterBase, ICompoundWordTokenFilter
 	{
 		protected CompoundWordTokenFilter(string type) : base(type) { } 
 
@@ -55,16 +56,57 @@ namespace Nest
 		public string WordListPath { get; set; }
 
 		/// <inheritdoc/>
-		public int MinWordSize { get; set; }
+		public int? MinWordSize { get; set; }
 
 		/// <inheritdoc/>
-		public int MinSubwordSize { get; set; }
+		public int? MinSubwordSize { get; set; }
 
 		/// <inheritdoc/>
-		public int MaxSubwordSize { get; set; }
+		public int? MaxSubwordSize { get; set; }
 
 		/// <inheritdoc/>
-		public bool OnlyLongestMatch { get; set; }
+		public bool? OnlyLongestMatch { get; set; }
 	}
+	
+	///<inheritdoc/>
+	public abstract class CompoundWordTokenFilterDescriptorBase<TCompound, TCompoundInterface> 
+		: TokenFilterDescriptorBase<TCompound, TCompoundInterface>, ICompoundWordTokenFilter
+		where TCompound : CompoundWordTokenFilterDescriptorBase<TCompound, TCompoundInterface>, TCompoundInterface
+		where TCompoundInterface : class, ICompoundWordTokenFilter
+	{
+		IEnumerable<string> ICompoundWordTokenFilter.WordList { get; set; }
+		string ICompoundWordTokenFilter.WordListPath { get; set; }
+		int? ICompoundWordTokenFilter.MinWordSize { get; set; }
+		int? ICompoundWordTokenFilter.MinSubwordSize { get; set; }
+		int? ICompoundWordTokenFilter.MaxSubwordSize { get; set; }
+		bool? ICompoundWordTokenFilter.OnlyLongestMatch { get; set; }
+
+		///<inheritdoc/>
+		public TCompound WordList(IEnumerable<string> wordList) => Assign(a => a.WordList = wordList);
+
+		///<inheritdoc/>
+		public TCompound WordList(params string[] wordList) => Assign(a => a.WordList = wordList);
+
+		///<inheritdoc/>
+		public TCompound WordListPath(string path) => Assign(a => a.WordListPath = path);
+
+		///<inheritdoc/>
+		public TCompound MinWordSize(int? minWordSize) => Assign(a => a.MinWordSize = minWordSize);
+
+		///<inheritdoc/>
+		public TCompound MinSubwordSize(int? minSubwordSize) => Assign(a => a.MinSubwordSize = minSubwordSize);
+
+		///<inheritdoc/>
+		public TCompound MaxSubwordSize(int? maxSubwordSize) => Assign(a => a.MaxSubwordSize = maxSubwordSize);
+
+		///<inheritdoc/>
+		public TCompound OnlyLongestMatch(bool? onlyLongest) => Assign(a => a.OnlyLongestMatch = onlyLongest);
+
+	}
+
+
+}
+	}
+
 
 }

@@ -31,4 +31,24 @@ namespace Nest
 		/// <inheritdoc/>
 		public bool? PreserveOriginal { get; set; }
 	}
+	///<inheritdoc/>
+	public class PatternCaptureTokenFilterDescriptor 
+		: TokenFilterDescriptorBase<PatternCaptureTokenFilterDescriptor, IPatternCaptureTokenFilter>, IPatternCaptureTokenFilter
+	{
+		protected override string Type => "pattern_capture";
+
+		bool? IPatternCaptureTokenFilter.PreserveOriginal { get; set; }
+		IEnumerable<string> IPatternCaptureTokenFilter.Patterns { get; set; }
+
+		///<inheritdoc/>
+		public PatternCaptureTokenFilterDescriptor PreserveOriginal(bool? preserve = true) => Assign(a => a.PreserveOriginal = preserve);
+
+		///<inheritdoc/>
+		public PatternCaptureTokenFilterDescriptor Patterns(IEnumerable<string> patterns) => Assign(a => a.Patterns = patterns);
+
+		///<inheritdoc/>
+		public PatternCaptureTokenFilterDescriptor PreserveOriginal(params string[] patterns) => Assign(a => a.Patterns = patterns);
+
+	}
+
 }

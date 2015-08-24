@@ -10,4 +10,11 @@
 		public StandardTokenFilter() : base("standard") { }
 	}
 
+	///<inheritdoc/>
+	public class StandardTokenFilterDescriptor 
+		: TokenFilterDescriptorBase<StandardTokenFilterDescriptor, IStandardTokenFilter>, IStandardTokenFilter
+	{
+		protected override string Type => "standard";
+	}
+
 }

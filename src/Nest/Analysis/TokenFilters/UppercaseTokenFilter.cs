@@ -11,4 +11,11 @@
 		public UppercaseTokenFilter() : base("uppercase") { }
 	}
 
+	///<inheritdoc/>
+	public class UppercaseTokenFilterDescriptor 
+		: TokenFilterDescriptorBase<UppercaseTokenFilterDescriptor, IUppercaseTokenFilter>, IUppercaseTokenFilter
+	{
+		protected override string Type => "uppercase";
+	}
+
 }

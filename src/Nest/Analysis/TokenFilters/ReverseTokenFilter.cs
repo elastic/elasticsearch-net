@@ -9,5 +9,11 @@
 	{
 		public ReverseTokenFilter() : base("reverse") { }
 	}
+	///<inheritdoc/>
+	public class ReverseTokenFilterDescriptor 
+		: TokenFilterDescriptorBase<ReverseTokenFilterDescriptor, IReverseTokenFilter>, IReverseTokenFilter
+	{
+		protected override string Type => "reverse";
+	}
 
 }

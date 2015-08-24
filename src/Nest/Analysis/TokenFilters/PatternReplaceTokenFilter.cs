@@ -30,4 +30,22 @@ namespace Nest
 		/// <inheritdoc/>
 		public string Replacement { get; set; }
 	}
+	///<inheritdoc/>
+	public class PatternReplaceTokenFilterDescriptor 
+		: TokenFilterDescriptorBase<PatternReplaceTokenFilterDescriptor, IPatternReplaceTokenFilter>, IPatternReplaceTokenFilter
+	{
+		protected override string Type => "pattern_replace";
+
+		string IPatternReplaceTokenFilter.Pattern { get; set; }
+
+		string IPatternReplaceTokenFilter.Replacement { get; set; }
+
+		///<inheritdoc/>
+		public PatternReplaceTokenFilterDescriptor Pattern(string pattern) => Assign(a => a.Pattern = pattern);
+
+		///<inheritdoc/>
+		public PatternReplaceTokenFilterDescriptor Replacement(string replacement) => Assign(a => a.Replacement = replacement);
+
+	}
+
 }

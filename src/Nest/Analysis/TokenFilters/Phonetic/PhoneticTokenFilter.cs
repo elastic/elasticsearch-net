@@ -26,15 +26,26 @@ namespace Nest
 		public PhoneticTokenFilter() : base("phonetic") { }
 
 		/// <inheritdoc/>
-		PhoneticEncoder? string Encoder { get; set; }
+		public PhoneticEncoder? Encoder { get; set; }
 
 		/// <inheritdoc/>
 		public bool? Replace { get; set; }
 
 	}
 
+	///<inheritdoc/>
+	public class PhoneticTokenFilterDescriptor
+		: TokenFilterDescriptorBase<PhoneticTokenFilterDescriptor, IPhoneticTokenFilter>, IPhoneticTokenFilter
+	{
+		protected override string Type => "phonetic";
 
+		bool? IPhoneticTokenFilter.Replace { get; set; }
+		PhoneticEncoder? IPhoneticTokenFilter.Encoder { get; set; }
+
+		///<inheritdoc/>
+		public PhoneticTokenFilterDescriptor Replace(bool? replace = true) => Assign(a => a.Replace = replace);
+
+		///<inheritdoc/>
+		public PhoneticTokenFilterDescriptor Encoder(PhoneticEncoder? encoder) => Assign(a => a.Encoder = encoder);
+	}
 }
-
-
-
