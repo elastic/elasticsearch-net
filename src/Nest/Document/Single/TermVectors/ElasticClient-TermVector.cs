@@ -8,7 +8,7 @@ namespace Nest
 {
 	public partial class ElasticClient
 	{
-		///<inheritdoc />
+		///<inheritdoc/>
 		public ITermVectorResponse TermVector<T>(Func<TermvectorDescriptor<T>, TermvectorDescriptor<T>> termVectorSelector)
 			where T : class
 		{
@@ -18,7 +18,7 @@ namespace Nest
 			);
 		}
 
-		///<inheritdoc />
+		///<inheritdoc/>
 		public ITermVectorResponse TermVector(ITermvectorRequest termvectorRequest)
 		{
 			return this.Dispatcher.Dispatch<ITermvectorRequest, TermvectorRequestParameters, TermVectorResponse>(
@@ -27,7 +27,7 @@ namespace Nest
 			);
 		}
 
-		///<inheritdoc />
+		///<inheritdoc/>
 		public Task<ITermVectorResponse> TermVectorAsync<T>(Func<TermvectorDescriptor<T>, TermvectorDescriptor<T>> termVectorSelector)
 			where T : class
 		{
@@ -37,7 +37,7 @@ namespace Nest
 			);
 		}
 
-		///<inheritdoc />
+		///<inheritdoc/>
 		public Task<ITermVectorResponse> TermVectorAsync(ITermvectorRequest termvectorRequest)
 		{
 			return this.Dispatcher.DispatchAsync<ITermvectorRequest , TermvectorRequestParameters, TermVectorResponse, ITermVectorResponse>(

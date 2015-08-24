@@ -11,7 +11,7 @@ namespace Nest
 
 	public partial class ElasticClient
 	{
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public IExistsResponse TemplateExists(Func<TemplateExistsDescriptor, TemplateExistsDescriptor> selector)
 		{
 			return this.Dispatcher.Dispatch<TemplateExistsDescriptor, TemplateExistsRequestParameters, ExistsResponse>(
@@ -22,7 +22,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public IExistsResponse TemplateExists(ITemplateExistsRequest templateRequest)
 		{
 			return this.Dispatcher.Dispatch<ITemplateExistsRequest, TemplateExistsRequestParameters, ExistsResponse>(
@@ -33,7 +33,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public Task<IExistsResponse> TemplateExistsAsync(Func<TemplateExistsDescriptor, TemplateExistsDescriptor> selector)
 		{
 			return this.Dispatcher.DispatchAsync<TemplateExistsDescriptor, TemplateExistsRequestParameters, ExistsResponse, IExistsResponse>(
@@ -44,7 +44,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public Task<IExistsResponse> TemplateExistsAsync(ITemplateExistsRequest templateRequest)
 		{
 			return this.Dispatcher.DispatchAsync<ITemplateExistsRequest, TemplateExistsRequestParameters, ExistsResponse, IExistsResponse>(

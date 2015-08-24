@@ -10,7 +10,7 @@ namespace Nest
 	public partial class ElasticClient
 	{
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public IIndicesOperationResponse PutTemplate(string name, Func<PutTemplateDescriptor, PutTemplateDescriptor> putTemplateSelector)
 		{
 			putTemplateSelector.ThrowIfNull("putTemplateSelector");
@@ -21,7 +21,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public IIndicesOperationResponse PutTemplate(IPutTemplateRequest putTemplateRequest)
 		{
 			return this.Dispatcher.Dispatch<IPutTemplateRequest, PutTemplateRequestParameters, IndicesOperationResponse>(
@@ -30,7 +30,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public Task<IIndicesOperationResponse> PutTemplateAsync(string name, Func<PutTemplateDescriptor, PutTemplateDescriptor> putTemplateSelector)
 		{
 			putTemplateSelector.ThrowIfNull("putTemplateSelector");
@@ -41,7 +41,7 @@ namespace Nest
 				);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public Task<IIndicesOperationResponse> PutTemplateAsync(IPutTemplateRequest putTemplateRequest)
 		{
 			return this.Dispatcher.DispatchAsync<IPutTemplateRequest, PutTemplateRequestParameters, IndicesOperationResponse, IIndicesOperationResponse>(

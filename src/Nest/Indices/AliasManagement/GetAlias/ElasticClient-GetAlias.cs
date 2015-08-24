@@ -11,7 +11,7 @@ namespace Nest
 
 	public partial class ElasticClient
 	{
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public IGetAliasesResponse GetAlias(Func<GetAliasDescriptor, GetAliasDescriptor> GetAliasDescriptor)
 		{
 			return this.Dispatcher.Dispatch<GetAliasDescriptor, GetAliasRequestParameters, GetAliasesResponse>(
@@ -22,7 +22,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public IGetAliasesResponse GetAlias(IGetAliasRequest GetAliasRequest)
 		{
 			return this.Dispatcher.Dispatch<IGetAliasRequest, GetAliasRequestParameters, GetAliasesResponse>(
@@ -33,7 +33,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public Task<IGetAliasesResponse> GetAliasAsync(Func<GetAliasDescriptor, GetAliasDescriptor> GetAliasDescriptor)
 		{
 			return this.Dispatcher.DispatchAsync<GetAliasDescriptor, GetAliasRequestParameters, GetAliasesResponse, IGetAliasesResponse>(
@@ -44,7 +44,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public Task<IGetAliasesResponse> GetAliasAsync(IGetAliasRequest GetAliasRequest)
 		{
 			return this.Dispatcher.DispatchAsync<IGetAliasRequest, GetAliasRequestParameters, GetAliasesResponse, IGetAliasesResponse>(

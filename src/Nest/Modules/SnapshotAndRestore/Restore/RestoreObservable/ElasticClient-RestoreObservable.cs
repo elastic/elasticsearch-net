@@ -6,7 +6,7 @@ namespace Nest
 {
 	public partial class ElasticClient
 	{
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public IObservable<IRecoveryStatusResponse> RestoreObservable(TimeSpan interval, IRestoreRequest restoreRequest)
 		{
 			restoreRequest.ThrowIfNull("restoreRequest");
@@ -14,7 +14,7 @@ namespace Nest
 			return observable;
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public IObservable<IRecoveryStatusResponse> RestoreObservable(TimeSpan interval, Func<RestoreDescriptor, RestoreDescriptor> restoreSelector = null)
 		{
 			restoreSelector.ThrowIfNull("restoreSelector");

@@ -83,7 +83,7 @@ namespace Nest
 		public double MaxScore { get { return this.HitsMetaData == null ? 0 : this.HitsMetaData.MaxScore; } }
 
 		private IList<T> _documents; 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		[JsonIgnore]
 		public IEnumerable<T> Documents
 		{
@@ -102,7 +102,7 @@ namespace Nest
 			get { return this.HitsMetaData != null ? (IEnumerable<IHit<T>>) this.HitsMetaData.Hits : new List<Hit<T>>(); }
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		[JsonIgnore]
 		public IEnumerable<FieldSelection<T>> FieldSelections
 		{

@@ -65,15 +65,9 @@ namespace Nest
 			return (TDescriptor)this;
 		}
 			
-		public TDescriptor Index(string indexType)
+		public TDescriptor Index(IndexName indexName)
 		{
-			Self.Index = indexType;
-			return (TDescriptor)this;
-		}
-
-		public TDescriptor Index(Type indexType)
-		{
-			Self.Index = indexType;
+			Self.Index = indexName;
 			return (TDescriptor)this;
 		}
 

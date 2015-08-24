@@ -12,7 +12,7 @@ namespace Nest
 
 	public partial class ElasticClient
 	{
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public IIndicesOperationResponse DeleteWarmer(string name, Func<DeleteWarmerDescriptor, DeleteWarmerDescriptor> selector = null)
 		{
 			selector = selector ?? (s => s);
@@ -22,7 +22,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public IIndicesOperationResponse DeleteWarmer(IDeleteWarmerRequest deleteWarmerRequest)
 		{
 			return this.Dispatcher.Dispatch<IDeleteWarmerRequest, DeleteWarmerRequestParameters, IndicesOperationResponse>(
@@ -31,7 +31,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public Task<IIndicesOperationResponse> DeleteWarmerAsync(string name, Func<DeleteWarmerDescriptor, DeleteWarmerDescriptor> selector = null)
 		{
 			selector = selector ?? (s => s);
@@ -42,7 +42,7 @@ namespace Nest
 				);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public Task<IIndicesOperationResponse> DeleteWarmerAsync(IDeleteWarmerRequest deleteWarmerRequest)
 		{
 			return this.Dispatcher.DispatchAsync<IDeleteWarmerRequest, DeleteWarmerRequestParameters, IndicesOperationResponse, IIndicesOperationResponse>(

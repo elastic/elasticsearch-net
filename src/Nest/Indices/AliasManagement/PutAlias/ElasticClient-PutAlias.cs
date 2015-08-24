@@ -9,7 +9,7 @@ namespace Nest
 {
 	public partial class ElasticClient
 	{
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public IPutAliasResponse PutAlias(IPutAliasRequest putAliasRequest)
 		{
 			return this.Dispatcher.Dispatch<IPutAliasRequest, PutAliasRequestParameters, PutAliasResponse>(
@@ -18,7 +18,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public Task<IPutAliasResponse> PutAliasAsync(IPutAliasRequest putAliasRequest)
 		{
 			return this.Dispatcher.DispatchAsync<IPutAliasRequest, PutAliasRequestParameters, PutAliasResponse, IPutAliasResponse>(
@@ -27,7 +27,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public IPutAliasResponse PutAlias(Func<PutAliasDescriptor, PutAliasDescriptor> putAliasDescriptor)
 		{
 			return this.Dispatcher.Dispatch<PutAliasDescriptor, PutAliasRequestParameters, PutAliasResponse>(
@@ -36,7 +36,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public Task<IPutAliasResponse> PutAliasAsync(Func<PutAliasDescriptor, PutAliasDescriptor> putAliasDescriptor)
 		{
 			return this.Dispatcher.DispatchAsync<PutAliasDescriptor, PutAliasRequestParameters, PutAliasResponse, IPutAliasResponse>(

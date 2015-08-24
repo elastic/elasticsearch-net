@@ -5,11 +5,16 @@ namespace Nest
 	/// <summary>
 	/// An analyzer of type simple that is built using a Lower Case Tokenizer.
 	/// </summary>
-	public class SimpleAnalyzer : AnalyzerBase
-    {
-		public SimpleAnalyzer()
-        {
-            Type = "simple";
-        }
-    }
+	public interface ISimpleAnalyzer : IAnalyzer { }
+
+	public class SimpleAnalyzer : AnalyzerBase, ISimpleAnalyzer
+	{
+		public SimpleAnalyzer() { Type = "simple"; }
+	}
+
+	public class SimpleAnalyzerDescriptor :
+		AnalyzerDescriptorBase<SimpleAnalyzerDescriptor, ISimpleAnalyzer>, ISimpleAnalyzer
+	{
+		protected override string Type => "simple";
+	}
 }

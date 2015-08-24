@@ -53,7 +53,7 @@ namespace Nest
 		public string Similarity { get; set; }
 	}
 
-	public class AllFieldDescriptor 
+	public class AllFieldDescriptor
 		: DescriptorBase<AllFieldDescriptor, IAllField>, IAllField
 	{
 		bool? IAllField.Enabled { get; set; }
@@ -84,5 +84,5 @@ namespace Nest
 		public AllFieldDescriptor SearchAnalyzer(string searchAnalyzer) => Assign(a => a.SearchAnalyzer = searchAnalyzer);
 
 		public AllFieldDescriptor Similarity(string similarity) => Assign(a => a.Similarity = similarity);
-    }
+	}
 }

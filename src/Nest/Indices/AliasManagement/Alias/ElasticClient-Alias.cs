@@ -9,7 +9,7 @@ namespace Nest
 {
 	public partial class ElasticClient
 	{
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public IIndicesOperationResponse Alias(IAliasRequest aliasRequest)
 		{
 			return this.Dispatcher.Dispatch<IAliasRequest, AliasRequestParameters, IndicesOperationResponse>(
@@ -18,7 +18,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public IIndicesOperationResponse Alias(Func<AliasDescriptor, AliasDescriptor> aliasSelector)
 		{
 			return this.Dispatcher.Dispatch<AliasDescriptor, AliasRequestParameters, IndicesOperationResponse>(
@@ -27,7 +27,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public Task<IIndicesOperationResponse> AliasAsync(IAliasRequest aliasRequest)
 		{
 			return this.Dispatcher.DispatchAsync<IAliasRequest, AliasRequestParameters, IndicesOperationResponse, IIndicesOperationResponse>(
@@ -36,7 +36,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public Task<IIndicesOperationResponse> AliasAsync(Func<AliasDescriptor, AliasDescriptor> aliasSelector)
 		{
 			return this.Dispatcher.DispatchAsync<AliasDescriptor, AliasRequestParameters, IndicesOperationResponse, IIndicesOperationResponse>(

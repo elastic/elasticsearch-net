@@ -8,7 +8,7 @@ namespace Nest
 {
 	public partial class ElasticClient
 	{
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public IIndicesResponse Map<T>(Func<PutMappingDescriptor<T>, IPutMappingRequest> mappingSelector) 
 			where T : class
 		{
@@ -17,7 +17,7 @@ namespace Nest
 			return this.Map(descriptor);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public IIndicesResponse Map(IPutMappingRequest putMappingRequest) 
 		{
 			return this.Dispatcher.Dispatch<IPutMappingRequest, PutMappingRequestParameters, IndicesResponse>(
@@ -26,7 +26,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public Task<IIndicesResponse> MapAsync<T>(Func<PutMappingDescriptor<T>, IPutMappingRequest> mappingSelector)
 			where T : class
 		{
@@ -35,7 +35,7 @@ namespace Nest
 			return this.MapAsync(descriptor);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public Task<IIndicesResponse> MapAsync(IPutMappingRequest putMappingRequest)
 		{
 			return this.Dispatcher.DispatchAsync<IPutMappingRequest, PutMappingRequestParameters, IndicesResponse, IIndicesResponse>(

@@ -7,19 +7,19 @@ namespace Nest
 {
 	public partial class ElasticClient
 	{
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public IUpdateResponse Update<T>(Func<UpdateDescriptor<T, T>, UpdateDescriptor<T, T>> updateSelector) where T : class
 		{
 			return this.Update<T, T>(updateSelector);
 		}
 		
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public IUpdateResponse Update<T>(IUpdateRequest<T, T> updateSelector) where T : class
 		{
 			return this.Update<T, T>(updateSelector);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public IUpdateResponse Update<T, K>(Func<UpdateDescriptor<T, K>, UpdateDescriptor<T, K>> updateSelector)
 			where T : class
 			where K : class
@@ -29,7 +29,7 @@ namespace Nest
 				(p, d) => this.LowLevelDispatch.UpdateDispatch<UpdateResponse>(p, d)
 			);
 		}
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public IUpdateResponse Update<T, K>(IUpdateRequest<T, K> updateSelector)
 			where T : class
 			where K : class
@@ -40,21 +40,21 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public Task<IUpdateResponse> UpdateAsync<T>(Func<UpdateDescriptor<T, T>, UpdateDescriptor<T, T>> updateSelector)
 			where T : class
 		{
 			return this.UpdateAsync<T, T>(updateSelector);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public Task<IUpdateResponse> UpdateAsync<T>(IUpdateRequest<T, T> updateRequest)
 			where T : class
 		{
 			return this.UpdateAsync<T, T>(updateRequest);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public Task<IUpdateResponse> UpdateAsync<T, K>(Func<UpdateDescriptor<T, K>, UpdateDescriptor<T, K>> updateSelector)
 			where T : class
 			where K : class
@@ -65,7 +65,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public Task<IUpdateResponse> UpdateAsync<T, K>(IUpdateRequest<T, K> updateRequest)
 			where T : class
 			where K : class

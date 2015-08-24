@@ -8,7 +8,7 @@ namespace Nest
 {
 	public partial class ElasticClient
 	{
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public T Source<T>(Func<SourceDescriptor<T>, SourceDescriptor<T>> getSelector) where T : class
 		{
 			var descriptor = getSelector(new SourceDescriptor<T>());
@@ -17,7 +17,7 @@ namespace Nest
 			return response.Body;
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public T Source<T>(ISourceRequest sourceRequest) where T : class
 		{
 			var pathInfo = sourceRequest.ToPathInfo(ConnectionSettings); 
@@ -25,7 +25,7 @@ namespace Nest
 			return response.Body;
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public Task<T> SourceAsync<T>(Func<SourceDescriptor<T>, SourceDescriptor<T>> getSelector) where T : class
 		{
 			var descriptor = getSelector(new SourceDescriptor<T>());
@@ -43,7 +43,7 @@ namespace Nest
 			return response;
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public Task<T> SourceAsync<T>(ISourceRequest sourceRequest) where T : class
 		{
 			var pathInfo = sourceRequest.ToPathInfo(ConnectionSettings);

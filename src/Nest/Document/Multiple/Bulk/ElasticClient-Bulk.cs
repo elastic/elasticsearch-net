@@ -8,7 +8,7 @@ namespace Nest
 {
 	public partial class ElasticClient
 	{
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public IBulkResponse Bulk(IBulkRequest bulkRequest)
 		{
 			return this.Dispatcher.Dispatch<IBulkRequest, BulkRequestParameters, BulkResponse>(
@@ -16,7 +16,7 @@ namespace Nest
 			);
 		}
 		
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public IBulkResponse Bulk(Func<BulkDescriptor, BulkDescriptor> bulkSelector)
 		{
 			return this.Dispatcher.Dispatch<BulkDescriptor, BulkRequestParameters, BulkResponse>(
@@ -24,7 +24,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public Task<IBulkResponse> BulkAsync(IBulkRequest bulkRequest)
 		{
 			return this.Dispatcher.DispatchAsync<IBulkRequest, BulkRequestParameters, BulkResponse, IBulkResponse>(
@@ -32,7 +32,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public Task<IBulkResponse> BulkAsync(Func<BulkDescriptor, BulkDescriptor> bulkSelector)
 		{
 			return this.Dispatcher.DispatchAsync<BulkDescriptor, BulkRequestParameters, BulkResponse, IBulkResponse>(

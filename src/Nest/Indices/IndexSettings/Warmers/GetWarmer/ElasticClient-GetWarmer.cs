@@ -13,7 +13,7 @@ namespace Nest
 	public partial class ElasticClient
 	{
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public IWarmerResponse GetWarmer(string name, Func<GetWarmerDescriptor, GetWarmerDescriptor> selector = null)
 		{
 			selector = selector ?? (s => s);
@@ -25,7 +25,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public IWarmerResponse GetWarmer(IGetWarmerRequest getWarmerRequest)
 		{
 			return this.Dispatcher.Dispatch<IGetWarmerRequest, GetWarmerRequestParameters, WarmerResponse>(
@@ -36,7 +36,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public Task<IWarmerResponse> GetWarmerAsync(string name, Func<GetWarmerDescriptor, GetWarmerDescriptor> selector = null)
 		{
 			selector = selector ?? (s => s);
@@ -48,7 +48,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public Task<IWarmerResponse> GetWarmerAsync(IGetWarmerRequest getWarmerRequest)
 		{
 			return this.Dispatcher.DispatchAsync<IGetWarmerRequest, GetWarmerRequestParameters, WarmerResponse, IWarmerResponse>(
@@ -59,7 +59,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		private WarmerResponse DeserializeWarmerResponse(IApiCallDetails apiCallDetails, Stream stream)
 		{
 			if (!apiCallDetails.Success) return new WarmerResponse ();

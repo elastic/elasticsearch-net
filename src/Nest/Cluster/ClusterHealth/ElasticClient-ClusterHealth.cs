@@ -7,7 +7,7 @@ namespace Nest
 {
 	public partial class ElasticClient
 	{
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public IHealthResponse ClusterHealth(Func<ClusterHealthDescriptor, ClusterHealthDescriptor> clusterHealthSelector = null)
 		{
 			clusterHealthSelector = clusterHealthSelector ?? (s => s);
@@ -17,7 +17,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public IHealthResponse ClusterHealth(IClusterHealthRequest clusterHealthRequest)
 		{
 			return this.Dispatcher.Dispatch<IClusterHealthRequest, ClusterHealthRequestParameters, HealthResponse>(
@@ -26,7 +26,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public Task<IHealthResponse> ClusterHealthAsync(Func<ClusterHealthDescriptor, ClusterHealthDescriptor> clusterHealthSelector = null)
 		{
 			clusterHealthSelector = clusterHealthSelector ?? (s => s);
@@ -36,7 +36,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public Task<IHealthResponse> ClusterHealthAsync(IClusterHealthRequest clusterHealthRequest)
 		{
 			return this.Dispatcher.DispatchAsync<IClusterHealthRequest, ClusterHealthRequestParameters, HealthResponse, IHealthResponse>(

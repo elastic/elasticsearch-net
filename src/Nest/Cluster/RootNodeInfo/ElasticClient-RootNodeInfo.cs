@@ -7,7 +7,7 @@ namespace Nest
 {
 	public partial class ElasticClient
 	{
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public IRootInfoResponse RootNodeInfo(Func<InfoDescriptor, InfoDescriptor> selector = null)
 		{
 			selector = selector ?? (i => i);
@@ -17,7 +17,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public IRootInfoResponse RootNodeInfo(IInfoRequest infoRequest)
 		{
 			return this.Dispatcher.Dispatch<IInfoRequest, InfoRequestParameters, RootInfoResponse>(
@@ -26,7 +26,7 @@ namespace Nest
 				);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public Task<IRootInfoResponse> RootNodeInfoAsync(Func<InfoDescriptor, InfoDescriptor> selector = null)
 		{
 			selector = selector ?? (i => i);
@@ -36,7 +36,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public Task<IRootInfoResponse> RootNodeInfoAsync(IInfoRequest inforRequest)
 		{
 			return this.Dispatcher.DispatchAsync<IInfoRequest, InfoRequestParameters, RootInfoResponse, IRootInfoResponse>(

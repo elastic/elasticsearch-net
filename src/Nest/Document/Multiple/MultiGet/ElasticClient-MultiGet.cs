@@ -12,7 +12,7 @@ namespace Nest
 	
 	public partial class ElasticClient
 	{
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public IMultiGetResponse MultiGet(Func<MultiGetDescriptor, MultiGetDescriptor> multiGetSelector)
 		{
 			multiGetSelector.ThrowIfNull("multiGetSelector");
@@ -25,7 +25,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public IMultiGetResponse MultiGet(IMultiGetRequest multiRequest)
 		{
 			var converter = CreateCovariantMultiGetConverter(multiRequest);
@@ -36,7 +36,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public Task<IMultiGetResponse> MultiGetAsync(Func<MultiGetDescriptor, MultiGetDescriptor> multiGetSelector)
 		{
 			multiGetSelector.ThrowIfNull("multiGetSelector");
@@ -49,7 +49,7 @@ namespace Nest
 			);
 		}
 
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public Task<IMultiGetResponse> MultiGetAsync(IMultiGetRequest multiGetRequest)
 		{
 			var converter = CreateCovariantMultiGetConverter(multiGetRequest);

@@ -8,7 +8,7 @@ namespace Nest
 {
 	public partial class ElasticClient
 	{
-		/// <inheritdoc />
+		/// <inheritdoc/>
 		public ICatResponse<CatNodesRecord> CatNodes(Func<CatNodesDescriptor, CatNodesDescriptor> selector = null) =>
 			this.DoCat<CatNodesDescriptor, CatNodesRequestParameters, CatNodesRecord>(selector, this.LowLevelDispatch.CatNodesDispatch<CatResponse<CatNodesRecord>>);
 

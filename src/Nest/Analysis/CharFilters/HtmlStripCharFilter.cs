@@ -5,14 +5,16 @@ namespace Nest
 	/// <summary>
 	/// A char filter of type html_strip stripping out HTML elements from an analyzed text.
 	/// </summary>
-	public class HtmlStripCharFilter : CharFilterBase
+	public interface IHtmlStripCharFilter : ICharFilter { }
+	public class HtmlStripCharFilter : CharFilterBase, IHtmlStripCharFilter
 	{
-		public HtmlStripCharFilter()
-			: base("html_strip")
-		{
+		public HtmlStripCharFilter() : base("html_strip") { }
+	}
 
-		}
-
+	public class HtmlStripCharFilterDescriptor 
+		: CharFilterDescriptorBase<HtmlStripCharFilterDescriptor, IHtmlStripCharFilter>, IHtmlStripCharFilter
+	{
+		protected override string Type => "html_strip";
 	}
 
 }
