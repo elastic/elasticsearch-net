@@ -23,6 +23,7 @@ namespace Nest
 
 	public partial class PutMappingRequest : IndicesTypePathBase<PutMappingRequestParameters>, IPutMappingRequest
 	{
+		[Obsolete("Required for ReadAsTypeConverter.  This will be removed once we figure out a better way to deserialize.")]
 		public PutMappingRequest()
 		{
 		}
