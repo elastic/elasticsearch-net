@@ -8,13 +8,13 @@ namespace Nest
 	{
 		IAnalyzers Analyzers { get; set; }
 		ICharFilters CharFilters { get; set; }
+		ITokenFilters TokenFilters { get; set; }
 	}
 
 	public class AnalysisSettings : IAnalysisSettings
 	{
 		public AnalysisSettings()
 		{
-			this.TokenFilters = new Dictionary<string, TokenFilterBase>();
 			this.Tokenizers = new Dictionary<string, TokenizerBase>();
 		}
 
@@ -22,9 +22,7 @@ namespace Nest
 		//[JsonConverter(typeof(AnalyzerCollectionJsonConverter))]
 		public IAnalyzers Analyzers { get; set; }
 		public ICharFilters CharFilters { get; set; }
-
-		[JsonConverter(typeof(TokenFilterCollectionJsonConverter))]
-		public IDictionary<string, TokenFilterBase> TokenFilters { get; set; }
+		public ITokenFilters TokenFilters { get; set; }
 
 		[JsonConverter(typeof(TokenizerCollectionJsonConverter))]
 		public IDictionary<string, TokenizerBase> Tokenizers { get; set; }
@@ -37,12 +35,16 @@ namespace Nest
 
 		IAnalyzers IAnalysisSettings.Analyzers { get; set; }
 		ICharFilters IAnalysisSettings.CharFilters { get; set; }
+		ITokenFilters IAnalysisSettings.TokenFilters { get; set; }
 
 		public AnalysisSettingsDescriptor Analyzers(Func<AnalyzersDescriptor, IAnalyzers> selector) =>
 			Assign(a => a.Analyzers = selector?.Invoke(new AnalyzersDescriptor()));
 
 		public AnalysisSettingsDescriptor CharFilters(Func<CharFiltersDescriptor, ICharFilters> selector) =>
 			Assign(a => a.CharFilters = selector?.Invoke(new CharFiltersDescriptor()));
+
+		public AnalysisSettingsDescriptor TokenFilters(Func<TokenFiltersDescriptor, ITokenFilters> selector) =>
+			Assign(a => a.TokenFilters = selector?.Invoke(new TokenFiltersDescriptor()));
 
 	}
 }

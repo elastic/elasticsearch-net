@@ -85,7 +85,7 @@ namespace Nest
 		public SynonymTokenFilterDescriptor Synonyms(IEnumerable<string> synonyms) => Assign(a => a.Synonyms = synonyms);
 
 		///<inheritdoc/>
-		public SynonymTokenFilterDescriptor Synonyms(string[] synonyms) => Assign(a => a.Synonyms = synonyms);
+		public SynonymTokenFilterDescriptor Synonyms(params string[] synonyms) => Assign(a => a.Synonyms = synonyms);
 
 	}
 

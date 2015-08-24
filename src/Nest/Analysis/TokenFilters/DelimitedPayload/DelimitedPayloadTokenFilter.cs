@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Elasticsearch.Net;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -18,7 +19,7 @@ namespace Nest
 		/// The type of the payload. int for integer, float for float and identity for characters. 
 		/// </summary>
 		[JsonProperty("encoding")]
-		string Encoding { get; set; }
+		DelimitedPayloadEncoding? Encoding { get; set; }
 
 	}
 
@@ -31,7 +32,7 @@ namespace Nest
 		public char Delimiter { get; set; }
 
 		/// <inheritdoc/>
-		public string Encoding { get; set; }
+		public DelimitedPayloadEncoding? Encoding { get; set; }
 
 	}
 
@@ -42,13 +43,13 @@ namespace Nest
 		protected override string Type => "delimited_payload_filter";
 
 		char IDelimitedPayloadTokenFilter.Delimiter { get; set; }
-		string IDelimitedPayloadTokenFilter.Encoding { get; set; }
+		DelimitedPayloadEncoding? IDelimitedPayloadTokenFilter.Encoding { get; set; }
 
 		///<inheritdoc/>
 		public DelimitedPayloadTokenFilterDescriptor Delimiter(char delimiter) => Assign(a => a.Delimiter = delimiter);
 
 		///<inheritdoc/>
-		public DelimitedPayloadTokenFilterDescriptor Encoding(string encoding) => Assign(a => a.Encoding = encoding);
+		public DelimitedPayloadTokenFilterDescriptor Encoding(DelimitedPayloadEncoding? encoding) => Assign(a => a.Encoding = encoding);
 
 	}
 

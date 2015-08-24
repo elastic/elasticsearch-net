@@ -75,6 +75,12 @@ namespace Nest
 		public StopTokenFilterDescriptor Stopwords(StopWords stopWords) => Assign(a => a.Stopwords = stopWords);
 
 		///<inheritdoc/>
+		public StopTokenFilterDescriptor Stopwords(IEnumerable<string> stopWords) => Assign(a => a.Stopwords = stopWords.ToListOrNullIfEmpty());
+
+		///<inheritdoc/>
+		public StopTokenFilterDescriptor Stopwords(params string[] stopWords) => Assign(a => a.Stopwords = stopWords);
+
+		///<inheritdoc/>
 		public StopTokenFilterDescriptor StopwordsPath(string path) => Assign(a => a.StopwordsPath = path);
 
 	}

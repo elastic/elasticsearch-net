@@ -1,4 +1,5 @@
 ﻿using System;
+using Elasticsearch.Net;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -27,7 +28,8 @@ namespace Nest
 		public string Type { get; protected set; }
 	}
 
-	public abstract class TokenFilterDescriptorBase<TTokenFilter, TTokenFilterInterface>: ITokenFilter
+	public abstract class TokenFilterDescriptorBase<TTokenFilter, TTokenFilterInterface> 
+		: DescriptorBase<TTokenFilter, TTokenFilterInterface>, ITokenFilter
 		where TTokenFilter : TokenFilterDescriptorBase<TTokenFilter, TTokenFilterInterface>, TTokenFilterInterface
 		where TTokenFilterInterface : class, ITokenFilter
 	{

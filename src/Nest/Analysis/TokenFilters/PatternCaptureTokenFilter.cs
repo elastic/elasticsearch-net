@@ -47,7 +47,7 @@ namespace Nest
 		public PatternCaptureTokenFilterDescriptor Patterns(IEnumerable<string> patterns) => Assign(a => a.Patterns = patterns);
 
 		///<inheritdoc/>
-		public PatternCaptureTokenFilterDescriptor PreserveOriginal(params string[] patterns) => Assign(a => a.Patterns = patterns);
+		public PatternCaptureTokenFilterDescriptor Patterns(params string[] patterns) => Assign(a => a.Patterns = patterns);
 
 	}
 

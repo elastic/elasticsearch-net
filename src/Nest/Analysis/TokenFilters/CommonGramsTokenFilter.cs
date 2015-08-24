@@ -77,7 +77,7 @@ namespace Nest
 		public CommonGramsTokenFilterDescriptor CommonWords(IEnumerable<string> commonWords) => Assign(a => a.CommonWords = commonWords);
 
 		///<inheritdoc/>
-		public CommonGramsTokenFilterDescriptor CommonWords(string[] commonWords) => Assign(a => a.CommonWords = commonWords);
+		public CommonGramsTokenFilterDescriptor CommonWords(params string[] commonWords) => Assign(a => a.CommonWords = commonWords);
 
 	}
 

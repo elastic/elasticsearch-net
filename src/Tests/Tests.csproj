@@ -117,6 +117,7 @@
     <Compile Include="Framework\MockData\Person.cs" />
     <Compile Include="Framework\MockData\Tag.cs" />
     <Compile Include="Framework\Roundtrip.cs" />
+    <Compile Include="Indices\IndexManagement\CreateIndex\CreateIndexFullExample.cs" />
     <Compile Include="Indices\IndexManagement\CreateIndex\CreateIndex.cs" />
     <Compile Include="Mapping\MapUsageBase.cs" />
     <Compile Include="Mapping\Types\String.cs" />

@@ -47,7 +47,7 @@ namespace Nest
 
 	public abstract class CompoundWordTokenFilter : TokenFilterBase, ICompoundWordTokenFilter
 	{
-		protected CompoundWordTokenFilter(string type) : base(type) { } 
+		protected CompoundWordTokenFilter(string type) : base(type) { }
 
 		/// <inheritdoc/>
 		public IEnumerable<string> WordList { get; set; }
@@ -67,9 +67,9 @@ namespace Nest
 		/// <inheritdoc/>
 		public bool? OnlyLongestMatch { get; set; }
 	}
-	
+
 	///<inheritdoc/>
-	public abstract class CompoundWordTokenFilterDescriptorBase<TCompound, TCompoundInterface> 
+	public abstract class CompoundWordTokenFilterDescriptorBase<TCompound, TCompoundInterface>
 		: TokenFilterDescriptorBase<TCompound, TCompoundInterface>, ICompoundWordTokenFilter
 		where TCompound : CompoundWordTokenFilterDescriptorBase<TCompound, TCompoundInterface>, TCompoundInterface
 		where TCompoundInterface : class, ICompoundWordTokenFilter
@@ -100,13 +100,7 @@ namespace Nest
 		public TCompound MaxSubwordSize(int? maxSubwordSize) => Assign(a => a.MaxSubwordSize = maxSubwordSize);
 
 		///<inheritdoc/>
-		public TCompound OnlyLongestMatch(bool? onlyLongest) => Assign(a => a.OnlyLongestMatch = onlyLongest);
+		public TCompound OnlyLongestMatch(bool? onlyLongest = true) => Assign(a => a.OnlyLongestMatch = onlyLongest);
 
 	}
-
-
-}
-	}
-
-
 }

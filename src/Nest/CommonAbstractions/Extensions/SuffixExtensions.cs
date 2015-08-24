@@ -15,11 +15,5 @@ namespace Nest
 		{
 			return @object;
 		}
-		
-		[Obsolete("Not supported in 2.0 anymore")]
-		public static T FullyQualified<T>(this T @object)
-		{
-			return @object;
-		}
 	}
 }

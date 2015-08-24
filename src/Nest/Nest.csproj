@@ -81,6 +81,7 @@
     <Compile Include="Analysis\CharFilters\CharFilters.cs" />
     <Compile Include="Analysis\Languages\SnowballLanguage.cs" />
     <Compile Include="Analysis\StopWords.cs" />
+    <Compile Include="Analysis\TokenFilters\DelimitedPayload\DelimitedPayloadEncoding.cs" />
     <Compile Include="Analysis\TokenFilters\EdgeNGram\EdgeNGramSide.cs" />
     <Compile Include="Analysis\TokenFilters\Phonetic\PhoneticEncoder.cs" />
     <Compile Include="Analysis\TokenFilters\Synonym\SynonymFormat.cs" />
@@ -241,7 +242,7 @@
     <Compile Include="Analysis\TokenFilters\AsciiFoldingTokenFilter.cs" />
     <Compile Include="Analysis\TokenFilters\CommonGramsTokenFilter.cs" />
     <Compile Include="Analysis\TokenFilters\CompoundWord\CompoundWordTokenFilter.cs" />
-    <Compile Include="Analysis\TokenFilters\DelimitedPayloadTokenFilter.cs" />
+    <Compile Include="Analysis\TokenFilters\DelimitedPayload\DelimitedPayloadTokenFilter.cs" />
     <Compile Include="Analysis\TokenFilters\CompoundWord\DictionaryDecompounderTokenFilter.cs" />
     <Compile Include="Analysis\TokenFilters\EdgeNGram\EdgeNGramTokenFilter.cs" />
     <Compile Include="Analysis\TokenFilters\ElisionTokenFilter.cs" />
@@ -255,7 +256,7 @@
     <Compile Include="Analysis\TokenFilters\LengthTokenFilter.cs" />
     <Compile Include="Analysis\TokenFilters\LimitTokenCountTokenFilter.cs" />
     <Compile Include="Analysis\TokenFilters\LowercaseTokenFilter.cs" />
-    <Compile Include="Analysis\TokenFilters\NgramTokenFilter.cs" />
+    <Compile Include="Analysis\TokenFilters\NGramTokenFilter.cs" />
     <Compile Include="Analysis\TokenFilters\PatternCaptureTokenFilter.cs" />
     <Compile Include="Analysis\TokenFilters\PatternReplaceTokenFilter.cs" />
     <Compile Include="Analysis\TokenFilters\Phonetic\PhoneticTokenFilter.cs" />
