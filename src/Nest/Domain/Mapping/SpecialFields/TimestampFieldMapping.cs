@@ -24,7 +24,7 @@ namespace Nest
 		bool? IgnoreMissing { get; set; }
 		
 		[JsonProperty("store")]
-		bool Store { get; set; }
+		bool? Store { get; set; }
 	}
 
 	public class TimestampFieldMapping : ITimestampFieldMapping
@@ -36,7 +36,7 @@ namespace Nest
 		public string Format { get; set; }
 		public string Default { get; set; }
 		public bool? IgnoreMissing { get; set; }
-		public bool Store { get; set; }
+		public bool? Store { get; set; }
 	}
 
 
@@ -51,7 +51,7 @@ namespace Nest
 		string ITimestampFieldMapping.Format { get; set; }
 		string ITimestampFieldMapping.Default { get; set; }
 		bool? ITimestampFieldMapping.IgnoreMissing { get; set; }
-		bool ITimestampFieldMapping.Store { get; set; }
+		bool? ITimestampFieldMapping.Store { get; set; }
 
 		public TimestampFieldMappingDescriptor<T> Enabled(bool enabled = true)
 		{
@@ -59,7 +59,7 @@ namespace Nest
 			return this;
 		}
 		
-		public TimestampFieldMappingDescriptor<T> Store(bool store = false)
+		public TimestampFieldMappingDescriptor<T> Store(bool store = true)
 		{
 			Self.Store = store;
 			return this;
