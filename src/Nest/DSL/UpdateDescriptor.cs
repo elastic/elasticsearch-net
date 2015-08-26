@@ -202,7 +202,7 @@ namespace Nest
 			if (!typedPathLookups.HasAny())
 				return this;
 
-			this.Request.RequestParameters.AddQueryString("fields",typedPathLookups);
+			this.Request.RequestParameters.AddQueryString("fields",typedPathLookups.Select(e => (PropertyPathMarker)e).ToList());
 			return this;
 		}
 			

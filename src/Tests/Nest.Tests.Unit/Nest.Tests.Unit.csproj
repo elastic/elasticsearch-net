@@ -423,6 +423,7 @@
     <Compile Include="Reproduce\Reproduce1199Tests.cs" />
     <Compile Include="Reproduce\Reproduce1146Tests.cs" />
     <Compile Include="Reproduce\Reproduce1440Tests.cs" />
+    <Compile Include="Reproduce\Reproduce1497Tests.cs" />
     <Compile Include="Reproduce\Reproduce1528Tests.cs" />
     <Compile Include="Reproduce\Reproduce1464Tests.cs" />
     <Compile Include="Reproduce\Reproduce629Tests.cs" />
