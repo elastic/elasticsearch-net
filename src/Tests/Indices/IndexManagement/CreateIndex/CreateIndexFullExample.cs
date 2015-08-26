@@ -105,10 +105,19 @@ namespace Tests.Indices.IndexManagement
 				.Translog(this.TranslogSettings)
 				.Analysis(this.AnalysisSettings)
 			)
-			.Mappings(mappings=>mappings
-				.Map<Project>(map=>map
+			.Mappings(mappings => mappings
+				.Map<Project>(map => map
+					.AutoMap()
 				)
-			);
+			)
+			.Warmers(warmers=>warmers
+				.Warm<Project>("projects_match_all", w=>w
+					.Source(s=>s
+						.MatchAll()
+					)
+				)
+			)
+		;
 
 		private ITranslogSettings TranslogSettings(TranslogSettingsDescriptor selector) => selector
 			.Flush(f => f

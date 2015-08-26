@@ -19,6 +19,9 @@ namespace Nest
 		[JsonProperty("mappings")]
 		IMappings Mappings { get; set; }
 		
+		[JsonProperty("warmers")]
+		IWarmers Warmers { get; set; }
+		
 	}
 
 	internal static class CreateIndexPathInfo
@@ -39,6 +42,8 @@ namespace Nest
 
 		public IMappings Mappings { get; set; }
 
+		public IWarmers Warmers { get; set; }
+
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CreateIndexRequestParameters> pathInfo)
 		{
 			CreateIndexPathInfo.Update(pathInfo, this);
@@ -54,6 +59,8 @@ namespace Nest
 
 		IMappings ICreateIndexRequest.Mappings { get; set; }
 
+		IWarmers ICreateIndexRequest.Warmers { get; set; }
+
 		public CreateIndexDescriptor InitializeUsing(IIndexState indexSettings)
 		{
 			//TODO make this work again
@@ -65,6 +72,9 @@ namespace Nest
 
 		public CreateIndexDescriptor Mappings(Func<MappingsDescriptor, IMappings> selector) =>
 			Assign(a => a.Mappings = selector?.Invoke(new MappingsDescriptor()));
+
+		public CreateIndexDescriptor Warmers(Func<WarmersDescriptor, IWarmers> selector) =>
+			Assign(a => a.Warmers = selector?.Invoke(new WarmersDescriptor()));
 
 		/// <summary>
 		/// Add an alias for this index upon index creation

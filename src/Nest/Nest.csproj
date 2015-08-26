@@ -178,7 +178,8 @@
     <Compile Include="Mapping\AttributeBased\StringAttribute.cs" />
     <Compile Include="Mapping\AttributeBased\TokenCountAttribute.cs" />
     <Compile Include="Indices\MappingManagement\GetFieldMapping\FieldMappingJsonConverter.cs" />
-    <Compile Include="Mapping\ITypeMapping.cs" />
+    <Compile Include="Mapping\Mappings.cs" />
+    <Compile Include="Mapping\TypeMapping.cs" />
     <Compile Include="Mapping\Types\PropertiesJsonConverter.cs" />
     <Compile Include="Mapping\Types\PropertyJsonConverter.cs" />
     <Compile Include="Mapping\SimilarityOption.cs" />
@@ -224,7 +225,6 @@
     <Compile Include="Aggregations\Metric\Percentiles\PercentilesMetric.cs" />
     <Compile Include="Aggregations\Metric\Stats\StatsMetric.cs" />
     <Compile Include="Aggregations\Metric\ValueMetric.cs" />
-    <Compile Include="Analysis\Analysis.cs" />
     <Compile Include="Analysis\AnalysisSettings.cs" />
     <Compile Include="Analysis\Analyzers\AnalyzerBase.cs" />
     <Compile Include="Analysis\Analyzers\CustomAnalyzer.cs" />
@@ -595,7 +595,6 @@
     <Compile Include="Search\Search\Highlighting\HighlighterType.cs" />
     <Compile Include="Mapping\Norms\NormsLoading.cs" />
     <Compile Include="Mapping\Types\Core\Date\NumericResolutionUnit.cs" />
-    <Compile Include="Indices\IndexSettings\UpdateIndicesSettings\RoutingAllocationEnableOption.cs" />
     <Compile Include="Modules\Scripting\ScriptLang.cs" />
     <Compile Include="Aggregations\Bucket\Terms\TermsAggregationCollectMode.cs" />
     <Compile Include="CommonAbstractions\Exception\RestoreException.cs" />
