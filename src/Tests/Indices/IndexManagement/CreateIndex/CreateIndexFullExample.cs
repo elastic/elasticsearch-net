@@ -108,11 +108,21 @@ namespace Tests.Indices.IndexManagement
 			.Mappings(mappings => mappings
 				.Map<Project>(map => map
 					.AutoMap()
+					.Properties(props => props
+						.String(s => s
+							.Name(p => p.Name)
+							.Analyzer("mySnow")
+							.IncludeInAll(false)
+							.Fields(f => f
+								.String(ss => ss.Name("sort").NotAnalyzed())
+							)
+						)
+					)
 				)
 			)
-			.Warmers(warmers=>warmers
-				.Warm<Project>("projects_match_all", w=>w
-					.Source(s=>s
+			.Warmers(warmers => warmers
+				.Warm<Project>("projects_match_all", w => w
+					.Source(s => s
 						.MatchAll()
 					)
 				)

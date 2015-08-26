@@ -7,10 +7,6 @@ namespace Nest
 	//	[JsonObject(MemberSerialization.OptIn)]
 	public class TemplateMapping
 	{
-		public TemplateMapping()
-		{
-		}
-
 		[JsonProperty("template")]
 		public string Template { get; set; }
 
@@ -19,15 +15,15 @@ namespace Nest
 
 		[JsonProperty("settings")]
 		[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]
-		public FluentDictionary<string, object> Settings { get; set; }
+		public IIndexSettings Settings { get; set; }
 
 		[JsonProperty("mappings")]
 		[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]
-		public Dictionary<string, ITypeMapping> Mappings { get; set; }
+		public IMappings Mappings { get; set; }
 
 		[JsonProperty("warmers")]
 		[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]
-		public Dictionary<string, WarmerMapping> Warmers { get; set; }
+		public IWarmers Warmers { get; set; }
 		
 		[JsonProperty("aliases")]
 		[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]

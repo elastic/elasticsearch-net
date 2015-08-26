@@ -36,7 +36,7 @@ namespace Nest
 		public Dictionary<string, CreateAliasOperation> Aliases { get; set; }
 			
 		[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]
-		public Dictionary<string, WarmerMapping> Warmers { get; set; }
+		public IWarmers Warmers { get; set; }
 
 		public SimilaritySettings Similarity { get; internal set; }
 	}

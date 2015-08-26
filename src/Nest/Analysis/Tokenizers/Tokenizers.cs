@@ -5,9 +5,9 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public interface ITokenizers : IWrapDictionary { }
+	public interface ITokenizers : IHasADictionary { }
 
-	public class Tokenizers : WrapDictionary<string, ITokenizer>, ITokenizers
+	public class Tokenizers : HasADictionary<string, ITokenizer>, ITokenizers
 	{
 		public Tokenizers() : base() { }
 		public Tokenizers(IDictionary<string, ITokenizer> container) : base(container) { }
@@ -15,13 +15,13 @@ namespace Nest
 			: base(container.Select(kv => kv).ToDictionary(kv => kv.Key, kv => kv.Value))
 		{ }
 
-		public void Add(string name, ITokenizer analyzer) => _backingDictionary.Add(name, analyzer);
+		public void Add(string name, ITokenizer analyzer) => BackingDictionary.Add(name, analyzer);
 	}
 
-	public class TokenizersDescriptor : WrapDictionary<string, ITokenizer>, ITokenizers
+	public class TokenizersDescriptor : HasADictionary<string, ITokenizer>, ITokenizers
 	{
 		protected TokenizersDescriptor Assign(string name, ITokenizer analyzer) =>
-			Fluent.Assign<TokenizersDescriptor, TokenizersDescriptor>(this, (a) => _backingDictionary.Add(name, analyzer));
+			Fluent.Assign<TokenizersDescriptor, TokenizersDescriptor>(this, (a) => BackingDictionary.Add(name, analyzer));
 
 		public TokenizersDescriptor Add(string name, ITokenizer analyzer) => Assign(name, analyzer);
 		

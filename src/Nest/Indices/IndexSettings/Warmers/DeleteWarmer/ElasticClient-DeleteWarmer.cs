@@ -8,7 +8,7 @@ using Elasticsearch.Net;
 namespace Nest
 {
 	using GetWarmerConverter = Func<IApiCallDetails, Stream, WarmerResponse>;
-	using CrazyWarmerResponse = Dictionary<string, Dictionary<string, Dictionary<string, WarmerMapping>>>;
+	using CrazyWarmerResponse = Dictionary<string, Dictionary<string, IWarmers>>;
 
 	public partial class ElasticClient
 	{

@@ -5,9 +5,9 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public interface ICharFilters : IWrapDictionary { }
+	public interface ICharFilters : IHasADictionary { }
 
-	public class CharFilters : WrapDictionary<string, ICharFilter>, ICharFilters
+	public class CharFilters : HasADictionary<string, ICharFilter>, ICharFilters
 	{
 		public CharFilters() : base() { }
 		public CharFilters(IDictionary<string, ICharFilter> container) : base(container) { }
@@ -15,13 +15,13 @@ namespace Nest
 			: base(container.Select(kv => kv).ToDictionary(kv => kv.Key, kv => kv.Value))
 		{ }
 
-		public void Add(string name, ICharFilter analyzer) => _backingDictionary.Add(name, analyzer);
+		public void Add(string name, ICharFilter analyzer) => BackingDictionary.Add(name, analyzer);
 	}
 
-	public class CharFiltersDescriptor : WrapDictionary<string, ICharFilter>, ICharFilters
+	public class CharFiltersDescriptor : HasADictionary<string, ICharFilter>, ICharFilters
 	{
 		protected CharFiltersDescriptor Assign(string name, ICharFilter analyzer) =>
-			Fluent.Assign<CharFiltersDescriptor, CharFiltersDescriptor>(this, (a) => _backingDictionary.Add(name, analyzer));
+			Fluent.Assign<CharFiltersDescriptor, CharFiltersDescriptor>(this, (a) => BackingDictionary.Add(name, analyzer));
 
 		public CharFiltersDescriptor Add(string name, ICharFilter analyzer) => Assign(name, analyzer);
 		

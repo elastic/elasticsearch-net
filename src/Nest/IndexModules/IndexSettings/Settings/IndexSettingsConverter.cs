@@ -7,7 +7,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
-	internal class IndexSettingsConverter : JsonConverter
+	internal class IndexSettingsConverter: JsonConverter
 	{
 		public override bool CanRead => true;
 		public override bool CanWrite => true;
@@ -18,9 +18,9 @@ namespace Nest
 			var ds = value as IDynamicIndexSettings;
 			if (ds == null) return;
 
-			var wrapDictionary = (ds as IWrapDictionary);
+			var wrapDictionary = (ds as IHasADictionary);
 			if (wrapDictionary == null) return;
-			var dict = wrapDictionary?.BackingDictionary ?? new Dictionary<string, object>();
+			var dict = wrapDictionary?.Dictionary ?? new Dictionary<string, object>();
 
 			dict[UpdatableSettings.NumberOfReplicas] = ds.NumberOfReplicas;
 			dict[UpdatableSettings.AutoExpandReplicas] = ds.AutoExpandReplicas;

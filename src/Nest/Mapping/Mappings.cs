@@ -5,8 +5,8 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public interface IMappings : IWrapDictionary { }
-	public class Mappings : ProxyDictionary<TypeName, ITypeMapping>, IMappings
+	public interface IMappings : IHasADictionary { }
+	public class Mappings : IsADictionary<TypeName, ITypeMapping>, IMappings
 	{
 		public Mappings() : base() { }
 		public Mappings(IDictionary<TypeName, ITypeMapping> container) : base(container) { }
@@ -17,15 +17,15 @@ namespace Nest
 		/// <summary>
 		/// Add any setting to the index
 		/// </summary>
-		public void Add(TypeName type, ITypeMapping mapping) => _backingDictionary.Add(type, mapping);
+		public void Add(TypeName type, ITypeMapping mapping) => BackingDictionary.Add(type, mapping);
 
 	}
 	
-	public class MappingsDescriptor : WrapDictionaryDescriptor<MappingsDescriptor, TypeName, ITypeMapping>, IMappings
+	public class MappingsDescriptor : HasADictionary<MappingsDescriptor, TypeName, ITypeMapping>, IMappings
 	{
 		public MappingsDescriptor Map<T>(Func<TypeMappingDescriptor<T>, ITypeMapping> selector) where T : class
 		{
-			_backingDictionary.Add(typeof(T), selector?.Invoke(new TypeMappingDescriptor<T>()));
+			this.BackingDictionary.Add(typeof(T), selector?.Invoke(new TypeMappingDescriptor<T>()));
 			return this;
 		}
 	}

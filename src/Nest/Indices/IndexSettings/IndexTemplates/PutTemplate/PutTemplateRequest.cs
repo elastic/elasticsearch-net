@@ -48,9 +48,6 @@ namespace Nest
 		{
 			_connectionSettings = connectionSettings;
 			Self.TemplateMapping = new TemplateMapping();
-			Self.TemplateMapping.Mappings = new Dictionary<string, ITypeMapping>();
-			Self.TemplateMapping.Warmers = new Dictionary<string, WarmerMapping>();
-			Self.TemplateMapping.Settings = new FluentDictionary<string, object>();
 		}
 
 
@@ -78,44 +75,33 @@ namespace Nest
 
 		public PutTemplateDescriptor Settings(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> settingsSelector)
 		{
-			settingsSelector.ThrowIfNull("settingsDescriptor");
-			Self.TemplateMapping.Settings = settingsSelector(Self.TemplateMapping.Settings ?? new FluentDictionary<string, object>());
-			return this;
+			throw new NotImplementedException();
 		}
 
 		public PutTemplateDescriptor AddMapping<T>(Func<PutMappingDescriptor<T>, PutMappingDescriptor<T>> mappingSelector)
 			where T : class
 		{
-			mappingSelector.ThrowIfNull("mappingSelector");
-			var putMappingDescriptor = mappingSelector(new PutMappingDescriptor<T>());
-			putMappingDescriptor.ThrowIfNull(nameof(mappingSelector));
-
-			var inferrer = new ElasticInferrer(this._connectionSettings);
-			IPutMappingRequest request = putMappingDescriptor;
-			var typeName = inferrer.TypeName(typeof(T));
-			if (typeName == null)
-				return this;
-			Self.TemplateMapping.Mappings[typeName] = request;
-			return this;
+			throw new NotImplementedException();
 		}
 
 		public PutTemplateDescriptor AddWarmer<T>(Func<CreateWarmerDescriptor, CreateWarmerDescriptor> warmerSelector)
 			where T : class
 		{
-			warmerSelector.ThrowIfNull("warmerSelector");
-			var warmerDescriptor = warmerSelector(new CreateWarmerDescriptor());
-			warmerDescriptor.ThrowIfNull("warmerDescriptor");
-			warmerDescriptor._WarmerName.ThrowIfNull("warmer has no name");
+			throw new NotImplementedException();
+			//warmerSelector.ThrowIfNull("warmerSelector");
+			//var warmerDescriptor = warmerSelector(new CreateWarmerDescriptor());
+			//warmerDescriptor.ThrowIfNull("warmerDescriptor");
+			//warmerDescriptor._WarmerName.ThrowIfNull("warmer has no name");
 
-			var warmer = new WarmerMapping
-			{
-				Name = warmerDescriptor._WarmerName, 
-				Types = warmerDescriptor._Types, 
-				Source = warmerDescriptor._SearchDescriptor
-			};
+			//var warmer = new WarmerMapping
+			//{
+			//	Name = warmerDescriptor._WarmerName, 
+			//	Types = warmerDescriptor._Types, 
+			//	Source = warmerDescriptor._SearchDescriptor
+			//};
 
-			Self.TemplateMapping.Warmers[warmerDescriptor._WarmerName] = warmer;
-			return this;
+			//Self.TemplateMapping.Warmers[warmerDescriptor._WarmerName] = warmer;
+			//return this;
 
 		}
 		

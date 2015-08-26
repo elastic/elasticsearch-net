@@ -1,9 +1,46 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using Newtonsoft.Json;
 
 namespace Nest
 {
+	public interface IProperties : IHasADictionary<FieldName, IElasticsearchProperty>
+	{
+		
+	}
+
+	public class Properties : IsADictionary<FieldName, IElasticsearchProperty>, IProperties
+	{
+		IDictionary<FieldName, IElasticsearchProperty> IHasADictionary<FieldName, IElasticsearchProperty>.Dictionary => this.BackingDictionary;
+		public Properties() : base() { }
+		public Properties(IDictionary<FieldName, IElasticsearchProperty> container) : base(container) { }
+		public Properties(IProperties properties) : base(properties?.Dictionary) { }
+		public Properties(Dictionary<FieldName, IElasticsearchProperty> container)
+			: base(container.Select(kv => kv).ToDictionary(kv => kv.Key, kv => kv.Value))
+		{ }
+
+		/// <summary>
+		/// Add any setting to the index
+		/// </summary>
+		public void Add(FieldName field, IElasticsearchProperty property) => this.BackingDictionary.Add(field, property);
+	}
+
+	public class Properties<T> : IsADictionary<FieldName, IElasticsearchProperty>, IProperties
+	{
+		IDictionary<FieldName, IElasticsearchProperty> IHasADictionary<FieldName, IElasticsearchProperty>.Dictionary => this.BackingDictionary;
+		public Properties() : base() { }
+		public Properties(IDictionary<FieldName, IElasticsearchProperty> container) : base(container) { }
+		public Properties(IProperties properties) : base(properties?.Dictionary) { }
+		public Properties(Dictionary<FieldName, IElasticsearchProperty> container)
+			: base(container.Select(kv => kv).ToDictionary(kv => kv.Key, kv => kv.Value))
+		{ }
+
+		public void Add(FieldName field, IElasticsearchProperty property) => this.BackingDictionary.Add(field, property);
+		public void Add(Expression<Func<T, object>> field, IElasticsearchProperty property) => this.BackingDictionary.Add(field, property);
+	}
+
 	public interface IPropertiesDescriptor<T, TReturnType>
 		where T : class
 		where TReturnType : class
@@ -26,16 +63,14 @@ namespace Nest
 		TReturnType Murmur3Hash(Func<Murmur3HashPropertyDescriptor<T>, IMurmur3HashProperty> selector);
 	}
 
-	public class PropertiesDescriptor<T> : IPropertiesDescriptor<T, PropertiesDescriptor<T>>
+	public class PropertiesDescriptor<T> 
+		: HasADictionary<PropertiesDescriptor<T>, IProperties, FieldName, IElasticsearchProperty>, IPropertiesDescriptor<T, PropertiesDescriptor<T>>, IProperties
 		where T : class
 	{
-		[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]
-		public IDictionary<FieldName, IElasticsearchProperty> Properties { get; private set; }
+		IDictionary<FieldName, IElasticsearchProperty> IHasADictionary<FieldName, IElasticsearchProperty>.Dictionary => this.BackingDictionary;
 
-		public PropertiesDescriptor()
-		{
-			this.Properties = new Dictionary<FieldName, IElasticsearchProperty>();
-		}
+		public PropertiesDescriptor() : base() { }
+		public PropertiesDescriptor(IProperties properties) : base(properties?.Dictionary) { }
 
 		public PropertiesDescriptor<T> String(Func<StringPropertyDescriptor<T>, IStringProperty> selector) => SetProperty(selector);
 
@@ -85,8 +120,8 @@ namespace Nest
 			var typeName = type.GetType().Name;
 			if (type.Name.IsConditionless())
 				throw new ArgumentException($"Could not get field name for {typeName} mapping");
-			Properties[type.Name] = type;
-			return this;
+
+			return this.Assign(a => a.Dictionary.Add(type.Name, type));
 		}
 	}
 }

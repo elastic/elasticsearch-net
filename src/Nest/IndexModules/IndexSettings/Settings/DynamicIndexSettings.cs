@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonConverter(typeof(IndexSettingsConverter))]
-	public interface IDynamicIndexSettings
+	public interface IDynamicIndexSettings : IHasADictionary
 	{
 		/// <summary>
 		///The number of replicas each primary shard has. Defaults to 1. 
@@ -102,7 +102,7 @@ namespace Nest
 		IAnalysisSettings Analysis { get; set; }
 	}
 
-	public class DynamicIndexSettings : WrapDictionary<string, object>, IDynamicIndexSettings
+	public class DynamicIndexSettings : HasADictionary<string, object>, IDynamicIndexSettings
 	{
 		public DynamicIndexSettings() : base() { }
 		public DynamicIndexSettings(IDictionary<string, object> container) : base(container) { }
@@ -164,7 +164,7 @@ namespace Nest
 		/// <summary>
 		/// Add any setting to the index
 		/// </summary>
-		public void Add(string setting, object value) => _backingDictionary.Add(setting, value);
+		public void Add(string setting, object value) => this.BackingDictionary.Add(setting, value);
 
 	}
 	
@@ -173,7 +173,7 @@ namespace Nest
 
 	}
 
-	public abstract class DynamicIndexSettingsDescriptor<TIndexSettings> : WrapDictionary<string, object>, IDynamicIndexSettings
+	public abstract class DynamicIndexSettingsDescriptor<TIndexSettings> : HasADictionary<string, object>, IDynamicIndexSettings
 		where TIndexSettings : DynamicIndexSettingsDescriptor<TIndexSettings> 
 	{
 		protected TIndexSettings Assign(Action<IDynamicIndexSettings> assigner) =>
@@ -205,7 +205,7 @@ namespace Nest
 		/// </summary>
 		public TIndexSettings Add(string setting, object value)
 		{
-			_backingDictionary.Add(setting, value);
+			this.BackingDictionary.Add(setting, value);
 			return (TIndexSettings)this;
 		}
 

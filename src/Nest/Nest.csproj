@@ -90,8 +90,8 @@
     <Compile Include="Analysis\Tokenizers\Tokenizers.cs" />
     <Compile Include="CommonAbstractions\Fluent\DescriptorBase.cs" />
     <Compile Include="CommonAbstractions\LazyDocument\LazyDocumentJsonConverter.cs" />
-    <Compile Include="CommonAbstractions\WrapDictionary.cs" />
-    <Compile Include="CommonAbstractions\ProxyDictionary.cs" />
+    <Compile Include="CommonAbstractions\HasADictionary.cs" />
+    <Compile Include="CommonAbstractions\IsADictionary.cs" />
     <Compile Include="Cat\CatAllocation\ElasticClient-CatAllocation.cs" />
     <Compile Include="Cat\CatCount\ElasticClient-CatCount.cs" />
     <Compile Include="Cat\CatFielddata\ElasticClient-CatFielddata.cs" />
@@ -162,6 +162,7 @@
     <Compile Include="Document\Multiple\MultiGet\EllasticClient-GetMany.cs" />
     <Compile Include="Indices\IndexManagement\OpenCloseIndex\ElasticClient-OpenCloseIndexExtensions.cs" />
     <Compile Include="Document\Single\Exists\ElasticClient-ExistsExtensions.cs" />
+    <Compile Include="Indices\IndexSettings\Warmers\Warmers.cs" />
     <Compile Include="Mapping\AttributeBased\AttachmentAttribute.cs" />
     <Compile Include="Mapping\AttributeBased\BinaryAttribute.cs" />
     <Compile Include="Mapping\AttributeBased\BooleanAttribute.cs" />
@@ -791,7 +792,7 @@
     <Compile Include="Cluster\ClusterState\ElasticClient-ClusterState.cs" />
     <Compile Include="CommonAbstractions\Extensions\UriExtensions.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\StatefulDeserialization\ConcreteTypeConverter.cs" />
-    <Compile Include="Indices\IndexSettings\Warmers\WarmerMapping.cs" />
+    <Compile Include="Indices\IndexSettings\Warmers\Warmer.cs" />
     <Compile Include="Indices\IndexSettings\Warmers\GetWarmer\WarmerResponse.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -842,7 +843,7 @@
     <Compile Include="Mapping\Types\Complex\Object\ObjectProperty.cs" />
     <Compile Include="Mapping\Types\Core\Number\NumberProperty.cs" />
     <Compile Include="Mapping\Types\Core\Date\DateProperty.cs" />
-    <Compile Include="Mapping\Types\PropertiesDescriptor.cs" />
+    <Compile Include="Mapping\Types\Properties.cs" />
     <Compile Include="Mapping\Types\Core\String\StringProperty.cs" />
     <Compile Include="Mapping\DynamicTemplate\DynamicTemplate.cs" />
     <Compile Include="Indices\MappingManagement\GetMapping\ElasticClient-MappingGet.cs" />
@@ -999,7 +1000,6 @@
     <Compile Include="CommonAbstractions\Infer\TypeName\TypeNameJsonConverter.cs" />
     <Compile Include="QueryDsl\Geo\GeoPrecisionJsonConverter.cs" />
     <Compile Include="Indices\StatusManagement\Upgrade\UpgradeStatus\UpgradeStatusResponseJsonConverter.cs" />
-    <Compile Include="Indices\IndexSettings\Warmers\WarmerMappingJsonConverter.cs" />
     <Compile Include="Document\Multiple\MultiGet\Response\MultiGetHitJsonConverter.cs" />
     <Compile Include="Mapping\DynamicTemplate\DynamicTemplatesJsonConverter.cs" />
     <Compile Include="Search\MultiSearch\MultiSearchJsonConverter.cs" />

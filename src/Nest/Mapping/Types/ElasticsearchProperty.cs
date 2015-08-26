@@ -22,8 +22,8 @@ namespace Nest
 		[JsonProperty("doc_values")]
 		bool? DocValues { get; set; }
 
-		[JsonProperty("fields", DefaultValueHandling = DefaultValueHandling.Ignore), JsonConverter(typeof(PropertyJsonConverter))]
-		IDictionary<FieldName, IElasticsearchProperty> Fields { get; set; }
+		[JsonProperty("fields", DefaultValueHandling = DefaultValueHandling.Ignore)]
+		IProperties Fields { get; set; }
 
 		[JsonProperty("similarity")]
 		SimilarityOption? Similarity { get; set; }
@@ -52,7 +52,7 @@ namespace Nest
 		public virtual TypeName Type { get; set; }
 		public IEnumerable<FieldName> CopyTo { get; set; }
 		public bool? DocValues { get; set; }
-		public IDictionary<FieldName, IElasticsearchProperty> Fields { get; set; }
+		public IProperties Fields { get; set; }
 		public string IndexName { get; set; }
 		public SimilarityOption? Similarity { get; set; }
 		public bool? Store { get; set; }

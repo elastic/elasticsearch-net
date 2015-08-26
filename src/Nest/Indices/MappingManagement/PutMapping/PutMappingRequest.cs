@@ -84,7 +84,7 @@ namespace Nest
 		/// <inheritdoc/>
 		public IParentField ParentField { get; set; }
 		/// <inheritdoc/>
-		public IDictionary<FieldName, IElasticsearchProperty> Properties { get; set; }
+		public IProperties Properties { get; set; }
 		/// <inheritdoc/>
 		public IRoutingField RoutingField { get; set; }
 		/// <inheritdoc/>
@@ -138,7 +138,7 @@ namespace Nest
 		/// <inheritdoc/>
 		public IParentField ParentField { get; set; }
 		/// <inheritdoc/>
-		public IDictionary<FieldName, IElasticsearchProperty> Properties { get; set; }
+		public IProperties Properties { get; set; }
 		/// <inheritdoc/>
 		public IRoutingField RoutingField { get; set; }
 		/// <inheritdoc/>
@@ -182,7 +182,7 @@ namespace Nest
 		FluentDictionary<string, object> ITypeMapping.Meta { get; set; }
 		bool? ITypeMapping.NumericDetection { get; set; }
 		IParentField ITypeMapping.ParentField { get; set; }
-		IDictionary<FieldName, IElasticsearchProperty> ITypeMapping.Properties { get; set; }
+		IProperties ITypeMapping.Properties { get; set; }
 		IRoutingField ITypeMapping.RoutingField { get; set; }
 		ISizeField ITypeMapping.SizeField { get; set; }
 		ISourceField ITypeMapping.SourceField { get; set; }
@@ -221,7 +221,7 @@ namespace Nest
 		public PutMappingDescriptor<T> AllField(Func<AllFieldDescriptor, AllFieldDescriptor> allFieldSelector) => Assign(a => a.AllField = allFieldSelector?.Invoke(new AllFieldDescriptor()));
 
 		/// <inheritdoc/>
-		public PutMappingDescriptor<T> IndexField(Func<IndexFieldDescriptor, IndexFieldDescriptor> indexFieldSelector) => Assign(a=>a.IndexField = indexFieldSelector?.Invoke(new IndexFieldDescriptor())):
+		public PutMappingDescriptor<T> IndexField(Func<IndexFieldDescriptor, IndexFieldDescriptor> indexFieldSelector) => Assign(a => a.IndexField = indexFieldSelector?.Invoke(new IndexFieldDescriptor()));
 
 		/// <inheritdoc/>
 		public PutMappingDescriptor<T> SizeField(Func<SizeFieldDescriptor, SizeFieldDescriptor> sizeFieldSelector) => Assign(a => a.SizeField = sizeFieldSelector?.Invoke(new SizeFieldDescriptor()));
@@ -280,18 +280,7 @@ namespace Nest
 		/// <inheritdoc/>
 		public PutMappingDescriptor<T> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> metaSelector) => Assign(a => a.Meta = metaSelector(new FluentDictionary<string, object>()));
 
-		//TODO PROPERTIES SHOULD BE THE DICTIONARY
-		public PutMappingDescriptor<T> Properties(Func<PropertiesDescriptor<T>, PropertiesDescriptor<T>> propertiesSelector)
-		{
-			propertiesSelector.ThrowIfNull("propertiesSelector");
-			var properties = propertiesSelector(new PropertiesDescriptor<T>());
-			if (Self.Properties == null)
-				Self.Properties = new Dictionary<FieldName, IElasticsearchProperty>();
-			foreach (var p in properties.Properties)
-				Self.Properties[p.Key] = p.Value;
-			return this;
-		}
-
+		public PutMappingDescriptor<T> Properties(Func<PropertiesDescriptor<T>, PropertiesDescriptor<T>> propertiesSelector) => Assign(a => a.Properties = propertiesSelector?.Invoke(new PropertiesDescriptor<T>()));
 
 		/// <inheritdoc/>
 		public PutMappingDescriptor<T> DynamicTemplates(Func<DynamicTemplatesDescriptor<T>, DynamicTemplatesDescriptor<T>> dynamicTemplatesSelector)

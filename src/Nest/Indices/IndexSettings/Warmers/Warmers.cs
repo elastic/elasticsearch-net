@@ -5,8 +5,8 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public interface IWarmers : IWrapDictionary { }
-	public class Warmers : ProxyDictionary<TypeName, IWarmer>, IWarmers
+	public interface IWarmers : IHasADictionary { }
+	public class Warmers : IsADictionary<TypeName, IWarmer>, IWarmers
 	{
 		public Warmers() : base() { }
 		public Warmers(IDictionary<TypeName, IWarmer> container) : base(container) { }
@@ -17,14 +17,14 @@ namespace Nest
 		/// <summary>
 		/// Add any setting to the index
 		/// </summary>
-		public void Add(TypeName type, IWarmer mapping) => _backingDictionary.Add(type, mapping);
+		public void Add(TypeName type, IWarmer mapping) => BackingDictionary.Add(type, mapping);
 	}
 	
-	public class WarmersDescriptor : WrapDictionaryDescriptor<WarmersDescriptor, TypeName, IWarmer>, IWarmers
+	public class WarmersDescriptor : HasADictionary<WarmersDescriptor, TypeName, IWarmer>, IWarmers
 	{
 		public WarmersDescriptor Warm<T>(string warmerName, Func<WarmerDescriptor<T>, IWarmer> selector) where T : class
 		{
-			_backingDictionary.Add(warmerName, selector?.Invoke(new WarmerDescriptor<T>()));
+			this.BackingDictionary.Add(warmerName, selector?.Invoke(new WarmerDescriptor<T>()));
 			return this;
 		}
 	}

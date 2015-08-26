@@ -21,8 +21,7 @@ namespace Nest
 		string Path { get; set; }
 
 		[JsonProperty("properties", TypeNameHandling = TypeNameHandling.None)]
-		[JsonConverter(typeof(PropertiesJsonConverter))]
-		IDictionary<FieldName, IElasticsearchProperty> Properties { get; set; }
+		IProperties Properties { get; set; }
 	}
 
 	public class ObjectProperty : ElasticsearchProperty, IObjectProperty
@@ -50,7 +49,7 @@ namespace Nest
 		public bool? Enabled { get; set; }
 		public bool? IncludeInAll { get; set; }
 		public string Path { get; set; }
-		public IDictionary<FieldName, IElasticsearchProperty> Properties { get; set; }
+		public IProperties Properties { get; set; }
 	}
 
 	public class ObjectTypeDescriptor<TParent, TChild>
@@ -73,7 +72,7 @@ namespace Nest
 		bool? IObjectProperty.Enabled { get; set; }
 		bool? IObjectProperty.IncludeInAll { get; set; }
 		string IObjectProperty.Path { get; set; }
-		IDictionary<FieldName, IElasticsearchProperty> IObjectProperty.Properties { get; set; }
+		IProperties IObjectProperty.Properties { get; set; }
 	
 		public ObjectPropertyDescriptorBase() : base("object")
 		{
@@ -95,20 +94,8 @@ namespace Nest
 		public TDescriptor Path(string path) => 
 			Assign(a => a.Path = path);
 
-		public TDescriptor Properties(Func<PropertiesDescriptor<TChild>, PropertiesDescriptor<TChild>> selector) => Assign(a =>
-		{
-			selector.ThrowIfNull(nameof(selector));
-			var properties = selector(new PropertiesDescriptor<TChild>());
-			if (a.Properties == null)
-				a.Properties = new Dictionary<FieldName, IElasticsearchProperty>();
-			foreach (var p in properties.Properties)
-				a.Properties[p.Key] = p.Value;
-		});
+		public TDescriptor Properties(Func<PropertiesDescriptor<TChild>, PropertiesDescriptor<TChild>> selector) => Assign(a => a.Properties = selector?.Invoke(new PropertiesDescriptor<TChild>(a.Properties)));
 
-		public TDescriptor AutoMap(IPropertyVisitor visitor = null) => Assign(a =>
-		{
-			var mapper = new PropertyWalker(typeof(TChild), visitor);
-			a.Properties = mapper.GetProperties();	
-		});
+		public TDescriptor AutoMap(IPropertyVisitor visitor = null) => Assign(a => a.Properties = new PropertyWalker(typeof(TChild), visitor).GetProperties());
 	}
 }

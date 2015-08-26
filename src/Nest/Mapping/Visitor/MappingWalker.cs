@@ -25,10 +25,10 @@ namespace Nest.DSL.Visitor
 			this.Accept(mapping.Properties);
 		}
 			
-		public void Accept(IDictionary<FieldName, IElasticsearchProperty> properties)
+		public void Accept(IProperties properties)
 		{
 			if (properties == null) return;
-			foreach (var kv in properties)
+			foreach (var kv in properties.Dictionary)
 			{
 				var prop = kv.Key;
 				var field = kv.Value;
@@ -110,22 +110,5 @@ namespace Nest.DSL.Visitor
 
 			}
 		}
-
-		//private void Accept(IDictionary<FieldName, IElasticType> properties)
-		//{
-		//	if (properties == null || properties.Count == 0) return;
-		//	this._visitor.Depth += 1;
-			
-		//	var dict = new Dictionary<FieldName, IElasticType>();
-		//	foreach (var kv in properties)
-		//	{
-		//		var t = kv.Value as IElasticType;
-		//		if (t == null) continue;
-		//		dict.Add(kv.Key, t);
-		//	}
-
-		//	if (dict.Count == 0) return;
-		//	this._visitor.Depth -= 1;
-		//}
 	}
 }

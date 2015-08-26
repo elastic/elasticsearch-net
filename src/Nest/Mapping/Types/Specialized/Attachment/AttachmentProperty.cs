@@ -23,60 +23,62 @@ namespace Nest
 	{
 		public AttachmentProperty() : base("attachment") { }
 
+		private IDictionary<FieldName, IElasticsearchProperty> Dictionary => this.Fields.Dictionary as IDictionary<FieldName, IElasticsearchProperty>;
+
 		internal AttachmentProperty(AttachmentAttribute attribute) : base("attachment", attribute) { }
 
 		public IStringProperty AuthorField
 		{
-			get { return Fields["author"] as IStringProperty; }
-			set { Fields["author"] = value; }
+			get { return Dictionary["author"] as IStringProperty; }
+			set { Dictionary["author"] = value; }
 		}
 
 		public INumberProperty ContentLengthField
 		{
-			get { return Fields["content_length"] as INumberProperty; }
-			set { Fields["content_length"] = value; }
+			get { return Dictionary["content_length"] as INumberProperty; }
+			set { Dictionary["content_length"] = value; }
 		}
 
 		public IStringProperty ContentTypeField
 		{
-			get { return Fields["content_type"] as IStringProperty; }
-			set { Fields["content_type"] = value; }
+			get { return Dictionary["content_type"] as IStringProperty; }
+			set { Dictionary["content_type"] = value; }
 		}
 
 		public IDateProperty DateField
 		{
-			get { return Fields["date"] as IDateProperty; }
-			set { Fields["date"] = value; }
+			get { return Dictionary["date"] as IDateProperty; }
+			set { Dictionary["date"] = value; }
 		}
 
 		public IStringProperty FileField
 		{
-			get { return Fields["file"] as IStringProperty; }
-			set { Fields["file"] = value; }
+			get { return Dictionary["file"] as IStringProperty; }
+			set { Dictionary["file"] = value; }
 		}
 
 		public IStringProperty KeywordsField
 		{
-			get { return Fields["keywords"] as IStringProperty; }
-			set { Fields["keywords"] = value; }
+			get { return Dictionary["keywords"] as IStringProperty; }
+			set { Dictionary["keywords"] = value; }
 		}
 
 		public IStringProperty LanguageField
 		{
-			get { return Fields["language"] as IStringProperty; }
-			set { Fields["language"] = value; }
+			get { return Dictionary["language"] as IStringProperty; }
+			set { Dictionary["language"] = value; }
 		}
 
 		public IStringProperty NameField
 		{
-			get { return Fields["name"] as IStringProperty; }
-			set { Fields["name"] = value; }
+			get { return Dictionary["name"] as IStringProperty; }
+			set { Dictionary["name"] = value; }
 		}
 
 		public IStringProperty TitleField
 		{
-			get { return Fields["title"] as IStringProperty; }
-			set { Fields["title"] = value; }
+			get { return Dictionary["title"] as IStringProperty; }
+			set { Dictionary["title"] = value; }
 		}
 	}
 
@@ -94,7 +96,7 @@ namespace Nest
 		INumberProperty IAttachmentProperty.ContentLengthField { get; set; }
 		IStringProperty IAttachmentProperty.LanguageField { get; set; }
 
-		private IDictionary<FieldName, IElasticsearchProperty> _Fields { get { return ((IAttachmentProperty)this).Fields; } }
+		private IDictionary<FieldName, IElasticsearchProperty> Dictionary => ((IAttachmentProperty)this).Fields.Dictionary as IDictionary<FieldName, IElasticsearchProperty>;
 
 		public AttachmentPropertyDescriptor() : base("attachment") { }
 
@@ -104,7 +106,7 @@ namespace Nest
 		{
 			selector.ThrowIfNull(nameof(selector));
 			var type = selector(Activator.CreateInstance<TDescriptor>());
-			_Fields[fieldName] = type;
+			this.Dictionary[fieldName] = type;
 			return this;
 		}
 

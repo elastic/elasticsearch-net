@@ -50,28 +50,30 @@ namespace Tests.Framework.Integration
 			putTemplateResult.IsValid.Should().BeTrue();
 
 			var createProjectIndex = this.Client.CreateIndex(typeof(Project), c => c
-				.AddMapping<Project>(m=>m
-					.Properties(props=>props
-						.Date(d=>d.Name(p=>p.StartedOn))
-						.String(d=>d.Name(p=>p.State).NotAnalyzed())
-						.Nested<Tag>(mo=>mo
-							.Name(p=>p.Tags)
-							.Properties(TagProperties)
-						)
-						.Object<Developer>(o=>o
-							.Name(p=>p.LeadDeveloper)
-							.Properties(DeveloperProperties)
+				.Mappings(map=>map
+					.Map<Project>(m=>m
+						.Properties(props=>props
+							.Date(d=>d.Name(p=>p.StartedOn))
+							.String(d=>d.Name(p=>p.State).NotAnalyzed())
+							.Nested<Tag>(mo=>mo
+								.Name(p=>p.Tags)
+								.Properties(TagProperties)
+							)
+							.Object<Developer>(o=>o
+								.Name(p=>p.LeadDeveloper)
+								.Properties(DeveloperProperties)
+							)
 						)
 					)
-				)
-				.AddMapping<CommitActivity>(m=>m
-					.SetParent<Project>()
-					.Properties(props=>props
-						.Object<Developer>(o=>o
-							.Name(p=>p.Committer)
-							.Properties(DeveloperProperties)
+					.Map<CommitActivity>(m=>m
+						.SetParent<Project>()
+						.Properties(props=>props
+							.Object<Developer>(o=>o
+								.Name(p=>p.Committer)
+								.Properties(DeveloperProperties)
+							)
+							.String(prop=>prop.Name(p=>p.ProjectName).NotAnalyzed())
 						)
-						.String(prop=>prop.Name(p=>p.ProjectName).NotAnalyzed())
 					)
 				)
 			);

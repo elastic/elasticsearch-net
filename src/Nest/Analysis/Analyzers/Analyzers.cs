@@ -5,9 +5,9 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public interface IAnalyzers : IWrapDictionary { }
+	public interface IAnalyzers : IHasADictionary { }
 
-	public class Analyzers : WrapDictionary<string, IAnalyzer>, IAnalyzers
+	public class Analyzers : HasADictionary<string, IAnalyzer>, IAnalyzers
 	{
 		public Analyzers() : base() { }
 		public Analyzers(IDictionary<string, IAnalyzer> container) : base(container) { }
@@ -15,13 +15,13 @@ namespace Nest
 			: base(container.Select(kv => kv).ToDictionary(kv => kv.Key, kv => kv.Value))
 		{ }
 
-		public void Add(string name, IAnalyzer analyzer) => _backingDictionary.Add(name, analyzer);
+		public void Add(string name, IAnalyzer analyzer) => BackingDictionary.Add(name, analyzer);
 	}
 
-	public class AnalyzersDescriptor : WrapDictionary<string, IAnalyzer>, IAnalyzers
+	public class AnalyzersDescriptor : HasADictionary<string, IAnalyzer>, IAnalyzers
 	{
 		protected AnalyzersDescriptor Assign(string name, IAnalyzer analyzer) =>
-			Fluent.Assign<AnalyzersDescriptor, AnalyzersDescriptor>(this, (a) => _backingDictionary.Add(name, analyzer));
+			Fluent.Assign<AnalyzersDescriptor, AnalyzersDescriptor>(this, (a) => BackingDictionary.Add(name, analyzer));
 
 		public AnalyzersDescriptor Add(string name, IAnalyzer analyzer) => Assign(name, analyzer);
 

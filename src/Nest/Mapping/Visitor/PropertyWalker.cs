@@ -20,9 +20,9 @@ namespace Nest
 			_visitor = visitor ?? new NoopPropertyVisitor();
 		}
 
-		public Dictionary<FieldName, IElasticsearchProperty> GetProperties()
+		public IProperties GetProperties()
 		{
-			var properties = new Dictionary<FieldName, IElasticsearchProperty>();
+			var properties = new Properties();
 			foreach(var propertyInfo in _type.GetProperties())
 			{
 				var attribute = ElasticsearchPropertyAttribute.From(propertyInfo);

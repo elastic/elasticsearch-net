@@ -78,8 +78,7 @@ namespace Nest
 		DynamicMapping? Dynamic { get; set; }
 
 		[JsonProperty("properties", TypeNameHandling = TypeNameHandling.None)]
-		[JsonConverter(typeof(PropertiesJsonConverter))]
-		IDictionary<FieldName, IElasticsearchProperty> Properties { get; set; }
+		IProperties Properties { get; set; }
 	}
 
 	public class TypeMapping : ITypeMapping
@@ -111,7 +110,7 @@ namespace Nest
 		/// <inheritdoc/>
 		public IParentField ParentField { get; set; }
 		/// <inheritdoc/>
-		public IDictionary<FieldName, IElasticsearchProperty> Properties { get; set; }
+		public IProperties Properties { get; set; }
 		/// <inheritdoc/>
 		public IRoutingField RoutingField { get; set; }
 		/// <inheritdoc/>
@@ -150,7 +149,7 @@ namespace Nest
 		FluentDictionary<string, object> ITypeMapping.Meta { get; set; }
 		bool? ITypeMapping.NumericDetection { get; set; }
 		IParentField ITypeMapping.ParentField { get; set; }
-		IDictionary<FieldName, IElasticsearchProperty> ITypeMapping.Properties { get; set; }
+		IProperties ITypeMapping.Properties { get; set; }
 		IRoutingField ITypeMapping.RoutingField { get; set; }
 		string ITypeMapping.SearchAnalyzer { get; set; }
 		ISizeField ITypeMapping.SizeField { get; set; }
@@ -190,7 +189,7 @@ namespace Nest
 		public TypeMappingDescriptor<T> AllField(Func<AllFieldDescriptor, AllFieldDescriptor> allFieldSelector) => Assign(a => a.AllField = allFieldSelector?.Invoke(new AllFieldDescriptor()));
 
 		/// <inheritdoc/>
-		public TypeMappingDescriptor<T> IndexField(Func<IndexFieldDescriptor, IndexFieldDescriptor> indexFieldSelector) => Assign(a=>a.IndexField = indexFieldSelector?.Invoke(new IndexFieldDescriptor())):
+		public TypeMappingDescriptor<T> IndexField(Func<IndexFieldDescriptor, IndexFieldDescriptor> indexFieldSelector) => Assign(a => a.IndexField = indexFieldSelector?.Invoke(new IndexFieldDescriptor()));
 
 		/// <inheritdoc/>
 		public TypeMappingDescriptor<T> SizeField(Func<SizeFieldDescriptor, SizeFieldDescriptor> sizeFieldSelector) => Assign(a => a.SizeField = sizeFieldSelector?.Invoke(new SizeFieldDescriptor()));
@@ -249,18 +248,8 @@ namespace Nest
 		/// <inheritdoc/>
 		public TypeMappingDescriptor<T> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> metaSelector) => Assign(a => a.Meta = metaSelector(new FluentDictionary<string, object>()));
 
-		//TODO PROPERTIES SHOULD BE THE DICTIONARY
-		public TypeMappingDescriptor<T> Properties(Func<PropertiesDescriptor<T>, PropertiesDescriptor<T>> propertiesSelector)
-		{
-			propertiesSelector.ThrowIfNull("propertiesSelector");
-			var properties = propertiesSelector(new PropertiesDescriptor<T>());
-			if (Self.Properties == null)
-				Self.Properties = new Dictionary<FieldName, IElasticsearchProperty>();
-			foreach (var p in properties.Properties)
-				Self.Properties[p.Key] = p.Value;
-			return this;
-		}
-
+		public TypeMappingDescriptor<T> Properties(Func<PropertiesDescriptor<T>, IProperties> propertiesSelector) => 
+			Assign(a => a.Properties = propertiesSelector?.Invoke(new PropertiesDescriptor<T>(Self.Properties)));
 
 		/// <inheritdoc/>
 		public TypeMappingDescriptor<T> DynamicTemplates(Func<DynamicTemplatesDescriptor<T>, DynamicTemplatesDescriptor<T>> dynamicTemplatesSelector)

@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public interface IUpdateSettingsRequest : IIndexOptionalPath<UpdateSettingsRequestParameters>, IIndexSettings, IWrapDictionary
+	public interface IUpdateSettingsRequest : IIndexOptionalPath<UpdateSettingsRequestParameters>, IIndexSettings, IHasADictionary
 	{
 	}
 
@@ -26,7 +26,7 @@ namespace Nest
 			UpdateSettingsPathInfo.Update(settings, pathInfo);
 		}
 
-		IDictionary IWrapDictionary.BackingDictionary => this.AnySettings;
+		IDictionary IHasADictionary.Dictionary => this.AnySettings;
 
 		public Dictionary<string, object> AnySettings { get; set; }
 
@@ -120,15 +120,15 @@ namespace Nest
 		TimeUnitExpression IDynamicIndexSettings.UnassignedNodeLeftDelayedTimeout { get; set; }
 		IAnalysisSettings IDynamicIndexSettings.Analysis { get; set; }
 
-		private readonly Dictionary<string, object> _anySettings = new Dictionary<string, object>();
-		IDictionary IWrapDictionary.BackingDictionary => this._anySettings;
+		protected Dictionary<string, object> BackingDictionary { get; set; } = new Dictionary<string, object>();
+		IDictionary IHasADictionary.Dictionary => this.BackingDictionary;
 
 		/// <summary>
 		/// Add any setting that we might have missed or is introduced by a plugin
 		/// </summary>
 		public UpdateSettingsDescriptor Add(string setting, object value)
 		{
-			this._anySettings.Add(setting, value);
+			this.BackingDictionary.Add(setting, value);
 			return this;
 		}
 

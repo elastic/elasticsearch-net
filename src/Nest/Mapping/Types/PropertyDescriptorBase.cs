@@ -19,7 +19,7 @@ namespace Nest
 		bool? IElasticsearchProperty.DocValues { get; set; }
 		SimilarityOption? IElasticsearchProperty.Similarity { get; set; }
 		IEnumerable<FieldName> IElasticsearchProperty.CopyTo { get; set; }
-		IDictionary<FieldName, IElasticsearchProperty> IElasticsearchProperty.Fields { get; set; }
+		IProperties IElasticsearchProperty.Fields { get; set; }
 
 		public PropertyDescriptorBase(string type) { ((IElasticsearchProperty)this).Type = type; }
 
@@ -33,18 +33,7 @@ namespace Nest
 
 		public TDescriptor DocValues(bool docValues = true) => Assign(a => a.DocValues = docValues);
 
-		public TDescriptor Fields(Func<PropertiesDescriptor<T>, PropertiesDescriptor<T>> selector) => Assign(a =>
-		{
-			selector.ThrowIfNull(nameof(selector));
-			var properties = selector(new PropertiesDescriptor<T>());
-			foreach (var property in properties.Properties)
-			{
-				var value = property.Value as IElasticsearchProperty;
-				if (value == null)
-					continue;
-				a.Fields[property.Key] = value;
-			}
-		});
+		public TDescriptor Fields(Func<PropertiesDescriptor<T>, IProperties> selector) => Assign(a => a.Fields = selector?.Invoke(new PropertiesDescriptor<T>()));
 
 		public TDescriptor Similarity(SimilarityOption similarity) => Assign(a => a.Similarity = similarity);
 

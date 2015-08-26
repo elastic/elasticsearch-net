@@ -11,7 +11,7 @@ namespace Nest
 	}
 
 	[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeJsonConverter<NamedFiltersContainer>, DictionaryKeysAreNotFieldNamesJsonConverter>))]
-	public abstract class NamedFiltersContainerBase : ProxyDictionary<string, IQueryContainer>, INamedFiltersContainer
+	public abstract class NamedFiltersContainerBase : IsADictionary<string, IQueryContainer>, INamedFiltersContainer
 	{
 		protected NamedFiltersContainerBase () : base() { }
 		protected NamedFiltersContainerBase(IDictionary<string, IQueryContainer> container) : base(container) { }
@@ -31,8 +31,8 @@ namespace Nest
 			: base(container.Select(kv => kv).ToDictionary(kv => kv.Key, kv => (IQueryContainer)kv.Value))
 		{ }
 
-		public void Add(string name, IQueryContainer filter) => _backingDictionary.Add(name, filter);
-		public void Add(string name, QueryContainer filter) => _backingDictionary.Add(name, filter);
+		public void Add(string name, IQueryContainer filter) => BackingDictionary.Add(name, filter);
+		public void Add(string name, QueryContainer filter) => BackingDictionary.Add(name, filter);
 	}
 
 	public class NamedFiltersContainerDescriptor<T>: NamedFiltersContainerBase
@@ -43,21 +43,21 @@ namespace Nest
 
 		public NamedFiltersContainerDescriptor<T> Filter(string name, IQueryContainer filter)
 		{
-			 _backingDictionary.Add(name, filter);
+			 BackingDictionary.Add(name, filter);
 			return this;
 		}
 
 		public NamedFiltersContainerDescriptor<T> Filter(string name, Func<QueryContainerDescriptor<T>, IQueryContainer> selector)
 		{
 			var filter = selector?.Invoke(new QueryContainerDescriptor<T>());
-			if (filter != null) _backingDictionary.Add(name, filter);
+			if (filter != null) BackingDictionary.Add(name, filter);
 			return this;
 		}
 		public NamedFiltersContainerDescriptor<T> Filter<TOther>(string name, Func<QueryContainerDescriptor<TOther>, IQueryContainer> selector)
 			where TOther : class
 		{
 			var filter = selector?.Invoke(new QueryContainerDescriptor<TOther>());
-			if (filter != null) _backingDictionary.Add(name, filter);
+			if (filter != null) BackingDictionary.Add(name, filter);
 			return this;
 		}
 	}

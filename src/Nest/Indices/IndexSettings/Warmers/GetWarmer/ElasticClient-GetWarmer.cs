@@ -8,7 +8,7 @@ using Elasticsearch.Net;
 namespace Nest
 {
 	using GetWarmerConverter = Func<IApiCallDetails, Stream, WarmerResponse>;
-	using CrazyWarmerResponse = Dictionary<string, Dictionary<string, Dictionary<string, WarmerMapping>>>;
+	using CrazyWarmerResponse = Dictionary<string, Dictionary<string, IWarmers>>;
 
 	public partial class ElasticClient
 	{
@@ -62,24 +62,25 @@ namespace Nest
 		/// <inheritdoc/>
 		private WarmerResponse DeserializeWarmerResponse(IApiCallDetails apiCallDetails, Stream stream)
 		{
-			if (!apiCallDetails.Success) return new WarmerResponse ();
+			throw new NotImplementedException();
+			//if (!apiCallDetails.Success) return new WarmerResponse ();
 
-			var dict = this.Serializer.Deserialize<CrazyWarmerResponse>(stream);
-			var indices = new Dictionary<string, Dictionary<string, WarmerMapping>>();
-			foreach (var kv in dict)
-			{
-				var indexDict = kv.Value;
-				Dictionary<string, WarmerMapping> warmers;
-				if (indexDict == null || !indexDict.TryGetValue("warmers", out warmers) || warmers == null)
-					continue;
-				foreach (var kvW in warmers)
-				{
-					kvW.Value.Name = kvW.Key;
-				}
-				indices.Add(kv.Key, warmers);
-			}
+			//var dict = this.Serializer.Deserialize<CrazyWarmerResponse>(stream);
+			//var indices = new Dictionary<string, IWarmers>();
+			//foreach (var kv in dict)
+			//{
+			//	var indexDict = kv.Value;
+			//	IWarmers warmers;
+			//	if (indexDict == null || !indexDict.TryGetValue("warmers", out warmers) || warmers == null)
+			//		continue;
+			//	foreach (var kvW in warmers)
+			//	{
+			//		kvW.Value.Name = kvW.Key;
+			//	}
+			//	indices.Add(kv.Key, warmers);
+			//}
 
-			return new WarmerResponse { Indices = indices };
+			//return new WarmerResponse { Indices = indices };
 		}
 	}
 }

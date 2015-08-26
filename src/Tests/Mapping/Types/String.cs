@@ -40,10 +40,10 @@ namespace Tests.Mapping.Types
 			protected override PutMappingRequest<Project> Initializer =>
 				new PutMappingRequest<Project>
 				{
-					Properties = new Dictionary<FieldName, IElasticsearchProperty>
-						{
-							{ "name", new StringProperty { Index = FieldIndexOption.NotAnalyzed } }
-						}
+					Properties = new Properties<Project>
+					{
+						{ p => p.Name , new StringProperty { Index = FieldIndexOption.NotAnalyzed } }
+					}
 				};
 		}
 	}
