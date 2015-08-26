@@ -33,8 +33,7 @@ namespace Nest
 	}
 
 
-	public class TimestampFieldDescriptor<T> 
-		: DescriptorBase<TimestampFieldDescriptor<T>, ITimestampField>, ITimestampField
+	public class TimestampFieldDescriptor<T> : DescriptorBase<TimestampFieldDescriptor<T>, ITimestampField>, ITimestampField
 	{
 		bool ITimestampField.Enabled { get; set;}
 		FieldName ITimestampField.Path { get; set;}

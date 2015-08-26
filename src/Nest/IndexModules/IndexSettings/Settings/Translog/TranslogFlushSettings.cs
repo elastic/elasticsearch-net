@@ -7,17 +7,17 @@ namespace Nest
 		/// <summary>
 		/// Once the translog hits this size, a flush will happen. Defaults to 512mb.
 		/// </summary>
-		string TresholdSize { get; set; }
+		string ThresholdSize { get; set; }
 
 		/// <summary>
 		/// After how many operations to flush. Defaults to unlimited.
 		/// </summary>
-		int? TresholdOps { get; set; }
+		int? ThresholdOps { get; set; }
 
 		/// <summary>
 		/// How long to wait before triggering a flush regardless of translog size. Defaults to 30m.
 		/// </summary>
-		TimeUnitExpression TresholdPeriod { get; set; }
+		TimeUnitExpression ThresholdPeriod { get; set; }
 
 		/// <summary>
 		/// How often to check if a flush is needed, randomized between 
@@ -31,11 +31,11 @@ namespace Nest
 		/// <inheritdoc/>
 		public TimeUnitExpression Interval { get; set; }
 		/// <inheritdoc/>
-		public int? TresholdOps { get; set; }
+		public int? ThresholdOps { get; set; }
 		/// <inheritdoc/>
-		public TimeUnitExpression TresholdPeriod { get; set; }
+		public TimeUnitExpression ThresholdPeriod { get; set; }
 		/// <inheritdoc/>
-		public string TresholdSize { get; set; }
+		public string ThresholdSize { get; set; }
 	}
 
 	public class TranslogFlushSettingsDescriptor : ITranslogFlushSettings
@@ -44,19 +44,19 @@ namespace Nest
 			Fluent.Assign(this, assigner);
 
 		TimeUnitExpression ITranslogFlushSettings.Interval { get; set; }
-		int? ITranslogFlushSettings.TresholdOps { get; set; }
-		TimeUnitExpression ITranslogFlushSettings.TresholdPeriod { get; set; }
-		string ITranslogFlushSettings.TresholdSize { get; set; }
+		int? ITranslogFlushSettings.ThresholdOps { get; set; }
+		TimeUnitExpression ITranslogFlushSettings.ThresholdPeriod { get; set; }
+		string ITranslogFlushSettings.ThresholdSize { get; set; }
 
 		/// <inheritdoc/>
-		public TranslogFlushSettingsDescriptor TresholdSize(string size) => Assign(a => a.TresholdSize = size);
+		public TranslogFlushSettingsDescriptor ThresholdSize(string size) => Assign(a => a.ThresholdSize = size);
 
 		/// <inheritdoc/>
-		public TranslogFlushSettingsDescriptor TresholdOps(int? operations) => Assign(a => a.TresholdOps = operations);
+		public TranslogFlushSettingsDescriptor ThresholdOps(int? operations) => Assign(a => a.ThresholdOps = operations);
 
 		/// <inheritdoc/>
-		public TranslogFlushSettingsDescriptor TresholdPeriod(TimeUnitExpression time) => 
-			Assign(a => a.TresholdPeriod = time);
+		public TranslogFlushSettingsDescriptor ThresholdPeriod(TimeUnitExpression time) => 
+			Assign(a => a.ThresholdPeriod = time);
 
 		/// <inheritdoc/>
 		public TranslogFlushSettingsDescriptor Interval(TimeUnitExpression time) => Assign(a => a.Interval = time);

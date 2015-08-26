@@ -4,40 +4,40 @@ namespace Nest
 {
 	public interface ISlowLogSearchFetch
 	{
-		TimeUnitExpression TresholdWarn { get; set; }
-		TimeUnitExpression TresholdInfo { get; set; }
-		TimeUnitExpression TresholdDebug { get; set; }
-		TimeUnitExpression TresholdTrace { get; set; }
+		TimeUnitExpression ThresholdWarn { get; set; }
+		TimeUnitExpression ThresholdInfo { get; set; }
+		TimeUnitExpression ThresholdDebug { get; set; }
+		TimeUnitExpression ThresholdTrace { get; set; }
 	}
 
 	public class SlowLogSearchFetch : ISlowLogSearchFetch
 	{
-		public TimeUnitExpression TresholdDebug { get; set; }
-		public TimeUnitExpression TresholdInfo { get; set; }
-		public TimeUnitExpression TresholdTrace { get; set; }
-		public TimeUnitExpression TresholdWarn { get; set; }
+		public TimeUnitExpression ThresholdDebug { get; set; }
+		public TimeUnitExpression ThresholdInfo { get; set; }
+		public TimeUnitExpression ThresholdTrace { get; set; }
+		public TimeUnitExpression ThresholdWarn { get; set; }
 	}
 
 	public class SlowLogSearchFetchDescriptor : ISlowLogSearchFetch
 	{
 		SlowLogSearchFetchDescriptor Assign(Action<ISlowLogSearchFetch> assigner) => Fluent.Assign(this, assigner);
 
-		TimeUnitExpression ISlowLogSearchFetch.TresholdDebug { get; set; }
-		TimeUnitExpression ISlowLogSearchFetch.TresholdInfo { get; set; }
-		TimeUnitExpression ISlowLogSearchFetch.TresholdTrace { get; set; }
-		TimeUnitExpression ISlowLogSearchFetch.TresholdWarn { get; set; }
+		TimeUnitExpression ISlowLogSearchFetch.ThresholdDebug { get; set; }
+		TimeUnitExpression ISlowLogSearchFetch.ThresholdInfo { get; set; }
+		TimeUnitExpression ISlowLogSearchFetch.ThresholdTrace { get; set; }
+		TimeUnitExpression ISlowLogSearchFetch.ThresholdWarn { get; set; }
 
 		/// <inheritdoc/>
-		public SlowLogSearchFetchDescriptor TresholdDebug(TimeUnitExpression time) => Assign(a => a.TresholdDebug = time);
+		public SlowLogSearchFetchDescriptor ThresholdDebug(TimeUnitExpression time) => Assign(a => a.ThresholdDebug = time);
 
 		/// <inheritdoc/>
-		public SlowLogSearchFetchDescriptor TresholdInfo(TimeUnitExpression time) => Assign(a => a.TresholdInfo = time);
+		public SlowLogSearchFetchDescriptor ThresholdInfo(TimeUnitExpression time) => Assign(a => a.ThresholdInfo = time);
 
 		/// <inheritdoc/>
-		public SlowLogSearchFetchDescriptor TresholdTrace(TimeUnitExpression time) => Assign(a => a.TresholdTrace = time);
+		public SlowLogSearchFetchDescriptor ThresholdTrace(TimeUnitExpression time) => Assign(a => a.ThresholdTrace = time);
 
 		/// <inheritdoc/>
-		public SlowLogSearchFetchDescriptor TresholdWarn(TimeUnitExpression time) => Assign(a => a.TresholdWarn = time);
+		public SlowLogSearchFetchDescriptor ThresholdWarn(TimeUnitExpression time) => Assign(a => a.ThresholdWarn = time);
 
 
 	}

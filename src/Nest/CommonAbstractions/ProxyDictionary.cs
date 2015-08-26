@@ -5,11 +5,12 @@ using System.ComponentModel;
 
 namespace Nest
 {
-	public abstract class ProxyDictionary<TKey, TValue> : IDictionary<TKey, TValue>, IDictionary
+	public abstract class ProxyDictionary<TKey, TValue> : IDictionary<TKey, TValue>, IDictionary, IWrapDictionary
 	{
 
 		protected readonly IDictionary<TKey, TValue> _backingDictionary;
 		private IDictionary ObsoleteDict => _backingDictionary as IDictionary;
+		IDictionary IWrapDictionary.BackingDictionary => _backingDictionary as IDictionary;
 
 		protected ProxyDictionary() { this._backingDictionary = new Dictionary<TKey, TValue>(); }
 		protected ProxyDictionary(IDictionary<TKey, TValue> backingDictionary)

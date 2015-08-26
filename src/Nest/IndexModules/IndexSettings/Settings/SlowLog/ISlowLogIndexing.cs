@@ -4,10 +4,10 @@ namespace Nest
 {
 	public interface ISlowLogIndexing
 	{
-		TimeUnitExpression TresholdWarn { get; set; }
-		TimeUnitExpression TresholdInfo { get; set; }
-		TimeUnitExpression TresholdDebug { get; set; }
-		TimeUnitExpression TresholdTrace { get; set; }
+		TimeUnitExpression ThresholdWarn { get; set; }
+		TimeUnitExpression ThresholdInfo { get; set; }
+		TimeUnitExpression ThresholdDebug { get; set; }
+		TimeUnitExpression ThresholdTrace { get; set; }
 		SlowLogLevel? LogLevel { get; set; }
 		int? Source { get; set; }
 	}
@@ -17,13 +17,13 @@ namespace Nest
 
 		public int? Source { get; set; }
 
-		public TimeUnitExpression TresholdDebug { get; set; }
+		public TimeUnitExpression ThresholdDebug { get; set; }
 
-		public TimeUnitExpression TresholdInfo { get; set; }
+		public TimeUnitExpression ThresholdInfo { get; set; }
 
-		public TimeUnitExpression TresholdTrace { get; set; }
+		public TimeUnitExpression ThresholdTrace { get; set; }
 
-		public TimeUnitExpression TresholdWarn { get; set; }
+		public TimeUnitExpression ThresholdWarn { get; set; }
 	}
 
 	public class SlowLogIndexingDescriptor : ISlowLogIndexing
@@ -32,10 +32,10 @@ namespace Nest
 
 		SlowLogLevel? ISlowLogIndexing.LogLevel { get; set; }
 		int? ISlowLogIndexing.Source { get; set; }
-		TimeUnitExpression ISlowLogIndexing.TresholdDebug { get; set; }
-		TimeUnitExpression ISlowLogIndexing.TresholdInfo { get; set; }
-		TimeUnitExpression ISlowLogIndexing.TresholdTrace { get; set; }
-		TimeUnitExpression ISlowLogIndexing.TresholdWarn { get; set; }
+		TimeUnitExpression ISlowLogIndexing.ThresholdDebug { get; set; }
+		TimeUnitExpression ISlowLogIndexing.ThresholdInfo { get; set; }
+		TimeUnitExpression ISlowLogIndexing.ThresholdTrace { get; set; }
+		TimeUnitExpression ISlowLogIndexing.ThresholdWarn { get; set; }
 
 		/// <inheritdoc/>
 		public SlowLogIndexingDescriptor LogLevel(SlowLogLevel? level) => Assign(a => a.LogLevel = level);
@@ -44,16 +44,16 @@ namespace Nest
 		public SlowLogIndexingDescriptor Source(int? source) => Assign(a => a.Source = source);
 
 		/// <inheritdoc/>
-		public SlowLogIndexingDescriptor TresholdDebug(TimeUnitExpression time) => Assign(a => a.TresholdDebug = time);
+		public SlowLogIndexingDescriptor ThresholdDebug(TimeUnitExpression time) => Assign(a => a.ThresholdDebug = time);
 
 		/// <inheritdoc/>
-		public SlowLogIndexingDescriptor TresholdInfo(TimeUnitExpression time) => Assign(a => a.TresholdInfo = time);
+		public SlowLogIndexingDescriptor ThresholdInfo(TimeUnitExpression time) => Assign(a => a.ThresholdInfo = time);
 
 		/// <inheritdoc/>
-		public SlowLogIndexingDescriptor TresholdTrace(TimeUnitExpression time) => Assign(a => a.TresholdTrace = time);
+		public SlowLogIndexingDescriptor ThresholdTrace(TimeUnitExpression time) => Assign(a => a.ThresholdTrace = time);
 
 		/// <inheritdoc/>
-		public SlowLogIndexingDescriptor TresholdWarn(TimeUnitExpression time) => Assign(a => a.TresholdWarn = time);
+		public SlowLogIndexingDescriptor ThresholdWarn(TimeUnitExpression time) => Assign(a => a.ThresholdWarn = time);
 
 
 	}

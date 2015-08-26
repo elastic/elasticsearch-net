@@ -22,6 +22,7 @@ namespace Nest
 		FileSystemStorageImplementation? FileSystemStorageImplementation { get; set; }
 	}
 
+	/// <inheritdoc />
 	public class IndexSettings: DynamicIndexSettings, IIndexSettings
 	{
 		public IndexSettings() : base() { }
@@ -30,12 +31,16 @@ namespace Nest
 			: base(container.Select(kv => kv).ToDictionary(kv => kv.Key, kv => kv.Value))
 		{ }
 
+		/// <inheritdoc />
 		public int? NumberOfShards { get; set; }
+
+		/// <inheritdoc />
 		public FileSystemStorageImplementation? FileSystemStorageImplementation { get; set; }
 
 		//public void Add(string setting, object value) => _backingDictionary.Add(setting, value);
 	}
 
+	/// <inheritdoc />
 	public class IndexSettingsDescriptor: DynamicIndexSettingsDescriptor<IndexSettingsDescriptor>, IIndexSettings
 	{
 		IndexSettingsDescriptor Assign(Action<IIndexSettings> assigner) => Fluent.Assign(this, assigner);
@@ -43,9 +48,11 @@ namespace Nest
 		int? IIndexSettings.NumberOfShards { get; set; }
 		FileSystemStorageImplementation? IIndexSettings.FileSystemStorageImplementation { get; set; }
 
+		/// <inheritdoc />
 		public IndexSettingsDescriptor NumberOfShards(int? numberOfShards) =>
 			Assign(a => a.NumberOfShards = numberOfShards);
 
+		/// <inheritdoc />
 		public IndexSettingsDescriptor FileSystemStorageImplementation(FileSystemStorageImplementation? fs) =>
 			Assign(a => a.FileSystemStorageImplementation = fs);
 

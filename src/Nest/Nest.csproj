@@ -134,7 +134,7 @@
     <Compile Include="Document\Multiple\MultiGet\ElasticClient-SourceMany.cs" />
     <Compile Include="Document\Single\Index\IndexRequestJsonConverter.cs" />
     <Compile Include="IndexModules\IndexSettings\IIndexState.cs" />
-    <Compile Include="IndexModules\IndexSettings\Settings\IDynamicIndexSettings.cs" />
+    <Compile Include="IndexModules\IndexSettings\Settings\DynamicIndexSettings.cs" />
     <Compile Include="IndexModules\IndexSettings\Settings\Merge\MergePolicySettings.cs" />
     <Compile Include="IndexModules\IndexSettings\Settings\Merge\MergeSchedulerSettings.cs" />
     <Compile Include="IndexModules\IndexSettings\Settings\Merge\MergeSettings.cs" />
@@ -422,7 +422,7 @@
     <Compile Include="Indices\IndexSettings\GetSettings\GetIndexSettingsRequest.cs" />
     <Compile Include="Indices\IndexSettings\IndexTemplates\GetTemplate\ElasticClient-GetTemplate.cs" />
     <Compile Include="Indices\IndexSettings\IndexTemplates\PutTemplate\ElasticClient-PutTemplate.cs" />
-    <Compile Include="Indices\IndexSettings\UpdateIndicesSettings\UpdatableSettings.cs" />
+    <Compile Include="IndexModules\IndexSettings\Settings\UpdatableSettings.cs" />
     <Compile Include="Search\FieldStats\FieldStatsRequest.cs" />
     <Compile Include="QueryDsl\Compound\Indices\NoMatchShortcut.cs" />
     <Compile Include="Indices\StatusManagement\SyncedFlush\SyncedFlushRequest.cs" />

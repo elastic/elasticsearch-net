@@ -52,6 +52,22 @@ namespace Nest
 		int? Priority { get; set; }
 
 		/// <summary>
+		/// Index warmup can be disabled by setting index.warmer.enabled to false. This can be handy when 
+		/// doing initial bulk indexing: disable pre registered warmers to make indexing faster 
+		/// and less expensive and then enable it.
+		/// </summary>
+		bool? WarmersEnabled { get; set; }
+
+		/// <summary>
+		/// When a search request is run against an index or against many indices, each involved shard executes the search locally and
+	   ///  returns its local results to the coordinating node, which combines these shard-level results into a “global” result set.
+		///<para>
+		/// The shard-level request cache module caches the local results on each shard.This allows frequently used 
+		/// (and potentially heavy) search requests to return results almost instantly.</para>
+		/// </summary>
+		bool? RequestCacheEnabled { get; set; }
+
+		/// <summary>
 		/// A primary shard is only recovered only if there are
 		/// enough nodes available to allocate sufficient replicas to form a quorum.
 		/// </summary>
@@ -113,6 +129,12 @@ namespace Nest
 		public int? Priority { get; set; }
 		
 		/// <inheritdoc/ >
+		public bool? WarmersEnabled { get; set; }
+		
+		/// <inheritdoc/ >
+		public bool? RequestCacheEnabled { get; set; }
+		
+		/// <inheritdoc/ >
 		public IMergeSettings Merge { get; set; }
 		
 		/// <inheritdoc/ >
@@ -167,6 +189,8 @@ namespace Nest
 		bool? IDynamicIndexSettings.BlocksReadOnly { get; set; }
 		bool? IDynamicIndexSettings.BlocksWrite { get; set; }
 		int? IDynamicIndexSettings.Priority { get; set; }
+		bool? IDynamicIndexSettings.WarmersEnabled { get; set; }
+		bool? IDynamicIndexSettings.RequestCacheEnabled { get; set; }
 		IMergeSettings IDynamicIndexSettings.Merge { get; set; }
 		Union<int, RecoveryInitialShards> IDynamicIndexSettings.RecoveryInitialShards { get; set; }
 		TimeUnitExpression IDynamicIndexSettings.RefreshInterval { get; set; }
@@ -212,6 +236,14 @@ namespace Nest
 		/// <inheritdoc/ >
 		public TIndexSettings Priority(int? priority) =>
 			Assign(a => a.Priority = priority);
+
+		/// <inheritdoc/ >
+		public TIndexSettings WarmersEnabled(bool enabled = true) =>
+			Assign(a => a.WarmersEnabled = enabled);
+
+		/// <inheritdoc/ >
+		public TIndexSettings RequestCacheEnabled(bool enabled = true) =>
+			Assign(a => a.RequestCacheEnabled = enabled);
 
 		/// <inheritdoc/ >
 		public TIndexSettings Merge(Func<MergeSettingsDescriptor, IMergeSettings> merge) =>

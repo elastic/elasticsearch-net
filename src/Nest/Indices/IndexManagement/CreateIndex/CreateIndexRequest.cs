@@ -15,6 +15,10 @@ namespace Nest
 	{
 		[JsonProperty("settings")]
 		IIndexSettings Settings { get; set; }
+
+		[JsonProperty("mappings")]
+		IMappings Mappings { get; set; }
+		
 	}
 
 	internal static class CreateIndexPathInfo
@@ -33,6 +37,8 @@ namespace Nest
 
 		public IIndexSettings Settings { get; set; }
 
+		public IMappings Mappings { get; set; }
+
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CreateIndexRequestParameters> pathInfo)
 		{
 			CreateIndexPathInfo.Update(pathInfo, this);
@@ -46,6 +52,8 @@ namespace Nest
 
 		IIndexSettings ICreateIndexRequest.Settings { get; set; }
 
+		IMappings ICreateIndexRequest.Mappings { get; set; }
+
 		public CreateIndexDescriptor InitializeUsing(IIndexState indexSettings)
 		{
 			//TODO make this work again
@@ -55,6 +63,9 @@ namespace Nest
 		public CreateIndexDescriptor Settings(Func<IndexSettingsDescriptor, IIndexSettings> selector) =>
 			Assign(a => a.Settings = selector?.Invoke(new IndexSettingsDescriptor()));
 
+		public CreateIndexDescriptor Mappings(Func<MappingsDescriptor, IMappings> selector) =>
+			Assign(a => a.Mappings = selector?.Invoke(new MappingsDescriptor()));
+
 		/// <summary>
 		/// Add an alias for this index upon index creation
 		/// </summary>
@@ -63,22 +74,6 @@ namespace Nest
 			return this;
 		}
 
-		/// <summary>
-		/// Add a new mapping for T
-		/// </summary>
-		public CreateIndexDescriptor AddMapping<T>(Func<PutMappingDescriptor<T>, ITypeMapping> typeMappingDescriptor) where T : class
-		{
-			return this;
-		}
-
-		/// <summary>
-		/// Add a new mapping using the first rootObjectMapping parameter as the base to construct the new mapping.
-		/// Handy if you wish to reuse a mapping.
-		/// </summary>
-		public CreateIndexDescriptor AddMapping<T>(ITypeMapping mapping, Func<PutMappingDescriptor<T>, PutMappingDescriptor<T>> typeMappingDescriptor) where T : class
-		{
-			return this;
-		}
 
 		public CreateIndexDescriptor AddWarmer(Func<CreateWarmerDescriptor, CreateWarmerDescriptor> warmerSelector)
 		{

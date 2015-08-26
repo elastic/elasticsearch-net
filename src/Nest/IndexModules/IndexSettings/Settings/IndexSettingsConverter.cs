@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using Newtonsoft.Json;
@@ -16,65 +17,69 @@ namespace Nest
 		{
 			var ds = value as IDynamicIndexSettings;
 			if (ds == null) return;
-			var dict = (ds as IWrapDictionary)?.BackingDictionary;
-			if (dict == null) return;
-			dict["index.number_of_replicas"] = ds.NumberOfReplicas;
-			dict["index.auto_expand_replicas"] = ds.AutoExpandReplicas;
-			dict["index.refresh_interval"] = ds.RefreshInterval;
-			dict["index.blocks.read_only"] = ds.BlocksReadOnly;
-			dict["index.blocks.read"] = ds.BlocksRead;
-			dict["index.blocks.write"] = ds.BlocksWrite;
-			dict["index.blocks.metadata"] = ds.BlocksMetadata;
-			dict["index.priority"] = ds.Priority;
-			dict["index.recovery.initial_shards"] = ds.RecoveryInitialShards;
-			dict["index.routing.allocation.total_shards_per_node"] =
+
+			var wrapDictionary = (ds as IWrapDictionary);
+			if (wrapDictionary == null) return;
+			var dict = wrapDictionary?.BackingDictionary ?? new Dictionary<string, object>();
+
+			dict[UpdatableSettings.NumberOfReplicas] = ds.NumberOfReplicas;
+			dict[UpdatableSettings.AutoExpandReplicas] = ds.AutoExpandReplicas;
+			dict[UpdatableSettings.RefreshInterval] = ds.RefreshInterval;
+			dict[UpdatableSettings.BlocksReadOnly] = ds.BlocksReadOnly;
+			dict[UpdatableSettings.BlocksRead] = ds.BlocksRead;
+			dict[UpdatableSettings.BlocksWrite] = ds.BlocksWrite;
+			dict[UpdatableSettings.BlocksMetadata] = ds.BlocksMetadata;
+			dict[UpdatableSettings.Priority] = ds.Priority;
+			dict[UpdatableSettings.WarmersEnabled] = ds.WarmersEnabled;
+			dict[UpdatableSettings.RequestCacheEnable] = ds.RequestCacheEnabled;
+			dict[UpdatableSettings.RecoveryInitialShards] = ds.RecoveryInitialShards;
+			dict[UpdatableSettings.RoutingAllocationTotalShardsPerNode] =
 				ds.RoutingAllocationTotalShardsPerNode;
-			dict["index.unassigned.node_left.delayed_timeout"] =
-				ds.UnassignedNodeLeftDelayedTimeout;
+			dict[UpdatableSettings.UnassignedNodeLeftDelayedTimeout] = ds.UnassignedNodeLeftDelayedTimeout;
 
 			var translog = ds.Translog;
-			dict["index.translog.sync_interval"] = translog.SyncInterval;
-			dict["index.translog.durability"] = translog.Durability;
-			dict["index.translog.fs.type"] = translog.FileSystemType;
+			dict[UpdatableSettings.TranslogSyncInterval] = translog.SyncInterval;
+			dict[UpdatableSettings.TranslogDurability] = translog.Durability;
+			dict[UpdatableSettings.TranslogFsType] = translog.FileSystemType;
 
 			var flush = ds.Translog?.Flush;
-			dict["index.translog.flush_threshold_size"] = flush.TresholdSize;
-			dict["index.translog.flush_threshold_ops"] = flush.TresholdOps;
-			dict["index.translog.flush_threshold_period"] = flush.TresholdPeriod;
-			dict["index.translog.interval"] = flush.Interval;
+			dict[UpdatableSettings.TranslogFlushThresholdSize] = flush.ThresholdSize;
+			dict[UpdatableSettings.TranslogFlushTreshHoldOps] = flush.ThresholdOps;
+			dict[UpdatableSettings.TranslogFlushThresholdPeriod] = flush.ThresholdPeriod;
+			dict[UpdatableSettings.TranslogInterval] = flush.Interval;
 
-			dict["index.merge.policy.expunge_deletes_allowed"] = ds.Merge?.Policy.ExpungeDeletesAllowed;
-			dict["index.merge.policy.floor_segment"] = ds.Merge?.Policy.FloorSegment;
-			dict["index.merge.policy.max_merge_at_once"] = ds.Merge?.Policy.MaxMergeAtOnce;
-			dict["index.merge.policy.max_merge_at_once_explicit"] = ds.Merge?.Policy.MaxMergeAtOnceExplicit;
-			dict["index.merge.policy.max_merged_segment"] = ds.Merge?.Policy.MaxMergedSegment;
-			dict["index.merge.policy.segments_per_tier"] = ds.Merge?.Policy.SegmentsPerTier;
-			dict["index.merge.policy.reclaim_deletes_weight"] = ds.Merge?.Policy.ReclaimDeletesWeight;
+			dict[UpdatableSettings.MergePolicyExpungeDeletesAllowed] = ds.Merge?.Policy.ExpungeDeletesAllowed;
+			dict[UpdatableSettings.MergePolicyFloorSegment] = ds.Merge?.Policy.FloorSegment;
+			dict[UpdatableSettings.MergePolicyMaxMergeAtOnce] = ds.Merge?.Policy.MaxMergeAtOnce;
+			dict[UpdatableSettings.MergePolicyMaxMergeAtOnceExplicit] = ds.Merge?.Policy.MaxMergeAtOnceExplicit;
+			dict[UpdatableSettings.MergePolicyMaxMergedSegment] = ds.Merge?.Policy.MaxMergedSegment;
+			dict[UpdatableSettings.MergePolicySegmentsPerTier] = ds.Merge?.Policy.SegmentsPerTier;
+			dict[UpdatableSettings.MergePolicyReclaimDeletesWeight] = ds.Merge?.Policy.ReclaimDeletesWeight;
 
-			dict["index.merge.scheduler.max_thread_count"] = ds.Merge?.Scheduler?.MaxThreadCount;
-			dict["index.merge.scheduler.auto_throttle"] = ds.Merge?.Scheduler?.AutoThrottle;
+			dict[UpdatableSettings.MergeSchedulerMaxThreadCount] = ds.Merge?.Scheduler?.MaxThreadCount;
+			dict[UpdatableSettings.MergeSchedulerAutoThrottle] = ds.Merge?.Scheduler?.AutoThrottle;
 
 			var log = ds.SlowLog;
 			var search = log?.Search;
 			var indexing = log?.Indexing;
 
-			dict["index.search.slowlog.threshold.query.warn"] = search?.Query?.TresholdWarn;
-			dict["index.search.slowlog.threshold.query.info"] = search?.Query?.TresholdInfo;
-			dict["index.search.slowlog.threshold.query.debug"] = search?.Query?.TresholdDebug;
-			dict["index.search.slowlog.threshold.query.trace"] = search?.Query?.TresholdTrace;
+			dict[UpdatableSettings.SlowlogSearchThresholdQueryWarn] = search?.Query?.ThresholdWarn;
+			dict[UpdatableSettings.SlowlogSearchThresholdQueryInfo] = search?.Query?.ThresholdInfo;
+			dict[UpdatableSettings.SlowlogSearchThresholdQueryDebug] = search?.Query?.ThresholdDebug;
+			dict[UpdatableSettings.SlowlogSearchThresholdQueryTrace] = search?.Query?.ThresholdTrace;
 
-			dict["index.search.slowlog.threshold.fetch.warn"] = search?.Fetch?.TresholdWarn;
-			dict["index.search.slowlog.threshold.fetch.info"] = search?.Fetch?.TresholdInfo;
-			dict["index.search.slowlog.threshold.fetch.debug"] = search?.Fetch?.TresholdDebug;
-			dict["index.search.slowlog.threshold.fetch.trace"] = search?.Fetch?.TresholdTrace;
-			dict["index.search.slowlog.level"] = search?.LogLevel;
+			dict[UpdatableSettings.SlowlogSearchThresholdFetchWarn] = search?.Fetch?.ThresholdWarn;
+			dict[UpdatableSettings.SlowlogSearchThresholdFetchInfo] = search?.Fetch?.ThresholdInfo;
+			dict[UpdatableSettings.SlowlogSearchThresholdFetchDebug] = search?.Fetch?.ThresholdDebug;
+			dict[UpdatableSettings.SlowlogSearchThresholdFetchTrace] = search?.Fetch?.ThresholdTrace;
+			dict[UpdatableSettings.SlowlogSearchLevel] = search?.LogLevel;
 
-			dict["index.indexing.slowlog.threshold.index.warn"] = indexing?.TresholdWarn;
-			dict["index.indexing.slowlog.threshold.index.info"] = indexing?.TresholdInfo;
-			dict["index.indexing.slowlog.threshold.index.debug"] = indexing?.TresholdDebug;
-			dict["index.indexing.slowlog.threshold.index.trace"] = indexing?.TresholdTrace;
-			dict["index.indexing.slowlog.level"] = indexing?.LogLevel;
-			dict["index.indexing.slowlog.source"] = indexing?.Source;
+			dict[UpdatableSettings.SlowlogIndexingThresholdFetchWarn] = indexing?.ThresholdWarn;
+			dict[UpdatableSettings.SlowlogIndexingThresholdFetchInfo] = indexing?.ThresholdInfo;
+			dict[UpdatableSettings.SlowlogIndexingThresholdFetchDebug] = indexing?.ThresholdDebug;
+			dict[UpdatableSettings.SlowlogIndexingThresholdFetchTrace] = indexing?.ThresholdTrace;
+			dict[UpdatableSettings.SlowlogIndexingLevel] = indexing?.LogLevel;
+			dict[UpdatableSettings.SlowlogIndexingSource] = indexing?.Source;
 
 			var indexSettings = value as IIndexSettings;
 			dict["index.number_of_shards"] = indexSettings?.NumberOfShards;
