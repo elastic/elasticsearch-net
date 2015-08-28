@@ -151,6 +151,11 @@
     <Compile Include="IndexModules\IndexSettings\Settings\Translog\TranslogDurability.cs" />
     <Compile Include="IndexModules\IndexSettings\Settings\Translog\TranslogFlushSettings.cs" />
     <Compile Include="IndexModules\IndexSettings\Settings\Translog\TranslogSettings.cs" />
+    <Compile Include="IndexModules\Similarity\DFR\DFRAfterEffect.cs" />
+    <Compile Include="IndexModules\Similarity\DFR\DFRBasicModel.cs" />
+    <Compile Include="IndexModules\Similarity\Normalization.cs" />
+    <Compile Include="IndexModules\Similarity\IB\IBLambda.cs" />
+    <Compile Include="IndexModules\Similarity\IB\IBDistribution.cs" />
     <Compile Include="Indices\AliasManagement\GetAliases\ElasticClient-GetIndicesPointingToAlias.cs" />
     <Compile Include="Indices\AliasManagement\GetAliases\ElasticClient-GetAliasesPointingToIndex.cs" />
     <Compile Include="Document\Single\Delete\ElasticClient-DeleteExtensions.cs" />
@@ -538,8 +543,8 @@
     <Compile Include="Aggregations\Bucket\Terms\TermsIncludeExclude.cs" />
     <Compile Include="IndexModules\Similarity\BM25Similarity.cs" />
     <Compile Include="IndexModules\Similarity\DefaultSimilarity.cs" />
-    <Compile Include="IndexModules\Similarity\DFRSimilarity.cs" />
-    <Compile Include="IndexModules\Similarity\IBSimilarity.cs" />
+    <Compile Include="IndexModules\Similarity\DFR\DFRSimilarity.cs" />
+    <Compile Include="IndexModules\Similarity\IB\IBSimilarity.cs" />
     <Compile Include="IndexModules\Similarity\LMDirichletSimilarity.cs" />
     <Compile Include="IndexModules\Similarity\LMJelinekSimilarity.cs" />
     <Compile Include="IndexModules\Similarity\Similarity.cs" />

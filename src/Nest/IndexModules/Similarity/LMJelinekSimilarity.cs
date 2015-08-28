@@ -5,11 +5,26 @@ using System.Linq;
 
 namespace Nest
 {
-	public class LMJelinekSimilarity : SimilarityBase
-	{
-		public override string Type => "LMJelinekMercer";
 
+	public interface ILMJelinekSimilarity : ISimilarity
+	{
 		[JsonProperty("lambda")]
-		public double Lambda { get; set; }
+		double? Lambda { get; set; }
+	}
+
+	public class LMJelinekSimilarity : ILMJelinekSimilarity
+	{
+		public string Type => "LMJelinekMercer";
+
+		public double? Lambda { get; set; }
+	}
+
+	public class LMJelinekSimilarityDescriptor 
+		: DescriptorBase<LMJelinekSimilarityDescriptor, ILMJelinekSimilarity>, ILMJelinekSimilarity
+	{
+		string ISimilarity.Type => "LMJelinekMercer";
+		double? ILMJelinekSimilarity.Lambda { get; set; }
+
+		public LMJelinekSimilarityDescriptor Lamdba(double? lamda) => Assign(a => a.Lambda = lamda);
 	}
 }

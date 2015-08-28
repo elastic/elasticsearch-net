@@ -5,11 +5,26 @@ using System.Linq;
 
 namespace Nest
 {
-	public class DefaultSimilarity : SimilarityBase
+	public interface IDefaultSimilarity : ISimilarity
 	{
-		public override string Type => "default";
-
 		[JsonProperty("discount_overlaps")]
-		public bool DiscountOverlaps { get; set; }
+		bool? DiscountOverlaps { get; set; }
 	}
+
+	public class DefaultSimilarity : IDefaultSimilarity
+	{
+		public string Type => "default";
+
+		public bool? DiscountOverlaps { get; set; }
+	}
+
+	public class DefaultSimilarityDescriptor 
+		: DescriptorBase<DefaultSimilarityDescriptor, IDefaultSimilarity>, IDefaultSimilarity
+	{
+		string ISimilarity.Type => "default";
+		bool? IDefaultSimilarity.DiscountOverlaps { get; set; }
+
+		public DefaultSimilarityDescriptor DiscountOverlaps(bool? discount = true) => Assign(a => a.DiscountOverlaps = discount);
+	}
+
 }
