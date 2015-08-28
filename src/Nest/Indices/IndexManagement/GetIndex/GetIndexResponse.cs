@@ -33,7 +33,7 @@ namespace Nest
 		public IDictionary<string, TypeMapping> Mappings { get; set; }
 
 		[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]
-		public Dictionary<string, CreateAliasOperation> Aliases { get; set; }
+		public Dictionary<string, Alias> Aliases { get; set; }
 			
 		[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]
 		public IWarmers Warmers { get; set; }

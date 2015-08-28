@@ -1843,7 +1843,7 @@ namespace Nest
 		
 		}
 	///<summary>Request parameters for IndicesUpdateAliasesForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</pre></summary>
-	public partial class AliasRequest 
+	public partial class BulkAliasRequest 
 	{
 		///<summary>Request timeout</summary>
 		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }

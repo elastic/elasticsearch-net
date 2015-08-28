@@ -1975,19 +1975,19 @@ namespace Nest
 	}
 	
 	///<summary>descriptor for IndicesUpdateAliasesForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</pre></summary>
-	public partial class AliasDescriptor 
+	public partial class BulkAliasDescriptor 
 	{
 		///<summary>Request timeout</summary>
-		public AliasDescriptor Timeout(string timeout) => _requestParams(p=>p.Timeout(timeout));
+		public BulkAliasDescriptor Timeout(string timeout) => _requestParams(p=>p.Timeout(timeout));
 
 		///<summary>Specify timeout for connection to master</summary>
-		public AliasDescriptor MasterTimeout(string master_timeout) => _requestParams(p=>p.MasterTimeout(master_timeout));
+		public BulkAliasDescriptor MasterTimeout(string master_timeout) => _requestParams(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>The URL-encoded request definition</summary>
-		public AliasDescriptor Source(string source) => _requestParams(p=>p.Source(source));
+		public BulkAliasDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public AliasDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
+		public BulkAliasDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 	
 	}
 	

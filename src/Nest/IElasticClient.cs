@@ -1064,16 +1064,16 @@ namespace Nest
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-aliases.html
 		/// </summary>
 		/// <param name="aliasSelector">A desriptor that describes the parameters for the alias operation</param>
-		IIndicesOperationResponse Alias(Func<AliasDescriptor, AliasDescriptor> aliasSelector);
+		IIndicesOperationResponse Alias(Func<BulkAliasDescriptor, BulkAliasDescriptor> aliasSelector);
 
 		/// <inheritdoc/>
-		IIndicesOperationResponse Alias(IAliasRequest aliasRequest);
+		IIndicesOperationResponse Alias(IBulkAliasRequest aliasRequest);
 
 		/// <inheritdoc/>
-		Task<IIndicesOperationResponse> AliasAsync(Func<AliasDescriptor, AliasDescriptor> aliasSelector);
+		Task<IIndicesOperationResponse> AliasAsync(Func<BulkAliasDescriptor, BulkAliasDescriptor> aliasSelector);
 
 		/// <inheritdoc/>
-		Task<IIndicesOperationResponse> AliasAsync(IAliasRequest aliasRequest);
+		Task<IIndicesOperationResponse> AliasAsync(IBulkAliasRequest aliasRequest);
 
 		/// <summary>
 		/// The get index alias api allows to filter by alias name and index name. This api redirects to the master and fetches 

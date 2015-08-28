@@ -7,7 +7,6 @@ namespace Nest
 		public string Name { get; set; }
 
 		[JsonProperty("filter")]
-		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeJsonConverter<QueryContainer>, CustomJsonConverter>))]
 		public IQueryContainer Filter { get; internal set; }
 	
 		[JsonProperty("routing")]

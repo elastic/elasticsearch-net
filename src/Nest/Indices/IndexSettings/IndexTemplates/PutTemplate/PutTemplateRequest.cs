@@ -105,13 +105,13 @@ namespace Nest
 
 		}
 		
-		public PutTemplateDescriptor AddAlias(string aliasName, Func<CreateAliasDescriptor, CreateAliasDescriptor> addAliasDescriptor = null)
+		public PutTemplateDescriptor AddAlias(string aliasName, Func<BulkAliasDescriptor, BulkAliasDescriptor> addAliasDescriptor = null)
 		{
 			aliasName.ThrowIfNull("aliasName");
 			addAliasDescriptor = addAliasDescriptor ?? (a=>a);
-			var alias = addAliasDescriptor(new CreateAliasDescriptor());
+			var alias = addAliasDescriptor(new BulkAliasDescriptor());
 			if (Self.TemplateMapping.Aliases == null)
-				Self.TemplateMapping.Aliases = new Dictionary<string, ICreateAliasOperation>();
+				Self.TemplateMapping.Aliases = new Dictionary<string, IAlias>();
 
 			Self.TemplateMapping.Aliases[aliasName] = alias;
 			return this;

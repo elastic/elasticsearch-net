@@ -27,6 +27,6 @@ namespace Nest
 		
 		[JsonProperty("aliases")]
 		[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]
-		public Dictionary<string, ICreateAliasOperation> Aliases { get; set; }
+		public Dictionary<string, IAlias> Aliases { get; set; }
 	}
 }

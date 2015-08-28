@@ -14,7 +14,7 @@ namespace Nest
 		public IMappings Mappings { get; set; }
 
 		[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]
-		public Dictionary<string, ICreateAliasOperation> Aliases { get; set; }
+		public Dictionary<string, IAlias> Aliases { get; set; }
 			
 		[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]
 		public IWarmers Warmers { get; set; }

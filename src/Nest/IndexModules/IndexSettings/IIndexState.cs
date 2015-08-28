@@ -4,7 +4,7 @@ namespace Nest
 {
 	public interface IIndexState
 	{
-		Dictionary<string, ICreateAliasOperation> Aliases { get; set; }
+		Dictionary<string, IAlias> Aliases { get; set; }
 		SimilaritySettings Similarity { get; }
 
 		IAnalysisSettings Analysis { get; set; }

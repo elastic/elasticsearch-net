@@ -88,7 +88,7 @@ namespace Nest.Resolvers
 			defaultProperties = PropertiesOf<IBulkOperation>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IMultiGetOperation>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IRepository>(type, memberSerialization, defaultProperties, lookup);
-			defaultProperties = PropertiesOf<ICreateAliasOperation>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<IAlias>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IInnerHitsContainer>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IInnerHits>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IElasticsearchProperty>(type, memberSerialization, defaultProperties, lookup);

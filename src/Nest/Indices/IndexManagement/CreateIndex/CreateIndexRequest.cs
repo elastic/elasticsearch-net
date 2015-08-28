@@ -79,7 +79,7 @@ namespace Nest
 		/// <summary>
 		/// Add an alias for this index upon index creation
 		/// </summary>
-		public CreateIndexDescriptor AddAlias(string aliasName, Func<CreateAliasDescriptor, CreateAliasDescriptor> addAliasSelector = null)
+		public CreateIndexDescriptor AddAlias(string aliasName, Func<BulkAliasDescriptor, BulkAliasDescriptor> addAliasSelector = null)
 		{
 			return this;
 		}
