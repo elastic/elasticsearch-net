@@ -17,6 +17,10 @@ namespace Nest
 		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<QueryDescriptor<object>>, CustomJsonConverter>))]
 		IQueryContainer Query { get; set; }
 
+		[JsonProperty("filter")]
+		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<FilterDescriptor<object>>, CustomJsonConverter>))]
+		IFilterContainer Filter { get; set; }
+
 		[JsonProperty("inner_hits")]
 		[JsonConverter(typeof(ReadAsTypeConverter<InnerHits>))]
 		IInnerHits InnerHits { get; set; }
@@ -32,6 +36,7 @@ namespace Nest
 
 		public TypeNameMarker Type { get; set; }
 		public IQueryContainer Query { get; set; }
+		public IFilterContainer Filter { get; set; }
 		public IInnerHits InnerHits { get; set; }
 	}
 
@@ -43,15 +48,17 @@ namespace Nest
 
 		IQueryContainer IHasParentFilter.Query { get; set; }
 
+		IFilterContainer IHasParentFilter.Filter { get; set; }
+
 		IInnerHits IHasParentFilter.InnerHits { get; set; }
 
 		bool IFilter.IsConditionless
 		{
 			get
 			{
-				return Self.Query == null 
-					|| Self.Query.IsConditionless 
-					|| Self.Type.IsNullOrEmpty();
+				return Self.Type.IsNullOrEmpty()
+					|| ((Self.Query == null || Self.Query.IsConditionless)
+					&& (Self.Filter == null || Self.Filter.IsConditionless));
 			}
 		}
 
@@ -64,6 +71,13 @@ namespace Nest
 		{
 			var q = new QueryDescriptor<T>();
 			Self.Query = querySelector(q);
+			return this;
+		}
+
+		public HasParentFilterDescriptor<T> Filter(Func<FilterDescriptor<T>, FilterContainer> filterSelector)
+		{
+			var f = new FilterDescriptor<T>();
+			Self.Filter = filterSelector(f);
 			return this;
 		}
 
