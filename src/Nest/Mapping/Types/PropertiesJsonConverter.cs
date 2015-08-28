@@ -7,7 +7,7 @@ namespace Nest
 {
 	internal class PropertiesJsonConverter : JsonConverter
 	{
-		private readonly DictionaryKeysAreNotFieldNamesJsonConverter _dictionaryConverter = new DictionaryKeysAreNotFieldNamesJsonConverter();
+		private readonly VerbatimDictionaryKeysJsonConverter _dictionaryConverter = new VerbatimDictionaryKeysJsonConverter();
 		private readonly PropertyJsonConverter _elasticTypeConverter = new PropertyJsonConverter();
 
 		public override bool CanWrite

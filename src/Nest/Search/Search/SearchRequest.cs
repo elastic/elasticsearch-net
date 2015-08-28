@@ -39,7 +39,7 @@ namespace Nest
 		long? TerminateAfter { get; set; }
 
 		[JsonProperty(PropertyName = "indices_boost")]
-		[JsonConverter(typeof (DictionaryKeysAreNotFieldNamesJsonConverter))]
+		[JsonConverter(typeof (VerbatimDictionaryKeysJsonConverter))]
 		IDictionary<IndexName, double> IndicesBoost { get; set; }
 
 		[JsonProperty(PropertyName = "sort")]
@@ -62,7 +62,7 @@ namespace Nest
 		IList<FieldName> FielddataFields { get; set; }
 
 		[JsonProperty(PropertyName = "script_fields")]
-		[JsonConverter(typeof (DictionaryKeysAreNotFieldNamesJsonConverter))]
+		[JsonConverter(typeof (VerbatimDictionaryKeysJsonConverter))]
 		IDictionary<string, IScriptQuery> ScriptFields { get; set; }
 
 		[JsonProperty(PropertyName = "_source")]
@@ -79,7 +79,7 @@ namespace Nest
 		IQueryContainer PostFilter { get; set; }
 
 		[JsonProperty(PropertyName = "inner_hits")]
-		[JsonConverter(typeof (DictionaryKeysAreNotFieldNamesJsonConverter))]
+		[JsonConverter(typeof (VerbatimDictionaryKeysJsonConverter))]
 		IDictionary<string, IInnerHitsContainer> InnerHits { get; set; }
 
 		string Preference { get; }

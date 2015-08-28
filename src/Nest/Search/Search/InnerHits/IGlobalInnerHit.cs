@@ -12,7 +12,7 @@ namespace Nest
 		IQueryContainer Query { get; set; }
 
 		[JsonProperty(PropertyName = "inner_hits")]
-		[JsonConverter(typeof (DictionaryKeysAreNotFieldNamesJsonConverter))]
+		[JsonConverter(typeof (VerbatimDictionaryKeysJsonConverter))]
 		IDictionary<string, IInnerHitsContainer> InnerHits { get; set; }
 	}
 

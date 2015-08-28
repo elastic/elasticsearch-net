@@ -21,7 +21,7 @@ namespace Nest
 		public Stats Stats { get; set; }
 
 		[JsonProperty(PropertyName = "indices")]
-		[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]
+		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
 		public Dictionary<string, Stats> Indices { get; set; }
 
 	}

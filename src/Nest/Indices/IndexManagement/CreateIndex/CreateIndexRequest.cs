@@ -13,7 +13,7 @@ namespace Nest
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<CreateIndexDescriptor>))]
 	public interface ICreateIndexRequest : IIndexPath<CreateIndexRequestParameters>, IIndexState
 	{
-		
+
 	}
 
 	internal static class CreateIndexPathInfo
@@ -26,7 +26,7 @@ namespace Nest
 
 	public partial class CreateIndexRequest : IndexPathBase<CreateIndexRequestParameters>, ICreateIndexRequest
 	{
-		internal CreateIndexRequest() : base(null) { } 
+		internal CreateIndexRequest() : base(null) { }
 
 		public CreateIndexRequest(IndexName index) : base(index) { }
 
@@ -63,11 +63,13 @@ namespace Nest
 
 		ISimilarities IIndexState.Similarity { get; set; }
 
-		public CreateIndexDescriptor InitializeUsing(IIndexState indexSettings)
+		public CreateIndexDescriptor InitializeUsing(IIndexState indexSettings) => Assign(a =>
 		{
-			//TODO make this work again
-			return this;
-		}
+			a.Settings = indexSettings.Settings;
+			a.Mappings = indexSettings.Mappings;
+			a.Warmers = indexSettings.Warmers;
+			a.Aliases = indexSettings.Aliases;
+		});
 
 		public CreateIndexDescriptor Settings(Func<IndexSettingsDescriptor, IIndexSettings> selector) =>
 			Assign(a => a.Settings = selector?.Invoke(new IndexSettingsDescriptor()));

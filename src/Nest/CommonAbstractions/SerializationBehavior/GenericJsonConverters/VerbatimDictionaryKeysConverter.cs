@@ -11,7 +11,7 @@ namespace Nest
 	/// JSON converter for IDictionary that ignores the contract resolver (e.g. CamelCaseFieldNamesContractResolver)
 	/// when converting dictionary keys to property names.
 	/// </summary>
-	internal class DictionaryKeysAreNotFieldNamesJsonConverter : JsonConverter
+	internal class VerbatimDictionaryKeysJsonConverter : JsonConverter
 	{
 		public override bool CanConvert(Type t) => typeof (IDictionary).IsAssignableFrom(t);
 
@@ -26,7 +26,8 @@ namespace Nest
 		{
 			var contract = serializer.ContractResolver as SettingsContractResolver;
 
-			IDictionary dictionary = (IDictionary)value;
+			var isADictionary = value as IHasADictionary;
+			IDictionary dictionary = isADictionary?.Dictionary ?? (value as IDictionary);
 			writer.WriteStartObject();
 
 			foreach (DictionaryEntry entry in dictionary)

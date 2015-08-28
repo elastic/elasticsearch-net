@@ -10,7 +10,7 @@ namespace Nest
 		where T : class
 	{
 		[JsonProperty(PropertyName = "linear")]
-		[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]
+		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
 		internal IDictionary<FieldName, FunctionScoreDecayFieldDescriptor> _LinearDescriptor { get; set; }
 
 		public LinearFunction(

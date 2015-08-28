@@ -48,7 +48,7 @@ namespace Nest
 		public HitsMetaData<T> HitsMetaData { get; internal set; }
 
 		[JsonProperty(PropertyName = "aggregations")]
-		[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]
+		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
 		public IDictionary<string, IAggregation> Aggregations { get; internal set; } = new Dictionary<string, IAggregation>();
 		
 		private AggregationsHelper _agg = null;

@@ -31,7 +31,7 @@ namespace Nest.Domain
 			((IFieldSelection<T>)this).FieldValuesDictionary = valuesDictionary;
 		}
 
-		[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]
+		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
 		IDictionary<string, object> IFieldSelection<T>.FieldValuesDictionary { get; set; }
 
 		/// <summary>

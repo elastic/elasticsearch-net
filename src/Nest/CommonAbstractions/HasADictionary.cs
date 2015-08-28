@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using Newtonsoft.Json;
 
 namespace Nest
 {
@@ -43,7 +44,8 @@ namespace Nest
 		protected HasADictionary(Dictionary<TKey, TValue> backingDictionary) { this.BackingDictionary = backingDictionary; }
 		protected HasADictionary(IDictionary<TKey, TValue> backingDictionary)
 		{
-			this.BackingDictionary = new Dictionary<TKey, TValue>(backingDictionary);
+			if (backingDictionary != null) this.BackingDictionary = new Dictionary<TKey, TValue>(backingDictionary);
+			else this.BackingDictionary = new Dictionary<TKey, TValue>();
 		}
 	}
 }

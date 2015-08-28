@@ -203,7 +203,7 @@ namespace Nest
 		public UpdateSettingsDescriptor UnassignedNodeLeftDelayedTimeout(TimeUnitExpression time) =>
 			Assign(a => a.UnassignedNodeLeftDelayedTimeout = time);
 
-		public UpdateSettingsDescriptor Analysis(Func<AnalysisSettingsDescriptor, IAnalysis> selector) =>
-			Assign(a => a.Analysis = selector?.Invoke(new AnalysisSettingsDescriptor()));
+		public UpdateSettingsDescriptor Analysis(Func<AnalysisDescriptor, IAnalysis> selector) =>
+			Assign(a => a.Analysis = selector?.Invoke(new AnalysisDescriptor()));
 	}
 }

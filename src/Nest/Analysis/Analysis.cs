@@ -6,13 +6,17 @@ namespace Nest
 {
 	public interface IAnalysis
 	{
+		[JsonProperty("analyzer")]
 		IAnalyzers Analyzers { get; set; }
+		[JsonProperty("char_filter")]
 		ICharFilters CharFilters { get; set; }
+		[JsonProperty("filter")]
 		ITokenFilters TokenFilters { get; set; }
+		[JsonProperty("tokenizer")]
 		ITokenizers Tokenizers { get; set; }
 	}
 
-	public class AnalysisSettings : IAnalysis
+	public class Analysis : IAnalysis
 	{
 		public IAnalyzers Analyzers { get; set; }
 		public ICharFilters CharFilters { get; set; }
@@ -21,25 +25,25 @@ namespace Nest
 
 	}
 
-	public class AnalysisSettingsDescriptor : IAnalysis
+	public class AnalysisDescriptor : IAnalysis
 	{
-		protected AnalysisSettingsDescriptor Assign(Action<IAnalysis> assigner) => Fluent.Assign(this, assigner);
+		protected AnalysisDescriptor Assign(Action<IAnalysis> assigner) => Fluent.Assign(this, assigner);
 
 		IAnalyzers IAnalysis.Analyzers { get; set; }
 		ICharFilters IAnalysis.CharFilters { get; set; }
 		ITokenFilters IAnalysis.TokenFilters { get; set; }
 		ITokenizers IAnalysis.Tokenizers { get; set; }
 
-		public AnalysisSettingsDescriptor Analyzers(Func<AnalyzersDescriptor, IAnalyzers> selector) =>
+		public AnalysisDescriptor Analyzers(Func<AnalyzersDescriptor, IAnalyzers> selector) =>
 			Assign(a => a.Analyzers = selector?.Invoke(new AnalyzersDescriptor()));
 
-		public AnalysisSettingsDescriptor CharFilters(Func<CharFiltersDescriptor, ICharFilters> selector) =>
+		public AnalysisDescriptor CharFilters(Func<CharFiltersDescriptor, ICharFilters> selector) =>
 			Assign(a => a.CharFilters = selector?.Invoke(new CharFiltersDescriptor()));
 
-		public AnalysisSettingsDescriptor TokenFilters(Func<TokenFiltersDescriptor, ITokenFilters> selector) =>
+		public AnalysisDescriptor TokenFilters(Func<TokenFiltersDescriptor, ITokenFilters> selector) =>
 			Assign(a => a.TokenFilters = selector?.Invoke(new TokenFiltersDescriptor()));
 
-		public AnalysisSettingsDescriptor Tokenizers(Func<TokenizersDescriptor, ITokenizers> selector) =>
+		public AnalysisDescriptor Tokenizers(Func<TokenizersDescriptor, ITokenizers> selector) =>
 			Assign(a => a.Tokenizers = selector?.Invoke(new TokenizersDescriptor()));
 
 	}

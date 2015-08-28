@@ -10,7 +10,7 @@ namespace Nest
 		where T : class
 	{
 		[JsonProperty(PropertyName = "exp")]
-		[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]
+		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
 		internal IDictionary<FieldName, FunctionScoreDecayFieldDescriptor> _ExpDescriptor { get; set; }
 
 		public ExpFunction(

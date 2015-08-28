@@ -19,7 +19,7 @@ namespace Nest
 
 	public class UpgradeStatusResponse : BaseResponse, IUpgradeStatusResponse
 	{
-		[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]
+		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
 		public Dictionary<string, UpgradeStatus> Upgrades { get; set; }
 		public long SizeInBytes { get; set; }
 		public string SizeToUpgradeInBytes { get; set; }

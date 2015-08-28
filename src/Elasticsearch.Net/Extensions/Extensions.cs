@@ -23,7 +23,7 @@ namespace Elasticsearch.Net
 			if (da.Length > 0)
 				return da[0].Value;
 			else
-				return string.Empty;
+				return Enum.GetName(enumValue.GetType(), enumValue);
 		}
 
 		internal static string GetStringValue(this IEnumerable<Enum> enumValues)

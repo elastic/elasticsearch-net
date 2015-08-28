@@ -38,7 +38,7 @@ namespace Nest
 		IList<FieldName> FielddataFields { get; set; }
 
 		[JsonProperty(PropertyName = "script_fields")]
-		[JsonConverter(typeof (DictionaryKeysAreNotFieldNamesJsonConverter))]
+		[JsonConverter(typeof (VerbatimDictionaryKeysJsonConverter))]
 		IDictionary<string, IScriptQuery> ScriptFields { get; set; }
 	}
 

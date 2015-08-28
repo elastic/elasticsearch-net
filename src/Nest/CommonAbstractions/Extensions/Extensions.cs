@@ -32,7 +32,7 @@ namespace Nest
 			if (da.Length > 0)
 				return da[0].Value;
 			else
-				return string.Empty;
+				return Enum.GetName(enumValue.GetType(), enumValue);
 		}
 		
 		internal static readonly JsonConverter dateConverter = new IsoDateTimeConverter { Culture = CultureInfo.InvariantCulture };

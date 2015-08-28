@@ -275,8 +275,8 @@ namespace Nest
 
 		//TODO DSL for shard allocation filtering
 
-		public TIndexSettings Analysis(Func<AnalysisSettingsDescriptor, IAnalysis> selector) =>
-			Assign(a => a.Analysis = selector?.Invoke(new AnalysisSettingsDescriptor()));
+		public TIndexSettings Analysis(Func<AnalysisDescriptor, IAnalysis> selector) =>
+			Assign(a => a.Analysis = selector?.Invoke(new AnalysisDescriptor()));
 	}
 
 }

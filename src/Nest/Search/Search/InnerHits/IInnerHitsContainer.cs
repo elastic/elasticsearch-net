@@ -8,11 +8,11 @@ namespace Nest
 	public interface IInnerHitsContainer
 	{
 		[JsonProperty(PropertyName = "type")]
-		[JsonConverter(typeof (DictionaryKeysAreNotFieldNamesJsonConverter))]
+		[JsonConverter(typeof (VerbatimDictionaryKeysJsonConverter))]
 		IDictionary<TypeName, IGlobalInnerHit> Type { get; set; }
 
 		[JsonProperty(PropertyName = "path")]
-		[JsonConverter(typeof (DictionaryKeysAreNotFieldNamesJsonConverter))]
+		[JsonConverter(typeof (VerbatimDictionaryKeysJsonConverter))]
 		IDictionary<FieldName, IGlobalInnerHit> Path { get; set; }
 	}
 

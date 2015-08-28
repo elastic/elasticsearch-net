@@ -21,6 +21,11 @@ namespace Nest.Resolvers
 			this.ConnectionSettings = connectionSettings;
 		}
 
+		protected override JsonDictionaryContract CreateDictionaryContract(Type objectType)
+		{
+			return base.CreateDictionaryContract(objectType);
+		}
+
 		protected override JsonContract CreateContract(Type objectType)
 		{
 			JsonContract contract = base.CreateContract(objectType);
@@ -28,7 +33,7 @@ namespace Nest.Resolvers
 			// this will only be called once and then cached
 
 			if (typeof(IDictionary).IsAssignableFrom(objectType))
-				contract.Converter = new DictionaryKeysAreNotFieldNamesJsonConverter();
+				contract.Converter = new VerbatimDictionaryKeysJsonConverter();
 
 			else if (objectType == typeof(IAggregation))
 				contract.Converter = new AggregationJsonConverter();
@@ -64,6 +69,10 @@ namespace Nest.Resolvers
 		{
 			var defaultProperties = base.CreateProperties(type, memberSerialization);
 			var lookup = defaultProperties.ToLookup(p => p.PropertyName);
+
+			defaultProperties = PropertiesOf<IIndexState>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<IIndexSettings>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<IAnalysis>(type, memberSerialization, defaultProperties, lookup);
 
 			defaultProperties = PropertiesOf<IQuery>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<ISpecialField>(type, memberSerialization, defaultProperties, lookup);

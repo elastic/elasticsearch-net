@@ -11,7 +11,7 @@ namespace Nest
 	public interface IMultiSearchRequest : IFixedIndexTypePath<MultiSearchRequestParameters>
 	{
 		
-		[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]
+		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
 		IDictionary<string, ISearchRequest> Operations { get; set;}
 
 	}

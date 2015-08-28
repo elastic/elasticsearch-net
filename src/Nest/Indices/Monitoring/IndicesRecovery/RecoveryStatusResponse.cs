@@ -13,7 +13,7 @@ namespace Nest
 	public class RecoveryStatusResponse : BaseResponse, IRecoveryStatusResponse
 	{
 
-		[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]
+		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
 		public Dictionary<string, RecoveryStatus> Indices { get; set; } 
 	}
 }

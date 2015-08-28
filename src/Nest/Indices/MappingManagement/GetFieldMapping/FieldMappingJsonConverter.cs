@@ -7,8 +7,8 @@ namespace Nest
 {
 	internal class FieldMappingJsonConverter : JsonConverter
 	{
-		private readonly DictionaryKeysAreNotFieldNamesJsonConverter _dictionaryConverter =
-		new DictionaryKeysAreNotFieldNamesJsonConverter();
+		private readonly VerbatimDictionaryKeysJsonConverter _dictionaryConverter =
+		new VerbatimDictionaryKeysJsonConverter();
 
 		private readonly PropertyJsonConverter _elasticTypeConverter = new PropertyJsonConverter();
 

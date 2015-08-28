@@ -26,7 +26,7 @@ namespace Nest
 		internal string _ScriptFile { get; set; }
 
 		[JsonProperty(PropertyName = "params")]
-		[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]
+		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
 		internal Dictionary<string, object> _Params { get; set; }
 		
 		[JsonProperty(PropertyName = "lang")]

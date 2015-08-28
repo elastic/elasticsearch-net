@@ -107,7 +107,7 @@ namespace Tests.Indices.IndexManagement
 			)
 			.Mappings(mappings => mappings
 				.Map<Project>(map => map
-					.AutoMap()
+					//.AutoMap()
 					.Properties(props => props
 						.String(s => s
 							.Name(p => p.Name)
@@ -136,6 +136,9 @@ namespace Tests.Indices.IndexManagement
 						.Term(t=>t.OnField(p=>p.Name).Value("hello"))
 					)
 				)
+			)
+			.Similarity(similarity=>similarity
+				.Add("bm", new BM25Similarity { })
 			)
 		;
 
@@ -190,7 +193,7 @@ namespace Tests.Indices.IndexManagement
 				.MaxThreadCount(1)
 			);
 
-		private IAnalysis AnalysisSettings(AnalysisSettingsDescriptor descriptor) => descriptor
+		private IAnalysis AnalysisSettings(AnalysisDescriptor descriptor) => descriptor
 			.CharFilters(charfilters => charfilters
 				.HtmlStrip("stripMe")
 				.PatternReplace("patterned", c => c.Pattern("x").Replacement("y"))

@@ -18,7 +18,7 @@ namespace Nest
 		bool? TrackScores { get; set; }
 
 		[JsonProperty(PropertyName = "score")]
-		[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]
+		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
 		IDictionary<FieldName, ISort> Sort { get; set; }
 
 		[JsonProperty(PropertyName = "highlight")]
@@ -32,7 +32,7 @@ namespace Nest
 		QueryContainer Filter { get; set; }
 
 		[JsonProperty(PropertyName = "aggs")]
-		[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]
+		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
 		IDictionary<string, IAggregationContainer> Aggregations { get; set; }
 
 		IRequestParameters GetRequestParameters();

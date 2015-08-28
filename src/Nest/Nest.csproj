@@ -979,7 +979,7 @@
     <Compile Include="CommonOptions\Sorting\SortCollectionJsonConverter.cs" />
     <Compile Include="Search\Suggesters\Suggest\SuggestResponseJsonConverter.cs" />
     <Compile Include="CommonAbstractions\Infer\FieldName\FieldNameJsonConverter.cs" />
-    <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\DictionaryKeysAreNotPropertyNamesJsonConverter.cs" />
+    <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\VerbatimDictionaryKeysConverter.cs" />
     <Compile Include="CommonAbstractions\Infer\IndexName\IndexNameJsonConverter.cs" />
     <Compile Include="Aggregations\Bucket\Terms\TermsIncludeExcludeJsonConverter.cs" />
     <Compile Include="CommonAbstractions\Infer\TypeName\TypeNameJsonConverter.cs" />

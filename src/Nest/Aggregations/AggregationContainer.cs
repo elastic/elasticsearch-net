@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]
+	[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
 	public class AggregationDictionary : IsADictionary<string, IAggregationContainer>
 	{
 		public AggregationDictionary() : base() { }

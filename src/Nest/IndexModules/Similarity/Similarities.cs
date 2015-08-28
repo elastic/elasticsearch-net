@@ -5,6 +5,7 @@ using System.Linq;
 
 namespace Nest
 {
+	[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
 	public interface ISimilarities : IHasADictionary { }
 	public class Similarities : IsADictionary<string, ISimilarity>, ISimilarities
 	{
@@ -23,7 +24,7 @@ namespace Nest
 	
 	public class SimilaritiesDescriptor : HasADictionary<SimilaritiesDescriptor, string, ISimilarity>, ISimilarities
 	{
-		public SimilaritiesDescriptor Add<T>(string name, ISimilarity similarity) where T : class
+		public SimilaritiesDescriptor Add(string name, ISimilarity similarity)
 		{
 			this.BackingDictionary.Add(name, similarity);
 			return this;

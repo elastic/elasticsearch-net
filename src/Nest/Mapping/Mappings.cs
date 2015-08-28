@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
 	public interface IMappings : IHasADictionary { }
 	public class Mappings : IsADictionary<TypeName, ITypeMapping>, IMappings
 	{

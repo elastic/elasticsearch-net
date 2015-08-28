@@ -10,7 +10,7 @@ namespace Nest
 		where T : class
 	{
 		[JsonProperty(PropertyName = "gauss")]
-		[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]
+		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
 		internal IDictionary<FieldName, FunctionScoreDecayFieldDescriptor> _GaussDescriptor { get; set; }
 
 		public GaussFunction(

@@ -15,8 +15,8 @@ namespace Nest
 		public const string TranslogFlushThresholdPeriod = "index.translog.flush_threshold_period";
 		public const string TranslogInterval = "index.translog.interval";
 		public const string TranslogFsType = "index.translog.fs.type";
-		public const string TranslogDurability = "index.durability";
-		public const string TranslogSyncInterval = "index.sync_interval";
+		public const string TranslogDurability = "index.translog.durability";
+		public const string TranslogSyncInterval = "index.translog.sync_interval";
 		public const string RequestCacheEnable = "index.requests.cache.enable";
 
 		public const string RoutingAllocationInclude = "index.routing.allocation.include";//

@@ -13,7 +13,7 @@ namespace Nest
 			this._Responses = new Dictionary<string, object>();
 		}
 
-		[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]	
+		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]	
 		internal IDictionary<string, object> _Responses { get; set; }
 
 		public int TotalResponses { get { return this._Responses.HasAny() ? this._Responses.Count() : 0 ; } }
