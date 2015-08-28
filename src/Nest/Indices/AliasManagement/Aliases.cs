@@ -23,9 +23,9 @@ namespace Nest
 	
 	public class AliasesDescriptor : HasADictionary<AliasesDescriptor, IndexName, IAlias>, IAliases
 	{
-		public AliasesDescriptor Alias<T>(Func<BulkAliasDescriptor, ITypeMapping> selector) where T : class
+		public AliasesDescriptor Alias<T>(Func<AliasDescriptor, IAlias> selector) where T : class
 		{
-			this.BackingDictionary.Add(typeof(T), selector?.Invoke(new TypeMappingDescriptor<T>()));
+			this.BackingDictionary.Add(typeof(T), selector?.Invoke(new AliasDescriptor()));
 			return this;
 		}
 	}

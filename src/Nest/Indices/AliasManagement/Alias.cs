@@ -26,17 +26,17 @@ namespace Nest
 		public string SearchRouting { get; set; }
 	}
 
-	public class BulkAliasDescriptor : DescriptorBase<BulkAliasDescriptor, IAlias>, IAlias
+	public class AliasDescriptor : DescriptorBase<AliasDescriptor, IAlias>, IAlias
 	{
 		IQueryContainer IAlias.Filter { get; set; }
 		string IAlias.Routing { get; set; }
 		string IAlias.IndexRouting { get; set; }
 		string IAlias.SearchRouting { get; set; }
 
-		public BulkAliasDescriptor Routing(string routing) => Assign(a => a.Routing = routing);
-		public BulkAliasDescriptor IndexRouting(string indexRouting) => Assign(a => a.IndexRouting = indexRouting);
-		public BulkAliasDescriptor SearchRouting(string searchRouting) => Assign(a => a.SearchRouting = searchRouting);
-		public BulkAliasDescriptor Filter<T>(Func<QueryContainerDescriptor<T>, IQueryContainer> filterSelector) where T : class => 
-			Assign(a => a.Filter = filterSelector?.Invoke(new QueryContainerDescriptor<T>());
+		public AliasDescriptor Routing(string routing) => Assign(a => a.Routing = routing);
+		public AliasDescriptor IndexRouting(string indexRouting) => Assign(a => a.IndexRouting = indexRouting);
+		public AliasDescriptor SearchRouting(string searchRouting) => Assign(a => a.SearchRouting = searchRouting);
+		public AliasDescriptor Filter<T>(Func<QueryContainerDescriptor<T>, IQueryContainer> filterSelector) where T : class => 
+			Assign(a => a.Filter = filterSelector?.Invoke(new QueryContainerDescriptor<T>()));
 	}
 }

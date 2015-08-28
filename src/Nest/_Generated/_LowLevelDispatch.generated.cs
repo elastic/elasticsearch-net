@@ -16,30 +16,6 @@ namespace Nest
 	///<summary>This dispatches highlevel requests into the proper lowlevel client overload method</summary>
 	internal partial class LowLevelDispatch
 	{
-		internal ElasticsearchResponse<T> AbortBenchmarkDispatch<T>(ElasticsearchPathInfo<AbortBenchmarkRequestParameters> p ) where T : class
-		{
-			switch(p.HttpMethod)
-			{
-				case POST:
-					if (AllSet(p.Name)) return _lowLevel.AbortBenchmark<T>(p.Name,u => p.RequestParameters);
-					break;
-
-			}
-			throw InvalidDispatch("AbortBenchmark", p, new [] { POST }, "/_bench/abort/{name}");
-		}
-		
-		internal Task<ElasticsearchResponse<T>> AbortBenchmarkDispatchAsync<T>(ElasticsearchPathInfo<AbortBenchmarkRequestParameters> p ) where T : class
-		{
-			switch(p.HttpMethod)
-			{
-				case POST:
-					if (AllSet(p.Name)) return _lowLevel.AbortBenchmarkAsync<T>(p.Name,u => p.RequestParameters);
-					break;
-
-			}
-			throw InvalidDispatch("AbortBenchmark", p, new [] { POST }, "/_bench/abort/{name}");
-		}
-		
 		internal ElasticsearchResponse<T> BulkDispatch<T>(ElasticsearchPathInfo<BulkRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
@@ -258,6 +234,28 @@ namespace Nest
 
 			}
 			throw InvalidDispatch("CatMaster", p, new [] { GET }, "/_cat/master");
+		}
+		
+		internal ElasticsearchResponse<T> CatNodeattrsDispatch<T>(ElasticsearchPathInfo<CatNodeattrsRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					return _lowLevel.CatNodeattrs<T>(u => p.RequestParameters);
+
+			}
+			throw InvalidDispatch("CatNodeattrs", p, new [] { GET }, "/_cat/nodeattrs");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> CatNodeattrsDispatchAsync<T>(ElasticsearchPathInfo<CatNodeattrsRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					return _lowLevel.CatNodeattrsAsync<T>(u => p.RequestParameters);
+
+			}
+			throw InvalidDispatch("CatNodeattrs", p, new [] { GET }, "/_cat/nodeattrs");
 		}
 		
 		internal ElasticsearchResponse<T> CatNodesDispatch<T>(ElasticsearchPathInfo<CatNodesRequestParameters> p ) where T : class
@@ -832,7 +830,7 @@ namespace Nest
 			throw InvalidDispatch("Explain", p, new [] { GET, POST }, "/{index}/{type}/{id}/_explain");
 		}
 		
-		internal ElasticsearchResponse<T> FieldStatsDispatch<T>(ElasticsearchPathInfo<FieldStatsRequestParameters> p ) where T : class
+		internal ElasticsearchResponse<T> FieldStatsDispatch<T>(ElasticsearchPathInfo<FieldStatsRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -841,14 +839,14 @@ namespace Nest
 					return _lowLevel.FieldStatsGet<T>(u => p.RequestParameters);
 
 				case POST:
-					if (AllSet(p.Index)) return _lowLevel.FieldStats<T>(p.Index,u => p.RequestParameters);
-					return _lowLevel.FieldStats<T>(u => p.RequestParameters);
+					if (AllSet(p.Index)) return _lowLevel.FieldStats<T>(p.Index,body,u => p.RequestParameters);
+					return _lowLevel.FieldStats<T>(body,u => p.RequestParameters);
 
 			}
 			throw InvalidDispatch("FieldStats", p, new [] { GET, POST }, "/_field_stats", "/{index}/_field_stats");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> FieldStatsDispatchAsync<T>(ElasticsearchPathInfo<FieldStatsRequestParameters> p ) where T : class
+		internal Task<ElasticsearchResponse<T>> FieldStatsDispatchAsync<T>(ElasticsearchPathInfo<FieldStatsRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -857,8 +855,8 @@ namespace Nest
 					return _lowLevel.FieldStatsGetAsync<T>(u => p.RequestParameters);
 
 				case POST:
-					if (AllSet(p.Index)) return _lowLevel.FieldStatsAsync<T>(p.Index,u => p.RequestParameters);
-					return _lowLevel.FieldStatsAsync<T>(u => p.RequestParameters);
+					if (AllSet(p.Index)) return _lowLevel.FieldStatsAsync<T>(p.Index,body,u => p.RequestParameters);
+					return _lowLevel.FieldStatsAsync<T>(body,u => p.RequestParameters);
 
 			}
 			throw InvalidDispatch("FieldStats", p, new [] { GET, POST }, "/_field_stats", "/{index}/_field_stats");
@@ -1162,30 +1160,6 @@ namespace Nest
 
 			}
 			throw InvalidDispatch("IndicesDeleteAlias", p, new [] { DELETE }, "/{index}/_alias/{name}", "/{index}/_aliases/{name}");
-		}
-		
-		internal ElasticsearchResponse<T> IndicesDeleteMappingDispatch<T>(ElasticsearchPathInfo<DeleteMappingRequestParameters> p ) where T : class
-		{
-			switch(p.HttpMethod)
-			{
-				case DELETE:
-					if (AllSet(p.Index, p.Type)) return _lowLevel.IndicesDeleteMapping<T>(p.Index,p.Type,u => p.RequestParameters);
-					break;
-
-			}
-			throw InvalidDispatch("IndicesDeleteMapping", p, new [] { DELETE }, "/{index}/{type}/_mapping", "/{index}/{type}", "/{index}/_mapping/{type}", "/{index}/{type}/_mappings", "/{index}/_mappings/{type}");
-		}
-		
-		internal Task<ElasticsearchResponse<T>> IndicesDeleteMappingDispatchAsync<T>(ElasticsearchPathInfo<DeleteMappingRequestParameters> p ) where T : class
-		{
-			switch(p.HttpMethod)
-			{
-				case DELETE:
-					if (AllSet(p.Index, p.Type)) return _lowLevel.IndicesDeleteMappingAsync<T>(p.Index,p.Type,u => p.RequestParameters);
-					break;
-
-			}
-			throw InvalidDispatch("IndicesDeleteMapping", p, new [] { DELETE }, "/{index}/{type}/_mapping", "/{index}/{type}", "/{index}/_mapping/{type}", "/{index}/{type}/_mappings", "/{index}/_mappings/{type}");
 		}
 		
 		internal ElasticsearchResponse<T> IndicesDeleteTemplateDispatch<T>(ElasticsearchPathInfo<DeleteTemplateRequestParameters> p ) where T : class
@@ -1946,6 +1920,30 @@ namespace Nest
 			throw InvalidDispatch("IndicesSegments", p, new [] { GET }, "/_segments", "/{index}/_segments");
 		}
 		
+		internal ElasticsearchResponse<T> IndicesShardStoresDispatch<T>(ElasticsearchPathInfo<IndicesShardStoresRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.Index)) return _lowLevel.IndicesShardStores<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.IndicesShardStoresForAll<T>(u => p.RequestParameters);
+
+			}
+			throw InvalidDispatch("IndicesShardStores", p, new [] { GET }, "/_shard_stores", "/{index}/_shard_stores");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> IndicesShardStoresDispatchAsync<T>(ElasticsearchPathInfo<IndicesShardStoresRequestParameters> p ) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.Index)) return _lowLevel.IndicesShardStoresAsync<T>(p.Index,u => p.RequestParameters);
+					return _lowLevel.IndicesShardStoresForAllAsync<T>(u => p.RequestParameters);
+
+			}
+			throw InvalidDispatch("IndicesShardStores", p, new [] { GET }, "/_shard_stores", "/{index}/_shard_stores");
+		}
+		
 		internal ElasticsearchResponse<T> IndicesStatsDispatch<T>(ElasticsearchPathInfo<IndicesStatsRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
@@ -1974,31 +1972,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesStats", p, new [] { GET }, "/_stats", "/_stats/{metric}", "/{index}/_stats", "/{index}/_stats/{metric}");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesStatusDispatch<T>(ElasticsearchPathInfo<IndicesStatusRequestParameters> p ) where T : class
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-					if (AllSet(p.Index)) return _lowLevel.IndicesStatus<T>(p.Index,u => p.RequestParameters);
-					return _lowLevel.IndicesStatusForAll<T>(u => p.RequestParameters);
-
-			}
-			throw InvalidDispatch("IndicesStatus", p, new [] { GET }, "/_status", "/{index}/_status");
-		}
-		
-		internal Task<ElasticsearchResponse<T>> IndicesStatusDispatchAsync<T>(ElasticsearchPathInfo<IndicesStatusRequestParameters> p ) where T : class
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-					if (AllSet(p.Index)) return _lowLevel.IndicesStatusAsync<T>(p.Index,u => p.RequestParameters);
-					return _lowLevel.IndicesStatusForAllAsync<T>(u => p.RequestParameters);
-
-			}
-			throw InvalidDispatch("IndicesStatus", p, new [] { GET }, "/_status", "/{index}/_status");
-		}
-		
-		internal ElasticsearchResponse<T> IndicesUpdateAliasesDispatch<T>(ElasticsearchPathInfo<AliasRequestParameters> p , object body) where T : class
+		internal ElasticsearchResponse<T> IndicesUpdateAliasesDispatch<T>(ElasticsearchPathInfo<BulkAliasRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2009,7 +1983,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesUpdateAliases", p, new [] { POST }, "/_aliases");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesUpdateAliasesDispatchAsync<T>(ElasticsearchPathInfo<AliasRequestParameters> p , object body) where T : class
+		internal Task<ElasticsearchResponse<T>> IndicesUpdateAliasesDispatchAsync<T>(ElasticsearchPathInfo<BulkAliasRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2102,32 +2076,6 @@ namespace Nest
 			throw InvalidDispatch("Info", p, new [] { GET }, "/");
 		}
 		
-		internal ElasticsearchResponse<T> ListBenchmarksDispatch<T>(ElasticsearchPathInfo<ListBenchmarksRequestParameters> p ) where T : class
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-					if (AllSet(p.Index, p.Type)) return _lowLevel.ListBenchmarks<T>(p.Index,p.Type,u => p.RequestParameters);
-					if (AllSet(p.Index)) return _lowLevel.ListBenchmarks<T>(p.Index,u => p.RequestParameters);
-					return _lowLevel.ListBenchmarks<T>(u => p.RequestParameters);
-
-			}
-			throw InvalidDispatch("ListBenchmarks", p, new [] { GET }, "/_bench", "/{index}/_bench", "/{index}/{type}/_bench");
-		}
-		
-		internal Task<ElasticsearchResponse<T>> ListBenchmarksDispatchAsync<T>(ElasticsearchPathInfo<ListBenchmarksRequestParameters> p ) where T : class
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-					if (AllSet(p.Index, p.Type)) return _lowLevel.ListBenchmarksAsync<T>(p.Index,p.Type,u => p.RequestParameters);
-					if (AllSet(p.Index)) return _lowLevel.ListBenchmarksAsync<T>(p.Index,u => p.RequestParameters);
-					return _lowLevel.ListBenchmarksAsync<T>(u => p.RequestParameters);
-
-			}
-			throw InvalidDispatch("ListBenchmarks", p, new [] { GET }, "/_bench", "/{index}/_bench", "/{index}/{type}/_bench");
-		}
-		
 		internal ElasticsearchResponse<T> MgetDispatch<T>(ElasticsearchPathInfo<MultiGetRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
@@ -2162,38 +2110,6 @@ namespace Nest
 
 			}
 			throw InvalidDispatch("Mget", p, new [] { GET, POST }, "/_mget", "/{index}/_mget", "/{index}/{type}/_mget");
-		}
-		
-		internal ElasticsearchResponse<T> MltDispatch<T>(ElasticsearchPathInfo<MoreLikeThisRequestParameters> p , object body) where T : class
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-					if (AllSet(p.Index, p.Type, p.Id)) return _lowLevel.MltGet<T>(p.Index,p.Type,p.Id,u => p.RequestParameters);
-					break;
-
-				case POST:
-					if (AllSet(p.Index, p.Type, p.Id)) return _lowLevel.Mlt<T>(p.Index,p.Type,p.Id,body,u => p.RequestParameters);
-					break;
-
-			}
-			throw InvalidDispatch("Mlt", p, new [] { GET, POST }, "/{index}/{type}/{id}/_mlt");
-		}
-		
-		internal Task<ElasticsearchResponse<T>> MltDispatchAsync<T>(ElasticsearchPathInfo<MoreLikeThisRequestParameters> p , object body) where T : class
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-					if (AllSet(p.Index, p.Type, p.Id)) return _lowLevel.MltGetAsync<T>(p.Index,p.Type,p.Id,u => p.RequestParameters);
-					break;
-
-				case POST:
-					if (AllSet(p.Index, p.Type, p.Id)) return _lowLevel.MltAsync<T>(p.Index,p.Type,p.Id,body,u => p.RequestParameters);
-					break;
-
-			}
-			throw InvalidDispatch("Mlt", p, new [] { GET, POST }, "/{index}/{type}/{id}/_mlt");
 		}
 		
 		internal ElasticsearchResponse<T> MpercolateDispatch<T>(ElasticsearchPathInfo<MultiPercolateRequestParameters> p , object body) where T : class
@@ -2356,30 +2272,6 @@ namespace Nest
 			throw InvalidDispatch("NodesInfo", p, new [] { GET }, "/_nodes", "/_nodes/{node_id}", "/_nodes/{metric}", "/_nodes/{node_id}/{metric}");
 		}
 		
-		internal ElasticsearchResponse<T> NodesShutdownDispatch<T>(ElasticsearchPathInfo<NodesShutdownRequestParameters> p ) where T : class
-		{
-			switch(p.HttpMethod)
-			{
-				case POST:
-					if (AllSet(p.NodeId)) return _lowLevel.NodesShutdown<T>(p.NodeId,u => p.RequestParameters);
-					return _lowLevel.NodesShutdownForAll<T>(u => p.RequestParameters);
-
-			}
-			throw InvalidDispatch("NodesShutdown", p, new [] { POST }, "/_shutdown", "/_cluster/nodes/_shutdown", "/_cluster/nodes/{node_id}/_shutdown");
-		}
-		
-		internal Task<ElasticsearchResponse<T>> NodesShutdownDispatchAsync<T>(ElasticsearchPathInfo<NodesShutdownRequestParameters> p ) where T : class
-		{
-			switch(p.HttpMethod)
-			{
-				case POST:
-					if (AllSet(p.NodeId)) return _lowLevel.NodesShutdownAsync<T>(p.NodeId,u => p.RequestParameters);
-					return _lowLevel.NodesShutdownForAllAsync<T>(u => p.RequestParameters);
-
-			}
-			throw InvalidDispatch("NodesShutdown", p, new [] { POST }, "/_shutdown", "/_cluster/nodes/_shutdown", "/_cluster/nodes/{node_id}/_shutdown");
-		}
-		
 		internal ElasticsearchResponse<T> NodesStatsDispatch<T>(ElasticsearchPathInfo<NodesStatsRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
@@ -2532,6 +2424,38 @@ namespace Nest
 
 			}
 			throw InvalidDispatch("PutTemplate", p, new [] { PUT, POST }, "/_search/template/{id}");
+		}
+		
+		internal ElasticsearchResponse<T> RenderSearchTemplateDispatch<T>(ElasticsearchPathInfo<RenderSearchTemplateRequestParameters> p , object body) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.Id)) return _lowLevel.RenderSearchTemplateGet<T>(p.Id,u => p.RequestParameters);
+					return _lowLevel.RenderSearchTemplateGet<T>(u => p.RequestParameters);
+
+				case POST:
+					if (AllSet(p.Id)) return _lowLevel.RenderSearchTemplate<T>(p.Id,body,u => p.RequestParameters);
+					return _lowLevel.RenderSearchTemplate<T>(body,u => p.RequestParameters);
+
+			}
+			throw InvalidDispatch("RenderSearchTemplate", p, new [] { GET, POST }, "/_render/template", "/_render/template/{id}");
+		}
+		
+		internal Task<ElasticsearchResponse<T>> RenderSearchTemplateDispatchAsync<T>(ElasticsearchPathInfo<RenderSearchTemplateRequestParameters> p , object body) where T : class
+		{
+			switch(p.HttpMethod)
+			{
+				case GET:
+					if (AllSet(p.Id)) return _lowLevel.RenderSearchTemplateGetAsync<T>(p.Id,u => p.RequestParameters);
+					return _lowLevel.RenderSearchTemplateGetAsync<T>(u => p.RequestParameters);
+
+				case POST:
+					if (AllSet(p.Id)) return _lowLevel.RenderSearchTemplateAsync<T>(p.Id,body,u => p.RequestParameters);
+					return _lowLevel.RenderSearchTemplateAsync<T>(body,u => p.RequestParameters);
+
+			}
+			throw InvalidDispatch("RenderSearchTemplate", p, new [] { GET, POST }, "/_render/template", "/_render/template/{id}");
 		}
 		
 		internal ElasticsearchResponse<T> ScrollDispatch<T>(ElasticsearchPathInfo<ScrollRequestParameters> p , object body) where T : class
@@ -2976,40 +2900,40 @@ namespace Nest
 			throw InvalidDispatch("Suggest", p, new [] { POST, GET }, "/_suggest", "/{index}/_suggest");
 		}
 		
-		internal ElasticsearchResponse<T> TermvectorDispatch<T>(ElasticsearchPathInfo<TermvectorRequestParameters> p , object body) where T : class
+		internal ElasticsearchResponse<T> TermvectorsDispatch<T>(ElasticsearchPathInfo<TermVectorsRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
 				case GET:
-					if (AllSet(p.Index, p.Type, p.Id)) return _lowLevel.TermvectorGet<T>(p.Index,p.Type,p.Id,u => p.RequestParameters);
-					if (AllSet(p.Index, p.Type)) return _lowLevel.TermvectorGet<T>(p.Index,p.Type,u => p.RequestParameters);
+					if (AllSet(p.Index, p.Type, p.Id)) return _lowLevel.TermvectorsGet<T>(p.Index,p.Type,p.Id,u => p.RequestParameters);
+					if (AllSet(p.Index, p.Type)) return _lowLevel.TermvectorsGet<T>(p.Index,p.Type,u => p.RequestParameters);
 					break;
 
 				case POST:
-					if (AllSet(p.Index, p.Type, p.Id)) return _lowLevel.Termvector<T>(p.Index,p.Type,p.Id,body,u => p.RequestParameters);
-					if (AllSet(p.Index, p.Type)) return _lowLevel.Termvector<T>(p.Index,p.Type,body,u => p.RequestParameters);
+					if (AllSet(p.Index, p.Type, p.Id)) return _lowLevel.Termvectors<T>(p.Index,p.Type,p.Id,body,u => p.RequestParameters);
+					if (AllSet(p.Index, p.Type)) return _lowLevel.Termvectors<T>(p.Index,p.Type,body,u => p.RequestParameters);
 					break;
 
 			}
-			throw InvalidDispatch("Termvector", p, new [] { GET, POST }, "/{index}/{type}/_termvector", "/{index}/{type}/{id}/_termvector");
+			throw InvalidDispatch("Termvectors", p, new [] { GET, POST }, "/{index}/{type}/_termvectors", "/{index}/{type}/{id}/_termvectors");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> TermvectorDispatchAsync<T>(ElasticsearchPathInfo<TermvectorRequestParameters> p , object body) where T : class
+		internal Task<ElasticsearchResponse<T>> TermvectorsDispatchAsync<T>(ElasticsearchPathInfo<TermVectorsRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
 				case GET:
-					if (AllSet(p.Index, p.Type, p.Id)) return _lowLevel.TermvectorGetAsync<T>(p.Index,p.Type,p.Id,u => p.RequestParameters);
-					if (AllSet(p.Index, p.Type)) return _lowLevel.TermvectorGetAsync<T>(p.Index,p.Type,u => p.RequestParameters);
+					if (AllSet(p.Index, p.Type, p.Id)) return _lowLevel.TermvectorsGetAsync<T>(p.Index,p.Type,p.Id,u => p.RequestParameters);
+					if (AllSet(p.Index, p.Type)) return _lowLevel.TermvectorsGetAsync<T>(p.Index,p.Type,u => p.RequestParameters);
 					break;
 
 				case POST:
-					if (AllSet(p.Index, p.Type, p.Id)) return _lowLevel.TermvectorAsync<T>(p.Index,p.Type,p.Id,body,u => p.RequestParameters);
-					if (AllSet(p.Index, p.Type)) return _lowLevel.TermvectorAsync<T>(p.Index,p.Type,body,u => p.RequestParameters);
+					if (AllSet(p.Index, p.Type, p.Id)) return _lowLevel.TermvectorsAsync<T>(p.Index,p.Type,p.Id,body,u => p.RequestParameters);
+					if (AllSet(p.Index, p.Type)) return _lowLevel.TermvectorsAsync<T>(p.Index,p.Type,body,u => p.RequestParameters);
 					break;
 
 			}
-			throw InvalidDispatch("Termvector", p, new [] { GET, POST }, "/{index}/{type}/_termvector", "/{index}/{type}/{id}/_termvector");
+			throw InvalidDispatch("Termvectors", p, new [] { GET, POST }, "/{index}/{type}/_termvectors", "/{index}/{type}/{id}/_termvectors");
 		}
 		
 		internal ElasticsearchResponse<T> UpdateDispatch<T>(ElasticsearchPathInfo<UpdateRequestParameters> p , object body) where T : class

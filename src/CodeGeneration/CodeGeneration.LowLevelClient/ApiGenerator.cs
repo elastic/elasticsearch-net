@@ -19,13 +19,18 @@ namespace CodeGeneration.LowLevelClient
 {
 	public static class ApiGenerator
 	{
-		private readonly static string _listingUrl = "https://github.com/elastic/elasticsearch/tree/2.0/rest-api-spec/src/main/resources/rest-api-spec/api";
-		private readonly static string _rawUrlPrefix = "https://raw.github.com/elastic/elasticsearch/2.0/rest-api-spec/src/main/resources/rest-api-spec/api/";
 		private readonly static string _nestFolder = @"..\..\..\..\..\src\Nest\";
 		private readonly static string _esNetFolder = @"..\..\..\..\..\src\Elasticsearch.Net\";
 		private readonly static string _viewFolder = @"..\..\Views\";
 		private readonly static string _apiEndpointsFolder = @"..\..\ApiEndpoints\";
 		private static readonly RazorMachine _razorMachine;
+
+		private static readonly string _version = "2.0";
+		private static List<string> ApiListings = new List<string>
+		{
+			"https://github.com/elastic/elasticsearch/tree/{version}/rest-api-spec/src/main/resources/rest-api-spec/api",
+			"https://github.com/elastic/elasticsearch/tree/{version}/plugins/delete-by-query/rest-api-spec/api"
+		};
 
 		private static readonly Assembly _assembly;
 
@@ -42,22 +47,44 @@ namespace CodeGeneration.LowLevelClient
 		public static void GenerateEndpointFiles()
 		{
 			Console.WriteLine("Getting a listing of all the api endpoints from the elasticsearch-rest-api-spec repos");
+			foreach(var listing in ApiListings.Select(l=>l.Replace("{version}", _version)))
+				DownloadJsonDefinitions(listing);
+		}
 
+		private static void DownloadJsonDefinitions(string listingUrl)
+		{
 			string html = string.Empty;
 			using (var client = new WebClient())
-				html = client.DownloadString(_listingUrl);
+				html = client.DownloadString(listingUrl);
 
+			FindJsonFilesOnListing(listingUrl, html);
+		}
+
+		private static void FindJsonFilesOnListing(string listingUrl, string html)
+		{
 			var dom = CQ.Create(html);
 
 			WriteToEndpointsFolder("root.html", html);
-			
+
 			var endpoints = dom[".js-directory-link"]
 				.Select(s => s.InnerText)
 				.Where(s => !string.IsNullOrEmpty(s) && s.EndsWith(".json"))
 				.ToList();
-			
-			endpoints.ForEach(s => WriteEndpointFile(s));
+
+			endpoints.ForEach(s => WriteEndpointFile(listingUrl, s));
 		}
+		private static void WriteEndpointFile(string listingUrl, string s)
+		{
+			using (var client = new WebClient())
+			{
+				var rawFile = listingUrl.Replace("github.com", "raw.githubusercontent.com").Replace("tree/", "") + "/" + s;
+				var fileName = rawFile.Split(new[] { '/' }).Last();
+				Console.WriteLine("Downloading {0}", rawFile);
+				var json = client.DownloadString(rawFile);
+				WriteToEndpointsFolder(fileName, json);
+			}
+		}
+
 
 		public static RestApiSpec GetRestApiSpec()
 		{
@@ -87,18 +114,6 @@ namespace CodeGeneration.LowLevelClient
 			var assemblyPath = Path.GetFullPath((new Uri(basePath)).LocalPath);
 			var fileUri = new Uri(assemblyPath).AbsoluteUri;
 			return fileUri;
-		}
-
-		private static void WriteEndpointFile(string s)
-		{
-			using (var client = new WebClient())
-			{
-				var rawFile = _rawUrlPrefix + s;
-				var fileName = rawFile.Split(new[] { '/' }).Last();
-				Console.WriteLine("Downloading {0}", rawFile);
-				var json = client.DownloadString(rawFile);
-				WriteToEndpointsFolder(fileName, json);
-			}
 		}
 
 		private static readonly Dictionary<string, string> MethodNameOverrides =

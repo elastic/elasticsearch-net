@@ -16,6 +16,10 @@ namespace Nest
 	public static class RequestPameterExtensions
 	{
 		
+		///<summary>Default comma-separated list of fields to return in the response for updates</summary>
+		internal static BulkRequestParameters _Fields<T>(this BulkRequestParameters qs, IEnumerable<Expression<Func<T, object>>>  fields) where T : class =>
+			qs.AddQueryString("fields", fields.Select(e=>(FieldName)e));
+		
 		///<summary>A comma-separated list of fields to return in the output</summary>
 		internal static CatFielddataRequestParameters _Fields<T>(this CatFielddataRequestParameters qs, IEnumerable<Expression<Func<T, object>>>  fields) where T : class =>
 			qs.AddQueryString("fields", fields.Select(e=>(FieldName)e));
@@ -88,10 +92,6 @@ namespace Nest
 		internal static MultiGetRequestParameters _SourceInclude<T>(this MultiGetRequestParameters qs, IEnumerable<Expression<Func<T, object>>>  source_include) where T : class =>
 			qs.AddQueryString("_source_include", source_include.Select(e=>(FieldName)e));
 		
-		///<summary>Specific fields to perform the query against</summary>
-		internal static MoreLikeThisRequestParameters _MltFields<T>(this MoreLikeThisRequestParameters qs, IEnumerable<Expression<Func<T, object>>>  mlt_fields) where T : class =>
-			qs.AddQueryString("mlt_fields", mlt_fields.Select(e=>(FieldName)e));
-		
 		///<summary>A comma-separated list of fields to return. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
 		internal static MultiTermVectorsRequestParameters _Fields<T>(this MultiTermVectorsRequestParameters qs, IEnumerable<Expression<Func<T, object>>>  fields) where T : class =>
 			qs.AddQueryString("fields", fields.Select(e=>(FieldName)e));
@@ -113,7 +113,7 @@ namespace Nest
 			qs.AddQueryString("suggest_field", (FieldName)suggest_field);
 		
 		///<summary>A comma-separated list of fields to return.</summary>
-		internal static TermvectorRequestParameters _Fields<T>(this TermvectorRequestParameters qs, IEnumerable<Expression<Func<T, object>>>  fields) where T : class =>
+		internal static TermVectorsRequestParameters _Fields<T>(this TermVectorsRequestParameters qs, IEnumerable<Expression<Func<T, object>>>  fields) where T : class =>
 			qs.AddQueryString("fields", fields.Select(e=>(FieldName)e));
 	}
 }

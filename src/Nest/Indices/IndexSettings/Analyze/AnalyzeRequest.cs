@@ -23,7 +23,7 @@ namespace Nest
 	{
 		public AnalyzeRequest(string textToAnalyze)
 		{
-			this.Text = textToAnalyze;
+			this.Text = new[] { textToAnalyze };
 		}
 
 

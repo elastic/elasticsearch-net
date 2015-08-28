@@ -13,22 +13,7 @@ using Elasticsearch.Net;
 namespace Nest
 {
 
-	///<summary>Request parameters for AbortBenchmark <pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-benchmark.html</pre></summary>
-	public partial class AbortBenchmarkRequest  : BasePathRequest<AbortBenchmarkRequestParameters>
-	{
-		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<AbortBenchmarkRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-	
-	}
-	///<summary>Request parameters for Bulk <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-bulk.html</pre></summary>
+	///<summary>Request parameters for Bulk <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-bulk.html</pre></summary>
 	public partial class BulkRequest 
 	{
 		///<summary>Explicit write consistency setting for the operation</summary>
@@ -36,9 +21,6 @@ namespace Nest
 		
 		///<summary>Refresh the index after performing the operation</summary>
 		public bool Refresh { get { return Q<bool>("refresh"); } set { Q("refresh", value); } }
-		
-		///<summary>Explicitely set the replication type</summary>
-		public Replication Replication { get { return Q<Replication>("replication"); } set { Q("replication", value); } }
 		
 		///<summary>Specific routing value</summary>
 		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
@@ -49,6 +31,9 @@ namespace Nest
 		///<summary>Default document type for items which don&#39;t provide one</summary>
 		public string TypeQueryString { get { return Q<string>("type"); } set { Q("type", value); } }
 		
+		///<summary>Default comma-separated list of fields to return in the response for updates</summary>
+		public IList<FieldName> Fields { get { return Q<IList<FieldName>>("fields"); } set { Q("fields", value); } }
+		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
@@ -56,7 +41,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for CatAliases <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-alias.html</pre></summary>
+	///<summary>Request parameters for CatAliases <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-alias.html</pre></summary>
 	public partial class CatAliasesRequest 
 	{
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
@@ -81,7 +66,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for CatAllocation <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-allocation.html</pre></summary>
+	///<summary>Request parameters for CatAllocation <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-allocation.html</pre></summary>
 	public partial class CatAllocationRequest 
 	{
 		///<summary>The unit in which to display byte values</summary>
@@ -109,7 +94,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for CatCount <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-count.html</pre></summary>
+	///<summary>Request parameters for CatCount <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-count.html</pre></summary>
 	public partial class CatCountRequest 
 	{
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
@@ -165,7 +150,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for CatHealth <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-health.html</pre></summary>
+	///<summary>Request parameters for CatHealth <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-health.html</pre></summary>
 	public partial class CatHealthRequest 
 	{
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
@@ -193,7 +178,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for CatHelp <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat.html</pre></summary>
+	///<summary>Request parameters for CatHelp <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat.html</pre></summary>
 	public partial class CatHelpRequest  : BasePathRequest<CatHelpRequestParameters>
 	{
 		///<summary>Return help information</summary>
@@ -211,7 +196,7 @@ namespace Nest
 		}
 	
 	}
-	///<summary>Request parameters for CatIndices <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-indices.html</pre></summary>
+	///<summary>Request parameters for CatIndices <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-indices.html</pre></summary>
 	public partial class CatIndicesRequest 
 	{
 		///<summary>The unit in which to display byte values</summary>
@@ -242,7 +227,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for CatMaster <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-master.html</pre></summary>
+	///<summary>Request parameters for CatMaster <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-master.html</pre></summary>
 	public partial class CatMasterRequest 
 	{
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
@@ -267,7 +252,37 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for CatNodes <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-nodes.html</pre></summary>
+	///<summary>Request parameters for CatNodeattrs <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodeattrs.html</pre></summary>
+	public partial class CatNodeattrsRequest  : BasePathRequest<CatNodeattrsRequestParameters>
+	{
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
+		
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
+		
+		///<summary>Comma-separated list of column names to display</summary>
+		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
+		
+		///<summary>Return help information</summary>
+		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
+		
+		///<summary>Verbose mode. Display column headers</summary>
+		public bool V { get { return Q<bool>("v"); } set { Q("v", value); } }
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CatNodeattrsRequestParameters> pathInfo)
+		{
+			throw new NotImplementedException();
+		}
+	
+	}
+	///<summary>Request parameters for CatNodes <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodes.html</pre></summary>
 	public partial class CatNodesRequest 
 	{
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
@@ -292,7 +307,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for CatPendingTasks <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-pending-tasks.html</pre></summary>
+	///<summary>Request parameters for CatPendingTasks <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-pending-tasks.html</pre></summary>
 	public partial class CatPendingTasksRequest 
 	{
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
@@ -342,7 +357,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for CatRecovery <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-recovery.html</pre></summary>
+	///<summary>Request parameters for CatRecovery <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-recovery.html</pre></summary>
 	public partial class CatRecoveryRequest 
 	{
 		///<summary>The unit in which to display byte values</summary>
@@ -386,7 +401,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for CatShards <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cat-shards.html</pre></summary>
+	///<summary>Request parameters for CatShards <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-shards.html</pre></summary>
 	public partial class CatShardsRequest 
 	{
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
@@ -439,7 +454,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for ClearScroll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-request-scroll.html</pre></summary>
+	///<summary>Request parameters for ClearScroll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</pre></summary>
 	public partial class ClearScrollRequest 
 	{
 		///<summary>The URL-encoded request definition</summary>
@@ -449,7 +464,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for ClusterGetSettings <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-update-settings.html</pre></summary>
+	///<summary>Request parameters for ClusterGetSettings <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</pre></summary>
 	public partial class ClusterGetSettingsRequest 
 	{
 		///<summary>Return settings in flat format (default: false)</summary>
@@ -468,7 +483,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for ClusterHealth <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-health.html</pre></summary>
+	///<summary>Request parameters for ClusterHealth <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-health.html</pre></summary>
 	public partial class ClusterHealthRequest 
 	{
 		///<summary>Specify the level of detail for returned information</summary>
@@ -502,7 +517,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for ClusterPendingTasks <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-pending.html</pre></summary>
+	///<summary>Request parameters for ClusterPendingTasks <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-pending.html</pre></summary>
 	public partial class ClusterPendingTasksRequest 
 	{
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
@@ -518,7 +533,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for ClusterPutSettings <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-update-settings.html</pre></summary>
+	///<summary>Request parameters for ClusterPutSettings <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</pre></summary>
 	public partial class ClusterSettingsRequest 
 	{
 		///<summary>Return settings in flat format (default: false)</summary>
@@ -537,7 +552,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for ClusterReroute <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-reroute.html</pre></summary>
+	///<summary>Request parameters for ClusterReroute <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-reroute.html</pre></summary>
 	public partial class ClusterRerouteRequest 
 	{
 		///<summary>Simulate the operation only and return the resulting state</summary>
@@ -562,7 +577,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for ClusterState <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-state.html</pre></summary>
+	///<summary>Request parameters for ClusterState <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-state.html</pre></summary>
 	public partial class ClusterStateRequest 
 	{
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
@@ -590,7 +605,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for ClusterStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-stats.html</pre></summary>
+	///<summary>Request parameters for ClusterStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-stats.html</pre></summary>
 	public partial class ClusterStatsRequest 
 	{
 		///<summary>Return settings in flat format (default: false)</summary>
@@ -606,7 +621,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for Count <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-count.html</pre></summary>
+	///<summary>Request parameters for Count <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-count.html</pre></summary>
 	public partial class CountRequest<T> 
 	{
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -655,7 +670,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for CountPercolateGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html</pre></summary>
+	///<summary>Request parameters for CountPercolateGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-percolate.html</pre></summary>
 	public partial class PercolateCountRequest<TDocument> 
 	{
 		///<summary>A comma-separated list of specific routing values</summary>
@@ -692,7 +707,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for Delete <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-delete.html</pre></summary>
+	///<summary>Request parameters for Delete <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete.html</pre></summary>
 	public partial class DeleteRequest<T> 
 	{
 		///<summary>Specific write consistency setting for the operation</summary>
@@ -703,9 +718,6 @@ namespace Nest
 		
 		///<summary>Refresh the index after performing the operation</summary>
 		public bool Refresh { get { return Q<bool>("refresh"); } set { Q("refresh", value); } }
-		
-		///<summary>Specific replication type</summary>
-		public Replication Replication { get { return Q<Replication>("replication"); } set { Q("replication", value); } }
 		
 		///<summary>Specific routing value</summary>
 		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
@@ -726,14 +738,11 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for DeleteByQuery <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-delete-by-query.html</pre></summary>
+	///<summary>Request parameters for DeleteByQuery <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/2.0/plugins-delete-by-query.html</pre></summary>
 	public partial class DeleteByQueryRequest<T> 
 	{
 		///<summary>The analyzer to use for the query string</summary>
 		public string Analyzer { get { return Q<string>("analyzer"); } set { Q("analyzer", value); } }
-		
-		///<summary>Specific write consistency setting for the operation</summary>
-		public Consistency Consistency { get { return Q<Consistency>("consistency"); } set { Q("consistency", value); } }
 		
 		///<summary>The default operator for query string query (AND or OR)</summary>
 		public DefaultOperator DefaultOperator { get { return Q<DefaultOperator>("default_operator"); } set { Q("default_operator", value); } }
@@ -750,20 +759,17 @@ namespace Nest
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
-		///<summary>Specific replication type</summary>
-		public Replication Replication { get { return Q<Replication>("replication"); } set { Q("replication", value); } }
-		
 		///<summary>Query in the Lucene query string syntax</summary>
 		public string Q { get { return Q<string>("q"); } set { Q("q", value); } }
 		
 		///<summary>Specific routing value</summary>
 		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
+		///<summary>The URL-encoded query definition (instead of using the request body)</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
 		///<summary>Explicit operation timeout</summary>
 		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
-		
-		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
@@ -801,7 +807,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for Exists <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-get.html</pre></summary>
+	///<summary>Request parameters for Exists <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
 	public partial class DocumentExistsRequest<T> 
 	{
 		///<summary>The ID of the parent document</summary>
@@ -826,7 +832,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for ExplainGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-explain.html</pre></summary>
+	///<summary>Request parameters for ExplainGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-explain.html</pre></summary>
 	public partial class ExplainRequest<T> 
 	{
 		///<summary>Specify whether wildcards and prefix queries in the query string query should be analyzed (default: false)</summary>
@@ -903,7 +909,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for Get <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-get.html</pre></summary>
+	///<summary>Request parameters for Get <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
 	public partial class GetRequest<T> 
 	{
 		///<summary>A comma-separated list of fields to return in the response</summary>
@@ -962,7 +968,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for GetSource <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-get.html</pre></summary>
+	///<summary>Request parameters for GetSource <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
 	public partial class SourceRequest<T> 
 	{
 		///<summary>The ID of the parent document</summary>
@@ -1018,7 +1024,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for Index <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-index_.html</pre></summary>
+	///<summary>Request parameters for Index <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</pre></summary>
 	public partial class IndexRequest<TDocument> 
 	{
 		///<summary>Explicit write consistency setting for the operation</summary>
@@ -1032,9 +1038,6 @@ namespace Nest
 		
 		///<summary>Refresh the index after performing the operation</summary>
 		public bool Refresh { get { return Q<bool>("refresh"); } set { Q("refresh", value); } }
-		
-		///<summary>Specific replication type</summary>
-		public Replication Replication { get { return Q<Replication>("replication"); } set { Q("replication", value); } }
 		
 		///<summary>Specific routing value</summary>
 		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
@@ -1061,7 +1064,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for IndicesAnalyzeGetForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-analyze.html</pre></summary>
+	///<summary>Request parameters for IndicesAnalyzeGetForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-analyze.html</pre></summary>
 	public partial class AnalyzeRequest 
 	{
 		///<summary>The name of the analyzer to use</summary>
@@ -1083,7 +1086,7 @@ namespace Nest
 		public bool PreferLocal { get { return Q<bool>("prefer_local"); } set { Q("prefer_local", value); } }
 		
 		///<summary>The text on which the analysis should be performed (when request body is not used)</summary>
-		public string Text { get { return Q<string>("text"); } set { Q("text", value); } }
+		public  string[] Text { get { return Q< string[]>("text"); } set { Q("text", value); } }
 		
 		///<summary>The name of the tokenizer to use for the analysis</summary>
 		public string Tokenizer { get { return Q<string>("tokenizer"); } set { Q("tokenizer", value); } }
@@ -1098,7 +1101,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for IndicesClearCacheForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-clearcache.html</pre></summary>
+	///<summary>Request parameters for IndicesClearCacheForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clearcache.html</pre></summary>
 	public partial class ClearCacheRequest 
 	{
 		///<summary>Clear field data</summary>
@@ -1107,20 +1110,8 @@ namespace Nest
 		///<summary>A comma-separated list of fields to clear when using the `field_data` parameter (default: all)</summary>
 		public IList<FieldName> Fields { get { return Q<IList<FieldName>>("fields"); } set { Q("fields", value); } }
 		
-		///<summary>Clear filter caches</summary>
-		public bool Filter { get { return Q<bool>("filter"); } set { Q("filter", value); } }
-		
-		///<summary>Clear filter caches</summary>
-		public bool FilterCache { get { return Q<bool>("filter_cache"); } set { Q("filter_cache", value); } }
-		
-		///<summary>A comma-separated list of keys to clear when using the `filter_cache` parameter (default: all)</summary>
-		public bool FilterKeys { get { return Q<bool>("filter_keys"); } set { Q("filter_keys", value); } }
-		
-		///<summary>Clear ID caches for parent/child</summary>
-		public bool Id { get { return Q<bool>("id"); } set { Q("id", value); } }
-		
-		///<summary>Clear ID caches for parent/child</summary>
-		public bool IdCache { get { return Q<bool>("id_cache"); } set { Q("id_cache", value); } }
+		///<summary>Clear query caches</summary>
+		public bool Query { get { return Q<bool>("query"); } set { Q("query", value); } }
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
@@ -1137,8 +1128,8 @@ namespace Nest
 		///<summary>Clear the recycler cache</summary>
 		public bool Recycler { get { return Q<bool>("recycler"); } set { Q("recycler", value); } }
 		
-		///<summary>Clear query cache</summary>
-		public bool QueryCache { get { return Q<bool>("query_cache"); } set { Q("query_cache", value); } }
+		///<summary>Clear request cache</summary>
+		public bool Request { get { return Q<bool>("request"); } set { Q("request", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
@@ -1147,7 +1138,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for IndicesClose <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-open-close.html</pre></summary>
+	///<summary>Request parameters for IndicesClose <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</pre></summary>
 	public partial class CloseIndexRequest 
 	{
 		///<summary>Explicit operation timeout</summary>
@@ -1172,7 +1163,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for IndicesCreate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-create-index.html</pre></summary>
+	///<summary>Request parameters for IndicesCreate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-create-index.html</pre></summary>
 	public partial class CreateIndexRequest 
 	{
 		///<summary>Explicit operation timeout</summary>
@@ -1181,6 +1172,9 @@ namespace Nest
 		///<summary>Specify timeout for connection to master</summary>
 		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
+		///<summary>Whether to update the mapping for all fields with the same name across all types or not</summary>
+		public bool UpdateAllTypes { get { return Q<bool>("update_all_types"); } set { Q("update_all_types", value); } }
+		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
@@ -1188,7 +1182,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for IndicesDelete <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-delete-index.html</pre></summary>
+	///<summary>Request parameters for IndicesDelete <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-delete-index.html</pre></summary>
 	public partial class DeleteIndexRequest 
 	{
 		///<summary>Explicit operation timeout</summary>
@@ -1204,7 +1198,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for IndicesDeleteAlias <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</pre></summary>
+	///<summary>Request parameters for IndicesDeleteAlias <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
 	public partial class DeleteAliasRequest 
 	{
 		///<summary>Explicit timestamp for the document</summary>
@@ -1220,20 +1214,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for IndicesDeleteMapping <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-delete-mapping.html</pre></summary>
-	public partial class DeleteMappingRequest<T> 
-	{
-		///<summary>Specify timeout for connection to master</summary>
-		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
-		
-		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
-	///<summary>Request parameters for IndicesDeleteWarmer <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-warmers.html</pre></summary>
+	///<summary>Request parameters for IndicesDeleteWarmer <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-warmers.html</pre></summary>
 	public partial class DeleteWarmerRequest 
 	{
 		///<summary>Specify timeout for connection to master</summary>
@@ -1246,7 +1227,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for IndicesExists <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-exists.html</pre></summary>
+	///<summary>Request parameters for IndicesExists <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-exists.html</pre></summary>
 	public partial class IndexExistsRequest 
 	{
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -1268,7 +1249,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for IndicesExistsAliasForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</pre></summary>
+	///<summary>Request parameters for IndicesExistsAliasForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
 	public partial class AliasExistsRequest 
 	{
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -1290,7 +1271,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for IndicesExistsTemplateForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-templates.html</pre></summary>
+	///<summary>Request parameters for IndicesExistsTemplateForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
 	public partial class TemplateExistsRequest 
 	{
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -1306,7 +1287,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for IndicesExistsType <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-types-exists.html</pre></summary>
+	///<summary>Request parameters for IndicesExistsType <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-types-exists.html</pre></summary>
 	public partial class TypeExistsRequest 
 	{
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -1328,7 +1309,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for IndicesFlushForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-flush.html</pre></summary>
+	///<summary>Request parameters for IndicesFlushForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-flush.html</pre></summary>
 	public partial class FlushRequest 
 	{
 		///<summary>Whether a flush should be forced even if it is not necessarily needed ie. if no changes will be committed to the index. This is useful if transaction log IDs should be incremented even if no uncommitted changes are present. (This setting can be considered as internal)</summary>
@@ -1363,7 +1344,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for IndicesGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-index.html</pre></summary>
+	///<summary>Request parameters for IndicesGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-index.html</pre></summary>
 	public partial class GetIndexRequest 
 	{
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
@@ -1378,6 +1359,12 @@ namespace Nest
 		///<summary>Whether wildcard expressions should get expanded to open or closed indices (default: open)</summary>
 		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
+		///<summary>Return settings in flat format (default: false)</summary>
+		public bool FlatSettings { get { return Q<bool>("flat_settings"); } set { Q("flat_settings", value); } }
+		
+		///<summary>Whether to return version and creation date values in human-readable format.</summary>
+		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
+		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
@@ -1385,7 +1372,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for IndicesGetAliasForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</pre></summary>
+	///<summary>Request parameters for IndicesGetAliasForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
 	public partial class GetAliasRequest 
 	{
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -1407,7 +1394,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for IndicesGetAliasesForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</pre></summary>
+	///<summary>Request parameters for IndicesGetAliasesForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
 	public partial class GetAliasesRequest 
 	{
 		///<summary>Explicit operation timeout</summary>
@@ -1423,7 +1410,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for IndicesGetFieldMappingForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-field-mapping.html</pre></summary>
+	///<summary>Request parameters for IndicesGetFieldMappingForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-field-mapping.html</pre></summary>
 	public partial class GetFieldMappingRequest<T> 
 	{
 		///<summary>Whether the default mapping values should be returned as well</summary>
@@ -1448,7 +1435,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for IndicesGetMappingForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-mapping.html</pre></summary>
+	///<summary>Request parameters for IndicesGetMappingForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-mapping.html</pre></summary>
 	public partial class GetMappingRequest<T> 
 	{
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -1470,7 +1457,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for IndicesGetSettingsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-settings.html</pre></summary>
+	///<summary>Request parameters for IndicesGetSettingsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-settings.html</pre></summary>
 	public partial class GetIndexSettingsRequest 
 	{
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -1487,6 +1474,9 @@ namespace Nest
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
+		
+		///<summary>Whether to return version and creation date values in human-readable format.</summary>
+		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
@@ -1517,7 +1507,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for IndicesGetWarmerForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-warmers.html</pre></summary>
+	///<summary>Request parameters for IndicesGetWarmerForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-warmers.html</pre></summary>
 	public partial class GetWarmerRequest 
 	{
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -1539,7 +1529,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for IndicesOpen <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-open-close.html</pre></summary>
+	///<summary>Request parameters for IndicesOpen <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</pre></summary>
 	public partial class OpenIndexRequest 
 	{
 		///<summary>Explicit operation timeout</summary>
@@ -1564,7 +1554,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for IndicesOptimizeForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-optimize.html</pre></summary>
+	///<summary>Request parameters for IndicesOptimizeForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-optimize.html</pre></summary>
 	public partial class OptimizeRequest 
 	{
 		///<summary>Specify whether the index should be flushed after performing the operation (default: true)</summary>
@@ -1591,9 +1581,6 @@ namespace Nest
 		///<summary>Specify whether the request should block until the merge process is finished (default: true)</summary>
 		public bool WaitForMerge { get { return Q<bool>("wait_for_merge"); } set { Q("wait_for_merge", value); } }
 		
-		///<summary>Force a merge operation to run, even if there is a single segment in the index (default: false)</summary>
-		public bool Force { get { return Q<bool>("force"); } set { Q("force", value); } }
-		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
@@ -1601,7 +1588,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for IndicesPutAlias <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</pre></summary>
+	///<summary>Request parameters for IndicesPutAlias <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
 	public partial class PutAliasRequest 
 	{
 		///<summary>Explicit timestamp for the document</summary>
@@ -1617,12 +1604,9 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for IndicesPutMapping <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-put-mapping.html</pre></summary>
+	///<summary>Request parameters for IndicesPutMapping <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html</pre></summary>
 	public partial class PutMappingRequest<T> 
 	{
-		///<summary>Specify whether to ignore conflicts while updating the mapping (default: false)</summary>
-		public bool IgnoreConflicts { get { return Q<bool>("ignore_conflicts"); } set { Q("ignore_conflicts", value); } }
-		
 		///<summary>Explicit operation timeout</summary>
 		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
 		
@@ -1638,6 +1622,9 @@ namespace Nest
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
+		///<summary>Whether to update the mapping for all fields with the same name across all types or not</summary>
+		public bool UpdateAllTypes { get { return Q<bool>("update_all_types"); } set { Q("update_all_types", value); } }
+		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
@@ -1645,7 +1632,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for IndicesPutSettingsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-update-settings.html</pre></summary>
+	///<summary>Request parameters for IndicesPutSettingsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-update-settings.html</pre></summary>
 	public partial class UpdateSettingsRequest 
 	{
 		///<summary>Specify timeout for connection to master</summary>
@@ -1670,7 +1657,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for IndicesPutTemplateForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-templates.html</pre></summary>
+	///<summary>Request parameters for IndicesPutTemplateForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
 	public partial class PutTemplateRequest 
 	{
 		///<summary>Whether the index template should only be added if new or can also replace an existing one</summary>
@@ -1692,7 +1679,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for IndicesPutWarmerForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-warmers.html</pre></summary>
+	///<summary>Request parameters for IndicesPutWarmerForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-warmers.html</pre></summary>
 	public partial class PutWarmerRequest 
 	{
 		///<summary>Specify timeout for connection to master</summary>
@@ -1706,6 +1693,9 @@ namespace Nest
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both, in the search request to warm.</summary>
 		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
+		
+		///<summary>Specify whether the request to be warmed should use the request cache, defaults to index level setting</summary>
+		public bool RequestCache { get { return Q<bool>("request_cache"); } set { Q("request_cache", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
@@ -1733,7 +1723,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for IndicesRefreshForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-refresh.html</pre></summary>
+	///<summary>Request parameters for IndicesRefreshForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-refresh.html</pre></summary>
 	public partial class RefreshRequest 
 	{
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -1758,7 +1748,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for IndicesSegmentsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-segments.html</pre></summary>
+	///<summary>Request parameters for IndicesSegmentsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-segments.html</pre></summary>
 	public partial class SegmentsRequest 
 	{
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -1783,7 +1773,37 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for IndicesStatsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-stats.html</pre></summary>
+	///<summary>Request parameters for IndicesShardStoresForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shards-stores.html</pre></summary>
+	public partial class IndicesShardStoresRequest  : BasePathRequest<IndicesShardStoresRequestParameters>
+	{
+		///<summary>A comma-separated list of statuses used to filter on shards to get store information for</summary>
+		public  string[] Status { get { return Q< string[]>("status"); } set { Q("status", value); } }
+		
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
+		
+		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
+		
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
+		
+		///<summary>TODO: ?</summary>
+		public string OperationThreading { get { return Q<string>("operation_threading"); } set { Q("operation_threading", value); } }
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<IndicesShardStoresRequestParameters> pathInfo)
+		{
+			throw new NotImplementedException();
+		}
+	
+	}
+	///<summary>Request parameters for IndicesStatsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-stats.html</pre></summary>
 	public partial class IndicesStatsRequest 
 	{
 		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
@@ -1811,38 +1831,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for IndicesStatusForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-status.html</pre></summary>
-	public partial class IndicesStatusRequest 
-	{
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
-		
-		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
-		
-		///<summary>Whether to return time and byte values in human-readable format.</summary>
-		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
-		
-		///<summary>TODO: ?</summary>
-		public string OperationThreading { get { return Q<string>("operation_threading"); } set { Q("operation_threading", value); } }
-		
-		///<summary>Return information about shard recovery</summary>
-		public bool Recovery { get { return Q<bool>("recovery"); } set { Q("recovery", value); } }
-		
-		///<summary>TODO: ?</summary>
-		public bool Snapshot { get { return Q<bool>("snapshot"); } set { Q("snapshot", value); } }
-		
-		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
-	///<summary>Request parameters for IndicesUpdateAliasesForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-aliases.html</pre></summary>
+	///<summary>Request parameters for IndicesUpdateAliasesForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
 	public partial class BulkAliasRequest 
 	{
 		///<summary>Request timeout</summary>
@@ -1870,7 +1859,7 @@ namespace Nest
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
-		///<summary>Specify whether the request should block until the all segments are upgraded (default: true)</summary>
+		///<summary>Specify whether the request should block until the all segments are upgraded (default: false)</summary>
 		public bool WaitForCompletion { get { return Q<bool>("wait_for_completion"); } set { Q("wait_for_completion", value); } }
 		
 		///<summary>If true, only ancient (an older Lucene major release) segments will be upgraded</summary>
@@ -1883,7 +1872,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for IndicesValidateQueryGetForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-validate.html</pre></summary>
+	///<summary>Request parameters for IndicesValidateQueryGetForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html</pre></summary>
 	public partial class ValidateQueryRequest<T> 
 	{
 		///<summary>Return detailed information about the error</summary>
@@ -1942,22 +1931,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for ListBenchmarks <pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-benchmark.html</pre></summary>
-	public partial class ListBenchmarksRequest  : BasePathRequest<ListBenchmarksRequestParameters>
-	{
-		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ListBenchmarksRequestParameters> pathInfo)
-		{
-			throw new NotImplementedException();
-		}
-	
-	}
-	///<summary>Request parameters for MgetGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-multi-get.html</pre></summary>
+	///<summary>Request parameters for MgetGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-get.html</pre></summary>
 	public partial class MultiGetRequest 
 	{
 		///<summary>A comma-separated list of fields to return in the response</summary>
@@ -1988,71 +1962,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for MltGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-more-like-this.html</pre></summary>
-	public partial class MoreLikeThisRequest<T> 
-	{
-		///<summary>The boost factor</summary>
-		public double BoostTerms { get { return Q<double>("boost_terms"); } set { Q("boost_terms", value); } }
-		
-		///<summary>The word occurrence frequency as count: words with higher occurrence in the corpus will be ignored</summary>
-		public long MaxDocFreq { get { return Q<long>("max_doc_freq"); } set { Q("max_doc_freq", value); } }
-		
-		///<summary>The maximum query terms to be included in the generated query</summary>
-		public long MaxQueryTerms { get { return Q<long>("max_query_terms"); } set { Q("max_query_terms", value); } }
-		
-		///<summary>The minimum length of the word: longer words will be ignored</summary>
-		public long MaxWordLength { get { return Q<long>("max_word_length"); } set { Q("max_word_length", value); } }
-		
-		///<summary>The word occurrence frequency as count: words with lower occurrence in the corpus will be ignored</summary>
-		public long MinDocFreq { get { return Q<long>("min_doc_freq"); } set { Q("min_doc_freq", value); } }
-		
-		///<summary>The term frequency as percent: terms with lower occurence in the source document will be ignored</summary>
-		public long MinTermFreq { get { return Q<long>("min_term_freq"); } set { Q("min_term_freq", value); } }
-		
-		///<summary>The minimum length of the word: shorter words will be ignored</summary>
-		public long MinWordLength { get { return Q<long>("min_word_length"); } set { Q("min_word_length", value); } }
-		
-		///<summary>Specific fields to perform the query against</summary>
-		public IList<FieldName> MltFields { get { return Q<IList<FieldName>>("mlt_fields"); } set { Q("mlt_fields", value); } }
-		
-		///<summary>How many terms have to match in order to consider the document a match (default: 0.3)</summary>
-		public double PercentTermsToMatch { get { return Q<double>("percent_terms_to_match"); } set { Q("percent_terms_to_match", value); } }
-		
-		///<summary>Specific routing value</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
-		
-		///<summary>The offset from which to return results</summary>
-		public long SearchFrom { get { return Q<long>("search_from"); } set { Q("search_from", value); } }
-		
-		///<summary>A comma-separated list of indices to perform the query against (default: the index containing the document)</summary>
-		public  string[] SearchIndices { get { return Q< string[]>("search_indices"); } set { Q("search_indices", value); } }
-		
-		///<summary>A scroll search request definition</summary>
-		public string SearchScroll { get { return Q<string>("search_scroll"); } set { Q("search_scroll", value); } }
-		
-		///<summary>The number of documents to return (default: 10)</summary>
-		public long SearchSize { get { return Q<long>("search_size"); } set { Q("search_size", value); } }
-		
-		///<summary>A specific search request definition (instead of using the request body)</summary>
-		public string SearchSource { get { return Q<string>("search_source"); } set { Q("search_source", value); } }
-		
-		///<summary>Specific search type (eg. `dfs_then_fetch`, `count`, etc)</summary>
-		public string SearchType { get { return Q<string>("search_type"); } set { Q("search_type", value); } }
-		
-		///<summary>A comma-separated list of types to perform the query against (default: the same type as the document)</summary>
-		public  string[] SearchTypes { get { return Q< string[]>("search_types"); } set { Q("search_types", value); } }
-		
-		///<summary>A list of stop words to be ignored</summary>
-		public  string[] StopWords { get { return Q< string[]>("stop_words"); } set { Q("stop_words", value); } }
-		
-		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
-	///<summary>Request parameters for MpercolateGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html</pre></summary>
+	///<summary>Request parameters for MpercolateGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-percolate.html</pre></summary>
 	public partial class MultiPercolateRequest 
 	{
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -2071,7 +1981,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for MsearchGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-multi-search.html</pre></summary>
+	///<summary>Request parameters for MsearchGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-multi-search.html</pre></summary>
 	public partial class MultiSearchRequest 
 	{
 		///<summary>Search operation type</summary>
@@ -2084,7 +1994,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for MtermvectorsGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-multi-termvectors.html</pre></summary>
+	///<summary>Request parameters for MtermvectorsGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html</pre></summary>
 	public partial class MultiTermVectorsRequest 
 	{
 		///<summary>Specifies if total term frequency and document frequency should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
@@ -2117,6 +2027,12 @@ namespace Nest
 		///<summary>Specifies if requests are real-time as opposed to near-real-time (default: true).</summary>
 		public bool Realtime { get { return Q<bool>("realtime"); } set { Q("realtime", value); } }
 		
+		///<summary>Explicit version number for concurrency control</summary>
+		public long Version { get { return Q<long>("version"); } set { Q("version", value); } }
+		
+		///<summary>Specific version type</summary>
+		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
+		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
@@ -2124,7 +2040,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for NodesHotThreadsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-hot-threads.html</pre></summary>
+	///<summary>Request parameters for NodesHotThreadsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-hot-threads.html</pre></summary>
 	public partial class NodesHotThreadsRequest 
 	{
 		///<summary>The interval for the second sampling of threads</summary>
@@ -2149,7 +2065,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for NodesInfoForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-info.html</pre></summary>
+	///<summary>Request parameters for NodesInfoForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-info.html</pre></summary>
 	public partial class NodesInfoRequest 
 	{
 		///<summary>Return settings in flat format (default: false)</summary>
@@ -2165,23 +2081,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for NodesShutdownForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-shutdown.html</pre></summary>
-	public partial class NodesShutdownRequest 
-	{
-		///<summary>Set the delay for the operation (default: 1s)</summary>
-		public string Delay { get { return Q<string>("delay"); } set { Q("delay", value); } }
-		
-		///<summary>Exit the JVM as well (default: true)</summary>
-		public bool Exit { get { return Q<bool>("exit"); } set { Q("exit", value); } }
-		
-		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
-	///<summary>Request parameters for NodesStatsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/cluster-nodes-stats.html</pre></summary>
+	///<summary>Request parameters for NodesStatsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-stats.html</pre></summary>
 	public partial class NodesStatsRequest 
 	{
 		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
@@ -2212,7 +2112,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for PercolateGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-percolate.html</pre></summary>
+	///<summary>Request parameters for PercolateGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-percolate.html</pre></summary>
 	public partial class PercolateRequest<TDocument> 
 	{
 		///<summary>A comma-separated list of specific routing values</summary>
@@ -2230,9 +2130,6 @@ namespace Nest
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
-		///<summary>Return an array of matching query IDs instead of objects</summary>
-		public PercolateFormat PercolateFormat { get { return Q<PercolateFormat>("percolate_format"); } set { Q("percolate_format", value); } }
-		
 		///<summary>The index to percolate the document into. Defaults to index.</summary>
 		public string PercolateIndex { get { return Q<string>("percolate_index"); } set { Q("percolate_index", value); } }
 		
@@ -2244,6 +2141,9 @@ namespace Nest
 		
 		///<summary>Which shard to prefer when executing the percolate request.</summary>
 		public string PercolatePreference { get { return Q<string>("percolate_preference"); } set { Q("percolate_preference", value); } }
+		
+		///<summary>Return an array of matching query IDs instead of objects</summary>
+		public PercolateFormat PercolateFormat { get { return Q<PercolateFormat>("percolate_format"); } set { Q("percolate_format", value); } }
 		
 		///<summary>Explicit version number for concurrency control</summary>
 		public long Version { get { return Q<long>("version"); } set { Q("version", value); } }
@@ -2287,7 +2187,22 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for ScrollGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-request-scroll.html</pre></summary>
+	///<summary>Request parameters for RenderSearchTemplateGet <pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</pre></summary>
+	public partial class RenderSearchTemplateRequest  : BasePathRequest<RenderSearchTemplateRequestParameters>
+	{
+		///<summary>The URL-encoded request definition</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<RenderSearchTemplateRequestParameters> pathInfo)
+		{
+			throw new NotImplementedException();
+		}
+	
+	}
+	///<summary>Request parameters for ScrollGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</pre></summary>
 	public partial class ScrollRequest 
 	{
 		///<summary>The URL-encoded request definition</summary>
@@ -2297,7 +2212,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for SearchGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-search.html</pre></summary>
+	///<summary>Request parameters for SearchGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html</pre></summary>
 	public partial class SearchRequest<T> 
 	{
 		///<summary>The analyzer to use for the query string</summary>
@@ -2354,8 +2269,8 @@ namespace Nest
 		///<summary>The source text for which the suggestions should be returned</summary>
 		public string SuggestText { get { return Q<string>("suggest_text"); } set { Q("suggest_text", value); } }
 		
-		///<summary>Specify if query cache should be used for this request or not, defaults to index level setting</summary>
-		public bool QueryCache { get { return Q<bool>("query_cache"); } set { Q("query_cache", value); } }
+		///<summary>Specify if request cache should be used for this request or not, defaults to index level setting</summary>
+		public bool RequestCache { get { return Q<bool>("request_cache"); } set { Q("request_cache", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
@@ -2469,7 +2384,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for SnapshotCreate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html</pre></summary>
+	///<summary>Request parameters for SnapshotCreate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class SnapshotRequest 
 	{
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -2485,7 +2400,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for SnapshotCreateRepository <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html</pre></summary>
+	///<summary>Request parameters for SnapshotCreateRepository <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class CreateRepositoryRequest 
 	{
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -2504,7 +2419,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for SnapshotDelete <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html</pre></summary>
+	///<summary>Request parameters for SnapshotDelete <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class DeleteSnapshotRequest 
 	{
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -2517,7 +2432,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for SnapshotDeleteRepository <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html</pre></summary>
+	///<summary>Request parameters for SnapshotDeleteRepository <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class DeleteRepositoryRequest 
 	{
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -2533,7 +2448,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for SnapshotGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html</pre></summary>
+	///<summary>Request parameters for SnapshotGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class GetSnapshotRequest 
 	{
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -2546,7 +2461,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for SnapshotGetRepository <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html</pre></summary>
+	///<summary>Request parameters for SnapshotGetRepository <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class GetRepositoryRequest 
 	{
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -2562,7 +2477,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for SnapshotRestore <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules-snapshots.html</pre></summary>
+	///<summary>Request parameters for SnapshotRestore <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class RestoreRequest 
 	{
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -2607,7 +2522,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for Suggest <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-suggesters.html</pre></summary>
+	///<summary>Request parameters for Suggest <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-suggesters.html</pre></summary>
 	public partial class SuggestRequest 
 	{
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -2632,14 +2547,17 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for TermvectorGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-termvectors.html</pre></summary>
-	public partial class TermvectorRequest<T> 
+	///<summary>Request parameters for TermvectorsGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html</pre></summary>
+	public partial class TermVectorsRequest<T> 
 	{
 		///<summary>Specifies if total term frequency and document frequency should be returned.</summary>
 		public bool TermStatistics { get { return Q<bool>("term_statistics"); } set { Q("term_statistics", value); } }
 		
 		///<summary>Specifies if document count, sum of document frequencies and sum of total term frequencies should be returned.</summary>
 		public bool FieldStatistics { get { return Q<bool>("field_statistics"); } set { Q("field_statistics", value); } }
+		
+		///<summary>Specifies if distributed frequencies should be returned instead shard frequencies.</summary>
+		public bool Dfs { get { return Q<bool>("dfs"); } set { Q("dfs", value); } }
 		
 		///<summary>A comma-separated list of fields to return.</summary>
 		public IList<FieldName> Fields { get { return Q<IList<FieldName>>("fields"); } set { Q("fields", value); } }
@@ -2665,6 +2583,12 @@ namespace Nest
 		///<summary>Specifies if request is real-time as opposed to near-real-time (default: true).</summary>
 		public bool Realtime { get { return Q<bool>("realtime"); } set { Q("realtime", value); } }
 		
+		///<summary>Explicit version number for concurrency control</summary>
+		public long Version { get { return Q<long>("version"); } set { Q("version", value); } }
+		
+		///<summary>Specific version type</summary>
+		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
+		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
@@ -2672,7 +2596,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for Update <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-update.html</pre></summary>
+	///<summary>Request parameters for Update <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update.html</pre></summary>
 	public partial class UpdateRequest<TDocument,TPartialDocument> 
 	{
 		///<summary>Explicit write consistency setting for the operation</summary>
@@ -2686,9 +2610,6 @@ namespace Nest
 		
 		///<summary>Refresh the index after performing the operation</summary>
 		public bool Refresh { get { return Q<bool>("refresh"); } set { Q("refresh", value); } }
-		
-		///<summary>Specific replication type</summary>
-		public Replication Replication { get { return Q<Replication>("replication"); } set { Q("replication", value); } }
 		
 		///<summary>Specify how many times should the operation be retried when a conflict occurs (default: 0)</summary>
 		public long RetryOnConflict { get { return Q<long>("retry_on_conflict"); } set { Q("retry_on_conflict", value); } }
@@ -2727,7 +2648,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for Count <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-count.html</pre></summary>
+	///<summary>Request parameters for Count <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-count.html</pre></summary>
 	public partial class CountRequest 
 	{
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -2776,7 +2697,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for Delete <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-delete.html</pre></summary>
+	///<summary>Request parameters for Delete <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete.html</pre></summary>
 	public partial class DeleteRequest 
 	{
 		///<summary>Specific write consistency setting for the operation</summary>
@@ -2787,9 +2708,6 @@ namespace Nest
 		
 		///<summary>Refresh the index after performing the operation</summary>
 		public bool Refresh { get { return Q<bool>("refresh"); } set { Q("refresh", value); } }
-		
-		///<summary>Specific replication type</summary>
-		public Replication Replication { get { return Q<Replication>("replication"); } set { Q("replication", value); } }
 		
 		///<summary>Specific routing value</summary>
 		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
@@ -2810,14 +2728,11 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for DeleteByQuery <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-delete-by-query.html</pre></summary>
+	///<summary>Request parameters for DeleteByQuery <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/2.0/plugins-delete-by-query.html</pre></summary>
 	public partial class DeleteByQueryRequest 
 	{
 		///<summary>The analyzer to use for the query string</summary>
 		public string Analyzer { get { return Q<string>("analyzer"); } set { Q("analyzer", value); } }
-		
-		///<summary>Specific write consistency setting for the operation</summary>
-		public Consistency Consistency { get { return Q<Consistency>("consistency"); } set { Q("consistency", value); } }
 		
 		///<summary>The default operator for query string query (AND or OR)</summary>
 		public DefaultOperator DefaultOperator { get { return Q<DefaultOperator>("default_operator"); } set { Q("default_operator", value); } }
@@ -2834,26 +2749,23 @@ namespace Nest
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
-		///<summary>Specific replication type</summary>
-		public Replication Replication { get { return Q<Replication>("replication"); } set { Q("replication", value); } }
-		
 		///<summary>Query in the Lucene query string syntax</summary>
 		public string Q { get { return Q<string>("q"); } set { Q("q", value); } }
 		
 		///<summary>Specific routing value</summary>
 		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
+		///<summary>The URL-encoded query definition (instead of using the request body)</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
 		///<summary>Explicit operation timeout</summary>
 		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
-		
-		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for Exists <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-get.html</pre></summary>
+	///<summary>Request parameters for Exists <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
 	public partial class DocumentExistsRequest 
 	{
 		///<summary>The ID of the parent document</summary>
@@ -2878,7 +2790,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for ExplainGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-explain.html</pre></summary>
+	///<summary>Request parameters for ExplainGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-explain.html</pre></summary>
 	public partial class ExplainRequest 
 	{
 		///<summary>Specify whether wildcards and prefix queries in the query string query should be analyzed (default: false)</summary>
@@ -2930,7 +2842,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for Get <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-get.html</pre></summary>
+	///<summary>Request parameters for Get <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
 	public partial class GetRequest 
 	{
 		///<summary>A comma-separated list of fields to return in the response</summary>
@@ -2973,7 +2885,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for GetSource <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-get.html</pre></summary>
+	///<summary>Request parameters for GetSource <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
 	public partial class SourceRequest 
 	{
 		///<summary>The ID of the parent document</summary>
@@ -3013,20 +2925,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for IndicesDeleteMapping <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-delete-mapping.html</pre></summary>
-	public partial class DeleteMappingRequest 
-	{
-		///<summary>Specify timeout for connection to master</summary>
-		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
-		
-		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
-	///<summary>Request parameters for IndicesGetFieldMappingForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-field-mapping.html</pre></summary>
+	///<summary>Request parameters for IndicesGetFieldMappingForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-field-mapping.html</pre></summary>
 	public partial class GetFieldMappingRequest 
 	{
 		///<summary>Whether the default mapping values should be returned as well</summary>
@@ -3051,7 +2950,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for IndicesGetMappingForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-get-mapping.html</pre></summary>
+	///<summary>Request parameters for IndicesGetMappingForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-mapping.html</pre></summary>
 	public partial class GetMappingRequest 
 	{
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -3073,12 +2972,9 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for IndicesPutMapping <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/indices-put-mapping.html</pre></summary>
+	///<summary>Request parameters for IndicesPutMapping <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html</pre></summary>
 	public partial class PutMappingRequest 
 	{
-		///<summary>Specify whether to ignore conflicts while updating the mapping (default: false)</summary>
-		public bool IgnoreConflicts { get { return Q<bool>("ignore_conflicts"); } set { Q("ignore_conflicts", value); } }
-		
 		///<summary>Explicit operation timeout</summary>
 		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
 		
@@ -3094,6 +2990,9 @@ namespace Nest
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
+		///<summary>Whether to update the mapping for all fields with the same name across all types or not</summary>
+		public bool UpdateAllTypes { get { return Q<bool>("update_all_types"); } set { Q("update_all_types", value); } }
+		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
@@ -3101,7 +3000,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for IndicesValidateQueryGetForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-validate.html</pre></summary>
+	///<summary>Request parameters for IndicesValidateQueryGetForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html</pre></summary>
 	public partial class ValidateQueryRequest 
 	{
 		///<summary>Return detailed information about the error</summary>
@@ -3150,71 +3049,7 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for MltGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-more-like-this.html</pre></summary>
-	public partial class MoreLikeThisRequest 
-	{
-		///<summary>The boost factor</summary>
-		public double BoostTerms { get { return Q<double>("boost_terms"); } set { Q("boost_terms", value); } }
-		
-		///<summary>The word occurrence frequency as count: words with higher occurrence in the corpus will be ignored</summary>
-		public long MaxDocFreq { get { return Q<long>("max_doc_freq"); } set { Q("max_doc_freq", value); } }
-		
-		///<summary>The maximum query terms to be included in the generated query</summary>
-		public long MaxQueryTerms { get { return Q<long>("max_query_terms"); } set { Q("max_query_terms", value); } }
-		
-		///<summary>The minimum length of the word: longer words will be ignored</summary>
-		public long MaxWordLength { get { return Q<long>("max_word_length"); } set { Q("max_word_length", value); } }
-		
-		///<summary>The word occurrence frequency as count: words with lower occurrence in the corpus will be ignored</summary>
-		public long MinDocFreq { get { return Q<long>("min_doc_freq"); } set { Q("min_doc_freq", value); } }
-		
-		///<summary>The term frequency as percent: terms with lower occurence in the source document will be ignored</summary>
-		public long MinTermFreq { get { return Q<long>("min_term_freq"); } set { Q("min_term_freq", value); } }
-		
-		///<summary>The minimum length of the word: shorter words will be ignored</summary>
-		public long MinWordLength { get { return Q<long>("min_word_length"); } set { Q("min_word_length", value); } }
-		
-		///<summary>Specific fields to perform the query against</summary>
-		public IList<FieldName> MltFields { get { return Q<IList<FieldName>>("mlt_fields"); } set { Q("mlt_fields", value); } }
-		
-		///<summary>How many terms have to match in order to consider the document a match (default: 0.3)</summary>
-		public double PercentTermsToMatch { get { return Q<double>("percent_terms_to_match"); } set { Q("percent_terms_to_match", value); } }
-		
-		///<summary>Specific routing value</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
-		
-		///<summary>The offset from which to return results</summary>
-		public long SearchFrom { get { return Q<long>("search_from"); } set { Q("search_from", value); } }
-		
-		///<summary>A comma-separated list of indices to perform the query against (default: the index containing the document)</summary>
-		public  string[] SearchIndices { get { return Q< string[]>("search_indices"); } set { Q("search_indices", value); } }
-		
-		///<summary>A scroll search request definition</summary>
-		public string SearchScroll { get { return Q<string>("search_scroll"); } set { Q("search_scroll", value); } }
-		
-		///<summary>The number of documents to return (default: 10)</summary>
-		public long SearchSize { get { return Q<long>("search_size"); } set { Q("search_size", value); } }
-		
-		///<summary>A specific search request definition (instead of using the request body)</summary>
-		public string SearchSource { get { return Q<string>("search_source"); } set { Q("search_source", value); } }
-		
-		///<summary>Specific search type (eg. `dfs_then_fetch`, `count`, etc)</summary>
-		public string SearchType { get { return Q<string>("search_type"); } set { Q("search_type", value); } }
-		
-		///<summary>A comma-separated list of types to perform the query against (default: the same type as the document)</summary>
-		public  string[] SearchTypes { get { return Q< string[]>("search_types"); } set { Q("search_types", value); } }
-		
-		///<summary>A list of stop words to be ignored</summary>
-		public  string[] StopWords { get { return Q< string[]>("stop_words"); } set { Q("stop_words", value); } }
-		
-		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
-	///<summary>Request parameters for SearchGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/search-search.html</pre></summary>
+	///<summary>Request parameters for SearchGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html</pre></summary>
 	public partial class SearchRequest 
 	{
 		///<summary>The analyzer to use for the query string</summary>
@@ -3271,8 +3106,8 @@ namespace Nest
 		///<summary>The source text for which the suggestions should be returned</summary>
 		public string SuggestText { get { return Q<string>("suggest_text"); } set { Q("suggest_text", value); } }
 		
-		///<summary>Specify if query cache should be used for this request or not, defaults to index level setting</summary>
-		public bool QueryCache { get { return Q<bool>("query_cache"); } set { Q("query_cache", value); } }
+		///<summary>Specify if request cache should be used for this request or not, defaults to index level setting</summary>
+		public bool RequestCache { get { return Q<bool>("request_cache"); } set { Q("request_cache", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
@@ -3386,14 +3221,17 @@ namespace Nest
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
 		}
-	///<summary>Request parameters for TermvectorGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/1.6/docs-termvectors.html</pre></summary>
-	public partial class TermvectorRequest 
+	///<summary>Request parameters for TermvectorsGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html</pre></summary>
+	public partial class TermVectorsRequest 
 	{
 		///<summary>Specifies if total term frequency and document frequency should be returned.</summary>
 		public bool TermStatistics { get { return Q<bool>("term_statistics"); } set { Q("term_statistics", value); } }
 		
 		///<summary>Specifies if document count, sum of document frequencies and sum of total term frequencies should be returned.</summary>
 		public bool FieldStatistics { get { return Q<bool>("field_statistics"); } set { Q("field_statistics", value); } }
+		
+		///<summary>Specifies if distributed frequencies should be returned instead shard frequencies.</summary>
+		public bool Dfs { get { return Q<bool>("dfs"); } set { Q("dfs", value); } }
 		
 		///<summary>A comma-separated list of fields to return.</summary>
 		public IList<FieldName> Fields { get { return Q<IList<FieldName>>("fields"); } set { Q("fields", value); } }
@@ -3418,6 +3256,12 @@ namespace Nest
 		
 		///<summary>Specifies if request is real-time as opposed to near-real-time (default: true).</summary>
 		public bool Realtime { get { return Q<bool>("realtime"); } set { Q("realtime", value); } }
+		
+		///<summary>Explicit version number for concurrency control</summary>
+		public long Version { get { return Q<long>("version"); } set { Q("version", value); } }
+		
+		///<summary>Specific version type</summary>
+		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }

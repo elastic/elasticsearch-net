@@ -437,24 +437,6 @@ namespace Nest
 		Task<IGetMappingResponse> GetMappingAsync(IGetMappingRequest getMappingRequest);
 
 		/// <summary>
-		/// Allow to delete a mapping (type) along with its data. 
-		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-delete-mapping.html
-		/// </summary>
-		/// <param name="selector">A descriptor that describes the parameters for the delete mapping operation</param>
-		IIndicesResponse DeleteMapping<T>(Func<DeleteMappingDescriptor<T>, DeleteMappingDescriptor<T>> selector = null)
-			where T : class;
-
-		/// <inheritdoc/>
-		IIndicesResponse DeleteMapping(IDeleteMappingRequest deleteMappingRequest);
-
-		/// <inheritdoc/>
-		Task<IIndicesResponse> DeleteMappingAsync<T>(Func<DeleteMappingDescriptor<T>, DeleteMappingDescriptor<T>> selector = null)
-			where T : class;
-
-		/// <inheritdoc/>
-		Task<IIndicesResponse> DeleteMappingAsync(IDeleteMappingRequest deleteMappingRequest);
-
-		/// <summary>
 		/// The flush API allows to flush one or more indices through an API. The flush process of an index basically 
 		/// frees memory from the index by flushing data to the index storage and clearing the internal transaction log. 
 		/// By default, Elasticsearch uses memory heuristics in order to automatically trigger 
@@ -638,22 +620,6 @@ namespace Nest
 		Task<INodesHotThreadsResponse> NodesHotThreadsAsync(INodesHotThreadsRequest nodesHotThreadsRequest);
 
 		/// <summary>
-		/// Allows to shutdown one or more (or all) nodes in the cluster.
-		/// http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/cluster-nodes-shutdown.html#cluster-nodes-shutdown
-		/// </summary>
-		/// <param name="nodesShutdownSelector">A descriptor that describes the nodes shutdown operation</param>
-		INodesShutdownResponse NodesShutdown(Func<NodesShutdownDescriptor, NodesShutdownDescriptor> nodesShutdownSelector = null);
-
-		/// <inheritdoc/>
-		Task<INodesShutdownResponse> NodesShutdownAsync(Func<NodesShutdownDescriptor, NodesShutdownDescriptor> nodesShutdownSelector = null);
-
-		/// <inheritdoc/>
-		INodesShutdownResponse NodesShutdown(INodesShutdownRequest nodesShutdownRequest);
-
-		/// <inheritdoc/>
-		Task<INodesShutdownResponse> NodesShutdownAsync(INodesShutdownRequest nodesShutdownRequest);
-
-		/// <summary>
 		/// Used to check if the index (indices) exists or not. 
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-exists.html
 		/// </summary>
@@ -668,27 +634,6 @@ namespace Nest
 
 		/// <inheritdoc/>
 		Task<IExistsResponse> IndexExistsAsync(IIndexExistsRequest indexExistsRequest);
-
-		/// <summary>
-		/// The more like this (mlt) API allows to get documents that are "like" a specified document. 
-		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-more-like-this.html
-		/// </summary>
-		/// <typeparam name="T">Type used to infer the default index and typename and used to describe the search</typeparam>
-		/// <param name="mltSelector">A descriptor that describes the more like this operation</param>
-		ISearchResponse<T> MoreLikeThis<T>(Func<MoreLikeThisDescriptor<T>, MoreLikeThisDescriptor<T>> mltSelector)
-			where T : class;
-
-		/// <inheritdoc/>
-		ISearchResponse<T> MoreLikeThis<T>(IMoreLikeThisRequest moreLikeThisRequest)
-			where T : class;
-
-		/// <inheritdoc/>
-		Task<ISearchResponse<T>> MoreLikeThisAsync<T>(Func<MoreLikeThisDescriptor<T>, MoreLikeThisDescriptor<T>> mltSelector)
-			where T : class;
-
-		/// <inheritdoc/>
-		Task<ISearchResponse<T>> MoreLikeThisAsync<T>(IMoreLikeThisRequest moreLikeThisRequest)
-			where T : class;
 
 		/// <summary>
 		/// The cluster health API allows to get a very simple status on the health of the cluster.
@@ -1161,39 +1106,23 @@ namespace Nest
 		Task<IShardsOperationResponse> OptimizeAsync(IOptimizeRequest optimizeRequest);
 
 		/// <summary>
-		/// The indices status API allows to get a comprehensive status information of one or more indices.
-		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-status.html
-		/// </summary>
-		/// <param name="selector">An optional descriptor that further describes the status operation, i.e limiting it to certain indices</param>
-		IStatusResponse Status(Func<IndicesStatusDescriptor, IndicesStatusDescriptor> selector = null);
-
-		/// <inheritdoc/>
-		IStatusResponse Status(IIndicesStatusRequest statusRequest);
-
-		/// <inheritdoc/>
-		Task<IStatusResponse> StatusAsync(Func<IndicesStatusDescriptor, IndicesStatusDescriptor> selector = null);
-
-		/// <inheritdoc/>
-		Task<IStatusResponse> StatusAsync(IIndicesStatusRequest statusRequest);
-
-		/// <summary>
 		/// Returns information and statistics on terms in the fields of a particular document as stored in the index.
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-termvectors.html
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
 		/// <param name="termVectorSelector"></param>
-		ITermVectorResponse TermVector<T>(Func<TermvectorDescriptor<T>, TermvectorDescriptor<T>> termVectorSelector)
+		ITermVectorsResponse TermVectors<T>(Func<TermVectorsDescriptor<T>, TermVectorsDescriptor<T>> termVectorSelector)
 			where T : class;
 
 		/// <inheritdoc/>
-		ITermVectorResponse TermVector(ITermvectorRequest termvectorRequest);
+		ITermVectorsResponse TermVectors(ITermVectorsRequest termvectorRequest);
 
 		/// <inheritdoc/>
-		Task<ITermVectorResponse> TermVectorAsync<T>(Func<TermvectorDescriptor<T>, TermvectorDescriptor<T>> termVectorSelector)
+		Task<ITermVectorsResponse> TermVectorsAsync<T>(Func<TermVectorsDescriptor<T>, TermVectorsDescriptor<T>> termVectorSelector)
 			where T : class;
 
 		/// <inheritdoc/>
-		Task<ITermVectorResponse> TermVectorAsync(ITermvectorRequest termvectorRequest);
+		Task<ITermVectorsResponse> TermVectorsAsync(ITermVectorsRequest termvectorRequest);
 
 		/// <summary>
 		/// Multi termvectors API allows to get multiple termvectors based on an index, type and id.

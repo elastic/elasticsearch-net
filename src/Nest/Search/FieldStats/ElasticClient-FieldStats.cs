@@ -10,32 +10,28 @@ namespace Nest
 		public IFieldStatsResponse FieldStats(Func<FieldStatsDescriptor, FieldStatsDescriptor> selector)
 		{
 			return this.Dispatcher.Dispatch<FieldStatsDescriptor, FieldStatsRequestParameters, FieldStatsResponse>(
-				selector,
-				(p, d) => this.LowLevelDispatch.FieldStatsDispatch<FieldStatsResponse>(p)
+				selector, this.LowLevelDispatch.FieldStatsDispatch<FieldStatsResponse>
 			);
 		}
 
 		public IFieldStatsResponse FieldStats(IFieldStatsRequest request)
 		{
 			return this.Dispatcher.Dispatch<IFieldStatsRequest, FieldStatsRequestParameters, FieldStatsResponse>(
-				request,
-				(p, d) => this.LowLevelDispatch.FieldStatsDispatch<FieldStatsResponse>(p)
+				request, this.LowLevelDispatch.FieldStatsDispatch<FieldStatsResponse>
 			);
 		}
 
 		public Task<IFieldStatsResponse> FieldStatsAsync(Func<FieldStatsDescriptor, FieldStatsDescriptor> selector)
 		{
 			return this.Dispatcher.DispatchAsync<FieldStatsDescriptor, FieldStatsRequestParameters, FieldStatsResponse, IFieldStatsResponse>(
-				selector,
-				(p, d) => this.LowLevelDispatch.FieldStatsDispatchAsync<FieldStatsResponse>(p)
+				selector, this.LowLevelDispatch.FieldStatsDispatchAsync<FieldStatsResponse>
 			);
 		}
 
 		public Task<IFieldStatsResponse> FieldStatsAsync(IFieldStatsRequest request)
 		{
 			return this.Dispatcher.DispatchAsync<IFieldStatsRequest, FieldStatsRequestParameters, FieldStatsResponse, IFieldStatsResponse>(
-				request,
-				(p, d) => this.LowLevelDispatch.FieldStatsDispatchAsync<FieldStatsResponse>(p)
+				request, this.LowLevelDispatch.FieldStatsDispatchAsync<FieldStatsResponse>
 			);
 		}
 	}
