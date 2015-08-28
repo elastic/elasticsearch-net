@@ -7,10 +7,7 @@ namespace Nest
 {
 	public class LMJelinekSimilarity : SimilarityBase
 	{
-		public LMJelinekSimilarity()
-		{
-			this.Type = "LMJelinekMercer";
-		}
+		public override string Type => "LMJelinekMercer";
 
 		[JsonProperty("lambda")]
 		public double Lambda { get; set; }

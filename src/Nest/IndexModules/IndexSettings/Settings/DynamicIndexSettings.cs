@@ -99,7 +99,7 @@ namespace Nest
 		/// </summary>
 		ITranslogSettings Translog { get; set; }
 
-		IAnalysisSettings Analysis { get; set; }
+		IAnalysis Analysis { get; set; }
 	}
 
 	public class DynamicIndexSettings : HasADictionary<string, object>, IDynamicIndexSettings
@@ -159,7 +159,7 @@ namespace Nest
 		public TimeUnitExpression UnassignedNodeLeftDelayedTimeout { get; set; }
 
 		/// <inheritdoc/ >
-		public IAnalysisSettings Analysis { get; set; }
+		public IAnalysis Analysis { get; set; }
 
 		/// <summary>
 		/// Add any setting to the index
@@ -198,7 +198,7 @@ namespace Nest
 		ISlowLog IDynamicIndexSettings.SlowLog { get; set; }
 		ITranslogSettings IDynamicIndexSettings.Translog { get; set; }
 		TimeUnitExpression IDynamicIndexSettings.UnassignedNodeLeftDelayedTimeout { get; set; }
-		IAnalysisSettings IDynamicIndexSettings.Analysis { get; set; }
+		IAnalysis IDynamicIndexSettings.Analysis { get; set; }
 
 		/// <summary>
 		/// Add any setting to the index
@@ -275,7 +275,7 @@ namespace Nest
 
 		//TODO DSL for shard allocation filtering
 
-		public TIndexSettings Analysis(Func<AnalysisSettingsDescriptor, IAnalysisSettings> selector) =>
+		public TIndexSettings Analysis(Func<AnalysisSettingsDescriptor, IAnalysis> selector) =>
 			Assign(a => a.Analysis = selector?.Invoke(new AnalysisSettingsDescriptor()));
 	}
 

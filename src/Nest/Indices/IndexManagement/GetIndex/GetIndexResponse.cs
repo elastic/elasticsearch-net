@@ -28,16 +28,14 @@ namespace Nest
 		/// </summary>
 		public dynamic AsExpando { get; internal set; }
 		
-		public AnalysisSettings Analysis { get; set; }
+		public IAnalysis Analysis { get; set; }
 
-		public IDictionary<string, TypeMapping> Mappings { get; set; }
+		public IMappings Mappings { get; set; }
 
-		[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]
-		public Dictionary<string, Alias> Aliases { get; set; }
+		public IAliases Aliases { get; set; }
 			
-		[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]
 		public IWarmers Warmers { get; set; }
 
-		public SimilaritySettings Similarity { get; internal set; }
+		public ISimilarities Similarity { get; internal set; }
 	}
 }

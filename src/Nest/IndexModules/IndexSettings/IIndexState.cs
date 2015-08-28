@@ -4,12 +4,14 @@ namespace Nest
 {
 	public interface IIndexState
 	{
-		Dictionary<string, IAlias> Aliases { get; set; }
-		SimilaritySettings Similarity { get; }
-
-		IAnalysisSettings Analysis { get; set; }
-		IWarmers Warmers { get; set; }
-		IMappings Mappings { get; set; }
 		IIndexSettings Settings { get; set; }
+
+		IAliases Aliases { get; set; }
+
+		IWarmers Warmers { get; set; }
+
+		IMappings Mappings { get; set; }
+
+		ISimilarities Similarity { get; set; }
 	}
 }

@@ -127,6 +127,16 @@ namespace Tests.Indices.IndexManagement
 					)
 				)
 			)
+			.Aliases(aliases=>aliases
+				.Alias("alias_1")
+				.Alias("alias_2", a=>a
+					.IndexRouting("kimchy")
+					.SearchRouting("shay")
+					.Filter<Project>(f=>f
+						.Term(t=>t.OnField(p=>p.Name).Value("hello"))
+					)
+				)
+			)
 		;
 
 		private ITranslogSettings TranslogSettings(TranslogSettingsDescriptor selector) => selector
@@ -180,7 +190,7 @@ namespace Tests.Indices.IndexManagement
 				.MaxThreadCount(1)
 			);
 
-		private IAnalysisSettings AnalysisSettings(AnalysisSettingsDescriptor descriptor) => descriptor
+		private IAnalysis AnalysisSettings(AnalysisSettingsDescriptor descriptor) => descriptor
 			.CharFilters(charfilters => charfilters
 				.HtmlStrip("stripMe")
 				.PatternReplace("patterned", c => c.Pattern("x").Replacement("y"))

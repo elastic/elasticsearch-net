@@ -7,10 +7,7 @@ namespace Nest
 {
 	public class DFRSimilarity : SimilarityBase
 	{
-		public DFRSimilarity()
-		{
-			this.Type = "DFR";
-		}
+		public override string Type => "DFR";
 
 		[JsonProperty("basic_model")]
 		public string BasicModel { get; set; }

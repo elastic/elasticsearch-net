@@ -7,10 +7,7 @@ namespace Nest
 {
 	public class LMDirichletSimilarity : SimilarityBase
 	{
-		public LMDirichletSimilarity()
-		{
-			this.Type = "LMDirichlet";
-		}
+		public override string Type => "LMDirichlet";
 
 		[JsonProperty("mu")]
 		public int Mu { get; set; }

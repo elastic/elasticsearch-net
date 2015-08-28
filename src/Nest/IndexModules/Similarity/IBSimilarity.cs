@@ -7,10 +7,7 @@ namespace Nest
 {
 	public class IBSimilarity : SimilarityBase
 	{
-		public IBSimilarity()
-		{
-			this.Type = "IB";
-		}
+		public override string Type => "IB";
 
 		[JsonProperty("distribution")]
 		public string Distribution { get; set; }

@@ -35,31 +35,14 @@ namespace Nest
 	[DescriptorFor("IndicesUpdateAliases")]
 	public partial class BulkAliasDescriptor : BasePathDescriptor<BulkAliasDescriptor, BulkAliasRequestParameters>, IBulkAliasRequest
 	{
-		private IBulkAliasRequest Self => this;
+		public BulkAliasDescriptor Add(IAliasAction action) => 
+			Fluent.Assign<BulkAliasDescriptor, IBulkAliasRequest>(this, a=> a.Actions.AddIfNotNull(action));
 
-		public BulkAliasDescriptor()
-		{
-			Self.Actions = new List<IAliasAction>();
-		}
+		IList<IAliasAction> IBulkAliasRequest.Actions { get; set; } = new List<IAliasAction>();
 
-		IList<IAliasAction> IBulkAliasRequest.Actions { get; set; }
+		public BulkAliasDescriptor Add(Func<AliasAddDescriptor, AliasAddDescriptor> addSelector) => Add(addSelector?.Invoke(new AliasAddDescriptor()));
 
-		public BulkAliasDescriptor Add(Func<AliasAddDescriptor, AliasAddDescriptor> addSelector)
-		{
-			addSelector.ThrowIfNull("addSelector");
-			var descriptor = addSelector(new AliasAddDescriptor());
-			descriptor.ThrowIfNull("addAliasDescriptor");
-			Self.Actions.Add(descriptor);
-			return this;
-		}
-		public BulkAliasDescriptor Remove(Func<AliasRemoveDescriptor, AliasRemoveDescriptor> removeSelector)
-		{
-			removeSelector.ThrowIfNull("removeSelector");
-			var descriptor = removeSelector(new AliasRemoveDescriptor());
-			descriptor.ThrowIfNull("removeAliasDescriptor");
-			Self.Actions.Add(descriptor);
-			return this;
-		}
+		public BulkAliasDescriptor Remove(Func<AliasRemoveDescriptor, AliasRemoveDescriptor> removeSelector)=> Add(removeSelector?.Invoke(new AliasRemoveDescriptor()));
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<BulkAliasRequestParameters> pathInfo)
 		{

@@ -9,17 +9,13 @@ namespace Nest
 	{
 		public IIndexSettings Settings { get; set; }
 		
-		public IAnalysisSettings Analysis { get; set; }
-
 		public IMappings Mappings { get; set; }
 
-		[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]
-		public Dictionary<string, IAlias> Aliases { get; set; }
+		public IAliases Aliases { get; set; }
 			
-		[JsonConverter(typeof(DictionaryKeysAreNotFieldNamesJsonConverter))]
 		public IWarmers Warmers { get; set; }
 
-		public SimilaritySettings Similarity { get; internal set; }
+		public ISimilarities Similarity { get; set; }
 	}
 
 

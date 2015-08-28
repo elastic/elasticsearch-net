@@ -7,10 +7,7 @@ namespace Nest
 {
 	public class BM25Similarity : SimilarityBase
 	{
-		public BM25Similarity()
-		{
-			this.Type = "BM25";
-		}
+		public override string Type => "BM25";
 
 		[JsonProperty("k1")]
 		public double K1 { get; set; }

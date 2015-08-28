@@ -161,6 +161,12 @@ namespace Nest
 		internal static List<T> ToListOrNullIfEmpty<T>(this IEnumerable<T> enumerable) =>
 			enumerable.HasAny() ? enumerable.ToList() : null;
 
+		internal static void AddIfNotNull<T>(this IList<T> list, T item) where T : class
+		{
+			if (item == null) return;
+			list.Add(item);
+		}
+
 		internal static Dictionary<TKey, TValue> NullIfNoKeys<TKey, TValue>(this Dictionary<TKey, TValue> dictionary)
 		{
 			var i = dictionary?.Count;

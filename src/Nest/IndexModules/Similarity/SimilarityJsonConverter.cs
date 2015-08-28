@@ -8,13 +8,14 @@ namespace Nest
 {
 	internal class SimilarityCollectionJsonConverter : JsonConverter
 	{
-		public override bool CanConvert(Type objectType) => typeof(IDictionary<string, SimilarityBase>).IsAssignableFrom(objectType);
+		public override bool CanConvert(Type objectType) => typeof(SimilarityBase).IsAssignableFrom(objectType);
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
 			JObject o = JObject.Load(reader);
-			var result = existingValue as Dictionary<string, SimilarityBase> ?? new Dictionary<string, SimilarityBase>();
-
+			var result = existingValue as SimilarityBase;
+			
+			//TODO This is broken
 			foreach (var childProperty in o.Children<JProperty>())
 			{
 				var FieldName = childProperty.Name;
@@ -35,7 +36,6 @@ namespace Nest
 					continue;
 				}
 
-				result[FieldName] = item;
 			}
 
 			return result;

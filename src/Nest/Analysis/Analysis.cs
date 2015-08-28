@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public interface IAnalysisSettings
+	public interface IAnalysis
 	{
 		IAnalyzers Analyzers { get; set; }
 		ICharFilters CharFilters { get; set; }
@@ -12,7 +12,7 @@ namespace Nest
 		ITokenizers Tokenizers { get; set; }
 	}
 
-	public class AnalysisSettings : IAnalysisSettings
+	public class AnalysisSettings : IAnalysis
 	{
 		public IAnalyzers Analyzers { get; set; }
 		public ICharFilters CharFilters { get; set; }
@@ -21,14 +21,14 @@ namespace Nest
 
 	}
 
-	public class AnalysisSettingsDescriptor : IAnalysisSettings
+	public class AnalysisSettingsDescriptor : IAnalysis
 	{
-		protected AnalysisSettingsDescriptor Assign(Action<IAnalysisSettings> assigner) => Fluent.Assign(this, assigner);
+		protected AnalysisSettingsDescriptor Assign(Action<IAnalysis> assigner) => Fluent.Assign(this, assigner);
 
-		IAnalyzers IAnalysisSettings.Analyzers { get; set; }
-		ICharFilters IAnalysisSettings.CharFilters { get; set; }
-		ITokenFilters IAnalysisSettings.TokenFilters { get; set; }
-		ITokenizers IAnalysisSettings.Tokenizers { get; set; }
+		IAnalyzers IAnalysis.Analyzers { get; set; }
+		ICharFilters IAnalysis.CharFilters { get; set; }
+		ITokenFilters IAnalysis.TokenFilters { get; set; }
+		ITokenizers IAnalysis.Tokenizers { get; set; }
 
 		public AnalysisSettingsDescriptor Analyzers(Func<AnalyzersDescriptor, IAnalyzers> selector) =>
 			Assign(a => a.Analyzers = selector?.Invoke(new AnalyzersDescriptor()));

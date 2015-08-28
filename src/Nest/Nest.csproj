@@ -226,7 +226,7 @@
     <Compile Include="Aggregations\Metric\Percentiles\PercentilesMetric.cs" />
     <Compile Include="Aggregations\Metric\Stats\StatsMetric.cs" />
     <Compile Include="Aggregations\Metric\ValueMetric.cs" />
-    <Compile Include="Analysis\AnalysisSettings.cs" />
+    <Compile Include="Analysis\Analysis.cs" />
     <Compile Include="Analysis\Analyzers\AnalyzerBase.cs" />
     <Compile Include="Analysis\Analyzers\CustomAnalyzer.cs" />
     <Compile Include="Analysis\Analyzers\KeywordAnalyzer.cs" />
@@ -293,12 +293,12 @@
     <Compile Include="Search\Search\Hits\InnerHitsMetaData.cs" />
     <Compile Include="Search\Search\Hits\InnerHitsResult.cs" />
     <Compile Include="Indices\AliasManagement\Alias.cs" />
-    <Compile Include="Indices\AliasManagement\Actions\AliasAdd.cs" />
-    <Compile Include="Indices\AliasManagement\Actions\AliasAddOperation.cs" />
+    <Compile Include="Indices\AliasManagement\Alias\Actions\AliasAdd.cs" />
+    <Compile Include="Indices\AliasManagement\Alias\Actions\AliasAddOperation.cs" />
     <Compile Include="Indices\AliasManagement\AliasDefinition.cs" />
-    <Compile Include="Indices\AliasManagement\Actions\AliasRemove.cs" />
-    <Compile Include="Indices\AliasManagement\Actions\AliasRemoveOperation.cs" />
-    <Compile Include="Indices\AliasManagement\Actions\IAliasAction.cs" />
+    <Compile Include="Indices\AliasManagement\Alias\Actions\AliasRemove.cs" />
+    <Compile Include="Indices\AliasManagement\Alias\Actions\AliasRemoveOperation.cs" />
+    <Compile Include="Indices\AliasManagement\Alias\Actions\IAliasAction.cs" />
     <Compile Include="Document\Multiple\Bulk\BulkOperation\IBulkOperation.cs" />
     <Compile Include="Cat\CatSegments\CatSegmentsRecord.cs" />
     <Compile Include="Cluster\ClusterReroute\ClusterRerouteDecision.cs" />
@@ -542,7 +542,7 @@
     <Compile Include="IndexModules\Similarity\IBSimilarity.cs" />
     <Compile Include="IndexModules\Similarity\LMDirichletSimilarity.cs" />
     <Compile Include="IndexModules\Similarity\LMJelinekSimilarity.cs" />
-    <Compile Include="IndexModules\Similarity\SimilarityBase.cs" />
+    <Compile Include="IndexModules\Similarity\Similarity.cs" />
     <Compile Include="Document\Multiple\Bulk\BulkOperation\BulkOperationBase.cs" />
     <Compile Include="Cluster\ClusterSettings\ClusterGetSettings\ClusterGetSettingsRequest.cs" />
     <Compile Include="Cluster\ClusterSettings\ClusterPutSettings\ClusterSettingsRequest.cs" />
@@ -554,7 +554,6 @@
     <Compile Include="QueryDsl\QueryBase.cs" />
     <Compile Include="QueryDsl\QueryContainer.cs" />
     <Compile Include="Search\Search\Rescoring\RescoreQuery.cs" />
-    <Compile Include="Indices\IndexManagement\CreateIndex\Similarity.cs" />
     <Compile Include="CommonOptions\Fuzziness\Fuzziness.cs" />
     <Compile Include="CommonOptions\Fuzziness\IFuzziness.cs" />
     <Compile Include="Search\Explain\ExplainRequest.cs" />
@@ -798,7 +797,7 @@
     <Compile Include="Document\Multiple\Bulk\BulkResponseItem\BulkIndexResponseItem.cs" />
     <Compile Include="Document\Multiple\Bulk\BulkResponseItem\BulkResponseItem.cs" />
     <Compile Include="Search\MultiSearch\MultiSearchResponse.cs" />
-    <Compile Include="IndexModules\Similarity\SimilaritySettings.cs" />
+    <Compile Include="IndexModules\Similarity\Similarities.cs" />
     <Compile Include="Search\MultiSearch\ElasticClient-MultiSearch.cs" />
     <Compile Include="Indices\IndexSettings\IndexTemplates\TemplateMapping.cs" />
     <Compile Include="Indices\IndexSettings\IndexTemplates\GetTemplate\TemplateResponse.cs" />
@@ -910,7 +909,7 @@
     <Compile Include="Mapping\Transform\MappingTransformJsonConverter.cs" />
     <Compile Include="QueryDsl\Compound\Dismax\DismaxQueryJsonConverter.cs" />
     <Compile Include="QueryDsl\Geo\Shape\GeoShapeQueryJsonConverter.cs" />
-    <Compile Include="IndexModules\Similarity\SimilarityCollectionJsonConverter.cs" />
+    <Compile Include="IndexModules\Similarity\SimilarityJsonConverter.cs" />
     <Compile Include="CommonOptions\Fuzziness\FuzzinessJsonConverter.cs" />
     <Compile Include="QueryDsl\Geo\LatLon.cs" />
     <Compile Include="QueryDsl\Span\SpanTermQueryJsonConverter.cs" />
@@ -977,7 +976,6 @@
     <Compile Include="Aggregations\AggregationJsonConverter.cs" />
     <Compile Include="QueryDsl\FieldNameQueryJsonConverter.cs" />
     <Compile Include="Indices\IndexSettings\GetSettings\IndexSettingsResponseJsonConverter.cs" />
-    <Compile Include="IndexModules\Similarity\SimilaritySettingsJsonConverter.cs" />
     <Compile Include="CommonOptions\Sorting\SortCollectionJsonConverter.cs" />
     <Compile Include="Search\Suggesters\Suggest\SuggestResponseJsonConverter.cs" />
     <Compile Include="CommonAbstractions\Infer\FieldName\FieldNameJsonConverter.cs" />

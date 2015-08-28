@@ -11,16 +11,8 @@ namespace Nest
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<CreateIndexDescriptor>))]
-	public interface ICreateIndexRequest : IIndexPath<CreateIndexRequestParameters>
+	public interface ICreateIndexRequest : IIndexPath<CreateIndexRequestParameters>, IIndexState
 	{
-		[JsonProperty("settings")]
-		IIndexSettings Settings { get; set; }
-
-		[JsonProperty("mappings")]
-		IMappings Mappings { get; set; }
-		
-		[JsonProperty("warmers")]
-		IWarmers Warmers { get; set; }
 		
 	}
 
@@ -44,6 +36,12 @@ namespace Nest
 
 		public IWarmers Warmers { get; set; }
 
+		public IAliases Aliases { get; set; }
+
+		public ISimilarities Similarity { get; set; }
+
+		public IAnalysis Analysis { get; set; }
+
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CreateIndexRequestParameters> pathInfo)
 		{
 			CreateIndexPathInfo.Update(pathInfo, this);
@@ -55,11 +53,15 @@ namespace Nest
 	{
 		protected CreateIndexDescriptor Assign(Action<ICreateIndexRequest> assigner) => Fluent.Assign(this, assigner);
 
-		IIndexSettings ICreateIndexRequest.Settings { get; set; }
+		IIndexSettings IIndexState.Settings { get; set; }
 
-		IMappings ICreateIndexRequest.Mappings { get; set; }
+		IMappings IIndexState.Mappings { get; set; }
 
-		IWarmers ICreateIndexRequest.Warmers { get; set; }
+		IWarmers IIndexState.Warmers { get; set; }
+
+		IAliases IIndexState.Aliases { get; set; }
+
+		ISimilarities IIndexState.Similarity { get; set; }
 
 		public CreateIndexDescriptor InitializeUsing(IIndexState indexSettings)
 		{
@@ -76,29 +78,12 @@ namespace Nest
 		public CreateIndexDescriptor Warmers(Func<WarmersDescriptor, IWarmers> selector) =>
 			Assign(a => a.Warmers = selector?.Invoke(new WarmersDescriptor()));
 
-		/// <summary>
-		/// Add an alias for this index upon index creation
-		/// </summary>
-		public CreateIndexDescriptor AddAlias(string aliasName, Func<BulkAliasDescriptor, BulkAliasDescriptor> addAliasSelector = null)
-		{
-			return this;
-		}
+		public CreateIndexDescriptor Aliases(Func<AliasesDescriptor, IAliases> selector) =>
+			Assign(a => a.Aliases = selector?.Invoke(new AliasesDescriptor()));
 
+		public CreateIndexDescriptor Similarity(Func<SimilaritiesDescriptor, ISimilarities> selector) =>
+			Assign(a => a.Similarity = selector?.Invoke(new SimilaritiesDescriptor()));
 
-		public CreateIndexDescriptor AddWarmer(Func<CreateWarmerDescriptor, CreateWarmerDescriptor> warmerSelector)
-		{
-			return this;
-		}
-
-		public CreateIndexDescriptor DeleteWarmer(string warmerName)
-		{
-			return this;
-		}
-
-		public CreateIndexDescriptor Similarity(Func<SimilarityDescriptor, SimilarityDescriptor> similaritySelector)
-		{
-			return this;
-		}
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CreateIndexRequestParameters> pathInfo)
 		{

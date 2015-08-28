@@ -85,7 +85,7 @@ namespace Nest
 		public TimeUnitExpression UnassignedNodeLeftDelayedTimeout { get; set; }
 
 		/// <inheritdoc/ >
-		public IAnalysisSettings Analysis { get; set; }
+		public IAnalysis Analysis { get; set; }
 	}
 
 	[DescriptorFor("IndicesPutSettings")]
@@ -118,7 +118,7 @@ namespace Nest
 		ISlowLog IDynamicIndexSettings.SlowLog { get; set; }
 		ITranslogSettings IDynamicIndexSettings.Translog { get; set; }
 		TimeUnitExpression IDynamicIndexSettings.UnassignedNodeLeftDelayedTimeout { get; set; }
-		IAnalysisSettings IDynamicIndexSettings.Analysis { get; set; }
+		IAnalysis IDynamicIndexSettings.Analysis { get; set; }
 
 		protected Dictionary<string, object> BackingDictionary { get; set; } = new Dictionary<string, object>();
 		IDictionary IHasADictionary.Dictionary => this.BackingDictionary;
@@ -203,7 +203,7 @@ namespace Nest
 		public UpdateSettingsDescriptor UnassignedNodeLeftDelayedTimeout(TimeUnitExpression time) =>
 			Assign(a => a.UnassignedNodeLeftDelayedTimeout = time);
 
-		public UpdateSettingsDescriptor Analysis(Func<AnalysisSettingsDescriptor, IAnalysisSettings> selector) =>
+		public UpdateSettingsDescriptor Analysis(Func<AnalysisSettingsDescriptor, IAnalysis> selector) =>
 			Assign(a => a.Analysis = selector?.Invoke(new AnalysisSettingsDescriptor()));
 	}
 }
