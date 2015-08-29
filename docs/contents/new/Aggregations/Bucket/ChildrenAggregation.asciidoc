@@ -9,11 +9,12 @@ we add a `_parent` mapping from `commitactivity` to `parent`
 
 [source, csharp]
 ----
-var createProjectIndex = TestClient.GetClient().CreateIndex(c => c
-	.Index<Project>()
-	.AddMapping<Project>(m=>m.MapFromAttributes())
-	.AddMapping<CommitActivity>(m=>m
-		.SetParent<Project>()
+var createProjectIndex = TestClient.GetClient().CreateIndex(typeof(Project), c => c
+	.Mappings(map=>map
+		.Map<Project>(m=>m.AutoMap())
+		.Map<CommitActivity>(m=>m
+.SetParent<Project>()
+		)
 	)
 );
 ----

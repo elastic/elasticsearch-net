@@ -1,20 +1,31 @@
 [source, csharp]
 ----
-var defaultSettings = new ConnectionSettings((CreateBaseUri(port)), "defaultindex")
-				.InferMappingFor<Project>(map=>map
+var defaultSettings = new ConnectionSettings(new SingleNodeConnectionPool(CreateNode(port)), CreateConnection())
+				.SetDefaultIndex("default-index")
+				.PrettyJson()
+				.InferMappingFor<Project>(map => map
 					.IndexName("project")
-					.IdProperty(p=>p.Name)
+					.IdProperty(p => p.Name)
 				)
-				.InferMappingFor<CommitActivity>(map=>map
+				.InferMappingFor<CommitActivity>(map => map
 					.IndexName("project")
 					.TypeName("commits")
 				)
-				.InferMappingFor<Developer>(map=>map
-					.Ignore(p=>p.PrivateValue)
-					.Rename(p=>p.OnlineHandle, "nickname")
+				.InferMappingFor<Developer>(map => map
+					.Ignore(p => p.PrivateValue)
+					.Rename(p => p.OnlineHandle, "nickname")
 				)
-				.SetGlobalHeaders(new NameValueCollection { {"TestMethod", ExpensiveTestNameForIntegrationTests()} });
+				//We try and fetch the test name during integration tests when running fiddler to send the name 
+				//as the TestMethod header, this allows us to quickly identify which test sent which request
+				.SetGlobalHeaders(new NameValueCollection { { "TestMethod", ExpensiveTestNameForIntegrationTests() } });
 var settings = modifySettings != null ? modifySettings(defaultSettings) : defaultSettings;
+var serializer = new NestSerializer(new ConnectionSettings());
+string fixedResult = string.Empty;
+serializer.Serialize(responseJson, ms);
+fixedResult =Encoding.UTF8.GetString(ms.ToArray());
+var connection = new InMemoryConnection(fixedResult);
+var connectionPool = new SingleNodeConnectionPool(new Uri("http://localhost:9200"));
+var settings = new ConnectionSettings(connectionPool, connection);
 var st = new StackTrace();
 var types = GetTypes(st);
 var types = (from f in st.GetFrames()
@@ -23,7 +34,4 @@ var types = (from f in st.GetFrames()
 				let type = method.DeclaringType
 				where type.FullName.StartsWith("Tests.") && !type.FullName.StartsWith("Tests.Framework.")
 				select type).ToList();
-var host = "localhost";
-host = "ipv4.fiddler";
-var uri = new UriBuilder("http", host, port.GetValueOrDefault(9200)).Uri;
 ----

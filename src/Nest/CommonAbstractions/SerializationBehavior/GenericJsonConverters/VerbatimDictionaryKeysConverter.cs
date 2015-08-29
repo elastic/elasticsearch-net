@@ -13,7 +13,9 @@ namespace Nest
 	/// </summary>
 	internal class VerbatimDictionaryKeysJsonConverter : JsonConverter
 	{
-		public override bool CanConvert(Type t) => typeof (IDictionary).IsAssignableFrom(t);
+		public override bool CanConvert(Type t) => 
+			typeof (IDictionary).IsAssignableFrom(t)
+			|| typeof (IHasADictionary).IsAssignableFrom(t);
 
 		public override bool CanRead => false;
 

@@ -10,22 +10,17 @@ namespace Nest
 		private readonly VerbatimDictionaryKeysJsonConverter _dictionaryConverter = new VerbatimDictionaryKeysJsonConverter();
 		private readonly PropertyJsonConverter _elasticTypeConverter = new PropertyJsonConverter();
 
-		public override bool CanWrite
-		{
-			get { return true; }
-		}
+		public override bool CanConvert(Type objectType) => objectType == typeof(IProperties);
+		public override bool CanWrite => true;
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
 			_dictionaryConverter.WriteJson(writer, value, serializer);
 		}
 
-
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
-		JsonSerializer serializer)
+		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
-			var r = new Dictionary<FieldName, IElasticsearchProperty>();
-
+			var r = new Properties();
 			JObject o = JObject.Load(reader);
 
 			foreach (var p in o.Properties())
@@ -45,11 +40,6 @@ namespace Nest
 
 			}
 			return r;
-		}
-
-		public override bool CanConvert(Type objectType)
-		{
-			return objectType == typeof(IDictionary<string, IElasticsearchProperty>);
 		}
 
 	}

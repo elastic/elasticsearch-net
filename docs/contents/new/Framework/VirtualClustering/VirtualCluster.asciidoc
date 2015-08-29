@@ -1,0 +1,9 @@
+[source, csharp]
+----
+node.MasterEligable = false;
+node.HoldsData = false;
+this.PingingRules.Add(selector(new PingRule()));
+this.SniffingRules.Add(selector(new SniffRule()));
+var nodes = seedNodesSelector?.Invoke(this._nodes) ?? this._nodes;
+var nodes = seedNodesSelector?.Invoke(this._nodes) ?? this._nodes;
+----

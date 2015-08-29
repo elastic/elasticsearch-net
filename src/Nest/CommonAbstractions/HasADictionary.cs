@@ -8,10 +8,12 @@ namespace Nest
 {
 	public interface IHasADictionary
 	{
+		[JsonIgnore]
 		IDictionary Dictionary { get; }
 	}
 	public interface IHasADictionary<TKey, TValue> : IHasADictionary
 	{
+		[JsonIgnore]
 		new IDictionary<TKey, TValue> Dictionary { get; }
 	}
 

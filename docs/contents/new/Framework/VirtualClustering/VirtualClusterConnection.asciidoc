@@ -1,0 +1,26 @@
+[source, csharp]
+----
+this._cluster = sniffRule.NewClusterState ?? this._cluster;
+this._cluster = sniffRule.NewClusterState ?? this._cluster;
+var response = new
+			{
+				cluster_name = "elasticsearch-test-cluster",
+				nodes = this.SniffResponseNodes()
+			};
+new ElasticsearchDefaultSerializer().Serialize(response, ms);
+var response = new
+			{
+				name = "Razor Fist",
+				cluster_name = "elasticsearch-test-cluster",
+				version = new
+				{
+					number = "2.0.0",
+					build_hash = "af1dc6d8099487755c3143c931665b709de3c764",
+					build_timestamp = "2015-07-07T11:28:47Z",
+					build_snapshot = true,
+					lucene_version = "5.2.1"
+				},
+				tagline = "You Know, for Search"
+			};
+new ElasticsearchDefaultSerializer().Serialize(response, ms);
+----

@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
+	[JsonConverter(typeof(PropertiesJsonConverter))]
 	public interface IProperties : IHasADictionary<FieldName, IElasticsearchProperty>
 	{
 		

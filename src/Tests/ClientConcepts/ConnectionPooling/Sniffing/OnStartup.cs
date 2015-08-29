@@ -39,8 +39,7 @@ namespace Tests.ClientConcepts.LowLevel
 				{ AuditEvent.SniffFail, 9201},
 				{ AuditEvent.SniffSuccess, 9202},
 				{ AuditEvent.Ping, 9200},
-				{ AuditEvent.HealhyResponse, 9200},
-				{ AuditEvent.HealhyResponse}
+				{ AuditEvent.HealhyResponse, 9200}
 			});
 		}
 

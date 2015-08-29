@@ -17,11 +17,11 @@ namespace Tests.Indices.IndexManagement
 	{
 		public CreateIndex(IndexingCluster cluster, ApiUsage usage) : base(cluster, usage) { }
 
-		public string IndexName { get; } = RandomString();
+		public static string IndexName { get; } = RandomString();
 
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.CreateIndex(IndexName, f),
-			fluentAsync: (client, f) => client.CreateIndexAsync(this.IndexName, f),
+			fluentAsync: (client, f) => client.CreateIndexAsync(IndexName, f),
 			request: (client, r) => client.CreateIndex(r),
 			requestAsync: (client, r) => client.CreateIndexAsync(r)
 		);
@@ -50,7 +50,7 @@ namespace Tests.Indices.IndexManagement
 				.NumberOfShards(1)
 			);
 
-		protected override CreateIndexRequest Initializer => new CreateIndexRequest(this.IndexName)
+		protected override CreateIndexRequest Initializer => new CreateIndexRequest(IndexName)
 		{
 			Settings = new IndexSettings()
 			{

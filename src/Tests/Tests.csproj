@@ -117,6 +117,10 @@
     <Compile Include="Framework\MockData\Person.cs" />
     <Compile Include="Framework\MockData\Tag.cs" />
     <Compile Include="Framework\Roundtrip.cs" />
+    <Compile Include="IndexModules\IndexSettings\Merge\MergeSettings.cs" />
+    <Compile Include="IndexModules\IndexSettings\Settings\TypedIndexSettings.cs" />
+    <Compile Include="IndexModules\IndexSettings\SlowLog\SlowLogSettings.cs" />
+    <Compile Include="IndexModules\IndexSettings\Translog\TranslogSettings.cs" />
     <Compile Include="Indices\IndexManagement\CreateIndex\CreateIndexFullExample.cs" />
     <Compile Include="Indices\IndexManagement\CreateIndex\CreateIndex.cs" />
     <Compile Include="Mapping\MapUsageBase.cs" />
@@ -173,7 +177,6 @@
     <Folder Include="Cat\" />
     <Folder Include="ClientConcepts\ConnectionPooling\FailOver\" />
     <Folder Include="Cluster\" />
-    <Folder Include="IndexModules\" />
     <Folder Include="Migration\" />
     <Folder Include="Modules\" />
     <Folder Include="QueryDsl\" />

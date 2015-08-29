@@ -18,10 +18,8 @@ namespace Nest
 
 	internal static class CreateIndexPathInfo
 	{
-		public static void Update(ElasticsearchPathInfo<CreateIndexRequestParameters> pathInfo, ICreateIndexRequest request)
-		{
+		public static void Update(ElasticsearchPathInfo<CreateIndexRequestParameters> pathInfo, ICreateIndexRequest request) =>
 			pathInfo.HttpMethod = HttpMethod.POST;
-		}
 	}
 
 	public partial class CreateIndexRequest : IndexPathBase<CreateIndexRequestParameters>, ICreateIndexRequest
@@ -42,10 +40,8 @@ namespace Nest
 
 		public IAnalysis Analysis { get; set; }
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CreateIndexRequestParameters> pathInfo)
-		{
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CreateIndexRequestParameters> pathInfo) =>
 			CreateIndexPathInfo.Update(pathInfo, this);
-		}
 	}
 
 	[DescriptorFor("IndicesCreate")]
@@ -87,9 +83,7 @@ namespace Nest
 			Assign(a => a.Similarity = selector?.Invoke(new SimilaritiesDescriptor()));
 
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CreateIndexRequestParameters> pathInfo)
-		{
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CreateIndexRequestParameters> pathInfo) =>
 			CreateIndexPathInfo.Update(pathInfo, this);
-		}
 	}
 }
