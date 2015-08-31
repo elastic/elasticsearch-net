@@ -21,25 +21,25 @@ namespace Nest
 		/// Normalization model that assumes a uniform distribution of the term frequency. 
 		/// </summary>
 		[JsonProperty("normalization.h1.c")]
-		float? NormalizationH1C { get; set; }
+		double? NormalizationH1C { get; set; }
 
 		/// <summary>
 		///  Normalization model in which the term frequency is inversely related to the length.
 		/// </summary>
 		[JsonProperty("normalization.h2.c")]
-		float? NormalizationH2C { get; set; }
+		double? NormalizationH2C { get; set; }
 
 		/// <summary>
 		///  Dirichlet Priors normalization
 		/// </summary>
 		[JsonProperty("normalization.h3.c")]
-		float? NormalizationH3C { get; set; }
+		double? NormalizationH3C { get; set; }
 
 		/// <summary>
 		/// Pareto-Zipf Normalization
 		/// </summary>
 		[JsonProperty("normalization.z.z")]
-		float? NormalizationZZ { get; set; }
+		double? NormalizationZZ { get; set; }
 	}
 	public class IBSimilarity : IIBSimilarity
 	{
@@ -51,26 +51,26 @@ namespace Nest
 
 		public Normalization? Normalization { get; set; }
 
-		public float? NormalizationH1C { get; set; }
+		public double? NormalizationH1C { get; set; }
 
-		public float? NormalizationH2C { get; set; }
+		public double? NormalizationH2C { get; set; }
 
-		public float? NormalizationH3C { get; set; }
+		public double? NormalizationH3C { get; set; }
 
-		public float? NormalizationZZ { get; set; }
+		public double? NormalizationZZ { get; set; }
 	}
 
 	public class IBSimilarityDescriptor
 		: DescriptorBase<IBSimilarityDescriptor, IIBSimilarity>, IIBSimilarity
 	{
-		string ISimilarity.Type => "LIB";
+		string ISimilarity.Type => "IB";
 		IBDistribution? IIBSimilarity.Distribution { get; set; }
 		IBLambda? IIBSimilarity.Lambda { get; set; }
 		Normalization? IIBSimilarity.Normalization { get; set; }
-		float? IIBSimilarity.NormalizationH1C { get; set; }
-		float? IIBSimilarity.NormalizationH2C { get; set; }
-		float? IIBSimilarity.NormalizationH3C { get; set; }
-		float? IIBSimilarity.NormalizationZZ { get; set; }
+		double? IIBSimilarity.NormalizationH1C { get; set; }
+		double? IIBSimilarity.NormalizationH2C { get; set; }
+		double? IIBSimilarity.NormalizationH3C { get; set; }
+		double? IIBSimilarity.NormalizationZZ { get; set; }
 
 		public IBSimilarityDescriptor Distribution(IBDistribution? distribution) => Assign(a => a.Distribution = distribution);
 		public IBSimilarityDescriptor Lambda(IBLambda? lambda) => Assign(a => a.Lambda = lambda);
@@ -80,7 +80,7 @@ namespace Nest
 		/// Normalization model that assumes a uniform distribution of the term frequency. 
 		/// </summary>
 		/// <param name="c">hyper-parameter that controls the term frequency normalization with respect to the document length.</param>
-		public IBSimilarityDescriptor NormalizationH1(float c) => Assign(a =>
+		public IBSimilarityDescriptor NormalizationH1(double? c) => Assign(a =>
 		{
 			a.Normalization = Normalization.H1;
 			a.NormalizationH1C = c;
@@ -90,7 +90,7 @@ namespace Nest
 		/// Normalization model in which the term frequency is inversely related to the length.
 		/// </summary>
 		/// <param name="c">hyper-parameter that controls the term frequency normalization with respect to the document length.</param>
-		public IBSimilarityDescriptor NormalizationH2(float c) => Assign(a =>
+		public IBSimilarityDescriptor NormalizationH2(double? c) => Assign(a =>
 		{
 			a.Normalization = Normalization.H2;
 			a.NormalizationH1C = c;
@@ -100,7 +100,7 @@ namespace Nest
 		/// Dirichlet Priors normalization
 		/// </summary>
 		/// <param name="mu">smoothing parameter μ.</param>
-		public IBSimilarityDescriptor NormalizationH3(float mu) => Assign(a =>
+		public IBSimilarityDescriptor NormalizationH3(double? mu) => Assign(a =>
 		{
 			a.Normalization = Normalization.H3;
 			a.NormalizationH1C = mu;
@@ -110,7 +110,7 @@ namespace Nest
 		/// Pareto-Zipf Normalization
 		/// </summary>
 		/// <param name="mu">represents A/(A+1) where A measures the specificity of the language..</param>
-		public IBSimilarityDescriptor NormalizationZ(float z) => Assign(a =>
+		public IBSimilarityDescriptor NormalizationZ(double? z) => Assign(a =>
 		{
 			a.Normalization = Normalization.Z;
 			a.NormalizationH1C = z;

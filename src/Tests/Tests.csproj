@@ -121,6 +121,7 @@
     <Compile Include="IndexModules\IndexSettings\Settings\TypedIndexSettings.cs" />
     <Compile Include="IndexModules\IndexSettings\SlowLog\SlowLogSettings.cs" />
     <Compile Include="IndexModules\IndexSettings\Translog\TranslogSettings.cs" />
+    <Compile Include="IndexModules\Similarity\SimilaritySettings.cs" />
     <Compile Include="Indices\IndexManagement\CreateIndex\CreateIndexFullExample.cs" />
     <Compile Include="Indices\IndexManagement\CreateIndex\CreateIndex.cs" />
     <Compile Include="Mapping\MapUsageBase.cs" />

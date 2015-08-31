@@ -29,16 +29,21 @@ namespace Nest
 		[JsonProperty("k1")]
 		double? K1 { get; set; }
 	}
+	/// <inheritdoc/>
 	public class BM25Similarity : IBM25Similarity
 	{
 		public string Type => "BM25";
 
+		/// <inheritdoc/>
 		public double? K1 { get; set; }
 
+		/// <inheritdoc/>
 		public double? B { get; set; }
 
+		/// <inheritdoc/>
 		public bool? DiscountOverlaps { get; set; }
 	}
+	/// <inheritdoc/>
 	public class BM25SimilarityDescriptor 
 		: DescriptorBase<BM25SimilarityDescriptor, IBM25Similarity>, IBM25Similarity
 	{
@@ -47,8 +52,11 @@ namespace Nest
 		double? IBM25Similarity.K1 { get; set; }
 		double? IBM25Similarity.B { get; set; }
 
+		/// <inheritdoc/>
 		public BM25SimilarityDescriptor DiscountOverlaps(bool? discount = true) => Assign(a => a.DiscountOverlaps = discount);
+		/// <inheritdoc/>
 		public BM25SimilarityDescriptor K1(double? k1) => Assign(a => a.K1 = k1);
+		/// <inheritdoc/>
 		public BM25SimilarityDescriptor B(double? b) => Assign(a => a.B = b);
 	}
 

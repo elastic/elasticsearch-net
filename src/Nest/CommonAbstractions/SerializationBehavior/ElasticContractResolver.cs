@@ -11,6 +11,9 @@ namespace Nest.Resolvers
 {
 	public class ElasticContractResolver : DefaultContractResolver
 	{
+		public static JsonSerializer Empty { get; } = new JsonSerializer();
+
+
 		/// <summary>
 		/// ConnectionSettings can be requested by JsonConverter's.
 		/// </summary>
@@ -19,11 +22,6 @@ namespace Nest.Resolvers
 		public ElasticContractResolver(IConnectionSettingsValues connectionSettings)
 		{
 			this.ConnectionSettings = connectionSettings;
-		}
-
-		protected override JsonDictionaryContract CreateDictionaryContract(Type objectType)
-		{
-			return base.CreateDictionaryContract(objectType);
 		}
 
 		protected override JsonContract CreateContract(Type objectType)
@@ -35,8 +33,8 @@ namespace Nest.Resolvers
 			if (typeof(IDictionary).IsAssignableFrom(objectType))
 				contract.Converter = new VerbatimDictionaryKeysJsonConverter();
 
-			else if (objectType == typeof(IAggregation))
-				contract.Converter = new AggregationJsonConverter();
+			else if (objectType == typeof(IAggregation)) contract.Converter = new AggregationJsonConverter();
+			else if (objectType == typeof(ISimilarity)) contract.Converter = new SimilarityCollectionJsonConverter();
 			
 			else if (objectType == typeof(DateTime) || objectType == typeof(DateTime?))
 				contract.Converter = new IsoDateTimeConverter();
@@ -73,6 +71,7 @@ namespace Nest.Resolvers
 			defaultProperties = PropertiesOf<IIndexState>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IIndexSettings>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IAnalysis>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<ISimilarity>(type, memberSerialization, defaultProperties, lookup);
 
 			defaultProperties = PropertiesOf<IQuery>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<ISpecialField>(type, memberSerialization, defaultProperties, lookup);
