@@ -107,7 +107,7 @@ namespace Tests.Indices.IndexManagement
 			)
 			.Mappings(mappings => mappings
 				.Map<Project>(map => map
-					//.AutoMap()
+					.AutoMap()
 					.Properties(props => props
 						.String(s => s
 							.Name(p => p.Name)
