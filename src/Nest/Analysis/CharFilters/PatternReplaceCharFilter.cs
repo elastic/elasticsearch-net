@@ -15,7 +15,7 @@ namespace Nest
 	}
 	
 	/// <inheritdoc/>
-	public class PatternReplaceCharFilter : CharFilterBase, ICharFilter
+	public class PatternReplaceCharFilter : CharFilterBase, IPatternReplaceCharFilter
 	{
 		public PatternReplaceCharFilter() : base("pattern_replace") { }
 

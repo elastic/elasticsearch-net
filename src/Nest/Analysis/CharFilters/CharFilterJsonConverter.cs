@@ -7,9 +7,9 @@ using Nest.Resolvers;
 
 namespace Nest
 {
-	internal class SimilarityJsonConverter : JsonConverter
+	internal class CharFilterJsonConverter : JsonConverter
 	{
-		public override bool CanConvert(Type objectType) => typeof(ISimilarity).IsAssignableFrom(objectType);
+		public override bool CanConvert(Type objectType) => true;
 		public override bool CanWrite => false;
 		public override bool CanRead => true;
 
@@ -21,8 +21,13 @@ namespace Nest
 			if (typeProperty == null) return null;
 
 			var typePropertyValue = typeProperty.Value.ToString();
-			var itemType = Type.GetType("Nest." + typePropertyValue + "Similarity", false, true);
-			return o.ToObject(itemType, ElasticContractResolver.Empty);
+			switch(typePropertyValue)
+			{
+				case "html_strip": return o.ToObject<HtmlStripCharFilter>(ElasticContractResolver.Empty);
+				case "mapping": return o.ToObject<MappingCharFilter>(ElasticContractResolver.Empty);
+				case "pattern_replace": return o.ToObject<PatternReplaceCharFilter>(ElasticContractResolver.Empty);
+			}
+			return null;
 		}
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)

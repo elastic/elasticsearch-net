@@ -31,11 +31,11 @@ namespace Nest
 	/// <inheritdoc/>
 	public class LanguageAnalyzer : AnalyzerBase, ILanguageAnalyzer
 	{
-		public LanguageAnalyzer(Language language)
+		private string _type = "language";
+		public override string Type
 		{
-			language.ThrowIfNull("language");
-			var langName = language.GetStringValue().ToLowerInvariant();
-			Type = langName;
+			get { return _type; }
+			protected set { this._type = value; this.Language = value.ToEnum<Language>(); }
 		}
 
 		/// <inheritdoc/>
@@ -43,6 +43,13 @@ namespace Nest
 
 		/// <inheritdoc/>
 		public IEnumerable<string> StemExclusionList { get; set; }
+
+		[JsonIgnore]
+		/// <inheritdoc/>
+		public Language? Language {
+			get { return _type.ToEnum<Language>(); }
+			set { _type = value.GetStringValue().ToLowerInvariant(); }
+		}
 
 		/// <inheritdoc/>
 		public string StopwordsPath { get; set; }

@@ -5,10 +5,10 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
+	[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<Analyzers, string, IAnalyzer>))]
 	public interface IAnalyzers : IHasADictionary { }
 
-	public class Analyzers : HasADictionary<string, IAnalyzer>, IAnalyzers
+	public class Analyzers : IsADictionary<string, IAnalyzer>, IAnalyzers
 	{
 		public Analyzers() : base() { }
 		public Analyzers(IDictionary<string, IAnalyzer> container) : base(container) { }
@@ -40,7 +40,7 @@ namespace Nest
 		/// <para>Note, when using mapping definitions, it make more sense to simply mark the field as not_analyzed.</para>
 		/// </summary>
 		public AnalyzersDescriptor Keyword(string name, Func<KeywordAnalyzerDescriptor, IKeywordAnalyzer> selector = null) =>
-			Assign(name, selector?.InvokeOrDefault(new KeywordAnalyzerDescriptor()));
+			Assign(name, selector.InvokeOrDefault(new KeywordAnalyzerDescriptor()));
 
 		/// <summary>
 		/// A set of analyzers aimed at analyzing specific language text. 
@@ -58,7 +58,7 @@ namespace Nest
 		/// An analyzer of type simple that is built using a Lower Case Tokenizer.
 		/// </summary>
 		public AnalyzersDescriptor Simple(string name, Func<SimpleAnalyzerDescriptor, ISimpleAnalyzer> selector = null) =>
-			Assign(name, selector?.InvokeOrDefault(new SimpleAnalyzerDescriptor()));
+			Assign(name, selector.InvokeOrDefault(new SimpleAnalyzerDescriptor()));
 
 		/// <summary>
 		/// An analyzer of type snowball that uses the standard tokenizer, with standard filter, lowercase filter, stop filter, and snowball filter.
@@ -83,7 +83,7 @@ namespace Nest
 		/// An analyzer of type whitespace that is built using a Whitespace Tokenizer.
 		/// </summary>
 		public AnalyzersDescriptor Whitespace(string name, Func<WhitespaceAnalyzerDescriptor, IWhitespaceAnalyzer> selector = null) =>
-			Assign(name, selector?.InvokeOrDefault(new WhitespaceAnalyzerDescriptor()));
+			Assign(name, selector.InvokeOrDefault(new WhitespaceAnalyzerDescriptor()));
 
 	}
 }

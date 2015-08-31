@@ -5,10 +5,10 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
+	[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<Tokenizers, string, ITokenizer>))]
 	public interface ITokenizers : IHasADictionary { }
 
-	public class Tokenizers : HasADictionary<string, ITokenizer>, ITokenizers
+	public class Tokenizers : IsADictionary<string, ITokenizer>, ITokenizers
 	{
 		public Tokenizers() : base() { }
 		public Tokenizers(IDictionary<string, ITokenizer> container) : base(container) { }
@@ -83,7 +83,7 @@ namespace Nest
 		/// <para>The tokenizer implements the Unicode Text Segmentation algorithm, as specified in Unicode Standard Annex #29.</para>
 		/// </summary>
 		public TokenizersDescriptor Standard(string name, Func<StandardTokenizerDescriptor, IStandardTokenizer> selector = null) =>
-			Assign(name, selector?.InvokeOrDefault(new StandardTokenizerDescriptor()));
+			Assign(name, selector.InvokeOrDefault(new StandardTokenizerDescriptor()));
 
 		/// <summary>
 		/// A tokenizer of type uax_url_email which works exactly like the standard tokenizer, but tokenizes emails and urls as single tokens
@@ -95,6 +95,6 @@ namespace Nest
 		/// A tokenizer of type whitespace that divides text at whitespace.
 		/// </summary>
 		public TokenizersDescriptor Whitespace(string name, Func<WhitespaceTokenizerDescriptor, IWhitespaceTokenizer> selector = null) =>
-			Assign(name, selector?.InvokeOrDefault(new WhitespaceTokenizerDescriptor()));
+			Assign(name, selector.InvokeOrDefault(new WhitespaceTokenizerDescriptor()));
 	}
 }

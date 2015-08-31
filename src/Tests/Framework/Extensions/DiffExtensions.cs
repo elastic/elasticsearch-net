@@ -4,6 +4,7 @@ using DiffPlex.DiffBuilder.Model;
 using System;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Tests.Framework
 {
@@ -33,6 +34,18 @@ namespace Tests.Framework
 				sb.AppendLine(line.Text);
 				return sb;
 			}, sb => sb.ToString());
+
+			diff += "\r\n C# approximation of actual: \r\n new ";
+			var approx = Regex.Replace(actual, @"^(?=.*:.*)[^:]+:", (s) => s
+				.Value.Replace("\"", "")
+				.Replace(":", " =")
+			, RegexOptions.Multiline)
+				.Replace(" = {", " = new {")
+				.Replace(" = [", " = new [] {")
+				;
+			approx = Regex.Replace(approx, @"^\s*\],?.*$", s => s.Value.Replace("]", "}"), RegexOptions.Multiline);
+			diff += approx + ";";
+
 			throw new Exception(diff);
 		}
 

@@ -75,6 +75,10 @@
     <Compile Include="Aggregations\Bucket\ChildrenAggregation.cs" />
     <Compile Include="Aggregations\AggregationUsageBase.cs" />
     <Compile Include="Aggregations\WritingAggregations.cs" />
+    <Compile Include="Analysis\Analyzers\AnalyzerTests.cs" />
+    <Compile Include="Analysis\CharFilters\CharFilterTests.cs" />
+    <Compile Include="Analysis\TokenFilters\TokenizerTests.cs" />
+    <Compile Include="Analysis\Tokenizers\TokenizerTests.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\BuildingBlocks\Transports.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\BuildingBlocks\RoundRobin.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\BuildingBlocks\ConnectionPooling.cs" />
@@ -171,10 +175,6 @@
   <ItemGroup>
     <Folder Include="Aggregations\Metric\" />
     <Folder Include="Aggregations\Pipeline\" />
-    <Folder Include="Analysis\Analyzers\" />
-    <Folder Include="Analysis\CharFilters\" />
-    <Folder Include="Analysis\TokenFilters\" />
-    <Folder Include="Analysis\Tokenizers\" />
     <Folder Include="Cat\" />
     <Folder Include="ClientConcepts\ConnectionPooling\FailOver\" />
     <Folder Include="Cluster\" />

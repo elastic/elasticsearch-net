@@ -78,7 +78,9 @@
     <Compile Include="Aggregations\Bucket\SignificantTerms\Heuristics\PercentageScoreHeuristic.cs" />
     <Compile Include="Aggregations\IAggregator.cs" />
     <Compile Include="Analysis\Analyzers\Analyzers.cs" />
+    <Compile Include="Analysis\Analyzers\AnalyzerJsonConverter.cs" />
     <Compile Include="Analysis\CharFilters\CharFilters.cs" />
+    <Compile Include="Analysis\CharFilters\CharFilterJsonConverter.cs" />
     <Compile Include="Analysis\Languages\SnowballLanguage.cs" />
     <Compile Include="Analysis\StopWords.cs" />
     <Compile Include="Analysis\TokenFilters\DelimitedPayload\DelimitedPayloadEncoding.cs" />
@@ -86,6 +88,7 @@
     <Compile Include="Analysis\TokenFilters\Phonetic\PhoneticEncoder.cs" />
     <Compile Include="Analysis\TokenFilters\Synonym\SynonymFormat.cs" />
     <Compile Include="Analysis\TokenFilters\TokenFilters.cs" />
+    <Compile Include="Analysis\Tokenizers\TokenizerJsonConverter.cs" />
     <Compile Include="Analysis\Tokenizers\NGram\TokenChar.cs" />
     <Compile Include="Analysis\Tokenizers\Tokenizers.cs" />
     <Compile Include="CommonAbstractions\Fluent\DescriptorBase.cs" />
@@ -546,7 +549,7 @@
     <Compile Include="IndexModules\Similarity\DFR\DFRSimilarity.cs" />
     <Compile Include="IndexModules\Similarity\IB\IBSimilarity.cs" />
     <Compile Include="IndexModules\Similarity\LMDirichletSimilarity.cs" />
-    <Compile Include="IndexModules\Similarity\LMJelinekSimilarity.cs" />
+    <Compile Include="IndexModules\Similarity\LMJelinekMercerSimilarity.cs" />
     <Compile Include="IndexModules\Similarity\Similarity.cs" />
     <Compile Include="Document\Multiple\Bulk\BulkOperation\BulkOperationBase.cs" />
     <Compile Include="Cluster\ClusterSettings\ClusterGetSettings\ClusterGetSettingsRequest.cs" />

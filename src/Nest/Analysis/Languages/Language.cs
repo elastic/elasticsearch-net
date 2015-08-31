@@ -1,8 +1,12 @@
-﻿namespace Nest
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+
+namespace Nest
 {
 	/// <summary>
 	/// Language types used for language analyzers
 	/// </summary>
+	[JsonConverter(typeof(StringEnumConverter))]
 	public enum Language
 	{
 		Arabic, 

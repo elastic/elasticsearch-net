@@ -11,6 +11,7 @@ using Newtonsoft.Json.Linq;
 using Ploeh.AutoFixture;
 using Elasticsearch.Net.Serialization;
 using Tests.Framework;
+using System.Text.RegularExpressions;
 
 namespace Tests.Framework
 {
@@ -55,25 +56,6 @@ namespace Tests.Framework
 			_expectedJsonString.Diff(serialized, message);
 			return false;
 
-		}
-
-		private void Diff(string expected, string actual, string message)
-		{
-			var d = new Differ();
-			var inlineBuilder = new InlineDiffBuilder(d);
-			var result = inlineBuilder.BuildDiffModel(expected, actual);
-			var diff = result.Lines.Aggregate(new StringBuilder().AppendLine(message), (sb, line) =>
-			{
-				if (line.Type == ChangeType.Inserted)
-					sb.Append("+ ");
-				else if (line.Type == ChangeType.Deleted)
-					sb.Append("- ");
-				else
-					sb.Append("  ");
-				sb.AppendLine(line.Text);
-				return sb;
-			}, sb => sb.ToString());
-			throw new Exception(diff);
 		}
 
 		private TObject Deserialize<TObject>(string json) =>

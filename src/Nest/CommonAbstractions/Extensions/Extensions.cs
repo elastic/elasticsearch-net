@@ -51,12 +51,18 @@ namespace Nest
 			return items.GroupBy(property).Select(x => x.First());
 		}
 
+		//TODO Memoize?
 		public static T? ToEnum<T>(this string str) where T : struct
 		{
 			var enumType = typeof(T);
 			foreach (var name in Enum.GetNames(enumType))
 			{
-				var enumMemberAttribute = ((EnumMemberAttribute[])enumType.GetField(name).GetCustomAttributes(typeof(EnumMemberAttribute), true)).Single();
+				if (name.Equals(str, StringComparison.OrdinalIgnoreCase)) return (T)Enum.Parse(enumType, name);
+
+				var enumAttributes = ((EnumMemberAttribute[])enumType.GetField(name).GetCustomAttributes(typeof(EnumMemberAttribute), true));
+				if (!enumAttributes.HasAny()) continue;
+
+				var enumMemberAttribute = enumAttributes.Single();
 				if (enumMemberAttribute.Value == str) return (T)Enum.Parse(enumType, name);
 			}
 			//throw exception or whatever handling you want or

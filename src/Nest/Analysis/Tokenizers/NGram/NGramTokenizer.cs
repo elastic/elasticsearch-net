@@ -56,7 +56,7 @@ namespace Nest
 		public NGramTokenizerDescriptor MinGram(int? minGram) => Assign(a => a.MinGram = minGram);
 
 		/// <inheritdoc/>
-		public NGramTokenizerDescriptor MaxGram(int? minGram) => Assign(a => a.MinGram = minGram);
+		public NGramTokenizerDescriptor MaxGram(int? minGram) => Assign(a => a.MaxGram = minGram);
 
 		/// <inheritdoc/>
 		public NGramTokenizerDescriptor TokenChars(IEnumerable<TokenChar> tokenChars) => 

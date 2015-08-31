@@ -139,7 +139,7 @@ namespace Nest
 		///<para> All terms must already be lowercased (use lowercase filter) for this filter to work correctly.</para>
 		/// </summary>
 		public TokenFiltersDescriptor KStem(string name, Func<KStemTokenFilterDescriptor, IKStemTokenFilter> selector = null) =>
-			Assign(name, selector?.InvokeOrDefault(new KStemTokenFilterDescriptor()));
+			Assign(name, selector.InvokeOrDefault(new KStemTokenFilterDescriptor()));
 
 		/// <summary>
 		/// A token filter of type length that removes words that are too long or too short for the stream.
@@ -158,7 +158,7 @@ namespace Nest
 		///<para> Lowercase token filter supports Greek and Turkish lowercase token filters through the language parameter.</para>
 		/// </summary>
 		public TokenFiltersDescriptor Lowercase(string name, Func<LowercaseTokenFilterDescriptor, ILowercaseTokenFilter> selector = null) =>
-			Assign(name, selector?.InvokeOrDefault(new LowercaseTokenFilterDescriptor()));
+			Assign(name, selector.InvokeOrDefault(new LowercaseTokenFilterDescriptor()));
 
 		/// <summary>
 		/// A token filter of type nGram.
@@ -188,7 +188,7 @@ namespace Nest
 		/// A token filter of type reverse that simply reverses the tokens.
 		/// </summary>
 		public TokenFiltersDescriptor Reverse(string name, Func<ReverseTokenFilterDescriptor, IReverseTokenFilter> selector = null) =>
-			Assign(name, selector?.InvokeOrDefault(new ReverseTokenFilterDescriptor()));
+			Assign(name, selector.InvokeOrDefault(new ReverseTokenFilterDescriptor()));
 
 		/// <summary>
 		/// A filter that stems words using a Snowball-generated stemmer.
@@ -218,7 +218,7 @@ namespace Nest
 		/// The trim token filter trims surrounding whitespaces around a token.
 		/// </summary>
 		public TokenFiltersDescriptor Trim(string name, Func<TrimTokenFilterDescriptor, ITrimTokenFilter> selector = null) =>
-			Assign(name, selector?.InvokeOrDefault(new TrimTokenFilterDescriptor()));
+			Assign(name, selector.InvokeOrDefault(new TrimTokenFilterDescriptor()));
 
 		/// <summary>
 		/// The truncate token filter can be used to truncate tokens into a specific length. This can come in handy with keyword (single token) 
@@ -231,13 +231,13 @@ namespace Nest
 		/// The unique token filter can be used to only index unique tokens during analysis. By default it is applied on all the token stream
 		/// </summary>
 		public TokenFiltersDescriptor Unique(string name, Func<UniqueTokenFilterDescriptor, IUniqueTokenFilter> selector = null) =>
-			Assign(name, selector?.InvokeOrDefault(new UniqueTokenFilterDescriptor()));
+			Assign(name, selector.InvokeOrDefault(new UniqueTokenFilterDescriptor()));
 
 		/// <summary>
 		/// A token filter of type uppercase that normalizes token text to upper case.
 		/// </summary>
 		public TokenFiltersDescriptor Uppercase(string name, Func<UppercaseTokenFilterDescriptor, IUppercaseTokenFilter> selector = null) =>
-			Assign(name, selector?.InvokeOrDefault(new UppercaseTokenFilterDescriptor()));
+			Assign(name, selector.InvokeOrDefault(new UppercaseTokenFilterDescriptor()));
 
 	}
 }

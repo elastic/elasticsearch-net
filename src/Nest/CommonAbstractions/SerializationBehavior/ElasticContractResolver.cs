@@ -34,7 +34,11 @@ namespace Nest.Resolvers
 				contract.Converter = new VerbatimDictionaryKeysJsonConverter();
 
 			else if (objectType == typeof(IAggregation)) contract.Converter = new AggregationJsonConverter();
-			else if (objectType == typeof(ISimilarity)) contract.Converter = new SimilarityCollectionJsonConverter();
+			else if (objectType == typeof(ISimilarity)) contract.Converter = new SimilarityJsonConverter();
+			else if (objectType == typeof(ICharFilter)) contract.Converter = new CharFilterJsonConverter();
+			else if (objectType == typeof(IAnalyzer)) contract.Converter = new AnalyzerJsonConverter();
+			else if (objectType == typeof(ITokenizer)) contract.Converter = new TokenizerJsonConverter();
+			else if (objectType == typeof(ITokenFilter)) contract.Converter = new TokenizerJsonConverter();
 			
 			else if (objectType == typeof(DateTime) || objectType == typeof(DateTime?))
 				contract.Converter = new IsoDateTimeConverter();
@@ -70,8 +74,13 @@ namespace Nest.Resolvers
 
 			defaultProperties = PropertiesOf<IIndexState>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IIndexSettings>(type, memberSerialization, defaultProperties, lookup);
+
 			defaultProperties = PropertiesOf<IAnalysis>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<ISimilarity>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<ICharFilter>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<IAnalyzer>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<ITokenizer>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<ITokenFilter>(type, memberSerialization, defaultProperties, lookup);
 
 			defaultProperties = PropertiesOf<IQuery>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<ISpecialField>(type, memberSerialization, defaultProperties, lookup);

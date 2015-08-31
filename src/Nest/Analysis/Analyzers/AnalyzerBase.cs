@@ -18,7 +18,7 @@ namespace Nest
 	{
 		public string Version { get; set; }
 		
-		public string Type { get; protected set; }
+		public virtual string Type { get; protected set; }
 	}
 
 	public abstract class AnalyzerDescriptorBase<TAnalyzer, TAnalyzerInterface>

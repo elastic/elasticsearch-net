@@ -5,10 +5,10 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
+	[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<CharFilters, string, ICharFilter>))]
 	public interface ICharFilters : IHasADictionary { }
 
-	public class CharFilters : HasADictionary<string, ICharFilter>, ICharFilters
+	public class CharFilters : IsADictionary<string, ICharFilter>, ICharFilters
 	{
 		public CharFilters() : base() { }
 		public CharFilters(IDictionary<string, ICharFilter> container) : base(container) { }
@@ -21,8 +21,11 @@ namespace Nest
 
 	public class CharFiltersDescriptor : HasADictionary<string, ICharFilter>, ICharFilters
 	{
-		protected CharFiltersDescriptor Assign(string name, ICharFilter analyzer) =>
-			Fluent.Assign<CharFiltersDescriptor, CharFiltersDescriptor>(this, (a) => BackingDictionary.Add(name, analyzer));
+		protected CharFiltersDescriptor Assign(string name, ICharFilter analyzer)
+		{
+			this.BackingDictionary.Add(name, analyzer);
+			return this;
+		}
 
 		public CharFiltersDescriptor Add(string name, ICharFilter analyzer) => Assign(name, analyzer);
 		
@@ -36,7 +39,7 @@ namespace Nest
 		/// A char filter of type html_strip stripping out HTML elements from an analyzed text.
 		/// </summary>
 		public CharFiltersDescriptor HtmlStrip(string name, Func<HtmlStripCharFilterDescriptor, IHtmlStripCharFilter> selector = null) =>
-			Assign(name, selector?.InvokeOrDefault(new HtmlStripCharFilterDescriptor()));
+			Assign(name, selector.InvokeOrDefault(new HtmlStripCharFilterDescriptor()));
 
 		/// <summary>
 		/// A char filter of type mapping replacing characters of an analyzed text with given mapping.

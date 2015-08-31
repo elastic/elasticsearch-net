@@ -175,7 +175,7 @@ namespace Nest
 			foreach (var kv in settings)
 			{
 				var setting = kv.Value;
-				if (kv.Key == "analysis") s.Analysis = setting.Value<JObject>().ToObject<Analysis>();
+				if (kv.Key == "analysis") s.Analysis = setting.Value.Value<JObject>().ToObject<Analysis>(serializer);
 				else
 				{
 					((IHasADictionary)s).Dictionary.Add(kv.Key, serializer.Deserialize(kv.Value.Value.CreateReader()));
