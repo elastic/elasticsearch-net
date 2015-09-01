@@ -27,15 +27,9 @@ namespace Tests
 						myCustom = new
 						{
 							type = "typex",
-							char_filter = "tokeniza",
-							filter = new[] {
-								"x",
-								"y"
-							},
-							tokenizer = new[] {
-								"a",
-								"b"
-							}
+							tokenizer = "ng",
+							filter = new[] { "myAscii", "kstem" },
+							char_filter = new[] { "stripMe", "patterned" }
 						},
 						myKeyword = new
 						{
@@ -64,7 +58,7 @@ namespace Tests
 						myStop = new
 						{
 							type = "stop",
-							stopwords_path = "somewhere"
+							stopwords_path = "analysis/stopwords.txt"
 						},
 						myWhiteSpace = new
 						{
@@ -83,14 +77,14 @@ namespace Tests
 			/**
 			 * 
 			 */
-			protected override Func<IndexSettingsDescriptor, IIndexSettings> Fluent => s => s
+			protected override Func<IndexSettingsDescriptor, IIndexSettings> Fluent => FluentExample;
+			public static Func<IndexSettingsDescriptor, IIndexSettings> FluentExample => s => s
 				.Analysis(analysis => analysis
 					.Analyzers(analyzers => analyzers
 						.Custom("myCustom", a => a
-							.CustomType("typex")
-							.Filters("x", "y")
-							.CharFilters("a", "b")
-							.Tokenizer("tokeniza")
+							.Filters("myAscii", "kstem")
+							.CharFilters("stripMe", "patterned")
+							.Tokenizer("ng")
 						)
 						.Keyword("myKeyword")
 						.Pattern("myPattern", a => a.Pattern(@"\w"))
@@ -98,7 +92,7 @@ namespace Tests
 						.Simple("mySimple")
 						.Snowball("mySnow", a => a.Language(SnowballLanguage.Dutch))
 						.Standard("myStandard", a => a.MaxTokenLength(2))
-						.Stop("myStop", a => a.StopwordsPath("somewhere"))
+						.Stop("myStop", a => a.StopwordsPath("analysis/stopwords.txt"))
 						.Whitespace("myWhiteSpace")
 						.Whitespace("myWhiteSpace2")
 					)
@@ -106,18 +100,19 @@ namespace Tests
 
 			/**
 			 */
-			protected override IndexSettings Initializer =>
+			protected override IndexSettings Initializer => InitializerExample;
+			public static IndexSettings InitializerExample =>
 				new IndexSettings
 				{
 					Analysis = new Analysis
 					{
 						Analyzers = new Analyzers
 						{
-							{ "myCustom", new CustomAnalyzer("typex")
+							{ "myCustom", new CustomAnalyzer
 							{
-								CharFilter = new [] { "a", "b"},
-								Filter = new [] { "x", "y"},
-								Tokenizer = "tokeniza"
+								CharFilter = new [] { "stripMe", "patterned"},
+								Filter = new [] { "myAscii", "kstem"},
+								Tokenizer = "ng"
 							} },
 							{ "myKeyword", new KeywordAnalyzer() },
 							{ "myPattern", new PatternAnalyzer { Pattern = @"\w" } },
@@ -125,7 +120,7 @@ namespace Tests
 							{ "mySimple", new SimpleAnalyzer() },
 							{ "mySnow", new SnowballAnalyzer { Language = SnowballLanguage.Dutch } },
 							{ "myStandard", new StandardAnalyzer { MaxTokenLength = 2 } },
-							{ "myStop", new StopAnalyzer { StopwordsPath = "somewhere" } },
+							{ "myStop", new StopAnalyzer { StopwordsPath = "analysis/stopwords.txt" } },
 							{ "myWhiteSpace", new WhitespaceAnalyzer() },
 							{ "myWhiteSpace2", new WhitespaceAnalyzer() }
 						}

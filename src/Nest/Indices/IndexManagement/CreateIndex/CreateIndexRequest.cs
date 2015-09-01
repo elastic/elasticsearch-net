@@ -38,8 +38,6 @@ namespace Nest
 
 		public ISimilarities Similarity { get; set; }
 
-		public IAnalysis Analysis { get; set; }
-
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CreateIndexRequestParameters> pathInfo) =>
 			CreateIndexPathInfo.Update(pathInfo, this);
 	}

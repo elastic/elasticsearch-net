@@ -11,7 +11,7 @@ namespace Nest
 		/// <summary>
 		///  If only_on_same_position is set to true, it will only remove duplicate tokens on the same position.
 		/// </summary>
-		[JsonProperty("only_on_same_position ")]
+		[JsonProperty("only_on_same_position")]
 		bool? OnlyOnSamePosition { get; set; }
 	}
 

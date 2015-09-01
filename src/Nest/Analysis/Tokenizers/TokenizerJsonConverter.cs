@@ -23,7 +23,7 @@ namespace Nest
 			var typePropertyValue = typeProperty.Value.ToString();
 			switch(typePropertyValue.ToLowerInvariant())
 			{
-				case "edgengram": 
+				case "edgengram":
 				case "edge_ngram": return o.ToObject<EdgeNGramTokenizer>(ElasticContractResolver.Empty);
 				case "ngram": return o.ToObject<NGramTokenizer>(ElasticContractResolver.Empty);
 				case "path_hierarchy": return o.ToObject<PathHierarchyTokenizer>(ElasticContractResolver.Empty);

@@ -41,7 +41,7 @@ namespace Tests
 						path = new
 						{
 							delimiter = "|",
-							replacement = "||",
+							replacement = "-",
 							buffer_size = 2048,
 							reverse = true,
 							skip = 1,
@@ -74,7 +74,8 @@ namespace Tests
 			/**
 			 * 
 			 */
-			protected override Func<IndexSettingsDescriptor, IIndexSettings> Fluent => s => s
+			protected override Func<IndexSettingsDescriptor, IIndexSettings> Fluent => FluentExample;
+			public static Func<IndexSettingsDescriptor, IIndexSettings> FluentExample => s => s
 				.Analysis(analysis => analysis
 					.Tokenizers(tokenizer => tokenizer
 						.EdgeNGram("endgen", t => t
@@ -89,8 +90,8 @@ namespace Tests
 						)
 						.PathHierarchy("path", t => t
 							.BufferSize(2048)
-							.Delimiter("|")
-							.Replacement("||")
+							.Delimiter('|')
+							.Replacement('-')
 							.Reverse()
 							.Skip(1)
 						)
@@ -107,7 +108,8 @@ namespace Tests
 
 			/**
 			 */
-			protected override IndexSettings Initializer =>
+			protected override IndexSettings Initializer => InitializerExample;
+			public static IndexSettings InitializerExample =>
 				new IndexSettings
 				{
 					Analysis = new Analysis
@@ -129,8 +131,8 @@ namespace Tests
 							{ "path", new PathHierarchyTokenizer
 							{
 								BufferSize = 2048,
-								Delimiter = "|",
-								Replacement = "||",
+								Delimiter = '|',
+								Replacement = '-',
 								Reverse = true,
 								Skip = 1
 							} },

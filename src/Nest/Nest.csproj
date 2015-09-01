@@ -88,6 +88,7 @@
     <Compile Include="Analysis\TokenFilters\Phonetic\PhoneticEncoder.cs" />
     <Compile Include="Analysis\TokenFilters\Synonym\SynonymFormat.cs" />
     <Compile Include="Analysis\TokenFilters\TokenFilters.cs" />
+    <Compile Include="Analysis\TokenFilters\TokenFilterJsonConverter.cs" />
     <Compile Include="Analysis\Tokenizers\TokenizerJsonConverter.cs" />
     <Compile Include="Analysis\Tokenizers\NGram\TokenChar.cs" />
     <Compile Include="Analysis\Tokenizers\Tokenizers.cs" />
@@ -262,7 +263,6 @@
     <Compile Include="Analysis\TokenFilters\KeepTypesTokenFilter.cs" />
     <Compile Include="Analysis\TokenFilters\KeepWordsTokenFilter.cs" />
     <Compile Include="Analysis\TokenFilters\KeywordMarkerTokenFilter.cs" />
-    <Compile Include="Analysis\TokenFilters\KeywordRepeatTokenFilter.cs" />
     <Compile Include="Analysis\TokenFilters\KStemTokenFilter.cs" />
     <Compile Include="Analysis\TokenFilters\LengthTokenFilter.cs" />
     <Compile Include="Analysis\TokenFilters\LimitTokenCountTokenFilter.cs" />

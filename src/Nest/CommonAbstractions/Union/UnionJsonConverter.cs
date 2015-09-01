@@ -30,7 +30,7 @@ namespace Nest
 					conversion = typeof (UnionJsonConverter<,>).CreateGenericInstance(genericArguments) as UnionJsonConverterBase;
 					break;
 				default:
-					throw new Exception($"No union converter registered that takes {genericArguments.Length} type arguments");
+					throw new Exception($"No union converter registered that takes {genericArguments.Length} type arguments for {t.Name}");
 
 			}
 			KnownTypes.TryAdd(t, conversion);

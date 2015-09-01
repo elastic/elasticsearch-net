@@ -16,7 +16,7 @@ namespace Nest
 		/// <summary>
 		/// The logical / registered name of the tokenizer to use.
 		/// </summary>
-		[JsonProperty("tokenizer")]
+		[JsonProperty("char_filter")]
 		IEnumerable<string> CharFilter { get; set; }
 
 		/// <summary>
@@ -28,7 +28,7 @@ namespace Nest
 		/// <summary>
 		/// An optional list of logical / registered name of char filters.
 		/// </summary>
-		[JsonProperty("char_filter")]
+		[JsonProperty("tokenizer")]
 		string Tokenizer { get; set; }
 
 		/// <summary>
@@ -41,8 +41,7 @@ namespace Nest
 
 	public class CustomAnalyzer : AnalyzerBase, ICustomAnalyzer
 	{
-		public CustomAnalyzer(string type) { Type = type; }
-		public CustomAnalyzer() : this("custom") { }
+		public CustomAnalyzer()  { Type = "custom"; }
 
 		/// <inheritdoc/>
 		public string Tokenizer { get; set; }
@@ -60,21 +59,13 @@ namespace Nest
 	public class CustomAnalyzerDescriptor 
 		: AnalyzerDescriptorBase<CustomAnalyzerDescriptor, ICustomAnalyzer>, ICustomAnalyzer
 	{
-		private string _type = "custom";
-		protected override string Type => _type;
+		protected override string Type => "custom";
 
 		IEnumerable<string> ICustomAnalyzer.CharFilter { get; set; }
 		IEnumerable<string> ICustomAnalyzer.Filter { get; set; }
 		string ICustomAnalyzer.Tokenizer { get; set; }
 		int? ICustomAnalyzer.PositionOffsetGap { get; set; }
 		
-		/// <summary> Set a custom type  </summary>
-		public CustomAnalyzerDescriptor CustomType(string type)
-		{
-			this._type = type;
-			return this;
-		}
-
 		/// <inheritdoc/>
 		public CustomAnalyzerDescriptor Filters(params string[] filters) => Assign(a => a.Filter = filters);
 

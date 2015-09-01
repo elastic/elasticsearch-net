@@ -21,7 +21,7 @@ namespace Nest
 	}
 
 	/// <inheritdoc/>
-	public class NGramTokenFilter : TokenFilterBase
+	public class NGramTokenFilter : TokenFilterBase, INGramTokenFilter
 	{
 		public NGramTokenFilter() : base("ngram") { }
 
