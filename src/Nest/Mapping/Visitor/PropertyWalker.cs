@@ -1,5 +1,6 @@
 ﻿using Nest.Resolvers;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -11,18 +12,36 @@ namespace Nest
 	{
 		private Type _type;
 		private IPropertyVisitor _visitor;
+		private int _maxRecursion;
+		private ConcurrentDictionary<Type, int> _seenTypes;
 
-		public PropertyWalker(Type type) : this(type, null) { }
+		public PropertyWalker(Type type, int maxRecursion = 0) : this(type, null, maxRecursion) { }
 
-		public PropertyWalker(Type type, IPropertyVisitor visitor)
+		public PropertyWalker(Type type, IPropertyVisitor visitor, int maxRecursion = 0)
 		{
 			_type = GetUnderlyingType(type);
 			_visitor = visitor ?? new NoopPropertyVisitor();
+			_maxRecursion = maxRecursion;
+			_seenTypes = new ConcurrentDictionary<Type, int>();
+			_seenTypes.TryAdd(_type, 0);
+		}
+
+		internal PropertyWalker(Type type, IPropertyVisitor visitor, int maxRecursion, ConcurrentDictionary<Type, int> seenTypes)
+		{
+			_type = type;
+			_visitor = visitor;
+			_maxRecursion = maxRecursion;
+			_seenTypes = seenTypes;
 		}
 
 		public IProperties GetProperties()
 		{
 			var properties = new Properties();
+
+			int seen;
+			if (_seenTypes.TryGetValue(_type, out seen) && seen > _maxRecursion)
+				return properties;
+
 			foreach(var propertyInfo in _type.GetProperties())
 			{
 				var attribute = ElasticsearchPropertyAttribute.From(propertyInfo);
@@ -31,6 +50,7 @@ namespace Nest
 				var property = GetProperty(propertyInfo, attribute);
 				properties.Add(propertyInfo.Name, property);
 			}
+
 			return properties;
 		}
 
@@ -40,7 +60,10 @@ namespace Nest
 			var objectType = elasticType as IObjectProperty;
 			if (objectType != null)
 			{
-				var walker = new PropertyWalker(propertyInfo.PropertyType, _visitor);
+				var type = GetUnderlyingType(propertyInfo.PropertyType);
+				var seenTypes = new ConcurrentDictionary<Type, int>(_seenTypes);
+				seenTypes.AddOrUpdate(type, 0, (t, i) => ++i);
+				var walker = new PropertyWalker(type, _visitor, _maxRecursion, seenTypes);
 				objectType.Properties = walker.GetProperties();
 			}
 			_visitor.Visit(elasticType, propertyInfo, attribute);
