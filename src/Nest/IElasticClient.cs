@@ -101,13 +101,13 @@ namespace Nest
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-update-settings.html
 		/// </summary>
 		/// <param name="updateSettingsSelector">A descriptor that strongly types all the updateable settings</param>
-		IAcknowledgedResponse UpdateSettings(Func<UpdateSettingsDescriptor, UpdateSettingsDescriptor> updateSettingsSelector);
+		IAcknowledgedResponse UpdateSettings(Func<UpdateSettingsDescriptor, IUpdateSettingsRequest> updateSettingsSelector);
 
 		/// <inheritdoc/>
 		IAcknowledgedResponse UpdateSettings(IUpdateSettingsRequest updateSettingsRequest);
 
 		/// <inheritdoc/>
-		Task<IAcknowledgedResponse> UpdateSettingsAsync(Func<UpdateSettingsDescriptor, UpdateSettingsDescriptor> updateSettingsSelector);
+		Task<IAcknowledgedResponse> UpdateSettingsAsync(Func<UpdateSettingsDescriptor, IUpdateSettingsRequest> updateSettingsSelector);
 
 		/// <inheritdoc/>
 		Task<IAcknowledgedResponse> UpdateSettingsAsync(IUpdateSettingsRequest updateSettingsRequest);
@@ -479,13 +479,13 @@ namespace Nest
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-get-settings.html
 		/// </summary>
 		/// <param name="selector">A descriptor that describes the parameters for the get index settings operation</param>
-		IIndexSettingsResponse GetIndexSettings(Func<GetIndexSettingsDescriptor, GetIndexSettingsDescriptor> selector);
+		IIndexSettingsResponse GetIndexSettings(Func<GetIndexSettingsDescriptor, IGetIndexSettingsRequest> selector);
 
 		/// <inheritdoc/>
 		IIndexSettingsResponse GetIndexSettings(IGetIndexSettingsRequest getIndexSettingsRequest);
 
 		/// <inheritdoc/>
-		Task<IIndexSettingsResponse> GetIndexSettingsAsync(Func<GetIndexSettingsDescriptor, GetIndexSettingsDescriptor> selector);
+		Task<IIndexSettingsResponse> GetIndexSettingsAsync(Func<GetIndexSettingsDescriptor, IGetIndexSettingsRequest> selector);
 
 		/// <inheritdoc/>
 		Task<IIndexSettingsResponse> GetIndexSettingsAsync(IGetIndexSettingsRequest getIndexSettingsRequest);

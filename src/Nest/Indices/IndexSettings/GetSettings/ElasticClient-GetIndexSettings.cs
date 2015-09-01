@@ -8,10 +8,10 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IIndexSettingsResponse GetIndexSettings(Func<GetIndexSettingsDescriptor, GetIndexSettingsDescriptor> selector)
+		public IIndexSettingsResponse GetIndexSettings(Func<GetIndexSettingsDescriptor, IGetIndexSettingsRequest> selector)
 		{
-			return this.Dispatcher.Dispatch<GetIndexSettingsDescriptor, GetIndexSettingsRequestParameters, IndexSettingsResponse>(
-				selector,
+			return this.Dispatcher.Dispatch<IGetIndexSettingsRequest, GetIndexSettingsRequestParameters, IndexSettingsResponse>(
+				selector?.Invoke(new GetIndexSettingsDescriptor()),
 				(p, d) => this.LowLevelDispatch.IndicesGetSettingsDispatch<IndexSettingsResponse>(p)
 			);
 		}
@@ -26,11 +26,10 @@ namespace Nest
 		}
 
 		/// <inheritdoc/>
-		public Task<IIndexSettingsResponse> GetIndexSettingsAsync(Func<GetIndexSettingsDescriptor, GetIndexSettingsDescriptor> selector)
+		public Task<IIndexSettingsResponse> GetIndexSettingsAsync(Func<GetIndexSettingsDescriptor, IGetIndexSettingsRequest> selector)
 		{
-			return this.Dispatcher.DispatchAsync
-				<GetIndexSettingsDescriptor, GetIndexSettingsRequestParameters, IndexSettingsResponse, IIndexSettingsResponse>(
-					selector,
+			return this.Dispatcher.DispatchAsync<IGetIndexSettingsRequest, GetIndexSettingsRequestParameters, IndexSettingsResponse, IIndexSettingsResponse>(
+					selector?.Invoke(new GetIndexSettingsDescriptor()),
 					(p, d) => this.LowLevelDispatch.IndicesGetSettingsDispatchAsync<IndexSettingsResponse>(p)
 				);
 		}

@@ -54,6 +54,8 @@ namespace Tests.Framework
 
 	public class LazyResponses : AsyncLazy<Dictionary<string, IResponse>>
 	{
+		public static LazyResponses Empty { get; } = new LazyResponses(() => new Dictionary<string, IResponse> { });
+
 		public LazyResponses(Func<Dictionary<string, IResponse>> factory) : base(factory) { }
 
 		public LazyResponses(Func<Task<Dictionary<string, IResponse>>> factory) : base(factory) { }

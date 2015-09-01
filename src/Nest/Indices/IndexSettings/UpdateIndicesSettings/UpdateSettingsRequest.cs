@@ -20,7 +20,8 @@ namespace Nest
 
 	public partial class UpdateSettingsRequest : IndexOptionalPathBase<UpdateSettingsRequestParameters>, IUpdateSettingsRequest
 	{
-
+		public UpdateSettingsRequest() { }
+		public UpdateSettingsRequest(IndexName index) { Index = index; }
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<UpdateSettingsRequestParameters> pathInfo)
 		{
 			UpdateSettingsPathInfo.Update(settings, pathInfo);

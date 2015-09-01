@@ -19,7 +19,7 @@ using Xunit;
 namespace Tests
 {
 	[Collection(IntegrationContext.Indexing)]
-	public class AnalysisCrud : CrudExample<IIndicesOperationResponse>
+	public class AnalysisCrud : CrudExample<IIndicesOperationResponse, IIndexSettingsResponse, IIndicesOperationResponse>
 	{
 		public AnalysisCrud(IndexingCluster cluster, ApiUsage usage) : base (cluster, usage) { }
 
@@ -56,19 +56,51 @@ namespace Tests
 				)
 			);
 
-		protected override LazyResponses Delete()
-		{
-			return null;
-		}
 
-		protected override LazyResponses Read()
-		{
-			return null;
-		}
+		protected override LazyResponses Read() => Calls<GetIndexSettingsDescriptor, GetIndexSettingsRequest, IGetIndexSettingsRequest, IIndexSettingsResponse>(
+			GetInitializer,
+			GetFluent,
+			fluent: (s, c, f) => c.GetIndexSettings(f),
+			fluentAsync: (s, c, f) => c.GetIndexSettingsAsync(f),
+			request: (s, c, r) => c.GetIndexSettings(r),
+			requestAsync: (s, c, r) => c.GetIndexSettingsAsync(r)
+		);
 
-		protected override LazyResponses Update()
+		protected GetIndexSettingsRequest GetInitializer(string indexName) => new GetIndexSettingsRequest(indexName) { };
+		protected IGetIndexSettingsRequest GetFluent(string indexName, GetIndexSettingsDescriptor u) => u.Index(indexName);
+
+		protected override LazyResponses Update() => Calls<UpdateSettingsDescriptor, UpdateSettingsRequest, IUpdateSettingsRequest, IAcknowledgedResponse>(
+			UpdateInitializer,
+			UpdateFluent,
+			fluent: (s, c, f) => c.UpdateSettings(f),
+			fluentAsync: (s, c, f) => c.UpdateSettingsAsync(f),
+			request: (s, c, r) => c.UpdateSettings(r),
+			requestAsync: (s, c, r) => c.UpdateSettingsAsync(r)
+		);
+
+		protected UpdateSettingsRequest UpdateInitializer(string indexName) => new UpdateSettingsRequest(indexName)
 		{
-			return null;
-		}
+			Analysis = new Analysis
+			{
+				CharFilters = new CharFilters { { "differentHtml", new HtmlStripCharFilter { } } }
+			}
+		};
+		[I] protected async Task CreatedAnalyisHasCharFilters() => await this.AssertOnGetAfterCreate(r =>
+		{
+			r.IndexSettings.Should().NotBeNull();
+			r.IndexSettings.Settings.Should().NotBeNull();
+			r.IndexSettings.Settings.Analysis.Should().NotBeNull();
+			r.IndexSettings.Settings.Analysis.CharFilters.Should().NotBeNull();
+		});
+
+		protected IUpdateSettingsRequest UpdateFluent(string indexName, UpdateSettingsDescriptor u) => u
+			.Index(indexName)
+			.Analysis(a => a
+				.CharFilters(c => c
+					.HtmlStrip("differentHtml")
+				)
+			);
+
+		protected override bool SupportsDeletes => false;
 	}
 }
