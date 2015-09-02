@@ -22,12 +22,7 @@ namespace Nest
 	public class CharFiltersDescriptor 
 		: HasADictionaryDescriptor<CharFiltersDescriptor, ICharFilters, string, ICharFilter>, ICharFilters
 	{
-		protected CharFiltersDescriptor Assign(string name, ICharFilter analyzer)
-		{
-			this.BackingDictionary.Add(name, analyzer);
-			return this;
-		}
-
+		//TODO Unknown()? discuss with @gmarz
 		public CharFiltersDescriptor Add(string name, ICharFilter analyzer) => Assign(name, analyzer);
 		
 		/// <summary>

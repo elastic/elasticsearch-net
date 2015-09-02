@@ -52,6 +52,9 @@ namespace Nest
 		IDictionary IHasADictionary.Dictionary => this.BackingDictionary;
 		IDictionary<TKey, TValue> IHasADictionary<TKey, TValue>.Dictionary => this.BackingDictionary;
 
+		protected TDescriptor Assign(TKey key, TValue value) =>
+			Fluent.Assign<TDescriptor, TDescriptor>((TDescriptor)this, (a) => BackingDictionary.Add(key, value));
+
 		protected HasADictionaryDescriptor() { this.BackingDictionary = new Dictionary<TKey, TValue>(); }
 		protected HasADictionaryDescriptor(Dictionary<TKey, TValue> backingDictionary) { this.BackingDictionary = backingDictionary; }
 		protected HasADictionaryDescriptor(IDictionary<TKey, TValue> backingDictionary)

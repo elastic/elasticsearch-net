@@ -94,7 +94,7 @@ namespace Nest
 		/// <inheritdoc/>
 		public ITimestampField TimestampField { get; set; }
 		/// <inheritdoc/>
-		public IList<MappingTransform> Transform { get; set; }
+		public IList<IMappingTransform> Transform { get; set; }
 		/// <inheritdoc/>
 		public ITtlField TtlField { get; set; }
 		/// <inheritdoc/>
@@ -148,7 +148,7 @@ namespace Nest
 		/// <inheritdoc/>
 		public ITimestampField TimestampField { get; set; }
 		/// <inheritdoc/>
-		public IList<MappingTransform> Transform { get; set; }
+		public IList<IMappingTransform> Transform { get; set; }
 		/// <inheritdoc/>
 		public ITtlField TtlField { get; set; }
 		/// <inheritdoc/>
@@ -187,7 +187,7 @@ namespace Nest
 		ISizeField ITypeMapping.SizeField { get; set; }
 		ISourceField ITypeMapping.SourceField { get; set; }
 		ITimestampField ITypeMapping.TimestampField { get; set; }
-		IList<MappingTransform> ITypeMapping.Transform { get; set; }
+		IList<IMappingTransform> ITypeMapping.Transform { get; set; }
 		ITtlField ITypeMapping.TtlField { get; set; }
 		ITypeField ITypeMapping.TypeField { get; set; }
 
@@ -242,14 +242,13 @@ namespace Nest
 		public PutMappingDescriptor<T> NumericDetection(bool detect = true) => Assign(a => a.NumericDetection = detect);
 
 		/// <inheritdoc/>
-		public PutMappingDescriptor<T> Transform(Func<MappingTransformDescriptor, MappingTransformDescriptor> mappingTransformSelector)
+		public PutMappingDescriptor<T> Transform(Func<MappingTransformDescriptor, IMappingTransform> mappingTransformSelector)
 		{
-		/// <inheritdoc/>
-			mappingTransformSelector.ThrowIfNull("mappingTransformSelector");
-			var transformDescriptor = mappingTransformSelector(new MappingTransformDescriptor());
-			if (Self.Transform == null)
-				Self.Transform = new List<MappingTransform>();
-			Self.Transform.Add(transformDescriptor._mappingTransform);
+			//TODO MappingTransform needs a descriptor so we no longer make this call mutate state
+			var t = mappingTransformSelector?.Invoke(new MappingTransformDescriptor());
+			if (t == null) return this;
+			if (Self.Transform == null) Self.Transform = new List<IMappingTransform>();
+			Self.Transform.Add(t);
 			return this;
 		}
 

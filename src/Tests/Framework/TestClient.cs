@@ -15,7 +15,7 @@ namespace Tests.Framework
 {
 	public static class TestClient
 	{
-		private static bool _integrationOverride = true;
+		private static bool _integrationOverride = false;
 		private static string _manualOverrideVersion = "2.0.0";
 
 		public static string ElasticsearchVersion => 

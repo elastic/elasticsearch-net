@@ -16,10 +16,8 @@ namespace Nest
 		public AliasAddOperation Add { get; set; }
 	}
 
-	public class AliasAddDescriptor : IAliasAddAction
+	public class AliasAddDescriptor : DescriptorBase<AliasAddDescriptor, IAliasAddAction>, IAliasAddAction
 	{
-		private IAliasAddAction Self => this;
-
 		public AliasAddDescriptor()
 		{
 			Self.Add = new AliasAddOperation();

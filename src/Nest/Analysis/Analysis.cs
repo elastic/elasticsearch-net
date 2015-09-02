@@ -25,10 +25,8 @@ namespace Nest
 
 	}
 
-	public class AnalysisDescriptor : IAnalysis
+	public class AnalysisDescriptor : DescriptorBase<AnalysisDescriptor, IAnalysis>, IAnalysis
 	{
-		protected AnalysisDescriptor Assign(Action<IAnalysis> assigner) => Fluent.Assign(this, assigner);
-
 		IAnalyzers IAnalysis.Analyzers { get; set; }
 		ICharFilters IAnalysis.CharFilters { get; set; }
 		ITokenFilters IAnalysis.TokenFilters { get; set; }

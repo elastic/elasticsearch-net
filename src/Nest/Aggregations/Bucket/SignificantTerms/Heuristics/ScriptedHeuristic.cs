@@ -4,35 +4,35 @@ using System;
 
 namespace Nest
 {
-	public class ScriptedHeuristic
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<ScriptedHeuristic>))]
+	public interface IScriptedHeuristic
 	{
 		[JsonProperty("script")]
-		public string Script { get; set; }
+		string Script { get; set; }
 		[JsonProperty("lang")]
-		public string Lang { get; set; }
+		string Lang { get; set; }
 		[JsonProperty("params")]
+		IDictionary<string, object> Params { get; set; }
+	}
+
+	public class ScriptedHeuristic
+	{
+		public string Script { get; set; }
+		public string Lang { get; set; }
 		public IDictionary<string, object> Params { get; set; }
 	}
 
-	public class ScriptedHeuristicDescriptor
+	public class ScriptedHeuristicDescriptor : DescriptorBase<ScriptedHeuristicDescriptor, IScriptedHeuristic>, IScriptedHeuristic
 	{
-		internal ScriptedHeuristic ScriptedHeuristic = new ScriptedHeuristic();
-		public ScriptedHeuristicDescriptor Script(string script)
-		{
-			this.ScriptedHeuristic.Script = script;
-			return this;
-		}
+		string IScriptedHeuristic.Script { get; set; }
+		string IScriptedHeuristic.Lang { get; set; }
+		IDictionary<string, object> IScriptedHeuristic.Params { get; set; }
 
-		public ScriptedHeuristicDescriptor Lang(string lang)
-		{
-			this.ScriptedHeuristic.Lang = lang;
-			return this;
-		}
+		public ScriptedHeuristicDescriptor Script(string script) => Assign(a => a.Script = script);
 
-		public ScriptedHeuristicDescriptor Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramsSelector)
-		{
-			this.ScriptedHeuristic.Params = paramsSelector(new FluentDictionary<string, object>());
-			return this;
-		}
+		public ScriptedHeuristicDescriptor Lang(string lang) => Assign(a => a.Lang = lang);
+
+		public ScriptedHeuristicDescriptor Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramsSelector) =>
+			Assign(a => a.Params = paramsSelector?.Invoke(new FluentDictionary<string, object>()));
 	}
 }

@@ -7,11 +7,11 @@ using System.Text;
 
 namespace Nest
 {
-	internal class MappingTransformJsonConverter : JsonConverter
+	internal class MappingTransformCollectionJsonConverter : JsonConverter
 	{
 		public override bool CanWrite { get { return false; } }
 
-		public override bool CanConvert(Type objectType) => objectType == typeof(MappingTransform);
+		public override bool CanConvert(Type objectType) => objectType == typeof(IMappingTransform);
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
@@ -19,12 +19,12 @@ namespace Nest
 
 			if (o is JArray)
 			{
-				return o.ToObject<IList<MappingTransform>>();
+				return o.ToObject<IList<IMappingTransform>>();
 			}
 			else if (o is JObject)
 			{
-				var transform = o.ToObject<MappingTransform>();
-				return new List<MappingTransform> { transform };
+				var transform = o.ToObject<IMappingTransform>();
+				return new List<IMappingTransform> { transform };
 			}
 
 			return null;
