@@ -38,11 +38,8 @@ namespace Nest
 		public string ThresholdSize { get; set; }
 	}
 
-	public class TranslogFlushSettingsDescriptor : ITranslogFlushSettings
+	public class TranslogFlushSettingsDescriptor: DescriptorBase<TranslogFlushSettingsDescriptor, ITranslogFlushSettings>, ITranslogFlushSettings
 	{
-		protected TranslogFlushSettingsDescriptor Assign(Action<ITranslogFlushSettings> assigner) => 
-			Fluent.Assign(this, assigner);
-
 		TimeUnitExpression ITranslogFlushSettings.Interval { get; set; }
 		int? ITranslogFlushSettings.ThresholdOps { get; set; }
 		TimeUnitExpression ITranslogFlushSettings.ThresholdPeriod { get; set; }

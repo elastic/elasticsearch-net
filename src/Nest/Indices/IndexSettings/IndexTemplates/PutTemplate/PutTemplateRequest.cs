@@ -26,6 +26,7 @@ namespace Nest
 		{
 		}
 
+		//TODO Merge this state object onto this object
 		public TemplateMapping TemplateMapping { get; set; }
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<PutTemplateRequestParameters> pathInfo)
@@ -42,6 +43,7 @@ namespace Nest
 
 		private readonly IConnectionSettingsValues _connectionSettings;
 
+		//TODO Merge this state object onto this descriptor
 		TemplateMapping IPutTemplateRequest.TemplateMapping { get; set; }
 
 		public PutTemplateDescriptor(IConnectionSettingsValues connectionSettings)
@@ -73,50 +75,28 @@ namespace Nest
 			return this;
 		}
 
-		public PutTemplateDescriptor Settings(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> settingsSelector)
+		public PutTemplateDescriptor Settings(Func<IndexSettingsDescriptor, IIndexSettings> settingsSelector)
 		{
-			throw new NotImplementedException();
+			Self.TemplateMapping.Settings = settingsSelector?.Invoke(new IndexSettingsDescriptor());
+			return this;
 		}
 
-		public PutTemplateDescriptor AddMapping<T>(Func<PutMappingDescriptor<T>, PutMappingDescriptor<T>> mappingSelector)
-			where T : class
+		public PutTemplateDescriptor Mappings(Func<MappingsDescriptor, IMappings> mappingSelector)
 		{
-			throw new NotImplementedException();
+			Self.TemplateMapping.Mappings = mappingSelector?.Invoke(new MappingsDescriptor());
+			return this;
 		}
 
-		public PutTemplateDescriptor AddWarmer<T>(Func<CreateWarmerDescriptor, CreateWarmerDescriptor> warmerSelector)
-			where T : class
+		public PutTemplateDescriptor Warmers(Func<WarmersDescriptor, IWarmers> warmerSelector)
 		{
-			throw new NotImplementedException();
-			//warmerSelector.ThrowIfNull("warmerSelector");
-			//var warmerDescriptor = warmerSelector(new CreateWarmerDescriptor());
-			//warmerDescriptor.ThrowIfNull("warmerDescriptor");
-			//warmerDescriptor._WarmerName.ThrowIfNull("warmer has no name");
-
-			//var warmer = new WarmerMapping
-			//{
-			//	Name = warmerDescriptor._WarmerName, 
-			//	Types = warmerDescriptor._Types, 
-			//	Source = warmerDescriptor._SearchDescriptor
-			//};
-
-			//Self.TemplateMapping.Warmers[warmerDescriptor._WarmerName] = warmer;
-			//return this;
-
+			Self.TemplateMapping.Warmers = warmerSelector?.Invoke(new WarmersDescriptor());
+			return this;
 		}
 		
-		public PutTemplateDescriptor AddAlias(string aliasName, Func<BulkAliasDescriptor, BulkAliasDescriptor> addAliasDescriptor = null)
+		public PutTemplateDescriptor Aliases(Func<AliasesDescriptor, IAliases> aliasDescriptor)
 		{
-			throw new NotImplementedException();
-			//aliasName.ThrowIfNull("aliasName");
-			//addAliasDescriptor = addAliasDescriptor ?? (a=>a);
-			//var alias = addAliasDescriptor(new BulkAliasDescriptor());
-			//if (Self.TemplateMapping.Aliases == null)
-			//	Self.TemplateMapping.Aliases = new Dictionary<string, IAlias>();
-
-			//Self.TemplateMapping.Aliases[aliasName] = alias;
-			//return this;
-
+			Self.TemplateMapping.Aliases = aliasDescriptor?.Invoke(new AliasesDescriptor());
+			return this;
 		}
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<PutTemplateRequestParameters> pathInfo)

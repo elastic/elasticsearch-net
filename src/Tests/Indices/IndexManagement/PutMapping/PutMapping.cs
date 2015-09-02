@@ -12,6 +12,7 @@ using Elasticsearch.Net;
 
 namespace Tests.Indices.IndexManagement
 {
+	//TODO NOT Readonly
 	[Collection(IntegrationContext.ReadOnly)]
 	public abstract class PutMapping 
 		: ApiCallIntegration<IIndicesResponse, IPutMappingRequest, PutMappingDescriptor<Project>, PutMappingRequest<Project>>
@@ -20,7 +21,7 @@ namespace Tests.Indices.IndexManagement
 
 		public override bool ExpectIsValid => true;
 
-		public override int ExpectStatusCode => 201;
+		public override int ExpectStatusCode => 200;
 
 		public override string UrlPath => "/project/project/_mapping";
 

@@ -47,7 +47,7 @@ namespace Tests.Framework
 			{
 				var dict = new Dictionary<string, IResponse>();
 				OnBeforeCall(client);
-			    dict.Add("fluent", fluent(client, this.Fluent));
+				dict.Add("fluent", fluent(client, this.Fluent));
 				OnBeforeCall(client);
 				dict.Add("fluentAsync", await fluentAsync(client, this.Fluent));
 				OnBeforeCall(client);

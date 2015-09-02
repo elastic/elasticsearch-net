@@ -58,10 +58,10 @@ namespace Tests.Framework
 			clientKeyValues.Should().Equal(expectedKeyValues);
 		}
 
-		[I] protected async void HandlesStatusCode() =>
+		[I] protected async Task HandlesStatusCode() =>
 			await this.AssertOnAllResponses(r=>r.ApiCall.HttpStatusCode.Should().Be(this.ExpectStatusCode));
 
-		[I] protected async void ReturnsExpectedIsValid() =>
+		[I] protected async Task ReturnsExpectedIsValid() =>
 			await this.AssertOnAllResponses(r=>r.IsValid.Should().Be(this.ExpectIsValid));
 
 	}

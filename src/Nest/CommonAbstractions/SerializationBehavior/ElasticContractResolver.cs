@@ -38,7 +38,7 @@ namespace Nest.Resolvers
 			else if (objectType == typeof(ICharFilter)) contract.Converter = new CharFilterJsonConverter();
 			else if (objectType == typeof(IAnalyzer)) contract.Converter = new AnalyzerJsonConverter();
 			else if (objectType == typeof(ITokenizer)) contract.Converter = new TokenizerJsonConverter();
-			else if (objectType == typeof(ITokenFilter)) contract.Converter = new TokenizerJsonConverter();
+			else if (objectType == typeof(ITokenFilter)) contract.Converter = new TokenFilterJsonConverter();
 			
 			else if (objectType == typeof(DateTime) || objectType == typeof(DateTime?))
 				contract.Converter = new IsoDateTimeConverter();
@@ -81,6 +81,10 @@ namespace Nest.Resolvers
 			defaultProperties = PropertiesOf<IAnalyzer>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<ITokenizer>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<ITokenFilter>(type, memberSerialization, defaultProperties, lookup);
+
+
+
+			defaultProperties = PropertiesOf<ITypeMapping>(type, memberSerialization, defaultProperties, lookup);
 
 			defaultProperties = PropertiesOf<IQuery>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<ISpecialField>(type, memberSerialization, defaultProperties, lookup);

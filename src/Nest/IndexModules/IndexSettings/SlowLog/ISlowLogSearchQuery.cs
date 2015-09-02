@@ -22,10 +22,8 @@ namespace Nest
 		public TimeUnitExpression ThresholdWarn { get; set; }
 	}
 
-	public class SlowLogSearchQueryDescriptor : ISlowLogSearchQuery
+	public class SlowLogSearchQueryDescriptor: DescriptorBase<SlowLogSearchQueryDescriptor, ISlowLogSearchQuery>, ISlowLogSearchQuery
 	{
-		SlowLogSearchQueryDescriptor Assign(Action<ISlowLogSearchQuery> assigner) => Fluent.Assign(this, assigner);
-
 		TimeUnitExpression ISlowLogSearchQuery.ThresholdDebug { get; set; }
 		TimeUnitExpression ISlowLogSearchQuery.ThresholdInfo { get; set; }
 		TimeUnitExpression ISlowLogSearchQuery.ThresholdTrace { get; set; }

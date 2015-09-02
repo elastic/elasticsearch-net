@@ -43,7 +43,7 @@ namespace Nest
 		PercentageScoreHeuristic PercentageScore { get; set; }
 
 		[JsonProperty("script_heuristic")]
-		ScriptedHeuristic Script { get; set; }
+		IScriptedHeuristic Script { get; set; }
 
 		[JsonProperty("background_filter")]
 		IQueryContainer BackgroundFilter { get; set; }
@@ -63,7 +63,7 @@ namespace Nest
 		public ChiSquareHeuristic ChiSquare { get; set; }
 		public GoogleNormalizedDistanceHeuristic GoogleNormalizedDistance { get; set; }
 		public PercentageScoreHeuristic PercentageScore { get; set; }
-		public ScriptedHeuristic Script { get; set; }
+		public IScriptedHeuristic Script { get; set; }
 		public IQueryContainer BackgroundFilter { get; set; }
 	}
 
@@ -80,7 +80,7 @@ namespace Nest
 		public ChiSquareHeuristic ChiSquare { get; set; }
 		public GoogleNormalizedDistanceHeuristic GoogleNormalizedDistance { get; set; }
 		public PercentageScoreHeuristic PercentageScore { get; set; }
-		public ScriptedHeuristic Script { get; set; }
+		public IScriptedHeuristic Script { get; set; }
 		public IQueryContainer BackgroundFilter { get; set; }
 
 		public SignificantTermsAgg(string name) : base(name) { }
@@ -115,7 +115,7 @@ namespace Nest
 
 		PercentageScoreHeuristic ISignificantTermsAggregator.PercentageScore { get; set; }
 
-		ScriptedHeuristic ISignificantTermsAggregator.Script { get; set; }
+		IScriptedHeuristic ISignificantTermsAggregator.Script { get; set; }
 
 		IQueryContainer ISignificantTermsAggregator.BackgroundFilter { get; set; }
 
@@ -152,8 +152,8 @@ namespace Nest
 
 		public SignificantTermsAggregatorDescriptor<T> PercentageScore() => Assign(a => a.PercentageScore = new PercentageScoreHeuristic());
 
-		public SignificantTermsAggregatorDescriptor<T> Script(Func<ScriptedHeuristicDescriptor, ScriptedHeuristicDescriptor> scriptSelector) =>
-			Assign(a => a.Script = scriptSelector?.Invoke(new ScriptedHeuristicDescriptor())?.ScriptedHeuristic);
+		public SignificantTermsAggregatorDescriptor<T> Script(Func<ScriptedHeuristicDescriptor, IScriptedHeuristic> scriptSelector) =>
+			Assign(a => a.Script = scriptSelector?.Invoke(new ScriptedHeuristicDescriptor()));
 
 		public SignificantTermsAggregatorDescriptor<T> BackgroundFilter(Func<QueryContainerDescriptor<T>, QueryContainer> selector) =>
 			Assign(a => a.BackgroundFilter = selector(new QueryContainerDescriptor<T>()));

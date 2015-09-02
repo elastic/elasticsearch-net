@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public interface IUpdateSettingsRequest : IIndexOptionalPath<UpdateSettingsRequestParameters>, IIndexSettings, IHasADictionary
+	public interface IUpdateSettingsRequest : IIndicesOptionalPath<UpdateSettingsRequestParameters>, IIndexSettings, IHasADictionary
 	{
 	}
 
@@ -18,8 +18,10 @@ namespace Nest
 		}
 	}
 
-	public partial class UpdateSettingsRequest : IndexOptionalPathBase<UpdateSettingsRequestParameters>, IUpdateSettingsRequest
+	public partial class UpdateSettingsRequest : IndicesOptionalPathBase<UpdateSettingsRequestParameters>, IUpdateSettingsRequest
 	{
+		public UpdateSettingsRequest() { }
+		public UpdateSettingsRequest(IndexName index) { this.Indices = new []{ index }; }
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<UpdateSettingsRequestParameters> pathInfo)
 		{
@@ -91,7 +93,7 @@ namespace Nest
 	[DescriptorFor("IndicesPutSettings")]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial class UpdateSettingsDescriptor
-		: IndexOptionalPathDescriptorBase<UpdateSettingsDescriptor, UpdateSettingsRequestParameters>, IUpdateSettingsRequest
+		: IndicesOptionalPathDescriptor<UpdateSettingsDescriptor, UpdateSettingsRequestParameters>, IUpdateSettingsRequest
 	{
 		UpdateSettingsDescriptor Assign(Action<IIndexSettings> assigner) => Fluent.Assign(this, assigner);
 

@@ -173,11 +173,11 @@ namespace Nest
 
 	}
 
-	public abstract class DynamicIndexSettingsDescriptor<TIndexSettings> : HasADictionary<string, object>, IDynamicIndexSettings
+	public abstract class DynamicIndexSettingsDescriptor<TIndexSettings> 
+		: HasADictionaryDescriptor<DynamicIndexSettingsDescriptor<TIndexSettings>, IDynamicIndexSettings, string, object>, IDynamicIndexSettings
 		where TIndexSettings : DynamicIndexSettingsDescriptor<TIndexSettings> 
 	{
-		protected TIndexSettings Assign(Action<IDynamicIndexSettings> assigner) =>
-			Fluent.Assign((TIndexSettings)this, assigner);
+		protected TIndexSettings Set(Action<IDynamicIndexSettings> assigner) => Fluent.Assign((TIndexSettings)this, assigner);
 
 		public DynamicIndexSettingsDescriptor() : base() { }
 		protected DynamicIndexSettingsDescriptor(IDictionary<string, object> container) : base(container) { }
@@ -199,7 +199,8 @@ namespace Nest
 		ITranslogSettings IDynamicIndexSettings.Translog { get; set; }
 		TimeUnitExpression IDynamicIndexSettings.UnassignedNodeLeftDelayedTimeout { get; set; }
 		IAnalysis IDynamicIndexSettings.Analysis { get; set; }
-
+		
+		//TODO rename to Setting? discuss with @gmarz
 		/// <summary>
 		/// Add any setting to the index
 		/// </summary>
@@ -210,73 +211,63 @@ namespace Nest
 		}
 
 		/// <inheritdoc/ >
-		public TIndexSettings NumberOfReplicas(int? numberOfReplicas) =>
-			Assign(a => a.NumberOfReplicas = numberOfReplicas);
+		public TIndexSettings NumberOfReplicas(int? numberOfReplicas) => Set(a => a.NumberOfReplicas = numberOfReplicas);
 
 		/// <inheritdoc/ >
-		public TIndexSettings AutoExpandReplicas(string AutoExpandReplicas) =>
-			Assign(a => a.AutoExpandReplicas = AutoExpandReplicas);
+		public TIndexSettings AutoExpandReplicas(string AutoExpandReplicas) => Set(a => a.AutoExpandReplicas = AutoExpandReplicas);
 
 		/// <inheritdoc/ >
-		public TIndexSettings BlocksMetadata(bool? blocksMetadata = true) =>
-			Assign(a => a.BlocksMetadata = blocksMetadata);
+		public TIndexSettings BlocksMetadata(bool? blocksMetadata = true) => Set(a => a.BlocksMetadata = blocksMetadata);
 
 		/// <inheritdoc/ >
-		public TIndexSettings BlocksRead(bool? blocksRead = true) =>
-			Assign(a => a.BlocksRead = blocksRead);
+		public TIndexSettings BlocksRead(bool? blocksRead = true) => Set(a => a.BlocksRead = blocksRead);
 
 		/// <inheritdoc/ >
-		public TIndexSettings BlocksReadOnly(bool? blocksReadOnly = true) =>
-			Assign(a => a.BlocksReadOnly = blocksReadOnly);
+		public TIndexSettings BlocksReadOnly(bool? blocksReadOnly = true) => Set(a => a.BlocksReadOnly = blocksReadOnly);
 
 		/// <inheritdoc/ >
-		public TIndexSettings BlocksWrite(bool? blocksWrite = true) =>
-			Assign(a => a.BlocksWrite = blocksWrite);
+		public TIndexSettings BlocksWrite(bool? blocksWrite = true) => Set(a => a.BlocksWrite = blocksWrite);
 
 		/// <inheritdoc/ >
-		public TIndexSettings Priority(int? priority) =>
-			Assign(a => a.Priority = priority);
+		public TIndexSettings Priority(int? priority) => Set(a => a.Priority = priority);
 
 		/// <inheritdoc/ >
-		public TIndexSettings WarmersEnabled(bool enabled = true) =>
-			Assign(a => a.WarmersEnabled = enabled);
+		public TIndexSettings WarmersEnabled(bool enabled = true) => Set(a => a.WarmersEnabled = enabled);
 
 		/// <inheritdoc/ >
-		public TIndexSettings RequestCacheEnabled(bool enabled = true) =>
-			Assign(a => a.RequestCacheEnabled = enabled);
+		public TIndexSettings RequestCacheEnabled(bool enabled = true) => Set(a => a.RequestCacheEnabled = enabled);
 
 		/// <inheritdoc/ >
 		public TIndexSettings Merge(Func<MergeSettingsDescriptor, IMergeSettings> merge) =>
-			Assign(a => a.Merge = merge?.Invoke(new MergeSettingsDescriptor()));
+			Set(a => a.Merge = merge?.Invoke(new MergeSettingsDescriptor()));
 
 		/// <inheritdoc/ >
 		public TIndexSettings RecoveryInitialShards(Union<int, RecoveryInitialShards> initialShards) =>
-			Assign(a => a.RecoveryInitialShards = initialShards);
+			Set(a => a.RecoveryInitialShards = initialShards);
 
 		/// <inheritdoc/ >
-		public TIndexSettings RefreshInterval(TimeUnitExpression time) =>
-			Assign(a => a.RefreshInterval = time);
+		public TIndexSettings RefreshInterval(TimeUnitExpression time) => Set(a => a.RefreshInterval = time);
 
 		/// <inheritdoc/ >
 		public TIndexSettings TotalShardsPerNode(int? totalShardsPerNode) =>
-			Assign(a => a.RoutingAllocationTotalShardsPerNode = totalShardsPerNode);
+			Set(a => a.RoutingAllocationTotalShardsPerNode = totalShardsPerNode);
 
 		/// <inheritdoc/ >
 		public TIndexSettings SlowLog(Func<SlowLogDescriptor, ISlowLog> slowLogSelector) =>
-			Assign(a => a.SlowLog = slowLogSelector?.Invoke(new SlowLogDescriptor()));
+			Set(a => a.SlowLog = slowLogSelector?.Invoke(new SlowLogDescriptor()));
 
 		/// <inheritdoc/ >
 		public TIndexSettings Translog(Func<TranslogSettingsDescriptor, ITranslogSettings> translogSelector) =>
-			Assign(a => a.Translog = translogSelector?.Invoke(new TranslogSettingsDescriptor()));
+			Set(a => a.Translog = translogSelector?.Invoke(new TranslogSettingsDescriptor()));
 
 		/// <inheritdoc/ >
 		public TIndexSettings UnassignedNodeLeftDelayedTimeout(TimeUnitExpression time) =>
-			Assign(a => a.UnassignedNodeLeftDelayedTimeout = time);
+			Set(a => a.UnassignedNodeLeftDelayedTimeout = time);
 
 		//TODO DSL for shard allocation filtering
 
 		public TIndexSettings Analysis(Func<AnalysisDescriptor, IAnalysis> selector) =>
-			Assign(a => a.Analysis = selector?.Invoke(new AnalysisDescriptor()));
+			Set(a => a.Analysis = selector?.Invoke(new AnalysisDescriptor()));
 	}
 
 }

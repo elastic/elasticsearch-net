@@ -6,54 +6,51 @@ using System.Text;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization.OptIn)]
-	public class MappingTransform
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<MappingTransform>))]
+	public interface IMappingTransform
 	{
 		[JsonProperty("script")]
-		public string Script { get; set; }
+		string Script { get; set; }
 
-        [JsonProperty("script_file")]
-        public string ScriptFile { get; set; }
+		[JsonProperty("script_file")]
+		string ScriptFile { get; set; }
 
 		[JsonProperty("params")]
-		public IDictionary<string, string> Parameters { get; set; }
+		IDictionary<string, string> Parameters { get; set; }
 
 		[JsonProperty("lang")]
+		string Language { get; set; }
+	}
+
+	public class MappingTransform: IMappingTransform
+	{
+		public string Script { get; set; }
+
+		public string ScriptFile { get; set; }
+
+		public IDictionary<string, string> Parameters { get; set; }
+
 		public string Language { get; set; }
 	}
 
-	public class MappingTransformDescriptor
+	public class MappingTransformDescriptor : DescriptorBase<MappingTransformDescriptor, IMappingTransform>, IMappingTransform
 	{
-		internal MappingTransform _mappingTransform = new MappingTransform();
+		string IMappingTransform.Script { get; set; }
 
-		public MappingTransformDescriptor Script(string script)
-		{
-			this._mappingTransform.Script = script;
-			return this;
-		}
+		string IMappingTransform.ScriptFile { get; set; }
 
-        public MappingTransformDescriptor ScriptFile(string scriptFile)
-        {
-            this._mappingTransform.ScriptFile = scriptFile;
-            return this;
-        }
+		IDictionary<string, string> IMappingTransform.Parameters { get; set; }
 
-		public MappingTransformDescriptor Params(IDictionary<string, string> parameters)
-		{
-			this._mappingTransform.Parameters = parameters;
-			return this;
-		}
+		string IMappingTransform.Language { get; set; }
 
-		public MappingTransformDescriptor Language(string language)
-		{
-			this._mappingTransform.Language = language;
-			return this;
-		}
+		public MappingTransformDescriptor Script(string script) => Assign(a => a.Script = script);
 
-		public MappingTransformDescriptor Language(ScriptLang language)
-		{
-			this._mappingTransform.Language = language.GetStringValue();
-			return this;
-		}
+		public MappingTransformDescriptor ScriptFile(string scriptFile) => Assign(a => a.ScriptFile = scriptFile);
+
+		public MappingTransformDescriptor Params(IDictionary<string, string> parameters) => Assign(a => a.Parameters = parameters);
+
+		public MappingTransformDescriptor Language(string language) => Assign(a => a.Language = language);
+
+		public MappingTransformDescriptor Language(ScriptLang language) => Assign(a => a.Language = language.GetStringValue());
 	}
 }

@@ -37,10 +37,8 @@ namespace Nest
 		public TranslogWriteMode? FileSystemType { get; set; }
 	}
 
-	public class TranslogSettingsDescriptor : ITranslogSettings
+	public class TranslogSettingsDescriptor: DescriptorBase<TranslogSettingsDescriptor, ITranslogSettings>, ITranslogSettings
 	{
-		protected TranslogSettingsDescriptor Assign(Action<ITranslogSettings> assigner) => Fluent.Assign(this, assigner);
-
 		ITranslogFlushSettings ITranslogSettings.Flush { get; set; }
 		TimeUnitExpression ITranslogSettings.SyncInterval { get; set; }
 		TranslogDurability? ITranslogSettings.Durability { get; set; }

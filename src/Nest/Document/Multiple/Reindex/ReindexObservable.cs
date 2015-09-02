@@ -42,12 +42,12 @@ namespace Nest
 			fromIndex.ThrowIfNullOrEmpty("fromIndex");
 			toIndex.ThrowIfNullOrEmpty("toIndex");
 
-			var indexSettings = this.CurrentClient.GetIndexSettings(i=>i.Index(this._reindexDescriptor._FromIndexName));
+			var indexSettings = this.CurrentClient.GetIndexSettings(i=>i.Index(fromIndex));
 			Func<CreateIndexDescriptor, CreateIndexDescriptor> settings =
 				this._reindexDescriptor._CreateIndexSelector ?? ((ci) => ci);
 
 			var createIndexResponse = this.CurrentClient.CreateIndex(
-				toIndex, (c) => settings(c.InitializeUsing(indexSettings.IndexSettings)));
+				toIndex, (c) => settings(c.InitializeUsing(indexSettings.Indices[fromIndex])));
 			if (!createIndexResponse.IsValid)
 				throw new ReindexException(createIndexResponse.ApiCall);
 

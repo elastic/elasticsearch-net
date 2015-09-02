@@ -29,6 +29,16 @@ namespace Nest
 			this.BackingDictionary.Add(typeof(T), selector?.Invoke(new TypeMappingDescriptor<T>()));
 			return this;
 		}
+		public MappingsDescriptor Map<T>(TypeName name, Func<TypeMappingDescriptor<T>, ITypeMapping> selector) where T : class
+		{
+			this.BackingDictionary.Add(name, selector?.Invoke(new TypeMappingDescriptor<T>()));
+			return this;
+		}
+		public MappingsDescriptor Map(TypeName name, Func<TypeMappingDescriptor<object>, ITypeMapping> selector) 
+		{
+			this.BackingDictionary.Add(name, selector?.Invoke(new TypeMappingDescriptor<object>()));
+			return this;
+		}
 	}
 
 }

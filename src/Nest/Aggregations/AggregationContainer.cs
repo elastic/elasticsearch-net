@@ -42,8 +42,6 @@ namespace Nest
 				throw new ArgumentException($"{aggregator.GetType().Name} .Name is not set!");
 			return new Dictionary<string, AggregationContainer> { { b.Name, aggregator } };
 		}
-
-
 	}
 
 

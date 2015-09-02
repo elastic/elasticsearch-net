@@ -17,7 +17,6 @@ namespace Nest
 		ElasticsearchServerError ServerError { get; }
 	}
 
-
 	public class BaseResponse : IResponse
 	{
 		private bool? _forcedIsValid = null;

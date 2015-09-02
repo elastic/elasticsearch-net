@@ -31,10 +31,9 @@ namespace Nest
 		public int? MaxThreadCount { get; set; }
 	}
 
-	public class MergeSchedulerSettingsDescriptor : IMergeSchedulerSettings
+	public class MergeSchedulerSettingsDescriptor 
+		: DescriptorBase<MergeSchedulerSettingsDescriptor, IMergeSchedulerSettings>, IMergeSchedulerSettings
 	{
-		protected MergeSchedulerSettingsDescriptor Assign(Action<IMergeSchedulerSettings> assigner) => Fluent.Assign(this, assigner);
-
 		bool? IMergeSchedulerSettings.AutoThrottle { get; set; }
 		int? IMergeSchedulerSettings.MaxThreadCount { get; set; }
 

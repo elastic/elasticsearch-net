@@ -44,7 +44,8 @@ namespace Tests
 			/**
 			 * 
 			 */
-			protected override Func<IndexSettingsDescriptor, IIndexSettings> Fluent => s => s
+			protected override Func<IndexSettingsDescriptor, IIndexSettings> Fluent => FluentExample;
+			public static Func<IndexSettingsDescriptor, IIndexSettings> FluentExample => s => s
 				.Analysis(a => a
 					.CharFilters(charfilters => charfilters
 						.HtmlStrip("stripMe")
@@ -55,7 +56,8 @@ namespace Tests
 
 			/**
 			 */
-			protected override IndexSettings Initializer =>
+			protected override IndexSettings Initializer => InitializerExample;
+			public static IndexSettings InitializerExample =>
 				new IndexSettings
 				{
 					Analysis = new Analysis

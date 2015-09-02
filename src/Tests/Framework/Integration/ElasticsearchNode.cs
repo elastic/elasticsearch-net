@@ -8,6 +8,7 @@ using System.Reactive;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
+using System.Security.AccessControl;
 using System.Text.RegularExpressions;
 using System.Threading;
 
@@ -61,7 +62,7 @@ namespace Tests.Framework.Integration
 		{
 			if (!this.RunningIntegrations) return Observable.Empty<ElasticsearchMessage>();
 
-			var handle  = new ManualResetEvent(false);
+			var handle = new ManualResetEvent(false);
 			this.Stop();
 
 			this._process = this.CreateProcess(
@@ -73,7 +74,7 @@ namespace Tests.Framework.Integration
 			var observable = Observable.Using(() => _process, process => StartObservableProcess(process));
 			this._processListener = observable.Subscribe(onNext: s => HandleConsoleMessage(s, handle));
 
-			var timeout = TimeSpan.FromSeconds(60);
+			var timeout = TimeSpan.FromSeconds(20);
 			if (!handle.WaitOne(timeout, true))
 				throw new ApplicationException($"Could not start elasticsearch within {timeout}");
 
@@ -139,15 +140,8 @@ namespace Tests.Framework.Integration
 			}
 			else if (s.TryGetStartedConfirmation())
 			{
-				try
-				{
-					this._blockingSubject.OnNext(handle);
-					this.Started = true;
-				}
-				finally
-				{
-					//handle.Set();
-				}
+				this._blockingSubject.OnNext(handle);
+				this.Started = true;
 			}
 			else if (s.TryGetPortNumber(out port))
 			{
@@ -194,6 +188,27 @@ namespace Tests.Framework.Integration
 				{
 					ZipFile.ExtractToDirectory(localZip, this.RoamingFolder);
 				}
+
+				//hunspell config 
+				var hunspellFolder = Path.Combine(this.RoamingClusterFolder, "config", "hunspell", "en_US");
+				var hunspellPrefix = Path.Combine(hunspellFolder, "en_US");
+				if (!File.Exists(hunspellPrefix + ".dic"))
+				{
+					Directory.CreateDirectory(hunspellFolder);
+					//File.Create(hunspellPrefix + ".dic");
+					File.WriteAllText(hunspellPrefix + ".dic", "1\r\nabcdegf");
+					//File.Create(hunspellPrefix + ".aff");
+					File.WriteAllText(hunspellPrefix + ".aff", "SET UTF8\r\nSFX P Y 1\r\nSFX P 0 s");
+				}
+
+				var analysFolder = Path.Combine(this.RoamingClusterFolder, "config", "analysis");
+				if (!Directory.Exists(analysFolder)) Directory.CreateDirectory(analysFolder);
+				var fopXml = Path.Combine(analysFolder, "fop") + ".xml";
+				if (!File.Exists(fopXml)) File.WriteAllText(fopXml, "<languages-info />");
+				var customStems = Path.Combine(analysFolder, "custom_stems") + ".txt";
+				if (!File.Exists(customStems)) File.WriteAllText(customStems, "");
+				var stopwords = Path.Combine(analysFolder, "stopwords") + ".txt";
+				if (!File.Exists(stopwords)) File.WriteAllText(stopwords, "");
 			}
 
 		}
@@ -280,8 +295,8 @@ namespace Tests.Framework.Integration
 			Node = match.Groups["node"].Value.Trim();
 			Message = match.Groups["message"].Value.Trim();
 		}
-		
-		private static readonly Regex InfoParser = 
+
+		private static readonly Regex InfoParser =
 			new Regex(@"version\[(?<version>.*)\], pid\[(?<pid>.*)\], build\[(?<build>.+)\]");
 
 		public bool TryParseNodeInfo(out ElasticsearchNodeInfo nodeInfo)
@@ -305,7 +320,7 @@ namespace Tests.Framework.Integration
 			return this.Message == "started";
 		}
 
-		private static readonly Regex PortParser = 
+		private static readonly Regex PortParser =
 			new Regex(@"{inet\[.+\:(?<port>\d+)\]");
 
 		public bool TryGetPortNumber(out int port)
@@ -324,9 +339,9 @@ namespace Tests.Framework.Integration
 
 	public class ElasticsearchNodeInfo
 	{
-		public string Version { get;  }
-		public int Pid { get;  }
-		public string Build { get;  }
+		public string Version { get; }
+		public int Pid { get; }
+		public string Build { get; }
 
 		public ElasticsearchNodeInfo(string version, string pid, string build)
 		{

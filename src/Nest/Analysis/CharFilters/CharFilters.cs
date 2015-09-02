@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<CharFilters, string, ICharFilter>))]
-	public interface ICharFilters : IHasADictionary { }
+	public interface ICharFilters : IHasADictionary<string, ICharFilter> { }
 
 	public class CharFilters : IsADictionary<string, ICharFilter>, ICharFilters
 	{
@@ -19,14 +19,10 @@ namespace Nest
 		public void Add(string name, ICharFilter analyzer) => BackingDictionary.Add(name, analyzer);
 	}
 
-	public class CharFiltersDescriptor : HasADictionary<string, ICharFilter>, ICharFilters
+	public class CharFiltersDescriptor 
+		: HasADictionaryDescriptor<CharFiltersDescriptor, ICharFilters, string, ICharFilter>, ICharFilters
 	{
-		protected CharFiltersDescriptor Assign(string name, ICharFilter analyzer)
-		{
-			this.BackingDictionary.Add(name, analyzer);
-			return this;
-		}
-
+		//TODO Unknown()? discuss with @gmarz
 		public CharFiltersDescriptor Add(string name, ICharFilter analyzer) => Assign(name, analyzer);
 		
 		/// <summary>

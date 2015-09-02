@@ -62,11 +62,9 @@ namespace Nest
 	}
 
 	public class PropertiesDescriptor<T> 
-		: HasADictionary<PropertiesDescriptor<T>, IProperties, FieldName, IElasticsearchProperty>, IPropertiesDescriptor<T, PropertiesDescriptor<T>>, IProperties
+		: HasADictionaryDescriptor<PropertiesDescriptor<T>, IProperties, FieldName, IElasticsearchProperty>, IPropertiesDescriptor<T, PropertiesDescriptor<T>>, IProperties
 		where T : class
 	{
-		IDictionary<FieldName, IElasticsearchProperty> IHasADictionary<FieldName, IElasticsearchProperty>.Dictionary => this.BackingDictionary;
-
 		public PropertiesDescriptor() : base() { }
 		public PropertiesDescriptor(IProperties properties) : base(properties?.Dictionary) { }
 

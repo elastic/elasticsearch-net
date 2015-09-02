@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IGetIndexSettingsRequest : IIndexPath<GetIndexSettingsRequestParameters> { }
+	public interface IGetIndexSettingsRequest : IIndicesOptionalPath<GetIndexSettingsRequestParameters> { }
 
 	internal static class GetIndexSettingsPathInfo
 	{
@@ -17,9 +17,10 @@ namespace Nest
 		}
 	}
 	
-	public partial class GetIndexSettingsRequest : IndexPathBase<GetIndexSettingsRequestParameters>, IGetIndexSettingsRequest
+	public partial class GetIndexSettingsRequest : IndicesOptionalPathBase<GetIndexSettingsRequestParameters>, IGetIndexSettingsRequest
 	{
-		public GetIndexSettingsRequest(IndexName index) : base(index) { }
+		public GetIndexSettingsRequest() { }
+		public GetIndexSettingsRequest(IndexName index) { this.Indices = new []{ index }; }
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<GetIndexSettingsRequestParameters> pathInfo)
 		{
@@ -28,7 +29,8 @@ namespace Nest
 	}
 
 	[DescriptorFor("IndicesGetSettings")]
-	public partial class GetIndexSettingsDescriptor : IndexPathDescriptorBase<GetIndexSettingsDescriptor, GetIndexSettingsRequestParameters>, IGetIndexSettingsRequest
+	public partial class GetIndexSettingsDescriptor 
+		: IndicesOptionalPathDescriptor<GetIndexSettingsDescriptor, GetIndexSettingsRequestParameters>, IGetIndexSettingsRequest
 	{
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<GetIndexSettingsRequestParameters> pathInfo)
 		{

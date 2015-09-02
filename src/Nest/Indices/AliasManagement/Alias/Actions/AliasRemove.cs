@@ -16,16 +16,14 @@ namespace Nest
 		public AliasRemoveOperation Remove { get; set; }
 	}
 
-	public class AliasRemoveDescriptor : IAliasRemoveAction
+	public class AliasRemoveDescriptor : DescriptorBase<AliasRemoveDescriptor, IAliasRemoveAction>, IAliasRemoveAction
 	{
-		private IAliasRemoveAction Self => this;
 		AliasRemoveOperation IAliasRemoveAction.Remove { get; set; }
 
 		public AliasRemoveDescriptor()
 		{
 			Self.Remove = new AliasRemoveOperation();
 		}
-
 
 		public AliasRemoveDescriptor Index(string index)
 		{

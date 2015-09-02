@@ -205,7 +205,6 @@ namespace Tests.Indices.IndexManagement
 
 		protected IAnalyzers Analyzers(AnalyzersDescriptor descriptor) => descriptor
 			.Custom("myCustom", a => a
-				.CustomType("typex")
 				.Filters("x", "y")
 				.CharFilters("a", "b")
 				.Tokenizer("tokeniza")
@@ -270,7 +269,6 @@ namespace Tests.Indices.IndexManagement
 				.IgnoreCase()
 				.Keywords("a", "b")
 			)
-			.KeywordRepeat("repeat")
 			.KStem("kstem")
 			.Length("length", t => t
 				.Max(200)
@@ -355,8 +353,8 @@ namespace Tests.Indices.IndexManagement
 			)
 			.PathHierarchy("path", t => t
 				.BufferSize(2048)
-				.Delimiter("|")
-				.Replacement("||")
+				.Delimiter('|')
+				.Replacement('-')
 				.Reverse()
 				.Skip(1)
 			)

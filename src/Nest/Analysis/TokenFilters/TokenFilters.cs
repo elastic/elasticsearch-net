@@ -5,10 +5,10 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
-	public interface ITokenFilters : IHasADictionary { }
+	[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<TokenFilters, string, ITokenFilter>))]
+	public interface ITokenFilters : IHasADictionary<string, ITokenFilter> { }
 
-	public class TokenFilters : HasADictionary<string, ITokenFilter>, ITokenFilters
+	public class TokenFilters : IsADictionary<string, ITokenFilter>, ITokenFilters
 	{
 		public TokenFilters() : base() { }
 		public TokenFilters(IDictionary<string, ITokenFilter> container) : base(container) { }
@@ -19,13 +19,11 @@ namespace Nest
 		public void Add(string name, ITokenFilter analyzer) => BackingDictionary.Add(name, analyzer);
 	}
 
-	public class TokenFiltersDescriptor : HasADictionary<string, ITokenFilter>, ITokenFilters
+	public class TokenFiltersDescriptor 
+		: HasADictionaryDescriptor<TokenFiltersDescriptor, ITokenFilters, string, ITokenFilter>, ITokenFilters
 	{
-		protected TokenFiltersDescriptor Assign(string name, ITokenFilter analyzer) =>
-			Fluent.Assign<TokenFiltersDescriptor, TokenFiltersDescriptor>(this, (a) => BackingDictionary.Add(name, analyzer));
-
+		//TODO Unknown()? discuss with @gmarz
 		public TokenFiltersDescriptor Add(string name, ITokenFilter analyzer) => Assign(name, analyzer);
-
 
 		/// <summary>
 		/// Token filters that allow to decompose compound words using a dictionary
@@ -129,12 +127,6 @@ namespace Nest
 			Assign(name, selector?.Invoke(new KeywordMarkerTokenFilterDescriptor()));
 
 		/// <summary>
-		/// The keyword_repeat token filter Emits each incoming token twice once as keyword and once as a non-keyword to allow an unstemmed version of a term to be indexed side by side with the stemmed version of the term.
-		/// </summary>
-		public TokenFiltersDescriptor KeywordRepeat(string name, Func<KeywordRepeatTokenFilterDescriptor, IKeywordRepeatTokenFilter> selector = null) =>
-			Assign(name, selector?.InvokeOrDefault(new KeywordRepeatTokenFilterDescriptor()));
-
-		/// <summary>
 		///The kstem token filter is a high performance filter for english. 
 		///<para> All terms must already be lowercased (use lowercase filter) for this filter to work correctly.</para>
 		/// </summary>
@@ -182,7 +174,7 @@ namespace Nest
 		/// A token filter of type porterStem that transforms the token stream as per the Porter stemming algorithm.
 		/// </summary>
 		public TokenFiltersDescriptor PorterStem(string name, Func<PorterStemTokenFilterDescriptor, IPorterStemTokenFilter> selector = null) =>
-			Assign(name, selector?.InvokeOrDefault(new PorterStemTokenFilterDescriptor()));
+			Assign(name, selector.InvokeOrDefault(new PorterStemTokenFilterDescriptor()));
 
 		/// <summary>
 		/// A token filter of type reverse that simply reverses the tokens.
@@ -200,7 +192,7 @@ namespace Nest
 		/// A token filter of type standard that normalizes tokens extracted with the Standard Tokenizer.
 		/// </summary>
 		public TokenFiltersDescriptor Standard(string name, Func<StandardTokenFilterDescriptor, IStandardTokenFilter> selector = null) =>
-			Assign(name, selector?.InvokeOrDefault(new StandardTokenFilterDescriptor()));
+			Assign(name, selector.InvokeOrDefault(new StandardTokenFilterDescriptor()));
 
 		/// <summary>
 		/// A filter that stems words (similar to snowball, but with more options).

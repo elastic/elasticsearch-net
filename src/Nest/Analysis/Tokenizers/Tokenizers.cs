@@ -19,11 +19,10 @@ namespace Nest
 		public void Add(string name, ITokenizer analyzer) => BackingDictionary.Add(name, analyzer);
 	}
 
-	public class TokenizersDescriptor : HasADictionary<string, ITokenizer>, ITokenizers
+	public class TokenizersDescriptor 
+		: HasADictionaryDescriptor<TokenizersDescriptor, ITokenizers, string, ITokenizer>, ITokenizers
 	{
-		protected TokenizersDescriptor Assign(string name, ITokenizer analyzer) =>
-			Fluent.Assign<TokenizersDescriptor, TokenizersDescriptor>(this, (a) => BackingDictionary.Add(name, analyzer));
-
+		//TODO Unknown()? discuss with @gmarz
 		public TokenizersDescriptor Add(string name, ITokenizer analyzer) => Assign(name, analyzer);
 		
 		/// <summary>
