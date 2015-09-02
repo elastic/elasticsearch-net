@@ -23,6 +23,6 @@ namespace Nest
 		public bool IgnoreMalformed { get; set; }
 		public bool Coerce { get; set; }
 
-		public override IElasticsearchProperty ToProperty() => new NumberProperty(this);
+		public override IProperty ToProperty() => new NumberProperty(this);
 	}
 }

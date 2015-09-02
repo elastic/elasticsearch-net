@@ -50,7 +50,7 @@ namespace Nest
 				}
 				if (mapping == null) continue;
 
-				var esType = mapping as IElasticsearchProperty;
+				var esType = mapping as IProperty;
 				if (esType != null)
 					esType.Name = name;
 

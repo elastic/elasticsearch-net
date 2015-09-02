@@ -7,7 +7,7 @@ using Newtonsoft.Json.Converters;
 namespace Nest
 {
 	[JsonObject(MemberSerialization.OptIn)]
-	public interface IGeoShapeProperty : IElasticsearchProperty
+	public interface IGeoShapeProperty : IProperty
 	{
 		[JsonProperty("tree")]
 		GeoTree? Tree { get; set; }
@@ -25,7 +25,7 @@ namespace Nest
 		double? DistanceErrorPercentage { get; set; }
 	}
 
-	public class GeoShapeProperty : ElasticsearchProperty, IGeoShapeProperty
+	public class GeoShapeProperty : Property, IGeoShapeProperty
 	{
 		public GeoShapeProperty() : base("geo_shape") { }
 		

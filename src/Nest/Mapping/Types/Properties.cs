@@ -7,36 +7,36 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonConverter(typeof(PropertiesJsonConverter))]
-	public interface IProperties : IHasADictionary<FieldName, IElasticsearchProperty>
+	public interface IProperties : IHasADictionary<FieldName, IProperty>
 	{
 		
 	}
 
-	public class Properties : IsADictionary<FieldName, IElasticsearchProperty>, IProperties
+	public class Properties : IsADictionary<FieldName, IProperty>, IProperties
 	{
-		IDictionary<FieldName, IElasticsearchProperty> IHasADictionary<FieldName, IElasticsearchProperty>.Dictionary => this.BackingDictionary;
+		IDictionary<FieldName, IProperty> IHasADictionary<FieldName, IProperty>.Dictionary => this.BackingDictionary;
 		public Properties() : base() { }
-		public Properties(IDictionary<FieldName, IElasticsearchProperty> container) : base(container) { }
+		public Properties(IDictionary<FieldName, IProperty> container) : base(container) { }
 		public Properties(IProperties properties) : base(properties?.Dictionary) { }
-		public Properties(Dictionary<FieldName, IElasticsearchProperty> container)
+		public Properties(Dictionary<FieldName, IProperty> container)
 			: base(container.Select(kv => kv).ToDictionary(kv => kv.Key, kv => kv.Value))
 		{ }
 
-		public void Add(FieldName field, IElasticsearchProperty property) => this.BackingDictionary.Add(field, property);
+		public void Add(FieldName field, IProperty property) => this.BackingDictionary.Add(field, property);
 	}
 
-	public class Properties<T> : IsADictionary<FieldName, IElasticsearchProperty>, IProperties
+	public class Properties<T> : IsADictionary<FieldName, IProperty>, IProperties
 	{
-		IDictionary<FieldName, IElasticsearchProperty> IHasADictionary<FieldName, IElasticsearchProperty>.Dictionary => this.BackingDictionary;
+		IDictionary<FieldName, IProperty> IHasADictionary<FieldName, IProperty>.Dictionary => this.BackingDictionary;
 		public Properties() : base() { }
-		public Properties(IDictionary<FieldName, IElasticsearchProperty> container) : base(container) { }
+		public Properties(IDictionary<FieldName, IProperty> container) : base(container) { }
 		public Properties(IProperties properties) : base(properties?.Dictionary) { }
-		public Properties(Dictionary<FieldName, IElasticsearchProperty> container)
+		public Properties(Dictionary<FieldName, IProperty> container)
 			: base(container.Select(kv => kv).ToDictionary(kv => kv.Key, kv => kv.Value))
 		{ }
 
-		public void Add(FieldName field, IElasticsearchProperty property) => this.BackingDictionary.Add(field, property);
-		public void Add(Expression<Func<T, object>> field, IElasticsearchProperty property) => this.BackingDictionary.Add(field, property);
+		public void Add(FieldName field, IProperty property) => this.BackingDictionary.Add(field, property);
+		public void Add(Expression<Func<T, object>> field, IProperty property) => this.BackingDictionary.Add(field, property);
 	}
 
 	public interface IPropertiesDescriptor<T, TReturnType>
@@ -62,7 +62,7 @@ namespace Nest
 	}
 
 	public class PropertiesDescriptor<T> 
-		: HasADictionaryDescriptor<PropertiesDescriptor<T>, IProperties, FieldName, IElasticsearchProperty>, IPropertiesDescriptor<T, PropertiesDescriptor<T>>, IProperties
+		: HasADictionaryDescriptor<PropertiesDescriptor<T>, IProperties, FieldName, IProperty>, IPropertiesDescriptor<T, PropertiesDescriptor<T>>, IProperties
 		where T : class
 	{
 		public PropertiesDescriptor() : base() { }
@@ -98,11 +98,11 @@ namespace Nest
 
 		public PropertiesDescriptor<T> Murmur3Hash(Func<Murmur3HashPropertyDescriptor<T>, IMurmur3HashProperty> selector) => SetProperty(selector);
 
-		public PropertiesDescriptor<T> Custom(IElasticsearchProperty customType) => SetProperty(customType);
+		public PropertiesDescriptor<T> Custom(IProperty customType) => SetProperty(customType);
 
 		private PropertiesDescriptor<T> SetProperty<TDescriptor, TInterface>(Func<TDescriptor, TInterface> selector)
 			where TDescriptor : class, TInterface, new()
-			where TInterface : IElasticsearchProperty
+			where TInterface : IProperty
 		{
 			selector.ThrowIfNull(nameof(selector));
 			var type = selector(new TDescriptor());
@@ -110,7 +110,7 @@ namespace Nest
 			return this;
 		}
 
-		private PropertiesDescriptor<T> SetProperty(IElasticsearchProperty type)
+		private PropertiesDescriptor<T> SetProperty(IProperty type)
 		{
 			type.ThrowIfNull(nameof(type));
 			var typeName = type.GetType().Name;

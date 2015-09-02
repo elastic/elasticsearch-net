@@ -9,6 +9,6 @@ namespace Nest
 		public int TreeLevels { get; set; }
 		public double DistanceErrorPercentage { get; set; }
 
-		public override IElasticsearchProperty ToProperty() => new GeoShapeProperty(this);
+		public override IProperty ToProperty() => new GeoShapeProperty(this);
 	}
 }

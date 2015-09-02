@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using Nest.Resolvers;
+using System.Linq.Expressions;
 
 namespace Nest
 {
@@ -13,17 +14,33 @@ namespace Nest
 		{
 			return typeof(T);
 		}
+
 		public static IndexName Index(Type t)
 		{
 			return t;
 		}
+
 		public static TypeName Type<T>()
 		{
 			return typeof(T);
 		}
+
 		public static TypeName Type(Type t)
 		{
 			return t;
+		}
+
+		/// <summary>
+		/// Create a strongly typed string field name representation of the path to a property
+		/// <para>i.e p => p.Arrary.First().SubProperty.Field will return 'array.subProperty.field'</para>
+		/// </summary>
+		/// <typeparam name="T">The type of the object</typeparam>
+		/// <param name="path">The path we want to specify</param>
+		/// <param name="boost">An optional ^boost postfix, only make sense with certain queries</param>
+		public static FieldName Field<T>(Expression<Func<T, object>> path, double? boost = null) 
+			where T : class
+		{
+			return FieldName.Create(path, boost);
 		}
 	}
 

@@ -7,6 +7,6 @@ namespace Nest
 		public bool IncludeInParent { get; set; }
 		public bool IncludeInRoot { get; set; }
 
-		public override IElasticsearchProperty ToProperty() => new NestedProperty(this);
+		public override IProperty ToProperty() => new NestedProperty(this);
 	}
 }

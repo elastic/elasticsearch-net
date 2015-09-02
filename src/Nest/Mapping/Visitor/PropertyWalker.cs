@@ -54,37 +54,36 @@ namespace Nest
 			return properties;
 		}
 
-		private IElasticsearchProperty GetProperty(PropertyInfo propertyInfo, ElasticsearchPropertyAttribute attribute)
+		private IProperty GetProperty(PropertyInfo propertyInfo, ElasticsearchPropertyAttribute attribute)
 		{
-			var elasticType = GetElasticType(propertyInfo, attribute);
-			var objectType = elasticType as IObjectProperty;
-			if (objectType != null)
+			var property = _visitor.Visit(propertyInfo, attribute);
+			if (property != null)
+				return property;
+
+			if (propertyInfo.GetGetMethod().IsStatic)
+				return null;
+
+			if (attribute != null)
+				property = attribute.ToProperty();
+
+			property = InferProperty(propertyInfo.PropertyType);
+
+			var objectProperty = property as IObjectProperty;
+			if (objectProperty != null)
 			{
 				var type = GetUnderlyingType(propertyInfo.PropertyType);
 				var seenTypes = new ConcurrentDictionary<Type, int>(_seenTypes);
 				seenTypes.AddOrUpdate(type, 0, (t, i) => ++i);
 				var walker = new PropertyWalker(type, _visitor, _maxRecursion, seenTypes);
-				objectType.Properties = walker.GetProperties(seenTypes, _maxRecursion);
+				objectProperty.Properties = walker.GetProperties(seenTypes, _maxRecursion);
 			}
-			_visitor.Visit(elasticType, propertyInfo, attribute);
-			return elasticType;	
+
+			_visitor.Visit(property, propertyInfo, attribute);
+
+			return property;
 		}
 
-		private IElasticsearchProperty GetElasticType(PropertyInfo propertyInfo, ElasticsearchPropertyAttribute attribute)
-		{
-			var elasticType = _visitor.Visit(propertyInfo, attribute);
-			if (elasticType != null)
-				return elasticType;
-
-			if (propertyInfo.GetGetMethod().IsStatic)
-				return null;
-
-			return (attribute != null) 
-				? attribute.ToProperty() 
-				: InferElasticType(propertyInfo.PropertyType);
-		}
-
-		private IElasticsearchProperty InferElasticType(Type type)
+		private IProperty InferProperty(Type type)
 		{
 			type = GetUnderlyingType(type);
 

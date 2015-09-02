@@ -64,9 +64,9 @@ namespace Nest
 		{
 		}
 
-		public virtual IElasticsearchProperty Visit(PropertyInfo propertyInfo, ElasticsearchPropertyAttribute attribute) => null;
+		public virtual IProperty Visit(PropertyInfo propertyInfo, ElasticsearchPropertyAttribute attribute) => null;
 
-		public void Visit(IElasticsearchProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttribute attribute)
+		public void Visit(IProperty type, PropertyInfo propertyInfo, ElasticsearchPropertyAttribute attribute)
 		{
 			var nestedType = type as INestedProperty;
 			if (nestedType != null)

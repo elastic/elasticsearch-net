@@ -534,7 +534,6 @@
     <Compile Include="CommonAbstractions\ForAttribute.cs" />
     <Compile Include="CommonAbstractions\RawJson\ICustomJson.cs" />
     <Compile Include="CommonAbstractions\Fields\FluentFieldList.cs" />
-    <Compile Include="CommonAbstractions\Infer\FieldName\Field.cs" />
     <Compile Include="Modules\SnapshotAndRestore\Snapshot\Snapshot.cs" />
     <Compile Include="Modules\SnapshotAndRestore\Restore\SnapshotRestore.cs" />
     <Compile Include="Cluster\ClusterSettings\ClusterPutSettings\ClusterPutSettingsResponse.cs" />
@@ -958,7 +957,7 @@
     <Compile Include="Indices\IndexSettings\GetIndexSettings\ElasticClient-GetIndexSettings.cs" />
     <Compile Include="Indices\StatusManagement\ClearCache\ElasticClient-ClearCache.cs" />
     <Compile Include="Indices\Analyze\AnalyzeToken.cs" />
-    <Compile Include="Mapping\Types\ElasticsearchProperty.cs" />
+    <Compile Include="Mapping\Types\Property.cs" />
     <Compile Include="Mapping\Fields\Id\IdField.cs" />
     <Compile Include="Indices\Analyze\AnalyzeResponse.cs" />
     <Compile Include="Search\Count\CountResponse.cs" />

@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 namespace Nest
 {
 	[JsonObject(MemberSerialization.OptIn)]
-	public interface IGeoPointProperty : IElasticsearchProperty
+	public interface IGeoPointProperty : IProperty
 	{
 		[JsonProperty("lat_lon")]
 		bool? LatLon { get; set; }
@@ -45,7 +45,7 @@ namespace Nest
 		IGeoPointFielddata Fielddata { get; set; }
 	}
 
-	public class GeoPointProperty : ElasticsearchProperty, IGeoPointProperty
+	public class GeoPointProperty : Property, IGeoPointProperty
 	{
 		public GeoPointProperty() : base("geo_point") { }
 		internal GeoPointProperty(GeoPointAttribute attribute) 

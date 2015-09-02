@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 namespace Nest
 {
 	[JsonObject(MemberSerialization.OptIn)]
-	public interface IObjectProperty : IElasticsearchProperty
+	public interface IObjectProperty : IProperty
 	{
 		[JsonProperty("dynamic")]
 		DynamicMapping? Dynamic { get; set; }
@@ -24,7 +24,7 @@ namespace Nest
 		IProperties Properties { get; set; }
 	}
 
-	public class ObjectProperty : ElasticsearchProperty, IObjectProperty
+	public class ObjectProperty : Property, IObjectProperty
 	{
 		public ObjectProperty() : base("object") { }
 

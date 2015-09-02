@@ -7,7 +7,7 @@ using Newtonsoft.Json.Converters;
 namespace Nest
 {
 	[JsonObject(MemberSerialization.OptIn)]
-	public interface IDateProperty : IElasticsearchProperty
+	public interface IDateProperty : IProperty
 	{
 		[JsonProperty("index")]
 		NonStringIndexOption? Index { get; set; }
@@ -37,7 +37,7 @@ namespace Nest
 		INumericFielddata Fielddata { get; set; }
 	}
 
-	public class DateProperty : ElasticsearchProperty, IDateProperty
+	public class DateProperty : Property, IDateProperty
 	{
 		public DateProperty() : base("date") { }
 
