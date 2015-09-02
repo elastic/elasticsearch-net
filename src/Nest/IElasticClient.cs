@@ -6,7 +6,7 @@ using Elasticsearch.Net.Serialization;
 
 namespace Nest
 {
-	public interface IElasticClient
+	public partial interface IElasticClient
 	{
 		IElasticsearchSerializer Serializer { get; }
 		IElasticsearchClient Raw { get; }
@@ -23,32 +23,6 @@ namespace Nest
 		/// </summary>
 		/// <returns>An IObservable you can subscribe to to listen to the progress of the reindexation process</returns>
 		IObservable<IReindexResponse<T>> Reindex<T>(Func<ReindexDescriptor<T>, ReindexDescriptor<T>> reindexSelector)
-			where T : class;
-
-		/// <summary>
-		/// A search request can be scrolled by specifying the scroll parameter. 
-		/// <para>The scroll parameter is a time value parameter (for example: scroll=5m), 
-		/// indicating for how long the nodes that participate in the search will maintain relevant resources in
-		/// order to continue and support it.</para><para> 
-		/// This is very similar in its idea to opening a cursor against a database.</para>
-		/// <para> </para><para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-request-scroll.html</para>
-		/// </summary>
-		/// <typeparam name="T">The type that represents the result hits</typeparam>
-		/// <param name="scrollRequest">A descriptor that describes the scroll operation</param>
-		/// <returns>A query response holding T hits as well as the ScrollId for the next scroll operation</returns>
-		ISearchResponse<T> Scroll<T>(IScrollRequest scrollRequest)
-			where T : class;
-
-		///<inheritdoc/>
-		ISearchResponse<T> Scroll<T>(Func<ScrollDescriptor<T>, ScrollDescriptor<T>> scrollSelector)
-			where T : class;
-
-		///<inheritdoc/>
-		Task<ISearchResponse<T>> ScrollAsync<T>(IScrollRequest scrollRequest)
-			where T : class;
-
-		///<inheritdoc/>
-		Task<ISearchResponse<T>> ScrollAsync<T>(Func<ScrollDescriptor<T>, ScrollDescriptor<T>> scrollSelector)
 			where T : class;
 
 		/// <summary>
@@ -111,25 +85,6 @@ namespace Nest
 
 		/// <inheritdoc/>
 		Task<IAcknowledgedResponse> UpdateIndexSettingsAsync(IUpdateSettingsRequest updateSettingsRequest);
-
-		/// <summary>
-		/// The validate API allows a user to validate a potentially expensive query without executing it.
-		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-validate.html
-		/// </summary>
-		/// <typeparam name="T">The type used to describe the query</typeparam>
-		/// <param name="querySelector">A descriptor that describes the query operation</param>
-		IValidateResponse Validate<T>(Func<ValidateQueryDescriptor<T>, ValidateQueryDescriptor<T>> querySelector)
-			where T : class;
-
-		/// <inheritdoc/>
-		IValidateResponse Validate(IValidateQueryRequest validateQueryRequest);
-
-		/// <inheritdoc/>
-		Task<IValidateResponse> ValidateAsync<T>(Func<ValidateQueryDescriptor<T>, ValidateQueryDescriptor<T>> querySelector)
-			where T : class;
-
-		/// <inheritdoc/>
-		Task<IValidateResponse> ValidateAsync(IValidateQueryRequest validateQueryRequest);
 
 		/// <summary>
 		/// The open and close index APIs allow to close an index, and later on opening it. 
@@ -326,79 +281,6 @@ namespace Nest
 		/// <inheritdoc/>
 		Task<IIndicesOperationResponse> DeleteTemplateAsync(IDeleteTemplateRequest deleteTemplateRequest);
 
-		/// <summary>
-		/// Unregister a percolator
-		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-percolate.html
-		/// </summary>
-		/// <param name="name">The name for the percolator</param>
-		/// <param name="selector">An optional descriptor describing the unregister percolator operation further</param>
-		IUnregisterPercolateResponse UnregisterPercolator<T>(string name, Func<UnregisterPercolatorDescriptor<T>, UnregisterPercolatorDescriptor<T>> selector = null)
-			where T : class;
-
-		/// <inheritdoc/>
-		IUnregisterPercolateResponse UnregisterPercolator(IUnregisterPercolatorRequest unregisterPercolatorRequest);
-
-		/// <inheritdoc/>
-		Task<IUnregisterPercolateResponse> UnregisterPercolatorAsync<T>(string name, Func<UnregisterPercolatorDescriptor<T>, UnregisterPercolatorDescriptor<T>> selector = null)
-			where T : class;
-
-		/// <inheritdoc/>
-		Task<IUnregisterPercolateResponse> UnregisterPercolatorAsync(IUnregisterPercolatorRequest unregisterPercolatorRequest);
-
-		/// <summary>
-		/// Register a percolator
-		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-percolate.html
-		/// </summary>
-		/// <typeparam name="T">The type to infer the index/type from, will also be used to strongly type the query</typeparam>
-		/// <param name="name">The name for the percolator</param>
-		/// <param name="percolatorSelector">An optional descriptor describing the register percolator operation further</param>
-		IRegisterPercolateResponse RegisterPercolator<T>(string name, Func<RegisterPercolatorDescriptor<T>, RegisterPercolatorDescriptor<T>> percolatorSelector)
-			where T : class;
-
-		/// <inheritdoc/>
-		IRegisterPercolateResponse RegisterPercolator(IRegisterPercolatorRequest registerPercolatorRequest);
-
-		/// <inheritdoc/>
-		Task<IRegisterPercolateResponse> RegisterPercolatorAsync<T>(string name, Func<RegisterPercolatorDescriptor<T>, RegisterPercolatorDescriptor<T>> percolatorSelector)
-			where T : class;
-
-		/// <inheritdoc/>
-		Task<IRegisterPercolateResponse> RegisterPercolatorAsync(IRegisterPercolatorRequest registerPercolatorRequest);
-
-		/// <summary>
-		/// Percolate a document
-		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-percolate.html
-		/// </summary>
-		/// <typeparam name="T">The type to infer the index/type from, and of the object that is being percolated</typeparam>
-		/// <param name="percolateSelector">An optional descriptor describing the percolate operation further</param>
-		IPercolateResponse Percolate<T>(Func<PercolateDescriptor<T>, PercolateDescriptor<T>> percolateSelector)
-			where T : class;
-
-		/// <inheritdoc/>
-		IPercolateResponse Percolate<T>(IPercolateRequest<T> percolateRequest)
-			where T : class;
-
-		/// <inheritdoc/>
-		Task<IPercolateResponse> PercolateAsync<T>(Func<PercolateDescriptor<T>, PercolateDescriptor<T>> percolateSelector)
-			where T : class;
-
-		/// <inheritdoc/>
-		Task<IPercolateResponse> PercolateAsync<T>(IPercolateRequest<T> percolateRequest)
-			where T : class;
-
-		IPercolateCountResponse PercolateCount<T>(Func<PercolateCountDescriptor<T>, PercolateCountDescriptor<T>> percolateSelector)
-			where T : class;
-
-		/// <inheritdoc/>
-		IPercolateCountResponse PercolateCount<T>(IPercolateCountRequest<T> percolateCountRequest)
-			where T : class;
-
-		Task<IPercolateCountResponse> PercolateCountAsync<T>(Func<PercolateCountDescriptor<T>, PercolateCountDescriptor<T>> percolateSelector = null)
-			where T : class;
-
-		/// <inheritdoc/>
-		Task<IPercolateCountResponse> PercolateCountAsync<T>(IPercolateCountRequest<T> percolateCountRequest)
-			where T : class;
 
 		/// <summary>
 		/// The put mapping API allows to register specific mapping definition for a specific type.
@@ -620,22 +502,6 @@ namespace Nest
 		Task<INodesHotThreadsResponse> NodesHotThreadsAsync(INodesHotThreadsRequest nodesHotThreadsRequest);
 
 		/// <summary>
-		/// Used to check if the index (indices) exists or not. 
-		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-exists.html
-		/// </summary>
-		/// <param name="selector">A descriptor that describes the index exist operation</param>
-		IExistsResponse IndexExists(Func<IndexExistsDescriptor, IndexExistsDescriptor> selector);
-
-		/// <inheritdoc/>
-		IExistsResponse IndexExists(IIndexExistsRequest indexExistsRequest);
-
-		/// <inheritdoc/>
-		Task<IExistsResponse> IndexExistsAsync(Func<IndexExistsDescriptor, IndexExistsDescriptor> selector);
-
-		/// <inheritdoc/>
-		Task<IExistsResponse> IndexExistsAsync(IIndexExistsRequest indexExistsRequest);
-
-		/// <summary>
 		/// The cluster health API allows to get a very simple status on the health of the cluster.
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/cluster-health.html
 		/// </summary>
@@ -700,48 +566,6 @@ namespace Nest
 		/// <inheritdoc/>
 		Task<IAnalyzeResponse> AnalyzeAsync(IAnalyzeRequest analyzeRequest);
 
-		/// <summary>
-		/// The search API allows to execute a search query and get back search hits that match the query.
-		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-search.html
-		/// </summary>
-		/// <typeparam name="T">The type used to infer the index and typename as well describe the query strongly typed</typeparam>
-		/// <param name="searchSelector">A descriptor that describes the parameters for the search operation</param>
-		ISearchResponse<T> Search<T>(Func<SearchDescriptor<T>, ISearchRequest> searchSelector)
-			where T : class;
-
-		/// <inheritdoc/>
-		ISearchResponse<T> Search<T>(ISearchRequest request)
-			where T : class;
-
-		/// <inheritdoc/>
-		ISearchResponse<TResult> Search<T, TResult>(Func<SearchDescriptor<T>, ISearchRequest> searchSelector)
-			where T : class
-			where TResult : class;
-
-		/// <inheritdoc/>
-		ISearchResponse<TResult> Search<T, TResult>(ISearchRequest request)
-			where T : class
-			where TResult : class;
-
-		/// <inheritdoc/>
-		/// <typeparam name="T">The type used to infer the index and typename as well describe the query strongly typed</typeparam>
-		/// <param name="searchSelector">A descriptor that describes the parameters for the search operation</param>
-		Task<ISearchResponse<T>> SearchAsync<T>(Func<SearchDescriptor<T>, ISearchRequest> searchSelector)
-			where T : class;
-
-		/// <inheritdoc/>
-		Task<ISearchResponse<T>> SearchAsync<T>(ISearchRequest request)
-			where T : class;
-
-		/// <inheritdoc/>
-		Task<ISearchResponse<TResult>> SearchAsync<T, TResult>(Func<SearchDescriptor<T>, ISearchRequest> searchSelector)
-			where T : class
-			where TResult : class;
-
-		/// <inheritdoc/>
-		Task<ISearchResponse<TResult>> SearchAsync<T, TResult>(ISearchRequest request)
-			where T : class
-			where TResult : class;
 
 		/// <summary>
 		/// The /_search/template endpoint allows to use the mustache language to pre render search 
@@ -785,80 +609,7 @@ namespace Nest
 			where T : class
 			where TResult : class;
 
-		/// <inheritdoc/>
-		IGetSearchTemplateResponse GetSearchTemplate(string name, Func<GetSearchTemplateDescriptor, GetSearchTemplateDescriptor> selector = null);
 
-		/// <inheritdoc/>
-		IGetSearchTemplateResponse GetSearchTemplate(IGetSearchTemplateRequest request);
-
-		/// <inheritdoc/>
-		Task<IGetSearchTemplateResponse> GetSearchTemplateAsync(string name, Func<GetSearchTemplateDescriptor, GetSearchTemplateDescriptor> selector = null);
-
-		/// <inheritdoc/>
-		Task<IGetSearchTemplateResponse> GetSearchTemplateAsync(IGetSearchTemplateRequest request);
-
-		/// <inheritdoc/>
-		IPutSearchTemplateResponse PutSearchTemplate(string name, Func<PutSearchTemplateDescriptor, PutSearchTemplateDescriptor> selector = null);
-
-		/// <inheritdoc/>
-		IPutSearchTemplateResponse PutSearchTemplate(IPutSearchTemplateRequest request);
-
-		/// <inheritdoc/>
-		Task<IPutSearchTemplateResponse> PutSearchTemplateAsync(string name, Func<PutSearchTemplateDescriptor, PutSearchTemplateDescriptor> selector = null);
-
-		/// <inheritdoc/>
-		Task<IPutSearchTemplateResponse> PutSearchTemplateAsync(IPutSearchTemplateRequest request);
-
-		/// <inheritdoc/>
-		IDeleteSearchTemplateResponse DeleteSearchTemplate(string name, Func<DeleteSearchTemplateDescriptor, DeleteSearchTemplateDescriptor> selector = null);
-
-		/// <inheritdoc/>
-		IDeleteSearchTemplateResponse DeleteSearchTemplate(IDeleteSearchTemplateRequest request);
-
-		/// <inheritdoc/>
-		Task<IDeleteSearchTemplateResponse> DeleteSearchTemplateAsync(string name, Func<DeleteSearchTemplateDescriptor, DeleteSearchTemplateDescriptor> selector = null);
-
-		/// <inheritdoc/>
-		Task<IDeleteSearchTemplateResponse> DeleteSearchTemplateAsync(IDeleteSearchTemplateRequest request);
-
-		/// <summary>
-		/// The multi search API allows to execute several search requests within the same API.
-		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-multi-search.html
-		/// </summary>
-		/// <param name="multiSearchSelector">A descriptor that describes the search operations on the multi search api</param>
-		IMultiSearchResponse MultiSearch(Func<MultiSearchDescriptor, MultiSearchDescriptor> multiSearchSelector);
-
-		/// <inheritdoc/>
-		IMultiSearchResponse MultiSearch(IMultiSearchRequest multiSearchRequest);
-
-		/// <inheritdoc/>
-		Task<IMultiSearchResponse> MultiSearchAsync(Func<MultiSearchDescriptor, MultiSearchDescriptor> multiSearchSelector);
-
-		/// <inheritdoc/>
-		Task<IMultiSearchResponse> MultiSearchAsync(IMultiSearchRequest multiSearchRequest);
-
-		/// <summary>
-		/// The count API allows to easily execute a query and get the number of matches for that query. 
-		/// It can be executed across one or more indices and across one or more types. 
-		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-count.html
-		/// </summary>
-		/// <typeparam name="T">The type used to infer the default index and typename as well as describe the strongly
-		///  typed parts of the query</typeparam>
-		/// <param name="countSelector">An optional descriptor to further describe the count operation</param>
-		ICountResponse Count<T>(Func<CountDescriptor<T>, CountDescriptor<T>> countSelector = null)
-			where T : class;
-
-		/// <inheritdoc/>
-		ICountResponse Count<T>(ICountRequest countRequest)
-			where T : class;
-
-		/// <inheritdoc/>
-		Task<ICountResponse> CountAsync<T>(Func<CountDescriptor<T>, CountDescriptor<T>> countSelector = null)
-			where T : class;
-
-		/// <inheritdoc/>
-		Task<ICountResponse> CountAsync<T>(ICountRequest countRequest)
-			where T : class;
 
 		/// <summary>
 		/// The delete by query API allows to delete documents from one or more indices and one or more types based on a query.
@@ -1143,41 +894,7 @@ namespace Nest
 		/// <inheritdoc/>
 		Task<IMultiTermVectorResponse> MultiTermVectorsAsync(IMultiTermVectorsRequest multiTermVectorsRequest);
 
-		/// <summary>
-		/// The suggest feature suggests similar looking terms based on a provided text by using a suggester. 
-		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-suggesters.html
-		/// </summary>
-		/// <typeparam name="T">The type used to strongly type parts of the suggest operation</typeparam>
-		/// <param name="selector">The suggesters to use this operation (can be multiple)</param>
-		ISuggestResponse Suggest<T>(Func<SuggestDescriptor<T>, SuggestDescriptor<T>> selector)
-			where T : class;
 
-		/// <inheritdoc/>
-		ISuggestResponse Suggest(ISuggestRequest suggestRequest);
-
-		/// <inheritdoc/>
-		Task<ISuggestResponse> SuggestAsync<T>(Func<SuggestDescriptor<T>, SuggestDescriptor<T>> selector)
-			where T : class;
-
-		/// <inheritdoc/>
-		Task<ISuggestResponse> SuggestAsync(ISuggestRequest suggestRequest);
-
-
-		/// <summary>
-		/// Deletes a registered scroll request on the cluster 
-		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-request-scroll.html
-		/// </summary>
-		/// <param name="clearScrollSelector">Specify the scroll id as well as request specific configuration</param>
-		IEmptyResponse ClearScroll(Func<ClearScrollDescriptor, ClearScrollDescriptor> clearScrollSelector);
-
-		/// <inheritdoc/>
-		IEmptyResponse ClearScroll(IClearScrollRequest clearScrollRequest);
-
-		/// <inheritdoc/>
-		Task<IEmptyResponse> ClearScrollAsync(Func<ClearScrollDescriptor, ClearScrollDescriptor> clearScrollSelector);
-
-		/// <inheritdoc/>
-		Task<IEmptyResponse> ClearScrollAsync(IClearScrollRequest clearScrollRequest);
 
 		/// <summary>
 		/// Check if a document exists without returning its contents
@@ -1231,84 +948,6 @@ namespace Nest
 
 		/// <inheritdoc/>
 		Task<IAcknowledgedResponse> DeleteRepositoryAsync(IDeleteRepositoryRequest deleteRepositoryRequest);
-
-		/// <summary>
-		/// A repository can contain multiple snapshots of the same cluster. Snapshot are identified by unique names within the cluster.
-		/// /// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-snapshots.html#_snapshot
-		/// </summary>
-		/// <param name="repository">The name of the repository we want to create a snapshot in</param>
-		/// <param name="snapshotName">The name of the snapshot</param>
-		/// <param name="selector">Optionally provide more details about the snapshot operation</param>
-		ISnapshotResponse Snapshot(string repository, string snapshotName, Func<SnapshotDescriptor, SnapshotDescriptor> selector = null);
-
-		/// <inheritdoc/>
-		ISnapshotResponse Snapshot(ISnapshotRequest snapshotRequest);
-
-		/// <inheritdoc/>
-		Task<ISnapshotResponse> SnapshotAsync(string repository, string snapshotName, Func<SnapshotDescriptor, SnapshotDescriptor> selector = null);
-
-		/// <inheritdoc/>
-		Task<ISnapshotResponse> SnapshotAsync(ISnapshotRequest snapshotRequest);
-
-		/// <inheritdoc/>
-		IObservable<ISnapshotStatusResponse> SnapshotObservable(TimeSpan interval, Func<SnapshotDescriptor, SnapshotDescriptor> snapshotSelector = null);
-
-		/// <inheritdoc/>
-		IObservable<ISnapshotStatusResponse> SnapshotObservable(TimeSpan interval, ISnapshotRequest snapshotRequest);
-
-		/// <summary>
-		/// Delete a snapshot
-		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-snapshots.html#_snapshot
-		/// </summary>
-		/// <param name="repository">The repository name under which the snapshot we want to delete lives</param>
-		/// <param name="snapshotName">The name of the snapshot that we want to delete</param>
-		/// <param name="selector">Optionally further describe the delete snapshot operation</param>
-		IAcknowledgedResponse DeleteSnapshot(string repository, string snapshotName, Func<DeleteSnapshotDescriptor, DeleteSnapshotDescriptor> selector = null);
-
-		/// <inheritdoc/>
-		IAcknowledgedResponse DeleteSnapshot(IDeleteSnapshotRequest deleteSnapshotRequest);
-
-		/// <inheritdoc/>
-		Task<IAcknowledgedResponse> DeleteSnapshotAsync(string repository, string snapshotName, Func<DeleteSnapshotDescriptor, DeleteSnapshotDescriptor> selector = null);
-
-		/// <inheritdoc/>
-		Task<IAcknowledgedResponse> DeleteSnapshotAsync(IDeleteSnapshotRequest deleteSnapshotRequest);
-
-		/// <summary>
-		/// Gets information about one or more snapshots
-		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-snapshots.html#_snapshot
-		/// </summary>
-		/// <param name="repository">The repository name under which the snapshots live</param>
-		/// <param name="snapshotName">The names of the snapshots we want information from (can be _all or wildcards)</param>
-		/// <param name="selector">Optionally further describe the get snapshot operation</param>
-		IGetSnapshotResponse GetSnapshot(string repository, string snapshotName, Func<GetSnapshotDescriptor, GetSnapshotDescriptor> selector = null);
-
-		/// <inheritdoc/>
-		IGetSnapshotResponse GetSnapshot(IGetSnapshotRequest getSnapshotRequest);
-
-		/// <inheritdoc/>
-		Task<IGetSnapshotResponse> GetSnapshotAsync(string repository, string snapshotName, Func<GetSnapshotDescriptor, GetSnapshotDescriptor> selector = null);
-
-		/// <inheritdoc/>
-		Task<IGetSnapshotResponse> GetSnapshotAsync(IGetSnapshotRequest getSnapshotRequest);
-
-		/// <summary>
-		/// Restore a snapshot
-		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-snapshots.html#_restore
-		/// </summary>
-		/// <param name="repository">The repository name that holds our snapshot</param>
-		/// <param name="snapshotName">The name of the snapshot that we want to restore</param>
-		/// <param name="selector">Optionally further describe the restore operation</param>
-		IRestoreResponse Restore(string repository, string snapshotName, Func<RestoreDescriptor, RestoreDescriptor> selector = null);
-
-		/// <inheritdoc/>
-		IRestoreResponse Restore(IRestoreRequest restoreRequest);
-
-		/// <inheritdoc/>
-		Task<IRestoreResponse> RestoreAsync(string repository, string snapshotName, Func<RestoreDescriptor, RestoreDescriptor> selector = null);
-
-		/// <inheritdoc/>
-		Task<IRestoreResponse> RestoreAsync(IRestoreRequest restoreRequest);
 
 		/// <inheritdoc/>
 		IObservable<IRecoveryStatusResponse> RestoreObservable(TimeSpan interval, Func<RestoreDescriptor, RestoreDescriptor> selector = null);
@@ -1387,34 +1026,6 @@ namespace Nest
 		Task<IExistsResponse> TypeExistsAsync(ITypeExistsRequest TypeRequest);
 
 		/// <inheritdoc/>
-		IExplainResponse<T> Explain<T>(Func<ExplainDescriptor<T>, ExplainDescriptor<T>> querySelector)
-			where T : class;
-
-		/// <inheritdoc/>
-		IExplainResponse<T> Explain<T>(IExplainRequest explainRequest)
-			where T : class;
-
-		/// <inheritdoc/>
-		Task<IExplainResponse<T>> ExplainAsync<T>(Func<ExplainDescriptor<T>, ExplainDescriptor<T>> querySelector)
-			where T : class;
-
-		/// <inheritdoc/>
-		Task<IExplainResponse<T>> ExplainAsync<T>(IExplainRequest explainRequest)
-			where T : class;
-
-		/// <inheritdoc/>
-		IMultiPercolateResponse MultiPercolate(Func<MultiPercolateDescriptor, MultiPercolateDescriptor> multiPercolateSelector);
-
-		/// <inheritdoc/>
-		IMultiPercolateResponse MultiPercolate(IMultiPercolateRequest multiRequest);
-
-		/// <inheritdoc/>
-		Task<IMultiPercolateResponse> MultiPercolateAsync(Func<MultiPercolateDescriptor, MultiPercolateDescriptor> multiPercolateSelector);
-
-		/// <inheritdoc/>
-		Task<IMultiPercolateResponse> MultiPercolateAsync(IMultiPercolateRequest multiPercolateRequest);
-
-		/// <inheritdoc/>
 		IGetFieldMappingResponse GetFieldMapping<T>(Func<GetFieldMappingDescriptor<T>, GetFieldMappingDescriptor<T>> selector = null)
 			where T : class;
 
@@ -1455,17 +1066,6 @@ namespace Nest
 		Task<IPingResponse> PingAsync(IPingRequest pingRequest);
 
 		/// <inheritdoc/>
-		ISearchShardsResponse SearchShards<T>(Func<SearchShardsDescriptor<T>, SearchShardsDescriptor<T>> searchSelector) where T : class;
-
-		ISearchShardsResponse SearchShards(ISearchShardsRequest request);
-
-		/// <inheritdoc/>
-		Task<ISearchShardsResponse> SearchShardsAsync<T>(Func<SearchShardsDescriptor<T>, SearchShardsDescriptor<T>> searchSelector)
-			where T : class;
-
-		Task<ISearchShardsResponse> SearchShardsAsync(ISearchShardsRequest request);
-
-		/// <inheritdoc/>
 		IGetRepositoryResponse GetRepository(Func<GetRepositoryDescriptor, GetRepositoryDescriptor> selector);
 
 		/// <inheritdoc/>
@@ -1476,17 +1076,6 @@ namespace Nest
 
 		/// <inheritdoc/>
 		Task<IGetRepositoryResponse> GetRepositoryAsync(IGetRepositoryRequest request);
-
-		ISnapshotStatusResponse SnapshotStatus(Func<SnapshotStatusDescriptor, SnapshotStatusDescriptor> selector = null);
-
-		/// <inheritdoc/>
-		ISnapshotStatusResponse SnapshotStatus(ISnapshotStatusRequest getSnapshotRequest);
-
-		/// <inheritdoc/>
-		Task<ISnapshotStatusResponse> SnapshotStatusAsync(Func<SnapshotStatusDescriptor, SnapshotStatusDescriptor> selector = null);
-
-		/// <inheritdoc/>
-		Task<ISnapshotStatusResponse> SnapshotStatusAsync(ISnapshotStatusRequest getSnapshotRequest);
 
 		IRecoveryStatusResponse RecoveryStatus(Func<RecoveryStatusDescriptor, RecoveryStatusDescriptor> selector = null);
 
@@ -1528,20 +1117,6 @@ namespace Nest
 
 		/// <inheritdoc/>
 		Task<IGetIndexResponse> GetIndexAsync(IGetIndexRequest createIndexRequest);
-
-		/// <inheritdoc/>
-		IExistsResponse SearchExists<T>(Func<SearchExistsDescriptor<T>, SearchExistsDescriptor<T>> selector)
-			where T : class;
-
-		/// <inheritdoc/>
-		IExistsResponse SearchExists(ISearchExistsRequest indexRequest);
-
-		/// <inheritdoc/>
-		Task<IExistsResponse> SearchExistsAsync<T>(Func<SearchExistsDescriptor<T>, SearchExistsDescriptor<T>> selector)
-			where T : class;
-
-		/// <inheritdoc/>
-		Task<IExistsResponse> SearchExistsAsync(ISearchExistsRequest indexRequest);
 
 		/// <inheritdoc/>
 		IVerifyRepositoryResponse VerifyRepository(string name, Func<VerifyRepositoryDescriptor, VerifyRepositoryDescriptor> selector = null);
@@ -1676,10 +1251,5 @@ namespace Nest
 		Task<ICatResponse<CatSegmentsRecord>> CatSegmentsAsync(Func<CatSegmentsDescriptor, CatSegmentsDescriptor> selector = null);
 		Task<ICatResponse<CatSegmentsRecord>> CatSegmentsAsync(ICatSegmentsRequest request);
 
-		/// <inheritdoc/>
-		IFieldStatsResponse FieldStats(Func<FieldStatsDescriptor, FieldStatsDescriptor> selector);
-		IFieldStatsResponse FieldStats(IFieldStatsRequest request);
-		Task<IFieldStatsResponse> FieldStatsAsync(Func<FieldStatsDescriptor, FieldStatsDescriptor> selector);
-		Task<IFieldStatsResponse> FieldStatsAsync(IFieldStatsRequest request);
 	}
 }

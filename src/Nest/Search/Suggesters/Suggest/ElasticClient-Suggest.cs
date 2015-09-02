@@ -6,45 +6,56 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
+	public partial interface IElasticClient
+	{
+		/// <summary>
+		/// The suggest feature suggests similar looking terms based on a provided text by using a suggester. 
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-suggesters.html
+		/// </summary>
+		/// <typeparam name="T">The type used to strongly type parts of the suggest operation</typeparam>
+		/// <param name="selector">The suggesters to use this operation (can be multiple)</param>
+		ISuggestResponse Suggest<T>(Func<SuggestDescriptor<T>, ISuggestRequest> selector) where T : class;
+
+		/// <inheritdoc/>
+		ISuggestResponse Suggest(ISuggestRequest suggestRequest);
+
+		/// <inheritdoc/>
+		Task<ISuggestResponse> SuggestAsync<T>(Func<SuggestDescriptor<T>, ISuggestRequest> selector) where T : class;
+
+		/// <inheritdoc/>
+		Task<ISuggestResponse> SuggestAsync(ISuggestRequest suggestRequest);
+	}
+
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public ISuggestResponse Suggest<T>(Func<SuggestDescriptor<T>, SuggestDescriptor<T>> selector)
-			where T : class
-		{
-			return this.Dispatcher.Dispatch<SuggestDescriptor<T>, SuggestRequestParameters, SuggestResponse>(
-				selector,
-				(p, d) => this.LowLevelDispatch.SuggestDispatch<SuggestResponse>(p, d)
+		public ISuggestResponse Suggest<T>(Func<SuggestDescriptor<T>, ISuggestRequest> selector)
+			where T : class => 
+			this.Dispatcher.Dispatch<ISuggestRequest, SuggestRequestParameters, SuggestResponse>(
+				selector?.Invoke(new SuggestDescriptor<T>()),
+				this.LowLevelDispatch.SuggestDispatch<SuggestResponse>
 			);
-		}
 
 		/// <inheritdoc/>
-		public ISuggestResponse Suggest(ISuggestRequest suggestRequest)
-		{
-			return this.Dispatcher.Dispatch<ISuggestRequest, SuggestRequestParameters, SuggestResponse>(
+		public ISuggestResponse Suggest(ISuggestRequest suggestRequest) => 
+			this.Dispatcher.Dispatch<ISuggestRequest, SuggestRequestParameters, SuggestResponse>(
 				suggestRequest,
-				(p, d) => this.LowLevelDispatch.SuggestDispatch<SuggestResponse>(p, d)
+				this.LowLevelDispatch.SuggestDispatch<SuggestResponse>
 			);
-		}
 
 		/// <inheritdoc/>
-		public Task<ISuggestResponse> SuggestAsync<T>(Func<SuggestDescriptor<T>, SuggestDescriptor<T>> selector)
-			where T : class
-		{
-			return this.Dispatcher.DispatchAsync<SuggestDescriptor<T>, SuggestRequestParameters, SuggestResponse, ISuggestResponse>(
-				selector,
-				(p, d) => this.LowLevelDispatch.SuggestDispatchAsync<SuggestResponse>(p, d)
+		public Task<ISuggestResponse> SuggestAsync<T>(Func<SuggestDescriptor<T>, ISuggestRequest> selector)
+			where T : class => 
+			this.Dispatcher.DispatchAsync<ISuggestRequest, SuggestRequestParameters, SuggestResponse, ISuggestResponse>(
+				selector?.Invoke(new SuggestDescriptor<T>()),
+				this.LowLevelDispatch.SuggestDispatchAsync<SuggestResponse>
 			);
-		}
 
 		/// <inheritdoc/>
-		public Task<ISuggestResponse> SuggestAsync(ISuggestRequest suggestRequest)
-		{
-			return this.Dispatcher.DispatchAsync<ISuggestRequest, SuggestRequestParameters, SuggestResponse, ISuggestResponse>(
+		public Task<ISuggestResponse> SuggestAsync(ISuggestRequest suggestRequest) => 
+			this.Dispatcher.DispatchAsync<ISuggestRequest, SuggestRequestParameters, SuggestResponse, ISuggestResponse>(
 				suggestRequest,
-				(p, d) => this.LowLevelDispatch.SuggestDispatchAsync<SuggestResponse>(p, d)
+				this.LowLevelDispatch.SuggestDispatchAsync<SuggestResponse>
 			);
-		}
-
 	}
 }

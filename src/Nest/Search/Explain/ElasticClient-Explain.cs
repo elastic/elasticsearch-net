@@ -5,46 +5,58 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
+	public partial interface IElasticClient
+	{
+		/// <inheritdoc/>
+		IExplainResponse<T> Explain<T>(Func<ExplainDescriptor<T>, IExplainRequest> querySelector)
+			where T : class;
+
+		/// <inheritdoc/>
+		IExplainResponse<T> Explain<T>(IExplainRequest explainRequest)
+			where T : class;
+
+		/// <inheritdoc/>
+		Task<IExplainResponse<T>> ExplainAsync<T>(Func<ExplainDescriptor<T>, IExplainRequest> querySelector)
+			where T : class;
+
+		/// <inheritdoc/>
+		Task<IExplainResponse<T>> ExplainAsync<T>(IExplainRequest explainRequest)
+			where T : class;
+
+	}
+
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IExplainResponse<T> Explain<T>(Func<ExplainDescriptor<T>, ExplainDescriptor<T>> querySelector)
-			where T : class
-		{
-			return this.Dispatcher.Dispatch<ExplainDescriptor<T>, ExplainRequestParameters, ExplainResponse<T>>(
-				querySelector,
-				(p, d) => this.LowLevelDispatch.ExplainDispatch<ExplainResponse<T>>(p, d)
+		public IExplainResponse<T> Explain<T>(Func<ExplainDescriptor<T>, IExplainRequest> querySelector)
+			where T : class => 
+			this.Dispatcher.Dispatch<IExplainRequest, ExplainRequestParameters, ExplainResponse<T>>(
+				querySelector?.Invoke(new ExplainDescriptor<T>()),
+				this.LowLevelDispatch.ExplainDispatch<ExplainResponse<T>>
 			);
-		}
 
 		/// <inheritdoc/>
 		public IExplainResponse<T> Explain<T>(IExplainRequest explainRequest)
-			where T : class
-		{
-			return this.Dispatcher.Dispatch<IExplainRequest, ExplainRequestParameters, ExplainResponse<T>>(
+			where T : class => 
+			this.Dispatcher.Dispatch<IExplainRequest, ExplainRequestParameters, ExplainResponse<T>>(
 				explainRequest,
-				(p, d) => this.LowLevelDispatch.ExplainDispatch<ExplainResponse<T>>(p, d)
+				this.LowLevelDispatch.ExplainDispatch<ExplainResponse<T>>
 			);
-		}
 
 		/// <inheritdoc/>
-		public Task<IExplainResponse<T>> ExplainAsync<T>(Func<ExplainDescriptor<T>, ExplainDescriptor<T>> querySelector)
-			where T : class
-		{
-			return this.Dispatcher.DispatchAsync<ExplainDescriptor<T>, ExplainRequestParameters, ExplainResponse<T>, IExplainResponse<T>>(
-				querySelector,
-				(p, d) => this.LowLevelDispatch.ExplainDispatchAsync<ExplainResponse<T>>(p, d)
+		public Task<IExplainResponse<T>> ExplainAsync<T>(Func<ExplainDescriptor<T>, IExplainRequest> querySelector)
+			where T : class => 
+			this.Dispatcher.DispatchAsync<IExplainRequest, ExplainRequestParameters, ExplainResponse<T>, IExplainResponse<T>>(
+				querySelector?.Invoke(new ExplainDescriptor<T>()),
+				this.LowLevelDispatch.ExplainDispatchAsync<ExplainResponse<T>>
 			);
-		}
 
 		/// <inheritdoc/>
 		public Task<IExplainResponse<T>> ExplainAsync<T>(IExplainRequest explainRequest)
-			where T : class
-		{
-			return this.Dispatcher.DispatchAsync<IExplainRequest, ExplainRequestParameters, ExplainResponse<T>, IExplainResponse<T>>(
+			where T : class => 
+			this.Dispatcher.DispatchAsync<IExplainRequest, ExplainRequestParameters, ExplainResponse<T>, IExplainResponse<T>>(
 				explainRequest,
-				(p, d) => this.LowLevelDispatch.ExplainDispatchAsync<ExplainResponse<T>>(p, d)
+				this.LowLevelDispatch.ExplainDispatchAsync<ExplainResponse<T>>
 			);
-		}
 	}
 }

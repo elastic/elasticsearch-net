@@ -5,50 +5,62 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	public partial class ElasticClient
+	public partial interface IElasticClient
 	{
+		/// <summary>
+		/// Percolate a document
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-percolate.html
+		/// </summary>
+		/// <typeparam name="T">The type to infer the index/type from, and of the object that is being percolated</typeparam>
+		/// <param name="percolateSelector">An optional descriptor describing the percolate operation further</param>
+		IPercolateResponse Percolate<T>(Func<PercolateDescriptor<T>, IPercolateRequest<T>> percolateSelector)
+			where T : class;
 
 		/// <inheritdoc/>
-		public IPercolateResponse Percolate<T>(Func<PercolateDescriptor<T>, PercolateDescriptor<T>> percolateSelector)
-			where T : class
-		{
-			percolateSelector = percolateSelector ?? (s => s);
-			return this.Dispatcher.Dispatch<PercolateDescriptor<T>, PercolateRequestParameters, PercolateResponse>(
-				percolateSelector,
-				(p, d) => this.LowLevelDispatch.PercolateDispatch<PercolateResponse>(p, d)
+		IPercolateResponse Percolate<T>(IPercolateRequest<T> percolateRequest)
+			where T : class;
+
+		/// <inheritdoc/>
+		Task<IPercolateResponse> PercolateAsync<T>(Func<PercolateDescriptor<T>, IPercolateRequest<T>> percolateSelector)
+			where T : class;
+
+		/// <inheritdoc/>
+		Task<IPercolateResponse> PercolateAsync<T>(IPercolateRequest<T> percolateRequest)
+			where T : class;
+	}
+
+	public partial class ElasticClient
+	{
+		/// <inheritdoc/>
+		public IPercolateResponse Percolate<T>(Func<PercolateDescriptor<T>, IPercolateRequest<T>> percolateSelector)
+			where T : class => 
+			this.Dispatcher.Dispatch<IPercolateRequest<T>, PercolateRequestParameters, PercolateResponse>(
+				percolateSelector?.Invoke(new PercolateDescriptor<T>()),
+				this.LowLevelDispatch.PercolateDispatch<PercolateResponse>
 			);
-		}
 
 		/// <inheritdoc/>
 		public IPercolateResponse Percolate<T>(IPercolateRequest<T> percolateRequest)
-			where T : class
-		{
-			return this.Dispatcher.Dispatch<IPercolateRequest<T>, PercolateRequestParameters, PercolateResponse>(
+			where T : class => 
+			this.Dispatcher.Dispatch<IPercolateRequest<T>, PercolateRequestParameters, PercolateResponse>(
 				percolateRequest,
-				(p, d) => this.LowLevelDispatch.PercolateDispatch<PercolateResponse>(p, d)
+				this.LowLevelDispatch.PercolateDispatch<PercolateResponse>
 			);
-		}
 
 		/// <inheritdoc/>
-		public Task<IPercolateResponse> PercolateAsync<T>(Func<PercolateDescriptor<T>, PercolateDescriptor<T>> percolateSelector)
-			where T : class
-		{
-			percolateSelector = percolateSelector ?? (s => s);
-			return this.Dispatcher.DispatchAsync<PercolateDescriptor<T>, PercolateRequestParameters, PercolateResponse, IPercolateResponse>(
-				percolateSelector,
-				(p, d) => this.LowLevelDispatch.PercolateDispatchAsync<PercolateResponse>(p, d)
+		public Task<IPercolateResponse> PercolateAsync<T>(Func<PercolateDescriptor<T>, IPercolateRequest<T>> percolateSelector)
+			where T : class => 
+			this.Dispatcher.DispatchAsync<IPercolateRequest<T>, PercolateRequestParameters, PercolateResponse, IPercolateResponse>(
+				percolateSelector?.Invoke(new PercolateDescriptor<T>()),
+				this.LowLevelDispatch.PercolateDispatchAsync<PercolateResponse>
 			);
-		}
 
 		/// <inheritdoc/>
 		public Task<IPercolateResponse> PercolateAsync<T>(IPercolateRequest<T> percolateRequest)
-			where T : class
-		{
-			return this.Dispatcher.DispatchAsync<IPercolateRequest<T>, PercolateRequestParameters, PercolateResponse, IPercolateResponse>(
+			where T : class => 
+			this.Dispatcher.DispatchAsync<IPercolateRequest<T>, PercolateRequestParameters, PercolateResponse, IPercolateResponse>(
 				percolateRequest,
-				(p, d) => this.LowLevelDispatch.PercolateDispatchAsync<PercolateResponse>(p, d)
+				this.LowLevelDispatch.PercolateDispatchAsync<PercolateResponse>
 			);
-		}
-
 	}
 }

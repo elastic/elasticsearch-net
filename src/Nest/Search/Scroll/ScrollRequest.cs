@@ -8,7 +8,7 @@ namespace Nest
 	public interface IScrollRequest : IRequest<ScrollRequestParameters>
 	{
 		string ScrollId { get; set; }
-		string Scroll { get; set; }
+		TimeUnitExpression Scroll { get; set; }
 	}
 
 	internal static class ScrollPathInfo
@@ -30,9 +30,9 @@ namespace Nest
 	public partial class ScrollRequest : BasePathRequest<ScrollRequestParameters>, IScrollRequest
 	{
 		public string ScrollId { get; set; }
-		public string Scroll { get; set; }
+		public TimeUnitExpression Scroll { get; set; }
 
-		public ScrollRequest(string scrollId, string scrollTimeout)
+		public ScrollRequest(string scrollId, TimeUnitExpression scrollTimeout)
 		{
 			this.ScrollId = scrollId;
 			this.Scroll = scrollTimeout;
@@ -56,10 +56,10 @@ namespace Nest
 		}
 
 		string IScrollRequest.ScrollId { get; set; }
-		string IScrollRequest.Scroll { get; set; }
+		TimeUnitExpression IScrollRequest.Scroll { get; set; }
 		
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
-		public ScrollDescriptor<T> Scroll(string scroll)
+		public ScrollDescriptor<T> Scroll(TimeUnitExpression scroll)
 		{
 			Self.Scroll = scroll;
 			return this;
