@@ -19,7 +19,7 @@ namespace Nest
 			pathInfo.HttpMethod = HttpMethod.PUT;
 		}
 	}
-	
+
 	public partial class PutTemplateRequest : NamePathBase<PutTemplateRequestParameters>, IPutTemplateRequest
 	{
 		public PutTemplateRequest(string name) : base(name)
@@ -45,6 +45,8 @@ namespace Nest
 
 		//TODO Merge this state object onto this descriptor
 		TemplateMapping IPutTemplateRequest.TemplateMapping { get; set; }
+		
+		//TODO ConnectionSettings why?
 
 		public PutTemplateDescriptor(IConnectionSettingsValues connectionSettings)
 		{
@@ -92,7 +94,7 @@ namespace Nest
 			Self.TemplateMapping.Warmers = warmerSelector?.Invoke(new WarmersDescriptor());
 			return this;
 		}
-		
+
 		public PutTemplateDescriptor Aliases(Func<AliasesDescriptor, IAliases> aliasDescriptor)
 		{
 			Self.TemplateMapping.Aliases = aliasDescriptor?.Invoke(new AliasesDescriptor());

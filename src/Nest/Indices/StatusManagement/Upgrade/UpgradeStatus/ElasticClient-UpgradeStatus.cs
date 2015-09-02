@@ -8,40 +8,49 @@ using System.Threading.Tasks;
 
 namespace Nest
 {
+	public partial interface IElasticClient
+	{
+		/// <inheritdoc/>
+		IUpgradeStatusResponse UpgradeStatus(IUpgradeStatusRequest upgradeStatusRequest);
+
+		/// <inheritdoc/>
+		IUpgradeStatusResponse UpgradeStatus(Func<UpgradeStatusDescriptor, IUpgradeStatusRequest> upgradeStatusSelector = null);
+
+		/// <inheritdoc/>
+		Task<IUpgradeStatusResponse> UpgradeStatusAsync(IUpgradeStatusRequest upgradeStatusRequest);
+
+		/// <inheritdoc/>
+		Task<IUpgradeStatusResponse> UpgradeStatusAsync(Func<UpgradeStatusDescriptor, IUpgradeStatusRequest> upgradeStatusSelector = null);
+	}
+
 	public partial class ElasticClient
 	{
-		public IUpgradeStatusResponse UpgradeStatus(IUpgradeStatusRequest upgradeStatusRequest)
-		{
-			return this.Dispatcher.Dispatch<IUpgradeStatusRequest, UpgradeStatusRequestParameters, UpgradeStatusResponse>(
+		/// <inheritdoc/>
+		public IUpgradeStatusResponse UpgradeStatus(IUpgradeStatusRequest upgradeStatusRequest) => 
+			this.Dispatcher.Dispatch<IUpgradeStatusRequest, UpgradeStatusRequestParameters, UpgradeStatusResponse>(
 				upgradeStatusRequest,
 				(p, d) => this.LowLevelDispatch.IndicesGetUpgradeDispatch<UpgradeStatusResponse>(p)
-			);	
-		}
+			);
 
-		public IUpgradeStatusResponse UpgradeStatus(Func<UpgradeStatusDescriptor, UpgradeStatusDescriptor> upgradeStatusDescriptor = null)
-		{
-			upgradeStatusDescriptor = upgradeStatusDescriptor ?? (s => s);
-			return this.Dispatcher.Dispatch<UpgradeStatusDescriptor, UpgradeStatusRequestParameters, UpgradeStatusResponse>(
-				upgradeStatusDescriptor,
+		/// <inheritdoc/>
+		public IUpgradeStatusResponse UpgradeStatus(Func<UpgradeStatusDescriptor, IUpgradeStatusRequest> upgradeStatusSelector = null) => 
+			this.Dispatcher.Dispatch<IUpgradeStatusRequest, UpgradeStatusRequestParameters, UpgradeStatusResponse>(
+				upgradeStatusSelector.InvokeOrDefault(new UpgradeStatusDescriptor()),
 				(p, d) => this.LowLevelDispatch.IndicesGetUpgradeDispatch<UpgradeStatusResponse>(p)
 			);
-		}
 
-		public Task<IUpgradeStatusResponse> UpgradeStatusAsync(IUpgradeStatusRequest upgradeStatusRequest)
-		{
-			return this.Dispatcher.DispatchAsync<IUpgradeStatusRequest, UpgradeStatusRequestParameters, UpgradeStatusResponse, IUpgradeStatusResponse>(
+		/// <inheritdoc/>
+		public Task<IUpgradeStatusResponse> UpgradeStatusAsync(IUpgradeStatusRequest upgradeStatusRequest) => 
+			this.Dispatcher.DispatchAsync<IUpgradeStatusRequest, UpgradeStatusRequestParameters, UpgradeStatusResponse, IUpgradeStatusResponse>(
 				upgradeStatusRequest,
 				(p, d) => this.LowLevelDispatch.IndicesGetUpgradeDispatchAsync<UpgradeStatusResponse>(p)
 			);
-		}
 
-		public Task<IUpgradeStatusResponse> UpgradeStatusAsync(Func<UpgradeStatusDescriptor, UpgradeStatusDescriptor> upgradeStatusDescriptor = null)
-		{
-			upgradeStatusDescriptor = upgradeStatusDescriptor ?? (s => s);
-			return this.Dispatcher.DispatchAsync<UpgradeStatusDescriptor, UpgradeStatusRequestParameters, UpgradeStatusResponse, IUpgradeStatusResponse>(
-				upgradeStatusDescriptor,
+		/// <inheritdoc/>
+		public Task<IUpgradeStatusResponse> UpgradeStatusAsync(Func<UpgradeStatusDescriptor, IUpgradeStatusRequest> upgradeStatusSelector = null) => 
+			this.Dispatcher.DispatchAsync<IUpgradeStatusRequest, UpgradeStatusRequestParameters, UpgradeStatusResponse, IUpgradeStatusResponse>(
+				upgradeStatusSelector.InvokeOrDefault(new UpgradeStatusDescriptor()),
 				(p, d) => this.LowLevelDispatch.IndicesGetUpgradeDispatchAsync<UpgradeStatusResponse>(p)
 			);
-		}
 	}
 }

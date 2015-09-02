@@ -5,45 +5,56 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
+	public partial interface IElasticClient
+	{
+		/// <summary>
+		/// The optimize API allows to optimize one or more indices through an API. The optimize process basically optimizes 
+		/// the index for faster search operations (and relates to the number of segments a Lucene index holds within each shard).
+		///  The optimize operation allows to reduce the number of segments by merging them.
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-optimize.html
+		/// </summary>
+		/// <param name="optimizeSelector">An optional descriptor that further describes the optimize operation, i.e limit it to one index</param>
+		IShardsOperationResponse Optimize(Func<OptimizeDescriptor, IOptimizeRequest> optimizeSelector = null);
+
+		/// <inheritdoc/>
+		IShardsOperationResponse Optimize(IOptimizeRequest optimizeRequest);
+
+		/// <inheritdoc/>
+		Task<IShardsOperationResponse> OptimizeAsync(Func<OptimizeDescriptor, IOptimizeRequest> optimizeSelector = null);
+
+		/// <inheritdoc/>
+		Task<IShardsOperationResponse> OptimizeAsync(IOptimizeRequest optimizeRequest);
+
+	}
+
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IShardsOperationResponse Optimize(Func<OptimizeDescriptor, OptimizeDescriptor> optimizeSelector = null)
-		{
-			optimizeSelector = optimizeSelector ?? (s => s);
-			return this.Dispatcher.Dispatch<OptimizeDescriptor, OptimizeRequestParameters, ShardsOperationResponse>(
-				optimizeSelector,
+		public IShardsOperationResponse Optimize(Func<OptimizeDescriptor, IOptimizeRequest> optimizeSelector = null) => 
+			this.Dispatcher.Dispatch<IOptimizeRequest, OptimizeRequestParameters, ShardsOperationResponse>(
+				optimizeSelector.InvokeOrDefault(new OptimizeDescriptor()),
 				(p, d) => this.LowLevelDispatch.IndicesOptimizeDispatch<ShardsOperationResponse>(p)
 			);
-		}
 
 		/// <inheritdoc/>
-		public IShardsOperationResponse Optimize(IOptimizeRequest optimizeRequest)
-		{
-			return this.Dispatcher.Dispatch<IOptimizeRequest, OptimizeRequestParameters, ShardsOperationResponse>(
+		public IShardsOperationResponse Optimize(IOptimizeRequest optimizeRequest) => 
+			this.Dispatcher.Dispatch<IOptimizeRequest, OptimizeRequestParameters, ShardsOperationResponse>(
 				optimizeRequest,
 				(p, d) => this.LowLevelDispatch.IndicesOptimizeDispatch<ShardsOperationResponse>(p)
 			);
-		}
 
 		/// <inheritdoc/>
-		public Task<IShardsOperationResponse> OptimizeAsync(Func<OptimizeDescriptor, OptimizeDescriptor> optimizeSelector = null)
-		{
-			optimizeSelector = optimizeSelector ?? (s => s);
-			return this.Dispatcher.DispatchAsync<OptimizeDescriptor, OptimizeRequestParameters, ShardsOperationResponse, IShardsOperationResponse>(
-				optimizeSelector,
+		public Task<IShardsOperationResponse> OptimizeAsync(Func<OptimizeDescriptor, IOptimizeRequest> optimizeSelector = null) => 
+			this.Dispatcher.DispatchAsync<IOptimizeRequest, OptimizeRequestParameters, ShardsOperationResponse, IShardsOperationResponse>(
+				optimizeSelector.InvokeOrDefault(new OptimizeDescriptor()),
 				(p, d) => this.LowLevelDispatch.IndicesOptimizeDispatchAsync<ShardsOperationResponse>(p)
 			);
-		}
 
 		/// <inheritdoc/>
-		public Task<IShardsOperationResponse> OptimizeAsync(IOptimizeRequest optimizeRequest)
-		{
-			return this.Dispatcher.DispatchAsync<IOptimizeRequest, OptimizeRequestParameters, ShardsOperationResponse, IShardsOperationResponse>(
+		public Task<IShardsOperationResponse> OptimizeAsync(IOptimizeRequest optimizeRequest) => 
+			this.Dispatcher.DispatchAsync<IOptimizeRequest, OptimizeRequestParameters, ShardsOperationResponse, IShardsOperationResponse>(
 				optimizeRequest,
 				(p, d) => this.LowLevelDispatch.IndicesOptimizeDispatchAsync<ShardsOperationResponse>(p)
 			);
-		}
-
 	}
 }

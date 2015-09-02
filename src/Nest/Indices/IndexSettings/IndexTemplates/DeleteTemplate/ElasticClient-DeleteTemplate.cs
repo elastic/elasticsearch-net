@@ -7,46 +7,49 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
+	public partial interface IElasticClient
+	{
+		/// <summary>
+		/// Deletes an index template
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-templates.html#delete
+		/// </summary>
+		/// <param name="name">The name of the template to delete</param>
+		/// <param name="deleteTemplateSelector">An optional selector specifying additional parameters for the delete template operation</param>
+		IIndicesOperationResponse DeleteTemplate(string name, Func<DeleteTemplateDescriptor, IDeleteTemplateRequest> deleteTemplateSelector = null);
+
+		/// <inheritdoc/>
+		IIndicesOperationResponse DeleteTemplate(IDeleteTemplateRequest deleteTemplateRequest);
+
+		/// <inheritdoc/>
+		Task<IIndicesOperationResponse> DeleteTemplateAsync(string name, Func<DeleteTemplateDescriptor, IDeleteTemplateRequest> deleteTemplateSelector = null);
+
+		/// <inheritdoc/>
+		Task<IIndicesOperationResponse> DeleteTemplateAsync(IDeleteTemplateRequest deleteTemplateRequest);
+
+	}
+
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IIndicesOperationResponse DeleteTemplate(string name, Func<DeleteTemplateDescriptor, DeleteTemplateDescriptor> deleteTemplateSelector = null)
-		{
-			deleteTemplateSelector = deleteTemplateSelector ?? (s => s);
-			return this.Dispatcher.Dispatch<DeleteTemplateDescriptor, DeleteTemplateRequestParameters, IndicesOperationResponse>(
-				d => deleteTemplateSelector(d.Name(name)),
-				(p, d) => this.LowLevelDispatch.IndicesDeleteTemplateDispatch<IndicesOperationResponse>(p)
-			);
-		}
+		public IIndicesOperationResponse DeleteTemplate(string name, Func<DeleteTemplateDescriptor, IDeleteTemplateRequest> deleteTemplateSelector = null) =>
+			this.DeleteTemplate(deleteTemplateSelector.InvokeOrDefault(new DeleteTemplateDescriptor().Name(name)));
 
 		/// <inheritdoc/>
-		public IIndicesOperationResponse DeleteTemplate(IDeleteTemplateRequest deleteTemplateRequest)
-		{
-			return this.Dispatcher.Dispatch<IDeleteTemplateRequest, DeleteTemplateRequestParameters, IndicesOperationResponse>(
+		public IIndicesOperationResponse DeleteTemplate(IDeleteTemplateRequest deleteTemplateRequest) => 
+			this.Dispatcher.Dispatch<IDeleteTemplateRequest, DeleteTemplateRequestParameters, IndicesOperationResponse>(
 				deleteTemplateRequest,
 				(p, d) => this.LowLevelDispatch.IndicesDeleteTemplateDispatch<IndicesOperationResponse>(p)
 			);
-		}
 
 		/// <inheritdoc/>
-		public Task<IIndicesOperationResponse> DeleteTemplateAsync(string name, Func<DeleteTemplateDescriptor, DeleteTemplateDescriptor> deleteTemplateSelector = null)
-		{
-			deleteTemplateSelector = deleteTemplateSelector ?? (s => s);
-			return this.Dispatcher.DispatchAsync
-				<DeleteTemplateDescriptor, DeleteTemplateRequestParameters, IndicesOperationResponse, IIndicesOperationResponse>(
-					d => deleteTemplateSelector(d.Name(name)),
-					(p, d) => this.LowLevelDispatch.IndicesDeleteTemplateDispatchAsync<IndicesOperationResponse>(p)
-				);
-		}
+		public Task<IIndicesOperationResponse> DeleteTemplateAsync(string name, Func<DeleteTemplateDescriptor, IDeleteTemplateRequest> deleteTemplateSelector = null) =>
+			this.DeleteTemplateAsync(deleteTemplateSelector.InvokeOrDefault(new DeleteTemplateDescriptor().Name(name)));
 
 		/// <inheritdoc/>
-		public Task<IIndicesOperationResponse> DeleteTemplateAsync(IDeleteTemplateRequest deleteTemplateRequest)
-		{
-			return this.Dispatcher.DispatchAsync<IDeleteTemplateRequest, DeleteTemplateRequestParameters, IndicesOperationResponse, IIndicesOperationResponse>(
-					deleteTemplateRequest,
-					(p, d) => this.LowLevelDispatch.IndicesDeleteTemplateDispatchAsync<IndicesOperationResponse>(p)
-				);
-		}
-
+		public Task<IIndicesOperationResponse> DeleteTemplateAsync(IDeleteTemplateRequest deleteTemplateRequest) => 
+			this.Dispatcher.DispatchAsync<IDeleteTemplateRequest, DeleteTemplateRequestParameters, IndicesOperationResponse, IIndicesOperationResponse>(
+				deleteTemplateRequest,
+				(p, d) => this.LowLevelDispatch.IndicesDeleteTemplateDispatchAsync<IndicesOperationResponse>(p)
+			);
 	}
 }

@@ -6,43 +6,49 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
+	public partial interface IElasticClient
+	{
+		/// <inheritdoc/>
+		IGetRepositoryResponse GetRepository(Func<GetRepositoryDescriptor, IGetRepositoryRequest> selector);
+
+		/// <inheritdoc/>
+		IGetRepositoryResponse GetRepository(IGetRepositoryRequest request);
+
+		/// <inheritdoc/>
+		Task<IGetRepositoryResponse> GetRepositoryAsync(Func<GetRepositoryDescriptor, IGetRepositoryRequest> selector);
+
+		/// <inheritdoc/>
+		Task<IGetRepositoryResponse> GetRepositoryAsync(IGetRepositoryRequest request);
+	}
+
 	public partial class ElasticClient
 	{
-		
 		/// <inheritdoc/>
-		public IGetRepositoryResponse GetRepository(Func<GetRepositoryDescriptor, GetRepositoryDescriptor> selector)
-		{
-			return this.Dispatcher.Dispatch<GetRepositoryDescriptor, GetRepositoryRequestParameters, GetRepositoryResponse>(
-				selector,
+		public IGetRepositoryResponse GetRepository(Func<GetRepositoryDescriptor, IGetRepositoryRequest> selector) => 
+			this.Dispatcher.Dispatch<IGetRepositoryRequest, GetRepositoryRequestParameters, GetRepositoryResponse>(
+				selector?.Invoke(new GetRepositoryDescriptor()),
 				(p, d) => this.LowLevelDispatch.SnapshotGetRepositoryDispatch<GetRepositoryResponse>(p)
 			);
-		}
 
 		/// <inheritdoc/>
-		public IGetRepositoryResponse GetRepository(IGetRepositoryRequest request)
-		{
-			return this.Dispatcher.Dispatch<IGetRepositoryRequest, GetRepositoryRequestParameters, GetRepositoryResponse>(
+		public IGetRepositoryResponse GetRepository(IGetRepositoryRequest request) => 
+			this.Dispatcher.Dispatch<IGetRepositoryRequest, GetRepositoryRequestParameters, GetRepositoryResponse>(
 				request,
 				(p, d) => this.LowLevelDispatch.SnapshotGetRepositoryDispatch<GetRepositoryResponse>(p)
 			);
-		}
 
 		/// <inheritdoc/>
-		public Task<IGetRepositoryResponse> GetRepositoryAsync(Func<GetRepositoryDescriptor, GetRepositoryDescriptor> selector)
-		{
-			return this.Dispatcher.DispatchAsync<GetRepositoryDescriptor, GetRepositoryRequestParameters, GetRepositoryResponse, IGetRepositoryResponse>(
-				selector,
+		public Task<IGetRepositoryResponse> GetRepositoryAsync(Func<GetRepositoryDescriptor, IGetRepositoryRequest> selector) => 
+			this.Dispatcher.DispatchAsync<IGetRepositoryRequest, GetRepositoryRequestParameters, GetRepositoryResponse, IGetRepositoryResponse>(
+				selector?.Invoke(new GetRepositoryDescriptor()),
 				(p, d) => this.LowLevelDispatch.SnapshotGetRepositoryDispatchAsync<GetRepositoryResponse>(p)
 			);
-		}
-		
+
 		/// <inheritdoc/>
-		public Task<IGetRepositoryResponse> GetRepositoryAsync(IGetRepositoryRequest request)
-		{
-			return this.Dispatcher.DispatchAsync<IGetRepositoryRequest, GetRepositoryRequestParameters, GetRepositoryResponse, IGetRepositoryResponse>(
+		public Task<IGetRepositoryResponse> GetRepositoryAsync(IGetRepositoryRequest request) => 
+			this.Dispatcher.DispatchAsync<IGetRepositoryRequest, GetRepositoryRequestParameters, GetRepositoryResponse, IGetRepositoryResponse>(
 				request,
 				(p, d) => this.LowLevelDispatch.SnapshotGetRepositoryDispatchAsync<GetRepositoryResponse>(p)
 			);
-		}
 	}
 }

@@ -10,45 +10,59 @@ namespace Nest
 	using GetWarmerConverter = Func<IApiCallDetails, Stream, WarmerResponse>;
 	using CrazyWarmerResponse = Dictionary<string, Dictionary<string, IWarmers>>;
 
+	public partial interface IElasticClient
+	{
+		/// <summary>
+		/// Allows to put a warmup search request on a specific index (or indices), with the body composing of a regular 
+		/// search request. Types can be provided as part of the URI if the search request is designed to be run only 
+		/// against the specific types.
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-warmers.html#warmer-adding
+		/// </summary>
+		/// <param name="name">The name for the warmer that you want to register</param>
+		/// <param name="selector">A descriptor that further describes what the warmer should look like</param>
+		IIndicesOperationResponse PutWarmer(string name, Func<PutWarmerDescriptor, IPutWarmerRequest> selector);
+
+		/// <inheritdoc/>
+		IIndicesOperationResponse PutWarmer(IPutWarmerRequest putWarmerRequest);
+
+		/// <inheritdoc/>
+		Task<IIndicesOperationResponse> PutWarmerAsync(string name, Func<PutWarmerDescriptor, IPutWarmerRequest> selector);
+
+		/// <inheritdoc/>
+		Task<IIndicesOperationResponse> PutWarmerAsync(IPutWarmerRequest putWarmerRequest);
+
+	}
+
 	public partial class ElasticClient
 	{
-		/// <inheritdoc/>
-		public IIndicesOperationResponse PutWarmer(string name, Func<PutWarmerDescriptor, PutWarmerDescriptor> selector)
-		{
-			selector.ThrowIfNull("selector");
-			return this.Dispatcher.Dispatch<PutWarmerDescriptor, PutWarmerRequestParameters, IndicesOperationResponse>(
-				d => selector(d.Name(name).AllIndices()),
-				(p, d) => this.LowLevelDispatch.IndicesPutWarmerDispatch<IndicesOperationResponse>(p, d)
-			);
-		}
+		//TODO AllIndices() seems odd here
 
 		/// <inheritdoc/>
-		public IIndicesOperationResponse PutWarmer(IPutWarmerRequest putWarmerRequest)
-		{
-			return this.Dispatcher.Dispatch<IPutWarmerRequest, PutWarmerRequestParameters, IndicesOperationResponse>(
+		public IIndicesOperationResponse PutWarmer(string name, Func<PutWarmerDescriptor, IPutWarmerRequest> selector) => 
+			this.Dispatcher.Dispatch<IPutWarmerRequest, PutWarmerRequestParameters, IndicesOperationResponse>(
+				selector?.Invoke(new PutWarmerDescriptor().Name(name).AllIndices()),
+				this.LowLevelDispatch.IndicesPutWarmerDispatch<IndicesOperationResponse>
+			);
+
+		/// <inheritdoc/>
+		public IIndicesOperationResponse PutWarmer(IPutWarmerRequest putWarmerRequest) => 
+			this.Dispatcher.Dispatch<IPutWarmerRequest, PutWarmerRequestParameters, IndicesOperationResponse>(
 				putWarmerRequest,
-				(p, d) => this.LowLevelDispatch.IndicesPutWarmerDispatch<IndicesOperationResponse>(p, d)
+				this.LowLevelDispatch.IndicesPutWarmerDispatch<IndicesOperationResponse>
 			);
-		}
 
 		/// <inheritdoc/>
-		public Task<IIndicesOperationResponse> PutWarmerAsync(string name, Func<PutWarmerDescriptor, PutWarmerDescriptor> selector)
-		{
-			selector.ThrowIfNull("selector");
-			return this.Dispatcher.DispatchAsync<PutWarmerDescriptor, PutWarmerRequestParameters, IndicesOperationResponse, IIndicesOperationResponse>(
-				d => selector(d.Name(name).AllIndices()),
-				(p, d) => this.LowLevelDispatch.IndicesPutWarmerDispatchAsync<IndicesOperationResponse>(p, d)
+		public Task<IIndicesOperationResponse> PutWarmerAsync(string name, Func<PutWarmerDescriptor, IPutWarmerRequest> selector) => 
+			this.Dispatcher.DispatchAsync<IPutWarmerRequest, PutWarmerRequestParameters, IndicesOperationResponse, IIndicesOperationResponse>(
+				selector?.Invoke(new PutWarmerDescriptor().Name(name).AllIndices()),
+				this.LowLevelDispatch.IndicesPutWarmerDispatchAsync<IndicesOperationResponse>
 			);
-		}
 
 		/// <inheritdoc/>
-		public Task<IIndicesOperationResponse> PutWarmerAsync(IPutWarmerRequest putWarmerRequest)
-		{
-			return this.Dispatcher.DispatchAsync<IPutWarmerRequest, PutWarmerRequestParameters, IndicesOperationResponse, IIndicesOperationResponse>(
+		public Task<IIndicesOperationResponse> PutWarmerAsync(IPutWarmerRequest putWarmerRequest) => 
+			this.Dispatcher.DispatchAsync<IPutWarmerRequest, PutWarmerRequestParameters, IndicesOperationResponse, IIndicesOperationResponse>(
 				putWarmerRequest,
-				(p, d) => this.LowLevelDispatch.IndicesPutWarmerDispatchAsync<IndicesOperationResponse>(p, d)
+				this.LowLevelDispatch.IndicesPutWarmerDispatchAsync<IndicesOperationResponse>
 			);
-		}
-
 	}
 }

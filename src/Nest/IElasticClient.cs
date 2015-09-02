@@ -71,22 +71,6 @@ namespace Nest
 			where K : class;
 
 		/// <summary>
-		/// Change specific index level settings in real time. Note not all index settings CAN be updated.
-		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-update-settings.html
-		/// </summary>
-		/// <param name="updateSettingsSelector">A descriptor that strongly types all the updateable settings</param>
-		IAcknowledgedResponse UpdateIndexSettings(Func<UpdateSettingsDescriptor, IUpdateSettingsRequest> updateSettingsSelector);
-
-		/// <inheritdoc/>
-		IAcknowledgedResponse UpdateIndexSettings(IUpdateSettingsRequest updateSettingsRequest);
-
-		/// <inheritdoc/>
-		Task<IAcknowledgedResponse> UpdateIndexSettingsAsync(Func<UpdateSettingsDescriptor, IUpdateSettingsRequest> updateSettingsSelector);
-
-		/// <inheritdoc/>
-		Task<IAcknowledgedResponse> UpdateIndexSettingsAsync(IUpdateSettingsRequest updateSettingsRequest);
-
-		/// <summary>
 		/// The open and close index APIs allow to close an index, and later on opening it. 
 		/// A closed index has almost no overhead on the cluster (except for maintaining its metadata), and is blocked 
 		/// for read/write operations. 
@@ -125,41 +109,6 @@ namespace Nest
 		Task<IIndicesOperationResponse> CloseIndexAsync(ICloseIndexRequest closeIndexRequest);
 
 		/// <summary>
-		/// The refresh API allows to explicitly refresh one or more index, making all operations performed since the last refresh 
-		/// available for search. The (near) real-time capabilities depend on the index engine used. 
-		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-refresh.html
-		/// </summary>
-		/// <param name="refreshSelector">A descriptor that describes the parameters for the refresh operation</param>
-		IShardsOperationResponse Refresh(Func<RefreshDescriptor, RefreshDescriptor> refreshSelector = null);
-
-		/// <inheritdoc/>
-		IShardsOperationResponse Refresh(IRefreshRequest refreshRequest);
-
-		/// <inheritdoc/>
-		Task<IShardsOperationResponse> RefreshAsync(Func<RefreshDescriptor, RefreshDescriptor> refreshSelector = null);
-
-		/// <inheritdoc/>
-		Task<IShardsOperationResponse> RefreshAsync(IRefreshRequest refreshRequest);
-
-		/// <summary>
-		/// Provide low level segments information that a Lucene index (shard level) is built with. 
-		/// Allows to be used to provide more information on the state of a shard and an index, possibly optimization information,
-		/// data "wasted" on deletes, and so on.
-		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-segments.html
-		/// </summary>
-		/// <param name="segmentsSelector">A descriptor that describes the parameters for the segments operation</param>
-		ISegmentsResponse Segments(Func<SegmentsDescriptor, SegmentsDescriptor> segmentsSelector = null);
-
-		/// <inheritdoc/>
-		ISegmentsResponse Segments(ISegmentsRequest segmentsRequest);
-
-		/// <inheritdoc/>
-		Task<ISegmentsResponse> SegmentsAsync(Func<SegmentsDescriptor, SegmentsDescriptor> segmentsSelector = null);
-
-		/// <inheritdoc/>
-		Task<ISegmentsResponse> SegmentsAsync(ISegmentsRequest segmentsRequest);
-
-		/// <summary>
 		/// The cluster state API allows to get a comprehensive state information of the whole cluster.
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/cluster-state.html
 		/// </summary>
@@ -175,186 +124,7 @@ namespace Nest
 		/// <inheritdoc/>
 		Task<IClusterStateResponse> ClusterStateAsync(IClusterStateRequest clusterStateRequest);
 
-		/// <summary>
-		/// Allows to put a warmup search request on a specific index (or indices), with the body composing of a regular 
-		/// search request. Types can be provided as part of the URI if the search request is designed to be run only 
-		/// against the specific types.
-		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-warmers.html#warmer-adding
-		/// </summary>
-		/// <param name="name">The name for the warmer that you want to register</param>
-		/// <param name="selector">A descriptor that further describes what the warmer should look like</param>
-		IIndicesOperationResponse PutWarmer(string name, Func<PutWarmerDescriptor, PutWarmerDescriptor> selector);
 
-		/// <inheritdoc/>
-		IIndicesOperationResponse PutWarmer(IPutWarmerRequest putWarmerRequest);
-
-		/// <inheritdoc/>
-		Task<IIndicesOperationResponse> PutWarmerAsync(string name, Func<PutWarmerDescriptor, PutWarmerDescriptor> selector);
-
-		/// <inheritdoc/>
-		Task<IIndicesOperationResponse> PutWarmerAsync(IPutWarmerRequest putWarmerRequest);
-
-		/// <summary>
-		/// Getting a warmer for specific index (or alias, or several indices) based on its name. 
-		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-warmers.html#warmer-retrieving
-		/// </summary>
-		/// <param name="name">The name of the warmer to get</param>
-		/// <param name="selector">An optional selector specifying additional parameters for the get warmer operation</param>
-		IWarmerResponse GetWarmer(string name, Func<GetWarmerDescriptor, GetWarmerDescriptor> selector = null);
-
-		/// <inheritdoc/>
-		IWarmerResponse GetWarmer(IGetWarmerRequest getWarmerRequest);
-
-		/// <inheritdoc/>
-		Task<IWarmerResponse> GetWarmerAsync(string name, Func<GetWarmerDescriptor, GetWarmerDescriptor> selector = null);
-
-		/// <inheritdoc/>
-		Task<IWarmerResponse> GetWarmerAsync(IGetWarmerRequest getWarmerRequest);
-
-		/// <summary>
-		/// Deletes a warmer
-		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-warmers.html#removing
-		/// </summary>
-		/// <param name="name">The name of the warmer to delete</param>
-		/// <param name="selector">An optional selector specifying additional parameters for the delete warmer operation</param>
-		IIndicesOperationResponse DeleteWarmer(string name, Func<DeleteWarmerDescriptor, DeleteWarmerDescriptor> selector = null);
-
-		/// <inheritdoc/>
-		IIndicesOperationResponse DeleteWarmer(IDeleteWarmerRequest deleteWarmerRequest);
-
-		/// <inheritdoc/>
-		Task<IIndicesOperationResponse> DeleteWarmerAsync(string name, Func<DeleteWarmerDescriptor, DeleteWarmerDescriptor> selector = null);
-
-		/// <inheritdoc/>
-		Task<IIndicesOperationResponse> DeleteWarmerAsync(IDeleteWarmerRequest deleteWarmerRequest);
-
-		/// <summary>
-		/// Gets an index template
-		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-templates.html#getting
-		/// </summary>
-		/// <param name="name">The name of the template to get</param>
-		/// <param name="getTemplateSelector">An optional selector specifying additional parameters for the get template operation</param>
-		ITemplateResponse GetTemplate(string name, Func<GetTemplateDescriptor, GetTemplateDescriptor> getTemplateSelector = null);
-
-		/// <inheritdoc/>
-		ITemplateResponse GetTemplate(IGetTemplateRequest getTemplateRequest);
-
-		/// <inheritdoc/>
-		Task<ITemplateResponse> GetTemplateAsync(string name, Func<GetTemplateDescriptor, GetTemplateDescriptor> getTemplateSelector = null);
-
-		/// <inheritdoc/>
-		Task<ITemplateResponse> GetTemplateAsync(IGetTemplateRequest getTemplateRequest);
-
-		/// <summary>
-		/// Index templates allow to define templates that will automatically be applied to new indices created. 
-		/// <para>The templates include both settings and mappings, and a simple pattern template that controls if 
-		/// the template will be applied to the index created. </para>
-		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-templates.html
-		/// </summary>
-		/// <param name="name">The name of the template to register</param>
-		/// <param name="putTemplateSelector">An optional selector specifying additional parameters for the put template operation</param>
-		IIndicesOperationResponse PutTemplate(string name, Func<PutTemplateDescriptor, PutTemplateDescriptor> putTemplateSelector);
-
-		/// <inheritdoc/>
-		IIndicesOperationResponse PutTemplate(IPutTemplateRequest putTemplateRequest);
-
-		/// <inheritdoc/>
-		Task<IIndicesOperationResponse> PutTemplateAsync(string name, Func<PutTemplateDescriptor, PutTemplateDescriptor> putTemplateSelector);
-
-		/// <inheritdoc/>
-		Task<IIndicesOperationResponse> PutTemplateAsync(IPutTemplateRequest putTemplateRequest);
-
-		/// <summary>
-		/// Deletes an index template
-		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-templates.html#delete
-		/// </summary>
-		/// <param name="name">The name of the template to delete</param>
-		/// <param name="deleteTemplateSelector">An optional selector specifying additional parameters for the delete template operation</param>
-		IIndicesOperationResponse DeleteTemplate(string name, Func<DeleteTemplateDescriptor, DeleteTemplateDescriptor> deleteTemplateSelector = null);
-
-		/// <inheritdoc/>
-		IIndicesOperationResponse DeleteTemplate(IDeleteTemplateRequest deleteTemplateRequest);
-
-		/// <inheritdoc/>
-		Task<IIndicesOperationResponse> DeleteTemplateAsync(string name, Func<DeleteTemplateDescriptor, DeleteTemplateDescriptor> deleteTemplateSelector = null);
-
-		/// <inheritdoc/>
-		Task<IIndicesOperationResponse> DeleteTemplateAsync(IDeleteTemplateRequest deleteTemplateRequest);
-
-
-		/// <summary>
-		/// The put mapping API allows to register specific mapping definition for a specific type.
-		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-put-mapping.html
-		/// </summary>
-		/// <typeparam name="T">The type we want to map in elasticsearch</typeparam>
-		/// <param name="mappingSelector">A descriptor to describe the mapping of our type</param>
-		IIndicesResponse Map<T>(Func<PutMappingDescriptor<T>, IPutMappingRequest> mappingSelector)
-			where T : class;
-
-		/// <inheritdoc/>
-		IIndicesResponse Map(IPutMappingRequest putMappingRequest);
-
-		/// <inheritdoc/>
-		Task<IIndicesResponse> MapAsync<T>(Func<PutMappingDescriptor<T>, IPutMappingRequest> mappingSelector)
-			where T : class;
-
-		/// <inheritdoc/>
-		Task<IIndicesResponse> MapAsync(IPutMappingRequest putMappingRequest);
-
-		/// <summary>
-		/// The get mapping API allows to retrieve mapping definitions for an index or index/type.
-		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-get-mapping.html
-		/// </summary>
-		/// <param name="selector">A descriptor that describes the parameters for the get mapping operation</param>
-		IGetMappingResponse GetMapping<T>(Func<GetMappingDescriptor<T>, GetMappingDescriptor<T>> selector = null) where T : class;
-
-		/// <inheritdoc/>
-		IGetMappingResponse GetMapping(IGetMappingRequest getMappingRequest);
-
-		/// <inheritdoc/>
-		Task<IGetMappingResponse> GetMappingAsync<T>(Func<GetMappingDescriptor<T>, GetMappingDescriptor<T>> selector = null)
-			where T : class;
-
-		/// <inheritdoc/>
-		Task<IGetMappingResponse> GetMappingAsync(IGetMappingRequest getMappingRequest);
-
-		/// <summary>
-		/// The flush API allows to flush one or more indices through an API. The flush process of an index basically 
-		/// frees memory from the index by flushing data to the index storage and clearing the internal transaction log. 
-		/// By default, Elasticsearch uses memory heuristics in order to automatically trigger 
-		/// flush operations as required in order to clear memory.
-		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-flush.html
-		/// </summary>
-		/// <param name="selector">A descriptor that describes the parameters for the flush operation</param>
-		IShardsOperationResponse Flush(Func<FlushDescriptor, FlushDescriptor> selector);
-
-		/// <inheritdoc/>
-		IShardsOperationResponse Flush(IFlushRequest flushRequest);
-
-		/// <inheritdoc/>
-		Task<IShardsOperationResponse> FlushAsync(Func<FlushDescriptor, FlushDescriptor> selector);
-
-		/// <inheritdoc/>
-		Task<IShardsOperationResponse> FlushAsync(IFlushRequest flushRequest);
-
-		/// <summary>
-		/// The Synced Flush API allows an administrator to initiate a synced flush manually. 
-		/// This can be particularly useful for a planned (rolling) cluster restart where you 
-		/// can stop indexing and don’t want to wait the default 5 minutes for idle indices to 
-		/// be sync-flushed automatically.
-		/// </summary>
-		/// <param name="selector">A descriptor that describes the parameters for the synced flush operation</param>
-		/// <returns></returns>
-		IShardsOperationResponse SyncedFlush(Func<SyncedFlushDescriptor, SyncedFlushDescriptor> selector);
-
-		/// <inheritdoc/>
-		IShardsOperationResponse SyncedFlush(ISyncedFlushRequest flushRequest);
-
-		/// <inheritdoc/>
-		Task<IShardsOperationResponse> SyncedFlushAsync(Func<SyncedFlushDescriptor, SyncedFlushDescriptor> selector);
-
-		/// <inheritdoc/>
-		Task<IShardsOperationResponse> SyncedFlushAsync(ISyncedFlushRequest flushRequest);
 
 		/// <summary>
 		/// The get settings API allows to retrieve settings of index/indices.
@@ -389,22 +159,6 @@ namespace Nest
 		Task<IIndicesResponse> DeleteIndexAsync(IDeleteIndexRequest deleteIndexRequest);
 
 		/// <summary>
-		/// The clear cache API allows to clear either all caches or specific cached associated with one ore more indices.
-		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-clearcache.html
-		/// </summary>
-		/// <param name="selector">A descriptor that describes the parameters for the clear cache operation</param>
-		IShardsOperationResponse ClearCache(Func<ClearCacheDescriptor, ClearCacheDescriptor> selector = null);
-
-		/// <inheritdoc/>
-		IShardsOperationResponse ClearCache(IClearCacheRequest clearCacheRequest);
-
-		/// <inheritdoc/>
-		Task<IShardsOperationResponse> ClearCacheAsync(Func<ClearCacheDescriptor, ClearCacheDescriptor> selector = null);
-
-		/// <inheritdoc/>
-		Task<IShardsOperationResponse> ClearCacheAsync(IClearCacheRequest clearCacheRequest);
-
-		/// <summary>
 		/// The create index API allows to instantiate an index. Elasticsearch provides support for multiple indices, 
 		/// including executing operations across several indices.
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-create-index.html
@@ -435,23 +189,6 @@ namespace Nest
 
 		/// <inheritdoc/>
 		Task<IRootInfoResponse> RootNodeInfoAsync(IInfoRequest infoRequest);
-
-		/// <summary>
-		/// Indices level stats provide statistics on different operations happening on an index. The API provides statistics on 
-		/// the index level scope (though most stats can also be retrieved using node level scope).
-		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-stats.html
-		/// </summary>
-		/// <param name="selector">Optionaly further describe the indices stats operation</param>
-		IGlobalStatsResponse IndicesStats(Func<IndicesStatsDescriptor, IndicesStatsDescriptor> selector = null);
-
-		/// <inheritdoc/>
-		IGlobalStatsResponse IndicesStats(IIndicesStatsRequest indicesStatsRequest);
-
-		/// <inheritdoc/>
-		Task<IGlobalStatsResponse> IndicesStatsAsync(Func<IndicesStatsDescriptor, IndicesStatsDescriptor> selector = null);
-
-		/// <inheritdoc/>
-		Task<IGlobalStatsResponse> IndicesStatsAsync(IIndicesStatsRequest indicesStatsRequest);
 
 		/// <summary>
 		/// The cluster nodes info API allows to retrieve one or more (or all) of the cluster nodes information.
@@ -839,24 +576,6 @@ namespace Nest
 		Task<IDeleteAliasResponse> DeleteAliasAsync<T>(Func<DeleteAliasDescriptor<T>, DeleteAliasDescriptor<T>> deleteAliasDescriptor) where T : class;
 
 		/// <summary>
-		/// The optimize API allows to optimize one or more indices through an API. The optimize process basically optimizes 
-		/// the index for faster search operations (and relates to the number of segments a Lucene index holds within each shard).
-		///  The optimize operation allows to reduce the number of segments by merging them.
-		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-optimize.html
-		/// </summary>
-		/// <param name="optimizeSelector">An optional descriptor that further describes the optimize operation, i.e limit it to one index</param>
-		IShardsOperationResponse Optimize(Func<OptimizeDescriptor, OptimizeDescriptor> optimizeSelector = null);
-
-		/// <inheritdoc/>
-		IShardsOperationResponse Optimize(IOptimizeRequest optimizeRequest);
-
-		/// <inheritdoc/>
-		Task<IShardsOperationResponse> OptimizeAsync(Func<OptimizeDescriptor, OptimizeDescriptor> optimizeSelector = null);
-
-		/// <inheritdoc/>
-		Task<IShardsOperationResponse> OptimizeAsync(IOptimizeRequest optimizeRequest);
-
-		/// <summary>
 		/// Returns information and statistics on terms in the fields of a particular document as stored in the index.
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-termvectors.html
 		/// </summary>
@@ -914,46 +633,6 @@ namespace Nest
 
 		/// <inheritdoc/>
 		Task<IExistsResponse> DocumentExistsAsync(IDocumentExistsRequest documentExistsRequest);
-
-		/// <summary>
-		/// Before any snapshot or restore operation can be performed a snapshot repository should be registered in Elasticsearch. 
-		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-snapshots.html#_repositories
-		/// </summary>
-		/// <param name="repository">The name for the repository</param>
-		/// <param name="selector">describe what the repository looks like</param>
-		IAcknowledgedResponse CreateRepository(string repository, Func<CreateRepositoryDescriptor, CreateRepositoryDescriptor> selector);
-
-		/// <inheritdoc/>
-		IAcknowledgedResponse CreateRepository(ICreateRepositoryRequest createRepositoryRequest);
-
-		/// <inheritdoc/>
-		Task<IAcknowledgedResponse> CreateRepositoryAsync(string repository, Func<CreateRepositoryDescriptor, CreateRepositoryDescriptor> selector);
-
-		/// <inheritdoc/>
-		Task<IAcknowledgedResponse> CreateRepositoryAsync(ICreateRepositoryRequest createRepositoryRequest);
-
-		/// <summary>
-		/// Delete a repository, if you have ongoing restore operations be sure to delete the indices being restored into first.
-		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-snapshots.html#_repositories
-		/// </summary>
-		/// <param name="repository">The name of the repository</param>
-		/// <param name="selector">Optionaly provide the delete operation with more details</param>>
-		IAcknowledgedResponse DeleteRepository(string repository, Func<DeleteRepositoryDescriptor, DeleteRepositoryDescriptor> selector = null);
-
-		/// <inheritdoc/>
-		IAcknowledgedResponse DeleteRepository(IDeleteRepositoryRequest deleteRepositoryRequest);
-
-		/// <inheritdoc/>
-		Task<IAcknowledgedResponse> DeleteRepositoryAsync(string repository, Func<DeleteRepositoryDescriptor, DeleteRepositoryDescriptor> selector = null);
-
-		/// <inheritdoc/>
-		Task<IAcknowledgedResponse> DeleteRepositoryAsync(IDeleteRepositoryRequest deleteRepositoryRequest);
-
-		/// <inheritdoc/>
-		IObservable<IRecoveryStatusResponse> RestoreObservable(TimeSpan interval, Func<RestoreDescriptor, RestoreDescriptor> selector = null);
-
-		/// <inheritdoc/>
-		IObservable<IRecoveryStatusResponse> RestoreObservable(TimeSpan interval, IRestoreRequest restoreRequest);
 
 		/// <summary>
 		/// Allows to update cluster wide specific settings. Settings updated can either be persistent 
@@ -1025,32 +704,6 @@ namespace Nest
 		/// <inheritdoc/>
 		Task<IExistsResponse> TypeExistsAsync(ITypeExistsRequest TypeRequest);
 
-		/// <inheritdoc/>
-		IGetFieldMappingResponse GetFieldMapping<T>(Func<GetFieldMappingDescriptor<T>, GetFieldMappingDescriptor<T>> selector = null)
-			where T : class;
-
-		/// <inheritdoc/>
-		IGetFieldMappingResponse GetFieldMapping(IGetFieldMappingRequest getFieldMappingRequest);
-
-		/// <inheritdoc/>
-		Task<IGetFieldMappingResponse> GetFieldMappingAsync<T>(Func<GetFieldMappingDescriptor<T>, GetFieldMappingDescriptor<T>> selector = null)
-			where T : class;
-
-		/// <inheritdoc/>
-		Task<IGetFieldMappingResponse> GetFieldMappingAsync(IGetFieldMappingRequest getFieldMappingRequest);
-
-		/// <inheritdoc/>
-		IExistsResponse TemplateExists(Func<TemplateExistsDescriptor, TemplateExistsDescriptor> selector);
-
-		/// <inheritdoc/>
-		IExistsResponse TemplateExists(ITemplateExistsRequest templateRequest);
-
-		/// <inheritdoc/>
-		Task<IExistsResponse> TemplateExistsAsync(Func<TemplateExistsDescriptor, TemplateExistsDescriptor> selector);
-
-		/// <inheritdoc/>
-		Task<IExistsResponse> TemplateExistsAsync(ITemplateExistsRequest templateRequest);
-
 		/// <summary>
 		/// Executes a HEAD request to the cluster to determine whether it's up or not.
 		/// </summary>
@@ -1065,46 +718,6 @@ namespace Nest
 		/// <inheritdoc/>
 		Task<IPingResponse> PingAsync(IPingRequest pingRequest);
 
-		/// <inheritdoc/>
-		IGetRepositoryResponse GetRepository(Func<GetRepositoryDescriptor, GetRepositoryDescriptor> selector);
-
-		/// <inheritdoc/>
-		IGetRepositoryResponse GetRepository(IGetRepositoryRequest request);
-
-		/// <inheritdoc/>
-		Task<IGetRepositoryResponse> GetRepositoryAsync(Func<GetRepositoryDescriptor, GetRepositoryDescriptor> selector);
-
-		/// <inheritdoc/>
-		Task<IGetRepositoryResponse> GetRepositoryAsync(IGetRepositoryRequest request);
-
-		IRecoveryStatusResponse RecoveryStatus(Func<RecoveryStatusDescriptor, RecoveryStatusDescriptor> selector = null);
-
-		/// <inheritdoc/>
-		IRecoveryStatusResponse RecoveryStatus(IRecoveryStatusRequest statusRequest);
-
-		/// <inheritdoc/>
-		Task<IRecoveryStatusResponse> RecoveryStatusAsync(Func<RecoveryStatusDescriptor, RecoveryStatusDescriptor> selector = null);
-
-		/// <inheritdoc/>
-		Task<IRecoveryStatusResponse> RecoveryStatusAsync(IRecoveryStatusRequest statusRequest);
-
-		/// <inheritdoc/>
-		IPutScriptResponse PutScript(Func<PutScriptDescriptor, PutScriptDescriptor> putScriptDescriptor);
-
-		/// <inheritdoc/>
-		Task<IPutScriptResponse> PutScriptAsync(Func<PutScriptDescriptor, PutScriptDescriptor> putScriptDescriptor);
-
-		/// <inheritdoc/>
-		IGetScriptResponse GetScript(Func<GetScriptDescriptor, GetScriptDescriptor> getScriptDescriptor);
-
-		/// <inheritdoc/>
-		Task<IGetScriptResponse> GetScriptAsync(Func<GetScriptDescriptor, GetScriptDescriptor> getScriptDescriptor);
-
-		/// <inheritdoc/>
-		IDeleteScriptResponse DeleteScript(Func<DeleteScriptDescriptor, DeleteScriptDescriptor> deleteScriptDescriptor);
-
-		/// <inheritdoc/>
-		Task<IDeleteScriptResponse> DeleteScriptAsync(Func<DeleteScriptDescriptor, DeleteScriptDescriptor> deleteScriptDescriptor);
 
 		/// <inheritdoc/>
 		IGetIndexResponse GetIndex(Func<GetIndexDescriptor, GetIndexDescriptor> getIndexSelector);
@@ -1117,42 +730,6 @@ namespace Nest
 
 		/// <inheritdoc/>
 		Task<IGetIndexResponse> GetIndexAsync(IGetIndexRequest createIndexRequest);
-
-		/// <inheritdoc/>
-		IVerifyRepositoryResponse VerifyRepository(string name, Func<VerifyRepositoryDescriptor, VerifyRepositoryDescriptor> selector = null);
-
-		/// <inheritdoc/>
-		IVerifyRepositoryResponse VerifyRepository(IVerifyRepositoryRequest verifyRepositoryRequest);
-
-		/// <inheritdoc/>
-		Task<IVerifyRepositoryResponse> VerifyRepositoryAsync(string name, Func<VerifyRepositoryDescriptor, VerifyRepositoryDescriptor> selector = null);
-
-		/// <inheritdoc/>
-		Task<IVerifyRepositoryResponse> VerifyRepositoryAsync(IVerifyRepositoryRequest verifyRepositoryRequest);
-
-		/// <inheritdoc/>
-		IUpgradeResponse Upgrade(IUpgradeRequest upgradeRequest);
-
-		/// <inheritdoc/>
-		IUpgradeResponse Upgrade(Func<UpgradeDescriptor, UpgradeDescriptor> upgradeDescriptor = null);
-
-		/// <inheritdoc/>
-		Task<IUpgradeResponse> UpgradeAsync(IUpgradeRequest upgradeRequest);
-
-		/// <inheritdoc/>
-		Task<IUpgradeResponse> UpgradeAsync(Func<UpgradeDescriptor, UpgradeDescriptor> upgradeDescriptor = null);
-
-		/// <inheritdoc/>
-		IUpgradeStatusResponse UpgradeStatus(IUpgradeStatusRequest upgradeRequest);
-
-		/// <inheritdoc/>
-		IUpgradeStatusResponse UpgradeStatus(Func<UpgradeStatusDescriptor, UpgradeStatusDescriptor> upgradeDescriptor = null);
-
-		/// <inheritdoc/>
-		Task<IUpgradeStatusResponse> UpgradeStatusAsync(IUpgradeStatusRequest upgradeRequest);
-
-		/// <inheritdoc/>
-		Task<IUpgradeStatusResponse> UpgradeStatusAsync(Func<UpgradeStatusDescriptor, UpgradeStatusDescriptor> upgradeDescriptor = null);
 
 		/// <inheritdoc/>
 		ICatResponse<CatAliasesRecord> CatAliases(Func<CatAliasesDescriptor, CatAliasesDescriptor> selector = null);

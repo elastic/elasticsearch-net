@@ -10,58 +10,67 @@ namespace Nest
 	using GetWarmerConverter = Func<IApiCallDetails, Stream, WarmerResponse>;
 	using CrazyWarmerResponse = Dictionary<string, Dictionary<string, IWarmers>>;
 
+	public partial interface IElasticClient
+	{
+		/// <summary>
+		/// Getting a warmer for specific index (or alias, or several indices) based on its name. 
+		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-warmers.html#warmer-retrieving
+		/// </summary>
+		/// <param name="name">The name of the warmer to get</param>
+		/// <param name="selector">An optional selector specifying additional parameters for the get warmer operation</param>
+		IWarmerResponse GetWarmer(string name, Func<GetWarmerDescriptor, IGetWarmerRequest> selector = null);
+
+		/// <inheritdoc/>
+		IWarmerResponse GetWarmer(IGetWarmerRequest getWarmerRequest);
+
+		/// <inheritdoc/>
+		Task<IWarmerResponse> GetWarmerAsync(string name, Func<GetWarmerDescriptor, IGetWarmerRequest> selector = null);
+
+		/// <inheritdoc/>
+		Task<IWarmerResponse> GetWarmerAsync(IGetWarmerRequest getWarmerRequest);
+
+	}
+
 	public partial class ElasticClient
 	{
+		//TODO AllIndices seems very weird here
 
 		/// <inheritdoc/>
-		public IWarmerResponse GetWarmer(string name, Func<GetWarmerDescriptor, GetWarmerDescriptor> selector = null)
-		{
-			selector = selector ?? (s => s);
-			return this.Dispatcher.Dispatch<GetWarmerDescriptor, GetWarmerRequestParameters, WarmerResponse>(
-				d => selector(d.Name(name).AllIndices()),
-				(p, d) => this.LowLevelDispatch.IndicesGetWarmerDispatch<WarmerResponse>(
-					p.DeserializationState(new GetWarmerConverter(DeserializeWarmerResponse))
-				)
+		public IWarmerResponse GetWarmer(string name, Func<GetWarmerDescriptor, IGetWarmerRequest> selector = null) => 
+			this.Dispatcher.Dispatch<IGetWarmerRequest, GetWarmerRequestParameters, WarmerResponse>(
+				selector.InvokeOrDefault(new GetWarmerDescriptor().Name(name).AllIndices()),
+				new GetWarmerConverter(DeserializeWarmerResponse),
+				(p, d) => this.LowLevelDispatch.IndicesGetWarmerDispatch<WarmerResponse>(p)
 			);
-		}
 
 		/// <inheritdoc/>
-		public IWarmerResponse GetWarmer(IGetWarmerRequest getWarmerRequest)
-		{
-			return this.Dispatcher.Dispatch<IGetWarmerRequest, GetWarmerRequestParameters, WarmerResponse>(
+		public IWarmerResponse GetWarmer(IGetWarmerRequest getWarmerRequest) => 
+			this.Dispatcher.Dispatch<IGetWarmerRequest, GetWarmerRequestParameters, WarmerResponse>(
 				getWarmerRequest,
-				(p, d) => this.LowLevelDispatch.IndicesGetWarmerDispatch<WarmerResponse>(
-					p.DeserializationState(new GetWarmerConverter(DeserializeWarmerResponse))
-				)
+				new GetWarmerConverter(DeserializeWarmerResponse),
+				(p, d) => this.LowLevelDispatch.IndicesGetWarmerDispatch<WarmerResponse>(p)
 			);
-		}
 
 		/// <inheritdoc/>
-		public Task<IWarmerResponse> GetWarmerAsync(string name, Func<GetWarmerDescriptor, GetWarmerDescriptor> selector = null)
-		{
-			selector = selector ?? (s => s);
-			return this.Dispatcher.DispatchAsync<GetWarmerDescriptor, GetWarmerRequestParameters, WarmerResponse, IWarmerResponse>(
-				d => selector(d.Name(name).AllIndices()),
-				(p, d) => this.LowLevelDispatch.IndicesGetWarmerDispatchAsync<WarmerResponse>(
-					p.DeserializationState(new GetWarmerConverter(DeserializeWarmerResponse))
-				)
+		public Task<IWarmerResponse> GetWarmerAsync(string name, Func<GetWarmerDescriptor, IGetWarmerRequest> selector = null) => 
+			this.Dispatcher.DispatchAsync<IGetWarmerRequest, GetWarmerRequestParameters, WarmerResponse, IWarmerResponse>(
+				selector.InvokeOrDefault(new GetWarmerDescriptor().Name(name).AllIndices()),
+				new GetWarmerConverter(DeserializeWarmerResponse),
+				(p, d) => this.LowLevelDispatch.IndicesGetWarmerDispatchAsync<WarmerResponse>(p)
 			);
-		}
 
 		/// <inheritdoc/>
-		public Task<IWarmerResponse> GetWarmerAsync(IGetWarmerRequest getWarmerRequest)
-		{
-			return this.Dispatcher.DispatchAsync<IGetWarmerRequest, GetWarmerRequestParameters, WarmerResponse, IWarmerResponse>(
+		public Task<IWarmerResponse> GetWarmerAsync(IGetWarmerRequest getWarmerRequest) => 
+			this.Dispatcher.DispatchAsync<IGetWarmerRequest, GetWarmerRequestParameters, WarmerResponse, IWarmerResponse>(
 				getWarmerRequest,
-				(p, d) => this.LowLevelDispatch.IndicesGetWarmerDispatchAsync<WarmerResponse>(
-					p.DeserializationState(new GetWarmerConverter(DeserializeWarmerResponse))
-				)
+				new GetWarmerConverter(DeserializeWarmerResponse),
+				(p, d) => this.LowLevelDispatch.IndicesGetWarmerDispatchAsync<WarmerResponse>(p)
 			);
-		}
 
 		/// <inheritdoc/>
 		private WarmerResponse DeserializeWarmerResponse(IApiCallDetails apiCallDetails, Stream stream)
 		{
+			//TODO Broke this rething this, DictionaryResponse?
 			throw new NotImplementedException();
 			//if (!apiCallDetails.Success) return new WarmerResponse ();
 
