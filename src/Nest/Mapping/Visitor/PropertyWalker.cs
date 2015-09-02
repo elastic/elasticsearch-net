@@ -34,12 +34,12 @@ namespace Nest
 			_seenTypes = seenTypes;
 		}
 
-		public IProperties GetProperties()
+		public IProperties GetProperties(ConcurrentDictionary<Type, int> seenTypes = null, int maxRecursion = 0)
 		{
 			var properties = new Properties();
 
 			int seen;
-			if (_seenTypes.TryGetValue(_type, out seen) && seen > _maxRecursion)
+			if (seenTypes != null && seenTypes.TryGetValue(_type, out seen) && seen > maxRecursion)
 				return properties;
 
 			foreach(var propertyInfo in _type.GetProperties())
@@ -64,7 +64,7 @@ namespace Nest
 				var seenTypes = new ConcurrentDictionary<Type, int>(_seenTypes);
 				seenTypes.AddOrUpdate(type, 0, (t, i) => ++i);
 				var walker = new PropertyWalker(type, _visitor, _maxRecursion, seenTypes);
-				objectType.Properties = walker.GetProperties();
+				objectType.Properties = walker.GetProperties(seenTypes, _maxRecursion);
 			}
 			_visitor.Visit(elasticType, propertyInfo, attribute);
 			return elasticType;	
