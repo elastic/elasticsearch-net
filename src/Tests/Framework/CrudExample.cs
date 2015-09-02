@@ -10,9 +10,20 @@ using Xunit;
 namespace Tests.Framework
 {
 	public abstract class CrudExample<TCreateResponse, TReadResponse, TUpdateResponse>
+		: CrudExample<TCreateResponse, TReadResponse, TUpdateResponse, AcknowledgedResponse>
 			where TCreateResponse : class, IResponse
 			where TReadResponse : class, IResponse
 			where TUpdateResponse : class, IResponse
+	{
+		public CrudExample(IIntegrationCluster cluster, ApiUsage usage) : base(cluster, usage) { }
+		protected override bool SupportsDeletes => false;
+	}
+
+	public abstract class CrudExample<TCreateResponse, TReadResponse, TUpdateResponse, TDeleteResponse>
+			where TCreateResponse : class, IResponse
+			where TReadResponse : class, IResponse
+			where TUpdateResponse : class, IResponse
+			where TDeleteResponse : class, IResponse
 	{
 		private LazyResponses _createResponse;
 		private LazyResponses _createGetResponse;
@@ -79,6 +90,8 @@ namespace Tests.Framework
 		protected async Task AssertOnAllResponses<TResponse>(LazyResponses responses, Action<TResponse> assert)
 			where TResponse : class, IResponse
 		{
+			//hack to make sure these are resolved in the right order, calling twice yields cached results so 
+			//should be fast
 			await this._createResponse;
 			await this._createGetResponse;
 			await this._updateResponse;
@@ -92,6 +105,8 @@ namespace Tests.Framework
 			foreach (var kv in await responses)
 			{
 				var response = kv.Value as TResponse;
+				if (response == null)
+					throw new Exception($"{kv.Value.GetType()} is not expected response type {typeof(TResponse)}");
 				try
 				{
 					assert(response);
@@ -105,7 +120,7 @@ namespace Tests.Framework
 
 		protected async Task AssertOnCreate(Action<TCreateResponse> assert) => await this.AssertOnAllResponses(this._createResponse, assert);
 		protected async Task AssertOnUpdate(Action<TUpdateResponse> assert) => await this.AssertOnAllResponses(this._updateResponse, assert);
-		protected async Task AssertOnDelete(Action<TCreateResponse> assert)
+		protected async Task AssertOnDelete(Action<TDeleteResponse> assert)
 		{
 			if (!this.SupportsDeletes) return;
 			await this.AssertOnAllResponses(this._deleteResponse, assert);
@@ -119,14 +134,13 @@ namespace Tests.Framework
 			await this.AssertOnAllResponses(this._deleteGetResponse, assert);
 		}
 
-
 		[I] protected async Task CreateCallIsValid() => await this.AssertOnCreate(r => r.IsValid.Should().Be(true));
 		[I] protected async Task GetAfterCreateIsValid() => await this.AssertOnGetAfterCreate(r => r.IsValid.Should().Be(true));
 
 		[I] protected async Task UpdateCallIsValid() => await this.AssertOnUpdate(r => r.IsValid.Should().Be(true));
 		[I] protected async Task GetAfterUpdateIsValid() => await this.AssertOnGetAfterUpdate(r => r.IsValid.Should().Be(true));
 
-		[I] protected async Task DeleteCallIsValid() => await this.AssertOnUpdate(r => r.IsValid.Should().Be(true));
+		[I] protected async Task DeleteCallIsValid() => await this.AssertOnDelete(r => r.IsValid.Should().Be(true));
 		[I] protected async Task GetAfterDeleteIsValid() => await this.AssertOnGetAfterDelete(r => r.IsValid.Should().Be(false));
 	}
 }

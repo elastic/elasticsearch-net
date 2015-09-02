@@ -101,16 +101,16 @@ namespace Nest
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-update-settings.html
 		/// </summary>
 		/// <param name="updateSettingsSelector">A descriptor that strongly types all the updateable settings</param>
-		IAcknowledgedResponse UpdateSettings(Func<UpdateSettingsDescriptor, IUpdateSettingsRequest> updateSettingsSelector);
+		IAcknowledgedResponse UpdateIndexSettings(Func<UpdateSettingsDescriptor, IUpdateSettingsRequest> updateSettingsSelector);
 
 		/// <inheritdoc/>
-		IAcknowledgedResponse UpdateSettings(IUpdateSettingsRequest updateSettingsRequest);
+		IAcknowledgedResponse UpdateIndexSettings(IUpdateSettingsRequest updateSettingsRequest);
 
 		/// <inheritdoc/>
-		Task<IAcknowledgedResponse> UpdateSettingsAsync(Func<UpdateSettingsDescriptor, IUpdateSettingsRequest> updateSettingsSelector);
+		Task<IAcknowledgedResponse> UpdateIndexSettingsAsync(Func<UpdateSettingsDescriptor, IUpdateSettingsRequest> updateSettingsSelector);
 
 		/// <inheritdoc/>
-		Task<IAcknowledgedResponse> UpdateSettingsAsync(IUpdateSettingsRequest updateSettingsRequest);
+		Task<IAcknowledgedResponse> UpdateIndexSettingsAsync(IUpdateSettingsRequest updateSettingsRequest);
 
 		/// <summary>
 		/// The validate API allows a user to validate a potentially expensive query without executing it.

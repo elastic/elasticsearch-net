@@ -18,11 +18,24 @@ using Xunit;
 
 namespace Tests
 {
-	[Collection(IntegrationContext.Indexing)]
-	public class AnalysisCrud : CrudExample<IIndicesOperationResponse, IIndexSettingsResponse, IIndicesOperationResponse>
-	{
-		public AnalysisCrud(IndexingCluster cluster, ApiUsage usage) : base (cluster, usage) { }
 
+	[Collection(IntegrationContext.Indexing)]
+	public class AnalysisCrud : CrudExample<IIndicesOperationResponse, IIndexSettingsResponse, IAcknowledgedResponse>
+	{
+		/**
+		* # Analysis crud
+		* 
+		* In this example we will create an index with analysis settings, read those settings back, update the analysis settings
+		* and do another read after the update to assert our new analysis setting is applied.
+		* There is NO mechanism to delete an analysis setting in elasticsearch.
+		*/
+		protected override bool SupportsDeletes => false;
+
+		public AnalysisCrud(IndexingCluster cluster, ApiUsage usage) : base(cluster, usage) { }
+
+		/**
+		* We can create the analysis settings as part of the create index call
+		*/
 		protected override LazyResponses Create() => Calls<CreateIndexDescriptor, CreateIndexRequest, ICreateIndexRequest, IIndicesOperationResponse>(
 			CreateInitializer,
 			CreateFluent,
@@ -47,16 +60,19 @@ namespace Tests
 		};
 
 		protected ICreateIndexRequest CreateFluent(string indexName, CreateIndexDescriptor c) =>
-			c.Settings(s=>s
-				.Analysis(a=>a
-					.Analyzers(t=>AnalyzersTests.Usage.FluentExample(s).Analysis.Analyzers)
-					.CharFilters(t=>CharFilterTests.Usage.FluentExample(s).Analysis.CharFilters)
-					.Tokenizers(t=>TokenizerTests.Usage.FluentExample(s).Analysis.Tokenizers)
-					.TokenFilters(t=>TokenFiltersTests.Usage.FluentExample(s).Analysis.TokenFilters)
+			c.Settings(s => s
+				.Analysis(a => a
+					.Analyzers(t => AnalyzersTests.Usage.FluentExample(s).Analysis.Analyzers)
+					.CharFilters(t => CharFilterTests.Usage.FluentExample(s).Analysis.CharFilters)
+					.Tokenizers(t => TokenizerTests.Usage.FluentExample(s).Analysis.Tokenizers)
+					.TokenFilters(t => TokenFiltersTests.Usage.FluentExample(s).Analysis.TokenFilters)
 				)
 			);
 
 
+		/**
+		* We then read back the analysis settings using `GetIndexSettings()`, you can use this method to get the settings for 1, or many indices in one go
+		*/
 		protected override LazyResponses Read() => Calls<GetIndexSettingsDescriptor, GetIndexSettingsRequest, IGetIndexSettingsRequest, IIndexSettingsResponse>(
 			GetInitializer,
 			GetFluent,
@@ -69,15 +85,64 @@ namespace Tests
 		protected GetIndexSettingsRequest GetInitializer(string indexName) => new GetIndexSettingsRequest(indexName) { };
 		protected IGetIndexSettingsRequest GetFluent(string indexName, GetIndexSettingsDescriptor u) => u.Index(indexName);
 
+		/**
+		* Here we assert over the response from `GetIndexSettings()` after the index creation to make sure our analysis chain did infact 
+		* store our html char filter called `stripMe`
+		*/
+		[I] protected async Task CreatedAnalyisHasCharFilters() => await this.AssertOnGetAfterCreate(r =>
+		{
+			r.Indices.Should().NotBeNull().And.HaveCount(1);
+			var index = r.Indices.Values.First();
+			index.Should().NotBeNull();
+			index.Settings.Should().NotBeNull();
+			var indexSettings = index.Settings;
+			indexSettings.Analysis.Should().NotBeNull();
+			indexSettings.Analysis.CharFilters.Should().NotBeNull();
+
+			var firstHtmlCharFilter = indexSettings.Analysis.CharFilters["stripMe"];
+			firstHtmlCharFilter.Should().NotBeNull();
+		});
+
+		/**
+		* Elasticsearch has an `UpdateIndexSettings()` call but in order to be able to use it you first need to close the index and reopen it afterwards
+		*/
 		protected override LazyResponses Update() => Calls<UpdateSettingsDescriptor, UpdateSettingsRequest, IUpdateSettingsRequest, IAcknowledgedResponse>(
 			UpdateInitializer,
 			UpdateFluent,
-			fluent: (s, c, f) => c.UpdateSettings(f),
-			fluentAsync: (s, c, f) => c.UpdateSettingsAsync(f),
-			request: (s, c, r) => c.UpdateSettings(r),
-			requestAsync: (s, c, r) => c.UpdateSettingsAsync(r)
+			fluent: (s, c, f) =>
+			{
+				c.CloseIndex(s);
+				var response = c.UpdateIndexSettings(f);
+				c.OpenIndex(s);
+				return response;
+			}
+			,
+			fluentAsync: async (s, c, f) =>
+			{
+				c.CloseIndex(s);
+				var response = await c.UpdateIndexSettingsAsync(f);
+				c.OpenIndex(s);
+				return response;
+			},
+			request: (s, c, r) =>
+			{
+				c.CloseIndex(s);
+				var response = c.UpdateIndexSettings(r);
+				c.OpenIndex(s);
+				return response;
+			},
+			requestAsync: async (s, c, r) =>
+			{
+				c.CloseIndex(s);
+				var response = await c.UpdateIndexSettingsAsync(r);
+				c.OpenIndex(s);
+				return response;
+			}
 		);
 
+		/**
+		* Here we add a new `HtmlStripCharFilter` called `differentHtml`
+		*/
 		protected UpdateSettingsRequest UpdateInitializer(string indexName) => new UpdateSettingsRequest(indexName)
 		{
 			Analysis = new Analysis
@@ -85,13 +150,7 @@ namespace Tests
 				CharFilters = new CharFilters { { "differentHtml", new HtmlStripCharFilter { } } }
 			}
 		};
-		[I] protected async Task CreatedAnalyisHasCharFilters() => await this.AssertOnGetAfterCreate(r =>
-		{
-			r.IndexSettings.Should().NotBeNull();
-			r.IndexSettings.Settings.Should().NotBeNull();
-			r.IndexSettings.Settings.Analysis.Should().NotBeNull();
-			r.IndexSettings.Settings.Analysis.CharFilters.Should().NotBeNull();
-		});
+
 
 		protected IUpdateSettingsRequest UpdateFluent(string indexName, UpdateSettingsDescriptor u) => u
 			.Index(indexName)
@@ -101,6 +160,21 @@ namespace Tests
 				)
 			);
 
-		protected override bool SupportsDeletes => false;
+		/**
+		* Here we assert that the `GetIndexSettings()` call after the update sees the newly introduced `differentHmtl` char filter
+		*/
+		[I] protected async Task UpdatedAnalyisHasNewCharFilter() => await this.AssertOnGetAfterUpdate(r =>
+		{
+			r.Indices.Should().NotBeNull().And.HaveCount(1);
+			var index = r.Indices.Values.First();
+			index.Should().NotBeNull();
+			index.Settings.Should().NotBeNull();
+			var indexSettings = index.Settings;
+			indexSettings.Analysis.Should().NotBeNull();
+			indexSettings.Analysis.CharFilters.Should().NotBeNull();
+
+			var firstHtmlCharFilter = indexSettings.Analysis.CharFilters["differentHtml"];
+			firstHtmlCharFilter.Should().NotBeNull();
+		});
 	}
 }

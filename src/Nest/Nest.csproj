@@ -116,6 +116,7 @@
     <Compile Include="CommonAbstractions\ConnectionSettings\ClrTypeMapping.cs" />
     <Compile Include="CommonAbstractions\Infer\FieldName\FieldName.cs" />
     <Compile Include="CommonAbstractions\Infer\FieldName\FieldNameExtensions.cs" />
+    <Compile Include="CommonAbstractions\Response\DictionaryResponse.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\KeyValueJsonConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\ReserializeJsonConverter.cs" />
     <Compile Include="CommonAbstractions\Union\UnionJsonConverter.cs" />
@@ -136,7 +137,6 @@
     <Compile Include="CommonOptions\TimeUnit\TimeUnitExpression.cs" />
     <Compile Include="Document\Multiple\MultiGet\ElasticClient-SourceMany.cs" />
     <Compile Include="Document\Single\Index\IndexRequestJsonConverter.cs" />
-    <Compile Include="IndexModules\IndexSettings\IIndexState.cs" />
     <Compile Include="IndexModules\IndexSettings\Settings\DynamicIndexSettings.cs" />
     <Compile Include="IndexModules\IndexSettings\Merge\MergePolicySettings.cs" />
     <Compile Include="IndexModules\IndexSettings\Merge\MergeSchedulerSettings.cs" />
@@ -171,7 +171,7 @@
     <Compile Include="Document\Multiple\MultiGet\EllasticClient-GetMany.cs" />
     <Compile Include="Indices\IndexManagement\OpenCloseIndex\ElasticClient-OpenCloseIndexExtensions.cs" />
     <Compile Include="Document\Single\Exists\ElasticClient-ExistsExtensions.cs" />
-    <Compile Include="Indices\IndexSettings\Warmers\Warmers.cs" />
+    <Compile Include="Indices\Warmers\Warmers.cs" />
     <Compile Include="Mapping\AttributeBased\AttachmentAttribute.cs" />
     <Compile Include="Mapping\AttributeBased\BinaryAttribute.cs" />
     <Compile Include="Mapping\AttributeBased\BooleanAttribute.cs" />
@@ -367,7 +367,7 @@
     <Compile Include="Cluster\ClusterStats\ClusterStatsResponse.cs" />
     <Compile Include="Cluster\PendingClusterTasks\ClusterPendingTasksResponse.cs" />
     <Compile Include="Indices\AliasManagement\DeleteAlias\DeleteAliasResponse.cs" />
-    <Compile Include="Indices\IndexSettings\Warmers\PutWarmer\CreateWarmer.cs" />
+    <Compile Include="Indices\Warmers\PutWarmer\CreateWarmer.cs" />
     <Compile Include="Search\FieldStats\FieldStatsResponse.cs" />
     <Compile Include="Indices\IndexManagement\GetIndex\GetIndexResponse.cs" />
     <Compile Include="Modules\Scripting\DeleteScript\DeleteScriptResponse.cs" />
@@ -426,7 +426,7 @@
     <Compile Include="Aggregations\Metric\TopHits\TopHitsAggregation.cs" />
     <Compile Include="Aggregations\Metric\GeoBounds\GeoBoundsAggregation.cs" />
     <Compile Include="Aggregations\Bucket\ReverseNested\ReverseNestedAggregation.cs" />
-    <Compile Include="Indices\IndexSettings\GetSettings\GetIndexSettingsRequest.cs" />
+    <Compile Include="Indices\IndexSettings\GetIndexSettings\GetIndexSettingsRequest.cs" />
     <Compile Include="Indices\IndexSettings\IndexTemplates\GetTemplate\ElasticClient-GetTemplate.cs" />
     <Compile Include="Indices\IndexSettings\IndexTemplates\PutTemplate\ElasticClient-PutTemplate.cs" />
     <Compile Include="IndexModules\IndexSettings\Settings\UpdatableSettings.cs" />
@@ -442,8 +442,8 @@
     <Compile Include="Indices\StatusManagement\Upgrade\UpgradeStatus\UpgradeStatusRequest.cs" />
     <Compile Include="Indices\IndexManagement\GetIndex\GetIndexRequest.cs" />
     <Compile Include="Indices\IndexManagement\OpenCloseIndex\OpenIndex\ElasticClient-OpenIndex.cs" />
-    <Compile Include="Indices\IndexSettings\Warmers\GetWarmer\ElasticClient-GetWarmer.cs" />
-    <Compile Include="Indices\IndexSettings\Warmers\PutWarmer\ElasticClient-PutWarmer.cs" />
+    <Compile Include="Indices\Warmers\GetWarmer\ElasticClient-GetWarmer.cs" />
+    <Compile Include="Indices\Warmers\PutWarmer\ElasticClient-PutWarmer.cs" />
     <Compile Include="Modules\Scripting\DeleteScript\DeleteScriptRequest.cs" />
     <Compile Include="Indices\AliasManagement\DeleteAlias\ElasticClient-DeleteAlias.cs" />
     <Compile Include="Indices\AliasManagement\GetAliases\ElasticClient-GetAliases.cs" />
@@ -518,7 +518,7 @@
     <Compile Include="CommonAbstractions\Request\Paths\IndicesOptionalTypesNamePathDecriptor.cs" />
     <Compile Include="Cluster\Ping\PingRequest.cs" />
     <Compile Include="QueryDsl\Span\MultiTerm\SpanMultiTermQuery.cs" />
-    <Compile Include="Indices\MappingManagement\TypesExists\TypeExistsRequest.cs" />
+    <Compile Include="Indices\IndexManagement\TypesExists\TypeExistsRequest.cs" />
     <Compile Include="QueryDsl\Compound\FunctionScore\Functions\FieldValueFactor.cs" />
     <Compile Include="QueryDsl\Geo\Shape\MultiPoint\GeoShapeMultiPointQuery.cs" />
     <Compile Include="QueryDsl\Geo\Shape\MultiPolygon\GeoShapeMultiPolygonQuery.cs" />
@@ -591,7 +591,7 @@
     <Compile Include="Indices\MappingManagement\GetFieldMapping\ElasticClient-MappingGetField.cs" />
     <Compile Include="Search\Percolator\MultiPercolate\ElasticClient-MultiPercolate.cs" />
     <Compile Include="Cluster\Ping\ElasticClient-Ping.cs" />
-    <Compile Include="Indices\MappingManagement\TypesExists\ElasticClient-TypeExists.cs" />
+    <Compile Include="Indices\IndexManagement\TypesExists\ElasticClient-TypeExists.cs" />
     <Compile Include="Search\Explain\ElasticClient-Explain.cs" />
     <Compile Include="Indices\StatusManagement\Upgrade\ElasticClient-Upgrade.cs" />
     <Compile Include="Modules\Indices\Fielddata\FielddataLoading.cs" />
@@ -691,7 +691,7 @@
     <Compile Include="Cluster\NodeStats\NodesStatsRequest.cs" />
     <Compile Include="Cluster\NodesInfo\NodesInfoRequest.cs" />
     <Compile Include="Cluster\ClusterHealth\ClusterHealthRequest.cs" />
-    <Compile Include="Indices\IndexSettings\Analyze\AnalyzeRequest.cs" />
+    <Compile Include="Indices\Analyze\AnalyzeRequest.cs" />
     <Compile Include="Indices\AliasManagement\Alias\BulkAliasRequest.cs" />
     <Compile Include="Indices\AliasManagement\GetAliases\GetAliasesRequest.cs" />
     <Compile Include="Document\Single\Delete\DeleteRequest.cs" />
@@ -714,7 +714,7 @@
     <Compile Include="Search\Percolator\UnregisterPercolator\UnregisterPercolatorRequest.cs" />
     <Compile Include="Indices\IndexSettings\IndexTemplates\DeleteTemplate\DeleteTemplateRequest.cs" />
     <Compile Include="Indices\IndexSettings\IndexTemplates\GetTemplate\GetTemplateRequest.cs" />
-    <Compile Include="Indices\IndexSettings\Warmers\DeleteWarmer\DeleteWarmerRequest.cs" />
+    <Compile Include="Indices\Warmers\DeleteWarmer\DeleteWarmerRequest.cs" />
     <Compile Include="CommonAbstractions\Request\Paths\IPathInfo.cs" />
     <Compile Include="CommonAbstractions\Request\Paths\IndexNamePath.cs" />
     <Compile Include="CommonAbstractions\Request\Paths\NamePath.cs" />
@@ -789,17 +789,17 @@
     <Compile Include="Cluster\ClusterState\ElasticClient-ClusterState.cs" />
     <Compile Include="CommonAbstractions\Extensions\UriExtensions.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\StatefulDeserialization\ConcreteTypeConverter.cs" />
-    <Compile Include="Indices\IndexSettings\Warmers\Warmer.cs" />
-    <Compile Include="Indices\IndexSettings\Warmers\GetWarmer\WarmerResponse.cs">
+    <Compile Include="Indices\Warmers\Warmer.cs" />
+    <Compile Include="Indices\Warmers\GetWarmer\WarmerResponse.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Search\Search\Rescoring\Rescore.cs" />
-    <Compile Include="Indices\IndexSettings\Warmers\PutWarmer\PutWarmerRequest.cs" />
-    <Compile Include="Indices\IndexSettings\Warmers\GetWarmer\GetWarmerRequest.cs" />
+    <Compile Include="Indices\Warmers\PutWarmer\PutWarmerRequest.cs" />
+    <Compile Include="Indices\Warmers\GetWarmer\GetWarmerRequest.cs" />
     <Compile Include="QueryDsl\FullText\Match\MatchPhrasePrefixQuery.cs" />
     <Compile Include="QueryDsl\FullText\Match\MatchPhraseQuery.cs" />
     <Compile Include="QueryDsl\FullText\Match\MatchQuery.cs" />
-    <Compile Include="Indices\IndexSettings\Warmers\DeleteWarmer\ElasticClient-DeleteWarmer.cs" />
+    <Compile Include="Indices\Warmers\DeleteWarmer\ElasticClient-DeleteWarmer.cs" />
     <Compile Include="Document\Multiple\Bulk\BulkResponseItem\BulkCreateResponseItem.cs" />
     <Compile Include="Document\Multiple\Bulk\BulkResponseItem\BulkDeleteResponseItem.cs" />
     <Compile Include="Document\Multiple\Bulk\BulkResponseItem\BulkIndexResponseItem.cs" />
@@ -954,20 +954,20 @@
     <Compile Include="Indices\Monitoring\IndicesStats\Stats.cs" />
     <Compile Include="Indices\Monitoring\IndicesStats\ElasticClient-IndicesStats.cs" />
     <Compile Include="CommonAbstractions\Response\AcknowledgedResponse.cs" />
-    <Compile Include="Indices\IndexSettings\GetSettings\IndexSettingsResponse.cs" />
-    <Compile Include="Indices\IndexSettings\GetSettings\ElasticClient-GetIndexSettings.cs" />
+    <Compile Include="Indices\IndexSettings\GetIndexSettings\IndexSettingsResponse.cs" />
+    <Compile Include="Indices\IndexSettings\GetIndexSettings\ElasticClient-GetIndexSettings.cs" />
     <Compile Include="Indices\StatusManagement\ClearCache\ElasticClient-ClearCache.cs" />
-    <Compile Include="Indices\IndexSettings\Analyze\AnalyzeToken.cs" />
+    <Compile Include="Indices\Analyze\AnalyzeToken.cs" />
     <Compile Include="Mapping\Types\ElasticsearchProperty.cs" />
     <Compile Include="Mapping\Fields\Id\IdField.cs" />
-    <Compile Include="Indices\IndexSettings\Analyze\AnalyzeResponse.cs" />
+    <Compile Include="Indices\Analyze\AnalyzeResponse.cs" />
     <Compile Include="Search\Count\CountResponse.cs" />
     <Compile Include="CommonAbstractions\Response\ElasticSearchVersionInfo.cs" />
     <Compile Include="CommonAbstractions\Response\IndicesOperationResponse.cs" />
     <Compile Include="CommonAbstractions\Response\IndicesResponse.cs" />
     <Compile Include="Search\Search\SearchResponse.cs" />
     <Compile Include="IndexModules\IndexSettings\IndexState.cs" />
-    <Compile Include="Indices\IndexSettings\Analyze\ElasticClient-Analyze.cs" />
+    <Compile Include="Indices\Analyze\ElasticClient-Analyze.cs" />
     <Compile Include="Indices\AliasManagement\Alias\ElasticClient-Alias.cs" />
     <Compile Include="Indices\StatusManagement\Optimize\ElasticClient-Optimize.cs" />
     <Compile Include="Indices\StatusManagement\Flush\ElasticClient-Flush.cs" />
@@ -983,7 +983,6 @@
     <Compile Include="Document\Multiple\Bulk\BulkResponseItem\BulkResponseItemJsonConverter.cs" />
     <Compile Include="Aggregations\AggregationJsonConverter.cs" />
     <Compile Include="QueryDsl\FieldNameQueryJsonConverter.cs" />
-    <Compile Include="Indices\IndexSettings\GetSettings\IndexSettingsResponseJsonConverter.cs" />
     <Compile Include="CommonOptions\Sorting\SortCollectionJsonConverter.cs" />
     <Compile Include="Search\Suggesters\Suggest\SuggestResponseJsonConverter.cs" />
     <Compile Include="CommonAbstractions\Infer\FieldName\FieldNameJsonConverter.cs" />

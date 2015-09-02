@@ -5,11 +5,13 @@ using System.ComponentModel;
 
 namespace Nest
 {
-	public abstract class IsADictionary<TKey, TValue> : IDictionary<TKey, TValue>, IDictionary, IHasADictionary
+
+	public abstract class IsADictionary<TKey, TValue> : IDictionary<TKey, TValue>, IDictionary, IHasADictionary<TKey, TValue>
 	{
 		protected IHasADictionary Self => this;
 		protected Dictionary<TKey, TValue> BackingDictionary { get; set; }
 		IDictionary IHasADictionary.Dictionary => this.BackingDictionary;
+		IDictionary<TKey, TValue> IHasADictionary<TKey, TValue>.Dictionary => this.BackingDictionary;
 
 		protected IsADictionary() { this.BackingDictionary = new Dictionary<TKey, TValue>(); }
 		protected IsADictionary(Dictionary<TKey, TValue> backingDictionary) { this.BackingDictionary = backingDictionary; }
@@ -84,9 +86,8 @@ namespace Nest
 		bool ICollection<KeyValuePair<TKey, TValue>>.Remove(KeyValuePair<TKey, TValue> item) =>
 			((ICollection<KeyValuePair<TKey, TValue>>)this.BackingDictionary).Remove(item);
 
-
-		public void Add(KeyValuePair<TKey, TValue> item)=>
-			((ICollection<KeyValuePair<TKey, TValue>>)this.BackingDictionary).Remove(item);
+		void ICollection<KeyValuePair<TKey, TValue>>.Add(KeyValuePair<TKey, TValue> item)=>
+			((ICollection<KeyValuePair<TKey, TValue>>)this.BackingDictionary).Add(item);
 
 		TValue IDictionary<TKey, TValue>.this[TKey key]
 		{

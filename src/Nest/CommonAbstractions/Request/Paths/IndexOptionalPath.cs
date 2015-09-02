@@ -36,6 +36,9 @@ namespace Nest
 	public abstract class IndexOptionalPathBase<TParameters> : BasePathRequest<TParameters>, IIndexOptionalPath<TParameters>
 		where TParameters : IRequestParameters, new()
 	{
+		public IndexOptionalPathBase() { }
+		public IndexOptionalPathBase(IndexName index) { Index = index; }
+
 		public IndexName Index { get; set; }
 		public bool? AllIndices { get; set; }
 		

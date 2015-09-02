@@ -2,15 +2,15 @@
 
 namespace Nest
 {
-    public interface IIndicesResponse : IResponse
-    {
-        bool Acknowledged { get; }
-        ShardsMetaData ShardsHit { get; }
-    }
+	public interface IIndicesResponse : IResponse
+	{
+		bool Acknowledged { get; }
+		ShardsMetaData ShardsHit { get; }
+	}
 
-    [JsonObject]
+	[JsonObject]
 	public class IndicesResponse : BaseResponse, IIndicesResponse
-    {
+	{
 		[JsonProperty(PropertyName = "acknowledged")]
 		public bool Acknowledged { get; private set; }
 

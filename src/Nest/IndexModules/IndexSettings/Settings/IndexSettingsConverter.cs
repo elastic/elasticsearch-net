@@ -98,7 +98,7 @@ namespace Nest
 			newObject = newObject ?? new JObject();
 			foreach (var property in original.Properties())
 			{
-				if (property.Value is JObject && property.Name != "analysis") Flatten(property.Value<JObject>(), property.Name + ".", newObject);
+				if (property.Value is JObject && property.Name != "analysis") Flatten(property.Value.Value<JObject>(), property.Name + ".", newObject);
 				else newObject.Add(prefix + property.Name, property.Value);
 			}
 			return newObject;
@@ -175,7 +175,8 @@ namespace Nest
 			foreach (var kv in settings)
 			{
 				var setting = kv.Value;
-				if (kv.Key == "analysis") s.Analysis = setting.Value.Value<JObject>().ToObject<Analysis>(serializer);
+				if (kv.Key == "analysis" || kv.Key == "index.analysis")
+					s.Analysis = setting.Value.Value<JObject>().ToObject<Analysis>(serializer);
 				else
 				{
 					((IHasADictionary)s).Dictionary.Add(kv.Key, serializer.Deserialize(kv.Value.Value.CreateReader()));

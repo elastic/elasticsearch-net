@@ -29,6 +29,7 @@ namespace Nest
 	public abstract class IndicesOptionalPathBase<TParameters> : BasePathRequest<TParameters>, IIndicesOptionalPath<TParameters>
 		where TParameters : IRequestParameters, new()
 	{
+
 		public IEnumerable<IndexName> Indices { get; set; }
 		
 		protected override void SetRouteParameters(
