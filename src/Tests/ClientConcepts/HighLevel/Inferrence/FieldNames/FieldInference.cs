@@ -29,7 +29,7 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence.FieldNames
 
 			/** especially when using C# expressions since these can not be simply new'ed*/
 			Expression<Func<Project, object>> expression = p => p.Name;
-			var fieldExpression = new FieldName() { Expression = expression };
+			var fieldExpression = FieldName.Create(expression);
 
 			Expect("name")
 				.WhenSerializing(fieldExpression)

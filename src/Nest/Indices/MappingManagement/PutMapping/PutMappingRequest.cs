@@ -197,7 +197,13 @@ namespace Nest
 		/// <pre>Class types default to object and Enums to int</pre>
 		/// <pre>Later calls can override whatever is set is by this call.</pre>
 		/// </summary>
-		public PutMappingDescriptor<T> AutoMap(IPropertyVisitor visitor = null) => Assign(a => a.Properties = new PropertyWalker(typeof(T), visitor).GetProperties());
+		public PutMappingDescriptor<T> AutoMap(IPropertyVisitor visitor = null) => Assign(a =>
+		{
+			a.Properties = a.Properties ?? new Properties();
+			var autoProperties = new PropertyWalker(typeof(T), visitor).GetProperties();
+			foreach (var autoProperty in autoProperties.Dictionary)
+				a.Properties.Dictionary[autoProperty.Key] = autoProperty.Value;
+        });
 
 		/// <inheritdoc/>
 		public PutMappingDescriptor<T> Dynamic(DynamicMapping dynamic) => Assign(a => a.Dynamic = dynamic);
@@ -280,7 +286,8 @@ namespace Nest
 		/// <inheritdoc/>
 		public PutMappingDescriptor<T> Meta(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> metaSelector) => Assign(a => a.Meta = metaSelector(new FluentDictionary<string, object>()));
 
-		public PutMappingDescriptor<T> Properties(Func<PropertiesDescriptor<T>, PropertiesDescriptor<T>> propertiesSelector) => Assign(a => a.Properties = propertiesSelector?.Invoke(new PropertiesDescriptor<T>()));
+		public PutMappingDescriptor<T> Properties(Func<PropertiesDescriptor<T>, PropertiesDescriptor<T>> propertiesSelector) =>
+			Assign(a => a.Properties = propertiesSelector?.Invoke(new PropertiesDescriptor<T>(a.Properties)));
 
 		/// <inheritdoc/>
 		public PutMappingDescriptor<T> DynamicTemplates(Func<DynamicTemplatesDescriptor<T>, DynamicTemplatesDescriptor<T>> dynamicTemplatesSelector)

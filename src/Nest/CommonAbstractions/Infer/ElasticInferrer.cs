@@ -57,13 +57,21 @@ namespace Nest
 		{
 			if (field.IsConditionless())
 				return null;
-			var name = !field.Name.IsNullOrEmpty() 
-				? field.Name 
-				: field.Expression != null 
+
+			var name = !field.Name.IsNullOrEmpty()
+				? field.Name
+				: field.Expression != null
 					? this.FieldNameResolver.Resolve(field.Expression)
-					: this.TypeName(field.Type);
+					: field.Property != null
+						? this.FieldNameResolver.Resolve(field.Property)
+						: null;
+
+			if (name == null)
+				throw new ArgumentException("Could not resolve a field name");
+
 			if (field.Boost.HasValue)
 				name += "^" + field.Boost.Value.ToString(CultureInfo.InvariantCulture);
+
 			return name;
 		}
 

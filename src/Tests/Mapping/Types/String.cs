@@ -8,12 +8,13 @@ using Nest;
 using Tests.Framework.MockData;
 using Tests.Framework.Integration;
 using Elasticsearch.Net;
+using Tests.Indices.IndexManagement;
 
 namespace Tests.Mapping.Types
 {
 	public class String
 	{
-		public class Usage : MapUsageBase
+		public class Usage : PutMapping
 		{
 			public Usage(ReadOnlyCluster cluster, ApiUsage usage) : base(cluster, usage) { }
 

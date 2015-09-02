@@ -22,9 +22,6 @@ namespace Nest
 			: base(container.Select(kv => kv).ToDictionary(kv => kv.Key, kv => kv.Value))
 		{ }
 
-		/// <summary>
-		/// Add any setting to the index
-		/// </summary>
 		public void Add(FieldName field, IElasticsearchProperty property) => this.BackingDictionary.Add(field, property);
 	}
 
@@ -122,7 +119,7 @@ namespace Nest
 			if (type.Name.IsConditionless())
 				throw new ArgumentException($"Could not get field name for {typeName} mapping");
 
-			return this.Assign(a => a.Dictionary.Add(type.Name, type));
+			return this.Assign(a => a.Dictionary[type.Name] = type);
 		}
 	}
 }

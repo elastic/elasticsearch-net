@@ -48,7 +48,7 @@ namespace Nest
 				if (attribute != null && attribute.Ignore)
 					continue;
 				var property = GetProperty(propertyInfo, attribute);
-				properties.Add(propertyInfo.Name, property);
+				properties.Add(propertyInfo, property);
 			}
 
 			return properties;
@@ -75,6 +75,10 @@ namespace Nest
 			var elasticType = _visitor.Visit(propertyInfo, attribute);
 			if (elasticType != null)
 				return elasticType;
+
+			if (propertyInfo.GetGetMethod().IsStatic)
+				return null;
+
 			return (attribute != null) 
 				? attribute.ToProperty() 
 				: InferElasticType(propertyInfo.PropertyType);
