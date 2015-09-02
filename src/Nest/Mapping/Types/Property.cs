@@ -6,7 +6,7 @@ using System.Linq;
 namespace Nest
 {
 	[JsonObject(MemberSerialization.OptIn)]
-	public interface IElasticsearchProperty : IFieldMapping
+	public interface IProperty : IFieldMapping
 	{
 		FieldName Name { get; set; }
 
@@ -32,14 +32,14 @@ namespace Nest
 		IEnumerable<FieldName> CopyTo { get; set; }
 	}
 
-	public abstract class ElasticsearchProperty : IElasticsearchProperty
+	public abstract class Property : IProperty
 	{
-		public ElasticsearchProperty(TypeName typeName)
+		public Property(TypeName typeName)
 		{
 			Type = typeName;
 		}
 
-		internal ElasticsearchProperty(TypeName typeName, ElasticsearchPropertyAttribute attribute)
+		internal Property(TypeName typeName, ElasticsearchPropertyAttribute attribute)
 			: this(typeName)
 		{
 			DocValues = attribute.DocValues;

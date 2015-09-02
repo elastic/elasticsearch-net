@@ -7,7 +7,7 @@ using System.Text;
 namespace Nest
 {
 	[JsonObject(MemberSerialization.OptIn)]
-	public interface ITokenCountProperty : IElasticsearchProperty
+	public interface ITokenCountProperty : IProperty
 	{
 		string Analyzer { get; set; }
 	}

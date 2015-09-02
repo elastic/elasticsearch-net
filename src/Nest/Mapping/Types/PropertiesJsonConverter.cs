@@ -31,7 +31,7 @@ namespace Nest
 					continue;
 
 				var mapping = _elasticTypeConverter.ReadJson(po.CreateReader(), objectType, existingValue, serializer)
-				as IElasticsearchProperty;
+				as IProperty;
 				if (mapping == null)
 					continue;
 				mapping.Name = name;

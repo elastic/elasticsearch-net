@@ -131,7 +131,8 @@
     <Compile Include="IndexModules\Similarity\SimilaritySettings.cs" />
     <Compile Include="Indices\IndexManagement\CreateIndex\CreateIndexFullExample.cs" />
     <Compile Include="Indices\IndexManagement\CreateIndex\CreateIndex.cs" />
-    <Compile Include="Mapping\MapUsageBase.cs" />
+    <Compile Include="Indices\IndexManagement\PutMapping\PutMapping.cs" />
+    <Compile Include="Indices\IndexManagement\PutMapping\PutMappingFullExample.cs" />
     <Compile Include="Mapping\Types\String.cs" />
     <Compile Include="Search\Request\Fields.cs" />
     <Compile Include="Search\Request\FielddataFields.cs" />

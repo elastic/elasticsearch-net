@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using Bogus;
+using Newtonsoft.Json;
 
 namespace Tests.Framework.MockData
 {

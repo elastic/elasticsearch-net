@@ -5,6 +5,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using Elasticsearch.Net.Connection;
+using System.Reflection;
 
 namespace Nest
 {
@@ -12,43 +13,55 @@ namespace Nest
 	{
 		public string Name { get; set; }
 		public Expression Expression { get; set; }
-		public Type Type { get; set; }
+		public PropertyInfo Property { get; set; }
 		public double? Boost { get; set; }
 
-		public static FieldName Create(string field, double? boost = null)
+		private string ComparisonValue;
+
+		public static FieldName Create(string name, double? boost = null)
 		{
-			FieldName fieldName = field;
+			FieldName fieldName = name;
 			fieldName.Boost = boost;
 			return fieldName;
 		}
 
-		public static FieldName Create(Expression field, double? boost = null)
+		public static FieldName Create(Expression expression, double? boost = null)
 		{
-			FieldName fieldName = field;
+			FieldName fieldName = expression;
 			fieldName.Boost = boost;
 			return fieldName;
 		}
 
-		public static implicit operator FieldName(string typeName)
+		public static implicit operator FieldName(string name)
 		{
-			return typeName == null ? null : new FieldName { Name = typeName };
+			return name == null ? null : new FieldName
+			{
+				Name = name,
+				ComparisonValue = name
+			};
 		}
 
-		public static implicit operator FieldName(Expression type)
+		public static implicit operator FieldName(Expression expression)
 		{
-			return type == null ? null : new FieldName { Expression = type };
+			return expression == null ? null : new FieldName
+			{
+				Expression = expression,
+				ComparisonValue = ((expression as LambdaExpression).Body as MemberExpression).Member.Name
+			};
 		}
 
-		public static implicit operator FieldName(Type type)
+		public static implicit operator FieldName(PropertyInfo property)
 		{
-			return type == null ? null : new FieldName { Type = type };
+			return property == null ? null : new FieldName
+			{
+				Property = property,
+				ComparisonValue = property.Name
+			};
 		}
 
 		public override int GetHashCode()
 		{
-			if (Name != null)
-				return Name.GetHashCode();
-			return Expression != null ? Expression.GetHashCode() : 0;
+			return (ComparisonValue != null) ? ComparisonValue.GetHashCode() : 0;	
 		}
 
 		bool IEquatable<FieldName>.Equals(FieldName other)
@@ -58,27 +71,10 @@ namespace Nest
 
 		public override bool Equals(object obj)
 		{
-			var s = obj as string;
-			if (!s.IsNullOrEmpty()) return EqualsString(s);
-			var pp = obj as FieldName;
-			if (pp != null) return EqualsMarker(pp);
-			return base.Equals(obj);
-		}
-
-		public bool EqualsMarker(FieldName other)
-		{
-			if (!Name.IsNullOrEmpty() && other != null && !other.Name.IsNullOrEmpty())
-				return EqualsString(other.Name);
-			if (Expression != null && other != null && other.Expression != null)
-				return GetHashCode() == other.GetHashCode();
-			if (Type != null && other != null && other.Type != null)
-				return GetHashCode() == other.GetHashCode();
-			return false;
-		}
-
-		public bool EqualsString(string other)
-		{
-			return !other.IsNullOrEmpty() && other == Name;
+			var other = obj as FieldName;
+			if (other == null)
+				return false;
+			return ComparisonValue == other.ComparisonValue;
 		}
 
 		string IQueryStringValue.ToQueryStringValue(IConnectionConfigurationValues settings)
@@ -88,7 +84,6 @@ namespace Nest
 				throw new Exception("Tried to pass field name on querysting but it could not be resolved because no nest settings are available");
 			var infer = new ElasticInferrer(nestSettings);
 			return infer.FieldName(this);
-
 		}
 	}
 }

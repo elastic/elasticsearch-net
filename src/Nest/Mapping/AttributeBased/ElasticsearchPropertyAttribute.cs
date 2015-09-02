@@ -16,7 +16,7 @@ namespace Nest
 		public SimilarityOption? Similarity { get; set; }
 		public bool Store { get; set; }
 
-		public abstract IElasticsearchProperty ToProperty();
+		public abstract IProperty ToProperty();
 
 		public static ElasticsearchPropertyAttribute From(MemberInfo memberInfo)
 		{

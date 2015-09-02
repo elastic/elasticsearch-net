@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 
 namespace Nest
 {
-	public interface IIpProperty : IElasticsearchProperty
+	public interface IIpProperty : IProperty
 	{
 		[JsonProperty("index")]
 		NonStringIndexOption? Index { get; set; }
@@ -24,7 +24,7 @@ namespace Nest
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
-	public class IpProperty : ElasticsearchProperty, IIpProperty
+	public class IpProperty : Property, IIpProperty
 	{
 		public IpProperty() : base("ip") { }
 

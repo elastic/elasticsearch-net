@@ -10,14 +10,14 @@ using Tests.Framework.MockData;
 using Xunit;
 using Elasticsearch.Net;
 
-namespace Tests.Mapping
+namespace Tests.Indices.IndexManagement
 {
 	//TODO NOT Readonly
 	[Collection(IntegrationContext.ReadOnly)]
-	public abstract class MapUsageBase 
+	public abstract class PutMapping 
 		: ApiCallIntegration<IIndicesResponse, IPutMappingRequest, PutMappingDescriptor<Project>, PutMappingRequest<Project>>
 	{
-		protected MapUsageBase(ReadOnlyCluster cluster, ApiUsage usage) : base(cluster, usage) { }
+		protected PutMapping(ReadOnlyCluster cluster, ApiUsage usage) : base(cluster, usage) { }
 
 		public override bool ExpectIsValid => true;
 

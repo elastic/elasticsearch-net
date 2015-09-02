@@ -8,7 +8,7 @@ using Tests.Framework;
 using Tests.Framework.MockData;
 using Xunit.Sdk;
 using static Tests.Framework.RoundTripper;
-using static Nest.Property;
+using static Nest.Infer;
 
 namespace Tests.ClientConcepts.HighLevel.Inferrence.FieldNames
 {
@@ -29,7 +29,7 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence.FieldNames
 
 			/** especially when using C# expressions since these can not be simply new'ed*/
 			Expression<Func<Project, object>> expression = p => p.Name;
-			var fieldExpression = new FieldName() { Expression = expression };
+			var fieldExpression = FieldName.Create(expression);
 
 			Expect("name")
 				.WhenSerializing(fieldExpression)
@@ -56,10 +56,10 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence.FieldNames
 			FieldName fieldString = "name";
 
 			/** but for expressions this is still rather involved */
-			var fieldExpression = Property.Field<Project>(p=>p.Name);
+			var fieldExpression = Field<Project>(p=>p.Name);
 
 			/** Using static imports in c# 6 this can be even shortened:
-				using static Nest.Property; 
+				using static Nest.Infer; 
 			*/
 			fieldExpression = Field<Project>(p=>p.Name);
 			/** Now this is much much terser then our first example using the constructor! */

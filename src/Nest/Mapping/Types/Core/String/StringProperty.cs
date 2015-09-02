@@ -8,7 +8,7 @@ using Newtonsoft.Json.Converters;
 namespace Nest
 {
 	[JsonObject(MemberSerialization.OptIn)]
-	public interface IStringProperty : IElasticsearchProperty
+	public interface IStringProperty : IProperty
 	{
 		[JsonProperty("index")]
 		FieldIndexOption? Index { get; set; }
@@ -47,7 +47,7 @@ namespace Nest
 		IStringFielddata Fielddata { get; set; }
 	}
 
-	public class StringProperty : ElasticsearchProperty, IStringProperty
+	public class StringProperty : Property, IStringProperty
 	{
 		public StringProperty() : base("string") { }
 

@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 namespace Nest
 {
 	[JsonObject(MemberSerialization.OptIn)]
-	public interface IObjectProperty : IElasticsearchProperty
+	public interface IObjectProperty : IProperty
 	{
 		[JsonProperty("dynamic")]
 		DynamicMapping? Dynamic { get; set; }
@@ -24,7 +24,7 @@ namespace Nest
 		IProperties Properties { get; set; }
 	}
 
-	public class ObjectProperty : ElasticsearchProperty, IObjectProperty
+	public class ObjectProperty : Property, IObjectProperty
 	{
 		public ObjectProperty() : base("object") { }
 
@@ -73,7 +73,7 @@ namespace Nest
 		bool? IObjectProperty.IncludeInAll { get; set; }
 		string IObjectProperty.Path { get; set; }
 		IProperties IObjectProperty.Properties { get; set; }
-	
+
 		public ObjectPropertyDescriptorBase() : base("object")
 		{
 			_TypeName = TypeName.Create<TChild>();
@@ -91,11 +91,18 @@ namespace Nest
 		public TDescriptor IncludeInAll(bool includeInAll = true) =>
 			Assign(a => a.IncludeInAll = includeInAll);
 
-		public TDescriptor Path(string path) => 
+		public TDescriptor Path(string path) =>
 			Assign(a => a.Path = path);
 
-		public TDescriptor Properties(Func<PropertiesDescriptor<TChild>, PropertiesDescriptor<TChild>> selector) => Assign(a => a.Properties = selector?.Invoke(new PropertiesDescriptor<TChild>(a.Properties)));
+		public TDescriptor Properties(Func<PropertiesDescriptor<TChild>, PropertiesDescriptor<TChild>> selector) =>
+			Assign(a => a.Properties = selector?.Invoke(new PropertiesDescriptor<TChild>(a.Properties)));
 
-		public TDescriptor AutoMap(IPropertyVisitor visitor = null) => Assign(a => a.Properties = new PropertyWalker(typeof(TChild), visitor).GetProperties());
+		public TDescriptor AutoMap(IPropertyVisitor visitor = null) => Assign(a =>
+		{
+			a.Properties = a.Properties ?? new Properties();
+			var autoProperties = new PropertyWalker(typeof(TChild), visitor).GetProperties();
+			foreach (var autoProperty in autoProperties.Dictionary)
+				a.Properties.Dictionary[autoProperty.Key] = autoProperty.Value;
+		});
 	}
 }

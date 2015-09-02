@@ -8,7 +8,7 @@ using Tests.Framework;
 using Tests.Framework.MockData;
 using Xunit.Sdk;
 using static Tests.Framework.RoundTripper;
-using static Nest.Property;
+using static Nest.Infer;
 using Elasticsearch.Net.Connection;
 using System.IO;
 using System.Text;
