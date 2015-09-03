@@ -38,7 +38,7 @@ namespace Nest
 			this.Dispatcher.Dispatch<IGetFieldMappingRequest, GetFieldMappingRequestParameters, GetFieldMappingResponse>(
 				getFieldMappingRequest,
 				(p, d) => this.LowLevelDispatch.IndicesGetFieldMappingDispatch<GetFieldMappingResponse>(
-					p.DeserializationState(new GetFieldMappingConverter((r, s) => DeserializeGetFieldMappingResponse(r, d, s)))
+					p.DeserializationOverride(new GetFieldMappingConverter((r, s) => DeserializeGetFieldMappingResponse(r, d, s)))
 				)
 			);
 
@@ -52,7 +52,7 @@ namespace Nest
 			this.Dispatcher.DispatchAsync<IGetFieldMappingRequest, GetFieldMappingRequestParameters, GetFieldMappingResponse, IGetFieldMappingResponse>(
 				getFieldMappingRequest,
 				(p, d) => this.LowLevelDispatch.IndicesGetFieldMappingDispatchAsync<GetFieldMappingResponse>(
-					p.DeserializationState(new GetFieldMappingConverter((r, s) => DeserializeGetFieldMappingResponse(r, d, s)))
+					p.DeserializationOverride(new GetFieldMappingConverter((r, s) => DeserializeGetFieldMappingResponse(r, d, s)))
 				)
 			);
 		//TODO DictionaryResponse!

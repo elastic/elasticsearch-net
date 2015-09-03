@@ -35,10 +35,9 @@ namespace Nest
 			this.RequestParameters = new TParameters();
 		}
 
-		//TODO Rename discuss with @gmarz
-		public ElasticsearchPathInfo<TParameters> DeserializationState(Func<IApiCallDetails, Stream, object> customObjectCreation)
+		public ElasticsearchPathInfo<TParameters> DeserializationOverride(Func<IApiCallDetails, Stream, object> customObjectCreation)
 		{
-			this.RequestParameters.DeserializationState = customObjectCreation;
+			this.RequestParameters.DeserializationOverride = customObjectCreation;
 			return this;
 		}
 

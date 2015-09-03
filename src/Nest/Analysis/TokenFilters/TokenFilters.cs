@@ -22,8 +22,7 @@ namespace Nest
 	public class TokenFiltersDescriptor 
 		: HasADictionaryDescriptor<TokenFiltersDescriptor, ITokenFilters, string, ITokenFilter>, ITokenFilters
 	{
-		//TODO Unknown()? discuss with @gmarz
-		public TokenFiltersDescriptor Add(string name, ITokenFilter analyzer) => Assign(name, analyzer);
+		public TokenFiltersDescriptor UserDefined(string name, ITokenFilter analyzer) => Assign(name, analyzer);
 
 		/// <summary>
 		/// Token filters that allow to decompose compound words using a dictionary

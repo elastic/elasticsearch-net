@@ -22,8 +22,7 @@ namespace Nest
 	public class TokenizersDescriptor 
 		: HasADictionaryDescriptor<TokenizersDescriptor, ITokenizers, string, ITokenizer>, ITokenizers
 	{
-		//TODO Unknown()? discuss with @gmarz
-		public TokenizersDescriptor Add(string name, ITokenizer analyzer) => Assign(name, analyzer);
+		public TokenizersDescriptor UserDefined(string name, ITokenizer analyzer) => Assign(name, analyzer);
 		
 		/// <summary>
 		/// A tokenizer of type edgeNGram.

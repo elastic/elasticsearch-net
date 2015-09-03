@@ -19,7 +19,6 @@ namespace Nest
 		/// <returns>A query response holding T hits as well as the ScrollId for the next scroll operation</returns>
 		ISearchResponse<T> Scroll<T>(IScrollRequest scrollRequest) where T : class;
 
-		//TODO swapping these parameters around would cause a hard to spot bug when upgrading to 2.0 discuss with @gmarz
 		///<inheritdoc/>
 		ISearchResponse<T> Scroll<T>(TimeUnitExpression scrollTime, string scrollId, Func<ScrollDescriptor<T>, IScrollRequest> scrollSelector = null) 
 			where T : class;

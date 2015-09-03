@@ -6,10 +6,16 @@ using Elasticsearch.Net;
 namespace Nest
 {
 	//TODO I Deleted DeleteExtensions, when we introduced Document as a parameter folks can do 
+
+	//.Delete<T>(id)
+	//.Delete(Document.Id<T>(2))
+	//.Delete<T>(T object)
+	//.Delete(Document.Infer<T>(2))
+
+
 	//Delete(Document.Index("a").Type("x").Id("1"), s=>s)
 	//Delete(Document.Infer(doc), s=>s)
 	//Delete(Document.Index<T>().Type<TOptional>().Id(2), s=>s)
-	//Delete(Document.Id<T>(2), s=>s)
 	public partial interface IElasticClient
 	{
 		/// <summary>

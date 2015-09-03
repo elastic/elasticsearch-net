@@ -25,7 +25,7 @@ namespace Nest
 			where TRequest : IRequest<TParams> => 
 			this.Dispatcher.Dispatch<TRequest, TParams, CatResponse<TCatRecord>>(
 				this.ForceConfiguration(request, c => c.ContentType = "application/json"),
-				(p, d) => dispatch(p.DeserializationState(
+				(p, d) => dispatch(p.DeserializationOverride(
 					new Func<IApiCallDetails, Stream, CatResponse<TCatRecord>>(this.DeserializeCatResponse<TCatRecord>))
 					)
 				);
@@ -39,7 +39,7 @@ namespace Nest
 			where TRequest : IRequest<TParams> => 
 			this.Dispatcher.DispatchAsync<TRequest, TParams, CatResponse<TCatRecord>, ICatResponse<TCatRecord>>(
 				this.ForceConfiguration(request, c => c.ContentType = "application/json"),
-				(p, d) => dispatch(p.DeserializationState(
+				(p, d) => dispatch(p.DeserializationOverride(
 					new Func<IApiCallDetails, Stream, CatResponse<TCatRecord>>(this.DeserializeCatResponse<TCatRecord>))
 				)
 			);

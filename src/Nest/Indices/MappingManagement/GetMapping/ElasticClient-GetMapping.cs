@@ -41,7 +41,7 @@ namespace Nest
 			this.Dispatcher.Dispatch<IGetMappingRequest, GetMappingRequestParameters, GetMappingResponse>(
 				getMappingRequest,
 				(p, d) => this.LowLevelDispatch.IndicesGetMappingDispatch<GetMappingResponse>(
-					p.DeserializationState(new GetMappingConverter((r, s) => DeserializeGetMappingResponse(r, d, s)))
+					p.DeserializationOverride(new GetMappingConverter((r, s) => DeserializeGetMappingResponse(r, d, s)))
 				)
 			);
 
@@ -55,7 +55,7 @@ namespace Nest
 			this.Dispatcher.DispatchAsync<IGetMappingRequest, GetMappingRequestParameters, GetMappingResponse, IGetMappingResponse>(
 				getMappingRequest,
 				(p, d) => this.LowLevelDispatch.IndicesGetMappingDispatchAsync<GetMappingResponse>(
-					p.DeserializationState(new GetMappingConverter((r, s) => DeserializeGetMappingResponse(r, d, s)))
+					p.DeserializationOverride(new GetMappingConverter((r, s) => DeserializeGetMappingResponse(r, d, s)))
 				)
 			);
 		

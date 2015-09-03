@@ -86,7 +86,7 @@ namespace Tests.Indices.IndexManagement
 
 		protected override Func<CreateIndexDescriptor, ICreateIndexRequest> Fluent => d => d
 			.Settings(s => s
-				.Add("any.setting", "can be set")
+				.Setting("any.setting", "can be set")
 				.NumberOfShards(1)
 				.NumberOfReplicas(2)
 				.AutoExpandReplicas("1-3")

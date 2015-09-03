@@ -22,8 +22,7 @@ namespace Nest
 	public class CharFiltersDescriptor 
 		: HasADictionaryDescriptor<CharFiltersDescriptor, ICharFilters, string, ICharFilter>, ICharFilters
 	{
-		//TODO Unknown()? discuss with @gmarz
-		public CharFiltersDescriptor Add(string name, ICharFilter analyzer) => Assign(name, analyzer);
+		public CharFiltersDescriptor UserDefined(string name, ICharFilter analyzer) => Assign(name, analyzer);
 		
 		/// <summary>
 		/// The pattern_replace char filter allows the use of a regex to manipulate the characters in a string before analysis. 

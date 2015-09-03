@@ -43,10 +43,10 @@ namespace Tests.Aggregations
 			 * 
 			 */
 			protected override Func<IndexSettingsDescriptor, IIndexSettings> Fluent => s => s
-				.Add("any.setting", "can be set")
-				.Add("doubles", 1.1)
-				.Add("bools", false)
-				.Add("enums", FieldIndexOption.Analyzed)
+				.Setting("any.setting", "can be set")
+				.Setting("doubles", 1.1)
+				.Setting("bools", false)
+				.Setting("enums", FieldIndexOption.Analyzed)
 				.NumberOfShards(1)
 				.NumberOfReplicas(2)
 				.AutoExpandReplicas("1-3")
