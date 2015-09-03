@@ -83,13 +83,6 @@ namespace Nest
 			return ResultsSelector<D, Q, R>(response, descriptor);
 		}
 
-		R IHighLevelToLowLevelDispatcher.Dispatch<D, Q, R>(Func<D, D> selector, Func<ElasticsearchPathInfo<Q>, D, ElasticsearchResponse<R>> dispatch)
-		{
-			selector.ThrowIfNull("selector");
-			var descriptor = selector(new D());
-			return this.Dispatcher.Dispatch<D, Q, R>(descriptor, dispatch);
-		}
-
 		Task<I> IHighLevelToLowLevelDispatcher.DispatchAsync<D, Q, R, I>(D descriptor, Func<ElasticsearchPathInfo<Q>, D, Task<ElasticsearchResponse<R>>> dispatch)
 		{
 			return this.Dispatcher.DispatchAsync<D,Q,R,I>(descriptor, null, dispatch);
@@ -114,13 +107,6 @@ namespace Nest
 					}
 					return ResultsSelector<D, Q, R>(r.Result, descriptor);
 				});
-		}
-
-		Task<I> IHighLevelToLowLevelDispatcher.DispatchAsync<D, Q, R, I>(Func<D, D> selector, Func<ElasticsearchPathInfo<Q>, D, Task<ElasticsearchResponse<R>>> dispatch)
-		{
-			selector.ThrowIfNull("selector");
-			var descriptor = selector(new D());
-			return this.Dispatcher.DispatchAsync<D, Q, R, I>(descriptor, dispatch);
 		}
 
 		private static R ResultsSelector<D, Q, R>(
