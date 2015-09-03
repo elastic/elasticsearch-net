@@ -33,11 +33,8 @@ namespace Nest
 	{
 		/// <inheritdoc/>
 		public IPercolateResponse Percolate<T>(Func<PercolateDescriptor<T>, IPercolateRequest<T>> percolateSelector)
-			where T : class => 
-			this.Dispatcher.Dispatch<IPercolateRequest<T>, PercolateRequestParameters, PercolateResponse>(
-				percolateSelector?.Invoke(new PercolateDescriptor<T>()),
-				this.LowLevelDispatch.PercolateDispatch<PercolateResponse>
-			);
+			where T : class =>
+			this.Percolate(percolateSelector?.Invoke(new PercolateDescriptor<T>()));
 
 		/// <inheritdoc/>
 		public IPercolateResponse Percolate<T>(IPercolateRequest<T> percolateRequest)
@@ -50,10 +47,7 @@ namespace Nest
 		/// <inheritdoc/>
 		public Task<IPercolateResponse> PercolateAsync<T>(Func<PercolateDescriptor<T>, IPercolateRequest<T>> percolateSelector)
 			where T : class => 
-			this.Dispatcher.DispatchAsync<IPercolateRequest<T>, PercolateRequestParameters, PercolateResponse, IPercolateResponse>(
-				percolateSelector?.Invoke(new PercolateDescriptor<T>()),
-				this.LowLevelDispatch.PercolateDispatchAsync<PercolateResponse>
-			);
+			this.PercolateAsync(percolateSelector?.Invoke(new PercolateDescriptor<T>()));
 
 		/// <inheritdoc/>
 		public Task<IPercolateResponse> PercolateAsync<T>(IPercolateRequest<T> percolateRequest)

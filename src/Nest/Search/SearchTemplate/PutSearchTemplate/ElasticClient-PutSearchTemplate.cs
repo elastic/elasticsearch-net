@@ -27,11 +27,8 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IPutSearchTemplateResponse PutSearchTemplate(string name, Func<PutSearchTemplateDescriptor, IPutSearchTemplateRequest> selector = null) => 
-			this.Dispatcher.Dispatch<IPutSearchTemplateRequest, PutTemplateRequestParameters, PutSearchTemplateResponse>(
-				selector.InvokeOrDefault(new PutSearchTemplateDescriptor().Name(name)),
-				this.LowLevelDispatch.PutTemplateDispatch<PutSearchTemplateResponse>
-			);
+		public IPutSearchTemplateResponse PutSearchTemplate(string name, Func<PutSearchTemplateDescriptor, IPutSearchTemplateRequest> selector = null) =>
+			this.PutSearchTemplate(selector.InvokeOrDefault(new PutSearchTemplateDescriptor().Name(name)));
 
 		/// <inheritdoc/>
 		public IPutSearchTemplateResponse PutSearchTemplate(IPutSearchTemplateRequest request) => 
@@ -42,10 +39,7 @@ namespace Nest
 
 		/// <inheritdoc/>
 		public Task<IPutSearchTemplateResponse> PutSearchTemplateAsync(string name, Func<PutSearchTemplateDescriptor, IPutSearchTemplateRequest> selector = null) => 
-			this.Dispatcher.DispatchAsync<IPutSearchTemplateRequest, PutTemplateRequestParameters, PutSearchTemplateResponse, IPutSearchTemplateResponse>(
-				selector.InvokeOrDefault(new PutSearchTemplateDescriptor().Name(name)),
-				this.LowLevelDispatch.PutTemplateDispatchAsync<PutSearchTemplateResponse>
-			);
+			this.PutSearchTemplateAsync(selector.InvokeOrDefault(new PutSearchTemplateDescriptor().Name(name)));
 
 		/// <inheritdoc/>
 		public Task<IPutSearchTemplateResponse> PutSearchTemplateAsync(IPutSearchTemplateRequest request) => 

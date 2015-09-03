@@ -30,11 +30,8 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IGlobalStatsResponse IndicesStats(Func<IndicesStatsDescriptor, IIndicesStatsRequest> selector = null) => 
-			this.Dispatcher.Dispatch<IIndicesStatsRequest, IndicesStatsRequestParameters, GlobalStatsResponse>(
-				selector.InvokeOrDefault(new IndicesStatsDescriptor()),
-				(p, d) => this.LowLevelDispatch.IndicesStatsDispatch<GlobalStatsResponse>(p)
-			);
+		public IGlobalStatsResponse IndicesStats(Func<IndicesStatsDescriptor, IIndicesStatsRequest> selector = null) =>
+			this.IndicesStats(selector.InvokeOrDefault(new IndicesStatsDescriptor()));
 
 		/// <inheritdoc/>
 		public IGlobalStatsResponse IndicesStats(IIndicesStatsRequest statsRequest) => 
@@ -45,10 +42,7 @@ namespace Nest
 
 		/// <inheritdoc/>
 		public Task<IGlobalStatsResponse> IndicesStatsAsync(Func<IndicesStatsDescriptor, IIndicesStatsRequest> selector = null) => 
-			this.Dispatcher.DispatchAsync<IIndicesStatsRequest, IndicesStatsRequestParameters, GlobalStatsResponse, IGlobalStatsResponse>(
-				selector.InvokeOrDefault(new IndicesStatsDescriptor()),
-				(p, d) => this.LowLevelDispatch.IndicesStatsDispatchAsync<GlobalStatsResponse>(p)
-			);
+			this.IndicesStatsAsync(selector.InvokeOrDefault(new IndicesStatsDescriptor()));
 
 		/// <inheritdoc/>
 		public Task<IGlobalStatsResponse> IndicesStatsAsync(IIndicesStatsRequest statsRequest) => 

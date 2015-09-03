@@ -29,11 +29,8 @@ namespace Nest
 	{
 		/// <inheritdoc/>
 		public IExplainResponse<T> Explain<T>(Func<ExplainDescriptor<T>, IExplainRequest> querySelector)
-			where T : class => 
-			this.Dispatcher.Dispatch<IExplainRequest, ExplainRequestParameters, ExplainResponse<T>>(
-				querySelector?.Invoke(new ExplainDescriptor<T>()),
-				this.LowLevelDispatch.ExplainDispatch<ExplainResponse<T>>
-			);
+			where T : class =>
+			this.Explain<T>(querySelector?.Invoke(new ExplainDescriptor<T>()));
 
 		/// <inheritdoc/>
 		public IExplainResponse<T> Explain<T>(IExplainRequest explainRequest)
@@ -46,10 +43,7 @@ namespace Nest
 		/// <inheritdoc/>
 		public Task<IExplainResponse<T>> ExplainAsync<T>(Func<ExplainDescriptor<T>, IExplainRequest> querySelector)
 			where T : class => 
-			this.Dispatcher.DispatchAsync<IExplainRequest, ExplainRequestParameters, ExplainResponse<T>, IExplainResponse<T>>(
-				querySelector?.Invoke(new ExplainDescriptor<T>()),
-				this.LowLevelDispatch.ExplainDispatchAsync<ExplainResponse<T>>
-			);
+			this.ExplainAsync<T>(querySelector?.Invoke(new ExplainDescriptor<T>()));
 
 		/// <inheritdoc/>
 		public Task<IExplainResponse<T>> ExplainAsync<T>(IExplainRequest explainRequest)

@@ -25,11 +25,8 @@ namespace Nest
 	}
 	public partial class ElasticClient
 	{
-		public IGetSearchTemplateResponse GetSearchTemplate(string name, Func<GetSearchTemplateDescriptor, IGetSearchTemplateRequest> selector = null) => 
-			this.Dispatcher.Dispatch<IGetSearchTemplateRequest, GetTemplateRequestParameters, GetSearchTemplateResponse>(
-				selector.InvokeOrDefault(new GetSearchTemplateDescriptor().Name(name)),
-				(p, d) => this.LowLevelDispatch.GetTemplateDispatch<GetSearchTemplateResponse>(p)
-			);
+		public IGetSearchTemplateResponse GetSearchTemplate(string name, Func<GetSearchTemplateDescriptor, IGetSearchTemplateRequest> selector = null) =>
+			this.GetSearchTemplate(selector.InvokeOrDefault(new GetSearchTemplateDescriptor().Name(name)));
 
 		public IGetSearchTemplateResponse GetSearchTemplate(IGetSearchTemplateRequest request) => 
 			this.Dispatcher.Dispatch<IGetSearchTemplateRequest, GetTemplateRequestParameters, GetSearchTemplateResponse>(
@@ -38,10 +35,7 @@ namespace Nest
 			);
 
 		public Task<IGetSearchTemplateResponse> GetSearchTemplateAsync(string name, Func<GetSearchTemplateDescriptor, IGetSearchTemplateRequest> selector = null) => 
-			this.Dispatcher.DispatchAsync<IGetSearchTemplateRequest, GetTemplateRequestParameters, GetSearchTemplateResponse, IGetSearchTemplateResponse>(
-				selector.InvokeOrDefault(new GetSearchTemplateDescriptor().Name(name)),
-				(p, d) => this.LowLevelDispatch.GetTemplateDispatchAsync<GetSearchTemplateResponse>(p)
-			);
+			this.GetSearchTemplateAsync(selector.InvokeOrDefault(new GetSearchTemplateDescriptor().Name(name)));
 
 		public Task<IGetSearchTemplateResponse> GetSearchTemplateAsync(IGetSearchTemplateRequest request) => 
 			this.Dispatcher.DispatchAsync<IGetSearchTemplateRequest, GetTemplateRequestParameters, GetSearchTemplateResponse, IGetSearchTemplateResponse>(

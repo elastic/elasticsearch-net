@@ -61,12 +61,7 @@ namespace Nest
 		public ISearchResponse<TResult> Search<T, TResult>(Func<SearchDescriptor<T>, ISearchRequest> searchSelector)
 			where T : class
 			where TResult : class =>
-			this.Dispatcher.Dispatch<ISearchRequest, SearchRequestParameters, SearchResponse<TResult>>(
-				searchSelector?.InvokeOrDefault(new SearchDescriptor<T>()),
-				(p, d) => this.LowLevelDispatch.SearchDispatch<SearchResponse<TResult>>(
-					this.AttachCustomConverterWhenNeeded<T, TResult>(p, d), d
-					)
-				);
+			this.Search<TResult>(searchSelector?.InvokeOrDefault(new SearchDescriptor<T>()));
 
 		/// <inheritdoc/>
 		public ISearchResponse<T> Search<T>(ISearchRequest request) where T : class => 
@@ -92,12 +87,7 @@ namespace Nest
 		public Task<ISearchResponse<TResult>> SearchAsync<T, TResult>(Func<SearchDescriptor<T>, ISearchRequest> searchSelector)
 			where T : class
 			where TResult : class =>
-			this.Dispatcher.DispatchAsync<ISearchRequest, SearchRequestParameters, SearchResponse<TResult>, ISearchResponse<TResult>>(
-				searchSelector?.InvokeOrDefault(new SearchDescriptor<T>()),
-				(p, d) => this.LowLevelDispatch.SearchDispatchAsync<SearchResponse<TResult>>(
-					this.AttachCustomConverterWhenNeeded<T, TResult>(p, d), d
-					)
-				);
+			this.SearchAsync<TResult>(searchSelector?.InvokeOrDefault(new SearchDescriptor<T>()));
 
 		/// <inheritdoc/>
 		public Task<ISearchResponse<T>> SearchAsync<T>(ISearchRequest request) where T : class => 

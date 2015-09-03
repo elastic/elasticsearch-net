@@ -30,11 +30,8 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IAcknowledgedResponse CreateRepository(string name, Func<CreateRepositoryDescriptor, ICreateRepositoryRequest> selector) => 
-			this.Dispatcher.Dispatch<ICreateRepositoryRequest, CreateRepositoryRequestParameters, AcknowledgedResponse>(
-				selector?.Invoke(new CreateRepositoryDescriptor().Repository(name)),
-				(p, d) => this.LowLevelDispatch.SnapshotCreateRepositoryDispatch<AcknowledgedResponse>(p, d.Repository)
-			);
+		public IAcknowledgedResponse CreateRepository(string name, Func<CreateRepositoryDescriptor, ICreateRepositoryRequest> selector) =>
+			this.CreateRepository(selector?.Invoke(new CreateRepositoryDescriptor().Repository(name)));
 
 		/// <inheritdoc/>
 		public IAcknowledgedResponse CreateRepository(ICreateRepositoryRequest request) => 
@@ -45,10 +42,7 @@ namespace Nest
 
 		/// <inheritdoc/>
 		public Task<IAcknowledgedResponse> CreateRepositoryAsync(string name, Func<CreateRepositoryDescriptor, ICreateRepositoryRequest> selector) => 
-			this.Dispatcher.DispatchAsync<ICreateRepositoryRequest, CreateRepositoryRequestParameters, AcknowledgedResponse, IAcknowledgedResponse>(
-				selector?.Invoke(new CreateRepositoryDescriptor().Repository(name)),
-				(p, d) => this.LowLevelDispatch.SnapshotCreateRepositoryDispatchAsync<AcknowledgedResponse>(p, d.Repository)
-			);
+			this.CreateRepositoryAsync(selector?.Invoke(new CreateRepositoryDescriptor().Repository(name)));
 
 		/// <inheritdoc/>
 		public Task<IAcknowledgedResponse> CreateRepositoryAsync(ICreateRepositoryRequest request) => 

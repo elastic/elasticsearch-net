@@ -23,13 +23,9 @@ namespace Nest
 
 	public partial class ElasticClient
 	{
-
 		/// <inheritdoc/>
-		public IVerifyRepositoryResponse VerifyRepository(string name, Func<VerifyRepositoryDescriptor, IVerifyRepositoryRequest> selector = null) => 
-			this.Dispatcher.Dispatch<IVerifyRepositoryRequest, VerifyRepositoryRequestParameters, VerifyRepositoryResponse>(
-				selector.InvokeOrDefault(new VerifyRepositoryDescriptor().Repository(name)),
-				(p, d) => this.LowLevelDispatch.SnapshotVerifyRepositoryDispatch<VerifyRepositoryResponse>(p)
-			);
+		public IVerifyRepositoryResponse VerifyRepository(string name, Func<VerifyRepositoryDescriptor, IVerifyRepositoryRequest> selector = null) =>
+			this.VerifyRepository(selector.InvokeOrDefault(new VerifyRepositoryDescriptor().Repository(name)));
 
 		/// <inheritdoc/>
 		public IVerifyRepositoryResponse VerifyRepository(IVerifyRepositoryRequest verifyRepositoryRequest) => 
@@ -40,10 +36,7 @@ namespace Nest
 
 		/// <inheritdoc/>
 		public Task<IVerifyRepositoryResponse> VerifyRepositoryAsync(string name, Func<VerifyRepositoryDescriptor, IVerifyRepositoryRequest> selector = null) => 
-			this.Dispatcher.DispatchAsync<IVerifyRepositoryRequest, VerifyRepositoryRequestParameters, VerifyRepositoryResponse, IVerifyRepositoryResponse>(
-				selector.InvokeOrDefault(new VerifyRepositoryDescriptor().Repository(name)),
-				(p, d) => this.LowLevelDispatch.SnapshotVerifyRepositoryDispatchAsync<VerifyRepositoryResponse>(p)
-			);
+			this.VerifyRepositoryAsync(selector.InvokeOrDefault(new VerifyRepositoryDescriptor().Repository(name)));
 
 		/// <inheritdoc/>
 		public Task<IVerifyRepositoryResponse> VerifyRepositoryAsync(IVerifyRepositoryRequest verifyRepositoryRequest) => 

@@ -22,11 +22,8 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public ISnapshotStatusResponse SnapshotStatus(Func<SnapshotStatusDescriptor, ISnapshotStatusRequest> selector = null) => 
-			this.Dispatcher.Dispatch<ISnapshotStatusRequest, SnapshotStatusRequestParameters, SnapshotStatusResponse>(
-				selector.InvokeOrDefault(new SnapshotStatusDescriptor()),
-				(p, d) => this.LowLevelDispatch.SnapshotStatusDispatch<SnapshotStatusResponse>(p)
-			);
+		public ISnapshotStatusResponse SnapshotStatus(Func<SnapshotStatusDescriptor, ISnapshotStatusRequest> selector = null) =>
+			this.SnapshotStatus(selector.InvokeOrDefault(new SnapshotStatusDescriptor()));
 
 		/// <inheritdoc/>
 		public ISnapshotStatusResponse SnapshotStatus(ISnapshotStatusRequest getSnapshotRequest) => 
@@ -37,10 +34,7 @@ namespace Nest
 
 		/// <inheritdoc/>
 		public Task<ISnapshotStatusResponse> SnapshotStatusAsync(Func<SnapshotStatusDescriptor, ISnapshotStatusRequest> selector = null) => 
-			this.Dispatcher.DispatchAsync<ISnapshotStatusRequest, SnapshotStatusRequestParameters, SnapshotStatusResponse, ISnapshotStatusResponse>(
-				selector.InvokeOrDefault(new SnapshotStatusDescriptor()),
-				(p, d) => this.LowLevelDispatch.SnapshotStatusDispatchAsync<SnapshotStatusResponse>(p)
-			);
+			this.SnapshotStatusAsync(selector.InvokeOrDefault(new SnapshotStatusDescriptor()));
 
 		/// <inheritdoc/>
 		public Task<ISnapshotStatusResponse> SnapshotStatusAsync(ISnapshotStatusRequest getSnapshotRequest) => 

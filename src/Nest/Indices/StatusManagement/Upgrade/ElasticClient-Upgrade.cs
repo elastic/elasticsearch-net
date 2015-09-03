@@ -32,10 +32,7 @@ namespace Nest
 			);
 
 		public IUpgradeResponse Upgrade(Func<UpgradeDescriptor, IUpgradeRequest> upgradeSelector = null) =>
-			this.Dispatcher.Dispatch<IUpgradeRequest, UpgradeRequestParameters, UpgradeResponse>(
-				upgradeSelector.InvokeOrDefault(new UpgradeDescriptor()),
-				(p, d) => this.LowLevelDispatch.IndicesUpgradeDispatch<UpgradeResponse>(p)
-			);
+			this.Upgrade(upgradeSelector.InvokeOrDefault(new UpgradeDescriptor()));
 
 		public Task<IUpgradeResponse> UpgradeAsync(IUpgradeRequest upgradeRequest) =>
 			this.Dispatcher.DispatchAsync<IUpgradeRequest, UpgradeRequestParameters, UpgradeResponse, IUpgradeResponse>(
@@ -44,9 +41,6 @@ namespace Nest
 			);
 
 		public Task<IUpgradeResponse> UpgradeAsync(Func<UpgradeDescriptor, IUpgradeRequest> upgradeSelector = null) =>
-			this.Dispatcher.DispatchAsync<IUpgradeRequest, UpgradeRequestParameters, UpgradeResponse, IUpgradeResponse>(
-				upgradeSelector.InvokeOrDefault(new UpgradeDescriptor()),
-				(p, d) => this.LowLevelDispatch.IndicesUpgradeDispatchAsync<UpgradeResponse>(p)
-			);
+			this.UpgradeAsync(upgradeSelector.InvokeOrDefault(new UpgradeDescriptor()));
 	}
 }

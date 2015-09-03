@@ -26,39 +26,32 @@ namespace Nest
 
 		/// <inheritdoc/>
 		Task<IRegisterPercolateResponse> RegisterPercolatorAsync(IRegisterPercolatorRequest registerPercolatorRequest);
-
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
 		public IRegisterPercolateResponse RegisterPercolator<T>(string name, Func<RegisterPercolatorDescriptor<T>, IRegisterPercolatorRequest> percolatorSelector)
-			where T : class => 
-			this.Dispatcher.Dispatch<IRegisterPercolatorRequest, IndexRequestParameters, RegisterPercolateResponse>(
-				percolatorSelector.InvokeOrDefault(new RegisterPercolatorDescriptor<T>().Name(name)),
-				(p, d) => this.LowLevelDispatch.IndexDispatch<RegisterPercolateResponse>(p, d)
-			);
+			where T : class =>
+			this.RegisterPercolator(percolatorSelector.InvokeOrDefault(new RegisterPercolatorDescriptor<T>().Name(name)));
 
 		/// <inheritdoc/>
 		public IRegisterPercolateResponse RegisterPercolator(IRegisterPercolatorRequest registerPercolatorRequest) => 
 			this.Dispatcher.Dispatch<IRegisterPercolatorRequest, IndexRequestParameters, RegisterPercolateResponse>(
 				registerPercolatorRequest,
-				(p, d) => this.LowLevelDispatch.IndexDispatch<RegisterPercolateResponse>(p, d)
+				this.LowLevelDispatch.IndexDispatch<RegisterPercolateResponse>
 			);
 
 		/// <inheritdoc/>
 		public Task<IRegisterPercolateResponse> RegisterPercolatorAsync<T>(string name, Func<RegisterPercolatorDescriptor<T>, IRegisterPercolatorRequest> percolatorSelector)
 			where T : class => 
-			this.Dispatcher.DispatchAsync<IRegisterPercolatorRequest, IndexRequestParameters, RegisterPercolateResponse, IRegisterPercolateResponse>(
-				percolatorSelector.InvokeOrDefault(new RegisterPercolatorDescriptor<T>().Name(name)),
-				(p, d) => this.LowLevelDispatch.IndexDispatchAsync<RegisterPercolateResponse>(p, d)
-			);
+			this.RegisterPercolatorAsync(percolatorSelector.InvokeOrDefault(new RegisterPercolatorDescriptor<T>().Name(name)));
 
 		/// <inheritdoc/>
 		public Task<IRegisterPercolateResponse> RegisterPercolatorAsync(IRegisterPercolatorRequest registerPercolatorRequest) => 
 			this.Dispatcher.DispatchAsync<IRegisterPercolatorRequest, IndexRequestParameters, RegisterPercolateResponse, IRegisterPercolateResponse>(
 				registerPercolatorRequest,
-				(p, d) => this.LowLevelDispatch.IndexDispatchAsync<RegisterPercolateResponse>(p, d)
+				this.LowLevelDispatch.IndexDispatchAsync<RegisterPercolateResponse>
 			);
 	}
 }

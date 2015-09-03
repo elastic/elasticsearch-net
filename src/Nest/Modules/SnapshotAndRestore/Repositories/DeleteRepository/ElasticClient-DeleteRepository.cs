@@ -29,11 +29,8 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IAcknowledgedResponse DeleteRepository(string name, Func<DeleteRepositoryDescriptor, IDeleteRepositoryRequest> selector = null) => 
-			this.Dispatcher.Dispatch<IDeleteRepositoryRequest, DeleteRepositoryRequestParameters, AcknowledgedResponse>(
-				selector?.Invoke(new DeleteRepositoryDescriptor().Repository(name)),
-				(p, d) => this.LowLevelDispatch.SnapshotDeleteRepositoryDispatch<AcknowledgedResponse>(p)
-			);
+		public IAcknowledgedResponse DeleteRepository(string name, Func<DeleteRepositoryDescriptor, IDeleteRepositoryRequest> selector = null) =>
+			this.DeleteRepository(selector?.Invoke(new DeleteRepositoryDescriptor().Repository(name)));
 
 		/// <inheritdoc/>
 		public IAcknowledgedResponse DeleteRepository(IDeleteRepositoryRequest deleteRepositoryRequest) => 
@@ -44,10 +41,7 @@ namespace Nest
 
 		/// <inheritdoc/>
 		public Task<IAcknowledgedResponse> DeleteRepositoryAsync(string name, Func<DeleteRepositoryDescriptor, IDeleteRepositoryRequest> selector = null) => 
-			this.Dispatcher.DispatchAsync<IDeleteRepositoryRequest, DeleteRepositoryRequestParameters, AcknowledgedResponse, IAcknowledgedResponse>(
-				selector?.Invoke(new DeleteRepositoryDescriptor().Repository(name)),
-				(p, d) => this.LowLevelDispatch.SnapshotDeleteRepositoryDispatchAsync<AcknowledgedResponse>(p)
-			);
+			this.DeleteRepositoryAsync(selector?.Invoke(new DeleteRepositoryDescriptor().Repository(name)));
 
 		/// <inheritdoc/>
 		public Task<IAcknowledgedResponse> DeleteRepositoryAsync(IDeleteRepositoryRequest deleteRepositoryRequest) => 

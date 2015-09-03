@@ -25,49 +25,27 @@ namespace Nest
 
 	public partial class ElasticClient
 	{
-
 		/// <inheritdoc/>
-		public IEmptyResponse ClearScroll(string scrollId, Func<ClearScrollDescriptor, IClearScrollRequest> clearScrollSelector = null) => 
-			this.Dispatcher.Dispatch<IClearScrollRequest, ClearScrollRequestParameters, EmptyResponse>(
-				clearScrollSelector.InvokeOrDefault(new ClearScrollDescriptor().ScrollId(scrollId)),
-				(p, d) =>
-				{
-					var body = PatchClearScroll(p);
-					return this.LowLevelDispatch.ClearScrollDispatch<EmptyResponse>(p, body);
-				}
-				);
+		public IEmptyResponse ClearScroll(string scrollId, Func<ClearScrollDescriptor, IClearScrollRequest> clearScrollSelector = null) =>
+			this.ClearScroll(clearScrollSelector.InvokeOrDefault(new ClearScrollDescriptor().ScrollId(scrollId)));
 
 		/// <inheritdoc/>
 		public IEmptyResponse ClearScroll(IClearScrollRequest clearScrollRequest) => 
 			this.Dispatcher.Dispatch<IClearScrollRequest, ClearScrollRequestParameters, EmptyResponse>(
 				clearScrollRequest,
-				(p, d) =>
-				{
-					var body = PatchClearScroll(p);
-					return this.LowLevelDispatch.ClearScrollDispatch<EmptyResponse>(p, body);
-				}
-				);
+				(p, d) => this.LowLevelDispatch.ClearScrollDispatch<EmptyResponse>(p, PatchClearScroll(p))
+			);
+	
 
 		/// <inheritdoc/>
 		public Task<IEmptyResponse> ClearScrollAsync(string scrollId, Func<ClearScrollDescriptor, IClearScrollRequest> clearScrollSelector = null) => 
-			this.Dispatcher.DispatchAsync<IClearScrollRequest, ClearScrollRequestParameters, EmptyResponse, IEmptyResponse>(
-				clearScrollSelector.InvokeOrDefault(new ClearScrollDescriptor().ScrollId(scrollId)),
-				(p, d) =>
-				{
-					var body = PatchClearScroll(p);
-					return this.LowLevelDispatch.ClearScrollDispatchAsync<EmptyResponse>(p, body);
-				}
-			);
+			this.ClearScrollAsync(clearScrollSelector.InvokeOrDefault(new ClearScrollDescriptor().ScrollId(scrollId)));
 
 		/// <inheritdoc/>
 		public Task<IEmptyResponse> ClearScrollAsync(IClearScrollRequest clearScrollRequest) => 
 			this.Dispatcher.DispatchAsync<IClearScrollRequest, ClearScrollRequestParameters, EmptyResponse, IEmptyResponse>(
 				clearScrollRequest,
-				(p, d) =>
-				{
-					var body = PatchClearScroll(p);
-					return this.LowLevelDispatch.ClearScrollDispatchAsync<EmptyResponse>(p, body);
-				}
+				(p, d) => this.LowLevelDispatch.ClearScrollDispatchAsync<EmptyResponse>(p, PatchClearScroll(p))
 			);
 
 		private static string PatchClearScroll(ElasticsearchPathInfo<ClearScrollRequestParameters> p)

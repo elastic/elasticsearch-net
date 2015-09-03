@@ -36,11 +36,8 @@ namespace Nest
 		//TODO AllIndices seems weird here 
 
 		/// <inheritdoc/>
-		public IIndicesOperationResponse DeleteWarmer(string name, Func<DeleteWarmerDescriptor, IDeleteWarmerRequest> selector = null) => 
-			this.Dispatcher.Dispatch<IDeleteWarmerRequest, DeleteWarmerRequestParameters, IndicesOperationResponse>(
-				selector.InvokeOrDefault(new DeleteWarmerDescriptor().Name(name).AllIndices()),
-				(p, d) => this.LowLevelDispatch.IndicesDeleteWarmerDispatch<IndicesOperationResponse>(p)
-			);
+		public IIndicesOperationResponse DeleteWarmer(string name, Func<DeleteWarmerDescriptor, IDeleteWarmerRequest> selector = null) =>
+			this.DeleteWarmer(selector.InvokeOrDefault(new DeleteWarmerDescriptor().Name(name).AllIndices()));
 
 		/// <inheritdoc/>
 		public IIndicesOperationResponse DeleteWarmer(IDeleteWarmerRequest deleteWarmerRequest) => 
@@ -51,10 +48,7 @@ namespace Nest
 
 		/// <inheritdoc/>
 		public Task<IIndicesOperationResponse> DeleteWarmerAsync(string name, Func<DeleteWarmerDescriptor, IDeleteWarmerRequest> selector = null) => 
-			this.Dispatcher.DispatchAsync<IDeleteWarmerRequest, DeleteWarmerRequestParameters, IndicesOperationResponse, IIndicesOperationResponse>(
-				selector.InvokeOrDefault(new DeleteWarmerDescriptor().Name(name).AllIndices()),
-				(p, d) => this.LowLevelDispatch.IndicesDeleteWarmerDispatchAsync<IndicesOperationResponse>(p)
-			);
+			this.DeleteWarmerAsync(selector.InvokeOrDefault(new DeleteWarmerDescriptor().Name(name).AllIndices()));
 
 		/// <inheritdoc/>
 		public Task<IIndicesOperationResponse> DeleteWarmerAsync(IDeleteWarmerRequest deleteWarmerRequest) => 

@@ -36,12 +36,8 @@ namespace Nest
 		//TODO AllIndices seems very weird here
 
 		/// <inheritdoc/>
-		public IWarmerResponse GetWarmer(string name, Func<GetWarmerDescriptor, IGetWarmerRequest> selector = null) => 
-			this.Dispatcher.Dispatch<IGetWarmerRequest, GetWarmerRequestParameters, WarmerResponse>(
-				selector.InvokeOrDefault(new GetWarmerDescriptor().Name(name).AllIndices()),
-				new GetWarmerConverter(DeserializeWarmerResponse),
-				(p, d) => this.LowLevelDispatch.IndicesGetWarmerDispatch<WarmerResponse>(p)
-			);
+		public IWarmerResponse GetWarmer(string name, Func<GetWarmerDescriptor, IGetWarmerRequest> selector = null) =>
+			this.GetWarmer(selector.InvokeOrDefault(new GetWarmerDescriptor().Name(name).AllIndices()));
 
 		/// <inheritdoc/>
 		public IWarmerResponse GetWarmer(IGetWarmerRequest getWarmerRequest) => 
@@ -53,11 +49,7 @@ namespace Nest
 
 		/// <inheritdoc/>
 		public Task<IWarmerResponse> GetWarmerAsync(string name, Func<GetWarmerDescriptor, IGetWarmerRequest> selector = null) => 
-			this.Dispatcher.DispatchAsync<IGetWarmerRequest, GetWarmerRequestParameters, WarmerResponse, IWarmerResponse>(
-				selector.InvokeOrDefault(new GetWarmerDescriptor().Name(name).AllIndices()),
-				new GetWarmerConverter(DeserializeWarmerResponse),
-				(p, d) => this.LowLevelDispatch.IndicesGetWarmerDispatchAsync<WarmerResponse>(p)
-			);
+			this.GetWarmerAsync(selector.InvokeOrDefault(new GetWarmerDescriptor().Name(name).AllIndices()));
 
 		/// <inheritdoc/>
 		public Task<IWarmerResponse> GetWarmerAsync(IGetWarmerRequest getWarmerRequest) => 

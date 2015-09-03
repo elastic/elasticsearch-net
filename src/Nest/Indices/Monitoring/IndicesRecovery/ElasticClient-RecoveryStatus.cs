@@ -27,12 +27,8 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IRecoveryStatusResponse RecoveryStatus(Func<RecoveryStatusDescriptor, IRecoveryStatusRequest> selector = null) => 
-			this.Dispatcher.Dispatch<IRecoveryStatusRequest, RecoveryStatusRequestParameters, RecoveryStatusResponse>(
-				selector.InvokeOrDefault(new RecoveryStatusDescriptor()),
-				new RecoveryStatusConverter(DeserializeRecoveryStatusResponse),
-				(p, d) => this.LowLevelDispatch.IndicesRecoveryDispatch<RecoveryStatusResponse>(p)
-			);
+		public IRecoveryStatusResponse RecoveryStatus(Func<RecoveryStatusDescriptor, IRecoveryStatusRequest> selector = null) =>
+			this.RecoveryStatus(selector.InvokeOrDefault(new RecoveryStatusDescriptor()));
 
 		/// <inheritdoc/>
 		public IRecoveryStatusResponse RecoveryStatus(IRecoveryStatusRequest statusRequest) => 
@@ -44,11 +40,7 @@ namespace Nest
 
 		/// <inheritdoc/>
 		public Task<IRecoveryStatusResponse> RecoveryStatusAsync(Func<RecoveryStatusDescriptor, IRecoveryStatusRequest> selector = null) => 
-			this.Dispatcher.DispatchAsync<IRecoveryStatusRequest, RecoveryStatusRequestParameters, RecoveryStatusResponse, IRecoveryStatusResponse>(
-				selector.InvokeOrDefault(new RecoveryStatusDescriptor()),
-				new RecoveryStatusConverter(DeserializeRecoveryStatusResponse),
-				(p, d) => this.LowLevelDispatch.IndicesRecoveryDispatchAsync<RecoveryStatusResponse>(p)
-			);
+			this.RecoveryStatusAsync(selector.InvokeOrDefault(new RecoveryStatusDescriptor()));
 
 		/// <inheritdoc/>
 		public Task<IRecoveryStatusResponse> RecoveryStatusAsync(IRecoveryStatusRequest statusRequest) => 
