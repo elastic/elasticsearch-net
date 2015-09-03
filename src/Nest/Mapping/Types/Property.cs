@@ -8,7 +8,7 @@ namespace Nest
 	[JsonObject(MemberSerialization.OptIn)]
 	public interface IProperty : IFieldMapping
 	{
-		FieldName Name { get; set; }
+		PropertyName Name { get; set; }
 
 		[JsonProperty("type")]
 		TypeName Type { get; set; }
@@ -48,7 +48,7 @@ namespace Nest
 			Store = attribute.Store;
 		}
 
-		public FieldName Name { get; set; }
+		public PropertyName Name { get; set; }
 		public virtual TypeName Type { get; set; }
 		public IEnumerable<FieldName> CopyTo { get; set; }
 		public bool? DocValues { get; set; }

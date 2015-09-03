@@ -17,8 +17,8 @@ namespace Nest.Resolvers
 	//replaces my sloppy 300+ lines (though working!) first attempt, thanks Thomas Levesque.	
 	public class FieldNameResolver : ExpressionVisitor
 	{
+		 private readonly IConnectionSettingsValues _settings;
 
-		private readonly IConnectionSettingsValues _settings;
 		public FieldNameResolver(IConnectionSettingsValues settings)
 		{
 			if (settings == null)
@@ -40,12 +40,6 @@ namespace Nest.Resolvers
 			return _settings.DefaultFieldNameInferrer(name);
 		}
 
-		public string ResolveToLastToken(MemberInfo info)
-		{
-			var FieldName = this.Resolve(info);
-			return FieldName == null ? null : FieldName.Split(',').Last();
-		}
-
 		public string Resolve(Expression expression)
 		{
 			var stack = new Stack<string>();
@@ -57,14 +51,6 @@ namespace Nest.Resolvers
 					(sb, name) =>
 					(sb.Length > 0 ? sb.Append(".") : sb).Append(name))
 				.ToString();
-		}
-
-		public string ResolveToLastToken(Expression expression)
-		{
-			var stack = new Stack<string>();
-			var properties = new Stack<ElasticsearchPropertyAttribute>();
-			Visit(expression, stack, properties);
-			return stack.Last();
 		}
 
 		protected override Expression VisitMemberAccess(MemberExpression expression, Stack<string> stack, Stack<ElasticsearchPropertyAttribute> properties)

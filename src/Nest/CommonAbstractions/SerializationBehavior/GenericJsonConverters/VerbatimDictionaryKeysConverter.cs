@@ -35,20 +35,20 @@ namespace Nest
 				if (entry.Value == null && serializer.NullValueHandling == NullValueHandling.Ignore)
 					continue;
 				string key;
-				var pp = entry.Key as FieldName;
-				var pn = entry.Key as FieldName;
-				var im = entry.Key as IndexName;
-				var tm = entry.Key as TypeName;
+				var fieldName = entry.Key as FieldName;
+				var propertyName = entry.Key as PropertyName;
+				var indexName = entry.Key as IndexName;
+				var typeName = entry.Key as TypeName;
 				if (contract == null)
 					key = Convert.ToString(entry.Key, CultureInfo.InvariantCulture);
-				else if (pp != null)
-					key = contract.Infer.FieldName(pp);
-				else if (pn != null)
-					key = contract.Infer.FieldName(pn);
-				else if (im != null)
-					key = contract.Infer.IndexName(im);
-				else if (tm != null)
-					key = contract.Infer.TypeName(tm);
+				else if (fieldName != null)
+					key = contract.Infer.FieldName(fieldName);
+				else if (propertyName != null)
+					key = contract.Infer.PropertyName(propertyName);
+				else if (indexName != null)
+					key = contract.Infer.IndexName(indexName);
+				else if (typeName != null)
+					key = contract.Infer.TypeName(typeName);
 				else
 					key = Convert.ToString(entry.Key, CultureInfo.InvariantCulture);
 				writer.WritePropertyName(key);

@@ -12,7 +12,7 @@ namespace Nest
 		where TInterface : class, IProperty
 		where T : class
 	{
-		FieldName IProperty.Name { get; set; }
+		PropertyName IProperty.Name { get; set; }
 		TypeName IProperty.Type { get; set; }
 		string IProperty.IndexName { get; set; }
 		bool? IProperty.Store { get; set; }
@@ -23,7 +23,7 @@ namespace Nest
 
 		public PropertyDescriptorBase(string type) { ((IProperty)this).Type = type; }
 
-		public TDescriptor Name(FieldName name) => Assign(a => a.Name = name);
+		public TDescriptor Name(PropertyName name) => Assign(a => a.Name = name);
 
 		public TDescriptor Name(Expression<Func<T, object>> objectPath) => Assign(a => a.Name = objectPath);
 
