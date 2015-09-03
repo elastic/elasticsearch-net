@@ -21,11 +21,8 @@ namespace Nest
 	}
 	public partial class ElasticClient
 	{
-		public IPutScriptResponse PutScript(Func<PutScriptDescriptor, IPutScriptRequest> putScriptSelector) => 
-			this.Dispatcher.Dispatch<IPutScriptRequest, PutScriptRequestParameters, PutScriptResponse>(
-				putScriptSelector?.Invoke(new PutScriptDescriptor()),
-				this.LowLevelDispatch.PutScriptDispatch<PutScriptResponse>
-			);
+		public IPutScriptResponse PutScript(Func<PutScriptDescriptor, IPutScriptRequest> putScriptSelector) =>
+			this.PutScript(putScriptSelector?.Invoke(new PutScriptDescriptor()));
 
 		public IPutScriptResponse PutScript(IPutScriptRequest putScriptRequest) => 
 			this.Dispatcher.Dispatch<IPutScriptRequest, PutScriptRequestParameters, PutScriptResponse>(
@@ -34,10 +31,7 @@ namespace Nest
 			);
 
 		public Task<IPutScriptResponse> PutScriptAsync(Func<PutScriptDescriptor, IPutScriptRequest> putScriptSelector) => 
-			this.Dispatcher.DispatchAsync<IPutScriptRequest, PutScriptRequestParameters, PutScriptResponse, IPutScriptResponse>(
-				putScriptSelector?.Invoke(new PutScriptDescriptor()),
-				this.LowLevelDispatch.PutScriptDispatchAsync<PutScriptResponse>
-			);
+			this.PutScriptAsync(putScriptSelector?.Invoke(new PutScriptDescriptor()));
 
 		public Task<IPutScriptResponse> PutScriptAsync(IPutScriptRequest putScriptRequest) => 
 			this.Dispatcher.DispatchAsync<IPutScriptRequest, PutScriptRequestParameters, PutScriptResponse, IPutScriptResponse>(

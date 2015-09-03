@@ -14,13 +14,13 @@ namespace Nest
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-open-close.html
 		/// </summary>
 		/// <param name="closeIndexSelector">A descriptor thata describes the close index operation</param>
-		IIndicesOperationResponse CloseIndex(IndexName index, Func<CloseIndexDescriptor, CloseIndexDescriptor> closeIndexSelector = null);
+		IIndicesOperationResponse CloseIndex(IndexName index, Func<CloseIndexDescriptor, ICloseIndexRequest> closeIndexSelector = null);
 
 		/// <inheritdoc/>
 		IIndicesOperationResponse CloseIndex(ICloseIndexRequest closeIndexRequest);
 
 		/// <inheritdoc/>
-		Task<IIndicesOperationResponse> CloseIndexAsync(IndexName index, Func<CloseIndexDescriptor, CloseIndexDescriptor> closeIndexSelector = null);
+		Task<IIndicesOperationResponse> CloseIndexAsync(IndexName index, Func<CloseIndexDescriptor, ICloseIndexRequest> closeIndexSelector = null);
 
 		/// <inheritdoc/>
 		Task<IIndicesOperationResponse> CloseIndexAsync(ICloseIndexRequest closeIndexRequest);
@@ -30,7 +30,7 @@ namespace Nest
 	{
 
 		/// <inheritdoc/>
-		public IIndicesOperationResponse CloseIndex(IndexName index, Func<CloseIndexDescriptor, CloseIndexDescriptor> closeIndexSelector = null) =>
+		public IIndicesOperationResponse CloseIndex(IndexName index, Func<CloseIndexDescriptor, ICloseIndexRequest> closeIndexSelector = null) =>
 			this.CloseIndex(closeIndexSelector.InvokeOrDefault(new CloseIndexDescriptor().Index(index)));
 
 		/// <inheritdoc/>
@@ -41,7 +41,7 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<IIndicesOperationResponse> CloseIndexAsync(IndexName index, Func<CloseIndexDescriptor, CloseIndexDescriptor> closeIndexSelector = null) =>
+		public Task<IIndicesOperationResponse> CloseIndexAsync(IndexName index, Func<CloseIndexDescriptor, ICloseIndexRequest> closeIndexSelector = null) =>
 			this.CloseIndexAsync(closeIndexSelector.InvokeOrDefault(new CloseIndexDescriptor().Index(index)));
 
 		/// <inheritdoc/>

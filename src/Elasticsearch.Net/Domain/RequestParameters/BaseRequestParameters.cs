@@ -10,7 +10,7 @@ namespace Elasticsearch.Net
 	public class RequestParameters : IRequestParameters
 	{
 		public IDictionary<string, object> QueryString { get; set; }
-		public Func<IApiCallDetails, Stream, object> DeserializationState { get; set; }
+		public Func<IApiCallDetails, Stream, object> DeserializationOverride { get; set; }
 		public IRequestConfiguration RequestConfiguration { get; set; }
 		
 		public RequestParameters()

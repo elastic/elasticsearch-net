@@ -28,11 +28,8 @@ namespace Nest
 
 		/// <inheritdoc/>
 		public IPercolateCountResponse PercolateCount<T>(Func<PercolateCountDescriptor<T>, IPercolateCountRequest<T>> percolateSelector)
-			where T : class => 
-			this.Dispatcher.Dispatch<IPercolateCountRequest<T>, PercolateCountRequestParameters, PercolateCountResponse>(
-				percolateSelector?.Invoke(new PercolateCountDescriptor<T>()),
-				this.LowLevelDispatch.CountPercolateDispatch<PercolateCountResponse>
-			);
+			where T : class =>
+			this.PercolateCount<T>(percolateSelector?.Invoke(new PercolateCountDescriptor<T>()));
 
 		/// <inheritdoc/>
 		public IPercolateCountResponse PercolateCount<T>(IPercolateCountRequest<T> percolateCountRequest)
@@ -45,10 +42,7 @@ namespace Nest
 		/// <inheritdoc/>
 		public Task<IPercolateCountResponse> PercolateCountAsync<T>(Func<PercolateCountDescriptor<T>, IPercolateCountRequest<T>> percolateSelector)
 			where T : class => 
-			this.Dispatcher.DispatchAsync<IPercolateCountRequest<T>, PercolateCountRequestParameters, PercolateCountResponse, IPercolateCountResponse>(
-				percolateSelector?.Invoke(new PercolateCountDescriptor<T>()),
-				this.LowLevelDispatch.CountPercolateDispatchAsync<PercolateCountResponse>
-			);
+			this.PercolateCountAsync<T>(percolateSelector?.Invoke(new PercolateCountDescriptor<T>()));
 
 		/// <inheritdoc/>
 		public Task<IPercolateCountResponse> PercolateCountAsync<T>(IPercolateCountRequest<T> percolateCountRequest)

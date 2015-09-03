@@ -35,11 +35,8 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public IRestoreResponse Restore(string repository, string snapshotName, Func<RestoreDescriptor, IRestoreRequest> selector = null) => 
-			this.Dispatcher.Dispatch<IRestoreRequest, RestoreRequestParameters, RestoreResponse>(
-				selector(new RestoreDescriptor().Snapshot(snapshotName).Repository(repository)),
-				this.LowLevelDispatch.SnapshotRestoreDispatch<RestoreResponse>
-			);
+		public IRestoreResponse Restore(string repository, string snapshotName, Func<RestoreDescriptor, IRestoreRequest> selector = null) =>
+			this.Restore(selector(new RestoreDescriptor().Snapshot(snapshotName).Repository(repository)));
 
 		/// <inheritdoc/>
 		public Task<IRestoreResponse> RestoreAsync(IRestoreRequest restoreRequest) => 
@@ -50,9 +47,6 @@ namespace Nest
 
 		/// <inheritdoc/>
 		public Task<IRestoreResponse> RestoreAsync(string repository, string snapshotName, Func<RestoreDescriptor, IRestoreRequest> selector = null) => 
-			this.Dispatcher.DispatchAsync<IRestoreRequest, RestoreRequestParameters, RestoreResponse, IRestoreResponse>(
-				selector(new RestoreDescriptor().Snapshot(snapshotName).Repository(repository)),
-				(p, d) => this.LowLevelDispatch.SnapshotRestoreDispatchAsync<RestoreResponse>(p, d)
-			);
+			this.RestoreAsync(selector(new RestoreDescriptor().Snapshot(snapshotName).Repository(repository)));
 	}
 }

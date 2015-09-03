@@ -24,11 +24,8 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IMultiPercolateResponse MultiPercolate(Func<MultiPercolateDescriptor, IMultiPercolateRequest> multiPercolateSelector) => 
-			this.Dispatcher.Dispatch<IMultiPercolateRequest, MultiPercolateRequestParameters, MultiPercolateResponse>(
-				multiPercolateSelector?.Invoke(new MultiPercolateDescriptor()),
-				this.LowLevelDispatch.MpercolateDispatch<MultiPercolateResponse>
-			);
+		public IMultiPercolateResponse MultiPercolate(Func<MultiPercolateDescriptor, IMultiPercolateRequest> multiPercolateSelector) =>
+			this.MultiPercolate(multiPercolateSelector?.Invoke(new MultiPercolateDescriptor()));
 
 		/// <inheritdoc/>
 		public IMultiPercolateResponse MultiPercolate(IMultiPercolateRequest multiRequest) => 
@@ -38,10 +35,7 @@ namespace Nest
 
 		/// <inheritdoc/>
 		public Task<IMultiPercolateResponse> MultiPercolateAsync(Func<MultiPercolateDescriptor, IMultiPercolateRequest> multiPercolateSelector) => 
-			this.Dispatcher.DispatchAsync<IMultiPercolateRequest, MultiPercolateRequestParameters, MultiPercolateResponse, IMultiPercolateResponse>(
-				multiPercolateSelector?.Invoke(new MultiPercolateDescriptor()),
-				this.LowLevelDispatch.MpercolateDispatchAsync<MultiPercolateResponse>
-			);
+			this.MultiPercolateAsync(multiPercolateSelector?.Invoke(new MultiPercolateDescriptor()));
 
 		/// <inheritdoc/>
 		public Task<IMultiPercolateResponse> MultiPercolateAsync(IMultiPercolateRequest multiPercolateRequest) => 

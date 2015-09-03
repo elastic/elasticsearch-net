@@ -19,7 +19,6 @@ namespace Nest
 		/// <returns>A query response holding T hits as well as the ScrollId for the next scroll operation</returns>
 		ISearchResponse<T> Scroll<T>(IScrollRequest scrollRequest) where T : class;
 
-		//TODO swapping these parameters around would cause a hard to spot bug when upgrading to 2.0 discuss with @gmarz
 		///<inheritdoc/>
 		ISearchResponse<T> Scroll<T>(TimeUnitExpression scrollTime, string scrollId, Func<ScrollDescriptor<T>, IScrollRequest> scrollSelector = null) 
 			where T : class;
@@ -48,16 +47,8 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public ISearchResponse<T> Scroll<T>(TimeUnitExpression scrollTime, string scrollId, Func<ScrollDescriptor<T>, IScrollRequest> scrollSelector = null) where T : class => 
-			this.Dispatcher.Dispatch<IScrollRequest, ScrollRequestParameters, SearchResponse<T>>(
-				scrollSelector.InvokeOrDefault(new ScrollDescriptor<T>().Scroll(scrollTime).ScrollId(scrollId)),
-				(p, d) =>
-				{
-					var id = p.ScrollId;
-					p.ScrollId = null;
-					return this.LowLevelDispatch.ScrollDispatch<SearchResponse<T>>(p, id);
-				}
-			);
+		public ISearchResponse<T> Scroll<T>(TimeUnitExpression scrollTime, string scrollId, Func<ScrollDescriptor<T>, IScrollRequest> scrollSelector = null) where T : class =>
+			this.Scroll<T>(scrollSelector.InvokeOrDefault(new ScrollDescriptor<T>().Scroll(scrollTime).ScrollId(scrollId)));
 
 		/// <inheritdoc/>
 		public Task<ISearchResponse<T>> ScrollAsync<T>(IScrollRequest request) where T : class => 
@@ -73,14 +64,6 @@ namespace Nest
 
 		/// <inheritdoc/>
 		public Task<ISearchResponse<T>> ScrollAsync<T>(TimeUnitExpression scrollTime, string scrollId, Func<ScrollDescriptor<T>, IScrollRequest> scrollSelector = null) where T : class => 
-			this.Dispatcher.DispatchAsync<IScrollRequest, ScrollRequestParameters, SearchResponse<T>, ISearchResponse<T>>(
-				scrollSelector.InvokeOrDefault(new ScrollDescriptor<T>().Scroll(scrollTime).ScrollId(scrollId)),
-				(p, d) =>
-				{
-					var id = p.ScrollId;
-					p.ScrollId = null;
-					return this.LowLevelDispatch.ScrollDispatchAsync<SearchResponse<T>>(p, id);
-				}
-			);
+			this.ScrollAsync<T>(scrollSelector.InvokeOrDefault(new ScrollDescriptor<T>().Scroll(scrollTime).ScrollId(scrollId)));
 	}
 }

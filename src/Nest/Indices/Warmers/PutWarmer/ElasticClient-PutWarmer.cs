@@ -38,11 +38,8 @@ namespace Nest
 		//TODO AllIndices() seems odd here
 
 		/// <inheritdoc/>
-		public IIndicesOperationResponse PutWarmer(string name, Func<PutWarmerDescriptor, IPutWarmerRequest> selector) => 
-			this.Dispatcher.Dispatch<IPutWarmerRequest, PutWarmerRequestParameters, IndicesOperationResponse>(
-				selector?.Invoke(new PutWarmerDescriptor().Name(name).AllIndices()),
-				this.LowLevelDispatch.IndicesPutWarmerDispatch<IndicesOperationResponse>
-			);
+		public IIndicesOperationResponse PutWarmer(string name, Func<PutWarmerDescriptor, IPutWarmerRequest> selector) =>
+			this.PutWarmer(selector?.Invoke(new PutWarmerDescriptor().Name(name).AllIndices()));
 
 		/// <inheritdoc/>
 		public IIndicesOperationResponse PutWarmer(IPutWarmerRequest putWarmerRequest) => 
@@ -53,10 +50,7 @@ namespace Nest
 
 		/// <inheritdoc/>
 		public Task<IIndicesOperationResponse> PutWarmerAsync(string name, Func<PutWarmerDescriptor, IPutWarmerRequest> selector) => 
-			this.Dispatcher.DispatchAsync<IPutWarmerRequest, PutWarmerRequestParameters, IndicesOperationResponse, IIndicesOperationResponse>(
-				selector?.Invoke(new PutWarmerDescriptor().Name(name).AllIndices()),
-				this.LowLevelDispatch.IndicesPutWarmerDispatchAsync<IndicesOperationResponse>
-			);
+			this.PutWarmerAsync(selector?.Invoke(new PutWarmerDescriptor().Name(name).AllIndices()));
 
 		/// <inheritdoc/>
 		public Task<IIndicesOperationResponse> PutWarmerAsync(IPutWarmerRequest putWarmerRequest) => 

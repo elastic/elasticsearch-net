@@ -23,8 +23,7 @@ namespace Nest
 		: HasADictionaryDescriptor<AnalyzersDescriptor, IAnalyzers, string, IAnalyzer>, IAnalyzers
 	{
 
-		//TODO Unknown()? discuss with @gmarz
-		public AnalyzersDescriptor Add(string name, IAnalyzer analyzer) => Assign(name, analyzer);
+		public AnalyzersDescriptor UserDefined(string name, IAnalyzer analyzer) => Assign(name, analyzer);
 
 		/// <summary>
 		/// An analyzer of type custom that allows to combine a Tokenizer with zero or more Token Filters, 

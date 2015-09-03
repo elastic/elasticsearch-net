@@ -29,18 +29,12 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public IDeleteScriptResponse DeleteScript(Func<DeleteScriptDescriptor, IDeleteScriptRequest> deleteScriptSelector) => 
-			this.Dispatcher.Dispatch<IDeleteScriptRequest, DeleteScriptRequestParameters, DeleteScriptResponse>(
-				deleteScriptSelector?.Invoke(new DeleteScriptDescriptor()),
-				(p, d) => this.LowLevelDispatch.DeleteScriptDispatch<DeleteScriptResponse>(p)
-			);
+		public IDeleteScriptResponse DeleteScript(Func<DeleteScriptDescriptor, IDeleteScriptRequest> deleteScriptSelector) =>
+			this.DeleteScript(deleteScriptSelector?.Invoke(new DeleteScriptDescriptor()));
 
 		/// <inheritdoc/>
 		public Task<IDeleteScriptResponse> DeleteScriptAsync(Func<DeleteScriptDescriptor, IDeleteScriptRequest> deleteScriptSelector) => 
-			this.Dispatcher.DispatchAsync<IDeleteScriptRequest, DeleteScriptRequestParameters, DeleteScriptResponse, IDeleteScriptResponse>(
-				deleteScriptSelector?.Invoke(new DeleteScriptDescriptor()),
-				(p, d) => this.LowLevelDispatch.DeleteScriptDispatchAsync<DeleteScriptResponse>(p)
-			);
+			this.DeleteScriptAsync(deleteScriptSelector?.Invoke(new DeleteScriptDescriptor()));
 
 		/// <inheritdoc/>
 		public Task<IDeleteScriptResponse> DeleteScriptAsync(IDeleteScriptRequest deleteScriptRequest) => 

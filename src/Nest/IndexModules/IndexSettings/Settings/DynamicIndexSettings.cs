@@ -200,11 +200,10 @@ namespace Nest
 		TimeUnitExpression IDynamicIndexSettings.UnassignedNodeLeftDelayedTimeout { get; set; }
 		IAnalysis IDynamicIndexSettings.Analysis { get; set; }
 		
-		//TODO rename to Setting? discuss with @gmarz
 		/// <summary>
 		/// Add any setting to the index
 		/// </summary>
-		public TIndexSettings Add(string setting, object value)
+		public TIndexSettings Setting(string setting, object value)
 		{
 			this.BackingDictionary.Add(setting, value);
 			return (TIndexSettings)this;

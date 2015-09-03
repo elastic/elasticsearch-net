@@ -27,11 +27,8 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public ISearchShardsResponse SearchShards<T>(Func<SearchShardsDescriptor<T>, ISearchShardsRequest> searchSelector) where T : class => 
-			this.Dispatcher.Dispatch<ISearchShardsRequest, SearchShardsRequestParameters, SearchShardsResponse>(
-				searchSelector?.Invoke(new SearchShardsDescriptor<T>()),
-				(p, d) => this.LowLevelDispatch.SearchShardsDispatch<SearchShardsResponse>(p)
-			);
+		public ISearchShardsResponse SearchShards<T>(Func<SearchShardsDescriptor<T>, ISearchShardsRequest> searchSelector) where T : class =>
+			this.SearchShards(searchSelector?.Invoke(new SearchShardsDescriptor<T>()));
 
 		/// <inheritdoc/>
 		public ISearchShardsResponse SearchShards(ISearchShardsRequest request) => 
@@ -43,10 +40,7 @@ namespace Nest
 		/// <inheritdoc/>
 		public Task<ISearchShardsResponse> SearchShardsAsync<T>(Func<SearchShardsDescriptor<T>, ISearchShardsRequest> searchSelector)
 			where T : class => 
-			this.Dispatcher.DispatchAsync<ISearchShardsRequest, SearchShardsRequestParameters, SearchShardsResponse, ISearchShardsResponse>(
-				searchSelector?.Invoke(new SearchShardsDescriptor<T>()),
-				(p, d) => this.LowLevelDispatch.SearchShardsDispatchAsync<SearchShardsResponse>(p)
-			);
+			this.SearchShardsAsync(searchSelector?.Invoke(new SearchShardsDescriptor<T>()));
 
 		/// <inheritdoc/>
 		public Task<ISearchShardsResponse> SearchShardsAsync(ISearchShardsRequest request) => 

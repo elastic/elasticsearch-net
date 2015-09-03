@@ -49,9 +49,9 @@ namespace Nest
 			this.GetAliasAsync(getAliasDescriptor?.Invoke(new GetAliasDescriptor()));
 
 		/// <inheritdoc/>
-		public Task<IGetAliasesResponse> GetAliasAsync(IGetAliasRequest GetAliasRequest) => 
+		public Task<IGetAliasesResponse> GetAliasAsync(IGetAliasRequest getAliasRequest) => 
 			this.Dispatcher.DispatchAsync<IGetAliasRequest, GetAliasRequestParameters, GetAliasesResponse, IGetAliasesResponse>(
-				GetAliasRequest,
+				getAliasRequest,
 				new GetAliasesConverter(DeserializeGetAliasesResponse),
 				(p, d) => this.LowLevelDispatch.IndicesGetAliasDispatchAsync<GetAliasesResponse>(p)
 			);

@@ -35,11 +35,8 @@ namespace Nest
 	{
 		/// <inheritdoc/>
 		public ICountResponse Count<T>(Func<CountDescriptor<T>, ICountRequest> countSelector = null)
-			where T : class => 
-			this.Dispatcher.Dispatch<ICountRequest, CountRequestParameters, CountResponse>(
-				countSelector.InvokeOrDefault(new CountDescriptor<T>()),
-				this.LowLevelDispatch.CountDispatch<CountResponse>
-			);
+			where T : class =>
+			this.Count<T>(countSelector.InvokeOrDefault(new CountDescriptor<T>()));
 
 		/// <inheritdoc/>
 		public ICountResponse Count<T>(ICountRequest countRequest)
@@ -52,10 +49,7 @@ namespace Nest
 		/// <inheritdoc/>
 		public Task<ICountResponse> CountAsync<T>(Func<CountDescriptor<T>, ICountRequest> countSelector = null)
 			where T : class => 
-			this.Dispatcher.DispatchAsync<ICountRequest, CountRequestParameters, CountResponse, ICountResponse>(
-				countSelector.InvokeOrDefault(new CountDescriptor<T>()),
-				this.LowLevelDispatch.CountDispatchAsync<CountResponse>
-			);
+			this.CountAsync<T>(countSelector.InvokeOrDefault(new CountDescriptor<T>()));
 
 		/// <inheritdoc/>
 		public Task<ICountResponse> CountAsync<T>(ICountRequest countRequest)

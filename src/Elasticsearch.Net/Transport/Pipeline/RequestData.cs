@@ -51,7 +51,7 @@ namespace Elasticsearch.Net.Connection
 		public RequestData(HttpMethod method, string path, PostData<object> data, IConnectionConfigurationValues global, IRequestParameters local, IMemoryStreamFactory memoryStreamFactory)
 			: this(method, path, data, global, (IRequestConfiguration)local?.RequestConfiguration, memoryStreamFactory)
 		{
-			this.CustomConverter = local?.DeserializationState;
+			this.CustomConverter = local?.DeserializationOverride;
 			this.Path = this.CreatePathWithQueryStrings(path, this._settings, local);
 		}
 

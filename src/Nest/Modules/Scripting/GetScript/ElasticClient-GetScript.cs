@@ -24,11 +24,8 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IGetScriptResponse GetScript(Func<GetScriptDescriptor, IGetScriptRequest> getScriptSelector) => 
-			this.Dispatcher.Dispatch<IGetScriptRequest, GetScriptRequestParameters, GetScriptResponse>(
-				getScriptSelector?.Invoke(new GetScriptDescriptor()),
-				(p, d) => this.LowLevelDispatch.GetScriptDispatch<GetScriptResponse>(p)
-			);
+		public IGetScriptResponse GetScript(Func<GetScriptDescriptor, IGetScriptRequest> getScriptSelector) =>
+			this.GetScript(getScriptSelector?.Invoke(new GetScriptDescriptor()));
 
 		/// <inheritdoc/>
 		public IGetScriptResponse GetScript(IGetScriptRequest getScriptRequest) => 
@@ -39,10 +36,7 @@ namespace Nest
 
 		/// <inheritdoc/>
 		public Task<IGetScriptResponse> GetScriptAsync(Func<GetScriptDescriptor, IGetScriptRequest> getScriptSelector) => 
-			this.Dispatcher.DispatchAsync<IGetScriptRequest, GetScriptRequestParameters, GetScriptResponse, IGetScriptResponse>(
-				getScriptSelector?.Invoke(new GetScriptDescriptor()),
-				(p, d) => this.LowLevelDispatch.GetScriptDispatchAsync<GetScriptResponse>(p)
-			);
+			this.GetScriptAsync(getScriptSelector?.Invoke(new GetScriptDescriptor()));
 
 		/// <inheritdoc/>
 		public Task<IGetScriptResponse> GetScriptAsync(IGetScriptRequest getScriptRequest) => 

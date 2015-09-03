@@ -31,11 +31,8 @@ namespace Nest
 	{
 		/// <inheritdoc/>
 		public IValidateResponse Validate<T>(Func<ValidateQueryDescriptor<T>, IValidateQueryRequest> querySelector)
-			where T : class => 
-			this.Dispatcher.Dispatch<IValidateQueryRequest, ValidateQueryRequestParameters, ValidateResponse>(
-				querySelector?.Invoke(new ValidateQueryDescriptor<T>()),
-				this.LowLevelDispatch.IndicesValidateQueryDispatch<ValidateResponse>
-			);
+			where T : class =>
+			this.Validate(querySelector?.Invoke(new ValidateQueryDescriptor<T>()));
 
 		/// <inheritdoc/>
 		public IValidateResponse Validate(IValidateQueryRequest validateQueryRequest) => 
@@ -47,10 +44,7 @@ namespace Nest
 		/// <inheritdoc/>
 		public Task<IValidateResponse> ValidateAsync<T>(Func<ValidateQueryDescriptor<T>, IValidateQueryRequest> querySelector)
 			where T : class => 
-			this.Dispatcher.DispatchAsync<IValidateQueryRequest, ValidateQueryRequestParameters, ValidateResponse, IValidateResponse>(
-				querySelector?.Invoke(new ValidateQueryDescriptor<T>()),
-				this.LowLevelDispatch.IndicesValidateQueryDispatchAsync<ValidateResponse>
-			);
+			this.ValidateAsync(querySelector?.Invoke(new ValidateQueryDescriptor<T>()));
 
 		/// <inheritdoc/>
 		public Task<IValidateResponse> ValidateAsync(IValidateQueryRequest validateQueryRequest) => 

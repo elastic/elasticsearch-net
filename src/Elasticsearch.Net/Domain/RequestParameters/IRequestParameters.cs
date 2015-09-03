@@ -19,7 +19,7 @@ namespace Elasticsearch.Net
 		/// A method that can be set on the request to take ownership of creating the response object.
 		/// When set this will be called instead of the internal .Deserialize();
 		/// </summary>
-		Func<IApiCallDetails, Stream, object> DeserializationState { get; set;  }
+		Func<IApiCallDetails, Stream, object> DeserializationOverride { get; set;  }
 
 		/// <summary>
 		/// Configuration for this specific request, i.e disable sniffing, custom timeouts etcetera.

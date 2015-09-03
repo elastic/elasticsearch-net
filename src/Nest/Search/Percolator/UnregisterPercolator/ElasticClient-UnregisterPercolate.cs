@@ -32,11 +32,8 @@ namespace Nest
 
 		/// <inheritdoc/>
 		public IUnregisterPercolateResponse UnregisterPercolator<T>(string name, Func<UnregisterPercolatorDescriptor<T>, IUnregisterPercolatorRequest> selector = null)
-			where T : class => 
-			this.Dispatcher.Dispatch<IUnregisterPercolatorRequest, DeleteRequestParameters, UnregisterPercolateResponse>(
-				selector.InvokeOrDefault(new UnregisterPercolatorDescriptor<T>().Name(name)),
-				(p, d) => this.LowLevelDispatch.DeleteDispatch<UnregisterPercolateResponse>(p)
-			);
+			where T : class =>
+			this.UnregisterPercolator(selector.InvokeOrDefault(new UnregisterPercolatorDescriptor<T>().Name(name)));
 
 		/// <inheritdoc/>
 		public IUnregisterPercolateResponse UnregisterPercolator(IUnregisterPercolatorRequest unregisterPercolatorRequest) => 
@@ -48,10 +45,7 @@ namespace Nest
 		/// <inheritdoc/>
 		public Task<IUnregisterPercolateResponse> UnregisterPercolatorAsync<T>(string name, Func<UnregisterPercolatorDescriptor<T>, IUnregisterPercolatorRequest> selector = null)
 			where T : class => 
-			this.Dispatcher.DispatchAsync<IUnregisterPercolatorRequest, DeleteRequestParameters, UnregisterPercolateResponse, IUnregisterPercolateResponse>(
-				selector.InvokeOrDefault(new UnregisterPercolatorDescriptor<T>().Name(name)),
-				(p, d) => this.LowLevelDispatch.DeleteDispatchAsync<UnregisterPercolateResponse>(p)
-			);
+			this.UnregisterPercolatorAsync(selector.InvokeOrDefault(new UnregisterPercolatorDescriptor<T>().Name(name)));
 
 		/// <inheritdoc/>
 		public Task<IUnregisterPercolateResponse> UnregisterPercolatorAsync(IUnregisterPercolatorRequest unregisterPercolatorRequest) => 

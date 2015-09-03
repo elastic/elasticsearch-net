@@ -21,7 +21,6 @@ namespace Nest
 		public ISearchRequest Source { get; set; }
 	}
 	
-	//TODO discuss with @gmarz wether this should be typed or not
 	public class WarmerDescriptor<T> : DescriptorBase<WarmerDescriptor<T>, IWarmer>, IWarmer
 		where T : class
 	{

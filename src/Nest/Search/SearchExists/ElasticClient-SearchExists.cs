@@ -26,12 +26,8 @@ namespace Nest
 	{
 		/// <inheritdoc/>
 		public IExistsResponse SearchExists<T>(Func<SearchExistsDescriptor<T>, ISearchExistsRequest> selector)
-			where T : class => 
-			this.Dispatcher.Dispatch<ISearchExistsRequest, SearchExistsRequestParameters, ExistsResponse>(
-				selector?.Invoke(new SearchExistsDescriptor<T>()),
-				new SearchExistConverter(DeserializeExistsResponse),
-				this.LowLevelDispatch.SearchExistsDispatch<ExistsResponse>
-			);
+			where T : class =>
+			this.SearchExists(selector?.Invoke(new SearchExistsDescriptor<T>()));
 
 		/// <inheritdoc/>
 		public IExistsResponse SearchExists(ISearchExistsRequest indexRequest) => 
@@ -44,11 +40,7 @@ namespace Nest
 		/// <inheritdoc/>
 		public Task<IExistsResponse> SearchExistsAsync<T>(Func<SearchExistsDescriptor<T>, ISearchExistsRequest> selector)
 			where T : class => 
-			this.Dispatcher.DispatchAsync<ISearchExistsRequest, SearchExistsRequestParameters, ExistsResponse, IExistsResponse>(
-				selector?.Invoke(new SearchExistsDescriptor<T>()),
-				new SearchExistConverter(DeserializeExistsResponse),
-				this.LowLevelDispatch.SearchExistsDispatchAsync<ExistsResponse>
-			);
+			this.SearchExistsAsync(selector?.Invoke(new SearchExistsDescriptor<T>()));
 
 		/// <inheritdoc/>
 		public Task<IExistsResponse> SearchExistsAsync(ISearchExistsRequest indexRequest) => 

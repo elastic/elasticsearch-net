@@ -28,11 +28,8 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IShardsOperationResponse Refresh(Func<RefreshDescriptor, IRefreshRequest> refreshSelector = null) => 
-			this.Dispatcher.Dispatch<IRefreshRequest, RefreshRequestParameters, ShardsOperationResponse>(
-				refreshSelector.InvokeOrDefault(new RefreshDescriptor()),
-				(p, d) => this.LowLevelDispatch.IndicesRefreshDispatch<ShardsOperationResponse>(p)
-			);
+		public IShardsOperationResponse Refresh(Func<RefreshDescriptor, IRefreshRequest> refreshSelector = null) =>
+			this.Refresh(refreshSelector.InvokeOrDefault(new RefreshDescriptor()));
 
 		/// <inheritdoc/>
 		public IShardsOperationResponse Refresh(IRefreshRequest refreshRequest) => 
@@ -43,10 +40,7 @@ namespace Nest
 
 		/// <inheritdoc/>
 		public Task<IShardsOperationResponse> RefreshAsync(Func<RefreshDescriptor, IRefreshRequest> refreshSelector = null) => 
-			this.Dispatcher.DispatchAsync<IRefreshRequest, RefreshRequestParameters, ShardsOperationResponse, IShardsOperationResponse>(
-				refreshSelector.InvokeOrDefault(new RefreshDescriptor()),
-				(p, d) => this.LowLevelDispatch.IndicesRefreshDispatchAsync<ShardsOperationResponse>(p)
-			);
+			this.RefreshAsync(refreshSelector.InvokeOrDefault(new RefreshDescriptor()));
 
 		/// <inheritdoc/>
 		public Task<IShardsOperationResponse> RefreshAsync(IRefreshRequest refreshRequest) => 

@@ -30,11 +30,8 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IShardsOperationResponse Optimize(Func<OptimizeDescriptor, IOptimizeRequest> optimizeSelector = null) => 
-			this.Dispatcher.Dispatch<IOptimizeRequest, OptimizeRequestParameters, ShardsOperationResponse>(
-				optimizeSelector.InvokeOrDefault(new OptimizeDescriptor()),
-				(p, d) => this.LowLevelDispatch.IndicesOptimizeDispatch<ShardsOperationResponse>(p)
-			);
+		public IShardsOperationResponse Optimize(Func<OptimizeDescriptor, IOptimizeRequest> optimizeSelector = null) =>
+			this.Optimize(optimizeSelector.InvokeOrDefault(new OptimizeDescriptor()));
 
 		/// <inheritdoc/>
 		public IShardsOperationResponse Optimize(IOptimizeRequest optimizeRequest) => 
@@ -45,10 +42,7 @@ namespace Nest
 
 		/// <inheritdoc/>
 		public Task<IShardsOperationResponse> OptimizeAsync(Func<OptimizeDescriptor, IOptimizeRequest> optimizeSelector = null) => 
-			this.Dispatcher.DispatchAsync<IOptimizeRequest, OptimizeRequestParameters, ShardsOperationResponse, IShardsOperationResponse>(
-				optimizeSelector.InvokeOrDefault(new OptimizeDescriptor()),
-				(p, d) => this.LowLevelDispatch.IndicesOptimizeDispatchAsync<ShardsOperationResponse>(p)
-			);
+			this.OptimizeAsync(optimizeSelector.InvokeOrDefault(new OptimizeDescriptor()));
 
 		/// <inheritdoc/>
 		public Task<IShardsOperationResponse> OptimizeAsync(IOptimizeRequest optimizeRequest) => 
