@@ -7,44 +7,45 @@ using System.Threading.Tasks;
 
 namespace Nest
 {
+	public partial interface IElasticClient
+	{
+		/// <summary>
+		/// Returns a list of any cluster-level changes (e.g. create index, update mapping, allocate or fail shard) which have not yet been executed.
+		/// </summary>
+		IClusterPendingTasksResponse ClusterPendingTasks(Func<ClusterPendingTasksDescriptor, IClusterPendingTasksRequest> pendingTasksSelector = null);
+
+		/// <inheritdoc/>
+		Task<IClusterPendingTasksResponse> ClusterPendingTasksAsync(Func<ClusterPendingTasksDescriptor, IClusterPendingTasksRequest> pendingTasksSelector = null);
+
+		/// <inheritdoc/>
+		IClusterPendingTasksResponse ClusterPendingTasks(IClusterPendingTasksRequest pendingTasksRequest);
+
+		/// <inheritdoc/>
+		Task<IClusterPendingTasksResponse> ClusterPendingTasksAsync(IClusterPendingTasksRequest pendingTasksRequest);
+	}
+
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IClusterPendingTasksResponse ClusterPendingTasks(Func<ClusterPendingTasksDescriptor, ClusterPendingTasksDescriptor> pendingTasksSelector = null)
-		{
-			pendingTasksSelector = pendingTasksSelector ?? (s => s);
-			return this.Dispatcher.Dispatch<ClusterPendingTasksDescriptor, ClusterPendingTasksRequestParameters, ClusterPendingTasksResponse>(
-				pendingTasksSelector,
-				(p, d) => this.LowLevelDispatch.ClusterPendingTasksDispatch<ClusterPendingTasksResponse>(p)
-			);
-		}
+		public IClusterPendingTasksResponse ClusterPendingTasks(Func<ClusterPendingTasksDescriptor, IClusterPendingTasksRequest> pendingTasksSelector = null) =>
+			this.ClusterPendingTasks(pendingTasksSelector.InvokeOrDefault(new ClusterPendingTasksDescriptor()));
 
 		/// <inheritdoc/>
-		public Task<IClusterPendingTasksResponse> ClusterPendingTasksAsync(Func<ClusterPendingTasksDescriptor, ClusterPendingTasksDescriptor> pendingTasksSelector = null)
-		{
-			pendingTasksSelector = pendingTasksSelector ?? (s => s);
-			return this.Dispatcher.DispatchAsync<ClusterPendingTasksDescriptor, ClusterPendingTasksRequestParameters, ClusterPendingTasksResponse, IClusterPendingTasksResponse>(
-				pendingTasksSelector,
-				(p, d) => this.LowLevelDispatch.ClusterPendingTasksDispatchAsync<ClusterPendingTasksResponse>(p)
-			);
-		}
+		public Task<IClusterPendingTasksResponse> ClusterPendingTasksAsync(Func<ClusterPendingTasksDescriptor, IClusterPendingTasksRequest> pendingTasksSelector = null) =>
+			this.ClusterPendingTasksAsync(pendingTasksSelector.InvokeOrDefault(new ClusterPendingTasksDescriptor()));
 
 		/// <inheritdoc/>
-		public IClusterPendingTasksResponse ClusterPendingTasks(IClusterPendingTasksRequest pendingTasksRequest)
-		{
-			return this.Dispatcher.Dispatch<IClusterPendingTasksRequest, ClusterPendingTasksRequestParameters, ClusterPendingTasksResponse>(
+		public IClusterPendingTasksResponse ClusterPendingTasks(IClusterPendingTasksRequest pendingTasksRequest) => 
+			this.Dispatcher.Dispatch<IClusterPendingTasksRequest, ClusterPendingTasksRequestParameters, ClusterPendingTasksResponse>(
 				pendingTasksRequest,
 				(p, d) => this.LowLevelDispatch.ClusterPendingTasksDispatch<ClusterPendingTasksResponse>(p)
 			);
-		}
 
 		/// <inheritdoc/>
-		public Task<IClusterPendingTasksResponse> ClusterPendingTasksAsync(IClusterPendingTasksRequest pendingTasksRequest)
-		{
-			return this.Dispatcher.DispatchAsync<IClusterPendingTasksRequest, ClusterPendingTasksRequestParameters, ClusterPendingTasksResponse, IClusterPendingTasksResponse>(
+		public Task<IClusterPendingTasksResponse> ClusterPendingTasksAsync(IClusterPendingTasksRequest pendingTasksRequest) => 
+			this.Dispatcher.DispatchAsync<IClusterPendingTasksRequest, ClusterPendingTasksRequestParameters, ClusterPendingTasksResponse, IClusterPendingTasksResponse>(
 				pendingTasksRequest,
 				(p, d) => this.LowLevelDispatch.ClusterPendingTasksDispatchAsync<ClusterPendingTasksResponse>(p)
 			);
-		}
 	}
 }

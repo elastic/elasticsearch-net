@@ -7,46 +7,48 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
+	public partial interface IElasticClient
+	{
+		/// <summary>
+		/// Delete an index alias
+		/// http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-aliases.html#deleting
+		/// </summary>
+		/// <param name="deleteAliasRequest">A descriptor that describes the delete alias request</param>
+		IDeleteAliasResponse DeleteAlias(IDeleteAliasRequest deleteAliasRequest);
+
+		/// <inheritdoc/>
+		Task<IDeleteAliasResponse> DeleteAliasAsync(IDeleteAliasRequest deleteAliasRequest);
+
+		/// <inheritdoc/>
+		IDeleteAliasResponse DeleteAlias<T>(Func<DeleteAliasDescriptor<T>, IDeleteAliasRequest> deleteAliasDescriptor) where T : class;
+
+		/// <inheritdoc/>
+		Task<IDeleteAliasResponse> DeleteAliasAsync<T>(Func<DeleteAliasDescriptor<T>, IDeleteAliasRequest> deleteAliasDescriptor) where T : class;
+	}
+
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IDeleteAliasResponse DeleteAlias(IDeleteAliasRequest deleteAliasRequest)
-		{
-			return this.Dispatcher.Dispatch<IDeleteAliasRequest, DeleteAliasRequestParameters, DeleteAliasResponse>(
+		public IDeleteAliasResponse DeleteAlias(IDeleteAliasRequest deleteAliasRequest) => 
+			this.Dispatcher.Dispatch<IDeleteAliasRequest, DeleteAliasRequestParameters, DeleteAliasResponse>(
 				deleteAliasRequest,
 				(p, d) => this.LowLevelDispatch.IndicesDeleteAliasDispatch<DeleteAliasResponse>(p)
 			);
-		}
 
 		/// <inheritdoc/>
-		public Task<IDeleteAliasResponse> DeleteAliasAsync(IDeleteAliasRequest deleteAliasRequest)
-		{
-			return this.Dispatcher.DispatchAsync<IDeleteAliasRequest, DeleteAliasRequestParameters, DeleteAliasResponse, IDeleteAliasResponse>(
+		public Task<IDeleteAliasResponse> DeleteAliasAsync(IDeleteAliasRequest deleteAliasRequest) => 
+			this.Dispatcher.DispatchAsync<IDeleteAliasRequest, DeleteAliasRequestParameters, DeleteAliasResponse, IDeleteAliasResponse>(
 				deleteAliasRequest,
 				(p, d) => this.LowLevelDispatch.IndicesDeleteAliasDispatchAsync<DeleteAliasResponse>(p)
 			);
-		}
 
 		/// <inheritdoc/>
-		public IDeleteAliasResponse DeleteAlias<T>(Func<DeleteAliasDescriptor<T>, DeleteAliasDescriptor<T>> deleteAliasDescriptor)
-			where T : class
-		{
-			return this.Dispatcher.Dispatch<DeleteAliasDescriptor<T>, DeleteAliasRequestParameters, DeleteAliasResponse>(
-				deleteAliasDescriptor,
-				(p, d) => this.LowLevelDispatch.IndicesDeleteAliasDispatch<DeleteAliasResponse>(p)
-			);
-		}
+		public IDeleteAliasResponse DeleteAlias<T>(Func<DeleteAliasDescriptor<T>, IDeleteAliasRequest> deleteAliasDescriptor) where T : class =>
+			this.DeleteAlias(deleteAliasDescriptor?.Invoke(new DeleteAliasDescriptor<T>()));
 
 		/// <inheritdoc/>
-		public Task<IDeleteAliasResponse> DeleteAliasAsync<T>(Func<DeleteAliasDescriptor<T>, DeleteAliasDescriptor<T>> deleteAliasDescriptor)
-			where T : class
-		{
-			return this.Dispatcher.DispatchAsync<DeleteAliasDescriptor<T>, DeleteAliasRequestParameters, DeleteAliasResponse, IDeleteAliasResponse>(
-				deleteAliasDescriptor,
-				(p, d) => this.LowLevelDispatch.IndicesDeleteAliasDispatchAsync<DeleteAliasResponse>(p)
-			);
-		}
-
+		public Task<IDeleteAliasResponse> DeleteAliasAsync<T>(Func<DeleteAliasDescriptor<T>, IDeleteAliasRequest> deleteAliasDescriptor) where T : class=>
+			this.DeleteAliasAsync(deleteAliasDescriptor?.Invoke(new DeleteAliasDescriptor<T>()));
 	}
 }

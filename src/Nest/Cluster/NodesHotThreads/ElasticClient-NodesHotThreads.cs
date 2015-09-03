@@ -11,49 +11,50 @@ namespace Nest
 {
 	using NodesHotThreadConverter = Func<IApiCallDetails, Stream, NodesHotThreadsResponse>;
 
+	public partial interface IElasticClient
+	{
+		/// <summary>
+		/// An API allowing to get the current hot threads on each node in the cluster.
+		/// </summary>
+		/// <param name="selector"></param>
+		/// <returns>An optional descriptor to further describe the nodes hot threads operation</returns>
+		INodesHotThreadsResponse NodesHotThreads(Func<NodesHotThreadsDescriptor, INodesHotThreadsRequest> selector = null);
+
+		/// <inheritdoc/>
+		INodesHotThreadsResponse NodesHotThreads(INodesHotThreadsRequest nodesHotThreadsRequest);
+
+		/// <inheritdoc/>
+		Task<INodesHotThreadsResponse> NodesHotThreadsAsync(Func<NodesHotThreadsDescriptor, INodesHotThreadsRequest> selector = null);
+
+		/// <inheritdoc/>
+		Task<INodesHotThreadsResponse> NodesHotThreadsAsync(INodesHotThreadsRequest nodesHotThreadsRequest);
+	}
+
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public INodesHotThreadsResponse NodesHotThreads(Func<NodesHotThreadsDescriptor, NodesHotThreadsDescriptor> selector = null)
-		{
-			selector = selector ?? (s => s);
-			return this.Dispatcher.Dispatch<NodesHotThreadsDescriptor, NodesHotThreadsRequestParameters, NodesHotThreadsResponse>(
-				selector,
-				(p, d) => this.LowLevelDispatch.NodesHotThreadsDispatch<NodesHotThreadsResponse>(
-					p.DeserializationState(new NodesHotThreadConverter(DeserializeNodesHotThreadResponse)))
-				);
-		}
+		public INodesHotThreadsResponse NodesHotThreads(Func<NodesHotThreadsDescriptor, INodesHotThreadsRequest> selector = null) =>
+			this.NodesHotThreads(selector.InvokeOrDefault(new NodesHotThreadsDescriptor()));
 
 		/// <inheritdoc/>
-		public INodesHotThreadsResponse NodesHotThreads(INodesHotThreadsRequest nodesHotThreadsRequest)
-		{
-			return this.Dispatcher.Dispatch<INodesHotThreadsRequest, NodesHotThreadsRequestParameters, NodesHotThreadsResponse>(
+		public INodesHotThreadsResponse NodesHotThreads(INodesHotThreadsRequest nodesHotThreadsRequest) => 
+			this.Dispatcher.Dispatch<INodesHotThreadsRequest, NodesHotThreadsRequestParameters, NodesHotThreadsResponse>(
 				nodesHotThreadsRequest,
-				(p, d) => this.LowLevelDispatch.NodesHotThreadsDispatch<NodesHotThreadsResponse>(
-					p.DeserializationState(new NodesHotThreadConverter(DeserializeNodesHotThreadResponse)))
+				new NodesHotThreadConverter(DeserializeNodesHotThreadResponse),
+				(p, d) => this.LowLevelDispatch.NodesHotThreadsDispatch<NodesHotThreadsResponse>(p)
 			);
-		}
 
 		/// <inheritdoc/>
-		public Task<INodesHotThreadsResponse> NodesHotThreadsAsync(Func<NodesHotThreadsDescriptor, NodesHotThreadsDescriptor> selector = null)
-		{
-			selector = selector ?? (s => s);
-			return this.Dispatcher.DispatchAsync<NodesHotThreadsDescriptor, NodesHotThreadsRequestParameters, NodesHotThreadsResponse, INodesHotThreadsResponse>(
-				selector,
-				(p, d) => this.LowLevelDispatch.NodesHotThreadsDispatchAsync<NodesHotThreadsResponse>(
-					p.DeserializationState(new NodesHotThreadConverter(DeserializeNodesHotThreadResponse)))
-			);
-		}
+		public Task<INodesHotThreadsResponse> NodesHotThreadsAsync(Func<NodesHotThreadsDescriptor, INodesHotThreadsRequest> selector = null) =>
+			this.NodesHotThreadsAsync(selector.InvokeOrDefault(new NodesHotThreadsDescriptor()));
 
 		/// <inheritdoc/>
-		public Task<INodesHotThreadsResponse> NodesHotThreadsAsync(INodesHotThreadsRequest nodesHotThreadsRequest)
-		{
-			return this.Dispatcher.DispatchAsync<INodesHotThreadsRequest, NodesHotThreadsRequestParameters, NodesHotThreadsResponse, INodesHotThreadsResponse>(
+		public Task<INodesHotThreadsResponse> NodesHotThreadsAsync(INodesHotThreadsRequest nodesHotThreadsRequest) => 
+			this.Dispatcher.DispatchAsync<INodesHotThreadsRequest, NodesHotThreadsRequestParameters, NodesHotThreadsResponse, INodesHotThreadsResponse>(
 				nodesHotThreadsRequest,
-				(p, d) => this.LowLevelDispatch.NodesHotThreadsDispatchAsync<NodesHotThreadsResponse>(
-					p.DeserializationState(new NodesHotThreadConverter(DeserializeNodesHotThreadResponse)))
+				new NodesHotThreadConverter(DeserializeNodesHotThreadResponse),
+				(p, d) => this.LowLevelDispatch.NodesHotThreadsDispatchAsync<NodesHotThreadsResponse>(p)
 			);
-		}
 
 		/// <summary>
 		/// Because the nodes.hot_threads endpoint returns plain text instead of JSON, we have to

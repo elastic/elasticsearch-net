@@ -2,6 +2,8 @@
 
 namespace Nest
 {
+	//TODO with better typed paths (required params consts) this should no longer be necessary
+
 	/// <summary>
 	/// Provides extension methods to provide a cleaner scoll API given a scollTime and scrollId
 	/// </summary>

@@ -9,51 +9,45 @@ namespace Nest
 {
 	using AliasExistConverter = Func<IApiCallDetails, Stream, ExistsResponse>;
 
+	public partial interface IElasticClient
+	{
+		/// <inheritdoc/>
+		IExistsResponse AliasExists(Func<AliasExistsDescriptor, IAliasExistsRequest> selector);
+
+		/// <inheritdoc/>
+		IExistsResponse AliasExists(IAliasExistsRequest aliasRequest);
+
+		/// <inheritdoc/>
+		Task<IExistsResponse> AliasExistsAsync(Func<AliasExistsDescriptor, IAliasExistsRequest> selector);
+
+		/// <inheritdoc/>
+		Task<IExistsResponse> AliasExistsAsync(IAliasExistsRequest aliasRequest);
+	}
+
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IExistsResponse AliasExists(Func<AliasExistsDescriptor, AliasExistsDescriptor> selector)
-		{
-			return this.Dispatcher.Dispatch<AliasExistsDescriptor, AliasExistsRequestParameters, ExistsResponse>(
-				selector,
-				(p, d) => this.LowLevelDispatch.IndicesExistsAliasDispatch<ExistsResponse>(
-					p.DeserializationState(new AliasExistConverter(DeserializeExistsResponse))
-				)
-			);
-		}
+		public IExistsResponse AliasExists(Func<AliasExistsDescriptor, IAliasExistsRequest> selector) =>
+			this.AliasExists(selector?.Invoke(new AliasExistsDescriptor()));
 
 		/// <inheritdoc/>
-		public IExistsResponse AliasExists(IAliasExistsRequest AliasRequest)
-		{
-			return this.Dispatcher.Dispatch<IAliasExistsRequest, AliasExistsRequestParameters, ExistsResponse>(
-				AliasRequest,
-				(p, d) => this.LowLevelDispatch.IndicesExistsAliasDispatch<ExistsResponse>(
-					p.DeserializationState(new AliasExistConverter(DeserializeExistsResponse))
-				)
+		public IExistsResponse AliasExists(IAliasExistsRequest aliasRequest) => 
+			this.Dispatcher.Dispatch<IAliasExistsRequest, AliasExistsRequestParameters, ExistsResponse>(
+				aliasRequest,
+				new AliasExistConverter(DeserializeExistsResponse),
+				(p, d) => this.LowLevelDispatch.IndicesExistsAliasDispatch<ExistsResponse>(p)
 			);
-		}
 
 		/// <inheritdoc/>
-		public Task<IExistsResponse> AliasExistsAsync(Func<AliasExistsDescriptor, AliasExistsDescriptor> selector)
-		{
-			return this.Dispatcher.DispatchAsync<AliasExistsDescriptor, AliasExistsRequestParameters, ExistsResponse, IExistsResponse>(
-				selector,
-				(p, d) => this.LowLevelDispatch.IndicesExistsAliasDispatchAsync<ExistsResponse>(
-					p.DeserializationState(new AliasExistConverter(DeserializeExistsResponse))
-				)
-			);
-		}
+		public Task<IExistsResponse> AliasExistsAsync(Func<AliasExistsDescriptor, IAliasExistsRequest> selector) =>
+			this.AliasExistsAsync(selector?.Invoke(new AliasExistsDescriptor()));
 
 		/// <inheritdoc/>
-		public Task<IExistsResponse> AliasExistsAsync(IAliasExistsRequest AliasRequest)
-		{
-			return this.Dispatcher.DispatchAsync<IAliasExistsRequest, AliasExistsRequestParameters, ExistsResponse, IExistsResponse>(
-				AliasRequest,
-				(p, d) => this.LowLevelDispatch.IndicesExistsAliasDispatchAsync<ExistsResponse>(
-					p.DeserializationState(new AliasExistConverter(DeserializeExistsResponse))
-				)
+		public Task<IExistsResponse> AliasExistsAsync(IAliasExistsRequest aliasRequest) => 
+			this.Dispatcher.DispatchAsync<IAliasExistsRequest, AliasExistsRequestParameters, ExistsResponse, IExistsResponse>(
+				aliasRequest,
+				new AliasExistConverter(DeserializeExistsResponse),
+				(p, d) => this.LowLevelDispatch.IndicesExistsAliasDispatchAsync<ExistsResponse>(p)
 			);
-		}
-
 	}
 }

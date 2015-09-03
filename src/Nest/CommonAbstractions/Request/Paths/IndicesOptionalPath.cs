@@ -56,16 +56,22 @@ namespace Nest
 
 		IEnumerable<IndexName> IIndicesOptionalPath<TParameters>.Indices { get; set; }
 		
-		public TDescriptor Index(string index)
+		public TDescriptor Index(IndexName index)
 		{
 			return this.Indices(index);
 		}
-	
+
 		public TDescriptor Index<TAlternative>() where TAlternative : class
 		{
 			return this.Indices(typeof(TAlternative));
 		}
 			
+		public TDescriptor Indices(params IndexName[] indices)
+		{
+			Self.Indices = indices;
+			return (TDescriptor)this;
+		}
+
 		public TDescriptor Indices(params string[] indices)
 		{
 			Self.Indices = indices.Select(s=>(IndexName)s);

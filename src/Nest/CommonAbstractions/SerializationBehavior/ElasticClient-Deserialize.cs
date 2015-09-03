@@ -8,6 +8,8 @@ namespace Nest.SerializationExtensions
 {
 	public static class SerializerExtensions
 	{
+		//TODO discuss with @gmarz whether we should keep exposing this ? I vote to delete
+
 		/// <summary>
 		/// This is a convenience method to deserialize to T using the registered deserializer. 
 		/// <para>NOTE:</para> If you want to deserialize to a NEST response you need to use the overload that 

@@ -6,6 +6,16 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
+	public partial interface IElasticClient
+	{
+		/// <inheritdoc/>
+		ICatResponse<CatCountRecord> CatCount(Func<CatCountDescriptor, CatCountDescriptor> selector = null);
+
+		ICatResponse<CatCountRecord> CatCount(ICatCountRequest request);
+		Task<ICatResponse<CatCountRecord>> CatCountAsync(Func<CatCountDescriptor, CatCountDescriptor> selector = null);
+		Task<ICatResponse<CatCountRecord>> CatCountAsync(ICatCountRequest request);
+	}
+
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>

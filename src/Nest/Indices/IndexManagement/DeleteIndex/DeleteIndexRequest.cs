@@ -11,10 +11,8 @@ namespace Nest
 
 	internal static class DeleteIndexPathInfo
 	{
-		public static void Update(ElasticsearchPathInfo<DeleteIndexRequestParameters> pathInfo, IDeleteIndexRequest request)
-		{
+		public static void Update(ElasticsearchPathInfo<DeleteIndexRequestParameters> pathInfo, IDeleteIndexRequest request) =>
 			pathInfo.HttpMethod = HttpMethod.DELETE;
-		}
 	}
 	
 	public partial class DeleteIndexRequest : IndicesOptionalExplicitAllPathBase<DeleteIndexRequestParameters>, IDeleteIndexRequest

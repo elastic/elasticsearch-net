@@ -7,44 +7,48 @@ using System.Threading.Tasks;
 
 namespace Nest
 {
+	public partial interface IElasticClient
+	{
+		/// <summary>
+		/// allows to retrieve statistics from a cluster wide perspective. The API returns basic index metrics 
+		/// (shard numbers, store size, memory usage) and information about the current nodes that form the 
+		/// cluster (number, roles, os, jvm versions, memory usage, cpu and installed plugins).
+		/// </summary>
+		/// <param name="clusterStatsSelector">A descriptor that describes the cluster stats operation</param>
+		IClusterStatsResponse ClusterStats(Func<ClusterStatsDescriptor, IClusterStatsRequest> clusterStatsSelector = null);
+
+		/// <inheritdoc/>
+		Task<IClusterStatsResponse> ClusterStatsAsync(Func<ClusterStatsDescriptor, IClusterStatsRequest> clusterStatsSelector = null);
+
+		/// <inheritdoc/>
+		IClusterStatsResponse ClusterStats(IClusterStatsRequest clusterStatsRequest);
+
+		/// <inheritdoc/>
+		Task<IClusterStatsResponse> ClusterStatsAsync(IClusterStatsRequest clusterStatsRequest);
+	}
+
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IClusterStatsResponse ClusterStats(Func<ClusterStatsDescriptor, ClusterStatsDescriptor> clusterStatsSelector = null)
-		{
-			clusterStatsSelector = clusterStatsSelector ?? (s => s);
-			return this.Dispatcher.Dispatch<ClusterStatsDescriptor, ClusterStatsRequestParameters, ClusterStatsResponse>(
-				clusterStatsSelector,
-				(p, d) => this.LowLevelDispatch.ClusterStatsDispatch<ClusterStatsResponse>(p)
-			);
-		}
+		public IClusterStatsResponse ClusterStats(Func<ClusterStatsDescriptor, IClusterStatsRequest> clusterStatsSelector = null) =>
+			this.ClusterStats(clusterStatsSelector.InvokeOrDefault(new ClusterStatsDescriptor()));
 
 		/// <inheritdoc/>
-		public Task<IClusterStatsResponse> ClusterStatsAsync(Func<ClusterStatsDescriptor, ClusterStatsDescriptor> clusterStatsSelector = null)
-		{
-			clusterStatsSelector = clusterStatsSelector ?? (s => s);
-			return this.Dispatcher.DispatchAsync<ClusterStatsDescriptor, ClusterStatsRequestParameters, ClusterStatsResponse, IClusterStatsResponse>(
-				clusterStatsSelector,
-				(p, d) => this.LowLevelDispatch.ClusterStatsDispatchAsync<ClusterStatsResponse>(p)
-			);
-		}
+		public Task<IClusterStatsResponse> ClusterStatsAsync(Func<ClusterStatsDescriptor, IClusterStatsRequest> clusterStatsSelector = null) =>
+			this.ClusterStatsAsync(clusterStatsSelector.InvokeOrDefault(new ClusterStatsDescriptor()));
 
 		/// <inheritdoc/>
-		public IClusterStatsResponse ClusterStats(IClusterStatsRequest clusterStatsRequest)
-		{
-			return this.Dispatcher.Dispatch<IClusterStatsRequest, ClusterStatsRequestParameters, ClusterStatsResponse>(
+		public IClusterStatsResponse ClusterStats(IClusterStatsRequest clusterStatsRequest) => 
+			this.Dispatcher.Dispatch<IClusterStatsRequest, ClusterStatsRequestParameters, ClusterStatsResponse>(
 				clusterStatsRequest,
 				(p, d) => this.LowLevelDispatch.ClusterStatsDispatch<ClusterStatsResponse>(p)
 			);
-		}
 
 		/// <inheritdoc/>
-		public Task<IClusterStatsResponse> ClusterStatsAsync(IClusterStatsRequest clusterStatsRequest)
-		{
-			return this.Dispatcher.DispatchAsync<IClusterStatsRequest, ClusterStatsRequestParameters, ClusterStatsResponse, IClusterStatsResponse>(
+		public Task<IClusterStatsResponse> ClusterStatsAsync(IClusterStatsRequest clusterStatsRequest) => 
+			this.Dispatcher.DispatchAsync<IClusterStatsRequest, ClusterStatsRequestParameters, ClusterStatsResponse, IClusterStatsResponse>(
 				clusterStatsRequest,
 				(p, d) => this.LowLevelDispatch.ClusterStatsDispatchAsync<ClusterStatsResponse>(p)
 			);
-		}
 	}
 }

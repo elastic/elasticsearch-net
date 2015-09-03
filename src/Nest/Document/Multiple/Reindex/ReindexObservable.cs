@@ -5,16 +5,16 @@ namespace Nest
 {
 	public class ReindexObservable<T> : IDisposable, IObservable<IReindexResponse<T>> where T : class
 	{
-		private ReindexDescriptor<T> _reindexDescriptor;
+		private IReindexRequest _reindexRequest;
 		private readonly IConnectionSettingsValues _connectionSettings;
-		internal IElasticClient CurrentClient { get; set; }
-		internal ReindexDescriptor<T> ReindexDescriptor { get; set; } 
 
-		public ReindexObservable(IElasticClient client, IConnectionSettingsValues connectionSettings, ReindexDescriptor<T> reindexDescriptor)
+		private IElasticClient _client { get; set; }
+
+		public ReindexObservable(IElasticClient client, IConnectionSettingsValues connectionSettings, IReindexRequest reindexRequest)
 		{
 			this._connectionSettings = connectionSettings;
-			this._reindexDescriptor = reindexDescriptor;
-			this.CurrentClient = client;
+			this._reindexRequest = reindexRequest;
+			this._client = client;
 		}
 
 		public IDisposable Subscribe(IObserver<IReindexResponse<T>> observer)
@@ -34,31 +34,29 @@ namespace Nest
 
 		private void Reindex(IObserver<IReindexResponse<T>> observer)
 		{
-			var fromIndex = this._reindexDescriptor._FromIndexName;
-			var toIndex = this._reindexDescriptor._ToIndexName;
-			var scroll = this._reindexDescriptor._Scroll ?? "2m";
-			var size = this._reindexDescriptor._Size ?? 100;
+			var fromIndex = this._reindexRequest.From;
+			var toIndex = this._reindexRequest.To;
+			var scroll = this._reindexRequest.Scroll ?? "2m";
+			var size = this._reindexRequest.Size ?? 100;
 
-			fromIndex.ThrowIfNullOrEmpty("fromIndex");
-			toIndex.ThrowIfNullOrEmpty("toIndex");
+			fromIndex.Resolve(this._connectionSettings).ThrowIfNullOrEmpty("fromIndex");
+			toIndex.Resolve(this._connectionSettings).ThrowIfNullOrEmpty("toIndex");
 
-			var indexSettings = this.CurrentClient.GetIndexSettings(i=>i.Index(fromIndex));
-			Func<CreateIndexDescriptor, CreateIndexDescriptor> settings =
-				this._reindexDescriptor._CreateIndexSelector ?? ((ci) => ci);
-
-			var createIndexResponse = this.CurrentClient.CreateIndex(
+			var indexSettings = this._client.GetIndexSettings(i=>i.Index(fromIndex));
+			Func<CreateIndexDescriptor, ICreateIndexRequest> settings =  (ci) => this._reindexRequest.CreateIndexRequest ?? ci;
+			var createIndexResponse = this._client.CreateIndex(
 				toIndex, (c) => settings(c.InitializeUsing(indexSettings.Indices[fromIndex])));
 			if (!createIndexResponse.IsValid)
 				throw new ReindexException(createIndexResponse.ApiCall);
 
 			var page = 0;
-			var searchResult = this.CurrentClient.Search<T>(
+			var searchResult = this._client.Search<T>(
 				s => s
 					.Index(fromIndex)
 					.AllTypes()
 					.From(0)
 					.Size(size)
-					.Query(this._reindexDescriptor._QuerySelector ?? (q=>q.MatchAll()))
+					.Query(this._reindexRequest.Query)
 					.SearchType(SearchType.Scan)
 					.Scroll(scroll)
 				);
@@ -68,7 +66,7 @@ namespace Nest
 			do
 			{
 				var result = searchResult;
-				searchResult = this.CurrentClient.Scroll<T>(scroll, result.ScrollId);
+				searchResult = this._client.Scroll<T>((TimeUnitExpression)scroll, result.ScrollId);
 				if (searchResult.Documents.HasAny())
 					indexResult = this.IndexSearchResults(searchResult, observer, toIndex, page);
 				page++;
@@ -78,7 +76,7 @@ namespace Nest
 			observer.OnCompleted();
 		}
 
-		public IBulkResponse IndexSearchResults(ISearchResponse<T> searchResult,IObserver<IReindexResponse<T>> observer, string toIndex, int page)
+		public IBulkResponse IndexSearchResults(ISearchResponse<T> searchResult,IObserver<IReindexResponse<T>> observer, IndexName toIndex, int page)
 		{
 			if (!searchResult.IsValid)
 				throw new ReindexException(searchResult.ApiCall, "reindex failed on scroll #" + page);
@@ -90,7 +88,7 @@ namespace Nest
 				bb.Index<T>(bi => bi.Document(d1.Source).Type(d1.Type).Index(toIndex).Id(d.Id));
 			}
 
-			var indexResult = this.CurrentClient.Bulk(b=>bb);
+			var indexResult = this._client.Bulk(b=>bb);
 			if (!indexResult.IsValid)
 				throw new ReindexException(indexResult.ApiCall, "reindex failed when indexing page " + page);
 
