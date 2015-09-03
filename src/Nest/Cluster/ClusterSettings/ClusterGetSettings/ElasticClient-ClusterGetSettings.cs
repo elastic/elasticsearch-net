@@ -28,11 +28,11 @@ namespace Nest
 	{
 		/// <inheritdoc/>
 		public IClusterGetSettingsResponse ClusterGetSettings(Func<ClusterGetSettingsDescriptor, IClusterGetSettingsRequest> selector = null) =>
-			this.ClusterGetSettings(selector.InvokeOrDefault(new ClusterGetSettingsDescriptor());
+			this.ClusterGetSettings(selector.InvokeOrDefault(new ClusterGetSettingsDescriptor()));
 
 		/// <inheritdoc/>
 		public Task<IClusterGetSettingsResponse> ClusterGetSettingsAsync(Func<ClusterGetSettingsDescriptor, IClusterGetSettingsRequest> selector = null) =>
-			this.ClusterGetSettingsAsync(selector.InvokeOrDefault(new ClusterGetSettingsDescriptor());
+			this.ClusterGetSettingsAsync(selector.InvokeOrDefault(new ClusterGetSettingsDescriptor()));
 
 		/// <inheritdoc/>
 		public IClusterGetSettingsResponse ClusterGetSettings(IClusterGetSettingsRequest clusterSettingsRequest) => 

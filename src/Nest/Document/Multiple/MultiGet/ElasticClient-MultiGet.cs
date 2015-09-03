@@ -46,7 +46,7 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<IMultiGetResponse> MultiGetAsync(Func<MultiGetDescriptor, MultiGetDescriptor> multiGetSelector) =>
+		public Task<IMultiGetResponse> MultiGetAsync(Func<MultiGetDescriptor, IMultiGetRequest> multiGetSelector) =>
 			this.MultiGetAsync(multiGetSelector?.Invoke(new MultiGetDescriptor()));
 
 		/// <inheritdoc/>
