@@ -9,7 +9,7 @@ using System.Reflection;
 
 namespace Nest
 {
-	public class FieldName : IEquatable<FieldName>, IQueryStringValue
+	public class FieldName : IEquatable<FieldName>, IUrlParameter
 	{
 		public string Name { get; set; }
 		public Expression Expression { get; set; }
@@ -77,7 +77,7 @@ namespace Nest
 			return ComparisonValue == other.ComparisonValue;
 		}
 
-		string IQueryStringValue.ToQueryStringValue(IConnectionConfigurationValues settings)
+		string IUrlParameter.GetString(IConnectionConfigurationValues settings)
 		{
 			var nestSettings = settings as IConnectionSettingsValues;
 			if (nestSettings == null)

@@ -17,10 +17,16 @@ namespace Nest
 		ISuggestResponse Suggest<T>(Func<SuggestDescriptor<T>, ISuggestRequest> selector) where T : class;
 
 		/// <inheritdoc/>
+		ISuggestResponse Suggest<T>(Indices indices, Func<SuggestDescriptor<T>, ISuggestRequest> selector) where T : class;
+
+		/// <inheritdoc/>
 		ISuggestResponse Suggest(ISuggestRequest suggestRequest);
 
 		/// <inheritdoc/>
 		Task<ISuggestResponse> SuggestAsync<T>(Func<SuggestDescriptor<T>, ISuggestRequest> selector) where T : class;
+
+		/// <inheritdoc/>
+		Task<ISuggestResponse> SuggestAsync<T>(Indices indices, Func<SuggestDescriptor<T>, ISuggestRequest> selector) where T : class;
 
 		/// <inheritdoc/>
 		Task<ISuggestResponse> SuggestAsync(ISuggestRequest suggestRequest);
@@ -29,12 +35,11 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public ISuggestResponse Suggest<T>(Func<SuggestDescriptor<T>, ISuggestRequest> selector)
-			where T : class => 
-			this.Dispatcher.Dispatch<ISuggestRequest, SuggestRequestParameters, SuggestResponse>(
-				selector?.Invoke(new SuggestDescriptor<T>()),
-				this.LowLevelDispatch.SuggestDispatch<SuggestResponse>
-			);
+		public ISuggestResponse Suggest<T>(Func<SuggestDescriptor<T>, ISuggestRequest> selector) where T : class =>
+			this.Suggest(selector?.Invoke(new SuggestDescriptor<T>()));
+
+		public ISuggestResponse Suggest<T>(Indices indices, Func<SuggestDescriptor<T>, ISuggestRequest> selector) where T : class =>
+			this.Suggest(selector?.Invoke(new SuggestDescriptor<T>(indices)));
 
 		/// <inheritdoc/>
 		public ISuggestResponse Suggest(ISuggestRequest suggestRequest) => 
@@ -44,12 +49,12 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<ISuggestResponse> SuggestAsync<T>(Func<SuggestDescriptor<T>, ISuggestRequest> selector)
-			where T : class => 
-			this.Dispatcher.DispatchAsync<ISuggestRequest, SuggestRequestParameters, SuggestResponse, ISuggestResponse>(
-				selector?.Invoke(new SuggestDescriptor<T>()),
-				this.LowLevelDispatch.SuggestDispatchAsync<SuggestResponse>
-			);
+		public Task<ISuggestResponse> SuggestAsync<T>(Func<SuggestDescriptor<T>, ISuggestRequest> selector) where T : class => 
+			this.SuggestAsync(selector?.Invoke(new SuggestDescriptor<T>()));
+
+		/// <inheritdoc/>
+		public Task<ISuggestResponse> SuggestAsync<T>(Indices indices, Func<SuggestDescriptor<T>, ISuggestRequest> selector) where T : class => 
+			this.SuggestAsync(selector?.Invoke(new SuggestDescriptor<T>(indices)));
 
 		/// <inheritdoc/>
 		public Task<ISuggestResponse> SuggestAsync(ISuggestRequest suggestRequest) => 

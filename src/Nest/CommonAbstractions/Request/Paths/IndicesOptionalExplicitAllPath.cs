@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using Elasticsearch.Net;
+using Elasticsearch.Net.Serialization;
 
 namespace Nest
 {
 	public interface IIndicesOptionalExplicitAllPath<TParameters> : IRequest<TParameters>
 		where TParameters : IRequestParameters, new()
 	{
-		IEnumerable<IndexName> Indices { get; set; }
-		bool? AllIndices { get; set; }
+		Indices Indices { get; set; }
 	}
 
 	internal static class IndicesOptionalExplicitAllPathRouteParameters
@@ -20,16 +20,7 @@ namespace Nest
 			ElasticsearchPathInfo<TParameters> pathInfo)
 			where TParameters : IRequestParameters, new()
 		{	
-			var inferrer = new ElasticInferrer(settings);
-			if (!path.AllIndices.HasValue && path.Indices == null)
-				path.Indices = new[] {(IndexName)inferrer.DefaultIndex};
-
-			string index = "_all";
-			if (!path.AllIndices.GetValueOrDefault(false))
-				index = string.Join(",", path.Indices.Select(inferrer.IndexName));
-
-			pathInfo.Index = index;
-		
+			pathInfo.Index = ((IUrlParameter)path.Indices).GetString(settings);
 		}
 	
 	}
@@ -37,13 +28,16 @@ namespace Nest
 	public abstract class IndicesOptionalExplicitAllPathBase<TParameters> : BasePathRequest<TParameters>, IIndicesOptionalExplicitAllPath<TParameters>
 		where TParameters : IRequestParameters, new()
 	{
-		public IEnumerable<IndexName> Indices { get; set; }
-		public bool? AllIndices { get; set; }
-		
-		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
-		{	
-			IndicesOptionalExplicitAllPathRouteParameters.SetRouteParameters(this, settings, pathInfo);
+		Indices IIndicesOptionalExplicitAllPath<TParameters>.Indices { get; set; }
+
+		public IndicesOptionalExplicitAllPathBase(Indices indices)
+		{
+			indices.ThrowIfNull(nameof(indices));
+			((IIndicesOptionalExplicitAllPath<TParameters>)this).Indices = indices;
 		}
+		
+		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo) =>
+			IndicesOptionalExplicitAllPathRouteParameters.SetRouteParameters(this, settings, pathInfo);
 	}
 
 	/// <summary>
@@ -55,41 +49,17 @@ namespace Nest
 	/// </summary>
 	public abstract class IndicesOptionalExplicitAllPathDescriptor<TDescriptor, TParameters> 
 		: BasePathDescriptor<TDescriptor, TParameters>, IIndicesOptionalExplicitAllPath<TParameters>
-		where TDescriptor : IndicesOptionalExplicitAllPathDescriptor<TDescriptor, TParameters>, new()
+		where TDescriptor : IndicesOptionalExplicitAllPathDescriptor<TDescriptor, TParameters>
 		where TParameters : FluentRequestParameters<TParameters>, new()
 	{
 		private IIndicesOptionalExplicitAllPath<TParameters> Self => this;
 
-		IEnumerable<IndexName> IIndicesOptionalExplicitAllPath<TParameters>.Indices { get; set; }
-		
-		bool? IIndicesOptionalExplicitAllPath<TParameters>.AllIndices { get; set; }
+		Indices IIndicesOptionalExplicitAllPath<TParameters>.Indices { get; set; }
 
-		public TDescriptor AllIndices(bool allIndices = true)
+		public IndicesOptionalExplicitAllPathDescriptor(Indices indices)
 		{
-			Self.AllIndices = allIndices;
-			return (TDescriptor)this;
-		}
-			
-		public TDescriptor Index(string index)
-		{
-			return this.Indices(index);
-		}
-	
-		public TDescriptor Index<TAlternative>() where TAlternative : class
-		{
-			return this.Indices(typeof(TAlternative));
-		}
-			
-		public TDescriptor Indices(params string[] indices)
-		{
-			Self.Indices = indices.Select(s=>(IndexName)s);
-			return (TDescriptor)this;
-		}
-
-		public TDescriptor Indices(params Type[] indicesTypes)
-		{
-			Self.Indices = indicesTypes.Select(s=>(IndexName)s);
-			return (TDescriptor)this;
+			indices.ThrowIfNull(nameof(indices));
+			((IIndicesOptionalExplicitAllPath<TParameters>)this).Indices = indices;
 		}
 
 		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)

@@ -16,13 +16,13 @@ namespace Nest
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-get-mapping.html
 		/// </summary>
 		/// <param name="selector">A descriptor that describes the parameters for the get mapping operation</param>
-		IGetMappingResponse GetMapping<T>(Func<GetMappingDescriptor<T>, GetMappingDescriptor<T>> selector = null) where T : class;
+		IGetMappingResponse GetMapping<T>(Func<GetMappingDescriptor<T>, IGetMappingRequest> selector = null) where T : class;
 
 		/// <inheritdoc/>
 		IGetMappingResponse GetMapping(IGetMappingRequest getMappingRequest);
 
 		/// <inheritdoc/>
-		Task<IGetMappingResponse> GetMappingAsync<T>(Func<GetMappingDescriptor<T>, GetMappingDescriptor<T>> selector = null)
+		Task<IGetMappingResponse> GetMappingAsync<T>(Func<GetMappingDescriptor<T>, IGetMappingRequest> selector = null)
 			where T : class;
 
 		/// <inheritdoc/>
@@ -46,7 +46,7 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<IGetMappingResponse> GetMappingAsync<T>(Func<GetMappingDescriptor<T>, GetMappingDescriptor<T>> selector = null)
+		public Task<IGetMappingResponse> GetMappingAsync<T>(Func<GetMappingDescriptor<T>, IGetMappingRequest> selector = null)
 			where T : class =>
 			this.GetMappingAsync(selector.InvokeOrDefault(new GetMappingDescriptor<T>()));
 

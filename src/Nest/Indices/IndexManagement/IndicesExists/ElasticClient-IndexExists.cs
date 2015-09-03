@@ -14,13 +14,13 @@ namespace Nest
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-exists.html
 		/// </summary>
 		/// <param name="selector">A descriptor that describes the index exist operation</param>
-		IExistsResponse IndexExists(Func<IndexExistsDescriptor, IIndexExistsRequest> selector);
+		IExistsResponse IndexExists(IndexName index, Func<IndexExistsDescriptor, IIndexExistsRequest> selector = null);
 
 		/// <inheritdoc/>
 		IExistsResponse IndexExists(IIndexExistsRequest indexExistsRequest);
 
 		/// <inheritdoc/>
-		Task<IExistsResponse> IndexExistsAsync(Func<IndexExistsDescriptor, IIndexExistsRequest> selector);
+		Task<IExistsResponse> IndexExistsAsync(IndexName index, Func<IndexExistsDescriptor, IIndexExistsRequest> selector = null);
 
 		/// <inheritdoc/>
 		Task<IExistsResponse> IndexExistsAsync(IIndexExistsRequest indexExistsRequest);
@@ -32,12 +32,8 @@ namespace Nest
 		private ExistsResponse DeserializeExistsResponse(IApiCallDetails response, Stream stream) => new ExistsResponse(response);
 
 		/// <inheritdoc/>
-		public IExistsResponse IndexExists(Func<IndexExistsDescriptor, IIndexExistsRequest> selector) => 
-			this.Dispatcher.Dispatch<IIndexExistsRequest, IndexExistsRequestParameters, ExistsResponse>(
-				selector?.Invoke(new IndexExistsDescriptor()),
-				new IndexExistConverter(DeserializeExistsResponse),
-				(p, d) => this.LowLevelDispatch.IndicesExistsDispatch<ExistsResponse>(p)
-			);
+		public IExistsResponse IndexExists(IndexName index, Func<IndexExistsDescriptor, IIndexExistsRequest> selector = null) =>
+			this.IndexExists(selector.Invoke(new IndexExistsDescriptor().Index(index)));
 
 		/// <inheritdoc/>
 		public IExistsResponse IndexExists(IIndexExistsRequest indexRequest) => 
@@ -48,12 +44,8 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<IExistsResponse> IndexExistsAsync(Func<IndexExistsDescriptor, IIndexExistsRequest> selector) => 
-			this.Dispatcher.DispatchAsync<IIndexExistsRequest, IndexExistsRequestParameters, ExistsResponse, IExistsResponse>(
-				selector?.Invoke(new IndexExistsDescriptor()),
-				new IndexExistConverter(DeserializeExistsResponse),
-				(p, d) => this.LowLevelDispatch.IndicesExistsDispatchAsync<ExistsResponse>(p)
-			);
+		public Task<IExistsResponse> IndexExistsAsync(IndexName index, Func<IndexExistsDescriptor, IIndexExistsRequest> selector = null) => 
+			this.IndexExistsAsync(selector.Invoke(new IndexExistsDescriptor().Index(index)));
 
 		/// <inheritdoc/>
 		public Task<IExistsResponse> IndexExistsAsync(IIndexExistsRequest indexRequest) => 

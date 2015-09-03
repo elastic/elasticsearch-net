@@ -44,20 +44,7 @@ namespace Nest
 
 	public partial class GetIndexRequest : IndicesOptionalExplicitAllPathBase<GetIndexRequestParameters>, IGetIndexRequest
 	{
-		public GetIndexRequest() : base()
-		{
-			this.AllIndices = true;
-		}
-
-		public GetIndexRequest(IndexName index) : this()
-		{
-			this.Indices = new[] {index};
-		}
-
-		public GetIndexRequest(IEnumerable<IndexName> indices) : this()
-		{
-			this.Indices = indices;
-		}
+		public GetIndexRequest(Indices indices) : base(indices) { }
 
 		/// <summary>
 		/// Be selective which features to return, i.e GetIndexFeature.Mappings | GetIndexFeature.Settings
@@ -74,8 +61,11 @@ namespace Nest
 	public partial class GetIndexDescriptor : IndicesOptionalExplicitAllPathDescriptor<GetIndexDescriptor, GetIndexRequestParameters>, IGetIndexRequest
 	{
 		private IGetIndexRequest Self => this;
+
 		GetIndexFeature IGetIndexRequest.Features { get; set; }
 		
+		public GetIndexDescriptor(Indices indices) : base(indices) { }
+
 		/// <summary>
 		/// Be selective which features to return, i.e GetIndexFeature.Mappings | GetIndexFeature.Settings
 		/// </summary>
@@ -83,12 +73,6 @@ namespace Nest
 		{
 			Self.Features = features;
 			return this;
-		}
-
-		[Obsolete("Please use the overload taking an enum", true)]
-		public GetIndexDescriptor ExpandWildcards(params string[] expandWildcards)
-		{
-			throw new NotImplementedException();
 		}
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<GetIndexRequestParameters> pathInfo)

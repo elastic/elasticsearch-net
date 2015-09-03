@@ -9,52 +9,49 @@ namespace Nest
 {
 	using GetIndexResponseConverter = Func<IApiCallDetails, Stream, GetIndexResponse>;
 
+	public partial interface IElasticClient
+	{
+		/// <inheritdoc/>
+		IGetIndexResponse GetIndex(Indices indices, Func<GetIndexDescriptor, GetIndexDescriptor> getIndexSelector = null);
+
+		/// <inheritdoc/>
+		IGetIndexResponse GetIndex(IGetIndexRequest createIndexRequest);
+
+		/// <inheritdoc/>
+		Task<IGetIndexResponse> GetIndexAsync(Indices indices, Func<GetIndexDescriptor, GetIndexDescriptor> getIndexSelector = null);
+
+		/// <inheritdoc/>
+		Task<IGetIndexResponse> GetIndexAsync(IGetIndexRequest createIndexRequest);
+	}
+
+
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IGetIndexResponse GetIndex(Func<GetIndexDescriptor, GetIndexDescriptor> getIndexSelector)
-		{
-			return this.Dispatcher.Dispatch<GetIndexDescriptor, GetIndexRequestParameters, GetIndexResponse>(
-				getIndexSelector,
-				(p, d) => this.LowLevelDispatch.IndicesGetDispatch<GetIndexResponse>(
-					p.DeserializationState(new GetIndexResponseConverter(this.DeserializeGetIndexResponse))
-				)
-			);
-		}
+		public IGetIndexResponse GetIndex(Indices indices, Func<GetIndexDescriptor, GetIndexDescriptor> getIndexSelector = null) =>
+			this.GetIndex(getIndexSelector.InvokeOrDefault(new GetIndexDescriptor(indices)));
 
 		/// <inheritdoc/>
-		public IGetIndexResponse GetIndex(IGetIndexRequest createIndexRequest)
-		{
-			return this.Dispatcher.Dispatch<IGetIndexRequest, GetIndexRequestParameters, GetIndexResponse>(
+		public IGetIndexResponse GetIndex(IGetIndexRequest createIndexRequest) => 
+			this.Dispatcher.Dispatch<IGetIndexRequest, GetIndexRequestParameters, GetIndexResponse>(
 				createIndexRequest,
-				(p, d) => this.LowLevelDispatch.IndicesGetDispatch<GetIndexResponse>(
-					p.DeserializationState(new GetIndexResponseConverter(this.DeserializeGetIndexResponse))
-				)
+				new GetIndexResponseConverter(this.DeserializeGetIndexResponse),
+				(p, d) => this.LowLevelDispatch.IndicesGetDispatch<GetIndexResponse>(p)
 			);
-		}
 
 		/// <inheritdoc/>
-		public Task<IGetIndexResponse> GetIndexAsync(Func<GetIndexDescriptor, GetIndexDescriptor> getIndexSelector)
-		{
-			return this.Dispatcher.DispatchAsync<GetIndexDescriptor, GetIndexRequestParameters, GetIndexResponse, IGetIndexResponse>(
-				getIndexSelector,
-				(p, d) => this.LowLevelDispatch.IndicesGetDispatchAsync<GetIndexResponse>(
-					p.DeserializationState(new GetIndexResponseConverter(this.DeserializeGetIndexResponse))
-				)
-			);
-		}
+		public Task<IGetIndexResponse> GetIndexAsync(Indices indices, Func<GetIndexDescriptor, GetIndexDescriptor> getIndexSelector = null) =>
+			this.GetIndexAsync(getIndexSelector.InvokeOrDefault(new GetIndexDescriptor(indices)));
 
 		/// <inheritdoc/>
-		public Task<IGetIndexResponse> GetIndexAsync(IGetIndexRequest createIndexRequest)
-		{
-			return this.Dispatcher.DispatchAsync<IGetIndexRequest, GetIndexRequestParameters, GetIndexResponse, IGetIndexResponse>(
+		public Task<IGetIndexResponse> GetIndexAsync(IGetIndexRequest createIndexRequest) => 
+			this.Dispatcher.DispatchAsync<IGetIndexRequest, GetIndexRequestParameters, GetIndexResponse, IGetIndexResponse>(
 				createIndexRequest,
-				(p, d) => this.LowLevelDispatch.IndicesGetDispatchAsync<GetIndexResponse>(
-					p.DeserializationState(new GetIndexResponseConverter(this.DeserializeGetIndexResponse))
-				)
+				new GetIndexResponseConverter(this.DeserializeGetIndexResponse),
+				(p, d) => this.LowLevelDispatch.IndicesGetDispatchAsync<GetIndexResponse>(p)
 			);
-		}
 
+		//TODO DictionaryResponse
 		private GetIndexResponse DeserializeGetIndexResponse(IApiCallDetails response, Stream stream)
 		{
 			return new GetIndexResponse

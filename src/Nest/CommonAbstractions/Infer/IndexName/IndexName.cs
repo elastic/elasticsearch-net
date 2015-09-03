@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace Nest
 {
+
 	[JsonConverter(typeof(IndexNameJsonConverter))]
 	public class IndexName : IEquatable<IndexName>
 	{

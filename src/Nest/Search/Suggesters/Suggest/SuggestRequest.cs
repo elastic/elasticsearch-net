@@ -55,6 +55,7 @@ namespace Nest
 
 	public partial class SuggestRequest : IndicesOptionalExplicitAllPathBase<SuggestRequestParameters>, ISuggestRequest
 	{
+		public SuggestRequest(Indices indices) : base(indices) { }
 		public string GlobalText { get; set; }
 		public IDictionary<string, ISuggester> Suggest { get; set; }
 
@@ -74,15 +75,13 @@ namespace Nest
 	{
 		private ISuggestRequest Self => this;
 
+		public SuggestDescriptor() : base(Indices.Type<T>()) { }
+		public SuggestDescriptor(Indices indices) : base(indices) { }
+
 		object ICustomJson.GetCustomJson() { return SuggestPathInfo.GetCustomJson(this); }
 
 		string ISuggestRequest.GlobalText { get; set; }
-		IDictionary<string, ISuggester> ISuggestRequest.Suggest { get; set; }
-
-		public SuggestDescriptor()
-		{
-			Self.Suggest = new Dictionary<string, ISuggester>();
-		}
+		IDictionary<string, ISuggester> ISuggestRequest.Suggest { get; set; }= new Dictionary<string, ISuggester>();
 
 		/// <summary>
 		/// To avoid repetition of the suggest text, it is possible to define a global text.
@@ -140,22 +139,6 @@ namespace Nest
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SuggestRequestParameters> pathInfo)
 		{
 			SuggestPathInfo.Update(pathInfo, this);
-		}
-
-		protected override void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<SuggestRequestParameters> pathInfo)
-		{
-			var inferrer = new ElasticInferrer(settings);
-
-			var index = inferrer.IndexName<T>();
-			pathInfo.Index = index;
-
-			if (Self.Indices.HasAny())
-				pathInfo.Index = inferrer.IndexNames(Self.Indices);
-			else
-				pathInfo.Index = Self.AllIndices.GetValueOrDefault(false) ? null : inferrer.IndexName<T>();
-
-			if (pathInfo.Index.IsNullOrEmpty())
-				pathInfo.Index = "_all";
 		}
 	}
 }

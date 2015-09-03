@@ -85,6 +85,7 @@
     <Compile Include="ClientConcepts\ConnectionPooling\BuildingBlocks\ConnectionPooling.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\BuildingBlocks\RequestPipeline.cs" />
     <Compile Include="ClientConcepts\HighLevel\CovariantHits\CovariantSearchResults.cs" />
+    <Compile Include="ClientConcepts\HighLevel\Inferrence\Indices\IndicesPaths.cs" />
     <Compile Include="CodeStandards\Descriptors.cs" />
     <Compile Include="Document\Single\Indexing.cs" />
     <Compile Include="Framework\CrudExample.cs" />

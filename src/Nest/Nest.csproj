@@ -93,6 +93,8 @@
     <Compile Include="Analysis\Tokenizers\NGram\TokenChar.cs" />
     <Compile Include="Analysis\Tokenizers\Tokenizers.cs" />
     <Compile Include="CommonAbstractions\Fluent\DescriptorBase.cs" />
+    <Compile Include="CommonAbstractions\Infer\Indices\IndicesJsonConverter.cs" />
+    <Compile Include="CommonAbstractions\Infer\Indices\Indices.cs" />
     <Compile Include="CommonAbstractions\LazyDocument\LazyDocumentJsonConverter.cs" />
     <Compile Include="CommonAbstractions\HasADictionary.cs" />
     <Compile Include="CommonAbstractions\IsADictionary.cs" />
@@ -164,12 +166,10 @@
     <Compile Include="Indices\AliasManagement\GetAliases\ElasticClient-GetAliasesPointingToIndex.cs" />
     <Compile Include="Document\Single\Delete\ElasticClient-DeleteExtensions.cs" />
     <Compile Include="Indices\AliasManagement\Aliases.cs" />
-    <Compile Include="Indices\IndexManagement\DeleteIndex\ElasticClient-DeleteIndexExtensions.cs" />
     <Compile Include="Document\Multiple\Bulk\ElasticClient-IndexMany.cs" />
     <Compile Include="Document\Single\Get\ElasticClient-GetExtensions.cs" />
     <Compile Include="Document\Multiple\Bulk\ElasticClient-DeleteMany.cs" />
     <Compile Include="Document\Multiple\MultiGet\EllasticClient-GetMany.cs" />
-    <Compile Include="Indices\IndexManagement\OpenCloseIndex\ElasticClient-OpenCloseIndexExtensions.cs" />
     <Compile Include="Document\Single\Exists\ElasticClient-ExistsExtensions.cs" />
     <Compile Include="Indices\Warmers\Warmers.cs" />
     <Compile Include="Mapping\AttributeBased\AttachmentAttribute.cs" />
@@ -586,7 +586,7 @@
     <Compile Include="Indices\AliasManagement\AliasExists\ElasticClient-AliasExists.cs" />
     <Compile Include="Cluster\ClusterSettings\ClusterPutSettings\ElasticClient-ClusterSettings.cs" />
     <Compile Include="Indices\IndexManagement\DeleteIndex\ElasticClient-DeleteIndex.cs" />
-    <Compile Include="Indices\MappingManagement\GetFieldMapping\ElasticClient-MappingGetField.cs" />
+    <Compile Include="Indices\MappingManagement\GetFieldMapping\ElasticClient-GetFieldMapping.cs" />
     <Compile Include="Search\Percolator\MultiPercolate\ElasticClient-MultiPercolate.cs" />
     <Compile Include="Cluster\Ping\ElasticClient-Ping.cs" />
     <Compile Include="Indices\IndexManagement\TypesExists\ElasticClient-TypeExists.cs" />
@@ -839,7 +839,7 @@
     <Compile Include="Mapping\Types\Properties.cs" />
     <Compile Include="Mapping\Types\Core\String\StringProperty.cs" />
     <Compile Include="Mapping\DynamicTemplate\DynamicTemplate.cs" />
-    <Compile Include="Indices\MappingManagement\GetMapping\ElasticClient-MappingGet.cs" />
+    <Compile Include="Indices\MappingManagement\GetMapping\ElasticClient-GetMapping.cs" />
     <Compile Include="Mapping\Fields\All\AllField.cs" />
     <Compile Include="Mapping\Fields\Boost\BoostField.cs" />
     <Compile Include="Mapping\Fields\Ttl\TtlField.cs" />

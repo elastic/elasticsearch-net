@@ -20,6 +20,8 @@ namespace Nest
 
 	public partial class SyncedFlushRequest : IndicesOptionalExplicitAllPathBase<SyncedFlushRequestParameters>, ISyncedFlushRequest
 	{
+		public SyncedFlushRequest(Indices indices) : base(indices) { }
+
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SyncedFlushRequestParameters> pathInfo)
 		{
 			SyncedFlushPathInfo.Update(settings, pathInfo);
@@ -31,6 +33,8 @@ namespace Nest
 		: IndicesOptionalExplicitAllPathDescriptor<SyncedFlushDescriptor, SyncedFlushRequestParameters>
 		, ISyncedFlushRequest
 	{
+		public SyncedFlushDescriptor(Indices indices) : base(indices) { }
+
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SyncedFlushRequestParameters> pathInfo)
 		{
 			SyncedFlushPathInfo.Update(settings, pathInfo);

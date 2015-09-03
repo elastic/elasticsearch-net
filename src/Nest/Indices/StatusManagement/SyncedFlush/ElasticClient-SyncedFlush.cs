@@ -15,13 +15,13 @@ namespace Nest
 		/// </summary>
 		/// <param name="selector">A descriptor that describes the parameters for the synced flush operation</param>
 		/// <returns></returns>
-		IShardsOperationResponse SyncedFlush(Func<SyncedFlushDescriptor, ISyncedFlushRequest> selector);
+		IShardsOperationResponse SyncedFlush(Indices indices, Func<SyncedFlushDescriptor, ISyncedFlushRequest> selector = null);
 
 		/// <inheritdoc/>
 		IShardsOperationResponse SyncedFlush(ISyncedFlushRequest flushRequest);
 
 		/// <inheritdoc/>
-		Task<IShardsOperationResponse> SyncedFlushAsync(Func<SyncedFlushDescriptor, ISyncedFlushRequest> selector);
+		Task<IShardsOperationResponse> SyncedFlushAsync(Indices indices, Func<SyncedFlushDescriptor, ISyncedFlushRequest> selector = null);
 
 		/// <inheritdoc/>
 		Task<IShardsOperationResponse> SyncedFlushAsync(ISyncedFlushRequest flushRequest);
@@ -31,11 +31,8 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IShardsOperationResponse SyncedFlush(Func<SyncedFlushDescriptor, ISyncedFlushRequest> selector) => 
-			this.Dispatcher.Dispatch<ISyncedFlushRequest, SyncedFlushRequestParameters, ShardsOperationResponse>(
-				selector?.Invoke(new SyncedFlushDescriptor()),
-				(p, d) => this.LowLevelDispatch.IndicesFlushSyncedDispatch<ShardsOperationResponse>(p)
-			);
+		public IShardsOperationResponse SyncedFlush(Indices indices, Func<SyncedFlushDescriptor, ISyncedFlushRequest> selector = null) =>
+			this.SyncedFlush(selector.InvokeOrDefault(new SyncedFlushDescriptor(indices)));
 
 		/// <inheritdoc/>
 		public IShardsOperationResponse SyncedFlush(ISyncedFlushRequest flushRequest) => 
@@ -45,11 +42,8 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<IShardsOperationResponse> SyncedFlushAsync(Func<SyncedFlushDescriptor, ISyncedFlushRequest> selector) => 
-			this.Dispatcher.DispatchAsync<ISyncedFlushRequest, SyncedFlushRequestParameters, ShardsOperationResponse, IShardsOperationResponse>(
-				selector?.Invoke(new SyncedFlushDescriptor()),
-				(p, d) => this.LowLevelDispatch.IndicesFlushSyncedDispatchAsync<ShardsOperationResponse>(p)
-			);
+		public Task<IShardsOperationResponse> SyncedFlushAsync(Indices indices, Func<SyncedFlushDescriptor, ISyncedFlushRequest> selector = null) => 
+			this.SyncedFlushAsync(selector.InvokeOrDefault(new SyncedFlushDescriptor(indices)));
 
 		/// <inheritdoc/>
 		public Task<IShardsOperationResponse> SyncedFlushAsync(ISyncedFlushRequest flushRequest) => 

@@ -136,7 +136,7 @@
     <Compile Include="Purify\UriInfo.cs" />
     <Compile Include="Serialization\ElasticsearchDefaultSerializer.cs" />
     <Compile Include="Serialization\ElasticsearchNetJsonStrategy.cs" />
-    <Compile Include="Serialization\IQueryStringValue.cs" />
+    <Compile Include="Serialization\IUrlParameter.cs" />
     <Compile Include="Serialization\UrlFormatProvider.cs" />
     <Compile Include="Serialization\IElasticsearchSerializer.cs" />
     <Compile Include="Serialization\SerializationFormatting.cs" />

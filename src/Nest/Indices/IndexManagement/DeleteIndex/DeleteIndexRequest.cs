@@ -19,29 +19,18 @@ namespace Nest
 	
 	public partial class DeleteIndexRequest : IndicesOptionalExplicitAllPathBase<DeleteIndexRequestParameters>, IDeleteIndexRequest
 	{
+		public DeleteIndexRequest(Indices indices) : base(indices) { }
 
-		public DeleteIndexRequest(IEnumerable<IndexName> indices)
-		{
-			this.Indices = indices;
-			this.AllIndices = false;
-		}
-		public DeleteIndexRequest(IndexName index)
-		{
-			this.Indices = new [] { index };
-		}
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteIndexRequestParameters> pathInfo)
-		{
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteIndexRequestParameters> pathInfo) =>
 			DeleteIndexPathInfo.Update(pathInfo, this);
-		}
 	}
 	[DescriptorFor("IndicesDelete")]
 	public partial class DeleteIndexDescriptor : IndicesOptionalExplicitAllPathDescriptor<DeleteIndexDescriptor, DeleteIndexRequestParameters>, IDeleteIndexRequest
 	{
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteIndexRequestParameters> pathInfo)
-		{
+		public DeleteIndexDescriptor(Indices indices) : base(indices) { }
+
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteIndexRequestParameters> pathInfo) =>
 			DeleteIndexPathInfo.Update(pathInfo, this);
-		}
 
 	}
 }

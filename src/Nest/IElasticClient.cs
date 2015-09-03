@@ -70,43 +70,6 @@ namespace Nest
 			where T : class
 			where K : class;
 
-		/// <summary>
-		/// The open and close index APIs allow to close an index, and later on opening it. 
-		/// A closed index has almost no overhead on the cluster (except for maintaining its metadata), and is blocked 
-		/// for read/write operations. 
-		/// A closed index can be opened which will then go through the normal recovery process.
-		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-open-close.html
-		/// </summary>
-		/// <param name="openIndexSelector">A descriptor thata describes the open index operation</param>
-		IIndicesOperationResponse OpenIndex(Func<OpenIndexDescriptor, OpenIndexDescriptor> openIndexSelector);
-
-		/// <inheritdoc/>
-		IIndicesOperationResponse OpenIndex(IOpenIndexRequest openIndexRequest);
-
-		/// <inheritdoc/>
-		Task<IIndicesOperationResponse> OpenIndexAsync(Func<OpenIndexDescriptor, OpenIndexDescriptor> openIndexSelector);
-
-		/// <inheritdoc/>
-		Task<IIndicesOperationResponse> OpenIndexAsync(IOpenIndexRequest openIndexRequest);
-
-		/// <summary>
-		/// The open and close index APIs allow to close an index, and later on opening it. 
-		/// A closed index has almost no overhead on the cluster (except for maintaining its metadata), and is blocked 
-		/// for read/write operations. 
-		/// A closed index can be opened which will then go through the normal recovery process.
-		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-open-close.html
-		/// </summary>
-		/// <param name="closeIndexSelector">A descriptor thata describes the close index operation</param>
-		IIndicesOperationResponse CloseIndex(Func<CloseIndexDescriptor, CloseIndexDescriptor> closeIndexSelector);
-
-		/// <inheritdoc/>
-		IIndicesOperationResponse CloseIndex(ICloseIndexRequest closeIndexRequest);
-
-		/// <inheritdoc/>
-		Task<IIndicesOperationResponse> CloseIndexAsync(Func<CloseIndexDescriptor, CloseIndexDescriptor> closeIndexSelector);
-
-		/// <inheritdoc/>
-		Task<IIndicesOperationResponse> CloseIndexAsync(ICloseIndexRequest closeIndexRequest);
 
 		/// <summary>
 		/// The cluster state API allows to get a comprehensive state information of the whole cluster.
@@ -123,40 +86,6 @@ namespace Nest
 
 		/// <inheritdoc/>
 		Task<IClusterStateResponse> ClusterStateAsync(IClusterStateRequest clusterStateRequest);
-
-
-
-		/// <summary>
-		/// The get settings API allows to retrieve settings of index/indices.
-		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-get-settings.html
-		/// </summary>
-		/// <param name="selector">A descriptor that describes the parameters for the get index settings operation</param>
-		IIndexSettingsResponse GetIndexSettings(Func<GetIndexSettingsDescriptor, IGetIndexSettingsRequest> selector);
-
-		/// <inheritdoc/>
-		IIndexSettingsResponse GetIndexSettings(IGetIndexSettingsRequest getIndexSettingsRequest);
-
-		/// <inheritdoc/>
-		Task<IIndexSettingsResponse> GetIndexSettingsAsync(Func<GetIndexSettingsDescriptor, IGetIndexSettingsRequest> selector);
-
-		/// <inheritdoc/>
-		Task<IIndexSettingsResponse> GetIndexSettingsAsync(IGetIndexSettingsRequest getIndexSettingsRequest);
-
-		/// <summary>
-		/// The delete index API allows to delete an existing index.
-		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-delete-index.html
-		/// </summary>
-		/// <param name="selector">A descriptor that describes the parameters for the delete index operation</param>
-		IIndicesResponse DeleteIndex(Func<DeleteIndexDescriptor, DeleteIndexDescriptor> selector);
-
-		/// <inheritdoc/>
-		IIndicesResponse DeleteIndex(IDeleteIndexRequest deleteIndexRequest);
-
-		/// <inheritdoc/>
-		Task<IIndicesResponse> DeleteIndexAsync(Func<DeleteIndexDescriptor, DeleteIndexDescriptor> selector);
-
-		/// <inheritdoc/>
-		Task<IIndicesResponse> DeleteIndexAsync(IDeleteIndexRequest deleteIndexRequest);
 
 		/// <summary>
 		/// The create index API allows to instantiate an index. Elasticsearch provides support for multiple indices, 
@@ -692,18 +621,6 @@ namespace Nest
 		/// <inheritdoc/>
 		Task<IExistsResponse> AliasExistsAsync(IAliasExistsRequest AliasRequest);
 
-		/// <inheritdoc/>
-		IExistsResponse TypeExists(Func<TypeExistsDescriptor, TypeExistsDescriptor> selector);
-
-		/// <inheritdoc/>
-		IExistsResponse TypeExists(ITypeExistsRequest TypeRequest);
-
-		/// <inheritdoc/>
-		Task<IExistsResponse> TypeExistsAsync(Func<TypeExistsDescriptor, TypeExistsDescriptor> selector);
-
-		/// <inheritdoc/>
-		Task<IExistsResponse> TypeExistsAsync(ITypeExistsRequest TypeRequest);
-
 		/// <summary>
 		/// Executes a HEAD request to the cluster to determine whether it's up or not.
 		/// </summary>
@@ -719,17 +636,6 @@ namespace Nest
 		Task<IPingResponse> PingAsync(IPingRequest pingRequest);
 
 
-		/// <inheritdoc/>
-		IGetIndexResponse GetIndex(Func<GetIndexDescriptor, GetIndexDescriptor> getIndexSelector);
-
-		/// <inheritdoc/>
-		IGetIndexResponse GetIndex(IGetIndexRequest createIndexRequest);
-
-		/// <inheritdoc/>
-		Task<IGetIndexResponse> GetIndexAsync(Func<GetIndexDescriptor, GetIndexDescriptor> getIndexSelector);
-
-		/// <inheritdoc/>
-		Task<IGetIndexResponse> GetIndexAsync(IGetIndexRequest createIndexRequest);
 
 		/// <inheritdoc/>
 		ICatResponse<CatAliasesRecord> CatAliases(Func<CatAliasesDescriptor, CatAliasesDescriptor> selector = null);
