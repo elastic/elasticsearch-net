@@ -6,21 +6,34 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Tests.Framework.MockData;
+using Elasticsearch.Net.ConnectionPool;
 
 namespace Tests.Framework
 {
 	public class AuditTrailTester
 	{
 		public Func<VirtualizedCluster> Cluster { get; set; }
+		public Action<IConnectionPool> AssertPoolBeforeCall { get; set; }
+		public Action<IConnectionPool> AssertPoolAfterCall { get; set; }
 
 		public ISearchResponse<Project> Response { get; internal set; }
 		public ISearchResponse<Project> ResponseAsync { get; internal set; }
 
+		public async Task TraceStartup()
+		{
+			var virtualizedCluster = this.Cluster();
+			this.AssertPoolBeforeCall?.Invoke(virtualizedCluster.ConnectionPool);
+			this.Response = virtualizedCluster.ClientCall();
+			this.AssertPoolAfterCall?.Invoke(virtualizedCluster.ConnectionPool);
+
+			virtualizedCluster = this.Cluster();
+			this.ResponseAsync = await virtualizedCluster.ClientCallAsync();
+			this.AssertPoolAfterCall?.Invoke(virtualizedCluster.ConnectionPool);
+		}
+
 		public async Task TraceCall(Audits audits)
 		{
-			this.Response = this.Cluster().ClientCall();
-			this.ResponseAsync = await this.Cluster().ClientCallAsync();
-
+			await this.TraceStartup();
 			var auditTrail = this.Response.ApiCall.AuditTrail;
 			var asyncAuditTrail = this.ResponseAsync.ApiCall.AuditTrail;
 

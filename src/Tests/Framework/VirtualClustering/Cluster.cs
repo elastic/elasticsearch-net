@@ -1,6 +1,7 @@
 using Elasticsearch.Net.Connection;
 using System;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace Tests.Framework
 {
@@ -10,5 +11,8 @@ namespace Tests.Framework
 			new VirtualCluster(
 				Enumerable.Range(startFrom, numberOfNodes).Select(n => new Node(new Uri($"http://localhost:{n}")))
 			);
+
+		public static VirtualCluster Nodes(IEnumerable<Node> nodes) =>
+			new VirtualCluster(nodes);
 	}
 }

@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using Elasticsearch.Net;
 using Elasticsearch.Net.Connection;
 using Elasticsearch.Net.ConnectionPool;
@@ -48,5 +50,6 @@ namespace Tests.Framework
 		{
 			return this.Pipeline;
 		}
+
 	}
 }

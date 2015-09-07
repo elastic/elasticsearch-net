@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Tests.Framework.MockResponses;
 
 namespace Tests.Framework
 {
@@ -19,7 +20,7 @@ namespace Tests.Framework
 		}
 
 		public bool IsSniffRequest(RequestData requestData) =>
-			requestData.Path.StartsWith("_nodes/_all/clear", StringComparison.Ordinal);
+			requestData.Path.StartsWith("_nodes/_all/settings", StringComparison.Ordinal);
 
 		public override ElasticsearchResponse<TReturn> Request<TReturn>(RequestData requestData)
 		{
@@ -33,7 +34,7 @@ namespace Tests.Framework
 						if (sniffRule.Succeeds)
 						{
 							this._cluster = sniffRule.NewClusterState ?? this._cluster;
-							return this.ReturnConnectionStatus<TReturn>(requestData, SniffResponse());
+							return this.ReturnConnectionStatus<TReturn>(requestData, SniffResponse.Create(this._cluster.Nodes));
 						}
 						throw new ElasticsearchException(PipelineFailure.BadResponse, (Exception)null);
 					}
@@ -45,40 +46,14 @@ namespace Tests.Framework
 						if (sniffRule.Succeeds)
 						{
 							this._cluster = sniffRule.NewClusterState ?? this._cluster;
-							return this.ReturnConnectionStatus<TReturn>(requestData, SniffResponse());
+							return this.ReturnConnectionStatus<TReturn>(requestData, SniffResponse.Create(this._cluster.Nodes));
 						}
 						throw new ElasticsearchException(PipelineFailure.BadResponse, (Exception)null);
 					}
 				}
-				return this.ReturnConnectionStatus<TReturn>(requestData, SniffResponse());
+				return this.ReturnConnectionStatus<TReturn>(requestData, SniffResponse.Create(this._cluster.Nodes));
 			}
 			return this.ReturnConnectionStatus<TReturn>(requestData, CallResponse());
-		}
-
-		private IDictionary<string, object> SniffResponseNodes() =>
-		this._cluster.Nodes.ToDictionary(kv => kv.Id ?? Guid.NewGuid().ToString("N").Substring(0, 8), kv => (object)new
-		{
-			name = kv.Name ?? Guid.NewGuid().ToString("N").Substring(0, 8),
-			transport_address = $"inet[/127.0.0.1:{kv.Uri.Port}]",
-			http_address = $"inet[/127.0.0.1:{kv.Uri.Port}]",
-			host = Guid.NewGuid().ToString("N").Substring(0, 8),
-			ip = "127.0.0.1",
-			version = TestClient.ElasticsearchVersion,
-			build = Guid.NewGuid().ToString("N").Substring(0, 8),
-		});
-
-		private byte[] SniffResponse()
-		{
-			var response = new
-			{
-				cluster_name = "elasticsearch-test-cluster",
-				nodes = this.SniffResponseNodes()
-			};
-			using (var ms = new MemoryStream())
-			{
-				new ElasticsearchDefaultSerializer().Serialize(response, ms);
-				return ms.ToArray();
-			}
 		}
 
 		private byte[] CallResponse()

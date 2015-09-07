@@ -24,7 +24,7 @@ namespace Elasticsearch.Net.Connection
 		public IRequestParameters RequestParameters { get; }
 		public IRequestConfiguration RequestConfiguration { get; }
 		public DateTime StartedOn { get; }
-		public DateTime CompletedOn { get; }
+		public virtual DateTime CompletedOn { get; }
 
 		public List<Audit> AuditTrail { get; } = new List<Audit>();
 
@@ -232,9 +232,11 @@ namespace Elasticsearch.Net.Connection
 
 		public static void VoidCallHandler(ElasticsearchResponse<Stream> response) { }
 
+		private string SniffPath => "_nodes/_all/settings?flat_settings&timeout=" + this.PingTimeout;
+
 		public void Sniff()
 		{
-			var path = "_nodes/_all/clear?timeout=" + this.PingTimeout;
+			var path = this.SniffPath;
 			var exceptions = new List<ElasticsearchException>();
 			foreach (var node in this._connectionPool.Nodes)
 			{
@@ -270,7 +272,7 @@ namespace Elasticsearch.Net.Connection
 
 		public async Task SniffAsync()
 		{
-			var path = "_nodes/_all/clear?timeout=" + this.PingTimeout;
+			var path = this.SniffPath;
 			var exceptions = new List<ElasticsearchException>();
 			foreach (var node in this._connectionPool.Nodes)
 			{

@@ -4,6 +4,7 @@ using Nest;
 using System;
 using System.Threading.Tasks;
 using Tests.Framework.MockData;
+using Elasticsearch.Net.Connection;
 
 namespace Tests.Framework
 {
@@ -14,6 +15,8 @@ namespace Tests.Framework
 		private readonly IConnectionPool _connectionPool;
 		private readonly TestableDateTimeProvider _dateTimeProvider;
 		private FixedPipelineFactory _fixedRequestPipeline;
+
+		public IConnectionPool ConnectionPool => this._client.ConnectionSettings.ConnectionPool;
 
 		public VirtualizedCluster(VirtualCluster cluster, IConnectionPool pool, ConnectionSettings settings)
 		{
