@@ -1,10 +1,11 @@
 ﻿using System;
+using System.ComponentModel;
 using Elasticsearch.Net;
 using Elasticsearch.Net.Connection.Configuration;
 
 namespace Nest
 {
-	public abstract class BasePathDescriptor<TDescriptor, TParameters> : BaseRequest<TParameters>
+	public abstract class BasePathDescriptor<TDescriptor, TParameters> : BaseRequest<TParameters>, IDescriptor
 		where TDescriptor : BasePathDescriptor<TDescriptor, TParameters>
 		where TParameters : FluentRequestParameters<TParameters>, new()
 	{
@@ -24,6 +25,26 @@ namespace Nest
 			return (TDescriptor)this;
 		}
 		
+		/// <summary>
+		/// Hides the <see cref="Equals"/> method.
+		/// </summary>
+		[Browsable(false)]
+		[EditorBrowsable(EditorBrowsableState.Never)]
+		public override bool Equals(object obj) => base.Equals(obj);
+
+		/// <summary>
+		/// Hides the <see cref="GetHashCode"/> method.
+		/// </summary>
+		[Browsable(false)]
+		[EditorBrowsable(EditorBrowsableState.Never)]
+		public override int GetHashCode() => base.GetHashCode();
+
+		/// <summary>
+		/// Hides the <see cref="ToString"/> method.
+		/// </summary>
+		[Browsable(false)]
+		[EditorBrowsable(EditorBrowsableState.Never)]
+		public override string ToString() => base.ToString();
 		
 	}
 }

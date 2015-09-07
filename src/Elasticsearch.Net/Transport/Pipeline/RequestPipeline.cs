@@ -234,11 +234,13 @@ namespace Elasticsearch.Net.Connection
 
 		private string SniffPath => "_nodes/_all/settings?flat_settings&timeout=" + this.PingTimeout;
 
+		public IEnumerable<Node> SniffNodes => this._connectionPool.Nodes.OrderByDescending(n => n.MasterEligable ? 3 : 0);
+
 		public void Sniff()
 		{
 			var path = this.SniffPath;
 			var exceptions = new List<ElasticsearchException>();
-			foreach (var node in this._connectionPool.Nodes)
+			foreach (var node in this.SniffNodes)
 			{
 				using (var audit = this.Audit(AuditEvent.SniffSuccess))
 				{
@@ -274,7 +276,7 @@ namespace Elasticsearch.Net.Connection
 		{
 			var path = this.SniffPath;
 			var exceptions = new List<ElasticsearchException>();
-			foreach (var node in this._connectionPool.Nodes)
+			foreach (var node in this.SniffNodes)
 			{
 				using (var audit = this.Audit(AuditEvent.SniffSuccess))
 				{

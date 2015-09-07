@@ -15,8 +15,13 @@ using Tests.Framework.MockResponses;
 
 namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 {
-	public class SniffResponseHandling
+	public class RoleDetection
 	{
+		/** == Sniffing role detection
+		* 
+		* When we sniff the custer state we detect the role of the node whether its master eligable and holds data
+		* We use this information when selecting a node to perform an API call on.
+		*/
 		[U, SuppressMessage("AsyncUsage", "AsyncFixer001:Unnecessary async/await usage", Justification = "Its a test")]
 		public async Task DetectsMasterNodes()
 		{
