@@ -7,36 +7,36 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonConverter(typeof(PropertiesJsonConverter))]
-	public interface IProperties : IHasADictionary<FieldName, IProperty>
+	public interface IProperties : IHasADictionary<PropertyName, IProperty>
 	{
 		
 	}
 
-	public class Properties : IsADictionary<FieldName, IProperty>, IProperties
+	public class Properties : IsADictionary<PropertyName, IProperty>, IProperties
 	{
-		IDictionary<FieldName, IProperty> IHasADictionary<FieldName, IProperty>.Dictionary => this.BackingDictionary;
+		IDictionary<PropertyName, IProperty> IHasADictionary<PropertyName, IProperty>.Dictionary => this.BackingDictionary;
 		public Properties() : base() { }
-		public Properties(IDictionary<FieldName, IProperty> container) : base(container) { }
+		public Properties(IDictionary<PropertyName, IProperty> container) : base(container) { }
 		public Properties(IProperties properties) : base(properties?.Dictionary) { }
-		public Properties(Dictionary<FieldName, IProperty> container)
+		public Properties(Dictionary<PropertyName, IProperty> container)
 			: base(container.Select(kv => kv).ToDictionary(kv => kv.Key, kv => kv.Value))
 		{ }
 
-		public void Add(FieldName field, IProperty property) => this.BackingDictionary.Add(field, property);
+		public void Add(PropertyName name, IProperty property) => this.BackingDictionary.Add(name, property);
 	}
 
-	public class Properties<T> : IsADictionary<FieldName, IProperty>, IProperties
+	public class Properties<T> : IsADictionary<PropertyName, IProperty>, IProperties
 	{
-		IDictionary<FieldName, IProperty> IHasADictionary<FieldName, IProperty>.Dictionary => this.BackingDictionary;
+		IDictionary<PropertyName, IProperty> IHasADictionary<PropertyName, IProperty>.Dictionary => this.BackingDictionary;
 		public Properties() : base() { }
-		public Properties(IDictionary<FieldName, IProperty> container) : base(container) { }
+		public Properties(IDictionary<PropertyName, IProperty> container) : base(container) { }
 		public Properties(IProperties properties) : base(properties?.Dictionary) { }
-		public Properties(Dictionary<FieldName, IProperty> container)
+		public Properties(Dictionary<PropertyName, IProperty> container)
 			: base(container.Select(kv => kv).ToDictionary(kv => kv.Key, kv => kv.Value))
 		{ }
 
-		public void Add(FieldName field, IProperty property) => this.BackingDictionary.Add(field, property);
-		public void Add(Expression<Func<T, object>> field, IProperty property) => this.BackingDictionary.Add(field, property);
+		public void Add(PropertyName name, IProperty property) => this.BackingDictionary.Add(name, property);
+		public void Add(Expression<Func<T, object>> name, IProperty property) => this.BackingDictionary.Add(name, property);
 	}
 
 	public interface IPropertiesDescriptor<T, TReturnType>
@@ -62,7 +62,7 @@ namespace Nest
 	}
 
 	public class PropertiesDescriptor<T> 
-		: HasADictionaryDescriptor<PropertiesDescriptor<T>, IProperties, FieldName, IProperty>, IPropertiesDescriptor<T, PropertiesDescriptor<T>>, IProperties
+		: HasADictionaryDescriptor<PropertiesDescriptor<T>, IProperties, PropertyName, IProperty>, IPropertiesDescriptor<T, PropertiesDescriptor<T>>, IProperties
 		where T : class
 	{
 		public PropertiesDescriptor() : base() { }

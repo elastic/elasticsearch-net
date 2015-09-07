@@ -52,6 +52,7 @@ namespace Nest
 		private IndexNameResolver IndexNameResolver { get; set; }
 		private TypeNameResolver TypeNameResolver { get; set; }
 		private FieldNameResolver FieldNameResolver { get; set; }
+
 		public string DefaultIndex
 		{
 			get
@@ -86,21 +87,35 @@ namespace Nest
 			if (name == null)
 				throw new ArgumentException("Could not resolve a field name");
 
-			if (field.Boost.HasValue)
+			if (field != null && field.Boost.HasValue)
 				name += "^" + field.Boost.Value.ToString(CultureInfo.InvariantCulture);
 
 			return name;
 		}
 
-		public string FieldName(MemberInfo member)
-		{
-			return member == null ? null : this.FieldNameResolver.Resolve(member);
-		}
-		
 		public string FieldNames(IEnumerable<FieldName> fields)
 		{
 			if (!fields.HasAny() || fields.All(f=>f.IsConditionless())) return null;
 			return string.Join(",", fields.Select(FieldName).Where(f => !f.IsNullOrEmpty()));
+		}
+
+		public string PropertyName(PropertyName property)
+		{
+			if (property.IsConditionless())
+				return null;
+
+			var name = !property.Name.IsNullOrEmpty()
+				? property.Name
+				: property.Expression != null
+					? this.FieldNameResolver.Resolve(property.Expression)
+					: property.Property != null
+						? this.FieldNameResolver.Resolve(property.Property)
+						: null;
+
+			if (name == null)
+				throw new ArgumentException("Could not resolve a property name");
+
+			return name;
 		}
 
 		public string IndexName<T>() where T : class

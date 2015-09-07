@@ -95,6 +95,10 @@
     <Compile Include="CommonAbstractions\Fluent\DescriptorBase.cs" />
     <Compile Include="CommonAbstractions\Infer\Indices\IndicesJsonConverter.cs" />
     <Compile Include="CommonAbstractions\Infer\Indices\Indices.cs" />
+    <Compile Include="CommonAbstractions\Infer\FieldName\FieldNameExtensions.cs" />
+    <Compile Include="CommonAbstractions\Infer\PropertyName\PropertyName.cs" />
+    <Compile Include="CommonAbstractions\Infer\PropertyName\PropertyNameExtensions.cs" />
+    <Compile Include="CommonAbstractions\Infer\PropertyName\PropertyNameJsonConverter.cs" />
     <Compile Include="CommonAbstractions\LazyDocument\LazyDocumentJsonConverter.cs" />
     <Compile Include="CommonAbstractions\HasADictionary.cs" />
     <Compile Include="CommonAbstractions\IsADictionary.cs" />
@@ -117,7 +121,6 @@
     <Compile Include="Cluster\NodeStats\ElasticClient-NodeStats.cs" />
     <Compile Include="CommonAbstractions\ConnectionSettings\ClrTypeMapping.cs" />
     <Compile Include="CommonAbstractions\Infer\FieldName\FieldName.cs" />
-    <Compile Include="CommonAbstractions\Infer\FieldName\FieldNameExtensions.cs" />
     <Compile Include="CommonAbstractions\Response\DictionaryResponse.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\KeyValueJsonConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\ReserializeJsonConverter.cs" />

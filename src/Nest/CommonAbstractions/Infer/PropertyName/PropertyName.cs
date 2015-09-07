@@ -9,54 +9,47 @@ using System.Reflection;
 
 namespace Nest
 {
-	public class FieldName : IEquatable<FieldName>, IUrlParameter
+	public class PropertyName : IEquatable<PropertyName>, IUrlParameter
 	{
 		public string Name { get; set; }
 		public Expression Expression { get; set; }
 		public PropertyInfo Property { get; set; }
-		public double? Boost { get; set; }
 
 		private string ComparisonValue;
 
-		public static FieldName Create(string name, double? boost = null)
+		public static PropertyName Create(string name, double? boost = null)
 		{
-			FieldName fieldName = name;
-			fieldName.Boost = boost;
-			return fieldName;
+			PropertyName propertyName = name;
+			return propertyName;
 		}
 
-		public static FieldName Create(Expression expression, double? boost = null)
+		public static PropertyName Create(Expression expression, double? boost = null)
 		{
-			FieldName fieldName = expression;
-			fieldName.Boost = boost;
-			return fieldName;
+			PropertyName propertyName = expression;
+			return propertyName;
 		}
 
-		public static implicit operator FieldName(string name)
+		public static implicit operator PropertyName(string name)
 		{
-			return name == null ? null : new FieldName
+			return name == null ? null : new PropertyName
 			{
 				Name = name,
 				ComparisonValue = name
 			};
 		}
 
-		public static implicit operator FieldName(Expression expression)
+		public static implicit operator PropertyName(Expression expression)
 		{
-			return expression == null ? null : new FieldName
+			return expression == null ? null : new PropertyName
 			{
 				Expression = expression,
-
-				// TODO: This isn't sufficient for field names. We need to be able to resolve an entire
-				// expression path. For instance, "p => p.Locations.First().Name" will resolve to just
-				// "Name", but we need "Locations.Name"
 				ComparisonValue = ((expression as LambdaExpression).Body as MemberExpression).Member.Name
 			};
 		}
 
-		public static implicit operator FieldName(PropertyInfo property)
+		public static implicit operator PropertyName(PropertyInfo property)
 		{
-			return property == null ? null : new FieldName
+			return property == null ? null : new PropertyName
 			{
 				Property = property,
 				ComparisonValue = property.Name
@@ -68,14 +61,14 @@ namespace Nest
 			return (ComparisonValue != null) ? ComparisonValue.GetHashCode() : 0;	
 		}
 
-		bool IEquatable<FieldName>.Equals(FieldName other)
+		bool IEquatable<PropertyName>.Equals(PropertyName other)
 		{
 			return Equals(other);
 		}
 
 		public override bool Equals(object obj)
 		{
-			var other = obj as FieldName;
+			var other = obj as PropertyName;
 			if (other == null)
 				return false;
 			return ComparisonValue == other.ComparisonValue;
@@ -87,7 +80,7 @@ namespace Nest
 			if (nestSettings == null)
 				throw new Exception("Tried to pass field name on querysting but it could not be resolved because no nest settings are available");
 			var infer = new ElasticInferrer(nestSettings);
-			return infer.FieldName(this);
+			return infer.PropertyName(this);
 		}
 	}
 }
