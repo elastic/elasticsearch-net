@@ -29,8 +29,9 @@ namespace Elasticsearch.Net.Connection
 		/// Transport coordinates the client requests over the connection pool nodes and is in charge of falling over on different nodes 
 		/// </summary>
 		/// <param name="configurationValues">The connectionsettings to use for this transport</param>
-		public Transport(TConnectionSettings configurationValues) 
-			: this(configurationValues, null, null, null) { }
+		public Transport(TConnectionSettings configurationValues)
+			: this(configurationValues, null, null, null)
+		{ }
 
 		/// <summary>
 		/// Transport coordinates the client requests over the connection pool nodes and is in charge of falling over on different nodes 
@@ -68,6 +69,7 @@ namespace Elasticsearch.Net.Connection
 				var requestData = new RequestData(method, path, data, this.Settings, requestParameters, this.MemoryStreamFactory);
 				ElasticsearchResponse<TReturn> response = null;
 
+				var exceptions = new List<ElasticsearchException>();
 				while (pipeline.NextNode())
 				{
 					try
@@ -80,12 +82,17 @@ namespace Elasticsearch.Net.Connection
 						pipeline.MarkDead();
 						exception.RethrowKeepingStackTrace();
 					}
+					catch (ElasticsearchException exception)
+					{
+						pipeline.MarkDead();
+						exceptions.Add(exception);
+					}
 					if (response != null && response.SuccessOrKnownError)
 					{
 						pipeline.MarkAlive();
 						return response;
 					}
-					pipeline.BadResponse(response);
+					pipeline.BadResponse(response, exceptions);
 				}
 				return response;
 			}
@@ -101,6 +108,7 @@ namespace Elasticsearch.Net.Connection
 				var requestData = new RequestData(method, path, data, this.Settings, requestParameters, this.MemoryStreamFactory);
 				ElasticsearchResponse<TReturn> response = null;
 
+				var exceptions = new List<ElasticsearchException>();
 				while (pipeline.NextNode())
 				{
 					try
@@ -113,12 +121,17 @@ namespace Elasticsearch.Net.Connection
 						pipeline.MarkDead();
 						exception.RethrowKeepingStackTrace();
 					}
+					catch (ElasticsearchException exception)
+					{
+						pipeline.MarkDead();
+						exceptions.Add(exception);
+					}
 					if (response != null && response.SuccessOrKnownError)
 					{
 						pipeline.MarkAlive();
 						return response;
 					}
-					pipeline.BadResponse(response);
+					pipeline.BadResponse(response, exceptions);
 				}
 				return response;
 			}

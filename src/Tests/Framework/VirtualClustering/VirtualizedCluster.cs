@@ -14,7 +14,7 @@ namespace Tests.Framework
 		private readonly VirtualCluster _cluster;
 		private readonly IConnectionPool _connectionPool;
 		private readonly TestableDateTimeProvider _dateTimeProvider;
-		private FixedPipelineFactory _fixedRequestPipeline;
+		public FixedPipelineFactory _fixedRequestPipeline;
 
 		public IConnectionPool ConnectionPool => this._client.ConnectionSettings.ConnectionPool;
 

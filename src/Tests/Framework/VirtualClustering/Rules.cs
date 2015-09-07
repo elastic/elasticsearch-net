@@ -3,7 +3,6 @@
 	public interface IRule
 	{
 		bool? AllCalls { get; set; }
-		int? NthCall { get; set; }
 		int? OnPort { get; set; }
 		bool Succeeds { get; set; }
 	}
@@ -19,27 +18,11 @@
 		int? IRule.OnPort { get; set; }
 		bool IRule.Succeeds { get; set; }
 		bool? IRule.AllCalls { get; set; }
-		int? IRule.NthCall { get; set; }
 		VirtualCluster ISniffRule.NewClusterState { get; set; }
 
 		public SniffRule OnPort(int port)
 		{
 			Self.OnPort = port;
-			return this;
-		}
-
-		public SniffRule FailsOn(int call)
-		{
-			Self.NthCall = call;
-			Self.Succeeds = false;
-			return this;
-		}
-
-		public SniffRule SucceedsOn(int call, VirtualCluster cluster = null)
-		{
-			Self.NthCall = call;
-			Self.Succeeds = true;
-			Self.NewClusterState = cluster;
 			return this;
 		}
 
@@ -67,7 +50,6 @@
 		int? IRule.OnPort { get; set; }
 		bool IRule.Succeeds { get; set; }
 		bool? IRule.AllCalls { get; set; }
-		int? IRule.NthCall { get; set; }
 
 		public PingRule OnPort(int port)
 		{
@@ -75,17 +57,14 @@
 			return this;
 		}
 
-		public PingRule FailsOn(int call)
+		public PingRule SucceedsOnce()
 		{
-			Self.NthCall = call;
-			Self.Succeeds = false;
+			Self.Succeeds = true;
 			return this;
 		}
-
-		public PingRule SucceedsOn(int call)
+		public PingRule FailOnce()
 		{
-			Self.NthCall = call;
-			Self.Succeeds = true;
+			Self.Succeeds = false;
 			return this;
 		}
 

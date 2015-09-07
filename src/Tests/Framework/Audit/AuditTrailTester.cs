@@ -10,30 +10,44 @@ using Elasticsearch.Net.ConnectionPool;
 
 namespace Tests.Framework
 {
-	public class AuditTrailTester
+	public class Auditor
 	{
 		public Func<VirtualizedCluster> Cluster { get; set; }
 		public Action<IConnectionPool> AssertPoolBeforeCall { get; set; }
 		public Action<IConnectionPool> AssertPoolAfterCall { get; set; }
 
+		private VirtualizedCluster _cluster;
+		private VirtualizedCluster _clusterAsync;
+
+		public Auditor(Func<VirtualizedCluster> setup) {
+			this.Cluster = setup;
+		}
+		private Auditor(VirtualizedCluster cluster, VirtualizedCluster clusterAsync)
+		{
+			_cluster = cluster;
+			_clusterAsync = clusterAsync;
+		}
+
 		public ISearchResponse<Project> Response { get; internal set; }
 		public ISearchResponse<Project> ResponseAsync { get; internal set; }
 
-		public async Task TraceStartup()
+		public async Task<Auditor> TraceStartup(Audits audit = null)
 		{
-			var virtualizedCluster = this.Cluster();
-			this.AssertPoolBeforeCall?.Invoke(virtualizedCluster.ConnectionPool);
-			this.Response = virtualizedCluster.ClientCall();
-			this.AssertPoolAfterCall?.Invoke(virtualizedCluster.ConnectionPool);
+			this._cluster  = _cluster ?? this.Cluster();
+			this.AssertPoolBeforeCall?.Invoke(this._cluster.ConnectionPool);
+			this.Response = this._cluster.ClientCall();
+			this.AssertPoolAfterCall?.Invoke(this._cluster.ConnectionPool);
+			audit?.AssertPoolAfterCall?.Invoke(this._cluster.ConnectionPool);
 
-			virtualizedCluster = this.Cluster();
-			this.ResponseAsync = await virtualizedCluster.ClientCallAsync();
-			this.AssertPoolAfterCall?.Invoke(virtualizedCluster.ConnectionPool);
+			this._clusterAsync = _clusterAsync ?? this.Cluster();
+			this.ResponseAsync = await this._clusterAsync.ClientCallAsync();
+			this.AssertPoolAfterCall?.Invoke(this._clusterAsync.ConnectionPool);
+			return new Auditor(_cluster, _clusterAsync);
 		}
 
-		public async Task TraceCall(Audits audits)
+		public async Task<Auditor> TraceCall(Audits audits)
 		{
-			await this.TraceStartup();
+			await this.TraceStartup(audits);
 			var auditTrail = this.Response.ApiCall.AuditTrail;
 			var asyncAuditTrail = this.ResponseAsync.ApiCall.AuditTrail;
 
@@ -41,6 +55,16 @@ namespace Tests.Framework
 
 			AssertTrailOnResponse(audits, auditTrail, true);
 			AssertTrailOnResponse(audits, asyncAuditTrail, false);
+			return new Auditor(_cluster, _clusterAsync);
+		}
+		public async Task<Auditor> TraceCalls(params Audits[] audits)
+		{
+			var auditor = this;
+			foreach (var a in audits)
+			{
+				auditor = await auditor.TraceCall(a); 
+			}
+			return auditor;
 		}
 
 		private static void AssertTrailOnResponse(Audits audits, List<Audit> auditTrail, bool sync)

@@ -25,61 +25,60 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 		[U, SuppressMessage("AsyncUsage", "AsyncFixer001:Unnecessary async/await usage", Justification = "Its a test")]
 		public async Task DetectsMasterNodes()
 		{
-			var virtualWorld = new AuditTrailTester();
-			virtualWorld.Cluster = () => Cluster
+			var audit = new Auditor(() => Cluster
 				.Nodes(10)
 				.Sniff(s => s.FailAlways())
 				.Sniff(s => s.OnPort(9202)
 					.SucceedAlways(Cluster.Nodes(8).MasterEligable(9200, 9201, 9202))
 				)
 				.SniffingConnectionPool()
-				.AllDefaults();
-
-			virtualWorld.AssertPoolBeforeCall = (pool) =>
+				.AllDefaults()
+			)
 			{
-				pool.Should().NotBeNull();
-				pool.Nodes.Should().HaveCount(10);
-				pool.Nodes.Where(n=>n.MasterEligable).Should().HaveCount(10);
+				AssertPoolBeforeCall = (pool) =>
+				{
+					pool.Should().NotBeNull();
+					pool.Nodes.Should().HaveCount(10);
+					pool.Nodes.Where(n => n.MasterEligable).Should().HaveCount(10);
+				},
+				AssertPoolAfterCall = (pool) =>
+				{
+					pool.Should().NotBeNull();
+					pool.Nodes.Should().HaveCount(8);
+					pool.Nodes.Where(n => n.MasterEligable).Should().HaveCount(3);
+				}
 			};
-
-			virtualWorld.AssertPoolAfterCall = (pool) =>
-			{
-				pool.Should().NotBeNull();
-				pool.Nodes.Should().HaveCount(8);
-				pool.Nodes.Where(n=>n.MasterEligable).Should().HaveCount(3);
-			};
-
-			await virtualWorld.TraceStartup();
+			await audit.TraceStartup();
 		}
 
 		[U, SuppressMessage("AsyncUsage", "AsyncFixer001:Unnecessary async/await usage", Justification = "Its a test")]
 		public async Task DetectsDataNodes()
 		{
-			var virtualWorld = new AuditTrailTester();
-			virtualWorld.Cluster = () => Cluster
+			var audit = new Auditor(() => Cluster
 				.Nodes(10)
 				.Sniff(s => s.FailAlways())
 				.Sniff(s => s.OnPort(9202)
 					.SucceedAlways(Cluster.Nodes(8).StoresNoData(9200, 9201, 9202))
 				)
 				.SniffingConnectionPool()
-				.AllDefaults();
-
-			virtualWorld.AssertPoolBeforeCall = (pool) =>
+				.AllDefaults()
+			)
 			{
-				pool.Should().NotBeNull();
-				pool.Nodes.Should().HaveCount(10);
-				pool.Nodes.Where(n=>n.HoldsData).Should().HaveCount(10);
-			};
+				AssertPoolBeforeCall = (pool) =>
+				{
+					pool.Should().NotBeNull();
+					pool.Nodes.Should().HaveCount(10);
+					pool.Nodes.Where(n => n.HoldsData).Should().HaveCount(10);
+				},
 
-			virtualWorld.AssertPoolAfterCall = (pool) =>
-			{
-				pool.Should().NotBeNull();
-				pool.Nodes.Should().HaveCount(8);
-				pool.Nodes.Where(n=>n.HoldsData).Should().HaveCount(5);
+				AssertPoolAfterCall = (pool) =>
+				{
+					pool.Should().NotBeNull();
+					pool.Nodes.Should().HaveCount(8);
+					pool.Nodes.Where(n => n.HoldsData).Should().HaveCount(5);
+				}
 			};
-
-			await virtualWorld.TraceStartup();
+			await audit.TraceStartup();
 		}
 	}
 }

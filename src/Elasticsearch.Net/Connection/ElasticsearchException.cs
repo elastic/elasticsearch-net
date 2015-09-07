@@ -19,7 +19,7 @@ namespace Elasticsearch.Net.Connection
 			this.Cause = cause;
 		}
 
-		public ElasticsearchException(PipelineFailure cause, IApiCallDetails response)
+		public ElasticsearchException(PipelineFailure cause, IApiCallDetails response, Exception innerException) : base("", innerException)
 		{
 			this.Cause = cause;
 			this.Response = response;

@@ -5,9 +5,13 @@ namespace Elasticsearch.Net.Connection
 		SniffOnStartup,
 		SniffOnFail,
 		SniffOnStaleCluster,
-		SniffFail,
+
 		SniffSuccess,
-		Ping,
+		SniffFailure,
+		PingSuccess,
+		PingFailure,
+
+		SkipNode,
 		BadResponse,
 		HealhyResponse
 	}

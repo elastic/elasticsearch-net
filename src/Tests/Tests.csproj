@@ -84,7 +84,8 @@
     <Compile Include="ClientConcepts\ConnectionPooling\BuildingBlocks\RoundRobin.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\BuildingBlocks\ConnectionPooling.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\BuildingBlocks\RequestPipeline.cs" />
-    <Compile Include="ClientConcepts\ConnectionPooling\Sniffing\SniffResponseHandling.cs" />
+    <Compile Include="ClientConcepts\ConnectionPooling\FailOver\NthCallFailure.cs" />
+    <Compile Include="ClientConcepts\ConnectionPooling\Sniffing\RoleDetection.cs" />
     <Compile Include="ClientConcepts\HighLevel\CovariantHits\CovariantSearchResults.cs" />
     <Compile Include="ClientConcepts\HighLevel\Inferrence\Indices\IndicesPaths.cs" />
     <Compile Include="CodeStandards\Descriptors.cs" />
@@ -183,7 +184,6 @@
     <Folder Include="Aggregations\Metric\" />
     <Folder Include="Aggregations\Pipeline\" />
     <Folder Include="Cat\" />
-    <Folder Include="ClientConcepts\ConnectionPooling\FailOver\" />
     <Folder Include="Cluster\" />
     <Folder Include="Migration\" />
     <Folder Include="Modules\" />

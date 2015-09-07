@@ -37,7 +37,7 @@ namespace Elasticsearch.Net.ConnectionPool
 				{
 					this._readerWriter.ExitReadLock();
 				}
-            }
+			}
 		}
 
 		public override void Reseed(IEnumerable<Node> nodes)

@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using Tests.Framework.MockData;
 using System.Threading.Tasks;
 using System.Diagnostics.CodeAnalysis;
+using static Elasticsearch.Net.Connection.AuditEvent;
 
 namespace Tests.ClientConcepts.LowLevel
 {
@@ -27,78 +28,77 @@ namespace Tests.ClientConcepts.LowLevel
 		[U] [SuppressMessage("AsyncUsage", "AsyncFixer001:Unnecessary async/await usage", Justification = "Its a test")]
 		public async Task ASniffOnStartupHappens()
 		{
-			var virtualWorld = new AuditTrailTester();
-			virtualWorld.Cluster = () => Cluster
+			var audit = new Auditor(() => Cluster
 				.Nodes(10)
 				.Sniff(s => s.FailAlways())
 				.Sniff(s => s.OnPort(9202).SucceedAlways())
 				.SniffingConnectionPool()
-				.AllDefaults();
+				.AllDefaults()
+			);
 
-			 await virtualWorld.TraceCall(new Audits {
-				{ AuditEvent.SniffOnStartup},
-				{ AuditEvent.SniffFail, 9200},
-				{ AuditEvent.SniffFail, 9201},
-				{ AuditEvent.SniffSuccess, 9202},
-				{ AuditEvent.Ping, 9200},
-				{ AuditEvent.HealhyResponse, 9200}
+			 await audit.TraceCall(new Audits {
+				{ SniffOnStartup},
+				{ SniffFailure, 9200},
+				{ SniffFailure, 9201},
+				{ SniffSuccess, 9202},
+				{ PingSuccess , 9200},
+				{ HealhyResponse, 9200}
 			});
 		}
 
 		[U] [SuppressMessage("AsyncUsage", "AsyncFixer001:Unnecessary async/await usage", Justification = "Its a test")]
 		public async Task SniffOnStartUpTakesNewClusterState()
 		{
-			var virtualWorld = new AuditTrailTester();
-			virtualWorld.Cluster = () => Cluster
+			var audit = new Auditor(() => Cluster
 				.Nodes(10)
 				.Sniff(s => s.FailAlways())
 				.Sniff(s => s.OnPort(9202).SucceedAlways(Cluster.Nodes(8, startFrom: 9204)))
 				.SniffingConnectionPool()
-				.AllDefaults();
+				.AllDefaults()
+			);
 
-			await virtualWorld.TraceCall(new Audits {
-				{ AuditEvent.SniffOnStartup},
-				{ AuditEvent.SniffFail, 9200},
-				{ AuditEvent.SniffFail, 9201},
-				{ AuditEvent.SniffSuccess, 9202},
-				{ AuditEvent.Ping, 9204},
-				{ AuditEvent.HealhyResponse, 9204}
+			await audit.TraceCall(new Audits {
+				{ SniffOnStartup},
+				{ SniffFailure, 9200},
+				{ SniffFailure, 9201},
+				{ SniffSuccess, 9202},
+				{ PingSuccess, 9204},
+				{ HealhyResponse, 9204}
 			});
 		}
 
 		[U] [SuppressMessage("AsyncUsage", "AsyncFixer001:Unnecessary async/await usage", Justification = "Its a test")]
 		public async Task SniffTriesAllNodes()
 		{
-			var virtualWorld = new AuditTrailTester();
-			virtualWorld.Cluster = () => Cluster
+			var audit = new Auditor(() => Cluster
 				.Nodes(10)
 				.Sniff(s => s.FailAlways())
 				.Sniff(s => s.OnPort(9209).SucceedAlways())
 				.SniffingConnectionPool()
-				.AllDefaults();
+				.AllDefaults()
+			);
 
-			await virtualWorld.TraceCall(new Audits {
-				{ AuditEvent.SniffOnStartup},
-				{ AuditEvent.SniffFail, 9200},
-				{ AuditEvent.SniffFail, 9201},
-				{ AuditEvent.SniffFail, 9202},
-				{ AuditEvent.SniffFail, 9203},
-				{ AuditEvent.SniffFail, 9204},
-				{ AuditEvent.SniffFail, 9205},
-				{ AuditEvent.SniffFail, 9206},
-				{ AuditEvent.SniffFail, 9207},
-				{ AuditEvent.SniffFail, 9208},
-				{ AuditEvent.SniffSuccess, 9209},
-				{ AuditEvent.Ping, 9200},
-				{ AuditEvent.HealhyResponse, 9200}
+			await audit.TraceCall(new Audits {
+				{ SniffOnStartup},
+				{ SniffFailure, 9200},
+				{ SniffFailure, 9201},
+				{ SniffFailure, 9202},
+				{ SniffFailure, 9203},
+				{ SniffFailure, 9204},
+				{ SniffFailure, 9205},
+				{ SniffFailure, 9206},
+				{ SniffFailure, 9207},
+				{ SniffFailure, 9208},
+				{ SniffSuccess, 9209},
+				{ PingSuccess, 9200},
+				{ HealhyResponse, 9200}
 			});
 		}
 
 		[U] [SuppressMessage("AsyncUsage", "AsyncFixer001:Unnecessary async/await usage", Justification = "Its a test")]
 		public async Task SniffPrefersMasterNodes()
 		{
-			var virtualWorld = new AuditTrailTester();
-			virtualWorld.Cluster = () => Cluster
+			var audit = new Auditor(() => Cluster
 				.Nodes(new[] {
 					new Node(new Uri("http://localhost:9200")) { MasterEligable = false },
 					new Node(new Uri("http://localhost:9201")) { MasterEligable = false },
@@ -106,21 +106,21 @@ namespace Tests.ClientConcepts.LowLevel
 				})
 				.Sniff(s => s.SucceedAlways())
 				.SniffingConnectionPool()
-				.AllDefaults();
+				.AllDefaults()
+			);
 
-			await virtualWorld.TraceCall(new Audits {
-				{ AuditEvent.SniffOnStartup},
-				{ AuditEvent.SniffSuccess, 9202},
-				{ AuditEvent.Ping, 9200},
-				{ AuditEvent.HealhyResponse, 9200}
+			await audit.TraceCall(new Audits {
+				{ SniffOnStartup},
+				{ SniffSuccess, 9202},
+				{ PingSuccess, 9200},
+				{ HealhyResponse, 9200}
 			});
 		}
 
 		[U] [SuppressMessage("AsyncUsage", "AsyncFixer001:Unnecessary async/await usage", Justification = "Its a test")]
 		public async Task SniffPrefersMasterNodesButStillFailsOver()
 		{
-			var virtualWorld = new AuditTrailTester();
-			virtualWorld.Cluster = () => Cluster
+			var audit = new Auditor(() => Cluster
 				.Nodes(new[] {
 					new Node(new Uri("http://localhost:9200")) { MasterEligable = true },
 					new Node(new Uri("http://localhost:9201")) { MasterEligable = true },
@@ -129,14 +129,15 @@ namespace Tests.ClientConcepts.LowLevel
 				.Sniff(s => s.FailAlways())
 				.Sniff(s => s.OnPort(9202).SucceedAlways())
 				.SniffingConnectionPool()
-				.AllDefaults();
+				.AllDefaults()
+			);
 
-			await virtualWorld.TraceCall(new Audits {
+			await audit.TraceCall(new Audits {
 				{ AuditEvent.SniffOnStartup},
-				{ AuditEvent.SniffFail, 9200},
-				{ AuditEvent.SniffFail, 9201},
+				{ AuditEvent.SniffFailure, 9200},
+				{ AuditEvent.SniffFailure, 9201},
 				{ AuditEvent.SniffSuccess, 9202},
-				{ AuditEvent.Ping, 9200},
+				{ AuditEvent.PingSuccess, 9200},
 				{ AuditEvent.HealhyResponse, 9200}
 			});
 		}

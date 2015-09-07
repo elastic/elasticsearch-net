@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -32,6 +33,6 @@ namespace Elasticsearch.Net.Connection
 		void Sniff();
 		Task SniffAsync();
 
-		void BadResponse(IApiCallDetails response);
+		void BadResponse(IApiCallDetails response, List<ElasticsearchException> seenExceptions);
 	}
 }

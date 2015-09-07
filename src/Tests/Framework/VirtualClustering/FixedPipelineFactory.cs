@@ -48,7 +48,8 @@ namespace Tests.Framework
 
 		public IRequestPipeline Create(IConnectionConfigurationValues configurationValues, IDateTimeProvider dateTimeProvider, IMemoryStreamFactory memorystreamFactory, IRequestParameters requestParameters)
 		{
-			return this.Pipeline;
+			return new RequestPipeline(this.Settings, this.DateTimeProvider, this.MemoryStreamFactory, new RequestParameters());
+			///return this.Pipeline;
 		}
 
 	}

@@ -180,7 +180,7 @@ namespace Elasticsearch.Net.Connection
 			return true;
 		}
 
-		public void BadResponse(IApiCallDetails response)
+		public void BadResponse(IApiCallDetails response, List<ElasticsearchException> seenExceptions)
 		{
 			this.MarkDead();
 			var currentRetryCount = this._retried;
@@ -189,28 +189,44 @@ namespace Elasticsearch.Net.Connection
 			if (!this.IsTakingTooLong || currentRetryCount < this.MaxRetries)
 				return;
 
-			if (this.IsTakingTooLong) throw new ElasticsearchException(PipelineFailure.RetryTimeout, response);
-			throw new ElasticsearchException(PipelineFailure.RetryMaximum, response);
+			Exception seenAggregate = seenExceptions.HasAny() ? new AggregateException(seenExceptions) : null;
+
+			if (this.IsTakingTooLong) throw new ElasticsearchException(PipelineFailure.RetryTimeout, response, seenAggregate);
+			throw new ElasticsearchException(PipelineFailure.RetryMaximum, response, seenAggregate);
 		}
 
 		TimeSpan PingTimeout =>
-			 this.RequestConfiguration?.ConnectTimeout 
-			?? this._settings.PingTimeout 
+			 this.RequestConfiguration?.ConnectTimeout
+			?? this._settings.PingTimeout
 			?? (this._connectionPool.UsingSsl ? ConnectionConfiguration.DefaultPingTimeoutOnSSL : ConnectionConfiguration.DefaultPingTimeout);
+
+		private RequestData PingRequestData(Auditable audit)
+		{
+			audit.Node = this.CurrentNode;
+
+			var requestOverrides = this.RequestConfiguration ?? new RequestConfiguration { };
+			requestOverrides.ConnectTimeout = requestOverrides.RequestTimeout = PingTimeout;
+
+			var requestData = CreateRequestData(HttpMethod.HEAD, "/", null, requestOverrides);
+			return requestData;
+		}
 
 		public void Ping()
 		{
 			if (this._settings.DisablePings || !this._connectionPool.SupportsPinging || !this.CurrentNode.IsResurrected) return;
 
-			using (var audit = this.Audit(AuditEvent.Ping))
+			using (var audit = this.Audit(AuditEvent.PingSuccess))
 			{
-				audit.Node = this.CurrentNode;
-
-				var requestOverrides = this.RequestConfiguration ?? new RequestConfiguration {};
-				requestOverrides.ConnectTimeout = requestOverrides.RequestTimeout = PingTimeout;
-
-				var requestData = CreateRequestData(HttpMethod.HEAD, "/", null, requestOverrides);
-				this._connection.Request<VoidResponse>(requestData);
+				try
+				{
+					var requestData = PingRequestData(audit);
+					this._connection.Request<VoidResponse>(requestData);
+				}
+				catch
+				{
+					audit.Event = AuditEvent.PingFailure;
+					throw;
+				}
 			}
 		}
 
@@ -218,15 +234,18 @@ namespace Elasticsearch.Net.Connection
 		{
 			if (this._settings.DisablePings || !this._connectionPool.SupportsPinging || !this.CurrentNode.IsResurrected) return;
 
-			using (var audit = this.Audit(AuditEvent.Ping))
+			using (var audit = this.Audit(AuditEvent.PingSuccess))
 			{
-				audit.Node = this.CurrentNode;
-
-				var requestOverrides = this.RequestConfiguration ?? new RequestConfiguration { };
-				requestOverrides.ConnectTimeout = requestOverrides.RequestTimeout = PingTimeout;
-
-				var requestData = CreateRequestData(HttpMethod.HEAD, "/", null, requestOverrides);
-				await this._connection.RequestAsync<VoidResponse>(requestData);
+				try
+				{
+					var requestData = PingRequestData(audit);
+					await this._connection.RequestAsync<VoidResponse>(requestData);
+				}
+				catch
+				{
+					audit.Event = AuditEvent.PingFailure;
+					throw;
+				}
 			}
 		}
 
@@ -257,13 +276,13 @@ namespace Elasticsearch.Net.Connection
 					}
 					catch (ElasticsearchException e) when (e.Cause == PipelineFailure.BadAuthentication) //unrecoverable
 					{
-						audit.Event = AuditEvent.SniffFail;
+						audit.Event = AuditEvent.SniffFailure;
 						e.RethrowKeepingStackTrace();
 						continue;
 					}
 					catch (ElasticsearchException e)
 					{
-						audit.Event = AuditEvent.SniffFail;
+						audit.Event = AuditEvent.SniffFailure;
 						exceptions.Add(e);
 						continue;
 					}
@@ -292,13 +311,13 @@ namespace Elasticsearch.Net.Connection
 					}
 					catch (ElasticsearchException e) when (e.Cause == PipelineFailure.BadAuthentication) //unrecoverable
 					{
-						audit.Event = AuditEvent.SniffFail;
+						audit.Event = AuditEvent.SniffFailure;
 						e.RethrowKeepingStackTrace();
 						continue;
 					}
 					catch (ElasticsearchException e)
 					{
-						audit.Event = AuditEvent.SniffFail;
+						audit.Event = AuditEvent.SniffFailure;
 						exceptions.Add(e);
 						continue;
 					}
