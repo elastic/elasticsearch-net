@@ -209,7 +209,6 @@
     <Compile Include="QueryDsl\FieldNameQueryDescriptorBase.cs" />
     <Compile Include="QueryDsl\QueryDescriptorBase.cs" />
     <Compile Include="QueryDsl\Specialized\MoreLikeThis\MoreLikeThisQueryDocumentsDescriptor.cs" />
-    <Compile Include="CommonAbstractions\SerializationBehavior\ElasticClient-Deserialize.cs" />
     <Compile Include="Aggregations\AggregationsHelper.cs" />
     <Compile Include="Aggregations\Bucket\SignificantTerms\Heuristics\ScriptedHeuristic.cs" />
     <Compile Include="Aggregations\Bucket\Buckets\Bucket.cs" />

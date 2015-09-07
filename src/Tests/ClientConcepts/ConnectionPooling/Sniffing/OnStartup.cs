@@ -13,6 +13,7 @@ using System.Linq;
 using System.Collections.Generic;
 using Tests.Framework.MockData;
 using System.Threading.Tasks;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Tests.ClientConcepts.LowLevel
 {
@@ -23,7 +24,8 @@ namespace Tests.ClientConcepts.LowLevel
 		* Connection pools that return true for `SupportsReseeding` by default sniff on startup.
 		*/
 
-		[U] public async Task ASniffOnStartupHappens()
+		[U] [SuppressMessage("AsyncUsage", "AsyncFixer001:Unnecessary async/await usage", Justification = "Its a test")]
+		public async Task ASniffOnStartupHappens()
 		{
 			var virtualWorld = new AuditTrailTester();
 			virtualWorld.Cluster = () => Cluster
@@ -43,7 +45,8 @@ namespace Tests.ClientConcepts.LowLevel
 			});
 		}
 
-		[U] public async Task SniffOnStartUpTakesNewClusterState()
+		[U] [SuppressMessage("AsyncUsage", "AsyncFixer001:Unnecessary async/await usage", Justification = "Its a test")]
+		public async Task SniffOnStartUpTakesNewClusterState()
 		{
 			var virtualWorld = new AuditTrailTester();
 			virtualWorld.Cluster = () => Cluster
@@ -53,7 +56,7 @@ namespace Tests.ClientConcepts.LowLevel
 				.SniffingConnectionPool()
 				.AllDefaults();
 
-			 await virtualWorld.TraceCall(new Audits {
+			await virtualWorld.TraceCall(new Audits {
 				{ AuditEvent.SniffOnStartup},
 				{ AuditEvent.SniffFail, 9200},
 				{ AuditEvent.SniffFail, 9201},
@@ -63,7 +66,8 @@ namespace Tests.ClientConcepts.LowLevel
 			});
 		}
 
-		[U] public async Task SniffTriesAllNodes()
+		[U] [SuppressMessage("AsyncUsage", "AsyncFixer001:Unnecessary async/await usage", Justification = "Its a test")]
+		public async Task SniffTriesAllNodes()
 		{
 			var virtualWorld = new AuditTrailTester();
 			virtualWorld.Cluster = () => Cluster
@@ -73,7 +77,7 @@ namespace Tests.ClientConcepts.LowLevel
 				.SniffingConnectionPool()
 				.AllDefaults();
 
-			 await virtualWorld.TraceCall(new Audits {
+			await virtualWorld.TraceCall(new Audits {
 				{ AuditEvent.SniffOnStartup},
 				{ AuditEvent.SniffFail, 9200},
 				{ AuditEvent.SniffFail, 9201},
@@ -89,6 +93,5 @@ namespace Tests.ClientConcepts.LowLevel
 				{ AuditEvent.HealhyResponse, 9200}
 			});
 		}
-
 	}
 }

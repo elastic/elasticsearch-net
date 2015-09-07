@@ -67,8 +67,7 @@ namespace Tests.Framework.Integration
 
 			this._process = this.CreateProcess(
 				$"-Des.cluster.name={this.ClusterName}",
-				$"-Des.node.name={this.NodeName}",
-				"-Des.discovery.zen.ping.multicast.enabled=false"
+				$"-Des.node.name={this.NodeName}"
 			);
 
 			var observable = Observable.Using(() => _process, process => StartObservableProcess(process));
@@ -175,7 +174,7 @@ namespace Tests.Framework.Integration
 			lock (_lock)
 			{
 				var zip = $"elasticsearch-{this.Version}.zip";
-				var downloadUrl = $"https://download.elastic.co/elasticsearch/elasticsearch/{zip}";
+				var downloadUrl = $"https://download.elasticsearch.org/elasticsearch/release/org/elasticsearch/distribution/zip/elasticsearch/{this.Version}/{zip}";
 				var localZip = Path.Combine(this.RoamingFolder, zip);
 
 				Directory.CreateDirectory(this.RoamingFolder);
@@ -291,7 +290,7 @@ namespace Tests.Framework.Integration
 			var dateString = match.Groups["date"].Value.Trim();
 			Date = DateTime.ParseExact(dateString, "yyyy-MM-dd HH:mm:ss,fff", CultureInfo.CurrentCulture);
 			Level = match.Groups["level"].Value.Trim();
-			Section = match.Groups["section"].Value.Trim();
+			Section = match.Groups["section"].Value.Trim().Replace("org.elasticsearch.", "");
 			Node = match.Groups["node"].Value.Trim();
 			Message = match.Groups["message"].Value.Trim();
 		}
@@ -321,7 +320,7 @@ namespace Tests.Framework.Integration
 		}
 
 		private static readonly Regex PortParser =
-			new Regex(@"{inet\[.+\:(?<port>\d+)\]");
+			new Regex(@"bound_address {.+\:(?<port>\d+)}");
 
 		public bool TryGetPortNumber(out int port)
 		{
