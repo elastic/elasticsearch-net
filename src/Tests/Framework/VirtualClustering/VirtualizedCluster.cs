@@ -18,9 +18,9 @@ namespace Tests.Framework
 
 		public IConnectionPool ConnectionPool => this._client.ConnectionSettings.ConnectionPool;
 
-		public VirtualizedCluster(VirtualCluster cluster, IConnectionPool pool, ConnectionSettings settings)
+		public VirtualizedCluster(VirtualCluster cluster, IConnectionPool pool, TestableDateTimeProvider dateTimeProvider, ConnectionSettings settings)
 		{
-			this._dateTimeProvider = new TestableDateTimeProvider();
+			this._dateTimeProvider = dateTimeProvider;
 			this._fixedRequestPipeline = new FixedPipelineFactory(settings, this._dateTimeProvider);
 			this._client = this._fixedRequestPipeline.Client;
 

@@ -31,6 +31,15 @@ namespace Tests.Framework
 		public ISearchResponse<Project> Response { get; internal set; }
 		public ISearchResponse<Project> ResponseAsync { get; internal set; }
 
+		public void ChangeTime(Func<DateTime, DateTime> selector)
+		{
+			this._cluster  = _cluster ?? this.Cluster();
+			this._clusterAsync = _clusterAsync ?? this.Cluster();
+
+			this._cluster.ChangeTime(selector);
+			this._clusterAsync.ChangeTime(selector);
+		}
+
 		public async Task<Auditor> TraceStartup()
 		{
 			this._cluster  = _cluster ?? this.Cluster();

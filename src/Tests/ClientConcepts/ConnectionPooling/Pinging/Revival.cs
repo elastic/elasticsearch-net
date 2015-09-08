@@ -27,8 +27,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Pinging
 		* before the actual call to make sure its up and running. If its still down we put it back in the dog house a little longer. For an explanation on these timeouts see: TODO LINK
 		*/
 
-		[U, SuppressMessage("AsyncUsage", "AsyncFixer001:Unnecessary async/await usage", Justification = "Its a test")]
-		public async Task PingAfterRevival()
+		[U] public async Task PingAfterRevival()
 		{
 			var audit = new Auditor(() => Cluster
 				.Nodes(3)
@@ -39,7 +38,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Pinging
 				.AllDefaults()
 			);
 
-			await audit.TraceCalls(
+			audit = await audit.TraceCalls(
 				new CallTrace { { PingSuccess, 9200 }, { HealhyResponse, 9200 } },
 				new CallTrace { { PingSuccess, 9201 }, { HealhyResponse, 9201 } },
 				new CallTrace { 
@@ -51,7 +50,17 @@ namespace Tests.ClientConcepts.ConnectionPooling.Pinging
 				new CallTrace { { HealhyResponse, 9201 } },
 				new CallTrace { { HealhyResponse, 9200 } },
 				new CallTrace { { HealhyResponse, 9201 } },
-				new CallTrace { { HealhyResponse, 9200 } }
+				new CallTrace {
+					{ HealhyResponse, 9200 },
+                    { pool => pool.Nodes.First(n=>!n.IsAlive).DeadUntil.Should().BeAfter(DateTime.UtcNow) }
+				}
+			);
+
+			audit.ChangeTime(d => d.AddMinutes(20));
+
+			audit = await audit.TraceCalls(
+				new CallTrace { { HealhyResponse, 9201 } },
+				new CallTrace { { PingSuccess, 9202 }, { HealhyResponse, 9202 } }
 			);
 		}
 	}

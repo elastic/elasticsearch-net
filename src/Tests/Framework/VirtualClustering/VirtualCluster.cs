@@ -56,13 +56,13 @@ namespace Tests.Framework
 		public SealedVirtualCluster StaticConnectionPool(Func<IList<Node>, IEnumerable<Node>> seedNodesSelector = null)
 		{
 			var nodes = seedNodesSelector?.Invoke(this._nodes) ?? this._nodes;
-			return new SealedVirtualCluster(this, new StaticConnectionPool(nodes, randomize: false, dateTimeProvider: this.DateTimeProvider));
+			return new SealedVirtualCluster(this, new StaticConnectionPool(nodes, randomize: false, dateTimeProvider: this.DateTimeProvider), this.DateTimeProvider);
 		}
 
 		public SealedVirtualCluster SniffingConnectionPool(Func<IList<Node>, IEnumerable<Node>> seedNodesSelector = null)
 		{
 			var nodes = seedNodesSelector?.Invoke(this._nodes) ?? this._nodes;
-			return new SealedVirtualCluster(this, new SniffingConnectionPool(nodes, randomize: false, dateTimeProvider: this.DateTimeProvider));
+			return new SealedVirtualCluster(this, new SniffingConnectionPool(nodes, randomize: false, dateTimeProvider: this.DateTimeProvider), this.DateTimeProvider);
 		}
 	}
 
