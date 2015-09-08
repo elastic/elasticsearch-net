@@ -14,7 +14,7 @@ namespace Tests.Framework
 	public class VirtualClusterConnection : InMemoryConnection
 	{
 		private static readonly object _lock = new object();
-		private class State { public int Pinged = 0; public int Sniffed = 0; public int Called = 0; }
+		private class State { public int Pinged = 0; public int Sniffed = 0; public int Called = 0; public int Successes = 0; public int Failures = 0; }
 		private IDictionary<int, State> Calls = new Dictionary<int, State> { };
 
 		private VirtualCluster _cluster;
@@ -75,29 +75,61 @@ namespace Tests.Framework
 			Func<byte[]> successResponse
 			) where TReturn : class where TRule : IRule
 		{
+			var state = this.Calls[requestData.Uri.Port];
 			foreach (var rule in rules.Where(s => s.OnPort.HasValue))
 			{
+				var always = rule.Times.Match(t => true, t => false);
+				var times = rule.Times.Match(t => -1, t => t);
 				if (rule.OnPort.Value == requestData.Uri.Port)
 				{
-					if (rule.Succeeds)
-					{
-						beforeReturn?.Invoke(rule);
-						return this.ReturnConnectionStatus<TReturn>(requestData, successResponse());
-					}
-					throw new ElasticsearchException(PipelineFailure.BadResponse, (Exception)null);
+					if (always)
+						return rule.Succeeds
+							? Success<TReturn, TRule>(requestData, beforeReturn, successResponse, rule)
+							: Fail<TReturn>(requestData);
+
+					return Sometimes<TReturn, TRule>(requestData, beforeReturn, successResponse, state, rule, times);
 				}
 			}
 			foreach (var rule in rules.Where(s => !s.OnPort.HasValue))
 			{
-				//is a rule describing always
-				if (!rule.Times.Match(t => true, t => false)) continue;
-				if (rule.Succeeds)
-				{
-					beforeReturn?.Invoke(rule);
-					return this.ReturnConnectionStatus<TReturn>(requestData, successResponse());
-				}
-				throw new ElasticsearchException(PipelineFailure.BadResponse, (Exception)null);
+				var always = rule.Times.Match(t => true, t => false);
+				var times = rule.Times.Match(t => -1, t => t);
+				if (always)
+					return rule.Succeeds
+						? Success<TReturn, TRule>(requestData, beforeReturn, successResponse, rule)
+						: Fail<TReturn>(requestData);
+				return Sometimes<TReturn, TRule>(requestData, beforeReturn, successResponse, state, rule, times);
 			}
+			return this.ReturnConnectionStatus<TReturn>(requestData, successResponse());
+		}
+
+		private ElasticsearchResponse<TReturn> Sometimes<TReturn, TRule>(RequestData requestData, Action<TRule> beforeReturn, Func<byte[]> successResponse, State state, TRule rule, int times)
+			where TReturn : class
+			where TRule : IRule
+		{
+			if (rule.Succeeds && times >= state.Successes)
+				return Success<TReturn, TRule>(requestData, beforeReturn, successResponse, rule);
+			else if (rule.Succeeds) return Fail<TReturn>(requestData);
+
+			if (!rule.Succeeds && times >= state.Failures)
+				return Fail<TReturn>(requestData);
+			return Success<TReturn, TRule>(requestData, beforeReturn, successResponse, rule);
+		}
+
+		private ElasticsearchResponse<TReturn> Fail<TReturn>(RequestData requestData)
+		{
+			var state = this.Calls[requestData.Uri.Port];
+			var failed = Interlocked.Increment(ref state.Failures);
+			throw new ElasticsearchException(PipelineFailure.BadResponse, (Exception)null);
+		}
+
+		private ElasticsearchResponse<TReturn> Success<TReturn, TRule>(RequestData requestData, Action<TRule> beforeReturn, Func<byte[]> successResponse, TRule rule)
+			where TReturn : class
+			where TRule : IRule
+		{
+			var state = this.Calls[requestData.Uri.Port];
+			var succeeded = Interlocked.Increment(ref state.Successes);
+			beforeReturn?.Invoke(rule);
 			return this.ReturnConnectionStatus<TReturn>(requestData, successResponse());
 		}
 
