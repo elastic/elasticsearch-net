@@ -8,9 +8,7 @@ namespace Elasticsearch.Net.ConnectionPool
 	public interface IConnectionPool
 	{
 		/// <summary>
-		/// Returns a readonly collection of all the nodes registered. This is meant as a view. 
-		/// If you want to update this list call UpdateNodeList(), each IConnectionPool needs to make sure that is threadsafe
-		/// GetNext() is also written in a way to deal with intermittent list updates.
+		/// Returns a readonly constant view of all the nodes in the cluster, this might involve creating copies of the nodes e.g if you are using the sniffing connectionpool.
 		/// </summary>
 		IReadOnlyCollection<Node> Nodes { get; }
 
@@ -41,13 +39,11 @@ namespace Elasticsearch.Net.ConnectionPool
 		bool SniffedOnStartup { get; set; }
 
 		/// <summary>
-		/// Gets the next live Uri to perform the request on
+		/// Creates a view with changing starting positions that wraps over on each call
+		/// e.g Thread A might get 1,2,3,4,5 and thread B will get 2,3,4,5,1.
+		/// if there are no live nodes yields a different dead node to try once
 		/// </summary>
-		/// <param name="initialSeed">pass the original seed when retrying, this guarantees that the nodes are walked in a
-		///  predictable manner even when called in a multithreaded context</param>
-		/// <param name="cursor">The seed this call started on</param>
-		/// <returns></returns>
-		Node GetNext(int? cursor, out int? newCursor);
+		IEnumerable<Node> CreateView();
 
 		/// <summary>
 		/// Update the node list, it's the IConnectionPool's responsibility to do so in a threadsafe fashion

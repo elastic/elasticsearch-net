@@ -29,17 +29,17 @@ namespace Tests.ClientConcepts.LowLevel
 
 		protected int NumberOfNodes = 10;
 
-		[U] public void CallingGetNext()
+		[U] public void EachViewStartsAtNexPositionAndWrapsOver()
 		{
 			var uris = Enumerable.Range(9200, NumberOfNodes).Select(p => new Uri("http://localhost:" + p));
 			var staticPool = new StaticConnectionPool(uris, randomize: false);
 			var sniffingPool = new SniffingConnectionPool(uris, randomize: false);
 
-			this.AssertGetNextBehavior(staticPool);
-			this.AssertGetNextBehavior(sniffingPool);
+			this.AssertCreateView(staticPool);
+			this.AssertCreateView(sniffingPool);
 		}
 
-		public void AssertGetNextBehavior(IConnectionPool pool)
+		public void AssertCreateView(IConnectionPool pool)
 		{ 
 			/**
 			* Here we have setup a static connection pool seeded with 10 nodes. We force randomizationOnStartup to false
@@ -51,9 +51,8 @@ namespace Tests.ClientConcepts.LowLevel
 			* After this each thread should walk the nodes in successive order using their local cursor
 			* e.g Thread A might get 0,1,2,3,5 and thread B will get 1,2,3,4,0.
 			*/
-			int? ignoredLocalCursor = null;
 			var startingPositions = Enumerable.Range(0, NumberOfNodes)
-				.Select(i => pool.GetNext(null, out ignoredLocalCursor))
+				.Select(i => pool.CreateView().First())
 				.Select(n => n.Uri.Port)
 				.ToList();
 
@@ -100,12 +99,7 @@ namespace Tests.ClientConcepts.LowLevel
 
 		private IEnumerable<int> CallGetNext(IConnectionPool pool)
 		{
-			int? localCursor = null;
-			var nextNode = pool.GetNext(localCursor, out localCursor);
-			var startingPosition = nextNode.Uri.Port;
-			yield return startingPosition;
-			for (;;)
-				yield return pool.GetNext(localCursor, out localCursor).Uri.Port;
+			foreach(var n in pool.CreateView()) yield return n.Uri.Port;
 		}
 	}
 }

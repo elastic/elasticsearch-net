@@ -32,7 +32,7 @@ namespace Tests.Framework
 
 		public async Task<ISearchResponse<Project>> ClientCallAsync() => await this._client.SearchAsync<Project>(s => s);
 
-		public void ChangeTime(Func<DateTime, DateTime> change) => change(_dateTimeProvider.MutableNow);
+		public void ChangeTime(Func<DateTime, DateTime> change) => _dateTimeProvider.ChangeTime(change);
 	}
 
 }

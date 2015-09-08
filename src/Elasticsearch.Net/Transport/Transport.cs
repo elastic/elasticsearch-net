@@ -70,7 +70,7 @@ namespace Elasticsearch.Net.Connection
 				ElasticsearchResponse<TReturn> response = null;
 
 				var exceptions = new List<ElasticsearchException>();
-				while (pipeline.NextNode())
+				foreach (var node in pipeline.NextNode())
 				{
 					try
 					{
@@ -109,7 +109,7 @@ namespace Elasticsearch.Net.Connection
 				ElasticsearchResponse<TReturn> response = null;
 
 				var exceptions = new List<ElasticsearchException>();
-				while (pipeline.NextNode())
+				foreach (var node in pipeline.NextNode())
 				{
 					try
 					{

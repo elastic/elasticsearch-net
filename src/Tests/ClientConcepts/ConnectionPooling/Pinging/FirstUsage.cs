@@ -15,10 +15,11 @@ using Tests.Framework.MockData;
 using System.Threading.Tasks;
 using System.Diagnostics.CodeAnalysis;
 using static Elasticsearch.Net.Connection.AuditEvent;
+using static Tests.Framework.TimesHelper;
 
-namespace Tests.ClientConcepts.LowLevel
+namespace Tests.ClientConcepts.ConnectionPooling.Pinging
 {
-	public class NThCallFailure
+	public class FirstUsage
 	{
 		/** == Pinging
 		* 
@@ -33,7 +34,7 @@ namespace Tests.ClientConcepts.LowLevel
 			/** A cluster with 2 nodes where the second node fails on ping */
 			var audit = new Auditor(() => Cluster
 				.Nodes(2)
-				.Ping(p => p.SucceedAlways())
+				.Ping(p => p.Succeeds(Always))
 				.Ping(p => p.OnPort(9201).FailAlways())
 				.StaticConnectionPool()
 				.AllDefaults()
@@ -41,7 +42,7 @@ namespace Tests.ClientConcepts.LowLevel
 
 			await audit.TraceCalls(
 				/** The first call goes to 9200 which succeeds */
-				new Audits { 
+				new CallTrace { 
 					{ PingSuccess, 9200},
 					{ HealhyResponse, 9200},
 					{ pool =>
@@ -51,7 +52,7 @@ namespace Tests.ClientConcepts.LowLevel
 				},
 				/** The 2nd call does a ping on 9201 because its used for the first time. 
 				* It fails so we wrap over to node 9200 which we've already pinged */
-				new Audits { 
+				new CallTrace { 
 					{ PingFailure, 9201},
 					{ HealhyResponse, 9200},
 					/** Finally we assert that the connectionpool has one node that is marked as dead */
@@ -74,7 +75,7 @@ namespace Tests.ClientConcepts.LowLevel
 
 			await audit.TraceCalls(
 				/** The first call goes to 9200 which succeeds */
-				new Audits { 
+				new CallTrace { 
 					{ PingSuccess, 9200},
 					{ HealhyResponse, 9200},
 					{ pool =>
@@ -85,7 +86,7 @@ namespace Tests.ClientConcepts.LowLevel
 				/** The 2nd call does a ping on 9201 because its used for the first time. 
 				* It fails and so we ping 9202 which also fails. We then ping 9203 becuase 
 				* we haven't used it before and it succeeds */
-				new Audits { 
+				new CallTrace { 
 					{ PingFailure, 9201},
 					{ PingFailure, 9202},
 					{ PingSuccess, 9203},
@@ -93,6 +94,29 @@ namespace Tests.ClientConcepts.LowLevel
 					/** Finally we assert that the connectionpool has two nodes that are marked as dead */
 					{ pool =>  pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(2) }
 				}
+			);
+		}
+		[U, SuppressMessage("AsyncUsage", "AsyncFixer001:Unnecessary async/await usage", Justification = "Its a test")]
+		public async Task AllNodesArePingedOnlyOnFirstUseProvidedTheyAreHealthy()
+		{
+			/**  A healthy cluster of 4 (min master nodes of 3 of course!) */ 
+			var audit = new Auditor(() => Cluster
+				.Nodes(4)
+				.Ping(p => p.SucceedAlways())
+				.StaticConnectionPool()
+				.AllDefaults()
+			);
+
+			await audit.TraceCalls(
+				new CallTrace { { PingSuccess, 9200}, { HealhyResponse, 9200} },
+				new CallTrace { { PingSuccess, 9201}, { HealhyResponse, 9201} },
+				new CallTrace { { PingSuccess, 9202}, { HealhyResponse, 9202} },
+				new CallTrace { { PingSuccess, 9203}, { HealhyResponse, 9203} },
+				new CallTrace { { HealhyResponse, 9200} },
+				new CallTrace { { HealhyResponse, 9201} },
+				new CallTrace { { HealhyResponse, 9202} },
+				new CallTrace { { HealhyResponse, 9203} },
+				new CallTrace { { HealhyResponse, 9200} }
 			);
 		}
 	}

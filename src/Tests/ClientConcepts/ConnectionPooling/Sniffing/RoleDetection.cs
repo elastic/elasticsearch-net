@@ -12,6 +12,7 @@ using FluentAssertions;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.MockResponses;
+using static Tests.Framework.TimesHelper;
 
 namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 {
@@ -27,9 +28,9 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 		{
 			var audit = new Auditor(() => Cluster
 				.Nodes(10)
-				.Sniff(s => s.FailAlways())
+				.Sniff(s => s.Fails(Always))
 				.Sniff(s => s.OnPort(9202)
-					.SucceedAlways(Cluster.Nodes(8).MasterEligable(9200, 9201, 9202))
+					.Succeeds(Always, Cluster.Nodes(8).MasterEligable(9200, 9201, 9202))
 				)
 				.SniffingConnectionPool()
 				.AllDefaults()
@@ -56,9 +57,9 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 		{
 			var audit = new Auditor(() => Cluster
 				.Nodes(10)
-				.Sniff(s => s.FailAlways())
+				.Sniff(s => s.Fails(Always))
 				.Sniff(s => s.OnPort(9202)
-					.SucceedAlways(Cluster.Nodes(8).StoresNoData(9200, 9201, 9202))
+					.Succeeds(Always, Cluster.Nodes(8).StoresNoData(9200, 9201, 9202))
 				)
 				.SniffingConnectionPool()
 				.AllDefaults()

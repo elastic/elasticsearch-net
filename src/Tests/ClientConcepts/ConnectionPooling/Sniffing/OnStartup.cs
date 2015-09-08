@@ -15,6 +15,7 @@ using Tests.Framework.MockData;
 using System.Threading.Tasks;
 using System.Diagnostics.CodeAnalysis;
 using static Elasticsearch.Net.Connection.AuditEvent;
+using static Tests.Framework.TimesHelper;
 
 namespace Tests.ClientConcepts.LowLevel
 {
@@ -30,13 +31,13 @@ namespace Tests.ClientConcepts.LowLevel
 		{
 			var audit = new Auditor(() => Cluster
 				.Nodes(10)
-				.Sniff(s => s.FailAlways())
-				.Sniff(s => s.OnPort(9202).SucceedAlways())
+				.Sniff(s => s.Fails(Always))
+				.Sniff(s => s.OnPort(9202).Succeeds(Always))
 				.SniffingConnectionPool()
 				.AllDefaults()
 			);
 
-			 await audit.TraceCall(new Audits {
+			 await audit.TraceCall(new CallTrace {
 				{ SniffOnStartup},
 				{ SniffFailure, 9200},
 				{ SniffFailure, 9201},
@@ -51,13 +52,13 @@ namespace Tests.ClientConcepts.LowLevel
 		{
 			var audit = new Auditor(() => Cluster
 				.Nodes(10)
-				.Sniff(s => s.FailAlways())
-				.Sniff(s => s.OnPort(9202).SucceedAlways(Cluster.Nodes(8, startFrom: 9204)))
+				.Sniff(s => s.Fails(Always))
+				.Sniff(s => s.OnPort(9202).Succeeds(Always, Cluster.Nodes(8, startFrom: 9204)))
 				.SniffingConnectionPool()
 				.AllDefaults()
 			);
 
-			await audit.TraceCall(new Audits {
+			await audit.TraceCall(new CallTrace {
 				{ SniffOnStartup},
 				{ SniffFailure, 9200},
 				{ SniffFailure, 9201},
@@ -72,13 +73,13 @@ namespace Tests.ClientConcepts.LowLevel
 		{
 			var audit = new Auditor(() => Cluster
 				.Nodes(10)
-				.Sniff(s => s.FailAlways())
-				.Sniff(s => s.OnPort(9209).SucceedAlways())
+				.Sniff(s => s.Fails(Always))
+				.Sniff(s => s.OnPort(9209).Succeeds(Always))
 				.SniffingConnectionPool()
 				.AllDefaults()
 			);
 
-			await audit.TraceCall(new Audits {
+			await audit.TraceCall(new CallTrace {
 				{ SniffOnStartup},
 				{ SniffFailure, 9200},
 				{ SniffFailure, 9201},
@@ -104,12 +105,12 @@ namespace Tests.ClientConcepts.LowLevel
 					new Node(new Uri("http://localhost:9201")) { MasterEligable = false },
 					new Node(new Uri("http://localhost:9202")) { MasterEligable = true },
 				})
-				.Sniff(s => s.SucceedAlways())
+				.Sniff(s => s.Succeeds(Always))
 				.SniffingConnectionPool()
 				.AllDefaults()
 			);
 
-			await audit.TraceCall(new Audits {
+			await audit.TraceCall(new CallTrace {
 				{ SniffOnStartup},
 				{ SniffSuccess, 9202},
 				{ PingSuccess, 9200},
@@ -126,13 +127,13 @@ namespace Tests.ClientConcepts.LowLevel
 					new Node(new Uri("http://localhost:9201")) { MasterEligable = true },
 					new Node(new Uri("http://localhost:9202")) { MasterEligable = false },
 				})
-				.Sniff(s => s.FailAlways())
-				.Sniff(s => s.OnPort(9202).SucceedAlways())
+				.Sniff(s => s.Fails(Always))
+				.Sniff(s => s.OnPort(9202).Succeeds(Always))
 				.SniffingConnectionPool()
 				.AllDefaults()
 			);
 
-			await audit.TraceCall(new Audits {
+			await audit.TraceCall(new CallTrace {
 				{ AuditEvent.SniffOnStartup},
 				{ AuditEvent.SniffFailure, 9200},
 				{ AuditEvent.SniffFailure, 9201},

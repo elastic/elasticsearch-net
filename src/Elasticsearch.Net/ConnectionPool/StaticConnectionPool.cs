@@ -13,7 +13,7 @@ namespace Elasticsearch.Net.ConnectionPool
 		protected Random Random { get; } = new Random();
 		protected bool Randomize { get; }
 
-		protected List<Node> InternalNodes { get; set; } = new List<Node>();
+		protected List<Node> InternalNodes = new List<Node>();
 
 		public virtual IReadOnlyCollection<Node> Nodes => this.InternalNodes;
 
@@ -39,13 +39,14 @@ namespace Elasticsearch.Net.ConnectionPool
 			this.Randomize = randomize;
 			this.DateTimeProvider = dateTimeProvider ?? new DateTimeProvider();
 
-			var uris = nodes.Select(n => n.Uri).ToList();
+			var nn = nodes.ToList();
+			var uris = nn.Select(n => n.Uri).ToList();
 			if (uris.Select(u => u.Scheme).Distinct().Count() > 1)
 				throw new ArgumentException("Trying to instantiate a connection pool with mixed URI Schemes");
 
 			this.UsingSsl = uris.Any(uri => uri.Scheme == Uri.UriSchemeHttps);
 
-			this.InternalNodes = nodes
+			this.InternalNodes = nn
 				.OrderBy((item) => randomize ? this.Random.Next() : 1)
 				.DistinctBy(n=>n.Uri)
 				.ToList();
@@ -53,41 +54,40 @@ namespace Elasticsearch.Net.ConnectionPool
 
 		private int _globalCursor = -1;
 		/// <summary>
-		/// Get the next node in a thread safe fashion that tries to keep order over multiple threads. 
+		/// Creates a view of all the live nodes with changing starting positions that wraps over on each call
 		/// e.g Thread A might get 1,2,3,4,5 and thread B will get 2,3,4,5,1.
+		/// if there are no live nodes yields a different dead node to try once
 		/// </summary>
-		/// <param name="cursor">On first use pass in null, this will take the global round cursor, on repeated uses pass in seed as a private cursor</param>
-		/// <param name="newCursor">A private cursor that can be used in repeated calls to GetNext</param>
-		public virtual Node GetNext(int? cursor, out int? newCursor)
+		public virtual IEnumerable<Node> CreateView()
 		{
-			var count = this.InternalNodes.Count;
+			//var count = this.InternalNodes.Count;
 
-			//if we have a local cursor use that otherwise use the globalcursor
-			int privateCursor;
-			if (cursor.HasValue) privateCursor = cursor.Value + 1;
-			else privateCursor = Interlocked.Increment(ref _globalCursor);
-
-			newCursor = privateCursor % count;
+			var now = this.DateTimeProvider.Now();
+			var nodes = this.InternalNodes.Where(n => n.IsAlive || n.DeadUntil <= now).ToList();
+			var count = nodes.Count();
+			var globalCursor = Interlocked.Increment(ref _globalCursor);
+			var localCursor = globalCursor % count;
 
 			Node node = null;
 			for (int attempts = 0; attempts < count; attempts++)
 			{
-				node = this.InternalNodes[newCursor.Value];
-				var now = this.DateTimeProvider.Now();
+				node = nodes[localCursor];
+				localCursor = (localCursor + 1) % count;
 				//node is not dead or no longer dead
 				if (node.DeadUntil <= now)
 				{
 					//if this node is not alive mark it as resurrected
 					if (!node.IsAlive) node.IsResurrected = true;
-					return node;
+					yield return node;
 				}
-				newCursor = (++privateCursor) % count;
 			}
-
-			//could not find a suitable node retrying on node that has been dead longest.
-			node = this.InternalNodes[newCursor.Value];
-			node.IsResurrected = true;
-			return node;
+			if (count == 0)
+			{
+				//could not find a suitable node retrying on node that has been dead longest.
+				node = this.InternalNodes[globalCursor % count];
+				node.IsResurrected = true;
+				yield return node;
+			}
 		}
 
 	}

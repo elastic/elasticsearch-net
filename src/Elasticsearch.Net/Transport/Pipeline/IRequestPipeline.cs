@@ -22,7 +22,7 @@ namespace Elasticsearch.Net.Connection
 		void MarkAlive();
 		void MarkDead();
 
-		bool NextNode();
+		IEnumerable<Node> NextNode();
 
 		void Ping();
 		Task PingAsync();

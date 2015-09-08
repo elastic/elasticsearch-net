@@ -81,10 +81,13 @@
     <Compile Include="Analysis\TokenFilters\TokenizerTests.cs" />
     <Compile Include="Analysis\Tokenizers\TokenizerTests.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\BuildingBlocks\Transports.cs" />
-    <Compile Include="ClientConcepts\ConnectionPooling\BuildingBlocks\RoundRobin.cs" />
+    <Compile Include="ClientConcepts\ConnectionPooling\RoundRobin\VolatileUpdates.cs" />
+    <Compile Include="ClientConcepts\ConnectionPooling\RoundRobin\RoundRobin.cs" />
+    <Compile Include="ClientConcepts\ConnectionPooling\RoundRobin\SkipDeadNodes.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\BuildingBlocks\ConnectionPooling.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\BuildingBlocks\RequestPipeline.cs" />
-    <Compile Include="ClientConcepts\ConnectionPooling\FailOver\NthCallFailure.cs" />
+    <Compile Include="ClientConcepts\ConnectionPooling\Pinging\Revival.cs" />
+    <Compile Include="ClientConcepts\ConnectionPooling\Pinging\FirstUsage.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\Sniffing\RoleDetection.cs" />
     <Compile Include="ClientConcepts\HighLevel\CovariantHits\CovariantSearchResults.cs" />
     <Compile Include="ClientConcepts\HighLevel\Inferrence\Indices\IndicesPaths.cs" />
@@ -95,9 +98,7 @@
     <Compile Include="Framework\SimpleIntegration.cs" />
     <Compile Include="Framework\ApiCallExample.cs" />
     <Compile Include="Framework\Audit\Audits.cs" />
-    <Compile Include="Framework\Audit\AuditTrailTester.cs" />
-    <Compile Include="Framework\Audit\ClientCall.cs" />
-    <Compile Include="Framework\Audit\ClientCallAssertations.cs" />
+    <Compile Include="Framework\Audit\Auditor.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\Sniffing\OnStartup.cs" />
     <Compile Include="Framework\Extensions\DiffExtensions.cs" />
     <Compile Include="Framework\Extensions\Numeric.cs" />

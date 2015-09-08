@@ -171,13 +171,14 @@ namespace Elasticsearch.Net.Connection
 			}
 		}
 
-		public bool NextNode()
+		public IEnumerable<Node> NextNode()
 		{
-			if (this.Retried >= this.MaxRetries + 1) return false;
-
-			var node = this._connectionPool.GetNext(_cursor, out _cursor);
-			this.CurrentNode = node;
-			return true;
+			if (this.Retried >= this.MaxRetries + 1)  yield break;
+			foreach (var node in this._connectionPool.CreateView())
+			{
+				this.CurrentNode = node;
+				yield return node;
+			}
 		}
 
 		public void BadResponse(IApiCallDetails response, List<ElasticsearchException> seenExceptions)

@@ -30,10 +30,9 @@ namespace Elasticsearch.Net.ConnectionPool
 			this.Nodes = new List<Node> { this._node };
 		}
 
-		public Node GetNext(int? cursor, out int? newCursor)
+		public IEnumerable<Node> CreateView()
 		{
-			newCursor = 0;
-			return this._node;
+			return this.Nodes;
 		}
 
 

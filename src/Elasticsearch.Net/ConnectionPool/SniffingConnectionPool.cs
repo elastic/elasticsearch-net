@@ -47,10 +47,14 @@ namespace Elasticsearch.Net.ConnectionPool
 			try
 			{
 				this._readerWriter.EnterWriteLock();
-				this.InternalNodes = nodes
+				var sortedNodes = nodes
 					.OrderBy((item) => this.Randomize ? this.Random.Next() : 1)
 					.DistinctBy(n => n.Uri)
 					.ToList();
+
+				this.InternalNodes = sortedNodes;
+				//Interlocked.Exchange(ref this.InternalNodes, n);
+
 			}
 			finally
 			{
@@ -58,12 +62,12 @@ namespace Elasticsearch.Net.ConnectionPool
 			}
 		}
 
-		public override Node GetNext(int? cursor, out int? newCursor)
+		public override IEnumerable<Node> CreateView()
 		{
 			try
 			{
 				this._readerWriter.EnterReadLock();
-				return base.GetNext(cursor, out newCursor);
+				return base.CreateView();
 			}
 			finally
 			{

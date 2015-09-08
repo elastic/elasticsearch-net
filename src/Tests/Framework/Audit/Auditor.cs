@@ -31,13 +31,12 @@ namespace Tests.Framework
 		public ISearchResponse<Project> Response { get; internal set; }
 		public ISearchResponse<Project> ResponseAsync { get; internal set; }
 
-		public async Task<Auditor> TraceStartup(Audits audit = null)
+		public async Task<Auditor> TraceStartup()
 		{
 			this._cluster  = _cluster ?? this.Cluster();
 			this.AssertPoolBeforeCall?.Invoke(this._cluster.ConnectionPool);
 			this.Response = this._cluster.ClientCall();
 			this.AssertPoolAfterCall?.Invoke(this._cluster.ConnectionPool);
-			audit?.AssertPoolAfterCall?.Invoke(this._cluster.ConnectionPool);
 
 			this._clusterAsync = _clusterAsync ?? this.Cluster();
 			this.ResponseAsync = await this._clusterAsync.ClientCallAsync();
@@ -45,39 +44,48 @@ namespace Tests.Framework
 			return new Auditor(_cluster, _clusterAsync);
 		}
 
-		public async Task<Auditor> TraceCall(Audits audits)
+		public async Task<Auditor> TraceCall(CallTrace callTrace, int nthCall = 0)
 		{
-			await this.TraceStartup(audits);
+			await this.TraceStartup();
 			var auditTrail = this.Response.ApiCall.AuditTrail;
 			var asyncAuditTrail = this.ResponseAsync.ApiCall.AuditTrail;
 
 			auditTrail.Count.Should().Be(asyncAuditTrail.Count, "calling async should have the same audit trail length as the sync call");
 
-			AssertTrailOnResponse(audits, auditTrail, true);
-			AssertTrailOnResponse(audits, asyncAuditTrail, false);
+			AssertTrailOnResponse(callTrace, auditTrail, true, nthCall);
+			AssertTrailOnResponse(callTrace, asyncAuditTrail, false, nthCall);
+
+			callTrace?.AssertPoolAfterCall?.Invoke(this._cluster.ConnectionPool);
+			callTrace?.AssertPoolAfterCall?.Invoke(this._clusterAsync.ConnectionPool);
 			return new Auditor(_cluster, _clusterAsync);
 		}
-		public async Task<Auditor> TraceCalls(params Audits[] audits)
+		public async Task<Auditor> TraceCalls(params CallTrace[] audits)
 		{
 			var auditor = this;
-			foreach (var a in audits)
+			foreach (var a in audits.Select((a, i)=> new { a, i }))
 			{
-				auditor = await auditor.TraceCall(a); 
+				auditor = await auditor.TraceCall(a.a, a.i); 
 			}
 			return auditor;
 		}
 
-		private static void AssertTrailOnResponse(Audits audits, List<Audit> auditTrail, bool sync)
+		private static void AssertTrailOnResponse(CallTrace callTrace, List<Audit> auditTrail, bool sync, int nthCall)
 		{
 			var typeOfTrail = (sync ? "synchronous" : "asynchronous") + " audit trail";
+			var nthClientCall = (nthCall + 1).ToOrdinal();
 
-			audits.Count().Should().Be(auditTrail.Count(), $"the test should test the whole {typeOfTrail}");
-			//auditTrail.Count().Should().Be(audits.Count(), $"the test should test the whole {typeOfTrail}");
-			foreach (var audit in auditTrail.Select((s, i) => new { s, i }))
+			callTrace.Select(c=>c.Event).Should().ContainInOrder(auditTrail.Select(a=>a.Event), $"the {nthClientCall} client call's {typeOfTrail} should assert ALL audit trail items");
+			foreach (var t in auditTrail.Select((a, i) => new { a, i }))
 			{
-				var because = $"thats the type specified on the {(audit.i + 1).ToOrdinal()} {typeOfTrail}";
-				audit.s.Event.Should().Be(audits[audit.i].Key, because);
-				audits[audit.i].Value?.Invoke(audit.s);
+				var i = t.i;
+				var audit = t.a;
+				var nthAuditTrailItem = (i + 1).ToOrdinal();
+				var because = $"thats the {{0}} specified on the {nthAuditTrailItem} item in the {nthClientCall} client call's {typeOfTrail}";
+				var c = callTrace[i];
+				audit.Event.Should().Be(c.Event, string.Format(because, "event"));
+				if (c.Port.HasValue) audit.Node.Uri.Port.Should().Be(c.Port.Value, string.Format(because, "port"));
+				c.SimpleAssert?.Invoke(audit);
+				c.AssertWithBecause?.Invoke(string.Format(because, "custom assertion"), audit);
 			}
 		}
 	}

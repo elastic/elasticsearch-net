@@ -16,8 +16,6 @@ namespace Elasticsearch.Net.Connection
 
 		public List<Tuple<string, Uri, PostData<object>>> Requests = new List<Tuple<string, Uri, PostData<object>>>(); 
 		
-		public bool RecordRequests { get; set;}
-
 		public InMemoryConnection() 
 		{
 			_statusCode = 200;
@@ -43,11 +41,6 @@ namespace Elasticsearch.Net.Connection
 			var path = request.RequestUri.ToString();
 
 			var cs = requestData.CreateResponse<TReturn>(this._statusCode, new MemoryStream(fixedResult ?? _fixedResultBytes));
-			if (this.RecordRequests)
-			{
-				this.Requests.Add(Tuple.Create(method, request.RequestUri, requestData.Data));
-			}
-
 			return cs;
 		}
 
