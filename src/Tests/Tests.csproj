@@ -89,6 +89,7 @@
     <Compile Include="ClientConcepts\ConnectionPooling\BuildingBlocks\RequestPipeline.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\Pinging\Revival.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\Pinging\FirstUsage.cs" />
+    <Compile Include="ClientConcepts\ConnectionPooling\Sniffing\OnConnectionFailure.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\Sniffing\RoleDetection.cs" />
     <Compile Include="ClientConcepts\HighLevel\CovariantHits\CovariantSearchResults.cs" />
     <Compile Include="ClientConcepts\HighLevel\Inferrence\Indices\IndicesPaths.cs" />

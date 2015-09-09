@@ -30,7 +30,6 @@ namespace Elasticsearch.Net.Connection
 
 		public Node CurrentNode { get; private set; }
 
-		public int MaxRetries { get; }
 		private int _retried = 0;
 		public int Retried => _retried;
 
@@ -48,12 +47,13 @@ namespace Elasticsearch.Net.Connection
 			this._dateTimeProvider = dateTimeProvider;
 			this._memoryStreamFactory = memoryStreamFactory;
 
-			this.MaxRetries = this._settings.MaxRetries ?? this._connectionPool.MaxRetries;
 			this.RequestParameters = requestParameters;
 			this.RequestConfiguration = requestParameters?.RequestConfiguration;
 			this._cancellationToken = this.RequestConfiguration?.CancellationToken ?? CancellationToken.None;
 			this.StartedOn = dateTimeProvider.Now();
 		}
+
+		public int MaxRetries => Math.Min(this._settings.MaxRetries.GetValueOrDefault(int.MaxValue), this._connectionPool.MaxRetries);
 
 		private RequestData CreateRequestData(HttpMethod method, string path, PostData<object> postData, IRequestConfiguration requestOverrides)
 		{
@@ -80,6 +80,8 @@ namespace Elasticsearch.Net.Connection
 
 		public bool FirstPoolUsageNeedsSniffing =>
 			this._connectionPool.SupportsReseeding && this._settings.SniffsOnStartup && !this._connectionPool.SniffedOnStartup;
+
+		public bool SniffsOnConnectionFailure => this._connectionPool.SupportsReseeding && this._settings.SniffsOnConnectionFault;
 
 		public void FirstPoolUsage(SemaphoreSlim semaphore)
 		{
@@ -173,14 +175,29 @@ namespace Elasticsearch.Net.Connection
 				return tookToLong;
 			}
 		}
+		
+		private bool Refresh { get; set; }
 
 		public IEnumerable<Node> NextNode()
 		{
-			foreach (var node in this._connectionPool.CreateView())
+			//This for loops allows to break out of the view state machine if we need to 
+			//force a refresh (after reseeding connectionpool). We have a hardcoded limit of only
+			//allowing 100 of these refreshes per call
+			//TODO discuss with @gmarz lower limit?
+			for (var i = 0; i < 100; i++)
 			{
-				if (this.Retried >= this.MaxRetries + 1 || this.IsTakingTooLong)  yield break;
-				this.CurrentNode = node;
-				yield return node;
+				if (this.Retried >= this.MaxRetries + 1 || this.IsTakingTooLong) yield break;
+				foreach (var node in this._connectionPool.CreateView())
+				{
+					if (this.Retried >= this.MaxRetries + 1 || this.IsTakingTooLong) yield break;
+					this.CurrentNode = node;
+					yield return node;
+					if (this.Refresh)
+					{
+						this.Refresh = false;
+						break;
+					}
+				}
 			}
 		}
 
@@ -227,6 +244,7 @@ namespace Elasticsearch.Net.Connection
 				catch
 				{
 					audit.Event = AuditEvent.PingFailure;
+					if (this.SniffsOnConnectionFailure) this.Sniff();
 					throw;
 				}
 			}
@@ -246,6 +264,7 @@ namespace Elasticsearch.Net.Connection
 				catch
 				{
 					audit.Event = AuditEvent.PingFailure;
+					if (this.SniffsOnConnectionFailure) await this.SniffAsync();
 					throw;
 				}
 			}
@@ -255,7 +274,7 @@ namespace Elasticsearch.Net.Connection
 
 		private string SniffPath => "_nodes/_all/settings?flat_settings&timeout=" + this.PingTimeout;
 
-		public IEnumerable<Node> SniffNodes => this._connectionPool.Nodes.OrderByDescending(n => n.MasterEligable ? 3 : 0);
+		public IEnumerable<Node> SniffNodes => this._connectionPool.CreateView().ToList().OrderBy(n =>  n.MasterEligable ? n.Uri.Port : int.MaxValue);
 
 		public void Sniff()
 		{
@@ -274,6 +293,7 @@ namespace Elasticsearch.Net.Connection
 						var response = this._connection.Request<SniffResponse>(requestData);
 						var nodes = response.Body.ToNodes(this._connectionPool.UsingSsl);
 						this._connectionPool.Reseed(nodes);
+						this.Refresh = true;
 						return;
 					}
 					catch (ElasticsearchException e) when (e.Cause == PipelineFailure.BadAuthentication) //unrecoverable
@@ -309,6 +329,7 @@ namespace Elasticsearch.Net.Connection
 
 						var response = await this._connection.RequestAsync<SniffResponse>(requestData);
 						this._connectionPool.Reseed(response.Body.ToNodes(this._connectionPool.UsingSsl));
+						this.Refresh = true;
 						return;
 					}
 					catch (ElasticsearchException e) when (e.Cause == PipelineFailure.BadAuthentication) //unrecoverable
@@ -349,6 +370,7 @@ namespace Elasticsearch.Net.Connection
 				{
 					(response as ElasticsearchResponse<Stream>)?.Body?.Dispose();
 					audit.Event = AuditEvent.BadResponse;
+					if (this.SniffsOnConnectionFailure) this.Sniff();
 					throw new ElasticsearchException(PipelineFailure.BadResponse, e);
 				}
 			}
@@ -375,6 +397,7 @@ namespace Elasticsearch.Net.Connection
 				{
 					(response as ElasticsearchResponse<Stream>)?.Body?.Dispose();
 					audit.Event = AuditEvent.BadResponse;
+					if (this.SniffsOnConnectionFailure) await this.SniffAsync();
 					throw new ElasticsearchException(PipelineFailure.BadResponse, e);
 				}
 			}

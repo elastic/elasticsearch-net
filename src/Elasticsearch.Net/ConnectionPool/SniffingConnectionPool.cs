@@ -53,6 +53,7 @@ namespace Elasticsearch.Net.ConnectionPool
 					.ToList();
 
 				this.InternalNodes = sortedNodes;
+				this._globalCursor = -1;
 				//Interlocked.Exchange(ref this.InternalNodes, n);
 
 			}

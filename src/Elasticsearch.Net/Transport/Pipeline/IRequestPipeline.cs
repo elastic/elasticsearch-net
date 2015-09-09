@@ -8,6 +8,7 @@ namespace Elasticsearch.Net.Connection
 	public interface IRequestPipeline : IDisposable
 	{
 		bool FirstPoolUsageNeedsSniffing { get; }
+		bool SniffsOnConnectionFailure { get; }
 		bool OutOfDateClusterInformation { get; }
 		DateTime StartedOn { get; }
 		DateTime CompletedOn { get; }

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Tests.Framework.MockResponses;
 using System.Threading;
+using FluentAssertions;
 
 namespace Tests.Framework
 {
@@ -41,6 +42,8 @@ namespace Tests.Framework
 
 		public override ElasticsearchResponse<TReturn> Request<TReturn>(RequestData requestData)
 		{
+			this.Calls.Should().ContainKey(requestData.Uri.Port);
+
 			var state = this.Calls[requestData.Uri.Port];
 			if (IsSniffRequest(requestData))
 			{
