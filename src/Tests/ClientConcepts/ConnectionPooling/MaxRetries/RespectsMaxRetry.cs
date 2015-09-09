@@ -52,9 +52,33 @@ namespace Tests.ClientConcepts.ConnectionPooling.MaxRetries
 					{ HealthyResponse, 9209 }
 				}
             );
-
 		}
 
+		/**
+		* When you have a 100 node cluster you might want to ensure a fixed number of retries. 
+		* Remember that the actual number of requests is initial attempt + set number of retries 
+		*/
+
+		[U] public async Task FixedMaximumNumberOfRetries()
+		{
+			var audit = new Auditor(() => Cluster
+				.Nodes(10)
+				.ClientCalls(r => r.FailAlways())
+				.ClientCalls(r => r.OnPort(9209).SucceedAlways())
+				.Ping(p => p.SucceedAlways())
+				.StaticConnectionPool()
+				.Settings(s => s.DisablePing().MaximumRetries(3))
+			);
+
+			audit = await audit.TraceCall(
+				new CallTrace {
+					{ BadResponse, 9200 },
+					{ BadResponse, 9201 },
+					{ BadResponse, 9202 },
+					{ BadResponse, 9203 },
+				}
+            );
+		}
 		/** 
 		* In our previous test we simulated very fast failures, in the real world a call might take upwards of a second
 		* Here we simulate a particular heavy search that takes 10 seconds to fail, our Request timeout is set to 20 seconds.
