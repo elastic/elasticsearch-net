@@ -53,6 +53,12 @@ namespace Tests.Framework
 			this.ClientCallRules.Add(selector(new ClientCallRule()));
 			return this;
 		}
+
+		public SealedVirtualCluster SingleNodeConnection(Func<IList<Node>, IEnumerable<Node>> seedNodesSelector = null)
+		{
+			var nodes = seedNodesSelector?.Invoke(this._nodes) ?? this._nodes;
+			return new SealedVirtualCluster(this, new SingleNodeConnectionPool(nodes.First().Uri), this.DateTimeProvider);
+		}
 		public SealedVirtualCluster StaticConnectionPool(Func<IList<Node>, IEnumerable<Node>> seedNodesSelector = null)
 		{
 			var nodes = seedNodesSelector?.Invoke(this._nodes) ?? this._nodes;

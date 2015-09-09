@@ -33,7 +33,6 @@ namespace Tests.ClientConcepts.ConnectionPooling.MaxRetries
 				.Nodes(10)
 				.ClientCalls(r => r.FailAlways())
 				.ClientCalls(r => r.OnPort(9209).SucceedAlways())
-				.Ping(p => p.SucceedAlways())
 				.StaticConnectionPool()
 				.Settings(s => s.DisablePing())
 			);
@@ -65,7 +64,6 @@ namespace Tests.ClientConcepts.ConnectionPooling.MaxRetries
 				.Nodes(10)
 				.ClientCalls(r => r.FailAlways())
 				.ClientCalls(r => r.OnPort(9209).SucceedAlways())
-				.Ping(p => p.SucceedAlways())
 				.StaticConnectionPool()
 				.Settings(s => s.DisablePing().MaximumRetries(3))
 			);
@@ -90,7 +88,6 @@ namespace Tests.ClientConcepts.ConnectionPooling.MaxRetries
 				.Nodes(10)
 				.ClientCalls(r => r.FailAlways().Takes(TimeSpan.FromSeconds(10)))
 				.ClientCalls(r => r.OnPort(9209).SucceedAlways())
-				.Ping(p => p.SucceedAlways())
 				.StaticConnectionPool()
 				.Settings(s => s.DisablePing().SetTimeout(TimeSpan.FromSeconds(20)))
 			);
@@ -116,7 +113,6 @@ namespace Tests.ClientConcepts.ConnectionPooling.MaxRetries
 				.Nodes(10)
 				.ClientCalls(r => r.FailAlways().Takes(TimeSpan.FromSeconds(3)))
 				.ClientCalls(r => r.OnPort(9209).SucceedAlways())
-				.Ping(p => p.SucceedAlways())
 				.StaticConnectionPool()
 				.Settings(s => s.DisablePing().SetTimeout(TimeSpan.FromSeconds(2)).SetMaxRetryTimeout(TimeSpan.FromSeconds(10)))
 			);
@@ -128,6 +124,49 @@ namespace Tests.ClientConcepts.ConnectionPooling.MaxRetries
 					{ BadResponse, 9202 },
 					{ BadResponse, 9203 },
 					{ BadResponse, 9204 },
+				}
+            );
+
+		}
+		/** 
+		* If your retry policy expands beyond available nodes we won't retry the same node twice
+		*/
+		[U] public async Task RetriesAreLimitedByNodesInPool()
+		{
+			var audit = new Auditor(() => Cluster
+				.Nodes(2)
+				.ClientCalls(r => r.FailAlways().Takes(TimeSpan.FromSeconds(3)))
+				.ClientCalls(r => r.OnPort(9209).SucceedAlways())
+				.StaticConnectionPool()
+				.Settings(s => s.DisablePing().SetTimeout(TimeSpan.FromSeconds(2)).SetMaxRetryTimeout(TimeSpan.FromSeconds(10)))
+			);
+
+			audit = await audit.TraceCall(
+				new CallTrace {
+					{ BadResponse, 9200 },
+					{ BadResponse, 9201 },
+				}
+            );
+		}
+
+		/** 
+		* This makes setting any retry setting on a single node connection pool a NOOP, this is by design! 
+		* Connection pooling and connection failover is about trying to fail sanely whilst still utilizing available resources and 
+		* not giving up on the fail fast principle. It's *NOT* a mechanism for forcing requests to succeed.
+		*/
+		[U] public async Task DoesNotRetryOnSingleNodeConnectionPool()
+		{
+			var audit = new Auditor(() => Cluster
+				.Nodes(10)
+				.ClientCalls(r => r.FailAlways().Takes(TimeSpan.FromSeconds(3)))
+				.ClientCalls(r => r.OnPort(9209).SucceedAlways())
+				.SingleNodeConnection()
+				.Settings(s => s.DisablePing().MaximumRetries(10))
+			);
+
+			audit = await audit.TraceCall(
+				new CallTrace {
+					{ BadResponse, 9200 }
 				}
             );
 
