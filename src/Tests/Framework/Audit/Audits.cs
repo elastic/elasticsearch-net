@@ -12,13 +12,13 @@ namespace Tests.Framework
 	{
 		public CallTraceState(AuditEvent e) { this.Event = e;  }
 
+		public AuditEvent Event { get; private set; }
+
 		public int? Port { get; set; }
 
 		public Action<Audit> SimpleAssert { get; set; }
 		
 		public Action<string, Audit> AssertWithBecause { get; set; }
-
-		public AuditEvent Event { get; private set; }
 	}
 
 	public class CallTrace : List<CallTraceState>

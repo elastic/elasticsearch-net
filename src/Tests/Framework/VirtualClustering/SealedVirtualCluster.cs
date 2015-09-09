@@ -22,7 +22,7 @@ namespace Tests.Framework
 		{
 			this._cluster = cluster;
 			this._connectionPool = pool;
-			this._connection = new VirtualClusterConnection(cluster);
+			this._connection = new VirtualClusterConnection(cluster, dateTimeProvider);
 			this._dateTimeProvider = dateTimeProvider;
 		}
 

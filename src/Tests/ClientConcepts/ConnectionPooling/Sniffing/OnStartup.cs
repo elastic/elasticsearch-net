@@ -43,7 +43,7 @@ namespace Tests.ClientConcepts.LowLevel
 				{ SniffFailure, 9201},
 				{ SniffSuccess, 9202},
 				{ PingSuccess , 9200},
-				{ HealhyResponse, 9200}
+				{ HealthyResponse, 9200}
 			});
 		}
 
@@ -64,7 +64,7 @@ namespace Tests.ClientConcepts.LowLevel
 				{ SniffFailure, 9201},
 				{ SniffSuccess, 9202},
 				{ PingSuccess, 9204},
-				{ HealhyResponse, 9204}
+				{ HealthyResponse, 9204}
 			});
 		}
 
@@ -92,7 +92,7 @@ namespace Tests.ClientConcepts.LowLevel
 				{ SniffFailure, 9208},
 				{ SniffSuccess, 9209},
 				{ PingSuccess, 9200},
-				{ HealhyResponse, 9200}
+				{ HealthyResponse, 9200}
 			});
 		}
 
@@ -114,7 +114,7 @@ namespace Tests.ClientConcepts.LowLevel
 				{ SniffOnStartup},
 				{ SniffSuccess, 9202},
 				{ PingSuccess, 9200},
-				{ HealhyResponse, 9200}
+				{ HealthyResponse, 9200}
 			});
 		}
 
@@ -139,7 +139,7 @@ namespace Tests.ClientConcepts.LowLevel
 				{ AuditEvent.SniffFailure, 9201},
 				{ AuditEvent.SniffSuccess, 9202},
 				{ AuditEvent.PingSuccess, 9200},
-				{ AuditEvent.HealhyResponse, 9200}
+				{ AuditEvent.HealthyResponse, 9200}
 			});
 		}
 	}

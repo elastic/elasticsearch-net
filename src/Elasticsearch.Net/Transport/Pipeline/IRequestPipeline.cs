@@ -33,6 +33,7 @@ namespace Elasticsearch.Net.Connection
 		void Sniff();
 		Task SniffAsync();
 
-		void BadResponse(IApiCallDetails response, List<ElasticsearchException> seenExceptions);
+		void BadResponse<TReturn>(ref ElasticsearchResponse<TReturn> response, RequestData requestData, List<ElasticsearchException> seenExceptions)
+			where TReturn : class;
 	}
 }

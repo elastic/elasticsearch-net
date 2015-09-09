@@ -39,19 +39,19 @@ namespace Tests.ClientConcepts.ConnectionPooling.Pinging
 			);
 
 			audit = await audit.TraceCalls(
-				new CallTrace { { PingSuccess, 9200 }, { HealhyResponse, 9200 } },
-				new CallTrace { { PingSuccess, 9201 }, { HealhyResponse, 9201 } },
+				new CallTrace { { PingSuccess, 9200 }, { HealthyResponse, 9200 } },
+				new CallTrace { { PingSuccess, 9201 }, { HealthyResponse, 9201 } },
 				new CallTrace { 
 					{ PingSuccess, 9202},
 					{ BadResponse, 9202},
-					{ HealhyResponse, 9200},
+					{ HealthyResponse, 9200},
 					{ pool =>  pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(1) }
 				},
-				new CallTrace { { HealhyResponse, 9201 } },
-				new CallTrace { { HealhyResponse, 9200 } },
-				new CallTrace { { HealhyResponse, 9201 } },
+				new CallTrace { { HealthyResponse, 9201 } },
+				new CallTrace { { HealthyResponse, 9200 } },
+				new CallTrace { { HealthyResponse, 9201 } },
 				new CallTrace {
-					{ HealhyResponse, 9200 },
+					{ HealthyResponse, 9200 },
                     { pool => pool.Nodes.First(n=>!n.IsAlive).DeadUntil.Should().BeAfter(DateTime.UtcNow) }
 				}
 			);
@@ -59,8 +59,8 @@ namespace Tests.ClientConcepts.ConnectionPooling.Pinging
 			audit.ChangeTime(d => d.AddMinutes(20));
 
 			audit = await audit.TraceCalls(
-				new CallTrace { { HealhyResponse, 9201 } },
-				new CallTrace { { PingSuccess, 9202 }, { HealhyResponse, 9202 } }
+				new CallTrace { { HealthyResponse, 9201 } },
+				new CallTrace { { PingSuccess, 9202 }, { HealthyResponse, 9202 } }
 			);
 		}
 	}

@@ -18,10 +18,12 @@ namespace Tests.Framework
 		private IDictionary<int, State> Calls = new Dictionary<int, State> { };
 
 		private VirtualCluster _cluster;
+		private TestableDateTimeProvider _dateTimeProvider;
 
-		public VirtualClusterConnection(VirtualCluster cluster)
+		public VirtualClusterConnection(VirtualCluster cluster, TestableDateTimeProvider dateTimeProvider) 
 		{
 			this.UpdateCluster(cluster);
+			this._dateTimeProvider = dateTimeProvider;
 		}
 
 		public void UpdateCluster(VirtualCluster cluster)
@@ -83,9 +85,7 @@ namespace Tests.Framework
 				if (rule.OnPort.Value == requestData.Uri.Port)
 				{
 					if (always)
-						return rule.Succeeds
-							? Success<TReturn, TRule>(requestData, beforeReturn, successResponse, rule)
-							: Fail<TReturn>(requestData);
+						return Always<TReturn, TRule>(requestData, beforeReturn, successResponse, rule);
 
 					return Sometimes<TReturn, TRule>(requestData, beforeReturn, successResponse, state, rule, times);
 				}
@@ -95,18 +95,30 @@ namespace Tests.Framework
 				var always = rule.Times.Match(t => true, t => false);
 				var times = rule.Times.Match(t => -1, t => t);
 				if (always)
-					return rule.Succeeds
-						? Success<TReturn, TRule>(requestData, beforeReturn, successResponse, rule)
-						: Fail<TReturn>(requestData);
+					return Always<TReturn, TRule>(requestData, beforeReturn, successResponse, rule);
+
 				return Sometimes<TReturn, TRule>(requestData, beforeReturn, successResponse, state, rule, times);
 			}
 			return this.ReturnConnectionStatus<TReturn>(requestData, successResponse());
+		}
+
+		private ElasticsearchResponse<TReturn> Always<TReturn, TRule>(RequestData requestData, Action<TRule> beforeReturn, Func<byte[]> successResponse, TRule rule)
+			where TReturn : class
+			where TRule : IRule
+		{
+			if (rule.Takes != null) this._dateTimeProvider.ChangeTime(rule.Takes);
+
+			return rule.Succeeds
+				? Success<TReturn, TRule>(requestData, beforeReturn, successResponse, rule)
+				: Fail<TReturn>(requestData);
 		}
 
 		private ElasticsearchResponse<TReturn> Sometimes<TReturn, TRule>(RequestData requestData, Action<TRule> beforeReturn, Func<byte[]> successResponse, State state, TRule rule, int times)
 			where TReturn : class
 			where TRule : IRule
 		{
+			if (rule.Takes != null) this._dateTimeProvider.ChangeTime(rule.Takes);
+
 			if (rule.Succeeds && times >= state.Successes)
 				return Success<TReturn, TRule>(requestData, beforeReturn, successResponse, rule);
 			else if (rule.Succeeds) return Fail<TReturn>(requestData);

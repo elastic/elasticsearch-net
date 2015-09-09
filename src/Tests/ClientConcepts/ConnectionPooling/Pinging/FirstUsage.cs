@@ -44,7 +44,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Pinging
 				/** The first call goes to 9200 which succeeds */
 				new CallTrace { 
 					{ PingSuccess, 9200},
-					{ HealhyResponse, 9200},
+					{ HealthyResponse, 9200},
 					{ pool =>
 					{
 						pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(0);
@@ -54,7 +54,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Pinging
 				* It fails so we wrap over to node 9200 which we've already pinged */
 				new CallTrace { 
 					{ PingFailure, 9201},
-					{ HealhyResponse, 9200},
+					{ HealthyResponse, 9200},
 					/** Finally we assert that the connectionpool has one node that is marked as dead */
 					{ pool =>  pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(1) }
 				}
@@ -77,7 +77,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Pinging
 				/** The first call goes to 9200 which succeeds */
 				new CallTrace { 
 					{ PingSuccess, 9200},
-					{ HealhyResponse, 9200},
+					{ HealthyResponse, 9200},
 					{ pool =>
 					{
 						pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(0);
@@ -90,7 +90,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Pinging
 					{ PingFailure, 9201},
 					{ PingFailure, 9202},
 					{ PingSuccess, 9203},
-					{ HealhyResponse, 9203},
+					{ HealthyResponse, 9203},
 					/** Finally we assert that the connectionpool has two nodes that are marked as dead */
 					{ pool =>  pool.Nodes.Where(n=>!n.IsAlive).Should().HaveCount(2) }
 				}
@@ -108,15 +108,15 @@ namespace Tests.ClientConcepts.ConnectionPooling.Pinging
 			);
 
 			await audit.TraceCalls(
-				new CallTrace { { PingSuccess, 9200}, { HealhyResponse, 9200} },
-				new CallTrace { { PingSuccess, 9201}, { HealhyResponse, 9201} },
-				new CallTrace { { PingSuccess, 9202}, { HealhyResponse, 9202} },
-				new CallTrace { { PingSuccess, 9203}, { HealhyResponse, 9203} },
-				new CallTrace { { HealhyResponse, 9200} },
-				new CallTrace { { HealhyResponse, 9201} },
-				new CallTrace { { HealhyResponse, 9202} },
-				new CallTrace { { HealhyResponse, 9203} },
-				new CallTrace { { HealhyResponse, 9200} }
+				new CallTrace { { PingSuccess, 9200}, { HealthyResponse, 9200} },
+				new CallTrace { { PingSuccess, 9201}, { HealthyResponse, 9201} },
+				new CallTrace { { PingSuccess, 9202}, { HealthyResponse, 9202} },
+				new CallTrace { { PingSuccess, 9203}, { HealthyResponse, 9203} },
+				new CallTrace { { HealthyResponse, 9200} },
+				new CallTrace { { HealthyResponse, 9201} },
+				new CallTrace { { HealthyResponse, 9202} },
+				new CallTrace { { HealthyResponse, 9203} },
+				new CallTrace { { HealthyResponse, 9200} }
 			);
 		}
 	}

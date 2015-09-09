@@ -81,6 +81,7 @@
     <Compile Include="Analysis\TokenFilters\TokenizerTests.cs" />
     <Compile Include="Analysis\Tokenizers\TokenizerTests.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\BuildingBlocks\Transports.cs" />
+    <Compile Include="ClientConcepts\ConnectionPooling\MaxRetries\RespectsMaxRetry.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\RoundRobin\VolatileUpdates.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\RoundRobin\RoundRobin.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\RoundRobin\SkipDeadNodes.cs" />
@@ -110,7 +111,11 @@
     <Compile Include="Framework\Providers\TestableDateTimeProvider.cs" />
     <Compile Include="Framework\VirtualClustering\Cluster.cs" />
     <Compile Include="Framework\VirtualClustering\FixedPipelineFactory.cs" />
-    <Compile Include="Framework\VirtualClustering\Rules.cs" />
+    <Compile Include="Framework\VirtualClustering\Rules\ClientCallRule.cs" />
+    <Compile Include="Framework\VirtualClustering\Rules\PingRule.cs" />
+    <Compile Include="Framework\VirtualClustering\Rules\RuleBase.cs" />
+    <Compile Include="Framework\VirtualClustering\Rules\SniffRule.cs" />
+    <Compile Include="Framework\VirtualClustering\Rules\TimesHelper.cs" />
     <Compile Include="Framework\VirtualClustering\SealedVirtualCluster.cs" />
     <Compile Include="Framework\VirtualClustering\VirtualCluster.cs" />
     <Compile Include="Framework\VirtualClustering\VirtualClusterConnection.cs" />

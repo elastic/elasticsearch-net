@@ -13,6 +13,6 @@ namespace Elasticsearch.Net.Connection
 
 		SkipNode,
 		BadResponse,
-		HealhyResponse
+		HealthyResponse
 	}
 }

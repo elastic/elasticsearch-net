@@ -71,6 +71,9 @@ namespace Elasticsearch.Net.Connection
 			var node = this.CurrentNode;
 			var deadUntil = this._dateTimeProvider.DeadTime(node.FailedAttempts, this._settings.DeadTimeout, this._settings.MaxDeadTimeout);
 			node.MarkDead(deadUntil);
+
+			var currentRetryCount = this._retried;
+			this._retried++;
 		}
 
 		public void MarkAlive() => this.CurrentNode.MarkAlive();
@@ -173,27 +176,25 @@ namespace Elasticsearch.Net.Connection
 
 		public IEnumerable<Node> NextNode()
 		{
-			if (this.Retried >= this.MaxRetries + 1)  yield break;
 			foreach (var node in this._connectionPool.CreateView())
 			{
+				if (this.Retried >= this.MaxRetries + 1 || this.IsTakingTooLong)  yield break;
 				this.CurrentNode = node;
 				yield return node;
 			}
 		}
 
-		public void BadResponse(IApiCallDetails response, List<ElasticsearchException> seenExceptions)
+		public void BadResponse<TReturn>(ref ElasticsearchResponse<TReturn> response, RequestData data, List<ElasticsearchException> seenExceptions)
+			where TReturn : class
 		{
-			this.MarkDead();
-			var currentRetryCount = this._retried;
-			this._retried++;
-
-			if (!this.IsTakingTooLong || currentRetryCount < this.MaxRetries)
-				return;
+			var pipelineFailure = PipelineFailure.BadResponse;
+			if (this.IsTakingTooLong) pipelineFailure = PipelineFailure.RetryTimeout;
+			if (this.Retried >= this.MaxRetries) pipelineFailure = PipelineFailure.RetryMaximum;
 
 			Exception seenAggregate = seenExceptions.HasAny() ? new AggregateException(seenExceptions) : null;
-
-			if (this.IsTakingTooLong) throw new ElasticsearchException(PipelineFailure.RetryTimeout, response, seenAggregate);
-			throw new ElasticsearchException(PipelineFailure.RetryMaximum, response, seenAggregate);
+			if (response == null)
+				response = data.CreateResponse<TReturn>(new ElasticsearchException(pipelineFailure, seenAggregate));
+			response.AuditTrail = this.AuditTrail;
 		}
 
 		TimeSpan PingTimeout =>
@@ -329,7 +330,7 @@ namespace Elasticsearch.Net.Connection
 
 		public ElasticsearchResponse<TReturn> CallElasticsearch<TReturn>(RequestData requestData) where TReturn : class
 		{
-			using (var audit = this.Audit(AuditEvent.HealhyResponse))
+			using (var audit = this.Audit(AuditEvent.HealthyResponse))
 			{
 				audit.Node = this.CurrentNode;
 				audit.Path = requestData.Path;
@@ -355,7 +356,7 @@ namespace Elasticsearch.Net.Connection
 
 		public async Task<ElasticsearchResponse<TReturn>> CallElasticsearchAsync<TReturn>(RequestData requestData) where TReturn : class
 		{
-			using (var audit = this.Audit(AuditEvent.HealhyResponse))
+			using (var audit = this.Audit(AuditEvent.HealthyResponse))
 			{
 				audit.Node = this.CurrentNode;
 				audit.Path = requestData.Path;

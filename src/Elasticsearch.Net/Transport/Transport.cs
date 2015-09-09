@@ -92,8 +92,8 @@ namespace Elasticsearch.Net.Connection
 						pipeline.MarkAlive();
 						return response;
 					}
-					pipeline.BadResponse(response, exceptions);
 				}
+				pipeline.BadResponse(ref response, requestData, exceptions);
 				return response;
 			}
 		}
@@ -131,8 +131,8 @@ namespace Elasticsearch.Net.Connection
 						pipeline.MarkAlive();
 						return response;
 					}
-					pipeline.BadResponse(response, exceptions);
 				}
+				pipeline.BadResponse(ref response, requestData, exceptions);
 				return response;
 			}
 		}
