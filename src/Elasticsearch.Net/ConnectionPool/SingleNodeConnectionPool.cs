@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Elasticsearch.Net.Connection;
+using Elasticsearch.Net.Providers;
 
 namespace Elasticsearch.Net.ConnectionPool
 {
@@ -21,13 +22,14 @@ namespace Elasticsearch.Net.ConnectionPool
 
 		public IReadOnlyCollection<Node> Nodes { get; }
 
-		public DateTime? LastUpdate { get; set; }
+		public DateTime LastUpdate { get; set; }
 
-		public SingleNodeConnectionPool(Uri uri)
+		public SingleNodeConnectionPool(Uri uri, IDateTimeProvider dateTimeProvider = null)
 		{
 			this._node = new Node(uri);
 			this.UsingSsl = this._node.Uri.Scheme == Uri.UriSchemeHttps;
 			this.Nodes = new List<Node> { this._node };
+			this.LastUpdate = (dateTimeProvider ?? new DateTimeProvider()).Now();
 		}
 
 		public IEnumerable<Node> CreateView()

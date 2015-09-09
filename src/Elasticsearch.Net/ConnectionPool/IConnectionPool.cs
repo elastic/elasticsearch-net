@@ -8,7 +8,8 @@ namespace Elasticsearch.Net.ConnectionPool
 	public interface IConnectionPool
 	{
 		/// <summary>
-		/// Returns a readonly constant view of all the nodes in the cluster, this might involve creating copies of the nodes e.g if you are using the sniffing connectionpool.
+		/// Returns a readonly constant view of all the nodes in the cluster, this might involve creating copies of the nodes e.g 
+		/// if you are using the sniffing connectionpool. If you do not need an isolated copy of the nodes please read `CreateView()` to completion
 		/// </summary>
 		IReadOnlyCollection<Node> Nodes { get; }
 
@@ -26,7 +27,7 @@ namespace Elasticsearch.Net.ConnectionPool
 
 		bool SupportsPinging { get; }
 
-		DateTime? LastUpdate { get; set; }
+		DateTime LastUpdate { get; set; }
 
 		/// <summary>
 		/// Whether or not SSL is being using

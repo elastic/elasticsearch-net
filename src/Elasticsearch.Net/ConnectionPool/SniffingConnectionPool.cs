@@ -54,8 +54,7 @@ namespace Elasticsearch.Net.ConnectionPool
 
 				this.InternalNodes = sortedNodes;
 				this._globalCursor = -1;
-				//Interlocked.Exchange(ref this.InternalNodes, n);
-
+				this.LastUpdate = this.DateTimeProvider.Now();
 			}
 			finally
 			{

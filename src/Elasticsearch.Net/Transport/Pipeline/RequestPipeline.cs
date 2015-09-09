@@ -83,6 +83,21 @@ namespace Elasticsearch.Net.Connection
 
 		public bool SniffsOnConnectionFailure => this._connectionPool.SupportsReseeding && this._settings.SniffsOnConnectionFault;
 
+		public bool OutOfDateClusterInformation
+		{
+			get
+			{
+				if (!this._connectionPool.SupportsReseeding) return false;
+				var sniffLifeSpan = this._settings.SniffInformationLifeSpan;
+				if (!sniffLifeSpan.HasValue) return false;
+
+				var now = this._dateTimeProvider.Now();
+				var lastSniff = this._connectionPool.LastUpdate;
+
+				return sniffLifeSpan.Value < (now - lastSniff);
+			}
+		}
+
 		public void FirstPoolUsage(SemaphoreSlim semaphore)
 		{
 			if (!this.FirstPoolUsageNeedsSniffing) return;
@@ -145,20 +160,6 @@ namespace Elasticsearch.Net.Connection
 			}
 		}
 
-		public bool OutOfDateClusterInformation
-		{
-			get
-			{
-				if (!this._connectionPool.SupportsReseeding) return false;
-				var sniffLifeSpan = this._settings.SniffInformationLifeSpan;
-				if (!sniffLifeSpan.HasValue) return false;
-
-				var now = this._dateTimeProvider.Now();
-				var lastSniff = this._connectionPool.LastUpdate;
-
-				return !lastSniff.HasValue || (lastSniff.HasValue && sniffLifeSpan.Value < (now - lastSniff.Value));
-			}
-		}
 
 		public bool IsTakingTooLong
 		{

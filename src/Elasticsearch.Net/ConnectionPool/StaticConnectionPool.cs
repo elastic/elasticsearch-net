@@ -28,7 +28,7 @@ namespace Elasticsearch.Net.ConnectionPool
 
 		public bool SniffedOnStartup { get; set; }
 
-		public DateTime? LastUpdate { get; set; }
+		public DateTime LastUpdate { get; set; }
 
 		public StaticConnectionPool(IEnumerable<Uri> uris, bool randomize = true, IDateTimeProvider dateTimeProvider = null)
 			: this(uris.Select(uri=>new Node(uri)), randomize, dateTimeProvider) { }
@@ -50,6 +50,7 @@ namespace Elasticsearch.Net.ConnectionPool
 				.OrderBy((item) => randomize ? this.Random.Next() : 1)
 				.DistinctBy(n=>n.Uri)
 				.ToList();
+			this.LastUpdate = dateTimeProvider.Now();
 		}
 
 		protected int _globalCursor = -1;

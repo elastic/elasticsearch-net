@@ -74,6 +74,7 @@ namespace Elasticsearch.Net.Connection
 				{
 					try
 					{
+						pipeline.SniffOnStaleCluster();
 						pipeline.Ping();
 						response = pipeline.CallElasticsearch<TReturn>(requestData);
 					}
@@ -113,6 +114,7 @@ namespace Elasticsearch.Net.Connection
 				{
 					try
 					{
+						await pipeline.SniffOnStaleClusterAsync();
 						await pipeline.PingAsync();
 						response = await pipeline.CallElasticsearchAsync<TReturn>(requestData);
 					}
