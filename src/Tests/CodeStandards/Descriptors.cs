@@ -52,5 +52,11 @@ namespace Tests.CodeStandards
 		}
 
 		//TODO methods taking params should also have a version taking IEnumerable
+
+		//TODO some interfaces are implemented by both requests as well isolated classes to be used elsewhere in the DSL
+		//We need to write tests that these have the same public methods so we do not accidentally add it without adding it to the interface
+
+		//TODO write a tests that all our abstract classes have the *Base suffix
+		//TODO write a test that assures we use Base as a suffix and not prefix
 	}
 }
