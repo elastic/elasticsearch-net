@@ -50,7 +50,7 @@ namespace Elasticsearch.Net.ConnectionPool
 				.OrderBy((item) => randomize ? this.Random.Next() : 1)
 				.DistinctBy(n=>n.Uri)
 				.ToList();
-			this.LastUpdate = dateTimeProvider.Now();
+			this.LastUpdate = this.DateTimeProvider.Now();
 		}
 
 		protected int _globalCursor = -1;

@@ -160,7 +160,6 @@ namespace Elasticsearch.Net.Connection
 			}
 		}
 
-
 		public bool IsTakingTooLong
 		{
 			get
@@ -184,7 +183,6 @@ namespace Elasticsearch.Net.Connection
 			//This for loops allows to break out of the view state machine if we need to 
 			//force a refresh (after reseeding connectionpool). We have a hardcoded limit of only
 			//allowing 100 of these refreshes per call
-			//TODO discuss with @gmarz lower limit?
 			for (var i = 0; i < 100; i++)
 			{
 				if (this.Retried >= this.MaxRetries + 1 || this.IsTakingTooLong) yield break;
