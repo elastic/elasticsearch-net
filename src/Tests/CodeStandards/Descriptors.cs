@@ -50,5 +50,7 @@ namespace Tests.CodeStandards
 
 			selectorMethods.Should().BeEmpty();
 		}
+
+		//TODO methods taking params should also have a version taking IEnumerable
 	}
 }

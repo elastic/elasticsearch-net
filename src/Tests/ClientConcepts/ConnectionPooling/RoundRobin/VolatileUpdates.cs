@@ -71,7 +71,7 @@ namespace Tests.ClientConcepts.LowLevel
 
 		private IEnumerable<int> CallGetNext(IConnectionPool pool)
 		{
-			foreach (var n in pool.CreateView().ToList()) yield return n.Uri.Port;
+			foreach (var n in pool.CreateView()) yield return n.Uri.Port;
 		}
 	}
 }
