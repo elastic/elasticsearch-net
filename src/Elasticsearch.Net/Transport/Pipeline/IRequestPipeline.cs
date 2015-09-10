@@ -20,13 +20,13 @@ namespace Elasticsearch.Net.Connection
 		ElasticsearchResponse<TReturn> CallElasticsearch<TReturn>(RequestData requestData) where TReturn : class;
 		Task<ElasticsearchResponse<TReturn>> CallElasticsearchAsync<TReturn>(RequestData requestData) where TReturn : class;
 
-		void MarkAlive();
-		void MarkDead();
+		void MarkAlive(Node node);
+		void MarkDead(Node node);
 
 		IEnumerable<Node> NextNode();
 
-		void Ping();
-		Task PingAsync();
+		void Ping(Node node);
+		Task PingAsync(Node node);
 
 		void FirstPoolUsage(SemaphoreSlim semaphore);
 		Task FirstPoolUsageAsync(SemaphoreSlim semaphore);
