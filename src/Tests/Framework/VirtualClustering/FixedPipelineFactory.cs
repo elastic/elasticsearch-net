@@ -18,7 +18,6 @@ namespace Tests.Framework
 
 		public IDateTimeProvider DateTimeProvider { get; }
 		public MemoryStreamFactory MemoryStreamFactory { get; }
-		public RequestParameters RequestParameters { get; }
 
 		public ElasticClient Client => new ElasticClient(this.Transport);
 
@@ -26,12 +25,11 @@ namespace Tests.Framework
 		{
 			this.DateTimeProvider = new DateTimeProvider();
 			this.MemoryStreamFactory = new MemoryStreamFactory();
-			this.RequestParameters = new RequestParameters();
 
 			var uris = new[] { TestClient.CreateNode(), TestClient.CreateNode(9201) };
 			var settings = new ConnectionSettings(setupPool(uris), TestClient.CreateConnection());
 			this.Settings = settingsSelector?.Invoke(settings) ?? settings;
-			this.Pipeline = new RequestPipeline(this.Settings, this.DateTimeProvider, this.MemoryStreamFactory, new RequestParameters());
+			this.Pipeline = new RequestPipeline(this.Settings, this.DateTimeProvider, this.MemoryStreamFactory, new SearchRequestParameters());
 			this.Transport = new Transport<IConnectionSettingsValues>(this.Settings, this, this.DateTimeProvider, this.MemoryStreamFactory);
 		}
 
@@ -39,16 +37,15 @@ namespace Tests.Framework
 		{
 			this.DateTimeProvider = dateTimeProvider;
 			this.MemoryStreamFactory = new MemoryStreamFactory();
-			this.RequestParameters = new RequestParameters();
 
 			this.Settings = connectionSettings;
-			this.Pipeline = new RequestPipeline(this.Settings, this.DateTimeProvider, this.MemoryStreamFactory, new RequestParameters());
+			this.Pipeline = new RequestPipeline(this.Settings, this.DateTimeProvider, this.MemoryStreamFactory, new SearchRequestParameters());
 			this.Transport = new Transport<IConnectionSettingsValues>(this.Settings, this, this.DateTimeProvider, this.MemoryStreamFactory);
 		}
 
 		public IRequestPipeline Create(IConnectionConfigurationValues configurationValues, IDateTimeProvider dateTimeProvider, IMemoryStreamFactory memorystreamFactory, IRequestParameters requestParameters)
 		{
-			return new RequestPipeline(this.Settings, this.DateTimeProvider, this.MemoryStreamFactory, new RequestParameters());
+			return new RequestPipeline(this.Settings, this.DateTimeProvider, this.MemoryStreamFactory, new SearchRequestParameters());
 			///return this.Pipeline;
 		}
 

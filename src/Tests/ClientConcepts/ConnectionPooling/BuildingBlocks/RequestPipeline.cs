@@ -26,12 +26,12 @@ namespace Tests.ClientConcepts.LowLevel
 			var settings = TestClient.CreateSettings();
 
 			/** When calling Request(Async) on Transport the whole coordination of the request is deferred to a new instance in a `using` block. */
-			var pipeline = new RequestPipeline(settings, new DateTimeProvider(), new MemoryStreamFactory(), new RequestParameters());
+			var pipeline = new RequestPipeline(settings, new DateTimeProvider(), new MemoryStreamFactory(), new SearchRequestParameters());
 			pipeline.GetType().Should().Implement<IDisposable>();
 
 			/** However the transport does not instantiate RequestPipeline directly, it uses a pluggable `IRequestPipelineFactory`*/
 			var requestPipelineFactory = new RequestPipelineFactory();
-			var requestPipeline = requestPipelineFactory.Create(settings, new DateTimeProvider(), new MemoryStreamFactory(), new RequestParameters());
+			var requestPipeline = requestPipelineFactory.Create(settings, new DateTimeProvider(), new MemoryStreamFactory(), new SearchRequestParameters());
 			requestPipeline.Should().BeOfType<RequestPipeline>();
 			requestPipeline.GetType().Should().Implement<IDisposable>();
 

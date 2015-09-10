@@ -83,7 +83,6 @@
     <Compile Include="Transport\Sniff\SniffResponse.cs" />
     <Compile Include="Transport\PostData.cs" />
     <Compile Include="Transport\Transport.cs" />
-    <Compile Include="Domain\RequestParameters\BaseRequestParameters.cs" />
     <Compile Include="Responses\IApiCallDetails.cs" />
     <Compile Include="Domain\IHideObjectMembers.cs" />
     <Compile Include="Domain\RequestParameters\IRequestParameters.cs" />
