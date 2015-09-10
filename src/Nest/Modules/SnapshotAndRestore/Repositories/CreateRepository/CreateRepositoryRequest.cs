@@ -12,24 +12,11 @@ namespace Nest
 		IRepository Repository { get; set; }
 	}
 
-	internal static class CreateRepositoryPathInfo
-	{
-		public static void Update(ElasticsearchPathInfo<CreateRepositoryRequestParameters> pathInfo, ICreateRepositoryRequest request)
-		{
-			pathInfo.HttpMethod = HttpMethod.PUT;
-		}
-	}
-	
 	public partial class CreateRepositoryRequest : RepositoryPathBase<CreateRepositoryRequestParameters>, ICreateRepositoryRequest
 	{
 		public CreateRepositoryRequest(string repositoryName) : base(repositoryName) { }
 
 		public IRepository Repository { get; set; }
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CreateRepositoryRequestParameters> pathInfo)
-		{
-			CreateRepositoryPathInfo.Update(pathInfo, this);
-		}
 	}
 
 	[DescriptorFor("SnapshotCreateRepository")]
@@ -103,11 +90,5 @@ namespace Nest
 			Self.Repository = repository;
 			return this;
 		}
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CreateRepositoryRequestParameters> pathInfo)
-		{
-			CreateRepositoryPathInfo.Update(pathInfo, this);
-		}
-
 	}
 }

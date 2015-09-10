@@ -12,13 +12,9 @@ namespace Nest
 	{
 	}
 
-	public partial class GetSearchTemplateRequest 
-		: NamePathBase<GetTemplateRequestParameters>, IGetSearchTemplateRequest
+	public partial class GetSearchTemplateRequest : NamePathBase<GetTemplateRequestParameters>, IGetSearchTemplateRequest
 	{
-		public GetSearchTemplateRequest(string templateName)
-			: base(templateName)
-		{
-		}
+		public GetSearchTemplateRequest(string templateName) : base(templateName) { }
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<GetTemplateRequestParameters> pathInfo)
 		{

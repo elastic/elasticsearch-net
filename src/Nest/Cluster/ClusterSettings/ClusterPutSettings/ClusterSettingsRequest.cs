@@ -6,15 +6,6 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-
-	internal static class ClusterSettingsPathInfo
-	{
-		public static void Update(ElasticsearchPathInfo<ClusterSettingsRequestParameters> pathInfo, IClusterSettingsRequest request)
-		{
-			pathInfo.HttpMethod = HttpMethod.PUT;
-		}
-	}
-
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IClusterSettingsRequest : IRequest<ClusterSettingsRequestParameters>
 	{
@@ -31,11 +22,6 @@ namespace Nest
 		public IDictionary<string, object> Persistent { get; set; }
 
 		public IDictionary<string, object> Transient { get; set; }
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ClusterSettingsRequestParameters> pathInfo)
-		{
-			ClusterSettingsPathInfo.Update(pathInfo, this);
-		}
 	}
 
 	[DescriptorFor("ClusterPutSettings")]
@@ -62,13 +48,5 @@ namespace Nest
 			Self.Transient = selector(new FluentDictionary<string, object>());
 			return this;
 		}
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ClusterSettingsRequestParameters> pathInfo)
-		{
-			ClusterSettingsPathInfo.Update(pathInfo, this);
-		}
 	}
-	
-
-	
 }

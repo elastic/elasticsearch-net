@@ -14,22 +14,9 @@ namespace Nest
 		IList<IMultiGetOperation> GetOperations { get; set; }
 	}
 
-	internal static class MultiGetPathInfo
-	{
-		public static void Update(ElasticsearchPathInfo<MultiGetRequestParameters> pathInfo, IMultiGetRequest request)
-		{
-			pathInfo.HttpMethod = HttpMethod.POST;
-		}
-	}
-	
 	public partial class MultiGetRequest : FixedIndexTypePathBase<MultiGetRequestParameters>, IMultiGetRequest
 	{
 		public IList<IMultiGetOperation> GetOperations { get; set; }
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<MultiGetRequestParameters> pathInfo)
-		{
-			MultiGetPathInfo.Update(pathInfo, this);
-		}
 	}
 
 	[DescriptorFor("Mget")]
@@ -71,11 +58,6 @@ namespace Nest
 				this.Self.GetOperations.Add(sg);
 			return this;
 
-		}
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<MultiGetRequestParameters> pathInfo)
-		{
-			MultiGetPathInfo.Update(pathInfo, this);
 		}
 	}
 }

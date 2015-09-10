@@ -26,7 +26,6 @@ namespace Nest
 				&& request.AllIndices.GetValueOrDefault(false)
 				&& request.AllTypes.GetValueOrDefault(false))
 				pathInfo.Index = "_all";
-
 		}
 	}
 	

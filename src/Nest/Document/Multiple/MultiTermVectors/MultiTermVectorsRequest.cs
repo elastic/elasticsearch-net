@@ -14,27 +14,11 @@ namespace Nest
 		IEnumerable<MultiTermVectorDocument> Documents { get; set;}
 	}
 
-	internal static class MultiTermVectorsPathInfo
-	{
-		public static void Update(ElasticsearchPathInfo<MultiTermVectorsRequestParameters> pathInfo, IMultiTermVectorsRequest request)
-		{
-			pathInfo.HttpMethod = HttpMethod.POST;
-		}
-	}
-	
 	public partial class MultiTermVectorsRequest : IndexTypePathBase<MultiTermVectorsRequestParameters>, IMultiTermVectorsRequest
 	{
-		public MultiTermVectorsRequest(IndexName index, TypeName typeNameMarker) : base(index, typeNameMarker)
-		{
-		}
+		public MultiTermVectorsRequest(IndexName index, TypeName typeNameMarker) : base(index, typeNameMarker) { }
 
 		public IEnumerable<MultiTermVectorDocument> Documents { get; set; }
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<MultiTermVectorsRequestParameters> pathInfo)
-		{
-			MultiTermVectorsPathInfo.Update(pathInfo, this);
-		}
-
 	}
 
 	[DescriptorFor("Mtermvectors")]
@@ -76,11 +60,5 @@ namespace Nest
 		{
 			return this.Documents(ids.Select(id => new MultiTermVectorDocument { Id = id.ToString(CultureInfo.InvariantCulture) }));
 		}
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<MultiTermVectorsRequestParameters> pathInfo)
-		{
-			pathInfo.HttpMethod = HttpMethod.POST;
-		}
-
 	}
 }

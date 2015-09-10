@@ -9,28 +9,12 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IRecoveryStatusRequest : IIndicesOptionalPath<RecoveryStatusRequestParameters> { }
 
-	internal static class RecoveryStatusPathInfo
-	{
-		public static void Update(ElasticsearchPathInfo<RecoveryStatusRequestParameters> pathInfo, IRecoveryStatusRequest request)
-		{
-			pathInfo.HttpMethod = HttpMethod.GET;
-		}
-	}
-	
 	public partial class RecoveryStatusRequest : IndicesOptionalPathBase<RecoveryStatusRequestParameters>, IRecoveryStatusRequest
 	{
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<RecoveryStatusRequestParameters> pathInfo)
-		{
-			RecoveryStatusPathInfo.Update(pathInfo, this);
-		}
 	}
 
 	[DescriptorFor("IndicesRecovery")]
 	public partial class RecoveryStatusDescriptor : IndicesOptionalPathDescriptor<RecoveryStatusDescriptor, RecoveryStatusRequestParameters>, IRecoveryStatusRequest
 	{
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<RecoveryStatusRequestParameters> pathInfo)
-		{
-			RecoveryStatusPathInfo.Update(pathInfo, this);
-		}
 	}
 }

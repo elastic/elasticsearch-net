@@ -8,12 +8,10 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface ICountRequest : IQueryPath<CountRequestParameters>
 	{
-		
 		[JsonProperty("query")]
 		IQueryContainer Query { get; set; }
 	}
-	public interface ICountRequest<T> : ICountRequest
-		where T : class {}
+	public interface ICountRequest<T> : ICountRequest where T : class {}
 
 	internal static class CountPathInfo
 	{

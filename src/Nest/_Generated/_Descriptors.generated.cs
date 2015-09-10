@@ -703,7 +703,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for CountPercolateGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-percolate.html</pre></summary>
+	///<summary>descriptor for CountPercolate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-percolate.html</pre></summary>
 	public partial class PercolateCountDescriptor<T> 
 	{
 		///<summary>A comma-separated list of specific routing values</summary>
@@ -871,7 +871,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for ExplainGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-explain.html</pre></summary>
+	///<summary>descriptor for Explain <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-explain.html</pre></summary>
 	public partial class ExplainDescriptor<T> 
 	{
 		///<summary>Specify whether wildcards and prefix queries in the query string query should be analyzed (default: false)</summary>
@@ -936,7 +936,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for FieldStatsGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-stats.html</pre></summary>
+	///<summary>descriptor for FieldStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-stats.html</pre></summary>
 	public partial class FieldStatsDescriptor 
 	{
 		///<summary>A comma-separated list of fields for to get field statistics for (min value, max value, and more)</summary>
@@ -1146,7 +1146,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for IndicesAnalyzeGetForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-analyze.html</pre></summary>
+	///<summary>descriptor for IndicesAnalyzeForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-analyze.html</pre></summary>
 	public partial class AnalyzeDescriptor 
 	{
 		///<summary>The name of the analyzer to use</summary>
@@ -1439,6 +1439,15 @@ namespace Nest
 	///<summary>descriptor for IndicesFlushSyncedForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush.html</pre></summary>
 	public partial class SyncedFlushDescriptor 
 	{
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public SyncedFlushDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => _requestParams(p=>p.IgnoreUnavailable(ignore_unavailable));
+
+		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		public SyncedFlushDescriptor AllowNoIndices(bool allow_no_indices = true) => _requestParams(p=>p.AllowNoIndices(allow_no_indices));
+
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public SyncedFlushDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => _requestParams(p=>p.ExpandWildcards(expand_wildcards));
+
 		///<summary>The URL-encoded request definition</summary>
 		public SyncedFlushDescriptor Source(string source) => _requestParams(p=>p.Source(source));
 
@@ -2014,7 +2023,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for IndicesValidateQueryGetForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html</pre></summary>
+	///<summary>descriptor for IndicesValidateQueryForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html</pre></summary>
 	public partial class ValidateQueryDescriptor<T> 
 	{
 		///<summary>Return detailed information about the error</summary>
@@ -2075,7 +2084,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for MgetGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-get.html</pre></summary>
+	///<summary>descriptor for Mget <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-get.html</pre></summary>
 	public partial class MultiGetDescriptor 
 	{
 		///<summary>A comma-separated list of fields to return in the response</summary>
@@ -2119,7 +2128,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for MpercolateGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-percolate.html</pre></summary>
+	///<summary>descriptor for Mpercolate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-percolate.html</pre></summary>
 	public partial class MultiPercolateDescriptor 
 	{
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -2139,7 +2148,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for MsearchGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-multi-search.html</pre></summary>
+	///<summary>descriptor for Msearch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-multi-search.html</pre></summary>
 	public partial class MultiSearchDescriptor 
 	{
 		///<summary>Search operation type</summary>
@@ -2153,7 +2162,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for MtermvectorsGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html</pre></summary>
+	///<summary>descriptor for Mtermvectors <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html</pre></summary>
 	public partial class MultiTermVectorsDescriptor<T> 
 	{
 		///<summary>Specifies if total term frequency and document frequency should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
@@ -2291,7 +2300,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for PercolateGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-percolate.html</pre></summary>
+	///<summary>descriptor for Percolate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-percolate.html</pre></summary>
 	public partial class PercolateDescriptor<T> 
 	{
 		///<summary>A comma-separated list of specific routing values</summary>
@@ -2369,7 +2378,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for RenderSearchTemplateGet <pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</pre></summary>
+	///<summary>descriptor for RenderSearchTemplate <pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</pre></summary>
 	public partial class RenderSearchTemplateDescriptor  : BasePathDescriptor<RenderSearchTemplateDescriptor,RenderSearchTemplateRequestParameters>
 	{
 		///<summary>The URL-encoded request definition</summary>
@@ -2385,7 +2394,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for ScrollGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</pre></summary>
+	///<summary>descriptor for Scroll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</pre></summary>
 	public partial class ScrollDescriptor<T> 
 	{
 		///<summary>The URL-encoded request definition</summary>
@@ -2396,7 +2405,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for SearchGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html</pre></summary>
+	///<summary>descriptor for Search <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html</pre></summary>
 	public partial class SearchDescriptor<T> 
 	{
 		///<summary>The analyzer to use for the query string</summary>
@@ -2515,7 +2524,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for SearchShardsGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html</pre></summary>
+	///<summary>descriptor for SearchShards <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html</pre></summary>
 	public partial class SearchShardsDescriptor<T> 
 	{
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
@@ -2544,7 +2553,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for SearchTemplateGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html</pre></summary>
+	///<summary>descriptor for SearchTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html</pre></summary>
 	public partial class SearchTemplateDescriptor<T> 
 	{
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -2749,7 +2758,7 @@ namespace Nest
 	
 	}
 	
-	///<summary>descriptor for TermvectorsGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html</pre></summary>
+	///<summary>descriptor for Termvectors <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html</pre></summary>
 	public partial class TermVectorsDescriptor<T> 
 	{
 		///<summary>Specifies if total term frequency and document frequency should be returned.</summary>

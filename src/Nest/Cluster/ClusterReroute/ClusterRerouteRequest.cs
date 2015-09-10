@@ -15,23 +15,10 @@ namespace Nest
 		IList<IClusterRerouteCommand> Commands { get; set; }
 	}
 
-	internal static class ClusterReroutePathInfo
-	{
-		public static void Update(ElasticsearchPathInfo<ClusterRerouteRequestParameters> pathInfo)
-		{
-			pathInfo.HttpMethod = HttpMethod.POST;
-		}
-	}
-
 	public partial class ClusterRerouteRequest 
 		: BasePathRequest<ClusterRerouteRequestParameters>, IClusterRerouteRequest
 	{
 		public IList<IClusterRerouteCommand> Commands { get; set; }
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ClusterRerouteRequestParameters> pathInfo)
-		{
-			ClusterReroutePathInfo.Update(pathInfo);
-		}
 	}
 
 	public partial class ClusterRerouteDescriptor 
@@ -40,11 +27,6 @@ namespace Nest
 		IClusterRerouteRequest Self => this;
 
 		IList<IClusterRerouteCommand> IClusterRerouteRequest.Commands { get; set; }
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ClusterRerouteRequestParameters> pathInfo)
-		{
-			ClusterReroutePathInfo.Update(pathInfo);
-		}
 
 		public ClusterRerouteDescriptor Move(Func<MoveClusterRerouteCommandDescriptor, MoveClusterRerouteCommandDescriptor> moveCommandDescriptor)
 		{

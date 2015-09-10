@@ -13,22 +13,9 @@ namespace Nest
 		IList<IAliasAction> Actions { get; set; }
 	}
 
-	internal static class BulkAliasPathInfo
-	{
-		public static void Update(ElasticsearchPathInfo<BulkAliasRequestParameters> pathInfo, IBulkAliasRequest request)
-		{
-			pathInfo.HttpMethod = HttpMethod.POST;
-		}
-	}
-	
 	public partial class BulkAliasRequest : BasePathRequest<BulkAliasRequestParameters>, IBulkAliasRequest
 	{
 		public IList<IAliasAction> Actions { get; set; }
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<BulkAliasRequestParameters> pathInfo)
-		{
-			BulkAliasPathInfo.Update(pathInfo, this);
-		}
 	}
 
 
@@ -43,11 +30,5 @@ namespace Nest
 		public BulkAliasDescriptor Add(Func<AliasAddDescriptor, AliasAddDescriptor> addSelector) => Add(addSelector?.Invoke(new AliasAddDescriptor()));
 
 		public BulkAliasDescriptor Remove(Func<AliasRemoveDescriptor, AliasRemoveDescriptor> removeSelector)=> Add(removeSelector?.Invoke(new AliasRemoveDescriptor()));
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<BulkAliasRequestParameters> pathInfo)
-		{
-			BulkAliasPathInfo.Update(pathInfo, this);
-		}
-
 	}
 }

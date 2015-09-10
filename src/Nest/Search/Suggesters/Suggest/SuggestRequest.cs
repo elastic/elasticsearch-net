@@ -17,11 +17,6 @@ namespace Nest
 
 	internal static class SuggestPathInfo
 	{
-		public static void Update(ElasticsearchPathInfo<SuggestRequestParameters> pathInfo, ISuggestRequest request)
-		{
-			pathInfo.HttpMethod = HttpMethod.POST;
-		}
-
 		public static object GetCustomJson(ISuggestRequest suggestRequest)
 		{
 			if (suggestRequest == null || (suggestRequest.GlobalText.IsNullOrEmpty() && suggestRequest.Suggest == null))
@@ -59,13 +54,7 @@ namespace Nest
 		public string GlobalText { get; set; }
 		public IDictionary<string, ISuggester> Suggest { get; set; }
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SuggestRequestParameters> pathInfo)
-		{
-			SuggestPathInfo.Update(pathInfo, this);
-		}
-
 		object ICustomJson.GetCustomJson() { return SuggestPathInfo.GetCustomJson(this); }
-
 	}
 
 
@@ -134,11 +123,6 @@ namespace Nest
 			var item = suggest(desc);
 			Self.Suggest.Add(name, item);
 			return this;
-		}
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SuggestRequestParameters> pathInfo)
-		{
-			SuggestPathInfo.Update(pathInfo, this);
 		}
 	}
 }

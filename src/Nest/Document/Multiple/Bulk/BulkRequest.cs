@@ -15,22 +15,9 @@ namespace Nest
 		IList<IBulkOperation> Operations { get; set;}
 	}
 
-	internal static class BulkPathInfo
-	{
-		public static void Update(ElasticsearchPathInfo<BulkRequestParameters> pathInfo, IBulkRequest request)
-		{
-			pathInfo.HttpMethod = HttpMethod.POST;
-		}
-	}
-	
 	public partial class BulkRequest : FixedIndexTypePathBase<BulkRequestParameters>, IBulkRequest
 	{
 		public IList<IBulkOperation> Operations { get; set; }
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<BulkRequestParameters> pathInfo)
-		{
-			BulkPathInfo.Update(pathInfo, this);
-		}
 	}
 
 	public partial class BulkDescriptor : FixedIndexTypePathDescriptor<BulkDescriptor, BulkRequestParameters>, IBulkRequest
@@ -150,11 +137,6 @@ namespace Nest
 				return this;
 			Self.Operations.Add(descriptor);
 			return this;
-		}
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<BulkRequestParameters> pathInfo)
-		{
-			BulkPathInfo.Update(pathInfo, this);
 		}
 	}
 }

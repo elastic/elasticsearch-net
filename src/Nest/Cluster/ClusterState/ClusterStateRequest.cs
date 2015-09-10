@@ -12,25 +12,9 @@ namespace Nest
 		IEnumerable<ClusterStateMetric> Metrics { get; set; }
 	}
 
-	internal static class ClusterStatePathInfo
-	{
-		public static void Update(ElasticsearchPathInfo<ClusterStateRequestParameters> pathInfo, IClusterStateRequest request)
-		{
-			pathInfo.HttpMethod = HttpMethod.GET;
-			if (request.Metrics != null)
-				pathInfo.Metric = request.Metrics.Cast<Enum>().GetStringValue();
-		}
-	}
-	
 	public partial class ClusterStateRequest : IndicesOptionalPathBase<ClusterStateRequestParameters>, IClusterStateRequest
 	{
 		public IEnumerable<ClusterStateMetric> Metrics { get; set; }
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ClusterStateRequestParameters> pathInfo)
-		{
-			ClusterStatePathInfo.Update(pathInfo, this);
-		}
-
 	}
 
 
@@ -43,11 +27,6 @@ namespace Nest
 		{
 			Self.Metrics = metrics;
 			return this;
-		}
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ClusterStateRequestParameters> pathInfo)
-		{
-			ClusterStatePathInfo.Update(pathInfo, this);
 		}
 	}
 }

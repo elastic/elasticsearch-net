@@ -10,6 +10,8 @@ namespace Elasticsearch.Net
 {
 	public interface IRequestParameters
 	{
+		HttpMethod DefaultHttpMethod { get; }
+
 		/// <summary>
 		/// The querystring that should be appended to the path of the request
 		/// </summary>

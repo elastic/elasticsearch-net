@@ -9,26 +9,7 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IClusterHealthRequest : IIndicesOptionalPath<ClusterHealthRequestParameters> { }
 
-	internal static class ClusterHealthPathInfo
-	{
-		public static void Update(ElasticsearchPathInfo<ClusterHealthRequestParameters> pathInfo, IClusterHealthRequest request)
-		{
-			pathInfo.HttpMethod = HttpMethod.GET;
-		}
-	}
-	
-	public partial class ClusterHealthRequest : IndicesOptionalPathBase<ClusterHealthRequestParameters>, IClusterHealthRequest
-	{
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ClusterHealthRequestParameters> pathInfo)
-		{
-			ClusterHealthPathInfo.Update(pathInfo, this);
-		}
-	}
-	public partial class ClusterHealthDescriptor : IndicesOptionalPathDescriptor<ClusterHealthDescriptor, ClusterHealthRequestParameters>, IClusterHealthRequest
-	{
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ClusterHealthRequestParameters> pathInfo)
-		{
-			ClusterHealthPathInfo.Update(pathInfo, this);
-		}
-	}
+	public partial class ClusterHealthRequest : IndicesOptionalPathBase<ClusterHealthRequestParameters>, IClusterHealthRequest { }
+
+	public partial class ClusterHealthDescriptor : IndicesOptionalPathDescriptor<ClusterHealthDescriptor, ClusterHealthRequestParameters>, IClusterHealthRequest { }
 }

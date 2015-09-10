@@ -4,64 +4,65 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public interface IExplainRequest : IDocumentOptionalPath<ExplainRequestParameters>
-    {
-        [JsonProperty("query")]
-        IQueryContainer Query { get; set; }
-    }
-	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public interface IExplainRequest<T> : IExplainRequest
-        where T : class { }
+	public interface IExplainRequest : IDocumentOptionalPath<ExplainRequestParameters>
+	{
+		[JsonProperty("query")]
+		IQueryContainer Query { get; set; }
+	}
 
-    internal static class ExplainPathInfo
-    {
-        public static void Update(ElasticsearchPathInfo<ExplainRequestParameters> pathInfo, IExplainRequest request)
-        {
-            var source = request.RequestParameters.GetQueryStringValue<string>("source");
-            var q = request.RequestParameters.GetQueryStringValue<string>("q");
-            pathInfo.HttpMethod = (!source.IsNullOrEmpty() || !q.IsNullOrEmpty())
-                ? HttpMethod.GET
-                : HttpMethod.POST;
-        }
-    }
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public interface IExplainRequest<T> : IExplainRequest
+		where T : class
+	{ }
 
-    public partial class ExplainRequest : DocumentPathBase<ExplainRequestParameters>, IExplainRequest
-    {
-	    public ExplainRequest(IndexName indexName, TypeName typeName, string id) : base(indexName, typeName, id) { }
+	internal static class ExplainPathInfo
+	{
+		public static void Update(ElasticsearchPathInfo<ExplainRequestParameters> pathInfo, IExplainRequest request)
+		{
+			var source = request.RequestParameters.GetQueryStringValue<string>("source");
+			var q = request.RequestParameters.GetQueryStringValue<string>("q");
+			pathInfo.HttpMethod = (!source.IsNullOrEmpty() || !q.IsNullOrEmpty())
+				? HttpMethod.GET
+				: HttpMethod.POST;
+		}
+	}
 
-	    public IQueryContainer Query { get; set; }
+	public partial class ExplainRequest : DocumentPathBase<ExplainRequestParameters>, IExplainRequest
+	{
+		public ExplainRequest(IndexName indexName, TypeName typeName, string id) : base(indexName, typeName, id) { }
 
-        protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ExplainRequestParameters> pathInfo)
-        {
-            ExplainPathInfo.Update(pathInfo, this);
-        }
-    }
+		public IQueryContainer Query { get; set; }
+
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ExplainRequestParameters> pathInfo)
+		{
+			ExplainPathInfo.Update(pathInfo, this);
+		}
+	}
 
 	public partial class ExplainRequest<T> : DocumentPathBase<ExplainRequestParameters, T>, IExplainRequest<T>
-        where T : class
-    {
-	    public ExplainRequest(string id) : base(id) { } 
-	    public ExplainRequest(long id) : base(id) { }
-	    public ExplainRequest(T document) : base(document) { }
+		where T : class
+	{
+		public ExplainRequest(string id) : base(id) { }
+		public ExplainRequest(long id) : base(id) { }
+		public ExplainRequest(T document) : base(document) { }
 
-	    public IQueryContainer Query { get; set; }
+		public IQueryContainer Query { get; set; }
 
-        protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ExplainRequestParameters> pathInfo)
-        {
-            ExplainPathInfo.Update(pathInfo, this);
-        }
-    }
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ExplainRequestParameters> pathInfo)
+		{
+			ExplainPathInfo.Update(pathInfo, this);
+		}
+	}
 
 	[DescriptorFor("Explain")]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial class ExplainDescriptor<T> : DocumentPathDescriptor<ExplainDescriptor<T>, ExplainRequestParameters, T>, IExplainRequest<T>
 		where T : class
 	{
-        private IExplainRequest Self => this;
+		private IExplainRequest Self => this;
 
-        IQueryContainer IExplainRequest.Query { get; set; }
+		IQueryContainer IExplainRequest.Query { get; set; }
 
 		public ExplainDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector)
 		{
@@ -71,7 +72,7 @@ namespace Nest
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ExplainRequestParameters> pathInfo)
 		{
-            ExplainPathInfo.Update(pathInfo, this);
+			ExplainPathInfo.Update(pathInfo, this);
 		}
 	}
 }

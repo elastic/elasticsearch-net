@@ -13,22 +13,10 @@ namespace Nest
 		IList<IPercolateOperation> Percolations { get; set; }
 	}
 
-	internal static class MultiPercolatePathInfo
-	{
-		public static void Update(ElasticsearchPathInfo<MultiPercolateRequestParameters> pathInfo, IMultiPercolateRequest request)
-		{
-			pathInfo.HttpMethod = HttpMethod.POST;
-		}
-	}
-	
 	public partial class MultiPercolateRequest : FixedIndexTypePathBase<MultiPercolateRequestParameters>, IMultiPercolateRequest
 	{
 		public IList<IPercolateOperation> Percolations { get; set; }
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<MultiPercolateRequestParameters> pathInfo)
-		{
-			MultiPercolatePathInfo.Update(pathInfo, this);
-		}
 	}
 
 	[DescriptorFor("Mpercolate")]
@@ -71,11 +59,6 @@ namespace Nest
 			var descriptor = getSelector(new PercolateCountDescriptor<T>().Index<T>().Type<T>());
 			Self.Percolations.Add(descriptor);
 			return this;
-		}
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<MultiPercolateRequestParameters> pathInfo)
-		{
-			MultiPercolatePathInfo.Update(pathInfo, this);
 		}
 	}
 }

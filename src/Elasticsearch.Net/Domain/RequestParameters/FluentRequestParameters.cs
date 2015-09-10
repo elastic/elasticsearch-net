@@ -20,6 +20,8 @@ namespace Elasticsearch.Net
 	{
 		private IRequestParameters Self { get { return this; } }
 
+		public abstract HttpMethod DefaultHttpMethod { get; }
+
 		IDictionary<string, object> IRequestParameters.QueryString { get; set; }
 		Func<IApiCallDetails, Stream, object> IRequestParameters.DeserializationOverride { get; set; }
 		IRequestConfiguration IRequestParameters.RequestConfiguration { get; set; }

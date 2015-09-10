@@ -15,14 +15,6 @@ namespace Nest
 
 	public interface ISearchShardsRequest<T> : ISearchShardsRequest {}
 
-	internal static class SearchShardsPathInfo
-	{
-		public static void Update(IConnectionSettingsValues settings, ElasticsearchPathInfo<SearchShardsRequestParameters> pathInfo, ISearchShardsRequest request)
-		{
-			pathInfo.HttpMethod = HttpMethod.GET; 
-		}
-	}
-	
 	public partial class SearchShardsRequest : QueryPathBase<SearchShardsRequestParameters>, ISearchShardsRequest
 	{
 		public SearchShardsRequest() {}
@@ -30,11 +22,6 @@ namespace Nest
 		public SearchShardsRequest(IndexName index, TypeName type = null) : base(index, type) { }
 
 		public SearchShardsRequest(IEnumerable<IndexName> indices, IEnumerable<TypeName> types = null) : base(indices, types) { }
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SearchShardsRequestParameters> pathInfo)
-		{
-			SearchShardsPathInfo.Update(settings, pathInfo, this);
-		}
 	}
 
 	public partial class SearchShardsRequest<T> : QueryPathBase<SearchShardsRequestParameters, T>, ISearchShardsRequest
@@ -45,11 +32,6 @@ namespace Nest
 		public SearchShardsRequest(IndexName index, TypeName type = null) : base(index, type) { }
 
 		public SearchShardsRequest(IEnumerable<IndexName> indices, IEnumerable<TypeName> types = null) : base(indices, types) { }
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SearchShardsRequestParameters> pathInfo)
-		{
-			SearchShardsPathInfo.Update(settings,pathInfo, this);
-		}
 	}
 
 
@@ -59,11 +41,5 @@ namespace Nest
 	public partial class SearchShardsDescriptor<T> : QueryPathDescriptorBase<SearchShardsDescriptor<T>, SearchShardsRequestParameters, T>, ISearchShardsRequest 
 		where T : class
 	{
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SearchShardsRequestParameters> pathInfo)
-		{
-			SearchShardsPathInfo.Update(settings,pathInfo, this);
-		}
-
 	}
 }

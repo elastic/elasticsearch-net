@@ -25,14 +25,6 @@ namespace Nest
 		List<string> IgnoreIndexSettings { get; set; }
 	}
 
-	internal static class RestorePathInfo
-	{
-		public static void Update(ElasticsearchPathInfo<RestoreRequestParameters> pathInfo, IRestoreRequest request)
-		{
-			pathInfo.HttpMethod = HttpMethod.POST;
-		}
-	}
-	
 	public partial class RestoreRequest : RepositorySnapshotPathBase<RestoreRequestParameters>, IRestoreRequest
 	{
 		public RestoreRequest(string repository, string snapshot) : base(repository, snapshot) { }
@@ -48,12 +40,6 @@ namespace Nest
 		public string RenameReplacement { get; set; }
 		public IUpdateSettingsRequest IndexSettings { get; set; }
 		public List<string> IgnoreIndexSettings { get; set; }
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<RestoreRequestParameters> pathInfo)
-		{
-			RestorePathInfo.Update(pathInfo, this);
-		}
-
 	}
 
 	[DescriptorFor("SnapshotRestore")]
@@ -132,9 +118,5 @@ namespace Nest
 			return this;
 		}
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<RestoreRequestParameters> pathInfo)
-		{
-			RestorePathInfo.Update(pathInfo, this);
-		}
 	}
 }

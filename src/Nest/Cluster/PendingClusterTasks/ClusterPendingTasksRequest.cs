@@ -6,33 +6,11 @@ using System.Text;
 
 namespace Nest
 {
-	internal static class ClusterPendingTasksPathInfo
-	{
-		public static void Update(ElasticsearchPathInfo<ClusterPendingTasksRequestParameters> pathInfo)
-		{
-			pathInfo.HttpMethod = HttpMethod.GET;
-		}
-	}
-
-	public interface IClusterPendingTasksRequest : IRequest<ClusterPendingTasksRequestParameters>
-	{
-	}
+	public interface IClusterPendingTasksRequest : IRequest<ClusterPendingTasksRequestParameters> { }
 
 	public partial class ClusterPendingTasksRequest 
-		: BasePathRequest<ClusterPendingTasksRequestParameters>, IClusterPendingTasksRequest
-	{
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ClusterPendingTasksRequestParameters> pathInfo)
-		{
-			ClusterPendingTasksPathInfo.Update(pathInfo);
-		}
-	}
+		: BasePathRequest<ClusterPendingTasksRequestParameters>, IClusterPendingTasksRequest { }
 
 	public partial class ClusterPendingTasksDescriptor 
-		: BasePathDescriptor<ClusterPendingTasksDescriptor, ClusterPendingTasksRequestParameters>, IClusterPendingTasksRequest
-	{
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ClusterPendingTasksRequestParameters> pathInfo)
-		{
-			ClusterPendingTasksPathInfo.Update(pathInfo);
-		}
-	}
+		: BasePathDescriptor<ClusterPendingTasksDescriptor, ClusterPendingTasksRequestParameters>, IClusterPendingTasksRequest { }
 }

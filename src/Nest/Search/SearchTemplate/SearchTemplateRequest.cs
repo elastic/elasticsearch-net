@@ -8,39 +8,6 @@ using System.Text;
 
 namespace Nest
 {
-	internal static class SearchTemplatePathInfo
-	{
-		public static void Update(ElasticsearchPathInfo<SearchTemplateRequestParameters> pathInfo)
-		{
-			pathInfo.HttpMethod = HttpMethod.POST;
-		}
-
-		/// <summary>
-		/// Based on the type information present in this descriptor create method that takes
-		/// the returned _source and hit and returns the ClrType it should deserialize too.
-		/// This is so that Documents[A] can contain actual instances of subclasses B, C as well.
-		/// If you specify types using .Types(typeof(B), typeof(C)) then NEST can automagically
-		/// create a TypeSelector based on the hits _type property.
-		/// </summary>
-		public static void CloseOverAutomagicCovariantResultSelector(ElasticInferrer infer, ISearchTemplateRequest self)
-		{
-			if (infer == null || self == null) return;
-			var returnType = self.ClrType;
-
-			if (returnType == null) return;
-
-			var types = (self.Types ?? Enumerable.Empty<TypeName>()).Where(t => t.Type != null).ToList();
-			if (self.TypeSelector != null || !types.HasAny(t => t.Type != returnType))
-				return;
-
-			var typeDictionary = types.ToDictionary(infer.TypeName, t => t.Type);
-			self.TypeSelector = (o, h) =>
-			{
-				Type t;
-				return !typeDictionary.TryGetValue(h.Type, out t) ? returnType : t;
-			};
-		}
-	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface ISearchTemplateRequest 
@@ -75,11 +42,6 @@ namespace Nest
 		private Type _clrType { get; set; }
 		Type ISearchTemplateRequest.ClrType { get { return _clrType; } }
 		public Func<dynamic, Hit<dynamic>, Type> TypeSelector { get; set; }
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SearchTemplateRequestParameters> pathInfo)
-		{
-			SearchTemplatePathInfo.Update(pathInfo);
-		}
 	}
 	
 	public partial class SearchTemplateRequest<T> 
@@ -92,11 +54,6 @@ namespace Nest
 		public IDictionary<string, object> Params { get; set; }
 		public Type ClrType { get { return typeof(T); } }
 		public Func<dynamic, Hit<dynamic>, Type> TypeSelector { get; set; }
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SearchTemplateRequestParameters> pathInfo)
-		{
-			SearchTemplatePathInfo.Update(pathInfo);
-		}
 	}
 
 	public partial class SearchTemplateDescriptor<T> 
@@ -158,11 +115,6 @@ namespace Nest
 		{
 			Self.TypeSelector = typeSelector;
 			return this;
-		}
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SearchTemplateRequestParameters> pathInfo)
-		{
-			SearchTemplatePathInfo.Update(pathInfo);
 		}
 	}
 }

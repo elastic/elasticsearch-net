@@ -551,7 +551,7 @@
     <Compile Include="Document\Multiple\Bulk\BulkOperation\BulkOperationBase.cs" />
     <Compile Include="Cluster\ClusterSettings\ClusterGetSettings\ClusterGetSettingsRequest.cs" />
     <Compile Include="Cluster\ClusterSettings\ClusterPutSettings\ClusterSettingsRequest.cs" />
-    <Compile Include="CommonAbstractions\Request\Paths\BasePathRequest.cs" />
+    <Compile Include="CommonAbstractions\Request\BasePathRequest.cs" />
     <Compile Include="CommonAbstractions\Request\BaseRequest.cs" />
     <Compile Include="Modules\SnapshotAndRestore\Snapshot\DeleteSnapshot\DeleteSnapshotRequest.cs" />
     <Compile Include="CommonAbstractions\Request\IRequest.cs" />
@@ -681,7 +681,7 @@
     <Compile Include="Indices\IndexManagement\OpenCloseIndex\CloseIndex\CloseIndexRequest.cs" />
     <Compile Include="Cluster\ClusterState\ClusterStateRequest.cs" />
     <Compile Include="Indices\StatusManagement\ClearCache\ClearCacheRequest.cs" />
-    <Compile Include="CommonAbstractions\Request\Paths\BasePath.cs" />
+    <Compile Include="CommonAbstractions\Request\BasePath.cs" />
     <Compile Include="QueryDsl\Geo\Shape\Circle\GeoShapeCircleQuery.cs" />
     <Compile Include="QueryDsl\FullText\SimpleQueryString\SimpleQueryStringQuery.cs" />
     <Compile Include="Document\Single\Source\SourceRequest.cs" />

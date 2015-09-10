@@ -19,14 +19,6 @@ namespace Nest
 		IQueryContainer Filter { get; set; }
 	}
 
-	internal static class PutAliasPathInfo
-	{
-		public static void Update(ElasticsearchPathInfo<PutAliasRequestParameters> pathInfo)
-		{
-			pathInfo.HttpMethod = HttpMethod.PUT;
-		}
-	}
-
 	public partial class PutAliasRequest : IndexOptionalNamePathBase<PutAliasRequestParameters>, IPutAliasRequest
 	{
 		public PutAliasRequest(string name) : base(name) { }
@@ -36,12 +28,6 @@ namespace Nest
 		public string Routing { get; set; }
 
 		public IQueryContainer Filter { get; set; }
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<PutAliasRequestParameters> pathInfo)
-		{
-			PutAliasPathInfo.Update(pathInfo);
-		}
-
 	}
 
 	[DescriptorFor("IndicesPutAlias")]
@@ -65,11 +51,5 @@ namespace Nest
 			Self.Filter = filterSelector(new QueryContainerDescriptor<T>());
 			return this;
 		}
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<PutAliasRequestParameters> pathInfo)
-		{
-			PutAliasPathInfo.Update(pathInfo);
-		}
-
 	}
 }

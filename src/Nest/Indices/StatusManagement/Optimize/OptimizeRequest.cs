@@ -9,14 +9,6 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IOptimizeRequest : IIndicesOptionalPath<OptimizeRequestParameters> { }
 
-	internal static class OptimizePathInfo
-	{
-		public static void Update(ElasticsearchPathInfo<OptimizeRequestParameters> pathInfo, IOptimizeRequest request)
-		{
-			pathInfo.HttpMethod = HttpMethod.POST;
-		}
-	}
-	
 	public partial class OptimizeRequest : IndicesOptionalPathBase<OptimizeRequestParameters>, IOptimizeRequest
 	{
 		
@@ -39,18 +31,9 @@ namespace Nest
 		{
 			this.Indices = indices;
 		}
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<OptimizeRequestParameters> pathInfo)
-		{
-			OptimizePathInfo.Update(pathInfo, this);
-		}
 	}
 	[DescriptorFor("IndicesOptimize")]
 	public partial class OptimizeDescriptor : IndicesOptionalPathDescriptor<OptimizeDescriptor, OptimizeRequestParameters>, IOptimizeRequest
 	{
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<OptimizeRequestParameters> pathInfo)
-		{
-			OptimizePathInfo.Update(pathInfo, this);
-		}
 	}
 }

@@ -12,28 +12,12 @@ namespace Nest
 		TemplateMapping TemplateMapping { get; set; }
 	}
 
-	internal static class PutTemplatePathInfo
-	{
-		public static void Update(ElasticsearchPathInfo<PutTemplateRequestParameters> pathInfo, IPutTemplateRequest request)
-		{
-			pathInfo.HttpMethod = HttpMethod.PUT;
-		}
-	}
-
 	public partial class PutTemplateRequest : NamePathBase<PutTemplateRequestParameters>, IPutTemplateRequest
 	{
-		public PutTemplateRequest(string name) : base(name)
-		{
-		}
+		public PutTemplateRequest(string name) : base(name) { } 
 
 		//TODO Merge this state object onto this object
 		public TemplateMapping TemplateMapping { get; set; }
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<PutTemplateRequestParameters> pathInfo)
-		{
-			PutTemplatePathInfo.Update(pathInfo, this);
-		}
-
 	}
 
 	[DescriptorFor("IndicesPutTemplate")]
@@ -100,11 +84,5 @@ namespace Nest
 			Self.TemplateMapping.Aliases = aliasDescriptor?.Invoke(new AliasesDescriptor());
 			return this;
 		}
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<PutTemplateRequestParameters> pathInfo)
-		{
-			PutTemplatePathInfo.Update(pathInfo, this);
-		}
-
 	}
 }

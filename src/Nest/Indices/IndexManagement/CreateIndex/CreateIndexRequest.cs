@@ -13,13 +13,6 @@ namespace Nest
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<CreateIndexDescriptor>))]
 	public interface ICreateIndexRequest : IIndexPath<CreateIndexRequestParameters>, IIndexState
 	{
-
-	}
-
-	internal static class CreateIndexPathInfo
-	{
-		public static void Update(ElasticsearchPathInfo<CreateIndexRequestParameters> pathInfo, ICreateIndexRequest request) =>
-			pathInfo.HttpMethod = HttpMethod.POST;
 	}
 
 	public partial class CreateIndexRequest : IndexPathBase<CreateIndexRequestParameters>, ICreateIndexRequest
@@ -37,9 +30,6 @@ namespace Nest
 		public IAliases Aliases { get; set; }
 
 		public ISimilarities Similarity { get; set; }
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CreateIndexRequestParameters> pathInfo) =>
-			CreateIndexPathInfo.Update(pathInfo, this);
 	}
 
 	[DescriptorFor("IndicesCreate")]
@@ -79,9 +69,5 @@ namespace Nest
 
 		public CreateIndexDescriptor Similarity(Func<SimilaritiesDescriptor, ISimilarities> selector) =>
 			Assign(a => a.Similarity = selector?.Invoke(new SimilaritiesDescriptor()));
-
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CreateIndexRequestParameters> pathInfo) =>
-			CreateIndexPathInfo.Update(pathInfo, this);
 	}
 }

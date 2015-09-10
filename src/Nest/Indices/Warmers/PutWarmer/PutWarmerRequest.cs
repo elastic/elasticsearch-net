@@ -13,14 +13,6 @@ namespace Nest
 		ISearchRequest SearchDescriptor { get; set; }
 	}
 
-	internal static class PutWarmerPathInfo
-	{
-		public static void Update(ElasticsearchPathInfo<PutWarmerRequestParameters> pathInfo, IPutWarmerRequest request)
-		{
-			pathInfo.HttpMethod = HttpMethod.PUT;
-		}
-	}
-	
 	public partial class PutWarmerRequest : IndicesOptionalTypesNamePathBase<PutWarmerRequestParameters>, IPutWarmerRequest
 	{
 		public PutWarmerRequest(string name)
@@ -30,11 +22,6 @@ namespace Nest
 
 		public ISearchRequest SearchDescriptor { get; set; }
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<PutWarmerRequestParameters> pathInfo)
-		{
-			PutWarmerPathInfo.Update(pathInfo, this);
-		}
-		
 		object ICustomJson.GetCustomJson() { return this.SearchDescriptor; }
 
 	}
@@ -51,11 +38,6 @@ namespace Nest
 		{
 			Self.SearchDescriptor = selector(new SearchDescriptor<T>());
 			return this;
-		}
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<PutWarmerRequestParameters> pathInfo)
-		{
-			PutWarmerPathInfo.Update(pathInfo, this);
 		}
 
 		object ICustomJson.GetCustomJson() { return Self.SearchDescriptor; }

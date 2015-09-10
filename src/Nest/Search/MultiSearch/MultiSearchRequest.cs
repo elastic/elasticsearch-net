@@ -13,25 +13,11 @@ namespace Nest
 		
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
 		IDictionary<string, ISearchRequest> Operations { get; set;}
-
 	}
 
-	internal static class MultiSearchPathInfo
-	{
-		public static void Update(ElasticsearchPathInfo<MultiSearchRequestParameters> pathInfo, IMultiSearchRequest request)
-		{
-			pathInfo.HttpMethod = HttpMethod.POST;
-		}
-	}
-	
 	public partial class MultiSearchRequest : FixedIndexTypePathBase<MultiSearchRequestParameters>, IMultiSearchRequest
 	{
 		public IDictionary<string, ISearchRequest> Operations { get; set; }
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<MultiSearchRequestParameters> pathInfo)
-		{
-			MultiSearchPathInfo.Update(pathInfo, this);
-		}
 	}
 
 	[DescriptorFor("Msearch")]
@@ -62,11 +48,5 @@ namespace Nest
 		{
 			return this.Search(Guid.NewGuid().ToString(), searchSelector);
 		}
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<MultiSearchRequestParameters> pathInfo)
-		{
-			pathInfo.HttpMethod = HttpMethod.POST;
-		}
-
 	}
 }

@@ -13,10 +13,7 @@ namespace Nest
 	public partial class DeleteSearchTemplateRequest 
 		: NamePathBase<DeleteTemplateRequestParameters>, IDeleteSearchTemplateRequest
 	{
-		public DeleteSearchTemplateRequest(string templateName)
-			: base(templateName)
-		{
-		}
+		public DeleteSearchTemplateRequest(string templateName) : base(templateName) { }
 
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteTemplateRequestParameters> pathInfo)
 		{

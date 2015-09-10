@@ -59,12 +59,14 @@ namespace Nest
 		{
 		}
 
-		protected abstract void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo);
+		protected virtual void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
+		{
+			pathInfo.HttpMethod = pathInfo.RequestParameters.DefaultHttpMethod;
+		}
 		
 		ElasticsearchPathInfo<TParameters> IPathInfo<TParameters>.ToPathInfo(IConnectionSettingsValues settings)
 		{
 			return this.ToPathInfo(settings, this.Request.RequestParameters);
 		}
-
 	}
 }

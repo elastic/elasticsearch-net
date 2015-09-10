@@ -5,6 +5,8 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	//TODO not really a request object, find better name discuss with @gmarz
+
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<HighlightRequest>))]
 	public interface IHighlightRequest

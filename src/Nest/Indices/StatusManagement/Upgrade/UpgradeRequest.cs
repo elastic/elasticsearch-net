@@ -7,13 +7,6 @@ using System.Text;
 
 namespace Nest
 {
-	internal static class UpgradePathInfo
-	{
-		public static void Update(ElasticsearchPathInfo<UpgradeRequestParameters> pathInfo)
-		{
-			pathInfo.HttpMethod = HttpMethod.POST;
-		}
-	}
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IUpgradeRequest : IIndicesOptionalPath<UpgradeRequestParameters>
 	{
@@ -21,19 +14,11 @@ namespace Nest
 
 	public partial class UpgradeRequest : IndicesOptionalPathBase<UpgradeRequestParameters>, IUpgradeRequest
 	{
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<UpgradeRequestParameters> pathInfo)
-		{
-			UpgradePathInfo.Update(pathInfo);
-		}
 	}
 
 	[DescriptorFor("IndicesUpgrade")]
 	public partial class UpgradeDescriptor 
 		: IndicesOptionalPathDescriptor<UpgradeDescriptor, UpgradeRequestParameters>, IUpgradeRequest
 	{
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<UpgradeRequestParameters> pathInfo)
-		{
-			UpgradePathInfo.Update(pathInfo);
-		}
 	}
 }

@@ -10,23 +10,10 @@ namespace Nest
 	{
 	}
 
-	internal static class UpdateSettingsPathInfo
-	{
-		public static void Update(IConnectionSettingsValues settings, ElasticsearchPathInfo<UpdateSettingsRequestParameters> pathInfo)
-		{
-			pathInfo.HttpMethod = HttpMethod.PUT;
-		}
-	}
-
 	public partial class UpdateSettingsRequest : IndicesOptionalPathBase<UpdateSettingsRequestParameters>, IUpdateSettingsRequest
 	{
 		public UpdateSettingsRequest() { }
 		public UpdateSettingsRequest(IndexName index) { this.Indices = new []{ index }; }
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<UpdateSettingsRequestParameters> pathInfo)
-		{
-			UpdateSettingsPathInfo.Update(settings, pathInfo);
-		}
 
 		IDictionary IHasADictionary.Dictionary => this.AnySettings;
 
@@ -96,11 +83,6 @@ namespace Nest
 		: IndicesOptionalPathDescriptor<UpdateSettingsDescriptor, UpdateSettingsRequestParameters>, IUpdateSettingsRequest
 	{
 		UpdateSettingsDescriptor Assign(Action<IIndexSettings> assigner) => Fluent.Assign(this, assigner);
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<UpdateSettingsRequestParameters> pathInfo)
-		{
-			UpdateSettingsPathInfo.Update(settings, pathInfo);
-		}
 
 		int? IIndexSettings.NumberOfShards { get; set; }
 		FileSystemStorageImplementation? IIndexSettings.FileSystemStorageImplementation { get; set; }

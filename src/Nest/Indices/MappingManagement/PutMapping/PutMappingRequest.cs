@@ -11,22 +11,12 @@ namespace Nest
 	{
 	}
 
-	public interface IPutMappingRequest<T> : IPutMappingRequest where T : class {}
-
-	internal static class PutMappingPathInfo
-	{
-		public static void Update(ElasticsearchPathInfo<PutMappingRequestParameters> pathInfo, IPutMappingRequest request)
-		{
-			pathInfo.HttpMethod = HttpMethod.PUT;
-		}
-	}
+	public interface IPutMappingRequest<T> : IPutMappingRequest where T : class { }
 
 	public partial class PutMappingRequest : IndicesTypePathBase<PutMappingRequestParameters>, IPutMappingRequest
 	{
 		[Obsolete("Required for ReadAsTypeConverter.  This will be removed once we figure out a better way to deserialize.")]
-		public PutMappingRequest()
-		{
-		}
+		public PutMappingRequest() { }
 
 		/// <summary>
 		/// Calls putmapping on /_all/{type}
@@ -52,7 +42,7 @@ namespace Nest
 		public PutMappingRequest(IndexName index, TypeName type)
 		{
 			this.Type = type;
-			this.Indices = new [] { index };
+			this.Indices = new[] { index };
 		}
 
 		/// <inheritdoc/>
@@ -99,11 +89,6 @@ namespace Nest
 		public ITtlField TtlField { get; set; }
 		/// <inheritdoc/>
 		public ITypeField TypeField { get; set; }
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<PutMappingRequestParameters> pathInfo)
-		{
-			PutMappingPathInfo.Update(pathInfo, this);
-		}
 	}
 
 	public partial class PutMappingRequest<T> : IndicesTypePathBase<PutMappingRequestParameters, T>, IPutMappingRequest<T>
@@ -153,11 +138,6 @@ namespace Nest
 		public ITtlField TtlField { get; set; }
 		/// <inheritdoc/>
 		public ITypeField TypeField { get; set; }
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<PutMappingRequestParameters> pathInfo)
-		{
-			PutMappingPathInfo.Update(pathInfo, this);
-		}
 	}
 
 	[DescriptorFor("IndicesPutMapping")]
@@ -203,7 +183,7 @@ namespace Nest
 			var autoProperties = new PropertyWalker(typeof(T), visitor).GetProperties();
 			foreach (var autoProperty in autoProperties.Dictionary)
 				a.Properties.Dictionary[autoProperty.Key] = autoProperty.Value;
-        });
+		});
 
 		/// <inheritdoc/>
 		public PutMappingDescriptor<T> Dynamic(DynamicMapping dynamic) => Assign(a => a.Dynamic = dynamic);
@@ -221,7 +201,7 @@ namespace Nest
 		public PutMappingDescriptor<T> Analyzer(string analyzer) => Assign(a => a.Analyzer = analyzer);
 
 		/// <inheritdoc/>
-		public PutMappingDescriptor<T> SearchAnalyzer(string searchAnalyzer)=> Assign(a => a.SearchAnalyzer = searchAnalyzer);
+		public PutMappingDescriptor<T> SearchAnalyzer(string searchAnalyzer) => Assign(a => a.SearchAnalyzer = searchAnalyzer);
 
 		/// <inheritdoc/>
 		public PutMappingDescriptor<T> AllField(Func<AllFieldDescriptor, AllFieldDescriptor> allFieldSelector) => Assign(a => a.AllField = allFieldSelector?.Invoke(new AllFieldDescriptor()));
@@ -301,11 +281,6 @@ namespace Nest
 			foreach (var t in templates.Templates)
 				Self.DynamicTemplates[t.Key] = t.Value;
 			return this;
-		}
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<PutMappingRequestParameters> pathInfo)
-		{
-			PutMappingPathInfo.Update(pathInfo, this);
 		}
 	}
 }

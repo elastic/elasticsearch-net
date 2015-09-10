@@ -8,36 +8,12 @@ using System.Text;
 
 namespace Nest
 {
-	internal static class NodesHotThreadsPathInfo
-	{
-		public static void Update(IConnectionSettingsValues settings, ElasticsearchPathInfo<NodesHotThreadsRequestParameters> pathInfo, INodesHotThreadsRequest request)
-		{
-			pathInfo.HttpMethod = HttpMethod.GET;
-		}
-	}
-
 	public interface INodesHotThreadsRequest 
-		: INodeIdOptionalPath<NodesHotThreadsRequestParameters>
-	{
-	}
+		: INodeIdOptionalPath<NodesHotThreadsRequestParameters> { }
 
 	public partial class NodesHotThreadsRequest 
-		: NodeIdOptionalPathBase<NodesHotThreadsRequestParameters>, INodesHotThreadsRequest
-	{
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<NodesHotThreadsRequestParameters> pathInfo)
-		{
-			NodesHotThreadsPathInfo.Update(settings, pathInfo, this);
-		}
-	}
+		: NodeIdOptionalPathBase<NodesHotThreadsRequestParameters>, INodesHotThreadsRequest { }
 
 	public partial class NodesHotThreadsDescriptor 
-		: NodeIdOptionalDescriptor<NodesHotThreadsDescriptor, NodesHotThreadsRequestParameters>, INodesHotThreadsRequest
-	{
-		private INodesHotThreadsRequest Self => this;
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<NodesHotThreadsRequestParameters> pathInfo)
-		{
-			NodesHotThreadsPathInfo.Update(settings, pathInfo, this.Self);
-		}
-	}
+		: NodeIdOptionalDescriptor<NodesHotThreadsDescriptor, NodesHotThreadsRequestParameters>, INodesHotThreadsRequest { }
 }

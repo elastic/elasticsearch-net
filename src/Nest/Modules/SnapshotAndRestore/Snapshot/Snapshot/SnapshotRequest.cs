@@ -21,14 +21,6 @@ namespace Nest
 		bool? Partial { get; set; }
 	}
 
-	internal static class SnapshotPathInfo
-	{
-		public static void Update(IConnectionSettingsValues settings, ElasticsearchPathInfo<SnapshotRequestParameters> pathInfo)
-		{
-			pathInfo.HttpMethod = HttpMethod.PUT;
-		}
-	}
-
 	public partial class SnapshotRequest : RepositorySnapshotPathBase<SnapshotRequestParameters>, ISnapshotRequest
 	{
 		public SnapshotRequest(string repository, string snapshot) : base(repository, snapshot) { }
@@ -41,10 +33,6 @@ namespace Nest
 
 		public bool? Partial { get; set; }
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SnapshotRequestParameters> pathInfo)
-		{
-			SnapshotPathInfo.Update(settings, pathInfo);
-		}
 	}
 
 
@@ -100,11 +88,6 @@ namespace Nest
 		{
 			this.Self.Partial = partial;
 			return this;
-		}
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SnapshotRequestParameters> pathInfo)
-		{
-			pathInfo.HttpMethod = HttpMethod.PUT;
 		}
 	}
 }
