@@ -140,7 +140,7 @@ namespace Elasticsearch.Net.Connection
 			if (!OutOfDateClusterInformation) return;
 			using (this.Audit(AuditEvent.SniffOnStaleCluster))
 			{
-				this.Sniff();
+				await this.SniffAsync();
 				this._connectionPool.SniffedOnStartup = true;
 			}
 		}
