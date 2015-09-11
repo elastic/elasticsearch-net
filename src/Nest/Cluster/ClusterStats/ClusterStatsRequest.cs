@@ -8,8 +8,8 @@ namespace Nest
 {
 	public interface IClusterStatsRequest : IRequest<ClusterStatsRequestParameters> { }
 
-	public partial class ClusterStatsRequest : BasePathRequest<ClusterStatsRequestParameters>, IClusterStatsRequest { }
+	public partial class ClusterStatsRequest : PathRequestBase<ClusterStatsRequestParameters>, IClusterStatsRequest { }
 
 	public partial class ClusterStatsDescriptor 
-		: BasePathDescriptor<ClusterStatsDescriptor, ClusterStatsRequestParameters>, IClusterStatsRequest { }
+		: PathDescriptorBase<ClusterStatsDescriptor, ClusterStatsRequestParameters>, IClusterStatsRequest { }
 }

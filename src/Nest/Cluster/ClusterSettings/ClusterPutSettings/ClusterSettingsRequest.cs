@@ -17,7 +17,7 @@ namespace Nest
 
 	}
 	
-	public partial class ClusterSettingsRequest : BasePathRequest<ClusterSettingsRequestParameters>, IClusterSettingsRequest
+	public partial class ClusterSettingsRequest : PathRequestBase<ClusterSettingsRequestParameters>, IClusterSettingsRequest
 	{
 		public IDictionary<string, object> Persistent { get; set; }
 
@@ -26,7 +26,7 @@ namespace Nest
 
 	[DescriptorFor("ClusterPutSettings")]
 	public partial class ClusterSettingsDescriptor : 
-		BasePathDescriptor<ClusterSettingsDescriptor, ClusterSettingsRequestParameters>
+		PathDescriptorBase<ClusterSettingsDescriptor, ClusterSettingsRequestParameters>
 		, IClusterSettingsRequest
 	{
 		protected IClusterSettingsRequest Self => this;

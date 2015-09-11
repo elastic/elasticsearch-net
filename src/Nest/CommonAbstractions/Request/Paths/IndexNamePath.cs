@@ -44,7 +44,7 @@ namespace Nest
 		}
 	}
 
-	public abstract class IndexNamePathBase<TParameters> : BasePathRequest<TParameters>, IIndexNamePath<TParameters>
+	public abstract class IndexNamePathBase<TParameters> : PathRequestBase<TParameters>, IIndexNamePath<TParameters>
 		where TParameters : IRequestParameters, new()
 	{
 		public IndexName Index { get; set; }
@@ -62,7 +62,7 @@ namespace Nest
 		}
 	}
 		
-	public abstract class IndexNamePathBase<TParameters, T> : BasePathRequest<TParameters>, IIndexNamePath<TParameters>
+	public abstract class IndexNamePathBase<TParameters, T> : PathRequestBase<TParameters>, IIndexNamePath<TParameters>
 		where TParameters : IRequestParameters, new()
 		where T : class
 	{
@@ -87,7 +87,7 @@ namespace Nest
 	/// </pre>
 	/// neither parameter is optional 
 	/// </summary>
-	public abstract class IndexNamePathDescriptor<TDescriptor, TParameters, T> : BasePathDescriptor<TDescriptor, TParameters>, IIndexNamePath<TParameters>
+	public abstract class IndexNamePathDescriptor<TDescriptor, TParameters, T> : PathDescriptorBase<TDescriptor, TParameters>, IIndexNamePath<TParameters>
 		where TDescriptor : IndexNamePathDescriptor<TDescriptor, TParameters, T>, new()
 		where TParameters : FluentRequestParameters<TParameters>, new()
 		where T : class

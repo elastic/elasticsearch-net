@@ -24,7 +24,7 @@ namespace Nest
 	
 	}
 
-	public abstract class NodeIdOptionalPathBase<TParameters> : BasePathRequest<TParameters>, INodeIdOptionalPath<TParameters>
+	public abstract class NodeIdOptionalPathBase<TParameters> : PathRequestBase<TParameters>, INodeIdOptionalPath<TParameters>
 		where TParameters : IRequestParameters, new()
 	{
 		
@@ -44,7 +44,7 @@ namespace Nest
 	/// node id is optional
 	/// </summary>
 	public abstract class NodeIdOptionalDescriptor<TDescriptor, TParameters>
-		: BasePathDescriptor<TDescriptor, TParameters>, INodeIdOptionalPath<TParameters>
+		: PathDescriptorBase<TDescriptor, TParameters>, INodeIdOptionalPath<TParameters>
 		where TDescriptor : NodeIdOptionalDescriptor<TDescriptor, TParameters> 
 		where TParameters : FluentRequestParameters<TParameters>, new()
 	{

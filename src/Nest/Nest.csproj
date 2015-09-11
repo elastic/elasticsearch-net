@@ -99,6 +99,8 @@
     <Compile Include="CommonAbstractions\Infer\PropertyName\PropertyName.cs" />
     <Compile Include="CommonAbstractions\Infer\PropertyName\PropertyNameExtensions.cs" />
     <Compile Include="CommonAbstractions\Infer\PropertyName\PropertyNameJsonConverter.cs" />
+    <Compile Include="CommonAbstractions\Infer\Types\TypesJsonConverter.cs" />
+    <Compile Include="CommonAbstractions\Infer\Types\Types.cs" />
     <Compile Include="CommonAbstractions\LazyDocument\LazyDocumentJsonConverter.cs" />
     <Compile Include="CommonAbstractions\HasADictionary.cs" />
     <Compile Include="CommonAbstractions\IsADictionary.cs" />
@@ -551,8 +553,8 @@
     <Compile Include="Document\Multiple\Bulk\BulkOperation\BulkOperationBase.cs" />
     <Compile Include="Cluster\ClusterSettings\ClusterGetSettings\ClusterGetSettingsRequest.cs" />
     <Compile Include="Cluster\ClusterSettings\ClusterPutSettings\ClusterSettingsRequest.cs" />
-    <Compile Include="CommonAbstractions\Request\BasePathRequest.cs" />
-    <Compile Include="CommonAbstractions\Request\BaseRequest.cs" />
+    <Compile Include="CommonAbstractions\Request\PathRequestBase.cs" />
+    <Compile Include="CommonAbstractions\Request\RequestBase.cs" />
     <Compile Include="Modules\SnapshotAndRestore\Snapshot\DeleteSnapshot\DeleteSnapshotRequest.cs" />
     <Compile Include="CommonAbstractions\Request\IRequest.cs" />
     <Compile Include="QueryDsl\Compound\FunctionScore\Functions\FieldValueFactorModifier.cs" />
@@ -681,7 +683,6 @@
     <Compile Include="Indices\IndexManagement\OpenCloseIndex\CloseIndex\CloseIndexRequest.cs" />
     <Compile Include="Cluster\ClusterState\ClusterStateRequest.cs" />
     <Compile Include="Indices\StatusManagement\ClearCache\ClearCacheRequest.cs" />
-    <Compile Include="CommonAbstractions\Request\BasePath.cs" />
     <Compile Include="QueryDsl\Geo\Shape\Circle\GeoShapeCircleQuery.cs" />
     <Compile Include="QueryDsl\FullText\SimpleQueryString\SimpleQueryStringQuery.cs" />
     <Compile Include="Document\Single\Source\SourceRequest.cs" />
@@ -1007,7 +1008,7 @@
     <Compile Include="Mapping\Types\Core\Number\NumberType.cs" />
     <Compile Include="CommonAbstractions\RawJson\CustomJsonConverter.cs" />
     <Compile Include="Mapping\Types\Specialized\Ip\YesNoBoolJsonConverter.cs" />
-    <Compile Include="CommonAbstractions\Request\Paths\ElasticSearchPathInfo.cs" />
+    <Compile Include="CommonAbstractions\Request\ElasticsearchPathInfo.cs" />
     <Compile Include="Cluster\ClusterStats\ElasticClient-ClusterStats.cs" />
     <Compile Include="Cluster\PendingClusterTasks\ElasticClient-ClusterPendingTasks.cs" />
     <Compile Include="CommonAbstractions\Infer\ExpressionVisitor.cs" />

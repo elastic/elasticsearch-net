@@ -26,7 +26,7 @@ namespace Nest
 		}
 	}
 
-	public abstract class IndicesOptionalPathBase<TParameters> : BasePathRequest<TParameters>, IIndicesOptionalPath<TParameters>
+	public abstract class IndicesOptionalPathBase<TParameters> : PathRequestBase<TParameters>, IIndicesOptionalPath<TParameters>
 		where TParameters : IRequestParameters, new()
 	{
 
@@ -47,7 +47,7 @@ namespace Nest
 	/// {indices} is optional 
 	/// </summary>
 	public abstract class IndicesOptionalPathDescriptor<TDescriptor, TParameters> 
-		: BasePathDescriptor<TDescriptor, TParameters>, IIndicesOptionalPath<TParameters>
+		: PathDescriptorBase<TDescriptor, TParameters>, IIndicesOptionalPath<TParameters>
 		where TDescriptor : IndicesOptionalPathDescriptor<TDescriptor, TParameters>, new()
 		where TParameters : FluentRequestParameters<TParameters>, new()
 	{

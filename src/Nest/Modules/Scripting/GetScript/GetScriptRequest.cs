@@ -12,7 +12,7 @@ namespace Nest
 		string Id { get; set; }
 	}
 
-	public partial class GetScriptRequest : BasePathRequest<GetScriptRequestParameters>, IGetScriptRequest
+	public partial class GetScriptRequest : PathRequestBase<GetScriptRequestParameters>, IGetScriptRequest
 	{
 		public string Lang { get; set; }
 		public string Id { get; set; }
@@ -34,7 +34,7 @@ namespace Nest
 	}
 
 	[DescriptorFor("ScriptGet")]
-	public partial class GetScriptDescriptor : BasePathDescriptor<GetScriptDescriptor, GetScriptRequestParameters>, IGetScriptRequest
+	public partial class GetScriptDescriptor : PathDescriptorBase<GetScriptDescriptor, GetScriptRequestParameters>, IGetScriptRequest
 	{
 		IGetScriptRequest Self => this;
 		string IGetScriptRequest.Lang { get; set; }

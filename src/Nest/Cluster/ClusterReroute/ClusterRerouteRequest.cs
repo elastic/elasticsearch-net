@@ -16,13 +16,13 @@ namespace Nest
 	}
 
 	public partial class ClusterRerouteRequest 
-		: BasePathRequest<ClusterRerouteRequestParameters>, IClusterRerouteRequest
+		: PathRequestBase<ClusterRerouteRequestParameters>, IClusterRerouteRequest
 	{
 		public IList<IClusterRerouteCommand> Commands { get; set; }
 	}
 
 	public partial class ClusterRerouteDescriptor 
-		: BasePathDescriptor<ClusterRerouteDescriptor, ClusterRerouteRequestParameters>, IClusterRerouteRequest
+		: PathDescriptorBase<ClusterRerouteDescriptor, ClusterRerouteRequestParameters>, IClusterRerouteRequest
 	{
 		IClusterRerouteRequest Self => this;
 

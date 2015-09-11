@@ -27,7 +27,7 @@ namespace Nest
 	
 	}
 
-	public abstract class RepositorySnapshotOptionalPathBase<TParameters> : BasePathRequest<TParameters>, IRepositorySnapshotOptionalPath<TParameters>
+	public abstract class RepositorySnapshotOptionalPathBase<TParameters> : PathRequestBase<TParameters>, IRepositorySnapshotOptionalPath<TParameters>
 		where TParameters : IRequestParameters, new()
 	{
 		public string Repository { get; set; }
@@ -58,7 +58,7 @@ namespace Nest
 	/// routing value
 	/// </summary>
 	public abstract class RepositorySnapshotOptionalPathDescriptor<TDescriptor, TParameters> 
-		: BasePathDescriptor<TDescriptor, TParameters>, IRepositorySnapshotOptionalPath<TParameters>
+		: PathDescriptorBase<TDescriptor, TParameters>, IRepositorySnapshotOptionalPath<TParameters>
 		where TDescriptor : RepositorySnapshotOptionalPathDescriptor<TDescriptor, TParameters> 
 		where TParameters : FluentRequestParameters<TParameters>, new()
 	{

@@ -7,13 +7,13 @@ namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<PutMappingRequest>))]
-	public interface IPutMappingRequest : IIndicesTypePath<PutMappingRequestParameters>, ITypeMapping
+	public interface IPutMappingRequest : ITypeMapping
 	{
 	}
 
 	public interface IPutMappingRequest<T> : IPutMappingRequest where T : class { }
 
-	public partial class PutMappingRequest : IndicesTypePathBase<PutMappingRequestParameters>, IPutMappingRequest
+	public partial class PutMappingRequest : PathRequestBase<PutMappingRequestParameters>, IPutMappingRequest
 	{
 		[Obsolete("Required for ReadAsTypeConverter.  This will be removed once we figure out a better way to deserialize.")]
 		public PutMappingRequest() { }
@@ -22,28 +22,15 @@ namespace Nest
 		/// Calls putmapping on /_all/{type}
 		/// </summary>
 		public PutMappingRequest(TypeName type)
-		{
-			this.Type = type;
-			this.AllIndices = true;
-		}
+            : base(p => p.Required(Types.Single(type)))
+        { }
 
 		/// <summary>
 		/// Calls putmapping on /{indices}/{type}
 		/// </summary>
-		public PutMappingRequest(IEnumerable<IndexName> indices, TypeName type)
-		{
-			this.Type = type;
-			this.Indices = indices;
-		}
-
-		/// <summary>
-		/// Calls putmapping on /{index}/{type}
-		/// </summary>
-		public PutMappingRequest(IndexName index, TypeName type)
-		{
-			this.Type = type;
-			this.Indices = new[] { index };
-		}
+		public PutMappingRequest(Indices indices, TypeName types)
+            : base(p => p.Required(Types.Single(types)).Optional(indices))
+		{ }
 
 		/// <inheritdoc/>
 		public IAllField AllField { get; set; }
@@ -91,9 +78,18 @@ namespace Nest
 		public ITypeField TypeField { get; set; }
 	}
 
-	public partial class PutMappingRequest<T> : IndicesTypePathBase<PutMappingRequestParameters, T>, IPutMappingRequest<T>
+	public partial class PutMappingRequest<T> : PathRequestBase<PutMappingRequestParameters>, IPutMappingRequest<T>
 		where T : class
 	{
+
+        public PutMappingRequest()
+            : base(p => p.Required(Types.Single<T>()))
+        { }
+
+        public PutMappingRequest(Indices indices)
+            : base(p => p.Required(Types.Single<T>()).Optional(indices))
+        { }
+
 		/// <inheritdoc/>
 		public IAllField AllField { get; set; }
 		/// <inheritdoc/>
@@ -142,9 +138,17 @@ namespace Nest
 
 	[DescriptorFor("IndicesPutMapping")]
 	public partial class PutMappingDescriptor<T> :
-		IndicesTypePathDescriptor<PutMappingDescriptor<T>, PutMappingRequestParameters, T>, IPutMappingRequest<T>
+		PathDescriptorBase<PutMappingDescriptor<T>, PutMappingRequestParameters>, IPutMappingRequest<T>
 		where T : class
 	{
+        public PutMappingDescriptor()
+            : base(p => p.Required(Types.Single<T>()))
+        { }
+
+        public PutMappingDescriptor(Indices indices)
+            : base(p => p.Required(Types.Single<T>()).Optional(indices))
+        { }
+
 		protected PutMappingDescriptor<T> Assign(Action<ITypeMapping> assigner) => Fluent.Assign(this, assigner);
 		private ITypeMapping Self => this;
 

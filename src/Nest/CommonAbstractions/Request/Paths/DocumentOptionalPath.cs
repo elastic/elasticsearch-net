@@ -56,7 +56,7 @@ namespace Nest
 
 	}
 
-	public abstract class DocumentOptionalPathBase<TParameters> : BasePathRequest<TParameters>, IDocumentOptionalPath<TParameters>
+	public abstract class DocumentOptionalPathBase<TParameters> : PathRequestBase<TParameters>, IDocumentOptionalPath<TParameters>
 		where TParameters : IRequestParameters, new()
 	{
 		public IndexName Index { get; set; }
@@ -76,7 +76,7 @@ namespace Nest
 		}
 	}
 
-	public abstract class DocumentOptionalPathBase<TParameters, T> : BasePathRequest<TParameters>, IDocumentOptionalPath<TParameters, T>
+	public abstract class DocumentOptionalPathBase<TParameters, T> : PathRequestBase<TParameters>, IDocumentOptionalPath<TParameters, T>
 		where TParameters : IRequestParameters, new()
 		where T : class
 	{
@@ -105,7 +105,7 @@ namespace Nest
 	/// this version won't throw if any of the parts are inferred to be empty<para>T</para>
 	/// </summary>
 	public abstract class DocumentOptionalPathDescriptor<TDescriptor, TParameters, T>
-		: BasePathDescriptor<TDescriptor, TParameters>, IDocumentOptionalPath<TParameters, T>
+		: PathDescriptorBase<TDescriptor, TParameters>, IDocumentOptionalPath<TParameters, T>
 		where TDescriptor : DocumentOptionalPathDescriptor<TDescriptor, TParameters, T>, new()
 		where TParameters : FluentRequestParameters<TParameters>, new()
 		where T : class

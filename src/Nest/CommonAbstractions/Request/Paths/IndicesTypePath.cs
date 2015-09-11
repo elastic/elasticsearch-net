@@ -60,7 +60,7 @@ namespace Nest
 		}
 	}
 
-	public abstract class IndicesTypePathBase<TParameters> : BasePathRequest<TParameters>, IIndicesTypePath<TParameters>
+	public abstract class IndicesTypePathBase<TParameters> : PathRequestBase<TParameters>, IIndicesTypePath<TParameters>
 		where TParameters : IRequestParameters, new()
 	{
 		public bool? AllIndices { get; set; }
@@ -92,7 +92,7 @@ namespace Nest
 	/// {indices} is optional and so is {type} and will fallback to default of <para>T</para>
 	/// </summary>
 	public abstract class IndicesTypePathDescriptor<TDescriptor, TParameters, T> 
-		: BasePathDescriptor<TDescriptor, TParameters>, IIndicesTypePath<TParameters> 
+		: PathDescriptorBase<TDescriptor, TParameters>, IIndicesTypePath<TParameters> 
 		where TDescriptor : IndicesTypePathDescriptor<TDescriptor, TParameters, T> 
 		where TParameters : FluentRequestParameters<TParameters>, new()
 		where T : class

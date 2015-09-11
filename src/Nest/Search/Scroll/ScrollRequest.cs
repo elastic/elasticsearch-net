@@ -27,7 +27,7 @@ namespace Nest
 		}
 	}
 
-	public partial class ScrollRequest : BasePathRequest<ScrollRequestParameters>, IScrollRequest
+	public partial class ScrollRequest : PathRequestBase<ScrollRequestParameters>, IScrollRequest
 	{
 		public string ScrollId { get; set; }
 		public TimeUnitExpression Scroll { get; set; }
@@ -44,7 +44,7 @@ namespace Nest
 		}
 	}
 
-	public partial class ScrollDescriptor<T> : BasePathDescriptor<ScrollDescriptor<T>, ScrollRequestParameters>, IScrollRequest,
+	public partial class ScrollDescriptor<T> : PathDescriptorBase<ScrollDescriptor<T>, ScrollRequestParameters>, IScrollRequest,
 		IHideObjectMembers
 		where T : class
 	{

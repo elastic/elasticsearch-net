@@ -4,23 +4,26 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public abstract class BaseRequest<TParameters> : IRequest<TParameters>
-		where TParameters : IRequestParameters, new()
-	{
-		[JsonIgnore]
-		protected IRequest<TParameters> Request => this;
+    public abstract class RequestBase<TParameters> : IRequest<TParameters>
+        where TParameters : IRequestParameters, new()
+    {
+        [JsonIgnore]
+        protected IRequest<TParameters> Request => this;
 
-		/// <summary>
-		/// Allows you to override connection settings on a per call basis
-		/// </summary>
-		[JsonIgnore]
-		IRequestConfiguration IRequest.RequestConfiguration { get; set; }
+        /// <summary>
+        /// Allows you to override connection settings on a per call basis
+        /// </summary>
+        [JsonIgnore]
+        IRequestConfiguration IRequest.RequestConfiguration { get; set; }
 
-		/// <summary>
-		/// Describes parameters that are supplied on the querystring rather then the body of the request
-		/// </summary>
-		[JsonIgnore]
-		TParameters IRequest<TParameters>.RequestParameters { get; set; } = new TParameters();
+        /// <summary>
+        /// Describes parameters that are supplied on the querystring rather then the body of the request
+        /// </summary>
+        [JsonIgnore]
+        TParameters IRequest<TParameters>.RequestParameters { get; set; } = new TParameters();
+
+        [JsonIgnore]
+        public IElasticsearchPathInfo<TParameters> PathInfo { get; set; }
 
 		/// <summary>
 		/// Creates a PathInfo object from this request that we can use to dispatch into the low level client

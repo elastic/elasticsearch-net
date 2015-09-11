@@ -15,7 +15,7 @@ namespace Nest
 		string Lang { get; set; }
 	}
 
-	public partial class PutScriptRequest : BasePathRequest<PutScriptRequestParameters>, IPutScriptRequest
+	public partial class PutScriptRequest : PathRequestBase<PutScriptRequestParameters>, IPutScriptRequest
 	{
 		public string Lang { get; set; }
 		public string Id { get; set; }
@@ -38,7 +38,7 @@ namespace Nest
 	}
 
 	[DescriptorFor("ScriptPut")]
-	public partial class PutScriptDescriptor : BasePathDescriptor<PutScriptDescriptor, PutScriptRequestParameters>, IPutScriptRequest
+	public partial class PutScriptDescriptor : PathDescriptorBase<PutScriptDescriptor, PutScriptRequestParameters>, IPutScriptRequest
 	{
 		IPutScriptRequest Self => this;
 		string IPutScriptRequest.Script { get; set; }

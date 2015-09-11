@@ -1,14 +1,45 @@
-﻿using System;
-using System.ComponentModel;
 using Elasticsearch.Net;
 using Elasticsearch.Net.Connection.Configuration;
+using Newtonsoft.Json;
+using System;
+using System.ComponentModel;
 
 namespace Nest
 {
-	public abstract class BasePathDescriptor<TDescriptor, TParameters> : BaseRequest<TParameters>, IDescriptor
-		where TDescriptor : BasePathDescriptor<TDescriptor, TParameters>
+	public abstract class PathRequestBase<TParameters> : RequestBase<TParameters>
+		where TParameters : IRequestParameters, new()
+	{
+        // TODO: Placeholder for now so stuff compiles.  Need to remove this ctor eventually.
+        public PathRequestBase()
+        {
+        }
+
+        public PathRequestBase(Func<ElasticsearchPathInfo<TParameters>, ElasticsearchPathInfo<TParameters>> pathSelector)
+        {
+            this.PathInfo = pathSelector(new ElasticsearchPathInfo<TParameters>());
+        }
+
+		protected TOut Q<TOut>(string name) =>
+			this.Request.RequestParameters.GetQueryStringValue<TOut>(name);
+
+		protected void Q(string name, object value) =>
+			this.Request.RequestParameters.AddQueryStringValue(name, value);
+	}
+
+    public abstract class PathDescriptorBase<TDescriptor, TParameters> : RequestBase<TParameters>, IDescriptor
+		where TDescriptor : PathDescriptorBase<TDescriptor, TParameters>
 		where TParameters : FluentRequestParameters<TParameters>, new()
 	{
+        // TODO: Placeholder for now so stuff compiles.  Need to remove this ctor eventually.
+        public PathDescriptorBase()
+        {
+        }
+
+        public PathDescriptorBase(Func<ElasticsearchPathInfo<TParameters>, ElasticsearchPathInfo<TParameters>> pathSelector)
+        {
+            this.PathInfo = pathSelector(new ElasticsearchPathInfo<TParameters>());
+        }
+
 		protected TDescriptor _requestParams(Action<TParameters> assigner)
 		{
 			assigner?.Invoke(this.Request.RequestParameters);

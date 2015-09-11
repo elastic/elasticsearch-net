@@ -10,7 +10,7 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface ICatFielddataRequest : IRequest<CatFielddataRequestParameters> { }
 
-	public partial class CatFielddataRequest : BasePathRequest<CatFielddataRequestParameters>, ICatFielddataRequest { }
+	public partial class CatFielddataRequest : PathRequestBase<CatFielddataRequestParameters>, ICatFielddataRequest { }
 
-	public partial class CatFielddataDescriptor : BasePathDescriptor<CatFielddataDescriptor, CatFielddataRequestParameters>, ICatFielddataRequest { }
+	public partial class CatFielddataDescriptor : PathDescriptorBase<CatFielddataDescriptor, CatFielddataRequestParameters>, ICatFielddataRequest { }
 }

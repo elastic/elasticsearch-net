@@ -60,7 +60,7 @@ namespace Nest
 	
 	}
 
-	public abstract class IndicesOptionalTypesOptionalFieldsPathBase<TParameters> : BasePathRequest<TParameters>, IIndicesOptionalTypesOptionalFieldsPath<TParameters>
+	public abstract class IndicesOptionalTypesOptionalFieldsPathBase<TParameters> : PathRequestBase<TParameters>, IIndicesOptionalTypesOptionalFieldsPath<TParameters>
 		where TParameters : IRequestParameters, new()
 	{
 		
@@ -79,7 +79,7 @@ namespace Nest
 		}
 	}
 
-	public abstract class IndicesOptionalTypesOptionalFieldsPathBase<TParameters, T> : BasePathRequest<TParameters>, IIndicesOptionalTypesOptionalFieldsPath<TParameters, T>
+	public abstract class IndicesOptionalTypesOptionalFieldsPathBase<TParameters, T> : PathRequestBase<TParameters>, IIndicesOptionalTypesOptionalFieldsPath<TParameters, T>
 		where TParameters : IRequestParameters, new()
 		where T : class
 	{
@@ -114,7 +114,7 @@ namespace Nest
 	/// {types} is optional, {indices} is too, {Fields} is mandatory
 	/// </summary>
 	public abstract class IndicesOptionalTypesOptionalFieldsPathDescriptor<TDescriptor, TParameters, T> 
-		: BasePathDescriptor<TDescriptor, TParameters>, IIndicesOptionalTypesOptionalFieldsPath<TParameters, T>
+		: PathDescriptorBase<TDescriptor, TParameters>, IIndicesOptionalTypesOptionalFieldsPath<TParameters, T>
 		where TDescriptor : IndicesOptionalTypesOptionalFieldsPathDescriptor<TDescriptor, TParameters, T>, new()
 		where TParameters : FluentRequestParameters<TParameters>, new()
 		where T : class

@@ -24,7 +24,7 @@ namespace Nest
 		}
 	}
 	
-	public partial class ClearScrollRequest : BasePathRequest<ClearScrollRequestParameters>, IClearScrollRequest
+	public partial class ClearScrollRequest : PathRequestBase<ClearScrollRequestParameters>, IClearScrollRequest
 	{
 		public string ScrollId { get; set; }
 
@@ -40,7 +40,7 @@ namespace Nest
 
 	}
 	[DescriptorFor("ClearScroll")]
-	public partial class ClearScrollDescriptor : BasePathDescriptor<ClearScrollDescriptor, ClearScrollRequestParameters>, IClearScrollRequest
+	public partial class ClearScrollDescriptor : PathDescriptorBase<ClearScrollDescriptor, ClearScrollRequestParameters>, IClearScrollRequest
 	{
 		private IClearScrollRequest Self => this;
 

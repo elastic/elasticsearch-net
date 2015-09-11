@@ -27,7 +27,7 @@ namespace Nest
 	
 	}
 
-	public abstract class NamePathBase<TParameters> : BasePathRequest<TParameters>, INamePath<TParameters>
+	public abstract class NamePathBase<TParameters> : PathRequestBase<TParameters>, INamePath<TParameters>
 		where TParameters : IRequestParameters, new()
 	{
 		public string Name { get; set; }
@@ -51,7 +51,7 @@ namespace Nest
 	/// name is mandatory.
 	/// </summary>
 	public abstract class NamePathDescriptor<TDescriptor, TParameters> 
-		: BasePathDescriptor<TDescriptor, TParameters>, INamePath<TParameters>
+		: PathDescriptorBase<TDescriptor, TParameters>, INamePath<TParameters>
 		where TDescriptor : NamePathDescriptor<TDescriptor, TParameters> 
 		where TParameters : FluentRequestParameters<TParameters>, new()
 	{

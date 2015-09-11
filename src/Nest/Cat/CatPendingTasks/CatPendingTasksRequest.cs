@@ -10,7 +10,7 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface ICatPendingTasksRequest : IRequest<CatPendingTasksRequestParameters> { }
 
-	public partial class CatPendingTasksRequest : BasePathRequest<CatPendingTasksRequestParameters>, ICatPendingTasksRequest { }
+	public partial class CatPendingTasksRequest : PathRequestBase<CatPendingTasksRequestParameters>, ICatPendingTasksRequest { }
 
-	public partial class CatPendingTasksDescriptor : BasePathDescriptor<CatPendingTasksDescriptor, CatPendingTasksRequestParameters>, ICatPendingTasksRequest { }
+	public partial class CatPendingTasksDescriptor : PathDescriptorBase<CatPendingTasksDescriptor, CatPendingTasksRequestParameters>, ICatPendingTasksRequest { }
 }

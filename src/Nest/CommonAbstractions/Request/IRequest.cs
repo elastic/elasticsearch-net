@@ -11,6 +11,7 @@ namespace Nest
 	{
 		IRequestConfiguration RequestConfiguration { get; set; }
 	}
+
 	public interface IRequest<TParameters> : IPathInfo<TParameters>, IRequest
 		where TParameters : IRequestParameters, new()
 	{
@@ -20,5 +21,6 @@ namespace Nest
 		/// </summary>
 		TParameters RequestParameters { get; set; }
 
+        IElasticsearchPathInfo<TParameters> PathInfo { get; set; }
 	}
 }

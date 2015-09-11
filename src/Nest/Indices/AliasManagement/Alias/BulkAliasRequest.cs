@@ -13,14 +13,14 @@ namespace Nest
 		IList<IAliasAction> Actions { get; set; }
 	}
 
-	public partial class BulkAliasRequest : BasePathRequest<BulkAliasRequestParameters>, IBulkAliasRequest
+	public partial class BulkAliasRequest : PathRequestBase<BulkAliasRequestParameters>, IBulkAliasRequest
 	{
 		public IList<IAliasAction> Actions { get; set; }
 	}
 
 
 	[DescriptorFor("IndicesUpdateAliases")]
-	public partial class BulkAliasDescriptor : BasePathDescriptor<BulkAliasDescriptor, BulkAliasRequestParameters>, IBulkAliasRequest
+	public partial class BulkAliasDescriptor : PathDescriptorBase<BulkAliasDescriptor, BulkAliasRequestParameters>, IBulkAliasRequest
 	{
 		public BulkAliasDescriptor Add(IAliasAction action) => 
 			Fluent.Assign<BulkAliasDescriptor, IBulkAliasRequest>(this, a=> a.Actions.AddIfNotNull(action));

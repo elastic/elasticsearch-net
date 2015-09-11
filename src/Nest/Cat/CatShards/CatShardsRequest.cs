@@ -10,7 +10,7 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface ICatShardsRequest : IRequest<CatShardsRequestParameters> { }
 	 
-	public partial class CatShardsRequest : BasePathRequest<CatShardsRequestParameters>, ICatShardsRequest { }
+	public partial class CatShardsRequest : PathRequestBase<CatShardsRequestParameters>, ICatShardsRequest { }
 
-	public partial class CatShardsDescriptor : BasePathDescriptor<CatShardsDescriptor, CatShardsRequestParameters>, ICatShardsRequest { }
+	public partial class CatShardsDescriptor : PathDescriptorBase<CatShardsDescriptor, CatShardsRequestParameters>, ICatShardsRequest { }
 }

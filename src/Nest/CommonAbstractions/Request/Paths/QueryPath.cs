@@ -73,7 +73,7 @@ namespace Nest
 		}
 	}
 
-	public abstract class QueryPathBase<TParameters> : BasePathRequest<TParameters>, IQueryPath<TParameters>
+	public abstract class QueryPathBase<TParameters> : PathRequestBase<TParameters>, IQueryPath<TParameters>
 		where TParameters : IRequestParameters, new()
 	{
 		protected QueryPathBase()
@@ -148,7 +148,7 @@ namespace Nest
 	/// all parameters are optional and will default to the defaults for <para>T</para>
 	/// </summary>
 	public abstract class QueryPathDescriptorBase<TDescriptor, TParameters, T> 
-        : BasePathDescriptor<TDescriptor, TParameters>, IQueryPath<TParameters>
+        : PathDescriptorBase<TDescriptor, TParameters>, IQueryPath<TParameters>
 		where TDescriptor : QueryPathDescriptorBase<TDescriptor, TParameters, T>, new()
 		where TParameters : FluentRequestParameters<TParameters>, new()
         where T : class

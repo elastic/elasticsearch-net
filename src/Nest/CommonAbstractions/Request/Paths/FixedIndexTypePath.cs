@@ -30,7 +30,7 @@ namespace Nest
 	
 	}
 
-	public abstract class FixedIndexTypePathBase<TParameters> : BasePathRequest<TParameters>, IFixedIndexTypePath<TParameters>
+	public abstract class FixedIndexTypePathBase<TParameters> : PathRequestBase<TParameters>, IFixedIndexTypePath<TParameters>
 		where TParameters : IRequestParameters, new()
 	{
 		public IndexName Index { get; set; }
@@ -52,7 +52,7 @@ namespace Nest
 	/// type can only be specified in conjuction with index.
 	/// </summary>
 	public abstract class FixedIndexTypePathDescriptor<TDescriptor, TParameters> 
-		: BasePathDescriptor<TDescriptor, TParameters>, IFixedIndexTypePath<TParameters> 
+		: PathDescriptorBase<TDescriptor, TParameters>, IFixedIndexTypePath<TParameters> 
 		where TDescriptor : FixedIndexTypePathDescriptor<TDescriptor, TParameters> 
 		where TParameters : FluentRequestParameters<TParameters>, new()
 	{
