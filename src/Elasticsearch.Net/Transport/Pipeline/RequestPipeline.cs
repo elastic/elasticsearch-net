@@ -27,9 +27,6 @@ namespace Elasticsearch.Net.Connection
 		public virtual DateTime CompletedOn { get; }
 
 		public List<Audit> AuditTrail { get; } = new List<Audit>();
-
-		public Node CurrentNode { get; private set; }
-
 		private int _retried = 0;
 		public int Retried => _retried;
 
@@ -55,20 +52,8 @@ namespace Elasticsearch.Net.Connection
 
 		public int MaxRetries => Math.Min(this._settings.MaxRetries.GetValueOrDefault(int.MaxValue), this._connectionPool.MaxRetries);
 
-		private RequestData CreateRequestData(HttpMethod method, string path, PostData<object> postData, IRequestConfiguration requestOverrides)
+		public void MarkDead(Node node)
 		{
-			var requestData = new RequestData(method, path, postData, this._settings, requestOverrides, this._memoryStreamFactory);
-			requestData.Uri = this.CurrentNode.CreatePath(requestData.Path);
-			return requestData;
-		}
-
-		public void Dispose()
-		{
-		}
-
-		public void MarkDead()
-		{
-			var node = this.CurrentNode;
 			var deadUntil = this._dateTimeProvider.DeadTime(node.FailedAttempts, this._settings.DeadTimeout, this._settings.MaxDeadTimeout);
 			node.MarkDead(deadUntil);
 
@@ -76,7 +61,7 @@ namespace Elasticsearch.Net.Connection
 			this._retried++;
 		}
 
-		public void MarkAlive() => this.CurrentNode.MarkAlive();
+		public void MarkAlive(Node node) => node.MarkAlive();
 
 		public bool FirstPoolUsageNeedsSniffing =>
 			this._connectionPool.SupportsReseeding && this._settings.SniffsOnStartup && !this._connectionPool.SniffedOnStartup;
@@ -155,7 +140,7 @@ namespace Elasticsearch.Net.Connection
 			if (!OutOfDateClusterInformation) return;
 			using (this.Audit(AuditEvent.SniffOnStaleCluster))
 			{
-				this.Sniff();
+				await this.SniffAsync();
 				this._connectionPool.SniffedOnStartup = true;
 			}
 		}
@@ -189,7 +174,6 @@ namespace Elasticsearch.Net.Connection
 				foreach (var node in this._connectionPool.CreateView())
 				{
 					if (this.Retried >= this.MaxRetries + 1 || this.IsTakingTooLong) yield break;
-					this.CurrentNode = node;
 					yield return node;
 					if (this.Refresh)
 					{
@@ -218,27 +202,26 @@ namespace Elasticsearch.Net.Connection
 			?? this._settings.PingTimeout
 			?? (this._connectionPool.UsingSsl ? ConnectionConfiguration.DefaultPingTimeoutOnSSL : ConnectionConfiguration.DefaultPingTimeout);
 
-		private RequestData PingRequestData(Auditable audit)
+		private RequestData CreatePingRequestData(Node node, Auditable audit)
 		{
-			audit.Node = this.CurrentNode;
+			audit.Node = node;
 
 			var requestOverrides = this.RequestConfiguration ?? new RequestConfiguration { };
 			requestOverrides.ConnectTimeout = requestOverrides.RequestTimeout = PingTimeout;
 
-			var requestData = CreateRequestData(HttpMethod.HEAD, "/", null, requestOverrides);
-			return requestData;
+			return new RequestData(HttpMethod.HEAD, "/", null, this._settings, requestOverrides, this._memoryStreamFactory) { Node = node };
 		}
 
-		public void Ping()
+		public void Ping(Node node)
 		{
-			if (this._settings.DisablePings || !this._connectionPool.SupportsPinging || !this.CurrentNode.IsResurrected) return;
+			if (this._settings.DisablePings || !this._connectionPool.SupportsPinging || !node.IsResurrected) return;
 
 			using (var audit = this.Audit(AuditEvent.PingSuccess))
 			{
 				try
 				{
-					var requestData = PingRequestData(audit);
-					this._connection.Request<VoidResponse>(requestData);
+					var pingData = CreatePingRequestData(node, audit);
+					this._connection.Request<VoidResponse>(pingData);
 				}
 				catch
 				{
@@ -249,16 +232,16 @@ namespace Elasticsearch.Net.Connection
 			}
 		}
 
-		public async Task PingAsync()
+		public async Task PingAsync(Node node)
 		{
-			if (this._settings.DisablePings || !this._connectionPool.SupportsPinging || !this.CurrentNode.IsResurrected) return;
+			if (this._settings.DisablePings || !this._connectionPool.SupportsPinging || !node.IsResurrected) return;
 
 			using (var audit = this.Audit(AuditEvent.PingSuccess))
 			{
 				try
 				{
-					var requestData = PingRequestData(audit);
-					await this._connection.RequestAsync<VoidResponse>(requestData);
+					var pingData = CreatePingRequestData(node, audit);
+					await this._connection.RequestAsync<VoidResponse>(pingData);
 				}
 				catch
 				{
@@ -286,9 +269,7 @@ namespace Elasticsearch.Net.Connection
 					audit.Node = node;
 					try
 					{
-						var requestData = new RequestData(HttpMethod.GET, path, null, this._settings, this._memoryStreamFactory);
-						requestData.Uri = node.CreatePath(requestData.Path);
-
+						var requestData = new RequestData(HttpMethod.GET, path, null, this._settings, this._memoryStreamFactory) { Node = node };
 						var response = this._connection.Request<SniffResponse>(requestData);
 						var nodes = response.Body.ToNodes(this._connectionPool.UsingSsl);
 						this._connectionPool.Reseed(nodes);
@@ -323,9 +304,7 @@ namespace Elasticsearch.Net.Connection
 					audit.Node = node;
 					try
 					{
-						var requestData = new RequestData(HttpMethod.GET, path, null, this._settings, this._memoryStreamFactory);
-						requestData.Uri = node.CreatePath(requestData.Path);
-
+						var requestData = new RequestData(HttpMethod.GET, path, null, this._settings, this._memoryStreamFactory) { Node = node };
 						var response = await this._connection.RequestAsync<SniffResponse>(requestData);
 						this._connectionPool.Reseed(response.Body.ToNodes(this._connectionPool.UsingSsl));
 						this.Refresh = true;
@@ -352,10 +331,9 @@ namespace Elasticsearch.Net.Connection
 		{
 			using (var audit = this.Audit(AuditEvent.HealthyResponse))
 			{
-				audit.Node = this.CurrentNode;
+				audit.Node = requestData.Node;
 				audit.Path = requestData.Path;
-				var uri = this.CurrentNode.CreatePath(requestData.Path);
-				requestData.Uri = uri;
+
 				ElasticsearchResponse<TReturn> response = null;
 				try
 				{
@@ -379,10 +357,9 @@ namespace Elasticsearch.Net.Connection
 		{
 			using (var audit = this.Audit(AuditEvent.HealthyResponse))
 			{
-				audit.Node = this.CurrentNode;
+				audit.Node = requestData.Node;
 				audit.Path = requestData.Path;
-				var uri = this.CurrentNode.CreatePath(requestData.Path);
-				requestData.Uri = uri;
+
 				ElasticsearchResponse<TReturn> response = null;
 				try
 				{
@@ -403,5 +380,9 @@ namespace Elasticsearch.Net.Connection
 		}
 
 		private Auditable Audit(AuditEvent type) => new Auditable(type, this.AuditTrail, this._dateTimeProvider);
+
+		public void Dispose()
+		{
+		}
 	}
 }

@@ -72,25 +72,26 @@ namespace Elasticsearch.Net.Connection
 				var exceptions = new List<ElasticsearchException>();
 				foreach (var node in pipeline.NextNode())
 				{
+					requestData.Node = node;
 					try
 					{
 						pipeline.SniffOnStaleCluster();
-						pipeline.Ping();
+						pipeline.Ping(node);
 						response = pipeline.CallElasticsearch<TReturn>(requestData);
 					}
 					catch (ElasticsearchException exception) when (!exception.Recoverable)
 					{
-						pipeline.MarkDead();
+						pipeline.MarkDead(node);
 						exception.RethrowKeepingStackTrace();
 					}
 					catch (ElasticsearchException exception)
 					{
-						pipeline.MarkDead();
+						pipeline.MarkDead(node);
 						exceptions.Add(exception);
 					}
 					if (response != null && response.SuccessOrKnownError)
 					{
-						pipeline.MarkAlive();
+						pipeline.MarkAlive(node);
 						return response;
 					}
 				}
@@ -112,25 +113,26 @@ namespace Elasticsearch.Net.Connection
 				var exceptions = new List<ElasticsearchException>();
 				foreach (var node in pipeline.NextNode())
 				{
+					requestData.Node = node;
 					try
 					{
 						await pipeline.SniffOnStaleClusterAsync();
-						await pipeline.PingAsync();
+						await pipeline.PingAsync(node);
 						response = await pipeline.CallElasticsearchAsync<TReturn>(requestData);
 					}
 					catch (ElasticsearchException exception) when (!exception.Recoverable)
 					{
-						pipeline.MarkDead();
+						pipeline.MarkDead(node);
 						exception.RethrowKeepingStackTrace();
 					}
 					catch (ElasticsearchException exception)
 					{
-						pipeline.MarkDead();
+						pipeline.MarkDead(node);
 						exceptions.Add(exception);
 					}
 					if (response != null && response.SuccessOrKnownError)
 					{
-						pipeline.MarkAlive();
+						pipeline.MarkAlive(node);
 						return response;
 					}
 				}

@@ -9,6 +9,7 @@ using Elasticsearch.Net.Connection.Security;
 using System.Threading;
 using System.IO.Compression;
 using Elasticsearch.Net.Serialization;
+using PurifyNet;
 
 namespace Elasticsearch.Net.Connection
 {
@@ -17,11 +18,12 @@ namespace Elasticsearch.Net.Connection
 		public const string MimeType = "application/json";
 		public const int BufferSize = 8096;
 
-		public Uri Uri { get; internal set; }
+		public Uri Uri => new Uri(this.Node.Uri, this.Path).Purify();
+
 		public HttpMethod Method { get; internal set; }
 		public string Path { get; }
 		public PostData<object> Data { get; }
-
+		public Node Node { get; internal set; }
 		public TimeSpan RequestTimeout { get; }
 		public int KeepAliveTime { get; }
 		public int KeepAliveInterval { get; }
