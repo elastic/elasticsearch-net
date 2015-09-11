@@ -41,9 +41,6 @@ namespace Nest
 			return this;
 		}
 
-		internal ElasticsearchResponse<T> CallWhen<T>(HttpMethod method, bool allSet, Func<IElasticsearchPathInfo<TParameters>, ElasticsearchResponse<T>> action) =>
-				allSet ? action(this) : null;
-
 	}
 
 	public interface IElasticsearchPathInfo
