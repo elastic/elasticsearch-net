@@ -15,7 +15,7 @@ namespace Nest
 	{
 		public DeleteSearchTemplateRequest(string templateName) : base(templateName) { }
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteTemplateRequestParameters> pathInfo)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<DeleteTemplateRequestParameters> pathInfo)
 		{
 			DeleteSearchTemplatePathInfo.Update(pathInfo, this);
 		}
@@ -23,7 +23,7 @@ namespace Nest
 
 	internal static class DeleteSearchTemplatePathInfo
 	{
-		public static void Update(ElasticsearchPathInfo<DeleteTemplateRequestParameters> pathInfo, IDeleteSearchTemplateRequest request)
+		public static void Update(RequestPath<DeleteTemplateRequestParameters> pathInfo, IDeleteSearchTemplateRequest request)
 		{
 			pathInfo.Id = request.Name;
 			pathInfo.HttpMethod = HttpMethod.DELETE;
@@ -33,7 +33,7 @@ namespace Nest
 	public partial class DeleteSearchTemplateDescriptor 
 		: NamePathDescriptor<DeleteSearchTemplateDescriptor, DeleteTemplateRequestParameters>, IDeleteSearchTemplateRequest
 	{
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteTemplateRequestParameters> pathInfo)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<DeleteTemplateRequestParameters> pathInfo)
 		{
 			DeleteSearchTemplatePathInfo.Update(pathInfo, this);
 		}

@@ -16,7 +16,7 @@ namespace Nest
 
 	internal static class IndicesStatsPathInfo
 	{
-		public static void Update(IConnectionSettingsValues settings, ElasticsearchPathInfo<IndicesStatsRequestParameters> pathInfo, IIndicesStatsRequest request)
+		public static void Update(IConnectionSettingsValues settings, RequestPath<IndicesStatsRequestParameters> pathInfo, IIndicesStatsRequest request)
 		{
 			if (request.Types.HasAny())
 			{
@@ -35,7 +35,7 @@ namespace Nest
 		public IEnumerable<IndicesStatsMetric> Metrics { get; set; }
 		public IEnumerable<TypeName> Types { get; set; }
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<IndicesStatsRequestParameters> pathInfo)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<IndicesStatsRequestParameters> pathInfo)
 		{
 			IndicesStatsPathInfo.Update(settings, pathInfo , this);
 		}
@@ -63,7 +63,7 @@ namespace Nest
 			return this;
 		}
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<IndicesStatsRequestParameters> pathInfo)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<IndicesStatsRequestParameters> pathInfo)
 		{
 			IndicesStatsPathInfo.Update(settings, pathInfo, this);
 		}

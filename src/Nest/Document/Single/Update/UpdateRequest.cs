@@ -42,7 +42,7 @@ namespace Nest
 	{
 		public static void Update<TDocument, TPartialDocument>(
 			IConnectionSettingsValues settings,
-			ElasticsearchPathInfo<UpdateRequestParameters> pathInfo,
+			RequestPath<UpdateRequestParameters> pathInfo,
 			IUpdateRequest<TDocument, TPartialDocument> self)
 			where TDocument : class
 			where TPartialDocument : class
@@ -86,7 +86,7 @@ namespace Nest
 				this.Upsert = idFrom;
 		}
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<UpdateRequestParameters> pathInfo)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<UpdateRequestParameters> pathInfo)
 		{
 			UpdateRequestPathInfo.Update(settings, pathInfo, this);
 		}
@@ -206,7 +206,7 @@ namespace Nest
 			return this;
 		}
 			
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<UpdateRequestParameters> pathInfo)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<UpdateRequestParameters> pathInfo)
 		{
 			UpdateRequestPathInfo.Update(settings, pathInfo, this);
 		}

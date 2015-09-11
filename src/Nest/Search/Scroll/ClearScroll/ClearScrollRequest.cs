@@ -14,7 +14,7 @@ namespace Nest
 
 	internal static class ClearScrollPathInfo
 	{
-		public static void Update(ElasticsearchPathInfo<ClearScrollRequestParameters> pathInfo, IClearScrollRequest request)
+		public static void Update(RequestPath<ClearScrollRequestParameters> pathInfo, IClearScrollRequest request)
 		{
 			if (request.ScrollId.IsNullOrEmpty())
 				throw new DslException("missing ScrollId()");
@@ -33,7 +33,7 @@ namespace Nest
 			this.ScrollId = scrollId;
 		}
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ClearScrollRequestParameters> pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<ClearScrollRequestParameters> pathInfo)
 		{
 			ClearScrollPathInfo.Update(pathInfo, this);
 		}
@@ -55,7 +55,7 @@ namespace Nest
 			return this;
 		}
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ClearScrollRequestParameters> pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<ClearScrollRequestParameters> pathInfo)
 		{
 			ClearScrollPathInfo.Update(pathInfo, this);
 		}

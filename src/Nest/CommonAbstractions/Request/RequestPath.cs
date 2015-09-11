@@ -5,7 +5,7 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	public interface IElasticsearchPathInfo
+	public interface IRequestPath
 	{
 		HttpMethod HttpMethod { get; set; }
 		Indices Index { get; set; }
@@ -24,7 +24,13 @@ namespace Nest
 		string IndexMetric { get; set; }
 	}
 
-	public class ElasticsearchPathInfo<TParameters> : IElasticsearchPathInfo<TParameters>
+	public interface IRequestPath<TParameters> : IRequestPath
+		where TParameters : IRequestParameters, new()
+	{
+		TParameters RequestParameters { get; set; }
+	}
+
+	public class RequestPath<TParameters> : IRequestPath<TParameters>
 		where TParameters : IRequestParameters, new()
 	{
 		public HttpMethod HttpMethod { get; set; }
@@ -46,49 +52,43 @@ namespace Nest
 		public string IndexMetric { get; set; }
 		public string Lang { get; set; }
 
-		public ElasticsearchPathInfo()
+		public RequestPath()
 		{
 			this.RequestParameters = new TParameters();
 		}
 
-        public ElasticsearchPathInfo<TParameters> Required(Indices indices)
+        public RequestPath<TParameters> Required(Indices indices)
         {
             this.Index = indices;
             return this;
         }
 
-        public ElasticsearchPathInfo<TParameters> Optional(Indices indices)
+        public RequestPath<TParameters> Optional(Indices indices)
         {
             this.Index = indices;
             return this;
         }
 
-        public ElasticsearchPathInfo<TParameters> Required(Types types)
+        public RequestPath<TParameters> Required(Types types)
         {
             this.Type = types;
             return this;
         }
 
-        public ElasticsearchPathInfo<TParameters> Optional(Types types)
+        public RequestPath<TParameters> Optional(Types types)
         {
             this.Type = types;
             return this;
         }
 
-		public ElasticsearchPathInfo<TParameters> DeserializationOverride(Func<IApiCallDetails, Stream, object> customObjectCreation)
+		public RequestPath<TParameters> DeserializationOverride(Func<IApiCallDetails, Stream, object> customObjectCreation)
 		{
 			this.RequestParameters.DeserializationOverride = customObjectCreation;
 			return this;
 		}
 
-		internal ElasticsearchResponse<T> CallWhen<T>(HttpMethod method, bool allSet, Func<IElasticsearchPathInfo<TParameters>, ElasticsearchResponse<T>> action) =>
+		internal ElasticsearchResponse<T> CallWhen<T>(HttpMethod method, bool allSet, Func<IRequestPath<TParameters>, ElasticsearchResponse<T>> action) =>
 				allSet ? action(this) : null;
 
-	}
-
-	public interface IElasticsearchPathInfo<TParameters> : IElasticsearchPathInfo
-		where TParameters : IRequestParameters, new()
-	{
-		TParameters RequestParameters { get; set; }
 	}
 }

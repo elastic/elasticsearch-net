@@ -15,7 +15,7 @@ namespace Nest
 
 	internal static class GetAliasPathInfo
 	{
-		public static void Update(ElasticsearchPathInfo<GetAliasRequestParameters> pathInfo, IGetAliasRequest request)
+		public static void Update(RequestPath<GetAliasRequestParameters> pathInfo, IGetAliasRequest request)
 		{
 			pathInfo.HttpMethod = HttpMethod.GET;
 			pathInfo.Name = request.Alias ?? "*";
@@ -26,7 +26,7 @@ namespace Nest
 	{
 		public string Alias { get; set; }
 		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<GetAliasRequestParameters> pathInfo)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<GetAliasRequestParameters> pathInfo)
 		{
 			GetAliasPathInfo.Update(pathInfo, this);
 		}
@@ -47,7 +47,7 @@ namespace Nest
 			return this;
 		}
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<GetAliasRequestParameters> pathInfo)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<GetAliasRequestParameters> pathInfo)
 		{
 			GetAliasPathInfo.Update(pathInfo, this);
 		}

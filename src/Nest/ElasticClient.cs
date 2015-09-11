@@ -70,24 +70,24 @@ namespace Nest
 			where T : class => this.Raw.DoRequestAsync<T>(method, path, data, requestParameters);
 
 
-		R IHighLevelToLowLevelDispatcher.Dispatch<D, Q, R>(D descriptor, Func<IApiCallDetails, Stream, R> responseGenerator, Func<ElasticsearchPathInfo<Q>, D, ElasticsearchResponse<R>> dispatch)
+		R IHighLevelToLowLevelDispatcher.Dispatch<D, Q, R>(D descriptor, Func<IApiCallDetails, Stream, R> responseGenerator, Func<RequestPath<Q>, D, ElasticsearchResponse<R>> dispatch)
 		{
 			var pathInfo = descriptor.ToPathInfo(this.ConnectionSettings);
 			var response = dispatch(pathInfo.DeserializationOverride(responseGenerator), descriptor);
 			return ResultsSelector<D, Q, R>(response, descriptor);
 		}
-		R IHighLevelToLowLevelDispatcher.Dispatch<D, Q, R>(D descriptor, Func<ElasticsearchPathInfo<Q>, D, ElasticsearchResponse<R>> dispatch)
+		R IHighLevelToLowLevelDispatcher.Dispatch<D, Q, R>(D descriptor, Func<RequestPath<Q>, D, ElasticsearchResponse<R>> dispatch)
 		{
 			var pathInfo = descriptor.ToPathInfo(this.ConnectionSettings);
 			var response = dispatch(pathInfo, descriptor);
 			return ResultsSelector<D, Q, R>(response, descriptor);
 		}
 
-		Task<I> IHighLevelToLowLevelDispatcher.DispatchAsync<D, Q, R, I>(D descriptor, Func<ElasticsearchPathInfo<Q>, D, Task<ElasticsearchResponse<R>>> dispatch)
+		Task<I> IHighLevelToLowLevelDispatcher.DispatchAsync<D, Q, R, I>(D descriptor, Func<RequestPath<Q>, D, Task<ElasticsearchResponse<R>>> dispatch)
 		{
 			return this.Dispatcher.DispatchAsync<D,Q,R,I>(descriptor, null, dispatch);
 		}
-		Task<I> IHighLevelToLowLevelDispatcher.DispatchAsync<D, Q, R, I>(D descriptor, Func<IApiCallDetails, Stream, R> responseGenerator, Func<ElasticsearchPathInfo<Q>, D, Task<ElasticsearchResponse<R>>> dispatch)
+		Task<I> IHighLevelToLowLevelDispatcher.DispatchAsync<D, Q, R, I>(D descriptor, Func<IApiCallDetails, Stream, R> responseGenerator, Func<RequestPath<Q>, D, Task<ElasticsearchResponse<R>>> dispatch)
 		{
 			var pathInfo = descriptor.ToPathInfo(this.ConnectionSettings);
 			return dispatch(pathInfo.DeserializationOverride(responseGenerator), descriptor)

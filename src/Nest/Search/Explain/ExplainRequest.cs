@@ -18,7 +18,7 @@ namespace Nest
 
 	internal static class ExplainPathInfo
 	{
-		public static void Update(ElasticsearchPathInfo<ExplainRequestParameters> pathInfo, IExplainRequest request)
+		public static void Update(RequestPath<ExplainRequestParameters> pathInfo, IExplainRequest request)
 		{
 			var source = request.RequestParameters.GetQueryStringValue<string>("source");
 			var q = request.RequestParameters.GetQueryStringValue<string>("q");
@@ -34,7 +34,7 @@ namespace Nest
 
 		public IQueryContainer Query { get; set; }
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ExplainRequestParameters> pathInfo)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<ExplainRequestParameters> pathInfo)
 		{
 			ExplainPathInfo.Update(pathInfo, this);
 		}
@@ -49,7 +49,7 @@ namespace Nest
 
 		public IQueryContainer Query { get; set; }
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ExplainRequestParameters> pathInfo)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<ExplainRequestParameters> pathInfo)
 		{
 			ExplainPathInfo.Update(pathInfo, this);
 		}
@@ -70,7 +70,7 @@ namespace Nest
 			return this;
 		}
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ExplainRequestParameters> pathInfo)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<ExplainRequestParameters> pathInfo)
 		{
 			ExplainPathInfo.Update(pathInfo, this);
 		}

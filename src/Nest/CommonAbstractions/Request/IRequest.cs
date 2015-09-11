@@ -21,6 +21,6 @@ namespace Nest
 		/// </summary>
 		TParameters RequestParameters { get; set; }
 
-        IElasticsearchPathInfo<TParameters> PathInfo { get; set; }
+        IRequestPath<TParameters> Path { get; set; }
 	}
 }

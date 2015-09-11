@@ -15,7 +15,7 @@ namespace Nest
 
 	internal static class CountPathInfo
 	{
-		public static void Update(ElasticsearchPathInfo<CountRequestParameters> pathInfo, ICountRequest request)
+		public static void Update(RequestPath<CountRequestParameters> pathInfo, ICountRequest request)
 		{
 			var source = request.RequestParameters.GetQueryStringValue<string>("source");
 			pathInfo.HttpMethod = source.IsNullOrEmpty() 
@@ -35,7 +35,7 @@ namespace Nest
 
 		public IQueryContainer Query { get; set; }
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CountRequestParameters> pathInfo)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<CountRequestParameters> pathInfo)
 		{
 			CountPathInfo.Update(pathInfo, this);
 		}
@@ -52,7 +52,7 @@ namespace Nest
 
 		public IQueryContainer Query { get; set; }
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CountRequestParameters> pathInfo)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<CountRequestParameters> pathInfo)
 		{
 			CountPathInfo.Update(pathInfo, this);
 		}
@@ -72,7 +72,7 @@ namespace Nest
 			return this;
 		}
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CountRequestParameters> pathInfo)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<CountRequestParameters> pathInfo)
 		{
 			CountPathInfo.Update(pathInfo, this);
 		}

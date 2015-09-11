@@ -23,53 +23,46 @@ namespace Nest
         TParameters IRequest<TParameters>.RequestParameters { get; set; } = new TParameters();
 
         [JsonIgnore]
-        public IElasticsearchPathInfo<TParameters> PathInfo { get; set; }
+        public IRequestPath<TParameters> Path { get; set; }
 
 		/// <summary>
 		/// Creates a PathInfo object from this request that we can use to dispatch into the low level client
 		/// </summary>
-		internal virtual ElasticsearchPathInfo<TParameters> ToPathInfo(
+		internal virtual IRequestPath<TParameters> GetRequestPath(
 			IConnectionSettingsValues settings, 
 			TParameters queryString
 			)
 		{
-			var pathInfo = new ElasticsearchPathInfo<TParameters>
-			{
-				RequestParameters = queryString
-			};
+            this.Path = this.Path ?? new RequestPath<TParameters>();
+
+            this.Path.RequestParameters = queryString;
 			//if this request describes request specific connection overrides make sure they are carried 
 			//over into the pathInfo object
 			var config = ((IRequest) this).RequestConfiguration;
 			if (config != null)
 			{
-				IRequestParameters p = pathInfo.RequestParameters;
+				IRequestParameters p = this.Path.RequestParameters;
 				p.RequestConfiguration = config;
 			}
 			
 			//ask subclasses to set the relevant pathInfo parameters
-			SetRouteParameters(settings, pathInfo);
+			SetRouteParameters(settings, this.Path);
+
 			//update the pathInfo, is abstract and forces each subclass to at a minimum set the HttpMethod
-			UpdatePathInfo(settings, pathInfo);
+			UpdateRequestPath(settings, this.Path);
 
-			ValidatePathInfo(pathInfo);
+			ValidateRequestPath(this.Path);
 
-			return pathInfo;
+            return this.Path; 
 		}
 
-		protected virtual void SetRouteParameters(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo) { }
+		protected virtual void SetRouteParameters(IConnectionSettingsValues settings, IRequestPath<TParameters> pathInfo) { }
 
-		protected virtual void ValidatePathInfo(ElasticsearchPathInfo<TParameters> pathInfo)
-		{
-		}
+		protected virtual void ValidateRequestPath(IRequestPath<TParameters> pathInfo) { }
 
-		protected virtual void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<TParameters> pathInfo)
+		protected virtual void UpdateRequestPath(IConnectionSettingsValues settings, IRequestPath<TParameters> pathInfo)
 		{
 			pathInfo.HttpMethod = pathInfo.RequestParameters.DefaultHttpMethod;
-		}
-		
-		ElasticsearchPathInfo<TParameters> IPathInfo<TParameters>.ToPathInfo(IConnectionSettingsValues settings)
-		{
-			return this.ToPathInfo(settings, this.Request.RequestParameters);
 		}
 	}
 }

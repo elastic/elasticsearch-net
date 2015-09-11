@@ -18,7 +18,7 @@ namespace Nest
 		public string Lang { get; set; }
 		public string Id { get; set; }
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteScriptRequestParameters> pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<DeleteScriptRequestParameters> pathInfo)
 		{
 			DeleteScriptPathInfo.Update(pathInfo, this);
 		}
@@ -26,7 +26,7 @@ namespace Nest
 
 	internal static class DeleteScriptPathInfo
 	{
-		public static void Update(ElasticsearchPathInfo<DeleteScriptRequestParameters> pathInfo, IDeleteScriptRequest request)
+		public static void Update(RequestPath<DeleteScriptRequestParameters> pathInfo, IDeleteScriptRequest request)
 		{
 			pathInfo.Id = request.Id;
 			pathInfo.Lang = request.Lang;
@@ -59,7 +59,7 @@ namespace Nest
 			return this;
 		}
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteScriptRequestParameters> pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<DeleteScriptRequestParameters> pathInfo)
 		{
 			DeleteScriptPathInfo.Update(pathInfo, this);
 		}

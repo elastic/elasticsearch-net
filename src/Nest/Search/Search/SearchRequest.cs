@@ -124,7 +124,7 @@ namespace Nest
 				return !typeDictionary.TryGetValue(h.Type, out t) ? returnType : t;
 			};
 		}
-		public static void Update(IConnectionSettingsValues settings, ElasticsearchPathInfo<SearchRequestParameters> pathInfo, ISearchRequest request)
+		public static void Update(IConnectionSettingsValues settings, RequestPath<SearchRequestParameters> pathInfo, ISearchRequest request)
 		{
 			pathInfo.HttpMethod = request.RequestParameters.ContainsKey("source") ? HttpMethod.GET : HttpMethod.POST;
 		}
@@ -177,7 +177,7 @@ namespace Nest
 
 		public SearchRequestParameters QueryString { get; set; }
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SearchRequestParameters> pathInfo) =>
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<SearchRequestParameters> pathInfo) =>
 			SearchPathInfo.Update(settings, pathInfo, this);
 
 	}
@@ -193,7 +193,7 @@ namespace Nest
 
 		public SearchRequest(IEnumerable<IndexName> indices, IEnumerable<TypeName> types = null) : base(indices, types) { }
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SearchRequestParameters> pathInfo) =>
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<SearchRequestParameters> pathInfo) =>
 			SearchPathInfo.Update(settings,pathInfo, this);
 
 		public Type ClrType => typeof(T);
@@ -841,7 +841,7 @@ namespace Nest
 		public SearchDescriptor<T> ConcreteTypeSelector(Func<dynamic, Hit<dynamic>, Type> typeSelector) =>
 			_assign(a => a.TypeSelector = typeSelector);
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SearchRequestParameters> pathInfo) =>
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<SearchRequestParameters> pathInfo) =>
 			SearchPathInfo.Update(settings,pathInfo, this);
 
 	}

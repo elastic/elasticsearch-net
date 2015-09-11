@@ -17,7 +17,7 @@ namespace Nest
 
 	internal static class DeleteByQueryPathInfo
 	{
-		public static void Update(ElasticsearchPathInfo<DeleteByQueryRequestParameters> pathInfo, IDeleteByQueryRequest request)
+		public static void Update(RequestPath<DeleteByQueryRequestParameters> pathInfo, IDeleteByQueryRequest request)
 		{
 			pathInfo.HttpMethod = HttpMethod.DELETE;
 			//query works a bit different in that if all types and all indices are specified the root 
@@ -41,7 +41,7 @@ namespace Nest
 		public IQueryContainer Query { get; set; }
 
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteByQueryRequestParameters> pathInfo)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<DeleteByQueryRequestParameters> pathInfo)
 		{
 			DeleteByQueryPathInfo.Update(pathInfo, this);
 		}
@@ -58,7 +58,7 @@ namespace Nest
 
 		public IQueryContainer Query { get; set; }
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteByQueryRequestParameters> pathInfo)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<DeleteByQueryRequestParameters> pathInfo)
 		{
 			DeleteByQueryPathInfo.Update(pathInfo, this);
 		}
@@ -85,7 +85,7 @@ namespace Nest
 			return this;
 		}
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteByQueryRequestParameters> pathInfo)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<DeleteByQueryRequestParameters> pathInfo)
 		{
 			DeleteByQueryPathInfo.Update(pathInfo, this);
 		}

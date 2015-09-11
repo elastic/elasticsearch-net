@@ -190,7 +190,7 @@ namespace Nest
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CatHelpRequestParameters> pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<CatHelpRequestParameters> pathInfo)
 		{
 			throw new NotImplementedException();
 		}
@@ -276,7 +276,7 @@ namespace Nest
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CatNodeattrsRequestParameters> pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<CatNodeattrsRequestParameters> pathInfo)
 		{
 			throw new NotImplementedException();
 		}
@@ -1806,7 +1806,7 @@ namespace Nest
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<IndicesShardStoresRequestParameters> pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<IndicesShardStoresRequestParameters> pathInfo)
 		{
 			throw new NotImplementedException();
 		}
@@ -2205,7 +2205,7 @@ namespace Nest
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
 		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<RenderSearchTemplateRequestParameters> pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<RenderSearchTemplateRequestParameters> pathInfo)
 		{
 			throw new NotImplementedException();
 		}

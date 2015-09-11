@@ -10,23 +10,23 @@ namespace Nest
 {
 	public interface IHighLevelToLowLevelDispatcher
 	{
-		R Dispatch<D, Q, R>(D descriptor, Func<ElasticsearchPathInfo<Q>, D, ElasticsearchResponse<R>> dispatch)
+		R Dispatch<D, Q, R>(D descriptor, Func<RequestPath<Q>, D, ElasticsearchResponse<R>> dispatch)
 			where Q : FluentRequestParameters<Q>, new()
 			where D : IRequest<Q>
 			where R : BaseResponse;
 
-		R Dispatch<D, Q, R>(D descriptor, Func<IApiCallDetails, Stream, R> responseGenerator, Func<ElasticsearchPathInfo<Q>, D, ElasticsearchResponse<R>> dispatch)
+		R Dispatch<D, Q, R>(D descriptor, Func<IApiCallDetails, Stream, R> responseGenerator, Func<RequestPath<Q>, D, ElasticsearchResponse<R>> dispatch)
 			where Q : FluentRequestParameters<Q>, new()
 			where D : IRequest<Q>
 			where R : BaseResponse;
 
-		Task<I> DispatchAsync<D, Q, R, I>(D descriptor, Func<ElasticsearchPathInfo<Q>, D, Task<ElasticsearchResponse<R>>> dispatch)
+		Task<I> DispatchAsync<D, Q, R, I>(D descriptor, Func<RequestPath<Q>, D, Task<ElasticsearchResponse<R>>> dispatch)
 			where Q : FluentRequestParameters<Q>, new()
 			where D : IRequest<Q>
 			where R : BaseResponse, I
 			where I : IResponse;
 
-		Task<I> DispatchAsync<D, Q, R, I>(D descriptor, Func<IApiCallDetails, Stream, R> responseGenerator, Func<ElasticsearchPathInfo<Q>, D, Task<ElasticsearchResponse<R>>> dispatch)
+		Task<I> DispatchAsync<D, Q, R, I>(D descriptor, Func<IApiCallDetails, Stream, R> responseGenerator, Func<RequestPath<Q>, D, Task<ElasticsearchResponse<R>>> dispatch)
 			where Q : FluentRequestParameters<Q>, new()
 			where D : IRequest<Q>
 			where R : BaseResponse, I

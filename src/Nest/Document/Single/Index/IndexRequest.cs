@@ -21,7 +21,7 @@ namespace Nest
 
 	internal static class IndexPathInfo
 	{
-		public static void Update<T>(ElasticsearchPathInfo<IndexRequestParameters> pathInfo, IIndexRequest<T> request) 
+		public static void Update<T>(RequestPath<IndexRequestParameters> pathInfo, IIndexRequest<T> request) 
 			where T : class
 		{
 			pathInfo.Index.ThrowIfNull("index");
@@ -43,7 +43,7 @@ namespace Nest
 			this.Document = document;
 		}
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<IndexRequestParameters> pathInfo)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<IndexRequestParameters> pathInfo)
 		{
 			IndexPathInfo.Update(pathInfo, this);
 		}
@@ -63,7 +63,7 @@ namespace Nest
 			a.IdFrom = document;
         });
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<IndexRequestParameters> pathInfo)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<IndexRequestParameters> pathInfo)
 		{
 			IndexPathInfo.Update(pathInfo, this);
 		}

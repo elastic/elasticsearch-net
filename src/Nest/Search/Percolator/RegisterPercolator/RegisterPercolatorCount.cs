@@ -17,7 +17,7 @@ namespace Nest
 
 	internal static class RegisterPercolatorPathInfo
 	{
-		public static void Update(ElasticsearchPathInfo<IndexRequestParameters> pathInfo, IRegisterPercolatorRequest request)
+		public static void Update(RequestPath<IndexRequestParameters> pathInfo, IRegisterPercolatorRequest request)
 		{
 			pathInfo.HttpMethod = HttpMethod.POST;
 			pathInfo.Index = pathInfo.Index;
@@ -35,7 +35,7 @@ namespace Nest
 		public IDictionary<string, object> MetaData { get; set; }
 		public QueryContainer Query { get; set; }
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<IndexRequestParameters> pathInfo)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<IndexRequestParameters> pathInfo)
 		{
 			RegisterPercolatorPathInfo.Update(pathInfo, this);
 		}
@@ -86,7 +86,7 @@ namespace Nest
 				.Add("query", Self.Query);
 		}
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<IndexRequestParameters> pathInfo)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<IndexRequestParameters> pathInfo)
 		{
 			RegisterPercolatorPathInfo.Update(pathInfo, this);
 		}

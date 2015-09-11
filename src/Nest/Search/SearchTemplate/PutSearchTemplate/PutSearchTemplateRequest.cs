@@ -23,7 +23,7 @@ namespace Nest
 		{
 		}
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<PutTemplateRequestParameters> pathInfo)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<PutTemplateRequestParameters> pathInfo)
 		{
 			PutSearchTemplatePathInfo.Update(pathInfo, this);
 		}
@@ -31,7 +31,7 @@ namespace Nest
 
 	internal static class PutSearchTemplatePathInfo
 	{
-		public static void Update(ElasticsearchPathInfo<PutTemplateRequestParameters> pathInfo, IPutSearchTemplateRequest request)
+		public static void Update(RequestPath<PutTemplateRequestParameters> pathInfo, IPutSearchTemplateRequest request)
 		{
 			pathInfo.Id = request.Name;
 			pathInfo.HttpMethod = HttpMethod.POST;
@@ -51,7 +51,7 @@ namespace Nest
 			return this;
 		}
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<PutTemplateRequestParameters> pathInfo)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<PutTemplateRequestParameters> pathInfo)
 		{
 			PutSearchTemplatePathInfo.Update(pathInfo, this);
 		}

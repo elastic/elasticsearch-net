@@ -19,7 +19,7 @@ namespace Nest
 
 	internal static class ValidateQueryPathInfo
 	{
-		public static void Update(ElasticsearchPathInfo<ValidateQueryRequestParameters> pathInfo, IValidateQueryRequest request)
+		public static void Update(RequestPath<ValidateQueryRequestParameters> pathInfo, IValidateQueryRequest request)
 		{
 			var source = request.RequestParameters.GetQueryStringValue<string>("source");
 			var q = request.RequestParameters.GetQueryStringValue<string>("q");
@@ -39,7 +39,7 @@ namespace Nest
 
 		public IQueryContainer Query { get; set; }
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ValidateQueryRequestParameters> pathInfo)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<ValidateQueryRequestParameters> pathInfo)
 		{
 			ValidateQueryPathInfo.Update(pathInfo, this);
 		}
@@ -57,7 +57,7 @@ namespace Nest
 
 		public IQueryContainer Query { get; set; }
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ValidateQueryRequestParameters> pathInfo)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<ValidateQueryRequestParameters> pathInfo)
 		{
 			ValidateQueryPathInfo.Update(pathInfo, this);
 		}
@@ -79,7 +79,7 @@ namespace Nest
 			return this;
 		}
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ValidateQueryRequestParameters> pathInfo)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<ValidateQueryRequestParameters> pathInfo)
 		{
 			ValidateQueryPathInfo.Update(pathInfo, this);
 		}

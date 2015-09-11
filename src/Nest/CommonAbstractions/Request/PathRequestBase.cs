@@ -14,9 +14,9 @@ namespace Nest
         {
         }
 
-        public PathRequestBase(Func<ElasticsearchPathInfo<TParameters>, ElasticsearchPathInfo<TParameters>> pathSelector)
+        public PathRequestBase(Func<RequestPath<TParameters>, RequestPath<TParameters>> pathSelector)
         {
-            this.PathInfo = pathSelector(new ElasticsearchPathInfo<TParameters>());
+            this.Path = pathSelector(new RequestPath<TParameters>());
         }
 
 		protected TOut Q<TOut>(string name) =>
@@ -35,9 +35,9 @@ namespace Nest
         {
         }
 
-        public PathDescriptorBase(Func<ElasticsearchPathInfo<TParameters>, ElasticsearchPathInfo<TParameters>> pathSelector)
+        public PathDescriptorBase(Func<RequestPath<TParameters>, RequestPath<TParameters>> pathSelector)
         {
-            this.PathInfo = pathSelector(new ElasticsearchPathInfo<TParameters>());
+            this.Path = pathSelector(new RequestPath<TParameters>());
         }
 
 		protected TDescriptor _requestParams(Action<TParameters> assigner)

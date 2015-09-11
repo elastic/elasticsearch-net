@@ -14,14 +14,14 @@ namespace Nest
 	[Serializable]
 	public class DispatchException : System.Exception
 	{
-		public IElasticsearchPathInfo Provided { get; }
+		public IRequestPath Provided { get; }
 
-		public DispatchException(string msg, IElasticsearchPathInfo provided) : base(msg)
+		public DispatchException(string msg, IRequestPath provided) : base(msg)
 		{
 			Provided = provided;
 		}
 
-		public static DispatchException InvalidDispatch(string apiCall, IElasticsearchPathInfo provided, HttpMethod[] methods, params string[] endpoints)
+		public static DispatchException InvalidDispatch(string apiCall, IRequestPath provided, HttpMethod[] methods, params string[] endpoints)
 		{
 			var sb = new StringBuilder();
 			sb.AppendLine($"Dispatching {apiCall}() from NEST into to Elasticsearch.NET failed");

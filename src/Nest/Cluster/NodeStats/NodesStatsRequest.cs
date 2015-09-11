@@ -15,7 +15,7 @@ namespace Nest
 
 	internal static class NodesStatsPathInfo
 	{
-		public static void Update(ElasticsearchPathInfo<NodesStatsRequestParameters> pathInfo, INodesStatsRequest request)
+		public static void Update(RequestPath<NodesStatsRequestParameters> pathInfo, INodesStatsRequest request)
 		{
 			pathInfo.HttpMethod = HttpMethod.GET;
 			if (request.Metrics != null)
@@ -30,7 +30,7 @@ namespace Nest
 		public IEnumerable<NodesStatsMetric> Metrics { get; set; }
 		public IEnumerable<NodesStatsIndexMetric> IndexMetrics { get; set; }
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<NodesStatsRequestParameters> pathInfo)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<NodesStatsRequestParameters> pathInfo)
 		{
 			NodesStatsPathInfo.Update(pathInfo, this);
 		}
@@ -54,7 +54,7 @@ namespace Nest
 			return this;
 		}
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<NodesStatsRequestParameters> pathInfo)
+		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<NodesStatsRequestParameters> pathInfo)
 		{
 			NodesStatsPathInfo.Update(pathInfo, this);
 		}
