@@ -12,6 +12,6 @@ namespace Nest
 	
 	public partial class ClusterGetSettingsRequest : PathRequestBase<ClusterGetSettingsRequestParameters>, IClusterGetSettingsRequest { }
 
-	public partial class ClusterGetSettingsDescriptor : PathDescriptorBase<ClusterGetSettingsDescriptor, ClusterGetSettingsRequestParameters>
+	public partial class ClusterGetSettingsDescriptor : RequestDescriptorBase<ClusterGetSettingsDescriptor, ClusterGetSettingsRequestParameters>
 		, IClusterGetSettingsRequest { }
 }

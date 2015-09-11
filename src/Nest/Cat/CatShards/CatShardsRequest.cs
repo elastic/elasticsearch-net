@@ -12,5 +12,5 @@ namespace Nest
 	 
 	public partial class CatShardsRequest : PathRequestBase<CatShardsRequestParameters>, ICatShardsRequest { }
 
-	public partial class CatShardsDescriptor : PathDescriptorBase<CatShardsDescriptor, CatShardsRequestParameters>, ICatShardsRequest { }
+	public partial class CatShardsDescriptor : RequestDescriptorBase<CatShardsDescriptor, CatShardsRequestParameters>, ICatShardsRequest { }
 }

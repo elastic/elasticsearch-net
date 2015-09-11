@@ -40,7 +40,7 @@ namespace Nest
 
 	}
 	[DescriptorFor("ClearScroll")]
-	public partial class ClearScrollDescriptor : PathDescriptorBase<ClearScrollDescriptor, ClearScrollRequestParameters>, IClearScrollRequest
+	public partial class ClearScrollDescriptor : RequestDescriptorBase<ClearScrollDescriptor, ClearScrollRequestParameters>, IClearScrollRequest
 	{
 		private IClearScrollRequest Self => this;
 

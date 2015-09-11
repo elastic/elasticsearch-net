@@ -57,8 +57,8 @@ namespace Nest
 		private IPingRequest SetPingTimeout(IPingRequest pingRequest)
 		{
 			if (!this.ConnectionSettings.PingTimeout.HasValue) return pingRequest;
-			if (pingRequest.RequestConfiguration == null) pingRequest.RequestConfiguration = new RequestConfiguration();
-			pingRequest.RequestConfiguration.RequestTimeout = this.ConnectionSettings.PingTimeout.Value;
+			if (pingRequest.Configuration == null) pingRequest.Configuration = new RequestConfiguration();
+			pingRequest.Configuration.RequestTimeout = this.ConnectionSettings.PingTimeout.Value;
 			return pingRequest;
 		}
 

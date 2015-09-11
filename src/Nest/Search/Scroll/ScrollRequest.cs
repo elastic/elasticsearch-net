@@ -22,8 +22,8 @@ namespace Nest
 			pathInfo.HttpMethod = HttpMethod.POST;
 			pathInfo.ScrollId = request.ScrollId;
 			// force scroll id out of RequestParameters (potentially very large)
-			request.RequestParameters.RemoveQueryString("scroll_id");
-			request.RequestParameters.AddQueryString("scroll", request.Scroll);
+			request.Parameters.RemoveQueryString("scroll_id");
+			request.Parameters.AddQueryString("scroll", request.Scroll);
 		}
 	}
 
@@ -44,7 +44,7 @@ namespace Nest
 		}
 	}
 
-	public partial class ScrollDescriptor<T> : PathDescriptorBase<ScrollDescriptor<T>, ScrollRequestParameters>, IScrollRequest,
+	public partial class ScrollDescriptor<T> : RequestDescriptorBase<ScrollDescriptor<T>, ScrollRequestParameters>, IScrollRequest,
 		IHideObjectMembers
 		where T : class
 	{

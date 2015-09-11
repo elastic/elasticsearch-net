@@ -192,7 +192,7 @@ namespace Nest
 	}
 	
 	///<summary>descriptor for CatHelp <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat.html</pre></summary>
-	public partial class CatHelpDescriptor  : PathDescriptorBase<CatHelpDescriptor,CatHelpRequestParameters>
+	public partial class CatHelpDescriptor  : RequestDescriptorBase<CatHelpDescriptor,CatHelpRequestParameters>
 	{
 		///<summary>Return help information</summary>
 		public CatHelpDescriptor Help(bool help = true) => _requestParams(p=>p.Help(help));
@@ -269,7 +269,7 @@ namespace Nest
 	}
 	
 	///<summary>descriptor for CatNodeattrs <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodeattrs.html</pre></summary>
-	public partial class CatNodeattrsDescriptor  : PathDescriptorBase<CatNodeattrsDescriptor,CatNodeattrsRequestParameters>
+	public partial class CatNodeattrsDescriptor  : RequestDescriptorBase<CatNodeattrsDescriptor,CatNodeattrsRequestParameters>
 	{
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatNodeattrsDescriptor Local(bool local = true) => _requestParams(p=>p.Local(local));
@@ -1728,7 +1728,7 @@ namespace Nest
 	}
 	
 	///<summary>descriptor for IndicesPutMapping <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html</pre></summary>
-	public partial class PutMappingDescriptor  : PathDescriptorBase<PutMappingDescriptor,PutMappingRequestParameters>
+	public partial class PutMappingDescriptor  : RequestDescriptorBase<PutMappingDescriptor,PutMappingRequestParameters>
 	{
 		///<summary>Explicit operation timeout</summary>
 		public PutMappingDescriptor Timeout(string timeout) => _requestParams(p=>p.Timeout(timeout));
@@ -1909,7 +1909,7 @@ namespace Nest
 	}
 	
 	///<summary>descriptor for IndicesShardStoresForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shards-stores.html</pre></summary>
-	public partial class IndicesShardStoresDescriptor  : PathDescriptorBase<IndicesShardStoresDescriptor,IndicesShardStoresRequestParameters>
+	public partial class IndicesShardStoresDescriptor  : RequestDescriptorBase<IndicesShardStoresDescriptor,IndicesShardStoresRequestParameters>
 	{
 		///<summary>A comma-separated list of statuses used to filter on shards to get store information for</summary>
 		public IndicesShardStoresDescriptor Status(params string[] status) => _requestParams(p=>p.Status(status));
@@ -2379,7 +2379,7 @@ namespace Nest
 	}
 	
 	///<summary>descriptor for RenderSearchTemplate <pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</pre></summary>
-	public partial class RenderSearchTemplateDescriptor  : PathDescriptorBase<RenderSearchTemplateDescriptor,RenderSearchTemplateRequestParameters>
+	public partial class RenderSearchTemplateDescriptor  : RequestDescriptorBase<RenderSearchTemplateDescriptor,RenderSearchTemplateRequestParameters>
 	{
 		///<summary>The URL-encoded request definition</summary>
 		public RenderSearchTemplateDescriptor Source(string source) => _requestParams(p=>p.Source(source));

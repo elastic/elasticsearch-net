@@ -12,5 +12,5 @@ namespace Nest
 
 	public partial class PingRequest : PathRequestBase<PingRequestParameters>, IPingRequest { }
 
-	public partial class PingDescriptor : PathDescriptorBase<PingDescriptor, PingRequestParameters>, IPingRequest { }
+	public partial class PingDescriptor : RequestDescriptorBase<PingDescriptor, PingRequestParameters>, IPingRequest { }
 }

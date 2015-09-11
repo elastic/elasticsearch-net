@@ -12,5 +12,5 @@ namespace Nest
 		: PathRequestBase<ClusterPendingTasksRequestParameters>, IClusterPendingTasksRequest { }
 
 	public partial class ClusterPendingTasksDescriptor 
-		: PathDescriptorBase<ClusterPendingTasksDescriptor, ClusterPendingTasksRequestParameters>, IClusterPendingTasksRequest { }
+		: RequestDescriptorBase<ClusterPendingTasksDescriptor, ClusterPendingTasksRequestParameters>, IClusterPendingTasksRequest { }
 }

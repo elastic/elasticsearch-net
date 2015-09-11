@@ -12,5 +12,5 @@ namespace Nest
 
 	public partial class CatIndicesRequest : PathRequestBase<CatIndicesRequestParameters>, ICatIndicesRequest { }
 
-	public partial class CatIndicesDescriptor : PathDescriptorBase<CatIndicesDescriptor, CatIndicesRequestParameters>, ICatIndicesRequest { }
+	public partial class CatIndicesDescriptor : RequestDescriptorBase<CatIndicesDescriptor, CatIndicesRequestParameters>, ICatIndicesRequest { }
 }

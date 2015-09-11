@@ -13,7 +13,7 @@ namespace Nest
 
 	public interface IPutMappingRequest<T> : IPutMappingRequest where T : class { }
 
-	public partial class PutMappingRequest : PathRequestBase<PutMappingRequestParameters>, IPutMappingRequest
+	public partial class PutMappingRequest : RequestBase<PutMappingRequestParameters>, IPutMappingRequest
 	{
 		[Obsolete("Required for ReadAsTypeConverter.  This will be removed once we figure out a better way to deserialize.")]
 		public PutMappingRequest() { }
@@ -78,7 +78,7 @@ namespace Nest
 		public ITypeField TypeField { get; set; }
 	}
 
-	public partial class PutMappingRequest<T> : PathRequestBase<PutMappingRequestParameters>, IPutMappingRequest<T>
+	public partial class PutMappingRequest<T> : RequestBase<PutMappingRequestParameters>, IPutMappingRequest<T>
 		where T : class
 	{
 
@@ -138,7 +138,7 @@ namespace Nest
 
 	[DescriptorFor("IndicesPutMapping")]
 	public partial class PutMappingDescriptor<T> :
-		PathDescriptorBase<PutMappingDescriptor<T>, PutMappingRequestParameters>, IPutMappingRequest<T>
+		RequestDescriptorBase<PutMappingDescriptor<T>, PutMappingRequestParameters>, IPutMappingRequest<T>
 		where T : class
 	{
         public PutMappingDescriptor()

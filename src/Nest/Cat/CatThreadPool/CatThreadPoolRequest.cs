@@ -12,5 +12,5 @@ namespace Nest
 
 	public partial class CatThreadPoolRequest : PathRequestBase<CatThreadPoolRequestParameters>, ICatThreadPoolRequest { }
 
-	public partial class CatThreadPoolDescriptor : PathDescriptorBase<CatThreadPoolDescriptor, CatThreadPoolRequestParameters>, ICatThreadPoolRequest { }
+	public partial class CatThreadPoolDescriptor : RequestDescriptorBase<CatThreadPoolDescriptor, CatThreadPoolRequestParameters>, ICatThreadPoolRequest { }
 }

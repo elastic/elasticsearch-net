@@ -12,5 +12,5 @@ namespace Nest
 
 	public partial class CatMasterRequest : PathRequestBase<CatMasterRequestParameters>, ICatMasterRequest { }
 
-	public partial class CatMasterDescriptor : PathDescriptorBase<CatMasterDescriptor, CatMasterRequestParameters>, ICatMasterRequest { }
+	public partial class CatMasterDescriptor : RequestDescriptorBase<CatMasterDescriptor, CatMasterRequestParameters>, ICatMasterRequest { }
 }

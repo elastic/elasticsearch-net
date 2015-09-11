@@ -12,5 +12,5 @@ namespace Nest
 
 	public partial class CatAllocationRequest : PathRequestBase<CatAllocationRequestParameters>, ICatAllocationRequest { }
 
-	public partial class CatAllocationDescriptor : PathDescriptorBase<CatAllocationDescriptor, CatAllocationRequestParameters>, ICatAllocationRequest { }
+	public partial class CatAllocationDescriptor : RequestDescriptorBase<CatAllocationDescriptor, CatAllocationRequestParameters>, ICatAllocationRequest { }
 }

@@ -12,5 +12,5 @@ namespace Nest
 
 	public partial class CatPluginsRequest : PathRequestBase<CatPluginsRequestParameters>, ICatPluginsRequest { }
 
-	public partial class CatPluginsDescriptor : PathDescriptorBase<CatPluginsDescriptor, CatPluginsRequestParameters>, ICatPluginsRequest { }
+	public partial class CatPluginsDescriptor : RequestDescriptorBase<CatPluginsDescriptor, CatPluginsRequestParameters>, ICatPluginsRequest { }
 }

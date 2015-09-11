@@ -12,5 +12,5 @@ namespace Nest
 	public partial class InfoRequest : PathRequestBase<InfoRequestParameters>, IInfoRequest { }
 
 	[DescriptorFor("Info")]
-	public partial class InfoDescriptor : PathDescriptorBase<InfoDescriptor, InfoRequestParameters>, IInfoRequest { }
+	public partial class InfoDescriptor : RequestDescriptorBase<InfoDescriptor, InfoRequestParameters>, IInfoRequest { }
 }

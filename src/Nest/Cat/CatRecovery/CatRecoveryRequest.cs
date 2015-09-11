@@ -12,5 +12,5 @@ namespace Nest
 
 	public partial class CatRecoveryRequest : PathRequestBase<CatRecoveryRequestParameters>, ICatRecoveryRequest { }
 
-	public partial class CatRecoveryDescriptor : PathDescriptorBase<CatRecoveryDescriptor, CatRecoveryRequestParameters>, ICatRecoveryRequest { }
+	public partial class CatRecoveryDescriptor : RequestDescriptorBase<CatRecoveryDescriptor, CatRecoveryRequestParameters>, ICatRecoveryRequest { }
 }

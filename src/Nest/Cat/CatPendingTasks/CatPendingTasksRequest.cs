@@ -12,5 +12,5 @@ namespace Nest
 
 	public partial class CatPendingTasksRequest : PathRequestBase<CatPendingTasksRequestParameters>, ICatPendingTasksRequest { }
 
-	public partial class CatPendingTasksDescriptor : PathDescriptorBase<CatPendingTasksDescriptor, CatPendingTasksRequestParameters>, ICatPendingTasksRequest { }
+	public partial class CatPendingTasksDescriptor : RequestDescriptorBase<CatPendingTasksDescriptor, CatPendingTasksRequestParameters>, ICatPendingTasksRequest { }
 }

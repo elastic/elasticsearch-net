@@ -12,5 +12,5 @@ namespace Nest
 
 	public partial class CatHealthRequest : PathRequestBase<CatHealthRequestParameters>, ICatHealthRequest { }
 
-	public partial class CatHealthDescriptor : PathDescriptorBase<CatHealthDescriptor, CatHealthRequestParameters>, ICatHealthRequest { }
+	public partial class CatHealthDescriptor : RequestDescriptorBase<CatHealthDescriptor, CatHealthRequestParameters>, ICatHealthRequest { }
 }

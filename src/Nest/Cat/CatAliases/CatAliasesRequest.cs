@@ -12,5 +12,5 @@ namespace Nest
 
 	public partial class CatAliasesRequest : PathRequestBase<CatAliasesRequestParameters>, ICatAliasesRequest { }
 
-	public partial class CatAliasesDescriptor : PathDescriptorBase<CatAliasesDescriptor, CatAliasesRequestParameters>, ICatAliasesRequest { }
+	public partial class CatAliasesDescriptor : RequestDescriptorBase<CatAliasesDescriptor, CatAliasesRequestParameters>, ICatAliasesRequest { }
 }

@@ -22,7 +22,7 @@ namespace Nest
 	}
 
 	public partial class ClusterRerouteDescriptor 
-		: PathDescriptorBase<ClusterRerouteDescriptor, ClusterRerouteRequestParameters>, IClusterRerouteRequest
+		: RequestDescriptorBase<ClusterRerouteDescriptor, ClusterRerouteRequestParameters>, IClusterRerouteRequest
 	{
 		IClusterRerouteRequest Self => this;
 

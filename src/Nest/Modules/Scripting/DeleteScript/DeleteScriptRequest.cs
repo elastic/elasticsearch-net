@@ -35,7 +35,7 @@ namespace Nest
 	}
 
 	[DescriptorFor("ScriptDelete")]
-	public partial class DeleteScriptDescriptor : PathDescriptorBase<DeleteScriptDescriptor, DeleteScriptRequestParameters>, IDeleteScriptRequest
+	public partial class DeleteScriptDescriptor : RequestDescriptorBase<DeleteScriptDescriptor, DeleteScriptRequestParameters>, IDeleteScriptRequest
 	{
 		IDeleteScriptRequest Self => this;
 		string IDeleteScriptRequest.Lang { get; set; }

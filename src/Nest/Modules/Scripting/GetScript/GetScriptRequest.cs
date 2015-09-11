@@ -34,7 +34,7 @@ namespace Nest
 	}
 
 	[DescriptorFor("ScriptGet")]
-	public partial class GetScriptDescriptor : PathDescriptorBase<GetScriptDescriptor, GetScriptRequestParameters>, IGetScriptRequest
+	public partial class GetScriptDescriptor : RequestDescriptorBase<GetScriptDescriptor, GetScriptRequestParameters>, IGetScriptRequest
 	{
 		IGetScriptRequest Self => this;
 		string IGetScriptRequest.Lang { get; set; }

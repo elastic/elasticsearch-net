@@ -20,7 +20,7 @@ namespace Nest
 
 
 	[DescriptorFor("IndicesUpdateAliases")]
-	public partial class BulkAliasDescriptor : PathDescriptorBase<BulkAliasDescriptor, BulkAliasRequestParameters>, IBulkAliasRequest
+	public partial class BulkAliasDescriptor : RequestDescriptorBase<BulkAliasDescriptor, BulkAliasRequestParameters>, IBulkAliasRequest
 	{
 		public BulkAliasDescriptor Add(IAliasAction action) => 
 			Fluent.Assign<BulkAliasDescriptor, IBulkAliasRequest>(this, a=> a.Actions.AddIfNotNull(action));

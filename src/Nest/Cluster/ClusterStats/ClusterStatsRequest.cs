@@ -11,5 +11,5 @@ namespace Nest
 	public partial class ClusterStatsRequest : PathRequestBase<ClusterStatsRequestParameters>, IClusterStatsRequest { }
 
 	public partial class ClusterStatsDescriptor 
-		: PathDescriptorBase<ClusterStatsDescriptor, ClusterStatsRequestParameters>, IClusterStatsRequest { }
+		: RequestDescriptorBase<ClusterStatsDescriptor, ClusterStatsRequestParameters>, IClusterStatsRequest { }
 }

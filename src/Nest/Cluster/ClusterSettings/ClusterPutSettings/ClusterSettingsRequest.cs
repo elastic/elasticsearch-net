@@ -26,7 +26,7 @@ namespace Nest
 
 	[DescriptorFor("ClusterPutSettings")]
 	public partial class ClusterSettingsDescriptor : 
-		PathDescriptorBase<ClusterSettingsDescriptor, ClusterSettingsRequestParameters>
+		RequestDescriptorBase<ClusterSettingsDescriptor, ClusterSettingsRequestParameters>
 		, IClusterSettingsRequest
 	{
 		protected IClusterSettingsRequest Self => this;

@@ -12,5 +12,5 @@ namespace Nest
 
 	public partial class CatCountRequest : PathRequestBase<CatCountRequestParameters>, ICatCountRequest { }
 
-	public partial class CatCountDescriptor : PathDescriptorBase<CatCountDescriptor, CatCountRequestParameters>, ICatCountRequest { }
+	public partial class CatCountDescriptor : RequestDescriptorBase<CatCountDescriptor, CatCountRequestParameters>, ICatCountRequest { }
 }
