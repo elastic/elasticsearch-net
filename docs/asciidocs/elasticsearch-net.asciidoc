@@ -26,7 +26,7 @@ var client = new ElasticsearchClient(config);
 
 === Calling an API Endpoint
 
-Elasticsearch.Net is generated from the https://github.com/elasticsearch/elasticsearch/tree/master/rest-api-spec/api[the official client REST specification], and thus maps to all Elasticsearch API endpoints.
+Elasticsearch.Net is generated from the https://github.com/elastic/elasticsearch/tree/master/rest-api-spec[the official client REST specification], and thus maps to all Elasticsearch API endpoints.
 
 [source,c#]
 ------------------------------------
