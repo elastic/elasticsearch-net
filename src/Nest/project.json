@@ -1,0 +1,25 @@
+{
+  "version": "1.0.0-*",
+  "compilationOptions": {
+    "warningsAsErrors": false
+  },
+  "dependencies": {
+    "System.Runtime": "4.0.21-beta-23225",
+    "Newtonsoft.Json": "7.0.1"
+  },
+  "commands": {
+
+  },
+  "frameworks": {
+    "dotnet": {
+      "compilationOptions": { "define": [ "DOTNETCORE" ] },
+      "dependencies": {
+        "System.Linq": "4.0.0-beta-23109",
+        "System.Collections": "4.0.11-beta-23225",
+        "System.Dynamic.Runtime": "4.0.11-beta-23225",
+        "System.Threading": "4.0.11-beta-23225",
+        "Elasticsearch.Net": ""
+      }
+    }
+  }
+}

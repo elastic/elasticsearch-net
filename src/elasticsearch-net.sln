@@ -6,6 +6,8 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Elasticsearch.Net", "Elasti
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{87237912-4EFF-49B1-AE76-CD46D97A8DA1}"
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Nest", "Nest\Nest.xproj", "{5CED4B1F-25CF-4632-9EA0-023E7FAFA217}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -16,6 +18,10 @@ Global
 		{C837B88B-1395-424C-8A6D-BFB5B47B8B8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C837B88B-1395-424C-8A6D-BFB5B47B8B8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C837B88B-1395-424C-8A6D-BFB5B47B8B8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5CED4B1F-25CF-4632-9EA0-023E7FAFA217}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CED4B1F-25CF-4632-9EA0-023E7FAFA217}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CED4B1F-25CF-4632-9EA0-023E7FAFA217}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CED4B1F-25CF-4632-9EA0-023E7FAFA217}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
