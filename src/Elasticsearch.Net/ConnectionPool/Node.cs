@@ -1,5 +1,5 @@
 ﻿using System;
-using PurifyNet;
+using Purify;
 using Elasticsearch.Net.Providers;
 
 namespace Elasticsearch.Net.Connection

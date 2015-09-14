@@ -9,7 +9,7 @@ using Elasticsearch.Net.Connection.Security;
 using System.Threading;
 using System.IO.Compression;
 using Elasticsearch.Net.Serialization;
-using PurifyNet;
+using Purify;
 
 namespace Elasticsearch.Net.Connection
 {
@@ -169,7 +169,7 @@ namespace Elasticsearch.Net.Connection
 		private byte[] SwapStreams(ref Stream responseStream, ref MemoryStream ms)
 		{
 			var bytes = ms.ToArray();
-			responseStream.Close();
+			responseStream.Dispose();
 			responseStream = ms;
 			responseStream.Position = 0;
 			return bytes;
@@ -205,7 +205,7 @@ namespace Elasticsearch.Net.Connection
 
 		private void SetVoidResult(ElasticsearchResponse<VoidResponse> result, Stream response)
 		{
-			response.Close();
+			response.Dispose();
 			result.Body = _void;
 		}
 

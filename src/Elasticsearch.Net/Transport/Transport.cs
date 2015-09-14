@@ -7,7 +7,7 @@ using Elasticsearch.Net.Serialization;
 using Elasticsearch.Net.ConnectionPool;
 using Elasticsearch.Net.Providers;
 using Elasticsearch.Net.Connection.Configuration;
-using PurifyNet;
+using Purify;
 using System.IO;
 using System.Collections.Specialized;
 using System.Threading;

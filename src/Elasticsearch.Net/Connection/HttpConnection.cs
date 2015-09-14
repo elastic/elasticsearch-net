@@ -1,17 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
 using System.IO.Compression;
-using System.Linq;
+#if !DOTNETCORE
 using System.Net;
-using System.Runtime.InteropServices;
-using System.Security.Cryptography;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net.Connection.Configuration;
-using Elasticsearch.Net.Providers;
-using PurifyNet;
 
 namespace Elasticsearch.Net.Connection
 {
@@ -72,7 +64,7 @@ namespace Elasticsearch.Net.Connection
 			var m = requestData.Method.GetStringValue();
 			request.Method = m;
 			if (m != "head" && m != "get" && (requestData.Data == null))
-                request.ContentLength = 0;
+				request.ContentLength = 0;
 
 			return request;
 		}
@@ -194,3 +186,4 @@ namespace Elasticsearch.Net.Connection
 		}
 	}
 }
+#endif

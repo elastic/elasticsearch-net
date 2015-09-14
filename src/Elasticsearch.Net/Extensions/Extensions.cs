@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Globalization;
+using System.Reflection;
 
 namespace Elasticsearch.Net
 {
@@ -17,7 +18,11 @@ namespace Elasticsearch.Net
 
 			//TODO measure performance and cache 
 			var type = enumValue.GetType();
+#if DOTNETCORE
+			var info = type.GetTypeInfo().GetDeclaredField(enumValue.ToString());
+#else
 			var info = type.GetField(enumValue.ToString());
+#endif
 			var da = (EnumMemberAttribute[])(info.GetCustomAttributes(typeof(EnumMemberAttribute), false));
 
 			if (da.Length > 0)
@@ -33,7 +38,7 @@ namespace Elasticsearch.Net
 
 		internal static string Utf8String(this byte[] bytes)
 		{
-			return bytes == null ? null : Encoding.UTF8.GetString(bytes);
+			return bytes == null ? null : Encoding.UTF8.GetString(bytes,0, bytes.Length);
 		}
 	
 		internal static byte[] Utf8Bytes(this string s)
@@ -49,7 +54,7 @@ namespace Elasticsearch.Net
 			if (!char.IsUpper(s[0]))
 				return s;
 
-			string camelCase = char.ToLower(s[0], CultureInfo.InvariantCulture).ToString(CultureInfo.InvariantCulture);
+			string camelCase = char.ToLowerInvariant(s[0]).ToString();
 			if (s.Length > 1)
 				camelCase += s.Substring(1);
 

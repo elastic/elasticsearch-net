@@ -14,7 +14,7 @@ namespace Elasticsearch.Net
 		{
 			foreach (var key in source.AllKeys)
 			{
-				if (dest[key] != null) throw new ApplicationException(string.Format("Attempted to add duplicate key '{0}'", key));
+				if (dest[key] != null) throw new Exception(string.Format("Attempted to add duplicate key '{0}'", key));
 
 				dest.Add(key, source[key]);
 			}
@@ -26,8 +26,9 @@ namespace Elasticsearch.Net
 				return null;
 
 			if (self.AllKeys.Length == 0) return string.Empty;
-
-			return prefix + string.Join("&", Array.ConvertAll(self.AllKeys, key => string.Format("{0}={1}", Encode(key), Encode(self[key]))));
+			return prefix + string.Join("&", self.AllKeys.Select(key => string.Format("{0}={1}", Encode(key), Encode(self[key]))));
+			//TODO REMOVE COMMENTED CODE
+			//return prefix + string.Join("&", Array.ConvertAll(self.AllKeys, key => string.Format("{0}={1}", Encode(key), Encode(self[key]))));
 		}
 		private static string Encode(string s)
 		{

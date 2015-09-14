@@ -73,6 +73,10 @@
     <Compile Include="Auditting\Audit.cs" />
     <Compile Include="Auditting\Auditable.cs" />
     <Compile Include="Auditting\AuditEvent.cs" />
+    <Compile Include="CrossPlatform\Browsable.cs" />
+    <Compile Include="CrossPlatform\GenerateCode.cs" />
+    <Compile Include="CrossPlatform\SuppressMessage.cs" />
+    <Compile Include="CrossPlatform\TypeExtensions.cs" />
     <Compile Include="Responses\IBodyWithApiCallDetails.cs" />
     <Compile Include="Transport\Pipeline\RequestPipeline.cs" />
     <Compile Include="Transport\Pipeline\RequestData.cs" />
@@ -97,7 +101,6 @@
     <Compile Include="Providers\DateTimeProvider.cs" />
     <Compile Include="Connection\HttpConnection.cs" />
     <Compile Include="Exceptions\ElasticsearchServerException.cs" />
-    <Compile Include="Exceptions\ConnectionException.cs" />
     <Compile Include="Configuration\ConnectionConfiguration.cs" />
     <Compile Include="ConnectionPool\IConnectionPool.cs" />
     <Compile Include="Providers\IRequestPipelineFactory.cs" />
@@ -128,11 +131,7 @@
     <Compile Include="Domain\RequestParameters\FluentRequestParameters.cs" />
     <Compile Include="Domain\RequestParameters\RequestParameters.Generated.cs" />
     <Compile Include="Properties\ClsCompliancy.cs" />
-    <Compile Include="Purify\IPurify.cs" />
-    <Compile Include="Purify\PurifierDotNet.cs" />
-    <Compile Include="Purify\PurifierMono.cs" />
     <Compile Include="Purify\Purify.cs" />
-    <Compile Include="Purify\UriInfo.cs" />
     <Compile Include="Serialization\ElasticsearchDefaultSerializer.cs" />
     <Compile Include="Serialization\ElasticsearchNetJsonStrategy.cs" />
     <Compile Include="Serialization\IUrlParameter.cs" />

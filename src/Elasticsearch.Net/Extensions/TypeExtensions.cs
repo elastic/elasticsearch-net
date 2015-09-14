@@ -40,7 +40,7 @@ namespace Elasticsearch.Net
 			{
 				var generic = GetActivatorMethodInfo.MakeGenericMethod(t);
 
-				ConstructorInfo ctor = t.GetConstructors().FirstOrDefault(c=>c.GetParameters().Count() == argLength);
+				ConstructorInfo ctor = t.GetTypeInfo().DeclaredConstructors.FirstOrDefault(c=>c.GetParameters().Count() == argLength);
 				if (ctor == null)
 					throw new Exception("Cannot create an instance of " + t.FullName 
 						+ "because it has no constructor taking " + argLength + " arguments");

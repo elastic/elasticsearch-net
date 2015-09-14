@@ -6,6 +6,7 @@ using System.Linq;
 using Elasticsearch.Net.ConnectionPool;
 using Elasticsearch.Net.Serialization;
 using Elasticsearch.Net.Connection.Security;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Elasticsearch.Net.Connection
 {
@@ -152,7 +153,7 @@ namespace Elasticsearch.Net.Connection
 		IConnection _connection;
 		IConnection IConnectionConfigurationValues.Connection => _connection;
 
-		[System.Diagnostics.CodeAnalysis.SuppressMessage(
+		[SuppressMessage(
 			"Potential Code Quality Issues", "RECS0021:Warns about calls to virtual member functions occuring in the constructor", 
 			Justification = "We want the virtual method to run on most derived")]
 		protected ConnectionConfiguration(IConnectionPool connectionPool, IConnection connection, IElasticsearchSerializer serializer)
