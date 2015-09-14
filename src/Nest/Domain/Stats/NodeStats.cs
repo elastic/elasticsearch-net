@@ -250,6 +250,10 @@ namespace Nest
 			public string HeapCommitted { get; internal set; }
 			[JsonProperty("heap_committed_in_bytes")]
 			public long HeapCommittedInBytes { get; internal set; }
+			[JsonProperty("heap_max")]
+			public string HeapMax { get; internal set; }
+			[JsonProperty("heap_max_in_bytes")]
+			public long HeapMaxInBytes { get; internal set; }
 			[JsonProperty("non_heap_used")]
 			public string NonHeapUsed { get; internal set; }
 			[JsonProperty("non_heap_used_in_bytes")]
