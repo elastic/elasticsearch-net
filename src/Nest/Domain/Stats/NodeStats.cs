@@ -168,7 +168,7 @@ namespace Nest
 			[JsonProperty("actual_free")]
 			public string ActualFree { get; internal set; }
 			[JsonProperty("actual_free_in_bytes")]
-			public long ActualFreeInbytes { get; internal set; }
+			public long ActualFreeInBytes { get; internal set; }
 			[JsonProperty("actual_used")]
 			public string ActualUsed { get; internal set; }
 			[JsonProperty("actual_used_in_bytes")]
