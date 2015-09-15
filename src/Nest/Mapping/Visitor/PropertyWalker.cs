@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Collections;
 
 namespace Nest
 {
@@ -90,10 +91,10 @@ namespace Nest
 			if (type == typeof(string))
 				return new StringProperty();
 
-			if (type.IsEnum)
+			if (type.IsEnumType())
 				return new NumberProperty(NumberType.Integer);
 
-			if (type.IsValueType)
+			if (type.IsValue())
 			{
 				switch (type.Name)
 				{
@@ -129,7 +130,9 @@ namespace Nest
 			if (type.IsArray)
 				return type.GetElementType();
 
-			if (type.IsGenericType && type.GetGenericArguments().Length == 1 && (type.GetInterface("IEnumerable") != null || Nullable.GetUnderlyingType(type) != null))
+			var typeInfo = type.GetTypeInfo();
+			if (typeInfo.IsGenericType && type.GetGenericArguments().Length == 1 
+				&& (typeInfo.ImplementedInterfaces.HasAny(t=>t == typeof(IEnumerable)) || Nullable.GetUnderlyingType(type) != null))
 				return type.GetGenericArguments()[0];
 
 			return type;

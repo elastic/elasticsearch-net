@@ -65,7 +65,7 @@ namespace Nest
 				_restoreStatusHumbleObject.Completed += onCompleted;
 				_restoreStatusHumbleObject.Error += onError;
 
-				_timer = new Timer(Restore, observer, (long)_interval.TotalMilliseconds, Timeout.Infinite);
+				_timer = new Timer(Restore, observer, _interval, Timeout.InfiniteTimeSpan);
 			}
 			catch (Exception exception)
 			{
@@ -88,7 +88,7 @@ namespace Nest
 
 				_restoreStatusHumbleObject.CheckStatus();
 
-				_timer.Change(Math.Max(0, (long)_interval.TotalMilliseconds - watch.ElapsedMilliseconds), Timeout.Infinite);
+				_timer.Change(TimeSpan.FromMilliseconds(Math.Max(0, _interval.TotalMilliseconds - watch.ElapsedMilliseconds)), Timeout.InfiniteTimeSpan);
 			}
 			catch (Exception exception)
 			{

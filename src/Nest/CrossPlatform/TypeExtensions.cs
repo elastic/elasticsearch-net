@@ -27,7 +27,7 @@ namespace Elasticsearch.Net
 #endif
 		}
 
-		public static TypeCode GetTypeCode(this Type type)
+		internal static TypeCode GetTypeCode(this Type type)
 		{
 #if !DOTNETCORE
 			return Type.GetTypeCode(type);

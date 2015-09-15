@@ -29,7 +29,7 @@ namespace Nest.Resolvers
 
 		internal static Func<T, object> MakeDelegate<T, U>(MethodInfo @get)
 		{
-			var f = (Func<T, U>)Delegate.CreateDelegate(typeof(Func<T, U>), @get);
+			var f = (Func<T, U>)@get.CreateDelegate(typeof(Func<T, U>));
 			return t => f(t);
 		}
 

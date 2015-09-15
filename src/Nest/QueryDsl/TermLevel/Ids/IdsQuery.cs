@@ -40,7 +40,7 @@ namespace Nest
 		public IdsQueryDescriptor Type(IEnumerable<string> values) => Type(values.ToArray());
 
 		public IdsQueryDescriptor Values(params long[] values) =>
-			Assign(a => a.Values.Select(v => v.ToString(CultureInfo.InvariantCulture)).ToArray());
+			Values(values.Select(v => v.ToString(CultureInfo.InvariantCulture)).ToArray());
 
 		public IdsQueryDescriptor Values(IEnumerable<long> values) =>
 			Values(values.Select(v => v.ToString(CultureInfo.InvariantCulture)).ToArray());

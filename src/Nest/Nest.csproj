@@ -784,7 +784,6 @@
     <Compile Include="QueryDsl\ExternalFieldDeclaration.cs" />
     <Compile Include="QueryDsl\FullText\MultiMatch\MultiMatchQuery.cs" />
     <Compile Include="Cluster\ClusterState\ElasticClient-ClusterState.cs" />
-    <Compile Include="CommonAbstractions\Extensions\UriExtensions.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\StatefulDeserialization\ConcreteTypeConverter.cs" />
     <Compile Include="Indices\Warmers\Warmer.cs" />
     <Compile Include="Indices\Warmers\GetWarmer\WarmerResponse.cs">

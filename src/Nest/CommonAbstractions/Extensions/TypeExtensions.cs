@@ -118,5 +118,35 @@ namespace Nest
 			return  _jsonContract.PropertiesOfAll(t, memberSerialization);
 		}
 
+#if DOTNETCORE
+		internal static bool IsAssignableFrom(this Type t, Type other) => t.GetTypeInfo().IsAssignableFrom(other.GetTypeInfo());
+#endif
+
+		internal static bool IsGeneric(this Type type)
+		{
+#if DOTNETCORE
+			return type.GetTypeInfo().IsGenericType;
+#else
+		return type.IsGenericType;
+#endif
+		}
+
+		internal static bool IsValue(this Type type)
+		{
+#if DOTNETCORE
+			return type.GetTypeInfo().IsValueType;
+#else
+		return type.IsValueType;
+#endif
+		}
+
+		internal static bool IsEnumType(this Type type)
+		{
+#if DOTNETCORE
+			return type.GetTypeInfo().IsEnum;
+#else
+		return type.IsEnum;
+#endif
+		}
 	}
 }

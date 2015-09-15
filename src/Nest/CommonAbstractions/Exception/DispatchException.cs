@@ -11,7 +11,9 @@ namespace Nest
 	/// Occurs when an IElasticClient call does not have 
 	/// enough information to dispatch into the raw client.
 	/// </summary>
+#if !DOTNETCORE
 	[Serializable]
+#endif
 	public class DispatchException : System.Exception
 	{
 		public IElasticsearchPathInfo Provided { get; }

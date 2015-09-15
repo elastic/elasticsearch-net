@@ -11,6 +11,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Elasticsearch.Net.Serialization;
 using Elasticsearch.Net;
+using System.Reflection;
 
 namespace Nest
 {
@@ -59,7 +60,7 @@ namespace Nest
 			{
 				if (name.Equals(str, StringComparison.OrdinalIgnoreCase)) return (T)Enum.Parse(enumType, name);
 
-				var enumAttributes = ((EnumMemberAttribute[])enumType.GetField(name).GetCustomAttributes(typeof(EnumMemberAttribute), true));
+				var enumAttributes = ((EnumMemberAttribute[])(enumType.GetTypeInfo().GetDeclaredField(name).GetCustomAttributes(typeof(EnumMemberAttribute), true)));
 				if (!enumAttributes.HasAny()) continue;
 
 				var enumMemberAttribute = enumAttributes.Single();
@@ -70,7 +71,7 @@ namespace Nest
 		}
 		internal static string Utf8String(this byte[] bytes)
 		{
-			return bytes == null ? null : Encoding.UTF8.GetString(bytes);
+			return bytes == null ? null : Encoding.UTF8.GetString(bytes, 0, bytes.Length);
 		}
 
 		internal static byte[] Utf8Bytes(this string s)
