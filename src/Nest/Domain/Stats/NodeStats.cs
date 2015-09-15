@@ -13,13 +13,13 @@ namespace Nest
 
 		[JsonProperty("name")]
 		public string Name { get; internal set; }
-		
+
 		[JsonProperty("transport_address")]
 		public string TransportAddress { get; internal set; }
 
 		// TODO: Rename to Host in 2.0
 		[JsonProperty("host")]
-		public string Hostname { get; internal set; } 
+		public string Hostname { get; internal set; }
 
 		[JsonProperty("indices")]
 		public NodeStatsIndexes Indices { get; internal set; }
@@ -168,8 +168,7 @@ namespace Nest
 			[JsonProperty("actual_free")]
 			public string ActualFree { get; internal set; }
 			[Obsolete]
-			[JsonProperty("actual_free_in_bytes")]
-			public long ActualFreeInbytes { get; internal set; }
+			public long ActualFreeInbytes { get { return ActualFreeInBytes; } internal set { ActualFreeInBytes = value; } }
 			[JsonProperty("actual_free_in_bytes")]
 			public long ActualFreeInBytes { get; internal set; }
 			[JsonProperty("actual_used")]
