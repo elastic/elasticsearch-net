@@ -167,7 +167,7 @@ namespace Nest
 			[JsonProperty("actual_free")]
 			public string ActualFree { get; internal set; }
 			[JsonProperty("actual_free_in_bytes")]
-			public long ActualFreeInbytes { get; internal set; }
+			public long ActualFreeInBytes { get; internal set; }
 			[JsonProperty("actual_used")]
 			public string ActualUsed { get; internal set; }
 			[JsonProperty("actual_used_in_bytes")]
@@ -249,6 +249,10 @@ namespace Nest
 			public string HeapCommitted { get; internal set; }
 			[JsonProperty("heap_committed_in_bytes")]
 			public long HeapCommittedInBytes { get; internal set; }
+			[JsonProperty("heap_max")]
+			public string HeapMax { get; internal set; }
+			[JsonProperty("heap_max_in_bytes")]
+			public long HeapMaxInBytes { get; internal set; }
 			[JsonProperty("non_heap_used")]
 			public string NonHeapUsed { get; internal set; }
 			[JsonProperty("non_heap_used_in_bytes")]
