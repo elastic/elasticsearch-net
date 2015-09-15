@@ -57,9 +57,12 @@ namespace Nest
 
 		[JsonProperty("matched_fields")]
 		IEnumerable<PropertyPathMarker> MatchedFields { get; set; }
-	}
 
-	public class HighlightField : IHighlightField
+        [JsonProperty("highlight_query")]
+        IQueryContainer HighlightQuery { get; set; }
+    }
+
+    public class HighlightField : IHighlightField
 	{
 		public PropertyPathMarker Field { get; set; }
 		public IEnumerable<string> PreTags { get; set; }
@@ -77,7 +80,8 @@ namespace Nest
 		public string Type { get; set; }
 		public bool? ForceSource { get; set; }
 		public IEnumerable<PropertyPathMarker> MatchedFields { get; set; }
-	}
+        public IQueryContainer HighlightQuery { get; set; }
+    }
 
 	public class HighlightFieldDescriptor<T> : IHighlightField where T : class
 	{
@@ -113,9 +117,11 @@ namespace Nest
 
 		bool? IHighlightField.ForceSource { get; set; }
 
-		IEnumerable<PropertyPathMarker> IHighlightField.MatchedFields { get; set; }
-		
-		public HighlightFieldDescriptor<T> OnField(string field)
+        IEnumerable<PropertyPathMarker> IHighlightField.MatchedFields { get; set; }
+
+        IQueryContainer IHighlightField.HighlightQuery { get; set; }
+
+        public HighlightFieldDescriptor<T> OnField(string field)
 		{
 			Self.Field = field;
 			return this;
@@ -224,5 +230,10 @@ namespace Nest
 			Self.MatchedFields = objectPaths.Select(f => (PropertyPathMarker)f);
 			return this;
 		}
-	}
+        public HighlightFieldDescriptor<T> HighlightQuery(Func<QueryDescriptor<T>, QueryContainer> query)
+        {
+            Self.HighlightQuery = query(new QueryDescriptor<T>());
+            return this;
+        }
+    }
 }
