@@ -14,6 +14,7 @@ using CsQuery.ExtensionMethods.Internal;
 using Newtonsoft.Json;
 using Xipton.Razor;
 using CodeGeneration.LowLevelClient.Overrides.Global;
+using Xipton.Razor.Config;
 
 namespace CodeGeneration.LowLevelClient
 {
@@ -36,7 +37,7 @@ namespace CodeGeneration.LowLevelClient
 
 		static ApiGenerator()
 		{
-			_razorMachine = new RazorMachine();
+			_razorMachine = new RazorMachine(references: new[] { "Xipton.Razor.dll" });
 			_assembly = typeof(ApiGenerator).Assembly;
 		}
 		public static string PascalCase(string s)
@@ -111,7 +112,8 @@ namespace CodeGeneration.LowLevelClient
 
 		private static string LocalUri(string file)
 		{
-			var basePath = Path.Combine(Assembly.GetEntryAssembly().Location, @"..\" + _apiEndpointsFolder + file);
+			var basePath = Path.Combine(Environment.CurrentDirectory, _apiEndpointsFolder + file);
+			Console.WriteLine(basePath);
 			var assemblyPath = Path.GetFullPath((new Uri(basePath)).LocalPath);
 			var fileUri = new Uri(assemblyPath).AbsoluteUri;
 			return fileUri;
