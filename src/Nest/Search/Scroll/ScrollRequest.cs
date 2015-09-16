@@ -27,7 +27,7 @@ namespace Nest
 		}
 	}
 
-	public partial class ScrollRequest : PathRequestBase<ScrollRequestParameters>, IScrollRequest
+	public partial class ScrollRequest : RequestBase<ScrollRequestParameters>, IScrollRequest
 	{
 		public string ScrollId { get; set; }
 		public TimeUnitExpression Scroll { get; set; }

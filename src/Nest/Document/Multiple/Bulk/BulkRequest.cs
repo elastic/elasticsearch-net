@@ -9,27 +9,42 @@ namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(BulkRequestJsonConverter))]
-	public interface IBulkRequest : IFixedIndexTypePath<BulkRequestParameters>
+	public interface IBulkRequest : IRequest<BulkRequestParameters>
 	{
 		[JsonIgnore]
 		IList<IBulkOperation> Operations { get; set;}
 	}
 
-	public partial class BulkRequest : FixedIndexTypePathBase<BulkRequestParameters>, IBulkRequest
+	public partial class BulkRequest : RequestBase<BulkRequestParameters>, IBulkRequest
 	{
 		public IList<IBulkOperation> Operations { get; set; }
+
+        public BulkRequest() { }
+
+        public BulkRequest(Indices indices)
+            : base(p => p.Required(indices))
+        { }
+
+        public BulkRequest(Indices indices, Types types)
+            : base(p => p.Required(indices).Required(types))
+        { }
 	}
 
-	public partial class BulkDescriptor : FixedIndexTypePathDescriptor<BulkDescriptor, BulkRequestParameters>, IBulkRequest
+	public partial class BulkDescriptor : RequestDescriptorBase<BulkDescriptor, BulkRequestParameters>, IBulkRequest
 	{
 		private IBulkRequest Self => this;
 
-		IList<IBulkOperation> IBulkRequest.Operations { get; set; }
+        IList<IBulkOperation> IBulkRequest.Operations { get; set; } = new SynchronizedCollection<IBulkOperation>();
 
-		public BulkDescriptor()
-		{
-			Self.Operations = new SynchronizedCollection<IBulkOperation>();
-		}
+        public BulkDescriptor() { }
+
+        public BulkDescriptor(Indices indices)
+            : base(p => p.Required(indices))
+        { }
+
+        public BulkDescriptor(Indices indices, Types types)
+            : base(p => p.Required(indices).Required(types))
+        { }
 
 		public BulkDescriptor Create<T>(Func<BulkCreateDescriptor<T>, BulkCreateDescriptor<T>> bulkCreateSelector) where T : class
 		{

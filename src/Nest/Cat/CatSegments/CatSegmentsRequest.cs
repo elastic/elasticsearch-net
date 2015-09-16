@@ -11,7 +11,7 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface ICatSegmentsRequest : IRequest<CatSegmentsRequestParameters> { }
 
-	public partial class CatSegmentsRequest : PathRequestBase<CatSegmentsRequestParameters>, ICatSegmentsRequest { }
+	public partial class CatSegmentsRequest : RequestBase<CatSegmentsRequestParameters>, ICatSegmentsRequest { }
 
 	public partial class CatSegmentsDescriptor : RequestDescriptorBase<CatSegmentsDescriptor, CatSegmentsRequestParameters>, ICatSegmentsRequest { }
 }

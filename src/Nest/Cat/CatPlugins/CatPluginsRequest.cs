@@ -10,7 +10,7 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface ICatPluginsRequest : IRequest<CatPluginsRequestParameters> { }
 
-	public partial class CatPluginsRequest : PathRequestBase<CatPluginsRequestParameters>, ICatPluginsRequest { }
+	public partial class CatPluginsRequest : RequestBase<CatPluginsRequestParameters>, ICatPluginsRequest { }
 
 	public partial class CatPluginsDescriptor : RequestDescriptorBase<CatPluginsDescriptor, CatPluginsRequestParameters>, ICatPluginsRequest { }
 }

@@ -13,7 +13,7 @@ namespace Nest
 		string Id { get; set; }
 	}
 
-	public partial class DeleteScriptRequest : PathRequestBase<DeleteScriptRequestParameters>, IDeleteScriptRequest
+	public partial class DeleteScriptRequest : RequestBase<DeleteScriptRequestParameters>, IDeleteScriptRequest
 	{
 		public string Lang { get; set; }
 		public string Id { get; set; }

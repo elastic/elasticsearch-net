@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface INodesStatsRequest : INodeIdOptionalPath<NodesStatsRequestParameters>
+	public interface INodesStatsRequest : IRequest<NodesStatsRequestParameters>
 	{
 		IEnumerable<NodesStatsMetric> Metrics { get; set; }
 		IEnumerable<NodesStatsIndexMetric> IndexMetrics { get; set; }
@@ -15,7 +15,7 @@ namespace Nest
 
 	internal static class NodesStatsPathInfo
 	{
-		public static void Update(RequestPath<NodesStatsRequestParameters> pathInfo, INodesStatsRequest request)
+		public static void Update(IRequestPath<NodesStatsRequestParameters> pathInfo, INodesStatsRequest request)
 		{
 			pathInfo.HttpMethod = HttpMethod.GET;
 			if (request.Metrics != null)
@@ -25,24 +25,37 @@ namespace Nest
 		}
 	}
 	
-	public partial class NodesStatsRequest : NodeIdOptionalPathBase<NodesStatsRequestParameters>, INodesStatsRequest
+	public partial class NodesStatsRequest : RequestBase<NodesStatsRequestParameters>, INodesStatsRequest
 	{
 		public IEnumerable<NodesStatsMetric> Metrics { get; set; }
 		public IEnumerable<NodesStatsIndexMetric> IndexMetrics { get; set; }
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<NodesStatsRequestParameters> pathInfo)
+        public NodesStatsRequest() { }
+
+        public NodesStatsRequest(string nodeId)
+            : base(p => p.RequiredNodeId(nodeId))
+        { }
+
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, IRequestPath<NodesStatsRequestParameters> path)
 		{
-			NodesStatsPathInfo.Update(pathInfo, this);
+			NodesStatsPathInfo.Update(path, this);
 		}
 
 	}
 	[DescriptorFor("NodesStats")]
-	public partial class NodesStatsDescriptor : NodeIdOptionalDescriptor<NodesStatsDescriptor, NodesStatsRequestParameters>, INodesStatsRequest
+	public partial class NodesStatsDescriptor : RequestDescriptorBase<NodesStatsDescriptor, NodesStatsRequestParameters>, INodesStatsRequest
 	{
 		private INodesStatsRequest Self => this;
 		IEnumerable<NodesStatsMetric> INodesStatsRequest.Metrics { get; set; }
 		IEnumerable<NodesStatsIndexMetric> INodesStatsRequest.IndexMetrics { get; set; }
-		
+	
+        public NodesStatsDescriptor() { }
+
+        public NodesStatsDescriptor(string nodeId)
+            : base(p => p.RequiredNodeId(nodeId))
+        { }
+
+	
 		public NodesStatsDescriptor Metrics(params NodesStatsMetric[] metrics)
 		{
 			Self.Metrics = metrics;
@@ -54,9 +67,9 @@ namespace Nest
 			return this;
 		}
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<NodesStatsRequestParameters> pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, IRequestPath<NodesStatsRequestParameters> path)
 		{
-			NodesStatsPathInfo.Update(pathInfo, this);
+			NodesStatsPathInfo.Update(path, this);
 		}
 
 	}

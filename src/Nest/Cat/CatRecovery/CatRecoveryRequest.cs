@@ -10,7 +10,7 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface ICatRecoveryRequest : IRequest<CatRecoveryRequestParameters> { }
 
-	public partial class CatRecoveryRequest : PathRequestBase<CatRecoveryRequestParameters>, ICatRecoveryRequest { }
+	public partial class CatRecoveryRequest : RequestBase<CatRecoveryRequestParameters>, ICatRecoveryRequest { }
 
 	public partial class CatRecoveryDescriptor : RequestDescriptorBase<CatRecoveryDescriptor, CatRecoveryRequestParameters>, ICatRecoveryRequest { }
 }

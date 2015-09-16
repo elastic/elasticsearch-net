@@ -7,15 +7,14 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface INodesInfoRequest : INodeIdOptionalPath<NodesInfoRequestParameters>
+	public interface INodesInfoRequest : IRequest<NodesInfoRequestParameters>
 	{
 		IEnumerable<NodesInfoMetric> Metrics { get; set; }
-		
 	}
 
 	internal static class NodesInfoPathInfo
 	{
-		public static void Update(RequestPath<NodesInfoRequestParameters> pathInfo, INodesInfoRequest request)
+		public static void Update(IRequestPath<NodesInfoRequestParameters> pathInfo, INodesInfoRequest request)
 		{
 			if (request.Metrics != null)
 				pathInfo.Metric = request.Metrics.Cast<Enum>().GetStringValue();
@@ -23,11 +22,17 @@ namespace Nest
 		}
 	}
 	
-	public partial class NodesInfoRequest : NodeIdOptionalPathBase<NodesInfoRequestParameters>, INodesInfoRequest
+	public partial class NodesInfoRequest : RequestBase<NodesInfoRequestParameters>, INodesInfoRequest
 	{
 		public IEnumerable<NodesInfoMetric> Metrics { get; set; }
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<NodesInfoRequestParameters> pathInfo)
+        public NodesInfoRequest() { }
+
+        public NodesInfoRequest(string nodeId)
+            : base(p => p.RequiredNodeId(nodeId))
+        { }
+
+        protected override void UpdateRequestPath(IConnectionSettingsValues settings, IRequestPath<NodesInfoRequestParameters> pathInfo)
 		{
 			NodesInfoPathInfo.Update(pathInfo, this);
 		}
@@ -35,18 +40,23 @@ namespace Nest
 	}
 
 	[DescriptorFor("NodesInfo")]
-	public partial class NodesInfoDescriptor : NodeIdOptionalDescriptor<NodesInfoDescriptor, NodesInfoRequestParameters>, INodesInfoRequest
+	public partial class NodesInfoDescriptor : RequestDescriptorBase<NodesInfoDescriptor, NodesInfoRequestParameters>, INodesInfoRequest
 	{
 		private INodesInfoRequest Self => this;
 		IEnumerable<NodesInfoMetric> INodesInfoRequest.Metrics { get; set; }
 
+        public NodesInfoDescriptor() { }
+
+        public NodesInfoDescriptor(string nodeId)
+            : base(p => p.RequiredNodeId(nodeId))
+        { }
 		public NodesInfoDescriptor Metrics(params NodesInfoMetric[] metrics)
 		{
 			Self.Metrics = metrics;
 			return this;
 		}
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<NodesInfoRequestParameters> pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, IRequestPath<NodesInfoRequestParameters> pathInfo)
 		{
 			NodesInfoPathInfo.Update(pathInfo, this);
 		}

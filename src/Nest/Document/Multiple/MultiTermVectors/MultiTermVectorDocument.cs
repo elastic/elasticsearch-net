@@ -99,9 +99,5 @@ namespace Nest
 		{
 			return this.SetDocValue(d => d.Document.FieldStatistics = fieldStatistics);
 		}
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<MultiTermVectorsRequestParameters> pathInfo)
-		{
-		}
 	}
 }

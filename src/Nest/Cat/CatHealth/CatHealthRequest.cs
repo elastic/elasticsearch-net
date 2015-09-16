@@ -10,7 +10,7 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface ICatHealthRequest : IRequest<CatHealthRequestParameters> { }
 
-	public partial class CatHealthRequest : PathRequestBase<CatHealthRequestParameters>, ICatHealthRequest { }
+	public partial class CatHealthRequest : RequestBase<CatHealthRequestParameters>, ICatHealthRequest { }
 
 	public partial class CatHealthDescriptor : RequestDescriptorBase<CatHealthDescriptor, CatHealthRequestParameters>, ICatHealthRequest { }
 }

@@ -7,29 +7,58 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IDocumentExistsRequest : IDocumentOptionalPath<DocumentExistsRequestParameters> { }
+	public interface IDocumentExistsRequest : IRequest<DocumentExistsRequestParameters> { }
 
 	public interface IDocumentExistsRequest<T> : IDocumentExistsRequest where T : class {}
 
-	public partial class DocumentExistsRequest : DocumentPathBase<DocumentExistsRequestParameters>, IDocumentExistsRequest
+	public partial class DocumentExistsRequest : RequestBase<DocumentExistsRequestParameters>, IDocumentExistsRequest
 	{
 		public DocumentExistsRequest(IndexName indexName, TypeName typeName, string id) : base(indexName, typeName, id) { }
 	}
 	
-	public partial class DocumentExistsRequest<T> : DocumentPathBase<DocumentExistsRequestParameters, T>, IDocumentExistsRequest
+	public partial class DocumentExistsRequest<T> : RequestBase<DocumentExistsRequestParameters>, IDocumentExistsRequest
 		where T : class
 	{
-		public DocumentExistsRequest(string id) : base(id) { }
+        public T Document { get; set; }
 
-		public DocumentExistsRequest(long id) : base(id) { }
+		public DocumentExistsRequest(string id) 
+            : base(p => p.RequiredId(id)) { }
 
-		public DocumentExistsRequest(T document) : base(document) { }
-	}
+		public DocumentExistsRequest(long id) 
+            : base(p => p.RequiredId(id.ToString())) { }
+
+		public DocumentExistsRequest(T document)
+        {
+            Document = document;
+        }
+
+        protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<DocumentExistsRequestParameters> path)
+        {
+            path.IdFrom(settings, this.Document);
+        }
+    }
 
 	[DescriptorFor("Exists")]
 	public partial class DocumentExistsDescriptor<T>
-		: DocumentPathDescriptor<DocumentExistsDescriptor<T>, DocumentExistsRequestParameters, T>, IDocumentExistsRequest
+		: RequestDescriptorBase<DocumentExistsDescriptor<T>, DocumentExistsRequestParameters>, IDocumentExistsRequest
 		where T : class
 	{
-	}
+        public T Document { get; set; }
+
+		public DocumentExistsDescriptor(string id) 
+            : base(p => p.RequiredId(id)) { }
+
+		public DocumentExistsDescriptor(long id) 
+            : base(p => p.RequiredId(id.ToString())) { }
+
+		public DocumentExistsDescriptor(T document)
+        {
+            Document = document;
+        }
+
+        protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<DocumentExistsRequestParameters> pathInfo)
+        {
+            pathInfo.IdFrom(settings, this.Document);
+        }
+    }
 }

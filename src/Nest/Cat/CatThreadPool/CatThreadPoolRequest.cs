@@ -10,7 +10,7 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface ICatThreadPoolRequest : IRequest<CatThreadPoolRequestParameters> { }
 
-	public partial class CatThreadPoolRequest : PathRequestBase<CatThreadPoolRequestParameters>, ICatThreadPoolRequest { }
+	public partial class CatThreadPoolRequest : RequestBase<CatThreadPoolRequestParameters>, ICatThreadPoolRequest { }
 
 	public partial class CatThreadPoolDescriptor : RequestDescriptorBase<CatThreadPoolDescriptor, CatThreadPoolRequestParameters>, ICatThreadPoolRequest { }
 }

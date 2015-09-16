@@ -9,7 +9,7 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IInfoRequest : IRequest<InfoRequestParameters> { }
 
-	public partial class InfoRequest : PathRequestBase<InfoRequestParameters>, IInfoRequest { }
+	public partial class InfoRequest : RequestBase<InfoRequestParameters>, IInfoRequest { }
 
 	[DescriptorFor("Info")]
 	public partial class InfoDescriptor : RequestDescriptorBase<InfoDescriptor, InfoRequestParameters>, IInfoRequest { }

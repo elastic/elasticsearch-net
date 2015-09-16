@@ -27,7 +27,6 @@ namespace Nest
     public abstract class RequestBase<TParameters> : IRequest<TParameters>
         where TParameters : IRequestParameters, new()
     {
-        [Obsolete("Required for ReadAsTypeConverter.  This will be removed once we figure out a better way to deserialize.")]
         public RequestBase() { }
 
         public RequestBase(Func<RequestPath<TParameters>, RequestPath<TParameters>> pathSelector)
@@ -90,11 +89,11 @@ namespace Nest
             return this.Path(settings, this.Request.Parameters);
         }
 
-        protected virtual void SetRouteParameters(IConnectionSettingsValues settings, IRequestPath<TParameters> path) { }
+        protected virtual void SetRouteParameters(IConnectionSettingsValues settings, RequestPath<TParameters> path) { }
 
 		protected virtual void ValidateRequestPath(IRequestPath<TParameters> path) { }
 
-		protected virtual void UpdateRequestPath(IConnectionSettingsValues settings, IRequestPath<TParameters> pathInfo)
+		protected virtual void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<TParameters> pathInfo)
 		{
 			pathInfo.HttpMethod = pathInfo.RequestParameters.DefaultHttpMethod;
 		}
@@ -104,7 +103,6 @@ namespace Nest
 		where TDescriptor : RequestDescriptorBase<TDescriptor, TParameters>
 		where TParameters : FluentRequestParameters<TParameters>, new()
 	{
-        [Obsolete("Required for ReadAsTypeConverter.  This will be removed once we figure out a better way to deserialize.")]
         public RequestDescriptorBase() { }
 
         public RequestDescriptorBase(Func<RequestPath<TParameters>, RequestPath<TParameters>> pathSelector)

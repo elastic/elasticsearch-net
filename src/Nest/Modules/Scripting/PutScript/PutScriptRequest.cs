@@ -15,7 +15,7 @@ namespace Nest
 		string Lang { get; set; }
 	}
 
-	public partial class PutScriptRequest : PathRequestBase<PutScriptRequestParameters>, IPutScriptRequest
+	public partial class PutScriptRequest : RequestBase<PutScriptRequestParameters>, IPutScriptRequest
 	{
 		public string Lang { get; set; }
 		public string Id { get; set; }

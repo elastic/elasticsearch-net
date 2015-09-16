@@ -10,7 +10,7 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface ICatAllocationRequest : IRequest<CatAllocationRequestParameters> { }
 
-	public partial class CatAllocationRequest : PathRequestBase<CatAllocationRequestParameters>, ICatAllocationRequest { }
+	public partial class CatAllocationRequest : RequestBase<CatAllocationRequestParameters>, ICatAllocationRequest { }
 
 	public partial class CatAllocationDescriptor : RequestDescriptorBase<CatAllocationDescriptor, CatAllocationRequestParameters>, ICatAllocationRequest { }
 }

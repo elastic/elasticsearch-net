@@ -10,7 +10,7 @@ namespace Nest
 	public interface IClusterGetSettingsRequest : IRequest<ClusterGetSettingsRequestParameters> { 
 	}
 	
-	public partial class ClusterGetSettingsRequest : PathRequestBase<ClusterGetSettingsRequestParameters>, IClusterGetSettingsRequest { }
+	public partial class ClusterGetSettingsRequest : RequestBase<ClusterGetSettingsRequestParameters>, IClusterGetSettingsRequest { }
 
 	public partial class ClusterGetSettingsDescriptor : RequestDescriptorBase<ClusterGetSettingsDescriptor, ClusterGetSettingsRequestParameters>
 		, IClusterGetSettingsRequest { }

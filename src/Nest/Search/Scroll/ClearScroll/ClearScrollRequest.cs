@@ -24,7 +24,7 @@ namespace Nest
 		}
 	}
 	
-	public partial class ClearScrollRequest : PathRequestBase<ClearScrollRequestParameters>, IClearScrollRequest
+	public partial class ClearScrollRequest : RequestBase<ClearScrollRequestParameters>, IClearScrollRequest
 	{
 		public string ScrollId { get; set; }
 

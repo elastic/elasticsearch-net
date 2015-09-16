@@ -8,26 +8,54 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IMultiTermVectorsRequest : IIndexTypePath<MultiTermVectorsRequestParameters>
+	public interface IMultiTermVectorsRequest : IRequest<MultiTermVectorsRequestParameters>
 	{
 		[JsonProperty("docs")]
 		IEnumerable<MultiTermVectorDocument> Documents { get; set;}
 	}
 
-	public partial class MultiTermVectorsRequest : IndexTypePathBase<MultiTermVectorsRequestParameters>, IMultiTermVectorsRequest
+	public partial class MultiTermVectorsRequest : RequestBase<MultiTermVectorsRequestParameters>, IMultiTermVectorsRequest
 	{
-		public MultiTermVectorsRequest(IndexName index, TypeName typeNameMarker) : base(index, typeNameMarker) { }
+        public MultiTermVectorsRequest() { }
+
+		public MultiTermVectorsRequest(Indices indices, Types types) 
+            : base(p => p.Required(indices).Required(types))
+        { }
+
+        public MultiTermVectorsRequest(Indices indices)
+            : base(p => p.Required(indices))
+        { }
+
+        public MultiTermVectorsRequest(Types types)
+            : base(p => p.Required(types))
+        { }
 
 		public IEnumerable<MultiTermVectorDocument> Documents { get; set; }
 	}
 
 	[DescriptorFor("Mtermvectors")]
-	public partial class MultiTermVectorsDescriptor<T> : IndexTypePathDescriptor<MultiTermVectorsDescriptor<T>, MultiTermVectorsRequestParameters, T>, IMultiTermVectorsRequest
+	public partial class MultiTermVectorsDescriptor<T> : RequestDescriptorBase<MultiTermVectorsDescriptor<T>, MultiTermVectorsRequestParameters>, IMultiTermVectorsRequest
 		where T : class
 	{
 		private IMultiTermVectorsRequest Self => this;
 
 		IEnumerable<MultiTermVectorDocument> IMultiTermVectorsRequest.Documents { get; set; }
+
+        public MultiTermVectorsDescriptor()
+            : base(p => p.Required(Indices.Single<T>()).Required(Types.Single<T>()))
+        { }
+
+		public MultiTermVectorsDescriptor(Indices indices, Types types) 
+            : base(p => p.Required(indices).Required(types))
+        { }
+
+        public MultiTermVectorsDescriptor(Indices indices)
+            : base(p => p.Required(indices).Required(Types.Single<T>()))
+        { }
+
+        public MultiTermVectorsDescriptor(Types types)
+            : base(p => p.Required(types).Required(Indices.Single<T>()))
+        { }
 
 		public MultiTermVectorsDescriptor<T> Documents(params Func<MultiTermVectorDocumentDescriptor<T>, IMultiTermVectorDocumentDescriptor>[] documentSelectors)
 		{

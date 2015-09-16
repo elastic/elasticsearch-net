@@ -9,7 +9,7 @@ namespace Nest
 	public interface IClusterPendingTasksRequest : IRequest<ClusterPendingTasksRequestParameters> { }
 
 	public partial class ClusterPendingTasksRequest 
-		: PathRequestBase<ClusterPendingTasksRequestParameters>, IClusterPendingTasksRequest { }
+		: RequestBase<ClusterPendingTasksRequestParameters>, IClusterPendingTasksRequest { }
 
 	public partial class ClusterPendingTasksDescriptor 
 		: RequestDescriptorBase<ClusterPendingTasksDescriptor, ClusterPendingTasksRequestParameters>, IClusterPendingTasksRequest { }

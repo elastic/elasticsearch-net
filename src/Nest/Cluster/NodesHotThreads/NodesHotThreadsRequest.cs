@@ -9,11 +9,25 @@ using System.Text;
 namespace Nest
 {
 	public interface INodesHotThreadsRequest 
-		: INodeIdOptionalPath<NodesHotThreadsRequestParameters> { }
+        : IRequest<NodesHotThreadsRequestParameters> { }
 
 	public partial class NodesHotThreadsRequest 
-		: NodeIdOptionalPathBase<NodesHotThreadsRequestParameters>, INodesHotThreadsRequest { }
+		: RequestBase<NodesHotThreadsRequestParameters>, INodesHotThreadsRequest
+    {
+        public NodesHotThreadsRequest() { }
+
+        public NodesHotThreadsRequest(string nodeId)
+            : base(p => p.RequiredNodeId(nodeId))
+        { }
+    }
 
 	public partial class NodesHotThreadsDescriptor 
-		: NodeIdOptionalDescriptor<NodesHotThreadsDescriptor, NodesHotThreadsRequestParameters>, INodesHotThreadsRequest { }
+		: RequestDescriptorBase<NodesHotThreadsDescriptor, NodesHotThreadsRequestParameters>, INodesHotThreadsRequest
+    {
+        public NodesHotThreadsDescriptor() { }
+
+        public NodesHotThreadsDescriptor(string nodeId)
+            : base(p => p.RequiredNodeId(nodeId))
+        { }
+    }
 }

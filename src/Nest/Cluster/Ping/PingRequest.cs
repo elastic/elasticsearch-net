@@ -10,7 +10,7 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IPingRequest : IRequest<PingRequestParameters> { }
 
-	public partial class PingRequest : PathRequestBase<PingRequestParameters>, IPingRequest { }
+	public partial class PingRequest : RequestBase<PingRequestParameters>, IPingRequest { }
 
 	public partial class PingDescriptor : RequestDescriptorBase<PingDescriptor, PingRequestParameters>, IPingRequest { }
 }

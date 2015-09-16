@@ -8,30 +8,53 @@ namespace Nest
 {
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IMultiGetRequest : IFixedIndexTypePath<MultiGetRequestParameters>
+	public interface IMultiGetRequest : IRequest<MultiGetRequestParameters>
 	{
 		[JsonProperty("docs")]
 		IList<IMultiGetOperation> GetOperations { get; set; }
 	}
 
-	public partial class MultiGetRequest : FixedIndexTypePathBase<MultiGetRequestParameters>, IMultiGetRequest
+	public partial class MultiGetRequest : RequestBase<MultiGetRequestParameters>, IMultiGetRequest
 	{
 		public IList<IMultiGetOperation> GetOperations { get; set; }
+
+        public MultiGetRequest() { }
+
+        public MultiGetRequest(Indices indices, Types types)
+            : base(p => p.Required(indices).Required(types))
+        { }
+
+        public MultiGetRequest(Indices indices)
+            : base(p => p.Required(indices))
+        { }
+
+        public MultiGetRequest(Types types)
+            : base(p => p.Required(types))
+        { }
 	}
 
 	[DescriptorFor("Mget")]
-	public partial class MultiGetDescriptor : FixedIndexTypePathDescriptor<MultiGetDescriptor, MultiGetRequestParameters>, IMultiGetRequest
+	public partial class MultiGetDescriptor : RequestDescriptorBase<MultiGetDescriptor, MultiGetRequestParameters>, IMultiGetRequest
 	{
 		private IMultiGetRequest Self => this;
 
-		IList<IMultiGetOperation> IMultiGetRequest.GetOperations { get; set; }
+        IList<IMultiGetOperation> IMultiGetRequest.GetOperations { get; set; } = new List<IMultiGetOperation>();
 
-		public MultiGetDescriptor()
-		{
-			this.Self.GetOperations = new List<IMultiGetOperation>();
-		}
+        public MultiGetDescriptor() { }
 
-		public MultiGetDescriptor Get<T>(Func<MultiGetOperationDescriptor<T>, MultiGetOperationDescriptor<T>> getSelector) 
+        public MultiGetDescriptor(Indices indices, Types types)
+            : base(p => p.Required(indices).Required(types))
+        { }
+
+        public MultiGetDescriptor(Indices indices)
+            : base(p => p.Required(indices))
+        { }
+
+        public MultiGetDescriptor(Types types)
+            : base(p => p.Required(types))
+        { }
+
+        public MultiGetDescriptor Get<T>(Func<MultiGetOperationDescriptor<T>, MultiGetOperationDescriptor<T>> getSelector) 
 			where T : class
 		{
 			getSelector.ThrowIfNull("getSelector");

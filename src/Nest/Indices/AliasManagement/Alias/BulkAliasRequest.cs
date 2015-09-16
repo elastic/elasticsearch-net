@@ -13,7 +13,7 @@ namespace Nest
 		IList<IAliasAction> Actions { get; set; }
 	}
 
-	public partial class BulkAliasRequest : PathRequestBase<BulkAliasRequestParameters>, IBulkAliasRequest
+	public partial class BulkAliasRequest : RequestBase<BulkAliasRequestParameters>, IBulkAliasRequest
 	{
 		public IList<IAliasAction> Actions { get; set; }
 	}

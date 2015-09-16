@@ -81,6 +81,34 @@ namespace Nest
             return this;
         }
 
+        [Obsolete("TODO: Rename to Required once NodeId type is implemented")]
+        public RequestPath<TParameters> RequiredNodeId(string nodeId)
+        {
+            this.NodeId = nodeId;
+            return this;
+        }
+
+        [Obsolete("TODO: Rename to Optional once NodeId type is implemented")]
+        public RequestPath<TParameters> OptionalNodeId(string nodeId)
+        {
+            this.NodeId = nodeId;
+            return this;
+        }
+
+        [Obsolete]
+        public RequestPath<TParameters> RequiredId(string id)
+        {
+            this.Id = id;
+            return this;
+        }
+
+        [Obsolete]
+        public RequestPath<TParameters> OptionalId(string id)
+        {
+            this.Id = id;
+            return this;
+        }
+
 		public RequestPath<TParameters> DeserializationOverride(Func<IApiCallDetails, Stream, object> customObjectCreation)
 		{
 			this.RequestParameters.DeserializationOverride = customObjectCreation;
@@ -89,6 +117,5 @@ namespace Nest
 
 		internal ElasticsearchResponse<T> CallWhen<T>(HttpMethod method, bool allSet, Func<IRequestPath<TParameters>, ElasticsearchResponse<T>> action) =>
 				allSet ? action(this) : null;
-
 	}
 }

@@ -179,7 +179,7 @@ namespace Nest
 		
 		}
 	///<summary>Request parameters for CatHelp <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat.html</pre></summary>
-	public partial class CatHelpRequest  : PathRequestBase<CatHelpRequestParameters>
+	public partial class CatHelpRequest  : RequestBase<CatHelpRequestParameters>
 	{
 		///<summary>Return help information</summary>
 		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
@@ -253,7 +253,7 @@ namespace Nest
 		
 		}
 	///<summary>Request parameters for CatNodeattrs <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodeattrs.html</pre></summary>
-	public partial class CatNodeattrsRequest  : PathRequestBase<CatNodeattrsRequestParameters>
+	public partial class CatNodeattrsRequest  : RequestBase<CatNodeattrsRequestParameters>
 	{
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
@@ -1783,7 +1783,7 @@ namespace Nest
 		
 		}
 	///<summary>Request parameters for IndicesShardStoresForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shards-stores.html</pre></summary>
-	public partial class IndicesShardStoresRequest  : PathRequestBase<IndicesShardStoresRequestParameters>
+	public partial class IndicesShardStoresRequest  : RequestBase<IndicesShardStoresRequestParameters>
 	{
 		///<summary>A comma-separated list of statuses used to filter on shards to get store information for</summary>
 		public  string[] Status { get { return Q< string[]>("status"); } set { Q("status", value); } }
@@ -2197,7 +2197,7 @@ namespace Nest
 		
 		}
 	///<summary>Request parameters for RenderSearchTemplate <pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</pre></summary>
-	public partial class RenderSearchTemplateRequest  : PathRequestBase<RenderSearchTemplateRequestParameters>
+	public partial class RenderSearchTemplateRequest  : RequestBase<RenderSearchTemplateRequestParameters>
 	{
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }

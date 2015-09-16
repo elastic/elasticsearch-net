@@ -7,22 +7,34 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IClusterStateRequest : IIndicesOptionalPath<ClusterStateRequestParameters>
+	public interface IClusterStateRequest : IRequest<ClusterStateRequestParameters>
 	{
 		IEnumerable<ClusterStateMetric> Metrics { get; set; }
 	}
 
-	public partial class ClusterStateRequest : IndicesOptionalPathBase<ClusterStateRequestParameters>, IClusterStateRequest
+	public partial class ClusterStateRequest : RequestBase<ClusterStateRequestParameters>, IClusterStateRequest
 	{
-		public IEnumerable<ClusterStateMetric> Metrics { get; set; }
+        public ClusterStateRequest() { }
+
+        public ClusterStateRequest(Indices indices)
+            : base(p => p.Optional(indices))
+        { }
+		
+        public IEnumerable<ClusterStateMetric> Metrics { get; set; }
 	}
 
 
-	public partial class ClusterStateDescriptor : IndicesOptionalPathDescriptor<ClusterStateDescriptor, ClusterStateRequestParameters>, IClusterStateRequest
+	public partial class ClusterStateDescriptor : RequestDescriptorBase<ClusterStateDescriptor, ClusterStateRequestParameters>, IClusterStateRequest
 	{
 		private IClusterStateRequest Self => this;
 
-		IEnumerable<ClusterStateMetric> IClusterStateRequest.Metrics { get; set; }
+        public ClusterStateDescriptor() { }
+
+        public ClusterStateDescriptor(Indices indices)
+            : base(p => p.Optional(indices))
+        { }
+        
+        IEnumerable<ClusterStateMetric> IClusterStateRequest.Metrics { get; set; }
 		public ClusterStateDescriptor Metrics(params ClusterStateMetric[] metrics)
 		{
 			Self.Metrics = metrics;

@@ -12,7 +12,7 @@ namespace Nest
 		string Id { get; set; }
 	}
 
-	public partial class GetScriptRequest : PathRequestBase<GetScriptRequestParameters>, IGetScriptRequest
+	public partial class GetScriptRequest : RequestBase<GetScriptRequestParameters>, IGetScriptRequest
 	{
 		public string Lang { get; set; }
 		public string Id { get; set; }
