@@ -4,12 +4,21 @@
     "warningsAsErrors": false
   },
   "dependencies": {
+    "Elasticsearch.Net": "",
     "Newtonsoft.Json": "7.0.1"
   },
   "commands": {
 
   },
   "frameworks": {
+    "net45": {
+      "frameworkAssemblies": {
+        "System.Runtime": "",
+        "System.Runtime.Serialization" :  "",
+        "System.ServiceModel" :  ""
+
+      }
+    },
     "dotnet": {
       "compilationOptions": { "define": [ "DOTNETCORE" ] },
       "dependencies": {
@@ -19,8 +28,7 @@
         "System.Collections": "4.0.11-beta-23225",
         "System.Dynamic.Runtime": "4.0.11-beta-23225",
         "System.Threading": "4.0.11-beta-23225",
-        "System.Threading.Timer": "4.0.0-beta-23109",
-        "Elasticsearch.Net": ""
+        "System.Threading.Timer": "4.0.0-beta-23109"
       }
     }
   }

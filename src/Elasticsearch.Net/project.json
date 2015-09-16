@@ -10,6 +10,12 @@
 
   },
   "frameworks": {
+    "net45": {
+      "frameworkAssemblies": {
+        "System.Runtime": "",
+        "System.Runtime.Serialization" :  ""
+      }
+    },
     "dotnet": {
       "compilationOptions": { "define": [ "DOTNETCORE" ] },
       "dependencies": {
