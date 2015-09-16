@@ -1,0 +1,28 @@
+{
+  "version": "1.0.0-*",
+  "compilationOptions": {
+    "warningsAsErrors": false
+  },
+  "dependencies": {
+    "Elasticsearch.Net": "",
+    "Nest": "",
+    "Newtonsoft.Json": "7.0.1",
+    "Bogus": "3.0.0.3",
+    "FluentAssertions": "4.0.0",
+    "xunit": "2.1.0-rc1-build3168",
+    "DiffPlex": "1.2.1"
+  },
+  "commands": {
+
+  },
+  "frameworks": {
+    "net45": {
+      "compilationOptions": { "define": [ "DOTNETCORE" ] },
+      "frameworkAssemblies": {
+        "System.Runtime": ""
+      },
+      "dependencies": {
+      }
+    }
+  }
+}
