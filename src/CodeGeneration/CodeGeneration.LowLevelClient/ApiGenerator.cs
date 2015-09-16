@@ -19,10 +19,10 @@ namespace CodeGeneration.LowLevelClient
 {
 	public static class ApiGenerator
 	{
-		private readonly static string _nestFolder = @"..\..\..\..\..\src\Nest\";
-		private readonly static string _esNetFolder = @"..\..\..\..\..\src\Elasticsearch.Net\";
-		private readonly static string _viewFolder = @"..\..\Views\";
-		private readonly static string _apiEndpointsFolder = @"..\..\ApiEndpoints\";
+		private readonly static string _nestFolder = @"..\..\..\src\Nest\";
+		private readonly static string _esNetFolder = @"..\..\..\src\Elasticsearch.Net\";
+		private readonly static string _viewFolder = @"Views\";
+		private readonly static string _apiEndpointsFolder = @"ApiEndpoints\";
 		private static readonly RazorMachine _razorMachine;
 
 		private static readonly string _version = "2.0";
@@ -44,6 +44,7 @@ namespace CodeGeneration.LowLevelClient
 			var textInfo = new CultureInfo("en-US").TextInfo;
 			return textInfo.ToTitleCase(s.ToLowerInvariant()).Replace("_", string.Empty).Replace(".", string.Empty);
 		}
+
 		public static void GenerateEndpointFiles()
 		{
 			Console.WriteLine("Getting a listing of all the api endpoints from the elasticsearch-rest-api-spec repos");
