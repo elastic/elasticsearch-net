@@ -8,32 +8,33 @@ using System.Text;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IDeleteSearchTemplateRequest : INamePath<DeleteTemplateRequestParameters> { }
-
-	public partial class DeleteSearchTemplateRequest 
-		: NamePathBase<DeleteTemplateRequestParameters>, IDeleteSearchTemplateRequest
+	public interface IDeleteSearchTemplateRequest : IRequest<DeleteTemplateRequestParameters>
 	{
-		public DeleteSearchTemplateRequest(string templateName) : base(templateName) { }
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<DeleteTemplateRequestParameters> pathInfo)
-		{
-			DeleteSearchTemplatePathInfo.Update(pathInfo, this);
-		}
+		//TODO NAME/TEMPLATE
 	}
 
 	internal static class DeleteSearchTemplatePathInfo
 	{
 		public static void Update(RequestPath<DeleteTemplateRequestParameters> pathInfo, IDeleteSearchTemplateRequest request)
 		{
-			pathInfo.Id = request.Name;
+			//TODO pathInfo.Id = request.Name;
 			pathInfo.HttpMethod = HttpMethod.DELETE;
 		}
 	}
+	
+	public partial class DeleteSearchTemplateRequest : RequestBase<DeleteTemplateRequestParameters>, IDeleteSearchTemplateRequest
+	{
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<DeleteTemplateRequestParameters> pathInfo)
+		{
+			DeleteSearchTemplatePathInfo.Update(pathInfo, this);
+		}
+	}
+
 
 	public partial class DeleteSearchTemplateDescriptor 
-		: NamePathDescriptor<DeleteSearchTemplateDescriptor, DeleteTemplateRequestParameters>, IDeleteSearchTemplateRequest
+		: RequestDescriptorBase<DeleteSearchTemplateDescriptor, DeleteTemplateRequestParameters>, IDeleteSearchTemplateRequest
 	{
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<DeleteTemplateRequestParameters> pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<DeleteTemplateRequestParameters> pathInfo)
 		{
 			DeleteSearchTemplatePathInfo.Update(pathInfo, this);
 		}

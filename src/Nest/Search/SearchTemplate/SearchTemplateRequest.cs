@@ -10,8 +10,7 @@ namespace Nest
 {
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface ISearchTemplateRequest 
-		: IQueryPath<SearchTemplateRequestParameters>
+	public interface ISearchTemplateRequest : IRequest<SearchTemplateRequestParameters>
 	{
 		[JsonProperty("params")]
 		IDictionary<string, object> Params { get; set; }
@@ -32,8 +31,7 @@ namespace Nest
 
 	public interface ISearchTemplateRequest<T> : ISearchTemplateRequest { }
 
-	public partial class SearchTemplateRequest 
-		: QueryPathBase<SearchTemplateRequestParameters>, ISearchTemplateRequest
+	public partial class SearchTemplateRequest : RequestBase<SearchTemplateRequestParameters>, ISearchTemplateRequest
 	{
 		public string Template { get; set; }
 		public string File { get; set; }
@@ -44,8 +42,7 @@ namespace Nest
 		public Func<dynamic, Hit<dynamic>, Type> TypeSelector { get; set; }
 	}
 	
-	public partial class SearchTemplateRequest<T> 
-		: QueryPathBase<SearchTemplateRequestParameters, T>, ISearchTemplateRequest
+	public partial class SearchTemplateRequest<T> : RequestBase<SearchTemplateRequestParameters>, ISearchTemplateRequest
 		where T : class
 	{
 		public string Template { get; set; }
@@ -56,8 +53,7 @@ namespace Nest
 		public Func<dynamic, Hit<dynamic>, Type> TypeSelector { get; set; }
 	}
 
-	public partial class SearchTemplateDescriptor<T> 
-		: QueryPathDescriptorBase<SearchTemplateDescriptor<T>, SearchTemplateRequestParameters, T>, ISearchTemplateRequest<T>
+	public partial class SearchTemplateDescriptor<T> : RequestDescriptorBase<SearchTemplateDescriptor<T>, SearchTemplateRequestParameters>, ISearchTemplateRequest<T>
 		where T : class
 	{
 		ISearchTemplateRequest<T> Self => this;

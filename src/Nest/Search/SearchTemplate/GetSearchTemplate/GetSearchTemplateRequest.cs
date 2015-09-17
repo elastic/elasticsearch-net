@@ -8,33 +8,32 @@ using System.Text;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IGetSearchTemplateRequest : INamePath<GetTemplateRequestParameters>
+	public interface IGetSearchTemplateRequest : IRequest<GetTemplateRequestParameters>
 	{
-	}
-
-	public partial class GetSearchTemplateRequest : NamePathBase<GetTemplateRequestParameters>, IGetSearchTemplateRequest
-	{
-		public GetSearchTemplateRequest(string templateName) : base(templateName) { }
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<GetTemplateRequestParameters> pathInfo)
-		{
-			GetSearchTemplatePathInfo.Update(pathInfo, this);
-		}
+		//TODO NAME
 	}
 
 	internal static class GetSearchTemplatePathInfo
 	{
 		public static void Update(RequestPath<GetTemplateRequestParameters> pathInfo, IGetSearchTemplateRequest request)
 		{
-			pathInfo.Id = request.Name;
+			//TODO NAME pathInfo.Id = request.;
 			pathInfo.HttpMethod = HttpMethod.GET;
 		}
 	}
 
-	public partial class GetSearchTemplateDescriptor 
-		: NamePathDescriptor<GetSearchTemplateDescriptor, GetTemplateRequestParameters>, IGetSearchTemplateRequest
+	public partial class GetSearchTemplateRequest : RequestBase<GetTemplateRequestParameters>, IGetSearchTemplateRequest
 	{
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<GetTemplateRequestParameters> pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<GetTemplateRequestParameters> pathInfo)
+		{
+			GetSearchTemplatePathInfo.Update(pathInfo, this);
+		}
+	}
+
+
+	public partial class GetSearchTemplateDescriptor : RequestDescriptorBase<GetSearchTemplateDescriptor, GetTemplateRequestParameters>, IGetSearchTemplateRequest
+	{
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<GetTemplateRequestParameters> pathInfo)
 		{
 			GetSearchTemplatePathInfo.Update(pathInfo, this);
 		}

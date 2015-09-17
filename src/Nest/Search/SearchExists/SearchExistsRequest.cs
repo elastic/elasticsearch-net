@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface ISearchExistsRequest : IQueryPath<SearchExistsRequestParameters>
+	public interface ISearchExistsRequest : IRequest<SearchExistsRequestParameters>
 	{
 		[JsonProperty(PropertyName = "query")]
 		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeJsonConverter<QueryContainer>, CustomJsonConverter>))]
@@ -22,29 +22,20 @@ namespace Nest
 	{
 		public static void Update(RequestPath<SearchExistsRequestParameters> pathInfo, ISearchExistsRequest request)
 		{
-			if (request.RequestParameters.ContainsKey("source") || request.RequestParameters.ContainsKey("q"))
+			if (request.Parameters.ContainsKey("source") || request.Parameters.ContainsKey("q"))
 				pathInfo.HttpMethod = HttpMethod.GET;
 			else
 				pathInfo.HttpMethod = request.Query != null ? HttpMethod.POST : HttpMethod.GET;
 		}
 	}
 	
-	public partial class SearchExistsRequest : QueryPathBase<SearchExistsRequestParameters>, ISearchExistsRequest
+	public partial class SearchExistsRequest : RequestBase<SearchExistsRequestParameters>, ISearchExistsRequest
 	{
 		public IQueryContainer Query { get; set; }
 
 		public string QueryString { get; set; }
 
-		protected SearchExistsRequest() : base() { }
-
-		protected SearchExistsRequest(IndexName index, TypeName type = null)
-			: base(index, type) { }
-
-
-		protected SearchExistsRequest(IEnumerable<IndexName> indices, IEnumerable<TypeName> types = null)
-			: base(indices, types) { }
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<SearchExistsRequestParameters> pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<SearchExistsRequestParameters> pathInfo)
 		{
 			SearchExistsPathInfo.Update(pathInfo, this);
 		}

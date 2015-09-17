@@ -8,39 +8,34 @@ using System.Text;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IPutSearchTemplateRequest : INamePath<PutTemplateRequestParameters>
+	public interface IPutSearchTemplateRequest : IRequest<PutTemplateRequestParameters>
 	{
+		//TODO NAME
 		[JsonProperty("template")]
 		string Template { get; set; }
-	}
-
-	public partial class PutSearchTemplateRequest : NamePathBase<PutTemplateRequestParameters>, IPutSearchTemplateRequest
-	{
-		public string Template { get; set; }
-
-		public PutSearchTemplateRequest(string templateName)
-			: base(templateName)
-		{
-		}
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<PutTemplateRequestParameters> pathInfo)
-		{
-			PutSearchTemplatePathInfo.Update(pathInfo, this);
-		}
 	}
 
 	internal static class PutSearchTemplatePathInfo
 	{
 		public static void Update(RequestPath<PutTemplateRequestParameters> pathInfo, IPutSearchTemplateRequest request)
 		{
-			pathInfo.Id = request.Name;
+			//TODO NAME pathInfo.Id = request.Name;
 			pathInfo.HttpMethod = HttpMethod.POST;
 		}
 	}
 
+	public partial class PutSearchTemplateRequest : RequestBase<PutTemplateRequestParameters>, IPutSearchTemplateRequest
+	{
+		public string Template { get; set; }
+
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<PutTemplateRequestParameters> pathInfo)
+		{
+			PutSearchTemplatePathInfo.Update(pathInfo, this);
+		}
+	}
+
 	[DescriptorFor("SearchTemplatePut")]
-	public partial class PutSearchTemplateDescriptor
-		: NamePathDescriptor<PutSearchTemplateDescriptor, PutTemplateRequestParameters>, IPutSearchTemplateRequest
+	public partial class PutSearchTemplateDescriptor : RequestDescriptorBase<PutSearchTemplateDescriptor, PutTemplateRequestParameters>, IPutSearchTemplateRequest
 	{
 		IPutSearchTemplateRequest Self => this;
 		string IPutSearchTemplateRequest.Template { get; set;}
@@ -51,7 +46,7 @@ namespace Nest
 			return this;
 		}
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<PutTemplateRequestParameters> pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<PutTemplateRequestParameters> pathInfo)
 		{
 			PutSearchTemplatePathInfo.Update(pathInfo, this);
 		}
