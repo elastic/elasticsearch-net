@@ -7,17 +7,15 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IGetIndexSettingsRequest : IIndicesOptionalPath<GetIndexSettingsRequestParameters> { }
+	public interface IGetIndexSettingsRequest : IRequest<GetIndexSettingsRequestParameters> { }
 
-	public partial class GetIndexSettingsRequest : IndicesOptionalPathBase<GetIndexSettingsRequestParameters>, IGetIndexSettingsRequest
+	public partial class GetIndexSettingsRequest : RequestBase<GetIndexSettingsRequestParameters>, IGetIndexSettingsRequest
 	{
-		public GetIndexSettingsRequest() { }
-		public GetIndexSettingsRequest(IndexName index) { this.Indices = new []{ index }; }
 	}
 
 	[DescriptorFor("IndicesGetSettings")]
 	public partial class GetIndexSettingsDescriptor 
-		: IndicesOptionalPathDescriptor<GetIndexSettingsDescriptor, GetIndexSettingsRequestParameters>, IGetIndexSettingsRequest
+		: RequestDescriptorBase<GetIndexSettingsDescriptor, GetIndexSettingsRequestParameters>, IGetIndexSettingsRequest
 	{
 	}
 }

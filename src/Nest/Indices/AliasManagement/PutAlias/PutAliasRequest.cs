@@ -9,7 +9,7 @@ namespace Nest
 {
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IPutAliasRequest : IIndexOptionalNamePath<PutAliasRequestParameters>
+	public interface IPutAliasRequest : IRequest<PutAliasRequestParameters>
 	{
 		[JsonProperty("routing")]
 		string Routing { get; set; }
@@ -19,12 +19,8 @@ namespace Nest
 		IQueryContainer Filter { get; set; }
 	}
 
-	public partial class PutAliasRequest : IndexOptionalNamePathBase<PutAliasRequestParameters>, IPutAliasRequest
+	public partial class PutAliasRequest : RequestBase<PutAliasRequestParameters>, IPutAliasRequest
 	{
-		public PutAliasRequest(string name) : base(name) { }
-
-		public PutAliasRequest(string index, string name) : base(index, name) { }
-
 		public string Routing { get; set; }
 
 		public IQueryContainer Filter { get; set; }
@@ -32,7 +28,7 @@ namespace Nest
 
 	[DescriptorFor("IndicesPutAlias")]
 	public partial class PutAliasDescriptor 
-		: IndexOptionalNamePathDescriptor<PutAliasDescriptor, PutAliasRequestParameters>, IPutAliasRequest
+		: RequestDescriptorBase<PutAliasDescriptor, PutAliasRequestParameters>, IPutAliasRequest
 	{
 		IPutAliasRequest Self => this;
 		string IPutAliasRequest.Routing { get; set; }

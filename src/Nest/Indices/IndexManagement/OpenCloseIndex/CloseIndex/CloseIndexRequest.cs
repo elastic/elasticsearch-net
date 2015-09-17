@@ -7,14 +7,14 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface ICloseIndexRequest : IIndexPath<CloseIndexRequestParameters> { }
+	public interface ICloseIndexRequest : IRequest<CloseIndexRequestParameters> { }
 
-	public partial class CloseIndexRequest : IndexPathBase<CloseIndexRequestParameters>, ICloseIndexRequest
+	public partial class CloseIndexRequest : RequestBase<CloseIndexRequestParameters>, ICloseIndexRequest
 	{
-		public CloseIndexRequest(IndexName index) : base(index) { }
 	}
+
 	[DescriptorFor("IndicesClose")]
-	public partial class CloseIndexDescriptor : IndexPathDescriptorBase<CloseIndexDescriptor, CloseIndexRequestParameters>, ICloseIndexRequest
+	public partial class CloseIndexDescriptor : RequestDescriptorBase<CloseIndexDescriptor, CloseIndexRequestParameters>, ICloseIndexRequest
 	{
 	}
 }

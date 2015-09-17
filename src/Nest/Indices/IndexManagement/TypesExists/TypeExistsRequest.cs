@@ -7,15 +7,14 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface ITypeExistsRequest : IIndexTypePath<TypeExistsRequestParameters> { }
+	public interface ITypeExistsRequest : IRequest<TypeExistsRequestParameters> { }
 
-	public partial class TypeExistsRequest : IndexTypePathBase<TypeExistsRequestParameters>, ITypeExistsRequest
+	public partial class TypeExistsRequest : RequestBase<TypeExistsRequestParameters>, ITypeExistsRequest
 	{
-		public TypeExistsRequest(IndexName index, TypeName typeNameMarker) : base(index, typeNameMarker) { }
 	}
 
 	[DescriptorFor("IndicesExistsType")]
-	public partial class TypeExistsDescriptor : IndexTypePathDescriptor<TypeExistsDescriptor, TypeExistsRequestParameters>, ITypeExistsRequest
+	public partial class TypeExistsDescriptor : RequestDescriptorBase<TypeExistsDescriptor, TypeExistsRequestParameters>, ITypeExistsRequest
 	{
 	}
 }

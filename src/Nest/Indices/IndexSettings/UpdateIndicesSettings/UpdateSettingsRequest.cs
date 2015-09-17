@@ -6,15 +6,12 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public interface IUpdateSettingsRequest : IIndicesOptionalPath<UpdateSettingsRequestParameters>, IIndexSettings, IHasADictionary
+	public interface IUpdateSettingsRequest : IRequest<UpdateSettingsRequestParameters>, IIndexSettings, IHasADictionary
 	{
 	}
 
-	public partial class UpdateSettingsRequest : IndicesOptionalPathBase<UpdateSettingsRequestParameters>, IUpdateSettingsRequest
+	public partial class UpdateSettingsRequest : RequestBase<UpdateSettingsRequestParameters>, IUpdateSettingsRequest
 	{
-		public UpdateSettingsRequest() { }
-		public UpdateSettingsRequest(IndexName index) { this.Indices = new []{ index }; }
-
 		IDictionary IHasADictionary.Dictionary => this.AnySettings;
 
 		public Dictionary<string, object> AnySettings { get; set; }
@@ -80,7 +77,7 @@ namespace Nest
 	[DescriptorFor("IndicesPutSettings")]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial class UpdateSettingsDescriptor
-		: IndicesOptionalPathDescriptor<UpdateSettingsDescriptor, UpdateSettingsRequestParameters>, IUpdateSettingsRequest
+		: RequestDescriptorBase<UpdateSettingsDescriptor, UpdateSettingsRequestParameters>, IUpdateSettingsRequest
 	{
 		UpdateSettingsDescriptor Assign(Action<IIndexSettings> assigner) => Fluent.Assign(this, assigner);
 

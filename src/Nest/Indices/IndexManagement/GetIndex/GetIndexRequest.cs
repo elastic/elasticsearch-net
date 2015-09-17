@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IGetIndexRequest : IIndicesOptionalExplicitAllPath<GetIndexRequestParameters>
+	public interface IGetIndexRequest : IRequest<GetIndexRequestParameters>
 	{
 		/// <summary>
 		/// Be selective which features to return, i.e GetIndexFeature.Mappings | GetIndexFeature.Settings
@@ -21,7 +21,7 @@ namespace Nest
 	{
 		public static void Update(RequestPath<GetIndexRequestParameters> pathInfo, IGetIndexRequest request)
 		{
-			if (pathInfo.Index.IsNullOrEmpty())
+			if (pathInfo.Index == null)
 				throw new DslException("Can not call GetIndex without specifying one or more indices or explicitly calling .AllIndices()");
 
 			pathInfo.HttpMethod = HttpMethod.GET;
@@ -42,30 +42,26 @@ namespace Nest
 		}
 	}
 
-	public partial class GetIndexRequest : IndicesOptionalExplicitAllPathBase<GetIndexRequestParameters>, IGetIndexRequest
+	public partial class GetIndexRequest : RequestBase<GetIndexRequestParameters>, IGetIndexRequest
 	{
-		public GetIndexRequest(Indices indices) : base(indices) { }
-
 		/// <summary>
 		/// Be selective which features to return, i.e GetIndexFeature.Mappings | GetIndexFeature.Settings
 		/// </summary>
 		public GetIndexFeature Features { get; set; }
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<GetIndexRequestParameters> pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<GetIndexRequestParameters> pathInfo)
 		{
 			GetIndexPathInfo.Update(pathInfo, this);
 		}
 	}
 
 	[DescriptorFor("IndicesGet")]
-	public partial class GetIndexDescriptor : IndicesOptionalExplicitAllPathDescriptor<GetIndexDescriptor, GetIndexRequestParameters>, IGetIndexRequest
+	public partial class GetIndexDescriptor : RequestDescriptorBase<GetIndexDescriptor, GetIndexRequestParameters>, IGetIndexRequest
 	{
 		private IGetIndexRequest Self => this;
 
 		GetIndexFeature IGetIndexRequest.Features { get; set; }
 		
-		public GetIndexDescriptor(Indices indices) : base(indices) { }
-
 		/// <summary>
 		/// Be selective which features to return, i.e GetIndexFeature.Mappings | GetIndexFeature.Settings
 		/// </summary>
@@ -75,7 +71,7 @@ namespace Nest
 			return this;
 		}
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<GetIndexRequestParameters> pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<GetIndexRequestParameters> pathInfo)
 		{
 			GetIndexPathInfo.Update(pathInfo, this);
 		}

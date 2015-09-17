@@ -7,7 +7,7 @@ using System.Linq.Expressions;
 
 namespace Nest
 {
-	public interface ITermVectorsRequest : IDocumentOptionalPath<TermVectorsRequestParameters>
+	public interface ITermVectorsRequest : IRequest<TermVectorsRequestParameters>
 	{
 		/// <summary>
 		/// An optional document to get termvectors for instead of using an already indexed document
@@ -29,11 +29,9 @@ namespace Nest
 		}
 	}
 
-	public partial class TermVectorsRequest : DocumentOptionalPathBase<TermVectorsRequestParameters>, ITermVectorsRequest
+	public partial class TermVectorsRequest : RequestBase<TermVectorsRequestParameters>, ITermVectorsRequest
 	{
-		public TermVectorsRequest(IndexName indexName, TypeName typeName, string id) : base(indexName, typeName, id) { }
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<TermVectorsRequestParameters> pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<TermVectorsRequestParameters> pathInfo)
 		{
 			TermVectorsPathInfo.Update(settings, pathInfo, this);
 		}
@@ -43,27 +41,21 @@ namespace Nest
 		public IDictionary<FieldName, string> PerFieldAnalyzer { get; set; }
 	}
 
-	public partial class TermVectorsRequest<T> : DocumentOptionalPathBase<TermVectorsRequestParameters, T>, ITermVectorsRequest<T>
+	public partial class TermVectorsRequest<T> : RequestBase<TermVectorsRequestParameters>, ITermVectorsRequest<T>
 		where T : class
 	{
 		object ITermVectorsRequest.Document { get; set; }
 
 		IDictionary<FieldName, string> ITermVectorsRequest.PerFieldAnalyzer { get; set; }
 
-		public TermVectorsRequest(string id) : base(id) { }
-
-		public TermVectorsRequest(long id) : base(id) { }
-
-		public TermVectorsRequest(T document) : base(document) { }
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<TermVectorsRequestParameters> pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<TermVectorsRequestParameters> pathInfo)
 		{
 			TermVectorsPathInfo.Update(settings, pathInfo, this);
 		}
 	}
 
 	[DescriptorFor("Termvectors")]
-	public partial class TermVectorsDescriptor<T> : DocumentOptionalPathDescriptor<TermVectorsDescriptor<T>, TermVectorsRequestParameters, T>
+	public partial class TermVectorsDescriptor<T> : RequestDescriptorBase<TermVectorsDescriptor<T>, TermVectorsRequestParameters>
 		, ITermVectorsRequest
 		where T : class
 	{
@@ -91,10 +83,9 @@ namespace Nest
 			Self.PerFieldAnalyzer = analyzerSelector(new FluentDictionary<FieldName, string>());
 			return this;
 		}
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<TermVectorsRequestParameters> pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<TermVectorsRequestParameters> pathInfo)
 		{
 			TermVectorsPathInfo.Update(settings, pathInfo, this);
 		}
-
 	}
 }

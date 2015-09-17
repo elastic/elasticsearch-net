@@ -7,21 +7,20 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IGetMappingRequest : IIndexTypePath<GetMappingRequestParameters> { }
+	public interface IGetMappingRequest : IRequest<GetMappingRequestParameters> { }
 	public interface IGetMappingRequest<T> : IGetMappingRequest where T : class { }
 
-	public partial class GetMappingRequest : IndexTypePathBase<GetMappingRequestParameters>, IGetMappingRequest
+	public partial class GetMappingRequest : RequestBase<GetMappingRequestParameters>, IGetMappingRequest
 	{
-		public GetMappingRequest(IndexName index, TypeName typeNameMarker) : base(index, typeNameMarker) { }
 	}
 	
-	public partial class GetMappingRequest<T> : IndexTypePathBase<GetMappingRequestParameters, T>, IGetMappingRequest
+	public partial class GetMappingRequest<T> : RequestBase<GetMappingRequestParameters>, IGetMappingRequest<T>
 		where T : class
 	{
 	}
 
 	[DescriptorFor("IndicesGetMapping")]
-	public partial class GetMappingDescriptor<T> : IndexTypePathDescriptor<GetMappingDescriptor<T>, GetMappingRequestParameters, T>, IGetMappingRequest
+	public partial class GetMappingDescriptor<T> : RequestDescriptorBase<GetMappingDescriptor<T>, GetMappingRequestParameters>, IGetMappingRequest
 		where T : class
 	{
 	}

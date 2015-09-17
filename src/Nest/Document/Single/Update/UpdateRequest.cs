@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IUpdateRequest<TDocument,TPartialDocument> : IDocumentOptionalPath<UpdateRequestParameters>
+	public interface IUpdateRequest<TDocument,TPartialDocument> : IRequest<UpdateRequestParameters>
 		where TDocument : class
 		where TPartialDocument : class 
 	{
@@ -60,37 +60,18 @@ namespace Nest
 	}
 
 	public class UpdateRequest<TDocument> : UpdateRequest<TDocument,TDocument>
-		where TDocument : class 
-	{
-		public UpdateRequest(string id) : base(id) { }
-
-		public UpdateRequest(long id) : base(id) { }
-
-		public UpdateRequest(TDocument document, bool useAsUpsert = false) : base(document, useAsUpsert)
-		{
-			
-		}
+		where TDocument : class
+    {
 	}
 
-	public partial class UpdateRequest<TDocument,TPartialDocument> : DocumentOptionalPathBase<UpdateRequestParameters, TDocument>, IUpdateRequest<TDocument, TPartialDocument> 
+	public partial class UpdateRequest<TDocument,TPartialDocument> : RequestBase<UpdateRequestParameters>, IUpdateRequest<TDocument, TPartialDocument> 
 		where TDocument : class
 		where TPartialDocument : class 
 	{
-		public UpdateRequest(string id) : base(id) { }
-
-		public UpdateRequest(long id) : base(id) { }
-
-		public UpdateRequest(TDocument idFrom, bool useAsUpsert = false) : base(idFrom)
-		{
-			if (useAsUpsert)
-				this.Upsert = idFrom;
-		}
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<UpdateRequestParameters> pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<UpdateRequestParameters> pathInfo)
 		{
 			UpdateRequestPathInfo.Update(settings, pathInfo, this);
 		}
-		
 
 		public string Script { get; set; }
 		public string ScriptFile { get; set; }
@@ -102,7 +83,7 @@ namespace Nest
 	}
 
 	public partial class UpdateDescriptor<TDocument,TPartialDocument> 
-		: DocumentPathDescriptor<UpdateDescriptor<TDocument, TPartialDocument>, UpdateRequestParameters, TDocument>
+		: RequestDescriptorBase<UpdateDescriptor<TDocument, TPartialDocument>, UpdateRequestParameters>
 		, IUpdateRequest<TDocument, TPartialDocument> 
 		where TDocument : class 
 		where TPartialDocument : class
@@ -156,7 +137,8 @@ namespace Nest
 
 		public UpdateDescriptor<TDocument, TPartialDocument> Id(TDocument document, bool useAsUpsert)
 		{
-			((IDocumentOptionalPath<UpdateRequestParameters, TDocument>)Self).IdFrom = document;
+            //TODO: What should this be when we have an Ids type?
+			//((IDocumentOptionalPath<UpdateRequestParameters, TDocument>)Self).IdFrom = document;
 			if (useAsUpsert)
 				return this.Upsert(document);
 			return this;
@@ -191,7 +173,7 @@ namespace Nest
 		///<summary>A comma-separated list of fields to return in the response</summary>
 		public UpdateDescriptor<TDocument,TPartialDocument> Fields(params string[] fields)
 		{
-			this.Request.RequestParameters.AddQueryString("fields", fields);
+			this.Request.Parameters.AddQueryString("fields", fields);
 			return this;
 		}
 		
@@ -202,11 +184,11 @@ namespace Nest
 			if (!typedPathLookups.HasAny())
 				return this;
 
-			this.Request.RequestParameters.AddQueryString("fields",typedPathLookups);
+			this.Request.Parameters.AddQueryString("fields",typedPathLookups);
 			return this;
 		}
 			
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<UpdateRequestParameters> pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<UpdateRequestParameters> pathInfo)
 		{
 			UpdateRequestPathInfo.Update(settings, pathInfo, this);
 		}

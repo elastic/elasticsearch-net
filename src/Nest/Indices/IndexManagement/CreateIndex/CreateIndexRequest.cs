@@ -11,16 +11,12 @@ namespace Nest
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<CreateIndexDescriptor>))]
-	public interface ICreateIndexRequest : IIndexPath<CreateIndexRequestParameters>, IIndexState
+	public interface ICreateIndexRequest : IRequest<CreateIndexRequestParameters>, IIndexState
 	{
 	}
 
-	public partial class CreateIndexRequest : IndexPathBase<CreateIndexRequestParameters>, ICreateIndexRequest
+	public partial class CreateIndexRequest : RequestBase<CreateIndexRequestParameters>, ICreateIndexRequest
 	{
-		internal CreateIndexRequest() : base(null) { }
-
-		public CreateIndexRequest(IndexName index) : base(index) { }
-
 		public IIndexSettings Settings { get; set; }
 
 		public IMappings Mappings { get; set; }
@@ -33,7 +29,7 @@ namespace Nest
 	}
 
 	[DescriptorFor("IndicesCreate")]
-	public partial class CreateIndexDescriptor : IndexPathDescriptorBase<CreateIndexDescriptor, CreateIndexRequestParameters>, ICreateIndexRequest
+	public partial class CreateIndexDescriptor : RequestDescriptorBase<CreateIndexDescriptor, CreateIndexRequestParameters>, ICreateIndexRequest
 	{
 		protected CreateIndexDescriptor Assign(Action<ICreateIndexRequest> assigner) => Fluent.Assign(this, assigner);
 

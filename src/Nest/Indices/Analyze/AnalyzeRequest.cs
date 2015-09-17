@@ -7,9 +7,9 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IAnalyzeRequest : IIndicesOptionalPath<AnalyzeRequestParameters> { }
+	public interface IAnalyzeRequest : IRequest<AnalyzeRequestParameters> { }
 
-	public partial class AnalyzeRequest : IndicesOptionalPathBase<AnalyzeRequestParameters>, IAnalyzeRequest
+	public partial class AnalyzeRequest : RequestBase<AnalyzeRequestParameters>, IAnalyzeRequest
 	{
 		public AnalyzeRequest(string textToAnalyze)
 		{
@@ -18,7 +18,7 @@ namespace Nest
 	}
 
 	[DescriptorFor("IndicesAnalyze")]
-	public partial class AnalyzeDescriptor : IndicesOptionalPathDescriptor<AnalyzeDescriptor, AnalyzeRequestParameters>, IAnalyzeRequest
+	public partial class AnalyzeDescriptor : RequestDescriptorBase<AnalyzeDescriptor, AnalyzeRequestParameters>, IAnalyzeRequest
 	{
 	}
 }

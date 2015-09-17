@@ -7,14 +7,14 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IDeleteTemplateRequest : INamePath<DeleteTemplateRequestParameters> { }
+	public interface IDeleteTemplateRequest : IRequest<DeleteTemplateRequestParameters> { }
 
-	public partial class DeleteTemplateRequest : NamePathBase<DeleteTemplateRequestParameters>, IDeleteTemplateRequest
+	public partial class DeleteTemplateRequest : RequestBase<DeleteTemplateRequestParameters>, IDeleteTemplateRequest
 	{
-		public DeleteTemplateRequest(string name) : base(name) { }
 	}
+
 	[DescriptorFor("IndicesDeleteTemplate")]
-	public partial class DeleteTemplateDescriptor : NamePathDescriptor<DeleteTemplateDescriptor, DeleteTemplateRequestParameters>, IDeleteTemplateRequest
+	public partial class DeleteTemplateDescriptor : RequestDescriptorBase<DeleteTemplateDescriptor, DeleteTemplateRequestParameters>, IDeleteTemplateRequest
 	{
 	}
 }
