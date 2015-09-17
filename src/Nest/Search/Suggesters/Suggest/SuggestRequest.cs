@@ -9,7 +9,7 @@ namespace Nest
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(CustomJsonConverter))]
-	public interface ISuggestRequest : IIndicesOptionalExplicitAllPath<SuggestRequestParameters>, ICustomJson
+	public interface ISuggestRequest : IRequest<SuggestRequestParameters>, ICustomJson
 	{
 		string GlobalText { get; set; }
 		IDictionary<string, ISuggester> Suggest { get; set; }
@@ -17,6 +17,7 @@ namespace Nest
 
 	internal static class SuggestPathInfo
 	{
+		//TODO this is ugly
 		public static object GetCustomJson(ISuggestRequest suggestRequest)
 		{
 			if (suggestRequest == null || (suggestRequest.GlobalText.IsNullOrEmpty() && suggestRequest.Suggest == null))
@@ -48,9 +49,8 @@ namespace Nest
 		}
 	}
 
-	public partial class SuggestRequest : IndicesOptionalExplicitAllPathBase<SuggestRequestParameters>, ISuggestRequest
+	public partial class SuggestRequest : RequestBase<SuggestRequestParameters>, ISuggestRequest
 	{
-		public SuggestRequest(Indices indices) : base(indices) { }
 		public string GlobalText { get; set; }
 		public IDictionary<string, ISuggester> Suggest { get; set; }
 
@@ -59,13 +59,10 @@ namespace Nest
 
 
 	[DescriptorFor("Suggest")]
-	public partial class SuggestDescriptor<T> : IndicesOptionalExplicitAllPathDescriptor<SuggestDescriptor<T>, SuggestRequestParameters>, ISuggestRequest
+	public partial class SuggestDescriptor<T> : RequestDescriptorBase<SuggestDescriptor<T>, SuggestRequestParameters>, ISuggestRequest
 		where T : class
 	{
 		private ISuggestRequest Self => this;
-
-		public SuggestDescriptor() : base(Indices.Type<T>()) { }
-		public SuggestDescriptor(Indices indices) : base(indices) { }
 
 		object ICustomJson.GetCustomJson() { return SuggestPathInfo.GetCustomJson(this); }
 

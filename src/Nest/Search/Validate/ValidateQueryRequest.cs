@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IValidateQueryRequest : IQueryPath<ValidateQueryRequestParameters>
+	public interface IValidateQueryRequest : IRequest<ValidateQueryRequestParameters>
 	{
 		[JsonProperty("query")]
 		IQueryContainer Query { get; set; }
@@ -21,43 +21,30 @@ namespace Nest
 	{
 		public static void Update(RequestPath<ValidateQueryRequestParameters> pathInfo, IValidateQueryRequest request)
 		{
-			var source = request.RequestParameters.GetQueryStringValue<string>("source");
-			var q = request.RequestParameters.GetQueryStringValue<string>("q");
+			var source = request.Parameters.GetQueryStringValue<string>("source");
+			var q = request.Parameters.GetQueryStringValue<string>("q");
 			pathInfo.HttpMethod = (!source.IsNullOrEmpty() || !q.IsNullOrEmpty())
 				? HttpMethod.GET
 				: HttpMethod.POST;
 		}
 	}
 
-	public partial class ValidateQueryRequest : QueryPathBase<ValidateQueryRequestParameters>, IValidateQueryRequest
+	public partial class ValidateQueryRequest : RequestBase<ValidateQueryRequestParameters>, IValidateQueryRequest
 	{
-		public ValidateQueryRequest() { }
-
-		public ValidateQueryRequest(IndexName index, TypeName type = null) : base(index, type) { }
-
-		public ValidateQueryRequest(IEnumerable<IndexName> indices, IEnumerable<TypeName> types = null) : base(indices, types) { }
-
 		public IQueryContainer Query { get; set; }
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<ValidateQueryRequestParameters> pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<ValidateQueryRequestParameters> pathInfo)
 		{
 			ValidateQueryPathInfo.Update(pathInfo, this);
 		}
 	}
 
-	public partial class ValidateQueryRequest<T> : QueryPathBase<ValidateQueryRequestParameters, T>, IValidateQueryRequest<T>
+	public partial class ValidateQueryRequest<T> : RequestBase<ValidateQueryRequestParameters>, IValidateQueryRequest<T>
 		where T : class
 	{
-
-		public ValidateQueryRequest() { }
-
-		public ValidateQueryRequest(IndexName index, TypeName type = null) : base(index, type) { }
-
-		public ValidateQueryRequest(IEnumerable<IndexName> indices, IEnumerable<TypeName> types = null) : base(indices, types) { }
-
 		public IQueryContainer Query { get; set; }
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<ValidateQueryRequestParameters> pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<ValidateQueryRequestParameters> pathInfo)
 		{
 			ValidateQueryPathInfo.Update(pathInfo, this);
 		}
@@ -65,8 +52,7 @@ namespace Nest
 
 	[DescriptorFor("IndicesValidateQuery")]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial class ValidateQueryDescriptor<T>
-		: QueryPathDescriptorBase<ValidateQueryDescriptor<T>, ValidateQueryRequestParameters, T>, IValidateQueryRequest<T>
+	public partial class ValidateQueryDescriptor<T> : RequestDescriptorBase<ValidateQueryDescriptor<T>,  ValidateQueryRequestParameters>, IValidateQueryRequest<T>
 		where T : class
 	{
 		private IValidateQueryRequest Self => this;
@@ -79,7 +65,7 @@ namespace Nest
 			return this;
 		}
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<ValidateQueryRequestParameters> pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<ValidateQueryRequestParameters> pathInfo)
 		{
 			ValidateQueryPathInfo.Update(pathInfo, this);
 		}
