@@ -7,21 +7,19 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IPutTemplateRequest : INamePath<PutTemplateRequestParameters>
+	public interface IPutTemplateRequest : IRequest<PutTemplateRequestParameters>
 	{
 		TemplateMapping TemplateMapping { get; set; }
 	}
 
-	public partial class PutTemplateRequest : NamePathBase<PutTemplateRequestParameters>, IPutTemplateRequest
+	public partial class PutTemplateRequest : RequestBase<PutTemplateRequestParameters>, IPutTemplateRequest
 	{
-		public PutTemplateRequest(string name) : base(name) { } 
-
 		//TODO Merge this state object onto this object
 		public TemplateMapping TemplateMapping { get; set; }
 	}
 
 	[DescriptorFor("IndicesPutTemplate")]
-	public partial class PutTemplateDescriptor : NamePathDescriptor<PutTemplateDescriptor, PutTemplateRequestParameters>, IPutTemplateRequest
+	public partial class PutTemplateDescriptor : RequestDescriptorBase<PutTemplateDescriptor, PutTemplateRequestParameters>, IPutTemplateRequest
 	{
 		private IPutTemplateRequest Self => this;
 

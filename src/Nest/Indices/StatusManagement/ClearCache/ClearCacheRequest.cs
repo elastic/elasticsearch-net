@@ -7,14 +7,14 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IClearCacheRequest : IIndicesOptionalPath<ClearCacheRequestParameters> { }
+	public interface IClearCacheRequest : IRequest<ClearCacheRequestParameters> { }
 	
-	public partial class ClearCacheRequest : IndicesOptionalPathBase<ClearCacheRequestParameters>, IClearCacheRequest
+	public partial class ClearCacheRequest : RequestBase<ClearCacheRequestParameters>, IClearCacheRequest
 	{
 	}
 
 	[DescriptorFor("IndicesClearCache")]
-	public partial class ClearCacheDescriptor : IndicesOptionalPathDescriptor<ClearCacheDescriptor, ClearCacheRequestParameters>, IClearCacheRequest
+	public partial class ClearCacheDescriptor : RequestDescriptorBase<ClearCacheDescriptor, ClearCacheRequestParameters>, IClearCacheRequest
 	{
 	}
 }

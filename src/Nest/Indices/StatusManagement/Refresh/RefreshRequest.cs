@@ -7,14 +7,14 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IRefreshRequest : IIndicesOptionalPath<RefreshRequestParameters> { }
+	public interface IRefreshRequest : IRequest<RefreshRequestParameters> { }
 
-	public partial class RefreshRequest : IndicesOptionalPathBase<RefreshRequestParameters>, IRefreshRequest
+	public partial class RefreshRequest : RequestBase<RefreshRequestParameters>, IRefreshRequest
 	{
 	}
 
 	[DescriptorFor("IndicesRefresh")]
-	public partial class RefreshDescriptor : IndicesOptionalPathDescriptor<RefreshDescriptor, RefreshRequestParameters>, IRefreshRequest
+	public partial class RefreshDescriptor : RequestDescriptorBase<RefreshDescriptor, RefreshRequestParameters>, IRefreshRequest
 	{
 	}
 }

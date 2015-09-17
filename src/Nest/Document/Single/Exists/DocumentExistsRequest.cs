@@ -13,7 +13,6 @@ namespace Nest
 
 	public partial class DocumentExistsRequest : RequestBase<DocumentExistsRequestParameters>, IDocumentExistsRequest
 	{
-		public DocumentExistsRequest(IndexName indexName, TypeName typeName, string id) : base(indexName, typeName, id) { }
 	}
 	
 	public partial class DocumentExistsRequest<T> : RequestBase<DocumentExistsRequestParameters>, IDocumentExistsRequest
@@ -34,7 +33,6 @@ namespace Nest
 
         protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<DocumentExistsRequestParameters> path)
         {
-            path.IdFrom(settings, this.Document);
         }
     }
 

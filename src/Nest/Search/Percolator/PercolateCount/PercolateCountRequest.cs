@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IPercolateCountRequest<TDocument> : IIndexTypePath<PercolateCountRequestParameters>, IPercolateOperation
+	public interface IPercolateCountRequest<TDocument> : IRequest<PercolateCountRequestParameters>, IPercolateOperation
 		where TDocument : class
 	{
 		[JsonProperty(PropertyName = "doc")]
@@ -26,7 +26,7 @@ namespace Nest
 		}
 	}
 	
-	public partial class PercolateCountRequest<TDocument> : IndexTypePathBase<PercolateCountRequestParameters, TDocument>, IPercolateCountRequest<TDocument>
+	public partial class PercolateCountRequest<TDocument> : RequestBase<PercolateCountRequestParameters>, IPercolateCountRequest<TDocument>
 		where TDocument : class
 	{
 		public string Id { get; set; }
@@ -42,10 +42,10 @@ namespace Nest
 		
 		IRequestParameters IPercolateOperation.GetRequestParameters()
 		{
-			return this.Request.RequestParameters;
+			return this.Request.Parameters;
 		}
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<PercolateCountRequestParameters> pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<PercolateCountRequestParameters> pathInfo)
 		{
 			PercolateCountPathInfo.Update(pathInfo, this);
 		}
@@ -53,7 +53,7 @@ namespace Nest
 	}
 	
 	[DescriptorFor("CountPercolate")]
-	public partial class PercolateCountDescriptor<T> : IndexTypePathDescriptor<PercolateCountDescriptor<T>, PercolateCountRequestParameters, T>
+	public partial class PercolateCountDescriptor<T> : RequestDescriptorBase<PercolateCountDescriptor<T>, PercolateCountRequestParameters>
 		, IPercolateCountRequest<T>
 		where T : class
 	{
@@ -76,7 +76,7 @@ namespace Nest
 		
 		IRequestParameters IPercolateOperation.GetRequestParameters()
 		{
-			return this.Request.RequestParameters;
+			return this.Request.Parameters;
 		}
 		/// <summary>
 		/// The object to perculate
@@ -298,7 +298,7 @@ namespace Nest
 			return this;
 		}
 		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<PercolateCountRequestParameters> pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<PercolateCountRequestParameters> pathInfo)
 		{
 			PercolateCountPathInfo.Update(pathInfo, this);
 		}

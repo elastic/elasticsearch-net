@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IIndicesStatsRequest : IIndicesOptionalPath<IndicesStatsRequestParameters>
+	public interface IIndicesStatsRequest : IRequest<IndicesStatsRequestParameters>
 	{
 		IEnumerable<TypeName> Types { get; set; }
 		IEnumerable<IndicesStatsMetric> Metrics { get; set; }
@@ -30,12 +30,12 @@ namespace Nest
 		}
 	}
 
-	public partial class IndicesStatsRequest : IndicesOptionalPathBase<IndicesStatsRequestParameters>, IIndicesStatsRequest
+	public partial class IndicesStatsRequest : RequestBase<IndicesStatsRequestParameters>, IIndicesStatsRequest
 	{
 		public IEnumerable<IndicesStatsMetric> Metrics { get; set; }
 		public IEnumerable<TypeName> Types { get; set; }
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<IndicesStatsRequestParameters> pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<IndicesStatsRequestParameters> pathInfo)
 		{
 			IndicesStatsPathInfo.Update(settings, pathInfo , this);
 		}
@@ -43,7 +43,7 @@ namespace Nest
 	}
 
 	[DescriptorFor("IndicesStats")]
-	public partial class IndicesStatsDescriptor : IndicesOptionalPathDescriptor<IndicesStatsDescriptor, IndicesStatsRequestParameters>, IIndicesStatsRequest
+	public partial class IndicesStatsDescriptor : RequestDescriptorBase<IndicesStatsDescriptor, IndicesStatsRequestParameters>, IIndicesStatsRequest
 	{
 		private IIndicesStatsRequest Self => this;
 
@@ -63,7 +63,7 @@ namespace Nest
 			return this;
 		}
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<IndicesStatsRequestParameters> pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<IndicesStatsRequestParameters> pathInfo)
 		{
 			IndicesStatsPathInfo.Update(settings, pathInfo, this);
 		}

@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface ICountRequest : IQueryPath<CountRequestParameters>
+	public interface ICountRequest : IRequest<CountRequestParameters>
 	{
 		[JsonProperty("query")]
 		IQueryContainer Query { get; set; }
@@ -17,7 +17,7 @@ namespace Nest
 	{
 		public static void Update(RequestPath<CountRequestParameters> pathInfo, ICountRequest request)
 		{
-			var source = request.RequestParameters.GetQueryStringValue<string>("source");
+			var source = request.Parameters.GetQueryStringValue<string>("source");
 			pathInfo.HttpMethod = source.IsNullOrEmpty() 
 				&& (request.Query == null || request.Query.IsConditionless)
 				? HttpMethod.GET
@@ -25,41 +25,29 @@ namespace Nest
 		}
 	}
 	
-	public partial class CountRequest : QueryPathBase<CountRequestParameters>, ICountRequest
+	public partial class CountRequest : RequestBase<CountRequestParameters>, ICountRequest
 	{
-		public CountRequest() {}
-
-		public CountRequest(IndexName index, TypeName type = null) : base(index, type) { }
-
-		public CountRequest(IEnumerable<IndexName> indices, IEnumerable<TypeName> types = null) : base(indices, types) { }
-
 		public IQueryContainer Query { get; set; }
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<CountRequestParameters> pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<CountRequestParameters> pathInfo)
 		{
 			CountPathInfo.Update(pathInfo, this);
 		}
 	}
 
-	public partial class CountRequest<T> : QueryPathBase<CountRequestParameters, T>, ICountRequest
+	public partial class CountRequest<T> : RequestBase<CountRequestParameters>, ICountRequest<T>
 		where T : class
 	{
-		public CountRequest() {}
-
-		public CountRequest(IndexName index, TypeName type = null) : base(index, type) { }
-
-		public CountRequest(IEnumerable<IndexName> indices, IEnumerable<TypeName> types = null) : base(indices, types) { }
-
 		public IQueryContainer Query { get; set; }
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<CountRequestParameters> pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<CountRequestParameters> pathInfo)
 		{
 			CountPathInfo.Update(pathInfo, this);
 		}
 	}
 	
 	[DescriptorFor("Count")]
-	public partial class CountDescriptor<T> : QueryPathDescriptorBase<CountDescriptor<T>, CountRequestParameters, T>, ICountRequest
+	public partial class CountDescriptor<T> : RequestDescriptorBase<CountDescriptor<T>, CountRequestParameters>, ICountRequest<T>
 		where T : class
 	{
 		private ICountRequest Self => this;
@@ -72,7 +60,7 @@ namespace Nest
 			return this;
 		}
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<CountRequestParameters> pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<CountRequestParameters> pathInfo)
 		{
 			CountPathInfo.Update(pathInfo, this);
 		}

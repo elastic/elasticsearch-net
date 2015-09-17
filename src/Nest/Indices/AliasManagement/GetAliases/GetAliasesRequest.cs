@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IGetAliasesRequest : IIndicesOptionalPath<GetAliasesRequestParameters>
+	public interface IGetAliasesRequest : IRequest<GetAliasesRequestParameters>
 	{
 		[JsonIgnore]
 		string Alias { get; set; }
@@ -22,11 +22,11 @@ namespace Nest
 		}
 	}
 	
-	public partial class GetAliasesRequest : IndicesOptionalPathBase<GetAliasesRequestParameters>, IGetAliasesRequest
+	public partial class GetAliasesRequest : RequestBase<GetAliasesRequestParameters>, IGetAliasesRequest
 	{
 		public string Alias { get; set; }
 		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<GetAliasesRequestParameters> pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<GetAliasesRequestParameters> pathInfo)
 		{
 			GetAliasesPathInfo.Update(pathInfo, this);
 		}
@@ -34,7 +34,7 @@ namespace Nest
 
 	[DescriptorFor("IndicesGetAliases")]
 	public partial class GetAliasesDescriptor 
-		: IndicesOptionalPathDescriptor<GetAliasesDescriptor, GetAliasesRequestParameters>, IGetAliasesRequest
+		: RequestDescriptorBase<GetAliasesDescriptor, GetAliasesRequestParameters>, IGetAliasesRequest
 	{
 
 		private IGetAliasesRequest Self => this;
@@ -47,7 +47,7 @@ namespace Nest
 			return this;
 		}
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<GetAliasesRequestParameters> pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<GetAliasesRequestParameters> pathInfo)
 		{
 			GetAliasesPathInfo.Update(pathInfo, this);
 		}

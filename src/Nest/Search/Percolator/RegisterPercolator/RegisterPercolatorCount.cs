@@ -9,7 +9,7 @@ namespace Nest
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(CustomJsonConverter))]
-	public interface IRegisterPercolatorRequest : IIndexNamePath<IndexRequestParameters>, ICustomJson
+	public interface IRegisterPercolatorRequest : IRequest<IndexRequestParameters>, ICustomJson
 	{
 		IDictionary<string, object> MetaData { get; set; }
 		QueryContainer Query { get; set; }
@@ -26,16 +26,12 @@ namespace Nest
 		}
 	}
 
-	public class RegisterPercolatorRequest : IndexNamePathBase<IndexRequestParameters>, IRegisterPercolatorRequest
+	public class RegisterPercolatorRequest : RequestBase<IndexRequestParameters>, IRegisterPercolatorRequest
 	{
-		public RegisterPercolatorRequest(IndexName index, string name) : base(index, name)
-		{
-		}
-
 		public IDictionary<string, object> MetaData { get; set; }
 		public QueryContainer Query { get; set; }
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<IndexRequestParameters> pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<IndexRequestParameters> pathInfo)
 		{
 			RegisterPercolatorPathInfo.Update(pathInfo, this);
 		}
@@ -48,7 +44,7 @@ namespace Nest
 
 	}
 
-	public class RegisterPercolatorDescriptor<T> : IndexNamePathDescriptor<RegisterPercolatorDescriptor<T>, IndexRequestParameters, T>, IRegisterPercolatorRequest
+	public class RegisterPercolatorDescriptor<T> : RequestDescriptorBase<RegisterPercolatorDescriptor<T>, IndexRequestParameters>, IRegisterPercolatorRequest
 		where T : class
 	{
 		private IRegisterPercolatorRequest Self => this;
@@ -86,7 +82,7 @@ namespace Nest
 				.Add("query", Self.Query);
 		}
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<IndexRequestParameters> pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<IndexRequestParameters> pathInfo)
 		{
 			RegisterPercolatorPathInfo.Update(pathInfo, this);
 		}

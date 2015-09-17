@@ -8,20 +8,20 @@ namespace Nest
 {
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IMultiSearchRequest : IFixedIndexTypePath<MultiSearchRequestParameters>
+	public interface IMultiSearchRequest : IRequest<MultiSearchRequestParameters>
 	{
 		
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
 		IDictionary<string, ISearchRequest> Operations { get; set;}
 	}
 
-	public partial class MultiSearchRequest : FixedIndexTypePathBase<MultiSearchRequestParameters>, IMultiSearchRequest
+	public partial class MultiSearchRequest : RequestBase<MultiSearchRequestParameters>, IMultiSearchRequest
 	{
 		public IDictionary<string, ISearchRequest> Operations { get; set; }
 	}
 
 	[DescriptorFor("Msearch")]
-	public partial class MultiSearchDescriptor : FixedIndexTypePathDescriptor<MultiSearchDescriptor, MultiSearchRequestParameters>, IMultiSearchRequest
+	public partial class MultiSearchDescriptor : RequestDescriptorBase<MultiSearchDescriptor, MultiSearchRequestParameters>, IMultiSearchRequest
 	{
 		private IMultiSearchRequest Self => this;
 
@@ -37,7 +37,7 @@ namespace Nest
 		{
 			name.ThrowIfNull("name");
 			searchSelector.ThrowIfNull("searchSelector");
-			var descriptor = searchSelector(new SearchDescriptor<T>().Index(Self.Index).Type(Self.Type));
+            var descriptor = searchSelector(new SearchDescriptor<T>());
 			if (descriptor == null)
 				return this;
 			this._operations.Add(name, descriptor);

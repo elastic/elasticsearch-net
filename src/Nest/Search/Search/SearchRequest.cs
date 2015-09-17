@@ -10,7 +10,7 @@ namespace Nest
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<SearchRequest>))]
-	public interface ISearchRequest : IQueryPath<SearchRequestParameters>
+	public interface ISearchRequest : IRequest<SearchRequestParameters>
 	{
 		Type ClrType { get; }
 
@@ -108,36 +108,31 @@ namespace Nest
 		/// </summary>
 		public static void CloseOverAutomagicCovariantResultSelector(ElasticInferrer infer, ISearchRequest self)
 		{
-			if (infer == null || self == null) return;
-			var returnType = self.ClrType;
+            // TODO: Fix this
+			//if (infer == null || self == null) return;
+			//var returnType = self.ClrType;
 
-			if (returnType == null) return;
+			//if (returnType == null) return;
 
-			var types = (self.Types ?? Enumerable.Empty<TypeName>()).Where(t => t.Type != null).ToList();
-			if (self.TypeSelector != null || !types.HasAny(t => t.Type != returnType))
-				return;
+			//var types = (self.Types ?? Enumerable.Empty<TypeName>()).Where(t => t.Type != null).ToList();
+			//if (self.TypeSelector != null || !types.HasAny(t => t.Type != returnType))
+			//	return;
 			
-			var typeDictionary = types.ToDictionary(infer.TypeName, t => t.Type);
-			self.TypeSelector = (o, h) =>
-			{
-				Type t;
-				return !typeDictionary.TryGetValue(h.Type, out t) ? returnType : t;
-			};
+			//var typeDictionary = types.ToDictionary(infer.TypeName, t => t.Type);
+			//self.TypeSelector = (o, h) =>
+			//{
+			//	Type t;
+			//	return !typeDictionary.TryGetValue(h.Type, out t) ? returnType : t;
+			//};
 		}
 		public static void Update(IConnectionSettingsValues settings, RequestPath<SearchRequestParameters> pathInfo, ISearchRequest request)
 		{
-			pathInfo.HttpMethod = request.RequestParameters.ContainsKey("source") ? HttpMethod.GET : HttpMethod.POST;
+			pathInfo.HttpMethod = request.Parameters.ContainsKey("source") ? HttpMethod.GET : HttpMethod.POST;
 		}
 	}
 	
-	public partial class SearchRequest : QueryPathBase<SearchRequestParameters>, ISearchRequest
+	public partial class SearchRequest : RequestBase<SearchRequestParameters>, ISearchRequest
 	{
-		public SearchRequest() {}
-
-		public SearchRequest(IndexName index, TypeName type = null) : base(index, type) { }
-
-		public SearchRequest(IEnumerable<IndexName> indices, IEnumerable<TypeName> types = null) : base(indices, types) { }
-
 		private Type _clrType { get; set; }
 		Type ISearchRequest.ClrType { get { return _clrType; } }
 
@@ -177,23 +172,19 @@ namespace Nest
 
 		public SearchRequestParameters QueryString { get; set; }
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<SearchRequestParameters> pathInfo) =>
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<SearchRequestParameters> pathInfo) =>
 			SearchPathInfo.Update(settings, pathInfo, this);
 
 	}
 
-	public partial class SearchRequest<T> : QueryPathBase<SearchRequestParameters, T>, ISearchRequest
+	public partial class SearchRequest<T> : RequestBase<SearchRequestParameters>, ISearchRequest
 		where T : class
 	{
 		public SearchRequest() {}
 
 		private ISearchRequest Self => this;
 
-		public SearchRequest(IndexName index, TypeName type = null) : base(index, type) { }
-
-		public SearchRequest(IEnumerable<IndexName> indices, IEnumerable<TypeName> types = null) : base(indices, types) { }
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<SearchRequestParameters> pathInfo) =>
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<SearchRequestParameters> pathInfo) =>
 			SearchPathInfo.Update(settings,pathInfo, this);
 
 		public Type ClrType => typeof(T);
@@ -242,27 +233,27 @@ namespace Nest
 	/// <summary>
 	/// A descriptor wich describes a search operation for _search and _msearch
 	/// </summary>
-	public partial class SearchDescriptor<T> : QueryPathDescriptorBase<SearchDescriptor<T>, SearchRequestParameters, T>, ISearchRequest 
+	public partial class SearchDescriptor<T> : RequestDescriptorBase<SearchDescriptor<T>, SearchRequestParameters>, ISearchRequest 
 		where T : class
 	{
 		private ISearchRequest Self => this;
 
 		private SearchDescriptor<T> _assign(Action<ISearchRequest> assigner) => Fluent.Assign(this, assigner);
 
-		SearchType? ISearchRequest.SearchType => this.Request.RequestParameters.GetQueryStringValue<SearchType?>("search_type");
+		SearchType? ISearchRequest.SearchType => this.Request.Parameters.GetQueryStringValue<SearchType?>("search_type");
 
 		SearchRequestParameters ISearchRequest.QueryString
 		{
-			get { return this.Request.RequestParameters;  }
-			set { this.Request.RequestParameters = value;  }
+			get { return this.Request.Parameters;  }
+			set { this.Request.Parameters = value;  }
 		}
 
-		string ISearchRequest.Preference => this.Request.RequestParameters.GetQueryStringValue<string>("preference");
+		string ISearchRequest.Preference => this.Request.Parameters.GetQueryStringValue<string>("preference");
 
-		string ISearchRequest.Routing => this.Request.RequestParameters.GetQueryStringValue<string[]>("routing") == null
-			? null : string.Join(",", this.Request.RequestParameters.GetQueryStringValue<string[]>("routing"));
+		string ISearchRequest.Routing => this.Request.Parameters.GetQueryStringValue<string[]>("routing") == null
+			? null : string.Join(",", this.Request.Parameters.GetQueryStringValue<string[]>("routing"));
 
-		bool? ISearchRequest.IgnoreUnavalable => this.Request.RequestParameters.GetQueryStringValue<bool?>("ignore_unavailable");
+		bool? ISearchRequest.IgnoreUnavalable => this.Request.Parameters.GetQueryStringValue<bool?>("ignore_unavailable");
 
 		Type ISearchRequest.ClrType => typeof(T);
 
@@ -841,7 +832,7 @@ namespace Nest
 		public SearchDescriptor<T> ConcreteTypeSelector(Func<dynamic, Hit<dynamic>, Type> typeSelector) =>
 			_assign(a => a.TypeSelector = typeSelector);
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<SearchRequestParameters> pathInfo) =>
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<SearchRequestParameters> pathInfo) =>
 			SearchPathInfo.Update(settings,pathInfo, this);
 
 	}

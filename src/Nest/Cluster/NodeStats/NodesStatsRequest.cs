@@ -36,7 +36,7 @@ namespace Nest
             : base(p => p.RequiredNodeId(nodeId))
         { }
 
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, IRequestPath<NodesStatsRequestParameters> path)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<NodesStatsRequestParameters> path)
 		{
 			NodesStatsPathInfo.Update(path, this);
 		}
@@ -67,7 +67,7 @@ namespace Nest
 			return this;
 		}
 
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, IRequestPath<NodesStatsRequestParameters> path)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<NodesStatsRequestParameters> path)
 		{
 			NodesStatsPathInfo.Update(path, this);
 		}

@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IExplainRequest : IDocumentOptionalPath<ExplainRequestParameters>
+	public interface IExplainRequest : IRequest<ExplainRequestParameters>
 	{
 		[JsonProperty("query")]
 		IQueryContainer Query { get; set; }
@@ -20,36 +20,30 @@ namespace Nest
 	{
 		public static void Update(RequestPath<ExplainRequestParameters> pathInfo, IExplainRequest request)
 		{
-			var source = request.RequestParameters.GetQueryStringValue<string>("source");
-			var q = request.RequestParameters.GetQueryStringValue<string>("q");
+			var source = request.Parameters.GetQueryStringValue<string>("source");
+			var q = request.Parameters.GetQueryStringValue<string>("q");
 			pathInfo.HttpMethod = (!source.IsNullOrEmpty() || !q.IsNullOrEmpty())
 				? HttpMethod.GET
 				: HttpMethod.POST;
 		}
 	}
 
-	public partial class ExplainRequest : DocumentPathBase<ExplainRequestParameters>, IExplainRequest
+	public partial class ExplainRequest : RequestBase<ExplainRequestParameters>, IExplainRequest
 	{
-		public ExplainRequest(IndexName indexName, TypeName typeName, string id) : base(indexName, typeName, id) { }
-
 		public IQueryContainer Query { get; set; }
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<ExplainRequestParameters> pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<ExplainRequestParameters> pathInfo)
 		{
 			ExplainPathInfo.Update(pathInfo, this);
 		}
 	}
 
-	public partial class ExplainRequest<T> : DocumentPathBase<ExplainRequestParameters, T>, IExplainRequest<T>
+	public partial class ExplainRequest<T> : RequestBase<ExplainRequestParameters>, IExplainRequest<T>
 		where T : class
 	{
-		public ExplainRequest(string id) : base(id) { }
-		public ExplainRequest(long id) : base(id) { }
-		public ExplainRequest(T document) : base(document) { }
-
 		public IQueryContainer Query { get; set; }
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<ExplainRequestParameters> pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<ExplainRequestParameters> pathInfo)
 		{
 			ExplainPathInfo.Update(pathInfo, this);
 		}
@@ -57,7 +51,7 @@ namespace Nest
 
 	[DescriptorFor("Explain")]
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial class ExplainDescriptor<T> : DocumentPathDescriptor<ExplainDescriptor<T>, ExplainRequestParameters, T>, IExplainRequest<T>
+	public partial class ExplainDescriptor<T> : RequestDescriptorBase<ExplainDescriptor<T>, ExplainRequestParameters>, IExplainRequest<T>
 		where T : class
 	{
 		private IExplainRequest Self => this;
@@ -70,7 +64,7 @@ namespace Nest
 			return this;
 		}
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<ExplainRequestParameters> pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<ExplainRequestParameters> pathInfo)
 		{
 			ExplainPathInfo.Update(pathInfo, this);
 		}

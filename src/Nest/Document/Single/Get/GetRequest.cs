@@ -37,7 +37,6 @@ namespace Nest
 
         protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<GetRequestParameters> path)
         {
-            path.IdFrom(settings, this.Document);
         }
     }
 	
@@ -63,7 +62,6 @@ namespace Nest
 
         protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<GetRequestParameters> path)
         {
-            path.IdFrom(settings, this.Document);
         }
 
 		public GetDescriptor<T> ExecuteOnPrimary()

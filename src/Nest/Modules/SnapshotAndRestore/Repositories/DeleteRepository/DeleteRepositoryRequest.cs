@@ -8,15 +8,14 @@ namespace Nest
 {
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IDeleteRepositoryRequest : IRepositoryPath<DeleteRepositoryRequestParameters> { }
+	public interface IDeleteRepositoryRequest : IRequest<DeleteRepositoryRequestParameters> { }
 
-	public partial class DeleteRepositoryRequest : RepositoryPathBase<DeleteRepositoryRequestParameters>, IDeleteRepositoryRequest
+	public partial class DeleteRepositoryRequest : RequestBase<DeleteRepositoryRequestParameters>, IDeleteRepositoryRequest
 	{
-		public DeleteRepositoryRequest(string repositoryName) : base(repositoryName) { }
 	}
 
 	[DescriptorFor("SnapshotDeleteRepository")]
-	public partial class DeleteRepositoryDescriptor : RepositoryPathDescriptor<DeleteRepositoryDescriptor, DeleteRepositoryRequestParameters>, IDeleteRepositoryRequest
+	public partial class DeleteRepositoryDescriptor : RequestDescriptorBase<DeleteRepositoryDescriptor, DeleteRepositoryRequestParameters>, IDeleteRepositoryRequest
 	{
 	}
 }

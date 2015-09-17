@@ -5,7 +5,7 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	public interface IUnregisterPercolatorRequest : IIndexNamePath<DeleteRequestParameters> { }
+	public interface IUnregisterPercolatorRequest : IRequest<DeleteRequestParameters> { }
 
 	public interface IUnregisterPercolatorRequest<T> : IUnregisterPercolatorRequest where T : class { }
 
@@ -23,23 +23,19 @@ namespace Nest
 		}
 	}
 
-	public partial class UnregisterPercolatorRequest : IndexNamePathBase<DeleteRequestParameters>, IUnregisterPercolatorRequest
+	public partial class UnregisterPercolatorRequest : RequestBase<DeleteRequestParameters>, IUnregisterPercolatorRequest
 	{
-		public UnregisterPercolatorRequest(IndexName index, string name) : base(index, name)
-		{
-		}
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<DeleteRequestParameters> pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<DeleteRequestParameters> pathInfo)
 		{
 			UnregisterPercolatorPathInfo.Update(settings, pathInfo);
 		}
 	}
 
 	public partial class UnregisterPercolatorDescriptor<T>
-		: IndexNamePathDescriptor<UnregisterPercolatorDescriptor<T>, DeleteRequestParameters, T>, IUnregisterPercolatorRequest
+		: RequestDescriptorBase<UnregisterPercolatorDescriptor<T>, DeleteRequestParameters>, IUnregisterPercolatorRequest
 		where T : class
 	{
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<DeleteRequestParameters> pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<DeleteRequestParameters> pathInfo)
 		{
 			UnregisterPercolatorPathInfo.Update(settings, pathInfo);
 		}

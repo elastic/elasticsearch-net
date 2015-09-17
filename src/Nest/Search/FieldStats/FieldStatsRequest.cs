@@ -6,17 +6,15 @@ using System.Text;
 
 namespace Nest
 {
-	public interface IFieldStatsRequest : IIndicesOptionalExplicitAllPath<FieldStatsRequestParameters> { }
+	public interface IFieldStatsRequest : IRequest<FieldStatsRequestParameters> { }
 
-	public partial class FieldStatsRequest : IndicesOptionalExplicitAllPathBase<FieldStatsRequestParameters>, IFieldStatsRequest
+	public partial class FieldStatsRequest : RequestBase<FieldStatsRequestParameters>, IFieldStatsRequest
 	{
-		public FieldStatsRequest(Indices indices) : base(indices) { }
 	}
 
 	public partial class FieldStatsDescriptor 
-		: IndicesOptionalExplicitAllPathDescriptor<FieldStatsDescriptor, FieldStatsRequestParameters>
+		: RequestDescriptorBase<FieldStatsDescriptor, FieldStatsRequestParameters>
 		, IFieldStatsRequest
 	{
-		public FieldStatsDescriptor(Indices indices) : base(indices) { }
 	}
 }

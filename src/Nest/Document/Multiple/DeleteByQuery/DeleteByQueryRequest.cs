@@ -42,7 +42,7 @@ namespace Nest
 
 		public IQueryContainer Query { get; set; }
 
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, IRequestPath<DeleteByQueryRequestParameters> path)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<DeleteByQueryRequestParameters> path)
 		{
 			DeleteByQueryPath.Update(path, this);
 		}
@@ -68,7 +68,7 @@ namespace Nest
 
 		public IQueryContainer Query { get; set; }
 
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, IRequestPath<DeleteByQueryRequestParameters> path)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<DeleteByQueryRequestParameters> path)
 		{
 			DeleteByQueryPath.Update(path, this);
 		}
@@ -112,7 +112,7 @@ namespace Nest
 			return this;
 		}
 
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, IRequestPath<DeleteByQueryRequestParameters> path)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<DeleteByQueryRequestParameters> path)
 		{
 			DeleteByQueryPath.Update(path, this);
 		}

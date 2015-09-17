@@ -7,20 +7,18 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface ICreateRepositoryRequest : IRepositoryPath<CreateRepositoryRequestParameters>
+	public interface ICreateRepositoryRequest : IRequest<CreateRepositoryRequestParameters>
 	{
 		IRepository Repository { get; set; }
 	}
 
-	public partial class CreateRepositoryRequest : RepositoryPathBase<CreateRepositoryRequestParameters>, ICreateRepositoryRequest
+	public partial class CreateRepositoryRequest : RequestBase<CreateRepositoryRequestParameters>, ICreateRepositoryRequest
 	{
-		public CreateRepositoryRequest(string repositoryName) : base(repositoryName) { }
-
 		public IRepository Repository { get; set; }
 	}
 
 	[DescriptorFor("SnapshotCreateRepository")]
-	public partial class CreateRepositoryDescriptor : RepositoryPathDescriptor<CreateRepositoryDescriptor, CreateRepositoryRequestParameters>, ICreateRepositoryRequest
+	public partial class CreateRepositoryDescriptor : RequestDescriptorBase<CreateRepositoryDescriptor, CreateRepositoryRequestParameters>, ICreateRepositoryRequest
 	{
 		private ICreateRepositoryRequest Self => this;
 

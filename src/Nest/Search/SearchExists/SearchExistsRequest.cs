@@ -42,29 +42,21 @@ namespace Nest
 
 	}
 
-	public partial class SearchExistsRequest<T> : QueryPathBase<SearchExistsRequestParameters, T>, ISearchExistsRequest<T>
+	public partial class SearchExistsRequest<T> : RequestBase<SearchExistsRequestParameters>, ISearchExistsRequest<T>
 		where T : class
 	{
 		public IQueryContainer Query { get; set; }
 
 		public string QueryString { get; set; }
 
-		protected SearchExistsRequest() : base() { }
-
-		protected SearchExistsRequest(IndexName index, TypeName type = null)
-			: base(index, type) { }
-
-		protected SearchExistsRequest(IEnumerable<IndexName> indices, IEnumerable<TypeName> types = null)
-			: base(indices, types) { }
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<SearchExistsRequestParameters> pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<SearchExistsRequestParameters> pathInfo)
 		{
 			SearchExistsPathInfo.Update(pathInfo, this);
 		}
 	}
 
 	[DescriptorFor("IndicesExists")]
-	public partial class SearchExistsDescriptor<T> : QueryPathDescriptorBase<SearchExistsDescriptor<T>, SearchExistsRequestParameters, T>, ISearchExistsRequest
+	public partial class SearchExistsDescriptor<T> : RequestDescriptorBase<SearchExistsDescriptor<T>, SearchExistsRequestParameters>, ISearchExistsRequest
 		where T : class
 	{
 		private ISearchExistsRequest Self => this;
@@ -73,7 +65,7 @@ namespace Nest
 
 		string ISearchExistsRequest.QueryString { get; set; }
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, RequestPath<SearchExistsRequestParameters> pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<SearchExistsRequestParameters> pathInfo)
 		{
 			SearchExistsPathInfo.Update(pathInfo, this);
 		}
@@ -129,7 +121,7 @@ namespace Nest
 		/// </summary>
 		public SearchExistsDescriptor<T> QueryString(string query)
 		{
-			Self.RequestParameters.AddQueryString("q", query);
+			Self.Parameters.AddQueryString("q", query);
 			return this;
 		}
 

@@ -8,19 +8,19 @@ namespace Nest
 {
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IMultiPercolateRequest : IFixedIndexTypePath<MultiPercolateRequestParameters>
+	public interface IMultiPercolateRequest : IRequest<MultiPercolateRequestParameters>
 	{
 		IList<IPercolateOperation> Percolations { get; set; }
 	}
 
-	public partial class MultiPercolateRequest : FixedIndexTypePathBase<MultiPercolateRequestParameters>, IMultiPercolateRequest
+	public partial class MultiPercolateRequest : RequestBase<MultiPercolateRequestParameters>, IMultiPercolateRequest
 	{
 		public IList<IPercolateOperation> Percolations { get; set; }
 
 	}
 
 	[DescriptorFor("Mpercolate")]
-	public partial class MultiPercolateDescriptor : FixedIndexTypePathDescriptor<MultiPercolateDescriptor, MultiPercolateRequestParameters>, IMultiPercolateRequest
+	public partial class MultiPercolateDescriptor : RequestDescriptorBase<MultiPercolateDescriptor, MultiPercolateRequestParameters>, IMultiPercolateRequest
 	{
 		private IMultiPercolateRequest Self => this;
 
@@ -35,7 +35,7 @@ namespace Nest
 			where T : class
 		{
 			getSelector.ThrowIfNull("getSelector");
-			var descriptor = getSelector(new PercolateDescriptor<T>().Index<T>().Type<T>());
+			var descriptor = getSelector(new PercolateDescriptor<T>());
 			Self.Percolations.Add(descriptor);
 			return this;
 		}
@@ -46,7 +46,7 @@ namespace Nest
 			foreach (var source in sources)
 			{
 				getSelector.ThrowIfNull("getSelector");
-				var descriptor = getSelector(new PercolateDescriptor<T>().Index<T>().Type<T>(), source);
+				var descriptor = getSelector(new PercolateDescriptor<T>(), source);
 				Self.Percolations.Add(descriptor);
 			}
 			return this;
@@ -56,7 +56,7 @@ namespace Nest
 			where T : class
 		{
 			getSelector.ThrowIfNull("getSelector");
-			var descriptor = getSelector(new PercolateCountDescriptor<T>().Index<T>().Type<T>());
+			var descriptor = getSelector(new PercolateCountDescriptor<T>());
 			Self.Percolations.Add(descriptor);
 			return this;
 		}

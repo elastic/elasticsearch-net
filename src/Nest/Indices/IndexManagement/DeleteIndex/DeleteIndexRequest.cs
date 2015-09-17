@@ -16,6 +16,5 @@ namespace Nest
 	[DescriptorFor("IndicesDelete")]
 	public partial class DeleteIndexDescriptor : RequestDescriptorBase<DeleteIndexDescriptor, DeleteIndexRequestParameters>, IDeleteIndexRequest
 	{
-		public DeleteIndexDescriptor(Indices indices) : base(indices) { }
 	}
 }

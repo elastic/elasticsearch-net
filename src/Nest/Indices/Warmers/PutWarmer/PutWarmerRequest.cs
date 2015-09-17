@@ -8,25 +8,20 @@ namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(CustomJsonConverter))]
-	public interface IPutWarmerRequest : IIndicesOptionalTypesNamePath<PutWarmerRequestParameters>, ICustomJson
+	public interface IPutWarmerRequest : IRequest<PutWarmerRequestParameters>, ICustomJson
 	{
 		ISearchRequest SearchDescriptor { get; set; }
 	}
 
-	public partial class PutWarmerRequest : IndicesOptionalTypesNamePathBase<PutWarmerRequestParameters>, IPutWarmerRequest
+	public partial class PutWarmerRequest : RequestBase<PutWarmerRequestParameters>, IPutWarmerRequest
 	{
-		public PutWarmerRequest(string name)
-		{
-			this.Name = name;
-		}
-
 		public ISearchRequest SearchDescriptor { get; set; }
 
 		object ICustomJson.GetCustomJson() { return this.SearchDescriptor; }
 
 	}
 	[DescriptorFor("IndicesPutWarmer")]
-	public partial class PutWarmerDescriptor : IndicesOptionalTypesNamePathDescriptor<PutWarmerDescriptor, PutWarmerRequestParameters>
+	public partial class PutWarmerDescriptor : RequestDescriptorBase<PutWarmerDescriptor, PutWarmerRequestParameters>
 		, IPutWarmerRequest
 	{
 		private IPutWarmerRequest Self => this;
