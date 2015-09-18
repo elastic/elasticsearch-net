@@ -15,7 +15,7 @@ namespace Nest
 
 	internal static class GetSearchTemplatePathInfo
 	{
-		public static void Update(RequestPath<GetTemplateRequestParameters> pathInfo, IGetSearchTemplateRequest request)
+		public static void Update(RequestPath pathInfo, IGetSearchTemplateRequest request)
 		{
 			//TODO NAME pathInfo.Id = request.;
 			pathInfo.HttpMethod = HttpMethod.GET;
@@ -24,7 +24,7 @@ namespace Nest
 
 	public partial class GetSearchTemplateRequest : RequestBase<GetTemplateRequestParameters>, IGetSearchTemplateRequest
 	{
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<GetTemplateRequestParameters> pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath pathInfo)
 		{
 			GetSearchTemplatePathInfo.Update(pathInfo, this);
 		}
@@ -33,7 +33,7 @@ namespace Nest
 
 	public partial class GetSearchTemplateDescriptor : RequestDescriptorBase<GetSearchTemplateDescriptor, GetTemplateRequestParameters>, IGetSearchTemplateRequest
 	{
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<GetTemplateRequestParameters> pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath pathInfo)
 		{
 			GetSearchTemplatePathInfo.Update(pathInfo, this);
 		}

@@ -35,7 +35,7 @@ namespace Nest
             Document = document;
         }
 
-        protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<GetRequestParameters> path)
+        protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath path)
         {
         }
     }
@@ -60,7 +60,7 @@ namespace Nest
             Document = document;
         }
 
-        protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<GetRequestParameters> path)
+        protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath path)
         {
         }
 

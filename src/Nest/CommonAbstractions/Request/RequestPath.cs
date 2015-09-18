@@ -2,104 +2,81 @@
 using System.Collections.Generic;
 using System.IO;
 using Elasticsearch.Net;
+using Elasticsearch.Net.Serialization;
 
 namespace Nest
 {
 	public interface IRequestPath
 	{
-		HttpMethod HttpMethod { get; set; }
-		Indices Index { get; set; }
-		Types Type { get; set; }
-		string Id { get; set; }
-		string Name { get; set; }
-		string Field { get; set; }
-		string ScrollId { get; set; }
-		string NodeId { get; set; }
-		string Fields { get; set; }
-		string SearchGroups { get; set; }
-		string IndexingTypes { get; set; }
-		string Repository { get; set; }
-		string Snapshot { get; set; }
-		string Metric { get; set; }
-		string IndexMetric { get; set; }
+		string Index { get; }
+		string Type { get; }
+		string Id { get; }
+		string Name { get; }
+		string Field { get; }
+		string ScrollId { get; }
+		string NodeId { get; }
+		string Fields { get; }
+		string Repository { get; }
+		string Snapshot { get; }
+		string Metric { get; }
+		string IndexMetric { get; }
+        void ResolveRouteValues(IConnectionSettingsValues settings);
 	}
-
-	public interface IRequestPath<TParameters> : IRequestPath
-		where TParameters : IRequestParameters, new()
+	public class RequestPath: IRequestPath
 	{
-	}
+		private Dictionary<string, IUrlParameter> _routeValues = new Dictionary<string, IUrlParameter>();
+		private Dictionary<string, string> _resolved = new Dictionary<string, string>();
 
-	public class RequestPath<TParameters> : IRequestPath<TParameters>
-		where TParameters : IRequestParameters, new()
-	{
-		public HttpMethod HttpMethod { get; set; }
-		public Indices Index { get; set; }
-		public Types Type { get; set; }
-		public string Id { get; set; }
-		public string Name { get; set; }
-		public string Field { get; set; }
-		public string ScrollId { get; set; }
-		public string NodeId { get; set; }
-		public string Fields { get; set; }
-		public string SearchGroups { get; set; }
-		public string IndexingTypes { get; set; }
-		public string Repository { get; set; }
-		public string Snapshot { get; set; }
-		public string Feature { get; set; }
-		public string Metric { get; set; }
-		public string IndexMetric { get; set; }
-		public string Lang { get; set; }
+		public string Index => _resolved["index"];
+		public string Type => _resolved["type"];
+		public string Id => _resolved["id"];
+		public string Name => _resolved["name"];
+		public string Field=> _resolved["field"];
+		public string ScrollId => _resolved["scroll_id"];
+		public string NodeId => _resolved["node_id"];
+		public string Fields => _resolved["fields"];
+		public string Repository => _resolved["repostitory"];
+		public string Snapshot => _resolved["snapshot"];
+		public string Feature => _resolved["feature"];
+		public string Metric => _resolved["metric"];
+		public string IndexMetric => _resolved["index_metric"];
+		public string Lang => _resolved["lang"];
 
-        public RequestPath<TParameters> Required(Indices indices)
-        {
-            this.Index = indices;
-            return this;
-        }
+		private RequestPath Route(string name, IUrlParameter routeValue, bool required = true)
+		{
+			this._routeValues.Add(name, routeValue);
+			return this;
+		}
+		private RequestPath Resolved(string name, string routeValue, bool required = true)
+		{
+			this._resolved.Add(name, routeValue);
+			return this;
+		}
+		
+		public void Resolve(IConnectionSettingsValues settings)
+		{
+			foreach(var kv in _routeValues)
+			{
+				this._resolved[kv.Key] = kv.Value.GetString(settings);
+			}
+		}
 
-        public RequestPath<TParameters> Optional(Indices indices)
-        {
-            this.Index = indices;
-            return this;
-        }
+		public RequestPath Required(Indices indices) => Route("index", indices);
+        public RequestPath Optional(Indices indices) => Route("index", indices, false);
 
-        public RequestPath<TParameters> Required(Types types)
-        {
-            this.Type = types;
-            return this;
-        }
+		public RequestPath Required(Types types) => Route("type", types);
+		public RequestPath Optional(Types types) => Route("type", types, false);
 
-        public RequestPath<TParameters> Optional(Types types)
-        {
-            this.Type = types;
-            return this;
-        }
+		[Obsolete("TODO: Rename to Required once NodeId type is implemented")]
+		public RequestPath RequiredNodeId(string nodeId) => Resolved("node_id", nodeId);
 
-        [Obsolete("TODO: Rename to Required once NodeId type is implemented")]
-        public RequestPath<TParameters> RequiredNodeId(string nodeId)
-        {
-            this.NodeId = nodeId;
-            return this;
-        }
+		[Obsolete("TODO: Rename to Optional once NodeId type is implemented")]
+		public RequestPath OptionalNodeId(string nodeId) => Resolved("node_id", nodeId, false);
 
-        [Obsolete("TODO: Rename to Optional once NodeId type is implemented")]
-        public RequestPath<TParameters> OptionalNodeId(string nodeId)
-        {
-            this.NodeId = nodeId;
-            return this;
-        }
+		[Obsolete]
+		public RequestPath RequiredId(string id) => Resolved("id", id);
 
-        [Obsolete]
-        public RequestPath<TParameters> RequiredId(string id)
-        {
-            this.Id = id;
-            return this;
-        }
-
-        [Obsolete]
-        public RequestPath<TParameters> OptionalId(string id)
-        {
-            this.Id = id;
-            return this;
-        }
+		[Obsolete]
+		public RequestPath OptionalId(string id) => Resolved("id", id, false);
 	}
 }

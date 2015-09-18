@@ -3,6 +3,8 @@ using Elasticsearch.Net.Connection.Configuration;
 using Newtonsoft.Json;
 using System;
 using System.ComponentModel;
+using System.Collections.Generic;
+using Elasticsearch.Net.Serialization;
 
 namespace Nest
 {
@@ -22,19 +24,32 @@ namespace Nest
         /// </summary>
         TParameters Parameters { get; set; }
 
-        RequestPath<TParameters> ResolvePath(IConnectionSettingsValues settings);
+		HttpMethod HttpMethod { get; }
+
+		RequestPath RouteValues { get; }
+
+        void ResolveRouteValues(IConnectionSettingsValues settings);
 	}
 
     public abstract class RequestBase<TParameters> : IRequest<TParameters>
         where TParameters : IRequestParameters, new()
     {
-        private RequestPath<TParameters> _path;
+        private RequestPath _path;
 
+        [JsonIgnore]
+        HttpMethod IRequest<TParameters>.HttpMethod => this.Request.Parameters.DefaultHttpMethod;
+
+		[JsonIgnore]
+		RequestPath IRequest<TParameters>.RouteValues { get; } = new RequestPath();
+
+        [JsonIgnore]
+        TParameters IRequest<TParameters>.Parameters { get; set; } = new TParameters();
+		
         public RequestBase() { }
 
-        protected RequestBase(Func<RequestPath<TParameters>, RequestPath<TParameters>> pathSelector)
+        protected RequestBase(Func<RequestPath, RequestPath> pathSelector)
         {
-            _path = pathSelector(new RequestPath<TParameters>());
+            _path = pathSelector(new RequestPath());
         }
 
         [JsonIgnore]
@@ -43,17 +58,11 @@ namespace Nest
 		protected TOut Q<TOut>(string name) => this.Request.Parameters.GetQueryStringValue<TOut>(name);
 
 		protected void Q(string name, object value) => this.Request.Parameters.AddQueryStringValue(name, value);
-
-        /// <summary>
-        /// Describes parameters that are supplied on the querystring rather then the body of the request
-        /// </summary>
-        [JsonIgnore]
-        TParameters IRequest<TParameters>.Parameters { get; set; } = new TParameters();
 		
         /// <summary>
 		/// Creates a PathInfo object from this request that we can use to dispatch into the low level client
 		/// </summary>
-		internal virtual RequestPath<TParameters> Path(IConnectionSettingsValues settings, TParameters queryString)
+		internal virtual RequestPath Path(IConnectionSettingsValues settings, TParameters queryString)
         {
 			//ask subclasses to set the relevant pathInfo parameters
 			SetRouteParameters(settings, _path);
@@ -66,18 +75,14 @@ namespace Nest
             return _path;
 		}
 
-        RequestPath<TParameters> IRequest<TParameters>.ResolvePath(IConnectionSettingsValues settings)
-        {
-            return this.Path(settings, this.Request.Parameters);
-        }
+        void IRequest<TParameters>.ResolveRouteValues(IConnectionSettingsValues settings) => this.Request.RouteValues.Resolve(settings);
 
-        protected virtual void SetRouteParameters(IConnectionSettingsValues settings, RequestPath<TParameters> path) { }
+        protected virtual void SetRouteParameters(IConnectionSettingsValues settings, RequestPath path) { }
 
-		protected virtual void ValidateRequestPath(IRequestPath<TParameters> path) { }
+		protected virtual void ValidateRequestPath(IRequestPath path) { }
 
-		protected virtual void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<TParameters> pathInfo)
+		protected virtual void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath pathInfo)
 		{
-			pathInfo.HttpMethod = this.Request.Parameters.DefaultHttpMethod;
 		}
 	}
 
@@ -87,7 +92,7 @@ namespace Nest
 	{
         public RequestDescriptorBase() { }
 
-        protected RequestDescriptorBase(Func<RequestPath<TParameters>, RequestPath<TParameters>> pathSelector)
+        protected RequestDescriptorBase(Func<RequestPath, RequestPath> pathSelector)
             : base(pathSelector)
         { }
 

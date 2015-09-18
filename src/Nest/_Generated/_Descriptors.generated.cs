@@ -203,7 +203,7 @@ namespace Nest
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public CatHelpDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<CatHelpRequestParameters> pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath pathInfo)
 		{
 			throw new NotImplementedException();
 		} 
@@ -292,7 +292,7 @@ namespace Nest
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public CatNodeattrsDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<CatNodeattrsRequestParameters> pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath pathInfo)
 		{
 			throw new NotImplementedException();
 		} 
@@ -1754,7 +1754,7 @@ namespace Nest
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public PutMappingDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<PutMappingRequestParameters> pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath pathInfo)
 		{
 			throw new NotImplementedException();
 		} 
@@ -1932,7 +1932,7 @@ namespace Nest
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public IndicesShardStoresDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<IndicesShardStoresRequestParameters> pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath pathInfo)
 		{
 			throw new NotImplementedException();
 		} 
@@ -2387,7 +2387,7 @@ namespace Nest
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public RenderSearchTemplateDescriptor FilterPath(string filter_path) => _requestParams(p=>p.FilterPath(filter_path));
 
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<RenderSearchTemplateRequestParameters> pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath pathInfo)
 		{
 			throw new NotImplementedException();
 		} 

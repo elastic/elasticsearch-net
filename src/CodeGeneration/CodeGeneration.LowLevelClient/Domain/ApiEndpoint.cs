@@ -23,7 +23,7 @@ namespace CodeGeneration.LowLevelClient.Domain
 			get
 			{
 				var parts = this.CsharpMethod.Parts.Where(p => p.Name != "body")
-					.Select(p => $"p.{p.Name.ToPascalCase()}").ToList();
+					.Select(p => $"p.RouteValues.{p.Name.ToPascalCase()}").ToList();
 				if (!parts.Any()) return string.Empty;
 				return $"AllSet({string.Join(", ", parts)})";
 			}
