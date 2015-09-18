@@ -11,8 +11,11 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IRequest
 	{
-		//IRequestConfiguration Configuration { get; set; }
-        //IRequestParameters Parameters { get; set; }
+		HttpMethod HttpMethod { get; }
+
+		RequestPath RouteValues { get; }
+
+        void ResolveRouteValues(IConnectionSettingsValues settings);
 	}
 
 	public interface IRequest<TParameters> : IRequest
@@ -22,13 +25,7 @@ namespace Nest
         /// Used to describe request parameters not part of the body. e.q query string or 
         /// connection configuration overrides
         /// </summary>
-        TParameters Parameters { get; set; }
-
-		HttpMethod HttpMethod { get; }
-
-		RequestPath RouteValues { get; }
-
-        void ResolveRouteValues(IConnectionSettingsValues settings);
+        TParameters RequestParameters { get; set; }
 	}
 
     public abstract class RequestBase<TParameters> : IRequest<TParameters>
@@ -37,13 +34,15 @@ namespace Nest
         private RequestPath _path;
 
         [JsonIgnore]
-        HttpMethod IRequest<TParameters>.HttpMethod => this.Request.Parameters.DefaultHttpMethod;
+        HttpMethod IRequest.HttpMethod => this.Request.RequestParameters.DefaultHttpMethod;
 
 		[JsonIgnore]
-		RequestPath IRequest<TParameters>.RouteValues { get; } = new RequestPath();
+		RequestPath IRequest.RouteValues { get; } = new RequestPath();
+
+        void IRequest.ResolveRouteValues(IConnectionSettingsValues settings) => this.Request.RouteValues.Resolve(settings);
 
         [JsonIgnore]
-        TParameters IRequest<TParameters>.Parameters { get; set; } = new TParameters();
+        TParameters IRequest<TParameters>.RequestParameters { get; set; } = new TParameters();
 		
         public RequestBase() { }
 
@@ -55,9 +54,9 @@ namespace Nest
         [JsonIgnore]
         protected IRequest<TParameters> Request => this;
 
-		protected TOut Q<TOut>(string name) => this.Request.Parameters.GetQueryStringValue<TOut>(name);
+		protected TOut Q<TOut>(string name) => this.Request.RequestParameters.GetQueryStringValue<TOut>(name);
 
-		protected void Q(string name, object value) => this.Request.Parameters.AddQueryStringValue(name, value);
+		protected void Q(string name, object value) => this.Request.RequestParameters.AddQueryStringValue(name, value);
 		
         /// <summary>
 		/// Creates a PathInfo object from this request that we can use to dispatch into the low level client
@@ -75,7 +74,6 @@ namespace Nest
             return _path;
 		}
 
-        void IRequest<TParameters>.ResolveRouteValues(IConnectionSettingsValues settings) => this.Request.RouteValues.Resolve(settings);
 
         protected virtual void SetRouteParameters(IConnectionSettingsValues settings, RequestPath path) { }
 
@@ -98,7 +96,7 @@ namespace Nest
 
 		protected TDescriptor _requestParams(Action<TParameters> assigner)
 		{
-			assigner?.Invoke(this.Request.Parameters);
+			assigner?.Invoke(this.Request.RequestParameters);
 			return (TDescriptor)this;
 		}
 
@@ -107,7 +105,7 @@ namespace Nest
 		/// </summary>
 		public TDescriptor RequestConfiguration(Func<RequestConfigurationDescriptor, IRequestConfiguration> configurationSelector)
 		{
-			this.Request.Parameters.RequestConfiguration(configurationSelector);
+			this.Request.RequestParameters.RequestConfiguration(configurationSelector);
 			return (TDescriptor)this;
 		}
 		

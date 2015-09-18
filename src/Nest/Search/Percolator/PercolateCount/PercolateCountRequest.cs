@@ -42,7 +42,7 @@ namespace Nest
 		
 		IRequestParameters IPercolateOperation.GetRequestParameters()
 		{
-			return this.Request.Parameters;
+			return this.Request.RequestParameters;
 		}
 
 		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath pathInfo)
@@ -76,7 +76,7 @@ namespace Nest
 		
 		IRequestParameters IPercolateOperation.GetRequestParameters()
 		{
-			return this.Request.Parameters;
+			return this.Request.RequestParameters;
 		}
 		/// <summary>
 		/// The object to perculate

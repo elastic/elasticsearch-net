@@ -22,8 +22,8 @@ namespace Nest
 			pathInfo.HttpMethod = HttpMethod.POST;
 			pathInfo.ScrollId = request.ScrollId;
 			// force scroll id out of RequestParameters (potentially very large)
-			request.Parameters.RemoveQueryString("scroll_id");
-			request.Parameters.AddQueryString("scroll", request.Scroll);
+			request.RequestParameters.RemoveQueryString("scroll_id");
+			request.RequestParameters.AddQueryString("scroll", request.Scroll);
 		}
 	}
 

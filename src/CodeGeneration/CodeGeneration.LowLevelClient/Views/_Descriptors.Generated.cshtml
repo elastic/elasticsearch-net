@@ -21,7 +21,7 @@ namespace Nest
 		var type = method.DescriptorType + method.DescriptorTypeGeneric;
 	<text>
 	///<summary>descriptor for @method.FullName <pre>@method.Documentation</pre></summary>
-	public partial class @Raw(type) @(Raw(!method.Unmapped ? "" : string.Format(" : BasePathDescriptor<{0},{1}>", type, method.QueryStringParamName)))
+	public partial class @Raw(type) @(Raw(!method.Unmapped ? "" : string.Format(" : RequestDescriptorBase<{0},{1}>", type, method.QueryStringParamName)))
 	{</text>foreach (KeyValuePair<string, ApiQueryParameters> kv in method.Url.Params)
 	{
 		var t = @kv.Value.CsharpType(kv.Key);
@@ -54,7 +54,7 @@ namespace Nest
 	}
 	if (method.Unmapped)
 	{<text>
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, @Raw(string.Format("ElasticsearchPathInfo<{0}>", method.QueryStringParamName)) pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, @Raw(string.Format("IRequest<{0}>", method.QueryStringParamName)) request)
 		{
 			throw new NotImplementedException();
 		} </text>

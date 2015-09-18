@@ -21,8 +21,8 @@ namespace Nest
 	{
 		public static void Update(RequestPath pathInfo, IValidateQueryRequest request)
 		{
-			var source = request.Parameters.GetQueryStringValue<string>("source");
-			var q = request.Parameters.GetQueryStringValue<string>("q");
+			var source = request.RequestParameters.GetQueryStringValue<string>("source");
+			var q = request.RequestParameters.GetQueryStringValue<string>("q");
 			pathInfo.HttpMethod = (!source.IsNullOrEmpty() || !q.IsNullOrEmpty())
 				? HttpMethod.GET
 				: HttpMethod.POST;

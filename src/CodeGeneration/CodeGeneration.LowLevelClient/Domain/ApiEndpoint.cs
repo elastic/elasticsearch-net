@@ -12,7 +12,7 @@ namespace CodeGeneration.LowLevelClient.Domain
 			get
 			{
 				var methodArgs = CsharpMethod.Parts
-					.Select(p => (p.Name != "body") ? "p." + p.Name.ToPascalCase() : "body")
+					.Select(p => (p.Name != "body") ? "p.RouteValues." + p.Name.ToPascalCase() : "body")
 					.Concat(new[] {"u => p.RequestParameters"});
 				return methodArgs;
 			}
@@ -35,7 +35,7 @@ namespace CodeGeneration.LowLevelClient.Domain
 			{
 				return this.CsharpMethod.Parts.Select(p =>
 				{
-					var name = (p.Name == "body") ? "body" : "p." + p.Name.ToPascalCase();
+					var name = (p.Name == "body") ? "body" : "p.RouteValues." + p.Name.ToPascalCase();
 					switch (p.Type)
 					{
 						case "string":

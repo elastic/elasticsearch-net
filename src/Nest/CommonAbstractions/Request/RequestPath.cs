@@ -20,7 +20,7 @@ namespace Nest
 		string Snapshot { get; }
 		string Metric { get; }
 		string IndexMetric { get; }
-        void ResolveRouteValues(IConnectionSettingsValues settings);
+        void Resolve(IConnectionSettingsValues settings);
 	}
 	public class RequestPath: IRequestPath
 	{

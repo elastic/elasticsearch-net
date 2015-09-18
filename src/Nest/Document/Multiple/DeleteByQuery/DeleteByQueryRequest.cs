@@ -17,7 +17,7 @@ namespace Nest
 
 	internal static class DeleteByQueryPath
 	{
-		public static void Update(IRequestPath<DeleteByQueryRequestParameters> path, IDeleteByQueryRequest request)
+		public static void Update(IRequestPath path, IDeleteByQueryRequest request)
 		{
 			path.HttpMethod = HttpMethod.DELETE;
 		}
@@ -36,7 +36,7 @@ namespace Nest
 
 		public IQueryContainer Query { get; set; }
 
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<DeleteByQueryRequestParameters> path)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath path)
 		{
 			DeleteByQueryPath.Update(path, this);
 		}
@@ -62,7 +62,7 @@ namespace Nest
 
 		public IQueryContainer Query { get; set; }
 
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<DeleteByQueryRequestParameters> path)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath path)
 		{
 			DeleteByQueryPath.Update(path, this);
 		}
@@ -106,7 +106,7 @@ namespace Nest
 			return this;
 		}
 
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<DeleteByQueryRequestParameters> path)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath path)
 		{
 			DeleteByQueryPath.Update(path, this);
 		}

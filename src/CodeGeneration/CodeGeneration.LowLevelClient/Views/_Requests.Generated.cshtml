@@ -29,7 +29,7 @@ namespace Nest
 	@foreach (CsharpMethod method in methods)
 	{
 	<text>///<summary>Request parameters for @method.FullName <pre>@method.Documentation</pre></summary>
-	public partial class @Raw(method.RequestType + method.RequestTypeGeneric) @Raw(!method.RequestTypeUnmapped ?  "" : string.Format(" : BasePathRequest<{0}>", method.QueryStringParamName))
+	public partial class @Raw(method.RequestType + method.RequestTypeGeneric) @Raw(!method.RequestTypeUnmapped ?  "" : string.Format(" : RequestBase<{0}>", method.QueryStringParamName))
 	{
 	@foreach (KeyValuePair<string, ApiQueryParameters> kv in method.Url.Params)
 	{
@@ -55,7 +55,7 @@ namespace Nest
 		</text>
 	}
 	@if (method.RequestTypeUnmapped)
-	{<text>	protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo@(Raw(string.Format("<{0}>", method.QueryStringParamName))) pathInfo)
+	{<text>	protected override void UpdateRequestPath(IConnectionSettingsValues settings, ElasticsearchPathInfo@(Raw(string.Format("<{0}>", method.QueryStringParamName))) pathInfo)
 		{
 			throw new NotImplementedException();
 		}

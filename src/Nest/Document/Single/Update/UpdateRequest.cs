@@ -173,7 +173,7 @@ namespace Nest
 		///<summary>A comma-separated list of fields to return in the response</summary>
 		public UpdateDescriptor<TDocument,TPartialDocument> Fields(params string[] fields)
 		{
-			this.Request.Parameters.AddQueryString("fields", fields);
+			this.Request.RequestParameters.AddQueryString("fields", fields);
 			return this;
 		}
 		
@@ -184,7 +184,7 @@ namespace Nest
 			if (!typedPathLookups.HasAny())
 				return this;
 
-			this.Request.Parameters.AddQueryString("fields",typedPathLookups);
+			this.Request.RequestParameters.AddQueryString("fields",typedPathLookups);
 			return this;
 		}
 			

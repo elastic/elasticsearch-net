@@ -127,7 +127,7 @@ namespace Nest
 		}
 		public static void Update(IConnectionSettingsValues settings, RequestPath pathInfo, ISearchRequest request)
 		{
-			pathInfo.HttpMethod = request.Parameters.ContainsKey("source") ? HttpMethod.GET : HttpMethod.POST;
+			pathInfo.HttpMethod = request.RequestParameters.ContainsKey("source") ? HttpMethod.GET : HttpMethod.POST;
 		}
 	}
 	
@@ -240,20 +240,20 @@ namespace Nest
 
 		private SearchDescriptor<T> _assign(Action<ISearchRequest> assigner) => Fluent.Assign(this, assigner);
 
-		SearchType? ISearchRequest.SearchType => this.Request.Parameters.GetQueryStringValue<SearchType?>("search_type");
+		SearchType? ISearchRequest.SearchType => this.Request.RequestParameters.GetQueryStringValue<SearchType?>("search_type");
 
 		SearchRequestParameters ISearchRequest.QueryString
 		{
-			get { return this.Request.Parameters;  }
-			set { this.Request.Parameters = value;  }
+			get { return this.Request.RequestParameters;  }
+			set { this.Request.RequestParameters = value;  }
 		}
 
-		string ISearchRequest.Preference => this.Request.Parameters.GetQueryStringValue<string>("preference");
+		string ISearchRequest.Preference => this.Request.RequestParameters.GetQueryStringValue<string>("preference");
 
-		string ISearchRequest.Routing => this.Request.Parameters.GetQueryStringValue<string[]>("routing") == null
-			? null : string.Join(",", this.Request.Parameters.GetQueryStringValue<string[]>("routing"));
+		string ISearchRequest.Routing => this.Request.RequestParameters.GetQueryStringValue<string[]>("routing") == null
+			? null : string.Join(",", this.Request.RequestParameters.GetQueryStringValue<string[]>("routing"));
 
-		bool? ISearchRequest.IgnoreUnavalable => this.Request.Parameters.GetQueryStringValue<bool?>("ignore_unavailable");
+		bool? ISearchRequest.IgnoreUnavalable => this.Request.RequestParameters.GetQueryStringValue<bool?>("ignore_unavailable");
 
 		Type ISearchRequest.ClrType => typeof(T);
 

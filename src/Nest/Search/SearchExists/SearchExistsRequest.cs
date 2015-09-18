@@ -20,9 +20,9 @@ namespace Nest
 
 	internal static class SearchExistsPathInfo
 	{
-		public static void Update(RequestPath<SearchExistsRequestParameters> pathInfo, ISearchExistsRequest request)
+		public static void Update(RequestPath pathInfo, ISearchExistsRequest request)
 		{
-			if (request.Parameters.ContainsKey("source") || request.Parameters.ContainsKey("q"))
+			if (request.RequestParameters.ContainsKey("source") || request.RequestParameters.ContainsKey("q"))
 				pathInfo.HttpMethod = HttpMethod.GET;
 			else
 				pathInfo.HttpMethod = request.Query != null ? HttpMethod.POST : HttpMethod.GET;
@@ -35,7 +35,7 @@ namespace Nest
 
 		public string QueryString { get; set; }
 
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<SearchExistsRequestParameters> pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath pathInfo)
 		{
 			SearchExistsPathInfo.Update(pathInfo, this);
 		}
@@ -49,7 +49,7 @@ namespace Nest
 
 		public string QueryString { get; set; }
 
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<SearchExistsRequestParameters> pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath pathInfo)
 		{
 			SearchExistsPathInfo.Update(pathInfo, this);
 		}
@@ -65,7 +65,7 @@ namespace Nest
 
 		string ISearchExistsRequest.QueryString { get; set; }
 
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<SearchExistsRequestParameters> pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath pathInfo)
 		{
 			SearchExistsPathInfo.Update(pathInfo, this);
 		}
@@ -121,7 +121,7 @@ namespace Nest
 		/// </summary>
 		public SearchExistsDescriptor<T> QueryString(string query)
 		{
-			Self.Parameters.AddQueryString("q", query);
+			Self.RequestParameters.AddQueryString("q", query);
 			return this;
 		}
 

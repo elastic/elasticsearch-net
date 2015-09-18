@@ -21,7 +21,7 @@ namespace Nest
 			Provided = provided;
 		}
 
-		public static DispatchException InvalidDispatch(string apiCall, IRequestPath provided, HttpMethod[] methods, params string[] endpoints)
+		public static DispatchException InvalidDispatch(string apiCall, IRequest provided, HttpMethod[] methods, params string[] endpoints)
 		{
 			var sb = new StringBuilder();
 			sb.AppendLine($"Dispatching {apiCall}() from NEST into to Elasticsearch.NET failed");

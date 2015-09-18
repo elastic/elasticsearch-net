@@ -69,32 +69,32 @@ namespace Nest
 		public Task<ElasticsearchResponse<T>> DoRequestAsync<T>(HttpMethod method, string path, PostData<object> data = null, IRequestParameters requestParameters = null)
 			where T : class => this.Raw.DoRequestAsync<T>(method, path, data, requestParameters);
 
-
-		R IHighLevelToLowLevelDispatcher.Dispatch<D, Q, R>(D request, Func<IApiCallDetails, Stream, R> responseGenerator, Func<RequestPath<Q>, D, ElasticsearchResponse<R>> dispatch)
+		R IHighLevelToLowLevelDispatcher.Dispatch<D, Q, R>(D request, Func<D, D, ElasticsearchResponse<R>> dispatch)
 		{
-			var path = request.ResolvePath(this.ConnectionSettings);
-			request.Parameters.DeserializationOverride(responseGenerator);
-			var response = dispatch(path, request);
+			return this.Dispatcher.Dispatch<D,Q,R>(request, null, dispatch);
+		}
+
+		R IHighLevelToLowLevelDispatcher.Dispatch<D, Q, R>(D request, Func<IApiCallDetails, Stream, R> responseGenerator, Func<D, D, ElasticsearchResponse<R>> dispatch)
+		{
+			request.RouteValues.Resolve(this.ConnectionSettings);
+			request.RequestParameters.DeserializationOverride(responseGenerator);
+
+			var response = dispatch(request, request);
 			return ResultsSelector<D, Q, R>(response, request);
 		}
 
-		R IHighLevelToLowLevelDispatcher.Dispatch<D, Q, R>(D request, Func<RequestPath<Q>, D, ElasticsearchResponse<R>> dispatch)
-		{
-			var path = request.ResolvePath(this.ConnectionSettings);
-			var response = dispatch(path, request);
-			return ResultsSelector<D, Q, R>(response, request);
-		}
-
-		Task<I> IHighLevelToLowLevelDispatcher.DispatchAsync<D, Q, R, I>(D descriptor, Func<RequestPath<Q>, D, Task<ElasticsearchResponse<R>>> dispatch)
+		Task<I> IHighLevelToLowLevelDispatcher.DispatchAsync<D, Q, R, I>(D descriptor, Func<D, D, Task<ElasticsearchResponse<R>>> dispatch)
 		{
 			return this.Dispatcher.DispatchAsync<D,Q,R,I>(descriptor, null, dispatch);
 		}
 
-		Task<I> IHighLevelToLowLevelDispatcher.DispatchAsync<D, Q, R, I>(D request, Func<IApiCallDetails, Stream, R> responseGenerator, Func<RequestPath<Q>, D, Task<ElasticsearchResponse<R>>> dispatch)
+		Task<I> IHighLevelToLowLevelDispatcher.DispatchAsync<D, Q, R, I>(D request, Func<IApiCallDetails, Stream, R> responseGenerator, Func<D, D, Task<ElasticsearchResponse<R>>> dispatch)
 		{
-			var path = request.ResolvePath(this.ConnectionSettings);
-			request.Parameters.DeserializationOverride(responseGenerator);
-			return dispatch(path, request)
+			request.RouteValues.Resolve(this.ConnectionSettings);
+			request.RequestParameters.DeserializationOverride(responseGenerator);
+
+			request.RequestParameters.DeserializationOverride(responseGenerator);
+			return dispatch(request, request)
 				.ContinueWith<I>(r =>
 				{
 					if (r.IsFaulted && r.Exception != null)
@@ -136,9 +136,9 @@ namespace Nest
 			where TRequest : IRequest<TParams>
 			where TParams : IRequestParameters, new()
 		{
-			var configuration = request.Parameters.RequestConfiguration ?? new RequestConfiguration();
+			var configuration = request.RequestParameters.RequestConfiguration ?? new RequestConfiguration();
 			setter(configuration);
-			request.Parameters.RequestConfiguration = configuration;
+			request.RequestParameters.RequestConfiguration = configuration;
 			return request;
 		}
 	}
