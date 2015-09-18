@@ -108,14 +108,5 @@ namespace Nest
             this.Id = id;
             return this;
         }
-
-		public RequestPath<TParameters> DeserializationOverride(Func<IApiCallDetails, Stream, object> customObjectCreation)
-		{
-			this.RequestParameters.DeserializationOverride = customObjectCreation;
-			return this;
-		}
-
-		internal ElasticsearchResponse<T> CallWhen<T>(HttpMethod method, bool allSet, Func<IRequestPath<TParameters>, ElasticsearchResponse<T>> action) =>
-				allSet ? action(this) : null;
 	}
 }

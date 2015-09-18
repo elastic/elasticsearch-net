@@ -106,8 +106,11 @@ namespace Nest
 
 		private RequestPath<SearchRequestParameters> AttachCustomConverterWhenNeeded<T, TResult>(RequestPath<SearchRequestParameters> p, ISearchRequest d)
 			where T : class
-			where TResult : class => 
-			p.DeserializationOverride(this.CreateSearchDeserializer<T, TResult>(d));
+			where TResult : class
+		{
+			d.Parameters.DeserializationOverride(this.CreateSearchDeserializer<T, TResult>(d));
+			return p;
+		}
 
 		private Func<IApiCallDetails, Stream, SearchResponse<TResult>> CreateSearchDeserializer<T, TResult>(ISearchRequest request)
 			where T : class

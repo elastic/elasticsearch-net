@@ -25,10 +25,9 @@ namespace Nest
 			where TRequest : IRequest<TParams> => 
 			this.Dispatcher.Dispatch<TRequest, TParams, CatResponse<TCatRecord>>(
 				this.ForceConfiguration(request, c => c.ContentType = "application/json"),
-				(p, d) => dispatch(p.DeserializationOverride(
-					new Func<IApiCallDetails, Stream, CatResponse<TCatRecord>>(this.DeserializeCatResponse<TCatRecord>))
-					)
-				);
+				new Func<IApiCallDetails, Stream, CatResponse<TCatRecord>>(this.DeserializeCatResponse<TCatRecord>),
+				(p, d) => dispatch(p)
+			);
 
 		private Task<ICatResponse<TCatRecord>> DoCatAsync<TRequest, TParams, TCatRecord>(
 			TRequest request,
@@ -39,9 +38,8 @@ namespace Nest
 			where TRequest : IRequest<TParams> => 
 			this.Dispatcher.DispatchAsync<TRequest, TParams, CatResponse<TCatRecord>, ICatResponse<TCatRecord>>(
 				this.ForceConfiguration(request, c => c.ContentType = "application/json"),
-				(p, d) => dispatch(p.DeserializationOverride(
-					new Func<IApiCallDetails, Stream, CatResponse<TCatRecord>>(this.DeserializeCatResponse<TCatRecord>))
-				)
+				new Func<IApiCallDetails, Stream, CatResponse<TCatRecord>>(this.DeserializeCatResponse<TCatRecord>),
+				(p, d) => dispatch(p)
 			);
 	
 	}

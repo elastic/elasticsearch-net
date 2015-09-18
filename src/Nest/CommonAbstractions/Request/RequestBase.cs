@@ -39,11 +39,9 @@ namespace Nest
         [JsonIgnore]
         protected IRequest<TParameters> Request => this;
 
-		protected TOut Q<TOut>(string name) =>
-			this.Request.Parameters.GetQueryStringValue<TOut>(name);
+		protected TOut Q<TOut>(string name) => this.Request.Parameters.GetQueryStringValue<TOut>(name);
 
-		protected void Q(string name, object value) =>
-			this.Request.Parameters.AddQueryStringValue(name, value);
+		protected void Q(string name, object value) => this.Request.Parameters.AddQueryStringValue(name, value);
 
         /// <summary>
         /// Allows you to override connection settings on a per call basis
@@ -105,7 +103,7 @@ namespace Nest
 	{
         public RequestDescriptorBase() { }
 
-        public RequestDescriptorBase(Func<RequestPath<TParameters>, RequestPath<TParameters>> pathSelector)
+        protected RequestDescriptorBase(Func<RequestPath<TParameters>, RequestPath<TParameters>> pathSelector)
             : base(pathSelector)
         { }
 
@@ -120,8 +118,7 @@ namespace Nest
 		/// </summary>
 		public TDescriptor RequestConfiguration(Func<RequestConfigurationDescriptor, IRequestConfiguration> configurationSelector)
 		{
-			configurationSelector.ThrowIfNull("configurationSelector");
-			this.Request.Configuration = configurationSelector(new RequestConfigurationDescriptor());
+			this.Request.Configuration = configurationSelector?.Invoke(new RequestConfigurationDescriptor());
 			return (TDescriptor)this;
 		}
 		

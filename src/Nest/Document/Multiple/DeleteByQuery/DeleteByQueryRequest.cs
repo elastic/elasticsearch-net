@@ -28,17 +28,11 @@ namespace Nest
 	{
 		public DeleteByQueryRequest() {}
 
-		public DeleteByQueryRequest(Indices indices, Types types)
-            : base(p => p.Required(indices).Required(types))
-        { }
+		public DeleteByQueryRequest(Indices indices, Types types) : base(p => p.Required(indices).Required(types)) { }
 
-		public DeleteByQueryRequest(Indices indices)
-            : base(p => p.Required(indices))
-        { }
+		public DeleteByQueryRequest(Indices indices) : base(p => p.Required(indices)) { }
 
-        public DeleteByQueryRequest(Types types)
-            : base(p => p.Required(types))
-        { }
+        public DeleteByQueryRequest(Types types) : base(p => p.Required(types)) { }
 
 		public IQueryContainer Query { get; set; }
 

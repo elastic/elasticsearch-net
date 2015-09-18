@@ -37,9 +37,8 @@ namespace Nest
 		public IGetFieldMappingResponse GetFieldMapping(IGetFieldMappingRequest getFieldMappingRequest) => 
 			this.Dispatcher.Dispatch<IGetFieldMappingRequest, GetFieldMappingRequestParameters, GetFieldMappingResponse>(
 				getFieldMappingRequest,
-				(p, d) => this.LowLevelDispatch.IndicesGetFieldMappingDispatch<GetFieldMappingResponse>(
-					p.DeserializationOverride(new GetFieldMappingConverter((r, s) => DeserializeGetFieldMappingResponse(r, d, s)))
-				)
+				new GetFieldMappingConverter((r, s) => DeserializeGetFieldMappingResponse(r, getFieldMappingRequest, s)),
+				(p, d) => this.LowLevelDispatch.IndicesGetFieldMappingDispatch<GetFieldMappingResponse>(p)
 			);
 
 		/// <inheritdoc/>
@@ -51,9 +50,8 @@ namespace Nest
 		public Task<IGetFieldMappingResponse> GetFieldMappingAsync(IGetFieldMappingRequest getFieldMappingRequest) => 
 			this.Dispatcher.DispatchAsync<IGetFieldMappingRequest, GetFieldMappingRequestParameters, GetFieldMappingResponse, IGetFieldMappingResponse>(
 				getFieldMappingRequest,
-				(p, d) => this.LowLevelDispatch.IndicesGetFieldMappingDispatchAsync<GetFieldMappingResponse>(
-					p.DeserializationOverride(new GetFieldMappingConverter((r, s) => DeserializeGetFieldMappingResponse(r, d, s)))
-				)
+				new GetFieldMappingConverter((r, s) => DeserializeGetFieldMappingResponse(r, getFieldMappingRequest, s)),
+				(p, d) => this.LowLevelDispatch.IndicesGetFieldMappingDispatchAsync<GetFieldMappingResponse>(p)
 			);
 		//TODO DictionaryResponse!
 		private GetFieldMappingResponse DeserializeGetFieldMappingResponse(IApiCallDetails response, IGetFieldMappingRequest d, Stream stream)

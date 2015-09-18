@@ -73,7 +73,8 @@ namespace Nest
 		R IHighLevelToLowLevelDispatcher.Dispatch<D, Q, R>(D request, Func<IApiCallDetails, Stream, R> responseGenerator, Func<RequestPath<Q>, D, ElasticsearchResponse<R>> dispatch)
 		{
 			var path = request.Path(this.ConnectionSettings);
-			var response = dispatch(path.DeserializationOverride(responseGenerator), request);
+			request.Parameters.DeserializationOverride(responseGenerator);
+			var response = dispatch(path, request);
 			return ResultsSelector<D, Q, R>(response, request);
 		}
 
@@ -92,7 +93,8 @@ namespace Nest
 		Task<I> IHighLevelToLowLevelDispatcher.DispatchAsync<D, Q, R, I>(D request, Func<IApiCallDetails, Stream, R> responseGenerator, Func<RequestPath<Q>, D, Task<ElasticsearchResponse<R>>> dispatch)
 		{
 			var path = request.Path(this.ConnectionSettings);
-			return dispatch(path.DeserializationOverride(responseGenerator), request)
+			request.Parameters.DeserializationOverride(responseGenerator);
+			return dispatch(path, request)
 				.ContinueWith<I>(r =>
 				{
 					if (r.IsFaulted && r.Exception != null)
