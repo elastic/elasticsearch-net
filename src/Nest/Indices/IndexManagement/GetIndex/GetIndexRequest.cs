@@ -19,7 +19,7 @@ namespace Nest
 
 	internal static class GetIndexPathInfo
 	{
-		public static void Update(RequestPath pathInfo, IGetIndexRequest request)
+		public static void Update(RouteValues pathInfo, IGetIndexRequest request)
 		{
 			if (pathInfo.Index == null)
 				throw new DslException("Can not call GetIndex without specifying one or more indices or explicitly calling .AllIndices()");
@@ -49,7 +49,7 @@ namespace Nest
 		/// </summary>
 		public GetIndexFeature Features { get; set; }
 
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
 		{
 			GetIndexPathInfo.Update(pathInfo, this);
 		}
@@ -71,7 +71,7 @@ namespace Nest
 			return this;
 		}
 
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
 		{
 			GetIndexPathInfo.Update(pathInfo, this);
 		}

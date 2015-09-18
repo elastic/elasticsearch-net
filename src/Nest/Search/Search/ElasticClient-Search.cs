@@ -104,7 +104,7 @@ namespace Nest
 					)
 				);
 
-		private RequestPath AttachCustomConverterWhenNeeded<T, TResult>(RequestPath p, ISearchRequest d)
+		private RouteValues AttachCustomConverterWhenNeeded<T, TResult>(RouteValues p, ISearchRequest d)
 			where T : class
 			where TResult : class
 		{

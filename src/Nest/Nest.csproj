@@ -985,7 +985,7 @@
     <Compile Include="Mapping\Types\Core\Number\NumberType.cs" />
     <Compile Include="CommonAbstractions\RawJson\CustomJsonConverter.cs" />
     <Compile Include="Mapping\Types\Specialized\Ip\YesNoBoolJsonConverter.cs" />
-    <Compile Include="CommonAbstractions\Request\RequestPath.cs" />
+    <Compile Include="CommonAbstractions\Request\RouteValues.cs" />
     <Compile Include="Cluster\ClusterStats\ElasticClient-ClusterStats.cs" />
     <Compile Include="Cluster\PendingClusterTasks\ElasticClient-ClusterPendingTasks.cs" />
     <Compile Include="CommonAbstractions\Infer\ExpressionVisitor.cs" />

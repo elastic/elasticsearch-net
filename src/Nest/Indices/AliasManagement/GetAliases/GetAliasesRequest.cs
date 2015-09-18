@@ -15,7 +15,7 @@ namespace Nest
 
 	internal static class GetAliasesPathInfo
 	{
-		public static void Update(RequestPath pathInfo, IGetAliasesRequest request)
+		public static void Update(RouteValues pathInfo, IGetAliasesRequest request)
 		{
 			pathInfo.HttpMethod = HttpMethod.GET;
 			pathInfo.Name = request.Alias ?? "*";
@@ -26,7 +26,7 @@ namespace Nest
 	{
 		public string Alias { get; set; }
 		
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
 		{
 			GetAliasesPathInfo.Update(pathInfo, this);
 		}
@@ -47,7 +47,7 @@ namespace Nest
 			return this;
 		}
 
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
 		{
 			GetAliasesPathInfo.Update(pathInfo, this);
 		}

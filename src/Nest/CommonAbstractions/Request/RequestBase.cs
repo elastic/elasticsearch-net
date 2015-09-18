@@ -13,7 +13,7 @@ namespace Nest
 	{
 		HttpMethod HttpMethod { get; }
 
-		RequestPath RouteValues { get; }
+		RouteValues RouteValues { get; }
 
         void ResolveRouteValues(IConnectionSettingsValues settings);
 	}
@@ -31,7 +31,7 @@ namespace Nest
     public abstract class RequestBase<TParameters> : IRequest<TParameters>
         where TParameters : IRequestParameters, new()
     {
-        protected RequestBase(Func<RequestPath, RequestPath> pathSelector)
+        protected RequestBase(Func<RouteValues, RouteValues> pathSelector)
         {
             pathSelector(this.Request.RouteValues);
         }
@@ -40,7 +40,7 @@ namespace Nest
         HttpMethod IRequest.HttpMethod => this.Request.RequestParameters.DefaultHttpMethod;
 
 		[JsonIgnore]
-		RequestPath IRequest.RouteValues { get; } = new RequestPath();
+		RouteValues IRequest.RouteValues { get; } = new RouteValues();
 
         void IRequest.ResolveRouteValues(IConnectionSettingsValues settings) => this.Request.RouteValues.Resolve(settings);
 
@@ -60,7 +60,7 @@ namespace Nest
 		where TDescriptor : RequestDescriptorBase<TDescriptor, TParameters>
 		where TParameters : FluentRequestParameters<TParameters>, new()
 	{
-        protected RequestDescriptorBase(Func<RequestPath, RequestPath> pathSelector) : base(pathSelector) { }
+        protected RequestDescriptorBase(Func<RouteValues, RouteValues> pathSelector) : base(pathSelector) { }
 
 		protected TDescriptor AssignParam(Action<TParameters> assigner)
 		{

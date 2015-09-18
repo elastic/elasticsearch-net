@@ -21,7 +21,7 @@ namespace Nest
 		public string Id { get; set; }
 		public string Script { get; set; }
 
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
 		{
 			PutScriptPathInfo.Update(pathInfo, this);
 		}
@@ -29,7 +29,7 @@ namespace Nest
 
 	internal static class PutScriptPathInfo
 	{
-		public static void Update(RequestPath pathInfo, IPutScriptRequest putScriptRequest)
+		public static void Update(RouteValues pathInfo, IPutScriptRequest putScriptRequest)
 		{
 			pathInfo.Id = putScriptRequest.Id;
 			pathInfo.Lang = putScriptRequest.Lang;
@@ -71,7 +71,7 @@ namespace Nest
 			return this;
 		}
 
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
 		{
 			PutScriptPathInfo.Update(pathInfo, this);
 		}

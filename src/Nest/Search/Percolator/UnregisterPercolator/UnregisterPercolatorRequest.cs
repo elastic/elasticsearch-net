@@ -11,7 +11,7 @@ namespace Nest
 
 	internal static class UnregisterPercolatorPathInfo
 	{
-		public static void Update(IConnectionSettingsValues settings, RequestPath pathInfo)
+		public static void Update(IConnectionSettingsValues settings, RouteValues pathInfo)
 		{
 			//deleting a percolator in elasticsearch < 1.0 is actually deleting a document in a 
 			//special _percolator index where the passed index is actually a type
@@ -25,7 +25,7 @@ namespace Nest
 
 	public partial class UnregisterPercolatorRequest : RequestBase<DeleteRequestParameters>, IUnregisterPercolatorRequest
 	{
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
 		{
 			UnregisterPercolatorPathInfo.Update(settings, pathInfo);
 		}
@@ -35,7 +35,7 @@ namespace Nest
 		: RequestDescriptorBase<UnregisterPercolatorDescriptor<T>, DeleteRequestParameters>, IUnregisterPercolatorRequest
 		where T : class
 	{
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
 		{
 			UnregisterPercolatorPathInfo.Update(settings, pathInfo);
 		}

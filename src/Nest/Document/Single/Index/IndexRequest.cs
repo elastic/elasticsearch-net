@@ -21,7 +21,7 @@ namespace Nest
 
 	internal static class IndexPathInfo
 	{
-		public static void Update<T>(RequestPath pathInfo, IIndexRequest<T> request) 
+		public static void Update<T>(RouteValues pathInfo, IIndexRequest<T> request) 
 			where T : class
 		{
 			pathInfo.Index.ThrowIfNull("index");
@@ -38,7 +38,7 @@ namespace Nest
 
 		public TDocument Document { get; set; }
 
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
 		{
 			IndexPathInfo.Update(pathInfo, this);
 		}
@@ -57,7 +57,7 @@ namespace Nest
 			a.Document = document;
         });
 
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
 		{
 			IndexPathInfo.Update(pathInfo, this);
 		}

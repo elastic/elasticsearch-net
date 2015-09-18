@@ -42,7 +42,7 @@ namespace Nest
 	{
 		public static void Update<TDocument, TPartialDocument>(
 			IConnectionSettingsValues settings,
-			RequestPath pathInfo,
+			RouteValues pathInfo,
 			IUpdateRequest<TDocument, TPartialDocument> self)
 			where TDocument : class
 			where TPartialDocument : class
@@ -68,7 +68,7 @@ namespace Nest
 		where TDocument : class
 		where TPartialDocument : class 
 	{
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
 		{
 			UpdateRequestPathInfo.Update(settings, pathInfo, this);
 		}
@@ -188,7 +188,7 @@ namespace Nest
 			return this;
 		}
 			
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
 		{
 			UpdateRequestPathInfo.Update(settings, pathInfo, this);
 		}

@@ -15,7 +15,7 @@ namespace Nest
 
 	internal static class CountPathInfo
 	{
-		public static void Update(RequestPath pathInfo, ICountRequest request)
+		public static void Update(RouteValues pathInfo, ICountRequest request)
 		{
 			var source = request.RequestParameters.GetQueryStringValue<string>("source");
 			pathInfo.HttpMethod = source.IsNullOrEmpty() 
@@ -29,7 +29,7 @@ namespace Nest
 	{
 		public IQueryContainer Query { get; set; }
 
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
 		{
 			CountPathInfo.Update(pathInfo, this);
 		}
@@ -40,7 +40,7 @@ namespace Nest
 	{
 		public IQueryContainer Query { get; set; }
 
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
 		{
 			CountPathInfo.Update(pathInfo, this);
 		}
@@ -60,7 +60,7 @@ namespace Nest
 			return this;
 		}
 
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
 		{
 			CountPathInfo.Update(pathInfo, this);
 		}

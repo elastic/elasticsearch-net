@@ -14,9 +14,9 @@ namespace Nest
 	[Serializable]
 	public class DispatchException : System.Exception
 	{
-		public IRequestPath Provided { get; }
+		public RouteValues Provided { get; }
 
-		public DispatchException(string msg, IRequestPath provided) : base(msg)
+		public DispatchException(string msg, RouteValues provided) : base(msg)
 		{
 			Provided = provided;
 		}
@@ -30,7 +30,7 @@ namespace Nest
 			sb.AppendLine($"The request might not have enough information provided to make any of these endpoints:");
 			foreach (var endpoint in endpoints)
 				sb.AppendLine($"  - {endpoint}");
-			return new DispatchException(sb.ToString(), provided);
+			return new DispatchException(sb.ToString(), provided.RouteValues);
 		}
 
 	}

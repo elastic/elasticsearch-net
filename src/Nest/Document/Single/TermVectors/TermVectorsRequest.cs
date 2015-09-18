@@ -23,7 +23,7 @@ namespace Nest
 
 	internal static class TermVectorsPathInfo
 	{
-		public static void Update(IConnectionSettingsValues settings, RequestPath pathInfo, ITermVectorsRequest request)
+		public static void Update(IConnectionSettingsValues settings, RouteValues pathInfo, ITermVectorsRequest request)
 		{
 			pathInfo.HttpMethod = request.Document == null ? HttpMethod.GET : HttpMethod.POST;
 		}
@@ -31,7 +31,7 @@ namespace Nest
 
 	public partial class TermVectorsRequest : RequestBase<TermVectorsRequestParameters>, ITermVectorsRequest
 	{
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
 		{
 			TermVectorsPathInfo.Update(settings, pathInfo, this);
 		}
@@ -48,7 +48,7 @@ namespace Nest
 
 		IDictionary<FieldName, string> ITermVectorsRequest.PerFieldAnalyzer { get; set; }
 
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
 		{
 			TermVectorsPathInfo.Update(settings, pathInfo, this);
 		}
@@ -83,7 +83,7 @@ namespace Nest
 			Self.PerFieldAnalyzer = analyzerSelector(new FluentDictionary<FieldName, string>());
 			return this;
 		}
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
 		{
 			TermVectorsPathInfo.Update(settings, pathInfo, this);
 		}

@@ -19,7 +19,7 @@ namespace Nest
 
 	internal static class ValidateQueryPathInfo
 	{
-		public static void Update(RequestPath pathInfo, IValidateQueryRequest request)
+		public static void Update(RouteValues pathInfo, IValidateQueryRequest request)
 		{
 			var source = request.RequestParameters.GetQueryStringValue<string>("source");
 			var q = request.RequestParameters.GetQueryStringValue<string>("q");
@@ -33,7 +33,7 @@ namespace Nest
 	{
 		public IQueryContainer Query { get; set; }
 
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
 		{
 			ValidateQueryPathInfo.Update(pathInfo, this);
 		}
@@ -44,7 +44,7 @@ namespace Nest
 	{
 		public IQueryContainer Query { get; set; }
 
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
 		{
 			ValidateQueryPathInfo.Update(pathInfo, this);
 		}
@@ -65,7 +65,7 @@ namespace Nest
 			return this;
 		}
 
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
 		{
 			ValidateQueryPathInfo.Update(pathInfo, this);
 		}

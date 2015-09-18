@@ -15,7 +15,7 @@ namespace Nest
 
 	internal static class NodesStatsPathInfo
 	{
-		public static void Update(IRequestPath pathInfo, INodesStatsRequest request)
+		public static void Update(RouteValues pathInfo, INodesStatsRequest request)
 		{
 			pathInfo.HttpMethod = HttpMethod.GET;
 			if (request.Metrics != null)
@@ -36,7 +36,7 @@ namespace Nest
             : base(p => p.RequiredNodeId(nodeId))
         { }
 
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath path)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues path)
 		{
 			NodesStatsPathInfo.Update(path, this);
 		}
@@ -67,7 +67,7 @@ namespace Nest
 			return this;
 		}
 
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath path)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues path)
 		{
 			NodesStatsPathInfo.Update(path, this);
 		}

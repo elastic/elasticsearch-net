@@ -17,7 +17,7 @@ namespace Nest
 
 	internal static class PutSearchTemplatePathInfo
 	{
-		public static void Update(RequestPath pathInfo, IPutSearchTemplateRequest request)
+		public static void Update(RouteValues pathInfo, IPutSearchTemplateRequest request)
 		{
 			//TODO NAME pathInfo.Id = request.Name;
 			pathInfo.HttpMethod = HttpMethod.POST;
@@ -28,7 +28,7 @@ namespace Nest
 	{
 		public string Template { get; set; }
 
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
 		{
 			PutSearchTemplatePathInfo.Update(pathInfo, this);
 		}
@@ -46,7 +46,7 @@ namespace Nest
 			return this;
 		}
 
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
 		{
 			PutSearchTemplatePathInfo.Update(pathInfo, this);
 		}

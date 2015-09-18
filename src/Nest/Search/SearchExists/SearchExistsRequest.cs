@@ -20,7 +20,7 @@ namespace Nest
 
 	internal static class SearchExistsPathInfo
 	{
-		public static void Update(RequestPath pathInfo, ISearchExistsRequest request)
+		public static void Update(RouteValues pathInfo, ISearchExistsRequest request)
 		{
 			if (request.RequestParameters.ContainsKey("source") || request.RequestParameters.ContainsKey("q"))
 				pathInfo.HttpMethod = HttpMethod.GET;
@@ -35,7 +35,7 @@ namespace Nest
 
 		public string QueryString { get; set; }
 
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
 		{
 			SearchExistsPathInfo.Update(pathInfo, this);
 		}
@@ -49,7 +49,7 @@ namespace Nest
 
 		public string QueryString { get; set; }
 
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
 		{
 			SearchExistsPathInfo.Update(pathInfo, this);
 		}
@@ -65,7 +65,7 @@ namespace Nest
 
 		string ISearchExistsRequest.QueryString { get; set; }
 
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
 		{
 			SearchExistsPathInfo.Update(pathInfo, this);
 		}

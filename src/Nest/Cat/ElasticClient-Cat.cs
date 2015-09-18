@@ -18,7 +18,7 @@ namespace Nest
 
 		private ICatResponse<TCatRecord> DoCat<TRequest, TParams, TCatRecord>(
 			TRequest request,
-			Func<RequestPath, ElasticsearchResponse<CatResponse<TCatRecord>>> dispatch
+			Func<RouteValues, ElasticsearchResponse<CatResponse<TCatRecord>>> dispatch
 			)
 			where TCatRecord : ICatRecord
 			where TParams : FluentRequestParameters<TParams>, new()
@@ -31,7 +31,7 @@ namespace Nest
 
 		private Task<ICatResponse<TCatRecord>> DoCatAsync<TRequest, TParams, TCatRecord>(
 			TRequest request,
-			Func<RequestPath, Task<ElasticsearchResponse<CatResponse<TCatRecord>>>> dispatch
+			Func<RouteValues, Task<ElasticsearchResponse<CatResponse<TCatRecord>>>> dispatch
 			)
 			where TCatRecord : ICatRecord
 			where TParams : FluentRequestParameters<TParams>, new()

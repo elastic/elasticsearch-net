@@ -16,7 +16,7 @@ namespace Nest
 		public static void Update(
 			IScrollRequest request,
 			IConnectionSettingsValues settings, 
-			RequestPath pathInfo)
+			RouteValues pathInfo)
 		{
 			// force POST scrollId can be quite big
 			pathInfo.HttpMethod = HttpMethod.POST;
@@ -38,7 +38,7 @@ namespace Nest
 			this.Scroll = scrollTimeout;
 		}
 
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
 		{
 			ScrollPathInfo.Update(this, settings, pathInfo);
 		}
@@ -50,7 +50,7 @@ namespace Nest
 	{
 		private IScrollRequest Self => this;
 
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
 		{
 			ScrollPathInfo.Update(this, settings, pathInfo);
 		}

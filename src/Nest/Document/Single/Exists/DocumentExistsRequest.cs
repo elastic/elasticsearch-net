@@ -31,7 +31,7 @@ namespace Nest
             Document = document;
         }
 
-        protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath path)
+        protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues path)
         {
         }
     }
@@ -54,7 +54,7 @@ namespace Nest
             Document = document;
         }
 
-        protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath pathInfo)
+        protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
         {
             pathInfo.IdFrom(settings, this.Document);
         }

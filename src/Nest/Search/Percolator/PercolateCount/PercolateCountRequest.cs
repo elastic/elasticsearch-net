@@ -18,7 +18,7 @@ namespace Nest
 
 	internal static class PercolateCountPathInfo
 	{
-		public static void Update<T>(RequestPath pathInfo, IPercolateCountRequest<T> request)
+		public static void Update<T>(RouteValues pathInfo, IPercolateCountRequest<T> request)
 			where T : class
 		{
 			pathInfo.Id = request.Id;
@@ -45,7 +45,7 @@ namespace Nest
 			return this.Request.RequestParameters;
 		}
 
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
 		{
 			PercolateCountPathInfo.Update(pathInfo, this);
 		}
@@ -298,7 +298,7 @@ namespace Nest
 			return this;
 		}
 		
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
 		{
 			PercolateCountPathInfo.Update(pathInfo, this);
 		}

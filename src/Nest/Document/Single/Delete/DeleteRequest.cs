@@ -39,7 +39,7 @@ namespace Nest
 
         public T Document { get; set; }
 
-        protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath path)
+        protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues path)
         {
             if (this.Document != null)
                 path.Id = settings.Inferrer.Id(this.Document);
@@ -64,7 +64,7 @@ namespace Nest
 
         public T Document { get; set; }
 
-        protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath path)
+        protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues path)
         {
             if (this.Document != null)
                 path.Id = settings.Inferrer.Id(this.Document);

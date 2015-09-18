@@ -6,23 +6,7 @@ using Elasticsearch.Net.Serialization;
 
 namespace Nest
 {
-	public interface IRequestPath
-	{
-		string Index { get; }
-		string Type { get; }
-		string Id { get; }
-		string Name { get; }
-		string Field { get; }
-		string ScrollId { get; }
-		string NodeId { get; }
-		string Fields { get; }
-		string Repository { get; }
-		string Snapshot { get; }
-		string Metric { get; }
-		string IndexMetric { get; }
-        void Resolve(IConnectionSettingsValues settings);
-	}
-	public class RequestPath: IRequestPath
+	public class RouteValues
 	{
 		private Dictionary<string, IUrlParameter> _routeValues = new Dictionary<string, IUrlParameter>();
 		private Dictionary<string, string> _resolved = new Dictionary<string, string>();
@@ -42,12 +26,12 @@ namespace Nest
 		public string IndexMetric => _resolved["index_metric"];
 		public string Lang => _resolved["lang"];
 
-		private RequestPath Route(string name, IUrlParameter routeValue, bool required = true)
+		private RouteValues Route(string name, IUrlParameter routeValue, bool required = true)
 		{
 			this._routeValues.Add(name, routeValue);
 			return this;
 		}
-		private RequestPath Resolved(string name, string routeValue, bool required = true)
+		private RouteValues Resolved(string name, string routeValue, bool required = true)
 		{
 			this._resolved.Add(name, routeValue);
 			return this;
@@ -61,22 +45,22 @@ namespace Nest
 			}
 		}
 
-		public RequestPath Required(Indices indices) => Route("index", indices);
-        public RequestPath Optional(Indices indices) => Route("index", indices, false);
+		public RouteValues Required(Indices indices) => Route("index", indices);
+        public RouteValues Optional(Indices indices) => Route("index", indices, false);
 
-		public RequestPath Required(Types types) => Route("type", types);
-		public RequestPath Optional(Types types) => Route("type", types, false);
+		public RouteValues Required(Types types) => Route("type", types);
+		public RouteValues Optional(Types types) => Route("type", types, false);
 
 		[Obsolete("TODO: Rename to Required once NodeId type is implemented")]
-		public RequestPath RequiredNodeId(string nodeId) => Resolved("node_id", nodeId);
+		public RouteValues RequiredNodeId(string nodeId) => Resolved("node_id", nodeId);
 
 		[Obsolete("TODO: Rename to Optional once NodeId type is implemented")]
-		public RequestPath OptionalNodeId(string nodeId) => Resolved("node_id", nodeId, false);
+		public RouteValues OptionalNodeId(string nodeId) => Resolved("node_id", nodeId, false);
 
 		[Obsolete]
-		public RequestPath RequiredId(string id) => Resolved("id", id);
+		public RouteValues RequiredId(string id) => Resolved("id", id);
 
 		[Obsolete]
-		public RequestPath OptionalId(string id) => Resolved("id", id, false);
+		public RouteValues OptionalId(string id) => Resolved("id", id, false);
 	}
 }

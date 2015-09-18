@@ -17,7 +17,7 @@ namespace Nest
 
 	internal static class RegisterPercolatorPathInfo
 	{
-		public static void Update(RequestPath pathInfo, IRegisterPercolatorRequest request)
+		public static void Update(RouteValues pathInfo, IRegisterPercolatorRequest request)
 		{
 			pathInfo.Id = pathInfo.Name;
 			pathInfo.Type = ".percolator";
@@ -29,7 +29,7 @@ namespace Nest
 		public IDictionary<string, object> MetaData { get; set; }
 		public QueryContainer Query { get; set; }
 
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
 		{
 			RegisterPercolatorPathInfo.Update(pathInfo, this);
 		}
@@ -80,7 +80,7 @@ namespace Nest
 				.Add("query", Self.Query);
 		}
 
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath pathInfo)
+		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
 		{
 			RegisterPercolatorPathInfo.Update(pathInfo, this);
 		}
