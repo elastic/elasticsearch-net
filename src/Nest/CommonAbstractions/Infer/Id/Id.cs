@@ -5,9 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Elasticsearch.Net.Connection;
+using Newtonsoft.Json;
 
 namespace Nest
 {
+    [JsonConverter(typeof(IdJsonConverter))]
     public class Id
     {
        public string Value { get; set; }
