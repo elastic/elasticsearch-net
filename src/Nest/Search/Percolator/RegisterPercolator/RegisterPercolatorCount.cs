@@ -19,8 +19,6 @@ namespace Nest
 	{
 		public static void Update(RequestPath pathInfo, IRegisterPercolatorRequest request)
 		{
-			pathInfo.HttpMethod = HttpMethod.POST;
-			pathInfo.Index = pathInfo.Index;
 			pathInfo.Id = pathInfo.Name;
 			pathInfo.Type = ".percolator";
 		}

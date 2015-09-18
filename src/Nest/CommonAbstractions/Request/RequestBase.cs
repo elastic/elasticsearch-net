@@ -31,7 +31,10 @@ namespace Nest
     public abstract class RequestBase<TParameters> : IRequest<TParameters>
         where TParameters : IRequestParameters, new()
     {
-        private RequestPath _path;
+        protected RequestBase(Func<RequestPath, RequestPath> pathSelector)
+        {
+            pathSelector(this.Request.RouteValues);
+        }
 
         [JsonIgnore]
         HttpMethod IRequest.HttpMethod => this.Request.RequestParameters.DefaultHttpMethod;
@@ -43,13 +46,6 @@ namespace Nest
 
         [JsonIgnore]
         TParameters IRequest<TParameters>.RequestParameters { get; set; } = new TParameters();
-		
-        public RequestBase() { }
-
-        protected RequestBase(Func<RequestPath, RequestPath> pathSelector)
-        {
-            _path = pathSelector(new RequestPath());
-        }
 
         [JsonIgnore]
         protected IRequest<TParameters> Request => this;
@@ -58,43 +54,15 @@ namespace Nest
 
 		protected void Q(string name, object value) => this.Request.RequestParameters.AddQueryStringValue(name, value);
 		
-        /// <summary>
-		/// Creates a PathInfo object from this request that we can use to dispatch into the low level client
-		/// </summary>
-		internal virtual RequestPath Path(IConnectionSettingsValues settings, TParameters queryString)
-        {
-			//ask subclasses to set the relevant pathInfo parameters
-			SetRouteParameters(settings, _path);
-
-			//update the pathInfo, is abstract and forces each subclass to at a minimum set the HttpMethod
-			UpdateRequestPath(settings, _path);
-
-			ValidateRequestPath(_path);
-
-            return _path;
-		}
-
-
-        protected virtual void SetRouteParameters(IConnectionSettingsValues settings, RequestPath path) { }
-
-		protected virtual void ValidateRequestPath(IRequestPath path) { }
-
-		protected virtual void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath pathInfo)
-		{
-		}
 	}
 
     public abstract class RequestDescriptorBase<TDescriptor, TParameters> : RequestBase<TParameters>, IDescriptor
 		where TDescriptor : RequestDescriptorBase<TDescriptor, TParameters>
 		where TParameters : FluentRequestParameters<TParameters>, new()
 	{
-        public RequestDescriptorBase() { }
+        protected RequestDescriptorBase(Func<RequestPath, RequestPath> pathSelector) : base(pathSelector) { }
 
-        protected RequestDescriptorBase(Func<RequestPath, RequestPath> pathSelector)
-            : base(pathSelector)
-        { }
-
-		protected TDescriptor _requestParams(Action<TParameters> assigner)
+		protected TDescriptor AssignParam(Action<TParameters> assigner)
 		{
 			assigner?.Invoke(this.Request.RequestParameters);
 			return (TDescriptor)this;
