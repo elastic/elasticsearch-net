@@ -14,8 +14,6 @@ namespace Nest
 		HttpMethod HttpMethod { get; }
 
 		RouteValues RouteValues { get; }
-
-        void ResolveRouteValues(IConnectionSettingsValues settings);
 	}
 
 	public interface IRequest<TParameters> : IRequest
@@ -31,28 +29,27 @@ namespace Nest
     public abstract class RequestBase<TParameters> : IRequest<TParameters>
         where TParameters : IRequestParameters, new()
     {
+        [JsonIgnore] protected IRequest<TParameters> Self => this;
+
+		protected RequestBase() { }
         protected RequestBase(Func<RouteValues, RouteValues> pathSelector)
         {
-            pathSelector(this.Request.RouteValues);
+            pathSelector(Self.RouteValues);
         }
 
         [JsonIgnore]
-        HttpMethod IRequest.HttpMethod => this.Request.RequestParameters.DefaultHttpMethod;
+        HttpMethod IRequest.HttpMethod => Self.RequestParameters.DefaultHttpMethod;
 
 		[JsonIgnore]
 		RouteValues IRequest.RouteValues { get; } = new RouteValues();
 
-        void IRequest.ResolveRouteValues(IConnectionSettingsValues settings) => this.Request.RouteValues.Resolve(settings);
-
         [JsonIgnore]
         TParameters IRequest<TParameters>.RequestParameters { get; set; } = new TParameters();
 
-        [JsonIgnore]
-        protected IRequest<TParameters> Request => this;
 
-		protected TOut Q<TOut>(string name) => this.Request.RequestParameters.GetQueryStringValue<TOut>(name);
+		protected TOut Q<TOut>(string name) => Self.RequestParameters.GetQueryStringValue<TOut>(name);
 
-		protected void Q(string name, object value) => this.Request.RequestParameters.AddQueryStringValue(name, value);
+		protected void Q(string name, object value) => Self.RequestParameters.AddQueryStringValue(name, value);
 		
 	}
 
@@ -60,11 +57,12 @@ namespace Nest
 		where TDescriptor : RequestDescriptorBase<TDescriptor, TParameters>
 		where TParameters : FluentRequestParameters<TParameters>, new()
 	{
+		protected RequestDescriptorBase() { }
         protected RequestDescriptorBase(Func<RouteValues, RouteValues> pathSelector) : base(pathSelector) { }
 
 		protected TDescriptor AssignParam(Action<TParameters> assigner)
 		{
-			assigner?.Invoke(this.Request.RequestParameters);
+			assigner?.Invoke(this.Self.RequestParameters);
 			return (TDescriptor)this;
 		}
 
@@ -73,7 +71,7 @@ namespace Nest
 		/// </summary>
 		public TDescriptor RequestConfiguration(Func<RequestConfigurationDescriptor, IRequestConfiguration> configurationSelector)
 		{
-			this.Request.RequestParameters.RequestConfiguration(configurationSelector);
+			Self.RequestParameters.RequestConfiguration(configurationSelector);
 			return (TDescriptor)this;
 		}
 		
@@ -98,5 +96,12 @@ namespace Nest
 		[EditorBrowsable(EditorBrowsableState.Never)]
 		public override string ToString() => base.ToString();
 		
+	}
+    public abstract class RequestDescriptorBase<TDescriptor, TParameters, TInterface> 
+		: RequestDescriptorBase<TDescriptor, TParameters>, IDescriptor
+		where TDescriptor : RequestDescriptorBase<TDescriptor, TParameters, TInterface>, TInterface
+		where TParameters : FluentRequestParameters<TParameters>, new()
+	{
+		protected TDescriptor Assign(Action<TInterface> assign) => Fluent.Assign((TDescriptor)this, assign);
 	}
 }

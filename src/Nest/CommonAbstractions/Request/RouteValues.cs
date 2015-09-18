@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Elasticsearch.Net;
 using Elasticsearch.Net.Serialization;
 
 namespace Nest
 {
+	//TODO INTERNAL ?
 	public class RouteValues
 	{
 		private Dictionary<string, IUrlParameter> _routeValues = new Dictionary<string, IUrlParameter>();
@@ -19,7 +21,7 @@ namespace Nest
 		public string ScrollId => _resolved["scroll_id"];
 		public string NodeId => _resolved["node_id"];
 		public string Fields => _resolved["fields"];
-		public string Repository => _resolved["repostitory"];
+		public string Repository => _resolved["repository"];
 		public string Snapshot => _resolved["snapshot"];
 		public string Feature => _resolved["feature"];
 		public string Metric => _resolved["metric"];
@@ -50,6 +52,15 @@ namespace Nest
 
 		public RouteValues Required(Types types) => Route("type", types);
 		public RouteValues Optional(Types types) => Route("type", types, false);
+
+		public RouteValues Required(string route, IEnumerable<Enum> enums) => 
+			Resolved(route, string.Join(",", enums.Select(e=>e.GetStringValue())));
+        public RouteValues Optional(string route, IEnumerable<Enum> enums) =>
+			Resolved(route, string.Join(",", enums.Select(e=>e.GetStringValue())), false);
+
+		public RouteValues Required(IEnumerable<ClusterStateMetric> enums) => Required("metric", enums.Cast<Enum>());
+        public RouteValues Optional(IEnumerable<ClusterStateMetric> enums) => Optional("metric", enums.Cast<Enum>());
+
 
 		[Obsolete("TODO: Rename to Required once NodeId type is implemented")]
 		public RouteValues RequiredNodeId(string nodeId) => Resolved("node_id", nodeId);

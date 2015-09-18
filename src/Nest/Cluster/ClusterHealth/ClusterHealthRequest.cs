@@ -11,21 +11,19 @@ namespace Nest
 
 	public partial class ClusterHealthRequest : RequestBase<ClusterHealthRequestParameters>, IClusterHealthRequest
     {
-        public ClusterHealthRequest()
-        { }
+		/// <summary>
+		/// /_cluster/health
+		/// </summary>
+		public ClusterHealthRequest() { }
 
-        public ClusterHealthRequest(Indices indices)
-            : base(p => p.Optional(indices))
-        { }
+		/// <summary>
+		/// /_cluster/health/{index}
+		/// </summary>
+		public ClusterHealthRequest(Indices indices) : base(p => p.Optional(indices)) { }
     }
 
 	public partial class ClusterHealthDescriptor : RequestDescriptorBase<ClusterHealthDescriptor, ClusterHealthRequestParameters>, IClusterHealthRequest
     {
-        public ClusterHealthDescriptor()
-        { }
 
-        public ClusterHealthDescriptor(Indices indices)
-            : base(p => p.Optional(indices))
-        { }
     }
 }

@@ -240,20 +240,20 @@ namespace Nest
 
 		private SearchDescriptor<T> _assign(Action<ISearchRequest> assigner) => Fluent.Assign(this, assigner);
 
-		SearchType? ISearchRequest.SearchType => this.Request.RequestParameters.GetQueryStringValue<SearchType?>("search_type");
+		SearchType? ISearchRequest.SearchType => this.Self.RequestParameters.GetQueryStringValue<SearchType?>("search_type");
 
 		SearchRequestParameters ISearchRequest.QueryString
 		{
-			get { return this.Request.RequestParameters;  }
-			set { this.Request.RequestParameters = value;  }
+			get { return this.Self.RequestParameters;  }
+			set { this.Self.RequestParameters = value;  }
 		}
 
-		string ISearchRequest.Preference => this.Request.RequestParameters.GetQueryStringValue<string>("preference");
+		string ISearchRequest.Preference => this.Self.RequestParameters.GetQueryStringValue<string>("preference");
 
-		string ISearchRequest.Routing => this.Request.RequestParameters.GetQueryStringValue<string[]>("routing") == null
-			? null : string.Join(",", this.Request.RequestParameters.GetQueryStringValue<string[]>("routing"));
+		string ISearchRequest.Routing => this.Self.RequestParameters.GetQueryStringValue<string[]>("routing") == null
+			? null : string.Join(",", this.Self.RequestParameters.GetQueryStringValue<string[]>("routing"));
 
-		bool? ISearchRequest.IgnoreUnavalable => this.Request.RequestParameters.GetQueryStringValue<bool?>("ignore_unavailable");
+		bool? ISearchRequest.IgnoreUnavalable => this.Self.RequestParameters.GetQueryStringValue<bool?>("ignore_unavailable");
 
 		Type ISearchRequest.ClrType => typeof(T);
 
