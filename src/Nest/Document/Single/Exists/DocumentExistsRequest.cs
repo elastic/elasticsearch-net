@@ -14,26 +14,12 @@ namespace Nest
 	public partial class DocumentExistsRequest : RequestBase<DocumentExistsRequestParameters>, IDocumentExistsRequest
 	{
 	}
-	
-	public partial class DocumentExistsRequest<T> : RequestBase<DocumentExistsRequestParameters>, IDocumentExistsRequest
-		where T : class
-	{
-        public T Document { get; set; }
 
-		public DocumentExistsRequest(string id) 
-            : base(p => p.RequiredId(id)) { }
-
-		public DocumentExistsRequest(long id) 
-            : base(p => p.RequiredId(id.ToString())) { }
-
-		public DocumentExistsRequest(T document)
-        {
-            Document = document;
-        }
-
-        protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues path)
-        {
-        }
+    public partial class DocumentExistsRequest<T> : RequestBase<DocumentExistsRequestParameters>, IDocumentExistsRequest
+        where T : class
+    {
+        public DocumentExistsRequest(Id id) : base(r => r.Required(Ids.Single(id))) { }
+        public DocumentExistsRequest(T document) : base(r => r.Required(Ids.Single(document))) { }
     }
 
 	[DescriptorFor("Exists")]
@@ -41,22 +27,7 @@ namespace Nest
 		: RequestDescriptorBase<DocumentExistsDescriptor<T>, DocumentExistsRequestParameters>, IDocumentExistsRequest
 		where T : class
 	{
-        public T Document { get; set; }
-
-		public DocumentExistsDescriptor(string id) 
-            : base(p => p.RequiredId(id)) { }
-
-		public DocumentExistsDescriptor(long id) 
-            : base(p => p.RequiredId(id.ToString())) { }
-
-		public DocumentExistsDescriptor(T document)
-        {
-            Document = document;
-        }
-
-        protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
-        {
-            pathInfo.IdFrom(settings, this.Document);
-        }
+		public DocumentExistsDescriptor(Id id) : base(r => r.Required(Ids.Single(id))) { }
+		public DocumentExistsDescriptor(T document) : base(r => r.Required(Ids.Single(document))) { }
     }
 }

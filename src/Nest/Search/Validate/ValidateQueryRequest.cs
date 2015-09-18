@@ -17,37 +17,21 @@ namespace Nest
 		where T : class
 	{ }
 
-	internal static class ValidateQueryPathInfo
-	{
-		public static void Update(RouteValues pathInfo, IValidateQueryRequest request)
-		{
-			var source = request.RequestParameters.GetQueryStringValue<string>("source");
-			var q = request.RequestParameters.GetQueryStringValue<string>("q");
-			pathInfo.HttpMethod = (!source.IsNullOrEmpty() || !q.IsNullOrEmpty())
-				? HttpMethod.GET
-				: HttpMethod.POST;
-		}
-	}
-
 	public partial class ValidateQueryRequest : RequestBase<ValidateQueryRequestParameters>, IValidateQueryRequest
 	{
-		public IQueryContainer Query { get; set; }
+        public ValidateQueryRequest() { }
+        public ValidateQueryRequest(Indices indices) : base(r => r.Optional(indices)) { }
+        public ValidateQueryRequest(Indices indices, Types types) : base(r => r.Optional(indices).Optional(types)) { }
 
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
-		{
-			ValidateQueryPathInfo.Update(pathInfo, this);
-		}
+		public IQueryContainer Query { get; set; }
 	}
 
-	public partial class ValidateQueryRequest<T> : RequestBase<ValidateQueryRequestParameters>, IValidateQueryRequest<T>
+	public partial class ValidateQueryRequest<T> : ValidateQueryRequest, IValidateQueryRequest<T>
 		where T : class
 	{
-		public IQueryContainer Query { get; set; }
-
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
-		{
-			ValidateQueryPathInfo.Update(pathInfo, this);
-		}
+        public ValidateQueryRequest() : base() { }
+        public ValidateQueryRequest(Indices indices) : base(indices) { }
+        public ValidateQueryRequest(Indices indices, Types types) : base(indices, types) { }
 	}
 
 	[DescriptorFor("IndicesValidateQuery")]
@@ -63,11 +47,6 @@ namespace Nest
 		{
 			Self.Query = querySelector(new QueryContainerDescriptor<T>());
 			return this;
-		}
-
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
-		{
-			ValidateQueryPathInfo.Update(pathInfo, this);
 		}
 	}
 }

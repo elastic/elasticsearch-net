@@ -15,23 +15,12 @@ namespace Nest
 		string Template { get; set; }
 	}
 
-	internal static class PutSearchTemplatePathInfo
-	{
-		public static void Update(RouteValues pathInfo, IPutSearchTemplateRequest request)
-		{
-			//TODO NAME pathInfo.Id = request.Name;
-			pathInfo.HttpMethod = HttpMethod.POST;
-		}
-	}
 
-	public partial class PutSearchTemplateRequest : RequestBase<PutTemplateRequestParameters>, IPutSearchTemplateRequest
-	{
+    public partial class PutSearchTemplateRequest : RequestBase<PutTemplateRequestParameters>, IPutSearchTemplateRequest
+    {
+        public PutSearchTemplateRequest(Id id) : base(r => r.Required(Ids.Single(id))) { }
+      
 		public string Template { get; set; }
-
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
-		{
-			PutSearchTemplatePathInfo.Update(pathInfo, this);
-		}
 	}
 
 	[DescriptorFor("SearchTemplatePut")]
@@ -45,10 +34,5 @@ namespace Nest
 			this.Self.Template = template;
 			return this;
 		}
-
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
-		{
-			PutSearchTemplatePathInfo.Update(pathInfo, this);
-		}
-	}
+    }
 }

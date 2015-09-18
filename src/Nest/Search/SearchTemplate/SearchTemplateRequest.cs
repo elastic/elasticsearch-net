@@ -31,9 +31,13 @@ namespace Nest
 
 	public interface ISearchTemplateRequest<T> : ISearchTemplateRequest { }
 
-	public partial class SearchTemplateRequest : RequestBase<SearchTemplateRequestParameters>, ISearchTemplateRequest
-	{
-		public string Template { get; set; }
+    public partial class SearchTemplateRequest : RequestBase<SearchTemplateRequestParameters>, ISearchTemplateRequest
+    {
+        public SearchTemplateRequest() { }
+        public SearchTemplateRequest(Indices indices) : base(r => r.Optional(indices)) { }
+        public SearchTemplateRequest(Indices indices, Types types) : base(r => r.Optional(indices).Optional(types)) { }
+
+        public string Template { get; set; }
 		public string File { get; set; }
 		public string Id { get; set; }
 		public IDictionary<string, object> Params { get; set; }
@@ -42,15 +46,14 @@ namespace Nest
 		public Func<dynamic, Hit<dynamic>, Type> TypeSelector { get; set; }
 	}
 	
-	public partial class SearchTemplateRequest<T> : RequestBase<SearchTemplateRequestParameters>, ISearchTemplateRequest
+	public partial class SearchTemplateRequest<T> : SearchTemplateRequest, ISearchTemplateRequest<T>
 		where T : class
 	{
-		public string Template { get; set; }
-		public string File { get; set; }
-		public string Id { get; set; }
-		public IDictionary<string, object> Params { get; set; }
+        public SearchTemplateRequest() { }
+        public SearchTemplateRequest(Indices indices) : base(indices) { }
+        public SearchTemplateRequest(Indices indices, Types types) : base(indices, types) { }
+
 		public Type ClrType { get { return typeof(T); } }
-		public Func<dynamic, Hit<dynamic>, Type> TypeSelector { get; set; }
 	}
 
 	public partial class SearchTemplateDescriptor<T> : RequestDescriptorBase<SearchTemplateDescriptor<T>, SearchTemplateRequestParameters>, ISearchTemplateRequest<T>

@@ -12,32 +12,17 @@ namespace Nest
 
 	public partial class GetRequest : RequestBase<GetRequestParameters>, IGetRequest 
 	{
-		public GetRequest(IndexName index, TypeName type, string id)
-            : base(p => p.Required(Indices.Single(index)).Required(Types.Single(type)).RequiredId(id))
-        { }
+		public GetRequest(IndexName index, TypeName type, Id id)
+            : base(p => p.Required(Indices.Single(index)).Required(Types.Single(type)).Required(Ids.Single(id))) { }
 	}
 
 	public partial class GetRequest<T> 
         : RequestBase<GetRequestParameters>, IGetRequest<T> where T : class
 	{
-        T Document { get; set; }
+        public GetRequest(Id id) 
+            : base(p => p.Required(Indices.Single<T>()).Required(Types.Single<T>()).Required(Ids.Single(id))) { }
 
-        public GetRequest(string id) 
-            : base(p => p.Required(Indices.Single<T>()).Required(Types.Single<T>()).RequiredId(id))
-        { }
-
-		public GetRequest(long id)
-            : base(p => p.Required(Indices.Single<T>()).Required(Types.Single<T>()).RequiredId(id.ToString()))
-        { }
-
-		public GetRequest(T document)
-        {
-            Document = document;
-        }
-
-        protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues path)
-        {
-        }
+		public GetRequest(T document) : base(r => r.Required(Ids.Single(document))) { }
     }
 	
 	public partial class GetDescriptor<T> 
@@ -45,26 +30,12 @@ namespace Nest
 		where T : class
 	{
 
-        T Document { get; set; }
+        public GetDescriptor(Id id) 
+            : base(p => p.Required(Indices.Single<T>()).Required(Types.Single<T>()).Required(Ids.Single(id))) { }
 
-        public GetDescriptor(string id) 
-            : base(p => p.Required(Indices.Single<T>()).Required(Types.Single<T>()).RequiredId(id))
-        { }
+	    public GetDescriptor(T document) : base(r => r.Required(Ids.Single(document))) { }
 
-		public GetDescriptor(long id)
-            : base(p => p.Required(Indices.Single<T>()).Required(Types.Single<T>()).RequiredId(id.ToString()))
-        { }
-
-		public GetDescriptor(T document)
-        {
-            Document = document;
-        }
-
-        protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues path)
-        {
-        }
-
-		public GetDescriptor<T> ExecuteOnPrimary()
+        public GetDescriptor<T> ExecuteOnPrimary()
 		{
 			return this.Preference("_primary");
 		}

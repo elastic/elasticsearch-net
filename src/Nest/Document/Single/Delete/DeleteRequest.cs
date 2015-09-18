@@ -12,62 +12,32 @@ namespace Nest
 	public interface IDeleteRequest<T> : IDeleteRequest 
         where T : class
     {
-        T Document { get; set; }
     }
 
     public partial class DeleteRequest : RequestBase<DeleteRequestParameters>, IDeleteRequest
 	{
-		public DeleteRequest(IndexName index, TypeName type, string id) 
-            : base(p => p.Required(Indices.Single(index)).Required(Types.Single(type)).RequiredId(id))
-        { }
+		public DeleteRequest(IndexName index, TypeName type, Id id) 
+            : base(p => p.Required(Indices.Single(index)).Required(Types.Single(type)).Required(Ids.Single(id))) { }
 	}
 
 	public partial class DeleteRequest<T> : RequestBase<DeleteRequestParameters>, IDeleteRequest<T>
 		where T : class
 	{
-		public DeleteRequest(string id) 
-            : base(p => p.Required(Indices.Single<T>()).Required(Types.Single<T>()).RequiredId(id)) { }
+		public DeleteRequest(Id id) 
+            : base(p => p.Required(Indices.Single<T>()).Required(Types.Single<T>()).Required(Ids.Single(id))) { }
 
-		public DeleteRequest(long id) 
-            : base(p => p.Required(Indices.Single<T>()).Required(Types.Single<T>()).RequiredId(id.ToString())) { }
-
-		public DeleteRequest(T document)
-            : base(p => p.Required(Indices.Single<T>()).Required(Types.Single<T>()))
-        {
-            this.Document = document;
-        }
-
-        public T Document { get; set; }
-
-        protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues path)
-        {
-            if (this.Document != null)
-                path.Id = settings.Inferrer.Id(this.Document);
-        }
+        public DeleteRequest(T document)
+            : base(p => p.Required(Indices.Single<T>()).Required(Types.Single<T>()).Required(Ids.Single(document))) { }
     }
 
     [DescriptorFor("Delete")]
     public partial class DeleteDescriptor<T> : RequestDescriptorBase<DeleteDescriptor<T>, DeleteRequestParameters>, IDeleteRequest<T>
         where T : class
     {
-        public DeleteDescriptor(string id) 
-            : base(p => p.Required(Indices.Single<T>()).Required(Types.Single<T>()).RequiredId(id)) { }
-
-		public DeleteDescriptor(long id) 
-            : base(p => p.Required(Indices.Single<T>()).Required(Types.Single<T>()).RequiredId(id.ToString())) { }
+        public DeleteDescriptor(Id id) 
+            : base(p => p.Required(Indices.Single<T>()).Required(Types.Single<T>()).Required(Ids.Single(id))) { }
 
 		public DeleteDescriptor(T document)
-            : base(p => p.Required(Indices.Single<T>()).Required(Types.Single<T>()))
-        {
-            this.Document = document;
-        }
-
-        public T Document { get; set; }
-
-        protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues path)
-        {
-            if (this.Document != null)
-                path.Id = settings.Inferrer.Id(this.Document);
-        }
+            : base(p => p.Required(Indices.Single<T>()).Required(Types.Single<T>()).Required(Ids.Single(document))) { }
     }
 }

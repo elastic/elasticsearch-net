@@ -53,6 +53,9 @@ namespace Nest
 		public RouteValues Required(Types types) => Route("type", types);
 		public RouteValues Optional(Types types) => Route("type", types, false);
 
+        public RouteValues Required(Ids ids) => Route("id", ids);
+        public RouteValues Optional(Ids ids) => Route("id", ids, false);
+
 		public RouteValues Required(string route, IEnumerable<Enum> enums) => 
 			Resolved(route, string.Join(",", enums.Select(e=>e.GetStringValue())));
         public RouteValues Optional(string route, IEnumerable<Enum> enums) =>
@@ -67,11 +70,5 @@ namespace Nest
 
 		[Obsolete("TODO: Rename to Optional once NodeId type is implemented")]
 		public RouteValues OptionalNodeId(string nodeId) => Resolved("node_id", nodeId, false);
-
-		[Obsolete]
-		public RouteValues RequiredId(string id) => Resolved("id", id);
-
-		[Obsolete]
-		public RouteValues OptionalId(string id) => Resolved("id", id, false);
 	}
 }
