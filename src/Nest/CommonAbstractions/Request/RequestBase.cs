@@ -9,7 +9,8 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IRequest
 	{
-		IRequestConfiguration Configuration { get; set; }
+		//IRequestConfiguration Configuration { get; set; }
+        //IRequestParameters Parameters { get; set; }
 	}
 
 	public interface IRequest<TParameters> : IRequest
@@ -21,12 +22,14 @@ namespace Nest
         /// </summary>
         TParameters Parameters { get; set; }
 
-        RequestPath<TParameters> Path(IConnectionSettingsValues settings);
+        RequestPath<TParameters> ResolvePath(IConnectionSettingsValues settings);
 	}
 
     public abstract class RequestBase<TParameters> : IRequest<TParameters>
         where TParameters : IRequestParameters, new()
     {
+        private RequestPath<TParameters> _path;
+
         public RequestBase() { }
 
         protected RequestBase(Func<RequestPath<TParameters>, RequestPath<TParameters>> pathSelector)
@@ -34,20 +37,12 @@ namespace Nest
             _path = pathSelector(new RequestPath<TParameters>());
         }
 
-        private RequestPath<TParameters> _path;
-
         [JsonIgnore]
         protected IRequest<TParameters> Request => this;
 
 		protected TOut Q<TOut>(string name) => this.Request.Parameters.GetQueryStringValue<TOut>(name);
 
 		protected void Q(string name, object value) => this.Request.Parameters.AddQueryStringValue(name, value);
-
-        /// <summary>
-        /// Allows you to override connection settings on a per call basis
-        /// </summary>
-        [JsonIgnore]
-        IRequestConfiguration IRequest.Configuration { get; set; }
 
         /// <summary>
         /// Describes parameters that are supplied on the querystring rather then the body of the request
@@ -60,17 +55,6 @@ namespace Nest
 		/// </summary>
 		internal virtual RequestPath<TParameters> Path(IConnectionSettingsValues settings, TParameters queryString)
         {
-            _path.RequestParameters = queryString;
-
-			//if this request describes request specific connection overrides make sure they are carried 
-			//over into the requestPath object
-			var config = ((IRequest) this).Configuration;
-			if (config != null)
-			{
-				IRequestParameters p = _path.RequestParameters;
-				p.RequestConfiguration = config;
-			}
-			
 			//ask subclasses to set the relevant pathInfo parameters
 			SetRouteParameters(settings, _path);
 
@@ -82,7 +66,7 @@ namespace Nest
             return _path;
 		}
 
-        RequestPath<TParameters> IRequest<TParameters>.Path(IConnectionSettingsValues settings)
+        RequestPath<TParameters> IRequest<TParameters>.ResolvePath(IConnectionSettingsValues settings)
         {
             return this.Path(settings, this.Request.Parameters);
         }
@@ -93,7 +77,7 @@ namespace Nest
 
 		protected virtual void UpdateRequestPath(IConnectionSettingsValues settings, RequestPath<TParameters> pathInfo)
 		{
-			pathInfo.HttpMethod = pathInfo.RequestParameters.DefaultHttpMethod;
+			pathInfo.HttpMethod = this.Request.Parameters.DefaultHttpMethod;
 		}
 	}
 
@@ -118,7 +102,7 @@ namespace Nest
 		/// </summary>
 		public TDescriptor RequestConfiguration(Func<RequestConfigurationDescriptor, IRequestConfiguration> configurationSelector)
 		{
-			this.Request.Configuration = configurationSelector?.Invoke(new RequestConfigurationDescriptor());
+			this.Request.Parameters.RequestConfiguration(configurationSelector);
 			return (TDescriptor)this;
 		}
 		

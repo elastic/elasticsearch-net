@@ -72,7 +72,7 @@ namespace Nest
 
 		R IHighLevelToLowLevelDispatcher.Dispatch<D, Q, R>(D request, Func<IApiCallDetails, Stream, R> responseGenerator, Func<RequestPath<Q>, D, ElasticsearchResponse<R>> dispatch)
 		{
-			var path = request.Path(this.ConnectionSettings);
+			var path = request.ResolvePath(this.ConnectionSettings);
 			request.Parameters.DeserializationOverride(responseGenerator);
 			var response = dispatch(path, request);
 			return ResultsSelector<D, Q, R>(response, request);
@@ -80,7 +80,7 @@ namespace Nest
 
 		R IHighLevelToLowLevelDispatcher.Dispatch<D, Q, R>(D request, Func<RequestPath<Q>, D, ElasticsearchResponse<R>> dispatch)
 		{
-			var path = request.Path(this.ConnectionSettings);
+			var path = request.ResolvePath(this.ConnectionSettings);
 			var response = dispatch(path, request);
 			return ResultsSelector<D, Q, R>(response, request);
 		}
@@ -92,7 +92,7 @@ namespace Nest
 
 		Task<I> IHighLevelToLowLevelDispatcher.DispatchAsync<D, Q, R, I>(D request, Func<IApiCallDetails, Stream, R> responseGenerator, Func<RequestPath<Q>, D, Task<ElasticsearchResponse<R>>> dispatch)
 		{
-			var path = request.Path(this.ConnectionSettings);
+			var path = request.ResolvePath(this.ConnectionSettings);
 			request.Parameters.DeserializationOverride(responseGenerator);
 			return dispatch(path, request)
 				.ContinueWith<I>(r =>
@@ -132,22 +132,13 @@ namespace Nest
 			return r;
 		}
 
-		private TRequest ForceConfiguration<TRequest>(
-			Func<TRequest, TRequest> selector, Action<IRequestConfiguration> setter
-			)
-			where TRequest : class, IRequest, new()
+		private TRequest ForceConfiguration<TRequest, TParams>(TRequest request, Action<IRequestConfiguration> setter)
+			where TRequest : IRequest<TParams>
+			where TParams : IRequestParameters, new()
 		{
-			selector = selector ?? (s => s);
-			var request = selector(new TRequest());
-			return ForceConfiguration(request, setter);
-		}
-
-		private TRequest ForceConfiguration<TRequest>(TRequest request, Action<IRequestConfiguration> setter)
-			where TRequest : IRequest
-		{
-			var configuration = request.Configuration ?? new RequestConfiguration();
+			var configuration = request.Parameters.RequestConfiguration ?? new RequestConfiguration();
 			setter(configuration);
-			request.Configuration = configuration;
+			request.Parameters.RequestConfiguration = configuration;
 			return request;
 		}
 	}

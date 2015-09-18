@@ -27,7 +27,6 @@ namespace Nest
 	public interface IRequestPath<TParameters> : IRequestPath
 		where TParameters : IRequestParameters, new()
 	{
-		TParameters RequestParameters { get; set; }
 	}
 
 	public class RequestPath<TParameters> : IRequestPath<TParameters>
@@ -37,7 +36,6 @@ namespace Nest
 		public Indices Index { get; set; }
 		public Types Type { get; set; }
 		public string Id { get; set; }
-		public TParameters RequestParameters { get; set; }
 		public string Name { get; set; }
 		public string Field { get; set; }
 		public string ScrollId { get; set; }
@@ -51,11 +49,6 @@ namespace Nest
 		public string Metric { get; set; }
 		public string IndexMetric { get; set; }
 		public string Lang { get; set; }
-
-		public RequestPath()
-		{
-			this.RequestParameters = new TParameters();
-		}
 
         public RequestPath<TParameters> Required(Indices indices)
         {

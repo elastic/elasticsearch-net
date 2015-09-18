@@ -42,7 +42,7 @@ namespace Nest
 		/// <inheritdoc/>
 		public T Source<T>(ISourceRequest sourceRequest) where T : class
 		{
-			var pathInfo = sourceRequest.Path(ConnectionSettings); 
+			var pathInfo = sourceRequest.ResolvePath(ConnectionSettings); 
 			var response = this.LowLevelDispatch.GetSourceDispatch<T>(pathInfo);
 			return response.Body;
 		}
@@ -54,7 +54,7 @@ namespace Nest
 		/// <inheritdoc/>
 		public Task<T> SourceAsync<T>(ISourceRequest sourceRequest) where T : class
 		{
-			var pathInfo = sourceRequest.Path(ConnectionSettings);
+			var pathInfo = sourceRequest.ResolvePath(ConnectionSettings);
 			var response = this.LowLevelDispatch.GetSourceDispatchAsync<T>(pathInfo)
 				.ContinueWith(t => t.Result.Body, TaskContinuationOptions.ExecuteSynchronously);
 			return response;

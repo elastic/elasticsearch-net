@@ -24,7 +24,7 @@ namespace Nest
 			where TParams : FluentRequestParameters<TParams>, new()
 			where TRequest : IRequest<TParams> => 
 			this.Dispatcher.Dispatch<TRequest, TParams, CatResponse<TCatRecord>>(
-				this.ForceConfiguration(request, c => c.ContentType = "application/json"),
+				this.ForceConfiguration<TRequest, TParams>(request, c => c.ContentType = "application/json"),
 				new Func<IApiCallDetails, Stream, CatResponse<TCatRecord>>(this.DeserializeCatResponse<TCatRecord>),
 				(p, d) => dispatch(p)
 			);
@@ -37,7 +37,7 @@ namespace Nest
 			where TParams : FluentRequestParameters<TParams>, new()
 			where TRequest : IRequest<TParams> => 
 			this.Dispatcher.DispatchAsync<TRequest, TParams, CatResponse<TCatRecord>, ICatResponse<TCatRecord>>(
-				this.ForceConfiguration(request, c => c.ContentType = "application/json"),
+				this.ForceConfiguration<TRequest, TParams>(request, c => c.ContentType = "application/json"),
 				new Func<IApiCallDetails, Stream, CatResponse<TCatRecord>>(this.DeserializeCatResponse<TCatRecord>),
 				(p, d) => dispatch(p)
 			);
