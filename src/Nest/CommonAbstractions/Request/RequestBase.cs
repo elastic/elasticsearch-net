@@ -29,7 +29,7 @@ namespace Nest
     {
         public RequestBase() { }
 
-        public RequestBase(Func<RequestPath<TParameters>, RequestPath<TParameters>> pathSelector)
+        protected RequestBase(Func<RequestPath<TParameters>, RequestPath<TParameters>> pathSelector)
         {
             _path = pathSelector(new RequestPath<TParameters>());
         }
