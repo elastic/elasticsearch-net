@@ -75,6 +75,7 @@
     <Compile Include="ApiGenerator.cs" />
     <Compile Include="Domain\ApiQueryParameters.cs" />
     <Compile Include="Domain\ApiUrl.cs" />
+    <Compile Include="Domain\RequestConstructor.cs" />
     <Compile Include="Domain\ApiUrlPart.cs" />
     <Compile Include="Domain\CsharpMethod.cs" />
     <Compile Include="Extensions.cs" />

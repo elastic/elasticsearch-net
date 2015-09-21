@@ -55,27 +55,33 @@ namespace CodeGeneration.LowLevelClient.Domain
 			};
 		}
 
-		public IEnumerable<string> RequestConstructors()
+		public IEnumerable<RequestConstructor> RequestConstructors()
 		{
-			var consts = new List<string>();
+			var consts = new List<RequestConstructor>();
 			if (this.Url.Parts == null || !this.Url.Parts.Any()) return consts;
 			foreach (var url in this.Url.Paths)
 			{
 				var m = this.RequestType;
 				var cp = this.Url.Parts
-					.Where(p=>!ApiUrl.BlackListRouteValues.Contains(p.Key))
+					.Where(p => !ApiUrl.BlackListRouteValues.Contains(p.Key))
 					.Where(p => url.Contains($"{{{p.Value.Name}}}"))
 					.OrderBy(kv => url.IndexOf($"{{{kv.Value.Name}}}", StringComparison.Ordinal));
 				var par = string.Join(", ", cp.Select(p => $"{p.Value.ClrTypeName} {p.Key}"));
 				var routing = string.Empty;
 				if (cp.Any())
 					routing = "r=>r." + string.Join(".", cp.Select(p => $"{(p.Value.Required ? "Required" : "Optional")}(\"{p.Key}\", {p.Key})"));
-				consts.Add($"public {m}({par}) : base({routing}){{}}");
+				var doc = $@"/// <summary>{url}</summary>";
+				if (cp.Any())
+				{
+					doc += "\r\n" + string.Join("\t\t\r\n", cp.Select(p => $"///<param name=\"{p.Key}\">{(p.Value.Required ? "this parameter is required" : "Optional, accepts null")}</param>"));
+				}
+				var c = new RequestConstructor { Generated = $"public {m}({par}) : base({routing}){{}}", Description = doc };
+				consts.Add(c);
 			}
-			return consts;
+			return consts.DistinctBy(c => c.Generated);
 		}
 
 
-		public IEnumerable<ApiUrlPart> AllParts => (this.Url?.Parts?.Values ?? Enumerable.Empty<ApiUrlPart>()).Where(p=>!string.IsNullOrWhiteSpace(p.Name));
+		public IEnumerable<ApiUrlPart> AllParts => (this.Url?.Parts?.Values ?? Enumerable.Empty<ApiUrlPart>()).Where(p => !string.IsNullOrWhiteSpace(p.Name));
 	}
 }

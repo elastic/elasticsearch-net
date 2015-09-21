@@ -10,14 +10,7 @@ namespace Nest
 {
 	public partial interface INodesHotThreadsRequest { }
 	 
-	public partial class NodesHotThreadsRequest 
-	{
-		public NodesHotThreadsRequest() { }
-
-		public NodesHotThreadsRequest(string nodeId)
-			: base(p => p.RequiredNodeId(nodeId))
-		{ }
-	}
+	public partial class NodesHotThreadsRequest { }
 
 	public partial class NodesHotThreadsDescriptor { }
 }

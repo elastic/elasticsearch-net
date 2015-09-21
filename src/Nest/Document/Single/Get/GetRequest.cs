@@ -11,15 +11,11 @@ namespace Nest
 
 	public partial class GetRequest 
 	{
-		public GetRequest(IndexName index, TypeName type, Id id)
-			: base(p => p.Required(Indices.Single(index)).Required(Types.Single(type)).Required(Ids.Single(id)))
-		{ }
 	}
 
 	public partial class GetRequest<T> 
 		where T : class
 	{
-		//TODO constructors
 	}
 
 	public partial class GetDescriptor<T> where T : class

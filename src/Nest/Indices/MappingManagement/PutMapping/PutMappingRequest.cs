@@ -14,22 +14,8 @@ namespace Nest
 
 	public partial class PutMappingRequest : RequestBase<PutMappingRequestParameters>, IPutMappingRequest
 	{
-		[Obsolete("Required for ReadAsTypeConverter.  This will be removed once we figure out a better way to deserialize.")]
+		//TODO only needed for read as type, better to have a dedicated json converter subclass that can new an internal constructor
 		public PutMappingRequest() { }
-
-		/// <summary>
-		/// Calls putmapping on /_all/{type}
-		/// </summary>
-		public PutMappingRequest(TypeName type)
-			: base(p => p.Required(Types.Single(type)))
-		{ }
-
-		/// <summary>
-		/// Calls putmapping on /{indices}/{type}
-		/// </summary>
-		public PutMappingRequest(Indices indices, TypeName types)
-			: base(p => p.Required(Types.Single(types)).Optional(indices))
-		{ }
 
 		/// <inheritdoc/>
 		public IAllField AllField { get; set; }

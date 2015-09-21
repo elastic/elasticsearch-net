@@ -17,18 +17,6 @@ namespace Nest
 	public partial class BulkRequest 
 	{
 		public IList<IBulkOperation> Operations { get; set; }
-
-		public BulkRequest() { }
-
-		public BulkRequest(Indices indices)
-			: base(p => p.Optional(indices))
-		{ }
-
-		//TODO discuss with @gmarz the benefits of allowing null's here and possible side effects if folks
-		//do not expect to be able to pass null
-		public BulkRequest(Indices indices, Types types)
-			: base(p => p.Optional(indices).Optional(types))
-		{ }
 	}
 
 	public partial class BulkDescriptor 
@@ -36,16 +24,6 @@ namespace Nest
 		private IBulkRequest Self => this;
 
 		IList<IBulkOperation> IBulkRequest.Operations { get; set; } = new SynchronizedCollection<IBulkOperation>();
-
-		public BulkDescriptor() { }
-
-		public BulkDescriptor(Indices indices)
-			: base(p => p.Required(indices))
-		{ }
-
-		public BulkDescriptor(Indices indices, Types types)
-			: base(p => p.Required(indices).Required(types))
-		{ }
 
 		public BulkDescriptor Create<T>(Func<BulkCreateDescriptor<T>, BulkCreateDescriptor<T>> bulkCreateSelector) where T : class
 		{

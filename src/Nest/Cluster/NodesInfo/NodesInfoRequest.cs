@@ -14,12 +14,6 @@ namespace Nest
 	public partial class NodesInfoRequest 
 	{
 		public IEnumerable<NodesInfoMetric> Metrics { get; set; }
-
-		public NodesInfoRequest() { }
-
-		public NodesInfoRequest(string nodeId)
-			: base(p => p.RequiredNodeId(nodeId))
-		{ }
 	}
 
 	[DescriptorFor("NodesInfo")]

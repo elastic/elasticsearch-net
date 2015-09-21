@@ -8,21 +8,7 @@ namespace Nest
 {
 	public partial interface IClusterStateRequest { }
 
-	public partial class ClusterStateRequest 
-	{
-		public ClusterStateRequest() { }
-
-		public ClusterStateRequest(Indices indices) : base(p => p.Optional(indices)) { }
-
-		public ClusterStateRequest(Indices indices, IEnumerable<ClusterStateMetric> metrics)
-			: base(p => p.Optional(indices).Optional(metrics))
-		{ }
-
-		public ClusterStateRequest(Indices indices, params ClusterStateMetric[] metrics)
-			: base(p => p.Optional(indices).Optional(metrics))
-		{ }
-	}
-
+	public partial class ClusterStateRequest { }
 
 	public partial class ClusterStateDescriptor 
 	{

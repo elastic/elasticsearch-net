@@ -15,20 +15,6 @@ namespace Nest
 
 	public partial class MultiTermVectorsRequest 
 	{
-		public MultiTermVectorsRequest() { }
-
-		public MultiTermVectorsRequest(Indices indices, Types types)
-			: base(p => p.Required(indices).Required(types))
-		{ }
-
-		public MultiTermVectorsRequest(Indices indices)
-			: base(p => p.Required(indices))
-		{ }
-
-		public MultiTermVectorsRequest(Types types)
-			: base(p => p.Required(types))
-		{ }
-
 		public IEnumerable<MultiTermVectorDocument> Documents { get; set; }
 	}
 

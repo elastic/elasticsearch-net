@@ -7,7 +7,6 @@ namespace Nest
 {
 	public partial interface IScrollRequest 
 	{
-		string ScrollId { get; set; }
 		TimeUnitExpression Scroll { get; set; }
 	}
 	
@@ -29,6 +28,7 @@ namespace Nest
 	//	}
 	//}
 
+	//TODO signal to codegen to not generate constructors for this one
 	public partial class ScrollRequest 
 	{
 		public string ScrollId { get; set; }
@@ -43,13 +43,12 @@ namespace Nest
 
 	public partial class ScrollDescriptor<T> where T : class
 	{
-		string IScrollRequest.ScrollId { get; set; }
 		TimeUnitExpression IScrollRequest.Scroll { get; set; }
 
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
 		public ScrollDescriptor<T> Scroll(TimeUnitExpression scroll) => Assign(a => a.Scroll = scroll);
 
 		///<summary>The scroll id used to continue/start the scrolled pagination</summary>
-		public ScrollDescriptor<T> ScrollId(string scrollId) => Assign(a => a.ScrollId = scrollId);
+		public ScrollDescriptor<T> ScrollId(ScrollIds scrollId) => Assign(a => a.ScrollId = scrollId);
 	}
 }

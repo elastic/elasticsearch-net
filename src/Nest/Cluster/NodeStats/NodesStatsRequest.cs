@@ -16,10 +16,6 @@ namespace Nest
 	{
 		public IEnumerable<NodesStatsMetric> Metrics { get; set; }
 		public IEnumerable<NodesStatsIndexMetric> IndexMetrics { get; set; }
-
-		public NodesStatsRequest() { }
-
-		public NodesStatsRequest(string nodeId) : base(p => p.RequiredNodeId(nodeId)) { }
 	}
 	[DescriptorFor("NodesStats")]
 	public partial class NodesStatsDescriptor 

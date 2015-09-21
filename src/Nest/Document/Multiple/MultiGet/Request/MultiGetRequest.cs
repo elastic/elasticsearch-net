@@ -17,19 +17,6 @@ namespace Nest
 	{
 		public IList<IMultiGetOperation> GetOperations { get; set; }
 
-		public MultiGetRequest() { }
-
-		public MultiGetRequest(Indices indices, Types types)
-			: base(p => p.Required(indices).Required(types))
-		{ }
-
-		public MultiGetRequest(Indices indices)
-			: base(p => p.Required(indices))
-		{ }
-
-		public MultiGetRequest(Types types)
-			: base(p => p.Required(types))
-		{ }
 	}
 
 	[DescriptorFor("Mget")]

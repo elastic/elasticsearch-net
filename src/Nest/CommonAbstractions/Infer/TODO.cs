@@ -16,6 +16,14 @@ namespace Nest
 		}
 	}
 
+	public class ScrollId : IUrlParameter
+	{
+		public string GetString(IConnectionConfigurationValues settings)
+		{
+			throw new NotImplementedException();
+		}
+	}
+
 	public class NodeIds : IUrlParameter
 	{
 		public string GetString(IConnectionConfigurationValues settings)
