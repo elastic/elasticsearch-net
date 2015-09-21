@@ -21,7 +21,7 @@ namespace Nest
 		var type = method.DescriptorType + method.DescriptorTypeGeneric;
 	<text>
 	///<summary>descriptor for @method.FullName <pre>@method.Documentation</pre></summary>
-	public partial class @Raw(type) @(Raw(!method.Unmapped ? "" : string.Format(" : RequestDescriptorBase<{0},{1}>", type, method.QueryStringParamName)))
+	public partial class @Raw(type) @(Raw(string.Format(" : RequestDescriptorBase<{0},{1}, I{2}>, I{2}", type, method.QueryStringParamName, method.DescriptorType.Replace("Descriptor", "Request"))))
 	{</text>foreach (KeyValuePair<string, ApiQueryParameters> kv in method.Url.Params)
 	{
 		var t = @kv.Value.CsharpType(kv.Key);

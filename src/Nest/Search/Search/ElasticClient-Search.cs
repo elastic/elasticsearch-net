@@ -116,7 +116,7 @@ namespace Nest
 			where T : class
 			where TResult : class
 		{
-			SearchPathInfo.CloseOverAutomagicCovariantResultSelector(this.Infer, request);
+			SearchTemplateResponseHelper.CloseOverAutomagicCovariantResultSelector(this.Infer, request);
 			if (request.TypeSelector == null) return null;
 			return (r, s) => this.FieldsSearchDeserializer<T, TResult>(r, s, request);
 		}

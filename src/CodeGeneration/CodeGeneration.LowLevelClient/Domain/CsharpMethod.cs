@@ -24,6 +24,8 @@ namespace CodeGeneration.LowLevelClient.Domain
 		public IEnumerable<ApiUrlPart> Parts { get; set; }
 		public ApiUrl Url { get; set; }
 
+		public bool SkipInterface { get; set; }
+
 		public static CsharpMethod Clone(CsharpMethod method)
 		{
 			return new CsharpMethod
@@ -46,7 +48,8 @@ namespace CodeGeneration.LowLevelClient.Domain
 				ReturnType = method.ReturnType,
 				ReturnTypeGeneric = method.ReturnTypeGeneric,
 				Unmapped = method.Unmapped,
-				Url = method.Url
+				Url = method.Url,
+				SkipInterface = method.SkipInterface
 			};
 		}
 

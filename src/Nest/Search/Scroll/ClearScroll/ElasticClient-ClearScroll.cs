@@ -48,7 +48,7 @@ namespace Nest
 				(p, d) => this.LowLevelDispatch.ClearScrollDispatchAsync<EmptyResponse>(p, PatchClearScroll(p))
 			);
 
-		private static string PatchClearScroll(RouteValues p)
+		private static string PatchClearScroll(IRequest<ClearScrollRequestParameters> p)
 		{
 			string body = null;
 			var scrollId = p.ScrollId;

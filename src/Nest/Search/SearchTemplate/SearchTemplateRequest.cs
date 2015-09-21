@@ -8,9 +8,7 @@ using System.Text;
 
 namespace Nest
 {
-
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface ISearchTemplateRequest : IRequest<SearchTemplateRequestParameters>
+	public partial interface ISearchTemplateRequest 
 	{
 		[JsonProperty("params")]
 		IDictionary<string, object> Params { get; set; }
@@ -31,13 +29,13 @@ namespace Nest
 
 	public interface ISearchTemplateRequest<T> : ISearchTemplateRequest { }
 
-    public partial class SearchTemplateRequest : RequestBase<SearchTemplateRequestParameters>, ISearchTemplateRequest
-    {
-        public SearchTemplateRequest() { }
-        public SearchTemplateRequest(Indices indices) : base(r => r.Optional(indices)) { }
-        public SearchTemplateRequest(Indices indices, Types types) : base(r => r.Optional(indices).Optional(types)) { }
+	public partial class SearchTemplateRequest : RequestBase<SearchTemplateRequestParameters>, ISearchTemplateRequest
+	{
+		public SearchTemplateRequest() { }
+		public SearchTemplateRequest(Indices indices) : base(r => r.Optional(indices)) { }
+		public SearchTemplateRequest(Indices indices, Types types) : base(r => r.Optional(indices).Optional(types)) { }
 
-        public string Template { get; set; }
+		public string Template { get; set; }
 		public string File { get; set; }
 		public string Id { get; set; }
 		public IDictionary<string, object> Params { get; set; }
@@ -45,13 +43,13 @@ namespace Nest
 		Type ISearchTemplateRequest.ClrType { get { return _clrType; } }
 		public Func<dynamic, Hit<dynamic>, Type> TypeSelector { get; set; }
 	}
-	
+
 	public partial class SearchTemplateRequest<T> : SearchTemplateRequest, ISearchTemplateRequest<T>
 		where T : class
 	{
-        public SearchTemplateRequest() { }
-        public SearchTemplateRequest(Indices indices) : base(indices) { }
-        public SearchTemplateRequest(Indices indices, Types types) : base(indices, types) { }
+		public SearchTemplateRequest() { }
+		public SearchTemplateRequest(Indices indices) : base(indices) { }
+		public SearchTemplateRequest(Indices indices, Types types) : base(indices, types) { }
 
 		public Type ClrType { get { return typeof(T); } }
 	}
