@@ -940,55 +940,6 @@ namespace Nest
 	}
 	
 	///<summary>Request parameters for Count <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-count.html</pre></summary>
-	public partial class CountRequest<T>  : RequestBase<CountRequestParameters>, ICountRequest
-	{
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
-		
-		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
-		
-		///<summary>Include only documents with a specific `_score` value in the result</summary>
-		public double MinScore { get { return Q<double>("min_score"); } set { Q("min_score", value); } }
-		
-		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
-		
-		///<summary>Specific routing value</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
-		
-		///<summary>Query in the Lucene query string syntax</summary>
-		public string Q { get { return Q<string>("q"); } set { Q("q", value); } }
-		
-		///<summary>The analyzer to use for the query string</summary>
-		public string Analyzer { get { return Q<string>("analyzer"); } set { Q("analyzer", value); } }
-		
-		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
-		public bool AnalyzeWildcard { get { return Q<bool>("analyze_wildcard"); } set { Q("analyze_wildcard", value); } }
-		
-		///<summary>The default operator for query string query (AND or OR)</summary>
-		public DefaultOperator DefaultOperator { get { return Q<DefaultOperator>("default_operator"); } set { Q("default_operator", value); } }
-		
-		///<summary>The field to use as default where no field prefix is given in the query string</summary>
-		public string Df { get { return Q<string>("df"); } set { Q("df", value); } }
-		
-		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
-		public bool Lenient { get { return Q<bool>("lenient"); } set { Q("lenient", value); } }
-		
-		///<summary>Specify whether query terms should be lowercased</summary>
-		public bool LowercaseExpandedTerms { get { return Q<bool>("lowercase_expanded_terms"); } set { Q("lowercase_expanded_terms", value); } }
-		
-		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
-	///<summary>Request parameters for Count <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-count.html</pre></summary>
 	public partial class CountRequest  : RequestBase<CountRequestParameters>, ICountRequest
 	{
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -1446,58 +1397,6 @@ namespace Nest
 	}
 	
 	///<summary>Request parameters for Explain <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-explain.html</pre></summary>
-	public partial class ExplainRequest<T>  : RequestBase<ExplainRequestParameters>, IExplainRequest
-	{
-		///<summary>Specify whether wildcards and prefix queries in the query string query should be analyzed (default: false)</summary>
-		public bool AnalyzeWildcard { get { return Q<bool>("analyze_wildcard"); } set { Q("analyze_wildcard", value); } }
-		
-		///<summary>The analyzer for the query string query</summary>
-		public string Analyzer { get { return Q<string>("analyzer"); } set { Q("analyzer", value); } }
-		
-		///<summary>The default operator for query string query (AND or OR)</summary>
-		public DefaultOperator DefaultOperator { get { return Q<DefaultOperator>("default_operator"); } set { Q("default_operator", value); } }
-		
-		///<summary>The default field for query string query (default: _all)</summary>
-		public string Df { get { return Q<string>("df"); } set { Q("df", value); } }
-		
-		///<summary>A comma-separated list of fields to return in the response</summary>
-		public IList<FieldName> Fields { get { return Q<IList<FieldName>>("fields"); } set { Q("fields", value); } }
-		
-		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
-		public bool Lenient { get { return Q<bool>("lenient"); } set { Q("lenient", value); } }
-		
-		///<summary>Specify whether query terms should be lowercased</summary>
-		public bool LowercaseExpandedTerms { get { return Q<bool>("lowercase_expanded_terms"); } set { Q("lowercase_expanded_terms", value); } }
-		
-		///<summary>The ID of the parent document</summary>
-		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
-		
-		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
-		
-		///<summary>Query in the Lucene query string syntax</summary>
-		public string Q { get { return Q<string>("q"); } set { Q("q", value); } }
-		
-		///<summary>Specific routing value</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
-		
-		///<summary>True or false to return the _source field or not, or a list of fields to return</summary>
-		public  string[] SourceEnabled { get { return Q< string[]>("_source"); } set { Q("_source", value); } }
-		
-		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public IList<FieldName> SourceExclude { get { return Q<IList<FieldName>>("_source_exclude"); } set { Q("_source_exclude", value); } }
-		
-		///<summary>A list of fields to extract and return from the _source field</summary>
-		public IList<FieldName> SourceInclude { get { return Q<IList<FieldName>>("_source_include"); } set { Q("_source_include", value); } }
-		
-		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
-	///<summary>Request parameters for Explain <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-explain.html</pre></summary>
 	public partial class ExplainRequest  : RequestBase<ExplainRequestParameters>, IExplainRequest
 	{
 		///<summary>Specify whether wildcards and prefix queries in the query string query should be analyzed (default: false)</summary>
@@ -1668,31 +1567,6 @@ namespace Nest
 	}
 	
 	///<summary>Request parameters for IndicesGetFieldMappingForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-field-mapping.html</pre></summary>
-	public partial class GetFieldMappingRequest<T>  : RequestBase<GetFieldMappingRequestParameters>, IGetFieldMappingRequest
-	{
-		///<summary>Whether the default mapping values should be returned as well</summary>
-		public bool IncludeDefaults { get { return Q<bool>("include_defaults"); } set { Q("include_defaults", value); } }
-		
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
-		
-		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
-		
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
-		
-		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
-	///<summary>Request parameters for IndicesGetFieldMappingForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-field-mapping.html</pre></summary>
 	public partial class GetFieldMappingRequest  : RequestBase<GetFieldMappingRequestParameters>, IGetFieldMappingRequest
 	{
 		///<summary>Whether the default mapping values should be returned as well</summary>
@@ -1791,28 +1665,6 @@ namespace Nest
 	{
 	}
 	
-	///<summary>Request parameters for IndicesGetMappingForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-mapping.html</pre></summary>
-	public partial class GetMappingRequest<T>  : RequestBase<GetMappingRequestParameters>, IGetMappingRequest
-	{
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
-		
-		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
-		
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
-		
-		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
 	///<summary>Request parameters for IndicesGetMappingForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-mapping.html</pre></summary>
 	public partial class GetMappingRequest  : RequestBase<GetMappingRequestParameters>, IGetMappingRequest
 	{
@@ -2889,55 +2741,6 @@ namespace Nest
 	}
 	
 	///<summary>Request parameters for SearchExists <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-exists.html</pre></summary>
-	public partial class SearchExistsRequest<T>  : RequestBase<SearchExistsRequestParameters>, ISearchExistsRequest
-	{
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
-		
-		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
-		
-		///<summary>Include only documents with a specific `_score` value in the result</summary>
-		public double MinScore { get { return Q<double>("min_score"); } set { Q("min_score", value); } }
-		
-		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
-		
-		///<summary>Specific routing value</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
-		
-		///<summary>Query in the Lucene query string syntax</summary>
-		public string Q { get { return Q<string>("q"); } set { Q("q", value); } }
-		
-		///<summary>The analyzer to use for the query string</summary>
-		public string Analyzer { get { return Q<string>("analyzer"); } set { Q("analyzer", value); } }
-		
-		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
-		public bool AnalyzeWildcard { get { return Q<bool>("analyze_wildcard"); } set { Q("analyze_wildcard", value); } }
-		
-		///<summary>The default operator for query string query (AND or OR)</summary>
-		public DefaultOperator DefaultOperator { get { return Q<DefaultOperator>("default_operator"); } set { Q("default_operator", value); } }
-		
-		///<summary>The field to use as default where no field prefix is given in the query string</summary>
-		public string Df { get { return Q<string>("df"); } set { Q("df", value); } }
-		
-		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
-		public bool Lenient { get { return Q<bool>("lenient"); } set { Q("lenient", value); } }
-		
-		///<summary>Specify whether query terms should be lowercased</summary>
-		public bool LowercaseExpandedTerms { get { return Q<bool>("lowercase_expanded_terms"); } set { Q("lowercase_expanded_terms", value); } }
-		
-		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
-	///<summary>Request parameters for SearchExists <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-exists.html</pre></summary>
 	public partial class SearchExistsRequest  : RequestBase<SearchExistsRequestParameters>, ISearchExistsRequest
 	{
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -2992,70 +2795,6 @@ namespace Nest
 	{
 	}
 	
-	///<summary>Request parameters for Search <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html</pre></summary>
-	public partial class SearchRequest<T>  : RequestBase<SearchRequestParameters>, ISearchRequest
-	{
-		///<summary>The analyzer to use for the query string</summary>
-		public string Analyzer { get { return Q<string>("analyzer"); } set { Q("analyzer", value); } }
-		
-		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
-		public bool AnalyzeWildcard { get { return Q<bool>("analyze_wildcard"); } set { Q("analyze_wildcard", value); } }
-		
-		///<summary>The default operator for query string query (AND or OR)</summary>
-		public DefaultOperator DefaultOperator { get { return Q<DefaultOperator>("default_operator"); } set { Q("default_operator", value); } }
-		
-		///<summary>The field to use as default where no field prefix is given in the query string</summary>
-		public string Df { get { return Q<string>("df"); } set { Q("df", value); } }
-		
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
-		
-		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
-		
-		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
-		public bool Lenient { get { return Q<bool>("lenient"); } set { Q("lenient", value); } }
-		
-		///<summary>Specify whether query terms should be lowercased</summary>
-		public bool LowercaseExpandedTerms { get { return Q<bool>("lowercase_expanded_terms"); } set { Q("lowercase_expanded_terms", value); } }
-		
-		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
-		
-		///<summary>A comma-separated list of specific routing values</summary>
-		public  string[] Routing { get { return Q< string[]>("routing"); } set { Q("routing", value); } }
-		
-		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
-		public string Scroll { get { return Q<string>("scroll"); } set { Q("scroll", value); } }
-		
-		///<summary>Search operation type</summary>
-		public SearchType SearchType { get { return Q<SearchType>("search_type"); } set { Q("search_type", value); } }
-		
-		///<summary>Specific &#39;tag&#39; of the request for logging and statistical purposes</summary>
-		public  string[] Stats { get { return Q< string[]>("stats"); } set { Q("stats", value); } }
-		
-		///<summary>Specify which field to use for suggestions</summary>
-		public FieldName SuggestField { get { return Q<FieldName>("suggest_field"); } set { Q("suggest_field", value); } }
-		
-		///<summary>Specify suggest mode</summary>
-		public SuggestMode SuggestMode { get { return Q<SuggestMode>("suggest_mode"); } set { Q("suggest_mode", value); } }
-		
-		///<summary>How many suggestions to return in response</summary>
-		public long SuggestSize { get { return Q<long>("suggest_size"); } set { Q("suggest_size", value); } }
-		
-		///<summary>The source text for which the suggestions should be returned</summary>
-		public string SuggestText { get { return Q<string>("suggest_text"); } set { Q("suggest_text", value); } }
-		
-		///<summary>Specify if request cache should be used for this request or not, defaults to index level setting</summary>
-		public bool RequestCache { get { return Q<bool>("request_cache"); } set { Q("request_cache", value); } }
-		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
 	///<summary>Request parameters for Search <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html</pre></summary>
 	public partial class SearchRequest  : RequestBase<SearchRequestParameters>, ISearchRequest
 	{
@@ -3126,34 +2865,6 @@ namespace Nest
 	{
 	}
 	
-	///<summary>Request parameters for SearchShards <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html</pre></summary>
-	public partial class SearchShardsRequest<T>  : RequestBase<SearchShardsRequestParameters>, ISearchShardsRequest
-	{
-		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
-		
-		///<summary>Specific routing value</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
-		
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
-		
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
-		
-		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
-		
-		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
 	///<summary>Request parameters for SearchShards <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html</pre></summary>
 	public partial class SearchShardsRequest  : RequestBase<SearchShardsRequestParameters>, ISearchShardsRequest
 	{
@@ -3462,55 +3173,6 @@ namespace Nest
 	}
 	
 	///<summary>Request parameters for Termvectors <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html</pre></summary>
-	public partial class TermVectorsRequest<T>  : RequestBase<TermVectorsRequestParameters>, ITermVectorsRequest
-	{
-		///<summary>Specifies if total term frequency and document frequency should be returned.</summary>
-		public bool TermStatistics { get { return Q<bool>("term_statistics"); } set { Q("term_statistics", value); } }
-		
-		///<summary>Specifies if document count, sum of document frequencies and sum of total term frequencies should be returned.</summary>
-		public bool FieldStatistics { get { return Q<bool>("field_statistics"); } set { Q("field_statistics", value); } }
-		
-		///<summary>Specifies if distributed frequencies should be returned instead shard frequencies.</summary>
-		public bool Dfs { get { return Q<bool>("dfs"); } set { Q("dfs", value); } }
-		
-		///<summary>A comma-separated list of fields to return.</summary>
-		public IList<FieldName> Fields { get { return Q<IList<FieldName>>("fields"); } set { Q("fields", value); } }
-		
-		///<summary>Specifies if term offsets should be returned.</summary>
-		public bool Offsets { get { return Q<bool>("offsets"); } set { Q("offsets", value); } }
-		
-		///<summary>Specifies if term positions should be returned.</summary>
-		public bool Positions { get { return Q<bool>("positions"); } set { Q("positions", value); } }
-		
-		///<summary>Specifies if term payloads should be returned.</summary>
-		public bool Payloads { get { return Q<bool>("payloads"); } set { Q("payloads", value); } }
-		
-		///<summary>Specify the node or shard the operation should be performed on (default: random).</summary>
-		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
-		
-		///<summary>Specific routing value.</summary>
-		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
-		
-		///<summary>Parent id of documents.</summary>
-		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
-		
-		///<summary>Specifies if request is real-time as opposed to near-real-time (default: true).</summary>
-		public bool Realtime { get { return Q<bool>("realtime"); } set { Q("realtime", value); } }
-		
-		///<summary>Explicit version number for concurrency control</summary>
-		public long Version { get { return Q<long>("version"); } set { Q("version", value); } }
-		
-		///<summary>Specific version type</summary>
-		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
-		
-		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
-	///<summary>Request parameters for Termvectors <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html</pre></summary>
 	public partial class TermVectorsRequest  : RequestBase<TermVectorsRequestParameters>, ITermVectorsRequest
 	{
 		///<summary>Specifies if total term frequency and document frequency should be returned.</summary>
@@ -3594,7 +3256,7 @@ namespace Nest
 	}
 	
 	///<summary>Request parameters for Update <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update.html</pre></summary>
-	public partial class UpdateRequest<TDocument,TPartialDocument>  : RequestBase<UpdateRequestParameters>, IUpdateRequest
+	public partial class UpdateRequest  : RequestBase<UpdateRequestParameters>, IUpdateRequest
 	{
 		///<summary>Explicit write consistency setting for the operation</summary>
 		public Consistency Consistency { get { return Q<Consistency>("consistency"); } set { Q("consistency", value); } }

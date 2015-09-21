@@ -49,6 +49,7 @@ namespace Nest
 		where TPartialDocument : class
 	{
 		public string Script { get; set; }
+		public string ScriptId { get; set; }
 		public string ScriptFile { get; set; }
 		public string Language { get; set; }
 		public Dictionary<string, object> Params { get; set; }

@@ -1724,34 +1724,31 @@ namespace Nest
 	}
 	
 	///<summary>descriptor for IndicesPutMapping <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html</pre></summary>
-	public partial class PutMappingDescriptor  : RequestDescriptorBase<PutMappingDescriptor,PutMappingRequestParameters, IPutMappingRequest>, IPutMappingRequest
+	public partial class PutMappingDescriptor<T>  : RequestDescriptorBase<PutMappingDescriptor<T>,PutMappingRequestParameters, IPutMappingRequest>, IPutMappingRequest
 	{
 		///<summary>Explicit operation timeout</summary>
-		public PutMappingDescriptor Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
+		public PutMappingDescriptor<T> Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
 
 		///<summary>Specify timeout for connection to master</summary>
-		public PutMappingDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
+		public PutMappingDescriptor<T> MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public PutMappingDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
+		public PutMappingDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
 
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public PutMappingDescriptor AllowNoIndices(bool allow_no_indices = true) => AssignParam(p=>p.AllowNoIndices(allow_no_indices));
+		public PutMappingDescriptor<T> AllowNoIndices(bool allow_no_indices = true) => AssignParam(p=>p.AllowNoIndices(allow_no_indices));
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public PutMappingDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => AssignParam(p=>p.ExpandWildcards(expand_wildcards));
+		public PutMappingDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards) => AssignParam(p=>p.ExpandWildcards(expand_wildcards));
 
 		///<summary>Whether to update the mapping for all fields with the same name across all types or not</summary>
-		public PutMappingDescriptor UpdateAllTypes(bool update_all_types = true) => AssignParam(p=>p.UpdateAllTypes(update_all_types));
+		public PutMappingDescriptor<T> UpdateAllTypes(bool update_all_types = true) => AssignParam(p=>p.UpdateAllTypes(update_all_types));
 
 		///<summary>The URL-encoded request definition</summary>
-		public PutMappingDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public PutMappingDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public PutMappingDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-
-		//TODO THIS METHOD IS UNMAPPED!
-		
+		public PutMappingDescriptor<T> FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -2803,55 +2800,55 @@ namespace Nest
 	}
 	
 	///<summary>descriptor for Update <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update.html</pre></summary>
-	public partial class UpdateDescriptor<TDocument,TPartialDocument>  : RequestDescriptorBase<UpdateDescriptor<TDocument,TPartialDocument>,UpdateRequestParameters, IUpdateRequest>, IUpdateRequest
+	public partial class UpdateDescriptor  : RequestDescriptorBase<UpdateDescriptor,UpdateRequestParameters, IUpdateRequest>, IUpdateRequest
 	{
 		///<summary>Explicit write consistency setting for the operation</summary>
-		public UpdateDescriptor<TDocument,TPartialDocument> Consistency(Consistency consistency) => AssignParam(p=>p.Consistency(consistency));
+		public UpdateDescriptor Consistency(Consistency consistency) => AssignParam(p=>p.Consistency(consistency));
 
 		///<summary>The script language (default: groovy)</summary>
-		public UpdateDescriptor<TDocument,TPartialDocument> Lang(string lang) => AssignParam(p=>p.Lang(lang));
+		public UpdateDescriptor Lang(string lang) => AssignParam(p=>p.Lang(lang));
 
 		///<summary>ID of the parent document. Is is only used for routing and when for the upsert request</summary>
-		public UpdateDescriptor<TDocument,TPartialDocument> Parent(string parent) => AssignParam(p=>p.Parent(parent));
+		public UpdateDescriptor Parent(string parent) => AssignParam(p=>p.Parent(parent));
 
 		///<summary>Refresh the index after performing the operation</summary>
-		public UpdateDescriptor<TDocument,TPartialDocument> Refresh(bool refresh = true) => AssignParam(p=>p.Refresh(refresh));
+		public UpdateDescriptor Refresh(bool refresh = true) => AssignParam(p=>p.Refresh(refresh));
 
 		///<summary>Specify how many times should the operation be retried when a conflict occurs (default: 0)</summary>
-		public UpdateDescriptor<TDocument,TPartialDocument> RetryOnConflict(long retry_on_conflict) => AssignParam(p=>p.RetryOnConflict(retry_on_conflict));
+		public UpdateDescriptor RetryOnConflict(long retry_on_conflict) => AssignParam(p=>p.RetryOnConflict(retry_on_conflict));
 
 		///<summary>Specific routing value</summary>
-		public UpdateDescriptor<TDocument,TPartialDocument> Routing(string routing) => AssignParam(p=>p.Routing(routing));
+		public UpdateDescriptor Routing(string routing) => AssignParam(p=>p.Routing(routing));
 
 		///<summary>The URL-encoded script definition (instead of using request body)</summary>
-		public UpdateDescriptor<TDocument,TPartialDocument> ScriptQueryString(string script) => AssignParam(p=>p.Script(script));
+		public UpdateDescriptor ScriptQueryString(string script) => AssignParam(p=>p.Script(script));
 
 		///<summary>The id of a stored script</summary>
-		public UpdateDescriptor<TDocument,TPartialDocument> ScriptId(string script_id) => AssignParam(p=>p.ScriptId(script_id));
+		public UpdateDescriptor ScriptId(string script_id) => AssignParam(p=>p.ScriptId(script_id));
 
 		///<summary>True if the script referenced in script or script_id should be called to perform inserts - defaults to false</summary>
-		public UpdateDescriptor<TDocument,TPartialDocument> ScriptedUpsert(bool scripted_upsert = true) => AssignParam(p=>p.ScriptedUpsert(scripted_upsert));
+		public UpdateDescriptor ScriptedUpsert(bool scripted_upsert = true) => AssignParam(p=>p.ScriptedUpsert(scripted_upsert));
 
 		///<summary>Explicit operation timeout</summary>
-		public UpdateDescriptor<TDocument,TPartialDocument> Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
+		public UpdateDescriptor Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
 
 		///<summary>Explicit timestamp for the document</summary>
-		public UpdateDescriptor<TDocument,TPartialDocument> Timestamp(string timestamp) => AssignParam(p=>p.Timestamp(timestamp));
+		public UpdateDescriptor Timestamp(string timestamp) => AssignParam(p=>p.Timestamp(timestamp));
 
 		///<summary>Expiration time for the document</summary>
-		public UpdateDescriptor<TDocument,TPartialDocument> Ttl(string ttl) => AssignParam(p=>p.Ttl(ttl));
+		public UpdateDescriptor Ttl(string ttl) => AssignParam(p=>p.Ttl(ttl));
 
 		///<summary>Explicit version number for concurrency control</summary>
-		public UpdateDescriptor<TDocument,TPartialDocument> Version(long version) => AssignParam(p=>p.Version(version));
+		public UpdateDescriptor Version(long version) => AssignParam(p=>p.Version(version));
 
 		///<summary>Specific version type</summary>
-		public UpdateDescriptor<TDocument,TPartialDocument> VersionType(VersionType version_type) => AssignParam(p=>p.VersionType(version_type));
+		public UpdateDescriptor VersionType(VersionType version_type) => AssignParam(p=>p.VersionType(version_type));
 
 		///<summary>The URL-encoded request definition</summary>
-		public UpdateDescriptor<TDocument,TPartialDocument> Source(string source) => AssignParam(p=>p.Source(source));
+		public UpdateDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public UpdateDescriptor<TDocument,TPartialDocument> FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		public UpdateDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 }

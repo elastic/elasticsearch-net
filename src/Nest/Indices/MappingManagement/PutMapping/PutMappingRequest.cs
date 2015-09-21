@@ -77,17 +77,60 @@ namespace Nest
 		public ITypeField TypeField { get; set; }
 	}
 
-	public partial class PutMappingRequest<T> : PutMappingRequest
+	public partial class PutMappingRequest<T> 
 		where T : class
 	{
 		//TODO constructors
+		/// <inheritdoc/>
+		public IAllField AllField { get; set; }
+		/// <inheritdoc/>
+		public IBoostField BoostField { get; set; }
+		/// <inheritdoc/>
+		public bool? DateDetection { get; set; }
+		/// <inheritdoc/>
+		public IEnumerable<string> DynamicDateFormats { get; set; }
+		/// <inheritdoc/>
+		public IDictionary<string, DynamicTemplate> DynamicTemplates { get; set; }
+		/// <inheritdoc/>
+		public DynamicMapping? Dynamic { get; set; }
+		/// <inheritdoc/>
+		public string Analyzer { get; set; }
+		/// <inheritdoc/>
+		public string SearchAnalyzer { get; set; }
+		/// <inheritdoc/>
+		public IFieldNamesField FieldNamesField { get; set; }
+		/// <inheritdoc/>
+		public IIdField IdField { get; set; }
+		/// <inheritdoc/>
+		public IIndexField IndexField { get; set; }
+		/// <inheritdoc/>
+		public FluentDictionary<string, object> Meta { get; set; }
+		/// <inheritdoc/>
+		public bool? NumericDetection { get; set; }
+		/// <inheritdoc/>
+		public IParentField ParentField { get; set; }
+		/// <inheritdoc/>
+		public IProperties Properties { get; set; }
+		/// <inheritdoc/>
+		public IRoutingField RoutingField { get; set; }
+		/// <inheritdoc/>
+		public ISizeField SizeField { get; set; }
+		/// <inheritdoc/>
+		public ISourceField SourceField { get; set; }
+		/// <inheritdoc/>
+		public ITimestampField TimestampField { get; set; }
+		/// <inheritdoc/>
+		public IList<IMappingTransform> Transform { get; set; }
+		/// <inheritdoc/>
+		public ITtlField TtlField { get; set; }
+		/// <inheritdoc/>
+		public ITypeField TypeField { get; set; }
 	}
 
 	//TODO why is there no typed generated descriptor
 
 	[DescriptorFor("IndicesPutMapping")]
-	public partial class PutMappingDescriptor<T> : RequestDescriptorBase<PutMappingDescriptor<T>, PutMappingRequestParameters>, IPutMappingRequest<T>
-		where T : class
+	public partial class PutMappingDescriptor<T> where T : class
 	{
 		public PutMappingDescriptor()
 			: base(p => p.Required(Types.Single<T>()))

@@ -20,20 +20,22 @@ namespace Nest
 		TDocument Document { get; set; }
 	}
 
-	public partial class IndexRequest<TDocument> where TDocument : class
+	public partial class IndexRequest<TDocument> : IIndexRequest<TDocument> 
+		where TDocument : class
 	{
 		object IIndexRequest.UntypedDocument => this.Document;
 
 		public TDocument Document { get; set; }
 	}
 	
-	public partial class IndexDescriptor<T> where T : class
+	public partial class IndexDescriptor<T> : IIndexRequest<T>
+		where T : class
 	{
 		object IIndexRequest.UntypedDocument => ((IIndexRequest<T>)this).Document;
 
 		T IIndexRequest<T>.Document { get; set; }
 
-		public IndexDescriptor<T> Document(T document) => Assign(a => a.Document = document);
+		public IndexDescriptor<T> Document(T document) => Assign(a => ((IIndexRequest<T>)this).Document = document);
 
 	}
 }

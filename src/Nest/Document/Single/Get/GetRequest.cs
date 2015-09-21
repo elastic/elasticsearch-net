@@ -9,14 +9,14 @@ namespace Nest
 	public partial interface IGetRequest { }
 	public interface IGetRequest<T> : IGetRequest where T : class { }
 
-	public partial class GetRequest : RequestBase<GetRequestParameters>, IGetRequest
+	public partial class GetRequest 
 	{
 		public GetRequest(IndexName index, TypeName type, Id id)
 			: base(p => p.Required(Indices.Single(index)).Required(Types.Single(type)).Required(Ids.Single(id)))
 		{ }
 	}
 
-	public partial class GetRequest<T> : GetRequest
+	public partial class GetRequest<T> 
 		where T : class
 	{
 		//TODO constructors
