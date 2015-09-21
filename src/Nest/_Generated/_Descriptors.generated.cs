@@ -15,6 +15,8 @@ namespace Nest
 	///<summary>descriptor for Bulk <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-bulk.html</pre></summary>
 	public partial class BulkDescriptor  : RequestDescriptorBase<BulkDescriptor,BulkRequestParameters, IBulkRequest>, IBulkRequest
 	{ 
+		IndexName IBulkRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		TypeName IBulkRequest.Type => Self.RouteValues.Get<TypeName>("type");
 	
 		///<summary>Explicit write consistency setting for the operation</summary>
 		public BulkDescriptor Consistency(Consistency consistency) => AssignParam(p=>p.Consistency(consistency));
@@ -49,6 +51,7 @@ namespace Nest
 	///<summary>descriptor for CatAliases <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-alias.html</pre></summary>
 	public partial class CatAliasesDescriptor  : RequestDescriptorBase<CatAliasesDescriptor,CatAliasesRequestParameters, ICatAliasesRequest>, ICatAliasesRequest
 	{ 
+		Names ICatAliasesRequest.Name => Self.RouteValues.Get<Names>("name");
 	
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatAliasesDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
@@ -76,6 +79,7 @@ namespace Nest
 	///<summary>descriptor for CatAllocation <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-allocation.html</pre></summary>
 	public partial class CatAllocationDescriptor  : RequestDescriptorBase<CatAllocationDescriptor,CatAllocationRequestParameters, ICatAllocationRequest>, ICatAllocationRequest
 	{ 
+		NodeIds ICatAllocationRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
 	
 		///<summary>The unit in which to display byte values</summary>
 		public CatAllocationDescriptor Bytes(Bytes bytes) => AssignParam(p=>p.Bytes(bytes));
@@ -106,6 +110,7 @@ namespace Nest
 	///<summary>descriptor for CatCount <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-count.html</pre></summary>
 	public partial class CatCountDescriptor  : RequestDescriptorBase<CatCountDescriptor,CatCountRequestParameters, ICatCountRequest>, ICatCountRequest
 	{ 
+		Indices ICatCountRequest.Index => Self.RouteValues.Get<Indices>("index");
 	
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatCountDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
@@ -218,6 +223,7 @@ namespace Nest
 	///<summary>descriptor for CatIndices <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-indices.html</pre></summary>
 	public partial class CatIndicesDescriptor  : RequestDescriptorBase<CatIndicesDescriptor,CatIndicesRequestParameters, ICatIndicesRequest>, ICatIndicesRequest
 	{ 
+		Indices ICatIndicesRequest.Index => Self.RouteValues.Get<Indices>("index");
 	
 		///<summary>The unit in which to display byte values</summary>
 		public CatIndicesDescriptor Bytes(Bytes bytes) => AssignParam(p=>p.Bytes(bytes));
@@ -389,6 +395,7 @@ namespace Nest
 	///<summary>descriptor for CatRecovery <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-recovery.html</pre></summary>
 	public partial class CatRecoveryDescriptor  : RequestDescriptorBase<CatRecoveryDescriptor,CatRecoveryRequestParameters, ICatRecoveryRequest>, ICatRecoveryRequest
 	{ 
+		Indices ICatRecoveryRequest.Index => Self.RouteValues.Get<Indices>("index");
 	
 		///<summary>The unit in which to display byte values</summary>
 		public CatRecoveryDescriptor Bytes(Bytes bytes) => AssignParam(p=>p.Bytes(bytes));
@@ -416,6 +423,7 @@ namespace Nest
 	///<summary>descriptor for CatSegments <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-segments.html</pre></summary>
 	public partial class CatSegmentsDescriptor  : RequestDescriptorBase<CatSegmentsDescriptor,CatSegmentsRequestParameters, ICatSegmentsRequest>, ICatSegmentsRequest
 	{ 
+		Indices ICatSegmentsRequest.Index => Self.RouteValues.Get<Indices>("index");
 	
 		///<summary>Comma-separated list of column names to display</summary>
 		public CatSegmentsDescriptor H(params string[] h) => AssignParam(p=>p.H(h));
@@ -437,6 +445,7 @@ namespace Nest
 	///<summary>descriptor for CatShards <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-shards.html</pre></summary>
 	public partial class CatShardsDescriptor  : RequestDescriptorBase<CatShardsDescriptor,CatShardsRequestParameters, ICatShardsRequest>, ICatShardsRequest
 	{ 
+		Indices ICatShardsRequest.Index => Self.RouteValues.Get<Indices>("index");
 	
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatShardsDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
@@ -528,6 +537,7 @@ namespace Nest
 	///<summary>descriptor for ClusterHealth <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-health.html</pre></summary>
 	public partial class ClusterHealthDescriptor  : RequestDescriptorBase<ClusterHealthDescriptor,ClusterHealthRequestParameters, IClusterHealthRequest>, IClusterHealthRequest
 	{ 
+		IndexName IClusterHealthRequest.Index => Self.RouteValues.Get<IndexName>("index");
 	
 		///<summary>Specify the level of detail for returned information</summary>
 		public ClusterHealthDescriptor Level(Level level) => AssignParam(p=>p.Level(level));
@@ -630,6 +640,8 @@ namespace Nest
 	///<summary>descriptor for ClusterState <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-state.html</pre></summary>
 	public partial class ClusterStateDescriptor  : RequestDescriptorBase<ClusterStateDescriptor,ClusterStateRequestParameters, IClusterStateRequest>, IClusterStateRequest
 	{ 
+		Indices IClusterStateRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Metrics IClusterStateRequest.Metric => Self.RouteValues.Get<Metrics>("metric");
 	
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public ClusterStateDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
@@ -660,6 +672,7 @@ namespace Nest
 	///<summary>descriptor for ClusterStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-stats.html</pre></summary>
 	public partial class ClusterStatsDescriptor  : RequestDescriptorBase<ClusterStatsDescriptor,ClusterStatsRequestParameters, IClusterStatsRequest>, IClusterStatsRequest
 	{ 
+		NodeIds IClusterStatsRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
 	
 		///<summary>Return settings in flat format (default: false)</summary>
 		public ClusterStatsDescriptor FlatSettings(bool flat_settings = true) => AssignParam(p=>p.FlatSettings(flat_settings));
@@ -678,6 +691,8 @@ namespace Nest
 	///<summary>descriptor for Count <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-count.html</pre></summary>
 	public partial class CountDescriptor<T>  : RequestDescriptorBase<CountDescriptor<T>,CountRequestParameters, ICountRequest>, ICountRequest
 	{ 
+		Indices ICountRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Types ICountRequest.Type => Self.RouteValues.Get<Types>("type");
 	
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public CountDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
@@ -731,6 +746,7 @@ namespace Nest
 	{ 
 		IndexName IPercolateCountRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		TypeName IPercolateCountRequest.Type => Self.RouteValues.Get<TypeName>("type");
+		Id IPercolateCountRequest.Id => Self.RouteValues.Get<Id>("id");
 	
 		///<summary>A comma-separated list of specific routing values</summary>
 		public PercolateCountDescriptor<T> Routing(params string[] routing) => AssignParam(p=>p.Routing(routing));
@@ -770,9 +786,9 @@ namespace Nest
 	///<summary>descriptor for Delete <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete.html</pre></summary>
 	public partial class DeleteDescriptor<T>  : RequestDescriptorBase<DeleteDescriptor<T>,DeleteRequestParameters, IDeleteRequest>, IDeleteRequest
 	{ 
+		Id IDeleteRequest.Id => Self.RouteValues.Get<Id>("id");
 		IndexName IDeleteRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		TypeName IDeleteRequest.Type => Self.RouteValues.Get<TypeName>("type");
-		Id IDeleteRequest.Id => Self.RouteValues.Get<Id>("id");
 	
 		///<summary>Specific write consistency setting for the operation</summary>
 		public DeleteDescriptor<T> Consistency(Consistency consistency) => AssignParam(p=>p.Consistency(consistency));
@@ -807,6 +823,7 @@ namespace Nest
 	public partial class DeleteByQueryDescriptor<T>  : RequestDescriptorBase<DeleteByQueryDescriptor<T>,DeleteByQueryRequestParameters, IDeleteByQueryRequest>, IDeleteByQueryRequest
 	{ 
 		Indices IDeleteByQueryRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Types IDeleteByQueryRequest.Type => Self.RouteValues.Get<Types>("type");
 	
 		///<summary>The analyzer to use for the query string</summary>
 		public DeleteByQueryDescriptor<T> Analyzer(string analyzer) => AssignParam(p=>p.Analyzer(analyzer));
@@ -846,8 +863,8 @@ namespace Nest
 	///<summary>descriptor for DeleteScript <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</pre></summary>
 	public partial class DeleteScriptDescriptor  : RequestDescriptorBase<DeleteScriptDescriptor,DeleteScriptRequestParameters, IDeleteScriptRequest>, IDeleteScriptRequest
 	{ 
-		Name IDeleteScriptRequest.Lang => Self.RouteValues.Get<Name>("lang");
 		Id IDeleteScriptRequest.Id => Self.RouteValues.Get<Id>("id");
+		Name IDeleteScriptRequest.Lang => Self.RouteValues.Get<Name>("lang");
 	
 		///<summary>Explicit version number for concurrency control</summary>
 		public DeleteScriptDescriptor Version(long version) => AssignParam(p=>p.Version(version));
@@ -885,9 +902,9 @@ namespace Nest
 	///<summary>descriptor for Exists <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
 	public partial class DocumentExistsDescriptor<T>  : RequestDescriptorBase<DocumentExistsDescriptor<T>,DocumentExistsRequestParameters, IDocumentExistsRequest>, IDocumentExistsRequest
 	{ 
+		Id IDocumentExistsRequest.Id => Self.RouteValues.Get<Id>("id");
 		IndexName IDocumentExistsRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		TypeName IDocumentExistsRequest.Type => Self.RouteValues.Get<TypeName>("type");
-		Id IDocumentExistsRequest.Id => Self.RouteValues.Get<Id>("id");
 	
 		///<summary>The ID of the parent document</summary>
 		public DocumentExistsDescriptor<T> Parent(string parent) => AssignParam(p=>p.Parent(parent));
@@ -915,9 +932,9 @@ namespace Nest
 	///<summary>descriptor for Explain <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-explain.html</pre></summary>
 	public partial class ExplainDescriptor<T>  : RequestDescriptorBase<ExplainDescriptor<T>,ExplainRequestParameters, IExplainRequest>, IExplainRequest
 	{ 
+		Id IExplainRequest.Id => Self.RouteValues.Get<Id>("id");
 		IndexName IExplainRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		TypeName IExplainRequest.Type => Self.RouteValues.Get<TypeName>("type");
-		Id IExplainRequest.Id => Self.RouteValues.Get<Id>("id");
 	
 		///<summary>Specify whether wildcards and prefix queries in the query string query should be analyzed (default: false)</summary>
 		public ExplainDescriptor<T> AnalyzeWildcard(bool analyze_wildcard = true) => AssignParam(p=>p.AnalyzeWildcard(analyze_wildcard));
@@ -984,6 +1001,7 @@ namespace Nest
 	///<summary>descriptor for FieldStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-stats.html</pre></summary>
 	public partial class FieldStatsDescriptor  : RequestDescriptorBase<FieldStatsDescriptor,FieldStatsRequestParameters, IFieldStatsRequest>, IFieldStatsRequest
 	{ 
+		Indices IFieldStatsRequest.Index => Self.RouteValues.Get<Indices>("index");
 	
 		///<summary>A comma-separated list of fields for to get field statistics for (min value, max value, and more)</summary>
 		public FieldStatsDescriptor Fields(params string[] fields) => AssignParam(p=>p.Fields(fields));
@@ -1015,9 +1033,9 @@ namespace Nest
 	///<summary>descriptor for Get <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
 	public partial class GetDescriptor<T>  : RequestDescriptorBase<GetDescriptor<T>,GetRequestParameters, IGetRequest>, IGetRequest
 	{ 
+		Id IGetRequest.Id => Self.RouteValues.Get<Id>("id");
 		IndexName IGetRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		TypeName IGetRequest.Type => Self.RouteValues.Get<TypeName>("type");
-		Id IGetRequest.Id => Self.RouteValues.Get<Id>("id");
 	
 		///<summary>A comma-separated list of fields to return in the response</summary>
 		public GetDescriptor<T> Fields(params string[] fields) => AssignParam(p=>p.Fields(fields));
@@ -1075,8 +1093,8 @@ namespace Nest
 	///<summary>descriptor for GetScript <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</pre></summary>
 	public partial class GetScriptDescriptor  : RequestDescriptorBase<GetScriptDescriptor,GetScriptRequestParameters, IGetScriptRequest>, IGetScriptRequest
 	{ 
-		Name IGetScriptRequest.Lang => Self.RouteValues.Get<Name>("lang");
 		Id IGetScriptRequest.Id => Self.RouteValues.Get<Id>("id");
+		Name IGetScriptRequest.Lang => Self.RouteValues.Get<Name>("lang");
 	
 		///<summary>Explicit version number for concurrency control</summary>
 		public GetScriptDescriptor Version(long version) => AssignParam(p=>p.Version(version));
@@ -1095,9 +1113,9 @@ namespace Nest
 	///<summary>descriptor for GetSource <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
 	public partial class SourceDescriptor<T>  : RequestDescriptorBase<SourceDescriptor<T>,SourceRequestParameters, ISourceRequest>, ISourceRequest
 	{ 
+		Id ISourceRequest.Id => Self.RouteValues.Get<Id>("id");
 		IndexName ISourceRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		TypeName ISourceRequest.Type => Self.RouteValues.Get<TypeName>("type");
-		Id ISourceRequest.Id => Self.RouteValues.Get<Id>("id");
 	
 		///<summary>The ID of the parent document</summary>
 		public SourceDescriptor<T> Parent(string parent) => AssignParam(p=>p.Parent(parent));
@@ -1167,6 +1185,7 @@ namespace Nest
 	///<summary>descriptor for Index <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</pre></summary>
 	public partial class IndexDescriptor<T>  : RequestDescriptorBase<IndexDescriptor<T>,IndexRequestParameters, IIndexRequest>, IIndexRequest
 	{ 
+		Id IIndexRequest.Id => Self.RouteValues.Get<Id>("id");
 		IndexName IIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		TypeName IIndexRequest.Type => Self.RouteValues.Get<TypeName>("type");
 	
@@ -1211,6 +1230,7 @@ namespace Nest
 	///<summary>descriptor for IndicesAnalyzeForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-analyze.html</pre></summary>
 	public partial class AnalyzeDescriptor  : RequestDescriptorBase<AnalyzeDescriptor,AnalyzeRequestParameters, IAnalyzeRequest>, IAnalyzeRequest
 	{ 
+		IndexName IAnalyzeRequest.Index => Self.RouteValues.Get<IndexName>("index");
 	
 		///<summary>The name of the analyzer to use</summary>
 		public AnalyzeDescriptor Analyzer(string analyzer) => AssignParam(p=>p.Analyzer(analyzer));
@@ -1254,6 +1274,7 @@ namespace Nest
 	///<summary>descriptor for IndicesClearCacheForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clearcache.html</pre></summary>
 	public partial class ClearCacheDescriptor  : RequestDescriptorBase<ClearCacheDescriptor,ClearCacheRequestParameters, IClearCacheRequest>, IClearCacheRequest
 	{ 
+		Indices IClearCacheRequest.Index => Self.RouteValues.Get<Indices>("index");
 	
 		///<summary>Clear field data</summary>
 		public ClearCacheDescriptor FieldData(bool field_data = true) => AssignParam(p=>p.FieldData(field_data));
@@ -1428,6 +1449,7 @@ namespace Nest
 	///<summary>descriptor for IndicesExistsAliasForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
 	public partial class AliasExistsDescriptor  : RequestDescriptorBase<AliasExistsDescriptor,AliasExistsRequestParameters, IAliasExistsRequest>, IAliasExistsRequest
 	{ 
+		Indices IAliasExistsRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Names IAliasExistsRequest.Name => Self.RouteValues.Get<Names>("name");
 	
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -1498,6 +1520,7 @@ namespace Nest
 	///<summary>descriptor for IndicesFlushForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-flush.html</pre></summary>
 	public partial class FlushDescriptor  : RequestDescriptorBase<FlushDescriptor,FlushRequestParameters, IFlushRequest>, IFlushRequest
 	{ 
+		Indices IFlushRequest.Index => Self.RouteValues.Get<Indices>("index");
 	
 		///<summary>Whether a flush should be forced even if it is not necessarily needed ie. if no changes will be committed to the index. This is useful if transaction log IDs should be incremented even if no uncommitted changes are present. (This setting can be considered as internal)</summary>
 		public FlushDescriptor Force(bool force = true) => AssignParam(p=>p.Force(force));
@@ -1525,6 +1548,7 @@ namespace Nest
 	///<summary>descriptor for IndicesFlushSyncedForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush.html</pre></summary>
 	public partial class SyncedFlushDescriptor  : RequestDescriptorBase<SyncedFlushDescriptor,SyncedFlushRequestParameters, ISyncedFlushRequest>, ISyncedFlushRequest
 	{ 
+		Indices ISyncedFlushRequest.Index => Self.RouteValues.Get<Indices>("index");
 	
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public SyncedFlushDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
@@ -1547,6 +1571,7 @@ namespace Nest
 	public partial class GetIndexDescriptor  : RequestDescriptorBase<GetIndexDescriptor,GetIndexRequestParameters, IGetIndexRequest>, IGetIndexRequest
 	{ 
 		Indices IGetIndexRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Feature IGetIndexRequest.Feature => Self.RouteValues.Get<Feature>("feature");
 	
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public GetIndexDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
@@ -1577,6 +1602,8 @@ namespace Nest
 	///<summary>descriptor for IndicesGetAliasForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
 	public partial class GetAliasDescriptor  : RequestDescriptorBase<GetAliasDescriptor,GetAliasRequestParameters, IGetAliasRequest>, IGetAliasRequest
 	{ 
+		Indices IGetAliasRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Names IGetAliasRequest.Name => Self.RouteValues.Get<Names>("name");
 	
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public GetAliasDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
@@ -1601,6 +1628,8 @@ namespace Nest
 	///<summary>descriptor for IndicesGetAliasesForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
 	public partial class GetAliasesDescriptor  : RequestDescriptorBase<GetAliasesDescriptor,GetAliasesRequestParameters, IGetAliasesRequest>, IGetAliasesRequest
 	{ 
+		Indices IGetAliasesRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Names IGetAliasesRequest.Name => Self.RouteValues.Get<Names>("name");
 	
 		///<summary>Explicit operation timeout</summary>
 		public GetAliasesDescriptor Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
@@ -1619,6 +1648,8 @@ namespace Nest
 	///<summary>descriptor for IndicesGetFieldMappingForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-field-mapping.html</pre></summary>
 	public partial class GetFieldMappingDescriptor<T>  : RequestDescriptorBase<GetFieldMappingDescriptor<T>,GetFieldMappingRequestParameters, IGetFieldMappingRequest>, IGetFieldMappingRequest
 	{ 
+		Indices IGetFieldMappingRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Types IGetFieldMappingRequest.Type => Self.RouteValues.Get<Types>("type");
 		PropertyNames IGetFieldMappingRequest.Field => Self.RouteValues.Get<PropertyNames>("field");
 	
 		///<summary>Whether the default mapping values should be returned as well</summary>
@@ -1647,6 +1678,8 @@ namespace Nest
 	///<summary>descriptor for IndicesGetMappingForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-mapping.html</pre></summary>
 	public partial class GetMappingDescriptor<T>  : RequestDescriptorBase<GetMappingDescriptor<T>,GetMappingRequestParameters, IGetMappingRequest>, IGetMappingRequest
 	{ 
+		Indices IGetMappingRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Types IGetMappingRequest.Type => Self.RouteValues.Get<Types>("type");
 	
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public GetMappingDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
@@ -1671,6 +1704,8 @@ namespace Nest
 	///<summary>descriptor for IndicesGetSettingsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-settings.html</pre></summary>
 	public partial class GetIndexSettingsDescriptor  : RequestDescriptorBase<GetIndexSettingsDescriptor,GetIndexSettingsRequestParameters, IGetIndexSettingsRequest>, IGetIndexSettingsRequest
 	{ 
+		Indices IGetIndexSettingsRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Names IGetIndexSettingsRequest.Name => Self.RouteValues.Get<Names>("name");
 	
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public GetIndexSettingsDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
@@ -1701,6 +1736,7 @@ namespace Nest
 	///<summary>descriptor for IndicesGetUpgradeForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</pre></summary>
 	public partial class UpgradeStatusDescriptor  : RequestDescriptorBase<UpgradeStatusDescriptor,UpgradeStatusRequestParameters, IUpgradeStatusRequest>, IUpgradeStatusRequest
 	{ 
+		Indices IUpgradeStatusRequest.Index => Self.RouteValues.Get<Indices>("index");
 	
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public UpgradeStatusDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
@@ -1725,6 +1761,9 @@ namespace Nest
 	///<summary>descriptor for IndicesGetWarmerForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-warmers.html</pre></summary>
 	public partial class GetWarmerDescriptor  : RequestDescriptorBase<GetWarmerDescriptor,GetWarmerRequestParameters, IGetWarmerRequest>, IGetWarmerRequest
 	{ 
+		Indices IGetWarmerRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Names IGetWarmerRequest.Name => Self.RouteValues.Get<Names>("name");
+		Types IGetWarmerRequest.Type => Self.RouteValues.Get<Types>("type");
 	
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public GetWarmerDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
@@ -1777,6 +1816,7 @@ namespace Nest
 	///<summary>descriptor for IndicesOptimizeForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-optimize.html</pre></summary>
 	public partial class OptimizeDescriptor  : RequestDescriptorBase<OptimizeDescriptor,OptimizeRequestParameters, IOptimizeRequest>, IOptimizeRequest
 	{ 
+		Indices IOptimizeRequest.Index => Self.RouteValues.Get<Indices>("index");
 	
 		///<summary>Specify whether the index should be flushed after performing the operation (default: true)</summary>
 		public OptimizeDescriptor Flush(bool flush = true) => AssignParam(p=>p.Flush(flush));
@@ -1865,6 +1905,7 @@ namespace Nest
 	///<summary>descriptor for IndicesPutSettingsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-update-settings.html</pre></summary>
 	public partial class UpdateSettingsDescriptor  : RequestDescriptorBase<UpdateSettingsDescriptor,UpdateSettingsRequestParameters, IUpdateSettingsRequest>, IUpdateSettingsRequest
 	{ 
+		Indices IUpdateSettingsRequest.Index => Self.RouteValues.Get<Indices>("index");
 	
 		///<summary>Specify timeout for connection to master</summary>
 		public UpdateSettingsDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
@@ -1917,7 +1958,9 @@ namespace Nest
 	///<summary>descriptor for IndicesPutWarmerForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-warmers.html</pre></summary>
 	public partial class PutWarmerDescriptor  : RequestDescriptorBase<PutWarmerDescriptor,PutWarmerRequestParameters, IPutWarmerRequest>, IPutWarmerRequest
 	{ 
+		Indices IPutWarmerRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Name IPutWarmerRequest.Name => Self.RouteValues.Get<Name>("name");
+		Types IPutWarmerRequest.Type => Self.RouteValues.Get<Types>("type");
 	
 		///<summary>Specify timeout for connection to master</summary>
 		public PutWarmerDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
@@ -1945,6 +1988,7 @@ namespace Nest
 	///<summary>descriptor for IndicesRecoveryForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-recovery.html</pre></summary>
 	public partial class RecoveryStatusDescriptor  : RequestDescriptorBase<RecoveryStatusDescriptor,RecoveryStatusRequestParameters, IRecoveryStatusRequest>, IRecoveryStatusRequest
 	{ 
+		Indices IRecoveryStatusRequest.Index => Self.RouteValues.Get<Indices>("index");
 	
 		///<summary>Whether to display detailed information about shard recovery</summary>
 		public RecoveryStatusDescriptor Detailed(bool detailed = true) => AssignParam(p=>p.Detailed(detailed));
@@ -1966,6 +2010,7 @@ namespace Nest
 	///<summary>descriptor for IndicesRefreshForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-refresh.html</pre></summary>
 	public partial class RefreshDescriptor  : RequestDescriptorBase<RefreshDescriptor,RefreshRequestParameters, IRefreshRequest>, IRefreshRequest
 	{ 
+		Indices IRefreshRequest.Index => Self.RouteValues.Get<Indices>("index");
 	
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public RefreshDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
@@ -1993,6 +2038,7 @@ namespace Nest
 	///<summary>descriptor for IndicesSegmentsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-segments.html</pre></summary>
 	public partial class SegmentsDescriptor  : RequestDescriptorBase<SegmentsDescriptor,SegmentsRequestParameters, ISegmentsRequest>, ISegmentsRequest
 	{ 
+		Indices ISegmentsRequest.Index => Self.RouteValues.Get<Indices>("index");
 	
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public SegmentsDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
@@ -2020,6 +2066,7 @@ namespace Nest
 	///<summary>descriptor for IndicesShardStoresForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shards-stores.html</pre></summary>
 	public partial class IndicesShardStoresDescriptor  : RequestDescriptorBase<IndicesShardStoresDescriptor,IndicesShardStoresRequestParameters, IIndicesShardStoresRequest>, IIndicesShardStoresRequest
 	{ 
+		Indices IIndicesShardStoresRequest.Index => Self.RouteValues.Get<Indices>("index");
 	
 		///<summary>A comma-separated list of statuses used to filter on shards to get store information for</summary>
 		public IndicesShardStoresDescriptor Status(params string[] status) => AssignParam(p=>p.Status(status));
@@ -2050,6 +2097,8 @@ namespace Nest
 	///<summary>descriptor for IndicesStatsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-stats.html</pre></summary>
 	public partial class IndicesStatsDescriptor  : RequestDescriptorBase<IndicesStatsDescriptor,IndicesStatsRequestParameters, IIndicesStatsRequest>, IIndicesStatsRequest
 	{ 
+		Indices IIndicesStatsRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Metrics IIndicesStatsRequest.Metric => Self.RouteValues.Get<Metrics>("metric");
 	
 		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
 		public IndicesStatsDescriptor CompletionFields(params string[] completion_fields) => AssignParam(p=>p.CompletionFields(completion_fields));
@@ -2110,6 +2159,7 @@ namespace Nest
 	///<summary>descriptor for IndicesUpgradeForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</pre></summary>
 	public partial class UpgradeDescriptor  : RequestDescriptorBase<UpgradeDescriptor,UpgradeRequestParameters, IUpgradeRequest>, IUpgradeRequest
 	{ 
+		Indices IUpgradeRequest.Index => Self.RouteValues.Get<Indices>("index");
 	
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public UpgradeDescriptor AllowNoIndices(bool allow_no_indices = true) => AssignParam(p=>p.AllowNoIndices(allow_no_indices));
@@ -2137,6 +2187,8 @@ namespace Nest
 	///<summary>descriptor for IndicesValidateQueryForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html</pre></summary>
 	public partial class ValidateQueryDescriptor<T>  : RequestDescriptorBase<ValidateQueryDescriptor<T>,ValidateQueryRequestParameters, IValidateQueryRequest>, IValidateQueryRequest
 	{ 
+		Indices IValidateQueryRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Types IValidateQueryRequest.Type => Self.RouteValues.Get<Types>("type");
 	
 		///<summary>Return detailed information about the error</summary>
 		public ValidateQueryDescriptor<T> Explain(bool explain = true) => AssignParam(p=>p.Explain(explain));
@@ -2200,6 +2252,8 @@ namespace Nest
 	///<summary>descriptor for Mget <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-get.html</pre></summary>
 	public partial class MultiGetDescriptor  : RequestDescriptorBase<MultiGetDescriptor,MultiGetRequestParameters, IMultiGetRequest>, IMultiGetRequest
 	{ 
+		IndexName IMultiGetRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		TypeName IMultiGetRequest.Type => Self.RouteValues.Get<TypeName>("type");
 	
 		///<summary>A comma-separated list of fields to return in the response</summary>
 		public MultiGetDescriptor Fields(params string[] fields) => AssignParam(p=>p.Fields(fields));
@@ -2245,6 +2299,8 @@ namespace Nest
 	///<summary>descriptor for Mpercolate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-percolate.html</pre></summary>
 	public partial class MultiPercolateDescriptor  : RequestDescriptorBase<MultiPercolateDescriptor,MultiPercolateRequestParameters, IMultiPercolateRequest>, IMultiPercolateRequest
 	{ 
+		IndexName IMultiPercolateRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		TypeName IMultiPercolateRequest.Type => Self.RouteValues.Get<TypeName>("type");
 	
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public MultiPercolateDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
@@ -2266,6 +2322,8 @@ namespace Nest
 	///<summary>descriptor for Msearch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-multi-search.html</pre></summary>
 	public partial class MultiSearchDescriptor  : RequestDescriptorBase<MultiSearchDescriptor,MultiSearchRequestParameters, IMultiSearchRequest>, IMultiSearchRequest
 	{ 
+		Indices IMultiSearchRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Types IMultiSearchRequest.Type => Self.RouteValues.Get<Types>("type");
 	
 		///<summary>Search operation type</summary>
 		public MultiSearchDescriptor SearchType(SearchType search_type) => AssignParam(p=>p.SearchType(search_type));
@@ -2281,6 +2339,8 @@ namespace Nest
 	///<summary>descriptor for Mtermvectors <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html</pre></summary>
 	public partial class MultiTermVectorsDescriptor<T>  : RequestDescriptorBase<MultiTermVectorsDescriptor<T>,MultiTermVectorsRequestParameters, IMultiTermVectorsRequest>, IMultiTermVectorsRequest
 	{ 
+		IndexName IMultiTermVectorsRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		TypeName IMultiTermVectorsRequest.Type => Self.RouteValues.Get<TypeName>("type");
 	
 		///<summary>Specifies if total term frequency and document frequency should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
 		public MultiTermVectorsDescriptor<T> TermStatistics(bool term_statistics = true) => AssignParam(p=>p.TermStatistics(term_statistics));
@@ -2333,6 +2393,7 @@ namespace Nest
 	///<summary>descriptor for NodesHotThreadsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-hot-threads.html</pre></summary>
 	public partial class NodesHotThreadsDescriptor  : RequestDescriptorBase<NodesHotThreadsDescriptor,NodesHotThreadsRequestParameters, INodesHotThreadsRequest>, INodesHotThreadsRequest
 	{ 
+		NodeIds INodesHotThreadsRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
 	
 		///<summary>The interval for the second sampling of threads</summary>
 		public NodesHotThreadsDescriptor Interval(string interval) => AssignParam(p=>p.Interval(interval));
@@ -2360,6 +2421,8 @@ namespace Nest
 	///<summary>descriptor for NodesInfoForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-info.html</pre></summary>
 	public partial class NodesInfoDescriptor  : RequestDescriptorBase<NodesInfoDescriptor,NodesInfoRequestParameters, INodesInfoRequest>, INodesInfoRequest
 	{ 
+		NodeIds INodesInfoRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
+		Metrics INodesInfoRequest.Metric => Self.RouteValues.Get<Metrics>("metric");
 	
 		///<summary>Return settings in flat format (default: false)</summary>
 		public NodesInfoDescriptor FlatSettings(bool flat_settings = true) => AssignParam(p=>p.FlatSettings(flat_settings));
@@ -2378,6 +2441,9 @@ namespace Nest
 	///<summary>descriptor for NodesStatsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-stats.html</pre></summary>
 	public partial class NodesStatsDescriptor  : RequestDescriptorBase<NodesStatsDescriptor,NodesStatsRequestParameters, INodesStatsRequest>, INodesStatsRequest
 	{ 
+		Metrics INodesStatsRequest.Metric => Self.RouteValues.Get<Metrics>("metric");
+		Metrics INodesStatsRequest.IndexMetric => Self.RouteValues.Get<Metrics>("index_metric");
+		NodeIds INodesStatsRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
 	
 		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
 		public NodesStatsDescriptor CompletionFields(params string[] completion_fields) => AssignParam(p=>p.CompletionFields(completion_fields));
@@ -2425,6 +2491,7 @@ namespace Nest
 	{ 
 		IndexName IPercolateRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		TypeName IPercolateRequest.Type => Self.RouteValues.Get<TypeName>("type");
+		Id IPercolateRequest.Id => Self.RouteValues.Get<Id>("id");
 	
 		///<summary>A comma-separated list of specific routing values</summary>
 		public PercolateDescriptor<T> Routing(params string[] routing) => AssignParam(p=>p.Routing(routing));
@@ -2485,8 +2552,8 @@ namespace Nest
 	///<summary>descriptor for PutScript <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</pre></summary>
 	public partial class PutScriptDescriptor  : RequestDescriptorBase<PutScriptDescriptor,PutScriptRequestParameters, IPutScriptRequest>, IPutScriptRequest
 	{ 
-		Name IPutScriptRequest.Lang => Self.RouteValues.Get<Name>("lang");
 		Id IPutScriptRequest.Id => Self.RouteValues.Get<Id>("id");
+		Name IPutScriptRequest.Lang => Self.RouteValues.Get<Name>("lang");
 	
 		///<summary>Explicit operation type</summary>
 		public PutScriptDescriptor OpType(OpType op_type) => AssignParam(p=>p.OpType(op_type));
@@ -2508,6 +2575,7 @@ namespace Nest
 	///<summary>descriptor for RenderSearchTemplate <pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</pre></summary>
 	public partial class RenderSearchTemplateDescriptor  : RequestDescriptorBase<RenderSearchTemplateDescriptor,RenderSearchTemplateRequestParameters, IRenderSearchTemplateRequest>, IRenderSearchTemplateRequest
 	{ 
+		Id IRenderSearchTemplateRequest.Id => Self.RouteValues.Get<Id>("id");
 	
 		///<summary>The URL-encoded request definition</summary>
 		public RenderSearchTemplateDescriptor Source(string source) => AssignParam(p=>p.Source(source));
@@ -2523,6 +2591,7 @@ namespace Nest
 	///<summary>descriptor for Scroll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</pre></summary>
 	public partial class ScrollDescriptor<T>  : RequestDescriptorBase<ScrollDescriptor<T>,ScrollRequestParameters, IScrollRequest>, IScrollRequest
 	{ 
+		ScrollId IScrollRequest.ScrollId => Self.RouteValues.Get<ScrollId>("scroll_id");
 	
 		///<summary>The URL-encoded request definition</summary>
 		public ScrollDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
@@ -2535,6 +2604,8 @@ namespace Nest
 	///<summary>descriptor for Search <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html</pre></summary>
 	public partial class SearchDescriptor<T>  : RequestDescriptorBase<SearchDescriptor<T>,SearchRequestParameters, ISearchRequest>, ISearchRequest
 	{ 
+		Indices ISearchRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Types ISearchRequest.Type => Self.RouteValues.Get<Types>("type");
 	
 		///<summary>The analyzer to use for the query string</summary>
 		public SearchDescriptor<T> Analyzer(string analyzer) => AssignParam(p=>p.Analyzer(analyzer));
@@ -2605,6 +2676,8 @@ namespace Nest
 	///<summary>descriptor for SearchExists <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-exists.html</pre></summary>
 	public partial class SearchExistsDescriptor<T>  : RequestDescriptorBase<SearchExistsDescriptor<T>,SearchExistsRequestParameters, ISearchExistsRequest>, ISearchExistsRequest
 	{ 
+		Indices ISearchExistsRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Types ISearchExistsRequest.Type => Self.RouteValues.Get<Types>("type");
 	
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public SearchExistsDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
@@ -2656,6 +2729,8 @@ namespace Nest
 	///<summary>descriptor for SearchShards <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html</pre></summary>
 	public partial class SearchShardsDescriptor<T>  : RequestDescriptorBase<SearchShardsDescriptor<T>,SearchShardsRequestParameters, ISearchShardsRequest>, ISearchShardsRequest
 	{ 
+		Indices ISearchShardsRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Types ISearchShardsRequest.Type => Self.RouteValues.Get<Types>("type");
 	
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public SearchShardsDescriptor<T> Preference(string preference) => AssignParam(p=>p.Preference(preference));
@@ -2686,6 +2761,8 @@ namespace Nest
 	///<summary>descriptor for SearchTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html</pre></summary>
 	public partial class SearchTemplateDescriptor<T>  : RequestDescriptorBase<SearchTemplateDescriptor<T>,SearchTemplateRequestParameters, ISearchTemplateRequest>, ISearchTemplateRequest
 	{ 
+		Indices ISearchTemplateRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Types ISearchTemplateRequest.Type => Self.RouteValues.Get<Types>("type");
 	
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public SearchTemplateDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
@@ -2814,6 +2891,7 @@ namespace Nest
 	///<summary>descriptor for SnapshotGetRepository <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class GetRepositoryDescriptor  : RequestDescriptorBase<GetRepositoryDescriptor,GetRepositoryRequestParameters, IGetRepositoryRequest>, IGetRepositoryRequest
 	{ 
+		Names IGetRepositoryRequest.RepositoryName => Self.RouteValues.Get<Names>("repository");
 	
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public GetRepositoryDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
@@ -2852,6 +2930,8 @@ namespace Nest
 	///<summary>descriptor for SnapshotStatus <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class SnapshotStatusDescriptor  : RequestDescriptorBase<SnapshotStatusDescriptor,SnapshotStatusRequestParameters, ISnapshotStatusRequest>, ISnapshotStatusRequest
 	{ 
+		Name ISnapshotStatusRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
+		Names ISnapshotStatusRequest.Snapshot => Self.RouteValues.Get<Names>("snapshot");
 	
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public SnapshotStatusDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
@@ -2886,6 +2966,7 @@ namespace Nest
 	///<summary>descriptor for Suggest <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-suggesters.html</pre></summary>
 	public partial class SuggestDescriptor<T>  : RequestDescriptorBase<SuggestDescriptor<T>,SuggestRequestParameters, ISuggestRequest>, ISuggestRequest
 	{ 
+		Indices ISuggestRequest.Index => Self.RouteValues.Get<Indices>("index");
 	
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public SuggestDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
@@ -2915,6 +2996,7 @@ namespace Nest
 	{ 
 		IndexName ITermVectorsRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		TypeName ITermVectorsRequest.Type => Self.RouteValues.Get<TypeName>("type");
+		Id ITermVectorsRequest.Id => Self.RouteValues.Get<Id>("id");
 	
 		///<summary>Specifies if total term frequency and document frequency should be returned.</summary>
 		public TermVectorsDescriptor<T> TermStatistics(bool term_statistics = true) => AssignParam(p=>p.TermStatistics(term_statistics));
@@ -2970,9 +3052,9 @@ namespace Nest
 	///<summary>descriptor for Update <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update.html</pre></summary>
 	public partial class UpdateDescriptor  : RequestDescriptorBase<UpdateDescriptor,UpdateRequestParameters, IUpdateRequest>, IUpdateRequest
 	{ 
+		Id IUpdateRequest.Id => Self.RouteValues.Get<Id>("id");
 		IndexName IUpdateRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		TypeName IUpdateRequest.Type => Self.RouteValues.Get<TypeName>("type");
-		Id IUpdateRequest.Id => Self.RouteValues.Get<Id>("id");
 	
 		///<summary>Explicit write consistency setting for the operation</summary>
 		public UpdateDescriptor Consistency(Consistency consistency) => AssignParam(p=>p.Consistency(consistency));

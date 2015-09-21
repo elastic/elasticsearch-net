@@ -29,10 +29,6 @@ namespace Nest
 
 	public partial class SearchTemplateRequest 
 	{
-		public SearchTemplateRequest() { }
-		public SearchTemplateRequest(Indices indices) : base(r => r.Optional(indices)) { }
-		public SearchTemplateRequest(Indices indices, Types types) : base(r => r.Optional(indices).Optional(types)) { }
-
 		public string Template { get; set; }
 		public string File { get; set; }
 		public string Id { get; set; }

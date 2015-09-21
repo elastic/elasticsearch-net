@@ -36,7 +36,7 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface I@(method.RequestType) : IRequest@(Raw(string.Format("<{0}>", method.QueryStringParamName))) 
 	{</text>
-	foreach (ApiUrlPart part in method.Parts.Where(p=>p.Name != "body"))
+	foreach (ApiUrlPart part in method.AllParts.Where(p=>!ApiUrl.BlackListRouteValues.Contains(p.Name)))
 	{
 		<text>@(Raw(part.ClrTypeName)) @(part.InterfaceName) { get; }</text>
 	}
@@ -45,7 +45,7 @@ namespace Nest
 	<text>///<summary>Request parameters for @method.FullName <pre>@method.Documentation</pre></summary>
 	public partial class @Raw(method.RequestType + method.RequestTypeGeneric) @Raw(string.Format(" : RequestBase<{0}>, I{1}", method.QueryStringParamName, method.RequestType))
 	{
-	@foreach (ApiUrlPart part in method.Parts.Where(p=>p.Name != "body"))
+	@foreach (ApiUrlPart part in method.AllParts.Where(p=>!ApiUrl.BlackListRouteValues.Contains(p.Name)))
 	{
 	<text>	@(Raw(part.ClrTypeName)) I@(Raw(method.RequestType)).@(part.InterfaceName) => Self.RouteValues.Get@(Raw(string.Format("<{0}>",part.ClrTypeName)))("@(part.Name)");</text>
 	}

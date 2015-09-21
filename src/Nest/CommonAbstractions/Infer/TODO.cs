@@ -16,6 +16,38 @@ namespace Nest
 		}
 	}
 
+	public class NodeIds : IUrlParameter
+	{
+		public string GetString(IConnectionConfigurationValues settings)
+		{
+			throw new NotImplementedException();
+		}
+	}
+
+	public class Metrics : IUrlParameter
+	{
+		public string GetString(IConnectionConfigurationValues settings)
+		{
+			throw new NotImplementedException();
+		}
+	}
+
+	public class Features : IUrlParameter
+	{
+		public string GetString(IConnectionConfigurationValues settings)
+		{
+			throw new NotImplementedException();
+		}
+	}
+
+	public class Feature : IUrlParameter
+	{
+		public string GetString(IConnectionConfigurationValues settings)
+		{
+			throw new NotImplementedException();
+		}
+	}
+
 	public class Names : IUrlParameter
 	{
 		public string GetString(IConnectionConfigurationValues settings)

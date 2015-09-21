@@ -19,6 +19,7 @@ namespace CodeGeneration.LowLevelClient
 		private static Regex _removePunctuationExceptFirstUnderScore = new Regex(@"(?!^_(?!All$))[_\.]");
 		public static string ToPascalCase(this string s)
 		{
+			if (string.IsNullOrEmpty(s)) return s;
 			var textInfo = new CultureInfo("en-US").TextInfo;
 			var titleCased = textInfo.ToTitleCase(s.ToLowerInvariant());
 			return _removePunctuationExceptFirstUnderScore.Replace(titleCased, "");

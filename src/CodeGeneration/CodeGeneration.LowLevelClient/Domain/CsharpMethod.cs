@@ -62,7 +62,9 @@ namespace CodeGeneration.LowLevelClient.Domain
 			foreach (var url in this.Url.Paths)
 			{
 				var m = this.RequestType;
-				var cp = this.Url.Parts.Where(p => url.Contains($"{{{p.Value.Name}}}"))
+				var cp = this.Url.Parts
+					.Where(p=>!ApiUrl.BlackListRouteValues.Contains(p.Key))
+					.Where(p => url.Contains($"{{{p.Value.Name}}}"))
 					.OrderBy(kv => url.IndexOf($"{{{kv.Value.Name}}}", StringComparison.Ordinal));
 				var par = string.Join(", ", cp.Select(p => $"{p.Value.ClrTypeName} {p.Key}"));
 				var routing = string.Empty;
@@ -74,5 +76,6 @@ namespace CodeGeneration.LowLevelClient.Domain
 		}
 
 
+		public IEnumerable<ApiUrlPart> AllParts => (this.Url?.Parts?.Values ?? Enumerable.Empty<ApiUrlPart>()).Where(p=>!string.IsNullOrWhiteSpace(p.Name));
 	}
 }
