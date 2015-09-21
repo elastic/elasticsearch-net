@@ -7,6 +7,7 @@ namespace CodeGeneration.LowLevelClient.Domain
 		public string Name { get; set; }
 		public string Type { get; set; }
 		public string Description { get; set; }
+		public bool Required { get; set; }
 		public IEnumerable<string> Options { get; set; }
 
 		public string ClrTypeName

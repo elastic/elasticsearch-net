@@ -47,7 +47,11 @@ namespace Nest
 	{
 	@foreach (ApiUrlPart part in method.Parts.Where(p=>p.Name != "body"))
 	{
-		<text>@(Raw(part.ClrTypeName)) I@(Raw(method.RequestType)).@(part.InterfaceName) => Self.RouteValues.Get@(Raw(string.Format("<{0}>",part.ClrTypeName)))("@(part.Name)");</text>
+	<text>	@(Raw(part.ClrTypeName)) I@(Raw(method.RequestType)).@(part.InterfaceName) => Self.RouteValues.Get@(Raw(string.Format("<{0}>",part.ClrTypeName)))("@(part.Name)");</text>
+	}
+	@foreach (string c in method.RequestConstructors())
+	{
+	<text>	@(Raw(c))</text>
 	}
 	@foreach (KeyValuePair<string, ApiQueryParameters> kv in method.Url.Params)
 	{

@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CodeGeneration.LowLevelClient.Domain
 {
@@ -53,6 +55,23 @@ namespace CodeGeneration.LowLevelClient.Domain
 			};
 		}
 
+		public IEnumerable<string> RequestConstructors()
+		{
+			var consts = new List<string>();
+			if (this.Url.Parts == null || !this.Url.Parts.Any()) return consts;
+			foreach (var url in this.Url.Paths)
+			{
+				var m = this.RequestType;
+				var cp = this.Url.Parts.Where(p => url.Contains($"{{{p.Value.Name}}}"))
+					.OrderBy(kv => url.IndexOf($"{{{kv.Value.Name}}}", StringComparison.Ordinal));
+				var par = string.Join(", ", cp.Select(p => $"{p.Value.ClrTypeName} {p.Key}"));
+				var routing = string.Empty;
+				if (cp.Any())
+					routing = "r=>r." + string.Join(".", cp.Select(p => $"{(p.Value.Required ? "Required" : "Optional")}(\"{p.Key}\", {p.Key})"));
+				consts.Add($"public {m}({par}) : base({routing}){{}}");
+			}
+			return consts;
+		}
 
 
 	}

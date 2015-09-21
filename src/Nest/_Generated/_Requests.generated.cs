@@ -24,6 +24,9 @@ namespace Nest
 	public partial class AliasExistsRequest  : RequestBase<AliasExistsRequestParameters>, IAliasExistsRequest
 	{
 		Names IAliasExistsRequest.Name => Self.RouteValues.Get<Names>("name");
+			public AliasExistsRequest(Names name) : base(r=>r.Optional("name", name)){}
+		public AliasExistsRequest(Indices index, Names name) : base(r=>r.Optional("index", index).Optional("name", name)){}
+		public AliasExistsRequest(Indices index) : base(r=>r.Optional("index", index)){}
 			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
@@ -51,6 +54,8 @@ namespace Nest
 	///<summary>Request parameters for IndicesAnalyzeForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-analyze.html</pre></summary>
 	public partial class AnalyzeRequest  : RequestBase<AnalyzeRequestParameters>, IAnalyzeRequest
 	{
+			public AnalyzeRequest() : base(){}
+		public AnalyzeRequest(IndexName index) : base(r=>r.Optional("index", index)){}
 			///<summary>The name of the analyzer to use</summary>
 		public string Analyzer { get { return Q<string>("analyzer"); } set { Q("analyzer", value); } }
 		
@@ -93,7 +98,7 @@ namespace Nest
 	///<summary>Request parameters for IndicesUpdateAliasesForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
 	public partial class BulkAliasRequest  : RequestBase<BulkAliasRequestParameters>, IBulkAliasRequest
 	{
-			///<summary>Request timeout</summary>
+				///<summary>Request timeout</summary>
 		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
 		
 		///<summary>Specify timeout for connection to master</summary>
@@ -114,6 +119,9 @@ namespace Nest
 	///<summary>Request parameters for Bulk <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-bulk.html</pre></summary>
 	public partial class BulkRequest  : RequestBase<BulkRequestParameters>, IBulkRequest
 	{
+			public BulkRequest() : base(){}
+		public BulkRequest(IndexName index) : base(r=>r.Optional("index", index)){}
+		public BulkRequest(IndexName index, TypeName type) : base(r=>r.Optional("index", index).Optional("type", type)){}
 			///<summary>Explicit write consistency setting for the operation</summary>
 		public Consistency Consistency { get { return Q<Consistency>("consistency"); } set { Q("consistency", value); } }
 		
@@ -147,6 +155,8 @@ namespace Nest
 	///<summary>Request parameters for CatAliases <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-alias.html</pre></summary>
 	public partial class CatAliasesRequest  : RequestBase<CatAliasesRequestParameters>, ICatAliasesRequest
 	{
+			public CatAliasesRequest() : base(){}
+		public CatAliasesRequest(Names name) : base(r=>r.Optional("name", name)){}
 			///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
@@ -177,6 +187,8 @@ namespace Nest
 	///<summary>Request parameters for CatAllocation <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-allocation.html</pre></summary>
 	public partial class CatAllocationRequest  : RequestBase<CatAllocationRequestParameters>, ICatAllocationRequest
 	{
+			public CatAllocationRequest() : base(){}
+		public CatAllocationRequest(NodeIds node_id) : base(r=>r.Optional("node_id", node_id)){}
 			///<summary>The unit in which to display byte values</summary>
 		public Bytes Bytes { get { return Q<Bytes>("bytes"); } set { Q("bytes", value); } }
 		
@@ -210,6 +222,8 @@ namespace Nest
 	///<summary>Request parameters for CatCount <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-count.html</pre></summary>
 	public partial class CatCountRequest  : RequestBase<CatCountRequestParameters>, ICatCountRequest
 	{
+			public CatCountRequest() : base(){}
+		public CatCountRequest(Indices index) : base(r=>r.Optional("index", index)){}
 			///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
@@ -240,6 +254,7 @@ namespace Nest
 	///<summary>Request parameters for CatFielddata <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-fielddata.html</pre></summary>
 	public partial class CatFielddataRequest  : RequestBase<CatFielddataRequestParameters>, ICatFielddataRequest
 	{
+			public CatFielddataRequest() : base(){}
 			///<summary>The unit in which to display byte values</summary>
 		public Bytes Bytes { get { return Q<Bytes>("bytes"); } set { Q("bytes", value); } }
 		
@@ -276,7 +291,7 @@ namespace Nest
 	///<summary>Request parameters for CatHealth <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-health.html</pre></summary>
 	public partial class CatHealthRequest  : RequestBase<CatHealthRequestParameters>, ICatHealthRequest
 	{
-			///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+				///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -309,7 +324,7 @@ namespace Nest
 	///<summary>Request parameters for CatHelp <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat.html</pre></summary>
 	public partial class CatHelpRequest  : RequestBase<CatHelpRequestParameters>, ICatHelpRequest
 	{
-			///<summary>Return help information</summary>
+				///<summary>Return help information</summary>
 		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
@@ -329,6 +344,8 @@ namespace Nest
 	///<summary>Request parameters for CatIndices <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-indices.html</pre></summary>
 	public partial class CatIndicesRequest  : RequestBase<CatIndicesRequestParameters>, ICatIndicesRequest
 	{
+			public CatIndicesRequest() : base(){}
+		public CatIndicesRequest(Indices index) : base(r=>r.Optional("index", index)){}
 			///<summary>The unit in which to display byte values</summary>
 		public Bytes Bytes { get { return Q<Bytes>("bytes"); } set { Q("bytes", value); } }
 		
@@ -365,7 +382,7 @@ namespace Nest
 	///<summary>Request parameters for CatMaster <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-master.html</pre></summary>
 	public partial class CatMasterRequest  : RequestBase<CatMasterRequestParameters>, ICatMasterRequest
 	{
-			///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+				///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -395,7 +412,7 @@ namespace Nest
 	///<summary>Request parameters for CatNodeattrs <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodeattrs.html</pre></summary>
 	public partial class CatNodeattrsRequest  : RequestBase<CatNodeattrsRequestParameters>, ICatNodeattrsRequest
 	{
-			///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+				///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -427,7 +444,7 @@ namespace Nest
 	///<summary>Request parameters for CatNodes <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodes.html</pre></summary>
 	public partial class CatNodesRequest  : RequestBase<CatNodesRequestParameters>, ICatNodesRequest
 	{
-			///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+				///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -457,7 +474,7 @@ namespace Nest
 	///<summary>Request parameters for CatPendingTasks <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-pending-tasks.html</pre></summary>
 	public partial class CatPendingTasksRequest  : RequestBase<CatPendingTasksRequestParameters>, ICatPendingTasksRequest
 	{
-			///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+				///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -487,7 +504,7 @@ namespace Nest
 	///<summary>Request parameters for CatPlugins <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-plugins.html</pre></summary>
 	public partial class CatPluginsRequest  : RequestBase<CatPluginsRequestParameters>, ICatPluginsRequest
 	{
-			///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+				///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -517,6 +534,8 @@ namespace Nest
 	///<summary>Request parameters for CatRecovery <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-recovery.html</pre></summary>
 	public partial class CatRecoveryRequest  : RequestBase<CatRecoveryRequestParameters>, ICatRecoveryRequest
 	{
+			public CatRecoveryRequest() : base(){}
+		public CatRecoveryRequest(Indices index) : base(r=>r.Optional("index", index)){}
 			///<summary>The unit in which to display byte values</summary>
 		public Bytes Bytes { get { return Q<Bytes>("bytes"); } set { Q("bytes", value); } }
 		
@@ -547,6 +566,8 @@ namespace Nest
 	///<summary>Request parameters for CatSegments <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-segments.html</pre></summary>
 	public partial class CatSegmentsRequest  : RequestBase<CatSegmentsRequestParameters>, ICatSegmentsRequest
 	{
+			public CatSegmentsRequest() : base(){}
+		public CatSegmentsRequest(Indices index) : base(r=>r.Optional("index", index)){}
 			///<summary>Comma-separated list of column names to display</summary>
 		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
 		
@@ -571,6 +592,8 @@ namespace Nest
 	///<summary>Request parameters for CatShards <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-shards.html</pre></summary>
 	public partial class CatShardsRequest  : RequestBase<CatShardsRequestParameters>, ICatShardsRequest
 	{
+			public CatShardsRequest() : base(){}
+		public CatShardsRequest(Indices index) : base(r=>r.Optional("index", index)){}
 			///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
@@ -601,7 +624,7 @@ namespace Nest
 	///<summary>Request parameters for CatThreadPool <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-thread-pool.html</pre></summary>
 	public partial class CatThreadPoolRequest  : RequestBase<CatThreadPoolRequestParameters>, ICatThreadPoolRequest
 	{
-			///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+				///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -634,6 +657,8 @@ namespace Nest
 	///<summary>Request parameters for IndicesClearCacheForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clearcache.html</pre></summary>
 	public partial class ClearCacheRequest  : RequestBase<ClearCacheRequestParameters>, IClearCacheRequest
 	{
+			public ClearCacheRequest() : base(){}
+		public ClearCacheRequest(Indices index) : base(r=>r.Optional("index", index)){}
 			///<summary>Clear field data</summary>
 		public bool FieldData { get { return Q<bool>("field_data"); } set { Q("field_data", value); } }
 		
@@ -678,6 +703,8 @@ namespace Nest
 	public partial class ClearScrollRequest  : RequestBase<ClearScrollRequestParameters>, IClearScrollRequest
 	{
 		ScrollIds IClearScrollRequest.ScrollId => Self.RouteValues.Get<ScrollIds>("scroll_id");
+			public ClearScrollRequest(ScrollIds scroll_id) : base(r=>r.Optional("scroll_id", scroll_id)){}
+		public ClearScrollRequest() : base(){}
 			///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
@@ -695,6 +722,7 @@ namespace Nest
 	public partial class CloseIndexRequest  : RequestBase<CloseIndexRequestParameters>, ICloseIndexRequest
 	{
 		IndexName ICloseIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
+			public CloseIndexRequest(IndexName index) : base(r=>r.Required("index", index)){}
 			///<summary>Explicit operation timeout</summary>
 		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
 		
@@ -725,7 +753,7 @@ namespace Nest
 	///<summary>Request parameters for ClusterGetSettings <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</pre></summary>
 	public partial class ClusterGetSettingsRequest  : RequestBase<ClusterGetSettingsRequestParameters>, IClusterGetSettingsRequest
 	{
-			///<summary>Return settings in flat format (default: false)</summary>
+				///<summary>Return settings in flat format (default: false)</summary>
 		public bool FlatSettings { get { return Q<bool>("flat_settings"); } set { Q("flat_settings", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -749,6 +777,8 @@ namespace Nest
 	///<summary>Request parameters for ClusterHealth <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-health.html</pre></summary>
 	public partial class ClusterHealthRequest  : RequestBase<ClusterHealthRequestParameters>, IClusterHealthRequest
 	{
+			public ClusterHealthRequest() : base(){}
+		public ClusterHealthRequest(IndexName index) : base(r=>r.Optional("index", index)){}
 			///<summary>Specify the level of detail for returned information</summary>
 		public Level Level { get { return Q<Level>("level"); } set { Q("level", value); } }
 		
@@ -788,7 +818,7 @@ namespace Nest
 	///<summary>Request parameters for ClusterPendingTasks <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-pending.html</pre></summary>
 	public partial class ClusterPendingTasksRequest  : RequestBase<ClusterPendingTasksRequestParameters>, IClusterPendingTasksRequest
 	{
-			///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+				///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Specify timeout for connection to master</summary>
@@ -809,7 +839,7 @@ namespace Nest
 	///<summary>Request parameters for ClusterReroute <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-reroute.html</pre></summary>
 	public partial class ClusterRerouteRequest  : RequestBase<ClusterRerouteRequestParameters>, IClusterRerouteRequest
 	{
-			///<summary>Simulate the operation only and return the resulting state</summary>
+				///<summary>Simulate the operation only and return the resulting state</summary>
 		public bool DryRun { get { return Q<bool>("dry_run"); } set { Q("dry_run", value); } }
 		
 		///<summary>Return an explanation of why the commands can or cannot be executed</summary>
@@ -839,7 +869,7 @@ namespace Nest
 	///<summary>Request parameters for ClusterPutSettings <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</pre></summary>
 	public partial class ClusterSettingsRequest  : RequestBase<ClusterSettingsRequestParameters>, IClusterSettingsRequest
 	{
-			///<summary>Return settings in flat format (default: false)</summary>
+				///<summary>Return settings in flat format (default: false)</summary>
 		public bool FlatSettings { get { return Q<bool>("flat_settings"); } set { Q("flat_settings", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -863,6 +893,9 @@ namespace Nest
 	///<summary>Request parameters for ClusterState <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-state.html</pre></summary>
 	public partial class ClusterStateRequest  : RequestBase<ClusterStateRequestParameters>, IClusterStateRequest
 	{
+			public ClusterStateRequest() : base(){}
+		public ClusterStateRequest(list_ metric) : base(r=>r.Optional("metric", metric)){}
+		public ClusterStateRequest(list_ metric, Indices index) : base(r=>r.Optional("metric", metric).Optional("index", index)){}
 			///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
@@ -896,6 +929,8 @@ namespace Nest
 	///<summary>Request parameters for ClusterStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-stats.html</pre></summary>
 	public partial class ClusterStatsRequest  : RequestBase<ClusterStatsRequestParameters>, IClusterStatsRequest
 	{
+			public ClusterStatsRequest() : base(){}
+		public ClusterStatsRequest(NodeIds node_id) : base(r=>r.Optional("node_id", node_id)){}
 			///<summary>Return settings in flat format (default: false)</summary>
 		public bool FlatSettings { get { return Q<bool>("flat_settings"); } set { Q("flat_settings", value); } }
 		
@@ -917,6 +952,9 @@ namespace Nest
 	///<summary>Request parameters for Count <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-count.html</pre></summary>
 	public partial class CountRequest  : RequestBase<CountRequestParameters>, ICountRequest
 	{
+			public CountRequest() : base(){}
+		public CountRequest(Indices index) : base(r=>r.Optional("index", index)){}
+		public CountRequest(Indices index, Types type) : base(r=>r.Optional("index", index).Optional("type", type)){}
 			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
@@ -973,6 +1011,7 @@ namespace Nest
 	public partial class CreateIndexRequest  : RequestBase<CreateIndexRequestParameters>, ICreateIndexRequest
 	{
 		IndexName ICreateIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
+			public CreateIndexRequest(IndexName index) : base(r=>r.Required("index", index)){}
 			///<summary>Explicit operation timeout</summary>
 		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
 		
@@ -999,6 +1038,7 @@ namespace Nest
 	public partial class CreateRepositoryRequest  : RequestBase<CreateRepositoryRequestParameters>, ICreateRepositoryRequest
 	{
 		Name ICreateRepositoryRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
+			public CreateRepositoryRequest(Name repository) : base(r=>r.Required("repository", repository)){}
 			///<summary>Explicit operation timeout for connection to master node</summary>
 		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
@@ -1027,6 +1067,8 @@ namespace Nest
 	{
 		Indices IDeleteAliasRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Names IDeleteAliasRequest.Name => Self.RouteValues.Get<Names>("name");
+			public DeleteAliasRequest(Indices index, Names name) : base(r=>r.Required("index", index).Required("name", name)){}
+		public DeleteAliasRequest(Indices index, Names name) : base(r=>r.Required("index", index).Required("name", name)){}
 			///<summary>Explicit timestamp for the document</summary>
 		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
 		
@@ -1050,6 +1092,8 @@ namespace Nest
 	public partial class DeleteByQueryRequest<T>  : RequestBase<DeleteByQueryRequestParameters>, IDeleteByQueryRequest
 	{
 		Indices IDeleteByQueryRequest.Index => Self.RouteValues.Get<Indices>("index");
+			public DeleteByQueryRequest(Indices index) : base(r=>r.Required("index", index)){}
+		public DeleteByQueryRequest(Indices index, Types type) : base(r=>r.Required("index", index).Optional("type", type)){}
 			///<summary>The analyzer to use for the query string</summary>
 		public string Analyzer { get { return Q<string>("analyzer"); } set { Q("analyzer", value); } }
 		
@@ -1088,6 +1132,8 @@ namespace Nest
 	public partial class DeleteByQueryRequest  : RequestBase<DeleteByQueryRequestParameters>, IDeleteByQueryRequest
 	{
 		Indices IDeleteByQueryRequest.Index => Self.RouteValues.Get<Indices>("index");
+			public DeleteByQueryRequest(Indices index) : base(r=>r.Required("index", index)){}
+		public DeleteByQueryRequest(Indices index, Types type) : base(r=>r.Required("index", index).Optional("type", type)){}
 			///<summary>The analyzer to use for the query string</summary>
 		public string Analyzer { get { return Q<string>("analyzer"); } set { Q("analyzer", value); } }
 		
@@ -1132,6 +1178,7 @@ namespace Nest
 	public partial class DeleteIndexRequest  : RequestBase<DeleteIndexRequestParameters>, IDeleteIndexRequest
 	{
 		Indices IDeleteIndexRequest.Index => Self.RouteValues.Get<Indices>("index");
+			public DeleteIndexRequest(Indices index) : base(r=>r.Required("index", index)){}
 			///<summary>Explicit operation timeout</summary>
 		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
 		
@@ -1155,6 +1202,7 @@ namespace Nest
 	public partial class DeleteRepositoryRequest  : RequestBase<DeleteRepositoryRequestParameters>, IDeleteRepositoryRequest
 	{
 		Names IDeleteRepositoryRequest.RepositoryName => Self.RouteValues.Get<Names>("repository");
+			public DeleteRepositoryRequest(Names repository) : base(r=>r.Required("repository", repository)){}
 			///<summary>Explicit operation timeout for connection to master node</summary>
 		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
@@ -1182,6 +1230,7 @@ namespace Nest
 		IndexName IDeleteRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		TypeName IDeleteRequest.Type => Self.RouteValues.Get<TypeName>("type");
 		Id IDeleteRequest.Id => Self.RouteValues.Get<Id>("id");
+			public DeleteRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id)){}
 			///<summary>Specific write consistency setting for the operation</summary>
 		public Consistency Consistency { get { return Q<Consistency>("consistency"); } set { Q("consistency", value); } }
 		
@@ -1216,6 +1265,7 @@ namespace Nest
 		IndexName IDeleteRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		TypeName IDeleteRequest.Type => Self.RouteValues.Get<TypeName>("type");
 		Id IDeleteRequest.Id => Self.RouteValues.Get<Id>("id");
+			public DeleteRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id)){}
 			///<summary>Specific write consistency setting for the operation</summary>
 		public Consistency Consistency { get { return Q<Consistency>("consistency"); } set { Q("consistency", value); } }
 		
@@ -1256,6 +1306,7 @@ namespace Nest
 	{
 		Name IDeleteScriptRequest.Lang => Self.RouteValues.Get<Name>("lang");
 		Id IDeleteScriptRequest.Id => Self.RouteValues.Get<Id>("id");
+			public DeleteScriptRequest(Name lang, Id id) : base(r=>r.Required("lang", lang).Required("id", id)){}
 			///<summary>Explicit version number for concurrency control</summary>
 		public long Version { get { return Q<long>("version"); } set { Q("version", value); } }
 		
@@ -1281,6 +1332,7 @@ namespace Nest
 	{
 		Name IDeleteSnapshotRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
 		Name IDeleteSnapshotRequest.Snapshot => Self.RouteValues.Get<Name>("snapshot");
+			public DeleteSnapshotRequest(Name repository, Name snapshot) : base(r=>r.Required("repository", repository).Required("snapshot", snapshot)){}
 			///<summary>Explicit operation timeout for connection to master node</summary>
 		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
@@ -1301,6 +1353,7 @@ namespace Nest
 	public partial class DeleteTemplateRequest  : RequestBase<DeleteTemplateRequestParameters>, IDeleteTemplateRequest
 	{
 		Id IDeleteTemplateRequest.Id => Self.RouteValues.Get<Id>("id");
+			public DeleteTemplateRequest(Id id) : base(r=>r.Optional("id", id)){}
 			///<summary>Explicit version number for concurrency control</summary>
 		public long Version { get { return Q<long>("version"); } set { Q("version", value); } }
 		
@@ -1326,6 +1379,8 @@ namespace Nest
 	{
 		Indices IDeleteWarmerRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Names IDeleteWarmerRequest.Name => Self.RouteValues.Get<Names>("name");
+			public DeleteWarmerRequest(Indices index, Names name) : base(r=>r.Required("index", index).Required("name", name)){}
+		public DeleteWarmerRequest(Indices index, Names name) : base(r=>r.Required("index", index).Required("name", name)){}
 			///<summary>Specify timeout for connection to master</summary>
 		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
@@ -1350,6 +1405,7 @@ namespace Nest
 		IndexName IDocumentExistsRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		TypeName IDocumentExistsRequest.Type => Self.RouteValues.Get<TypeName>("type");
 		Id IDocumentExistsRequest.Id => Self.RouteValues.Get<Id>("id");
+			public DocumentExistsRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id)){}
 			///<summary>The ID of the parent document</summary>
 		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
 		
@@ -1378,6 +1434,7 @@ namespace Nest
 		IndexName IDocumentExistsRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		TypeName IDocumentExistsRequest.Type => Self.RouteValues.Get<TypeName>("type");
 		Id IDocumentExistsRequest.Id => Self.RouteValues.Get<Id>("id");
+			public DocumentExistsRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id)){}
 			///<summary>The ID of the parent document</summary>
 		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
 		
@@ -1414,6 +1471,7 @@ namespace Nest
 		IndexName IExplainRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		TypeName IExplainRequest.Type => Self.RouteValues.Get<TypeName>("type");
 		Id IExplainRequest.Id => Self.RouteValues.Get<Id>("id");
+			public ExplainRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id)){}
 			///<summary>Specify whether wildcards and prefix queries in the query string query should be analyzed (default: false)</summary>
 		public bool AnalyzeWildcard { get { return Q<bool>("analyze_wildcard"); } set { Q("analyze_wildcard", value); } }
 		
@@ -1471,6 +1529,8 @@ namespace Nest
 	///<summary>Request parameters for FieldStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-stats.html</pre></summary>
 	public partial class FieldStatsRequest  : RequestBase<FieldStatsRequestParameters>, IFieldStatsRequest
 	{
+			public FieldStatsRequest() : base(){}
+		public FieldStatsRequest(Indices index) : base(r=>r.Optional("index", index)){}
 			///<summary>A comma-separated list of fields for to get field statistics for (min value, max value, and more)</summary>
 		public IList<FieldName> Fields { get { return Q<IList<FieldName>>("fields"); } set { Q("fields", value); } }
 		
@@ -1501,6 +1561,8 @@ namespace Nest
 	///<summary>Request parameters for IndicesFlushForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-flush.html</pre></summary>
 	public partial class FlushRequest  : RequestBase<FlushRequestParameters>, IFlushRequest
 	{
+			public FlushRequest() : base(){}
+		public FlushRequest(Indices index) : base(r=>r.Optional("index", index)){}
 			///<summary>Whether a flush should be forced even if it is not necessarily needed ie. if no changes will be committed to the index. This is useful if transaction log IDs should be incremented even if no uncommitted changes are present. (This setting can be considered as internal)</summary>
 		public bool Force { get { return Q<bool>("force"); } set { Q("force", value); } }
 		
@@ -1531,6 +1593,10 @@ namespace Nest
 	///<summary>Request parameters for IndicesGetAliasesForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
 	public partial class GetAliasesRequest  : RequestBase<GetAliasesRequestParameters>, IGetAliasesRequest
 	{
+			public GetAliasesRequest() : base(){}
+		public GetAliasesRequest(Indices index) : base(r=>r.Optional("index", index)){}
+		public GetAliasesRequest(Indices index, Names name) : base(r=>r.Optional("index", index).Optional("name", name)){}
+		public GetAliasesRequest(Names name) : base(r=>r.Optional("name", name)){}
 			///<summary>Explicit operation timeout</summary>
 		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
 		
@@ -1552,6 +1618,10 @@ namespace Nest
 	///<summary>Request parameters for IndicesGetAliasForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
 	public partial class GetAliasRequest  : RequestBase<GetAliasRequestParameters>, IGetAliasRequest
 	{
+			public GetAliasRequest() : base(){}
+		public GetAliasRequest(Names name) : base(r=>r.Optional("name", name)){}
+		public GetAliasRequest(Indices index, Names name) : base(r=>r.Optional("index", index).Optional("name", name)){}
+		public GetAliasRequest(Indices index) : base(r=>r.Optional("index", index)){}
 			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
@@ -1581,6 +1651,10 @@ namespace Nest
 	public partial class GetFieldMappingRequest  : RequestBase<GetFieldMappingRequestParameters>, IGetFieldMappingRequest
 	{
 		PropertyNames IGetFieldMappingRequest.Field => Self.RouteValues.Get<PropertyNames>("field");
+			public GetFieldMappingRequest(PropertyNames field) : base(r=>r.Required("field", field)){}
+		public GetFieldMappingRequest(Indices index, PropertyNames field) : base(r=>r.Optional("index", index).Required("field", field)){}
+		public GetFieldMappingRequest(Types type, PropertyNames field) : base(r=>r.Optional("type", type).Required("field", field)){}
+		public GetFieldMappingRequest(Indices index, Types type, PropertyNames field) : base(r=>r.Optional("index", index).Optional("type", type).Required("field", field)){}
 			///<summary>Whether the default mapping values should be returned as well</summary>
 		public bool IncludeDefaults { get { return Q<bool>("include_defaults"); } set { Q("include_defaults", value); } }
 		
@@ -1613,6 +1687,8 @@ namespace Nest
 	public partial class GetIndexRequest  : RequestBase<GetIndexRequestParameters>, IGetIndexRequest
 	{
 		Indices IGetIndexRequest.Index => Self.RouteValues.Get<Indices>("index");
+			public GetIndexRequest(Indices index) : base(r=>r.Required("index", index)){}
+		public GetIndexRequest(Indices index, list_ feature) : base(r=>r.Required("index", index).Optional("feature", feature)){}
 			///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
@@ -1646,6 +1722,10 @@ namespace Nest
 	///<summary>Request parameters for IndicesGetSettingsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-settings.html</pre></summary>
 	public partial class GetIndexSettingsRequest  : RequestBase<GetIndexSettingsRequestParameters>, IGetIndexSettingsRequest
 	{
+			public GetIndexSettingsRequest() : base(){}
+		public GetIndexSettingsRequest(Indices index) : base(r=>r.Optional("index", index)){}
+		public GetIndexSettingsRequest(Indices index, Names name) : base(r=>r.Optional("index", index).Optional("name", name)){}
+		public GetIndexSettingsRequest(Names name) : base(r=>r.Optional("name", name)){}
 			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
@@ -1679,6 +1759,10 @@ namespace Nest
 	///<summary>Request parameters for IndicesGetMappingForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-mapping.html</pre></summary>
 	public partial class GetMappingRequest  : RequestBase<GetMappingRequestParameters>, IGetMappingRequest
 	{
+			public GetMappingRequest() : base(){}
+		public GetMappingRequest(Indices index) : base(r=>r.Optional("index", index)){}
+		public GetMappingRequest(Types type) : base(r=>r.Optional("type", type)){}
+		public GetMappingRequest(Indices index, Types type) : base(r=>r.Optional("index", index).Optional("type", type)){}
 			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
@@ -1706,6 +1790,8 @@ namespace Nest
 	///<summary>Request parameters for SnapshotGetRepository <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class GetRepositoryRequest  : RequestBase<GetRepositoryRequestParameters>, IGetRepositoryRequest
 	{
+			public GetRepositoryRequest() : base(){}
+		public GetRepositoryRequest(Names repository) : base(r=>r.Optional("repository", repository)){}
 			///<summary>Explicit operation timeout for connection to master node</summary>
 		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
@@ -1733,6 +1819,7 @@ namespace Nest
 		IndexName IGetRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		TypeName IGetRequest.Type => Self.RouteValues.Get<TypeName>("type");
 		Id IGetRequest.Id => Self.RouteValues.Get<Id>("id");
+			public GetRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id)){}
 			///<summary>A comma-separated list of fields to return in the response</summary>
 		public IList<FieldName> Fields { get { return Q<IList<FieldName>>("fields"); } set { Q("fields", value); } }
 		
@@ -1779,6 +1866,7 @@ namespace Nest
 		IndexName IGetRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		TypeName IGetRequest.Type => Self.RouteValues.Get<TypeName>("type");
 		Id IGetRequest.Id => Self.RouteValues.Get<Id>("id");
+			public GetRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id)){}
 			///<summary>A comma-separated list of fields to return in the response</summary>
 		public IList<FieldName> Fields { get { return Q<IList<FieldName>>("fields"); } set { Q("fields", value); } }
 		
@@ -1831,6 +1919,7 @@ namespace Nest
 	{
 		Name IGetScriptRequest.Lang => Self.RouteValues.Get<Name>("lang");
 		Id IGetScriptRequest.Id => Self.RouteValues.Get<Id>("id");
+			public GetScriptRequest(Name lang, Id id) : base(r=>r.Required("lang", lang).Required("id", id)){}
 			///<summary>Explicit version number for concurrency control</summary>
 		public long Version { get { return Q<long>("version"); } set { Q("version", value); } }
 		
@@ -1856,6 +1945,7 @@ namespace Nest
 	{
 		Name IGetSnapshotRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
 		Names IGetSnapshotRequest.Snapshot => Self.RouteValues.Get<Names>("snapshot");
+			public GetSnapshotRequest(Name repository, Names snapshot) : base(r=>r.Required("repository", repository).Required("snapshot", snapshot)){}
 			///<summary>Explicit operation timeout for connection to master node</summary>
 		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
@@ -1876,6 +1966,7 @@ namespace Nest
 	public partial class GetTemplateRequest  : RequestBase<GetTemplateRequestParameters>, IGetTemplateRequest
 	{
 		Id IGetTemplateRequest.Id => Self.RouteValues.Get<Id>("id");
+			public GetTemplateRequest(Id id) : base(r=>r.Required("id", id)){}
 			///<summary>Explicit version number for concurrency control</summary>
 		public long Version { get { return Q<long>("version"); } set { Q("version", value); } }
 		
@@ -1897,6 +1988,11 @@ namespace Nest
 	///<summary>Request parameters for IndicesGetWarmerForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-warmers.html</pre></summary>
 	public partial class GetWarmerRequest  : RequestBase<GetWarmerRequestParameters>, IGetWarmerRequest
 	{
+			public GetWarmerRequest() : base(){}
+		public GetWarmerRequest(Indices index) : base(r=>r.Optional("index", index)){}
+		public GetWarmerRequest(Indices index, Names name) : base(r=>r.Optional("index", index).Optional("name", name)){}
+		public GetWarmerRequest(Names name) : base(r=>r.Optional("name", name)){}
+		public GetWarmerRequest(Indices index, Types type, Names name) : base(r=>r.Optional("index", index).Optional("type", type).Optional("name", name)){}
 			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
@@ -1926,6 +2022,7 @@ namespace Nest
 	public partial class IndexExistsRequest  : RequestBase<IndexExistsRequestParameters>, IIndexExistsRequest
 	{
 		Indices IIndexExistsRequest.Index => Self.RouteValues.Get<Indices>("index");
+			public IndexExistsRequest(Indices index) : base(r=>r.Required("index", index)){}
 			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
@@ -1957,6 +2054,8 @@ namespace Nest
 	{
 		IndexName IIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		TypeName IIndexRequest.Type => Self.RouteValues.Get<TypeName>("type");
+			public IndexRequest(IndexName index, TypeName type) : base(r=>r.Required("index", index).Required("type", type)){}
+		public IndexRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Optional("id", id)){}
 			///<summary>Explicit write consistency setting for the operation</summary>
 		public Consistency Consistency { get { return Q<Consistency>("consistency"); } set { Q("consistency", value); } }
 		
@@ -2002,6 +2101,8 @@ namespace Nest
 	///<summary>Request parameters for IndicesShardStoresForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shards-stores.html</pre></summary>
 	public partial class IndicesShardStoresRequest  : RequestBase<IndicesShardStoresRequestParameters>, IIndicesShardStoresRequest
 	{
+			public IndicesShardStoresRequest() : base(){}
+		public IndicesShardStoresRequest(Indices index) : base(r=>r.Optional("index", index)){}
 			///<summary>A comma-separated list of statuses used to filter on shards to get store information for</summary>
 		public  string[] Status { get { return Q< string[]>("status"); } set { Q("status", value); } }
 		
@@ -2034,6 +2135,10 @@ namespace Nest
 	///<summary>Request parameters for IndicesStatsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-stats.html</pre></summary>
 	public partial class IndicesStatsRequest  : RequestBase<IndicesStatsRequestParameters>, IIndicesStatsRequest
 	{
+			public IndicesStatsRequest() : base(){}
+		public IndicesStatsRequest(list_ metric) : base(r=>r.Optional("metric", metric)){}
+		public IndicesStatsRequest(Indices index) : base(r=>r.Optional("index", index)){}
+		public IndicesStatsRequest(Indices index, list_ metric) : base(r=>r.Optional("index", index).Optional("metric", metric)){}
 			///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
 		public IList<FieldName> CompletionFields { get { return Q<IList<FieldName>>("completion_fields"); } set { Q("completion_fields", value); } }
 		
@@ -2067,7 +2172,7 @@ namespace Nest
 	///<summary>Request parameters for Info <pre>http://www.elastic.co/guide/</pre></summary>
 	public partial class InfoRequest  : RequestBase<InfoRequestParameters>, IInfoRequest
 	{
-			///<summary>The URL-encoded request definition</summary>
+				///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
@@ -2082,6 +2187,9 @@ namespace Nest
 	///<summary>Request parameters for Mget <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-get.html</pre></summary>
 	public partial class MultiGetRequest  : RequestBase<MultiGetRequestParameters>, IMultiGetRequest
 	{
+			public MultiGetRequest() : base(){}
+		public MultiGetRequest(IndexName index) : base(r=>r.Optional("index", index)){}
+		public MultiGetRequest(IndexName index, TypeName type) : base(r=>r.Optional("index", index).Optional("type", type)){}
 			///<summary>A comma-separated list of fields to return in the response</summary>
 		public IList<FieldName> Fields { get { return Q<IList<FieldName>>("fields"); } set { Q("fields", value); } }
 		
@@ -2118,6 +2226,9 @@ namespace Nest
 	///<summary>Request parameters for Mpercolate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-percolate.html</pre></summary>
 	public partial class MultiPercolateRequest  : RequestBase<MultiPercolateRequestParameters>, IMultiPercolateRequest
 	{
+			public MultiPercolateRequest() : base(){}
+		public MultiPercolateRequest(IndexName index) : base(r=>r.Optional("index", index)){}
+		public MultiPercolateRequest(IndexName index, TypeName type) : base(r=>r.Optional("index", index).Optional("type", type)){}
 			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
@@ -2142,6 +2253,9 @@ namespace Nest
 	///<summary>Request parameters for Msearch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-multi-search.html</pre></summary>
 	public partial class MultiSearchRequest  : RequestBase<MultiSearchRequestParameters>, IMultiSearchRequest
 	{
+			public MultiSearchRequest() : base(){}
+		public MultiSearchRequest(Indices index) : base(r=>r.Optional("index", index)){}
+		public MultiSearchRequest(Indices index, Types type) : base(r=>r.Optional("index", index).Optional("type", type)){}
 			///<summary>Search operation type</summary>
 		public SearchType SearchType { get { return Q<SearchType>("search_type"); } set { Q("search_type", value); } }
 		
@@ -2160,6 +2274,9 @@ namespace Nest
 	///<summary>Request parameters for Mtermvectors <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html</pre></summary>
 	public partial class MultiTermVectorsRequest  : RequestBase<MultiTermVectorsRequestParameters>, IMultiTermVectorsRequest
 	{
+			public MultiTermVectorsRequest() : base(){}
+		public MultiTermVectorsRequest(IndexName index) : base(r=>r.Optional("index", index)){}
+		public MultiTermVectorsRequest(IndexName index, TypeName type) : base(r=>r.Optional("index", index).Optional("type", type)){}
 			///<summary>Specifies if total term frequency and document frequency should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
 		public bool TermStatistics { get { return Q<bool>("term_statistics"); } set { Q("term_statistics", value); } }
 		
@@ -2211,6 +2328,14 @@ namespace Nest
 	///<summary>Request parameters for NodesHotThreadsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-hot-threads.html</pre></summary>
 	public partial class NodesHotThreadsRequest  : RequestBase<NodesHotThreadsRequestParameters>, INodesHotThreadsRequest
 	{
+			public NodesHotThreadsRequest() : base(){}
+		public NodesHotThreadsRequest() : base(){}
+		public NodesHotThreadsRequest(NodeIds node_id) : base(r=>r.Optional("node_id", node_id)){}
+		public NodesHotThreadsRequest(NodeIds node_id) : base(r=>r.Optional("node_id", node_id)){}
+		public NodesHotThreadsRequest() : base(){}
+		public NodesHotThreadsRequest() : base(){}
+		public NodesHotThreadsRequest(NodeIds node_id) : base(r=>r.Optional("node_id", node_id)){}
+		public NodesHotThreadsRequest(NodeIds node_id) : base(r=>r.Optional("node_id", node_id)){}
 			///<summary>The interval for the second sampling of threads</summary>
 		public string Interval { get { return Q<string>("interval"); } set { Q("interval", value); } }
 		
@@ -2241,6 +2366,10 @@ namespace Nest
 	///<summary>Request parameters for NodesInfoForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-info.html</pre></summary>
 	public partial class NodesInfoRequest  : RequestBase<NodesInfoRequestParameters>, INodesInfoRequest
 	{
+			public NodesInfoRequest() : base(){}
+		public NodesInfoRequest(NodeIds node_id) : base(r=>r.Optional("node_id", node_id)){}
+		public NodesInfoRequest(list_ metric) : base(r=>r.Optional("metric", metric)){}
+		public NodesInfoRequest(NodeIds node_id, list_ metric) : base(r=>r.Optional("node_id", node_id).Optional("metric", metric)){}
 			///<summary>Return settings in flat format (default: false)</summary>
 		public bool FlatSettings { get { return Q<bool>("flat_settings"); } set { Q("flat_settings", value); } }
 		
@@ -2262,6 +2391,12 @@ namespace Nest
 	///<summary>Request parameters for NodesStatsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-stats.html</pre></summary>
 	public partial class NodesStatsRequest  : RequestBase<NodesStatsRequestParameters>, INodesStatsRequest
 	{
+			public NodesStatsRequest() : base(){}
+		public NodesStatsRequest(NodeIds node_id) : base(r=>r.Optional("node_id", node_id)){}
+		public NodesStatsRequest(list_ metric) : base(r=>r.Optional("metric", metric)){}
+		public NodesStatsRequest(NodeIds node_id, list_ metric) : base(r=>r.Optional("node_id", node_id).Optional("metric", metric)){}
+		public NodesStatsRequest(list_ metric, list_ index_metric) : base(r=>r.Optional("metric", metric).Optional("index_metric", index_metric)){}
+		public NodesStatsRequest(NodeIds node_id, list_ metric, list_ index_metric) : base(r=>r.Optional("node_id", node_id).Optional("metric", metric).Optional("index_metric", index_metric)){}
 			///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
 		public IList<FieldName> CompletionFields { get { return Q<IList<FieldName>>("completion_fields"); } set { Q("completion_fields", value); } }
 		
@@ -2300,6 +2435,7 @@ namespace Nest
 	public partial class OpenIndexRequest  : RequestBase<OpenIndexRequestParameters>, IOpenIndexRequest
 	{
 		IndexName IOpenIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
+			public OpenIndexRequest(IndexName index) : base(r=>r.Required("index", index)){}
 			///<summary>Explicit operation timeout</summary>
 		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
 		
@@ -2330,6 +2466,8 @@ namespace Nest
 	///<summary>Request parameters for IndicesOptimizeForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-optimize.html</pre></summary>
 	public partial class OptimizeRequest  : RequestBase<OptimizeRequestParameters>, IOptimizeRequest
 	{
+			public OptimizeRequest() : base(){}
+		public OptimizeRequest(Indices index) : base(r=>r.Optional("index", index)){}
 			///<summary>Specify whether the index should be flushed after performing the operation (default: true)</summary>
 		public bool Flush { get { return Q<bool>("flush"); } set { Q("flush", value); } }
 		
@@ -2373,6 +2511,8 @@ namespace Nest
 	{
 		IndexName IPercolateCountRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		TypeName IPercolateCountRequest.Type => Self.RouteValues.Get<TypeName>("type");
+			public PercolateCountRequest(IndexName index, TypeName type) : base(r=>r.Required("index", index).Required("type", type)){}
+		public PercolateCountRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Optional("id", id)){}
 			///<summary>A comma-separated list of specific routing values</summary>
 		public  string[] Routing { get { return Q< string[]>("routing"); } set { Q("routing", value); } }
 		
@@ -2419,6 +2559,8 @@ namespace Nest
 	{
 		IndexName IPercolateRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		TypeName IPercolateRequest.Type => Self.RouteValues.Get<TypeName>("type");
+			public PercolateRequest(IndexName index, TypeName type) : base(r=>r.Required("index", index).Required("type", type)){}
+		public PercolateRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Optional("id", id)){}
 			///<summary>A comma-separated list of specific routing values</summary>
 		public  string[] Routing { get { return Q< string[]>("routing"); } set { Q("routing", value); } }
 		
@@ -2470,7 +2612,7 @@ namespace Nest
 	///<summary>Request parameters for Ping <pre>http://www.elastic.co/guide/</pre></summary>
 	public partial class PingRequest  : RequestBase<PingRequestParameters>, IPingRequest
 	{
-			///<summary>The URL-encoded request definition</summary>
+				///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
@@ -2489,6 +2631,8 @@ namespace Nest
 	{
 		Indices IPutAliasRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Name IPutAliasRequest.Name => Self.RouteValues.Get<Name>("name");
+			public PutAliasRequest(Indices index, Name name) : base(r=>r.Required("index", index).Required("name", name)){}
+		public PutAliasRequest(Indices index, Name name) : base(r=>r.Required("index", index).Required("name", name)){}
 			///<summary>Explicit timestamp for the document</summary>
 		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
 		
@@ -2514,6 +2658,12 @@ namespace Nest
 	{
 		Indices IPutMappingRequest.Index => Self.RouteValues.Get<Indices>("index");
 		TypeName IPutMappingRequest.Type => Self.RouteValues.Get<TypeName>("type");
+			public PutMappingRequest(Indices index, TypeName type) : base(r=>r.Optional("index", index).Required("type", type)){}
+		public PutMappingRequest(Indices index, TypeName type) : base(r=>r.Optional("index", index).Required("type", type)){}
+		public PutMappingRequest(TypeName type) : base(r=>r.Required("type", type)){}
+		public PutMappingRequest(Indices index, TypeName type) : base(r=>r.Optional("index", index).Required("type", type)){}
+		public PutMappingRequest(Indices index, TypeName type) : base(r=>r.Optional("index", index).Required("type", type)){}
+		public PutMappingRequest(TypeName type) : base(r=>r.Required("type", type)){}
 			///<summary>Explicit operation timeout</summary>
 		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
 		
@@ -2544,6 +2694,12 @@ namespace Nest
 	{
 		Indices IPutMappingRequest.Index => Self.RouteValues.Get<Indices>("index");
 		TypeName IPutMappingRequest.Type => Self.RouteValues.Get<TypeName>("type");
+			public PutMappingRequest(Indices index, TypeName type) : base(r=>r.Optional("index", index).Required("type", type)){}
+		public PutMappingRequest(Indices index, TypeName type) : base(r=>r.Optional("index", index).Required("type", type)){}
+		public PutMappingRequest(TypeName type) : base(r=>r.Required("type", type)){}
+		public PutMappingRequest(Indices index, TypeName type) : base(r=>r.Optional("index", index).Required("type", type)){}
+		public PutMappingRequest(Indices index, TypeName type) : base(r=>r.Optional("index", index).Required("type", type)){}
+		public PutMappingRequest(TypeName type) : base(r=>r.Required("type", type)){}
 			///<summary>Explicit operation timeout</summary>
 		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
 		
@@ -2581,6 +2737,7 @@ namespace Nest
 	{
 		Name IPutScriptRequest.Lang => Self.RouteValues.Get<Name>("lang");
 		Id IPutScriptRequest.Id => Self.RouteValues.Get<Id>("id");
+			public PutScriptRequest(Name lang, Id id) : base(r=>r.Required("lang", lang).Required("id", id)){}
 			///<summary>Explicit operation type</summary>
 		public OpType OpType { get { return Q<OpType>("op_type"); } set { Q("op_type", value); } }
 		
@@ -2607,6 +2764,7 @@ namespace Nest
 	public partial class PutTemplateRequest  : RequestBase<PutTemplateRequestParameters>, IPutTemplateRequest
 	{
 		Name IPutTemplateRequest.Name => Self.RouteValues.Get<Name>("name");
+			public PutTemplateRequest(Name name) : base(r=>r.Required("name", name)){}
 			///<summary>Whether the index template should only be added if new or can also replace an existing one</summary>
 		public bool Create { get { return Q<bool>("create"); } set { Q("create", value); } }
 		
@@ -2636,6 +2794,12 @@ namespace Nest
 	public partial class PutWarmerRequest  : RequestBase<PutWarmerRequestParameters>, IPutWarmerRequest
 	{
 		Name IPutWarmerRequest.Name => Self.RouteValues.Get<Name>("name");
+			public PutWarmerRequest(Name name) : base(r=>r.Required("name", name)){}
+		public PutWarmerRequest(Indices index, Name name) : base(r=>r.Optional("index", index).Required("name", name)){}
+		public PutWarmerRequest(Indices index, Types type, Name name) : base(r=>r.Optional("index", index).Optional("type", type).Required("name", name)){}
+		public PutWarmerRequest(Name name) : base(r=>r.Required("name", name)){}
+		public PutWarmerRequest(Indices index, Name name) : base(r=>r.Optional("index", index).Required("name", name)){}
+		public PutWarmerRequest(Indices index, Types type, Name name) : base(r=>r.Optional("index", index).Optional("type", type).Required("name", name)){}
 			///<summary>Specify timeout for connection to master</summary>
 		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
@@ -2666,6 +2830,8 @@ namespace Nest
 	///<summary>Request parameters for IndicesRecoveryForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-recovery.html</pre></summary>
 	public partial class RecoveryStatusRequest  : RequestBase<RecoveryStatusRequestParameters>, IRecoveryStatusRequest
 	{
+			public RecoveryStatusRequest() : base(){}
+		public RecoveryStatusRequest(Indices index) : base(r=>r.Optional("index", index)){}
 			///<summary>Whether to display detailed information about shard recovery</summary>
 		public bool Detailed { get { return Q<bool>("detailed"); } set { Q("detailed", value); } }
 		
@@ -2690,6 +2856,8 @@ namespace Nest
 	///<summary>Request parameters for IndicesRefreshForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-refresh.html</pre></summary>
 	public partial class RefreshRequest  : RequestBase<RefreshRequestParameters>, IRefreshRequest
 	{
+			public RefreshRequest() : base(){}
+		public RefreshRequest(Indices index) : base(r=>r.Optional("index", index)){}
 			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
@@ -2720,6 +2888,8 @@ namespace Nest
 	///<summary>Request parameters for RenderSearchTemplate <pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</pre></summary>
 	public partial class RenderSearchTemplateRequest  : RequestBase<RenderSearchTemplateRequestParameters>, IRenderSearchTemplateRequest
 	{
+			public RenderSearchTemplateRequest() : base(){}
+		public RenderSearchTemplateRequest(Id id) : base(r=>r.Optional("id", id)){}
 			///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
@@ -2741,6 +2911,7 @@ namespace Nest
 	{
 		Name IRestoreRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
 		Name IRestoreRequest.Snapshot => Self.RouteValues.Get<Name>("snapshot");
+			public RestoreRequest(Name repository, Name snapshot) : base(r=>r.Required("repository", repository).Required("snapshot", snapshot)){}
 			///<summary>Explicit operation timeout for connection to master node</summary>
 		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
@@ -2762,6 +2933,8 @@ namespace Nest
 	///<summary>Request parameters for Scroll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</pre></summary>
 	public partial class ScrollRequest  : RequestBase<ScrollRequestParameters>, IScrollRequest
 	{
+			public ScrollRequest() : base(){}
+		public ScrollRequest(ScrollId scroll_id) : base(r=>r.Optional("scroll_id", scroll_id)){}
 			///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
@@ -2777,6 +2950,9 @@ namespace Nest
 	///<summary>Request parameters for SearchExists <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-exists.html</pre></summary>
 	public partial class SearchExistsRequest  : RequestBase<SearchExistsRequestParameters>, ISearchExistsRequest
 	{
+			public SearchExistsRequest() : base(){}
+		public SearchExistsRequest(Indices index) : base(r=>r.Optional("index", index)){}
+		public SearchExistsRequest(Indices index, Types type) : base(r=>r.Optional("index", index).Optional("type", type)){}
 			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
@@ -2831,6 +3007,9 @@ namespace Nest
 	///<summary>Request parameters for Search <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html</pre></summary>
 	public partial class SearchRequest  : RequestBase<SearchRequestParameters>, ISearchRequest
 	{
+			public SearchRequest() : base(){}
+		public SearchRequest(Indices index) : base(r=>r.Optional("index", index)){}
+		public SearchRequest(Indices index, Types type) : base(r=>r.Optional("index", index).Optional("type", type)){}
 			///<summary>The analyzer to use for the query string</summary>
 		public string Analyzer { get { return Q<string>("analyzer"); } set { Q("analyzer", value); } }
 		
@@ -2900,6 +3079,9 @@ namespace Nest
 	///<summary>Request parameters for SearchShards <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html</pre></summary>
 	public partial class SearchShardsRequest  : RequestBase<SearchShardsRequestParameters>, ISearchShardsRequest
 	{
+			public SearchShardsRequest() : base(){}
+		public SearchShardsRequest(Indices index) : base(r=>r.Optional("index", index)){}
+		public SearchShardsRequest(Indices index, Types type) : base(r=>r.Optional("index", index).Optional("type", type)){}
 			///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
 		
@@ -2933,6 +3115,9 @@ namespace Nest
 	///<summary>Request parameters for SearchTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html</pre></summary>
 	public partial class SearchTemplateRequest  : RequestBase<SearchTemplateRequestParameters>, ISearchTemplateRequest
 	{
+		public SearchTemplateRequest() : base(){}
+		public SearchTemplateRequest(Indices index) : base(r=>r.Optional("index", index)){}
+		public SearchTemplateRequest(Indices index, Types type) : base(r=>r.Optional("index", index).Optional("type", type)){}
 			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
@@ -2969,6 +3154,8 @@ namespace Nest
 	///<summary>Request parameters for IndicesSegmentsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-segments.html</pre></summary>
 	public partial class SegmentsRequest  : RequestBase<SegmentsRequestParameters>, ISegmentsRequest
 	{
+			public SegmentsRequest() : base(){}
+		public SegmentsRequest(Indices index) : base(r=>r.Optional("index", index)){}
 			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
@@ -3003,6 +3190,7 @@ namespace Nest
 	{
 		Name ISnapshotRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
 		Name ISnapshotRequest.Snapshot => Self.RouteValues.Get<Name>("snapshot");
+			public SnapshotRequest(Name repository, Name snapshot) : base(r=>r.Required("repository", repository).Required("snapshot", snapshot)){}
 			///<summary>Explicit operation timeout for connection to master node</summary>
 		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
@@ -3024,6 +3212,9 @@ namespace Nest
 	///<summary>Request parameters for SnapshotStatus <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class SnapshotStatusRequest  : RequestBase<SnapshotStatusRequestParameters>, ISnapshotStatusRequest
 	{
+			public SnapshotStatusRequest() : base(){}
+		public SnapshotStatusRequest(Name repository) : base(r=>r.Optional("repository", repository)){}
+		public SnapshotStatusRequest(Name repository, Names snapshot) : base(r=>r.Optional("repository", repository).Optional("snapshot", snapshot)){}
 			///<summary>Explicit operation timeout for connection to master node</summary>
 		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
@@ -3048,6 +3239,7 @@ namespace Nest
 		IndexName ISourceRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		TypeName ISourceRequest.Type => Self.RouteValues.Get<TypeName>("type");
 		Id ISourceRequest.Id => Self.RouteValues.Get<Id>("id");
+			public SourceRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id)){}
 			///<summary>The ID of the parent document</summary>
 		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
 		
@@ -3091,6 +3283,7 @@ namespace Nest
 		IndexName ISourceRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		TypeName ISourceRequest.Type => Self.RouteValues.Get<TypeName>("type");
 		Id ISourceRequest.Id => Self.RouteValues.Get<Id>("id");
+			public SourceRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id)){}
 			///<summary>The ID of the parent document</summary>
 		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
 		
@@ -3136,6 +3329,8 @@ namespace Nest
 	///<summary>Request parameters for Suggest <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-suggesters.html</pre></summary>
 	public partial class SuggestRequest  : RequestBase<SuggestRequestParameters>, ISuggestRequest
 	{
+			public SuggestRequest() : base(){}
+		public SuggestRequest(Indices index) : base(r=>r.Optional("index", index)){}
 			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
@@ -3166,6 +3361,8 @@ namespace Nest
 	///<summary>Request parameters for IndicesFlushSyncedForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush.html</pre></summary>
 	public partial class SyncedFlushRequest  : RequestBase<SyncedFlushRequestParameters>, ISyncedFlushRequest
 	{
+			public SyncedFlushRequest() : base(){}
+		public SyncedFlushRequest(Indices index) : base(r=>r.Optional("index", index)){}
 			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
@@ -3192,6 +3389,7 @@ namespace Nest
 	public partial class TemplateExistsRequest  : RequestBase<TemplateExistsRequestParameters>, ITemplateExistsRequest
 	{
 		Name ITemplateExistsRequest.Name => Self.RouteValues.Get<Name>("name");
+			public TemplateExistsRequest(Name name) : base(r=>r.Required("name", name)){}
 			///<summary>Explicit operation timeout for connection to master node</summary>
 		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
@@ -3217,6 +3415,8 @@ namespace Nest
 	{
 		IndexName ITermVectorsRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		TypeName ITermVectorsRequest.Type => Self.RouteValues.Get<TypeName>("type");
+			public TermVectorsRequest(IndexName index, TypeName type) : base(r=>r.Required("index", index).Required("type", type)){}
+		public TermVectorsRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Optional("id", id)){}
 			///<summary>Specifies if total term frequency and document frequency should be returned.</summary>
 		public bool TermStatistics { get { return Q<bool>("term_statistics"); } set { Q("term_statistics", value); } }
 		
@@ -3275,6 +3475,7 @@ namespace Nest
 	{
 		Indices ITypeExistsRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types ITypeExistsRequest.Type => Self.RouteValues.Get<Types>("type");
+			public TypeExistsRequest(Indices index, Types type) : base(r=>r.Required("index", index).Required("type", type)){}
 			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
@@ -3308,6 +3509,7 @@ namespace Nest
 		IndexName IUpdateRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		TypeName IUpdateRequest.Type => Self.RouteValues.Get<TypeName>("type");
 		Id IUpdateRequest.Id => Self.RouteValues.Get<Id>("id");
+			public UpdateRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id)){}
 			///<summary>Explicit write consistency setting for the operation</summary>
 		public Consistency Consistency { get { return Q<Consistency>("consistency"); } set { Q("consistency", value); } }
 		
@@ -3365,6 +3567,8 @@ namespace Nest
 	///<summary>Request parameters for IndicesPutSettingsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-update-settings.html</pre></summary>
 	public partial class UpdateSettingsRequest  : RequestBase<UpdateSettingsRequestParameters>, IUpdateSettingsRequest
 	{
+			public UpdateSettingsRequest() : base(){}
+		public UpdateSettingsRequest(Indices index) : base(r=>r.Optional("index", index)){}
 			///<summary>Specify timeout for connection to master</summary>
 		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
@@ -3395,6 +3599,8 @@ namespace Nest
 	///<summary>Request parameters for IndicesUpgradeForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</pre></summary>
 	public partial class UpgradeRequest  : RequestBase<UpgradeRequestParameters>, IUpgradeRequest
 	{
+			public UpgradeRequest() : base(){}
+		public UpgradeRequest(Indices index) : base(r=>r.Optional("index", index)){}
 			///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
@@ -3425,6 +3631,8 @@ namespace Nest
 	///<summary>Request parameters for IndicesGetUpgradeForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</pre></summary>
 	public partial class UpgradeStatusRequest  : RequestBase<UpgradeStatusRequestParameters>, IUpgradeStatusRequest
 	{
+			public UpgradeStatusRequest() : base(){}
+		public UpgradeStatusRequest(Indices index) : base(r=>r.Optional("index", index)){}
 			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
@@ -3452,6 +3660,9 @@ namespace Nest
 	///<summary>Request parameters for IndicesValidateQueryForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html</pre></summary>
 	public partial class ValidateQueryRequest<T>  : RequestBase<ValidateQueryRequestParameters>, IValidateQueryRequest
 	{
+			public ValidateQueryRequest() : base(){}
+		public ValidateQueryRequest(Indices index) : base(r=>r.Optional("index", index)){}
+		public ValidateQueryRequest(Indices index, Types type) : base(r=>r.Optional("index", index).Optional("type", type)){}
 			///<summary>Return detailed information about the error</summary>
 		public bool Explain { get { return Q<bool>("explain"); } set { Q("explain", value); } }
 		
@@ -3501,6 +3712,9 @@ namespace Nest
 	///<summary>Request parameters for IndicesValidateQueryForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html</pre></summary>
 	public partial class ValidateQueryRequest  : RequestBase<ValidateQueryRequestParameters>, IValidateQueryRequest
 	{
+			public ValidateQueryRequest() : base(){}
+		public ValidateQueryRequest(Indices index) : base(r=>r.Optional("index", index)){}
+		public ValidateQueryRequest(Indices index, Types type) : base(r=>r.Optional("index", index).Optional("type", type)){}
 			///<summary>Return detailed information about the error</summary>
 		public bool Explain { get { return Q<bool>("explain"); } set { Q("explain", value); } }
 		
@@ -3557,6 +3771,7 @@ namespace Nest
 	public partial class VerifyRepositoryRequest  : RequestBase<VerifyRepositoryRequestParameters>, IVerifyRepositoryRequest
 	{
 		Name IVerifyRepositoryRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
+			public VerifyRepositoryRequest(Name repository) : base(r=>r.Required("repository", repository)){}
 			///<summary>Explicit operation timeout for connection to master node</summary>
 		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		

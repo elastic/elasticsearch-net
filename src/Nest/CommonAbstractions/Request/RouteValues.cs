@@ -47,8 +47,8 @@ namespace Nest
 			}
 		}
 
-		internal void Required(string route, IUrlParameter value) => this._routeValues.Add(route, value);
-		internal void Optional(string route, IUrlParameter value) => this._routeValues.Add(route, value);
+		internal RouteValues Required(string route, IUrlParameter value) => Route(route, value);
+		internal RouteValues Optional(string route, IUrlParameter value) => Route(route, value, false);
 
 		internal TActual Get<TActual>(string route) where TActual : class, IUrlParameter => this._routeValues[route] as TActual;
 

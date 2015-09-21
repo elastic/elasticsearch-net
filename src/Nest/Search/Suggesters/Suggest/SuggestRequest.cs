@@ -53,9 +53,6 @@ namespace Nest
 		public string GlobalText { get; set; }
 		public IDictionary<string, ISuggester> Suggest { get; set; }
 
-		public SuggestRequest() { }
-		public SuggestRequest(Indices indices) : base(r => r.Optional(indices)) { }
-
 		object ICustomJson.GetCustomJson() { return SuggestPathInfo.GetCustomJson(this); }
 	}
 
