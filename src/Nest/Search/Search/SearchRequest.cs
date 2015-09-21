@@ -8,9 +8,8 @@ using System.Linq.Expressions;
 namespace Nest
 {
 
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<SearchRequest>))]
-	public interface ISearchRequest : IRequest<SearchRequestParameters>
+	public partial interface ISearchRequest 
 	{
 		Type ClrType { get; }
 
@@ -95,11 +94,10 @@ namespace Nest
 		SearchRequestParameters QueryString { get; set; }
 	}
 
-	public interface ISearchRequest<T> : ISearchRequest {} 
-
 	//TODO Force get if source is specified on query string
+	//TODO removed typed request variant
 
-	public partial class SearchRequest : RequestBase<SearchRequestParameters>, ISearchRequest
+	public partial class SearchRequest 
 	{
 		private Type _clrType { get; set; }
 		Type ISearchRequest.ClrType { get { return _clrType; } }
@@ -141,61 +139,10 @@ namespace Nest
 		public SearchRequestParameters QueryString { get; set; }
 	}
 
-	public partial class SearchRequest<T> : RequestBase<SearchRequestParameters>, ISearchRequest
-		where T : class
-	{
-		public SearchRequest() {}
-
-		private ISearchRequest Self => this;
-
-		public Type ClrType => typeof(T);
-		public string Timeout { get; set; }
-		public int? From { get; set; }
-		public int? Size { get; set; }
-		public bool? Explain { get; set; }
-		public bool? Version { get; set; }
-		public bool? TrackScores { get; set; }
-		public double? MinScore { get; set; }
-		public long? TerminateAfter { get; set; }
-		public IDictionary<IndexName, double> IndicesBoost { get; set; }
-		public IList<ISort> Sort { get; set; }
-		public IDictionary<string, ISuggestBucket> Suggest { get; set; }
-		public IHighlightRequest Highlight { get; set; }
-		public IRescore Rescore { get; set; }
-		public IList<FieldName> Fields { get; set; }
-		public IList<FieldName> FielddataFields { get; set; }
-		public IDictionary<string, IScriptQuery> ScriptFields { get; set; }
-		public ISourceFilter Source { get; set; }
-		public IDictionary<string, IInnerHitsContainer> InnerHits { get; set; }
-		public AggregationDictionary Aggregations { get; set; }
-
-		IQueryContainer ISearchRequest.Query { get; set; }
-		[JsonProperty(PropertyName = "query")]
-		public QueryContainer Query { get { return Self.Query as QueryContainer; } set { Self.Query = value; } }
-
-		IQueryContainer ISearchRequest.PostFilter { get; set; }
-		[JsonProperty(PropertyName = "post_filter")]
-		public QueryContainer PostFilter { get { return Self.PostFilter as QueryContainer; } set { Self.PostFilter = value; } }
-
-		SearchType? ISearchRequest.SearchType => this.QueryString?.GetQueryStringValue<SearchType?>("search_type");
-
-		string ISearchRequest.Preference => this.QueryString?.GetQueryStringValue<string>("preference");
-
-		string ISearchRequest.Routing => this.QueryString?.GetQueryStringValue<string[]>("routing") == null
-			? null
-			: string.Join(",", this.QueryString?.GetQueryStringValue<string[]>("routing"));
-
-		bool? ISearchRequest.IgnoreUnavalable => this.QueryString?.GetQueryStringValue<bool?>("ignore_unavailable");
-
-		public Func<dynamic, Hit<dynamic>, Type> TypeSelector { get; set; }
-		public SearchRequestParameters QueryString { get; set; }
-	}
-
 	/// <summary>
 	/// A descriptor wich describes a search operation for _search and _msearch
 	/// </summary>
-	public partial class SearchDescriptor<T> : RequestDescriptorBase<SearchDescriptor<T>, SearchRequestParameters>, ISearchRequest 
-		where T : class
+	public partial class SearchDescriptor<T> where T : class
 	{
 		private ISearchRequest Self => this;
 

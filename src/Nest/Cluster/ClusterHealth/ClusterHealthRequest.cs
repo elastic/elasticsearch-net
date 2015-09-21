@@ -6,11 +6,10 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IClusterHealthRequest : IRequest<ClusterHealthRequestParameters> { }
+	public partial interface IClusterHealthRequest { }
 
-	public partial class ClusterHealthRequest : RequestBase<ClusterHealthRequestParameters>, IClusterHealthRequest
-    {
+	public partial class ClusterHealthRequest 
+	{
 		/// <summary>
 		/// /_cluster/health
 		/// </summary>
@@ -20,10 +19,8 @@ namespace Nest
 		/// /_cluster/health/{index}
 		/// </summary>
 		public ClusterHealthRequest(Indices indices) : base(p => p.Optional(indices)) { }
-    }
+	}
 
-	public partial class ClusterHealthDescriptor : RequestDescriptorBase<ClusterHealthDescriptor, ClusterHealthRequestParameters>, IClusterHealthRequest
-    {
-
-    }
+	public partial class ClusterHealthDescriptor { 
+	}
 }

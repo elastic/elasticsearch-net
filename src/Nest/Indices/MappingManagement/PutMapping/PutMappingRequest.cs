@@ -5,9 +5,8 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<PutMappingRequest>))]
-	public interface IPutMappingRequest : ITypeMapping
+	public partial interface IPutMappingRequest : ITypeMapping
 	{
 	}
 
@@ -22,14 +21,14 @@ namespace Nest
 		/// Calls putmapping on /_all/{type}
 		/// </summary>
 		public PutMappingRequest(TypeName type)
-            : base(p => p.Required(Types.Single(type)))
-        { }
+			: base(p => p.Required(Types.Single(type)))
+		{ }
 
 		/// <summary>
 		/// Calls putmapping on /{indices}/{type}
 		/// </summary>
 		public PutMappingRequest(Indices indices, TypeName types)
-            : base(p => p.Required(Types.Single(types)).Optional(indices))
+			: base(p => p.Required(Types.Single(types)).Optional(indices))
 		{ }
 
 		/// <inheritdoc/>
@@ -78,76 +77,25 @@ namespace Nest
 		public ITypeField TypeField { get; set; }
 	}
 
-	public partial class PutMappingRequest<T> : RequestBase<PutMappingRequestParameters>, IPutMappingRequest<T>
+	public partial class PutMappingRequest<T> : PutMappingRequest
 		where T : class
 	{
-
-        public PutMappingRequest()
-            : base(p => p.Required(Types.Single<T>()))
-        { }
-
-        public PutMappingRequest(Indices indices)
-            : base(p => p.Required(Types.Single<T>()).Optional(indices))
-        { }
-
-		/// <inheritdoc/>
-		public IAllField AllField { get; set; }
-		/// <inheritdoc/>
-		public IBoostField BoostField { get; set; }
-		/// <inheritdoc/>
-		public bool? DateDetection { get; set; }
-		/// <inheritdoc/>
-		public IEnumerable<string> DynamicDateFormats { get; set; }
-		/// <inheritdoc/>
-		public IDictionary<string, DynamicTemplate> DynamicTemplates { get; set; }
-		/// <inheritdoc/>
-		public DynamicMapping? Dynamic { get; set; }
-		/// <inheritdoc/>
-		public string Analyzer { get; set; }
-		/// <inheritdoc/>
-		public string SearchAnalyzer { get; set; }
-		/// <inheritdoc/>
-		public IFieldNamesField FieldNamesField { get; set; }
-		/// <inheritdoc/>
-		public IIdField IdField { get; set; }
-		/// <inheritdoc/>
-		public IIndexField IndexField { get; set; }
-		/// <inheritdoc/>
-		public FluentDictionary<string, object> Meta { get; set; }
-		/// <inheritdoc/>
-		public bool? NumericDetection { get; set; }
-		/// <inheritdoc/>
-		public IParentField ParentField { get; set; }
-		/// <inheritdoc/>
-		public IProperties Properties { get; set; }
-		/// <inheritdoc/>
-		public IRoutingField RoutingField { get; set; }
-		/// <inheritdoc/>
-		public ISizeField SizeField { get; set; }
-		/// <inheritdoc/>
-		public ISourceField SourceField { get; set; }
-		/// <inheritdoc/>
-		public ITimestampField TimestampField { get; set; }
-		/// <inheritdoc/>
-		public IList<IMappingTransform> Transform { get; set; }
-		/// <inheritdoc/>
-		public ITtlField TtlField { get; set; }
-		/// <inheritdoc/>
-		public ITypeField TypeField { get; set; }
+		//TODO constructors
 	}
 
+	//TODO why is there no typed generated descriptor
+
 	[DescriptorFor("IndicesPutMapping")]
-	public partial class PutMappingDescriptor<T> :
-		RequestDescriptorBase<PutMappingDescriptor<T>, PutMappingRequestParameters>, IPutMappingRequest<T>
+	public partial class PutMappingDescriptor<T> : RequestDescriptorBase<PutMappingDescriptor<T>, PutMappingRequestParameters>, IPutMappingRequest<T>
 		where T : class
 	{
-        public PutMappingDescriptor()
-            : base(p => p.Required(Types.Single<T>()))
-        { }
+		public PutMappingDescriptor()
+			: base(p => p.Required(Types.Single<T>()))
+		{ }
 
-        public PutMappingDescriptor(Indices indices)
-            : base(p => p.Required(Types.Single<T>()).Optional(indices))
-        { }
+		public PutMappingDescriptor(Indices indices)
+			: base(p => p.Required(Types.Single<T>()).Optional(indices))
+		{ }
 
 		protected PutMappingDescriptor<T> Assign(Action<ITypeMapping> assigner) => Fluent.Assign(this, assigner);
 		private ITypeMapping Self => this;

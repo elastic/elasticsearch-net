@@ -8,15 +8,14 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IPercolateCountRequest<TDocument> : IRequest<PercolateCountRequestParameters>, IPercolateOperation
+	public interface IPercolateCountRequest<TDocument> : IPercolateCountRequest, IPercolateOperation
 		where TDocument : class
 	{
 		[JsonProperty(PropertyName = "doc")]
 		TDocument Document { get; set; }
 	}
 
-	public partial class PercolateCountRequest<TDocument> : RequestBase<PercolateCountRequestParameters>, IPercolateCountRequest<TDocument>
+	public partial class PercolateCountRequest<TDocument> : IPercolateCountRequest<TDocument>
 		where TDocument : class
 	{
 		public string Id { get; set; }
@@ -37,8 +36,7 @@ namespace Nest
 	}
 	
 	[DescriptorFor("CountPercolate")]
-	public partial class PercolateCountDescriptor<T> : RequestDescriptorBase<PercolateCountDescriptor<T>, PercolateCountRequestParameters>
-		, IPercolateCountRequest<T>
+	public partial class PercolateCountDescriptor<T> : IPercolateCountRequest<T>
 		where T : class
 	{
 		private IPercolateCountRequest<T> Self => this;

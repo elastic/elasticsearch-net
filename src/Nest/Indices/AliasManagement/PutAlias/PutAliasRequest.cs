@@ -8,8 +8,7 @@ using System.Text;
 namespace Nest
 {
 
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IPutAliasRequest : IRequest<PutAliasRequestParameters>
+	public partial interface IPutAliasRequest 
 	{
 		[JsonProperty("routing")]
 		string Routing { get; set; }
@@ -19,7 +18,7 @@ namespace Nest
 		IQueryContainer Filter { get; set; }
 	}
 
-	public partial class PutAliasRequest : RequestBase<PutAliasRequestParameters>, IPutAliasRequest
+	public partial class PutAliasRequest 
 	{
 		public string Routing { get; set; }
 
@@ -28,7 +27,6 @@ namespace Nest
 
 	[DescriptorFor("IndicesPutAlias")]
 	public partial class PutAliasDescriptor 
-		: RequestDescriptorBase<PutAliasDescriptor, PutAliasRequestParameters>, IPutAliasRequest
 	{
 		IPutAliasRequest Self => this;
 		string IPutAliasRequest.Routing { get; set; }

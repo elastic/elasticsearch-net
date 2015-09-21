@@ -6,15 +6,10 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IDeleteWarmerRequest : IRequest<DeleteWarmerRequestParameters> { }
+	public partial interface IDeleteWarmerRequest { }
 
-	public partial class DeleteWarmerRequest : RequestBase<DeleteWarmerRequestParameters>, IDeleteWarmerRequest
-	{
-	}
+	public partial class DeleteWarmerRequest { }
 
 	[DescriptorFor("IndicesDeleteWarmer")]
-	public partial class DeleteWarmerDescriptor : RequestDescriptorBase<DeleteWarmerDescriptor, DeleteWarmerRequestParameters>, IDeleteWarmerRequest
-	{
-	}
+	public partial class DeleteWarmerDescriptor { }
 }

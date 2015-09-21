@@ -4,17 +4,13 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IExplainRequest : IRequest<ExplainRequestParameters>
+	public partial interface IExplainRequest 
 	{
 		[JsonProperty("query")]
 		IQueryContainer Query { get; set; }
 	}
 
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IExplainRequest<T> : IExplainRequest
-		where T : class
-	{ }
+	//TODO Removed typed variant assert this is ok using new setup
 
 	//TODO port this HttpMethod logic to property
 	//internal static class ExplainPathInfo
@@ -29,30 +25,17 @@ namespace Nest
 	//	}
 	//}
 
-	public partial class ExplainRequest : RequestBase<ExplainRequestParameters>, IExplainRequest
-	{
-		public IQueryContainer Query { get; set; }
-	}
-
-	public partial class ExplainRequest<T> : RequestBase<ExplainRequestParameters>, IExplainRequest<T>
-		where T : class
+	public partial class ExplainRequest 
 	{
 		public IQueryContainer Query { get; set; }
 	}
 
 	[DescriptorFor("Explain")]
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial class ExplainDescriptor<T> : RequestDescriptorBase<ExplainDescriptor<T>, ExplainRequestParameters>, IExplainRequest<T>
-		where T : class
+	public partial class ExplainDescriptor<T> where T : class
 	{
-		private IExplainRequest Self => this;
-
 		IQueryContainer IExplainRequest.Query { get; set; }
 
-		public ExplainDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector)
-		{
-			Self.Query = querySelector(new QueryContainerDescriptor<T>());
-			return this;
-		}
+		public ExplainDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector) => 
+			Assign(a => a.Query = querySelector?.Invoke(new QueryContainerDescriptor<T>()));
 	}
 }

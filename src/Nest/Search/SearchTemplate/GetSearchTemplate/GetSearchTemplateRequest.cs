@@ -7,18 +7,18 @@ using System.Text;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IGetSearchTemplateRequest : IRequest<GetTemplateRequestParameters>
+	//TODO RENDERSEARCHTEMPATE?
+	public partial interface IGetSearchTemplateRequest 
 	{
 		//TODO NAME
 	}
-
-	public partial class GetSearchTemplateRequest : RequestBase<GetTemplateRequestParameters>, IGetSearchTemplateRequest
+	
+	public partial class GetSearchTemplateRequest 
 	{
 	}
 
 
-	public partial class GetSearchTemplateDescriptor : RequestDescriptorBase<GetSearchTemplateDescriptor, GetTemplateRequestParameters>, IGetSearchTemplateRequest
+	public partial class GetSearchTemplateDescriptor 
 	{
 	}
 }

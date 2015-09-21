@@ -9,9 +9,9 @@ namespace Nest
 {
 	//TODO we used to to a complex infer on Id, if its empty first try on Doc otherwise on Upsert doc, is this still valid?
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IUpdateRequest<TDocument,TPartialDocument> : IRequest<UpdateRequestParameters>
+	public interface IUpdateRequest<TDocument, TPartialDocument> : IUpdateRequest
 		where TDocument : class
-		where TPartialDocument : class 
+		where TPartialDocument : class
 	{
 		[JsonProperty(PropertyName = "script")]
 		string Script { get; set; }
@@ -26,7 +26,7 @@ namespace Nest
 		string Language { get; set; }
 
 		[JsonProperty(PropertyName = "params")]
-		[JsonConverter(typeof (VerbatimDictionaryKeysJsonConverter))]
+		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
 		Dictionary<string, object> Params { get; set; }
 
 		[JsonProperty(PropertyName = "upsert")]
@@ -39,14 +39,14 @@ namespace Nest
 		TPartialDocument Doc { get; set; }
 	}
 
-	public class UpdateRequest<TDocument> : UpdateRequest<TDocument,TDocument>
+	public class UpdateRequest<TDocument> : UpdateRequest<TDocument, TDocument>
 		where TDocument : class
-    {
+	{
 	}
 
-	public partial class UpdateRequest<TDocument,TPartialDocument> : RequestBase<UpdateRequestParameters>, IUpdateRequest<TDocument, TPartialDocument> 
+	public partial class UpdateRequest<TDocument, TPartialDocument> : RequestBase<UpdateRequestParameters>, IUpdateRequest<TDocument, TPartialDocument>
 		where TDocument : class
-		where TPartialDocument : class 
+		where TPartialDocument : class
 	{
 		public string Script { get; set; }
 		public string ScriptFile { get; set; }
@@ -57,19 +57,19 @@ namespace Nest
 		public TPartialDocument Doc { get; set; }
 	}
 
-	public partial class UpdateDescriptor<TDocument,TPartialDocument> 
-		: RequestDescriptorBase<UpdateDescriptor<TDocument, TPartialDocument>, UpdateRequestParameters>
-		, IUpdateRequest<TDocument, TPartialDocument> 
-		where TDocument : class 
+	public partial class UpdateDescriptor<TDocument, TPartialDocument>
+		: RequestDescriptorBase<UpdateDescriptor<TDocument, TPartialDocument>, UpdateRequestParameters, IUpdateRequest>
+		, IUpdateRequest<TDocument, TPartialDocument>
+		where TDocument : class
 		where TPartialDocument : class
 	{
 
 		private IUpdateRequest<TDocument, TPartialDocument> Self => this;
 
 		string IUpdateRequest<TDocument, TPartialDocument>.Script { get; set; }
-		
+
 		string IUpdateRequest<TDocument, TPartialDocument>.ScriptId { get; set; }
-		
+
 		string IUpdateRequest<TDocument, TPartialDocument>.ScriptFile { get; set; }
 
 		string IUpdateRequest<TDocument, TPartialDocument>.Language { get; set; }
@@ -82,7 +82,7 @@ namespace Nest
 
 		TPartialDocument IUpdateRequest<TDocument, TPartialDocument>.Doc { get; set; }
 
-		
+
 		public UpdateDescriptor<TDocument, TPartialDocument> Script(string script)
 		{
 			script.ThrowIfNull("script");
@@ -112,7 +112,7 @@ namespace Nest
 
 		public UpdateDescriptor<TDocument, TPartialDocument> Id(TDocument document, bool useAsUpsert)
 		{
-            //TODO: What should this be when we have an Ids type?
+			//TODO: What should this be when we have an Ids type?
 			//((IDocumentOptionalPath<UpdateRequestParameters, TDocument>)Self).IdFrom = document;
 			if (useAsUpsert)
 				return this.Upsert(document);
@@ -146,20 +146,20 @@ namespace Nest
 		}
 
 		///<summary>A comma-separated list of fields to return in the response</summary>
-		public UpdateDescriptor<TDocument,TPartialDocument> Fields(params string[] fields)
+		public UpdateDescriptor<TDocument, TPartialDocument> Fields(params string[] fields)
 		{
 			this.Self.RequestParameters.AddQueryString("fields", fields);
 			return this;
 		}
-		
-			
+
+
 		///<summary>A comma-separated list of fields to return in the response</summary>
-		public UpdateDescriptor<TDocument,TPartialDocument> Fields(params Expression<Func<TPartialDocument, object>>[] typedPathLookups) 
+		public UpdateDescriptor<TDocument, TPartialDocument> Fields(params Expression<Func<TPartialDocument, object>>[] typedPathLookups)
 		{
 			if (!typedPathLookups.HasAny())
 				return this;
 
-			this.Self.RequestParameters.AddQueryString("fields",typedPathLookups);
+			this.Self.RequestParameters.AddQueryString("fields", typedPathLookups);
 			return this;
 		}
 	}

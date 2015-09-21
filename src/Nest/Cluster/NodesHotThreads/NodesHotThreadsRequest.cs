@@ -8,26 +8,16 @@ using System.Text;
 
 namespace Nest
 {
-	public interface INodesHotThreadsRequest 
-        : IRequest<NodesHotThreadsRequestParameters> { }
-
+	public partial interface INodesHotThreadsRequest { }
+	 
 	public partial class NodesHotThreadsRequest 
-		: RequestBase<NodesHotThreadsRequestParameters>, INodesHotThreadsRequest
-    {
-        public NodesHotThreadsRequest() { }
+	{
+		public NodesHotThreadsRequest() { }
 
-        public NodesHotThreadsRequest(string nodeId)
-            : base(p => p.RequiredNodeId(nodeId))
-        { }
-    }
+		public NodesHotThreadsRequest(string nodeId)
+			: base(p => p.RequiredNodeId(nodeId))
+		{ }
+	}
 
-	public partial class NodesHotThreadsDescriptor 
-		: RequestDescriptorBase<NodesHotThreadsDescriptor, NodesHotThreadsRequestParameters>, INodesHotThreadsRequest
-    {
-        public NodesHotThreadsDescriptor() { }
-
-        public NodesHotThreadsDescriptor(string nodeId)
-            : base(p => p.RequiredNodeId(nodeId))
-        { }
-    }
+	public partial class NodesHotThreadsDescriptor { }
 }

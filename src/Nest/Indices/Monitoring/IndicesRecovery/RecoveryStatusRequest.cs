@@ -6,15 +6,10 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IRecoveryStatusRequest : IRequest<RecoveryStatusRequestParameters> { }
+	public partial interface IRecoveryStatusRequest { }
 
-	public partial class RecoveryStatusRequest : RequestBase<RecoveryStatusRequestParameters>, IRecoveryStatusRequest
-	{
-	}
+	public partial class RecoveryStatusRequest { }
 
 	[DescriptorFor("IndicesRecovery")]
-	public partial class RecoveryStatusDescriptor : RequestDescriptorBase<RecoveryStatusDescriptor, RecoveryStatusRequestParameters>, IRecoveryStatusRequest
-	{
-	}
+	public partial class RecoveryStatusDescriptor { }
 }

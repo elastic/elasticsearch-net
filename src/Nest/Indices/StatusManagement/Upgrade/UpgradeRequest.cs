@@ -7,18 +7,10 @@ using System.Text;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IUpgradeRequest : IRequest<UpgradeRequestParameters>
-	{
-	}
+	public partial interface IUpgradeRequest : IRequest<UpgradeRequestParameters> { }
 
-	public partial class UpgradeRequest : RequestBase<UpgradeRequestParameters>, IUpgradeRequest
-	{
-	}
+	public partial class UpgradeRequest { }
 
 	[DescriptorFor("IndicesUpgrade")]
-	public partial class UpgradeDescriptor 
-		: RequestDescriptorBase<UpgradeDescriptor, UpgradeRequestParameters>, IUpgradeRequest
-	{
-	}
+	public partial class UpgradeDescriptor { }
 }

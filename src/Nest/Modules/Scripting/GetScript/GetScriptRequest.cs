@@ -3,8 +3,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IGetScriptRequest : IRequest<GetScriptRequestParameters>
+	public partial interface IGetScriptRequest 
 	{
 		[JsonProperty("lang")]
 		string Lang { get; set; }
@@ -12,14 +11,14 @@ namespace Nest
 		string Id { get; set; }
 	}
 
-	public partial class GetScriptRequest : RequestBase<GetScriptRequestParameters>, IGetScriptRequest
+	public partial class GetScriptRequest 
 	{
 		public string Lang { get; set; }
 		public string Id { get; set; }
 	}
 
 	[DescriptorFor("ScriptGet")]
-	public partial class GetScriptDescriptor : RequestDescriptorBase<GetScriptDescriptor, GetScriptRequestParameters>, IGetScriptRequest
+	public partial class GetScriptDescriptor 
 	{
 		IGetScriptRequest Self => this;
 		string IGetScriptRequest.Lang { get; set; }

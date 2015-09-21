@@ -7,8 +7,7 @@ using System.Text;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IPutSearchTemplateRequest : IRequest<PutTemplateRequestParameters>
+	public partial interface IPutSearchTemplateRequest 
 	{
 		//TODO NAME
 		[JsonProperty("template")]
@@ -16,10 +15,11 @@ namespace Nest
 	}
 
 
-    public partial class PutSearchTemplateRequest : RequestBase<PutTemplateRequestParameters>, IPutSearchTemplateRequest
-    {
-        public PutSearchTemplateRequest(Id id) : base(r => r.Required(Ids.Single(id))) { }
-      
+	//TODO whats going on here? renamed?
+	public partial class PutSearchTemplateRequest 
+	{
+		public PutSearchTemplateRequest(Id id) : base(r => r.Required(Ids.Single(id))) { }
+
 		public string Template { get; set; }
 	}
 
@@ -27,12 +27,12 @@ namespace Nest
 	public partial class PutSearchTemplateDescriptor : RequestDescriptorBase<PutSearchTemplateDescriptor, PutTemplateRequestParameters>, IPutSearchTemplateRequest
 	{
 		IPutSearchTemplateRequest Self => this;
-		string IPutSearchTemplateRequest.Template { get; set;}
+		string IPutSearchTemplateRequest.Template { get; set; }
 
 		public PutSearchTemplateDescriptor Template(string template)
 		{
 			this.Self.Template = template;
 			return this;
 		}
-    }
+	}
 }

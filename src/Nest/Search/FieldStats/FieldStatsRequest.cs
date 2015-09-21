@@ -6,15 +6,9 @@ using System.Text;
 
 namespace Nest
 {
-	public interface IFieldStatsRequest : IRequest<FieldStatsRequestParameters> { }
+	public partial interface IFieldStatsRequest { }
 
-	public partial class FieldStatsRequest : RequestBase<FieldStatsRequestParameters>, IFieldStatsRequest
-	{
-	}
+	public partial class FieldStatsRequest { }
 
-	public partial class FieldStatsDescriptor 
-		: RequestDescriptorBase<FieldStatsDescriptor, FieldStatsRequestParameters>
-		, IFieldStatsRequest
-	{
-	}
+	public partial class FieldStatsDescriptor { }
 }

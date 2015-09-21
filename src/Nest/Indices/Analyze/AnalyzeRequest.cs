@@ -6,10 +6,9 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IAnalyzeRequest : IRequest<AnalyzeRequestParameters> { }
+	public partial interface IAnalyzeRequest { }
 
-	public partial class AnalyzeRequest : RequestBase<AnalyzeRequestParameters>, IAnalyzeRequest
+	public partial class AnalyzeRequest 
 	{
 		public AnalyzeRequest(string textToAnalyze)
 		{
@@ -18,7 +17,5 @@ namespace Nest
 	}
 
 	[DescriptorFor("IndicesAnalyze")]
-	public partial class AnalyzeDescriptor : RequestDescriptorBase<AnalyzeDescriptor, AnalyzeRequestParameters>, IAnalyzeRequest
-	{
-	}
+	public partial class AnalyzeDescriptor { }
 }

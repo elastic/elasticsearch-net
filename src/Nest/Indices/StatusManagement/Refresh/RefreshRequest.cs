@@ -6,15 +6,10 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IRefreshRequest : IRequest<RefreshRequestParameters> { }
+	public partial interface IRefreshRequest { }
 
-	public partial class RefreshRequest : RequestBase<RefreshRequestParameters>, IRefreshRequest
-	{
-	}
+	public partial class RefreshRequest { }
 
 	[DescriptorFor("IndicesRefresh")]
-	public partial class RefreshDescriptor : RequestDescriptorBase<RefreshDescriptor, RefreshRequestParameters>, IRefreshRequest
-	{
-	}
+	public partial class RefreshDescriptor { }
 }

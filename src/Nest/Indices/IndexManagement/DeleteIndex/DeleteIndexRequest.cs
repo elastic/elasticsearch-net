@@ -6,15 +6,10 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IDeleteIndexRequest : IRequest<DeleteIndexRequestParameters> { }
+	public partial interface IDeleteIndexRequest { }
 
-	public partial class DeleteIndexRequest : RequestBase<DeleteIndexRequestParameters>, IDeleteIndexRequest
-	{
-	}
+	public partial class DeleteIndexRequest { }
 
 	[DescriptorFor("IndicesDelete")]
-	public partial class DeleteIndexDescriptor : RequestDescriptorBase<DeleteIndexDescriptor, DeleteIndexRequestParameters>, IDeleteIndexRequest
-	{
-	}
+	public partial class DeleteIndexDescriptor { }
 }

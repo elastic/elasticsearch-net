@@ -6,8 +6,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface ISearchExistsRequest : IRequest<SearchExistsRequestParameters>
+	public partial interface ISearchExistsRequest 
 	{
 		[JsonProperty(PropertyName = "query")]
 		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeJsonConverter<QueryContainer>, CustomJsonConverter>))]
@@ -16,29 +15,19 @@ namespace Nest
 		[JsonIgnore]
 		string QueryString { get; set; }
 	}
-	public interface ISearchExistsRequest<T> : ISearchExistsRequest { }
-
 	//TODO if querystring has source || q || this.Query == null do a GET otherwise POST
 
-	public partial class SearchExistsRequest : RequestBase<SearchExistsRequestParameters>, ISearchExistsRequest
+	public partial class SearchExistsRequest 
 	{
 		public IQueryContainer Query { get; set; }
 
 		public string QueryString { get; set; }
 	}
 
-	public partial class SearchExistsRequest<T> : RequestBase<SearchExistsRequestParameters>, ISearchExistsRequest<T>
-		where T : class
-	{
-		public IQueryContainer Query { get; set; }
-
-		public string QueryString { get; set; }
-
-	}
+	//TODO removed typed request variant for now
 
 	[DescriptorFor("IndicesExists")]
-	public partial class SearchExistsDescriptor<T> : RequestDescriptorBase<SearchExistsDescriptor<T>, SearchExistsRequestParameters>, ISearchExistsRequest
-		where T : class
+	public partial class SearchExistsDescriptor<T> where T : class
 	{
 		private ISearchExistsRequest Self => this;
 

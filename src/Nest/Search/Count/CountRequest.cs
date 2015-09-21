@@ -5,13 +5,12 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface ICountRequest : IRequest<CountRequestParameters>
+	public partial interface ICountRequest 
 	{
 		[JsonProperty("query")]
 		IQueryContainer Query { get; set; }
 	}
-	public interface ICountRequest<T> : ICountRequest where T : class {}
+	//TODO removed typed variant of request assert this is ok in new setup
 
 	//TODO port this HttpMethod logic to property
 	//internal static class CountPathInfo
@@ -26,29 +25,17 @@ namespace Nest
 	//	}
 	//}
 	
-	public partial class CountRequest : RequestBase<CountRequestParameters>, ICountRequest
+	public partial class CountRequest 
 	{
 		public IQueryContainer Query { get; set; }
 	}
 
-	public partial class CountRequest<T> : RequestBase<CountRequestParameters>, ICountRequest<T>
-		where T : class
-	{
-		public IQueryContainer Query { get; set; }
-	}
-	
 	[DescriptorFor("Count")]
-	public partial class CountDescriptor<T> : RequestDescriptorBase<CountDescriptor<T>, CountRequestParameters>, ICountRequest<T>
-		where T : class
+	public partial class CountDescriptor<T> where T : class
 	{
-		private ICountRequest Self => this;
-
 		IQueryContainer ICountRequest.Query { get; set; }
 
-		public CountDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector)
-		{
-			Self.Query = querySelector(new QueryContainerDescriptor<T>());
-			return this;
-		}
+		public CountDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector) =>
+			Assign(a => a.Query = querySelector?.Invoke(new QueryContainerDescriptor<T>()));
 	}
 }

@@ -6,21 +6,20 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IBulkAliasRequest : IRequest<BulkAliasRequestParameters>
+	public partial interface IBulkAliasRequest 
 	{
 		[JsonProperty("actions")]
 		IList<IAliasAction> Actions { get; set; }
 	}
 
-	public partial class BulkAliasRequest : RequestBase<BulkAliasRequestParameters>, IBulkAliasRequest
+	public partial class BulkAliasRequest 
 	{
 		public IList<IAliasAction> Actions { get; set; }
 	}
 
 
 	[DescriptorFor("IndicesUpdateAliases")]
-	public partial class BulkAliasDescriptor : RequestDescriptorBase<BulkAliasDescriptor, BulkAliasRequestParameters>, IBulkAliasRequest
+	public partial class BulkAliasDescriptor 
 	{
 		public BulkAliasDescriptor Add(IAliasAction action) => 
 			Fluent.Assign<BulkAliasDescriptor, IBulkAliasRequest>(this, a=> a.Actions.AddIfNotNull(action));

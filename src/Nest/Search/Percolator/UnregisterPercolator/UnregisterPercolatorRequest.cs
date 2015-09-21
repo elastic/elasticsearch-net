@@ -5,9 +5,9 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	public interface IUnregisterPercolatorRequest : IRequest<DeleteRequestParameters> { }
+	//This does not represent an actual dedicated API endpoint in elasticsearch 
 
-	public interface IUnregisterPercolatorRequest<T> : IUnregisterPercolatorRequest where T : class { }
+	public interface IUnregisterPercolatorRequest : IRequest<DeleteRequestParameters> { }
 
 	//TODO port complex route values logic
 
@@ -25,11 +25,11 @@ namespace Nest
 	//	}
 	//}
 
-	public partial class UnregisterPercolatorRequest : RequestBase<DeleteRequestParameters>, IUnregisterPercolatorRequest
+	public class UnregisterPercolatorRequest : RequestBase<DeleteRequestParameters>, IUnregisterPercolatorRequest
 	{
 	}
 
-	public partial class UnregisterPercolatorDescriptor<T>
+	public class UnregisterPercolatorDescriptor<T>
 		: RequestDescriptorBase<UnregisterPercolatorDescriptor<T>, DeleteRequestParameters>, IUnregisterPercolatorRequest
 		where T : class
 	{

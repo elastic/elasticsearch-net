@@ -7,10 +7,9 @@ using System.Text;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface ICatThreadPoolRequest : IRequest<CatThreadPoolRequestParameters> { }
+	public partial interface ICatThreadPoolRequest { }
 
-	public partial class CatThreadPoolRequest : RequestBase<CatThreadPoolRequestParameters>, ICatThreadPoolRequest { }
+	public partial class CatThreadPoolRequest { }
 
-	public partial class CatThreadPoolDescriptor : RequestDescriptorBase<CatThreadPoolDescriptor, CatThreadPoolRequestParameters>, ICatThreadPoolRequest { }
+	public partial class CatThreadPoolDescriptor { }
 }

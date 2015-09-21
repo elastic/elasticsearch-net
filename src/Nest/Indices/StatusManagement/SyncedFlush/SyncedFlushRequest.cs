@@ -6,18 +6,10 @@ using System.Text;
 
 namespace Nest
 {
-	public interface ISyncedFlushRequest : IRequest<SyncedFlushRequestParameters>
-	{
-	}
+	public partial interface ISyncedFlushRequest { }
 
-	public partial class SyncedFlushRequest : RequestBase<SyncedFlushRequestParameters>, ISyncedFlushRequest
-	{
-	}
+	public partial class SyncedFlushRequest { }
 	
 	[DescriptorFor("IndicesFlushSynced")]
-	public partial class SyncedFlushDescriptor 
-		: RequestDescriptorBase<SyncedFlushDescriptor, SyncedFlushRequestParameters>
-		, ISyncedFlushRequest
-	{
-	}
+	public partial class SyncedFlushDescriptor { }
 }

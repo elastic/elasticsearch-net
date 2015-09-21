@@ -5,7 +5,7 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	public interface IScrollRequest : IRequest<ScrollRequestParameters>
+	public partial interface IScrollRequest 
 	{
 		string ScrollId { get; set; }
 		TimeUnitExpression Scroll { get; set; }
@@ -29,7 +29,7 @@ namespace Nest
 	//	}
 	//}
 
-	public partial class ScrollRequest : RequestBase<ScrollRequestParameters>, IScrollRequest
+	public partial class ScrollRequest 
 	{
 		public string ScrollId { get; set; }
 		public TimeUnitExpression Scroll { get; set; }
@@ -41,27 +41,15 @@ namespace Nest
 		}
 	}
 
-	public partial class ScrollDescriptor<T> : RequestDescriptorBase<ScrollDescriptor<T>, ScrollRequestParameters>, IScrollRequest,
-		IHideObjectMembers
-		where T : class
+	public partial class ScrollDescriptor<T> where T : class
 	{
-		private IScrollRequest Self => this;
-
 		string IScrollRequest.ScrollId { get; set; }
 		TimeUnitExpression IScrollRequest.Scroll { get; set; }
-		
+
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
-		public ScrollDescriptor<T> Scroll(TimeUnitExpression scroll)
-		{
-			Self.Scroll = scroll;
-			return this;
-		}
-		
+		public ScrollDescriptor<T> Scroll(TimeUnitExpression scroll) => Assign(a => a.Scroll = scroll);
+
 		///<summary>The scroll id used to continue/start the scrolled pagination</summary>
-		public ScrollDescriptor<T> ScrollId(string scrollId)
-		{
-			Self.ScrollId = scrollId;
-			return this;
-		}
+		public ScrollDescriptor<T> ScrollId(string scrollId) => Assign(a => a.ScrollId = scrollId);
 	}
 }

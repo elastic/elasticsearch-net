@@ -7,20 +7,19 @@ using Newtonsoft.Json;
 namespace Nest
 {
 
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IMultiPercolateRequest : IRequest<MultiPercolateRequestParameters>
+	public partial interface IMultiPercolateRequest 
 	{
 		IList<IPercolateOperation> Percolations { get; set; }
 	}
 
-	public partial class MultiPercolateRequest : RequestBase<MultiPercolateRequestParameters>, IMultiPercolateRequest
+	public partial class MultiPercolateRequest 
 	{
 		public IList<IPercolateOperation> Percolations { get; set; }
 
 	}
 
 	[DescriptorFor("Mpercolate")]
-	public partial class MultiPercolateDescriptor : RequestDescriptorBase<MultiPercolateDescriptor, MultiPercolateRequestParameters>, IMultiPercolateRequest
+	public partial class MultiPercolateDescriptor 
 	{
 		private IMultiPercolateRequest Self => this;
 

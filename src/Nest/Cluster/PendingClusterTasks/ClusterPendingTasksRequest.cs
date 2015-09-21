@@ -6,11 +6,9 @@ using System.Text;
 
 namespace Nest
 {
-	public interface IClusterPendingTasksRequest : IRequest<ClusterPendingTasksRequestParameters> { }
+	public partial interface IClusterPendingTasksRequest { }
 
-	public partial class ClusterPendingTasksRequest 
-		: RequestBase<ClusterPendingTasksRequestParameters>, IClusterPendingTasksRequest { }
+	public partial class ClusterPendingTasksRequest { }
 
-	public partial class ClusterPendingTasksDescriptor 
-		: RequestDescriptorBase<ClusterPendingTasksDescriptor, ClusterPendingTasksRequestParameters>, IClusterPendingTasksRequest { }
+	public partial class ClusterPendingTasksDescriptor { }
 }

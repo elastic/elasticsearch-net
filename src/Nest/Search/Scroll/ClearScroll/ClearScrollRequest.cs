@@ -6,13 +6,12 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IClearScrollRequest : IRequest<ClearScrollRequestParameters>
+	public partial interface IClearScrollRequest 
 	{
 		string ScrollId { get; set; }
 	}
 
-	public partial class ClearScrollRequest : RequestBase<ClearScrollRequestParameters>, IClearScrollRequest
+	public partial class ClearScrollRequest 
 	{
 		public string ScrollId { get; set; }
 
@@ -23,19 +22,13 @@ namespace Nest
 	}
 
 	[DescriptorFor("ClearScroll")]
-	public partial class ClearScrollDescriptor : RequestDescriptorBase<ClearScrollDescriptor, ClearScrollRequestParameters>, IClearScrollRequest
+	public partial class ClearScrollDescriptor 
 	{
-		private IClearScrollRequest Self => this;
-
 		string IClearScrollRequest.ScrollId { get; set; }
 
 		/// <summary>
 		/// Specify the {name} part of the operation
 		/// </summary>
-		public ClearScrollDescriptor ScrollId(string scrollId)
-		{
-			Self.ScrollId = scrollId;
-			return this;
-		}
+		public ClearScrollDescriptor ScrollId(string scrollId) => Assign(a => a.ScrollId = scrollId);
 	}
 }

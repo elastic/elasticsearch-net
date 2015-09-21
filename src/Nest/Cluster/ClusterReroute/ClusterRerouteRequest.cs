@@ -7,8 +7,7 @@ using System.Text;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IClusterRerouteRequest : IRequest<ClusterRerouteRequestParameters>
+	public partial interface IClusterRerouteRequest 
 	{
 		[JsonProperty("commands")]
 		[JsonConverter(typeof(ClusterRerouteCommandsJsonConverter))]
@@ -16,13 +15,11 @@ namespace Nest
 	}
 
 	public partial class ClusterRerouteRequest 
-		: RequestBase<ClusterRerouteRequestParameters>, IClusterRerouteRequest
 	{
 		public IList<IClusterRerouteCommand> Commands { get; set; }
 	}
 
 	public partial class ClusterRerouteDescriptor 
-		: RequestDescriptorBase<ClusterRerouteDescriptor, ClusterRerouteRequestParameters>, IClusterRerouteRequest
 	{
 		IClusterRerouteRequest Self => this;
 

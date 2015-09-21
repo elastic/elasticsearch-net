@@ -8,14 +8,12 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<CreateIndexDescriptor>))]
-	public interface ICreateIndexRequest : IRequest<CreateIndexRequestParameters>, IIndexState
+	public partial interface ICreateIndexRequest : IIndexState
 	{
 	}
 
-	public partial class CreateIndexRequest : RequestBase<CreateIndexRequestParameters>, ICreateIndexRequest
+	public partial class CreateIndexRequest 
 	{
 		public IIndexSettings Settings { get; set; }
 
@@ -29,10 +27,8 @@ namespace Nest
 	}
 
 	[DescriptorFor("IndicesCreate")]
-	public partial class CreateIndexDescriptor : RequestDescriptorBase<CreateIndexDescriptor, CreateIndexRequestParameters>, ICreateIndexRequest
+	public partial class CreateIndexDescriptor 
 	{
-		protected CreateIndexDescriptor Assign(Action<ICreateIndexRequest> assigner) => Fluent.Assign(this, assigner);
-
 		IIndexSettings IIndexState.Settings { get; set; }
 
 		IMappings IIndexState.Mappings { get; set; }

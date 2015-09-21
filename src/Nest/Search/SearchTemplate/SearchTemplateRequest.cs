@@ -27,9 +27,7 @@ namespace Nest
 		Func<dynamic, Hit<dynamic>, Type> TypeSelector { get; set; }
 	}
 
-	public interface ISearchTemplateRequest<T> : ISearchTemplateRequest { }
-
-	public partial class SearchTemplateRequest : RequestBase<SearchTemplateRequestParameters>, ISearchTemplateRequest
+	public partial class SearchTemplateRequest 
 	{
 		public SearchTemplateRequest() { }
 		public SearchTemplateRequest(Indices indices) : base(r => r.Optional(indices)) { }
@@ -44,22 +42,19 @@ namespace Nest
 		public Func<dynamic, Hit<dynamic>, Type> TypeSelector { get; set; }
 	}
 
-	public partial class SearchTemplateRequest<T> : SearchTemplateRequest, ISearchTemplateRequest<T>
+	public class SearchTemplateRequest<T> : SearchTemplateRequest
 		where T : class
 	{
 		public SearchTemplateRequest() { }
 		public SearchTemplateRequest(Indices indices) : base(indices) { }
 		public SearchTemplateRequest(Indices indices, Types types) : base(indices, types) { }
 
-		public Type ClrType { get { return typeof(T); } }
+		public Type ClrType => typeof(T);
 	}
 
-	public partial class SearchTemplateDescriptor<T> : RequestDescriptorBase<SearchTemplateDescriptor<T>, SearchTemplateRequestParameters>, ISearchTemplateRequest<T>
-		where T : class
+	public partial class SearchTemplateDescriptor<T> where T : class
 	{
-		ISearchTemplateRequest<T> Self => this;
-
-		Type ISearchTemplateRequest.ClrType { get { return typeof(T); } }
+		Type ISearchTemplateRequest.ClrType => typeof(T);
 
 		/// <summary>
 		/// Whether conditionless queries are allowed or not
@@ -67,51 +62,21 @@ namespace Nest
 		internal bool _Strict { get; set; }
 
 		string ISearchTemplateRequest.Template { get; set; }
+		public SearchTemplateDescriptor<T> Template(string template) => Assign(a => a.Template = template);
 
 		string ISearchTemplateRequest.File { get; set; }
+		public SearchTemplateDescriptor<T> File(string file) => Assign(a => a.File = file);
 
 		string ISearchTemplateRequest.Id { get; set; }
+		public SearchTemplateDescriptor<T> Id(string id) => Assign(a => a.Id = id);
+
+		public SearchTemplateDescriptor<T> Params(Dictionary<string, object> paramDictionary) => Assign(a => a.Params = paramDictionary);
 
 		IDictionary<string, object> ISearchTemplateRequest.Params { get; set; }
+		public SearchTemplateDescriptor<T> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramDictionary) =>
+			Assign(a => a.Params = paramDictionary?.Invoke(new FluentDictionary<string, object>()));
 
 		Func<dynamic, Hit<dynamic>, Type> ISearchTemplateRequest.TypeSelector { get; set; }
-
-		public SearchTemplateDescriptor<T> Template(string template)
-		{
-			this.Self.Template = template;
-			return this;
-		}
-
-		public SearchTemplateDescriptor<T> File(string file)
-		{
-			this.Self.File = file;
-			return this;
-		}
-
-		public SearchTemplateDescriptor<T> Id(string id)
-		{
-			this.Self.Id = id;
-			return this;
-		}
-
-		public SearchTemplateDescriptor<T> Params(Dictionary<string, object> paramDictionary)
-		{
-			paramDictionary.ThrowIfNull("paramDictionary");
-			this.Self.Params = paramDictionary;
-			return this;
-		}
-
-		public SearchTemplateDescriptor<T> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramDictionary)
-		{
-			paramDictionary.ThrowIfNull("paramDictionary");
-			this.Self.Params = paramDictionary(new FluentDictionary<string, object>());
-			return this;
-		}
-
-		public SearchTemplateDescriptor<T> ConcreteTypeSelector(Func<dynamic, Hit<dynamic>, Type> typeSelector)
-		{
-			Self.TypeSelector = typeSelector;
-			return this;
-		}
+		public SearchTemplateDescriptor<T> ConcreteTypeSelector(Func<dynamic, Hit<dynamic>, Type> typeSelector) => Assign(a => a.TypeSelector = typeSelector);
 	}
 }

@@ -6,8 +6,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IGetAliasesRequest : IRequest<GetAliasesRequestParameters>
+	public partial interface IGetAliasesRequest 
 	{
 		[JsonIgnore]
 		string Alias { get; set; }
@@ -15,14 +14,13 @@ namespace Nest
 
 	//TODO alias is {name} in route parameters
 
-	public partial class GetAliasesRequest : RequestBase<GetAliasesRequestParameters>, IGetAliasesRequest
+	public partial class GetAliasesRequest 
 	{
 		public string Alias { get; set; } = "*";
 	}
 
 	[DescriptorFor("IndicesGetAliases")]
 	public partial class GetAliasesDescriptor 
-		: RequestDescriptorBase<GetAliasesDescriptor, GetAliasesRequestParameters, IGetAliasesRequest>, IGetAliasesRequest
 	{
 		string IGetAliasesRequest.Alias { get; set; } = "*";
 

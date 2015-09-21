@@ -4,8 +4,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IPutScriptRequest : IRequest<PutScriptRequestParameters>
+	public partial interface IPutScriptRequest 
 	{
 		[JsonProperty("script")]
 		string Script { get; set; }
@@ -15,7 +14,7 @@ namespace Nest
 		string Lang { get; set; }
 	}
 
-	public partial class PutScriptRequest : RequestBase<PutScriptRequestParameters>, IPutScriptRequest
+	public partial class PutScriptRequest 
 	{
 		public string Lang { get; set; }
 		public string Id { get; set; }
@@ -23,7 +22,7 @@ namespace Nest
 	}
 
 	[DescriptorFor("ScriptPut")]
-	public partial class PutScriptDescriptor : RequestDescriptorBase<PutScriptDescriptor, PutScriptRequestParameters>, IPutScriptRequest
+	public partial class PutScriptDescriptor 
 	{
 		IPutScriptRequest Self => this;
 		string IPutScriptRequest.Script { get; set; }

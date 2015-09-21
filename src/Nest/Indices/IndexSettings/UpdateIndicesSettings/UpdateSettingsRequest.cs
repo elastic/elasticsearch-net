@@ -6,11 +6,9 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public interface IUpdateSettingsRequest : IRequest<UpdateSettingsRequestParameters>, IIndexSettings, IHasADictionary
-	{
-	}
+	public partial interface IUpdateSettingsRequest : IIndexSettings, IHasADictionary { }
 
-	public partial class UpdateSettingsRequest : RequestBase<UpdateSettingsRequestParameters>, IUpdateSettingsRequest
+	public partial class UpdateSettingsRequest 
 	{
 		IDictionary IHasADictionary.Dictionary => this.AnySettings;
 
@@ -75,9 +73,7 @@ namespace Nest
 	}
 
 	[DescriptorFor("IndicesPutSettings")]
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial class UpdateSettingsDescriptor
-		: RequestDescriptorBase<UpdateSettingsDescriptor, UpdateSettingsRequestParameters>, IUpdateSettingsRequest
+	public partial class UpdateSettingsDescriptor 
 	{
 		UpdateSettingsDescriptor Assign(Action<IIndexSettings> assigner) => Fluent.Assign(this, assigner);
 

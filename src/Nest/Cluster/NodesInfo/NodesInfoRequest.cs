@@ -6,34 +6,28 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface INodesInfoRequest : IRequest<NodesInfoRequestParameters>
+	public partial interface INodesInfoRequest 
 	{
 		IEnumerable<NodesInfoMetric> Metrics { get; set; }
 	}
 
-	public partial class NodesInfoRequest : RequestBase<NodesInfoRequestParameters>, INodesInfoRequest
+	public partial class NodesInfoRequest 
 	{
 		public IEnumerable<NodesInfoMetric> Metrics { get; set; }
 
-        public NodesInfoRequest() { }
+		public NodesInfoRequest() { }
 
-        public NodesInfoRequest(string nodeId)
-            : base(p => p.RequiredNodeId(nodeId))
-        { }
+		public NodesInfoRequest(string nodeId)
+			: base(p => p.RequiredNodeId(nodeId))
+		{ }
 	}
 
 	[DescriptorFor("NodesInfo")]
-	public partial class NodesInfoDescriptor : RequestDescriptorBase<NodesInfoDescriptor, NodesInfoRequestParameters>, INodesInfoRequest
+	public partial class NodesInfoDescriptor 
 	{
 		private INodesInfoRequest Self => this;
 		IEnumerable<NodesInfoMetric> INodesInfoRequest.Metrics { get; set; }
 
-        public NodesInfoDescriptor() { }
-
-        public NodesInfoDescriptor(string nodeId)
-            : base(p => p.RequiredNodeId(nodeId))
-        { }
 		public NodesInfoDescriptor Metrics(params NodesInfoMetric[] metrics)
 		{
 			Self.Metrics = metrics;

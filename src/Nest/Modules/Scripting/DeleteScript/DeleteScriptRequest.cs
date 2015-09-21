@@ -4,8 +4,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IDeleteScriptRequest : IRequest<DeleteScriptRequestParameters>
+	public partial interface IDeleteScriptRequest 
 	{
 		[JsonProperty("lang")]
 		string Lang { get; set; }
@@ -13,14 +12,14 @@ namespace Nest
 		string Id { get; set; }
 	}
 
-	public partial class DeleteScriptRequest : RequestBase<DeleteScriptRequestParameters>, IDeleteScriptRequest
+	public partial class DeleteScriptRequest 
 	{
 		public string Lang { get; set; }
 		public string Id { get; set; }
 	}
 
 	[DescriptorFor("ScriptDelete")]
-	public partial class DeleteScriptDescriptor : RequestDescriptorBase<DeleteScriptDescriptor, DeleteScriptRequestParameters>, IDeleteScriptRequest
+	public partial class DeleteScriptDescriptor 
 	{
 		IDeleteScriptRequest Self => this;
 		string IDeleteScriptRequest.Lang { get; set; }

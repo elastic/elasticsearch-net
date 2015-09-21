@@ -6,15 +6,10 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IFlushRequest : IRequest<FlushRequestParameters> { }
+	public partial interface IFlushRequest { }
 
-	public partial class FlushRequest : RequestBase<FlushRequestParameters>, IFlushRequest
-	{
-	}
+	public partial class FlushRequest { }
 
 	[DescriptorFor("IndicesFlush")]
-	public partial class FlushDescriptor : RequestDescriptorBase<FlushDescriptor, FlushRequestParameters>, IFlushRequest
-	{
-	}
+	public partial class FlushDescriptor { }
 }

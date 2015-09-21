@@ -6,8 +6,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IRestoreRequest : IRequest<RestoreRequestParameters>
+	public partial interface IRestoreRequest 
 	{
 		[JsonProperty("indices")]
 		IEnumerable<IndexName> Indices { get; set; }
@@ -25,7 +24,7 @@ namespace Nest
 		List<string> IgnoreIndexSettings { get; set; }
 	}
 
-	public partial class RestoreRequest : RequestBase<RestoreRequestParameters>, IRestoreRequest
+	public partial class RestoreRequest 
 	{
 		public IEnumerable<IndexName> Indices { get; set; }
 		
@@ -41,7 +40,7 @@ namespace Nest
 	}
 
 	[DescriptorFor("SnapshotRestore")]
-	public partial class RestoreDescriptor : RequestDescriptorBase<RestoreDescriptor, RestoreRequestParameters>, IRestoreRequest
+	public partial class RestoreDescriptor 
 	{
 		private IRestoreRequest Self => this;
 

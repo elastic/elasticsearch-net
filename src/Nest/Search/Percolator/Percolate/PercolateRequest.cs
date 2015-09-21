@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IPercolateRequest<TDocument> : IRequest<PercolateRequestParameters>, IPercolateOperation
+	public interface IPercolateRequest<TDocument> : IPercolateRequest, IPercolateOperation
 		where TDocument : class
 	{
 		[JsonProperty(PropertyName = "doc")]
@@ -17,7 +17,7 @@ namespace Nest
 
 	}
 
-	public partial class PercolateRequest<TDocument> : RequestBase<PercolateRequestParameters>, IPercolateRequest<TDocument>
+	public partial class PercolateRequest<TDocument> : IPercolateRequest<TDocument>
 		where TDocument : class
 	{
 		public IHighlightRequest Highlight { get; set; }
@@ -43,7 +43,7 @@ namespace Nest
 
 		IRequestParameters IPercolateOperation.GetRequestParameters() => this.Self.RequestParameters;
 	}
-	public partial class PercolateDescriptor<T> : RequestDescriptorBase<PercolateDescriptor<T>, PercolateRequestParameters>, IPercolateRequest<T>
+	public partial class PercolateDescriptor<T> : IPercolateRequest<T>
 		where T : class
 	{
 		private IPercolateRequest<T> Self => this;

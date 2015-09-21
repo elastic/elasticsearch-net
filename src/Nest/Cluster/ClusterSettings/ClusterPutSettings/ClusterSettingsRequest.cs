@@ -6,8 +6,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IClusterSettingsRequest : IRequest<ClusterSettingsRequestParameters>
+	public partial interface IClusterSettingsRequest 
 	{
 		[JsonProperty(PropertyName = "persistent")]
 		IDictionary<string, object> Persistent { get; set; }
@@ -17,7 +16,7 @@ namespace Nest
 
 	}
 	
-	public partial class ClusterSettingsRequest : RequestBase<ClusterSettingsRequestParameters>, IClusterSettingsRequest
+	public partial class ClusterSettingsRequest 
 	{
 		public IDictionary<string, object> Persistent { get; set; }
 
@@ -25,9 +24,7 @@ namespace Nest
 	}
 
 	[DescriptorFor("ClusterPutSettings")]
-	public partial class ClusterSettingsDescriptor : 
-		RequestDescriptorBase<ClusterSettingsDescriptor, ClusterSettingsRequestParameters>
-		, IClusterSettingsRequest
+	public partial class ClusterSettingsDescriptor 
 	{
 		protected IClusterSettingsRequest Self => this;
 

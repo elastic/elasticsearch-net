@@ -5,22 +5,16 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	public interface ISourceRequest : IRequest<SourceRequestParameters> { }
+	public partial interface ISourceRequest { }
 
 	public interface ISourceRequest<T> : ISourceRequest where T : class { }
 
-	public partial class SourceRequest : RequestBase<SourceRequestParameters>, ISourceRequest
-	{
-	}
+	public partial class SourceRequest { }
 
-	public partial class SourceRequest<T> : RequestBase<SourceRequestParameters>, ISourceRequest<T>
-		where T : class
-	{
-	}
+	public partial class SourceRequest<T> where T : class { }
 
 	[DescriptorFor("GetSource")]
-	public partial class SourceDescriptor<T> : RequestDescriptorBase<SourceDescriptor<T>, SourceRequestParameters>
-		where T : class
+	public partial class SourceDescriptor<T> 
 	{
 		public SourceDescriptor<T> ExecuteOnPrimary()
 		{

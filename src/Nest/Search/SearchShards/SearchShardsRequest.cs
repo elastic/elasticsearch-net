@@ -7,28 +7,19 @@ using System.Linq.Expressions;
 
 namespace Nest
 {
-
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface ISearchShardsRequest : IRequest<SearchShardsRequestParameters>
+	//TODO removed typed variant is this ok?
+	public partial interface ISearchShardsRequest 
 	{
 	}
-
-	public interface ISearchShardsRequest<T> : ISearchShardsRequest {}
 
 	public partial class SearchShardsRequest : RequestBase<SearchShardsRequestParameters>, ISearchShardsRequest
-	{
-	}
-
-	public partial class SearchShardsRequest<T> : RequestBase<SearchShardsRequestParameters>, ISearchShardsRequest
-		where T : class
 	{
 	}
 
 	/// <summary>
 	/// A descriptor wich describes a search operation for _search_shards
 	/// </summary>
-	public partial class SearchShardsDescriptor<T> : RequestDescriptorBase<SearchShardsDescriptor<T>, SearchShardsRequestParameters>, ISearchShardsRequest 
-		where T : class
+	public partial class SearchShardsDescriptor<T> where T : class
 	{
 	}
 }

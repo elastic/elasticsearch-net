@@ -6,8 +6,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IIndicesStatsRequest : IRequest<IndicesStatsRequestParameters>
+	public partial interface IIndicesStatsRequest 
 	{
 		IEnumerable<TypeName> Types { get; set; }
 		IEnumerable<IndicesStatsMetric> Metrics { get; set; }
@@ -32,14 +31,14 @@ namespace Nest
 	//	}
 	//}
 
-	public partial class IndicesStatsRequest : RequestBase<IndicesStatsRequestParameters>, IIndicesStatsRequest
+	public partial class IndicesStatsRequest 
 	{
 		public IEnumerable<IndicesStatsMetric> Metrics { get; set; }
 		public IEnumerable<TypeName> Types { get; set; }
 	}
 
 	[DescriptorFor("IndicesStats")]
-	public partial class IndicesStatsDescriptor : RequestDescriptorBase<IndicesStatsDescriptor, IndicesStatsRequestParameters>, IIndicesStatsRequest
+	public partial class IndicesStatsDescriptor 
 	{
 		private IIndicesStatsRequest Self => this;
 

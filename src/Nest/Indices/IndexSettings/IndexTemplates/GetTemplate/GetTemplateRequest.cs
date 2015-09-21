@@ -6,15 +6,10 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IGetTemplateRequest : IRequest<GetTemplateRequestParameters> { }
+	public partial interface IGetTemplateRequest { }
 
-	public partial class GetTemplateRequest : RequestBase<GetTemplateRequestParameters>, IGetTemplateRequest
-	{
-	}
+	public partial class GetTemplateRequest { }
 
 	[DescriptorFor("IndicesGetTemplate")]
-	public partial class GetTemplateDescriptor : RequestDescriptorBase<GetTemplateDescriptor, GetTemplateRequestParameters>, IGetTemplateRequest
-	{
-	}
+	public partial class GetTemplateDescriptor { }
 }

@@ -6,15 +6,10 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IOptimizeRequest : IRequest<OptimizeRequestParameters> { }
+	public partial interface IOptimizeRequest { }
 
-	public partial class OptimizeRequest : RequestBase<OptimizeRequestParameters>, IOptimizeRequest
-    {
-	}
+	public partial class OptimizeRequest { }
 
 	[DescriptorFor("IndicesOptimize")]
-	public partial class OptimizeDescriptor : RequestDescriptorBase<OptimizeDescriptor, OptimizeRequestParameters>, IOptimizeRequest
-	{
-	}
+	public partial class OptimizeDescriptor { }
 }

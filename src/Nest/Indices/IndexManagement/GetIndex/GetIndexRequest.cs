@@ -8,8 +8,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IGetIndexRequest : IRequest<GetIndexRequestParameters>
+	public partial interface IGetIndexRequest 
 	{
 		/// <summary>
 		/// Be selective which features to return, i.e GetIndexFeature.Mappings | GetIndexFeature.Settings
@@ -44,7 +43,7 @@ namespace Nest
 	//	}
 	//}
 
-	public partial class GetIndexRequest : RequestBase<GetIndexRequestParameters>, IGetIndexRequest
+	public partial class GetIndexRequest 
 	{
 		/// <summary>
 		/// Be selective which features to return, i.e GetIndexFeature.Mappings | GetIndexFeature.Settings
@@ -53,19 +52,13 @@ namespace Nest
 	}
 
 	[DescriptorFor("IndicesGet")]
-	public partial class GetIndexDescriptor : RequestDescriptorBase<GetIndexDescriptor, GetIndexRequestParameters>, IGetIndexRequest
+	public partial class GetIndexDescriptor 
 	{
-		private IGetIndexRequest Self => this;
-
 		GetIndexFeature IGetIndexRequest.Features { get; set; }
-		
+
 		/// <summary>
 		/// Be selective which features to return, i.e GetIndexFeature.Mappings | GetIndexFeature.Settings
 		/// </summary>
-		public GetIndexDescriptor Features(GetIndexFeature features)
-		{
-			Self.Features = features;
-			return this;
-		}
+		public GetIndexDescriptor Features(GetIndexFeature features) => Assign(a => a.Features = features);
 	}
 }
