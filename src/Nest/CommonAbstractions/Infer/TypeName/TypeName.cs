@@ -1,10 +1,12 @@
 ﻿using System;
+using Elasticsearch.Net.Connection;
+using Elasticsearch.Net.Serialization;
 using Newtonsoft.Json;
 
 namespace Nest
 {
 	[JsonConverter(typeof(TypeNameJsonConverter))]
-	public class TypeName : IEquatable<TypeName>
+	public class TypeName : IEquatable<TypeName> , IUrlParameter
 	{
 		public string Name { get; set; }
 		public Type Type { get; set; }
@@ -69,5 +71,6 @@ namespace Nest
 		{
 			return !other.IsNullOrEmpty() && other == this.Name;
 		}
+		public string GetString(IConnectionConfigurationValues settings) => ((IUrlParameter)Types.Single(this)).GetString(settings);
 	}
 }

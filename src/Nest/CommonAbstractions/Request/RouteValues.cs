@@ -17,7 +17,7 @@ namespace Nest
 		public string Type => _resolved["type"];
 		public string Id => _resolved["id"];
 		public string Name => _resolved["name"];
-		public string Field=> _resolved["field"];
+		public string Field => _resolved["field"];
 		public string ScrollId => _resolved["scroll_id"];
 		public string NodeId => _resolved["node_id"];
 		public string Fields => _resolved["fields"];
@@ -38,31 +38,36 @@ namespace Nest
 			this._resolved.Add(name, routeValue);
 			return this;
 		}
-		
+
 		public void Resolve(IConnectionSettingsValues settings)
 		{
-			foreach(var kv in _routeValues)
+			foreach (var kv in _routeValues)
 			{
 				this._resolved[kv.Key] = kv.Value.GetString(settings);
 			}
 		}
 
+		internal void Required(string route, IUrlParameter value) => this._routeValues.Add(route, value);
+		internal void Optional(string route, IUrlParameter value) => this._routeValues.Add(route, value);
+
+		internal TActual Get<TActual>(string route) where TActual : class, IUrlParameter => this._routeValues[route] as TActual;
+
 		public RouteValues Required(Indices indices) => Route("index", indices);
-        public RouteValues Optional(Indices indices) => Route("index", indices, false);
+		public RouteValues Optional(Indices indices) => Route("index", indices, false);
 
 		public RouteValues Required(Types types) => Route("type", types);
 		public RouteValues Optional(Types types) => Route("type", types, false);
 
-        public RouteValues Required(Ids ids) => Route("id", ids);
-        public RouteValues Optional(Ids ids) => Route("id", ids, false);
+		public RouteValues Required(Ids ids) => Route("id", ids);
+		public RouteValues Optional(Ids ids) => Route("id", ids, false);
 
-		public RouteValues Required(string route, IEnumerable<Enum> enums) => 
-			Resolved(route, string.Join(",", enums.Select(e=>e.GetStringValue())));
-        public RouteValues Optional(string route, IEnumerable<Enum> enums) =>
-			Resolved(route, string.Join(",", enums.Select(e=>e.GetStringValue())), false);
+		public RouteValues Required(string route, IEnumerable<Enum> enums) =>
+			Resolved(route, string.Join(",", enums.Select(e => e.GetStringValue())));
+		public RouteValues Optional(string route, IEnumerable<Enum> enums) =>
+			Resolved(route, string.Join(",", enums.Select(e => e.GetStringValue())), false);
 
 		public RouteValues Required(IEnumerable<ClusterStateMetric> enums) => Required("metric", enums.Cast<Enum>());
-        public RouteValues Optional(IEnumerable<ClusterStateMetric> enums) => Optional("metric", enums.Cast<Enum>());
+		public RouteValues Optional(IEnumerable<ClusterStateMetric> enums) => Optional("metric", enums.Cast<Enum>());
 
 
 		[Obsolete("TODO: Rename to Required once NodeId type is implemented")]

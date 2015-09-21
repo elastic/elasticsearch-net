@@ -16,14 +16,15 @@ namespace Nest
 
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IAliasExistsRequest : IRequest<AliasExistsRequestParameters>
+	public partial interface IAliasExistsRequest : IRequest<AliasExistsRequestParameters> 
 	{
-	}
-	
+		Names Name { get; }
+	 } 
 	///<summary>Request parameters for IndicesExistsAliasForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
 	public partial class AliasExistsRequest  : RequestBase<AliasExistsRequestParameters>, IAliasExistsRequest
 	{
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		Names IAliasExistsRequest.Name => Self.RouteValues.Get<Names>("name");
+			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
@@ -44,14 +45,13 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IAnalyzeRequest : IRequest<AnalyzeRequestParameters>
+	public partial interface IAnalyzeRequest : IRequest<AnalyzeRequestParameters> 
 	{
-	}
-	
+	 } 
 	///<summary>Request parameters for IndicesAnalyzeForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-analyze.html</pre></summary>
 	public partial class AnalyzeRequest  : RequestBase<AnalyzeRequestParameters>, IAnalyzeRequest
 	{
-		///<summary>The name of the analyzer to use</summary>
+			///<summary>The name of the analyzer to use</summary>
 		public string Analyzer { get { return Q<string>("analyzer"); } set { Q("analyzer", value); } }
 		
 		///<summary>A comma-separated list of character filters to use for the analysis</summary>
@@ -87,14 +87,13 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IBulkAliasRequest : IRequest<BulkAliasRequestParameters>
+	public partial interface IBulkAliasRequest : IRequest<BulkAliasRequestParameters> 
 	{
-	}
-	
+	 } 
 	///<summary>Request parameters for IndicesUpdateAliasesForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
 	public partial class BulkAliasRequest  : RequestBase<BulkAliasRequestParameters>, IBulkAliasRequest
 	{
-		///<summary>Request timeout</summary>
+			///<summary>Request timeout</summary>
 		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
 		
 		///<summary>Specify timeout for connection to master</summary>
@@ -109,14 +108,13 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IBulkRequest : IRequest<BulkRequestParameters>
+	public partial interface IBulkRequest : IRequest<BulkRequestParameters> 
 	{
-	}
-	
+	 } 
 	///<summary>Request parameters for Bulk <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-bulk.html</pre></summary>
 	public partial class BulkRequest  : RequestBase<BulkRequestParameters>, IBulkRequest
 	{
-		///<summary>Explicit write consistency setting for the operation</summary>
+			///<summary>Explicit write consistency setting for the operation</summary>
 		public Consistency Consistency { get { return Q<Consistency>("consistency"); } set { Q("consistency", value); } }
 		
 		///<summary>Refresh the index after performing the operation</summary>
@@ -143,14 +141,13 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ICatAliasesRequest : IRequest<CatAliasesRequestParameters>
+	public partial interface ICatAliasesRequest : IRequest<CatAliasesRequestParameters> 
 	{
-	}
-	
+	 } 
 	///<summary>Request parameters for CatAliases <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-alias.html</pre></summary>
 	public partial class CatAliasesRequest  : RequestBase<CatAliasesRequestParameters>, ICatAliasesRequest
 	{
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+			///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -174,14 +171,13 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ICatAllocationRequest : IRequest<CatAllocationRequestParameters>
+	public partial interface ICatAllocationRequest : IRequest<CatAllocationRequestParameters> 
 	{
-	}
-	
+	 } 
 	///<summary>Request parameters for CatAllocation <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-allocation.html</pre></summary>
 	public partial class CatAllocationRequest  : RequestBase<CatAllocationRequestParameters>, ICatAllocationRequest
 	{
-		///<summary>The unit in which to display byte values</summary>
+			///<summary>The unit in which to display byte values</summary>
 		public Bytes Bytes { get { return Q<Bytes>("bytes"); } set { Q("bytes", value); } }
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
@@ -208,14 +204,13 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ICatCountRequest : IRequest<CatCountRequestParameters>
+	public partial interface ICatCountRequest : IRequest<CatCountRequestParameters> 
 	{
-	}
-	
+	 } 
 	///<summary>Request parameters for CatCount <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-count.html</pre></summary>
 	public partial class CatCountRequest  : RequestBase<CatCountRequestParameters>, ICatCountRequest
 	{
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+			///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -239,14 +234,13 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ICatFielddataRequest : IRequest<CatFielddataRequestParameters>
+	public partial interface ICatFielddataRequest : IRequest<CatFielddataRequestParameters> 
 	{
-	}
-	
+	 } 
 	///<summary>Request parameters for CatFielddata <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-fielddata.html</pre></summary>
 	public partial class CatFielddataRequest  : RequestBase<CatFielddataRequestParameters>, ICatFielddataRequest
 	{
-		///<summary>The unit in which to display byte values</summary>
+			///<summary>The unit in which to display byte values</summary>
 		public Bytes Bytes { get { return Q<Bytes>("bytes"); } set { Q("bytes", value); } }
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
@@ -276,14 +270,13 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ICatHealthRequest : IRequest<CatHealthRequestParameters>
+	public partial interface ICatHealthRequest : IRequest<CatHealthRequestParameters> 
 	{
-	}
-	
+	 } 
 	///<summary>Request parameters for CatHealth <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-health.html</pre></summary>
 	public partial class CatHealthRequest  : RequestBase<CatHealthRequestParameters>, ICatHealthRequest
 	{
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+			///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -310,14 +303,13 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ICatHelpRequest : IRequest<CatHelpRequestParameters>
+	public partial interface ICatHelpRequest : IRequest<CatHelpRequestParameters> 
 	{
-	}
-	
+	 } 
 	///<summary>Request parameters for CatHelp <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat.html</pre></summary>
 	public partial class CatHelpRequest  : RequestBase<CatHelpRequestParameters>, ICatHelpRequest
 	{
-		///<summary>Return help information</summary>
+			///<summary>Return help information</summary>
 		public bool Help { get { return Q<bool>("help"); } set { Q("help", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
@@ -331,14 +323,13 @@ namespace Nest
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ICatIndicesRequest : IRequest<CatIndicesRequestParameters>
+	public partial interface ICatIndicesRequest : IRequest<CatIndicesRequestParameters> 
 	{
-	}
-	
+	 } 
 	///<summary>Request parameters for CatIndices <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-indices.html</pre></summary>
 	public partial class CatIndicesRequest  : RequestBase<CatIndicesRequestParameters>, ICatIndicesRequest
 	{
-		///<summary>The unit in which to display byte values</summary>
+			///<summary>The unit in which to display byte values</summary>
 		public Bytes Bytes { get { return Q<Bytes>("bytes"); } set { Q("bytes", value); } }
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
@@ -368,14 +359,13 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ICatMasterRequest : IRequest<CatMasterRequestParameters>
+	public partial interface ICatMasterRequest : IRequest<CatMasterRequestParameters> 
 	{
-	}
-	
+	 } 
 	///<summary>Request parameters for CatMaster <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-master.html</pre></summary>
 	public partial class CatMasterRequest  : RequestBase<CatMasterRequestParameters>, ICatMasterRequest
 	{
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+			///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -399,14 +389,13 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ICatNodeattrsRequest : IRequest<CatNodeattrsRequestParameters>
+	public partial interface ICatNodeattrsRequest : IRequest<CatNodeattrsRequestParameters> 
 	{
-	}
-	
+	 } 
 	///<summary>Request parameters for CatNodeattrs <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodeattrs.html</pre></summary>
 	public partial class CatNodeattrsRequest  : RequestBase<CatNodeattrsRequestParameters>, ICatNodeattrsRequest
 	{
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+			///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -432,14 +421,13 @@ namespace Nest
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ICatNodesRequest : IRequest<CatNodesRequestParameters>
+	public partial interface ICatNodesRequest : IRequest<CatNodesRequestParameters> 
 	{
-	}
-	
+	 } 
 	///<summary>Request parameters for CatNodes <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodes.html</pre></summary>
 	public partial class CatNodesRequest  : RequestBase<CatNodesRequestParameters>, ICatNodesRequest
 	{
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+			///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -463,14 +451,13 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ICatPendingTasksRequest : IRequest<CatPendingTasksRequestParameters>
+	public partial interface ICatPendingTasksRequest : IRequest<CatPendingTasksRequestParameters> 
 	{
-	}
-	
+	 } 
 	///<summary>Request parameters for CatPendingTasks <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-pending-tasks.html</pre></summary>
 	public partial class CatPendingTasksRequest  : RequestBase<CatPendingTasksRequestParameters>, ICatPendingTasksRequest
 	{
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+			///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -494,14 +481,13 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ICatPluginsRequest : IRequest<CatPluginsRequestParameters>
+	public partial interface ICatPluginsRequest : IRequest<CatPluginsRequestParameters> 
 	{
-	}
-	
+	 } 
 	///<summary>Request parameters for CatPlugins <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-plugins.html</pre></summary>
 	public partial class CatPluginsRequest  : RequestBase<CatPluginsRequestParameters>, ICatPluginsRequest
 	{
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+			///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -525,14 +511,13 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ICatRecoveryRequest : IRequest<CatRecoveryRequestParameters>
+	public partial interface ICatRecoveryRequest : IRequest<CatRecoveryRequestParameters> 
 	{
-	}
-	
+	 } 
 	///<summary>Request parameters for CatRecovery <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-recovery.html</pre></summary>
 	public partial class CatRecoveryRequest  : RequestBase<CatRecoveryRequestParameters>, ICatRecoveryRequest
 	{
-		///<summary>The unit in which to display byte values</summary>
+			///<summary>The unit in which to display byte values</summary>
 		public Bytes Bytes { get { return Q<Bytes>("bytes"); } set { Q("bytes", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -556,14 +541,13 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ICatSegmentsRequest : IRequest<CatSegmentsRequestParameters>
+	public partial interface ICatSegmentsRequest : IRequest<CatSegmentsRequestParameters> 
 	{
-	}
-	
+	 } 
 	///<summary>Request parameters for CatSegments <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-segments.html</pre></summary>
 	public partial class CatSegmentsRequest  : RequestBase<CatSegmentsRequestParameters>, ICatSegmentsRequest
 	{
-		///<summary>Comma-separated list of column names to display</summary>
+			///<summary>Comma-separated list of column names to display</summary>
 		public  string[] H { get { return Q< string[]>("h"); } set { Q("h", value); } }
 		
 		///<summary>Return help information</summary>
@@ -581,14 +565,13 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ICatShardsRequest : IRequest<CatShardsRequestParameters>
+	public partial interface ICatShardsRequest : IRequest<CatShardsRequestParameters> 
 	{
-	}
-	
+	 } 
 	///<summary>Request parameters for CatShards <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-shards.html</pre></summary>
 	public partial class CatShardsRequest  : RequestBase<CatShardsRequestParameters>, ICatShardsRequest
 	{
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+			///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -612,14 +595,13 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ICatThreadPoolRequest : IRequest<CatThreadPoolRequestParameters>
+	public partial interface ICatThreadPoolRequest : IRequest<CatThreadPoolRequestParameters> 
 	{
-	}
-	
+	 } 
 	///<summary>Request parameters for CatThreadPool <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-thread-pool.html</pre></summary>
 	public partial class CatThreadPoolRequest  : RequestBase<CatThreadPoolRequestParameters>, ICatThreadPoolRequest
 	{
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+			///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -646,14 +628,13 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IClearCacheRequest : IRequest<ClearCacheRequestParameters>
+	public partial interface IClearCacheRequest : IRequest<ClearCacheRequestParameters> 
 	{
-	}
-	
+	 } 
 	///<summary>Request parameters for IndicesClearCacheForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-clearcache.html</pre></summary>
 	public partial class ClearCacheRequest  : RequestBase<ClearCacheRequestParameters>, IClearCacheRequest
 	{
-		///<summary>Clear field data</summary>
+			///<summary>Clear field data</summary>
 		public bool FieldData { get { return Q<bool>("field_data"); } set { Q("field_data", value); } }
 		
 		///<summary>A comma-separated list of fields to clear when using the `field_data` parameter (default: all)</summary>
@@ -689,14 +670,15 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IClearScrollRequest : IRequest<ClearScrollRequestParameters>
+	public partial interface IClearScrollRequest : IRequest<ClearScrollRequestParameters> 
 	{
-	}
-	
+		ScrollIds ScrollId { get; }
+	 } 
 	///<summary>Request parameters for ClearScroll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</pre></summary>
 	public partial class ClearScrollRequest  : RequestBase<ClearScrollRequestParameters>, IClearScrollRequest
 	{
-		///<summary>The URL-encoded request definition</summary>
+		ScrollIds IClearScrollRequest.ScrollId => Self.RouteValues.Get<ScrollIds>("scroll_id");
+			///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
@@ -705,14 +687,15 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ICloseIndexRequest : IRequest<CloseIndexRequestParameters>
+	public partial interface ICloseIndexRequest : IRequest<CloseIndexRequestParameters> 
 	{
-	}
-	
+		IndexName Index { get; }
+	 } 
 	///<summary>Request parameters for IndicesClose <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</pre></summary>
 	public partial class CloseIndexRequest  : RequestBase<CloseIndexRequestParameters>, ICloseIndexRequest
 	{
-		///<summary>Explicit operation timeout</summary>
+		IndexName ICloseIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
+			///<summary>Explicit operation timeout</summary>
 		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
 		
 		///<summary>Specify timeout for connection to master</summary>
@@ -736,14 +719,13 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IClusterGetSettingsRequest : IRequest<ClusterGetSettingsRequestParameters>
+	public partial interface IClusterGetSettingsRequest : IRequest<ClusterGetSettingsRequestParameters> 
 	{
-	}
-	
+	 } 
 	///<summary>Request parameters for ClusterGetSettings <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</pre></summary>
 	public partial class ClusterGetSettingsRequest  : RequestBase<ClusterGetSettingsRequestParameters>, IClusterGetSettingsRequest
 	{
-		///<summary>Return settings in flat format (default: false)</summary>
+			///<summary>Return settings in flat format (default: false)</summary>
 		public bool FlatSettings { get { return Q<bool>("flat_settings"); } set { Q("flat_settings", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -761,14 +743,13 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IClusterHealthRequest : IRequest<ClusterHealthRequestParameters>
+	public partial interface IClusterHealthRequest : IRequest<ClusterHealthRequestParameters> 
 	{
-	}
-	
+	 } 
 	///<summary>Request parameters for ClusterHealth <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-health.html</pre></summary>
 	public partial class ClusterHealthRequest  : RequestBase<ClusterHealthRequestParameters>, IClusterHealthRequest
 	{
-		///<summary>Specify the level of detail for returned information</summary>
+			///<summary>Specify the level of detail for returned information</summary>
 		public Level Level { get { return Q<Level>("level"); } set { Q("level", value); } }
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
@@ -801,14 +782,13 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IClusterPendingTasksRequest : IRequest<ClusterPendingTasksRequestParameters>
+	public partial interface IClusterPendingTasksRequest : IRequest<ClusterPendingTasksRequestParameters> 
 	{
-	}
-	
+	 } 
 	///<summary>Request parameters for ClusterPendingTasks <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-pending.html</pre></summary>
 	public partial class ClusterPendingTasksRequest  : RequestBase<ClusterPendingTasksRequestParameters>, IClusterPendingTasksRequest
 	{
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+			///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Specify timeout for connection to master</summary>
@@ -823,14 +803,13 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IClusterRerouteRequest : IRequest<ClusterRerouteRequestParameters>
+	public partial interface IClusterRerouteRequest : IRequest<ClusterRerouteRequestParameters> 
 	{
-	}
-	
+	 } 
 	///<summary>Request parameters for ClusterReroute <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-reroute.html</pre></summary>
 	public partial class ClusterRerouteRequest  : RequestBase<ClusterRerouteRequestParameters>, IClusterRerouteRequest
 	{
-		///<summary>Simulate the operation only and return the resulting state</summary>
+			///<summary>Simulate the operation only and return the resulting state</summary>
 		public bool DryRun { get { return Q<bool>("dry_run"); } set { Q("dry_run", value); } }
 		
 		///<summary>Return an explanation of why the commands can or cannot be executed</summary>
@@ -854,14 +833,13 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IClusterSettingsRequest : IRequest<ClusterSettingsRequestParameters>
+	public partial interface IClusterSettingsRequest : IRequest<ClusterSettingsRequestParameters> 
 	{
-	}
-	
+	 } 
 	///<summary>Request parameters for ClusterPutSettings <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</pre></summary>
 	public partial class ClusterSettingsRequest  : RequestBase<ClusterSettingsRequestParameters>, IClusterSettingsRequest
 	{
-		///<summary>Return settings in flat format (default: false)</summary>
+			///<summary>Return settings in flat format (default: false)</summary>
 		public bool FlatSettings { get { return Q<bool>("flat_settings"); } set { Q("flat_settings", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
@@ -879,14 +857,13 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IClusterStateRequest : IRequest<ClusterStateRequestParameters>
+	public partial interface IClusterStateRequest : IRequest<ClusterStateRequestParameters> 
 	{
-	}
-	
+	 } 
 	///<summary>Request parameters for ClusterState <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-state.html</pre></summary>
 	public partial class ClusterStateRequest  : RequestBase<ClusterStateRequestParameters>, IClusterStateRequest
 	{
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+			///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Specify timeout for connection to master</summary>
@@ -913,14 +890,13 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IClusterStatsRequest : IRequest<ClusterStatsRequestParameters>
+	public partial interface IClusterStatsRequest : IRequest<ClusterStatsRequestParameters> 
 	{
-	}
-	
+	 } 
 	///<summary>Request parameters for ClusterStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-stats.html</pre></summary>
 	public partial class ClusterStatsRequest  : RequestBase<ClusterStatsRequestParameters>, IClusterStatsRequest
 	{
-		///<summary>Return settings in flat format (default: false)</summary>
+			///<summary>Return settings in flat format (default: false)</summary>
 		public bool FlatSettings { get { return Q<bool>("flat_settings"); } set { Q("flat_settings", value); } }
 		
 		///<summary>Whether to return time and byte values in human-readable format.</summary>
@@ -935,14 +911,13 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ICountRequest : IRequest<CountRequestParameters>
+	public partial interface ICountRequest : IRequest<CountRequestParameters> 
 	{
-	}
-	
+	 } 
 	///<summary>Request parameters for Count <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-count.html</pre></summary>
 	public partial class CountRequest  : RequestBase<CountRequestParameters>, ICountRequest
 	{
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
@@ -990,14 +965,15 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ICreateIndexRequest : IRequest<CreateIndexRequestParameters>
+	public partial interface ICreateIndexRequest : IRequest<CreateIndexRequestParameters> 
 	{
-	}
-	
+		IndexName Index { get; }
+	 } 
 	///<summary>Request parameters for IndicesCreate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-create-index.html</pre></summary>
 	public partial class CreateIndexRequest  : RequestBase<CreateIndexRequestParameters>, ICreateIndexRequest
 	{
-		///<summary>Explicit operation timeout</summary>
+		IndexName ICreateIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
+			///<summary>Explicit operation timeout</summary>
 		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
 		
 		///<summary>Specify timeout for connection to master</summary>
@@ -1015,14 +991,15 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ICreateRepositoryRequest : IRequest<CreateRepositoryRequestParameters>
+	public partial interface ICreateRepositoryRequest : IRequest<CreateRepositoryRequestParameters> 
 	{
-	}
-	
+		Name RepositoryName { get; }
+	 } 
 	///<summary>Request parameters for SnapshotCreateRepository <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class CreateRepositoryRequest  : RequestBase<CreateRepositoryRequestParameters>, ICreateRepositoryRequest
 	{
-		///<summary>Explicit operation timeout for connection to master node</summary>
+		Name ICreateRepositoryRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
+			///<summary>Explicit operation timeout for connection to master node</summary>
 		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Explicit operation timeout</summary>
@@ -1040,14 +1017,17 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IDeleteAliasRequest : IRequest<DeleteAliasRequestParameters>
+	public partial interface IDeleteAliasRequest : IRequest<DeleteAliasRequestParameters> 
 	{
-	}
-	
+		Indices Index { get; }
+		Names Name { get; }
+	 } 
 	///<summary>Request parameters for IndicesDeleteAlias <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
 	public partial class DeleteAliasRequest  : RequestBase<DeleteAliasRequestParameters>, IDeleteAliasRequest
 	{
-		///<summary>Explicit timestamp for the document</summary>
+		Indices IDeleteAliasRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Names IDeleteAliasRequest.Name => Self.RouteValues.Get<Names>("name");
+			///<summary>Explicit timestamp for the document</summary>
 		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
 		
 		///<summary>Specify timeout for connection to master</summary>
@@ -1062,14 +1042,15 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IDeleteByQueryRequest : IRequest<DeleteByQueryRequestParameters>
+	public partial interface IDeleteByQueryRequest : IRequest<DeleteByQueryRequestParameters> 
 	{
-	}
-	
+		Indices Index { get; }
+	 } 
 	///<summary>Request parameters for DeleteByQuery <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/2.0/plugins-delete-by-query.html</pre></summary>
 	public partial class DeleteByQueryRequest<T>  : RequestBase<DeleteByQueryRequestParameters>, IDeleteByQueryRequest
 	{
-		///<summary>The analyzer to use for the query string</summary>
+		Indices IDeleteByQueryRequest.Index => Self.RouteValues.Get<Indices>("index");
+			///<summary>The analyzer to use for the query string</summary>
 		public string Analyzer { get { return Q<string>("analyzer"); } set { Q("analyzer", value); } }
 		
 		///<summary>The default operator for query string query (AND or OR)</summary>
@@ -1106,7 +1087,8 @@ namespace Nest
 	///<summary>Request parameters for DeleteByQuery <pre>https://www.elastic.co/guide/en/elasticsearch/plugins/2.0/plugins-delete-by-query.html</pre></summary>
 	public partial class DeleteByQueryRequest  : RequestBase<DeleteByQueryRequestParameters>, IDeleteByQueryRequest
 	{
-		///<summary>The analyzer to use for the query string</summary>
+		Indices IDeleteByQueryRequest.Index => Self.RouteValues.Get<Indices>("index");
+			///<summary>The analyzer to use for the query string</summary>
 		public string Analyzer { get { return Q<string>("analyzer"); } set { Q("analyzer", value); } }
 		
 		///<summary>The default operator for query string query (AND or OR)</summary>
@@ -1142,14 +1124,15 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IDeleteIndexRequest : IRequest<DeleteIndexRequestParameters>
+	public partial interface IDeleteIndexRequest : IRequest<DeleteIndexRequestParameters> 
 	{
-	}
-	
+		Indices Index { get; }
+	 } 
 	///<summary>Request parameters for IndicesDelete <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-delete-index.html</pre></summary>
 	public partial class DeleteIndexRequest  : RequestBase<DeleteIndexRequestParameters>, IDeleteIndexRequest
 	{
-		///<summary>Explicit operation timeout</summary>
+		Indices IDeleteIndexRequest.Index => Self.RouteValues.Get<Indices>("index");
+			///<summary>Explicit operation timeout</summary>
 		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
 		
 		///<summary>Specify timeout for connection to master</summary>
@@ -1164,14 +1147,15 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IDeleteRepositoryRequest : IRequest<DeleteRepositoryRequestParameters>
+	public partial interface IDeleteRepositoryRequest : IRequest<DeleteRepositoryRequestParameters> 
 	{
-	}
-	
+		Names RepositoryName { get; }
+	 } 
 	///<summary>Request parameters for SnapshotDeleteRepository <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class DeleteRepositoryRequest  : RequestBase<DeleteRepositoryRequestParameters>, IDeleteRepositoryRequest
 	{
-		///<summary>Explicit operation timeout for connection to master node</summary>
+		Names IDeleteRepositoryRequest.RepositoryName => Self.RouteValues.Get<Names>("repository");
+			///<summary>Explicit operation timeout for connection to master node</summary>
 		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Explicit operation timeout</summary>
@@ -1186,14 +1170,19 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IDeleteRequest : IRequest<DeleteRequestParameters>
+	public partial interface IDeleteRequest : IRequest<DeleteRequestParameters> 
 	{
-	}
-	
+		IndexName Index { get; }
+		TypeName Type { get; }
+		Id Id { get; }
+	 } 
 	///<summary>Request parameters for Delete <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete.html</pre></summary>
 	public partial class DeleteRequest<T>  : RequestBase<DeleteRequestParameters>, IDeleteRequest
 	{
-		///<summary>Specific write consistency setting for the operation</summary>
+		IndexName IDeleteRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		TypeName IDeleteRequest.Type => Self.RouteValues.Get<TypeName>("type");
+		Id IDeleteRequest.Id => Self.RouteValues.Get<Id>("id");
+			///<summary>Specific write consistency setting for the operation</summary>
 		public Consistency Consistency { get { return Q<Consistency>("consistency"); } set { Q("consistency", value); } }
 		
 		///<summary>ID of parent document</summary>
@@ -1224,7 +1213,10 @@ namespace Nest
 	///<summary>Request parameters for Delete <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-delete.html</pre></summary>
 	public partial class DeleteRequest  : RequestBase<DeleteRequestParameters>, IDeleteRequest
 	{
-		///<summary>Specific write consistency setting for the operation</summary>
+		IndexName IDeleteRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		TypeName IDeleteRequest.Type => Self.RouteValues.Get<TypeName>("type");
+		Id IDeleteRequest.Id => Self.RouteValues.Get<Id>("id");
+			///<summary>Specific write consistency setting for the operation</summary>
 		public Consistency Consistency { get { return Q<Consistency>("consistency"); } set { Q("consistency", value); } }
 		
 		///<summary>ID of parent document</summary>
@@ -1254,14 +1246,17 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IDeleteScriptRequest : IRequest<DeleteScriptRequestParameters>
+	public partial interface IDeleteScriptRequest : IRequest<DeleteScriptRequestParameters> 
 	{
-	}
-	
+		Name Lang { get; }
+		Id Id { get; }
+	 } 
 	///<summary>Request parameters for DeleteScript <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</pre></summary>
 	public partial class DeleteScriptRequest  : RequestBase<DeleteScriptRequestParameters>, IDeleteScriptRequest
 	{
-		///<summary>Explicit version number for concurrency control</summary>
+		Name IDeleteScriptRequest.Lang => Self.RouteValues.Get<Name>("lang");
+		Id IDeleteScriptRequest.Id => Self.RouteValues.Get<Id>("id");
+			///<summary>Explicit version number for concurrency control</summary>
 		public long Version { get { return Q<long>("version"); } set { Q("version", value); } }
 		
 		///<summary>Specific version type</summary>
@@ -1276,14 +1271,17 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IDeleteSnapshotRequest : IRequest<DeleteSnapshotRequestParameters>
+	public partial interface IDeleteSnapshotRequest : IRequest<DeleteSnapshotRequestParameters> 
 	{
-	}
-	
+		Name RepositoryName { get; }
+		Name Snapshot { get; }
+	 } 
 	///<summary>Request parameters for SnapshotDelete <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class DeleteSnapshotRequest  : RequestBase<DeleteSnapshotRequestParameters>, IDeleteSnapshotRequest
 	{
-		///<summary>Explicit operation timeout for connection to master node</summary>
+		Name IDeleteSnapshotRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
+		Name IDeleteSnapshotRequest.Snapshot => Self.RouteValues.Get<Name>("snapshot");
+			///<summary>Explicit operation timeout for connection to master node</summary>
 		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
@@ -1295,14 +1293,15 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IDeleteTemplateRequest : IRequest<DeleteTemplateRequestParameters>
+	public partial interface IDeleteTemplateRequest : IRequest<DeleteTemplateRequestParameters> 
 	{
-	}
-	
+		Id Id { get; }
+	 } 
 	///<summary>Request parameters for DeleteTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-template.html</pre></summary>
 	public partial class DeleteTemplateRequest  : RequestBase<DeleteTemplateRequestParameters>, IDeleteTemplateRequest
 	{
-		///<summary>Explicit version number for concurrency control</summary>
+		Id IDeleteTemplateRequest.Id => Self.RouteValues.Get<Id>("id");
+			///<summary>Explicit version number for concurrency control</summary>
 		public long Version { get { return Q<long>("version"); } set { Q("version", value); } }
 		
 		///<summary>Specific version type</summary>
@@ -1317,14 +1316,17 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IDeleteWarmerRequest : IRequest<DeleteWarmerRequestParameters>
+	public partial interface IDeleteWarmerRequest : IRequest<DeleteWarmerRequestParameters> 
 	{
-	}
-	
+		Indices Index { get; }
+		Names Name { get; }
+	 } 
 	///<summary>Request parameters for IndicesDeleteWarmer <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-warmers.html</pre></summary>
 	public partial class DeleteWarmerRequest  : RequestBase<DeleteWarmerRequestParameters>, IDeleteWarmerRequest
 	{
-		///<summary>Specify timeout for connection to master</summary>
+		Indices IDeleteWarmerRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Names IDeleteWarmerRequest.Name => Self.RouteValues.Get<Names>("name");
+			///<summary>Specify timeout for connection to master</summary>
 		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
@@ -1336,14 +1338,19 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IDocumentExistsRequest : IRequest<DocumentExistsRequestParameters>
+	public partial interface IDocumentExistsRequest : IRequest<DocumentExistsRequestParameters> 
 	{
-	}
-	
+		IndexName Index { get; }
+		TypeName Type { get; }
+		Id Id { get; }
+	 } 
 	///<summary>Request parameters for Exists <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
 	public partial class DocumentExistsRequest<T>  : RequestBase<DocumentExistsRequestParameters>, IDocumentExistsRequest
 	{
-		///<summary>The ID of the parent document</summary>
+		IndexName IDocumentExistsRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		TypeName IDocumentExistsRequest.Type => Self.RouteValues.Get<TypeName>("type");
+		Id IDocumentExistsRequest.Id => Self.RouteValues.Get<Id>("id");
+			///<summary>The ID of the parent document</summary>
 		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
@@ -1368,7 +1375,10 @@ namespace Nest
 	///<summary>Request parameters for Exists <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
 	public partial class DocumentExistsRequest  : RequestBase<DocumentExistsRequestParameters>, IDocumentExistsRequest
 	{
-		///<summary>The ID of the parent document</summary>
+		IndexName IDocumentExistsRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		TypeName IDocumentExistsRequest.Type => Self.RouteValues.Get<TypeName>("type");
+		Id IDocumentExistsRequest.Id => Self.RouteValues.Get<Id>("id");
+			///<summary>The ID of the parent document</summary>
 		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
@@ -1392,14 +1402,19 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IExplainRequest : IRequest<ExplainRequestParameters>
+	public partial interface IExplainRequest : IRequest<ExplainRequestParameters> 
 	{
-	}
-	
+		IndexName Index { get; }
+		TypeName Type { get; }
+		Id Id { get; }
+	 } 
 	///<summary>Request parameters for Explain <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-explain.html</pre></summary>
 	public partial class ExplainRequest  : RequestBase<ExplainRequestParameters>, IExplainRequest
 	{
-		///<summary>Specify whether wildcards and prefix queries in the query string query should be analyzed (default: false)</summary>
+		IndexName IExplainRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		TypeName IExplainRequest.Type => Self.RouteValues.Get<TypeName>("type");
+		Id IExplainRequest.Id => Self.RouteValues.Get<Id>("id");
+			///<summary>Specify whether wildcards and prefix queries in the query string query should be analyzed (default: false)</summary>
 		public bool AnalyzeWildcard { get { return Q<bool>("analyze_wildcard"); } set { Q("analyze_wildcard", value); } }
 		
 		///<summary>The analyzer for the query string query</summary>
@@ -1450,14 +1465,13 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IFieldStatsRequest : IRequest<FieldStatsRequestParameters>
+	public partial interface IFieldStatsRequest : IRequest<FieldStatsRequestParameters> 
 	{
-	}
-	
+	 } 
 	///<summary>Request parameters for FieldStats <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-field-stats.html</pre></summary>
 	public partial class FieldStatsRequest  : RequestBase<FieldStatsRequestParameters>, IFieldStatsRequest
 	{
-		///<summary>A comma-separated list of fields for to get field statistics for (min value, max value, and more)</summary>
+			///<summary>A comma-separated list of fields for to get field statistics for (min value, max value, and more)</summary>
 		public IList<FieldName> Fields { get { return Q<IList<FieldName>>("fields"); } set { Q("fields", value); } }
 		
 		///<summary>Defines if field stats should be returned on a per index level or on a cluster wide level</summary>
@@ -1481,14 +1495,13 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IFlushRequest : IRequest<FlushRequestParameters>
+	public partial interface IFlushRequest : IRequest<FlushRequestParameters> 
 	{
-	}
-	
+	 } 
 	///<summary>Request parameters for IndicesFlushForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-flush.html</pre></summary>
 	public partial class FlushRequest  : RequestBase<FlushRequestParameters>, IFlushRequest
 	{
-		///<summary>Whether a flush should be forced even if it is not necessarily needed ie. if no changes will be committed to the index. This is useful if transaction log IDs should be incremented even if no uncommitted changes are present. (This setting can be considered as internal)</summary>
+			///<summary>Whether a flush should be forced even if it is not necessarily needed ie. if no changes will be committed to the index. This is useful if transaction log IDs should be incremented even if no uncommitted changes are present. (This setting can be considered as internal)</summary>
 		public bool Force { get { return Q<bool>("force"); } set { Q("force", value); } }
 		
 		///<summary>If set to true the flush operation will block until the flush can be executed if another flush operation is already executing. The default is false and will cause an exception to be thrown on the shard level if another flush operation is already running.</summary>
@@ -1512,14 +1525,13 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IGetAliasesRequest : IRequest<GetAliasesRequestParameters>
+	public partial interface IGetAliasesRequest : IRequest<GetAliasesRequestParameters> 
 	{
-	}
-	
+	 } 
 	///<summary>Request parameters for IndicesGetAliasesForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
 	public partial class GetAliasesRequest  : RequestBase<GetAliasesRequestParameters>, IGetAliasesRequest
 	{
-		///<summary>Explicit operation timeout</summary>
+			///<summary>Explicit operation timeout</summary>
 		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
@@ -1534,14 +1546,13 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IGetAliasRequest : IRequest<GetAliasRequestParameters>
+	public partial interface IGetAliasRequest : IRequest<GetAliasRequestParameters> 
 	{
-	}
-	
+	 } 
 	///<summary>Request parameters for IndicesGetAliasForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
 	public partial class GetAliasRequest  : RequestBase<GetAliasRequestParameters>, IGetAliasRequest
 	{
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
@@ -1562,14 +1573,15 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IGetFieldMappingRequest : IRequest<GetFieldMappingRequestParameters>
+	public partial interface IGetFieldMappingRequest : IRequest<GetFieldMappingRequestParameters> 
 	{
-	}
-	
+		PropertyNames Field { get; }
+	 } 
 	///<summary>Request parameters for IndicesGetFieldMappingForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-field-mapping.html</pre></summary>
 	public partial class GetFieldMappingRequest  : RequestBase<GetFieldMappingRequestParameters>, IGetFieldMappingRequest
 	{
-		///<summary>Whether the default mapping values should be returned as well</summary>
+		PropertyNames IGetFieldMappingRequest.Field => Self.RouteValues.Get<PropertyNames>("field");
+			///<summary>Whether the default mapping values should be returned as well</summary>
 		public bool IncludeDefaults { get { return Q<bool>("include_defaults"); } set { Q("include_defaults", value); } }
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -1593,14 +1605,15 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IGetIndexRequest : IRequest<GetIndexRequestParameters>
+	public partial interface IGetIndexRequest : IRequest<GetIndexRequestParameters> 
 	{
-	}
-	
+		Indices Index { get; }
+	 } 
 	///<summary>Request parameters for IndicesGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-index.html</pre></summary>
 	public partial class GetIndexRequest  : RequestBase<GetIndexRequestParameters>, IGetIndexRequest
 	{
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		Indices IGetIndexRequest.Index => Self.RouteValues.Get<Indices>("index");
+			///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>Ignore unavailable indexes (default: false)</summary>
@@ -1627,14 +1640,13 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IGetIndexSettingsRequest : IRequest<GetIndexSettingsRequestParameters>
+	public partial interface IGetIndexSettingsRequest : IRequest<GetIndexSettingsRequestParameters> 
 	{
-	}
-	
+	 } 
 	///<summary>Request parameters for IndicesGetSettingsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-settings.html</pre></summary>
 	public partial class GetIndexSettingsRequest  : RequestBase<GetIndexSettingsRequestParameters>, IGetIndexSettingsRequest
 	{
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
@@ -1661,14 +1673,13 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IGetMappingRequest : IRequest<GetMappingRequestParameters>
+	public partial interface IGetMappingRequest : IRequest<GetMappingRequestParameters> 
 	{
-	}
-	
+	 } 
 	///<summary>Request parameters for IndicesGetMappingForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-mapping.html</pre></summary>
 	public partial class GetMappingRequest  : RequestBase<GetMappingRequestParameters>, IGetMappingRequest
 	{
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
@@ -1689,14 +1700,13 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IGetRepositoryRequest : IRequest<GetRepositoryRequestParameters>
+	public partial interface IGetRepositoryRequest : IRequest<GetRepositoryRequestParameters> 
 	{
-	}
-	
+	 } 
 	///<summary>Request parameters for SnapshotGetRepository <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class GetRepositoryRequest  : RequestBase<GetRepositoryRequestParameters>, IGetRepositoryRequest
 	{
-		///<summary>Explicit operation timeout for connection to master node</summary>
+			///<summary>Explicit operation timeout for connection to master node</summary>
 		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
@@ -1711,14 +1721,19 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IGetRequest : IRequest<GetRequestParameters>
+	public partial interface IGetRequest : IRequest<GetRequestParameters> 
 	{
-	}
-	
+		IndexName Index { get; }
+		TypeName Type { get; }
+		Id Id { get; }
+	 } 
 	///<summary>Request parameters for Get <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
 	public partial class GetRequest<T>  : RequestBase<GetRequestParameters>, IGetRequest
 	{
-		///<summary>A comma-separated list of fields to return in the response</summary>
+		IndexName IGetRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		TypeName IGetRequest.Type => Self.RouteValues.Get<TypeName>("type");
+		Id IGetRequest.Id => Self.RouteValues.Get<Id>("id");
+			///<summary>A comma-separated list of fields to return in the response</summary>
 		public IList<FieldName> Fields { get { return Q<IList<FieldName>>("fields"); } set { Q("fields", value); } }
 		
 		///<summary>The ID of the parent document</summary>
@@ -1761,7 +1776,10 @@ namespace Nest
 	///<summary>Request parameters for Get <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
 	public partial class GetRequest  : RequestBase<GetRequestParameters>, IGetRequest
 	{
-		///<summary>A comma-separated list of fields to return in the response</summary>
+		IndexName IGetRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		TypeName IGetRequest.Type => Self.RouteValues.Get<TypeName>("type");
+		Id IGetRequest.Id => Self.RouteValues.Get<Id>("id");
+			///<summary>A comma-separated list of fields to return in the response</summary>
 		public IList<FieldName> Fields { get { return Q<IList<FieldName>>("fields"); } set { Q("fields", value); } }
 		
 		///<summary>The ID of the parent document</summary>
@@ -1803,14 +1821,17 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IGetScriptRequest : IRequest<GetScriptRequestParameters>
+	public partial interface IGetScriptRequest : IRequest<GetScriptRequestParameters> 
 	{
-	}
-	
+		Name Lang { get; }
+		Id Id { get; }
+	 } 
 	///<summary>Request parameters for GetScript <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</pre></summary>
 	public partial class GetScriptRequest  : RequestBase<GetScriptRequestParameters>, IGetScriptRequest
 	{
-		///<summary>Explicit version number for concurrency control</summary>
+		Name IGetScriptRequest.Lang => Self.RouteValues.Get<Name>("lang");
+		Id IGetScriptRequest.Id => Self.RouteValues.Get<Id>("id");
+			///<summary>Explicit version number for concurrency control</summary>
 		public long Version { get { return Q<long>("version"); } set { Q("version", value); } }
 		
 		///<summary>Specific version type</summary>
@@ -1825,14 +1846,17 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IGetSnapshotRequest : IRequest<GetSnapshotRequestParameters>
+	public partial interface IGetSnapshotRequest : IRequest<GetSnapshotRequestParameters> 
 	{
-	}
-	
+		Name RepositoryName { get; }
+		Names Snapshot { get; }
+	 } 
 	///<summary>Request parameters for SnapshotGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class GetSnapshotRequest  : RequestBase<GetSnapshotRequestParameters>, IGetSnapshotRequest
 	{
-		///<summary>Explicit operation timeout for connection to master node</summary>
+		Name IGetSnapshotRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
+		Names IGetSnapshotRequest.Snapshot => Self.RouteValues.Get<Names>("snapshot");
+			///<summary>Explicit operation timeout for connection to master node</summary>
 		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
@@ -1844,14 +1868,15 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IGetTemplateRequest : IRequest<GetTemplateRequestParameters>
+	public partial interface IGetTemplateRequest : IRequest<GetTemplateRequestParameters> 
 	{
-	}
-	
+		Id Id { get; }
+	 } 
 	///<summary>Request parameters for GetTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-template.html</pre></summary>
 	public partial class GetTemplateRequest  : RequestBase<GetTemplateRequestParameters>, IGetTemplateRequest
 	{
-		///<summary>Explicit version number for concurrency control</summary>
+		Id IGetTemplateRequest.Id => Self.RouteValues.Get<Id>("id");
+			///<summary>Explicit version number for concurrency control</summary>
 		public long Version { get { return Q<long>("version"); } set { Q("version", value); } }
 		
 		///<summary>Specific version type</summary>
@@ -1866,14 +1891,13 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IGetWarmerRequest : IRequest<GetWarmerRequestParameters>
+	public partial interface IGetWarmerRequest : IRequest<GetWarmerRequestParameters> 
 	{
-	}
-	
+	 } 
 	///<summary>Request parameters for IndicesGetWarmerForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-warmers.html</pre></summary>
 	public partial class GetWarmerRequest  : RequestBase<GetWarmerRequestParameters>, IGetWarmerRequest
 	{
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
@@ -1894,14 +1918,15 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IIndexExistsRequest : IRequest<IndexExistsRequestParameters>
+	public partial interface IIndexExistsRequest : IRequest<IndexExistsRequestParameters> 
 	{
-	}
-	
+		Indices Index { get; }
+	 } 
 	///<summary>Request parameters for IndicesExists <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-exists.html</pre></summary>
 	public partial class IndexExistsRequest  : RequestBase<IndexExistsRequestParameters>, IIndexExistsRequest
 	{
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		Indices IIndexExistsRequest.Index => Self.RouteValues.Get<Indices>("index");
+			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
@@ -1922,14 +1947,17 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IIndexRequest : IRequest<IndexRequestParameters>
+	public partial interface IIndexRequest : IRequest<IndexRequestParameters> 
 	{
-	}
-	
+		IndexName Index { get; }
+		TypeName Type { get; }
+	 } 
 	///<summary>Request parameters for Index <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</pre></summary>
 	public partial class IndexRequest<TDocument>  : RequestBase<IndexRequestParameters>, IIndexRequest
 	{
-		///<summary>Explicit write consistency setting for the operation</summary>
+		IndexName IIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		TypeName IIndexRequest.Type => Self.RouteValues.Get<TypeName>("type");
+			///<summary>Explicit write consistency setting for the operation</summary>
 		public Consistency Consistency { get { return Q<Consistency>("consistency"); } set { Q("consistency", value); } }
 		
 		///<summary>Explicit operation type</summary>
@@ -1968,14 +1996,13 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IIndicesShardStoresRequest : IRequest<IndicesShardStoresRequestParameters>
+	public partial interface IIndicesShardStoresRequest : IRequest<IndicesShardStoresRequestParameters> 
 	{
-	}
-	
+	 } 
 	///<summary>Request parameters for IndicesShardStoresForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-shards-stores.html</pre></summary>
 	public partial class IndicesShardStoresRequest  : RequestBase<IndicesShardStoresRequestParameters>, IIndicesShardStoresRequest
 	{
-		///<summary>A comma-separated list of statuses used to filter on shards to get store information for</summary>
+			///<summary>A comma-separated list of statuses used to filter on shards to get store information for</summary>
 		public  string[] Status { get { return Q< string[]>("status"); } set { Q("status", value); } }
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -2001,14 +2028,13 @@ namespace Nest
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IIndicesStatsRequest : IRequest<IndicesStatsRequestParameters>
+	public partial interface IIndicesStatsRequest : IRequest<IndicesStatsRequestParameters> 
 	{
-	}
-	
+	 } 
 	///<summary>Request parameters for IndicesStatsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-stats.html</pre></summary>
 	public partial class IndicesStatsRequest  : RequestBase<IndicesStatsRequestParameters>, IIndicesStatsRequest
 	{
-		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
+			///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
 		public IList<FieldName> CompletionFields { get { return Q<IList<FieldName>>("completion_fields"); } set { Q("completion_fields", value); } }
 		
 		///<summary>A comma-separated list of fields for `fielddata` index metric (supports wildcards)</summary>
@@ -2035,14 +2061,13 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IInfoRequest : IRequest<InfoRequestParameters>
+	public partial interface IInfoRequest : IRequest<InfoRequestParameters> 
 	{
-	}
-	
+	 } 
 	///<summary>Request parameters for Info <pre>http://www.elastic.co/guide/</pre></summary>
 	public partial class InfoRequest  : RequestBase<InfoRequestParameters>, IInfoRequest
 	{
-		///<summary>The URL-encoded request definition</summary>
+			///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
@@ -2051,14 +2076,13 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IMultiGetRequest : IRequest<MultiGetRequestParameters>
+	public partial interface IMultiGetRequest : IRequest<MultiGetRequestParameters> 
 	{
-	}
-	
+	 } 
 	///<summary>Request parameters for Mget <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-get.html</pre></summary>
 	public partial class MultiGetRequest  : RequestBase<MultiGetRequestParameters>, IMultiGetRequest
 	{
-		///<summary>A comma-separated list of fields to return in the response</summary>
+			///<summary>A comma-separated list of fields to return in the response</summary>
 		public IList<FieldName> Fields { get { return Q<IList<FieldName>>("fields"); } set { Q("fields", value); } }
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
@@ -2088,14 +2112,13 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IMultiPercolateRequest : IRequest<MultiPercolateRequestParameters>
+	public partial interface IMultiPercolateRequest : IRequest<MultiPercolateRequestParameters> 
 	{
-	}
-	
+	 } 
 	///<summary>Request parameters for Mpercolate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-percolate.html</pre></summary>
 	public partial class MultiPercolateRequest  : RequestBase<MultiPercolateRequestParameters>, IMultiPercolateRequest
 	{
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
@@ -2113,14 +2136,13 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IMultiSearchRequest : IRequest<MultiSearchRequestParameters>
+	public partial interface IMultiSearchRequest : IRequest<MultiSearchRequestParameters> 
 	{
-	}
-	
+	 } 
 	///<summary>Request parameters for Msearch <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-multi-search.html</pre></summary>
 	public partial class MultiSearchRequest  : RequestBase<MultiSearchRequestParameters>, IMultiSearchRequest
 	{
-		///<summary>Search operation type</summary>
+			///<summary>Search operation type</summary>
 		public SearchType SearchType { get { return Q<SearchType>("search_type"); } set { Q("search_type", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
@@ -2132,14 +2154,13 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IMultiTermVectorsRequest : IRequest<MultiTermVectorsRequestParameters>
+	public partial interface IMultiTermVectorsRequest : IRequest<MultiTermVectorsRequestParameters> 
 	{
-	}
-	
+	 } 
 	///<summary>Request parameters for Mtermvectors <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html</pre></summary>
 	public partial class MultiTermVectorsRequest  : RequestBase<MultiTermVectorsRequestParameters>, IMultiTermVectorsRequest
 	{
-		///<summary>Specifies if total term frequency and document frequency should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
+			///<summary>Specifies if total term frequency and document frequency should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
 		public bool TermStatistics { get { return Q<bool>("term_statistics"); } set { Q("term_statistics", value); } }
 		
 		///<summary>Specifies if document count, sum of document frequencies and sum of total term frequencies should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
@@ -2184,14 +2205,13 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface INodesHotThreadsRequest : IRequest<NodesHotThreadsRequestParameters>
+	public partial interface INodesHotThreadsRequest : IRequest<NodesHotThreadsRequestParameters> 
 	{
-	}
-	
+	 } 
 	///<summary>Request parameters for NodesHotThreadsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-hot-threads.html</pre></summary>
 	public partial class NodesHotThreadsRequest  : RequestBase<NodesHotThreadsRequestParameters>, INodesHotThreadsRequest
 	{
-		///<summary>The interval for the second sampling of threads</summary>
+			///<summary>The interval for the second sampling of threads</summary>
 		public string Interval { get { return Q<string>("interval"); } set { Q("interval", value); } }
 		
 		///<summary>Number of samples of thread stacktrace (default: 10)</summary>
@@ -2215,14 +2235,13 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface INodesInfoRequest : IRequest<NodesInfoRequestParameters>
+	public partial interface INodesInfoRequest : IRequest<NodesInfoRequestParameters> 
 	{
-	}
-	
+	 } 
 	///<summary>Request parameters for NodesInfoForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-info.html</pre></summary>
 	public partial class NodesInfoRequest  : RequestBase<NodesInfoRequestParameters>, INodesInfoRequest
 	{
-		///<summary>Return settings in flat format (default: false)</summary>
+			///<summary>Return settings in flat format (default: false)</summary>
 		public bool FlatSettings { get { return Q<bool>("flat_settings"); } set { Q("flat_settings", value); } }
 		
 		///<summary>Whether to return time and byte values in human-readable format.</summary>
@@ -2237,14 +2256,13 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface INodesStatsRequest : IRequest<NodesStatsRequestParameters>
+	public partial interface INodesStatsRequest : IRequest<NodesStatsRequestParameters> 
 	{
-	}
-	
+	 } 
 	///<summary>Request parameters for NodesStatsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-stats.html</pre></summary>
 	public partial class NodesStatsRequest  : RequestBase<NodesStatsRequestParameters>, INodesStatsRequest
 	{
-		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
+			///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
 		public IList<FieldName> CompletionFields { get { return Q<IList<FieldName>>("completion_fields"); } set { Q("completion_fields", value); } }
 		
 		///<summary>A comma-separated list of fields for `fielddata` index metric (supports wildcards)</summary>
@@ -2274,14 +2292,15 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IOpenIndexRequest : IRequest<OpenIndexRequestParameters>
+	public partial interface IOpenIndexRequest : IRequest<OpenIndexRequestParameters> 
 	{
-	}
-	
+		IndexName Index { get; }
+	 } 
 	///<summary>Request parameters for IndicesOpen <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</pre></summary>
 	public partial class OpenIndexRequest  : RequestBase<OpenIndexRequestParameters>, IOpenIndexRequest
 	{
-		///<summary>Explicit operation timeout</summary>
+		IndexName IOpenIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
+			///<summary>Explicit operation timeout</summary>
 		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
 		
 		///<summary>Specify timeout for connection to master</summary>
@@ -2305,14 +2324,13 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IOptimizeRequest : IRequest<OptimizeRequestParameters>
+	public partial interface IOptimizeRequest : IRequest<OptimizeRequestParameters> 
 	{
-	}
-	
+	 } 
 	///<summary>Request parameters for IndicesOptimizeForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-optimize.html</pre></summary>
 	public partial class OptimizeRequest  : RequestBase<OptimizeRequestParameters>, IOptimizeRequest
 	{
-		///<summary>Specify whether the index should be flushed after performing the operation (default: true)</summary>
+			///<summary>Specify whether the index should be flushed after performing the operation (default: true)</summary>
 		public bool Flush { get { return Q<bool>("flush"); } set { Q("flush", value); } }
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -2345,14 +2363,17 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IPercolateCountRequest : IRequest<PercolateCountRequestParameters>
+	public partial interface IPercolateCountRequest : IRequest<PercolateCountRequestParameters> 
 	{
-	}
-	
+		IndexName Index { get; }
+		TypeName Type { get; }
+	 } 
 	///<summary>Request parameters for CountPercolate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-percolate.html</pre></summary>
 	public partial class PercolateCountRequest<TDocument>  : RequestBase<PercolateCountRequestParameters>, IPercolateCountRequest
 	{
-		///<summary>A comma-separated list of specific routing values</summary>
+		IndexName IPercolateCountRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		TypeName IPercolateCountRequest.Type => Self.RouteValues.Get<TypeName>("type");
+			///<summary>A comma-separated list of specific routing values</summary>
 		public  string[] Routing { get { return Q< string[]>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
@@ -2388,14 +2409,17 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IPercolateRequest : IRequest<PercolateRequestParameters>
+	public partial interface IPercolateRequest : IRequest<PercolateRequestParameters> 
 	{
-	}
-	
+		IndexName Index { get; }
+		TypeName Type { get; }
+	 } 
 	///<summary>Request parameters for Percolate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-percolate.html</pre></summary>
 	public partial class PercolateRequest<TDocument>  : RequestBase<PercolateRequestParameters>, IPercolateRequest
 	{
-		///<summary>A comma-separated list of specific routing values</summary>
+		IndexName IPercolateRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		TypeName IPercolateRequest.Type => Self.RouteValues.Get<TypeName>("type");
+			///<summary>A comma-separated list of specific routing values</summary>
 		public  string[] Routing { get { return Q< string[]>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
@@ -2440,14 +2464,13 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IPingRequest : IRequest<PingRequestParameters>
+	public partial interface IPingRequest : IRequest<PingRequestParameters> 
 	{
-	}
-	
+	 } 
 	///<summary>Request parameters for Ping <pre>http://www.elastic.co/guide/</pre></summary>
 	public partial class PingRequest  : RequestBase<PingRequestParameters>, IPingRequest
 	{
-		///<summary>The URL-encoded request definition</summary>
+			///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
@@ -2456,14 +2479,17 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IPutAliasRequest : IRequest<PutAliasRequestParameters>
+	public partial interface IPutAliasRequest : IRequest<PutAliasRequestParameters> 
 	{
-	}
-	
+		Indices Index { get; }
+		Name Name { get; }
+	 } 
 	///<summary>Request parameters for IndicesPutAlias <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
 	public partial class PutAliasRequest  : RequestBase<PutAliasRequestParameters>, IPutAliasRequest
 	{
-		///<summary>Explicit timestamp for the document</summary>
+		Indices IPutAliasRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Name IPutAliasRequest.Name => Self.RouteValues.Get<Name>("name");
+			///<summary>Explicit timestamp for the document</summary>
 		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
 		
 		///<summary>Specify timeout for connection to master</summary>
@@ -2478,14 +2504,17 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IPutMappingRequest : IRequest<PutMappingRequestParameters>
+	public partial interface IPutMappingRequest : IRequest<PutMappingRequestParameters> 
 	{
-	}
-	
+		Indices Index { get; }
+		TypeName Type { get; }
+	 } 
 	///<summary>Request parameters for IndicesPutMapping <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html</pre></summary>
 	public partial class PutMappingRequest<T>  : RequestBase<PutMappingRequestParameters>, IPutMappingRequest
 	{
-		///<summary>Explicit operation timeout</summary>
+		Indices IPutMappingRequest.Index => Self.RouteValues.Get<Indices>("index");
+		TypeName IPutMappingRequest.Type => Self.RouteValues.Get<TypeName>("type");
+			///<summary>Explicit operation timeout</summary>
 		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
 		
 		///<summary>Specify timeout for connection to master</summary>
@@ -2513,7 +2542,9 @@ namespace Nest
 	///<summary>Request parameters for IndicesPutMapping <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-put-mapping.html</pre></summary>
 	public partial class PutMappingRequest  : RequestBase<PutMappingRequestParameters>, IPutMappingRequest
 	{
-		///<summary>Explicit operation timeout</summary>
+		Indices IPutMappingRequest.Index => Self.RouteValues.Get<Indices>("index");
+		TypeName IPutMappingRequest.Type => Self.RouteValues.Get<TypeName>("type");
+			///<summary>Explicit operation timeout</summary>
 		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
 		
 		///<summary>Specify timeout for connection to master</summary>
@@ -2540,14 +2571,17 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IPutScriptRequest : IRequest<PutScriptRequestParameters>
+	public partial interface IPutScriptRequest : IRequest<PutScriptRequestParameters> 
 	{
-	}
-	
+		Name Lang { get; }
+		Id Id { get; }
+	 } 
 	///<summary>Request parameters for PutScript <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting.html</pre></summary>
 	public partial class PutScriptRequest  : RequestBase<PutScriptRequestParameters>, IPutScriptRequest
 	{
-		///<summary>Explicit operation type</summary>
+		Name IPutScriptRequest.Lang => Self.RouteValues.Get<Name>("lang");
+		Id IPutScriptRequest.Id => Self.RouteValues.Get<Id>("id");
+			///<summary>Explicit operation type</summary>
 		public OpType OpType { get { return Q<OpType>("op_type"); } set { Q("op_type", value); } }
 		
 		///<summary>Explicit version number for concurrency control</summary>
@@ -2565,14 +2599,15 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IPutTemplateRequest : IRequest<PutTemplateRequestParameters>
+	public partial interface IPutTemplateRequest : IRequest<PutTemplateRequestParameters> 
 	{
-	}
-	
+		Name Name { get; }
+	 } 
 	///<summary>Request parameters for IndicesPutTemplateForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
 	public partial class PutTemplateRequest  : RequestBase<PutTemplateRequestParameters>, IPutTemplateRequest
 	{
-		///<summary>Whether the index template should only be added if new or can also replace an existing one</summary>
+		Name IPutTemplateRequest.Name => Self.RouteValues.Get<Name>("name");
+			///<summary>Whether the index template should only be added if new or can also replace an existing one</summary>
 		public bool Create { get { return Q<bool>("create"); } set { Q("create", value); } }
 		
 		///<summary>Explicit operation timeout</summary>
@@ -2593,14 +2628,15 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IPutWarmerRequest : IRequest<PutWarmerRequestParameters>
+	public partial interface IPutWarmerRequest : IRequest<PutWarmerRequestParameters> 
 	{
-	}
-	
+		Name Name { get; }
+	 } 
 	///<summary>Request parameters for IndicesPutWarmerForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-warmers.html</pre></summary>
 	public partial class PutWarmerRequest  : RequestBase<PutWarmerRequestParameters>, IPutWarmerRequest
 	{
-		///<summary>Specify timeout for connection to master</summary>
+		Name IPutWarmerRequest.Name => Self.RouteValues.Get<Name>("name");
+			///<summary>Specify timeout for connection to master</summary>
 		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed) in the search request to warm</summary>
@@ -2624,14 +2660,13 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IRecoveryStatusRequest : IRequest<RecoveryStatusRequestParameters>
+	public partial interface IRecoveryStatusRequest : IRequest<RecoveryStatusRequestParameters> 
 	{
-	}
-	
+	 } 
 	///<summary>Request parameters for IndicesRecoveryForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-recovery.html</pre></summary>
 	public partial class RecoveryStatusRequest  : RequestBase<RecoveryStatusRequestParameters>, IRecoveryStatusRequest
 	{
-		///<summary>Whether to display detailed information about shard recovery</summary>
+			///<summary>Whether to display detailed information about shard recovery</summary>
 		public bool Detailed { get { return Q<bool>("detailed"); } set { Q("detailed", value); } }
 		
 		///<summary>Display only those recoveries that are currently on-going</summary>
@@ -2649,14 +2684,13 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IRefreshRequest : IRequest<RefreshRequestParameters>
+	public partial interface IRefreshRequest : IRequest<RefreshRequestParameters> 
 	{
-	}
-	
+	 } 
 	///<summary>Request parameters for IndicesRefreshForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-refresh.html</pre></summary>
 	public partial class RefreshRequest  : RequestBase<RefreshRequestParameters>, IRefreshRequest
 	{
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
@@ -2680,14 +2714,13 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IRenderSearchTemplateRequest : IRequest<RenderSearchTemplateRequestParameters>
+	public partial interface IRenderSearchTemplateRequest : IRequest<RenderSearchTemplateRequestParameters> 
 	{
-	}
-	
+	 } 
 	///<summary>Request parameters for RenderSearchTemplate <pre>http://www.elasticsearch.org/guide/en/elasticsearch/reference/master/search-template.html</pre></summary>
 	public partial class RenderSearchTemplateRequest  : RequestBase<RenderSearchTemplateRequestParameters>, IRenderSearchTemplateRequest
 	{
-		///<summary>The URL-encoded request definition</summary>
+			///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
@@ -2698,14 +2731,17 @@ namespace Nest
 	}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IRestoreRequest : IRequest<RestoreRequestParameters>
+	public partial interface IRestoreRequest : IRequest<RestoreRequestParameters> 
 	{
-	}
-	
+		Name RepositoryName { get; }
+		Name Snapshot { get; }
+	 } 
 	///<summary>Request parameters for SnapshotRestore <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class RestoreRequest  : RequestBase<RestoreRequestParameters>, IRestoreRequest
 	{
-		///<summary>Explicit operation timeout for connection to master node</summary>
+		Name IRestoreRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
+		Name IRestoreRequest.Snapshot => Self.RouteValues.Get<Name>("snapshot");
+			///<summary>Explicit operation timeout for connection to master node</summary>
 		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Should this request wait until the operation has completed before returning</summary>
@@ -2720,14 +2756,13 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IScrollRequest : IRequest<ScrollRequestParameters>
+	public partial interface IScrollRequest : IRequest<ScrollRequestParameters> 
 	{
-	}
-	
+	 } 
 	///<summary>Request parameters for Scroll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-request-scroll.html</pre></summary>
 	public partial class ScrollRequest  : RequestBase<ScrollRequestParameters>, IScrollRequest
 	{
-		///<summary>The URL-encoded request definition</summary>
+			///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
@@ -2736,14 +2771,13 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ISearchExistsRequest : IRequest<SearchExistsRequestParameters>
+	public partial interface ISearchExistsRequest : IRequest<SearchExistsRequestParameters> 
 	{
-	}
-	
+	 } 
 	///<summary>Request parameters for SearchExists <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-exists.html</pre></summary>
 	public partial class SearchExistsRequest  : RequestBase<SearchExistsRequestParameters>, ISearchExistsRequest
 	{
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
@@ -2791,14 +2825,13 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ISearchRequest : IRequest<SearchRequestParameters>
+	public partial interface ISearchRequest : IRequest<SearchRequestParameters> 
 	{
-	}
-	
+	 } 
 	///<summary>Request parameters for Search <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-search.html</pre></summary>
 	public partial class SearchRequest  : RequestBase<SearchRequestParameters>, ISearchRequest
 	{
-		///<summary>The analyzer to use for the query string</summary>
+			///<summary>The analyzer to use for the query string</summary>
 		public string Analyzer { get { return Q<string>("analyzer"); } set { Q("analyzer", value); } }
 		
 		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
@@ -2861,14 +2894,13 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ISearchShardsRequest : IRequest<SearchShardsRequestParameters>
+	public partial interface ISearchShardsRequest : IRequest<SearchShardsRequestParameters> 
 	{
-	}
-	
+	 } 
 	///<summary>Request parameters for SearchShards <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html</pre></summary>
 	public partial class SearchShardsRequest  : RequestBase<SearchShardsRequestParameters>, ISearchShardsRequest
 	{
-		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
+			///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
 		
 		///<summary>Specific routing value</summary>
@@ -2895,14 +2927,13 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ISearchTemplateRequest : IRequest<SearchTemplateRequestParameters>
+	public partial interface ISearchTemplateRequest : IRequest<SearchTemplateRequestParameters> 
 	{
-	}
-	
+	 } 
 	///<summary>Request parameters for SearchTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html</pre></summary>
 	public partial class SearchTemplateRequest  : RequestBase<SearchTemplateRequestParameters>, ISearchTemplateRequest
 	{
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
@@ -2932,14 +2963,13 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ISegmentsRequest : IRequest<SegmentsRequestParameters>
+	public partial interface ISegmentsRequest : IRequest<SegmentsRequestParameters> 
 	{
-	}
-	
+	 } 
 	///<summary>Request parameters for IndicesSegmentsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-segments.html</pre></summary>
 	public partial class SegmentsRequest  : RequestBase<SegmentsRequestParameters>, ISegmentsRequest
 	{
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
@@ -2963,14 +2993,17 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ISnapshotRequest : IRequest<SnapshotRequestParameters>
+	public partial interface ISnapshotRequest : IRequest<SnapshotRequestParameters> 
 	{
-	}
-	
+		Name RepositoryName { get; }
+		Name Snapshot { get; }
+	 } 
 	///<summary>Request parameters for SnapshotCreate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class SnapshotRequest  : RequestBase<SnapshotRequestParameters>, ISnapshotRequest
 	{
-		///<summary>Explicit operation timeout for connection to master node</summary>
+		Name ISnapshotRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
+		Name ISnapshotRequest.Snapshot => Self.RouteValues.Get<Name>("snapshot");
+			///<summary>Explicit operation timeout for connection to master node</summary>
 		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Should this request wait until the operation has completed before returning</summary>
@@ -2985,14 +3018,13 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ISnapshotStatusRequest : IRequest<SnapshotStatusRequestParameters>
+	public partial interface ISnapshotStatusRequest : IRequest<SnapshotStatusRequestParameters> 
 	{
-	}
-	
+	 } 
 	///<summary>Request parameters for SnapshotStatus <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class SnapshotStatusRequest  : RequestBase<SnapshotStatusRequestParameters>, ISnapshotStatusRequest
 	{
-		///<summary>Explicit operation timeout for connection to master node</summary>
+			///<summary>Explicit operation timeout for connection to master node</summary>
 		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
@@ -3004,14 +3036,19 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ISourceRequest : IRequest<SourceRequestParameters>
+	public partial interface ISourceRequest : IRequest<SourceRequestParameters> 
 	{
-	}
-	
+		IndexName Index { get; }
+		TypeName Type { get; }
+		Id Id { get; }
+	 } 
 	///<summary>Request parameters for GetSource <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
 	public partial class SourceRequest<T>  : RequestBase<SourceRequestParameters>, ISourceRequest
 	{
-		///<summary>The ID of the parent document</summary>
+		IndexName ISourceRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		TypeName ISourceRequest.Type => Self.RouteValues.Get<TypeName>("type");
+		Id ISourceRequest.Id => Self.RouteValues.Get<Id>("id");
+			///<summary>The ID of the parent document</summary>
 		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
@@ -3051,7 +3088,10 @@ namespace Nest
 	///<summary>Request parameters for GetSource <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
 	public partial class SourceRequest  : RequestBase<SourceRequestParameters>, ISourceRequest
 	{
-		///<summary>The ID of the parent document</summary>
+		IndexName ISourceRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		TypeName ISourceRequest.Type => Self.RouteValues.Get<TypeName>("type");
+		Id ISourceRequest.Id => Self.RouteValues.Get<Id>("id");
+			///<summary>The ID of the parent document</summary>
 		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
@@ -3090,14 +3130,13 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ISuggestRequest : IRequest<SuggestRequestParameters>
+	public partial interface ISuggestRequest : IRequest<SuggestRequestParameters> 
 	{
-	}
-	
+	 } 
 	///<summary>Request parameters for Suggest <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-suggesters.html</pre></summary>
 	public partial class SuggestRequest  : RequestBase<SuggestRequestParameters>, ISuggestRequest
 	{
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
@@ -3121,14 +3160,13 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ISyncedFlushRequest : IRequest<SyncedFlushRequestParameters>
+	public partial interface ISyncedFlushRequest : IRequest<SyncedFlushRequestParameters> 
 	{
-	}
-	
+	 } 
 	///<summary>Request parameters for IndicesFlushSyncedForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-synced-flush.html</pre></summary>
 	public partial class SyncedFlushRequest  : RequestBase<SyncedFlushRequestParameters>, ISyncedFlushRequest
 	{
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
@@ -3146,14 +3184,15 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ITemplateExistsRequest : IRequest<TemplateExistsRequestParameters>
+	public partial interface ITemplateExistsRequest : IRequest<TemplateExistsRequestParameters> 
 	{
-	}
-	
+		Name Name { get; }
+	 } 
 	///<summary>Request parameters for IndicesExistsTemplateForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
 	public partial class TemplateExistsRequest  : RequestBase<TemplateExistsRequestParameters>, ITemplateExistsRequest
 	{
-		///<summary>Explicit operation timeout for connection to master node</summary>
+		Name ITemplateExistsRequest.Name => Self.RouteValues.Get<Name>("name");
+			///<summary>Explicit operation timeout for connection to master node</summary>
 		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
@@ -3168,14 +3207,17 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ITermVectorsRequest : IRequest<TermVectorsRequestParameters>
+	public partial interface ITermVectorsRequest : IRequest<TermVectorsRequestParameters> 
 	{
-	}
-	
+		IndexName Index { get; }
+		TypeName Type { get; }
+	 } 
 	///<summary>Request parameters for Termvectors <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html</pre></summary>
 	public partial class TermVectorsRequest  : RequestBase<TermVectorsRequestParameters>, ITermVectorsRequest
 	{
-		///<summary>Specifies if total term frequency and document frequency should be returned.</summary>
+		IndexName ITermVectorsRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		TypeName ITermVectorsRequest.Type => Self.RouteValues.Get<TypeName>("type");
+			///<summary>Specifies if total term frequency and document frequency should be returned.</summary>
 		public bool TermStatistics { get { return Q<bool>("term_statistics"); } set { Q("term_statistics", value); } }
 		
 		///<summary>Specifies if document count, sum of document frequencies and sum of total term frequencies should be returned.</summary>
@@ -3223,14 +3265,17 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ITypeExistsRequest : IRequest<TypeExistsRequestParameters>
+	public partial interface ITypeExistsRequest : IRequest<TypeExistsRequestParameters> 
 	{
-	}
-	
+		Indices Index { get; }
+		Types Type { get; }
+	 } 
 	///<summary>Request parameters for IndicesExistsType <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-types-exists.html</pre></summary>
 	public partial class TypeExistsRequest  : RequestBase<TypeExistsRequestParameters>, ITypeExistsRequest
 	{
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		Indices ITypeExistsRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Types ITypeExistsRequest.Type => Self.RouteValues.Get<Types>("type");
+			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
@@ -3251,14 +3296,19 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IUpdateRequest : IRequest<UpdateRequestParameters>
+	public partial interface IUpdateRequest : IRequest<UpdateRequestParameters> 
 	{
-	}
-	
+		IndexName Index { get; }
+		TypeName Type { get; }
+		Id Id { get; }
+	 } 
 	///<summary>Request parameters for Update <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update.html</pre></summary>
 	public partial class UpdateRequest  : RequestBase<UpdateRequestParameters>, IUpdateRequest
 	{
-		///<summary>Explicit write consistency setting for the operation</summary>
+		IndexName IUpdateRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		TypeName IUpdateRequest.Type => Self.RouteValues.Get<TypeName>("type");
+		Id IUpdateRequest.Id => Self.RouteValues.Get<Id>("id");
+			///<summary>Explicit write consistency setting for the operation</summary>
 		public Consistency Consistency { get { return Q<Consistency>("consistency"); } set { Q("consistency", value); } }
 		
 		///<summary>The script language (default: groovy)</summary>
@@ -3309,14 +3359,13 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IUpdateSettingsRequest : IRequest<UpdateSettingsRequestParameters>
+	public partial interface IUpdateSettingsRequest : IRequest<UpdateSettingsRequestParameters> 
 	{
-	}
-	
+	 } 
 	///<summary>Request parameters for IndicesPutSettingsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-update-settings.html</pre></summary>
 	public partial class UpdateSettingsRequest  : RequestBase<UpdateSettingsRequestParameters>, IUpdateSettingsRequest
 	{
-		///<summary>Specify timeout for connection to master</summary>
+			///<summary>Specify timeout for connection to master</summary>
 		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -3340,14 +3389,13 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IUpgradeRequest : IRequest<UpgradeRequestParameters>
+	public partial interface IUpgradeRequest : IRequest<UpgradeRequestParameters> 
 	{
-	}
-	
+	 } 
 	///<summary>Request parameters for IndicesUpgradeForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</pre></summary>
 	public partial class UpgradeRequest  : RequestBase<UpgradeRequestParameters>, IUpgradeRequest
 	{
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+			///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
@@ -3371,14 +3419,13 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IUpgradeStatusRequest : IRequest<UpgradeStatusRequestParameters>
+	public partial interface IUpgradeStatusRequest : IRequest<UpgradeStatusRequestParameters> 
 	{
-	}
-	
+	 } 
 	///<summary>Request parameters for IndicesGetUpgradeForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-upgrade.html</pre></summary>
 	public partial class UpgradeStatusRequest  : RequestBase<UpgradeStatusRequestParameters>, IUpgradeStatusRequest
 	{
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
@@ -3399,14 +3446,13 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IValidateQueryRequest : IRequest<ValidateQueryRequestParameters>
+	public partial interface IValidateQueryRequest : IRequest<ValidateQueryRequestParameters> 
 	{
-	}
-	
+	 } 
 	///<summary>Request parameters for IndicesValidateQueryForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html</pre></summary>
 	public partial class ValidateQueryRequest<T>  : RequestBase<ValidateQueryRequestParameters>, IValidateQueryRequest
 	{
-		///<summary>Return detailed information about the error</summary>
+			///<summary>Return detailed information about the error</summary>
 		public bool Explain { get { return Q<bool>("explain"); } set { Q("explain", value); } }
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -3455,7 +3501,7 @@ namespace Nest
 	///<summary>Request parameters for IndicesValidateQueryForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-validate.html</pre></summary>
 	public partial class ValidateQueryRequest  : RequestBase<ValidateQueryRequestParameters>, IValidateQueryRequest
 	{
-		///<summary>Return detailed information about the error</summary>
+			///<summary>Return detailed information about the error</summary>
 		public bool Explain { get { return Q<bool>("explain"); } set { Q("explain", value); } }
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
@@ -3503,14 +3549,15 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IVerifyRepositoryRequest : IRequest<VerifyRepositoryRequestParameters>
+	public partial interface IVerifyRepositoryRequest : IRequest<VerifyRepositoryRequestParameters> 
 	{
-	}
-	
+		Name RepositoryName { get; }
+	 } 
 	///<summary>Request parameters for SnapshotVerifyRepository <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/modules-snapshots.html</pre></summary>
 	public partial class VerifyRepositoryRequest  : RequestBase<VerifyRepositoryRequestParameters>, IVerifyRepositoryRequest
 	{
-		///<summary>Explicit operation timeout for connection to master node</summary>
+		Name IVerifyRepositoryRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
+			///<summary>Explicit operation timeout for connection to master node</summary>
 		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>Explicit operation timeout</summary>

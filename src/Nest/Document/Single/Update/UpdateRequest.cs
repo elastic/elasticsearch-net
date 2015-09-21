@@ -48,6 +48,10 @@ namespace Nest
 		where TDocument : class
 		where TPartialDocument : class
 	{
+		IndexName IUpdateRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		TypeName IUpdateRequest.Type => Self.RouteValues.Get<TypeName>("type");
+		Id IUpdateRequest.Id => Self.RouteValues.Get<Id>("id");
+
 		public string Script { get; set; }
 		public string ScriptId { get; set; }
 		public string ScriptFile { get; set; }
@@ -64,6 +68,10 @@ namespace Nest
 		where TDocument : class
 		where TPartialDocument : class
 	{
+
+		IndexName IUpdateRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		TypeName IUpdateRequest.Type => Self.RouteValues.Get<TypeName>("type");
+		Id IUpdateRequest.Id => Self.RouteValues.Get<Id>("id");
 
 		private IUpdateRequest<TDocument, TPartialDocument> Self => this;
 

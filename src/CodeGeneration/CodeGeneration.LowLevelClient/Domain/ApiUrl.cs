@@ -25,5 +25,6 @@ namespace CodeGeneration.LowLevelClient.Domain
 
 		public IDictionary<string, ApiUrlPart> Parts { get; set; }
 		public IDictionary<string, ApiQueryParameters> Params { get; set; }
+
 	}
 }
