@@ -17,16 +17,6 @@ namespace Nest
 
 	}
 
-	internal static class PercolatePathInfo
-	{
-		public static void Update<T>(RouteValues pathInfo, IPercolateRequest<T> request)
-			where T : class
-		{
-			pathInfo.Id = request.Id;
-			pathInfo.HttpMethod = HttpMethod.POST;
-		}
-	}
-
 	public partial class PercolateRequest<TDocument> : RequestBase<PercolateRequestParameters>, IPercolateRequest<TDocument>
 		where TDocument : class
 	{
@@ -50,21 +40,14 @@ namespace Nest
 		public PercolateRequest(string id) { this.Id = id; }
 
 		public PercolateRequest(long id) { this.Id = id.ToString(CultureInfo.InvariantCulture); }
-		
-		IRequestParameters IPercolateOperation.GetRequestParameters()
-		{
-			return this.Self.RequestParameters;
-		}
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
-		{
-			PercolatePathInfo.Update(pathInfo, this);
-		}
 
+		IRequestParameters IPercolateOperation.GetRequestParameters() => this.Self.RequestParameters;
 	}
 	public partial class PercolateDescriptor<T> : RequestDescriptorBase<PercolateDescriptor<T>, PercolateRequestParameters>, IPercolateRequest<T>
 		where T : class
 	{
 		private IPercolateRequest<T> Self => this;
+		IRequestParameters IPercolateOperation.GetRequestParameters() => this.Self.RequestParameters;
 
 		IHighlightRequest IPercolateOperation.Highlight { get; set; }
 		QueryContainer IPercolateOperation.Query { get; set; }
@@ -75,15 +58,10 @@ namespace Nest
 		bool? IPercolateOperation.TrackScores { get; set; }
 		
 		T IPercolateRequest<T>.Document { get; set; }
-
-
 		IDictionary<FieldName, ISort> IPercolateOperation.Sort { get; set; }
 		IDictionary<string, IAggregationContainer> IPercolateOperation.Aggregations { get; set; }
-		
-		IRequestParameters IPercolateOperation.GetRequestParameters()
-		{
-			return this.Self.RequestParameters;
-		}
+
+
 		/// <summary>
 		/// The object to perculate
 		/// </summary>
@@ -319,12 +297,6 @@ namespace Nest
 			QueryDescriptor.ThrowIfNull("filter");
 			Self.Filter = QueryDescriptor;
 			return this;
-		}
-
-
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
-		{
-			PercolatePathInfo.Update(pathInfo, this);
 		}
 	}
 }

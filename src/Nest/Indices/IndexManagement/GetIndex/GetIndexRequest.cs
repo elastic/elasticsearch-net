@@ -17,30 +17,32 @@ namespace Nest
 		GetIndexFeature Features { get; set; }
 	}
 
-	internal static class GetIndexPathInfo
-	{
-		public static void Update(RouteValues pathInfo, IGetIndexRequest request)
-		{
-			if (pathInfo.Index == null)
-				throw new DslException("Can not call GetIndex without specifying one or more indices or explicitly calling .AllIndices()");
+	//TODO This used to have a fairly complex way to build up the features route params
 
-			pathInfo.HttpMethod = HttpMethod.GET;
-			if (request.Features == default(GetIndexFeature) || request.Features == GetIndexFeature.All)
-				return;
+	//internal static class GetIndexPathInfo
+	//{
+	//	public static void Update(RouteValues pathInfo, IGetIndexRequest request)
+	//	{
+	//		if (pathInfo.Index == null)
+	//			throw new DslException("Can not call GetIndex without specifying one or more indices or explicitly calling .AllIndices()");
 
-			var features = new List<string>();
-			if ((request.Features & GetIndexFeature.Settings) == GetIndexFeature.Settings)
-				features.Add("_settings");
-			if ((request.Features & GetIndexFeature.Mappings) == GetIndexFeature.Mappings)
-				features.Add("_mappings");
-			if ((request.Features & GetIndexFeature.Warmers) == GetIndexFeature.Warmers)
-				features.Add("_warmers");
-			if ((request.Features & GetIndexFeature.Aliases) == GetIndexFeature.Aliases)
-				features.Add("_aliases");
+	//		pathInfo.HttpMethod = HttpMethod.GET;
+	//		if (request.Features == default(GetIndexFeature) || request.Features == GetIndexFeature.All)
+	//			return;
 
-			pathInfo.Feature = string.Join(",", features);
-		}
-	}
+	//		var features = new List<string>();
+	//		if ((request.Features & GetIndexFeature.Settings) == GetIndexFeature.Settings)
+	//			features.Add("_settings");
+	//		if ((request.Features & GetIndexFeature.Mappings) == GetIndexFeature.Mappings)
+	//			features.Add("_mappings");
+	//		if ((request.Features & GetIndexFeature.Warmers) == GetIndexFeature.Warmers)
+	//			features.Add("_warmers");
+	//		if ((request.Features & GetIndexFeature.Aliases) == GetIndexFeature.Aliases)
+	//			features.Add("_aliases");
+
+	//		pathInfo.Feature = string.Join(",", features);
+	//	}
+	//}
 
 	public partial class GetIndexRequest : RequestBase<GetIndexRequestParameters>, IGetIndexRequest
 	{
@@ -48,11 +50,6 @@ namespace Nest
 		/// Be selective which features to return, i.e GetIndexFeature.Mappings | GetIndexFeature.Settings
 		/// </summary>
 		public GetIndexFeature Features { get; set; }
-
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
-		{
-			GetIndexPathInfo.Update(pathInfo, this);
-		}
 	}
 
 	[DescriptorFor("IndicesGet")]
@@ -69,11 +66,6 @@ namespace Nest
 		{
 			Self.Features = features;
 			return this;
-		}
-
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
-		{
-			GetIndexPathInfo.Update(pathInfo, this);
 		}
 	}
 }

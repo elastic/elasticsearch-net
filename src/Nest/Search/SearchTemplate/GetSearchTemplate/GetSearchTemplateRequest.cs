@@ -13,29 +13,12 @@ namespace Nest
 		//TODO NAME
 	}
 
-	internal static class GetSearchTemplatePathInfo
-	{
-		public static void Update(RouteValues pathInfo, IGetSearchTemplateRequest request)
-		{
-			//TODO NAME pathInfo.Id = request.;
-			pathInfo.HttpMethod = HttpMethod.GET;
-		}
-	}
-
 	public partial class GetSearchTemplateRequest : RequestBase<GetTemplateRequestParameters>, IGetSearchTemplateRequest
 	{
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
-		{
-			GetSearchTemplatePathInfo.Update(pathInfo, this);
-		}
 	}
 
 
 	public partial class GetSearchTemplateDescriptor : RequestDescriptorBase<GetSearchTemplateDescriptor, GetTemplateRequestParameters>, IGetSearchTemplateRequest
 	{
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
-		{
-			GetSearchTemplatePathInfo.Update(pathInfo, this);
-		}
 	}
 }

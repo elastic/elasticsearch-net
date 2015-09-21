@@ -22,11 +22,13 @@ namespace Nest
         public BulkRequest() { }
 
         public BulkRequest(Indices indices)
-            : base(p => p.Required(indices))
+            : base(p => p.Optional(indices))
         { }
 
+		//TODO discuss with @gmarz the benefits of allowing null's here and possible side effects if folks
+		//do not expect to be able to pass null
         public BulkRequest(Indices indices, Types types)
-            : base(p => p.Required(indices).Required(types))
+            : base(p => p.Optional(indices).Optional(types))
         { }
 	}
 

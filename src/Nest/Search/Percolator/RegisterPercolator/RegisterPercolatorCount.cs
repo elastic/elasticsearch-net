@@ -15,24 +15,21 @@ namespace Nest
 		QueryContainer Query { get; set; }
 	}
 
-	internal static class RegisterPercolatorPathInfo
-	{
-		public static void Update(RouteValues pathInfo, IRegisterPercolatorRequest request)
-		{
-			pathInfo.Id = pathInfo.Name;
-			pathInfo.Type = ".percolator";
-		}
-	}
+	//TODO  Route parameters are complex need to be ported
+	
+	//internal static class RegisterPercolatorPathInfo
+	//{
+	//	public static void Update(RouteValues pathInfo, IRegisterPercolatorRequest request)
+	//	{
+	//		pathInfo.Id = pathInfo.Name;
+	//		pathInfo.Type = ".percolator";
+	//	}
+	//}
 
 	public class RegisterPercolatorRequest : RequestBase<IndexRequestParameters>, IRegisterPercolatorRequest
 	{
 		public IDictionary<string, object> MetaData { get; set; }
 		public QueryContainer Query { get; set; }
-
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
-		{
-			RegisterPercolatorPathInfo.Update(pathInfo, this);
-		}
 
 		public object GetCustomJson()
 		{
@@ -78,11 +75,6 @@ namespace Nest
 		{
 			return new FluentDictionary<string, object>(Self.MetaData)
 				.Add("query", Self.Query);
-		}
-
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
-		{
-			RegisterPercolatorPathInfo.Update(pathInfo, this);
 		}
 	}
 }

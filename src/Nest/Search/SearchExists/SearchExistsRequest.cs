@@ -18,28 +18,13 @@ namespace Nest
 	}
 	public interface ISearchExistsRequest<T> : ISearchExistsRequest { }
 
-	internal static class SearchExistsPathInfo
-	{
-		public static void Update(RouteValues pathInfo, ISearchExistsRequest request)
-		{
-			if (request.RequestParameters.ContainsKey("source") || request.RequestParameters.ContainsKey("q"))
-				pathInfo.HttpMethod = HttpMethod.GET;
-			else
-				pathInfo.HttpMethod = request.Query != null ? HttpMethod.POST : HttpMethod.GET;
-		}
-	}
-	
+	//TODO if querystring has source || q || this.Query == null do a GET otherwise POST
+
 	public partial class SearchExistsRequest : RequestBase<SearchExistsRequestParameters>, ISearchExistsRequest
 	{
 		public IQueryContainer Query { get; set; }
 
 		public string QueryString { get; set; }
-
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
-		{
-			SearchExistsPathInfo.Update(pathInfo, this);
-		}
-
 	}
 
 	public partial class SearchExistsRequest<T> : RequestBase<SearchExistsRequestParameters>, ISearchExistsRequest<T>
@@ -49,10 +34,6 @@ namespace Nest
 
 		public string QueryString { get; set; }
 
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
-		{
-			SearchExistsPathInfo.Update(pathInfo, this);
-		}
 	}
 
 	[DescriptorFor("IndicesExists")]
@@ -64,11 +45,6 @@ namespace Nest
 		IQueryContainer ISearchExistsRequest.Query { get; set; }
 
 		string ISearchExistsRequest.QueryString { get; set; }
-
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
-		{
-			SearchExistsPathInfo.Update(pathInfo, this);
-		}
 
 		internal bool _Strict { get; set; }
 		

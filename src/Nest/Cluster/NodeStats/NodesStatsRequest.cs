@@ -13,18 +13,6 @@ namespace Nest
 		IEnumerable<NodesStatsIndexMetric> IndexMetrics { get; set; }
 	}
 
-	internal static class NodesStatsPathInfo
-	{
-		public static void Update(RouteValues pathInfo, INodesStatsRequest request)
-		{
-			pathInfo.HttpMethod = HttpMethod.GET;
-			if (request.Metrics != null)
-				pathInfo.Metric = request.Metrics.Cast<Enum>().GetStringValue();
-			if (request.IndexMetrics != null)
-				pathInfo.IndexMetric = request.IndexMetrics.Cast<Enum>().GetStringValue();
-		}
-	}
-	
 	public partial class NodesStatsRequest : RequestBase<NodesStatsRequestParameters>, INodesStatsRequest
 	{
 		public IEnumerable<NodesStatsMetric> Metrics { get; set; }
@@ -35,12 +23,6 @@ namespace Nest
         public NodesStatsRequest(string nodeId)
             : base(p => p.RequiredNodeId(nodeId))
         { }
-
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues path)
-		{
-			NodesStatsPathInfo.Update(path, this);
-		}
-
 	}
 	[DescriptorFor("NodesStats")]
 	public partial class NodesStatsDescriptor : RequestDescriptorBase<NodesStatsDescriptor, NodesStatsRequestParameters>, INodesStatsRequest
@@ -66,11 +48,5 @@ namespace Nest
 			Self.IndexMetrics = metrics;
 			return this;
 		}
-
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues path)
-		{
-			NodesStatsPathInfo.Update(path, this);
-		}
-
 	}
 }

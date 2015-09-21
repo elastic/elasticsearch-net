@@ -16,16 +16,6 @@ namespace Nest
 		TDocument Document { get; set; }
 	}
 
-	internal static class PercolateCountPathInfo
-	{
-		public static void Update<T>(RouteValues pathInfo, IPercolateCountRequest<T> request)
-			where T : class
-		{
-			pathInfo.Id = request.Id;
-			pathInfo.HttpMethod = HttpMethod.POST;
-		}
-	}
-	
 	public partial class PercolateCountRequest<TDocument> : RequestBase<PercolateCountRequestParameters>, IPercolateCountRequest<TDocument>
 		where TDocument : class
 	{
@@ -44,12 +34,6 @@ namespace Nest
 		{
 			return this.Self.RequestParameters;
 		}
-
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
-		{
-			PercolateCountPathInfo.Update(pathInfo, this);
-		}
-
 	}
 	
 	[DescriptorFor("CountPercolate")]
@@ -57,7 +41,6 @@ namespace Nest
 		, IPercolateCountRequest<T>
 		where T : class
 	{
-
 		private IPercolateCountRequest<T> Self => this;
 
 		IHighlightRequest IPercolateOperation.Highlight { get; set; }
@@ -69,8 +52,8 @@ namespace Nest
 		bool? IPercolateOperation.TrackScores { get; set; }
 		
 		T IPercolateCountRequest<T>.Document { get; set; }
-
-
+		
+		//TODO these dictionaries seem badly typed
 		IDictionary<FieldName, ISort> IPercolateOperation.Sort { get; set; }
 		IDictionary<string, IAggregationContainer> IPercolateOperation.Aggregations { get; set; }
 		
@@ -296,11 +279,6 @@ namespace Nest
 			QueryDescriptor.ThrowIfNull("filter");
 			Self.Filter = QueryDescriptor;
 			return this;
-		}
-		
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
-		{
-			PercolateCountPathInfo.Update(pathInfo, this);
 		}
 	}
 }

@@ -97,40 +97,8 @@ namespace Nest
 
 	public interface ISearchRequest<T> : ISearchRequest {} 
 
-	internal static class SearchPathInfo
-	{
-		/// <summary>
-		/// Based on the type information present in this descriptor create method that takes
-		/// the returned _source and hit and returns the ClrType it should deserialize too.
-		/// This is so that Documents[A] can contain actual instances of subclasses B, C as well.
-		/// If you specify types using .Types(typeof(B), typeof(C)) then NEST can automagically
-		/// create a TypeSelector based on the hits _type property.
-		/// </summary>
-		public static void CloseOverAutomagicCovariantResultSelector(ElasticInferrer infer, ISearchRequest self)
-		{
-            // TODO: Fix this
-			//if (infer == null || self == null) return;
-			//var returnType = self.ClrType;
+	//TODO Force get if source is specified on query string
 
-			//if (returnType == null) return;
-
-			//var types = (self.Types ?? Enumerable.Empty<TypeName>()).Where(t => t.Type != null).ToList();
-			//if (self.TypeSelector != null || !types.HasAny(t => t.Type != returnType))
-			//	return;
-			
-			//var typeDictionary = types.ToDictionary(infer.TypeName, t => t.Type);
-			//self.TypeSelector = (o, h) =>
-			//{
-			//	Type t;
-			//	return !typeDictionary.TryGetValue(h.Type, out t) ? returnType : t;
-			//};
-		}
-		public static void Update(IConnectionSettingsValues settings, RouteValues pathInfo, ISearchRequest request)
-		{
-			pathInfo.HttpMethod = request.RequestParameters.ContainsKey("source") ? HttpMethod.GET : HttpMethod.POST;
-		}
-	}
-	
 	public partial class SearchRequest : RequestBase<SearchRequestParameters>, ISearchRequest
 	{
 		private Type _clrType { get; set; }
@@ -171,10 +139,6 @@ namespace Nest
 		public Func<dynamic, Hit<dynamic>, Type> TypeSelector { get; set; }
 
 		public SearchRequestParameters QueryString { get; set; }
-
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo) =>
-			SearchPathInfo.Update(settings, pathInfo, this);
-
 	}
 
 	public partial class SearchRequest<T> : RequestBase<SearchRequestParameters>, ISearchRequest
@@ -183,9 +147,6 @@ namespace Nest
 		public SearchRequest() {}
 
 		private ISearchRequest Self => this;
-
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo) =>
-			SearchPathInfo.Update(settings,pathInfo, this);
 
 		public Type ClrType => typeof(T);
 		public string Timeout { get; set; }
@@ -831,9 +792,6 @@ namespace Nest
 
 		public SearchDescriptor<T> ConcreteTypeSelector(Func<dynamic, Hit<dynamic>, Type> typeSelector) =>
 			_assign(a => a.TypeSelector = typeSelector);
-
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo) =>
-			SearchPathInfo.Update(settings,pathInfo, this);
 
 	}
 }

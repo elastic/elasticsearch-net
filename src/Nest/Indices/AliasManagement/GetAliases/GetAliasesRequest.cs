@@ -13,43 +13,19 @@ namespace Nest
 		string Alias { get; set; }
 	}
 
-	internal static class GetAliasesPathInfo
-	{
-		public static void Update(RouteValues pathInfo, IGetAliasesRequest request)
-		{
-			pathInfo.HttpMethod = HttpMethod.GET;
-			pathInfo.Name = request.Alias ?? "*";
-		}
-	}
-	
+	//TODO alias is {name} in route parameters
+
 	public partial class GetAliasesRequest : RequestBase<GetAliasesRequestParameters>, IGetAliasesRequest
 	{
-		public string Alias { get; set; }
-		
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
-		{
-			GetAliasesPathInfo.Update(pathInfo, this);
-		}
+		public string Alias { get; set; } = "*";
 	}
 
 	[DescriptorFor("IndicesGetAliases")]
 	public partial class GetAliasesDescriptor 
-		: RequestDescriptorBase<GetAliasesDescriptor, GetAliasesRequestParameters>, IGetAliasesRequest
+		: RequestDescriptorBase<GetAliasesDescriptor, GetAliasesRequestParameters, IGetAliasesRequest>, IGetAliasesRequest
 	{
+		string IGetAliasesRequest.Alias { get; set; } = "*";
 
-		private IGetAliasesRequest Self => this;
-
-		string IGetAliasesRequest.Alias { get; set; }
-
-		public GetAliasesDescriptor Alias(string alias)
-		{
-			Self.Alias = alias;
-			return this;
-		}
-
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
-		{
-			GetAliasesPathInfo.Update(pathInfo, this);
-		}
+		public GetAliasesDescriptor Alias(string alias) => Assign(a => a.Alias = alias.IsNullOrEmpty() ? "*" : alias);
 	}
 }

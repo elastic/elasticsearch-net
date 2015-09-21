@@ -125,6 +125,7 @@ namespace Nest
 			return originalSearchDescriptor.TypeSelector == null ? null : new ConcreteTypeConverter<TResult>(originalSearchDescriptor.TypeSelector);
 		}
 
+		//TODO badly named and in the wrong place, covariant magic shared with _search
 		internal static class SearchTemplateResponseHelper
 		{
 			/// <summary>

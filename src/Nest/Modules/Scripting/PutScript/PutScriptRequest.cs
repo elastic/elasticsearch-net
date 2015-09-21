@@ -20,21 +20,6 @@ namespace Nest
 		public string Lang { get; set; }
 		public string Id { get; set; }
 		public string Script { get; set; }
-
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
-		{
-			PutScriptPathInfo.Update(pathInfo, this);
-		}
-	}
-
-	internal static class PutScriptPathInfo
-	{
-		public static void Update(RouteValues pathInfo, IPutScriptRequest putScriptRequest)
-		{
-			pathInfo.Id = putScriptRequest.Id;
-			pathInfo.Lang = putScriptRequest.Lang;
-			pathInfo.HttpMethod = HttpMethod.POST;
-		}
 	}
 
 	[DescriptorFor("ScriptPut")]
@@ -69,11 +54,6 @@ namespace Nest
 		{
 			this.Self.Script = script;
 			return this;
-		}
-
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
-		{
-			PutScriptPathInfo.Update(pathInfo, this);
 		}
 	}
 }

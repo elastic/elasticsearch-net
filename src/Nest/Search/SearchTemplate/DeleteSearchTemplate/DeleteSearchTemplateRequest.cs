@@ -13,30 +13,13 @@ namespace Nest
 		//TODO NAME/TEMPLATE
 	}
 
-	internal static class DeleteSearchTemplatePathInfo
-	{
-		public static void Update(RouteValues pathInfo, IDeleteSearchTemplateRequest request)
-		{
-			//TODO pathInfo.Id = request.Name;
-			pathInfo.HttpMethod = HttpMethod.DELETE;
-		}
-	}
-	
 	public partial class DeleteSearchTemplateRequest : RequestBase<DeleteTemplateRequestParameters>, IDeleteSearchTemplateRequest
 	{
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
-		{
-			DeleteSearchTemplatePathInfo.Update(pathInfo, this);
-		}
 	}
 
 
 	public partial class DeleteSearchTemplateDescriptor 
 		: RequestDescriptorBase<DeleteSearchTemplateDescriptor, DeleteTemplateRequestParameters>, IDeleteSearchTemplateRequest
 	{
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
-		{
-			DeleteSearchTemplatePathInfo.Update(pathInfo, this);
-		}
 	}
 }

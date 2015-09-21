@@ -12,18 +12,6 @@ namespace Nest
 		string ScrollId { get; set; }
 	}
 
-	internal static class ClearScrollPathInfo
-	{
-		public static void Update(RouteValues pathInfo, IClearScrollRequest request)
-		{
-			if (request.ScrollId.IsNullOrEmpty())
-				throw new DslException("missing ScrollId()");
-
-			pathInfo.ScrollId = request.ScrollId;
-			pathInfo.HttpMethod = HttpMethod.DELETE;
-		}
-	}
-	
 	public partial class ClearScrollRequest : RequestBase<ClearScrollRequestParameters>, IClearScrollRequest
 	{
 		public string ScrollId { get; set; }
@@ -32,13 +20,8 @@ namespace Nest
 		{
 			this.ScrollId = scrollId;
 		}
-
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
-		{
-			ClearScrollPathInfo.Update(pathInfo, this);
-		}
-
 	}
+
 	[DescriptorFor("ClearScroll")]
 	public partial class ClearScrollDescriptor : RequestDescriptorBase<ClearScrollDescriptor, ClearScrollRequestParameters>, IClearScrollRequest
 	{
@@ -53,11 +36,6 @@ namespace Nest
 		{
 			Self.ScrollId = scrollId;
 			return this;
-		}
-
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
-		{
-			ClearScrollPathInfo.Update(pathInfo, this);
 		}
 	}
 }

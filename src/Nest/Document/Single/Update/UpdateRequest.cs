@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	//TODO we used to to a complex infer on Id, if its empty first try on Doc otherwise on Upsert doc, is this still valid?
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IUpdateRequest<TDocument,TPartialDocument> : IRequest<UpdateRequestParameters>
 		where TDocument : class
@@ -38,27 +39,6 @@ namespace Nest
 		TPartialDocument Doc { get; set; }
 	}
 
-	internal static class UpdateRequestPathInfo
-	{
-		public static void Update<TDocument, TPartialDocument>(
-			IConnectionSettingsValues settings,
-			RouteValues pathInfo,
-			IUpdateRequest<TDocument, TPartialDocument> self)
-			where TDocument : class
-			where TPartialDocument : class
-		{
-			if (pathInfo.Id.IsNullOrEmpty())
-			{
-				if (self.Doc != null)
-					pathInfo.Id = settings.Inferrer.Id(self.Doc);
-				else if (self.Upsert != null)
-					pathInfo.Id = settings.Inferrer.Id(self.Upsert);
-			}
-
-			pathInfo.HttpMethod = HttpMethod.POST;
-		}
-	}
-
 	public class UpdateRequest<TDocument> : UpdateRequest<TDocument,TDocument>
 		where TDocument : class
     {
@@ -68,11 +48,6 @@ namespace Nest
 		where TDocument : class
 		where TPartialDocument : class 
 	{
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
-		{
-			UpdateRequestPathInfo.Update(settings, pathInfo, this);
-		}
-
 		public string Script { get; set; }
 		public string ScriptFile { get; set; }
 		public string Language { get; set; }
@@ -186,11 +161,6 @@ namespace Nest
 
 			this.Self.RequestParameters.AddQueryString("fields",typedPathLookups);
 			return this;
-		}
-			
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
-		{
-			UpdateRequestPathInfo.Update(settings, pathInfo, this);
 		}
 	}
 }

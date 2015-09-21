@@ -16,37 +16,28 @@ namespace Nest
 		where T : class
 	{ }
 
-	internal static class ExplainPathInfo
-	{
-		public static void Update(RouteValues pathInfo, IExplainRequest request)
-		{
-			var source = request.RequestParameters.GetQueryStringValue<string>("source");
-			var q = request.RequestParameters.GetQueryStringValue<string>("q");
-			pathInfo.HttpMethod = (!source.IsNullOrEmpty() || !q.IsNullOrEmpty())
-				? HttpMethod.GET
-				: HttpMethod.POST;
-		}
-	}
+	//TODO port this HttpMethod logic to property
+	//internal static class ExplainPathInfo
+	//{
+	//	public static void Update(RouteValues pathInfo, IExplainRequest request)
+	//	{
+	//		var source = request.RequestParameters.GetQueryStringValue<string>("source");
+	//		var q = request.RequestParameters.GetQueryStringValue<string>("q");
+	//		pathInfo.HttpMethod = (!source.IsNullOrEmpty() || !q.IsNullOrEmpty())
+	//			? HttpMethod.GET
+	//			: HttpMethod.POST;
+	//	}
+	//}
 
 	public partial class ExplainRequest : RequestBase<ExplainRequestParameters>, IExplainRequest
 	{
 		public IQueryContainer Query { get; set; }
-
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
-		{
-			ExplainPathInfo.Update(pathInfo, this);
-		}
 	}
 
 	public partial class ExplainRequest<T> : RequestBase<ExplainRequestParameters>, IExplainRequest<T>
 		where T : class
 	{
 		public IQueryContainer Query { get; set; }
-
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
-		{
-			ExplainPathInfo.Update(pathInfo, this);
-		}
 	}
 
 	[DescriptorFor("Explain")]
@@ -62,11 +53,6 @@ namespace Nest
 		{
 			Self.Query = querySelector(new QueryContainerDescriptor<T>());
 			return this;
-		}
-
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
-		{
-			ExplainPathInfo.Update(pathInfo, this);
 		}
 	}
 }

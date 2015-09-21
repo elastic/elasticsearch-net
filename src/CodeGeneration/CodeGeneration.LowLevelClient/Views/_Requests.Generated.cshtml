@@ -55,10 +55,7 @@ namespace Nest
 		</text>
 	}
 	@if (method.RequestTypeUnmapped)
-	{<text>	protected override void UpdateRequestPath(IConnectionSettingsValues settings, ElasticsearchPathInfo@(Raw(string.Format("<{0}>", method.QueryStringParamName))) pathInfo)
-		{
-			throw new NotImplementedException();
-		}
+	{<text>	//TODO THIS METHOD IS UNMAPPED!
 	</text>
 	}
 	}</text>

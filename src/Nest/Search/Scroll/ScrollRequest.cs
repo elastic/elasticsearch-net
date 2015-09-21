@@ -10,22 +10,24 @@ namespace Nest
 		string ScrollId { get; set; }
 		TimeUnitExpression Scroll { get; set; }
 	}
+	
+	//TODO complex old route update routine needs to be ported
 
-	internal static class ScrollPathInfo
-	{
-		public static void Update(
-			IScrollRequest request,
-			IConnectionSettingsValues settings, 
-			RouteValues pathInfo)
-		{
-			// force POST scrollId can be quite big
-			pathInfo.HttpMethod = HttpMethod.POST;
-			pathInfo.ScrollId = request.ScrollId;
-			// force scroll id out of RequestParameters (potentially very large)
-			request.RequestParameters.RemoveQueryString("scroll_id");
-			request.RequestParameters.AddQueryString("scroll", request.Scroll);
-		}
-	}
+	//internal static class ScrollPathInfo
+	//{
+	//	public static void Update(
+	//		IScrollRequest request,
+	//		IConnectionSettingsValues settings, 
+	//		RouteValues pathInfo)
+	//	{
+	//		// force POST scrollId can be quite big
+	//		pathInfo.HttpMethod = HttpMethod.POST;
+	//		pathInfo.ScrollId = request.ScrollId;
+	//		// force scroll id out of RequestParameters (potentially very large)
+	//		request.RequestParameters.RemoveQueryString("scroll_id");
+	//		request.RequestParameters.AddQueryString("scroll", request.Scroll);
+	//	}
+	//}
 
 	public partial class ScrollRequest : RequestBase<ScrollRequestParameters>, IScrollRequest
 	{
@@ -37,11 +39,6 @@ namespace Nest
 			this.ScrollId = scrollId;
 			this.Scroll = scrollTimeout;
 		}
-
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
-		{
-			ScrollPathInfo.Update(this, settings, pathInfo);
-		}
 	}
 
 	public partial class ScrollDescriptor<T> : RequestDescriptorBase<ScrollDescriptor<T>, ScrollRequestParameters>, IScrollRequest,
@@ -49,11 +46,6 @@ namespace Nest
 		where T : class
 	{
 		private IScrollRequest Self => this;
-
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
-		{
-			ScrollPathInfo.Update(this, settings, pathInfo);
-		}
 
 		string IScrollRequest.ScrollId { get; set; }
 		TimeUnitExpression IScrollRequest.Scroll { get; set; }

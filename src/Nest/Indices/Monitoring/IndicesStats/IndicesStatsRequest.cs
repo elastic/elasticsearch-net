@@ -14,32 +14,28 @@ namespace Nest
 
 	}
 
-	internal static class IndicesStatsPathInfo
-	{
-		public static void Update(IConnectionSettingsValues settings, RouteValues pathInfo, IIndicesStatsRequest request)
-		{
-			if (request.Types.HasAny())
-			{
-				var inferrer = new ElasticInferrer(settings);
-				var types = inferrer.TypeNames(request.Types);
-				pathInfo.RequestParameters.AddQueryString("types", string.Join(",", types));
-			}
-			if (request.Metrics != null)
-				pathInfo.Metric = request.Metrics.Cast<Enum>().GetStringValue();
-			pathInfo.HttpMethod = HttpMethod.GET;
-		}
-	}
+	//TODO fairly complex route update routine, uncommented for now
+
+	//internal static class IndicesStatsPathInfo
+	//{
+	//	public static void Update(IConnectionSettingsValues settings, RouteValues pathInfo, IIndicesStatsRequest request)
+	//	{
+	//		if (request.Types.HasAny())
+	//		{
+	//			var inferrer = new ElasticInferrer(settings);
+	//			var types = inferrer.TypeNames(request.Types);
+	//			pathInfo.RequestParameters.AddQueryString("types", string.Join(",", types));
+	//		}
+	//		if (request.Metrics != null)
+	//			pathInfo.Metric = request.Metrics.Cast<Enum>().GetStringValue();
+	//		pathInfo.HttpMethod = HttpMethod.GET;
+	//	}
+	//}
 
 	public partial class IndicesStatsRequest : RequestBase<IndicesStatsRequestParameters>, IIndicesStatsRequest
 	{
 		public IEnumerable<IndicesStatsMetric> Metrics { get; set; }
 		public IEnumerable<TypeName> Types { get; set; }
-
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
-		{
-			IndicesStatsPathInfo.Update(settings, pathInfo , this);
-		}
-
 	}
 
 	[DescriptorFor("IndicesStats")]
@@ -61,11 +57,6 @@ namespace Nest
 		{
 			Self.Metrics = metrics;
 			return this;
-		}
-
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
-		{
-			IndicesStatsPathInfo.Update(settings, pathInfo, this);
 		}
 	}
 }

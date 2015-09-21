@@ -21,37 +21,24 @@ namespace Nest
 
 	public interface ITermVectorsRequest<T> : ITermVectorsRequest where T : class { }
 
-	internal static class TermVectorsPathInfo
-	{
-		public static void Update(IConnectionSettingsValues settings, RouteValues pathInfo, ITermVectorsRequest request)
-		{
-			pathInfo.HttpMethod = request.Document == null ? HttpMethod.GET : HttpMethod.POST;
-		}
-	}
-
 	public partial class TermVectorsRequest : RequestBase<TermVectorsRequestParameters>, ITermVectorsRequest
 	{
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
-		{
-			TermVectorsPathInfo.Update(settings, pathInfo, this);
-		}
+        HttpMethod IRequest.HttpMethod => this.Document == null ? HttpMethod.GET : HttpMethod.POST;
 
 		public object Document { get; set; }
 
 		public IDictionary<FieldName, string> PerFieldAnalyzer { get; set; }
 	}
 
+	//TODO why are these properties not public?
 	public partial class TermVectorsRequest<T> : RequestBase<TermVectorsRequestParameters>, ITermVectorsRequest<T>
 		where T : class
 	{
+        HttpMethod IRequest.HttpMethod => ((ITermVectorsRequest)this).Document == null ? HttpMethod.GET : HttpMethod.POST;
+
 		object ITermVectorsRequest.Document { get; set; }
 
 		IDictionary<FieldName, string> ITermVectorsRequest.PerFieldAnalyzer { get; set; }
-
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
-		{
-			TermVectorsPathInfo.Update(settings, pathInfo, this);
-		}
 	}
 
 	[DescriptorFor("Termvectors")]
@@ -60,6 +47,8 @@ namespace Nest
 		where T : class
 	{
 		private ITermVectorsRequest Self => this;
+
+        HttpMethod IRequest.HttpMethod => Self.Document == null ? HttpMethod.GET : HttpMethod.POST;
 		
 		object ITermVectorsRequest.Document { get; set; }
 
@@ -82,10 +71,6 @@ namespace Nest
 		{
 			Self.PerFieldAnalyzer = analyzerSelector(new FluentDictionary<FieldName, string>());
 			return this;
-		}
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
-		{
-			TermVectorsPathInfo.Update(settings, pathInfo, this);
 		}
 	}
 }

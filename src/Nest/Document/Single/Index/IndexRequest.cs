@@ -6,6 +6,8 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	//TODO if id == null do a POST otherwise a PUT
+
 	public interface IIndexRequest : IRequest<IndexRequestParameters>
 	{
 		object UntypedDocument { get; }
@@ -19,29 +21,12 @@ namespace Nest
 		TDocument Document { get; set; }
 	}
 
-	internal static class IndexPathInfo
-	{
-		public static void Update<T>(RouteValues pathInfo, IIndexRequest<T> request) 
-			where T : class
-		{
-			pathInfo.Index.ThrowIfNull("index");
-			pathInfo.Type.ThrowIfNull("type");
-			var id = pathInfo.Id;
-			pathInfo.HttpMethod = id == null || id.IsNullOrEmpty() ? HttpMethod.POST : HttpMethod.PUT;
-		}
-	}
-	
 	public partial class IndexRequest<TDocument> : RequestBase<IndexRequestParameters>, IIndexRequest<TDocument>
 		where TDocument : class
 	{
 		object IIndexRequest.UntypedDocument => this.Document;
 
 		public TDocument Document { get; set; }
-
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
-		{
-			IndexPathInfo.Update(pathInfo, this);
-		}
 	}
 	
 	public partial class IndexDescriptor<T> : RequestDescriptorBase<IndexDescriptor<T>, IndexRequestParameters>, IIndexRequest<T>
@@ -56,11 +41,6 @@ namespace Nest
 		public IndexDescriptor<T> Document(T document) => Assign(a => {
 			a.Document = document;
         });
-
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
-		{
-			IndexPathInfo.Update(pathInfo, this);
-		}
 
 	}
 }

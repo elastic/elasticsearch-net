@@ -17,21 +17,6 @@ namespace Nest
 	{
 		public string Lang { get; set; }
 		public string Id { get; set; }
-
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
-		{
-			DeleteScriptPathInfo.Update(pathInfo, this);
-		}
-	}
-
-	internal static class DeleteScriptPathInfo
-	{
-		public static void Update(RouteValues pathInfo, IDeleteScriptRequest request)
-		{
-			pathInfo.Id = request.Id;
-			pathInfo.Lang = request.Lang;
-			pathInfo.HttpMethod = HttpMethod.DELETE;
-		}
 	}
 
 	[DescriptorFor("ScriptDelete")]
@@ -57,11 +42,6 @@ namespace Nest
 		{
 			this.Self.Lang = lang;
 			return this;
-		}
-
-		protected override void UpdateRequestPath(IConnectionSettingsValues settings, RouteValues pathInfo)
-		{
-			DeleteScriptPathInfo.Update(pathInfo, this);
 		}
 	}
 }
