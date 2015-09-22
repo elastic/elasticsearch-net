@@ -75,7 +75,7 @@ namespace Nest
 			if (descriptor.Operations != null)
 			{
 				foreach (var kv in descriptor.Operations)
-					SearchTemplateResponseHelper.CloseOverAutomagicCovariantResultSelector(this.Infer, kv.Value);				
+					CovariantSearch.CloseOverAutomagicCovariantResultSelector(this.Infer, kv.Value);				
 			}
 
 			var multiSearchConverter = new MultiSearchJsonConverter(ConnectionSettings, descriptor);

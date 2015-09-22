@@ -31,7 +31,7 @@ namespace Nest
 		public IGetSearchTemplateResponse GetSearchTemplate(IGetSearchTemplateRequest request) => 
 			this.Dispatcher.Dispatch<IGetSearchTemplateRequest, GetSearchTemplateRequestParameters, GetSearchTemplateResponse>(
 				request,
-				(p, d) => this.LowLevelDispatch.GetSearchTemplateDispatch<GetSearchTemplateResponse>(p)
+				(p, d) => this.LowLevelDispatch.GetTemplateDispatch<GetSearchTemplateResponse>(p)
 			);
 
 		public Task<IGetSearchTemplateResponse> GetSearchTemplateAsync(Id id, Func<GetSearchTemplateDescriptor, IGetSearchTemplateRequest> selector = null) => 
@@ -40,7 +40,7 @@ namespace Nest
 		public Task<IGetSearchTemplateResponse> GetSearchTemplateAsync(IGetSearchTemplateRequest request) => 
 			this.Dispatcher.DispatchAsync<IGetSearchTemplateRequest, GetSearchTemplateRequestParameters, GetSearchTemplateResponse, IGetSearchTemplateResponse>(
 				request,
-				(p, d) => this.LowLevelDispatch.GetSearchTemplateDispatchAsync<GetSearchTemplateResponse>(p)
+				(p, d) => this.LowLevelDispatch.GetTemplateDispatchAsync<GetSearchTemplateResponse>(p)
 			);
 	}
 }

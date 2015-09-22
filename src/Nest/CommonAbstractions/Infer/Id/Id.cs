@@ -12,13 +12,17 @@ namespace Nest
 	[JsonConverter(typeof(IdJsonConverter))]
 	public class Id : IUrlParameter
 	{
-		public string Value { get; set; }
+		internal string Value { get; set; }
+		internal object Document { get; set; }
 
 		public Id(string id) { Value = id; }
 		public Id(long id) { Value = id.ToString(); }
+		public Id(object document) { Document = document; }
 
 		public static implicit operator Id(string id) => new Id(id);
 		public static implicit operator Id(long id) => new Id(id);
+
+		public static Id From<T>(T document) where T : class => new Id(document);
 
 		public string GetString(IConnectionConfigurationValues settings) => ((IUrlParameter)Ids.Single(this)).GetString(settings);
 	}
@@ -26,26 +30,26 @@ namespace Nest
 	public class Ids : IUrlParameter
 	{
 		internal IEnumerable<Id> _ids;
-		internal object _document;
 
 		internal Ids(Id id) { _ids = new List<Id> { id }; }
-		internal Ids(object document) { _document = document; }
+		internal Ids(IEnumerable<Id> ids) { _ids = ids; }
 
 		public static Ids Single(Id id) => new Ids(id);
-		public static Ids Single<T>(T document) where T : class => new Ids(document);
+		public static Ids Single<T>(T document) where T : class => new Ids(Id.From(document));
 		public static Ids Many(IEnumerable<Id> ids) => new Ids(ids);
 		public static Ids Many(params Id[] ids) => new Ids(ids);
 
 		public string GetString(IConnectionConfigurationValues settings)
 		{
-			if (_document != null)
-			{
-				var nestSettings = settings as IConnectionSettingsValues;
-				if (nestSettings == null)
-					throw new Exception("Tried to pass ids on querysting but it could not be resolved because no nest settings are available");
-				var infer = new ElasticInferrer(nestSettings);
-				return infer.Id(_document);
-			}
+			var nestSettings = settings as IConnectionSettingsValues;
+			if (nestSettings == null)
+				throw new Exception("Tried to pass ids on querysting but it could not be resolved because no nest settings are available");
+
+			var infer = new ElasticInferrer(nestSettings);
+			var ids = _ids
+				.Select(id => id.Document == null ? id.Value : infer.Id(id.Document))
+				.ToList();
+			if (ids.Any(id => id.IsNullOrEmpty())) throw new ArgumentException("One or more ids were null or empty", "ids");
 			return string.Join(",", _ids);
 		}
 	}

@@ -20,11 +20,13 @@ namespace Nest
 		Task<IFieldStatsResponse> FieldStatsAsync(IFieldStatsRequest request);
 	}
 
+	//TODO pass indices along on descriptor, we promote a more scoped fieldstats from the highlevel client
+
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
 		public IFieldStatsResponse FieldStats(Indices indices, Func<FieldStatsDescriptor, IFieldStatsRequest> selector = null) =>
-			this.FieldStats(selector.InvokeOrDefault(new FieldStatsDescriptor(indices)));
+			this.FieldStats(selector.InvokeOrDefault(new FieldStatsDescriptor()));
 
 		/// <inheritdoc/>
 		public IFieldStatsResponse FieldStats(IFieldStatsRequest request) => 
@@ -34,7 +36,7 @@ namespace Nest
 
 		/// <inheritdoc/>
 		public Task<IFieldStatsResponse> FieldStatsAsync(Indices indices, Func<FieldStatsDescriptor, IFieldStatsRequest> selector = null) => 
-			this.FieldStatsAsync(selector.InvokeOrDefault(new FieldStatsDescriptor(indices)));
+			this.FieldStatsAsync(selector.InvokeOrDefault(new FieldStatsDescriptor()));
 
 		/// <inheritdoc/>
 		public Task<IFieldStatsResponse> FieldStatsAsync(IFieldStatsRequest request) 

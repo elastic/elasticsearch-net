@@ -29,7 +29,7 @@ namespace Nest
 			where T : class
 		{
 			getSelector.ThrowIfNull("getSelector");
-			var descriptor = getSelector(new PercolateDescriptor<T>());
+			var descriptor = getSelector(new PercolateDescriptor<T>(typeof(T), typeof(T)));
 			Self.Percolations.Add(descriptor);
 			return this;
 		}
@@ -40,7 +40,7 @@ namespace Nest
 			foreach (var source in sources)
 			{
 				getSelector.ThrowIfNull("getSelector");
-				var descriptor = getSelector(new PercolateDescriptor<T>(), source);
+				var descriptor = getSelector(new PercolateDescriptor<T>(typeof(T), typeof(T)), source);
 				Self.Percolations.Add(descriptor);
 			}
 			return this;
@@ -50,7 +50,7 @@ namespace Nest
 			where T : class
 		{
 			getSelector.ThrowIfNull("getSelector");
-			var descriptor = getSelector(new PercolateCountDescriptor<T>());
+			var descriptor = getSelector(new PercolateCountDescriptor<T>(typeof(T), typeof(T)));
 			Self.Percolations.Add(descriptor);
 			return this;
 		}

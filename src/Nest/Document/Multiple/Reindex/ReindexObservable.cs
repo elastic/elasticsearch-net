@@ -53,7 +53,7 @@ namespace Nest
 			var searchResult = this._client.Search<T>(
 				s => s
 					.Index(fromIndex)
-					.AllTypes()
+					.Type(Types.All)
 					.From(0)
 					.Size(size)
 					.Query(this._reindexRequest.Query)

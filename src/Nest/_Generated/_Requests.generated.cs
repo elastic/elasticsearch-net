@@ -1506,6 +1506,33 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IDeleteSearchTemplateRequest : IRequest<DeleteSearchTemplateRequestParameters> 
+	{
+		Id Id { get; }
+	 } 
+	///<summary>Request parameters for DeleteTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-template.html</pre></summary>
+	public partial class DeleteSearchTemplateRequest  : RequestBase<DeleteSearchTemplateRequestParameters>, IDeleteSearchTemplateRequest
+	{
+		Id IDeleteSearchTemplateRequest.Id => Self.RouteValues.Get<Id>("id");
+			/// <summary>/_search/template/{id}</summary>
+///<param name="id">this parameter is required</param>
+		public DeleteSearchTemplateRequest(Id id) : base(r=>r.Required("id", id)){}
+
+			///<summary>Explicit version number for concurrency control</summary>
+		public long Version { get { return Q<long>("version"); } set { Q("version", value); } }
+		
+		///<summary>Specific version type</summary>
+		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IDeleteSnapshotRequest : IRequest<DeleteSnapshotRequestParameters> 
 	{
 		Name RepositoryName { get; }
@@ -1535,21 +1562,21 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IDeleteTemplateRequest : IRequest<DeleteTemplateRequestParameters> 
 	{
-		Id Id { get; }
+		Name Name { get; }
 	 } 
-	///<summary>Request parameters for DeleteTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-template.html</pre></summary>
+	///<summary>Request parameters for IndicesDeleteTemplateForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
 	public partial class DeleteTemplateRequest  : RequestBase<DeleteTemplateRequestParameters>, IDeleteTemplateRequest
 	{
-		Id IDeleteTemplateRequest.Id => Self.RouteValues.Get<Id>("id");
-			/// <summary>/_search/template/{id}</summary>
-///<param name="id">Optional, accepts null</param>
-		public DeleteTemplateRequest(Id id) : base(r=>r.Optional("id", id)){}
+		Name IDeleteTemplateRequest.Name => Self.RouteValues.Get<Name>("name");
+			/// <summary>/_template/{name}</summary>
+///<param name="name">this parameter is required</param>
+		public DeleteTemplateRequest(Name name) : base(r=>r.Required("name", name)){}
 
-			///<summary>Explicit version number for concurrency control</summary>
-		public long Version { get { return Q<long>("version"); } set { Q("version", value); } }
+			///<summary>Explicit operation timeout</summary>
+		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
 		
-		///<summary>Specific version type</summary>
-		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
+		///<summary>Specify timeout for connection to master</summary>
+		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
@@ -2276,7 +2303,7 @@ namespace Nest
 	{
 		Id Id { get; }
 	 } 
-	///<summary>Request parameters for GetSearchTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html</pre></summary>
+	///<summary>Request parameters for GetTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-template.html</pre></summary>
 	public partial class GetSearchTemplateRequest  : RequestBase<GetSearchTemplateRequestParameters>, IGetSearchTemplateRequest
 	{
 		Id IGetSearchTemplateRequest.Id => Self.RouteValues.Get<Id>("id");
@@ -3315,6 +3342,36 @@ namespace Nest
 ///<param name="lang">this parameter is required</param>		
 ///<param name="id">this parameter is required</param>
 		public PutScriptRequest(Name lang, Id id) : base(r=>r.Required("lang", lang).Required("id", id)){}
+
+			///<summary>Explicit operation type</summary>
+		public OpType OpType { get { return Q<OpType>("op_type"); } set { Q("op_type", value); } }
+		
+		///<summary>Explicit version number for concurrency control</summary>
+		public long Version { get { return Q<long>("version"); } set { Q("version", value); } }
+		
+		///<summary>Specific version type</summary>
+		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IPutSearchTemplateRequest : IRequest<PutSearchTemplateRequestParameters> 
+	{
+		Id Id { get; }
+	 } 
+	///<summary>Request parameters for PutTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-template.html</pre></summary>
+	public partial class PutSearchTemplateRequest  : RequestBase<PutSearchTemplateRequestParameters>, IPutSearchTemplateRequest
+	{
+		Id IPutSearchTemplateRequest.Id => Self.RouteValues.Get<Id>("id");
+			/// <summary>/_search/template/{id}</summary>
+///<param name="id">this parameter is required</param>
+		public PutSearchTemplateRequest(Id id) : base(r=>r.Required("id", id)){}
 
 			///<summary>Explicit operation type</summary>
 		public OpType OpType { get { return Q<OpType>("op_type"); } set { Q("op_type", value); } }

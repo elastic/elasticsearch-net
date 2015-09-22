@@ -22,20 +22,9 @@ namespace Nest
 	{
 		private IPutTemplateRequest Self => this;
 
-		private readonly IConnectionSettingsValues _connectionSettings;
-
 		//TODO Merge this state object onto this descriptor
 		TemplateMapping IPutTemplateRequest.TemplateMapping { get; set; }
 		
-		//TODO ConnectionSettings why?
-
-		public PutTemplateDescriptor(IConnectionSettingsValues connectionSettings)
-		{
-			_connectionSettings = connectionSettings;
-			Self.TemplateMapping = new TemplateMapping();
-		}
-
-
 		/// <summary>
 		/// Initialize the descriptor using the values from for instance a previous Get Template Mapping call.
 		/// </summary>

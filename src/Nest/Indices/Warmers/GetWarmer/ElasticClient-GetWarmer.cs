@@ -18,13 +18,13 @@ namespace Nest
 		/// </summary>
 		/// <param name="name">The name of the warmer to get</param>
 		/// <param name="selector">An optional selector specifying additional parameters for the get warmer operation</param>
-		IWarmerResponse GetWarmer(string name, Func<GetWarmerDescriptor, IGetWarmerRequest> selector = null);
+		IWarmerResponse GetWarmer(Names name, Func<GetWarmerDescriptor, IGetWarmerRequest> selector = null);
 
 		/// <inheritdoc/>
 		IWarmerResponse GetWarmer(IGetWarmerRequest getWarmerRequest);
 
 		/// <inheritdoc/>
-		Task<IWarmerResponse> GetWarmerAsync(string name, Func<GetWarmerDescriptor, IGetWarmerRequest> selector = null);
+		Task<IWarmerResponse> GetWarmerAsync(Names name, Func<GetWarmerDescriptor, IGetWarmerRequest> selector = null);
 
 		/// <inheritdoc/>
 		Task<IWarmerResponse> GetWarmerAsync(IGetWarmerRequest getWarmerRequest);
@@ -33,11 +33,11 @@ namespace Nest
 
 	public partial class ElasticClient
 	{
-		//TODO AllIndices seems very weird here
+		//TODO Names is optional so the descriptor has no const with names, pass it along once route values are generated
 
 		/// <inheritdoc/>
-		public IWarmerResponse GetWarmer(string name, Func<GetWarmerDescriptor, IGetWarmerRequest> selector = null) =>
-			this.GetWarmer(selector.InvokeOrDefault(new GetWarmerDescriptor().Name(name).AllIndices()));
+		public IWarmerResponse GetWarmer(Names names, Func<GetWarmerDescriptor, IGetWarmerRequest> selector = null) =>
+			this.GetWarmer(selector.InvokeOrDefault(new GetWarmerDescriptor()));
 
 		/// <inheritdoc/>
 		public IWarmerResponse GetWarmer(IGetWarmerRequest getWarmerRequest) => 
@@ -48,8 +48,8 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<IWarmerResponse> GetWarmerAsync(string name, Func<GetWarmerDescriptor, IGetWarmerRequest> selector = null) => 
-			this.GetWarmerAsync(selector.InvokeOrDefault(new GetWarmerDescriptor().Name(name).AllIndices()));
+		public Task<IWarmerResponse> GetWarmerAsync(Names names, Func<GetWarmerDescriptor, IGetWarmerRequest> selector = null) => 
+			this.GetWarmerAsync(selector.InvokeOrDefault(new GetWarmerDescriptor()));
 
 		/// <inheritdoc/>
 		public Task<IWarmerResponse> GetWarmerAsync(IGetWarmerRequest getWarmerRequest) => 

@@ -18,21 +18,14 @@ namespace Nest
 	//TODO whats going on here? renamed?
 	public partial class PutSearchTemplateRequest 
 	{
-		public PutSearchTemplateRequest(Id id) : base(r => r.Required(Ids.Single(id))) { }
-
 		public string Template { get; set; }
 	}
 
-	[DescriptorFor("SearchTemplatePut")]
-	public partial class PutSearchTemplateDescriptor : RequestDescriptorBase<PutSearchTemplateDescriptor, PutTemplateRequestParameters>, IPutSearchTemplateRequest
+	[DescriptorFor("PutTemplate")]
+	public partial class PutSearchTemplateDescriptor 
 	{
-		IPutSearchTemplateRequest Self => this;
 		string IPutSearchTemplateRequest.Template { get; set; }
 
-		public PutSearchTemplateDescriptor Template(string template)
-		{
-			this.Self.Template = template;
-			return this;
-		}
+		public PutSearchTemplateDescriptor Template(string template) => Assign(a => a.Template = template);
 	}
 }

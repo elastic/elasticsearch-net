@@ -33,6 +33,12 @@ namespace Nest
 		@(Raw(c.Generated))
 </text>
     }
+	@foreach (FluentRouteSetter c in method.GetFluentRouteSetters())
+    {
+	<text>	@(Raw(c.XmlDoc))
+		@(Raw(c.Code))
+</text>
+    }
 	</text>foreach (KeyValuePair<string, ApiQueryParameters> kv in method.Url.Params)
 	{
 		var t = @kv.Value.CsharpType(kv.Key);

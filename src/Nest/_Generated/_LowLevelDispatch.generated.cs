@@ -750,7 +750,7 @@ namespace Nest
 			throw InvalidDispatch("DeleteScript", p, new [] { DELETE }, "/_scripts/{lang}/{id}");
 		}
 		
-		internal ElasticsearchResponse<T> DeleteTemplateDispatch<T>(IRequest<DeleteTemplateRequestParameters> p ) where T : class
+		internal ElasticsearchResponse<T> DeleteTemplateDispatch<T>(IRequest<DeleteSearchTemplateRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -762,7 +762,7 @@ namespace Nest
 			throw InvalidDispatch("DeleteTemplate", p, new [] { DELETE }, "/_search/template/{id}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> DeleteTemplateDispatchAsync<T>(IRequest<DeleteTemplateRequestParameters> p ) where T : class
+		internal Task<ElasticsearchResponse<T>> DeleteTemplateDispatchAsync<T>(IRequest<DeleteSearchTemplateRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -908,30 +908,6 @@ namespace Nest
 
 			}
 			throw InvalidDispatch("GetScript", p, new [] { GET }, "/_scripts/{lang}/{id}");
-		}
-		
-		internal ElasticsearchResponse<T> GetSearchTemplateDispatch<T>(IRequest<GetSearchTemplateRequestParameters> p ) where T : class
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-					if (AllSet(p.RouteValues.Id)) return _lowLevel.GetSearchTemplate<T>(p.RouteValues.Id,u => p.RequestParameters);
-					break;
-
-			}
-			throw InvalidDispatch("GetSearchTemplate", p, new [] { GET }, "/_search/template/{id}");
-		}
-		
-		internal Task<ElasticsearchResponse<T>> GetSearchTemplateDispatchAsync<T>(IRequest<GetSearchTemplateRequestParameters> p ) where T : class
-		{
-			switch(p.HttpMethod)
-			{
-				case GET:
-					if (AllSet(p.RouteValues.Id)) return _lowLevel.GetSearchTemplateAsync<T>(p.RouteValues.Id,u => p.RequestParameters);
-					break;
-
-			}
-			throw InvalidDispatch("GetSearchTemplate", p, new [] { GET }, "/_search/template/{id}");
 		}
 		
 		internal ElasticsearchResponse<T> GetSourceDispatch<T>(IRequest<SourceRequestParameters> p ) where T : class
@@ -2418,7 +2394,7 @@ namespace Nest
 			throw InvalidDispatch("PutScript", p, new [] { PUT, POST }, "/_scripts/{lang}/{id}");
 		}
 		
-		internal ElasticsearchResponse<T> PutTemplateDispatch<T>(IRequest<PutTemplateRequestParameters> p , object body) where T : class
+		internal ElasticsearchResponse<T> PutTemplateDispatch<T>(IRequest<PutSearchTemplateRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2434,7 +2410,7 @@ namespace Nest
 			throw InvalidDispatch("PutTemplate", p, new [] { PUT, POST }, "/_search/template/{id}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> PutTemplateDispatchAsync<T>(IRequest<PutTemplateRequestParameters> p , object body) where T : class
+		internal Task<ElasticsearchResponse<T>> PutTemplateDispatchAsync<T>(IRequest<PutSearchTemplateRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{

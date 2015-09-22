@@ -9,10 +9,8 @@ namespace Nest
 {
 
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<SearchRequest>))]
-	public partial interface ISearchRequest 
+	public partial interface ISearchRequest : ICovariantSearchRequest
 	{
-		Type ClrType { get; }
-
 		[JsonProperty(PropertyName = "timeout")]
 		string Timeout { get; set; }
 
@@ -88,8 +86,6 @@ namespace Nest
 		SearchType? SearchType { get;  }
 
 		bool? IgnoreUnavalable { get; }
-
-		Func<dynamic, Hit<dynamic>, Type> TypeSelector { get; set;}
 		
 		SearchRequestParameters QueryString { get; set; }
 	}
@@ -100,7 +96,8 @@ namespace Nest
 	public partial class SearchRequest 
 	{
 		private Type _clrType { get; set; }
-		Type ISearchRequest.ClrType { get { return _clrType; } }
+		Type ICovariantSearchRequest.ClrType => this._clrType;
+		Types ICovariantSearchRequest.ElasticsearchTypes => ((ISearchTemplateRequest)this).Type;
 
 		public string Timeout { get; set; }
 		public int? From { get; set; }
@@ -144,6 +141,10 @@ namespace Nest
 	/// </summary>
 	public partial class SearchDescriptor<T> where T : class
 	{
+		Type ICovariantSearchRequest.ClrType => typeof(T);
+		Types ICovariantSearchRequest.ElasticsearchTypes => ((ISearchTemplateRequest)this).Type;
+		Func<dynamic, Hit<dynamic>, Type> ICovariantSearchRequest.TypeSelector { get; set; }
+
 		private ISearchRequest Self => this;
 
 		private SearchDescriptor<T> _assign(Action<ISearchRequest> assigner) => Fluent.Assign(this, assigner);
@@ -162,8 +163,6 @@ namespace Nest
 			? null : string.Join(",", this.Self.RequestParameters.GetQueryStringValue<string[]>("routing"));
 
 		bool? ISearchRequest.IgnoreUnavalable => this.Self.RequestParameters.GetQueryStringValue<bool?>("ignore_unavailable");
-
-		Type ISearchRequest.ClrType => typeof(T);
 
 		/// <summary>
 		/// Whether conditionless queries are allowed or not
@@ -198,14 +197,12 @@ namespace Nest
 		IList<FieldName> ISearchRequest.FielddataFields { get; set; }
 
 		IDictionary<string, IScriptQuery> ISearchRequest.ScriptFields { get; set; }
-
 		ISourceFilter ISearchRequest.Source { get; set; }
 
 		AggregationDictionary ISearchRequest.Aggregations { get; set; }
 
 		IDictionary<string, IInnerHitsContainer> ISearchRequest.InnerHits { get; set; }
 
-		Func<dynamic, Hit<dynamic>, Type> ISearchRequest.TypeSelector { get; set; }
 
 
 		//TODO probably remove this when we normalize sorting

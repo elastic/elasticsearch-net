@@ -8,4 +8,10 @@ namespace CodeGeneration.LowLevelClient.Domain
 		public string Url { get; set; }
 		public string Description { get; set; }
 	}
+
+	public class FluentRouteSetter
+	{
+		public string Code { get; set; }
+		public string XmlDoc { get; set; }
+	}
 }

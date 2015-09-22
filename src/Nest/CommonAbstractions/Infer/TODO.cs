@@ -22,6 +22,7 @@ namespace Nest
 		{
 			throw new NotImplementedException();
 		}
+		public static implicit operator ScrollId(string id) => new ScrollId();
 	}
 
 	public class NodeIds : IUrlParameter

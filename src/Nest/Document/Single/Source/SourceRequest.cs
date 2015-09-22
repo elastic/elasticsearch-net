@@ -14,7 +14,7 @@ namespace Nest
 	public partial class SourceRequest<T> where T : class { }
 
 	[DescriptorFor("GetSource")]
-	public partial class SourceDescriptor<T> 
+	public partial class SourceDescriptor<T> where T : class
 	{
 		public SourceDescriptor<T> ExecuteOnPrimary()
 		{

@@ -60,6 +60,11 @@ namespace Nest
 
 		public RouteValues Required(Ids ids) => Route("id", ids);
 		public RouteValues Optional(Ids ids) => Route("id", ids, false);
+		public void Remove(string route)
+		{
+			this._resolved.Remove(route);
+			this._routeValues.Remove(route);
+		}
 
 		public RouteValues Required(string route, IEnumerable<Enum> enums) =>
 			Resolved(route, string.Join(",", enums.Select(e => e.GetStringValue())));
