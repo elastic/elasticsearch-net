@@ -63,6 +63,11 @@ namespace Nest
 		{
 			throw new NotImplementedException();
 		}
+
+		public static implicit operator Names(Name name)
+		{
+			return new Names();
+		}
 	}
 
 	public class Name : IUrlParameter

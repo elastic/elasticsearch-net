@@ -118,16 +118,7 @@ namespace Nest
 	[DescriptorFor("IndicesPutMapping")]
 	public partial class PutMappingDescriptor<T> where T : class
 	{
-		public PutMappingDescriptor()
-			: base(p => p.Required(Types.Single<T>()))
-		{ }
-
-		public PutMappingDescriptor(Indices indices)
-			: base(p => p.Required(Types.Single<T>()).Optional(indices))
-		{ }
-
 		protected PutMappingDescriptor<T> Assign(Action<ITypeMapping> assigner) => Fluent.Assign(this, assigner);
-		private ITypeMapping Self => this;
 
 		IAllField ITypeMapping.AllField { get; set; }
 		IBoostField ITypeMapping.BoostField { get; set; }
@@ -214,8 +205,8 @@ namespace Nest
 			//TODO MappingTransform needs a descriptor so we no longer make this call mutate state
 			var t = mappingTransformSelector?.Invoke(new MappingTransformDescriptor());
 			if (t == null) return this;
-			if (Self.Transform == null) Self.Transform = new List<IMappingTransform>();
-			Self.Transform.Add(t);
+			if (((IPutMappingRequest)this).Transform == null) ((IPutMappingRequest)this).Transform = new List<IMappingTransform>();
+			((IPutMappingRequest)this).Transform.Add(t);
 			return this;
 		}
 
@@ -255,12 +246,12 @@ namespace Nest
 			//TODO _DELETES concept is wrong?
 			dynamicTemplatesSelector.ThrowIfNull("dynamicTemplatesSelector");
 			var templates = dynamicTemplatesSelector(new DynamicTemplatesDescriptor<T>());
-			if (Self.DynamicTemplates == null)
-				Self.DynamicTemplates = new Dictionary<string, DynamicTemplate>();
+			if (((IPutMappingRequest)this).DynamicTemplates == null)
+				((IPutMappingRequest)this).DynamicTemplates = new Dictionary<string, DynamicTemplate>();
 			foreach (var t in templates._Deletes)
-				Self.DynamicTemplates.Remove(t);
+				((IPutMappingRequest)this).DynamicTemplates.Remove(t);
 			foreach (var t in templates.Templates)
-				Self.DynamicTemplates[t.Key] = t.Value;
+				((IPutMappingRequest)this).DynamicTemplates[t.Key] = t.Value;
 			return this;
 		}
 	}

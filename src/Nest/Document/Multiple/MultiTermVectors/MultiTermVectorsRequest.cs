@@ -25,13 +25,13 @@ namespace Nest
 
 		public MultiTermVectorsDescriptor<T> Documents(params Func<MultiTermVectorDocumentDescriptor<T>, IMultiTermVectorDocumentDescriptor>[] documentSelectors)
 		{
-			Self.Documents = documentSelectors.Select(s => s(new MultiTermVectorDocumentDescriptor<T>()).GetDocument()).Where(d => d != null).ToList();
+			((IMultiTermVectorsRequest)this).Documents = documentSelectors.Select(s => s(new MultiTermVectorDocumentDescriptor<T>()).GetDocument()).Where(d => d != null).ToList();
 			return this;
 		}
 
 		public MultiTermVectorsDescriptor<T> Documents(IEnumerable<MultiTermVectorDocument> documents)
 		{
-			Self.Documents = documents;
+			((IMultiTermVectorsRequest)this).Documents = documents;
 			return this;
 		}
 

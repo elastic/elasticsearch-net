@@ -20,7 +20,7 @@ namespace Nest
 	}
 
 	[DescriptorFor("Mget")]
-	public partial class MultiGetDescriptor 
+	public partial class MultiGetDescriptor
 	{
 		IList<IMultiGetOperation> IMultiGetRequest.GetOperations { get; set; } = new List<IMultiGetOperation>();
 
@@ -29,9 +29,8 @@ namespace Nest
 		{
 			getSelector.ThrowIfNull("getSelector");
 			var descriptor = getSelector(new MultiGetOperationDescriptor<T>());
-			Self.GetOperations.Add(descriptor);
+			((IMultiGetRequest)this).GetOperations.Add(descriptor);
 			return this;
-
 		}
 
 		public MultiGetDescriptor GetMany<T>(IEnumerable<long> ids, Func<MultiGetOperationDescriptor<T>, long, MultiGetOperationDescriptor<T>> getSelector = null)
@@ -39,7 +38,7 @@ namespace Nest
 		{
 			getSelector = getSelector ?? ((sg, s) => sg);
 			foreach (var sg in ids.Select(id => getSelector(new MultiGetOperationDescriptor<T>().Id(id), id)))
-				this.Self.GetOperations.Add(sg);
+				((IMultiGetRequest)this).GetOperations.Add(sg);
 			return this;
 
 		}
@@ -48,9 +47,8 @@ namespace Nest
 		{
 			getSelector = getSelector ?? ((sg, s) => sg);
 			foreach (var sg in ids.Select(id => getSelector(new MultiGetOperationDescriptor<T>().Id(id), id)))
-				this.Self.GetOperations.Add(sg);
+				((IMultiGetRequest)this).GetOperations.Add(sg);
 			return this;
-
 		}
 	}
 }
