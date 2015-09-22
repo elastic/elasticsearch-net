@@ -89,11 +89,54 @@ namespace Nest
 		
 		SearchRequestParameters QueryString { get; set; }
 	}
-
+	public partial interface ISearchRequest<T> : ISearchRequest { }
 	//TODO Force get if source is specified on query string
 	//TODO removed typed request variant
 
 	public partial class SearchRequest 
+	{
+		private Type _clrType { get; set; }
+		Type ICovariantSearchRequest.ClrType => this._clrType;
+		Types ICovariantSearchRequest.ElasticsearchTypes => ((ISearchTemplateRequest)this).Type;
+
+		public string Timeout { get; set; }
+		public int? From { get; set; }
+		public int? Size { get; set; }
+		public bool? Explain { get; set; }
+		public bool? Version { get; set; }
+		public bool? TrackScores { get; set; }
+		public double? MinScore { get; set; }
+		public long? TerminateAfter { get; set; }
+		public IList<FieldName> Fields { get; set; }
+		public IList<FieldName> FielddataFields { get; set; }
+		public IDictionary<string, IScriptQuery> ScriptFields { get; set; }
+		public ISourceFilter Source { get; set; }
+		public IList<ISort> Sort { get; set; }
+		public IDictionary<IndexName, double> IndicesBoost { get; set; }
+		public IQueryContainer PostFilter { get; set; }
+		public IDictionary<string, IInnerHitsContainer> InnerHits { get; set; }
+		public IQueryContainer Query { get; set; }
+		public IRescore Rescore { get; set; }
+		public IDictionary<string, ISuggestBucket> Suggest { get; set; }
+		public IHighlightRequest Highlight { get; set; }
+		public AggregationDictionary Aggregations { get; set; }
+
+		SearchType? ISearchRequest.SearchType => this.QueryString?.GetQueryStringValue<SearchType?>("search_type");
+
+		string ISearchRequest.Preference => this.QueryString?.GetQueryStringValue<string>("preference");
+
+		string ISearchRequest.Routing => this.QueryString?.GetQueryStringValue<string[]>("routing") == null
+			? null
+			: string.Join(",", this.QueryString?.GetQueryStringValue<string[]>("routing"));
+
+		bool? ISearchRequest.IgnoreUnavalable => this.QueryString?.GetQueryStringValue<bool?>("ignore_unavailable");
+
+		public Func<dynamic, Hit<dynamic>, Type> TypeSelector { get; set; }
+
+		public SearchRequestParameters QueryString { get; set; }
+	}
+
+	public partial class SearchRequest<T> 
 	{
 		private Type _clrType { get; set; }
 		Type ICovariantSearchRequest.ClrType => this._clrType;
