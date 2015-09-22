@@ -65,7 +65,8 @@ namespace Nest
 		public string Id { get; set; }
 		[JsonProperty(PropertyName = "highlight")]
 		public Dictionary<string, IList<string>> Highlight { get; set; }
-		
-	}
+        [JsonProperty(PropertyName = "_score")]
+        public double? Score { get; set; }
+    }
 
 }
