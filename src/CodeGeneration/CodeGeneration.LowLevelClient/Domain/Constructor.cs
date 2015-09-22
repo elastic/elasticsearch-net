@@ -2,7 +2,7 @@
 
 namespace CodeGeneration.LowLevelClient.Domain
 {
-	public class RequestConstructor
+	public class Constructor
 	{
 		public string Generated { get; set; }
 		public string Url { get; set; }

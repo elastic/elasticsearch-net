@@ -17,6 +17,9 @@ namespace Nest
 	{ 
 		IndexName IBulkRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		TypeName IBulkRequest.Type => Self.RouteValues.Get<TypeName>("type");
+			/// <summary>/_bulk</summary>
+		public BulkDescriptor() : base(){}
+
 	
 		///<summary>Explicit write consistency setting for the operation</summary>
 		public BulkDescriptor Consistency(Consistency consistency) => AssignParam(p=>p.Consistency(consistency));
@@ -52,6 +55,9 @@ namespace Nest
 	public partial class CatAliasesDescriptor  : RequestDescriptorBase<CatAliasesDescriptor,CatAliasesRequestParameters, ICatAliasesRequest>, ICatAliasesRequest
 	{ 
 		Names ICatAliasesRequest.Name => Self.RouteValues.Get<Names>("name");
+			/// <summary>/_cat/aliases</summary>
+		public CatAliasesDescriptor() : base(){}
+
 	
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatAliasesDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
@@ -80,6 +86,9 @@ namespace Nest
 	public partial class CatAllocationDescriptor  : RequestDescriptorBase<CatAllocationDescriptor,CatAllocationRequestParameters, ICatAllocationRequest>, ICatAllocationRequest
 	{ 
 		NodeIds ICatAllocationRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
+			/// <summary>/_cat/allocation</summary>
+		public CatAllocationDescriptor() : base(){}
+
 	
 		///<summary>The unit in which to display byte values</summary>
 		public CatAllocationDescriptor Bytes(Bytes bytes) => AssignParam(p=>p.Bytes(bytes));
@@ -111,6 +120,9 @@ namespace Nest
 	public partial class CatCountDescriptor  : RequestDescriptorBase<CatCountDescriptor,CatCountRequestParameters, ICatCountRequest>, ICatCountRequest
 	{ 
 		Indices ICatCountRequest.Index => Self.RouteValues.Get<Indices>("index");
+			/// <summary>/_cat/count</summary>
+		public CatCountDescriptor() : base(){}
+
 	
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatCountDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
@@ -138,6 +150,9 @@ namespace Nest
 	///<summary>descriptor for CatFielddata <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-fielddata.html</pre></summary>
 	public partial class CatFielddataDescriptor  : RequestDescriptorBase<CatFielddataDescriptor,CatFielddataRequestParameters, ICatFielddataRequest>, ICatFielddataRequest
 	{ 
+			/// <summary>/_cat/fielddata</summary>
+		public CatFielddataDescriptor() : base(){}
+
 	
 		///<summary>The unit in which to display byte values</summary>
 		public CatFielddataDescriptor Bytes(Bytes bytes) => AssignParam(p=>p.Bytes(bytes));
@@ -175,7 +190,7 @@ namespace Nest
 	///<summary>descriptor for CatHealth <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-health.html</pre></summary>
 	public partial class CatHealthDescriptor  : RequestDescriptorBase<CatHealthDescriptor,CatHealthRequestParameters, ICatHealthRequest>, ICatHealthRequest
 	{ 
-	
+		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatHealthDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
 
@@ -205,7 +220,7 @@ namespace Nest
 	///<summary>descriptor for CatHelp <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat.html</pre></summary>
 	public partial class CatHelpDescriptor  : RequestDescriptorBase<CatHelpDescriptor,CatHelpRequestParameters, ICatHelpRequest>, ICatHelpRequest
 	{ 
-	
+		
 		///<summary>Return help information</summary>
 		public CatHelpDescriptor Help(bool help = true) => AssignParam(p=>p.Help(help));
 
@@ -224,6 +239,9 @@ namespace Nest
 	public partial class CatIndicesDescriptor  : RequestDescriptorBase<CatIndicesDescriptor,CatIndicesRequestParameters, ICatIndicesRequest>, ICatIndicesRequest
 	{ 
 		Indices ICatIndicesRequest.Index => Self.RouteValues.Get<Indices>("index");
+			/// <summary>/_cat/indices</summary>
+		public CatIndicesDescriptor() : base(){}
+
 	
 		///<summary>The unit in which to display byte values</summary>
 		public CatIndicesDescriptor Bytes(Bytes bytes) => AssignParam(p=>p.Bytes(bytes));
@@ -257,7 +275,7 @@ namespace Nest
 	///<summary>descriptor for CatMaster <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-master.html</pre></summary>
 	public partial class CatMasterDescriptor  : RequestDescriptorBase<CatMasterDescriptor,CatMasterRequestParameters, ICatMasterRequest>, ICatMasterRequest
 	{ 
-	
+		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatMasterDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
 
@@ -284,7 +302,7 @@ namespace Nest
 	///<summary>descriptor for CatNodeattrs <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodeattrs.html</pre></summary>
 	public partial class CatNodeattrsDescriptor  : RequestDescriptorBase<CatNodeattrsDescriptor,CatNodeattrsRequestParameters, ICatNodeattrsRequest>, ICatNodeattrsRequest
 	{ 
-	
+		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatNodeattrsDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
 
@@ -314,7 +332,7 @@ namespace Nest
 	///<summary>descriptor for CatNodes <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-nodes.html</pre></summary>
 	public partial class CatNodesDescriptor  : RequestDescriptorBase<CatNodesDescriptor,CatNodesRequestParameters, ICatNodesRequest>, ICatNodesRequest
 	{ 
-	
+		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatNodesDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
 
@@ -341,7 +359,7 @@ namespace Nest
 	///<summary>descriptor for CatPendingTasks <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-pending-tasks.html</pre></summary>
 	public partial class CatPendingTasksDescriptor  : RequestDescriptorBase<CatPendingTasksDescriptor,CatPendingTasksRequestParameters, ICatPendingTasksRequest>, ICatPendingTasksRequest
 	{ 
-	
+		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatPendingTasksDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
 
@@ -368,7 +386,7 @@ namespace Nest
 	///<summary>descriptor for CatPlugins <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-plugins.html</pre></summary>
 	public partial class CatPluginsDescriptor  : RequestDescriptorBase<CatPluginsDescriptor,CatPluginsRequestParameters, ICatPluginsRequest>, ICatPluginsRequest
 	{ 
-	
+		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatPluginsDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
 
@@ -396,6 +414,9 @@ namespace Nest
 	public partial class CatRecoveryDescriptor  : RequestDescriptorBase<CatRecoveryDescriptor,CatRecoveryRequestParameters, ICatRecoveryRequest>, ICatRecoveryRequest
 	{ 
 		Indices ICatRecoveryRequest.Index => Self.RouteValues.Get<Indices>("index");
+			/// <summary>/_cat/recovery</summary>
+		public CatRecoveryDescriptor() : base(){}
+
 	
 		///<summary>The unit in which to display byte values</summary>
 		public CatRecoveryDescriptor Bytes(Bytes bytes) => AssignParam(p=>p.Bytes(bytes));
@@ -424,6 +445,9 @@ namespace Nest
 	public partial class CatSegmentsDescriptor  : RequestDescriptorBase<CatSegmentsDescriptor,CatSegmentsRequestParameters, ICatSegmentsRequest>, ICatSegmentsRequest
 	{ 
 		Indices ICatSegmentsRequest.Index => Self.RouteValues.Get<Indices>("index");
+			/// <summary>/_cat/segments</summary>
+		public CatSegmentsDescriptor() : base(){}
+
 	
 		///<summary>Comma-separated list of column names to display</summary>
 		public CatSegmentsDescriptor H(params string[] h) => AssignParam(p=>p.H(h));
@@ -446,6 +470,9 @@ namespace Nest
 	public partial class CatShardsDescriptor  : RequestDescriptorBase<CatShardsDescriptor,CatShardsRequestParameters, ICatShardsRequest>, ICatShardsRequest
 	{ 
 		Indices ICatShardsRequest.Index => Self.RouteValues.Get<Indices>("index");
+			/// <summary>/_cat/shards</summary>
+		public CatShardsDescriptor() : base(){}
+
 	
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatShardsDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
@@ -473,7 +500,7 @@ namespace Nest
 	///<summary>descriptor for CatThreadPool <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-thread-pool.html</pre></summary>
 	public partial class CatThreadPoolDescriptor  : RequestDescriptorBase<CatThreadPoolDescriptor,CatThreadPoolRequestParameters, ICatThreadPoolRequest>, ICatThreadPoolRequest
 	{ 
-	
+		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public CatThreadPoolDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
 
@@ -504,6 +531,9 @@ namespace Nest
 	public partial class ClearScrollDescriptor  : RequestDescriptorBase<ClearScrollDescriptor,ClearScrollRequestParameters, IClearScrollRequest>, IClearScrollRequest
 	{ 
 		ScrollIds IClearScrollRequest.ScrollId => Self.RouteValues.Get<ScrollIds>("scroll_id");
+			/// <summary>/_search/scroll/{scroll_id}</summary>
+		public ClearScrollDescriptor() : base(){}
+
 	
 		///<summary>The URL-encoded request definition</summary>
 		public ClearScrollDescriptor Source(string source) => AssignParam(p=>p.Source(source));
@@ -516,7 +546,7 @@ namespace Nest
 	///<summary>descriptor for ClusterGetSettings <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</pre></summary>
 	public partial class ClusterGetSettingsDescriptor  : RequestDescriptorBase<ClusterGetSettingsDescriptor,ClusterGetSettingsRequestParameters, IClusterGetSettingsRequest>, IClusterGetSettingsRequest
 	{ 
-	
+		
 		///<summary>Return settings in flat format (default: false)</summary>
 		public ClusterGetSettingsDescriptor FlatSettings(bool flat_settings = true) => AssignParam(p=>p.FlatSettings(flat_settings));
 
@@ -538,6 +568,9 @@ namespace Nest
 	public partial class ClusterHealthDescriptor  : RequestDescriptorBase<ClusterHealthDescriptor,ClusterHealthRequestParameters, IClusterHealthRequest>, IClusterHealthRequest
 	{ 
 		IndexName IClusterHealthRequest.Index => Self.RouteValues.Get<IndexName>("index");
+			/// <summary>/_cluster/health</summary>
+		public ClusterHealthDescriptor() : base(){}
+
 	
 		///<summary>Specify the level of detail for returned information</summary>
 		public ClusterHealthDescriptor Level(Level level) => AssignParam(p=>p.Level(level));
@@ -574,7 +607,7 @@ namespace Nest
 	///<summary>descriptor for ClusterPendingTasks <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-pending.html</pre></summary>
 	public partial class ClusterPendingTasksDescriptor  : RequestDescriptorBase<ClusterPendingTasksDescriptor,ClusterPendingTasksRequestParameters, IClusterPendingTasksRequest>, IClusterPendingTasksRequest
 	{ 
-	
+		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public ClusterPendingTasksDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
 
@@ -592,7 +625,7 @@ namespace Nest
 	///<summary>descriptor for ClusterPutSettings <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</pre></summary>
 	public partial class ClusterSettingsDescriptor  : RequestDescriptorBase<ClusterSettingsDescriptor,ClusterSettingsRequestParameters, IClusterSettingsRequest>, IClusterSettingsRequest
 	{ 
-	
+		
 		///<summary>Return settings in flat format (default: false)</summary>
 		public ClusterSettingsDescriptor FlatSettings(bool flat_settings = true) => AssignParam(p=>p.FlatSettings(flat_settings));
 
@@ -613,7 +646,7 @@ namespace Nest
 	///<summary>descriptor for ClusterReroute <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-reroute.html</pre></summary>
 	public partial class ClusterRerouteDescriptor  : RequestDescriptorBase<ClusterRerouteDescriptor,ClusterRerouteRequestParameters, IClusterRerouteRequest>, IClusterRerouteRequest
 	{ 
-	
+		
 		///<summary>Simulate the operation only and return the resulting state</summary>
 		public ClusterRerouteDescriptor DryRun(bool dry_run = true) => AssignParam(p=>p.DryRun(dry_run));
 
@@ -642,6 +675,9 @@ namespace Nest
 	{ 
 		Indices IClusterStateRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Metrics IClusterStateRequest.Metric => Self.RouteValues.Get<Metrics>("metric");
+			/// <summary>/_cluster/state</summary>
+		public ClusterStateDescriptor() : base(){}
+
 	
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public ClusterStateDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
@@ -673,6 +709,9 @@ namespace Nest
 	public partial class ClusterStatsDescriptor  : RequestDescriptorBase<ClusterStatsDescriptor,ClusterStatsRequestParameters, IClusterStatsRequest>, IClusterStatsRequest
 	{ 
 		NodeIds IClusterStatsRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
+			/// <summary>/_cluster/stats</summary>
+		public ClusterStatsDescriptor() : base(){}
+
 	
 		///<summary>Return settings in flat format (default: false)</summary>
 		public ClusterStatsDescriptor FlatSettings(bool flat_settings = true) => AssignParam(p=>p.FlatSettings(flat_settings));
@@ -693,6 +732,9 @@ namespace Nest
 	{ 
 		Indices ICountRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types ICountRequest.Type => Self.RouteValues.Get<Types>("type");
+			/// <summary>/_count</summary>
+		public CountDescriptor() : base(){}
+
 	
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public CountDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
@@ -747,6 +789,11 @@ namespace Nest
 		IndexName IPercolateCountRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		TypeName IPercolateCountRequest.Type => Self.RouteValues.Get<TypeName>("type");
 		Id IPercolateCountRequest.Id => Self.RouteValues.Get<Id>("id");
+			/// <summary>/{index}/{type}/_percolate/count</summary>
+///<param name="index"> this parameter is required		
+///<param name="type"> this parameter is required
+		public PercolateCountDescriptor(IndexName index, TypeName type) : base(r=>r.Required("index", index).Required("type", type)){}
+
 	
 		///<summary>A comma-separated list of specific routing values</summary>
 		public PercolateCountDescriptor<T> Routing(params string[] routing) => AssignParam(p=>p.Routing(routing));
@@ -789,6 +836,12 @@ namespace Nest
 		Id IDeleteRequest.Id => Self.RouteValues.Get<Id>("id");
 		IndexName IDeleteRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		TypeName IDeleteRequest.Type => Self.RouteValues.Get<TypeName>("type");
+			/// <summary>/{index}/{type}/{id}</summary>
+///<param name="index"> this parameter is required		
+///<param name="type"> this parameter is required		
+///<param name="id"> this parameter is required
+		public DeleteDescriptor(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id)){}
+
 	
 		///<summary>Specific write consistency setting for the operation</summary>
 		public DeleteDescriptor<T> Consistency(Consistency consistency) => AssignParam(p=>p.Consistency(consistency));
@@ -824,6 +877,10 @@ namespace Nest
 	{ 
 		Indices IDeleteByQueryRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types IDeleteByQueryRequest.Type => Self.RouteValues.Get<Types>("type");
+			/// <summary>/{index}/_query</summary>
+///<param name="index"> this parameter is required
+		public DeleteByQueryDescriptor(Indices index) : base(r=>r.Required("index", index)){}
+
 	
 		///<summary>The analyzer to use for the query string</summary>
 		public DeleteByQueryDescriptor<T> Analyzer(string analyzer) => AssignParam(p=>p.Analyzer(analyzer));
@@ -865,6 +922,11 @@ namespace Nest
 	{ 
 		Id IDeleteScriptRequest.Id => Self.RouteValues.Get<Id>("id");
 		Name IDeleteScriptRequest.Lang => Self.RouteValues.Get<Name>("lang");
+			/// <summary>/_scripts/{lang}/{id}</summary>
+///<param name="lang"> this parameter is required		
+///<param name="id"> this parameter is required
+		public DeleteScriptDescriptor(Name lang, Id id) : base(r=>r.Required("lang", lang).Required("id", id)){}
+
 	
 		///<summary>Explicit version number for concurrency control</summary>
 		public DeleteScriptDescriptor Version(long version) => AssignParam(p=>p.Version(version));
@@ -884,6 +946,9 @@ namespace Nest
 	public partial class DeleteTemplateDescriptor  : RequestDescriptorBase<DeleteTemplateDescriptor,DeleteTemplateRequestParameters, IDeleteTemplateRequest>, IDeleteTemplateRequest
 	{ 
 		Id IDeleteTemplateRequest.Id => Self.RouteValues.Get<Id>("id");
+			/// <summary>/_search/template/{id}</summary>
+		public DeleteTemplateDescriptor() : base(){}
+
 	
 		///<summary>Explicit version number for concurrency control</summary>
 		public DeleteTemplateDescriptor Version(long version) => AssignParam(p=>p.Version(version));
@@ -905,6 +970,12 @@ namespace Nest
 		Id IDocumentExistsRequest.Id => Self.RouteValues.Get<Id>("id");
 		IndexName IDocumentExistsRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		TypeName IDocumentExistsRequest.Type => Self.RouteValues.Get<TypeName>("type");
+			/// <summary>/{index}/{type}/{id}</summary>
+///<param name="index"> this parameter is required		
+///<param name="type"> this parameter is required		
+///<param name="id"> this parameter is required
+		public DocumentExistsDescriptor(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id)){}
+
 	
 		///<summary>The ID of the parent document</summary>
 		public DocumentExistsDescriptor<T> Parent(string parent) => AssignParam(p=>p.Parent(parent));
@@ -935,6 +1006,12 @@ namespace Nest
 		Id IExplainRequest.Id => Self.RouteValues.Get<Id>("id");
 		IndexName IExplainRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		TypeName IExplainRequest.Type => Self.RouteValues.Get<TypeName>("type");
+			/// <summary>/{index}/{type}/{id}/_explain</summary>
+///<param name="index"> this parameter is required		
+///<param name="type"> this parameter is required		
+///<param name="id"> this parameter is required
+		public ExplainDescriptor(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id)){}
+
 	
 		///<summary>Specify whether wildcards and prefix queries in the query string query should be analyzed (default: false)</summary>
 		public ExplainDescriptor<T> AnalyzeWildcard(bool analyze_wildcard = true) => AssignParam(p=>p.AnalyzeWildcard(analyze_wildcard));
@@ -1002,6 +1079,9 @@ namespace Nest
 	public partial class FieldStatsDescriptor  : RequestDescriptorBase<FieldStatsDescriptor,FieldStatsRequestParameters, IFieldStatsRequest>, IFieldStatsRequest
 	{ 
 		Indices IFieldStatsRequest.Index => Self.RouteValues.Get<Indices>("index");
+			/// <summary>/_field_stats</summary>
+		public FieldStatsDescriptor() : base(){}
+
 	
 		///<summary>A comma-separated list of fields for to get field statistics for (min value, max value, and more)</summary>
 		public FieldStatsDescriptor Fields(params string[] fields) => AssignParam(p=>p.Fields(fields));
@@ -1036,6 +1116,12 @@ namespace Nest
 		Id IGetRequest.Id => Self.RouteValues.Get<Id>("id");
 		IndexName IGetRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		TypeName IGetRequest.Type => Self.RouteValues.Get<TypeName>("type");
+			/// <summary>/{index}/{type}/{id}</summary>
+///<param name="index"> this parameter is required		
+///<param name="type"> this parameter is required		
+///<param name="id"> this parameter is required
+		public GetDescriptor(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id)){}
+
 	
 		///<summary>A comma-separated list of fields to return in the response</summary>
 		public GetDescriptor<T> Fields(params string[] fields) => AssignParam(p=>p.Fields(fields));
@@ -1095,6 +1181,11 @@ namespace Nest
 	{ 
 		Id IGetScriptRequest.Id => Self.RouteValues.Get<Id>("id");
 		Name IGetScriptRequest.Lang => Self.RouteValues.Get<Name>("lang");
+			/// <summary>/_scripts/{lang}/{id}</summary>
+///<param name="lang"> this parameter is required		
+///<param name="id"> this parameter is required
+		public GetScriptDescriptor(Name lang, Id id) : base(r=>r.Required("lang", lang).Required("id", id)){}
+
 	
 		///<summary>Explicit version number for concurrency control</summary>
 		public GetScriptDescriptor Version(long version) => AssignParam(p=>p.Version(version));
@@ -1116,6 +1207,12 @@ namespace Nest
 		Id ISourceRequest.Id => Self.RouteValues.Get<Id>("id");
 		IndexName ISourceRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		TypeName ISourceRequest.Type => Self.RouteValues.Get<TypeName>("type");
+			/// <summary>/{index}/{type}/{id}/_source</summary>
+///<param name="index"> this parameter is required		
+///<param name="type"> this parameter is required		
+///<param name="id"> this parameter is required
+		public SourceDescriptor(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id)){}
+
 	
 		///<summary>The ID of the parent document</summary>
 		public SourceDescriptor<T> Parent(string parent) => AssignParam(p=>p.Parent(parent));
@@ -1167,6 +1264,10 @@ namespace Nest
 	public partial class GetTemplateDescriptor  : RequestDescriptorBase<GetTemplateDescriptor,GetTemplateRequestParameters, IGetTemplateRequest>, IGetTemplateRequest
 	{ 
 		Id IGetTemplateRequest.Id => Self.RouteValues.Get<Id>("id");
+			/// <summary>/_search/template/{id}</summary>
+///<param name="id"> this parameter is required
+		public GetTemplateDescriptor(Id id) : base(r=>r.Required("id", id)){}
+
 	
 		///<summary>Explicit version number for concurrency control</summary>
 		public GetTemplateDescriptor Version(long version) => AssignParam(p=>p.Version(version));
@@ -1188,6 +1289,11 @@ namespace Nest
 		Id IIndexRequest.Id => Self.RouteValues.Get<Id>("id");
 		IndexName IIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		TypeName IIndexRequest.Type => Self.RouteValues.Get<TypeName>("type");
+			/// <summary>/{index}/{type}</summary>
+///<param name="index"> this parameter is required		
+///<param name="type"> this parameter is required
+		public IndexDescriptor(IndexName index, TypeName type) : base(r=>r.Required("index", index).Required("type", type)){}
+
 	
 		///<summary>Explicit write consistency setting for the operation</summary>
 		public IndexDescriptor<T> Consistency(Consistency consistency) => AssignParam(p=>p.Consistency(consistency));
@@ -1231,6 +1337,9 @@ namespace Nest
 	public partial class AnalyzeDescriptor  : RequestDescriptorBase<AnalyzeDescriptor,AnalyzeRequestParameters, IAnalyzeRequest>, IAnalyzeRequest
 	{ 
 		IndexName IAnalyzeRequest.Index => Self.RouteValues.Get<IndexName>("index");
+			/// <summary>/_analyze</summary>
+		public AnalyzeDescriptor() : base(){}
+
 	
 		///<summary>The name of the analyzer to use</summary>
 		public AnalyzeDescriptor Analyzer(string analyzer) => AssignParam(p=>p.Analyzer(analyzer));
@@ -1275,6 +1384,9 @@ namespace Nest
 	public partial class ClearCacheDescriptor  : RequestDescriptorBase<ClearCacheDescriptor,ClearCacheRequestParameters, IClearCacheRequest>, IClearCacheRequest
 	{ 
 		Indices IClearCacheRequest.Index => Self.RouteValues.Get<Indices>("index");
+			/// <summary>/_cache/clear</summary>
+		public ClearCacheDescriptor() : base(){}
+
 	
 		///<summary>Clear field data</summary>
 		public ClearCacheDescriptor FieldData(bool field_data = true) => AssignParam(p=>p.FieldData(field_data));
@@ -1319,6 +1431,10 @@ namespace Nest
 	public partial class CloseIndexDescriptor  : RequestDescriptorBase<CloseIndexDescriptor,CloseIndexRequestParameters, ICloseIndexRequest>, ICloseIndexRequest
 	{ 
 		IndexName ICloseIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
+			/// <summary>/{index}/_close</summary>
+///<param name="index"> this parameter is required
+		public CloseIndexDescriptor(IndexName index) : base(r=>r.Required("index", index)){}
+
 	
 		///<summary>Explicit operation timeout</summary>
 		public CloseIndexDescriptor Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
@@ -1347,6 +1463,10 @@ namespace Nest
 	public partial class CreateIndexDescriptor  : RequestDescriptorBase<CreateIndexDescriptor,CreateIndexRequestParameters, ICreateIndexRequest>, ICreateIndexRequest
 	{ 
 		IndexName ICreateIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
+			/// <summary>/{index}</summary>
+///<param name="index"> this parameter is required
+		public CreateIndexDescriptor(IndexName index) : base(r=>r.Required("index", index)){}
+
 	
 		///<summary>Explicit operation timeout</summary>
 		public CreateIndexDescriptor Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
@@ -1369,6 +1489,10 @@ namespace Nest
 	public partial class DeleteIndexDescriptor  : RequestDescriptorBase<DeleteIndexDescriptor,DeleteIndexRequestParameters, IDeleteIndexRequest>, IDeleteIndexRequest
 	{ 
 		Indices IDeleteIndexRequest.Index => Self.RouteValues.Get<Indices>("index");
+			/// <summary>/{index}</summary>
+///<param name="index"> this parameter is required
+		public DeleteIndexDescriptor(Indices index) : base(r=>r.Required("index", index)){}
+
 	
 		///<summary>Explicit operation timeout</summary>
 		public DeleteIndexDescriptor Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
@@ -1389,6 +1513,11 @@ namespace Nest
 	{ 
 		Indices IDeleteAliasRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Names IDeleteAliasRequest.Name => Self.RouteValues.Get<Names>("name");
+			/// <summary>/{index}/_alias/{name}</summary>
+///<param name="index"> this parameter is required		
+///<param name="name"> this parameter is required
+		public DeleteAliasDescriptor(Indices index, Names name) : base(r=>r.Required("index", index).Required("name", name)){}
+
 	
 		///<summary>Explicit timestamp for the document</summary>
 		public DeleteAliasDescriptor<T> Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
@@ -1409,6 +1538,11 @@ namespace Nest
 	{ 
 		Indices IDeleteWarmerRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Names IDeleteWarmerRequest.Name => Self.RouteValues.Get<Names>("name");
+			/// <summary>/{index}/_warmer/{name}</summary>
+///<param name="index"> this parameter is required		
+///<param name="name"> this parameter is required
+		public DeleteWarmerDescriptor(Indices index, Names name) : base(r=>r.Required("index", index).Required("name", name)){}
+
 	
 		///<summary>Specify timeout for connection to master</summary>
 		public DeleteWarmerDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
@@ -1425,6 +1559,10 @@ namespace Nest
 	public partial class IndexExistsDescriptor  : RequestDescriptorBase<IndexExistsDescriptor,IndexExistsRequestParameters, IIndexExistsRequest>, IIndexExistsRequest
 	{ 
 		Indices IIndexExistsRequest.Index => Self.RouteValues.Get<Indices>("index");
+			/// <summary>/{index}</summary>
+///<param name="index"> this parameter is required
+		public IndexExistsDescriptor(Indices index) : base(r=>r.Required("index", index)){}
+
 	
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public IndexExistsDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
@@ -1451,6 +1589,9 @@ namespace Nest
 	{ 
 		Indices IAliasExistsRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Names IAliasExistsRequest.Name => Self.RouteValues.Get<Names>("name");
+			/// <summary>/_alias/{name}</summary>
+		public AliasExistsDescriptor() : base(){}
+
 	
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public AliasExistsDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
@@ -1476,6 +1617,10 @@ namespace Nest
 	public partial class TemplateExistsDescriptor  : RequestDescriptorBase<TemplateExistsDescriptor,TemplateExistsRequestParameters, ITemplateExistsRequest>, ITemplateExistsRequest
 	{ 
 		Name ITemplateExistsRequest.Name => Self.RouteValues.Get<Name>("name");
+			/// <summary>/_template/{name}</summary>
+///<param name="name"> this parameter is required
+		public TemplateExistsDescriptor(Name name) : base(r=>r.Required("name", name)){}
+
 	
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public TemplateExistsDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
@@ -1496,6 +1641,11 @@ namespace Nest
 	{ 
 		Indices ITypeExistsRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types ITypeExistsRequest.Type => Self.RouteValues.Get<Types>("type");
+			/// <summary>/{index}/{type}</summary>
+///<param name="index"> this parameter is required		
+///<param name="type"> this parameter is required
+		public TypeExistsDescriptor(Indices index, Types type) : base(r=>r.Required("index", index).Required("type", type)){}
+
 	
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public TypeExistsDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
@@ -1521,6 +1671,9 @@ namespace Nest
 	public partial class FlushDescriptor  : RequestDescriptorBase<FlushDescriptor,FlushRequestParameters, IFlushRequest>, IFlushRequest
 	{ 
 		Indices IFlushRequest.Index => Self.RouteValues.Get<Indices>("index");
+			/// <summary>/_flush</summary>
+		public FlushDescriptor() : base(){}
+
 	
 		///<summary>Whether a flush should be forced even if it is not necessarily needed ie. if no changes will be committed to the index. This is useful if transaction log IDs should be incremented even if no uncommitted changes are present. (This setting can be considered as internal)</summary>
 		public FlushDescriptor Force(bool force = true) => AssignParam(p=>p.Force(force));
@@ -1549,6 +1702,9 @@ namespace Nest
 	public partial class SyncedFlushDescriptor  : RequestDescriptorBase<SyncedFlushDescriptor,SyncedFlushRequestParameters, ISyncedFlushRequest>, ISyncedFlushRequest
 	{ 
 		Indices ISyncedFlushRequest.Index => Self.RouteValues.Get<Indices>("index");
+			/// <summary>/_flush/synced</summary>
+		public SyncedFlushDescriptor() : base(){}
+
 	
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public SyncedFlushDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
@@ -1572,6 +1728,10 @@ namespace Nest
 	{ 
 		Indices IGetIndexRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Feature IGetIndexRequest.Feature => Self.RouteValues.Get<Feature>("feature");
+			/// <summary>/{index}</summary>
+///<param name="index"> this parameter is required
+		public GetIndexDescriptor(Indices index) : base(r=>r.Required("index", index)){}
+
 	
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
 		public GetIndexDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
@@ -1604,6 +1764,9 @@ namespace Nest
 	{ 
 		Indices IGetAliasRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Names IGetAliasRequest.Name => Self.RouteValues.Get<Names>("name");
+			/// <summary>/_alias</summary>
+		public GetAliasDescriptor() : base(){}
+
 	
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public GetAliasDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
@@ -1630,6 +1793,9 @@ namespace Nest
 	{ 
 		Indices IGetAliasesRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Names IGetAliasesRequest.Name => Self.RouteValues.Get<Names>("name");
+			/// <summary>/_aliases</summary>
+		public GetAliasesDescriptor() : base(){}
+
 	
 		///<summary>Explicit operation timeout</summary>
 		public GetAliasesDescriptor Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
@@ -1651,6 +1817,10 @@ namespace Nest
 		Indices IGetFieldMappingRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types IGetFieldMappingRequest.Type => Self.RouteValues.Get<Types>("type");
 		PropertyNames IGetFieldMappingRequest.Field => Self.RouteValues.Get<PropertyNames>("field");
+			/// <summary>/_mapping/field/{field}</summary>
+///<param name="field"> this parameter is required
+		public GetFieldMappingDescriptor(PropertyNames field) : base(r=>r.Required("field", field)){}
+
 	
 		///<summary>Whether the default mapping values should be returned as well</summary>
 		public GetFieldMappingDescriptor<T> IncludeDefaults(bool include_defaults = true) => AssignParam(p=>p.IncludeDefaults(include_defaults));
@@ -1680,6 +1850,9 @@ namespace Nest
 	{ 
 		Indices IGetMappingRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types IGetMappingRequest.Type => Self.RouteValues.Get<Types>("type");
+			/// <summary>/_mapping</summary>
+		public GetMappingDescriptor() : base(){}
+
 	
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public GetMappingDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
@@ -1706,6 +1879,9 @@ namespace Nest
 	{ 
 		Indices IGetIndexSettingsRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Names IGetIndexSettingsRequest.Name => Self.RouteValues.Get<Names>("name");
+			/// <summary>/_settings</summary>
+		public GetIndexSettingsDescriptor() : base(){}
+
 	
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public GetIndexSettingsDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
@@ -1737,6 +1913,9 @@ namespace Nest
 	public partial class UpgradeStatusDescriptor  : RequestDescriptorBase<UpgradeStatusDescriptor,UpgradeStatusRequestParameters, IUpgradeStatusRequest>, IUpgradeStatusRequest
 	{ 
 		Indices IUpgradeStatusRequest.Index => Self.RouteValues.Get<Indices>("index");
+			/// <summary>/_upgrade</summary>
+		public UpgradeStatusDescriptor() : base(){}
+
 	
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public UpgradeStatusDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
@@ -1764,6 +1943,9 @@ namespace Nest
 		Indices IGetWarmerRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Names IGetWarmerRequest.Name => Self.RouteValues.Get<Names>("name");
 		Types IGetWarmerRequest.Type => Self.RouteValues.Get<Types>("type");
+			/// <summary>/_warmer</summary>
+		public GetWarmerDescriptor() : base(){}
+
 	
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public GetWarmerDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
@@ -1789,6 +1971,10 @@ namespace Nest
 	public partial class OpenIndexDescriptor  : RequestDescriptorBase<OpenIndexDescriptor,OpenIndexRequestParameters, IOpenIndexRequest>, IOpenIndexRequest
 	{ 
 		IndexName IOpenIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
+			/// <summary>/{index}/_open</summary>
+///<param name="index"> this parameter is required
+		public OpenIndexDescriptor(IndexName index) : base(r=>r.Required("index", index)){}
+
 	
 		///<summary>Explicit operation timeout</summary>
 		public OpenIndexDescriptor Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
@@ -1817,6 +2003,9 @@ namespace Nest
 	public partial class OptimizeDescriptor  : RequestDescriptorBase<OptimizeDescriptor,OptimizeRequestParameters, IOptimizeRequest>, IOptimizeRequest
 	{ 
 		Indices IOptimizeRequest.Index => Self.RouteValues.Get<Indices>("index");
+			/// <summary>/_optimize</summary>
+		public OptimizeDescriptor() : base(){}
+
 	
 		///<summary>Specify whether the index should be flushed after performing the operation (default: true)</summary>
 		public OptimizeDescriptor Flush(bool flush = true) => AssignParam(p=>p.Flush(flush));
@@ -1855,6 +2044,11 @@ namespace Nest
 	{ 
 		Indices IPutAliasRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Name IPutAliasRequest.Name => Self.RouteValues.Get<Name>("name");
+			/// <summary>/{index}/_alias/{name}</summary>
+///<param name="index"> this parameter is required		
+///<param name="name"> this parameter is required
+		public PutAliasDescriptor(Indices index, Name name) : base(r=>r.Required("index", index).Required("name", name)){}
+
 	
 		///<summary>Explicit timestamp for the document</summary>
 		public PutAliasDescriptor Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
@@ -1875,6 +2069,10 @@ namespace Nest
 	{ 
 		Indices IPutMappingRequest.Index => Self.RouteValues.Get<Indices>("index");
 		TypeName IPutMappingRequest.Type => Self.RouteValues.Get<TypeName>("type");
+			/// <summary>/{index}/{type}/_mapping</summary>
+///<param name="type"> this parameter is required
+		public PutMappingDescriptor(TypeName type) : base(r=>r.Required("type", type)){}
+
 	
 		///<summary>Explicit operation timeout</summary>
 		public PutMappingDescriptor<T> Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
@@ -1906,6 +2104,9 @@ namespace Nest
 	public partial class UpdateSettingsDescriptor  : RequestDescriptorBase<UpdateSettingsDescriptor,UpdateSettingsRequestParameters, IUpdateSettingsRequest>, IUpdateSettingsRequest
 	{ 
 		Indices IUpdateSettingsRequest.Index => Self.RouteValues.Get<Indices>("index");
+			/// <summary>/_settings</summary>
+		public UpdateSettingsDescriptor() : base(){}
+
 	
 		///<summary>Specify timeout for connection to master</summary>
 		public UpdateSettingsDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
@@ -1934,6 +2135,10 @@ namespace Nest
 	public partial class PutTemplateDescriptor  : RequestDescriptorBase<PutTemplateDescriptor,PutTemplateRequestParameters, IPutTemplateRequest>, IPutTemplateRequest
 	{ 
 		Name IPutTemplateRequest.Name => Self.RouteValues.Get<Name>("name");
+			/// <summary>/_template/{name}</summary>
+///<param name="name"> this parameter is required
+		public PutTemplateDescriptor(Name name) : base(r=>r.Required("name", name)){}
+
 	
 		///<summary>Whether the index template should only be added if new or can also replace an existing one</summary>
 		public PutTemplateDescriptor Create(bool create = true) => AssignParam(p=>p.Create(create));
@@ -1961,6 +2166,10 @@ namespace Nest
 		Indices IPutWarmerRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Name IPutWarmerRequest.Name => Self.RouteValues.Get<Name>("name");
 		Types IPutWarmerRequest.Type => Self.RouteValues.Get<Types>("type");
+			/// <summary>/_warmer/{name}</summary>
+///<param name="name"> this parameter is required
+		public PutWarmerDescriptor(Name name) : base(r=>r.Required("name", name)){}
+
 	
 		///<summary>Specify timeout for connection to master</summary>
 		public PutWarmerDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
@@ -1989,6 +2198,9 @@ namespace Nest
 	public partial class RecoveryStatusDescriptor  : RequestDescriptorBase<RecoveryStatusDescriptor,RecoveryStatusRequestParameters, IRecoveryStatusRequest>, IRecoveryStatusRequest
 	{ 
 		Indices IRecoveryStatusRequest.Index => Self.RouteValues.Get<Indices>("index");
+			/// <summary>/_recovery</summary>
+		public RecoveryStatusDescriptor() : base(){}
+
 	
 		///<summary>Whether to display detailed information about shard recovery</summary>
 		public RecoveryStatusDescriptor Detailed(bool detailed = true) => AssignParam(p=>p.Detailed(detailed));
@@ -2011,6 +2223,9 @@ namespace Nest
 	public partial class RefreshDescriptor  : RequestDescriptorBase<RefreshDescriptor,RefreshRequestParameters, IRefreshRequest>, IRefreshRequest
 	{ 
 		Indices IRefreshRequest.Index => Self.RouteValues.Get<Indices>("index");
+			/// <summary>/_refresh</summary>
+		public RefreshDescriptor() : base(){}
+
 	
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public RefreshDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
@@ -2039,6 +2254,9 @@ namespace Nest
 	public partial class SegmentsDescriptor  : RequestDescriptorBase<SegmentsDescriptor,SegmentsRequestParameters, ISegmentsRequest>, ISegmentsRequest
 	{ 
 		Indices ISegmentsRequest.Index => Self.RouteValues.Get<Indices>("index");
+			/// <summary>/_segments</summary>
+		public SegmentsDescriptor() : base(){}
+
 	
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public SegmentsDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
@@ -2067,6 +2285,9 @@ namespace Nest
 	public partial class IndicesShardStoresDescriptor  : RequestDescriptorBase<IndicesShardStoresDescriptor,IndicesShardStoresRequestParameters, IIndicesShardStoresRequest>, IIndicesShardStoresRequest
 	{ 
 		Indices IIndicesShardStoresRequest.Index => Self.RouteValues.Get<Indices>("index");
+			/// <summary>/_shard_stores</summary>
+		public IndicesShardStoresDescriptor() : base(){}
+
 	
 		///<summary>A comma-separated list of statuses used to filter on shards to get store information for</summary>
 		public IndicesShardStoresDescriptor Status(params string[] status) => AssignParam(p=>p.Status(status));
@@ -2099,6 +2320,9 @@ namespace Nest
 	{ 
 		Indices IIndicesStatsRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Metrics IIndicesStatsRequest.Metric => Self.RouteValues.Get<Metrics>("metric");
+			/// <summary>/_stats</summary>
+		public IndicesStatsDescriptor() : base(){}
+
 	
 		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
 		public IndicesStatsDescriptor CompletionFields(params string[] completion_fields) => AssignParam(p=>p.CompletionFields(completion_fields));
@@ -2141,7 +2365,7 @@ namespace Nest
 	///<summary>descriptor for IndicesUpdateAliasesForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
 	public partial class BulkAliasDescriptor  : RequestDescriptorBase<BulkAliasDescriptor,BulkAliasRequestParameters, IBulkAliasRequest>, IBulkAliasRequest
 	{ 
-	
+		
 		///<summary>Request timeout</summary>
 		public BulkAliasDescriptor Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
 
@@ -2160,6 +2384,9 @@ namespace Nest
 	public partial class UpgradeDescriptor  : RequestDescriptorBase<UpgradeDescriptor,UpgradeRequestParameters, IUpgradeRequest>, IUpgradeRequest
 	{ 
 		Indices IUpgradeRequest.Index => Self.RouteValues.Get<Indices>("index");
+			/// <summary>/_upgrade</summary>
+		public UpgradeDescriptor() : base(){}
+
 	
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
 		public UpgradeDescriptor AllowNoIndices(bool allow_no_indices = true) => AssignParam(p=>p.AllowNoIndices(allow_no_indices));
@@ -2189,6 +2416,9 @@ namespace Nest
 	{ 
 		Indices IValidateQueryRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types IValidateQueryRequest.Type => Self.RouteValues.Get<Types>("type");
+			/// <summary>/_validate/query</summary>
+		public ValidateQueryDescriptor() : base(){}
+
 	
 		///<summary>Return detailed information about the error</summary>
 		public ValidateQueryDescriptor<T> Explain(bool explain = true) => AssignParam(p=>p.Explain(explain));
@@ -2240,7 +2470,7 @@ namespace Nest
 	///<summary>descriptor for Info <pre>http://www.elastic.co/guide/</pre></summary>
 	public partial class InfoDescriptor  : RequestDescriptorBase<InfoDescriptor,InfoRequestParameters, IInfoRequest>, IInfoRequest
 	{ 
-	
+		
 		///<summary>The URL-encoded request definition</summary>
 		public InfoDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
@@ -2254,6 +2484,9 @@ namespace Nest
 	{ 
 		IndexName IMultiGetRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		TypeName IMultiGetRequest.Type => Self.RouteValues.Get<TypeName>("type");
+			/// <summary>/_mget</summary>
+		public MultiGetDescriptor() : base(){}
+
 	
 		///<summary>A comma-separated list of fields to return in the response</summary>
 		public MultiGetDescriptor Fields(params string[] fields) => AssignParam(p=>p.Fields(fields));
@@ -2301,6 +2534,9 @@ namespace Nest
 	{ 
 		IndexName IMultiPercolateRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		TypeName IMultiPercolateRequest.Type => Self.RouteValues.Get<TypeName>("type");
+			/// <summary>/_mpercolate</summary>
+		public MultiPercolateDescriptor() : base(){}
+
 	
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public MultiPercolateDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
@@ -2324,6 +2560,9 @@ namespace Nest
 	{ 
 		Indices IMultiSearchRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types IMultiSearchRequest.Type => Self.RouteValues.Get<Types>("type");
+			/// <summary>/_msearch</summary>
+		public MultiSearchDescriptor() : base(){}
+
 	
 		///<summary>Search operation type</summary>
 		public MultiSearchDescriptor SearchType(SearchType search_type) => AssignParam(p=>p.SearchType(search_type));
@@ -2341,6 +2580,9 @@ namespace Nest
 	{ 
 		IndexName IMultiTermVectorsRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		TypeName IMultiTermVectorsRequest.Type => Self.RouteValues.Get<TypeName>("type");
+			/// <summary>/_mtermvectors</summary>
+		public MultiTermVectorsDescriptor() : base(){}
+
 	
 		///<summary>Specifies if total term frequency and document frequency should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
 		public MultiTermVectorsDescriptor<T> TermStatistics(bool term_statistics = true) => AssignParam(p=>p.TermStatistics(term_statistics));
@@ -2394,6 +2636,9 @@ namespace Nest
 	public partial class NodesHotThreadsDescriptor  : RequestDescriptorBase<NodesHotThreadsDescriptor,NodesHotThreadsRequestParameters, INodesHotThreadsRequest>, INodesHotThreadsRequest
 	{ 
 		NodeIds INodesHotThreadsRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
+			/// <summary>/_cluster/nodes/hotthreads</summary>
+		public NodesHotThreadsDescriptor() : base(){}
+
 	
 		///<summary>The interval for the second sampling of threads</summary>
 		public NodesHotThreadsDescriptor Interval(string interval) => AssignParam(p=>p.Interval(interval));
@@ -2423,6 +2668,9 @@ namespace Nest
 	{ 
 		NodeIds INodesInfoRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
 		Metrics INodesInfoRequest.Metric => Self.RouteValues.Get<Metrics>("metric");
+			/// <summary>/_nodes</summary>
+		public NodesInfoDescriptor() : base(){}
+
 	
 		///<summary>Return settings in flat format (default: false)</summary>
 		public NodesInfoDescriptor FlatSettings(bool flat_settings = true) => AssignParam(p=>p.FlatSettings(flat_settings));
@@ -2444,6 +2692,9 @@ namespace Nest
 		Metrics INodesStatsRequest.Metric => Self.RouteValues.Get<Metrics>("metric");
 		Metrics INodesStatsRequest.IndexMetric => Self.RouteValues.Get<Metrics>("index_metric");
 		NodeIds INodesStatsRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
+			/// <summary>/_nodes/stats</summary>
+		public NodesStatsDescriptor() : base(){}
+
 	
 		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
 		public NodesStatsDescriptor CompletionFields(params string[] completion_fields) => AssignParam(p=>p.CompletionFields(completion_fields));
@@ -2492,6 +2743,11 @@ namespace Nest
 		IndexName IPercolateRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		TypeName IPercolateRequest.Type => Self.RouteValues.Get<TypeName>("type");
 		Id IPercolateRequest.Id => Self.RouteValues.Get<Id>("id");
+			/// <summary>/{index}/{type}/_percolate</summary>
+///<param name="index"> this parameter is required		
+///<param name="type"> this parameter is required
+		public PercolateDescriptor(IndexName index, TypeName type) : base(r=>r.Required("index", index).Required("type", type)){}
+
 	
 		///<summary>A comma-separated list of specific routing values</summary>
 		public PercolateDescriptor<T> Routing(params string[] routing) => AssignParam(p=>p.Routing(routing));
@@ -2540,7 +2796,7 @@ namespace Nest
 	///<summary>descriptor for Ping <pre>http://www.elastic.co/guide/</pre></summary>
 	public partial class PingDescriptor  : RequestDescriptorBase<PingDescriptor,PingRequestParameters, IPingRequest>, IPingRequest
 	{ 
-	
+		
 		///<summary>The URL-encoded request definition</summary>
 		public PingDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
@@ -2554,6 +2810,11 @@ namespace Nest
 	{ 
 		Id IPutScriptRequest.Id => Self.RouteValues.Get<Id>("id");
 		Name IPutScriptRequest.Lang => Self.RouteValues.Get<Name>("lang");
+			/// <summary>/_scripts/{lang}/{id}</summary>
+///<param name="lang"> this parameter is required		
+///<param name="id"> this parameter is required
+		public PutScriptDescriptor(Name lang, Id id) : base(r=>r.Required("lang", lang).Required("id", id)){}
+
 	
 		///<summary>Explicit operation type</summary>
 		public PutScriptDescriptor OpType(OpType op_type) => AssignParam(p=>p.OpType(op_type));
@@ -2576,6 +2837,9 @@ namespace Nest
 	public partial class RenderSearchTemplateDescriptor  : RequestDescriptorBase<RenderSearchTemplateDescriptor,RenderSearchTemplateRequestParameters, IRenderSearchTemplateRequest>, IRenderSearchTemplateRequest
 	{ 
 		Id IRenderSearchTemplateRequest.Id => Self.RouteValues.Get<Id>("id");
+			/// <summary>/_render/template</summary>
+		public RenderSearchTemplateDescriptor() : base(){}
+
 	
 		///<summary>The URL-encoded request definition</summary>
 		public RenderSearchTemplateDescriptor Source(string source) => AssignParam(p=>p.Source(source));
@@ -2592,6 +2856,9 @@ namespace Nest
 	public partial class ScrollDescriptor<T>  : RequestDescriptorBase<ScrollDescriptor<T>,ScrollRequestParameters, IScrollRequest>, IScrollRequest
 	{ 
 		ScrollId IScrollRequest.ScrollId => Self.RouteValues.Get<ScrollId>("scroll_id");
+			/// <summary>/_search/scroll</summary>
+		public ScrollDescriptor() : base(){}
+
 	
 		///<summary>The URL-encoded request definition</summary>
 		public ScrollDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
@@ -2606,6 +2873,9 @@ namespace Nest
 	{ 
 		Indices ISearchRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types ISearchRequest.Type => Self.RouteValues.Get<Types>("type");
+			/// <summary>/_search</summary>
+		public SearchDescriptor() : base(){}
+
 	
 		///<summary>The analyzer to use for the query string</summary>
 		public SearchDescriptor<T> Analyzer(string analyzer) => AssignParam(p=>p.Analyzer(analyzer));
@@ -2678,6 +2948,9 @@ namespace Nest
 	{ 
 		Indices ISearchExistsRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types ISearchExistsRequest.Type => Self.RouteValues.Get<Types>("type");
+			/// <summary>/_search/exists</summary>
+		public SearchExistsDescriptor() : base(){}
+
 	
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public SearchExistsDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
@@ -2731,6 +3004,9 @@ namespace Nest
 	{ 
 		Indices ISearchShardsRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types ISearchShardsRequest.Type => Self.RouteValues.Get<Types>("type");
+			/// <summary>/_search_shards</summary>
+		public SearchShardsDescriptor() : base(){}
+
 	
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public SearchShardsDescriptor<T> Preference(string preference) => AssignParam(p=>p.Preference(preference));
@@ -2763,6 +3039,9 @@ namespace Nest
 	{ 
 		Indices ISearchTemplateRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types ISearchTemplateRequest.Type => Self.RouteValues.Get<Types>("type");
+			/// <summary>/_search/template</summary>
+		public SearchTemplateDescriptor() : base(){}
+
 	
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public SearchTemplateDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
@@ -2798,6 +3077,11 @@ namespace Nest
 	{ 
 		Name ISnapshotRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
 		Name ISnapshotRequest.Snapshot => Self.RouteValues.Get<Name>("snapshot");
+			/// <summary>/_snapshot/{repository}/{snapshot}</summary>
+///<param name="repository"> this parameter is required		
+///<param name="snapshot"> this parameter is required
+		public SnapshotDescriptor(Name repository, Name snapshot) : base(r=>r.Required("repository", repository).Required("snapshot", snapshot)){}
+
 	
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public SnapshotDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
@@ -2817,6 +3101,10 @@ namespace Nest
 	public partial class CreateRepositoryDescriptor  : RequestDescriptorBase<CreateRepositoryDescriptor,CreateRepositoryRequestParameters, ICreateRepositoryRequest>, ICreateRepositoryRequest
 	{ 
 		Name ICreateRepositoryRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
+			/// <summary>/_snapshot/{repository}</summary>
+///<param name="repository"> this parameter is required
+		public CreateRepositoryDescriptor(Name repository) : base(r=>r.Required("repository", repository)){}
+
 	
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public CreateRepositoryDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
@@ -2840,6 +3128,11 @@ namespace Nest
 	{ 
 		Name IDeleteSnapshotRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
 		Name IDeleteSnapshotRequest.Snapshot => Self.RouteValues.Get<Name>("snapshot");
+			/// <summary>/_snapshot/{repository}/{snapshot}</summary>
+///<param name="repository"> this parameter is required		
+///<param name="snapshot"> this parameter is required
+		public DeleteSnapshotDescriptor(Name repository, Name snapshot) : base(r=>r.Required("repository", repository).Required("snapshot", snapshot)){}
+
 	
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public DeleteSnapshotDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
@@ -2856,6 +3149,10 @@ namespace Nest
 	public partial class DeleteRepositoryDescriptor  : RequestDescriptorBase<DeleteRepositoryDescriptor,DeleteRepositoryRequestParameters, IDeleteRepositoryRequest>, IDeleteRepositoryRequest
 	{ 
 		Names IDeleteRepositoryRequest.RepositoryName => Self.RouteValues.Get<Names>("repository");
+			/// <summary>/_snapshot/{repository}</summary>
+///<param name="repository"> this parameter is required
+		public DeleteRepositoryDescriptor(Names repository) : base(r=>r.Required("repository", repository)){}
+
 	
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public DeleteRepositoryDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
@@ -2876,6 +3173,11 @@ namespace Nest
 	{ 
 		Name IGetSnapshotRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
 		Names IGetSnapshotRequest.Snapshot => Self.RouteValues.Get<Names>("snapshot");
+			/// <summary>/_snapshot/{repository}/{snapshot}</summary>
+///<param name="repository"> this parameter is required		
+///<param name="snapshot"> this parameter is required
+		public GetSnapshotDescriptor(Name repository, Names snapshot) : base(r=>r.Required("repository", repository).Required("snapshot", snapshot)){}
+
 	
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public GetSnapshotDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
@@ -2892,6 +3194,9 @@ namespace Nest
 	public partial class GetRepositoryDescriptor  : RequestDescriptorBase<GetRepositoryDescriptor,GetRepositoryRequestParameters, IGetRepositoryRequest>, IGetRepositoryRequest
 	{ 
 		Names IGetRepositoryRequest.RepositoryName => Self.RouteValues.Get<Names>("repository");
+			/// <summary>/_snapshot</summary>
+		public GetRepositoryDescriptor() : base(){}
+
 	
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public GetRepositoryDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
@@ -2912,6 +3217,11 @@ namespace Nest
 	{ 
 		Name IRestoreRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
 		Name IRestoreRequest.Snapshot => Self.RouteValues.Get<Name>("snapshot");
+			/// <summary>/_snapshot/{repository}/{snapshot}/_restore</summary>
+///<param name="repository"> this parameter is required		
+///<param name="snapshot"> this parameter is required
+		public RestoreDescriptor(Name repository, Name snapshot) : base(r=>r.Required("repository", repository).Required("snapshot", snapshot)){}
+
 	
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public RestoreDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
@@ -2932,6 +3242,9 @@ namespace Nest
 	{ 
 		Name ISnapshotStatusRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
 		Names ISnapshotStatusRequest.Snapshot => Self.RouteValues.Get<Names>("snapshot");
+			/// <summary>/_snapshot/_status</summary>
+		public SnapshotStatusDescriptor() : base(){}
+
 	
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public SnapshotStatusDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
@@ -2948,6 +3261,10 @@ namespace Nest
 	public partial class VerifyRepositoryDescriptor  : RequestDescriptorBase<VerifyRepositoryDescriptor,VerifyRepositoryRequestParameters, IVerifyRepositoryRequest>, IVerifyRepositoryRequest
 	{ 
 		Name IVerifyRepositoryRequest.RepositoryName => Self.RouteValues.Get<Name>("repository");
+			/// <summary>/_snapshot/{repository}/_verify</summary>
+///<param name="repository"> this parameter is required
+		public VerifyRepositoryDescriptor(Name repository) : base(r=>r.Required("repository", repository)){}
+
 	
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public VerifyRepositoryDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
@@ -2967,6 +3284,9 @@ namespace Nest
 	public partial class SuggestDescriptor<T>  : RequestDescriptorBase<SuggestDescriptor<T>,SuggestRequestParameters, ISuggestRequest>, ISuggestRequest
 	{ 
 		Indices ISuggestRequest.Index => Self.RouteValues.Get<Indices>("index");
+			/// <summary>/_suggest</summary>
+		public SuggestDescriptor() : base(){}
+
 	
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public SuggestDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
@@ -2997,6 +3317,11 @@ namespace Nest
 		IndexName ITermVectorsRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		TypeName ITermVectorsRequest.Type => Self.RouteValues.Get<TypeName>("type");
 		Id ITermVectorsRequest.Id => Self.RouteValues.Get<Id>("id");
+			/// <summary>/{index}/{type}/_termvectors</summary>
+///<param name="index"> this parameter is required		
+///<param name="type"> this parameter is required
+		public TermVectorsDescriptor(IndexName index, TypeName type) : base(r=>r.Required("index", index).Required("type", type)){}
+
 	
 		///<summary>Specifies if total term frequency and document frequency should be returned.</summary>
 		public TermVectorsDescriptor<T> TermStatistics(bool term_statistics = true) => AssignParam(p=>p.TermStatistics(term_statistics));
@@ -3055,6 +3380,12 @@ namespace Nest
 		Id IUpdateRequest.Id => Self.RouteValues.Get<Id>("id");
 		IndexName IUpdateRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		TypeName IUpdateRequest.Type => Self.RouteValues.Get<TypeName>("type");
+			/// <summary>/{index}/{type}/{id}/_update</summary>
+///<param name="index"> this parameter is required		
+///<param name="type"> this parameter is required		
+///<param name="id"> this parameter is required
+		public UpdateDescriptor(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id)){}
+
 	
 		///<summary>Explicit write consistency setting for the operation</summary>
 		public UpdateDescriptor Consistency(Consistency consistency) => AssignParam(p=>p.Consistency(consistency));

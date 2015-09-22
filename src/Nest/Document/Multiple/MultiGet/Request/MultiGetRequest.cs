@@ -22,23 +22,7 @@ namespace Nest
 	[DescriptorFor("Mget")]
 	public partial class MultiGetDescriptor 
 	{
-		private IMultiGetRequest Self => this;
-
 		IList<IMultiGetOperation> IMultiGetRequest.GetOperations { get; set; } = new List<IMultiGetOperation>();
-
-		public MultiGetDescriptor() { }
-
-		public MultiGetDescriptor(Indices indices, Types types)
-			: base(p => p.Required(indices).Required(types))
-		{ }
-
-		public MultiGetDescriptor(Indices indices)
-			: base(p => p.Required(indices))
-		{ }
-
-		public MultiGetDescriptor(Types types)
-			: base(p => p.Required(types))
-		{ }
 
 		public MultiGetDescriptor Get<T>(Func<MultiGetOperationDescriptor<T>, MultiGetOperationDescriptor<T>> getSelector)
 			where T : class

@@ -25,11 +25,6 @@ namespace Nest
 
 		IList<IPercolateOperation> IMultiPercolateRequest.Percolations { get; set; }
 
-		public MultiPercolateDescriptor()
-		{
-			this.Self.Percolations = new List<IPercolateOperation>();
-		}
-
 		public MultiPercolateDescriptor Percolate<T>(Func<PercolateDescriptor<T>, PercolateDescriptor<T>> getSelector) 
 			where T : class
 		{

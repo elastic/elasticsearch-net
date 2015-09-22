@@ -21,25 +21,7 @@ namespace Nest
 	[DescriptorFor("Mtermvectors")]
 	public partial class MultiTermVectorsDescriptor<T> where T : class
 	{
-		private IMultiTermVectorsRequest Self => this;
-
-		IEnumerable<MultiTermVectorDocument> IMultiTermVectorsRequest.Documents { get; set; }
-
-		public MultiTermVectorsDescriptor()
-			: base(p => p.Required(Indices.Single<T>()).Required(Types.Single<T>()))
-		{ }
-
-		public MultiTermVectorsDescriptor(Indices indices, Types types)
-			: base(p => p.Required(indices).Required(types))
-		{ }
-
-		public MultiTermVectorsDescriptor(Indices indices)
-			: base(p => p.Required(indices).Required(Types.Single<T>()))
-		{ }
-
-		public MultiTermVectorsDescriptor(Types types)
-			: base(p => p.Required(types).Required(Indices.Single<T>()))
-		{ }
+		IEnumerable<MultiTermVectorDocument> IMultiTermVectorsRequest.Documents { get; set; }	
 
 		public MultiTermVectorsDescriptor<T> Documents(params Func<MultiTermVectorDocumentDescriptor<T>, IMultiTermVectorDocumentDescriptor>[] documentSelectors)
 		{

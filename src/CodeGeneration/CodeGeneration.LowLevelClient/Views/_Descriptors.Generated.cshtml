@@ -27,6 +27,12 @@ namespace Nest
 	{
 	<text>	@(Raw(part.ClrTypeName)) I@(Raw(method.RequestType)).@(part.InterfaceName) => Self.RouteValues.Get@(Raw(string.Format("<{0}>",part.ClrTypeName)))("@(part.Name)");</text>
 	}
+	@foreach (Constructor c in method.DescriptorConstructors())
+    {
+	<text>	@(Raw(c.Description))
+		@(Raw(c.Generated))
+</text>
+    }
 	</text>foreach (KeyValuePair<string, ApiQueryParameters> kv in method.Url.Params)
 	{
 		var t = @kv.Value.CsharpType(kv.Key);

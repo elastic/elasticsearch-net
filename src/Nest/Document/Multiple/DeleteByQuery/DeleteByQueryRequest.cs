@@ -24,7 +24,6 @@ namespace Nest
 	public partial class DeleteByQueryRequest<T> : RequestBase<DeleteByQueryRequestParameters>, IDeleteByQueryRequest where T : class
 	{
 		public IQueryContainer Query { get; set; }
-
 	}
 
 	public partial class DeleteByQueryDescriptor<T> where T : class
@@ -32,23 +31,6 @@ namespace Nest
 		private IDeleteByQueryRequest Self => this;
 
 		IQueryContainer IDeleteByQueryRequest.Query { get; set; }
-
-		public DeleteByQueryDescriptor()
-			: base(p => p.Required(Indices.Single<T>()).Required(Types.Single<T>()))
-		{ }
-
-		public DeleteByQueryDescriptor(Indices indices, Types types)
-			: base(p => p.Required(indices).Required(types))
-		{ }
-
-		public DeleteByQueryDescriptor(Indices indices)
-			: base(p => p.Required(indices).Required(Types.Single<T>()))
-		{ }
-
-		public DeleteByQueryDescriptor(Types types)
-			: base(p => p.Required(types).Required(Indices.Single<T>()))
-		{ }
-
 
 		public DeleteByQueryDescriptor<T> MatchAll()
 		{

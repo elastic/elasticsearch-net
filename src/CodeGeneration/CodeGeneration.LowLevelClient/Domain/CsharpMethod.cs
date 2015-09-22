@@ -55,10 +55,12 @@ namespace CodeGeneration.LowLevelClient.Domain
 			};
 		}
 
-		public IEnumerable<RequestConstructor> RequestConstructors()
+		private bool IsPartless => this.Url.Parts == null || !this.Url.Parts.Any();
+
+		public IEnumerable<Constructor> RequestConstructors()
 		{
-			var consts = new List<RequestConstructor>();
-			if (this.Url.Parts == null || !this.Url.Parts.Any()) return consts;
+			var ctors = new List<Constructor>();
+			if (IsPartless) return ctors;
 			foreach (var url in this.Url.Paths)
 			{
 				var m = this.RequestType;
@@ -75,13 +77,41 @@ namespace CodeGeneration.LowLevelClient.Domain
 				{
 					doc += "\r\n" + string.Join("\t\t\r\n", cp.Select(p => $"///<param name=\"{p.Key}\">{(p.Value.Required ? "this parameter is required" : "Optional, accepts null")}</param>"));
 				}
-				var c = new RequestConstructor { Generated = $"public {m}({par}) : base({routing}){{}}", Description = doc };
-				consts.Add(c);
+				var c = new Constructor { Generated = $"public {m}({par}) : base({routing}){{}}", Description = doc };
+				ctors.Add(c);
 			}
-			return consts.DistinctBy(c => c.Generated);
+			return ctors.DistinctBy(c => c.Generated);
 		}
 
+		public IEnumerable<Constructor> DescriptorConstructors()
+		{
+			var ctors = new List<Constructor>();
+			if (IsPartless) return ctors;
+			foreach (var url in this.Url.Paths)
+			{
+				var m = this.DescriptorType;
+				var cp = this.Url.Parts
+					.Where(p => !ApiUrl.BlackListRouteValues.Contains(p.Key))
+					.Where(p => p.Value.Required)
+					.Where(p => url.Contains($"{{{p.Value.Name}}}"))
+					.OrderBy(kv => url.IndexOf($"{{{kv.Value.Name}}}", StringComparison.Ordinal));
+				var par = string.Join(", ", cp.Select(p => $"{p.Value.ClrTypeName} {p.Key}"));
+				var routing = string.Empty;
+				if (cp.Any())
+					routing = "r=>r." + string.Join(".", cp.Select(p => $"Required(\"{p.Key}\", {p.Key})"));
+				var doc = $@"/// <summary>{url}</summary>";
+				if (cp.Any())
+				{
+					doc += "\r\n" + string.Join("\t\t\r\n", cp.Select(p => $"///<param name=\"{p.Key}\"> this parameter is required"));
+				}
+				var c = new Constructor { Generated = $"public {m}({par}) : base({routing}){{}}", Description = doc };
+				ctors.Add(c);
+			}
 
+			return ctors.DistinctBy(c => c.Generated);
+		}
+
+		
 		public IEnumerable<ApiUrlPart> AllParts => (this.Url?.Parts?.Values ?? Enumerable.Empty<ApiUrlPart>()).Where(p => !string.IsNullOrWhiteSpace(p.Name));
 	}
 }
