@@ -18,7 +18,6 @@ namespace Nest
 	public partial class PercolateCountRequest<TDocument> : IPercolateCountRequest<TDocument>
 		where TDocument : class
 	{
-		public string Id { get; set; }
 		public int? Size { get; set; }
 		public bool? TrackScores { get; set; }
 		public IDictionary<FieldName, ISort> Sort { get; set; }
@@ -29,6 +28,7 @@ namespace Nest
 
 		public TDocument Document { get; set; }
 		
+		Id IPercolateOperation.Id => ((IPercolateCountRequest)this).Id;
 		IRequestParameters IPercolateOperation.GetRequestParameters()
 		{
 			return this.Self.RequestParameters;
@@ -45,7 +45,7 @@ namespace Nest
 		QueryContainer IPercolateOperation.Query { get; set; }
 		QueryContainer IPercolateOperation.Filter { get; set; }
 
-		string IPercolateOperation.Id { get; set; }
+		Id IPercolateOperation.Id => ((IPercolateCountRequest)this).Id;
 		int? IPercolateOperation.Size { get; set; }
 		bool? IPercolateOperation.TrackScores { get; set; }
 		
@@ -68,23 +68,6 @@ namespace Nest
 			return this;
 		}
 
-		/// <summary>
-		/// The object to perculate
-		/// </summary>
-		public PercolateCountDescriptor<T> Id(string id)
-		{
-			Self.Id = id;
-			return this;
-		}
-
-		/// <summary>
-		/// The object to perculate
-		/// </summary>
-		public PercolateCountDescriptor<T> Id(long id)
-		{
-			Self.Id = id.ToString(CultureInfo.InvariantCulture);
-			return this;
-		}
 		/// <summary>
 		/// Make sure we keep calculating score even if we are sorting on a field.
 		/// </summary>
