@@ -70,10 +70,10 @@ namespace Nest
 		AggregationDictionary Aggregations { get; set; }
 
 		[JsonProperty(PropertyName = "query")]
-		IQueryContainer Query { get; set; }
+		QueryContainer Query { get; set; }
 
 		[JsonProperty(PropertyName = "post_filter")]
-		IQueryContainer PostFilter { get; set; }
+		QueryContainer PostFilter { get; set; }
 
 		[JsonProperty(PropertyName = "inner_hits")]
 		[JsonConverter(typeof (VerbatimDictionaryKeysJsonConverter))]
@@ -113,9 +113,9 @@ namespace Nest
 		public ISourceFilter Source { get; set; }
 		public IList<ISort> Sort { get; set; }
 		public IDictionary<IndexName, double> IndicesBoost { get; set; }
-		public IQueryContainer PostFilter { get; set; }
+		public QueryContainer PostFilter { get; set; }
 		public IDictionary<string, IInnerHitsContainer> InnerHits { get; set; }
-		public IQueryContainer Query { get; set; }
+		public QueryContainer Query { get; set; }
 		public IRescore Rescore { get; set; }
 		public IDictionary<string, ISuggestBucket> Suggest { get; set; }
 		public IHighlightRequest Highlight { get; set; }
@@ -156,9 +156,9 @@ namespace Nest
 		public ISourceFilter Source { get; set; }
 		public IList<ISort> Sort { get; set; }
 		public IDictionary<IndexName, double> IndicesBoost { get; set; }
-		public IQueryContainer PostFilter { get; set; }
+		public QueryContainer PostFilter { get; set; }
 		public IDictionary<string, IInnerHitsContainer> InnerHits { get; set; }
-		public IQueryContainer Query { get; set; }
+		public QueryContainer Query { get; set; }
 		public IRescore Rescore { get; set; }
 		public IDictionary<string, ISuggestBucket> Suggest { get; set; }
 		public IHighlightRequest Highlight { get; set; }
@@ -231,9 +231,9 @@ namespace Nest
 
 		IRescore ISearchRequest.Rescore { get; set; }
 
-		IQueryContainer ISearchRequest.Query { get; set; }
+		QueryContainer ISearchRequest.Query { get; set; }
 
-		IQueryContainer ISearchRequest.PostFilter { get; set; }
+		QueryContainer ISearchRequest.PostFilter { get; set; }
 
 		IList<FieldName> ISearchRequest.Fields { get; set; }
 
@@ -671,15 +671,10 @@ namespace Nest
 			return this.Query(bq);
 		}
 
-		public SearchDescriptor<T> Query(QueryContainer query)
-		{
-			return this.Query((IQueryContainer)query);
-		}
-
 		/// <summary>
 		/// Describe the query to perform using the static Query class
 		/// </summary>
-		public SearchDescriptor<T> Query(IQueryContainer query)
+		public SearchDescriptor<T> Query(QueryContainer query)
 		{
 			if (query == null)
 				return this;

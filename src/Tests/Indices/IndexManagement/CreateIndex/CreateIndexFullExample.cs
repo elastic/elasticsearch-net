@@ -81,8 +81,7 @@ namespace Tests.Indices.IndexManagement
 			}
 		};
 
-		protected override CreateIndexDescriptor ClientDoesThisInternally(CreateIndexDescriptor d) =>
-			d.Index(IndexName);
+		protected override CreateIndexDescriptor NewDescriptor() => new CreateIndexDescriptor(IndexName);
 
 		protected override Func<CreateIndexDescriptor, ICreateIndexRequest> Fluent => d => d
 			.Settings(s => s

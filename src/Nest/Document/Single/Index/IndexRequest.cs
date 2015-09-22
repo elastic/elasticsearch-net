@@ -41,6 +41,8 @@ namespace Nest
 		T IIndexRequest<T>.Document { get; set; }
 
 		public IndexDescriptor<T> Document(T document) => Assign(a => ((IIndexRequest<T>)this).Document = document);
+		public IndexDescriptor<T> Index(IndexName index) => Assign(a => a.RouteValues.Required("index", index));
+		public IndexDescriptor<T> Type(TypeName type) => Assign(a => a.RouteValues.Required("type", type));
 
 	}
 }

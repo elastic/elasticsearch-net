@@ -5,7 +5,7 @@ using Newtonsoft.Json.Linq;
 namespace Nest
 {
 	[JsonConverter(typeof(LazyDocumentJsonConverter))]
-	public interface IDocument
+	public interface ILazyDocument
 	{
 		/// <summary>
 		/// 
@@ -15,7 +15,7 @@ namespace Nest
 		T As<T>() where T : class;
 	}
 
-	public class Document : IDocument
+	public class LazyDocument : ILazyDocument
 	{
 		internal JToken _Value { get; set; }
 

@@ -80,7 +80,7 @@ namespace CodeGeneration.LowLevelClient.Domain
 				var c = new Constructor { Generated = $"public {m}({par}) : base({routing}){{}}", Description = doc };
 				ctors.Add(c);
 			}
-			if (IsDocumentPath && !string.IsNullOrEmpty(this.DescriptorTypeGeneric))
+			if (IsDocumentPath && !string.IsNullOrEmpty(this.RequestTypeGeneric))
 			{
 				var doc = $@"/// <summary>{this.Url.Path}</summary>";
 				doc += "\r\n\t\t\r\n" + $"///<param name=\"document\"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>";

@@ -76,6 +76,7 @@ namespace Nest
 		{
 			throw new NotImplementedException();
 		}
+		public static implicit operator Name(string name) => new Name();
 	}
 
 	public class PropertyNames : IUrlParameter

@@ -11,7 +11,7 @@ namespace Nest
 		string Scroll { get; set; }
 		int? Size { get; set; }
 		
-		IQueryContainer Query { get; set; }
+		QueryContainer Query { get; set; }
 
 		ICreateIndexRequest CreateIndexRequest { get; set; }
 
@@ -23,7 +23,7 @@ namespace Nest
 		public IndexName From { get; set; }
 		public string Scroll { get; set; }
 		public int? Size { get; set; }
-		public IQueryContainer Query { get; set; }
+		public QueryContainer Query { get; set; }
 		public ICreateIndexRequest CreateIndexRequest { get; set; }
 		public IPutMappingRequest PutMappingRequest { get; set; } 
 		public ReindexRequest(IndexName from, IndexName to)
@@ -41,7 +41,7 @@ namespace Nest
 		IndexName IReindexRequest.From { get; set; }
 		string IReindexRequest.Scroll { get; set; }
 		int? IReindexRequest.Size { get; set; }
-		IQueryContainer IReindexRequest.Query { get; set; }
+		QueryContainer IReindexRequest.Query { get; set; }
 		ICreateIndexRequest IReindexRequest.CreateIndexRequest { get; set; }
 		IPutMappingRequest IReindexRequest.PutMappingRequest { get; set; } 
 		
@@ -71,13 +71,13 @@ namespace Nest
 		/// <summary>
 		/// A query to optionally limit the documents to use for the reindex operation.  
 		/// </summary>
-		public ReindexDescriptor<T> Query(Func<QueryContainerDescriptor<T>, IQueryContainer> querySelector) =>
+		public ReindexDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector) =>
 			Assign(a => a.Query = querySelector?.Invoke(new QueryContainerDescriptor<T>()));
 
 		/// <summary>
 		/// A query to optionally limit the documents to use for the reindex operation.  
 		/// </summary>
-		public ReindexDescriptor<T> Query(IQueryContainer query) => Assign(a => a.Query = query);
+		public ReindexDescriptor<T> Query(QueryContainer query) => Assign(a => a.Query = query);
 
 		/// <summary>
 		/// CreateIndex selector, will be passed the a descriptor initialized with the settings from

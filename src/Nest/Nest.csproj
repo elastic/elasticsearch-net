@@ -322,7 +322,7 @@
     <Compile Include="Cat\CatRecovery\CatRecoveryRecord.cs" />
     <Compile Include="Cat\CatPlugins\CatPluginsRecord.cs" />
     <Compile Include="Cat\CatPendingTasks\CatPendingTasksRecord.cs" />
-    <Compile Include="CommonAbstractions\LazyDocument\IDocument.cs" />
+    <Compile Include="CommonAbstractions\LazyDocument\LazyDocument.cs" />
     <Compile Include="QueryDsl\Geo\GeoLocation.cs" />
     <Compile Include="QueryDsl\Geo\GeoPrecision.cs" />
     <Compile Include="Search\Explain\ExplainGet.cs" />

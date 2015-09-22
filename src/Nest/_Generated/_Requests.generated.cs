@@ -1451,11 +1451,6 @@ namespace Nest
 ///<param name="id">this parameter is required</param>
 		public DeleteRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id)){}
 
-		/// <summary>/{index}/{type}/{id}</summary>
-		
-///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
-		public DeleteRequest(Document document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){}
-
 			///<summary>Specific write consistency setting for the operation</summary>
 		public Consistency Consistency { get { return Q<Consistency>("consistency"); } set { Q("consistency", value); } }
 		
@@ -1681,11 +1676,6 @@ namespace Nest
 ///<param name="id">this parameter is required</param>
 		public DocumentExistsRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id)){}
 
-		/// <summary>/{index}/{type}/{id}</summary>
-		
-///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
-		public DocumentExistsRequest(Document document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){}
-
 			///<summary>The ID of the parent document</summary>
 		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
 		
@@ -1727,11 +1717,6 @@ namespace Nest
 ///<param name="type">this parameter is required</param>		
 ///<param name="id">this parameter is required</param>
 		public ExplainRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id)){}
-
-		/// <summary>/{index}/{type}/{id}/_explain</summary>
-		
-///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
-		public ExplainRequest(Document document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){}
 
 			///<summary>Specify whether wildcards and prefix queries in the query string query should be analyzed (default: false)</summary>
 		public bool AnalyzeWildcard { get { return Q<bool>("analyze_wildcard"); } set { Q("analyze_wildcard", value); } }
@@ -2256,11 +2241,6 @@ namespace Nest
 ///<param name="type">this parameter is required</param>		
 ///<param name="id">this parameter is required</param>
 		public GetRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id)){}
-
-		/// <summary>/{index}/{type}/{id}</summary>
-		
-///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
-		public GetRequest(Document document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){}
 
 			///<summary>A comma-separated list of fields to return in the response</summary>
 		public IList<FieldName> Fields { get { return Q<IList<FieldName>>("fields"); } set { Q("fields", value); } }
@@ -4186,11 +4166,6 @@ namespace Nest
 ///<param name="id">this parameter is required</param>
 		public SourceRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id)){}
 
-		/// <summary>/{index}/{type}/{id}/_source</summary>
-		
-///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
-		public SourceRequest(Document document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){}
-
 			///<summary>The ID of the parent document</summary>
 		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
 		
@@ -4351,11 +4326,6 @@ namespace Nest
 ///<param name="type">this parameter is required</param>		
 ///<param name="id">Optional, accepts null</param>
 		public TermVectorsRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Optional("id", id)){}
-
-		/// <summary>/{index}/{type}/_termvectors</summary>
-		
-///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
-		public TermVectorsRequest(Document document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){}
 
 			///<summary>Specifies if total term frequency and document frequency should be returned.</summary>
 		public bool TermStatistics { get { return Q<bool>("term_statistics"); } set { Q("term_statistics", value); } }
