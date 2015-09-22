@@ -5,71 +5,45 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	public interface IScrollRequest : IRequest<ScrollRequestParameters>
+	public partial interface IScrollRequest 
 	{
-		string ScrollId { get; set; }
 		TimeUnitExpression Scroll { get; set; }
 	}
+	
+	//TODO complex old route update routine needs to be ported
 
-	internal static class ScrollPathInfo
-	{
-		public static void Update(
-			IScrollRequest request,
-			IConnectionSettingsValues settings, 
-			ElasticsearchPathInfo<ScrollRequestParameters> pathInfo)
-		{
-			// force POST scrollId can be quite big
-			pathInfo.HttpMethod = HttpMethod.POST;
-			pathInfo.ScrollId = request.ScrollId;
-			// force scroll id out of RequestParameters (potentially very large)
-			request.RequestParameters.RemoveQueryString("scroll_id");
-			request.RequestParameters.AddQueryString("scroll", request.Scroll);
-		}
-	}
+	//internal static class ScrollPathInfo
+	//{
+	//	public static void Update(
+	//		IScrollRequest request,
+	//		IConnectionSettingsValues settings, 
+	//		RouteValues pathInfo)
+	//	{
+	//		// force POST scrollId can be quite big
+	//		pathInfo.HttpMethod = HttpMethod.POST;
+	//		pathInfo.ScrollId = request.ScrollId;
+	//		// force scroll id out of RequestParameters (potentially very large)
+	//		request.RequestParameters.RemoveQueryString("scroll_id");
+	//		request.RequestParameters.AddQueryString("scroll", request.Scroll);
+	//	}
+	//}
 
-	public partial class ScrollRequest : BasePathRequest<ScrollRequestParameters>, IScrollRequest
+	//TODO signal to codegen to not generate constructors for this one
+	public partial class ScrollRequest 
 	{
-		public string ScrollId { get; set; }
 		public TimeUnitExpression Scroll { get; set; }
 
-		public ScrollRequest(string scrollId, TimeUnitExpression scrollTimeout)
+		public ScrollRequest(ScrollId scrollId, TimeUnitExpression scrollTimeout) : this(scrollId)
 		{
-			this.ScrollId = scrollId;
 			this.Scroll = scrollTimeout;
-		}
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ScrollRequestParameters> pathInfo)
-		{
-			ScrollPathInfo.Update(this, settings, pathInfo);
 		}
 	}
 
-	public partial class ScrollDescriptor<T> : BasePathDescriptor<ScrollDescriptor<T>, ScrollRequestParameters>, IScrollRequest,
-		IHideObjectMembers
-		where T : class
+	public partial class ScrollDescriptor<T> where T : class
 	{
-		private IScrollRequest Self => this;
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<ScrollRequestParameters> pathInfo)
-		{
-			ScrollPathInfo.Update(this, settings, pathInfo);
-		}
-
-		string IScrollRequest.ScrollId { get; set; }
 		TimeUnitExpression IScrollRequest.Scroll { get; set; }
-		
+
 		///<summary>Specify how long a consistent view of the index should be maintained for scrolled search</summary>
-		public ScrollDescriptor<T> Scroll(TimeUnitExpression scroll)
-		{
-			Self.Scroll = scroll;
-			return this;
-		}
-		
-		///<summary>The scroll id used to continue/start the scrolled pagination</summary>
-		public ScrollDescriptor<T> ScrollId(string scrollId)
-		{
-			Self.ScrollId = scrollId;
-			return this;
-		}
+		public ScrollDescriptor<T> Scroll(TimeUnitExpression scroll) => Assign(a => a.Scroll = scroll);
 	}
 }

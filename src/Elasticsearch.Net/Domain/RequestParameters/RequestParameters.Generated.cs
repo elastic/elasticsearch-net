@@ -965,20 +965,20 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/master/search-template.html
 	///</pre>
 	///</summary>
-	public class DeleteTemplateRequestParameters : FluentRequestParameters<DeleteTemplateRequestParameters> 
+	public class DeleteSearchTemplateRequestParameters : FluentRequestParameters<DeleteSearchTemplateRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		///<summary>Explicit version number for concurrency control</summary>
-		public DeleteTemplateRequestParameters Version(long version) => this.AddQueryString("version", version);
+		public DeleteSearchTemplateRequestParameters Version(long version) => this.AddQueryString("version", version);
 		
 		///<summary>Specific version type</summary>
-		public DeleteTemplateRequestParameters VersionType(VersionType version_type) => this.AddQueryString("version_type", version_type);
+		public DeleteSearchTemplateRequestParameters VersionType(VersionType version_type) => this.AddQueryString("version_type", version_type);
 		
 		///<summary>The URL-encoded request definition</summary>
-		public DeleteTemplateRequestParameters Source(string source) => this.AddQueryString("source", source);
+		public DeleteSearchTemplateRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public DeleteTemplateRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		public DeleteSearchTemplateRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -1224,20 +1224,20 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/master/search-template.html
 	///</pre>
 	///</summary>
-	public class GetTemplateRequestParameters : FluentRequestParameters<GetTemplateRequestParameters> 
+	public class GetSearchTemplateRequestParameters : FluentRequestParameters<GetSearchTemplateRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Explicit version number for concurrency control</summary>
-		public GetTemplateRequestParameters Version(long version) => this.AddQueryString("version", version);
+		public GetSearchTemplateRequestParameters Version(long version) => this.AddQueryString("version", version);
 		
 		///<summary>Specific version type</summary>
-		public GetTemplateRequestParameters VersionType(VersionType version_type) => this.AddQueryString("version_type", version_type);
+		public GetSearchTemplateRequestParameters VersionType(VersionType version_type) => this.AddQueryString("version_type", version_type);
 		
 		///<summary>The URL-encoded request definition</summary>
-		public GetTemplateRequestParameters Source(string source) => this.AddQueryString("source", source);
+		public GetSearchTemplateRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public GetTemplateRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		public GetSearchTemplateRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -1470,6 +1470,28 @@ namespace Elasticsearch.Net
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public DeleteAliasRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
+	///<summary>Request parameters descriptor for IndicesDeleteTemplateForAll
+	///<pre>
+	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html
+	///</pre>
+	///</summary>
+	public class DeleteTemplateRequestParameters : FluentRequestParameters<DeleteTemplateRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
+		///<summary>Explicit operation timeout</summary>
+		public DeleteTemplateRequestParameters Timeout(string timeout) => this.AddQueryString("timeout", timeout);
+		
+		///<summary>Specify timeout for connection to master</summary>
+		public DeleteTemplateRequestParameters MasterTimeout(string master_timeout) => this.AddQueryString("master_timeout", master_timeout);
+		
+		///<summary>The URL-encoded request definition</summary>
+		public DeleteTemplateRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public DeleteTemplateRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -1828,6 +1850,31 @@ namespace Elasticsearch.Net
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public GetIndexSettingsRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
+	///<summary>Request parameters descriptor for IndicesGetTemplateForAll
+	///<pre>
+	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html
+	///</pre>
+	///</summary>
+	public class GetTemplateRequestParameters : FluentRequestParameters<GetTemplateRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
+		///<summary>Return settings in flat format (default: false)</summary>
+		public GetTemplateRequestParameters FlatSettings(bool flat_settings) => this.AddQueryString("flat_settings", flat_settings);
+		
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public GetTemplateRequestParameters MasterTimeout(string master_timeout) => this.AddQueryString("master_timeout", master_timeout);
+		
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public GetTemplateRequestParameters Local(bool local) => this.AddQueryString("local", local);
+		
+		///<summary>The URL-encoded request definition</summary>
+		public GetTemplateRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public GetTemplateRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -2693,6 +2740,31 @@ namespace Elasticsearch.Net
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public PutScriptRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		
+	}
+	
+	///<summary>Request parameters descriptor for PutTemplate
+	///<pre>
+	///http://www.elastic.co/guide/en/elasticsearch/reference/master/search-template.html
+	///</pre>
+	///</summary>
+	public class PutSearchTemplateRequestParameters : FluentRequestParameters<PutSearchTemplateRequestParameters> 
+	{
+		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+		///<summary>Explicit operation type</summary>
+		public PutSearchTemplateRequestParameters OpType(OpType op_type) => this.AddQueryString("op_type", op_type);
+		
+		///<summary>Explicit version number for concurrency control</summary>
+		public PutSearchTemplateRequestParameters Version(long version) => this.AddQueryString("version", version);
+		
+		///<summary>Specific version type</summary>
+		public PutSearchTemplateRequestParameters VersionType(VersionType version_type) => this.AddQueryString("version_type", version_type);
+		
+		///<summary>The URL-encoded request definition</summary>
+		public PutSearchTemplateRequestParameters Source(string source) => this.AddQueryString("source", source);
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public PutSearchTemplateRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	

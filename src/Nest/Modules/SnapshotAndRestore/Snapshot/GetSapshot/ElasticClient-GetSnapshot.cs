@@ -13,13 +13,13 @@ namespace Nest
 		/// <param name="repository">The repository name under which the snapshots live</param>
 		/// <param name="snapshotName">The names of the snapshots we want information from (can be _all or wildcards)</param>
 		/// <param name="selector">Optionally further describe the get snapshot operation</param>
-		IGetSnapshotResponse GetSnapshot(string repository, string snapshotName, Func<GetSnapshotDescriptor, IGetSnapshotRequest> selector = null);
+		IGetSnapshotResponse GetSnapshot(Name repository, Names snapshots, Func<GetSnapshotDescriptor, IGetSnapshotRequest> selector = null);
 
 		/// <inheritdoc/>
 		IGetSnapshotResponse GetSnapshot(IGetSnapshotRequest getSnapshotRequest);
 
 		/// <inheritdoc/>
-		Task<IGetSnapshotResponse> GetSnapshotAsync(string repository, string snapshotName, Func<GetSnapshotDescriptor, IGetSnapshotRequest> selector = null);
+		Task<IGetSnapshotResponse> GetSnapshotAsync(Name repository, Names snapshots, Func<GetSnapshotDescriptor, IGetSnapshotRequest> selector = null);
 
 		/// <inheritdoc/>
 		Task<IGetSnapshotResponse> GetSnapshotAsync(IGetSnapshotRequest getSnapshotRequest);
@@ -29,8 +29,8 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IGetSnapshotResponse GetSnapshot(string repository, string snapshotName, Func<GetSnapshotDescriptor, IGetSnapshotRequest> selector = null) =>
-			this.GetSnapshot(selector.InvokeOrDefault(new GetSnapshotDescriptor().Snapshot(snapshotName).Repository(repository)));
+		public IGetSnapshotResponse GetSnapshot(Name repository, Names snapshots, Func<GetSnapshotDescriptor, IGetSnapshotRequest> selector = null) =>
+			this.GetSnapshot(selector.InvokeOrDefault(new GetSnapshotDescriptor(repository, snapshots)));
 
 		/// <inheritdoc/>
 		public IGetSnapshotResponse GetSnapshot(IGetSnapshotRequest getSnapshotRequest) => 
@@ -40,8 +40,8 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<IGetSnapshotResponse> GetSnapshotAsync(string repository, string snapshotName, Func<GetSnapshotDescriptor, IGetSnapshotRequest> selector = null) => 
-			this.GetSnapshotAsync(selector.InvokeOrDefault(new GetSnapshotDescriptor().Snapshot(snapshotName).Repository(repository)));
+		public Task<IGetSnapshotResponse> GetSnapshotAsync(Name repository, Names snapshots, Func<GetSnapshotDescriptor, IGetSnapshotRequest> selector = null) => 
+			this.GetSnapshotAsync(selector.InvokeOrDefault(new GetSnapshotDescriptor(repository, snapshots)));
 
 		/// <inheritdoc/>
 		public Task<IGetSnapshotResponse> GetSnapshotAsync(IGetSnapshotRequest getSnapshotRequest) => 

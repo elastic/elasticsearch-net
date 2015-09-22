@@ -6,50 +6,24 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IGetAliasRequest : IIndicesOptionalPath<GetAliasRequestParameters>
+	public partial interface IGetAliasRequest 
 	{
 		[JsonIgnore]
 		string Alias { get; set; }
 	}
+	//TODO alias is {name} in route parameters
 
-	internal static class GetAliasPathInfo
-	{
-		public static void Update(ElasticsearchPathInfo<GetAliasRequestParameters> pathInfo, IGetAliasRequest request)
-		{
-			pathInfo.HttpMethod = HttpMethod.GET;
-			pathInfo.Name = request.Alias ?? "*";
-		}
-	}
-	
-	public partial class GetAliasRequest : IndicesOptionalPathBase<GetAliasRequestParameters>, IGetAliasRequest
+	public partial class GetAliasRequest 
 	{
 		public string Alias { get; set; }
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<GetAliasRequestParameters> pathInfo)
-		{
-			GetAliasPathInfo.Update(pathInfo, this);
-		}
 	}
 
 	[DescriptorFor("IndicesGetAlias")]
 	public partial class GetAliasDescriptor 
-		: IndicesOptionalPathDescriptor<GetAliasDescriptor, GetAliasRequestParameters>, IGetAliasRequest
 	{
-
-		private IGetAliasRequest Self => this;
-
 		string IGetAliasRequest.Alias { get; set; }
 
-		public GetAliasDescriptor Alias(string alias)
-		{
-			Self.Alias = alias;
-			return this;
-		}
+		public GetAliasDescriptor Alias(string alias)=> Assign(a => a.Alias = alias.IsNullOrEmpty() ? "*" : alias);
 
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<GetAliasRequestParameters> pathInfo)
-		{
-			GetAliasPathInfo.Update(pathInfo, this);
-		}
 	}
 }

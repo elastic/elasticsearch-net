@@ -6,10 +6,9 @@ using System.Text;
 
 namespace Nest
 {
-	public interface IClusterStatsRequest : IRequest<ClusterStatsRequestParameters> { }
+	public partial interface IClusterStatsRequest { }
 
-	public partial class ClusterStatsRequest : BasePathRequest<ClusterStatsRequestParameters>, IClusterStatsRequest { }
+	public partial class ClusterStatsRequest { }
 
-	public partial class ClusterStatsDescriptor 
-		: BasePathDescriptor<ClusterStatsDescriptor, ClusterStatsRequestParameters>, IClusterStatsRequest { }
+	public partial class ClusterStatsDescriptor { }
 }

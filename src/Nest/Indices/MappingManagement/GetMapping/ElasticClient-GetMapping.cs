@@ -40,9 +40,8 @@ namespace Nest
 		public IGetMappingResponse GetMapping(IGetMappingRequest getMappingRequest) => 
 			this.Dispatcher.Dispatch<IGetMappingRequest, GetMappingRequestParameters, GetMappingResponse>(
 				getMappingRequest,
-				(p, d) => this.LowLevelDispatch.IndicesGetMappingDispatch<GetMappingResponse>(
-					p.DeserializationOverride(new GetMappingConverter((r, s) => DeserializeGetMappingResponse(r, d, s)))
-				)
+				new GetMappingConverter((r, s) => DeserializeGetMappingResponse(r, getMappingRequest, s)),
+				(p, d) => this.LowLevelDispatch.IndicesGetMappingDispatch<GetMappingResponse>(p)
 			);
 
 		/// <inheritdoc/>
@@ -54,9 +53,8 @@ namespace Nest
 		public Task<IGetMappingResponse> GetMappingAsync(IGetMappingRequest getMappingRequest) => 
 			this.Dispatcher.DispatchAsync<IGetMappingRequest, GetMappingRequestParameters, GetMappingResponse, IGetMappingResponse>(
 				getMappingRequest,
-				(p, d) => this.LowLevelDispatch.IndicesGetMappingDispatchAsync<GetMappingResponse>(
-					p.DeserializationOverride(new GetMappingConverter((r, s) => DeserializeGetMappingResponse(r, d, s)))
-				)
+				new GetMappingConverter((r, s) => DeserializeGetMappingResponse(r, getMappingRequest, s)),
+				(p, d) => this.LowLevelDispatch.IndicesGetMappingDispatchAsync<GetMappingResponse>(p)
 			);
 		
 		//TODO this is too geared towards getting a single mapping

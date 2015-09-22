@@ -6,17 +6,10 @@ using System.Text;
 
 namespace Nest
 {
-	public interface IDeleteAliasRequest : IIndexNamePath<DeleteAliasRequestParameters> { }
+	public partial interface IDeleteAliasRequest { }
 
-	public partial class DeleteAliasRequest : IndexNamePathBase<DeleteAliasRequestParameters>, IDeleteAliasRequest
-	{
-		public DeleteAliasRequest(string index, string name) : base(index, name) { }
-	}
+	public partial class DeleteAliasRequest { }
 
 	[DescriptorFor("IndicesDeleteAlias")]
-	public partial class DeleteAliasDescriptor<T> 
-		: IndexNamePathDescriptor<DeleteAliasDescriptor<T>, DeleteAliasRequestParameters, T>, IDeleteAliasRequest
-		where T : class
-	{
-	}
+	public partial class DeleteAliasDescriptor<T> where T : class { }
 }

@@ -30,7 +30,7 @@ namespace Nest
 	{
 		/// <inheritdoc/>
 		public IIndicesOperationResponse OpenIndex(IndexName index, Func<OpenIndexDescriptor, IOpenIndexRequest> openIndexSelector = null) =>
-			this.OpenIndex(openIndexSelector.InvokeOrDefault(new OpenIndexDescriptor().Index(index)));
+			this.OpenIndex(openIndexSelector.InvokeOrDefault(new OpenIndexDescriptor(index)));
 
 		/// <inheritdoc/>
 		public IIndicesOperationResponse OpenIndex(IOpenIndexRequest openIndexRequest) => 
@@ -41,7 +41,7 @@ namespace Nest
 
 		/// <inheritdoc/>
 		public Task<IIndicesOperationResponse> OpenIndexAsync(IndexName index, Func<OpenIndexDescriptor, IOpenIndexRequest> openIndexSelector = null)=>
-			this.OpenIndexAsync(openIndexSelector.InvokeOrDefault(new OpenIndexDescriptor().Index(index)));
+			this.OpenIndexAsync(openIndexSelector.InvokeOrDefault(new OpenIndexDescriptor(index)));
 
 		/// <inheritdoc/>
 		public Task<IIndicesOperationResponse> OpenIndexAsync(IOpenIndexRequest openIndexRequest) => 

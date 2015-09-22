@@ -7,10 +7,9 @@ using System.Text;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface ICatPluginsRequest : IRequest<CatPluginsRequestParameters> { }
+	public partial interface ICatPluginsRequest { }
 
-	public partial class CatPluginsRequest : BasePathRequest<CatPluginsRequestParameters>, ICatPluginsRequest { }
+	public partial class CatPluginsRequest { }
 
-	public partial class CatPluginsDescriptor : BasePathDescriptor<CatPluginsDescriptor, CatPluginsRequestParameters>, ICatPluginsRequest { }
+	public partial class CatPluginsDescriptor { }
 }

@@ -34,7 +34,7 @@ namespace Nest
 		/// <inheritdoc/>
 		public IIndicesResponse Map<T>(Func<PutMappingDescriptor<T>, IPutMappingRequest> mappingSelector)
 			where T : class => 
-			this.Map(mappingSelector?.Invoke(new PutMappingDescriptor<T>()));
+			this.Map(mappingSelector?.Invoke(new PutMappingDescriptor<T>(typeof(T))));
 
 		/// <inheritdoc/>
 		public IIndicesResponse Map(IPutMappingRequest putMappingRequest) => 
@@ -46,7 +46,7 @@ namespace Nest
 		/// <inheritdoc/>
 		public Task<IIndicesResponse> MapAsync<T>(Func<PutMappingDescriptor<T>, IPutMappingRequest> mappingSelector)
 			where T : class => 
-			this.MapAsync(mappingSelector?.Invoke(new PutMappingDescriptor<T>()));
+			this.MapAsync(mappingSelector?.Invoke(new PutMappingDescriptor<T>(typeof(T))));
 
 		/// <inheritdoc/>
 		public Task<IIndicesResponse> MapAsync(IPutMappingRequest putMappingRequest) => 

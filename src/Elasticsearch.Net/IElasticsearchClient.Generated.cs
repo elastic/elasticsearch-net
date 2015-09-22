@@ -1499,7 +1499,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="id">Template ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> DeleteTemplate<T>(string id, Func<DeleteTemplateRequestParameters, DeleteTemplateRequestParameters> requestParameters = null) where T : class;
+		ElasticsearchResponse<T> DeleteTemplate<T>(string id, Func<DeleteSearchTemplateRequestParameters, DeleteSearchTemplateRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a DELETE on /_search/template/{id}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -1512,7 +1512,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="id">Template ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> DeleteTemplateAsync<T>(string id, Func<DeleteTemplateRequestParameters, DeleteTemplateRequestParameters> requestParameters = null) where T : class;
+		Task<ElasticsearchResponse<T>> DeleteTemplateAsync<T>(string id, Func<DeleteSearchTemplateRequestParameters, DeleteSearchTemplateRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a HEAD on /{index}/{type}/{id}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -1809,7 +1809,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="id">Template ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> GetTemplate<T>(string id, Func<GetTemplateRequestParameters, GetTemplateRequestParameters> requestParameters = null) where T : class;
+		ElasticsearchResponse<T> GetTemplate<T>(string id, Func<GetSearchTemplateRequestParameters, GetSearchTemplateRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a GET on /_search/template/{id}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -1822,7 +1822,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="id">Template ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> GetTemplateAsync<T>(string id, Func<GetTemplateRequestParameters, GetTemplateRequestParameters> requestParameters = null) where T : class;
+		Task<ElasticsearchResponse<T>> GetTemplateAsync<T>(string id, Func<GetSearchTemplateRequestParameters, GetSearchTemplateRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a POST on /{index}/{type}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -5906,7 +5906,7 @@ namespace Elasticsearch.Net
 		///<param name="id">Template ID</param>
 		///<param name="body">The document</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> PutTemplate<T>(string id, PostData<object> body, Func<PutTemplateRequestParameters, PutTemplateRequestParameters> requestParameters = null) where T : class;
+		ElasticsearchResponse<T> PutTemplate<T>(string id, PostData<object> body, Func<PutSearchTemplateRequestParameters, PutSearchTemplateRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a PUT on /_search/template/{id}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -5920,7 +5920,7 @@ namespace Elasticsearch.Net
 		///<param name="id">Template ID</param>
 		///<param name="body">The document</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> PutTemplateAsync<T>(string id, PostData<object> body, Func<PutTemplateRequestParameters, PutTemplateRequestParameters> requestParameters = null) where T : class;
+		Task<ElasticsearchResponse<T>> PutTemplateAsync<T>(string id, PostData<object> body, Func<PutSearchTemplateRequestParameters, PutSearchTemplateRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a POST on /_search/template/{id}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -5934,7 +5934,7 @@ namespace Elasticsearch.Net
 		///<param name="id">Template ID</param>
 		///<param name="body">The document</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> PutTemplatePost<T>(string id, PostData<object> body, Func<PutTemplateRequestParameters, PutTemplateRequestParameters> requestParameters = null) where T : class;
+		ElasticsearchResponse<T> PutTemplatePost<T>(string id, PostData<object> body, Func<PutSearchTemplateRequestParameters, PutSearchTemplateRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a POST on /_search/template/{id}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -5948,7 +5948,7 @@ namespace Elasticsearch.Net
 		///<param name="id">Template ID</param>
 		///<param name="body">The document</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> PutTemplatePostAsync<T>(string id, PostData<object> body, Func<PutTemplateRequestParameters, PutTemplateRequestParameters> requestParameters = null) where T : class;
+		Task<ElasticsearchResponse<T>> PutTemplatePostAsync<T>(string id, PostData<object> body, Func<PutSearchTemplateRequestParameters, PutSearchTemplateRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a GET on /_render/template
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:

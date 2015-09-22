@@ -83,7 +83,7 @@ namespace Tests.Framework.Integration
 
 			this.Client.IndexMany(Project.Projects);
 
-			this.Client.Refresh(r => r.Index<Project>());
+			this.Client.Refresh(c=>c.Index<Project>());
 
 		}
 

@@ -7,13 +7,13 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <inheritdoc/>
-		IDeleteScriptResponse DeleteScript(Func<DeleteScriptDescriptor, IDeleteScriptRequest> deleteScriptSelector);
+		IDeleteScriptResponse DeleteScript(Name language, Id id, Func<DeleteScriptDescriptor, IDeleteScriptRequest> deleteScriptSelector = null);
 
 		/// <inheritdoc/>
 		IDeleteScriptResponse DeleteScript(IDeleteScriptRequest deleteScriptRequest);
 
 		/// <inheritdoc/>
-		Task<IDeleteScriptResponse> DeleteScriptAsync(Func<DeleteScriptDescriptor, IDeleteScriptRequest> deleteScriptSelector);
+		Task<IDeleteScriptResponse> DeleteScriptAsync(Name language, Id id, Func<DeleteScriptDescriptor, IDeleteScriptRequest> deleteScriptSelector = null);
 
 		/// <inheritdoc/>
 		Task<IDeleteScriptResponse> DeleteScriptAsync(IDeleteScriptRequest deleteScriptRequest);
@@ -29,12 +29,12 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public IDeleteScriptResponse DeleteScript(Func<DeleteScriptDescriptor, IDeleteScriptRequest> deleteScriptSelector) =>
-			this.DeleteScript(deleteScriptSelector?.Invoke(new DeleteScriptDescriptor()));
+		public IDeleteScriptResponse DeleteScript(Name language, Id id, Func<DeleteScriptDescriptor, IDeleteScriptRequest> deleteScriptSelector = null) =>
+			this.DeleteScript(deleteScriptSelector.InvokeOrDefault(new DeleteScriptDescriptor(language, id)));
 
 		/// <inheritdoc/>
-		public Task<IDeleteScriptResponse> DeleteScriptAsync(Func<DeleteScriptDescriptor, IDeleteScriptRequest> deleteScriptSelector) => 
-			this.DeleteScriptAsync(deleteScriptSelector?.Invoke(new DeleteScriptDescriptor()));
+		public Task<IDeleteScriptResponse> DeleteScriptAsync(Name language, Id id, Func<DeleteScriptDescriptor, IDeleteScriptRequest> deleteScriptSelector = null) => 
+			this.DeleteScriptAsync(deleteScriptSelector.InvokeOrDefault(new DeleteScriptDescriptor(language, id)));
 
 		/// <inheritdoc/>
 		public Task<IDeleteScriptResponse> DeleteScriptAsync(IDeleteScriptRequest deleteScriptRequest) => 

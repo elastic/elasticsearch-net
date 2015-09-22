@@ -6,27 +6,13 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IClusterStateRequest : IIndicesOptionalPath<ClusterStateRequestParameters>
+	public partial interface IClusterStateRequest { }
+
+	public partial class ClusterStateRequest { }
+
+	public partial class ClusterStateDescriptor 
 	{
-		IEnumerable<ClusterStateMetric> Metrics { get; set; }
-	}
-
-	public partial class ClusterStateRequest : IndicesOptionalPathBase<ClusterStateRequestParameters>, IClusterStateRequest
-	{
-		public IEnumerable<ClusterStateMetric> Metrics { get; set; }
-	}
-
-
-	public partial class ClusterStateDescriptor : IndicesOptionalPathDescriptor<ClusterStateDescriptor, ClusterStateRequestParameters>, IClusterStateRequest
-	{
-		private IClusterStateRequest Self => this;
-
-		IEnumerable<ClusterStateMetric> IClusterStateRequest.Metrics { get; set; }
-		public ClusterStateDescriptor Metrics(params ClusterStateMetric[] metrics)
-		{
-			Self.Metrics = metrics;
-			return this;
-		}
+		public ClusterStateDescriptor Metrics(params ClusterStateMetric[] metrics) => Assign(a => a.RouteValues.Required(metrics));
+		public ClusterStateDescriptor Metrics(IEnumerable<ClusterStateMetric> metrics) => Assign(a => a.RouteValues.Required(metrics));
 	}
 }

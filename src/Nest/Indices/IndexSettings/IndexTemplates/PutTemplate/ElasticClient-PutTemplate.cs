@@ -17,13 +17,13 @@ namespace Nest
 		/// </summary>
 		/// <param name="name">The name of the template to register</param>
 		/// <param name="putTemplateSelector">An optional selector specifying additional parameters for the put template operation</param>
-		IIndicesOperationResponse PutTemplate(string name, Func<PutTemplateDescriptor, IPutTemplateRequest> putTemplateSelector);
+		IIndicesOperationResponse PutTemplate(Name name, Func<PutTemplateDescriptor, IPutTemplateRequest> putTemplateSelector);
 
 		/// <inheritdoc/>
 		IIndicesOperationResponse PutTemplate(IPutTemplateRequest putTemplateRequest);
 
 		/// <inheritdoc/>
-		Task<IIndicesOperationResponse> PutTemplateAsync(string name, Func<PutTemplateDescriptor, IPutTemplateRequest> putTemplateSelector);
+		Task<IIndicesOperationResponse> PutTemplateAsync(Name name, Func<PutTemplateDescriptor, IPutTemplateRequest> putTemplateSelector);
 
 		/// <inheritdoc/>
 		Task<IIndicesOperationResponse> PutTemplateAsync(IPutTemplateRequest putTemplateRequest);
@@ -32,8 +32,8 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IIndicesOperationResponse PutTemplate(string name, Func<PutTemplateDescriptor, IPutTemplateRequest> putTemplateSelector) => 
-			this.PutTemplate(putTemplateSelector.InvokeOrDefault(new PutTemplateDescriptor(ConnectionSettings).Name(name)));
+		public IIndicesOperationResponse PutTemplate(Name name, Func<PutTemplateDescriptor, IPutTemplateRequest> putTemplateSelector) => 
+			this.PutTemplate(putTemplateSelector.InvokeOrDefault(new PutTemplateDescriptor(name)));
 
 		/// <inheritdoc/>
 		public IIndicesOperationResponse PutTemplate(IPutTemplateRequest putTemplateRequest) => 
@@ -43,8 +43,8 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<IIndicesOperationResponse> PutTemplateAsync(string name, Func<PutTemplateDescriptor, IPutTemplateRequest> putTemplateSelector) =>
-			this.PutTemplateAsync(putTemplateSelector.InvokeOrDefault(new PutTemplateDescriptor(ConnectionSettings).Name(name)));
+		public Task<IIndicesOperationResponse> PutTemplateAsync(Name name, Func<PutTemplateDescriptor, IPutTemplateRequest> putTemplateSelector) =>
+			this.PutTemplateAsync(putTemplateSelector.InvokeOrDefault(new PutTemplateDescriptor(name)));
 
 		/// <inheritdoc/>
 		public Task<IIndicesOperationResponse> PutTemplateAsync(IPutTemplateRequest putTemplateRequest) => 

@@ -7,9 +7,8 @@ using Newtonsoft.Json;
 namespace Nest
 {
 
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(CustomJsonConverter))]
-	public interface ISuggestRequest : IIndicesOptionalExplicitAllPath<SuggestRequestParameters>, ICustomJson
+	public partial interface ISuggestRequest : ICustomJson
 	{
 		string GlobalText { get; set; }
 		IDictionary<string, ISuggester> Suggest { get; set; }
@@ -17,6 +16,7 @@ namespace Nest
 
 	internal static class SuggestPathInfo
 	{
+		//TODO this is ugly
 		public static object GetCustomJson(ISuggestRequest suggestRequest)
 		{
 			if (suggestRequest == null || (suggestRequest.GlobalText.IsNullOrEmpty() && suggestRequest.Suggest == null))
@@ -48,9 +48,8 @@ namespace Nest
 		}
 	}
 
-	public partial class SuggestRequest : IndicesOptionalExplicitAllPathBase<SuggestRequestParameters>, ISuggestRequest
+	public partial class SuggestRequest 
 	{
-		public SuggestRequest(Indices indices) : base(indices) { }
 		public string GlobalText { get; set; }
 		public IDictionary<string, ISuggester> Suggest { get; set; }
 
@@ -59,18 +58,14 @@ namespace Nest
 
 
 	[DescriptorFor("Suggest")]
-	public partial class SuggestDescriptor<T> : IndicesOptionalExplicitAllPathDescriptor<SuggestDescriptor<T>, SuggestRequestParameters>, ISuggestRequest
-		where T : class
+	public partial class SuggestDescriptor<T> where T : class
 	{
 		private ISuggestRequest Self => this;
-
-		public SuggestDescriptor() : base(Indices.Type<T>()) { }
-		public SuggestDescriptor(Indices indices) : base(indices) { }
 
 		object ICustomJson.GetCustomJson() { return SuggestPathInfo.GetCustomJson(this); }
 
 		string ISuggestRequest.GlobalText { get; set; }
-		IDictionary<string, ISuggester> ISuggestRequest.Suggest { get; set; }= new Dictionary<string, ISuggester>();
+		IDictionary<string, ISuggester> ISuggestRequest.Suggest { get; set; } = new Dictionary<string, ISuggester>();
 
 		/// <summary>
 		/// To avoid repetition of the suggest text, it is possible to define a global text.

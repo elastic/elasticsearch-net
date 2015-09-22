@@ -67,7 +67,7 @@ namespace Tests.Framework
 			Func<string, IElasticClient, TInitializer, Task<TResponse>> requestAsync
 		)
 			where TResponse : class, IResponse
-			where TDescriptor : class, TInterface, new()
+			where TDescriptor : class, TInterface
 			where TInitializer : class, TInterface
 			where TInterface : class
 		{

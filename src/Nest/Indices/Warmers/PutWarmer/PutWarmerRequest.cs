@@ -6,40 +6,27 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(CustomJsonConverter))]
-	public interface IPutWarmerRequest : IIndicesOptionalTypesNamePath<PutWarmerRequestParameters>, ICustomJson
+	public partial interface IPutWarmerRequest : ICustomJson
 	{
-		ISearchRequest SearchDescriptor { get; set; }
+		ISearchRequest Search { get; set; }
 	}
 
-	public partial class PutWarmerRequest : IndicesOptionalTypesNamePathBase<PutWarmerRequestParameters>, IPutWarmerRequest
+	public partial class PutWarmerRequest 
 	{
-		public PutWarmerRequest(string name)
-		{
-			this.Name = name;
-		}
+		public ISearchRequest Search { get; set; }
 
-		public ISearchRequest SearchDescriptor { get; set; }
-
-		object ICustomJson.GetCustomJson() { return this.SearchDescriptor; }
+		object ICustomJson.GetCustomJson() { return this.Search; }
 
 	}
 	[DescriptorFor("IndicesPutWarmer")]
-	public partial class PutWarmerDescriptor : IndicesOptionalTypesNamePathDescriptor<PutWarmerDescriptor, PutWarmerRequestParameters>
-		, IPutWarmerRequest
+	public partial class PutWarmerDescriptor 
 	{
-		private IPutWarmerRequest Self => this;
+		ISearchRequest IPutWarmerRequest.Search { get; set; }
 
-		ISearchRequest IPutWarmerRequest.SearchDescriptor { get; set; }
+		public PutWarmerDescriptor Search<T>(Func<SearchDescriptor<T>, ISearchRequest> selector) where T : class =>
+			Assign(a => a.Search = selector?.Invoke(new SearchDescriptor<T>()));
 
-		public PutWarmerDescriptor Search<T>(Func<SearchDescriptor<T>, SearchDescriptor<T>> selector)
-			where T : class
-		{
-			Self.SearchDescriptor = selector(new SearchDescriptor<T>());
-			return this;
-		}
-
-		object ICustomJson.GetCustomJson() { return Self.SearchDescriptor; }
+		object ICustomJson.GetCustomJson() => ((IPutWarmerRequest)this).Search;
 	}
 }

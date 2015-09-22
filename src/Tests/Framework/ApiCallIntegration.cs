@@ -12,7 +12,7 @@ namespace Tests.Framework
 	public abstract class ApiCallIntegration<TResponse, TInterface, TDescriptor, TInitializer> : 
 		ApiCallExample<TResponse, TInterface, TDescriptor, TInitializer>
 		where TResponse : class, IResponse
-		where TDescriptor : class, TInterface, new() 
+		where TDescriptor : class, TInterface
 		where TInitializer : class, TInterface
 		where TInterface : class
 	{

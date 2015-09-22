@@ -31,24 +31,24 @@ namespace Nest
 		public bool? FieldStatistics { get; set; }
 	}
 
-	public class MultiTermVectorDocumentDescriptor<T> : DocumentOptionalPathDescriptor<MultiTermVectorDocumentDescriptor<T>, MultiTermVectorsRequestParameters, T>, 
+	public class MultiTermVectorDocumentDescriptor<T> : RequestDescriptorBase<MultiTermVectorDocumentDescriptor<T>, MultiTermVectorsRequestParameters>, 
 		IMultiTermVectorDocumentDescriptor 
 		where T : class
 	{
 
-		protected IDocumentOptionalPath<MultiTermVectorsRequestParameters> Self => this;
-		
 		MultiTermVectorDocument IMultiTermVectorDocumentDescriptor.Document { get; set; }
 
 		MultiTermVectorDocument IMultiTermVectorDocumentDescriptor.GetDocument()
 		{
-			IMultiTermVectorDocumentDescriptor d = this;
-			if (d.Document == null) d.Document = new MultiTermVectorDocument();
-			d.Document.Id = Self.Id;
-			d.Document.Document = d.Document.Document;
-			d.Document.Type = Self.Type;
-			d.Document.Index = Self.Index;
-			return d.Document;
+			// TODO : Fix this
+			//IMultiTermVectorDocumentDescriptor d = this;
+			//if (d.Document == null) d.Document = new MultiTermVectorDocument();
+			//d.Document.Id = Self.Id;
+			//d.Document.Document = d.Document.Document;
+			//d.Document.Type = Self.Type;
+			//d.Document.Index = Self.Index;
+			//return d.Document;
+			return null; 
 		}
 
 		private MultiTermVectorDocumentDescriptor<T> SetDocValue(Action<IMultiTermVectorDocumentDescriptor> setter)
@@ -98,10 +98,6 @@ namespace Nest
 		public MultiTermVectorDocumentDescriptor<T> FieldStatistics (bool fieldStatistics = true)
 		{
 			return this.SetDocValue(d => d.Document.FieldStatistics = fieldStatistics);
-		}
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<MultiTermVectorsRequestParameters> pathInfo)
-		{
 		}
 	}
 }

@@ -31,7 +31,7 @@ namespace Nest
 
 		/// <inheritdoc/>
 		public IIndicesOperationResponse CloseIndex(IndexName index, Func<CloseIndexDescriptor, ICloseIndexRequest> closeIndexSelector = null) =>
-			this.CloseIndex(closeIndexSelector.InvokeOrDefault(new CloseIndexDescriptor().Index(index)));
+			this.CloseIndex(closeIndexSelector.InvokeOrDefault(new CloseIndexDescriptor(index)));
 
 		/// <inheritdoc/>
 		public IIndicesOperationResponse CloseIndex(ICloseIndexRequest closeIndexRequest) => 
@@ -42,7 +42,7 @@ namespace Nest
 
 		/// <inheritdoc/>
 		public Task<IIndicesOperationResponse> CloseIndexAsync(IndexName index, Func<CloseIndexDescriptor, ICloseIndexRequest> closeIndexSelector = null) =>
-			this.CloseIndexAsync(closeIndexSelector.InvokeOrDefault(new CloseIndexDescriptor().Index(index)));
+			this.CloseIndexAsync(closeIndexSelector.InvokeOrDefault(new CloseIndexDescriptor(index)));
 
 		/// <inheritdoc/>
 		public Task<IIndicesOperationResponse> CloseIndexAsync(ICloseIndexRequest closeIndexRequest) => 

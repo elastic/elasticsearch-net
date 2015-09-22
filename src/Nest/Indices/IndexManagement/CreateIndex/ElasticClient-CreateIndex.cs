@@ -13,13 +13,13 @@ namespace Nest
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-create-index.html
 		/// </summary>
 		/// <param name="createIndexSelector">A descriptor that describes the parameters for the create index operation</param>
-		IIndicesOperationResponse CreateIndex(IndexName indexName, Func<CreateIndexDescriptor, ICreateIndexRequest> createIndexSelector = null);
+		IIndicesOperationResponse CreateIndex(IndexName index, Func<CreateIndexDescriptor, ICreateIndexRequest> createIndexSelector = null);
 
 		/// <inheritdoc/>
 		IIndicesOperationResponse CreateIndex(ICreateIndexRequest createIndexRequest);
 
 		/// <inheritdoc/>
-		Task<IIndicesOperationResponse> CreateIndexAsync(IndexName indexName, Func<CreateIndexDescriptor, ICreateIndexRequest> createIndexSelector = null);
+		Task<IIndicesOperationResponse> CreateIndexAsync(IndexName index, Func<CreateIndexDescriptor, ICreateIndexRequest> createIndexSelector = null);
 
 		/// <inheritdoc/>
 		Task<IIndicesOperationResponse> CreateIndexAsync(ICreateIndexRequest createIndexRequest);
@@ -28,8 +28,8 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IIndicesOperationResponse CreateIndex(IndexName indexName, Func<CreateIndexDescriptor, ICreateIndexRequest> createIndexSelector = null) =>
-			this.CreateIndex(createIndexSelector.InvokeOrDefault(new CreateIndexDescriptor().Index(indexName)));
+		public IIndicesOperationResponse CreateIndex(IndexName index, Func<CreateIndexDescriptor, ICreateIndexRequest> createIndexSelector = null) =>
+			this.CreateIndex(createIndexSelector.InvokeOrDefault(new CreateIndexDescriptor(index)));
 
 		/// <inheritdoc/>
 		public IIndicesOperationResponse CreateIndex(ICreateIndexRequest createIndexRequest) => 
@@ -39,8 +39,8 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<IIndicesOperationResponse> CreateIndexAsync(IndexName indexName, Func<CreateIndexDescriptor, ICreateIndexRequest> createIndexSelector = null) => 
-			this.CreateIndexAsync(createIndexSelector.InvokeOrDefault(new CreateIndexDescriptor().Index(indexName)));
+		public Task<IIndicesOperationResponse> CreateIndexAsync(IndexName index, Func<CreateIndexDescriptor, ICreateIndexRequest> createIndexSelector = null) => 
+			this.CreateIndexAsync(createIndexSelector.InvokeOrDefault(new CreateIndexDescriptor(index)));
 
 		/// <inheritdoc/>
 		public Task<IIndicesOperationResponse> CreateIndexAsync(ICreateIndexRequest createIndexRequest) => 

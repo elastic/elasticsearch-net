@@ -18,30 +18,28 @@ namespace Nest
 
 		private ICatResponse<TCatRecord> DoCat<TRequest, TParams, TCatRecord>(
 			TRequest request,
-			Func<ElasticsearchPathInfo<TParams>, ElasticsearchResponse<CatResponse<TCatRecord>>> dispatch
+			Func<IRequest<TParams>, ElasticsearchResponse<CatResponse<TCatRecord>>> dispatch
 			)
 			where TCatRecord : ICatRecord
 			where TParams : FluentRequestParameters<TParams>, new()
 			where TRequest : IRequest<TParams> => 
 			this.Dispatcher.Dispatch<TRequest, TParams, CatResponse<TCatRecord>>(
-				this.ForceConfiguration(request, c => c.ContentType = "application/json"),
-				(p, d) => dispatch(p.DeserializationOverride(
-					new Func<IApiCallDetails, Stream, CatResponse<TCatRecord>>(this.DeserializeCatResponse<TCatRecord>))
-					)
-				);
+				this.ForceConfiguration<TRequest, TParams>(request, c => c.ContentType = "application/json"),
+				new Func<IApiCallDetails, Stream, CatResponse<TCatRecord>>(this.DeserializeCatResponse<TCatRecord>),
+				(p, d) => dispatch(p)
+			);
 
 		private Task<ICatResponse<TCatRecord>> DoCatAsync<TRequest, TParams, TCatRecord>(
 			TRequest request,
-			Func<ElasticsearchPathInfo<TParams>, Task<ElasticsearchResponse<CatResponse<TCatRecord>>>> dispatch
+			Func<IRequest<TParams>, Task<ElasticsearchResponse<CatResponse<TCatRecord>>>> dispatch
 			)
 			where TCatRecord : ICatRecord
 			where TParams : FluentRequestParameters<TParams>, new()
 			where TRequest : IRequest<TParams> => 
 			this.Dispatcher.DispatchAsync<TRequest, TParams, CatResponse<TCatRecord>, ICatResponse<TCatRecord>>(
-				this.ForceConfiguration(request, c => c.ContentType = "application/json"),
-				(p, d) => dispatch(p.DeserializationOverride(
-					new Func<IApiCallDetails, Stream, CatResponse<TCatRecord>>(this.DeserializeCatResponse<TCatRecord>))
-				)
+				this.ForceConfiguration<TRequest, TParams>(request, c => c.ContentType = "application/json"),
+				new Func<IApiCallDetails, Stream, CatResponse<TCatRecord>>(this.DeserializeCatResponse<TCatRecord>),
+				(p, d) => dispatch(p)
 			);
 	
 	}

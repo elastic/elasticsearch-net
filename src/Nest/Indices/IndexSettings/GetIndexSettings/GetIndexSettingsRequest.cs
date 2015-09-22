@@ -6,18 +6,10 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IGetIndexSettingsRequest : IIndicesOptionalPath<GetIndexSettingsRequestParameters> { }
+	public partial interface IGetIndexSettingsRequest { }
 
-	public partial class GetIndexSettingsRequest : IndicesOptionalPathBase<GetIndexSettingsRequestParameters>, IGetIndexSettingsRequest
-	{
-		public GetIndexSettingsRequest() { }
-		public GetIndexSettingsRequest(IndexName index) { this.Indices = new []{ index }; }
-	}
+	public partial class GetIndexSettingsRequest { }
 
 	[DescriptorFor("IndicesGetSettings")]
-	public partial class GetIndexSettingsDescriptor 
-		: IndicesOptionalPathDescriptor<GetIndexSettingsDescriptor, GetIndexSettingsRequestParameters>, IGetIndexSettingsRequest
-	{
-	}
+	public partial class GetIndexSettingsDescriptor { }
 }

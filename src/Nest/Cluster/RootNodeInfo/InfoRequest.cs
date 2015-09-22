@@ -6,11 +6,10 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IInfoRequest : IRequest<InfoRequestParameters> { }
+	public partial interface IInfoRequest { }
 
-	public partial class InfoRequest : BasePathRequest<InfoRequestParameters>, IInfoRequest { }
+	public partial class InfoRequest { }
 
 	[DescriptorFor("Info")]
-	public partial class InfoDescriptor : BasePathDescriptor<InfoDescriptor, InfoRequestParameters>, IInfoRequest { }
+	public partial class InfoDescriptor { }
 }

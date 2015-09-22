@@ -6,36 +6,18 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface INodesInfoRequest : INodeIdOptionalPath<NodesInfoRequestParameters>
+	public partial interface INodesInfoRequest 
 	{
 		IEnumerable<NodesInfoMetric> Metrics { get; set; }
-		
 	}
 
-	internal static class NodesInfoPathInfo
-	{
-		public static void Update(ElasticsearchPathInfo<NodesInfoRequestParameters> pathInfo, INodesInfoRequest request)
-		{
-			if (request.Metrics != null)
-				pathInfo.Metric = request.Metrics.Cast<Enum>().GetStringValue();
-			pathInfo.HttpMethod = HttpMethod.GET;
-		}
-	}
-	
-	public partial class NodesInfoRequest : NodeIdOptionalPathBase<NodesInfoRequestParameters>, INodesInfoRequest
+	public partial class NodesInfoRequest 
 	{
 		public IEnumerable<NodesInfoMetric> Metrics { get; set; }
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<NodesInfoRequestParameters> pathInfo)
-		{
-			NodesInfoPathInfo.Update(pathInfo, this);
-		}
-
 	}
 
 	[DescriptorFor("NodesInfo")]
-	public partial class NodesInfoDescriptor : NodeIdOptionalDescriptor<NodesInfoDescriptor, NodesInfoRequestParameters>, INodesInfoRequest
+	public partial class NodesInfoDescriptor 
 	{
 		private INodesInfoRequest Self => this;
 		IEnumerable<NodesInfoMetric> INodesInfoRequest.Metrics { get; set; }
@@ -45,11 +27,5 @@ namespace Nest
 			Self.Metrics = metrics;
 			return this;
 		}
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<NodesInfoRequestParameters> pathInfo)
-		{
-			NodesInfoPathInfo.Update(pathInfo, this);
-		}
-
 	}
 }
