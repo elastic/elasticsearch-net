@@ -72,5 +72,7 @@ namespace Nest
 			return !other.IsNullOrEmpty() && other == this.Name;
 		}
 		public string GetString(IConnectionConfigurationValues settings) => ((IUrlParameter)Types.Single(this)).GetString(settings);
+
+		public static TypeName From<T>() => typeof(T);
 	}
 }

@@ -46,6 +46,8 @@ namespace Nest
 		public static implicit operator Types(string typesString) => Parse(typesString);
 		public static implicit operator Types(AllTypes all) => new Types(all);
 		public static implicit operator Types(ManyTypes many) => new Types(many);
+		public static implicit operator Types(TypeName type) => Types.Single(type);
+		public static implicit operator Types(Type type) => Types.Single(type);
 
 		string IUrlParameter.GetString(IConnectionConfigurationValues settings)
 		{

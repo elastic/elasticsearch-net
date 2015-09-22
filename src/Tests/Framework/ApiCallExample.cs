@@ -11,7 +11,7 @@ namespace Tests.Framework
 {
 	public abstract class ApiCallExample<TResponse, TInterface, TDescriptor, TInitializer> : SerializationBase
 		where TResponse : class, IResponse
-		where TDescriptor : class, TInterface, new()
+		where TDescriptor : class, TInterface
 		where TInitializer : class, TInterface
 		where TInterface : class
 	{
@@ -130,6 +130,9 @@ namespace Tests.Framework
 
 		[U]
 		protected void SerializesFluent() =>
-			this.AssertSerializesAndRoundTrips(this.Fluent(this.ClientDoesThisInternally(new TDescriptor())));
+			this.AssertSerializesAndRoundTrips(this.Fluent(this.ClientDoesThisInternally(NewDescriptor())));
+
+		protected virtual TDescriptor NewDescriptor() => Activator.CreateInstance<TDescriptor>();
+
 	}
 }

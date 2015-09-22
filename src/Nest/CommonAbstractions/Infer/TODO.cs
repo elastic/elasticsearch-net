@@ -105,6 +105,7 @@ namespace Nest
 		internal Document(Id id) { Self.Id = id; }
 
 		public static Document<T> Id(Id id) => new Document<T>(id);
+		public static Document<T> From(T @object) => new Document<T>(Nest.Id.From(@object));
 
 		public Document<T> Index(IndexName index)
 		{

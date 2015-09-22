@@ -61,9 +61,9 @@ namespace CodeGeneration.LowLevelClient.Domain
 		{
 			var ctors = new List<Constructor>();
 			if (IsPartless) return ctors;
+			var m = this.RequestType;
 			foreach (var url in this.Url.Paths)
 			{
-				var m = this.RequestType;
 				var cp = this.Url.Parts
 					.Where(p => !ApiUrl.BlackListRouteValues.Contains(p.Key))
 					.Where(p => url.Contains($"{{{p.Value.Name}}}"))
@@ -78,6 +78,14 @@ namespace CodeGeneration.LowLevelClient.Domain
 					doc += "\r\n" + string.Join("\t\t\r\n", cp.Select(p => $"///<param name=\"{p.Key}\">{(p.Value.Required ? "this parameter is required" : "Optional, accepts null")}</param>"));
 				}
 				var c = new Constructor { Generated = $"public {m}({par}) : base({routing}){{}}", Description = doc };
+				ctors.Add(c);
+			}
+			if (IsDocumentPath && !string.IsNullOrEmpty(this.DescriptorTypeGeneric))
+			{
+				var doc = $@"/// <summary>{this.Url.Path}</summary>";
+				doc += "\r\n\t\t\r\n" + $"///<param name=\"document\"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>";
+				var documentRoute = "r=>r.Required(\"index\", document.Self.Index).Required(\"type\", document.Self.Type).Required(\"id\", document.Self.Id)";
+				var c = new Constructor { Generated = $"public {m}(Document{this.RequestTypeGeneric} document) : base({documentRoute}){{}}", Description = doc };
 				ctors.Add(c);
 			}
 			return ctors.DistinctBy(c => c.Generated);
@@ -107,7 +115,6 @@ namespace CodeGeneration.LowLevelClient.Domain
 				var c = new Constructor { Generated = $"public {m}({par}) : base({routing}){{}}", Description = doc };
 				ctors.Add(c);
 			}
-			//TODO discuss with @gmarz do the same for typed request?
 			if (IsDocumentPath && !string.IsNullOrEmpty(this.DescriptorTypeGeneric))
 			{
 				var doc = $@"/// <summary>{this.Url.Path}</summary>";
@@ -127,29 +134,33 @@ namespace CodeGeneration.LowLevelClient.Domain
 			var parts = this.Url.Parts
 				.Where(p => !ApiUrl.BlackListRouteValues.Contains(p.Key))
 				.Where(p => !p.Value.Required)
-				.Where(p=> !string.IsNullOrEmpty(p.Value.Name))
+				.Where(p => !string.IsNullOrEmpty(p.Value.Name))
 				.ToList();
 			var returnType = this.DescriptorType + this.DescriptorTypeGeneric;
-			foreach(var part in parts)
+			foreach (var part in parts)
 			{
 				var p = part.Value;
 				var paramName = p.Name.ToPascalCase();
 				if (paramName.Length > 1)
 					paramName = paramName.Substring(0, 1).ToLowerInvariant() + paramName.Substring(1);
-				else 
+				else
 					paramName = paramName.ToLowerInvariant();
 				// public ClearScrollDescriptor ScrollId(ScrollIds scrollId) => Assign(a=>a.RouteValues.Required("scroll_id", scrollId));
 				var code = $"public {returnType} {p.InterfaceName}({p.ClrTypeName} {paramName}) => Assign(a=>a.RouteValues.Required(\"{p.Name}\", {paramName}));";
-                var xmlDoc = $"///<sumary>${p.Description}</summary>";
+				var xmlDoc = $"///<sumary>{p.Description}</summary>";
 				setters.Add(new FluentRouteSetter { Code = code, XmlDoc = xmlDoc });
-            }
+				if ((paramName == "index" || paramName == "type"))
+				{
+					code = $"public {returnType} {p.InterfaceName}<TOther>() where TOther : class ";
+					code += $"=> Assign(a=>a.RouteValues.Required(\"{p.Name}\", ({p.ClrTypeName})typeof(TOther)));";
+                    xmlDoc = $"///<sumary>{p.Description}</summary>";
+					setters.Add(new FluentRouteSetter { Code = code, XmlDoc = xmlDoc });
+				}
+			}
 			return setters;
 		}
 
-
-
-
-		public bool IsDocumentPath => AllParts.Count() == 3 && AllParts.All(p => p.Required && p.Type != "list") && AllParts.All(p => new[] { "index", "type", "id" }.Contains(p.Name));
+		public bool IsDocumentPath => AllParts.Count() == 3 && AllParts.All(p => p.Type != "list") && AllParts.All(p => new[] { "index", "type", "id" }.Contains(p.Name));
 		public IEnumerable<ApiUrlPart> AllParts => (this.Url?.Parts?.Values ?? Enumerable.Empty<ApiUrlPart>()).Where(p => !string.IsNullOrWhiteSpace(p.Name));
 	}
 }

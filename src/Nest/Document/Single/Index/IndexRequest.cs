@@ -23,6 +23,11 @@ namespace Nest
 	public partial class IndexRequest<TDocument> : IIndexRequest<TDocument> 
 		where TDocument : class
 	{
+		public IndexRequest(TDocument document) : this(Document<TDocument>.From(document))
+		{
+			this.Document = document;
+		}
+
 		object IIndexRequest.UntypedDocument => this.Document;
 
 		public TDocument Document { get; set; }

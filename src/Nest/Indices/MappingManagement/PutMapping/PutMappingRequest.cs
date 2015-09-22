@@ -63,9 +63,10 @@ namespace Nest
 		public ITypeField TypeField { get; set; }
 	}
 
-	public partial class PutMappingRequest<T> 
-		where T : class
+	public partial class PutMappingRequest<T> where T : class
 	{
+		public PutMappingRequest() : this(typeof(T), typeof(T)) { }
+
 		//TODO constructors
 		/// <inheritdoc/>
 		public IAllField AllField { get; set; }
@@ -118,6 +119,8 @@ namespace Nest
 	[DescriptorFor("IndicesPutMapping")]
 	public partial class PutMappingDescriptor<T> where T : class
 	{
+		public PutMappingDescriptor() : base(r=>r.Required("index", (IndexName)typeof(T)).Required("type", (TypeName)typeof(T))) { }
+
 		protected PutMappingDescriptor<T> Assign(Action<ITypeMapping> assigner) => Fluent.Assign(this, assigner);
 
 		IAllField ITypeMapping.AllField { get; set; }

@@ -46,7 +46,8 @@ namespace Nest
 		public static implicit operator Indices(AllIndices all) => new Indices(all);
 		public static implicit operator Indices(ManyIndices many) => new Indices(many);
 		public static implicit operator Indices(IndexName[] many) => Indices.Many(many);
-		public static implicit operator Indices(IndexName many) => Indices.Single(many);
+		public static implicit operator Indices(IndexName index) => Indices.Single(index);
+		public static implicit operator Indices(Type type) => Indices.Single(type);
 
 		string IUrlParameter.GetString(IConnectionConfigurationValues settings)
 		{
