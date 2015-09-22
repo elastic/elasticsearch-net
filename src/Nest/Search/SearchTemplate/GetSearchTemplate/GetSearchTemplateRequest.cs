@@ -7,10 +7,8 @@ using System.Text;
 
 namespace Nest
 {
-	//TODO RENDERSEARCHTEMPATE?
 	public partial interface IGetSearchTemplateRequest 
 	{
-		//TODO NAME
 	}
 	
 	public partial class GetSearchTemplateRequest 
@@ -18,6 +16,7 @@ namespace Nest
 	}
 
 
+	[DescriptorFor("GetTemplate")]
 	public partial class GetSearchTemplateDescriptor 
 	{
 	}

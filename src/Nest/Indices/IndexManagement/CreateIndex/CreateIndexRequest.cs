@@ -8,13 +8,16 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<CreateIndexDescriptor>))]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<CreateIndexRequest>))]
 	public partial interface ICreateIndexRequest : IIndexState
 	{
 	}
 
 	public partial class CreateIndexRequest 
 	{
+		//TODO Only here for ReadAsType new() constraint needs to be updated
+		public CreateIndexRequest() { }
+
 		public IIndexSettings Settings { get; set; }
 
 		public IMappings Mappings { get; set; }

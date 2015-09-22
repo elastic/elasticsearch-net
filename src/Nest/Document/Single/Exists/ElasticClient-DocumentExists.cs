@@ -16,14 +16,14 @@ namespace Nest
 		/// </summary>
 		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
 		/// <param name="existsSelector">Describe what document we are looking for</param>
-		IExistsResponse DocumentExists<T>(Func<DocumentExistsDescriptor<T>, IDocumentExistsRequest> existsSelector)
+		IExistsResponse DocumentExists<T>(Document<T> document, Func<DocumentExistsDescriptor<T>, IDocumentExistsRequest> existsSelector = null)
 			where T : class;
 
 		/// <inheritdoc/>
 		IExistsResponse DocumentExists(IDocumentExistsRequest documentExistsRequest);
 
 		/// <inheritdoc/>
-		Task<IExistsResponse> DocumentExistsAsync<T>(Func<DocumentExistsDescriptor<T>, IDocumentExistsRequest> existsSelector)
+		Task<IExistsResponse> DocumentExistsAsync<T>(Document<T> document, Func<DocumentExistsDescriptor<T>, IDocumentExistsRequest> existsSelector = null)
 			where T : class;
 
 		/// <inheritdoc/>
@@ -35,8 +35,8 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IExistsResponse DocumentExists<T>(Func<DocumentExistsDescriptor<T>, IDocumentExistsRequest> existsSelector) where T : class =>
-			this.DocumentExists(existsSelector?.Invoke(new DocumentExistsDescriptor<T>()));
+		public IExistsResponse DocumentExists<T>(Document<T> document, Func<DocumentExistsDescriptor<T>, IDocumentExistsRequest> existsSelector = null) where T : class =>
+			this.DocumentExists(existsSelector?.Invoke(new DocumentExistsDescriptor<T>(document.Self.Index, document.Self.Type, document.Self.Id)));
 
 		/// <inheritdoc/>
 		public IExistsResponse DocumentExists(IDocumentExistsRequest documentExistsRequest) => 
@@ -47,8 +47,8 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<IExistsResponse> DocumentExistsAsync<T>(Func<DocumentExistsDescriptor<T>, IDocumentExistsRequest> existsSelector) where T : class=>
-			this.DocumentExistsAsync(existsSelector?.Invoke(new DocumentExistsDescriptor<T>()));
+		public Task<IExistsResponse> DocumentExistsAsync<T>(Document<T> document, Func<DocumentExistsDescriptor<T>, IDocumentExistsRequest> existsSelector = null) where T : class =>
+			this.DocumentExistsAsync(existsSelector.InvokeOrDefault(new DocumentExistsDescriptor<T>(document.Self.Index, document.Self.Type, document.Self.Id)));
 
 		/// <inheritdoc/>
 		public Task<IExistsResponse> DocumentExistsAsync(IDocumentExistsRequest documentExistsRequest) => 

@@ -15,13 +15,13 @@ namespace Nest
 		/// </summary>
 		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
 		/// <param name="getSelector">A descriptor that describes which document's source to fetch</param>
-		T Source<T>(Func<SourceDescriptor<T>, ISourceRequest> getSelector) where T : class;
+		T Source<T>(Document<T> document, Func<SourceDescriptor<T>, ISourceRequest> getSelector = null) where T : class;
 
 		/// <inheritdoc/>
 		T Source<T>(ISourceRequest sourceRequest) where T : class;
 
 		/// <inheritdoc/>
-		Task<T> SourceAsync<T>(Func<SourceDescriptor<T>, ISourceRequest> getSelector) where T : class;
+		Task<T> SourceAsync<T>(Document<T> document, Func<SourceDescriptor<T>, ISourceRequest> getSelector = null) where T : class;
 
 		/// <inheritdoc/>
 		Task<T> SourceAsync<T>(ISourceRequest sourceRequest) where T : class;
@@ -36,26 +36,26 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public T Source<T>(Func<SourceDescriptor<T>, ISourceRequest> getSelector) where T : class =>
-			this.Source<T>(getSelector?.Invoke(new SourceDescriptor<T>()));
+		public T Source<T>(Document<T> document, Func<SourceDescriptor<T>, ISourceRequest> getSelector = null) where T : class =>
+			this.Source<T>(getSelector.InvokeOrDefault(new SourceDescriptor<T>(document.Self.Index, document.Self.Type, document.Self.Id)));
 
 		/// <inheritdoc/>
 		public T Source<T>(ISourceRequest sourceRequest) where T : class
 		{
-			var pathInfo = sourceRequest.ResolvePath(ConnectionSettings); 
-			var response = this.LowLevelDispatch.GetSourceDispatch<T>(pathInfo);
+			sourceRequest.RouteValues.Resolve(ConnectionSettings); 
+			var response = this.LowLevelDispatch.GetSourceDispatch<T>(sourceRequest);
 			return response.Body;
 		}
 
 		/// <inheritdoc/>
-		public Task<T> SourceAsync<T>(Func<SourceDescriptor<T>, ISourceRequest> getSelector) where T : class =>
-			this.SourceAsync<T>(getSelector?.Invoke(new SourceDescriptor<T>()));
+		public Task<T> SourceAsync<T>(Document<T> document, Func<SourceDescriptor<T>, ISourceRequest> getSelector = null) where T : class =>
+			this.SourceAsync<T>(getSelector.InvokeOrDefault(new SourceDescriptor<T>(document.Self.Index, document.Self.Type, document.Self.Id)));
 
 		/// <inheritdoc/>
 		public Task<T> SourceAsync<T>(ISourceRequest sourceRequest) where T : class
 		{
-			var pathInfo = sourceRequest.ResolvePath(ConnectionSettings);
-			var response = this.LowLevelDispatch.GetSourceDispatchAsync<T>(pathInfo)
+			sourceRequest.RouteValues.Resolve(ConnectionSettings); 
+			var response = this.LowLevelDispatch.GetSourceDispatchAsync<T>(sourceRequest)
 				.ContinueWith(t => t.Result.Body, TaskContinuationOptions.ExecuteSynchronously);
 			return response;
 		}

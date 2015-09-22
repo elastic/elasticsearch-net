@@ -20,10 +20,10 @@ namespace Nest
 		Task<IPutAliasResponse> PutAliasAsync(IPutAliasRequest putAliasRequest);
 
 		/// <inheritdoc/>
-		IPutAliasResponse PutAlias(Func<PutAliasDescriptor, IPutAliasRequest> putAliasSelector);
+		IPutAliasResponse PutAlias(Indices indices, Name alias, Func<PutAliasDescriptor, IPutAliasRequest> putAliasSelector = null); 
 
 		/// <inheritdoc/>
-		Task<IPutAliasResponse> PutAliasAsync(Func<PutAliasDescriptor, IPutAliasRequest> putAliasSelector);
+		Task<IPutAliasResponse> PutAliasAsync(Indices indices, Name alias, Func<PutAliasDescriptor, IPutAliasRequest> putAliasSelector = null);
 	}
 
 	public partial class ElasticClient
@@ -43,11 +43,11 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public IPutAliasResponse PutAlias(Func<PutAliasDescriptor, IPutAliasRequest> putAliasSelector) =>
-			this.PutAlias(putAliasSelector?.Invoke(new PutAliasDescriptor()));
+		public IPutAliasResponse PutAlias(Indices indices, Name alias, Func<PutAliasDescriptor, IPutAliasRequest> putAliasSelector = null) =>
+			this.PutAlias(putAliasSelector.InvokeOrDefault(new PutAliasDescriptor(indices, alias)));
 
 		/// <inheritdoc/>
-		public Task<IPutAliasResponse> PutAliasAsync(Func<PutAliasDescriptor, IPutAliasRequest> putAliasSelector) =>
-			this.PutAliasAsync(putAliasSelector?.Invoke(new PutAliasDescriptor()));
+		public Task<IPutAliasResponse> PutAliasAsync(Indices indices, Name alias, Func<PutAliasDescriptor, IPutAliasRequest> putAliasSelector = null) =>
+			this.PutAliasAsync(putAliasSelector.InvokeOrDefault(new PutAliasDescriptor(indices, alias)));
 	}
 }

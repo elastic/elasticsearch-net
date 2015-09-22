@@ -79,5 +79,37 @@ namespace Nest
 			throw new NotImplementedException();
 		}
 	}
+	
+	public interface IDocumentPath
+	{
+		Id Id { get; set; }
+		IndexName Index { get; set; }
+		TypeName Type { get; set; }
+	}
+
+
+	public class Document<T> : IDocumentPath
+		where T : class
+	{
+		internal IDocumentPath Self => this;
+		Id IDocumentPath.Id { get; set; }
+		IndexName IDocumentPath.Index { get; set; }
+		TypeName IDocumentPath.Type { get; set; }
+
+		internal Document(Id id) { Self.Id = id; }
+
+		public static Document<T> Id(Id id) => new Document<T>(id);
+
+		public Document<T> Index(IndexName index)
+		{
+			Self.Index = index;
+			return this;
+		}
+		public Document<T> Type(TypeName type)
+		{
+			Self.Type = type;
+			return this;
+		}
+	}
 
 }

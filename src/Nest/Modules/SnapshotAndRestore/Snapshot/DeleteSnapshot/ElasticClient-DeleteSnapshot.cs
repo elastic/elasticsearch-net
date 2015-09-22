@@ -13,13 +13,13 @@ namespace Nest
 		/// <param name="repository">The repository name under which the snapshot we want to delete lives</param>
 		/// <param name="snapshotName">The name of the snapshot that we want to delete</param>
 		/// <param name="selector">Optionally further describe the delete snapshot operation</param>
-		IAcknowledgedResponse DeleteSnapshot(string repository, string snapshotName, Func<DeleteSnapshotDescriptor, IDeleteSnapshotRequest> selector = null);
+		IAcknowledgedResponse DeleteSnapshot(Name repository, Name snapshotName, Func<DeleteSnapshotDescriptor, IDeleteSnapshotRequest> selector = null);
 
 		/// <inheritdoc/>
 		IAcknowledgedResponse DeleteSnapshot(IDeleteSnapshotRequest deleteSnapshotRequest);
 
 		/// <inheritdoc/>
-		Task<IAcknowledgedResponse> DeleteSnapshotAsync(string repository, string snapshotName, Func<DeleteSnapshotDescriptor, IDeleteSnapshotRequest> selector = null);
+		Task<IAcknowledgedResponse> DeleteSnapshotAsync(Name repository, Name snapshotName, Func<DeleteSnapshotDescriptor, IDeleteSnapshotRequest> selector = null);
 
 		/// <inheritdoc/>
 		Task<IAcknowledgedResponse> DeleteSnapshotAsync(IDeleteSnapshotRequest deleteSnapshotRequest);
@@ -28,8 +28,8 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IAcknowledgedResponse DeleteSnapshot(string repository, string snapshotName, Func<DeleteSnapshotDescriptor, IDeleteSnapshotRequest> selector = null) =>
-			this.DeleteSnapshot(selector.InvokeOrDefault(new DeleteSnapshotDescriptor().Snapshot(snapshotName).Repository(repository)));
+		public IAcknowledgedResponse DeleteSnapshot(Name repository, Name snapshotName, Func<DeleteSnapshotDescriptor, IDeleteSnapshotRequest> selector = null) =>
+			this.DeleteSnapshot(selector.InvokeOrDefault(new DeleteSnapshotDescriptor(repository, snapshotName)));
 
 		/// <inheritdoc/>
 		public IAcknowledgedResponse DeleteSnapshot(IDeleteSnapshotRequest deleteSnapshotRequest) => 
@@ -39,8 +39,8 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<IAcknowledgedResponse> DeleteSnapshotAsync(string repository, string snapshotName, Func<DeleteSnapshotDescriptor, IDeleteSnapshotRequest> selector = null) => 
-			this.DeleteSnapshotAsync(selector.InvokeOrDefault(new DeleteSnapshotDescriptor().Snapshot(snapshotName).Repository(repository)));
+		public Task<IAcknowledgedResponse> DeleteSnapshotAsync(Name repository, Name snapshotName, Func<DeleteSnapshotDescriptor, IDeleteSnapshotRequest> selector = null) => 
+			this.DeleteSnapshotAsync(selector.InvokeOrDefault(new DeleteSnapshotDescriptor(repository, snapshotName)));
 
 		/// <inheritdoc/>
 		public Task<IAcknowledgedResponse> DeleteSnapshotAsync(IDeleteSnapshotRequest deleteSnapshotRequest) => 

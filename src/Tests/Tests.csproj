@@ -93,6 +93,8 @@
     <Compile Include="ClientConcepts\ConnectionPooling\Sniffing\OnStaleClusterState.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\Sniffing\RoleDetection.cs" />
     <Compile Include="ClientConcepts\HighLevel\CovariantHits\CovariantSearchResults.cs" />
+    <Compile Include="ClientConcepts\HighLevel\Inferrence\Document\DocumentParams.cs" />
+    <Compile Include="ClientConcepts\HighLevel\Inferrence\Id\IdsInference.cs" />
     <Compile Include="ClientConcepts\HighLevel\Inferrence\Indices\IndicesPaths.cs" />
     <Compile Include="CodeStandards\Descriptors.cs" />
     <Compile Include="Document\Single\Indexing.cs" />

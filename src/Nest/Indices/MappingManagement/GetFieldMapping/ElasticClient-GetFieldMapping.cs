@@ -12,14 +12,14 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <inheritdoc/>
-		IGetFieldMappingResponse GetFieldMapping<T>(Func<GetFieldMappingDescriptor<T>, GetFieldMappingDescriptor<T>> selector = null)
+		IGetFieldMappingResponse GetFieldMapping<T>(PropertyNames fields, Func<GetFieldMappingDescriptor<T>, GetFieldMappingDescriptor<T>> selector = null)
 			where T : class;
 
 		/// <inheritdoc/>
 		IGetFieldMappingResponse GetFieldMapping(IGetFieldMappingRequest getFieldMappingRequest);
 
 		/// <inheritdoc/>
-		Task<IGetFieldMappingResponse> GetFieldMappingAsync<T>(Func<GetFieldMappingDescriptor<T>, GetFieldMappingDescriptor<T>> selector = null)
+		Task<IGetFieldMappingResponse> GetFieldMappingAsync<T>(PropertyNames fields, Func<GetFieldMappingDescriptor<T>, GetFieldMappingDescriptor<T>> selector = null)
 			where T : class;
 
 		/// <inheritdoc/>
@@ -29,9 +29,9 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IGetFieldMappingResponse GetFieldMapping<T>(Func<GetFieldMappingDescriptor<T>, GetFieldMappingDescriptor<T>> selector = null)
+		public IGetFieldMappingResponse GetFieldMapping<T>(PropertyNames fields, Func<GetFieldMappingDescriptor<T>, GetFieldMappingDescriptor<T>> selector = null)
 			where T : class => 
-			this.GetFieldMapping(selector.InvokeOrDefault(new GetFieldMappingDescriptor<T>()));
+			this.GetFieldMapping(selector.InvokeOrDefault(new GetFieldMappingDescriptor<T>(fields)));
 
 		/// <inheritdoc/>
 		public IGetFieldMappingResponse GetFieldMapping(IGetFieldMappingRequest getFieldMappingRequest) => 
@@ -42,9 +42,9 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<IGetFieldMappingResponse> GetFieldMappingAsync<T>(Func<GetFieldMappingDescriptor<T>, GetFieldMappingDescriptor<T>> selector = null)
+		public Task<IGetFieldMappingResponse> GetFieldMappingAsync<T>(PropertyNames fields, Func<GetFieldMappingDescriptor<T>, GetFieldMappingDescriptor<T>> selector = null)
 			where T : class =>
-			this.GetFieldMappingAsync(selector.InvokeOrDefault(new GetFieldMappingDescriptor<T>()));
+			this.GetFieldMappingAsync(selector.InvokeOrDefault(new GetFieldMappingDescriptor<T>(fields)));
 
 		/// <inheritdoc/>
 		public Task<IGetFieldMappingResponse> GetFieldMappingAsync(IGetFieldMappingRequest getFieldMappingRequest) => 

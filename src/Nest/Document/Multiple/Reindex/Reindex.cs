@@ -84,7 +84,7 @@ namespace Nest
 		/// the index we're reindexing from
 		/// </summary>
 		public ReindexDescriptor<T> CreateIndex(Func<CreateIndexDescriptor, ICreateIndexRequest> createIndexSelector) =>
-			Assign(a => a.CreateIndexRequest = createIndexSelector?.Invoke(new CreateIndexDescriptor()));
+			Assign(a => a.CreateIndexRequest = createIndexSelector.InvokeOrDefault(new CreateIndexDescriptor(a.From)));
 
 		/// <summary>
 		/// CreateIndex selector, will be passed the a descriptor initialized with the settings from
