@@ -1201,6 +1201,29 @@ namespace Nest
 	
 	}
 	
+	///<summary>descriptor for GetSearchTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html</pre></summary>
+	public partial class GetSearchTemplateDescriptor  : RequestDescriptorBase<GetSearchTemplateDescriptor,GetSearchTemplateRequestParameters, IGetSearchTemplateRequest>, IGetSearchTemplateRequest
+	{ 
+		Id IGetSearchTemplateRequest.Id => Self.RouteValues.Get<Id>("id");
+			/// <summary>/_search/template/{id}</summary>
+///<param name="id"> this parameter is required
+		public GetSearchTemplateDescriptor(Id id) : base(r=>r.Required("id", id)){}
+
+	
+		///<summary>Explicit version number for concurrency control</summary>
+		public GetSearchTemplateDescriptor Version(long version) => AssignParam(p=>p.Version(version));
+
+		///<summary>Specific version type</summary>
+		public GetSearchTemplateDescriptor VersionType(VersionType version_type) => AssignParam(p=>p.VersionType(version_type));
+
+		///<summary>The URL-encoded request definition</summary>
+		public GetSearchTemplateDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public GetSearchTemplateDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+	
+	}
+	
 	///<summary>descriptor for GetSource <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-get.html</pre></summary>
 	public partial class SourceDescriptor<T>  : RequestDescriptorBase<SourceDescriptor<T>,SourceRequestParameters, ISourceRequest>, ISourceRequest
 	{ 
@@ -1257,29 +1280,6 @@ namespace Nest
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public SourceDescriptor<T> FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
-	
-	}
-	
-	///<summary>descriptor for GetTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-template.html</pre></summary>
-	public partial class GetTemplateDescriptor  : RequestDescriptorBase<GetTemplateDescriptor,GetTemplateRequestParameters, IGetTemplateRequest>, IGetTemplateRequest
-	{ 
-		Id IGetTemplateRequest.Id => Self.RouteValues.Get<Id>("id");
-			/// <summary>/_search/template/{id}</summary>
-///<param name="id"> this parameter is required
-		public GetTemplateDescriptor(Id id) : base(r=>r.Required("id", id)){}
-
-	
-		///<summary>Explicit version number for concurrency control</summary>
-		public GetTemplateDescriptor Version(long version) => AssignParam(p=>p.Version(version));
-
-		///<summary>Specific version type</summary>
-		public GetTemplateDescriptor VersionType(VersionType version_type) => AssignParam(p=>p.VersionType(version_type));
-
-		///<summary>The URL-encoded request definition</summary>
-		public GetTemplateDescriptor Source(string source) => AssignParam(p=>p.Source(source));
-
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public GetTemplateDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -1906,6 +1906,31 @@ namespace Nest
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
 		public GetIndexSettingsDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+	
+	}
+	
+	///<summary>descriptor for IndicesGetTemplateForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
+	public partial class GetTemplateDescriptor  : RequestDescriptorBase<GetTemplateDescriptor,GetTemplateRequestParameters, IGetTemplateRequest>, IGetTemplateRequest
+	{ 
+		Name IGetTemplateRequest.Name => Self.RouteValues.Get<Name>("name");
+			/// <summary>/_template</summary>
+		public GetTemplateDescriptor() : base(){}
+
+	
+		///<summary>Return settings in flat format (default: false)</summary>
+		public GetTemplateDescriptor FlatSettings(bool flat_settings = true) => AssignParam(p=>p.FlatSettings(flat_settings));
+
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public GetTemplateDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
+
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public GetTemplateDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
+
+		///<summary>The URL-encoded request definition</summary>
+		public GetTemplateDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public GetTemplateDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	

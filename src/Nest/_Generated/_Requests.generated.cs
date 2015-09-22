@@ -2272,6 +2272,33 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IGetSearchTemplateRequest : IRequest<GetSearchTemplateRequestParameters> 
+	{
+		Id Id { get; }
+	 } 
+	///<summary>Request parameters for GetSearchTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html</pre></summary>
+	public partial class GetSearchTemplateRequest  : RequestBase<GetSearchTemplateRequestParameters>, IGetSearchTemplateRequest
+	{
+		Id IGetSearchTemplateRequest.Id => Self.RouteValues.Get<Id>("id");
+			/// <summary>/_search/template/{id}</summary>
+///<param name="id">this parameter is required</param>
+		public GetSearchTemplateRequest(Id id) : base(r=>r.Required("id", id)){}
+
+			///<summary>Explicit version number for concurrency control</summary>
+		public long Version { get { return Q<long>("version"); } set { Q("version", value); } }
+		
+		///<summary>Specific version type</summary>
+		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetSnapshotRequest : IRequest<GetSnapshotRequestParameters> 
 	{
 		Name RepositoryName { get; }
@@ -2301,21 +2328,27 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetTemplateRequest : IRequest<GetTemplateRequestParameters> 
 	{
-		Id Id { get; }
+		Name Name { get; }
 	 } 
-	///<summary>Request parameters for GetTemplate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-template.html</pre></summary>
+	///<summary>Request parameters for IndicesGetTemplateForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
 	public partial class GetTemplateRequest  : RequestBase<GetTemplateRequestParameters>, IGetTemplateRequest
 	{
-		Id IGetTemplateRequest.Id => Self.RouteValues.Get<Id>("id");
-			/// <summary>/_search/template/{id}</summary>
-///<param name="id">this parameter is required</param>
-		public GetTemplateRequest(Id id) : base(r=>r.Required("id", id)){}
+		Name IGetTemplateRequest.Name => Self.RouteValues.Get<Name>("name");
+			/// <summary>/_template</summary>
+		public GetTemplateRequest() : base(){}
 
-			///<summary>Explicit version number for concurrency control</summary>
-		public long Version { get { return Q<long>("version"); } set { Q("version", value); } }
+		/// <summary>/_template/{name}</summary>
+///<param name="name">Optional, accepts null</param>
+		public GetTemplateRequest(Name name) : base(r=>r.Optional("name", name)){}
+
+			///<summary>Return settings in flat format (default: false)</summary>
+		public bool FlatSettings { get { return Q<bool>("flat_settings"); } set { Q("flat_settings", value); } }
 		
-		///<summary>Specific version type</summary>
-		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
+		
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }

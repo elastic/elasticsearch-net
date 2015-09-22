@@ -1894,6 +1894,34 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> GetScriptAsync<T>(string lang, string id, Func<GetScriptRequestParameters, GetScriptRequestParameters> requestParameters = null)
 			where T : class => this.DoRequestAsync<T>(GET, Url($"_scripts/{lang.NotNull("lang")}/{id.NotNull("id")}"), null, _params(requestParameters));
 		
+		///<summary>Represents a GET on /_search/template/{id} 
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to /para>
+		///<para> - byte[], no deserialization, but the response stream will be closed</para>
+		///<para> - Stream, no deserialization, response stream is your responsibility</para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed</para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth 
+	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html</para>	
+	    ///</summary>
+		///<param name="id">Template ID</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public ElasticsearchResponse<T> GetSearchTemplate<T>(string id, Func<GetSearchTemplateRequestParameters, GetSearchTemplateRequestParameters> requestParameters = null)
+			where T : class => this.DoRequest<T>(GET, Url($"_search/template/{id.NotNull("id")}"), null, _params(requestParameters));
+		
+		///<summary>Represents a GET on /_search/template/{id} 
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to /para>
+		///<para> - byte[], no deserialization, but the response stream will be closed</para>
+		///<para> - Stream, no deserialization, response stream is your responsibility</para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed</para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth 
+	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/current/search-template.html</para>	
+	    ///</summary>
+		///<param name="id">Template ID</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public Task<ElasticsearchResponse<T>> GetSearchTemplateAsync<T>(string id, Func<GetSearchTemplateRequestParameters, GetSearchTemplateRequestParameters> requestParameters = null)
+			where T : class => this.DoRequestAsync<T>(GET, Url($"_search/template/{id.NotNull("id")}"), null, _params(requestParameters));
+		
 		///<summary>Represents a GET on /{index}/{type}/{id}/_source 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to /para>
@@ -1937,7 +1965,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="id">Template ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> GetTemplate<T>(string id, Func<GetTemplateRequestParameters, GetTemplateRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> GetTemplate<T>(string id, Func<GetSearchTemplateRequestParameters, GetSearchTemplateRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(GET, Url($"_search/template/{id.NotNull("id")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_search/template/{id} 
@@ -1951,7 +1979,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="id">Template ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> GetTemplateAsync<T>(string id, Func<GetTemplateRequestParameters, GetTemplateRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> GetTemplateAsync<T>(string id, Func<GetSearchTemplateRequestParameters, GetSearchTemplateRequestParameters> requestParameters = null)
 			where T : class => this.DoRequestAsync<T>(GET, Url($"_search/template/{id.NotNull("id")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type} 

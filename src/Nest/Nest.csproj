@@ -176,7 +176,6 @@
     <Compile Include="Document\Multiple\Bulk\ElasticClient-IndexMany.cs" />
     <Compile Include="Document\Multiple\Bulk\ElasticClient-DeleteMany.cs" />
     <Compile Include="Document\Multiple\MultiGet\EllasticClient-GetMany.cs" />
-    <Compile Include="Document\Single\Exists\ElasticClient-ExistsExtensions.cs" />
     <Compile Include="Indices\Warmers\Warmers.cs" />
     <Compile Include="Mapping\AttributeBased\AttachmentAttribute.cs" />
     <Compile Include="Mapping\AttributeBased\BinaryAttribute.cs" />
