@@ -35,9 +35,5 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence.FieldNames
 				.WhenSerializing(fieldExpression)
 				.WhenSerializing(fieldString);
 		}
-		{
-		
-			Document<Project> documentFromId = 1;
-		}
 	}
 }

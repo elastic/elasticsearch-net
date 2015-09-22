@@ -32,6 +32,9 @@ namespace Nest
 		public IDictionary<string, object> MetaData { get; set; }
 		public QueryContainer Query { get; set; }
 
+		public RegisterPercolatorRequest(IndexName index, Name name) 
+			: base(r=>r.Required("index", index).Required("type", (TypeName)".percolator").Required("id", name)) { }
+
 		public object GetCustomJson()
 		{
 			return new FluentDictionary<string, object>(this.MetaData)
@@ -40,10 +43,16 @@ namespace Nest
 
 	}
 
-	public class RegisterPercolatorDescriptor<T> : RequestDescriptorBase<RegisterPercolatorDescriptor<T>, IndexRequestParameters>, IRegisterPercolatorRequest
+	public class RegisterPercolatorDescriptor<T> 
+		: RequestDescriptorBase<RegisterPercolatorDescriptor<T>, IndexRequestParameters, IRegisterPercolatorRequest>, IRegisterPercolatorRequest
 		where T : class
 	{
 		private IRegisterPercolatorRequest Self => this;
+
+		public RegisterPercolatorDescriptor(Name name) 
+			: base(r=>r.Required("index", (IndexName)typeof(T)).Required("type", (TypeName)".percolator").Required("id", name)) { }
+
+		public RegisterPercolatorDescriptor<T> Index(IndexName index) => Assign(a => a.RouteValues.Required("index", index));
 
 		QueryContainer IRegisterPercolatorRequest.Query { get; set; }
 
