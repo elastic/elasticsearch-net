@@ -97,7 +97,7 @@ namespace Nest
 	{
 		private Type _clrType { get; set; }
 		Type ICovariantSearchRequest.ClrType => this._clrType;
-		Types ICovariantSearchRequest.ElasticsearchTypes => ((ISearchTemplateRequest)this).Type;
+		Types ICovariantSearchRequest.ElasticsearchTypes => ((ISearchRequest)this).Type;
 
 		public string Timeout { get; set; }
 		public int? From { get; set; }
@@ -140,7 +140,7 @@ namespace Nest
 	{
 		private Type _clrType { get; set; }
 		Type ICovariantSearchRequest.ClrType => this._clrType;
-		Types ICovariantSearchRequest.ElasticsearchTypes => ((ISearchTemplateRequest)this).Type;
+		Types ICovariantSearchRequest.ElasticsearchTypes => ((ISearchRequest)this).Type;
 
 		public string Timeout { get; set; }
 		public int? From { get; set; }
@@ -185,7 +185,7 @@ namespace Nest
 	public partial class SearchDescriptor<T> where T : class
 	{
 		Type ICovariantSearchRequest.ClrType => typeof(T);
-		Types ICovariantSearchRequest.ElasticsearchTypes => ((ISearchTemplateRequest)this).Type;
+		Types ICovariantSearchRequest.ElasticsearchTypes => ((ISearchRequest)this).Type;
 		Func<dynamic, Hit<dynamic>, Type> ICovariantSearchRequest.TypeSelector { get; set; }
 
 		private ISearchRequest Self => this;

@@ -13,20 +13,27 @@ namespace Nest
 		private Dictionary<string, IUrlParameter> _routeValues = new Dictionary<string, IUrlParameter>();
 		private Dictionary<string, string> _resolved = new Dictionary<string, string>();
 
-		public string Index => _resolved["index"];
-		public string Type => _resolved["type"];
-		public string Id => _resolved["id"];
-		public string Name => _resolved["name"];
-		public string Field => _resolved["field"];
-		public string ScrollId => _resolved["scroll_id"];
-		public string NodeId => _resolved["node_id"];
-		public string Fields => _resolved["fields"];
-		public string Repository => _resolved["repository"];
-		public string Snapshot => _resolved["snapshot"];
-		public string Feature => _resolved["feature"];
-		public string Metric => _resolved["metric"];
-		public string IndexMetric => _resolved["index_metric"];
-		public string Lang => _resolved["lang"];
+		public string Index => GetResolved("index");
+		public string Type => GetResolved("type");
+		public string Id => GetResolved("id");
+		public string Name => GetResolved("name");
+		public string Field => GetResolved("field");
+		public string ScrollId => GetResolved("scroll_id");
+		public string NodeId => GetResolved("node_id");
+		public string Fields => GetResolved("fields");
+		public string Repository => GetResolved("repository");
+		public string Snapshot => GetResolved("snapshot");
+		public string Feature => GetResolved("feature");
+		public string Metric => GetResolved("metric");
+		public string IndexMetric => GetResolved("index_metric");
+		public string Lang => GetResolved("lang");
+
+		private string GetResolved(string route)
+		{
+			string resolved;
+			if (this._resolved.TryGetValue(route, out resolved)) return resolved;
+			return null;
+		}
 
 		private RouteValues Route(string name, IUrlParameter routeValue, bool required = true)
 		{
@@ -50,7 +57,13 @@ namespace Nest
 		internal RouteValues Required(string route, IUrlParameter value) => Route(route, value);
 		internal RouteValues Optional(string route, IUrlParameter value) => Route(route, value, false);
 
-		internal TActual Get<TActual>(string route) where TActual : class, IUrlParameter => this._routeValues[route] as TActual;
+		internal TActual Get<TActual>(string route) where TActual : class, IUrlParameter
+		{
+			IUrlParameter actual;
+			if (this._routeValues.TryGetValue(route, out actual) && actual != null)
+				return (TActual)actual;
+			return null;
+		}
 
 		public RouteValues Required(Indices indices) => Route("index", indices);
 		public RouteValues Optional(Indices indices) => Route("index", indices, false);

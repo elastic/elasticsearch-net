@@ -119,7 +119,8 @@ namespace Nest
 	[DescriptorFor("IndicesPutMapping")]
 	public partial class PutMappingDescriptor<T> where T : class
 	{
-		public PutMappingDescriptor() : base(r=>r.Required("index", (IndexName)typeof(T)).Required("type", (TypeName)typeof(T))) { }
+		public PutMappingDescriptor() : this(typeof(T), typeof(T)) { }
+		public PutMappingDescriptor(IndexName index, TypeName type) : base(r=>r.Required("index", index).Required("type", type)) { }
 
 		protected PutMappingDescriptor<T> Assign(Action<ITypeMapping> assigner) => Fluent.Assign(this, assigner);
 
