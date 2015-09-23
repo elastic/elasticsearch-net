@@ -33,7 +33,7 @@ namespace Nest
 
 		/// <inheritdoc/>
 		public IExistsResponse IndexExists(Indices indices, Func<IndexExistsDescriptor, IIndexExistsRequest> selector = null) =>
-			this.IndexExists(selector.Invoke(new IndexExistsDescriptor(indices)));
+			this.IndexExists(selector.InvokeOrDefault(new IndexExistsDescriptor(indices)));
 
 		/// <inheritdoc/>
 		public IExistsResponse IndexExists(IIndexExistsRequest indexRequest) => 
@@ -45,7 +45,7 @@ namespace Nest
 
 		/// <inheritdoc/>
 		public Task<IExistsResponse> IndexExistsAsync(Indices indices, Func<IndexExistsDescriptor, IIndexExistsRequest> selector = null) => 
-			this.IndexExistsAsync(selector.Invoke(new IndexExistsDescriptor(indices)));
+			this.IndexExistsAsync(selector.InvokeOrDefault(new IndexExistsDescriptor(indices)));
 
 		/// <inheritdoc/>
 		public Task<IExistsResponse> IndexExistsAsync(IIndexExistsRequest indexRequest) => 

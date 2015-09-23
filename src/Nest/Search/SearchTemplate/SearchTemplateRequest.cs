@@ -38,7 +38,6 @@ namespace Nest
 	public class SearchTemplateRequest<T> : SearchTemplateRequest
 		where T : class
 	{
-		public SearchTemplateRequest() { this.ClrType = typeof(T); }
 		public SearchTemplateRequest(Indices indices) : base(indices) { this.ClrType = typeof(T); }
 		public SearchTemplateRequest(Indices indices, Types types) : base(indices, types) { this.ClrType = typeof(T); }
 	}

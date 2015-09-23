@@ -16,7 +16,7 @@ namespace Nest
 		public PropertyInfo Property { get; set; }
 		public double? Boost { get; set; }
 
-		private string ComparisonValue;
+		private string ComparisonValue { get; set; }
 
 		public static FieldName Create(string name, double? boost = null)
 		{
@@ -43,15 +43,19 @@ namespace Nest
 
 		public static implicit operator FieldName(Expression expression)
 		{
-			return expression == null ? null : new FieldName
-			{
-				Expression = expression,
+			if (expression == null) return null;
 
-				// TODO: This isn't sufficient for field names. We need to be able to resolve an entire
-				// expression path. For instance, "p => p.Locations.First().Name" will resolve to just
-				// "Name", but we need "Locations.Name"
-				ComparisonValue = ((expression as LambdaExpression).Body as MemberExpression).Member.Name
-			};
+			var comparisonValue = string.Empty;
+			var lambda = expression as LambdaExpression;
+			if (lambda == null)
+				return new FieldName { Expression = expression, ComparisonValue = expression.ToString() }; 
+
+			var memberExpression = lambda.Body as MemberExpression;
+			if (memberExpression == null)
+				return new FieldName { Expression = expression, ComparisonValue = expression.ToString() }; 
+			
+			return new FieldName { Expression = expression, ComparisonValue = memberExpression.Member.Name}; 
+
 		}
 
 		public static implicit operator FieldName(PropertyInfo property)

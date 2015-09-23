@@ -70,6 +70,11 @@ namespace CodeGeneration.LowLevelClient.Domain
 					.OrderBy(kv => url.IndexOf($"{{{kv.Value.Name}}}", StringComparison.Ordinal));
 				var par = string.Join(", ", cp.Select(p => $"{p.Value.ClrTypeName} {p.Key}"));
 				var routing = string.Empty;
+
+				//Routes that take {indices}/{types} and both are optional
+				//we rather not generate a parameterless constructor and force folks to call Indices.All
+				if (!cp.Any() && IndicesAndTypes) continue;
+
 				if (cp.Any())
 					routing = "r=>r." + string.Join(".", cp.Select(p => $"{(p.Value.Required ? "Required" : "Optional")}(\"{p.Key}\", {p.Key})"));
 				var doc = $@"/// <summary>{url}</summary>";
@@ -105,6 +110,10 @@ namespace CodeGeneration.LowLevelClient.Domain
 					.OrderBy(kv => url.IndexOf($"{{{kv.Value.Name}}}", StringComparison.Ordinal));
 				var par = string.Join(", ", cp.Select(p => $"{p.Value.ClrTypeName} {p.Key}"));
 				var routing = string.Empty;
+				//Routes that take {indices}/{types} and both are optional
+				//We rather not generate a parameterless constructor but leave it to our 'usercode' to determine
+				//the best default constructor
+				if (!cp.Any() && IndicesAndTypes) continue;
 				if (cp.Any())
 					routing = "r=>r." + string.Join(".", cp.Select(p => $"Required(\"{p.Key}\", {p.Key})"));
 				var doc = $@"/// <summary>{url}</summary>";
@@ -160,6 +169,7 @@ namespace CodeGeneration.LowLevelClient.Domain
 			return setters;
 		}
 
+		public bool IndicesAndTypes => AllParts.Count() == 2 && AllParts.All(p => p.Type == "list") && AllParts.All(p => new[] { "index", "type"}.Contains(p.Name));
 		public bool IsDocumentPath => AllParts.Count() == 3 && AllParts.All(p => p.Type != "list") && AllParts.All(p => new[] { "index", "type", "id" }.Contains(p.Name));
 		public IEnumerable<ApiUrlPart> AllParts => (this.Url?.Parts?.Values ?? Enumerable.Empty<ApiUrlPart>()).Where(p => !string.IsNullOrWhiteSpace(p.Name));
 	}

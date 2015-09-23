@@ -52,8 +52,7 @@ namespace Tests.Document.Single
 			.Refresh()
 			.Routing("route");
 
-		protected override IndexDescriptor<Project> ClientDoesThisInternally(IndexDescriptor<Project> d) =>
-			d.Document(this.Document);
+		protected override IndexDescriptor<Project> NewDescriptor() => new IndexDescriptor<Project>(this.Document);
 
 		protected override IndexRequest<Project> Initializer =>
 			new IndexRequest<Project>(this.Document)

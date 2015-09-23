@@ -9,6 +9,7 @@ using Tests.Framework.MockData;
 using Xunit.Sdk;
 using static Tests.Framework.RoundTripper;
 using static Nest.Infer;
+using Nest.Resolvers;
 
 namespace Tests.ClientConcepts.HighLevel.Inferrence.FieldNames
 {
@@ -28,6 +29,16 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence.FieldNames
 			Id idFromInt = 1;
 
 			Expect("1").WhenSerializing(idFromInt);
+
+			var resolver = new IdResolver(new ConnectionSettings()
+				.InferMappingFor<Project>(m=>m.IdProperty(p=>p.Name)));
+			var id = resolver.GetIdFor(new Project { Name = "x" });
+			id.Should().Be("x");
+			object o = new Project { Name = "x" };
+			id = resolver.GetIdFor(typeof(Project), o);
+			id.Should().Be("x");
+			id = resolver.GetIdFor(typeof(Project), o);
+			id.Should().Be("x");
 		}
 	}
 }

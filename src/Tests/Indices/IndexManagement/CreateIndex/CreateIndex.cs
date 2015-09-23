@@ -32,7 +32,7 @@ namespace Tests.Indices.IndexManagement
 
 		public override bool ExpectIsValid => true;
 		public override int ExpectStatusCode => 200;
-		public override HttpMethod HttpMethod => HttpMethod.POST;
+		public override HttpMethod HttpMethod => HttpMethod.PUT;
 		public override string UrlPath => $"/{IndexName}";
 
 		protected override object ExpectJson { get; } = new

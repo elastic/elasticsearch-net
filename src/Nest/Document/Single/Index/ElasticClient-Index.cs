@@ -32,7 +32,7 @@ namespace Nest
 		/// <inheritdoc/>
 		public IIndexResponse Index<T>(T @object, Func<IndexDescriptor<T>, IIndexRequest<T>> indexSelector = null)
 			where T : class =>
-			this.Index(indexSelector?.InvokeOrDefault(new IndexDescriptor<T>(typeof(T), typeof(T)).Document(@object).Id(Id.From(@object))));
+			this.Index(indexSelector?.InvokeOrDefault(new IndexDescriptor<T>(@object)));
 
 		/// <inheritdoc/>
 		public IIndexResponse Index<T>(IIndexRequest<T> indexRequest)
@@ -44,7 +44,7 @@ namespace Nest
 		/// <inheritdoc/>
 		public Task<IIndexResponse> IndexAsync<T>(T @object, Func<IndexDescriptor<T>, IIndexRequest<T>> indexSelector = null)
 			where T : class => 
-			this.IndexAsync(indexSelector?.InvokeOrDefault(new IndexDescriptor<T>(typeof(T), typeof(T)).Document(@object).Id(Id.From(@object))));
+			this.IndexAsync(indexSelector?.InvokeOrDefault(new IndexDescriptor<T>(@object)));
 
 		/// <inheritdoc/>
 		public Task<IIndexResponse> IndexAsync<T>(IIndexRequest<T> indexRequest)

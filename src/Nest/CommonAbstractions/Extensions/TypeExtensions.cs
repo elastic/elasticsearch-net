@@ -52,12 +52,19 @@ namespace Nest
 		{
 			ObjectActivator<object> activator;
 			var argLength = args.Count();
-			var key = argLength + "--" + t.FullName;
+			var argKey = string.Join(",", args.Select(a => a.GetType().Name));
+			var key = argKey + "--" + t.FullName;
 			if (_cachedActivators.TryGetValue(key, out activator))
 				return activator(args);
 			var generic = GetActivatorMethodInfo.MakeGenericMethod(t);
 
-			ConstructorInfo ctor = t.GetConstructors().FirstOrDefault(c => c.GetParameters().Count() == argLength);
+
+			var constructors = from c in t.GetConstructors()
+							   let p = c.GetParameters()
+							   let k = string.Join(",", p.Select(a => a.ParameterType.Name))
+							   where p.Count() == argLength && k == argKey
+							   select c;
+			var ctor = constructors.FirstOrDefault();
 			if (ctor == null)
 				throw new Exception("Cannot create an instance of " + t.FullName
 				                    + "because it has no constructor taking " + argLength + " arguments");

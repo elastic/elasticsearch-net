@@ -99,6 +99,11 @@ namespace Nest
 		Type ICovariantSearchRequest.ClrType => this._clrType;
 		Types ICovariantSearchRequest.ElasticsearchTypes => ((ISearchRequest)this).Type;
 
+		/// <summary>
+		/// Does a search on all indices and types
+		/// </summary>
+		public SearchRequest() { }
+
 		public string Timeout { get; set; }
 		public int? From { get; set; }
 		public int? Size { get; set; }
@@ -141,6 +146,11 @@ namespace Nest
 		private Type _clrType { get; set; }
 		Type ICovariantSearchRequest.ClrType => this._clrType;
 		Types ICovariantSearchRequest.ElasticsearchTypes => ((ISearchRequest)this).Type;
+		
+		/// <summary>
+		/// Does a search on {inferred_index}/{inferred_type}/_search
+		/// </summary>
+		public SearchRequest() : this(typeof(T), typeof(T)) { }
 
 		public string Timeout { get; set; }
 		public int? From { get; set; }
@@ -191,6 +201,11 @@ namespace Nest
 		private ISearchRequest Self => this;
 
 		private SearchDescriptor<T> _assign(Action<ISearchRequest> assigner) => Fluent.Assign(this, assigner);
+
+		/// <summary>
+		/// Does a search on {inferred_index}/{inferred_type}/_search
+		/// </summary>
+		public SearchDescriptor() : base(r=> r.Required("index", (Indices)typeof(T)).Required("type", (Types)typeof(T))) { }
 
 		SearchType? ISearchRequest.SearchType => this.Self.RequestParameters.GetQueryStringValue<SearchType?>("search_type");
 

@@ -1081,10 +1081,7 @@ namespace Nest
 	{
 		Indices ICountRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types ICountRequest.Type => Self.RouteValues.Get<Types>("type");
-			/// <summary>/_count</summary>
-		public CountRequest() : base(){}
-
-		/// <summary>/{index}/_count</summary>
+			/// <summary>/{index}/_count</summary>
 ///<param name="index">Optional, accepts null</param>
 		public CountRequest(Indices index) : base(r=>r.Optional("index", index)){}
 
@@ -2100,10 +2097,7 @@ namespace Nest
 	{
 		Indices IGetMappingRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types IGetMappingRequest.Type => Self.RouteValues.Get<Types>("type");
-			/// <summary>/_mapping</summary>
-		public GetMappingRequest() : base(){}
-
-		/// <summary>/{index}/_mapping</summary>
+			/// <summary>/{index}/_mapping</summary>
 ///<param name="index">Optional, accepts null</param>
 		public GetMappingRequest(Indices index) : base(r=>r.Optional("index", index)){}
 
@@ -2767,10 +2761,7 @@ namespace Nest
 	{
 		Indices IMultiSearchRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types IMultiSearchRequest.Type => Self.RouteValues.Get<Types>("type");
-			/// <summary>/_msearch</summary>
-		public MultiSearchRequest() : base(){}
-
-		/// <summary>/{index}/_msearch</summary>
+			/// <summary>/{index}/_msearch</summary>
 ///<param name="index">Optional, accepts null</param>
 		public MultiSearchRequest(Indices index) : base(r=>r.Optional("index", index)){}
 
@@ -3667,10 +3658,7 @@ namespace Nest
 	{
 		Indices ISearchExistsRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types ISearchExistsRequest.Type => Self.RouteValues.Get<Types>("type");
-			/// <summary>/_search/exists</summary>
-		public SearchExistsRequest() : base(){}
-
-		/// <summary>/{index}/_search/exists</summary>
+			/// <summary>/{index}/_search/exists</summary>
 ///<param name="index">Optional, accepts null</param>
 		public SearchExistsRequest(Indices index) : base(r=>r.Optional("index", index)){}
 
@@ -3737,10 +3725,7 @@ namespace Nest
 	{
 		Indices ISearchRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types ISearchRequest.Type => Self.RouteValues.Get<Types>("type");
-			/// <summary>/_search</summary>
-		public SearchRequest() : base(){}
-
-		/// <summary>/{index}/_search</summary>
+			/// <summary>/{index}/_search</summary>
 ///<param name="index">Optional, accepts null</param>
 		public SearchRequest(Indices index) : base(r=>r.Optional("index", index)){}
 
@@ -3815,10 +3800,7 @@ namespace Nest
 	{
 		Indices ISearchRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types ISearchRequest.Type => Self.RouteValues.Get<Types>("type");
-			/// <summary>/_search</summary>
-		public SearchRequest() : base(){}
-
-		/// <summary>/{index}/_search</summary>
+			/// <summary>/{index}/_search</summary>
 ///<param name="index">Optional, accepts null</param>
 		public SearchRequest(Indices index) : base(r=>r.Optional("index", index)){}
 
@@ -3900,10 +3882,7 @@ namespace Nest
 	{
 		Indices ISearchShardsRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types ISearchShardsRequest.Type => Self.RouteValues.Get<Types>("type");
-			/// <summary>/_search_shards</summary>
-		public SearchShardsRequest() : base(){}
-
-		/// <summary>/{index}/_search_shards</summary>
+			/// <summary>/{index}/_search_shards</summary>
 ///<param name="index">Optional, accepts null</param>
 		public SearchShardsRequest(Indices index) : base(r=>r.Optional("index", index)){}
 
@@ -3949,10 +3928,7 @@ namespace Nest
 	{
 		Indices ISearchTemplateRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types ISearchTemplateRequest.Type => Self.RouteValues.Get<Types>("type");
-			/// <summary>/_search/template</summary>
-		public SearchTemplateRequest() : base(){}
-
-		/// <summary>/{index}/_search/template</summary>
+			/// <summary>/{index}/_search/template</summary>
 ///<param name="index">Optional, accepts null</param>
 		public SearchTemplateRequest(Indices index) : base(r=>r.Optional("index", index)){}
 
@@ -4604,10 +4580,7 @@ namespace Nest
 	{
 		Indices IValidateQueryRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types IValidateQueryRequest.Type => Self.RouteValues.Get<Types>("type");
-			/// <summary>/_validate/query</summary>
-		public ValidateQueryRequest() : base(){}
-
-		/// <summary>/{index}/_validate/query</summary>
+			/// <summary>/{index}/_validate/query</summary>
 ///<param name="index">Optional, accepts null</param>
 		public ValidateQueryRequest(Indices index) : base(r=>r.Optional("index", index)){}
 
@@ -4667,10 +4640,7 @@ namespace Nest
 	{
 		Indices IValidateQueryRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types IValidateQueryRequest.Type => Self.RouteValues.Get<Types>("type");
-			/// <summary>/_validate/query</summary>
-		public ValidateQueryRequest() : base(){}
-
-		/// <summary>/{index}/_validate/query</summary>
+			/// <summary>/{index}/_validate/query</summary>
 ///<param name="index">Optional, accepts null</param>
 		public ValidateQueryRequest(Indices index) : base(r=>r.Optional("index", index)){}
 

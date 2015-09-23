@@ -47,10 +47,10 @@ namespace Nest
 
 			var infer = new ElasticInferrer(nestSettings);
 			var ids = _ids
-				.Select(id => id.Document == null ? id.Value : infer.Id(id.Document))
+				.Select(id => id.Document == null ? id.Value : infer.Id(id.Document.GetType(), id.Document))
 				.ToList();
 			if (ids.Any(id => id.IsNullOrEmpty())) throw new ArgumentException("One or more ids were null or empty", "ids");
-			return string.Join(",", _ids);
+			return string.Join(",", ids);
 		}
 	}
 }

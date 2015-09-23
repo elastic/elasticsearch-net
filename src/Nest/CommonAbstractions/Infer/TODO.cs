@@ -103,10 +103,15 @@ namespace Nest
 		IndexName IDocumentPath.Index { get; set; }
 		TypeName IDocumentPath.Type { get; set; }
 
-		internal Document(Id id) { Self.Id = id; }
+		internal Document(Id id)
+		{
+			Self.Id = id;
+			Self.Index = typeof(T);
+			Self.Type = typeof(T);
+		}
 
 		public static Document<T> Id(Id id) => new Document<T>(id);
-		public static Document<T> From(T @object) => new Document<T>(Nest.Id.From(@object));
+		public static Document<T> IdFrom(T @object) => new Document<T>(Nest.Id.From(@object));
 
 		public Document<T> Index(IndexName index)
 		{

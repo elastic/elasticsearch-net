@@ -26,7 +26,7 @@ namespace Tests
 					{
 						myCustom = new
 						{
-							type = "typex",
+							type = "custom",
 							tokenizer = "ng",
 							filter = new[] { "myAscii", "kstem" },
 							char_filter = new[] { "stripMe", "patterned" }

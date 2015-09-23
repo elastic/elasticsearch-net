@@ -801,10 +801,7 @@ namespace Nest
 	{ 
 		Indices ICountRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types ICountRequest.Type => Self.RouteValues.Get<Types>("type");
-			/// <summary>/_count</summary>
-		public CountDescriptor() : base(){}
-
-			///<sumary>A comma-separated list of indices to restrict the results</summary>
+				///<sumary>A comma-separated list of indices to restrict the results</summary>
 		public CountDescriptor<T> Index(Indices index) => Assign(a=>a.RouteValues.Required("index", index));
 
 		///<sumary>A comma-separated list of indices to restrict the results</summary>
@@ -2074,10 +2071,7 @@ namespace Nest
 	{ 
 		Indices IGetMappingRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types IGetMappingRequest.Type => Self.RouteValues.Get<Types>("type");
-			/// <summary>/_mapping</summary>
-		public GetMappingDescriptor() : base(){}
-
-			///<sumary>A comma-separated list of index names</summary>
+				///<sumary>A comma-separated list of index names</summary>
 		public GetMappingDescriptor<T> Index(Indices index) => Assign(a=>a.RouteValues.Required("index", index));
 
 		///<sumary>A comma-separated list of index names</summary>
@@ -2779,10 +2773,7 @@ namespace Nest
 	{ 
 		Indices IValidateQueryRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types IValidateQueryRequest.Type => Self.RouteValues.Get<Types>("type");
-			/// <summary>/_validate/query</summary>
-		public ValidateQueryDescriptor() : base(){}
-
-			///<sumary>A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</summary>
+				///<sumary>A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</summary>
 		public ValidateQueryDescriptor<T> Index(Indices index) => Assign(a=>a.RouteValues.Required("index", index));
 
 		///<sumary>A comma-separated list of index names to restrict the operation; use `_all` or empty string to perform the operation on all indices</summary>
@@ -2959,10 +2950,7 @@ namespace Nest
 	{ 
 		Indices IMultiSearchRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types IMultiSearchRequest.Type => Self.RouteValues.Get<Types>("type");
-			/// <summary>/_msearch</summary>
-		public MultiSearchDescriptor() : base(){}
-
-			///<sumary>A comma-separated list of index names to use as default</summary>
+				///<sumary>A comma-separated list of index names to use as default</summary>
 		public MultiSearchDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Required("index", index));
 
 		///<sumary>A comma-separated list of index names to use as default</summary>
@@ -3354,10 +3342,7 @@ namespace Nest
 	{ 
 		Indices ISearchRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types ISearchRequest.Type => Self.RouteValues.Get<Types>("type");
-			/// <summary>/_search</summary>
-		public SearchDescriptor() : base(){}
-
-			///<sumary>A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</summary>
+				///<sumary>A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</summary>
 		public SearchDescriptor<T> Index(Indices index) => Assign(a=>a.RouteValues.Required("index", index));
 
 		///<sumary>A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</summary>
@@ -3441,10 +3426,7 @@ namespace Nest
 	{ 
 		Indices ISearchExistsRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types ISearchExistsRequest.Type => Self.RouteValues.Get<Types>("type");
-			/// <summary>/_search/exists</summary>
-		public SearchExistsDescriptor() : base(){}
-
-			///<sumary>A comma-separated list of indices to restrict the results</summary>
+				///<sumary>A comma-separated list of indices to restrict the results</summary>
 		public SearchExistsDescriptor<T> Index(Indices index) => Assign(a=>a.RouteValues.Required("index", index));
 
 		///<sumary>A comma-separated list of indices to restrict the results</summary>
@@ -3509,10 +3491,7 @@ namespace Nest
 	{ 
 		Indices ISearchShardsRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types ISearchShardsRequest.Type => Self.RouteValues.Get<Types>("type");
-			/// <summary>/_search_shards</summary>
-		public SearchShardsDescriptor() : base(){}
-
-			///<sumary>A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</summary>
+				///<sumary>A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</summary>
 		public SearchShardsDescriptor<T> Index(Indices index) => Assign(a=>a.RouteValues.Required("index", index));
 
 		///<sumary>A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</summary>
@@ -3556,10 +3535,7 @@ namespace Nest
 	{ 
 		Indices ISearchTemplateRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types ISearchTemplateRequest.Type => Self.RouteValues.Get<Types>("type");
-			/// <summary>/_search/template</summary>
-		public SearchTemplateDescriptor() : base(){}
-
-			///<sumary>A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</summary>
+				///<sumary>A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</summary>
 		public SearchTemplateDescriptor<T> Index(Indices index) => Assign(a=>a.RouteValues.Required("index", index));
 
 		///<sumary>A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</summary>

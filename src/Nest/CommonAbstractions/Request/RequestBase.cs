@@ -38,8 +38,10 @@ namespace Nest
 			pathSelector(Self.RouteValues);
 		}
 
+		protected virtual HttpMethod HttpMethod => Self.RequestParameters.DefaultHttpMethod;
+
 		[JsonIgnore]
-		HttpMethod IRequest.HttpMethod => Self.RequestParameters.DefaultHttpMethod;
+		HttpMethod IRequest.HttpMethod => this.HttpMethod;
 
 		[JsonIgnore]
 		RouteValues IRequest.RouteValues { get; } = new RouteValues();
