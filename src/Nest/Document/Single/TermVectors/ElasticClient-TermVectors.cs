@@ -28,12 +28,12 @@ namespace Nest
 		Task<ITermVectorsResponse> TermVectorsAsync(ITermVectorsRequest termvectorRequest);
 
 	}
-
+	//TODO discuss with @gmarz, termvectors has a required id|doc but its not reflected in our constructors
 	public partial class ElasticClient
 	{
 		///<inheritdoc/>
 		public ITermVectorsResponse TermVectors<T>(Func<TermVectorsDescriptor<T>, ITermVectorsRequest> termVectorSelector) where T : class =>
-			this.TermVectors(termVectorSelector?.Invoke(new TermVectorsDescriptor<T>()));
+			this.TermVectors(termVectorSelector?.Invoke(new TermVectorsDescriptor<T>(typeof(T), typeof(T))));
 
 		///<inheritdoc/>
 		public ITermVectorsResponse TermVectors(ITermVectorsRequest termvectorRequest)
@@ -46,7 +46,7 @@ namespace Nest
 
 		///<inheritdoc/>
 		public Task<ITermVectorsResponse> TermVectorsAsync<T>(Func<TermVectorsDescriptor<T>, ITermVectorsRequest> termVectorSelector) where T : class =>
-			this.TermVectorsAsync(termVectorSelector?.Invoke(new TermVectorsDescriptor<T>()));
+			this.TermVectorsAsync(termVectorSelector?.Invoke(new TermVectorsDescriptor<T>(typeof(T), typeof(T))));
 
 		///<inheritdoc/>
 		public Task<ITermVectorsResponse> TermVectorsAsync(ITermVectorsRequest termvectorRequest) => 

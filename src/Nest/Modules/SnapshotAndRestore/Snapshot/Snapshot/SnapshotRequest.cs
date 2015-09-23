@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public interface ISnapshotRequest : IRepositorySnapshotPath<SnapshotRequestParameters>
+	public partial interface ISnapshotRequest 
 	{
 		[JsonProperty("indices")]
 		IEnumerable<IndexName> Indices { get; set; }
@@ -21,10 +21,8 @@ namespace Nest
 		bool? Partial { get; set; }
 	}
 
-	public partial class SnapshotRequest : RepositorySnapshotPathBase<SnapshotRequestParameters>, ISnapshotRequest
+	public partial class SnapshotRequest 
 	{
-		public SnapshotRequest(string repository, string snapshot) : base(repository, snapshot) { }
-
 		public IEnumerable<IndexName> Indices { get; set; }
 
 		public bool? IgnoreUnavailable { get; set; }
@@ -35,10 +33,8 @@ namespace Nest
 
 	}
 
-
 	[DescriptorFor("SnapshotCreate")]
-	public partial class SnapshotDescriptor
-		: RepositorySnapshotPathDescriptor<SnapshotDescriptor, SnapshotRequestParameters>, ISnapshotRequest
+	public partial class SnapshotDescriptor 
 	{
 		private ISnapshotRequest Self => this;
 
@@ -49,9 +45,10 @@ namespace Nest
 
 		bool? ISnapshotRequest.Partial { get; set; }
 
-		string IRepositorySnapshotPath<SnapshotRequestParameters>.Repository { get; set; }
+		// TODO: Replace these
+		//string IRepositorySnapshotPath.<SnapshotRequestParameters>.Repository { get; set; }
 
-		string IRepositorySnapshotPath<SnapshotRequestParameters>.Snapshot { get; set; }
+		//string IRepositorySnapshotPath<SnapshotRequestParameters>.Snapshot { get; set; }
 
 		public SnapshotDescriptor Index(string index)
 		{

@@ -57,9 +57,8 @@ namespace Nest
 		private IPingRequest SetPingTimeout(IPingRequest pingRequest)
 		{
 			if (!this.ConnectionSettings.PingTimeout.HasValue) return pingRequest;
-			if (pingRequest.RequestConfiguration == null) pingRequest.RequestConfiguration = new RequestConfiguration();
-			pingRequest.RequestConfiguration.RequestTimeout = this.ConnectionSettings.PingTimeout.Value;
-			return pingRequest;
+			var timeout = this.ConnectionSettings.PingTimeout.Value;
+			return this.ForceConfiguration<IPingRequest, PingRequestParameters>(pingRequest, r => r.RequestTimeout = timeout);
 		}
 
 		private PingResponse DeserializePingResponse(IApiCallDetails response, Stream stream) => new PingResponse();

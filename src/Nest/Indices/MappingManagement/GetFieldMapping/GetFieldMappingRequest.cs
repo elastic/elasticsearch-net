@@ -7,26 +7,12 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IGetFieldMappingRequest : IIndicesOptionalTypesOptionalFieldsPath<GetFieldMappingRequestParameters> { }
-	public interface IGetFieldMappingRequest<T> : IGetFieldMappingRequest where T : class { }
+	public partial interface IGetFieldMappingRequest { }
 
-	public partial class GetFieldMappingRequest : IndicesOptionalTypesOptionalFieldsPathBase<GetFieldMappingRequestParameters>, IGetFieldMappingRequest
-	{
-		public GetFieldMappingRequest(params FieldName[] fields) : base(fields) {}
-	}
+	public partial class GetFieldMappingRequest { }
 	
-	public partial class GetFieldMappingRequest<T> : IndicesOptionalTypesOptionalFieldsPathBase<GetFieldMappingRequestParameters, T>, IGetFieldMappingRequest
-		where T : class
-	{
-		public GetFieldMappingRequest(params FieldName[] fields) : base(fields) { }
-
-		public GetFieldMappingRequest(params Expression<Func<T, object>>[] fields) : base(fields) { }
-	}
+	//TODO Removed typed request validate this is still valid
 
 	[DescriptorFor("IndicesGetFieldMapping")]
-	public partial class GetFieldMappingDescriptor<T> : IndicesOptionalTypesOptionalFieldsPathDescriptor<GetFieldMappingDescriptor<T>, GetFieldMappingRequestParameters, T>, IGetFieldMappingRequest
-		where T : class
-	{
-	}
+	public partial class GetFieldMappingDescriptor<T> where T : class { }
 }

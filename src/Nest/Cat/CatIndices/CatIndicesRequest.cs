@@ -7,10 +7,9 @@ using System.Text;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface ICatIndicesRequest : IRequest<CatIndicesRequestParameters> { }
+	public partial interface ICatIndicesRequest { }
 
-	public partial class CatIndicesRequest : BasePathRequest<CatIndicesRequestParameters>, ICatIndicesRequest { }
+	public partial class CatIndicesRequest { }
 
-	public partial class CatIndicesDescriptor : BasePathDescriptor<CatIndicesDescriptor, CatIndicesRequestParameters>, ICatIndicesRequest { }
+	public partial class CatIndicesDescriptor { }
 }

@@ -6,15 +6,10 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IClearCacheRequest : IIndicesOptionalPath<ClearCacheRequestParameters> { }
+	public partial interface IClearCacheRequest { }
 	
-	public partial class ClearCacheRequest : IndicesOptionalPathBase<ClearCacheRequestParameters>, IClearCacheRequest
-	{
-	}
+	public partial class ClearCacheRequest { }
 
 	[DescriptorFor("IndicesClearCache")]
-	public partial class ClearCacheDescriptor : IndicesOptionalPathDescriptor<ClearCacheDescriptor, ClearCacheRequestParameters>, IClearCacheRequest
-	{
-	}
+	public partial class ClearCacheDescriptor { }
 }

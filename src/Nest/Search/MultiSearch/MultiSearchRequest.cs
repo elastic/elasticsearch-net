@@ -6,22 +6,20 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IMultiSearchRequest : IFixedIndexTypePath<MultiSearchRequestParameters>
+	public partial interface IMultiSearchRequest
 	{
-		
+
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
-		IDictionary<string, ISearchRequest> Operations { get; set;}
+		IDictionary<string, ISearchRequest> Operations { get; set; }
 	}
 
-	public partial class MultiSearchRequest : FixedIndexTypePathBase<MultiSearchRequestParameters>, IMultiSearchRequest
+	public partial class MultiSearchRequest
 	{
 		public IDictionary<string, ISearchRequest> Operations { get; set; }
 	}
 
 	[DescriptorFor("Msearch")]
-	public partial class MultiSearchDescriptor : FixedIndexTypePathDescriptor<MultiSearchDescriptor, MultiSearchRequestParameters>, IMultiSearchRequest
+	public partial class MultiSearchDescriptor
 	{
 		private IMultiSearchRequest Self => this;
 
@@ -29,7 +27,7 @@ namespace Nest
 
 		IDictionary<string, ISearchRequest> IMultiSearchRequest.Operations
 		{
-			get { return _operations; } 
+			get { return _operations; }
 			set { _operations = value; }
 		}
 
@@ -37,7 +35,7 @@ namespace Nest
 		{
 			name.ThrowIfNull("name");
 			searchSelector.ThrowIfNull("searchSelector");
-			var descriptor = searchSelector(new SearchDescriptor<T>().Index(Self.Index).Type(Self.Type));
+			var descriptor = searchSelector(new SearchDescriptor<T>());
 			if (descriptor == null)
 				return this;
 			this._operations.Add(name, descriptor);

@@ -7,29 +7,23 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(BulkRequestJsonConverter))]
-	public interface IBulkRequest : IFixedIndexTypePath<BulkRequestParameters>
+	public partial interface IBulkRequest 
 	{
 		[JsonIgnore]
-		IList<IBulkOperation> Operations { get; set;}
+		IList<IBulkOperation> Operations { get; set; }
 	}
 
-	public partial class BulkRequest : FixedIndexTypePathBase<BulkRequestParameters>, IBulkRequest
+	public partial class BulkRequest 
 	{
 		public IList<IBulkOperation> Operations { get; set; }
 	}
 
-	public partial class BulkDescriptor : FixedIndexTypePathDescriptor<BulkDescriptor, BulkRequestParameters>, IBulkRequest
+	public partial class BulkDescriptor 
 	{
 		private IBulkRequest Self => this;
 
-		IList<IBulkOperation> IBulkRequest.Operations { get; set; }
-
-		public BulkDescriptor()
-		{
-			Self.Operations = new SynchronizedCollection<IBulkOperation>();
-		}
+		IList<IBulkOperation> IBulkRequest.Operations { get; set; } = new SynchronizedCollection<IBulkOperation>();
 
 		public BulkDescriptor Create<T>(Func<BulkCreateDescriptor<T>, BulkCreateDescriptor<T>> bulkCreateSelector) where T : class
 		{
@@ -40,7 +34,7 @@ namespace Nest
 			Self.Operations.Add(descriptor);
 			return this;
 		}
-		
+
 		/// <summary>
 		/// CreateMany, convenience method to create many documents at once.
 		/// </summary>
@@ -86,7 +80,7 @@ namespace Nest
 			Self.Operations.Add(descriptor);
 			return this;
 		}
-		
+
 		/// <summary>
 		/// DeleteMany, convenience method to delete many objects at once.
 		/// </summary>
@@ -94,12 +88,12 @@ namespace Nest
 		/// <param name="bulkDeleteSelector">A func called on each object to describe the individual delete operation</param>
 		public BulkDescriptor DeleteMany<T>(IEnumerable<T> @objects, Func<BulkDeleteDescriptor<T>, T, BulkDeleteDescriptor<T>> bulkDeleteSelector = null) where T : class
 		{
-			bulkDeleteSelector = bulkDeleteSelector ?? ((d, o)=>d);
+			bulkDeleteSelector = bulkDeleteSelector ?? ((d, o) => d);
 			foreach (var descriptor in @objects.Select(o => bulkDeleteSelector(new BulkDeleteDescriptor<T>().Document(o), o)))
 				Self.Operations.Add(descriptor);
 			return this;
 		}
-		
+
 		/// <summary>
 		/// DeleteMany, convenience method to delete many objects at once.
 		/// </summary>
@@ -107,12 +101,12 @@ namespace Nest
 		/// <param name="bulkDeleteSelector">A func called on each ids to describe the individual delete operation</param>
 		public BulkDescriptor DeleteMany<T>(IEnumerable<string> ids, Func<BulkDeleteDescriptor<T>, string, BulkDeleteDescriptor<T>> bulkDeleteSelector = null) where T : class
 		{
-			bulkDeleteSelector = bulkDeleteSelector ?? ((d, s)=> d);
+			bulkDeleteSelector = bulkDeleteSelector ?? ((d, s) => d);
 			foreach (var descriptor in ids.Select(o => bulkDeleteSelector(new BulkDeleteDescriptor<T>().Id(o), o)))
 				Self.Operations.Add(descriptor);
 			return this;
 		}
-		
+
 		/// <summary>
 		/// DeleteMany, convenience method to delete many objects at once.
 		/// </summary>
@@ -120,7 +114,7 @@ namespace Nest
 		/// <param name="bulkDeleteSelector">A func called on each ids to describe the individual delete operation</param>
 		public BulkDescriptor DeleteMany<T>(IEnumerable<long> ids, Func<BulkDeleteDescriptor<T>, string, BulkDeleteDescriptor<T>> bulkDeleteSelector = null) where T : class
 		{
-			return this.DeleteMany(ids.Select(i=>i.ToString(CultureInfo.InvariantCulture)), bulkDeleteSelector);
+			return this.DeleteMany(ids.Select(i => i.ToString(CultureInfo.InvariantCulture)), bulkDeleteSelector);
 		}
 
 		public BulkDescriptor Update<T>(Func<BulkUpdateDescriptor<T, T>, BulkUpdateDescriptor<T, T>> bulkUpdateSelector) where T : class

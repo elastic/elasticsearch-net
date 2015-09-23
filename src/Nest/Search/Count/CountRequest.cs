@@ -5,76 +5,37 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface ICountRequest : IQueryPath<CountRequestParameters>
+	public partial interface ICountRequest 
 	{
 		[JsonProperty("query")]
 		IQueryContainer Query { get; set; }
 	}
-	public interface ICountRequest<T> : ICountRequest where T : class {}
+	//TODO removed typed variant of request assert this is ok in new setup
 
-	internal static class CountPathInfo
-	{
-		public static void Update(ElasticsearchPathInfo<CountRequestParameters> pathInfo, ICountRequest request)
-		{
-			var source = request.RequestParameters.GetQueryStringValue<string>("source");
-			pathInfo.HttpMethod = source.IsNullOrEmpty() 
-				&& (request.Query == null || request.Query.IsConditionless)
-				? HttpMethod.GET
-				: HttpMethod.POST;
-		}
-	}
+	//TODO port this HttpMethod logic to property
+	//internal static class CountPathInfo
+	//{
+	//	public static void Update(RouteValues pathInfo, ICountRequest request)
+	//	{
+	//		var source = request.RequestParameters.GetQueryStringValue<string>("source");
+	//		pathInfo.HttpMethod = source.IsNullOrEmpty() 
+	//			&& (request.Query == null || request.Query.IsConditionless)
+	//			? HttpMethod.GET
+	//			: HttpMethod.POST;
+	//	}
+	//}
 	
-	public partial class CountRequest : QueryPathBase<CountRequestParameters>, ICountRequest
+	public partial class CountRequest 
 	{
-		public CountRequest() {}
-
-		public CountRequest(IndexName index, TypeName type = null) : base(index, type) { }
-
-		public CountRequest(IEnumerable<IndexName> indices, IEnumerable<TypeName> types = null) : base(indices, types) { }
-
 		public IQueryContainer Query { get; set; }
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CountRequestParameters> pathInfo)
-		{
-			CountPathInfo.Update(pathInfo, this);
-		}
 	}
 
-	public partial class CountRequest<T> : QueryPathBase<CountRequestParameters, T>, ICountRequest
-		where T : class
-	{
-		public CountRequest() {}
-
-		public CountRequest(IndexName index, TypeName type = null) : base(index, type) { }
-
-		public CountRequest(IEnumerable<IndexName> indices, IEnumerable<TypeName> types = null) : base(indices, types) { }
-
-		public IQueryContainer Query { get; set; }
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CountRequestParameters> pathInfo)
-		{
-			CountPathInfo.Update(pathInfo, this);
-		}
-	}
-	
 	[DescriptorFor("Count")]
-	public partial class CountDescriptor<T> : QueryPathDescriptorBase<CountDescriptor<T>, CountRequestParameters, T>, ICountRequest
-		where T : class
+	public partial class CountDescriptor<T> where T : class
 	{
-		private ICountRequest Self => this;
-
 		IQueryContainer ICountRequest.Query { get; set; }
 
-		public CountDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector)
-		{
-			Self.Query = querySelector(new QueryContainerDescriptor<T>());
-			return this;
-		}
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<CountRequestParameters> pathInfo)
-		{
-			CountPathInfo.Update(pathInfo, this);
-		}
+		public CountDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector) =>
+			Assign(a => a.Query = querySelector?.Invoke(new QueryContainerDescriptor<T>()));
 	}
 }

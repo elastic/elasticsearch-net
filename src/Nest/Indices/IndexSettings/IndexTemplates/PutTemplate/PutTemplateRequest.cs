@@ -6,39 +6,25 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IPutTemplateRequest : INamePath<PutTemplateRequestParameters>
+	public partial interface IPutTemplateRequest 
 	{
 		TemplateMapping TemplateMapping { get; set; }
 	}
 
-	public partial class PutTemplateRequest : NamePathBase<PutTemplateRequestParameters>, IPutTemplateRequest
+	public partial class PutTemplateRequest 
 	{
-		public PutTemplateRequest(string name) : base(name) { } 
-
 		//TODO Merge this state object onto this object
 		public TemplateMapping TemplateMapping { get; set; }
 	}
 
 	[DescriptorFor("IndicesPutTemplate")]
-	public partial class PutTemplateDescriptor : NamePathDescriptor<PutTemplateDescriptor, PutTemplateRequestParameters>, IPutTemplateRequest
+	public partial class PutTemplateDescriptor 
 	{
 		private IPutTemplateRequest Self => this;
-
-		private readonly IConnectionSettingsValues _connectionSettings;
 
 		//TODO Merge this state object onto this descriptor
 		TemplateMapping IPutTemplateRequest.TemplateMapping { get; set; }
 		
-		//TODO ConnectionSettings why?
-
-		public PutTemplateDescriptor(IConnectionSettingsValues connectionSettings)
-		{
-			_connectionSettings = connectionSettings;
-			Self.TemplateMapping = new TemplateMapping();
-		}
-
-
 		/// <summary>
 		/// Initialize the descriptor using the values from for instance a previous Get Template Mapping call.
 		/// </summary>

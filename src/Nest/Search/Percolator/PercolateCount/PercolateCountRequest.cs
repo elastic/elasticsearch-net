@@ -8,28 +8,16 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IPercolateCountRequest<TDocument> : IIndexTypePath<PercolateCountRequestParameters>, IPercolateOperation
+	public interface IPercolateCountRequest<TDocument> : IPercolateCountRequest, IPercolateOperation
 		where TDocument : class
 	{
 		[JsonProperty(PropertyName = "doc")]
 		TDocument Document { get; set; }
 	}
 
-	internal static class PercolateCountPathInfo
-	{
-		public static void Update<T>(ElasticsearchPathInfo<PercolateCountRequestParameters> pathInfo, IPercolateCountRequest<T> request)
-			where T : class
-		{
-			pathInfo.Id = request.Id;
-			pathInfo.HttpMethod = HttpMethod.POST;
-		}
-	}
-	
-	public partial class PercolateCountRequest<TDocument> : IndexTypePathBase<PercolateCountRequestParameters, TDocument>, IPercolateCountRequest<TDocument>
+	public partial class PercolateCountRequest<TDocument> : IPercolateCountRequest<TDocument>
 		where TDocument : class
 	{
-		public string Id { get; set; }
 		public int? Size { get; set; }
 		public bool? TrackScores { get; set; }
 		public IDictionary<FieldName, ISort> Sort { get; set; }
@@ -40,43 +28,36 @@ namespace Nest
 
 		public TDocument Document { get; set; }
 		
+		Id IPercolateOperation.Id => ((IPercolateCountRequest)this).Id;
 		IRequestParameters IPercolateOperation.GetRequestParameters()
 		{
-			return this.Request.RequestParameters;
+			return this.Self.RequestParameters;
 		}
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<PercolateCountRequestParameters> pathInfo)
-		{
-			PercolateCountPathInfo.Update(pathInfo, this);
-		}
-
 	}
 	
 	[DescriptorFor("CountPercolate")]
-	public partial class PercolateCountDescriptor<T> : IndexTypePathDescriptor<PercolateCountDescriptor<T>, PercolateCountRequestParameters, T>
-		, IPercolateCountRequest<T>
+	public partial class PercolateCountDescriptor<T> : IPercolateCountRequest<T>
 		where T : class
 	{
-
 		private IPercolateCountRequest<T> Self => this;
 
 		IHighlightRequest IPercolateOperation.Highlight { get; set; }
 		QueryContainer IPercolateOperation.Query { get; set; }
 		QueryContainer IPercolateOperation.Filter { get; set; }
 
-		string IPercolateOperation.Id { get; set; }
+		Id IPercolateOperation.Id => ((IPercolateCountRequest)this).Id;
 		int? IPercolateOperation.Size { get; set; }
 		bool? IPercolateOperation.TrackScores { get; set; }
 		
 		T IPercolateCountRequest<T>.Document { get; set; }
-
-
+		
+		//TODO these dictionaries seem badly typed
 		IDictionary<FieldName, ISort> IPercolateOperation.Sort { get; set; }
 		IDictionary<string, IAggregationContainer> IPercolateOperation.Aggregations { get; set; }
 		
 		IRequestParameters IPercolateOperation.GetRequestParameters()
 		{
-			return this.Request.RequestParameters;
+			return this.Self.RequestParameters;
 		}
 		/// <summary>
 		/// The object to perculate
@@ -87,23 +68,6 @@ namespace Nest
 			return this;
 		}
 
-		/// <summary>
-		/// The object to perculate
-		/// </summary>
-		public PercolateCountDescriptor<T> Id(string id)
-		{
-			Self.Id = id;
-			return this;
-		}
-
-		/// <summary>
-		/// The object to perculate
-		/// </summary>
-		public PercolateCountDescriptor<T> Id(long id)
-		{
-			Self.Id = id.ToString(CultureInfo.InvariantCulture);
-			return this;
-		}
 		/// <summary>
 		/// Make sure we keep calculating score even if we are sorting on a field.
 		/// </summary>
@@ -296,11 +260,6 @@ namespace Nest
 			QueryDescriptor.ThrowIfNull("filter");
 			Self.Filter = QueryDescriptor;
 			return this;
-		}
-		
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<PercolateCountRequestParameters> pathInfo)
-		{
-			PercolateCountPathInfo.Update(pathInfo, this);
 		}
 	}
 }

@@ -12,13 +12,13 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <inheritdoc/>
-		IExistsResponse TemplateExists(Func<TemplateExistsDescriptor, ITemplateExistsRequest> selector);
+		IExistsResponse TemplateExists(Name template, Func<TemplateExistsDescriptor, ITemplateExistsRequest> selector = null);
 
 		/// <inheritdoc/>
 		IExistsResponse TemplateExists(ITemplateExistsRequest templateRequest);
 
 		/// <inheritdoc/>
-		Task<IExistsResponse> TemplateExistsAsync(Func<TemplateExistsDescriptor, ITemplateExistsRequest> selector);
+		Task<IExistsResponse> TemplateExistsAsync(Name template, Func<TemplateExistsDescriptor, ITemplateExistsRequest> selector = null);
 
 		/// <inheritdoc/>
 		Task<IExistsResponse> TemplateExistsAsync(ITemplateExistsRequest templateRequest);
@@ -28,8 +28,8 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IExistsResponse TemplateExists(Func<TemplateExistsDescriptor, ITemplateExistsRequest> selector) => 
-			this.TemplateExists(selector?.Invoke(new TemplateExistsDescriptor()));
+		public IExistsResponse TemplateExists(Name template, Func<TemplateExistsDescriptor, ITemplateExistsRequest> selector = null) => 
+			this.TemplateExists(selector.InvokeOrDefault(new TemplateExistsDescriptor(template)));
 
 		/// <inheritdoc/>
 		public IExistsResponse TemplateExists(ITemplateExistsRequest templateRequest) => 
@@ -40,8 +40,8 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<IExistsResponse> TemplateExistsAsync(Func<TemplateExistsDescriptor, ITemplateExistsRequest> selector) => 
-			this.TemplateExistsAsync(selector?.Invoke(new TemplateExistsDescriptor()));
+		public Task<IExistsResponse> TemplateExistsAsync(Name template, Func<TemplateExistsDescriptor, ITemplateExistsRequest> selector = null) => 
+			this.TemplateExistsAsync(selector.InvokeOrDefault(new TemplateExistsDescriptor(template)));
 
 		/// <inheritdoc/>
 		public Task<IExistsResponse> TemplateExistsAsync(ITemplateExistsRequest templateRequest)

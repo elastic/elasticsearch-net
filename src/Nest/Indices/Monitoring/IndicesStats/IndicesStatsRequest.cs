@@ -6,44 +6,39 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IIndicesStatsRequest : IIndicesOptionalPath<IndicesStatsRequestParameters>
+	public partial interface IIndicesStatsRequest 
 	{
 		IEnumerable<TypeName> Types { get; set; }
 		IEnumerable<IndicesStatsMetric> Metrics { get; set; }
 
 	}
 
-	internal static class IndicesStatsPathInfo
-	{
-		public static void Update(IConnectionSettingsValues settings, ElasticsearchPathInfo<IndicesStatsRequestParameters> pathInfo, IIndicesStatsRequest request)
-		{
-			if (request.Types.HasAny())
-			{
-				var inferrer = new ElasticInferrer(settings);
-				var types = inferrer.TypeNames(request.Types);
-				pathInfo.RequestParameters.AddQueryString("types", string.Join(",", types));
-			}
-			if (request.Metrics != null)
-				pathInfo.Metric = request.Metrics.Cast<Enum>().GetStringValue();
-			pathInfo.HttpMethod = HttpMethod.GET;
-		}
-	}
+	//TODO fairly complex route update routine, uncommented for now
 
-	public partial class IndicesStatsRequest : IndicesOptionalPathBase<IndicesStatsRequestParameters>, IIndicesStatsRequest
+	//internal static class IndicesStatsPathInfo
+	//{
+	//	public static void Update(IConnectionSettingsValues settings, RouteValues pathInfo, IIndicesStatsRequest request)
+	//	{
+	//		if (request.Types.HasAny())
+	//		{
+	//			var inferrer = new ElasticInferrer(settings);
+	//			var types = inferrer.TypeNames(request.Types);
+	//			pathInfo.RequestParameters.AddQueryString("types", string.Join(",", types));
+	//		}
+	//		if (request.Metrics != null)
+	//			pathInfo.Metric = request.Metrics.Cast<Enum>().GetStringValue();
+	//		pathInfo.HttpMethod = HttpMethod.GET;
+	//	}
+	//}
+
+	public partial class IndicesStatsRequest 
 	{
 		public IEnumerable<IndicesStatsMetric> Metrics { get; set; }
 		public IEnumerable<TypeName> Types { get; set; }
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<IndicesStatsRequestParameters> pathInfo)
-		{
-			IndicesStatsPathInfo.Update(settings, pathInfo , this);
-		}
-
 	}
 
 	[DescriptorFor("IndicesStats")]
-	public partial class IndicesStatsDescriptor : IndicesOptionalPathDescriptor<IndicesStatsDescriptor, IndicesStatsRequestParameters>, IIndicesStatsRequest
+	public partial class IndicesStatsDescriptor 
 	{
 		private IIndicesStatsRequest Self => this;
 
@@ -61,11 +56,6 @@ namespace Nest
 		{
 			Self.Metrics = metrics;
 			return this;
-		}
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<IndicesStatsRequestParameters> pathInfo)
-		{
-			IndicesStatsPathInfo.Update(settings, pathInfo, this);
 		}
 	}
 }

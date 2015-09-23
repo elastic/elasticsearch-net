@@ -6,8 +6,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface ISearchExistsRequest : IQueryPath<SearchExistsRequestParameters>
+	public partial interface ISearchExistsRequest 
 	{
 		[JsonProperty(PropertyName = "query")]
 		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeJsonConverter<QueryContainer>, CustomJsonConverter>))]
@@ -16,76 +15,25 @@ namespace Nest
 		[JsonIgnore]
 		string QueryString { get; set; }
 	}
-	public interface ISearchExistsRequest<T> : ISearchExistsRequest { }
+	//TODO if querystring has source || q || this.Query == null do a GET otherwise POST
 
-	internal static class SearchExistsPathInfo
-	{
-		public static void Update(ElasticsearchPathInfo<SearchExistsRequestParameters> pathInfo, ISearchExistsRequest request)
-		{
-			if (request.RequestParameters.ContainsKey("source") || request.RequestParameters.ContainsKey("q"))
-				pathInfo.HttpMethod = HttpMethod.GET;
-			else
-				pathInfo.HttpMethod = request.Query != null ? HttpMethod.POST : HttpMethod.GET;
-		}
-	}
-	
-	public partial class SearchExistsRequest : QueryPathBase<SearchExistsRequestParameters>, ISearchExistsRequest
+	public partial class SearchExistsRequest 
 	{
 		public IQueryContainer Query { get; set; }
 
 		public string QueryString { get; set; }
-
-		protected SearchExistsRequest() : base() { }
-
-		protected SearchExistsRequest(IndexName index, TypeName type = null)
-			: base(index, type) { }
-
-
-		protected SearchExistsRequest(IEnumerable<IndexName> indices, IEnumerable<TypeName> types = null)
-			: base(indices, types) { }
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SearchExistsRequestParameters> pathInfo)
-		{
-			SearchExistsPathInfo.Update(pathInfo, this);
-		}
-
 	}
 
-	public partial class SearchExistsRequest<T> : QueryPathBase<SearchExistsRequestParameters, T>, ISearchExistsRequest<T>
-		where T : class
-	{
-		public IQueryContainer Query { get; set; }
-
-		public string QueryString { get; set; }
-
-		protected SearchExistsRequest() : base() { }
-
-		protected SearchExistsRequest(IndexName index, TypeName type = null)
-			: base(index, type) { }
-
-		protected SearchExistsRequest(IEnumerable<IndexName> indices, IEnumerable<TypeName> types = null)
-			: base(indices, types) { }
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SearchExistsRequestParameters> pathInfo)
-		{
-			SearchExistsPathInfo.Update(pathInfo, this);
-		}
-	}
+	//TODO removed typed request variant for now
 
 	[DescriptorFor("IndicesExists")]
-	public partial class SearchExistsDescriptor<T> : QueryPathDescriptorBase<SearchExistsDescriptor<T>, SearchExistsRequestParameters, T>, ISearchExistsRequest
-		where T : class
+	public partial class SearchExistsDescriptor<T> where T : class
 	{
 		private ISearchExistsRequest Self => this;
 
 		IQueryContainer ISearchExistsRequest.Query { get; set; }
 
 		string ISearchExistsRequest.QueryString { get; set; }
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SearchExistsRequestParameters> pathInfo)
-		{
-			SearchExistsPathInfo.Update(pathInfo, this);
-		}
 
 		internal bool _Strict { get; set; }
 		

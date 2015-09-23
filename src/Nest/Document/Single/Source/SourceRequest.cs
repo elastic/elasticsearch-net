@@ -5,28 +5,16 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	public interface ISourceRequest : IDocumentOptionalPath<SourceRequestParameters> { }
+	public partial interface ISourceRequest { }
 
 	public interface ISourceRequest<T> : ISourceRequest where T : class { }
 
-	public partial class SourceRequest : DocumentPathBase<SourceRequestParameters>, ISourceRequest
-	{
-		public SourceRequest(IndexName indexName, TypeName typeName, string id) : base(indexName, typeName, id) { }
-	}
+	public partial class SourceRequest { }
 
-	public partial class SourceRequest<T> : DocumentPathBase<SourceRequestParameters, T>, ISourceRequest<T>
-		where T : class
-	{
-		public SourceRequest(string id) : base(id) { }
-
-		public SourceRequest(long id) : base(id) { }
-
-		public SourceRequest(T document) : base(document) { }
-	}
+	public partial class SourceRequest<T> where T : class { }
 
 	[DescriptorFor("GetSource")]
-	public partial class SourceDescriptor<T> : DocumentPathDescriptor<SourceDescriptor<T>, SourceRequestParameters, T>
-		where T : class
+	public partial class SourceDescriptor<T> where T : class
 	{
 		public SourceDescriptor<T> ExecuteOnPrimary()
 		{

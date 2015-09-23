@@ -7,37 +7,31 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IMultiTermVectorsRequest : IIndexTypePath<MultiTermVectorsRequestParameters>
+	public partial interface IMultiTermVectorsRequest 
 	{
 		[JsonProperty("docs")]
-		IEnumerable<MultiTermVectorDocument> Documents { get; set;}
+		IEnumerable<MultiTermVectorDocument> Documents { get; set; }
 	}
 
-	public partial class MultiTermVectorsRequest : IndexTypePathBase<MultiTermVectorsRequestParameters>, IMultiTermVectorsRequest
+	public partial class MultiTermVectorsRequest 
 	{
-		public MultiTermVectorsRequest(IndexName index, TypeName typeNameMarker) : base(index, typeNameMarker) { }
-
 		public IEnumerable<MultiTermVectorDocument> Documents { get; set; }
 	}
 
 	[DescriptorFor("Mtermvectors")]
-	public partial class MultiTermVectorsDescriptor<T> : IndexTypePathDescriptor<MultiTermVectorsDescriptor<T>, MultiTermVectorsRequestParameters, T>, IMultiTermVectorsRequest
-		where T : class
+	public partial class MultiTermVectorsDescriptor<T> where T : class
 	{
-		private IMultiTermVectorsRequest Self => this;
-
-		IEnumerable<MultiTermVectorDocument> IMultiTermVectorsRequest.Documents { get; set; }
+		IEnumerable<MultiTermVectorDocument> IMultiTermVectorsRequest.Documents { get; set; }	
 
 		public MultiTermVectorsDescriptor<T> Documents(params Func<MultiTermVectorDocumentDescriptor<T>, IMultiTermVectorDocumentDescriptor>[] documentSelectors)
 		{
-			Self.Documents = documentSelectors.Select(s => s(new MultiTermVectorDocumentDescriptor<T>()).GetDocument()).Where(d=>d!= null).ToList();
+			((IMultiTermVectorsRequest)this).Documents = documentSelectors.Select(s => s(new MultiTermVectorDocumentDescriptor<T>()).GetDocument()).Where(d => d != null).ToList();
 			return this;
 		}
 
 		public MultiTermVectorsDescriptor<T> Documents(IEnumerable<MultiTermVectorDocument> documents)
 		{
-			Self.Documents = documents;
+			((IMultiTermVectorsRequest)this).Documents = documents;
 			return this;
 		}
 
@@ -45,17 +39,17 @@ namespace Nest
 		{
 			return this.Documents(ids.Select(id => new MultiTermVectorDocument { Id = id }));
 		}
-		
+
 		public MultiTermVectorsDescriptor<T> Ids(params long[] ids)
 		{
 			return this.Documents(ids.Select(id => new MultiTermVectorDocument { Id = id.ToString(CultureInfo.InvariantCulture) }));
 		}
-		
+
 		public MultiTermVectorsDescriptor<T> Ids(IEnumerable<string> ids)
 		{
 			return this.Documents(ids.Select(id => new MultiTermVectorDocument { Id = id }));
 		}
-		
+
 		public MultiTermVectorsDescriptor<T> Ids(IEnumerable<long> ids)
 		{
 			return this.Documents(ids.Select(id => new MultiTermVectorDocument { Id = id.ToString(CultureInfo.InvariantCulture) }));

@@ -20,13 +20,13 @@ namespace Nest
 		/// </summary>
 		/// <param name="name">The name for the warmer that you want to register</param>
 		/// <param name="selector">A descriptor that further describes what the warmer should look like</param>
-		IIndicesOperationResponse PutWarmer(string name, Func<PutWarmerDescriptor, IPutWarmerRequest> selector);
+		IIndicesOperationResponse PutWarmer(Name name, Func<PutWarmerDescriptor, IPutWarmerRequest> selector);
 
 		/// <inheritdoc/>
 		IIndicesOperationResponse PutWarmer(IPutWarmerRequest putWarmerRequest);
 
 		/// <inheritdoc/>
-		Task<IIndicesOperationResponse> PutWarmerAsync(string name, Func<PutWarmerDescriptor, IPutWarmerRequest> selector);
+		Task<IIndicesOperationResponse> PutWarmerAsync(Name name, Func<PutWarmerDescriptor, IPutWarmerRequest> selector);
 
 		/// <inheritdoc/>
 		Task<IIndicesOperationResponse> PutWarmerAsync(IPutWarmerRequest putWarmerRequest);
@@ -38,8 +38,8 @@ namespace Nest
 		//TODO AllIndices() seems odd here
 
 		/// <inheritdoc/>
-		public IIndicesOperationResponse PutWarmer(string name, Func<PutWarmerDescriptor, IPutWarmerRequest> selector) =>
-			this.PutWarmer(selector?.Invoke(new PutWarmerDescriptor().Name(name).AllIndices()));
+		public IIndicesOperationResponse PutWarmer(Name name, Func<PutWarmerDescriptor, IPutWarmerRequest> selector) =>
+			this.PutWarmer(selector?.Invoke(new PutWarmerDescriptor(name)));
 
 		/// <inheritdoc/>
 		public IIndicesOperationResponse PutWarmer(IPutWarmerRequest putWarmerRequest) => 
@@ -49,8 +49,8 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<IIndicesOperationResponse> PutWarmerAsync(string name, Func<PutWarmerDescriptor, IPutWarmerRequest> selector) => 
-			this.PutWarmerAsync(selector?.Invoke(new PutWarmerDescriptor().Name(name).AllIndices()));
+		public Task<IIndicesOperationResponse> PutWarmerAsync(Name name, Func<PutWarmerDescriptor, IPutWarmerRequest> selector) => 
+			this.PutWarmerAsync(selector?.Invoke(new PutWarmerDescriptor(name)));
 
 		/// <inheritdoc/>
 		public Task<IIndicesOperationResponse> PutWarmerAsync(IPutWarmerRequest putWarmerRequest) => 

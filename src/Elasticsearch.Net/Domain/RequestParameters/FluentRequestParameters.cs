@@ -31,17 +31,6 @@ namespace Elasticsearch.Net
 			Self.QueryString = new Dictionary<string, object>();
 		}
 
-		//TODO only called once investigate removing the need for this
-		public T CopyQueryStringValuesFrom(IRequestParameters requestParameters)
-		{
-			if (requestParameters == null)
-				return (T)this;
-			var from = requestParameters.QueryString;
-			foreach (var k in from.Keys)
-				Self.QueryString[k] = from[k];
-			return (T)this;
-		}
-
 		void IRequestParameters.AddQueryStringValue(string name, object value)
 		{
 			if (value == null || name.IsNullOrEmpty()) return;
@@ -60,10 +49,9 @@ namespace Elasticsearch.Net
 			return (T)this;
 		}
 
-		public T RequestConfiguration(Func<IRequestConfiguration, RequestConfigurationDescriptor> selector)
+		public T RequestConfiguration(Func<RequestConfigurationDescriptor, IRequestConfiguration> selector)
 		{
-			selector.ThrowIfNull("selector");
-			Self.RequestConfiguration = selector(Self.RequestConfiguration ?? new RequestConfigurationDescriptor());
+			Self.RequestConfiguration = selector?.Invoke(new RequestConfigurationDescriptor()) ?? Self.RequestConfiguration;
 			return (T)this;
 		}
 		

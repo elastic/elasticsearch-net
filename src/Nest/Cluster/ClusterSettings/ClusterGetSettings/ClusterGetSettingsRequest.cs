@@ -6,12 +6,9 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IClusterGetSettingsRequest : IRequest<ClusterGetSettingsRequestParameters> { 
-	}
+	public partial interface IClusterGetSettingsRequest { }
 	
-	public partial class ClusterGetSettingsRequest : BasePathRequest<ClusterGetSettingsRequestParameters>, IClusterGetSettingsRequest { }
+	public partial class ClusterGetSettingsRequest { }
 
-	public partial class ClusterGetSettingsDescriptor : BasePathDescriptor<ClusterGetSettingsDescriptor, ClusterGetSettingsRequestParameters>
-		, IClusterGetSettingsRequest { }
+	public partial class ClusterGetSettingsDescriptor { }
 }

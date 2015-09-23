@@ -7,10 +7,9 @@ using System.Text;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IPingRequest : IRequest<PingRequestParameters> { }
+	public partial interface IPingRequest { }
 
-	public partial class PingRequest : BasePathRequest<PingRequestParameters>, IPingRequest { }
+	public partial class PingRequest { }
 
-	public partial class PingDescriptor : BasePathDescriptor<PingDescriptor, PingRequestParameters>, IPingRequest { }
+	public partial class PingDescriptor { }
 }

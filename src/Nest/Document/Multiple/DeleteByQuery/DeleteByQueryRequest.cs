@@ -6,68 +6,27 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IDeleteByQueryRequest : IQueryPath<DeleteByQueryRequestParameters>
+	public partial interface IDeleteByQueryRequest 
 	{
 		[JsonProperty("query")]
 		IQueryContainer Query { get; set; }
 	}
 
-	public interface IDeleteByQueryRequest<T> : IDeleteByQueryRequest where T : class {}
+	public interface IDeleteByQueryRequest<T> : IDeleteByQueryRequest where T : class { }
 
-	internal static class DeleteByQueryPathInfo
+	public partial class DeleteByQueryRequest 
 	{
-		public static void Update(ElasticsearchPathInfo<DeleteByQueryRequestParameters> pathInfo, IDeleteByQueryRequest request)
-		{
-			pathInfo.HttpMethod = HttpMethod.DELETE;
-			//query works a bit different in that if all types and all indices are specified the root 
-			//needs to be /_all/_query not just /_query
-			if (pathInfo.Index.IsNullOrEmpty() && pathInfo.Type.IsNullOrEmpty()
-				&& request.AllIndices.GetValueOrDefault(false)
-				&& request.AllTypes.GetValueOrDefault(false))
-				pathInfo.Index = "_all";
-		}
+		public IQueryContainer Query { get; set; }
+
 	}
 	
-
-	public partial class DeleteByQueryRequest : QueryPathBase<DeleteByQueryRequestParameters>, IDeleteByQueryRequest
+	//TODO inherit from deleteybyqueryrequest
+	public partial class DeleteByQueryRequest<T> : RequestBase<DeleteByQueryRequestParameters>, IDeleteByQueryRequest where T : class
 	{
-		public DeleteByQueryRequest() {}
-
-		public DeleteByQueryRequest(IndexName index, TypeName type = null) : base(index, type) { }
-
-		public DeleteByQueryRequest(IEnumerable<IndexName> indices, IEnumerable<TypeName> types = null) : base(indices, types) { }
-
 		public IQueryContainer Query { get; set; }
-
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteByQueryRequestParameters> pathInfo)
-		{
-			DeleteByQueryPathInfo.Update(pathInfo, this);
-		}
-
 	}
 
-	public partial class DeleteByQueryRequest<T> : QueryPathBase<DeleteByQueryRequestParameters, T>, IDeleteByQueryRequest where T : class
-	{
-		public DeleteByQueryRequest() {}
-
-		public DeleteByQueryRequest(IndexName index, TypeName type = null) : base(index, type) { }
-
-		public DeleteByQueryRequest(IEnumerable<IndexName> indices, IEnumerable<TypeName> types = null) : base(indices, types) { }
-
-		public IQueryContainer Query { get; set; }
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteByQueryRequestParameters> pathInfo)
-		{
-			DeleteByQueryPathInfo.Update(pathInfo, this);
-		}
-
-	}
-
-	public partial class DeleteByQueryDescriptor<T> 
-		: QueryPathDescriptorBase<DeleteByQueryDescriptor<T>, DeleteByQueryRequestParameters, T>, IDeleteByQueryRequest
-		where T : class
+	public partial class DeleteByQueryDescriptor<T> where T : class
 	{
 		private IDeleteByQueryRequest Self => this;
 
@@ -83,11 +42,6 @@ namespace Nest
 		{
 			Self.Query = querySelector(new QueryContainerDescriptor<T>());
 			return this;
-		}
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteByQueryRequestParameters> pathInfo)
-		{
-			DeleteByQueryPathInfo.Update(pathInfo, this);
 		}
 	}
 }

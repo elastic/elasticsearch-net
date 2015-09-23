@@ -8,12 +8,9 @@ using System.Text;
 
 namespace Nest
 {
-	public interface INodesHotThreadsRequest 
-		: INodeIdOptionalPath<NodesHotThreadsRequestParameters> { }
+	public partial interface INodesHotThreadsRequest { }
+	 
+	public partial class NodesHotThreadsRequest { }
 
-	public partial class NodesHotThreadsRequest 
-		: NodeIdOptionalPathBase<NodesHotThreadsRequestParameters>, INodesHotThreadsRequest { }
-
-	public partial class NodesHotThreadsDescriptor 
-		: NodeIdOptionalDescriptor<NodesHotThreadsDescriptor, NodesHotThreadsRequestParameters>, INodesHotThreadsRequest { }
+	public partial class NodesHotThreadsDescriptor { }
 }

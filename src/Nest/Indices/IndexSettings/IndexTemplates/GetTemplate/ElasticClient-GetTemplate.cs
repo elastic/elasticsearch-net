@@ -17,24 +17,26 @@ namespace Nest
 		/// </summary>
 		/// <param name="name">The name of the template to get</param>
 		/// <param name="getTemplateSelector">An optional selector specifying additional parameters for the get template operation</param>
-		ITemplateResponse GetTemplate(string name, Func<GetTemplateDescriptor, IGetTemplateRequest> getTemplateSelector = null);
+		ITemplateResponse GetTemplate(Func<GetTemplateDescriptor, IGetTemplateRequest> getTemplateSelector = null);
 
 		/// <inheritdoc/>
 		ITemplateResponse GetTemplate(IGetTemplateRequest getTemplateRequest);
 
 		/// <inheritdoc/>
-		Task<ITemplateResponse> GetTemplateAsync(string name, Func<GetTemplateDescriptor, IGetTemplateRequest> getTemplateSelector = null);
+		Task<ITemplateResponse> GetTemplateAsync(Func<GetTemplateDescriptor, IGetTemplateRequest> getTemplateSelector = null);
 
 		/// <inheritdoc/>
 		Task<ITemplateResponse> GetTemplateAsync(IGetTemplateRequest getTemplateRequest);
 
 	}
 
+	//TODO discuss with @gmarz changing this and other methods that can actually return multiple to plural form e.g GetTemplates/GetIndexTemplates
+	
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public ITemplateResponse GetTemplate(string name, Func<GetTemplateDescriptor, IGetTemplateRequest> getTemplateSelector = null) =>
-			this.GetTemplate(getTemplateSelector.InvokeOrDefault(new GetTemplateDescriptor().Name(name)));
+		public ITemplateResponse GetTemplate(Func<GetTemplateDescriptor, IGetTemplateRequest> getTemplateSelector = null) =>
+			this.GetTemplate(getTemplateSelector.InvokeOrDefault(new GetTemplateDescriptor()));
 		
 		/// <inheritdoc/>
 		public ITemplateResponse GetTemplate(IGetTemplateRequest getTemplateRequest)
@@ -47,8 +49,8 @@ namespace Nest
 		}
 
 		/// <inheritdoc/>
-		public Task<ITemplateResponse> GetTemplateAsync(string name, Func<GetTemplateDescriptor, IGetTemplateRequest> getTemplateSelector = null) =>
-			this.GetTemplateAsync(getTemplateSelector.InvokeOrDefault(new GetTemplateDescriptor().Name(name)));
+		public Task<ITemplateResponse> GetTemplateAsync(Func<GetTemplateDescriptor, IGetTemplateRequest> getTemplateSelector = null) =>
+			this.GetTemplateAsync(getTemplateSelector.InvokeOrDefault(new GetTemplateDescriptor()));
 
 		/// <inheritdoc/>
 		public Task<ITemplateResponse> GetTemplateAsync(IGetTemplateRequest getTemplateRequest) => 

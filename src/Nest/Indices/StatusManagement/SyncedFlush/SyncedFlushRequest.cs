@@ -6,20 +6,10 @@ using System.Text;
 
 namespace Nest
 {
-	public interface ISyncedFlushRequest : IIndicesOptionalExplicitAllPath<SyncedFlushRequestParameters>
-	{
-	}
+	public partial interface ISyncedFlushRequest { }
 
-	public partial class SyncedFlushRequest : IndicesOptionalExplicitAllPathBase<SyncedFlushRequestParameters>, ISyncedFlushRequest
-	{
-		public SyncedFlushRequest(Indices indices) : base(indices) { }
-	}
+	public partial class SyncedFlushRequest { }
 	
 	[DescriptorFor("IndicesFlushSynced")]
-	public partial class SyncedFlushDescriptor 
-		: IndicesOptionalExplicitAllPathDescriptor<SyncedFlushDescriptor, SyncedFlushRequestParameters>
-		, ISyncedFlushRequest
-	{
-		public SyncedFlushDescriptor(Indices indices) : base(indices) { }
-	}
+	public partial class SyncedFlushDescriptor { }
 }

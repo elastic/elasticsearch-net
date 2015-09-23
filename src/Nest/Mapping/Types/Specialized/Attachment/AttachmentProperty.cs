@@ -101,11 +101,11 @@ namespace Nest
 		public AttachmentPropertyDescriptor() : base("attachment") { }
 
 		private AttachmentPropertyDescriptor<T> SetMetadataField<TDescriptor, TInterface>(Func<TDescriptor, TInterface> selector, string fieldName)
-			where TDescriptor : TInterface
+			where TDescriptor : TInterface, new()
 			where TInterface : IProperty
 		{
 			selector.ThrowIfNull(nameof(selector));
-			var type = selector(Activator.CreateInstance<TDescriptor>());
+			var type = selector(new TDescriptor());
 			this.Dictionary[fieldName] = type;
 			return this;
 		}

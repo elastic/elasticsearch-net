@@ -6,16 +6,10 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IAliasExistsRequest : IIndexOptionalNamePath<AliasExistsRequestParameters> { }
+	public partial interface IAliasExistsRequest { }
 
-	public partial class AliasExistsRequest : IndexOptionalNamePathBase<AliasExistsRequestParameters>, IAliasExistsRequest
-	{
-		public AliasExistsRequest(string name) : base(name) { }
-		public AliasExistsRequest(IndexName index, string name) : base(index, name) { }
-	}
+	public partial class AliasExistsRequest { }
+
 	[DescriptorFor("IndicesExistsAlias")]
-	public partial class AliasExistsDescriptor : IndexOptionalNamePathDescriptor<AliasExistsDescriptor, AliasExistsRequestParameters>, IAliasExistsRequest
-	{
-	}
+	public partial class AliasExistsDescriptor { }
 }

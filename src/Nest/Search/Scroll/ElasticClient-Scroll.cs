@@ -20,7 +20,7 @@ namespace Nest
 		ISearchResponse<T> Scroll<T>(IScrollRequest scrollRequest) where T : class;
 
 		///<inheritdoc/>
-		ISearchResponse<T> Scroll<T>(TimeUnitExpression scrollTime, string scrollId, Func<ScrollDescriptor<T>, IScrollRequest> scrollSelector = null) 
+		ISearchResponse<T> Scroll<T>(TimeUnitExpression scrollTime, ScrollId scrollId, Func<ScrollDescriptor<T>, IScrollRequest> scrollSelector = null) 
 			where T : class;
 
 		///<inheritdoc/>
@@ -28,7 +28,7 @@ namespace Nest
 			where T : class;
 
 		///<inheritdoc/>
-		Task<ISearchResponse<T>> ScrollAsync<T>(TimeUnitExpression scrollTime, string scrollId, Func<ScrollDescriptor<T>, IScrollRequest> scrollSelector = null)
+		Task<ISearchResponse<T>> ScrollAsync<T>(TimeUnitExpression scrollTime, ScrollId scrollId, Func<ScrollDescriptor<T>, IScrollRequest> scrollSelector = null)
 			where T : class;
 
 	}
@@ -41,13 +41,13 @@ namespace Nest
 				(p, d) =>
 				{
 					var id = p.ScrollId;
-					p.ScrollId = null;
+					p.RouteValues.Remove("scroll_id");
 					return this.LowLevelDispatch.ScrollDispatch<SearchResponse<T>>(p, id);
 				}
 			);
 
 		/// <inheritdoc/>
-		public ISearchResponse<T> Scroll<T>(TimeUnitExpression scrollTime, string scrollId, Func<ScrollDescriptor<T>, IScrollRequest> scrollSelector = null) where T : class =>
+		public ISearchResponse<T> Scroll<T>(TimeUnitExpression scrollTime, ScrollId scrollId, Func<ScrollDescriptor<T>, IScrollRequest> scrollSelector = null) where T : class =>
 			this.Scroll<T>(scrollSelector.InvokeOrDefault(new ScrollDescriptor<T>().Scroll(scrollTime).ScrollId(scrollId)));
 
 		/// <inheritdoc/>
@@ -57,13 +57,13 @@ namespace Nest
 				(p, d) =>
 				{
 					var id = p.ScrollId;
-					p.ScrollId = null;
+					p.RouteValues.Remove("scroll_id");
 					return this.LowLevelDispatch.ScrollDispatchAsync<SearchResponse<T>>(p, id);
 				}
 			);
 
 		/// <inheritdoc/>
-		public Task<ISearchResponse<T>> ScrollAsync<T>(TimeUnitExpression scrollTime, string scrollId, Func<ScrollDescriptor<T>, IScrollRequest> scrollSelector = null) where T : class => 
+		public Task<ISearchResponse<T>> ScrollAsync<T>(TimeUnitExpression scrollTime, ScrollId scrollId, Func<ScrollDescriptor<T>, IScrollRequest> scrollSelector = null) where T : class => 
 			this.ScrollAsync<T>(scrollSelector.InvokeOrDefault(new ScrollDescriptor<T>().Scroll(scrollTime).ScrollId(scrollId)));
 	}
 }
