@@ -25,10 +25,6 @@ namespace Tests.Document.Single.Index
 					Document = project
 				}))
 				;
-		}
-		[U] public async Task WithId()
-		{
-			var project = new Project { Name = "NEST" };
 
 			await PUT("/project/project/NEST")
 				.Fluent(c => c.Index(project))
