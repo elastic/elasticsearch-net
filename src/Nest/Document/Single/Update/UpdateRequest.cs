@@ -7,10 +7,11 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	//TODO we used to to a complex infer on Id, if its empty first try on Doc otherwise on Upsert doc, is this still valid?
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IUpdateRequest<TDocument,TPartialDocument> : IDocumentOptionalPath<UpdateRequestParameters>
+	public interface IUpdateRequest<TDocument, TPartialDocument> : IUpdateRequest
 		where TDocument : class
-		where TPartialDocument : class 
+		where TPartialDocument : class
 	{
 		[JsonProperty(PropertyName = "script")]
 		string Script { get; set; }
@@ -25,7 +26,7 @@ namespace Nest
 		string Language { get; set; }
 
 		[JsonProperty(PropertyName = "params")]
-		[JsonConverter(typeof (VerbatimDictionaryKeysJsonConverter))]
+		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
 		Dictionary<string, object> Params { get; set; }
 
 		[JsonProperty(PropertyName = "upsert")]
@@ -38,61 +39,21 @@ namespace Nest
 		TPartialDocument Doc { get; set; }
 	}
 
-	internal static class UpdateRequestPathInfo
-	{
-		public static void Update<TDocument, TPartialDocument>(
-			IConnectionSettingsValues settings,
-			ElasticsearchPathInfo<UpdateRequestParameters> pathInfo,
-			IUpdateRequest<TDocument, TPartialDocument> self)
-			where TDocument : class
-			where TPartialDocument : class
-		{
-			if (pathInfo.Id.IsNullOrEmpty())
-			{
-				if (self.Doc != null)
-					pathInfo.Id = settings.Inferrer.Id(self.Doc);
-				else if (self.Upsert != null)
-					pathInfo.Id = settings.Inferrer.Id(self.Upsert);
-			}
-
-			pathInfo.HttpMethod = HttpMethod.POST;
-		}
-	}
-
-	public class UpdateRequest<TDocument> : UpdateRequest<TDocument,TDocument>
-		where TDocument : class 
-	{
-		public UpdateRequest(string id) : base(id) { }
-
-		public UpdateRequest(long id) : base(id) { }
-
-		public UpdateRequest(TDocument document, bool useAsUpsert = false) : base(document, useAsUpsert)
-		{
-			
-		}
-	}
-
-	public partial class UpdateRequest<TDocument,TPartialDocument> : DocumentOptionalPathBase<UpdateRequestParameters, TDocument>, IUpdateRequest<TDocument, TPartialDocument> 
+	public class UpdateRequest<TDocument> : UpdateRequest<TDocument, TDocument>
 		where TDocument : class
-		where TPartialDocument : class 
 	{
-		public UpdateRequest(string id) : base(id) { }
+	}
 
-		public UpdateRequest(long id) : base(id) { }
-
-		public UpdateRequest(TDocument idFrom, bool useAsUpsert = false) : base(idFrom)
-		{
-			if (useAsUpsert)
-				this.Upsert = idFrom;
-		}
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<UpdateRequestParameters> pathInfo)
-		{
-			UpdateRequestPathInfo.Update(settings, pathInfo, this);
-		}
-		
+	public partial class UpdateRequest<TDocument, TPartialDocument> : RequestBase<UpdateRequestParameters>, IUpdateRequest<TDocument, TPartialDocument>
+		where TDocument : class
+		where TPartialDocument : class
+	{
+		IndexName IUpdateRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		TypeName IUpdateRequest.Type => Self.RouteValues.Get<TypeName>("type");
+		Id IUpdateRequest.Id => Self.RouteValues.Get<Id>("id");
 
 		public string Script { get; set; }
+		public string ScriptId { get; set; }
 		public string ScriptFile { get; set; }
 		public string Language { get; set; }
 		public Dictionary<string, object> Params { get; set; }
@@ -101,19 +62,23 @@ namespace Nest
 		public TPartialDocument Doc { get; set; }
 	}
 
-	public partial class UpdateDescriptor<TDocument,TPartialDocument> 
-		: DocumentPathDescriptor<UpdateDescriptor<TDocument, TPartialDocument>, UpdateRequestParameters, TDocument>
-		, IUpdateRequest<TDocument, TPartialDocument> 
-		where TDocument : class 
+	public partial class UpdateDescriptor<TDocument, TPartialDocument>
+		: RequestDescriptorBase<UpdateDescriptor<TDocument, TPartialDocument>, UpdateRequestParameters, IUpdateRequest>
+		, IUpdateRequest<TDocument, TPartialDocument>
+		where TDocument : class
 		where TPartialDocument : class
 	{
+
+		IndexName IUpdateRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		TypeName IUpdateRequest.Type => Self.RouteValues.Get<TypeName>("type");
+		Id IUpdateRequest.Id => Self.RouteValues.Get<Id>("id");
 
 		private IUpdateRequest<TDocument, TPartialDocument> Self => this;
 
 		string IUpdateRequest<TDocument, TPartialDocument>.Script { get; set; }
-		
+
 		string IUpdateRequest<TDocument, TPartialDocument>.ScriptId { get; set; }
-		
+
 		string IUpdateRequest<TDocument, TPartialDocument>.ScriptFile { get; set; }
 
 		string IUpdateRequest<TDocument, TPartialDocument>.Language { get; set; }
@@ -126,7 +91,7 @@ namespace Nest
 
 		TPartialDocument IUpdateRequest<TDocument, TPartialDocument>.Doc { get; set; }
 
-		
+
 		public UpdateDescriptor<TDocument, TPartialDocument> Script(string script)
 		{
 			script.ThrowIfNull("script");
@@ -156,7 +121,8 @@ namespace Nest
 
 		public UpdateDescriptor<TDocument, TPartialDocument> Id(TDocument document, bool useAsUpsert)
 		{
-			((IDocumentOptionalPath<UpdateRequestParameters, TDocument>)Self).IdFrom = document;
+			//TODO: What should this be when we have an Ids type?
+			//((IDocumentOptionalPath<UpdateRequestParameters, TDocument>)Self).IdFrom = document;
 			if (useAsUpsert)
 				return this.Upsert(document);
 			return this;
@@ -189,26 +155,21 @@ namespace Nest
 		}
 
 		///<summary>A comma-separated list of fields to return in the response</summary>
-		public UpdateDescriptor<TDocument,TPartialDocument> Fields(params string[] fields)
+		public UpdateDescriptor<TDocument, TPartialDocument> Fields(params string[] fields)
 		{
-			this.Request.RequestParameters.AddQueryString("fields", fields);
+			this.Self.RequestParameters.AddQueryString("fields", fields);
 			return this;
 		}
-		
-			
+
+
 		///<summary>A comma-separated list of fields to return in the response</summary>
-		public UpdateDescriptor<TDocument,TPartialDocument> Fields(params Expression<Func<TPartialDocument, object>>[] typedPathLookups) 
+		public UpdateDescriptor<TDocument, TPartialDocument> Fields(params Expression<Func<TPartialDocument, object>>[] typedPathLookups)
 		{
 			if (!typedPathLookups.HasAny())
 				return this;
 
-			this.Request.RequestParameters.AddQueryString("fields",typedPathLookups);
+			this.Self.RequestParameters.AddQueryString("fields", typedPathLookups);
 			return this;
-		}
-			
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<UpdateRequestParameters> pathInfo)
-		{
-			UpdateRequestPathInfo.Update(settings, pathInfo, this);
 		}
 	}
 }

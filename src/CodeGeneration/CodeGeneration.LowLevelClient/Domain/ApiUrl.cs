@@ -7,7 +7,7 @@ namespace CodeGeneration.LowLevelClient.Domain
 	{
 		//these are aliases we much rather pass along inside the querystring
 		//allowing these will cause too many overloads being generated which helps noone
-		private static readonly string[] _blackList = { "{fields}", "{search_groups}", "{indexing_types}"};
+		public static readonly string[] BlackListRouteValues = { "{fields}", "{search_groups}", "{indexing_types}", "{body}"};
 		private IEnumerable<string> _paths;
 
 		public string Path { get; set; }
@@ -17,7 +17,7 @@ namespace CodeGeneration.LowLevelClient.Domain
 			get
 			{
 				return _paths == null ? _paths : _paths
-					.Where(p => !_blackList.Any(p.Contains))
+					.Where(p => !BlackListRouteValues.Any(p.Contains))
 					.ToList();
 			}
 			set { _paths = value; }
@@ -25,5 +25,6 @@ namespace CodeGeneration.LowLevelClient.Domain
 
 		public IDictionary<string, ApiUrlPart> Parts { get; set; }
 		public IDictionary<string, ApiQueryParameters> Params { get; set; }
+
 	}
 }

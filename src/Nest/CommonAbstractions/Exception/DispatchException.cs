@@ -16,14 +16,14 @@ namespace Nest
 #endif
 	public class DispatchException : System.Exception
 	{
-		public IElasticsearchPathInfo Provided { get; }
+		public RouteValues Provided { get; }
 
-		public DispatchException(string msg, IElasticsearchPathInfo provided) : base(msg)
+		public DispatchException(string msg, RouteValues provided) : base(msg)
 		{
 			Provided = provided;
 		}
 
-		public static DispatchException InvalidDispatch(string apiCall, IElasticsearchPathInfo provided, HttpMethod[] methods, params string[] endpoints)
+		public static DispatchException InvalidDispatch(string apiCall, IRequest provided, HttpMethod[] methods, params string[] endpoints)
 		{
 			var sb = new StringBuilder();
 			sb.AppendLine($"Dispatching {apiCall}() from NEST into to Elasticsearch.NET failed");
@@ -32,7 +32,7 @@ namespace Nest
 			sb.AppendLine($"The request might not have enough information provided to make any of these endpoints:");
 			foreach (var endpoint in endpoints)
 				sb.AppendLine($"  - {endpoint}");
-			return new DispatchException(sb.ToString(), provided);
+			return new DispatchException(sb.ToString(), provided.RouteValues);
 		}
 
 	}

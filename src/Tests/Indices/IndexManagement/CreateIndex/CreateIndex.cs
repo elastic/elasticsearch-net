@@ -32,7 +32,7 @@ namespace Tests.Indices.IndexManagement
 
 		public override bool ExpectIsValid => true;
 		public override int ExpectStatusCode => 200;
-		public override HttpMethod HttpMethod => HttpMethod.POST;
+		public override HttpMethod HttpMethod => HttpMethod.PUT;
 		public override string UrlPath => $"/{IndexName}";
 
 		protected override object ExpectJson { get; } = new
@@ -43,6 +43,8 @@ namespace Tests.Indices.IndexManagement
 				{ "index.number_of_shards", 1 },
 			}
 		};
+
+		protected override CreateIndexDescriptor NewDescriptor() => new CreateIndexDescriptor(IndexName);
 
 		protected override Func<CreateIndexDescriptor, ICreateIndexRequest> Fluent => d => d
 			.Settings(s => s

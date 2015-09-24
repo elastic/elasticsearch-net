@@ -26,12 +26,14 @@ namespace Nest
 		/// <inheritdoc/>
 		Task<IShardsOperationResponse> FlushAsync(IFlushRequest flushRequest);
 	}
+	
+	//TODO pass indices along on descriptor, we promote a more scoped flush from the highlevel client
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
 		public IShardsOperationResponse Flush(Indices indices, Func<FlushDescriptor, IFlushRequest> selector = null) =>
-			this.Flush(selector.InvokeOrDefault(new FlushDescriptor(indices)));
+			this.Flush(selector.InvokeOrDefault(new FlushDescriptor()));
 
 		/// <inheritdoc/>
 		public IShardsOperationResponse Flush(IFlushRequest flushRequest) => 
@@ -42,7 +44,7 @@ namespace Nest
 
 		/// <inheritdoc/>
 		public Task<IShardsOperationResponse> FlushAsync(Indices indices, Func<FlushDescriptor, IFlushRequest> selector = null) => 
-			this.FlushAsync(selector.InvokeOrDefault(new FlushDescriptor(indices)));
+			this.FlushAsync(selector.InvokeOrDefault(new FlushDescriptor()));
 
 		/// <inheritdoc/>
 		public Task<IShardsOperationResponse> FlushAsync(IFlushRequest flushRequest) => 

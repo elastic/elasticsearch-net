@@ -7,35 +7,29 @@ using Newtonsoft.Json;
 namespace Nest
 {
 
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IMultiPercolateRequest : IFixedIndexTypePath<MultiPercolateRequestParameters>
+	public partial interface IMultiPercolateRequest 
 	{
 		IList<IPercolateOperation> Percolations { get; set; }
 	}
 
-	public partial class MultiPercolateRequest : FixedIndexTypePathBase<MultiPercolateRequestParameters>, IMultiPercolateRequest
+	public partial class MultiPercolateRequest 
 	{
 		public IList<IPercolateOperation> Percolations { get; set; }
 
 	}
 
 	[DescriptorFor("Mpercolate")]
-	public partial class MultiPercolateDescriptor : FixedIndexTypePathDescriptor<MultiPercolateDescriptor, MultiPercolateRequestParameters>, IMultiPercolateRequest
+	public partial class MultiPercolateDescriptor 
 	{
 		private IMultiPercolateRequest Self => this;
 
 		IList<IPercolateOperation> IMultiPercolateRequest.Percolations { get; set; }
 
-		public MultiPercolateDescriptor()
-		{
-			this.Self.Percolations = new List<IPercolateOperation>();
-		}
-
 		public MultiPercolateDescriptor Percolate<T>(Func<PercolateDescriptor<T>, PercolateDescriptor<T>> getSelector) 
 			where T : class
 		{
 			getSelector.ThrowIfNull("getSelector");
-			var descriptor = getSelector(new PercolateDescriptor<T>().Index<T>().Type<T>());
+			var descriptor = getSelector(new PercolateDescriptor<T>(typeof(T), typeof(T)));
 			Self.Percolations.Add(descriptor);
 			return this;
 		}
@@ -46,7 +40,7 @@ namespace Nest
 			foreach (var source in sources)
 			{
 				getSelector.ThrowIfNull("getSelector");
-				var descriptor = getSelector(new PercolateDescriptor<T>().Index<T>().Type<T>(), source);
+				var descriptor = getSelector(new PercolateDescriptor<T>(typeof(T), typeof(T)), source);
 				Self.Percolations.Add(descriptor);
 			}
 			return this;
@@ -56,7 +50,7 @@ namespace Nest
 			where T : class
 		{
 			getSelector.ThrowIfNull("getSelector");
-			var descriptor = getSelector(new PercolateCountDescriptor<T>().Index<T>().Type<T>());
+			var descriptor = getSelector(new PercolateCountDescriptor<T>(typeof(T), typeof(T)));
 			Self.Percolations.Add(descriptor);
 			return this;
 		}

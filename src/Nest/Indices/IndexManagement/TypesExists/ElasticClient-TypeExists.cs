@@ -10,13 +10,13 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <inheritdoc/>
-		IExistsResponse TypeExists(Func<TypeExistsDescriptor, ITypeExistsRequest> selector);
+		IExistsResponse TypeExists(Indices indices, Types types, Func<TypeExistsDescriptor, ITypeExistsRequest> selector = null);
 
 		/// <inheritdoc/>
 		IExistsResponse TypeExists(ITypeExistsRequest typeRequest);
 
 		/// <inheritdoc/>
-		Task<IExistsResponse> TypeExistsAsync(Func<TypeExistsDescriptor, ITypeExistsRequest> selector);
+		Task<IExistsResponse> TypeExistsAsync(Indices indices, Types types, Func<TypeExistsDescriptor, ITypeExistsRequest> selector = null);
 
 		/// <inheritdoc/>
 		Task<IExistsResponse> TypeExistsAsync(ITypeExistsRequest typeRequest);
@@ -26,8 +26,8 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IExistsResponse TypeExists(Func<TypeExistsDescriptor, ITypeExistsRequest> selector) =>
-			this.TypeExists(selector?.Invoke(new TypeExistsDescriptor()));
+		public IExistsResponse TypeExists(Indices indices, Types types, Func<TypeExistsDescriptor, ITypeExistsRequest> selector = null) =>
+			this.TypeExists(selector.InvokeOrDefault(new TypeExistsDescriptor(indices, types)));
 
 		/// <inheritdoc/>
 		public IExistsResponse TypeExists(ITypeExistsRequest typeRequest) => 
@@ -38,8 +38,8 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<IExistsResponse> TypeExistsAsync(Func<TypeExistsDescriptor, ITypeExistsRequest> selector) =>
-			this.TypeExistsAsync(selector?.Invoke(new TypeExistsDescriptor()));
+		public Task<IExistsResponse> TypeExistsAsync(Indices indices, Types types, Func<TypeExistsDescriptor, ITypeExistsRequest> selector = null) =>
+			this.TypeExistsAsync(selector.InvokeOrDefault(new TypeExistsDescriptor(indices, types)));
 
 		/// <inheritdoc/>
 		public Task<IExistsResponse> TypeExistsAsync(ITypeExistsRequest typeRequest) => 

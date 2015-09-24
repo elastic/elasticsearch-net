@@ -93,12 +93,18 @@
     <Compile Include="Analysis\Tokenizers\NGram\TokenChar.cs" />
     <Compile Include="Analysis\Tokenizers\Tokenizers.cs" />
     <Compile Include="CommonAbstractions\Fluent\DescriptorBase.cs" />
+    <Compile Include="CommonAbstractions\Infer\DocumentPath\DocumentPath.cs" />
+    <Compile Include="CommonAbstractions\Infer\Id\Id.cs" />
+    <Compile Include="CommonAbstractions\Infer\Id\IdJsonConverter.cs" />
     <Compile Include="CommonAbstractions\Infer\Indices\IndicesJsonConverter.cs" />
     <Compile Include="CommonAbstractions\Infer\Indices\Indices.cs" />
     <Compile Include="CommonAbstractions\Infer\FieldName\FieldNameExtensions.cs" />
+    <Compile Include="CommonAbstractions\Infer\TODO.cs" />
     <Compile Include="CommonAbstractions\Infer\PropertyName\PropertyName.cs" />
     <Compile Include="CommonAbstractions\Infer\PropertyName\PropertyNameExtensions.cs" />
     <Compile Include="CommonAbstractions\Infer\PropertyName\PropertyNameJsonConverter.cs" />
+    <Compile Include="CommonAbstractions\Infer\Types\TypesJsonConverter.cs" />
+    <Compile Include="CommonAbstractions\Infer\Types\Types.cs" />
     <Compile Include="CommonAbstractions\LazyDocument\LazyDocumentJsonConverter.cs" />
     <Compile Include="CommonAbstractions\HasADictionary.cs" />
     <Compile Include="CommonAbstractions\IsADictionary.cs" />
@@ -171,7 +177,6 @@
     <Compile Include="Document\Multiple\Bulk\ElasticClient-IndexMany.cs" />
     <Compile Include="Document\Multiple\Bulk\ElasticClient-DeleteMany.cs" />
     <Compile Include="Document\Multiple\MultiGet\EllasticClient-GetMany.cs" />
-    <Compile Include="Document\Single\Exists\ElasticClient-ExistsExtensions.cs" />
     <Compile Include="Indices\Warmers\Warmers.cs" />
     <Compile Include="Mapping\AttributeBased\AttachmentAttribute.cs" />
     <Compile Include="Mapping\AttributeBased\BinaryAttribute.cs" />
@@ -296,6 +301,7 @@
     <Compile Include="Analysis\Tokenizers\UaxEmailUrlTokenizer.cs" />
     <Compile Include="Analysis\Tokenizers\WhitespaceTokenizer.cs" />
     <Compile Include="CommonOptions\Hit\ShardsFailureReason.cs" />
+    <Compile Include="Search\CovariantSearch.cs" />
     <Compile Include="Search\Search\Hits\InnerHitsMetaData.cs" />
     <Compile Include="Search\Search\Hits\InnerHitsResult.cs" />
     <Compile Include="Indices\AliasManagement\Alias.cs" />
@@ -317,7 +323,7 @@
     <Compile Include="Cat\CatRecovery\CatRecoveryRecord.cs" />
     <Compile Include="Cat\CatPlugins\CatPluginsRecord.cs" />
     <Compile Include="Cat\CatPendingTasks\CatPendingTasksRecord.cs" />
-    <Compile Include="CommonAbstractions\LazyDocument\IDocument.cs" />
+    <Compile Include="CommonAbstractions\LazyDocument\LazyDocument.cs" />
     <Compile Include="QueryDsl\Geo\GeoLocation.cs" />
     <Compile Include="QueryDsl\Geo\GeoPrecision.cs" />
     <Compile Include="Search\Explain\ExplainGet.cs" />
@@ -489,10 +495,8 @@
     <Compile Include="Cluster\ClusterStats\ClusterStatsRequest.cs" />
     <Compile Include="Cat\CatAliases\CatAliasesRequest.cs" />
     <Compile Include="Indices\AliasManagement\DeleteAlias\DeleteAliasRequest.cs" />
-    <Compile Include="CommonAbstractions\Request\Paths\RepositoryOptionalPath.cs" />
     <Compile Include="Indices\AliasManagement\PutAlias\PutAliasRequest.cs" />
     <Compile Include="Search\SearchShards\SearchShardsRequest.cs" />
-    <Compile Include="CommonAbstractions\Request\Paths\RepositorySnapshotOptionalPath.cs" />
     <Compile Include="Modules\SnapshotAndRestore\Snapshot\SnapshotStatus\SnapshotStatusRequest.cs" />
     <Compile Include="Indices\Monitoring\IndicesRecovery\RecoveryStatusRequest.cs" />
     <Compile Include="Search\Suggesters\PhraseSuggester\PhraseSuggestCollate.cs" />
@@ -512,8 +516,6 @@
     <Compile Include="Search\Percolator\MultiPercolate\IPercolateOperation.cs" />
     <Compile Include="Search\Percolator\MultiPercolate\MultiPercolateRequest.cs" />
     <Compile Include="Cluster\NodesHotThreads\NodesHotThreadsRequest.cs" />
-    <Compile Include="CommonAbstractions\Request\Paths\IndexOptionalNamePath.cs" />
-    <Compile Include="CommonAbstractions\Request\Paths\IndicesOptionalTypesNamePathDecriptor.cs" />
     <Compile Include="Cluster\Ping\PingRequest.cs" />
     <Compile Include="QueryDsl\Span\MultiTerm\SpanMultiTermQuery.cs" />
     <Compile Include="Indices\IndexManagement\TypesExists\TypeExistsRequest.cs" />
@@ -551,10 +553,8 @@
     <Compile Include="Document\Multiple\Bulk\BulkOperation\BulkOperationBase.cs" />
     <Compile Include="Cluster\ClusterSettings\ClusterGetSettings\ClusterGetSettingsRequest.cs" />
     <Compile Include="Cluster\ClusterSettings\ClusterPutSettings\ClusterSettingsRequest.cs" />
-    <Compile Include="CommonAbstractions\Request\BasePathRequest.cs" />
-    <Compile Include="CommonAbstractions\Request\BaseRequest.cs" />
+    <Compile Include="CommonAbstractions\Request\RequestBase.cs" />
     <Compile Include="Modules\SnapshotAndRestore\Snapshot\DeleteSnapshot\DeleteSnapshotRequest.cs" />
-    <Compile Include="CommonAbstractions\Request\IRequest.cs" />
     <Compile Include="QueryDsl\Compound\FunctionScore\Functions\FieldValueFactorModifier.cs" />
     <Compile Include="QueryDsl\QueryBase.cs" />
     <Compile Include="QueryDsl\QueryContainer.cs" />
@@ -624,10 +624,8 @@
     <Compile Include="QueryDsl\Span\ISpanSubQuery.cs" />
     <Compile Include="Document\Multiple\MultiTermVectors\MultiTermVectorDocument.cs" />
     <Compile Include="Document\Multiple\MultiTermVectors\MultiTermVectorsRequest.cs" />
-    <Compile Include="CommonAbstractions\Request\Paths\DocumentOptionalPath.cs" />
     <Compile Include="Modules\SnapshotAndRestore\Snapshot\Snapshot\SnapshotRequest.cs" />
     <Compile Include="Modules\SnapshotAndRestore\Repositories\DeleteRepository\DeleteRepositoryRequest.cs" />
-    <Compile Include="CommonAbstractions\Request\Paths\RepositorySnapshotPath.cs" />
     <Compile Include="Modules\SnapshotAndRestore\Repositories\HdfsRepository.cs" />
     <Compile Include="Modules\SnapshotAndRestore\Repositories\AzureRepository.cs" />
     <Compile Include="Modules\SnapshotAndRestore\Repositories\S3Repository.cs" />
@@ -674,14 +672,12 @@
     <Compile Include="Search\Scroll\ClearScroll\ClearScrollRequest.cs" />
     <Compile Include="Modules\SnapshotAndRestore\Repositories\CreateRepository\CreateRepositoryRequest.cs" />
     <Compile Include="Document\Single\Index\IndexRequest.cs" />
-    <Compile Include="CommonAbstractions\Request\Paths\RepositoryPath.cs" />
     <Compile Include="Search\Percolator\PercolateCount\PercolateCountRequest.cs" />
     <Compile Include="QueryDsl\FullText\CommonTerms\CommonTermsQuery.cs" />
     <Compile Include="Search\Suggesters\Suggest\SuggestRequest.cs" />
     <Compile Include="Indices\IndexManagement\OpenCloseIndex\CloseIndex\CloseIndexRequest.cs" />
     <Compile Include="Cluster\ClusterState\ClusterStateRequest.cs" />
     <Compile Include="Indices\StatusManagement\ClearCache\ClearCacheRequest.cs" />
-    <Compile Include="CommonAbstractions\Request\BasePath.cs" />
     <Compile Include="QueryDsl\Geo\Shape\Circle\GeoShapeCircleQuery.cs" />
     <Compile Include="QueryDsl\FullText\SimpleQueryString\SimpleQueryStringQuery.cs" />
     <Compile Include="Document\Single\Source\SourceRequest.cs" />
@@ -700,31 +696,19 @@
     <Compile Include="Indices\IndexManagement\DeleteIndex\DeleteIndexRequest.cs" />
     <Compile Include="Indices\StatusManagement\Flush\FlushRequest.cs" />
     <Compile Include="Indices\MappingManagement\GetMapping\GetMappingRequest.cs" />
-    <Compile Include="CommonAbstractions\Request\Paths\IndicesOptionalPath.cs" />
-    <Compile Include="CommonAbstractions\Request\Paths\IndicesOptionalExplicitAllPath.cs" />
-    <Compile Include="CommonAbstractions\Request\Paths\FixedIndexTypePath.cs" />
-    <Compile Include="CommonAbstractions\Request\Paths\NodeIdOptional.cs" />
-    <Compile Include="CommonAbstractions\Request\Paths\IndexTypePath.cs" />
-    <Compile Include="CommonAbstractions\Request\Paths\IndicesTypePath.cs" />
     <Compile Include="Search\Search\SourceFiltering\SearchSource.cs" />
     <Compile Include="Document\Single\TermVectors\TermVectorsRequest.cs" />
     <Compile Include="Search\Percolator\UnregisterPercolator\UnregisterPercolatorRequest.cs" />
     <Compile Include="Indices\IndexSettings\IndexTemplates\DeleteTemplate\DeleteTemplateRequest.cs" />
     <Compile Include="Indices\IndexSettings\IndexTemplates\GetTemplate\GetTemplateRequest.cs" />
     <Compile Include="Indices\Warmers\DeleteWarmer\DeleteWarmerRequest.cs" />
-    <Compile Include="CommonAbstractions\Request\Paths\IPathInfo.cs" />
-    <Compile Include="CommonAbstractions\Request\Paths\IndexNamePath.cs" />
-    <Compile Include="CommonAbstractions\Request\Paths\NamePath.cs" />
-    <Compile Include="CommonAbstractions\Request\Paths\IndicesOptionalTypesOptionalFieldPathDecriptor.cs" />
     <Compile Include="Indices\Monitoring\IndicesSegments\SegmentsRequest.cs" />
     <Compile Include="Indices\StatusManagement\Refresh\RefreshRequest.cs" />
     <Compile Include="Indices\StatusManagement\Optimize\OptimizeRequest.cs" />
     <Compile Include="Indices\IndexManagement\OpenCloseIndex\OpenIndex\OpenIndexRequest.cs" />
     <Compile Include="CommonAbstractions\Fluent\FluentDictionary.cs" />
-    <Compile Include="CommonAbstractions\Request\Paths\IndexPath.cs" />
     <Compile Include="Search\Scroll\ScrollRequest.cs" />
     <Compile Include="Indices\IndexSettings\UpdateIndicesSettings\UpdateSettingsRequest.cs" />
-    <Compile Include="CommonAbstractions\Request\Paths\IndexOptionalPath.cs" />
     <Compile Include="Document\Single\Exists\ElasticClient-DocumentExists.cs" />
     <Compile Include="Document\Multiple\MultiTermVectors\ElasticClient-MultiTermVectors.cs" />
     <Compile Include="Modules\SnapshotAndRestore\Snapshot\DeleteSnapshot\ElasticClient-DeleteSnapshot.cs" />
@@ -736,7 +720,6 @@
     <Compile Include="Indices\IndexSettings\UpdateIndicesSettings\ElasticClient-UpdateSettings.cs" />
     <Compile Include="Document\Multiple\MultiGet\Request\IMultiGetOperation.cs" />
     <Compile Include="Document\Multiple\DeleteByQuery\DeleteByQueryRequest.cs" />
-    <Compile Include="CommonAbstractions\Request\Paths\DocumentPath.cs" />
     <Compile Include="Document\Multiple\MultiGet\Request\MultiGetOperation.cs" />
     <Compile Include="Aggregations\Bucket\Terms\TermsAggregationExecutionHint.cs" />
     <Compile Include="Aggregations\Bucket\GeoHash\GeoHashPrecision.cs" />
@@ -872,7 +855,6 @@
     <Compile Include="Document\Single\Update\ElasticClient-Update.cs" />
     <Compile Include="Search\Search\Highlighting\HighlightRequest.cs" />
     <Compile Include="Search\Search\Highlighting\HighlightField.cs" />
-    <Compile Include="CommonAbstractions\Request\Paths\QueryPath.cs" />
     <Compile Include="QueryDsl\Compound\Boosting\BoostingQuery.cs" />
     <Compile Include="QueryDsl\Compound\ConstantScore\ConstantScoreQuery.cs" />
     <Compile Include="QueryDsl\Compound\Indices\IndicesQuery.cs" />
@@ -1006,7 +988,7 @@
     <Compile Include="Mapping\Types\Core\Number\NumberType.cs" />
     <Compile Include="CommonAbstractions\RawJson\CustomJsonConverter.cs" />
     <Compile Include="Mapping\Types\Specialized\Ip\YesNoBoolJsonConverter.cs" />
-    <Compile Include="CommonAbstractions\Request\Paths\ElasticSearchPathInfo.cs" />
+    <Compile Include="CommonAbstractions\Request\RouteValues.cs" />
     <Compile Include="Cluster\ClusterStats\ElasticClient-ClusterStats.cs" />
     <Compile Include="Cluster\PendingClusterTasks\ElasticClient-ClusterPendingTasks.cs" />
     <Compile Include="CommonAbstractions\Infer\ExpressionVisitor.cs" />
@@ -1057,6 +1039,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Aggregations\Pipeline\" />
+    <Folder Include="CommonAbstractions\Infer\NodeId\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

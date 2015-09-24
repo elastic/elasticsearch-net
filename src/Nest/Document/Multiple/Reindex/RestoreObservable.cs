@@ -195,10 +195,9 @@ namespace Nest
 						})
 						.ToArray();
 
-				var recoveryStatus = _elasticClient.RecoveryStatus(new RecoveryStatusRequest
+				var recoveryStatus = _elasticClient.RecoveryStatus(new RecoveryStatusRequest(indices)
 				{
 					Detailed = true,
-					Indices = indices
 				});
 
 				if (!recoveryStatus.IsValid)

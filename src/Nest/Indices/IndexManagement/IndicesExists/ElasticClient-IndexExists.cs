@@ -14,13 +14,13 @@ namespace Nest
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-exists.html
 		/// </summary>
 		/// <param name="selector">A descriptor that describes the index exist operation</param>
-		IExistsResponse IndexExists(IndexName index, Func<IndexExistsDescriptor, IIndexExistsRequest> selector = null);
+		IExistsResponse IndexExists(Indices indices, Func<IndexExistsDescriptor, IIndexExistsRequest> selector = null);
 
 		/// <inheritdoc/>
 		IExistsResponse IndexExists(IIndexExistsRequest indexExistsRequest);
 
 		/// <inheritdoc/>
-		Task<IExistsResponse> IndexExistsAsync(IndexName index, Func<IndexExistsDescriptor, IIndexExistsRequest> selector = null);
+		Task<IExistsResponse> IndexExistsAsync(Indices indices, Func<IndexExistsDescriptor, IIndexExistsRequest> selector = null);
 
 		/// <inheritdoc/>
 		Task<IExistsResponse> IndexExistsAsync(IIndexExistsRequest indexExistsRequest);
@@ -32,8 +32,8 @@ namespace Nest
 		private ExistsResponse DeserializeExistsResponse(IApiCallDetails response, Stream stream) => new ExistsResponse(response);
 
 		/// <inheritdoc/>
-		public IExistsResponse IndexExists(IndexName index, Func<IndexExistsDescriptor, IIndexExistsRequest> selector = null) =>
-			this.IndexExists(selector.Invoke(new IndexExistsDescriptor().Index(index)));
+		public IExistsResponse IndexExists(Indices indices, Func<IndexExistsDescriptor, IIndexExistsRequest> selector = null) =>
+			this.IndexExists(selector.InvokeOrDefault(new IndexExistsDescriptor(indices)));
 
 		/// <inheritdoc/>
 		public IExistsResponse IndexExists(IIndexExistsRequest indexRequest) => 
@@ -44,8 +44,8 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<IExistsResponse> IndexExistsAsync(IndexName index, Func<IndexExistsDescriptor, IIndexExistsRequest> selector = null) => 
-			this.IndexExistsAsync(selector.Invoke(new IndexExistsDescriptor().Index(index)));
+		public Task<IExistsResponse> IndexExistsAsync(Indices indices, Func<IndexExistsDescriptor, IIndexExistsRequest> selector = null) => 
+			this.IndexExistsAsync(selector.InvokeOrDefault(new IndexExistsDescriptor(indices)));
 
 		/// <inheritdoc/>
 		public Task<IExistsResponse> IndexExistsAsync(IIndexExistsRequest indexRequest) => 

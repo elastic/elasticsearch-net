@@ -8,18 +8,15 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<CreateIndexDescriptor>))]
-	public interface ICreateIndexRequest : IIndexPath<CreateIndexRequestParameters>, IIndexState
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<CreateIndexRequest>))]
+	public partial interface ICreateIndexRequest : IIndexState
 	{
 	}
 
-	public partial class CreateIndexRequest : IndexPathBase<CreateIndexRequestParameters>, ICreateIndexRequest
+	public partial class CreateIndexRequest 
 	{
-		internal CreateIndexRequest() : base(null) { }
-
-		public CreateIndexRequest(IndexName index) : base(index) { }
+		//TODO Only here for ReadAsType new() constraint needs to be updated
+		public CreateIndexRequest() { }
 
 		public IIndexSettings Settings { get; set; }
 
@@ -33,10 +30,8 @@ namespace Nest
 	}
 
 	[DescriptorFor("IndicesCreate")]
-	public partial class CreateIndexDescriptor : IndexPathDescriptorBase<CreateIndexDescriptor, CreateIndexRequestParameters>, ICreateIndexRequest
+	public partial class CreateIndexDescriptor 
 	{
-		protected CreateIndexDescriptor Assign(Action<ICreateIndexRequest> assigner) => Fluent.Assign(this, assigner);
-
 		IIndexSettings IIndexState.Settings { get; set; }
 
 		IMappings IIndexState.Mappings { get; set; }

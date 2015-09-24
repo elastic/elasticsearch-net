@@ -183,7 +183,7 @@ namespace Nest
 			try
 			{
 				var snapshotStatusResponse =
-					_elasticClient.SnapshotStatus(new SnapshotStatusRequest(_snapshotRequest.Repository,
+					_elasticClient.SnapshotStatus(new SnapshotStatusRequest(_snapshotRequest.RepositoryName,
 						_snapshotRequest.Snapshot));
 
 				if (!snapshotStatusResponse.IsValid)

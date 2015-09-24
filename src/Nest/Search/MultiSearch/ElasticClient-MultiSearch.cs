@@ -10,7 +10,7 @@ namespace Nest
 {
 	using Elasticsearch.Net.Serialization;
 	using MultiSearchCreator = Func<IApiCallDetails, Stream, MultiSearchResponse>;
-	public interface IElasticCLient
+	public partial interface IElasticClient
 	{
 		/// <summary>
 		/// The multi search API allows to execute several search requests within the same API.
@@ -46,7 +46,8 @@ namespace Nest
 					var serializer = new NestSerializer(this.ConnectionSettings, converter);
 					var json = serializer.SerializeToBytes(d).Utf8String();
 					var creator = new MultiSearchCreator((r, s) => serializer.Deserialize<MultiSearchResponse>(s));
-					return this.LowLevelDispatch.MsearchDispatch<MultiSearchResponse>(p.DeserializationOverride(creator), json);
+					d.RequestParameters.DeserializationOverride(creator);
+					return this.LowLevelDispatch.MsearchDispatch<MultiSearchResponse>(p, json);
 				}
 			);
 
@@ -64,7 +65,8 @@ namespace Nest
 					var serializer = new NestSerializer(this.ConnectionSettings, converter);
 					var json = serializer.SerializeToBytes(d).Utf8String();
 					var creator = new MultiSearchCreator((r, s) => serializer.Deserialize<MultiSearchResponse>(s));
-					return this.LowLevelDispatch.MsearchDispatchAsync<MultiSearchResponse>(p.DeserializationOverride(creator), d);
+					d.RequestParameters.DeserializationOverride(creator);
+					return this.LowLevelDispatch.MsearchDispatchAsync<MultiSearchResponse>(p, d);
 				}
 			);
 
@@ -73,7 +75,7 @@ namespace Nest
 			if (descriptor.Operations != null)
 			{
 				foreach (var kv in descriptor.Operations)
-					SearchPathInfo.CloseOverAutomagicCovariantResultSelector(this.Infer, kv.Value);				
+					CovariantSearch.CloseOverAutomagicCovariantResultSelector(this.Infer, kv.Value);				
 			}
 
 			var multiSearchConverter = new MultiSearchJsonConverter(ConnectionSettings, descriptor);

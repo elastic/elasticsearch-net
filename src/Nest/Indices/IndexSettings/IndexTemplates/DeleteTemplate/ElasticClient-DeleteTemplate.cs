@@ -15,13 +15,13 @@ namespace Nest
 		/// </summary>
 		/// <param name="name">The name of the template to delete</param>
 		/// <param name="deleteTemplateSelector">An optional selector specifying additional parameters for the delete template operation</param>
-		IIndicesOperationResponse DeleteTemplate(string name, Func<DeleteTemplateDescriptor, IDeleteTemplateRequest> deleteTemplateSelector = null);
+		IIndicesOperationResponse DeleteTemplate(Name name, Func<DeleteTemplateDescriptor, IDeleteTemplateRequest> deleteTemplateSelector = null);
 
 		/// <inheritdoc/>
 		IIndicesOperationResponse DeleteTemplate(IDeleteTemplateRequest deleteTemplateRequest);
 
 		/// <inheritdoc/>
-		Task<IIndicesOperationResponse> DeleteTemplateAsync(string name, Func<DeleteTemplateDescriptor, IDeleteTemplateRequest> deleteTemplateSelector = null);
+		Task<IIndicesOperationResponse> DeleteTemplateAsync(Name name, Func<DeleteTemplateDescriptor, IDeleteTemplateRequest> deleteTemplateSelector = null);
 
 		/// <inheritdoc/>
 		Task<IIndicesOperationResponse> DeleteTemplateAsync(IDeleteTemplateRequest deleteTemplateRequest);
@@ -31,8 +31,8 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IIndicesOperationResponse DeleteTemplate(string name, Func<DeleteTemplateDescriptor, IDeleteTemplateRequest> deleteTemplateSelector = null) =>
-			this.DeleteTemplate(deleteTemplateSelector.InvokeOrDefault(new DeleteTemplateDescriptor().Name(name)));
+		public IIndicesOperationResponse DeleteTemplate(Name name, Func<DeleteTemplateDescriptor, IDeleteTemplateRequest> deleteTemplateSelector = null) =>
+			this.DeleteTemplate(deleteTemplateSelector.InvokeOrDefault(new DeleteTemplateDescriptor(name)));
 
 		/// <inheritdoc/>
 		public IIndicesOperationResponse DeleteTemplate(IDeleteTemplateRequest deleteTemplateRequest) => 
@@ -42,8 +42,8 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<IIndicesOperationResponse> DeleteTemplateAsync(string name, Func<DeleteTemplateDescriptor, IDeleteTemplateRequest> deleteTemplateSelector = null) =>
-			this.DeleteTemplateAsync(deleteTemplateSelector.InvokeOrDefault(new DeleteTemplateDescriptor().Name(name)));
+		public Task<IIndicesOperationResponse> DeleteTemplateAsync(Name name, Func<DeleteTemplateDescriptor, IDeleteTemplateRequest> deleteTemplateSelector = null) =>
+			this.DeleteTemplateAsync(deleteTemplateSelector.InvokeOrDefault(new DeleteTemplateDescriptor(name)));
 
 		/// <inheritdoc/>
 		public Task<IIndicesOperationResponse> DeleteTemplateAsync(IDeleteTemplateRequest deleteTemplateRequest) => 

@@ -5,6 +5,8 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
+	//Even though indices is NOT required lets promote a limited scope for synced_flush by default from the highlevel client
+
 	public partial interface IElasticClient
 	{
 		/// <summary>
@@ -25,14 +27,16 @@ namespace Nest
 
 		/// <inheritdoc/>
 		Task<IShardsOperationResponse> SyncedFlushAsync(ISyncedFlushRequest flushRequest);
-
 	}
 
+
+	//TODO pass indices along when we generate the fluent route value methods, 
+	
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
 		public IShardsOperationResponse SyncedFlush(Indices indices, Func<SyncedFlushDescriptor, ISyncedFlushRequest> selector = null) =>
-			this.SyncedFlush(selector.InvokeOrDefault(new SyncedFlushDescriptor(indices)));
+			this.SyncedFlush(selector.InvokeOrDefault(new SyncedFlushDescriptor()));
 
 		/// <inheritdoc/>
 		public IShardsOperationResponse SyncedFlush(ISyncedFlushRequest flushRequest) => 
@@ -43,7 +47,7 @@ namespace Nest
 
 		/// <inheritdoc/>
 		public Task<IShardsOperationResponse> SyncedFlushAsync(Indices indices, Func<SyncedFlushDescriptor, ISyncedFlushRequest> selector = null) => 
-			this.SyncedFlushAsync(selector.InvokeOrDefault(new SyncedFlushDescriptor(indices)));
+			this.SyncedFlushAsync(selector.InvokeOrDefault(new SyncedFlushDescriptor()));
 
 		/// <inheritdoc/>
 		public Task<IShardsOperationResponse> SyncedFlushAsync(ISyncedFlushRequest flushRequest) => 

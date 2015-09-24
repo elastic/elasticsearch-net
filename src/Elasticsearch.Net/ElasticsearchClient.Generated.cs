@@ -1605,7 +1605,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="id">Template ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> DeleteTemplate<T>(string id, Func<DeleteTemplateRequestParameters, DeleteTemplateRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> DeleteTemplate<T>(string id, Func<DeleteSearchTemplateRequestParameters, DeleteSearchTemplateRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(DELETE, Url($"_search/template/{id.NotNull("id")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a DELETE on /_search/template/{id} 
@@ -1619,7 +1619,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="id">Template ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> DeleteTemplateAsync<T>(string id, Func<DeleteTemplateRequestParameters, DeleteTemplateRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> DeleteTemplateAsync<T>(string id, Func<DeleteSearchTemplateRequestParameters, DeleteSearchTemplateRequestParameters> requestParameters = null)
 			where T : class => this.DoRequestAsync<T>(DELETE, Url($"_search/template/{id.NotNull("id")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a HEAD on /{index}/{type}/{id} 
@@ -1937,7 +1937,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="id">Template ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> GetTemplate<T>(string id, Func<GetTemplateRequestParameters, GetTemplateRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> GetTemplate<T>(string id, Func<GetSearchTemplateRequestParameters, GetSearchTemplateRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(GET, Url($"_search/template/{id.NotNull("id")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_search/template/{id} 
@@ -1951,7 +1951,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="id">Template ID</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> GetTemplateAsync<T>(string id, Func<GetTemplateRequestParameters, GetTemplateRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> GetTemplateAsync<T>(string id, Func<GetSearchTemplateRequestParameters, GetSearchTemplateRequestParameters> requestParameters = null)
 			where T : class => this.DoRequestAsync<T>(GET, Url($"_search/template/{id.NotNull("id")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a POST on /{index}/{type} 
@@ -6340,7 +6340,7 @@ namespace Elasticsearch.Net
 		///<param name="id">Template ID</param>
 		///<param name="body">The document</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> PutTemplate<T>(string id, PostData<object> body, Func<PutTemplateRequestParameters, PutTemplateRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> PutTemplate<T>(string id, PostData<object> body, Func<PutSearchTemplateRequestParameters, PutSearchTemplateRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(PUT, Url($"_search/template/{id.NotNull("id")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /_search/template/{id} 
@@ -6355,7 +6355,7 @@ namespace Elasticsearch.Net
 		///<param name="id">Template ID</param>
 		///<param name="body">The document</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> PutTemplateAsync<T>(string id, PostData<object> body, Func<PutTemplateRequestParameters, PutTemplateRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> PutTemplateAsync<T>(string id, PostData<object> body, Func<PutSearchTemplateRequestParameters, PutSearchTemplateRequestParameters> requestParameters = null)
 			where T : class => this.DoRequestAsync<T>(PUT, Url($"_search/template/{id.NotNull("id")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_search/template/{id} 
@@ -6370,7 +6370,7 @@ namespace Elasticsearch.Net
 		///<param name="id">Template ID</param>
 		///<param name="body">The document</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> PutTemplatePost<T>(string id, PostData<object> body, Func<PutTemplateRequestParameters, PutTemplateRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> PutTemplatePost<T>(string id, PostData<object> body, Func<PutSearchTemplateRequestParameters, PutSearchTemplateRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"_search/template/{id.NotNull("id")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_search/template/{id} 
@@ -6385,7 +6385,7 @@ namespace Elasticsearch.Net
 		///<param name="id">Template ID</param>
 		///<param name="body">The document</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> PutTemplatePostAsync<T>(string id, PostData<object> body, Func<PutTemplateRequestParameters, PutTemplateRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> PutTemplatePostAsync<T>(string id, PostData<object> body, Func<PutSearchTemplateRequestParameters, PutSearchTemplateRequestParameters> requestParameters = null)
 			where T : class => this.DoRequestAsync<T>(POST, Url($"_search/template/{id.NotNull("id")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_render/template 

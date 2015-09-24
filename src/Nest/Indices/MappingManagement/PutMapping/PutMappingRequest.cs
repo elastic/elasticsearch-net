@@ -5,46 +5,18 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<PutMappingRequest>))]
-	public interface IPutMappingRequest : IIndicesTypePath<PutMappingRequestParameters>, ITypeMapping
+	public partial interface IPutMappingRequest : ITypeMapping
 	{
 	}
 
 	public interface IPutMappingRequest<T> : IPutMappingRequest where T : class { }
 
-	public partial class PutMappingRequest : IndicesTypePathBase<PutMappingRequestParameters>, IPutMappingRequest
+	public partial class PutMappingRequest : RequestBase<PutMappingRequestParameters>, IPutMappingRequest
 	{
-		[Obsolete("Required for ReadAsTypeConverter.  This will be removed once we figure out a better way to deserialize.")]
+		//TODO only needed for read as type, better to have a dedicated json converter subclass that can new an internal constructor
 		public PutMappingRequest() { }
 
-		/// <summary>
-		/// Calls putmapping on /_all/{type}
-		/// </summary>
-		public PutMappingRequest(TypeName type)
-		{
-			this.Type = type;
-			this.AllIndices = true;
-		}
-
-		/// <summary>
-		/// Calls putmapping on /{indices}/{type}
-		/// </summary>
-		public PutMappingRequest(IEnumerable<IndexName> indices, TypeName type)
-		{
-			this.Type = type;
-			this.Indices = indices;
-		}
-
-		/// <summary>
-		/// Calls putmapping on /{index}/{type}
-		/// </summary>
-		public PutMappingRequest(IndexName index, TypeName type)
-		{
-			this.Type = type;
-			this.Indices = new[] { index };
-		}
-
 		/// <inheritdoc/>
 		public IAllField AllField { get; set; }
 		/// <inheritdoc/>
@@ -91,9 +63,11 @@ namespace Nest
 		public ITypeField TypeField { get; set; }
 	}
 
-	public partial class PutMappingRequest<T> : IndicesTypePathBase<PutMappingRequestParameters, T>, IPutMappingRequest<T>
-		where T : class
+	public partial class PutMappingRequest<T> where T : class
 	{
+		public PutMappingRequest() : this(typeof(T), typeof(T)) { }
+
+		//TODO constructors
 		/// <inheritdoc/>
 		public IAllField AllField { get; set; }
 		/// <inheritdoc/>
@@ -139,14 +113,16 @@ namespace Nest
 		/// <inheritdoc/>
 		public ITypeField TypeField { get; set; }
 	}
+
+	//TODO why is there no typed generated descriptor
 
 	[DescriptorFor("IndicesPutMapping")]
-	public partial class PutMappingDescriptor<T> :
-		IndicesTypePathDescriptor<PutMappingDescriptor<T>, PutMappingRequestParameters, T>, IPutMappingRequest<T>
-		where T : class
+	public partial class PutMappingDescriptor<T> where T : class
 	{
+		public PutMappingDescriptor() : this(typeof(T), typeof(T)) { }
+		public PutMappingDescriptor(IndexName index, TypeName type) : base(r=>r.Required("index", index).Required("type", type)) { }
+
 		protected PutMappingDescriptor<T> Assign(Action<ITypeMapping> assigner) => Fluent.Assign(this, assigner);
-		private ITypeMapping Self => this;
 
 		IAllField ITypeMapping.AllField { get; set; }
 		IBoostField ITypeMapping.BoostField { get; set; }
@@ -233,8 +209,8 @@ namespace Nest
 			//TODO MappingTransform needs a descriptor so we no longer make this call mutate state
 			var t = mappingTransformSelector?.Invoke(new MappingTransformDescriptor());
 			if (t == null) return this;
-			if (Self.Transform == null) Self.Transform = new List<IMappingTransform>();
-			Self.Transform.Add(t);
+			if (((IPutMappingRequest)this).Transform == null) ((IPutMappingRequest)this).Transform = new List<IMappingTransform>();
+			((IPutMappingRequest)this).Transform.Add(t);
 			return this;
 		}
 
@@ -274,12 +250,12 @@ namespace Nest
 			//TODO _DELETES concept is wrong?
 			dynamicTemplatesSelector.ThrowIfNull("dynamicTemplatesSelector");
 			var templates = dynamicTemplatesSelector(new DynamicTemplatesDescriptor<T>());
-			if (Self.DynamicTemplates == null)
-				Self.DynamicTemplates = new Dictionary<string, DynamicTemplate>();
+			if (((IPutMappingRequest)this).DynamicTemplates == null)
+				((IPutMappingRequest)this).DynamicTemplates = new Dictionary<string, DynamicTemplate>();
 			foreach (var t in templates._Deletes)
-				Self.DynamicTemplates.Remove(t);
+				((IPutMappingRequest)this).DynamicTemplates.Remove(t);
 			foreach (var t in templates.Templates)
-				Self.DynamicTemplates[t.Key] = t.Value;
+				((IPutMappingRequest)this).DynamicTemplates[t.Key] = t.Value;
 			return this;
 		}
 	}

@@ -5,43 +5,39 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	public interface IUnregisterPercolatorRequest : IIndexNamePath<DeleteRequestParameters> { }
+	//This does not represent an actual dedicated API endpoint in elasticsearch 
 
-	public interface IUnregisterPercolatorRequest<T> : IUnregisterPercolatorRequest where T : class { }
+	public interface IUnregisterPercolatorRequest : IRequest<DeleteRequestParameters> { }
 
-	internal static class UnregisterPercolatorPathInfo
+	//TODO port complex route values logic
+
+	//internal static class UnregisterPercolatorPathInfo
+	//{
+	//	public static void Update(IConnectionSettingsValues settings, RouteValues pathInfo)
+	//	{
+	//		//deleting a percolator in elasticsearch < 1.0 is actually deleting a document in a 
+	//		//special _percolator index where the passed index is actually a type
+	//		//the name is actually the id, we rectify that here
+	//		pathInfo.Index = pathInfo.Index;
+	//		pathInfo.Id = pathInfo.Name;
+	//		pathInfo.Type = ".percolator";
+	//		pathInfo.HttpMethod = HttpMethod.DELETE;
+	//	}
+	//}
+
+	public class UnregisterPercolatorRequest : RequestBase<DeleteRequestParameters>, IUnregisterPercolatorRequest
 	{
-		public static void Update(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteRequestParameters> pathInfo)
-		{
-			//deleting a percolator in elasticsearch < 1.0 is actually deleting a document in a 
-			//special _percolator index where the passed index is actually a type
-			//the name is actually the id, we rectify that here
-			pathInfo.Index = pathInfo.Index;
-			pathInfo.Id = pathInfo.Name;
-			pathInfo.Type = ".percolator";
-			pathInfo.HttpMethod = HttpMethod.DELETE;
-		}
+		public UnregisterPercolatorRequest(IndexName index, Name name) 
+			: base(r=>r.Required("index", index).Required("type", (TypeName)".percolator").Required("id", name)) { }
 	}
 
-	public partial class UnregisterPercolatorRequest : IndexNamePathBase<DeleteRequestParameters>, IUnregisterPercolatorRequest
-	{
-		public UnregisterPercolatorRequest(IndexName index, string name) : base(index, name)
-		{
-		}
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteRequestParameters> pathInfo)
-		{
-			UnregisterPercolatorPathInfo.Update(settings, pathInfo);
-		}
-	}
-
-	public partial class UnregisterPercolatorDescriptor<T>
-		: IndexNamePathDescriptor<UnregisterPercolatorDescriptor<T>, DeleteRequestParameters, T>, IUnregisterPercolatorRequest
+	public class UnregisterPercolatorDescriptor<T>
+		: RequestDescriptorBase<UnregisterPercolatorDescriptor<T>, DeleteRequestParameters, IUnregisterPercolatorRequest>, IUnregisterPercolatorRequest
 		where T : class
 	{
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<DeleteRequestParameters> pathInfo)
-		{
-			UnregisterPercolatorPathInfo.Update(settings, pathInfo);
-		}
+		public UnregisterPercolatorDescriptor(Name name) 
+			: base(r=>r.Required("index", (IndexName)typeof(T)).Required("type", (TypeName)".percolator").Required("id", name)) { }
+
+		public UnregisterPercolatorDescriptor<T> Index(IndexName index) => Assign(a => a.RouteValues.Required("index", index));
 	}
 }

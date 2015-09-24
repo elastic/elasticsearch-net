@@ -6,23 +6,12 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IGetMappingRequest : IIndexTypePath<GetMappingRequestParameters> { }
-	public interface IGetMappingRequest<T> : IGetMappingRequest where T : class { }
+	public partial interface IGetMappingRequest { }
 
-	public partial class GetMappingRequest : IndexTypePathBase<GetMappingRequestParameters>, IGetMappingRequest
-	{
-		public GetMappingRequest(IndexName index, TypeName typeNameMarker) : base(index, typeNameMarker) { }
-	}
+	//TODO removed typed request validate this is ok in new stup
+
+	public partial class GetMappingRequest { }
 	
-	public partial class GetMappingRequest<T> : IndexTypePathBase<GetMappingRequestParameters, T>, IGetMappingRequest
-		where T : class
-	{
-	}
-
 	[DescriptorFor("IndicesGetMapping")]
-	public partial class GetMappingDescriptor<T> : IndexTypePathDescriptor<GetMappingDescriptor<T>, GetMappingRequestParameters, T>, IGetMappingRequest
-		where T : class
-	{
-	}
+	public partial class GetMappingDescriptor<T> where T : class { }
 }

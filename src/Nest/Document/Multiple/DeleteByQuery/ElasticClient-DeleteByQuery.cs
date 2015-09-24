@@ -14,14 +14,14 @@ namespace Nest
 		/// <typeparam name="T">The type used to infer the default index and typename as well as describe the strongly
 		///  typed parts of the query</typeparam>
 		/// <param name="deleteByQuerySelector">An optional descriptor to further describe the delete by query operation</param>
-		IDeleteByQueryResponse DeleteByQuery<T>(Func<DeleteByQueryDescriptor<T>, IDeleteByQueryRequest> deleteByQuerySelector)
+		IDeleteByQueryResponse DeleteByQuery<T>(Indices indices, Func<DeleteByQueryDescriptor<T>, IDeleteByQueryRequest> deleteByQuerySelector)
 			where T : class;
 
 		/// <inheritdoc/>
 		IDeleteByQueryResponse DeleteByQuery(IDeleteByQueryRequest deleteByQueryRequest);
 
 		/// <inheritdoc/>
-		Task<IDeleteByQueryResponse> DeleteByQueryAsync<T>(Func<DeleteByQueryDescriptor<T>, IDeleteByQueryRequest> deleteByQuerySelector)
+		Task<IDeleteByQueryResponse> DeleteByQueryAsync<T>(Indices indices, Func<DeleteByQueryDescriptor<T>, IDeleteByQueryRequest> deleteByQuerySelector)
 			where T : class;
 
 		/// <inheritdoc/>
@@ -32,8 +32,8 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IDeleteByQueryResponse DeleteByQuery<T>(Func<DeleteByQueryDescriptor<T>, IDeleteByQueryRequest> deleteByQuerySelector) where T : class =>
-			this.DeleteByQuery(deleteByQuerySelector?.Invoke(new DeleteByQueryDescriptor<T>()));
+		public IDeleteByQueryResponse DeleteByQuery<T>(Indices indices, Func<DeleteByQueryDescriptor<T>, IDeleteByQueryRequest> deleteByQuerySelector) where T : class =>
+			this.DeleteByQuery(deleteByQuerySelector?.Invoke(new DeleteByQueryDescriptor<T>(indices)));
 
 		/// <inheritdoc/>
 		public IDeleteByQueryResponse DeleteByQuery(IDeleteByQueryRequest deleteByQueryRequest) => 
@@ -43,8 +43,8 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<IDeleteByQueryResponse> DeleteByQueryAsync<T>(Func<DeleteByQueryDescriptor<T>, IDeleteByQueryRequest> deleteByQuerySelector) where T : class =>
-			this.DeleteByQueryAsync(deleteByQuerySelector?.Invoke(new DeleteByQueryDescriptor<T>()));
+		public Task<IDeleteByQueryResponse> DeleteByQueryAsync<T>(Indices indices, Func<DeleteByQueryDescriptor<T>, IDeleteByQueryRequest> deleteByQuerySelector) where T : class =>
+			this.DeleteByQueryAsync(deleteByQuerySelector?.Invoke(new DeleteByQueryDescriptor<T>(indices)));
 
 		/// <inheritdoc/>
 		public Task<IDeleteByQueryResponse> DeleteByQueryAsync(IDeleteByQueryRequest deleteByQueryRequest) => 

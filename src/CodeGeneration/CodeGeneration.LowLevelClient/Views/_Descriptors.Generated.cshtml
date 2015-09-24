@@ -21,8 +21,26 @@ namespace Nest
 		var type = method.DescriptorType + method.DescriptorTypeGeneric;
 	<text>
 	///<summary>descriptor for @method.FullName <pre>@method.Documentation</pre></summary>
-	public partial class @Raw(type) @(Raw(!method.Unmapped ? "" : string.Format(" : BasePathDescriptor<{0},{1}>", type, method.QueryStringParamName)))
-	{</text>foreach (KeyValuePair<string, ApiQueryParameters> kv in method.Url.Params)
+	public partial class @Raw(type) @(Raw(string.Format(" : RequestDescriptorBase<{0},{1}, I{2}>, I{2}", type, method.QueryStringParamName, method.DescriptorType.Replace("Descriptor", "Request"))))
+	{ 
+	@foreach (ApiUrlPart part in method.AllParts.Where(p=>!ApiUrl.BlackListRouteValues.Contains(p.Name)))
+	{
+	<text>	@(Raw(part.ClrTypeName)) I@(Raw(method.RequestType)).@(part.InterfaceName) => Self.RouteValues.Get@(Raw(string.Format("<{0}>",part.ClrTypeName)))("@(part.Name)");</text>
+	}
+	@foreach (Constructor c in method.DescriptorConstructors())
+    {
+	<text>	@(Raw(c.Description))
+		@(Raw(c.Generated))
+		@(Raw(c.AdditionalCode))
+</text>
+    }
+	@foreach (FluentRouteSetter c in method.GetFluentRouteSetters())
+    {
+	<text>	@(Raw(c.XmlDoc))
+		@(Raw(c.Code))
+</text>
+    }
+	</text>foreach (KeyValuePair<string, ApiQueryParameters> kv in method.Url.Params)
 	{
 		var t = @kv.Value.CsharpType(kv.Key);
 		var tSuffix = (t == "bool") ? " = true" : "";
@@ -37,27 +55,25 @@ namespace Nest
 		{<text>
 		[Obsolete("Scheduled to be removed in 2.0, use @kv.Value.DeprecatedInFavorOf instead")]
 		</text>}
-		public @Raw(type) @(mm)(@t @kv.Key@tSuffix) => _requestParams(p=>p.@(m)(@kv.Key));</text>
+		public @Raw(type) @(mm)(@t @kv.Key@tSuffix) => AssignParam(p=>p.@(m)(@kv.Key));</text>
 		if (fieldMethod)
 		{
 			<text>
 		///<summary>@kv.Value.Description</summary>
 		public @Raw(type) @mm@(Raw(typed ? "" : "<T>"))(params @Raw("Expression<Func<T, object>>[]") fields) @Raw(typed ? "" : "where T : class") =>
-			_requestParams(p=>p._@(mm)(fields));</text>
+			AssignParam(p=>p._@(mm)(fields));</text>
 		}
 		else if (mm.ToLowerInvariant().Contains("field") && t.Contains("string"))
 		{<text>
 		///<summary>@kv.Value.Description</summary>
 		public @Raw(type) @mm@(Raw(typed ? "" : "<T>"))(@Raw("Expression<Func<T, object>>") field) @Raw(typed ? "" : "where T : class") =>
-			_requestParams(p=>p._@(mm)(field));</text>
+			AssignParam(p=>p._@(mm)(field));</text>
 		}
 	}
 	if (method.Unmapped)
 	{<text>
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, @Raw(string.Format("ElasticsearchPathInfo<{0}>", method.QueryStringParamName)) pathInfo)
-		{
-			throw new NotImplementedException();
-		} </text>
+		//TODO THIS METHOD IS UNMAPPED!
+		</text>
 	}	
 	<text>
 	}</text>

@@ -14,13 +14,13 @@ namespace Nest
 		/// </summary>
 		/// <param name="repository">The name for the repository</param>
 		/// <param name="selector">describe what the repository looks like</param>
-		IAcknowledgedResponse CreateRepository(string repository, Func<CreateRepositoryDescriptor, ICreateRepositoryRequest> selector);
+		IAcknowledgedResponse CreateRepository(Name repository, Func<CreateRepositoryDescriptor, ICreateRepositoryRequest> selector);
 
 		/// <inheritdoc/>
 		IAcknowledgedResponse CreateRepository(ICreateRepositoryRequest createRepositoryRequest);
 
 		/// <inheritdoc/>
-		Task<IAcknowledgedResponse> CreateRepositoryAsync(string repository, Func<CreateRepositoryDescriptor, ICreateRepositoryRequest> selector);
+		Task<IAcknowledgedResponse> CreateRepositoryAsync(Name repository, Func<CreateRepositoryDescriptor, ICreateRepositoryRequest> selector);
 
 		/// <inheritdoc/>
 		Task<IAcknowledgedResponse> CreateRepositoryAsync(ICreateRepositoryRequest createRepositoryRequest);
@@ -30,8 +30,8 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IAcknowledgedResponse CreateRepository(string name, Func<CreateRepositoryDescriptor, ICreateRepositoryRequest> selector) =>
-			this.CreateRepository(selector?.Invoke(new CreateRepositoryDescriptor().Repository(name)));
+		public IAcknowledgedResponse CreateRepository(Name repository, Func<CreateRepositoryDescriptor, ICreateRepositoryRequest> selector) =>
+			this.CreateRepository(selector?.Invoke(new CreateRepositoryDescriptor(repository)));
 
 		/// <inheritdoc/>
 		public IAcknowledgedResponse CreateRepository(ICreateRepositoryRequest request) => 
@@ -41,8 +41,8 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<IAcknowledgedResponse> CreateRepositoryAsync(string name, Func<CreateRepositoryDescriptor, ICreateRepositoryRequest> selector) => 
-			this.CreateRepositoryAsync(selector?.Invoke(new CreateRepositoryDescriptor().Repository(name)));
+		public Task<IAcknowledgedResponse> CreateRepositoryAsync(Name repository, Func<CreateRepositoryDescriptor, ICreateRepositoryRequest> selector) => 
+			this.CreateRepositoryAsync(selector?.Invoke(new CreateRepositoryDescriptor(repository)));
 
 		/// <inheritdoc/>
 		public Task<IAcknowledgedResponse> CreateRepositoryAsync(ICreateRepositoryRequest request) => 

@@ -8,12 +8,9 @@ using System.Linq.Expressions;
 namespace Nest
 {
 
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<SearchRequest>))]
-	public interface ISearchRequest : IQueryPath<SearchRequestParameters>
+	public partial interface ISearchRequest : ICovariantSearchRequest
 	{
-		Type ClrType { get; }
-
 		[JsonProperty(PropertyName = "timeout")]
 		string Timeout { get; set; }
 
@@ -73,10 +70,10 @@ namespace Nest
 		AggregationDictionary Aggregations { get; set; }
 
 		[JsonProperty(PropertyName = "query")]
-		IQueryContainer Query { get; set; }
+		QueryContainer Query { get; set; }
 
 		[JsonProperty(PropertyName = "post_filter")]
-		IQueryContainer PostFilter { get; set; }
+		QueryContainer PostFilter { get; set; }
 
 		[JsonProperty(PropertyName = "inner_hits")]
 		[JsonConverter(typeof (VerbatimDictionaryKeysJsonConverter))]
@@ -89,57 +86,23 @@ namespace Nest
 		SearchType? SearchType { get;  }
 
 		bool? IgnoreUnavalable { get; }
-
-		Func<dynamic, Hit<dynamic>, Type> TypeSelector { get; set;}
 		
 		SearchRequestParameters QueryString { get; set; }
 	}
+	public partial interface ISearchRequest<T> : ISearchRequest { }
+	//TODO Force get if source is specified on query string
+	//TODO removed typed request variant
 
-	public interface ISearchRequest<T> : ISearchRequest {} 
-
-	internal static class SearchPathInfo
+	public partial class SearchRequest 
 	{
-		/// <summary>
-		/// Based on the type information present in this descriptor create method that takes
-		/// the returned _source and hit and returns the ClrType it should deserialize too.
-		/// This is so that Documents[A] can contain actual instances of subclasses B, C as well.
-		/// If you specify types using .Types(typeof(B), typeof(C)) then NEST can automagically
-		/// create a TypeSelector based on the hits _type property.
-		/// </summary>
-		public static void CloseOverAutomagicCovariantResultSelector(ElasticInferrer infer, ISearchRequest self)
-		{
-			if (infer == null || self == null) return;
-			var returnType = self.ClrType;
-
-			if (returnType == null) return;
-
-			var types = (self.Types ?? Enumerable.Empty<TypeName>()).Where(t => t.Type != null).ToList();
-			if (self.TypeSelector != null || !types.HasAny(t => t.Type != returnType))
-				return;
-			
-			var typeDictionary = types.ToDictionary(infer.TypeName, t => t.Type);
-			self.TypeSelector = (o, h) =>
-			{
-				Type t;
-				return !typeDictionary.TryGetValue(h.Type, out t) ? returnType : t;
-			};
-		}
-		public static void Update(IConnectionSettingsValues settings, ElasticsearchPathInfo<SearchRequestParameters> pathInfo, ISearchRequest request)
-		{
-			pathInfo.HttpMethod = request.RequestParameters.ContainsKey("source") ? HttpMethod.GET : HttpMethod.POST;
-		}
-	}
-	
-	public partial class SearchRequest : QueryPathBase<SearchRequestParameters>, ISearchRequest
-	{
-		public SearchRequest() {}
-
-		public SearchRequest(IndexName index, TypeName type = null) : base(index, type) { }
-
-		public SearchRequest(IEnumerable<IndexName> indices, IEnumerable<TypeName> types = null) : base(indices, types) { }
-
 		private Type _clrType { get; set; }
-		Type ISearchRequest.ClrType { get { return _clrType; } }
+		Type ICovariantSearchRequest.ClrType => this._clrType;
+		Types ICovariantSearchRequest.ElasticsearchTypes => ((ISearchRequest)this).Type;
+
+		/// <summary>
+		/// Does a search on all indices and types
+		/// </summary>
+		public SearchRequest() { }
 
 		public string Timeout { get; set; }
 		public int? From { get; set; }
@@ -155,9 +118,9 @@ namespace Nest
 		public ISourceFilter Source { get; set; }
 		public IList<ISort> Sort { get; set; }
 		public IDictionary<IndexName, double> IndicesBoost { get; set; }
-		public IQueryContainer PostFilter { get; set; }
+		public QueryContainer PostFilter { get; set; }
 		public IDictionary<string, IInnerHitsContainer> InnerHits { get; set; }
-		public IQueryContainer Query { get; set; }
+		public QueryContainer Query { get; set; }
 		public IRescore Rescore { get; set; }
 		public IDictionary<string, ISuggestBucket> Suggest { get; set; }
 		public IHighlightRequest Highlight { get; set; }
@@ -176,27 +139,19 @@ namespace Nest
 		public Func<dynamic, Hit<dynamic>, Type> TypeSelector { get; set; }
 
 		public SearchRequestParameters QueryString { get; set; }
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SearchRequestParameters> pathInfo) =>
-			SearchPathInfo.Update(settings, pathInfo, this);
-
 	}
 
-	public partial class SearchRequest<T> : QueryPathBase<SearchRequestParameters, T>, ISearchRequest
-		where T : class
+	public partial class SearchRequest<T> 
 	{
-		public SearchRequest() {}
+		private Type _clrType { get; set; }
+		Type ICovariantSearchRequest.ClrType => this._clrType;
+		Types ICovariantSearchRequest.ElasticsearchTypes => ((ISearchRequest)this).Type;
+		
+		/// <summary>
+		/// Does a search on {inferred_index}/{inferred_type}/_search
+		/// </summary>
+		public SearchRequest() : this(typeof(T), typeof(T)) { }
 
-		private ISearchRequest Self => this;
-
-		public SearchRequest(IndexName index, TypeName type = null) : base(index, type) { }
-
-		public SearchRequest(IEnumerable<IndexName> indices, IEnumerable<TypeName> types = null) : base(indices, types) { }
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SearchRequestParameters> pathInfo) =>
-			SearchPathInfo.Update(settings,pathInfo, this);
-
-		public Type ClrType => typeof(T);
 		public string Timeout { get; set; }
 		public int? From { get; set; }
 		public int? Size { get; set; }
@@ -205,25 +160,19 @@ namespace Nest
 		public bool? TrackScores { get; set; }
 		public double? MinScore { get; set; }
 		public long? TerminateAfter { get; set; }
-		public IDictionary<IndexName, double> IndicesBoost { get; set; }
-		public IList<ISort> Sort { get; set; }
-		public IDictionary<string, ISuggestBucket> Suggest { get; set; }
-		public IHighlightRequest Highlight { get; set; }
-		public IRescore Rescore { get; set; }
 		public IList<FieldName> Fields { get; set; }
 		public IList<FieldName> FielddataFields { get; set; }
 		public IDictionary<string, IScriptQuery> ScriptFields { get; set; }
 		public ISourceFilter Source { get; set; }
+		public IList<ISort> Sort { get; set; }
+		public IDictionary<IndexName, double> IndicesBoost { get; set; }
+		public QueryContainer PostFilter { get; set; }
 		public IDictionary<string, IInnerHitsContainer> InnerHits { get; set; }
+		public QueryContainer Query { get; set; }
+		public IRescore Rescore { get; set; }
+		public IDictionary<string, ISuggestBucket> Suggest { get; set; }
+		public IHighlightRequest Highlight { get; set; }
 		public AggregationDictionary Aggregations { get; set; }
-
-		IQueryContainer ISearchRequest.Query { get; set; }
-		[JsonProperty(PropertyName = "query")]
-		public QueryContainer Query { get { return Self.Query as QueryContainer; } set { Self.Query = value; } }
-
-		IQueryContainer ISearchRequest.PostFilter { get; set; }
-		[JsonProperty(PropertyName = "post_filter")]
-		public QueryContainer PostFilter { get { return Self.PostFilter as QueryContainer; } set { Self.PostFilter = value; } }
 
 		SearchType? ISearchRequest.SearchType => this.QueryString?.GetQueryStringValue<SearchType?>("search_type");
 
@@ -236,35 +185,42 @@ namespace Nest
 		bool? ISearchRequest.IgnoreUnavalable => this.QueryString?.GetQueryStringValue<bool?>("ignore_unavailable");
 
 		public Func<dynamic, Hit<dynamic>, Type> TypeSelector { get; set; }
+
 		public SearchRequestParameters QueryString { get; set; }
 	}
 
 	/// <summary>
 	/// A descriptor wich describes a search operation for _search and _msearch
 	/// </summary>
-	public partial class SearchDescriptor<T> : QueryPathDescriptorBase<SearchDescriptor<T>, SearchRequestParameters, T>, ISearchRequest 
-		where T : class
+	public partial class SearchDescriptor<T> where T : class
 	{
+		Type ICovariantSearchRequest.ClrType => typeof(T);
+		Types ICovariantSearchRequest.ElasticsearchTypes => ((ISearchRequest)this).Type;
+		Func<dynamic, Hit<dynamic>, Type> ICovariantSearchRequest.TypeSelector { get; set; }
+
 		private ISearchRequest Self => this;
 
 		private SearchDescriptor<T> _assign(Action<ISearchRequest> assigner) => Fluent.Assign(this, assigner);
 
-		SearchType? ISearchRequest.SearchType => this.Request.RequestParameters.GetQueryStringValue<SearchType?>("search_type");
+		/// <summary>
+		/// Does a search on {inferred_index}/{inferred_type}/_search
+		/// </summary>
+		public SearchDescriptor() : base(r=> r.Required("index", (Indices)typeof(T)).Required("type", (Types)typeof(T))) { }
+
+		SearchType? ISearchRequest.SearchType => this.Self.RequestParameters.GetQueryStringValue<SearchType?>("search_type");
 
 		SearchRequestParameters ISearchRequest.QueryString
 		{
-			get { return this.Request.RequestParameters;  }
-			set { this.Request.RequestParameters = value;  }
+			get { return this.Self.RequestParameters;  }
+			set { this.Self.RequestParameters = value;  }
 		}
 
-		string ISearchRequest.Preference => this.Request.RequestParameters.GetQueryStringValue<string>("preference");
+		string ISearchRequest.Preference => this.Self.RequestParameters.GetQueryStringValue<string>("preference");
 
-		string ISearchRequest.Routing => this.Request.RequestParameters.GetQueryStringValue<string[]>("routing") == null
-			? null : string.Join(",", this.Request.RequestParameters.GetQueryStringValue<string[]>("routing"));
+		string ISearchRequest.Routing => this.Self.RequestParameters.GetQueryStringValue<string[]>("routing") == null
+			? null : string.Join(",", this.Self.RequestParameters.GetQueryStringValue<string[]>("routing"));
 
-		bool? ISearchRequest.IgnoreUnavalable => this.Request.RequestParameters.GetQueryStringValue<bool?>("ignore_unavailable");
-
-		Type ISearchRequest.ClrType => typeof(T);
+		bool? ISearchRequest.IgnoreUnavalable => this.Self.RequestParameters.GetQueryStringValue<bool?>("ignore_unavailable");
 
 		/// <summary>
 		/// Whether conditionless queries are allowed or not
@@ -290,23 +246,21 @@ namespace Nest
 
 		IRescore ISearchRequest.Rescore { get; set; }
 
-		IQueryContainer ISearchRequest.Query { get; set; }
+		QueryContainer ISearchRequest.Query { get; set; }
 
-		IQueryContainer ISearchRequest.PostFilter { get; set; }
+		QueryContainer ISearchRequest.PostFilter { get; set; }
 
 		IList<FieldName> ISearchRequest.Fields { get; set; }
 
 		IList<FieldName> ISearchRequest.FielddataFields { get; set; }
 
 		IDictionary<string, IScriptQuery> ISearchRequest.ScriptFields { get; set; }
-
 		ISourceFilter ISearchRequest.Source { get; set; }
 
 		AggregationDictionary ISearchRequest.Aggregations { get; set; }
 
 		IDictionary<string, IInnerHitsContainer> ISearchRequest.InnerHits { get; set; }
 
-		Func<dynamic, Hit<dynamic>, Type> ISearchRequest.TypeSelector { get; set; }
 
 
 		//TODO probably remove this when we normalize sorting
@@ -732,15 +686,10 @@ namespace Nest
 			return this.Query(bq);
 		}
 
-		public SearchDescriptor<T> Query(QueryContainer query)
-		{
-			return this.Query((IQueryContainer)query);
-		}
-
 		/// <summary>
 		/// Describe the query to perform using the static Query class
 		/// </summary>
-		public SearchDescriptor<T> Query(IQueryContainer query)
+		public SearchDescriptor<T> Query(QueryContainer query)
 		{
 			if (query == null)
 				return this;
@@ -840,9 +789,6 @@ namespace Nest
 
 		public SearchDescriptor<T> ConcreteTypeSelector(Func<dynamic, Hit<dynamic>, Type> typeSelector) =>
 			_assign(a => a.TypeSelector = typeSelector);
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<SearchRequestParameters> pathInfo) =>
-			SearchPathInfo.Update(settings,pathInfo, this);
 
 	}
 }

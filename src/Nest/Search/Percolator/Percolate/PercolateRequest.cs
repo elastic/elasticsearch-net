@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IPercolateRequest<TDocument> : IIndexTypePath<PercolateRequestParameters>, IPercolateOperation
+	public interface IPercolateRequest<TDocument> : IPercolateRequest, IPercolateOperation
 		where TDocument : class
 	{
 		[JsonProperty(PropertyName = "doc")]
@@ -17,17 +17,7 @@ namespace Nest
 
 	}
 
-	internal static class PercolatePathInfo
-	{
-		public static void Update<T>(ElasticsearchPathInfo<PercolateRequestParameters> pathInfo, IPercolateRequest<T> request)
-			where T : class
-		{
-			pathInfo.Id = request.Id;
-			pathInfo.HttpMethod = HttpMethod.POST;
-		}
-	}
-
-	public partial class PercolateRequest<TDocument> : IndexTypePathBase<PercolateRequestParameters, TDocument>, IPercolateRequest<TDocument>
+	public partial class PercolateRequest<TDocument> : IPercolateRequest<TDocument>
 		where TDocument : class
 	{
 		public IHighlightRequest Highlight { get; set; }
@@ -35,55 +25,33 @@ namespace Nest
 		public QueryContainer Filter { get; set; }
 		public IDictionary<string, IAggregationContainer> Aggregations { get; set; }
 		
-
-		public string Id { get; set; }
 		public int? Size { get; set; }
 		public bool? TrackScores { get; set; }
 		public TDocument Document { get; set; }
 		public IDictionary<FieldName, ISort> Sort { get; set; }
 
-		public PercolateRequest(TDocument document)
-		{
-			this.Document = document;
-		}
-
-		public PercolateRequest(string id) { this.Id = id; }
-
-		public PercolateRequest(long id) { this.Id = id.ToString(CultureInfo.InvariantCulture); }
-		
-		IRequestParameters IPercolateOperation.GetRequestParameters()
-		{
-			return this.Request.RequestParameters;
-		}
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<PercolateRequestParameters> pathInfo)
-		{
-			PercolatePathInfo.Update(pathInfo, this);
-		}
-
+		Id IPercolateOperation.Id => ((IPercolateCountRequest)this).Id;
+		IRequestParameters IPercolateOperation.GetRequestParameters() => this.Self.RequestParameters;
 	}
-	public partial class PercolateDescriptor<T> : IndexTypePathDescriptor<PercolateDescriptor<T>, PercolateRequestParameters, T>, IPercolateRequest<T>
+	public partial class PercolateDescriptor<T> : IPercolateRequest<T>
 		where T : class
 	{
 		private IPercolateRequest<T> Self => this;
+		IRequestParameters IPercolateOperation.GetRequestParameters() => this.Self.RequestParameters;
 
 		IHighlightRequest IPercolateOperation.Highlight { get; set; }
 		QueryContainer IPercolateOperation.Query { get; set; }
 		QueryContainer IPercolateOperation.Filter { get; set; }
 
-		string IPercolateOperation.Id { get; set; }
+		Id IPercolateOperation.Id => ((IPercolateCountRequest)this).Id;
 		int? IPercolateOperation.Size { get; set; }
 		bool? IPercolateOperation.TrackScores { get; set; }
 		
 		T IPercolateRequest<T>.Document { get; set; }
-
-
 		IDictionary<FieldName, ISort> IPercolateOperation.Sort { get; set; }
 		IDictionary<string, IAggregationContainer> IPercolateOperation.Aggregations { get; set; }
-		
-		IRequestParameters IPercolateOperation.GetRequestParameters()
-		{
-			return this.Request.RequestParameters;
-		}
+
+
 		/// <summary>
 		/// The object to perculate
 		/// </summary>
@@ -92,25 +60,6 @@ namespace Nest
 			Self.Document = @object;
 			return this;
 		}
-
-		/// <summary>
-		/// The object to perculate
-		/// </summary>
-		public PercolateDescriptor<T> Id(string id)
-		{
-			Self.Id = id;
-			return this;
-		}
-
-		/// <summary>
-		/// The object to perculate
-		/// </summary>
-		public PercolateDescriptor<T> Id(long id)
-		{
-			Self.Id = id.ToString(CultureInfo.InvariantCulture);
-			return this;
-		}
-		/// <summary>
 		/// Make sure we keep calculating score even if we are sorting on a field.
 		/// </summary>
 		public PercolateDescriptor<T> TrackScores(bool trackscores = true)
@@ -319,12 +268,6 @@ namespace Nest
 			QueryDescriptor.ThrowIfNull("filter");
 			Self.Filter = QueryDescriptor;
 			return this;
-		}
-
-
-		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<PercolateRequestParameters> pathInfo)
-		{
-			PercolatePathInfo.Update(pathInfo, this);
 		}
 	}
 }

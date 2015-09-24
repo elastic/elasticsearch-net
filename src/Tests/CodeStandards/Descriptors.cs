@@ -58,5 +58,7 @@ namespace Tests.CodeStandards
 
 		//TODO write a tests that all our abstract classes have the *Base suffix
 		//TODO write a test that assures we use Base as a suffix and not prefix
+
+		//Write a tests that all properties of type QueryContainer have the same json converters set
 	}
 }

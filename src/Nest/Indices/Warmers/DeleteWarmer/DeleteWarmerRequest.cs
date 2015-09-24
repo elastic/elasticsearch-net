@@ -6,19 +6,10 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IDeleteWarmerRequest : IIndicesOptionalTypesNamePath<DeleteWarmerRequestParameters> { }
+	public partial interface IDeleteWarmerRequest { }
 
-	public partial class DeleteWarmerRequest : IndicesOptionalTypesNamePathBase<DeleteWarmerRequestParameters>, IDeleteWarmerRequest
-	{
-		public DeleteWarmerRequest(string name)
-		{
-			this.Name = name;
-		}
-	}
+	public partial class DeleteWarmerRequest { }
 
 	[DescriptorFor("IndicesDeleteWarmer")]
-	public partial class DeleteWarmerDescriptor : IndicesOptionalTypesNamePathDescriptor<DeleteWarmerDescriptor, DeleteWarmerRequestParameters>, IDeleteWarmerRequest
-	{
-	}
+	public partial class DeleteWarmerDescriptor { }
 }

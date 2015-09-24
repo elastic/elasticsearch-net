@@ -6,15 +6,10 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface ICloseIndexRequest : IIndexPath<CloseIndexRequestParameters> { }
+	public partial interface ICloseIndexRequest { }
 
-	public partial class CloseIndexRequest : IndexPathBase<CloseIndexRequestParameters>, ICloseIndexRequest
-	{
-		public CloseIndexRequest(IndexName index) : base(index) { }
-	}
+	public partial class CloseIndexRequest { }
+
 	[DescriptorFor("IndicesClose")]
-	public partial class CloseIndexDescriptor : IndexPathDescriptorBase<CloseIndexDescriptor, CloseIndexRequestParameters>, ICloseIndexRequest
-	{
-	}
+	public partial class CloseIndexDescriptor { }
 }

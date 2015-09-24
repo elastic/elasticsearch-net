@@ -153,6 +153,12 @@ namespace Nest
 			return this.IdResolver.GetIdFor(obj);
 		}
 
+		public string Id(Type objType, object obj)
+		{
+			if (obj == null) return null;
+			
+			return this.IdResolver.GetIdFor(objType, obj);
+		}
 		public string TypeName<T>() where T : class
 		{
 			return this.TypeName(typeof(T));

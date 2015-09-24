@@ -13,13 +13,13 @@ namespace Nest
 		/// <param name="repository">The repository name that holds our snapshot</param>
 		/// <param name="snapshotName">The name of the snapshot that we want to restore</param>
 		/// <param name="selector">Optionally further describe the restore operation</param>
-		IRestoreResponse Restore(string repository, string snapshotName, Func<RestoreDescriptor, IRestoreRequest> selector = null);
+		IRestoreResponse Restore(Name repository, Name snapshotName, Func<RestoreDescriptor, IRestoreRequest> selector = null);
 
 		/// <inheritdoc/>
 		IRestoreResponse Restore(IRestoreRequest restoreRequest);
 
 		/// <inheritdoc/>
-		Task<IRestoreResponse> RestoreAsync(string repository, string snapshotName, Func<RestoreDescriptor, IRestoreRequest> selector = null);
+		Task<IRestoreResponse> RestoreAsync(Name repository, Name snapshotName, Func<RestoreDescriptor, IRestoreRequest> selector = null);
 
 		/// <inheritdoc/>
 		Task<IRestoreResponse> RestoreAsync(IRestoreRequest restoreRequest);
@@ -35,8 +35,8 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public IRestoreResponse Restore(string repository, string snapshotName, Func<RestoreDescriptor, IRestoreRequest> selector = null) =>
-			this.Restore(selector(new RestoreDescriptor().Snapshot(snapshotName).Repository(repository)));
+		public IRestoreResponse Restore(Name repository, Name snapshotName, Func<RestoreDescriptor, IRestoreRequest> selector = null) =>
+			this.Restore(selector(new RestoreDescriptor(repository, snapshotName)));
 
 		/// <inheritdoc/>
 		public Task<IRestoreResponse> RestoreAsync(IRestoreRequest restoreRequest) => 
@@ -46,7 +46,7 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<IRestoreResponse> RestoreAsync(string repository, string snapshotName, Func<RestoreDescriptor, IRestoreRequest> selector = null) => 
-			this.RestoreAsync(selector(new RestoreDescriptor().Snapshot(snapshotName).Repository(repository)));
+		public Task<IRestoreResponse> RestoreAsync(Name repository, Name snapshotName, Func<RestoreDescriptor, IRestoreRequest> selector = null) => 
+			this.RestoreAsync(selector(new RestoreDescriptor(repository, snapshotName)));
 	}
 }

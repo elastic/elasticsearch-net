@@ -6,17 +6,10 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	public partial interface IDeleteRepositoryRequest { }
 
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IDeleteRepositoryRequest : IRepositoryPath<DeleteRepositoryRequestParameters> { }
-
-	public partial class DeleteRepositoryRequest : RepositoryPathBase<DeleteRepositoryRequestParameters>, IDeleteRepositoryRequest
-	{
-		public DeleteRepositoryRequest(string repositoryName) : base(repositoryName) { }
-	}
+	public partial class DeleteRepositoryRequest { }
 
 	[DescriptorFor("SnapshotDeleteRepository")]
-	public partial class DeleteRepositoryDescriptor : RepositoryPathDescriptor<DeleteRepositoryDescriptor, DeleteRepositoryRequestParameters>, IDeleteRepositoryRequest
-	{
-	}
+	public partial class DeleteRepositoryDescriptor { }
 }

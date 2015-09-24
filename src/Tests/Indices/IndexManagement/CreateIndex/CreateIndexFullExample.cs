@@ -19,7 +19,7 @@ namespace Tests.Indices.IndexManagement
 
 		public static string IndexName { get; } = RandomString();
 
-		public override HttpMethod HttpMethod => HttpMethod.POST;
+		public override HttpMethod HttpMethod => HttpMethod.PUT;
 		public override string UrlPath => $"/{IndexName}";
 
 		protected override LazyResponses ClientUsage() => Calls(
@@ -74,15 +74,14 @@ namespace Tests.Indices.IndexManagement
 				{"index.indexing.slowlog.threshold.index.info", "5s"},
 				{"index.indexing.slowlog.threshold.index.debug", "2s"},
 				{"index.indexing.slowlog.threshold.index.trace", "500ms"},
-				{"index.indexing.slowlog.level", 2},
+				{"index.indexing.slowlog.level", "debug"},
 				{"index.indexing.slowlog.source", 100},
 				{"index.number_of_shards", 1},
 				{"index.store.type", "mmapfs"},
 			}
 		};
 
-		protected override CreateIndexDescriptor ClientDoesThisInternally(CreateIndexDescriptor d) =>
-			d.Index(IndexName);
+		protected override CreateIndexDescriptor NewDescriptor() => new CreateIndexDescriptor(IndexName);
 
 		protected override Func<CreateIndexDescriptor, ICreateIndexRequest> Fluent => d => d
 			.Settings(s => s

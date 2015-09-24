@@ -9,6 +9,7 @@ namespace Nest
 	/// </summary>
 	public static class IndexManyExtensions
 	{
+		//TODO nullable IndexName and IndexType?
 
 		/// <summary>
 		/// Shortcut into the Bulk call that indexes the specified objects
@@ -45,7 +46,7 @@ namespace Nest
 		private static BulkRequest CreateIndexBulkRequest<T>(IEnumerable<T> objects, string index, string type) where T : class
 		{
 			@objects.ThrowIfEmpty("objects");
-			var bulkRequest = new BulkRequest {Index = index, Type = type};
+			var bulkRequest = new BulkRequest(index, type);
 			var indexOps = @objects
 				.Select(o => new BulkIndexOperation<T>(o))
 				.Cast<IBulkOperation>()

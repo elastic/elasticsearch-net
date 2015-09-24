@@ -8,7 +8,7 @@ namespace Nest
 	{
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-			var d = value as Document;
+			var d = value as LazyDocument;
 			if (d == null || d._Value == null)
 				return;
 			writer.WriteToken(d._Value.CreateReader());
@@ -17,7 +17,7 @@ namespace Nest
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
 			var document = serializer.Deserialize(reader) as JToken;
-			return new Document { _Value = document };
+			return new LazyDocument { _Value = document };
 		}
 
 		public override bool CanConvert(Type objectType)
