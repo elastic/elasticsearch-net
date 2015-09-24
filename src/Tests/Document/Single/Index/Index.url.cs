@@ -10,9 +10,9 @@ using static Tests.Framework.UrlTester;
 
 namespace Tests.Document.Single.Index
 {
-	public class IndexingUrlTests
+	public class IndexUrlTests
 	{
-		[U] public async Task CreateUrlWithNoId()
+		[U] public async Task Urls()
 		{
 			var project = new Project { Name = "NEST" };
 
