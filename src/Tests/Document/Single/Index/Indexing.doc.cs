@@ -23,8 +23,8 @@ namespace Tests.Document.Single
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.Index<Project>(this.Document, f),
 			fluentAsync: (client, f) => client.IndexAsync<Project>(this.Document, f),
-			request: (client, r) => client.Index<Project>(r),
-			requestAsync: (client, r) => client.IndexAsync<Project>(r)
+			request: (client, r) => client.Index(r),
+			requestAsync: (client, r) => client.IndexAsync(r)
 		);
 
 		public Project Document => new Project

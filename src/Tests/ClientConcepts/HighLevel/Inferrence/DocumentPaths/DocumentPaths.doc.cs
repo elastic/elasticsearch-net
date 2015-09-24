@@ -12,7 +12,7 @@ using static Nest.Infer;
 
 namespace Tests.ClientConcepts.HighLevel.Inferrence.FieldNames
 {
-	public class DocumentParams
+	public class DocumentPaths
 	{
 		/** # DocumentPaths
 		 * Many API's in elasticsearch describe a path to a document. In NEST besides generating a constructor that takes

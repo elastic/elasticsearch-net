@@ -10,7 +10,7 @@ namespace Nest
 {
 	using Elasticsearch.Net.Serialization;
 	using MultiSearchCreator = Func<IApiCallDetails, Stream, MultiSearchResponse>;
-	public interface IElasticCLient
+	public partial interface IElasticClient
 	{
 		/// <summary>
 		/// The multi search API allows to execute several search requests within the same API.

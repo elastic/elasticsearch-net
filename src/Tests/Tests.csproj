@@ -93,13 +93,15 @@
     <Compile Include="ClientConcepts\ConnectionPooling\Sniffing\OnStaleClusterState.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\Sniffing\RoleDetection.cs" />
     <Compile Include="ClientConcepts\HighLevel\CovariantHits\CovariantSearchResults.cs" />
-    <Compile Include="ClientConcepts\HighLevel\Inferrence\Document\DocumentParams.cs" />
+    <Compile Include="ClientConcepts\HighLevel\Inferrence\DocumentPaths\DocumentPaths.doc.cs" />
     <Compile Include="ClientConcepts\HighLevel\Inferrence\Id\IdsInference.cs" />
     <Compile Include="ClientConcepts\HighLevel\Inferrence\Indices\IndicesPaths.cs" />
     <Compile Include="CodeStandards\Descriptors.cs" />
-    <Compile Include="Document\Single\Indexing.cs" />
+    <Compile Include="Document\Single\Index\Indexing.doc.cs" />
+    <Compile Include="Document\Single\Index\Indexing.url.cs" />
     <Compile Include="Framework\CrudExample.cs" />
     <Compile Include="Framework\MockResponses\SniffingResponse.cs" />
+    <Compile Include="Framework\UrlTests.cs" />
     <Compile Include="Framework\SimpleIntegration.cs" />
     <Compile Include="Framework\ApiCallExample.cs" />
     <Compile Include="Framework\Audit\Audits.cs" />
@@ -138,6 +140,7 @@
     <Compile Include="Framework\MockData\Person.cs" />
     <Compile Include="Framework\MockData\Tag.cs" />
     <Compile Include="Framework\Roundtrip.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="IndexModules\IndexSettings\Merge\MergeSettings.cs" />
     <Compile Include="IndexModules\IndexSettings\Settings\TypedIndexSettings.cs" />
     <Compile Include="IndexModules\IndexSettings\SlowLog\SlowLogSettings.cs" />

@@ -37,12 +37,25 @@ namespace Nest
 
 		private RouteValues Route(string name, IUrlParameter routeValue, bool required = true)
 		{
-			this._routeValues.Add(name, routeValue);
+			if (routeValue == null)
+			{
+				if (this._routeValues.ContainsKey(name))
+					this._routeValues.Remove(name);
+				return this;
+			}
+
+			this._routeValues[name] = routeValue;
 			return this;
 		}
 		private RouteValues Resolved(string name, string routeValue, bool required = true)
 		{
-			this._resolved.Add(name, routeValue);
+			if (routeValue == null)
+			{
+				if (this._resolved.ContainsKey(name))
+					this._resolved.Remove(name);
+				return this;
+			}
+			this._resolved[name] = routeValue;
 			return this;
 		}
 
