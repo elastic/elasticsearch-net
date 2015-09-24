@@ -21,12 +21,14 @@ namespace Nest
 
 		public static implicit operator Id(string id) => new Id(id);
 		public static implicit operator Id(long id) => new Id(id);
+		public static implicit operator Id(Guid id) => new Id(id.ToString("D"));
 
 		public static Id From<T>(T document) where T : class => new Id(document);
 
 		public string GetString(IConnectionConfigurationValues settings) => ((IUrlParameter)Ids.Single(this)).GetString(settings);
 	}
 
+	//TODO do we need this? discus with @gmarz
 	public class Ids : IUrlParameter
 	{
 		internal IEnumerable<Id> _ids;
@@ -43,7 +45,7 @@ namespace Nest
 		{
 			var nestSettings = settings as IConnectionSettingsValues;
 			if (nestSettings == null)
-				throw new Exception("Tried to pass ids on querysting but it could not be resolved because no nest settings are available");
+				throw new Exception("Tried to pass ids on querystring but it could not be resolved because no nest settings are available");
 
 			var infer = new ElasticInferrer(nestSettings);
 			var ids = _ids

@@ -30,6 +30,11 @@ namespace Tests.Framework
 			var sut = this.AssertSerializesAndRoundTrips(actual);
 			return new RoundTripper<T>(this.ExpectJson, sut);
 		}
+		public RoundTripper WhenInferringIdOn<T>(T project) where T : class
+		{
+			this.GetClient().Infer.Id<T>(project).Should().Be((string)this.ExpectJson);
+			return this;
+		}
 
 		public static IntermediateChangedSettings WithConnectionSettings(Func<ConnectionSettings, ConnectionSettings> settings) =>  new IntermediateChangedSettings(settings);
 
@@ -55,6 +60,7 @@ namespace Tests.Framework
 		{
 			this.Sut = sut;
 		}
+
 
 		public RoundTripper<T> WhenSerializing(T actual)
 		{

@@ -40,6 +40,7 @@ namespace Nest
 
 		protected virtual HttpMethod HttpMethod => Self.RequestParameters.DefaultHttpMethod;
 
+
 		[JsonIgnore]
 		HttpMethod IRequest.HttpMethod => this.HttpMethod;
 

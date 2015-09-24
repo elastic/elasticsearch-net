@@ -14,26 +14,77 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence.FieldNames
 {
 	public class DocumentParams
 	{
-		/** # Strongly typed field access 
-		 * 
-		 * Several places in the elasticsearch API expect the path to a field from your original source document as a string.
-		 * NEST allows you to use C# expressions to strongly type these field path strings. 
-		 *
-		 * These expressions are assigned to a type called `FieldName` and there are several ways to create a instance of that type
+		/** # DocumentPaths
+		 * Many API's in elasticsearch describe a path to a document. In NEST besides generating a constructor that takes
+		 * and Index, Type and Id seperately we also generate a constructor taking a DocumentPath that allows you to describe the path
+		 * to your document more succintly 
 		 */
 
-		/** Using the constructor directly is possible but rather involved */
-		[U] public void kkk()
+		/** Manually newing */
+		[U] public void FromId()
 		{
-			var fieldString = new FieldName {Name = "name"};
+			/** here we create a new document path based on Project with the id 1 */
+			IDocumentPath path = new DocumentPath<Project>(1);
+			Expect("project").WhenSerializing(path.Index);
+			Expect("project").WhenSerializing(path.Type);
+			Expect("1").WhenSerializing(path.Id);
 
-			/** especially when using C# expressions since these can not be simply new'ed*/
-			Expression<Func<Project, object>> expression = p => p.Name;
-			var fieldExpression = FieldName.Create(expression);
+			/** You can still override the inferred index and type name*/
+			path = new DocumentPath<Project>(1).Type("project1");
+			Expect("project1").WhenSerializing(path.Type);
 
-			Expect("name")
-				.WhenSerializing(fieldExpression)
-				.WhenSerializing(fieldString);
+			path = new DocumentPath<Project>(1).Index("project1");
+			Expect("project1").WhenSerializing(path.Index);
+			
+			/** there is also a static way to describe such paths */
+			path = DocumentPath<Project>.Id(1); 
+			Expect("project").WhenSerializing(path.Index);
+			Expect("project").WhenSerializing(path.Type);
+			Expect("1").WhenSerializing(path.Id);
+		}
+
+		//** if you have an instance of your document you can use it as well generate document paths */
+		[U] public void FromObject()
+		{
+			var project = new Project { Name = "hello-world" };
+
+			/** here we create a new document path based on a Project */
+			IDocumentPath path = new DocumentPath<Project>(project);
+			Expect("project").WhenSerializing(path.Index);
+			Expect("project").WhenSerializing(path.Type);
+			Expect("hello-world").WhenSerializing(path.Id);
+
+			/** You can still override the inferred index and type name*/
+			path = new DocumentPath<Project>(project).Type("project1");
+			Expect("project1").WhenSerializing(path.Type);
+
+			path = new DocumentPath<Project>(project).Index("project1");
+			Expect("project1").WhenSerializing(path.Index);
+			
+			/** there is also a static way to describe such paths */
+			path = DocumentPath<Project>.Id(project); 
+			Expect("project").WhenSerializing(path.Index);
+			Expect("project").WhenSerializing(path.Type);
+			Expect("hello-world").WhenSerializing(path.Id);
+
+			DocumentPath<Project> p = project;
+		}
+
+		[U] public void UsingWithRequests()
+		{
+			var project = new Project { Name = "hello-world" };
+
+			/** Here we can see and example how DocumentPath helps your describe your requests more tersely */
+			var request = new IndexRequest<Project>(2) { Document = project };
+			request = new IndexRequest<Project>(project) { };
+			
+			/** when comparing with the full blown constructor and passing document manually 
+			* DocumentPath&lt;T&gt;'s benefits become apparent. 
+			*/
+			request = new IndexRequest<Project>(IndexName.From<Project>(), TypeName.From<Project>(), 2)
+			{
+				Document = project
+			};
 		}
 	}
 }

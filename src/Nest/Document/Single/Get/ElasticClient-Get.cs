@@ -14,13 +14,13 @@ namespace Nest
 		/// </summary>
 		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
 		/// <param name="getSelector">A descriptor that describes which document's source to fetch</param>
-		IGetResponse<T> Get<T>(Document<T> document, Func<GetDescriptor<T>, IGetRequest> getSelector = null) where T : class;
+		IGetResponse<T> Get<T>(DocumentPath<T> document, Func<GetDescriptor<T>, IGetRequest> getSelector = null) where T : class;
 
 		/// <inheritdoc/>
 		IGetResponse<T> Get<T>(IGetRequest getRequest) where T : class;
 
 		/// <inheritdoc/>
-		Task<IGetResponse<T>> GetAsync<T>(Document<T> document, Func<GetDescriptor<T>, IGetRequest> getSelector = null) where T : class;
+		Task<IGetResponse<T>> GetAsync<T>(DocumentPath<T> document, Func<GetDescriptor<T>, IGetRequest> getSelector = null) where T : class;
 
 		/// <inheritdoc/>
 		Task<IGetResponse<T>> GetAsync<T>(IGetRequest getRequest) where T : class;
@@ -37,7 +37,7 @@ namespace Nest
 		//Source(Document.Id<T>(2), s=>s)
 
 		/// <inheritdoc/>
-		public IGetResponse<T> Get<T>(Document<T> document, Func<GetDescriptor<T>, IGetRequest> getSelector = null) where T : class =>
+		public IGetResponse<T> Get<T>(DocumentPath<T> document, Func<GetDescriptor<T>, IGetRequest> getSelector = null) where T : class =>
 			this.Get<T>(getSelector.InvokeOrDefault(new GetDescriptor<T>(document)));
 
 		/// <inheritdoc/>
@@ -48,7 +48,7 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<IGetResponse<T>> GetAsync<T>(Document<T> document, Func<GetDescriptor<T>, IGetRequest> getSelector = null) where T : class=>
+		public Task<IGetResponse<T>> GetAsync<T>(DocumentPath<T> document, Func<GetDescriptor<T>, IGetRequest> getSelector = null) where T : class=>
 			this.GetAsync<T>(getSelector.InvokeOrDefault(new GetDescriptor<T>(document)));
 
 		/// <inheritdoc/>

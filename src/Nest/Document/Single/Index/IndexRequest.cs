@@ -20,36 +20,26 @@ namespace Nest
 		TDocument Document { get; set; }
 	}
 
-	public partial class IndexRequest<TDocument> : IIndexRequest<TDocument> 
+	public partial class IndexRequest<TDocument> : IIndexRequest<TDocument>
 		where TDocument : class
 	{
 		protected override HttpMethod HttpMethod => ((IIndexRequest)this).Id == null ? HttpMethod.POST : HttpMethod.PUT;
-
-		public IndexRequest(TDocument document) : this(Document<TDocument>.IdFrom(document))
-		{
-			this.Document = document;
-		}
+		partial void DocumentFromPath(TDocument doc) => this.Document = doc;
 
 		object IIndexRequest.UntypedDocument => this.Document;
 
 		public TDocument Document { get; set; }
 	}
-	
+
 	public partial class IndexDescriptor<T> : IIndexRequest<T>
 		where T : class
 	{
 		protected override HttpMethod HttpMethod => ((IIndexRequest)this).Id == null ? HttpMethod.POST : HttpMethod.PUT;
-
+		partial void DocumentFromPath(T doc) => ((IIndexRequest<T>)this).Document = doc;
 		object IIndexRequest.UntypedDocument => ((IIndexRequest<T>)this).Document;
 
 		T IIndexRequest<T>.Document { get; set; }
 
-
-		public IndexDescriptor(T document) : this(Document<T>.IdFrom(document))
-		{
-			this.Document(document);
-		}
-		public IndexDescriptor<T> Document(T document) => Assign(a => ((IIndexRequest<T>)this).Document = document);
 		public IndexDescriptor<T> Index(IndexName index) => Assign(a => a.RouteValues.Required("index", index));
 		public IndexDescriptor<T> Type(TypeName type) => Assign(a => a.RouteValues.Required("type", type));
 

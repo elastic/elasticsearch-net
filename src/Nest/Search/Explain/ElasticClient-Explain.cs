@@ -8,7 +8,7 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <inheritdoc/>
-		IExplainResponse<T> Explain<T>(Document<T> document, Func<ExplainDescriptor<T>, IExplainRequest> querySelector)
+		IExplainResponse<T> Explain<T>(DocumentPath<T> document, Func<ExplainDescriptor<T>, IExplainRequest> querySelector)
 			where T : class;
 
 		/// <inheritdoc/>
@@ -16,7 +16,7 @@ namespace Nest
 			where T : class;
 
 		/// <inheritdoc/>
-		Task<IExplainResponse<T>> ExplainAsync<T>(Document<T> document,Func<ExplainDescriptor<T>, IExplainRequest> querySelector)
+		Task<IExplainResponse<T>> ExplainAsync<T>(DocumentPath<T> document,Func<ExplainDescriptor<T>, IExplainRequest> querySelector)
 			where T : class;
 
 		/// <inheritdoc/>
@@ -28,7 +28,7 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IExplainResponse<T> Explain<T>(Document<T> document, Func<ExplainDescriptor<T>, IExplainRequest> querySelector)
+		public IExplainResponse<T> Explain<T>(DocumentPath<T> document, Func<ExplainDescriptor<T>, IExplainRequest> querySelector)
 			where T : class =>
 			this.Explain<T>(querySelector?.Invoke(new ExplainDescriptor<T>(document.Self.Index, document.Self.Type, document.Self.Id)));
 
@@ -41,7 +41,7 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<IExplainResponse<T>> ExplainAsync<T>(Document<T> document, Func<ExplainDescriptor<T>, IExplainRequest> querySelector)
+		public Task<IExplainResponse<T>> ExplainAsync<T>(DocumentPath<T> document, Func<ExplainDescriptor<T>, IExplainRequest> querySelector)
 			where T : class => 
 			this.ExplainAsync<T>(querySelector?.Invoke(new ExplainDescriptor<T>(document.Self.Index, document.Self.Type, document.Self.Id)));
 

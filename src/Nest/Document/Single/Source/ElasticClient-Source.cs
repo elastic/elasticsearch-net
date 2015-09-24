@@ -15,13 +15,13 @@ namespace Nest
 		/// </summary>
 		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
 		/// <param name="getSelector">A descriptor that describes which document's source to fetch</param>
-		T Source<T>(Document<T> document, Func<SourceDescriptor<T>, ISourceRequest> getSelector = null) where T : class;
+		T Source<T>(DocumentPath<T> document, Func<SourceDescriptor<T>, ISourceRequest> getSelector = null) where T : class;
 
 		/// <inheritdoc/>
 		T Source<T>(ISourceRequest sourceRequest) where T : class;
 
 		/// <inheritdoc/>
-		Task<T> SourceAsync<T>(Document<T> document, Func<SourceDescriptor<T>, ISourceRequest> getSelector = null) where T : class;
+		Task<T> SourceAsync<T>(DocumentPath<T> document, Func<SourceDescriptor<T>, ISourceRequest> getSelector = null) where T : class;
 
 		/// <inheritdoc/>
 		Task<T> SourceAsync<T>(ISourceRequest sourceRequest) where T : class;
@@ -36,7 +36,7 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public T Source<T>(Document<T> document, Func<SourceDescriptor<T>, ISourceRequest> getSelector = null) where T : class =>
+		public T Source<T>(DocumentPath<T> document, Func<SourceDescriptor<T>, ISourceRequest> getSelector = null) where T : class =>
 			this.Source<T>(getSelector.InvokeOrDefault(new SourceDescriptor<T>(document.Self.Index, document.Self.Type, document.Self.Id)));
 
 		/// <inheritdoc/>
@@ -48,7 +48,7 @@ namespace Nest
 		}
 
 		/// <inheritdoc/>
-		public Task<T> SourceAsync<T>(Document<T> document, Func<SourceDescriptor<T>, ISourceRequest> getSelector = null) where T : class =>
+		public Task<T> SourceAsync<T>(DocumentPath<T> document, Func<SourceDescriptor<T>, ISourceRequest> getSelector = null) where T : class =>
 			this.SourceAsync<T>(getSelector.InvokeOrDefault(new SourceDescriptor<T>(document.Self.Index, document.Self.Type, document.Self.Id)));
 
 		/// <inheritdoc/>

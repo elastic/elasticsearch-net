@@ -31,6 +31,7 @@ namespace Nest
     {
 	<text>	@(Raw(c.Description))
 		@(Raw(c.Generated))
+		@(Raw(c.AdditionalCode))
 </text>
     }
 	@foreach (FluentRouteSetter c in method.GetFluentRouteSetters())

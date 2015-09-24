@@ -53,6 +53,7 @@ namespace Nest
     {
 	<text>	@(Raw(c.Description))
 		@(Raw(c.Generated))
+		@(Raw(c.AdditionalCode))
 </text>
 	}
 	@foreach (KeyValuePair<string, ApiQueryParameters> kv in method.Url.Params)

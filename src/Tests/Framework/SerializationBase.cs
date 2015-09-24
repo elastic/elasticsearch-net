@@ -63,9 +63,13 @@ namespace Tests.Framework
 
 		protected string Serialize<TObject>(TObject o)
 		{
-			var bytes = TestClient.GetClient(_connectionSettingsModifier).Serializer.SerializeToBytes(o);
+			var bytes = GetSerializer().SerializeToBytes(o);
 			return Encoding.UTF8.GetString(bytes);
 		}
+
+		protected IElasticsearchSerializer GetSerializer() => GetClient().Serializer;
+
+		protected IElasticClient GetClient() => TestClient.GetClient(_connectionSettingsModifier);
 
 		protected T AssertSerializesAndRoundTrips<T>(T o)
 		{
