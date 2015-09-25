@@ -11,7 +11,7 @@ using FluentAssertions;
 using Tests.Framework;
 using System.Linq;
 
-namespace Tests.ClientConcepts.LowLevel
+namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 {
 	public class DateTimeProviders
 	{

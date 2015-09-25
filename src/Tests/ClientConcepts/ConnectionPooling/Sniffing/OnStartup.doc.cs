@@ -17,7 +17,7 @@ using System.Diagnostics.CodeAnalysis;
 using static Elasticsearch.Net.Connection.AuditEvent;
 using static Tests.Framework.TimesHelper;
 
-namespace Tests.ClientConcepts.LowLevel
+namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 {
 	public class OnStartupSniffing
 	{

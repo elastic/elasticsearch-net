@@ -13,7 +13,7 @@ using System.Linq;
 using System.Collections.Generic;
 using Tests.Framework.MockData;
 
-namespace Tests.ClientConcepts.LowLevel.Ressurection
+namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 {
 	public class KeepingTrackOfNodes
 	{

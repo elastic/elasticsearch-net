@@ -13,9 +13,9 @@ using FluentAssertions;
 namespace Tests.Document.Single
 {
 	[Collection(IntegrationContext.Indexing)]
-	public class IndexingUsage : ApiCallExample<IIndexResponse, IIndexRequest<Project>, IndexDescriptor<Project>, IndexRequest<Project>>
+	public class IndexingUsage : EndpointExampleBase<IIndexResponse, IIndexRequest<Project>, IndexDescriptor<Project>, IndexRequest<Project>>
 	{
-		public IndexingUsage(IndexingCluster cluster, ApiUsage usage) : base(cluster, usage) { }
+		public IndexingUsage(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		public override string UrlPath => "/project/project/SomeProject?consistency=all&op_type=index&refresh=true&routing=route";
 		public override HttpMethod HttpMethod => HttpMethod.PUT;

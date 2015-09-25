@@ -9,7 +9,7 @@ using Elasticsearch.Net;
 
 namespace Tests.Framework
 {
-	public abstract class ApiCallExample<TResponse, TInterface, TDescriptor, TInitializer> : SerializationBase
+	public abstract class EndpointExampleBase<TResponse, TInterface, TDescriptor, TInitializer> : SerializationBase
 		where TResponse : class, IResponse
 		where TDescriptor : class, TInterface
 		where TInitializer : class, TInterface
@@ -26,7 +26,7 @@ namespace Tests.Framework
 
 		readonly IIntegrationCluster _cluster;
 
-		protected ApiCallExample(IIntegrationCluster cluster, ApiUsage usage)
+		protected EndpointExampleBase(IIntegrationCluster cluster, EndpointUsage usage)
 		{
 			this._cluster = cluster;
 			this.IntegrationPort = cluster.Node.Port;

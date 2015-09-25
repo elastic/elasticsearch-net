@@ -15,9 +15,9 @@ namespace Tests.Indices.IndexManagement
 	//TODO NOT Readonly
 	[Collection(IntegrationContext.ReadOnly)]
 	public abstract class PutMapping 
-		: ApiCallIntegration<IIndicesResponse, IPutMappingRequest, PutMappingDescriptor<Project>, PutMappingRequest<Project>>
+		: EndpointIntegrationBase<IIndicesResponse, IPutMappingRequest, PutMappingDescriptor<Project>, PutMappingRequest<Project>>
 	{
-		protected PutMapping(ReadOnlyCluster cluster, ApiUsage usage) : base(cluster, usage) { }
+		protected PutMapping(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		public override bool ExpectIsValid => true;
 

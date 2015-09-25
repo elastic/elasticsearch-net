@@ -19,6 +19,7 @@ namespace Tests.Framework
 		public static async Task<UrlTester> RequestAsync<TResponse>(this Task<UrlTester> tester, Func<IElasticClient, Task<TResponse>> call)
 			where TResponse : IResponse => await (await tester).WhenCallingAsync(call, "request async");
 	}
+
 	public class UrlTester : SerializationBase
 	{
 		protected string ExpectedUrl { get; set; }

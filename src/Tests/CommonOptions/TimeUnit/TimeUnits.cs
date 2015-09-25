@@ -106,5 +106,26 @@ namespace Tests.CommonOptions
 			(twoDays != new TimeUnitExpression("2.1d")).Should().BeTrue();
 			(new TimeUnitExpression("2.1d") == new TimeUnitExpression(TimeSpan.FromDays(2.1))).Should().BeTrue();
 		}
+
+		[U]
+		public void UsingInterval()
+		{
+			/**
+			* Time units are specified as a union of either a `DateInterval` or `TimeUnitExpression`
+			* both of which implicitly convert to the `Union` of these two.
+			*/
+			Expect("month").WhenSerializing<Union<DateInterval, TimeUnitExpression>>(DateInterval.Month);
+			Expect("day").WhenSerializing<Union<DateInterval, TimeUnitExpression>>(DateInterval.Day);
+			Expect("hour").WhenSerializing<Union<DateInterval, TimeUnitExpression>>(DateInterval.Hour);
+			Expect("minute").WhenSerializing<Union<DateInterval, TimeUnitExpression>>(DateInterval.Minute);
+			Expect("quarter").WhenSerializing<Union<DateInterval, TimeUnitExpression>>(DateInterval.Quarter);
+			Expect("second").WhenSerializing<Union<DateInterval, TimeUnitExpression>>(DateInterval.Second);
+			Expect("week").WhenSerializing<Union<DateInterval, TimeUnitExpression>>(DateInterval.Week);
+			Expect("year").WhenSerializing<Union<DateInterval, TimeUnitExpression>>(DateInterval.Year);
+
+
+			Expect("2d").WhenSerializing<Union<DateInterval, TimeUnitExpression>>((TimeUnitExpression)"2d");
+			Expect("1.16w").WhenSerializing<Union<DateInterval, TimeUnitExpression>>((TimeUnitExpression)TimeSpan.FromDays(8.1));
+		}
 	}
 }

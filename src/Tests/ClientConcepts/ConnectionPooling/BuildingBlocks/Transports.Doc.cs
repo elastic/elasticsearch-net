@@ -14,7 +14,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Tests.Framework.MockData;
 
-namespace Tests.ClientConcepts.LowLevel
+namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 {
 	public class Transports
 	{

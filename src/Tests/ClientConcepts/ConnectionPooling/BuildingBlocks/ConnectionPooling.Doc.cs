@@ -12,7 +12,7 @@ using Tests.Framework;
 using System.Linq;
 using System.Collections.Generic;
 
-namespace Tests.ClientConcepts.LowLevel
+namespace Tests.ClientConcepts.ConnectionPooling.BuildingBlocks
 {
 	public class ConnectionPooling
 	{

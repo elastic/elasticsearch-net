@@ -13,7 +13,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Threading;
 
-namespace Tests.ClientConcepts.LowLevel
+namespace Tests.ClientConcepts.ConnectionPooling.RoundRobin
 {
 	public class RoundRobin
 	{

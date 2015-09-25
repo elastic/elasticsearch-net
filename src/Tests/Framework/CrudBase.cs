@@ -9,17 +9,17 @@ using Xunit;
 
 namespace Tests.Framework
 {
-	public abstract class CrudExample<TCreateResponse, TReadResponse, TUpdateResponse>
-		: CrudExample<TCreateResponse, TReadResponse, TUpdateResponse, AcknowledgedResponse>
+	public abstract class CrudBase<TCreateResponse, TReadResponse, TUpdateResponse>
+		: CrudBase<TCreateResponse, TReadResponse, TUpdateResponse, AcknowledgedResponse>
 			where TCreateResponse : class, IResponse
 			where TReadResponse : class, IResponse
 			where TUpdateResponse : class, IResponse
 	{
-		public CrudExample(IIntegrationCluster cluster, ApiUsage usage) : base(cluster, usage) { }
+		public CrudBase(IIntegrationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override bool SupportsDeletes => false;
 	}
 
-	public abstract class CrudExample<TCreateResponse, TReadResponse, TUpdateResponse, TDeleteResponse>
+	public abstract class CrudBase<TCreateResponse, TReadResponse, TUpdateResponse, TDeleteResponse>
 			where TCreateResponse : class, IResponse
 			where TReadResponse : class, IResponse
 			where TUpdateResponse : class, IResponse
@@ -35,7 +35,7 @@ namespace Tests.Framework
 		readonly IIntegrationCluster _cluster;
 
 		[SuppressMessage("Potential Code Quality Issues", "RECS0021:Warns about calls to virtual member functions occuring in the constructor", Justification = "Expected behaviour")]
-		public CrudExample(IIntegrationCluster cluster, ApiUsage usage)
+		public CrudBase(IIntegrationCluster cluster, EndpointUsage usage)
 		{
 			this._cluster = cluster;
 			this.IntegrationPort = cluster.Node.Port;

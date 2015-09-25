@@ -13,9 +13,9 @@ using Tests.Framework.Integration;
 namespace Tests.Indices.IndexManagement
 {
 	[Collection(IntegrationContext.ReadOnly)]
-	public class CreateIndexFullExample : ApiCallExample<IIndicesOperationResponse, ICreateIndexRequest, CreateIndexDescriptor, CreateIndexRequest>
+	public class CreateIndexFullExample : EndpointExampleBase<IIndicesOperationResponse, ICreateIndexRequest, CreateIndexDescriptor, CreateIndexRequest>
 	{
-		public CreateIndexFullExample(ReadOnlyCluster cluster, ApiUsage usage) : base(cluster, usage) { }
+		public CreateIndexFullExample(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		public static string IndexName { get; } = RandomString();
 
