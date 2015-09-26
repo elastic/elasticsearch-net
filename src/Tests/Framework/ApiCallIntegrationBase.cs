@@ -9,8 +9,8 @@ using Elasticsearch.Net;
 
 namespace Tests.Framework
 {
-	public abstract class EndpointIntegrationBase<TResponse, TInterface, TDescriptor, TInitializer> : 
-		EndpointExampleBase<TResponse, TInterface, TDescriptor, TInitializer>
+	public abstract class ApiCallIntegrationBase<TResponse, TInterface, TDescriptor, TInitializer> : 
+		ApiCallExampleBase<TResponse, TInterface, TDescriptor, TInitializer>
 		where TResponse : class, IResponse
 		where TDescriptor : class, TInterface
 		where TInitializer : class, TInterface
@@ -21,7 +21,7 @@ namespace Tests.Framework
 		public abstract int ExpectStatusCode { get; }
 		public abstract bool ExpectIsValid { get; }
 
-		protected EndpointIntegrationBase(IIntegrationCluster cluster, EndpointUsage usage)
+		protected ApiCallIntegrationBase(IIntegrationCluster cluster, EndpointUsage usage)
 			: base(cluster, usage) { }
 
 		private void AssertUrl(Uri u)

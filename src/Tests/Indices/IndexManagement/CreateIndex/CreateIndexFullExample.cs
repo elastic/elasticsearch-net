@@ -13,7 +13,7 @@ using Tests.Framework.Integration;
 namespace Tests.Indices.IndexManagement
 {
 	[Collection(IntegrationContext.ReadOnly)]
-	public class CreateIndexFullExample : EndpointExampleBase<IIndicesOperationResponse, ICreateIndexRequest, CreateIndexDescriptor, CreateIndexRequest>
+	public class CreateIndexFullExample : ApiCallExampleBase<IIndicesOperationResponse, ICreateIndexRequest, CreateIndexDescriptor, CreateIndexRequest>
 	{
 		public CreateIndexFullExample(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

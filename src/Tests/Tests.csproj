@@ -104,7 +104,7 @@
     <Compile Include="Framework\MockResponses\SniffingResponse.cs" />
     <Compile Include="Framework\UrlTests.cs" />
     <Compile Include="Framework\SimpleIntegration.cs" />
-    <Compile Include="Framework\EndpointExampleBase.cs" />
+    <Compile Include="Framework\ApiCallExampleBase.cs" />
     <Compile Include="Framework\Audit\Audits.cs" />
     <Compile Include="Framework\Audit\Auditor.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\Sniffing\OnStartup.doc.cs" />
@@ -166,7 +166,7 @@
     <Compile Include="Search\Request\FromAndSize.cs" />
     <Compile Include="Search\SearchUsageBase.cs" />
     <Compile Include="Framework\AsyncLazy.cs" />
-    <Compile Include="Framework\EndpointIntegrationBase.cs" />
+    <Compile Include="Framework\ApiCallIntegrationBase.cs" />
     <Compile Include="Framework\GeneralUsageBase.cs" />
     <Compile Include="Framework\Integration\Seeder.cs" />
     <Compile Include="Framework\MockData\Project.cs" />
