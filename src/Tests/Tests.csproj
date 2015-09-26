@@ -69,18 +69,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Aggregations\Bucket\Children\ChildrenAggregation.MappingExample.doc.cs" />
-    <Compile Include="Aggregations\Bucket\Filters\FiltersAggregation.usage.cs" />
-    <Compile Include="Aggregations\Bucket\Filter\FilterAggregation.usage.cs" />
-    <Compile Include="Aggregations\Bucket\DateRange\DateRangeAggregation.usage.cs" />
-    <Compile Include="Aggregations\Bucket\DateHistogram\DateHistogramAggregation.usage.cs" />
-    <Compile Include="Aggregations\Bucket\Children\ChildrenAggregation.usage.cs" />
+    <Compile Include="Aggregations\Bucket\Filters\FiltersAggregationUsage.cs" />
+    <Compile Include="Aggregations\Bucket\Filter\FilterAggregationUsage.cs" />
+    <Compile Include="Aggregations\Bucket\DateRange\DateRangeAggregationUsage.cs" />
+    <Compile Include="Aggregations\Bucket\DateHistogram\DateHistogramAggregationUsage.cs" />
+    <Compile Include="Aggregations\Bucket\Children\ChildrenAggregationUsage.cs" />
     <Compile Include="Aggregations\AggregationUsageBase.cs" />
     <Compile Include="Aggregations\WritingAggregations.doc.cs" />
-    <Compile Include="Analysis\Analyzers\Analyzer.usage.cs" />
-    <Compile Include="Analysis\CharFilters\CharFilter.usage.cs" />
-    <Compile Include="Analysis\Analysis.crud.cs" />
-    <Compile Include="Analysis\TokenFilters\TokenFilter.usage.cs" />
-    <Compile Include="Analysis\Tokenizers\Tokenizer.usage.cs" />
+    <Compile Include="Analysis\Analyzers\AnalyzerUsage.cs" />
+    <Compile Include="Analysis\CharFilters\CharFilterUsage.cs" />
+    <Compile Include="Analysis\AnalysisCrud.cs" />
+    <Compile Include="Analysis\TokenFilters\TokenFilterUsage.cs" />
+    <Compile Include="Analysis\Tokenizers\TokenizerUsage.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\BuildingBlocks\Transports.doc.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\MaxRetries\RespectsMaxRetry.doc.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\RoundRobin\VolatileUpdates.doc.cs" />
