@@ -9,7 +9,7 @@ using Elasticsearch.Net;
 
 namespace Tests.Framework
 {
-	public abstract class ApiCallExampleBase<TResponse, TInterface, TDescriptor, TInitializer> : SerializationBase
+	public abstract class ApiCallExampleBase<TResponse, TInterface, TDescriptor, TInitializer> : SerializationTestBase
 		where TResponse : class, IResponse
 		where TDescriptor : class, TInterface
 		where TInitializer : class, TInterface

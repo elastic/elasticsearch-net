@@ -15,7 +15,7 @@ using System.Text.RegularExpressions;
 
 namespace Tests.Framework
 {
-	public abstract class SerializationBase
+	public abstract class SerializationTestBase
 	{
 		protected abstract object ExpectJson { get; }
 
@@ -23,7 +23,7 @@ namespace Tests.Framework
 		protected JToken _expectedJsonJObject;
 		protected Func<ConnectionSettings, ConnectionSettings> _connectionSettingsModifier = null;
 
-		protected SerializationBase()
+		protected SerializationTestBase()
 		{
 			var o = this.ExpectJson;
 			if (o == null) return;

@@ -28,7 +28,7 @@ namespace Tests.CommonOptions.TimeUnit
 		[U] public void Constructor()
 		{
 			var unitString = new TimeUnitExpression("2d");
-			var unitComposed = new TimeUnitExpression(2, TimeUnit.Day);
+			var unitComposed = new TimeUnitExpression(2, Nest.TimeUnit.Day);
 			var unitTimeSpan = new TimeUnitExpression(TimeSpan.FromDays(2));
 			var unitMilliseconds = new TimeUnitExpression(1000 * 60 * 60 * 24 * 2);
 			

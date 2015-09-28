@@ -69,18 +69,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Aggregations\Bucket\Children\ChildrenAggregationMapping.doc.cs" />
-    <Compile Include="Aggregations\Bucket\Filters\FiltersAggregationUsage.cs" />
+    <Compile Include="Aggregations\Bucket\Filters\FiltersAggregationUsageTest.cs" />
     <Compile Include="Aggregations\Bucket\Filter\FilterAggregationUsageTest.cs" />
     <Compile Include="Aggregations\Bucket\DateRange\DateRangeAggregationUsageTest.cs" />
     <Compile Include="Aggregations\Bucket\DateHistogram\DateHistogramAggregationUsageTest.cs" />
     <Compile Include="Aggregations\Bucket\Children\ChildrenAggregationUsageTest.cs" />
     <Compile Include="Aggregations\AggregationUsageTestBase.cs" />
     <Compile Include="Aggregations\WritingAggregations.doc.cs" />
-    <Compile Include="Analysis\Analyzers\AnalyzerUsage.cs" />
-    <Compile Include="Analysis\CharFilters\CharFilterUsage.cs" />
-    <Compile Include="Analysis\AnalysisCrud.cs" />
-    <Compile Include="Analysis\TokenFilters\TokenFilterUsage.cs" />
-    <Compile Include="Analysis\Tokenizers\TokenizerUsage.cs" />
+    <Compile Include="Analysis\Analyzers\AnalyzerUsageTest.cs" />
+    <Compile Include="Analysis\CharFilters\CharFilterUsageTest.cs" />
+    <Compile Include="Analysis\AnalysisCrudTest.cs" />
+    <Compile Include="Analysis\TokenFilters\TokenFilterUsageTest.cs" />
+    <Compile Include="Analysis\Tokenizers\TokenizerUsageTest.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\BuildingBlocks\Transports.doc.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\MaxRetries\RespectsMaxRetry.doc.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\RoundRobin\VolatileUpdates.doc.cs" />
@@ -98,9 +98,9 @@
     <Compile Include="ClientConcepts\HighLevel\Inferrence\Id\IdsInference.doc.cs" />
     <Compile Include="ClientConcepts\HighLevel\Inferrence\Indices\IndicesPaths.doc.cs" />
     <Compile Include="CodeStandards\Descriptors.doc.cs" />
-    <Compile Include="Document\Single\Index\IndexUrl.cs" />
+    <Compile Include="Document\Single\Index\IndexUrlTest.cs" />
     <Compile Include="Document\Single\Index\Indexing.Doc.cs" />
-    <Compile Include="Framework\CrudBase.cs" />
+    <Compile Include="Framework\CrudTestBase.cs" />
     <Compile Include="Framework\MockResponses\SniffingResponse.cs" />
     <Compile Include="Framework\UrlTests.cs" />
     <Compile Include="Framework\SimpleIntegration.cs" />
@@ -167,13 +167,13 @@
     <Compile Include="Search\SearchUsageBase.cs" />
     <Compile Include="Framework\AsyncLazy.cs" />
     <Compile Include="Framework\ApiCallIntegrationBase.cs" />
-    <Compile Include="Framework\GeneralUsageBase.cs" />
+    <Compile Include="Framework\UsageTestBase.cs" />
     <Compile Include="Framework\Integration\Seeder.cs" />
     <Compile Include="Framework\MockData\Project.cs" />
     <Compile Include="Framework\TestAttributes.cs" />
     <Compile Include="Framework\Integration\ElasticsearchNode.cs" />
     <Compile Include="Framework\Integration\ReadOnlyCluster.cs" />
-    <Compile Include="Framework\SerializationBase.cs" />
+    <Compile Include="Framework\SerializationTestBase.cs" />
     <Compile Include="Framework\TestClient.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -20,7 +20,7 @@ namespace Tests.Framework
 			where TResponse : IResponse => await (await tester).WhenCallingAsync(call, "request async");
 	}
 
-	public class UrlTester : SerializationBase
+	public class UrlTester : SerializationTestBase
 	{
 		protected string ExpectedUrl { get; set; }
 		protected HttpMethod ExpectedHttpMethod { get; set; }

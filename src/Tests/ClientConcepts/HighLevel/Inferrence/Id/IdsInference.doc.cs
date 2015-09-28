@@ -23,10 +23,10 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence.Id
 		/** Methods that take an Id can be passed longs, ints, strings & Guids and they will implicitly convert to Ids */
 		[U] public void CanImplicitlyConvertToId()
 		{
-			Id idFromInt = 1;
-			Id idFromLong = 2L;
-			Id idFromString = "hello-world";
-			Id idFromGuid = new Guid("D70BD3CF-4E38-46F3-91CA-FCBEF29B148E");
+			Nest.Id idFromInt = 1;
+			Nest.Id idFromLong = 2L;
+			Nest.Id idFromString = "hello-world";
+			Nest.Id idFromGuid = new Guid("D70BD3CF-4E38-46F3-91CA-FCBEF29B148E");
 
 			Expect("1").WhenSerializing(idFromInt);
 			Expect("2").WhenSerializing(idFromLong);

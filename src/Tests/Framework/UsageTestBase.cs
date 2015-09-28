@@ -3,7 +3,7 @@ using Nest;
 
 namespace Tests.Framework
 {
-	public abstract class UsageTestBase<TInterface, TDescriptor, TInitializer> : SerializationBase
+	public abstract class UsageTestBase<TInterface, TDescriptor, TInitializer> : SerializationTestBase
 		where TDescriptor : TInterface, new()
 		where TInitializer : class, TInterface
 		where TInterface : class
