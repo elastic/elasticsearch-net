@@ -11,7 +11,7 @@ using static Tests.Framework.RoundTripper;
 using static Nest.Infer;
 using Nest.Resolvers;
 
-namespace Tests.ClientConcepts.HighLevel.Inferrence.FieldNames
+namespace Tests.ClientConcepts.HighLevel.Inferrence.Id
 {
 	public class IdsInference
 	{

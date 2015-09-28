@@ -10,7 +10,7 @@ using Xunit.Sdk;
 using static Tests.Framework.RoundTripper;
 using static Nest.Infer;
 
-namespace Tests.ClientConcepts.HighLevel.Inferrence
+namespace Tests.ClientConcepts.HighLevel.Inferrence.Indices
 {
 	public class IndicesPaths
 	{

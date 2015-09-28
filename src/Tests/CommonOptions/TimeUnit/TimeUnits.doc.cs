@@ -10,7 +10,7 @@ using Nest;
 using Tests.Framework;
 using static Tests.Framework.RoundTripper;
 
-namespace Tests.CommonOptions
+namespace Tests.CommonOptions.TimeUnit
 {
 	public class TimeUnits 
 	{
