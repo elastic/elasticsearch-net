@@ -12,10 +12,12 @@ using Tests.Framework.Integration;
 
 namespace Tests.Indices.IndexManagement
 {
+	// TODO: do we need this?
 	[Collection(IntegrationContext.ReadOnly)]
-	public class CreateIndexFullExample : ApiCallExampleBase<IIndicesOperationResponse, ICreateIndexRequest, CreateIndexDescriptor, CreateIndexRequest>
+	public class CreateIndexFullApiTest 
+		: ApiTestBase<IIndicesOperationResponse, ICreateIndexRequest, CreateIndexDescriptor, CreateIndexRequest>
 	{
-		public CreateIndexFullExample(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public CreateIndexFullApiTest(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		public static string IndexName { get; } = RandomString();
 
@@ -369,5 +371,9 @@ namespace Tests.Indices.IndexManagement
 		protected override CreateIndexRequest Initializer => new CreateIndexRequest(IndexName)
 		{
 		};
+
+		public override int ExpectStatusCode => 201;
+
+		public override bool ExpectIsValid => true;
 	}
 }

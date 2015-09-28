@@ -9,9 +9,9 @@ using Tests.Framework.Integration;
 
 namespace Tests.Indices.IndexManagement
 {
-	public class PutMappingFullExample : PutMapping
+	public class PutMappingFullApiTest : PutMapping
 	{
-		public PutMappingFullExample(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public PutMappingFullApiTest(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override object ExpectJson => new
 		{

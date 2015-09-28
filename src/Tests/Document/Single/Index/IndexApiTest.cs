@@ -13,9 +13,10 @@ using FluentAssertions;
 namespace Tests.Document.Single
 {
 	[Collection(IntegrationContext.Indexing)]
-	public class IndexingUsage : ApiCallExampleBase<IIndexResponse, IIndexRequest<Project>, IndexDescriptor<Project>, IndexRequest<Project>>
+	public class IndexApiTest
+		: ApiTestBase<IIndexResponse, IIndexRequest<Project>, IndexDescriptor<Project>, IndexRequest<Project>>
 	{
-		public IndexingUsage(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public IndexApiTest(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		public override string UrlPath => "/project/project/SomeProject?consistency=all&op_type=index&refresh=true&routing=route";
 		public override HttpMethod HttpMethod => HttpMethod.PUT;
@@ -63,6 +64,9 @@ namespace Tests.Document.Single
 				Routing = "route"
 			};
 
+		public override int ExpectStatusCode => 201;
+
+		public override bool ExpectIsValid => true;
 	}
 
 	[Collection(IntegrationContext.Indexing)]
