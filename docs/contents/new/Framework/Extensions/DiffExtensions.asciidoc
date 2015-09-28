@@ -29,5 +29,5 @@ var approx = Regex.Replace(actual, @"^(?=.*:.*)[^:]+:", (s) => s
 				.Replace(" = [", " = new [] {")
 				;
 approx = Regex.Replace(approx, @"^\s*\],?.*$", s => s.Value.Replace("]", "}"), RegexOptions.Multiline);
-diff += approx;
+diff += approx + ";";
 ----

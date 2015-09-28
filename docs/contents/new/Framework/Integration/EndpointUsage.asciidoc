@@ -1,0 +1,8 @@
+[source, csharp]
+----
+var key = k ?? clientUsage.GetHashCode();
+LazyResponses r = null;
+LazyResponses lr = null;
+var response = clientUsage();
+_usages.TryAdd(key, response);
+----
