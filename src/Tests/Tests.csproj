@@ -81,6 +81,7 @@
     <Compile Include="Analysis\AnalysisCrudTest.cs" />
     <Compile Include="Analysis\TokenFilters\TokenFilterUsageTest.cs" />
     <Compile Include="Analysis\Tokenizers\TokenizerUsageTest.cs" />
+    <Compile Include="Cat\CatAliases\CatAliasesUrlTest.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\BuildingBlocks\Transports.doc.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\MaxRetries\RespectsMaxRetry.doc.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\RoundRobin\VolatileUpdates.doc.cs" />
@@ -194,7 +195,6 @@
   <ItemGroup>
     <Folder Include="Aggregations\Metric\" />
     <Folder Include="Aggregations\Pipeline\" />
-    <Folder Include="Cat\" />
     <Folder Include="Cluster\" />
     <Folder Include="Migration\" />
     <Folder Include="Modules\" />

@@ -14,6 +14,11 @@ using Ploeh.AutoFixture;
 
 namespace Tests.Framework
 {
+	public interface IUrlTest
+	{
+		Task Urls();
+	}
+
 	public static class UrlTesterExtensions
 	{
 		public static async Task<UrlTester> RequestAsync<TResponse>(this Task<UrlTester> tester, Func<IElasticClient, Task<TResponse>> call)
