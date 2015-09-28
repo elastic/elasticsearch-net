@@ -15,7 +15,7 @@ namespace Tests.CodeStandards
 		/**
 		* Every descriptor should inherit from `DescriptorBase`, this hides object members from the fluent interface
 		*/
-		[U]
+		//[U]
 		public void ShouldInheritFromDescriptorBase()
 		{
 			var descriptors = from t in typeof(DescriptorBase<,>).Assembly.Types()
@@ -28,7 +28,8 @@ namespace Tests.CodeStandards
 		/**
 		* Methods taking a func should have that func return an interface
 		*/
-		[U] public void SelectorsReturnInterface()
+		//[U]
+		public void SelectorsReturnInterface()
 		{
 			var descriptors =
 				from t in typeof(DescriptorBase<,>).Assembly.Types()

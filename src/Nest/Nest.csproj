@@ -371,7 +371,6 @@
     <Compile Include="Cluster\ClusterStats\ClusterStatsResponse.cs" />
     <Compile Include="Cluster\PendingClusterTasks\ClusterPendingTasksResponse.cs" />
     <Compile Include="Indices\AliasManagement\DeleteAlias\DeleteAliasResponse.cs" />
-    <Compile Include="Indices\Warmers\PutWarmer\CreateWarmer.cs" />
     <Compile Include="Search\FieldStats\FieldStatsResponse.cs" />
     <Compile Include="Indices\IndexManagement\GetIndex\GetIndexResponse.cs" />
     <Compile Include="Modules\Scripting\DeleteScript\DeleteScriptResponse.cs" />
