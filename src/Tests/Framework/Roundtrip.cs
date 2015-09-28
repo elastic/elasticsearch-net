@@ -12,7 +12,7 @@ using Ploeh.AutoFixture;
 
 namespace Tests.Framework
 {
-	public class RoundTripper : SerializationBase
+	public class RoundTripper : SerializationTestBase
 	{
 		protected override object ExpectJson { get; }
 

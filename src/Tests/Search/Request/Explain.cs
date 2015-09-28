@@ -16,7 +16,7 @@ namespace Tests.Search.Request
 
 		public class Usage : SearchUsageBase
 		{
-			public Usage(ReadOnlyCluster i, ApiUsage usage) : base(i, usage) { }
+			public Usage(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
 			protected override object ExpectJson =>
 				new { explain = true };
