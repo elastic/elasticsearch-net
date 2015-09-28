@@ -889,7 +889,7 @@ namespace Nest
 		/// <summary>/{index}/{type}/_percolate/count</summary>
 		
 ///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
-		public PercolateCountDescriptor(DocumentPath<T> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){}
+		public PercolateCountDescriptor(DocumentPath<T> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
 		partial void DocumentFromPath(T document);
 
 			///<sumary>Substitute the document in the request body with a document that is known by the specified id. On top of the id, the index and type parameter will be used to retrieve the document from within the cluster.</summary>
@@ -947,7 +947,7 @@ namespace Nest
 		/// <summary>/{index}/{type}/{id}</summary>
 		
 ///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
-		public DeleteDescriptor(DocumentPath<T> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){}
+		public DeleteDescriptor(DocumentPath<T> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
 		partial void DocumentFromPath(T document);
 
 		
@@ -1098,7 +1098,7 @@ namespace Nest
 		/// <summary>/{index}/{type}/{id}</summary>
 		
 ///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
-		public DocumentExistsDescriptor(DocumentPath<T> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){}
+		public DocumentExistsDescriptor(DocumentPath<T> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
 		partial void DocumentFromPath(T document);
 
 		
@@ -1141,7 +1141,7 @@ namespace Nest
 		/// <summary>/{index}/{type}/{id}/_explain</summary>
 		
 ///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
-		public ExplainDescriptor(DocumentPath<T> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){}
+		public ExplainDescriptor(DocumentPath<T> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
 		partial void DocumentFromPath(T document);
 
 		
@@ -1265,7 +1265,7 @@ namespace Nest
 		/// <summary>/{index}/{type}/{id}</summary>
 		
 ///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
-		public GetDescriptor(DocumentPath<T> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){}
+		public GetDescriptor(DocumentPath<T> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
 		partial void DocumentFromPath(T document);
 
 		
@@ -1364,7 +1364,7 @@ namespace Nest
 		/// <summary>/{index}/{type}/{id}/_source</summary>
 		
 ///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
-		public SourceDescriptor(DocumentPath<T> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){}
+		public SourceDescriptor(DocumentPath<T> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
 		partial void DocumentFromPath(T document);
 
 		
@@ -1453,7 +1453,7 @@ namespace Nest
 		/// <summary>/{index}/{type}</summary>
 		
 ///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
-		public IndexDescriptor(DocumentPath<T> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){}
+		public IndexDescriptor(DocumentPath<T> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
 		partial void DocumentFromPath(T document);
 
 			///<sumary>Document ID</summary>
@@ -3255,7 +3255,7 @@ namespace Nest
 		/// <summary>/{index}/{type}/_percolate</summary>
 		
 ///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
-		public PercolateDescriptor(DocumentPath<T> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){}
+		public PercolateDescriptor(DocumentPath<T> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
 		partial void DocumentFromPath(T document);
 
 			///<sumary>Substitute the document in the request body with a document that is known by the specified id. On top of the id, the index and type parameter will be used to retrieve the document from within the cluster.</summary>
@@ -3936,7 +3936,7 @@ namespace Nest
 		/// <summary>/{index}/{type}/_termvectors</summary>
 		
 ///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
-		public TermVectorsDescriptor(DocumentPath<T> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){}
+		public TermVectorsDescriptor(DocumentPath<T> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
 		partial void DocumentFromPath(T document);
 
 			///<sumary>The id of the document, when not specified a doc param should be supplied.</summary>

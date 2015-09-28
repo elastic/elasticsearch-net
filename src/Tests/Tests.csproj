@@ -146,10 +146,8 @@
     <Compile Include="IndexModules\IndexSettings\SlowLog\SlowLogSettings.cs" />
     <Compile Include="IndexModules\IndexSettings\Translog\TranslogSettings.cs" />
     <Compile Include="IndexModules\Similarity\SimilaritySettings.cs" />
-    <Compile Include="Indices\IndexManagement\CreateIndex\CreateIndexFullApiTest.cs" />
     <Compile Include="Indices\IndexManagement\CreateIndex\CreateIndexApiTest.cs" />
     <Compile Include="Indices\IndexManagement\PutMapping\PutMappingApiTest.cs" />
-    <Compile Include="Indices\IndexManagement\PutMapping\PutMappingFullApiTest.cs" />
     <Compile Include="Mapping\Types\String.cs" />
     <Compile Include="Search\Request\Fields.cs" />
     <Compile Include="Search\Request\FielddataFields.cs" />

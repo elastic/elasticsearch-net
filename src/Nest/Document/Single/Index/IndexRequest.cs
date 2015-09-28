@@ -8,13 +8,12 @@ namespace Nest
 {
 	//TODO if id == null do a POST otherwise a PUT
 
+	[JsonConverter(typeof(IndexRequestJsonConverter))]
 	public partial interface IIndexRequest : IRequest<IndexRequestParameters>
 	{
 		object UntypedDocument { get; }
 	}
 
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(IndexRequestJsonConverter))]
 	public interface IIndexRequest<TDocument> : IIndexRequest where TDocument : class
 	{
 		TDocument Document { get; set; }
@@ -24,6 +23,7 @@ namespace Nest
 		where TDocument : class
 	{
 		protected override HttpMethod HttpMethod => ((IIndexRequest)this).Id == null ? HttpMethod.POST : HttpMethod.PUT;
+
 		partial void DocumentFromPath(TDocument doc) => this.Document = doc;
 
 		object IIndexRequest.UntypedDocument => this.Document;

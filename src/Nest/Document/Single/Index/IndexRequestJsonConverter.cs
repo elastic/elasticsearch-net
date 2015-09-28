@@ -15,7 +15,7 @@ namespace Nest
 			//not optimized but deserializing index requests is far from common practice
 			var genericType = objectType.GetGenericArguments().First();
 			var o = serializer.Deserialize(reader, genericType);
-			var x = typeof(IndexRequest<>).CreateGenericInstance(genericType, o);
+			var x = typeof(IndexRequest<>).CreateGenericInstance(genericType, typeof(DocumentPath<>).CreateGenericInstance(genericType, o));
 			return x;
 		}
 

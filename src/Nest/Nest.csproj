@@ -130,6 +130,7 @@
     <Compile Include="CommonAbstractions\Response\DictionaryResponse.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\KeyValueJsonConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\ReserializeJsonConverter.cs" />
+    <Compile Include="CommonAbstractions\SerializationBehavior\PreferredConstructor.cs" />
     <Compile Include="CommonAbstractions\Union\UnionJsonConverter.cs" />
     <Compile Include="Document\Multiple\MultiGet\Response\MultiGetHit.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\Json.cs" />
@@ -1040,6 +1041,7 @@
   <ItemGroup>
     <Folder Include="Aggregations\Pipeline\" />
     <Folder Include="CommonAbstractions\Infer\NodeId\" />
+    <Folder Include="CommonAbstractions\SerializationBehavior\NewFolder1\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
