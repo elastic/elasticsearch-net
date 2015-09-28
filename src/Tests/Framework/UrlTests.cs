@@ -10,7 +10,6 @@ using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Newtonsoft.Json.Linq;
-using Ploeh.AutoFixture;
 
 namespace Tests.Framework
 {

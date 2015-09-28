@@ -97,8 +97,8 @@
     <Compile Include="ClientConcepts\HighLevel\Inferrence\Id\IdsInference.cs" />
     <Compile Include="ClientConcepts\HighLevel\Inferrence\Indices\IndicesPaths.cs" />
     <Compile Include="CodeStandards\Descriptors.cs" />
+    <Compile Include="Document\Single\Index\Index.url.cs" />
     <Compile Include="Document\Single\Index\Indexing.doc.cs" />
-    <Compile Include="Document\Single\Index\Indexing.url.cs" />
     <Compile Include="Framework\CrudExample.cs" />
     <Compile Include="Framework\MockResponses\SniffingResponse.cs" />
     <Compile Include="Framework\UrlTests.cs" />
