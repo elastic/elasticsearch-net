@@ -19,9 +19,9 @@ namespace Tests.Aggregations.Bucket
 	 *
 	 * Be sure to read the elasticsearch documentation {ref}/search-aggregations-bucket-filter-aggregation.html[on this subject here]
 	*/
-	public class FilterAggregationUsage : AggregationUsageBase
+	public class FilterAggregationUsageTest : AggregationUsageTestBase
 	{
-		public FilterAggregationUsage(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+		public FilterAggregationUsageTest(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
 		public static string FirstNameToFind = Project.Projects.First().LeadDeveloper.FirstName.ToLowerInvariant();
 

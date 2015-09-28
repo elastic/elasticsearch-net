@@ -11,8 +11,8 @@ using static Nest.Infer;
 
 namespace Tests
 {
-	public class CharFilterUsage 
-		: GeneralUsageBase<IIndexSettings, IndexSettingsDescriptor, IndexSettings>
+	public class CharFilterUsageTest 
+		: UsageTestBase<IIndexSettings, IndexSettingsDescriptor, IndexSettings>
 	{
 		protected override object ExpectJson => new
 		{

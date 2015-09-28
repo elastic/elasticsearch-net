@@ -21,9 +21,9 @@ namespace Tests.Aggregations.Bucket
 	*/
 
 	/** == Named filters **/
-	public class FiltersAggregationUsage : AggregationUsageBase
+	public class FiltersAggregationUsageTest : AggregationUsageTestBase
 	{
-		public FiltersAggregationUsage(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+		public FiltersAggregationUsageTest(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
 		protected override object ExpectJson => new
 		{
@@ -107,7 +107,7 @@ namespace Tests.Aggregations.Bucket
 
 	/** == Anonymous filters **/
 
-	public class AnonymousUsage : AggregationUsageBase
+	public class AnonymousUsage : AggregationUsageTestBase
 	{
 		public AnonymousUsage(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 

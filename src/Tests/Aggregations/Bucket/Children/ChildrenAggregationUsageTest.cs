@@ -18,9 +18,9 @@ namespace Tests.Aggregations.Bucket.Children
 	 * Be sure to read the elasticsearch documentation {ref}/search-aggregations-bucket-children-aggregation.html[on this subject here]
 	 */
 
-	public class ChildrenAggregationUsage : AggregationUsageBase
+	public class ChildrenAggregationUsageTest : AggregationUsageTestBase
 	{
-		public ChildrenAggregationUsage(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+		public ChildrenAggregationUsageTest(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
 		protected override object ExpectJson => new
 		{
@@ -86,7 +86,7 @@ namespace Tests.Aggregations.Bucket.Children
 	// TODO : move this to a general documentation test explaining how to
 	// combine aggregations using boolean operators?
 
-	public class ChildrenAggregationDslUsage : ChildrenAggregationUsage
+	public class ChildrenAggregationDslUsage : ChildrenAggregationUsageTest
 	{
 		public ChildrenAggregationDslUsage(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 

@@ -22,7 +22,7 @@ namespace Tests.Aggregations
 		 * want to use which one.
 		 */
 
-		public class Usage : GeneralUsageBase<ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
+		public class Usage : UsageTestBase<ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
 		{
 			protected override object ExpectJson => new
 			{

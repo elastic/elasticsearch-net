@@ -3,7 +3,7 @@ using Nest;
 
 namespace Tests.Framework
 {
-	public abstract class GeneralUsageBase<TInterface, TDescriptor, TInitializer> : SerializationBase
+	public abstract class UsageTestBase<TInterface, TDescriptor, TInitializer> : SerializationBase
 		where TDescriptor : TInterface, new()
 		where TInitializer : class, TInterface
 		where TInterface : class
@@ -13,7 +13,7 @@ namespace Tests.Framework
 
 		protected TInterface FluentInstance { get; private set; }
 
-		protected GeneralUsageBase()
+		protected UsageTestBase()
 		{
 			var client = this.Client();
 			this.FluentInstance = this.Fluent(new TDescriptor());

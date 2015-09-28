@@ -14,8 +14,8 @@ namespace Tests
 	/**
 	 */
 
-	public class TokenFilterUsage 
-		: GeneralUsageBase<IIndexSettings, IndexSettingsDescriptor, IndexSettings>
+	public class TokenFilterUsageTest 
+		: UsageTestBase<IIndexSettings, IndexSettingsDescriptor, IndexSettings>
 	{
 		protected override object ExpectJson => new
 		{

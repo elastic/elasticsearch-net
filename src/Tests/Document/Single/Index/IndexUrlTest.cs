@@ -10,7 +10,7 @@ using static Tests.Framework.UrlTester;
 
 namespace Tests.Document.Single.Index
 {
-	public class IndexUrl
+	public class IndexUrlTest
 	{
 		[U] public async Task Urls()
 		{

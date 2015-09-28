@@ -9,13 +9,13 @@ using Xunit;
 
 namespace Tests.Framework
 {
-	public abstract class CrudBase<TCreateResponse, TReadResponse, TUpdateResponse>
+	public abstract class CrudTestBase<TCreateResponse, TReadResponse, TUpdateResponse>
 		: CrudBase<TCreateResponse, TReadResponse, TUpdateResponse, AcknowledgedResponse>
 			where TCreateResponse : class, IResponse
 			where TReadResponse : class, IResponse
 			where TUpdateResponse : class, IResponse
 	{
-		public CrudBase(IIntegrationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public CrudTestBase(IIntegrationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override bool SupportsDeletes => false;
 	}
 

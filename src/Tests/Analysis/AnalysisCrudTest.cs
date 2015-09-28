@@ -20,8 +20,8 @@ namespace Tests
 {
 
 	[Collection(IntegrationContext.Indexing)]
-	public class AnalysisCrud 
-		: CrudBase<IIndicesOperationResponse, IIndexSettingsResponse, IAcknowledgedResponse>
+	public class AnalysisCrudTest 
+		: CrudTestBase<IIndicesOperationResponse, IIndexSettingsResponse, IAcknowledgedResponse>
 	{
 		/**
 		* # Analysis crud
@@ -32,7 +32,7 @@ namespace Tests
 		*/
 		protected override bool SupportsDeletes => false;
 
-		public AnalysisCrud(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public AnalysisCrudTest(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		/**
 		* We can create the analysis settings as part of the create index call
@@ -52,10 +52,10 @@ namespace Tests
 			{
 				Analysis = new Analysis
 				{
-					Analyzers = AnalyzerUsage.InitializerExample.Analysis.Analyzers,
-					CharFilters = CharFilterUsage.InitializerExample.Analysis.CharFilters,
-					Tokenizers = TokenizerUsage.InitializerExample.Analysis.Tokenizers,
-					TokenFilters = TokenFilterUsage.InitializerExample.Analysis.TokenFilters,
+					Analyzers = AnalyzerUsageTest.InitializerExample.Analysis.Analyzers,
+					CharFilters = CharFilterUsageTest.InitializerExample.Analysis.CharFilters,
+					Tokenizers = TokenizerUsageTest.InitializerExample.Analysis.Tokenizers,
+					TokenFilters = TokenFilterUsageTest.InitializerExample.Analysis.TokenFilters,
 				}
 			}
 		};
@@ -63,10 +63,10 @@ namespace Tests
 		protected ICreateIndexRequest CreateFluent(string indexName, CreateIndexDescriptor c) =>
 			c.Settings(s => s
 				.Analysis(a => a
-					.Analyzers(t => AnalyzerUsage.FluentExample(s).Analysis.Analyzers)
-					.CharFilters(t => CharFilterUsage.FluentExample(s).Analysis.CharFilters)
-					.Tokenizers(t => TokenizerUsage.FluentExample(s).Analysis.Tokenizers)
-					.TokenFilters(t => TokenFilterUsage.FluentExample(s).Analysis.TokenFilters)
+					.Analyzers(t => AnalyzerUsageTest.FluentExample(s).Analysis.Analyzers)
+					.CharFilters(t => CharFilterUsageTest.FluentExample(s).Analysis.CharFilters)
+					.Tokenizers(t => TokenizerUsageTest.FluentExample(s).Analysis.Tokenizers)
+					.TokenFilters(t => TokenFilterUsageTest.FluentExample(s).Analysis.TokenFilters)
 				)
 			);
 

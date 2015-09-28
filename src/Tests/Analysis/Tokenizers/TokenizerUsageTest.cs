@@ -14,7 +14,7 @@ namespace Tests
 	/**
 	 */
 
-	public class TokenizerUsage : GeneralUsageBase<IIndexSettings, IndexSettingsDescriptor, IndexSettings>
+	public class TokenizerUsageTest : UsageTestBase<IIndexSettings, IndexSettingsDescriptor, IndexSettings>
 	{
 		protected override object ExpectJson => new
 		{

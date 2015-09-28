@@ -20,9 +20,9 @@ namespace Tests.Aggregations.Bucket
 	 *
 	 * Be sure to read the elasticsearch documentation {ref}/search-aggregations-bucket-datehistogram-aggregation.html[on this subject here]
 	*/
-	public class DateHistogramAggregationUsage : AggregationUsageBase
+	public class DateHistogramAggregationUsageTest : AggregationUsageTestBase
 	{
-		public DateHistogramAggregationUsage(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+		public DateHistogramAggregationUsageTest(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
 		protected override object ExpectJson => new
 		{

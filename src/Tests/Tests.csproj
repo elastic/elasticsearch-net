@@ -68,13 +68,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Aggregations\Bucket\Children\ChildrenAggregation.MappingExample.doc.cs" />
+    <Compile Include="Aggregations\Bucket\Children\ChildrenAggregationMapping.doc.cs" />
     <Compile Include="Aggregations\Bucket\Filters\FiltersAggregationUsage.cs" />
-    <Compile Include="Aggregations\Bucket\Filter\FilterAggregationUsage.cs" />
-    <Compile Include="Aggregations\Bucket\DateRange\DateRangeAggregationUsage.cs" />
-    <Compile Include="Aggregations\Bucket\DateHistogram\DateHistogramAggregationUsage.cs" />
-    <Compile Include="Aggregations\Bucket\Children\ChildrenAggregationUsage.cs" />
-    <Compile Include="Aggregations\AggregationUsageBase.cs" />
+    <Compile Include="Aggregations\Bucket\Filter\FilterAggregationUsageTest.cs" />
+    <Compile Include="Aggregations\Bucket\DateRange\DateRangeAggregationUsageTest.cs" />
+    <Compile Include="Aggregations\Bucket\DateHistogram\DateHistogramAggregationUsageTest.cs" />
+    <Compile Include="Aggregations\Bucket\Children\ChildrenAggregationUsageTest.cs" />
+    <Compile Include="Aggregations\AggregationUsageTestBase.cs" />
     <Compile Include="Aggregations\WritingAggregations.doc.cs" />
     <Compile Include="Analysis\Analyzers\AnalyzerUsage.cs" />
     <Compile Include="Analysis\CharFilters\CharFilterUsage.cs" />

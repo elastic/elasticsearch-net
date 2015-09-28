@@ -9,10 +9,10 @@ using Elasticsearch.Net;
 namespace Tests.Aggregations
 {
 	[Collection(IntegrationContext.ReadOnly)]
-	public abstract class AggregationUsageBase 
+	public abstract class AggregationUsageTestBase 
 		: ApiCallIntegrationBase<ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
 	{
-		protected AggregationUsageBase(IIntegrationCluster cluster, EndpointUsage usage) : base(cluster, usage) {}
+		protected AggregationUsageTestBase(IIntegrationCluster cluster, EndpointUsage usage) : base(cluster, usage) {}
 
 		public override bool ExpectIsValid => true;
 

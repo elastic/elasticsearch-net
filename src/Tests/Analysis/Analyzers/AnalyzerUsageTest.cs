@@ -14,8 +14,8 @@ namespace Tests
 	/**
 	 */
 
-	public class AnalyzerUsage 
-		: GeneralUsageBase<IIndexSettings, IndexSettingsDescriptor, IndexSettings>
+	public class AnalyzerUsageTest 
+		: UsageTestBase<IIndexSettings, IndexSettingsDescriptor, IndexSettings>
 	{
 		protected override object ExpectJson => new
 		{
