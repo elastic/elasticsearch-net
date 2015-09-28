@@ -10,7 +10,7 @@ using Xunit.Sdk;
 using static Tests.Framework.RoundTripper;
 using static Nest.Infer;
 
-namespace Tests.ClientConcepts.HighLevel.Inferrence.FieldNames
+namespace Tests.ClientConcepts.HighLevel.Inferrence.DocumentPaths
 {
 	public class DocumentPaths
 	{
