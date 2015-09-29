@@ -302,7 +302,7 @@ namespace Elasticsearch.Net.Connection
 		public T PrettyJson(bool b = true) => Assign(a => {
 			this._prettyJson = b;
 			if (!b && this._queryString["pretty"] != null) this._queryString.Remove("pretty");
-			else if (b)
+			else if (b && this._queryString["pretty"] == null)
 				this.SetGlobalQueryStringParameters(new NameValueCollection { { "pretty", b.ToString().ToLowerInvariant() } });
         });
 
