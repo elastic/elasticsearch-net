@@ -31,6 +31,11 @@ namespace Nest
 		{
 			throw new NotImplementedException();
 		}
+
+		public static implicit operator NodeIds(string nodes)
+		{
+			throw new NotImplementedException();
+		}
 	}
 
 	public class Metrics : IUrlParameter
@@ -66,7 +71,12 @@ namespace Nest
 
 		public static implicit operator Names(Name name)
 		{
-			return new Names();
+			throw new NotImplementedException();
+		}
+
+		public static implicit operator Names(string names)
+		{
+			throw new NotImplementedException();
 		}
 	}
 

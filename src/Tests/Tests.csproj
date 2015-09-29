@@ -82,6 +82,9 @@
     <Compile Include="Analysis\TokenFilters\TokenFilterUsageTest.cs" />
     <Compile Include="Analysis\Tokenizers\TokenizerUsageTest.cs" />
     <Compile Include="Cat\CatAliases\CatAliasesUrlTest.cs" />
+    <Compile Include="Cat\CatAllocation\CatAllocationUrlTest.cs" />
+    <Compile Include="Cat\CatCount\CatCountUrlTest.cs" />
+    <Compile Include="Cat\CatFielddata\CatFielddataUrlTest.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\BuildingBlocks\Transports.doc.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\MaxRetries\RespectsMaxRetry.doc.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\RoundRobin\VolatileUpdates.doc.cs" />
@@ -195,6 +198,16 @@
   <ItemGroup>
     <Folder Include="Aggregations\Metric\" />
     <Folder Include="Aggregations\Pipeline\" />
+    <Folder Include="Cat\CatHealth\" />
+    <Folder Include="Cat\CatIndices\" />
+    <Folder Include="Cat\CatMaster\" />
+    <Folder Include="Cat\CatNodes\" />
+    <Folder Include="Cat\CatPendingTasks\" />
+    <Folder Include="Cat\CatPlugins\" />
+    <Folder Include="Cat\CatRecovery\" />
+    <Folder Include="Cat\CatSegments\" />
+    <Folder Include="Cat\CatShards\" />
+    <Folder Include="Cat\CatThreadPool\" />
     <Folder Include="Cluster\" />
     <Folder Include="Migration\" />
     <Folder Include="Modules\" />
