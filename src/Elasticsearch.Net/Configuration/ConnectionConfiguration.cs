@@ -300,8 +300,10 @@ namespace Elasticsearch.Net.Connection
 		/// Also forces the client to send out formatted json. Defaults to false
 		/// </summary>
 		public T PrettyJson(bool b = true) => Assign(a => {
-			this._prettyJson = true;
-			this.SetGlobalQueryStringParameters(new NameValueCollection { { "pretty", b.ToString().ToLowerInvariant() } });
+			this._prettyJson = b;
+			if (!b && this._queryString["pretty"] != null) this._queryString.Remove("pretty");
+			else if (b)
+				this.SetGlobalQueryStringParameters(new NameValueCollection { { "pretty", b.ToString().ToLowerInvariant() } });
         });
 
 		/// <summary>

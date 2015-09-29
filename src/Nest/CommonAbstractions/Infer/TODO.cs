@@ -18,11 +18,11 @@ namespace Nest
 
 	public class ScrollId : IUrlParameter
 	{
-		public string GetString(IConnectionConfigurationValues settings)
-		{
-			throw new NotImplementedException();
-		}
-		public static implicit operator ScrollId(string id) => new ScrollId();
+		private readonly string _scrollId;
+		public ScrollId(string id) { this._scrollId = id; }
+
+		public string GetString(IConnectionConfigurationValues settings) => _scrollId;
+		public static implicit operator ScrollId(string id) => new ScrollId(id);
 	}
 
 	public class NodeIds : IUrlParameter

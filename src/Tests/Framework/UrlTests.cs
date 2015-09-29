@@ -39,7 +39,7 @@ namespace Tests.Framework
 		{
 			this.ExpectedHttpMethod = method;
 			this.ExpectedUrl = expectedUrl;
-			this._connectionSettingsModifier = settings;
+			this._connectionSettingsModifier = (settings ?? (c =>c.PrettyJson(false)));
 		}
 
 			
@@ -73,7 +73,7 @@ namespace Tests.Framework
 
 		private UrlTester Assert(string typeOfCall, IApiCallDetails callDetails)
 		{
-			var url = callDetails.Uri.AbsolutePath;
+			var url = callDetails.Uri.PathAndQuery;
 			url.Should().Be(this.ExpectedUrl, $"when calling the {typeOfCall} Api");
 			callDetails.HttpMethod.Should().Be(this.ExpectedHttpMethod, typeOfCall);
 			return this;
