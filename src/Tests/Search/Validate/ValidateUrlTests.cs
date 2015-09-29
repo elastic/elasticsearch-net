@@ -8,7 +8,7 @@ using Tests.Framework;
 using Tests.Framework.MockData;
 using static Tests.Framework.UrlTester;
 
-namespace Tests.Validate.Validate
+namespace Tests.Search.Validate
 {
 	public class ValidateUrlTests
 	{
@@ -25,8 +25,10 @@ namespace Tests.Validate.Validate
 			await POST("/project/hardcoded/_validate/query")
 				.Fluent(c=>c.Validate<CommitActivity>(s=>s.Type(hardcoded)))
 				.Request(c=>c.Validate(new ValidateQueryRequest<CommitActivity>(typeof(Project), hardcoded)))
+				.Request(c=>c.Validate(new ValidateQueryRequest(typeof(Project), hardcoded)))
 				.FluentAsync(c=>c.ValidateAsync<CommitActivity>(s=>s.Type(hardcoded)))
 				.RequestAsync(c=>c.ValidateAsync(new ValidateQueryRequest<CommitActivity>(typeof(Project), hardcoded)))
+				.RequestAsync(c=>c.ValidateAsync(new ValidateQueryRequest(typeof(Project), hardcoded)))
 				;
 
 			await POST("/project/_validate/query")
