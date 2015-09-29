@@ -55,11 +55,14 @@ namespace Nest
 
 	public class Name : IUrlParameter
 	{
-		public string GetString(IConnectionConfigurationValues settings)
+		private readonly string _name;
+		public Name(string name)
 		{
-			throw new NotImplementedException();
+			this._name = name;
 		}
-		public static implicit operator Name(string name) => new Name();
+
+		public string GetString(IConnectionConfigurationValues settings) => this._name;
+		public static implicit operator Name(string name) => new Name(name);
 	}
 
 	public class PropertyNames : IUrlParameter
