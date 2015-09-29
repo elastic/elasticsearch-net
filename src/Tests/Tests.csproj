@@ -149,6 +149,7 @@
     <Compile Include="Indices\IndexManagement\CreateIndex\CreateIndexApiTest.cs" />
     <Compile Include="Indices\IndexManagement\PutMapping\PutMappingApiTest.cs" />
     <Compile Include="Mapping\Types\String.cs" />
+    <Compile Include="Search\Search\SearchUrlTests.cs" />
     <Compile Include="Search\Request\Fields.cs" />
     <Compile Include="Search\Request\FielddataFields.cs" />
     <Compile Include="Search\Request\Highlighting.cs" />
@@ -200,7 +201,6 @@
     <Folder Include="Modules\" />
     <Folder Include="Plugins\Analysis\Phonetic\" />
     <Folder Include="QueryDsl\" />
-    <Folder Include="Search\Suggesters\" />
     <Folder Include="Setup\" />
   </ItemGroup>
   <ItemGroup>

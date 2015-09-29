@@ -1,0 +1,17 @@
+[source, csharp]
+----
+await POST("/project/project/_search")
+				.Fluent(c=>c.Search<CommitActivity>())
+				.Request(c=>c.Search<CommitActivity>(new SearchRequest()))
+				.Request(c=>c.Search<CommitActivity>(new SearchRequest<Project>()))
+				.FluentAsync(c=>c.SearchAsync<CommitActivity>())
+				.RequestAsync(c=>c.SearchAsync<CommitActivity>(new SearchRequest<Project>()))
+				;
+await POST("/project/project/_search")
+				.Fluent(c=>c.Search<Project>())
+				.Request(c=>c.Search<Project>(new SearchRequest()))
+				.Request(c=>c.Search<Project>(new SearchRequest<Project>()))
+				.FluentAsync(c=>c.SearchAsync<Project>())
+				.RequestAsync(c=>c.SearchAsync<Project>(new SearchRequest<Project>()))
+				;
+----

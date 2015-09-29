@@ -130,7 +130,6 @@
     <Compile Include="CommonAbstractions\Response\DictionaryResponse.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\KeyValueJsonConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\ReserializeJsonConverter.cs" />
-    <Compile Include="CommonAbstractions\SerializationBehavior\PreferredConstructor.cs" />
     <Compile Include="CommonAbstractions\Union\UnionJsonConverter.cs" />
     <Compile Include="Document\Multiple\MultiGet\Response\MultiGetHit.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\Json.cs" />

@@ -167,6 +167,18 @@ namespace CodeGeneration.LowLevelClient.Domain
                     xmlDoc = $"///<sumary>{p.Description}</summary>";
 					setters.Add(new FluentRouteSetter { Code = code, XmlDoc = xmlDoc });
 				}
+				if (paramName == "index" && p.Type == "list")
+				{
+					code = $"public {returnType} AllIndices() => this.Index(Indices.All);";
+                    xmlDoc = $"///<sumary>{p.Description}</summary>";
+					setters.Add(new FluentRouteSetter { Code = code, XmlDoc = xmlDoc });
+				}
+				if (paramName == "type" && p.Type == "list")
+				{
+					code = $"public {returnType} AllTypes() => this.Type(Types.All);";
+                    xmlDoc = $"///<sumary>{p.Description}</summary>";
+					setters.Add(new FluentRouteSetter { Code = code, XmlDoc = xmlDoc });
+				}
 			}
 			return setters;
 		}
