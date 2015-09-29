@@ -150,6 +150,9 @@
     <Compile Include="Indices\IndexManagement\CreateIndex\CreateIndexApiTest.cs" />
     <Compile Include="Indices\IndexManagement\PutMapping\PutMappingApiTest.cs" />
     <Compile Include="Mapping\Types\String.cs" />
+    <Compile Include="Search\SearchShards\SearchShardsUrlTests.cs" />
+    <Compile Include="Search\SearchTemplate\DeleteSearchTemplate\DeleteSearchTemplateUrlTests.cs" />
+    <Compile Include="Search\SearchTemplate\GetSearchTemplate\GetSearchTemplateUrlTests.cs" />
     <Compile Include="Search\SearchTemplate\PutSearchTemplate\PutSearchTemplateUrlTests.cs" />
     <Compile Include="Search\Search\SearchUrlTests.cs" />
     <Compile Include="Search\Request\Fields.cs" />
@@ -203,8 +206,6 @@
     <Folder Include="Modules\" />
     <Folder Include="Plugins\Analysis\Phonetic\" />
     <Folder Include="QueryDsl\" />
-    <Folder Include="Search\SearchTemplate\DeleteSearchTemplate\" />
-    <Folder Include="Search\SearchTemplate\GetSearchTemplate\" />
     <Folder Include="Setup\" />
   </ItemGroup>
   <ItemGroup>

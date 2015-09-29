@@ -4080,6 +4080,53 @@ namespace Nest
 		Types Type { get; }
 	 } 
 	///<summary>Request parameters for SearchShards <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html</pre></summary>
+	public partial class SearchShardsRequest<T>  : RequestBase<SearchShardsRequestParameters>, ISearchShardsRequest
+	{
+		Indices ISearchShardsRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Types ISearchShardsRequest.Type => Self.RouteValues.Get<Types>("type");
+			/// <summary>/{index}/{type}/_search_shards</summary>
+		
+///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
+		public SearchShardsRequest() : this(typeof(T), typeof(T)) {}
+		
+
+		/// <summary>/{index}/_search_shards</summary>
+///<param name="index">Optional, accepts null</param>
+		public SearchShardsRequest(Indices index) : base(r=>r.Optional("index", index)){}
+		
+
+		/// <summary>/{index}/{type}/_search_shards</summary>
+///<param name="index">Optional, accepts null</param>		
+///<param name="type">Optional, accepts null</param>
+		public SearchShardsRequest(Indices index, Types type) : base(r=>r.Optional("index", index).Optional("type", type)){}
+		
+
+			///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
+		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
+		
+		///<summary>Specific routing value</summary>
+		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
+		
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
+		
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
+		
+		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
+		
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	///<summary>Request parameters for SearchShards <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html</pre></summary>
 	public partial class SearchShardsRequest  : RequestBase<SearchShardsRequestParameters>, ISearchShardsRequest
 	{
 		Indices ISearchShardsRequest.Index => Self.RouteValues.Get<Indices>("index");
