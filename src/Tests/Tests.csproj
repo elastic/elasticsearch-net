@@ -150,6 +150,7 @@
     <Compile Include="Indices\IndexManagement\CreateIndex\CreateIndexApiTest.cs" />
     <Compile Include="Indices\IndexManagement\PutMapping\PutMappingApiTest.cs" />
     <Compile Include="Mapping\Types\String.cs" />
+    <Compile Include="Search\SearchExists\SearchExistsUrlTests.cs" />
     <Compile Include="Search\SearchShards\SearchShardsUrlTests.cs" />
     <Compile Include="Search\SearchTemplate\DeleteSearchTemplate\DeleteSearchTemplateUrlTests.cs" />
     <Compile Include="Search\SearchTemplate\GetSearchTemplate\GetSearchTemplateUrlTests.cs" />
