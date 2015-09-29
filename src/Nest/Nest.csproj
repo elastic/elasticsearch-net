@@ -99,6 +99,8 @@
     <Compile Include="CommonAbstractions\Infer\Indices\IndicesJsonConverter.cs" />
     <Compile Include="CommonAbstractions\Infer\Indices\Indices.cs" />
     <Compile Include="CommonAbstractions\Infer\FieldName\FieldNameExtensions.cs" />
+    <Compile Include="CommonAbstractions\Infer\ScrollId\ScrollId.cs" />
+    <Compile Include="CommonAbstractions\Infer\ScrollId\ScrollIds.cs" />
     <Compile Include="CommonAbstractions\Infer\TODO.cs" />
     <Compile Include="CommonAbstractions\Infer\PropertyName\PropertyName.cs" />
     <Compile Include="CommonAbstractions\Infer\PropertyName\PropertyNameExtensions.cs" />
@@ -706,7 +708,7 @@
     <Compile Include="Indices\StatusManagement\Optimize\OptimizeRequest.cs" />
     <Compile Include="Indices\IndexManagement\OpenCloseIndex\OpenIndex\OpenIndexRequest.cs" />
     <Compile Include="CommonAbstractions\Fluent\FluentDictionary.cs" />
-    <Compile Include="Search\Scroll\ScrollRequest.cs" />
+    <Compile Include="Search\Scroll\Scroll\ScrollRequest.cs" />
     <Compile Include="Indices\IndexSettings\UpdateIndicesSettings\UpdateSettingsRequest.cs" />
     <Compile Include="Document\Single\Exists\ElasticClient-DocumentExists.cs" />
     <Compile Include="Document\Multiple\MultiTermVectors\ElasticClient-MultiTermVectors.cs" />
@@ -842,7 +844,7 @@
     <Compile Include="Document\Single\Get\GetRequest.cs" />
     <Compile Include="Document\Multiple\MultiGet\ElasticClient-MultiGet.cs" />
     <Compile Include="Cluster\NodesHotThreads\ElasticClient-NodesHotThreads.cs" />
-    <Compile Include="Search\Scroll\ElasticClient-Scroll.cs" />
+    <Compile Include="Search\Scroll\Scroll\ElasticClient-Scroll.cs" />
     <Compile Include="Search\Validate\ValidationExplanation.cs" />
     <Compile Include="Search\Validate\ValidateResponse.cs" />
     <Compile Include="Search\Validate\ValidateQueryRequest.cs" />

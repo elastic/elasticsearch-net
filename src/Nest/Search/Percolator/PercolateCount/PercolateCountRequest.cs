@@ -27,7 +27,10 @@ namespace Nest
 		public IDictionary<string, IAggregationContainer> Aggregations { get; set; }
 
 		public TDocument Document { get; set; }
-		
+
+		public PercolateCountRequest() : this(typeof(TDocument), typeof(TDocument)) { }
+		public PercolateCountRequest(Id id) : this(typeof(TDocument), typeof(TDocument), id) { }
+
 		Id IPercolateOperation.Id => ((IPercolateCountRequest)this).Id;
 		IRequestParameters IPercolateOperation.GetRequestParameters()
 		{

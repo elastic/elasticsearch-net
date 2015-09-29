@@ -150,6 +150,12 @@
     <Compile Include="Indices\IndexManagement\CreateIndex\CreateIndexApiTest.cs" />
     <Compile Include="Indices\IndexManagement\PutMapping\PutMappingApiTest.cs" />
     <Compile Include="Mapping\Types\String.cs" />
+    <Compile Include="Search\Percolator\PercolateCount\PercolateCountUrlTests.cs" />
+    <Compile Include="Search\Percolator\Percolate\PercolateUrlTests.cs" />
+    <Compile Include="Search\Percolator\RegisterPercolator\RegisterPercolatorUrlTests.cs" />
+    <Compile Include="Search\Percolator\UnregisterPercolator\UnregisterPercolatorUrlTests.cs" />
+    <Compile Include="Search\Scroll\ClearScroll\ClearScrollUrlTests.cs" />
+    <Compile Include="Search\Scroll\Scroll\ScrollUrlTests.cs" />
     <Compile Include="Search\SearchExists\SearchExistsUrlTests.cs" />
     <Compile Include="Search\SearchShards\SearchShardsUrlTests.cs" />
     <Compile Include="Search\SearchTemplate\DeleteSearchTemplate\DeleteSearchTemplateUrlTests.cs" />
@@ -207,6 +213,7 @@
     <Folder Include="Modules\" />
     <Folder Include="Plugins\Analysis\Phonetic\" />
     <Folder Include="QueryDsl\" />
+    <Folder Include="Search\Percolator\MultiPercolate\" />
     <Folder Include="Setup\" />
   </ItemGroup>
   <ItemGroup>

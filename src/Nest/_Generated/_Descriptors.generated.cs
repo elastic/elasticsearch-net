@@ -920,7 +920,19 @@ namespace Nest
 		public PercolateCountDescriptor(DocumentPath<T> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
 		partial void DocumentFromPath(T document);
 
-			///<sumary>Substitute the document in the request body with a document that is known by the specified id. On top of the id, the index and type parameter will be used to retrieve the document from within the cluster.</summary>
+			///<sumary>The index of the document being count percolated.</summary>
+		public PercolateCountDescriptor<T> Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
+
+		///<sumary>The index of the document being count percolated.</summary>
+		public PercolateCountDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
+
+		///<sumary>The type of the document being count percolated.</summary>
+		public PercolateCountDescriptor<T> Type(TypeName type) => Assign(a=>a.RouteValues.Required("type", type));
+
+		///<sumary>The type of the document being count percolated.</summary>
+		public PercolateCountDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
+
+		///<sumary>Substitute the document in the request body with a document that is known by the specified id. On top of the id, the index and type parameter will be used to retrieve the document from within the cluster.</summary>
 		public PercolateCountDescriptor<T> Id(Id id) => Assign(a=>a.RouteValues.Required("id", id));
 
 	
@@ -978,7 +990,19 @@ namespace Nest
 		public DeleteDescriptor(DocumentPath<T> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
 		partial void DocumentFromPath(T document);
 
-		
+			///<sumary>The name of the index</summary>
+		public DeleteDescriptor<T> Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
+
+		///<sumary>The name of the index</summary>
+		public DeleteDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
+
+		///<sumary>The type of the document</summary>
+		public DeleteDescriptor<T> Type(TypeName type) => Assign(a=>a.RouteValues.Required("type", type));
+
+		///<sumary>The type of the document</summary>
+		public DeleteDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
+
+	
 		///<summary>Specific write consistency setting for the operation</summary>
 		public DeleteDescriptor<T> Consistency(Consistency consistency) => AssignParam(p=>p.Consistency(consistency));
 
@@ -1018,7 +1042,16 @@ namespace Nest
 		public DeleteByQueryDescriptor(Indices index) : base(r=>r.Required("index", index)){}
 		
 
-			///<sumary>A comma-separated list of types to restrict the operation</summary>
+			///<sumary>A comma-separated list of indices to restrict the operation; use `_all` to perform the operation on all indices</summary>
+		public DeleteByQueryDescriptor<T> Index(Indices index) => Assign(a=>a.RouteValues.Required("index", index));
+
+		///<sumary>A comma-separated list of indices to restrict the operation; use `_all` to perform the operation on all indices</summary>
+		public DeleteByQueryDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (Indices)typeof(TOther)));
+
+		///<sumary>A comma-separated list of indices to restrict the operation; use `_all` to perform the operation on all indices</summary>
+		public DeleteByQueryDescriptor<T> AllIndices() => this.Index(Indices.All);
+
+		///<sumary>A comma-separated list of types to restrict the operation</summary>
 		public DeleteByQueryDescriptor<T> Type(Types type) => Assign(a=>a.RouteValues.Required("type", type));
 
 		///<sumary>A comma-separated list of types to restrict the operation</summary>
@@ -1132,7 +1165,19 @@ namespace Nest
 		public DocumentExistsDescriptor(DocumentPath<T> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
 		partial void DocumentFromPath(T document);
 
-		
+			///<sumary>The name of the index</summary>
+		public DocumentExistsDescriptor<T> Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
+
+		///<sumary>The name of the index</summary>
+		public DocumentExistsDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
+
+		///<sumary>The type of the document (use `_all` to fetch the first document matching the ID across all types)</summary>
+		public DocumentExistsDescriptor<T> Type(TypeName type) => Assign(a=>a.RouteValues.Required("type", type));
+
+		///<sumary>The type of the document (use `_all` to fetch the first document matching the ID across all types)</summary>
+		public DocumentExistsDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
+
+	
 		///<summary>The ID of the parent document</summary>
 		public DocumentExistsDescriptor<T> Parent(string parent) => AssignParam(p=>p.Parent(parent));
 
@@ -1175,7 +1220,19 @@ namespace Nest
 		public ExplainDescriptor(DocumentPath<T> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
 		partial void DocumentFromPath(T document);
 
-		
+			///<sumary>The name of the index</summary>
+		public ExplainDescriptor<T> Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
+
+		///<sumary>The name of the index</summary>
+		public ExplainDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
+
+		///<sumary>The type of the document</summary>
+		public ExplainDescriptor<T> Type(TypeName type) => Assign(a=>a.RouteValues.Required("type", type));
+
+		///<sumary>The type of the document</summary>
+		public ExplainDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
+
+	
 		///<summary>Specify whether wildcards and prefix queries in the query string query should be analyzed (default: false)</summary>
 		public ExplainDescriptor<T> AnalyzeWildcard(bool analyze_wildcard = true) => AssignParam(p=>p.AnalyzeWildcard(analyze_wildcard));
 
@@ -1302,7 +1359,19 @@ namespace Nest
 		public GetDescriptor(DocumentPath<T> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
 		partial void DocumentFromPath(T document);
 
-		
+			///<sumary>The name of the index</summary>
+		public GetDescriptor<T> Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
+
+		///<sumary>The name of the index</summary>
+		public GetDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
+
+		///<sumary>The type of the document (use `_all` to fetch the first document matching the ID across all types)</summary>
+		public GetDescriptor<T> Type(TypeName type) => Assign(a=>a.RouteValues.Required("type", type));
+
+		///<sumary>The type of the document (use `_all` to fetch the first document matching the ID across all types)</summary>
+		public GetDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
+
+	
 		///<summary>A comma-separated list of fields to return in the response</summary>
 		public GetDescriptor<T> Fields(params string[] fields) => AssignParam(p=>p.Fields(fields));
 			
@@ -1401,7 +1470,19 @@ namespace Nest
 		public SourceDescriptor(DocumentPath<T> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
 		partial void DocumentFromPath(T document);
 
-		
+			///<sumary>The name of the index</summary>
+		public SourceDescriptor<T> Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
+
+		///<sumary>The name of the index</summary>
+		public SourceDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
+
+		///<sumary>The type of the document; use `_all` to fetch the first document matching the ID across all types</summary>
+		public SourceDescriptor<T> Type(TypeName type) => Assign(a=>a.RouteValues.Required("type", type));
+
+		///<sumary>The type of the document; use `_all` to fetch the first document matching the ID across all types</summary>
+		public SourceDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
+
+	
 		///<summary>The ID of the parent document</summary>
 		public SourceDescriptor<T> Parent(string parent) => AssignParam(p=>p.Parent(parent));
 
@@ -1492,6 +1573,18 @@ namespace Nest
 
 			///<sumary>Document ID</summary>
 		public IndexDescriptor<T> Id(Id id) => Assign(a=>a.RouteValues.Required("id", id));
+
+		///<sumary>The name of the index</summary>
+		public IndexDescriptor<T> Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
+
+		///<sumary>The name of the index</summary>
+		public IndexDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
+
+		///<sumary>The type of the document</summary>
+		public IndexDescriptor<T> Type(TypeName type) => Assign(a=>a.RouteValues.Required("type", type));
+
+		///<sumary>The type of the document</summary>
+		public IndexDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
 
 	
 		///<summary>Explicit write consistency setting for the operation</summary>
@@ -1652,7 +1745,13 @@ namespace Nest
 		public CloseIndexDescriptor(IndexName index) : base(r=>r.Required("index", index)){}
 		
 
-		
+			///<sumary>The name of the index</summary>
+		public CloseIndexDescriptor Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
+
+		///<sumary>The name of the index</summary>
+		public CloseIndexDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
+
+	
 		///<summary>Explicit operation timeout</summary>
 		public CloseIndexDescriptor Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
 
@@ -1685,7 +1784,13 @@ namespace Nest
 		public CreateIndexDescriptor(IndexName index) : base(r=>r.Required("index", index)){}
 		
 
-		
+			///<sumary>The name of the index</summary>
+		public CreateIndexDescriptor Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
+
+		///<sumary>The name of the index</summary>
+		public CreateIndexDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
+
+	
 		///<summary>Explicit operation timeout</summary>
 		public CreateIndexDescriptor Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
 
@@ -1712,7 +1817,16 @@ namespace Nest
 		public DeleteIndexDescriptor(Indices index) : base(r=>r.Required("index", index)){}
 		
 
-		
+			///<sumary>A comma-separated list of indices to delete; use `_all` or `*` string to delete all indices</summary>
+		public DeleteIndexDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Required("index", index));
+
+		///<sumary>A comma-separated list of indices to delete; use `_all` or `*` string to delete all indices</summary>
+		public DeleteIndexDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (Indices)typeof(TOther)));
+
+		///<sumary>A comma-separated list of indices to delete; use `_all` or `*` string to delete all indices</summary>
+		public DeleteIndexDescriptor AllIndices() => this.Index(Indices.All);
+
+	
 		///<summary>Explicit operation timeout</summary>
 		public DeleteIndexDescriptor Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
 
@@ -1738,7 +1852,16 @@ namespace Nest
 		public DeleteAliasDescriptor(Indices index, Names name) : base(r=>r.Required("index", index).Required("name", name)){}
 		
 
-		
+			///<sumary>A comma-separated list of index names (supports wildcards); use `_all` for all indices</summary>
+		public DeleteAliasDescriptor<T> Index(Indices index) => Assign(a=>a.RouteValues.Required("index", index));
+
+		///<sumary>A comma-separated list of index names (supports wildcards); use `_all` for all indices</summary>
+		public DeleteAliasDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (Indices)typeof(TOther)));
+
+		///<sumary>A comma-separated list of index names (supports wildcards); use `_all` for all indices</summary>
+		public DeleteAliasDescriptor<T> AllIndices() => this.Index(Indices.All);
+
+	
 		///<summary>Explicit timestamp for the document</summary>
 		public DeleteAliasDescriptor<T> Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
 
@@ -1788,7 +1911,16 @@ namespace Nest
 		public DeleteWarmerDescriptor(Indices index, Names name) : base(r=>r.Required("index", index).Required("name", name)){}
 		
 
-		
+			///<sumary>A comma-separated list of index names to delete warmers from (supports wildcards); use `_all` to perform the operation on all indices.</summary>
+		public DeleteWarmerDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Required("index", index));
+
+		///<sumary>A comma-separated list of index names to delete warmers from (supports wildcards); use `_all` to perform the operation on all indices.</summary>
+		public DeleteWarmerDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (Indices)typeof(TOther)));
+
+		///<sumary>A comma-separated list of index names to delete warmers from (supports wildcards); use `_all` to perform the operation on all indices.</summary>
+		public DeleteWarmerDescriptor AllIndices() => this.Index(Indices.All);
+
+	
 		///<summary>Specify timeout for connection to master</summary>
 		public DeleteWarmerDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
 
@@ -1809,7 +1941,16 @@ namespace Nest
 		public IndexExistsDescriptor(Indices index) : base(r=>r.Required("index", index)){}
 		
 
-		
+			///<sumary>A comma-separated list of indices to check</summary>
+		public IndexExistsDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Required("index", index));
+
+		///<sumary>A comma-separated list of indices to check</summary>
+		public IndexExistsDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (Indices)typeof(TOther)));
+
+		///<sumary>A comma-separated list of indices to check</summary>
+		public IndexExistsDescriptor AllIndices() => this.Index(Indices.All);
+
+	
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public IndexExistsDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
 
@@ -1907,7 +2048,25 @@ namespace Nest
 		public TypeExistsDescriptor(Indices index, Types type) : base(r=>r.Required("index", index).Required("type", type)){}
 		
 
-		
+			///<sumary>A comma-separated list of index names; use `_all` to check the types across all indices</summary>
+		public TypeExistsDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Required("index", index));
+
+		///<sumary>A comma-separated list of index names; use `_all` to check the types across all indices</summary>
+		public TypeExistsDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (Indices)typeof(TOther)));
+
+		///<sumary>A comma-separated list of index names; use `_all` to check the types across all indices</summary>
+		public TypeExistsDescriptor AllIndices() => this.Index(Indices.All);
+
+		///<sumary>A comma-separated list of document types to check</summary>
+		public TypeExistsDescriptor Type(Types type) => Assign(a=>a.RouteValues.Required("type", type));
+
+		///<sumary>A comma-separated list of document types to check</summary>
+		public TypeExistsDescriptor Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (Types)typeof(TOther)));
+
+		///<sumary>A comma-separated list of document types to check</summary>
+		public TypeExistsDescriptor AllTypes() => this.Type(Types.All);
+
+	
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
 		public TypeExistsDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
 
@@ -2014,7 +2173,16 @@ namespace Nest
 		public GetIndexDescriptor(Indices index) : base(r=>r.Required("index", index)){}
 		
 
-			///<sumary>A comma-separated list of features</summary>
+			///<sumary>A comma-separated list of index names</summary>
+		public GetIndexDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Required("index", index));
+
+		///<sumary>A comma-separated list of index names</summary>
+		public GetIndexDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (Indices)typeof(TOther)));
+
+		///<sumary>A comma-separated list of index names</summary>
+		public GetIndexDescriptor AllIndices() => this.Index(Indices.All);
+
+		///<sumary>A comma-separated list of features</summary>
 		public GetIndexDescriptor Feature(Feature feature) => Assign(a=>a.RouteValues.Required("feature", feature));
 
 	
@@ -2399,7 +2567,13 @@ namespace Nest
 		public OpenIndexDescriptor(IndexName index) : base(r=>r.Required("index", index)){}
 		
 
-		
+			///<sumary>The name of the index</summary>
+		public OpenIndexDescriptor Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
+
+		///<sumary>The name of the index</summary>
+		public OpenIndexDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
+
+	
 		///<summary>Explicit operation timeout</summary>
 		public OpenIndexDescriptor Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
 
@@ -2484,7 +2658,16 @@ namespace Nest
 		public PutAliasDescriptor(Indices index, Name name) : base(r=>r.Required("index", index).Required("name", name)){}
 		
 
-		
+			///<sumary>A comma-separated list of index names the alias should point to (supports wildcards); use `_all` to perform the operation on all indices.</summary>
+		public PutAliasDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Required("index", index));
+
+		///<sumary>A comma-separated list of index names the alias should point to (supports wildcards); use `_all` to perform the operation on all indices.</summary>
+		public PutAliasDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (Indices)typeof(TOther)));
+
+		///<sumary>A comma-separated list of index names the alias should point to (supports wildcards); use `_all` to perform the operation on all indices.</summary>
+		public PutAliasDescriptor AllIndices() => this.Index(Indices.All);
+
+	
 		///<summary>Explicit timestamp for the document</summary>
 		public PutAliasDescriptor Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
 
@@ -2517,6 +2700,12 @@ namespace Nest
 
 		///<sumary>A comma-separated list of index names the mapping should be added to (supports wildcards); use `_all` or omit to add the mapping on all indices.</summary>
 		public PutMappingDescriptor<T> AllIndices() => this.Index(Indices.All);
+
+		///<sumary>The name of the document type</summary>
+		public PutMappingDescriptor<T> Type(TypeName type) => Assign(a=>a.RouteValues.Required("type", type));
+
+		///<sumary>The name of the document type</summary>
+		public PutMappingDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
 
 	
 		///<summary>Explicit operation timeout</summary>
@@ -3391,7 +3580,19 @@ namespace Nest
 		public PercolateDescriptor(DocumentPath<T> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
 		partial void DocumentFromPath(T document);
 
-			///<sumary>Substitute the document in the request body with a document that is known by the specified id. On top of the id, the index and type parameter will be used to retrieve the document from within the cluster.</summary>
+			///<sumary>The index of the document being percolated.</summary>
+		public PercolateDescriptor<T> Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
+
+		///<sumary>The index of the document being percolated.</summary>
+		public PercolateDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
+
+		///<sumary>The type of the document being percolated.</summary>
+		public PercolateDescriptor<T> Type(TypeName type) => Assign(a=>a.RouteValues.Required("type", type));
+
+		///<sumary>The type of the document being percolated.</summary>
+		public PercolateDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
+
+		///<sumary>Substitute the document in the request body with a document that is known by the specified id. On top of the id, the index and type parameter will be used to retrieve the document from within the cluster.</summary>
 		public PercolateDescriptor<T> Id(Id id) => Assign(a=>a.RouteValues.Required("id", id));
 
 	
@@ -4115,7 +4316,19 @@ namespace Nest
 		public TermVectorsDescriptor(DocumentPath<T> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
 		partial void DocumentFromPath(T document);
 
-			///<sumary>The id of the document, when not specified a doc param should be supplied.</summary>
+			///<sumary>The index in which the document resides.</summary>
+		public TermVectorsDescriptor<T> Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
+
+		///<sumary>The index in which the document resides.</summary>
+		public TermVectorsDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
+
+		///<sumary>The type of the document.</summary>
+		public TermVectorsDescriptor<T> Type(TypeName type) => Assign(a=>a.RouteValues.Required("type", type));
+
+		///<sumary>The type of the document.</summary>
+		public TermVectorsDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
+
+		///<sumary>The id of the document, when not specified a doc param should be supplied.</summary>
 		public TermVectorsDescriptor<T> Id(Id id) => Assign(a=>a.RouteValues.Required("id", id));
 
 	
@@ -4183,7 +4396,19 @@ namespace Nest
 		public UpdateDescriptor(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id)){}
 		
 
-		
+			///<sumary>The name of the index</summary>
+		public UpdateDescriptor Index(IndexName index) => Assign(a=>a.RouteValues.Required("index", index));
+
+		///<sumary>The name of the index</summary>
+		public UpdateDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("index", (IndexName)typeof(TOther)));
+
+		///<sumary>The type of the document</summary>
+		public UpdateDescriptor Type(TypeName type) => Assign(a=>a.RouteValues.Required("type", type));
+
+		///<sumary>The type of the document</summary>
+		public UpdateDescriptor Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Required("type", (TypeName)typeof(TOther)));
+
+	
 		///<summary>Explicit write consistency setting for the operation</summary>
 		public UpdateDescriptor Consistency(Consistency consistency) => AssignParam(p=>p.Consistency(consistency));
 
