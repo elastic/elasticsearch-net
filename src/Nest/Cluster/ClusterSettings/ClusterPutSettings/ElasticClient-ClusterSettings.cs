@@ -12,10 +12,10 @@ namespace Nest
 		/// (applied cross restarts) or transient (will not survive a full cluster restart). 
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/cluster-update-settings.html
 		/// </summary>
-		IClusterPutSettingsResponse ClusterSettings(Func<ClusterSettingsDescriptor, IClusterSettingsRequest> clusterHealthSelector);
+		IClusterPutSettingsResponse ClusterSettings(Func<ClusterSettingsDescriptor, IClusterSettingsRequest> clusterHealthSelector = null);
 
 		/// <inheritdoc/>
-		Task<IClusterPutSettingsResponse> ClusterSettingsAsync(Func<ClusterSettingsDescriptor, IClusterSettingsRequest> clusterHealthSelector);
+		Task<IClusterPutSettingsResponse> ClusterSettingsAsync(Func<ClusterSettingsDescriptor, IClusterSettingsRequest> clusterHealthSelector = null);
 
 		/// <inheritdoc/>
 		IClusterPutSettingsResponse ClusterSettings(IClusterSettingsRequest clusterSettingsRequest);
@@ -26,12 +26,12 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IClusterPutSettingsResponse ClusterSettings(Func<ClusterSettingsDescriptor, IClusterSettingsRequest> selector) =>
-			this.ClusterSettings(selector?.Invoke(new ClusterSettingsDescriptor()));
+		public IClusterPutSettingsResponse ClusterSettings(Func<ClusterSettingsDescriptor, IClusterSettingsRequest> selector = null) =>
+			this.ClusterSettings(selector.InvokeOrDefault(new ClusterSettingsDescriptor()));
 
 		/// <inheritdoc/>
-		public Task<IClusterPutSettingsResponse> ClusterSettingsAsync(Func<ClusterSettingsDescriptor, IClusterSettingsRequest> selector) =>
-			this.ClusterSettingsAsync(selector?.Invoke(new ClusterSettingsDescriptor()));
+		public Task<IClusterPutSettingsResponse> ClusterSettingsAsync(Func<ClusterSettingsDescriptor, IClusterSettingsRequest> selector = null) =>
+			this.ClusterSettingsAsync(selector.InvokeOrDefault(new ClusterSettingsDescriptor()));
 
 		/// <inheritdoc/>
 		public IClusterPutSettingsResponse ClusterSettings(IClusterSettingsRequest clusterSettingsRequest) => 

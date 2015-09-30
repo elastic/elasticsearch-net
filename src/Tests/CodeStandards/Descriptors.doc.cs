@@ -61,5 +61,9 @@ namespace Tests.CodeStandards
 		//TODO write a test that assures we use Base as a suffix and not prefix
 
 		//Write a tests that all properties of type QueryContainer have the same json converters set
+
+
+		//TODO write tests that ensure consistent parameter names on IElasticClient.  i.e. request, selector vs indexRequest, indexRequestSelector
+		//TODO write tests to ensure OIS IElasticClient methods are never nullable
 	}
 }
