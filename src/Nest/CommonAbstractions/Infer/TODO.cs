@@ -45,32 +45,7 @@ namespace Nest
 		}
 	}
 
-	public class Names : IUrlParameter
-	{
-		public string GetString(IConnectionConfigurationValues settings)
-		{
-			throw new NotImplementedException();
-		}
 
-		public static implicit operator Names(Name name)
-		{
-			throw new NotImplementedException();
-		}
-
-		public static implicit operator Names(string names)
-		{
-			throw new NotImplementedException();
-		}
-	}
-
-	public class Name : IUrlParameter
-	{
-		public string GetString(IConnectionConfigurationValues settings)
-		{
-			throw new NotImplementedException();
-		}
-		public static implicit operator Name(string name) => new Name();
-	}
 
 	public class PropertyNames : IUrlParameter
 	{

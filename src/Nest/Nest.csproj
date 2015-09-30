@@ -99,6 +99,8 @@
     <Compile Include="CommonAbstractions\Infer\Indices\IndicesJsonConverter.cs" />
     <Compile Include="CommonAbstractions\Infer\Indices\Indices.cs" />
     <Compile Include="CommonAbstractions\Infer\FieldName\FieldNameExtensions.cs" />
+    <Compile Include="CommonAbstractions\Infer\Name\Name.cs" />
+    <Compile Include="CommonAbstractions\Infer\Name\Names.cs" />
     <Compile Include="CommonAbstractions\Infer\ScrollId\ScrollId.cs" />
     <Compile Include="CommonAbstractions\Infer\ScrollId\ScrollIds.cs" />
     <Compile Include="CommonAbstractions\Infer\TODO.cs" />
