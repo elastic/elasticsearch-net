@@ -58,6 +58,10 @@ namespace Nest
 	}
 	@foreach (KeyValuePair<string, ApiQueryParameters> kv in method.Url.Params)
 	{
+		if (method.Url.Parts != null && method.Url.Parts.ContainsKey(kv.Key))
+        {
+			continue;
+        }
 		var original = kv.Value.OriginalQueryStringParamName;
 		var cased = kv.Key.ToPascalCase();
 		var mm = (cased != "Type" && cased != "Index" && cased != "Script") ? cased : cased + "QueryString";

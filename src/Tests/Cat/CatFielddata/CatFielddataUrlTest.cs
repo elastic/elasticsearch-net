@@ -24,10 +24,10 @@ namespace Tests.Cat.CatAliases
 			var fields = new[] { "name", "startedOn" };
 
 			await GET("/_cat/fielddata/name,startedOn")
-				.Fluent(c => c.CatFielddata(f => f.Fields(fields)))
-				.Request(c => c.CatFielddata(new CatFielddataRequest { Fields = fields }))
-				.FluentAsync(c => c.CatFielddataAsync(f => f.Fields(fields)))
-				.RequestAsync(c => c.CatFielddataAsync(new CatFielddataRequest { Fields = fields }))
+				.Fluent(c => c.CatFielddata(f => f.Fields<Project>(p => p.Name, p => p.StartedOn)))
+				.Request(c => c.CatFielddata(new CatFielddataRequest(fields)))
+				.FluentAsync(c => c.CatFielddataAsync(f => f.Fields<Project>(p => p.Name, p => p.StartedOn)))
+				.RequestAsync(c => c.CatFielddataAsync(new CatFielddataRequest(fields)))
 				;
 		}
 	}

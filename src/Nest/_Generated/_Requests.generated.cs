@@ -92,9 +92,6 @@ namespace Nest
 		///<summary>A comma-separated list of filters to use for the analysis</summary>
 		public  string[] Filters { get { return Q< string[]>("filters"); } set { Q("filters", value); } }
 		
-		///<summary>The name of the index to scope the operation</summary>
-		public string IndexQueryString { get { return Q<string>("index"); } set { Q("index", value); } }
-		
 		///<summary>With `true`, specify that a local shard should be used if available, with `false`, use a random shard (default: true)</summary>
 		public bool PreferLocal { get { return Q<bool>("prefer_local"); } set { Q("prefer_local", value); } }
 		
@@ -173,9 +170,6 @@ namespace Nest
 		
 		///<summary>Explicit operation timeout</summary>
 		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
-		
-		///<summary>Default document type for items which don&#39;t provide one</summary>
-		public string TypeQueryString { get { return Q<string>("type"); } set { Q("type", value); } }
 		
 		///<summary>Default comma-separated list of fields to return in the response for updates</summary>
 		public FieldNames Fields { get { return Q<FieldNames>("fields"); } set { Q("fields", value); } }
@@ -349,9 +343,6 @@ namespace Nest
 		
 		///<summary>Verbose mode. Display column headers</summary>
 		public bool V { get { return Q<bool>("v"); } set { Q("v", value); } }
-		
-		///<summary>A comma-separated list of fields to return in the output</summary>
-		public FieldNames Fields { get { return Q<FieldNames>("fields"); } set { Q("fields", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
@@ -798,9 +789,6 @@ namespace Nest
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
-		
-		///<summary>A comma-separated list of index name to limit the operation</summary>
-		public  string[] IndexQueryString { get { return Q< string[]>("index"); } set { Q("index", value); } }
 		
 		///<summary>Clear the recycler cache</summary>
 		public bool Recycler { get { return Q<bool>("recycler"); } set { Q("recycler", value); } }

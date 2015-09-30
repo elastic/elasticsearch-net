@@ -94,6 +94,7 @@
     <Compile Include="Analysis\Tokenizers\Tokenizers.cs" />
     <Compile Include="CommonAbstractions\Fluent\DescriptorBase.cs" />
     <Compile Include="CommonAbstractions\Infer\DocumentPath\DocumentPath.cs" />
+    <Compile Include="CommonAbstractions\Infer\FieldName\FieldNames.cs" />
     <Compile Include="CommonAbstractions\Infer\Id\Id.cs" />
     <Compile Include="CommonAbstractions\Infer\Id\IdJsonConverter.cs" />
     <Compile Include="CommonAbstractions\Infer\Indices\IndicesJsonConverter.cs" />
