@@ -101,6 +101,7 @@
     <Compile Include="CommonAbstractions\Infer\FieldName\FieldNameExtensions.cs" />
     <Compile Include="CommonAbstractions\Infer\Name\Name.cs" />
     <Compile Include="CommonAbstractions\Infer\Name\Names.cs" />
+    <Compile Include="CommonAbstractions\Infer\NodeId\NodeIds.cs" />
     <Compile Include="CommonAbstractions\Infer\ScrollId\ScrollId.cs" />
     <Compile Include="CommonAbstractions\Infer\ScrollId\ScrollIds.cs" />
     <Compile Include="CommonAbstractions\Infer\TODO.cs" />
@@ -1043,7 +1044,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Aggregations\Pipeline\" />
-    <Folder Include="CommonAbstractions\Infer\NodeId\" />
     <Folder Include="CommonAbstractions\SerializationBehavior\NewFolder1\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
