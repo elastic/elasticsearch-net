@@ -23,7 +23,7 @@ namespace Nest
 		public static Names Parse(string names)
 		{
 			if (names.IsNullOrEmpty()) throw new ArgumentException("can not create Names on an empty enumerable of string", nameof(names));
-			var nameList = names.Split(new [] { "," }, StringSplitOptions.RemoveEmptyEntries);
+			var nameList = names.Split(new [] { "," }, StringSplitOptions.RemoveEmptyEntries).Select(s=>s.Trim());
 			return new Names(nameList);
 		}
 

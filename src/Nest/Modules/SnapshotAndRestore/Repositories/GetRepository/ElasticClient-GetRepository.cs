@@ -9,13 +9,13 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <inheritdoc/>
-		IGetRepositoryResponse GetRepository(Func<GetRepositoryDescriptor, IGetRepositoryRequest> selector);
+		IGetRepositoryResponse GetRepository(Func<GetRepositoryDescriptor, IGetRepositoryRequest> selector = null);
 
 		/// <inheritdoc/>
 		IGetRepositoryResponse GetRepository(IGetRepositoryRequest request);
 
 		/// <inheritdoc/>
-		Task<IGetRepositoryResponse> GetRepositoryAsync(Func<GetRepositoryDescriptor, IGetRepositoryRequest> selector);
+		Task<IGetRepositoryResponse> GetRepositoryAsync(Func<GetRepositoryDescriptor, IGetRepositoryRequest> selector = null);
 
 		/// <inheritdoc/>
 		Task<IGetRepositoryResponse> GetRepositoryAsync(IGetRepositoryRequest request);
@@ -24,8 +24,8 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IGetRepositoryResponse GetRepository(Func<GetRepositoryDescriptor, IGetRepositoryRequest> selector) =>
-			this.GetRepository(selector?.Invoke(new GetRepositoryDescriptor()));
+		public IGetRepositoryResponse GetRepository(Func<GetRepositoryDescriptor, IGetRepositoryRequest> selector = null) =>
+			this.GetRepository(selector.InvokeOrDefault(new GetRepositoryDescriptor()));
 
 		/// <inheritdoc/>
 		public IGetRepositoryResponse GetRepository(IGetRepositoryRequest request) => 
@@ -35,8 +35,8 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<IGetRepositoryResponse> GetRepositoryAsync(Func<GetRepositoryDescriptor, IGetRepositoryRequest> selector) => 
-			this.GetRepositoryAsync(selector?.Invoke(new GetRepositoryDescriptor()));
+		public Task<IGetRepositoryResponse> GetRepositoryAsync(Func<GetRepositoryDescriptor, IGetRepositoryRequest> selector = null) => 
+			this.GetRepositoryAsync(selector.InvokeOrDefault(new GetRepositoryDescriptor()));
 
 		/// <inheritdoc/>
 		public Task<IGetRepositoryResponse> GetRepositoryAsync(IGetRepositoryRequest request) => 

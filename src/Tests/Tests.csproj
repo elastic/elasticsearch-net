@@ -153,6 +153,14 @@
     <Compile Include="Indices\IndexManagement\CreateIndex\CreateIndexApiTest.cs" />
     <Compile Include="Indices\IndexManagement\PutMapping\PutMappingApiTest.cs" />
     <Compile Include="Mapping\Types\String.cs" />
+    <Compile Include="Modules\Repositories\CreateRepository\CreateRepositoryUrlTests.cs" />
+    <Compile Include="Modules\Repositories\DeleteRepository\DeleteRepositoryUrlTests.cs" />
+    <Compile Include="Modules\Repositories\GetRepository\GetRepositoryUrlTests.cs" />
+    <Compile Include="Modules\Restore\RestoreUrlTests.cs" />
+    <Compile Include="Modules\Snapshot\DeleteSnapshot\DeleteSnapshotUrlTests.cs" />
+    <Compile Include="Modules\Snapshot\GetSnapshot\GetSnapshotUrlTests.cs" />
+    <Compile Include="Modules\Snapshot\SnapshotStatus\SnapshotStatusUrlTests.cs" />
+    <Compile Include="Modules\Snapshot\Snapshot\SnapshotUrlTests.cs" />
     <Compile Include="Search\Count\CountUrlTests.cs" />
     <Compile Include="Search\Explain\ExplainUrlTests.cs" />
     <Compile Include="Search\FieldStats\FieldStatsUrlTests.cs" />
@@ -228,7 +236,6 @@
     <Folder Include="Cat\CatThreadPool\" />
     <Folder Include="Cluster\" />
     <Folder Include="Migration\" />
-    <Folder Include="Modules\" />
     <Folder Include="Plugins\Analysis\Phonetic\" />
     <Folder Include="QueryDsl\" />
     <Folder Include="Setup\" />

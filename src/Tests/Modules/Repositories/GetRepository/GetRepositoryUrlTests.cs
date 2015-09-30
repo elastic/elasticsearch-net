@@ -14,14 +14,20 @@ namespace Tests.Modules.GetRepository.GetRepository
 	{
 		[U] public async Task Urls()
 		{
-			var repository = "repos";
+			var repositories = "repos1, repos2";
 			var snapshot = "snap";
 
-			await GET($"/_snapshot/{repository}")
-				.Fluent(c => c.GetRepository(repository))
-				.Request(c => c.GetRepository(new GetRepositoryRequest(repository)))
-				.FluentAsync(c => c.GetRepositoryAsync(repository))
-				.RequestAsync(c => c.GetRepositoryAsync(new GetRepositoryRequest(repository)))
+			await GET($"/_snapshot/repos1,repos2")
+				.Fluent(c => c.GetRepository(s=>s.RepositoryName(repositories)))
+				.Request(c => c.GetRepository(new GetRepositoryRequest(repositories)))
+				.FluentAsync(c => c.GetRepositoryAsync(s=>s.RepositoryName(repositories)))
+				.RequestAsync(c => c.GetRepositoryAsync(new GetRepositoryRequest(repositories)))
+				;
+			await GET($"/_snapshot")
+				.Fluent(c => c.GetRepository())
+				.Request(c => c.GetRepository(new GetRepositoryRequest()))
+				.FluentAsync(c => c.GetRepositoryAsync())
+				.RequestAsync(c => c.GetRepositoryAsync(new GetRepositoryRequest()))
 				;
 		}
 	}
