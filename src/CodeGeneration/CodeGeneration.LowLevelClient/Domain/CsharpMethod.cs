@@ -185,29 +185,35 @@ namespace CodeGeneration.LowLevelClient.Domain
 					paramName = paramName.Substring(0, 1).ToLowerInvariant() + paramName.Substring(1);
 				else
 					paramName = paramName.ToLowerInvariant();
-				// public ClearScrollDescriptor ScrollId(ScrollIds scrollId) => Assign(a=>a.RouteValues.Required("scroll_id", scrollId));
-				var code = $"public {returnType} {p.InterfaceName}({p.ClrTypeName} {paramName}) => Assign(a=>a.RouteValues.Required(\"{p.Name}\", {paramName}));";
-				var xmlDoc = $"///<sumary>{p.Description}</summary>";
+				var code = $"public {returnType} {p.InterfaceName}({p.ClrTypeName} {paramName}) => Assign(a=>a.RouteValues.Optional(\"{p.Name}\", {paramName}));";
+				var xmlDoc = $"///<summary>{p.Description}</summary>";
 				setters.Add(new FluentRouteSetter { Code = code, XmlDoc = xmlDoc });
 				if ((paramName == "index" || paramName == "type"))
 				{
 					code = $"public {returnType} {p.InterfaceName}<TOther>() where TOther : class ";
-					code += $"=> Assign(a=>a.RouteValues.Required(\"{p.Name}\", ({p.ClrTypeName})typeof(TOther)));";
-					xmlDoc = $"///<sumary>{p.Description}</summary>";
+					code += $"=> Assign(a=>a.RouteValues.Optional(\"{p.Name}\", ({p.ClrTypeName})typeof(TOther)));";
+					xmlDoc = $"///<summary>{p.Description}</summary>";
 					setters.Add(new FluentRouteSetter { Code = code, XmlDoc = xmlDoc });
 				}
 				if (paramName == "index" && p.Type == "list")
 				{
 					code = $"public {returnType} AllIndices() => this.Index(Indices.All);";
-					xmlDoc = $"///<sumary>{p.Description}</summary>";
+					xmlDoc = $"///<summary>{p.Description}</summary>";
 					setters.Add(new FluentRouteSetter { Code = code, XmlDoc = xmlDoc });
 				}
 				if (paramName == "type" && p.Type == "list")
 				{
 					code = $"public {returnType} AllTypes() => this.Type(Types.All);";
-					xmlDoc = $"///<sumary>{p.Description}</summary>";
+					xmlDoc = $"///<summary>{p.Description}</summary>";
 					setters.Add(new FluentRouteSetter { Code = code, XmlDoc = xmlDoc });
 				}
+				if (paramName == "fields" && p.Type == "list")
+				{
+					code = $"public {returnType} Fields<T>(params Expression<Func<T, object>>[] fields) ";
+					code += "=> Assign(a => a.RouteValues.Optional(\"fields\", (FieldNames)fields));";
+					xmlDoc = $"///<summary>{p.Description}</summary>";
+					setters.Add(new FluentRouteSetter { Code = code, XmlDoc = xmlDoc });
+                }
 			}
 			return setters;
 		}
