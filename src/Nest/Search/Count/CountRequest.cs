@@ -10,29 +10,38 @@ namespace Nest
 		[JsonProperty("query")]
 		IQueryContainer Query { get; set; }
 	}
-	//TODO removed typed variant of request assert this is ok in new setup
+	public partial interface ICountRequest<T> : ICountRequest
+		where T :class
+	{
 
-	//TODO port this HttpMethod logic to property
-	//internal static class CountPathInfo
-	//{
-	//	public static void Update(RouteValues pathInfo, ICountRequest request)
-	//	{
-	//		var source = request.RequestParameters.GetQueryStringValue<string>("source");
-	//		pathInfo.HttpMethod = source.IsNullOrEmpty() 
-	//			&& (request.Query == null || request.Query.IsConditionless)
-	//			? HttpMethod.GET
-	//			: HttpMethod.POST;
-	//	}
-	//}
-	
+	}
+
 	public partial class CountRequest 
 	{
+		private CountRequestParameters QueryString => ((IRequest<CountRequestParameters>)this).RequestParameters;
+		protected override HttpMethod HttpMethod =>
+			this.QueryString.ContainsKey("_source") || this.QueryString.ContainsKey("q") ? HttpMethod.GET : HttpMethod.POST;
+
 		public IQueryContainer Query { get; set; }
+	}
+
+	public partial class CountRequest<T>
+	{
+		private CountRequestParameters QueryString => ((IRequest<CountRequestParameters>)this).RequestParameters;
+		protected override HttpMethod HttpMethod =>
+			this.QueryString.ContainsKey("_source") || this.QueryString.ContainsKey("q") ? HttpMethod.GET : HttpMethod.POST;
+
+		public IQueryContainer Query { get; set; }
+
 	}
 
 	[DescriptorFor("Count")]
 	public partial class CountDescriptor<T> where T : class
 	{
+		private CountRequestParameters QueryString => ((IRequest<CountRequestParameters>)this).RequestParameters;
+		protected override HttpMethod HttpMethod =>
+			this.QueryString.ContainsKey("_source") || this.QueryString.ContainsKey("q") ? HttpMethod.GET : HttpMethod.POST;
+		
 		IQueryContainer ICountRequest.Query { get; set; }
 
 		public CountDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector) =>

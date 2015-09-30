@@ -6,8 +6,6 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	//TODO if id == null do a POST otherwise a PUT
-
 	[JsonConverter(typeof(IndexRequestJsonConverter))]
 	public partial interface IIndexRequest : IRequest<IndexRequestParameters>
 	{
