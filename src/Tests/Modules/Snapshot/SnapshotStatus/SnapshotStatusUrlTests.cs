@@ -14,8 +14,6 @@ namespace Tests.Modules.Snapshot.SnapshotStatus
 	{
 		[U] public async Task Urls()
 		{
-			var project = new Project { Name = "NEST" };
-
 			await GET("/_snapshot/_status")
 				.Fluent(c => c.SnapshotStatus())
 				.Request(c => c.SnapshotStatus(new SnapshotStatusRequest()))

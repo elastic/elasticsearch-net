@@ -14,7 +14,6 @@ namespace Tests.Modules.DeleteSnapshot.DeleteSnapshot
 	{
 		[U] public async Task Urls()
 		{
-			var project = new Project { Name = "NEST" };
 			var repository = "repos";
 			var snapshot = "snap";
 

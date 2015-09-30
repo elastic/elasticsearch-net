@@ -14,7 +14,6 @@ namespace Tests.Modules.GetSnapshot.GetSnapshot
 	{
 		[U] public async Task Urls()
 		{
-			var project = new Project { Name = "NEST" };
 			var repository = "repos";
 			var snapshot = "snap";
 

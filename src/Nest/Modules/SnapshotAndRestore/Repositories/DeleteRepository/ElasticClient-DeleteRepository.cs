@@ -30,7 +30,7 @@ namespace Nest
 	{
 		/// <inheritdoc/>
 		public IAcknowledgedResponse DeleteRepository(Names repositories, Func<DeleteRepositoryDescriptor, IDeleteRepositoryRequest> selector = null) =>
-			this.DeleteRepository(selector?.Invoke(new DeleteRepositoryDescriptor(repositories)));
+			this.DeleteRepository(selector.InvokeOrDefault(new DeleteRepositoryDescriptor(repositories)));
 
 		/// <inheritdoc/>
 		public IAcknowledgedResponse DeleteRepository(IDeleteRepositoryRequest deleteRepositoryRequest) => 
@@ -41,7 +41,7 @@ namespace Nest
 
 		/// <inheritdoc/>
 		public Task<IAcknowledgedResponse> DeleteRepositoryAsync(Names repositories, Func<DeleteRepositoryDescriptor, IDeleteRepositoryRequest> selector = null) => 
-			this.DeleteRepositoryAsync(selector?.Invoke(new DeleteRepositoryDescriptor(repositories)));
+			this.DeleteRepositoryAsync(selector.InvokeOrDefault(new DeleteRepositoryDescriptor(repositories)));
 
 		/// <inheritdoc/>
 		public Task<IAcknowledgedResponse> DeleteRepositoryAsync(IDeleteRepositoryRequest deleteRepositoryRequest) => 
