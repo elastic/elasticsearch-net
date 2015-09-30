@@ -59,7 +59,7 @@ namespace Nest
 					if (nestSettings == null)
 						throw new Exception("Tried to pass field name on querysting but it could not be resolved because no nest settings are available");
 					var infer = new ElasticInferrer(nestSettings);
-					var indices = this.Item2.Indices.Select(i => infer.IndexName(i));
+					var indices = many.Indices.Select(i => infer.IndexName(i));
 					return string.Join(",", indices);
 				}
 			);
