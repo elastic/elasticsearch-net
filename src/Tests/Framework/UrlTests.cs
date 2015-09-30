@@ -23,6 +23,9 @@ namespace Tests.Framework
 	{
 		public static async Task<UrlTester> RequestAsync<TResponse>(this Task<UrlTester> tester, Func<IElasticClient, Task<TResponse>> call)
 			where TResponse : IResponse => await (await tester).WhenCallingAsync(call, "request async");
+
+		public static async Task<UrlTester> FluentAsync<TResponse>(this Task<UrlTester> tester, Func<IElasticClient, Task<TResponse>> call)
+			where TResponse : IResponse => await (await tester).WhenCallingAsync(call, "fluent async");
 	}
 
 	public class UrlTester : SerializationTestBase
@@ -36,7 +39,7 @@ namespace Tests.Framework
 		{
 			this.ExpectedHttpMethod = method;
 			this.ExpectedUrl = expectedUrl;
-			this._connectionSettingsModifier = settings;
+			this._connectionSettingsModifier = (settings ?? (c =>c.PrettyJson(false)));
 		}
 
 			
@@ -70,8 +73,8 @@ namespace Tests.Framework
 
 		private UrlTester Assert(string typeOfCall, IApiCallDetails callDetails)
 		{
-			var url = callDetails.Uri.AbsolutePath;
-			url.Should().Be(this.ExpectedUrl);
+			var url = callDetails.Uri.PathAndQuery;
+			url.Should().Be(this.ExpectedUrl, $"when calling the {typeOfCall} Api");
 			callDetails.HttpMethod.Should().Be(this.ExpectedHttpMethod, typeOfCall);
 			return this;
 		}

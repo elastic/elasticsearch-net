@@ -1123,7 +1123,13 @@ namespace Nest
 	{
 		Indices ICountRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types ICountRequest.Type => Self.RouteValues.Get<Types>("type");
-			/// <summary>/{index}/_count</summary>
+			/// <summary>/_count</summary>
+		
+///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
+		public CountRequest() {}
+		
+
+		/// <summary>/{index}/_count</summary>
 ///<param name="index">Optional, accepts null</param>
 		public CountRequest(Indices index) : base(r=>r.Optional("index", index)){}
 		
@@ -2184,7 +2190,13 @@ namespace Nest
 	{
 		Indices IGetMappingRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types IGetMappingRequest.Type => Self.RouteValues.Get<Types>("type");
-			/// <summary>/{index}/_mapping</summary>
+			/// <summary>/_mapping</summary>
+		
+///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
+		public GetMappingRequest() {}
+		
+
+		/// <summary>/{index}/_mapping</summary>
 ///<param name="index">Optional, accepts null</param>
 		public GetMappingRequest(Indices index) : base(r=>r.Optional("index", index)){}
 		
@@ -2882,7 +2894,13 @@ namespace Nest
 	{
 		Indices IMultiSearchRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types IMultiSearchRequest.Type => Self.RouteValues.Get<Types>("type");
-			/// <summary>/{index}/_msearch</summary>
+			/// <summary>/_msearch</summary>
+		
+///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
+		public MultiSearchRequest() {}
+		
+
+		/// <summary>/{index}/_msearch</summary>
 ///<param name="index">Optional, accepts null</param>
 		public MultiSearchRequest(Indices index) : base(r=>r.Optional("index", index)){}
 		
@@ -3821,11 +3839,85 @@ namespace Nest
 		Types Type { get; }
 	 } 
 	///<summary>Request parameters for SearchExists <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-exists.html</pre></summary>
+	public partial class SearchExistsRequest<T>  : RequestBase<SearchExistsRequestParameters>, ISearchExistsRequest
+	{
+		Indices ISearchExistsRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Types ISearchExistsRequest.Type => Self.RouteValues.Get<Types>("type");
+			/// <summary>/_search/exists</summary>
+		
+///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
+		public SearchExistsRequest() : this(typeof(T), typeof(T)) {}
+		
+
+		/// <summary>/{index}/_search/exists</summary>
+///<param name="index">Optional, accepts null</param>
+		public SearchExistsRequest(Indices index) : base(r=>r.Optional("index", index)){}
+		
+
+		/// <summary>/{index}/{type}/_search/exists</summary>
+///<param name="index">Optional, accepts null</param>		
+///<param name="type">Optional, accepts null</param>
+		public SearchExistsRequest(Indices index, Types type) : base(r=>r.Optional("index", index).Optional("type", type)){}
+		
+
+			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
+		
+		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
+		
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
+		
+		///<summary>Include only documents with a specific `_score` value in the result</summary>
+		public double MinScore { get { return Q<double>("min_score"); } set { Q("min_score", value); } }
+		
+		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
+		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
+		
+		///<summary>Specific routing value</summary>
+		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
+		
+		///<summary>Query in the Lucene query string syntax</summary>
+		public string Q { get { return Q<string>("q"); } set { Q("q", value); } }
+		
+		///<summary>The analyzer to use for the query string</summary>
+		public string Analyzer { get { return Q<string>("analyzer"); } set { Q("analyzer", value); } }
+		
+		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
+		public bool AnalyzeWildcard { get { return Q<bool>("analyze_wildcard"); } set { Q("analyze_wildcard", value); } }
+		
+		///<summary>The default operator for query string query (AND or OR)</summary>
+		public DefaultOperator DefaultOperator { get { return Q<DefaultOperator>("default_operator"); } set { Q("default_operator", value); } }
+		
+		///<summary>The field to use as default where no field prefix is given in the query string</summary>
+		public string Df { get { return Q<string>("df"); } set { Q("df", value); } }
+		
+		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
+		public bool Lenient { get { return Q<bool>("lenient"); } set { Q("lenient", value); } }
+		
+		///<summary>Specify whether query terms should be lowercased</summary>
+		public bool LowercaseExpandedTerms { get { return Q<bool>("lowercase_expanded_terms"); } set { Q("lowercase_expanded_terms", value); } }
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	///<summary>Request parameters for SearchExists <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-exists.html</pre></summary>
 	public partial class SearchExistsRequest  : RequestBase<SearchExistsRequestParameters>, ISearchExistsRequest
 	{
 		Indices ISearchExistsRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types ISearchExistsRequest.Type => Self.RouteValues.Get<Types>("type");
-			/// <summary>/{index}/_search/exists</summary>
+			/// <summary>/_search/exists</summary>
+		
+///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
+		public SearchExistsRequest() {}
+		
+
+		/// <summary>/{index}/_search/exists</summary>
 ///<param name="index">Optional, accepts null</param>
 		public SearchExistsRequest(Indices index) : base(r=>r.Optional("index", index)){}
 		
@@ -3894,7 +3986,13 @@ namespace Nest
 	{
 		Indices ISearchRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types ISearchRequest.Type => Self.RouteValues.Get<Types>("type");
-			/// <summary>/{index}/_search</summary>
+			/// <summary>/_search</summary>
+		
+///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
+		public SearchRequest() : this(typeof(T), typeof(T)) {}
+		
+
+		/// <summary>/{index}/_search</summary>
 ///<param name="index">Optional, accepts null</param>
 		public SearchRequest(Indices index) : base(r=>r.Optional("index", index)){}
 		
@@ -3971,7 +4069,13 @@ namespace Nest
 	{
 		Indices ISearchRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types ISearchRequest.Type => Self.RouteValues.Get<Types>("type");
-			/// <summary>/{index}/_search</summary>
+			/// <summary>/_search</summary>
+		
+///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
+		public SearchRequest() {}
+		
+
+		/// <summary>/{index}/_search</summary>
 ///<param name="index">Optional, accepts null</param>
 		public SearchRequest(Indices index) : base(r=>r.Optional("index", index)){}
 		
@@ -4051,11 +4155,64 @@ namespace Nest
 		Types Type { get; }
 	 } 
 	///<summary>Request parameters for SearchShards <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html</pre></summary>
+	public partial class SearchShardsRequest<T>  : RequestBase<SearchShardsRequestParameters>, ISearchShardsRequest
+	{
+		Indices ISearchShardsRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Types ISearchShardsRequest.Type => Self.RouteValues.Get<Types>("type");
+			/// <summary>/{index}/{type}/_search_shards</summary>
+		
+///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
+		public SearchShardsRequest() : this(typeof(T), typeof(T)) {}
+		
+
+		/// <summary>/{index}/_search_shards</summary>
+///<param name="index">Optional, accepts null</param>
+		public SearchShardsRequest(Indices index) : base(r=>r.Optional("index", index)){}
+		
+
+		/// <summary>/{index}/{type}/_search_shards</summary>
+///<param name="index">Optional, accepts null</param>		
+///<param name="type">Optional, accepts null</param>
+		public SearchShardsRequest(Indices index, Types type) : base(r=>r.Optional("index", index).Optional("type", type)){}
+		
+
+			///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
+		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
+		
+		///<summary>Specific routing value</summary>
+		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
+		
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
+		
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
+		
+		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
+		
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	///<summary>Request parameters for SearchShards <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-shards.html</pre></summary>
 	public partial class SearchShardsRequest  : RequestBase<SearchShardsRequestParameters>, ISearchShardsRequest
 	{
 		Indices ISearchShardsRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types ISearchShardsRequest.Type => Self.RouteValues.Get<Types>("type");
-			/// <summary>/{index}/_search_shards</summary>
+			/// <summary>/{index}/{type}/_search_shards</summary>
+		
+///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
+		public SearchShardsRequest() {}
+		
+
+		/// <summary>/{index}/_search_shards</summary>
 ///<param name="index">Optional, accepts null</param>
 		public SearchShardsRequest(Indices index) : base(r=>r.Optional("index", index)){}
 		
@@ -4103,7 +4260,13 @@ namespace Nest
 	{
 		Indices ISearchTemplateRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types ISearchTemplateRequest.Type => Self.RouteValues.Get<Types>("type");
-			/// <summary>/{index}/_search/template</summary>
+			/// <summary>/_search/template</summary>
+		
+///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
+		public SearchTemplateRequest() {}
+		
+
+		/// <summary>/{index}/_search/template</summary>
 ///<param name="index">Optional, accepts null</param>
 		public SearchTemplateRequest(Indices index) : base(r=>r.Optional("index", index)){}
 		
@@ -4781,7 +4944,13 @@ namespace Nest
 	{
 		Indices IValidateQueryRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types IValidateQueryRequest.Type => Self.RouteValues.Get<Types>("type");
-			/// <summary>/{index}/_validate/query</summary>
+			/// <summary>/_validate/query</summary>
+		
+///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
+		public ValidateQueryRequest() : this(typeof(T), typeof(T)) {}
+		
+
+		/// <summary>/{index}/_validate/query</summary>
 ///<param name="index">Optional, accepts null</param>
 		public ValidateQueryRequest(Indices index) : base(r=>r.Optional("index", index)){}
 		
@@ -4843,7 +5012,13 @@ namespace Nest
 	{
 		Indices IValidateQueryRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types IValidateQueryRequest.Type => Self.RouteValues.Get<Types>("type");
-			/// <summary>/{index}/_validate/query</summary>
+			/// <summary>/_validate/query</summary>
+		
+///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
+		public ValidateQueryRequest() {}
+		
+
+		/// <summary>/{index}/_validate/query</summary>
 ///<param name="index">Optional, accepts null</param>
 		public ValidateQueryRequest(Indices index) : base(r=>r.Optional("index", index)){}
 		

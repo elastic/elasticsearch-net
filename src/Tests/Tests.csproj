@@ -153,6 +153,12 @@
     <Compile Include="Indices\IndexManagement\CreateIndex\CreateIndexApiTest.cs" />
     <Compile Include="Indices\IndexManagement\PutMapping\PutMappingApiTest.cs" />
     <Compile Include="Mapping\Types\String.cs" />
+    <Compile Include="Search\SearchExists\SearchExistsUrlTests.cs" />
+    <Compile Include="Search\SearchShards\SearchShardsUrlTests.cs" />
+    <Compile Include="Search\SearchTemplate\DeleteSearchTemplate\DeleteSearchTemplateUrlTests.cs" />
+    <Compile Include="Search\SearchTemplate\GetSearchTemplate\GetSearchTemplateUrlTests.cs" />
+    <Compile Include="Search\SearchTemplate\PutSearchTemplate\PutSearchTemplateUrlTests.cs" />
+    <Compile Include="Search\Search\SearchUrlTests.cs" />
     <Compile Include="Search\Request\Fields.cs" />
     <Compile Include="Search\Request\FielddataFields.cs" />
     <Compile Include="Search\Request\Highlighting.cs" />
@@ -176,6 +182,7 @@
     <Compile Include="Framework\Integration\ReadOnlyCluster.cs" />
     <Compile Include="Framework\SerializationTestBase.cs" />
     <Compile Include="Framework\TestClient.cs" />
+    <Compile Include="Search\Validate\ValidateUrlTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="index.asciidoc" />
@@ -213,7 +220,6 @@
     <Folder Include="Modules\" />
     <Folder Include="Plugins\Analysis\Phonetic\" />
     <Folder Include="QueryDsl\" />
-    <Folder Include="Search\Suggesters\" />
     <Folder Include="Setup\" />
   </ItemGroup>
   <ItemGroup>

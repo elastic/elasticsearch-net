@@ -8,23 +8,6 @@ using Elasticsearch.Net.Serialization;
 
 namespace Nest
 {
-	public class ScrollIds : IUrlParameter
-	{
-		public string GetString(IConnectionConfigurationValues settings)
-		{
-			throw new NotImplementedException();
-		}
-	}
-
-	public class ScrollId : IUrlParameter
-	{
-		public string GetString(IConnectionConfigurationValues settings)
-		{
-			throw new NotImplementedException();
-		}
-		public static implicit operator ScrollId(string id) => new ScrollId();
-	}
-
 	public class NodeIds : IUrlParameter
 	{
 		public string GetString(IConnectionConfigurationValues settings)

@@ -73,7 +73,11 @@ namespace CodeGeneration.LowLevelClient.Domain
 
 				//Routes that take {indices}/{types} and both are optional
 				//we rather not generate a parameterless constructor and force folks to call Indices.All
-				if (!cp.Any() && IndicesAndTypes) continue;
+				if (!cp.Any() && IndicesAndTypes)
+				{
+					ParameterlessIndicesTypesConstructor(ctors, m);
+					continue;
+				}
 
 				if (cp.Any())
 					routing = "r=>r." + string.Join(".", cp.Select(p => $"{(p.Value.Required ? "Required" : "Optional")}(\"{p.Key}\", {p.Key})"));
@@ -91,10 +95,21 @@ namespace CodeGeneration.LowLevelClient.Domain
 				doc += "\r\n\t\t\r\n" + $"///<param name=\"document\"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>";
 				var documentRoute = "r=>r.Required(\"index\", document.Self.Index).Required(\"type\", document.Self.Type).Required(\"id\", document.Self.Id)";
 				var documentFromPath = $"partial void DocumentFromPath({this.RequestTypeGeneric.Replace("<", "").Replace(">", "")} document);";
-				var c = new Constructor { AdditionalCode = documentFromPath, Generated = $"public {m}(DocumentPath{this.RequestTypeGeneric} document) : base({documentRoute}){{ this.DocumentFromPath(document.Document); }}", Description = doc,  };
+				var c = new Constructor { AdditionalCode = documentFromPath, Generated = $"public {m}(DocumentPath{this.RequestTypeGeneric} document) : base({documentRoute}){{ this.DocumentFromPath(document.Document); }}", Description = doc, };
 				ctors.Add(c);
 			}
 			return ctors.DistinctBy(c => c.Generated);
+		}
+
+		private void ParameterlessIndicesTypesConstructor(List<Constructor> ctors, string m)
+		{
+			var generic = this.RequestTypeGeneric?.Replace("<", "").Replace(">", "");
+			var doc = $@"/// <summary>{this.Url.Path}</summary>";
+			doc += "\r\n\t\t\r\n" + $"///<param name=\"document\"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>";
+			var c = new Constructor { Generated = $"public {m}() {{}}", Description = doc, };
+			if (!string.IsNullOrEmpty(generic))
+				c = new Constructor { Generated = $"public {m}() : this(typeof({generic}), typeof({generic})) {{}}", Description = doc, };
+			ctors.Add(c);
 		}
 
 		public IEnumerable<Constructor> DescriptorConstructors()
@@ -112,9 +127,11 @@ namespace CodeGeneration.LowLevelClient.Domain
 				var par = string.Join(", ", cp.Select(p => $"{p.Value.ClrTypeName} {p.Key}"));
 				var routing = string.Empty;
 				//Routes that take {indices}/{types} and both are optional
-				//We rather not generate a parameterless constructor but leave it to our 'usercode' to determine
-				//the best default constructor
-				if (!cp.Any() && IndicesAndTypes) continue;
+				if (!cp.Any() && IndicesAndTypes)
+				{
+					AddParameterlessIndicesTypesConstructor(ctors, m);
+					continue;
+				}
 				if (cp.Any())
 					routing = "r=>r." + string.Join(".", cp.Select(p => $"Required(\"{p.Key}\", {p.Key})"));
 				var doc = $@"/// <summary>{url}</summary>";
@@ -136,6 +153,17 @@ namespace CodeGeneration.LowLevelClient.Domain
 			}
 
 			return ctors.DistinctBy(c => c.Generated);
+		}
+
+		private void AddParameterlessIndicesTypesConstructor(List<Constructor> ctors, string m)
+		{
+			var generic = this.DescriptorTypeGeneric?.Replace("<", "").Replace(">", "");
+			var doc = $@"/// <summary>{this.Url.Path}</summary>";
+			var documentRoute = $"r=> r.Required(\"index\", (Indices)typeof({generic})).Required(\"type\", (Types)typeof({generic}))";
+			var c = new Constructor { Generated = $"public {m}() : base({documentRoute}){{}}", Description = doc };
+			if (string.IsNullOrEmpty(generic))
+				c = new Constructor { Generated = $"public {m}() {{}}", Description = doc };
+			ctors.Add(c);
 		}
 
 		public IEnumerable<FluentRouteSetter> GetFluentRouteSetters()
@@ -164,14 +192,26 @@ namespace CodeGeneration.LowLevelClient.Domain
 				{
 					code = $"public {returnType} {p.InterfaceName}<TOther>() where TOther : class ";
 					code += $"=> Assign(a=>a.RouteValues.Required(\"{p.Name}\", ({p.ClrTypeName})typeof(TOther)));";
-                    xmlDoc = $"///<sumary>{p.Description}</summary>";
+					xmlDoc = $"///<sumary>{p.Description}</summary>";
+					setters.Add(new FluentRouteSetter { Code = code, XmlDoc = xmlDoc });
+				}
+				if (paramName == "index" && p.Type == "list")
+				{
+					code = $"public {returnType} AllIndices() => this.Index(Indices.All);";
+					xmlDoc = $"///<sumary>{p.Description}</summary>";
+					setters.Add(new FluentRouteSetter { Code = code, XmlDoc = xmlDoc });
+				}
+				if (paramName == "type" && p.Type == "list")
+				{
+					code = $"public {returnType} AllTypes() => this.Type(Types.All);";
+					xmlDoc = $"///<sumary>{p.Description}</summary>";
 					setters.Add(new FluentRouteSetter { Code = code, XmlDoc = xmlDoc });
 				}
 			}
 			return setters;
 		}
 
-		public bool IndicesAndTypes => AllParts.Count() == 2 && AllParts.All(p => p.Type == "list") && AllParts.All(p => new[] { "index", "type"}.Contains(p.Name));
+		public bool IndicesAndTypes => AllParts.Count() == 2 && AllParts.All(p => p.Type == "list") && AllParts.All(p => new[] { "index", "type" }.Contains(p.Name));
 		public bool IsDocumentPath => AllParts.Count() == 3 && AllParts.All(p => p.Type != "list") && AllParts.All(p => new[] { "index", "type", "id" }.Contains(p.Name));
 		public IEnumerable<ApiUrlPart> AllParts => (this.Url?.Parts?.Values ?? Enumerable.Empty<ApiUrlPart>()).Where(p => !string.IsNullOrWhiteSpace(p.Name));
 	}
