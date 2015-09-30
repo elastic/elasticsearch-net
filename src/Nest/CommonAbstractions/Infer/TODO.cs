@@ -45,17 +45,14 @@ namespace Nest
 	public class FieldNames : IUrlParameter
 	{
 		private readonly string _name;
-		public Name(string name)
+		public FieldNames(string name)
 		{
 			this._name = name;
 		}
 
 		public string GetString(IConnectionConfigurationValues settings) => this._name;
-		public static implicit operator Name(string name) => new Name(name);
-	}
-
 		public static implicit operator FieldNames(string[] fields)
-	{
+		{
 			throw new NotImplementedException();
 		}
 	}

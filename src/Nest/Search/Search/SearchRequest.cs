@@ -88,7 +88,6 @@ namespace Nest
 		bool? IgnoreUnavalable { get; }
 	}
 	public partial interface ISearchRequest<T> : ISearchRequest { }
-	//TODO Force get if source is specified on query string
 
 	public partial class SearchRequest 
 	{
@@ -96,7 +95,7 @@ namespace Nest
 		Type ICovariantSearchRequest.ClrType => this._clrType;
 		Types ICovariantSearchRequest.ElasticsearchTypes => ((ISearchRequest)this).Type;
 		protected override HttpMethod HttpMethod =>
-			this.QueryString.ContainsKey("_source") || this.QueryString.ContainsKey("q") ? HttpMethod.GET : HttpMethod.POST;
+			this.QueryString?.ContainsKey("_source") == true || this.QueryString?.ContainsKey("q")  == true? HttpMethod.GET : HttpMethod.POST;
 
 		public string Timeout { get; set; }
 		public int? From { get; set; }
@@ -141,7 +140,7 @@ namespace Nest
 		Type ICovariantSearchRequest.ClrType => this._clrType;
 		Types ICovariantSearchRequest.ElasticsearchTypes => ((ISearchRequest)this).Type;
 		protected override HttpMethod HttpMethod =>
-			this.QueryString.ContainsKey("_source") || this.QueryString.ContainsKey("q") ? HttpMethod.GET : HttpMethod.POST;
+			this.QueryString?.ContainsKey("_source") == true || this.QueryString?.ContainsKey("q")  == true? HttpMethod.GET : HttpMethod.POST;
 		
 		public string Timeout { get; set; }
 		public int? From { get; set; }
@@ -189,7 +188,7 @@ namespace Nest
 		Types ICovariantSearchRequest.ElasticsearchTypes => ((ISearchRequest)this).Type;
 		Func<dynamic, Hit<dynamic>, Type> ICovariantSearchRequest.TypeSelector { get; set; }
 		protected override HttpMethod HttpMethod =>
-			this.QueryString.ContainsKey("_source") || this.QueryString.ContainsKey("q") ? HttpMethod.GET : HttpMethod.POST;
+			this.QueryString?.ContainsKey("_source") == true || this.QueryString?.ContainsKey("q")  == true? HttpMethod.GET : HttpMethod.POST;
 
 		private ISearchRequest Self => this;
 		public SearchRequestParameters QueryString => ((IRequest<SearchRequestParameters>)this).RequestParameters;

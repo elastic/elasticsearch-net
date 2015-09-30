@@ -307,8 +307,6 @@
     <Compile Include="Analysis\Tokenizers\WhitespaceTokenizer.cs" />
     <Compile Include="CommonOptions\Hit\ShardsFailureReason.cs" />
     <Compile Include="Search\CovariantSearch.cs" />
-    <Compile Include="Search\Scroll\Scroll\ElasticClient-Scroll.cs" />
-    <Compile Include="Search\Scroll\Scroll\ScrollRequest.cs" />
     <Compile Include="Search\Search\Hits\InnerHitsMetaData.cs" />
     <Compile Include="Search\Search\Hits\InnerHitsResult.cs" />
     <Compile Include="Indices\AliasManagement\Alias.cs" />
