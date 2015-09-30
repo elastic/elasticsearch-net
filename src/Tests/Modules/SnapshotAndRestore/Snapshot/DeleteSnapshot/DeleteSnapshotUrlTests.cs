@@ -8,7 +8,7 @@ using Tests.Framework;
 using Tests.Framework.MockData;
 using static Tests.Framework.UrlTester;
 
-namespace Tests.Modules.DeleteSnapshot.DeleteSnapshot
+namespace Tests.Modules.SnapshotAndRestore.Snapshot.DeleteSnapshot
 {
 	public class DeleteSnapshotUrlTests
 	{

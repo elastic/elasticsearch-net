@@ -8,7 +8,7 @@ using Tests.Framework;
 using Tests.Framework.MockData;
 using static Tests.Framework.UrlTester;
 
-namespace Tests.Modules.DeleteRepository.DeleteRepository
+namespace Tests.Modules.SnapshotAndRestore.Repositories.DeleteRepository
 {
 	public class DeleteRepositoryUrlTests
 	{

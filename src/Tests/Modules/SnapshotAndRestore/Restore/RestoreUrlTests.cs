@@ -8,7 +8,7 @@ using Tests.Framework;
 using Tests.Framework.MockData;
 using static Tests.Framework.UrlTester;
 
-namespace Tests.Modules.Restore.Restore
+namespace Tests.Modules.SnapshotAndRestore.Restore.Restore
 {
 	public class RestoreUrlTests
 	{
