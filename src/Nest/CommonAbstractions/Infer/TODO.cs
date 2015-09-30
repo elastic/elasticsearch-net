@@ -32,8 +32,6 @@ namespace Nest
 		}
 	}
 
-
-
 	public class PropertyNames : IUrlParameter
 	{
 		public string GetString(IConnectionConfigurationValues settings)

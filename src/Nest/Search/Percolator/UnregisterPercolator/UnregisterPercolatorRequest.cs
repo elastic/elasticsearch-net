@@ -5,8 +5,6 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	//This does not represent an actual dedicated API endpoint in elasticsearch 
-
 	public interface IUnregisterPercolatorRequest : IRequest<DeleteRequestParameters> { }
 
 	//TODO port complex route values logic

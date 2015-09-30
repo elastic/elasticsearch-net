@@ -170,9 +170,10 @@ namespace CodeGeneration.LowLevelClient.Domain
 		{
 			var setters = new List<FluentRouteSetter>();
 			if (IsPartless) return setters;
+			var alwaysGenerate = new[] { "index", "type" };
 			var parts = this.Url.Parts
 				.Where(p => !ApiUrl.BlackListRouteValues.Contains(p.Key))
-				.Where(p => !p.Value.Required)
+				.Where(p => !p.Value.Required || alwaysGenerate.Contains(p.Key))
 				.Where(p => !string.IsNullOrEmpty(p.Value.Name))
 				.ToList();
 			var returnType = this.DescriptorType + this.DescriptorTypeGeneric;

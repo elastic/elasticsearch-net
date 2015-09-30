@@ -6,8 +6,6 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	//TODO if id == null do a POST otherwise a PUT
-
 	[JsonConverter(typeof(IndexRequestJsonConverter))]
 	public partial interface IIndexRequest : IRequest<IndexRequestParameters>
 	{
@@ -39,9 +37,5 @@ namespace Nest
 		object IIndexRequest.UntypedDocument => ((IIndexRequest<T>)this).Document;
 
 		T IIndexRequest<T>.Document { get; set; }
-
-		public IndexDescriptor<T> Index(IndexName index) => Assign(a => a.RouteValues.Required("index", index));
-		public IndexDescriptor<T> Type(TypeName type) => Assign(a => a.RouteValues.Required("type", type));
-
 	}
 }

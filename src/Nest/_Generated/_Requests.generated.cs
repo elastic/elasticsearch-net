@@ -1107,6 +1107,74 @@ namespace Nest
 		Types Type { get; }
 	 } 
 	///<summary>Request parameters for Count <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-count.html</pre></summary>
+	public partial class CountRequest<T>  : RequestBase<CountRequestParameters>, ICountRequest
+	{
+		Indices ICountRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Types ICountRequest.Type => Self.RouteValues.Get<Types>("type");
+			/// <summary>/_count</summary>
+		
+///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
+		public CountRequest() : this(typeof(T), typeof(T)) {}
+		
+
+		/// <summary>/{index}/_count</summary>
+///<param name="index">Optional, accepts null</param>
+		public CountRequest(Indices index) : base(r=>r.Optional("index", index)){}
+		
+
+		/// <summary>/{index}/{type}/_count</summary>
+///<param name="index">Optional, accepts null</param>		
+///<param name="type">Optional, accepts null</param>
+		public CountRequest(Indices index, Types type) : base(r=>r.Optional("index", index).Optional("type", type)){}
+		
+
+			///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
+		
+		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
+		
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
+		
+		///<summary>Include only documents with a specific `_score` value in the result</summary>
+		public double MinScore { get { return Q<double>("min_score"); } set { Q("min_score", value); } }
+		
+		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
+		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
+		
+		///<summary>Specific routing value</summary>
+		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
+		
+		///<summary>Query in the Lucene query string syntax</summary>
+		public string Q { get { return Q<string>("q"); } set { Q("q", value); } }
+		
+		///<summary>The analyzer to use for the query string</summary>
+		public string Analyzer { get { return Q<string>("analyzer"); } set { Q("analyzer", value); } }
+		
+		///<summary>Specify whether wildcard and prefix queries should be analyzed (default: false)</summary>
+		public bool AnalyzeWildcard { get { return Q<bool>("analyze_wildcard"); } set { Q("analyze_wildcard", value); } }
+		
+		///<summary>The default operator for query string query (AND or OR)</summary>
+		public DefaultOperator DefaultOperator { get { return Q<DefaultOperator>("default_operator"); } set { Q("default_operator", value); } }
+		
+		///<summary>The field to use as default where no field prefix is given in the query string</summary>
+		public string Df { get { return Q<string>("df"); } set { Q("df", value); } }
+		
+		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
+		public bool Lenient { get { return Q<bool>("lenient"); } set { Q("lenient", value); } }
+		
+		///<summary>Specify whether query terms should be lowercased</summary>
+		public bool LowercaseExpandedTerms { get { return Q<bool>("lowercase_expanded_terms"); } set { Q("lowercase_expanded_terms", value); } }
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	///<summary>Request parameters for Count <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-count.html</pre></summary>
 	public partial class CountRequest  : RequestBase<CountRequestParameters>, ICountRequest
 	{
 		Indices ICountRequest.Index => Self.RouteValues.Get<Indices>("index");
@@ -1762,7 +1830,7 @@ namespace Nest
 		TypeName Type { get; }
 	 } 
 	///<summary>Request parameters for Explain <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-explain.html</pre></summary>
-	public partial class ExplainRequest  : RequestBase<ExplainRequestParameters>, IExplainRequest
+	public partial class ExplainRequest<TDocument>  : RequestBase<ExplainRequestParameters>, IExplainRequest
 	{
 		Id IExplainRequest.Id => Self.RouteValues.Get<Id>("id");
 		IndexName IExplainRequest.Index => Self.RouteValues.Get<IndexName>("index");
@@ -1773,6 +1841,12 @@ namespace Nest
 ///<param name="id">this parameter is required</param>
 		public ExplainRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id)){}
 		
+
+		/// <summary>/{index}/{type}/{id}/_explain</summary>
+		
+///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
+		public ExplainRequest(DocumentPath<TDocument> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
+		partial void DocumentFromPath(TDocument document);
 
 			///<summary>Specify whether wildcards and prefix queries in the query string query should be analyzed (default: false)</summary>
 		public bool AnalyzeWildcard { get { return Q<bool>("analyze_wildcard"); } set { Q("analyze_wildcard", value); } }

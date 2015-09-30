@@ -26,7 +26,7 @@ namespace Nest
 	{
 		/// <inheritdoc/>
 		public IFieldStatsResponse FieldStats(Indices indices, Func<FieldStatsDescriptor, IFieldStatsRequest> selector = null) =>
-			this.FieldStats(selector.InvokeOrDefault(new FieldStatsDescriptor()));
+			this.FieldStats(selector.InvokeOrDefault(new FieldStatsDescriptor().Index(indices)));
 
 		/// <inheritdoc/>
 		public IFieldStatsResponse FieldStats(IFieldStatsRequest request) => 
@@ -36,7 +36,7 @@ namespace Nest
 
 		/// <inheritdoc/>
 		public Task<IFieldStatsResponse> FieldStatsAsync(Indices indices, Func<FieldStatsDescriptor, IFieldStatsRequest> selector = null) => 
-			this.FieldStatsAsync(selector.InvokeOrDefault(new FieldStatsDescriptor()));
+			this.FieldStatsAsync(selector.InvokeOrDefault(new FieldStatsDescriptor().Index(indices)));
 
 		/// <inheritdoc/>
 		public Task<IFieldStatsResponse> FieldStatsAsync(IFieldStatsRequest request) 

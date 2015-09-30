@@ -86,18 +86,16 @@ namespace Nest
 		SearchType? SearchType { get;  }
 
 		bool? IgnoreUnavalable { get; }
-		
-		SearchRequestParameters QueryString { get; set; }
 	}
 	public partial interface ISearchRequest<T> : ISearchRequest { }
-	//TODO Force get if source is specified on query string
-	//TODO removed typed request variant
 
 	public partial class SearchRequest 
 	{
 		private Type _clrType { get; set; }
 		Type ICovariantSearchRequest.ClrType => this._clrType;
 		Types ICovariantSearchRequest.ElasticsearchTypes => ((ISearchRequest)this).Type;
+		protected override HttpMethod HttpMethod =>
+			this.QueryString?.ContainsKey("_source") == true || this.QueryString?.ContainsKey("q")  == true? HttpMethod.GET : HttpMethod.POST;
 
 		public string Timeout { get; set; }
 		public int? From { get; set; }
@@ -141,6 +139,8 @@ namespace Nest
 		private Type _clrType { get; set; }
 		Type ICovariantSearchRequest.ClrType => this._clrType;
 		Types ICovariantSearchRequest.ElasticsearchTypes => ((ISearchRequest)this).Type;
+		protected override HttpMethod HttpMethod =>
+			this.QueryString?.ContainsKey("_source") == true || this.QueryString?.ContainsKey("q")  == true? HttpMethod.GET : HttpMethod.POST;
 		
 		public string Timeout { get; set; }
 		public int? From { get; set; }
@@ -176,7 +176,7 @@ namespace Nest
 
 		public Func<dynamic, Hit<dynamic>, Type> TypeSelector { get; set; }
 
-		public SearchRequestParameters QueryString { get; set; }
+		public SearchRequestParameters QueryString => ((IRequest<SearchRequestParameters>)this).RequestParameters;
 	}
 
 	/// <summary>
@@ -187,25 +187,22 @@ namespace Nest
 		Type ICovariantSearchRequest.ClrType => typeof(T);
 		Types ICovariantSearchRequest.ElasticsearchTypes => ((ISearchRequest)this).Type;
 		Func<dynamic, Hit<dynamic>, Type> ICovariantSearchRequest.TypeSelector { get; set; }
+		protected override HttpMethod HttpMethod =>
+			this.QueryString?.ContainsKey("_source") == true || this.QueryString?.ContainsKey("q")  == true? HttpMethod.GET : HttpMethod.POST;
 
 		private ISearchRequest Self => this;
+		public SearchRequestParameters QueryString => ((IRequest<SearchRequestParameters>)this).RequestParameters;
 
 		private SearchDescriptor<T> _assign(Action<ISearchRequest> assigner) => Fluent.Assign(this, assigner);
 
-		SearchType? ISearchRequest.SearchType => this.Self.RequestParameters.GetQueryStringValue<SearchType?>("search_type");
+		SearchType? ISearchRequest.SearchType => Self.RequestParameters.GetQueryStringValue<SearchType?>("search_type");
 
-		SearchRequestParameters ISearchRequest.QueryString
-		{
-			get { return this.Self.RequestParameters;  }
-			set { this.Self.RequestParameters = value;  }
-		}
+		string ISearchRequest.Preference => Self.RequestParameters.GetQueryStringValue<string>("preference");
 
-		string ISearchRequest.Preference => this.Self.RequestParameters.GetQueryStringValue<string>("preference");
+		string ISearchRequest.Routing => Self.RequestParameters.GetQueryStringValue<string[]>("routing") == null
+			? null : string.Join(",", Self.RequestParameters.GetQueryStringValue<string[]>("routing"));
 
-		string ISearchRequest.Routing => this.Self.RequestParameters.GetQueryStringValue<string[]>("routing") == null
-			? null : string.Join(",", this.Self.RequestParameters.GetQueryStringValue<string[]>("routing"));
-
-		bool? ISearchRequest.IgnoreUnavalable => this.Self.RequestParameters.GetQueryStringValue<bool?>("ignore_unavailable");
+		bool? ISearchRequest.IgnoreUnavalable => Self.RequestParameters.GetQueryStringValue<bool?>("ignore_unavailable");
 
 		/// <summary>
 		/// Whether conditionless queries are allowed or not
@@ -245,8 +242,6 @@ namespace Nest
 		AggregationDictionary ISearchRequest.Aggregations { get; set; }
 
 		IDictionary<string, IInnerHitsContainer> ISearchRequest.InnerHits { get; set; }
-
-
 
 		//TODO probably remove this when we normalize sorting
 		private void AddSort(ISort sort)
@@ -687,22 +682,6 @@ namespace Nest
 			Self.Query = query;
 			return this;
 
-		}
-
-		/// <summary>
-		/// Shortcut to .Query(q=>q.QueryString(qs=>qs.Query("string"))
-		/// Does a match_all if the userInput string is null or empty;
-		/// </summary>
-		public SearchDescriptor<T> QueryString(string userInput)
-		{
-			var q = new QueryContainerDescriptor<T>();
-			QueryContainer bq;
-			if (userInput.IsNullOrEmpty())
-				bq = q.MatchAll();
-			else
-				bq = q.QueryString(qs => qs.Query(userInput));
-			Self.Query = bq;
-			return this;
 		}
 
 		/// <summary>

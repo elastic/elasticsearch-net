@@ -20,6 +20,9 @@ namespace Nest
 	public partial class PercolateRequest<TDocument> : IPercolateRequest<TDocument>
 		where TDocument : class
 	{
+		public PercolateRequest() : this(typeof(TDocument), typeof(TDocument)) { }
+		public PercolateRequest(Id id) : this(typeof(TDocument), typeof(TDocument), id) { }
+
 		public IHighlightRequest Highlight { get; set; }
 		public QueryContainer Query { get; set; }
 		public QueryContainer Filter { get; set; }

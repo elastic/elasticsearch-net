@@ -41,18 +41,19 @@ namespace Nest
 </text>
     }
 	</text>foreach (KeyValuePair<string, ApiQueryParameters> kv in method.Url.Params)
-        {
+	{
             if (method.Url.Parts != null && method.Url.Parts.ContainsKey(kv.Key))
             {
 				continue;
             }
-            var t = @kv.Value.CsharpType(kv.Key);
-            var tSuffix = (t == "bool") ? " = true" : "";
-            var m = kv.Key.ToPascalCase();
-            var mm = (m != "Type" && m != "Index" && m != "Script") ? m : m + "QueryString";
-            var typed = !method.DescriptorTypeGeneric.IsNullOrEmpty();
-            var mml = mm.ToLowerInvariant();
-            var fieldMethod = (mml.Contains("fields") || mml.Contains("sourceinclude") || mml.Contains("sourceexclude") ) && t.Contains("string");
+		var t = @kv.Value.CsharpType(kv.Key);
+		var tSuffix = (t == "bool") ? " = true" : "";
+		var m = kv.Key.ToPascalCase();
+		var mm = (m != "Type" && m != "Index" && m != "Script") ? m : m + "QueryString";
+		var typed = !method.DescriptorTypeGeneric.IsNullOrEmpty();
+		var g = typed ? method.DescriptorTypeGeneric.Replace("<", "").Replace(">", "") : "T";
+		var mml = mm.ToLowerInvariant();
+		var fieldMethod = (mml.Contains("fields") || mml.Contains("sourceinclude") || mml.Contains("sourceexclude") ) && t.Contains("string");
 		<text>
 		///<summary>@kv.Value.Description</summary>
 		@if (!string.IsNullOrWhiteSpace(kv.Value.DeprecatedInFavorOf))
@@ -64,13 +65,13 @@ namespace Nest
 		{
 			<text>
 		///<summary>@kv.Value.Description</summary>
-		public @Raw(type) @mm@(Raw(typed ? "" : "<T>"))(params @Raw("Expression<Func<T, object>>[]") fields) @Raw(typed ? "" : "where T : class") =>
+		public @Raw(type) @mm@(Raw(typed ? "" : "<T>"))(params @Raw("Expression<Func<" + g + ", object>>[]") fields) @Raw(typed ? "" : "where "+ g + " : class") =>
 			AssignParam(p=>p._@(mm)(fields));</text>
 		}
 		else if (mm.ToLowerInvariant().Contains("field") && t.Contains("string"))
 		{<text>
 		///<summary>@kv.Value.Description</summary>
-		public @Raw(type) @mm@(Raw(typed ? "" : "<T>"))(@Raw("Expression<Func<T, object>>") field) @Raw(typed ? "" : "where T : class") =>
+		public @Raw(type) @mm@(Raw(typed ? "" : "<T>"))(@Raw("Expression<Func<"+ g +", object>>") field) @Raw(typed ? "" : "where " + g + " : class") =>
 			AssignParam(p=>p._@(mm)(field));</text>
 		}
 	}

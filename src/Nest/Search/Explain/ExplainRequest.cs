@@ -9,8 +9,7 @@ namespace Nest
 		[JsonProperty("query")]
 		IQueryContainer Query { get; set; }
 	}
-
-	//TODO Removed typed variant assert this is ok using new setup
+	public partial interface IExplainRequest<TDocument> : IExplainRequest where TDocument : class { }
 
 	//TODO port this HttpMethod logic to property
 	//internal static class ExplainPathInfo
@@ -25,17 +24,19 @@ namespace Nest
 	//	}
 	//}
 
-	public partial class ExplainRequest 
+	public partial class ExplainRequest<TDocument> : IExplainRequest<TDocument>
+		where TDocument : class
 	{
 		public IQueryContainer Query { get; set; }
 	}
 
 	[DescriptorFor("Explain")]
-	public partial class ExplainDescriptor<T> where T : class
+	public partial class ExplainDescriptor<TDocument> : IExplainRequest<TDocument>
+		where TDocument : class
 	{
 		IQueryContainer IExplainRequest.Query { get; set; }
 
-		public ExplainDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector) => 
-			Assign(a => a.Query = querySelector?.Invoke(new QueryContainerDescriptor<T>()));
+		public ExplainDescriptor<TDocument> Query(Func<QueryContainerDescriptor<TDocument>, QueryContainer> querySelector) => 
+			Assign(a => a.Query = querySelector?.Invoke(new QueryContainerDescriptor<TDocument>()));
 	}
 }
