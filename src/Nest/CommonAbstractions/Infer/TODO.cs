@@ -8,14 +8,6 @@ using Elasticsearch.Net.Serialization;
 
 namespace Nest
 {
-	public class NodeIds : IUrlParameter
-	{
-		public string GetString(IConnectionConfigurationValues settings)
-		{
-			throw new NotImplementedException();
-		}
-	}
-
 	public class Metrics : IUrlParameter
 	{
 		public string GetString(IConnectionConfigurationValues settings)
@@ -40,20 +32,17 @@ namespace Nest
 		}
 	}
 
-	public class Names : IUrlParameter
+
+
+	public class PropertyNames : IUrlParameter
 	{
 		public string GetString(IConnectionConfigurationValues settings)
 		{
 			throw new NotImplementedException();
 		}
-
-		public static implicit operator Names(Name name)
-		{
-			return new Names();
 		}
-	}
 
-	public class Name : IUrlParameter
+	public class FieldNames : IUrlParameter
 	{
 		private readonly string _name;
 		public Name(string name)
@@ -65,13 +54,10 @@ namespace Nest
 		public static implicit operator Name(string name) => new Name(name);
 	}
 
-	public class PropertyNames : IUrlParameter
+		public static implicit operator FieldNames(string[] fields)
 	{
-		public string GetString(IConnectionConfigurationValues settings)
-		{
 			throw new NotImplementedException();
 		}
 	}
-	
 
 }

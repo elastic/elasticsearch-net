@@ -42,6 +42,10 @@ namespace Nest
     }
 	</text>foreach (KeyValuePair<string, ApiQueryParameters> kv in method.Url.Params)
 	{
+            if (method.Url.Parts != null && method.Url.Parts.ContainsKey(kv.Key))
+            {
+				continue;
+            }
 		var t = @kv.Value.CsharpType(kv.Key);
 		var tSuffix = (t == "bool") ? " = true" : "";
 		var m = kv.Key.ToPascalCase();

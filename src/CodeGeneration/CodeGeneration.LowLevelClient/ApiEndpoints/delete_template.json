@@ -9,7 +9,7 @@
         "id": {
           "type" : "string",
           "description" : "Template ID",
-          "required" : true
+          "required": true
         }
       },
       "params" : {

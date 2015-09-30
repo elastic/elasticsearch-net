@@ -99,6 +99,9 @@
     <Compile Include="CommonAbstractions\Infer\Indices\IndicesJsonConverter.cs" />
     <Compile Include="CommonAbstractions\Infer\Indices\Indices.cs" />
     <Compile Include="CommonAbstractions\Infer\FieldName\FieldNameExtensions.cs" />
+    <Compile Include="CommonAbstractions\Infer\Name\Name.cs" />
+    <Compile Include="CommonAbstractions\Infer\Name\Names.cs" />
+    <Compile Include="CommonAbstractions\Infer\NodeId\NodeIds.cs" />
     <Compile Include="CommonAbstractions\Infer\ScrollId\ScrollId.cs" />
     <Compile Include="CommonAbstractions\Infer\ScrollId\ScrollIds.cs" />
     <Compile Include="CommonAbstractions\Infer\TODO.cs" />
@@ -304,6 +307,8 @@
     <Compile Include="Analysis\Tokenizers\WhitespaceTokenizer.cs" />
     <Compile Include="CommonOptions\Hit\ShardsFailureReason.cs" />
     <Compile Include="Search\CovariantSearch.cs" />
+    <Compile Include="Search\Scroll\Scroll\ElasticClient-Scroll.cs" />
+    <Compile Include="Search\Scroll\Scroll\ScrollRequest.cs" />
     <Compile Include="Search\Search\Hits\InnerHitsMetaData.cs" />
     <Compile Include="Search\Search\Hits\InnerHitsResult.cs" />
     <Compile Include="Indices\AliasManagement\Alias.cs" />
@@ -1041,7 +1046,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Aggregations\Pipeline\" />
-    <Folder Include="CommonAbstractions\Infer\NodeId\" />
     <Folder Include="CommonAbstractions\SerializationBehavior\NewFolder1\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

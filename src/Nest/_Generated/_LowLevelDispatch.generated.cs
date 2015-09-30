@@ -129,10 +129,11 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case GET:
+					if (AllSet(p.RouteValues.Fields)) return _lowLevel.CatFielddata<T>(p.RouteValues.Fields,u => p.RequestParameters);
 					return _lowLevel.CatFielddata<T>(u => p.RequestParameters);
 
 			}
-			throw InvalidDispatch("CatFielddata", p, new [] { GET }, "/_cat/fielddata");
+			throw InvalidDispatch("CatFielddata", p, new [] { GET }, "/_cat/fielddata", "/_cat/fielddata/{fields}");
 		}
 		
 		internal Task<ElasticsearchResponse<T>> CatFielddataDispatchAsync<T>(IRequest<CatFielddataRequestParameters> p ) where T : class
@@ -140,10 +141,11 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case GET:
+					if (AllSet(p.RouteValues.Fields)) return _lowLevel.CatFielddataAsync<T>(p.RouteValues.Fields,u => p.RequestParameters);
 					return _lowLevel.CatFielddataAsync<T>(u => p.RequestParameters);
 
 			}
-			throw InvalidDispatch("CatFielddata", p, new [] { GET }, "/_cat/fielddata");
+			throw InvalidDispatch("CatFielddata", p, new [] { GET }, "/_cat/fielddata", "/_cat/fielddata/{fields}");
 		}
 		
 		internal ElasticsearchResponse<T> CatHealthDispatch<T>(IRequest<CatHealthRequestParameters> p ) where T : class
