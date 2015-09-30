@@ -152,6 +152,9 @@
     <Compile Include="IndexModules\Similarity\SimilaritySettings.cs" />
     <Compile Include="Indices\IndexManagement\CreateIndex\CreateIndexApiTest.cs" />
     <Compile Include="Indices\IndexManagement\PutMapping\PutMappingApiTest.cs" />
+    <Compile Include="Indices\Warmers\DeleteWarmer\DeleteWarmerUrlTests.cs" />
+    <Compile Include="Indices\Warmers\GetWarmer\GetWarmerUrlTests.cs" />
+    <Compile Include="Indices\Warmers\PutWarmer\PutWarmerUrlTests.cs" />
     <Compile Include="Mapping\Types\String.cs" />
     <Compile Include="Modules\Scripting\DeleteScript\DeleteScriptUrlTests.cs" />
     <Compile Include="Modules\Scripting\GetScript\GetScriptUrlTests.cs" />
@@ -239,6 +242,7 @@
     <Folder Include="Cat\CatShards\" />
     <Folder Include="Cat\CatThreadPool\" />
     <Folder Include="Cluster\" />
+    <Folder Include="Indices\AliasManagement\" />
     <Folder Include="Migration\" />
     <Folder Include="Plugins\Analysis\Phonetic\" />
     <Folder Include="QueryDsl\" />
