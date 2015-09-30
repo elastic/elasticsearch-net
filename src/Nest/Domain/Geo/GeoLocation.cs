@@ -25,7 +25,7 @@ namespace Nest
 		/// <summary>
 		/// Longitude
 		/// </summary>
-		public double Longtitude { get { return _longitude; } }
+		public double Longitude { get { return _longitude; } }
 		private readonly double _longitude;
 
 		/// <summary>
