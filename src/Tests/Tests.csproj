@@ -85,6 +85,16 @@
     <Compile Include="Cat\CatAllocation\CatAllocationUrlTest.cs" />
     <Compile Include="Cat\CatCount\CatCountUrlTest.cs" />
     <Compile Include="Cat\CatFielddata\CatFielddataUrlTest.cs" />
+    <Compile Include="Cat\CatHealth\CatHealthUrlTest.cs" />
+    <Compile Include="Cat\CatIndices\CatIndicesUrlTest.cs" />
+    <Compile Include="Cat\CatMaster\CatMasterUrlTest.cs" />
+    <Compile Include="Cat\CatNodes\CatNodesUrlTest.cs" />
+    <Compile Include="Cat\CatPendingTasks\CatPendingTasksUrlTest.cs" />
+    <Compile Include="Cat\CatPlugins\CatPluginsUrlTest.cs" />
+    <Compile Include="Cat\CatRecovery\CatRecoveryUrlTest.cs" />
+    <Compile Include="Cat\CatSegments\CatSegmentsUrlTest.cs" />
+    <Compile Include="Cat\CatShards\CatShardsUrlTest.cs" />
+    <Compile Include="Cat\CatThreadPool\CatThreadPoolUrlTest.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\BuildingBlocks\Transports.doc.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\MaxRetries\RespectsMaxRetry.doc.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\RoundRobin\VolatileUpdates.doc.cs" />
@@ -231,16 +241,6 @@
   <ItemGroup>
     <Folder Include="Aggregations\Metric\" />
     <Folder Include="Aggregations\Pipeline\" />
-    <Folder Include="Cat\CatHealth\" />
-    <Folder Include="Cat\CatIndices\" />
-    <Folder Include="Cat\CatMaster\" />
-    <Folder Include="Cat\CatNodes\" />
-    <Folder Include="Cat\CatPendingTasks\" />
-    <Folder Include="Cat\CatPlugins\" />
-    <Folder Include="Cat\CatRecovery\" />
-    <Folder Include="Cat\CatSegments\" />
-    <Folder Include="Cat\CatShards\" />
-    <Folder Include="Cat\CatThreadPool\" />
     <Folder Include="Cluster\" />
     <Folder Include="Indices\AliasManagement\" />
     <Folder Include="Migration\" />
