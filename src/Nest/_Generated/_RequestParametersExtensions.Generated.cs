@@ -20,10 +20,6 @@ namespace Nest
 		internal static BulkRequestParameters _Fields<T>(this BulkRequestParameters qs, IEnumerable<Expression<Func<T, object>>>  fields) where T : class =>
 			qs.AddQueryString("fields", fields.Select(e=>(FieldName)e));
 		
-		///<summary>A comma-separated list of fields to return in the output</summary>
-		internal static CatFielddataRequestParameters _Fields<T>(this CatFielddataRequestParameters qs, IEnumerable<Expression<Func<T, object>>>  fields) where T : class =>
-			qs.AddQueryString("fields", fields.Select(e=>(FieldName)e));
-		
 		///<summary>A comma-separated list of fields to return in the response</summary>
 		internal static ExplainRequestParameters _Fields<T>(this ExplainRequestParameters qs, IEnumerable<Expression<Func<T, object>>>  fields) where T : class =>
 			qs.AddQueryString("fields", fields.Select(e=>(FieldName)e));

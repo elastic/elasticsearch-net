@@ -96,6 +96,18 @@ namespace Nest
 			throw new NotImplementedException();
 		}
 	}
-	
+
+	public class FieldNames : IUrlParameter
+	{
+		public string GetString(IConnectionConfigurationValues settings)
+		{
+			throw new NotImplementedException();
+		}
+
+		public static implicit operator FieldNames(string[] fields)
+		{
+			throw new NotImplementedException();
+		}
+	}
 
 }

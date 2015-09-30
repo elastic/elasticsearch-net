@@ -41,14 +41,18 @@ namespace Nest
 </text>
     }
 	</text>foreach (KeyValuePair<string, ApiQueryParameters> kv in method.Url.Params)
-	{
-		var t = @kv.Value.CsharpType(kv.Key);
-		var tSuffix = (t == "bool") ? " = true" : "";
-		var m = kv.Key.ToPascalCase();
-		var mm = (m != "Type" && m != "Index" && m != "Script") ? m : m + "QueryString";
-		var typed = !method.DescriptorTypeGeneric.IsNullOrEmpty();
-		var mml = mm.ToLowerInvariant();
-		var fieldMethod = (mml.Contains("fields") || mml.Contains("sourceinclude") || mml.Contains("sourceexclude") ) && t.Contains("string");
+        {
+            if (method.Url.Parts != null && method.Url.Parts.ContainsKey(kv.Key))
+            {
+				continue;
+            }
+            var t = @kv.Value.CsharpType(kv.Key);
+            var tSuffix = (t == "bool") ? " = true" : "";
+            var m = kv.Key.ToPascalCase();
+            var mm = (m != "Type" && m != "Index" && m != "Script") ? m : m + "QueryString";
+            var typed = !method.DescriptorTypeGeneric.IsNullOrEmpty();
+            var mml = mm.ToLowerInvariant();
+            var fieldMethod = (mml.Contains("fields") || mml.Contains("sourceinclude") || mml.Contains("sourceexclude") ) && t.Contains("string");
 		<text>
 		///<summary>@kv.Value.Description</summary>
 		@if (!string.IsNullOrWhiteSpace(kv.Value.DeprecatedInFavorOf))

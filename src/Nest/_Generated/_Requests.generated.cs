@@ -178,7 +178,7 @@ namespace Nest
 		public string TypeQueryString { get { return Q<string>("type"); } set { Q("type", value); } }
 		
 		///<summary>Default comma-separated list of fields to return in the response for updates</summary>
-		public IList<FieldName> Fields { get { return Q<IList<FieldName>>("fields"); } set { Q("fields", value); } }
+		public FieldNames Fields { get { return Q<FieldNames>("fields"); } set { Q("fields", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
@@ -317,12 +317,19 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ICatFielddataRequest : IRequest<CatFielddataRequestParameters> 
 	{
+		FieldNames Fields { get; }
 	 } 
 	///<summary>Request parameters for CatFielddata <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-fielddata.html</pre></summary>
 	public partial class CatFielddataRequest  : RequestBase<CatFielddataRequestParameters>, ICatFielddataRequest
 	{
+		FieldNames ICatFielddataRequest.Fields => Self.RouteValues.Get<FieldNames>("fields");
 			/// <summary>/_cat/fielddata</summary>
 		public CatFielddataRequest() : base(){}
+		
+
+		/// <summary>/_cat/fielddata/{fields}</summary>
+///<param name="fields">Optional, accepts null</param>
+		public CatFielddataRequest(FieldNames fields) : base(r=>r.Optional("fields", fields)){}
 		
 
 			///<summary>The unit in which to display byte values</summary>
@@ -344,7 +351,7 @@ namespace Nest
 		public bool V { get { return Q<bool>("v"); } set { Q("v", value); } }
 		
 		///<summary>A comma-separated list of fields to return in the output</summary>
-		public IList<FieldName> Fields { get { return Q<IList<FieldName>>("fields"); } set { Q("fields", value); } }
+		public FieldNames Fields { get { return Q<FieldNames>("fields"); } set { Q("fields", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
@@ -778,7 +785,7 @@ namespace Nest
 		public bool FieldData { get { return Q<bool>("field_data"); } set { Q("field_data", value); } }
 		
 		///<summary>A comma-separated list of fields to clear when using the `field_data` parameter (default: all)</summary>
-		public IList<FieldName> Fields { get { return Q<IList<FieldName>>("fields"); } set { Q("fields", value); } }
+		public FieldNames Fields { get { return Q<FieldNames>("fields"); } set { Q("fields", value); } }
 		
 		///<summary>Clear query caches</summary>
 		public bool Query { get { return Q<bool>("query"); } set { Q("query", value); } }
@@ -1786,7 +1793,7 @@ namespace Nest
 		public string Df { get { return Q<string>("df"); } set { Q("df", value); } }
 		
 		///<summary>A comma-separated list of fields to return in the response</summary>
-		public IList<FieldName> Fields { get { return Q<IList<FieldName>>("fields"); } set { Q("fields", value); } }
+		public FieldNames Fields { get { return Q<FieldNames>("fields"); } set { Q("fields", value); } }
 		
 		///<summary>Specify whether format-based query failures (such as providing text to a numeric field) should be ignored</summary>
 		public bool Lenient { get { return Q<bool>("lenient"); } set { Q("lenient", value); } }
@@ -1810,10 +1817,10 @@ namespace Nest
 		public  string[] SourceEnabled { get { return Q< string[]>("_source"); } set { Q("_source", value); } }
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public IList<FieldName> SourceExclude { get { return Q<IList<FieldName>>("_source_exclude"); } set { Q("_source_exclude", value); } }
+		public FieldNames SourceExclude { get { return Q<FieldNames>("_source_exclude"); } set { Q("_source_exclude", value); } }
 		
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public IList<FieldName> SourceInclude { get { return Q<IList<FieldName>>("_source_include"); } set { Q("_source_include", value); } }
+		public FieldNames SourceInclude { get { return Q<FieldNames>("_source_include"); } set { Q("_source_include", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
@@ -1842,7 +1849,7 @@ namespace Nest
 		
 
 			///<summary>A comma-separated list of fields for to get field statistics for (min value, max value, and more)</summary>
-		public IList<FieldName> Fields { get { return Q<IList<FieldName>>("fields"); } set { Q("fields", value); } }
+		public FieldNames Fields { get { return Q<FieldNames>("fields"); } set { Q("fields", value); } }
 		
 		///<summary>Defines if field stats should be returned on a per index level or on a cluster wide level</summary>
 		public Level Level { get { return Q<Level>("level"); } set { Q("level", value); } }
@@ -2272,7 +2279,7 @@ namespace Nest
 		partial void DocumentFromPath(T document);
 
 			///<summary>A comma-separated list of fields to return in the response</summary>
-		public IList<FieldName> Fields { get { return Q<IList<FieldName>>("fields"); } set { Q("fields", value); } }
+		public FieldNames Fields { get { return Q<FieldNames>("fields"); } set { Q("fields", value); } }
 		
 		///<summary>The ID of the parent document</summary>
 		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
@@ -2293,10 +2300,10 @@ namespace Nest
 		public  string[] SourceEnabled { get { return Q< string[]>("_source"); } set { Q("_source", value); } }
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public IList<FieldName> SourceExclude { get { return Q<IList<FieldName>>("_source_exclude"); } set { Q("_source_exclude", value); } }
+		public FieldNames SourceExclude { get { return Q<FieldNames>("_source_exclude"); } set { Q("_source_exclude", value); } }
 		
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public IList<FieldName> SourceInclude { get { return Q<IList<FieldName>>("_source_include"); } set { Q("_source_include", value); } }
+		public FieldNames SourceInclude { get { return Q<FieldNames>("_source_include"); } set { Q("_source_include", value); } }
 		
 		///<summary>Explicit version number for concurrency control</summary>
 		public long Version { get { return Q<long>("version"); } set { Q("version", value); } }
@@ -2325,7 +2332,7 @@ namespace Nest
 		
 
 			///<summary>A comma-separated list of fields to return in the response</summary>
-		public IList<FieldName> Fields { get { return Q<IList<FieldName>>("fields"); } set { Q("fields", value); } }
+		public FieldNames Fields { get { return Q<FieldNames>("fields"); } set { Q("fields", value); } }
 		
 		///<summary>The ID of the parent document</summary>
 		public string Parent { get { return Q<string>("parent"); } set { Q("parent", value); } }
@@ -2346,10 +2353,10 @@ namespace Nest
 		public  string[] SourceEnabled { get { return Q< string[]>("_source"); } set { Q("_source", value); } }
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public IList<FieldName> SourceExclude { get { return Q<IList<FieldName>>("_source_exclude"); } set { Q("_source_exclude", value); } }
+		public FieldNames SourceExclude { get { return Q<FieldNames>("_source_exclude"); } set { Q("_source_exclude", value); } }
 		
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public IList<FieldName> SourceInclude { get { return Q<IList<FieldName>>("_source_include"); } set { Q("_source_include", value); } }
+		public FieldNames SourceInclude { get { return Q<FieldNames>("_source_include"); } set { Q("_source_include", value); } }
 		
 		///<summary>Explicit version number for concurrency control</summary>
 		public long Version { get { return Q<long>("version"); } set { Q("version", value); } }
@@ -2726,13 +2733,13 @@ namespace Nest
 		
 
 			///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
-		public IList<FieldName> CompletionFields { get { return Q<IList<FieldName>>("completion_fields"); } set { Q("completion_fields", value); } }
+		public FieldNames CompletionFields { get { return Q<FieldNames>("completion_fields"); } set { Q("completion_fields", value); } }
 		
 		///<summary>A comma-separated list of fields for `fielddata` index metric (supports wildcards)</summary>
-		public IList<FieldName> FielddataFields { get { return Q<IList<FieldName>>("fielddata_fields"); } set { Q("fielddata_fields", value); } }
+		public FieldNames FielddataFields { get { return Q<FieldNames>("fielddata_fields"); } set { Q("fielddata_fields", value); } }
 		
 		///<summary>A comma-separated list of fields for `fielddata` and `completion` index metric (supports wildcards)</summary>
-		public IList<FieldName> Fields { get { return Q<IList<FieldName>>("fields"); } set { Q("fields", value); } }
+		public FieldNames Fields { get { return Q<FieldNames>("fields"); } set { Q("fields", value); } }
 		
 		///<summary>A comma-separated list of search groups for `search` index metric</summary>
 		public  string[] Groups { get { return Q< string[]>("groups"); } set { Q("groups", value); } }
@@ -2793,7 +2800,7 @@ namespace Nest
 		
 
 			///<summary>A comma-separated list of fields to return in the response</summary>
-		public IList<FieldName> Fields { get { return Q<IList<FieldName>>("fields"); } set { Q("fields", value); } }
+		public FieldNames Fields { get { return Q<FieldNames>("fields"); } set { Q("fields", value); } }
 		
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
 		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
@@ -2808,10 +2815,10 @@ namespace Nest
 		public  string[] SourceEnabled { get { return Q< string[]>("_source"); } set { Q("_source", value); } }
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public IList<FieldName> SourceExclude { get { return Q<IList<FieldName>>("_source_exclude"); } set { Q("_source_exclude", value); } }
+		public FieldNames SourceExclude { get { return Q<FieldNames>("_source_exclude"); } set { Q("_source_exclude", value); } }
 		
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public IList<FieldName> SourceInclude { get { return Q<IList<FieldName>>("_source_include"); } set { Q("_source_include", value); } }
+		public FieldNames SourceInclude { get { return Q<FieldNames>("_source_include"); } set { Q("_source_include", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
@@ -2930,7 +2937,7 @@ namespace Nest
 		public bool FieldStatistics { get { return Q<bool>("field_statistics"); } set { Q("field_statistics", value); } }
 		
 		///<summary>A comma-separated list of fields to return. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public IList<FieldName> Fields { get { return Q<IList<FieldName>>("fields"); } set { Q("fields", value); } }
+		public FieldNames Fields { get { return Q<FieldNames>("fields"); } set { Q("fields", value); } }
 		
 		///<summary>Specifies if term offsets should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
 		public bool Offsets { get { return Q<bool>("offsets"); } set { Q("offsets", value); } }
@@ -3100,13 +3107,13 @@ namespace Nest
 		
 
 			///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
-		public IList<FieldName> CompletionFields { get { return Q<IList<FieldName>>("completion_fields"); } set { Q("completion_fields", value); } }
+		public FieldNames CompletionFields { get { return Q<FieldNames>("completion_fields"); } set { Q("completion_fields", value); } }
 		
 		///<summary>A comma-separated list of fields for `fielddata` index metric (supports wildcards)</summary>
-		public IList<FieldName> FielddataFields { get { return Q<IList<FieldName>>("fielddata_fields"); } set { Q("fielddata_fields", value); } }
+		public FieldNames FielddataFields { get { return Q<FieldNames>("fielddata_fields"); } set { Q("fielddata_fields", value); } }
 		
 		///<summary>A comma-separated list of fields for `fielddata` and `completion` index metric (supports wildcards)</summary>
-		public IList<FieldName> Fields { get { return Q<IList<FieldName>>("fields"); } set { Q("fields", value); } }
+		public FieldNames Fields { get { return Q<FieldNames>("fields"); } set { Q("fields", value); } }
 		
 		///<summary>A comma-separated list of search groups for `search` index metric</summary>
 		public bool Groups { get { return Q<bool>("groups"); } set { Q("groups", value); } }
@@ -4290,10 +4297,10 @@ namespace Nest
 		public  string[] SourceEnabled { get { return Q< string[]>("_source"); } set { Q("_source", value); } }
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public IList<FieldName> SourceExclude { get { return Q<IList<FieldName>>("_source_exclude"); } set { Q("_source_exclude", value); } }
+		public FieldNames SourceExclude { get { return Q<FieldNames>("_source_exclude"); } set { Q("_source_exclude", value); } }
 		
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public IList<FieldName> SourceInclude { get { return Q<IList<FieldName>>("_source_include"); } set { Q("_source_include", value); } }
+		public FieldNames SourceInclude { get { return Q<FieldNames>("_source_include"); } set { Q("_source_include", value); } }
 		
 		///<summary>Explicit version number for concurrency control</summary>
 		public long Version { get { return Q<long>("version"); } set { Q("version", value); } }
@@ -4340,10 +4347,10 @@ namespace Nest
 		public  string[] SourceEnabled { get { return Q< string[]>("_source"); } set { Q("_source", value); } }
 		
 		///<summary>A list of fields to exclude from the returned _source field</summary>
-		public IList<FieldName> SourceExclude { get { return Q<IList<FieldName>>("_source_exclude"); } set { Q("_source_exclude", value); } }
+		public FieldNames SourceExclude { get { return Q<FieldNames>("_source_exclude"); } set { Q("_source_exclude", value); } }
 		
 		///<summary>A list of fields to extract and return from the _source field</summary>
-		public IList<FieldName> SourceInclude { get { return Q<IList<FieldName>>("_source_include"); } set { Q("_source_include", value); } }
+		public FieldNames SourceInclude { get { return Q<FieldNames>("_source_include"); } set { Q("_source_include", value); } }
 		
 		///<summary>Explicit version number for concurrency control</summary>
 		public long Version { get { return Q<long>("version"); } set { Q("version", value); } }
@@ -4499,7 +4506,7 @@ namespace Nest
 		public bool Dfs { get { return Q<bool>("dfs"); } set { Q("dfs", value); } }
 		
 		///<summary>A comma-separated list of fields to return.</summary>
-		public IList<FieldName> Fields { get { return Q<IList<FieldName>>("fields"); } set { Q("fields", value); } }
+		public FieldNames Fields { get { return Q<FieldNames>("fields"); } set { Q("fields", value); } }
 		
 		///<summary>Specifies if term offsets should be returned.</summary>
 		public bool Offsets { get { return Q<bool>("offsets"); } set { Q("offsets", value); } }

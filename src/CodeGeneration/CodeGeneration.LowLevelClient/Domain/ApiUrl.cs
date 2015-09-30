@@ -7,7 +7,7 @@ namespace CodeGeneration.LowLevelClient.Domain
 	{
 		//these are aliases we much rather pass along inside the querystring
 		//allowing these will cause too many overloads being generated which helps noone
-		public static readonly string[] BlackListRouteValues = { "{fields}", "{search_groups}", "{indexing_types}", "{body}"};
+		public static readonly string[] BlackListRouteValues = { "{search_groups}", "{indexing_types}", "{body}"};
 		private IEnumerable<string> _paths;
 
 		public string Path { get; set; }

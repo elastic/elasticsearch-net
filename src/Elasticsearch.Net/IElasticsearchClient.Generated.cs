@@ -366,6 +366,32 @@ namespace Elasticsearch.Net
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> CatFielddataAsync<T>(Func<CatFielddataRequestParameters, CatFielddataRequestParameters> requestParameters = null) where T : class;
 		
+		///<summary>Represents a GET on /_cat/fielddata/{fields}
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to /para>
+		///<para> - byte[], no deserialization, but the response stream will be closed</para>
+		///<para> - Stream, no deserialization, response stream is your responsibility</para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed</para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-fielddata.html</para>	
+		///</summary>
+		///<param name="fields">A comma-separated list of fields to return the fielddata size</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		ElasticsearchResponse<T> CatFielddata<T>(string fields, Func<CatFielddataRequestParameters, CatFielddataRequestParameters> requestParameters = null) where T : class;
+		
+		///<summary>Represents a GET on /_cat/fielddata/{fields}
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to /para>
+		///<para> - byte[], no deserialization, but the response stream will be closed</para>
+		///<para> - Stream, no deserialization, response stream is your responsibility</para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed</para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth
+		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-fielddata.html</para>	
+		///</summary>
+		///<param name="fields">A comma-separated list of fields to return the fielddata size</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		Task<ElasticsearchResponse<T>> CatFielddataAsync<T>(string fields, Func<CatFielddataRequestParameters, CatFielddataRequestParameters> requestParameters = null) where T : class;
+		
 		///<summary>Represents a GET on /_cat/health
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to /para>

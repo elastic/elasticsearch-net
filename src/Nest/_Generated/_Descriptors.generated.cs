@@ -46,9 +46,6 @@ namespace Nest
 		///<summary>Explicit operation timeout</summary>
 		public BulkDescriptor Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
 
-		///<summary>Default document type for items which don&#39;t provide one</summary>
-		public BulkDescriptor TypeQueryString(string type) => AssignParam(p=>p.Type(type));
-
 		///<summary>Default comma-separated list of fields to return in the response for updates</summary>
 		public BulkDescriptor Fields(params string[] fields) => AssignParam(p=>p.Fields(fields));
 			
@@ -178,11 +175,15 @@ namespace Nest
 	///<summary>descriptor for CatFielddata <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-fielddata.html</pre></summary>
 	public partial class CatFielddataDescriptor  : RequestDescriptorBase<CatFielddataDescriptor,CatFielddataRequestParameters, ICatFielddataRequest>, ICatFielddataRequest
 	{ 
+		FieldNames ICatFielddataRequest.Fields => Self.RouteValues.Get<FieldNames>("fields");
 			/// <summary>/_cat/fielddata</summary>
 		public CatFielddataDescriptor() : base(){}
 		
 
-		
+			///<sumary>A comma-separated list of fields to return the fielddata size</summary>
+		public CatFielddataDescriptor Fields(FieldNames fields) => Assign(a=>a.RouteValues.Required("fields", fields));
+
+	
 		///<summary>The unit in which to display byte values</summary>
 		public CatFielddataDescriptor Bytes(Bytes bytes) => AssignParam(p=>p.Bytes(bytes));
 
@@ -200,13 +201,6 @@ namespace Nest
 
 		///<summary>Verbose mode. Display column headers</summary>
 		public CatFielddataDescriptor V(bool v = true) => AssignParam(p=>p.V(v));
-
-		///<summary>A comma-separated list of fields to return in the output</summary>
-		public CatFielddataDescriptor Fields(params string[] fields) => AssignParam(p=>p.Fields(fields));
-			
-		///<summary>A comma-separated list of fields to return in the output</summary>
-		public CatFielddataDescriptor Fields<T>(params Expression<Func<T, object>>[] fields) where T : class =>
-			AssignParam(p=>p._Fields(fields));
 
 		///<summary>The URL-encoded request definition</summary>
 		public CatFielddataDescriptor Source(string source) => AssignParam(p=>p.Source(source));
@@ -1529,9 +1523,6 @@ namespace Nest
 		///<summary>A comma-separated list of filters to use for the analysis</summary>
 		public AnalyzeDescriptor Filters(params string[] filters) => AssignParam(p=>p.Filters(filters));
 
-		///<summary>The name of the index to scope the operation</summary>
-		public AnalyzeDescriptor IndexQueryString(string index) => AssignParam(p=>p.Index(index));
-
 		///<summary>With `true`, specify that a local shard should be used if available, with `false`, use a random shard (default: true)</summary>
 		public AnalyzeDescriptor PreferLocal(bool prefer_local = true) => AssignParam(p=>p.PreferLocal(prefer_local));
 
@@ -1588,9 +1579,6 @@ namespace Nest
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
 		public ClearCacheDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => AssignParam(p=>p.ExpandWildcards(expand_wildcards));
-
-		///<summary>A comma-separated list of index name to limit the operation</summary>
-		public ClearCacheDescriptor IndexQueryString(params string[] index) => AssignParam(p=>p.Index(index));
 
 		///<summary>Clear the recycler cache</summary>
 		public ClearCacheDescriptor Recycler(bool recycler = true) => AssignParam(p=>p.Recycler(recycler));
