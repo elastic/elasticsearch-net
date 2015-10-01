@@ -14,13 +14,13 @@ namespace Nest
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-segments.html
 		/// </summary>
 		/// <param name="segmentsSelector">A descriptor that describes the parameters for the segments operation</param>
-		ISegmentsResponse Segments(Func<SegmentsDescriptor, ISegmentsRequest> segmentsSelector = null);
+		ISegmentsResponse Segments(Indices indices, Func<SegmentsDescriptor, ISegmentsRequest> segmentsSelector = null);
 
 		/// <inheritdoc/>
 		ISegmentsResponse Segments(ISegmentsRequest segmentsRequest);
 
 		/// <inheritdoc/>
-		Task<ISegmentsResponse> SegmentsAsync(Func<SegmentsDescriptor, ISegmentsRequest> segmentsSelector = null);
+		Task<ISegmentsResponse> SegmentsAsync(Indices indices, Func<SegmentsDescriptor, ISegmentsRequest> segmentsSelector = null);
 
 		/// <inheritdoc/>
 		Task<ISegmentsResponse> SegmentsAsync(ISegmentsRequest segmentsRequest);
@@ -29,8 +29,8 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public ISegmentsResponse Segments(Func<SegmentsDescriptor, ISegmentsRequest> segmentsSelector = null) =>
-			this.Segments(segmentsSelector.InvokeOrDefault(new SegmentsDescriptor()));
+		public ISegmentsResponse Segments(Indices indices, Func<SegmentsDescriptor, ISegmentsRequest> segmentsSelector = null) =>
+			this.Segments(segmentsSelector.InvokeOrDefault(new SegmentsDescriptor().Index(indices)));
 
 		/// <inheritdoc/>
 		public ISegmentsResponse Segments(ISegmentsRequest segmentsRequest) => 
@@ -40,8 +40,8 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<ISegmentsResponse> SegmentsAsync(Func<SegmentsDescriptor, ISegmentsRequest> segmentsSelector = null) => 
-			this.SegmentsAsync(segmentsSelector.InvokeOrDefault(new SegmentsDescriptor()));
+		public Task<ISegmentsResponse> SegmentsAsync(Indices indices, Func<SegmentsDescriptor, ISegmentsRequest> segmentsSelector = null) => 
+			this.SegmentsAsync(segmentsSelector.InvokeOrDefault(new SegmentsDescriptor().Index(indices)));
 
 		/// <inheritdoc/>
 		public Task<ISegmentsResponse> SegmentsAsync(ISegmentsRequest segmentsRequest) => 

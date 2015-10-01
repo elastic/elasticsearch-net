@@ -167,6 +167,9 @@
     <Compile Include="IndexModules\Similarity\SimilaritySettings.cs" />
     <Compile Include="Indices\IndexManagement\CreateIndex\CreateIndexApiTest.cs" />
     <Compile Include="Indices\IndexManagement\PutMapping\PutMappingApiTest.cs" />
+    <Compile Include="Indices\Monitoring\IndicesRecovery\RecoveryStatusUrlTests.cs" />
+    <Compile Include="Indices\Monitoring\IndicesSegments\SegmentsUrlTests.cs" />
+    <Compile Include="Indices\Monitoring\IndicesStats\IndicesStatsUrlTests.cs" />
     <Compile Include="Indices\StatusManagement\ClearCache\ClearCacheUrlTests.cs" />
     <Compile Include="Indices\StatusManagement\Flush\FlushUrlTests.cs" />
     <Compile Include="Indices\StatusManagement\Optimize\OptimizeUrlTests.cs" />
