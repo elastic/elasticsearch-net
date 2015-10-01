@@ -29,25 +29,25 @@ namespace Nest
 
 		internal Types(Types.AllTypes all) : base(all) { }
 		internal Types(Types.ManyTypes types) : base(types) { }
+		internal Types(IEnumerable<TypeName> types) : base(new ManyTypes(types)) { }
 
-		public static Types Single(TypeName type) => new ManyTypes(new[] { type });
-		public static Types Single<T>() => new ManyTypes(new TypeName[] { typeof(T) });
-		public static Types Many(IEnumerable<TypeName> types) => new ManyTypes(types);
-		public static Types Many(params TypeName[] types) => new ManyTypes(types);
-		public static ManyTypes Type<T>() => new ManyTypes(new TypeName[] { typeof(T) });
+		public static TypeName Type(TypeName type) => type;
+		public static TypeName Type<T>() => typeof(T);
+		public static ManyTypes Type(IEnumerable<TypeName> types) => new ManyTypes(types);
+		public static ManyTypes Type(params TypeName[] types) => new ManyTypes(types);
 
 		public static Types Parse(string typesString)
 		{
             if (typesString.IsNullOrEmpty()) return Types.All;
 			var types = typesString.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries);
-			return Many(types.Select(i => (TypeName)i));
+			return Type(types.Select(i => (TypeName)i));
 		}
 
 		public static implicit operator Types(string typesString) => Parse(typesString);
 		public static implicit operator Types(AllTypes all) => new Types(all);
 		public static implicit operator Types(ManyTypes many) => new Types(many);
-		public static implicit operator Types(TypeName type) => Types.Single(type);
-		public static implicit operator Types(Type type) => Types.Single(type);
+		public static implicit operator Types(TypeName type) => new ManyTypes(new[] { type });
+		public static implicit operator Types(Type type) => new ManyTypes(new TypeName[] { type });
 
 		string IUrlParameter.GetString(IConnectionConfigurationValues settings)
 		{

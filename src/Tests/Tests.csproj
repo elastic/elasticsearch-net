@@ -172,7 +172,9 @@
     <Compile Include="IndexModules\IndexSettings\Translog\TranslogSettings.cs" />
     <Compile Include="IndexModules\Similarity\SimilaritySettings.cs" />
     <Compile Include="Indices\IndexManagement\CreateIndex\CreateIndexApiTest.cs" />
-    <Compile Include="Indices\IndexManagement\PutMapping\PutMappingApiTest.cs" />
+    <Compile Include="Indices\MappingManagement\GetMapping\GetMappingUrlTests.cs" />
+    <Compile Include="Indices\MappingManagement\PutMapping\PutMappingApiTest.cs" />
+    <Compile Include="Indices\MappingManagement\PutMapping\PutMappingUrlTests.cs" />
     <Compile Include="Indices\Monitoring\IndicesRecovery\RecoveryStatusUrlTests.cs" />
     <Compile Include="Indices\Monitoring\IndicesSegments\SegmentsUrlTests.cs" />
     <Compile Include="Indices\Monitoring\IndicesStats\IndicesStatsUrlTests.cs" />
@@ -250,9 +252,6 @@
     <Folder Include="Aggregations\Metric\" />
     <Folder Include="Aggregations\Pipeline\" />
     <Folder Include="Cluster\NodeStats\" />
-    <Folder Include="Cluster\PendingClusterTasks\" />
-    <Folder Include="Cluster\Ping\" />
-    <Folder Include="Cluster\RootNodeInfo\" />
     <Folder Include="Indices\AliasManagement\" />
     <Folder Include="Migration\" />
     <Folder Include="Modules\" />

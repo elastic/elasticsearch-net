@@ -62,7 +62,7 @@ namespace Tests.ClientConcepts.HighLevel.CovariantHits
 			* and pass the actual types we want to search over using `.Types()`
 			*/
 			var result = this._client.Search<ISearchResult>(s => s
-				.Type(Types.Many(typeof(A), typeof(B), typeof(C)))
+				.Type(Types.Type(typeof(A), typeof(B), typeof(C)))
 				.Size(100)
 			);
 			/**

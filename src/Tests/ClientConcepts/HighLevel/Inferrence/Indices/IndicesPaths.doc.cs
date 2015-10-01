@@ -39,11 +39,11 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence.Indices
 		{
 			/** */
 			var all = Nest.Indices.All;
-			var many = Nest.Indices.Many("name1", "name2");
-			var manyTyped = Nest.Indices.Type<Project>().And<CommitActivity>();
-			var singleTyped = Nest.Indices.Single<Project>();
-			var singleString = Nest.Indices.Single("name1");
-			var invalidSingleString = Nest.Indices.Single("name1, name2");
+			var many = Nest.Indices.Index("name1", "name2");
+			var manyTyped = Nest.Indices.Index<Project>().And<CommitActivity>();
+			var singleTyped = Nest.Indices.Index<Project>();
+			var singleString = Nest.Indices.Index("name1");
+			var invalidSingleString = Nest.Indices.Index("name1, name2");
 
 		}
 	}

@@ -23,9 +23,9 @@ namespace Tests.Cat.CatAliases
 
 			await GET("/_cat/indices/project")
 				.Fluent(c => c.CatIndices(i => i.Index<Project>()))
-				.Request(c => c.CatIndices(new CatIndicesRequest(Nest.Indices.Single<Project>())))
+				.Request(c => c.CatIndices(new CatIndicesRequest(Nest.Indices.Index<Project>())))
 				.FluentAsync(c => c.CatIndicesAsync(i => i.Index<Project>()))
-				.RequestAsync(c => c.CatIndicesAsync(new CatIndicesRequest(Nest.Indices.Single<Project>())))
+				.RequestAsync(c => c.CatIndicesAsync(new CatIndicesRequest(Nest.Indices.Index<Project>())))
 				;
 		}
 	}
