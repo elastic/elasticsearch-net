@@ -11,15 +11,33 @@ namespace Nest
 {
 	public class FieldNames : IUrlParameter
 	{
-		private readonly IEnumerable<FieldName> _fieldNames;
+		private readonly IList<FieldName> _fieldNames;
 
 		public string GetString(IConnectionConfigurationValues settings) =>
 			string.Join(",", _fieldNames.Select(f => ((IUrlParameter)f).GetString(settings)));
 
-		public FieldNames(IEnumerable<FieldName> fieldNames) { this._fieldNames = fieldNames; }
+		internal FieldNames(IEnumerable<FieldName> fieldNames) { this._fieldNames = fieldNames.ToList(); }
 
 		public static implicit operator FieldNames(string[] fields) => new FieldNames(fields.Select(f => (FieldName)f));
 
 		public static implicit operator FieldNames(Expression[] fields) => new FieldNames(fields.Select(f => (FieldName)f));
+
+		public FieldNames And<T>(Expression<Func<T, object>> field) where T : class
+		{
+			this._fieldNames.Add(field);
+			return this;
+		}
+		public FieldNames And(string field)
+		{
+			this._fieldNames.Add(field);
+			return this;
+		}
+	}
+
+	public static class Fields 
+	{
+		public static FieldNames Field<T>(Expression<Func<T, object>> field) where T : class =>
+			new FieldNames(new FieldName[] { field });
+		public static FieldNames Field(string field) => new FieldNames(new FieldName[] { field });
 	}
 }

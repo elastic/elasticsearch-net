@@ -2081,36 +2081,36 @@ namespace Nest
 	{
 		Indices Index { get; }
 		Types Type { get; }
-		PropertyNames Field { get; }
+		FieldNames Field { get; }
 	 } 
 	///<summary>Request parameters for IndicesGetFieldMappingForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-field-mapping.html</pre></summary>
 	public partial class GetFieldMappingRequest  : RequestBase<GetFieldMappingRequestParameters>, IGetFieldMappingRequest
 	{
 		Indices IGetFieldMappingRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types IGetFieldMappingRequest.Type => Self.RouteValues.Get<Types>("type");
-		PropertyNames IGetFieldMappingRequest.Field => Self.RouteValues.Get<PropertyNames>("field");
+		FieldNames IGetFieldMappingRequest.Field => Self.RouteValues.Get<FieldNames>("field");
 			/// <summary>/_mapping/field/{field}</summary>
 ///<param name="field">this parameter is required</param>
-		public GetFieldMappingRequest(PropertyNames field) : base(r=>r.Required("field", field)){}
+		public GetFieldMappingRequest(FieldNames field) : base(r=>r.Required("field", field)){}
 		
 
 		/// <summary>/{index}/_mapping/field/{field}</summary>
 ///<param name="index">Optional, accepts null</param>		
 ///<param name="field">this parameter is required</param>
-		public GetFieldMappingRequest(Indices index, PropertyNames field) : base(r=>r.Optional("index", index).Required("field", field)){}
+		public GetFieldMappingRequest(Indices index, FieldNames field) : base(r=>r.Optional("index", index).Required("field", field)){}
 		
 
 		/// <summary>/_mapping/{type}/field/{field}</summary>
 ///<param name="type">Optional, accepts null</param>		
 ///<param name="field">this parameter is required</param>
-		public GetFieldMappingRequest(Types type, PropertyNames field) : base(r=>r.Optional("type", type).Required("field", field)){}
+		public GetFieldMappingRequest(Types type, FieldNames field) : base(r=>r.Optional("type", type).Required("field", field)){}
 		
 
 		/// <summary>/{index}/_mapping/{type}/field/{field}</summary>
 ///<param name="index">Optional, accepts null</param>		
 ///<param name="type">Optional, accepts null</param>		
 ///<param name="field">this parameter is required</param>
-		public GetFieldMappingRequest(Indices index, Types type, PropertyNames field) : base(r=>r.Optional("index", index).Optional("type", type).Required("field", field)){}
+		public GetFieldMappingRequest(Indices index, Types type, FieldNames field) : base(r=>r.Optional("index", index).Optional("type", type).Required("field", field)){}
 		
 
 			///<summary>Whether the default mapping values should be returned as well</summary>

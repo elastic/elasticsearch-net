@@ -2286,10 +2286,10 @@ namespace Nest
 	{ 
 		Indices IGetFieldMappingRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types IGetFieldMappingRequest.Type => Self.RouteValues.Get<Types>("type");
-		PropertyNames IGetFieldMappingRequest.Field => Self.RouteValues.Get<PropertyNames>("field");
+		FieldNames IGetFieldMappingRequest.Field => Self.RouteValues.Get<FieldNames>("field");
 			/// <summary>/_mapping/field/{field}</summary>
 ///<param name="field"> this parameter is required</param>
-		public GetFieldMappingDescriptor(PropertyNames field) : base(r=>r.Required("field", field)){}
+		public GetFieldMappingDescriptor(FieldNames field) : base(r=>r.Required("field", field)){}
 		
 
 			///<summary>A comma-separated list of index names</summary>
