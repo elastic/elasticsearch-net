@@ -21,6 +21,8 @@ namespace Tests.Cat.CatAliases
 				.RequestAsync(c => c.ClusterStateAsync(new ClusterStateRequest()))
 				;
 
+
+			// TODO: need to implement Metric
 			await GET("/_cluster/state/{metric}")
 				.Fluent(c => c.ClusterState())
 				.Request(c => c.ClusterState(new ClusterStateRequest()))
@@ -28,6 +30,7 @@ namespace Tests.Cat.CatAliases
 				.RequestAsync(c => c.ClusterStateAsync(new ClusterStateRequest()))
 				;
 
+			// TODO: need to implement Metric
 			await GET("/_cluster/state/{metric}/{index}")
 				.Fluent(c => c.ClusterState())
 				.Request(c => c.ClusterState(new ClusterStateRequest()))

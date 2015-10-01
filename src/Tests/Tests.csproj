@@ -116,6 +116,12 @@
     <Compile Include="Cluster\ClusterSettings\ClusterGetSettings\ClusterGetUrlTest.cs" />
     <Compile Include="Cluster\ClusterSettings\ClusterPutSettings\ClusterPutUrlTest.cs" />
     <Compile Include="Cluster\ClusterState\ClusterStateUrlTest.cs" />
+    <Compile Include="Cluster\ClusterStats\ClusterStatsUrlTest.cs" />
+    <Compile Include="Cluster\NodesHotThreads\NodesHotThreadsUrlTest.cs" />
+    <Compile Include="Cluster\NodesInfo\NodesInfoUrlTest.cs" />
+    <Compile Include="Cluster\PendingClusterTasks\PendingClusterTasksUrlTest.cs" />
+    <Compile Include="Cluster\Ping\PingUrlTest.cs" />
+    <Compile Include="Cluster\RootNodeInfo\PingUrlTest.cs" />
     <Compile Include="CodeStandards\Descriptors.doc.cs" />
     <Compile Include="Document\Single\Index\IndexUrlTest.cs" />
     <Compile Include="Document\Single\Index\IndexApiTest.cs" />
@@ -231,13 +237,7 @@
   <ItemGroup>
     <Folder Include="Aggregations\Metric\" />
     <Folder Include="Aggregations\Pipeline\" />
-    <Folder Include="Cluster\ClusterStats\" />
-    <Folder Include="Cluster\NodesHotThreads\" />
-    <Folder Include="Cluster\NodesInfo\" />
     <Folder Include="Cluster\NodeStats\" />
-    <Folder Include="Cluster\PendingClusterTasks\" />
-    <Folder Include="Cluster\Ping\" />
-    <Folder Include="Cluster\RootNodeInfo\" />
     <Folder Include="Migration\" />
     <Folder Include="Modules\" />
     <Folder Include="Plugins\Analysis\Phonetic\" />
