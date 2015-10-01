@@ -23,9 +23,8 @@ namespace CodeGeneration.LowLevelClient.Domain
 					case "scroll_id": return this.Type == "string" ? "ScrollId" : "ScrollIds";
 					case "field": return this.Type == "string" ? "PropertyName" : "PropertyNames";
 					case "fields": return "FieldNames";
-						//TODO I THINK plural suffices here
-					case "index_metric": return this.Type == "string" ? "Metric" : "Metrics";
-					case "metric": return this.Type == "string" ? "Metric" : "Metrics";
+					case "index_metric": return "IndexMetrics";
+					case "metric": return "Metrics";
 					case "feature": return this.Type == "list" ? "Feature" : "Features";
 
 					case "repository":

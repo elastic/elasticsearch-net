@@ -1033,13 +1033,13 @@ namespace Nest
 
 		/// <summary>/_cluster/state/{metric}</summary>
 ///<param name="metric">Optional, accepts null</param>
-		public ClusterStateRequest(Metrics metric) : base(r=>r.Optional("metric", metric)){}
+		public ClusterStateRequest(ClusterStateMetric metric) : base(r=>r.Optional("metric", (Metrics)metric)){}
 		
 
 		/// <summary>/_cluster/state/{metric}/{index}</summary>
 ///<param name="metric">Optional, accepts null</param>		
 ///<param name="index">Optional, accepts null</param>
-		public ClusterStateRequest(Metrics metric, Indices index) : base(r=>r.Optional("metric", metric).Optional("index", index)){}
+		public ClusterStateRequest(ClusterStateMetric metric, Indices index) : base(r=>r.Optional("metric", (Metrics)metric).Optional("index", index)){}
 		
 
 			///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
@@ -2792,7 +2792,7 @@ namespace Nest
 
 		/// <summary>/_stats/{metric}</summary>
 ///<param name="metric">Optional, accepts null</param>
-		public IndicesStatsRequest(Metrics metric) : base(r=>r.Optional("metric", metric)){}
+		public IndicesStatsRequest(IndicesStatsMetric metric) : base(r=>r.Optional("metric", (Metrics)metric)){}
 		
 
 		/// <summary>/{index}/_stats</summary>
@@ -2803,7 +2803,7 @@ namespace Nest
 		/// <summary>/{index}/_stats/{metric}</summary>
 ///<param name="index">Optional, accepts null</param>		
 ///<param name="metric">Optional, accepts null</param>
-		public IndicesStatsRequest(Indices index, Metrics metric) : base(r=>r.Optional("index", index).Optional("metric", metric)){}
+		public IndicesStatsRequest(Indices index, IndicesStatsMetric metric) : base(r=>r.Optional("index", index).Optional("metric", (Metrics)metric)){}
 		
 
 			///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
@@ -3117,13 +3117,13 @@ namespace Nest
 
 		/// <summary>/_nodes/{metric}</summary>
 ///<param name="metric">Optional, accepts null</param>
-		public NodesInfoRequest(Metrics metric) : base(r=>r.Optional("metric", metric)){}
+		public NodesInfoRequest(NodesInfoMetric metric) : base(r=>r.Optional("metric", (Metrics)metric)){}
 		
 
 		/// <summary>/_nodes/{node_id}/{metric}</summary>
 ///<param name="node_id">Optional, accepts null</param>		
 ///<param name="metric">Optional, accepts null</param>
-		public NodesInfoRequest(NodeIds node_id, Metrics metric) : base(r=>r.Optional("node_id", node_id).Optional("metric", metric)){}
+		public NodesInfoRequest(NodeIds node_id, NodesInfoMetric metric) : base(r=>r.Optional("node_id", node_id).Optional("metric", (Metrics)metric)){}
 		
 
 			///<summary>Return settings in flat format (default: false)</summary>
@@ -3144,14 +3144,14 @@ namespace Nest
 	public partial interface INodesStatsRequest : IRequest<NodesStatsRequestParameters> 
 	{
 		Metrics Metric { get; }
-		Metrics IndexMetric { get; }
+		IndexMetrics IndexMetric { get; }
 		NodeIds NodeId { get; }
 	 } 
 	///<summary>Request parameters for NodesStatsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-nodes-stats.html</pre></summary>
 	public partial class NodesStatsRequest  : RequestBase<NodesStatsRequestParameters>, INodesStatsRequest
 	{
 		Metrics INodesStatsRequest.Metric => Self.RouteValues.Get<Metrics>("metric");
-		Metrics INodesStatsRequest.IndexMetric => Self.RouteValues.Get<Metrics>("index_metric");
+		IndexMetrics INodesStatsRequest.IndexMetric => Self.RouteValues.Get<IndexMetrics>("index_metric");
 		NodeIds INodesStatsRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
 			/// <summary>/_nodes/stats</summary>
 		public NodesStatsRequest() : base(){}
@@ -3164,26 +3164,26 @@ namespace Nest
 
 		/// <summary>/_nodes/stats/{metric}</summary>
 ///<param name="metric">Optional, accepts null</param>
-		public NodesStatsRequest(Metrics metric) : base(r=>r.Optional("metric", metric)){}
+		public NodesStatsRequest(NodesStatsMetric metric) : base(r=>r.Optional("metric", (Metrics)metric)){}
 		
 
 		/// <summary>/_nodes/{node_id}/stats/{metric}</summary>
 ///<param name="node_id">Optional, accepts null</param>		
 ///<param name="metric">Optional, accepts null</param>
-		public NodesStatsRequest(NodeIds node_id, Metrics metric) : base(r=>r.Optional("node_id", node_id).Optional("metric", metric)){}
+		public NodesStatsRequest(NodeIds node_id, NodesStatsMetric metric) : base(r=>r.Optional("node_id", node_id).Optional("metric", (Metrics)metric)){}
 		
 
 		/// <summary>/_nodes/stats/{metric}/{index_metric}</summary>
 ///<param name="metric">Optional, accepts null</param>		
 ///<param name="index_metric">Optional, accepts null</param>
-		public NodesStatsRequest(Metrics metric, Metrics index_metric) : base(r=>r.Optional("metric", metric).Optional("index_metric", index_metric)){}
+		public NodesStatsRequest(NodesStatsMetric metric, NodesStatsIndexMetric index_metric) : base(r=>r.Optional("metric", (Metrics)metric).Optional("index_metric", (IndexMetrics)index_metric)){}
 		
 
 		/// <summary>/_nodes/{node_id}/stats/{metric}/{index_metric}</summary>
 ///<param name="node_id">Optional, accepts null</param>		
 ///<param name="metric">Optional, accepts null</param>		
 ///<param name="index_metric">Optional, accepts null</param>
-		public NodesStatsRequest(NodeIds node_id, Metrics metric, Metrics index_metric) : base(r=>r.Optional("node_id", node_id).Optional("metric", metric).Optional("index_metric", index_metric)){}
+		public NodesStatsRequest(NodeIds node_id, NodesStatsMetric metric, NodesStatsIndexMetric index_metric) : base(r=>r.Optional("node_id", node_id).Optional("metric", (Metrics)metric).Optional("index_metric", (IndexMetrics)index_metric)){}
 		
 
 			///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>

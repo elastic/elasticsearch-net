@@ -769,7 +769,7 @@ namespace Nest
 		public ClusterStateDescriptor AllIndices() => this.Index(Indices.All);
 
 		///<summary>Limit the information returned to the specified metrics</summary>
-		public ClusterStateDescriptor Metric(Metrics metric) => Assign(a=>a.RouteValues.Optional("metric", metric));
+		public ClusterStateDescriptor Metric(ClusterStateMetric metric) => Assign(a=>a.RouteValues.Optional("metric", (Metrics)metric));
 
 	
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
@@ -3029,7 +3029,7 @@ namespace Nest
 		public IndicesStatsDescriptor AllIndices() => this.Index(Indices.All);
 
 		///<summary>Limit the information returned the specific metrics.</summary>
-		public IndicesStatsDescriptor Metric(Metrics metric) => Assign(a=>a.RouteValues.Optional("metric", metric));
+		public IndicesStatsDescriptor Metric(IndicesStatsMetric metric) => Assign(a=>a.RouteValues.Optional("metric", (Metrics)metric));
 
 	
 		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
@@ -3475,7 +3475,7 @@ namespace Nest
 		public NodesInfoDescriptor NodeId(NodeIds nodeId) => Assign(a=>a.RouteValues.Optional("node_id", nodeId));
 
 		///<summary>A comma-separated list of metrics you wish returned. Leave empty to return all.</summary>
-		public NodesInfoDescriptor Metric(Metrics metric) => Assign(a=>a.RouteValues.Optional("metric", metric));
+		public NodesInfoDescriptor Metric(NodesInfoMetric metric) => Assign(a=>a.RouteValues.Optional("metric", (Metrics)metric));
 
 	
 		///<summary>Return settings in flat format (default: false)</summary>
@@ -3496,17 +3496,17 @@ namespace Nest
 	public partial class NodesStatsDescriptor  : RequestDescriptorBase<NodesStatsDescriptor,NodesStatsRequestParameters, INodesStatsRequest>, INodesStatsRequest
 	{ 
 		Metrics INodesStatsRequest.Metric => Self.RouteValues.Get<Metrics>("metric");
-		Metrics INodesStatsRequest.IndexMetric => Self.RouteValues.Get<Metrics>("index_metric");
+		IndexMetrics INodesStatsRequest.IndexMetric => Self.RouteValues.Get<IndexMetrics>("index_metric");
 		NodeIds INodesStatsRequest.NodeId => Self.RouteValues.Get<NodeIds>("node_id");
 			/// <summary>/_nodes/stats</summary>
 		public NodesStatsDescriptor() : base(){}
 		
 
 			///<summary>Limit the information returned to the specified metrics</summary>
-		public NodesStatsDescriptor Metric(Metrics metric) => Assign(a=>a.RouteValues.Optional("metric", metric));
+		public NodesStatsDescriptor Metric(NodesStatsMetric metric) => Assign(a=>a.RouteValues.Optional("metric", (Metrics)metric));
 
 		///<summary>Limit the information returned for `indices` metric to the specific index metrics. Isn't used if `indices` (or `all`) metric isn't specified.</summary>
-		public NodesStatsDescriptor IndexMetric(Metrics indexMetric) => Assign(a=>a.RouteValues.Optional("index_metric", indexMetric));
+		public NodesStatsDescriptor IndexMetric(NodesStatsIndexMetric indexMetric) => Assign(a=>a.RouteValues.Optional("index_metric", (IndexMetrics)indexMetric));
 
 		///<summary>A comma-separated list of node IDs or names to limit the returned information; use `_local` to return information from the node you're connecting to, leave empty to get information from all nodes</summary>
 		public NodesStatsDescriptor NodeId(NodeIds nodeId) => Assign(a=>a.RouteValues.Optional("node_id", nodeId));
