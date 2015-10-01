@@ -167,6 +167,15 @@
     <Compile Include="IndexModules\Similarity\SimilaritySettings.cs" />
     <Compile Include="Indices\IndexManagement\CreateIndex\CreateIndexApiTest.cs" />
     <Compile Include="Indices\IndexManagement\PutMapping\PutMappingApiTest.cs" />
+    <Compile Include="Indices\StatusManagement\ClearCache\ClearCacheUrlTests.cs" />
+    <Compile Include="Indices\StatusManagement\Flush\FlushUrlTests.cs" />
+    <Compile Include="Indices\StatusManagement\Optimize\OptimizeUrlTests.cs" />
+    <Compile Include="Indices\StatusManagement\Refresh\RefreshUrlTests.cs" />
+    <Compile Include="Indices\StatusManagement\SyncedFlush\SyncedFlushUrlTests.cs" />
+    <Compile Include="Indices\StatusManagement\Upgrade\UpgradeUrlTests.cs" />
+    <Compile Include="Indices\Warmers\DeleteWarmer\DeleteWarmerUrlTests.cs" />
+    <Compile Include="Indices\Warmers\GetWarmer\GetWarmerUrlTests.cs" />
+    <Compile Include="Indices\Warmers\PutWarmer\PutWarmerUrlTests.cs" />
     <Compile Include="Mapping\Types\String.cs" />
     <Compile Include="Search\Count\CountUrlTests.cs" />
     <Compile Include="Search\Explain\ExplainUrlTests.cs" />
@@ -238,6 +247,7 @@
     <Folder Include="Cluster\PendingClusterTasks\" />
     <Folder Include="Cluster\Ping\" />
     <Folder Include="Cluster\RootNodeInfo\" />
+    <Folder Include="Indices\AliasManagement\" />
     <Folder Include="Migration\" />
     <Folder Include="Modules\" />
     <Folder Include="Plugins\Analysis\Phonetic\" />
