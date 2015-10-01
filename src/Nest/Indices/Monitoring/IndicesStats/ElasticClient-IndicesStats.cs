@@ -14,13 +14,13 @@ namespace Nest
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-stats.html
 		/// </summary>
 		/// <param name="selector">Optionaly further describe the indices stats operation</param>
-		IGlobalStatsResponse IndicesStats(Func<IndicesStatsDescriptor, IIndicesStatsRequest> selector = null);
+		IGlobalStatsResponse IndicesStats(Indices indices, Func<IndicesStatsDescriptor, IIndicesStatsRequest> selector = null);
 
 		/// <inheritdoc/>
 		IGlobalStatsResponse IndicesStats(IIndicesStatsRequest indicesStatsRequest);
 
 		/// <inheritdoc/>
-		Task<IGlobalStatsResponse> IndicesStatsAsync(Func<IndicesStatsDescriptor, IIndicesStatsRequest> selector = null);
+		Task<IGlobalStatsResponse> IndicesStatsAsync(Indices indices, Func<IndicesStatsDescriptor, IIndicesStatsRequest> selector = null);
 
 		/// <inheritdoc/>
 		Task<IGlobalStatsResponse> IndicesStatsAsync(IIndicesStatsRequest indicesStatsRequest);
@@ -30,8 +30,8 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IGlobalStatsResponse IndicesStats(Func<IndicesStatsDescriptor, IIndicesStatsRequest> selector = null) =>
-			this.IndicesStats(selector.InvokeOrDefault(new IndicesStatsDescriptor()));
+		public IGlobalStatsResponse IndicesStats(Indices indices, Func<IndicesStatsDescriptor, IIndicesStatsRequest> selector = null) =>
+			this.IndicesStats(selector.InvokeOrDefault(new IndicesStatsDescriptor().Index(indices)));
 
 		/// <inheritdoc/>
 		public IGlobalStatsResponse IndicesStats(IIndicesStatsRequest statsRequest) => 
@@ -41,8 +41,8 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<IGlobalStatsResponse> IndicesStatsAsync(Func<IndicesStatsDescriptor, IIndicesStatsRequest> selector = null) => 
-			this.IndicesStatsAsync(selector.InvokeOrDefault(new IndicesStatsDescriptor()));
+		public Task<IGlobalStatsResponse> IndicesStatsAsync(Indices indices, Func<IndicesStatsDescriptor, IIndicesStatsRequest> selector = null) => 
+			this.IndicesStatsAsync(selector.InvokeOrDefault(new IndicesStatsDescriptor().Index(indices)));
 
 		/// <inheritdoc/>
 		public Task<IGlobalStatsResponse> IndicesStatsAsync(IIndicesStatsRequest statsRequest) => 
