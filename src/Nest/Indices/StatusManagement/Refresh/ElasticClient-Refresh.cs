@@ -13,13 +13,13 @@ namespace Nest
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-refresh.html
 		/// </summary>
 		/// <param name="refreshSelector">A descriptor that describes the parameters for the refresh operation</param>
-		IShardsOperationResponse Refresh(Func<RefreshDescriptor, IRefreshRequest> refreshSelector = null);
+		IShardsOperationResponse Refresh(Indices indices, Func<RefreshDescriptor, IRefreshRequest> refreshSelector = null);
 
 		/// <inheritdoc/>
 		IShardsOperationResponse Refresh(IRefreshRequest refreshRequest);
 
 		/// <inheritdoc/>
-		Task<IShardsOperationResponse> RefreshAsync(Func<RefreshDescriptor, IRefreshRequest> refreshSelector = null);
+		Task<IShardsOperationResponse> RefreshAsync(Indices indices, Func<RefreshDescriptor, IRefreshRequest> refreshSelector = null);
 
 		/// <inheritdoc/>
 		Task<IShardsOperationResponse> RefreshAsync(IRefreshRequest refreshRequest);
@@ -28,8 +28,8 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IShardsOperationResponse Refresh(Func<RefreshDescriptor, IRefreshRequest> refreshSelector = null) =>
-			this.Refresh(refreshSelector.InvokeOrDefault(new RefreshDescriptor()));
+		public IShardsOperationResponse Refresh(Indices indices, Func<RefreshDescriptor, IRefreshRequest> refreshSelector = null) =>
+			this.Refresh(refreshSelector.InvokeOrDefault(new RefreshDescriptor().Index(indices)));
 
 		/// <inheritdoc/>
 		public IShardsOperationResponse Refresh(IRefreshRequest refreshRequest) => 
@@ -39,8 +39,8 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<IShardsOperationResponse> RefreshAsync(Func<RefreshDescriptor, IRefreshRequest> refreshSelector = null) => 
-			this.RefreshAsync(refreshSelector.InvokeOrDefault(new RefreshDescriptor()));
+		public Task<IShardsOperationResponse> RefreshAsync(Indices indices, Func<RefreshDescriptor, IRefreshRequest> refreshSelector = null) => 
+			this.RefreshAsync(refreshSelector.InvokeOrDefault(new RefreshDescriptor().Index(indices)));
 
 		/// <inheritdoc/>
 		public Task<IShardsOperationResponse> RefreshAsync(IRefreshRequest refreshRequest) => 

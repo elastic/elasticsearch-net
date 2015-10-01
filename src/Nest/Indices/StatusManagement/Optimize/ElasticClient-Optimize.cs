@@ -14,13 +14,13 @@ namespace Nest
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-optimize.html
 		/// </summary>
 		/// <param name="optimizeSelector">An optional descriptor that further describes the optimize operation, i.e limit it to one index</param>
-		IShardsOperationResponse Optimize(Func<OptimizeDescriptor, IOptimizeRequest> optimizeSelector = null);
+		IShardsOperationResponse Optimize(Indices indices, Func<OptimizeDescriptor, IOptimizeRequest> optimizeSelector = null);
 
 		/// <inheritdoc/>
 		IShardsOperationResponse Optimize(IOptimizeRequest optimizeRequest);
 
 		/// <inheritdoc/>
-		Task<IShardsOperationResponse> OptimizeAsync(Func<OptimizeDescriptor, IOptimizeRequest> optimizeSelector = null);
+		Task<IShardsOperationResponse> OptimizeAsync(Indices indices, Func<OptimizeDescriptor, IOptimizeRequest> optimizeSelector = null);
 
 		/// <inheritdoc/>
 		Task<IShardsOperationResponse> OptimizeAsync(IOptimizeRequest optimizeRequest);
@@ -30,8 +30,8 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IShardsOperationResponse Optimize(Func<OptimizeDescriptor, IOptimizeRequest> optimizeSelector = null) =>
-			this.Optimize(optimizeSelector.InvokeOrDefault(new OptimizeDescriptor()));
+		public IShardsOperationResponse Optimize(Indices indices, Func<OptimizeDescriptor, IOptimizeRequest> optimizeSelector = null) =>
+			this.Optimize(optimizeSelector.InvokeOrDefault(new OptimizeDescriptor().Index(indices)));
 
 		/// <inheritdoc/>
 		public IShardsOperationResponse Optimize(IOptimizeRequest optimizeRequest) => 
@@ -41,8 +41,8 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<IShardsOperationResponse> OptimizeAsync(Func<OptimizeDescriptor, IOptimizeRequest> optimizeSelector = null) => 
-			this.OptimizeAsync(optimizeSelector.InvokeOrDefault(new OptimizeDescriptor()));
+		public Task<IShardsOperationResponse> OptimizeAsync(Indices indices, Func<OptimizeDescriptor, IOptimizeRequest> optimizeSelector = null) => 
+			this.OptimizeAsync(optimizeSelector.InvokeOrDefault(new OptimizeDescriptor().Index(indices)));
 
 		/// <inheritdoc/>
 		public Task<IShardsOperationResponse> OptimizeAsync(IOptimizeRequest optimizeRequest) => 

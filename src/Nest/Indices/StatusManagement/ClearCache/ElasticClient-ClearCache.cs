@@ -14,13 +14,13 @@ namespace Nest
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-clearcache.html
 		/// </summary>
 		/// <param name="selector">A descriptor that describes the parameters for the clear cache operation</param>
-		IShardsOperationResponse ClearCache(Func<ClearCacheDescriptor, IClearCacheRequest> selector = null);
+		IShardsOperationResponse ClearCache(Indices indices, Func<ClearCacheDescriptor, IClearCacheRequest> selector = null);
 
 		/// <inheritdoc/>
 		IShardsOperationResponse ClearCache(IClearCacheRequest clearCacheRequest);
 
 		/// <inheritdoc/>
-		Task<IShardsOperationResponse> ClearCacheAsync(Func<ClearCacheDescriptor, IClearCacheRequest> selector = null);
+		Task<IShardsOperationResponse> ClearCacheAsync(Indices indices, Func<ClearCacheDescriptor, IClearCacheRequest> selector = null);
 
 		/// <inheritdoc/>
 		Task<IShardsOperationResponse> ClearCacheAsync(IClearCacheRequest clearCacheRequest);
@@ -30,9 +30,9 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IShardsOperationResponse ClearCache(Func<ClearCacheDescriptor, IClearCacheRequest> selector = null) => 
+		public IShardsOperationResponse ClearCache(Indices indices, Func<ClearCacheDescriptor, IClearCacheRequest> selector = null) => 
 			this.Dispatcher.Dispatch<IClearCacheRequest, ClearCacheRequestParameters, ShardsOperationResponse>(
-				selector.InvokeOrDefault(new ClearCacheDescriptor()),
+				selector.InvokeOrDefault(new ClearCacheDescriptor().Index(indices)),
 				(p, d) => this.LowLevelDispatch.IndicesClearCacheDispatch<ShardsOperationResponse>(p)
 			);
 
@@ -44,8 +44,8 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<IShardsOperationResponse> ClearCacheAsync(Func<ClearCacheDescriptor, IClearCacheRequest> selector = null) => this.Dispatcher.DispatchAsync<IClearCacheRequest, ClearCacheRequestParameters, ShardsOperationResponse, IShardsOperationResponse>(
-				selector.InvokeOrDefault(new ClearCacheDescriptor()),
+		public Task<IShardsOperationResponse> ClearCacheAsync(Indices indices, Func<ClearCacheDescriptor, IClearCacheRequest> selector = null) => this.Dispatcher.DispatchAsync<IClearCacheRequest, ClearCacheRequestParameters, ShardsOperationResponse, IShardsOperationResponse>(
+				selector.InvokeOrDefault(new ClearCacheDescriptor().Index(indices)),
 				(p, d) => this.LowLevelDispatch.IndicesClearCacheDispatchAsync<ShardsOperationResponse>(p)
 			);
 
