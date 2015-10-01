@@ -2325,7 +2325,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="name">The name of the template</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> IndicesDeleteTemplateForAll<T>(string name, Func<DeleteTemplateRequestParameters, DeleteTemplateRequestParameters> requestParameters = null) where T : class;
+		ElasticsearchResponse<T> IndicesDeleteTemplateForAll<T>(string name, Func<DeleteIndexTemplateRequestParameters, DeleteIndexTemplateRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a DELETE on /_template/{name}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -2338,7 +2338,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="name">The name of the template</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> IndicesDeleteTemplateForAllAsync<T>(string name, Func<DeleteTemplateRequestParameters, DeleteTemplateRequestParameters> requestParameters = null) where T : class;
+		Task<ElasticsearchResponse<T>> IndicesDeleteTemplateForAllAsync<T>(string name, Func<DeleteIndexTemplateRequestParameters, DeleteIndexTemplateRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a DELETE on /{index}/_warmer/{name}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -2485,7 +2485,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="name">The name of the template</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> IndicesExistsTemplateForAll<T>(string name, Func<TemplateExistsRequestParameters, TemplateExistsRequestParameters> requestParameters = null) where T : class;
+		ElasticsearchResponse<T> IndicesExistsTemplateForAll<T>(string name, Func<IndexTemplateExistsRequestParameters, IndexTemplateExistsRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a HEAD on /_template/{name}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -2498,7 +2498,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="name">The name of the template</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> IndicesExistsTemplateForAllAsync<T>(string name, Func<TemplateExistsRequestParameters, TemplateExistsRequestParameters> requestParameters = null) where T : class;
+		Task<ElasticsearchResponse<T>> IndicesExistsTemplateForAllAsync<T>(string name, Func<IndexTemplateExistsRequestParameters, IndexTemplateExistsRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a HEAD on /{index}/{type}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -3320,7 +3320,7 @@ namespace Elasticsearch.Net
 		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para>	
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> IndicesGetTemplateForAll<T>(Func<GetTemplateRequestParameters, GetTemplateRequestParameters> requestParameters = null) where T : class;
+		ElasticsearchResponse<T> IndicesGetTemplateForAll<T>(Func<GetIndexTemplateRequestParameters, GetIndexTemplateRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a GET on /_template
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -3332,7 +3332,7 @@ namespace Elasticsearch.Net
 		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para>	
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> IndicesGetTemplateForAllAsync<T>(Func<GetTemplateRequestParameters, GetTemplateRequestParameters> requestParameters = null) where T : class;
+		Task<ElasticsearchResponse<T>> IndicesGetTemplateForAllAsync<T>(Func<GetIndexTemplateRequestParameters, GetIndexTemplateRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a GET on /_template/{name}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -3345,7 +3345,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="name">The name of the template</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> IndicesGetTemplateForAll<T>(string name, Func<GetTemplateRequestParameters, GetTemplateRequestParameters> requestParameters = null) where T : class;
+		ElasticsearchResponse<T> IndicesGetTemplateForAll<T>(string name, Func<GetIndexTemplateRequestParameters, GetIndexTemplateRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a GET on /_template/{name}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -3358,7 +3358,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="name">The name of the template</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> IndicesGetTemplateForAllAsync<T>(string name, Func<GetTemplateRequestParameters, GetTemplateRequestParameters> requestParameters = null) where T : class;
+		Task<ElasticsearchResponse<T>> IndicesGetTemplateForAllAsync<T>(string name, Func<GetIndexTemplateRequestParameters, GetIndexTemplateRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a GET on /_upgrade
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -3857,7 +3857,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="body">The index settings to be updated</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> IndicesPutSettingsForAll<T>(PostData<object> body, Func<UpdateSettingsRequestParameters, UpdateSettingsRequestParameters> requestParameters = null) where T : class;
+		ElasticsearchResponse<T> IndicesPutSettingsForAll<T>(PostData<object> body, Func<UpdateIndexSettingsRequestParameters, UpdateIndexSettingsRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a PUT on /_settings
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -3870,7 +3870,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="body">The index settings to be updated</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> IndicesPutSettingsForAllAsync<T>(PostData<object> body, Func<UpdateSettingsRequestParameters, UpdateSettingsRequestParameters> requestParameters = null) where T : class;
+		Task<ElasticsearchResponse<T>> IndicesPutSettingsForAllAsync<T>(PostData<object> body, Func<UpdateIndexSettingsRequestParameters, UpdateIndexSettingsRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a PUT on /{index}/_settings
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -3884,7 +3884,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="body">The index settings to be updated</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> IndicesPutSettings<T>(string index, PostData<object> body, Func<UpdateSettingsRequestParameters, UpdateSettingsRequestParameters> requestParameters = null) where T : class;
+		ElasticsearchResponse<T> IndicesPutSettings<T>(string index, PostData<object> body, Func<UpdateIndexSettingsRequestParameters, UpdateIndexSettingsRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a PUT on /{index}/_settings
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -3898,7 +3898,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="body">The index settings to be updated</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> IndicesPutSettingsAsync<T>(string index, PostData<object> body, Func<UpdateSettingsRequestParameters, UpdateSettingsRequestParameters> requestParameters = null) where T : class;
+		Task<ElasticsearchResponse<T>> IndicesPutSettingsAsync<T>(string index, PostData<object> body, Func<UpdateIndexSettingsRequestParameters, UpdateIndexSettingsRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a PUT on /_template/{name}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -3912,7 +3912,7 @@ namespace Elasticsearch.Net
 		///<param name="name">The name of the template</param>
 		///<param name="body">The template definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> IndicesPutTemplateForAll<T>(string name, PostData<object> body, Func<PutTemplateRequestParameters, PutTemplateRequestParameters> requestParameters = null) where T : class;
+		ElasticsearchResponse<T> IndicesPutTemplateForAll<T>(string name, PostData<object> body, Func<PutIndexTemplateRequestParameters, PutIndexTemplateRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a PUT on /_template/{name}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -3926,7 +3926,7 @@ namespace Elasticsearch.Net
 		///<param name="name">The name of the template</param>
 		///<param name="body">The template definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> IndicesPutTemplateForAllAsync<T>(string name, PostData<object> body, Func<PutTemplateRequestParameters, PutTemplateRequestParameters> requestParameters = null) where T : class;
+		Task<ElasticsearchResponse<T>> IndicesPutTemplateForAllAsync<T>(string name, PostData<object> body, Func<PutIndexTemplateRequestParameters, PutIndexTemplateRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a POST on /_template/{name}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -3940,7 +3940,7 @@ namespace Elasticsearch.Net
 		///<param name="name">The name of the template</param>
 		///<param name="body">The template definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> IndicesPutTemplatePostForAll<T>(string name, PostData<object> body, Func<PutTemplateRequestParameters, PutTemplateRequestParameters> requestParameters = null) where T : class;
+		ElasticsearchResponse<T> IndicesPutTemplatePostForAll<T>(string name, PostData<object> body, Func<PutIndexTemplateRequestParameters, PutIndexTemplateRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a POST on /_template/{name}
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -3954,7 +3954,7 @@ namespace Elasticsearch.Net
 		///<param name="name">The name of the template</param>
 		///<param name="body">The template definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> IndicesPutTemplatePostForAllAsync<T>(string name, PostData<object> body, Func<PutTemplateRequestParameters, PutTemplateRequestParameters> requestParameters = null) where T : class;
+		Task<ElasticsearchResponse<T>> IndicesPutTemplatePostForAllAsync<T>(string name, PostData<object> body, Func<PutIndexTemplateRequestParameters, PutIndexTemplateRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a PUT on /_warmer/{name}
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:

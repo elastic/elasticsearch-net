@@ -2,14 +2,14 @@
 
 namespace Nest
 {
-	public interface ITemplateResponse : IResponse
+	public interface IGetIndexTemplateResponse : IResponse
 	{
 		string Name { get; }
 		TemplateMapping TemplateMapping { get; }
 	}
 
 	[JsonObject(MemberSerialization.OptIn)]
-	public class TemplateResponse : BaseResponse, ITemplateResponse
+	public class GetIndexTemplateResponse : BaseResponse, IGetIndexTemplateResponse
 	{
 		public string Name { get; internal set; }
 		

@@ -6,10 +6,10 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public partial interface ITemplateExistsRequest { }
+	public partial interface IIndexTemplateExistsRequest { }
 
-	public partial class TemplateExistsRequest { }
+	public partial class IndexTemplateExistsRequest { }
 
 	[DescriptorFor("IndicesExistsTemplate")]
-	public partial class TemplateExistsDescriptor { }
+	public partial class IndexTemplateExistsDescriptor { }
 }

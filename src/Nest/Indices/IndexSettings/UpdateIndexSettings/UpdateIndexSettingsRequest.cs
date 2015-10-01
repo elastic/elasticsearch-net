@@ -6,9 +6,9 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public partial interface IUpdateSettingsRequest : IIndexSettings, IHasADictionary { }
+	public partial interface IUpdateIndexSettingsRequest : IIndexSettings, IHasADictionary { }
 
-	public partial class UpdateSettingsRequest 
+	public partial class UpdateIndexSettingsRequest 
 	{
 		IDictionary IHasADictionary.Dictionary => this.AnySettings;
 
@@ -73,9 +73,9 @@ namespace Nest
 	}
 
 	[DescriptorFor("IndicesPutSettings")]
-	public partial class UpdateSettingsDescriptor 
+	public partial class UpdateIndexSettingsDescriptor 
 	{
-		UpdateSettingsDescriptor Assign(Action<IIndexSettings> assigner) => Fluent.Assign(this, assigner);
+		UpdateIndexSettingsDescriptor Assign(Action<IIndexSettings> assigner) => Fluent.Assign(this, assigner);
 
 		int? IIndexSettings.NumberOfShards { get; set; }
 		FileSystemStorageImplementation? IIndexSettings.FileSystemStorageImplementation { get; set; }
@@ -103,84 +103,84 @@ namespace Nest
 		/// <summary>
 		/// Add any setting that we might have missed or is introduced by a plugin
 		/// </summary>
-		public UpdateSettingsDescriptor Add(string setting, object value)
+		public UpdateIndexSettingsDescriptor Add(string setting, object value)
 		{
 			this.BackingDictionary.Add(setting, value);
 			return this;
 		}
 
 		/// <inheritdoc />
-		public UpdateSettingsDescriptor NumberOfShards(int? numberOfShards) => Assign(a => a.NumberOfShards = numberOfShards);
+		public UpdateIndexSettingsDescriptor NumberOfShards(int? numberOfShards) => Assign(a => a.NumberOfShards = numberOfShards);
 
 		/// <inheritdoc />
-		public UpdateSettingsDescriptor FileSystemStorageImplementation(FileSystemStorageImplementation? fs) =>
+		public UpdateIndexSettingsDescriptor FileSystemStorageImplementation(FileSystemStorageImplementation? fs) =>
 			Assign(a => a.FileSystemStorageImplementation = fs);
 
 		/// <inheritdoc/ >
-		public UpdateSettingsDescriptor NumberOfReplicas(int? numberOfReplicas) =>
+		public UpdateIndexSettingsDescriptor NumberOfReplicas(int? numberOfReplicas) =>
 			Assign(a => a.NumberOfReplicas = numberOfReplicas);
 
 		/// <inheritdoc/ >
-		public UpdateSettingsDescriptor AutoExpandReplicas(string AutoExpandReplicas) =>
+		public UpdateIndexSettingsDescriptor AutoExpandReplicas(string AutoExpandReplicas) =>
 			Assign(a => a.AutoExpandReplicas = AutoExpandReplicas);
 
 		/// <inheritdoc/ >
-		public UpdateSettingsDescriptor BlocksMetadata(bool? blocksMetadata = true) =>
+		public UpdateIndexSettingsDescriptor BlocksMetadata(bool? blocksMetadata = true) =>
 			Assign(a => a.BlocksMetadata = blocksMetadata);
 
 		/// <inheritdoc/ >
-		public UpdateSettingsDescriptor BlocksRead(bool? blocksRead = true) =>
+		public UpdateIndexSettingsDescriptor BlocksRead(bool? blocksRead = true) =>
 			Assign(a => a.BlocksRead = blocksRead);
 
 		/// <inheritdoc/ >
-		public UpdateSettingsDescriptor BlocksReadOnly(bool? blocksReadOnly = true) =>
+		public UpdateIndexSettingsDescriptor BlocksReadOnly(bool? blocksReadOnly = true) =>
 			Assign(a => a.BlocksReadOnly = blocksReadOnly);
 
 		/// <inheritdoc/ >
-		public UpdateSettingsDescriptor BlocksWrite(bool? blocksWrite = true) =>
+		public UpdateIndexSettingsDescriptor BlocksWrite(bool? blocksWrite = true) =>
 			Assign(a => a.BlocksWrite = blocksWrite);
 
 		/// <inheritdoc/ >
-		public UpdateSettingsDescriptor Priority(int? priority) =>
+		public UpdateIndexSettingsDescriptor Priority(int? priority) =>
 			Assign(a => a.Priority = priority);
 
 		/// <inheritdoc/ >
-		public UpdateSettingsDescriptor WarmersEnabled(bool enabled = true) =>
+		public UpdateIndexSettingsDescriptor WarmersEnabled(bool enabled = true) =>
 			Assign(a => a.WarmersEnabled = enabled);
 
 		/// <inheritdoc/ >
-		public UpdateSettingsDescriptor RequestCacheEnabled(bool enabled = true) =>
+		public UpdateIndexSettingsDescriptor RequestCacheEnabled(bool enabled = true) =>
 			Assign(a => a.RequestCacheEnabled = enabled);
 
 		/// <inheritdoc/ >
-		public UpdateSettingsDescriptor Merge(Func<MergeSettingsDescriptor, IMergeSettings> merge) =>
+		public UpdateIndexSettingsDescriptor Merge(Func<MergeSettingsDescriptor, IMergeSettings> merge) =>
 			Assign(a => a.Merge = merge?.Invoke(new MergeSettingsDescriptor()));
 
 		/// <inheritdoc/ >
-		public UpdateSettingsDescriptor RecoveryInitialShards(Union<int, RecoveryInitialShards> initialShards) =>
+		public UpdateIndexSettingsDescriptor RecoveryInitialShards(Union<int, RecoveryInitialShards> initialShards) =>
 			Assign(a => a.RecoveryInitialShards = initialShards);
 
 		/// <inheritdoc/ >
-		public UpdateSettingsDescriptor RefreshInterval(TimeUnitExpression time) =>
+		public UpdateIndexSettingsDescriptor RefreshInterval(TimeUnitExpression time) =>
 			Assign(a => a.RefreshInterval = time);
 
 		/// <inheritdoc/ >
-		public UpdateSettingsDescriptor TotalShardsPerNode(int? totalShardsPerNode) =>
+		public UpdateIndexSettingsDescriptor TotalShardsPerNode(int? totalShardsPerNode) =>
 			Assign(a => a.RoutingAllocationTotalShardsPerNode = totalShardsPerNode);
 
 		/// <inheritdoc/ >
-		public UpdateSettingsDescriptor SlowLog(Func<SlowLogDescriptor, ISlowLog> slowLogSelector) =>
+		public UpdateIndexSettingsDescriptor SlowLog(Func<SlowLogDescriptor, ISlowLog> slowLogSelector) =>
 			Assign(a => a.SlowLog = slowLogSelector?.Invoke(new SlowLogDescriptor()));
 
 		/// <inheritdoc/ >
-		public UpdateSettingsDescriptor Translog(Func<TranslogSettingsDescriptor, ITranslogSettings> translogSelector) =>
+		public UpdateIndexSettingsDescriptor Translog(Func<TranslogSettingsDescriptor, ITranslogSettings> translogSelector) =>
 			Assign(a => a.Translog = translogSelector?.Invoke(new TranslogSettingsDescriptor()));
 
 		/// <inheritdoc/ >
-		public UpdateSettingsDescriptor UnassignedNodeLeftDelayedTimeout(TimeUnitExpression time) =>
+		public UpdateIndexSettingsDescriptor UnassignedNodeLeftDelayedTimeout(TimeUnitExpression time) =>
 			Assign(a => a.UnassignedNodeLeftDelayedTimeout = time);
 
-		public UpdateSettingsDescriptor Analysis(Func<AnalysisDescriptor, IAnalysis> selector) =>
+		public UpdateIndexSettingsDescriptor Analysis(Func<AnalysisDescriptor, IAnalysis> selector) =>
 			Assign(a => a.Analysis = selector?.Invoke(new AnalysisDescriptor()));
 	}
 }

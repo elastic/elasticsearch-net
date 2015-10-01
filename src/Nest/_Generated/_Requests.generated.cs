@@ -1472,6 +1472,34 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IDeleteIndexTemplateRequest : IRequest<DeleteIndexTemplateRequestParameters> 
+	{
+		Name Name { get; }
+	 } 
+	///<summary>Request parameters for IndicesDeleteTemplateForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
+	public partial class DeleteIndexTemplateRequest  : RequestBase<DeleteIndexTemplateRequestParameters>, IDeleteIndexTemplateRequest
+	{
+		Name IDeleteIndexTemplateRequest.Name => Self.RouteValues.Get<Name>("name");
+			/// <summary>/_template/{name}</summary>
+///<param name="name">this parameter is required</param>
+		public DeleteIndexTemplateRequest(Name name) : base(r=>r.Required("name", name)){}
+		
+
+			///<summary>Explicit operation timeout</summary>
+		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
+		
+		///<summary>Specify timeout for connection to master</summary>
+		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IDeleteRepositoryRequest : IRequest<DeleteRepositoryRequestParameters> 
 	{
 		Names RepositoryName { get; }
@@ -1672,34 +1700,6 @@ namespace Nest
 		
 
 			///<summary>Explicit operation timeout for connection to master node</summary>
-		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
-		
-		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
-	
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IDeleteTemplateRequest : IRequest<DeleteTemplateRequestParameters> 
-	{
-		Name Name { get; }
-	 } 
-	///<summary>Request parameters for IndicesDeleteTemplateForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
-	public partial class DeleteTemplateRequest  : RequestBase<DeleteTemplateRequestParameters>, IDeleteTemplateRequest
-	{
-		Name IDeleteTemplateRequest.Name => Self.RouteValues.Get<Name>("name");
-			/// <summary>/_template/{name}</summary>
-///<param name="name">this parameter is required</param>
-		public DeleteTemplateRequest(Name name) : base(r=>r.Required("name", name)){}
-		
-
-			///<summary>Explicit operation timeout</summary>
-		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
-		
-		///<summary>Specify timeout for connection to master</summary>
 		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
@@ -2242,6 +2242,41 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IGetIndexTemplateRequest : IRequest<GetIndexTemplateRequestParameters> 
+	{
+		Name Name { get; }
+	 } 
+	///<summary>Request parameters for IndicesGetTemplateForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
+	public partial class GetIndexTemplateRequest  : RequestBase<GetIndexTemplateRequestParameters>, IGetIndexTemplateRequest
+	{
+		Name IGetIndexTemplateRequest.Name => Self.RouteValues.Get<Name>("name");
+			/// <summary>/_template</summary>
+		public GetIndexTemplateRequest() : base(){}
+		
+
+		/// <summary>/_template/{name}</summary>
+///<param name="name">Optional, accepts null</param>
+		public GetIndexTemplateRequest(Name name) : base(r=>r.Optional("name", name)){}
+		
+
+			///<summary>Return settings in flat format (default: false)</summary>
+		public bool FlatSettings { get { return Q<bool>("flat_settings"); } set { Q("flat_settings", value); } }
+		
+		///<summary>Explicit operation timeout for connection to master node</summary>
+		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
+		
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetMappingRequest : IRequest<GetMappingRequestParameters> 
 	{
 		Indices Index { get; }
@@ -2534,41 +2569,6 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IGetTemplateRequest : IRequest<GetTemplateRequestParameters> 
-	{
-		Name Name { get; }
-	 } 
-	///<summary>Request parameters for IndicesGetTemplateForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
-	public partial class GetTemplateRequest  : RequestBase<GetTemplateRequestParameters>, IGetTemplateRequest
-	{
-		Name IGetTemplateRequest.Name => Self.RouteValues.Get<Name>("name");
-			/// <summary>/_template</summary>
-		public GetTemplateRequest() : base(){}
-		
-
-		/// <summary>/_template/{name}</summary>
-///<param name="name">Optional, accepts null</param>
-		public GetTemplateRequest(Name name) : base(r=>r.Optional("name", name)){}
-		
-
-			///<summary>Return settings in flat format (default: false)</summary>
-		public bool FlatSettings { get { return Q<bool>("flat_settings"); } set { Q("flat_settings", value); } }
-		
-		///<summary>Explicit operation timeout for connection to master node</summary>
-		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
-		
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
-		
-		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
-	
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetWarmerRequest : IRequest<GetWarmerRequestParameters> 
 	{
 		Indices Index { get; }
@@ -2723,6 +2723,34 @@ namespace Nest
 		
 		///<summary>Specific version type</summary>
 		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IIndexTemplateExistsRequest : IRequest<IndexTemplateExistsRequestParameters> 
+	{
+		Name Name { get; }
+	 } 
+	///<summary>Request parameters for IndicesExistsTemplateForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
+	public partial class IndexTemplateExistsRequest  : RequestBase<IndexTemplateExistsRequestParameters>, IIndexTemplateExistsRequest
+	{
+		Name IIndexTemplateExistsRequest.Name => Self.RouteValues.Get<Name>("name");
+			/// <summary>/_template/{name}</summary>
+///<param name="name">this parameter is required</param>
+		public IndexTemplateExistsRequest(Name name) : base(r=>r.Required("name", name)){}
+		
+
+			///<summary>Explicit operation timeout for connection to master node</summary>
+		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
+		
+		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
@@ -3492,6 +3520,43 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IPutIndexTemplateRequest : IRequest<PutIndexTemplateRequestParameters> 
+	{
+		Name Name { get; }
+	 } 
+	///<summary>Request parameters for IndicesPutTemplateForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
+	public partial class PutIndexTemplateRequest  : RequestBase<PutIndexTemplateRequestParameters>, IPutIndexTemplateRequest
+	{
+		Name IPutIndexTemplateRequest.Name => Self.RouteValues.Get<Name>("name");
+			/// <summary>/_template/{name}</summary>
+///<param name="name">this parameter is required</param>
+		public PutIndexTemplateRequest(Name name) : base(r=>r.Required("name", name)){}
+		
+
+			///<summary>The order for this template when merging multiple matching ones (higher numbers are merged later, overriding the lower numbers)</summary>
+		public long Order { get { return Q<long>("order"); } set { Q("order", value); } }
+		
+		///<summary>Whether the index template should only be added if new or can also replace an existing one</summary>
+		public bool Create { get { return Q<bool>("create"); } set { Q("create", value); } }
+		
+		///<summary>Explicit operation timeout</summary>
+		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
+		
+		///<summary>Specify timeout for connection to master</summary>
+		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
+		
+		///<summary>Return settings in flat format (default: false)</summary>
+		public bool FlatSettings { get { return Q<bool>("flat_settings"); } set { Q("flat_settings", value); } }
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IPutMappingRequest : IRequest<PutMappingRequestParameters> 
 	{
 		Indices Index { get; }
@@ -3636,40 +3701,6 @@ namespace Nest
 		
 		///<summary>Specific version type</summary>
 		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
-		
-		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
-	
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IPutTemplateRequest : IRequest<PutTemplateRequestParameters> 
-	{
-		Name Name { get; }
-	 } 
-	///<summary>Request parameters for IndicesPutTemplateForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
-	public partial class PutTemplateRequest  : RequestBase<PutTemplateRequestParameters>, IPutTemplateRequest
-	{
-		Name IPutTemplateRequest.Name => Self.RouteValues.Get<Name>("name");
-			/// <summary>/_template/{name}</summary>
-///<param name="name">this parameter is required</param>
-		public PutTemplateRequest(Name name) : base(r=>r.Required("name", name)){}
-		
-
-			///<summary>Whether the index template should only be added if new or can also replace an existing one</summary>
-		public bool Create { get { return Q<bool>("create"); } set { Q("create", value); } }
-		
-		///<summary>Explicit operation timeout</summary>
-		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
-		
-		///<summary>Specify timeout for connection to master</summary>
-		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
-		
-		///<summary>Return settings in flat format (default: false)</summary>
-		public bool FlatSettings { get { return Q<bool>("flat_settings"); } set { Q("flat_settings", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
@@ -4668,34 +4699,6 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ITemplateExistsRequest : IRequest<TemplateExistsRequestParameters> 
-	{
-		Name Name { get; }
-	 } 
-	///<summary>Request parameters for IndicesExistsTemplateForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
-	public partial class TemplateExistsRequest  : RequestBase<TemplateExistsRequestParameters>, ITemplateExistsRequest
-	{
-		Name ITemplateExistsRequest.Name => Self.RouteValues.Get<Name>("name");
-			/// <summary>/_template/{name}</summary>
-///<param name="name">this parameter is required</param>
-		public TemplateExistsRequest(Name name) : base(r=>r.Required("name", name)){}
-		
-
-			///<summary>Explicit operation timeout for connection to master node</summary>
-		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
-		
-		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public bool Local { get { return Q<bool>("local"); } set { Q("local", value); } }
-		
-		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
-	
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ITermVectorsRequest : IRequest<TermVectorsRequestParameters> 
 	{
 		IndexName Index { get; }
@@ -4806,6 +4809,47 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IUpdateIndexSettingsRequest : IRequest<UpdateIndexSettingsRequestParameters> 
+	{
+		Indices Index { get; }
+	 } 
+	///<summary>Request parameters for IndicesPutSettingsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-update-settings.html</pre></summary>
+	public partial class UpdateIndexSettingsRequest  : RequestBase<UpdateIndexSettingsRequestParameters>, IUpdateIndexSettingsRequest
+	{
+		Indices IUpdateIndexSettingsRequest.Index => Self.RouteValues.Get<Indices>("index");
+			/// <summary>/_settings</summary>
+		public UpdateIndexSettingsRequest() : base(){}
+		
+
+		/// <summary>/{index}/_settings</summary>
+///<param name="index">Optional, accepts null</param>
+		public UpdateIndexSettingsRequest(Indices index) : base(r=>r.Optional("index", index)){}
+		
+
+			///<summary>Specify timeout for connection to master</summary>
+		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
+		
+		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
+		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
+		
+		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
+		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
+		
+		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
+		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
+		
+		///<summary>Return settings in flat format (default: false)</summary>
+		public bool FlatSettings { get { return Q<bool>("flat_settings"); } set { Q("flat_settings", value); } }
+		
+		///<summary>The URL-encoded request definition</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IUpdateRequest : IRequest<UpdateRequestParameters> 
 	{
 		Id Id { get; }
@@ -4866,47 +4910,6 @@ namespace Nest
 		
 		///<summary>Specific version type</summary>
 		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
-		
-		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
-	
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IUpdateSettingsRequest : IRequest<UpdateSettingsRequestParameters> 
-	{
-		Indices Index { get; }
-	 } 
-	///<summary>Request parameters for IndicesPutSettingsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-update-settings.html</pre></summary>
-	public partial class UpdateSettingsRequest  : RequestBase<UpdateSettingsRequestParameters>, IUpdateSettingsRequest
-	{
-		Indices IUpdateSettingsRequest.Index => Self.RouteValues.Get<Indices>("index");
-			/// <summary>/_settings</summary>
-		public UpdateSettingsRequest() : base(){}
-		
-
-		/// <summary>/{index}/_settings</summary>
-///<param name="index">Optional, accepts null</param>
-		public UpdateSettingsRequest(Indices index) : base(r=>r.Optional("index", index)){}
-		
-
-			///<summary>Specify timeout for connection to master</summary>
-		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
-		
-		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public bool IgnoreUnavailable { get { return Q<bool>("ignore_unavailable"); } set { Q("ignore_unavailable", value); } }
-		
-		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public bool AllowNoIndices { get { return Q<bool>("allow_no_indices"); } set { Q("allow_no_indices", value); } }
-		
-		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
-		
-		///<summary>Return settings in flat format (default: false)</summary>
-		public bool FlatSettings { get { return Q<bool>("flat_settings"); } set { Q("flat_settings", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }

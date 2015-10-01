@@ -8,10 +8,11 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonConverter(typeof(IndicesJsonConverter))]
-	public class Indices : Union<Indices.AllIndices, Indices.ManyIndices>, IUrlParameter
+	public class Indices : Union<Indices.AllIndicesMarker, Indices.ManyIndices>, IUrlParameter
 	{
-		public class AllIndices { internal AllIndices() { } }
-		public static AllIndices All { get; } = new AllIndices();
+		public class AllIndicesMarker { internal AllIndicesMarker() { } }
+		public static Indices All { get; } = new Indices(new AllIndicesMarker());
+		public static Indices AllIndices { get; } = new Indices(new AllIndicesMarker());
 		public class ManyIndices
 		{
 			private readonly List<IndexName> _indices = new List<IndexName>();
@@ -25,7 +26,7 @@ namespace Nest
 			}
 		}
 
-		internal Indices(Indices.AllIndices all) : base(all) { }
+		internal Indices(Indices.AllIndicesMarker all) : base(all) { }
 		internal Indices(Indices.ManyIndices indices) : base(indices) { }
 		internal Indices(IEnumerable<IndexName> indices) : base(new ManyIndices(indices)) { }
 
@@ -43,7 +44,6 @@ namespace Nest
 		}
 
 		public static implicit operator Indices(string indicesString) => Parse(indicesString);
-		public static implicit operator Indices(AllIndices all) => new Indices(all);
 		public static implicit operator Indices(ManyIndices many) => new Indices(many);
 		public static implicit operator Indices(IndexName[] many) => new ManyIndices(many);
 		public static implicit operator Indices(IndexName index) => new ManyIndices(new[] { index });

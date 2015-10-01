@@ -1868,26 +1868,26 @@ namespace Nest
 	}
 	
 	///<summary>descriptor for IndicesDeleteTemplateForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
-	public partial class DeleteTemplateDescriptor  : RequestDescriptorBase<DeleteTemplateDescriptor,DeleteTemplateRequestParameters, IDeleteTemplateRequest>, IDeleteTemplateRequest
+	public partial class DeleteIndexTemplateDescriptor  : RequestDescriptorBase<DeleteIndexTemplateDescriptor,DeleteIndexTemplateRequestParameters, IDeleteIndexTemplateRequest>, IDeleteIndexTemplateRequest
 	{ 
-		Name IDeleteTemplateRequest.Name => Self.RouteValues.Get<Name>("name");
+		Name IDeleteIndexTemplateRequest.Name => Self.RouteValues.Get<Name>("name");
 			/// <summary>/_template/{name}</summary>
 ///<param name="name"> this parameter is required</param>
-		public DeleteTemplateDescriptor(Name name) : base(r=>r.Required("name", name)){}
+		public DeleteIndexTemplateDescriptor(Name name) : base(r=>r.Required("name", name)){}
 		
 
 		
 		///<summary>Explicit operation timeout</summary>
-		public DeleteTemplateDescriptor Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
+		public DeleteIndexTemplateDescriptor Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
 
 		///<summary>Specify timeout for connection to master</summary>
-		public DeleteTemplateDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
+		public DeleteIndexTemplateDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>The URL-encoded request definition</summary>
-		public DeleteTemplateDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public DeleteIndexTemplateDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public DeleteTemplateDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		public DeleteIndexTemplateDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -2005,26 +2005,26 @@ namespace Nest
 	}
 	
 	///<summary>descriptor for IndicesExistsTemplateForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
-	public partial class TemplateExistsDescriptor  : RequestDescriptorBase<TemplateExistsDescriptor,TemplateExistsRequestParameters, ITemplateExistsRequest>, ITemplateExistsRequest
+	public partial class IndexTemplateExistsDescriptor  : RequestDescriptorBase<IndexTemplateExistsDescriptor,IndexTemplateExistsRequestParameters, IIndexTemplateExistsRequest>, IIndexTemplateExistsRequest
 	{ 
-		Name ITemplateExistsRequest.Name => Self.RouteValues.Get<Name>("name");
+		Name IIndexTemplateExistsRequest.Name => Self.RouteValues.Get<Name>("name");
 			/// <summary>/_template/{name}</summary>
 ///<param name="name"> this parameter is required</param>
-		public TemplateExistsDescriptor(Name name) : base(r=>r.Required("name", name)){}
+		public IndexTemplateExistsDescriptor(Name name) : base(r=>r.Required("name", name)){}
 		
 
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TemplateExistsDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
+		public IndexTemplateExistsDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public TemplateExistsDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
+		public IndexTemplateExistsDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
 
 		///<summary>The URL-encoded request definition</summary>
-		public TemplateExistsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public IndexTemplateExistsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public TemplateExistsDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		public IndexTemplateExistsDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -2431,31 +2431,31 @@ namespace Nest
 	}
 	
 	///<summary>descriptor for IndicesGetTemplateForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
-	public partial class GetTemplateDescriptor  : RequestDescriptorBase<GetTemplateDescriptor,GetTemplateRequestParameters, IGetTemplateRequest>, IGetTemplateRequest
+	public partial class GetIndexTemplateDescriptor  : RequestDescriptorBase<GetIndexTemplateDescriptor,GetIndexTemplateRequestParameters, IGetIndexTemplateRequest>, IGetIndexTemplateRequest
 	{ 
-		Name IGetTemplateRequest.Name => Self.RouteValues.Get<Name>("name");
+		Name IGetIndexTemplateRequest.Name => Self.RouteValues.Get<Name>("name");
 			/// <summary>/_template</summary>
-		public GetTemplateDescriptor() : base(){}
+		public GetIndexTemplateDescriptor() : base(){}
 		
 
 			///<summary>The name of the template</summary>
-		public GetTemplateDescriptor Name(Name name) => Assign(a=>a.RouteValues.Optional("name", name));
+		public GetIndexTemplateDescriptor Name(Name name) => Assign(a=>a.RouteValues.Optional("name", name));
 
 	
 		///<summary>Return settings in flat format (default: false)</summary>
-		public GetTemplateDescriptor FlatSettings(bool flat_settings = true) => AssignParam(p=>p.FlatSettings(flat_settings));
+		public GetIndexTemplateDescriptor FlatSettings(bool flat_settings = true) => AssignParam(p=>p.FlatSettings(flat_settings));
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public GetTemplateDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
+		public GetIndexTemplateDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public GetTemplateDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
+		public GetIndexTemplateDescriptor Local(bool local = true) => AssignParam(p=>p.Local(local));
 
 		///<summary>The URL-encoded request definition</summary>
-		public GetTemplateDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public GetIndexTemplateDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public GetTemplateDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		public GetIndexTemplateDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -2726,73 +2726,76 @@ namespace Nest
 	}
 	
 	///<summary>descriptor for IndicesPutSettingsForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-update-settings.html</pre></summary>
-	public partial class UpdateSettingsDescriptor  : RequestDescriptorBase<UpdateSettingsDescriptor,UpdateSettingsRequestParameters, IUpdateSettingsRequest>, IUpdateSettingsRequest
+	public partial class UpdateIndexSettingsDescriptor  : RequestDescriptorBase<UpdateIndexSettingsDescriptor,UpdateIndexSettingsRequestParameters, IUpdateIndexSettingsRequest>, IUpdateIndexSettingsRequest
 	{ 
-		Indices IUpdateSettingsRequest.Index => Self.RouteValues.Get<Indices>("index");
+		Indices IUpdateIndexSettingsRequest.Index => Self.RouteValues.Get<Indices>("index");
 			/// <summary>/_settings</summary>
-		public UpdateSettingsDescriptor() : base(){}
+		public UpdateIndexSettingsDescriptor() : base(){}
 		
 
 			///<summary>A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</summary>
-		public UpdateSettingsDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
+		public UpdateIndexSettingsDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
 
 		///<summary>A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</summary>
-		public UpdateSettingsDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
+		public UpdateIndexSettingsDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
 
 		///<summary>A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</summary>
-		public UpdateSettingsDescriptor AllIndices() => this.Index(Indices.All);
+		public UpdateIndexSettingsDescriptor AllIndices() => this.Index(Indices.All);
 
 	
 		///<summary>Specify timeout for connection to master</summary>
-		public UpdateSettingsDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
+		public UpdateIndexSettingsDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public UpdateSettingsDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
+		public UpdateIndexSettingsDescriptor IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
 
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public UpdateSettingsDescriptor AllowNoIndices(bool allow_no_indices = true) => AssignParam(p=>p.AllowNoIndices(allow_no_indices));
+		public UpdateIndexSettingsDescriptor AllowNoIndices(bool allow_no_indices = true) => AssignParam(p=>p.AllowNoIndices(allow_no_indices));
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public UpdateSettingsDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => AssignParam(p=>p.ExpandWildcards(expand_wildcards));
+		public UpdateIndexSettingsDescriptor ExpandWildcards(ExpandWildcards expand_wildcards) => AssignParam(p=>p.ExpandWildcards(expand_wildcards));
 
 		///<summary>Return settings in flat format (default: false)</summary>
-		public UpdateSettingsDescriptor FlatSettings(bool flat_settings = true) => AssignParam(p=>p.FlatSettings(flat_settings));
+		public UpdateIndexSettingsDescriptor FlatSettings(bool flat_settings = true) => AssignParam(p=>p.FlatSettings(flat_settings));
 
 		///<summary>The URL-encoded request definition</summary>
-		public UpdateSettingsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public UpdateIndexSettingsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public UpdateSettingsDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		public UpdateIndexSettingsDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
 	///<summary>descriptor for IndicesPutTemplateForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
-	public partial class PutTemplateDescriptor  : RequestDescriptorBase<PutTemplateDescriptor,PutTemplateRequestParameters, IPutTemplateRequest>, IPutTemplateRequest
+	public partial class PutIndexTemplateDescriptor  : RequestDescriptorBase<PutIndexTemplateDescriptor,PutIndexTemplateRequestParameters, IPutIndexTemplateRequest>, IPutIndexTemplateRequest
 	{ 
-		Name IPutTemplateRequest.Name => Self.RouteValues.Get<Name>("name");
+		Name IPutIndexTemplateRequest.Name => Self.RouteValues.Get<Name>("name");
 			/// <summary>/_template/{name}</summary>
 ///<param name="name"> this parameter is required</param>
-		public PutTemplateDescriptor(Name name) : base(r=>r.Required("name", name)){}
+		public PutIndexTemplateDescriptor(Name name) : base(r=>r.Required("name", name)){}
 		
 
 		
+		///<summary>The order for this template when merging multiple matching ones (higher numbers are merged later, overriding the lower numbers)</summary>
+		public PutIndexTemplateDescriptor Order(long order) => AssignParam(p=>p.Order(order));
+
 		///<summary>Whether the index template should only be added if new or can also replace an existing one</summary>
-		public PutTemplateDescriptor Create(bool create = true) => AssignParam(p=>p.Create(create));
+		public PutIndexTemplateDescriptor Create(bool create = true) => AssignParam(p=>p.Create(create));
 
 		///<summary>Explicit operation timeout</summary>
-		public PutTemplateDescriptor Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
+		public PutIndexTemplateDescriptor Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
 
 		///<summary>Specify timeout for connection to master</summary>
-		public PutTemplateDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
+		public PutIndexTemplateDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Return settings in flat format (default: false)</summary>
-		public PutTemplateDescriptor FlatSettings(bool flat_settings = true) => AssignParam(p=>p.FlatSettings(flat_settings));
+		public PutIndexTemplateDescriptor FlatSettings(bool flat_settings = true) => AssignParam(p=>p.FlatSettings(flat_settings));
 
 		///<summary>The URL-encoded request definition</summary>
-		public PutTemplateDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public PutIndexTemplateDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public PutTemplateDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		public PutIndexTemplateDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	

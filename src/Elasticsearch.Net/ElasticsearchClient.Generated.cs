@@ -2491,7 +2491,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="name">The name of the template</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> IndicesDeleteTemplateForAll<T>(string name, Func<DeleteTemplateRequestParameters, DeleteTemplateRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> IndicesDeleteTemplateForAll<T>(string name, Func<DeleteIndexTemplateRequestParameters, DeleteIndexTemplateRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(DELETE, Url($"_template/{name.NotNull("name")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a DELETE on /_template/{name} 
@@ -2505,7 +2505,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="name">The name of the template</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> IndicesDeleteTemplateForAllAsync<T>(string name, Func<DeleteTemplateRequestParameters, DeleteTemplateRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> IndicesDeleteTemplateForAllAsync<T>(string name, Func<DeleteIndexTemplateRequestParameters, DeleteIndexTemplateRequestParameters> requestParameters = null)
 			where T : class => this.DoRequestAsync<T>(DELETE, Url($"_template/{name.NotNull("name")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a DELETE on /{index}/_warmer/{name} 
@@ -2663,8 +2663,8 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="name">The name of the template</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> IndicesExistsTemplateForAll<T>(string name, Func<TemplateExistsRequestParameters, TemplateExistsRequestParameters> requestParameters = null)
-			where T : class => this.DoRequest<T>(HEAD, Url($"_template/{name.NotNull("name")}"), null, _params(requestParameters, allow404: true));
+		public ElasticsearchResponse<T> IndicesExistsTemplateForAll<T>(string name, Func<IndexTemplateExistsRequestParameters, IndexTemplateExistsRequestParameters> requestParameters = null)
+			where T : class => this.DoRequest<T>(HEAD, Url($"_template/{name.NotNull("name")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a HEAD on /_template/{name} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -2677,8 +2677,8 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="name">The name of the template</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> IndicesExistsTemplateForAllAsync<T>(string name, Func<TemplateExistsRequestParameters, TemplateExistsRequestParameters> requestParameters = null)
-			where T : class => this.DoRequestAsync<T>(HEAD, Url($"_template/{name.NotNull("name")}"), null, _params(requestParameters, allow404: true));
+		public Task<ElasticsearchResponse<T>> IndicesExistsTemplateForAllAsync<T>(string name, Func<IndexTemplateExistsRequestParameters, IndexTemplateExistsRequestParameters> requestParameters = null)
+			where T : class => this.DoRequestAsync<T>(HEAD, Url($"_template/{name.NotNull("name")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a HEAD on /{index}/{type} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -3562,7 +3562,7 @@ namespace Elasticsearch.Net
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para>	
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> IndicesGetTemplateForAll<T>(Func<GetTemplateRequestParameters, GetTemplateRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> IndicesGetTemplateForAll<T>(Func<GetIndexTemplateRequestParameters, GetIndexTemplateRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(GET, Url($"_template"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_template 
@@ -3575,7 +3575,7 @@ namespace Elasticsearch.Net
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para>	
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> IndicesGetTemplateForAllAsync<T>(Func<GetTemplateRequestParameters, GetTemplateRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> IndicesGetTemplateForAllAsync<T>(Func<GetIndexTemplateRequestParameters, GetIndexTemplateRequestParameters> requestParameters = null)
 			where T : class => this.DoRequestAsync<T>(GET, Url($"_template"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_template/{name} 
@@ -3589,7 +3589,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="name">The name of the template</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> IndicesGetTemplateForAll<T>(string name, Func<GetTemplateRequestParameters, GetTemplateRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> IndicesGetTemplateForAll<T>(string name, Func<GetIndexTemplateRequestParameters, GetIndexTemplateRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(GET, Url($"_template/{name.NotNull("name")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_template/{name} 
@@ -3603,7 +3603,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="name">The name of the template</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> IndicesGetTemplateForAllAsync<T>(string name, Func<GetTemplateRequestParameters, GetTemplateRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> IndicesGetTemplateForAllAsync<T>(string name, Func<GetIndexTemplateRequestParameters, GetIndexTemplateRequestParameters> requestParameters = null)
 			where T : class => this.DoRequestAsync<T>(GET, Url($"_template/{name.NotNull("name")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_upgrade 
@@ -4139,7 +4139,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">The index settings to be updated</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> IndicesPutSettingsForAll<T>(PostData<object> body, Func<UpdateSettingsRequestParameters, UpdateSettingsRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> IndicesPutSettingsForAll<T>(PostData<object> body, Func<UpdateIndexSettingsRequestParameters, UpdateIndexSettingsRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(PUT, Url($"_settings"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /_settings 
@@ -4153,7 +4153,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">The index settings to be updated</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> IndicesPutSettingsForAllAsync<T>(PostData<object> body, Func<UpdateSettingsRequestParameters, UpdateSettingsRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> IndicesPutSettingsForAllAsync<T>(PostData<object> body, Func<UpdateIndexSettingsRequestParameters, UpdateIndexSettingsRequestParameters> requestParameters = null)
 			where T : class => this.DoRequestAsync<T>(PUT, Url($"_settings"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /{index}/_settings 
@@ -4168,7 +4168,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="body">The index settings to be updated</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> IndicesPutSettings<T>(string index, PostData<object> body, Func<UpdateSettingsRequestParameters, UpdateSettingsRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> IndicesPutSettings<T>(string index, PostData<object> body, Func<UpdateIndexSettingsRequestParameters, UpdateIndexSettingsRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(PUT, Url($"{index.NotNull("index")}/_settings"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /{index}/_settings 
@@ -4183,7 +4183,7 @@ namespace Elasticsearch.Net
 		///<param name="index">A comma-separated list of index names; use `_all` or empty string to perform the operation on all indices</param>
 		///<param name="body">The index settings to be updated</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> IndicesPutSettingsAsync<T>(string index, PostData<object> body, Func<UpdateSettingsRequestParameters, UpdateSettingsRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> IndicesPutSettingsAsync<T>(string index, PostData<object> body, Func<UpdateIndexSettingsRequestParameters, UpdateIndexSettingsRequestParameters> requestParameters = null)
 			where T : class => this.DoRequestAsync<T>(PUT, Url($"{index.NotNull("index")}/_settings"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /_template/{name} 
@@ -4198,7 +4198,7 @@ namespace Elasticsearch.Net
 		///<param name="name">The name of the template</param>
 		///<param name="body">The template definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> IndicesPutTemplateForAll<T>(string name, PostData<object> body, Func<PutTemplateRequestParameters, PutTemplateRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> IndicesPutTemplateForAll<T>(string name, PostData<object> body, Func<PutIndexTemplateRequestParameters, PutIndexTemplateRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(PUT, Url($"_template/{name.NotNull("name")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /_template/{name} 
@@ -4213,7 +4213,7 @@ namespace Elasticsearch.Net
 		///<param name="name">The name of the template</param>
 		///<param name="body">The template definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> IndicesPutTemplateForAllAsync<T>(string name, PostData<object> body, Func<PutTemplateRequestParameters, PutTemplateRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> IndicesPutTemplateForAllAsync<T>(string name, PostData<object> body, Func<PutIndexTemplateRequestParameters, PutIndexTemplateRequestParameters> requestParameters = null)
 			where T : class => this.DoRequestAsync<T>(PUT, Url($"_template/{name.NotNull("name")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_template/{name} 
@@ -4228,7 +4228,7 @@ namespace Elasticsearch.Net
 		///<param name="name">The name of the template</param>
 		///<param name="body">The template definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> IndicesPutTemplatePostForAll<T>(string name, PostData<object> body, Func<PutTemplateRequestParameters, PutTemplateRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> IndicesPutTemplatePostForAll<T>(string name, PostData<object> body, Func<PutIndexTemplateRequestParameters, PutIndexTemplateRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(POST, Url($"_template/{name.NotNull("name")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_template/{name} 
@@ -4243,7 +4243,7 @@ namespace Elasticsearch.Net
 		///<param name="name">The name of the template</param>
 		///<param name="body">The template definition</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> IndicesPutTemplatePostForAllAsync<T>(string name, PostData<object> body, Func<PutTemplateRequestParameters, PutTemplateRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> IndicesPutTemplatePostForAllAsync<T>(string name, PostData<object> body, Func<PutIndexTemplateRequestParameters, PutIndexTemplateRequestParameters> requestParameters = null)
 			where T : class => this.DoRequestAsync<T>(POST, Url($"_template/{name.NotNull("name")}"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /_warmer/{name} 

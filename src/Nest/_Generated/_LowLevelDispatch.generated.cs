@@ -1164,7 +1164,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesDeleteAlias", p, new [] { DELETE }, "/{index}/_alias/{name}", "/{index}/_aliases/{name}");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesDeleteTemplateDispatch<T>(IRequest<DeleteTemplateRequestParameters> p ) where T : class
+		internal ElasticsearchResponse<T> IndicesDeleteTemplateDispatch<T>(IRequest<DeleteIndexTemplateRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1176,7 +1176,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesDeleteTemplate", p, new [] { DELETE }, "/_template/{name}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesDeleteTemplateDispatchAsync<T>(IRequest<DeleteTemplateRequestParameters> p ) where T : class
+		internal Task<ElasticsearchResponse<T>> IndicesDeleteTemplateDispatchAsync<T>(IRequest<DeleteIndexTemplateRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1264,7 +1264,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesExistsAlias", p, new [] { HEAD }, "/_alias/{name}", "/{index}/_alias/{name}", "/{index}/_alias");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesExistsTemplateDispatch<T>(IRequest<TemplateExistsRequestParameters> p ) where T : class
+		internal ElasticsearchResponse<T> IndicesExistsTemplateDispatch<T>(IRequest<IndexTemplateExistsRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1276,7 +1276,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesExistsTemplate", p, new [] { HEAD }, "/_template/{name}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesExistsTemplateDispatchAsync<T>(IRequest<TemplateExistsRequestParameters> p ) where T : class
+		internal Task<ElasticsearchResponse<T>> IndicesExistsTemplateDispatchAsync<T>(IRequest<IndexTemplateExistsRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1544,7 +1544,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesGetSettings", p, new [] { GET }, "/_settings", "/{index}/_settings", "/{index}/_settings/{name}", "/_settings/{name}");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesGetTemplateDispatch<T>(IRequest<GetTemplateRequestParameters> p ) where T : class
+		internal ElasticsearchResponse<T> IndicesGetTemplateDispatch<T>(IRequest<GetIndexTemplateRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1556,7 +1556,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesGetTemplate", p, new [] { GET }, "/_template", "/_template/{name}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesGetTemplateDispatchAsync<T>(IRequest<GetTemplateRequestParameters> p ) where T : class
+		internal Task<ElasticsearchResponse<T>> IndicesGetTemplateDispatchAsync<T>(IRequest<GetIndexTemplateRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1746,7 +1746,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesPutMapping", p, new [] { PUT, POST }, "/{index}/{type}/_mapping", "/{index}/_mapping/{type}", "/_mapping/{type}", "/{index}/{type}/_mappings", "/{index}/_mappings/{type}", "/_mappings/{type}");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesPutSettingsDispatch<T>(IRequest<UpdateSettingsRequestParameters> p , object body) where T : class
+		internal ElasticsearchResponse<T> IndicesPutSettingsDispatch<T>(IRequest<UpdateIndexSettingsRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1758,7 +1758,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesPutSettings", p, new [] { PUT }, "/_settings", "/{index}/_settings");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesPutSettingsDispatchAsync<T>(IRequest<UpdateSettingsRequestParameters> p , object body) where T : class
+		internal Task<ElasticsearchResponse<T>> IndicesPutSettingsDispatchAsync<T>(IRequest<UpdateIndexSettingsRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1770,7 +1770,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesPutSettings", p, new [] { PUT }, "/_settings", "/{index}/_settings");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesPutTemplateDispatch<T>(IRequest<PutTemplateRequestParameters> p , object body) where T : class
+		internal ElasticsearchResponse<T> IndicesPutTemplateDispatch<T>(IRequest<PutIndexTemplateRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1786,7 +1786,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesPutTemplate", p, new [] { PUT, POST }, "/_template/{name}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesPutTemplateDispatchAsync<T>(IRequest<PutTemplateRequestParameters> p , object body) where T : class
+		internal Task<ElasticsearchResponse<T>> IndicesPutTemplateDispatchAsync<T>(IRequest<PutIndexTemplateRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{

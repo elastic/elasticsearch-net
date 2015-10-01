@@ -23,7 +23,7 @@ namespace Tests.Framework.Integration
 
 		public void CreateIndicesAndMappings()
 		{
-			var putTemplateResult = this.Client.PutTemplate("raw_fields", p => p
+			var putTemplateResult = this.Client.PutIndexTemplate("raw_fields", p => p
 				.Template("*") //match on all created indices
 				.Settings(s => s
 					.NumberOfReplicas(0)
