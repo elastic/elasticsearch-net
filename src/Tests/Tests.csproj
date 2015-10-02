@@ -171,6 +171,12 @@
     <Compile Include="IndexModules\IndexSettings\SlowLog\SlowLogSettings.cs" />
     <Compile Include="IndexModules\IndexSettings\Translog\TranslogSettings.cs" />
     <Compile Include="IndexModules\Similarity\SimilaritySettings.cs" />
+    <Compile Include="Indices\AliasManagement\AliasExists\AliasExistsUrlTests.cs" />
+    <Compile Include="Indices\AliasManagement\Alias\AliasUrlTests.cs" />
+    <Compile Include="Indices\AliasManagement\DeleteAlias\DeleteAliasUrlTests.cs" />
+    <Compile Include="Indices\AliasManagement\GetAliasesUrlTests.cs\GetAliasesUrlTests.cs" />
+    <Compile Include="Indices\AliasManagement\GetAlias\GetAliasUrlTests.cs" />
+    <Compile Include="Indices\AliasManagement\PutAliasUrlTests\PutAliasUrlTests.cs" />
     <Compile Include="Indices\Analyze\AnalyzeUrlTests.cs" />
     <Compile Include="Indices\IndexManagement\CreateIndex\CreateIndexApiTest.cs" />
     <Compile Include="Indices\IndexManagement\CreateIndex\CreateIndexUrlTests.cs" />
@@ -267,7 +273,6 @@
     <Folder Include="Aggregations\Metric\" />
     <Folder Include="Aggregations\Pipeline\" />
     <Folder Include="Cluster\NodeStats\" />
-    <Folder Include="Indices\AliasManagement\" />
     <Folder Include="Migration\" />
     <Folder Include="Modules\" />
     <Folder Include="Plugins\Analysis\Phonetic\" />

@@ -1836,7 +1836,7 @@ namespace Nest
 	}
 	
 	///<summary>descriptor for IndicesDeleteAlias <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-aliases.html</pre></summary>
-	public partial class DeleteAliasDescriptor<T>  : RequestDescriptorBase<DeleteAliasDescriptor<T>,DeleteAliasRequestParameters, IDeleteAliasRequest>, IDeleteAliasRequest
+	public partial class DeleteAliasDescriptor  : RequestDescriptorBase<DeleteAliasDescriptor,DeleteAliasRequestParameters, IDeleteAliasRequest>, IDeleteAliasRequest
 	{ 
 		Indices IDeleteAliasRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Names IDeleteAliasRequest.Name => Self.RouteValues.Get<Names>("name");
@@ -1847,26 +1847,26 @@ namespace Nest
 		
 
 			///<summary>A comma-separated list of index names (supports wildcards); use `_all` for all indices</summary>
-		public DeleteAliasDescriptor<T> Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
+		public DeleteAliasDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
 
 		///<summary>A comma-separated list of index names (supports wildcards); use `_all` for all indices</summary>
-		public DeleteAliasDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
+		public DeleteAliasDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
 
 		///<summary>A comma-separated list of index names (supports wildcards); use `_all` for all indices</summary>
-		public DeleteAliasDescriptor<T> AllIndices() => this.Index(Indices.All);
+		public DeleteAliasDescriptor AllIndices() => this.Index(Indices.All);
 
 	
 		///<summary>Explicit timestamp for the document</summary>
-		public DeleteAliasDescriptor<T> Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
+		public DeleteAliasDescriptor Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
 
 		///<summary>Specify timeout for connection to master</summary>
-		public DeleteAliasDescriptor<T> MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
+		public DeleteAliasDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>The URL-encoded request definition</summary>
-		public DeleteAliasDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
+		public DeleteAliasDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public DeleteAliasDescriptor<T> FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		public DeleteAliasDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	

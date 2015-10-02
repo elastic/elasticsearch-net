@@ -18,13 +18,13 @@ namespace Nest
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-aliases.html#alias-retrieving
 		/// </summary>
 		/// <param name="getAliasDescriptor">A descriptor that describes which aliases/indexes we are interested int</param>
-		IGetAliasesResponse GetAlias(Func<GetAliasDescriptor, IGetAliasRequest> getAliasDescriptor);
+		IGetAliasesResponse GetAlias(Func<GetAliasDescriptor, IGetAliasRequest> getAliasDescriptor = null);
 
 		/// <inheritdoc/>
 		IGetAliasesResponse GetAlias(IGetAliasRequest getAliasRequest);
 
 		/// <inheritdoc/>
-		Task<IGetAliasesResponse> GetAliasAsync(Func<GetAliasDescriptor, IGetAliasRequest> getAliasDescriptor);
+		Task<IGetAliasesResponse> GetAliasAsync(Func<GetAliasDescriptor, IGetAliasRequest> getAliasDescriptor = null);
 
 		/// <inheritdoc/>
 		Task<IGetAliasesResponse> GetAliasAsync(IGetAliasRequest getAliasRequest);
@@ -33,8 +33,8 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IGetAliasesResponse GetAlias(Func<GetAliasDescriptor, IGetAliasRequest> getAliasDescriptor) =>
-			this.GetAlias(getAliasDescriptor?.Invoke(new GetAliasDescriptor()));
+		public IGetAliasesResponse GetAlias(Func<GetAliasDescriptor, IGetAliasRequest> getAliasDescriptor = null) =>
+			this.GetAlias(getAliasDescriptor.InvokeOrDefault(new GetAliasDescriptor()));
 
 		/// <inheritdoc/>
 		public IGetAliasesResponse GetAlias(IGetAliasRequest GetAliasRequest) => 
@@ -45,8 +45,8 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<IGetAliasesResponse> GetAliasAsync(Func<GetAliasDescriptor, IGetAliasRequest> getAliasDescriptor) =>
-			this.GetAliasAsync(getAliasDescriptor?.Invoke(new GetAliasDescriptor()));
+		public Task<IGetAliasesResponse> GetAliasAsync(Func<GetAliasDescriptor, IGetAliasRequest> getAliasDescriptor = null) =>
+			this.GetAliasAsync(getAliasDescriptor.InvokeOrDefault(new GetAliasDescriptor()));
 
 		/// <inheritdoc/>
 		public Task<IGetAliasesResponse> GetAliasAsync(IGetAliasRequest getAliasRequest) => 
