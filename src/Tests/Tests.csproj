@@ -171,6 +171,7 @@
     <Compile Include="IndexModules\IndexSettings\SlowLog\SlowLogSettings.cs" />
     <Compile Include="IndexModules\IndexSettings\Translog\TranslogSettings.cs" />
     <Compile Include="IndexModules\Similarity\SimilaritySettings.cs" />
+    <Compile Include="Indices\Analyze\AnalyzeUrlTests.cs" />
     <Compile Include="Indices\IndexManagement\CreateIndex\CreateIndexApiTest.cs" />
     <Compile Include="Indices\IndexManagement\CreateIndex\CreateIndexUrlTests.cs" />
     <Compile Include="Indices\IndexManagement\DeleteIndex\DeleteIndexUrlTests.cs" />
