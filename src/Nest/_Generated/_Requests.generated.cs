@@ -833,15 +833,15 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface ICloseIndexRequest : IRequest<CloseIndexRequestParameters> 
 	{
-		IndexName Index { get; }
+		Indices Index { get; }
 	 } 
 	///<summary>Request parameters for IndicesClose <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</pre></summary>
 	public partial class CloseIndexRequest  : RequestBase<CloseIndexRequestParameters>, ICloseIndexRequest
 	{
-		IndexName ICloseIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		Indices ICloseIndexRequest.Index => Self.RouteValues.Get<Indices>("index");
 			/// <summary>/{index}/_close</summary>
 ///<param name="index">this parameter is required</param>
-		public CloseIndexRequest(IndexName index) : base(r=>r.Required("index", index)){}
+		public CloseIndexRequest(Indices index) : base(r=>r.Required("index", index)){}
 		
 
 			///<summary>Explicit operation timeout</summary>
@@ -2081,36 +2081,36 @@ namespace Nest
 	{
 		Indices Index { get; }
 		Types Type { get; }
-		FieldNames Field { get; }
+		FieldNames Fields { get; }
 	 } 
 	///<summary>Request parameters for IndicesGetFieldMappingForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-field-mapping.html</pre></summary>
 	public partial class GetFieldMappingRequest  : RequestBase<GetFieldMappingRequestParameters>, IGetFieldMappingRequest
 	{
 		Indices IGetFieldMappingRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types IGetFieldMappingRequest.Type => Self.RouteValues.Get<Types>("type");
-		FieldNames IGetFieldMappingRequest.Field => Self.RouteValues.Get<FieldNames>("field");
-			/// <summary>/_mapping/field/{field}</summary>
-///<param name="field">this parameter is required</param>
-		public GetFieldMappingRequest(FieldNames field) : base(r=>r.Required("field", field)){}
+		FieldNames IGetFieldMappingRequest.Fields => Self.RouteValues.Get<FieldNames>("fields");
+			/// <summary>/_mapping/field/{fields}</summary>
+///<param name="fields">this parameter is required</param>
+		public GetFieldMappingRequest(FieldNames fields) : base(r=>r.Required("fields", fields)){}
 		
 
-		/// <summary>/{index}/_mapping/field/{field}</summary>
+		/// <summary>/{index}/_mapping/field/{fields}</summary>
 ///<param name="index">Optional, accepts null</param>		
-///<param name="field">this parameter is required</param>
-		public GetFieldMappingRequest(Indices index, FieldNames field) : base(r=>r.Optional("index", index).Required("field", field)){}
+///<param name="fields">this parameter is required</param>
+		public GetFieldMappingRequest(Indices index, FieldNames fields) : base(r=>r.Optional("index", index).Required("fields", fields)){}
 		
 
-		/// <summary>/_mapping/{type}/field/{field}</summary>
+		/// <summary>/_mapping/{type}/field/{fields}</summary>
 ///<param name="type">Optional, accepts null</param>		
-///<param name="field">this parameter is required</param>
-		public GetFieldMappingRequest(Types type, FieldNames field) : base(r=>r.Optional("type", type).Required("field", field)){}
+///<param name="fields">this parameter is required</param>
+		public GetFieldMappingRequest(Types type, FieldNames fields) : base(r=>r.Optional("type", type).Required("fields", fields)){}
 		
 
-		/// <summary>/{index}/_mapping/{type}/field/{field}</summary>
+		/// <summary>/{index}/_mapping/{type}/field/{fields}</summary>
 ///<param name="index">Optional, accepts null</param>		
 ///<param name="type">Optional, accepts null</param>		
-///<param name="field">this parameter is required</param>
-		public GetFieldMappingRequest(Indices index, Types type, FieldNames field) : base(r=>r.Optional("index", index).Optional("type", type).Required("field", field)){}
+///<param name="fields">this parameter is required</param>
+		public GetFieldMappingRequest(Indices index, Types type, FieldNames fields) : base(r=>r.Optional("index", index).Optional("type", type).Required("fields", fields)){}
 		
 
 			///<summary>Whether the default mapping values should be returned as well</summary>
@@ -2244,19 +2244,19 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IGetIndexTemplateRequest : IRequest<GetIndexTemplateRequestParameters> 
 	{
-		Name Name { get; }
+		Names Name { get; }
 	 } 
 	///<summary>Request parameters for IndicesGetTemplateForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
 	public partial class GetIndexTemplateRequest  : RequestBase<GetIndexTemplateRequestParameters>, IGetIndexTemplateRequest
 	{
-		Name IGetIndexTemplateRequest.Name => Self.RouteValues.Get<Name>("name");
+		Names IGetIndexTemplateRequest.Name => Self.RouteValues.Get<Names>("name");
 			/// <summary>/_template</summary>
 		public GetIndexTemplateRequest() : base(){}
 		
 
 		/// <summary>/_template/{name}</summary>
 ///<param name="name">Optional, accepts null</param>
-		public GetIndexTemplateRequest(Name name) : base(r=>r.Optional("name", name)){}
+		public GetIndexTemplateRequest(Names name) : base(r=>r.Optional("name", name)){}
 		
 
 			///<summary>Return settings in flat format (default: false)</summary>
@@ -3246,15 +3246,15 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IOpenIndexRequest : IRequest<OpenIndexRequestParameters> 
 	{
-		IndexName Index { get; }
+		Indices Index { get; }
 	 } 
 	///<summary>Request parameters for IndicesOpen <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</pre></summary>
 	public partial class OpenIndexRequest  : RequestBase<OpenIndexRequestParameters>, IOpenIndexRequest
 	{
-		IndexName IOpenIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		Indices IOpenIndexRequest.Index => Self.RouteValues.Get<Indices>("index");
 			/// <summary>/{index}/_open</summary>
 ///<param name="index">this parameter is required</param>
-		public OpenIndexRequest(IndexName index) : base(r=>r.Required("index", index)){}
+		public OpenIndexRequest(Indices index) : base(r=>r.Required("index", index)){}
 		
 
 			///<summary>Explicit operation timeout</summary>

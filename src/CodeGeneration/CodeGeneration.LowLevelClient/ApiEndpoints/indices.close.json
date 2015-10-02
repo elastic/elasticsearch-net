@@ -7,7 +7,7 @@
       "paths": ["/{index}/_close"],
       "parts": {
         "index": {
-          "type" : "string",
+          "type" : "list",
           "required" : true,
           "description" : "The name of the index"
         }

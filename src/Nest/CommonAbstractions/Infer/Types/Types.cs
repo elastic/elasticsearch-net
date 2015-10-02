@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace Nest
 {
-    [JsonConverter(typeof(TypesJsonConverter))]
-    public class Types : Union<Types.AllTypesMarker, Types.ManyTypes>, IUrlParameter
-    {
-        public class AllTypesMarker { internal AllTypesMarker() { } }
+	[JsonConverter(typeof(TypesJsonConverter))]
+	public class Types : Union<Types.AllTypesMarker, Types.ManyTypes>, IUrlParameter
+	{
+		public class AllTypesMarker { internal AllTypesMarker() { } }
 		public static AllTypesMarker All { get; } = new AllTypesMarker();
 		public static AllTypesMarker AllTypes { get; } = new AllTypesMarker();
 		public class ManyTypes
@@ -39,7 +39,7 @@ namespace Nest
 
 		public static Types Parse(string typesString)
 		{
-            if (typesString.IsNullOrEmpty()) return Types.All;
+			if (typesString.IsNullOrEmpty()) return Types.All;
 			var types = typesString.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries);
 			return Type(types.Select(i => (TypeName)i));
 		}
@@ -60,11 +60,11 @@ namespace Nest
 					if (nestSettings == null)
 						throw new Exception("Tried to pass field name on querysting but it could not be resolved because no nest settings are available");
 					var infer = new ElasticInferrer(nestSettings);
-					var types = this.Item2.Types.Select(t => infer.TypeName(t));
+					var types = this.Item2.Types.Select(t => infer.TypeName(t)).Distinct();
 					return string.Join(",", types);
 				}
 			);
 
 		}
-    }
+	}
 }

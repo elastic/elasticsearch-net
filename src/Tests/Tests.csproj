@@ -172,6 +172,13 @@
     <Compile Include="IndexModules\IndexSettings\Translog\TranslogSettings.cs" />
     <Compile Include="IndexModules\Similarity\SimilaritySettings.cs" />
     <Compile Include="Indices\IndexManagement\CreateIndex\CreateIndexApiTest.cs" />
+    <Compile Include="Indices\IndexManagement\CreateIndex\CreateIndexUrlTests.cs" />
+    <Compile Include="Indices\IndexManagement\DeleteIndex\DeleteIndexUrlTests.cs" />
+    <Compile Include="Indices\IndexManagement\GetIndex\GetIndexUrlTests.cs" />
+    <Compile Include="Indices\IndexManagement\IndicesExists\IndexExistsUrlTests.cs" />
+    <Compile Include="Indices\IndexManagement\OpenCloseIndex\CloseIndex\CloseIndexUrlTests.cs" />
+    <Compile Include="Indices\IndexManagement\OpenCloseIndex\OpenIndex\OpenIndexUrlTests.cs" />
+    <Compile Include="Indices\IndexManagement\TypesExists\TypesExistsUrlTests.cs" />
     <Compile Include="Indices\IndexSettings\GetIndexSettings\GetIndexSettingsUrlTests.cs" />
     <Compile Include="Indices\IndexSettings\IndexTemplates\GetIndexTemplate\GetIndexTemplateUrlTests.cs" />
     <Compile Include="Indices\IndexSettings\IndexTemplates\DeleteIndexTemplate\DeleteIndexTemplateUrlTests.cs" />

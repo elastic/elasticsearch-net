@@ -10,7 +10,7 @@
       ],
       "parts": {
         "name": {
-          "type": "string",
+          "type": "list",
           "required": false,
           "description": "The name of the template"
         }

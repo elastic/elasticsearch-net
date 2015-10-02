@@ -1730,17 +1730,20 @@ namespace Nest
 	///<summary>descriptor for IndicesClose <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</pre></summary>
 	public partial class CloseIndexDescriptor  : RequestDescriptorBase<CloseIndexDescriptor,CloseIndexRequestParameters, ICloseIndexRequest>, ICloseIndexRequest
 	{ 
-		IndexName ICloseIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		Indices ICloseIndexRequest.Index => Self.RouteValues.Get<Indices>("index");
 			/// <summary>/{index}/_close</summary>
 ///<param name="index"> this parameter is required</param>
-		public CloseIndexDescriptor(IndexName index) : base(r=>r.Required("index", index)){}
+		public CloseIndexDescriptor(Indices index) : base(r=>r.Required("index", index)){}
 		
 
 			///<summary>The name of the index</summary>
-		public CloseIndexDescriptor Index(IndexName index) => Assign(a=>a.RouteValues.Optional("index", index));
+		public CloseIndexDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
 
 		///<summary>The name of the index</summary>
-		public CloseIndexDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (IndexName)typeof(TOther)));
+		public CloseIndexDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
+
+		///<summary>The name of the index</summary>
+		public CloseIndexDescriptor AllIndices() => this.Index(Indices.All);
 
 	
 		///<summary>Explicit operation timeout</summary>
@@ -2286,10 +2289,10 @@ namespace Nest
 	{ 
 		Indices IGetFieldMappingRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types IGetFieldMappingRequest.Type => Self.RouteValues.Get<Types>("type");
-		FieldNames IGetFieldMappingRequest.Field => Self.RouteValues.Get<FieldNames>("field");
-			/// <summary>/_mapping/field/{field}</summary>
-///<param name="field"> this parameter is required</param>
-		public GetFieldMappingDescriptor(FieldNames field) : base(r=>r.Required("field", field)){}
+		FieldNames IGetFieldMappingRequest.Fields => Self.RouteValues.Get<FieldNames>("fields");
+			/// <summary>/_mapping/field/{fields}</summary>
+///<param name="fields"> this parameter is required</param>
+		public GetFieldMappingDescriptor(FieldNames fields) : base(r=>r.Required("fields", fields)){}
 		
 
 			///<summary>A comma-separated list of index names</summary>
@@ -2433,13 +2436,13 @@ namespace Nest
 	///<summary>descriptor for IndicesGetTemplateForAll <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</pre></summary>
 	public partial class GetIndexTemplateDescriptor  : RequestDescriptorBase<GetIndexTemplateDescriptor,GetIndexTemplateRequestParameters, IGetIndexTemplateRequest>, IGetIndexTemplateRequest
 	{ 
-		Name IGetIndexTemplateRequest.Name => Self.RouteValues.Get<Name>("name");
+		Names IGetIndexTemplateRequest.Name => Self.RouteValues.Get<Names>("name");
 			/// <summary>/_template</summary>
 		public GetIndexTemplateDescriptor() : base(){}
 		
 
 			///<summary>The name of the template</summary>
-		public GetIndexTemplateDescriptor Name(Name name) => Assign(a=>a.RouteValues.Optional("name", name));
+		public GetIndexTemplateDescriptor Name(Names name) => Assign(a=>a.RouteValues.Optional("name", name));
 
 	
 		///<summary>Return settings in flat format (default: false)</summary>
@@ -2552,17 +2555,20 @@ namespace Nest
 	///<summary>descriptor for IndicesOpen <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</pre></summary>
 	public partial class OpenIndexDescriptor  : RequestDescriptorBase<OpenIndexDescriptor,OpenIndexRequestParameters, IOpenIndexRequest>, IOpenIndexRequest
 	{ 
-		IndexName IOpenIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		Indices IOpenIndexRequest.Index => Self.RouteValues.Get<Indices>("index");
 			/// <summary>/{index}/_open</summary>
 ///<param name="index"> this parameter is required</param>
-		public OpenIndexDescriptor(IndexName index) : base(r=>r.Required("index", index)){}
+		public OpenIndexDescriptor(Indices index) : base(r=>r.Required("index", index)){}
 		
 
 			///<summary>The name of the index</summary>
-		public OpenIndexDescriptor Index(IndexName index) => Assign(a=>a.RouteValues.Optional("index", index));
+		public OpenIndexDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
 
 		///<summary>The name of the index</summary>
-		public OpenIndexDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (IndexName)typeof(TOther)));
+		public OpenIndexDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
+
+		///<summary>The name of the index</summary>
+		public OpenIndexDescriptor AllIndices() => this.Index(Indices.All);
 
 	
 		///<summary>Explicit operation timeout</summary>

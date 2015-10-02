@@ -1463,14 +1463,14 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case GET:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type, p.RouteValues.Field)) return _lowLevel.IndicesGetFieldMapping<T>(p.RouteValues.Index,p.RouteValues.Type,p.RouteValues.Field,u => p.RequestParameters);
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Field)) return _lowLevel.IndicesGetFieldMapping<T>(p.RouteValues.Index,p.RouteValues.Field,u => p.RequestParameters);
-					if (AllSet(p.RouteValues.Type, p.RouteValues.Field)) return _lowLevel.IndicesGetFieldMappingForAll<T>(p.RouteValues.Type,p.RouteValues.Field,u => p.RequestParameters);
-					if (AllSet(p.RouteValues.Field)) return _lowLevel.IndicesGetFieldMappingForAll<T>(p.RouteValues.Field,u => p.RequestParameters);
+					if (AllSet(p.RouteValues.Index, p.RouteValues.Type, p.RouteValues.Fields)) return _lowLevel.IndicesGetFieldMapping<T>(p.RouteValues.Index,p.RouteValues.Type,p.RouteValues.Fields,u => p.RequestParameters);
+					if (AllSet(p.RouteValues.Index, p.RouteValues.Fields)) return _lowLevel.IndicesGetFieldMapping<T>(p.RouteValues.Index,p.RouteValues.Fields,u => p.RequestParameters);
+					if (AllSet(p.RouteValues.Type, p.RouteValues.Fields)) return _lowLevel.IndicesGetFieldMappingForAll<T>(p.RouteValues.Type,p.RouteValues.Fields,u => p.RequestParameters);
+					if (AllSet(p.RouteValues.Fields)) return _lowLevel.IndicesGetFieldMappingForAll<T>(p.RouteValues.Fields,u => p.RequestParameters);
 					break;
 
 			}
-			throw InvalidDispatch("IndicesGetFieldMapping", p, new [] { GET }, "/_mapping/field/{field}", "/{index}/_mapping/field/{field}", "/_mapping/{type}/field/{field}", "/{index}/_mapping/{type}/field/{field}");
+			throw InvalidDispatch("IndicesGetFieldMapping", p, new [] { GET }, "/_mapping/field/{fields}", "/{index}/_mapping/field/{fields}", "/_mapping/{type}/field/{fields}", "/{index}/_mapping/{type}/field/{fields}");
 		}
 		
 		internal Task<ElasticsearchResponse<T>> IndicesGetFieldMappingDispatchAsync<T>(IRequest<GetFieldMappingRequestParameters> p ) where T : class
@@ -1478,14 +1478,14 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case GET:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type, p.RouteValues.Field)) return _lowLevel.IndicesGetFieldMappingAsync<T>(p.RouteValues.Index,p.RouteValues.Type,p.RouteValues.Field,u => p.RequestParameters);
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Field)) return _lowLevel.IndicesGetFieldMappingAsync<T>(p.RouteValues.Index,p.RouteValues.Field,u => p.RequestParameters);
-					if (AllSet(p.RouteValues.Type, p.RouteValues.Field)) return _lowLevel.IndicesGetFieldMappingForAllAsync<T>(p.RouteValues.Type,p.RouteValues.Field,u => p.RequestParameters);
-					if (AllSet(p.RouteValues.Field)) return _lowLevel.IndicesGetFieldMappingForAllAsync<T>(p.RouteValues.Field,u => p.RequestParameters);
+					if (AllSet(p.RouteValues.Index, p.RouteValues.Type, p.RouteValues.Fields)) return _lowLevel.IndicesGetFieldMappingAsync<T>(p.RouteValues.Index,p.RouteValues.Type,p.RouteValues.Fields,u => p.RequestParameters);
+					if (AllSet(p.RouteValues.Index, p.RouteValues.Fields)) return _lowLevel.IndicesGetFieldMappingAsync<T>(p.RouteValues.Index,p.RouteValues.Fields,u => p.RequestParameters);
+					if (AllSet(p.RouteValues.Type, p.RouteValues.Fields)) return _lowLevel.IndicesGetFieldMappingForAllAsync<T>(p.RouteValues.Type,p.RouteValues.Fields,u => p.RequestParameters);
+					if (AllSet(p.RouteValues.Fields)) return _lowLevel.IndicesGetFieldMappingForAllAsync<T>(p.RouteValues.Fields,u => p.RequestParameters);
 					break;
 
 			}
-			throw InvalidDispatch("IndicesGetFieldMapping", p, new [] { GET }, "/_mapping/field/{field}", "/{index}/_mapping/field/{field}", "/_mapping/{type}/field/{field}", "/{index}/_mapping/{type}/field/{field}");
+			throw InvalidDispatch("IndicesGetFieldMapping", p, new [] { GET }, "/_mapping/field/{fields}", "/{index}/_mapping/field/{fields}", "/_mapping/{type}/field/{fields}", "/{index}/_mapping/{type}/field/{fields}");
 		}
 		
 		internal ElasticsearchResponse<T> IndicesGetMappingDispatch<T>(IRequest<GetMappingRequestParameters> p ) where T : class

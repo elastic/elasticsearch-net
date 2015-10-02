@@ -3208,7 +3208,7 @@ namespace Elasticsearch.Net
 		public Task<ElasticsearchResponse<T>> IndicesGetAliasesForAllAsync<T>(string name, Func<GetAliasesRequestParameters, GetAliasesRequestParameters> requestParameters = null)
 			where T : class => this.DoRequestAsync<T>(GET, Url($"_aliases/{name.NotNull("name")}"), null, _params(requestParameters));
 		
-		///<summary>Represents a GET on /_mapping/field/{field} 
+		///<summary>Represents a GET on /_mapping/field/{fields} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to /para>
 		///<para> - byte[], no deserialization, but the response stream will be closed</para>
@@ -3217,12 +3217,12 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth 
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-field-mapping.html</para>	
 	    ///</summary>
-		///<param name="field">A comma-separated list of fields</param>
+		///<param name="fields">A comma-separated list of fields</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> IndicesGetFieldMappingForAll<T>(string field, Func<GetFieldMappingRequestParameters, GetFieldMappingRequestParameters> requestParameters = null)
-			where T : class => this.DoRequest<T>(GET, Url($"_mapping/field/{field.NotNull("field")}"), null, _params(requestParameters));
+		public ElasticsearchResponse<T> IndicesGetFieldMappingForAll<T>(string fields, Func<GetFieldMappingRequestParameters, GetFieldMappingRequestParameters> requestParameters = null)
+			where T : class => this.DoRequest<T>(GET, Url($"_mapping/field/{fields.NotNull("fields")}"), null, _params(requestParameters));
 		
-		///<summary>Represents a GET on /_mapping/field/{field} 
+		///<summary>Represents a GET on /_mapping/field/{fields} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to /para>
 		///<para> - byte[], no deserialization, but the response stream will be closed</para>
@@ -3231,72 +3231,12 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth 
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-field-mapping.html</para>	
 	    ///</summary>
-		///<param name="field">A comma-separated list of fields</param>
+		///<param name="fields">A comma-separated list of fields</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> IndicesGetFieldMappingForAllAsync<T>(string field, Func<GetFieldMappingRequestParameters, GetFieldMappingRequestParameters> requestParameters = null)
-			where T : class => this.DoRequestAsync<T>(GET, Url($"_mapping/field/{field.NotNull("field")}"), null, _params(requestParameters));
+		public Task<ElasticsearchResponse<T>> IndicesGetFieldMappingForAllAsync<T>(string fields, Func<GetFieldMappingRequestParameters, GetFieldMappingRequestParameters> requestParameters = null)
+			where T : class => this.DoRequestAsync<T>(GET, Url($"_mapping/field/{fields.NotNull("fields")}"), null, _params(requestParameters));
 		
-		///<summary>Represents a GET on /{index}/_mapping/field/{field} 
-		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to /para>
-		///<para> - byte[], no deserialization, but the response stream will be closed</para>
-		///<para> - Stream, no deserialization, response stream is your responsibility</para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed</para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth 
-	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-field-mapping.html</para>	
-	    ///</summary>
-		///<param name="index">A comma-separated list of index names</param>
-		///<param name="field">A comma-separated list of fields</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> IndicesGetFieldMapping<T>(string index, string field, Func<GetFieldMappingRequestParameters, GetFieldMappingRequestParameters> requestParameters = null)
-			where T : class => this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/_mapping/field/{field.NotNull("field")}"), null, _params(requestParameters));
-		
-		///<summary>Represents a GET on /{index}/_mapping/field/{field} 
-		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to /para>
-		///<para> - byte[], no deserialization, but the response stream will be closed</para>
-		///<para> - Stream, no deserialization, response stream is your responsibility</para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed</para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth 
-	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-field-mapping.html</para>	
-	    ///</summary>
-		///<param name="index">A comma-separated list of index names</param>
-		///<param name="field">A comma-separated list of fields</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> IndicesGetFieldMappingAsync<T>(string index, string field, Func<GetFieldMappingRequestParameters, GetFieldMappingRequestParameters> requestParameters = null)
-			where T : class => this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/_mapping/field/{field.NotNull("field")}"), null, _params(requestParameters));
-		
-		///<summary>Represents a GET on /_mapping/{type}/field/{field} 
-		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to /para>
-		///<para> - byte[], no deserialization, but the response stream will be closed</para>
-		///<para> - Stream, no deserialization, response stream is your responsibility</para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed</para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth 
-	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-field-mapping.html</para>	
-	    ///</summary>
-		///<param name="type">A comma-separated list of document types</param>
-		///<param name="field">A comma-separated list of fields</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> IndicesGetFieldMappingForAll<T>(string type, string field, Func<GetFieldMappingRequestParameters, GetFieldMappingRequestParameters> requestParameters = null)
-			where T : class => this.DoRequest<T>(GET, Url($"_mapping/{type.NotNull("type")}/field/{field.NotNull("field")}"), null, _params(requestParameters));
-		
-		///<summary>Represents a GET on /_mapping/{type}/field/{field} 
-		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
-		///<para> - T, an object you own that the elasticsearch response will be deserialized to /para>
-		///<para> - byte[], no deserialization, but the response stream will be closed</para>
-		///<para> - Stream, no deserialization, response stream is your responsibility</para>
-		///<para> - VoidResponse, no deserialization, response stream never read and closed</para>
-		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth 
-	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-field-mapping.html</para>	
-	    ///</summary>
-		///<param name="type">A comma-separated list of document types</param>
-		///<param name="field">A comma-separated list of fields</param>
-		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> IndicesGetFieldMappingForAllAsync<T>(string type, string field, Func<GetFieldMappingRequestParameters, GetFieldMappingRequestParameters> requestParameters = null)
-			where T : class => this.DoRequestAsync<T>(GET, Url($"_mapping/{type.NotNull("type")}/field/{field.NotNull("field")}"), null, _params(requestParameters));
-		
-		///<summary>Represents a GET on /{index}/_mapping/{type}/field/{field} 
+		///<summary>Represents a GET on /{index}/_mapping/field/{fields} 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to /para>
 		///<para> - byte[], no deserialization, but the response stream will be closed</para>
@@ -3306,13 +3246,73 @@ namespace Elasticsearch.Net
 	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-field-mapping.html</para>	
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names</param>
-		///<param name="type">A comma-separated list of document types</param>
-		///<param name="field">A comma-separated list of fields</param>
+		///<param name="fields">A comma-separated list of fields</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> IndicesGetFieldMapping<T>(string index, string type, string field, Func<GetFieldMappingRequestParameters, GetFieldMappingRequestParameters> requestParameters = null)
-			where T : class => this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/_mapping/{type.NotNull("type")}/field/{field.NotNull("field")}"), null, _params(requestParameters));
+		public ElasticsearchResponse<T> IndicesGetFieldMapping<T>(string index, string fields, Func<GetFieldMappingRequestParameters, GetFieldMappingRequestParameters> requestParameters = null)
+			where T : class => this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/_mapping/field/{fields.NotNull("fields")}"), null, _params(requestParameters));
 		
-		///<summary>Represents a GET on /{index}/_mapping/{type}/field/{field} 
+		///<summary>Represents a GET on /{index}/_mapping/field/{fields} 
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to /para>
+		///<para> - byte[], no deserialization, but the response stream will be closed</para>
+		///<para> - Stream, no deserialization, response stream is your responsibility</para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed</para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth 
+	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-field-mapping.html</para>	
+	    ///</summary>
+		///<param name="index">A comma-separated list of index names</param>
+		///<param name="fields">A comma-separated list of fields</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public Task<ElasticsearchResponse<T>> IndicesGetFieldMappingAsync<T>(string index, string fields, Func<GetFieldMappingRequestParameters, GetFieldMappingRequestParameters> requestParameters = null)
+			where T : class => this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/_mapping/field/{fields.NotNull("fields")}"), null, _params(requestParameters));
+		
+		///<summary>Represents a GET on /_mapping/{type}/field/{fields} 
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to /para>
+		///<para> - byte[], no deserialization, but the response stream will be closed</para>
+		///<para> - Stream, no deserialization, response stream is your responsibility</para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed</para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth 
+	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-field-mapping.html</para>	
+	    ///</summary>
+		///<param name="type">A comma-separated list of document types</param>
+		///<param name="fields">A comma-separated list of fields</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public ElasticsearchResponse<T> IndicesGetFieldMappingForAll<T>(string type, string fields, Func<GetFieldMappingRequestParameters, GetFieldMappingRequestParameters> requestParameters = null)
+			where T : class => this.DoRequest<T>(GET, Url($"_mapping/{type.NotNull("type")}/field/{fields.NotNull("fields")}"), null, _params(requestParameters));
+		
+		///<summary>Represents a GET on /_mapping/{type}/field/{fields} 
+		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to /para>
+		///<para> - byte[], no deserialization, but the response stream will be closed</para>
+		///<para> - Stream, no deserialization, response stream is your responsibility</para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed</para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth 
+	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-field-mapping.html</para>	
+	    ///</summary>
+		///<param name="type">A comma-separated list of document types</param>
+		///<param name="fields">A comma-separated list of fields</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public Task<ElasticsearchResponse<T>> IndicesGetFieldMappingForAllAsync<T>(string type, string fields, Func<GetFieldMappingRequestParameters, GetFieldMappingRequestParameters> requestParameters = null)
+			where T : class => this.DoRequestAsync<T>(GET, Url($"_mapping/{type.NotNull("type")}/field/{fields.NotNull("fields")}"), null, _params(requestParameters));
+		
+		///<summary>Represents a GET on /{index}/_mapping/{type}/field/{fields} 
+		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+		///<para> - T, an object you own that the elasticsearch response will be deserialized to /para>
+		///<para> - byte[], no deserialization, but the response stream will be closed</para>
+		///<para> - Stream, no deserialization, response stream is your responsibility</para>
+		///<para> - VoidResponse, no deserialization, response stream never read and closed</para>
+		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth 
+	    ///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-field-mapping.html</para>	
+	    ///</summary>
+		///<param name="index">A comma-separated list of index names</param>
+		///<param name="type">A comma-separated list of document types</param>
+		///<param name="fields">A comma-separated list of fields</param>
+		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+		public ElasticsearchResponse<T> IndicesGetFieldMapping<T>(string index, string type, string fields, Func<GetFieldMappingRequestParameters, GetFieldMappingRequestParameters> requestParameters = null)
+			where T : class => this.DoRequest<T>(GET, Url($"{index.NotNull("index")}/_mapping/{type.NotNull("type")}/field/{fields.NotNull("fields")}"), null, _params(requestParameters));
+		
+		///<summary>Represents a GET on /{index}/_mapping/{type}/field/{fields} 
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
 		///<para> - T, an object you own that the elasticsearch response will be deserialized to /para>
 		///<para> - byte[], no deserialization, but the response stream will be closed</para>
@@ -3323,10 +3323,10 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="index">A comma-separated list of index names</param>
 		///<param name="type">A comma-separated list of document types</param>
-		///<param name="field">A comma-separated list of fields</param>
+		///<param name="fields">A comma-separated list of fields</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> IndicesGetFieldMappingAsync<T>(string index, string type, string field, Func<GetFieldMappingRequestParameters, GetFieldMappingRequestParameters> requestParameters = null)
-			where T : class => this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/_mapping/{type.NotNull("type")}/field/{field.NotNull("field")}"), null, _params(requestParameters));
+		public Task<ElasticsearchResponse<T>> IndicesGetFieldMappingAsync<T>(string index, string type, string fields, Func<GetFieldMappingRequestParameters, GetFieldMappingRequestParameters> requestParameters = null)
+			where T : class => this.DoRequestAsync<T>(GET, Url($"{index.NotNull("index")}/_mapping/{type.NotNull("type")}/field/{fields.NotNull("fields")}"), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_mapping 
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
