@@ -36,7 +36,7 @@ namespace Nest
 	{
 		/// <inheritdoc/>
 		public IExistsResponse DocumentExists<T>(DocumentPath<T> document, Func<DocumentExistsDescriptor<T>, IDocumentExistsRequest> existsSelector = null) where T : class =>
-			this.DocumentExists(existsSelector?.Invoke(new DocumentExistsDescriptor<T>(document.Self.Index, document.Self.Type, document.Self.Id)));
+			this.DocumentExists(existsSelector.InvokeOrDefault(new DocumentExistsDescriptor<T>(document.Self.Index, document.Self.Type, document.Self.Id)));
 
 		/// <inheritdoc/>
 		public IExistsResponse DocumentExists(IDocumentExistsRequest documentExistsRequest) => 

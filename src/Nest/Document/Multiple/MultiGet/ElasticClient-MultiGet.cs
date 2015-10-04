@@ -19,13 +19,13 @@ namespace Nest
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-multi-get.html
 		/// </summary>
 		/// <param name="multiGetSelector">A descriptor describing which documents should be fetched</param>
-		IMultiGetResponse MultiGet(Func<MultiGetDescriptor, IMultiGetRequest> multiGetSelector);
+		IMultiGetResponse MultiGet(Func<MultiGetDescriptor, IMultiGetRequest> multiGetSelector = null);
 
 		/// <inheritdoc/>
 		IMultiGetResponse MultiGet(IMultiGetRequest multiGetRequest);
 
 		/// <inheritdoc/>
-		Task<IMultiGetResponse> MultiGetAsync(Func<MultiGetDescriptor, IMultiGetRequest> multiGetSelector);
+		Task<IMultiGetResponse> MultiGetAsync(Func<MultiGetDescriptor, IMultiGetRequest> multiGetSelector = null);
 
 		/// <inheritdoc/>
 		Task<IMultiGetResponse> MultiGetAsync(IMultiGetRequest multiGetRequest);
@@ -34,8 +34,8 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IMultiGetResponse MultiGet(Func<MultiGetDescriptor, IMultiGetRequest> multiGetSelector) =>
-			this.MultiGet(multiGetSelector?.Invoke(new MultiGetDescriptor()));
+		public IMultiGetResponse MultiGet(Func<MultiGetDescriptor, IMultiGetRequest> multiGetSelector = null) =>
+			this.MultiGet(multiGetSelector.InvokeOrDefault(new MultiGetDescriptor()));
 
 		/// <inheritdoc/>
 		public IMultiGetResponse MultiGet(IMultiGetRequest multiRequest) => 
@@ -46,8 +46,8 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<IMultiGetResponse> MultiGetAsync(Func<MultiGetDescriptor, IMultiGetRequest> multiGetSelector) =>
-			this.MultiGetAsync(multiGetSelector?.Invoke(new MultiGetDescriptor()));
+		public Task<IMultiGetResponse> MultiGetAsync(Func<MultiGetDescriptor, IMultiGetRequest> multiGetSelector = null) =>
+			this.MultiGetAsync(multiGetSelector.InvokeOrDefault(new MultiGetDescriptor()));
 
 		/// <inheritdoc/>
 		public Task<IMultiGetResponse> MultiGetAsync(IMultiGetRequest multiRequest) => 

@@ -3358,7 +3358,7 @@ namespace Nest
 	}
 	
 	///<summary>descriptor for Mtermvectors <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-multi-termvectors.html</pre></summary>
-	public partial class MultiTermVectorsDescriptor<T>  : RequestDescriptorBase<MultiTermVectorsDescriptor<T>,MultiTermVectorsRequestParameters, IMultiTermVectorsRequest>, IMultiTermVectorsRequest
+	public partial class MultiTermVectorsDescriptor  : RequestDescriptorBase<MultiTermVectorsDescriptor,MultiTermVectorsRequestParameters, IMultiTermVectorsRequest>, IMultiTermVectorsRequest
 	{ 
 		IndexName IMultiTermVectorsRequest.Index => Self.RouteValues.Get<IndexName>("index");
 		TypeName IMultiTermVectorsRequest.Type => Self.RouteValues.Get<TypeName>("type");
@@ -3367,63 +3367,63 @@ namespace Nest
 		
 
 			///<summary>The index in which the document resides.</summary>
-		public MultiTermVectorsDescriptor<T> Index(IndexName index) => Assign(a=>a.RouteValues.Optional("index", index));
+		public MultiTermVectorsDescriptor Index(IndexName index) => Assign(a=>a.RouteValues.Optional("index", index));
 
 		///<summary>The index in which the document resides.</summary>
-		public MultiTermVectorsDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (IndexName)typeof(TOther)));
+		public MultiTermVectorsDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (IndexName)typeof(TOther)));
 
 		///<summary>The type of the document.</summary>
-		public MultiTermVectorsDescriptor<T> Type(TypeName type) => Assign(a=>a.RouteValues.Optional("type", type));
+		public MultiTermVectorsDescriptor Type(TypeName type) => Assign(a=>a.RouteValues.Optional("type", type));
 
 		///<summary>The type of the document.</summary>
-		public MultiTermVectorsDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (TypeName)typeof(TOther)));
+		public MultiTermVectorsDescriptor Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (TypeName)typeof(TOther)));
 
 	
 		///<summary>Specifies if total term frequency and document frequency should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public MultiTermVectorsDescriptor<T> TermStatistics(bool term_statistics = true) => AssignParam(p=>p.TermStatistics(term_statistics));
+		public MultiTermVectorsDescriptor TermStatistics(bool term_statistics = true) => AssignParam(p=>p.TermStatistics(term_statistics));
 
 		///<summary>Specifies if document count, sum of document frequencies and sum of total term frequencies should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public MultiTermVectorsDescriptor<T> FieldStatistics(bool field_statistics = true) => AssignParam(p=>p.FieldStatistics(field_statistics));
+		public MultiTermVectorsDescriptor FieldStatistics(bool field_statistics = true) => AssignParam(p=>p.FieldStatistics(field_statistics));
 
 		///<summary>A comma-separated list of fields to return. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public MultiTermVectorsDescriptor<T> Fields(params string[] fields) => AssignParam(p=>p.Fields(fields));
+		public MultiTermVectorsDescriptor Fields(params string[] fields) => AssignParam(p=>p.Fields(fields));
 			
 		///<summary>A comma-separated list of fields to return. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public MultiTermVectorsDescriptor<T> Fields(params Expression<Func<T, object>>[] fields)  =>
+		public MultiTermVectorsDescriptor Fields<T>(params Expression<Func<T, object>>[] fields) where T : class =>
 			AssignParam(p=>p._Fields(fields));
 
 		///<summary>Specifies if term offsets should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public MultiTermVectorsDescriptor<T> Offsets(bool offsets = true) => AssignParam(p=>p.Offsets(offsets));
+		public MultiTermVectorsDescriptor Offsets(bool offsets = true) => AssignParam(p=>p.Offsets(offsets));
 
 		///<summary>Specifies if term positions should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public MultiTermVectorsDescriptor<T> Positions(bool positions = true) => AssignParam(p=>p.Positions(positions));
+		public MultiTermVectorsDescriptor Positions(bool positions = true) => AssignParam(p=>p.Positions(positions));
 
 		///<summary>Specifies if term payloads should be returned. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public MultiTermVectorsDescriptor<T> Payloads(bool payloads = true) => AssignParam(p=>p.Payloads(payloads));
+		public MultiTermVectorsDescriptor Payloads(bool payloads = true) => AssignParam(p=>p.Payloads(payloads));
 
 		///<summary>Specify the node or shard the operation should be performed on (default: random) .Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public MultiTermVectorsDescriptor<T> Preference(string preference) => AssignParam(p=>p.Preference(preference));
+		public MultiTermVectorsDescriptor Preference(string preference) => AssignParam(p=>p.Preference(preference));
 
 		///<summary>Specific routing value. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public MultiTermVectorsDescriptor<T> Routing(string routing) => AssignParam(p=>p.Routing(routing));
+		public MultiTermVectorsDescriptor Routing(string routing) => AssignParam(p=>p.Routing(routing));
 
 		///<summary>Parent id of documents. Applies to all returned documents unless otherwise specified in body &quot;params&quot; or &quot;docs&quot;.</summary>
-		public MultiTermVectorsDescriptor<T> Parent(string parent) => AssignParam(p=>p.Parent(parent));
+		public MultiTermVectorsDescriptor Parent(string parent) => AssignParam(p=>p.Parent(parent));
 
 		///<summary>Specifies if requests are real-time as opposed to near-real-time (default: true).</summary>
-		public MultiTermVectorsDescriptor<T> Realtime(bool realtime = true) => AssignParam(p=>p.Realtime(realtime));
+		public MultiTermVectorsDescriptor Realtime(bool realtime = true) => AssignParam(p=>p.Realtime(realtime));
 
 		///<summary>Explicit version number for concurrency control</summary>
-		public MultiTermVectorsDescriptor<T> Version(long version) => AssignParam(p=>p.Version(version));
+		public MultiTermVectorsDescriptor Version(long version) => AssignParam(p=>p.Version(version));
 
 		///<summary>Specific version type</summary>
-		public MultiTermVectorsDescriptor<T> VersionType(VersionType version_type) => AssignParam(p=>p.VersionType(version_type));
+		public MultiTermVectorsDescriptor VersionType(VersionType version_type) => AssignParam(p=>p.VersionType(version_type));
 
 		///<summary>The URL-encoded request definition</summary>
-		public MultiTermVectorsDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
+		public MultiTermVectorsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public MultiTermVectorsDescriptor<T> FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		public MultiTermVectorsDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	

@@ -19,38 +19,39 @@ namespace Nest
 	}
 
 	[DescriptorFor("Mtermvectors")]
-	public partial class MultiTermVectorsDescriptor<T> where T : class
+	public partial class MultiTermVectorsDescriptor
 	{
 		IEnumerable<MultiTermVectorDocument> IMultiTermVectorsRequest.Documents { get; set; }	
 
-		public MultiTermVectorsDescriptor<T> Documents(params Func<MultiTermVectorDocumentDescriptor<T>, IMultiTermVectorDocumentDescriptor>[] documentSelectors)
+		public MultiTermVectorsDescriptor Documents<T>(params Func<MultiTermVectorDocumentDescriptor<T>, IMultiTermVectorDocumentDescriptor>[] documentSelectors)
+			where T : class
 		{
 			((IMultiTermVectorsRequest)this).Documents = documentSelectors.Select(s => s(new MultiTermVectorDocumentDescriptor<T>()).GetDocument()).Where(d => d != null).ToList();
 			return this;
 		}
 
-		public MultiTermVectorsDescriptor<T> Documents(IEnumerable<MultiTermVectorDocument> documents)
+		public MultiTermVectorsDescriptor Documents(IEnumerable<MultiTermVectorDocument> documents)
 		{
 			((IMultiTermVectorsRequest)this).Documents = documents;
 			return this;
 		}
 
-		public MultiTermVectorsDescriptor<T> Ids(params string[] ids)
+		public MultiTermVectorsDescriptor Ids(params string[] ids)
 		{
 			return this.Documents(ids.Select(id => new MultiTermVectorDocument { Id = id }));
 		}
 
-		public MultiTermVectorsDescriptor<T> Ids(params long[] ids)
+		public MultiTermVectorsDescriptor Ids(params long[] ids)
 		{
 			return this.Documents(ids.Select(id => new MultiTermVectorDocument { Id = id.ToString(CultureInfo.InvariantCulture) }));
 		}
 
-		public MultiTermVectorsDescriptor<T> Ids(IEnumerable<string> ids)
+		public MultiTermVectorsDescriptor Ids(IEnumerable<string> ids)
 		{
 			return this.Documents(ids.Select(id => new MultiTermVectorDocument { Id = id }));
 		}
 
-		public MultiTermVectorsDescriptor<T> Ids(IEnumerable<long> ids)
+		public MultiTermVectorsDescriptor Ids(IEnumerable<long> ids)
 		{
 			return this.Documents(ids.Select(id => new MultiTermVectorDocument { Id = id.ToString(CultureInfo.InvariantCulture) }));
 		}
