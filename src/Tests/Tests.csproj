@@ -124,6 +124,8 @@
     <Compile Include="Cluster\Ping\PingUrlTest.cs" />
     <Compile Include="Cluster\RootNodeInfo\RootNodeInfoUrlTest.cs" />
     <Compile Include="CodeStandards\Descriptors.doc.cs" />
+    <Compile Include="CodeStandards\ElasticClient.doc.cs" />
+    <Compile Include="CodeStandards\NamingConventions.doc.cs" />
     <Compile Include="Document\Multiple\Bulk\BulkUrlTest.cs" />
     <Compile Include="Document\Multiple\DeleteByQuery\DeleteByQueryUrlTest.cs" />
     <Compile Include="Document\Multiple\MultiGet\MultiGetUrlTest.cs" />

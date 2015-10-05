@@ -57,14 +57,6 @@ namespace Tests.CodeStandards
 		//TODO some interfaces are implemented by both requests as well isolated classes to be used elsewhere in the DSL
 		//We need to write tests that these have the same public methods so we do not accidentally add it without adding it to the interface
 
-		//TODO write a tests that all our abstract classes have the *Base suffix
-		//TODO write a test that assures we use Base as a suffix and not prefix
-
-		//Write a tests that all properties of type QueryContainer have the same json converters set
-
-
-		//TODO write tests that ensure consistent parameter names on IElasticClient.  i.e. request, selector vs indexRequest, indexRequestSelector
-		//TODO write tests to ensure OIS IElasticClient methods are never nullable
-		//TODO ensure xml docs on all IElasticClient methods
+		//Write a tests that all properties of type QueryContainer have the same json converters set	
 	}
 }
