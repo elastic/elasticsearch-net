@@ -65,5 +65,6 @@ namespace Tests.CodeStandards
 
 		//TODO write tests that ensure consistent parameter names on IElasticClient.  i.e. request, selector vs indexRequest, indexRequestSelector
 		//TODO write tests to ensure OIS IElasticClient methods are never nullable
+		//TODO ensure xml docs on all IElasticClient methods
 	}
 }

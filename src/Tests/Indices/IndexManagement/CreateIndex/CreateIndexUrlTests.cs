@@ -10,7 +10,7 @@ using static Nest.Indices;
 using static Nest.Types;
 using static Tests.Framework.UrlTester;
 
-namespace Tests.Modules.Indices.IndexManagement.CreateIndex
+namespace Tests.Indices.IndexManagement.CreateIndex
 {
 	public class CreateIndexUrlTests
 	{

@@ -8,7 +8,7 @@ using Tests.Framework;
 using Tests.Framework.MockData;
 using static Tests.Framework.UrlTester;
 
-namespace Tests.Indices.GetAliasManagement
+namespace Tests.Indices.AliasManagement.GetAlias
 {
 	public class GetAliasUrlTests
 	{

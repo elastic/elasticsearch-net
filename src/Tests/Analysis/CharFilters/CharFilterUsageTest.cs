@@ -9,7 +9,7 @@ using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using static Nest.Infer;
 
-namespace Tests
+namespace Tests.Analysis.CharFilters
 {
 	public class CharFilterUsageTest 
 		: UsageTestBase<IIndexSettings, IndexSettingsDescriptor, IndexSettings>
@@ -56,9 +56,9 @@ namespace Tests
 		public static IndexSettings InitializerExample =>
 			new IndexSettings
 			{
-				Analysis = new Analysis
+				Analysis = new Nest.Analysis
 				{
-					CharFilters = new CharFilters
+					CharFilters = new Nest.CharFilters
 					{
 							{ "stripMe", new HtmlStripCharFilter { } },
 							{ "patterned", new PatternReplaceCharFilter { Pattern = "x", Replacement = "y" } },

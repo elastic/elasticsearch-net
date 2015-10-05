@@ -8,7 +8,7 @@ using Tests.Framework;
 using Tests.Framework.MockData;
 using static Tests.Framework.UrlTester;
 
-namespace Tests.Cat.CatAliases
+namespace Tests.Cluster.ClusterHealth
 {
 	public class ClusterHealthUrlTest : IUrlTest
 	{

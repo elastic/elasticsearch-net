@@ -11,7 +11,7 @@ using Tests.Framework.MockData;
 using static Nest.Infer;
 using static Tests.Framework.RoundTripper;
 
-namespace Tests.Aggregations.Bucket
+namespace Tests.Aggregations.Bucket.DateRange
 {
 	/**
 	 * A range aggregation that is dedicated for date values. The main difference between this aggregation and the normal range aggregation is that the `from`

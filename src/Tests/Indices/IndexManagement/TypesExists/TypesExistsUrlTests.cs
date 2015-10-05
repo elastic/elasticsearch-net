@@ -10,7 +10,7 @@ using static Nest.Indices;
 using static Nest.Types;
 using static Tests.Framework.UrlTester;
 
-namespace Tests.Modules.Indices.TypeManagement.TypeExists
+namespace Tests.Indices.IndexManagement.TypeExists
 {
 	public class TypeExistsUrlTests
 	{

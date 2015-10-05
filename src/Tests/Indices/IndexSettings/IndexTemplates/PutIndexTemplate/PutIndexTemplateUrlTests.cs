@@ -8,7 +8,7 @@ using Tests.Framework;
 using Tests.Framework.MockData;
 using static Tests.Framework.UrlTester;
 
-namespace Tests.Modules.IndexSettings.IndexTemplates.PutIndexTemplate
+namespace Tests.Indices.IndexSettings.IndexTemplates.PutIndexTemplate
 {
 	public class PutTemplateUrlTests
 	{

@@ -29,7 +29,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 		[U] [SuppressMessage("AsyncUsage", "AsyncFixer001:Unnecessary async/await usage", Justification = "Its a test")]
 		public async Task ASniffOnStartupHappens()
 		{
-			var audit = new Auditor(() => Cluster
+			var audit = new Auditor(() => Framework.Cluster
 				.Nodes(10)
 				.Sniff(s => s.Fails(Always))
 				.Sniff(s => s.OnPort(9202).Succeeds(Always))
@@ -50,10 +50,10 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 		[U] [SuppressMessage("AsyncUsage", "AsyncFixer001:Unnecessary async/await usage", Justification = "Its a test")]
 		public async Task SniffOnStartUpTakesNewClusterState()
 		{
-			var audit = new Auditor(() => Cluster
+			var audit = new Auditor(() => Framework.Cluster
 				.Nodes(10)
 				.Sniff(s => s.Fails(Always))
-				.Sniff(s => s.OnPort(9202).Succeeds(Always, Cluster.Nodes(8, startFrom: 9204)))
+				.Sniff(s => s.OnPort(9202).Succeeds(Always, Framework.Cluster.Nodes(8, startFrom: 9204)))
 				.SniffingConnectionPool()
 				.AllDefaults()
 			);
@@ -71,7 +71,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 		[U] [SuppressMessage("AsyncUsage", "AsyncFixer001:Unnecessary async/await usage", Justification = "Its a test")]
 		public async Task SniffTriesAllNodes()
 		{
-			var audit = new Auditor(() => Cluster
+			var audit = new Auditor(() => Framework.Cluster
 				.Nodes(10)
 				.Sniff(s => s.Fails(Always))
 				.Sniff(s => s.OnPort(9209).Succeeds(Always))
@@ -99,7 +99,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 		[U] [SuppressMessage("AsyncUsage", "AsyncFixer001:Unnecessary async/await usage", Justification = "Its a test")]
 		public async Task SniffPrefersMasterNodes()
 		{
-			var audit = new Auditor(() => Cluster
+			var audit = new Auditor(() => Framework.Cluster
 				.Nodes(new[] {
 					new Node(new Uri("http://localhost:9200")) { MasterEligable = false },
 					new Node(new Uri("http://localhost:9201")) { MasterEligable = false },
@@ -121,7 +121,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 		[U] [SuppressMessage("AsyncUsage", "AsyncFixer001:Unnecessary async/await usage", Justification = "Its a test")]
 		public async Task SniffPrefersMasterNodesButStillFailsOver()
 		{
-			var audit = new Auditor(() => Cluster
+			var audit = new Auditor(() => Framework.Cluster
 				.Nodes(new[] {
 					new Node(new Uri("http://localhost:9200")) { MasterEligable = true },
 					new Node(new Uri("http://localhost:9201")) { MasterEligable = true },

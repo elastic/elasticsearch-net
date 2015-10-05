@@ -8,7 +8,7 @@ using Tests.Framework;
 using Tests.Framework.MockData;
 using static Tests.Framework.UrlTester;
 
-namespace Tests.Modules.Warmers.DeleteWarmer
+namespace Tests.Indices.Warmers.DeleteWarmer
 {
 	public class DeleteWarmerUrlTests
 	{

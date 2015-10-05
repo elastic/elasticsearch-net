@@ -9,7 +9,7 @@ using Tests.Framework.MockData;
 using Elasticsearch.Net;
 using static Tests.Framework.UrlTester;
 
-namespace Tests.Modules.Indices.Monitoring.IndicesStats
+namespace Tests.Indices.Monitoring.IndicesStats
 {
 	public class IndicesStatsUrlTests
 	{

@@ -8,7 +8,7 @@ using Tests.Framework;
 using Tests.Framework.MockData;
 using static Tests.Framework.UrlTester;
 
-namespace Tests.Modules.IndexSettings.IndexTemplates.DeleteIndexTemplate
+namespace Tests.Indices.IndexSettings.IndexTemplates.DeleteIndexTemplate
 {
 	public class DeleteTemplateUrlTests
 	{

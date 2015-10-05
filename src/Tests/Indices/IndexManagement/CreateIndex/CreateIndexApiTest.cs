@@ -55,7 +55,7 @@ namespace Tests.Indices.IndexManagement
 
 		protected override CreateIndexRequest Initializer => new CreateIndexRequest(IndexName)
 		{
-			Settings = new IndexSettings()
+			Settings = new Nest.IndexSettings()
 			{
 				NumberOfReplicas = 1,
 				NumberOfShards = 1,

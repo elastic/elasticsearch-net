@@ -9,7 +9,7 @@ using Tests.Framework.MockData;
 using static Tests.Framework.UrlTester;
 using Elasticsearch.Net;
 
-namespace Tests.Cat.CatAliases
+namespace Tests.Cluster.ClusterState
 {
 	public class ClusterStateUrlTest : IUrlTest
 	{
@@ -22,8 +22,6 @@ namespace Tests.Cat.CatAliases
 				.RequestAsync(c => c.ClusterStateAsync(new ClusterStateRequest()))
 				;
 
-
-			// TODO: need to implement Metric
 			var metrics = ClusterStateMetric.MasterNode | ClusterStateMetric.Metadata;
 			await GET("/_cluster/state/metadata,master_node")
 				.Fluent(c => c.ClusterState(p=>p.Metric(metrics)))
@@ -32,7 +30,6 @@ namespace Tests.Cat.CatAliases
 				.RequestAsync(c => c.ClusterStateAsync(new ClusterStateRequest(metrics)))
 				;
 
-			// TODO: need to implement Metric
 			metrics |= ClusterStateMetric.All;
 			var index = "indexx";
 			await GET($"/_cluster/state/_all/{index}")

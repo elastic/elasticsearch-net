@@ -9,7 +9,7 @@ using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using static Nest.Infer;
 
-namespace Tests
+namespace Tests.Analysis.Tokenizers
 {
 	/**
 	 */
@@ -110,9 +110,9 @@ namespace Tests
 		public static IndexSettings InitializerExample =>
 			new IndexSettings
 			{
-				Analysis = new Analysis
+				Analysis = new Nest.Analysis
 				{
-					Tokenizers = new Tokenizers
+					Tokenizers = new Nest.Tokenizers
 					{
 							{ "endgen", new EdgeNGramTokenizer
 							{

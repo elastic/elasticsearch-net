@@ -11,7 +11,7 @@ using Tests.Framework.MockData;
 using static Nest.Infer;
 using static Tests.Framework.RoundTripper;
 
-namespace Tests.Aggregations.Bucket
+namespace Tests.Aggregations.Bucket.Filter
 {
 	/**
 	 * Defines a single bucket of all the documents in the current document set context that match a specified filter. 

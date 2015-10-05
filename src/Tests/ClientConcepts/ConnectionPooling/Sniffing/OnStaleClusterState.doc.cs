@@ -33,15 +33,15 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 		[SuppressMessage("AsyncUsage", "AsyncFixer001:Unnecessary async/await usage", Justification = "Its a test")]
 		public async Task ASniffOnStartupHappens()
 		{
-			var audit = new Auditor(() => Cluster
+			var audit = new Auditor(() => Framework.Cluster
 				.Nodes(10)
 				.MasterEligable(9202, 9203, 9204)
 				.ClientCalls(r => r.SucceedAlways())
-				.Sniff(s => s.SucceedAlways(Cluster
+				.Sniff(s => s.SucceedAlways(Framework.Cluster
 					.Nodes(100)
 					.MasterEligable(9202, 9203, 9204)
 					.ClientCalls(r => r.SucceedAlways())
-					.Sniff(ss => ss.SucceedAlways(Cluster
+					.Sniff(ss => ss.SucceedAlways(Framework.Cluster
 						.Nodes(10)
 						.MasterEligable(9202, 9203, 9204)
 						.ClientCalls(r => r.SucceedAlways())
