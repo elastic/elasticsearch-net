@@ -17,15 +17,15 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+		<DebugSymbols>true</DebugSymbols>
+		<DebugType>full</DebugType>
+		<Optimize>false</Optimize>
+		<OutputPath>bin\Debug\</OutputPath>
+		<DefineConstants>DEBUG;TRACE</DefineConstants>
+		<ErrorReport>prompt</ErrorReport>
+		<WarningLevel>4</WarningLevel>
+	</PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
@@ -179,8 +179,31 @@
     <Compile Include="IndexModules\IndexSettings\SlowLog\SlowLogSettings.cs" />
     <Compile Include="IndexModules\IndexSettings\Translog\TranslogSettings.cs" />
     <Compile Include="IndexModules\Similarity\SimilaritySettings.cs" />
+    <Compile Include="Indices\AliasManagement\AliasExists\AliasExistsUrlTests.cs" />
+    <Compile Include="Indices\AliasManagement\Alias\AliasUrlTests.cs" />
+    <Compile Include="Indices\AliasManagement\DeleteAlias\DeleteAliasUrlTests.cs" />
+    <Compile Include="Indices\AliasManagement\GetAliasesUrlTests.cs\GetAliasesUrlTests.cs" />
+    <Compile Include="Indices\AliasManagement\GetAlias\GetAliasUrlTests.cs" />
+    <Compile Include="Indices\AliasManagement\PutAliasUrlTests\PutAliasUrlTests.cs" />
+    <Compile Include="Indices\Analyze\AnalyzeUrlTests.cs" />
     <Compile Include="Indices\IndexManagement\CreateIndex\CreateIndexApiTest.cs" />
-    <Compile Include="Indices\IndexManagement\PutMapping\PutMappingApiTest.cs" />
+    <Compile Include="Indices\IndexManagement\CreateIndex\CreateIndexUrlTests.cs" />
+    <Compile Include="Indices\IndexManagement\DeleteIndex\DeleteIndexUrlTests.cs" />
+    <Compile Include="Indices\IndexManagement\GetIndex\GetIndexUrlTests.cs" />
+    <Compile Include="Indices\IndexManagement\IndicesExists\IndexExistsUrlTests.cs" />
+    <Compile Include="Indices\IndexManagement\OpenCloseIndex\CloseIndex\CloseIndexUrlTests.cs" />
+    <Compile Include="Indices\IndexManagement\OpenCloseIndex\OpenIndex\OpenIndexUrlTests.cs" />
+    <Compile Include="Indices\IndexManagement\TypesExists\TypesExistsUrlTests.cs" />
+    <Compile Include="Indices\IndexSettings\GetIndexSettings\GetIndexSettingsUrlTests.cs" />
+    <Compile Include="Indices\IndexSettings\IndexTemplates\GetIndexTemplate\GetIndexTemplateUrlTests.cs" />
+    <Compile Include="Indices\IndexSettings\IndexTemplates\DeleteIndexTemplate\DeleteIndexTemplateUrlTests.cs" />
+    <Compile Include="Indices\IndexSettings\IndexTemplates\IndexTemplateExists\IndexTemplateExistsUrlTests.cs" />
+    <Compile Include="Indices\IndexSettings\IndexTemplates\PutIndexTemplate\PutIndexTemplateUrlTests.cs" />
+    <Compile Include="Indices\IndexSettings\UpdateIndicesSettings\UpdateIndicesSettingsUrlTests.cs" />
+    <Compile Include="Indices\MappingManagement\GetFieldMapping\GetFieldMappingUrlTests.cs" />
+    <Compile Include="Indices\MappingManagement\GetMapping\GetMappingUrlTests.cs" />
+    <Compile Include="Indices\MappingManagement\PutMapping\PutMappingApiTest.cs" />
+    <Compile Include="Indices\MappingManagement\PutMapping\PutMappingUrlTests.cs" />
     <Compile Include="Indices\Monitoring\IndicesRecovery\RecoveryStatusUrlTests.cs" />
     <Compile Include="Indices\Monitoring\IndicesSegments\SegmentsUrlTests.cs" />
     <Compile Include="Indices\Monitoring\IndicesStats\IndicesStatsUrlTests.cs" />

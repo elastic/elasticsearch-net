@@ -10,7 +10,8 @@ namespace Nest
 
 	public partial class AnalyzeRequest 
 	{
-		public AnalyzeRequest(string textToAnalyze)
+		public AnalyzeRequest(IndexName indices, string textToAnalyze)
+			:this(indices)
 		{
 			this.Text = new[] { textToAnalyze };
 		}

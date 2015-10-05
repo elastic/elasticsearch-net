@@ -51,9 +51,9 @@ namespace Nest
 		private static string MoveTextFromQueryString(IAnalyzeRequest d)
 		{
 			IRequest<AnalyzeRequestParameters> request = d;
-			var text = request.RequestParameters.GetQueryStringValue<string>("text");
+			var text = request.RequestParameters.GetQueryStringValue<string[]>("text");
 			request.RequestParameters.RemoveQueryString("text");
-			return text;
+			return string.Join(",", text);
 		}
 	}
 }

@@ -20,10 +20,10 @@ namespace Nest
 		Task<IDeleteAliasResponse> DeleteAliasAsync(IDeleteAliasRequest deleteAliasRequest);
 
 		/// <inheritdoc/>
-		IDeleteAliasResponse DeleteAlias<T>(Indices indices, Names names, Func<DeleteAliasDescriptor<T>, IDeleteAliasRequest> deleteAliasDescriptor) where T : class;
+		IDeleteAliasResponse DeleteAlias(Indices indices, Names names, Func<DeleteAliasDescriptor, IDeleteAliasRequest> deleteAliasDescriptor = null);
 
 		/// <inheritdoc/>
-		Task<IDeleteAliasResponse> DeleteAliasAsync<T>(Indices indices, Names names, Func<DeleteAliasDescriptor<T>, IDeleteAliasRequest> deleteAliasDescriptor) where T : class;
+		Task<IDeleteAliasResponse> DeleteAliasAsync(Indices indices, Names names, Func<DeleteAliasDescriptor, IDeleteAliasRequest> deleteAliasDescriptor = null);
 	}
 
 
@@ -44,11 +44,11 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public IDeleteAliasResponse DeleteAlias<T>(Indices indices, Names names, Func<DeleteAliasDescriptor<T>, IDeleteAliasRequest> deleteAliasDescriptor = null) where T : class =>
-			this.DeleteAlias(deleteAliasDescriptor.InvokeOrDefault(new DeleteAliasDescriptor<T>(indices, names)));
+		public IDeleteAliasResponse DeleteAlias(Indices indices, Names names, Func<DeleteAliasDescriptor, IDeleteAliasRequest> deleteAliasDescriptor = null) =>
+			this.DeleteAlias(deleteAliasDescriptor.InvokeOrDefault(new DeleteAliasDescriptor(indices, names)));
 
 		/// <inheritdoc/>
-		public Task<IDeleteAliasResponse> DeleteAliasAsync<T>(Indices indices, Names names, Func<DeleteAliasDescriptor<T>, IDeleteAliasRequest> deleteAliasDescriptor = null) where T : class=>
-			this.DeleteAliasAsync(deleteAliasDescriptor.InvokeOrDefault(new DeleteAliasDescriptor<T>(indices, names)));
+		public Task<IDeleteAliasResponse> DeleteAliasAsync(Indices indices, Names names, Func<DeleteAliasDescriptor, IDeleteAliasRequest> deleteAliasDescriptor = null) =>
+			this.DeleteAliasAsync(deleteAliasDescriptor.InvokeOrDefault(new DeleteAliasDescriptor(indices, names)));
 	}
 }

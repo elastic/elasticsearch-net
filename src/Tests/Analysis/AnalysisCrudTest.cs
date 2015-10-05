@@ -83,7 +83,7 @@ namespace Tests
 			requestAsync: (s, c, r) => c.GetIndexSettingsAsync(r)
 		);
 
-		protected GetIndexSettingsRequest GetInitializer(string indexName) => new GetIndexSettingsRequest(Nest.Indices.Single(indexName)) { };
+		protected GetIndexSettingsRequest GetInitializer(string indexName) => new GetIndexSettingsRequest(Nest.Indices.Index(indexName)) { };
 		protected IGetIndexSettingsRequest GetFluent(string indexName, GetIndexSettingsDescriptor u) => u.Index(indexName);
 
 		/**
@@ -107,13 +107,13 @@ namespace Tests
 		/**
 		* Elasticsearch has an `UpdateIndexSettings()` call but in order to be able to use it you first need to close the index and reopen it afterwards
 		*/
-		protected override LazyResponses Update() => Calls<UpdateSettingsDescriptor, UpdateSettingsRequest, IUpdateSettingsRequest, IAcknowledgedResponse>(
+		protected override LazyResponses Update() => Calls<UpdateIndexSettingsDescriptor, UpdateIndexSettingsRequest, IUpdateIndexSettingsRequest, IAcknowledgedResponse>(
 			UpdateInitializer,
 			UpdateFluent,
 			fluent: (s, c, f) =>
 			{
 				c.CloseIndex(s);
-				var response = c.UpdateIndexSettings(f);
+				var response = c.UpdateIndexSettings(s, f);
 				c.OpenIndex(s);
 				return response;
 			}
@@ -121,7 +121,7 @@ namespace Tests
 			fluentAsync: async (s, c, f) =>
 			{
 				c.CloseIndex(s);
-				var response = await c.UpdateIndexSettingsAsync(f);
+				var response = await c.UpdateIndexSettingsAsync(s, f);
 				c.OpenIndex(s);
 				return response;
 			},
@@ -144,7 +144,7 @@ namespace Tests
 		/**
 		* Here we add a new `HtmlStripCharFilter` called `differentHtml`
 		*/
-		protected UpdateSettingsRequest UpdateInitializer(string indexName) => new UpdateSettingsRequest(indexName)
+		protected UpdateIndexSettingsRequest UpdateInitializer(string indexName) => new UpdateIndexSettingsRequest(indexName)
 		{
 			Analysis = new Analysis
 			{
@@ -153,8 +153,8 @@ namespace Tests
 		};
 
 
-		protected IUpdateSettingsRequest UpdateFluent(string indexName, UpdateSettingsDescriptor u) => u
-			.Index(indexName)
+		protected IUpdateIndexSettingsRequest UpdateFluent(string indexName, UpdateIndexSettingsDescriptor u) => u
+			//.Index(indexName)
 			.Analysis(a => a
 				.CharFilters(c => c
 					.HtmlStrip("differentHtml")

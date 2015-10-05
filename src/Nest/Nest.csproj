@@ -436,8 +436,8 @@
     <Compile Include="Aggregations\Metric\GeoBounds\GeoBoundsAggregation.cs" />
     <Compile Include="Aggregations\Bucket\ReverseNested\ReverseNestedAggregation.cs" />
     <Compile Include="Indices\IndexSettings\GetIndexSettings\GetIndexSettingsRequest.cs" />
-    <Compile Include="Indices\IndexSettings\IndexTemplates\GetTemplate\ElasticClient-GetTemplate.cs" />
-    <Compile Include="Indices\IndexSettings\IndexTemplates\PutTemplate\ElasticClient-PutTemplate.cs" />
+    <Compile Include="Indices\IndexSettings\IndexTemplates\GetIndexTemplate\ElasticClient-GetIndexTemplate.cs" />
+    <Compile Include="Indices\IndexSettings\IndexTemplates\PutIndexTemplate\ElasticClient-PutIndexTemplate.cs" />
     <Compile Include="IndexModules\IndexSettings\Settings\UpdatableSettings.cs" />
     <Compile Include="Search\FieldStats\FieldStatsRequest.cs" />
     <Compile Include="QueryDsl\Compound\Indices\NoMatchShortcut.cs" />
@@ -513,7 +513,7 @@
     <Compile Include="Search\SearchTemplate\PutSearchTemplate\ElasticClient-PutSearchTemplate.cs" />
     <Compile Include="Search\SearchTemplate\SearchTemplateRequest.cs" />
     <Compile Include="Search\Suggesters\PhraseSuggester\PhraseSuggestHighlight.cs" />
-    <Compile Include="Indices\IndexSettings\IndexTemplates\TemplateExists\TemplateExistsRequest.cs" />
+    <Compile Include="Indices\IndexSettings\IndexTemplates\IndexTemplateExists\IndexTemplateExistsRequest.cs" />
     <Compile Include="Cluster\Ping\PingResponse.cs" />
     <Compile Include="Indices\AliasManagement\GetAlias\GetAliasRequest.cs" />
     <Compile Include="Indices\AliasManagement\AliasExists\AliasExistsRequest.cs" />
@@ -586,7 +586,7 @@
     <Compile Include="Search\SearchShards\ElasticClient-SearchShards.cs" />
     <Compile Include="Indices\Monitoring\IndicesRecovery\ElasticClient-RecoveryStatus.cs" />
     <Compile Include="Search\SearchTemplate\ElasticClient-SearchTemplate.cs" />
-    <Compile Include="Indices\IndexSettings\IndexTemplates\TemplateExists\ElasticClient-TemplateExists.cs" />
+    <Compile Include="Indices\IndexSettings\IndexTemplates\IndexTemplateExists\ElasticClient-IndexTemplateExists.cs" />
     <Compile Include="Indices\AliasManagement\AliasExists\ElasticClient-AliasExists.cs" />
     <Compile Include="Cluster\ClusterSettings\ClusterPutSettings\ElasticClient-ClusterSettings.cs" />
     <Compile Include="Indices\IndexManagement\DeleteIndex\ElasticClient-DeleteIndex.cs" />
@@ -704,8 +704,8 @@
     <Compile Include="Search\Search\SourceFiltering\SearchSource.cs" />
     <Compile Include="Document\Single\TermVectors\TermVectorsRequest.cs" />
     <Compile Include="Search\Percolator\UnregisterPercolator\UnregisterPercolatorRequest.cs" />
-    <Compile Include="Indices\IndexSettings\IndexTemplates\DeleteTemplate\DeleteTemplateRequest.cs" />
-    <Compile Include="Indices\IndexSettings\IndexTemplates\GetTemplate\GetTemplateRequest.cs" />
+    <Compile Include="Indices\IndexSettings\IndexTemplates\DeleteIndexTemplate\DeleteIndexTemplateRequest.cs" />
+    <Compile Include="Indices\IndexSettings\IndexTemplates\GetIndexTemplate\GetIndexTemplateRequest.cs" />
     <Compile Include="Indices\Warmers\DeleteWarmer\DeleteWarmerRequest.cs" />
     <Compile Include="Indices\Monitoring\IndicesSegments\SegmentsRequest.cs" />
     <Compile Include="Indices\StatusManagement\Refresh\RefreshRequest.cs" />
@@ -713,7 +713,7 @@
     <Compile Include="Indices\IndexManagement\OpenCloseIndex\OpenIndex\OpenIndexRequest.cs" />
     <Compile Include="CommonAbstractions\Fluent\FluentDictionary.cs" />
     <Compile Include="Search\Scroll\Scroll\ScrollRequest.cs" />
-    <Compile Include="Indices\IndexSettings\UpdateIndicesSettings\UpdateSettingsRequest.cs" />
+    <Compile Include="Indices\IndexSettings\UpdateIndexSettings\UpdateIndexSettingsRequest.cs" />
     <Compile Include="Document\Single\Exists\ElasticClient-DocumentExists.cs" />
     <Compile Include="Document\Multiple\MultiTermVectors\ElasticClient-MultiTermVectors.cs" />
     <Compile Include="Modules\SnapshotAndRestore\Snapshot\DeleteSnapshot\ElasticClient-DeleteSnapshot.cs" />
@@ -722,7 +722,7 @@
     <Compile Include="Search\Suggesters\Suggest\ElasticClient-Suggest.cs" />
     <Compile Include="Cluster\RootNodeInfo\ElasticClient-RootNodeInfo.cs" />
     <Compile Include="Document\Single\TermVectors\ElasticClient-TermVectors.cs" />
-    <Compile Include="Indices\IndexSettings\UpdateIndicesSettings\ElasticClient-UpdateSettings.cs" />
+    <Compile Include="Indices\IndexSettings\UpdateIndexSettings\ElasticClient-UpdateIndexSettings.cs" />
     <Compile Include="Document\Multiple\MultiGet\Request\IMultiGetOperation.cs" />
     <Compile Include="Document\Multiple\DeleteByQuery\DeleteByQueryRequest.cs" />
     <Compile Include="Document\Multiple\MultiGet\Request\MultiGetOperation.cs" />
@@ -793,10 +793,10 @@
     <Compile Include="IndexModules\Similarity\Similarities.cs" />
     <Compile Include="Search\MultiSearch\ElasticClient-MultiSearch.cs" />
     <Compile Include="Indices\IndexSettings\IndexTemplates\TemplateMapping.cs" />
-    <Compile Include="Indices\IndexSettings\IndexTemplates\GetTemplate\TemplateResponse.cs" />
+    <Compile Include="Indices\IndexSettings\IndexTemplates\GetIndexTemplate\GetIndexTemplateResponse.cs" />
     <Compile Include="Search\MultiSearch\MultiSearchRequest.cs" />
-    <Compile Include="Indices\IndexSettings\IndexTemplates\PutTemplate\PutTemplateRequest.cs" />
-    <Compile Include="Indices\IndexSettings\IndexTemplates\DeleteTemplate\ElasticClient-DeleteTemplate.cs" />
+    <Compile Include="Indices\IndexSettings\IndexTemplates\PutIndexTemplate\PutIndexTemplateRequest.cs" />
+    <Compile Include="Indices\IndexSettings\IndexTemplates\DeleteIndexTemplate\ElasticClient-DeleteIndexTemplate.cs" />
     <Compile Include="Document\Multiple\Bulk\BulkOperation\BulkCreate.cs" />
     <Compile Include="Document\Multiple\Bulk\BulkRequest.cs" />
     <Compile Include="Document\Multiple\Bulk\BulkOperation\BulkIndex.cs" />

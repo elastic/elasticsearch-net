@@ -19,7 +19,7 @@ namespace Nest
 		[JsonProperty("rename_replacement")]
 		string RenameReplacement { get; set; }
 		[JsonProperty("index_settings")]
-		IUpdateSettingsRequest IndexSettings { get; set; }
+		IUpdateIndexSettingsRequest IndexSettings { get; set; }
 		[JsonProperty("ignore_index_settings")]
 		List<string> IgnoreIndexSettings { get; set; }
 	}
@@ -35,7 +35,7 @@ namespace Nest
 		public string RenamePattern { get; set; }
 		
 		public string RenameReplacement { get; set; }
-		public IUpdateSettingsRequest IndexSettings { get; set; }
+		public IUpdateIndexSettingsRequest IndexSettings { get; set; }
 		public List<string> IgnoreIndexSettings { get; set; }
 	}
 
@@ -49,7 +49,7 @@ namespace Nest
 		bool? IRestoreRequest.IncludeGlobalState { get; set; }
 		string IRestoreRequest.RenamePattern { get; set; }
 		string IRestoreRequest.RenameReplacement { get; set; }
-		IUpdateSettingsRequest IRestoreRequest.IndexSettings { get; set; }
+		IUpdateIndexSettingsRequest IRestoreRequest.IndexSettings { get; set; }
 		List<string> IRestoreRequest.IgnoreIndexSettings { get; set; }
 
 		public RestoreDescriptor Index(string index)
@@ -94,10 +94,10 @@ namespace Nest
 			return this;
 		}
 
-		public RestoreDescriptor IndexSettings(Func<UpdateSettingsDescriptor, UpdateSettingsDescriptor> settingsSelector)
+		public RestoreDescriptor IndexSettings(Func<UpdateIndexSettingsDescriptor, UpdateIndexSettingsDescriptor> settingsSelector)
 		{
 			settingsSelector.ThrowIfNull("settings");
-			Self.IndexSettings = settingsSelector(new UpdateSettingsDescriptor());
+			Self.IndexSettings = settingsSelector(new UpdateIndexSettingsDescriptor());
 			return this;
 		}
 

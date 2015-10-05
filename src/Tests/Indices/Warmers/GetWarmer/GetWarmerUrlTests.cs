@@ -25,10 +25,10 @@ namespace Tests.Modules.Warmers.GetWarmer
 
 			var index = "indexx";
 			await GET($"/{index}/_warmer")
-				.Fluent(c => c.GetWarmer(w=>w.Index(Nest.Indices.Single(index))))
-				.Request(c => c.GetWarmer(new GetWarmerRequest(Nest.Indices.Single(index))))
+				.Fluent(c => c.GetWarmer(w=>w.Index(Nest.Indices.Index(index))))
+				.Request(c => c.GetWarmer(new GetWarmerRequest(Nest.Indices.Index(index))))
 				.FluentAsync(c => c.GetWarmerAsync(w=>w.Index(index)))
-				.RequestAsync(c => c.GetWarmerAsync(new GetWarmerRequest(Nest.Indices.Single(index))))
+				.RequestAsync(c => c.GetWarmerAsync(new GetWarmerRequest(Nest.Indices.Index(index))))
 				;
 
 			await GET($"/{index}/_warmer/{name}")

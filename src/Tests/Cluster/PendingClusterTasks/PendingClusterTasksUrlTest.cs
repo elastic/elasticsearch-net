@@ -14,7 +14,7 @@ namespace Tests.Cat.CatAliases
 	{
 		[U] public async Task Urls()
 		{
-			await POST("/_cluster/pending_tasks")
+			await GET("/_cluster/pending_tasks")
 				.Fluent(c => c.ClusterPendingTasks())
 				.Request(c => c.ClusterPendingTasks(new ClusterPendingTasksRequest()))
 				.FluentAsync(c => c.ClusterPendingTasksAsync())

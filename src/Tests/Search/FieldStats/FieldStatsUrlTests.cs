@@ -17,7 +17,7 @@ namespace Tests.Search.FieldStats
 			var project = new Project { Name = "NEST" };
 
 			await POST("/project/_field_stats")
-				.Fluent(c => c.FieldStats(Nest.Indices.Single<Project>()))
+				.Fluent(c => c.FieldStats(Nest.Indices.Index<Project>()))
 				.Request(c => c.FieldStats(new FieldStatsRequest("project") {}))
 				.FluentAsync(c => c.FieldStatsAsync(typeof(Project)))
 				.RequestAsync(c => c.FieldStatsAsync(new FieldStatsRequest("project")))

@@ -57,6 +57,10 @@ namespace CodeGeneration.LowLevelClient.Domain
 
 		private bool IsPartless => this.Url.Parts == null || !this.Url.Parts.Any();
 
+		private string MetricPrefix => this.RequestType.Replace("Request", "");
+		private string ClrParamType(string clrType) => clrType.EndsWith("Metrics", StringComparison.OrdinalIgnoreCase) 
+			?  this.MetricPrefix + clrType.Replace("Metrics", "Metric") : clrType;
+
 		public IEnumerable<Constructor> RequestConstructors()
 		{
 			var ctors = new List<Constructor>();
@@ -68,7 +72,7 @@ namespace CodeGeneration.LowLevelClient.Domain
 					.Where(p => !ApiUrl.BlackListRouteValues.Contains(p.Key))
 					.Where(p => url.Contains($"{{{p.Value.Name}}}"))
 					.OrderBy(kv => url.IndexOf($"{{{kv.Value.Name}}}", StringComparison.Ordinal));
-				var par = string.Join(", ", cp.Select(p => $"{p.Value.ClrTypeName} {p.Key}"));
+				var par = string.Join(", ", cp.Select(p => $"{ClrParamType(p.Value.ClrTypeName)} {p.Key}"));
 				var routing = string.Empty;
 
 				//Routes that take {indices}/{types} and both are optional
@@ -80,7 +84,19 @@ namespace CodeGeneration.LowLevelClient.Domain
 				}
 
 				if (cp.Any())
-					routing = "r=>r." + string.Join(".", cp.Select(p => $"{(p.Value.Required ? "Required" : "Optional")}(\"{p.Key}\", {p.Key})"));
+					routing = "r=>r." + string.Join(".", cp
+						.Select(p => new
+						{
+							route = p.Key,
+							call = p.Value.Required ? "Required" : "Optional",
+							v = p.Key == "metric"
+								? $"(Metrics){p.Key}"
+								: p.Key == "index_metric"
+									? $"(IndexMetrics){p.Key}"
+									: p.Key
+						})
+						.Select(p => $"{p.call}(\"{p.route}\", {p.v})")
+					);
 				var doc = $@"/// <summary>{url}</summary>";
 				if (cp.Any())
 				{
@@ -124,7 +140,7 @@ namespace CodeGeneration.LowLevelClient.Domain
 					.Where(p => p.Value.Required)
 					.Where(p => url.Contains($"{{{p.Value.Name}}}"))
 					.OrderBy(kv => url.IndexOf($"{{{kv.Value.Name}}}", StringComparison.Ordinal));
-				var par = string.Join(", ", cp.Select(p => $"{p.Value.ClrTypeName} {p.Key}"));
+				var par = string.Join(", ", cp.Select(p => $"{ClrParamType(p.Value.ClrTypeName)} {p.Key}"));
 				var routing = string.Empty;
 				//Routes that take {indices}/{types} and both are optional
 				if (!cp.Any() && IndicesAndTypes)
@@ -133,7 +149,19 @@ namespace CodeGeneration.LowLevelClient.Domain
 					continue;
 				}
 				if (cp.Any())
-					routing = "r=>r." + string.Join(".", cp.Select(p => $"Required(\"{p.Key}\", {p.Key})"));
+					routing = "r=>r." + string.Join(".", cp
+						.Select(p => new
+						{
+							route = p.Key,
+							call = p.Value.Required ? "Required" : "Optional",
+							v = p.Key == "metric"
+								? $"(Metrics){p.Key}"
+								: p.Key == "index_metric"
+									? $"(IndexMetrics){p.Key}"
+									: p.Key
+						})
+						.Select(p => $"{p.call}(\"{p.route}\", {p.v})")
+					);
 				var doc = $@"/// <summary>{url}</summary>";
 				if (cp.Any())
 				{
@@ -185,7 +213,12 @@ namespace CodeGeneration.LowLevelClient.Domain
 					paramName = paramName.Substring(0, 1).ToLowerInvariant() + paramName.Substring(1);
 				else
 					paramName = paramName.ToLowerInvariant();
-				var code = $"public {returnType} {p.InterfaceName}({p.ClrTypeName} {paramName}) => Assign(a=>a.RouteValues.Optional(\"{p.Name}\", {paramName}));";
+
+				var routeValue = paramName;
+				if (paramName == "metric") routeValue = "(Metrics)metric";
+				else if (paramName == "indexMetric") routeValue = "(IndexMetrics)indexMetric";
+
+				var code = $"public {returnType} {p.InterfaceName}({ClrParamType(p.ClrTypeName)} {paramName}) => Assign(a=>a.RouteValues.Optional(\"{p.Name}\", {routeValue}));";
 				var xmlDoc = $"///<summary>{p.Description}</summary>";
 				setters.Add(new FluentRouteSetter { Code = code, XmlDoc = xmlDoc });
 				if ((paramName == "index" || paramName == "type"))
