@@ -130,7 +130,7 @@
     <Compile Include="Cat\ElasticClient-Cat.cs" />
     <Compile Include="Cluster\ClusterSettings\ClusterGetSettings\ElasticClient-ClusterGetSettings.cs" />
     <Compile Include="Cluster\NodesInfo\ElasticClient-NodesInfo.cs" />
-    <Compile Include="Cluster\NodeStats\ElasticClient-NodeStats.cs" />
+    <Compile Include="Cluster\NodesStats\ElasticClient-NodesStats.cs" />
     <Compile Include="CommonAbstractions\ConnectionSettings\ClrTypeMapping.cs" />
     <Compile Include="CommonAbstractions\Infer\FieldName\FieldName.cs" />
     <Compile Include="CommonAbstractions\Response\DictionaryResponse.cs" />
@@ -686,7 +686,7 @@
     <Compile Include="QueryDsl\Geo\Shape\Circle\GeoShapeCircleQuery.cs" />
     <Compile Include="QueryDsl\FullText\SimpleQueryString\SimpleQueryStringQuery.cs" />
     <Compile Include="Document\Single\Source\SourceRequest.cs" />
-    <Compile Include="Cluster\NodeStats\NodesStatsRequest.cs" />
+    <Compile Include="Cluster\NodesStats\NodesStatsRequest.cs" />
     <Compile Include="Cluster\NodesInfo\NodesInfoRequest.cs" />
     <Compile Include="Cluster\ClusterHealth\ClusterHealthRequest.cs" />
     <Compile Include="Indices\Analyze\AnalyzeRequest.cs" />
@@ -806,10 +806,10 @@
     <Compile Include="Indices\IndexManagement\CreateIndex\ElasticClient-CreateIndex.cs" />
     <Compile Include="Cluster\ClusterHealth\HealthResponse.cs" />
     <Compile Include="Cluster\NodesInfo\NodeInfoResponse.cs" />
-    <Compile Include="Cluster\NodeStats\NodeStatsResponse.cs" />
+    <Compile Include="Cluster\NodesStats\NodeStatsResponse.cs" />
     <Compile Include="Cluster\ClusterHealth\IndexHealthStats.cs" />
     <Compile Include="Cluster\NodesInfo\NodeInfo.cs" />
-    <Compile Include="Cluster\NodeStats\NodeStats.cs" />
+    <Compile Include="Cluster\NodesStats\NodeStats.cs" />
     <Compile Include="Cluster\ClusterHealth\ShardHealthStats.cs" />
     <Compile Include="Cluster\ClusterHealth\ElasticClient-ClusterHealth.cs" />
     <Compile Include="Mapping\Types\Specialized\Attachment\AttachmentProperty.cs" />

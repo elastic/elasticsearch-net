@@ -29,7 +29,6 @@ namespace Tests.Cat.CatAliases
 				.RequestAsync(c => c.NodesInfoAsync(new NodesInfoRequest("foo")))
 				;
 
-			// TODO: need to implement Metric
 			var metrics = NodesInfoMetric.Http | NodesInfoMetric.Jvm;
 			await GET("/_nodes/jvm,http")
 				.Fluent(c => c.NodesInfo(p=>p.Metric(metrics)))
@@ -38,7 +37,6 @@ namespace Tests.Cat.CatAliases
 				.RequestAsync(c => c.NodesInfoAsync(new NodesInfoRequest(metrics)))
 				;
 
-			// TODO: need to implement Metric
 			await GET("/_nodes/foo/jvm,http")
 				.Fluent(c => c.NodesInfo(n => n.NodeId("foo").Metric(metrics)))
 				.Request(c => c.NodesInfo(new NodesInfoRequest("foo", metrics)))

@@ -17,15 +17,15 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
   </PropertyGroup>
-	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-		<DebugSymbols>true</DebugSymbols>
-		<DebugType>full</DebugType>
-		<Optimize>false</Optimize>
-		<OutputPath>bin\Debug\</OutputPath>
-		<DefineConstants>DEBUG;TRACE</DefineConstants>
-		<ErrorReport>prompt</ErrorReport>
-		<WarningLevel>4</WarningLevel>
-	</PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
@@ -119,6 +119,7 @@
     <Compile Include="Cluster\ClusterStats\ClusterStatsUrlTest.cs" />
     <Compile Include="Cluster\NodesHotThreads\NodesHotThreadsUrlTest.cs" />
     <Compile Include="Cluster\NodesInfo\NodesInfoUrlTest.cs" />
+    <Compile Include="Cluster\NodesStats\NodesStatsUrlTest.cs" />
     <Compile Include="Cluster\PendingClusterTasks\PendingClusterTasksUrlTest.cs" />
     <Compile Include="Cluster\Ping\PingUrlTest.cs" />
     <Compile Include="Cluster\RootNodeInfo\PingUrlTest.cs" />
@@ -280,10 +281,8 @@
   <ItemGroup>
     <Folder Include="Aggregations\Metric\" />
     <Folder Include="Aggregations\Pipeline\" />
-    <Folder Include="Cluster\NodeStats\" />
     <Folder Include="Document\Single\Source\" />
     <Folder Include="Document\Single\Update\" />
-    <Folder Include="Indices\AliasManagement\" />
     <Folder Include="Migration\" />
     <Folder Include="Modules\" />
     <Folder Include="Plugins\Analysis\Phonetic\" />
