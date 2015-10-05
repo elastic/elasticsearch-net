@@ -16,26 +16,26 @@ namespace Tests.Indices.GetAliasesManagement
 		{
 			Name name = "hardcoded";
 			IndexName index = "index";
-			await GET($"/_alias")
+			await GET($"/_aliases")
 				.Fluent(c=>c.GetAliases())
 				.Request(c=>c.GetAliases(new GetAliasesRequest()))
 				.FluentAsync(c=>c.GetAliasesAsync())
 				.RequestAsync(c=>c.GetAliasesAsync(new GetAliasesRequest()))
 				;
-			await GET($"/_alias/hardcoded")
+			await GET($"/_aliases/hardcoded")
 				.Fluent(c=>c.GetAliases(b=>b.Name(name)))
 				.Request(c=>c.GetAliases(new GetAliasesRequest(name)))
 				.FluentAsync(c=>c.GetAliasesAsync(b=>b.Name(name)))
 				.RequestAsync(c=>c.GetAliasesAsync(new GetAliasesRequest(name)))
 				;
-			await GET($"/index/_alias")
+			await GET($"/index/_aliases")
 				.Fluent(c=>c.GetAliases(b=>b.Index(index)))
 				.Request(c=>c.GetAliases(new GetAliasesRequest(index)))
 				.FluentAsync(c=>c.GetAliasesAsync(b=>b.Index(index)))
 				.RequestAsync(c=>c.GetAliasesAsync(new GetAliasesRequest(index)))
 				;
 
-			await GET($"/index/_alias/hardcoded")
+			await GET($"/index/_aliases/hardcoded")
 				.Fluent(c=>c.GetAliases(b=>b.Index(index).Name(name)))
 				.Request(c=>c.GetAliases(new GetAliasesRequest(index, name)))
 				.FluentAsync(c=>c.GetAliasesAsync(b=>b.Index(index).Name(name)))
