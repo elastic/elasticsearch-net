@@ -5,6 +5,8 @@ using Newtonsoft.Json.Converters;
 
 namespace Nest
 {
+	// TODO remove and let code generator create this once
+	// https://github.com/elastic/elasticsearch/pull/13946 is merged
 	[Flags]
 	[JsonConverter(typeof(StringEnumConverter))]
 	public enum GetIndexFeature

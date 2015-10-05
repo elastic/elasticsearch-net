@@ -24,6 +24,13 @@ namespace Tests.Modules.Indices.IndexManagement.GetIndex
 				.RequestAsync(c => c.GetIndexAsync(new GetIndexRequest(index)))
 				;
 
+			var features = GetIndexFeature.Mappings | GetIndexFeature.Settings;
+			await GET($"/{index}/mappings,settings")
+				.Fluent(c => c.GetIndex(index, s=>s.Feature(features)))
+				.Request(c => c.GetIndex(new GetIndexRequest(index, features)))
+				.FluentAsync(c => c.GetIndexAsync(index, s=>s.Feature(features)))
+				.RequestAsync(c => c.GetIndexAsync(new GetIndexRequest(index, features)))
+				;
 		}
 	}
 }

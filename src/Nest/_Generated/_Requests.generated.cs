@@ -2140,13 +2140,13 @@ namespace Nest
 	public partial interface IGetIndexRequest : IRequest<GetIndexRequestParameters> 
 	{
 		Indices Index { get; }
-		Feature Feature { get; }
+		Features Feature { get; }
 	 } 
 	///<summary>Request parameters for IndicesGet <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-get-index.html</pre></summary>
 	public partial class GetIndexRequest  : RequestBase<GetIndexRequestParameters>, IGetIndexRequest
 	{
 		Indices IGetIndexRequest.Index => Self.RouteValues.Get<Indices>("index");
-		Feature IGetIndexRequest.Feature => Self.RouteValues.Get<Feature>("feature");
+		Features IGetIndexRequest.Feature => Self.RouteValues.Get<Features>("feature");
 			/// <summary>/{index}</summary>
 ///<param name="index">this parameter is required</param>
 		public GetIndexRequest(Indices index) : base(r=>r.Required("index", index)){}
@@ -2155,7 +2155,7 @@ namespace Nest
 		/// <summary>/{index}/{feature}</summary>
 ///<param name="index">this parameter is required</param>		
 ///<param name="feature">Optional, accepts null</param>
-		public GetIndexRequest(Indices index, Feature feature) : base(r=>r.Required("index", index).Optional("feature", feature)){}
+		public GetIndexRequest(Indices index, Features feature) : base(r=>r.Required("index", index).Optional("feature", feature)){}
 		
 
 			///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>

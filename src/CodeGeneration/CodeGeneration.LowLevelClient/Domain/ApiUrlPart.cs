@@ -25,8 +25,7 @@ namespace CodeGeneration.LowLevelClient.Domain
 					case "fields": return this.Type == "string" ? "FieldName" : "FieldNames";
 					case "index_metric": return "IndexMetrics";
 					case "metric": return "Metrics";
-					case "feature": return this.Type == "list" ? "Feature" : "Features";
-
+					case "feature": return "Features";
 					case "repository":
 					case "snapshot":
 					case "lang":

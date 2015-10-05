@@ -94,6 +94,7 @@
     <Compile Include="Analysis\Tokenizers\Tokenizers.cs" />
     <Compile Include="CommonAbstractions\Fluent\DescriptorBase.cs" />
     <Compile Include="CommonAbstractions\Infer\DocumentPath\DocumentPath.cs" />
+    <Compile Include="CommonAbstractions\Infer\Features\Features.cs" />
     <Compile Include="CommonAbstractions\Infer\FieldName\FieldNames.cs" />
     <Compile Include="CommonAbstractions\Infer\Id\Id.cs" />
     <Compile Include="CommonAbstractions\Infer\Id\IdJsonConverter.cs" />
@@ -107,7 +108,6 @@
     <Compile Include="CommonAbstractions\Infer\NodeId\NodeIds.cs" />
     <Compile Include="CommonAbstractions\Infer\ScrollId\ScrollId.cs" />
     <Compile Include="CommonAbstractions\Infer\ScrollId\ScrollIds.cs" />
-    <Compile Include="CommonAbstractions\Infer\TODO.cs" />
     <Compile Include="CommonAbstractions\Infer\PropertyName\PropertyName.cs" />
     <Compile Include="CommonAbstractions\Infer\PropertyName\PropertyNameExtensions.cs" />
     <Compile Include="CommonAbstractions\Infer\PropertyName\PropertyNameJsonConverter.cs" />

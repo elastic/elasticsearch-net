@@ -2161,7 +2161,7 @@ namespace Nest
 	public partial class GetIndexDescriptor  : RequestDescriptorBase<GetIndexDescriptor,GetIndexRequestParameters, IGetIndexRequest>, IGetIndexRequest
 	{ 
 		Indices IGetIndexRequest.Index => Self.RouteValues.Get<Indices>("index");
-		Feature IGetIndexRequest.Feature => Self.RouteValues.Get<Feature>("feature");
+		Features IGetIndexRequest.Feature => Self.RouteValues.Get<Features>("feature");
 			/// <summary>/{index}</summary>
 ///<param name="index"> this parameter is required</param>
 		public GetIndexDescriptor(Indices index) : base(r=>r.Required("index", index)){}
@@ -2177,7 +2177,7 @@ namespace Nest
 		public GetIndexDescriptor AllIndices() => this.Index(Indices.All);
 
 		///<summary>A comma-separated list of features</summary>
-		public GetIndexDescriptor Feature(Feature feature) => Assign(a=>a.RouteValues.Optional("feature", feature));
+		public GetIndexDescriptor Feature(Features feature) => Assign(a=>a.RouteValues.Optional("feature", feature));
 
 	
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
