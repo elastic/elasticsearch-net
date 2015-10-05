@@ -10,7 +10,7 @@ using static Nest.Indices;
 using static Nest.Types;
 using static Tests.Framework.UrlTester;
 
-namespace Tests.Modules.Indices.IndexManagement.DeleteIndex
+namespace Tests.Indices.IndexManagement.DeleteIndex
 {
 	public class DeleteIndexUrlTests
 	{

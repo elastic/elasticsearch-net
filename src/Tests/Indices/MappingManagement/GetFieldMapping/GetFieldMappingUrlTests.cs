@@ -11,7 +11,7 @@ using static Nest.Types;
 using static Nest.Fields;
 using static Tests.Framework.UrlTester;
 
-namespace Tests.Modules.Indices.FieldMappingManagement.GetFieldMapping
+namespace Tests.Indices.MappingManagement.GetFieldMapping
 {
 	public class GetFieldMappingUrlTests
 	{

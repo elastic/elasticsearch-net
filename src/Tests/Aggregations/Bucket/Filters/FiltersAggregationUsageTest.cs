@@ -11,7 +11,7 @@ using Tests.Framework.MockData;
 using static Nest.Infer;
 using static Tests.Framework.RoundTripper;
 
-namespace Tests.Aggregations.Bucket
+namespace Tests.Aggregations.Bucket.Filters
 {
 	/**
 	 * Defines a multi bucket aggregations where each bucket is associated with a filter. 

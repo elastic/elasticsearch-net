@@ -10,7 +10,7 @@ using static Nest.Indices;
 using static Nest.Types;
 using static Tests.Framework.UrlTester;
 
-namespace Tests.Modules.Indices.IndexManagement.OpenCloseIndex.CloseIndex
+namespace Tests.Indices.IndexManagement.OpenCloseIndex.CloseIndex
 {
 	public class CloseIndexUrlTests
 	{

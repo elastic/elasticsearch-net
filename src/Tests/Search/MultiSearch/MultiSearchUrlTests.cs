@@ -8,7 +8,7 @@ using Tests.Framework;
 using Tests.Framework.MockData;
 using static Tests.Framework.UrlTester;
 
-namespace Tests.Search.Percolator.MultiSearch
+namespace Tests.Search.MultiSearch
 {
 	public class MultiSearchUrlTests
 	{

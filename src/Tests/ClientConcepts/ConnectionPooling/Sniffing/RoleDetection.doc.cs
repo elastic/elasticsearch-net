@@ -26,11 +26,11 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 		[U, SuppressMessage("AsyncUsage", "AsyncFixer001:Unnecessary async/await usage", Justification = "Its a test")]
 		public async Task DetectsMasterNodes()
 		{
-			var audit = new Auditor(() => Cluster
+			var audit = new Auditor(() => Framework.Cluster
 				.Nodes(10)
 				.Sniff(s => s.Fails(Always))
 				.Sniff(s => s.OnPort(9202)
-					.Succeeds(Always, Cluster.Nodes(8).MasterEligable(9200, 9201, 9202))
+					.Succeeds(Always, Framework.Cluster.Nodes(8).MasterEligable(9200, 9201, 9202))
 				)
 				.SniffingConnectionPool()
 				.AllDefaults()
@@ -55,11 +55,11 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 		[U, SuppressMessage("AsyncUsage", "AsyncFixer001:Unnecessary async/await usage", Justification = "Its a test")]
 		public async Task DetectsDataNodes()
 		{
-			var audit = new Auditor(() => Cluster
+			var audit = new Auditor(() => Framework.Cluster
 				.Nodes(10)
 				.Sniff(s => s.Fails(Always))
 				.Sniff(s => s.OnPort(9202)
-					.Succeeds(Always, Cluster.Nodes(8).StoresNoData(9200, 9201, 9202))
+					.Succeeds(Always, Framework.Cluster.Nodes(8).StoresNoData(9200, 9201, 9202))
 				)
 				.SniffingConnectionPool()
 				.AllDefaults()

@@ -9,7 +9,7 @@ using Tests.Framework.MockData;
 using static Tests.Framework.UrlTester;
 using Elasticsearch.Net;
 
-namespace Tests.Cat.CatAliases
+namespace Tests.Cluster.ClusterState
 {
 	public class ClusterStateUrlTest : IUrlTest
 	{

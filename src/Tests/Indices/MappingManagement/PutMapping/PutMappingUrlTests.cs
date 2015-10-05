@@ -9,7 +9,7 @@ using Tests.Framework.MockData;
 using static Nest.Indices;
 using static Tests.Framework.UrlTester;
 
-namespace Tests.Modules.Indices.MappingManagement.PutMapping
+namespace Tests.Indices.MappingManagement.PutMapping
 {
 	public class PutMappingUrlTests
 	{

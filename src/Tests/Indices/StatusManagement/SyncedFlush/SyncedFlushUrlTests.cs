@@ -9,7 +9,7 @@ using Tests.Framework.MockData;
 using static Tests.Framework.UrlTester;
 using static Nest.Indices;
 
-namespace Tests.Modules.Indices.StatusManagement.SyncedFlush
+namespace Tests.Indices.StatusManagement.SyncedFlush
 {
 	public class SyncedFlushUrlTests
 	{

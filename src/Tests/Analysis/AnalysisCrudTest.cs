@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 using Tests.Framework.Integration;
 using Xunit;
 
-namespace Tests
+namespace Tests.Analysis
 {
 
 	[Collection(IntegrationContext.Indexing)]
@@ -50,12 +50,12 @@ namespace Tests
 		{
 			Settings = new IndexSettings
 			{
-				Analysis = new Analysis
+				Analysis = new Nest.Analysis
 				{
-					Analyzers = AnalyzerUsageTest.InitializerExample.Analysis.Analyzers,
-					CharFilters = CharFilterUsageTest.InitializerExample.Analysis.CharFilters,
-					Tokenizers = TokenizerUsageTest.InitializerExample.Analysis.Tokenizers,
-					TokenFilters = TokenFilterUsageTest.InitializerExample.Analysis.TokenFilters,
+					Analyzers = Analyzers.AnalyzerUsageTest.InitializerExample.Analysis.Analyzers,
+					CharFilters = CharFilters.CharFilterUsageTest.InitializerExample.Analysis.CharFilters,
+					Tokenizers = Tokenizers.TokenizerUsageTest.InitializerExample.Analysis.Tokenizers,
+					TokenFilters = TokenFilters.TokenFilterUsageTest.InitializerExample.Analysis.TokenFilters,
 				}
 			}
 		};
@@ -63,10 +63,10 @@ namespace Tests
 		protected ICreateIndexRequest CreateFluent(string indexName, CreateIndexDescriptor c) =>
 			c.Settings(s => s
 				.Analysis(a => a
-					.Analyzers(t => AnalyzerUsageTest.FluentExample(s).Analysis.Analyzers)
-					.CharFilters(t => CharFilterUsageTest.FluentExample(s).Analysis.CharFilters)
-					.Tokenizers(t => TokenizerUsageTest.FluentExample(s).Analysis.Tokenizers)
-					.TokenFilters(t => TokenFilterUsageTest.FluentExample(s).Analysis.TokenFilters)
+					.Analyzers(t => Analyzers.AnalyzerUsageTest.FluentExample(s).Analysis.Analyzers)
+					.CharFilters(t => CharFilters.CharFilterUsageTest.FluentExample(s).Analysis.CharFilters)
+					.Tokenizers(t => Tokenizers.TokenizerUsageTest.FluentExample(s).Analysis.Tokenizers)
+					.TokenFilters(t => TokenFilters.TokenFilterUsageTest.FluentExample(s).Analysis.TokenFilters)
 				)
 			);
 
@@ -146,9 +146,9 @@ namespace Tests
 		*/
 		protected UpdateIndexSettingsRequest UpdateInitializer(string indexName) => new UpdateIndexSettingsRequest(indexName)
 		{
-			Analysis = new Analysis
+			Analysis = new Nest.Analysis
 			{
-				CharFilters = new CharFilters { { "differentHtml", new HtmlStripCharFilter { } } }
+				CharFilters = new Nest.CharFilters { { "differentHtml", new HtmlStripCharFilter { } } }
 			}
 		};
 

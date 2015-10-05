@@ -11,7 +11,7 @@ using Tests.Framework.MockData;
 using static Nest.Infer;
 using static Tests.Framework.RoundTripper;
 
-namespace Tests.Aggregations.Bucket
+namespace Tests.Aggregations.Bucket.DateHistogram
 {
 	/**
 	 * A multi-bucket aggregation similar to the histogram except it can only be applied on date values. 

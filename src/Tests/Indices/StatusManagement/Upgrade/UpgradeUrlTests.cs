@@ -9,7 +9,7 @@ using Tests.Framework.MockData;
 using static Tests.Framework.UrlTester;
 using static Nest.Indices;
 
-namespace Tests.Modules.Indices.StatusManagement.Upgrade
+namespace Tests.Indices.StatusManagement.Upgrade
 {
 	public class UpgradeUrlTests
 	{

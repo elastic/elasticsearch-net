@@ -122,14 +122,14 @@
     <Compile Include="Cluster\NodesStats\NodesStatsUrlTest.cs" />
     <Compile Include="Cluster\PendingClusterTasks\PendingClusterTasksUrlTest.cs" />
     <Compile Include="Cluster\Ping\PingUrlTest.cs" />
-    <Compile Include="Cluster\RootNodeInfo\PingUrlTest.cs" />
+    <Compile Include="Cluster\RootNodeInfo\RootNodeInfoUrlTest.cs" />
     <Compile Include="CodeStandards\Descriptors.doc.cs" />
     <Compile Include="Document\Multiple\Bulk\BulkUrlTest.cs" />
     <Compile Include="Document\Multiple\DeleteByQuery\DeleteByQueryUrlTest.cs" />
     <Compile Include="Document\Multiple\MultiGet\MultiGetUrlTest.cs" />
     <Compile Include="Document\Multiple\MultiTermVectors\MultiTermVectorsUrlTest.cs" />
-    <Compile Include="Document\Single\Delete\DeleteUrlTest.cs" />
     <Compile Include="Document\Single\Exists\ExistsUrlTest.cs" />
+    <Compile Include="Document\Single\Delete\DeleteUrlTest.cs" />
     <Compile Include="Document\Single\Get\GetUrlTest.cs" />
     <Compile Include="Document\Single\Index\IndexUrlTest.cs" />
     <Compile Include="Document\Single\Index\IndexApiTest.cs" />

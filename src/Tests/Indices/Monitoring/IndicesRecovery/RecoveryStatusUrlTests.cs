@@ -8,7 +8,7 @@ using Tests.Framework;
 using Tests.Framework.MockData;
 using static Tests.Framework.UrlTester;
 
-namespace Tests.Modules.Indices.Monitoring.RecoveryStatus
+namespace Tests.Indices.Monitoring.RecoveryStatus
 {
 	public class RecoveryStatusUrlTests
 	{

@@ -36,7 +36,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 			* 9202, 9203, 9204 are master eligable nodes. Our virtualized cluster will throw once when doing 
 			* a search on 9201. This should a sniff to be kicked off.
 			*/
-			var audit = new Auditor(() => Cluster
+			var audit = new Auditor(() => Framework.Cluster
 				.Nodes(5)
 				.MasterEligable(9202, 9203, 9204)
 				.ClientCalls(r => r.SucceedAlways())
@@ -46,7 +46,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 				* this cluster only has 3 nodes and the known masters are 9200 and 9202 but a search on 9201
 				* still fails once
 				*/
-				.Sniff(p => p.SucceedAlways(Cluster
+				.Sniff(p => p.SucceedAlways(Framework.Cluster
 					.Nodes(3)
 					.MasterEligable(9200, 9202)
 					.ClientCalls(r => r.OnPort(9201).Fails(Once))
@@ -54,7 +54,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 					* After this second failure on 9201 another sniff will be returned a cluster that no 
 					* longer fails but looks completely different (9210-9212) we should be able to handle this
 					*/
-					.Sniff(s => s.SucceedAlways(Cluster
+					.Sniff(s => s.SucceedAlways(Framework.Cluster
 						.Nodes(3, 9210)
 						.MasterEligable(9210, 921)
 						.ClientCalls(r => r.SucceedAlways())
@@ -103,15 +103,15 @@ namespace Tests.ClientConcepts.ConnectionPooling.Sniffing
 			/** Here we set up our cluster exactly the same as the previous setup 
 			* Only we enable pinging (default is true) and make the ping fail
 			*/
-			var audit = new Auditor(() => Cluster
+			var audit = new Auditor(() => Framework.Cluster
 				.Nodes(5)
 				.MasterEligable(9202, 9203, 9204)
 				.Ping(r => r.OnPort(9201).Fails(Once))
-				.Sniff(p => p.SucceedAlways(Cluster
+				.Sniff(p => p.SucceedAlways(Framework.Cluster
 					.Nodes(3)
 					.MasterEligable(9200, 9202)
 					.Ping(r => r.OnPort(9201).Fails(Once))
-					.Sniff(s => s.SucceedAlways(Cluster
+					.Sniff(s => s.SucceedAlways(Framework.Cluster
 						.Nodes(3, 9210)
 						.MasterEligable(9210, 9211)
 						.Ping(r => r.SucceedAlways())

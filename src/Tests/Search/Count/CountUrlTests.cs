@@ -8,7 +8,7 @@ using Tests.Framework;
 using Tests.Framework.MockData;
 using static Tests.Framework.UrlTester;
 
-namespace Tests.Count.Count
+namespace Tests.Search.Count
 {
 	public class CountUrlTests
 	{

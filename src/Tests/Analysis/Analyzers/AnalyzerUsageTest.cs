@@ -9,7 +9,7 @@ using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using static Nest.Infer;
 
-namespace Tests
+namespace Tests.Analysis.Analyzers
 {
 	/**
 	 */
@@ -103,9 +103,9 @@ namespace Tests
 		public static IndexSettings InitializerExample =>
 			new IndexSettings
 			{
-				Analysis = new Analysis
+				Analysis = new Nest.Analysis
 				{
-					Analyzers = new Analyzers
+					Analyzers = new Nest.Analyzers
 					{
 							{ "myCustom", new CustomAnalyzer
 							{

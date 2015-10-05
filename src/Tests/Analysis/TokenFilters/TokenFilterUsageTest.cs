@@ -9,7 +9,7 @@ using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using static Nest.Infer;
 
-namespace Tests
+namespace Tests.Analysis.TokenFilters
 {
 	/**
 	 */
@@ -356,9 +356,9 @@ namespace Tests
 		public static IndexSettings InitializerExample =>
 			new IndexSettings
 			{
-				Analysis = new Analysis
+				Analysis = new Nest.Analysis
 				{
-					TokenFilters = new TokenFilters
+					TokenFilters = new Nest.TokenFilters
 					{
 							{ "myAscii", new AsciiFoldingTokenFilter { PreserveOriginal = true } },
 							{ "myCommonGrams", new CommonGramsTokenFilter { QueryMode = true, IgnoreCase = true, CommonWords = new [] {"x", "y", "z"} } },

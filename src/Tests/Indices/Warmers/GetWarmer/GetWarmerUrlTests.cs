@@ -8,7 +8,7 @@ using Tests.Framework;
 using Tests.Framework.MockData;
 using static Tests.Framework.UrlTester;
 
-namespace Tests.Modules.Warmers.GetWarmer
+namespace Tests.Indices.Warmers.GetWarmer
 {
 	public class GetWarmerUrlTests
 	{

@@ -8,7 +8,7 @@ using Tests.Framework;
 using Tests.Framework.MockData;
 using static Tests.Framework.UrlTester;
 
-namespace Tests.Modules.Indices.StatusManagement.ClearCache
+namespace Tests.Indices.StatusManagement.ClearCache
 {
 	public class ClearCacheUrlTests
 	{

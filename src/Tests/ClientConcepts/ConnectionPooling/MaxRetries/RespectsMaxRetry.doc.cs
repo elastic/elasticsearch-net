@@ -29,7 +29,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.MaxRetries
 
 		[U] public async Task DefaultMaxIsNumberOfNodes()
 		{
-			var audit = new Auditor(() => Cluster
+			var audit = new Auditor(() => Framework.Cluster
 				.Nodes(10)
 				.ClientCalls(r => r.FailAlways())
 				.ClientCalls(r => r.OnPort(9209).SucceedAlways())
@@ -60,7 +60,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.MaxRetries
 
 		[U] public async Task FixedMaximumNumberOfRetries()
 		{
-			var audit = new Auditor(() => Cluster
+			var audit = new Auditor(() => Framework.Cluster
 				.Nodes(10)
 				.ClientCalls(r => r.FailAlways())
 				.ClientCalls(r => r.OnPort(9209).SucceedAlways())
@@ -84,7 +84,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.MaxRetries
 		*/
 		[U] public async Task RespectsOveralRequestTimeout()
 		{
-			var audit = new Auditor(() => Cluster
+			var audit = new Auditor(() => Framework.Cluster
 				.Nodes(10)
 				.ClientCalls(r => r.FailAlways().Takes(TimeSpan.FromSeconds(10)))
 				.ClientCalls(r => r.OnPort(9209).SucceedAlways())
@@ -109,7 +109,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.MaxRetries
 		*/
 		[U] public async Task RespectsMaxRetryTimeoutOverRequestTimeout()
 		{
-			var audit = new Auditor(() => Cluster
+			var audit = new Auditor(() => Framework.Cluster
 				.Nodes(10)
 				.ClientCalls(r => r.FailAlways().Takes(TimeSpan.FromSeconds(3)))
 				.ClientCalls(r => r.OnPort(9209).SucceedAlways())
@@ -133,7 +133,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.MaxRetries
 		*/
 		[U] public async Task RetriesAreLimitedByNodesInPool()
 		{
-			var audit = new Auditor(() => Cluster
+			var audit = new Auditor(() => Framework.Cluster
 				.Nodes(2)
 				.ClientCalls(r => r.FailAlways().Takes(TimeSpan.FromSeconds(3)))
 				.ClientCalls(r => r.OnPort(9209).SucceedAlways())
@@ -156,7 +156,7 @@ namespace Tests.ClientConcepts.ConnectionPooling.MaxRetries
 		*/
 		[U] public async Task DoesNotRetryOnSingleNodeConnectionPool()
 		{
-			var audit = new Auditor(() => Cluster
+			var audit = new Auditor(() => Framework.Cluster
 				.Nodes(10)
 				.ClientCalls(r => r.FailAlways().Takes(TimeSpan.FromSeconds(3)))
 				.ClientCalls(r => r.OnPort(9209).SucceedAlways())

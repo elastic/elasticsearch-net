@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Tests.Framework;
 using static Tests.Framework.UrlTester;
 
-namespace Tests.Cat.CatAliases
+namespace Tests.Cat.CatAllocation
 {
 	public class CatAllocationUrlTest : IUrlTest
 	{

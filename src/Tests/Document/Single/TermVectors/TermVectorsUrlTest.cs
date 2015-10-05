@@ -8,7 +8,7 @@ using Tests.Framework;
 using Tests.Framework.MockData;
 using static Tests.Framework.UrlTester;
 
-namespace Tests.Document.Single.Index
+namespace Tests.Document.Single.TermVectors
 {
 	public class TermVectorsUrlTest
 	{

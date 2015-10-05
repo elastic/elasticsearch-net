@@ -8,7 +8,7 @@ using Tests.Framework;
 using Tests.Framework.MockData;
 using static Tests.Framework.UrlTester;
 
-namespace Tests.Modules.Warmers.PutWarmer
+namespace Tests.Indices.Warmers.PutWarmer
 {
 	public class PutWarmerUrlTests
 	{
