@@ -42,7 +42,6 @@ namespace Nest
 		: FieldNameQueryDescriptorBase<TermsQueryDescriptor<T, K>, ITermsQuery, T>
 		, ITermsQuery where T : class
 	{
-		private ITermsQuery Self => this;
 		bool IQuery.Conditionless => TermsQuery.IsConditionless(this);
 		string ITermsQuery.MinimumShouldMatch { get; set; }
 		bool? ITermsQuery.DisableCoord { get; set; }

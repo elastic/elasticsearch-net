@@ -53,7 +53,7 @@ namespace Elasticsearch.Net.ConnectionPool
 			this.LastUpdate = this.DateTimeProvider.Now();
 		}
 
-		protected int _globalCursor = -1;
+		protected int GlobalCursor = -1;
 		/// <summary>
 		/// Creates a view of all the live nodes with changing starting positions that wraps over on each call
 		/// e.g Thread A might get 1,2,3,4,5 and thread B will get 2,3,4,5,1.
@@ -66,7 +66,7 @@ namespace Elasticsearch.Net.ConnectionPool
 			var now = this.DateTimeProvider.Now();
 			var nodes = this.InternalNodes.Where(n => n.IsAlive || n.DeadUntil <= now).ToList();
 			var count = nodes.Count();
-			var globalCursor = Interlocked.Increment(ref _globalCursor);
+			var globalCursor = Interlocked.Increment(ref GlobalCursor);
 			var localCursor = globalCursor % count;
 
 			Node node = null;

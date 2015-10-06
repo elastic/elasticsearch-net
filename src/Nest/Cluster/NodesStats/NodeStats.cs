@@ -54,7 +54,7 @@ namespace Nest
 	public class NodeStatsIndexes
 	{
 		[JsonProperty("store")]
-		public IndexStoreStats Store { get; internal set; }
+		public StoreStats Store { get; internal set; }
 		[JsonProperty("docs")]
 		public DocStats Docs { get; internal set; }
 		[JsonProperty("indexing")]
@@ -71,15 +71,6 @@ namespace Nest
 		public RefreshStats Refresh { get; internal set; }
 		[JsonProperty("flush")]
 		public FlushStats Flush { get; internal set; }
-
-		[JsonObject]
-		public class IndexStoreStats : StoreStats
-		{
-			[JsonProperty("throttle_time")]
-			public string ThrottleTime { get; internal set; }
-			[JsonProperty("throttle_time_in_millis")]
-			public long ThrottleTimeInMilliseconds { get; internal set; }
-		}
 
 		[JsonObject]
 		public class IndexCacheStats

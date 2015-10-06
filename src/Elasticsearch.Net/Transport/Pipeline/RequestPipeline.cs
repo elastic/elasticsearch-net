@@ -30,8 +30,6 @@ namespace Elasticsearch.Net.Connection
 		private int _retried = 0;
 		public int Retried => _retried;
 
-		private int? _cursor = null;
-
 		public RequestPipeline(
 			IConnectionConfigurationValues configurationValues,
 			IDateTimeProvider dateTimeProvider,

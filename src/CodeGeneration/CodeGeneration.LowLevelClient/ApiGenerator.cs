@@ -104,7 +104,7 @@ namespace CodeGeneration.LowLevelClient
 		{
 			var json = File.ReadAllText(jsonFile);
 			var endpoint = JsonConvert.DeserializeObject<Dictionary<string, ApiEndpoint>>(json).First();
-			endpoint.Value.CsharpMethodName = CreateMethodName(endpoint.Key, endpoint.Value);
+			endpoint.Value.CsharpMethodName = CreateMethodName(endpoint.Key);
 			return endpoint;
 		}
 
@@ -149,7 +149,6 @@ namespace CodeGeneration.LowLevelClient
 		public static void PatchMethod(CsharpMethod method)
 		{
 			Func<string, bool> ms = (s) => method.FullName.StartsWith(s);
-			Func<string, bool> mc = (s) => method.FullName.Contains(s);
 			Func<string, bool> pc = (s) => method.Path.Contains(s);
 
 			if (ms("Indices") && !pc("{index}"))
@@ -255,7 +254,7 @@ namespace CodeGeneration.LowLevelClient
 
 		}
 
-		public static string CreateMethodName(string apiEnpointKey, ApiEndpoint endpoint)
+		public static string CreateMethodName(string apiEnpointKey)
 		{
 			return PascalCase(apiEnpointKey);
 		}

@@ -21,8 +21,6 @@ namespace Nest
 
 	public partial class ClusterRerouteDescriptor 
 	{
-		IClusterRerouteRequest Self => this;
-
 		IList<IClusterRerouteCommand> IClusterRerouteRequest.Commands { get; set; }
 
 		public ClusterRerouteDescriptor Move(Func<MoveClusterRerouteCommandDescriptor, MoveClusterRerouteCommandDescriptor> moveCommandDescriptor)
@@ -52,16 +50,17 @@ namespace Nest
 		public ClusterRerouteDescriptor Commands(IEnumerable<IClusterRerouteCommand> commands)
 		{
 			commands.ThrowIfNull("commands");
-			this.Self.Commands = commands.ToList();
+			((IClusterRerouteRequest)this).Commands = commands.ToList();
 			return this;
 		}
 
 		private void AddCommand(IClusterRerouteCommand rerouteCommand)
 		{
 			rerouteCommand.ThrowIfNull("rerouteCommand");
-			if (this.Self.Commands == null)
-				this.Self.Commands = new List<IClusterRerouteCommand>();
-			this.Self.Commands.Add(rerouteCommand);
+			var s = ((IClusterRerouteRequest)this);
+			if (s.Commands == null)
+				s.Commands = new List<IClusterRerouteCommand>();
+			s.Commands.Add(rerouteCommand);
 		}
 	}
 }

@@ -17,10 +17,4 @@ namespace Nest
 			Data = rawJsonData;
 		}
 	}
-
-	[JsonConverter(typeof(CustomJsonConverter))]
-	internal class RawJsonWrapper<T>
-	{
-
-	}
 }

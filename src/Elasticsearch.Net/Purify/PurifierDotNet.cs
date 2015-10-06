@@ -9,14 +9,14 @@ namespace PurifyNet
 {
     internal class PurifierDotNet : IPurifier
     {
-        private static FieldInfo flagsField;
-        private static FieldInfo infoField;
-        private static FieldInfo stringField;
-        private static FieldInfo infoStringField;
-        private static FieldInfo moreInfoField;
-        private static FieldInfo moreInfoAbsoluteUri;
-        private static FieldInfo moreInfoPath;
-        private static FieldInfo moreInfoQuery;
+        private static readonly FieldInfo flagsField;
+        private static readonly FieldInfo infoField;
+        private static readonly FieldInfo stringField;
+        private static readonly FieldInfo infoStringField;
+        private static readonly FieldInfo moreInfoField;
+        private static readonly FieldInfo moreInfoAbsoluteUri;
+        private static readonly FieldInfo moreInfoPath;
+        private static readonly FieldInfo moreInfoQuery;
 
         static PurifierDotNet()
         {

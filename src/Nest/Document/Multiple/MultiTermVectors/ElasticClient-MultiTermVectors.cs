@@ -12,7 +12,6 @@ namespace Nest
 		/// Multi termvectors API allows to get multiple termvectors based on an index, type and id.
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-multi-termvectors.html
 		/// </summary>
-		/// <typeparam name="T">The type used to infer the default index and typename</typeparam>
 		/// <param name="multiTermVectorsSelector">The descriptor describing the multi termvectors operation</param>
 		IMultiTermVectorResponse MultiTermVectors(Func<MultiTermVectorsDescriptor, IMultiTermVectorsRequest> multiTermVectorsSelector = null);
 

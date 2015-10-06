@@ -9,12 +9,12 @@ namespace PurifyNet
 {
     internal class PurifierMono : IPurifier
     {
-        private static Type uriType = typeof(Uri);
-        private static FieldInfo mono_sourceField;
-        private static FieldInfo mono_queryField;
-        private static FieldInfo mono_pathField;
-        private static FieldInfo mono_cachedToStringField;
-        private static FieldInfo mono_cachedAbsoluteUriField;
+        private static readonly Type uriType = typeof(Uri);
+        private static readonly FieldInfo mono_sourceField;
+        private static readonly FieldInfo mono_queryField;
+        private static readonly FieldInfo mono_pathField;
+        private static readonly FieldInfo mono_cachedToStringField;
+        private static readonly FieldInfo mono_cachedAbsoluteUriField;
 
         static PurifierMono()
         {

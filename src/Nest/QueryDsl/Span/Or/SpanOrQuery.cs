@@ -26,7 +26,6 @@ namespace Nest
 		: QueryDescriptorBase<SpanOrQueryDescriptor<T>, ISpanOrQuery>
 		, ISpanOrQuery where T : class
 	{
-		private ISpanOrQuery Self => this;
 		bool IQuery.Conditionless => SpanOrQuery.IsConditionless(this);
 		IEnumerable<ISpanQuery> ISpanOrQuery.Clauses { get; set; }
 

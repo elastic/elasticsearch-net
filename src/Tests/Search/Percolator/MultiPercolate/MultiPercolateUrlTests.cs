@@ -14,7 +14,6 @@ namespace Tests.Search.Percolator.MultiPercolate
 	{
 		[U] public async Task Urls()
 		{
-			var id = "name-of-doc";
 			var index = "indexx";
 			await POST($"/_mpercolate")
 				.Fluent(c=>c.MultiPercolate(s=>s))

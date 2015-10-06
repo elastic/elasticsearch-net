@@ -29,8 +29,6 @@ namespace Nest
 	[DescriptorFor("IndicesStats")]
 	public partial class IndicesStatsDescriptor 
 	{
-		private IIndicesStatsRequest Self => this;
-
 		private IEnumerable<TypeName> _types;
 		IEnumerable<TypeName> IIndicesStatsRequest.Types 
 		{

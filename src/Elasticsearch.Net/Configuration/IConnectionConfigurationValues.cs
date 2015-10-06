@@ -71,7 +71,7 @@ namespace Elasticsearch.Net.Connection
 
 		/// <summary>
 		/// Enable gzip compressed requests and responses, do note that you need to configure elasticsearch to set this
-		/// <see cref="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-http.html"/>
+		/// <para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-http.html</para>
 		/// </summary>
 		bool EnableHttpCompression { get; }
 		

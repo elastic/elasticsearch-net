@@ -20,7 +20,6 @@ namespace Nest
 	public class MergeSettingsDescriptor 
 		: DescriptorBase<MergeSettingsDescriptor, IMergeSettings>, IMergeSettings
 	{
-		protected MergeSettingsDescriptor Assign(Action<IMergeSettings> assigner) => Fluent.Assign(this, assigner);
 		IMergePolicySettings IMergeSettings.Policy { get; set; }
 		IMergeSchedulerSettings IMergeSettings.Scheduler { get; set; }
 

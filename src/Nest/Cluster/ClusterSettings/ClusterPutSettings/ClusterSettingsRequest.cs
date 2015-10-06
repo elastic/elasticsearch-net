@@ -26,24 +26,14 @@ namespace Nest
 	[DescriptorFor("ClusterPutSettings")]
 	public partial class ClusterSettingsDescriptor 
 	{
-		protected IClusterSettingsRequest Self => this;
-
 		IDictionary<string, object> IClusterSettingsRequest.Persistent { get; set; }
 
 		IDictionary<string, object> IClusterSettingsRequest.Transient { get; set; }
 
-		public ClusterSettingsDescriptor Persistent(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-		{
-			selector.ThrowIfNull("selector");
-			Self.Persistent = selector(new FluentDictionary<string, object>());
-			return this;
-		}
+		public ClusterSettingsDescriptor Persistent(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) =>
+			Assign(a => a.Persistent = selector?.Invoke(new FluentDictionary<string, object>()));
 
-		public ClusterSettingsDescriptor Transient(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
-		{
-			selector.ThrowIfNull("selector");
-			Self.Transient = selector(new FluentDictionary<string, object>());
-			return this;
-		}
+		public ClusterSettingsDescriptor Transient(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) =>
+			Assign(a => a.Transient = selector?.Invoke(new FluentDictionary<string, object>()));
 	}
 }

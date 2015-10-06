@@ -52,8 +52,6 @@ namespace Nest
 
 	public class ScriptedMetricsAggregator : MetricAggregator, IScriptedMetricAggregator
 	{
-		[Obsolete("Script proxies to MapScript on ScriptedMetric, please consider using MapScript explicitly")]
-		public override string Script { get { return MapScript; } set { MapScript = value; } }
 		public string InitScript { get; set; }
 		public string InitScriptFile { get; set; }
 		public string InitScriptId { get; set; }
@@ -71,8 +69,6 @@ namespace Nest
 
 	public class ScriptedMetricsAgg : MetricAgg, IScriptedMetricAggregator
 	{
-		[Obsolete("Script proxies to MapScript on ScriptedMetric, please consider using MapScript explicitly")]
-		public override string Script { get { return MapScript; } set { MapScript = value; } }
 		public string InitScript { get; set; }
 		public string InitScriptFile { get; set; }
 		public string InitScriptId { get; set; }
@@ -109,9 +105,6 @@ namespace Nest
 		string IScriptedMetricAggregator.ReduceScriptFile { get; set; }
 		string IScriptedMetricAggregator.ReduceScriptId { get; set; }
 		IDictionary<string, object> IScriptedMetricAggregator.ReduceParams { get; set; }
-
-		[Obsolete("Script() proxies to MapScript on ScriptedMetric, please consider using MapScript explicitly")]
-		public override ScriptedMetricAggregatorDescriptor<T> Script(string script) => Assign(a => a.MapScript = script);
 
 		public ScriptedMetricAggregatorDescriptor<T> InitScript(string script) => Assign(a => a.InitScript = script);
 

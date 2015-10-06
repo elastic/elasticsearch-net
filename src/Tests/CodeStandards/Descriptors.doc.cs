@@ -54,6 +54,8 @@ namespace Tests.CodeStandards
 
 		//TODO methods taking params should also have a version taking IEnumerable
 
+		//TODO methods named Index or Indices that 
+
 		//TODO some interfaces are implemented by both requests as well isolated classes to be used elsewhere in the DSL
 		//We need to write tests that these have the same public methods so we do not accidentally add it without adding it to the interface
 

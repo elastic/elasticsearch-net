@@ -128,7 +128,7 @@ namespace Elasticsearch.Net.Connection
 		bool _throwOnServerExceptions;
 		bool IConnectionConfigurationValues.ThrowOnElasticsearchServerExceptions => _throwOnServerExceptions;
 
-		protected static void DefaultApiCallHandler(IApiCallDetails status) { return; }
+		protected static void DefaultApiCallHandler(IApiCallDetails status) {}
 		Action<IApiCallDetails> _apiCallHandler = DefaultApiCallHandler;
 		Action<IApiCallDetails> IConnectionConfigurationValues.ApiCallHandler => _apiCallHandler;
 
@@ -143,13 +143,13 @@ namespace Elasticsearch.Net.Connection
 
 		/* */
 
-		protected IElasticsearchSerializer _serializer;
+		readonly IElasticsearchSerializer _serializer;
 		IElasticsearchSerializer IConnectionConfigurationValues.Serializer => _serializer;
 
-		IConnectionPool _connectionPool;
+		readonly IConnectionPool _connectionPool;
 		IConnectionPool IConnectionConfigurationValues.ConnectionPool => _connectionPool;
 
-		IConnection _connection;
+		readonly IConnection _connection;
 		IConnection IConnectionConfigurationValues.Connection => _connection;
 
 		[System.Diagnostics.CodeAnalysis.SuppressMessage(
@@ -195,7 +195,7 @@ namespace Elasticsearch.Net.Connection
 
 		/// <summary>
 		/// Enable gzip compressed requests and responses, do note that you need to configure elasticsearch to set this
-		/// <see cref="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-http.html"/>
+		/// <para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/modules-http.html"</para>
 		/// </summary>
 		public T EnableHttpCompression(bool enabled = true) => Assign(a => a._enableHttpCompression = enabled);
 
@@ -269,9 +269,9 @@ namespace Elasticsearch.Net.Connection
 		public T SetMaxDeadTimeout(TimeSpan timeout) => Assign(a => a._maxDeadTimeout = timeout);
 
 		/// <summary>
-		/// Limits the total runtime including retries separately from <see cref="Timeout"/>
+		/// Limits the total runtime including retries separately from <see cref="SetTimeout"/>
 		/// <pre>
-		/// When not specified defaults to <see cref="Timeout"/> which itself defaults to 60seconds
+		/// When not specified defaults to <see cref="SetTimeout"/> which itself defaults to 60seconds
 		/// </pre>
 		/// </summary>
 		public T SetMaxRetryTimeout(TimeSpan maxRetryTimeout) => Assign(a => a._maxRetryTimeout = maxRetryTimeout);

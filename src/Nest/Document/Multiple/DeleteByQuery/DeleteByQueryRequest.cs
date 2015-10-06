@@ -20,28 +20,20 @@ namespace Nest
 
 	}
 	
-	//TODO inherit from deleteybyqueryrequest
-	public partial class DeleteByQueryRequest<T> : RequestBase<DeleteByQueryRequestParameters>, IDeleteByQueryRequest where T : class
+	public partial class DeleteByQueryRequest<T> : IDeleteByQueryRequest<T>
+		where T : class
 	{
 		public IQueryContainer Query { get; set; }
 	}
 
-	public partial class DeleteByQueryDescriptor<T> where T : class
+	public partial class DeleteByQueryDescriptor<T> : IDeleteByQueryRequest<T>
+		where T : class
 	{
-		private IDeleteByQueryRequest Self => this;
-
 		IQueryContainer IDeleteByQueryRequest.Query { get; set; }
 
-		public DeleteByQueryDescriptor<T> MatchAll()
-		{
-			Self.Query = new QueryContainerDescriptor<T>().MatchAll();
-			return this;
-		}
+		public DeleteByQueryDescriptor<T> MatchAll() => Assign(a => a.Query = new QueryContainerDescriptor<T>().MatchAll());
 
-		public DeleteByQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector)
-		{
-			Self.Query = querySelector(new QueryContainerDescriptor<T>());
-			return this;
-		}
+		public DeleteByQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector) =>
+			Assign(a => a.Query = querySelector?.Invoke(new QueryContainerDescriptor<T>()));
 	}
 }

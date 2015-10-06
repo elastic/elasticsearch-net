@@ -14,8 +14,6 @@ namespace Tests.Indices.AliasManagement.Alias
 	{
 		[U] public async Task Urls()
 		{
-			var hardcoded = "hardcoded";
-			var index = "index";
 			await POST($"/_aliases")
 				.Fluent(c=>c.Alias(b=>b))
 				.Request(c=>c.Alias(new BulkAliasRequest()))

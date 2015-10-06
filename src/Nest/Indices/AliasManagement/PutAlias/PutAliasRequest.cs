@@ -28,22 +28,13 @@ namespace Nest
 	[DescriptorFor("IndicesPutAlias")]
 	public partial class PutAliasDescriptor 
 	{
-		IPutAliasRequest Self => this;
 		string IPutAliasRequest.Routing { get; set; }
 		IQueryContainer IPutAliasRequest.Filter { get; set; }
-		
-		public PutAliasDescriptor Routing(string routing)
-		{
-			Self.Routing = routing;
-			return this;
-		}
+
+		public PutAliasDescriptor Routing(string routing) => Assign(a => a.Routing = routing);
 
 		public PutAliasDescriptor Filter<T>(Func<QueryContainerDescriptor<T>, QueryContainer> filterSelector)
-			where T : class
-		{
-			filterSelector.ThrowIfNull("filterSelector");
-			Self.Filter = filterSelector(new QueryContainerDescriptor<T>());
-			return this;
-		}
+			where T : class =>
+			Assign(a => a.Filter = filterSelector?.Invoke(new QueryContainerDescriptor<T>()));
 	}
 }

@@ -23,8 +23,6 @@ namespace Nest
 	public class TypeFieldDescriptor 
 		: DescriptorBase<TypeFieldDescriptor, ITypeField>, ITypeField
 	{
-		private ITypeField Self => this; 
-
 		NonStringIndexOption? ITypeField.Index { get; set; }
 
 		bool? ITypeField.Store { get; set; }

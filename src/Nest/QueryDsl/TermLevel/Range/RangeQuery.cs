@@ -59,7 +59,6 @@ namespace Nest
 		: FieldNameQueryDescriptorBase<RangeQueryDescriptor<T>, IRangeQuery, T>
 		, IRangeQuery where T : class
 	{
-		private IRangeQuery Self => this;
 		bool IQuery.Conditionless => RangeQuery.IsConditionless(this);
 		string IRangeQuery.GreaterThanOrEqualTo { get; set; }
 		string IRangeQuery.LowerThanOrEqualTo { get; set; }

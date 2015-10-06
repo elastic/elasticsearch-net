@@ -535,7 +535,6 @@
     <Compile Include="QueryDsl\Geo\Shape\LineString\GeoShapeLineStringQuery.cs" />
     <Compile Include="QueryDsl\Geo\Shape\Envelope\GeoShapeEnvelopeQuery.cs" />
     <Compile Include="Document\Multiple\MultiTermVectors\IMultiTermVectorDocument.cs" />
-    <Compile Include="Document\Multiple\MultiGet\Request\MultiGetDoc.cs" />
     <Compile Include="CommonAbstractions\ConnectionSettings\ConnectionSettings.cs" />
     <Compile Include="CommonAbstractions\ConnectionSettings\IConnectionSettingsValues.cs" />
     <Compile Include="CommonAbstractions\ForAttribute.cs" />
@@ -774,7 +773,6 @@
     <Compile Include="QueryDsl\ExternalFieldDeclaration.cs" />
     <Compile Include="QueryDsl\FullText\MultiMatch\MultiMatchQuery.cs" />
     <Compile Include="Cluster\ClusterState\ElasticClient-ClusterState.cs" />
-    <Compile Include="CommonAbstractions\Extensions\UriExtensions.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\StatefulDeserialization\ConcreteTypeConverter.cs" />
     <Compile Include="Indices\Warmers\Warmer.cs" />
     <Compile Include="Indices\Warmers\GetWarmer\WarmerResponse.cs">

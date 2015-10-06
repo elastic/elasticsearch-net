@@ -14,7 +14,6 @@ namespace Tests.Search.MultiSearch
 	{
 		[U] public async Task Urls()
 		{
-			var id = "name-of-doc";
 			var index = "indexx";
 			await POST($"/_msearch")
 				.Fluent(c=>c.MultiSearch(s=>s))

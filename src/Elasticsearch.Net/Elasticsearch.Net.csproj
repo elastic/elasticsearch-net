@@ -97,14 +97,12 @@
     <Compile Include="Providers\DateTimeProvider.cs" />
     <Compile Include="Connection\HttpConnection.cs" />
     <Compile Include="Exceptions\ElasticsearchServerException.cs" />
-    <Compile Include="Exceptions\ConnectionException.cs" />
     <Compile Include="Configuration\ConnectionConfiguration.cs" />
     <Compile Include="ConnectionPool\IConnectionPool.cs" />
     <Compile Include="Providers\IRequestPipelineFactory.cs" />
     <Compile Include="Providers\IDateTimeProvider.cs" />
     <Compile Include="ConnectionPool\SingleNodeConnectionPool.cs" />
     <Compile Include="Providers\IMemoryStreamFactory.cs" />
-    <Compile Include="Providers\Sniffer.cs" />
     <Compile Include="ConnectionPool\SniffingConnectionPool.cs" />
     <Compile Include="ConnectionPool\StaticConnectionPool.cs" />
     <Compile Include="Transport\ITransport.cs" />
