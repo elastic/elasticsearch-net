@@ -9,6 +9,7 @@ using Tests.Framework.MockData;
 using static Nest.Indices;
 using static Nest.Types;
 using static Tests.Framework.UrlTester;
+using Elasticsearch.Net;
 
 namespace Tests.Indices.IndexManagement.GetIndex
 {
@@ -24,8 +25,8 @@ namespace Tests.Indices.IndexManagement.GetIndex
 				.RequestAsync(c => c.GetIndexAsync(new GetIndexRequest(index)))
 				;
 
-			var features = GetIndexFeature.Mappings | GetIndexFeature.Settings;
-			await GET($"/{index}/mappings,settings")
+			var features = Feature.Settings | Feature.Mappings;
+			await GET($"/{index}/_settings,_mappings")
 				.Fluent(c => c.GetIndex(index, s=>s.Feature(features)))
 				.Request(c => c.GetIndex(new GetIndexRequest(index, features)))
 				.FluentAsync(c => c.GetIndexAsync(index, s=>s.Feature(features)))

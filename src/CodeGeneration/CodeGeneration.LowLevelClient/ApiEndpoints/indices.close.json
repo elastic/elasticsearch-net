@@ -9,7 +9,7 @@
         "index": {
           "type" : "list",
           "required" : true,
-          "description" : "The name of the index"
+          "description" : "A comma separated list of indices to close"
         }
       },
       "params": {

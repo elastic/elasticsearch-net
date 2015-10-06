@@ -15,8 +15,8 @@ namespace Nest
 
 		private readonly Enum _enumValue;
 
-		internal Features(GetIndexFeature feature) { _enumValue = feature; }
+		internal Features(Feature feature) { _enumValue = feature; }
 
-		public static implicit operator Features(GetIndexFeature feature) => new Features(feature);
+		public static implicit operator Features(Feature feature) => new Features(feature);
 	}
 }

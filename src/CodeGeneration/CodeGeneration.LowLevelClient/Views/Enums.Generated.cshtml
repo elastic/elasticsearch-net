@@ -6,14 +6,16 @@
 @functions {
 	private string CreateEnum(string o, int? i)
 	{
-		return string.Format("[EnumMember(Value = \"{0}\")]\r\n\t\t{1}{2}", o, o.ToPascalCase(), i.HasValue ? " = 1 << " + i.Value : null);
+		return string.Format("[EnumMember(Value = \"{0}\")]\r\n\t\t{1}{2}", o, o.ToPascalCase(true), i.HasValue ? " = 1 << " + i.Value : null);
 	}	
-	private string CreateCase
-		
-   (string e, string o)
+	private string CreateCase(string e, string o)
 	{
-		return string.Format("case {0}.{1}: return \"{2}\";", e, o.ToPascalCase(), o);
+		return string.Format("case {0}.{1}: return \"{2}\";", e, o.ToPascalCase(true), o);
 	}
+	private bool IsFlag(string name)
+    {
+        return name.EndsWith("Metric") || name.EndsWith("Feature");
+    }
 }
 using System;
 using System.Collections.Generic;
@@ -28,7 +30,7 @@ namespace Elasticsearch.Net
 {
 	@foreach (EnumDescription e in Model.EnumsInTheSpec)
 	{
-		var isFlag = e.Name.EndsWith("Metric");
+		var isFlag = IsFlag(e.Name);
 	<text>
 	@(isFlag ? "[Flags]" : string.Empty)public enum @e.Name 
 	{
@@ -44,7 +46,7 @@ namespace Elasticsearch.Net
 		{
 			@foreach (EnumDescription e in Model.EnumsInTheSpec)
 			{
-			var isFlag = e.Name.EndsWith("Metric");
+			var isFlag = IsFlag(e.Name);
 			<text>if (e is @e.Name)
 			{ </text>
 			if (isFlag)
@@ -54,11 +56,11 @@ namespace Elasticsearch.Net
 				{
 					if (option != "_all")
 					{
-				<text>if (e.HasFlag(@(e.Name).@(option.ToPascalCase()))) list.Add("@(option)");</text>
+				<text>if (e.HasFlag(@(e.Name).@(option.ToPascalCase(true)))) list.Add("@(option)");</text>
 					}
 					else 
 					{
-				<text>if (e.HasFlag(@(e.Name).@(option.ToPascalCase()))) return "@(option)";</text>
+				<text>if (e.HasFlag(@(e.Name).@(option.ToPascalCase(true)))) return "@(option)";</text>
 					}
 				}
 				<text>return string.Join(",", list);</text>

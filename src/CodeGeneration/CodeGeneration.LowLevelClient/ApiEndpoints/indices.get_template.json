@@ -12,7 +12,7 @@
         "name": {
           "type": "list",
           "required": false,
-          "description": "The name of the template"
+          "description": "The comma separated names of the index templates"
         }
       },
       "params": {

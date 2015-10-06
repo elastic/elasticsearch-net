@@ -640,16 +640,19 @@ namespace Nest
 	///<summary>descriptor for ClusterHealth <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-health.html</pre></summary>
 	public partial class ClusterHealthDescriptor  : RequestDescriptorBase<ClusterHealthDescriptor,ClusterHealthRequestParameters, IClusterHealthRequest>, IClusterHealthRequest
 	{ 
-		IndexName IClusterHealthRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		Indices IClusterHealthRequest.Index => Self.RouteValues.Get<Indices>("index");
 			/// <summary>/_cluster/health</summary>
 		public ClusterHealthDescriptor() : base(){}
 		
 
 			///<summary>Limit the information returned to a specific index</summary>
-		public ClusterHealthDescriptor Index(IndexName index) => Assign(a=>a.RouteValues.Optional("index", index));
+		public ClusterHealthDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
 
 		///<summary>Limit the information returned to a specific index</summary>
-		public ClusterHealthDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (IndexName)typeof(TOther)));
+		public ClusterHealthDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
+
+		///<summary>Limit the information returned to a specific index</summary>
+		public ClusterHealthDescriptor AllIndices() => this.Index(Indices.All);
 
 	
 		///<summary>Specify the level of detail for returned information</summary>
@@ -1736,13 +1739,13 @@ namespace Nest
 		public CloseIndexDescriptor(Indices index) : base(r=>r.Required("index", index)){}
 		
 
-			///<summary>The name of the index</summary>
+			///<summary>A comma separated list of indices to close</summary>
 		public CloseIndexDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
 
-		///<summary>The name of the index</summary>
+		///<summary>A comma separated list of indices to close</summary>
 		public CloseIndexDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
 
-		///<summary>The name of the index</summary>
+		///<summary>A comma separated list of indices to close</summary>
 		public CloseIndexDescriptor AllIndices() => this.Index(Indices.All);
 
 	
@@ -2441,7 +2444,7 @@ namespace Nest
 		public GetIndexTemplateDescriptor() : base(){}
 		
 
-			///<summary>The name of the template</summary>
+			///<summary>The comma separated names of the index templates</summary>
 		public GetIndexTemplateDescriptor Name(Names name) => Assign(a=>a.RouteValues.Optional("name", name));
 
 	
@@ -2561,13 +2564,13 @@ namespace Nest
 		public OpenIndexDescriptor(Indices index) : base(r=>r.Required("index", index)){}
 		
 
-			///<summary>The name of the index</summary>
+			///<summary>A comma separated list of indices to open</summary>
 		public OpenIndexDescriptor Index(Indices index) => Assign(a=>a.RouteValues.Optional("index", index));
 
-		///<summary>The name of the index</summary>
+		///<summary>A comma separated list of indices to open</summary>
 		public OpenIndexDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (Indices)typeof(TOther)));
 
-		///<summary>The name of the index</summary>
+		///<summary>A comma separated list of indices to open</summary>
 		public OpenIndexDescriptor AllIndices() => this.Index(Indices.All);
 
 	

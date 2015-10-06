@@ -2187,7 +2187,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth
 		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</para>	
 		///</summary>
-		///<param name="index">The name of the index</param>
+		///<param name="index">A comma separated list of indices to close</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesClose<T>(string index, Func<CloseIndexRequestParameters, CloseIndexRequestParameters> requestParameters = null) where T : class;
 		
@@ -2200,7 +2200,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth
 		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</para>	
 		///</summary>
-		///<param name="index">The name of the index</param>
+		///<param name="index">A comma separated list of indices to close</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesCloseAsync<T>(string index, Func<CloseIndexRequestParameters, CloseIndexRequestParameters> requestParameters = null) where T : class;
 		
@@ -3343,7 +3343,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth
 		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para>	
 		///</summary>
-		///<param name="name">The name of the template</param>
+		///<param name="name">The comma separated names of the index templates</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesGetTemplateForAll<T>(string name, Func<GetIndexTemplateRequestParameters, GetIndexTemplateRequestParameters> requestParameters = null) where T : class;
 		
@@ -3356,7 +3356,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth
 		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html</para>	
 		///</summary>
-		///<param name="name">The name of the template</param>
+		///<param name="name">The comma separated names of the index templates</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesGetTemplateForAllAsync<T>(string name, Func<GetIndexTemplateRequestParameters, GetIndexTemplateRequestParameters> requestParameters = null) where T : class;
 		
@@ -3553,7 +3553,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth
 		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</para>	
 		///</summary>
-		///<param name="index">The name of the index</param>
+		///<param name="index">A comma separated list of indices to open</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		ElasticsearchResponse<T> IndicesOpen<T>(string index, Func<OpenIndexRequestParameters, OpenIndexRequestParameters> requestParameters = null) where T : class;
 		
@@ -3566,7 +3566,7 @@ namespace Elasticsearch.Net
 		///<para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth
 		///<para>See also: http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-open-close.html</para>	
 		///</summary>
-		///<param name="index">The name of the index</param>
+		///<param name="index">A comma separated list of indices to open</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
 		Task<ElasticsearchResponse<T>> IndicesOpenAsync<T>(string index, Func<OpenIndexRequestParameters, OpenIndexRequestParameters> requestParameters = null) where T : class;
 		

@@ -177,6 +177,19 @@ namespace Elasticsearch.Net
 	}
 	
 	
+	[Flags]public enum Feature 
+	{
+		[EnumMember(Value = "_settings")]
+		Settings = 1 << 0,
+		[EnumMember(Value = "_mappings")]
+		Mappings = 1 << 1,
+		[EnumMember(Value = "_warmers")]
+		Warmers = 1 << 2,
+		[EnumMember(Value = "_aliases")]
+		Aliases = 1 << 3
+	}
+	
+	
 	[Flags]public enum IndicesStatsMetric 
 	{
 		[EnumMember(Value = "completion")]
@@ -461,6 +474,17 @@ namespace Elasticsearch.Net
 				if (e.HasFlag(ClusterStateMetric.MasterNode)) list.Add("master_node");
 				if (e.HasFlag(ClusterStateMetric.Version)) list.Add("version");
 				if (e.HasFlag(ClusterStateMetric.All)) return "_all";
+				return string.Join(",", list);
+			
+			}
+			
+			if (e is Feature)
+			{ 
+				var list = new List<string>();
+				if (e.HasFlag(Feature.Settings)) list.Add("_settings");
+				if (e.HasFlag(Feature.Mappings)) list.Add("_mappings");
+				if (e.HasFlag(Feature.Warmers)) list.Add("_warmers");
+				if (e.HasFlag(Feature.Aliases)) list.Add("_aliases");
 				return string.Join(",", list);
 			
 			}

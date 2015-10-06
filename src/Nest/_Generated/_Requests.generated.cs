@@ -894,19 +894,19 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public partial interface IClusterHealthRequest : IRequest<ClusterHealthRequestParameters> 
 	{
-		IndexName Index { get; }
+		Indices Index { get; }
 	 } 
 	///<summary>Request parameters for ClusterHealth <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-health.html</pre></summary>
 	public partial class ClusterHealthRequest  : RequestBase<ClusterHealthRequestParameters>, IClusterHealthRequest
 	{
-		IndexName IClusterHealthRequest.Index => Self.RouteValues.Get<IndexName>("index");
+		Indices IClusterHealthRequest.Index => Self.RouteValues.Get<Indices>("index");
 			/// <summary>/_cluster/health</summary>
 		public ClusterHealthRequest() : base(){}
 		
 
 		/// <summary>/_cluster/health/{index}</summary>
 ///<param name="index">Optional, accepts null</param>
-		public ClusterHealthRequest(IndexName index) : base(r=>r.Optional("index", index)){}
+		public ClusterHealthRequest(Indices index) : base(r=>r.Optional("index", index)){}
 		
 
 			///<summary>Specify the level of detail for returned information</summary>
