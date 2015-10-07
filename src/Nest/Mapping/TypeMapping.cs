@@ -133,9 +133,6 @@ namespace Nest
 	public class TypeMappingDescriptor<T> : DescriptorBase<TypeMappingDescriptor<T>, ITypeMapping>, ITypeMapping
 		where T : class
 	{
-		//TODO delete when we normalize properties and dynamic
-		private ITypeMapping Self => this;
-
 		IAllField ITypeMapping.AllField { get; set; }
 		string ITypeMapping.Analyzer { get; set; }
 		IBoostField ITypeMapping.BoostField { get; set; }

@@ -38,7 +38,6 @@ namespace Nest
 	public partial class SearchExistsDescriptor<T> where T : class
 	{
 		protected override HttpMethod HttpMethod => Self.Query != null ? HttpMethod.POST : HttpMethod.GET;
-		private ISearchExistsRequest Self => this;
 
 		QueryContainer ISearchExistsRequest.Query { get; set; }
 

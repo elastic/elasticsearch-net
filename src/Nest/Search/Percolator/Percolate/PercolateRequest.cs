@@ -32,7 +32,6 @@ namespace Nest
 		public TDocument Document { get; set; }
 		public IDictionary<FieldName, ISort> Sort { get; set; }
 
-		Id IPercolateOperation.Id => Self.Id;
 		IRequestParameters IPercolateOperation.GetRequestParameters() => this.RequestState.RequestParameters;
 	}
 	public partial class PercolateDescriptor<TDocument> : IPercolateRequest<TDocument>
@@ -44,7 +43,6 @@ namespace Nest
 		QueryContainer IPercolateOperation.Query { get; set; }
 		QueryContainer IPercolateOperation.Filter { get; set; }
 
-		Id IPercolateOperation.Id => Self.Id;
 		int? IPercolateOperation.Size { get; set; }
 		bool? IPercolateOperation.TrackScores { get; set; }
 		

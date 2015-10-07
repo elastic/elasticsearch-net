@@ -47,8 +47,6 @@ namespace Nest
 		: RequestDescriptorBase<RegisterPercolatorDescriptor<T>, IndexRequestParameters, IRegisterPercolatorRequest>, IRegisterPercolatorRequest
 		where T : class
 	{
-		private IRegisterPercolatorRequest Self => this;
-
 		public RegisterPercolatorDescriptor(Name name) 
 			: base(r=>r.Required("index", (IndexName)typeof(T)).Required("type", (TypeName)".percolator").Required("id", name)) { }
 

@@ -12,9 +12,10 @@ namespace Tests.Document.Single.TermVectors
 {
 	public class TermVectorsUrlTest
 	{
-		[U] public async Task Urls()
-		{
-			// TODO	
-		}
+
+		//[U] public async Task Urls()
+		//{
+		//	// TODO	
+		//}
 	}
 }

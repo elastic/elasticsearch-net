@@ -118,7 +118,9 @@ namespace Tests.Framework
 				{
 					assert(response);
 				}
+#pragma warning disable 7095
 				catch (Exception ex) when (false)
+#pragma warning restore 7095
 				{
 					throw new Exception($"asserting over the response from: {kv.Key} failed: {ex.Message}", ex);
 				}

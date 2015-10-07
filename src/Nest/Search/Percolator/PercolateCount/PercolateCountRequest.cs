@@ -31,7 +31,6 @@ namespace Nest
 		public PercolateCountRequest() : this(typeof(TDocument), typeof(TDocument)) { }
 		public PercolateCountRequest(Id id) : this(typeof(TDocument), typeof(TDocument), id) { }
 
-		Id IPercolateOperation.Id => Self.Id;
 		IRequestParameters IPercolateOperation.GetRequestParameters()
 		{
 			return this.RequestState.RequestParameters;
@@ -46,7 +45,6 @@ namespace Nest
 		QueryContainer IPercolateOperation.Query { get; set; }
 		QueryContainer IPercolateOperation.Filter { get; set; }
 
-		Id IPercolateOperation.Id => Self.Id;
 		int? IPercolateOperation.Size { get; set; }
 		bool? IPercolateOperation.TrackScores { get; set; }
 		
