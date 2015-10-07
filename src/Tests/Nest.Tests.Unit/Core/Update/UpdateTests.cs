@@ -38,7 +38,7 @@ namespace Nest.Tests.Unit.Core.Update
 				  .Add("count", 4)
 			  )
 			  .Upsert(new UpsertCount { Count = 1 }); 
-			this.JsonEquals(s, MethodBase.GetCurrentMethod()); 
+			this.JsonEquals(s, MethodBase.GetCurrentMethod());
 		}
 
 		[Test]
@@ -80,5 +80,19 @@ namespace Nest.Tests.Unit.Core.Update
 			this.JsonEquals(s, MethodBase.GetCurrentMethod());
 		}
 
+
+		[Test]
+		public void UpdateDetectNoop()
+		{
+			var s = new UpdateDescriptor<UpsertCount, UpsertCount>()
+			  .Script("ctx._source.counter += count")
+			  .Params(p => p
+				  .Add("count", 4)
+			  )
+			  .Upsert(new UpsertCount { Count = 1 })
+			  .DetectNoop();
+
+			this.JsonEquals(s, MethodBase.GetCurrentMethod());
+		}
 	}
 }
