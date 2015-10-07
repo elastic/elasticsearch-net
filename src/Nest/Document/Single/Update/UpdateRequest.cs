@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	//TODO we used to to a complex infer on Id, if its empty first try on Doc otherwise on Upsert doc, is this still valid?
-	public partial interface IUpdateRequest<TDocument,TPartialDocument> 
+	public partial interface IUpdateRequest<TDocument, TPartialDocument>
 		where TDocument : class
 		where TPartialDocument : class
 	{
@@ -38,7 +38,7 @@ namespace Nest
 		TPartialDocument Doc { get; set; }
 	}
 
-	public partial class UpdateRequest<TDocument, TPartialDocument> 
+	public partial class UpdateRequest<TDocument, TPartialDocument>
 		where TDocument : class
 		where TPartialDocument : class
 	{
@@ -51,7 +51,7 @@ namespace Nest
 		public TPartialDocument Doc { get; set; }
 	}
 
-	public partial class UpdateDescriptor<TDocument,TPartialDocument>
+	public partial class UpdateDescriptor<TDocument, TPartialDocument>
 		where TDocument : class
 		where TPartialDocument : class
 	{

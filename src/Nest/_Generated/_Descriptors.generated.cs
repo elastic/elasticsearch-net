@@ -4387,11 +4387,11 @@ namespace Nest
 	}
 	
 	///<summary>descriptor for Update <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update.html</pre></summary>
-	public partial class UpdateDescriptor<TDocument,TPartialDocument>  : RequestDescriptorBase<UpdateDescriptor<TDocument,TPartialDocument>,UpdateRequestParameters, IUpdateRequest<TDocument,TPartialDocument>>, IUpdateRequest<TDocument,TPartialDocument>
+	public partial class UpdateDescriptor<TDocument, TPartialDocument>  : RequestDescriptorBase<UpdateDescriptor<TDocument, TPartialDocument>,UpdateRequestParameters, IUpdateRequest<TDocument, TPartialDocument>>, IUpdateRequest<TDocument, TPartialDocument>
 	{ 
-		Id IUpdateRequest<TDocument,TPartialDocument>.Id => Self.RouteValues.Get<Id>("id");
-		IndexName IUpdateRequest<TDocument,TPartialDocument>.Index => Self.RouteValues.Get<IndexName>("index");
-		TypeName IUpdateRequest<TDocument,TPartialDocument>.Type => Self.RouteValues.Get<TypeName>("type");
+		Id IUpdateRequest<TDocument, TPartialDocument>.Id => Self.RouteValues.Get<Id>("id");
+		IndexName IUpdateRequest<TDocument, TPartialDocument>.Index => Self.RouteValues.Get<IndexName>("index");
+		TypeName IUpdateRequest<TDocument, TPartialDocument>.Type => Self.RouteValues.Get<TypeName>("type");
 			/// <summary>/{index}/{type}/{id}/_update</summary>
 ///<param name="index"> this parameter is required</param>		
 ///<param name="type"> this parameter is required</param>		
@@ -4406,65 +4406,65 @@ namespace Nest
 		partial void DocumentFromPath(TDocument document);
 
 			///<summary>The name of the index</summary>
-		public UpdateDescriptor<TDocument,TPartialDocument> Index(IndexName index) => Assign(a=>a.RouteValues.Optional("index", index));
+		public UpdateDescriptor<TDocument, TPartialDocument> Index(IndexName index) => Assign(a=>a.RouteValues.Optional("index", index));
 
 		///<summary>The name of the index</summary>
-		public UpdateDescriptor<TDocument,TPartialDocument> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (IndexName)typeof(TOther)));
+		public UpdateDescriptor<TDocument, TPartialDocument> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (IndexName)typeof(TOther)));
 
 		///<summary>The type of the document</summary>
-		public UpdateDescriptor<TDocument,TPartialDocument> Type(TypeName type) => Assign(a=>a.RouteValues.Optional("type", type));
+		public UpdateDescriptor<TDocument, TPartialDocument> Type(TypeName type) => Assign(a=>a.RouteValues.Optional("type", type));
 
 		///<summary>The type of the document</summary>
-		public UpdateDescriptor<TDocument,TPartialDocument> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (TypeName)typeof(TOther)));
+		public UpdateDescriptor<TDocument, TPartialDocument> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (TypeName)typeof(TOther)));
 
 	
 		///<summary>Explicit write consistency setting for the operation</summary>
-		public UpdateDescriptor<TDocument,TPartialDocument> Consistency(Consistency consistency) => AssignParam(p=>p.Consistency(consistency));
+		public UpdateDescriptor<TDocument, TPartialDocument> Consistency(Consistency consistency) => AssignParam(p=>p.Consistency(consistency));
 
 		///<summary>The script language (default: groovy)</summary>
-		public UpdateDescriptor<TDocument,TPartialDocument> Lang(string lang) => AssignParam(p=>p.Lang(lang));
+		public UpdateDescriptor<TDocument, TPartialDocument> Lang(string lang) => AssignParam(p=>p.Lang(lang));
 
 		///<summary>ID of the parent document. Is is only used for routing and when for the upsert request</summary>
-		public UpdateDescriptor<TDocument,TPartialDocument> Parent(string parent) => AssignParam(p=>p.Parent(parent));
+		public UpdateDescriptor<TDocument, TPartialDocument> Parent(string parent) => AssignParam(p=>p.Parent(parent));
 
 		///<summary>Refresh the index after performing the operation</summary>
-		public UpdateDescriptor<TDocument,TPartialDocument> Refresh(bool refresh = true) => AssignParam(p=>p.Refresh(refresh));
+		public UpdateDescriptor<TDocument, TPartialDocument> Refresh(bool refresh = true) => AssignParam(p=>p.Refresh(refresh));
 
 		///<summary>Specify how many times should the operation be retried when a conflict occurs (default: 0)</summary>
-		public UpdateDescriptor<TDocument,TPartialDocument> RetryOnConflict(long retry_on_conflict) => AssignParam(p=>p.RetryOnConflict(retry_on_conflict));
+		public UpdateDescriptor<TDocument, TPartialDocument> RetryOnConflict(long retry_on_conflict) => AssignParam(p=>p.RetryOnConflict(retry_on_conflict));
 
 		///<summary>Specific routing value</summary>
-		public UpdateDescriptor<TDocument,TPartialDocument> Routing(string routing) => AssignParam(p=>p.Routing(routing));
+		public UpdateDescriptor<TDocument, TPartialDocument> Routing(string routing) => AssignParam(p=>p.Routing(routing));
 
 		///<summary>The URL-encoded script definition (instead of using request body)</summary>
-		public UpdateDescriptor<TDocument,TPartialDocument> ScriptQueryString(string script) => AssignParam(p=>p.Script(script));
+		public UpdateDescriptor<TDocument, TPartialDocument> ScriptQueryString(string script) => AssignParam(p=>p.Script(script));
 
 		///<summary>The id of a stored script</summary>
-		public UpdateDescriptor<TDocument,TPartialDocument> ScriptId(string script_id) => AssignParam(p=>p.ScriptId(script_id));
+		public UpdateDescriptor<TDocument, TPartialDocument> ScriptId(string script_id) => AssignParam(p=>p.ScriptId(script_id));
 
 		///<summary>True if the script referenced in script or script_id should be called to perform inserts - defaults to false</summary>
-		public UpdateDescriptor<TDocument,TPartialDocument> ScriptedUpsert(bool scripted_upsert = true) => AssignParam(p=>p.ScriptedUpsert(scripted_upsert));
+		public UpdateDescriptor<TDocument, TPartialDocument> ScriptedUpsert(bool scripted_upsert = true) => AssignParam(p=>p.ScriptedUpsert(scripted_upsert));
 
 		///<summary>Explicit operation timeout</summary>
-		public UpdateDescriptor<TDocument,TPartialDocument> Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
+		public UpdateDescriptor<TDocument, TPartialDocument> Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
 
 		///<summary>Explicit timestamp for the document</summary>
-		public UpdateDescriptor<TDocument,TPartialDocument> Timestamp(string timestamp) => AssignParam(p=>p.Timestamp(timestamp));
+		public UpdateDescriptor<TDocument, TPartialDocument> Timestamp(string timestamp) => AssignParam(p=>p.Timestamp(timestamp));
 
 		///<summary>Expiration time for the document</summary>
-		public UpdateDescriptor<TDocument,TPartialDocument> Ttl(string ttl) => AssignParam(p=>p.Ttl(ttl));
+		public UpdateDescriptor<TDocument, TPartialDocument> Ttl(string ttl) => AssignParam(p=>p.Ttl(ttl));
 
 		///<summary>Explicit version number for concurrency control</summary>
-		public UpdateDescriptor<TDocument,TPartialDocument> Version(long version) => AssignParam(p=>p.Version(version));
+		public UpdateDescriptor<TDocument, TPartialDocument> Version(long version) => AssignParam(p=>p.Version(version));
 
 		///<summary>Specific version type</summary>
-		public UpdateDescriptor<TDocument,TPartialDocument> VersionType(VersionType version_type) => AssignParam(p=>p.VersionType(version_type));
+		public UpdateDescriptor<TDocument, TPartialDocument> VersionType(VersionType version_type) => AssignParam(p=>p.VersionType(version_type));
 
 		///<summary>The URL-encoded request definition</summary>
-		public UpdateDescriptor<TDocument,TPartialDocument> Source(string source) => AssignParam(p=>p.Source(source));
+		public UpdateDescriptor<TDocument, TPartialDocument> Source(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public UpdateDescriptor<TDocument,TPartialDocument> FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		public UpdateDescriptor<TDocument, TPartialDocument> FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 }

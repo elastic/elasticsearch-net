@@ -128,7 +128,7 @@ namespace CodeGeneration.LowLevelClient
 		private static readonly Dictionary<string, string> KnownDescriptors =
 			(from f in new DirectoryInfo(_nestFolder).GetFiles("*Request.cs", SearchOption.AllDirectories)
 			 let contents = File.ReadAllText(f.FullName)
-			 let c = Regex.Replace(contents, @"^.+class ([^ \r\n]+Descriptor[^ \r\n]*).*$", "$1", RegexOptions.Singleline)
+			 let c = Regex.Replace(contents, @"^.+class ([^ \r\n]+Descriptor(?:<[^>\r\n]+>)?[^ \r\n]*).*$", "$1", RegexOptions.Singleline)
 			 select new { Key = Regex.Replace(c, "<.*$", ""), Value = Regex.Replace(c, @"^.*?(?:(\<.+>).*?)?$", "$1") })
 			.DistinctBy(v => v.Key)
 			.OrderBy(v=>v.Key)
@@ -137,7 +137,7 @@ namespace CodeGeneration.LowLevelClient
 		private static readonly Dictionary<string, string> KnownRequests =
 			(from f in new DirectoryInfo(_nestFolder).GetFiles("*Request.cs", SearchOption.AllDirectories)
 			 let contents = File.ReadAllText(f.FullName)
-			 let c = Regex.Replace(contents, @"^.+interface ([^ \r\n]+).*$", "$1", RegexOptions.Singleline)
+			 let c = Regex.Replace(contents, @"^.+interface ([^ \r\n]+Request(?:<[^>\r\n]+>)?[^ \r\n]*).*$", "$1", RegexOptions.Singleline)
 			 where c.StartsWith("I") && c.Contains("Request")
 			 select new { Key = Regex.Replace(c, "<.*$", ""), Value = Regex.Replace(c, @"^.*?(?:(\<.+>).*?)?$", "$1") })
 			.DistinctBy(v => v.Key)

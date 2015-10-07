@@ -4962,19 +4962,19 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IUpdateRequest<TDocument,TPartialDocument> : IRequest<UpdateRequestParameters> 
+	public partial interface IUpdateRequest<TDocument, TPartialDocument> : IRequest<UpdateRequestParameters> 
 	{
 		Id Id { get; }
 		IndexName Index { get; }
 		TypeName Type { get; }
 	 } 
 	///<summary>Request parameters for Update <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update.html</pre></summary>
-	public partial class UpdateRequest<TDocument,TPartialDocument>  : RequestBase<UpdateRequestParameters>, IUpdateRequest<TDocument,TPartialDocument>
+	public partial class UpdateRequest<TDocument, TPartialDocument>  : RequestBase<UpdateRequestParameters>, IUpdateRequest<TDocument, TPartialDocument>
 	{
-		protected IUpdateRequest<TDocument,TPartialDocument> Self => this;
-		Id IUpdateRequest<TDocument,TPartialDocument>.Id => Self.RouteValues.Get<Id>("id");
-		IndexName IUpdateRequest<TDocument,TPartialDocument>.Index => Self.RouteValues.Get<IndexName>("index");
-		TypeName IUpdateRequest<TDocument,TPartialDocument>.Type => Self.RouteValues.Get<TypeName>("type");
+		protected IUpdateRequest<TDocument, TPartialDocument> Self => this;
+		Id IUpdateRequest<TDocument, TPartialDocument>.Id => Self.RouteValues.Get<Id>("id");
+		IndexName IUpdateRequest<TDocument, TPartialDocument>.Index => Self.RouteValues.Get<IndexName>("index");
+		TypeName IUpdateRequest<TDocument, TPartialDocument>.Type => Self.RouteValues.Get<TypeName>("type");
 			/// <summary>/{index}/{type}/{id}/_update</summary>
 ///<param name="index">this parameter is required</param>		
 ///<param name="type">this parameter is required</param>		
