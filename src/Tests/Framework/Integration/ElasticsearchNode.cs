@@ -11,11 +11,13 @@ using System.Reactive.Subjects;
 using System.Security.AccessControl;
 using System.Text.RegularExpressions;
 using System.Threading;
+using Nest;
 
 namespace Tests.Framework.Integration
 {
 	public class ElasticsearchNode : IDisposable
 	{
+		private readonly bool _doNotSpwanIfAlreadyRunning;
 		private static readonly object _lock = new object();
 		private Process _process;
 		private IDisposable _processListener;
@@ -37,8 +39,9 @@ namespace Tests.Framework.Integration
 		private Subject<ManualResetEvent> _blockingSubject = new Subject<ManualResetEvent>();
 		public IObservable<ManualResetEvent> BootstrapWork { get; }
 
-		public ElasticsearchNode(string elasticsearchVersion, bool runningIntegrations)
+		public ElasticsearchNode(string elasticsearchVersion, bool runningIntegrations, bool doNotSpwanIfAlreadyRunning)
 		{
+			_doNotSpwanIfAlreadyRunning = doNotSpwanIfAlreadyRunning;
 			this.Version = elasticsearchVersion;
 			this.RunningIntegrations = runningIntegrations;
 			this.BootstrapWork = _blockingSubject;
@@ -62,9 +65,21 @@ namespace Tests.Framework.Integration
 		{
 			if (!this.RunningIntegrations) return Observable.Empty<ElasticsearchMessage>();
 
-			var handle = new ManualResetEvent(false);
 			this.Stop();
 
+			if (_doNotSpwanIfAlreadyRunning)
+			{
+				var alreadyUp = new ElasticClient().RootNodeInfo();
+				if (alreadyUp.IsValid)
+				{
+					this.Started = true;
+					this.Port = 9200;
+					this.Info = new ElasticsearchNodeInfo(alreadyUp.Version.Number, "0", alreadyUp.Version.LuceneVersion);
+					return Observable.Empty<ElasticsearchMessage>();
+				}
+			}
+
+			var handle = new ManualResetEvent(false);
 			this._process = this.CreateProcess(
 				$"-Des.cluster.name={this.ClusterName}",
 				$"-Des.node.name={this.NodeName}"
@@ -73,7 +88,7 @@ namespace Tests.Framework.Integration
 			var observable = Observable.Using(() => _process, process => StartObservableProcess(process));
 			this._processListener = observable.Subscribe(onNext: s => HandleConsoleMessage(s, handle));
 
-			var timeout = TimeSpan.FromSeconds(20);
+			var timeout = TimeSpan.FromSeconds(40);
 			if (!handle.WaitOne(timeout, true))
 				throw new ApplicationException($"Could not start elasticsearch within {timeout}");
 
@@ -220,6 +235,8 @@ namespace Tests.Framework.Integration
 			if (!this.RunningIntegrations || !this.Started) return;
 
 			this.Started = false;
+			if (this._doNotSpwanIfAlreadyRunning) return;
+
 			if (this.Info != null)
 			{
 				var esProcess = Process.GetProcessById(this.Info.Pid);

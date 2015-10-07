@@ -139,7 +139,10 @@ namespace Elasticsearch.Net.Connection
 		private static ElasticsearchResponse<TReturn> FinalizeReponse<TReturn>(ElasticsearchResponse<TReturn> cs)
 		{
 			var passAlongConnectionStatus = cs.Body as IBodyWithApiCallDetails;
-			if (passAlongConnectionStatus != null) passAlongConnectionStatus.CallDetails = cs;
+			if (passAlongConnectionStatus != null)
+			{
+				passAlongConnectionStatus.CallDetails = cs;
+			}
 			return cs;
 		}
 

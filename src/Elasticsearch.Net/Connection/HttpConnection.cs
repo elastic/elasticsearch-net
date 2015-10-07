@@ -177,7 +177,8 @@ namespace Elasticsearch.Net.Connection
 				//Either the stream or the response object needs to be closed but not both although it won't
 				//throw any errors if both are closed atleast one of them has to be Closed.
 				//Since we expose the stream we let closing the stream determining when to close the connection
-				var response = (HttpWebResponse)(await request.GetResponseAsync());
+				var webResponse = await request.GetResponseAsync();
+				var response = (HttpWebResponse)webResponse;
 				var responseStream = response.GetResponseStream();
 				var cs = await requestData.CreateResponseAsync<TReturn>((int)response.StatusCode, responseStream);
 				return cs;
