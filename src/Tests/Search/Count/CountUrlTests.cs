@@ -23,10 +23,10 @@ namespace Tests.Search.Count
 				;
 
 			await GET("/project/commits/_count?q=querystring")
-				.Fluent(c=>c.Count<CommitActivity>(s=>s.Q("querystring")))
-				.Request(c=>c.Count<Project>(new CountRequest<CommitActivity>() { Q = "querystring" }))
-				.FluentAsync(c=>c.CountAsync<CommitActivity>(s=>s.Q("querystring")))
-				.RequestAsync(c=>c.CountAsync<Project>(new CountRequest<CommitActivity>() { Q = "querystring" }))
+				.Fluent(c=>c.Count<CommitActivity>(s=>s.QueryOnQueryString("querystring")))
+				.Request(c=>c.Count<Project>(new CountRequest<CommitActivity>() { QueryOnQueryString = "querystring" }))
+				.FluentAsync(c=>c.CountAsync<CommitActivity>(s=>s.QueryOnQueryString("querystring")))
+				.RequestAsync(c=>c.CountAsync<Project>(new CountRequest<CommitActivity>() { QueryOnQueryString = "querystring" }))
 				;
 			await POST("/project/hardcoded/_count")
 				.Fluent(c=>c.Count<CommitActivity>(s=>s.Type(hardcoded)))
