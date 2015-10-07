@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace CodeGeneration.LowLevelClient.Domain
 {
@@ -15,6 +16,9 @@ namespace CodeGeneration.LowLevelClient.Domain
 		public string DescriptorType { get; set; }
 		public string DescriptorTypeGeneric { get; set; }
 		public string RequestType { get; set; }
+
+		public string InterfaceType => "I" + (this.RequestTypeGeneric == "" || this.RequestTypeGeneric == "<T>" ? this.RequestType : this.RequestType + this.RequestTypeGeneric);
+
 		public string RequestTypeGeneric { get; set; }
 		public bool RequestTypeUnmapped { get; set; }
 		public string HttpMethod { get; set; }
@@ -110,8 +114,9 @@ namespace CodeGeneration.LowLevelClient.Domain
 				var doc = $@"/// <summary>{this.Url.Path}</summary>";
 				doc += "\r\n\t\t\r\n" + $"///<param name=\"document\"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>";
 				var documentRoute = "r=>r.Required(\"index\", document.Self.Index).Required(\"type\", document.Self.Type).Required(\"id\", document.Self.Id)";
-				var documentFromPath = $"partial void DocumentFromPath({this.RequestTypeGeneric.Replace("<", "").Replace(">", "")} document);";
-				var c = new Constructor { AdditionalCode = documentFromPath, Generated = $"public {m}(DocumentPath{this.RequestTypeGeneric} document) : base({documentRoute}){{ this.DocumentFromPath(document.Document); }}", Description = doc, };
+				var documentPathGeneric = Regex.Replace(this.DescriptorTypeGeneric, @"^<?([^\s,>]+).*$", "$1");
+				var documentFromPath = $"partial void DocumentFromPath({documentPathGeneric} document);";
+				var c = new Constructor { AdditionalCode = documentFromPath, Generated = $"public {m}(DocumentPath<{documentPathGeneric}> document) : base({documentRoute}){{ this.DocumentFromPath(document.Document); }}", Description = doc, };
 				ctors.Add(c);
 			}
 			return ctors.DistinctBy(c => c.Generated);
@@ -175,8 +180,9 @@ namespace CodeGeneration.LowLevelClient.Domain
 				var doc = $@"/// <summary>{this.Url.Path}</summary>";
 				doc += "\r\n\t\t\r\n" + $"///<param name=\"document\"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>";
 				var documentRoute = "r=>r.Required(\"index\", document.Self.Index).Required(\"type\", document.Self.Type).Required(\"id\", document.Self.Id)";
-				var documentFromPath = $"partial void DocumentFromPath({this.DescriptorTypeGeneric.Replace("<", "").Replace(">", "")} document);";
-				var c = new Constructor { AdditionalCode = documentFromPath, Generated = $"public {m}(DocumentPath{this.DescriptorTypeGeneric} document) : base({documentRoute}){{ this.DocumentFromPath(document.Document); }}", Description = doc };
+				var documentPathGeneric = Regex.Replace(this.DescriptorTypeGeneric, @"^<?([^\s,>]+).*$", "$1");
+				var documentFromPath = $"partial void DocumentFromPath({documentPathGeneric} document);";
+				var c = new Constructor { AdditionalCode = documentFromPath, Generated = $"public {m}(DocumentPath<{documentPathGeneric}> document) : base({documentRoute}){{ this.DocumentFromPath(document.Document); }}", Description = doc };
 				ctors.Add(c);
 			}
 

@@ -8,8 +8,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IPercolateRequest<TDocument> : IPercolateRequest, IPercolateOperation
+	public partial interface IPercolateRequest<TDocument> : IPercolateOperation
 		where TDocument : class
 	{
 		[JsonProperty(PropertyName = "doc")]
@@ -17,7 +16,7 @@ namespace Nest
 
 	}
 
-	public partial class PercolateRequest<TDocument> : IPercolateRequest<TDocument>
+	public partial class PercolateRequest<TDocument> 
 		where TDocument : class
 	{
 		public PercolateRequest() : this(typeof(TDocument), typeof(TDocument)) { }
@@ -33,24 +32,23 @@ namespace Nest
 		public TDocument Document { get; set; }
 		public IDictionary<FieldName, ISort> Sort { get; set; }
 
-		Id IPercolateOperation.Id => ((IPercolateCountRequest)this).Id;
-		IRequestParameters IPercolateOperation.GetRequestParameters() => this.Self.RequestParameters;
+		Id IPercolateOperation.Id => Self.Id;
+		IRequestParameters IPercolateOperation.GetRequestParameters() => this.RequestState.RequestParameters;
 	}
-	public partial class PercolateDescriptor<T> : IPercolateRequest<T>
-		where T : class
+	public partial class PercolateDescriptor<TDocument> : IPercolateRequest<TDocument>
+		where TDocument : class
 	{
-		private IPercolateRequest<T> Self => this;
-		IRequestParameters IPercolateOperation.GetRequestParameters() => this.Self.RequestParameters;
+		IRequestParameters IPercolateOperation.GetRequestParameters() => Self.RequestParameters;
 
 		IHighlightRequest IPercolateOperation.Highlight { get; set; }
 		QueryContainer IPercolateOperation.Query { get; set; }
 		QueryContainer IPercolateOperation.Filter { get; set; }
 
-		Id IPercolateOperation.Id => ((IPercolateCountRequest)this).Id;
+		Id IPercolateOperation.Id => Self.Id;
 		int? IPercolateOperation.Size { get; set; }
 		bool? IPercolateOperation.TrackScores { get; set; }
 		
-		T IPercolateRequest<T>.Document { get; set; }
+		TDocument IPercolateRequest<TDocument>.Document { get; set; }
 		IDictionary<FieldName, ISort> IPercolateOperation.Sort { get; set; }
 		IDictionary<string, IAggregationContainer> IPercolateOperation.Aggregations { get; set; }
 
@@ -58,22 +56,22 @@ namespace Nest
 		/// <summary>
 		/// The object to perculate
 		/// </summary>
-		public PercolateDescriptor<T> Document(T @object)
+		public PercolateDescriptor<TDocument> Document(TDocument @object)
 		{
 			Self.Document = @object;
 			return this;
 		}
 		/// Make sure we keep calculating score even if we are sorting on a field.
 		/// </summary>
-		public PercolateDescriptor<T> TrackScores(bool trackscores = true)
+		public PercolateDescriptor<TDocument> TrackScores(bool trackscores = true)
 		{
 			Self.TrackScores = trackscores;
 			return this;
 		}
 
-		public PercolateDescriptor<T> Aggregations(Func<AggregationContainerDescriptor<T>, AggregationContainerDescriptor<T>> aggregationsSelector)
+		public PercolateDescriptor<TDocument> Aggregations(Func<AggregationContainerDescriptor<TDocument>, AggregationContainerDescriptor<TDocument>> aggregationsSelector)
 		{
-			var aggs = aggregationsSelector(new AggregationContainerDescriptor<T>());
+			var aggs = aggregationsSelector(new AggregationContainerDescriptor<TDocument>());
 			if (aggs == null) return this;
 			Self.Aggregations = ((IAggregationContainer)aggs).Aggregations;
 			return this;
@@ -82,16 +80,16 @@ namespace Nest
 		/// <summary>
 		/// Allow to highlight search results on one or more fields. 
 		/// </summary>
-		public PercolateDescriptor<T> Highlight(int size, Func<HighlightDescriptor<T>,HighlightDescriptor<T>> highlightDescriptor)
+		public PercolateDescriptor<TDocument> Highlight(int size, Func<HighlightDescriptor<TDocument>,HighlightDescriptor<TDocument>> highlightDescriptor)
 		{
 			highlightDescriptor.ThrowIfNull("highlightDescriptor");
-			var d  = highlightDescriptor(new HighlightDescriptor<T>());
+			var d  = highlightDescriptor(new HighlightDescriptor<TDocument>());
 			Self.Size = size;
 			Self.Highlight = d;
 			return this;
 		}
 
-		public PercolateDescriptor<T> Size(int size)
+		public PercolateDescriptor<TDocument> Size(int size)
 		{
 			Self.Size = size;
 			return this;
@@ -105,7 +103,7 @@ namespace Nest
 		/// Sort ascending.
 		/// </para>
 		/// </summary>
-		public PercolateDescriptor<T> SortAscending(Expression<Func<T, object>> objectPath)
+		public PercolateDescriptor<TDocument> SortAscending(Expression<Func<TDocument, object>> objectPath)
 		{
 			if (Self.Sort == null) Self.Sort = new Dictionary<FieldName, ISort>();
 
@@ -121,7 +119,7 @@ namespace Nest
 		/// Sort descending.
 		/// </para>
 		/// </summary>
-		public PercolateDescriptor<T> SortDescending(Expression<Func<T, object>> objectPath)
+		public PercolateDescriptor<TDocument> SortDescending(Expression<Func<TDocument, object>> objectPath)
 		{
 			if (Self.Sort == null) Self.Sort = new Dictionary<FieldName, ISort>();
 
@@ -137,7 +135,7 @@ namespace Nest
 		/// Sort ascending.
 		/// </para>
 		/// </summary>
-		public PercolateDescriptor<T> SortAscending(string field)
+		public PercolateDescriptor<TDocument> SortAscending(string field)
 		{
 			if (Self.Sort == null) Self.Sort = new Dictionary<FieldName, ISort>();
 			Self.Sort.Add(field, new Sort() { Order = SortOrder.Ascending });
@@ -152,7 +150,7 @@ namespace Nest
 		/// Sort descending.
 		/// </para>
 		/// </summary>
-		public PercolateDescriptor<T> SortDescending(string field)
+		public PercolateDescriptor<TDocument> SortDescending(string field)
 		{
 			if (Self.Sort == null)
 				Self.Sort = new Dictionary<FieldName, ISort>();
@@ -165,13 +163,13 @@ namespace Nest
 		/// <para>Sort() allows you to fully describe your sort unlike the SortAscending and SortDescending aliases.
 		/// </para>
 		/// </summary>
-		public PercolateDescriptor<T> Sort(Func<SortFieldDescriptor<T>, IFieldSort> sortSelector)
+		public PercolateDescriptor<TDocument> Sort(Func<SortFieldDescriptor<TDocument>, IFieldSort> sortSelector)
 		{
 			if (Self.Sort == null)
 				Self.Sort = new Dictionary<FieldName, ISort>();
 
 			sortSelector.ThrowIfNull("sortSelector");
-			var descriptor = sortSelector(new SortFieldDescriptor<T>());
+			var descriptor = sortSelector(new SortFieldDescriptor<TDocument>());
 			Self.Sort.Add(descriptor.Field, descriptor);
 			return this;
 		}
@@ -180,13 +178,13 @@ namespace Nest
 		/// <para>SortGeoDistance() allows you to sort by a distance from a geo point.
 		/// </para>
 		/// </summary>
-		public PercolateDescriptor<T> SortGeoDistance(Func<SortGeoDistanceDescriptor<T>, IGeoDistanceSort> sortSelector)
+		public PercolateDescriptor<TDocument> SortGeoDistance(Func<SortGeoDistanceDescriptor<TDocument>, IGeoDistanceSort> sortSelector)
 		{
 			if (Self.Sort == null)
 				Self.Sort = new Dictionary<FieldName, ISort>();
 
 			sortSelector.ThrowIfNull("sortSelector");
-			var descriptor = sortSelector(new SortGeoDistanceDescriptor<T>());
+			var descriptor = sortSelector(new SortGeoDistanceDescriptor<TDocument>());
 			Self.Sort.Add("_geo_distance", descriptor);
 			return this;
 		}
@@ -195,13 +193,13 @@ namespace Nest
 		/// <para>SortScript() allows you to sort by a distance from a geo point.
 		/// </para>
 		/// </summary>
-		public PercolateDescriptor<T> SortScript(Func<SortScriptDescriptor<T>, IScriptSort> sortSelector)
+		public PercolateDescriptor<TDocument> SortScript(Func<SortScriptDescriptor<TDocument>, IScriptSort> sortSelector)
 		{
 			if (Self.Sort == null)
 				Self.Sort = new Dictionary<FieldName, ISort>();
 
 			sortSelector.ThrowIfNull("sortSelector");
-			var descriptor = sortSelector(new SortScriptDescriptor<T>());
+			var descriptor = sortSelector(new SortScriptDescriptor<TDocument>());
 			Self.Sort.Add("_script", descriptor);
 			return this;
 		}
@@ -209,15 +207,15 @@ namespace Nest
 		/// <summary>
 		/// Describe the query to perform using a query descriptor lambda
 		/// </summary>
-		public PercolateDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> query)
+		public PercolateDescriptor<TDocument> Query(Func<QueryContainerDescriptor<TDocument>, QueryContainer> query)
 		{
 			query.ThrowIfNull("query");
-			var q = new QueryContainerDescriptor<T>();
+			var q = new QueryContainerDescriptor<TDocument>();
 			var bq = query(q);
 			return this.Query(bq);
 		}
 
-		public PercolateDescriptor<T> Query(QueryContainer query)
+		public PercolateDescriptor<TDocument> Query(QueryContainer query)
 		{
 			if (query == null)
 				return this;
@@ -233,9 +231,9 @@ namespace Nest
 		/// Shortcut to .Query(q=>q.QueryString(qs=>qs.Query("string"))
 		/// Does a match_all if the userInput string is null or empty;
 		/// </summary>
-		public PercolateDescriptor<T> QueryString(string userInput)
+		public PercolateDescriptor<TDocument> QueryString(string userInput)
 		{
-			var q = new QueryContainerDescriptor<T>();
+			var q = new QueryContainerDescriptor<TDocument>();
 			QueryContainer bq;
 			if (userInput.IsNullOrEmpty())
 				bq = q.MatchAll();
@@ -248,10 +246,10 @@ namespace Nest
 		/// <summary>
 		/// Filter search using a filter descriptor lambda
 		/// </summary>
-		public PercolateDescriptor<T> Filter(Func<QueryContainerDescriptor<T>, QueryContainer> filter)
+		public PercolateDescriptor<TDocument> Filter(Func<QueryContainerDescriptor<TDocument>, QueryContainer> filter)
 		{
 			filter.ThrowIfNull("filter");
-			var f = new QueryContainerDescriptor<T>();
+			var f = new QueryContainerDescriptor<TDocument>();
 
 			var bf = filter(f);
 			if (bf == null)
@@ -266,7 +264,7 @@ namespace Nest
 		/// <summary>
 		/// Filter search
 		/// </summary>
-		public PercolateDescriptor<T> Filter(QueryContainer QueryDescriptor)
+		public PercolateDescriptor<TDocument> Filter(QueryContainer QueryDescriptor)
 		{
 			QueryDescriptor.ThrowIfNull("filter");
 			Self.Filter = QueryDescriptor;

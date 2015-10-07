@@ -7,20 +7,20 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonConverter(typeof(IndexRequestJsonConverter))]
-	public partial interface IIndexRequest : IRequest<IndexRequestParameters>
+	public interface IIndexRequest : IRequest<IndexRequestParameters>
 	{
 		object UntypedDocument { get; }
 	}
 
-	public interface IIndexRequest<TDocument> : IIndexRequest where TDocument : class
+	public partial interface IIndexRequest<TDocument> : IIndexRequest where TDocument : class
 	{
 		TDocument Document { get; set; }
 	}
 
-	public partial class IndexRequest<TDocument> : IIndexRequest<TDocument>
+	public partial class IndexRequest<TDocument> 
 		where TDocument : class
 	{
-		protected override HttpMethod HttpMethod => ((IIndexRequest)this).Id == null ? HttpMethod.POST : HttpMethod.PUT;
+		protected override HttpMethod HttpMethod => ((IIndexRequest<TDocument>)this).Id == null ? HttpMethod.POST : HttpMethod.PUT;
 
 		partial void DocumentFromPath(TDocument doc) => this.Document = doc;
 
@@ -29,13 +29,12 @@ namespace Nest
 		public TDocument Document { get; set; }
 	}
 
-	public partial class IndexDescriptor<T> : IIndexRequest<T>
-		where T : class
+	public partial class IndexDescriptor<TDocument>  where TDocument : class
 	{
-		protected override HttpMethod HttpMethod => ((IIndexRequest)this).Id == null ? HttpMethod.POST : HttpMethod.PUT;
-		partial void DocumentFromPath(T doc) => ((IIndexRequest<T>)this).Document = doc;
-		object IIndexRequest.UntypedDocument => ((IIndexRequest<T>)this).Document;
+		protected override HttpMethod HttpMethod => Self.Id == null ? HttpMethod.POST : HttpMethod.PUT;
+		partial void DocumentFromPath(TDocument doc) => Assign(a => a.Document = doc); 
+		object IIndexRequest.UntypedDocument => Self.Document;
 
-		T IIndexRequest<T>.Document { get; set; }
+		TDocument IIndexRequest<TDocument>.Document { get; set; }
 	}
 }

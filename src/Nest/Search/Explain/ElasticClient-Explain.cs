@@ -35,7 +35,7 @@ namespace Nest
 		/// <inheritdoc/>
 		public IExplainResponse<T> Explain<T>(IExplainRequest<T> explainRequest)
 			where T : class => 
-			this.Dispatcher.Dispatch<IExplainRequest, ExplainRequestParameters, ExplainResponse<T>>(
+			this.Dispatcher.Dispatch<IExplainRequest<T>, ExplainRequestParameters, ExplainResponse<T>>(
 				explainRequest,
 				this.LowLevelDispatch.ExplainDispatch<ExplainResponse<T>>
 			);
@@ -48,7 +48,7 @@ namespace Nest
 		/// <inheritdoc/>
 		public Task<IExplainResponse<T>> ExplainAsync<T>(IExplainRequest<T> explainRequest)
 			where T : class => 
-			this.Dispatcher.DispatchAsync<IExplainRequest, ExplainRequestParameters, ExplainResponse<T>, IExplainResponse<T>>(
+			this.Dispatcher.DispatchAsync<IExplainRequest<T>, ExplainRequestParameters, ExplainResponse<T>, IExplainResponse<T>>(
 				explainRequest,
 				this.LowLevelDispatch.ExplainDispatchAsync<ExplainResponse<T>>
 			);

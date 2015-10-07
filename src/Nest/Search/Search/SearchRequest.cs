@@ -95,7 +95,7 @@ namespace Nest
 		Type ICovariantSearchRequest.ClrType => this._clrType;
 		Types ICovariantSearchRequest.ElasticsearchTypes => ((ISearchRequest)this).Type;
 		protected override HttpMethod HttpMethod =>
-			Self.RequestParameters?.ContainsKey("_source") == true || Self.RequestParameters?.ContainsKey("q")  == true? HttpMethod.GET : HttpMethod.POST;
+			RequestState.RequestParameters?.ContainsKey("_source") == true || RequestState.RequestParameters?.ContainsKey("q")  == true? HttpMethod.GET : HttpMethod.POST;
 
 		public string Timeout { get; set; }
 		public int? From { get; set; }
@@ -119,15 +119,15 @@ namespace Nest
 		public IHighlightRequest Highlight { get; set; }
 		public AggregationDictionary Aggregations { get; set; }
 
-		SearchType? ISearchRequest.SearchType => Self.RequestParameters?.GetQueryStringValue<SearchType?>("search_type");
+		SearchType? ISearchRequest.SearchType => RequestState.RequestParameters?.GetQueryStringValue<SearchType?>("search_type");
 
-		string ISearchRequest.Preference => Self.RequestParameters?.GetQueryStringValue<string>("preference");
+		string ISearchRequest.Preference => RequestState.RequestParameters?.GetQueryStringValue<string>("preference");
 
-		string ISearchRequest.Routing => Self.RequestParameters?.GetQueryStringValue<string[]>("routing") == null
+		string ISearchRequest.Routing => RequestState.RequestParameters?.GetQueryStringValue<string[]>("routing") == null
 			? null
-			: string.Join(",", Self.RequestParameters?.GetQueryStringValue<string[]>("routing"));
+			: string.Join(",", RequestState.RequestParameters?.GetQueryStringValue<string[]>("routing"));
 
-		bool? ISearchRequest.IgnoreUnavalable => Self.RequestParameters?.GetQueryStringValue<bool?>("ignore_unavailable");
+		bool? ISearchRequest.IgnoreUnavalable => RequestState.RequestParameters?.GetQueryStringValue<bool?>("ignore_unavailable");
 
 		public Func<dynamic, Hit<dynamic>, Type> TypeSelector { get; set; }
 	}
@@ -138,7 +138,7 @@ namespace Nest
 		Type ICovariantSearchRequest.ClrType => this._clrType;
 		Types ICovariantSearchRequest.ElasticsearchTypes => ((ISearchRequest)this).Type;
 		protected override HttpMethod HttpMethod =>
-			Self.RequestParameters?.ContainsKey("_source") == true || Self.RequestParameters?.ContainsKey("q")  == true? HttpMethod.GET : HttpMethod.POST;
+			RequestState.RequestParameters?.ContainsKey("_source") == true || RequestState.RequestParameters?.ContainsKey("q")  == true? HttpMethod.GET : HttpMethod.POST;
 		
 		public string Timeout { get; set; }
 		public int? From { get; set; }
@@ -162,15 +162,15 @@ namespace Nest
 		public IHighlightRequest Highlight { get; set; }
 		public AggregationDictionary Aggregations { get; set; }
 
-		SearchType? ISearchRequest.SearchType => Self.RequestParameters?.GetQueryStringValue<SearchType?>("search_type");
+		SearchType? ISearchRequest.SearchType => RequestState.RequestParameters?.GetQueryStringValue<SearchType?>("search_type");
 
-		string ISearchRequest.Preference => Self.RequestParameters?.GetQueryStringValue<string>("preference");
+		string ISearchRequest.Preference => RequestState.RequestParameters?.GetQueryStringValue<string>("preference");
 
-		string ISearchRequest.Routing => Self.RequestParameters?.GetQueryStringValue<string[]>("routing") == null
+		string ISearchRequest.Routing => RequestState.RequestParameters?.GetQueryStringValue<string[]>("routing") == null
 			? null
-			: string.Join(",", Self.RequestParameters?.GetQueryStringValue<string[]>("routing"));
+			: string.Join(",", RequestState.RequestParameters?.GetQueryStringValue<string[]>("routing"));
 
-		bool? ISearchRequest.IgnoreUnavalable => Self.RequestParameters?.GetQueryStringValue<bool?>("ignore_unavailable");
+		bool? ISearchRequest.IgnoreUnavalable => RequestState.RequestParameters?.GetQueryStringValue<bool?>("ignore_unavailable");
 
 		public Func<dynamic, Hit<dynamic>, Type> TypeSelector { get; set; }
 	}
@@ -184,16 +184,16 @@ namespace Nest
 		Types ICovariantSearchRequest.ElasticsearchTypes => ((ISearchRequest)this).Type;
 		Func<dynamic, Hit<dynamic>, Type> ICovariantSearchRequest.TypeSelector { get; set; }
 		protected override HttpMethod HttpMethod =>
-			Self.RequestParameters?.ContainsKey("_source") == true || Self.RequestParameters?.ContainsKey("q")  == true? HttpMethod.GET : HttpMethod.POST;
+			RequestState.RequestParameters?.ContainsKey("_source") == true || RequestState.RequestParameters?.ContainsKey("q")  == true? HttpMethod.GET : HttpMethod.POST;
 
-		SearchType? ISearchRequest.SearchType => Self.RequestParameters.GetQueryStringValue<SearchType?>("search_type");
+		SearchType? ISearchRequest.SearchType => RequestState.RequestParameters.GetQueryStringValue<SearchType?>("search_type");
 
-		string ISearchRequest.Preference => Self.RequestParameters.GetQueryStringValue<string>("preference");
+		string ISearchRequest.Preference => RequestState.RequestParameters.GetQueryStringValue<string>("preference");
 
-		string ISearchRequest.Routing => Self.RequestParameters.GetQueryStringValue<string[]>("routing") == null
-			? null : string.Join(",", Self.RequestParameters.GetQueryStringValue<string[]>("routing"));
+		string ISearchRequest.Routing => RequestState.RequestParameters.GetQueryStringValue<string[]>("routing") == null
+			? null : string.Join(",", RequestState.RequestParameters.GetQueryStringValue<string[]>("routing"));
 
-		bool? ISearchRequest.IgnoreUnavalable => Self.RequestParameters.GetQueryStringValue<bool?>("ignore_unavailable");
+		bool? ISearchRequest.IgnoreUnavalable => RequestState.RequestParameters.GetQueryStringValue<bool?>("ignore_unavailable");
 
 		/// <summary>
 		/// Whether conditionless queries are allowed or not

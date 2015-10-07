@@ -533,7 +533,6 @@
     <Compile Include="QueryDsl\Geo\Shape\MultiLineString\GeoShapeMultiLineStringQuery.cs" />
     <Compile Include="QueryDsl\Geo\Shape\LineString\GeoShapeLineStringQuery.cs" />
     <Compile Include="QueryDsl\Geo\Shape\Envelope\GeoShapeEnvelopeQuery.cs" />
-    <Compile Include="Document\Multiple\MultiTermVectors\IMultiTermVectorDocument.cs" />
     <Compile Include="CommonAbstractions\ConnectionSettings\ConnectionSettings.cs" />
     <Compile Include="CommonAbstractions\ConnectionSettings\IConnectionSettingsValues.cs" />
     <Compile Include="CommonAbstractions\ForAttribute.cs" />

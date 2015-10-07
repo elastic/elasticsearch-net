@@ -21,11 +21,11 @@ namespace Nest
 		var type = method.DescriptorType + method.DescriptorTypeGeneric;
 	<text>
 	///<summary>descriptor for @method.FullName <pre>@method.Documentation</pre></summary>
-	public partial class @Raw(type) @(Raw(string.Format(" : RequestDescriptorBase<{0},{1}, I{2}>, I{2}", type, method.QueryStringParamName, method.DescriptorType.Replace("Descriptor", "Request"))))
+	public partial class @Raw(type) @(Raw(string.Format(" : RequestDescriptorBase<{0},{1}, {2}>, {2}", type, method.QueryStringParamName, method.InterfaceType)))
 	{ 
 	@foreach (ApiUrlPart part in method.AllParts.Where(p=>!ApiUrl.BlackListRouteValues.Contains(p.Name)))
 	{
-	<text>	@(Raw(part.ClrTypeName)) I@(Raw(method.RequestType)).@(part.InterfaceName) => Self.RouteValues.Get@(Raw(string.Format("<{0}>",part.ClrTypeName)))("@(part.Name)");</text>
+	<text>	@(Raw(part.ClrTypeName)) @(Raw(method.InterfaceType)).@(part.InterfaceName) => Self.RouteValues.Get@(Raw(string.Format("<{0}>",part.ClrTypeName)))("@(part.Name)");</text>
 	}
 	@foreach (Constructor c in method.DescriptorConstructors())
     {

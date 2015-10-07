@@ -903,11 +903,11 @@ namespace Nest
 	}
 	
 	///<summary>descriptor for CountPercolate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-percolate.html</pre></summary>
-	public partial class PercolateCountDescriptor<T>  : RequestDescriptorBase<PercolateCountDescriptor<T>,PercolateCountRequestParameters, IPercolateCountRequest>, IPercolateCountRequest
+	public partial class PercolateCountDescriptor<TDocument>  : RequestDescriptorBase<PercolateCountDescriptor<TDocument>,PercolateCountRequestParameters, IPercolateCountRequest<TDocument>>, IPercolateCountRequest<TDocument>
 	{ 
-		IndexName IPercolateCountRequest.Index => Self.RouteValues.Get<IndexName>("index");
-		TypeName IPercolateCountRequest.Type => Self.RouteValues.Get<TypeName>("type");
-		Id IPercolateCountRequest.Id => Self.RouteValues.Get<Id>("id");
+		IndexName IPercolateCountRequest<TDocument>.Index => Self.RouteValues.Get<IndexName>("index");
+		TypeName IPercolateCountRequest<TDocument>.Type => Self.RouteValues.Get<TypeName>("type");
+		Id IPercolateCountRequest<TDocument>.Id => Self.RouteValues.Get<Id>("id");
 			/// <summary>/{index}/{type}/_percolate/count</summary>
 ///<param name="index"> this parameter is required</param>		
 ///<param name="type"> this parameter is required</param>
@@ -917,57 +917,57 @@ namespace Nest
 		/// <summary>/{index}/{type}/_percolate/count</summary>
 		
 ///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
-		public PercolateCountDescriptor(DocumentPath<T> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
-		partial void DocumentFromPath(T document);
+		public PercolateCountDescriptor(DocumentPath<TDocument> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
+		partial void DocumentFromPath(TDocument document);
 
 			///<summary>The index of the document being count percolated.</summary>
-		public PercolateCountDescriptor<T> Index(IndexName index) => Assign(a=>a.RouteValues.Optional("index", index));
+		public PercolateCountDescriptor<TDocument> Index(IndexName index) => Assign(a=>a.RouteValues.Optional("index", index));
 
 		///<summary>The index of the document being count percolated.</summary>
-		public PercolateCountDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (IndexName)typeof(TOther)));
+		public PercolateCountDescriptor<TDocument> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (IndexName)typeof(TOther)));
 
 		///<summary>The type of the document being count percolated.</summary>
-		public PercolateCountDescriptor<T> Type(TypeName type) => Assign(a=>a.RouteValues.Optional("type", type));
+		public PercolateCountDescriptor<TDocument> Type(TypeName type) => Assign(a=>a.RouteValues.Optional("type", type));
 
 		///<summary>The type of the document being count percolated.</summary>
-		public PercolateCountDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (TypeName)typeof(TOther)));
+		public PercolateCountDescriptor<TDocument> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (TypeName)typeof(TOther)));
 
 		///<summary>Substitute the document in the request body with a document that is known by the specified id. On top of the id, the index and type parameter will be used to retrieve the document from within the cluster.</summary>
-		public PercolateCountDescriptor<T> Id(Id id) => Assign(a=>a.RouteValues.Optional("id", id));
+		public PercolateCountDescriptor<TDocument> Id(Id id) => Assign(a=>a.RouteValues.Optional("id", id));
 
 	
 		///<summary>A comma-separated list of specific routing values</summary>
-		public PercolateCountDescriptor<T> Routing(params string[] routing) => AssignParam(p=>p.Routing(routing));
+		public PercolateCountDescriptor<TDocument> Routing(params string[] routing) => AssignParam(p=>p.Routing(routing));
 
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public PercolateCountDescriptor<T> Preference(string preference) => AssignParam(p=>p.Preference(preference));
+		public PercolateCountDescriptor<TDocument> Preference(string preference) => AssignParam(p=>p.Preference(preference));
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public PercolateCountDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
+		public PercolateCountDescriptor<TDocument> IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
 
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public PercolateCountDescriptor<T> AllowNoIndices(bool allow_no_indices = true) => AssignParam(p=>p.AllowNoIndices(allow_no_indices));
+		public PercolateCountDescriptor<TDocument> AllowNoIndices(bool allow_no_indices = true) => AssignParam(p=>p.AllowNoIndices(allow_no_indices));
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public PercolateCountDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards) => AssignParam(p=>p.ExpandWildcards(expand_wildcards));
+		public PercolateCountDescriptor<TDocument> ExpandWildcards(ExpandWildcards expand_wildcards) => AssignParam(p=>p.ExpandWildcards(expand_wildcards));
 
 		///<summary>The index to count percolate the document into. Defaults to index.</summary>
-		public PercolateCountDescriptor<T> PercolateIndex(string percolate_index) => AssignParam(p=>p.PercolateIndex(percolate_index));
+		public PercolateCountDescriptor<TDocument> PercolateIndex(string percolate_index) => AssignParam(p=>p.PercolateIndex(percolate_index));
 
 		///<summary>The type to count percolate document into. Defaults to type.</summary>
-		public PercolateCountDescriptor<T> PercolateType(string percolate_type) => AssignParam(p=>p.PercolateType(percolate_type));
+		public PercolateCountDescriptor<TDocument> PercolateType(string percolate_type) => AssignParam(p=>p.PercolateType(percolate_type));
 
 		///<summary>Explicit version number for concurrency control</summary>
-		public PercolateCountDescriptor<T> Version(long version) => AssignParam(p=>p.Version(version));
+		public PercolateCountDescriptor<TDocument> Version(long version) => AssignParam(p=>p.Version(version));
 
 		///<summary>Specific version type</summary>
-		public PercolateCountDescriptor<T> VersionType(VersionType version_type) => AssignParam(p=>p.VersionType(version_type));
+		public PercolateCountDescriptor<TDocument> VersionType(VersionType version_type) => AssignParam(p=>p.VersionType(version_type));
 
 		///<summary>The URL-encoded request definition</summary>
-		public PercolateCountDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
+		public PercolateCountDescriptor<TDocument> Source(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public PercolateCountDescriptor<T> FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		public PercolateCountDescriptor<TDocument> FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -1202,11 +1202,11 @@ namespace Nest
 	}
 	
 	///<summary>descriptor for Explain <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-explain.html</pre></summary>
-	public partial class ExplainDescriptor<TDocument>  : RequestDescriptorBase<ExplainDescriptor<TDocument>,ExplainRequestParameters, IExplainRequest>, IExplainRequest
+	public partial class ExplainDescriptor<TDocument>  : RequestDescriptorBase<ExplainDescriptor<TDocument>,ExplainRequestParameters, IExplainRequest<TDocument>>, IExplainRequest<TDocument>
 	{ 
-		Id IExplainRequest.Id => Self.RouteValues.Get<Id>("id");
-		IndexName IExplainRequest.Index => Self.RouteValues.Get<IndexName>("index");
-		TypeName IExplainRequest.Type => Self.RouteValues.Get<TypeName>("type");
+		Id IExplainRequest<TDocument>.Id => Self.RouteValues.Get<Id>("id");
+		IndexName IExplainRequest<TDocument>.Index => Self.RouteValues.Get<IndexName>("index");
+		TypeName IExplainRequest<TDocument>.Type => Self.RouteValues.Get<TypeName>("type");
 			/// <summary>/{index}/{type}/{id}/_explain</summary>
 ///<param name="index"> this parameter is required</param>		
 ///<param name="type"> this parameter is required</param>		
@@ -1554,11 +1554,11 @@ namespace Nest
 	}
 	
 	///<summary>descriptor for Index <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-index_.html</pre></summary>
-	public partial class IndexDescriptor<T>  : RequestDescriptorBase<IndexDescriptor<T>,IndexRequestParameters, IIndexRequest>, IIndexRequest
+	public partial class IndexDescriptor<TDocument>  : RequestDescriptorBase<IndexDescriptor<TDocument>,IndexRequestParameters, IIndexRequest<TDocument>>, IIndexRequest<TDocument>
 	{ 
-		Id IIndexRequest.Id => Self.RouteValues.Get<Id>("id");
-		IndexName IIndexRequest.Index => Self.RouteValues.Get<IndexName>("index");
-		TypeName IIndexRequest.Type => Self.RouteValues.Get<TypeName>("type");
+		Id IIndexRequest<TDocument>.Id => Self.RouteValues.Get<Id>("id");
+		IndexName IIndexRequest<TDocument>.Index => Self.RouteValues.Get<IndexName>("index");
+		TypeName IIndexRequest<TDocument>.Type => Self.RouteValues.Get<TypeName>("type");
 			/// <summary>/{index}/{type}</summary>
 ///<param name="index"> this parameter is required</param>		
 ///<param name="type"> this parameter is required</param>
@@ -1568,60 +1568,60 @@ namespace Nest
 		/// <summary>/{index}/{type}</summary>
 		
 ///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
-		public IndexDescriptor(DocumentPath<T> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
-		partial void DocumentFromPath(T document);
+		public IndexDescriptor(DocumentPath<TDocument> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
+		partial void DocumentFromPath(TDocument document);
 
 			///<summary>Document ID</summary>
-		public IndexDescriptor<T> Id(Id id) => Assign(a=>a.RouteValues.Optional("id", id));
+		public IndexDescriptor<TDocument> Id(Id id) => Assign(a=>a.RouteValues.Optional("id", id));
 
 		///<summary>The name of the index</summary>
-		public IndexDescriptor<T> Index(IndexName index) => Assign(a=>a.RouteValues.Optional("index", index));
+		public IndexDescriptor<TDocument> Index(IndexName index) => Assign(a=>a.RouteValues.Optional("index", index));
 
 		///<summary>The name of the index</summary>
-		public IndexDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (IndexName)typeof(TOther)));
+		public IndexDescriptor<TDocument> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (IndexName)typeof(TOther)));
 
 		///<summary>The type of the document</summary>
-		public IndexDescriptor<T> Type(TypeName type) => Assign(a=>a.RouteValues.Optional("type", type));
+		public IndexDescriptor<TDocument> Type(TypeName type) => Assign(a=>a.RouteValues.Optional("type", type));
 
 		///<summary>The type of the document</summary>
-		public IndexDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (TypeName)typeof(TOther)));
+		public IndexDescriptor<TDocument> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (TypeName)typeof(TOther)));
 
 	
 		///<summary>Explicit write consistency setting for the operation</summary>
-		public IndexDescriptor<T> Consistency(Consistency consistency) => AssignParam(p=>p.Consistency(consistency));
+		public IndexDescriptor<TDocument> Consistency(Consistency consistency) => AssignParam(p=>p.Consistency(consistency));
 
 		///<summary>Explicit operation type</summary>
-		public IndexDescriptor<T> OpType(OpType op_type) => AssignParam(p=>p.OpType(op_type));
+		public IndexDescriptor<TDocument> OpType(OpType op_type) => AssignParam(p=>p.OpType(op_type));
 
 		///<summary>ID of the parent document</summary>
-		public IndexDescriptor<T> Parent(string parent) => AssignParam(p=>p.Parent(parent));
+		public IndexDescriptor<TDocument> Parent(string parent) => AssignParam(p=>p.Parent(parent));
 
 		///<summary>Refresh the index after performing the operation</summary>
-		public IndexDescriptor<T> Refresh(bool refresh = true) => AssignParam(p=>p.Refresh(refresh));
+		public IndexDescriptor<TDocument> Refresh(bool refresh = true) => AssignParam(p=>p.Refresh(refresh));
 
 		///<summary>Specific routing value</summary>
-		public IndexDescriptor<T> Routing(string routing) => AssignParam(p=>p.Routing(routing));
+		public IndexDescriptor<TDocument> Routing(string routing) => AssignParam(p=>p.Routing(routing));
 
 		///<summary>Explicit operation timeout</summary>
-		public IndexDescriptor<T> Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
+		public IndexDescriptor<TDocument> Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
 
 		///<summary>Explicit timestamp for the document</summary>
-		public IndexDescriptor<T> Timestamp(string timestamp) => AssignParam(p=>p.Timestamp(timestamp));
+		public IndexDescriptor<TDocument> Timestamp(string timestamp) => AssignParam(p=>p.Timestamp(timestamp));
 
 		///<summary>Expiration time for the document</summary>
-		public IndexDescriptor<T> Ttl(string ttl) => AssignParam(p=>p.Ttl(ttl));
+		public IndexDescriptor<TDocument> Ttl(string ttl) => AssignParam(p=>p.Ttl(ttl));
 
 		///<summary>Explicit version number for concurrency control</summary>
-		public IndexDescriptor<T> Version(long version) => AssignParam(p=>p.Version(version));
+		public IndexDescriptor<TDocument> Version(long version) => AssignParam(p=>p.Version(version));
 
 		///<summary>Specific version type</summary>
-		public IndexDescriptor<T> VersionType(VersionType version_type) => AssignParam(p=>p.VersionType(version_type));
+		public IndexDescriptor<TDocument> VersionType(VersionType version_type) => AssignParam(p=>p.VersionType(version_type));
 
 		///<summary>The URL-encoded request definition</summary>
-		public IndexDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
+		public IndexDescriptor<TDocument> Source(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public IndexDescriptor<T> FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		public IndexDescriptor<TDocument> FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -3566,11 +3566,11 @@ namespace Nest
 	}
 	
 	///<summary>descriptor for Percolate <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/search-percolate.html</pre></summary>
-	public partial class PercolateDescriptor<T>  : RequestDescriptorBase<PercolateDescriptor<T>,PercolateRequestParameters, IPercolateRequest>, IPercolateRequest
+	public partial class PercolateDescriptor<TDocument>  : RequestDescriptorBase<PercolateDescriptor<TDocument>,PercolateRequestParameters, IPercolateRequest<TDocument>>, IPercolateRequest<TDocument>
 	{ 
-		IndexName IPercolateRequest.Index => Self.RouteValues.Get<IndexName>("index");
-		TypeName IPercolateRequest.Type => Self.RouteValues.Get<TypeName>("type");
-		Id IPercolateRequest.Id => Self.RouteValues.Get<Id>("id");
+		IndexName IPercolateRequest<TDocument>.Index => Self.RouteValues.Get<IndexName>("index");
+		TypeName IPercolateRequest<TDocument>.Type => Self.RouteValues.Get<TypeName>("type");
+		Id IPercolateRequest<TDocument>.Id => Self.RouteValues.Get<Id>("id");
 			/// <summary>/{index}/{type}/_percolate</summary>
 ///<param name="index"> this parameter is required</param>		
 ///<param name="type"> this parameter is required</param>
@@ -3580,66 +3580,66 @@ namespace Nest
 		/// <summary>/{index}/{type}/_percolate</summary>
 		
 ///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
-		public PercolateDescriptor(DocumentPath<T> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
-		partial void DocumentFromPath(T document);
+		public PercolateDescriptor(DocumentPath<TDocument> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
+		partial void DocumentFromPath(TDocument document);
 
 			///<summary>The index of the document being percolated.</summary>
-		public PercolateDescriptor<T> Index(IndexName index) => Assign(a=>a.RouteValues.Optional("index", index));
+		public PercolateDescriptor<TDocument> Index(IndexName index) => Assign(a=>a.RouteValues.Optional("index", index));
 
 		///<summary>The index of the document being percolated.</summary>
-		public PercolateDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (IndexName)typeof(TOther)));
+		public PercolateDescriptor<TDocument> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (IndexName)typeof(TOther)));
 
 		///<summary>The type of the document being percolated.</summary>
-		public PercolateDescriptor<T> Type(TypeName type) => Assign(a=>a.RouteValues.Optional("type", type));
+		public PercolateDescriptor<TDocument> Type(TypeName type) => Assign(a=>a.RouteValues.Optional("type", type));
 
 		///<summary>The type of the document being percolated.</summary>
-		public PercolateDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (TypeName)typeof(TOther)));
+		public PercolateDescriptor<TDocument> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (TypeName)typeof(TOther)));
 
 		///<summary>Substitute the document in the request body with a document that is known by the specified id. On top of the id, the index and type parameter will be used to retrieve the document from within the cluster.</summary>
-		public PercolateDescriptor<T> Id(Id id) => Assign(a=>a.RouteValues.Optional("id", id));
+		public PercolateDescriptor<TDocument> Id(Id id) => Assign(a=>a.RouteValues.Optional("id", id));
 
 	
 		///<summary>A comma-separated list of specific routing values</summary>
-		public PercolateDescriptor<T> Routing(params string[] routing) => AssignParam(p=>p.Routing(routing));
+		public PercolateDescriptor<TDocument> Routing(params string[] routing) => AssignParam(p=>p.Routing(routing));
 
 		///<summary>Specify the node or shard the operation should be performed on (default: random)</summary>
-		public PercolateDescriptor<T> Preference(string preference) => AssignParam(p=>p.Preference(preference));
+		public PercolateDescriptor<TDocument> Preference(string preference) => AssignParam(p=>p.Preference(preference));
 
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public PercolateDescriptor<T> IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
+		public PercolateDescriptor<TDocument> IgnoreUnavailable(bool ignore_unavailable = true) => AssignParam(p=>p.IgnoreUnavailable(ignore_unavailable));
 
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public PercolateDescriptor<T> AllowNoIndices(bool allow_no_indices = true) => AssignParam(p=>p.AllowNoIndices(allow_no_indices));
+		public PercolateDescriptor<TDocument> AllowNoIndices(bool allow_no_indices = true) => AssignParam(p=>p.AllowNoIndices(allow_no_indices));
 
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public PercolateDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards) => AssignParam(p=>p.ExpandWildcards(expand_wildcards));
+		public PercolateDescriptor<TDocument> ExpandWildcards(ExpandWildcards expand_wildcards) => AssignParam(p=>p.ExpandWildcards(expand_wildcards));
 
 		///<summary>The index to percolate the document into. Defaults to index.</summary>
-		public PercolateDescriptor<T> PercolateIndex(string percolate_index) => AssignParam(p=>p.PercolateIndex(percolate_index));
+		public PercolateDescriptor<TDocument> PercolateIndex(string percolate_index) => AssignParam(p=>p.PercolateIndex(percolate_index));
 
 		///<summary>The type to percolate document into. Defaults to type.</summary>
-		public PercolateDescriptor<T> PercolateType(string percolate_type) => AssignParam(p=>p.PercolateType(percolate_type));
+		public PercolateDescriptor<TDocument> PercolateType(string percolate_type) => AssignParam(p=>p.PercolateType(percolate_type));
 
 		///<summary>The routing value to use when percolating the existing document.</summary>
-		public PercolateDescriptor<T> PercolateRouting(string percolate_routing) => AssignParam(p=>p.PercolateRouting(percolate_routing));
+		public PercolateDescriptor<TDocument> PercolateRouting(string percolate_routing) => AssignParam(p=>p.PercolateRouting(percolate_routing));
 
 		///<summary>Which shard to prefer when executing the percolate request.</summary>
-		public PercolateDescriptor<T> PercolatePreference(string percolate_preference) => AssignParam(p=>p.PercolatePreference(percolate_preference));
+		public PercolateDescriptor<TDocument> PercolatePreference(string percolate_preference) => AssignParam(p=>p.PercolatePreference(percolate_preference));
 
 		///<summary>Return an array of matching query IDs instead of objects</summary>
-		public PercolateDescriptor<T> PercolateFormat(PercolateFormat percolate_format) => AssignParam(p=>p.PercolateFormat(percolate_format));
+		public PercolateDescriptor<TDocument> PercolateFormat(PercolateFormat percolate_format) => AssignParam(p=>p.PercolateFormat(percolate_format));
 
 		///<summary>Explicit version number for concurrency control</summary>
-		public PercolateDescriptor<T> Version(long version) => AssignParam(p=>p.Version(version));
+		public PercolateDescriptor<TDocument> Version(long version) => AssignParam(p=>p.Version(version));
 
 		///<summary>Specific version type</summary>
-		public PercolateDescriptor<T> VersionType(VersionType version_type) => AssignParam(p=>p.VersionType(version_type));
+		public PercolateDescriptor<TDocument> VersionType(VersionType version_type) => AssignParam(p=>p.VersionType(version_type));
 
 		///<summary>The URL-encoded request definition</summary>
-		public PercolateDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
+		public PercolateDescriptor<TDocument> Source(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public PercolateDescriptor<T> FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		public PercolateDescriptor<TDocument> FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -4387,11 +4387,11 @@ namespace Nest
 	}
 	
 	///<summary>descriptor for Update <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-update.html</pre></summary>
-	public partial class UpdateDescriptor  : RequestDescriptorBase<UpdateDescriptor,UpdateRequestParameters, IUpdateRequest>, IUpdateRequest
+	public partial class UpdateDescriptor<TDocument,TPartialDocument>  : RequestDescriptorBase<UpdateDescriptor<TDocument,TPartialDocument>,UpdateRequestParameters, IUpdateRequest<TDocument,TPartialDocument>>, IUpdateRequest<TDocument,TPartialDocument>
 	{ 
-		Id IUpdateRequest.Id => Self.RouteValues.Get<Id>("id");
-		IndexName IUpdateRequest.Index => Self.RouteValues.Get<IndexName>("index");
-		TypeName IUpdateRequest.Type => Self.RouteValues.Get<TypeName>("type");
+		Id IUpdateRequest<TDocument,TPartialDocument>.Id => Self.RouteValues.Get<Id>("id");
+		IndexName IUpdateRequest<TDocument,TPartialDocument>.Index => Self.RouteValues.Get<IndexName>("index");
+		TypeName IUpdateRequest<TDocument,TPartialDocument>.Type => Self.RouteValues.Get<TypeName>("type");
 			/// <summary>/{index}/{type}/{id}/_update</summary>
 ///<param name="index"> this parameter is required</param>		
 ///<param name="type"> this parameter is required</param>		
@@ -4399,66 +4399,72 @@ namespace Nest
 		public UpdateDescriptor(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Required("id", id)){}
 		
 
+		/// <summary>/{index}/{type}/{id}/_update</summary>
+		
+///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
+		public UpdateDescriptor(DocumentPath<TDocument> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
+		partial void DocumentFromPath(TDocument document);
+
 			///<summary>The name of the index</summary>
-		public UpdateDescriptor Index(IndexName index) => Assign(a=>a.RouteValues.Optional("index", index));
+		public UpdateDescriptor<TDocument,TPartialDocument> Index(IndexName index) => Assign(a=>a.RouteValues.Optional("index", index));
 
 		///<summary>The name of the index</summary>
-		public UpdateDescriptor Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (IndexName)typeof(TOther)));
+		public UpdateDescriptor<TDocument,TPartialDocument> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (IndexName)typeof(TOther)));
 
 		///<summary>The type of the document</summary>
-		public UpdateDescriptor Type(TypeName type) => Assign(a=>a.RouteValues.Optional("type", type));
+		public UpdateDescriptor<TDocument,TPartialDocument> Type(TypeName type) => Assign(a=>a.RouteValues.Optional("type", type));
 
 		///<summary>The type of the document</summary>
-		public UpdateDescriptor Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (TypeName)typeof(TOther)));
+		public UpdateDescriptor<TDocument,TPartialDocument> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (TypeName)typeof(TOther)));
 
 	
 		///<summary>Explicit write consistency setting for the operation</summary>
-		public UpdateDescriptor Consistency(Consistency consistency) => AssignParam(p=>p.Consistency(consistency));
+		public UpdateDescriptor<TDocument,TPartialDocument> Consistency(Consistency consistency) => AssignParam(p=>p.Consistency(consistency));
 
 		///<summary>The script language (default: groovy)</summary>
-		public UpdateDescriptor Lang(string lang) => AssignParam(p=>p.Lang(lang));
+		public UpdateDescriptor<TDocument,TPartialDocument> Lang(string lang) => AssignParam(p=>p.Lang(lang));
 
 		///<summary>ID of the parent document. Is is only used for routing and when for the upsert request</summary>
-		public UpdateDescriptor Parent(string parent) => AssignParam(p=>p.Parent(parent));
+		public UpdateDescriptor<TDocument,TPartialDocument> Parent(string parent) => AssignParam(p=>p.Parent(parent));
 
 		///<summary>Refresh the index after performing the operation</summary>
-		public UpdateDescriptor Refresh(bool refresh = true) => AssignParam(p=>p.Refresh(refresh));
+		public UpdateDescriptor<TDocument,TPartialDocument> Refresh(bool refresh = true) => AssignParam(p=>p.Refresh(refresh));
 
 		///<summary>Specify how many times should the operation be retried when a conflict occurs (default: 0)</summary>
-		public UpdateDescriptor RetryOnConflict(long retry_on_conflict) => AssignParam(p=>p.RetryOnConflict(retry_on_conflict));
+		public UpdateDescriptor<TDocument,TPartialDocument> RetryOnConflict(long retry_on_conflict) => AssignParam(p=>p.RetryOnConflict(retry_on_conflict));
 
 		///<summary>Specific routing value</summary>
-		public UpdateDescriptor Routing(string routing) => AssignParam(p=>p.Routing(routing));
+		public UpdateDescriptor<TDocument,TPartialDocument> Routing(string routing) => AssignParam(p=>p.Routing(routing));
 
 		///<summary>The URL-encoded script definition (instead of using request body)</summary>
-		public UpdateDescriptor ScriptQueryString(string script) => AssignParam(p=>p.Script(script));
+		public UpdateDescriptor<TDocument,TPartialDocument> ScriptQueryString(string script) => AssignParam(p=>p.Script(script));
 
 		///<summary>The id of a stored script</summary>
-		public UpdateDescriptor ScriptId(string script_id) => AssignParam(p=>p.ScriptId(script_id));
+		public UpdateDescriptor<TDocument,TPartialDocument> ScriptId(string script_id) => AssignParam(p=>p.ScriptId(script_id));
 
 		///<summary>True if the script referenced in script or script_id should be called to perform inserts - defaults to false</summary>
-		public UpdateDescriptor ScriptedUpsert(bool scripted_upsert = true) => AssignParam(p=>p.ScriptedUpsert(scripted_upsert));
+		public UpdateDescriptor<TDocument,TPartialDocument> ScriptedUpsert(bool scripted_upsert = true) => AssignParam(p=>p.ScriptedUpsert(scripted_upsert));
 
 		///<summary>Explicit operation timeout</summary>
-		public UpdateDescriptor Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
+		public UpdateDescriptor<TDocument,TPartialDocument> Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
 
 		///<summary>Explicit timestamp for the document</summary>
-		public UpdateDescriptor Timestamp(string timestamp) => AssignParam(p=>p.Timestamp(timestamp));
+		public UpdateDescriptor<TDocument,TPartialDocument> Timestamp(string timestamp) => AssignParam(p=>p.Timestamp(timestamp));
 
 		///<summary>Expiration time for the document</summary>
-		public UpdateDescriptor Ttl(string ttl) => AssignParam(p=>p.Ttl(ttl));
+		public UpdateDescriptor<TDocument,TPartialDocument> Ttl(string ttl) => AssignParam(p=>p.Ttl(ttl));
 
 		///<summary>Explicit version number for concurrency control</summary>
-		public UpdateDescriptor Version(long version) => AssignParam(p=>p.Version(version));
+		public UpdateDescriptor<TDocument,TPartialDocument> Version(long version) => AssignParam(p=>p.Version(version));
 
 		///<summary>Specific version type</summary>
-		public UpdateDescriptor VersionType(VersionType version_type) => AssignParam(p=>p.VersionType(version_type));
+		public UpdateDescriptor<TDocument,TPartialDocument> VersionType(VersionType version_type) => AssignParam(p=>p.VersionType(version_type));
 
 		///<summary>The URL-encoded request definition</summary>
-		public UpdateDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public UpdateDescriptor<TDocument,TPartialDocument> Source(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public UpdateDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		public UpdateDescriptor<TDocument,TPartialDocument> FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 }
