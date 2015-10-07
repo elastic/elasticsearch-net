@@ -163,15 +163,12 @@ namespace Elasticsearch.Net.Connection
 
 		public IEnumerable<Node> NextNode()
 		{
-			//This outer while loop allows to break out of the view state machine if we need to 
+			//This for loop allows to break out of the view state machine if we need to 
 			//force a refresh (after reseeding connectionpool). We have a hardcoded limit of only
 			//allowing 100 of these refreshes per call
-			var i = 0;
-			var limit = 100;
-			var keepLooping = true; // TODO since we have this control flag, is the hard coded limit still necessary?
-			while(i < limit && keepLooping)
+			var refreshed = false;
+			for(var i = 0; i < 100; i++)
 			{
-				keepLooping = false;
 				if (this.Retried >= this.MaxRetries + 1 || this.IsTakingTooLong) yield break;
 				foreach (var node in this._connectionPool.CreateView())
 				{
@@ -180,11 +177,11 @@ namespace Elasticsearch.Net.Connection
 					if (this.Refresh)
 					{
 						this.Refresh = false;
-						keepLooping = true;
+						refreshed = true;
 						break;
 					}
 				}
-				i++;
+				if (refreshed) continue; else break;
 			}
 		}
 

@@ -14,12 +14,10 @@ namespace Tests.Cat.CatAliases
 	{
 		public CatAliasesApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		static string IndexName { get; } = RandomString();
-
 		public override bool ExpectIsValid => true;
 		public override int ExpectStatusCode => 200;
 		public override HttpMethod HttpMethod => HttpMethod.GET;
-		public override string UrlPath => $"/{IndexName}";
+		public override string UrlPath => "/_cat/aliases";
 
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.CatAliases(),
