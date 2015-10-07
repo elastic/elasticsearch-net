@@ -14,7 +14,7 @@ using Ploeh.AutoFixture;
 
 namespace Tests.Framework
 {
-	public interface IUrlTest
+	public interface IUrlTests
 	{
 		Task Urls();
 	}
