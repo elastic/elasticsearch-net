@@ -874,7 +874,7 @@ namespace Nest
 		public CountDescriptor<T> Routing(string routing) => AssignParam(p=>p.Routing(routing));
 
 		///<summary>Query in the Lucene query string syntax</summary>
-		public CountDescriptor<T> Q(string q) => AssignParam(p=>p.Q(q));
+		public CountDescriptor<T> QueryOnQueryString(string query_on_query_string) => AssignParam(p=>p.QueryOnQueryString(query_on_query_string));
 
 		///<summary>The analyzer to use for the query string</summary>
 		public CountDescriptor<T> Analyzer(string analyzer) => AssignParam(p=>p.Analyzer(analyzer));
@@ -1080,7 +1080,7 @@ namespace Nest
 		public DeleteByQueryDescriptor<T> ExpandWildcards(ExpandWildcards expand_wildcards) => AssignParam(p=>p.ExpandWildcards(expand_wildcards));
 
 		///<summary>Query in the Lucene query string syntax</summary>
-		public DeleteByQueryDescriptor<T> Q(string q) => AssignParam(p=>p.Q(q));
+		public DeleteByQueryDescriptor<T> QueryOnQueryString(string query_on_query_string) => AssignParam(p=>p.QueryOnQueryString(query_on_query_string));
 
 		///<summary>Specific routing value</summary>
 		public DeleteByQueryDescriptor<T> Routing(string routing) => AssignParam(p=>p.Routing(routing));
@@ -1265,7 +1265,7 @@ namespace Nest
 		public ExplainDescriptor<TDocument> Preference(string preference) => AssignParam(p=>p.Preference(preference));
 
 		///<summary>Query in the Lucene query string syntax</summary>
-		public ExplainDescriptor<TDocument> Q(string q) => AssignParam(p=>p.Q(q));
+		public ExplainDescriptor<TDocument> QueryOnQueryString(string query_on_query_string) => AssignParam(p=>p.QueryOnQueryString(query_on_query_string));
 
 		///<summary>Specific routing value</summary>
 		public ExplainDescriptor<TDocument> Routing(string routing) => AssignParam(p=>p.Routing(routing));
@@ -3185,7 +3185,7 @@ namespace Nest
 		public ValidateQueryDescriptor<T> OperationThreading(string operation_threading) => AssignParam(p=>p.OperationThreading(operation_threading));
 
 		///<summary>Query in the Lucene query string syntax</summary>
-		public ValidateQueryDescriptor<T> Q(string q) => AssignParam(p=>p.Q(q));
+		public ValidateQueryDescriptor<T> QueryOnQueryString(string query_on_query_string) => AssignParam(p=>p.QueryOnQueryString(query_on_query_string));
 
 		///<summary>The analyzer to use for the query string</summary>
 		public ValidateQueryDescriptor<T> Analyzer(string analyzer) => AssignParam(p=>p.Analyzer(analyzer));
@@ -3895,7 +3895,7 @@ namespace Nest
 		public SearchExistsDescriptor<T> Routing(string routing) => AssignParam(p=>p.Routing(routing));
 
 		///<summary>Query in the Lucene query string syntax</summary>
-		public SearchExistsDescriptor<T> Q(string q) => AssignParam(p=>p.Q(q));
+		public SearchExistsDescriptor<T> QueryOnQueryString(string query_on_query_string) => AssignParam(p=>p.QueryOnQueryString(query_on_query_string));
 
 		///<summary>The analyzer to use for the query string</summary>
 		public SearchExistsDescriptor<T> Analyzer(string analyzer) => AssignParam(p=>p.Analyzer(analyzer));

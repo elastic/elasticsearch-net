@@ -1178,7 +1178,7 @@ namespace Nest
 		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Query in the Lucene query string syntax</summary>
-		public string Q { get { return Q<string>("q"); } set { Q("q", value); } }
+		public string QueryOnQueryString { get { return Q<string>("q"); } set { Q("q", value); } }
 		
 		///<summary>The analyzer to use for the query string</summary>
 		public string Analyzer { get { return Q<string>("analyzer"); } set { Q("analyzer", value); } }
@@ -1247,7 +1247,7 @@ namespace Nest
 		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Query in the Lucene query string syntax</summary>
-		public string Q { get { return Q<string>("q"); } set { Q("q", value); } }
+		public string QueryOnQueryString { get { return Q<string>("q"); } set { Q("q", value); } }
 		
 		///<summary>The analyzer to use for the query string</summary>
 		public string Analyzer { get { return Q<string>("analyzer"); } set { Q("analyzer", value); } }
@@ -1413,7 +1413,7 @@ namespace Nest
 		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>Query in the Lucene query string syntax</summary>
-		public string Q { get { return Q<string>("q"); } set { Q("q", value); } }
+		public string QueryOnQueryString { get { return Q<string>("q"); } set { Q("q", value); } }
 		
 		///<summary>Specific routing value</summary>
 		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
@@ -1464,7 +1464,7 @@ namespace Nest
 		public ExpandWildcards ExpandWildcards { get { return Q<ExpandWildcards>("expand_wildcards"); } set { Q("expand_wildcards", value); } }
 		
 		///<summary>Query in the Lucene query string syntax</summary>
-		public string Q { get { return Q<string>("q"); } set { Q("q", value); } }
+		public string QueryOnQueryString { get { return Q<string>("q"); } set { Q("q", value); } }
 		
 		///<summary>Specific routing value</summary>
 		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
@@ -1925,7 +1925,7 @@ namespace Nest
 		public string Preference { get { return Q<string>("preference"); } set { Q("preference", value); } }
 		
 		///<summary>Query in the Lucene query string syntax</summary>
-		public string Q { get { return Q<string>("q"); } set { Q("q", value); } }
+		public string QueryOnQueryString { get { return Q<string>("q"); } set { Q("q", value); } }
 		
 		///<summary>Specific routing value</summary>
 		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
@@ -4068,7 +4068,7 @@ namespace Nest
 		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Query in the Lucene query string syntax</summary>
-		public string Q { get { return Q<string>("q"); } set { Q("q", value); } }
+		public string QueryOnQueryString { get { return Q<string>("q"); } set { Q("q", value); } }
 		
 		///<summary>The analyzer to use for the query string</summary>
 		public string Analyzer { get { return Q<string>("analyzer"); } set { Q("analyzer", value); } }
@@ -4137,7 +4137,7 @@ namespace Nest
 		public string Routing { get { return Q<string>("routing"); } set { Q("routing", value); } }
 		
 		///<summary>Query in the Lucene query string syntax</summary>
-		public string Q { get { return Q<string>("q"); } set { Q("q", value); } }
+		public string QueryOnQueryString { get { return Q<string>("q"); } set { Q("q", value); } }
 		
 		///<summary>The analyzer to use for the query string</summary>
 		public string Analyzer { get { return Q<string>("analyzer"); } set { Q("analyzer", value); } }
@@ -5164,7 +5164,7 @@ namespace Nest
 		public string OperationThreading { get { return Q<string>("operation_threading"); } set { Q("operation_threading", value); } }
 		
 		///<summary>Query in the Lucene query string syntax</summary>
-		public string Q { get { return Q<string>("q"); } set { Q("q", value); } }
+		public string QueryOnQueryString { get { return Q<string>("q"); } set { Q("q", value); } }
 		
 		///<summary>The analyzer to use for the query string</summary>
 		public string Analyzer { get { return Q<string>("analyzer"); } set { Q("analyzer", value); } }
@@ -5233,7 +5233,7 @@ namespace Nest
 		public string OperationThreading { get { return Q<string>("operation_threading"); } set { Q("operation_threading", value); } }
 		
 		///<summary>Query in the Lucene query string syntax</summary>
-		public string Q { get { return Q<string>("q"); } set { Q("q", value); } }
+		public string QueryOnQueryString { get { return Q<string>("q"); } set { Q("q", value); } }
 		
 		///<summary>The analyzer to use for the query string</summary>
 		public string Analyzer { get { return Q<string>("analyzer"); } set { Q("analyzer", value); } }

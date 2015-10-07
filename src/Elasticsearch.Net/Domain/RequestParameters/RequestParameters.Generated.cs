@@ -787,7 +787,7 @@ namespace Elasticsearch.Net
 		public CountRequestParameters Routing(string routing) => this.AddQueryString("routing", routing);
 		
 		///<summary>Query in the Lucene query string syntax</summary>
-		public CountRequestParameters Q(string q) => this.AddQueryString("q", q);
+		public CountRequestParameters QueryOnQueryString(string query_on_query_string) => this.AddQueryString("q", query_on_query_string);
 		
 		///<summary>The analyzer to use for the query string</summary>
 		public CountRequestParameters Analyzer(string analyzer) => this.AddQueryString("analyzer", analyzer);
@@ -922,7 +922,7 @@ namespace Elasticsearch.Net
 		public DeleteByQueryRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards) => this.AddQueryString("expand_wildcards", expand_wildcards);
 		
 		///<summary>Query in the Lucene query string syntax</summary>
-		public DeleteByQueryRequestParameters Q(string q) => this.AddQueryString("q", q);
+		public DeleteByQueryRequestParameters QueryOnQueryString(string query_on_query_string) => this.AddQueryString("q", query_on_query_string);
 		
 		///<summary>Specific routing value</summary>
 		public DeleteByQueryRequestParameters Routing(string routing) => this.AddQueryString("routing", routing);
@@ -1049,7 +1049,7 @@ namespace Elasticsearch.Net
 		public ExplainRequestParameters Preference(string preference) => this.AddQueryString("preference", preference);
 		
 		///<summary>Query in the Lucene query string syntax</summary>
-		public ExplainRequestParameters Q(string q) => this.AddQueryString("q", q);
+		public ExplainRequestParameters QueryOnQueryString(string query_on_query_string) => this.AddQueryString("q", query_on_query_string);
 		
 		///<summary>Specific routing value</summary>
 		public ExplainRequestParameters Routing(string routing) => this.AddQueryString("routing", routing);
@@ -2383,7 +2383,7 @@ namespace Elasticsearch.Net
 		public ValidateQueryRequestParameters OperationThreading(string operation_threading) => this.AddQueryString("operation_threading", operation_threading);
 		
 		///<summary>Query in the Lucene query string syntax</summary>
-		public ValidateQueryRequestParameters Q(string q) => this.AddQueryString("q", q);
+		public ValidateQueryRequestParameters QueryOnQueryString(string query_on_query_string) => this.AddQueryString("q", query_on_query_string);
 		
 		///<summary>The analyzer to use for the query string</summary>
 		public ValidateQueryRequestParameters Analyzer(string analyzer) => this.AddQueryString("analyzer", analyzer);
@@ -2900,7 +2900,7 @@ namespace Elasticsearch.Net
 		public SearchExistsRequestParameters Routing(string routing) => this.AddQueryString("routing", routing);
 		
 		///<summary>Query in the Lucene query string syntax</summary>
-		public SearchExistsRequestParameters Q(string q) => this.AddQueryString("q", q);
+		public SearchExistsRequestParameters QueryOnQueryString(string query_on_query_string) => this.AddQueryString("q", query_on_query_string);
 		
 		///<summary>The analyzer to use for the query string</summary>
 		public SearchExistsRequestParameters Analyzer(string analyzer) => this.AddQueryString("analyzer", analyzer);

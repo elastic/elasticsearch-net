@@ -209,6 +209,7 @@ namespace CodeGeneration.LowLevelClient
 					{"_source", "source_enabled"},
 					{"_source_include", "source_include"},
 					{"_source_exclude", "source_exclude"},
+					{"q", "query_on_query_string"},
 				};
 
 				foreach (var kv in globalQueryStringRenames)
