@@ -16,28 +16,33 @@ namespace Tests.Framework
 		where TInitializer : class, TInterface
 		where TInterface : class
 	{
-		private LazyResponses _responses;
-
-		public abstract int ExpectStatusCode { get; }
-		public abstract bool ExpectIsValid { get; }
-
-		public abstract string UrlPath { get; }
-		public abstract HttpMethod HttpMethod { get; }
-
-		protected abstract TInitializer Initializer { get; }
-		protected abstract Func<TDescriptor, TInterface> Fluent { get; }
-		protected virtual TDescriptor ClientDoesThisInternally(TDescriptor d) => d;
-
-		readonly IIntegrationCluster _cluster;
-
-		protected abstract LazyResponses ClientUsage();
-
 		protected ApiTestBase(IIntegrationCluster cluster, EndpointUsage usage)
 		{
 			this._cluster = cluster;
-			this.IntegrationPort = cluster.Node.Port;
+			this._integrationPort = cluster.Node.Port;
 			this._responses = usage.CallOnce(this.ClientUsage);
 		}
+		private readonly IIntegrationCluster _cluster;
+		private readonly LazyResponses _responses;
+		private readonly int _integrationPort;
+
+		protected static string RandomString() => Guid.NewGuid().ToString("N").Substring(0, 8);
+
+		protected abstract LazyResponses ClientUsage();
+		protected virtual void OnBeforeCall(IElasticClient client) { }
+
+		protected abstract int ExpectStatusCode { get; }
+		protected abstract bool ExpectIsValid { get; }
+		protected abstract string UrlPath { get; }
+		protected abstract HttpMethod HttpMethod { get; }
+
+		protected virtual TInitializer Initializer => Activator.CreateInstance<TInitializer>();
+		protected virtual Func<TDescriptor, TInterface> Fluent { get; }
+		protected virtual TDescriptor ClientDoesThisInternally(TDescriptor d) => d;
+
+		protected virtual ConnectionSettings GetConnectionSettings(ConnectionSettings settings) => settings;
+		protected virtual IElasticClient Client => this._cluster.Client(GetConnectionSettings);
+		protected virtual TDescriptor NewDescriptor() => Activator.CreateInstance<TDescriptor>();
 
 
 		protected LazyResponses Calls(
@@ -62,6 +67,7 @@ namespace Tests.Framework
 				return dict;
 			});
 		}
+
 		private void AssertUrl(Uri u)
 		{
 			var paths = (this.UrlPath ?? "").Split(new [] { '?' }, 2);
@@ -69,7 +75,7 @@ namespace Tests.Framework
 			if (paths.Length > 1)
 				query = paths.Last();
 
-			var expectedUri = new UriBuilder("http","localhost", IntegrationPort, path,  "?" + query).Uri;
+			var expectedUri = new UriBuilder("http","localhost", _integrationPort, path,  "?" + query).Uri;
 
 			u.AbsolutePath.Should().Be(expectedUri.AbsolutePath);
 			u = new UriBuilder(u.Scheme, u.Host, u.Port, u.AbsolutePath, u.Query.Replace("pretty=true", "")).Uri;
@@ -101,12 +107,6 @@ namespace Tests.Framework
 
 		[I] protected async Task ReturnsExpectedIsValid() =>
 			await this.AssertOnAllResponses(r=>r.IsValid.Should().Be(this.ExpectIsValid));
-		protected static string RandomString() => Guid.NewGuid().ToString("N").Substring(0, 8);
-		protected int IntegrationPort { get; set; } = 9200;
-		protected virtual ConnectionSettings GetConnectionSettings(ConnectionSettings settings) => settings;
-		protected virtual IElasticClient Client => this._cluster.Client(GetConnectionSettings);
-
-		protected virtual void OnBeforeCall(IElasticClient client) { }
 
 		protected async Task AssertOnAllResponses(Action<TResponse> assert)
 		{
@@ -136,14 +136,13 @@ namespace Tests.Framework
 			await this.AssertOnAllResponses(r => r.CallDetails.HttpMethod.Should().Be(this.HttpMethod));
 
 		[U]
-		protected void SerializesInitializer() =>
+		protected void SerializesRequest() =>
 			this.AssertSerializesAndRoundTrips<TInterface>(this.Initializer);
 
 		[U]
 		protected void SerializesFluent() =>
 			this.AssertSerializesAndRoundTrips(this.Fluent(this.ClientDoesThisInternally(NewDescriptor())));
 
-		protected virtual TDescriptor NewDescriptor() => Activator.CreateInstance<TDescriptor>();
 	}
 
 }

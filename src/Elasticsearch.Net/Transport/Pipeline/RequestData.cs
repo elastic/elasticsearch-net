@@ -20,14 +20,13 @@ namespace Elasticsearch.Net.Connection
 
 		public Uri Uri => new Uri(this.Node.Uri, this.Path).Purify();
 
-		public HttpMethod Method { get; internal set; }
+		public HttpMethod Method { get; private set; }
 		public string Path { get; }
 		public PostData<object> Data { get; }
 		public Node Node { get; internal set; }
 		public TimeSpan RequestTimeout { get; }
 		public int KeepAliveTime { get; }
 		public int KeepAliveInterval { get; }
-
 
 		public bool Pipelined { get; }
 		public bool HttpCompression { get; }

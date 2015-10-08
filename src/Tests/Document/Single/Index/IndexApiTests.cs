@@ -15,19 +15,7 @@ namespace Tests.Document.Single
 	[Collection(IntegrationContext.Indexing)]
 	public class IndexApiTests : ApiTestBase<IIndexResponse, IIndexRequest<Project>, IndexDescriptor<Project>, IndexRequest<Project>>
 	{
-		public IndexApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
-
-		public override string UrlPath => "/project/project/SomeProject?consistency=all&op_type=index&refresh=true&routing=route";
-		public override HttpMethod HttpMethod => HttpMethod.PUT;
-
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.Index<Project>(this.Document, f),
-			fluentAsync: (client, f) => client.IndexAsync<Project>(this.Document, f),
-			request: (client, r) => client.Index(r),
-			requestAsync: (client, r) => client.IndexAsync(r)
-		);
-
-		public Project Document => new Project
+		private Project Document => new Project
 		{
 			State = StateOfBeing.Stable,
 			Name = "SomeProject",
@@ -35,6 +23,19 @@ namespace Tests.Document.Single
 			LastActivity = FixedDate,
 			CuratedTags = new List<Tag> { new Tag { Name = "x", Added = FixedDate } }
 		};
+
+		public IndexApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		protected override LazyResponses ClientUsage() => Calls(
+			fluent: (client, f) => client.Index<Project>(this.Document, f),
+			fluentAsync: (client, f) => client.IndexAsync<Project>(this.Document, f),
+			request: (client, r) => client.Index(r),
+			requestAsync: (client, r) => client.IndexAsync(r)
+		);
+
+		protected override bool ExpectIsValid => true;
+		protected override int ExpectStatusCode => 201;
+		protected override HttpMethod HttpMethod => HttpMethod.PUT;
+		protected override string UrlPath => "/project/project/SomeProject?consistency=all&op_type=index&refresh=true&routing=route";
 
 		protected override object ExpectJson =>
 			new
@@ -46,13 +47,12 @@ namespace Tests.Document.Single
 				curatedTags = new[] { new { name = "x", added = FixedDate } },
 			};
 
+		protected override IndexDescriptor<Project> NewDescriptor() => new IndexDescriptor<Project>(this.Document);
 		protected override Func<IndexDescriptor<Project>, IIndexRequest<Project>> Fluent => s => s
 			.Consistency(Consistency.All)
 			.OpType(OpType.Index)
 			.Refresh()
 			.Routing("route");
-
-		protected override IndexDescriptor<Project> NewDescriptor() => new IndexDescriptor<Project>(this.Document);
 
 		protected override IndexRequest<Project> Initializer =>
 			new IndexRequest<Project>(this.Document)
@@ -63,9 +63,6 @@ namespace Tests.Document.Single
 				Routing = "route"
 			};
 
-		public override int ExpectStatusCode => 201;
-
-		public override bool ExpectIsValid => true;
 	}
 
 	[Collection(IntegrationContext.Indexing)]
@@ -120,7 +117,4 @@ namespace Tests.Document.Single
 		}
 
 	}
-
-
-
 }

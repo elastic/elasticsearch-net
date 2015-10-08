@@ -15,27 +15,24 @@ namespace Tests.Indices.IndexManagement
 	[Collection(IntegrationContext.Indexing)]
 	public class CreateIndexApiTests : ApiTestBase<IIndicesOperationResponse, ICreateIndexRequest, CreateIndexDescriptor, CreateIndexRequest>
 	{
-		public CreateIndexApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
-
 		static string IndexName { get; } = RandomString();
 
-		public override bool ExpectIsValid => true;
-		public override int ExpectStatusCode => 200;
-		public override HttpMethod HttpMethod => HttpMethod.PUT;
-		public override string UrlPath => $"/{IndexName}";
-
+		public CreateIndexApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.CreateIndex(IndexName, f),
 			fluentAsync: (client, f) => client.CreateIndexAsync(IndexName, f),
 			request: (client, r) => client.CreateIndex(r),
 			requestAsync: (client, r) => client.CreateIndexAsync(r)
 		);
-
 		protected override void OnBeforeCall(IElasticClient client)
 		{
 			if (client.IndexExists(IndexName).Exists) client.DeleteIndex(IndexName);
 		}
 
+		protected override bool ExpectIsValid => true;
+		protected override int ExpectStatusCode => 200;
+		protected override HttpMethod HttpMethod => HttpMethod.PUT;
+		protected override string UrlPath => $"/{IndexName}";
 
 		protected override object ExpectJson { get; } = new
 		{

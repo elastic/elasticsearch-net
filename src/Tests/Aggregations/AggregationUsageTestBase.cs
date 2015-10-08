@@ -13,20 +13,17 @@ namespace Tests.Aggregations
 		: ApiTestBase<ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
 	{
 		protected AggregationUsageTestBase(IIntegrationCluster cluster, EndpointUsage usage) : base(cluster, usage) {}
-
-		public override bool ExpectIsValid => true;
-
-		public override int ExpectStatusCode => 200;
-
-		public override HttpMethod HttpMethod => HttpMethod.POST;
-
-		public override string UrlPath => "/project/project/_search";
-
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.Search<Project>(f ),
 			fluentAsync: (client, f) => client.SearchAsync<Project>(f),
 			request: (client, r) => client.Search<Project>(r),
 			requestAsync: (client, r) => client.SearchAsync<Project>(r)
 		);
+
+		protected override bool ExpectIsValid => true;
+		protected override int ExpectStatusCode => 200;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override string UrlPath => "/project/project/_search";
+
 	}
 }

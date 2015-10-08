@@ -17,7 +17,7 @@ namespace Tests.Framework
 {
 	public abstract class SerializationTestBase
 	{
-		protected abstract object ExpectJson { get; }
+		protected virtual object ExpectJson { get; }
 
 		protected string _expectedJsonString;
 		protected JToken _expectedJsonJObject;
