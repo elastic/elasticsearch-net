@@ -99,10 +99,15 @@
     <Compile Include="Cat\CatNodes\CatNodesUrlTests.cs" />
     <Compile Include="Cat\CatPendingTasks\CatPendingTasksApiTests.cs" />
     <Compile Include="Cat\CatPendingTasks\CatPendingTasksUrlTests.cs" />
+    <Compile Include="Cat\CatPlugins\CatPluginsApiTests.cs" />
     <Compile Include="Cat\CatPlugins\CatPluginsUrlTests.cs" />
+    <Compile Include="Cat\CatRecovery\CatRecoveryApiTests.cs" />
     <Compile Include="Cat\CatRecovery\CatRecoveryUrlTests.cs" />
+    <Compile Include="Cat\CatSegments\CatSegmentsApiTests.cs" />
     <Compile Include="Cat\CatSegments\CatSegmentsUrlTests.cs" />
+    <Compile Include="Cat\CatShards\CatShardsApiTests.cs" />
     <Compile Include="Cat\CatShards\CatShardsUrlTests.cs" />
+    <Compile Include="Cat\CatThreadPool\CatThreadpoolApiTests.cs" />
     <Compile Include="Cat\CatThreadPool\CatThreadPoolUrlTests.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\BuildingBlocks\Transports.doc.cs" />
     <Compile Include="ClientConcepts\ConnectionPooling\MaxRetries\RespectsMaxRetry.doc.cs" />
