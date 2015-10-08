@@ -275,6 +275,7 @@
     <Compile Include="Framework\Integration\ReadOnlyCluster.cs" />
     <Compile Include="Framework\SerializationTestBase.cs" />
     <Compile Include="Framework\TestClient.cs" />
+    <Compile Include="Search\Validate\ValidateApiTests.cs" />
     <Compile Include="Search\Validate\ValidateUrlTests.cs" />
   </ItemGroup>
   <ItemGroup>
