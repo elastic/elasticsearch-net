@@ -36,6 +36,9 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "doc")]
 		TPartialDocument Doc { get; set; }
+
+		[JsonProperty(PropertyName = "detect_noop")]
+		bool? DetectNoop { get; set; }
 	}
 
 	internal static class UpdateRequestPathInfo
@@ -99,6 +102,7 @@ namespace Nest
 		public TDocument Upsert { get; set; }
 		public bool? DocAsUpsert { get; set; }
 		public TPartialDocument Doc { get; set; }
+		bool? IUpdateRequest<TDocument, TPartialDocument>.DetectNoop { get; set; }
 	}
 
 	public partial class UpdateDescriptor<TDocument,TPartialDocument> 
@@ -126,7 +130,8 @@ namespace Nest
 
 		TPartialDocument IUpdateRequest<TDocument, TPartialDocument>.Doc { get; set; }
 
-		
+		bool? IUpdateRequest<TDocument, TPartialDocument>.DetectNoop { get; set; }
+
 		public UpdateDescriptor<TDocument, TPartialDocument> Script(string script)
 		{
 			script.ThrowIfNull("script");
@@ -194,7 +199,6 @@ namespace Nest
 			this.Request.RequestParameters.AddQueryString("fields", fields);
 			return this;
 		}
-		
 			
 		///<summary>A comma-separated list of fields to return in the response</summary>
 		public UpdateDescriptor<TDocument,TPartialDocument> Fields(params Expression<Func<TPartialDocument, object>>[] typedPathLookups) 
@@ -205,7 +209,7 @@ namespace Nest
 			this.Request.RequestParameters.AddQueryString("fields",typedPathLookups.Select(e => (PropertyPathMarker)e).ToList());
 			return this;
 		}
-			
+
 		protected override void UpdatePathInfo(IConnectionSettingsValues settings, ElasticsearchPathInfo<UpdateRequestParameters> pathInfo)
 		{
 			UpdateRequestPathInfo.Update(settings, pathInfo, this);

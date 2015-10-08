@@ -7653,6 +7653,14 @@ namespace Nest
 		}
 		
 
+		///<summary>Specifying as true will cause Elasticsearch to check if there are changes and, if there aren’t, turn the update request into a noop.</summary>
+		public UpdateDescriptor<TDocument,TPartialDocument> DetectNoop(bool detect_noop = true)
+		{
+			this.Request.RequestParameters.DetectNoop(detect_noop);
+			return this;
+		}
+		
+
 		///<summary>The script language (default: groovy)</summary>
 		public UpdateDescriptor<TDocument,TPartialDocument> Lang(string lang)
 		{

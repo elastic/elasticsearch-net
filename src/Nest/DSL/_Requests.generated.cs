@@ -7064,6 +7064,14 @@ namespace Nest
 		}
 		
 		
+		///<summary>Specifying as true will cause Elasticsearch to check if there are changes and, if there aren’t, turn the update request into a noop.</summary>
+		public bool DetectNoop 
+		{ 
+			get { return this.Request.RequestParameters.GetQueryStringValue<bool>("detect_noop"); } 
+			set { this.Request.RequestParameters.AddQueryString("detect_noop", value); }
+		}
+		
+		
 		///<summary>The script language (default: groovy)</summary>
 		public string Lang 
 		{ 
