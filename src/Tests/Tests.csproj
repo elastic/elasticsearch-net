@@ -85,12 +85,19 @@
     <Compile Include="Cat\CatAliases\CatAliasesApiTests.cs" />
     <Compile Include="Cat\CatAllocation\CatAllocationApiTests.cs" />
     <Compile Include="Cat\CatAllocation\CatAllocationUrlTests.cs" />
+    <Compile Include="Cat\CatCount\CatCountApiTests.cs" />
     <Compile Include="Cat\CatCount\CatCountUrlTests.cs" />
+    <Compile Include="Cat\CatFielddata\CatFielddataApiTests.cs" />
     <Compile Include="Cat\CatFielddata\CatFielddataUrlTests.cs" />
+    <Compile Include="Cat\CatHealth\CatHealthApiTests.cs" />
     <Compile Include="Cat\CatHealth\CatHealthUrlTests.cs" />
+    <Compile Include="Cat\CatIndices\CatIndicesApiTests.cs" />
     <Compile Include="Cat\CatIndices\CatIndicesUrlTests.cs" />
+    <Compile Include="Cat\CatMaster\CatMasterApiTests.cs" />
     <Compile Include="Cat\CatMaster\CatMasterUrlTests.cs" />
+    <Compile Include="Cat\CatNodes\CatNodesApiTests.cs" />
     <Compile Include="Cat\CatNodes\CatNodesUrlTests.cs" />
+    <Compile Include="Cat\CatPendingTasks\CatPendingTasksApiTests.cs" />
     <Compile Include="Cat\CatPendingTasks\CatPendingTasksUrlTests.cs" />
     <Compile Include="Cat\CatPlugins\CatPluginsUrlTests.cs" />
     <Compile Include="Cat\CatRecovery\CatRecoveryUrlTests.cs" />
@@ -139,6 +146,7 @@
     <Compile Include="Document\Single\Index\IndexApiTests.cs" />
     <Compile Include="Document\Single\TermVectors\TermVectorsUrlTests.cs" />
     <Compile Include="Framework\CrudTestBase.cs" />
+    <Compile Include="Framework\Integration\ObservableProcess.cs" />
     <Compile Include="Framework\MockResponses\SniffingResponse.cs" />
     <Compile Include="Framework\UrlTests.cs" />
     <Compile Include="Framework\SimpleIntegration.cs" />
