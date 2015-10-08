@@ -130,7 +130,7 @@ namespace Elasticsearch.Net.Connection
 			if (!SetSpecialTypes(responseStream, cs, bytes))
 			{
 				if (this.CustomConverter != null) cs.Body = this.CustomConverter(cs, responseStream) as TReturn;
-				cs.Body = await this._settings.Serializer.DeserializeAsync<TReturn>(responseStream, this.CancellationToken);
+				else cs.Body = await this._settings.Serializer.DeserializeAsync<TReturn>(responseStream, this.CancellationToken);
 			}
 
 			return FinalizeReponse(cs);

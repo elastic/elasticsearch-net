@@ -22,7 +22,6 @@ namespace Nest
 
 	}
 
-
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
