@@ -18,20 +18,17 @@ namespace Tests.Search.Validate
 	{
 		public ValidateApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override bool ExpectIsValid => true;
-
-		protected override int ExpectStatusCode => 200;
-
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-
-		protected override string UrlPath => "/project/project/_validate/query";
-
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (c, f) => c.Validate<Project>(v => v.Query(q => q.MatchAll())),
 			fluentAsync: (c, f) => c.ValidateAsync<Project>(v => v.Query(q => q.MatchAll())),
 			request: (c, r) => c.Validate(new ValidateQueryRequest<Project> { Query = new QueryContainer(new MatchAllQuery()) }),
 			requestAsync: (c, r) => c.ValidateAsync(new ValidateQueryRequest<Project> { Query = new QueryContainer(new MatchAllQuery()) })
 		);
+
+		protected override bool ExpectIsValid => true;
+		protected override int ExpectStatusCode => 200;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override string UrlPath => "/project/project/_validate/query";
 	}
 
 	[Collection(IntegrationContext.ReadOnly)]
@@ -40,13 +37,12 @@ namespace Tests.Search.Validate
 	{
 		public ValidateInvalidQueryApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
-		protected override bool ExpectIsValid => true;
-
-		protected override int ExpectStatusCode => 200;
-
-		protected override HttpMethod HttpMethod => HttpMethod.POST;
-
-		protected override string UrlPath => "/project/project/_validate/query";
+		protected override LazyResponses ClientUsage() => Calls(
+			fluent: (c, f) => c.Validate<Project>(v => _descriptor),
+			fluentAsync: (c, f) => c.ValidateAsync<Project>(v => _descriptor),
+			request: (c, r) => c.Validate(_request),
+			requestAsync: (c, r) => c.ValidateAsync(_request)
+		);
 
 		private ValidateQueryDescriptor<Project> _descriptor = new ValidateQueryDescriptor<Project>()
 			.Query(q => q
@@ -67,12 +63,10 @@ namespace Tests.Search.Validate
 			)
         };
 
-		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (c, f) => c.Validate<Project>(v => _descriptor),
-			fluentAsync: (c, f) => c.ValidateAsync<Project>(v => _descriptor),
-			request: (c, r) => c.Validate(_request),
-			requestAsync: (c, r) => c.ValidateAsync(_request)
-		);
+		protected override bool ExpectIsValid => true;
+		protected override int ExpectStatusCode => 200;
+		protected override HttpMethod HttpMethod => HttpMethod.POST;
+		protected override string UrlPath => "/project/project/_validate/query";
 
 		[I]
 		public async Task IsInvalid() => await this.AssertOnAllResponses(r => r.Valid.Should().BeFalse());
