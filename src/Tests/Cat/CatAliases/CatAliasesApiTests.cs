@@ -20,10 +20,10 @@ namespace Tests.Cat.CatAliases
 			requestAsync: (client, r) => client.CatAliasesAsync(r)
 		);
 
-		public override bool ExpectIsValid => true;
-		public override int ExpectStatusCode => 200;
-		public override HttpMethod HttpMethod => HttpMethod.GET;
-		public override string UrlPath => "/_cat/aliases";
+		protected override bool ExpectIsValid => true;
+		protected override int ExpectStatusCode => 200;
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override string UrlPath => "/_cat/aliases";
 
 	}
 

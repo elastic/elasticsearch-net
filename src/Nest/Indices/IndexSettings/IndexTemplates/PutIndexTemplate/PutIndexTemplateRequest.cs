@@ -21,7 +21,7 @@ namespace Nest
 	public partial class PutIndexTemplateDescriptor 
 	{
 		//TODO Merge this state object onto this descriptor
-		TemplateMapping IPutIndexTemplateRequest.TemplateMapping { get; set; }
+		TemplateMapping IPutIndexTemplateRequest.TemplateMapping { get; set; } = new TemplateMapping();
 
 		/// <summary>
 		/// Initialize the descriptor using the values from for instance a previous Get Template Mapping call.

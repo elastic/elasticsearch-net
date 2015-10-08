@@ -36,7 +36,7 @@ namespace Tests.Framework.Integration
 		public ElasticsearchNodeInfo Info { get; private set; }
 		public int Port { get; private set; }
 
-		private Subject<ManualResetEvent> _blockingSubject = new Subject<ManualResetEvent>();
+		private readonly Subject<ManualResetEvent> _blockingSubject = new Subject<ManualResetEvent>();
 		public IObservable<ManualResetEvent> BootstrapWork { get; }
 
 		public ElasticsearchNode(string elasticsearchVersion, bool runningIntegrations, bool doNotSpwanIfAlreadyRunning)
@@ -66,6 +66,8 @@ namespace Tests.Framework.Integration
 			if (!this.RunningIntegrations) return Observable.Empty<ElasticsearchMessage>();
 
 			this.Stop();
+			var timeout = TimeSpan.FromSeconds(40);
+			var handle = new ManualResetEvent(false);
 
 			if (_doNotSpwanIfAlreadyRunning)
 			{
@@ -75,11 +77,13 @@ namespace Tests.Framework.Integration
 					this.Started = true;
 					this.Port = 9200;
 					this.Info = new ElasticsearchNodeInfo(alreadyUp.Version.Number, "0", alreadyUp.Version.LuceneVersion);
+					this._blockingSubject.OnNext(handle);
 					return Observable.Empty<ElasticsearchMessage>();
 				}
+				if (!handle.WaitOne(timeout, true))
+					throw new ApplicationException($"Could not start tests against already running elasticsearch {timeout}");
 			}
 
-			var handle = new ManualResetEvent(false);
 			this._process = this.CreateProcess(
 				$"-Des.cluster.name={this.ClusterName}",
 				$"-Des.node.name={this.NodeName}"
@@ -88,7 +92,6 @@ namespace Tests.Framework.Integration
 			var observable = Observable.Using(() => _process, process => StartObservableProcess(process));
 			this._processListener = observable.Subscribe(onNext: s => HandleConsoleMessage(s, handle));
 
-			var timeout = TimeSpan.FromSeconds(40);
 			if (!handle.WaitOne(timeout, true))
 				throw new ApplicationException($"Could not start elasticsearch within {timeout}");
 

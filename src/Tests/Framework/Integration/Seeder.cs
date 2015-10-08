@@ -23,6 +23,12 @@ namespace Tests.Framework.Integration
 
 		public void CreateIndicesAndMappings()
 		{
+			var rawFieldsTemplateExists = this.Client.IndexTemplateExists("raw_fields").Exists;
+			//if raw_fields exists assume this cluster is already seeded
+			//sometimes we run against an manually started elasticsearch when writing tests
+			//to cut down on cluster startup times
+			if (rawFieldsTemplateExists) return;
+
 			var putTemplateResult = this.Client.PutIndexTemplate("raw_fields", p => p
 				.Template("*") //match on all created indices
 				.Settings(s => s
@@ -51,6 +57,9 @@ namespace Tests.Framework.Integration
 			putTemplateResult.IsValid.Should().BeTrue();
 
 			var createProjectIndex = this.Client.CreateIndex(typeof(Project), c => c
+				.Aliases(a=>a
+					.Alias("projects-alias")
+				)
 				.Mappings(map => map
 					.Map<Project>(m => m
 						.Properties(props => props
