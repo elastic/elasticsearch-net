@@ -102,7 +102,7 @@ namespace Nest
 		public TDocument Upsert { get; set; }
 		public bool? DocAsUpsert { get; set; }
 		public TPartialDocument Doc { get; set; }
-		public bool? DetectNoop { get; set; }
+		bool? IUpdateRequest<TDocument, TPartialDocument>.DetectNoop { get; set; }
 	}
 
 	public partial class UpdateDescriptor<TDocument,TPartialDocument> 
@@ -207,12 +207,6 @@ namespace Nest
 				return this;
 
 			this.Request.RequestParameters.AddQueryString("fields",typedPathLookups.Select(e => (PropertyPathMarker)e).ToList());
-			return this;
-		}
-
-		public UpdateDescriptor<TDocument, TPartialDocument> DetectNoop(bool detectNoop = true)
-		{
-			Self.DetectNoop = detectNoop;
 			return this;
 		}
 
