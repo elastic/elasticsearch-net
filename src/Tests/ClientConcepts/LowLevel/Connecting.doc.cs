@@ -131,14 +131,6 @@ namespace Tests.ClientConcepts.LowLevel
 				* Allows you to set querystring parameters that have to be added to every request. For instance, if you use a hosted elasticserch provider, and you need need to pass an `apiKey` parameter onto every request.
 				*/
 
-				.SetMaximumAsyncConnections(12)
-				/**
-				* The default `HttpConnection` is unbounded in how many async connection it will start. Do note that the 
-				 * HttpConnection does not use any threads. If you need to throttle this you can use this setting.
-				 * For other `IConnection` implemenations, it can also be a hint to how many persistant connections it should hold,
-				 * i.e the `ThriftConnection` listens to this.
-				*/
-
 				.SetProxy(new Uri("http://myproxy"), "username", "pass")
 				/** Sets proxy information on the connection. */
 

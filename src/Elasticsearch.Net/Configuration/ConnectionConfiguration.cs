@@ -99,11 +99,6 @@ namespace Elasticsearch.Net.Connection
 		bool _disableAutomaticProxyDetection = false;
 		bool IConnectionConfigurationValues.DisableAutomaticProxyDetection => _disableAutomaticProxyDetection;
 		
-		//TODO remove we no longer listen to this, should be solved outside of the client by user IMO. 
-		//in 1.x in practice only our HttpConnection obeyed this
-		int _maximumAsyncConnections;
-		int IConnectionConfigurationValues.MaximumAsyncConnections => _maximumAsyncConnections;
-
 		int? _maxRetries;
 		int? IConnectionConfigurationValues.MaxRetries => _maxRetries;
 
@@ -162,9 +157,9 @@ namespace Elasticsearch.Net.Connection
 			this._serializer = serializer ?? this.DefaultSerializer();
 
 			this._timeout = ConnectionConfiguration.DefaultTimeout;
-			this._maximumAsyncConnections = 0;
 			this._sniffOnConnectionFault = true;
 			this._sniffOnStartup = true;
+			this._sniffLifeSpan = TimeSpan.FromHours(1);
 		}
 
 		T Assign(Action<ConnectionConfiguration<T>> assigner) => Fluent.Assign((T)this, assigner);
@@ -188,6 +183,8 @@ namespace Elasticsearch.Net.Connection
 
 		/// <summary>
 		/// Set the duration after which a cluster state is considered stale and a sniff should be performed again.
+		/// An IConnectionPool has to signal it supports reseeding otherwise sniffing will never happen.
+		/// Defaults to 1 hour.
 		/// Set to null to disable completely. Sniffing will only ever happen on ConnectionPools that return true for SupportsReseeding
 		/// </summary>
 		/// <param name="sniffLifeSpan">The duration a clusterstate is considered fresh, set to null to disable periodic sniffing</param>
@@ -275,13 +272,6 @@ namespace Elasticsearch.Net.Connection
 		/// </pre>
 		/// </summary>
 		public T SetMaxRetryTimeout(TimeSpan maxRetryTimeout) => Assign(a => a._maxRetryTimeout = maxRetryTimeout);
-
-		/// <summary>
-		/// Semaphore asynchronous connections automatically by giving
-		/// it a maximum concurrent connections. 
-		/// </summary>
-		/// <param name="maximum">defaults to 0 (unbounded)</param>
-		public T SetMaximumAsyncConnections(int maximum) => Assign(a => a._maximumAsyncConnections = maximum);
 
 		/// <summary>
 		/// If your connection has to go through proxy use this method to specify the proxy url

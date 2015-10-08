@@ -18,13 +18,6 @@ namespace Elasticsearch.Net.Connection
 		IElasticsearchSerializer Serializer { get; }
 
 		/// <summary>
-		/// When set to a value > 0, this will signal the IConnection what the maximum 
-		/// concurrent connections is, NEST favors IOCP ports over threads but in multi tenant 
-		/// situations this may still proof a valuable throttle
-		/// </summary>
-		int MaximumAsyncConnections { get; }
-		
-		/// <summary>
 		/// The timeout in milliseconds for each request to Elasticsearch
 		/// </summary>
 		TimeSpan Timeout { get; }

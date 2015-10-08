@@ -21,10 +21,10 @@ namespace Elasticsearch.Net.Connection
 		private readonly IMemoryStreamFactory _memoryStreamFactory;
 		private readonly CancellationToken _cancellationToken;
 
-		public IRequestParameters RequestParameters { get; }
-		public IRequestConfiguration RequestConfiguration { get; }
+		private IRequestParameters RequestParameters { get; }
+		private IRequestConfiguration RequestConfiguration { get; }
+
 		public DateTime StartedOn { get; }
-		public virtual DateTime CompletedOn { get; }
 
 		public List<Audit> AuditTrail { get; } = new List<Audit>();
 		private int _retried = 0;
@@ -50,36 +50,64 @@ namespace Elasticsearch.Net.Connection
 
 		public int MaxRetries => Math.Min(this._settings.MaxRetries.GetValueOrDefault(int.MaxValue), this._connectionPool.MaxRetries);
 
-		public void MarkDead(Node node)
-		{
-			var deadUntil = this._dateTimeProvider.DeadTime(node.FailedAttempts, this._settings.DeadTimeout, this._settings.MaxDeadTimeout);
-			node.MarkDead(deadUntil);
-
-			var currentRetryCount = this._retried;
-			this._retried++;
-		}
-
-		public void MarkAlive(Node node) => node.MarkAlive();
-
 		public bool FirstPoolUsageNeedsSniffing =>
 			this._connectionPool.SupportsReseeding && this._settings.SniffsOnStartup && !this._connectionPool.SniffedOnStartup;
 
 		public bool SniffsOnConnectionFailure => this._connectionPool.SupportsReseeding && this._settings.SniffsOnConnectionFault;
 
-		public bool OutOfDateClusterInformation
+		public bool SniffsOnStaleCluster => this._connectionPool.SupportsReseeding && this._settings.SniffInformationLifeSpan.HasValue;
+
+		public bool StaleClusterState
 		{
 			get
 			{
-				if (!this._connectionPool.SupportsReseeding) return false;
-				var sniffLifeSpan = this._settings.SniffInformationLifeSpan;
-				if (!sniffLifeSpan.HasValue) return false;
+				if (!SniffsOnStaleCluster) return false;
+				// ReSharper disable once PossibleInvalidOperationException
+				// already checked by SniffsOnStaleCluster
+				var sniffLifeSpan = this._settings.SniffInformationLifeSpan.Value;
 
 				var now = this._dateTimeProvider.Now();
 				var lastSniff = this._connectionPool.LastUpdate;
 
-				return sniffLifeSpan.Value < (now - lastSniff);
+				return sniffLifeSpan < (now - lastSniff);
 			}
 		}
+
+		TimeSpan PingTimeout =>
+			 this.RequestConfiguration?.ConnectTimeout
+			?? this._settings.PingTimeout
+			?? (this._connectionPool.UsingSsl ? ConnectionConfiguration.DefaultPingTimeoutOnSSL : ConnectionConfiguration.DefaultPingTimeout);
+
+		public bool IsTakingTooLong
+		{
+			get
+			{
+				var timeout = this._settings.MaxRetryTimeout.GetValueOrDefault(this._settings.Timeout);
+				var now = this._dateTimeProvider.Now();
+
+				//we apply a soft margin so that if a request timesout at 59 seconds when the maximum is 60 we also abort.
+				var margin = (timeout.TotalMilliseconds / 100.0) * 98;
+				var marginTimeSpan = TimeSpan.FromMilliseconds(margin);
+				var timespanCall = (now - this.StartedOn);
+				var tookToLong = timespanCall >= marginTimeSpan;
+				return tookToLong;
+			}
+		}
+		
+		public bool Refresh { get; private set; }
+
+		public bool DepleededRetries => this.Retried >= this.MaxRetries + 1 || this.IsTakingTooLong;
+
+		private Auditable Audit(AuditEvent type) => new Auditable(type, this.AuditTrail, this._dateTimeProvider);
+
+		public void MarkDead(Node node)
+		{
+			var deadUntil = this._dateTimeProvider.DeadTime(node.FailedAttempts, this._settings.DeadTimeout, this._settings.MaxDeadTimeout);
+			node.MarkDead(deadUntil);
+			this._retried++;
+		}
+
+		public void MarkAlive(Node node) => node.MarkAlive();
 
 		public void FirstPoolUsage(SemaphoreSlim semaphore)
 		{
@@ -125,7 +153,7 @@ namespace Elasticsearch.Net.Connection
 
 		public void SniffOnStaleCluster()
 		{
-			if (!OutOfDateClusterInformation) return;
+			if (!StaleClusterState) return;
 			using (this.Audit(AuditEvent.SniffOnStaleCluster))
 			{
 				this.Sniff();
@@ -135,31 +163,13 @@ namespace Elasticsearch.Net.Connection
 
 		public async Task SniffOnStaleClusterAsync()
 		{
-			if (!OutOfDateClusterInformation) return;
+			if (!StaleClusterState) return;
 			using (this.Audit(AuditEvent.SniffOnStaleCluster))
 			{
 				await this.SniffAsync();
 				this._connectionPool.SniffedOnStartup = true;
 			}
 		}
-
-		public bool IsTakingTooLong
-		{
-			get
-			{
-				var timeout = this._settings.MaxRetryTimeout.GetValueOrDefault(this._settings.Timeout);
-				var now = this._dateTimeProvider.Now();
-
-				//we apply a soft margin so that if a request timesout at 59 seconds when the maximum is 60 we also abort.
-				var margin = (timeout.TotalMilliseconds / 100.0) * 98;
-				var marginTimeSpan = TimeSpan.FromMilliseconds(margin);
-				var timespanCall = (now - this.StartedOn);
-				var tookToLong = timespanCall >= marginTimeSpan;
-				return tookToLong;
-			}
-		}
-		
-		private bool Refresh { get; set; }
 
 		public IEnumerable<Node> NextNode()
 		{
@@ -169,39 +179,20 @@ namespace Elasticsearch.Net.Connection
 			var refreshed = false;
 			for(var i = 0; i < 100; i++)
 			{
-				if (this.Retried >= this.MaxRetries + 1 || this.IsTakingTooLong) yield break;
-				foreach (var node in this._connectionPool.CreateView())
+				if (this.DepleededRetries) yield break;
+				foreach (var node in this._connectionPool.CreateView().TakeWhile(node => !this.DepleededRetries))
 				{
-					if (this.Retried >= this.MaxRetries + 1 || this.IsTakingTooLong) yield break;
 					yield return node;
-					if (this.Refresh)
-					{
-						this.Refresh = false;
-						refreshed = true;
-						break;
-					}
+					if (!this.Refresh) continue;
+					this.Refresh = false;
+					refreshed = true;
+					break;
 				}
-				if (refreshed) continue; else break;
+				//unless a refresh was requested we will not iterate over more then a single view.
+				//keep in mind refreshes are also still bound to overall maxretry count/timeout.
+				if (!refreshed) break;
 			}
 		}
-
-		public void BadResponse<TReturn>(ref ElasticsearchResponse<TReturn> response, RequestData data, List<ElasticsearchException> seenExceptions)
-			where TReturn : class
-		{
-			var pipelineFailure = PipelineFailure.BadResponse;
-			if (this.IsTakingTooLong) pipelineFailure = PipelineFailure.RetryTimeout;
-			if (this.Retried >= this.MaxRetries) pipelineFailure = PipelineFailure.RetryMaximum;
-
-			Exception seenAggregate = seenExceptions.HasAny() ? new AggregateException(seenExceptions) : null;
-			if (response == null)
-				response = data.CreateResponse<TReturn>(new ElasticsearchException(pipelineFailure, seenAggregate));
-			response.AuditTrail = this.AuditTrail;
-		}
-
-		TimeSpan PingTimeout =>
-			 this.RequestConfiguration?.ConnectTimeout
-			?? this._settings.PingTimeout
-			?? (this._connectionPool.UsingSsl ? ConnectionConfiguration.DefaultPingTimeoutOnSSL : ConnectionConfiguration.DefaultPingTimeout);
 
 		private RequestData CreatePingRequestData(Node node, Auditable audit)
 		{
@@ -252,8 +243,6 @@ namespace Elasticsearch.Net.Connection
 				}
 			}
 		}
-
-		public static void VoidCallHandler(ElasticsearchResponse<Stream> response) { }
 
 		private string SniffPath => "_nodes/_all/settings?flat_settings&timeout=" + this.PingTimeout;
 
@@ -380,7 +369,19 @@ namespace Elasticsearch.Net.Connection
 			}
 		}
 
-		private Auditable Audit(AuditEvent type) => new Auditable(type, this.AuditTrail, this._dateTimeProvider);
+		public void BadResponse<TReturn>(ref ElasticsearchResponse<TReturn> response, RequestData data, List<ElasticsearchException> seenExceptions)
+			where TReturn : class
+		{
+			var pipelineFailure = PipelineFailure.BadResponse;
+			if (this.IsTakingTooLong) pipelineFailure = PipelineFailure.RetryTimeout;
+			if (this.Retried >= this.MaxRetries) pipelineFailure = PipelineFailure.RetryMaximum;
+
+			Exception seenAggregate = seenExceptions.HasAny() ? new AggregateException(seenExceptions) : null;
+			if (response == null)
+				response = data.CreateResponse<TReturn>(new ElasticsearchException(pipelineFailure, seenAggregate));
+			response.AuditTrail = this.AuditTrail;
+		}
+
 
 		public void Dispose()
 		{
