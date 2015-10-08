@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Elasticsearch.Net;
+using FluentAssertions;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
@@ -24,6 +26,11 @@ namespace Tests.Cat.CatAliases
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override string UrlPath => "/_cat/aliases";
+
+		[I] public async Task HasAliases() => await this.AssertOnAllResponses(r =>
+		{
+			r.Records.Should().NotBeEmpty().And.Contain(a => a.Alias == "projects-alias");
+		});
 
 	}
 
