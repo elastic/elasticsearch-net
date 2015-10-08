@@ -83,6 +83,7 @@
     <Compile Include="Analysis\Tokenizers\TokenizerUsageTests.cs" />
     <Compile Include="Cat\CatAliases\CatAliasesUrlTests.cs" />
     <Compile Include="Cat\CatAliases\CatAliasesApiTests.cs" />
+    <Compile Include="Cat\CatAllocation\CatAllocationApiTests.cs" />
     <Compile Include="Cat\CatAllocation\CatAllocationUrlTests.cs" />
     <Compile Include="Cat\CatCount\CatCountUrlTests.cs" />
     <Compile Include="Cat\CatFielddata\CatFielddataUrlTests.cs" />
