@@ -150,6 +150,7 @@
     <Compile Include="Document\Single\Index\IndexUrlTests.cs" />
     <Compile Include="Document\Single\Index\IndexApiTests.cs" />
     <Compile Include="Document\Single\TermVectors\TermVectorsUrlTests.cs" />
+    <Compile Include="Document\Single\Update\UpdateUrlTests.cs" />
     <Compile Include="Framework\CrudTestBase.cs" />
     <Compile Include="Framework\Integration\ObservableProcess.cs" />
     <Compile Include="Framework\MockResponses\SniffingResponse.cs" />
@@ -301,7 +302,6 @@
     <Folder Include="Aggregations\Metric\" />
     <Folder Include="Aggregations\Pipeline\" />
     <Folder Include="Document\Single\Source\" />
-    <Folder Include="Document\Single\Update\" />
     <Folder Include="Migration\" />
     <Folder Include="Modules\" />
     <Folder Include="Plugins\Analysis\Phonetic\" />
