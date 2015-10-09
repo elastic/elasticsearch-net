@@ -32,8 +32,8 @@ namespace Nest
 
 		partial void DocumentFromPath(TDocument document)
 		{
-			this.Document = document;
-			if (document != null)
+			Self.Document = document;
+			if (Self.Document != null)
 				Self.RouteValues.Remove("id");
 		}
 	}

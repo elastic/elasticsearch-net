@@ -33,7 +33,15 @@ namespace Nest
 		public IDictionary<FieldName, ISort> Sort { get; set; }
 
 		IRequestParameters IPercolateOperation.GetRequestParameters() => this.RequestState.RequestParameters;
+
+		partial void DocumentFromPath(TDocument document)
+		{
+			Self.Document = document;
+			if (Self.Document != null)
+				Self.RouteValues.Remove("id");
+		}
 	}
+
 	public partial class PercolateDescriptor<TDocument> : IPercolateRequest<TDocument>
 		where TDocument : class
 	{
