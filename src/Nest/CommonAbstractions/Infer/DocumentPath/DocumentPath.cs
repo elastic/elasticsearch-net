@@ -8,6 +8,7 @@ namespace Nest
 		IndexName Index { get; set; }
 		TypeName Type { get; set; }
 	}
+
 	public class DocumentPath<T> : IDocumentPath where T : class
 	{
 		internal IDocumentPath Self => this;

@@ -9,9 +9,10 @@ namespace Elasticsearch.Net.Connection
 	{
 		bool FirstPoolUsageNeedsSniffing { get; }
 		bool SniffsOnConnectionFailure { get; }
-		bool OutOfDateClusterInformation { get; }
+		bool SniffsOnStaleCluster { get; }
+		bool StaleClusterState { get; }
+		
 		DateTime StartedOn { get; }
-		DateTime CompletedOn { get; }
 		bool IsTakingTooLong { get; }
 
 		int Retried { get; }

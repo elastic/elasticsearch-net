@@ -18,11 +18,11 @@ namespace Nest
 	{
 		protected IDateMath Self => this;
 
-		protected Union<DateTime, string> _anchor;
-		Union<DateTime, string> IDateMath.Anchor => _anchor;
+		protected Union<DateTime, string> Anchor;
+		Union<DateTime, string> IDateMath.Anchor => Anchor;
 
-		protected TimeUnit? _round;
-		TimeUnit? IDateMath.Round => _round;
+		protected TimeUnit? Round;
+		TimeUnit? IDateMath.Round => Round;
 
 		IList<Tuple<DateMathOperation, TimeUnitExpression>> IDateMath.Ranges { get; } = new List<Tuple<DateMathOperation, TimeUnitExpression>>();
 
@@ -53,12 +53,12 @@ namespace Nest
 					var nextRangeStart = rangeString.Substring(1).IndexOfAny(new char[] { '+', '-', '/' });
 					if (nextRangeStart == -1) nextRangeStart = rangeString.Length - 1;
 					var unit = rangeString.Substring(1, nextRangeStart);
-					if (rangeString.StartsWith("+"))
+					if (rangeString.StartsWith("+", StringComparison.Ordinal))
 					{
 						math = math.Add(unit);
 						rangeString = rangeString.Substring(nextRangeStart + 1);
 					}
-					else if (rangeString.StartsWith("-"))
+					else if (rangeString.StartsWith("-", StringComparison.Ordinal))
 					{
 						math = math.Subtract(unit);
 						rangeString = rangeString.Substring(nextRangeStart + 1);
@@ -86,7 +86,7 @@ namespace Nest
 			var sb = new StringBuilder();
 			var anchor = Self.Anchor.Match(
 				d => d.ToJsonNetString() + separator,
-				s => s == "now" || s.EndsWith("||") ? s : s + separator
+				s => s == "now" || s.EndsWith("||", StringComparison.Ordinal) ? s : s + separator
 			);
 			sb.Append(anchor);
 			foreach (var r in Self.Ranges)

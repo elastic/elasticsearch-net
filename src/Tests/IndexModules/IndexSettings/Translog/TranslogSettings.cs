@@ -16,7 +16,7 @@ namespace Tests.Aggregations
 		/**
 		 */
 
-		public class Usage : GeneralUsageBase<IIndexSettings, IndexSettingsDescriptor, IndexSettings>
+		public class Usage : UsageTestBase<IIndexSettings, IndexSettingsDescriptor, IndexSettings>
 		{
 			protected override object ExpectJson => new Dictionary<string, object>
 			{

@@ -129,10 +129,11 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case GET:
+					if (AllSet(p.RouteValues.Fields)) return _lowLevel.CatFielddata<T>(p.RouteValues.Fields,u => p.RequestParameters);
 					return _lowLevel.CatFielddata<T>(u => p.RequestParameters);
 
 			}
-			throw InvalidDispatch("CatFielddata", p, new [] { GET }, "/_cat/fielddata");
+			throw InvalidDispatch("CatFielddata", p, new [] { GET }, "/_cat/fielddata", "/_cat/fielddata/{fields}");
 		}
 		
 		internal Task<ElasticsearchResponse<T>> CatFielddataDispatchAsync<T>(IRequest<CatFielddataRequestParameters> p ) where T : class
@@ -140,10 +141,11 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case GET:
+					if (AllSet(p.RouteValues.Fields)) return _lowLevel.CatFielddataAsync<T>(p.RouteValues.Fields,u => p.RequestParameters);
 					return _lowLevel.CatFielddataAsync<T>(u => p.RequestParameters);
 
 			}
-			throw InvalidDispatch("CatFielddata", p, new [] { GET }, "/_cat/fielddata");
+			throw InvalidDispatch("CatFielddata", p, new [] { GET }, "/_cat/fielddata", "/_cat/fielddata/{fields}");
 		}
 		
 		internal ElasticsearchResponse<T> CatHealthDispatch<T>(IRequest<CatHealthRequestParameters> p ) where T : class
@@ -1162,7 +1164,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesDeleteAlias", p, new [] { DELETE }, "/{index}/_alias/{name}", "/{index}/_aliases/{name}");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesDeleteTemplateDispatch<T>(IRequest<DeleteTemplateRequestParameters> p ) where T : class
+		internal ElasticsearchResponse<T> IndicesDeleteTemplateDispatch<T>(IRequest<DeleteIndexTemplateRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1174,7 +1176,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesDeleteTemplate", p, new [] { DELETE }, "/_template/{name}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesDeleteTemplateDispatchAsync<T>(IRequest<DeleteTemplateRequestParameters> p ) where T : class
+		internal Task<ElasticsearchResponse<T>> IndicesDeleteTemplateDispatchAsync<T>(IRequest<DeleteIndexTemplateRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1262,7 +1264,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesExistsAlias", p, new [] { HEAD }, "/_alias/{name}", "/{index}/_alias/{name}", "/{index}/_alias");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesExistsTemplateDispatch<T>(IRequest<TemplateExistsRequestParameters> p ) where T : class
+		internal ElasticsearchResponse<T> IndicesExistsTemplateDispatch<T>(IRequest<IndexTemplateExistsRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1274,7 +1276,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesExistsTemplate", p, new [] { HEAD }, "/_template/{name}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesExistsTemplateDispatchAsync<T>(IRequest<TemplateExistsRequestParameters> p ) where T : class
+		internal Task<ElasticsearchResponse<T>> IndicesExistsTemplateDispatchAsync<T>(IRequest<IndexTemplateExistsRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1461,14 +1463,14 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case GET:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type, p.RouteValues.Field)) return _lowLevel.IndicesGetFieldMapping<T>(p.RouteValues.Index,p.RouteValues.Type,p.RouteValues.Field,u => p.RequestParameters);
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Field)) return _lowLevel.IndicesGetFieldMapping<T>(p.RouteValues.Index,p.RouteValues.Field,u => p.RequestParameters);
-					if (AllSet(p.RouteValues.Type, p.RouteValues.Field)) return _lowLevel.IndicesGetFieldMappingForAll<T>(p.RouteValues.Type,p.RouteValues.Field,u => p.RequestParameters);
-					if (AllSet(p.RouteValues.Field)) return _lowLevel.IndicesGetFieldMappingForAll<T>(p.RouteValues.Field,u => p.RequestParameters);
+					if (AllSet(p.RouteValues.Index, p.RouteValues.Type, p.RouteValues.Fields)) return _lowLevel.IndicesGetFieldMapping<T>(p.RouteValues.Index,p.RouteValues.Type,p.RouteValues.Fields,u => p.RequestParameters);
+					if (AllSet(p.RouteValues.Index, p.RouteValues.Fields)) return _lowLevel.IndicesGetFieldMapping<T>(p.RouteValues.Index,p.RouteValues.Fields,u => p.RequestParameters);
+					if (AllSet(p.RouteValues.Type, p.RouteValues.Fields)) return _lowLevel.IndicesGetFieldMappingForAll<T>(p.RouteValues.Type,p.RouteValues.Fields,u => p.RequestParameters);
+					if (AllSet(p.RouteValues.Fields)) return _lowLevel.IndicesGetFieldMappingForAll<T>(p.RouteValues.Fields,u => p.RequestParameters);
 					break;
 
 			}
-			throw InvalidDispatch("IndicesGetFieldMapping", p, new [] { GET }, "/_mapping/field/{field}", "/{index}/_mapping/field/{field}", "/_mapping/{type}/field/{field}", "/{index}/_mapping/{type}/field/{field}");
+			throw InvalidDispatch("IndicesGetFieldMapping", p, new [] { GET }, "/_mapping/field/{fields}", "/{index}/_mapping/field/{fields}", "/_mapping/{type}/field/{fields}", "/{index}/_mapping/{type}/field/{fields}");
 		}
 		
 		internal Task<ElasticsearchResponse<T>> IndicesGetFieldMappingDispatchAsync<T>(IRequest<GetFieldMappingRequestParameters> p ) where T : class
@@ -1476,14 +1478,14 @@ namespace Nest
 			switch(p.HttpMethod)
 			{
 				case GET:
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Type, p.RouteValues.Field)) return _lowLevel.IndicesGetFieldMappingAsync<T>(p.RouteValues.Index,p.RouteValues.Type,p.RouteValues.Field,u => p.RequestParameters);
-					if (AllSet(p.RouteValues.Index, p.RouteValues.Field)) return _lowLevel.IndicesGetFieldMappingAsync<T>(p.RouteValues.Index,p.RouteValues.Field,u => p.RequestParameters);
-					if (AllSet(p.RouteValues.Type, p.RouteValues.Field)) return _lowLevel.IndicesGetFieldMappingForAllAsync<T>(p.RouteValues.Type,p.RouteValues.Field,u => p.RequestParameters);
-					if (AllSet(p.RouteValues.Field)) return _lowLevel.IndicesGetFieldMappingForAllAsync<T>(p.RouteValues.Field,u => p.RequestParameters);
+					if (AllSet(p.RouteValues.Index, p.RouteValues.Type, p.RouteValues.Fields)) return _lowLevel.IndicesGetFieldMappingAsync<T>(p.RouteValues.Index,p.RouteValues.Type,p.RouteValues.Fields,u => p.RequestParameters);
+					if (AllSet(p.RouteValues.Index, p.RouteValues.Fields)) return _lowLevel.IndicesGetFieldMappingAsync<T>(p.RouteValues.Index,p.RouteValues.Fields,u => p.RequestParameters);
+					if (AllSet(p.RouteValues.Type, p.RouteValues.Fields)) return _lowLevel.IndicesGetFieldMappingForAllAsync<T>(p.RouteValues.Type,p.RouteValues.Fields,u => p.RequestParameters);
+					if (AllSet(p.RouteValues.Fields)) return _lowLevel.IndicesGetFieldMappingForAllAsync<T>(p.RouteValues.Fields,u => p.RequestParameters);
 					break;
 
 			}
-			throw InvalidDispatch("IndicesGetFieldMapping", p, new [] { GET }, "/_mapping/field/{field}", "/{index}/_mapping/field/{field}", "/_mapping/{type}/field/{field}", "/{index}/_mapping/{type}/field/{field}");
+			throw InvalidDispatch("IndicesGetFieldMapping", p, new [] { GET }, "/_mapping/field/{fields}", "/{index}/_mapping/field/{fields}", "/_mapping/{type}/field/{fields}", "/{index}/_mapping/{type}/field/{fields}");
 		}
 		
 		internal ElasticsearchResponse<T> IndicesGetMappingDispatch<T>(IRequest<GetMappingRequestParameters> p ) where T : class
@@ -1542,7 +1544,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesGetSettings", p, new [] { GET }, "/_settings", "/{index}/_settings", "/{index}/_settings/{name}", "/_settings/{name}");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesGetTemplateDispatch<T>(IRequest<GetTemplateRequestParameters> p ) where T : class
+		internal ElasticsearchResponse<T> IndicesGetTemplateDispatch<T>(IRequest<GetIndexTemplateRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1554,7 +1556,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesGetTemplate", p, new [] { GET }, "/_template", "/_template/{name}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesGetTemplateDispatchAsync<T>(IRequest<GetTemplateRequestParameters> p ) where T : class
+		internal Task<ElasticsearchResponse<T>> IndicesGetTemplateDispatchAsync<T>(IRequest<GetIndexTemplateRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1744,7 +1746,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesPutMapping", p, new [] { PUT, POST }, "/{index}/{type}/_mapping", "/{index}/_mapping/{type}", "/_mapping/{type}", "/{index}/{type}/_mappings", "/{index}/_mappings/{type}", "/_mappings/{type}");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesPutSettingsDispatch<T>(IRequest<UpdateSettingsRequestParameters> p , object body) where T : class
+		internal ElasticsearchResponse<T> IndicesPutSettingsDispatch<T>(IRequest<UpdateIndexSettingsRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1756,7 +1758,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesPutSettings", p, new [] { PUT }, "/_settings", "/{index}/_settings");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesPutSettingsDispatchAsync<T>(IRequest<UpdateSettingsRequestParameters> p , object body) where T : class
+		internal Task<ElasticsearchResponse<T>> IndicesPutSettingsDispatchAsync<T>(IRequest<UpdateIndexSettingsRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1768,7 +1770,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesPutSettings", p, new [] { PUT }, "/_settings", "/{index}/_settings");
 		}
 		
-		internal ElasticsearchResponse<T> IndicesPutTemplateDispatch<T>(IRequest<PutTemplateRequestParameters> p , object body) where T : class
+		internal ElasticsearchResponse<T> IndicesPutTemplateDispatch<T>(IRequest<PutIndexTemplateRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -1784,7 +1786,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesPutTemplate", p, new [] { PUT, POST }, "/_template/{name}");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> IndicesPutTemplateDispatchAsync<T>(IRequest<PutTemplateRequestParameters> p , object body) where T : class
+		internal Task<ElasticsearchResponse<T>> IndicesPutTemplateDispatchAsync<T>(IRequest<PutIndexTemplateRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{

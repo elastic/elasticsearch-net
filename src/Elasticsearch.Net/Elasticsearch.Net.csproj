@@ -107,7 +107,6 @@
     <Compile Include="Providers\IDateTimeProvider.cs" />
     <Compile Include="ConnectionPool\SingleNodeConnectionPool.cs" />
     <Compile Include="Providers\IMemoryStreamFactory.cs" />
-    <Compile Include="Providers\Sniffer.cs" />
     <Compile Include="ConnectionPool\SniffingConnectionPool.cs" />
     <Compile Include="ConnectionPool\StaticConnectionPool.cs" />
     <Compile Include="Transport\ITransport.cs" />

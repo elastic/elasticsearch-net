@@ -51,7 +51,6 @@ namespace Nest
 		: QueryDescriptorBase<NestedQueryDescriptor<T>, INestedQuery>
 		, INestedQuery where T : class
 	{
-		private INestedQuery Self => this;
 		bool IQuery.Conditionless => NestedQuery.IsConditionless(this);
 		NestedScore? INestedQuery.Score { get; set; }
 		IQueryContainer INestedQuery.Filter { get; set; }

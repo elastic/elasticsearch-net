@@ -12,40 +12,40 @@ namespace Nest
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/cluster-health.html
 		/// </summary>
 		/// <param name="clusterHealthSelector">An optional descriptor to further describe the cluster health operation</param>
-		IHealthResponse ClusterHealth(Func<ClusterHealthDescriptor, IClusterHealthRequest> clusterHealthSelector = null);
+		IClusterHealthResponse ClusterHealth(Func<ClusterHealthDescriptor, IClusterHealthRequest> clusterHealthSelector = null);
 
 		/// <inheritdoc/>
-		IHealthResponse ClusterHealth(IClusterHealthRequest clusterHealthRequest);
+		IClusterHealthResponse ClusterHealth(IClusterHealthRequest clusterHealthRequest);
 
 		/// <inheritdoc/>
-		Task<IHealthResponse> ClusterHealthAsync(Func<ClusterHealthDescriptor, IClusterHealthRequest> clusterHealthSelector = null);
+		Task<IClusterHealthResponse> ClusterHealthAsync(Func<ClusterHealthDescriptor, IClusterHealthRequest> clusterHealthSelector = null);
 
 		/// <inheritdoc/>
-		Task<IHealthResponse> ClusterHealthAsync(IClusterHealthRequest clusterHealthRequest);
+		Task<IClusterHealthResponse> ClusterHealthAsync(IClusterHealthRequest clusterHealthRequest);
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IHealthResponse ClusterHealth(Func<ClusterHealthDescriptor, IClusterHealthRequest> clusterHealthSelector = null) =>
+		public IClusterHealthResponse ClusterHealth(Func<ClusterHealthDescriptor, IClusterHealthRequest> clusterHealthSelector = null) =>
 			this.ClusterHealth(clusterHealthSelector.InvokeOrDefault(new ClusterHealthDescriptor()));
 
 		/// <inheritdoc/>
-		public IHealthResponse ClusterHealth(IClusterHealthRequest clusterHealthRequest) => 
-			this.Dispatcher.Dispatch<IClusterHealthRequest, ClusterHealthRequestParameters, HealthResponse>(
+		public IClusterHealthResponse ClusterHealth(IClusterHealthRequest clusterHealthRequest) => 
+			this.Dispatcher.Dispatch<IClusterHealthRequest, ClusterHealthRequestParameters, ClusterHealthResponse>(
 				clusterHealthRequest,
-				(p, d) => this.LowLevelDispatch.ClusterHealthDispatch<HealthResponse>(p)
+				(p, d) => this.LowLevelDispatch.ClusterHealthDispatch<ClusterHealthResponse>(p)
 			);
 
 		/// <inheritdoc/>
-		public Task<IHealthResponse> ClusterHealthAsync(Func<ClusterHealthDescriptor, IClusterHealthRequest> clusterHealthSelector = null) =>
+		public Task<IClusterHealthResponse> ClusterHealthAsync(Func<ClusterHealthDescriptor, IClusterHealthRequest> clusterHealthSelector = null) =>
 			this.ClusterHealthAsync(clusterHealthSelector.InvokeOrDefault(new ClusterHealthDescriptor()));
 
 		/// <inheritdoc/>
-		public Task<IHealthResponse> ClusterHealthAsync(IClusterHealthRequest clusterHealthRequest) => 
-			this.Dispatcher.DispatchAsync<IClusterHealthRequest, ClusterHealthRequestParameters, HealthResponse, IHealthResponse>(
+		public Task<IClusterHealthResponse> ClusterHealthAsync(IClusterHealthRequest clusterHealthRequest) => 
+			this.Dispatcher.DispatchAsync<IClusterHealthRequest, ClusterHealthRequestParameters, ClusterHealthResponse, IClusterHealthResponse>(
 				clusterHealthRequest,
-				(p, d) => this.LowLevelDispatch.ClusterHealthDispatchAsync<HealthResponse>(p)
+				(p, d) => this.LowLevelDispatch.ClusterHealthDispatchAsync<ClusterHealthResponse>(p)
 			);
 	}
 }

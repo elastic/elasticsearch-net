@@ -35,7 +35,6 @@ namespace Nest
 						return o.ToObject<CustomAnalyzer>(ElasticContractResolver.Empty);
 					return o.ToObject<LanguageAnalyzer>(ElasticContractResolver.Empty);
 			}
-			return null;
 		}
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)

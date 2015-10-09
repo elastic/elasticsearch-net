@@ -16,7 +16,7 @@ namespace Tests.Aggregations
 		/**
 		 */
 
-		public class Usage : GeneralUsageBase<ISimilarities, SimilaritiesDescriptor, Similarities>
+		public class Usage : UsageTestBase<ISimilarities, SimilaritiesDescriptor, Similarities>
 		{
 			protected override object ExpectJson => new
 			{

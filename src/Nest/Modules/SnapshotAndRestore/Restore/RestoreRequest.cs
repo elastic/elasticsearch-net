@@ -19,7 +19,7 @@ namespace Nest
 		[JsonProperty("rename_replacement")]
 		string RenameReplacement { get; set; }
 		[JsonProperty("index_settings")]
-		IUpdateSettingsRequest IndexSettings { get; set; }
+		IUpdateIndexSettingsRequest IndexSettings { get; set; }
 		[JsonProperty("ignore_index_settings")]
 		List<string> IgnoreIndexSettings { get; set; }
 	}
@@ -35,21 +35,19 @@ namespace Nest
 		public string RenamePattern { get; set; }
 		
 		public string RenameReplacement { get; set; }
-		public IUpdateSettingsRequest IndexSettings { get; set; }
+		public IUpdateIndexSettingsRequest IndexSettings { get; set; }
 		public List<string> IgnoreIndexSettings { get; set; }
 	}
 
 	[DescriptorFor("SnapshotRestore")]
 	public partial class RestoreDescriptor 
 	{
-		private IRestoreRequest Self => this;
-
 		IEnumerable<IndexName> IRestoreRequest.Indices { get; set; }
 		bool? IRestoreRequest.IgnoreUnavailable { get; set; }
 		bool? IRestoreRequest.IncludeGlobalState { get; set; }
 		string IRestoreRequest.RenamePattern { get; set; }
 		string IRestoreRequest.RenameReplacement { get; set; }
-		IUpdateSettingsRequest IRestoreRequest.IndexSettings { get; set; }
+		IUpdateIndexSettingsRequest IRestoreRequest.IndexSettings { get; set; }
 		List<string> IRestoreRequest.IgnoreIndexSettings { get; set; }
 
 		public RestoreDescriptor Index(string index)
@@ -61,59 +59,25 @@ namespace Nest
 		{
 			return this.Indices(typeof(T));
 		}
-			
-		public RestoreDescriptor Indices(params string[] indices)
-		{
-			Self.Indices = indices.Select(s=>(IndexName)s);
-			return this;
-		}
 
-		public RestoreDescriptor Indices(params Type[] indicesTypes)
-		{
-			Self.Indices = indicesTypes.Select(s=>(IndexName)s);
-			return this;
-		}
-		public RestoreDescriptor IgnoreUnavailable(bool ignoreUnavailable = true)
-		{
-			Self.IgnoreUnavailable = ignoreUnavailable;
-			return this;
-		}
-		public RestoreDescriptor IncludeGlobalState(bool includeGlobalState = true)
-		{
-			Self.IncludeGlobalState = includeGlobalState;
-			return this;
-		}
-		public RestoreDescriptor RenamePattern(string renamePattern)
-		{
-			Self.RenamePattern = renamePattern;
-			return this;
-		}
-		public RestoreDescriptor RenameReplacement(string renameReplacement)
-		{
-			Self.RenameReplacement = renameReplacement;
-			return this;
-		}
+		public RestoreDescriptor Indices(params string[] indices) => Assign(a => a.Indices = indices.Select(s => (IndexName) s));
 
-		public RestoreDescriptor IndexSettings(Func<UpdateSettingsDescriptor, UpdateSettingsDescriptor> settingsSelector)
-		{
-			settingsSelector.ThrowIfNull("settings");
-			Self.IndexSettings = settingsSelector(new UpdateSettingsDescriptor());
-			return this;
-		}
+		public RestoreDescriptor Indices(params Type[] indicesTypes) => Assign(a => a.Indices = indicesTypes.Select(s => (IndexName) s));
 
-		public RestoreDescriptor IgnoreIndexSettings(List<string> ignoreIndexSettings)
-		{
-			ignoreIndexSettings.ThrowIfNull("ignoreIndexSettings");
-			Self.IgnoreIndexSettings = ignoreIndexSettings;
-			return this;
-		}
+		public RestoreDescriptor IgnoreUnavailable(bool ignoreUnavailable = true) => Assign(a => a.IgnoreUnavailable = ignoreUnavailable);
 
-		public RestoreDescriptor IgnoreIndexSettings(params string[] ignoreIndexSettings)
-		{
-			ignoreIndexSettings.ThrowIfNull("ignoreIndexSettings");
-			this.IgnoreIndexSettings(ignoreIndexSettings.ToList());
-			return this;
-		}
+		public RestoreDescriptor IncludeGlobalState(bool includeGlobalState = true) => Assign(a => a.IncludeGlobalState = includeGlobalState);
+
+		public RestoreDescriptor RenamePattern(string renamePattern) => Assign(a => a.RenamePattern = renamePattern);
+
+		public RestoreDescriptor RenameReplacement(string renameReplacement) => Assign(a => a.RenameReplacement = renameReplacement);
+
+		public RestoreDescriptor IndexSettings(Func<UpdateIndexSettingsDescriptor, UpdateIndexSettingsDescriptor> settingsSelector) =>
+				Assign(a => a.IndexSettings = settingsSelector?.Invoke(new UpdateIndexSettingsDescriptor()));
+
+		public RestoreDescriptor IgnoreIndexSettings(List<string> ignoreIndexSettings) => Assign(a => a.IgnoreIndexSettings = ignoreIndexSettings);
+
+		public RestoreDescriptor IgnoreIndexSettings(params string[] ignoreIndexSettings) =>Assign(a => a.IgnoreIndexSettings = ignoreIndexSettings.ToListOrNullIfEmpty());
 
 	}
 }

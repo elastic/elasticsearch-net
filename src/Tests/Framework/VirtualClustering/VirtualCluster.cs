@@ -9,7 +9,6 @@ namespace Tests.Framework
 	public class VirtualCluster
 	{
 		private readonly List<Node> _nodes;
-		private IConnectionPool _connectionPool;
 
 		public List<ISniffRule> SniffingRules { get; } = new List<ISniffRule>();
 		public List<IRule> PingingRules { get; } = new List<IRule>();

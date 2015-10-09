@@ -15,6 +15,7 @@ namespace Nest
 	public partial class PutMappingRequest : RequestBase<PutMappingRequestParameters>, IPutMappingRequest
 	{
 		//TODO only needed for read as type, better to have a dedicated json converter subclass that can new an internal constructor
+		[Obsolete("This constructor has to be internal since its not valid to expose publicly")]
 		public PutMappingRequest() { }
 
 		/// <inheritdoc/>

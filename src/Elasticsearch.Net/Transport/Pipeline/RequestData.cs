@@ -20,14 +20,13 @@ namespace Elasticsearch.Net.Connection
 
 		public Uri Uri => new Uri(this.Node.Uri, this.Path).Purify();
 
-		public HttpMethod Method { get; internal set; }
+		public HttpMethod Method { get; private set; }
 		public string Path { get; }
 		public PostData<object> Data { get; }
 		public Node Node { get; internal set; }
 		public TimeSpan RequestTimeout { get; }
 		public int KeepAliveTime { get; }
 		public int KeepAliveInterval { get; }
-
 
 		public bool Pipelined { get; }
 		public bool HttpCompression { get; }
@@ -130,7 +129,7 @@ namespace Elasticsearch.Net.Connection
 			if (!SetSpecialTypes(responseStream, cs, bytes))
 			{
 				if (this.CustomConverter != null) cs.Body = this.CustomConverter(cs, responseStream) as TReturn;
-				cs.Body = await this._settings.Serializer.DeserializeAsync<TReturn>(responseStream, this.CancellationToken);
+				else cs.Body = await this._settings.Serializer.DeserializeAsync<TReturn>(responseStream, this.CancellationToken);
 			}
 
 			return FinalizeReponse(cs);
@@ -139,7 +138,10 @@ namespace Elasticsearch.Net.Connection
 		private static ElasticsearchResponse<TReturn> FinalizeReponse<TReturn>(ElasticsearchResponse<TReturn> cs)
 		{
 			var passAlongConnectionStatus = cs.Body as IBodyWithApiCallDetails;
-			if (passAlongConnectionStatus != null) passAlongConnectionStatus.CallDetails = cs;
+			if (passAlongConnectionStatus != null)
+			{
+				passAlongConnectionStatus.CallDetails = cs;
+			}
 			return cs;
 		}
 

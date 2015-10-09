@@ -8,9 +8,6 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IPercolateOperation
 	{
-
-		Id Id { get; }
-
 		[JsonProperty(PropertyName = "size")]
 		int? Size { get; set; }
 

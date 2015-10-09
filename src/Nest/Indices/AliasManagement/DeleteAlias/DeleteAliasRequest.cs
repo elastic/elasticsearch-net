@@ -11,5 +11,5 @@ namespace Nest
 	public partial class DeleteAliasRequest { }
 
 	[DescriptorFor("IndicesDeleteAlias")]
-	public partial class DeleteAliasDescriptor<T> where T : class { }
+	public partial class DeleteAliasDescriptor { }
 }

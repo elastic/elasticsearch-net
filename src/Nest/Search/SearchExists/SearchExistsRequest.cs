@@ -10,28 +10,36 @@ namespace Nest
 	{
 		[JsonProperty(PropertyName = "query")]
 		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeJsonConverter<QueryContainer>, CustomJsonConverter>))]
-		IQueryContainer Query { get; set; }
+		QueryContainer Query { get; set; }
 
 		[JsonIgnore]
 		string QueryString { get; set; }
 	}
-	//TODO if querystring has source || q || this.Query == null do a GET otherwise POST
+
+	public partial interface ISearchExistsRequest<T> : ISearchExistsRequest { }
 
 	public partial class SearchExistsRequest 
 	{
-		public IQueryContainer Query { get; set; }
+		protected override HttpMethod HttpMethod => this.Query != null ? HttpMethod.POST : HttpMethod.GET;
+		public QueryContainer Query { get; set; }
 
 		public string QueryString { get; set; }
 	}
 
-	//TODO removed typed request variant for now
+	public partial class SearchExistsRequest<T> 
+	{
+		protected override HttpMethod HttpMethod => this.Query != null ? HttpMethod.POST : HttpMethod.GET;
+		public QueryContainer Query { get; set; }
+
+		public string QueryString { get; set; }
+	}
 
 	[DescriptorFor("IndicesExists")]
 	public partial class SearchExistsDescriptor<T> where T : class
 	{
-		private ISearchExistsRequest Self => this;
+		protected override HttpMethod HttpMethod => Self.Query != null ? HttpMethod.POST : HttpMethod.GET;
 
-		IQueryContainer ISearchExistsRequest.Query { get; set; }
+		QueryContainer ISearchExistsRequest.Query { get; set; }
 
 		string ISearchExistsRequest.QueryString { get; set; }
 
@@ -58,15 +66,10 @@ namespace Nest
 			return this.Query(bq);
 		}
 
-		public SearchExistsDescriptor<T> Query(QueryContainer query)
-		{
-			return this.Query((IQueryContainer)query);
-		}
-
 		/// <summary>
 		/// Describe the query to perform using the static Query class
 		/// </summary>
-		public SearchExistsDescriptor<T> Query(IQueryContainer query)
+		public SearchExistsDescriptor<T> Query(QueryContainer query)
 		{
 			if (query == null)
 				return this;

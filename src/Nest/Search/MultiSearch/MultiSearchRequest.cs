@@ -21,8 +21,6 @@ namespace Nest
 	[DescriptorFor("Msearch")]
 	public partial class MultiSearchDescriptor
 	{
-		private IMultiSearchRequest Self => this;
-
 		internal IDictionary<string, ISearchRequest> _operations = new Dictionary<string, ISearchRequest>();
 
 		IDictionary<string, ISearchRequest> IMultiSearchRequest.Operations

@@ -21,11 +21,11 @@ namespace Nest
 		var type = method.DescriptorType + method.DescriptorTypeGeneric;
 	<text>
 	///<summary>descriptor for @method.FullName <pre>@method.Documentation</pre></summary>
-	public partial class @Raw(type) @(Raw(string.Format(" : RequestDescriptorBase<{0},{1}, I{2}>, I{2}", type, method.QueryStringParamName, method.DescriptorType.Replace("Descriptor", "Request"))))
+	public partial class @Raw(type) @(Raw(string.Format(" : RequestDescriptorBase<{0},{1}, {2}>, {2}", type, method.QueryStringParamName, method.InterfaceType)))
 	{ 
 	@foreach (ApiUrlPart part in method.AllParts.Where(p=>!ApiUrl.BlackListRouteValues.Contains(p.Name)))
 	{
-	<text>	@(Raw(part.ClrTypeName)) I@(Raw(method.RequestType)).@(part.InterfaceName) => Self.RouteValues.Get@(Raw(string.Format("<{0}>",part.ClrTypeName)))("@(part.Name)");</text>
+	<text>	@(Raw(part.ClrTypeName)) @(Raw(method.InterfaceType)).@(part.InterfaceName) => Self.RouteValues.Get@(Raw(string.Format("<{0}>",part.ClrTypeName)))("@(part.Name)");</text>
 	}
 	@foreach (Constructor c in method.DescriptorConstructors())
     {
@@ -42,11 +42,16 @@ namespace Nest
     }
 	</text>foreach (KeyValuePair<string, ApiQueryParameters> kv in method.Url.Params)
 	{
+            if (method.Url.Parts != null && method.Url.Parts.ContainsKey(kv.Key))
+            {
+				continue;
+            }
 		var t = @kv.Value.CsharpType(kv.Key);
 		var tSuffix = (t == "bool") ? " = true" : "";
 		var m = kv.Key.ToPascalCase();
 		var mm = (m != "Type" && m != "Index" && m != "Script") ? m : m + "QueryString";
 		var typed = !method.DescriptorTypeGeneric.IsNullOrEmpty();
+		var g = typed ? method.DescriptorTypeGeneric.Replace("<", "").Replace(">", "") : "T";
 		var mml = mm.ToLowerInvariant();
 		var fieldMethod = (mml.Contains("fields") || mml.Contains("sourceinclude") || mml.Contains("sourceexclude") ) && t.Contains("string");
 		<text>
@@ -60,13 +65,13 @@ namespace Nest
 		{
 			<text>
 		///<summary>@kv.Value.Description</summary>
-		public @Raw(type) @mm@(Raw(typed ? "" : "<T>"))(params @Raw("Expression<Func<T, object>>[]") fields) @Raw(typed ? "" : "where T : class") =>
+		public @Raw(type) @mm@(Raw(typed ? "" : "<T>"))(params @Raw("Expression<Func<" + g + ", object>>[]") fields) @Raw(typed ? "" : "where "+ g + " : class") =>
 			AssignParam(p=>p._@(mm)(fields));</text>
 		}
 		else if (mm.ToLowerInvariant().Contains("field") && t.Contains("string"))
 		{<text>
 		///<summary>@kv.Value.Description</summary>
-		public @Raw(type) @mm@(Raw(typed ? "" : "<T>"))(@Raw("Expression<Func<T, object>>") field) @Raw(typed ? "" : "where T : class") =>
+		public @Raw(type) @mm@(Raw(typed ? "" : "<T>"))(@Raw("Expression<Func<"+ g +", object>>") field) @Raw(typed ? "" : "where " + g + " : class") =>
 			AssignParam(p=>p._@(mm)(field));</text>
 		}
 	}

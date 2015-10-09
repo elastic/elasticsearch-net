@@ -4,38 +4,31 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public partial interface IExplainRequest 
+	public partial interface IExplainRequest<TDocument> where TDocument : class
 	{
 		[JsonProperty("query")]
 		IQueryContainer Query { get; set; }
 	}
 
-	//TODO Removed typed variant assert this is ok using new setup
-
-	//TODO port this HttpMethod logic to property
-	//internal static class ExplainPathInfo
-	//{
-	//	public static void Update(RouteValues pathInfo, IExplainRequest request)
-	//	{
-	//		var source = request.RequestParameters.GetQueryStringValue<string>("source");
-	//		var q = request.RequestParameters.GetQueryStringValue<string>("q");
-	//		pathInfo.HttpMethod = (!source.IsNullOrEmpty() || !q.IsNullOrEmpty())
-	//			? HttpMethod.GET
-	//			: HttpMethod.POST;
-	//	}
-	//}
-
-	public partial class ExplainRequest 
+	public partial class ExplainRequest<TDocument> : IExplainRequest<TDocument>
+		where TDocument : class
 	{
+		protected override HttpMethod HttpMethod =>
+			RequestState.RequestParameters?.ContainsKey("_source") == true || RequestState.RequestParameters?.ContainsKey("q")  == true? HttpMethod.GET : HttpMethod.POST;
+
 		public IQueryContainer Query { get; set; }
 	}
 
 	[DescriptorFor("Explain")]
-	public partial class ExplainDescriptor<T> where T : class
+	public partial class ExplainDescriptor<TDocument> : IExplainRequest<TDocument>
+		where TDocument : class
 	{
-		IQueryContainer IExplainRequest.Query { get; set; }
+		protected override HttpMethod HttpMethod =>
+			RequestState.RequestParameters?.ContainsKey("_source") == true || RequestState.RequestParameters?.ContainsKey("q")  == true? HttpMethod.GET : HttpMethod.POST;
 
-		public ExplainDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector) => 
-			Assign(a => a.Query = querySelector?.Invoke(new QueryContainerDescriptor<T>()));
+		IQueryContainer IExplainRequest<TDocument>.Query { get; set; }
+
+		public ExplainDescriptor<TDocument> Query(Func<QueryContainerDescriptor<TDocument>, QueryContainer> querySelector) => 
+			Assign(a => a.Query = querySelector?.Invoke(new QueryContainerDescriptor<TDocument>()));
 	}
 }

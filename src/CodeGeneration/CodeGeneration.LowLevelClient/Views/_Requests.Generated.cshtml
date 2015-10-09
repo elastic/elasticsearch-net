@@ -34,7 +34,7 @@ namespace Nest
 	{
 	<text>
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface I@(method.RequestType) : IRequest@(Raw(string.Format("<{0}>", method.QueryStringParamName))) 
+	public partial interface @(Raw(method.InterfaceType)) : IRequest@(Raw(string.Format("<{0}>", method.QueryStringParamName))) 
 	{</text>
 	foreach (ApiUrlPart part in method.AllParts.Where(p=>!ApiUrl.BlackListRouteValues.Contains(p.Name)))
 	{
@@ -43,11 +43,12 @@ namespace Nest
 	<text> } </text>
 	}
 	<text>///<summary>Request parameters for @method.FullName <pre>@method.Documentation</pre></summary>
-	public partial class @Raw(method.RequestType + method.RequestTypeGeneric) @Raw(string.Format(" : RequestBase<{0}>, I{1}", method.QueryStringParamName, method.RequestType))
+	public partial class @Raw(method.RequestType + method.RequestTypeGeneric) @Raw(string.Format(" : RequestBase<{0}>, {1}", method.QueryStringParamName, method.InterfaceType))
 	{
+		protected @(Raw(method.InterfaceType)) Self => this;
 	@foreach (ApiUrlPart part in method.AllParts.Where(p=>!ApiUrl.BlackListRouteValues.Contains(p.Name)))
 	{
-	<text>	@(Raw(part.ClrTypeName)) I@(Raw(method.RequestType)).@(part.InterfaceName) => Self.RouteValues.Get@(Raw(string.Format("<{0}>",part.ClrTypeName)))("@(part.Name)");</text>
+	<text>	@(Raw(part.ClrTypeName)) @(Raw(method.InterfaceType)).@(part.InterfaceName) => Self.RouteValues.Get@(Raw(string.Format("<{0}>",part.ClrTypeName)))("@(part.Name)");</text>
 	}
 	@foreach (Constructor c in method.RequestConstructors())
     {
@@ -58,6 +59,10 @@ namespace Nest
 	}
 	@foreach (KeyValuePair<string, ApiQueryParameters> kv in method.Url.Params)
 	{
+		if (method.Url.Parts != null && method.Url.Parts.ContainsKey(kv.Key))
+        {
+			continue;
+        }
 		var original = kv.Value.OriginalQueryStringParamName;
 		var cased = kv.Key.ToPascalCase();
 		var mm = (cased != "Type" && cased != "Index" && cased != "Script") ? cased : cased + "QueryString";
@@ -65,7 +70,7 @@ namespace Nest
 		var isFields = (original.Contains("fields") || original.Contains("source_include") || original.Contains("source_exclude"));
 		if (isFields && fieldType.Contains("string"))
 		{
-			fieldType = "IList<FieldName>";
+			fieldType = "FieldNames";
 		}
 		else if (original.Contains("field") && fieldType.Contains("string"))
 		{

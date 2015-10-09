@@ -12,13 +12,13 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <inheritdoc/>
-		IRecoveryStatusResponse RecoveryStatus(Func<RecoveryStatusDescriptor, IRecoveryStatusRequest> selector = null);
+		IRecoveryStatusResponse RecoveryStatus(Indices infices, Func<RecoveryStatusDescriptor, IRecoveryStatusRequest> selector = null);
 
 		/// <inheritdoc/>
 		IRecoveryStatusResponse RecoveryStatus(IRecoveryStatusRequest statusRequest);
 
 		/// <inheritdoc/>
-		Task<IRecoveryStatusResponse> RecoveryStatusAsync(Func<RecoveryStatusDescriptor, IRecoveryStatusRequest> selector = null);
+		Task<IRecoveryStatusResponse> RecoveryStatusAsync(Indices indices, Func<RecoveryStatusDescriptor, IRecoveryStatusRequest> selector = null);
 
 		/// <inheritdoc/>
 		Task<IRecoveryStatusResponse> RecoveryStatusAsync(IRecoveryStatusRequest statusRequest);
@@ -27,8 +27,8 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IRecoveryStatusResponse RecoveryStatus(Func<RecoveryStatusDescriptor, IRecoveryStatusRequest> selector = null) =>
-			this.RecoveryStatus(selector.InvokeOrDefault(new RecoveryStatusDescriptor()));
+		public IRecoveryStatusResponse RecoveryStatus(Indices indices, Func<RecoveryStatusDescriptor, IRecoveryStatusRequest> selector = null) =>
+			this.RecoveryStatus(selector.InvokeOrDefault(new RecoveryStatusDescriptor().Index(indices)));
 
 		/// <inheritdoc/>
 		public IRecoveryStatusResponse RecoveryStatus(IRecoveryStatusRequest statusRequest) => 
@@ -39,8 +39,8 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<IRecoveryStatusResponse> RecoveryStatusAsync(Func<RecoveryStatusDescriptor, IRecoveryStatusRequest> selector = null) => 
-			this.RecoveryStatusAsync(selector.InvokeOrDefault(new RecoveryStatusDescriptor()));
+		public Task<IRecoveryStatusResponse> RecoveryStatusAsync(Indices indices, Func<RecoveryStatusDescriptor, IRecoveryStatusRequest> selector = null) => 
+			this.RecoveryStatusAsync(selector.InvokeOrDefault(new RecoveryStatusDescriptor().Index(indices)));
 
 		/// <inheritdoc/>
 		public Task<IRecoveryStatusResponse> RecoveryStatusAsync(IRecoveryStatusRequest statusRequest) => 

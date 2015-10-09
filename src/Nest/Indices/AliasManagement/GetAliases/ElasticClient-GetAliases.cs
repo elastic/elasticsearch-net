@@ -18,13 +18,13 @@ namespace Nest
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-aliases.html#alias-retrieving
 		/// </summary>
 		/// <param name="getAliasesDescriptor">A descriptor that describes which aliases/indexes we are interested int</param>
-		IGetAliasesResponse GetAliases(Func<GetAliasesDescriptor, IGetAliasesRequest> getAliasesDescriptor);
+		IGetAliasesResponse GetAliases(Func<GetAliasesDescriptor, IGetAliasesRequest> getAliasesDescriptor=null);
 
 		/// <inheritdoc/>
 		IGetAliasesResponse GetAliases(IGetAliasesRequest getAliasesRequest);
 
 		/// <inheritdoc/>
-		Task<IGetAliasesResponse> GetAliasesAsync(Func<GetAliasesDescriptor, IGetAliasesRequest> getAliasesDescriptor);
+		Task<IGetAliasesResponse> GetAliasesAsync(Func<GetAliasesDescriptor, IGetAliasesRequest> getAliasesDescriptor=null);
 
 		/// <inheritdoc/>
 		Task<IGetAliasesResponse> GetAliasesAsync(IGetAliasesRequest getAliasesRequest);
@@ -34,8 +34,8 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IGetAliasesResponse GetAliases(Func<GetAliasesDescriptor, IGetAliasesRequest> getAliasesDescriptor) =>
-			this.GetAliases(getAliasesDescriptor?.Invoke(new GetAliasesDescriptor()));
+		public IGetAliasesResponse GetAliases(Func<GetAliasesDescriptor, IGetAliasesRequest> getAliasesDescriptor=null) =>
+			this.GetAliases(getAliasesDescriptor.InvokeOrDefault(new GetAliasesDescriptor()));
 
 		/// <inheritdoc/>
 		public IGetAliasesResponse GetAliases(IGetAliasesRequest getAliasesRequest) => 
@@ -46,8 +46,8 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<IGetAliasesResponse> GetAliasesAsync(Func<GetAliasesDescriptor, IGetAliasesRequest> getAliasesDescriptor) =>
-			this.GetAliasesAsync(getAliasesDescriptor?.Invoke(new GetAliasesDescriptor()));
+		public Task<IGetAliasesResponse> GetAliasesAsync(Func<GetAliasesDescriptor, IGetAliasesRequest> getAliasesDescriptor = null) =>
+			this.GetAliasesAsync(getAliasesDescriptor.InvokeOrDefault(new GetAliasesDescriptor()));
 
 		/// <inheritdoc/>
 		public Task<IGetAliasesResponse> GetAliasesAsync(IGetAliasesRequest getAliasesRequest) => 

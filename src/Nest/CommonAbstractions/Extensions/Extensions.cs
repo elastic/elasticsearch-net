@@ -21,6 +21,10 @@ namespace Nest
 			where T: class, TReturn where TReturn: class =>
 			func?.Invoke(@default) ?? @default;
 		
+		internal static TReturn InvokeOrDefault<T1, T2, TReturn>(this Func<T1, T2, TReturn> func, T1 @default, T2 param2)
+			where T1: class, TReturn where TReturn: class =>
+			func?.Invoke(@default, param2) ?? @default;
+
 		internal static string GetStringValue(this Enum enumValue)
 		{
 			var knownEnum = KnownEnums.Resolve(enumValue);
@@ -152,6 +156,11 @@ namespace Nest
 			return string.IsNullOrEmpty(value);
 		}
 
+
+		internal static void ForEach<T>(this IEnumerable<T> enumerable, Action<T> handler)
+		{
+			foreach (T item in enumerable) handler(item);
+		}
 
 		internal static void ForEachWithIndex<T>(this IEnumerable<T> enumerable, Action<T, int> handler)
 		{

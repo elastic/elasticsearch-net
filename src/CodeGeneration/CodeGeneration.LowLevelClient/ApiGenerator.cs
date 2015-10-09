@@ -106,7 +106,7 @@ namespace CodeGeneration.LowLevelClient
 		{
 			var json = File.ReadAllText(jsonFile);
 			var endpoint = JsonConvert.DeserializeObject<Dictionary<string, ApiEndpoint>>(json).First();
-			endpoint.Value.CsharpMethodName = CreateMethodName(endpoint.Key, endpoint.Value);
+			endpoint.Value.CsharpMethodName = CreateMethodName(endpoint.Key);
 			return endpoint;
 		}
 
@@ -131,7 +131,7 @@ namespace CodeGeneration.LowLevelClient
 		private static readonly Dictionary<string, string> KnownDescriptors =
 			(from f in new DirectoryInfo(_nestFolder).GetFiles("*Request.cs", SearchOption.AllDirectories)
 			 let contents = File.ReadAllText(f.FullName)
-			 let c = Regex.Replace(contents, @"^.+class ([^ \r\n]+Descriptor[^ \r\n]*).*$", "$1", RegexOptions.Singleline)
+			 let c = Regex.Replace(contents, @"^.+class ([^ \r\n]+Descriptor(?:<[^>\r\n]+>)?[^ \r\n]*).*$", "$1", RegexOptions.Singleline)
 			 select new { Key = Regex.Replace(c, "<.*$", ""), Value = Regex.Replace(c, @"^.*?(?:(\<.+>).*?)?$", "$1") })
 			.DistinctBy(v => v.Key)
 			.OrderBy(v=>v.Key)
@@ -140,7 +140,7 @@ namespace CodeGeneration.LowLevelClient
 		private static readonly Dictionary<string, string> KnownRequests =
 			(from f in new DirectoryInfo(_nestFolder).GetFiles("*Request.cs", SearchOption.AllDirectories)
 			 let contents = File.ReadAllText(f.FullName)
-			 let c = Regex.Replace(contents, @"^.+interface ([^ \r\n]+).*$", "$1", RegexOptions.Singleline)
+			 let c = Regex.Replace(contents, @"^.+interface ([^ \r\n]+Request(?:<[^>\r\n]+>)?[^ \r\n]*).*$", "$1", RegexOptions.Singleline)
 			 where c.StartsWith("I") && c.Contains("Request")
 			 select new { Key = Regex.Replace(c, "<.*$", ""), Value = Regex.Replace(c, @"^.*?(?:(\<.+>).*?)?$", "$1") })
 			.DistinctBy(v => v.Key)
@@ -152,7 +152,6 @@ namespace CodeGeneration.LowLevelClient
 		public static void PatchMethod(CsharpMethod method)
 		{
 			Func<string, bool> ms = (s) => method.FullName.StartsWith(s);
-			Func<string, bool> mc = (s) => method.FullName.Contains(s);
 			Func<string, bool> pc = (s) => method.Path.Contains(s);
 
 			if (ms("Indices") && !pc("{index}"))
@@ -213,6 +212,7 @@ namespace CodeGeneration.LowLevelClient
 					{"_source", "source_enabled"},
 					{"_source_include", "source_include"},
 					{"_source_exclude", "source_exclude"},
+					{"q", "query_on_query_string"},
 				};
 
 				foreach (var kv in globalQueryStringRenames)
@@ -258,7 +258,7 @@ namespace CodeGeneration.LowLevelClient
 
 		}
 
-		public static string CreateMethodName(string apiEnpointKey, ApiEndpoint endpoint)
+		public static string CreateMethodName(string apiEnpointKey)
 		{
 			return PascalCase(apiEnpointKey);
 		}

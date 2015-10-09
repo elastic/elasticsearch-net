@@ -21,8 +21,6 @@ namespace Nest
 	[DescriptorFor("Mpercolate")]
 	public partial class MultiPercolateDescriptor 
 	{
-		private IMultiPercolateRequest Self => this;
-
 		IList<IPercolateOperation> IMultiPercolateRequest.Percolations { get; set; }
 
 		public MultiPercolateDescriptor Percolate<T>(Func<PercolateDescriptor<T>, PercolateDescriptor<T>> getSelector) 
@@ -30,7 +28,7 @@ namespace Nest
 		{
 			getSelector.ThrowIfNull("getSelector");
 			var descriptor = getSelector(new PercolateDescriptor<T>(typeof(T), typeof(T)));
-			Self.Percolations.Add(descriptor);
+			((IMultiPercolateRequest)this).Percolations.Add(descriptor);
 			return this;
 		}
 
@@ -41,7 +39,7 @@ namespace Nest
 			{
 				getSelector.ThrowIfNull("getSelector");
 				var descriptor = getSelector(new PercolateDescriptor<T>(typeof(T), typeof(T)), source);
-				Self.Percolations.Add(descriptor);
+				((IMultiPercolateRequest)this).Percolations.Add(descriptor);
 			}
 			return this;
 		}
@@ -51,7 +49,7 @@ namespace Nest
 		{
 			getSelector.ThrowIfNull("getSelector");
 			var descriptor = getSelector(new PercolateCountDescriptor<T>(typeof(T), typeof(T)));
-			Self.Percolations.Add(descriptor);
+			((IMultiPercolateRequest)this).Percolations.Add(descriptor);
 			return this;
 		}
 	}

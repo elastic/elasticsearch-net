@@ -12,13 +12,13 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <inheritdoc/>
-		IPutSearchTemplateResponse PutSearchTemplate(Id id, Func<PutSearchTemplateDescriptor, IPutSearchTemplateRequest> selector = null);
+		IPutSearchTemplateResponse PutSearchTemplate(Id id, Func<PutSearchTemplateDescriptor, IPutSearchTemplateRequest> selector);
 
 		/// <inheritdoc/>
 		IPutSearchTemplateResponse PutSearchTemplate(IPutSearchTemplateRequest request);
 
 		/// <inheritdoc/>
-		Task<IPutSearchTemplateResponse> PutSearchTemplateAsync(Id id, Func<PutSearchTemplateDescriptor, IPutSearchTemplateRequest> selector = null);
+		Task<IPutSearchTemplateResponse> PutSearchTemplateAsync(Id id, Func<PutSearchTemplateDescriptor, IPutSearchTemplateRequest> selector);
 
 		/// <inheritdoc/>
 		Task<IPutSearchTemplateResponse> PutSearchTemplateAsync(IPutSearchTemplateRequest request);
@@ -27,8 +27,8 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IPutSearchTemplateResponse PutSearchTemplate(Id id, Func<PutSearchTemplateDescriptor, IPutSearchTemplateRequest> selector = null) =>
-			this.PutSearchTemplate(selector.InvokeOrDefault(new PutSearchTemplateDescriptor(id)));
+		public IPutSearchTemplateResponse PutSearchTemplate(Id id, Func<PutSearchTemplateDescriptor, IPutSearchTemplateRequest> selector) =>
+			this.PutSearchTemplate(selector?.Invoke(new PutSearchTemplateDescriptor(id)));
 
 		/// <inheritdoc/>
 		public IPutSearchTemplateResponse PutSearchTemplate(IPutSearchTemplateRequest request) => 
@@ -38,8 +38,8 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<IPutSearchTemplateResponse> PutSearchTemplateAsync(Id id, Func<PutSearchTemplateDescriptor, IPutSearchTemplateRequest> selector = null) => 
-			this.PutSearchTemplateAsync(selector.InvokeOrDefault(new PutSearchTemplateDescriptor(id)));
+		public Task<IPutSearchTemplateResponse> PutSearchTemplateAsync(Id id, Func<PutSearchTemplateDescriptor, IPutSearchTemplateRequest> selector) => 
+			this.PutSearchTemplateAsync(selector?.Invoke(new PutSearchTemplateDescriptor(id)));
 
 		/// <inheritdoc/>
 		public Task<IPutSearchTemplateResponse> PutSearchTemplateAsync(IPutSearchTemplateRequest request) => 

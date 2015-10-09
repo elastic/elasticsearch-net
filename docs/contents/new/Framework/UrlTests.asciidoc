@@ -1,0 +1,8 @@
+[source, csharp]
+----
+var callDetails = call(this.GetClient()).CallDetails;
+var callDetails = (await call(this.GetClient())).CallDetails;
+var url = callDetails.Uri.AbsolutePath;
+url.Should().Be(this.ExpectedUrl);
+callDetails.HttpMethod.Should().Be(this.ExpectedHttpMethod, typeOfCall);
+----

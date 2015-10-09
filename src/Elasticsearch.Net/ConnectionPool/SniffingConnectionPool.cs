@@ -53,7 +53,7 @@ namespace Elasticsearch.Net.ConnectionPool
 					.ToList();
 
 				this.InternalNodes = sortedNodes;
-				this._globalCursor = -1;
+				this.GlobalCursor = -1;
 				this.LastUpdate = this.DateTimeProvider.Now();
 			}
 			finally

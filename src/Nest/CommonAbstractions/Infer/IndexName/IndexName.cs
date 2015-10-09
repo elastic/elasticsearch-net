@@ -63,8 +63,11 @@ namespace Nest
 			return false;
 		}
 
-		public string GetString(IConnectionConfigurationValues settings) => ((IUrlParameter)Indices.Single(this)).GetString(settings);
+		public string GetString(IConnectionConfigurationValues settings) => ((IUrlParameter)(Indices)(Indices.Index(this))).GetString(settings);
 
 		public static IndexName From<T>() => typeof(T);
+
+		public Indices And<T>() => new Indices(new IndexName[] { this, typeof(T)});
+		public Indices And(IndexName index) => new Indices(new IndexName[] { this, index});
 	}
 }

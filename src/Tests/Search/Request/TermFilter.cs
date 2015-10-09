@@ -13,7 +13,7 @@ namespace Tests.Search.Request
 		 * The from parameter defines the offset from the first result you want to fetch. 
 		 * The size parameter allows you to configure the maximum amount of hits to be returned.
 		 */
-		public class Usage : GeneralUsageBase<ITermQuery, TermQueryDescriptor<Project>, TermQuery>
+		public class Usage : UsageTestBase<ITermQuery, TermQueryDescriptor<Project>, TermQuery>
 		{
 			protected override object ExpectJson =>
 				new { name = new { value = "myvalue" } };
@@ -29,7 +29,7 @@ namespace Tests.Search.Request
 				term => term.OnField("name").Value("myvalue");
 		}
 
-		public class UsageInsideQueryContainer : GeneralUsageBase<IQueryContainer, QueryContainerDescriptor<Project>, QueryContainer>
+		public class UsageInsideQueryContainer : UsageTestBase<IQueryContainer, QueryContainerDescriptor<Project>, QueryContainer>
 		{
 			protected override object ExpectJson =>
 				new { term = new { myfield = new { value = "myvalue" } } };

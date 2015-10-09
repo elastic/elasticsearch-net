@@ -786,7 +786,7 @@ namespace Elasticsearch.Net
 		public CountRequestParameters Routing(string routing) => this.AddQueryString("routing", routing);
 		
 		///<summary>Query in the Lucene query string syntax</summary>
-		public CountRequestParameters Q(string q) => this.AddQueryString("q", q);
+		public CountRequestParameters QueryOnQueryString(string query_on_query_string) => this.AddQueryString("q", query_on_query_string);
 		
 		///<summary>The analyzer to use for the query string</summary>
 		public CountRequestParameters Analyzer(string analyzer) => this.AddQueryString("analyzer", analyzer);
@@ -921,7 +921,7 @@ namespace Elasticsearch.Net
 		public DeleteByQueryRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards) => this.AddQueryString("expand_wildcards", expand_wildcards);
 		
 		///<summary>Query in the Lucene query string syntax</summary>
-		public DeleteByQueryRequestParameters Q(string q) => this.AddQueryString("q", q);
+		public DeleteByQueryRequestParameters QueryOnQueryString(string query_on_query_string) => this.AddQueryString("q", query_on_query_string);
 		
 		///<summary>Specific routing value</summary>
 		public DeleteByQueryRequestParameters Routing(string routing) => this.AddQueryString("routing", routing);
@@ -1048,7 +1048,7 @@ namespace Elasticsearch.Net
 		public ExplainRequestParameters Preference(string preference) => this.AddQueryString("preference", preference);
 		
 		///<summary>Query in the Lucene query string syntax</summary>
-		public ExplainRequestParameters Q(string q) => this.AddQueryString("q", q);
+		public ExplainRequestParameters QueryOnQueryString(string query_on_query_string) => this.AddQueryString("q", query_on_query_string);
 		
 		///<summary>Specific routing value</summary>
 		public ExplainRequestParameters Routing(string routing) => this.AddQueryString("routing", routing);
@@ -1477,20 +1477,20 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html
 	///</pre>
 	///</summary>
-	public class DeleteTemplateRequestParameters : FluentRequestParameters<DeleteTemplateRequestParameters> 
+	public class DeleteIndexTemplateRequestParameters : FluentRequestParameters<DeleteIndexTemplateRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.DELETE;
 		///<summary>Explicit operation timeout</summary>
-		public DeleteTemplateRequestParameters Timeout(string timeout) => this.AddQueryString("timeout", timeout);
+		public DeleteIndexTemplateRequestParameters Timeout(string timeout) => this.AddQueryString("timeout", timeout);
 		
 		///<summary>Specify timeout for connection to master</summary>
-		public DeleteTemplateRequestParameters MasterTimeout(string master_timeout) => this.AddQueryString("master_timeout", master_timeout);
+		public DeleteIndexTemplateRequestParameters MasterTimeout(string master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
 		///<summary>The URL-encoded request definition</summary>
-		public DeleteTemplateRequestParameters Source(string source) => this.AddQueryString("source", source);
+		public DeleteIndexTemplateRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public DeleteTemplateRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		public DeleteIndexTemplateRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -1574,20 +1574,20 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html
 	///</pre>
 	///</summary>
-	public class TemplateExistsRequestParameters : FluentRequestParameters<TemplateExistsRequestParameters> 
+	public class IndexTemplateExistsRequestParameters : FluentRequestParameters<IndexTemplateExistsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.HEAD;
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public TemplateExistsRequestParameters MasterTimeout(string master_timeout) => this.AddQueryString("master_timeout", master_timeout);
+		public IndexTemplateExistsRequestParameters MasterTimeout(string master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public TemplateExistsRequestParameters Local(bool local) => this.AddQueryString("local", local);
+		public IndexTemplateExistsRequestParameters Local(bool local) => this.AddQueryString("local", local);
 		
 		///<summary>The URL-encoded request definition</summary>
-		public TemplateExistsRequestParameters Source(string source) => this.AddQueryString("source", source);
+		public IndexTemplateExistsRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public TemplateExistsRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		public IndexTemplateExistsRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -1857,23 +1857,23 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html
 	///</pre>
 	///</summary>
-	public class GetTemplateRequestParameters : FluentRequestParameters<GetTemplateRequestParameters> 
+	public class GetIndexTemplateRequestParameters : FluentRequestParameters<GetIndexTemplateRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>Return settings in flat format (default: false)</summary>
-		public GetTemplateRequestParameters FlatSettings(bool flat_settings) => this.AddQueryString("flat_settings", flat_settings);
+		public GetIndexTemplateRequestParameters FlatSettings(bool flat_settings) => this.AddQueryString("flat_settings", flat_settings);
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public GetTemplateRequestParameters MasterTimeout(string master_timeout) => this.AddQueryString("master_timeout", master_timeout);
+		public GetIndexTemplateRequestParameters MasterTimeout(string master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
 		///<summary>Return local information, do not retrieve the state from master node (default: false)</summary>
-		public GetTemplateRequestParameters Local(bool local) => this.AddQueryString("local", local);
+		public GetIndexTemplateRequestParameters Local(bool local) => this.AddQueryString("local", local);
 		
 		///<summary>The URL-encoded request definition</summary>
-		public GetTemplateRequestParameters Source(string source) => this.AddQueryString("source", source);
+		public GetIndexTemplateRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public GetTemplateRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		public GetIndexTemplateRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -2065,29 +2065,29 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-update-settings.html
 	///</pre>
 	///</summary>
-	public class UpdateSettingsRequestParameters : FluentRequestParameters<UpdateSettingsRequestParameters> 
+	public class UpdateIndexSettingsRequestParameters : FluentRequestParameters<UpdateIndexSettingsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>Specify timeout for connection to master</summary>
-		public UpdateSettingsRequestParameters MasterTimeout(string master_timeout) => this.AddQueryString("master_timeout", master_timeout);
+		public UpdateIndexSettingsRequestParameters MasterTimeout(string master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
 		///<summary>Whether specified concrete indices should be ignored when unavailable (missing or closed)</summary>
-		public UpdateSettingsRequestParameters IgnoreUnavailable(bool ignore_unavailable) => this.AddQueryString("ignore_unavailable", ignore_unavailable);
+		public UpdateIndexSettingsRequestParameters IgnoreUnavailable(bool ignore_unavailable) => this.AddQueryString("ignore_unavailable", ignore_unavailable);
 		
 		///<summary>Whether to ignore if a wildcard indices expression resolves into no concrete indices. (This includes `_all` string or when no indices have been specified)</summary>
-		public UpdateSettingsRequestParameters AllowNoIndices(bool allow_no_indices) => this.AddQueryString("allow_no_indices", allow_no_indices);
+		public UpdateIndexSettingsRequestParameters AllowNoIndices(bool allow_no_indices) => this.AddQueryString("allow_no_indices", allow_no_indices);
 		
 		///<summary>Whether to expand wildcard expression to concrete indices that are open, closed or both.</summary>
-		public UpdateSettingsRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards) => this.AddQueryString("expand_wildcards", expand_wildcards);
+		public UpdateIndexSettingsRequestParameters ExpandWildcards(ExpandWildcards expand_wildcards) => this.AddQueryString("expand_wildcards", expand_wildcards);
 		
 		///<summary>Return settings in flat format (default: false)</summary>
-		public UpdateSettingsRequestParameters FlatSettings(bool flat_settings) => this.AddQueryString("flat_settings", flat_settings);
+		public UpdateIndexSettingsRequestParameters FlatSettings(bool flat_settings) => this.AddQueryString("flat_settings", flat_settings);
 		
 		///<summary>The URL-encoded request definition</summary>
-		public UpdateSettingsRequestParameters Source(string source) => this.AddQueryString("source", source);
+		public UpdateIndexSettingsRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public UpdateSettingsRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		public UpdateIndexSettingsRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -2096,26 +2096,29 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/master/indices-templates.html
 	///</pre>
 	///</summary>
-	public class PutTemplateRequestParameters : FluentRequestParameters<PutTemplateRequestParameters> 
+	public class PutIndexTemplateRequestParameters : FluentRequestParameters<PutIndexTemplateRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
+		///<summary>The order for this template when merging multiple matching ones (higher numbers are merged later, overriding the lower numbers)</summary>
+		public PutIndexTemplateRequestParameters Order(long order) => this.AddQueryString("order", order);
+		
 		///<summary>Whether the index template should only be added if new or can also replace an existing one</summary>
-		public PutTemplateRequestParameters Create(bool create) => this.AddQueryString("create", create);
+		public PutIndexTemplateRequestParameters Create(bool create) => this.AddQueryString("create", create);
 		
 		///<summary>Explicit operation timeout</summary>
-		public PutTemplateRequestParameters Timeout(string timeout) => this.AddQueryString("timeout", timeout);
+		public PutIndexTemplateRequestParameters Timeout(string timeout) => this.AddQueryString("timeout", timeout);
 		
 		///<summary>Specify timeout for connection to master</summary>
-		public PutTemplateRequestParameters MasterTimeout(string master_timeout) => this.AddQueryString("master_timeout", master_timeout);
+		public PutIndexTemplateRequestParameters MasterTimeout(string master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
 		///<summary>Return settings in flat format (default: false)</summary>
-		public PutTemplateRequestParameters FlatSettings(bool flat_settings) => this.AddQueryString("flat_settings", flat_settings);
+		public PutIndexTemplateRequestParameters FlatSettings(bool flat_settings) => this.AddQueryString("flat_settings", flat_settings);
 		
 		///<summary>The URL-encoded request definition</summary>
-		public PutTemplateRequestParameters Source(string source) => this.AddQueryString("source", source);
+		public PutIndexTemplateRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public PutTemplateRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		public PutIndexTemplateRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -2379,7 +2382,7 @@ namespace Elasticsearch.Net
 		public ValidateQueryRequestParameters OperationThreading(string operation_threading) => this.AddQueryString("operation_threading", operation_threading);
 		
 		///<summary>Query in the Lucene query string syntax</summary>
-		public ValidateQueryRequestParameters Q(string q) => this.AddQueryString("q", q);
+		public ValidateQueryRequestParameters QueryOnQueryString(string query_on_query_string) => this.AddQueryString("q", query_on_query_string);
 		
 		///<summary>The analyzer to use for the query string</summary>
 		public ValidateQueryRequestParameters Analyzer(string analyzer) => this.AddQueryString("analyzer", analyzer);
@@ -2896,7 +2899,7 @@ namespace Elasticsearch.Net
 		public SearchExistsRequestParameters Routing(string routing) => this.AddQueryString("routing", routing);
 		
 		///<summary>Query in the Lucene query string syntax</summary>
-		public SearchExistsRequestParameters Q(string q) => this.AddQueryString("q", q);
+		public SearchExistsRequestParameters QueryOnQueryString(string query_on_query_string) => this.AddQueryString("q", query_on_query_string);
 		
 		///<summary>The analyzer to use for the query string</summary>
 		public SearchExistsRequestParameters Analyzer(string analyzer) => this.AddQueryString("analyzer", analyzer);

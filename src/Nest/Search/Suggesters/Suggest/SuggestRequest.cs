@@ -60,8 +60,6 @@ namespace Nest
 	[DescriptorFor("Suggest")]
 	public partial class SuggestDescriptor<T> where T : class
 	{
-		private ISuggestRequest Self => this;
-
 		object ICustomJson.GetCustomJson() { return SuggestPathInfo.GetCustomJson(this); }
 
 		string ISuggestRequest.GlobalText { get; set; }

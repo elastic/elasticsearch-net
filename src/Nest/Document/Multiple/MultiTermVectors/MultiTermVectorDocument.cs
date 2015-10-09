@@ -30,9 +30,13 @@ namespace Nest
 		[JsonProperty("field_statistics")]
 		public bool? FieldStatistics { get; set; }
 	}
+	public interface IMultiTermVectorDocumentDescriptor
+	{
+		MultiTermVectorDocument Document { get; set; }
+		MultiTermVectorDocument GetDocument(); 
+	}
 
-	public class MultiTermVectorDocumentDescriptor<T> : RequestDescriptorBase<MultiTermVectorDocumentDescriptor<T>, MultiTermVectorsRequestParameters>, 
-		IMultiTermVectorDocumentDescriptor 
+	public class MultiTermVectorDocumentDescriptor<T> : DescriptorBase<MultiTermVectorDocumentDescriptor<T>, IMultiTermVectorDocumentDescriptor>, IMultiTermVectorDocumentDescriptor 
 		where T : class
 	{
 

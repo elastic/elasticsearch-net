@@ -23,13 +23,11 @@ namespace Nest
 	public class PrefixQueryDescriptor<T> : TermQueryDescriptorBase<PrefixQueryDescriptor<T>, T>, 
 		IPrefixQuery where T : class
 	{
-		private IPrefixQuery Self => this;
-
 		RewriteMultiTerm? IPrefixQuery.Rewrite { get; set; }
 
 		public PrefixQueryDescriptor<T> Rewrite(RewriteMultiTerm rewrite)
 		{
-			Self.Rewrite = rewrite;
+			((IPrefixQuery)this).Rewrite = rewrite;
 			return this;
 		}
 	}

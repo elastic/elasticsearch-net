@@ -26,7 +26,7 @@ namespace Nest
 	{
 		public AliasesDescriptor Alias(string alias, Func<AliasDescriptor, IAlias> selector = null)
 		{
-			this.BackingDictionary.Add(alias, selector?.InvokeOrDefault(new AliasDescriptor()));
+			this.BackingDictionary.Add(alias, selector.InvokeOrDefault(new AliasDescriptor()));
 			return this;
 		}
 	}

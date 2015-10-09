@@ -43,7 +43,7 @@ namespace Nest
 			return expression == null ? null : new PropertyName
 			{
 				Expression = expression,
-				ComparisonValue = ((expression as LambdaExpression).Body as MemberExpression).Member.Name
+				ComparisonValue = ((expression as LambdaExpression)?.Body as MemberExpression)?.Member.Name ?? expression.ToString()
 			};
 		}
 

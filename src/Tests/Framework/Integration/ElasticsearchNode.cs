@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
@@ -8,16 +9,26 @@ using System.Reactive;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
+using System.Reactive.Threading.Tasks;
 using System.Security.AccessControl;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Threading.Tasks;
+using Nest;
 
 namespace Tests.Framework.Integration
 {
 	public class ElasticsearchNode : IDisposable
 	{
 		private static readonly object _lock = new object();
-		private Process _process;
+		// <installpath> <> <plugin folder name>
+		private readonly Dictionary<string, string> SupportedPlugins = new Dictionary<string, string>
+		{
+			{ "delete-by-query", "delete-by-query" }
+		};
+
+		private readonly bool _doNotSpawnIfAlreadyRunning;
+		private ObservableProcess _process;
 		private IDisposable _processListener;
 
 		public string Version { get; }
@@ -34,11 +45,12 @@ namespace Tests.Framework.Integration
 		public ElasticsearchNodeInfo Info { get; private set; }
 		public int Port { get; private set; }
 
-		private Subject<ManualResetEvent> _blockingSubject = new Subject<ManualResetEvent>();
+		private readonly Subject<ManualResetEvent> _blockingSubject = new Subject<ManualResetEvent>();
 		public IObservable<ManualResetEvent> BootstrapWork { get; }
 
-		public ElasticsearchNode(string elasticsearchVersion, bool runningIntegrations)
+		public ElasticsearchNode(string elasticsearchVersion, bool runningIntegrations, bool doNotSpawnIfAlreadyRunning)
 		{
+			_doNotSpawnIfAlreadyRunning = doNotSpawnIfAlreadyRunning;
 			this.Version = elasticsearchVersion;
 			this.RunningIntegrations = runningIntegrations;
 			this.BootstrapWork = _blockingSubject;
@@ -60,69 +72,43 @@ namespace Tests.Framework.Integration
 
 		public IObservable<ElasticsearchMessage> Start()
 		{
+
 			if (!this.RunningIntegrations) return Observable.Empty<ElasticsearchMessage>();
 
-			var handle = new ManualResetEvent(false);
 			this.Stop();
+			var timeout = TimeSpan.FromSeconds(60);
+			var handle = new ManualResetEvent(false);
 
-			this._process = this.CreateProcess(
+			if (_doNotSpawnIfAlreadyRunning)
+			{
+				var alreadyUp = new ElasticClient().RootNodeInfo();
+				if (alreadyUp.IsValid)
+				{
+					this.Started = true;
+					this.Port = 9200;
+					this.Info = new ElasticsearchNodeInfo(alreadyUp.Version.Number, "0", alreadyUp.Version.LuceneVersion);
+					this._blockingSubject.OnNext(handle);
+					if (!handle.WaitOne(timeout, true))
+						throw new ApplicationException($"Could launch tests on already running elasticsearch within {timeout}");
+					return Observable.Empty<ElasticsearchMessage>();
+				}
+			}
+
+			this._process = new ObservableProcess(this.Binary,
 				$"-Des.cluster.name={this.ClusterName}",
 				$"-Des.node.name={this.NodeName}"
 			);
-
-			var observable = Observable.Using(() => _process, process => StartObservableProcess(process));
+			var observable = Observable.Using(() => this._process, process => process.Start())
+				.Select(consoleLine => new ElasticsearchMessage(consoleLine));
 			this._processListener = observable.Subscribe(onNext: s => HandleConsoleMessage(s, handle));
 
-			var timeout = TimeSpan.FromSeconds(20);
 			if (!handle.WaitOne(timeout, true))
+			{
+				this.Stop();
 				throw new ApplicationException($"Could not start elasticsearch within {timeout}");
+			}
 
 			return observable;
-		}
-
-		private static IObservable<ElasticsearchMessage> StartObservableProcess(Process process)
-		{
-			return Observable.Create<ElasticsearchMessage>(observer =>
-			{
-				// listen to stdout and stderr
-				var stdOut = process.CreateStandardOutputObservable();
-				var stdErr = process.CreateStandardErrorObservable();
-
-				var stdOutSubscription = stdOut.Subscribe(observer);
-				var stdErrSubscription = stdErr.Subscribe(observer);
-
-				var processExited = Observable.FromEventPattern(h => process.Exited += h, h => process.Exited -= h);
-				var processError = CreateProcessExitSubscription(process, processExited, observer);
-
-				process.Start();
-				process.BeginOutputReadLine();
-				process.BeginErrorReadLine();
-
-				return new CompositeDisposable(stdOutSubscription, stdErrSubscription, processError);
-			});
-		}
-
-		private static IDisposable CreateProcessExitSubscription(Process process, IObservable<EventPattern<object>> processExited, IObserver<ElasticsearchMessage> observer)
-		{
-			return processExited.Subscribe(args =>
-			{
-				try
-				{
-					if (process?.ExitCode > 0)
-					{
-						observer.OnError(new Exception(
-							$"Process '{process.StartInfo.FileName}' terminated with error code {process.ExitCode}"));
-					}
-					else
-					{
-						observer.OnCompleted();
-					}
-				}
-				finally
-				{
-					process?.Close();
-				}
-			});
 		}
 
 		private void HandleConsoleMessage(ElasticsearchMessage s, ManualResetEvent handle)
@@ -148,27 +134,6 @@ namespace Tests.Framework.Integration
 			}
 		}
 
-		private Process CreateProcess(params string[] arguments)
-		{
-			var a = string.Join(" ", arguments);
-			Console.WriteLine(a);
-			return new Process
-			{
-				EnableRaisingEvents = true,
-				StartInfo =
-				{
-					FileName = this.Binary,
-					Arguments = a,
-					CreateNoWindow = true,
-					UseShellExecute = false,
-					RedirectStandardOutput = true,
-					RedirectStandardError = true,
-					RedirectStandardInput = false
-				}
-			};
-
-		}
-
 		private void DownloadAndExtractElasticsearch()
 		{
 			lock (_lock)
@@ -187,6 +152,8 @@ namespace Tests.Framework.Integration
 				{
 					ZipFile.ExtractToDirectory(localZip, this.RoamingFolder);
 				}
+
+				InstallPlugins();
 
 				//hunspell config 
 				var hunspellFolder = Path.Combine(this.RoamingClusterFolder, "config", "hunspell", "en_US");
@@ -212,14 +179,52 @@ namespace Tests.Framework.Integration
 
 		}
 
+		private void InstallPlugins()
+		{
+			var pluginBat = Path.Combine(this.RoamingClusterFolder, "bin", "plugin") + ".bat";
+			foreach (var plugin in SupportedPlugins)
+			{
+				var installPath = plugin.Key;
+				var localPath = plugin.Value;
+				var pluginFolder = Path.Combine(this.RoamingClusterFolder, "bin", "plugins", localPath);
+				if (!Directory.Exists(this.RoamingClusterFolder)) continue;
+
+				var timeout = TimeSpan.FromSeconds(60);
+				using (var p = new ObservableProcess(pluginBat, "install", installPath))
+				{
+					var handle = new ManualResetEvent(false);
+					Task.Factory.StartNew(() =>
+					{
+						var o = p.Start();
+						o.Subscribe(
+							Console.WriteLine,
+							(e) =>
+							{
+								handle.Set();
+								throw e;
+							},
+							() => handle.Set()
+							);
+					});
+					if (!handle.WaitOne(timeout, true))
+						throw new ApplicationException($"Could not install ${installPath} within {timeout}");
+				}
+			}
+		}
+
+
 		public void Stop()
 		{
-			Console.WriteLine($"Stopping... ran integrations: {this.RunningIntegrations}");
-			Console.WriteLine($"Node started: {this.Started} on port: {this.Port} using PID: {this.Info?.Pid}");
-
 			if (!this.RunningIntegrations || !this.Started) return;
 
 			this.Started = false;
+
+			Console.WriteLine($"Stopping... ran integrations: {this.RunningIntegrations}");
+			Console.WriteLine($"Node started: {this.Started} on port: {this.Port} using PID: {this.Info?.Pid}");
+
+			this._process?.Dispose();
+			this._processListener?.Dispose();
+
 			if (this.Info != null)
 			{
 				var esProcess = Process.GetProcessById(this.Info.Pid);
@@ -229,11 +234,7 @@ namespace Tests.Framework.Integration
 				esProcess.Close();
 			}
 
-			this._process?.Kill();
-			this._process?.WaitForExit(2000);
-			this._process?.Close();
-			this._processListener?.Dispose();
-
+			if (this._doNotSpawnIfAlreadyRunning) return;
 			var dataFolder = Path.Combine(this.RoamingClusterFolder, "data", this.ClusterName);
 			if (Directory.Exists(dataFolder))
 			{
@@ -320,7 +321,7 @@ namespace Tests.Framework.Integration
 		}
 
 		private static readonly Regex PortParser =
-			new Regex(@"bound_address {.+\:(?<port>\d+)}");
+			new Regex(@"bound_address(es)? {.+\:(?<port>\d+)}");
 
 		public bool TryGetPortNumber(out int port)
 		{
@@ -351,34 +352,4 @@ namespace Tests.Framework.Integration
 
 	}
 
-	public static class RxProcessUtilities
-	{
-		public static IObservable<ElasticsearchMessage> CreateStandardErrorObservable(this Process process)
-		{
-			var receivedStdErr =
-				Observable.FromEventPattern<DataReceivedEventHandler, DataReceivedEventArgs>
-					(h => process.ErrorDataReceived += h, h => process.ErrorDataReceived -= h)
-				.Select(e => new ElasticsearchMessage(e.EventArgs.Data));
-
-			return Observable.Create<ElasticsearchMessage>(observer =>
-			{
-				var cancel = Disposable.Create(process.CancelErrorRead);
-				return new CompositeDisposable(cancel, receivedStdErr.Subscribe(observer));
-			});
-		}
-
-		public static IObservable<ElasticsearchMessage> CreateStandardOutputObservable(this Process process)
-		{
-			var receivedStdOut =
-				Observable.FromEventPattern<DataReceivedEventHandler, DataReceivedEventArgs>
-					(h => process.OutputDataReceived += h, h => process.OutputDataReceived -= h)
-				.Select(e => new ElasticsearchMessage(e.EventArgs.Data));
-
-			return Observable.Create<ElasticsearchMessage>(observer =>
-			{
-				var cancel = Disposable.Create(process.CancelOutputRead);
-				return new CompositeDisposable(cancel, receivedStdOut.Subscribe(observer));
-			});
-		}
-	}
 }

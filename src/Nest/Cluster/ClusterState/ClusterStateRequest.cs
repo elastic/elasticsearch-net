@@ -10,9 +10,5 @@ namespace Nest
 
 	public partial class ClusterStateRequest { }
 
-	public partial class ClusterStateDescriptor 
-	{
-		public ClusterStateDescriptor Metrics(params ClusterStateMetric[] metrics) => Assign(a => a.RouteValues.Required(metrics));
-		public ClusterStateDescriptor Metrics(IEnumerable<ClusterStateMetric> metrics) => Assign(a => a.RouteValues.Required(metrics));
-	}
+	public partial class ClusterStateDescriptor { }
 }

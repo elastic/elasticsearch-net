@@ -49,7 +49,7 @@ namespace Nest
 			set { _fieldValues = value; }
 		}
 
-		private FieldSelection<T> _fields = null; 
+		//private FieldSelection<T> _fields = null; 
 		public FieldSelection<T> Fields
 		{
 			get

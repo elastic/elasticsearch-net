@@ -16,7 +16,7 @@ namespace Tests.Mapping.Types
 	{
 		public class Usage : PutMapping
 		{
-			public Usage(ReadOnlyCluster cluster, ApiUsage usage) : base(cluster, usage) { }
+			public Usage(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 			protected override object ExpectJson => new
 			{

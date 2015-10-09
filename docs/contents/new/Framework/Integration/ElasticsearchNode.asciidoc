@@ -1,15 +1,14 @@
 [source, csharp]
 ----
-var handle  = new ManualResetEvent(false);
+var handle = new ManualResetEvent(false);
 this.Stop();
 this._process = this.CreateProcess(
 				$"-Des.cluster.name={this.ClusterName}",
-				$"-Des.node.name={this.NodeName}",
-				"-Des.discovery.zen.ping.multicast.enabled=false"
+				$"-Des.node.name={this.NodeName}"
 			);
 var observable = Observable.Using(() => _process, process => StartObservableProcess(process));
 this._processListener = observable.Subscribe(onNext: s => HandleConsoleMessage(s, handle));
-var timeout = TimeSpan.FromSeconds(60);
+var timeout = TimeSpan.FromSeconds(20);
 var stdOut = process.CreateStandardOutputObservable();
 var stdErr = process.CreateStandardErrorObservable();
 var stdOutSubscription = stdOut.Subscribe(observer);
@@ -34,11 +33,24 @@ Console.WriteLine(a);
 var zip = $
 "elasticsearch-{this.Version}.zip";
 var downloadUrl = $
-"https://download.elastic.co/elasticsearch/elasticsearch/{zip}";
+"https://download.elasticsearch.org/elasticsearch/release/org/elasticsearch/distribution/zip/elasticsearch/{this.Version}/{zip}";
 var localZip = Path.Combine(this.RoamingFolder, zip);
 Directory.CreateDirectory(this.RoamingFolder);
 new WebClient().DownloadFile(downloadUrl, localZip);
 ZipFile.ExtractToDirectory(localZip, this.RoamingFolder);
+var hunspellFolder = Path.Combine(this.RoamingClusterFolder, "config", "hunspell", "en_US");
+var hunspellPrefix = Path.Combine(hunspellFolder, "en_US");
+Directory.CreateDirectory(hunspellFolder);
+File.WriteAllText(hunspellPrefix + ".dic", "1\r\nabcdegf");
+File.WriteAllText(hunspellPrefix + ".aff", "SET UTF8\r\nSFX P Y 1\r\nSFX P 0 s");
+var analysFolder = Path.Combine(this.RoamingClusterFolder, "config", "analysis");
+Directory.CreateDirectory(analysFolder);
+var fopXml = Path.Combine(analysFolder, "fop") + ".xml";
+File.WriteAllText(fopXml, "<languages-info />");
+var customStems = Path.Combine(analysFolder, "custom_stems") + ".txt";
+File.WriteAllText(customStems, "");
+var stopwords = Path.Combine(analysFolder, "stopwords") + ".txt";
+File.WriteAllText(stopwords, "");
 Console.WriteLine($"Stopping... ran integrations: {this.RunningIntegrations}");
 Console.WriteLine($"Node started: {this.Started} on port: {this.Port} using PID: {this.Info?.Pid}");
 this.Started = false;

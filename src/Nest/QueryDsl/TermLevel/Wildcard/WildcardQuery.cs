@@ -36,13 +36,11 @@ namespace Nest
 		IWildcardQuery 
 		where T : class
 	{
-		private IWildcardQuery Self => this;
-
 		RewriteMultiTerm? IWildcardQuery.Rewrite { get; set; }
 
 		public WildcardQueryDescriptor<T> Rewrite(RewriteMultiTerm rewrite)
 		{
-			Self.Rewrite = rewrite;
+			((IWildcardQuery)this).Rewrite = rewrite;
 			return this;
 		}
 	}

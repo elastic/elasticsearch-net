@@ -36,8 +36,6 @@ namespace Nest
 	[DescriptorFor("SnapshotCreate")]
 	public partial class SnapshotDescriptor 
 	{
-		private ISnapshotRequest Self => this;
-
 		IEnumerable<IndexName> ISnapshotRequest.Indices { get; set; }
 		bool? ISnapshotRequest.IgnoreUnavailable { get; set; }
 
@@ -60,31 +58,14 @@ namespace Nest
 			return this.Indices(typeof(T));
 		}
 
-		public SnapshotDescriptor Indices(params string[] indices)
-		{
-			this.Self.Indices = indices.Select(s => (IndexName)s);
-			return this;
-		}
+		public SnapshotDescriptor Indices(params string[] indices) => Assign(a => a.Indices = indices.Select(s => (IndexName) s));
 
-		public SnapshotDescriptor Indices(params Type[] indicesTypes)
-		{
-			this.Self.Indices = indicesTypes.Select(s => (IndexName)s);
-			return this;
-		}
-		public SnapshotDescriptor IgnoreUnavailable(bool ignoreUnavailable = true)
-		{
-			this.Self.IgnoreUnavailable = ignoreUnavailable;
-			return this;
-		}
-		public SnapshotDescriptor IncludeGlobalState(bool includeGlobalState = true)
-		{
-			this.Self.IncludeGlobalState = includeGlobalState;
-			return this;
-		}
-		public SnapshotDescriptor Partial(bool partial = true)
-		{
-			this.Self.Partial = partial;
-			return this;
-		}
+		public SnapshotDescriptor Indices(params Type[] indices) =>Assign(a => a.Indices = indices.Select(s => (IndexName) s));
+
+		public SnapshotDescriptor IgnoreUnavailable(bool ignoreUnavailable = true) => Assign(a => a.IgnoreUnavailable = ignoreUnavailable);
+
+		public SnapshotDescriptor IncludeGlobalState(bool includeGlobalState = true) => Assign(a => a.IncludeGlobalState = includeGlobalState);
+
+		public SnapshotDescriptor Partial(bool partial = true) => Assign(a => a.Partial = partial);
 	}
 }

@@ -36,7 +36,7 @@ namespace Nest
 
 		/// <inheritdoc/>
 		public IRestoreResponse Restore(Name repository, Name snapshotName, Func<RestoreDescriptor, IRestoreRequest> selector = null) =>
-			this.Restore(selector(new RestoreDescriptor(repository, snapshotName)));
+			this.Restore(selector.InvokeOrDefault(new RestoreDescriptor(repository, snapshotName)));
 
 		/// <inheritdoc/>
 		public Task<IRestoreResponse> RestoreAsync(IRestoreRequest restoreRequest) => 
@@ -47,6 +47,6 @@ namespace Nest
 
 		/// <inheritdoc/>
 		public Task<IRestoreResponse> RestoreAsync(Name repository, Name snapshotName, Func<RestoreDescriptor, IRestoreRequest> selector = null) => 
-			this.RestoreAsync(selector(new RestoreDescriptor(repository, snapshotName)));
+			this.RestoreAsync(selector.InvokeOrDefault(new RestoreDescriptor(repository, snapshotName)));
 	}
 }
