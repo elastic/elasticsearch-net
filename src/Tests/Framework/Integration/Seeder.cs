@@ -18,17 +18,30 @@ namespace Tests.Framework.Integration
 
 		public void SeedNode()
 		{
-			this.CreateIndicesAndMappings();
-		}
-
-		public void CreateIndicesAndMappings()
-		{
 			var rawFieldsTemplateExists = this.Client.IndexTemplateExists("raw_fields").Exists;
 			//if raw_fields exists assume this cluster is already seeded
 			//sometimes we run against an manually started elasticsearch when writing tests
 			//to cut down on cluster startup times
 			if (rawFieldsTemplateExists) return;
+			this.CreateIndicesAndMappings();
 
+		}
+
+		public void CreateIndicesAndMappings()
+		{
+
+			CreateRawFieldsIndexTemplate();
+
+			CreateProjectIndex();
+
+			this.Client.IndexMany(Project.Projects);
+
+			this.Client.Refresh(Nest.Indices.Index<Project>());
+
+		}
+
+		private void CreateRawFieldsIndexTemplate()
+		{
 			var putTemplateResult = this.Client.PutIndexTemplate("raw_fields", p => p
 				.Template("*") //match on all created indices
 				.Settings(s => s
@@ -53,11 +66,14 @@ namespace Tests.Framework.Integration
 						)
 					)
 				)
-			);
+				);
 			putTemplateResult.IsValid.Should().BeTrue();
+		}
 
-			var createProjectIndex = this.Client.CreateIndex(typeof(Project), c => c
-				.Aliases(a=>a
+		private void CreateProjectIndex()
+		{
+			var createProjectIndex = this.Client.CreateIndex(typeof (Project), c => c
+				.Aliases(a => a
 					.Alias("projects-alias")
 				)
 				.Mappings(map => map
@@ -87,13 +103,8 @@ namespace Tests.Framework.Integration
 						)
 					)
 				)
-			);
+				);
 			createProjectIndex.IsValid.Should().BeTrue();
-
-			this.Client.IndexMany(Project.Projects);
-
-			this.Client.Refresh(Nest.Indices.Index<Project>());
-
 		}
 
 		private static PropertiesDescriptor<Tag> TagProperties(PropertiesDescriptor<Tag> props) => props
