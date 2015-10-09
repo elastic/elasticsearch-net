@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public interface IHealthResponse : IResponse
+	public interface IClusterHealthResponse : IResponse
 	{
 		string ClusterName { get; }
 		string Status { get; }
@@ -22,7 +22,7 @@ namespace Nest
 	}
 
 	[JsonObject]
-	public class HealthResponse : BaseResponse, IHealthResponse
+	public class ClusterHealthResponse : BaseResponse, IClusterHealthResponse
 	{
 		[JsonProperty(PropertyName = "cluster_name")]
 		public string ClusterName { get; internal set; }
