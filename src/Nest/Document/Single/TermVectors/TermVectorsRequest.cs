@@ -8,48 +8,55 @@ using System.ServiceModel.Configuration;
 
 namespace Nest
 {
-	public partial interface ITermVectorsRequest 
+	public partial interface ITermVectorsRequest<TDocument>
+		where TDocument : class
 	{
 		/// <summary>
 		/// An optional document to get termvectors for instead of using an already indexed document
 		/// </summary>
 		[JsonProperty("doc")]
-		object Document { get; set; }
+		TDocument Document { get; set; }
 
 		[JsonProperty("per_field_analyzer")]
 		IDictionary<FieldName, string> PerFieldAnalyzer { get; set; }
 	}
 
-	public partial class TermVectorsRequest 
+	public partial class TermVectorsRequest<TDocument>
+		where TDocument : class
 	{
 		HttpMethod IRequest.HttpMethod => this.Document == null ? HttpMethod.GET : HttpMethod.POST;
 
-		public object Document { get; set; }
+		public TDocument Document { get; set; }
 
 		public IDictionary<FieldName, string> PerFieldAnalyzer { get; set; }
+
+		partial void DocumentFromPath(TDocument document)
+		{
+			this.Document = document;
+			if (document != null)
+				Self.RouteValues.Remove("id");
+		}
 	}
 
-	//TODO Removed typed variant is this ok? probably not cause Document
-
 	[DescriptorFor("Termvectors")]
-	public partial class TermVectorsDescriptor<T> where T : class
+	public partial class TermVectorsDescriptor<TDocument>
+		where TDocument : class
 	{
-		HttpMethod IRequest.HttpMethod => ((ITermVectorsRequest)this).Document == null ? HttpMethod.GET : HttpMethod.POST;
+		HttpMethod IRequest.HttpMethod => ((ITermVectorsRequest<TDocument>)this).Document == null ? HttpMethod.GET : HttpMethod.POST;
 
-		object ITermVectorsRequest.Document { get; set; }
+		TDocument ITermVectorsRequest<TDocument>.Document { get; set; }
 
-		IDictionary<FieldName, string> ITermVectorsRequest.PerFieldAnalyzer { get; set; }
+		IDictionary<FieldName, string> ITermVectorsRequest<TDocument>.PerFieldAnalyzer { get; set; }
 
-		public TermVectorsDescriptor<T> Document<TDocument>(TDocument document) where TDocument : class =>
-			Assign(a => a.Document = document);
+		public TermVectorsDescriptor<TDocument> Document(TDocument document) => Assign(a => a.Document = document);
 
-		public TermVectorsDescriptor<T> PerFieldAnalyzer(Func<FluentDictionary<Expression<Func<T, object>>, string>, FluentDictionary<Expression<Func<T, object>>, string>> analyzerSelector) =>
+		public TermVectorsDescriptor<TDocument> PerFieldAnalyzer(Func<FluentDictionary<Expression<Func<TDocument, object>>, string>, FluentDictionary<Expression<Func<TDocument, object>>, string>> analyzerSelector) =>
 			Assign(a=>a.PerFieldAnalyzer = analyzerSelector?
-				.Invoke(new FluentDictionary<Expression<Func<T, object>>, string>())
+				.Invoke(new FluentDictionary<Expression<Func<TDocument, object>>, string>())
 				?.ToDictionary(x => FieldName.Create(x.Key), x => x.Value)
 			);
 
-		public TermVectorsDescriptor<T> PerFieldAnalyzer(
+		public TermVectorsDescriptor<TDocument> PerFieldAnalyzer(
 			Func<FluentDictionary<FieldName, string>, FluentDictionary<FieldName, string>> analyzerSelector) =>
 				Assign(a => a.PerFieldAnalyzer = analyzerSelector?.Invoke(new FluentDictionary<FieldName, string>()));
 	}

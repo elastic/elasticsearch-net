@@ -4302,11 +4302,11 @@ namespace Nest
 	}
 	
 	///<summary>descriptor for Termvectors <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html</pre></summary>
-	public partial class TermVectorsDescriptor<T>  : RequestDescriptorBase<TermVectorsDescriptor<T>,TermVectorsRequestParameters, ITermVectorsRequest>, ITermVectorsRequest
+	public partial class TermVectorsDescriptor<TDocument>  : RequestDescriptorBase<TermVectorsDescriptor<TDocument>,TermVectorsRequestParameters, ITermVectorsRequest<TDocument>>, ITermVectorsRequest<TDocument>
 	{ 
-		IndexName ITermVectorsRequest.Index => Self.RouteValues.Get<IndexName>("index");
-		TypeName ITermVectorsRequest.Type => Self.RouteValues.Get<TypeName>("type");
-		Id ITermVectorsRequest.Id => Self.RouteValues.Get<Id>("id");
+		IndexName ITermVectorsRequest<TDocument>.Index => Self.RouteValues.Get<IndexName>("index");
+		TypeName ITermVectorsRequest<TDocument>.Type => Self.RouteValues.Get<TypeName>("type");
+		Id ITermVectorsRequest<TDocument>.Id => Self.RouteValues.Get<Id>("id");
 			/// <summary>/{index}/{type}/_termvectors</summary>
 ///<param name="index"> this parameter is required</param>		
 ///<param name="type"> this parameter is required</param>
@@ -4316,73 +4316,73 @@ namespace Nest
 		/// <summary>/{index}/{type}/_termvectors</summary>
 		
 ///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
-		public TermVectorsDescriptor(DocumentPath<T> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
-		partial void DocumentFromPath(T document);
+		public TermVectorsDescriptor(DocumentPath<TDocument> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
+		partial void DocumentFromPath(TDocument document);
 
 			///<summary>The index in which the document resides.</summary>
-		public TermVectorsDescriptor<T> Index(IndexName index) => Assign(a=>a.RouteValues.Optional("index", index));
+		public TermVectorsDescriptor<TDocument> Index(IndexName index) => Assign(a=>a.RouteValues.Optional("index", index));
 
 		///<summary>The index in which the document resides.</summary>
-		public TermVectorsDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (IndexName)typeof(TOther)));
+		public TermVectorsDescriptor<TDocument> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (IndexName)typeof(TOther)));
 
 		///<summary>The type of the document.</summary>
-		public TermVectorsDescriptor<T> Type(TypeName type) => Assign(a=>a.RouteValues.Optional("type", type));
+		public TermVectorsDescriptor<TDocument> Type(TypeName type) => Assign(a=>a.RouteValues.Optional("type", type));
 
 		///<summary>The type of the document.</summary>
-		public TermVectorsDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (TypeName)typeof(TOther)));
+		public TermVectorsDescriptor<TDocument> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (TypeName)typeof(TOther)));
 
 		///<summary>The id of the document, when not specified a doc param should be supplied.</summary>
-		public TermVectorsDescriptor<T> Id(Id id) => Assign(a=>a.RouteValues.Optional("id", id));
+		public TermVectorsDescriptor<TDocument> Id(Id id) => Assign(a=>a.RouteValues.Optional("id", id));
 
 	
 		///<summary>Specifies if total term frequency and document frequency should be returned.</summary>
-		public TermVectorsDescriptor<T> TermStatistics(bool term_statistics = true) => AssignParam(p=>p.TermStatistics(term_statistics));
+		public TermVectorsDescriptor<TDocument> TermStatistics(bool term_statistics = true) => AssignParam(p=>p.TermStatistics(term_statistics));
 
 		///<summary>Specifies if document count, sum of document frequencies and sum of total term frequencies should be returned.</summary>
-		public TermVectorsDescriptor<T> FieldStatistics(bool field_statistics = true) => AssignParam(p=>p.FieldStatistics(field_statistics));
+		public TermVectorsDescriptor<TDocument> FieldStatistics(bool field_statistics = true) => AssignParam(p=>p.FieldStatistics(field_statistics));
 
 		///<summary>Specifies if distributed frequencies should be returned instead shard frequencies.</summary>
-		public TermVectorsDescriptor<T> Dfs(bool dfs = true) => AssignParam(p=>p.Dfs(dfs));
+		public TermVectorsDescriptor<TDocument> Dfs(bool dfs = true) => AssignParam(p=>p.Dfs(dfs));
 
 		///<summary>A comma-separated list of fields to return.</summary>
-		public TermVectorsDescriptor<T> Fields(params string[] fields) => AssignParam(p=>p.Fields(fields));
+		public TermVectorsDescriptor<TDocument> Fields(params string[] fields) => AssignParam(p=>p.Fields(fields));
 			
 		///<summary>A comma-separated list of fields to return.</summary>
-		public TermVectorsDescriptor<T> Fields(params Expression<Func<T, object>>[] fields)  =>
+		public TermVectorsDescriptor<TDocument> Fields(params Expression<Func<TDocument, object>>[] fields)  =>
 			AssignParam(p=>p._Fields(fields));
 
 		///<summary>Specifies if term offsets should be returned.</summary>
-		public TermVectorsDescriptor<T> Offsets(bool offsets = true) => AssignParam(p=>p.Offsets(offsets));
+		public TermVectorsDescriptor<TDocument> Offsets(bool offsets = true) => AssignParam(p=>p.Offsets(offsets));
 
 		///<summary>Specifies if term positions should be returned.</summary>
-		public TermVectorsDescriptor<T> Positions(bool positions = true) => AssignParam(p=>p.Positions(positions));
+		public TermVectorsDescriptor<TDocument> Positions(bool positions = true) => AssignParam(p=>p.Positions(positions));
 
 		///<summary>Specifies if term payloads should be returned.</summary>
-		public TermVectorsDescriptor<T> Payloads(bool payloads = true) => AssignParam(p=>p.Payloads(payloads));
+		public TermVectorsDescriptor<TDocument> Payloads(bool payloads = true) => AssignParam(p=>p.Payloads(payloads));
 
 		///<summary>Specify the node or shard the operation should be performed on (default: random).</summary>
-		public TermVectorsDescriptor<T> Preference(string preference) => AssignParam(p=>p.Preference(preference));
+		public TermVectorsDescriptor<TDocument> Preference(string preference) => AssignParam(p=>p.Preference(preference));
 
 		///<summary>Specific routing value.</summary>
-		public TermVectorsDescriptor<T> Routing(string routing) => AssignParam(p=>p.Routing(routing));
+		public TermVectorsDescriptor<TDocument> Routing(string routing) => AssignParam(p=>p.Routing(routing));
 
 		///<summary>Parent id of documents.</summary>
-		public TermVectorsDescriptor<T> Parent(string parent) => AssignParam(p=>p.Parent(parent));
+		public TermVectorsDescriptor<TDocument> Parent(string parent) => AssignParam(p=>p.Parent(parent));
 
 		///<summary>Specifies if request is real-time as opposed to near-real-time (default: true).</summary>
-		public TermVectorsDescriptor<T> Realtime(bool realtime = true) => AssignParam(p=>p.Realtime(realtime));
+		public TermVectorsDescriptor<TDocument> Realtime(bool realtime = true) => AssignParam(p=>p.Realtime(realtime));
 
 		///<summary>Explicit version number for concurrency control</summary>
-		public TermVectorsDescriptor<T> Version(long version) => AssignParam(p=>p.Version(version));
+		public TermVectorsDescriptor<TDocument> Version(long version) => AssignParam(p=>p.Version(version));
 
 		///<summary>Specific version type</summary>
-		public TermVectorsDescriptor<T> VersionType(VersionType version_type) => AssignParam(p=>p.VersionType(version_type));
+		public TermVectorsDescriptor<TDocument> VersionType(VersionType version_type) => AssignParam(p=>p.VersionType(version_type));
 
 		///<summary>The URL-encoded request definition</summary>
-		public TermVectorsDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
+		public TermVectorsDescriptor<TDocument> Source(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public TermVectorsDescriptor<T> FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		public TermVectorsDescriptor<TDocument> FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	

@@ -4808,19 +4808,19 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ITermVectorsRequest : IRequest<TermVectorsRequestParameters> 
+	public partial interface ITermVectorsRequest<TDocument> : IRequest<TermVectorsRequestParameters> 
 	{
 		IndexName Index { get; }
 		TypeName Type { get; }
 		Id Id { get; }
 	 } 
 	///<summary>Request parameters for Termvectors <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html</pre></summary>
-	public partial class TermVectorsRequest  : RequestBase<TermVectorsRequestParameters>, ITermVectorsRequest
+	public partial class TermVectorsRequest<TDocument>  : RequestBase<TermVectorsRequestParameters>, ITermVectorsRequest<TDocument>
 	{
-		protected ITermVectorsRequest Self => this;
-		IndexName ITermVectorsRequest.Index => Self.RouteValues.Get<IndexName>("index");
-		TypeName ITermVectorsRequest.Type => Self.RouteValues.Get<TypeName>("type");
-		Id ITermVectorsRequest.Id => Self.RouteValues.Get<Id>("id");
+		protected ITermVectorsRequest<TDocument> Self => this;
+		IndexName ITermVectorsRequest<TDocument>.Index => Self.RouteValues.Get<IndexName>("index");
+		TypeName ITermVectorsRequest<TDocument>.Type => Self.RouteValues.Get<TypeName>("type");
+		Id ITermVectorsRequest<TDocument>.Id => Self.RouteValues.Get<Id>("id");
 			/// <summary>/{index}/{type}/_termvectors</summary>
 ///<param name="index">this parameter is required</param>		
 ///<param name="type">this parameter is required</param>
@@ -4833,6 +4833,12 @@ namespace Nest
 ///<param name="id">Optional, accepts null</param>
 		public TermVectorsRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Optional("id", id)){}
 		
+
+		/// <summary>/{index}/{type}/_termvectors</summary>
+		
+///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
+		public TermVectorsRequest(DocumentPath<TDocument> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
+		partial void DocumentFromPath(TDocument document);
 
 			///<summary>Specifies if total term frequency and document frequency should be returned.</summary>
 		public bool TermStatistics { get { return Q<bool>("term_statistics"); } set { Q("term_statistics", value); } }

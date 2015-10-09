@@ -14,43 +14,45 @@ namespace Nest
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
 		/// <param name="termVectorSelector"></param>
-		ITermVectorsResponse TermVectors<T>(Func<TermVectorsDescriptor<T>, ITermVectorsRequest> termVectorSelector)
+		ITermVectorsResponse TermVectors<T>(Func<TermVectorsDescriptor<T>, ITermVectorsRequest<T>> termVectorSelector)
 			where T : class;
 
 		/// <inheritdoc/>
-		ITermVectorsResponse TermVectors(ITermVectorsRequest termvectorRequest);
-
-		/// <inheritdoc/>
-		Task<ITermVectorsResponse> TermVectorsAsync<T>(Func<TermVectorsDescriptor<T>, ITermVectorsRequest> termVectorSelector)
+		ITermVectorsResponse TermVectors<T>(ITermVectorsRequest<T> termvectorRequest)
 			where T : class;
 
 		/// <inheritdoc/>
-		Task<ITermVectorsResponse> TermVectorsAsync(ITermVectorsRequest termvectorRequest);
+		Task<ITermVectorsResponse> TermVectorsAsync<T>(Func<TermVectorsDescriptor<T>, ITermVectorsRequest<T>> termVectorSelector)
+			where T : class;
+
+		/// <inheritdoc/>
+		Task<ITermVectorsResponse> TermVectorsAsync<T>(ITermVectorsRequest<T> termvectorRequest)
+			where T : class;
 
 	}
-	//TODO discuss with @gmarz, termvectors has a required id|doc but its not reflected in our constructors
+
 	public partial class ElasticClient
 	{
 		///<inheritdoc/>
-		public ITermVectorsResponse TermVectors<T>(Func<TermVectorsDescriptor<T>, ITermVectorsRequest> termVectorSelector) where T : class =>
+		public ITermVectorsResponse TermVectors<T>(Func<TermVectorsDescriptor<T>, ITermVectorsRequest<T>> termVectorSelector) where T : class =>
 			this.TermVectors(termVectorSelector?.Invoke(new TermVectorsDescriptor<T>(typeof(T), typeof(T))));
-
+		
 		///<inheritdoc/>
-		public ITermVectorsResponse TermVectors(ITermVectorsRequest termvectorRequest)
+		public ITermVectorsResponse TermVectors<T>(ITermVectorsRequest<T> termvectorRequest) where T : class
 		{
-			return this.Dispatcher.Dispatch<ITermVectorsRequest, TermVectorsRequestParameters, TermVectorsResponse>(
+			return this.Dispatcher.Dispatch<ITermVectorsRequest<T>, TermVectorsRequestParameters, TermVectorsResponse>(
 				termvectorRequest,
 				this.LowLevelDispatch.TermvectorsDispatch<TermVectorsResponse>
 			);
 		}
 
 		///<inheritdoc/>
-		public Task<ITermVectorsResponse> TermVectorsAsync<T>(Func<TermVectorsDescriptor<T>, ITermVectorsRequest> termVectorSelector) where T : class =>
+		public Task<ITermVectorsResponse> TermVectorsAsync<T>(Func<TermVectorsDescriptor<T>, ITermVectorsRequest<T>> termVectorSelector) where T : class =>
 			this.TermVectorsAsync(termVectorSelector?.Invoke(new TermVectorsDescriptor<T>(typeof(T), typeof(T))));
-
+		
 		///<inheritdoc/>
-		public Task<ITermVectorsResponse> TermVectorsAsync(ITermVectorsRequest termvectorRequest) => 
-			this.Dispatcher.DispatchAsync<ITermVectorsRequest, TermVectorsRequestParameters, TermVectorsResponse, ITermVectorsResponse>(
+		public Task<ITermVectorsResponse> TermVectorsAsync<T>(ITermVectorsRequest<T> termvectorRequest) where T : class => 
+			this.Dispatcher.DispatchAsync<ITermVectorsRequest<T>, TermVectorsRequestParameters, TermVectorsResponse, ITermVectorsResponse>(
 				termvectorRequest,
 				this.LowLevelDispatch.TermvectorsDispatchAsync<TermVectorsResponse>
 			);
