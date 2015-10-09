@@ -59,9 +59,6 @@ namespace Elasticsearch.Net.Connection
 			this._semaphore = new SemaphoreSlim(1, 1);
 		}
 
-		//TODO SNIFF ON FAILURE?
-		//TODO PING ON FAILURE?
-
 		public ElasticsearchResponse<TReturn> Request<TReturn>(HttpMethod method, string path, PostData<object> data = null, IRequestParameters requestParameters = null)
 			where TReturn : class
 		{
