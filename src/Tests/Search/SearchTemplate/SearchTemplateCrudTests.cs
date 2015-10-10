@@ -13,13 +13,13 @@ namespace Tests.Search.SearchTemplate
 {
 	[Collection(IntegrationContext.Indexing)]
 	public class SearchTemplateCrudTests
-		: CrudTestBase<IPutSearchTemplateResponse, IGetSearchTemplateResponse, IPutSearchTemplateResponse>
+		: CrudTestBase<IAcknowledgedResponse, IGetSearchTemplateResponse, IAcknowledgedResponse>
 	{
 		public SearchTemplateCrudTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override bool SupportsDeletes => true;
 
-		protected override LazyResponses Create() => Calls<PutSearchTemplateDescriptor, PutSearchTemplateRequest, IPutSearchTemplateRequest, IPutSearchTemplateResponse>(
+		protected override LazyResponses Create() => Calls<PutSearchTemplateDescriptor, PutSearchTemplateRequest, IPutSearchTemplateRequest, IAcknowledgedResponse>(
 			CreateInitializer,
 			CreateFlunt,
 			fluent: (s, c, f) => c.PutSearchTemplate(s, f),
@@ -45,7 +45,7 @@ namespace Tests.Search.SearchTemplate
 		protected GetSearchTemplateRequest ReadInitializer(string id) => new GetSearchTemplateRequest(id);
 		protected IGetSearchTemplateRequest ReadFluent(string id, GetSearchTemplateDescriptor d) => d;
 
-		protected override LazyResponses Update() => Calls<PutSearchTemplateDescriptor, PutSearchTemplateRequest, IPutSearchTemplateRequest, IPutSearchTemplateResponse>(
+		protected override LazyResponses Update() => Calls<PutSearchTemplateDescriptor, PutSearchTemplateRequest, IPutSearchTemplateRequest, IAcknowledgedResponse>(
 			UpdateInitializer,
 			UpdateFluent,
 			fluent: (s, c, f) => c.PutSearchTemplate(s, f),
@@ -64,7 +64,7 @@ namespace Tests.Search.SearchTemplate
 		protected IPutSearchTemplateRequest UpdateFluent(string id, PutSearchTemplateDescriptor d) => d
 			.Template(_updatedTemplate);
 
-		protected override LazyResponses Delete() => Calls<DeleteSearchTemplateDescriptor, DeleteSearchTemplateRequest, IDeleteSearchTemplateRequest, IDeleteSearchTemplateResponse>(
+		protected override LazyResponses Delete() => Calls<DeleteSearchTemplateDescriptor, DeleteSearchTemplateRequest, IDeleteSearchTemplateRequest, IAcknowledgedResponse>(
 			DeleteInitializer,
 			DeleteFluent,
 			fluent: (s, c, f) => c.DeleteSearchTemplate(s, f),

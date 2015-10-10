@@ -13,13 +13,13 @@ namespace Tests.Modules.Scripting
 {
 	[Collection(IntegrationContext.Indexing)]
 	public class ScriptingCrudTests
-		: CrudTestBase<IPutScriptResponse, IGetScriptResponse, IPutScriptResponse>
+		: CrudTestBase<IAcknowledgedResponse, IGetScriptResponse, IAcknowledgedResponse>
 	{
 		public ScriptingCrudTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) {}
 
 		protected override bool SupportsDeletes => true;
 
-		protected override LazyResponses Create() => Calls<PutScriptDescriptor, PutScriptRequest, IPutScriptRequest, IPutScriptResponse>(
+		protected override LazyResponses Create() => Calls<PutScriptDescriptor, PutScriptRequest, IPutScriptRequest, IAcknowledgedResponse>(
 			CreateInitializer,
 			CreateFluent,
 			fluent: (s, c, f) => c.PutScript(_lang, s, f),
@@ -48,7 +48,7 @@ namespace Tests.Modules.Scripting
 
 		protected IGetScriptRequest ReadFluent(string id, GetScriptDescriptor d) => d;
 
-		protected override LazyResponses Update() => Calls<PutScriptDescriptor, PutScriptRequest, IPutScriptRequest, IPutScriptResponse>(
+		protected override LazyResponses Update() => Calls<PutScriptDescriptor, PutScriptRequest, IPutScriptRequest, IAcknowledgedResponse>(
 			UpdateInitializer,
 			UpdateFluent,
 			fluent: (s, c, f) => c.PutScript(_lang, s, f),
@@ -64,7 +64,7 @@ namespace Tests.Modules.Scripting
 
 		protected IPutScriptRequest UpdateFluent(string id, PutScriptDescriptor d) => d.Script(_updatedScript);
 
-		protected override LazyResponses Delete() => Calls<DeleteScriptDescriptor, DeleteScriptRequest, IDeleteScriptRequest, IDeleteScriptResponse>(
+		protected override LazyResponses Delete() => Calls<DeleteScriptDescriptor, DeleteScriptRequest, IDeleteScriptRequest, IAcknowledgedResponse>(
 			DeleteInitializer,
 			DeleteFluent,
 			fluent: (s, c, f) => c.DeleteScript(_lang, s, f),

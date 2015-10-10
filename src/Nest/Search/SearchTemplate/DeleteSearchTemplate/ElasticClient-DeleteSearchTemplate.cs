@@ -12,37 +12,37 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <inheritdoc/>
-		IDeleteSearchTemplateResponse DeleteSearchTemplate(Id id, Func<DeleteSearchTemplateDescriptor, IDeleteSearchTemplateRequest> selector = null);
+		IAcknowledgedResponse DeleteSearchTemplate(Id id, Func<DeleteSearchTemplateDescriptor, IDeleteSearchTemplateRequest> selector = null);
 
 		/// <inheritdoc/>
-		IDeleteSearchTemplateResponse DeleteSearchTemplate(IDeleteSearchTemplateRequest request);
+		IAcknowledgedResponse DeleteSearchTemplate(IDeleteSearchTemplateRequest request);
 
 		/// <inheritdoc/>
-		Task<IDeleteSearchTemplateResponse> DeleteSearchTemplateAsync(Id id, Func<DeleteSearchTemplateDescriptor, IDeleteSearchTemplateRequest> selector = null);
+		Task<IAcknowledgedResponse> DeleteSearchTemplateAsync(Id id, Func<DeleteSearchTemplateDescriptor, IDeleteSearchTemplateRequest> selector = null);
 
 		/// <inheritdoc/>
-		Task<IDeleteSearchTemplateResponse> DeleteSearchTemplateAsync(IDeleteSearchTemplateRequest request);
+		Task<IAcknowledgedResponse> DeleteSearchTemplateAsync(IDeleteSearchTemplateRequest request);
 	}
 
 	public partial class ElasticClient
 	{
-		public IDeleteSearchTemplateResponse DeleteSearchTemplate(Id id, Func<DeleteSearchTemplateDescriptor, IDeleteSearchTemplateRequest> selector = null) =>
+		public IAcknowledgedResponse DeleteSearchTemplate(Id id, Func<DeleteSearchTemplateDescriptor, IDeleteSearchTemplateRequest> selector = null) =>
 			this.DeleteSearchTemplate(selector.InvokeOrDefault(new DeleteSearchTemplateDescriptor(id)));
 
 
-		public IDeleteSearchTemplateResponse DeleteSearchTemplate(IDeleteSearchTemplateRequest request) => 
-			this.Dispatcher.Dispatch<IDeleteSearchTemplateRequest, DeleteSearchTemplateRequestParameters, DeleteSearchTemplateResponse>(
+		public IAcknowledgedResponse DeleteSearchTemplate(IDeleteSearchTemplateRequest request) => 
+			this.Dispatcher.Dispatch<IDeleteSearchTemplateRequest, DeleteSearchTemplateRequestParameters, AcknowledgedResponse>(
 				request,
-				(p, d) => this.LowLevelDispatch.DeleteTemplateDispatch<DeleteSearchTemplateResponse>(p)
+				(p, d) => this.LowLevelDispatch.DeleteTemplateDispatch<AcknowledgedResponse>(p)
 			);
 
-		public Task<IDeleteSearchTemplateResponse> DeleteSearchTemplateAsync(Id id, Func<DeleteSearchTemplateDescriptor, IDeleteSearchTemplateRequest> selector = null) => 
+		public Task<IAcknowledgedResponse> DeleteSearchTemplateAsync(Id id, Func<DeleteSearchTemplateDescriptor, IDeleteSearchTemplateRequest> selector = null) => 
 			this.DeleteSearchTemplateAsync(selector.InvokeOrDefault(new DeleteSearchTemplateDescriptor(id)));
 
-		public Task<IDeleteSearchTemplateResponse> DeleteSearchTemplateAsync(IDeleteSearchTemplateRequest request) => 
-			this.Dispatcher.DispatchAsync<IDeleteSearchTemplateRequest, DeleteSearchTemplateRequestParameters, DeleteSearchTemplateResponse, IDeleteSearchTemplateResponse>(
+		public Task<IAcknowledgedResponse> DeleteSearchTemplateAsync(IDeleteSearchTemplateRequest request) => 
+			this.Dispatcher.DispatchAsync<IDeleteSearchTemplateRequest, DeleteSearchTemplateRequestParameters, AcknowledgedResponse, IAcknowledgedResponse>(
 				request,
-				(p, d) => this.LowLevelDispatch.DeleteTemplateDispatchAsync<DeleteSearchTemplateResponse>(p)
+				(p, d) => this.LowLevelDispatch.DeleteTemplateDispatchAsync<AcknowledgedResponse>(p)
 			);
 	}
 }
