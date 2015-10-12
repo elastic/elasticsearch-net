@@ -8,7 +8,6 @@ using DiffPlex.DiffBuilder.Model;
 using FluentAssertions;
 using Nest;
 using Newtonsoft.Json.Linq;
-using Ploeh.AutoFixture;
 using Elasticsearch.Net.Serialization;
 using Tests.Framework;
 using System.Text.RegularExpressions;

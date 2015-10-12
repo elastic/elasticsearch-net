@@ -54,7 +54,7 @@ namespace Nest.Litterateur.Walkers
 				base.Visit(node);
 
 				var nodeHasLeadingTriva = node.HasLeadingTrivia && node.GetLeadingTrivia()
-					.Any(c=>c.CSharpKind() == SyntaxKind.MultiLineDocumentationCommentTrivia);
+					.Any(c=>c.Kind() == SyntaxKind.MultiLineDocumentationCommentTrivia);
 				var blocks = codeBlocks.Intertwine<IDocumentationBlock>(this.TextBlocks, swap: nodeHasLeadingTriva);
 				this.Blocks.Add(new CombinedBlock(blocks, line));
 				return;
@@ -68,7 +68,7 @@ namespace Nest.Litterateur.Walkers
 			var nodeLine = node.SyntaxTree.GetLineSpan(node.Span).StartLinePosition.Line;
 			var line = _lineNumberOverride ?? nodeLine;
 			var text = node.TextTokens
-				.Where(n => n.CSharpKind() == SyntaxKind.XmlTextLiteralToken)
+				.Where(n => n.Kind() == SyntaxKind.XmlTextLiteralToken)
 				.Aggregate(new StringBuilder(), (a, t) => a.AppendLine(t.Text.TrimStart()), a => a.ToString());
 
 			this.TextBlocks.Add(new TextBlock(text, line));
