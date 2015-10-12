@@ -101,9 +101,9 @@ module Tooling =
             if doesNotExist modulePath then
                 traceFAKE "npm module %s not found installing in %s" npmId modulePath
                 if (isMono) then
-                    execProcess "npm" ["install"; npmId; "--prefix"; "./build/tools" ]
+                    execProcess "npm" ["install"; npmId; "--prefix"; "./packages/build" ]
                 else 
-                Node.Exec [npm; "install"; npmId; "--prefix"; "./build/tools" ]
+                Node.Exec [npm; "install"; npmId; "--prefix"; "./packages/build" ]
         member this.Path = binPath
 
         member this.Exec arguments =
@@ -112,6 +112,5 @@ module Tooling =
                 else
                     exec Node.Path <| binPath :: arguments
 
-    let Wintersmith = new NpmTooling("wintersmith", "bin/wintersmith")
     let Notifier = new NpmTooling("node-notifier", "bin.js")
 

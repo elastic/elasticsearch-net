@@ -231,7 +231,7 @@ NUGET
   specs:
     FAKE (4.5.6)
     FSharp.Data (2.2.5)
-      Zlib.Portable (>= 1.10.0) - framework: portable-net40+sl50+wp80+win80
+      Zlib.Portable (>= 1.10.0)
     gitlink (2.1.0)
     Node.js (4.0.0)
     NoGit (0.0.9)

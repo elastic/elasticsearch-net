@@ -54,12 +54,6 @@ Target "Release" <| fun _ ->
     Release.PackAll()
     Sign.ValidateNugetDllAreSignedCorrectly()
 
-Target "Docs" <| fun _ -> Documentation.Execute "build" 
-
-Target "DocsPreview" <| fun _ -> 
-  Documentation.Execute "plugin install livereload" 
-  Documentation.Execute "preview" 
-
 Target "Nightly" <| fun _ -> trace "build nightly" 
 
 BuildFailureTarget "NotifyTestFailures" <| fun _ -> Tests.Notify() |> ignore
@@ -86,7 +80,6 @@ BuildFailureTarget "NotifyTestFailures" <| fun _ -> Tests.Notify() |> ignore
 "Build"
   ==> "Release"
 
-"DocsPreview"
 "BuildApp"
 "CreateKeysIfAbsent"
 "Version"
