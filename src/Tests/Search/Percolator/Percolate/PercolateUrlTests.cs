@@ -43,6 +43,15 @@ namespace Tests.Search.Percolator.Percolate
 				.FluentAsync(c=>c.PercolateAsync<Project>(s=>s))
 				.RequestAsync(c=>c.PercolateAsync(new PercolateRequest<Project>()))
 				;
+
+			var document = new Project { Name = "foo" };
+
+			await POST($"/project/project/_percolate")
+				.Fluent(c=>c.Percolate<Project>(s=>s.Document(document)))
+				.Request(c=>c.Percolate(new PercolateRequest<Project>(document)))
+				.FluentAsync(c=>c.PercolateAsync<Project>(s=>s.Document(document)))
+				.RequestAsync(c=>c.PercolateAsync(new PercolateRequest<Project>(document)))
+				;
 		}
 	}
 }

@@ -78,33 +78,10 @@ namespace Nest
 			return null;
 		}
 
-		public RouteValues Required(Indices indices) => Route("index", indices);
-		public RouteValues Optional(Indices indices) => Route("index", indices, false);
-
-		public RouteValues Required(Types types) => Route("type", types);
-		public RouteValues Optional(Types types) => Route("type", types, false);
-
-		public RouteValues Required(Ids ids) => Route("id", ids);
-		public RouteValues Optional(Ids ids) => Route("id", ids, false);
 		public void Remove(string route)
 		{
 			this._resolved.Remove(route);
 			this._routeValues.Remove(route);
-		}
-
-		public RouteValues Required(string route, IEnumerable<Enum> enums) =>
-			Resolved(route, string.Join(",", enums.Select(e => e.GetStringValue())));
-		public RouteValues Optional(string route, IEnumerable<Enum> enums) =>
-			Resolved(route, string.Join(",", enums.Select(e => e.GetStringValue())), false);
-
-		public RouteValues Required(IEnumerable<ClusterStateMetric> enums) => Required("metric", enums.Cast<Enum>());
-		public RouteValues Optional(IEnumerable<ClusterStateMetric> enums) => Optional("metric", enums.Cast<Enum>());
-
-
-		[Obsolete("TODO: Rename to Required once NodeId type is implemented")]
-		public RouteValues RequiredNodeId(string nodeId) => Resolved("node_id", nodeId);
-
-		[Obsolete("TODO: Rename to Optional once NodeId type is implemented")]
-		public RouteValues OptionalNodeId(string nodeId) => Resolved("node_id", nodeId, false);
+		}	
 	}
 }

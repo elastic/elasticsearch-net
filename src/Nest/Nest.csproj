@@ -311,6 +311,7 @@
     <Compile Include="Analysis\Tokenizers\WhitespaceTokenizer.cs" />
     <Compile Include="CommonOptions\Hit\ShardsFailureReason.cs" />
     <Compile Include="Search\CovariantSearch.cs" />
+    <Compile Include="Search\SearchTemplate\GetSearchTemplate\GetSearchTemplateResponse.cs" />
     <Compile Include="Search\Search\Hits\InnerHitsMetaData.cs" />
     <Compile Include="Search\Search\Hits\InnerHitsResult.cs" />
     <Compile Include="Indices\AliasManagement\Alias.cs" />
@@ -382,8 +383,6 @@
     <Compile Include="Indices\AliasManagement\DeleteAlias\DeleteAliasResponse.cs" />
     <Compile Include="Search\FieldStats\FieldStatsResponse.cs" />
     <Compile Include="Indices\IndexManagement\GetIndex\GetIndexResponse.cs" />
-    <Compile Include="Modules\Scripting\DeleteScript\DeleteScriptResponse.cs" />
-    <Compile Include="Search\SearchTemplate\DeleteSearchTemplate\DeleteSearchTemplateResponse.cs" />
     <Compile Include="Search\Explain\ExplainResponse.cs" />
     <Compile Include="Indices\MappingManagement\GetFieldMapping\GetFieldMappingResponse.cs" />
     <Compile Include="Cat\ICatRecord.cs" />
@@ -395,11 +394,9 @@
     <Compile Include="Modules\SnapshotAndRestore\Repositories\VerifyRepository\VerifyRepositoryResponse.cs" />
     <Compile Include="Modules\SnapshotAndRestore\Repositories\GetRepository\GetRepositoryResponse.cs" />
     <Compile Include="Modules\Scripting\GetScript\GetScriptResponse.cs" />
-    <Compile Include="Search\SearchTemplate\GetSearchTemplate\GetSearchTemplateResponse.cs" />
     <Compile Include="Search\Percolator\MultiPercolate\MultiPercolateResponse.cs" />
     <Compile Include="Cluster\NodesHotThreads\NodesHotThreadsResponse.cs" />
     <Compile Include="Indices\AliasManagement\PutAlias\PutAliasResponse.cs" />
-    <Compile Include="Modules\Scripting\PutScript\PutScriptResponse.cs" />
     <Compile Include="Search\SearchShards\SearchShardsResponse.cs" />
     <Compile Include="Modules\SnapshotAndRestore\Snapshot\SnapshotStatus\SnapshotStatusResponse.cs" />
     <Compile Include="Indices\Monitoring\IndicesRecovery\RecoveryOrigin.cs" />
@@ -412,7 +409,6 @@
     <Compile Include="Indices\Monitoring\IndicesRecovery\RecoveryStatusResponse.cs" />
     <Compile Include="Indices\Monitoring\IndicesRecovery\RecoveryTranslogStatus.cs" />
     <Compile Include="Indices\Monitoring\IndicesRecovery\ShardRecovery.cs" />
-    <Compile Include="Search\SearchTemplate\PutSearchTemplate\PutSearchTemplateResponse.cs" />
     <Compile Include="Cluster\ClusterStats\ClusterNodesStas.cs" />
     <Compile Include="Modules\SnapshotAndRestore\Repositories\VerifyRepository\CompactNodeInfo.cs" />
     <Compile Include="Cluster\ClusterStats\CompletionStats.cs" />
