@@ -124,15 +124,6 @@ Allows you to set querystring parameters that have to be added to every request.
 
 [source, csharp]
 ----
-.SetMaximumAsyncConnections(12)
-----
-The default `HttpConnection` is unbounded in how many async connection it will start. Do note that the 
-HttpConnection does not use any threads. If you need to throttle this you can use this setting.
-For other `IConnection` implemenations, it can also be a hint to how many persistant connections it should hold,
-i.e the `ThriftConnection` listens to this.
-
-[source, csharp]
-----
 .SetProxy(new Uri("http://myproxy"), "username", "pass")
 ----
 Sets proxy information on the connection. 

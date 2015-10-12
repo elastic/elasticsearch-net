@@ -4,7 +4,7 @@ Connection pools that return true for `SupportsReseeding` by default sniff on st
 
 [source, csharp]
 ----
-var audit = new Auditor(() => Cluster
+var audit = new Auditor(() => Framework.Cluster
 				.Nodes(10)
 				.Sniff(s => s.Fails(Always))
 				.Sniff(s => s.OnPort(9202).Succeeds(Always))
@@ -19,10 +19,10 @@ await audit.TraceCall(new CallTrace {
 				{ PingSuccess , 9200},
 				{ HealthyResponse, 9200}
 			});
-var audit = new Auditor(() => Cluster
+var audit = new Auditor(() => Framework.Cluster
 				.Nodes(10)
 				.Sniff(s => s.Fails(Always))
-				.Sniff(s => s.OnPort(9202).Succeeds(Always, Cluster.Nodes(8, startFrom: 9204)))
+				.Sniff(s => s.OnPort(9202).Succeeds(Always, Framework.Cluster.Nodes(8, startFrom: 9204)))
 				.SniffingConnectionPool()
 				.AllDefaults()
 			);
@@ -34,7 +34,7 @@ await audit.TraceCall(new CallTrace {
 				{ PingSuccess, 9204},
 				{ HealthyResponse, 9204}
 			});
-var audit = new Auditor(() => Cluster
+var audit = new Auditor(() => Framework.Cluster
 				.Nodes(10)
 				.Sniff(s => s.Fails(Always))
 				.Sniff(s => s.OnPort(9209).Succeeds(Always))
@@ -56,7 +56,7 @@ await audit.TraceCall(new CallTrace {
 				{ PingSuccess, 9200},
 				{ HealthyResponse, 9200}
 			});
-var audit = new Auditor(() => Cluster
+var audit = new Auditor(() => Framework.Cluster
 				.Nodes(new[] {
 					new Node(new Uri("http://localhost:9200")) { MasterEligable = false },
 					new Node(new Uri("http://localhost:9201")) { MasterEligable = false },
@@ -72,7 +72,7 @@ await audit.TraceCall(new CallTrace {
 				{ PingSuccess, 9200},
 				{ HealthyResponse, 9200}
 			});
-var audit = new Auditor(() => Cluster
+var audit = new Auditor(() => Framework.Cluster
 				.Nodes(new[] {
 					new Node(new Uri("http://localhost:9200")) { MasterEligable = true },
 					new Node(new Uri("http://localhost:9201")) { MasterEligable = true },

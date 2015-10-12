@@ -79,7 +79,7 @@ module Tests =
             | 0 ->
                 let successMessage = sprintf "\"All %i tests are passing!\"" total
                 printfn "%s" successMessage
-                Paths.Tooling.Notifier.Exec ["-t " + successMessage; "-m " + successMessage]  
+                Paths.Tooling.Notifier.Exec ["-t " + successMessage; "-m " + successMessage]
                 ignore
             | _ ->
                 let errorMessage = sprintf "\"%i failed %i run, %i skipped\"" errors total skipped
@@ -89,8 +89,8 @@ module Tests =
 
     let RunContinuous = fun _ ->
         ActivateBuildFailureTarget "NotifyTestFailures"
-        Paths.Tooling.Notifier.Exec ["-t " + "\"Starting tests!\""; "-m " + "\"...\""]  
-        try  
+        Paths.Tooling.Notifier.Exec ["-t " + "\"Starting tests!\""; "-m " + "\"...\""]
+        try 
             !! Paths.Source("**/bin/Release/Tests.dll") 
             |> xUnit2 (fun p -> 
             { 
