@@ -29,4 +29,5 @@ group build
     nuget FSharp.Data
     nuget GitLink
     nuget node.js
+	nuget npm
     nuget xunit.runner.console
