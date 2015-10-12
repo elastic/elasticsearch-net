@@ -1,15 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Elasticsearch.Net.Serialization;
-using Elasticsearch.Net.ConnectionPool;
-using Elasticsearch.Net.Providers;
-using Elasticsearch.Net.Connection.Configuration;
-using PurifyNet;
 using System.IO;
-using System.Collections.Specialized;
 using System.Threading;
 
 namespace Elasticsearch.Net.Connection
@@ -43,16 +37,16 @@ namespace Elasticsearch.Net.Connection
 			MemoryStream ms = null; Stream stream = null;
 			switch (_tag)
 			{
-				case 0:
+				case 0: //bytes
 					ms = new MemoryStream(Bytes);
 					break;
-				case 1:
+				case 1: //literal string
 					ms = new MemoryStream(LiteralString?.Utf8Bytes());
 					break;
-				case 2:
+				case 2: //enumerable of string
 					ms = EnumurabeOfStrings.HasAny() ? new MemoryStream((string.Join("\n", EnumurabeOfStrings) + "\n").Utf8Bytes()) : null;
 					break;
-				case 3:
+				case 3: //enumerable of objects
 					if (!EnumerableOfObject.HasAny()) return;
 
 					if (settings.DisableDirectStreaming)
@@ -67,14 +61,14 @@ namespace Elasticsearch.Net.Connection
 						stream.Write(new byte[] { (byte)'\n' }, 0, 1);
 					}
 					break;
-				case 4:
+				case 4: //object
 					stream = writableStream;
 					if (settings.DisableDirectStreaming)
 					{
 						ms = new MemoryStream();
 						stream = ms;
 					}
-					settings.Serializer.Serialize(this.Serializable, writableStream, indent);
+					settings.Serializer.Serialize(this.Serializable, stream, indent);
 					break;
 			}
 			if (ms != null)
@@ -92,16 +86,16 @@ namespace Elasticsearch.Net.Connection
 			MemoryStream ms = null; Stream stream = null;
 			switch (_tag)
 			{
-				case 0:
+				case 0: //bytes
 					ms = new MemoryStream(Bytes);
 					break;
-				case 1:
+				case 1: //string
 					ms = new MemoryStream(LiteralString?.Utf8Bytes());
 					break;
-				case 2:
+				case 2: //enumerable of strings
 					ms = EnumurabeOfStrings.HasAny() ? new MemoryStream((string.Join("\n", EnumurabeOfStrings) + "\n").Utf8Bytes()) : null;
 					break;
-				case 3:
+				case 3: //enumerable of objects
 					if (!EnumerableOfObject.HasAny()) return;
 					if (settings.DisableDirectStreaming)
 					{
@@ -115,14 +109,14 @@ namespace Elasticsearch.Net.Connection
 						stream.Write(new byte[] { (byte)'\n' }, 0, 1);
 					}
 					break;
-				case 4:
+				case 4: //object
 					stream = writableStream;
 					if (settings.DisableDirectStreaming)
 					{
 						ms = new MemoryStream();
 						stream = ms;
 					}
-					settings.Serializer.Serialize(this.Serializable, writableStream, indent);
+					settings.Serializer.Serialize(this.Serializable, stream, indent);
 					break;
 			}
 			if (ms != null)

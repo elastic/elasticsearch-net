@@ -59,9 +59,11 @@ namespace Nest
 		protected HasADictionaryDescriptor(Dictionary<TKey, TValue> backingDictionary) { this.BackingDictionary = backingDictionary; }
 		protected HasADictionaryDescriptor(IDictionary<TKey, TValue> backingDictionary)
 		{
-			if (backingDictionary != null) this.BackingDictionary = new Dictionary<TKey, TValue>(backingDictionary);
-			else this.BackingDictionary = new Dictionary<TKey, TValue>();
+			this.BackingDictionary = backingDictionary != null 
+				? new Dictionary<TKey, TValue>(backingDictionary) 
+				: new Dictionary<TKey, TValue>();
 		}
+
 		TValue IHasADictionary<TKey, TValue>.this[TKey key]
 		{
 			get { return this.BackingDictionary[key]; }

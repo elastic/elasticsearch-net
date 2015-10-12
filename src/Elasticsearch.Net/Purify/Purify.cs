@@ -55,13 +55,13 @@ namespace PurifyNet
             if (!uri.IsAbsoluteUri)
                 return uri;
 
-            IPurifier purifier = null;
+            IPurifier purifier;
             if (isMono)
                 purifier = new PurifierMono();
             else if (hasBrokenDotNetUri)
                 purifier = new PurifierDotNet();
             else return uri;
-            
+           
             purifier.Purify(uri);
             return uri;
         }

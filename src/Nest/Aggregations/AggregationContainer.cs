@@ -22,7 +22,7 @@ namespace Nest
 
 		public static implicit operator AggregationDictionary(AggregatorBase aggregator)
 		{
-			IAggregatorBase b = null;
+			IAggregatorBase b;
 			var combinator = aggregator as AggregatorCombinator;
 			if (combinator != null)
 			{

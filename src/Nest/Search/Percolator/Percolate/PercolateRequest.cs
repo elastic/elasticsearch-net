@@ -232,11 +232,7 @@ namespace Nest
 		public PercolateDescriptor<TDocument> QueryString(string userInput)
 		{
 			var q = new QueryContainerDescriptor<TDocument>();
-			QueryContainer bq;
-			if (userInput.IsNullOrEmpty())
-				bq = q.MatchAll();
-			else
-				bq = q.QueryString(qs => qs.Query(userInput));
+			var bq = userInput.IsNullOrEmpty() ? q.MatchAll() : q.QueryString(qs => qs.Query(userInput));
 			Self.Query = bq;
 			return this;
 		}

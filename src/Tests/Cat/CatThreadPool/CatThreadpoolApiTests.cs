@@ -28,5 +28,4 @@ namespace Tests.Cat.CatThreadPool
 		protected override string UrlPath => "/_cat/thread_pool";
 
 	}
-
 }

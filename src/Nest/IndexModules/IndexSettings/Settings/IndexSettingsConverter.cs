@@ -189,8 +189,7 @@ namespace Nest
 		{
 			if (!settings.ContainsKey(key)) return false;
 			var v = settings[key];
-			if (serializer == null) assign(v.Value.ToObject<T>());
-			else assign(v.Value.ToObject<T>(serializer));
+			assign(serializer == null ? v.Value.ToObject<T>() : v.Value.ToObject<T>(serializer));
 			settings.Remove(key);
 			return true;
 		}

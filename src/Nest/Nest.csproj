@@ -92,6 +92,7 @@
     <Compile Include="Analysis\Tokenizers\TokenizerJsonConverter.cs" />
     <Compile Include="Analysis\Tokenizers\NGram\TokenChar.cs" />
     <Compile Include="Analysis\Tokenizers\Tokenizers.cs" />
+    <Compile Include="Cluster\ClusterHealth\ClusterHealthResponse.cs" />
     <Compile Include="CommonAbstractions\Fluent\DescriptorBase.cs" />
     <Compile Include="CommonAbstractions\Infer\DocumentPath\DocumentPath.cs" />
     <Compile Include="CommonAbstractions\Infer\Features\Features.cs" />
@@ -802,7 +803,6 @@
     <Compile Include="Document\Multiple\DeleteByQuery\ElasticClient-DeleteByQuery.cs" />
     <Compile Include="Indices\IndexManagement\CreateIndex\CreateIndexRequest.cs" />
     <Compile Include="Indices\IndexManagement\CreateIndex\ElasticClient-CreateIndex.cs" />
-    <Compile Include="Cluster\ClusterHealth\HealthResponse.cs" />
     <Compile Include="Cluster\NodesInfo\NodeInfoResponse.cs" />
     <Compile Include="Cluster\NodesStats\NodeStatsResponse.cs" />
     <Compile Include="Cluster\ClusterHealth\IndexHealthStats.cs" />

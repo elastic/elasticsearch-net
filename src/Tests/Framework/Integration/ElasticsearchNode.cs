@@ -190,14 +190,13 @@ namespace Tests.Framework.Integration
 				if (!Directory.Exists(this.RoamingClusterFolder)) continue;
 
 				var timeout = TimeSpan.FromSeconds(60);
-				using (var p = new ObservableProcess(pluginBat, "install", installPath))
+				var handle = new ManualResetEvent(false);
+				Task.Factory.StartNew(() =>
 				{
-					var handle = new ManualResetEvent(false);
-					Task.Factory.StartNew(() =>
+					using (var p = new ObservableProcess(pluginBat, "install", installPath))
 					{
 						var o = p.Start();
-						o.Subscribe(
-							Console.WriteLine,
+						o.Subscribe(Console.WriteLine,
 							(e) =>
 							{
 								handle.Set();
@@ -205,10 +204,10 @@ namespace Tests.Framework.Integration
 							},
 							() => handle.Set()
 							);
-					});
-					if (!handle.WaitOne(timeout, true))
-						throw new ApplicationException($"Could not install ${installPath} within {timeout}");
-				}
+					}
+				});
+				if (!handle.WaitOne(timeout, true))
+					throw new ApplicationException($"Could not install ${installPath} within {timeout}");
 			}
 		}
 

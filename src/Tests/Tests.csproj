@@ -123,6 +123,7 @@
     <Compile Include="ClientConcepts\ConnectionPooling\Sniffing\RoleDetection.doc.cs" />
     <Compile Include="ClientConcepts\HighLevel\CovariantHits\CovariantSearchResults.doc.cs" />
     <Compile Include="ClientConcepts\HighLevel\Inferrence\DocumentPaths\DocumentPaths.doc.cs" />
+    <Compile Include="ClientConcepts\HighLevel\Inferrence\RouteValues\FeaturesInference.cs" />
     <Compile Include="ClientConcepts\HighLevel\Inferrence\Id\IdsInference.doc.cs" />
     <Compile Include="ClientConcepts\HighLevel\Inferrence\Indices\IndicesPaths.doc.cs" />
     <Compile Include="Cluster\ClusterHealth\ClusterHealthUrlTests.cs" />

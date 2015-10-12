@@ -26,7 +26,7 @@ namespace Nest
 			var jo = firstProp.Value.Value<JObject>();
 			if (jo == null) return null;
 
-			JToken v = null;
+			JToken v;
 			if (!jo.TryGetValue("value", out v)) return null;
 
 			IFuzzyQuery fq = new FuzzyQueryDescriptor<object>();

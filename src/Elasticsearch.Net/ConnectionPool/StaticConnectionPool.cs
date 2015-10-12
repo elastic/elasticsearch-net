@@ -69,26 +69,22 @@ namespace Elasticsearch.Net.ConnectionPool
 			var globalCursor = Interlocked.Increment(ref GlobalCursor);
 			var localCursor = globalCursor % count;
 
-			Node node = null;
-			for (int attempts = 0; attempts < count; attempts++)
+			Node node;
+			for (var attempts = 0; attempts < count; attempts++)
 			{
 				node = nodes[localCursor];
 				localCursor = (localCursor + 1) % count;
 				//node is not dead or no longer dead
-				if (node.DeadUntil <= now)
-				{
-					//if this node is not alive mark it as resurrected
-					if (!node.IsAlive) node.IsResurrected = true;
-					yield return node;
-				}
-			}
-			if (count == 0)
-			{
-				//could not find a suitable node retrying on node that has been dead longest.
-				node = this.InternalNodes[globalCursor % count];
-				node.IsResurrected = true;
+				if (node.DeadUntil > now) continue;
+				//if this node is not alive mark it as resurrected
+				if (!node.IsAlive) node.IsResurrected = true;
 				yield return node;
 			}
+			if (count != 0) yield break;
+			//could not find a suitable node retrying on node that has been dead longest.
+			node = this.InternalNodes[globalCursor % count];
+			node.IsResurrected = true;
+			yield return node;
 		}
 
 	}
