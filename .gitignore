@@ -34,9 +34,9 @@ _ReSharper*/
 _NCrunch*/
 [Tt]est[Rr]esult*
 
-.fake/*
+.fake/*	
 packages/*
-.paket/paket.exe
+paket.exe
 
 build/*
 !build/tools
@@ -50,7 +50,7 @@ build/tools/*
 !build/*.ps1
 !build/*.nuspec
 !build/scripts
-!.paket/*.exe
+
 
 /dep/Newtonsoft.Json.4.0.2
 !docs/build
