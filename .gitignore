@@ -34,6 +34,8 @@ _ReSharper*/
 _NCrunch*/
 [Tt]est[Rr]esult*
 
+.fake/*
+
 build/*
 !build/tools
 !build/keys
