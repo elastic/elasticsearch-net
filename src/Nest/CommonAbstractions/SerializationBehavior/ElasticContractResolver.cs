@@ -40,6 +40,8 @@ namespace Nest.Resolvers
 			else if (objectType == typeof(ITokenizer)) contract.Converter = new TokenizerJsonConverter();
 			else if (objectType == typeof(ITokenFilter)) contract.Converter = new TokenFilterJsonConverter();
 
+			else if (objectType == typeof(IClusterRerouteCommand)) contract.Converter = new ClusterRerouteCommandJsonConverter();
+
 			else if (objectType == typeof(DateTime) || objectType == typeof(DateTime?))
 				contract.Converter = new IsoDateTimeConverter();
 
@@ -114,6 +116,10 @@ namespace Nest.Resolvers
 			defaultProperties = PropertiesOf<IInnerHitsContainer>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IInnerHits>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IProperty>(type, memberSerialization, defaultProperties, lookup);
+
+
+			defaultProperties = PropertiesOf<IClusterRerouteCommand>(type, memberSerialization, defaultProperties, lookup);
+
 			defaultProperties = PropertiesOf<INestSerializable>(type, memberSerialization, defaultProperties, lookup);
 
 			return defaultProperties.GroupBy(p => p.PropertyName).Select(p => p.First()).ToList();

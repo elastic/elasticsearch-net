@@ -14,10 +14,10 @@ namespace Nest
 		/// For example, a shard can be moved from one node to another explicitly, an allocation can be canceled, 
 		/// or an unassigned shard can be explicitly allocated on a specific node.
 		/// </summary>
-		IClusterRerouteResponse ClusterReroute(Func<ClusterRerouteDescriptor, IClusterRerouteRequest> clusterRerouteSelector = null);
+		IClusterRerouteResponse ClusterReroute(Func<ClusterRerouteDescriptor, IClusterRerouteRequest> clusterRerouteSelector);
 
 		/// <inheritdoc/>
-		Task<IClusterRerouteResponse> ClusterRerouteAsync(Func<ClusterRerouteDescriptor, IClusterRerouteRequest> clusterRerouteSelector = null);
+		Task<IClusterRerouteResponse> ClusterRerouteAsync(Func<ClusterRerouteDescriptor, IClusterRerouteRequest> clusterRerouteSelector);
 
 		/// <inheritdoc/>
 		IClusterRerouteResponse ClusterReroute(IClusterRerouteRequest clusterRerouteRequest);
@@ -30,12 +30,12 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IClusterRerouteResponse ClusterReroute(Func<ClusterRerouteDescriptor, IClusterRerouteRequest> clusterRerouteSelector = null) =>
-			this.ClusterReroute(clusterRerouteSelector.InvokeOrDefault(new ClusterRerouteDescriptor()));
+		public IClusterRerouteResponse ClusterReroute(Func<ClusterRerouteDescriptor, IClusterRerouteRequest> clusterRerouteSelector) =>
+			this.ClusterReroute(clusterRerouteSelector?.Invoke(new ClusterRerouteDescriptor()));
 
 		/// <inheritdoc/>
-		public Task<IClusterRerouteResponse> ClusterRerouteAsync(Func<ClusterRerouteDescriptor, IClusterRerouteRequest> clusterRerouteSelector = null) =>
-			this.ClusterRerouteAsync(clusterRerouteSelector.InvokeOrDefault(new ClusterRerouteDescriptor()));
+		public Task<IClusterRerouteResponse> ClusterRerouteAsync(Func<ClusterRerouteDescriptor, IClusterRerouteRequest> clusterRerouteSelector) =>
+			this.ClusterRerouteAsync(clusterRerouteSelector?.Invoke(new ClusterRerouteDescriptor()));
 
 		/// <inheritdoc/>
 		public IClusterRerouteResponse ClusterReroute(IClusterRerouteRequest clusterRerouteRequest) => 

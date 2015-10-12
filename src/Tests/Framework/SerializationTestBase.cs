@@ -44,6 +44,7 @@ namespace Tests.Framework
 		{
 			serialized = null;
 			serialized = this.Serialize(o);
+			serialized.Should().NotBeNullOrWhiteSpace(o.ToString());
 			var actualJson = JToken.Parse(serialized);
 
 			var matches = JToken.DeepEquals(this._expectedJsonJObject, actualJson);
@@ -73,6 +74,8 @@ namespace Tests.Framework
 
 		protected T AssertSerializesAndRoundTrips<T>(T o)
 		{
+			if (string.IsNullOrEmpty(this._expectedJsonString)) return default(T);
+
 			int iteration = 0;
 			//first serialize to string and assert it looks like this.ExpectedJson
 			string serialized;

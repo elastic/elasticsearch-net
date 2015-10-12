@@ -6,50 +6,55 @@ using System.Text;
 
 namespace Nest
 {
-	public class MoveClusterRerouteCommand : IClusterRerouteCommand
+
+	public interface IMoveClusterRerouteCommand: IClusterRerouteCommand
 	{
-		[JsonIgnore]
-		public string Name { get { return "move";  } }
+		[JsonProperty("from_node")]
+		string FromNode { get; set; }
 
 		[JsonProperty("index")]
-		public string Index { get; set; }
+		IndexName Index { get; set; }
 
 		[JsonProperty("shard")]
-		public int Shard { get; set; }
-
-		[JsonProperty("from_node")]
-		public string FromNode { get; set; }
+		int Shard { get; set; }
 
 		[JsonProperty("to_node")]
+		string ToNode { get; set; }
+	}
+	public class MoveClusterRerouteCommand : IMoveClusterRerouteCommand
+	{
+		public string Name => "move";
+
+		public IndexName Index { get; set; }
+
+		public int Shard { get; set; }
+
+		public string FromNode { get; set; }
+
 		public string ToNode { get; set; }
 	}
 
-	public class MoveClusterRerouteCommandDescriptor
+	public class MoveClusterRerouteCommandDescriptor 
+		: DescriptorBase<MoveClusterRerouteCommandDescriptor, IMoveClusterRerouteCommand>, IMoveClusterRerouteCommand
 	{
-		internal MoveClusterRerouteCommand Command = new MoveClusterRerouteCommand();
+		string IClusterRerouteCommand.Name => "move";
 
-		public MoveClusterRerouteCommandDescriptor Index(string index)
-		{
-			this.Command.Index = index;
-			return this;
-		}
+		IndexName IMoveClusterRerouteCommand.Index { get; set; }
 
-		public MoveClusterRerouteCommandDescriptor Shard(int shard)
-		{
-			this.Command.Shard = shard;
-			return this;
-		}
+		int IMoveClusterRerouteCommand.Shard { get; set; }
 
-		public MoveClusterRerouteCommandDescriptor FromNode(string fromNode)
-		{
-			this.Command.FromNode = fromNode;
-			return this;
-		}
+		string IMoveClusterRerouteCommand.FromNode { get; set; }
 
-		public MoveClusterRerouteCommandDescriptor ToNode(string toNode)
-		{
-			this.Command.ToNode = toNode;
-			return this;
-		}
+		string IMoveClusterRerouteCommand.ToNode { get; set; }
+
+		public MoveClusterRerouteCommandDescriptor Index(IndexName index) => Assign(a => a.Index = index);
+
+		public MoveClusterRerouteCommandDescriptor Index<T>() where T : class => Assign(a => a.Index = typeof(T));
+
+		public MoveClusterRerouteCommandDescriptor Shard(int shard) => Assign(a => a.Shard = shard);
+
+		public MoveClusterRerouteCommandDescriptor FromNode(string fromNode) => Assign(a => a.FromNode = fromNode);
+
+		public MoveClusterRerouteCommandDescriptor ToNode(string toNode) => Assign(a => a.ToNode = toNode);
 	}
 }

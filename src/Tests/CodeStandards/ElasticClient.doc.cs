@@ -60,5 +60,7 @@ namespace Tests.CodeStandards
 		}
 
 		//TODO ensure xml docs on all IElasticClient methods
+
+		//TODO ensure sync methods have exact same arguments (nullable/not nullable) as their async counterparts
 	}
 }

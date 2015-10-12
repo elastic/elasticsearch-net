@@ -59,6 +59,10 @@ namespace Tests.CodeStandards
 		//TODO some interfaces are implemented by both requests as well isolated classes to be used elsewhere in the DSL
 		//We need to write tests that these have the same public methods so we do not accidentally add it without adding it to the interface
 
-		//Write a tests that all properties of type QueryContainer have the same json converters set	
+		//Write a tests that all properties of type QueryContainer have the same json converters set
+
+		//TODO write tests that request expose QueryContainer/AggregationContainer not their interfaces
+
+		//TODO descriptors taking a single valuetype parameter should always be nullable
 	}
 }
