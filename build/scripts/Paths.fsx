@@ -1,4 +1,4 @@
-﻿#I @"../tools/FAKE/tools"
+﻿#I @"../../packages/build/FAKE/tools"
 #r @"FakeLib.dll"
 open Fake
 
@@ -11,7 +11,7 @@ module Paths =
     let BuildFolder = "build"
 
     let BuildOutput = sprintf "%s/output" BuildFolder
-    let ToolsFolder = sprintf "%s/tools" BuildFolder
+    let ToolsFolder = "packages/build"
     let KeysFolder = sprintf "%s/keys" BuildFolder
     let NugetOutput = sprintf "%s/_packages" BuildOutput
     let SourceFolder = "src"
@@ -69,23 +69,7 @@ module Tooling =
 
     let private exec = execAt Environment.CurrentDirectory
 
-    let private nuget nugetId location = 
-        let path = "build/tools/nuget/nuget.exe"
-        if doesNotExist path then 
-            printf "Downloading NuGet..."
-            use webClient = new System.Net.WebClient()
-            path |> Path.GetDirectoryName |> Directory.CreateDirectory |> ignore
-            webClient.DownloadFile("https://nuget.org/nuget.exe", path |> Path.GetFullPath)
-            printfn "Done."
-        let fullTargetPath = sprintf "%s/%s" Paths.ToolsFolder location
-        if doesNotExist fullTargetPath then
-            traceFAKE "Tool %s not found installing in %s" nugetId fullTargetPath
-            exec path ["install"; nugetId; "-OutputDirectory build/tools"; "-ExcludeVersion"]
-
     type NugetTooling(nugetId, path) =
-        do 
-            //bootstrap nuget installation when needed
-            nuget nugetId path
         member this.Path = sprintf "%s/%s" Paths.ToolsFolder path 
         member this.Exec arguments = 
             exec this.Path arguments

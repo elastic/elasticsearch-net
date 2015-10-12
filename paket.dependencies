@@ -20,3 +20,13 @@ nuget Rx-Interfaces
 nuget Rx-Linq 
 nuget Rx-Main
 nuget Rx-PlatformServices
+
+group build
+    
+	source https://www.nuget.org/api/v2
+
+	nuget FAKE
+    nuget FSharp.Data
+    nuget GitLink
+    nuget node.js
+    nuget xunit.runner.console
