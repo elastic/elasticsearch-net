@@ -17,21 +17,22 @@ namespace Nest
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
-
 			IClusterRerouteCommand command = null;
 			var o = JObject.Load(reader);
 			var child = o.Children<JProperty>().FirstOrDefault();
 			if (child == null) return null;
+			var v = child.Children<JObject>().FirstOrDefault();
+			if (v == null) return null;
 			switch (child.Name)
 			{
 				case "allocate":
-					command = o.ToObject<AllocateClusterRerouteCommand>(ElasticContractResolver.Empty);
+					command = v.ToObject<AllocateClusterRerouteCommand>(ElasticContractResolver.Empty);
 					break;
 				case "move":
-					command = o.ToObject<MoveClusterRerouteCommand>(ElasticContractResolver.Empty);
+					command = v.ToObject<MoveClusterRerouteCommand>(ElasticContractResolver.Empty);
 					break;
 				case "cancel":
-					command = o.ToObject<CancelClusterRerouteCommand>(ElasticContractResolver.Empty);
+					command = v.ToObject<CancelClusterRerouteCommand>(ElasticContractResolver.Empty);
 					break;
 			}
 			return command;

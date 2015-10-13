@@ -40,7 +40,8 @@ namespace Nest.Resolvers
 			else if (objectType == typeof(ITokenizer)) contract.Converter = new TokenizerJsonConverter();
 			else if (objectType == typeof(ITokenFilter)) contract.Converter = new TokenFilterJsonConverter();
 
-			else if (objectType == typeof(IClusterRerouteCommand)) contract.Converter = new ClusterRerouteCommandJsonConverter();
+			else if (typeof(IClusterRerouteCommand).IsAssignableFrom(objectType))
+				contract.Converter = new ClusterRerouteCommandJsonConverter();
 
 			else if (objectType == typeof(DateTime) || objectType == typeof(DateTime?))
 				contract.Converter = new IsoDateTimeConverter();
