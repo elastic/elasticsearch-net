@@ -1,0 +1,9 @@
+[source, csharp]
+----
+await PUT("/_cluster/settings")
+				.Fluent(c => c.ClusterSettings())
+				.Request(c => c.ClusterSettings(new ClusterSettingsRequest()))
+				.FluentAsync(c => c.ClusterSettingsAsync())
+				.RequestAsync(c => c.ClusterSettingsAsync(new ClusterSettingsRequest()))
+				;
+----

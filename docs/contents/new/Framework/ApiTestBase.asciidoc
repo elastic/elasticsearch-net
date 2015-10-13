@@ -36,5 +36,4 @@ clientKeyValues.Should().Equal(expectedKeyValues);
 var responses = await this._responses;
 var response = kv.Value as TResponse;
 assert(response);
-when (true)
 ----

@@ -37,7 +37,7 @@ Target "WatchTests"  <| fun _ ->
     use watcher = (!! "src/Tests/**/*.cs").And("src/Tests/**/*.md") |> WatchChanges (fun changes -> 
             printfn "%A" changes
             Build.QuickCompile()
-            Documentation.RunLitterateur()
+            //Documentation.RunLitterateur()
             Tests.RunContinuous()
         )
     

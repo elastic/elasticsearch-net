@@ -44,7 +44,6 @@ namespace Tests.Framework
 		protected virtual IElasticClient Client => this._cluster.Client(GetConnectionSettings);
 		protected virtual TDescriptor NewDescriptor() => Activator.CreateInstance<TDescriptor>();
 
-
 		protected LazyResponses Calls(
 			Func<IElasticClient, Func<TDescriptor, TInterface>, TResponse> fluent,
 			Func<IElasticClient, Func<TDescriptor, TInterface>, Task<TResponse>> fluentAsync,
@@ -127,21 +126,13 @@ namespace Tests.Framework
 			}
 		}
 
-		[U]
-		protected async Task HitsTheCorrectUrl() =>
-			await this.AssertOnAllResponses(r => this.AssertUrl(r.ApiCall.Uri));
+		[U] protected async Task HitsTheCorrectUrl() => await this.AssertOnAllResponses(r => this.AssertUrl(r.ApiCall.Uri));
 
-		[U]
-		protected async Task UsesCorrectHttpMethod() =>
-			await this.AssertOnAllResponses(r => r.CallDetails.HttpMethod.Should().Be(this.HttpMethod));
+		[U] protected async Task UsesCorrectHttpMethod() => await this.AssertOnAllResponses(r => r.CallDetails.HttpMethod.Should().Be(this.HttpMethod));
 
-		[U]
-		protected void SerializesRequest() =>
-			this.AssertSerializesAndRoundTrips<TInterface>(this.Initializer);
+		[U] protected void SerializesRequest() => this.AssertSerializesAndRoundTrips<TInterface>(this.Initializer);
 
-		[U]
-		protected void SerializesFluent() =>
-			this.AssertSerializesAndRoundTrips(this.Fluent(this.ClientDoesThisInternally(NewDescriptor())));
+		[U] protected void SerializesFluent() => this.AssertSerializesAndRoundTrips(this.Fluent?.Invoke(this.ClientDoesThisInternally(NewDescriptor())));
 
 	}
 

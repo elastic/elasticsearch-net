@@ -21,7 +21,7 @@ module Tests =
     let htmlOutput = Paths.Output("TestResults.html")
 
     let RunAllUnitTests() =
-        !! Paths.Source("**/bin/Release/Tests.dll") 
+        !! Paths.Source("Tests/bin/Release/Tests.dll") 
             |> xUnit2 (fun p -> 
             {
                 p with 
@@ -90,13 +90,13 @@ module Tests =
     let RunContinuous = fun _ ->
         ActivateBuildFailureTarget "NotifyTestFailures"
         Paths.Tooling.Notifier.Exec ["-t " + "\"Starting tests!\""; "-m " + "\"...\""]
-        try 
-            !! Paths.Source("**/bin/Release/Tests.dll") 
-            |> xUnit2 (fun p -> 
-            { 
-                p with 
-                    XmlOutputPath = Some <| xmlOutput 
-                    HtmlOutputPath = Some <| htmlOutput 
-            })
-        finally
-            Notify() |> ignore
+        //try 
+        !! Paths.Source("Tests/bin/Release/Tests.dll") 
+        |> xUnit2 (fun p -> 
+        { 
+            p with 
+                XmlOutputPath = Some <| xmlOutput 
+                HtmlOutputPath = Some <| htmlOutput 
+        })
+        //finally
+        Notify() |> ignore

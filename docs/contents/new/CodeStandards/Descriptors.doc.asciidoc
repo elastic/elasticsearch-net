@@ -28,7 +28,6 @@ var selectorMethods =
 				where isFunc
 				let lastArgIsNotInterface = !type.GetGenericArguments().Last().IsInterface
 				where lastArgIsNotInterface
-				select $
-"{m.Name} on {m.DeclaringType.Name}";
+				select $"{m.Name} on {m.DeclaringType.Name}";
 selectorMethods.Should().BeEmpty();
 ----

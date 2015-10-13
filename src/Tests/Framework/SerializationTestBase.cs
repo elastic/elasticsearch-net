@@ -34,6 +34,7 @@ namespace Tests.Framework
 				throw new ArgumentNullException(nameof(this._expectedJsonString));
 		}
 
+
 		protected DateTime FixedDate => new DateTime(2015, 06, 06, 12, 01, 02, 123);
 
 		protected void ShouldBeEquivalentTo(string serialized) =>
