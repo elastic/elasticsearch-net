@@ -1,32 +1,36 @@
-NUGET="build/tools/nuget/nuget.exe"
-FAKE="build/tools/FAKE/tools/FAKE.exe"
-XUNIT="build/tools/xunit.runner.console/tools/xunit.console.exe"
-FSHARPCLI="build/tools/Fsharp.Formatting.CommandTool/Fsharp.Formatting.CommandTool.nupkg"
+#!/usr/bin/env bash
+FAKE="packages/build/FAKE/tools/FAKE.exe"
+BUILDSCRIPT="build/scripts/Targets.fsx"
 
-#we need nuget to install tools locally
-if [[ ! -f "$NUGET" ]]; then
-   echo NUGET not found.. Download...
-   mkdir -p build/tools/nuget
-   curl -o $NUGET https://api.nuget.org/downloads/nuget.exe
+if test "$OS" = "Windows_NT"
+then
+  # use .Net
+
+  .paket/paket.bootstrapper.exe prerelease
+  exit_code=$?
+  if [ $exit_code -ne 0 ]; then
+  	exit $exit_code
+  fi
+
+  .paket/paket.exe install
+  exit_code=$?
+  if [ $exit_code -ne 0 ]; then
+  	exit $exit_code
+  fi
+
+  $FAKE $@ --fsiargs -d:MONO $BUILDSCRIPT
+else
+  # use mono
+  mono .paket/paket.bootstrapper.exe prerelease
+  exit_code=$?
+  if [ $exit_code -ne 0 ]; then
+  	exit $exit_code
+  fi
+
+  mono .paket/paket.exe install
+  exit_code=$?
+  if [ $exit_code -ne 0 ]; then
+  	exit $exit_code
+  fi
+  mono $FAKE $@ --fsiargs -d:MONO $BUILDSCRIPT
 fi
-
-#we need FAKE to process our build scripts
-if [[ ! -f "$FAKE" ]]; then
-    echo  FAKE not found.. Installing..
-    mono --runtime=v4.0 "$NUGET" "install" "FAKE" "-OutputDirectory" "build/tools" "-ExcludeVersion" "-Prerelease"
-fi
-
-#workaround assembly resolution issues in build.fsx
-export FSHARPI=`which fsharpi`
-cat - > fsharpi <<"EOF"
-#!/bin/bash
-libdir=$PWD/build/tools/FAKE/tools/
-$FSHARPI --lib:$libdir $@
-EOF
-chmod +x fsharpi
-mono -V
-mono --runtime=v4.0 "$FAKE" build/scripts/Targets.fsx $@ "skiptests=1" 
-MONOEXIT=$?
-rm fsharpi
-#FORCE exit code to be that of calling fake not the last rm action
-exit $MONOEXIT
