@@ -87,6 +87,7 @@ namespace Tests.Cluster.ClusterReroute
 
 		[I] public async Task Response() => await this.AssertOnAllResponses(r =>
 		{
+			//TODO we expect all three to fail and see it on the response
 		});
 
 	}

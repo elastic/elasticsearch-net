@@ -10,7 +10,7 @@ using static Tests.Framework.UrlTester;
 
 namespace Tests.Cluster.ClusterSettings.ClusterGetSettings
 {
-	public class ClusterGetUrlTests : IUrlTests
+	public class ClusterGetSettingsUrlTests : IUrlTests
 	{
 		[U] public async Task Urls()
 		{

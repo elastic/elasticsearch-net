@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public partial interface IClusterSettingsRequest 
+	public partial interface IClusterPutSettingsRequest 
 	{
 		[JsonProperty(PropertyName = "persistent")]
 		IDictionary<string, object> Persistent { get; set; }
@@ -16,7 +16,7 @@ namespace Nest
 
 	}
 	
-	public partial class ClusterSettingsRequest 
+	public partial class ClusterPutSettingsRequest 
 	{
 		public IDictionary<string, object> Persistent { get; set; }
 
@@ -24,16 +24,16 @@ namespace Nest
 	}
 
 	[DescriptorFor("ClusterPutSettings")]
-	public partial class ClusterSettingsDescriptor 
+	public partial class ClusterPutSettingsDescriptor 
 	{
-		IDictionary<string, object> IClusterSettingsRequest.Persistent { get; set; }
+		IDictionary<string, object> IClusterPutSettingsRequest.Persistent { get; set; }
 
-		IDictionary<string, object> IClusterSettingsRequest.Transient { get; set; }
+		IDictionary<string, object> IClusterPutSettingsRequest.Transient { get; set; }
 
-		public ClusterSettingsDescriptor Persistent(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) =>
+		public ClusterPutSettingsDescriptor Persistent(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) =>
 			Assign(a => a.Persistent = selector?.Invoke(new FluentDictionary<string, object>()));
 
-		public ClusterSettingsDescriptor Transient(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) =>
+		public ClusterPutSettingsDescriptor Transient(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector) =>
 			Assign(a => a.Transient = selector?.Invoke(new FluentDictionary<string, object>()));
 	}
 }

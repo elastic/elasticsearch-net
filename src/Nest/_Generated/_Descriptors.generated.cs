@@ -706,23 +706,23 @@ namespace Nest
 	}
 	
 	///<summary>descriptor for ClusterPutSettings <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</pre></summary>
-	public partial class ClusterSettingsDescriptor  : RequestDescriptorBase<ClusterSettingsDescriptor,ClusterSettingsRequestParameters, IClusterSettingsRequest>, IClusterSettingsRequest
+	public partial class ClusterPutSettingsDescriptor  : RequestDescriptorBase<ClusterPutSettingsDescriptor,ClusterSettingsRequestParameters, IClusterPutSettingsRequest>, IClusterPutSettingsRequest
 	{ 
 			
 		///<summary>Return settings in flat format (default: false)</summary>
-		public ClusterSettingsDescriptor FlatSettings(bool flat_settings = true) => AssignParam(p=>p.FlatSettings(flat_settings));
+		public ClusterPutSettingsDescriptor FlatSettings(bool flat_settings = true) => AssignParam(p=>p.FlatSettings(flat_settings));
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public ClusterSettingsDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
+		public ClusterPutSettingsDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Explicit operation timeout</summary>
-		public ClusterSettingsDescriptor Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
+		public ClusterPutSettingsDescriptor Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
 
 		///<summary>The URL-encoded request definition</summary>
-		public ClusterSettingsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public ClusterPutSettingsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public ClusterSettingsDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		public ClusterPutSettingsDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	

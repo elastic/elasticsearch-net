@@ -1020,13 +1020,13 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IClusterSettingsRequest : IRequest<ClusterSettingsRequestParameters> 
+	public partial interface IClusterPutSettingsRequest : IRequest<ClusterSettingsRequestParameters> 
 	{
 	 } 
 	///<summary>Request parameters for ClusterPutSettings <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</pre></summary>
-	public partial class ClusterSettingsRequest  : RequestBase<ClusterSettingsRequestParameters>, IClusterSettingsRequest
+	public partial class ClusterPutSettingsRequest  : RequestBase<ClusterSettingsRequestParameters>, IClusterPutSettingsRequest
 	{
-		protected IClusterSettingsRequest Self => this;
+		protected IClusterPutSettingsRequest Self => this;
 				///<summary>Return settings in flat format (default: false)</summary>
 		public bool FlatSettings { get { return Q<bool>("flat_settings"); } set { Q("flat_settings", value); } }
 		
