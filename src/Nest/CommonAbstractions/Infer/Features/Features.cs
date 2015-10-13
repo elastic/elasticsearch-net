@@ -25,13 +25,13 @@ namespace Nest
 		public static Features FromString(string features)
 		{
 			var parts = features.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-			Feature? feature = null;
+			int feature = 0;
 			foreach (var p in parts)
 			{
 				var f = p.ToEnum<Feature>();
-				if (f != null) feature |= f;
+				if (f != null) feature |= (int)f;
 			}
-			return feature;
+			return (Feature)feature;
 		}
 	}
 }
