@@ -15,9 +15,9 @@ namespace Tests.Cluster.ClusterSettings.ClusterPutSettings
 		[U] public async Task Urls()
 		{
 			await PUT("/_cluster/settings")
-				.Fluent(c => c.ClusterPutSettings())
+				.Fluent(c => c.ClusterPutSettings(s=>s))
 				.Request(c => c.ClusterPutSettings(new ClusterPutSettingsRequest()))
-				.FluentAsync(c => c.ClusterPutSettingsAsync())
+				.FluentAsync(c => c.ClusterPutSettingsAsync(s=>s))
 				.RequestAsync(c => c.ClusterPutSettingsAsync(new ClusterPutSettingsRequest()))
 				;
 		}

@@ -5,7 +5,7 @@ using Newtonsoft.Json.Converters;
 namespace Nest
 {
 	[JsonConverter(typeof(StringEnumConverter))]
-	public enum SlowLogLevel
+	public enum LogLevel
 	{
 		[EnumMember(Value = "warn")]
 		Warn,

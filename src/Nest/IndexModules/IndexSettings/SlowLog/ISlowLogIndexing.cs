@@ -8,12 +8,12 @@ namespace Nest
 		TimeUnitExpression ThresholdInfo { get; set; }
 		TimeUnitExpression ThresholdDebug { get; set; }
 		TimeUnitExpression ThresholdTrace { get; set; }
-		SlowLogLevel? LogLevel { get; set; }
+		LogLevel? LogLevel { get; set; }
 		int? Source { get; set; }
 	}
 	public class SlowLogIndexing : ISlowLogIndexing
 	{
-		public SlowLogLevel? LogLevel { get; set; }
+		public LogLevel? LogLevel { get; set; }
 
 		public int? Source { get; set; }
 
@@ -28,7 +28,7 @@ namespace Nest
 
 	public class SlowLogIndexingDescriptor : DescriptorBase<SlowLogIndexingDescriptor, ISlowLogIndexing>, ISlowLogIndexing
 	{
-		SlowLogLevel? ISlowLogIndexing.LogLevel { get; set; }
+		LogLevel? ISlowLogIndexing.LogLevel { get; set; }
 		int? ISlowLogIndexing.Source { get; set; }
 		TimeUnitExpression ISlowLogIndexing.ThresholdDebug { get; set; }
 		TimeUnitExpression ISlowLogIndexing.ThresholdInfo { get; set; }
@@ -36,7 +36,7 @@ namespace Nest
 		TimeUnitExpression ISlowLogIndexing.ThresholdWarn { get; set; }
 
 		/// <inheritdoc/>
-		public SlowLogIndexingDescriptor LogLevel(SlowLogLevel? level) => Assign(a => a.LogLevel = level);
+		public SlowLogIndexingDescriptor LogLevel(LogLevel? level) => Assign(a => a.LogLevel = level);
 
 		/// <inheritdoc/>
 		public SlowLogIndexingDescriptor Source(int? source) => Assign(a => a.Source = source);

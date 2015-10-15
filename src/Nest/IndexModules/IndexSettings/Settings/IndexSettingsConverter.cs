@@ -23,64 +23,64 @@ namespace Nest
 			var dict = wrapDictionary?.Dictionary ?? new Dictionary<string, object>();
 
 
-			dict[UpdatableSettings.NumberOfReplicas] = ds.NumberOfReplicas;
-			dict[UpdatableSettings.AutoExpandReplicas] = ds.AutoExpandReplicas;
-			dict[UpdatableSettings.RefreshInterval] = ds.RefreshInterval;
-			dict[UpdatableSettings.BlocksReadOnly] = ds.BlocksReadOnly;
-			dict[UpdatableSettings.BlocksRead] = ds.BlocksRead;
-			dict[UpdatableSettings.BlocksWrite] = ds.BlocksWrite;
-			dict[UpdatableSettings.BlocksMetadata] = ds.BlocksMetadata;
-			dict[UpdatableSettings.Priority] = ds.Priority;
-			dict[UpdatableSettings.WarmersEnabled] = ds.WarmersEnabled;
-			dict[UpdatableSettings.RequestCacheEnable] = ds.RequestCacheEnabled;
-			dict[UpdatableSettings.RecoveryInitialShards] = ds.RecoveryInitialShards;
-			dict[UpdatableSettings.RoutingAllocationTotalShardsPerNode] =
+			dict[UpdatableIndexSettings.NumberOfReplicas] = ds.NumberOfReplicas;
+			dict[UpdatableIndexSettings.AutoExpandReplicas] = ds.AutoExpandReplicas;
+			dict[UpdatableIndexSettings.RefreshInterval] = ds.RefreshInterval;
+			dict[UpdatableIndexSettings.BlocksReadOnly] = ds.BlocksReadOnly;
+			dict[UpdatableIndexSettings.BlocksRead] = ds.BlocksRead;
+			dict[UpdatableIndexSettings.BlocksWrite] = ds.BlocksWrite;
+			dict[UpdatableIndexSettings.BlocksMetadata] = ds.BlocksMetadata;
+			dict[UpdatableIndexSettings.Priority] = ds.Priority;
+			dict[UpdatableIndexSettings.WarmersEnabled] = ds.WarmersEnabled;
+			dict[UpdatableIndexSettings.RequestCacheEnable] = ds.RequestCacheEnabled;
+			dict[UpdatableIndexSettings.RecoveryInitialShards] = ds.RecoveryInitialShards;
+			dict[UpdatableIndexSettings.RoutingAllocationTotalShardsPerNode] =
 				ds.RoutingAllocationTotalShardsPerNode;
-			dict[UpdatableSettings.UnassignedNodeLeftDelayedTimeout] = ds.UnassignedNodeLeftDelayedTimeout;
+			dict[UpdatableIndexSettings.UnassignedNodeLeftDelayedTimeout] = ds.UnassignedNodeLeftDelayedTimeout;
 
 			var translog = ds.Translog;
-			dict[UpdatableSettings.TranslogSyncInterval] = translog?.SyncInterval;
-			dict[UpdatableSettings.TranslogDurability] = translog?.Durability;
-			dict[UpdatableSettings.TranslogFsType] = translog?.FileSystemType;
+			dict[UpdatableIndexSettings.TranslogSyncInterval] = translog?.SyncInterval;
+			dict[UpdatableIndexSettings.TranslogDurability] = translog?.Durability;
+			dict[UpdatableIndexSettings.TranslogFsType] = translog?.FileSystemType;
 
 			var flush = ds.Translog?.Flush;
-			dict[UpdatableSettings.TranslogFlushThresholdSize] = flush?.ThresholdSize;
-			dict[UpdatableSettings.TranslogFlushTreshHoldOps] = flush?.ThresholdOps;
-			dict[UpdatableSettings.TranslogFlushThresholdPeriod] = flush?.ThresholdPeriod;
-			dict[UpdatableSettings.TranslogInterval] = flush?.Interval;
+			dict[UpdatableIndexSettings.TranslogFlushThresholdSize] = flush?.ThresholdSize;
+			dict[UpdatableIndexSettings.TranslogFlushTreshHoldOps] = flush?.ThresholdOps;
+			dict[UpdatableIndexSettings.TranslogFlushThresholdPeriod] = flush?.ThresholdPeriod;
+			dict[UpdatableIndexSettings.TranslogInterval] = flush?.Interval;
 
-			dict[UpdatableSettings.MergePolicyExpungeDeletesAllowed] = ds.Merge?.Policy.ExpungeDeletesAllowed;
-			dict[UpdatableSettings.MergePolicyFloorSegment] = ds.Merge?.Policy.FloorSegment;
-			dict[UpdatableSettings.MergePolicyMaxMergeAtOnce] = ds.Merge?.Policy.MaxMergeAtOnce;
-			dict[UpdatableSettings.MergePolicyMaxMergeAtOnceExplicit] = ds.Merge?.Policy.MaxMergeAtOnceExplicit;
-			dict[UpdatableSettings.MergePolicyMaxMergedSegment] = ds.Merge?.Policy.MaxMergedSegment;
-			dict[UpdatableSettings.MergePolicySegmentsPerTier] = ds.Merge?.Policy.SegmentsPerTier;
-			dict[UpdatableSettings.MergePolicyReclaimDeletesWeight] = ds.Merge?.Policy.ReclaimDeletesWeight;
+			dict[UpdatableIndexSettings.MergePolicyExpungeDeletesAllowed] = ds.Merge?.Policy.ExpungeDeletesAllowed;
+			dict[UpdatableIndexSettings.MergePolicyFloorSegment] = ds.Merge?.Policy.FloorSegment;
+			dict[UpdatableIndexSettings.MergePolicyMaxMergeAtOnce] = ds.Merge?.Policy.MaxMergeAtOnce;
+			dict[UpdatableIndexSettings.MergePolicyMaxMergeAtOnceExplicit] = ds.Merge?.Policy.MaxMergeAtOnceExplicit;
+			dict[UpdatableIndexSettings.MergePolicyMaxMergedSegment] = ds.Merge?.Policy.MaxMergedSegment;
+			dict[UpdatableIndexSettings.MergePolicySegmentsPerTier] = ds.Merge?.Policy.SegmentsPerTier;
+			dict[UpdatableIndexSettings.MergePolicyReclaimDeletesWeight] = ds.Merge?.Policy.ReclaimDeletesWeight;
 
-			dict[UpdatableSettings.MergeSchedulerMaxThreadCount] = ds.Merge?.Scheduler?.MaxThreadCount;
-			dict[UpdatableSettings.MergeSchedulerAutoThrottle] = ds.Merge?.Scheduler?.AutoThrottle;
+			dict[UpdatableIndexSettings.MergeSchedulerMaxThreadCount] = ds.Merge?.Scheduler?.MaxThreadCount;
+			dict[UpdatableIndexSettings.MergeSchedulerAutoThrottle] = ds.Merge?.Scheduler?.AutoThrottle;
 
 			var log = ds.SlowLog;
 			var search = log?.Search;
 			var indexing = log?.Indexing;
 
-			dict[UpdatableSettings.SlowlogSearchThresholdQueryWarn] = search?.Query?.ThresholdWarn;
-			dict[UpdatableSettings.SlowlogSearchThresholdQueryInfo] = search?.Query?.ThresholdInfo;
-			dict[UpdatableSettings.SlowlogSearchThresholdQueryDebug] = search?.Query?.ThresholdDebug;
-			dict[UpdatableSettings.SlowlogSearchThresholdQueryTrace] = search?.Query?.ThresholdTrace;
+			dict[UpdatableIndexSettings.SlowlogSearchThresholdQueryWarn] = search?.Query?.ThresholdWarn;
+			dict[UpdatableIndexSettings.SlowlogSearchThresholdQueryInfo] = search?.Query?.ThresholdInfo;
+			dict[UpdatableIndexSettings.SlowlogSearchThresholdQueryDebug] = search?.Query?.ThresholdDebug;
+			dict[UpdatableIndexSettings.SlowlogSearchThresholdQueryTrace] = search?.Query?.ThresholdTrace;
 
-			dict[UpdatableSettings.SlowlogSearchThresholdFetchWarn] = search?.Fetch?.ThresholdWarn;
-			dict[UpdatableSettings.SlowlogSearchThresholdFetchInfo] = search?.Fetch?.ThresholdInfo;
-			dict[UpdatableSettings.SlowlogSearchThresholdFetchDebug] = search?.Fetch?.ThresholdDebug;
-			dict[UpdatableSettings.SlowlogSearchThresholdFetchTrace] = search?.Fetch?.ThresholdTrace;
-			dict[UpdatableSettings.SlowlogSearchLevel] = search?.LogLevel;
+			dict[UpdatableIndexSettings.SlowlogSearchThresholdFetchWarn] = search?.Fetch?.ThresholdWarn;
+			dict[UpdatableIndexSettings.SlowlogSearchThresholdFetchInfo] = search?.Fetch?.ThresholdInfo;
+			dict[UpdatableIndexSettings.SlowlogSearchThresholdFetchDebug] = search?.Fetch?.ThresholdDebug;
+			dict[UpdatableIndexSettings.SlowlogSearchThresholdFetchTrace] = search?.Fetch?.ThresholdTrace;
+			dict[UpdatableIndexSettings.SlowlogSearchLevel] = search?.LogLevel;
 
-			dict[UpdatableSettings.SlowlogIndexingThresholdFetchWarn] = indexing?.ThresholdWarn;
-			dict[UpdatableSettings.SlowlogIndexingThresholdFetchInfo] = indexing?.ThresholdInfo;
-			dict[UpdatableSettings.SlowlogIndexingThresholdFetchDebug] = indexing?.ThresholdDebug;
-			dict[UpdatableSettings.SlowlogIndexingThresholdFetchTrace] = indexing?.ThresholdTrace;
-			dict[UpdatableSettings.SlowlogIndexingLevel] = indexing?.LogLevel;
-			dict[UpdatableSettings.SlowlogIndexingSource] = indexing?.Source;
+			dict[UpdatableIndexSettings.SlowlogIndexingThresholdFetchWarn] = indexing?.ThresholdWarn;
+			dict[UpdatableIndexSettings.SlowlogIndexingThresholdFetchInfo] = indexing?.ThresholdInfo;
+			dict[UpdatableIndexSettings.SlowlogIndexingThresholdFetchDebug] = indexing?.ThresholdDebug;
+			dict[UpdatableIndexSettings.SlowlogIndexingThresholdFetchTrace] = indexing?.ThresholdTrace;
+			dict[UpdatableIndexSettings.SlowlogIndexingLevel] = indexing?.LogLevel;
+			dict[UpdatableIndexSettings.SlowlogIndexingSource] = indexing?.Source;
 
 
 			var indexSettings = value as IIndexSettings;
@@ -109,67 +109,67 @@ namespace Nest
 			var s = new IndexSettings();
 
 			var settings = Flatten(JObject.Load(reader)).Properties().ToDictionary(kv=> kv.Name);
-			Set<int?>(settings, UpdatableSettings.NumberOfReplicas, v => s.NumberOfReplicas = v);
-			Set<string>(settings, UpdatableSettings.AutoExpandReplicas, v => s.AutoExpandReplicas = v);
-			Set<TimeUnitExpression>(settings, UpdatableSettings.RefreshInterval, v => s.RefreshInterval = v);
-			Set<bool?>(settings, UpdatableSettings.BlocksReadOnly, v => s.BlocksReadOnly = v);
-			Set<bool?>(settings, UpdatableSettings.BlocksRead, v => s.BlocksRead = v);
-			Set<bool?>(settings, UpdatableSettings.BlocksWrite, v => s.BlocksWrite = v);
-			Set<bool?>(settings, UpdatableSettings.BlocksMetadata, v => s.BlocksMetadata = v);
-			Set<int?>(settings, UpdatableSettings.Priority, v => s.Priority = v);
-			Set<bool?>(settings, UpdatableSettings.WarmersEnabled, v => s.WarmersEnabled = v);
-			Set<bool?>(settings, UpdatableSettings.RequestCacheEnable, v => s.RequestCacheEnabled = v);
-			Set<Union<int, RecoveryInitialShards>>(settings, UpdatableSettings.RecoveryInitialShards, v => s.RecoveryInitialShards = v);
-			Set<int?>(settings, UpdatableSettings.RoutingAllocationTotalShardsPerNode, v => s.RoutingAllocationTotalShardsPerNode = v);
-			Set<TimeUnitExpression>(settings, UpdatableSettings.UnassignedNodeLeftDelayedTimeout, v => s.UnassignedNodeLeftDelayedTimeout = v);
+			Set<int?>(settings, UpdatableIndexSettings.NumberOfReplicas, v => s.NumberOfReplicas = v);
+			Set<string>(settings, UpdatableIndexSettings.AutoExpandReplicas, v => s.AutoExpandReplicas = v);
+			Set<TimeUnitExpression>(settings, UpdatableIndexSettings.RefreshInterval, v => s.RefreshInterval = v);
+			Set<bool?>(settings, UpdatableIndexSettings.BlocksReadOnly, v => s.BlocksReadOnly = v);
+			Set<bool?>(settings, UpdatableIndexSettings.BlocksRead, v => s.BlocksRead = v);
+			Set<bool?>(settings, UpdatableIndexSettings.BlocksWrite, v => s.BlocksWrite = v);
+			Set<bool?>(settings, UpdatableIndexSettings.BlocksMetadata, v => s.BlocksMetadata = v);
+			Set<int?>(settings, UpdatableIndexSettings.Priority, v => s.Priority = v);
+			Set<bool?>(settings, UpdatableIndexSettings.WarmersEnabled, v => s.WarmersEnabled = v);
+			Set<bool?>(settings, UpdatableIndexSettings.RequestCacheEnable, v => s.RequestCacheEnabled = v);
+			Set<Union<int, RecoveryInitialShards>>(settings, UpdatableIndexSettings.RecoveryInitialShards, v => s.RecoveryInitialShards = v);
+			Set<int?>(settings, UpdatableIndexSettings.RoutingAllocationTotalShardsPerNode, v => s.RoutingAllocationTotalShardsPerNode = v);
+			Set<TimeUnitExpression>(settings, UpdatableIndexSettings.UnassignedNodeLeftDelayedTimeout, v => s.UnassignedNodeLeftDelayedTimeout = v);
 
 			var t = s.Translog = new TranslogSettings();
-			Set<TimeUnitExpression>(settings, UpdatableSettings.TranslogSyncInterval, v => t.SyncInterval = v);
-			Set<TranslogDurability?>(settings, UpdatableSettings.TranslogDurability, v => t.Durability = v);
-			Set<TranslogWriteMode?>(settings, UpdatableSettings.TranslogFsType, v => t.FileSystemType = v);
+			Set<TimeUnitExpression>(settings, UpdatableIndexSettings.TranslogSyncInterval, v => t.SyncInterval = v);
+			Set<TranslogDurability?>(settings, UpdatableIndexSettings.TranslogDurability, v => t.Durability = v);
+			Set<TranslogWriteMode?>(settings, UpdatableIndexSettings.TranslogFsType, v => t.FileSystemType = v);
 
 			var tf = s.Translog.Flush = new TranslogFlushSettings();
-			Set<string>(settings, UpdatableSettings.TranslogFlushThresholdSize, v => tf.ThresholdSize = v);
-			Set<int?>(settings, UpdatableSettings.TranslogFlushTreshHoldOps, v => tf.ThresholdOps = v);
-			Set<TimeUnitExpression>(settings, UpdatableSettings.TranslogFlushThresholdPeriod, v => tf.ThresholdPeriod = v);
-			Set<TimeUnitExpression>(settings, UpdatableSettings.TranslogInterval, v => tf.Interval = v);
+			Set<string>(settings, UpdatableIndexSettings.TranslogFlushThresholdSize, v => tf.ThresholdSize = v);
+			Set<int?>(settings, UpdatableIndexSettings.TranslogFlushTreshHoldOps, v => tf.ThresholdOps = v);
+			Set<TimeUnitExpression>(settings, UpdatableIndexSettings.TranslogFlushThresholdPeriod, v => tf.ThresholdPeriod = v);
+			Set<TimeUnitExpression>(settings, UpdatableIndexSettings.TranslogInterval, v => tf.Interval = v);
 
 			s.Merge = new MergeSettings();
 			var p = s.Merge.Policy = new MergePolicySettings();
-			Set<int?>(settings, UpdatableSettings.MergePolicyExpungeDeletesAllowed, v => p.ExpungeDeletesAllowed = v);
-			Set<string>(settings, UpdatableSettings.MergePolicyFloorSegment, v => p.FloorSegment = v);
-			Set<int?>(settings, UpdatableSettings.MergePolicyMaxMergeAtOnce, v => p.MaxMergeAtOnce = v);
-			Set<int?>(settings, UpdatableSettings.MergePolicyMaxMergeAtOnceExplicit, v => p.MaxMergeAtOnceExplicit = v);
-			Set<string>(settings, UpdatableSettings.MergePolicyMaxMergedSegment, v => p.MaxMergedSegment = v);
-			Set<int?>(settings, UpdatableSettings.MergePolicySegmentsPerTier, v => p.SegmentsPerTier = v);
-			Set<double?>(settings, UpdatableSettings.MergePolicyReclaimDeletesWeight, v => p.ReclaimDeletesWeight = v);
+			Set<int?>(settings, UpdatableIndexSettings.MergePolicyExpungeDeletesAllowed, v => p.ExpungeDeletesAllowed = v);
+			Set<string>(settings, UpdatableIndexSettings.MergePolicyFloorSegment, v => p.FloorSegment = v);
+			Set<int?>(settings, UpdatableIndexSettings.MergePolicyMaxMergeAtOnce, v => p.MaxMergeAtOnce = v);
+			Set<int?>(settings, UpdatableIndexSettings.MergePolicyMaxMergeAtOnceExplicit, v => p.MaxMergeAtOnceExplicit = v);
+			Set<string>(settings, UpdatableIndexSettings.MergePolicyMaxMergedSegment, v => p.MaxMergedSegment = v);
+			Set<int?>(settings, UpdatableIndexSettings.MergePolicySegmentsPerTier, v => p.SegmentsPerTier = v);
+			Set<double?>(settings, UpdatableIndexSettings.MergePolicyReclaimDeletesWeight, v => p.ReclaimDeletesWeight = v);
 
 			var ms = s.Merge.Scheduler = new MergeSchedulerSettings();
-			Set<int?>(settings, UpdatableSettings.MergeSchedulerMaxThreadCount, v => ms.MaxThreadCount = v);
-			Set<bool?>(settings, UpdatableSettings.MergeSchedulerAutoThrottle, v => ms.AutoThrottle = v);
+			Set<int?>(settings, UpdatableIndexSettings.MergeSchedulerMaxThreadCount, v => ms.MaxThreadCount = v);
+			Set<bool?>(settings, UpdatableIndexSettings.MergeSchedulerAutoThrottle, v => ms.AutoThrottle = v);
 
 			var slowlog = s.SlowLog = new SlowLog();
 			var search = s.SlowLog.Search = new SlowLogSearch();
-			Set<SlowLogLevel?>(settings, UpdatableSettings.SlowlogSearchLevel, v => search.LogLevel = v);
+			Set<LogLevel?>(settings, UpdatableIndexSettings.SlowlogSearchLevel, v => search.LogLevel = v);
 			var query = s.SlowLog.Search.Query = new SlowLogSearchQuery();
-			Set<TimeUnitExpression>(settings, UpdatableSettings.SlowlogSearchThresholdQueryWarn, v => query.ThresholdWarn = v);
-			Set<TimeUnitExpression>(settings, UpdatableSettings.SlowlogSearchThresholdQueryInfo, v => query.ThresholdInfo = v);
-			Set<TimeUnitExpression>(settings, UpdatableSettings.SlowlogSearchThresholdQueryDebug, v => query.ThresholdDebug = v);
-			Set<TimeUnitExpression>(settings, UpdatableSettings.SlowlogSearchThresholdQueryTrace, v => query.ThresholdTrace = v);
+			Set<TimeUnitExpression>(settings, UpdatableIndexSettings.SlowlogSearchThresholdQueryWarn, v => query.ThresholdWarn = v);
+			Set<TimeUnitExpression>(settings, UpdatableIndexSettings.SlowlogSearchThresholdQueryInfo, v => query.ThresholdInfo = v);
+			Set<TimeUnitExpression>(settings, UpdatableIndexSettings.SlowlogSearchThresholdQueryDebug, v => query.ThresholdDebug = v);
+			Set<TimeUnitExpression>(settings, UpdatableIndexSettings.SlowlogSearchThresholdQueryTrace, v => query.ThresholdTrace = v);
 
 			var fetch = s.SlowLog.Search.Fetch = new SlowLogSearchFetch();
-			Set<TimeUnitExpression>(settings, UpdatableSettings.SlowlogSearchThresholdFetchWarn, v => fetch.ThresholdWarn = v);
-			Set<TimeUnitExpression>(settings, UpdatableSettings.SlowlogSearchThresholdFetchInfo, v => fetch.ThresholdInfo = v);
-			Set<TimeUnitExpression>(settings, UpdatableSettings.SlowlogSearchThresholdFetchDebug, v => fetch.ThresholdDebug = v);
-			Set<TimeUnitExpression>(settings, UpdatableSettings.SlowlogSearchThresholdFetchTrace, v => fetch.ThresholdTrace = v);
+			Set<TimeUnitExpression>(settings, UpdatableIndexSettings.SlowlogSearchThresholdFetchWarn, v => fetch.ThresholdWarn = v);
+			Set<TimeUnitExpression>(settings, UpdatableIndexSettings.SlowlogSearchThresholdFetchInfo, v => fetch.ThresholdInfo = v);
+			Set<TimeUnitExpression>(settings, UpdatableIndexSettings.SlowlogSearchThresholdFetchDebug, v => fetch.ThresholdDebug = v);
+			Set<TimeUnitExpression>(settings, UpdatableIndexSettings.SlowlogSearchThresholdFetchTrace, v => fetch.ThresholdTrace = v);
 
 			var indexing = s.SlowLog.Indexing = new SlowLogIndexing();
-			Set<TimeUnitExpression>(settings, UpdatableSettings.SlowlogIndexingThresholdFetchWarn, v => indexing.ThresholdWarn = v);
-			Set<TimeUnitExpression>(settings, UpdatableSettings.SlowlogIndexingThresholdFetchInfo, v => indexing.ThresholdInfo = v);
-			Set<TimeUnitExpression>(settings, UpdatableSettings.SlowlogIndexingThresholdFetchDebug, v => indexing.ThresholdDebug = v);
-			Set<TimeUnitExpression>(settings, UpdatableSettings.SlowlogIndexingThresholdFetchTrace, v => indexing.ThresholdTrace = v);
-			Set<SlowLogLevel?>(settings, UpdatableSettings.SlowlogIndexingLevel, v => indexing.LogLevel = v);
-			Set<int?>(settings, UpdatableSettings.SlowlogIndexingSource, v => indexing.Source = v);
+			Set<TimeUnitExpression>(settings, UpdatableIndexSettings.SlowlogIndexingThresholdFetchWarn, v => indexing.ThresholdWarn = v);
+			Set<TimeUnitExpression>(settings, UpdatableIndexSettings.SlowlogIndexingThresholdFetchInfo, v => indexing.ThresholdInfo = v);
+			Set<TimeUnitExpression>(settings, UpdatableIndexSettings.SlowlogIndexingThresholdFetchDebug, v => indexing.ThresholdDebug = v);
+			Set<TimeUnitExpression>(settings, UpdatableIndexSettings.SlowlogIndexingThresholdFetchTrace, v => indexing.ThresholdTrace = v);
+			Set<LogLevel?>(settings, UpdatableIndexSettings.SlowlogIndexingLevel, v => indexing.LogLevel = v);
+			Set<int?>(settings, UpdatableIndexSettings.SlowlogIndexingSource, v => indexing.Source = v);
 			Set<int?>(settings, "index.number_of_shards", v => s.NumberOfShards = v);
 			Set<FileSystemStorageImplementation?>(settings, "index.store.type", v => s.FileSystemStorageImplementation = v, serializer);
 			foreach (var kv in settings)

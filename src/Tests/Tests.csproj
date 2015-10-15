@@ -114,7 +114,9 @@
     <Compile Include="Cluster\ClusterHealth\ClusterHealthUrlTests.cs" />
     <Compile Include="Cluster\ClusterReroute\ClusterRerouteApiTests.cs" />
     <Compile Include="Cluster\ClusterReroute\ClusterRerouteUrlTests.cs" />
-    <Compile Include="Cluster\ClusterSettings\ClusterGetSettings\ClusterGetUrlTests.cs" />
+    <Compile Include="Cluster\ClusterSettings\ClusterGetSettings\ClusterGetSettingsApiTests.cs" />
+    <Compile Include="Cluster\ClusterSettings\ClusterGetSettings\ClusterGetSettingsUrlTests.cs" />
+    <Compile Include="Cluster\ClusterSettings\ClusterPutSettings\ClusterPutSettingsApiTests.cs" />
     <Compile Include="Cluster\ClusterSettings\ClusterPutSettings\ClusterPutUrlTests.cs" />
     <Compile Include="Cluster\ClusterState\ClusterStateUrlTests.cs" />
     <Compile Include="Cluster\ClusterStats\ClusterStatsUrlTests.cs" />

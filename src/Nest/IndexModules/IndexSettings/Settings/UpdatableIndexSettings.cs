@@ -1,6 +1,6 @@
 namespace Nest
 {
-	public static class UpdatableSettings
+	public static class UpdatableIndexSettings
 	{
 		public const string NumberOfReplicas = "index.number_of_replicas";
 		public const string AutoExpandReplicas = "index.auto_expand_replicas";

@@ -93,6 +93,7 @@
     <Compile Include="Analysis\Tokenizers\NGram\TokenChar.cs" />
     <Compile Include="Analysis\Tokenizers\Tokenizers.cs" />
     <Compile Include="Cluster\ClusterHealth\ClusterHealthResponse.cs" />
+    <Compile Include="Cluster\ClusterSettings\ClusterPutSettings\ClusterSettings.cs" />
     <Compile Include="CommonAbstractions\Fluent\DescriptorBase.cs" />
     <Compile Include="CommonAbstractions\Infer\DocumentPath\DocumentPath.cs" />
     <Compile Include="CommonAbstractions\Infer\Features\Features.cs" />
@@ -170,8 +171,8 @@
     <Compile Include="IndexModules\IndexSettings\SlowLog\ISlowLogSearchFetch.cs" />
     <Compile Include="IndexModules\IndexSettings\SlowLog\ISlowLogSearchQuery.cs" />
     <Compile Include="IndexModules\IndexSettings\Settings\RecoveryInitialShards.cs" />
-    <Compile Include="IndexModules\IndexSettings\SlowLog\SlowLogLevel.cs" />
     <Compile Include="IndexModules\IndexSettings\Settings\IndexSettingsConverter.cs" />
+    <Compile Include="IndexModules\IndexSettings\SlowLog\LogLevel.cs" />
     <Compile Include="IndexModules\IndexSettings\Store\FileSystemStorageImplementation.cs" />
     <Compile Include="IndexModules\IndexSettings\Translog\TranslogWriteMode.cs" />
     <Compile Include="IndexModules\IndexSettings\Translog\TranslogDurability.cs" />
@@ -215,12 +216,22 @@
     <Compile Include="Mapping\Visitor\IPropertyVisitor.cs" />
     <Compile Include="Mapping\Visitor\NoopPropertyVisitor.cs" />
     <Compile Include="Mapping\Visitor\PropertyWalker.cs" />
+    <Compile Include="Modules\Cluster\AllocationAttribute.cs" />
+    <Compile Include="Modules\Cluster\AllocationAwareness\AllocationAwarenessSettings.cs" />
+    <Compile Include="Modules\Cluster\DiskBasedShardAllocation\DiskBasedShardAllocationSettings.cs" />
+    <Compile Include="Modules\Cluster\ShardAllocation\AllowRebalance.cs" />
+    <Compile Include="Modules\Cluster\ShardAllocation\RebalanceEnable.cs" />
+    <Compile Include="Modules\Cluster\ShardAllocation\AllocationEnable.cs" />
+    <Compile Include="Modules\Cluster\ShardAllocation\ShardBalancingHeuristicsSettings.cs" />
+    <Compile Include="Modules\Cluster\ShardAllocation\ShardRebalancingSettings.cs" />
+    <Compile Include="Modules\Cluster\ShardAllocation\ShardAllocationSettings.cs" />
     <Compile Include="Modules\Indices\Fielddata\GeoPoint\GeoPointFielddata.cs" />
     <Compile Include="Modules\Indices\Fielddata\GeoPoint\GeoPointFielddataFormat.cs" />
     <Compile Include="Modules\Indices\Fielddata\Numeric\NumericFielddataFormat.cs" />
     <Compile Include="Modules\Indices\Fielddata\Numeric\NumericFielddata.cs" />
     <Compile Include="Modules\Indices\Fielddata\String\StringFielddata.cs" />
     <Compile Include="Modules\Indices\Fielddata\String\StringFielddataFormat.cs" />
+    <Compile Include="Modules\Indices\Recovery\IndicesRecoverySettings.cs" />
     <Compile Include="QueryDsl\Compound\Bool\BoolQuery.cs" />
     <Compile Include="QueryDsl\Compound\Bool\BoolQueryExtensions.cs" />
     <Compile Include="QueryDsl\Compound\Indices\NoMatchQueryJsonConverter.cs" />
@@ -439,7 +450,7 @@
     <Compile Include="Indices\IndexSettings\GetIndexSettings\GetIndexSettingsRequest.cs" />
     <Compile Include="Indices\IndexSettings\IndexTemplates\GetIndexTemplate\ElasticClient-GetIndexTemplate.cs" />
     <Compile Include="Indices\IndexSettings\IndexTemplates\PutIndexTemplate\ElasticClient-PutIndexTemplate.cs" />
-    <Compile Include="IndexModules\IndexSettings\Settings\UpdatableSettings.cs" />
+    <Compile Include="IndexModules\IndexSettings\Settings\UpdatableIndexSettings.cs" />
     <Compile Include="Search\FieldStats\FieldStatsRequest.cs" />
     <Compile Include="QueryDsl\Compound\Indices\NoMatchShortcut.cs" />
     <Compile Include="Indices\StatusManagement\SyncedFlush\SyncedFlushRequest.cs" />
@@ -555,7 +566,7 @@
     <Compile Include="IndexModules\Similarity\Similarity.cs" />
     <Compile Include="Document\Multiple\Bulk\BulkOperation\BulkOperationBase.cs" />
     <Compile Include="Cluster\ClusterSettings\ClusterGetSettings\ClusterGetSettingsRequest.cs" />
-    <Compile Include="Cluster\ClusterSettings\ClusterPutSettings\ClusterSettingsRequest.cs" />
+    <Compile Include="Cluster\ClusterSettings\ClusterPutSettings\ClusterPutSettingsRequest.cs" />
     <Compile Include="CommonAbstractions\Request\RequestBase.cs" />
     <Compile Include="Modules\SnapshotAndRestore\Snapshot\DeleteSnapshot\DeleteSnapshotRequest.cs" />
     <Compile Include="QueryDsl\Compound\FunctionScore\Functions\FieldValueFactorModifier.cs" />
@@ -586,7 +597,7 @@
     <Compile Include="Search\SearchTemplate\ElasticClient-SearchTemplate.cs" />
     <Compile Include="Indices\IndexSettings\IndexTemplates\IndexTemplateExists\ElasticClient-IndexTemplateExists.cs" />
     <Compile Include="Indices\AliasManagement\AliasExists\ElasticClient-AliasExists.cs" />
-    <Compile Include="Cluster\ClusterSettings\ClusterPutSettings\ElasticClient-ClusterSettings.cs" />
+    <Compile Include="Cluster\ClusterSettings\ClusterPutSettings\ElasticClient-ClusterPutSettings.cs" />
     <Compile Include="Indices\IndexManagement\DeleteIndex\ElasticClient-DeleteIndex.cs" />
     <Compile Include="Indices\MappingManagement\GetFieldMapping\ElasticClient-GetFieldMapping.cs" />
     <Compile Include="Search\Percolator\MultiPercolate\ElasticClient-MultiPercolate.cs" />
@@ -1041,6 +1052,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Aggregations\Pipeline\" />
+    <Folder Include="Modules\Cluster\ShardAllocationFiltering\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
