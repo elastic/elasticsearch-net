@@ -2,7 +2,7 @@
 
 namespace Nest
 {
-	public interface IRootInfoResponse : IResponse
+	public interface IRootNodeInfoResponse : IResponse
 	{
 		int Status { get; }
 		string Name { get; }
@@ -11,7 +11,7 @@ namespace Nest
 	}
 
 	[JsonObject]
-	public class RootInfoResponse : BaseResponse, IRootInfoResponse
+	public class RootNodeInfoResponse : BaseResponse, IRootNodeInfoResponse
 	{
 		[JsonProperty(PropertyName = "status")]
 		public int Status { get; internal set; }

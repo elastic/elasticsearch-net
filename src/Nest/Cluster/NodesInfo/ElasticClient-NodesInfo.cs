@@ -18,41 +18,41 @@ namespace Nest
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/cluster-nodes-info.html
 		/// </summary>
 		/// <param name="selector">An optional descriptor to further describe the nodes info operation</param>
-		INodeInfoResponse NodesInfo(Func<NodesInfoDescriptor, INodesInfoRequest> selector = null);
+		INodesInfoResponse NodesInfo(Func<NodesInfoDescriptor, INodesInfoRequest> selector = null);
 
 		/// <inheritdoc/>
-		INodeInfoResponse NodesInfo(INodesInfoRequest nodesInfoRequest);
+		INodesInfoResponse NodesInfo(INodesInfoRequest nodesInfoRequest);
 
 		/// <inheritdoc/>
-		Task<INodeInfoResponse> NodesInfoAsync(Func<NodesInfoDescriptor, INodesInfoRequest> selector = null);
+		Task<INodesInfoResponse> NodesInfoAsync(Func<NodesInfoDescriptor, INodesInfoRequest> selector = null);
 
 		/// <inheritdoc/>
-		Task<INodeInfoResponse> NodesInfoAsync(INodesInfoRequest nodesInfoRequest);
+		Task<INodesInfoResponse> NodesInfoAsync(INodesInfoRequest nodesInfoRequest);
 
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public INodeInfoResponse NodesInfo(Func<NodesInfoDescriptor, INodesInfoRequest> selector = null) =>
+		public INodesInfoResponse NodesInfo(Func<NodesInfoDescriptor, INodesInfoRequest> selector = null) =>
 			this.NodesInfo(selector.InvokeOrDefault(new NodesInfoDescriptor()));
 
 		/// <inheritdoc/>
-		public INodeInfoResponse NodesInfo(INodesInfoRequest nodesInfoRequest) => 
-			this.Dispatcher.Dispatch<INodesInfoRequest, NodesInfoRequestParameters, NodeInfoResponse>(
+		public INodesInfoResponse NodesInfo(INodesInfoRequest nodesInfoRequest) => 
+			this.Dispatcher.Dispatch<INodesInfoRequest, NodesInfoRequestParameters, NodesInfoResponse>(
 				nodesInfoRequest,
-				(p, d) => this.LowLevelDispatch.NodesInfoDispatch<NodeInfoResponse>(p)
+				(p, d) => this.LowLevelDispatch.NodesInfoDispatch<NodesInfoResponse>(p)
 			);
 
 		/// <inheritdoc/>
-		public Task<INodeInfoResponse> NodesInfoAsync(Func<NodesInfoDescriptor, INodesInfoRequest> selector = null) =>
+		public Task<INodesInfoResponse> NodesInfoAsync(Func<NodesInfoDescriptor, INodesInfoRequest> selector = null) =>
 			this.NodesInfoAsync(selector.InvokeOrDefault(new NodesInfoDescriptor()));
 
 		/// <inheritdoc/>
-		public Task<INodeInfoResponse> NodesInfoAsync(INodesInfoRequest nodesInfoRequest) => 
-			this.Dispatcher.DispatchAsync<INodesInfoRequest, NodesInfoRequestParameters, NodeInfoResponse, INodeInfoResponse>(
+		public Task<INodesInfoResponse> NodesInfoAsync(INodesInfoRequest nodesInfoRequest) => 
+			this.Dispatcher.DispatchAsync<INodesInfoRequest, NodesInfoRequestParameters, NodesInfoResponse, INodesInfoResponse>(
 				nodesInfoRequest,
-				(p, d) => this.LowLevelDispatch.NodesInfoDispatchAsync<NodeInfoResponse>(p)
+				(p, d) => this.LowLevelDispatch.NodesInfoDispatchAsync<NodesInfoResponse>(p)
 			);
 	}
 }

@@ -2931,13 +2931,13 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IInfoRequest : IRequest<InfoRequestParameters> 
+	public partial interface IRootNodeInfoRequest : IRequest<InfoRequestParameters> 
 	{
 	 } 
 	///<summary>Request parameters for Info <pre>http://www.elastic.co/guide/</pre></summary>
-	public partial class InfoRequest  : RequestBase<InfoRequestParameters>, IInfoRequest
+	public partial class RootNodeInfoRequest  : RequestBase<InfoRequestParameters>, IRootNodeInfoRequest
 	{
-		protected IInfoRequest Self => this;
+		protected IRootNodeInfoRequest Self => this;
 				///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		

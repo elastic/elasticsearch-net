@@ -20,13 +20,20 @@ namespace Tests.Framework
 		{
 			this._cluster = cluster;
 			this._integrationPort = cluster.Node.Port;
+			this._usage = usage;
+			this.UniqueValues = this._usage.CallUniqueValues;
 			this._responses = usage.CallOnce(this.ClientUsage);
+
 		}
 		private readonly IIntegrationCluster _cluster;
 		private readonly LazyResponses _responses;
 		private readonly int _integrationPort;
+		private readonly EndpointUsage _usage;
 
 		protected static string RandomString() => Guid.NewGuid().ToString("N").Substring(0, 8);
+
+		protected IDictionary<ClientCall, string> UniqueValues { get; } 		
+		protected string CallIsolatedValue { get; private set; } 
 
 		protected abstract LazyResponses ClientUsage();
 		protected virtual void OnBeforeCall(IElasticClient client) { }
@@ -54,15 +61,22 @@ namespace Tests.Framework
 			var client = this.Client;
 			return new LazyResponses(async () =>
 			{
-				var dict = new Dictionary<string, IResponse>();
+				var dict = new Dictionary<ClientCall, IResponse>();
+				this.CallIsolatedValue = UniqueValues[ClientCall.Fluent];
 				OnBeforeCall(client);
-				dict.Add("fluent", fluent(client, this.Fluent));
+				dict.Add(ClientCall.Fluent, fluent(client, this.Fluent));
+
+				this.CallIsolatedValue = UniqueValues[ClientCall.FluentAsync];
 				OnBeforeCall(client);
-				dict.Add("fluentAsync", await fluentAsync(client, this.Fluent));
+				dict.Add(ClientCall.FluentAsync, await fluentAsync(client, this.Fluent));
+
+				this.CallIsolatedValue = UniqueValues[ClientCall.Initializer];
 				OnBeforeCall(client);
-				dict.Add("request", request(client, this.Initializer));
+				dict.Add(ClientCall.Initializer, request(client, this.Initializer));
+
+				this.CallIsolatedValue = UniqueValues[ClientCall.InitializerAsync];
 				OnBeforeCall(client);
-				dict.Add("requestAsync", await requestAsync(client, this.Initializer));
+				dict.Add(ClientCall.InitializerAsync, await requestAsync(client, this.Initializer));
 				return dict;
 			});
 		}
@@ -115,6 +129,7 @@ namespace Tests.Framework
 				var response = kv.Value as TResponse;
 				try
 				{
+					this.CallIsolatedValue = UniqueValues[kv.Key];
 					assert(response);
 				}
 #pragma warning disable 7095

@@ -400,7 +400,7 @@
     <Compile Include="Cat\CatNodes\CatNodesRecord.cs" />
     <Compile Include="Cat\CatResponse.cs" />
     <Compile Include="Cluster\ClusterStats\ClusterStatsResponse.cs" />
-    <Compile Include="Cluster\PendingClusterTasks\ClusterPendingTasksResponse.cs" />
+    <Compile Include="Cluster\ClusterPendingTasks\ClusterPendingTasksResponse.cs" />
     <Compile Include="Indices\AliasManagement\DeleteAlias\DeleteAliasResponse.cs" />
     <Compile Include="Search\FieldStats\FieldStatsResponse.cs" />
     <Compile Include="Indices\IndexManagement\GetIndex\GetIndexResponse.cs" />
@@ -515,7 +515,7 @@
     <Compile Include="Cat\CatFielddata\CatFielddataRequest.cs" />
     <Compile Include="Cat\CatCount\CatCountRequest.cs" />
     <Compile Include="Cat\CatAllocation\CatAllocationRequest.cs" />
-    <Compile Include="Cluster\PendingClusterTasks\ClusterPendingTasksRequest.cs" />
+    <Compile Include="Cluster\ClusterPendingTasks\ClusterPendingTasksRequest.cs" />
     <Compile Include="Cluster\ClusterStats\ClusterStatsRequest.cs" />
     <Compile Include="Cat\CatAliases\CatAliasesRequest.cs" />
     <Compile Include="Indices\AliasManagement\DeleteAlias\DeleteAliasRequest.cs" />
@@ -714,7 +714,7 @@
     <Compile Include="Search\Count\CountRequest.cs" />
     <Compile Include="Indices\IndexManagement\IndicesExists\IndexExistsRequest.cs" />
     <Compile Include="Indices\Monitoring\IndicesStats\IndicesStatsRequest.cs" />
-    <Compile Include="Cluster\RootNodeInfo\InfoRequest.cs" />
+    <Compile Include="Cluster\RootNodeInfo\RootNodeInfoRequest.cs" />
     <Compile Include="Indices\IndexManagement\DeleteIndex\DeleteIndexRequest.cs" />
     <Compile Include="Indices\StatusManagement\Flush\FlushRequest.cs" />
     <Compile Include="Indices\MappingManagement\GetMapping\GetMappingRequest.cs" />
@@ -820,7 +820,7 @@
     <Compile Include="Document\Multiple\DeleteByQuery\ElasticClient-DeleteByQuery.cs" />
     <Compile Include="Indices\IndexManagement\CreateIndex\CreateIndexRequest.cs" />
     <Compile Include="Indices\IndexManagement\CreateIndex\ElasticClient-CreateIndex.cs" />
-    <Compile Include="Cluster\NodesInfo\NodeInfoResponse.cs" />
+    <Compile Include="Cluster\NodesInfo\NodesInfoResponse.cs" />
     <Compile Include="Cluster\NodesStats\NodeStatsResponse.cs" />
     <Compile Include="Cluster\ClusterHealth\IndexHealthStats.cs" />
     <Compile Include="Cluster\NodesInfo\NodeInfo.cs" />
@@ -1011,7 +1011,7 @@
     <Compile Include="Mapping\Types\Specialized\Ip\YesNoBoolJsonConverter.cs" />
     <Compile Include="CommonAbstractions\Request\RouteValues.cs" />
     <Compile Include="Cluster\ClusterStats\ElasticClient-ClusterStats.cs" />
-    <Compile Include="Cluster\PendingClusterTasks\ElasticClient-ClusterPendingTasks.cs" />
+    <Compile Include="Cluster\ClusterPendingTasks\ElasticClient-ClusterPendingTasks.cs" />
     <Compile Include="CommonAbstractions\Infer\ExpressionVisitor.cs" />
     <Compile Include="CommonAbstractions\Infer\IndexName\IndexName.cs" />
     <Compile Include="CommonAbstractions\Infer\IndexName\IndexNameExtensions.cs" />

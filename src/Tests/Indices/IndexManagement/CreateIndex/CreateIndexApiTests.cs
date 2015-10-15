@@ -15,24 +15,18 @@ namespace Tests.Indices.IndexManagement
 	[Collection(IntegrationContext.Indexing)]
 	public class CreateIndexApiTests : ApiTestBase<IIndicesOperationResponse, ICreateIndexRequest, CreateIndexDescriptor, CreateIndexRequest>
 	{
-		static string IndexName { get; } = RandomString();
-
 		public CreateIndexApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.CreateIndex(IndexName, f),
-			fluentAsync: (client, f) => client.CreateIndexAsync(IndexName, f),
+			fluent: (client, f) => client.CreateIndex(CallIsolatedValue, f),
+			fluentAsync: (client, f) => client.CreateIndexAsync(CallIsolatedValue, f),
 			request: (client, r) => client.CreateIndex(r),
 			requestAsync: (client, r) => client.CreateIndexAsync(r)
 		);
-		protected override void OnBeforeCall(IElasticClient client)
-		{
-			if (client.IndexExists(IndexName).Exists) client.DeleteIndex(IndexName);
-		}
 
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
-		protected override string UrlPath => $"/{IndexName}";
+		protected override string UrlPath => $"/{CallIsolatedValue}";
 
 		protected override object ExpectJson { get; } = new
 		{
@@ -43,7 +37,7 @@ namespace Tests.Indices.IndexManagement
 			}
 		};
 
-		protected override CreateIndexDescriptor NewDescriptor() => new CreateIndexDescriptor(IndexName);
+		protected override CreateIndexDescriptor NewDescriptor() => new CreateIndexDescriptor(CallIsolatedValue);
 
 		protected override Func<CreateIndexDescriptor, ICreateIndexRequest> Fluent => d => d
 			.Settings(s => s
@@ -51,7 +45,7 @@ namespace Tests.Indices.IndexManagement
 				.NumberOfShards(1)
 			);
 
-		protected override CreateIndexRequest Initializer => new CreateIndexRequest(IndexName)
+		protected override CreateIndexRequest Initializer => new CreateIndexRequest(CallIsolatedValue)
 		{
 			Settings = new Nest.IndexSettings()
 			{
@@ -60,5 +54,4 @@ namespace Tests.Indices.IndexManagement
 			}
 		};
 	}
-
 }

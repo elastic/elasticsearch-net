@@ -8,9 +8,9 @@ using Tests.Framework;
 using Tests.Framework.MockData;
 using static Tests.Framework.UrlTester;
 
-namespace Tests.Cluster.PendingClusterTasks
+namespace Tests.Cluster.ClusterPendingTasks
 {
-	public class PendingClusterTasksUrlTests : IUrlTests
+	public class ClusterPendingTasksUrlTests : IUrlTests
 	{
 		[U] public async Task Urls()
 		{

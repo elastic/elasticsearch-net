@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using Bogus;
 using Newtonsoft.Json;
@@ -31,6 +32,22 @@ namespace Tests.Framework.MockData
 
 		public static IList<Project> Projects { get; } =
 			Project.Generator.Generate(100).ToList();
+
+		public static Project Instance = new Project
+		{
+			Name = "nesttests",
+			LeadDeveloper = new Developer() { FirstName = "Martijn", LastName = "Laarman" },
+			StartedOn = new DateTime(2015, 1, 1)
+		};
+
+		public static object InstanceAnonymous = new
+		{
+			name = "nesttests",
+			state = "BellyUp",
+			startedOn = "2015-01-01T00:00:00",
+			lastActivity = "0001-01-01T00:00:00",
+			leadDeveloper = new {gender = "Male", id = 0, firstName = "Martijn", lastName = "Laarman"}
+		};
 	}
 
 	[JsonConverter(typeof(StringEnumConverter))]

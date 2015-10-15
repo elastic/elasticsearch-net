@@ -3217,14 +3217,14 @@ namespace Nest
 	}
 	
 	///<summary>descriptor for Info <pre>http://www.elastic.co/guide/</pre></summary>
-	public partial class InfoDescriptor  : RequestDescriptorBase<InfoDescriptor,InfoRequestParameters, IInfoRequest>, IInfoRequest
+	public partial class RootNodeInfoDescriptor  : RequestDescriptorBase<RootNodeInfoDescriptor,InfoRequestParameters, IRootNodeInfoRequest>, IRootNodeInfoRequest
 	{ 
 			
 		///<summary>The URL-encoded request definition</summary>
-		public InfoDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public RootNodeInfoDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public InfoDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		public RootNodeInfoDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	

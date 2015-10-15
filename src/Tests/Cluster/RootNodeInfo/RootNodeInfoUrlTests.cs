@@ -16,9 +16,9 @@ namespace Tests.Cluster.RootNodeInfo
 		{
 			await GET("/")
 				.Fluent(c => c.RootNodeInfo())
-				.Request(c => c.RootNodeInfo(new InfoRequest()))
+				.Request(c => c.RootNodeInfo(new RootNodeInfoRequest()))
 				.FluentAsync(c => c.RootNodeInfoAsync())
-				.RequestAsync(c => c.RootNodeInfoAsync(new InfoRequest()))
+				.RequestAsync(c => c.RootNodeInfoAsync(new RootNodeInfoRequest()))
 				;
 		}
 	}
