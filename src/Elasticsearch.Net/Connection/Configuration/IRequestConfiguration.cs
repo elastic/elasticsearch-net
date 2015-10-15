@@ -2,6 +2,7 @@ using Elasticsearch.Net.Connection.Security;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 
 namespace Elasticsearch.Net.Connection.Configuration
 {
@@ -61,5 +62,11 @@ namespace Elasticsearch.Net.Connection.Configuration
 		/// <para>Note: HTTP pipelining must also be enabled in Elasticsearch for this to work properly.</para>
 		/// </summary>
 		bool EnableHttpPipelining { get; set; }
+
+		/// <summary>
+		/// An action that is called prior to sending an HTTP request to allow
+		/// a client to sign the HTTP request.
+		/// </summary>
+		Action<HttpWebRequest, byte[]> RequestSigner { get; set; }
 	}
 }

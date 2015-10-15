@@ -1,6 +1,7 @@
 using Elasticsearch.Net.Connection.Security;
 using System;
 using System.Collections.Generic;
+using System.Net;
 
 namespace Elasticsearch.Net.Connection.Configuration
 {
@@ -16,5 +17,6 @@ namespace Elasticsearch.Net.Connection.Configuration
 		public IEnumerable<int> AllowedStatusCodes { get; set; }
 		public BasicAuthorizationCredentials BasicAuthorizationCredentials { get; set; }
 		public bool EnableHttpPipelining { get; set; }
+		public Action<HttpWebRequest, byte[]> RequestSigner { get; set; }
 	}
 }

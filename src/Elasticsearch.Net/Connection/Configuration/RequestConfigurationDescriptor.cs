@@ -1,6 +1,7 @@
 using Elasticsearch.Net.Connection.Security;
 using System;
 using System.Collections.Generic;
+using System.Net;
 
 namespace Elasticsearch.Net.Connection.Configuration
 {
@@ -27,6 +28,8 @@ namespace Elasticsearch.Net.Connection.Configuration
 		BasicAuthorizationCredentials IRequestConfiguration.BasicAuthorizationCredentials { get; set; }
 
 		bool IRequestConfiguration.EnableHttpPipelining { get; set; }
+
+		Action<HttpWebRequest, byte[]> IRequestConfiguration.RequestSigner { get; set; }
 
 		public RequestConfigurationDescriptor RequestTimeout(int requestTimeoutInMilliseconds)
 		{
@@ -99,6 +102,12 @@ namespace Elasticsearch.Net.Connection.Configuration
 		public RequestConfigurationDescriptor EnableHttpPipelining(bool enable = true)
 		{
 			Self.EnableHttpPipelining = enable;
+			return this;
+		}
+
+		public RequestConfigurationDescriptor RequestSigner(Action<HttpWebRequest, byte[]> signer)
+		{
+			Self.RequestSigner = signer;
 			return this;
 		}
 	}
