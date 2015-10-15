@@ -17,25 +17,52 @@ namespace Nest
 		FielddataSettings FielddataSettings { get; set; }
 
 		/// <summary><summary>
-		IndicesRecoverySettings RecoverySettings { get; set; }
+		IIndicesRecoverySettings RecoverySettings { get; set; }
 
 	}
 
 	///<inheritdoc/>
 	public class IndicesModuleSettings : IIndicesModuleSettings
 	{
+		///<inheritdoc/>
+		public string QeueriesCacheSize { get; set; }
+
+		///<inheritdoc/>
+		public ICircuitBreakerSettings CircuitBreakerSettings { get; set; }
+
+		///<inheritdoc/>
+		public FielddataSettings FielddataSettings { get; set; }
+
+		///<inheritdoc/>
+		public IIndicesRecoverySettings RecoverySettings { get; set; }
+
 	}
 
 	///<inheritdoc/>
 	public class IndicesModuleSettingsDescriptor : DescriptorBase<IndicesModuleSettingsDescriptor, IIndicesModuleSettings>, IIndicesModuleSettings
 	{
 
-		IAllocationAwarenessSettings IIndicesModuleSettings.AllocationAwareness { get; set; }
+		///<inheritdoc/>
+		string IIndicesModuleSettings.QeueriesCacheSize { get; set; }
 
 		///<inheritdoc/>
-		public IndicesModuleSettingsDescriptor AllocationAwareness(Func<AllocationAwarenessSettings, IAllocationAwarenessSettings> selector) => 
-			Assign(a => a.AllocationAwareness = selector?.Invoke(new AllocationAwarenessSettings()));
+		ICircuitBreakerSettings IIndicesModuleSettings.CircuitBreakerSettings { get; set; }
 
+		///<inheritdoc/>
+		FielddataSettings IIndicesModuleSettings.FielddataSettings { get; set; }
+
+		///<inheritdoc/>
+		IIndicesRecoverySettings IIndicesModuleSettings.RecoverySettings { get; set; }
+
+		///<inheritdoc/>
+		public IndicesModuleSettingsDescriptor CircuitBreaker(Func<CircuitBreakerSettingsDescriptor, ICircuitBreakerSettings> selector) => 
+			Assign(a => a.CircuitBreakerSettings = selector?.Invoke(new CircuitBreakerSettingsDescriptor()));
+
+		//fielddatasettings are static 
+
+		///<inheritdoc/>
+		public IndicesModuleSettingsDescriptor IndicesRecovery(Func<IndicesRecoverySettingsDescriptor, IIndicesRecoverySettings> selector) => 
+			Assign(a => a.RecoverySettings = selector?.Invoke(new IndicesRecoverySettingsDescriptor()));
 
 	}
 
