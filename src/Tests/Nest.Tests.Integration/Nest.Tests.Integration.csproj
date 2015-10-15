@@ -182,6 +182,7 @@
     <Compile Include="Reproduce\Reproduce1457Tests.cs" />
     <Compile Include="Reproduce\Reproduce1474Tests.cs" />
     <Compile Include="Reproduce\Reproduce1515Tests.cs" />
+    <Compile Include="Reproduce\Reproduce1591Tests.cs" />
     <Compile Include="Reproduce\Reproduce769Tests.cs" />
     <Compile Include="Reproduce\Reproduce945Tests.cs" />
     <Compile Include="Reproduce\Reproduce953Tests.cs" />
@@ -446,5 +447,8 @@
       <Private>True</Private>
       <Paket>True</Paket>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
 </Project>
