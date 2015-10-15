@@ -161,7 +161,16 @@ namespace Elasticsearch.Net.Connection
 			this.SetBasicAuthenticationIfNeeded(uri, request, requestSpecificConfig);
 			this.SetProxyIfNeeded(request);
 			this.AlterServicePoint(request.ServicePoint);
+			this.SignRequest(request, data, requestSpecificConfig);
 			return request;
+		}
+
+		private void SignRequest(HttpWebRequest request, byte[] data, IRequestConfiguration requestSpecificConfig)
+		{
+			if (requestSpecificConfig.RequestSigner != null)
+			{
+				requestSpecificConfig.RequestSigner(request, data);
+			}
 		}
 
 		private void SetProxyIfNeeded(HttpWebRequest myReq)
