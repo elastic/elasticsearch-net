@@ -282,9 +282,11 @@
     <Compile Include="Search\SearchExists\SearchExistsUrlTests.cs" />
     <Compile Include="Search\SearchShards\SearchShardsUrlTests.cs" />
     <Compile Include="Search\SearchTemplate\DeleteSearchTemplate\DeleteSearchTemplateUrlTests.cs" />
+    <Compile Include="Search\SearchTemplate\DeleteSearchTemplate\DeleteSearchTemplateApiTests.cs" />
     <Compile Include="Search\SearchTemplate\GetSearchTemplate\GetSearchTemplateUrlTests.cs" />
+    <Compile Include="Search\SearchTemplate\GetSearchTemplate\GetSearchTemplateApiTests.cs" />
     <Compile Include="Search\SearchTemplate\PutSearchTemplate\PutSearchTemplateUrlTests.cs" />
-    <Compile Include="Search\SearchTemplate\PutSearchTemplate\PutSearchTemplateApiTest.cs" />
+    <Compile Include="Search\SearchTemplate\PutSearchTemplate\PutSearchTemplateApiTests.cs" />
     <Compile Include="Search\SearchTemplate\SearchTemplateCrudTests.cs" />
     <Compile Include="Search\Search\SearchUrlTests.cs" />
     <Compile Include="Search\Request\Fields.cs" />

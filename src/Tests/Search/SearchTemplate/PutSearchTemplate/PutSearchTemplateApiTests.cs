@@ -10,13 +10,13 @@ using Tests.Framework.Integration;
 using Xunit;
 using Tests.Framework.MockData;
 
-namespace Tests.Search.Validate
+namespace Tests.Search.SearchTemplate.PutSearchTemplate
 {
 	[Collection(IntegrationContext.ReadOnly)]
-	public class PutSearchTemplateApiTest 
+	public class PutSearchTemplateApiTests 
 		: ApiTestBase<IAcknowledgedResponse, IPutSearchTemplateRequest, PutSearchTemplateDescriptor, PutSearchTemplateRequest>
 	{
-		public PutSearchTemplateApiTest(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public PutSearchTemplateApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (c, f) => c.PutSearchTemplate(CallIsolatedValue, f),
@@ -24,7 +24,7 @@ namespace Tests.Search.Validate
 			request: (c, r) => c.PutSearchTemplate(r),
 			requestAsync: (c, r) => c.PutSearchTemplateAsync(r)
 		);
-		
+
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override string UrlPath => $"/_search/template/{CallIsolatedValue}";
 
