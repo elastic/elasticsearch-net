@@ -30,12 +30,22 @@ namespace Tests.Indices.AliasManagement.Update
 
 		protected override bool SupportsDeserialization => false;
 
+		protected override object ExpectJson { get; } = new
+		{
+			doc = Project.InstanceAnonymous,
+			doc_as_upsert = true
+		};
+
 		protected override UpdateDescriptor<Project, Project> NewDescriptor() => new UpdateDescriptor<Project, Project>(Project.Instance);
 
 		protected override Func<UpdateDescriptor<Project,Project>, IUpdateRequest<Project, Project>> Fluent => d=>d
-		;
+			.Doc(Project.Instance)
+			.DocAsUpsert();
+
 		protected override UpdateRequest<Project, Project> Initializer => new UpdateRequest<Project, Project>(Project.Instance.Name)
 		{
+			Doc = Project.Instance,
+			DocAsUpsert = true
 		};
 
 		[I] public async Task Response() => await this.AssertOnAllResponses(r =>
