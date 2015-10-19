@@ -280,6 +280,7 @@
     <Compile Include="Search\Scroll\ClearScroll\ClearScrollUrlTests.cs" />
     <Compile Include="Search\Scroll\Scroll\ScrollUrlTests.cs" />
     <Compile Include="Search\SearchExists\SearchExistsUrlTests.cs" />
+    <Compile Include="Search\SearchShards\SearchShardsApiTests.cs" />
     <Compile Include="Search\SearchShards\SearchShardsUrlTests.cs" />
     <Compile Include="Search\SearchTemplate\DeleteSearchTemplate\DeleteSearchTemplateUrlTests.cs" />
     <Compile Include="Search\SearchTemplate\DeleteSearchTemplate\DeleteSearchTemplateApiTests.cs" />
