@@ -20,5 +20,10 @@ namespace Nest
 		public static Types Type(IEnumerable<TypeName> types) => new Types.ManyTypes(types);
 		public static Types Type(params TypeName[] types) => new Types.ManyTypes(types);
 		public static Types AllTypes = Nest.Types.All;
+
+		public static Names Names(params string[] names) => string.Join(",", names);
+		public static Names Names(IEnumerable<string> names) => string.Join(",", names);
+
+		public static Id Id<T>(T document) where T : class => Nest.Id.From(document);
 	}
 }

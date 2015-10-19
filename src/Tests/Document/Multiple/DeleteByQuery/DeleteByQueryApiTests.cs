@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Framework;
@@ -46,5 +47,9 @@ namespace Tests.Document.Multiple.DeleteByQuery
 		{
 			Query = new MatchAllQuery()
 		};
+
+		[I] public async Task Response() => await this.AssertOnAllResponses(r =>
+		{
+		});
 	}
 }

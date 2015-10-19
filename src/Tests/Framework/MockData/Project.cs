@@ -35,14 +35,14 @@ namespace Tests.Framework.MockData
 
 		public static Project Instance = new Project
 		{
-			Name = "nesttests",
+			Name = Projects.First().Name,
 			LeadDeveloper = new Developer() { FirstName = "Martijn", LastName = "Laarman" },
 			StartedOn = new DateTime(2015, 1, 1)
 		};
 
 		public static object InstanceAnonymous = new
 		{
-			name = "nesttests",
+			name = Projects.First().Name,
 			state = "BellyUp",
 			startedOn = "2015-01-01T00:00:00",
 			lastActivity = "0001-01-01T00:00:00",

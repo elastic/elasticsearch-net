@@ -11,6 +11,7 @@ using Newtonsoft.Json.Linq;
 using Elasticsearch.Net.Serialization;
 using Tests.Framework;
 using System.Text.RegularExpressions;
+using Tests.Framework.Integration;
 
 namespace Tests.Framework
 {
@@ -24,6 +25,16 @@ namespace Tests.Framework
 		protected Func<ConnectionSettings, ConnectionSettings> _connectionSettingsModifier = null;
 
 		protected SerializationTestBase()
+		{
+			SetupSerialization();
+		}
+
+		protected SerializationTestBase(IIntegrationCluster cluster)
+		{
+			
+		}
+
+		protected void SetupSerialization()
 		{
 			var o = this.ExpectJson;
 			if (o == null) return;

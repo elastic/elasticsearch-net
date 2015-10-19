@@ -145,12 +145,18 @@
     <Compile Include="Document\Multiple\MultiGet\MultiGetUrlTests.cs" />
     <Compile Include="Document\Multiple\MultiTermVectors\MultiTermVectorsApiTests.cs" />
     <Compile Include="Document\Multiple\MultiTermVectors\MultiTermVectorsUrlTests.cs" />
-    <Compile Include="Document\Single\Exists\ExistsUrlTests.cs" />
+    <Compile Include="Document\Single\Delete\DeleteApiTests.cs" />
+    <Compile Include="Document\Single\Exists\DocumentExistsApiTests.cs" />
+    <Compile Include="Document\Single\Exists\DocumentExistsUrlTests.cs" />
     <Compile Include="Document\Single\Delete\DeleteUrlTests.cs" />
+    <Compile Include="Document\Single\Get\GetApiTests.cs" />
     <Compile Include="Document\Single\Get\GetUrlTests.cs" />
     <Compile Include="Document\Single\Index\IndexUrlTests.cs" />
     <Compile Include="Document\Single\Index\IndexApiTests.cs" />
+    <Compile Include="Document\Single\Source\SourceApiTests.cs" />
+    <Compile Include="Document\Single\TermVectors\TermVectorsApiTests.cs" />
     <Compile Include="Document\Single\TermVectors\TermVectorsUrlTests.cs" />
+    <Compile Include="Document\Single\Update\UpdateApiTests.cs" />
     <Compile Include="Document\Single\Update\UpdateUrlTests.cs" />
     <Compile Include="Framework\CrudTestBase.cs" />
     <Compile Include="Framework\Integration\ObservableProcess.cs" />
@@ -199,11 +205,17 @@
     <Compile Include="IndexModules\IndexSettings\SlowLog\SlowLogSettings.cs" />
     <Compile Include="IndexModules\IndexSettings\Translog\TranslogSettings.cs" />
     <Compile Include="IndexModules\Similarity\SimilaritySettings.cs" />
+    <Compile Include="Indices\AliasManagement\AliasExists\AliasExistsApiTests.cs" />
     <Compile Include="Indices\AliasManagement\AliasExists\AliasExistsUrlTests.cs" />
     <Compile Include="Indices\AliasManagement\Alias\AliasUrlTests.cs" />
+    <Compile Include="Indices\AliasManagement\Alias\AliasApiTests.cs" />
+    <Compile Include="Indices\AliasManagement\DeleteAlias\AliasDeleteApiTests.cs" />
     <Compile Include="Indices\AliasManagement\DeleteAlias\DeleteAliasUrlTests.cs" />
+    <Compile Include="Indices\AliasManagement\GetAliasesUrlTests.cs\GetAliasApiTests.cs" />
     <Compile Include="Indices\AliasManagement\GetAliasesUrlTests.cs\GetAliasesUrlTests.cs" />
+    <Compile Include="Indices\AliasManagement\GetAlias\GetAliasApiTests.cs" />
     <Compile Include="Indices\AliasManagement\GetAlias\GetAliasUrlTests.cs" />
+    <Compile Include="Indices\AliasManagement\PutAliasUrlTests\PutAliasApiTests.cs" />
     <Compile Include="Indices\AliasManagement\PutAliasUrlTests\PutAliasUrlTests.cs" />
     <Compile Include="Indices\Analyze\AnalyzeUrlTests.cs" />
     <Compile Include="Indices\IndexManagement\CreateIndex\CreateIndexApiTests.cs" />
@@ -305,7 +317,6 @@
   <ItemGroup>
     <Folder Include="Aggregations\Metric\" />
     <Folder Include="Aggregations\Pipeline\" />
-    <Folder Include="Document\Single\Source\" />
     <Folder Include="Migration\" />
     <Folder Include="Plugins\Analysis\Phonetic\" />
     <Folder Include="QueryDsl\" />

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Framework;
@@ -45,6 +46,10 @@ namespace Tests.Document.Multiple.MultiGet
 			Documents = Project.Projects.Select(p => p.Name).Take(10)
 				.Select(n=>new MultiGetOperation<Project>(n))
 		};
+
+		[I] public async Task Response() => await this.AssertOnAllResponses(r =>
+		{
+		});
 	}
 
 	[Collection(IntegrationContext.ReadOnly)]
@@ -81,5 +86,9 @@ namespace Tests.Document.Multiple.MultiGet
 				.Select(n=>new MultiGetOperation<Project>(n) { Routing = n, Source = false })
 				
 		};
+
+		[I] public async Task Response() => await this.AssertOnAllResponses(r =>
+		{
+		});
 	}
 }

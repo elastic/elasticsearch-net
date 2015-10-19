@@ -10,7 +10,7 @@ using static Tests.Framework.UrlTester;
 
 namespace Tests.Document.Single.Exists
 {
-	public class ExistsUrlTests
+	public class DocumentExistsUrlTests
 	{
 		[U] public async Task Urls()
 		{

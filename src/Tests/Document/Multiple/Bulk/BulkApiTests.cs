@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Framework;
@@ -30,18 +31,18 @@ namespace Tests.Document.Multiple.Bulk
 
 		protected override object ExpectJson { get; } = new object[]
 		{
-			new Dictionary<string, object>{ { "index", new {  _type = "project", _id = "nesttests" } } },
+			new Dictionary<string, object>{ { "index", new {  _type = "project", _id = Project.Instance.Name } } },
 			Project.InstanceAnonymous,
-			new Dictionary<string, object>{ { "update", new { _type="project", _id = "nesttests1" } } },
+			new Dictionary<string, object>{ { "update", new { _type="project", _id = Project.Instance.Name + "1" } } },
 			new { script = "1+1" },
-			new Dictionary<string, object>{ { "create", new { _type="project", _id = "nesttests" } } },
+			new Dictionary<string, object>{ { "create", new { _type="project", _id = Project.Instance.Name } } },
 			Project.InstanceAnonymous,
 		};
 
 		protected override Func<BulkDescriptor, IBulkRequest> Fluent => d => d
 			.Index(CallIsolatedValue)
 			.Index<Project>(b => b.Document(Project.Instance))
-			.Update<Project>(b => b.Script("1+1").Id("nesttests1"))
+			.Update<Project>(b => b.Script("1+1").Id(Project.Instance.Name + "1"))
 			.Create<Project>(b => b.Document(Project.Instance));
 			
 
@@ -50,9 +51,12 @@ namespace Tests.Document.Multiple.Bulk
 			Operations = new List<IBulkOperation>
 			{
 				new BulkIndexOperation<Project>(Project.Instance),
-				new BulkUpdateOperation<Project, Project>("nesttests1") { Script = "1+1" },
+				new BulkUpdateOperation<Project, Project>(Project.Instance.Name + "1") { Script = "1+1" },
 				new BulkCreateOperation<Project>(Project.Instance),
 			}
 		};
+		[I] public async Task Response() => await this.AssertOnAllResponses(r =>
+		{
+		});
 	}
 }

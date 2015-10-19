@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Framework;
@@ -50,5 +51,10 @@ namespace Tests.Document.Multiple.MultiTermVectors
 			Documents = Project.Projects.Select(p => p.Name).Take(10)
 				.Select(n=>new MultiTermVectorOperation<Project>(n) { FieldStatistics = true, Payloads = true })
 		};
+
+
+		[I] public async Task Response() => await this.AssertOnAllResponses(r =>
+		{
+		});
 	}
 }

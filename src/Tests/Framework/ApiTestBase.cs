@@ -16,7 +16,7 @@ namespace Tests.Framework
 		where TInitializer : class, TInterface
 		where TInterface : class
 	{
-		protected ApiTestBase(IIntegrationCluster cluster, EndpointUsage usage)
+		protected ApiTestBase(IIntegrationCluster cluster, EndpointUsage usage) : base(cluster)
 		{
 			this._cluster = cluster;
 			this._integrationPort = cluster.Node.Port;
@@ -24,6 +24,7 @@ namespace Tests.Framework
 			this.UniqueValues = this._usage.CallUniqueValues;
 			this._responses = usage.CallOnce(this.ClientUsage);
 			this.CallIsolatedValue = UniqueValues[ClientCall.Fluent];
+			this.SetupSerialization();
 		}
 		private readonly IIntegrationCluster _cluster;
 		private readonly LazyResponses _responses;
