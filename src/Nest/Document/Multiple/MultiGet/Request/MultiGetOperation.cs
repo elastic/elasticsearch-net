@@ -24,7 +24,7 @@ namespace Nest
 		
 		public TypeName Type { get; set; }
 		
-		public string Id { get; set; }
+		public Id Id { get; set; }
 		
 		public IList<FieldName> Fields { get; set; }
 		
@@ -44,7 +44,7 @@ namespace Nest
 
 		IndexName IMultiGetOperation.Index { get; set; }
 		TypeName IMultiGetOperation.Type { get; set; }
-		string IMultiGetOperation.Id { get; set; }
+		Id IMultiGetOperation.Id { get; set; }
 		string IMultiGetOperation.Routing { get; set; }
 		Union<bool, ISourceFilter> IMultiGetOperation.Source { get; set; }
 		IList<FieldName> IMultiGetOperation.Fields { get; set; }
@@ -104,16 +104,12 @@ namespace Nest
 			return this;
 		}
 
-		public MultiGetOperationDescriptor<T> Id(long id)
-		{
-			return this.Id(id.ToString(CultureInfo.InvariantCulture));
-		}
-
-		public MultiGetOperationDescriptor<T> Id(string id)
+		public MultiGetOperationDescriptor<T> Id(Id id)
 		{
 			Self.Id = id;
 			return this;
 		}
+
 		/// <summary>
 		/// Control how the document's source is loaded
 		/// </summary>

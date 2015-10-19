@@ -563,7 +563,7 @@
     <Compile Include="Cluster\ClusterSettings\ClusterPutSettings\ClusterPutSettingsResponse.cs" />
     <Compile Include="Cluster\ClusterSettings\ClusterGetSettings\ClusterGetSettingsResponse.cs" />
     <Compile Include="Modules\SnapshotAndRestore\Snapshot\GetSapshot\GetSnapshotResponse.cs" />
-    <Compile Include="Document\Multiple\MultiTermVectors\MultiTermVectorResponse.cs" />
+    <Compile Include="Document\Multiple\MultiTermVectors\MultiTermVectorsResponse.cs" />
     <Compile Include="Modules\SnapshotAndRestore\Restore\RestoreResponse.cs" />
     <Compile Include="Modules\SnapshotAndRestore\Snapshot\Snapshot\SnapshotResponse.cs" />
     <Compile Include="Aggregations\Bucket\Terms\TermsIncludeExclude.cs" />
@@ -646,7 +646,7 @@
     <Compile Include="QueryDsl\Compound\FunctionScore\Functions\LinearFunction.cs" />
     <Compile Include="QueryDsl\Compound\FunctionScore\Functions\ScriptScoreFunction.cs" />
     <Compile Include="QueryDsl\Span\ISpanSubQuery.cs" />
-    <Compile Include="Document\Multiple\MultiTermVectors\MultiTermVectorDocument.cs" />
+    <Compile Include="Document\Multiple\MultiTermVectors\MultiTermVectorOperation.cs" />
     <Compile Include="Document\Multiple\MultiTermVectors\MultiTermVectorsRequest.cs" />
     <Compile Include="Modules\SnapshotAndRestore\Snapshot\Snapshot\SnapshotRequest.cs" />
     <Compile Include="Modules\SnapshotAndRestore\Repositories\DeleteRepository\DeleteRepositoryRequest.cs" />

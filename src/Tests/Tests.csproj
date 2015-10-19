@@ -142,6 +142,7 @@
     <Compile Include="Document\Multiple\DeleteByQuery\DeleteByQueryUrlTests.cs" />
     <Compile Include="Document\Multiple\MultiGet\MultiGetApiTests.cs" />
     <Compile Include="Document\Multiple\MultiGet\MultiGetUrlTests.cs" />
+    <Compile Include="Document\Multiple\MultiTermVectors\MultiTermVectorsApiTests.cs" />
     <Compile Include="Document\Multiple\MultiTermVectors\MultiTermVectorsUrlTests.cs" />
     <Compile Include="Document\Single\Exists\ExistsUrlTests.cs" />
     <Compile Include="Document\Single\Delete\DeleteUrlTests.cs" />

@@ -120,6 +120,7 @@ namespace Nest.Resolvers
 
 
 			defaultProperties = PropertiesOf<IClusterRerouteCommand>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<IMultiTermVectorOperation>(type, memberSerialization, defaultProperties, lookup);
 
 			defaultProperties = PropertiesOf<INestSerializable>(type, memberSerialization, defaultProperties, lookup);
 

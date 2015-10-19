@@ -42,9 +42,8 @@ namespace Tests.Document.Multiple.MultiGet
 
 		protected override MultiGetRequest Initializer => new MultiGetRequest(Index<Project>(), Type<Project>())
 		{
-			GetOperations = Project.Projects.Select(p => p.Name).Take(10)
+			Documents = Project.Projects.Select(p => p.Name).Take(10)
 				.Select(n=>new MultiGetOperation<Project>(n))
-				
 		};
 	}
 
@@ -78,7 +77,7 @@ namespace Tests.Document.Multiple.MultiGet
 
 		protected override MultiGetRequest Initializer => new MultiGetRequest(Index<Project>())
 		{
-			GetOperations = Project.Projects.Select(p => p.Name).Take(10)
+			Documents = Project.Projects.Select(p => p.Name).Take(10)
 				.Select(n=>new MultiGetOperation<Project>(n) { Routing = n, Source = false })
 				
 		};

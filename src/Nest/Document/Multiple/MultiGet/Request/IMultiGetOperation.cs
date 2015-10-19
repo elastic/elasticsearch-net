@@ -15,7 +15,7 @@ namespace Nest
 		TypeName Type { get; set; }
 		
 		[JsonProperty(PropertyName = "_id")]
-		string Id { get; set; }
+		Id Id { get; set; }
 		
 		[JsonProperty(PropertyName = "fields")]
 		IList<FieldName> Fields { get; set; }

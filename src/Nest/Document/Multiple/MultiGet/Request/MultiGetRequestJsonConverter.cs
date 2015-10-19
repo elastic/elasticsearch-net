@@ -16,17 +16,17 @@ namespace Nest
 		{
 			var request = value as IMultiGetRequest;
 			writer.WriteStartObject();
-			if (!(request?.GetOperations.HasAny()).GetValueOrDefault(false))
+			if (!(request?.Documents.HasAny()).GetValueOrDefault(false))
 			{
 				writer.WriteEndObject();
 				return;
 			}
 			writer.WritePropertyName("docs");
 			writer.WriteStartArray();
-			foreach (var id in request.GetOperations)
+			foreach (var id in request.Documents)
 			{
 				if (request.Index != null && request.Type != null)
-					writer.WriteValue(id.Id);
+					serializer.Serialize(writer, id.Id);
 				else
 				{
 					if (request.Index != null) id.Index = null;
