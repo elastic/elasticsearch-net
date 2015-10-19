@@ -7,48 +7,36 @@ using Newtonsoft.Json;
 namespace Nest
 {
 
+	[JsonConverter(typeof(MultiGetRequestJsonConverter))]
 	public partial interface IMultiGetRequest 
 	{
 		[JsonProperty("docs")]
-		IList<IMultiGetOperation> GetOperations { get; set; }
+		IEnumerable<IMultiGetOperation> GetOperations { get; set; }
 	}
 
 	public partial class MultiGetRequest 
 	{
-		public IList<IMultiGetOperation> GetOperations { get; set; }
-
+		public IEnumerable<IMultiGetOperation> GetOperations { get; set; }
 	}
 
 	[DescriptorFor("Mget")]
 	public partial class MultiGetDescriptor
 	{
-		IList<IMultiGetOperation> IMultiGetRequest.GetOperations { get; set; } = new List<IMultiGetOperation>();
+		private List<IMultiGetOperation> _operations = new List<IMultiGetOperation>();
+
+		IEnumerable<IMultiGetOperation> IMultiGetRequest.GetOperations { get { return this._operations; } set { this._operations = value.ToList(); } }
 
 		public MultiGetDescriptor Get<T>(Func<MultiGetOperationDescriptor<T>, MultiGetOperationDescriptor<T>> getSelector)
-			where T : class
-		{
-			getSelector.ThrowIfNull("getSelector");
-			var descriptor = getSelector(new MultiGetOperationDescriptor<T>());
-			((IMultiGetRequest)this).GetOperations.Add(descriptor);
-			return this;
-		}
+			where T : class => 
+			Assign(a => this._operations.AddIfNotNull(getSelector?.Invoke(new MultiGetOperationDescriptor<T>())));
 
-		public MultiGetDescriptor GetMany<T>(IEnumerable<long> ids, Func<MultiGetOperationDescriptor<T>, long, MultiGetOperationDescriptor<T>> getSelector = null)
-			where T : class
-		{
-			getSelector = getSelector ?? ((sg, s) => sg);
-			foreach (var sg in ids.Select(id => getSelector(new MultiGetOperationDescriptor<T>().Id(id), id)))
-				((IMultiGetRequest)this).GetOperations.Add(sg);
-			return this;
+		public MultiGetDescriptor GetMany<T>(IEnumerable<long> ids,
+			Func<MultiGetOperationDescriptor<T>, long, MultiGetOperationDescriptor<T>> getSelector = null)
+			where T : class => 
+			Assign(a => this._operations.AddRange(ids.Select(id => getSelector.InvokeOrDefault(new MultiGetOperationDescriptor<T>().Id(id), id))));
 
-		}
 		public MultiGetDescriptor GetMany<T>(IEnumerable<string> ids, Func<MultiGetOperationDescriptor<T>, string, MultiGetOperationDescriptor<T>> getSelector = null)
-			where T : class
-		{
-			getSelector = getSelector ?? ((sg, s) => sg);
-			foreach (var sg in ids.Select(id => getSelector(new MultiGetOperationDescriptor<T>().Id(id), id)))
-				((IMultiGetRequest)this).GetOperations.Add(sg);
-			return this;
-		}
+			where T : class =>
+			Assign(a => this._operations.AddRange(ids.Select(id => getSelector.InvokeOrDefault(new MultiGetOperationDescriptor<T>().Id(id), id))));
 	}
 }

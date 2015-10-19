@@ -142,7 +142,9 @@
     <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\KeyValueJsonConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\ReserializeJsonConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\JsonReaderExtensions.cs" />
+    <Compile Include="CommonAbstractions\Static\Static.cs" />
     <Compile Include="CommonAbstractions\Union\UnionJsonConverter.cs" />
+    <Compile Include="Document\Multiple\MultiGet\Request\MultiGetRequestJsonConverter.cs" />
     <Compile Include="Document\Multiple\MultiGet\Response\MultiGetHit.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\Json.cs" />
     <Compile Include="Document\Multiple\Bulk\BulkRequestJsonConverter.cs" />
