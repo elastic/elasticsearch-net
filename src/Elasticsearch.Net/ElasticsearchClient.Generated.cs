@@ -1013,7 +1013,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">The settings to be updated. Can be either `transient` or `persistent` (survives cluster restart).</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> ClusterPutSettings<T>(PostData<object> body, Func<ClusterSettingsRequestParameters, ClusterSettingsRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> ClusterPutSettings<T>(PostData<object> body, Func<ClusterPutSettingsRequestParameters, ClusterPutSettingsRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(PUT, Url($"_cluster/settings"), body, _params(requestParameters));
 		
 		///<summary>Represents a PUT on /_cluster/settings 
@@ -1027,7 +1027,7 @@ namespace Elasticsearch.Net
 	    ///</summary>
 		///<param name="body">The settings to be updated. Can be either `transient` or `persistent` (survives cluster restart).</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> ClusterPutSettingsAsync<T>(PostData<object> body, Func<ClusterSettingsRequestParameters, ClusterSettingsRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> ClusterPutSettingsAsync<T>(PostData<object> body, Func<ClusterPutSettingsRequestParameters, ClusterPutSettingsRequestParameters> requestParameters = null)
 			where T : class => this.DoRequestAsync<T>(PUT, Url($"_cluster/settings"), body, _params(requestParameters));
 		
 		///<summary>Represents a POST on /_cluster/reroute 
@@ -5086,7 +5086,7 @@ namespace Elasticsearch.Net
 	    ///<para>See also: http://www.elastic.co/guide/</para>	
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public ElasticsearchResponse<T> Info<T>(Func<InfoRequestParameters, InfoRequestParameters> requestParameters = null)
+		public ElasticsearchResponse<T> Info<T>(Func<RootNodeInfoRequestParameters, RootNodeInfoRequestParameters> requestParameters = null)
 			where T : class => this.DoRequest<T>(GET, Url($""), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on / 
@@ -5099,7 +5099,7 @@ namespace Elasticsearch.Net
 	    ///<para>See also: http://www.elastic.co/guide/</para>	
 	    ///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		public Task<ElasticsearchResponse<T>> InfoAsync<T>(Func<InfoRequestParameters, InfoRequestParameters> requestParameters = null)
+		public Task<ElasticsearchResponse<T>> InfoAsync<T>(Func<RootNodeInfoRequestParameters, RootNodeInfoRequestParameters> requestParameters = null)
 			where T : class => this.DoRequestAsync<T>(GET, Url($""), null, _params(requestParameters));
 		
 		///<summary>Represents a GET on /_mget 

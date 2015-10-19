@@ -947,7 +947,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="body">The settings to be updated. Can be either `transient` or `persistent` (survives cluster restart).</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> ClusterPutSettings<T>(PostData<object> body, Func<ClusterSettingsRequestParameters, ClusterSettingsRequestParameters> requestParameters = null) where T : class;
+		ElasticsearchResponse<T> ClusterPutSettings<T>(PostData<object> body, Func<ClusterPutSettingsRequestParameters, ClusterPutSettingsRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a PUT on /_cluster/settings
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -960,7 +960,7 @@ namespace Elasticsearch.Net
 		///</summary>
 		///<param name="body">The settings to be updated. Can be either `transient` or `persistent` (survives cluster restart).</param>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> ClusterPutSettingsAsync<T>(PostData<object> body, Func<ClusterSettingsRequestParameters, ClusterSettingsRequestParameters> requestParameters = null) where T : class;
+		Task<ElasticsearchResponse<T>> ClusterPutSettingsAsync<T>(PostData<object> body, Func<ClusterPutSettingsRequestParameters, ClusterPutSettingsRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a POST on /_cluster/reroute
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
@@ -4738,7 +4738,7 @@ namespace Elasticsearch.Net
 		///<para>See also: http://www.elastic.co/guide/</para>	
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		ElasticsearchResponse<T> Info<T>(Func<InfoRequestParameters, InfoRequestParameters> requestParameters = null) where T : class;
+		ElasticsearchResponse<T> Info<T>(Func<RootNodeInfoRequestParameters, RootNodeInfoRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a GET on /
 		///<para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
@@ -4750,7 +4750,7 @@ namespace Elasticsearch.Net
 		///<para>See also: http://www.elastic.co/guide/</para>	
 		///</summary>
 		///<param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
-		Task<ElasticsearchResponse<T>> InfoAsync<T>(Func<InfoRequestParameters, InfoRequestParameters> requestParameters = null) where T : class;
+		Task<ElasticsearchResponse<T>> InfoAsync<T>(Func<RootNodeInfoRequestParameters, RootNodeInfoRequestParameters> requestParameters = null) where T : class;
 		
 		///<summary>Represents a GET on /_mget
 		///<para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:

@@ -23,21 +23,34 @@ namespace Tests.Indices.IndexSettings.IndexTemplates.PutIndexTemplate
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
-		protected override string UrlPath => $"/_template/{CallIsolatedValue}";
+		protected override string UrlPath => $"/_template/{CallIsolatedValue}?create=false";
+
+		protected override bool SupportsDeserialization => false;
+
+		protected override object ExpectJson { get; } = new
+		{
+			order = 1,
+			template = "nestx-*",
+			settings = new Dictionary<string, object> { { "index.number_of_shards", 1} }
+		};
 
 		protected override PutIndexTemplateDescriptor NewDescriptor()=> new PutIndexTemplateDescriptor(CallIsolatedValue);
 
 		protected override Func<PutIndexTemplateDescriptor, IPutIndexTemplateRequest> Fluent => d => d
 			.Order(1)
-			.Template("nest-*")
+			.Template("nestx-*")
 			.Create(false)
 			.Settings(p=>p.NumberOfShards(1));
 
 		protected override PutIndexTemplateRequest Initializer => new PutIndexTemplateRequest(CallIsolatedValue)
 		{
 			Order = 1,
-			Tem  
-			
+			Template = "nestx-*",
+			Create = false,
+			Settings = new Nest.IndexSettings
+			{
+				NumberOfShards = 1
+			}
 		};
 	}
 }

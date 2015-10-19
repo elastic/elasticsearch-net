@@ -31,7 +31,7 @@ namespace Nest
 
 		/// <inheritdoc/>
 		public IRootNodeInfoResponse RootNodeInfo(IRootNodeInfoRequest infoRequest) => 
-			this.Dispatcher.Dispatch<IRootNodeInfoRequest, InfoRequestParameters, RootNodeInfoResponse>(
+			this.Dispatcher.Dispatch<IRootNodeInfoRequest, RootNodeInfoRequestParameters, RootNodeInfoResponse>(
 				infoRequest,
 				(p, d) => this.LowLevelDispatch.InfoDispatch<RootNodeInfoResponse>(p)
 			);
@@ -42,7 +42,7 @@ namespace Nest
 
 		/// <inheritdoc/>
 		public Task<IRootNodeInfoResponse> RootNodeInfoAsync(IRootNodeInfoRequest infoRequest) => 
-			this.Dispatcher.DispatchAsync<IRootNodeInfoRequest, InfoRequestParameters, RootNodeInfoResponse, IRootNodeInfoResponse>(
+			this.Dispatcher.DispatchAsync<IRootNodeInfoRequest, RootNodeInfoRequestParameters, RootNodeInfoResponse, IRootNodeInfoResponse>(
 				infoRequest,
 				(p, d) => this.LowLevelDispatch.InfoDispatchAsync<RootNodeInfoResponse>(p)
 			);

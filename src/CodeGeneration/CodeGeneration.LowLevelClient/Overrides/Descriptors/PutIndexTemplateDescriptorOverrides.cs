@@ -5,7 +5,7 @@ using System.Text;
 
 namespace CodeGeneration.LowLevelClient.Overrides.Descriptors
 {
-	public class PutTemplateDescriptorOverrides : IDescriptorOverrides
+	public class PutIndexTemplateDescriptorOverrides : IDescriptorOverrides
 	{
 		public IEnumerable<string> SkipQueryStringParams
 		{
