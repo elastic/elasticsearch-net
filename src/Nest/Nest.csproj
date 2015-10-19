@@ -955,7 +955,7 @@
     <Compile Include="Indices\Monitoring\IndicesStats\Stats.cs" />
     <Compile Include="Indices\Monitoring\IndicesStats\ElasticClient-IndicesStats.cs" />
     <Compile Include="CommonAbstractions\Response\AcknowledgedResponse.cs" />
-    <Compile Include="Indices\IndexSettings\GetIndexSettings\IndexSettingsResponse.cs" />
+    <Compile Include="Indices\IndexSettings\GetIndexSettings\GetIndexSettingsResponse.cs" />
     <Compile Include="Indices\IndexSettings\GetIndexSettings\ElasticClient-GetIndexSettings.cs" />
     <Compile Include="Indices\StatusManagement\ClearCache\ElasticClient-ClearCache.cs" />
     <Compile Include="Indices\Analyze\AnalyzeToken.cs" />
