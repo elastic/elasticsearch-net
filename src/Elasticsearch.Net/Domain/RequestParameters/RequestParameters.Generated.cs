@@ -653,23 +653,23 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html
 	///</pre>
 	///</summary>
-	public class ClusterSettingsRequestParameters : FluentRequestParameters<ClusterSettingsRequestParameters> 
+	public class ClusterPutSettingsRequestParameters : FluentRequestParameters<ClusterPutSettingsRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
 		///<summary>Return settings in flat format (default: false)</summary>
-		public ClusterSettingsRequestParameters FlatSettings(bool flat_settings) => this.AddQueryString("flat_settings", flat_settings);
+		public ClusterPutSettingsRequestParameters FlatSettings(bool flat_settings) => this.AddQueryString("flat_settings", flat_settings);
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public ClusterSettingsRequestParameters MasterTimeout(string master_timeout) => this.AddQueryString("master_timeout", master_timeout);
+		public ClusterPutSettingsRequestParameters MasterTimeout(string master_timeout) => this.AddQueryString("master_timeout", master_timeout);
 		
 		///<summary>Explicit operation timeout</summary>
-		public ClusterSettingsRequestParameters Timeout(string timeout) => this.AddQueryString("timeout", timeout);
+		public ClusterPutSettingsRequestParameters Timeout(string timeout) => this.AddQueryString("timeout", timeout);
 		
 		///<summary>The URL-encoded request definition</summary>
-		public ClusterSettingsRequestParameters Source(string source) => this.AddQueryString("source", source);
+		public ClusterPutSettingsRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public ClusterSettingsRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		public ClusterPutSettingsRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -751,6 +751,9 @@ namespace Elasticsearch.Net
 		
 		///<summary>Whether to return time and byte values in human-readable format.</summary>
 		public ClusterStatsRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		///<summary>Explicit operation timeout</summary>
+		public ClusterStatsRequestParameters Timeout(string timeout) => this.AddQueryString("timeout", timeout);
 		
 		///<summary>The URL-encoded request definition</summary>
 		public ClusterStatsRequestParameters Source(string source) => this.AddQueryString("source", source);
@@ -2100,9 +2103,6 @@ namespace Elasticsearch.Net
 	public class PutIndexTemplateRequestParameters : FluentRequestParameters<PutIndexTemplateRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.PUT;
-		///<summary>The order for this template when merging multiple matching ones (higher numbers are merged later, overriding the lower numbers)</summary>
-		public PutIndexTemplateRequestParameters Order(long order) => this.AddQueryString("order", order);
-		
 		///<summary>Whether the index template should only be added if new or can also replace an existing one</summary>
 		public PutIndexTemplateRequestParameters Create(bool create) => this.AddQueryString("create", create);
 		
@@ -2419,14 +2419,14 @@ namespace Elasticsearch.Net
 	///http://www.elastic.co/guide/
 	///</pre>
 	///</summary>
-	public class InfoRequestParameters : FluentRequestParameters<InfoRequestParameters> 
+	public class RootNodeInfoRequestParameters : FluentRequestParameters<RootNodeInfoRequestParameters> 
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>The URL-encoded request definition</summary>
-		public InfoRequestParameters Source(string source) => this.AddQueryString("source", source);
+		public RootNodeInfoRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public InfoRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
+		public RootNodeInfoRequestParameters FilterPath(string filter_path) => this.AddQueryString("filter_path", filter_path);
 		
 	}
 	
@@ -2586,6 +2586,9 @@ namespace Elasticsearch.Net
 		///<summary>The type to sample (default: cpu)</summary>
 		public NodesHotThreadsRequestParameters ThreadType(ThreadType thread_type) => this.AddQueryString("type", thread_type);
 		
+		///<summary>Explicit operation timeout</summary>
+		public NodesHotThreadsRequestParameters Timeout(string timeout) => this.AddQueryString("timeout", timeout);
+		
 		///<summary>The URL-encoded request definition</summary>
 		public NodesHotThreadsRequestParameters Source(string source) => this.AddQueryString("source", source);
 		
@@ -2607,6 +2610,9 @@ namespace Elasticsearch.Net
 		
 		///<summary>Whether to return time and byte values in human-readable format.</summary>
 		public NodesInfoRequestParameters Human(bool human) => this.AddQueryString("human", human);
+		
+		///<summary>Explicit operation timeout</summary>
+		public NodesInfoRequestParameters Timeout(string timeout) => this.AddQueryString("timeout", timeout);
 		
 		///<summary>The URL-encoded request definition</summary>
 		public NodesInfoRequestParameters Source(string source) => this.AddQueryString("source", source);
@@ -2644,6 +2650,9 @@ namespace Elasticsearch.Net
 		
 		///<summary>A comma-separated list of document types for the `indexing` index metric</summary>
 		public NodesStatsRequestParameters Types(params string[] types) => this.AddQueryString("types", types);
+		
+		///<summary>Explicit operation timeout</summary>
+		public NodesStatsRequestParameters Timeout(string timeout) => this.AddQueryString("timeout", timeout);
 		
 		///<summary>The URL-encoded request definition</summary>
 		public NodesStatsRequestParameters Source(string source) => this.AddQueryString("source", source);
@@ -3326,6 +3335,9 @@ namespace Elasticsearch.Net
 		
 		///<summary>Specific version type</summary>
 		public UpdateRequestParameters VersionType(VersionType version_type) => this.AddQueryString("version_type", version_type);
+		
+		///<summary>Specifying as true will cause Elasticsearch to check if there are changes and, if there aren&#226;€™t, turn the update request into a noop.</summary>
+		public UpdateRequestParameters DetectNoop(bool detect_noop) => this.AddQueryString("detect_noop", detect_noop);
 		
 		///<summary>The URL-encoded request definition</summary>
 		public UpdateRequestParameters Source(string source) => this.AddQueryString("source", source);

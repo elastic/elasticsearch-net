@@ -6,13 +6,13 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public interface IIndexSettingsResponse : IResponse
+	public interface IGetIndexSettingsResponse : IResponse
 	{
 		IDictionary<IndexName, IIndexState> Indices { get; }
 	}
 
-	[JsonConverter(typeof(DictionaryResponseJsonConverter<IndexSettingsResponse, IndexName, IIndexState>))]
-	public class IndexSettingsResponse : DictionaryResponse<IndexName, IIndexState>, IIndexSettingsResponse
+	[JsonConverter(typeof(DictionaryResponseJsonConverter<GetIndexSettingsResponse, IndexName, IIndexState>))]
+	public class GetIndexSettingsResponse : DictionaryResponse<IndexName, IIndexState>, IGetIndexSettingsResponse
 	{
 		[JsonIgnore]
 		public IDictionary<IndexName, IIndexState> Indices { get { return Self.BackingDictionary; } }

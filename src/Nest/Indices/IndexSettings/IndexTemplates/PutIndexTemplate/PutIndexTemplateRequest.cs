@@ -6,42 +6,54 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public partial interface IPutIndexTemplateRequest 
+	public partial interface IPutIndexTemplateRequest : ITemplateMapping
 	{
-		TemplateMapping TemplateMapping { get; set; }
 	}
 
 	public partial class PutIndexTemplateRequest 
 	{
-		//TODO Merge this state object onto this object
-		public TemplateMapping TemplateMapping { get; set; }
+		public string Template { get; set; }
+
+		public int? Order { get; set; }
+
+		public IIndexSettings Settings { get; set; }
+
+		public IMappings Mappings { get; set; }
+
+		public IWarmers Warmers { get; set; }
+
+		public IAliases Aliases { get; set; }
 	}
 
 	[DescriptorFor("IndicesPutTemplate")]
 	public partial class PutIndexTemplateDescriptor 
 	{
-		//TODO Merge this state object onto this descriptor
-		TemplateMapping IPutIndexTemplateRequest.TemplateMapping { get; set; } = new TemplateMapping();
+		string ITemplateMapping.Template { get; set; }
 
-		/// <summary>
-		/// Initialize the descriptor using the values from for instance a previous Get Template Mapping call.
-		/// </summary>
-		public PutIndexTemplateDescriptor InitializeUsing(TemplateMapping templateMapping) => Assign(a => a.TemplateMapping = templateMapping);
+		int? ITemplateMapping.Order { get; set; }
 
-		public PutIndexTemplateDescriptor Order(int order) => Assign(a => a.TemplateMapping.Order = order);
+		IIndexSettings ITemplateMapping.Settings { get; set; }
 
-		public PutIndexTemplateDescriptor Template(string template)=> Assign(a => a.TemplateMapping.Template = template);
+		IMappings ITemplateMapping.Mappings { get; set; }
+
+		IWarmers ITemplateMapping.Warmers { get; set; }
+
+		IAliases ITemplateMapping.Aliases { get; set; }
+
+		public PutIndexTemplateDescriptor Order(int order) => Assign(a => a.Order = order);
+
+		public PutIndexTemplateDescriptor Template(string template)=> Assign(a => a.Template = template);
 
 		public PutIndexTemplateDescriptor Settings(Func<IndexSettingsDescriptor, IIndexSettings> settingsSelector) =>
-			Assign(a => a.TemplateMapping.Settings = settingsSelector?.Invoke(new IndexSettingsDescriptor()));
+			Assign(a => a.Settings = settingsSelector?.Invoke(new IndexSettingsDescriptor()));
 
 		public PutIndexTemplateDescriptor Mappings(Func<MappingsDescriptor, IMappings> mappingSelector) =>
-			Assign(a => a.TemplateMapping.Mappings = mappingSelector?.Invoke(new MappingsDescriptor()));
+			Assign(a => a.Mappings = mappingSelector?.Invoke(new MappingsDescriptor()));
 
 		public PutIndexTemplateDescriptor Warmers(Func<WarmersDescriptor, IWarmers> warmerSelector) =>
-			Assign(a => a.TemplateMapping.Warmers = warmerSelector?.Invoke(new WarmersDescriptor()));
+			Assign(a => a.Warmers = warmerSelector?.Invoke(new WarmersDescriptor()));
 
 		public PutIndexTemplateDescriptor Aliases(Func<AliasesDescriptor, IAliases> aliasDescriptor) =>
-			Assign(a => a.TemplateMapping.Aliases = aliasDescriptor?.Invoke(new AliasesDescriptor()));
+			Assign(a => a.Aliases = aliasDescriptor?.Invoke(new AliasesDescriptor()));
 	}
 }

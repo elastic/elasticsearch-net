@@ -512,7 +512,7 @@ namespace Nest
 			throw InvalidDispatch("ClusterPendingTasks", p, new [] { GET }, "/_cluster/pending_tasks");
 		}
 		
-		internal ElasticsearchResponse<T> ClusterPutSettingsDispatch<T>(IRequest<ClusterSettingsRequestParameters> p , object body) where T : class
+		internal ElasticsearchResponse<T> ClusterPutSettingsDispatch<T>(IRequest<ClusterPutSettingsRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -523,7 +523,7 @@ namespace Nest
 			throw InvalidDispatch("ClusterPutSettings", p, new [] { PUT }, "/_cluster/settings");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> ClusterPutSettingsDispatchAsync<T>(IRequest<ClusterSettingsRequestParameters> p , object body) where T : class
+		internal Task<ElasticsearchResponse<T>> ClusterPutSettingsDispatchAsync<T>(IRequest<ClusterPutSettingsRequestParameters> p , object body) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2056,7 +2056,7 @@ namespace Nest
 			throw InvalidDispatch("IndicesValidateQuery", p, new [] { GET, POST }, "/_validate/query", "/{index}/_validate/query", "/{index}/{type}/_validate/query");
 		}
 		
-		internal ElasticsearchResponse<T> InfoDispatch<T>(IRequest<InfoRequestParameters> p ) where T : class
+		internal ElasticsearchResponse<T> InfoDispatch<T>(IRequest<RootNodeInfoRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{
@@ -2067,7 +2067,7 @@ namespace Nest
 			throw InvalidDispatch("Info", p, new [] { GET }, "/");
 		}
 		
-		internal Task<ElasticsearchResponse<T>> InfoDispatchAsync<T>(IRequest<InfoRequestParameters> p ) where T : class
+		internal Task<ElasticsearchResponse<T>> InfoDispatchAsync<T>(IRequest<RootNodeInfoRequestParameters> p ) where T : class
 		{
 			switch(p.HttpMethod)
 			{

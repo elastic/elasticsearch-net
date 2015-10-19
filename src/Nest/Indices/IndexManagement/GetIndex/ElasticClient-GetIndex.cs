@@ -12,13 +12,13 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <inheritdoc/>
-		IGetIndexResponse GetIndex(Indices indices, Func<GetIndexDescriptor, GetIndexDescriptor> getIndexSelector = null);
+		IGetIndexResponse GetIndex(Indices indices, Func<GetIndexDescriptor, IGetIndexRequest> getIndexSelector = null);
 
 		/// <inheritdoc/>
 		IGetIndexResponse GetIndex(IGetIndexRequest createIndexRequest);
 
 		/// <inheritdoc/>
-		Task<IGetIndexResponse> GetIndexAsync(Indices indices, Func<GetIndexDescriptor, GetIndexDescriptor> getIndexSelector = null);
+		Task<IGetIndexResponse> GetIndexAsync(Indices indices, Func<GetIndexDescriptor, IGetIndexRequest> getIndexSelector = null);
 
 		/// <inheritdoc/>
 		Task<IGetIndexResponse> GetIndexAsync(IGetIndexRequest createIndexRequest);
@@ -28,7 +28,7 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IGetIndexResponse GetIndex(Indices indices, Func<GetIndexDescriptor, GetIndexDescriptor> getIndexSelector = null) =>
+		public IGetIndexResponse GetIndex(Indices indices, Func<GetIndexDescriptor, IGetIndexRequest> getIndexSelector = null) =>
 			this.GetIndex(getIndexSelector.InvokeOrDefault(new GetIndexDescriptor(indices)));
 
 		/// <inheritdoc/>
@@ -40,7 +40,7 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<IGetIndexResponse> GetIndexAsync(Indices indices, Func<GetIndexDescriptor, GetIndexDescriptor> getIndexSelector = null) =>
+		public Task<IGetIndexResponse> GetIndexAsync(Indices indices, Func<GetIndexDescriptor, IGetIndexRequest> getIndexSelector = null) =>
 			this.GetIndexAsync(getIndexSelector.InvokeOrDefault(new GetIndexDescriptor(indices)));
 
 		/// <inheritdoc/>

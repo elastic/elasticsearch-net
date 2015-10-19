@@ -106,9 +106,17 @@ namespace Nest
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
-			var s = new IndexSettings();
+			IIndexSettings s = new IndexSettings();
+			if (typeof(IUpdateIndexSettingsRequest).IsAssignableFrom(objectType))
+				s = new UpdateIndexSettingsRequest();
 
-			var settings = Flatten(JObject.Load(reader)).Properties().ToDictionary(kv=> kv.Name);
+			SetKnownIndexSettings(reader, serializer, s);
+			return s;
+		}
+
+		private void SetKnownIndexSettings(JsonReader reader, JsonSerializer serializer, IIndexSettings s)
+		{
+			var settings = Flatten(JObject.Load(reader)).Properties().ToDictionary(kv => kv.Name);
 			Set<int?>(settings, UpdatableIndexSettings.NumberOfReplicas, v => s.NumberOfReplicas = v);
 			Set<string>(settings, UpdatableIndexSettings.AutoExpandReplicas, v => s.AutoExpandReplicas = v);
 			Set<TimeUnitExpression>(settings, UpdatableIndexSettings.RefreshInterval, v => s.RefreshInterval = v);
@@ -119,9 +127,12 @@ namespace Nest
 			Set<int?>(settings, UpdatableIndexSettings.Priority, v => s.Priority = v);
 			Set<bool?>(settings, UpdatableIndexSettings.WarmersEnabled, v => s.WarmersEnabled = v);
 			Set<bool?>(settings, UpdatableIndexSettings.RequestCacheEnable, v => s.RequestCacheEnabled = v);
-			Set<Union<int, RecoveryInitialShards>>(settings, UpdatableIndexSettings.RecoveryInitialShards, v => s.RecoveryInitialShards = v);
-			Set<int?>(settings, UpdatableIndexSettings.RoutingAllocationTotalShardsPerNode, v => s.RoutingAllocationTotalShardsPerNode = v);
-			Set<TimeUnitExpression>(settings, UpdatableIndexSettings.UnassignedNodeLeftDelayedTimeout, v => s.UnassignedNodeLeftDelayedTimeout = v);
+			Set<Union<int, RecoveryInitialShards>>(settings, UpdatableIndexSettings.RecoveryInitialShards,
+				v => s.RecoveryInitialShards = v);
+			Set<int?>(settings, UpdatableIndexSettings.RoutingAllocationTotalShardsPerNode,
+				v => s.RoutingAllocationTotalShardsPerNode = v);
+			Set<TimeUnitExpression>(settings, UpdatableIndexSettings.UnassignedNodeLeftDelayedTimeout,
+				v => s.UnassignedNodeLeftDelayedTimeout = v);
 
 			var t = s.Translog = new TranslogSettings();
 			Set<TimeUnitExpression>(settings, UpdatableIndexSettings.TranslogSyncInterval, v => t.SyncInterval = v);
@@ -154,24 +165,33 @@ namespace Nest
 			var query = s.SlowLog.Search.Query = new SlowLogSearchQuery();
 			Set<TimeUnitExpression>(settings, UpdatableIndexSettings.SlowlogSearchThresholdQueryWarn, v => query.ThresholdWarn = v);
 			Set<TimeUnitExpression>(settings, UpdatableIndexSettings.SlowlogSearchThresholdQueryInfo, v => query.ThresholdInfo = v);
-			Set<TimeUnitExpression>(settings, UpdatableIndexSettings.SlowlogSearchThresholdQueryDebug, v => query.ThresholdDebug = v);
-			Set<TimeUnitExpression>(settings, UpdatableIndexSettings.SlowlogSearchThresholdQueryTrace, v => query.ThresholdTrace = v);
+			Set<TimeUnitExpression>(settings, UpdatableIndexSettings.SlowlogSearchThresholdQueryDebug,
+				v => query.ThresholdDebug = v);
+			Set<TimeUnitExpression>(settings, UpdatableIndexSettings.SlowlogSearchThresholdQueryTrace,
+				v => query.ThresholdTrace = v);
 
 			var fetch = s.SlowLog.Search.Fetch = new SlowLogSearchFetch();
 			Set<TimeUnitExpression>(settings, UpdatableIndexSettings.SlowlogSearchThresholdFetchWarn, v => fetch.ThresholdWarn = v);
 			Set<TimeUnitExpression>(settings, UpdatableIndexSettings.SlowlogSearchThresholdFetchInfo, v => fetch.ThresholdInfo = v);
-			Set<TimeUnitExpression>(settings, UpdatableIndexSettings.SlowlogSearchThresholdFetchDebug, v => fetch.ThresholdDebug = v);
-			Set<TimeUnitExpression>(settings, UpdatableIndexSettings.SlowlogSearchThresholdFetchTrace, v => fetch.ThresholdTrace = v);
+			Set<TimeUnitExpression>(settings, UpdatableIndexSettings.SlowlogSearchThresholdFetchDebug,
+				v => fetch.ThresholdDebug = v);
+			Set<TimeUnitExpression>(settings, UpdatableIndexSettings.SlowlogSearchThresholdFetchTrace,
+				v => fetch.ThresholdTrace = v);
 
 			var indexing = s.SlowLog.Indexing = new SlowLogIndexing();
-			Set<TimeUnitExpression>(settings, UpdatableIndexSettings.SlowlogIndexingThresholdFetchWarn, v => indexing.ThresholdWarn = v);
-			Set<TimeUnitExpression>(settings, UpdatableIndexSettings.SlowlogIndexingThresholdFetchInfo, v => indexing.ThresholdInfo = v);
-			Set<TimeUnitExpression>(settings, UpdatableIndexSettings.SlowlogIndexingThresholdFetchDebug, v => indexing.ThresholdDebug = v);
-			Set<TimeUnitExpression>(settings, UpdatableIndexSettings.SlowlogIndexingThresholdFetchTrace, v => indexing.ThresholdTrace = v);
+			Set<TimeUnitExpression>(settings, UpdatableIndexSettings.SlowlogIndexingThresholdFetchWarn,
+				v => indexing.ThresholdWarn = v);
+			Set<TimeUnitExpression>(settings, UpdatableIndexSettings.SlowlogIndexingThresholdFetchInfo,
+				v => indexing.ThresholdInfo = v);
+			Set<TimeUnitExpression>(settings, UpdatableIndexSettings.SlowlogIndexingThresholdFetchDebug,
+				v => indexing.ThresholdDebug = v);
+			Set<TimeUnitExpression>(settings, UpdatableIndexSettings.SlowlogIndexingThresholdFetchTrace,
+				v => indexing.ThresholdTrace = v);
 			Set<LogLevel?>(settings, UpdatableIndexSettings.SlowlogIndexingLevel, v => indexing.LogLevel = v);
 			Set<int?>(settings, UpdatableIndexSettings.SlowlogIndexingSource, v => indexing.Source = v);
 			Set<int?>(settings, "index.number_of_shards", v => s.NumberOfShards = v);
-			Set<FileSystemStorageImplementation?>(settings, "index.store.type", v => s.FileSystemStorageImplementation = v, serializer);
+			Set<FileSystemStorageImplementation?>(settings, "index.store.type", v => s.FileSystemStorageImplementation = v,
+				serializer);
 			foreach (var kv in settings)
 			{
 				var setting = kv.Value;
@@ -179,10 +199,9 @@ namespace Nest
 					s.Analysis = setting.Value.Value<JObject>().ToObject<Analysis>(serializer);
 				else
 				{
-					((IHasADictionary)s).Dictionary.Add(kv.Key, serializer.Deserialize(kv.Value.Value.CreateReader()));
+					((IHasADictionary) s).Dictionary.Add(kv.Key, serializer.Deserialize(kv.Value.Value.CreateReader()));
 				}
 			}
-			return s;
 		}
 
 		public bool Set<T>(IDictionary<string, JProperty> settings, string key, Action<T> assign, JsonSerializer serializer = null)

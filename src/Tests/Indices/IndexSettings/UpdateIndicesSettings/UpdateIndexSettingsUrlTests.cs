@@ -12,7 +12,7 @@ using static Tests.Framework.UrlTester;
 
 namespace Tests.Indices.IndexSettings.UpdateIndicesSettings
 {
-	public class UpdateIndicesSettingsUrlTests
+	public class UpdateIndexSettingsUrlTests
 	{
 		[U] public async Task Urls()
 		{

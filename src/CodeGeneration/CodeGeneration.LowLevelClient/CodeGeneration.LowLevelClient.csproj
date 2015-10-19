@@ -85,7 +85,7 @@
     <Compile Include="Overrides\Descriptors\IDescriptorOverrides.cs" />
     <Compile Include="Overrides\Descriptors\NodesHotThreadsDescriptorOverrides.cs" />
     <Compile Include="Overrides\Descriptors\DeleteWarmerDescriptorOverrides.cs" />
-    <Compile Include="Overrides\Descriptors\PutTemplateDescriptorOverrides.cs" />
+    <Compile Include="Overrides\Descriptors\PutIndexTemplateDescriptorOverrides.cs" />
     <Compile Include="Overrides\Descriptors\ClearCacheDescriptorOverrides.cs" />
     <Compile Include="Overrides\Descriptors\MultiTermVectorsDescriptorOverrides.cs" />
     <Compile Include="Overrides\Descriptors\SearchDescriptorOverrides.cs" />

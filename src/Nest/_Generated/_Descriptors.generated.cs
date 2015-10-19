@@ -706,7 +706,7 @@ namespace Nest
 	}
 	
 	///<summary>descriptor for ClusterPutSettings <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</pre></summary>
-	public partial class ClusterPutSettingsDescriptor  : RequestDescriptorBase<ClusterPutSettingsDescriptor,ClusterSettingsRequestParameters, IClusterPutSettingsRequest>, IClusterPutSettingsRequest
+	public partial class ClusterPutSettingsDescriptor  : RequestDescriptorBase<ClusterPutSettingsDescriptor,ClusterPutSettingsRequestParameters, IClusterPutSettingsRequest>, IClusterPutSettingsRequest
 	{ 
 			
 		///<summary>Return settings in flat format (default: false)</summary>
@@ -818,6 +818,9 @@ namespace Nest
 
 		///<summary>Whether to return time and byte values in human-readable format.</summary>
 		public ClusterStatsDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Explicit operation timeout</summary>
+		public ClusterStatsDescriptor Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
 
 		///<summary>The URL-encoded request definition</summary>
 		public ClusterStatsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
@@ -2785,9 +2788,6 @@ namespace Nest
 		
 
 		
-		///<summary>The order for this template when merging multiple matching ones (higher numbers are merged later, overriding the lower numbers)</summary>
-		public PutIndexTemplateDescriptor Order(long order) => AssignParam(p=>p.Order(order));
-
 		///<summary>Whether the index template should only be added if new or can also replace an existing one</summary>
 		public PutIndexTemplateDescriptor Create(bool create = true) => AssignParam(p=>p.Create(create));
 
@@ -3217,7 +3217,7 @@ namespace Nest
 	}
 	
 	///<summary>descriptor for Info <pre>http://www.elastic.co/guide/</pre></summary>
-	public partial class RootNodeInfoDescriptor  : RequestDescriptorBase<RootNodeInfoDescriptor,InfoRequestParameters, IRootNodeInfoRequest>, IRootNodeInfoRequest
+	public partial class RootNodeInfoDescriptor  : RequestDescriptorBase<RootNodeInfoDescriptor,RootNodeInfoRequestParameters, IRootNodeInfoRequest>, IRootNodeInfoRequest
 	{ 
 			
 		///<summary>The URL-encoded request definition</summary>
@@ -3466,6 +3466,9 @@ namespace Nest
 		///<summary>The type to sample (default: cpu)</summary>
 		public NodesHotThreadsDescriptor ThreadType(ThreadType thread_type) => AssignParam(p=>p.ThreadType(thread_type));
 
+		///<summary>Explicit operation timeout</summary>
+		public NodesHotThreadsDescriptor Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
+
 		///<summary>The URL-encoded request definition</summary>
 		public NodesHotThreadsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
@@ -3495,6 +3498,9 @@ namespace Nest
 
 		///<summary>Whether to return time and byte values in human-readable format.</summary>
 		public NodesInfoDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Explicit operation timeout</summary>
+		public NodesInfoDescriptor Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
 
 		///<summary>The URL-encoded request definition</summary>
 		public NodesInfoDescriptor Source(string source) => AssignParam(p=>p.Source(source));
@@ -3556,6 +3562,9 @@ namespace Nest
 
 		///<summary>A comma-separated list of document types for the `indexing` index metric</summary>
 		public NodesStatsDescriptor Types(params string[] types) => AssignParam(p=>p.Types(types));
+
+		///<summary>Explicit operation timeout</summary>
+		public NodesStatsDescriptor Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
 
 		///<summary>The URL-encoded request definition</summary>
 		public NodesStatsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
@@ -4459,6 +4468,9 @@ namespace Nest
 
 		///<summary>Specific version type</summary>
 		public UpdateDescriptor<TDocument, TPartialDocument> VersionType(VersionType version_type) => AssignParam(p=>p.VersionType(version_type));
+
+		///<summary>Specifying as true will cause Elasticsearch to check if there are changes and, if there aren&#226;€™t, turn the update request into a noop.</summary>
+		public UpdateDescriptor<TDocument, TPartialDocument> DetectNoop(bool detect_noop = true) => AssignParam(p=>p.DetectNoop(detect_noop));
 
 		///<summary>The URL-encoded request definition</summary>
 		public UpdateDescriptor<TDocument, TPartialDocument> Source(string source) => AssignParam(p=>p.Source(source));

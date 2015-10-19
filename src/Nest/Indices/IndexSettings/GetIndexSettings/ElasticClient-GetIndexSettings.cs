@@ -12,40 +12,40 @@ namespace Nest
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-get-settings.html
 		/// </summary>
 		/// <param name="selector">A descriptor that describes the parameters for the get index settings operation</param>
-		IIndexSettingsResponse GetIndexSettings(Func<GetIndexSettingsDescriptor, IGetIndexSettingsRequest> selector);
+		IGetIndexSettingsResponse GetIndexSettings(Func<GetIndexSettingsDescriptor, IGetIndexSettingsRequest> selector);
 
 		/// <inheritdoc/>
-		IIndexSettingsResponse GetIndexSettings(IGetIndexSettingsRequest getIndexSettingsRequest);
+		IGetIndexSettingsResponse GetIndexSettings(IGetIndexSettingsRequest getIndexSettingsRequest);
 
 		/// <inheritdoc/>
-		Task<IIndexSettingsResponse> GetIndexSettingsAsync(Func<GetIndexSettingsDescriptor, IGetIndexSettingsRequest> selector);
+		Task<IGetIndexSettingsResponse> GetIndexSettingsAsync(Func<GetIndexSettingsDescriptor, IGetIndexSettingsRequest> selector);
 
 		/// <inheritdoc/>
-		Task<IIndexSettingsResponse> GetIndexSettingsAsync(IGetIndexSettingsRequest getIndexSettingsRequest);
+		Task<IGetIndexSettingsResponse> GetIndexSettingsAsync(IGetIndexSettingsRequest getIndexSettingsRequest);
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IIndexSettingsResponse GetIndexSettings(Func<GetIndexSettingsDescriptor, IGetIndexSettingsRequest> selector) =>
+		public IGetIndexSettingsResponse GetIndexSettings(Func<GetIndexSettingsDescriptor, IGetIndexSettingsRequest> selector) =>
 			this.GetIndexSettings(selector?.Invoke(new GetIndexSettingsDescriptor()));
 
 		/// <inheritdoc/>
-		public IIndexSettingsResponse GetIndexSettings(IGetIndexSettingsRequest getIndexSettingsRequest) => 
-			this.Dispatcher.Dispatch<IGetIndexSettingsRequest, GetIndexSettingsRequestParameters, IndexSettingsResponse>(
+		public IGetIndexSettingsResponse GetIndexSettings(IGetIndexSettingsRequest getIndexSettingsRequest) => 
+			this.Dispatcher.Dispatch<IGetIndexSettingsRequest, GetIndexSettingsRequestParameters, GetIndexSettingsResponse>(
 				getIndexSettingsRequest,
-				(p, d) => this.LowLevelDispatch.IndicesGetSettingsDispatch<IndexSettingsResponse>(p)
+				(p, d) => this.LowLevelDispatch.IndicesGetSettingsDispatch<GetIndexSettingsResponse>(p)
 			);
 
 		/// <inheritdoc/>
-		public Task<IIndexSettingsResponse> GetIndexSettingsAsync(Func<GetIndexSettingsDescriptor, IGetIndexSettingsRequest> selector) =>
+		public Task<IGetIndexSettingsResponse> GetIndexSettingsAsync(Func<GetIndexSettingsDescriptor, IGetIndexSettingsRequest> selector) =>
 			this.GetIndexSettingsAsync(selector?.Invoke(new GetIndexSettingsDescriptor()));
 
 		/// <inheritdoc/>
-		public Task<IIndexSettingsResponse> GetIndexSettingsAsync(IGetIndexSettingsRequest getIndexSettingsRequest) => 
-			this.Dispatcher.DispatchAsync<IGetIndexSettingsRequest, GetIndexSettingsRequestParameters, IndexSettingsResponse, IIndexSettingsResponse>(
+		public Task<IGetIndexSettingsResponse> GetIndexSettingsAsync(IGetIndexSettingsRequest getIndexSettingsRequest) => 
+			this.Dispatcher.DispatchAsync<IGetIndexSettingsRequest, GetIndexSettingsRequestParameters, GetIndexSettingsResponse, IGetIndexSettingsResponse>(
 				getIndexSettingsRequest,
-				(p, d) => this.LowLevelDispatch.IndicesGetSettingsDispatchAsync<IndexSettingsResponse>(p)
+				(p, d) => this.LowLevelDispatch.IndicesGetSettingsDispatchAsync<GetIndexSettingsResponse>(p)
 			);
 	}
 }

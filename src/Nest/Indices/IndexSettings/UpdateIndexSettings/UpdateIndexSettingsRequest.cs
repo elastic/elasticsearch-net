@@ -20,55 +20,55 @@ namespace Nest
 		/// <inheritdoc />
 		public FileSystemStorageImplementation? FileSystemStorageImplementation { get; set; }
 
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public string AutoExpandReplicas { get; set; }
 
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public bool? BlocksMetadata { get; set; }
 
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public bool? BlocksRead { get; set; }
 
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public bool? BlocksReadOnly { get; set; }
 		
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public bool? BlocksWrite { get; set; }
 		
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public int? Priority { get; set; }
 		
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public bool? WarmersEnabled { get; set; }
 		
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public bool? RequestCacheEnabled { get; set; }
 		
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public IMergeSettings Merge { get; set; }
 		
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public int? NumberOfReplicas { get; set; }
 		
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public Union<int, RecoveryInitialShards> RecoveryInitialShards { get; set; }
 		
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public TimeUnitExpression RefreshInterval { get; set; }
 		
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public int? RoutingAllocationTotalShardsPerNode { get; set; }
 		
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public ISlowLog SlowLog { get; set; }
 		
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public ITranslogSettings Translog { get; set; }
 		
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public TimeUnitExpression UnassignedNodeLeftDelayedTimeout { get; set; }
 
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public IAnalysis Analysis { get; set; }
 	}
 
@@ -116,67 +116,67 @@ namespace Nest
 		public UpdateIndexSettingsDescriptor FileSystemStorageImplementation(FileSystemStorageImplementation? fs) =>
 			Assign(a => a.FileSystemStorageImplementation = fs);
 
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public UpdateIndexSettingsDescriptor NumberOfReplicas(int? numberOfReplicas) =>
 			Assign(a => a.NumberOfReplicas = numberOfReplicas);
 
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public UpdateIndexSettingsDescriptor AutoExpandReplicas(string AutoExpandReplicas) =>
 			Assign(a => a.AutoExpandReplicas = AutoExpandReplicas);
 
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public UpdateIndexSettingsDescriptor BlocksMetadata(bool? blocksMetadata = true) =>
 			Assign(a => a.BlocksMetadata = blocksMetadata);
 
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public UpdateIndexSettingsDescriptor BlocksRead(bool? blocksRead = true) =>
 			Assign(a => a.BlocksRead = blocksRead);
 
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public UpdateIndexSettingsDescriptor BlocksReadOnly(bool? blocksReadOnly = true) =>
 			Assign(a => a.BlocksReadOnly = blocksReadOnly);
 
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public UpdateIndexSettingsDescriptor BlocksWrite(bool? blocksWrite = true) =>
 			Assign(a => a.BlocksWrite = blocksWrite);
 
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public UpdateIndexSettingsDescriptor Priority(int? priority) =>
 			Assign(a => a.Priority = priority);
 
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public UpdateIndexSettingsDescriptor WarmersEnabled(bool enabled = true) =>
 			Assign(a => a.WarmersEnabled = enabled);
 
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public UpdateIndexSettingsDescriptor RequestCacheEnabled(bool enabled = true) =>
 			Assign(a => a.RequestCacheEnabled = enabled);
 
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public UpdateIndexSettingsDescriptor Merge(Func<MergeSettingsDescriptor, IMergeSettings> merge) =>
 			Assign(a => a.Merge = merge?.Invoke(new MergeSettingsDescriptor()));
 
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public UpdateIndexSettingsDescriptor RecoveryInitialShards(Union<int, RecoveryInitialShards> initialShards) =>
 			Assign(a => a.RecoveryInitialShards = initialShards);
 
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public UpdateIndexSettingsDescriptor RefreshInterval(TimeUnitExpression time) =>
 			Assign(a => a.RefreshInterval = time);
 
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public UpdateIndexSettingsDescriptor TotalShardsPerNode(int? totalShardsPerNode) =>
 			Assign(a => a.RoutingAllocationTotalShardsPerNode = totalShardsPerNode);
 
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public UpdateIndexSettingsDescriptor SlowLog(Func<SlowLogDescriptor, ISlowLog> slowLogSelector) =>
 			Assign(a => a.SlowLog = slowLogSelector?.Invoke(new SlowLogDescriptor()));
 
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public UpdateIndexSettingsDescriptor Translog(Func<TranslogSettingsDescriptor, ITranslogSettings> translogSelector) =>
 			Assign(a => a.Translog = translogSelector?.Invoke(new TranslogSettingsDescriptor()));
 
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public UpdateIndexSettingsDescriptor UnassignedNodeLeftDelayedTimeout(TimeUnitExpression time) =>
 			Assign(a => a.UnassignedNodeLeftDelayedTimeout = time);
 

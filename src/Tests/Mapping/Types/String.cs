@@ -9,43 +9,8 @@ using Tests.Framework.MockData;
 using Tests.Framework.Integration;
 using Elasticsearch.Net;
 using Tests.Indices.IndexManagement;
+using Tests.Indices.MappingManagement.PutMapping;
 
 namespace Tests.Mapping.Types
 {
-	public class String
-	{
-		public class Usage : PutMapping
-		{
-			public Usage(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
-
-			protected override object ExpectJson => new
-			{
-				properties = new
-				{
-					name = new
-					{
-						type = "string",
-						index = "not_analyzed"
-					}
-				}
-			};
-
-			protected override Func<PutMappingDescriptor<Project>, IPutMappingRequest> Fluent => m => m
-				.Properties(ps => ps
-					.String(s => s
-						.Name(p => p.Name)
-						.Index(FieldIndexOption.NotAnalyzed)
-					)
-				);
-
-			protected override PutMappingRequest<Project> Initializer =>
-				new PutMappingRequest<Project>
-				{
-					Properties = new Properties<Project>
-					{
-						{ p => p.Name , new StringProperty { Index = FieldIndexOption.NotAnalyzed } }
-					}
-				};
-		}
-	}
 }

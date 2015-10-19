@@ -20,7 +20,7 @@ namespace Tests.Analysis
 {
 
 	[Collection(IntegrationContext.Indexing)]
-	public class AnalysisCrudTests : CrudTestBase<IIndicesOperationResponse, IIndexSettingsResponse, IAcknowledgedResponse>
+	public class AnalysisCrudTests : CrudTestBase<IIndicesOperationResponse, IGetIndexSettingsResponse, IAcknowledgedResponse>
 	{
 		/**
 		* # Analysis crud
@@ -73,7 +73,7 @@ namespace Tests.Analysis
 		/**
 		* We then read back the analysis settings using `GetIndexSettings()`, you can use this method to get the settings for 1, or many indices in one go
 		*/
-		protected override LazyResponses Read() => Calls<GetIndexSettingsDescriptor, GetIndexSettingsRequest, IGetIndexSettingsRequest, IIndexSettingsResponse>(
+		protected override LazyResponses Read() => Calls<GetIndexSettingsDescriptor, GetIndexSettingsRequest, IGetIndexSettingsRequest, IGetIndexSettingsResponse>(
 			GetInitializer,
 			GetFluent,
 			fluent: (s, c, f) => c.GetIndexSettings(f),

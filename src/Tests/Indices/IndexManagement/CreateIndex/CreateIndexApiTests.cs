@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Tests.Framework;
-using Tests.Framework.MockData;
-using Nest;
 using Elasticsearch.Net;
-using Xunit;
+using Nest;
+using Tests.Framework;
 using Tests.Framework.Integration;
+using Xunit;
 
-namespace Tests.Indices.IndexManagement
+namespace Tests.Indices.IndexManagement.CreateIndex
 {
 	[Collection(IntegrationContext.Indexing)]
 	public class CreateIndexApiTests : ApiIntegrationTestBase<IIndicesOperationResponse, ICreateIndexRequest, CreateIndexDescriptor, CreateIndexRequest>

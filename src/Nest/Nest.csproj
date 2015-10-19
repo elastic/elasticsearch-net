@@ -810,7 +810,7 @@
     <Compile Include="Search\MultiSearch\MultiSearchResponse.cs" />
     <Compile Include="IndexModules\Similarity\Similarities.cs" />
     <Compile Include="Search\MultiSearch\ElasticClient-MultiSearch.cs" />
-    <Compile Include="Indices\IndexSettings\IndexTemplates\TemplateMapping.cs" />
+    <Compile Include="Indices\IndexSettings\IndexTemplates\GetIndexTemplate\TemplateMapping.cs" />
     <Compile Include="Indices\IndexSettings\IndexTemplates\GetIndexTemplate\GetIndexTemplateResponse.cs" />
     <Compile Include="Search\MultiSearch\MultiSearchRequest.cs" />
     <Compile Include="Indices\IndexSettings\IndexTemplates\PutIndexTemplate\PutIndexTemplateRequest.cs" />
@@ -955,7 +955,7 @@
     <Compile Include="Indices\Monitoring\IndicesStats\Stats.cs" />
     <Compile Include="Indices\Monitoring\IndicesStats\ElasticClient-IndicesStats.cs" />
     <Compile Include="CommonAbstractions\Response\AcknowledgedResponse.cs" />
-    <Compile Include="Indices\IndexSettings\GetIndexSettings\IndexSettingsResponse.cs" />
+    <Compile Include="Indices\IndexSettings\GetIndexSettings\GetIndexSettingsResponse.cs" />
     <Compile Include="Indices\IndexSettings\GetIndexSettings\ElasticClient-GetIndexSettings.cs" />
     <Compile Include="Indices\StatusManagement\ClearCache\ElasticClient-ClearCache.cs" />
     <Compile Include="Indices\Analyze\AnalyzeToken.cs" />

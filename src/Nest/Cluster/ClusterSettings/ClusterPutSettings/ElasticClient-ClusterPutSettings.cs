@@ -35,14 +35,14 @@ namespace Nest
 
 		/// <inheritdoc/>
 		public IClusterPutSettingsResponse ClusterPutSettings(IClusterPutSettingsRequest clusterSettingsRequest) => 
-			this.Dispatcher.Dispatch<IClusterPutSettingsRequest, ClusterSettingsRequestParameters, ClusterPutSettingsResponse>(
+			this.Dispatcher.Dispatch<IClusterPutSettingsRequest, ClusterPutSettingsRequestParameters, ClusterPutSettingsResponse>(
 				clusterSettingsRequest,
 				this.LowLevelDispatch.ClusterPutSettingsDispatch<ClusterPutSettingsResponse>
 			);
 
 		/// <inheritdoc/>
 		public Task<IClusterPutSettingsResponse> ClusterPutSettingsAsync(IClusterPutSettingsRequest clusterSettingsRequest) => 
-			this.Dispatcher.DispatchAsync<IClusterPutSettingsRequest, ClusterSettingsRequestParameters, ClusterPutSettingsResponse, IClusterPutSettingsResponse>(
+			this.Dispatcher.DispatchAsync<IClusterPutSettingsRequest, ClusterPutSettingsRequestParameters, ClusterPutSettingsResponse, IClusterPutSettingsResponse>(
 				clusterSettingsRequest,
 				this.LowLevelDispatch.ClusterPutSettingsDispatchAsync<ClusterPutSettingsResponse>
 			);

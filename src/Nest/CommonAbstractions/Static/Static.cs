@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -25,5 +26,17 @@ namespace Nest
 		public static Names Names(IEnumerable<string> names) => string.Join(",", names);
 
 		public static Id Id<T>(T document) where T : class => Nest.Id.From(document);
+
+		public static FieldNames Field<T>(Expression<Func<T, object>> field) where T : class =>
+			new FieldNames(new FieldName[] { field });
+
+		public static FieldNames Field(string field) => new FieldNames(new FieldName[] { field });
+
+		public static FieldNames Fields<T>(params Expression<Func<T, object>>[] fields) where T : class =>
+			new FieldNames(fields.Select(f=>(FieldName)f));
+
+		public static FieldNames Fields<T>(params string[] fields) where T : class =>
+			new FieldNames(fields.Select(f=>(FieldName)f));
+
 	}
 }

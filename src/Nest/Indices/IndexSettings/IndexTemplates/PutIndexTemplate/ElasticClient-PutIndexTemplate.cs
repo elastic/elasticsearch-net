@@ -39,7 +39,7 @@ namespace Nest
 		public IIndicesOperationResponse PutIndexTemplate(IPutIndexTemplateRequest putTemplateRequest) => 
 			this.Dispatcher.Dispatch<IPutIndexTemplateRequest, PutIndexTemplateRequestParameters, IndicesOperationResponse>(
 				putTemplateRequest,
-				(p, d) => this.LowLevelDispatch.IndicesPutTemplateDispatch<IndicesOperationResponse>(p, d.TemplateMapping)
+				this.LowLevelDispatch.IndicesPutTemplateDispatch<IndicesOperationResponse>
 			);
 
 		/// <inheritdoc/>
@@ -50,7 +50,7 @@ namespace Nest
 		public Task<IIndicesOperationResponse> PutIndexTemplateAsync(IPutIndexTemplateRequest putTemplateRequest) => 
 			this.Dispatcher.DispatchAsync<IPutIndexTemplateRequest, PutIndexTemplateRequestParameters, IndicesOperationResponse, IIndicesOperationResponse>(
 				putTemplateRequest,
-				(p, d) => this.LowLevelDispatch.IndicesPutTemplateDispatchAsync<IndicesOperationResponse>(p, d.TemplateMapping)
+				this.LowLevelDispatch.IndicesPutTemplateDispatchAsync<IndicesOperationResponse>
 			);
 	}
 }
