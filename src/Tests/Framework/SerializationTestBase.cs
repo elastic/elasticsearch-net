@@ -29,11 +29,6 @@ namespace Tests.Framework
 			SetupSerialization();
 		}
 
-		protected SerializationTestBase(IIntegrationCluster cluster)
-		{
-			
-		}
-
 		protected void SetupSerialization()
 		{
 			var o = this.ExpectJson;

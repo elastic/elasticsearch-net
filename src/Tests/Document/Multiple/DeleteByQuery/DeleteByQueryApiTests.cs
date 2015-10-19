@@ -13,7 +13,7 @@ using static Nest.Static;
 namespace Tests.Document.Multiple.DeleteByQuery
 {
 	[Collection(IntegrationContext.Indexing)]
-	public class DeleteByQueryApiTests : ApiTestBase<IDeleteByQueryResponse, IDeleteByQueryRequest, DeleteByQueryDescriptor<Project>, DeleteByQueryRequest>
+	public class DeleteByQueryApiTests : ApiIntegrationTestBase<IDeleteByQueryResponse, IDeleteByQueryRequest, DeleteByQueryDescriptor<Project>, DeleteByQueryRequest>
 	{
 		public DeleteByQueryApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(

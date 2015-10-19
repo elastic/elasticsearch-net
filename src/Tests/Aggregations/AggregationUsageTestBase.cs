@@ -10,7 +10,7 @@ namespace Tests.Aggregations
 {
 	[Collection(IntegrationContext.ReadOnly)]
 	public abstract class AggregationUsageTestBase 
-		: ApiTestBase<ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
+		: ApiIntegrationTestBase<ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
 	{
 		protected AggregationUsageTestBase(IIntegrationCluster cluster, EndpointUsage usage) : base(cluster, usage) {}
 		protected override LazyResponses ClientUsage() => Calls(

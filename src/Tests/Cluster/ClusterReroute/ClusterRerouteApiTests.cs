@@ -13,7 +13,7 @@ using Xunit;
 namespace Tests.Cluster.ClusterReroute
 {
 	[Collection(IntegrationContext.ReadOnly)]
-	public class ClusterRerouteApiTests : ApiTestBase<IClusterRerouteResponse, IClusterRerouteRequest, ClusterRerouteDescriptor, ClusterRerouteRequest>
+	public class ClusterRerouteApiTests : ApiIntegrationTestBase<IClusterRerouteResponse, IClusterRerouteRequest, ClusterRerouteDescriptor, ClusterRerouteRequest>
 	{
 
 		public ClusterRerouteApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

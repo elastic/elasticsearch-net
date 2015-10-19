@@ -12,7 +12,7 @@ using Xunit;
 namespace Tests.Indices.AliasManagement.Get
 {
 	[Collection(IntegrationContext.ReadOnly)]
-	public class GetApiTests : ApiTestBase<IGetResponse<Project>, IGetRequest, GetDescriptor<Project>, GetRequest<Project>>
+	public class GetApiTests : ApiIntegrationTestBase<IGetResponse<Project>, IGetRequest, GetDescriptor<Project>, GetRequest<Project>>
 	{
 		private string ProjectId => Project.Projects.First().Name;
 

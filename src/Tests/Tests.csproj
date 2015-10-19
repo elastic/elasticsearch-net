@@ -158,6 +158,7 @@
     <Compile Include="Document\Single\TermVectors\TermVectorsUrlTests.cs" />
     <Compile Include="Document\Single\Update\UpdateApiTests.cs" />
     <Compile Include="Document\Single\Update\UpdateUrlTests.cs" />
+    <Compile Include="Framework\ApiTestBase.cs" />
     <Compile Include="Framework\CrudTestBase.cs" />
     <Compile Include="Framework\Integration\ObservableProcess.cs" />
     <Compile Include="Framework\MockResponses\SniffingResponse.cs" />
@@ -285,7 +286,7 @@
     <Compile Include="Search\Request\FromAndSize.cs" />
     <Compile Include="Search\SearchUsageBase.cs" />
     <Compile Include="Framework\AsyncLazy.cs" />
-    <Compile Include="Framework\ApiTestBase.cs" />
+    <Compile Include="Framework\ApiIntegrationTestBase.cs" />
     <Compile Include="Framework\UsageTestBase.cs" />
     <Compile Include="Framework\Integration\Seeder.cs" />
     <Compile Include="Framework\MockData\Project.cs" />

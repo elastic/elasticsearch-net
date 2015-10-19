@@ -13,7 +13,7 @@ using static Nest.Static;
 namespace Tests.Document.Multiple.MultiTermVectors
 {
 	[Collection(IntegrationContext.ReadOnly)]
-	public class MultiTermVectorsApiTests : ApiTestBase<IMultiTermVectorsResponse, IMultiTermVectorsRequest, MultiTermVectorsDescriptor, MultiTermVectorsRequest>
+	public class MultiTermVectorsApiTests : ApiIntegrationTestBase<IMultiTermVectorsResponse, IMultiTermVectorsRequest, MultiTermVectorsDescriptor, MultiTermVectorsRequest>
 	{
 		public MultiTermVectorsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(

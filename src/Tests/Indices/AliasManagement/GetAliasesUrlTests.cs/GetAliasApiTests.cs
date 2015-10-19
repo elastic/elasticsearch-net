@@ -10,7 +10,7 @@ using Xunit;
 namespace Tests.Indices.AliasesManagement.GetAliases
 {
 	[Collection(IntegrationContext.ReadOnly)]
-	public class GetAliasesApiTests : ApiTestBase<IGetAliasesResponse, IGetAliasesRequest, GetAliasesDescriptor, GetAliasesRequest>
+	public class GetAliasesApiTests : ApiIntegrationTestBase<IGetAliasesResponse, IGetAliasesRequest, GetAliasesDescriptor, GetAliasesRequest>
 	{
 		private readonly static Names Names = Static.Names("alias, x", "y");
 

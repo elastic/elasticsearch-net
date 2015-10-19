@@ -12,7 +12,7 @@ using Xunit;
 namespace Tests.Indices.AliasManagement.Delete
 {
 	[Collection(IntegrationContext.Indexing)]
-	public class DeleteApiTests : ApiTestBase<IDeleteResponse, IDeleteRequest, DeleteDescriptor<Project>, DeleteRequest<Project>>
+	public class DeleteApiTests : ApiIntegrationTestBase<IDeleteResponse, IDeleteRequest, DeleteDescriptor<Project>, DeleteRequest<Project>>
 	{
 		public DeleteApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(

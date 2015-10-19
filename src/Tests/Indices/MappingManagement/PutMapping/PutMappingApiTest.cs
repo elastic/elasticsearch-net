@@ -14,7 +14,7 @@ namespace Tests.Indices.IndexManagement
 {
 	//TODO NOT Readonly
 	[Collection(IntegrationContext.ReadOnly)]
-	public abstract class PutMapping : ApiTestBase<IIndicesResponse, IPutMappingRequest, PutMappingDescriptor<Project>, PutMappingRequest<Project>>
+	public abstract class PutMapping : ApiIntegrationTestBase<IIndicesResponse, IPutMappingRequest, PutMappingDescriptor<Project>, PutMappingRequest<Project>>
 	{
 		protected PutMapping(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(

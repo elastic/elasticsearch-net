@@ -13,7 +13,7 @@ using static Nest.Static;
 namespace Tests.Indices.AliasManagement.Update
 {
 	[Collection(IntegrationContext.Indexing)]
-	public class UpdateApiTests : ApiTestBase<IUpdateResponse, IUpdateRequest<Project, Project>, UpdateDescriptor<Project, Project>, UpdateRequest<Project, Project>>
+	public class UpdateApiTests : ApiIntegrationTestBase<IUpdateResponse, IUpdateRequest<Project, Project>, UpdateDescriptor<Project, Project>, UpdateRequest<Project, Project>>
 	{
 		public UpdateApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(

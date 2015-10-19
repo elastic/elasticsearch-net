@@ -11,7 +11,7 @@ using Xunit;
 namespace Tests.Indices.AliasManagement.PutAlias
 {
 	[Collection(IntegrationContext.Indexing)]
-	public class PutAliasApiTests : ApiTestBase<IPutAliasResponse, IPutAliasRequest, PutAliasDescriptor, PutAliasRequest>
+	public class PutAliasApiTests : ApiIntegrationTestBase<IPutAliasResponse, IPutAliasRequest, PutAliasDescriptor, PutAliasRequest>
 	{
 
 		public PutAliasApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }

@@ -13,7 +13,7 @@ using Tests.Framework.Integration;
 namespace Tests.Indices.IndexManagement
 {
 	[Collection(IntegrationContext.Indexing)]
-	public class CreateIndexApiTests : ApiTestBase<IIndicesOperationResponse, ICreateIndexRequest, CreateIndexDescriptor, CreateIndexRequest>
+	public class CreateIndexApiTests : ApiIntegrationTestBase<IIndicesOperationResponse, ICreateIndexRequest, CreateIndexDescriptor, CreateIndexRequest>
 	{
 		public CreateIndexApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(

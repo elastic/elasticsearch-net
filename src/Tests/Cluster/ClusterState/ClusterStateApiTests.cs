@@ -12,7 +12,7 @@ using Xunit;
 namespace Tests.Cluster.ClusterStats
 {
 	[Collection(IntegrationContext.ReadOnly)]
-	public class ClusterStatsApiTests : ApiTestBase<IClusterStatsResponse, IClusterStatsRequest, ClusterStatsDescriptor, ClusterStatsRequest>
+	public class ClusterStatsApiTests : ApiIntegrationTestBase<IClusterStatsResponse, IClusterStatsRequest, ClusterStatsDescriptor, ClusterStatsRequest>
 	{
 		public ClusterStatsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(
