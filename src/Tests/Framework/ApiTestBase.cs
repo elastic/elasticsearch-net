@@ -32,7 +32,7 @@ namespace Tests.Framework
 
 		protected virtual int Port { get; set; } = 9200;
 
-		protected virtual TInitializer Initializer => Activator.CreateInstance<TInitializer>();
+		protected virtual TInitializer Initializer { get; }
 		protected virtual Func<TDescriptor, TInterface> Fluent { get; }
 
 		protected virtual TDescriptor ClientDoesThisInternally(TDescriptor d) => d;

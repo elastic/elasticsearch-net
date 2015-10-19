@@ -21,6 +21,8 @@ namespace Tests.Framework
 
 		protected ApiIntegrationTestBase(IIntegrationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
+		protected override TInitializer Initializer => Activator.CreateInstance<TInitializer>();
+
 		[I] protected async Task HandlesStatusCode() =>
 			await this.AssertOnAllResponses(r=>r.ApiCall.HttpStatusCode.Should().Be(this.ExpectStatusCode));
 
