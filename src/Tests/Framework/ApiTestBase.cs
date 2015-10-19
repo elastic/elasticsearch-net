@@ -23,7 +23,7 @@ namespace Tests.Framework
 			this._usage = usage;
 			this.UniqueValues = this._usage.CallUniqueValues;
 			this._responses = usage.CallOnce(this.ClientUsage);
-
+			this.CallIsolatedValue = UniqueValues[ClientCall.Fluent];
 		}
 		private readonly IIntegrationCluster _cluster;
 		private readonly LazyResponses _responses;

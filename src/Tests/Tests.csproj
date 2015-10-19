@@ -140,6 +140,7 @@
     <Compile Include="Document\Multiple\Bulk\BulkUrlTests.cs" />
     <Compile Include="Document\Multiple\Bulk\BulkApiTests.cs" />
     <Compile Include="Document\Multiple\DeleteByQuery\DeleteByQueryUrlTests.cs" />
+    <Compile Include="Document\Multiple\DeleteByQuery\DeleteByQueryApiTests.cs" />
     <Compile Include="Document\Multiple\MultiGet\MultiGetApiTests.cs" />
     <Compile Include="Document\Multiple\MultiGet\MultiGetUrlTests.cs" />
     <Compile Include="Document\Multiple\MultiTermVectors\MultiTermVectorsApiTests.cs" />

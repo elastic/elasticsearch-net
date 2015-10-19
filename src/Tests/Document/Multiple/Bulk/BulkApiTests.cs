@@ -30,11 +30,11 @@ namespace Tests.Document.Multiple.Bulk
 
 		protected override object ExpectJson { get; } = new object[]
 		{
-			new Dictionary<string, object>{ { "index", new { _index = "project", _type = "project", _id = "nesttests" } } },
+			new Dictionary<string, object>{ { "index", new {  _type = "project", _id = "nesttests" } } },
 			Project.InstanceAnonymous,
-			new Dictionary<string, object>{ { "update", new { _index = "project", _type="project", _id = "nesttests1" } } },
+			new Dictionary<string, object>{ { "update", new { _type="project", _id = "nesttests1" } } },
 			new { script = "1+1" },
-			new Dictionary<string, object>{ { "create", new { _index = "project", _type="project", _id = "nesttests" } } },
+			new Dictionary<string, object>{ { "create", new { _type="project", _id = "nesttests" } } },
 			Project.InstanceAnonymous,
 		};
 
