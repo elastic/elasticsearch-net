@@ -12,14 +12,14 @@ namespace Nest
 	public partial interface IElasticClient
 	{
 		/// <inheritdoc/>
-		IGetFieldMappingResponse GetFieldMapping<T>(FieldNames fields, Func<GetFieldMappingDescriptor<T>, GetFieldMappingDescriptor<T>> selector = null)
+		IGetFieldMappingResponse GetFieldMapping<T>(FieldNames fields, Func<GetFieldMappingDescriptor<T>, IGetFieldMappingRequest> selector = null)
 			where T : class;
 
 		/// <inheritdoc/>
 		IGetFieldMappingResponse GetFieldMapping(IGetFieldMappingRequest getFieldMappingRequest);
 
 		/// <inheritdoc/>
-		Task<IGetFieldMappingResponse> GetFieldMappingAsync<T>(FieldNames fields, Func<GetFieldMappingDescriptor<T>, GetFieldMappingDescriptor<T>> selector = null)
+		Task<IGetFieldMappingResponse> GetFieldMappingAsync<T>(FieldNames fields, Func<GetFieldMappingDescriptor<T>, IGetFieldMappingRequest> selector = null)
 			where T : class;
 
 		/// <inheritdoc/>
@@ -29,7 +29,7 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IGetFieldMappingResponse GetFieldMapping<T>(FieldNames fields, Func<GetFieldMappingDescriptor<T>, GetFieldMappingDescriptor<T>> selector = null)
+		public IGetFieldMappingResponse GetFieldMapping<T>(FieldNames fields, Func<GetFieldMappingDescriptor<T>, IGetFieldMappingRequest> selector = null)
 			where T : class => 
 			this.GetFieldMapping(selector.InvokeOrDefault(new GetFieldMappingDescriptor<T>(fields)));
 
@@ -42,7 +42,7 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
-		public Task<IGetFieldMappingResponse> GetFieldMappingAsync<T>(FieldNames fields, Func<GetFieldMappingDescriptor<T>, GetFieldMappingDescriptor<T>> selector = null)
+		public Task<IGetFieldMappingResponse> GetFieldMappingAsync<T>(FieldNames fields, Func<GetFieldMappingDescriptor<T>, IGetFieldMappingRequest> selector = null)
 			where T : class =>
 			this.GetFieldMappingAsync(selector.InvokeOrDefault(new GetFieldMappingDescriptor<T>(fields)));
 

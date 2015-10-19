@@ -34,7 +34,7 @@ namespace Tests.Indices.IndexSettings.IndexTemplates.PutIndexTemplate
 			settings = new Dictionary<string, object> { { "index.number_of_shards", 1} }
 		};
 
-		protected override PutIndexTemplateDescriptor NewDescriptor()=> new PutIndexTemplateDescriptor(CallIsolatedValue);
+		protected override PutIndexTemplateDescriptor NewDescriptor() => new PutIndexTemplateDescriptor(CallIsolatedValue);
 
 		protected override Func<PutIndexTemplateDescriptor, IPutIndexTemplateRequest> Fluent => d => d
 			.Order(1)

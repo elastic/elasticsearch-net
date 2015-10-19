@@ -33,11 +33,4 @@ namespace Nest
 			return this;
 		}
 	}
-
-	public static class Fields 
-	{
-		public static FieldNames Field<T>(Expression<Func<T, object>> field) where T : class =>
-			new FieldNames(new FieldName[] { field });
-		public static FieldNames Field(string field) => new FieldNames(new FieldName[] { field });
-	}
 }

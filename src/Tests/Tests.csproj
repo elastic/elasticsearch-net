@@ -246,6 +246,7 @@
     <Compile Include="Indices\IndexSettings\UpdateIndicesSettings\UpdateIndexSettingsApiTests.cs" />
     <Compile Include="Indices\IndexSettings\UpdateIndicesSettings\UpdateIndexSettingsUrlTests.cs" />
     <Compile Include="Indices\MappingManagement\GetFieldMapping\GetFieldMappingUrlTests.cs" />
+    <Compile Include="Indices\MappingManagement\GetFieldMapping\GetFieldMappingApiTests.cs" />
     <Compile Include="Indices\MappingManagement\GetMapping\GetMappingUrlTests.cs" />
     <Compile Include="Indices\MappingManagement\PutMapping\PutMappingApiTest.cs" />
     <Compile Include="Indices\MappingManagement\PutMapping\PutMappingUrlTests.cs" />
