@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Elasticsearch.Net;
 using Nest;
 using Tests.Framework;
@@ -9,10 +10,10 @@ using Xunit;
 
 namespace Tests.Indices.Monitoring.IndicesRecovery
 {
-	[Collection(IntegrationContext.Indexing)]
+	[Collection(IntegrationContext.ReadOnly)]
 	public class RecoveryStatusApiTests : ApiIntegrationTestBase<IRecoveryStatusResponse, IRecoveryStatusRequest, RecoveryStatusDescriptor, RecoveryStatusRequest>
 	{
-		public RecoveryStatusApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public RecoveryStatusApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.RecoveryStatus(Static.AllIndices, f),
@@ -29,5 +30,9 @@ namespace Tests.Indices.Monitoring.IndicesRecovery
 		protected override Func<RecoveryStatusDescriptor, IRecoveryStatusRequest> Fluent => d => d;
 
 		protected override RecoveryStatusRequest Initializer => new RecoveryStatusRequest(Static.AllIndices);
+
+		[I] public async Task Response() => await this.AssertOnAllResponses(r =>
+		{
+		});
 	}
 }

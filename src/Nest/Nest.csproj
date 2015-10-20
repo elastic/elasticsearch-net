@@ -941,7 +941,7 @@
     <Compile Include="Indices\Monitoring\IndicesSegments\SegmentsResponse.cs" />
     <Compile Include="Indices\IndexManagement\IndicesExists\IndexExistsResponse.cs" />
     <Compile Include="Indices\IndexManagement\IndicesExists\ElasticClient-IndexExists.cs" />
-    <Compile Include="Indices\Monitoring\IndicesStats\GlobalStatsResponse.cs" />
+    <Compile Include="Indices\Monitoring\IndicesStats\IndicesStatsResponse.cs" />
     <Compile Include="CommonOptions\Stats\TypeStats.cs" />
     <Compile Include="CommonOptions\Stats\FlushStats.cs" />
     <Compile Include="CommonOptions\Stats\RefreshStats.cs" />
