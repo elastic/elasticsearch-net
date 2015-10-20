@@ -140,7 +140,7 @@
     <Compile Include="CommonAbstractions\Infer\FieldName\FieldName.cs" />
     <Compile Include="CommonAbstractions\Response\DictionaryResponse.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\KeyValueJsonConverter.cs" />
-    <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\ReadAsTypeInternalConstructorJsonConverter.cs" />
+    <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\ReadAsTypeJsonConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\ReserializeJsonConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\JsonReaderExtensions.cs" />
     <Compile Include="CommonAbstractions\Static\Static.cs" />
@@ -926,7 +926,6 @@
     <Compile Include="QueryDsl\FullText\Match\MatchQueryJsonConverter.cs" />
     <Compile Include="QueryDsl\TermLevel\Fuzzy\FuzzyQueryJsonConverter.cs" />
     <Compile Include="QueryDsl\TermLevel\Terms\TermsQueryJsonConverter.cs" />
-    <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\ReadAsTypeJsonConverter.cs" />
     <Compile Include="Mapping\Fields\Parent\ParentField.cs" />
     <Compile Include="Search\Percolator\Percolate\PercolateResponse.cs" />
     <Compile Include="Search\Percolator\UnregisterPercolator\UnregisterPercolateResponse.cs" />

@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ReadAsTypeInternalConstructorJsonConverter<PutMappingRequest>))]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<PutMappingRequest>))]
 	public partial interface IPutMappingRequest : ITypeMapping
 	{
 	}
