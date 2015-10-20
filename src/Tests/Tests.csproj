@@ -278,7 +278,10 @@
     <Compile Include="Indices\Warmers\PutWarmer\PutWarmerUrlTests.cs" />
     <Compile Include="Mapping\Types\String.cs" />
     <Compile Include="Modules\Scripting\DeleteScript\DeleteScriptUrlTests.cs" />
+    <Compile Include="Modules\Scripting\DeleteScript\DeleteScriptApiTests.cs" />
+    <Compile Include="Modules\Scripting\GetScript\GetScriptApiTests.cs" />
     <Compile Include="Modules\Scripting\GetScript\GetScriptUrlTests.cs" />
+    <Compile Include="Modules\Scripting\PutScript\PutScriptApiTests.cs" />
     <Compile Include="Modules\Scripting\PutScript\PutScriptUrlTests.cs" />
     <Compile Include="Modules\Scripting\ScriptingCrudTests.cs" />
     <Compile Include="Search\Count\CountUrlTests.cs" />
