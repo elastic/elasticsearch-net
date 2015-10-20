@@ -9,9 +9,9 @@ using Elasticsearch.Net;
 namespace Tests.Search
 {
 	[Collection(IntegrationContext.ReadOnly)]
-	public abstract class SearchUsageBase : ApiIntegrationTestBase<ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
+	public abstract class SearchUsageTestBase : ApiIntegrationTestBase<ISearchResponse<Project>, ISearchRequest, SearchDescriptor<Project>, SearchRequest<Project>>
 	{
-		protected SearchUsageBase(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		protected SearchUsageTestBase(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.Search<Project>(f),
 			fluentAsync: (client, f) => client.SearchAsync<Project>(f),
