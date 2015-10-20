@@ -11,7 +11,7 @@ using Xunit;
 namespace Tests.Indices.AliasManagement.DeleteAlias
 {
 	[Collection(IntegrationContext.Indexing)]
-	public class DeleteAliasApiTests : ApiTestBase<IDeleteAliasResponse, IDeleteAliasRequest, DeleteAliasDescriptor, DeleteAliasRequest>
+	public class DeleteAliasApiTests : ApiIntegrationTestBase<IDeleteAliasResponse, IDeleteAliasRequest, DeleteAliasDescriptor, DeleteAliasRequest>
 	{
 		private readonly static Names Names = Static.Names("alias, x", "y");
 

@@ -11,7 +11,7 @@ using Xunit;
 namespace Tests.Cluster.ClusterSettings.ClusterGetSettings
 {
 	[Collection(IntegrationContext.ReadOnly)]
-	public class ClusterGetSettingsApiTests : ApiTestBase<IClusterGetSettingsResponse, IClusterGetSettingsRequest, ClusterGetSettingsDescriptor, ClusterGetSettingsRequest>
+	public class ClusterGetSettingsApiTests : ApiIntegrationTestBase<IClusterGetSettingsResponse, IClusterGetSettingsRequest, ClusterGetSettingsDescriptor, ClusterGetSettingsRequest>
 	{
 		public ClusterGetSettingsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(

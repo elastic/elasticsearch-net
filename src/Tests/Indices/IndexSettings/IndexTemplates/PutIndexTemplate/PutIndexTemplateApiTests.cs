@@ -10,7 +10,7 @@ using Xunit;
 namespace Tests.Indices.IndexSettings.IndexTemplates.PutIndexTemplate
 {
 	[Collection(IntegrationContext.Indexing)]
-	public class PutIndexTemplateApiTests : ApiTestBase<IIndicesOperationResponse, IPutIndexTemplateRequest, PutIndexTemplateDescriptor, PutIndexTemplateRequest>
+	public class PutIndexTemplateApiTests : ApiIntegrationTestBase<IIndicesOperationResponse, IPutIndexTemplateRequest, PutIndexTemplateDescriptor, PutIndexTemplateRequest>
 	{
 		public PutIndexTemplateApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(

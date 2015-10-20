@@ -10,7 +10,7 @@ using Xunit;
 namespace Tests.Indices.IndexManagement.GetIndex
 {
 	[Collection(IntegrationContext.Indexing)]
-	public class GetIndexApiTests : ApiTestBase<IGetIndexResponse, IGetIndexRequest, GetIndexDescriptor, GetIndexRequest>
+	public class GetIndexApiTests : ApiIntegrationTestBase<IGetIndexResponse, IGetIndexRequest, GetIndexDescriptor, GetIndexRequest>
 	{
 		public GetIndexApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(

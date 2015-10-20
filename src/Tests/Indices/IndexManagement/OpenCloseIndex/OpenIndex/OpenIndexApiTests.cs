@@ -10,8 +10,8 @@ using Xunit;
 namespace Tests.Indices.IndexManagement.OpenCloseIndex.OpenIndex
 {
 	[Collection(IntegrationContext.Indexing)]
-	public class OpenIndexApiTests :
-		ApiTestBase<IIndicesOperationResponse, IOpenIndexRequest, OpenIndexDescriptor, OpenIndexRequest>
+	public class OpenIndexApiTests 
+		: ApiIntegrationTestBase<IIndicesOperationResponse, IOpenIndexRequest, OpenIndexDescriptor, OpenIndexRequest>
 	{
 		public OpenIndexApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(

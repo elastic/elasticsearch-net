@@ -13,7 +13,7 @@ using static Nest.Static;
 namespace Tests.Indices.AliasManagement.TermVectors
 {
 	[Collection(IntegrationContext.Indexing)]
-	public class TermVectorsApiTests : ApiTestBase<ITermVectorsResponse, ITermVectorsRequest<Project>, TermVectorsDescriptor<Project>, TermVectorsRequest<Project>>
+	public class TermVectorsApiTests : ApiIntegrationTestBase<ITermVectorsResponse, ITermVectorsRequest<Project>, TermVectorsDescriptor<Project>, TermVectorsRequest<Project>>
 	{
 		public TermVectorsApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(

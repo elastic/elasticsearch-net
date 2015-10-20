@@ -10,7 +10,8 @@ using Xunit;
 namespace Tests.Indices.IndexManagement.DeleteIndex
 {
 	[Collection(IntegrationContext.Indexing)]
-	public class DeleteIndexApiTests : ApiTestBase<IIndicesResponse, IDeleteIndexRequest, DeleteIndexDescriptor, DeleteIndexRequest>
+	public class DeleteIndexApiTests 
+		: ApiIntegrationTestBase<IIndicesResponse, IDeleteIndexRequest, DeleteIndexDescriptor, DeleteIndexRequest>
 	{
 		public DeleteIndexApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(

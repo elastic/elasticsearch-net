@@ -13,7 +13,7 @@ using static Nest.Static;
 namespace Tests.Document.Multiple.Alias
 {
 	[Collection(IntegrationContext.Indexing)]
-	public class AliasApiTests : ApiTestBase<IIndicesOperationResponse, IBulkAliasRequest, BulkAliasDescriptor, BulkAliasRequest>
+	public class AliasApiTests : ApiIntegrationTestBase<IIndicesOperationResponse, IBulkAliasRequest, BulkAliasDescriptor, BulkAliasRequest>
 	{
 		public AliasApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(
@@ -43,7 +43,6 @@ namespace Tests.Document.Multiple.Alias
 			.Add(a=>a.Alias("alias").Index(CallIsolatedValue).IndexRouting("x").SearchRouting("y"))
 			.Remove(a=>a.Alias("alias").Index(CallIsolatedValue))
 		;
-
 
 		protected override BulkAliasRequest Initializer => new BulkAliasRequest
 		{

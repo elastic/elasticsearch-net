@@ -13,7 +13,7 @@ using FluentAssertions;
 namespace Tests.Document.Single
 {
 	[Collection(IntegrationContext.Indexing)]
-	public class IndexApiTests : ApiTestBase<IIndexResponse, IIndexRequest<Project>, IndexDescriptor<Project>, IndexRequest<Project>>
+	public class IndexApiTests : ApiIntegrationTestBase<IIndexResponse, IIndexRequest<Project>, IndexDescriptor<Project>, IndexRequest<Project>>
 	{
 		private Project Document => new Project
 		{

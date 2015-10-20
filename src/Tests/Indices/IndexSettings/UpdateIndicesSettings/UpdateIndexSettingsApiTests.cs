@@ -13,7 +13,7 @@ using static Nest.Static;
 namespace Tests.Indices.IndexSettings.UpdateIndicesSettings
 {
 	[Collection(IntegrationContext.Indexing)]
-	public class UpdateIndexSettingsApiTests : ApiTestBase<IAcknowledgedResponse, IUpdateIndexSettingsRequest, UpdateIndexSettingsDescriptor, UpdateIndexSettingsRequest>
+	public class UpdateIndexSettingsApiTests : ApiIntegrationTestBase<IAcknowledgedResponse, IUpdateIndexSettingsRequest, UpdateIndexSettingsDescriptor, UpdateIndexSettingsRequest>
 	{
 		public UpdateIndexSettingsApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(

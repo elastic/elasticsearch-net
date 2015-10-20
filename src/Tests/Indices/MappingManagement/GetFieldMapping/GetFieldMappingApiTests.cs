@@ -12,7 +12,8 @@ using Xunit;
 namespace Tests.Indices.MappingManagement.GetFieldMapping
 {
 	[Collection(IntegrationContext.Indexing)]
-	public class GetFieldMappingApiTests : ApiTestBase<IGetFieldMappingResponse, IGetFieldMappingRequest, GetFieldMappingDescriptor<Project>, GetFieldMappingRequest>
+	public class GetFieldMappingApiTests 
+		: ApiIntegrationTestBase<IGetFieldMappingResponse, IGetFieldMappingRequest, GetFieldMappingDescriptor<Project>, GetFieldMappingRequest>
 	{
 		private static readonly FieldNames Fields = Static.Fields<Project>(p => p.Name, p => p.Tags);
 

@@ -10,7 +10,7 @@ using Xunit;
 namespace Tests.Indices.IndexManagement.IndexExists
 {
 	[Collection(IntegrationContext.Indexing)]
-	public class IndexExistsApiTests : ApiTestBase<IExistsResponse, IIndexExistsRequest, IndexExistsDescriptor, IndexExistsRequest>
+	public class IndexExistsApiTests : ApiIntegrationTestBase<IExistsResponse, IIndexExistsRequest, IndexExistsDescriptor, IndexExistsRequest>
 	{
 		public IndexExistsApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(

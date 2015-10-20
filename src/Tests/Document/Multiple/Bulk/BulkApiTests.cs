@@ -12,7 +12,7 @@ using Xunit;
 namespace Tests.Document.Multiple.Bulk
 {
 	[Collection(IntegrationContext.Indexing)]
-	public class BulkApiTests : ApiTestBase<IBulkResponse, IBulkRequest, BulkDescriptor, BulkRequest>
+	public class BulkApiTests : ApiIntegrationTestBase<IBulkResponse, IBulkRequest, BulkDescriptor, BulkRequest>
 	{
 		public BulkApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(

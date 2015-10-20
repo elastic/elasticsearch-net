@@ -12,7 +12,7 @@ using Xunit;
 namespace Tests.Cat.CatSegments
 {
 	[Collection(IntegrationContext.ReadOnly)]
-	public class CatSegmentsApiTests : ApiTestBase<ICatResponse<CatSegmentsRecord>, ICatSegmentsRequest, CatSegmentsDescriptor, CatSegmentsRequest>
+	public class CatSegmentsApiTests : ApiIntegrationTestBase<ICatResponse<CatSegmentsRecord>, ICatSegmentsRequest, CatSegmentsDescriptor, CatSegmentsRequest>
 	{
 		public CatSegmentsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(

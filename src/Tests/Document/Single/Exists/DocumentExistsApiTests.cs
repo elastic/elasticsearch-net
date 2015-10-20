@@ -12,7 +12,7 @@ using Xunit;
 namespace Tests.Indices.AliasManagement.Exists
 {
 	[Collection(IntegrationContext.Indexing)]
-	public class DocumentExistsApiTests : ApiTestBase<IExistsResponse, IDocumentExistsRequest, DocumentExistsDescriptor<Project>, DocumentExistsRequest<Project>>
+	public class DocumentExistsApiTests : ApiIntegrationTestBase<IExistsResponse, IDocumentExistsRequest, DocumentExistsDescriptor<Project>, DocumentExistsRequest<Project>>
 	{
 		public DocumentExistsApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(

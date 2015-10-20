@@ -12,7 +12,7 @@ using Xunit;
 namespace Tests.Indices.IndexSettings.GetIndexSettings
 {
 	[Collection(IntegrationContext.ReadOnly)]
-	public class GetIndexSettingsApiTests : ApiTestBase<IGetIndexSettingsResponse, IGetIndexSettingsRequest, GetIndexSettingsDescriptor, GetIndexSettingsRequest>
+	public class GetIndexSettingsApiTests : ApiIntegrationTestBase<IGetIndexSettingsResponse, IGetIndexSettingsRequest, GetIndexSettingsDescriptor, GetIndexSettingsRequest>
 	{
 		public GetIndexSettingsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(

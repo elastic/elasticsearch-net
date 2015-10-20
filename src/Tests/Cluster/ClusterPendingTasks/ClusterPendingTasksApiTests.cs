@@ -12,7 +12,7 @@ using Xunit;
 namespace Tests.Cluster.ClusterPendingTasks
 {
 	[Collection(IntegrationContext.ReadOnly)]
-	public class ClusterPendingTasksApiTests : ApiTestBase<IClusterPendingTasksResponse, IClusterPendingTasksRequest, ClusterPendingTasksDescriptor, ClusterPendingTasksRequest>
+	public class ClusterPendingTasksApiTests : ApiIntegrationTestBase<IClusterPendingTasksResponse, IClusterPendingTasksRequest, ClusterPendingTasksDescriptor, ClusterPendingTasksRequest>
 	{
 		public ClusterPendingTasksApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(

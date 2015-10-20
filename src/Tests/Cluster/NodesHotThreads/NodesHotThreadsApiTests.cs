@@ -12,7 +12,7 @@ using Xunit;
 namespace Tests.Cluster.NodesHotThreads
 {
 	[Collection(IntegrationContext.ReadOnly)]
-	public class NodesHotThreadsApiTests : ApiTestBase<INodesHotThreadsResponse, INodesHotThreadsRequest, NodesHotThreadsDescriptor, NodesHotThreadsRequest>
+	public class NodesHotThreadsApiTests : ApiIntegrationTestBase<INodesHotThreadsResponse, INodesHotThreadsRequest, NodesHotThreadsDescriptor, NodesHotThreadsRequest>
 	{
 		public NodesHotThreadsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(

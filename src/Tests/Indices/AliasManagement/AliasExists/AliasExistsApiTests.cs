@@ -11,7 +11,7 @@ using Xunit;
 namespace Tests.Indices.AliasManagement.AliasExists
 {
 	[Collection(IntegrationContext.ReadOnly)]
-	public class AliasExistsApiTests : ApiTestBase<IExistsResponse, IAliasExistsRequest, AliasExistsDescriptor, AliasExistsRequest>
+	public class AliasExistsApiTests : ApiIntegrationTestBase<IExistsResponse, IAliasExistsRequest, AliasExistsDescriptor, AliasExistsRequest>
 	{
 		public AliasExistsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(

@@ -11,7 +11,8 @@ using Xunit;
 namespace Tests.Indices.MappingManagement.PutMapping
 {
 	[Collection(IntegrationContext.Indexing)]
-	public class PutMappingApiTests : ApiTestBase<IIndicesResponse, IPutMappingRequest, PutMappingDescriptor<Project>, PutMappingRequest<Project>>
+	public class PutMappingApiTests 
+		: ApiIntegrationTestBase<IIndicesResponse, IPutMappingRequest, PutMappingDescriptor<Project>, PutMappingRequest<Project>>
 	{
 		public PutMappingApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

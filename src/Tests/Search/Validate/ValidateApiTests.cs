@@ -14,7 +14,7 @@ namespace Tests.Search.Validate
 {
 	[Collection(IntegrationContext.ReadOnly)]
 	public class ValidateApiTests 
-		: ApiTestBase<IValidateResponse, IValidateQueryRequest, ValidateQueryDescriptor<Project>, ValidateQueryRequest<Project>>
+		: ApiIntegrationTestBase<IValidateResponse, IValidateQueryRequest, ValidateQueryDescriptor<Project>, ValidateQueryRequest<Project>>
 	{
 		public ValidateApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -33,7 +33,7 @@ namespace Tests.Search.Validate
 
 	[Collection(IntegrationContext.ReadOnly)]
 	public class ValidateInvalidQueryApiTests 
-		: ApiTestBase<IValidateResponse, IValidateQueryRequest, ValidateQueryDescriptor<Project>, ValidateQueryRequest<Project>>
+		: ApiIntegrationTestBase<IValidateResponse, IValidateQueryRequest, ValidateQueryDescriptor<Project>, ValidateQueryRequest<Project>>
 	{
 		public ValidateInvalidQueryApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
