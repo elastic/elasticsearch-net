@@ -248,8 +248,10 @@
     <Compile Include="Indices\MappingManagement\GetFieldMapping\GetFieldMappingUrlTests.cs" />
     <Compile Include="Indices\MappingManagement\GetFieldMapping\GetFieldMappingApiTests.cs" />
     <Compile Include="Indices\MappingManagement\GetMapping\GetMappingUrlTests.cs" />
+    <Compile Include="Indices\MappingManagement\GetMapping\GetMappingApiTest.cs" />
     <Compile Include="Indices\MappingManagement\PutMapping\PutMappingApiTest.cs" />
     <Compile Include="Indices\MappingManagement\PutMapping\PutMappingUrlTests.cs" />
+    <Compile Include="Indices\Monitoring\IndicesRecovery\RecoveryStatusApiTests.cs" />
     <Compile Include="Indices\Monitoring\IndicesRecovery\RecoveryStatusUrlTests.cs" />
     <Compile Include="Indices\Monitoring\IndicesSegments\SegmentsUrlTests.cs" />
     <Compile Include="Indices\Monitoring\IndicesStats\IndicesStatsUrlTests.cs" />
