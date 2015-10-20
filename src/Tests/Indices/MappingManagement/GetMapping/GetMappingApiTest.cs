@@ -13,7 +13,7 @@ using static Nest.Static;
 namespace Tests.Indices.MappingManagement.GetMapping
 {
 	[Collection(IntegrationContext.Indexing)]
-	public class GetMappingApiTests : ApiTestBase<IGetMappingResponse, IGetMappingRequest, GetMappingDescriptor<Project>, GetMappingRequest>
+	public class GetMappingApiTests : ApiIntegrationTestBase<IGetMappingResponse, IGetMappingRequest, GetMappingDescriptor<Project>, GetMappingRequest>
 	{
 		public GetMappingApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

@@ -30,6 +30,8 @@ namespace Tests.Search.SearchTemplate.PutSearchTemplate
 
 		private string _template = "\"template\" : { \"query\": { \"match_all : {} } }\"";
 
+		protected override bool SupportsDeserialization => false;
+
 		protected override object ExpectJson => new
 		{
 			template = _template

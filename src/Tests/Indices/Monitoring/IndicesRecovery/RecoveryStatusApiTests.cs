@@ -5,53 +5,29 @@ using Elasticsearch.Net;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.MockData;
 using Xunit;
 
-namespace Tests.Indices.MappingManagement.PutMapping
+namespace Tests.Indices.Monitoring.IndicesRecovery
 {
 	[Collection(IntegrationContext.Indexing)]
-	public class PutMappingApiTests : ApiTestBase<IIndicesResponse, IPutMappingRequest, PutMappingDescriptor<Project>, PutMappingRequest<Project>>
+	public class RecoveryStatusApiTests : ApiIntegrationTestBase<IRecoveryStatusResponse, IRecoveryStatusRequest, RecoveryStatusDescriptor, RecoveryStatusRequest>
 	{
-		public PutMappingApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public RecoveryStatusApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (client, f) => client.Map(f),
-			fluentAsync: (client, f) => client.MapAsync(f),
-			request: (client, r) => client.Map(r),
-			requestAsync: (client, r) => client.MapAsync(r)
+			fluent: (client, f) => client.RecoveryStatus(Static.AllIndices, f),
+			fluentAsync: (client, f) => client.RecoveryStatusAsync(Static.AllIndices, f),
+			request: (client, r) => client.RecoveryStatus(r),
+			requestAsync: (client, r) => client.RecoveryStatusAsync(r)
 		);
 
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
-		protected override HttpMethod HttpMethod => HttpMethod.PUT;
-		protected override string UrlPath => "/project/project/_mapping";
+		protected override HttpMethod HttpMethod => HttpMethod.GET;
+		protected override string UrlPath => "/_recovery";
 
-		protected override object ExpectJson { get; } = new
-		{
-			properties = new
-			{
-				name = new
-				{
-					type = "string",
-					index = "not_analyzed"
-				}
-			}
+		protected override Func<RecoveryStatusDescriptor, IRecoveryStatusRequest> Fluent => d => d;
 
-		};
-
-
-		protected override Func<PutMappingDescriptor<Project>, IPutMappingRequest> Fluent => d => d
-			.Properties(prop=>prop
-				.String(s=>s.Name(p=>p.Name).NotAnalyzed())
-			);
-
-		protected override PutMappingRequest<Project> Initializer => new PutMappingRequest<Project>
-		{
-			Properties = new Properties<Project>
-			{
-				{ p=>p.Name, new StringProperty { Index = FieldIndexOption.NotAnalyzed }  }
-			}
-		};
+		protected override RecoveryStatusRequest Initializer => new RecoveryStatusRequest(Static.AllIndices);
 	}
 }
