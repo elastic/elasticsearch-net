@@ -139,6 +139,7 @@
     <Compile Include="CommonAbstractions\ConnectionSettings\ClrTypeMapping.cs" />
     <Compile Include="CommonAbstractions\Infer\FieldName\FieldName.cs" />
     <Compile Include="CommonAbstractions\Response\DictionaryResponse.cs" />
+    <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\DictionaryToPropertiesJsonConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\KeyValueJsonConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\ReadAsTypeJsonConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\ReserializeJsonConverter.cs" />
@@ -787,7 +788,7 @@
     <Compile Include="QueryDsl\Joining\HasChild\ChildScoreType.cs" />
     <Compile Include="QueryDsl\Joining\HasParent\HasParentQuery.cs" />
     <Compile Include="QueryDsl\Joining\HasParent\ParentScoreType.cs" />
-    <Compile Include="Search\Percolator\RegisterPercolator\RegisterPercolatorCount.cs" />
+    <Compile Include="Search\Percolator\RegisterPercolator\RegisterPercolatorRequest.cs" />
     <Compile Include="Search\Percolator\Percolate\PercolateRequest.cs" />
     <Compile Include="QueryDsl\ExternalFieldDeclaration.cs" />
     <Compile Include="QueryDsl\FullText\MultiMatch\MultiMatchQuery.cs" />

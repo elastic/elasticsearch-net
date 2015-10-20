@@ -301,6 +301,8 @@
     <Compile Include="Search\Percolator\PercolateCount\PercolateCountUrlTests.cs" />
     <Compile Include="Search\Percolator\Percolate\PercolateUrlTests.cs" />
     <Compile Include="Search\Percolator\RegisterPercolator\RegisterPercolatorUrlTests.cs" />
+    <Compile Include="Search\Percolator\RegisterPercolator\RegisterPercolatorApiTests.cs" />
+    <Compile Include="Search\Percolator\UnregisterPercolator\UnregisterPercolatorApiTests.cs" />
     <Compile Include="Search\Percolator\UnregisterPercolator\UnregisterPercolatorUrlTests.cs" />
     <Compile Include="Search\Scroll\ClearScroll\ClearScrollUrlTests.cs" />
     <Compile Include="Search\Scroll\ClearScroll\ClearScrollApiTests.cs" />
