@@ -16,8 +16,6 @@ namespace Nest
 
 	public partial class PutSearchTemplateRequest 
 	{
-		internal PutSearchTemplateRequest() { }
-
 		public string Template { get; set; }
 	}
 

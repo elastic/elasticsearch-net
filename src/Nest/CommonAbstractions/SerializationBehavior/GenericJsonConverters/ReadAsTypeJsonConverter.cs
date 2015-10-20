@@ -22,9 +22,7 @@ namespace Nest
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
-			// TODO is Activator.CreateInstance better?
-			var flags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance;
-			var t = (T)typeof(T).GetConstructor(flags, null, new Type[]{}, null).Invoke(new object[]{});
+			var t = (T)typeof(T).CreateInstance();
 			serializer.Populate(reader, t);
 			return t;
 		}

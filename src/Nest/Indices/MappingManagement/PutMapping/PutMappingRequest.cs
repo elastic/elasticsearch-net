@@ -14,6 +14,7 @@ namespace Nest
 
 	public partial class PutMappingRequest : RequestBase<PutMappingRequestParameters>, IPutMappingRequest
 	{
+		// Needed for ReadAsType
 		internal PutMappingRequest() { }
 
 		/// <inheritdoc/>
