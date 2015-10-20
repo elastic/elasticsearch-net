@@ -278,8 +278,11 @@
     <Compile Include="Search\Percolator\RegisterPercolator\RegisterPercolatorUrlTests.cs" />
     <Compile Include="Search\Percolator\UnregisterPercolator\UnregisterPercolatorUrlTests.cs" />
     <Compile Include="Search\Scroll\ClearScroll\ClearScrollUrlTests.cs" />
+    <Compile Include="Search\Scroll\ClearScroll\ClearScrollApiTests.cs" />
     <Compile Include="Search\Scroll\Scroll\ScrollUrlTests.cs" />
+    <Compile Include="Search\Scroll\Scroll\ScrollApiTests.cs" />
     <Compile Include="Search\SearchExists\SearchExistsUrlTests.cs" />
+    <Compile Include="Search\SearchExists\SearchExistsApiTests.cs" />
     <Compile Include="Search\SearchShards\SearchShardsApiTests.cs" />
     <Compile Include="Search\SearchShards\SearchShardsUrlTests.cs" />
     <Compile Include="Search\SearchTemplate\DeleteSearchTemplate\DeleteSearchTemplateUrlTests.cs" />
@@ -289,6 +292,7 @@
     <Compile Include="Search\SearchTemplate\PutSearchTemplate\PutSearchTemplateUrlTests.cs" />
     <Compile Include="Search\SearchTemplate\PutSearchTemplate\PutSearchTemplateApiTests.cs" />
     <Compile Include="Search\SearchTemplate\SearchTemplateCrudTests.cs" />
+    <Compile Include="Search\Search\SearchExistsApiTests.cs" />
     <Compile Include="Search\Search\SearchUrlTests.cs" />
     <Compile Include="Search\Request\Fields.cs" />
     <Compile Include="Search\Request\FielddataFields.cs" />
