@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Nest
 {
-	public interface IGlobalStatsResponse : IResponse
+	public interface IIndicesStatsResponse : IResponse
 	{
 		ShardsMetaData Shards { get; }
 		Stats Stats { get; set; }
@@ -11,7 +11,7 @@ namespace Nest
 	}
 
 	[JsonObject]
-	public class GlobalStatsResponse : BaseResponse, IGlobalStatsResponse
+	public class IndicesStatsResponse : BaseResponse, IIndicesStatsResponse
 	{
 
 		[JsonProperty(PropertyName = "_shards")]

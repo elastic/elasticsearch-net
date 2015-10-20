@@ -14,41 +14,41 @@ namespace Nest
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-stats.html
 		/// </summary>
 		/// <param name="selector">Optionaly further describe the indices stats operation</param>
-		IGlobalStatsResponse IndicesStats(Indices indices, Func<IndicesStatsDescriptor, IIndicesStatsRequest> selector = null);
+		IIndicesStatsResponse IndicesStats(Indices indices, Func<IndicesStatsDescriptor, IIndicesStatsRequest> selector = null);
 
 		/// <inheritdoc/>
-		IGlobalStatsResponse IndicesStats(IIndicesStatsRequest indicesStatsRequest);
+		IIndicesStatsResponse IndicesStats(IIndicesStatsRequest indicesStatsRequest);
 
 		/// <inheritdoc/>
-		Task<IGlobalStatsResponse> IndicesStatsAsync(Indices indices, Func<IndicesStatsDescriptor, IIndicesStatsRequest> selector = null);
+		Task<IIndicesStatsResponse> IndicesStatsAsync(Indices indices, Func<IndicesStatsDescriptor, IIndicesStatsRequest> selector = null);
 
 		/// <inheritdoc/>
-		Task<IGlobalStatsResponse> IndicesStatsAsync(IIndicesStatsRequest indicesStatsRequest);
+		Task<IIndicesStatsResponse> IndicesStatsAsync(IIndicesStatsRequest indicesStatsRequest);
 
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IGlobalStatsResponse IndicesStats(Indices indices, Func<IndicesStatsDescriptor, IIndicesStatsRequest> selector = null) =>
+		public IIndicesStatsResponse IndicesStats(Indices indices, Func<IndicesStatsDescriptor, IIndicesStatsRequest> selector = null) =>
 			this.IndicesStats(selector.InvokeOrDefault(new IndicesStatsDescriptor().Index(indices)));
 
 		/// <inheritdoc/>
-		public IGlobalStatsResponse IndicesStats(IIndicesStatsRequest statsRequest) => 
-			this.Dispatcher.Dispatch<IIndicesStatsRequest, IndicesStatsRequestParameters, GlobalStatsResponse>(
+		public IIndicesStatsResponse IndicesStats(IIndicesStatsRequest statsRequest) => 
+			this.Dispatcher.Dispatch<IIndicesStatsRequest, IndicesStatsRequestParameters, IndicesStatsResponse>(
 				statsRequest,
-				(p, d) => this.LowLevelDispatch.IndicesStatsDispatch<GlobalStatsResponse>(p)
+				(p, d) => this.LowLevelDispatch.IndicesStatsDispatch<IndicesStatsResponse>(p)
 			);
 
 		/// <inheritdoc/>
-		public Task<IGlobalStatsResponse> IndicesStatsAsync(Indices indices, Func<IndicesStatsDescriptor, IIndicesStatsRequest> selector = null) => 
+		public Task<IIndicesStatsResponse> IndicesStatsAsync(Indices indices, Func<IndicesStatsDescriptor, IIndicesStatsRequest> selector = null) => 
 			this.IndicesStatsAsync(selector.InvokeOrDefault(new IndicesStatsDescriptor().Index(indices)));
 
 		/// <inheritdoc/>
-		public Task<IGlobalStatsResponse> IndicesStatsAsync(IIndicesStatsRequest statsRequest) => 
-			this.Dispatcher.DispatchAsync<IIndicesStatsRequest, IndicesStatsRequestParameters, GlobalStatsResponse, IGlobalStatsResponse>(
+		public Task<IIndicesStatsResponse> IndicesStatsAsync(IIndicesStatsRequest statsRequest) => 
+			this.Dispatcher.DispatchAsync<IIndicesStatsRequest, IndicesStatsRequestParameters, IndicesStatsResponse, IIndicesStatsResponse>(
 				statsRequest,
-				(p, d) => this.LowLevelDispatch.IndicesStatsDispatchAsync<GlobalStatsResponse>(p)
+				(p, d) => this.LowLevelDispatch.IndicesStatsDispatchAsync<IndicesStatsResponse>(p)
 			);
 	}
 }
