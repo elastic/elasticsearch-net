@@ -6,10 +6,10 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<SearchExistsRequest>))]
 	public partial interface ISearchExistsRequest 
 	{
 		[JsonProperty(PropertyName = "query")]
-		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeJsonConverter<QueryContainer>, CustomJsonConverter>))]
 		QueryContainer Query { get; set; }
 
 		[JsonIgnore]

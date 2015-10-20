@@ -25,13 +25,10 @@ namespace Tests.Search.SearchExists
 			requestAsync: (c, r) => c.SearchExistsAsync(r)
 		);
 		
-
 		protected override int ExpectStatusCode => 200;
 		protected override bool ExpectIsValid => true;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override string UrlPath => $"/project/project/_search/exists";
-
-		protected override SearchExistsDescriptor<Project> NewDescriptor() => new SearchExistsDescriptor<Project>();
 
 		protected override object ExpectJson => new
 		{
@@ -64,7 +61,6 @@ namespace Tests.Search.SearchExists
 			request: (c, r) => c.SearchExists(r),
 			requestAsync: (c, r) => c.SearchExistsAsync(r)
 		);
-		
 
 		protected override int ExpectStatusCode => 200;
 		protected override bool ExpectIsValid => true;
