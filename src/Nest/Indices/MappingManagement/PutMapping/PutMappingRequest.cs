@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<PutMappingRequest>))]
+	[JsonConverter(typeof(ReadAsTypeInternalConstructorJsonConverter<PutMappingRequest>))]
 	public partial interface IPutMappingRequest : ITypeMapping
 	{
 	}
@@ -14,9 +14,7 @@ namespace Nest
 
 	public partial class PutMappingRequest : RequestBase<PutMappingRequestParameters>, IPutMappingRequest
 	{
-		//TODO only needed for read as type, better to have a dedicated json converter subclass that can new an internal constructor
-		[Obsolete("This constructor has to be internal since its not valid to expose publicly")]
-		public PutMappingRequest() { }
+		internal PutMappingRequest() { }
 
 		/// <inheritdoc/>
 		public IAllField AllField { get; set; }

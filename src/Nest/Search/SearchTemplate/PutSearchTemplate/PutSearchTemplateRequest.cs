@@ -7,6 +7,7 @@ using System.Text;
 
 namespace Nest
 {
+	[JsonConverter(typeof(ReadAsTypeInternalConstructorJsonConverter<PutSearchTemplateRequest>))]
 	public partial interface IPutSearchTemplateRequest 
 	{
 		[JsonProperty("template")]
@@ -15,6 +16,8 @@ namespace Nest
 
 	public partial class PutSearchTemplateRequest 
 	{
+		internal PutSearchTemplateRequest() { }
+
 		public string Template { get; set; }
 	}
 
