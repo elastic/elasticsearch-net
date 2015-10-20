@@ -30,16 +30,75 @@ namespace Tests.Search.Search
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override string UrlPath => $"/project/project/_search";
 
-		protected override SearchDescriptor<Project> NewDescriptor() => new SearchDescriptor<Project>();
+		protected override object ExpectJson => new
+		{
+			from = 10,
+			size = 20,
+			query = new
+			{
+				match_all = new { }
+			},
+			aggs = new
+			{
+				startDates = new
+				{
+					terms = new
+					{
+						field = "startedOn"
+					}
+				}
+			},
+			post_filter = new
+			{
+				term = new
+				{
+					state = new
+					{
+						value = "Stable"
+					}
+
+				}
+			}
+		};
 
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
+			.From(10)
+			.Size(20)
 			.Query(q => q
 				.MatchAll()
+			)
+			.Aggregations(a => a
+				.Terms("startDates", t => t
+					.Field(p => p.StartedOn)
+				)
+			)
+			.PostFilter(f => f
+				.Term(p => p.State, StateOfBeing.Stable)
 			);
 
 		protected override SearchRequest<Project> Initializer => new SearchRequest<Project>()
 		{
-			Query = new QueryContainer(new MatchAllQuery())
+			From = 10,
+			Size =20,
+			Query = new QueryContainer(new MatchAllQuery()),
+			Aggregations = new TermsAgg("startDates")
+			{
+				Field = "startedOn"
+			},
+			PostFilter = new QueryContainer(new TermQuery
+			{
+				Field = "state",
+				Value = "Stable"
+			})
 		};
+
+		[I] public async Task HasHits() => await this.AssertOnAllResponses(r => r.Hits.Count().Should().BeGreaterThan(0));
+
+		[I] public async Task HasAggregations() => await this.AssertOnAllResponses(r =>
+		{
+			r.Aggregations.Count.Should().BeGreaterThan(0);
+			var startDates = r.Aggs.Terms("startDates");
+			startDates.Should().NotBeNull();
+		});
 	}
 }
