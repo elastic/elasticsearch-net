@@ -9,7 +9,7 @@ namespace Nest
 	public partial interface ISnapshotRequest 
 	{
 		[JsonProperty("indices")]
-		IEnumerable<IndexName> Indices { get; set; }
+		Indices Indices { get; set; }
 
 		[JsonProperty("ignore_unavailable")]
 		bool? IgnoreUnavailable { get; set; }
@@ -23,7 +23,7 @@ namespace Nest
 
 	public partial class SnapshotRequest 
 	{
-		public IEnumerable<IndexName> Indices { get; set; }
+		public Indices Indices { get; set; }
 
 		public bool? IgnoreUnavailable { get; set; }
 
@@ -36,31 +36,18 @@ namespace Nest
 	[DescriptorFor("SnapshotCreate")]
 	public partial class SnapshotDescriptor 
 	{
-		IEnumerable<IndexName> ISnapshotRequest.Indices { get; set; }
+		Indices ISnapshotRequest.Indices { get; set; }
 		bool? ISnapshotRequest.IgnoreUnavailable { get; set; }
 
 		bool? ISnapshotRequest.IncludeGlobalState { get; set; }
 
 		bool? ISnapshotRequest.Partial { get; set; }
 
-		// TODO: Replace these
-		//string IRepositorySnapshotPath.<SnapshotRequestParameters>.Repository { get; set; }
+		public SnapshotDescriptor Index(IndexName index) => this.Indices(index);
 
-		//string IRepositorySnapshotPath<SnapshotRequestParameters>.Snapshot { get; set; }
+		public SnapshotDescriptor Index<T>() where T : class => this.Indices(typeof(T));
 
-		public SnapshotDescriptor Index(string index)
-		{
-			return this.Indices(index);
-		}
-
-		public SnapshotDescriptor Index<T>() where T : class
-		{
-			return this.Indices(typeof(T));
-		}
-
-		public SnapshotDescriptor Indices(params string[] indices) => Assign(a => a.Indices = indices.Select(s => (IndexName) s));
-
-		public SnapshotDescriptor Indices(params Type[] indices) =>Assign(a => a.Indices = indices.Select(s => (IndexName) s));
+		public SnapshotDescriptor Indices(Indices indices) => Assign(a => a.Indices = indices);
 
 		public SnapshotDescriptor IgnoreUnavailable(bool ignoreUnavailable = true) => Assign(a => a.IgnoreUnavailable = ignoreUnavailable);
 

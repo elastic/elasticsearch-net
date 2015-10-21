@@ -13,8 +13,7 @@ using Tests.Framework.MockData;
 namespace Tests.Search.SearchTemplate.DeleteSearchTemplate
 {
 	[Collection(IntegrationContext.ReadOnly)]
-	public class DeleteSearchTemplateApiTests 
-		: ApiTestBase<IAcknowledgedResponse, IDeleteSearchTemplateRequest, DeleteSearchTemplateDescriptor, DeleteSearchTemplateRequest>
+	public class DeleteSearchTemplateApiTests : ApiTestBase<IAcknowledgedResponse, IDeleteSearchTemplateRequest, DeleteSearchTemplateDescriptor, DeleteSearchTemplateRequest>
 	{
 		public DeleteSearchTemplateApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

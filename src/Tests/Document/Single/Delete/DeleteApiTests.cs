@@ -9,7 +9,7 @@ using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using Xunit;
 
-namespace Tests.Indices.AliasManagement.Delete
+namespace Tests.Document.Single.Delete
 {
 	[Collection(IntegrationContext.Indexing)]
 	public class DeleteApiTests : ApiIntegrationTestBase<IDeleteResponse, IDeleteRequest, DeleteDescriptor<Project>, DeleteRequest<Project>>

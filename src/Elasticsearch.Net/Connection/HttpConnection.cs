@@ -145,10 +145,10 @@ namespace Elasticsearch.Net.Connection
 				var cs = requestData.CreateResponse<TReturn>((int)response.StatusCode, responseStream);
 				return cs;
 			}
-			catch (WebException exception)
+			catch (WebException webException)
 			{
-				var response = (HttpWebResponse)exception.Response;
-				return requestData.CreateResponse<TReturn>((int)response.StatusCode, response.GetResponseStream(), exception);
+				var response = (HttpWebResponse)webException.Response;
+				return requestData.CreateResponse<TReturn>((int)response.StatusCode, response.GetResponseStream(), webException);
 			}
 			catch (Exception exception)
 			{

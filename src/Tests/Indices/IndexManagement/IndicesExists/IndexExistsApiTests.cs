@@ -7,7 +7,7 @@ using Tests.Framework;
 using Tests.Framework.Integration;
 using Xunit;
 
-namespace Tests.Indices.IndexManagement.IndexExists
+namespace Tests.Indices.IndexManagement.IndicesExists
 {
 	[Collection(IntegrationContext.Indexing)]
 	public class IndexExistsApiTests : ApiIntegrationTestBase<IExistsResponse, IIndexExistsRequest, IndexExistsDescriptor, IndexExistsRequest>

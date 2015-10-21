@@ -187,7 +187,7 @@ namespace Nest
 			try
 			{
 				var indices =
-					_restoreRequest.Indices.Select(
+					_restoreRequest.Indices.Item2.Indices.Select(
 						x => new IndexName
 						{
 							Name = Regex.Replace(x.Name, _renamePattern, _renameReplacement),

@@ -13,8 +13,7 @@ using Tests.Framework.MockData;
 namespace Tests.Search.SearchExists
 {
 	[Collection(IntegrationContext.ReadOnly)]
-	public class SearchExistsApiTests 
-		: ApiIntegrationTestBase<IExistsResponse, ISearchExistsRequest, SearchExistsDescriptor<Project>, SearchExistsRequest<Project>>
+	public class SearchExistsApiTests : ApiIntegrationTestBase<IExistsResponse, ISearchExistsRequest, SearchExistsDescriptor<Project>, SearchExistsRequest<Project>>
 	{
 		public SearchExistsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

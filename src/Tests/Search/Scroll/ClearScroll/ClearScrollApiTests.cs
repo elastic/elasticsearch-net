@@ -13,8 +13,7 @@ using Tests.Framework.MockData;
 namespace Tests.Search.Scroll.ClearScroll
 {
 	[Collection(IntegrationContext.ReadOnly)]
-	public class ClearScrollApiTests 
-		: ApiIntegrationTestBase<IEmptyResponse, IClearScrollRequest, ClearScrollDescriptor, ClearScrollRequest>
+	public class ClearScrollApiTests : ApiIntegrationTestBase<IEmptyResponse, IClearScrollRequest, ClearScrollDescriptor, ClearScrollRequest>
 	{
 		public ClearScrollApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

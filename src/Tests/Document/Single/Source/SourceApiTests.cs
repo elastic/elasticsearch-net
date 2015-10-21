@@ -1,16 +1,13 @@
 ﻿using System;
-using Nest;
+using System.Collections.Generic;
+using System.Linq;
+using FluentAssertions;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using Xunit;
-using System.Collections.Generic;
-using Elasticsearch.Net;
-using System.Threading.Tasks;
-using System.Linq;
-using FluentAssertions;
 
-namespace Tests.Document.Single
+namespace Tests.Document.Single.Source
 {
 	[Collection(IntegrationContext.ReadOnly)]
 	public class SourceIntegrationTests : SimpleIntegration

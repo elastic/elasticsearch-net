@@ -6,8 +6,8 @@ namespace Nest
 	public interface IIndicesStatsResponse : IResponse
 	{
 		ShardsMetaData Shards { get; }
-		Stats Stats { get; set; }
-		Dictionary<string, Stats> Indices { get; set; }
+		IndicesStats Stats { get; set; }
+		Dictionary<string, IndicesStats> Indices { get; set; }
 	}
 
 	[JsonObject]
@@ -18,11 +18,11 @@ namespace Nest
 		public ShardsMetaData Shards { get; internal set; }
 
 		[JsonProperty(PropertyName = "_all")]
-		public Stats Stats { get; set; }
+		public IndicesStats Stats { get; set; }
 
 		[JsonProperty(PropertyName = "indices")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
-		public Dictionary<string, Stats> Indices { get; set; }
+		public Dictionary<string, IndicesStats> Indices { get; set; }
 
 	}
 }

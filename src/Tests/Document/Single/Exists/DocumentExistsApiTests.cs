@@ -9,7 +9,7 @@ using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using Xunit;
 
-namespace Tests.Indices.AliasManagement.Exists
+namespace Tests.Document.Single.Exists
 {
 	[Collection(IntegrationContext.Indexing)]
 	public class DocumentExistsApiTests : ApiIntegrationTestBase<IExistsResponse, IDocumentExistsRequest, DocumentExistsDescriptor<Project>, DocumentExistsRequest<Project>>

@@ -13,8 +13,7 @@ using Tests.Framework.MockData;
 namespace Tests.Search.SearchTemplate.GetSearchTemplate
 {
 	[Collection(IntegrationContext.ReadOnly)]
-	public class GetSearchTemplateApiTests 
-		: ApiTestBase<IGetSearchTemplateResponse, IGetSearchTemplateRequest, GetSearchTemplateDescriptor, GetSearchTemplateRequest>
+	public class GetSearchTemplateApiTests : ApiTestBase<IGetSearchTemplateResponse, IGetSearchTemplateRequest, GetSearchTemplateDescriptor, GetSearchTemplateRequest>
 	{
 		public GetSearchTemplateApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

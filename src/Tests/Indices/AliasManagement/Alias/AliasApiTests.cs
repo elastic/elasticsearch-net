@@ -6,11 +6,9 @@ using Elasticsearch.Net;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.MockData;
 using Xunit;
-using static Nest.Static;
 
-namespace Tests.Document.Multiple.Alias
+namespace Tests.Indices.AliasManagement.Alias
 {
 	[Collection(IntegrationContext.Indexing)]
 	public class AliasApiTests : ApiIntegrationTestBase<IIndicesOperationResponse, IBulkAliasRequest, BulkAliasDescriptor, BulkAliasRequest>
@@ -49,7 +47,7 @@ namespace Tests.Document.Multiple.Alias
 			Actions = new List<IAliasAction>
 			{
 				new AliasAddAction { Add = new AliasAddOperation {Alias = "alias", Index = CallIsolatedValue, IndexRouting = "x", SearchRouting = "y"} },
-				new AliasRemoveAction {Remove = new AliasRemoveOperation {Alias = "alias", Index = Index(CallIsolatedValue) }},
+				new AliasRemoveAction {Remove = new AliasRemoveOperation {Alias = "alias", Index = Static.Index(CallIsolatedValue) }},
 			}
 		};
 

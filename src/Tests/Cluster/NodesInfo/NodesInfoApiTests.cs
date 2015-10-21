@@ -35,6 +35,79 @@ namespace Tests.Cluster.NodesInfo
 			node.Key.Should().NotBeNullOrWhiteSpace();
 		});
 
+		[I] public async Task NodeResponse() => await this.AssertOnAllResponses(r =>
+		{
+			var node = r.Nodes.First().Value;
+			node.Name.Should().NotBeNullOrWhiteSpace();
+			node.TransportAddress.Should().NotBeNullOrWhiteSpace();
+			node.Hostname.Should().NotBeNullOrWhiteSpace();
+			node.Ip.Should().NotBeNullOrWhiteSpace();
+			node.Version.Should().NotBeNullOrWhiteSpace();
+			node.Build.Should().NotBeNullOrWhiteSpace();
+			node.HttpAddress.Should().NotBeNullOrWhiteSpace();
+		});
+
+		[I] public async Task NodeOsResponse() => await this.AssertOnAllResponses(r =>
+		{
+			var os = r.Nodes.First().Value.OS;
+			os.Should().NotBeNull();
+			os.RefreshInterval.Should().Be(1000);
+			os.AvailableProcessors.Should().BeGreaterThan(0);
+			os.Name.Should().NotBeNullOrWhiteSpace();
+			os.Architecture.Should().NotBeNullOrWhiteSpace();
+			os.Version.Should().NotBeNullOrWhiteSpace();
+		});
+
+		[I] public async Task NodeJVMResponse() => await this.AssertOnAllResponses(r =>
+		{
+			var jvm = r.Nodes.First().Value.JVM;
+			jvm.Should().NotBeNull();
+			jvm.PID.Should().BeGreaterThan(0);
+			jvm.StartTime.Should().BeGreaterThan(0);
+			jvm.Version.Should().NotBeNullOrWhiteSpace();
+			jvm.VMName.Should().NotBeNullOrWhiteSpace();
+			jvm.VMVendor.Should().NotBeNullOrWhiteSpace();
+			jvm.VMVersion.Should().NotBeNullOrWhiteSpace();
+			jvm.GCCollectors.Should().NotBeEmpty();
+			jvm.MemoryPools.Should().NotBeEmpty();
+			jvm.Memory.Should().NotBeNull();
+			jvm.Memory.DirectMaxInBytes.Should().BeGreaterThan(0);
+			jvm.Memory.NonHeapMaxInBytes.Should().BeGreaterOrEqualTo(0);
+			jvm.Memory.NonHeapInitInBytes.Should().BeGreaterThan(0);
+			jvm.Memory.HeapMaxInBytes.Should().BeGreaterThan(0);
+			jvm.Memory.HeapInitInBytes.Should().BeGreaterThan(0);
+		});
+
+		[I] public async Task NodeThreadPoolResponse() => await this.AssertOnAllResponses(r =>
+		{
+			var pools = r.Nodes.First().Value.ThreadPool;
+			pools.Should().NotBeEmpty().And.ContainKey("fetch_shard_store");
+
+			var pool = pools["fetch_shard_store"];
+			pool.KeepAlive.Should().NotBeNullOrWhiteSpace();
+			pool.Type.Should().Be("scaling");
+			pool.Min.Should().BeGreaterThan(0);
+			pool.Max.Should().BeGreaterThan(0);
+			pool.QueueSize.Should().BeGreaterOrEqualTo(-1);
+		});
+
+		[I] public async Task NodeTransportResponse() => await this.AssertOnAllResponses(r =>
+		{
+			var transport = r.Nodes.First().Value.Transport;
+			transport.Should().NotBeNull();
+
+			transport.BoundAddress.Should().NotBeEmpty();
+			transport.PublishAddress.Should().NotBeNullOrWhiteSpace();
+		});
+
+		[I] public async Task NodeHttpResponse() => await this.AssertOnAllResponses(r =>
+		{
+			var http = r.Nodes.First().Value.HTTP;
+			http.Should().NotBeNull();
+
+			http.BoundAddress.Should().NotBeEmpty();
+			http.PublishAddress.Should().NotBeNullOrWhiteSpace();
+		});
 	}
 
 }

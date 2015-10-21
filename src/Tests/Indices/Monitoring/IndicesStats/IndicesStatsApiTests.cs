@@ -8,7 +8,7 @@ using Tests.Framework;
 using Tests.Framework.Integration;
 using Xunit;
 
-namespace Tests.Indices.Monitoring.IndicesRecovery
+namespace Tests.Indices.Monitoring.IndicesStats
 {
 	[Collection(IntegrationContext.ReadOnly)]
 	public class IndicesStatsApiTests : ApiIntegrationTestBase<IIndicesStatsResponse, IIndicesStatsRequest, IndicesStatsDescriptor, IndicesStatsRequest>
