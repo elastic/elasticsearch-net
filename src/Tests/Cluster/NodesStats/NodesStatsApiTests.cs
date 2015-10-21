@@ -78,7 +78,13 @@ namespace Tests.Cluster.NodesStats
 			i.Segments.NormsMemoryInBytes.Should().BeGreaterThan(0);
 			i.Segments.StoredFieldsMemoryInBytes.Should().BeGreaterThan(0);
 			i.Segments.TermsMemoryInBytes.Should().BeGreaterThan(0);
-			i.Segments.VersionMapMemoryInBytes.Should().BeGreaterThan(0);
+
+			i.Store.Should().NotBeNull();
+			i.Store.SizeInBytes.Should().BeGreaterThan(0);
+
+			i.Suggest.Should().NotBeNull();
+			i.Translog.Should().NotBeNull();
+			i.Warmer.Should().NotBeNull();
 		});
 
 		[I] public async Task NodeOsResponse() => await this.AssertOnAllResponses(r =>

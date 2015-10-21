@@ -38,7 +38,7 @@ namespace Nest
 		[JsonProperty(PropertyName = "query_cache")]
 		public QueryCacheStats QueryCache { get; set; }
 
-		[JsonProperty(PropertyName = "field_data")]
+		[JsonProperty(PropertyName = "fielddata")]
 		public FielddataStats Fielddata { get; set; }
 
 		[JsonProperty(PropertyName = "percolate")]
