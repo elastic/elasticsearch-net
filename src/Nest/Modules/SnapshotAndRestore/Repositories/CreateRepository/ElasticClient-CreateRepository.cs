@@ -37,7 +37,7 @@ namespace Nest
 		public IAcknowledgedResponse CreateRepository(ICreateRepositoryRequest request) => 
 			this.Dispatcher.Dispatch<ICreateRepositoryRequest, CreateRepositoryRequestParameters, AcknowledgedResponse>(
 				request,
-				(p, d) => this.LowLevelDispatch.SnapshotCreateRepositoryDispatch<AcknowledgedResponse>(p, d.Repository)
+				this.LowLevelDispatch.SnapshotCreateRepositoryDispatch<AcknowledgedResponse>
 			);
 
 		/// <inheritdoc/>
@@ -48,7 +48,7 @@ namespace Nest
 		public Task<IAcknowledgedResponse> CreateRepositoryAsync(ICreateRepositoryRequest request) => 
 			this.Dispatcher.DispatchAsync<ICreateRepositoryRequest, CreateRepositoryRequestParameters, AcknowledgedResponse, IAcknowledgedResponse>(
 				request,
-				(p, d) => this.LowLevelDispatch.SnapshotCreateRepositoryDispatchAsync<AcknowledgedResponse>(p, d.Repository)
+				this.LowLevelDispatch.SnapshotCreateRepositoryDispatchAsync<AcknowledgedResponse>
 			);
 	}
 }

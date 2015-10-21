@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Nest
 {
-	public class HfdsRepository : IRepository
+	public class HdfsRepository : IRepository
 	{
 		string IRepository.Type { get { return "hdfs"; } }
 		public IDictionary<string, object> Settings { get; set; }

@@ -242,6 +242,7 @@
     <Compile Include="Modules\Indices\IndicesModuleSettings.cs" />
     <Compile Include="Modules\Indices\Recovery\IndicesRecoverySettings.cs" />
     <Compile Include="Modules\Indices\TtlInterval\TtlIntervalSettings.cs" />
+    <Compile Include="Modules\SnapshotAndRestore\Repositories\CreateRepository\CreateRepositoryJsonConverter.cs" />
     <Compile Include="QueryDsl\Compound\Bool\BoolQuery.cs" />
     <Compile Include="QueryDsl\Compound\Bool\BoolQueryExtensions.cs" />
     <Compile Include="QueryDsl\Compound\Indices\NoMatchQueryJsonConverter.cs" />

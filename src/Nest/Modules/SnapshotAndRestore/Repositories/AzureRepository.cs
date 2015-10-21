@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Nest
 {
 	public class AzureRepository : IRepository
 	{
 		string IRepository.Type { get { return "azure"; } }
-		public IDictionary<string, object> Settings { get; set; }
+		public IDictionary<string, object> Settings { get; set; } = new Dictionary<string, object>();
 	}
 
 	public class AzureRepositoryDescriptor : IRepository

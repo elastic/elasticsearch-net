@@ -9,7 +9,7 @@ namespace Nest
 	public partial interface IRestoreRequest 
 	{
 		[JsonProperty("indices")]
-		IEnumerable<IndexName> Indices { get; set; }
+		Indices Indices { get; set; }
 		[JsonProperty("ignore_unavailable")]
 		bool? IgnoreUnavailable { get; set; }
 		[JsonProperty("include_global_state")]
@@ -26,7 +26,7 @@ namespace Nest
 
 	public partial class RestoreRequest 
 	{
-		public IEnumerable<IndexName> Indices { get; set; }
+		public Indices Indices { get; set; }
 		
 		public bool? IgnoreUnavailable { get; set; }
 		
@@ -42,7 +42,7 @@ namespace Nest
 	[DescriptorFor("SnapshotRestore")]
 	public partial class RestoreDescriptor 
 	{
-		IEnumerable<IndexName> IRestoreRequest.Indices { get; set; }
+		Indices IRestoreRequest.Indices { get; set; }
 		bool? IRestoreRequest.IgnoreUnavailable { get; set; }
 		bool? IRestoreRequest.IncludeGlobalState { get; set; }
 		string IRestoreRequest.RenamePattern { get; set; }
@@ -50,19 +50,11 @@ namespace Nest
 		IUpdateIndexSettingsRequest IRestoreRequest.IndexSettings { get; set; }
 		List<string> IRestoreRequest.IgnoreIndexSettings { get; set; }
 
-		public RestoreDescriptor Index(string index)
-		{
-			return this.Indices(index);
-		}
-	
-		public RestoreDescriptor Index<T>() where T : class
-		{
-			return this.Indices(typeof(T));
-		}
+		public RestoreDescriptor Index(IndexName index) => this.Indices(index);
 
-		public RestoreDescriptor Indices(params string[] indices) => Assign(a => a.Indices = indices.Select(s => (IndexName) s));
+		public RestoreDescriptor Index<T>() where T : class => this.Indices(typeof(T));
 
-		public RestoreDescriptor Indices(params Type[] indicesTypes) => Assign(a => a.Indices = indicesTypes.Select(s => (IndexName) s));
+		public RestoreDescriptor Indices(Indices indices) => Assign(a => a.Indices = indices);
 
 		public RestoreDescriptor IgnoreUnavailable(bool ignoreUnavailable = true) => Assign(a => a.IgnoreUnavailable = ignoreUnavailable);
 
