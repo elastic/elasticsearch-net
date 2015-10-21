@@ -59,7 +59,7 @@ namespace Nest
 				return activator(args);
 			var generic = GetActivatorMethodInfo.MakeGenericMethod(t);
 
-			var constructors = from c in t.GetConstructors()
+			var constructors = from c in t.GetConstructors(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
 							   let p = c.GetParameters()
 							   let k = string.Join(",", p.Select(a => a.ParameterType.Name))
 							   where p.Count() == argLength //&& k == argKey
@@ -67,7 +67,7 @@ namespace Nest
 			var ctor = constructors.FirstOrDefault();
 			if (ctor == null)
 				throw new Exception("Cannot create an instance of " + t.FullName
-				                    + "because it has no constructor taking " + argLength + " arguments");
+				                    + " because it has no constructor taking " + argLength + " arguments");
 			activator = (ObjectActivator<object>)generic.Invoke(null, new[] { ctor });
 			_cachedActivators.TryAdd(key, activator);
 			return activator(args);

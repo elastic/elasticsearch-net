@@ -1,13 +1,15 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using Newtonsoft.Json;
+using System.Reflection;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Nest
 {
 	internal class ReadAsTypeJsonConverter<T> : JsonConverter
-		where T : class, new()
+		where T : class
 	{
 		public override bool CanRead => true;
 		public override bool CanWrite => false;
@@ -17,12 +19,12 @@ namespace Nest
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
 		}
+
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
-			var t = new T();
+			var t = (T)typeof(T).CreateInstance();
 			serializer.Populate(reader, t);
 			return t;
 		}
 	}
-	
 }
