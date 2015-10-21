@@ -128,8 +128,8 @@ namespace Tests.Framework
 					this.CallIsolatedValue = UniqueValues[kv.Key];
 					assert(response);
 				}
-#pragma warning disable 7095
-				catch (Exception ex) when (true)
+#pragma warning disable 7095 //enable this if you expect a single overload to act up
+				catch (Exception ex) when (false)
 #pragma warning restore 7095
 				{
 					throw new Exception($"asserting over the response from: {kv.Key} failed: {ex.Message}", ex);

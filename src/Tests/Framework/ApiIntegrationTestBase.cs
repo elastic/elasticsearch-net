@@ -28,5 +28,20 @@ namespace Tests.Framework
 
 		[I] protected async Task ReturnsExpectedIsValid() =>
 			await this.AssertOnAllResponses(r=>r.IsValid.Should().Be(this.ExpectIsValid));
+
+		protected override Task AssertOnAllResponses(Action<TResponse> assert)
+		{
+			if (!this.ExpectIsValid) return base.AssertOnAllResponses(assert);
+
+			return base.AssertOnAllResponses((r) =>
+			{
+				if (!r.IsValid && r.CallDetails.OriginalException != null)
+				{
+					throw r.CallDetails.OriginalException;
+				}
+
+				assert(r);
+			});
+		}
 	}
 }
