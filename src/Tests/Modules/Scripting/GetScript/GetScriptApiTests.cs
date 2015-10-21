@@ -5,11 +5,9 @@ using Elasticsearch.Net;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.MockData;
-using static Nest.Static;
 using Xunit;
 
-namespace Tests.Indices.Scripts.GetScript
+namespace Tests.Modules.Scripting.GetScript
 {
 	[Collection(IntegrationContext.ReadOnly)]
 	public class GetScriptApiTests : ApiTestBase<IGetScriptResponse, IGetScriptRequest, GetScriptDescriptor, GetScriptRequest>

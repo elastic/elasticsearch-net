@@ -13,8 +13,7 @@ using Tests.Framework.MockData;
 namespace Tests.Search.SearchShards
 {
 	[Collection(IntegrationContext.ReadOnly)]
-	public class SearchShardsApiTests 
-		: ApiIntegrationTestBase<ISearchShardsResponse, ISearchShardsRequest, SearchShardsDescriptor<Project>, SearchShardsRequest<Project>>
+	public class SearchShardsApiTests : ApiIntegrationTestBase<ISearchShardsResponse, ISearchShardsRequest, SearchShardsDescriptor<Project>, SearchShardsRequest<Project>>
 	{
 		public SearchShardsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

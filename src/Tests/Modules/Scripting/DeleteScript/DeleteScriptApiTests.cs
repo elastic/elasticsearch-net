@@ -5,11 +5,9 @@ using Elasticsearch.Net;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.MockData;
-using static Nest.Static;
 using Xunit;
 
-namespace Tests.Indices.Scripts.DeleteScript
+namespace Tests.Modules.Scripting.DeleteScript
 {
 	[Collection(IntegrationContext.ReadOnly)]
 	public class DeleteScriptApiTests : ApiTestBase<IAcknowledgedResponse, IDeleteScriptRequest, DeleteScriptDescriptor, DeleteScriptRequest>

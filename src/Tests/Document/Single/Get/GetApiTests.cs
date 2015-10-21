@@ -9,7 +9,7 @@ using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using Xunit;
 
-namespace Tests.Indices.AliasManagement.Get
+namespace Tests.Document.Single.Get
 {
 	[Collection(IntegrationContext.ReadOnly)]
 	public class GetApiTests : ApiIntegrationTestBase<IGetResponse<Project>, IGetRequest, GetDescriptor<Project>, GetRequest<Project>>

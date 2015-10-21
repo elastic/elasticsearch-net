@@ -5,11 +5,9 @@ using Elasticsearch.Net;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
-using Tests.Framework.MockData;
 using Xunit;
-using static Nest.Static;
 
-namespace Tests.Modules.SnapshotStatusAndRestore.SnapshotStatus.SnapshotStatus
+namespace Tests.Modules.SnapshotAndRestore.Snapshot.SnapshotStatus
 {
 	[Collection(IntegrationContext.ReadOnly)]
 	public class SnapshotStatusApiTests : ApiTestBase<ISnapshotStatusResponse, ISnapshotStatusRequest, SnapshotStatusDescriptor, SnapshotStatusRequest>

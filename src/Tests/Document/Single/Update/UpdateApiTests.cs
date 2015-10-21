@@ -8,9 +8,8 @@ using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using Xunit;
-using static Nest.Static;
 
-namespace Tests.Indices.AliasManagement.Update
+namespace Tests.Document.Single.Update
 {
 	[Collection(IntegrationContext.Indexing)]
 	public class UpdateApiTests : ApiIntegrationTestBase<IUpdateResponse, IUpdateRequest<Project, Project>, UpdateDescriptor<Project, Project>, UpdateRequest<Project, Project>>

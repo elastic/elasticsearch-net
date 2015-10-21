@@ -13,8 +13,7 @@ using Tests.Framework.MockData;
 namespace Tests.Search.Scroll.Scroll
 {
 	[Collection(IntegrationContext.ReadOnly)]
-	public class ScrollApiTests 
-		: ApiIntegrationTestBase<ISearchResponse<Project>, IScrollRequest, ScrollDescriptor<Project>, ScrollRequest>
+	public class ScrollApiTests : ApiIntegrationTestBase<ISearchResponse<Project>, IScrollRequest, ScrollDescriptor<Project>, ScrollRequest>
 	{
 		public ScrollApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

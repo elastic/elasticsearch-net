@@ -10,7 +10,7 @@ using Tests.Framework.MockData;
 using Xunit;
 using static Nest.Static;
 
-namespace Tests.Indices.AliasManagement.TermVectors
+namespace Tests.Document.Single.TermVectors
 {
 	[Collection(IntegrationContext.Indexing)]
 	public class TermVectorsApiTests : ApiIntegrationTestBase<ITermVectorsResponse, ITermVectorsRequest<Project>, TermVectorsDescriptor<Project>, TermVectorsRequest<Project>>
