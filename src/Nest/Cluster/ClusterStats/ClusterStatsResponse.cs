@@ -10,7 +10,7 @@ namespace Nest
 	{
 		string ClusterName { get; set; }
 		string Status { get; set; }
-		IndicesStats Indices { get; set; }
+		ClusterIndicesStats Indices { get; set; }
 		ClusterNodesStats Nodes { get; set; }
 	}
 
@@ -23,7 +23,7 @@ namespace Nest
 		public string Status { get; set; }
 
 		[JsonProperty("indices")]
-		public IndicesStats Indices { get; set; }
+		public ClusterIndicesStats Indices { get; set; }
 
 		[JsonProperty("nodes")]
 		public ClusterNodesStats Nodes { get; set; }

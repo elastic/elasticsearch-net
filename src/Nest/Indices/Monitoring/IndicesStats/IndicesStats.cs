@@ -6,11 +6,11 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject]
-	public class Stats
+	public class IndicesStats
 	{
 		[JsonProperty(PropertyName = "primaries")]
-		public StatsContainer Primaries { get; set; }
+		public IndexStats Primaries { get; set; }
 		[JsonProperty(PropertyName = "total")]
-		public StatsContainer Total { get; set; }
+		public IndexStats Total { get; set; }
 	}
 }

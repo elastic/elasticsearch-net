@@ -20,25 +20,31 @@ namespace Nest
 		[JsonProperty("host")]
 		public string Host { get; internal set; } 
 
+		[JsonProperty("ip")]
+		public IEnumerable<string> Ip { get; internal set; } 
+
 		[JsonProperty("indices")]
-		public NodeStatsIndexes Indices { get; internal set; }
+		public IndexStats Indices { get; internal set; }
 
 		[JsonProperty("os")]
-		public OSStats OS { get; internal set; }
+		public OperatingSystemStats OperatingSystem { get; internal set; }
 
 		[JsonProperty("process")]
 		public ProcessStats Process { get; internal set; }
 
+		[JsonProperty("script")]
+		public ScriptStats Script { get; internal set; }
+
 		[JsonProperty("jvm")]
-		public JVM JVM { get; internal set; }
+		public NodeJvmStats Jvm { get; internal set; }
 
 		[JsonProperty("thread_pool")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
 		public Dictionary<string, ThreadCountStats> ThreadPool { get; internal set; }
 
-
-		[JsonProperty("network")]
-		public NetworkStats Network { get; internal set; }
+		[JsonProperty("breakers")]
+		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
+		public Dictionary<string, BreakerStats> Breakers { get; internal set; }
 
 		[JsonProperty("fs")]
 		public FileSystemStats FileSystem { get; internal set; }
@@ -47,122 +53,77 @@ namespace Nest
 		public TransportStats Transport { get; internal set; }
 
 		[JsonProperty("http")]
-		public HttpStats HTTP { get; internal set; }
+		public HttpStats Http { get; internal set; }
 	}
 
 	[JsonObject]
-	public class NodeStatsIndexes
+	public class ScriptStats
 	{
-		[JsonProperty("store")]
-		public StoreStats Store { get; internal set; }
-		[JsonProperty("docs")]
-		public DocStats Docs { get; internal set; }
-		[JsonProperty("indexing")]
-		public IndexingStats Indexing { get; internal set; }
-		[JsonProperty("get")]
-		public GetStats Get { get; internal set; }
-		[JsonProperty("search")]
-		public SearchStats Search { get; internal set; }
-		[JsonProperty("cache")]
-		public IndexCacheStats Cache { get; internal set; }
-		[JsonProperty("merges")]
-		public MergesStats Merges { get; internal set; }
-		[JsonProperty("refresh")]
-		public RefreshStats Refresh { get; internal set; }
-		[JsonProperty("flush")]
-		public FlushStats Flush { get; internal set; }
-
-		[JsonObject]
-		public class IndexCacheStats
-		{
-			[JsonProperty(PropertyName = "field_evictions")]
-			public long FieldEvictions { get; internal set; }
-			[JsonProperty(PropertyName = "field_size")]
-			public string FieldSize { get; internal set; }
-			[JsonProperty(PropertyName = "field_size_in_bytes")]
-			public long FieldSizeInBytes { get; internal set; }
-			[JsonProperty(PropertyName = "filter_count")]
-			public long FilterCount { get; internal set; }
-			[JsonProperty(PropertyName = "filter_evictions")]
-			public long FilterEvictions { get; internal set; }
-			[JsonProperty(PropertyName = "filter_size")]
-			public string FilterSize { get; internal set; }
-			[JsonProperty(PropertyName = "filter_size_in_bytes")]
-			public long FilterSizeInBytes { get; internal set; }
-			[JsonProperty(PropertyName = "bloom_size")]
-			public string BloomSize { get; internal set; }
-			[JsonProperty(PropertyName = "bloom_size_in_bytes")]
-			public long BloomSizeInBytes { get; internal set; }
-			[JsonProperty(PropertyName = "id_cache_size")]
-			public string IDCacheSize { get; internal set; }
-			[JsonProperty(PropertyName = "id_cache_size_in_bytes")]
-			public long IDCacheSizeInBytes { get; internal set; }
-		}
+		[JsonProperty("cache_evictions")]
+		public long CacheEvictions { get; internal set; }
+		[JsonProperty("compilations")]
+		public long Compilations { get; internal set; }
 	}
 
 	[JsonObject]
-	public class UptimeStats
+	public class BreakerStats
+	{
+		[JsonProperty("estimated_size")]
+		public string EstimatedSize { get; internal set; }
+		[JsonProperty("estimated_size_in_bytes")]
+		public long EstimatedSizeInBytes { get; internal set; }
+		[JsonProperty("limit_size")]
+		public string LimitSize { get; internal set; }
+		[JsonProperty("limit_size_in_bytes")]
+		public long LimitSizeInBytes { get; internal set; }
+		[JsonProperty("overhead")]
+		public float Overhead { get; internal set; }
+		[JsonProperty("tripped")]
+		public float Tripped { get; internal set; }
+	}
+
+	[JsonObject]
+	public class OperatingSystemStats 
 	{
 		[JsonProperty("timestamp")]
 		public long Timestamp { get; internal set; }
-		[JsonProperty("uptime")]
-		public string Uptime { get; internal set; }
-		[JsonProperty("uptime_in_millis")]
-		public long UptimeInMilliseconds { get; internal set; }
 		[JsonProperty("load_average")]
-		public float[] LoadAverage { get; internal set; }
-	}
+		public float LoadAverage { get; internal set; }
 
-	[JsonObject]
-	public class OSStats : UptimeStats
-	{
-		[JsonProperty("CPU")]
-		public CPUStats CPU { get; internal set; }
 		[JsonProperty("mem")]
-		public MemoryStats Memory { get; internal set; }
+		public ExtendedMemoryStats Memory { get; internal set; }
 		[JsonProperty("swap")]
-		public BaseMemoryStats Swap { get; internal set; }
-
-
-		[JsonObject]
-		public class CPUStats
-		{
-			[JsonProperty("sys")]
-			public int System { get; internal set; }
-			[JsonProperty("user")]
-			public int User { get; internal set; }
-			[JsonProperty("idle")]
-			public int Idle { get; internal set; }
-		}
+		public MemoryStats Swap { get; internal set; }
 
 		[JsonObject]
-		public class BaseMemoryStats
+		public class MemoryStats
 		{
-			[JsonProperty("used")]
-			public string Used { get; internal set; }
-			[JsonProperty("used_in_bytes")]
-			public long UsedInBytes { get; internal set; }
+			[JsonProperty("total")]
+			public string Total { get; internal set; }
+
+			[JsonProperty("total_in_bytes")]
+			public long TotalInBytes { get; internal set; }
+
 			[JsonProperty("free")]
 			public string Free { get; internal set; }
+
 			[JsonProperty("free_in_bytes")]
 			public long FreeInBytes { get; internal set; }
+
+			[JsonProperty("used")]
+			public string Used { get; internal set; }
+
+			[JsonProperty("used_in_bytes")]
+			public long UsedInBytes { get; internal set; }
 		}
 
 		[JsonObject]
-		public class MemoryStats : BaseMemoryStats
+		public class ExtendedMemoryStats : MemoryStats
 		{
 			[JsonProperty("free_percent")]
 			public int FreePercent { get; internal set; }
 			[JsonProperty("used_percent")]
 			public int UsedPercent { get; internal set; }
-			[JsonProperty("actual_free")]
-			public string ActualFree { get; internal set; }
-			[JsonProperty("actual_free_in_bytes")]
-			public long ActualFreeInBytes { get; internal set; }
-			[JsonProperty("actual_used")]
-			public string ActualUsed { get; internal set; }
-			[JsonProperty("actual_used_in_bytes")]
-			public long ActualUsedInBytes { get; internal set; }
 		}
 	}
 
@@ -217,17 +178,38 @@ namespace Nest
 	}
 
 	[JsonObject]
-	public class JVM : UptimeStats
+	public class NodeJvmStats 
 	{
+		[JsonProperty("timestamp")]
+		public long Timestamp { get; internal set; }
+		[JsonProperty("uptime")]
+		public string Uptime { get; internal set; }
+		[JsonProperty("uptime_in_millis")]
+		public long UptimeInMilliseconds { get; internal set; }
 		[JsonProperty("mem")]
 		public MemoryStats Memory { get; internal set; }
 		[JsonProperty("threads")]
 		public ThreadStats Threads { get; internal set; }
 		[JsonProperty("gc")]
-		public GCOverallStats GC { get; internal set; }
+		public GarbageCollectionStats GarbageCollection { get; internal set; }
+
 		[JsonProperty("buffer_pools")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
 		public Dictionary<string, NodeBufferPool> BufferPools { get; internal set; }
+	
+		[JsonProperty("classes")]
+		public JvmClassesStats Classes { get; internal set; }
+
+		[JsonObject]
+		public class JvmClassesStats
+		{
+			[JsonProperty("current_loaded_count")]
+			public long CurrentLoadedCount { get; internal set; }
+			[JsonProperty("total_loaded_count")]
+			public long TotalLoadedCount { get; internal set; }
+			[JsonProperty("total_unloaded_count")]
+			public long TotalUnloadedCount { get; internal set; }
+		}
 
 		[JsonObject]
 		public class MemoryStats
@@ -236,6 +218,8 @@ namespace Nest
 			public string HeapUsed { get; internal set; }
 			[JsonProperty("heap_used_in_bytes")]
 			public long HeapUsedInBytes { get; internal set; }
+			[JsonProperty("heap_used_percent")]
+			public long HeapUsedPercent { get; internal set; }
 			[JsonProperty("heap_committed")]
 			public string HeapCommitted { get; internal set; }
 			[JsonProperty("heap_committed_in_bytes")]
@@ -288,15 +272,15 @@ namespace Nest
 		}
 
 		[JsonObject]
-		public class GCOverallStats : GarbageCollectorStats
+		public class GarbageCollectionStats 
 		{
-			[JsonProperty("Collectors")]
+			[JsonProperty("collectors")]
 			[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
-			public Dictionary<string, GarbageCollectorStats> collectors { get; internal set; }
+			public Dictionary<string, GarbageCollectionGenerationStats> Collectors { get; internal set; }
 		}
 
 		[JsonObject]
-		public class GarbageCollectorStats
+		public class GarbageCollectionGenerationStats
 		{
 			[JsonProperty("collection_count")]
 			public long CollectionCount { get; internal set; }
@@ -340,54 +324,44 @@ namespace Nest
 	}
 
 	[JsonObject]
-	public class NetworkStats
-	{
-		[JsonProperty("tcp")]
-		public TCPStats tcp { get; internal set; }
-
-		[JsonObject]
-		public class TCPStats
-		{
-			[JsonProperty("active_opens")]
-			public long ActiveOpens { get; internal set; }
-			[JsonProperty("passive_opens")]
-			public long PassiceOpens { get; internal set; }
-			[JsonProperty("curr_estab")]
-			public long CurrentEstablished { get; internal set; }
-			[JsonProperty("in_segs")]
-			public long InSegments { get; internal set; }
-			[JsonProperty("out_segs")]
-			public long OutSegments { get; internal set; }
-			[JsonProperty("retrans_segs")]
-			public long RetransmittedSegments { get; internal set; }
-			[JsonProperty("estab_resets")]
-			public long EstablishedResets { get; internal set; }
-			[JsonProperty("attempt_fails")]
-			public long AttemptFails { get; internal set; }
-			[JsonProperty("in_errs")]
-			public long InErrors { get; internal set; }
-			[JsonProperty("out_rsts")]
-			public long OutResets { get; internal set; }
-		}
-	}
-
-	[JsonObject]
 	public class FileSystemStats
 	{
 		[JsonProperty("timestamp")]
 		public long Timestamp { get; internal set; }
+		[JsonProperty("total")]
+		public TotalFileSystemStats Total { get; internal set; }
 		[JsonProperty("data")]
-		public DatumStats[] Data { get; internal set; }
+		public IEnumerable<DataPathStats> Data { get; internal set; }
+
+		public class TotalFileSystemStats
+		{
+			[JsonProperty("available")]
+			public string Available { get; internal set; }
+			[JsonProperty("available_in_bytes")]
+			public long AvailableInBytes { get; internal set; }
+
+			[JsonProperty("free")]
+			public string Free { get; internal set; }
+			[JsonProperty("free_in_bytes")]
+			public long FreeInBytes { get; internal set; }
+
+			[JsonProperty("total")]
+			public string Total { get; internal set; }
+			[JsonProperty("total_in_bytes")]
+			public long TotalInBytes { get; internal set; }
+		}
 
 		[JsonObject]
-		public class DatumStats
+		public class DataPathStats
 		{
 			[JsonProperty("path")]
 			public string Path { get; internal set; }
 			[JsonProperty("mount")]
 			public string Mount { get; internal set; }
-			[JsonProperty("dev")]
-			public string Dev { get; internal set; }
+			[JsonProperty("type")]
+			public string Type { get; internal set; }
+			[JsonProperty("spins")]
+			public bool? Spins { get; internal set; }
 			[JsonProperty("total")]
 			public string Total { get; internal set; }
 			[JsonProperty("total_in_bytes")]

@@ -6,15 +6,17 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject]
-	public class RefreshStats
+	public class SuggestStats
 	{
-	
-		[JsonProperty(PropertyName = "total")]
+		[JsonProperty("current")]
+		public long Current { get; set; }
+
+		[JsonProperty("total")]
 		public long Total { get; set; }
 
-		[JsonProperty(PropertyName = "total_time")]
+		[JsonProperty("total_time")]
 		public string TotalTime { get; set; }
-		[JsonProperty(PropertyName = "total_time_in_millis")]
+		[JsonProperty("total_time_in_millis")]
 		public long TotalTimeInMilliseconds { get; set; }
 
 	}

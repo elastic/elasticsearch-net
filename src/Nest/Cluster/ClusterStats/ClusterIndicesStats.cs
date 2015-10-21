@@ -8,13 +8,13 @@ using System.Text;
 namespace Nest
 {
 	[JsonObject]
-	public class IndicesStats
+	public class ClusterIndicesStats
 	{
 		[JsonProperty("count")]
 		public long Count { get; internal set; }
 
 		[JsonProperty("shards")]
-		public IndicesShardsStats Shards { get; internal set; }
+		public ClusterIndicesShardsStats Shards { get; internal set; }
 
 		[JsonProperty("docs")]
 		public DocStats Docs { get; internal set; }
@@ -23,10 +23,7 @@ namespace Nest
 		public StoreStats Store { get; internal set; }
 
 		[JsonProperty("fielddata")]
-		public FieldDataStats FieldData { get; internal set; }
-
-		[JsonProperty("filter_cache")]
-		public FilterCacheStats FilterCache { get; internal set; }
+		public FielddataStats Fielddata { get; internal set; }
 
 		[JsonProperty("id_cache")]
 		public IdCacheStats IdCache { get; internal set; }
@@ -42,7 +39,7 @@ namespace Nest
 	}
 
 	[JsonObject]
-	public class IndicesShardsStats
+	public class ClusterIndicesShardsStats
 	{
 		[JsonProperty("total")]
 		public double Total { get; internal set; }
@@ -54,23 +51,24 @@ namespace Nest
 		public double Replication { get; internal set; }
 
 		[JsonProperty("index")]
-		public IndicesShardsIndexStats Index { get; internal set; }
+		public ClusterIndicesShardsIndexStats Index { get; internal set; }
 	}
 
 	[JsonObject]
-	public class IndicesShardsIndexStats
+	public class ClusterIndicesShardsIndexStats
 	{
 		[JsonProperty("shards")]
-		public IndicesShardsIndexStatsMetrics Shards { get; internal set; }
+		public ClusterShardMetrics Shards { get; internal set; }
 
 		[JsonProperty("primaries")]
-		public IndicesShardsIndexStatsMetrics Primaries { get; internal set; }
+		public ClusterShardMetrics Primaries { get; internal set; }
 
 		[JsonProperty("replication")]
-		public IndicesShardsIndexStatsMetrics Replication { get; internal set; }
+		public ClusterShardMetrics Replication { get; internal set; }
 	}
 
-	public class IndicesShardsIndexStatsMetrics
+	[JsonObject]
+	public class ClusterShardMetrics
 	{
 		[JsonProperty("min")]
 		public double Min { get; internal set; }

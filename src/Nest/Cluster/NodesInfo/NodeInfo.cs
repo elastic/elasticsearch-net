@@ -14,13 +14,21 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "transport_address")]
 		public string TransportAddress { get; internal set; }
+
 		[JsonProperty(PropertyName = "host")]
 		public string Hostname { get; internal set; }
+
+		[JsonProperty(PropertyName = "ip")]
+		public string Ip { get; internal set; }
+
 		[JsonProperty(PropertyName = "version")]
 		public string Version { get; internal set; }
+
+		[JsonProperty(PropertyName = "build")]
+		public string Build { get; internal set; }
+
 		[JsonProperty(PropertyName = "http_address")]
 		public string HttpAddress { get; internal set; }
-
 
 		[JsonProperty(PropertyName = "settings")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
@@ -48,14 +56,23 @@ namespace Nest
 		[JsonProperty(PropertyName = "http")]
 		public NodeInfoHTTP HTTP { get; internal set; }
 
-    [JsonProperty("plugins")]
-    public List<PluginStats> Plugins { get; internal set; }
+		[JsonProperty("plugins")]
+		public List<PluginStats> Plugins { get; internal set; }
 	}
 
 	[JsonObject]
 	public class NodeInfoOS
 	{
-		[JsonProperty(PropertyName = "refresh_interval")]
+		[JsonProperty(PropertyName = "name")]
+		public string Name { get; internal set; }
+
+		[JsonProperty(PropertyName = "arch")]
+		public string Architecture { get; internal set; }
+
+		[JsonProperty(PropertyName = "version")]
+		public string Version { get; internal set; }
+
+		[JsonProperty(PropertyName = "refresh_interval_in_millis")]
 		public int RefreshInterval { get; internal set; }
 
 		[JsonProperty(PropertyName = "available_processors")]
@@ -63,8 +80,10 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "cpu")]
 		public NodeInfoOSCPU Cpu { get; internal set; }
+
 		[JsonProperty(PropertyName = "mem")]
 		public NodeInfoMemory Mem { get; internal set; }
+
 		[JsonProperty(PropertyName = "swap")]
 		public NodeInfoMemory Swap { get; internal set; }
 	}
@@ -123,7 +142,11 @@ namespace Nest
 		public string VMVersion { get; internal set; }
 		[JsonProperty(PropertyName = "vm_vendor")]
 		public string VMVendor { get; internal set; }
-		[JsonProperty(PropertyName = "start_time")]
+		[JsonProperty(PropertyName = "memory_pools")]
+		public IEnumerable<string> MemoryPools { get; internal set; }
+		[JsonProperty(PropertyName = "gc_collectors")]
+		public IEnumerable<string> GCCollectors { get; internal set; }
+		[JsonProperty(PropertyName = "start_time_in_millis")]
 		public long StartTime { get; internal set; }
 		[JsonProperty(PropertyName = "mem")]
 		public NodeInfoJVMMemory Memory { get; internal set; }
@@ -163,6 +186,8 @@ namespace Nest
 		public int? Min { get; internal set; }
 		[JsonProperty(PropertyName = "max")]
 		public int? Max { get; internal set; }
+		[JsonProperty(PropertyName = "queue_size")]
+		public int? QueueSize { get; internal set; }
 		[JsonProperty(PropertyName = "keep_alive")]
 		public string KeepAlive { get; internal set; }
 	}
@@ -191,7 +216,7 @@ namespace Nest
 	public class NodeInfoTransport
 	{
 		[JsonProperty(PropertyName = "bound_address")]
-		public string BoundAddress { get; internal set; }
+		public IEnumerable<string> BoundAddress { get; internal set; }
 		[JsonProperty(PropertyName = "publish_address")]
 		public string PublishAddress { get; internal set; }
 	}
@@ -200,7 +225,7 @@ namespace Nest
 	public class NodeInfoHTTP
 	{
 		[JsonProperty(PropertyName = "bound_address")]
-		public string BoundAddress { get; internal set; }
+		public IEnumerable<string> BoundAddress { get; internal set; }
 		[JsonProperty(PropertyName = "publish_address")]
 		public string PublishAddress { get; internal set; }
 		[JsonProperty(PropertyName = "max_content_length")]
@@ -209,5 +234,3 @@ namespace Nest
 		public long MaxContentLengthInBytes { get; internal set; }
 	}
 }
-// 503-528-3500
-// 503-528-3549 // 3570
