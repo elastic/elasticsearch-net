@@ -8,27 +8,26 @@ namespace Nest
 {
 	public class HotThreadInformation
 	{
-		public HotThreadInformation()
-		{
-			this.Threads = new List<string>();
-		}
-
-		public string Node { get; set; }
-		public List<string> Threads { get; set; }
+		public string NodeName { get; set; }
+		public string NodeId { get; set; }
+		public IEnumerable<string> Threads { get; set; } = Enumerable.Empty<string>();
+		public IEnumerable<string> Hosts { get; set; } = Enumerable.Empty<string>();
 	}
 
 	public interface INodesHotThreadsResponse : IResponse
 	{
-		List<HotThreadInformation> HotThreads { get; }
+		IEnumerable<HotThreadInformation> HotThreads { get; }
 	}
 
 	public class NodesHotThreadsResponse : BaseResponse, INodesHotThreadsResponse
 	{
-		public NodesHotThreadsResponse()
+		public NodesHotThreadsResponse() { }
+
+		internal NodesHotThreadsResponse(IEnumerable<HotThreadInformation> threadInfo)
 		{
-			this.HotThreads = new List<HotThreadInformation>();
+			this.HotThreads = threadInfo;
 		}
 
-		public List<HotThreadInformation> HotThreads { get; set; }
+		public IEnumerable<HotThreadInformation> HotThreads { get; } = Enumerable.Empty<HotThreadInformation>();
 	}
 }

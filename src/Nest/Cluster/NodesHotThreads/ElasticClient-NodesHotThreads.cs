@@ -37,7 +37,7 @@ namespace Nest
 			this.NodesHotThreads(selector.InvokeOrDefault(new NodesHotThreadsDescriptor()));
 
 		/// <inheritdoc/>
-		public INodesHotThreadsResponse NodesHotThreads(INodesHotThreadsRequest nodesHotThreadsRequest) => 
+		public INodesHotThreadsResponse NodesHotThreads(INodesHotThreadsRequest nodesHotThreadsRequest) =>
 			this.Dispatcher.Dispatch<INodesHotThreadsRequest, NodesHotThreadsRequestParameters, NodesHotThreadsResponse>(
 				nodesHotThreadsRequest,
 				new NodesHotThreadConverter(DeserializeNodesHotThreadResponse),
@@ -49,12 +49,17 @@ namespace Nest
 			this.NodesHotThreadsAsync(selector.InvokeOrDefault(new NodesHotThreadsDescriptor()));
 
 		/// <inheritdoc/>
-		public Task<INodesHotThreadsResponse> NodesHotThreadsAsync(INodesHotThreadsRequest nodesHotThreadsRequest) => 
+		public Task<INodesHotThreadsResponse> NodesHotThreadsAsync(INodesHotThreadsRequest nodesHotThreadsRequest) =>
 			this.Dispatcher.DispatchAsync<INodesHotThreadsRequest, NodesHotThreadsRequestParameters, NodesHotThreadsResponse, INodesHotThreadsResponse>(
 				nodesHotThreadsRequest,
 				new NodesHotThreadConverter(DeserializeNodesHotThreadResponse),
 				(p, d) => this.LowLevelDispatch.NodesHotThreadsDispatchAsync<NodesHotThreadsResponse>(p)
 			);
+
+
+		//::: {Dragonfly}{lvtIV72sRIWBGik7ulbuaw}{127.0.0.1}{127.0.0.1:9300}
+		private static Regex NodeRegex = new Regex(@"^\s\{(?<name>.+?)\}\{(?<id>.+?)\}(?<hosts>.+)\n");
+
 
 		/// <summary>
 		/// Because the nodes.hot_threads endpoint returns plain text instead of JSON, we have to
@@ -62,37 +67,43 @@ namespace Nest
 		/// </summary>
 		private NodesHotThreadsResponse DeserializeNodesHotThreadResponse(IApiCallDetails response, Stream stream)
 		{
-			var typedResponse = new NodesHotThreadsResponse();
-			var plainTextResponse = Encoding.UTF8.GetString(response.ResponseBodyInBytes);
-
-			// If the response doesn't start with :::, which is the pattern that delimits
-			// each node section in the response, then the response format isn't recognized.
-			// Just return an empty response object. This is especially useful when unit
-			// testing against an in-memory connection where you won't get a real response.
-			if (!plainTextResponse.StartsWith(":::"))
-				return typedResponse;
-
-			var sections = plainTextResponse.Split(new string[] { ":::" }, StringSplitOptions.RemoveEmptyEntries);
-
-			foreach (var section in sections)
+			using (stream)
+			using (var sr = new StreamReader(stream, Encoding.UTF8))
 			{
-				var sectionLines = section.Split(new string[] { "\n   \n" }, StringSplitOptions.None);
+				var typedResponse = new NodesHotThreadsResponse();
+				var plainTextResponse = sr.ReadToEnd();
 
-				if (sectionLines.Length > 0)
-				{
-					var hotThreadInfo = new HotThreadInformation
+				// If the response doesn't start with :::, which is the pattern that delimits
+				// each node section in the response, then the response format isn't recognized.
+				// Just return an empty response object. This is especially useful when unit
+				// testing against an in-memory connection where you won't get a real response.
+				if (!plainTextResponse.StartsWith(":::", StringComparison.Ordinal))
+					return typedResponse;
+
+				var sections = plainTextResponse.Split(new string[] { ":::" }, StringSplitOptions.RemoveEmptyEntries);
+				var info =
+					from section in sections
+					select section.Split(new string[] {"\n   \n"}, StringSplitOptions.None)
+					into sectionLines
+					where sectionLines.Length > 0
+					let nodeLine = sectionLines.FirstOrDefault()
+					where nodeLine != null
+					let matches = NodeRegex.Match(nodeLine)
+					where matches.Success
+					let node = matches.Groups["name"].Value
+					let nodeId = matches.Groups["id"].Value
+					let hosts = matches.Groups["hosts"].Value.Split(new[] {'{', '}'}, StringSplitOptions.RemoveEmptyEntries)
+					let threads = sectionLines.Skip(1).Take(sectionLines.Length - 1).ToList()
+					select new HotThreadInformation
 					{
-						// First line contains the node name between [ ]
-						Node = sectionLines.First().Split('[')[1].TrimEnd(']'),
-						// The rest of the lines are hot threads
-						Threads = sectionLines.Skip(1).Take(sectionLines.Length - 1).ToList()
+						NodeName = node,
+						NodeId = nodeId,
+						Threads = threads,
+						Hosts = hosts
 					};
-
-					typedResponse.HotThreads.Add(hotThreadInfo);
-				}
+				return new NodesHotThreadsResponse(info.ToList());
 			}
 
-			return typedResponse;
 		}
 
 	}

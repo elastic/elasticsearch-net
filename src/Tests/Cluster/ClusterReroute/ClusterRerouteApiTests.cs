@@ -24,8 +24,8 @@ namespace Tests.Cluster.ClusterReroute
 			requestAsync: (client, r) => client.ClusterRerouteAsync(r)
 		);
 
-		protected override bool ExpectIsValid => true;
-		protected override int ExpectStatusCode => 200;
+		protected override bool ExpectIsValid => false;
+		protected override int ExpectStatusCode => 400;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override string UrlPath => "/_cluster/reroute";
 
@@ -88,8 +88,11 @@ namespace Tests.Cluster.ClusterReroute
 		[I] public async Task Response() => await this.AssertOnAllResponses(r =>
 		{
 			//TODO we expect all three to fail and see it on the response
+			//and exception
 		});
 
 	}
 
+
+	//TODO simple integration test against isolated index to test happy flow
 }

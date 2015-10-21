@@ -15,7 +15,7 @@ namespace Tests.Framework
 {
 	public static class TestClient
 	{
-		private static bool _integrationOverride = false;
+		private static bool _integrationOverride = true;
 		private static string _manualOverrideVersion = "2.0.0-rc1";
 
 		private static string ElasticVersionInEnvironment = Environment.GetEnvironmentVariable("NEST_INTEGRATION_VERSION");

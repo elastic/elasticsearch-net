@@ -11,7 +11,7 @@ using Xunit;
 namespace Tests.Cluster.ClusterSettings.ClusterGetSettings
 {
 	[Collection(IntegrationContext.ReadOnly)]
-	public class ClusterGetSettingsApiTests : ApiIntegrationTestBase<IClusterGetSettingsResponse, IClusterGetSettingsRequest, ClusterGetSettingsDescriptor, ClusterGetSettingsRequest>
+	public class ClusterGetSettingsApiTests : ApiTestBase<IClusterGetSettingsResponse, IClusterGetSettingsRequest, ClusterGetSettingsDescriptor, ClusterGetSettingsRequest>
 	{
 		public ClusterGetSettingsApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(
@@ -21,15 +21,8 @@ namespace Tests.Cluster.ClusterSettings.ClusterGetSettings
 			requestAsync: (client, r) => client.ClusterGetSettingsAsync(r)
 		);
 
-		protected override bool ExpectIsValid => true;
-		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override string UrlPath => "/_cluster/settings";
-
-		[I] public async Task Response() => await this.AssertOnAllResponses(r =>
-		{
-		});
-
 	}
 
 }
