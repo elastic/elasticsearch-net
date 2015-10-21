@@ -335,6 +335,7 @@
     <Compile Include="Analysis\Tokenizers\WhitespaceTokenizer.cs" />
     <Compile Include="CommonOptions\Hit\ShardsFailureReason.cs" />
     <Compile Include="Search\CovariantSearch.cs" />
+    <Compile Include="Search\Percolator\MultiPercolate\MultiPercolateJsonConverter.cs" />
     <Compile Include="Search\Percolator\RegisterPercolator\RegisterPercolatorJsonConverter.cs" />
     <Compile Include="Search\SearchTemplate\GetSearchTemplate\GetSearchTemplateResponse.cs" />
     <Compile Include="Search\Search\Hits\InnerHitsMetaData.cs" />

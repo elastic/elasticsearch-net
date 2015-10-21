@@ -16,12 +16,13 @@ namespace Nest
 
 	}
 
-	public partial class PercolateRequest<TDocument> 
+	public partial class PercolateRequest<TDocument>
 		where TDocument : class
 	{
 		public PercolateRequest() : this(typeof(TDocument), typeof(TDocument)) { }
 		public PercolateRequest(Id id) : this(typeof(TDocument), typeof(TDocument), id) { }
 
+		public string MultiPercolateName => "percolate";
 		public IHighlightRequest Highlight { get; set; }
 		public QueryContainer Query { get; set; }
 		public QueryContainer Filter { get; set; }
@@ -58,6 +59,7 @@ namespace Nest
 		IDictionary<FieldName, ISort> IPercolateOperation.Sort { get; set; }
 		IDictionary<string, IAggregationContainer> IPercolateOperation.Aggregations { get; set; }
 
+		string IPercolateOperation.MultiPercolateName => "percolate";
 
 		/// <summary>
 		/// The object to perculate

@@ -298,7 +298,10 @@
     <Compile Include="Search\FieldStats\FieldStatsUrlTests.cs" />
     <Compile Include="Search\MultiSearch\MultiSearchUrlTests.cs" />
     <Compile Include="Search\Percolator\MultiPercolate\MultiPercolateUrlTests.cs" />
+    <Compile Include="Search\Percolator\MultiPercolate\MultiPercolateApiTests.cs" />
     <Compile Include="Search\Percolator\PercolateCount\PercolateCountUrlTests.cs" />
+    <Compile Include="Search\Percolator\PercolateCount\PercolateCountApiTests.cs" />
+    <Compile Include="Search\Percolator\Percolate\PercolateApiTests.cs" />
     <Compile Include="Search\Percolator\Percolate\PercolateUrlTests.cs" />
     <Compile Include="Search\Percolator\RegisterPercolator\RegisterPercolatorUrlTests.cs" />
     <Compile Include="Search\Percolator\RegisterPercolator\RegisterPercolatorApiTests.cs" />
