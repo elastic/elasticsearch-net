@@ -9,13 +9,11 @@ namespace Nest
 	// This does not represent a dedicated API in elasticsearch, its syntactic sugar for indexing percolate documents
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<RegisterPercolatorRequest>))]
+	[JsonConverter(typeof(RegisterPercolatorJsonConverter))]
 	public interface IRegisterPercolatorRequest : IRequest<IndexRequestParameters> 
 	{
-		[JsonConverter(typeof(DictionaryToPropertiesJsonConverter<object>))]
-		IDictionary<string, object> MetaData { get; set; }
+		IDictionary<string, object> Metadata { get; set; }
 
-		[JsonProperty("query")]
 		QueryContainer Query { get; set; }
 	}
 
@@ -23,7 +21,7 @@ namespace Nest
 	{
 		internal RegisterPercolatorRequest() { }
 
-		public IDictionary<string, object> MetaData { get; set; }
+		public IDictionary<string, object> Metadata { get; set; }
 		public QueryContainer Query { get; set; }
 
 		public RegisterPercolatorRequest(IndexName index, Name name) 
@@ -43,18 +41,17 @@ namespace Nest
 
 		QueryContainer IRegisterPercolatorRequest.Query { get; set; }
 
-		IDictionary<string, object> IRegisterPercolatorRequest.MetaData { get; set; }
+		IDictionary<string, object> IRegisterPercolatorRequest.Metadata { get; set; }
 
 		/// <summary>
-		/// Add metadata associated with this percolator query document that can
-		/// later be used to query or filter specific percolated queries
+		/// Add metadata associated with this percolator query document that can later be used to query or filter specific percolated queries
 		/// </summary>
-		public RegisterPercolatorDescriptor<T> AddMetadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
+		public RegisterPercolatorDescriptor<T> Metadata(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> selector)
 		{
 			if (selector == null)
 				return this;
 
-			Self.MetaData = selector(new FluentDictionary<string, object>());
+			Self.Metadata = selector(new FluentDictionary<string, object>());
 			return this;
 		}
 

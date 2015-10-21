@@ -139,7 +139,6 @@
     <Compile Include="CommonAbstractions\ConnectionSettings\ClrTypeMapping.cs" />
     <Compile Include="CommonAbstractions\Infer\FieldName\FieldName.cs" />
     <Compile Include="CommonAbstractions\Response\DictionaryResponse.cs" />
-    <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\DictionaryToPropertiesJsonConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\KeyValueJsonConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\ReadAsTypeJsonConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\ReserializeJsonConverter.cs" />
@@ -336,6 +335,7 @@
     <Compile Include="Analysis\Tokenizers\WhitespaceTokenizer.cs" />
     <Compile Include="CommonOptions\Hit\ShardsFailureReason.cs" />
     <Compile Include="Search\CovariantSearch.cs" />
+    <Compile Include="Search\Percolator\RegisterPercolator\RegisterPercolatorJsonConverter.cs" />
     <Compile Include="Search\SearchTemplate\GetSearchTemplate\GetSearchTemplateResponse.cs" />
     <Compile Include="Search\Search\Hits\InnerHitsMetaData.cs" />
     <Compile Include="Search\Search\Hits\InnerHitsResult.cs" />

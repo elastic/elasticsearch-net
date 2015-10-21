@@ -42,18 +42,24 @@ namespace Tests.Search.Percolator.RegisterPercolator
 				{
 					name = new
 					{
-						query = "foo"
+						query = "nest"
 					}
 				}
-			}
+			},
+			language = "c#",
+			commits = 5000
 		};
 
 		protected override Func<RegisterPercolatorDescriptor<Project>, IRegisterPercolatorRequest> Fluent => r => r
 			.Query(q => q
 				.Match(m => m
 					.OnField(p => p.Name)
-					.Query("foo")
+					.Query("nest")
 				)
+			)
+			.Metadata(md => md
+				.Add("language", "c#")
+				.Add("commits", 5000)
 			);
 
 		protected override RegisterPercolatorRequest Initializer => new RegisterPercolatorRequest(typeof(Project), _name)
@@ -61,8 +67,13 @@ namespace Tests.Search.Percolator.RegisterPercolator
 			Query = new QueryContainer(new MatchQuery
 			{
 				Field = "name",
-				Query = "foo"
-			})
+				Query = "nest"
+			}),
+			Metadata = new Dictionary<string, object>
+			{
+				{ "language", "c#" },
+				{ "commits", 5000 }
+			}
 		};
 	}
 }
