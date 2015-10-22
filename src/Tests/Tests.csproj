@@ -160,6 +160,7 @@
     <Compile Include="Document\Single\Update\UpdateApiTests.cs" />
     <Compile Include="Document\Single\Update\UpdateUrlTests.cs" />
     <Compile Include="Framework\ApiTestBase.cs" />
+    <Compile Include="Framework\Configuration\LocalConfiguration.cs" />
     <Compile Include="Framework\CrudTestBase.cs" />
     <Compile Include="Framework\Integration\Process\ObservableProcess.cs" />
     <Compile Include="Framework\MockResponses\SniffingResponse.cs" />
@@ -390,6 +391,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ClientConcepts\ConnectionPooling\BuildingBlocks\timeoutplot.png" />
+    <None Include="tests.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
