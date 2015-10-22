@@ -4,7 +4,6 @@ namespace Nest
 {
 	public interface IRootNodeInfoResponse : IResponse
 	{
-		int Status { get; }
 		string Name { get; }
 		string Tagline { get;  }
 		ElasticsearchVersionInfo Version { get;  }
@@ -13,9 +12,6 @@ namespace Nest
 	[JsonObject]
 	public class RootNodeInfoResponse : BaseResponse, IRootNodeInfoResponse
 	{
-		[JsonProperty(PropertyName = "status")]
-		public int Status { get; internal set; }
-
 		[JsonProperty(PropertyName = "name")]
 		public string Name { get; internal set; }
 

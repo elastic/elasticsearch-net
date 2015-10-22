@@ -33,7 +33,6 @@ namespace Tests.Cluster.RootNodeInfo
 			r.Version.LuceneVersion.Should().NotBeNullOrWhiteSpace();
 			r.Tagline.Should().NotBeNullOrWhiteSpace();
 			r.Name.Should().NotBeNullOrWhiteSpace();
-			r.Status.Should().BeGreaterOrEqualTo(200);
 		});
 
 	}
