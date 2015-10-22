@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using FluentAssertions;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
@@ -23,32 +24,42 @@ namespace Tests.Document.Multiple.MultiGet
 			requestAsync: (client, r) => client.MultiGetAsync(r)
 		);
 
+		private IEnumerable<long> _ids = Developer.Developers.Select(d => (long)d.Id).Take(10);
+
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => $"/project/project/_mget";
+		protected override string UrlPath => $"/dev/developer/_mget";
 
 		protected override bool SupportsDeserialization => false;
 
-		protected override object ExpectJson { get; } = new 
+		protected override object ExpectJson => new 
 		{
-			docs = Project.Projects.Select(p =>  p.Name).Take(10)
+			ids = this._ids
 		};
 
 		protected override Func<MultiGetDescriptor, IMultiGetRequest> Fluent => d => d
-			.Index<Project>()
-			.Type<Project>()
-			.GetMany<Project>(Project.Projects.Select(p => p.Name).Take(10));
+			.Index<Developer>()
+			.Type<Developer>()
+			.GetMany<Developer>(this._ids);
 			
 
-		protected override MultiGetRequest Initializer => new MultiGetRequest(Index<Project>(), Type<Project>())
+		protected override MultiGetRequest Initializer => new MultiGetRequest(Index<Developer>(), Type<Developer>())
 		{
-			Documents = Project.Projects.Select(p => p.Name).Take(10)
-				.Select(n=>new MultiGetOperation<Project>(n))
+			Documents = this._ids
+				.Select(n=>new MultiGetOperation<Developer>(n))
 		};
 
 		[I] public async Task Response() => await this.AssertOnAllResponses(r =>
 		{
+			r.Documents.Should().NotBeEmpty().And.HaveCount(10);
+			foreach (var hit in r.Documents)
+			{
+				hit.Index.Should().NotBeNullOrWhiteSpace();
+				hit.Type.Should().NotBeNullOrWhiteSpace();
+				hit.Id.Should().NotBeNullOrWhiteSpace();
+				hit.Found.Should().BeTrue();
+			}
 		});
 	}
 
@@ -63,32 +74,40 @@ namespace Tests.Document.Multiple.MultiGet
 			requestAsync: (client, r) => client.MultiGetAsync(r)
 		);
 
+		private IEnumerable<long> _ids = Developer.Developers.Select(d => (long)d.Id).Take(10);
+
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => $"/project/_mget";
+		protected override string UrlPath => $"/devs/_mget";
 
 		protected override bool SupportsDeserialization => false;
 
 		protected override object ExpectJson { get; } = new 
 		{
-			docs = Project.Projects.Select(p => new { _type = "project", _id = p.Name, _routing = p.Name, _source = false }).Take(10)
+			docs = Developer.Developers.Select(p => new { _type = "project", _id = p.Id, _routing = p.Id, _source = false }).Take(10)
 		};
 
 		protected override Func<MultiGetDescriptor, IMultiGetRequest> Fluent => d => d
-			.Index<Project>()
-			.GetMany<Project>(Project.Projects.Select(p => p.Name).Take(10), (g, i) => g.Routing(i).Source(false));
-			
+			.Index<Developer>()
+			.GetMany<Developer>(this._ids, (g, i) => g.Routing(i.ToString()).Source(false));
 
-		protected override MultiGetRequest Initializer => new MultiGetRequest(Index<Project>())
+		protected override MultiGetRequest Initializer => new MultiGetRequest(Index<Developer>())
 		{
-			Documents = Project.Projects.Select(p => p.Name).Take(10)
-				.Select(n=>new MultiGetOperation<Project>(n) { Routing = n, Source = false })
-				
+			Documents = this._ids
+				.Select(n=>new MultiGetOperation<Developer>(n) { Routing = n.ToString(), Source = false })
 		};
 
 		[I] public async Task Response() => await this.AssertOnAllResponses(r =>
 		{
+			r.Documents.Should().NotBeEmpty().And.HaveCount(10);
+			foreach (var hit in r.Documents)
+			{
+				hit.Index.Should().NotBeNullOrWhiteSpace();
+				hit.Type.Should().NotBeNullOrWhiteSpace();
+				hit.Id.Should().NotBeNullOrWhiteSpace();
+				hit.Found.Should().BeTrue();
+			}
 		});
 	}
 }

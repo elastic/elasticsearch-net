@@ -40,6 +40,7 @@ namespace Tests.Framework
 					.TypeName("commits")
 				)
 				.InferMappingFor<Developer>(map => map
+					.IndexName("devs")
 					.Ignore(p => p.PrivateValue)
 					.Rename(p => p.OnlineHandle, "nickname")
 				)

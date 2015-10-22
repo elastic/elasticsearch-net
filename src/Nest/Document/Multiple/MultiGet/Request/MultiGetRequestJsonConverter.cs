@@ -21,19 +21,22 @@ namespace Nest
 				writer.WriteEndObject();
 				return;
 			}
-			writer.WritePropertyName("docs");
-			writer.WriteStartArray();
-			foreach (var id in request.Documents)
+			var docs = request.Documents.ToList();
+			var flatten = docs.All(p =>
 			{
-				if (request.Index != null && request.Type != null)
+				if (request.Index != null) p.Index = null;
+				if (request.Type != null) p.Type = null;
+				return p.CanBeFlattened;
+			});
+
+			writer.WritePropertyName(flatten ? "ids" : "docs");
+			writer.WriteStartArray();
+			foreach (var id in docs)
+			{
+				if (flatten)
 					serializer.Serialize(writer, id.Id);
 				else
-				{
-					if (request.Index != null) id.Index = null;
-
 					serializer.Serialize(writer, id);
-					//writer.WriteValue(id);
-				}
 			}
 			writer.WriteEndArray();
 			writer.WriteEndObject();
