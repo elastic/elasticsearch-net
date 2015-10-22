@@ -47,9 +47,9 @@ namespace Tests.Cluster.NodesInfo
 			node.HttpAddress.Should().NotBeNullOrWhiteSpace();
 		});
 
-		[I] public async Task NodeOsResponse() => await this.AssertOnAllResponses(r =>
+		[I] public async Task NodeOperatingSystemResponse() => await this.AssertOnAllResponses(r =>
 		{
-			var os = r.Nodes.First().Value.OS;
+			var os = r.Nodes.First().Value.OperatingSystem;
 			os.Should().NotBeNull();
 			os.RefreshInterval.Should().Be(1000);
 			os.AvailableProcessors.Should().BeGreaterThan(0);
@@ -58,9 +58,28 @@ namespace Tests.Cluster.NodesInfo
 			os.Version.Should().NotBeNullOrWhiteSpace();
 		});
 
-		[I] public async Task NodeJVMResponse() => await this.AssertOnAllResponses(r =>
+		[I] public async Task NodePluginsResponse() => await this.AssertOnAllResponses(r =>
 		{
-			var jvm = r.Nodes.First().Value.JVM;
+			var plugins = r.Nodes.First().Value.Plugins;
+			plugins.Should().NotBeEmpty();
+
+			var plugin = plugins.First();
+			plugin.Name.Should().NotBeNullOrWhiteSpace();
+			plugin.Description.Should().NotBeNullOrWhiteSpace();
+			plugin.Version.Should().NotBeNullOrWhiteSpace();
+			plugin.ClassName.Should().NotBeNullOrWhiteSpace();
+		});
+
+		[I] public async Task NodeProcessResponse() => await this.AssertOnAllResponses(r =>
+		{
+			var process = r.Nodes.First().Value.Process;
+			process.Id.Should().BeGreaterThan(0);
+			process.RefreshIntervalInMilliseconds.Should().BeGreaterThan(0);
+		});
+
+		[I] public async Task NodeJvmResponse() => await this.AssertOnAllResponses(r =>
+		{
+			var jvm = r.Nodes.First().Value.Jvm;
 			jvm.Should().NotBeNull();
 			jvm.PID.Should().BeGreaterThan(0);
 			jvm.StartTime.Should().BeGreaterThan(0);
@@ -102,7 +121,7 @@ namespace Tests.Cluster.NodesInfo
 
 		[I] public async Task NodeHttpResponse() => await this.AssertOnAllResponses(r =>
 		{
-			var http = r.Nodes.First().Value.HTTP;
+			var http = r.Nodes.First().Value.Http;
 			http.Should().NotBeNull();
 
 			http.BoundAddress.Should().NotBeEmpty();

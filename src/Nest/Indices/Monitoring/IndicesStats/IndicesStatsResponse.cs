@@ -7,7 +7,7 @@ namespace Nest
 	{
 		ShardsMetaData Shards { get; }
 		IndicesStats Stats { get; set; }
-		Dictionary<string, IndicesStats> Indices { get; set; }
+		Dictionary<IndexName, IndicesStats> Indices { get; set; }
 	}
 
 	[JsonObject]
@@ -22,7 +22,7 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "indices")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
-		public Dictionary<string, IndicesStats> Indices { get; set; }
+		public Dictionary<IndexName, IndicesStats> Indices { get; set; }
 
 	}
 }

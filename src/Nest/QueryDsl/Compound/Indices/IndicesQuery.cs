@@ -12,7 +12,7 @@ namespace Nest
 	public interface IIndicesQuery : IQuery
 	{
 		[JsonProperty("indices")]
-		IEnumerable<string> Indices { get; set; }
+		IEnumerable<IndexName> Indices { get; set; }
 
 		[JsonProperty("query")]
 		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeJsonConverter<QueryContainerDescriptor<object>>, CustomJsonConverter>))]
@@ -41,7 +41,7 @@ namespace Nest
 		bool IQuery.Conditionless => IsConditionless(this);
 		public IQueryContainer Query { get; set; }
 		public IQueryContainer NoMatchQuery { get; set; }
-		public IEnumerable<string> Indices { get; set; }
+		public IEnumerable<IndexName> Indices { get; set; }
 
 		protected override void WrapInContainer(IQueryContainer c) => c.Indices = this;
 		internal static bool IsConditionless(IIndicesQuery q) => q.NoMatchQuery == null && q.Query == null;
@@ -54,7 +54,7 @@ namespace Nest
 		bool IQuery.Conditionless => IndicesQuery.IsConditionless(this);
 		IQueryContainer IIndicesQuery.Query { get; set; }
 		IQueryContainer IIndicesQuery.NoMatchQuery { get; set; }
-		IEnumerable<string> IIndicesQuery.Indices { get; set; }
+		IEnumerable<IndexName> IIndicesQuery.Indices { get; set; }
 
 		public IndicesQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> selector) => Assign(a =>
 		{
@@ -87,6 +87,6 @@ namespace Nest
 				a.NoMatchQuery = query;
 		});
 
-		public IndicesQueryDescriptor<T> Indices(IEnumerable<string> indices) => Assign(a => a.Indices = indices);
+		public IndicesQueryDescriptor<T> Indices(IEnumerable<IndexName> indices) => Assign(a => a.Indices = indices);
 	}
 }

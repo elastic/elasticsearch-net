@@ -7,17 +7,15 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonConverter(typeof(PropertiesJsonConverter))]
-	public interface IProperties : IHasADictionary<PropertyName, IProperty>
+	public interface IProperties : IIsADictionary<PropertyName, IProperty>
 	{
 		
 	}
 
 	public class Properties : IsADictionary<PropertyName, IProperty>, IProperties
 	{
-		IDictionary<PropertyName, IProperty> IHasADictionary<PropertyName, IProperty>.Dictionary => this.BackingDictionary;
 		public Properties() : base() { }
 		public Properties(IDictionary<PropertyName, IProperty> container) : base(container) { }
-		public Properties(IProperties properties) : base(properties?.Dictionary) { }
 		public Properties(Dictionary<PropertyName, IProperty> container)
 			: base(container.Select(kv => kv).ToDictionary(kv => kv.Key, kv => kv.Value))
 		{ }
@@ -27,10 +25,9 @@ namespace Nest
 
 	public class Properties<T> : IsADictionary<PropertyName, IProperty>, IProperties
 	{
-		IDictionary<PropertyName, IProperty> IHasADictionary<PropertyName, IProperty>.Dictionary => this.BackingDictionary;
 		public Properties() : base() { }
 		public Properties(IDictionary<PropertyName, IProperty> container) : base(container) { }
-		public Properties(IProperties properties) : base(properties?.Dictionary) { }
+		public Properties(IProperties properties) : base(properties) { }
 		public Properties(Dictionary<PropertyName, IProperty> container)
 			: base(container.Select(kv => kv).ToDictionary(kv => kv.Key, kv => kv.Value))
 		{ }
@@ -62,11 +59,11 @@ namespace Nest
 	}
 
 	public class PropertiesDescriptor<T> 
-		: HasADictionaryDescriptor<PropertiesDescriptor<T>, IProperties, PropertyName, IProperty>, IPropertiesDescriptor<T, PropertiesDescriptor<T>>, IProperties
+		: IsADictionaryDescriptor<PropertiesDescriptor<T>, IProperties, PropertyName, IProperty>, IPropertiesDescriptor<T, PropertiesDescriptor<T>>, IProperties
 		where T : class
 	{
 		public PropertiesDescriptor() : base() { }
-		public PropertiesDescriptor(IProperties properties) : base(properties?.Dictionary) { }
+		public PropertiesDescriptor(IProperties properties) : base(properties) { }
 
 		public PropertiesDescriptor<T> String(Func<StringPropertyDescriptor<T>, IStringProperty> selector) => SetProperty(selector);
 

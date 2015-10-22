@@ -102,7 +102,7 @@ namespace Nest
 		IAnalysis Analysis { get; set; }
 	}
 
-	public class DynamicIndexSettings : HasADictionary<string, object>, IDynamicIndexSettings
+	public class DynamicIndexSettings : IsADictionary<string, object>, IDynamicIndexSettings
 	{
 		public DynamicIndexSettings() : base() { }
 		public DynamicIndexSettings(IDictionary<string, object> container) : base(container) { }
@@ -174,7 +174,7 @@ namespace Nest
 	}
 
 	public abstract class DynamicIndexSettingsDescriptor<TIndexSettings> 
-		: HasADictionaryDescriptor<DynamicIndexSettingsDescriptor<TIndexSettings>, IDynamicIndexSettings, string, object>, IDynamicIndexSettings
+		: IsADictionaryDescriptor<DynamicIndexSettingsDescriptor<TIndexSettings>, IDynamicIndexSettings, string, object>, IDynamicIndexSettings
 		where TIndexSettings : DynamicIndexSettingsDescriptor<TIndexSettings> 
 	{
 		protected TIndexSettings Set(Action<IDynamicIndexSettings> assigner) => Fluent.Assign((TIndexSettings)this, assigner);

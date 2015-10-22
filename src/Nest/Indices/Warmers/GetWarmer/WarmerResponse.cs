@@ -5,14 +5,14 @@ namespace Nest
 {
 	public interface IWarmerResponse : IResponse
 	{
-		Dictionary<string, IWarmers> Indices { get; }
+		Dictionary<IndexName, IWarmers> Indices { get; }
 	}
 
 	[JsonObject]
 	public class WarmerResponse : BaseResponse, IWarmerResponse
 	{
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
-		public Dictionary<string, IWarmers> Indices { get; internal set; }
+		public Dictionary<IndexName, IWarmers> Indices { get; internal set; }
 
 	}
 }

@@ -16,7 +16,7 @@ namespace Nest
 		public List<string> Versions { get; internal set; }
 
 		[JsonProperty("os")]
-		public ClusterOs Os { get; internal set; }
+		public ClusterOperatingSystemStats OperatingSystem { get; internal set; }
 
 		[JsonProperty("process")]
 		public ClusterProcess Process { get; internal set; }
@@ -46,22 +46,6 @@ namespace Nest
 		public string Available { get; internal set; }
 		[JsonProperty("available_in_bytes")]
 		public long AvailableInBytes { get; internal set; }
-		[JsonProperty("disk_reads")]
-		public long DiskReads { get; internal set; }
-		[JsonProperty("disk_writes")]
-		public long DiskWrites { get; internal set; }
-		[JsonProperty("disk_io_op")]
-		public long DiskIoOps { get; internal set; }
-		[JsonProperty("disk_read_size")]
-		public string DiskReadSize { get; internal set; }
-		[JsonProperty("disk_read_size_in_bytes")]
-		public long DiskReadSizeInBytes { get; internal set; }
-		[JsonProperty("disk_write_size")]
-		public string DiskWriteSize { get; internal set; }
-		[JsonProperty("disk_write_size_in_bytes")]
-		public long DiskWriteSizeInBytes { get; internal set; }
-		[JsonProperty("disk_queue")]
-		public string DiskQueue { get; internal set; }
 	}
 
 	[JsonObject]
@@ -70,8 +54,8 @@ namespace Nest
 		[JsonProperty("max_uptime")]
 		public string MaxUptime { get; internal set; }
 
-		[JsonProperty("max_uptime_in_milliseconds")]
-		public string MaxUptimeInMilliseconds { get; internal set; }
+		[JsonProperty("max_uptime_in_millis")]
+		public long MaxUptimeInMilliseconds { get; internal set; }
 
 		[JsonProperty("versions")]
 		public List<ClusterJvmVersion> Versions { get; internal set; }
@@ -149,51 +133,35 @@ namespace Nest
 	}
 
 	[JsonObject]
-	public class ClusterOs
+	public class ClusterOperatingSystemStats
 	{
 		[JsonProperty("available_processors")]
 		public int AvailableProcessors { get; internal set; }
 
 		[JsonProperty("mem")]
-		public ClusterOsMemory Memory { get; internal set; }
+		public ClusterOperatingSystemMemory Memory { get; internal set; }
 
-		[JsonProperty("cpu")]
-		public List<ClusterCpu> Cpu { get; internal set; }
+		[JsonProperty("names")]
+		public List<ClusterOperatingSystemName> Names { get; internal set; }
 	}
 
 	[JsonObject]
-	public class ClusterOsMemory
+	public class ClusterOperatingSystemMemory
 	{
+		[JsonProperty("total")]
+		public string Total { get; internal set; }
 		[JsonProperty("total_in_bytes")]
 		public long TotalInBytes { get; internal set; }
 	}
 
 	[JsonObject]
-	public class ClusterCpu
+	public class ClusterOperatingSystemName
 	{
-		[JsonProperty("vendor")]
-		public string Vendor { get; internal set; }
-
-		[JsonProperty("model")]
-		public string Model { get; internal set; }
-
-		[JsonProperty("mhz")]
-		public int Mhz { get; internal set; }
-
-		[JsonProperty("total_scores")]
-		public int TotalCores { get; internal set; }
-
-		[JsonProperty("total_sockets")]
-		public int TotalSockets { get; internal set; }
-
-		[JsonProperty("cores_per_socket")]
-		public int CoresPerSocket { get; internal set; }
-
-		[JsonProperty("cache_size_in_bytes")]
-		public int CacheSizeInBytes { get; internal set; }
-
 		[JsonProperty("count")]
 		public int Count { get; internal set; }
+
+		[JsonProperty("name")]
+		public string Name { get; internal set; }
 	}
 
 	[JsonObject]

@@ -92,8 +92,10 @@
     <Compile Include="Analysis\Tokenizers\TokenizerJsonConverter.cs" />
     <Compile Include="Analysis\Tokenizers\NGram\TokenChar.cs" />
     <Compile Include="Analysis\Tokenizers\Tokenizers.cs" />
+    <Compile Include="Cluster\ClusterHealth.cs" />
     <Compile Include="Cluster\ClusterHealth\ClusterHealthResponse.cs" />
     <Compile Include="Cluster\ClusterSettings\ClusterPutSettings\ClusterSettings.cs" />
+    <Compile Include="CommonAbstractions\DictionaryLike\IHasADictionary.cs" />
     <Compile Include="CommonAbstractions\Fluent\DescriptorBase.cs" />
     <Compile Include="CommonAbstractions\Infer\DocumentPath\DocumentPath.cs" />
     <Compile Include="CommonAbstractions\Infer\Features\Features.cs" />
@@ -117,8 +119,8 @@
     <Compile Include="CommonAbstractions\Infer\Types\TypesJsonConverter.cs" />
     <Compile Include="CommonAbstractions\Infer\Types\Types.cs" />
     <Compile Include="CommonAbstractions\LazyDocument\LazyDocumentJsonConverter.cs" />
-    <Compile Include="CommonAbstractions\HasADictionary.cs" />
-    <Compile Include="CommonAbstractions\IsADictionary.cs" />
+    <Compile Include="CommonAbstractions\DictionaryLike\IsADictionaryDescriptor.cs" />
+    <Compile Include="CommonAbstractions\DictionaryLike\IsADictionary.cs" />
     <Compile Include="Cat\CatAllocation\ElasticClient-CatAllocation.cs" />
     <Compile Include="Cat\CatCount\ElasticClient-CatCount.cs" />
     <Compile Include="Cat\CatFielddata\ElasticClient-CatFielddata.cs" />
@@ -441,11 +443,10 @@
     <Compile Include="Indices\Monitoring\IndicesRecovery\RecoveryStatusResponse.cs" />
     <Compile Include="Indices\Monitoring\IndicesRecovery\RecoveryTranslogStatus.cs" />
     <Compile Include="Indices\Monitoring\IndicesRecovery\ShardRecovery.cs" />
-    <Compile Include="Cluster\ClusterStats\ClusterNodesStas.cs" />
+    <Compile Include="Cluster\ClusterStats\ClusterNodesStats.cs" />
     <Compile Include="Modules\SnapshotAndRestore\Repositories\VerifyRepository\CompactNodeInfo.cs" />
     <Compile Include="CommonOptions\Stats\CompletionStats.cs" />
     <Compile Include="CommonOptions\Stats\FieldDataStats.cs" />
-    <Compile Include="Cluster\ClusterStats\IdCacheStats.cs" />
     <Compile Include="Cluster\ClusterStats\ClusterIndicesStats.cs" />
     <Compile Include="CommonOptions\Stats\PercolateStats.cs" />
     <Compile Include="CommonOptions\Stats\PluginStats.cs" />

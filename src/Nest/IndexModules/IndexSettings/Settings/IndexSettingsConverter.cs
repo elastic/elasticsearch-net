@@ -22,7 +22,6 @@ namespace Nest
 			if (wrapDictionary == null) return;
 			var dict = wrapDictionary?.Dictionary ?? new Dictionary<string, object>();
 
-
 			dict[UpdatableIndexSettings.NumberOfReplicas] = ds.NumberOfReplicas;
 			dict[UpdatableIndexSettings.AutoExpandReplicas] = ds.AutoExpandReplicas;
 			dict[UpdatableIndexSettings.RefreshInterval] = ds.RefreshInterval;

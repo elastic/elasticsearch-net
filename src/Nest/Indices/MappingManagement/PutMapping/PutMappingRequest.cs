@@ -157,8 +157,8 @@ namespace Nest
 		{
 			a.Properties = a.Properties ?? new Properties();
 			var autoProperties = new PropertyWalker(typeof(T), visitor).GetProperties();
-			foreach (var autoProperty in autoProperties.Dictionary)
-				a.Properties.Dictionary[autoProperty.Key] = autoProperty.Value;
+			foreach (var autoProperty in autoProperties)
+				a.Properties[autoProperty.Key] = autoProperty.Value;
 		});
 
 		/// <inheritdoc/>

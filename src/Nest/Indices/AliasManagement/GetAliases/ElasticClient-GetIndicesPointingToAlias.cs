@@ -14,7 +14,7 @@ namespace Nest
 		/// </summary>
 		/// <param name="client"></param>
 		/// <param name="aliasName">The exact alias name</param>
-		public static IList<string> GetIndicesPointingToAlias(this IElasticClient client, string aliasName)
+		public static IList<IndexName> GetIndicesPointingToAlias(this IElasticClient client, string aliasName)
 		{
 			var aliasesResponse = client.GetAliases(a => a.Alias(aliasName));
 			return IndicesPointingToAlias(aliasName, aliasesResponse);
@@ -25,7 +25,7 @@ namespace Nest
 		/// </summary>
 		/// <param name="client"></param>
 		/// <param name="aliasName">The exact alias name</param>
-		public static Task<IList<string>> GetIndicesPointingToAliasAsync(this IElasticClient client, string aliasName)
+		public static Task<IList<IndexName>> GetIndicesPointingToAliasAsync(this IElasticClient client, string aliasName)
 		{
 			return client.GetAliasesAsync(a => a.Index(aliasName))
 				.ContinueWith((t) =>
@@ -35,11 +35,11 @@ namespace Nest
 				});
 		}
 
-		private static IList<string> IndicesPointingToAlias(string aliasName, IGetAliasesResponse aliasesResponse)
+		private static IList<IndexName> IndicesPointingToAlias(string aliasName, IGetAliasesResponse aliasesResponse)
 		{
 			if (!aliasesResponse.IsValid
 				|| !aliasesResponse.Indices.HasAny())
-				return new string[] { };
+				return new IndexName[] { };
 
 			var indices = from i in aliasesResponse.Indices
 						  where i.Value.Any(a => a.Name == aliasName)

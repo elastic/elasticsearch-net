@@ -65,7 +65,7 @@ namespace Nest
 				(p, d) => this.LowLevelDispatch.IndicesGetAliasesDispatchAsync<GetAliasesResponse>(p)
 			);
 		
-		//TODO map the response properly
+		//TODO map the response properly, remove list flattening
 		/// <inheritdoc/>
 		private GetAliasesResponse DeserializeGetAliasesResponse(IApiCallDetails apiCallDetails, Stream stream)
 		{
@@ -74,7 +74,7 @@ namespace Nest
 
 			var dict = this.Serializer.Deserialize<CrazyAliasesResponse>(stream);
 
-			var d = new Dictionary<string, IList<AliasDefinition>>();
+			var d = new Dictionary<IndexName, IList<AliasDefinition>>();
 
 			foreach (var kv in dict)
 			{

@@ -10,32 +10,33 @@ namespace Nest
 	[JsonObject]
 	public class ClusterIndicesStats
 	{
+		[JsonProperty("completion")]
+		public CompletionStats Completion { get; internal set; }
+
 		[JsonProperty("count")]
 		public long Count { get; internal set; }
 
-		[JsonProperty("shards")]
-		public ClusterIndicesShardsStats Shards { get; internal set; }
-
 		[JsonProperty("docs")]
-		public DocStats Docs { get; internal set; }
-
-		[JsonProperty("store")]
-		public StoreStats Store { get; internal set; }
+		public DocStats Documents { get; internal set; }
 
 		[JsonProperty("fielddata")]
 		public FielddataStats Fielddata { get; internal set; }
 
-		[JsonProperty("id_cache")]
-		public IdCacheStats IdCache { get; internal set; }
+		[JsonProperty("percolate")]
+		public PercolateStats Percolate { get; internal set; }
 
-		[JsonProperty("completion")]
-		public CompletionStats Completion { get; internal set; }
+		[JsonProperty("query_cache")]
+		public QueryCacheStats QueryCache { get; internal set; }
 
 		[JsonProperty("segments")]
 		public SegmentsStats Segments { get; internal set; }
 
-		[JsonProperty("percolate")]
-		public PercolateStats Percolate { get; internal set; }
+		[JsonProperty("shards")]
+		public ClusterIndicesShardsStats Shards { get; internal set; }
+
+		[JsonProperty("store")]
+		public StoreStats Store { get; internal set; }
+
 	}
 
 	[JsonObject]

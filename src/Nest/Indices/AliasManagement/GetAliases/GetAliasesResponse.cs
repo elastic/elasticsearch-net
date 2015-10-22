@@ -4,11 +4,11 @@ namespace Nest
 {
 	public interface IGetAliasesResponse : IResponse
 	{
-		IDictionary<string, IList<AliasDefinition>> Indices { get; }
+		IDictionary<IndexName, IList<AliasDefinition>> Indices { get; }
 	}
 
 	public class GetAliasesResponse : BaseResponse, IGetAliasesResponse
 	{
-		public IDictionary<string, IList<AliasDefinition>> Indices { get; internal set; } = new Dictionary<string, IList<AliasDefinition>>();
+		public IDictionary<IndexName, IList<AliasDefinition>> Indices { get; internal set; } = new Dictionary<IndexName, IList<AliasDefinition>>();
 	}
 }

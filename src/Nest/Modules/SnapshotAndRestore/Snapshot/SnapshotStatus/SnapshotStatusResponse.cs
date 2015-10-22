@@ -33,7 +33,7 @@ namespace Nest
 		[JsonProperty("stats")]
 		public SnapshotStats Stats { get; internal set; }
 		[JsonProperty("indices")]
-		public IDictionary<string, SnapshotIndexStats> Indices { get; internal set; } 
+		public IDictionary<IndexName, SnapshotIndexStats> Indices { get; internal set; } 
 	}
 	
 	public class SnapshotIndexStats
@@ -43,7 +43,7 @@ namespace Nest
 		[JsonProperty("stats")]
 		public SnapshotStats Stats { get; internal set; }
 		[JsonProperty("shards")]
-		public IDictionary<string, SnapshotShardsStats> Shards { get; internal set; } 
+		public IDictionary<IndexName, SnapshotShardsStats> Shards { get; internal set; } 
 	}
 
 	public class SnapshotIndexShardStats

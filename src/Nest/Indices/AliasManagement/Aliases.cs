@@ -19,10 +19,9 @@ namespace Nest
 		/// Add any setting to the index
 		/// </summary>
 		public void Add(IndexName index, IAlias alias) => BackingDictionary.Add(index, alias);
-
 	}
 	
-	public class AliasesDescriptor : HasADictionary<AliasesDescriptor, IndexName, IAlias>, IAliases
+	public class AliasesDescriptor : IsADictionaryDescriptor<AliasesDescriptor, IAliases, IndexName, IAlias>, IAliases
 	{
 		public AliasesDescriptor Alias(string alias, Func<AliasDescriptor, IAlias> selector = null)
 		{

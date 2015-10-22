@@ -7,6 +7,9 @@ namespace Nest
 {
 	public interface IGetMappingResponse : IResponse
 	{
+		/// <summary>
+		/// TODO dict|indexname, imappings|
+		/// </summary>
 		Dictionary<string, IList<TypeMapping>> Mappings { get; }
 		TypeMapping Mapping { get; }
 		void Accept(IMappingVisitor visitor);

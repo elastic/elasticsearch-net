@@ -20,7 +20,7 @@ namespace Nest
 		public void Add(string attribute, IEnumerable<string> values) => this.BackingDictionary.Add(attribute, values.ToList());
 	}
 
-	public class AllocationAttributesDescriptor : HasADictionary<AllocationAttributesDescriptor, string, IList<string>>, IAllocationAttributes
+	public class AllocationAttributesDescriptor : IsADictionaryDescriptor<AllocationAttributesDescriptor, IAllocationAttributes, string, IList<string>>, IAllocationAttributes
 	{
 		IDictionary<string, IList<string>> IAllocationAttributes.Attributes => this.BackingDictionary;
 
