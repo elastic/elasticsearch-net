@@ -56,7 +56,7 @@ namespace Nest
 		{
 			return new GetIndexResponse
 			{
-				Indices = this.Serializer.Deserialize<Dictionary<IndexName, IndexState>>(stream)
+				Indices = this.Serializer.Deserialize<Dictionary<string, IndexState>>(stream)
 			};
 		}
 

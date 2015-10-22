@@ -74,7 +74,7 @@ namespace Nest
 
 			var dict = this.Serializer.Deserialize<CrazyAliasesResponse>(stream);
 
-			var d = new Dictionary<IndexName, IList<AliasDefinition>>();
+			var d = new Dictionary<string, IList<AliasDefinition>>();
 
 			foreach (var kv in dict)
 			{
