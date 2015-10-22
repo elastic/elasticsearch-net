@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Newtonsoft.Json;
 
 namespace Nest
@@ -13,6 +14,11 @@ namespace Nest
 		[JsonProperty("text")]
 		public string Text { get; internal set; }
 		[JsonProperty("options")]
-		public IEnumerable<SuggestOption> Options { get; internal set; }
+		public IEnumerable<SuggestOption<object>> Options { get; internal set; }
+
+		public IEnumerable<SuggestOption<T>> GetCompletionOptions<T>()
+		{
+			return Options?.Select(x => new SuggestOption<T>(x)) ?? Enumerable.Empty<SuggestOption<T>>();
+		}
 	}
 }
