@@ -6,7 +6,7 @@ namespace Nest
 {
 	public interface IRecoveryStatusResponse : IResponse
 	{
-		Dictionary<IndexName, RecoveryStatus> Indices { get; set; }
+		Dictionary<string, RecoveryStatus> Indices { get; set; }
 	}
 
 	[JsonObject]
@@ -14,6 +14,6 @@ namespace Nest
 	{
 
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
-		public Dictionary<IndexName, RecoveryStatus> Indices { get; set; } 
+		public Dictionary<string, RecoveryStatus> Indices { get; set; } 
 	}
 }

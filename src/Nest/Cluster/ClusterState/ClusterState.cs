@@ -24,7 +24,7 @@ namespace Nest
 	{
 		[JsonProperty("indices")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
-		public Dictionary<IndexName, IndexRoutingTable> Indices { get; internal set; }
+		public Dictionary<string, IndexRoutingTable> Indices { get; internal set; }
 	}
 
 	public class IndexRoutingTable
@@ -92,7 +92,7 @@ namespace Nest
 
 		[JsonProperty("indices")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
-		public Dictionary<IndexName, MetadataIndexState> Indices { get; internal set; }
+		public Dictionary<string, MetadataIndexState> Indices { get; internal set; }
 	}
 
 	public class MetadataIndexState

@@ -8,7 +8,7 @@ namespace Nest
 		/// <summary>
 		/// The delete by query details for each affected index.
 		/// </summary>
-		IDictionary<IndexName, DeleteByQueryIndices> Indices { get; set; }
+		IDictionary<string, DeleteByQueryIndices> Indices { get; set; }
 	}
 
 
@@ -17,7 +17,7 @@ namespace Nest
 	{
 		[JsonProperty("_indices")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
-		public IDictionary<IndexName, DeleteByQueryIndices> Indices { get; set; }
+		public IDictionary<string, DeleteByQueryIndices> Indices { get; set; }
 	}
 
 	[JsonObject]
