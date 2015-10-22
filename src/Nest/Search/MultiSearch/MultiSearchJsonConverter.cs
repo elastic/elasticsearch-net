@@ -53,7 +53,7 @@ namespace Nest
 			var errorProperty = tuple.Hit.Children<JProperty>().FirstOrDefault(c=>c.Name == "error");
 			if (errorProperty != null)
 			{
-				hit.IsValid = false;
+				//hit.IsValid = false;
 				//TODO es 1.0 will return statuscode pass that into exception
 				
 			}

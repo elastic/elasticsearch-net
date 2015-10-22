@@ -15,18 +15,7 @@ namespace Nest
 	[JsonObject]
 	public class BulkResponse : BaseResponse, IBulkResponse
 	{
-		private bool _isValid;
-		public override bool IsValid
-		{
-			get
-			{
-				return this._isValid && !this.Errors && !this.ItemsWithErrors.HasAny();
-			}
-			internal set
-			{
-				this._isValid = value;
-			}
-		}
+		public override bool IsValid => base.IsValid && !this.Errors && !this.ItemsWithErrors.HasAny();
 
 		[JsonProperty("took")]
 		public int Took { get; internal set; }

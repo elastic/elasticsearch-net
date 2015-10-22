@@ -24,7 +24,7 @@ namespace Elasticsearch.Net
 		private static readonly string _printFormat = "StatusCode: {1}, {0}\tMethod: {2}, {0}\tUrl: {3}, {0}\tRequest: {4}, {0}\tResponse: {5}";
 		private static readonly string _errorFormat = "{0}\tExceptionMessage: {1}{0}\t StackTrace: {2}";
 
-		public bool Success { get; internal set; }
+		public bool Success { get; internal set; } = true;
 
 		public HttpMethod HttpMethod { get; internal set; }
 

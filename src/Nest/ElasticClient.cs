@@ -129,7 +129,6 @@ namespace Nest
 		{
 			var r = typeof(R).CreateInstance<R>();
 			((IBodyWithApiCallDetails)r).CallDetails = response;
-			r.IsValid = false;
 			return r;
 		}
 

@@ -137,6 +137,7 @@
     <Compile Include="CodeStandards\Descriptors.doc.cs" />
     <Compile Include="CodeStandards\ElasticClient.doc.cs" />
     <Compile Include="CodeStandards\NamingConventions.doc.cs" />
+    <Compile Include="Document\Multiple\Bulk\BulkInvalidApiTests.cs" />
     <Compile Include="Document\Multiple\Bulk\BulkUrlTests.cs" />
     <Compile Include="Document\Multiple\Bulk\BulkApiTests.cs" />
     <Compile Include="Document\Multiple\DeleteByQuery\DeleteByQueryUrlTests.cs" />

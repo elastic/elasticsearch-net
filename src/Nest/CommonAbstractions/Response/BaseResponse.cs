@@ -19,15 +19,7 @@ namespace Nest
 
 	public class BaseResponse : IResponse
 	{
-		private bool? _forcedIsValid = null;
-		public virtual bool IsValid
-		{
-			get
-			{
-				return _forcedIsValid ?? this.ApiCall?.Success ?? false;
-			}
-			internal set { _forcedIsValid = value; }
-		}
+		public virtual bool IsValid => this.ApiCall?.Success ?? false;
 
 		IApiCallDetails IBodyWithApiCallDetails.CallDetails { get; set; }
 		public IApiCallDetails ApiCall => ((IBodyWithApiCallDetails)this).CallDetails;

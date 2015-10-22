@@ -66,7 +66,7 @@ namespace Nest
 			this.Indices = dict ?? new IndexFieldMappings();
 			//TODO can dict truely ever be null, whats the response look like when field mapping is not found.
 			//does status.Success not already reflect this?
-			this.IsValid = status.Success && dict != null && dict.Count > 0;
+			//this.IsValid = status.Success && dict != null && dict.Count > 0;
 		}
 
 		public IndexFieldMappings Indices { get; set; }
