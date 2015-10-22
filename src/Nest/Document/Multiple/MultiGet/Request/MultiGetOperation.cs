@@ -16,21 +16,29 @@ namespace Nest
 			this.Type = typeof(T);
 		}
 
-		public MultiGetOperation(long id) : this(id.ToString(CultureInfo.InvariantCulture)) {}
+		public MultiGetOperation(long id) : this(id.ToString(CultureInfo.InvariantCulture)) { }
 
 		Type IMultiGetOperation.ClrType => typeof(T);
 
 		public IndexName Index { get; set; }
-		
+
 		public TypeName Type { get; set; }
-		
+
 		public Id Id { get; set; }
-		
+
 		public IList<FieldName> Fields { get; set; }
-		
+
 		public Union<bool, ISourceFilter> Source { get; set; }
 
 		public string Routing { get; set; }
+
+		bool IMultiGetOperation.CanBeFlattened =>
+			this.Index == null 
+			&& this.Type == null
+			&& this.Routing == null
+			&& this.Source == null
+			&& this.Fields == null;
+
 
 		public object Document { get; set; }
 
@@ -51,6 +59,13 @@ namespace Nest
 		object IMultiGetOperation.Document { get; set; }
 		IDictionary<FieldName, string> IMultiGetOperation.PerFieldAnalyzer { get; set; }
 		Type IMultiGetOperation.ClrType => typeof(T);
+
+		bool IMultiGetOperation.CanBeFlattened =>
+			Self.Index == null
+			&& Self.Type == null
+			&& Self.Routing == null
+			&& Self.Source == null
+			&& Self.Fields == null;
 
 		public MultiGetOperationDescriptor()
 		{

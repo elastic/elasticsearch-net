@@ -40,5 +40,7 @@ namespace Nest
 		IDictionary<FieldName, string> PerFieldAnalyzer { get; set; }
 
 		Type ClrType { get; }
+
+		bool CanBeFlattened { get; }
 	}
 }

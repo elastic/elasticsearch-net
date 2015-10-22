@@ -35,8 +35,9 @@ namespace Tests.Framework.Integration
 			CreateProjectIndex();
 
 			this.Client.IndexMany(Project.Projects);
+			this.Client.IndexMany(Developer.Developers);
 
-			this.Client.Refresh(Nest.Indices.Index<Project>());
+			this.Client.Refresh(Nest.Indices.Index<Project>().And<Developer>());
 
 		}
 
