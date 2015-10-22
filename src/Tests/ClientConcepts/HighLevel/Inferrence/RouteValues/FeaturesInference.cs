@@ -10,7 +10,7 @@ using Tests.Framework.MockData;
 using Xunit.Sdk;
 using static Nest.Indices;
 using static Tests.Framework.RoundTripper;
-using static Nest.Infer;
+using static Nest.Static;
 
 namespace Tests.ClientConcepts.HighLevel.Inferrence.FieldNames
 {

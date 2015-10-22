@@ -161,7 +161,7 @@
     <Compile Include="Document\Single\Update\UpdateUrlTests.cs" />
     <Compile Include="Framework\ApiTestBase.cs" />
     <Compile Include="Framework\CrudTestBase.cs" />
-    <Compile Include="Framework\Integration\ObservableProcess.cs" />
+    <Compile Include="Framework\Integration\Process\ObservableProcess.cs" />
     <Compile Include="Framework\MockResponses\SniffingResponse.cs" />
     <Compile Include="Framework\UrlTests.cs" />
     <Compile Include="Framework\SimpleIntegration.cs" />
@@ -171,10 +171,10 @@
     <Compile Include="Framework\Extensions\DiffExtensions.cs" />
     <Compile Include="Framework\Extensions\Numeric.cs" />
     <Compile Include="Framework\Integration\EndpointUsage.cs" />
-    <Compile Include="Framework\Integration\ClusterBase.cs" />
-    <Compile Include="Framework\Integration\IIntegrationCluster.cs" />
+    <Compile Include="Framework\Integration\Clusters\ClusterBase.cs" />
+    <Compile Include="Framework\Integration\Clusters\IIntegrationCluster.cs" />
     <Compile Include="Framework\Integration\IntegrationContext.cs" />
-    <Compile Include="Framework\Integration\IndexingCluster.cs" />
+    <Compile Include="Framework\Integration\Clusters\IndexingCluster.cs" />
     <Compile Include="Framework\Providers\TestableDateTimeProvider.cs" />
     <Compile Include="Framework\VirtualClustering\Cluster.cs" />
     <Compile Include="Framework\VirtualClustering\FixedPipelineFactory.cs" />
@@ -353,11 +353,11 @@
     <Compile Include="Framework\AsyncLazy.cs" />
     <Compile Include="Framework\ApiIntegrationTestBase.cs" />
     <Compile Include="Framework\UsageTestBase.cs" />
-    <Compile Include="Framework\Integration\Seeder.cs" />
+    <Compile Include="Framework\Integration\Bootstrappers\Seeder.cs" />
     <Compile Include="Framework\MockData\Project.cs" />
     <Compile Include="Framework\TestAttributes.cs" />
-    <Compile Include="Framework\Integration\ElasticsearchNode.cs" />
-    <Compile Include="Framework\Integration\ReadOnlyCluster.cs" />
+    <Compile Include="Framework\Integration\Process\ElasticsearchNode.cs" />
+    <Compile Include="Framework\Integration\Clusters\ReadOnlyCluster.cs" />
     <Compile Include="Framework\SerializationTestBase.cs" />
     <Compile Include="Framework\TestClient.cs" />
     <Compile Include="Search\Validate\ValidateApiTests.cs" />

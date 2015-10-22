@@ -8,7 +8,7 @@ using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
-using static Nest.Infer;
+using static Nest.Static;
 using static Tests.Framework.RoundTripper;
 
 namespace Tests.Aggregations.Bucket.Filter

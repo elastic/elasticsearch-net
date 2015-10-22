@@ -27,8 +27,9 @@ namespace Tests.Framework
 		protected IDictionary<ClientCall, string> UniqueValues { get; } 		
 		protected string CallIsolatedValue { get; private set; }
 
+		protected virtual void BeforeAllCalls(IElasticClient client, IDictionary<ClientCall, string> values) { }
 		protected virtual void OnBeforeCall(IElasticClient client) { }
-		protected virtual void OnBeforeAssert(KeyValuePair<ClientCall, IResponse> response) { }
+		protected virtual void OnAfterCall(IElasticClient client) { }
 
 		protected virtual int Port { get; set; } = 9200;
 
@@ -63,22 +64,28 @@ namespace Tests.Framework
 			var client = this.Client;
 			return new LazyResponses(async () =>
 			{
+				this.BeforeAllCalls(client, UniqueValues);
+
 				var dict = new Dictionary<ClientCall, IResponse>();
 				this.CallIsolatedValue = UniqueValues[ClientCall.Fluent];
 				OnBeforeCall(client);
 				dict.Add(ClientCall.Fluent, fluent(client, this.Fluent));
+				OnAfterCall(client);
 
 				this.CallIsolatedValue = UniqueValues[ClientCall.FluentAsync];
 				OnBeforeCall(client);
 				dict.Add(ClientCall.FluentAsync, await fluentAsync(client, this.Fluent));
+				OnAfterCall(client);
 
 				this.CallIsolatedValue = UniqueValues[ClientCall.Initializer];
 				OnBeforeCall(client);
 				dict.Add(ClientCall.Initializer, request(client, this.Initializer));
+				OnAfterCall(client);
 
 				this.CallIsolatedValue = UniqueValues[ClientCall.InitializerAsync];
 				OnBeforeCall(client);
 				dict.Add(ClientCall.InitializerAsync, await requestAsync(client, this.Initializer));
+				OnAfterCall(client);
 				return dict;
 			});
 		}

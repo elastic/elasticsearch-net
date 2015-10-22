@@ -8,7 +8,7 @@ using Tests.Framework;
 using Tests.Framework.MockData;
 using Xunit.Sdk;
 using static Tests.Framework.RoundTripper;
-using static Nest.Infer;
+using static Nest.Static;
 using Nest.Resolvers;
 
 namespace Tests.ClientConcepts.HighLevel.Inferrence.Id
