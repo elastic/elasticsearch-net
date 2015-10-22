@@ -64,5 +64,3 @@ YamlCache
 
 *.DS_Store
 *.sln.ide
-
-/src/Tests/tests.config
