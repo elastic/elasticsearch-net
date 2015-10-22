@@ -14,8 +14,6 @@ namespace Tests.Search.FieldStats
 	{
 		[U] public async Task Urls()
 		{
-			var project = new Project { Name = "NEST" };
-
 			await POST("/project/_field_stats")
 				.Fluent(c => c.FieldStats(Nest.Indices.Index<Project>()))
 				.Request(c => c.FieldStats(new FieldStatsRequest("project") {}))
