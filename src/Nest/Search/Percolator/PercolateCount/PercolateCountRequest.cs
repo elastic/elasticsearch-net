@@ -18,7 +18,8 @@ namespace Nest
 	public partial class PercolateCountRequest<TDocument> 
 		where TDocument : class
 	{
-		public int? Size { get; set; }
+		public string MultiPercolateName => "count";
+        public int? Size { get; set; }
 		public bool? TrackScores { get; set; }
 		public IDictionary<FieldName, ISort> Sort { get; set; }
 		public IHighlightRequest Highlight { get; set; }
@@ -53,7 +54,9 @@ namespace Nest
 		//TODO these dictionaries seem badly typed
 		IDictionary<FieldName, ISort> IPercolateOperation.Sort { get; set; }
 		IDictionary<string, IAggregationContainer> IPercolateOperation.Aggregations { get; set; }
-		
+
+		string IPercolateOperation.MultiPercolateName => "count";
+
 		IRequestParameters IPercolateOperation.GetRequestParameters()
 		{
 			return this.Self.RequestParameters;

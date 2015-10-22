@@ -6,10 +6,9 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	[JsonConverter(typeof(MultiSearchJsonConverter))]
 	public partial interface IMultiSearchRequest
 	{
-
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
 		IDictionary<string, ISearchRequest> Operations { get; set; }
 	}
 
