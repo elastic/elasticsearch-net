@@ -6,6 +6,7 @@ using Newtonsoft.Json.Linq;
 using System.Reflection;
 using Elasticsearch.Net.Serialization;
 using Nest.Resolvers;
+using Elasticsearch.Net;
 
 namespace Nest
 {
@@ -22,7 +23,7 @@ namespace Nest
 		private static MethodInfo MakeDelegateMethodInfo = typeof(MultiSearchJsonConverter).GetMethod("CreateMultiHit", BindingFlags.Static | BindingFlags.NonPublic);
 		private readonly IConnectionSettingsValues _settings;
 
-		internal MultiSearchJsonConverter()
+		public MultiSearchJsonConverter()
 		{
 			
 		}
@@ -35,7 +36,41 @@ namespace Nest
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
+			var request = value as IMultiSearchRequest;
+			if (request == null) return;
+			var contract = serializer.ContractResolver as SettingsContractResolver;
+			var elasticsearchSerializer = contract?.ConnectionSettings.Serializer;
+			if (elasticsearchSerializer == null) return;
 
+			foreach (var operation in request.Operations.Values)
+			{
+				var index = (request.Index != null && !request.Index.Equals(operation.Index))
+					? operation.Index
+					: null;
+
+				var type = (request.Type != null && !request.Type.Equals(operation.Type))
+					? operation.Type
+					: null;
+
+				var searchType = operation.RequestParameters.GetQueryStringValue<SearchType>("search_type").GetStringValue();
+				if (searchType == "query_then_fetch")
+					searchType = null;
+
+				var header = new
+				{
+					index = index,
+					type = type,
+					search_type = searchType,
+					preference = operation.Preference,
+					routing = operation.Routing,
+					ignore_unavailable = operation.IgnoreUnavalable
+				};
+
+				var headerBytes = elasticsearchSerializer.SerializeToBytes(header, SerializationFormatting.None);
+				writer.WriteRaw(headerBytes.Utf8String() + "\n");
+				var bodyBytes = elasticsearchSerializer.SerializeToBytes(operation, SerializationFormatting.None);
+				writer.WriteRaw(bodyBytes.Utf8String() + "\n");
+			}
 		}
 		
 		private static void CreateMultiHit<T>(
@@ -55,7 +90,6 @@ namespace Nest
 			{
 				//hit.IsValid = false;
 				//TODO es 1.0 will return statuscode pass that into exception
-				
 			}
 
 			collection.Add(tuple.Descriptor.Key, hit);
