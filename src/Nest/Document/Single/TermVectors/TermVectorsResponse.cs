@@ -8,7 +8,7 @@ namespace Nest
 	public interface ITermVectorsResponse : IResponse
 	{
 		bool Found { get; }
-		IDictionary<string, TermVector> TermVectorss { get; }
+		IDictionary<string, TermVector> TermVectors { get; }
 	}
 
 	[JsonObject]
@@ -18,6 +18,6 @@ namespace Nest
 		public bool Found { get; internal set; }
 
 		[JsonProperty("term_vectors")]
-		public IDictionary<string, TermVector> TermVectorss { get; internal set; } =  new Dictionary<string, TermVector>();
+		public IDictionary<string, TermVector> TermVectors { get; internal set; } =  new Dictionary<string, TermVector>();
 	}
 }

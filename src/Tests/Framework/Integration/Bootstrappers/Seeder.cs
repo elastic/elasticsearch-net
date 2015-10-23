@@ -1,6 +1,7 @@
 using FluentAssertions;
 using Nest;
 using Tests.Framework.MockData;
+using static Nest.Static;
 
 namespace Tests.Framework.Integration
 {
@@ -29,16 +30,15 @@ namespace Tests.Framework.Integration
 
 		public void CreateIndicesAndMappings()
 		{
-
 			CreateRawFieldsIndexTemplate();
 
 			CreateProjectIndex();
+			CreateDeveloperIndex();
 
 			this.Client.IndexMany(Project.Projects);
 			this.Client.IndexMany(Developer.Developers);
 
 			this.Client.Refresh(Nest.Indices.Index<Project>().And<Developer>());
-
 		}
 
 		private void CreateRawFieldsIndexTemplate()
@@ -71,49 +71,68 @@ namespace Tests.Framework.Integration
 			putTemplateResult.IsValid.Should().BeTrue();
 		}
 
+		private void CreateDeveloperIndex()
+		{
+			var createDeveloperIndex = this.Client.CreateIndex(Index<Developer>(), c => c
+				.Mappings(map => map
+					.Map<Developer>(m => m
+						.AutoMap()
+						.Properties(DeveloperProperties)
+					)
+				)
+			);
+			createDeveloperIndex.IsValid.Should().BeTrue();
+		}
+
 		private void CreateProjectIndex()
 		{
-			var createProjectIndex = this.Client.CreateIndex(typeof (Project), c => c
-				.Aliases(a => a
-					.Alias("projects-alias")
-				)
-				.Mappings(map => map
-					.Map<Project>(m => m
-						.Properties(props => props
-							.String(s => s.Name(p => p.Name).NotAnalyzed())
-							.Date(d => d.Name(p => p.StartedOn))
-							.String(d => d.Name(p => p.State).NotAnalyzed())
-							.Nested<Tag>(mo => mo
-								.Name(p => p.Tags)
-								.Properties(TagProperties)
-							)
-							.Object<Developer>(o => o
-								.Name(p => p.LeadDeveloper)
-								.Properties(DeveloperProperties)
-							)
-						)
-					)
-					.Map<CommitActivity>(m => m
-						.SetParent<Project>()
-						.Properties(props => props
-							.Object<Developer>(o => o
-								.Name(p => p.Committer)
-								.Properties(DeveloperProperties)
-							)
-							.String(prop => prop.Name(p => p.ProjectName).NotAnalyzed())
-						)
-					)
-				)
+			var createProjectIndex = this.Client.CreateIndex(typeof(Project), c => c
+			   .Aliases(a => a
+				   .Alias("projects-alias")
+			   )
+			   .Mappings(map => map
+				   .Map<Project>(m => m
+					   .Properties(props => props
+						   .String(s => s.Name(p => p.Name).NotAnalyzed())
+						   .Date(d => d.Name(p => p.StartedOn))
+						   .String(d => d.Name(p => p.State).NotAnalyzed())
+						   .Nested<Tag>(mo => mo
+							   .Name(p => p.Tags)
+							   .Properties(TagProperties)
+						   )
+						   .Object<Developer>(o => o
+							   .Name(p => p.LeadDeveloper)
+							   .Properties(DeveloperProperties)
+						   )
+					   )
+				   )
+				   .Map<CommitActivity>(m => m
+					   .SetParent<Project>()
+					   .Properties(props => props
+						   .Object<Developer>(o => o
+							   .Name(p => p.Committer)
+							   .Properties(DeveloperProperties)
+						   )
+						   .String(prop => prop.Name(p => p.ProjectName).NotAnalyzed())
+					   )
+				   )
+			   )
 				);
 			createProjectIndex.IsValid.Should().BeTrue();
 		}
 
 		private static PropertiesDescriptor<Tag> TagProperties(PropertiesDescriptor<Tag> props) => props
-			.String(s => s.Name(p => p.Name).NotAnalyzed());
+			.String(s => s
+				.Name(p => p.Name).NotAnalyzed()
+				.Fields(f => f
+					.String(st => st.Name("vectors").TermVector(TermVectorOption.WithPositionsOffsetsPayloads))
+				)
+			);
 
 		private static PropertiesDescriptor<Developer> DeveloperProperties(PropertiesDescriptor<Developer> props) => props
 			.String(s => s.Name(p => p.OnlineHandle).NotAnalyzed())
 			.String(s => s.Name(p => p.Gender).NotAnalyzed())
+			.String(s => s.Name(p => p.FirstName).TermVector(TermVectorOption.WithPositionsOffsetsPayloads))
 			//.GeoPoint(g=>g.Name(p=>p.Location))
 			;
 
