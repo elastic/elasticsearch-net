@@ -49,6 +49,15 @@ namespace Nest
 			return 0;
 		}
 
+		public override string ToString()
+		{
+			if (!this.Name.IsNullOrEmpty())
+				return this.Name;
+            if (this.Type != null)
+				return this.Type.Name;
+			return string.Empty;
+		}
+
 		public bool EqualsString(string other)
 		{
 			return !other.IsNullOrEmpty() && other == this.Name;

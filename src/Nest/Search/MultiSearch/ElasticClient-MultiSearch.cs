@@ -8,8 +8,6 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	using Elasticsearch.Net.Serialization;
-	using MultiSearchCreator = Func<IApiCallDetails, Stream, MultiSearchResponse>;
 	public partial interface IElasticClient
 	{
 		/// <summary>
@@ -29,7 +27,6 @@ namespace Nest
 		Task<IMultiSearchResponse> MultiSearchAsync(IMultiSearchRequest multiSearchRequest);
 	}
 
-	//TODO the custom serialize and deserialize here is ugly
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
@@ -40,15 +37,7 @@ namespace Nest
 		public IMultiSearchResponse MultiSearch(IMultiSearchRequest multiSearchRequest) => 
 			this.Dispatcher.Dispatch<IMultiSearchRequest, MultiSearchRequestParameters, MultiSearchResponse>(
 				multiSearchRequest,
-				(p, d) =>
-				{
-					var converter = CreateMultiSearchConverter(d);
-					var serializer = new NestSerializer(this.ConnectionSettings, converter);
-					var json = serializer.SerializeToBytes(d).Utf8String();
-					var creator = new MultiSearchCreator((r, s) => serializer.Deserialize<MultiSearchResponse>(s));
-					d.RequestParameters.DeserializationOverride(creator);
-					return this.LowLevelDispatch.MsearchDispatch<MultiSearchResponse>(p, json);
-				}
+				(p, d) => this.LowLevelDispatch.MsearchDispatch<MultiSearchResponse>(p, d)
 			);
 
 		/// <inheritdoc/>
@@ -59,27 +48,7 @@ namespace Nest
 		public Task<IMultiSearchResponse> MultiSearchAsync(IMultiSearchRequest multiSearchRequest) =>
 			this.Dispatcher.DispatchAsync<IMultiSearchRequest, MultiSearchRequestParameters, MultiSearchResponse, IMultiSearchResponse>(
 				multiSearchRequest,
-				(p, d) =>
-				{
-					var converter = CreateMultiSearchConverter(d);
-					var serializer = new NestSerializer(this.ConnectionSettings, converter);
-					var json = serializer.SerializeToBytes(d).Utf8String();
-					var creator = new MultiSearchCreator((r, s) => serializer.Deserialize<MultiSearchResponse>(s));
-					d.RequestParameters.DeserializationOverride(creator);
-					return this.LowLevelDispatch.MsearchDispatchAsync<MultiSearchResponse>(p, d);
-				}
+				(p, d) => this.LowLevelDispatch.MsearchDispatchAsync<MultiSearchResponse>(p, d)
 			);
-
-		private JsonConverter CreateMultiSearchConverter(IMultiSearchRequest descriptor)
-		{
-			if (descriptor.Operations != null)
-			{
-				foreach (var kv in descriptor.Operations)
-					CovariantSearch.CloseOverAutomagicCovariantResultSelector(this.Infer, kv.Value);				
-			}
-
-			var multiSearchConverter = new MultiSearchJsonConverter(ConnectionSettings, descriptor);
-			return multiSearchConverter;
-		}
 	}
 }

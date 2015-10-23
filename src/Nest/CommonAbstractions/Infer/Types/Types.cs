@@ -66,5 +66,26 @@ namespace Nest
 			);
 
 		}
+
+		public override bool Equals(object obj)
+		{
+			var other = obj as Types;
+			if (other == null) return false;
+			return this.Match(
+				all => other.Match(a => true, m => false),
+				many => other.Match(
+					a => false,
+					m => this.GetHashCode().Equals(other.GetHashCode())
+				)
+			);	
+		}
+
+		public override int GetHashCode()
+		{
+			return this.Match(
+				all => "_all".GetHashCode(),
+				many => string.Concat(many.Types).GetHashCode()
+			);
+		}
 	}
 }

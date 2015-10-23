@@ -10,19 +10,19 @@ using Tests.Framework.MockData;
 using Elasticsearch.Net.ConnectionPool;
 using System.IO;
 using System.Text;
+using Tests.Framework.Configuration;
 
 namespace Tests.Framework
 {
 	public static class TestClient
 	{
-		private static bool _integrationOverride = true;
-		private static string _manualOverrideVersion = "2.0.0-rc1";
+		private static LocalConfiguration LocalConfig = new LocalConfiguration(@"..\..\tests.config");
 
 		private static string ElasticVersionInEnvironment = Environment.GetEnvironmentVariable("NEST_INTEGRATION_VERSION");
 
-		public static string ElasticsearchVersion => ElasticVersionInEnvironment ?? (_integrationOverride ? _manualOverrideVersion : null);
+		public static string ElasticsearchVersion => ElasticVersionInEnvironment ?? (LocalConfig.IntegrationOverride ? LocalConfig.ManualOverrideVersion : null);
 
-		public static bool RunIntegrationTests => _integrationOverride || !string.IsNullOrEmpty(ElasticsearchVersion);
+		public static bool RunIntegrationTests => LocalConfig.IntegrationOverride || !string.IsNullOrEmpty(ElasticsearchVersion);
 
 		public static bool RunningFiddler = Process.GetProcessesByName("fiddler").Any();
 
@@ -47,7 +47,7 @@ namespace Tests.Framework
 				//We try and fetch the test name during integration tests when running fiddler to send the name 
 				//as the TestMethod header, this allows us to quickly identify which test sent which request
 				.SetGlobalHeaders(new NameValueCollection { { "TestMethod", ExpensiveTestNameForIntegrationTests() } });
-			
+
 			var settings = modifySettings != null ? modifySettings(defaultSettings) : defaultSettings;
 			return settings;
 		}
