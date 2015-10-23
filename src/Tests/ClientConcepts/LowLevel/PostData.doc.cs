@@ -12,6 +12,7 @@ using Tests.Framework;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
+using static Tests.Framework.RoundTripper;
 
 namespace Tests.ClientConcepts.LowLevel
 {
@@ -54,7 +55,13 @@ namespace Tests.ClientConcepts.LowLevel
 			var fromObject = ImplicitlyConvertsFrom(@object);
 
 			/** postData Bytes will always be set if it originated from a byte*/
-			fromByteArray.Bytes.Should().BeSameAs(bytes);
+			fromByteArray.WrittenBytes.Should().BeSameAs(bytes);
+
+			fromString.Type.Should().Be(PostType.LiteralString);
+			fromByteArray.Type.Should().Be(PostType.ByteArray);
+			fromListOfString.Type.Should().Be(PostType.EnumerableOfString);
+			fromListOfObject.Type.Should().Be(PostType.EnumerableOfObject);
+			fromObject.Type.Should().Be(PostType.Serializable);
 		}
 
 		[U] public async Task WritesCorrectlyUsingBothLowAndHighLevelSettings()
@@ -95,14 +102,13 @@ namespace Tests.ClientConcepts.LowLevel
 			await Post(()=>@object, writes: objectJson, storesBytes: true, settings: settings);
 		}
 
-		internal static async Task Post(Func<PostData<object>> postData, byte[] writes, bool storesBytes, IConnectionConfigurationValues settings)
+		private static async Task Post(Func<PostData<object>> postData, byte[] writes, bool storesBytes, IConnectionConfigurationValues settings)
 		{
 			PostAssert(postData(), writes, storesBytes, settings);
 			await PostAssertAsync(postData(), writes, storesBytes, settings);
 		}
 
-
-		internal static void PostAssert(PostData<object> postData, byte[] writes, bool storesBytes, IConnectionConfigurationValues settings)
+		private static void PostAssert(PostData<object> postData, byte[] writes, bool storesBytes, IConnectionConfigurationValues settings)
 		{
 			using (var ms = new MemoryStream())
 			{
@@ -110,13 +116,13 @@ namespace Tests.ClientConcepts.LowLevel
 				var sentBytes = ms.ToArray();
 				sentBytes.Should().Equal(writes);
 				if (storesBytes)
-					postData.Bytes.Should().NotBeNull();
+					postData.WrittenBytes.Should().NotBeNull();
 				else 
-					postData.Bytes.Should().BeNull();
+					postData.WrittenBytes.Should().BeNull();
 			}
 		}
 
-		internal static async Task PostAssertAsync(PostData<object> postData, byte[] writes, bool storesBytes, IConnectionConfigurationValues settings)
+		private static async Task PostAssertAsync(PostData<object> postData, byte[] writes, bool storesBytes, IConnectionConfigurationValues settings)
 		{
 			using (var ms = new MemoryStream())
 			{
@@ -124,16 +130,16 @@ namespace Tests.ClientConcepts.LowLevel
 				var sentBytes = ms.ToArray();
 				sentBytes.Should().Equal(writes);
 				if (storesBytes)
-					postData.Bytes.Should().NotBeNull();
+					postData.WrittenBytes.Should().NotBeNull();
 				else 
-					postData.Bytes.Should().BeNull();
+					postData.WrittenBytes.Should().BeNull();
 			}
 		}
 
-		internal static byte[] Utf8Bytes(string s)
+		private static byte[] Utf8Bytes(string s)
 		{
 			return string.IsNullOrEmpty(s) ? null : Encoding.UTF8.GetBytes(s);
 		}
-		public PostData<object> ImplicitlyConvertsFrom(PostData<object> postData) => postData;
+		private PostData<object> ImplicitlyConvertsFrom(PostData<object> postData) => postData;
 	}
 }

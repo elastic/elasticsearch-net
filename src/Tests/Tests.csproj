@@ -146,6 +146,7 @@
     <Compile Include="Document\Multiple\MultiGet\MultiGetUrlTests.cs" />
     <Compile Include="Document\Multiple\MultiTermVectors\MultiTermVectorsApiTests.cs" />
     <Compile Include="Document\Multiple\MultiTermVectors\MultiTermVectorsUrlTests.cs" />
+    <Compile Include="Document\Multiple\Reindex\ReindexApiTests.cs" />
     <Compile Include="Document\Single\Delete\DeleteApiTests.cs" />
     <Compile Include="Document\Single\Exists\DocumentExistsApiTests.cs" />
     <Compile Include="Document\Single\Exists\DocumentExistsUrlTests.cs" />

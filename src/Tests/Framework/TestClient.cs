@@ -20,7 +20,7 @@ namespace Tests.Framework
 
 		private static string ElasticVersionInEnvironment = Environment.GetEnvironmentVariable("NEST_INTEGRATION_VERSION");
 
-		public static string ElasticsearchVersion => ElasticVersionInEnvironment ?? (LocalConfig.IntegrationOverride ? LocalConfig.ManualOverrideVersion : null);
+		public static string ElasticsearchVersion => ElasticVersionInEnvironment ?? (LocalConfig.IntegrationOverride ? LocalConfig.ManualOverrideVersion.Trim() : null);
 
 		public static bool RunIntegrationTests => LocalConfig.IntegrationOverride || !string.IsNullOrEmpty(ElasticsearchVersion);
 

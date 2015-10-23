@@ -40,7 +40,7 @@ namespace Nest
 				request,
 				(p, d) =>
 				{
-					var id = p.ScrollId;
+					var id = p.ScrollId.GetString(this.ConnectionSettings);
 					p.RouteValues.Remove("scroll_id");
 					p.RequestParameters.AddQueryString("scroll", p.Scroll);
 					return this.LowLevelDispatch.ScrollDispatch<SearchResponse<T>>(p, id);
@@ -57,7 +57,7 @@ namespace Nest
 				request,
 				(p, d) =>
 				{
-					var id = p.ScrollId;
+					var id = p.ScrollId.GetString(this.ConnectionSettings);
 					p.RouteValues.Remove("scroll_id");
 					p.RequestParameters.AddQueryString("scroll", p.Scroll);
 					return this.LowLevelDispatch.ScrollDispatchAsync<SearchResponse<T>>(p, id);
