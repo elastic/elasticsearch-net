@@ -8,6 +8,9 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	using Elasticsearch.Net.Serialization;
+	using MultiSearchCreator = Func<IApiCallDetails, Stream, MultiSearchResponse>;
+
 	public partial interface IElasticClient
 	{
 		/// <summary>
@@ -29,26 +32,58 @@ namespace Nest
 
 	public partial class ElasticClient
 	{
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public IMultiSearchResponse MultiSearch(Func<MultiSearchDescriptor, IMultiSearchRequest> multiSearchSelector) =>
-			this.MultiSearch(multiSearchSelector?.Invoke(new Nest.MultiSearchDescriptor()));
+			this.MultiSearch(multiSearchSelector?.Invoke(new MultiSearchDescriptor()));
 
-		/// <inheritdoc/>
-		public IMultiSearchResponse MultiSearch(IMultiSearchRequest multiSearchRequest) => 
-			this.Dispatcher.Dispatch<IMultiSearchRequest, MultiSearchRequestParameters, MultiSearchResponse>(
+		/// <inheritdoc />
+		public IMultiSearchResponse MultiSearch(IMultiSearchRequest multiSearchRequest)
+		{
+			return this.Dispatcher.Dispatch<IMultiSearchRequest, MultiSearchRequestParameters, MultiSearchResponse>(
 				multiSearchRequest,
-				(p, d) => this.LowLevelDispatch.MsearchDispatch<MultiSearchResponse>(p, d)
+				(p, d) =>
+				{
+					var converter = CreateMultiSearchDeserializer(d);
+					var serializer = new NestSerializer(this.ConnectionSettings, converter);
+					var json = serializer.SerializeToBytes(d).Utf8String();
+					var creator = new MultiSearchCreator((r, s) => serializer.Deserialize<MultiSearchResponse>(s));
+					d.RequestParameters.DeserializationOverride(creator);
+					return this.LowLevelDispatch.MsearchDispatch<MultiSearchResponse>(p, json);
+				}
 			);
+		}
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public Task<IMultiSearchResponse> MultiSearchAsync(Func<MultiSearchDescriptor, IMultiSearchRequest> multiSearchSelector) =>
-			this.MultiSearchAsync(multiSearchSelector?.Invoke(new Nest.MultiSearchDescriptor()));
+			this.MultiSearchAsync(multiSearchSelector?.Invoke(new MultiSearchDescriptor()));
 
-		/// <inheritdoc/>
-		public Task<IMultiSearchResponse> MultiSearchAsync(IMultiSearchRequest multiSearchRequest) =>
-			this.Dispatcher.DispatchAsync<IMultiSearchRequest, MultiSearchRequestParameters, MultiSearchResponse, IMultiSearchResponse>(
+
+		/// <inheritdoc />
+		public Task<IMultiSearchResponse> MultiSearchAsync(IMultiSearchRequest multiSearchRequest)
+		{
+			return this.Dispatcher.DispatchAsync<IMultiSearchRequest, MultiSearchRequestParameters, MultiSearchResponse, IMultiSearchResponse>(
 				multiSearchRequest,
-				(p, d) => this.LowLevelDispatch.MsearchDispatchAsync<MultiSearchResponse>(p, d)
+				(p, d) =>
+				{
+					var converter = CreateMultiSearchDeserializer(d);
+					var serializer = new NestSerializer(this.ConnectionSettings, converter);
+					var json = serializer.SerializeToBytes(d).Utf8String();
+					var creator = new MultiSearchCreator((r, s) => serializer.Deserialize<MultiSearchResponse>(s));
+					d.RequestParameters.DeserializationOverride(creator);
+					return this.LowLevelDispatch.MsearchDispatchAsync<MultiSearchResponse>(p, json);
+				}
 			);
+		}
+
+		private JsonConverter CreateMultiSearchDeserializer(IMultiSearchRequest request)
+		{
+			if (request.Operations != null)
+			{
+				foreach (var operation in request.Operations.Values)
+					CovariantSearch.CloseOverAutomagicCovariantResultSelector(this.Infer, operation);
+			}
+
+			return new MultiSearchResponsJsonConverter(this.ConnectionSettings, request);
+		}
 	}
 }
