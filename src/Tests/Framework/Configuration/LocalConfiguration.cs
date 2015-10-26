@@ -17,10 +17,13 @@ namespace Tests.Framework.Configuration
 			if (!File.Exists(configurationFile)) return;
 
 			var config = File.ReadAllLines(configurationFile)
-				.ToDictionary(l => l.Split(':')[0], l => l.Split(':')[1]);
-
+				.ToDictionary(l => ConfigName(l), l => ConfigValue(l));
 			this.IntegrationOverride = bool.Parse(config["integration_override"]);
 			this.ManualOverrideVersion = config["override_version"];
 		}
+
+		private string ConfigName(string configLine) => Parse(configLine, 0);
+		private string ConfigValue(string configLine) => Parse(configLine, 1);
+		private string Parse(string configLine, int index) => configLine.Split(':')[index].Trim(' ');
 	}
 }
