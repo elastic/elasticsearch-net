@@ -24,6 +24,8 @@ namespace Nest
 			var elasticsearchSerializer = contract?.ConnectionSettings.Serializer;
 			if (elasticsearchSerializer == null) return;
 
+			if (request.Operations == null) return;
+
 			foreach (var operation in request.Operations.Values)
 			{
 				var index = (request.Index != null && !request.Index.Equals(operation.Index))
