@@ -4,9 +4,13 @@ using System;
 
 namespace Nest
 {
-	[JsonObject]
-	[JsonConverter(typeof(RepositoryJsonConverter))]
-	public interface IReadOnlyUrlRepistory : IRepository
+	public interface IReadOnlyUrlRepository : IRepository
+	{
+		[JsonProperty("settings")]
+		IReadOnlyUrlRepositorySettings Settings { get; set; }
+	}
+
+	public interface IReadOnlyUrlRepositorySettings : INestSerializable
 	{
 		[JsonProperty("location")]
 		string Location { get; set; }
@@ -15,36 +19,55 @@ namespace Nest
 		int ConcurrentStreams { get; set; }
 	}
 
-	public class ReadOnlyUrlRepository : IReadOnlyUrlRepistory
+	public class ReadOnlyUrlRepository : IReadOnlyUrlRepository
 	{
-		public ReadOnlyUrlRepository(string location)
+		public ReadOnlyUrlRepository(ReadOnlyUrlRepositorySettings settings)
+		{
+			this.Settings = settings;
+		}
+
+		string IRepository.Type { get { return "url"; } }
+		public IReadOnlyUrlRepositorySettings Settings { get; set; }
+	}
+
+	public class ReadOnlyUrlRepositorySettings : IReadOnlyUrlRepositorySettings
+	{
+		public ReadOnlyUrlRepositorySettings(string location)
 		{
 			this.Location = location;
 		}
 
-		string IRepository.Type { get { return "url"; } }
 		public string Location { get; set; }
 		public int ConcurrentStreams { get; set; }
 	}
 
-	public class ReadOnlyUrlRepositoryDescriptor 
-		: DescriptorBase<ReadOnlyUrlRepositoryDescriptor, IReadOnlyUrlRepistory>, IReadOnlyUrlRepistory
+	public class ReadOnlyUrlRepositorySettingsDescriptor
+		: DescriptorBase<ReadOnlyUrlRepositorySettingsDescriptor, IReadOnlyUrlRepositorySettings>, IReadOnlyUrlRepositorySettings
 	{
-		string IRepository.Type { get { return "url"; } }
-		int IReadOnlyUrlRepistory.ConcurrentStreams { get; set; }
-		string IReadOnlyUrlRepistory.Location { get; set; }
+		int IReadOnlyUrlRepositorySettings.ConcurrentStreams { get; set; }
+		string IReadOnlyUrlRepositorySettings.Location { get;set; }
 
 		/// <summary>
 		/// Location of the snapshots. Mandatory.
 		/// </summary>
 		/// <param name="location"></param>
-		public ReadOnlyUrlRepositoryDescriptor Location(string location) => Assign(a => a.Location = location);
+		public ReadOnlyUrlRepositorySettingsDescriptor Location(string location) => Assign(a => a.Location = location);
 
 		/// <summary>
 		/// Throttles the number of streams (per node) preforming snapshot operation. Defaults to 5
 		/// </summary>
 		/// <param name="concurrentStreams"></param>
-		public ReadOnlyUrlRepositoryDescriptor ConcurrentStreams(int concurrentStreams) =>
+		public ReadOnlyUrlRepositorySettingsDescriptor ConcurrentStreams(int concurrentStreams) =>
 			Assign(a => a.ConcurrentStreams = concurrentStreams);
+	}
+
+	public class ReadOnlyUrlRepositoryDescriptor 
+		: DescriptorBase<ReadOnlyUrlRepositoryDescriptor, IReadOnlyUrlRepository>, IReadOnlyUrlRepository
+	{
+		string IRepository.Type { get { return "url"; } }
+		IReadOnlyUrlRepositorySettings IReadOnlyUrlRepository.Settings { get; set; }
+
+		public ReadOnlyUrlRepositoryDescriptor Settings(string location, Func<ReadOnlyUrlRepositorySettingsDescriptor, IReadOnlyUrlRepositorySettings> settingsSelector = null) =>
+			Assign(a => a.Settings = settingsSelector.InvokeOrDefault(new ReadOnlyUrlRepositorySettingsDescriptor().Location(location)));
 	}
 }

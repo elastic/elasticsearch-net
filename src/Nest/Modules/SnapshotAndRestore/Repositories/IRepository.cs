@@ -5,7 +5,7 @@ namespace Nest
 {
 	public interface IRepository
 	{
-		[JsonIgnore]
+		[JsonProperty("type")]
 		string Type { get; }
 	}
 

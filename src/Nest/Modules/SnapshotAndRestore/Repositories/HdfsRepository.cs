@@ -5,9 +5,13 @@ using System.Linq;
 
 namespace Nest
 {
-	[JsonObject]
-	[JsonConverter(typeof(RepositoryJsonConverter))]
 	public interface IHdfsRepository : IRepository
+	{
+		[JsonProperty("settings")]
+		IHdfsRepositorySettings Settings { get; set; }
+	}
+
+	public interface IHdfsRepositorySettings : INestSerializable
 	{
 		[JsonProperty("uri")]
 		string Uri { get; set; }
@@ -36,12 +40,22 @@ namespace Nest
 
 	public class HdfsRepository : IHdfsRepository
 	{
-		public HdfsRepository(string path)
+		public HdfsRepository(HdfsRepositorySettings settings)
+		{
+			this.Settings = settings;
+		}
+
+		string IRepository.Type { get; } = "hdfs";
+		public IHdfsRepositorySettings Settings { get; set; }
+    }
+
+	public class HdfsRepositorySettings : IHdfsRepositorySettings
+	{
+		public HdfsRepositorySettings(string path)
 		{
 			this.Path = path;
 		}
 
-		string IRepository.Type { get; } = "hdfs";
 		public string ChunkSize { get; set; }
 		public bool Compress { get; set; }
 		public int ConcurrentStreams { get; set; }
@@ -52,39 +66,38 @@ namespace Nest
 		public string Uri { get; set; }
 	}
 
-	public class HdfsRepositoryDescriptor 
-		: DescriptorBase<HdfsRepositoryDescriptor, IHdfsRepository>, IHdfsRepository
+	public class HdfsRepositorySettingsDescriptor 
+		: DescriptorBase<HdfsRepositorySettingsDescriptor, IHdfsRepositorySettings>, IHdfsRepositorySettings
 	{
-		string IRepository.Type { get { return "hdfs"; } } 
-		string IHdfsRepository.Uri { get; set; }
-		string IHdfsRepository.Path { get; set; }
-		bool IHdfsRepository.LoadDefaults { get; set; }
-		string IHdfsRepository.ConfigurationLocation { get; set; }
-		bool IHdfsRepository.Compress { get; set; }
-		int IHdfsRepository.ConcurrentStreams { get; set; }
-		string IHdfsRepository.ChunkSize { get; set; }
-		public Dictionary<string, object> InlineHadoopConfiguration { get; set; }
+		string IHdfsRepositorySettings.Uri { get; set; }
+		string IHdfsRepositorySettings.Path { get; set; }
+		bool IHdfsRepositorySettings.LoadDefaults { get; set; }
+		string IHdfsRepositorySettings.ConfigurationLocation { get; set; }
+		bool IHdfsRepositorySettings.Compress { get; set; }
+		int IHdfsRepositorySettings.ConcurrentStreams { get; set; }
+		string IHdfsRepositorySettings.ChunkSize { get; set; }
+		Dictionary<string, object> IHdfsRepositorySettings.InlineHadoopConfiguration { get; set; }
 
 		/// <summary>
 		/// optional - Hadoop file-system URI
 		/// </summary>
-		public HdfsRepositoryDescriptor Uri(string uri) => Assign(a => a.Uri = uri);
+		public HdfsRepositorySettingsDescriptor Uri(string uri) => Assign(a => a.Uri = uri);
 
 		/// <summary>
 		///required - path with the file-system where data is stored/loaded
 		/// </summary>
-		public HdfsRepositoryDescriptor Path(string path) => Assign(a => a.Path = path);
+		public HdfsRepositorySettingsDescriptor Path(string path) => Assign(a => a.Path = path);
 		/// <summary>
 		/// whether to load the default Hadoop configuration (default) or not
 		/// </summary>
 		/// <param name="loadDefaults"></param>
-		public HdfsRepositoryDescriptor LoadDefaults(bool loadDefaults = true) => Assign(a => a.LoadDefaults = loadDefaults);
+		public HdfsRepositorySettingsDescriptor LoadDefaults(bool loadDefaults = true) => Assign(a => a.LoadDefaults = loadDefaults);
 
 		/// <summary>
 		/// Hadoop configuration XML to be loaded (use commas for multi values)
 		/// </summary>
 		/// <param name="configurationLocation"></param>
-		public HdfsRepositoryDescriptor ConfigurationLocation(string configurationLocation) =>
+		public HdfsRepositorySettingsDescriptor ConfigurationLocation(string configurationLocation) =>
 			Assign(a => a.ConfigurationLocation = configurationLocation);
 
 		/// <summary>
@@ -92,7 +105,7 @@ namespace Nest
 		/// </summary>
 		/// <param name="key"></param>
 		/// <param name="value"></param>
-		public HdfsRepositoryDescriptor InlinedHadoopConfiguration(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> inlineConfig) => Assign(a =>
+		public HdfsRepositorySettingsDescriptor InlinedHadoopConfiguration(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> inlineConfig) => Assign(a =>
 			a.InlineHadoopConfiguration = inlineConfig(new FluentDictionary<string, object>())
 		);
 
@@ -101,13 +114,13 @@ namespace Nest
 		/// affect index files that are already compressed by default. Defaults to false.
 		/// </summary>
 		/// <param name="compress"></param>
-		public HdfsRepositoryDescriptor Compress(bool compress = true) => Assign(a => a.Compress = compress);
+		public HdfsRepositorySettingsDescriptor Compress(bool compress = true) => Assign(a => a.Compress = compress);
 
 		/// <summary>
 		/// Throttles the number of streams (per node) preforming snapshot operation. Defaults to 5
 		/// </summary>
 		/// <param name="concurrentStreams"></param>
-		public HdfsRepositoryDescriptor ConcurrentStreams(int concurrentStreams) => Assign(a => a.ConcurrentStreams = concurrentStreams);
+		public HdfsRepositorySettingsDescriptor ConcurrentStreams(int concurrentStreams) => Assign(a => a.ConcurrentStreams = concurrentStreams);
 
 		/// <summary>
 		///  Big files can be broken down into chunks during snapshotting if needed.
@@ -115,6 +128,17 @@ namespace Nest
 		///  i.e. 1g, 10m, 5k. Disabled by default
 		/// </summary>
 		/// <param name="chunkSize"></param>
-		public HdfsRepositoryDescriptor ChunkSize(string chunkSize) => Assign(a => a.ChunkSize = chunkSize);
+		public HdfsRepositorySettingsDescriptor ChunkSize(string chunkSize) => Assign(a => a.ChunkSize = chunkSize);
+	}
+
+	public class HdfsRepositoryDescriptor 
+		: DescriptorBase<HdfsRepositoryDescriptor, IHdfsRepository>, IHdfsRepository
+	{
+		string IRepository.Type { get { return "hdfs"; } } 
+
+		IHdfsRepositorySettings IHdfsRepository.Settings { get; set; }
+
+		public HdfsRepositoryDescriptor Settings(string path, Func<HdfsRepositorySettingsDescriptor, IHdfsRepositorySettings> settingsSelector = null) =>
+			Assign(a => a.Settings = settingsSelector?.InvokeOrDefault(new HdfsRepositorySettingsDescriptor().Path(path)));
 	}
 }

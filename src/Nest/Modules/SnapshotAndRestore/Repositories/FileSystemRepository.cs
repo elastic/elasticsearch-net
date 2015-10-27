@@ -5,9 +5,13 @@ using System.Linq;
 
 namespace Nest
 {
-	[JsonObject]
-	[JsonConverter(typeof(RepositoryJsonConverter))]
 	public interface IFileSystemRepository : IRepository
+	{
+		[JsonProperty("settings")]
+		IFileSystemRepositorySettings Settings { get; set; }
+	}
+
+	public interface IFileSystemRepositorySettings : INestSerializable
 	{
 		[JsonProperty("location")]
 		string Location { get; set; }
@@ -22,20 +26,29 @@ namespace Nest
 		string ChunkSize { get; set; }
 
 		[JsonProperty("max_restore_bytes_per_second")]
-		string MaximumRestoreBytesPerSecond { get; set; }
+		string RestoreBytesPerSecondMaximum { get; set; }
 
 		[JsonProperty("max_snapshot_bytes_per_second")]
-		string MaximumSnapshotBytesPerSecond { get; set; }
+		string SnapshotBytesPerSecondMaximum { get; set; }
 	}
 
 	public class FileSystemRepository : IFileSystemRepository
 	{
-		public FileSystemRepository(string location)
+		public FileSystemRepository(FileSystemRepositorySettings settings)
+		{
+			this.Settings = settings;
+		}
+
+		string IRepository.Type { get { return "fs"; } }	
+		public IFileSystemRepositorySettings Settings { get; set; }
+	}
+
+	public class FileSystemRepositorySettings : IFileSystemRepositorySettings
+	{
+		public FileSystemRepositorySettings(string location)
 		{
 			this.Location = location;
 		}
-
-		string IRepository.Type { get { return "fs"; } }
 
 		public string Location { get; set; }
 
@@ -45,39 +58,38 @@ namespace Nest
 
 		public string ChunkSize { get; set; }
 
-		public string MaximumRestoreBytesPerSecond { get; set; }
+		public string RestoreBytesPerSecondMaximum { get; set; }
 
-		public string MaximumSnapshotBytesPerSecond { get; set; }
+		public string SnapshotBytesPerSecondMaximum { get; set; }
 	}
 
-	public class FileSystemRepositoryDescriptor 
-		: DescriptorBase<FileSystemRepositoryDescriptor, IFileSystemRepository>, IFileSystemRepository
+	public class FileSystemRepositorySettingsDescriptor
+		: DescriptorBase<FileSystemRepositorySettingsDescriptor, IFileSystemRepositorySettings>, IFileSystemRepositorySettings
 	{
-		string IRepository.Type { get { return "fs"; } }
-		string IFileSystemRepository.Location { get; set; }
-		bool IFileSystemRepository.Compress  { get; set; }
-		int IFileSystemRepository.ConcurrentStreams { get; set; }
-		string IFileSystemRepository.ChunkSize { get; set; }
-		string IFileSystemRepository.MaximumRestoreBytesPerSecond { get; set; }
-		string IFileSystemRepository.MaximumSnapshotBytesPerSecond { get; set; }
+		string IFileSystemRepositorySettings.Location { get; set; }
+		bool IFileSystemRepositorySettings.Compress  { get; set; }
+		int IFileSystemRepositorySettings.ConcurrentStreams { get; set; }
+		string IFileSystemRepositorySettings.ChunkSize { get; set; }
+		string IFileSystemRepositorySettings.RestoreBytesPerSecondMaximum { get; set; }
+		string IFileSystemRepositorySettings.SnapshotBytesPerSecondMaximum { get; set; }
 
 		/// <summary>
 		/// Location of the snapshots. Mandatory.
 		/// </summary>
 		/// <param name="location"></param>
-		public FileSystemRepositoryDescriptor Location(string location) => Assign(a => a.Location = location);
+		public FileSystemRepositorySettingsDescriptor Location(string location) => Assign(a => a.Location = location);
 
 		/// <summary>
 		/// Turns on compression of the snapshot files. Defaults to true.
 		/// </summary>
 		/// <param name="compress"></param>
-		public FileSystemRepositoryDescriptor Compress(bool compress = true) => Assign(a => a.Compress = compress);
+		public FileSystemRepositorySettingsDescriptor Compress(bool compress = true) => Assign(a => a.Compress = compress);
 
 		/// <summary>
 		/// Throttles the number of streams (per node) preforming snapshot operation. Defaults to 5
 		/// </summary>
 		/// <param name="concurrentStreams"></param>
-		public FileSystemRepositoryDescriptor ConcurrentStreams(int concurrentStreams) => Assign(a => a.ConcurrentStreams = concurrentStreams);
+		public FileSystemRepositorySettingsDescriptor ConcurrentStreams(int concurrentStreams) => Assign(a => a.ConcurrentStreams = concurrentStreams);
 
 		/// <summary>
 		/// Big files can be broken down into chunks during snapshotting if needed. 
@@ -85,20 +97,30 @@ namespace Nest
 		/// Defaults to null (unlimited chunk size).
 		/// </summary>
 		/// <param name="chunkSize"></param>
-		public FileSystemRepositoryDescriptor ChunkSize(string chunkSize) => Assign(a => a.ChunkSize = chunkSize);
+		public FileSystemRepositorySettingsDescriptor ChunkSize(string chunkSize) => Assign(a => a.ChunkSize = chunkSize);
 
 		/// <summary>
 		/// Throttles per node restore rate. Defaults to 20mb per second.
 		/// </summary>
 		/// <param name="maximumBytesPerSecond"></param>
-		public FileSystemRepositoryDescriptor RestoreBytesPerSecondMaximum(string maximumBytesPerSecond) =>
-			Assign(a => a.MaximumRestoreBytesPerSecond = maximumBytesPerSecond);
+		public FileSystemRepositorySettingsDescriptor RestoreBytesPerSecondMaximum(string maximumBytesPerSecond) =>
+			Assign(a => a.RestoreBytesPerSecondMaximum = maximumBytesPerSecond);
 
 		/// <summary>
 		/// Throttles per node snapshot rate. Defaults to 20mb per second. 
 		/// </summary>
 		/// <param name="maximumBytesPerSecond"></param>
-		public FileSystemRepositoryDescriptor SnapshotBytesPerSecondMaximum(string maximumBytesPerSecond) =>
-			Assign(a => a.MaximumSnapshotBytesPerSecond = maximumBytesPerSecond);
+		public FileSystemRepositorySettingsDescriptor SnapshotBytesPerSecondMaximum(string maximumBytesPerSecond) =>
+			Assign(a => a.SnapshotBytesPerSecondMaximum = maximumBytesPerSecond);
+	}
+
+	public class FileSystemRepositoryDescriptor 
+		: DescriptorBase<FileSystemRepositoryDescriptor, IFileSystemRepository>, IFileSystemRepository
+	{
+		string IRepository.Type { get { return "fs"; } }
+		IFileSystemRepositorySettings IFileSystemRepository.Settings { get; set; }
+
+		public FileSystemRepositoryDescriptor Settings(string location, Func<FileSystemRepositorySettingsDescriptor, IFileSystemRepositorySettings> settingsSelector = null) =>
+			Assign(a => a.Settings = settingsSelector.InvokeOrDefault(new FileSystemRepositorySettingsDescriptor().Location(location)));
 	}
 }

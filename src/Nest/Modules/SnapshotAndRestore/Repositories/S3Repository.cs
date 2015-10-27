@@ -5,9 +5,13 @@ using System.Linq;
 
 namespace Nest
 {
-	[JsonObject]
-	[JsonConverter(typeof(RepositoryJsonConverter))]
 	public interface IS3Repository : IRepository
+	{
+		[JsonProperty("settings")]
+		IS3RepositorySettings Settings { get; set; }
+	}
+
+	public interface IS3RepositorySettings : INestSerializable
 	{
 		[JsonProperty("bucket")]
 		string Bucket { get; set; }
@@ -36,76 +40,90 @@ namespace Nest
 
 	public class S3Repository : IS3Repository
 	{
+		public S3Repository(S3RepositorySettings settings)
+		{
+			this.Settings = settings;
+		}
+
 		string IRepository.Type { get; } = "s3";
-		public string AccessKey { get; set; }
-		public string BasePath { get; set; }
-		public string Bucket { get; set; }
-		public string ChunkSize { get; set; }
-		public bool Compress { get; set; }
-		public int ConcurrentStreams { get; set; }
-		public string Region { get; set; }
-		public string SecretKey { get; set; }
+		public IS3RepositorySettings Settings { get; set; }
 	}
 
-	public class S3RepositoryDescriptor 
-		: DescriptorBase<S3RepositoryDescriptor, IS3Repository>, IS3Repository
+	public class S3RepositorySettings : IS3RepositorySettings
 	{
-		string IRepository.Type { get; } = "s3";
-		string IS3Repository.Bucket { get; set; }
-		string IS3Repository.Region { get; set; }
-		string IS3Repository.BasePath { get; set; }
-		string IS3Repository.AccessKey { get; set; }
-		string IS3Repository.SecretKey { get; set; }
-		bool IS3Repository.Compress { get; set; }
-		int IS3Repository.ConcurrentStreams { get; set; }
-		string IS3Repository.ChunkSize { get; set; }
+		public S3RepositorySettings(string bucket)
+		{
+			this.Bucket = bucket;
+		}
+
+		public string Bucket { get; set; }
+		public string Region { get; set; }
+		public string BasePath { get; set; }
+		public string AccessKey { get; set; }
+		public string SecretKey { get; set; }
+		public bool Compress { get; set; }
+		public int ConcurrentStreams { get; set; }
+		public string ChunkSize { get; set; }
+	}
+
+	public class S3RepositorySettingsDescriptor 
+		: DescriptorBase<S3RepositorySettingsDescriptor, IS3RepositorySettings>, IS3RepositorySettings
+	{
+		string IS3RepositorySettings.Bucket { get; set; }
+		string IS3RepositorySettings.Region { get; set; }
+		string IS3RepositorySettings.BasePath { get; set; }
+		string IS3RepositorySettings.AccessKey { get; set; }
+		string IS3RepositorySettings.SecretKey { get; set; }
+		bool IS3RepositorySettings.Compress { get; set; }
+		int IS3RepositorySettings.ConcurrentStreams { get; set; }
+		string IS3RepositorySettings.ChunkSize { get; set; }
 
 		/// <summary>
 		/// The name of the bucket to be used for snapshots. (Mandatory)
 		/// </summary>
 		/// <param name="bucket"></param>
-		public S3RepositoryDescriptor Bucket(string bucket) => Assign(a => a.Bucket = bucket);
+		public S3RepositorySettingsDescriptor Bucket(string bucket) => Assign(a => a.Bucket = bucket);
 
 		/// <summary>
 		/// The region where bucket is located. Defaults to US Standard
 		/// </summary>
 		/// <param name="region"></param>
 		/// <returns></returns>
-		public S3RepositoryDescriptor Region(string region) => Assign(a => a.Region = region);
+		public S3RepositorySettingsDescriptor Region(string region) => Assign(a => a.Region = region);
 
 		/// <summary>
 		/// Specifies the path within bucket to repository data. Defaults to root directory.
 		/// </summary>
 		/// <param name="basePath"></param>
 		/// <returns></returns>
-		public S3RepositoryDescriptor BasePath(string basePath) => Assign(a => a.BasePath = basePath);
+		public S3RepositorySettingsDescriptor BasePath(string basePath) => Assign(a => a.BasePath = basePath);
 
 		/// <summary>
 		/// The access key to use for authentication. Defaults to value of cloud.aws.access_key.
 		/// </summary>
 		/// <param name="accessKey"></param>
 		/// <returns></returns>
-		public S3RepositoryDescriptor AccessKey(string accessKey) => Assign(a => a.AccessKey = accessKey);
+		public S3RepositorySettingsDescriptor AccessKey(string accessKey) => Assign(a => a.AccessKey = accessKey);
 
 		/// <summary>
 		/// The secret key to use for authentication. Defaults to value of cloud.aws.secret_key.
 		/// </summary>
 		/// <param name="secretKey"></param>
 		/// <returns></returns>
-		public S3RepositoryDescriptor SecretKey(string secretKey) => Assign(a => a.SecretKey = secretKey);
+		public S3RepositorySettingsDescriptor SecretKey(string secretKey) => Assign(a => a.SecretKey = secretKey);
 
 		/// <summary>
 		/// When set to true metadata files are stored in compressed format. This setting doesn't 
 		/// affect index files that are already compressed by default. Defaults to false.
 		/// </summary>
 		/// <param name="compress"></param>
-		public S3RepositoryDescriptor Compress(bool compress = true) => Assign(a => a.Compress = compress);
+		public S3RepositorySettingsDescriptor Compress(bool compress = true) => Assign(a => a.Compress = compress);
 
 		/// <summary>
 		/// Throttles the number of streams (per node) preforming snapshot operation. Defaults to 5
 		/// </summary>
 		/// <param name="concurrentStreams"></param>
-		public S3RepositoryDescriptor ConcurrentStreams(int concurrentStreams) => Assign(a => a.ConcurrentStreams = concurrentStreams);
+		public S3RepositorySettingsDescriptor ConcurrentStreams(int concurrentStreams) => Assign(a => a.ConcurrentStreams = concurrentStreams);
 
 		/// <summary>
 		///  Big files can be broken down into chunks during snapshotting if needed. 
@@ -113,6 +131,16 @@ namespace Nest
 		/// i.e. 1g, 10m, 5k. Defaults to 100m.
 		/// </summary>
 		/// <param name="chunkSize"></param>
-		public S3RepositoryDescriptor ChunkSize(string chunkSize) => Assign(a => a.ChunkSize = chunkSize);
+		public S3RepositorySettingsDescriptor ChunkSize(string chunkSize) => Assign(a => a.ChunkSize = chunkSize);
+	}
+
+	public class S3RepositoryDescriptor 
+		: DescriptorBase<S3RepositoryDescriptor, IS3Repository>, IS3Repository
+	{
+		string IRepository.Type { get; } = "s3";
+		IS3RepositorySettings IS3Repository.Settings { get; set; }
+
+		public S3RepositoryDescriptor Settings(string bucket, Func<S3RepositorySettingsDescriptor, IS3RepositorySettings> settingsSelector = null) =>
+			Assign(a => a.Settings = settingsSelector.InvokeOrDefault(new S3RepositorySettingsDescriptor().Bucket(bucket)));
 	}
 }

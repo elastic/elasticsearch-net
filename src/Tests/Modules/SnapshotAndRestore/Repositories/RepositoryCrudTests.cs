@@ -32,11 +32,11 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories
 		protected CreateRepositoryRequest CreateInitializer(string name) =>
 			new CreateRepositoryRequest(name)
 			{
-				Repository = new FileSystemRepository(Location(name))
+				Repository = new FileSystemRepository(new FileSystemRepositorySettings(Location(name)))
             };
 
 		protected ICreateRepositoryRequest CreateFluent(string name, CreateRepositoryDescriptor d) => d
-			.FileSystem(Location(name));
+			.FileSystem(fs => fs.Settings(Location(name)));
 
 		protected override LazyResponses Read() => Calls<GetRepositoryDescriptor, GetRepositoryRequest, IGetRepositoryRequest, IGetRepositoryResponse>(
 			ReadInitializer,
@@ -63,15 +63,18 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories
 
 		protected CreateRepositoryRequest UpdateInitializer(string name) => new CreateRepositoryRequest(name)
 		{
-			Repository = new FileSystemRepository(Location(name))
-			{
-				ChunkSize = "64mb"
-			}
+			Repository = new FileSystemRepository(new FileSystemRepositorySettings(Location(name))
+				{
+					ChunkSize = "64mb"
+				}
+			)
 		};
 
 		protected ICreateRepositoryRequest UpdateFluent(string name, CreateRepositoryDescriptor d) => d
-			.FileSystem(Location(name), fs => fs
-				.ChunkSize("64mb")
+			.FileSystem(fs => fs
+				.Settings(Location(name), s => s
+					.ChunkSize("64mb")
+				)
 			);
 
 		protected override LazyResponses Delete() => Calls<DeleteRepositoryDescriptor, DeleteRepositoryRequest, IDeleteRepositoryRequest, IAcknowledgedResponse>(
