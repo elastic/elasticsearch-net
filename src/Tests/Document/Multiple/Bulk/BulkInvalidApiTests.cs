@@ -33,7 +33,7 @@ namespace Tests.Document.Multiple.Bulk
 		protected override object ExpectJson { get; } = new object[]
 		{
 			new Dictionary<string, object>{ { "update", new { _type="project", _id = Project.Instance.Name } } },
-			new { leadDeveloper = new { firstName = "martijn" } },
+			new { doc = new { leadDeveloper = new { firstName = "martijn" } } },
 			new Dictionary<string, object>{ { "delete", new { _type="project", _id = Project.Instance.Name + "1" } } },
 		};
 

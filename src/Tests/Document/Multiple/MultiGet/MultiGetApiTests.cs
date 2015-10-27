@@ -29,7 +29,7 @@ namespace Tests.Document.Multiple.MultiGet
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => $"/dev/developer/_mget";
+		protected override string UrlPath => $"/devs/developer/_mget";
 
 		protected override bool SupportsDeserialization => false;
 
@@ -85,7 +85,7 @@ namespace Tests.Document.Multiple.MultiGet
 
 		protected override object ExpectJson { get; } = new 
 		{
-			docs = Developer.Developers.Select(p => new { _type = "project", _id = p.Id, _routing = p.Id, _source = false }).Take(10)
+			docs = Developer.Developers.Select(p => new { _type = "developer", _id = p.Id, _routing = p.Id.ToString(), _source = false }).Take(10)
 		};
 
 		protected override Func<MultiGetDescriptor, IMultiGetRequest> Fluent => d => d

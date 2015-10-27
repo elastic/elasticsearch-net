@@ -33,6 +33,9 @@ namespace Nest.Resolvers
 			if (typeof(IDictionary).IsAssignableFrom(objectType)  
 				&& !typeof(IMappings).IsAssignableFrom(objectType)
 				&& !typeof(IProperties).IsAssignableFrom(objectType)
+				&& !typeof(IAnalyzers).IsAssignableFrom(objectType)
+				&& !typeof(ICharFilters).IsAssignableFrom(objectType)
+				&& !typeof(ITokenFilters).IsAssignableFrom(objectType)
 				&& !typeof(IDynamicIndexSettings).IsAssignableFrom(objectType)
 				)
 				contract.Converter = new VerbatimDictionaryKeysJsonConverter();
