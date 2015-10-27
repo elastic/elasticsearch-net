@@ -62,6 +62,22 @@ namespace Tests.ClientConcepts.LowLevel
 			fromListOfString.Type.Should().Be(PostType.EnumerableOfString);
 			fromListOfObject.Type.Should().Be(PostType.EnumerableOfObject);
 			fromObject.Type.Should().Be(PostType.Serializable);
+			
+			//passing a PostData<obkect> object to a method taking PostData<object> should not wrap
+
+			fromString = ImplicitlyConvertsFrom(fromString);
+			fromByteArray = ImplicitlyConvertsFrom(fromByteArray);
+			fromListOfString = ImplicitlyConvertsFrom(fromListOfString);
+			fromListOfObject = ImplicitlyConvertsFrom(fromListOfObject);
+			fromObject = ImplicitlyConvertsFrom(fromObject);
+
+			fromString.Type.Should().Be(PostType.LiteralString);
+			fromByteArray.Type.Should().Be(PostType.ByteArray);
+			fromListOfString.Type.Should().Be(PostType.EnumerableOfString);
+			fromListOfObject.Type.Should().Be(PostType.EnumerableOfObject);
+			fromObject.Type.Should().Be(PostType.Serializable);
+
+
 		}
 
 		[U] public async Task WritesCorrectlyUsingBothLowAndHighLevelSettings()
