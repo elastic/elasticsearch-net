@@ -39,8 +39,7 @@ namespace Nest
 			}
 
 			var s = Value as string;
-			if (s != null) return s;
-			return this.Value?.ToString();
+			return s ?? this.Value?.ToString();
 		}
 	}
 

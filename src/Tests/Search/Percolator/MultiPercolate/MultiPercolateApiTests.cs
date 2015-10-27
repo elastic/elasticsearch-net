@@ -36,11 +36,11 @@ namespace Tests.Search.Percolator.MultiPercolate
 		{
 			new Dictionary<string, object>{ { "percolate", new {} } },
 			new { doc = Project.InstanceAnonymous },
-			new Dictionary<string, object>{ { "percolate", new {  index = "otherindex", id = "1" } } },
+			new Dictionary<string, object>{ { "percolate", new {  index = "otherindex", id = 1 } } },
 			new { },
 			new Dictionary<string, object> { { "count", new { index = "otherindex", type = "othertype" } } },
 			new { doc = Project.InstanceAnonymous },
-			new Dictionary<string, object> { { "count", new { id = "2" } } },
+			new Dictionary<string, object> { { "count", new { id = 2 } } },
 			new { }
 		};
 

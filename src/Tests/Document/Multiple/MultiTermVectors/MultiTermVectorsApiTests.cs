@@ -39,7 +39,7 @@ namespace Tests.Document.Multiple.MultiTermVectors
 			{
 				_index = "devs",
 				_type = "developer",
-				_id = p.Id.ToString(),
+				_id = p.Id,
 				payloads = true,
 				field_statistics = true,
 				term_statistics = true,
