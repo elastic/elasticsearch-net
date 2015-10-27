@@ -4,6 +4,11 @@ namespace Nest
 {
 	public class ReadOnlyUrlRepository : IRepository
 	{
+		public ReadOnlyUrlRepository(string location)
+		{
+			Settings = new Dictionary<string, object> { { "location", location } };
+		}
+
 		string IRepository.Type { get { return "url"; } }
 		public IDictionary<string, object> Settings { get; set; }
 	}

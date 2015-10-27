@@ -6,6 +6,11 @@ namespace Nest
 {
 	public class FileSystemRepository : IRepository
 	{
+		public FileSystemRepository(string location)
+		{
+			Settings = new Dictionary<string, object> { { "location", location } };
+		}
+
 		string IRepository.Type { get { return "fs"; } }
 		public IDictionary<string, object> Settings { get; set; }
 	}

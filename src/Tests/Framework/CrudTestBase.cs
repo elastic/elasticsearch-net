@@ -11,7 +11,7 @@ using Xunit;
 namespace Tests.Framework
 {
 	public abstract class CrudTestBase<TCreateResponse, TReadResponse, TUpdateResponse>
-		: CrudBase<TCreateResponse, TReadResponse, TUpdateResponse, AcknowledgedResponse>
+		: CrudTestBase<TCreateResponse, TReadResponse, TUpdateResponse, AcknowledgedResponse>
 			where TCreateResponse : class, IResponse
 			where TReadResponse : class, IResponse
 			where TUpdateResponse : class, IResponse
@@ -20,7 +20,7 @@ namespace Tests.Framework
 		protected override bool SupportsDeletes => false;
 	}
 
-	public abstract class CrudBase<TCreateResponse, TReadResponse, TUpdateResponse, TDeleteResponse>
+	public abstract class CrudTestBase<TCreateResponse, TReadResponse, TUpdateResponse, TDeleteResponse>
 			where TCreateResponse : class, IResponse
 			where TReadResponse : class, IResponse
 			where TUpdateResponse : class, IResponse
@@ -36,7 +36,7 @@ namespace Tests.Framework
 		readonly IIntegrationCluster _cluster;
 
 		[SuppressMessage("Potential Code Quality Issues", "RECS0021:Warns about calls to virtual member functions occuring in the constructor", Justification = "Expected behaviour")]
-		public CrudBase(IIntegrationCluster cluster, EndpointUsage usage)
+		public CrudTestBase(IIntegrationCluster cluster, EndpointUsage usage)
 		{
 			this._cluster = cluster;
 			this.IntegrationPort = cluster.Node.Port;

@@ -24,7 +24,8 @@ namespace Tests.Framework.Integration
 		// <installpath> <> <plugin folder name>
 		private readonly Dictionary<string, string> SupportedPlugins = new Dictionary<string, string>
 		{
-			{ "delete-by-query", "delete-by-query" }
+			{ "delete-by-query", "delete-by-query" },
+			{ "cloud-azure", "cloud-azure" }
 		};
 
 		private readonly bool _doNotSpawnIfAlreadyRunning;
@@ -41,7 +42,7 @@ namespace Tests.Framework.Integration
 		public bool RunningIntegrations { get; private set; }
 		public string ClusterName { get; } = Guid.NewGuid().ToString("N").Substring(0, 6);
 		public string NodeName { get; } = Guid.NewGuid().ToString("N").Substring(0, 6);
-
+		public string RepositoryPath { get; } = @"C:\";
 		public ElasticsearchNodeInfo Info { get; private set; }
 		public int Port { get; private set; }
 
@@ -96,7 +97,8 @@ namespace Tests.Framework.Integration
 
 			this._process = new ObservableProcess(this.Binary,
 				$"-Des.cluster.name={this.ClusterName}",
-				$"-Des.node.name={this.NodeName}"
+				$"-Des.node.name={this.NodeName}",
+				$"-Des.path.repo={this.RepositoryPath}"
 			);
 			var observable = Observable.Using(() => this._process, process => process.Start())
 				.Select(consoleLine => new ElasticsearchMessage(consoleLine));

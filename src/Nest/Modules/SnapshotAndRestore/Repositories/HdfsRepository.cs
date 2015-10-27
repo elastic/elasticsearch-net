@@ -6,6 +6,11 @@ namespace Nest
 {
 	public class HdfsRepository : IRepository
 	{
+		public HdfsRepository(string path)
+		{
+			Settings = new Dictionary<string, object> { { "path", path } };
+		}
+
 		string IRepository.Type { get { return "hdfs"; } }
 		public IDictionary<string, object> Settings { get; set; }
 	}

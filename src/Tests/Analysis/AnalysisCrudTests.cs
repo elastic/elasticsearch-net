@@ -20,7 +20,8 @@ namespace Tests.Analysis
 {
 
 	[Collection(IntegrationContext.Indexing)]
-	public class AnalysisCrudTests : CrudTestBase<IIndicesOperationResponse, IGetIndexSettingsResponse, IAcknowledgedResponse>
+	public class AnalysisCrudTests 
+		: CrudTestBase<IIndicesOperationResponse, IGetIndexSettingsResponse, IAcknowledgedResponse>
 	{
 		/**
 		* # Analysis crud
