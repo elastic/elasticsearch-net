@@ -65,10 +65,7 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories
 		{
 			Repository = new FileSystemRepository(Location(name))
 			{
-				Settings = new Dictionary<string, object>
-				{
-					{ "chunk_size", "64mb" }
-				}
+				ChunkSize = "64mb"
 			}
 		};
 

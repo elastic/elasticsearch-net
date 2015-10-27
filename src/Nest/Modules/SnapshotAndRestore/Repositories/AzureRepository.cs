@@ -1,76 +1,72 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 
 namespace Nest
 {
-	public class AzureRepository : IRepository
+	[JsonObject]
+	[JsonConverter(typeof(RepositoryJsonConverter))]
+	public interface IAzureRepository : IRepository
 	{
-		string IRepository.Type { get { return "azure"; } }
-		public IDictionary<string, object> Settings { get; set; } = new Dictionary<string, object>();
+		[JsonProperty("container")]
+		string Container { get; set; }
+
+		[JsonProperty("base_path")]
+		string BasePath { get; set; }
+
+		[JsonProperty("compress")]
+		bool Compress { get; set; }
+
+		[JsonProperty("chunk_size")]
+		string ChunkSize { get; set; }
 	}
 
-	public class AzureRepositoryDescriptor : IRepository
+	public class AzureRepository : IAzureRepository
+	{
+		string IRepository.Type { get; } = "azure";
+		public string Container { get; set; }
+		public string BasePath { get; set; }
+		public bool Compress { get; set; }
+		public string ChunkSize { get; set; }
+	}
+
+	public class AzureRepositoryDescriptor
+		: DescriptorBase<AzureRepositoryDescriptor, IAzureRepository>, IAzureRepository
 	{
 		string IRepository.Type { get { return "azure"; } }
-		IDictionary<string, object> IRepository.Settings { get; set; }
+		string IAzureRepository.Container { get; set; }
+		string IAzureRepository.BasePath { get; set; }
+		bool IAzureRepository.Compress { get; set; }
+		string IAzureRepository.ChunkSize { get; set; }
 
-		private IRepository Self => this;
-
-		public AzureRepositoryDescriptor()
-		{
-			Self.Settings = new Dictionary<string, object>();
-		}
 		/// <summary>
 		/// Container name. Defaults to elasticsearch-snapshots
 		/// </summary>
-		/// <param name="bucket"></param>
-		public AzureRepositoryDescriptor Container(string bucket)
-		{
-			Self.Settings["bucket"] = bucket;
-			return this;
-		}
+		/// <param name="container"></param>
+		public AzureRepositoryDescriptor Container(string container) => Assign(a => a.Container = container);
+
 		/// <summary>
 		///Specifies the path within container to repository data. Defaults to empty (root directory).
 		/// </summary>
 		/// <param name="basePath"></param>
 		/// <returns></returns>
-		public AzureRepositoryDescriptor BasePath(string basePath)
-		{
-			Self.Settings["base_path"] = basePath;
-			return this;
-		}
+		public AzureRepositoryDescriptor BasePath(string basePath) => Assign(a => a.BasePath = basePath);
+
 		/// <summary>
 		/// When set to true metadata files are stored in compressed format. This setting doesn't 
 		/// affect index files that are already compressed by default. Defaults to false.
 		/// </summary>
 		/// <param name="compress"></param>
-		public AzureRepositoryDescriptor Compress(bool compress = true)
-		{
-			Self.Settings["compress"] = compress;
-			return this;
-		}
-		/// <summary>
-		/// Throttles the number of streams (per node) preforming snapshot operation. Defaults to 5
-		/// </summary>
-		/// <param name="concurrentStreams"></param>
-		public AzureRepositoryDescriptor ConcurrentStreams(int concurrentStreams)
-		{
-			Self.Settings["concurrent_streams"] = concurrentStreams;
-			return this;
-		}
+		public AzureRepositoryDescriptor Compress(bool compress = true) => Assign(a => a.Compress = compress);
+
 		/// <summary>
 		///  Big files can be broken down into chunks during snapshotting if needed.
 		///  The chunk size can be specified in bytes or by using size value notation,
 		///  i.e. 1g, 10m, 5k. Defaults to 64m (64m max)
 		/// </summary>
 		/// <param name="chunkSize"></param>
-		public AzureRepositoryDescriptor ChunkSize(string chunkSize)
-		{
-			Self.Settings["chunk_size"] = chunkSize;
-			return this;
-		}
-
+		public AzureRepositoryDescriptor ChunkSize(string chunkSize) => Assign(a => a.ChunkSize = chunkSize);
 	}
 }
