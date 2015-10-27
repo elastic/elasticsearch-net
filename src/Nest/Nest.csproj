@@ -345,6 +345,7 @@
     <Compile Include="Analysis\Tokenizers\WhitespaceTokenizer.cs" />
     <Compile Include="CommonOptions\Failures\ShardsFailure.cs" />
     <Compile Include="Search\CovariantSearch.cs" />
+    <Compile Include="Search\MultiSearch\MultiSearchResponsJsonConverter.cs" />
     <Compile Include="Search\Percolator\MultiPercolate\MultiPercolateJsonConverter.cs" />
     <Compile Include="Search\Percolator\RegisterPercolator\RegisterPercolatorJsonConverter.cs" />
     <Compile Include="Search\SearchTemplate\GetSearchTemplate\GetSearchTemplateResponse.cs" />

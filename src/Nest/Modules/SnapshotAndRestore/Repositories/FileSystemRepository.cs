@@ -1,93 +1,126 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Nest
 {
-	public class FileSystemRepository : IRepository
+	public interface IFileSystemRepository : IRepository
 	{
-		string IRepository.Type { get { return "fs"; } }
-		public IDictionary<string, object> Settings { get; set; }
+		[JsonProperty("settings")]
+		IFileSystemRepositorySettings Settings { get; set; }
 	}
 
-	public class FileSystemRepositoryDescriptor : IRepository
+	public interface IFileSystemRepositorySettings : INestSerializable
 	{
-		string IRepository.Type { get { return "fs"; } }
-		IDictionary<string, object> IRepository.Settings { get; set; }
+		[JsonProperty("location")]
+		string Location { get; set; }
 
-		private IRepository Self => this;
+		[JsonProperty("compress")]
+		bool Compress { get; set; }
 
-		public FileSystemRepositoryDescriptor()
+		[JsonProperty("concurrent_streams")]
+		int ConcurrentStreams { get; set; }
+
+		[JsonProperty("chunk_size")]
+		string ChunkSize { get; set; }
+
+		[JsonProperty("max_restore_bytes_per_second")]
+		string RestoreBytesPerSecondMaximum { get; set; }
+
+		[JsonProperty("max_snapshot_bytes_per_second")]
+		string SnapshotBytesPerSecondMaximum { get; set; }
+	}
+
+	public class FileSystemRepository : IFileSystemRepository
+	{
+		public FileSystemRepository(FileSystemRepositorySettings settings)
 		{
-			Self.Settings = new Dictionary<string, object>();
+			this.Settings = settings;
 		}
+
+		string IRepository.Type { get { return "fs"; } }	
+		public IFileSystemRepositorySettings Settings { get; set; }
+	}
+
+	public class FileSystemRepositorySettings : IFileSystemRepositorySettings
+	{
+		public FileSystemRepositorySettings(string location)
+		{
+			this.Location = location;
+		}
+
+		public string Location { get; set; }
+
+		public bool Compress { get; set; }
+
+		public int ConcurrentStreams { get; set; }
+
+		public string ChunkSize { get; set; }
+
+		public string RestoreBytesPerSecondMaximum { get; set; }
+
+		public string SnapshotBytesPerSecondMaximum { get; set; }
+	}
+
+	public class FileSystemRepositorySettingsDescriptor
+		: DescriptorBase<FileSystemRepositorySettingsDescriptor, IFileSystemRepositorySettings>, IFileSystemRepositorySettings
+	{
+		string IFileSystemRepositorySettings.Location { get; set; }
+		bool IFileSystemRepositorySettings.Compress  { get; set; }
+		int IFileSystemRepositorySettings.ConcurrentStreams { get; set; }
+		string IFileSystemRepositorySettings.ChunkSize { get; set; }
+		string IFileSystemRepositorySettings.RestoreBytesPerSecondMaximum { get; set; }
+		string IFileSystemRepositorySettings.SnapshotBytesPerSecondMaximum { get; set; }
+
 		/// <summary>
 		/// Location of the snapshots. Mandatory.
 		/// </summary>
 		/// <param name="location"></param>
-		public FileSystemRepositoryDescriptor Location(string location)
-		{
-			Self.Settings["location"] = location;
-			return this;
-		}
+		public FileSystemRepositorySettingsDescriptor Location(string location) => Assign(a => a.Location = location);
+
 		/// <summary>
 		/// Turns on compression of the snapshot files. Defaults to true.
 		/// </summary>
 		/// <param name="compress"></param>
-		public FileSystemRepositoryDescriptor Compress(bool compress = true)
-		{
-			Self.Settings["compress"] = compress;
-			return this;
-		}
+		public FileSystemRepositorySettingsDescriptor Compress(bool compress = true) => Assign(a => a.Compress = compress);
+
 		/// <summary>
 		/// Throttles the number of streams (per node) preforming snapshot operation. Defaults to 5
 		/// </summary>
 		/// <param name="concurrentStreams"></param>
-		public FileSystemRepositoryDescriptor ConcurrentStreams(int concurrentStreams)
-		{
-			Self.Settings["concurrent_streams"] = concurrentStreams;
-			return this;
-		}
+		public FileSystemRepositorySettingsDescriptor ConcurrentStreams(int concurrentStreams) => Assign(a => a.ConcurrentStreams = concurrentStreams);
+
 		/// <summary>
 		/// Big files can be broken down into chunks during snapshotting if needed. 
 		/// The chunk size can be specified in bytes or by using size value notation, i.e. 1g, 10m, 5k. 
 		/// Defaults to null (unlimited chunk size).
 		/// </summary>
 		/// <param name="chunkSize"></param>
-		public FileSystemRepositoryDescriptor ChunkSize(string chunkSize)
-		{
-			Self.Settings["chunk_size"] = chunkSize;
-			return this;
-		}
+		public FileSystemRepositorySettingsDescriptor ChunkSize(string chunkSize) => Assign(a => a.ChunkSize = chunkSize);
+
 		/// <summary>
 		/// Throttles per node restore rate. Defaults to 20mb per second.
 		/// </summary>
 		/// <param name="maximumBytesPerSecond"></param>
-		public FileSystemRepositoryDescriptor RestoreBytesPerSecondMaximum(string maximumBytesPerSecond)
-		{
-			Self.Settings["max_restore_bytes_per_sec"] = maximumBytesPerSecond;
-			return this;
-		}
-		/// <summary>
-		/// Throttles per node snapshot rate. Defaults to 20mb per second. 
-		/// </summary>
-		/// <param name="maximumBytesPerSecond"></param>
-		[Obsolete("Typo, Scheduled to be removed in 2.0 use the correctly spelled method")]
-		public FileSystemRepositoryDescriptor SnapshortBytesPerSecondMaximum(string maximumBytesPerSecond)
-		{
-			Self.Settings["max_snapshot_bytes_per_sec"] = maximumBytesPerSecond;
-			return this;
-		}
-		
-		/// <summary>
-		/// Throttles per node snapshot rate. Defaults to 20mb per second. 
-		/// </summary>
-		/// <param name="maximumBytesPerSecond"></param>
-		public FileSystemRepositoryDescriptor SnapshotBytesPerSecondMaximum(string maximumBytesPerSecond)
-		{
-			Self.Settings["max_snapshot_bytes_per_sec"] = maximumBytesPerSecond;
-			return this;
-		}
+		public FileSystemRepositorySettingsDescriptor RestoreBytesPerSecondMaximum(string maximumBytesPerSecond) =>
+			Assign(a => a.RestoreBytesPerSecondMaximum = maximumBytesPerSecond);
 
+		/// <summary>
+		/// Throttles per node snapshot rate. Defaults to 20mb per second. 
+		/// </summary>
+		/// <param name="maximumBytesPerSecond"></param>
+		public FileSystemRepositorySettingsDescriptor SnapshotBytesPerSecondMaximum(string maximumBytesPerSecond) =>
+			Assign(a => a.SnapshotBytesPerSecondMaximum = maximumBytesPerSecond);
+	}
+
+	public class FileSystemRepositoryDescriptor 
+		: DescriptorBase<FileSystemRepositoryDescriptor, IFileSystemRepository>, IFileSystemRepository
+	{
+		string IRepository.Type { get { return "fs"; } }
+		IFileSystemRepositorySettings IFileSystemRepository.Settings { get; set; }
+
+		public FileSystemRepositoryDescriptor Settings(string location, Func<FileSystemRepositorySettingsDescriptor, IFileSystemRepositorySettings> settingsSelector = null) =>
+			Assign(a => a.Settings = settingsSelector.InvokeOrDefault(new FileSystemRepositorySettingsDescriptor().Location(location)));
 	}
 }
