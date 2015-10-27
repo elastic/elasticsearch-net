@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
 using FluentAssertions;
@@ -31,22 +32,26 @@ namespace Tests.Document.Multiple.Reindex
 			this._reindexResult = this._client.Reindex<ILazyDocument>(Index<Developer>(), "dev-copy", r=>r);
 		}
 
-		[I] public async Task ResponseTests()
+		[I] public void ResponseTests()
 		{
+			var handle = new ManualResetEvent(false);
 			var observer = new ReindexObserver<ILazyDocument>(
 					onError: (e) => { throw e; },
 					completed: () =>
 					{
 						var refresh = this._client.Refresh("dev-copy");
-						var originalIndexCount = this._client.Count<object>(c => c.Index<Developer>());
-						var newIndexCount = this._client.Count<object>(c => c.Index("dev-copy"));
+						var originalIndexCount = this._client.Count<Developer>();
+						var newIndexCount = this._client.Count<Developer>(c => c.Index("dev-copy"));
 
 						originalIndexCount.Count.Should().BeGreaterThan(0).And.Be(newIndexCount.Count);
+
+						handle.Set();
 					}
 				);
 
 			this._reindexResult.Subscribe(observer);
-			await this._reindexResult;
+			handle.WaitOne(TimeSpan.FromMinutes(3));
+			//await this._reindexResult;
 		}
 	}
 }
