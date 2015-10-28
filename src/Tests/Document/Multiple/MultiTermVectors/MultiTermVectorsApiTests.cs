@@ -27,7 +27,7 @@ namespace Tests.Document.Multiple.MultiTermVectors
 		protected override bool ExpectIsValid => true;
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
-		protected override string UrlPath => $"/project/_mtermvectors";
+		protected override string UrlPath => $"/devs/_mtermvectors";
 
 		protected override bool SupportsDeserialization => false;
 
@@ -35,11 +35,11 @@ namespace Tests.Document.Multiple.MultiTermVectors
 		//not important for 2.0 release
 		protected override object ExpectJson { get; } = new
 		{
-			docs = Project.Projects.Select(p => new
+			docs = Developer.Developers.Select(p => new
 			{
-				_index = "project",
-				_type = "project",
-				_id = p.Name,
+				_index = "devs",
+				_type = "developer",
+				_id = p.Id,
 				payloads = true,
 				field_statistics = true,
 				term_statistics = true,

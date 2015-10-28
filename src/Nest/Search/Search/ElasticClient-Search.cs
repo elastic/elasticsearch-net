@@ -74,7 +74,7 @@ namespace Nest
 			this.Dispatcher.Dispatch<ISearchRequest, SearchRequestParameters, SearchResponse<TResult>>(
 				request,
 				(p, d) => this.LowLevelDispatch.SearchDispatch<SearchResponse<TResult>>(
-					this.AttachCustomConverterWhenNeeded<T, TResult>(p.RouteValues, d), d
+					this.AttachCustomConverterWhenNeeded<T, TResult>(p.RouteValues, request), d
 					)
 				);
 
@@ -100,7 +100,7 @@ namespace Nest
 			this.Dispatcher.DispatchAsync<ISearchRequest, SearchRequestParameters, SearchResponse<TResult>, ISearchResponse<TResult>>(
 				request,
 				(p, d) => this.LowLevelDispatch.SearchDispatchAsync<SearchResponse<TResult>>(
-					this.AttachCustomConverterWhenNeeded<T, TResult>(p.RouteValues, d), d
+					this.AttachCustomConverterWhenNeeded<T, TResult>(p.RouteValues, request), d
 					)
 				);
 

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Nest.Resolvers;
+using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
@@ -14,6 +15,9 @@ namespace Nest
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
+			if (reader.TokenType == JsonToken.Integer)
+				return new Id((long)reader.Value);
+
 			return new Id(reader.Value as string);
 		}
 

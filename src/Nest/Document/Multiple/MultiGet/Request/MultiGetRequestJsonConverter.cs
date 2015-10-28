@@ -21,13 +21,14 @@ namespace Nest
 				writer.WriteEndObject();
 				return;
 			}
-			var docs = request.Documents.ToList();
-			var flatten = docs.All(p =>
+			var docs = request.Documents.Select(d =>
 			{
-				if (request.Index != null) p.Index = null;
-				if (request.Type != null) p.Type = null;
-				return p.CanBeFlattened;
-			});
+				if (request.Index != null) d.Index = null;
+				if (request.Type != null) d.Type = null;
+				return d;
+			}).ToList();
+
+			var flatten = docs.All(p => p.CanBeFlattened);
 
 			writer.WritePropertyName(flatten ? "ids" : "docs");
 			writer.WriteStartArray();

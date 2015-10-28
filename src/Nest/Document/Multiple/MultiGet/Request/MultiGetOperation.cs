@@ -9,14 +9,13 @@ namespace Nest
 
 	public class MultiGetOperation<T> : IMultiGetOperation
 	{
-		public MultiGetOperation(string id)
+		public MultiGetOperation(Id id)
 		{
 			this.Id = id;
 			this.Index = typeof(T);
 			this.Type = typeof(T);
 		}
 
-		public MultiGetOperation(long id) : this(id.ToString(CultureInfo.InvariantCulture)) { }
 
 		Type IMultiGetOperation.ClrType => typeof(T);
 

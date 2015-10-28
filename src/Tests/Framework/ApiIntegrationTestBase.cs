@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.ExceptionServices;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Nest;
@@ -35,9 +36,10 @@ namespace Tests.Framework
 
 			return base.AssertOnAllResponses((r) =>
 			{
-				if (!r.IsValid && r.CallDetails.OriginalException != null)
+				if (TestClient.RunIntegrationTests && !r.IsValid && r.CallDetails.OriginalException != null)
 				{
-					throw r.CallDetails.OriginalException;
+					ExceptionDispatchInfo.Capture(r.CallDetails.OriginalException).Throw();
+					return;
 				}
 
 				assert(r);

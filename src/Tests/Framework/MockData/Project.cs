@@ -10,7 +10,6 @@ namespace Tests.Framework.MockData
 {
 	public class Project
 	{
-		public long Id { get; set; }
 		public string Name { get; set; }
 		public StateOfBeing State { get; set; }
 		public DateTime StartedOn { get; set; }

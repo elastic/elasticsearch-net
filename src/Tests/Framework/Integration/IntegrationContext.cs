@@ -7,5 +7,6 @@ namespace Tests.Framework.Integration
 
 
 		public const string DeleteByQuery = "DeleteByQuery Cluster";
+		public const string Reindex = "Reindex Cluster";
 	}
 }

@@ -23,7 +23,7 @@ namespace Nest
 		}
 
 		public string GetString(IConnectionConfigurationValues settings) =>
-		string.Join(",", this._scrollIds.Select(s => s.GetString(settings)));
+			string.Join(",", this._scrollIds.Select(s => s.GetString(settings)));
 
 		public static implicit operator ScrollIds(string scrollIds) => Parse(scrollIds);
 	}

@@ -68,7 +68,7 @@ namespace Nest
 			do
 			{
 				var result = searchResult;
-				searchResult = this._client.Scroll<T>((TimeUnitExpression)scroll, result.ScrollId);
+				searchResult = this._client.Scroll<T>(scroll, result.ScrollId);
 				if (searchResult.Documents.HasAny())
 					indexResult = this.IndexSearchResults(searchResult, observer, toIndex, page);
 				page++;

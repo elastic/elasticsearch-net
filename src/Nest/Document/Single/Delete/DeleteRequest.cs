@@ -15,7 +15,6 @@ namespace Nest
 	public partial class DeleteRequest<T> : RequestBase<DeleteRequestParameters>, IDeleteRequest<T>
 		where T : class
 	{
-		//TODO constructors
 	}
 
 	[DescriptorFor("Delete")]

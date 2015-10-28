@@ -35,7 +35,7 @@ namespace Tests.Document.Multiple.Bulk
 			new Dictionary<string, object>{ { "index", new {  _type = "project", _id = Project.Instance.Name } } },
 			Project.InstanceAnonymous,
 			new Dictionary<string, object>{ { "update", new { _type="project", _id = Project.Instance.Name } } },
-			new { leadDeveloper = new { firstName = "martijn" } },
+			new { doc = new { leadDeveloper = new { firstName = "martijn" } } } ,
 			new Dictionary<string, object>{ { "create", new { _type="project", _id = Project.Instance.Name + "1" } } },
 			Project.InstanceAnonymous,
 			new Dictionary<string, object>{ { "delete", new { _type="project", _id = Project.Instance.Name + "1" } } },
@@ -62,7 +62,7 @@ namespace Tests.Document.Multiple.Bulk
 				{
 					Id = Project.Instance.Name + "1"
 				},
-				new BulkDeleteOperation<Project>(Project.Instance + "1"),
+				new BulkDeleteOperation<Project>(Project.Instance.Name + "1"),
 			}
 		};
 		[I] public async Task Response() => await this.AssertOnAllResponses(r =>

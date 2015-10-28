@@ -47,18 +47,6 @@ namespace Nest
 			this._routeValues[name] = routeValue;
 			return this;
 		}
-		private RouteValues Resolved(string name, string routeValue, bool required = true)
-		{
-			if (routeValue == null)
-			{
-				if (this._resolved.ContainsKey(name))
-					this._resolved.Remove(name);
-				return this;
-			}
-			this._resolved[name] = routeValue;
-			return this;
-		}
-
 		public void Resolve(IConnectionSettingsValues settings)
 		{
 			foreach (var kv in _routeValues)
