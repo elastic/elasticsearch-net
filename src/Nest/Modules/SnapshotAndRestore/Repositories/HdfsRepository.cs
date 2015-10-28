@@ -5,13 +5,20 @@ using System.Linq;
 
 namespace Nest
 {
-	public interface IHdfsRepository : IRepository
+	public interface IHdfsRepository : IRepository<IHdfsRepositorySettings> { }
+
+	public class HdfsRepository : IHdfsRepository
 	{
-		[JsonProperty("settings")]
-		IHdfsRepositorySettings Settings { get; set; }
+		public HdfsRepository(HdfsRepositorySettings settings)
+		{
+			Settings = settings;
+		}
+
+		public IHdfsRepositorySettings Settings { get; set; }
+		public string Type { get; } = "hdfs";
 	}
 
-	public interface IHdfsRepositorySettings : INestSerializable
+	public interface IHdfsRepositorySettings : IRepositorySettings
 	{
 		[JsonProperty("uri")]
 		string Uri { get; set; }
@@ -20,16 +27,16 @@ namespace Nest
 		string Path { get; set; }
 
 		[JsonProperty("load_defaults")]
-		bool LoadDefaults { get; set; }
+		bool? LoadDefaults { get; set; }
 
 		[JsonProperty("conf_location")]
 		string ConfigurationLocation { get; set; }
 
 		[JsonProperty("compress")]
-		bool Compress { get; set; }
+		bool? Compress { get; set; }
 
 		[JsonProperty("concurrent_streams")]
-		int ConcurrentStreams { get; set; }
+		int? ConcurrentStreams { get; set; }
 
 		[JsonProperty("chunk_size")]
 		string ChunkSize { get; set; }
@@ -38,30 +45,21 @@ namespace Nest
 		Dictionary<string, object> InlineHadoopConfiguration { get; set; }
 	}
 
-	public class HdfsRepository : IHdfsRepository
-	{
-		public HdfsRepository(HdfsRepositorySettings settings)
-		{
-			this.Settings = settings;
-		}
-
-		string IRepository.Type { get; } = "hdfs";
-		public IHdfsRepositorySettings Settings { get; set; }
-    }
-
 	public class HdfsRepositorySettings : IHdfsRepositorySettings
 	{
+		internal HdfsRepositorySettings() { }
+		
 		public HdfsRepositorySettings(string path)
 		{
 			this.Path = path;
 		}
 
 		public string ChunkSize { get; set; }
-		public bool Compress { get; set; }
-		public int ConcurrentStreams { get; set; }
+		public bool? Compress { get; set; }
+		public int? ConcurrentStreams { get; set; }
 		public string ConfigurationLocation { get; set; }
 		public Dictionary<string, object> InlineHadoopConfiguration { get; set; }
-		public bool LoadDefaults { get; set; }
+		public bool? LoadDefaults { get; set; }
 		public string Path { get; set; }
 		public string Uri { get; set; }
 	}
@@ -71,10 +69,10 @@ namespace Nest
 	{
 		string IHdfsRepositorySettings.Uri { get; set; }
 		string IHdfsRepositorySettings.Path { get; set; }
-		bool IHdfsRepositorySettings.LoadDefaults { get; set; }
+		bool? IHdfsRepositorySettings.LoadDefaults { get; set; }
 		string IHdfsRepositorySettings.ConfigurationLocation { get; set; }
-		bool IHdfsRepositorySettings.Compress { get; set; }
-		int IHdfsRepositorySettings.ConcurrentStreams { get; set; }
+		bool? IHdfsRepositorySettings.Compress { get; set; }
+		int? IHdfsRepositorySettings.ConcurrentStreams { get; set; }
 		string IHdfsRepositorySettings.ChunkSize { get; set; }
 		Dictionary<string, object> IHdfsRepositorySettings.InlineHadoopConfiguration { get; set; }
 
@@ -136,7 +134,7 @@ namespace Nest
 	{
 		string IRepository.Type { get { return "hdfs"; } } 
 
-		IHdfsRepositorySettings IHdfsRepository.Settings { get; set; }
+		IHdfsRepositorySettings IRepository<IHdfsRepositorySettings>.Settings { get; set; }
 
 		public HdfsRepositoryDescriptor Settings(string path, Func<HdfsRepositorySettingsDescriptor, IHdfsRepositorySettings> settingsSelector = null) =>
 			Assign(a => a.Settings = settingsSelector?.InvokeOrDefault(new HdfsRepositorySettingsDescriptor().Path(path)));

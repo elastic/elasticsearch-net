@@ -5,13 +5,20 @@ using System.Linq;
 
 namespace Nest
 {
-	public interface IS3Repository : IRepository
+	public interface IS3Repository : IRepository<IS3RepositorySettings> { }
+
+	public class S3Repository : IS3Repository
 	{
-		[JsonProperty("settings")]
-		IS3RepositorySettings Settings { get; set; }
+		public S3Repository(S3RepositorySettings settings)
+		{
+			Settings = settings;
+		}
+
+		public IS3RepositorySettings Settings { get; set; }
+		public string Type { get; } = "s3";
 	}
 
-	public interface IS3RepositorySettings : INestSerializable
+	public interface IS3RepositorySettings : IRepositorySettings
 	{
 		[JsonProperty("bucket")]
 		string Bucket { get; set; }
@@ -29,28 +36,19 @@ namespace Nest
 		string SecretKey { get; set; }
 
 		[JsonProperty("compress")]
-		bool Compress { get; set; }
+		bool? Compress { get; set; }
 
 		[JsonProperty("concurrent_streams")]
-		int ConcurrentStreams { get; set; }
+		int? ConcurrentStreams { get; set; }
 
 		[JsonProperty("chunk_size")]
 		string ChunkSize { get; set; }
 	}
 
-	public class S3Repository : IS3Repository
-	{
-		public S3Repository(S3RepositorySettings settings)
-		{
-			this.Settings = settings;
-		}
-
-		string IRepository.Type { get; } = "s3";
-		public IS3RepositorySettings Settings { get; set; }
-	}
-
 	public class S3RepositorySettings : IS3RepositorySettings
 	{
+		internal S3RepositorySettings() { }
+
 		public S3RepositorySettings(string bucket)
 		{
 			this.Bucket = bucket;
@@ -61,8 +59,8 @@ namespace Nest
 		public string BasePath { get; set; }
 		public string AccessKey { get; set; }
 		public string SecretKey { get; set; }
-		public bool Compress { get; set; }
-		public int ConcurrentStreams { get; set; }
+		public bool? Compress { get; set; }
+		public int? ConcurrentStreams { get; set; }
 		public string ChunkSize { get; set; }
 	}
 
@@ -74,8 +72,8 @@ namespace Nest
 		string IS3RepositorySettings.BasePath { get; set; }
 		string IS3RepositorySettings.AccessKey { get; set; }
 		string IS3RepositorySettings.SecretKey { get; set; }
-		bool IS3RepositorySettings.Compress { get; set; }
-		int IS3RepositorySettings.ConcurrentStreams { get; set; }
+		bool? IS3RepositorySettings.Compress { get; set; }
+		int? IS3RepositorySettings.ConcurrentStreams { get; set; }
 		string IS3RepositorySettings.ChunkSize { get; set; }
 
 		/// <summary>
@@ -138,7 +136,7 @@ namespace Nest
 		: DescriptorBase<S3RepositoryDescriptor, IS3Repository>, IS3Repository
 	{
 		string IRepository.Type { get; } = "s3";
-		IS3RepositorySettings IS3Repository.Settings { get; set; }
+		IS3RepositorySettings IRepository<IS3RepositorySettings>.Settings { get; set; }
 
 		public S3RepositoryDescriptor Settings(string bucket, Func<S3RepositorySettingsDescriptor, IS3RepositorySettings> settingsSelector = null) =>
 			Assign(a => a.Settings = settingsSelector.InvokeOrDefault(new S3RepositorySettingsDescriptor().Bucket(bucket)));

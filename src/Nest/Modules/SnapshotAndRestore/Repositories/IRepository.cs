@@ -9,8 +9,12 @@ namespace Nest
 		string Type { get; }
 	}
 
-	public class SnapshotRepository : IRepository
+	public interface IRepository<TSettings> : IRepository
+		where TSettings : class, IRepositorySettings
 	{
-		public string Type { get; internal set; }
+		[JsonProperty("settings")]
+		TSettings Settings { get; set; }
 	}
+
+	public interface IRepositorySettings { }
 }

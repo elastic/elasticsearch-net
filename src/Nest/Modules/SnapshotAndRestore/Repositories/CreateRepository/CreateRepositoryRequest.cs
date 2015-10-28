@@ -19,7 +19,7 @@ namespace Nest
 	}
 
 	[DescriptorFor("SnapshotCreateRepository")]
-	public partial class CreateRepositoryDescriptor 
+	public partial class CreateRepositoryDescriptor
 	{
 		IRepository ICreateRepositoryRequest.Repository { get; set; }
 
