@@ -111,7 +111,8 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories
 
 		[I] public async Task ResponseDeserializes() => await this.AssertOnGetAfterCreate(r => {
 			r.Repositories.Should().NotBeNull().And.HaveCount(1);
-			var repository = r.Repositories.Values.SingleOrDefault() as FileSystemRepository;
+			var name = r.Repositories.Keys.First();
+			var repository = r.FileSystem(name);
 			repository.Should().NotBeNull();
 			repository.Type.Should().Be("fs");
 			repository.Settings.Should().NotBeNull();
@@ -122,7 +123,8 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories
 		[I] public async Task RepositoryUpdated() => await this.AssertOnGetAfterUpdate(r =>
 		{
 			r.Repositories.Should().NotBeNull().And.HaveCount(1);
-			var repository = r.Repositories.Values.SingleOrDefault() as FileSystemRepository;
+			var name = r.Repositories.Keys.First();
+			var repository = r.FileSystem(name);
 			repository.Should().NotBeNull();
 			repository.Type.Should().Be("fs");
 			repository.Settings.Should().NotBeNull();

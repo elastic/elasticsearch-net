@@ -16,7 +16,9 @@ namespace Nest
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
 			var response = new GetRepositoryResponse();
-			var repositories = JObject.Load(reader).Properties().ToDictionary(p => p.Name, p => p.Value);
+			var repositories = JObject.Load(reader).Properties()
+				.Where(p => p.Name != "error" && p.Name != "status")
+				.ToDictionary(p => p.Name, p => p.Value);
 			if (!repositories.HasAny())
 				return response;
 			response.Repositories = new Dictionary<string, IRepository>();
