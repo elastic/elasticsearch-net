@@ -250,6 +250,11 @@ namespace Tests.Framework.Integration
 				Console.WriteLine($"attempting to delete log file: {f}");
 				File.Delete(f);
 			}
+			if (Directory.Exists(this.RepositoryPath))
+			{
+				Console.WriteLine("attempting to delete repositories");
+				Directory.Delete(this.RepositoryPath, true);
+			}
 		}
 
 		public void Dispose()
