@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Nest;
+using Tests.Framework.Integration;
 
 namespace Tests.Framework
 {
@@ -52,12 +53,12 @@ namespace Tests.Framework
 		}
 	}
 
-	public class LazyResponses : AsyncLazy<Dictionary<string, IResponse>>
+	public class LazyResponses : AsyncLazy<Dictionary<ClientCall, IResponse>>
 	{
-		public static LazyResponses Empty { get; } = new LazyResponses(() => new Dictionary<string, IResponse> { });
+		public static LazyResponses Empty { get; } = new LazyResponses(() => new Dictionary<ClientCall, IResponse> { });
 
-		public LazyResponses(Func<Dictionary<string, IResponse>> factory) : base(factory) { }
+		public LazyResponses(Func<Dictionary<ClientCall, IResponse>> factory) : base(factory) { }
 
-		public LazyResponses(Func<Task<Dictionary<string, IResponse>>> factory) : base(factory) { }
+		public LazyResponses(Func<Task<Dictionary<ClientCall, IResponse>>> factory) : base(factory) { }
 	}
 }

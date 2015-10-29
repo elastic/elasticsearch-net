@@ -1,27 +1,33 @@
 source https://www.nuget.org/api/v2
 
-nuget Nuget.CommandLine 2.8.3
-nuget AppDomainToolkit 1.0.4.1
-nuget Autofac.Extras.FakeItEasy 3.0.2
-nuget AutoPoco 1.0.0.0
-nuget CsQuery 1.3.4
-nuget FluentAssertions 3.5.0
-nuget FubuCsProjFile 1.1.0.83
-nuget Moq 4.2.1312.1622
-nuget Newtonsoft.Json 7.0.1
-nuget NUnit 2.6.4
+nuget Newtonsoft.Json 
+
+//codegen
+nuget ShellProgressBar 
+nuget Microsoft.CodeAnalysis.CSharp 
+nuget CsQuery 
 nuget RazorMachine 2.6.1
-nuget Rx-Core 2.2.5 framework: >= net451
-nuget Rx-Interfaces 2.2.5 framework: >= net451
-nuget Rx-Linq 2.2.5 framework: >= net451
-nuget Rx-Main 2.2.5 framework: >= net451
-nuget Rx-PlatformServices 2.2.5 framework: >= net451
-nuget ShellProgressBar 1.0.0.0
-nuget SimpleJson 0.32.0
-nuget YamlDotNet 3.0.0
-nuget AutoFixture 3.22.0
-nuget FsUnit 1.3.0.1
-nuget Microsoft.CodeAnalysis.CSharp 1.0.0-beta1-20141031-01
-nuget xunit 2.1.0-beta3-build3029
-nuget Bogus 2.1.5.2
-nuget DiffPlex 1.2.1
+
+//tests
+nuget xunit 
+nuget FluentAssertions 
+nuget Bogus 
+nuget DiffPlex 
+
+//Rx-Main on its does not seem to work
+nuget Rx-Core
+nuget Rx-Interfaces
+nuget Rx-Linq 
+nuget Rx-Main
+nuget Rx-PlatformServices
+
+group build
+    
+	source https://www.nuget.org/api/v2
+
+	nuget FAKE
+    nuget FSharp.Data
+    nuget GitLink
+    nuget node.js
+	nuget npm
+    nuget xunit.runner.console

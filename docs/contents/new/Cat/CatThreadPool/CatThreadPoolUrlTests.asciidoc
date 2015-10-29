@@ -1,0 +1,9 @@
+[source, csharp]
+----
+await GET("/_cat/thread_pool")
+				.Fluent(c => c.CatThreadPool())
+				.Request(c => c.CatThreadPool(new CatThreadPoolRequest()))
+				.FluentAsync(c => c.CatThreadPoolAsync())
+				.RequestAsync(c => c.CatThreadPoolAsync(new CatThreadPoolRequest()))
+				;
+----

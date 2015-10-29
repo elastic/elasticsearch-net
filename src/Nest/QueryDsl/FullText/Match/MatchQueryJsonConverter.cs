@@ -27,11 +27,11 @@ namespace Nest
 			var jo = firstProp.Value.Value<JObject>();
 			if (jo == null) return null;
 
-			JToken v = null;
+			JToken v;
 			string type = null;
 			if (jo.TryGetValue("type", out v)) type = v.Value<string>();
 
-			IMatchQuery fq = null;
+			IMatchQuery fq;
 			if (type.IsNullOrEmpty()) fq = new MatchQueryDescriptor<object>();
 			else if (type == "phrase") fq = new MatchPhraseQueryDescriptor<object>();
 			else if (type == "phrase_prefix") fq = new MatchPhrasePrefixQueryDescriptor<object>();

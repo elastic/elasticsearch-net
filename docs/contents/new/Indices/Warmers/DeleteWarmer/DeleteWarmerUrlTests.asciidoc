@@ -1,0 +1,10 @@
+[source, csharp]
+----
+var name = "id";
+await DELETE($"/_all/_warmer/{name}")
+				.Fluent(c => c.DeleteWarmer(Nest.Indices.All, name))
+				.Request(c => c.DeleteWarmer(new DeleteWarmerRequest("_all", name)))
+				.FluentAsync(c => c.DeleteWarmerAsync(Nest.Indices.All, name))
+				.RequestAsync(c => c.DeleteWarmerAsync(new DeleteWarmerRequest(Nest.Indices.All, name)))
+				;
+----

@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<Analyzers, string, IAnalyzer>))]
-	public interface IAnalyzers : IHasADictionary<string, IAnalyzer> { }
+	public interface IAnalyzers : IIsADictionary<string, IAnalyzer> { }
 
 	public class Analyzers : IsADictionary<string, IAnalyzer>, IAnalyzers
 	{
@@ -20,7 +20,7 @@ namespace Nest
 	}
 
 	public class AnalyzersDescriptor
-		: HasADictionaryDescriptor<AnalyzersDescriptor, IAnalyzers, string, IAnalyzer>, IAnalyzers
+		: IsADictionaryDescriptor<AnalyzersDescriptor, IAnalyzers, string, IAnalyzer>, IAnalyzers
 	{
 
 		public AnalyzersDescriptor UserDefined(string name, IAnalyzer analyzer) => Assign(name, analyzer);

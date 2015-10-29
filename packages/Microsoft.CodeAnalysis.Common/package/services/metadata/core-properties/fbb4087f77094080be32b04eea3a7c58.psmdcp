@@ -1,6 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?><coreProperties xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.openxmlformats.org/package/2006/metadata/core-properties"><dc:creator>Microsoft</dc:creator><dc:description>A shared package used by the Microsoft .NET Compiler Platform ("Roslyn"). Do not install this package manually, it will be added as a prerequisite by other packages that require it.
-      
-Supported Platforms:
-- .NET Framework 4.5
-- Windows 8
-- Portable Class Libraries</dc:description><dc:identifier>Microsoft.CodeAnalysis.Common</dc:identifier><version>1.0.0-beta1-20141031-01</version><dc:language>en-US</dc:language><keywords>Roslyn CodeAnalysis Compiler CSharp VB VisualBasic Parser Scanner Lexer Emit CodeGeneration Metadata IL Compilation Scripting Syntax Semantics</keywords><lastModifiedBy>NuGet, Version=2.8.50126.400, Culture=neutral, PublicKeyToken=null;Microsoft Windows NT 6.1.7601 Service Pack 1;.NET Framework 4</lastModifiedBy></coreProperties>

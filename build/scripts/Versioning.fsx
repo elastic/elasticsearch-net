@@ -1,4 +1,4 @@
-﻿#I @"../tools/FAKE/tools"
+﻿#I @"../../packages/build/FAKE/tools"
 #r @"FakeLib.dll"
 #load @"Projects.fsx"
 open System

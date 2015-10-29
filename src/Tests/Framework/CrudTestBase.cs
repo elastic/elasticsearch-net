@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
+using Elasticsearch.Net;
 using FluentAssertions;
 using Nest;
 using Tests.Framework.Integration;
@@ -10,7 +11,7 @@ using Xunit;
 namespace Tests.Framework
 {
 	public abstract class CrudTestBase<TCreateResponse, TReadResponse, TUpdateResponse>
-		: CrudBase<TCreateResponse, TReadResponse, TUpdateResponse, AcknowledgedResponse>
+		: CrudTestBase<TCreateResponse, TReadResponse, TUpdateResponse, AcknowledgedResponse>
 			where TCreateResponse : class, IResponse
 			where TReadResponse : class, IResponse
 			where TUpdateResponse : class, IResponse
@@ -19,7 +20,7 @@ namespace Tests.Framework
 		protected override bool SupportsDeletes => false;
 	}
 
-	public abstract class CrudBase<TCreateResponse, TReadResponse, TUpdateResponse, TDeleteResponse>
+	public abstract class CrudTestBase<TCreateResponse, TReadResponse, TUpdateResponse, TDeleteResponse>
 			where TCreateResponse : class, IResponse
 			where TReadResponse : class, IResponse
 			where TUpdateResponse : class, IResponse
@@ -35,7 +36,7 @@ namespace Tests.Framework
 		readonly IIntegrationCluster _cluster;
 
 		[SuppressMessage("Potential Code Quality Issues", "RECS0021:Warns about calls to virtual member functions occuring in the constructor", Justification = "Expected behaviour")]
-		public CrudBase(IIntegrationCluster cluster, EndpointUsage usage)
+		public CrudTestBase(IIntegrationCluster cluster, EndpointUsage usage)
 		{
 			this._cluster = cluster;
 			this.IntegrationPort = cluster.Node.Port;
@@ -74,11 +75,11 @@ namespace Tests.Framework
 			var client = this.Client;
 			return new LazyResponses(async () =>
 			{
-				var dict = new Dictionary<string, IResponse>();
-				dict.Add("fluent", fluent(RandomFluent, client, f => fluentBody(RandomFluent, f)));
-				dict.Add("fluentAsync", await fluentAsync(RandomFluentAsync, client, f => fluentBody(RandomFluentAsync, f)));
-				dict.Add("request", request(RandomInitializer, client, initializerBody(RandomInitializer)));
-				dict.Add("requestAsync", await requestAsync(RandomInitializerAsync, client, initializerBody(RandomInitializerAsync)));
+				var dict = new Dictionary<ClientCall, IResponse>();
+				dict.Add(ClientCall.Fluent, fluent(RandomFluent, client, f => fluentBody(RandomFluent, f)));
+				dict.Add(ClientCall.FluentAsync, await fluentAsync(RandomFluentAsync, client, f => fluentBody(RandomFluentAsync, f)));
+				dict.Add(ClientCall.Initializer, request(RandomInitializer, client, initializerBody(RandomInitializer)));
+				dict.Add(ClientCall.InitializerAsync, await requestAsync(RandomInitializerAsync, client, initializerBody(RandomInitializerAsync)));
 				return dict;
 			});
 		}
@@ -93,12 +94,15 @@ namespace Tests.Framework
 			//hack to make sure these are resolved in the right order, calling twice yields cached results so 
 			//should be fast
 			await this._createResponse;
+			this.WaitForYellow();
 			await this._createGetResponse;
 			await this._updateResponse;
+			this.WaitForYellow();
 			await this._updateGetResponse;
 			if (this.SupportsDeletes)
 			{
 				await this._deleteResponse;
+				this.WaitForYellow();
 				await this._deleteGetResponse;
 			}
 
@@ -120,6 +124,11 @@ namespace Tests.Framework
 			}
 		}
 
+		protected void WaitForYellow()
+		{
+			this.Client.ClusterHealth(g => g.WaitForStatus(WaitForStatus.Yellow));
+		}
+
 		protected async Task AssertOnCreate(Action<TCreateResponse> assert) => await this.AssertOnAllResponses(this._createResponse, assert);
 		protected async Task AssertOnUpdate(Action<TUpdateResponse> assert) => await this.AssertOnAllResponses(this._updateResponse, assert);
 		protected async Task AssertOnDelete(Action<TDeleteResponse> assert)
@@ -136,11 +145,20 @@ namespace Tests.Framework
 			await this.AssertOnAllResponses(this._deleteGetResponse, assert);
 		}
 
+		protected virtual void ExpectAfterCreate(TReadResponse response) { }
+		protected virtual void ExpectAfterUpdate(TReadResponse response) { }
+
 		[I] protected async Task CreateCallIsValid() => await this.AssertOnCreate(r => r.IsValid.Should().Be(true));
-		[I] protected async Task GetAfterCreateIsValid() => await this.AssertOnGetAfterCreate(r => r.IsValid.Should().Be(true));
+		[I] protected async Task GetAfterCreateIsValid() => await this.AssertOnGetAfterCreate(r => {
+			r.IsValid.Should().Be(true);
+			ExpectAfterCreate(r);
+		});
 
 		[I] protected async Task UpdateCallIsValid() => await this.AssertOnUpdate(r => r.IsValid.Should().Be(true));
-		[I] protected async Task GetAfterUpdateIsValid() => await this.AssertOnGetAfterUpdate(r => r.IsValid.Should().Be(true));
+		[I] protected async Task GetAfterUpdateIsValid() => await this.AssertOnGetAfterUpdate(r => {
+			r.IsValid.Should().Be(true);
+			ExpectAfterUpdate(r);
+		});
 
 		[I] protected async Task DeleteCallIsValid() => await this.AssertOnDelete(r => r.IsValid.Should().Be(true));
 		[I] protected async Task GetAfterDeleteIsValid() => await this.AssertOnGetAfterDelete(r => r.IsValid.Should().Be(false));

@@ -10,50 +10,38 @@ namespace Nest
 	public partial interface IMultiTermVectorsRequest 
 	{
 		[JsonProperty("docs")]
-		IEnumerable<MultiTermVectorDocument> Documents { get; set; }
+		IEnumerable<IMultiTermVectorOperation> Documents { get; set; }
 	}
 
 	public partial class MultiTermVectorsRequest 
 	{
-		public IEnumerable<MultiTermVectorDocument> Documents { get; set; }
+		public IEnumerable<IMultiTermVectorOperation> Documents { get; set; }
 	}
 
 	[DescriptorFor("Mtermvectors")]
 	public partial class MultiTermVectorsDescriptor
 	{
-		IEnumerable<MultiTermVectorDocument> IMultiTermVectorsRequest.Documents { get; set; }	
+		private List<IMultiTermVectorOperation> _operations = new List<IMultiTermVectorOperation>();
+		IEnumerable<IMultiTermVectorOperation> IMultiTermVectorsRequest.Documents { get { return this._operations; }
+			set { this._operations = value?.ToList(); }
+		}	
 
-		public MultiTermVectorsDescriptor Documents<T>(params Func<MultiTermVectorDocumentDescriptor<T>, IMultiTermVectorDocumentDescriptor>[] documentSelectors)
-			where T : class
-		{
-			((IMultiTermVectorsRequest)this).Documents = documentSelectors.Select(s => s(new MultiTermVectorDocumentDescriptor<T>()).GetDocument()).Where(d => d != null).ToList();
-			return this;
-		}
+		public MultiTermVectorsDescriptor Get<T>(Func<MultiTermVectorOperationDescriptor<T>, IMultiTermVectorOperation> getSelector)
+			where T : class => 
+			Assign(a => this._operations.AddIfNotNull(getSelector?.Invoke(new MultiTermVectorOperationDescriptor<T>())));
 
-		public MultiTermVectorsDescriptor Documents(IEnumerable<MultiTermVectorDocument> documents)
-		{
-			((IMultiTermVectorsRequest)this).Documents = documents;
-			return this;
-		}
+		public MultiTermVectorsDescriptor GetMany<T>(IEnumerable<long> ids,
+			Func<MultiTermVectorOperationDescriptor<T>, long, IMultiTermVectorOperation> getSelector = null)
+			where T : class => 
+			Assign(a => this._operations.AddRange(ids.Select(id => getSelector.InvokeOrDefault(new MultiTermVectorOperationDescriptor<T>().Id(id), id))));
 
-		public MultiTermVectorsDescriptor Ids(params string[] ids)
-		{
-			return this.Documents(ids.Select(id => new MultiTermVectorDocument { Id = id }));
-		}
+		public MultiTermVectorsDescriptor GetMany<T>(IEnumerable<string> ids, Func<MultiTermVectorOperationDescriptor<T>, string, IMultiTermVectorOperation> getSelector = null)
+			where T : class =>
+			Assign(a => this._operations.AddRange(ids.Select(id => getSelector.InvokeOrDefault(new MultiTermVectorOperationDescriptor<T>().Id(id), id))));
 
-		public MultiTermVectorsDescriptor Ids(params long[] ids)
-		{
-			return this.Documents(ids.Select(id => new MultiTermVectorDocument { Id = id.ToString(CultureInfo.InvariantCulture) }));
-		}
+		public MultiTermVectorsDescriptor GetMany<T>(IEnumerable<Id> ids, Func<MultiTermVectorOperationDescriptor<T>, Id, IMultiTermVectorOperation> getSelector = null)
+			where T : class =>
+			Assign(a => this._operations.AddRange(ids.Select(id => getSelector.InvokeOrDefault(new MultiTermVectorOperationDescriptor<T>().Id(id), id))));
 
-		public MultiTermVectorsDescriptor Ids(IEnumerable<string> ids)
-		{
-			return this.Documents(ids.Select(id => new MultiTermVectorDocument { Id = id }));
-		}
-
-		public MultiTermVectorsDescriptor Ids(IEnumerable<long> ids)
-		{
-			return this.Documents(ids.Select(id => new MultiTermVectorDocument { Id = id.ToString(CultureInfo.InvariantCulture) }));
-		}
 	}
 }

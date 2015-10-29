@@ -3,21 +3,18 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<SnapshotRepository>))]
 	public interface IRepository
 	{
-		[JsonProperty("settings")]
-		IDictionary<string, object> Settings { get; set; }
-
 		[JsonProperty("type")]
 		string Type { get; }
 	}
 
-
-	public class SnapshotRepository : IRepository
+	public interface IRepository<TSettings> : IRepository
+		where TSettings : class, IRepositorySettings
 	{
-		public IDictionary<string, object> Settings { get; set; }
-		public string Type { get; internal set; }
+		[JsonProperty("settings")]
+		TSettings Settings { get; set; }
 	}
 
+	public interface IRepositorySettings { }
 }

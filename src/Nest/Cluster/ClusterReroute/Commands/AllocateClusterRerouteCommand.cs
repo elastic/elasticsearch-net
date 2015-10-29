@@ -1,55 +1,60 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace Nest
 {
-	public class AllocateClusteRerouteCommand : IClusterRerouteCommand
+	public interface IAllocateClusterRerouteCommand : IClusterRerouteCommand
 	{
-		[JsonIgnore]
-		public string Name { get { return "allocate"; } }
-
 		[JsonProperty("index")]
-		public string Index { get; set; }
+		IndexName Index { get; set; }
 
 		[JsonProperty("shard")]
-		public int Shard { get; set; }
+		int Shard { get; set; }
 
 		[JsonProperty("node")]
-		public string Node { get; set; }
+		string Node { get; set; }
 
 		[JsonProperty("allow_primary")]
+		bool? AllowPrimary { get; set; }
+	}
+	public class AllocateClusterRerouteCommand : IAllocateClusterRerouteCommand
+	{
+		public string Name => "allocate";
+
+		public IndexName Index { get; set; }
+
+		public int Shard { get; set; }
+
+		public string Node { get; set; }
+
 		public bool? AllowPrimary { get; set; }
 	}
 
-	public class AllocateClusterRerouteCommandDescriptor
+	public class AllocateClusterRerouteCommandDescriptor 
+		: DescriptorBase<AllocateClusterRerouteCommandDescriptor, IAllocateClusterRerouteCommand>, IAllocateClusterRerouteCommand
 	{
-		internal AllocateClusteRerouteCommand Command = new AllocateClusteRerouteCommand();
+		string IClusterRerouteCommand.Name => "allocate";
 
-		public AllocateClusterRerouteCommandDescriptor Index(string index)
-		{
-			this.Command.Index = index;
-			return this;
-		}
+		IndexName IAllocateClusterRerouteCommand.Index { get; set; }
 
-		public AllocateClusterRerouteCommandDescriptor Shard(int shard)
-		{
-			this.Command.Shard = shard;
-			return this;
-		}
+		int IAllocateClusterRerouteCommand.Shard { get; set; }
 
-		public AllocateClusterRerouteCommandDescriptor Node(string node)
-		{
-			this.Command.Node = node;
-			return this;
-		}
+		string IAllocateClusterRerouteCommand.Node { get; set; }
 
-		public AllocateClusterRerouteCommandDescriptor AllowPrimary(bool allowPrimary = true)
-		{
-			this.Command.AllowPrimary = allowPrimary;
-			return this;
-		}
+		bool? IAllocateClusterRerouteCommand.AllowPrimary { get; set; }
+
+		public AllocateClusterRerouteCommandDescriptor Index(IndexName index) => Assign(a => a.Index = index);
+
+		public AllocateClusterRerouteCommandDescriptor Index<T>() where T : class => Assign(a => a.Index = typeof(T));
+
+		public AllocateClusterRerouteCommandDescriptor Shard(int shard) => Assign(a => a.Shard = shard);
+
+		public AllocateClusterRerouteCommandDescriptor Node(string node) => Assign(a => a.Node = node);
+
+		public AllocateClusterRerouteCommandDescriptor AllowPrimary(bool? allowPrimary = true) => Assign(a => a.AllowPrimary = allowPrimary);
 	}
 }

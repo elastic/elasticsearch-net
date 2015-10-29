@@ -102,7 +102,7 @@ namespace Nest
 		IAnalysis Analysis { get; set; }
 	}
 
-	public class DynamicIndexSettings : HasADictionary<string, object>, IDynamicIndexSettings
+	public class DynamicIndexSettings : IsADictionary<string, object>, IDynamicIndexSettings
 	{
 		public DynamicIndexSettings() : base() { }
 		public DynamicIndexSettings(IDictionary<string, object> container) : base(container) { }
@@ -110,55 +110,55 @@ namespace Nest
 			: base(container.Select(kv => kv).ToDictionary(kv => kv.Key, kv => kv.Value))
 		{ }
 
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public string AutoExpandReplicas { get; set; }
 
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public bool? BlocksMetadata { get; set; }
 
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public bool? BlocksRead { get; set; }
 
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public bool? BlocksReadOnly { get; set; }
 		
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public bool? BlocksWrite { get; set; }
 		
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public int? Priority { get; set; }
 		
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public bool? WarmersEnabled { get; set; }
 		
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public bool? RequestCacheEnabled { get; set; }
 		
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public IMergeSettings Merge { get; set; }
 		
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public int? NumberOfReplicas { get; set; }
 		
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public Union<int, RecoveryInitialShards> RecoveryInitialShards { get; set; }
 		
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public TimeUnitExpression RefreshInterval { get; set; }
 		
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public int? RoutingAllocationTotalShardsPerNode { get; set; }
 		
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public ISlowLog SlowLog { get; set; }
 		
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public ITranslogSettings Translog { get; set; }
 		
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public TimeUnitExpression UnassignedNodeLeftDelayedTimeout { get; set; }
 
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public IAnalysis Analysis { get; set; }
 
 		/// <summary>
@@ -174,7 +174,7 @@ namespace Nest
 	}
 
 	public abstract class DynamicIndexSettingsDescriptor<TIndexSettings> 
-		: HasADictionaryDescriptor<DynamicIndexSettingsDescriptor<TIndexSettings>, IDynamicIndexSettings, string, object>, IDynamicIndexSettings
+		: IsADictionaryDescriptor<DynamicIndexSettingsDescriptor<TIndexSettings>, IDynamicIndexSettings, string, object>, IDynamicIndexSettings
 		where TIndexSettings : DynamicIndexSettingsDescriptor<TIndexSettings> 
 	{
 		protected TIndexSettings Set(Action<IDynamicIndexSettings> assigner) => Fluent.Assign((TIndexSettings)this, assigner);
@@ -209,57 +209,57 @@ namespace Nest
 			return (TIndexSettings)this;
 		}
 
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public TIndexSettings NumberOfReplicas(int? numberOfReplicas) => Set(a => a.NumberOfReplicas = numberOfReplicas);
 
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public TIndexSettings AutoExpandReplicas(string AutoExpandReplicas) => Set(a => a.AutoExpandReplicas = AutoExpandReplicas);
 
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public TIndexSettings BlocksMetadata(bool? blocksMetadata = true) => Set(a => a.BlocksMetadata = blocksMetadata);
 
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public TIndexSettings BlocksRead(bool? blocksRead = true) => Set(a => a.BlocksRead = blocksRead);
 
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public TIndexSettings BlocksReadOnly(bool? blocksReadOnly = true) => Set(a => a.BlocksReadOnly = blocksReadOnly);
 
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public TIndexSettings BlocksWrite(bool? blocksWrite = true) => Set(a => a.BlocksWrite = blocksWrite);
 
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public TIndexSettings Priority(int? priority) => Set(a => a.Priority = priority);
 
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public TIndexSettings WarmersEnabled(bool enabled = true) => Set(a => a.WarmersEnabled = enabled);
 
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public TIndexSettings RequestCacheEnabled(bool enabled = true) => Set(a => a.RequestCacheEnabled = enabled);
 
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public TIndexSettings Merge(Func<MergeSettingsDescriptor, IMergeSettings> merge) =>
 			Set(a => a.Merge = merge?.Invoke(new MergeSettingsDescriptor()));
 
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public TIndexSettings RecoveryInitialShards(Union<int, RecoveryInitialShards> initialShards) =>
 			Set(a => a.RecoveryInitialShards = initialShards);
 
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public TIndexSettings RefreshInterval(TimeUnitExpression time) => Set(a => a.RefreshInterval = time);
 
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public TIndexSettings TotalShardsPerNode(int? totalShardsPerNode) =>
 			Set(a => a.RoutingAllocationTotalShardsPerNode = totalShardsPerNode);
 
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public TIndexSettings SlowLog(Func<SlowLogDescriptor, ISlowLog> slowLogSelector) =>
 			Set(a => a.SlowLog = slowLogSelector?.Invoke(new SlowLogDescriptor()));
 
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public TIndexSettings Translog(Func<TranslogSettingsDescriptor, ITranslogSettings> translogSelector) =>
 			Set(a => a.Translog = translogSelector?.Invoke(new TranslogSettingsDescriptor()));
 
-		/// <inheritdoc/ >
+		/// <inheritdoc/>
 		public TIndexSettings UnassignedNodeLeftDelayedTimeout(TimeUnitExpression time) =>
 			Set(a => a.UnassignedNodeLeftDelayedTimeout = time);
 

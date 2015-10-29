@@ -73,7 +73,7 @@ namespace Purify
         /// <returns>The purified uri</returns>
         public static Uri Purify(this Uri uri)
         {
-            IPurifier purifier = null;
+            IPurifier purifier;
             if (isMono)
                 purifier = new PurifierMono();
             else if (hasBrokenDotNetUri)

@@ -5,7 +5,7 @@ before the actual call to make sure its up and running. If its still down we put
 
 [source, csharp]
 ----
-var audit = new Auditor(() => Cluster
+var audit = new Auditor(() => Framework.Cluster
 				.Nodes(3)
 				.ClientCalls(r=>r.SucceedAlways())
 				.ClientCalls(r=>r.OnPort(9202).Fails(Once))

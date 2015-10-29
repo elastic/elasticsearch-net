@@ -1,51 +1,60 @@
-﻿using System;
+﻿using Elasticsearch.Net;
+using Nest;
+using FluentAssertions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
-using FluentAssertions;
-using Nest;
 using Tests.Framework.Integration;
-using Elasticsearch.Net;
 
 namespace Tests.Framework
 {
-	public abstract class ApiTestBase<TResponse, TInterface, TDescriptor, TInitializer> 
+	public abstract class ApiTestBase<TResponse, TInterface, TDescriptor, TInitializer>
 		: SerializationTestBase
 		where TResponse : class, IResponse
 		where TDescriptor : class, TInterface
 		where TInitializer : class, TInterface
 		where TInterface : class
 	{
-		protected ApiTestBase(IIntegrationCluster cluster, EndpointUsage usage)
-		{
-			this._cluster = cluster;
-			this._integrationPort = cluster.Node.Port;
-			this._responses = usage.CallOnce(this.ClientUsage);
-		}
 		private readonly IIntegrationCluster _cluster;
 		private readonly LazyResponses _responses;
-		private readonly int _integrationPort;
 
 		protected static string RandomString() => Guid.NewGuid().ToString("N").Substring(0, 8);
+		protected virtual ConnectionSettings GetConnectionSettings(ConnectionSettings settings) => settings;
+		protected virtual IElasticClient Client => this._cluster.Client(GetConnectionSettings);
 
-		protected abstract LazyResponses ClientUsage();
+		protected IDictionary<ClientCall, string> UniqueValues { get; } 		
+		protected string CallIsolatedValue { get; private set; }
+
+		protected virtual void BeforeAllCalls(IElasticClient client, IDictionary<ClientCall, string> values) { }
 		protected virtual void OnBeforeCall(IElasticClient client) { }
+		protected virtual void OnAfterCall(IElasticClient client) { }
 
-		protected abstract int ExpectStatusCode { get; }
-		protected abstract bool ExpectIsValid { get; }
+		protected virtual int Port { get; set; } = 9200;
+
+		protected virtual TInitializer Initializer { get; }
+		protected virtual Func<TDescriptor, TInterface> Fluent { get; }
+
+		protected virtual TDescriptor ClientDoesThisInternally(TDescriptor d) => d;
+		protected abstract LazyResponses ClientUsage();
+
+		protected virtual TDescriptor NewDescriptor() => Activator.CreateInstance<TDescriptor>();
+
 		protected abstract string UrlPath { get; }
 		protected abstract HttpMethod HttpMethod { get; }
 
-		protected virtual TInitializer Initializer => Activator.CreateInstance<TInitializer>();
-		protected virtual Func<TDescriptor, TInterface> Fluent { get; }
-		protected virtual TDescriptor ClientDoesThisInternally(TDescriptor d) => d;
+		protected ApiTestBase(IIntegrationCluster cluster, EndpointUsage usage)
+		{
+			this._cluster = cluster;
+			this._responses = usage.CallOnce(this.ClientUsage);
+			this.Port = cluster.Node.Port;
+			this.UniqueValues = usage.CallUniqueValues;
+			this.CallIsolatedValue = UniqueValues[ClientCall.Fluent];
+			this.SetupSerialization();
+		}
 
-		protected virtual ConnectionSettings GetConnectionSettings(ConnectionSettings settings) => settings;
-		protected virtual IElasticClient Client => this._cluster.Client(GetConnectionSettings);
-		protected virtual TDescriptor NewDescriptor() => Activator.CreateInstance<TDescriptor>();
-
-
-		protected LazyResponses Calls(
+		protected virtual LazyResponses Calls(
 			Func<IElasticClient, Func<TDescriptor, TInterface>, TResponse> fluent,
 			Func<IElasticClient, Func<TDescriptor, TInterface>, Task<TResponse>> fluentAsync,
 			Func<IElasticClient, TInitializer, TResponse> request,
@@ -55,32 +64,45 @@ namespace Tests.Framework
 			var client = this.Client;
 			return new LazyResponses(async () =>
 			{
-				var dict = new Dictionary<string, IResponse>();
+				this.BeforeAllCalls(client, UniqueValues);
+
+				var dict = new Dictionary<ClientCall, IResponse>();
+				this.CallIsolatedValue = UniqueValues[ClientCall.Fluent];
 				OnBeforeCall(client);
-				dict.Add("fluent", fluent(client, this.Fluent));
+				dict.Add(ClientCall.Fluent, fluent(client, this.Fluent));
+				OnAfterCall(client);
+
+				this.CallIsolatedValue = UniqueValues[ClientCall.FluentAsync];
 				OnBeforeCall(client);
-				dict.Add("fluentAsync", await fluentAsync(client, this.Fluent));
+				dict.Add(ClientCall.FluentAsync, await fluentAsync(client, this.Fluent));
+				OnAfterCall(client);
+
+				this.CallIsolatedValue = UniqueValues[ClientCall.Initializer];
 				OnBeforeCall(client);
-				dict.Add("request", request(client, this.Initializer));
+				dict.Add(ClientCall.Initializer, request(client, this.Initializer));
+				OnAfterCall(client);
+
+				this.CallIsolatedValue = UniqueValues[ClientCall.InitializerAsync];
 				OnBeforeCall(client);
-				dict.Add("requestAsync", await requestAsync(client, this.Initializer));
+				dict.Add(ClientCall.InitializerAsync, await requestAsync(client, this.Initializer));
+				OnAfterCall(client);
 				return dict;
 			});
 		}
 
-		private void AssertUrl(Uri u)
+		protected virtual void AssertUrl(Uri u)
 		{
-			var paths = (this.UrlPath ?? "").Split(new [] { '?' }, 2);
+			var paths = (this.UrlPath ?? "").Split(new[] { '?' }, 2);
 			string path = paths.First(), query = string.Empty;
 			if (paths.Length > 1)
 				query = paths.Last();
 
-			var expectedUri = new UriBuilder("http","localhost", _integrationPort, path,  "?" + query).Uri;
+			var expectedUri = new UriBuilder("http", "localhost", Port, path, "?" + query).Uri;
 
 			u.AbsolutePath.Should().Be(expectedUri.AbsolutePath);
 			u = new UriBuilder(u.Scheme, u.Host, u.Port, u.AbsolutePath, u.Query.Replace("pretty=true", "")).Uri;
 
-			var queries = new[] {u.Query, expectedUri.Query};
+			var queries = new[] { u.Query, expectedUri.Query };
 			if (queries.All(string.IsNullOrWhiteSpace)) return;
 			if (queries.Any(string.IsNullOrWhiteSpace))
 			{
@@ -90,11 +112,11 @@ namespace Tests.Framework
 
 			var clientKeyValues = u.Query.Substring(1).Split('&')
 				.Select(v => v.Split('='))
-				.Where(k=>!string.IsNullOrWhiteSpace(k[0]))
+				.Where(k => !string.IsNullOrWhiteSpace(k[0]))
 				.ToDictionary(k => k[0], v => v.Last());
 			var expectedKeyValues = expectedUri.Query.Substring(1).Split('&')
 				.Select(v => v.Split('='))
-				.Where(k=>!string.IsNullOrWhiteSpace(k[0]))
+				.Where(k => !string.IsNullOrWhiteSpace(k[0]))
 				.ToDictionary(k => k[0], v => v.Last());
 
 			clientKeyValues.Count().Should().Be(expectedKeyValues.Count());
@@ -102,13 +124,7 @@ namespace Tests.Framework
 			clientKeyValues.Should().Equal(expectedKeyValues);
 		}
 
-		[I] protected async Task HandlesStatusCode() =>
-			await this.AssertOnAllResponses(r=>r.ApiCall.HttpStatusCode.Should().Be(this.ExpectStatusCode));
-
-		[I] protected async Task ReturnsExpectedIsValid() =>
-			await this.AssertOnAllResponses(r=>r.IsValid.Should().Be(this.ExpectIsValid));
-
-		protected async Task AssertOnAllResponses(Action<TResponse> assert)
+		protected virtual async Task AssertOnAllResponses(Action<TResponse> assert)
 		{
 			var responses = await this._responses;
 			foreach (var kv in responses)
@@ -116,10 +132,11 @@ namespace Tests.Framework
 				var response = kv.Value as TResponse;
 				try
 				{
+					this.CallIsolatedValue = UniqueValues[kv.Key];
 					assert(response);
 				}
-#pragma warning disable 7095
-				catch (Exception ex) when (true)
+#pragma warning disable 7095 //enable this if you expect a single overload to act up
+				catch (Exception ex) when (false)
 #pragma warning restore 7095
 				{
 					throw new Exception($"asserting over the response from: {kv.Key} failed: {ex.Message}", ex);
@@ -136,13 +153,12 @@ namespace Tests.Framework
 			await this.AssertOnAllResponses(r => r.CallDetails.HttpMethod.Should().Be(this.HttpMethod));
 
 		[U]
-		protected void SerializesRequest() =>
+		protected void SerializesInitializer() =>
 			this.AssertSerializesAndRoundTrips<TInterface>(this.Initializer);
 
 		[U]
 		protected void SerializesFluent() =>
-			this.AssertSerializesAndRoundTrips(this.Fluent(this.ClientDoesThisInternally(NewDescriptor())));
-
+			this.AssertSerializesAndRoundTrips(this.Fluent?.Invoke(this.ClientDoesThisInternally(NewDescriptor())));
 	}
 
 }

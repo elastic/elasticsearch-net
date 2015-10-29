@@ -8,6 +8,9 @@ namespace Nest
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IPercolateOperation
 	{
+		[JsonIgnore]
+		string MultiPercolateName { get; }
+
 		[JsonProperty(PropertyName = "size")]
 		int? Size { get; set; }
 
@@ -33,6 +36,5 @@ namespace Nest
 		IDictionary<string, IAggregationContainer> Aggregations { get; set; }
 
 		IRequestParameters GetRequestParameters();
-	
 	}
 }

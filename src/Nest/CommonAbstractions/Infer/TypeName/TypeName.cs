@@ -58,6 +58,15 @@ namespace Nest
 			return base.Equals(obj);
 		}
 
+		public override string ToString()
+		{
+			if (!this.Name.IsNullOrEmpty())
+				return this.Name;
+			if (this.Type != null)
+				return this.Type.Name;
+			return string.Empty;
+		}
+
 		public bool EqualsMarker(TypeName other)
 		{
 			if (!this.Name.IsNullOrEmpty() && other != null && !other.Name.IsNullOrEmpty())

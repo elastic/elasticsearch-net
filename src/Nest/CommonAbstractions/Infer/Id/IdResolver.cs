@@ -71,8 +71,8 @@ namespace Nest.Resolvers
 			if (@object == null)
 				return null;
 
-			var type = typeof(T);
-			return GetIdFor(type, @object);
+			//var type = typeof(T);
+			return GetIdFor(@object.GetType(), @object);
 			}
 
 		private PropertyInfo GetInferredId(Type type)

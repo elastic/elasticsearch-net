@@ -6,6 +6,7 @@ using System.Linq.Expressions;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[JsonConverter(typeof (FieldNameQueryJsonConverter<RangeQuery>))]
 	public interface IRangeQuery : IFieldNameQuery
 	{
 		[JsonProperty("gte")]
@@ -19,10 +20,6 @@ namespace Nest
 
 		[JsonProperty("lt")]
 		string LowerThan { get; set; }
-
-		[JsonProperty(PropertyName = "_cache")]
-		[Obsolete("scheduled to be removed in 2.o copy paste errror from filters")]
-		bool? Cache { get; set; }
 
 		[JsonProperty("time_zone")]
 		string TimeZone { get; set; }
@@ -64,7 +61,6 @@ namespace Nest
 		string IRangeQuery.LowerThanOrEqualTo { get; set; }
 		string IRangeQuery.GreaterThan { get; set; }
 		string IRangeQuery.LowerThan { get; set; }
-		bool? IRangeQuery.Cache { get; set; }
 		string IRangeQuery.TimeZone { get; set; }
 		string IRangeQuery.Format { get; set; }
 

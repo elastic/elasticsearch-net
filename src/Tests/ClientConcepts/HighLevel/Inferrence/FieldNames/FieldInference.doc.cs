@@ -8,7 +8,7 @@ using Tests.Framework;
 using Tests.Framework.MockData;
 using Xunit.Sdk;
 using static Tests.Framework.RoundTripper;
-using static Nest.Infer;
+using static Nest.Static;
 
 namespace Tests.ClientConcepts.HighLevel.Inferrence.FieldNames
 {
@@ -59,7 +59,7 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence.FieldNames
 			var fieldExpression = Field<Project>(p=>p.Name);
 
 			/** Using static imports in c# 6 this can be even shortened:
-				using static Nest.Infer; 
+				using static Nest.Static; 
 			*/
 			fieldExpression = Field<Project>(p=>p.Name);
 			/** Now this is much much terser then our first example using the constructor! */

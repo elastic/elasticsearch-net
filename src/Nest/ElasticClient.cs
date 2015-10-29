@@ -70,12 +70,12 @@ namespace Nest
 		public Task<ElasticsearchResponse<T>> DoRequestAsync<T>(HttpMethod method, string path, PostData<object> data = null, IRequestParameters requestParameters = null)
 			where T : class => this.Raw.DoRequestAsync<T>(method, path, data, requestParameters);
 
-		R IHighLevelToLowLevelDispatcher.Dispatch<D, Q, R>(D request, Func<D, D, ElasticsearchResponse<R>> dispatch)
+		R IHighLevelToLowLevelDispatcher.Dispatch<D, Q, R>(D request, Func<D, PostData<object>, ElasticsearchResponse<R>> dispatch)
 		{
 			return this.Dispatcher.Dispatch<D,Q,R>(request, null, dispatch);
 		}
 
-		R IHighLevelToLowLevelDispatcher.Dispatch<D, Q, R>(D request, Func<IApiCallDetails, Stream, R> responseGenerator, Func<D, D, ElasticsearchResponse<R>> dispatch)
+		R IHighLevelToLowLevelDispatcher.Dispatch<D, Q, R>(D request, Func<IApiCallDetails, Stream, R> responseGenerator, Func<D, PostData<object>, ElasticsearchResponse<R>> dispatch)
 		{
 			request.RouteValues.Resolve(this.ConnectionSettings);
 			request.RequestParameters.DeserializationOverride(responseGenerator);
@@ -84,12 +84,12 @@ namespace Nest
 			return ResultsSelector<D, Q, R>(response, request);
 		}
 
-		Task<I> IHighLevelToLowLevelDispatcher.DispatchAsync<D, Q, R, I>(D descriptor, Func<D, D, Task<ElasticsearchResponse<R>>> dispatch)
+		Task<I> IHighLevelToLowLevelDispatcher.DispatchAsync<D, Q, R, I>(D descriptor, Func<D, PostData<object>, Task<ElasticsearchResponse<R>>> dispatch)
 		{
 			return this.Dispatcher.DispatchAsync<D,Q,R,I>(descriptor, null, dispatch);
 		}
 
-		Task<I> IHighLevelToLowLevelDispatcher.DispatchAsync<D, Q, R, I>(D request, Func<IApiCallDetails, Stream, R> responseGenerator, Func<D, D, Task<ElasticsearchResponse<R>>> dispatch)
+		Task<I> IHighLevelToLowLevelDispatcher.DispatchAsync<D, Q, R, I>(D request, Func<IApiCallDetails, Stream, R> responseGenerator, Func<D, PostData<object>, Task<ElasticsearchResponse<R>>> dispatch)
 		{
 			request.RouteValues.Resolve(this.ConnectionSettings);
 			request.RequestParameters.DeserializationOverride(responseGenerator);
@@ -129,7 +129,6 @@ namespace Nest
 		{
 			var r = typeof(R).CreateInstance<R>();
 			((IBodyWithApiCallDetails)r).CallDetails = response;
-			r.IsValid = false;
 			return r;
 		}
 

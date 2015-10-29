@@ -2,6 +2,7 @@
 ----
 serialized = null;
 serialized = this.Serialize(o);
+serialized.Should().NotBeNullOrWhiteSpace(o.ToString());
 var actualJson = JToken.Parse(serialized);
 var matches = JToken.DeepEquals(this._expectedJsonJObject, actualJson);
 var message = "This is the first time I am serializing";

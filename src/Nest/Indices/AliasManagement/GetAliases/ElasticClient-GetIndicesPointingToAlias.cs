@@ -39,7 +39,7 @@ namespace Nest
 		{
 			if (!aliasesResponse.IsValid
 				|| !aliasesResponse.Indices.HasAny())
-				return new string[] { };
+				return new string [] { };
 
 			var indices = from i in aliasesResponse.Indices
 						  where i.Value.Any(a => a.Name == aliasName)

@@ -36,6 +36,9 @@ namespace Nest
 
 	public class RoutingShard
 	{
+		[JsonProperty("allocation_id")]
+		public AllocationId AllocationId { get; internal set; }
+
 		[JsonProperty("state")]
 		public string State { get; internal set; }
 
@@ -51,9 +54,19 @@ namespace Nest
 		[JsonProperty("shard")]
 		public int Shard { get; internal set; }
 
+		[JsonProperty("version")]
+		public long Version { get; internal set; }
+
 		[JsonProperty("index")]
 		public string Index { get; internal set; }
 	}
+
+	public class AllocationId
+	{
+		[JsonProperty("id")]
+		public string Id { get; internal set; }
+	}
+
 
 	public class RoutingNodesState
 	{
@@ -70,8 +83,12 @@ namespace Nest
 	}
 	public class MetadataState
 	{
-		//[JsonProperty("templates")]
-		//public ?? Templates { get; internal set; }
+		[JsonProperty("templates")]
+		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
+		public IDictionary<string, TemplateMapping> Templates { get; internal set; }
+
+		[JsonProperty("cluster_uuid")]
+		public string ClusterUUID { get; internal set; }
 
 		[JsonProperty("indices")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
@@ -88,8 +105,7 @@ namespace Nest
 		public DynamicResponse Settings { get; internal set; }
 
 		[JsonProperty("mappings")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
-		public Dictionary<string, ObjectProperty> Mappings { get; internal set; }
+		public IMappings Mappings { get; internal set; }
 
 		[JsonProperty("aliases")]
 		public IEnumerable<string> Aliases { get; internal set; }

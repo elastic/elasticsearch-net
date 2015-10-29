@@ -13,7 +13,8 @@ namespace Nest
 	/// </summary>
 	internal class VerbatimDictionaryKeysJsonConverter : JsonConverter
 	{
-		public override bool CanConvert(Type t) => typeof (IDictionary).IsAssignableFrom(t) || typeof (IHasADictionary).IsAssignableFrom(t);
+		public override bool CanConvert(Type t) => 
+			typeof (IDictionary).IsAssignableFrom(t) || typeof (IHasADictionary).IsAssignableFrom(t);
 
 		public override bool CanRead => false;
 
@@ -69,18 +70,5 @@ namespace Nest
 			var dictionary = serializer.Deserialize<Dictionary<TKey, TValue>>(reader);
 			return typeof(THasDictionary).CreateInstance<THasDictionary>(dictionary);
 		}
-	}
-
-	internal class VerbatimDictionaryKeysJsonConverter<TJsonReader> : VerbatimDictionaryKeysJsonConverter 
-		where TJsonReader : JsonConverter, new()
-	{
-		public override bool CanConvert(Type t) => base.CanConvert(t) || Reader.CanConvert(t);
-
-		public override bool CanRead => true;
-
-		private static TJsonReader Reader { get; } = new TJsonReader();
-
-		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer) =>
-			Reader.ReadJson(reader, objectType, existingValue, serializer);
 	}
 }

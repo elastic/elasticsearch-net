@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization.OptIn)]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<ParentField>))]
 	public interface IParentField : ISpecialField
 	{
 		[JsonProperty("type")]

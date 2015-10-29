@@ -7,12 +7,21 @@ namespace Nest
 	public abstract class BulkResponseItem
 	{
 		public abstract string Operation { get; internal set; }
-		public abstract string Index { get; internal set; }
-		public abstract string Type { get; internal set; }
-		public abstract string Id { get; internal set; }
-		public abstract long Version { get; internal set; }
-		public abstract int Status { get; internal set; }
-		public abstract string Error { get; internal set; }
+
+		[JsonProperty("_index")]
+		public string Index { get; internal set; }
+		[JsonProperty("_type")]
+		public string Type { get; internal set; }
+		[JsonProperty("_id")]
+		public string Id { get; internal set; }
+		[JsonProperty("_version")]
+		public long Version { get; internal set; }
+		[JsonProperty("status")]
+		public int Status { get; internal set; }
+		[JsonProperty("error")]
+		public BulkError Error { get; internal set; }
+		[JsonProperty("_shards")]
+		public ShardsMetaData Shards { get; internal set; }
 
 		/// <summary>
 		/// Specifies wheter this particular bulk operation succeeded or not
@@ -21,8 +30,7 @@ namespace Nest
 		{
 			get
 			{
-				if (!this.Error.IsNullOrEmpty() || this.Type.IsNullOrEmpty())
-					return false;
+				if (this.Error != null || this.Type.IsNullOrEmpty()) return false;
 				switch (this.Operation.ToLowerInvariant())
 				{
 					case "delete": return this.Status == 200 || this.Status == 404;

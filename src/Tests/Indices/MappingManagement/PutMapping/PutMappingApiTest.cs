@@ -1,22 +1,21 @@
-﻿using Nest;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Elasticsearch.Net;
+using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using Xunit;
-using Elasticsearch.Net;
 
-namespace Tests.Indices.IndexManagement
+namespace Tests.Indices.MappingManagement.PutMapping
 {
-	//TODO NOT Readonly
-	[Collection(IntegrationContext.ReadOnly)]
-	public abstract class PutMapping : ApiTestBase<IIndicesResponse, IPutMappingRequest, PutMappingDescriptor<Project>, PutMappingRequest<Project>>
+	[Collection(IntegrationContext.Indexing)]
+	public class PutMappingApiTests 
+		: ApiIntegrationTestBase<IIndicesResponse, IPutMappingRequest, PutMappingDescriptor<Project>, PutMappingRequest<Project>>
 	{
-		protected PutMapping(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public PutMappingApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+
 		protected override LazyResponses ClientUsage() => Calls(
 			fluent: (client, f) => client.Map(f),
 			fluentAsync: (client, f) => client.MapAsync(f),
@@ -29,5 +28,31 @@ namespace Tests.Indices.IndexManagement
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override string UrlPath => "/project/project/_mapping";
 
+		protected override object ExpectJson { get; } = new
+		{
+			properties = new
+			{
+				name = new
+				{
+					type = "string",
+					index = "not_analyzed"
+				}
+			}
+
+		};
+
+
+		protected override Func<PutMappingDescriptor<Project>, IPutMappingRequest> Fluent => d => d
+			.Properties(prop=>prop
+				.String(s=>s.Name(p=>p.Name).NotAnalyzed())
+			);
+
+		protected override PutMappingRequest<Project> Initializer => new PutMappingRequest<Project>
+		{
+			Properties = new Properties<Project>
+			{
+				{ p=>p.Name, new StringProperty { Index = FieldIndexOption.NotAnalyzed }  }
+			}
+		};
 	}
 }

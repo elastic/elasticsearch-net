@@ -5,8 +5,11 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
-	public interface IMappings : IHasADictionary { }
+	[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<Mappings, TypeName, ITypeMapping>))]
+	public interface IMappings : IIsADictionary<TypeName, ITypeMapping>
+	{
+	}
+
 	public class Mappings : IsADictionary<TypeName, ITypeMapping>, IMappings
 	{
 		public Mappings() : base() { }
@@ -19,10 +22,9 @@ namespace Nest
 		/// Add any setting to the index
 		/// </summary>
 		public void Add(TypeName type, ITypeMapping mapping) => BackingDictionary.Add(type, mapping);
-
 	}
 	
-	public class MappingsDescriptor : HasADictionary<MappingsDescriptor, TypeName, ITypeMapping>, IMappings
+	public class MappingsDescriptor : IsADictionaryDescriptor<MappingsDescriptor,IMappings, TypeName, ITypeMapping>, IMappings
 	{
 		public MappingsDescriptor Map<T>(Func<TypeMappingDescriptor<T>, ITypeMapping> selector) where T : class
 		{

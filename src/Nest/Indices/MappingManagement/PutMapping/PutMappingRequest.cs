@@ -14,9 +14,8 @@ namespace Nest
 
 	public partial class PutMappingRequest : RequestBase<PutMappingRequestParameters>, IPutMappingRequest
 	{
-		//TODO only needed for read as type, better to have a dedicated json converter subclass that can new an internal constructor
-		[Obsolete("This constructor has to be internal since its not valid to expose publicly")]
-		public PutMappingRequest() { }
+		// Needed for ReadAsType
+		internal PutMappingRequest() { }
 
 		/// <inheritdoc/>
 		public IAllField AllField { get; set; }
@@ -158,8 +157,8 @@ namespace Nest
 		{
 			a.Properties = a.Properties ?? new Properties();
 			var autoProperties = new PropertyWalker(typeof(T), visitor).GetProperties();
-			foreach (var autoProperty in autoProperties.Dictionary)
-				a.Properties.Dictionary[autoProperty.Key] = autoProperty.Value;
+			foreach (var autoProperty in autoProperties)
+				a.Properties[autoProperty.Key] = autoProperty.Value;
 		});
 
 		/// <inheritdoc/>

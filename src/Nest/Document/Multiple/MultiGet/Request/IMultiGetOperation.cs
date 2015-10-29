@@ -15,7 +15,7 @@ namespace Nest
 		TypeName Type { get; set; }
 		
 		[JsonProperty(PropertyName = "_id")]
-		string Id { get; set; }
+		Id Id { get; set; }
 		
 		[JsonProperty(PropertyName = "fields")]
 		IList<FieldName> Fields { get; set; }
@@ -24,7 +24,7 @@ namespace Nest
 		string Routing { get; set; }
 		
 		[JsonProperty(PropertyName = "_source")]
-		ISourceFilter Source { get; set; }
+		Union<bool, ISourceFilter> Source { get; set; }
 
 		// Only used for the MLT query for specifying an artificial document.
 		// TODO: For 2.0, we should consider decoupling IMultiGetOperation from 
@@ -40,5 +40,7 @@ namespace Nest
 		IDictionary<FieldName, string> PerFieldAnalyzer { get; set; }
 
 		Type ClrType { get; }
+
+		bool CanBeFlattened { get; }
 	}
 }

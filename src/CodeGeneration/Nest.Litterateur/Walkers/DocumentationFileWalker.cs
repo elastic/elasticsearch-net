@@ -68,7 +68,7 @@ namespace Nest.Litterateur.Walkers
 			{
 				var line = node.SyntaxTree.GetLineSpan(node.Span).StartLinePosition.Line;
 				var allchildren = node.DescendantNodesAndTokens(descendIntoTrivia: true);
-				if (allchildren.Any(a => a.CSharpKind() == SyntaxKind.MultiLineDocumentationCommentTrivia))
+				if (allchildren.Any(a => a.Kind() == SyntaxKind.MultiLineDocumentationCommentTrivia))
 				{
 					var walker = new CodeWithDocumentationWalker(ClassDepth, line);
 					walker.Visit(node.WithAdditionalAnnotations());
@@ -88,7 +88,7 @@ namespace Nest.Litterateur.Walkers
 			{
 				var allchildren = node.DescendantNodesAndTokens(descendIntoTrivia: true);
 				var line = node.SyntaxTree.GetLineSpan(node.Span).StartLinePosition.Line;
-				if (allchildren.Any(a => a.CSharpKind() == SyntaxKind.MultiLineDocumentationCommentTrivia))
+				if (allchildren.Any(a => a.Kind() == SyntaxKind.MultiLineDocumentationCommentTrivia))
 				{
 					var walker = new CodeWithDocumentationWalker(ClassDepth, line);
 					walker.Visit(node.WithAdditionalAnnotations());
@@ -103,7 +103,7 @@ namespace Nest.Litterateur.Walkers
 		public override void VisitXmlText(XmlTextSyntax node)
 		{
 			var text = node.TextTokens
-				.Where(n => n.CSharpKind() == SyntaxKind.XmlTextLiteralToken)
+				.Where(n => n.Kind() == SyntaxKind.XmlTextLiteralToken)
 				.Aggregate(new StringBuilder(), (a, t) => a.AppendLine(t.Text.TrimStart()), a => a.ToString());
 
 			var line = node.SyntaxTree.GetLineSpan(node.Span).StartLinePosition.Line;
@@ -114,7 +114,7 @@ namespace Nest.Litterateur.Walkers
 
 		public override void VisitTrivia(SyntaxTrivia trivia)
 		{
-			if (trivia.CSharpKind() != SyntaxKind.MultiLineDocumentationCommentTrivia)
+			if (trivia.Kind() != SyntaxKind.MultiLineDocumentationCommentTrivia)
 			{
 				base.VisitTrivia(trivia);
 				return;

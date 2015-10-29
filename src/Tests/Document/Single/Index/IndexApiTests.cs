@@ -1,19 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Elasticsearch.Net;
+using FluentAssertions;
 using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using Xunit;
-using System.Collections.Generic;
-using Elasticsearch.Net;
-using System.Threading.Tasks;
-using System.Linq;
-using FluentAssertions;
 
-namespace Tests.Document.Single
+namespace Tests.Document.Single.Index
 {
 	[Collection(IntegrationContext.Indexing)]
-	public class IndexApiTests : ApiTestBase<IIndexResponse, IIndexRequest<Project>, IndexDescriptor<Project>, IndexRequest<Project>>
+	public class IndexApiTests : ApiIntegrationTestBase<IIndexResponse, IIndexRequest<Project>, IndexDescriptor<Project>, IndexRequest<Project>>
 	{
 		private Project Document => new Project
 		{

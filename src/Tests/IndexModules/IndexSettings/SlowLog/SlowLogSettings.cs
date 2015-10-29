@@ -7,7 +7,7 @@ using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Tests.Framework.MockData;
-using static Nest.Infer;
+using static Nest.Static;
 
 namespace Tests.Aggregations
 {
@@ -46,7 +46,7 @@ namespace Tests.Aggregations
 						.ThresholdInfo("5s")
 						.ThresholdDebug(TimeSpan.FromSeconds(2))
 						.ThresholdTrace(TimeSpan.FromMilliseconds(500))
-						.LogLevel(SlowLogLevel.Debug)
+						.LogLevel(LogLevel.Debug)
 						.Source(100)
 					)
 					.Search(search => search
@@ -62,7 +62,7 @@ namespace Tests.Aggregations
 							.ThresholdDebug(TimeSpan.FromMilliseconds(500))
 							.ThresholdTrace(TimeSpan.FromMilliseconds(200))
 						)
-						.LogLevel(SlowLogLevel.Info)
+						.LogLevel(LogLevel.Info)
 					)
 				);
 
@@ -75,7 +75,7 @@ namespace Tests.Aggregations
 					{
 						Indexing = new SlowLogIndexing
 						{
-							LogLevel = SlowLogLevel.Debug,
+							LogLevel = LogLevel.Debug,
 							Source = 100,
 							ThresholdInfo = TimeSpan.FromSeconds(5),
 							ThresholdDebug = "2s",
@@ -84,7 +84,7 @@ namespace Tests.Aggregations
 						},
 						Search = new SlowLogSearch
 						{
-							LogLevel = SlowLogLevel.Info,
+							LogLevel = LogLevel.Info,
 							Fetch = new SlowLogSearchFetch
 							{
 

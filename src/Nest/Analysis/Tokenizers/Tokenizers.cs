@@ -20,7 +20,7 @@ namespace Nest
 	}
 
 	public class TokenizersDescriptor 
-		: HasADictionaryDescriptor<TokenizersDescriptor, ITokenizers, string, ITokenizer>, ITokenizers
+		:IsADictionaryDescriptor<TokenizersDescriptor, ITokenizers, string, ITokenizer>, ITokenizers
 	{
 		public TokenizersDescriptor UserDefined(string name, ITokenizer analyzer) => Assign(name, analyzer);
 		

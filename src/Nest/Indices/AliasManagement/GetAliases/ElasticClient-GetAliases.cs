@@ -18,15 +18,19 @@ namespace Nest
 		/// <para> </para>http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-aliases.html#alias-retrieving
 		/// </summary>
 		/// <param name="getAliasesDescriptor">A descriptor that describes which aliases/indexes we are interested int</param>
+		[Obsolete("Deprecated since 1.0, will be removed in 3.0")]
 		IGetAliasesResponse GetAliases(Func<GetAliasesDescriptor, IGetAliasesRequest> getAliasesDescriptor=null);
 
 		/// <inheritdoc/>
+		[Obsolete("Deprecated since 1.0, will be removed in 3.0")]
 		IGetAliasesResponse GetAliases(IGetAliasesRequest getAliasesRequest);
 
 		/// <inheritdoc/>
+		[Obsolete("Deprecated since 1.0, will be removed in 3.0")]
 		Task<IGetAliasesResponse> GetAliasesAsync(Func<GetAliasesDescriptor, IGetAliasesRequest> getAliasesDescriptor=null);
 
 		/// <inheritdoc/>
+		[Obsolete("Deprecated since 1.0, will be removed in 3.0")]
 		Task<IGetAliasesResponse> GetAliasesAsync(IGetAliasesRequest getAliasesRequest);
 
 	}
@@ -34,10 +38,12 @@ namespace Nest
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
+		[Obsolete("Deprecated since 1.0, will be removed in 3.0")]
 		public IGetAliasesResponse GetAliases(Func<GetAliasesDescriptor, IGetAliasesRequest> getAliasesDescriptor=null) =>
 			this.GetAliases(getAliasesDescriptor.InvokeOrDefault(new GetAliasesDescriptor()));
 
 		/// <inheritdoc/>
+		[Obsolete("Deprecated since 1.0, will be removed in 3.0")]
 		public IGetAliasesResponse GetAliases(IGetAliasesRequest getAliasesRequest) => 
 			this.Dispatcher.Dispatch<IGetAliasesRequest, GetAliasesRequestParameters, GetAliasesResponse>(
 				getAliasesRequest,
@@ -46,10 +52,12 @@ namespace Nest
 			);
 
 		/// <inheritdoc/>
+		[Obsolete("Deprecated since 1.0, will be removed in 3.0")]
 		public Task<IGetAliasesResponse> GetAliasesAsync(Func<GetAliasesDescriptor, IGetAliasesRequest> getAliasesDescriptor = null) =>
 			this.GetAliasesAsync(getAliasesDescriptor.InvokeOrDefault(new GetAliasesDescriptor()));
 
 		/// <inheritdoc/>
+		[Obsolete("Deprecated since 1.0, will be removed in 3.0")]
 		public Task<IGetAliasesResponse> GetAliasesAsync(IGetAliasesRequest getAliasesRequest) => 
 			this.Dispatcher.DispatchAsync<IGetAliasesRequest, GetAliasesRequestParameters, GetAliasesResponse, IGetAliasesResponse>(
 				getAliasesRequest,
@@ -57,7 +65,7 @@ namespace Nest
 				(p, d) => this.LowLevelDispatch.IndicesGetAliasesDispatchAsync<GetAliasesResponse>(p)
 			);
 		
-		//TODO map the response properly
+		//TODO map the response properly, remove list flattening
 		/// <inheritdoc/>
 		private GetAliasesResponse DeserializeGetAliasesResponse(IApiCallDetails apiCallDetails, Stream stream)
 		{

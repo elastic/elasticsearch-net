@@ -9,28 +9,35 @@ namespace Nest
 
 	public class MultiGetOperation<T> : IMultiGetOperation
 	{
-		public MultiGetOperation(string id)
+		public MultiGetOperation(Id id)
 		{
 			this.Id = id;
 			this.Index = typeof(T);
 			this.Type = typeof(T);
 		}
 
-		public MultiGetOperation(long id) : this(id.ToString(CultureInfo.InvariantCulture)) {}
 
-		Type IMultiGetOperation.ClrType { get { return typeof(T); } }
-		
+		Type IMultiGetOperation.ClrType => typeof(T);
+
 		public IndexName Index { get; set; }
-		
+
 		public TypeName Type { get; set; }
-		
-		public string Id { get; set; }
-		
+
+		public Id Id { get; set; }
+
 		public IList<FieldName> Fields { get; set; }
-		
-		public ISourceFilter Source { get; set; }
+
+		public Union<bool, ISourceFilter> Source { get; set; }
 
 		public string Routing { get; set; }
+
+		bool IMultiGetOperation.CanBeFlattened =>
+			this.Index == null 
+			&& this.Type == null
+			&& this.Routing == null
+			&& this.Source == null
+			&& this.Fields == null;
+
 
 		public object Document { get; set; }
 
@@ -44,13 +51,20 @@ namespace Nest
 
 		IndexName IMultiGetOperation.Index { get; set; }
 		TypeName IMultiGetOperation.Type { get; set; }
-		string IMultiGetOperation.Id { get; set; }
+		Id IMultiGetOperation.Id { get; set; }
 		string IMultiGetOperation.Routing { get; set; }
-		ISourceFilter IMultiGetOperation.Source { get; set; }
+		Union<bool, ISourceFilter> IMultiGetOperation.Source { get; set; }
 		IList<FieldName> IMultiGetOperation.Fields { get; set; }
 		object IMultiGetOperation.Document { get; set; }
 		IDictionary<FieldName, string> IMultiGetOperation.PerFieldAnalyzer { get; set; }
-		Type IMultiGetOperation.ClrType { get { return typeof(T); } }
+		Type IMultiGetOperation.ClrType => typeof(T);
+
+		bool IMultiGetOperation.CanBeFlattened =>
+			Self.Index == null
+			&& Self.Type == null
+			&& Self.Routing == null
+			&& Self.Source == null
+			&& Self.Fields == null;
 
 		public MultiGetOperationDescriptor()
 		{
@@ -104,31 +118,27 @@ namespace Nest
 			return this;
 		}
 
-		public MultiGetOperationDescriptor<T> Id(long id)
-		{
-			return this.Id(id.ToString(CultureInfo.InvariantCulture));
-		}
-
-		public MultiGetOperationDescriptor<T> Id(string id)
+		public MultiGetOperationDescriptor<T> Id(Id id)
 		{
 			Self.Id = id;
 			return this;
 		}
+
 		/// <summary>
 		/// Control how the document's source is loaded
 		/// </summary>
-		public MultiGetOperationDescriptor<T> Source(ISourceFilter source)
+		public MultiGetOperationDescriptor<T> Source(bool? sourceEnabled = true)
 		{
-			Self.Source = source;
+			Self.Source = sourceEnabled;
 			return this;
 		}
 
 		/// <summary>
 		/// Control how the document's source is loaded
 		/// </summary>
-		public MultiGetOperationDescriptor<T> Source(Func<SearchSourceDescriptor<T>, SearchSourceDescriptor<T>> source)
+		public MultiGetOperationDescriptor<T> Source(Func<SearchSourceDescriptor<T>, ISourceFilter> source)
 		{
-			Self.Source = source(new SearchSourceDescriptor<T>());
+			Self.Source = new Union<bool, ISourceFilter>(source(new SearchSourceDescriptor<T>()));
 			return this;
 		}
 

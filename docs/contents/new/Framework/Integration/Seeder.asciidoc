@@ -1,7 +1,12 @@
 [source, csharp]
 ----
+var rawFieldsTemplateExists = this.Client.IndexTemplateExists("raw_fields").Exists;
 this.CreateIndicesAndMappings();
-var putTemplateResult = this.Client.PutTemplate("raw_fields", p => p
+CreateRawFieldsIndexTemplate();
+CreateProjectIndex();
+this.Client.IndexMany(Project.Projects);
+this.Client.Refresh(Nest.Indices.Index<Project>());
+var putTemplateResult = this.Client.PutIndexTemplate("raw_fields", p => p
 				.Template("*") //match on all created indices
 				.Settings(s => s
 					.NumberOfReplicas(0)
@@ -25,9 +30,12 @@ var putTemplateResult = this.Client.PutTemplate("raw_fields", p => p
 						)
 					)
 				)
-			);
+				);
 putTemplateResult.IsValid.Should().BeTrue();
-var createProjectIndex = this.Client.CreateIndex(typeof(Project), c => c
+var createProjectIndex = this.Client.CreateIndex(typeof (Project), c => c
+				.Aliases(a => a
+					.Alias("projects-alias")
+				)
 				.Mappings(map => map
 					.Map<Project>(m => m
 						.Properties(props => props
@@ -55,8 +63,6 @@ var createProjectIndex = this.Client.CreateIndex(typeof(Project), c => c
 						)
 					)
 				)
-			);
+				);
 createProjectIndex.IsValid.Should().BeTrue();
-this.Client.IndexMany(Project.Projects);
-this.Client.Refresh(c=>c.Index<Project>());
 ----

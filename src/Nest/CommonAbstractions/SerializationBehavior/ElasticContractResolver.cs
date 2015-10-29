@@ -30,7 +30,14 @@ namespace Nest.Resolvers
 
 			// this will only be called once and then cached
 
-			if (typeof(IDictionary).IsAssignableFrom(objectType))
+			if (typeof(IDictionary).IsAssignableFrom(objectType)  
+				&& !typeof(IMappings).IsAssignableFrom(objectType)
+				&& !typeof(IProperties).IsAssignableFrom(objectType)
+				&& !typeof(IAnalyzers).IsAssignableFrom(objectType)
+				&& !typeof(ICharFilters).IsAssignableFrom(objectType)
+				&& !typeof(ITokenFilters).IsAssignableFrom(objectType)
+				&& !typeof(IDynamicIndexSettings).IsAssignableFrom(objectType)
+				)
 				contract.Converter = new VerbatimDictionaryKeysJsonConverter();
 
 			else if (objectType == typeof(IAggregation)) contract.Converter = new AggregationJsonConverter();
@@ -39,6 +46,9 @@ namespace Nest.Resolvers
 			else if (objectType == typeof(IAnalyzer)) contract.Converter = new AnalyzerJsonConverter();
 			else if (objectType == typeof(ITokenizer)) contract.Converter = new TokenizerJsonConverter();
 			else if (objectType == typeof(ITokenFilter)) contract.Converter = new TokenFilterJsonConverter();
+
+			else if (typeof(IClusterRerouteCommand).IsAssignableFrom(objectType))
+				contract.Converter = new ClusterRerouteCommandJsonConverter();
 
 			else if (objectType == typeof(DateTime) || objectType == typeof(DateTime?))
 				contract.Converter = new IsoDateTimeConverter();
@@ -109,11 +119,16 @@ namespace Nest.Resolvers
 			defaultProperties = PropertiesOf<IAliasAction>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IBulkOperation>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IMultiGetOperation>(type, memberSerialization, defaultProperties, lookup);
-			defaultProperties = PropertiesOf<IRepository>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IAlias>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IInnerHitsContainer>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IInnerHits>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IProperty>(type, memberSerialization, defaultProperties, lookup);
+
+			defaultProperties = PropertiesOf<IClusterRerouteCommand>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<IMultiTermVectorOperation>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<IRepository>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<IRepositorySettings>(type, memberSerialization, defaultProperties, lookup);
+
 			defaultProperties = PropertiesOf<INestSerializable>(type, memberSerialization, defaultProperties, lookup);
 
 			return defaultProperties.GroupBy(p => p.PropertyName).Select(p => p.First()).ToList();

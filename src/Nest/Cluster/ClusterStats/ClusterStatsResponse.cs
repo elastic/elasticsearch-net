@@ -3,29 +3,38 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Elasticsearch.Net;
 
 namespace Nest
 {
 	public interface IClusterStatsResponse : IResponse
 	{
+		[JsonProperty("cluster_name")]
 		string ClusterName { get; set; }
-		string Status { get; set; }
-		IndicesStats Indices { get; set; }
+
+		[JsonProperty("timestamp")]
+		long Timestamp { get; set; }
+
+		[JsonProperty("status")]
+		ClusterStatus Status { get; set; }
+
+		[JsonProperty("indices")]
+		ClusterIndicesStats Indices { get; set; }
+
+		[JsonProperty("nodes")]
 		ClusterNodesStats Nodes { get; set; }
 	}
 
-	[JsonObject]
 	public class ClusterStatsResponse : BaseResponse, IClusterStatsResponse
 	{
-		[JsonProperty("cluster_name")]
 		public string ClusterName { get; set; }
-		[JsonProperty("status")]
-		public string Status { get; set; }
 
-		[JsonProperty("indices")]
-		public IndicesStats Indices { get; set; }
+		public long Timestamp { get; set; }
 
-		[JsonProperty("nodes")]
+		public ClusterStatus Status { get; set; }
+
+		public ClusterIndicesStats Indices { get; set; }
+
 		public ClusterNodesStats Nodes { get; set; }
 	}
 }

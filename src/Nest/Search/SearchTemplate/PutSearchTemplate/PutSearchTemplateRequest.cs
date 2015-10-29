@@ -7,15 +7,13 @@ using System.Text;
 
 namespace Nest
 {
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<PutSearchTemplateRequest>))]
 	public partial interface IPutSearchTemplateRequest 
 	{
-		//TODO NAME
 		[JsonProperty("template")]
 		string Template { get; set; }
 	}
 
-
-	//TODO whats going on here? renamed?
 	public partial class PutSearchTemplateRequest 
 	{
 		public string Template { get; set; }

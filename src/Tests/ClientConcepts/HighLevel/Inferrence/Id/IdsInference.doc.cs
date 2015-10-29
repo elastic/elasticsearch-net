@@ -8,7 +8,7 @@ using Tests.Framework;
 using Tests.Framework.MockData;
 using Xunit.Sdk;
 using static Tests.Framework.RoundTripper;
-using static Nest.Infer;
+using static Nest.Static;
 using Nest.Resolvers;
 
 namespace Tests.ClientConcepts.HighLevel.Inferrence.Id
@@ -28,8 +28,8 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence.Id
 			Nest.Id idFromString = "hello-world";
 			Nest.Id idFromGuid = new Guid("D70BD3CF-4E38-46F3-91CA-FCBEF29B148E");
 
-			Expect("1").WhenSerializing(idFromInt);
-			Expect("2").WhenSerializing(idFromLong);
+			Expect(1).WhenSerializing(idFromInt);
+			Expect(2).WhenSerializing(idFromLong);
 			Expect("hello-world").WhenSerializing(idFromString);
 			Expect("d70bd3cf-4e38-46f3-91ca-fcbef29b148e").WhenSerializing(idFromGuid);
 		}

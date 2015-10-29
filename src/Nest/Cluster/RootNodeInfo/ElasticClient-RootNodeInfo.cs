@@ -11,40 +11,40 @@ namespace Nest
 		/// Does a request to the root of an elasticsearch node
 		/// </summary>
 		/// <param name="selector">A descriptor to further describe the root operation</param>
-		IRootInfoResponse RootNodeInfo(Func<InfoDescriptor, IInfoRequest> selector = null);
+		IRootNodeInfoResponse RootNodeInfo(Func<RootNodeInfoDescriptor, IRootNodeInfoRequest> selector = null);
 
 		/// <inheritdoc/>
-		IRootInfoResponse RootNodeInfo(IInfoRequest infoRequest);
+		IRootNodeInfoResponse RootNodeInfo(IRootNodeInfoRequest infoRequest);
 
 		/// <inheritdoc/>
-		Task<IRootInfoResponse> RootNodeInfoAsync(Func<InfoDescriptor, IInfoRequest> selector = null);
+		Task<IRootNodeInfoResponse> RootNodeInfoAsync(Func<RootNodeInfoDescriptor, IRootNodeInfoRequest> selector = null);
 
 		/// <inheritdoc/>
-		Task<IRootInfoResponse> RootNodeInfoAsync(IInfoRequest infoRequest);
+		Task<IRootNodeInfoResponse> RootNodeInfoAsync(IRootNodeInfoRequest infoRequest);
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IRootInfoResponse RootNodeInfo(Func<InfoDescriptor, IInfoRequest> selector = null) =>
-			this.RootNodeInfo(selector.InvokeOrDefault(new InfoDescriptor()));
+		public IRootNodeInfoResponse RootNodeInfo(Func<RootNodeInfoDescriptor, IRootNodeInfoRequest> selector = null) =>
+			this.RootNodeInfo(selector.InvokeOrDefault(new RootNodeInfoDescriptor()));
 
 		/// <inheritdoc/>
-		public IRootInfoResponse RootNodeInfo(IInfoRequest infoRequest) => 
-			this.Dispatcher.Dispatch<IInfoRequest, InfoRequestParameters, RootInfoResponse>(
+		public IRootNodeInfoResponse RootNodeInfo(IRootNodeInfoRequest infoRequest) => 
+			this.Dispatcher.Dispatch<IRootNodeInfoRequest, RootNodeInfoRequestParameters, RootNodeInfoResponse>(
 				infoRequest,
-				(p, d) => this.LowLevelDispatch.InfoDispatch<RootInfoResponse>(p)
+				(p, d) => this.LowLevelDispatch.InfoDispatch<RootNodeInfoResponse>(p)
 			);
 
 		/// <inheritdoc/>
-		public Task<IRootInfoResponse> RootNodeInfoAsync(Func<InfoDescriptor, IInfoRequest> selector = null) =>
-			this.RootNodeInfoAsync(selector.InvokeOrDefault(new InfoDescriptor()));
+		public Task<IRootNodeInfoResponse> RootNodeInfoAsync(Func<RootNodeInfoDescriptor, IRootNodeInfoRequest> selector = null) =>
+			this.RootNodeInfoAsync(selector.InvokeOrDefault(new RootNodeInfoDescriptor()));
 
 		/// <inheritdoc/>
-		public Task<IRootInfoResponse> RootNodeInfoAsync(IInfoRequest infoRequest) => 
-			this.Dispatcher.DispatchAsync<IInfoRequest, InfoRequestParameters, RootInfoResponse, IRootInfoResponse>(
+		public Task<IRootNodeInfoResponse> RootNodeInfoAsync(IRootNodeInfoRequest infoRequest) => 
+			this.Dispatcher.DispatchAsync<IRootNodeInfoRequest, RootNodeInfoRequestParameters, RootNodeInfoResponse, IRootNodeInfoResponse>(
 				infoRequest,
-				(p, d) => this.LowLevelDispatch.InfoDispatchAsync<RootInfoResponse>(p)
+				(p, d) => this.LowLevelDispatch.InfoDispatchAsync<RootNodeInfoResponse>(p)
 			);
 	}
 }

@@ -12,11 +12,11 @@ namespace Nest
 	[JsonConverter(typeof(IdJsonConverter))]
 	public class Id : IUrlParameter
 	{
-		internal string Value { get; set; }
+		internal object Value { get; set; }
 		internal object Document { get; set; }
 
 		public Id(string id) { Value = id; }
-		public Id(long id) { Value = id.ToString(); }
+		public Id(long id) { Value = id; }
 		public Id(object document) { Document = document; }
 
 		public static implicit operator Id(string id) => new Id(id);
@@ -25,7 +25,22 @@ namespace Nest
 
 		public static Id From<T>(T document) where T : class => new Id(document);
 
-		public string GetString(IConnectionConfigurationValues settings) => ((IUrlParameter)Ids.Single(this)).GetString(settings);
+		public string GetString(IConnectionConfigurationValues settings)
+		{
+			var nestSettings = settings as IConnectionSettingsValues;
+			return GetString(nestSettings);
+		}
+
+		internal string GetString(IConnectionSettingsValues nestSettings)
+		{
+			if (this.Document != null)
+			{
+				return nestSettings.Inferrer.Id(this.Document);
+			}
+
+			var s = Value as string;
+			return s ?? this.Value?.ToString();
+		}
 	}
 
 	//TODO do we need this? discus with @gmarz
@@ -47,9 +62,8 @@ namespace Nest
 			if (nestSettings == null)
 				throw new Exception("Tried to pass ids on querystring but it could not be resolved because no nest settings are available");
 
-			var infer = new ElasticInferrer(nestSettings);
 			var ids = _ids
-				.Select(id => id.Document == null ? id.Value : infer.Id(id.Document.GetType(), id.Document))
+				.Select(i=>i.GetString(nestSettings))
 				.ToList();
 			if (ids.Any(id => id.IsNullOrEmpty())) throw new ArgumentException("One or more ids were null or empty", "ids");
 			return string.Join(",", ids);

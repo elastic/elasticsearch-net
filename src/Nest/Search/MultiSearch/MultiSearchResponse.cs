@@ -26,7 +26,7 @@ namespace Nest
 		}
 		public SearchResponse<T> GetResponse<T>(string name) where T : class
 		{
-			object response = null;
+			object response;
 			this._Responses.TryGetValue(name, out response);
 			var r = response as IBodyWithApiCallDetails;
 			if (r != null)

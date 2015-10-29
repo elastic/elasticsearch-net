@@ -22,7 +22,7 @@ namespace Nest
 
 	}
 	
-	public class SimilaritiesDescriptor : HasADictionary<SimilaritiesDescriptor, string, ISimilarity>, ISimilarities
+	public class SimilaritiesDescriptor : IsADictionaryDescriptor<SimilaritiesDescriptor, ISimilarities, string, ISimilarity>, ISimilarities
 	{
 		public SimilaritiesDescriptor Add(string name, ISimilarity similarity)
 		{

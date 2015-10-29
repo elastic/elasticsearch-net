@@ -16,12 +16,13 @@ namespace Nest
 
 	}
 
-	public partial class PercolateRequest<TDocument> 
+	public partial class PercolateRequest<TDocument>
 		where TDocument : class
 	{
 		public PercolateRequest() : this(typeof(TDocument), typeof(TDocument)) { }
 		public PercolateRequest(Id id) : this(typeof(TDocument), typeof(TDocument), id) { }
 
+		public string MultiPercolateName => "percolate";
 		public IHighlightRequest Highlight { get; set; }
 		public QueryContainer Query { get; set; }
 		public QueryContainer Filter { get; set; }
@@ -33,7 +34,15 @@ namespace Nest
 		public IDictionary<FieldName, ISort> Sort { get; set; }
 
 		IRequestParameters IPercolateOperation.GetRequestParameters() => this.RequestState.RequestParameters;
+
+		partial void DocumentFromPath(TDocument document)
+		{
+			Self.Document = document;
+			if (Self.Document != null)
+				Self.RouteValues.Remove("id");
+		}
 	}
+
 	public partial class PercolateDescriptor<TDocument> : IPercolateRequest<TDocument>
 		where TDocument : class
 	{
@@ -50,6 +59,7 @@ namespace Nest
 		IDictionary<FieldName, ISort> IPercolateOperation.Sort { get; set; }
 		IDictionary<string, IAggregationContainer> IPercolateOperation.Aggregations { get; set; }
 
+		string IPercolateOperation.MultiPercolateName => "percolate";
 
 		/// <summary>
 		/// The object to perculate
@@ -232,11 +242,7 @@ namespace Nest
 		public PercolateDescriptor<TDocument> QueryString(string userInput)
 		{
 			var q = new QueryContainerDescriptor<TDocument>();
-			QueryContainer bq;
-			if (userInput.IsNullOrEmpty())
-				bq = q.MatchAll();
-			else
-				bq = q.QueryString(qs => qs.Query(userInput));
+			var bq = userInput.IsNullOrEmpty() ? q.MatchAll() : q.QueryString(qs => qs.Query(userInput));
 			Self.Query = bq;
 			return this;
 		}

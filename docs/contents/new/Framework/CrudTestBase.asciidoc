@@ -14,7 +14,6 @@ await this._deleteResponse;
 await this._deleteGetResponse;
 var response = kv.Value as TResponse;
 assert(response);
-when (false)
 await this.AssertOnAllResponses(this._deleteResponse, assert);
 await this.AssertOnAllResponses(this._deleteGetResponse, assert);
 ----

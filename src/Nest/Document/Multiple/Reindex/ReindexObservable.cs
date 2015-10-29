@@ -39,13 +39,15 @@ namespace Nest
 			var scroll = this._reindexRequest.Scroll ?? "2m";
 			var size = this._reindexRequest.Size ?? 100;
 
-			fromIndex.Resolve(this._connectionSettings).ThrowIfNullOrEmpty("fromIndex");
-			toIndex.Resolve(this._connectionSettings).ThrowIfNullOrEmpty("toIndex");
+			var resolvedFrom = fromIndex.Resolve(this._connectionSettings);
+			resolvedFrom.ThrowIfNullOrEmpty("fromIndex");
+			var resolvedTo = toIndex.Resolve(this._connectionSettings);
+			resolvedTo.ThrowIfNullOrEmpty("toIndex");
 
 			var indexSettings = this._client.GetIndexSettings(i=>i.Index(fromIndex));
 			Func<CreateIndexDescriptor, ICreateIndexRequest> settings =  (ci) => this._reindexRequest.CreateIndexRequest ?? ci;
 			var createIndexResponse = this._client.CreateIndex(
-				toIndex, (c) => settings(c.InitializeUsing(indexSettings.Indices[fromIndex])));
+				toIndex, (c) => settings(c.InitializeUsing(indexSettings.Indices[resolvedFrom])));
 			if (!createIndexResponse.IsValid)
 				throw new ReindexException(createIndexResponse.ApiCall);
 
@@ -66,7 +68,7 @@ namespace Nest
 			do
 			{
 				var result = searchResult;
-				searchResult = this._client.Scroll<T>((TimeUnitExpression)scroll, result.ScrollId);
+				searchResult = this._client.Scroll<T>(scroll, result.ScrollId);
 				if (searchResult.Documents.HasAny())
 					indexResult = this.IndexSearchResults(searchResult, observer, toIndex, page);
 				page++;

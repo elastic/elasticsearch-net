@@ -8,7 +8,7 @@ using Tests.Framework;
 using Tests.Framework.MockData;
 using Xunit.Sdk;
 using static Tests.Framework.RoundTripper;
-using static Nest.Infer;
+using static Nest.Static;
 
 namespace Tests.ClientConcepts.HighLevel.Inferrence.DocumentPaths
 {
@@ -27,7 +27,7 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence.DocumentPaths
 			IDocumentPath path = new DocumentPath<Project>(1);
 			Expect("project").WhenSerializing(path.Index);
 			Expect("project").WhenSerializing(path.Type);
-			Expect("1").WhenSerializing(path.Id);
+			Expect(1).WhenSerializing(path.Id);
 
 			/** You can still override the inferred index and type name*/
 			path = new DocumentPath<Project>(1).Type("project1");
@@ -40,7 +40,7 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence.DocumentPaths
 			path = DocumentPath<Project>.Id(1); 
 			Expect("project").WhenSerializing(path.Index);
 			Expect("project").WhenSerializing(path.Type);
-			Expect("1").WhenSerializing(path.Id);
+			Expect(1).WhenSerializing(path.Id);
 		}
 
 		//** if you have an instance of your document you can use it as well generate document paths */

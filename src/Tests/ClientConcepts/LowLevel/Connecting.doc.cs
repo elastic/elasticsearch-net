@@ -20,6 +20,8 @@ namespace Tests.ClientConcepts.LowLevel
 		public void InstantiateUsingAllDefaults()
 		{
 			var client = new ElasticsearchClient();
+			var tokenizers = new TokenizersDescriptor();
+
 		}
 		/**
 		 * If your Elasticsearch node does not live at `http://localhost:9200` but i.e `http://mynode.example.com:8082/apiKey`, then 

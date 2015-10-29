@@ -18,6 +18,11 @@ namespace Nest
 
 		private string ComparisonValue { get; set; }
 
+		public FieldNames And<T>(Expression<Func<T, object>> field) where T : class =>
+			new FieldNames(new [] { this, field });
+
+		public FieldNames And(string field) => new FieldNames(new [] { this, field });
+
 		public static FieldName Create(string name, double? boost = null)
 		{
 			FieldName fieldName = name;

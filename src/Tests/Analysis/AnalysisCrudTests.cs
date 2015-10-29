@@ -20,7 +20,8 @@ namespace Tests.Analysis
 {
 
 	[Collection(IntegrationContext.Indexing)]
-	public class AnalysisCrudTests : CrudTestBase<IIndicesOperationResponse, IIndexSettingsResponse, IAcknowledgedResponse>
+	public class AnalysisCrudTests 
+		: CrudTestBase<IIndicesOperationResponse, IGetIndexSettingsResponse, IAcknowledgedResponse>
 	{
 		/**
 		* # Analysis crud
@@ -73,7 +74,7 @@ namespace Tests.Analysis
 		/**
 		* We then read back the analysis settings using `GetIndexSettings()`, you can use this method to get the settings for 1, or many indices in one go
 		*/
-		protected override LazyResponses Read() => Calls<GetIndexSettingsDescriptor, GetIndexSettingsRequest, IGetIndexSettingsRequest, IIndexSettingsResponse>(
+		protected override LazyResponses Read() => Calls<GetIndexSettingsDescriptor, GetIndexSettingsRequest, IGetIndexSettingsRequest, IGetIndexSettingsResponse>(
 			GetInitializer,
 			GetFluent,
 			fluent: (s, c, f) => c.GetIndexSettings(f),
@@ -89,10 +90,10 @@ namespace Tests.Analysis
 		* Here we assert over the response from `GetIndexSettings()` after the index creation to make sure our analysis chain did infact 
 		* store our html char filter called `stripMe`
 		*/
-		[I] protected async Task CreatedAnalyisHasCharFilters() => await this.AssertOnGetAfterCreate(r =>
+		protected override void ExpectAfterCreate(IGetIndexSettingsResponse response)
 		{
-			r.Indices.Should().NotBeNull().And.HaveCount(1);
-			var index = r.Indices.Values.First();
+			response.Indices.Should().NotBeNull().And.HaveCount(1);
+			var index = response.Indices.Values.First();
 			index.Should().NotBeNull();
 			index.Settings.Should().NotBeNull();
 			var indexSettings = index.Settings;
@@ -101,7 +102,7 @@ namespace Tests.Analysis
 
 			var firstHtmlCharFilter = indexSettings.Analysis.CharFilters["stripMe"];
 			firstHtmlCharFilter.Should().NotBeNull();
-		});
+		}
 
 		/**
 		* Elasticsearch has an `UpdateIndexSettings()` call but in order to be able to use it you first need to close the index and reopen it afterwards
@@ -163,10 +164,10 @@ namespace Tests.Analysis
 		/**
 		* Here we assert that the `GetIndexSettings()` call after the update sees the newly introduced `differentHmtl` char filter
 		*/
-		[I] protected async Task UpdatedAnalyisHasNewCharFilter() => await this.AssertOnGetAfterUpdate(r =>
+		protected override void ExpectAfterUpdate(IGetIndexSettingsResponse response)
 		{
-			r.Indices.Should().NotBeNull().And.HaveCount(1);
-			var index = r.Indices.Values.First();
+			response.Indices.Should().NotBeNull().And.HaveCount(1);
+			var index = response.Indices.Values.First();
 			index.Should().NotBeNull();
 			index.Settings.Should().NotBeNull();
 			var indexSettings = index.Settings;
@@ -175,6 +176,6 @@ namespace Tests.Analysis
 
 			var firstHtmlCharFilter = indexSettings.Analysis.CharFilters["differentHtml"];
 			firstHtmlCharFilter.Should().NotBeNull();
-		});
+		}
 	}
 }

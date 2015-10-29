@@ -9,7 +9,7 @@ namespace Nest
 		[JsonProperty("snapshot")]
 		public string Name { get; internal set;  }
 		[JsonProperty("indices")]
-		public IEnumerable<string> Indices { get; internal set; }
+		public IEnumerable<IndexName> Indices { get; internal set; }
 		
 		[JsonProperty("shards")]
 		public ShardsMetaData Shards { get; internal set;  }

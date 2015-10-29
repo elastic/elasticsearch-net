@@ -1,5 +1,9 @@
 [source, csharp]
 ----
+Activator.CreateInstance<TInitializer>()
+----
+[source, csharp]
+----
 var client = this.Client;
 var dict = new Dictionary<string, IResponse>();
 OnBeforeCall(client);
@@ -13,7 +17,7 @@ dict.Add("requestAsync", await requestAsync(client, this.Initializer));
 var paths = (this.UrlPath ?? "").Split(new [] { '?' }, 2);
 string path = paths.First(), query = string.Empty;
 query = paths.Last();
-var expectedUri = new UriBuilder("http","localhost", IntegrationPort, path,  "?" + query).Uri;
+var expectedUri = new UriBuilder("http","localhost", _integrationPort, path,  "?" + query).Uri;
 u.AbsolutePath.Should().Be(expectedUri.AbsolutePath);
 u = new UriBuilder(u.Scheme, u.Host, u.Port, u.AbsolutePath, u.Query.Replace("pretty=true", "")).Uri;
 var queries = new[] {u.Query, expectedUri.Query};
@@ -32,5 +36,4 @@ clientKeyValues.Should().Equal(expectedKeyValues);
 var responses = await this._responses;
 var response = kv.Value as TResponse;
 assert(response);
-when (false)
 ----

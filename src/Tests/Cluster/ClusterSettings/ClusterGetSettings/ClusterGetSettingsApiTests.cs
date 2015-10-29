@@ -21,15 +21,8 @@ namespace Tests.Cluster.ClusterSettings.ClusterGetSettings
 			requestAsync: (client, r) => client.ClusterGetSettingsAsync(r)
 		);
 
-		protected override bool ExpectIsValid => true;
-		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override string UrlPath => "/_cluster/settings";
-
-		[I] public async Task Response() => await this.AssertOnAllResponses(r =>
-		{
-		});
-
 	}
 
 }

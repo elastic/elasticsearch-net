@@ -28,7 +28,7 @@ namespace Nest.DSL.Visitor
 		public void Accept(IProperties properties)
 		{
 			if (properties == null) return;
-			foreach (var kv in properties.Dictionary)
+			foreach (var kv in properties)
 			{
 				var prop = kv.Key;
 				var field = kv.Value;

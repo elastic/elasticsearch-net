@@ -5,7 +5,7 @@ but give up after 20 seconds
 
 [source, csharp]
 ----
-var audit = new Auditor(() => Cluster
+var audit = new Auditor(() => Framework.Cluster
 				.Nodes(10)
 				.ClientCalls(r => r.FailAlways())
 				.ClientCalls(r => r.OnPort(9209).SucceedAlways())
@@ -32,7 +32,7 @@ Remember that the actual number of requests is initial attempt + set number of r
 
 [source, csharp]
 ----
-var audit = new Auditor(() => Cluster
+var audit = new Auditor(() => Framework.Cluster
 				.Nodes(10)
 				.ClientCalls(r => r.FailAlways())
 				.ClientCalls(r => r.OnPort(9209).SucceedAlways())
@@ -55,7 +55,7 @@ In this case it does not make sense to retry our 10 second query on 10 nodes. We
 
 [source, csharp]
 ----
-var audit = new Auditor(() => Cluster
+var audit = new Auditor(() => Framework.Cluster
 				.Nodes(10)
 				.ClientCalls(r => r.FailAlways().Takes(TimeSpan.FromSeconds(10)))
 				.ClientCalls(r => r.OnPort(9209).SucceedAlways())
@@ -77,7 +77,7 @@ wins over the configured request timeout
 
 [source, csharp]
 ----
-var audit = new Auditor(() => Cluster
+var audit = new Auditor(() => Framework.Cluster
 				.Nodes(10)
 				.ClientCalls(r => r.FailAlways().Takes(TimeSpan.FromSeconds(3)))
 				.ClientCalls(r => r.OnPort(9209).SucceedAlways())
@@ -99,7 +99,7 @@ If your retry policy expands beyond available nodes we won't retry the same node
 
 [source, csharp]
 ----
-var audit = new Auditor(() => Cluster
+var audit = new Auditor(() => Framework.Cluster
 				.Nodes(2)
 				.ClientCalls(r => r.FailAlways().Takes(TimeSpan.FromSeconds(3)))
 				.ClientCalls(r => r.OnPort(9209).SucceedAlways())
@@ -120,7 +120,7 @@ not giving up on the fail fast principle. It's *NOT* a mechanism for forcing req
 
 [source, csharp]
 ----
-var audit = new Auditor(() => Cluster
+var audit = new Auditor(() => Framework.Cluster
 				.Nodes(10)
 				.ClientCalls(r => r.FailAlways().Takes(TimeSpan.FromSeconds(3)))
 				.ClientCalls(r => r.OnPort(9209).SucceedAlways())

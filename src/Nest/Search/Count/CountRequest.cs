@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<CountRequest>))]
 	public partial interface ICountRequest 
 	{
 		[JsonProperty("query")]
@@ -32,7 +33,6 @@ namespace Nest
 			this.QueryString.ContainsKey("_source") || this.QueryString.ContainsKey("q") ? HttpMethod.GET : HttpMethod.POST;
 
 		public IQueryContainer Query { get; set; }
-
 	}
 
 	[DescriptorFor("Count")]

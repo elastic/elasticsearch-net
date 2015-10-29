@@ -148,7 +148,7 @@ namespace Elasticsearch.Net.Connection
 		public ElasticsearchResponse<TReturn> CreateResponse<TReturn>(Exception e)
 		{
 			var cs = new ElasticsearchResponse<TReturn>(e);
-			cs.RequestBodyInBytes = this.Data?.Bytes;
+			cs.RequestBodyInBytes = this.Data?.WrittenBytes;
 			cs.Uri = this.Uri;
 			cs.HttpMethod = this.Method;
 			cs.OriginalException = e;
@@ -158,7 +158,7 @@ namespace Elasticsearch.Net.Connection
 		private ElasticsearchResponse<TReturn> InitializeResponse<TReturn>(int statusCode, Exception innerException)
 		{
 			var cs = new ElasticsearchResponse<TReturn>(statusCode);
-			cs.RequestBodyInBytes = this.Data?.Bytes;
+			cs.RequestBodyInBytes = this.Data?.WrittenBytes;
 			cs.Uri = this.Uri;
 			cs.HttpMethod = this.Method;
 			cs.OriginalException = innerException;

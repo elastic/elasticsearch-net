@@ -21,7 +21,7 @@ namespace Nest
 		public void Add(TypeName type, IWarmer mapping) => BackingDictionary.Add(type, mapping);
 	}
 	
-	public class WarmersDescriptor : HasADictionary<WarmersDescriptor, TypeName, IWarmer>, IWarmers
+	public class WarmersDescriptor : IsADictionaryDescriptor<WarmersDescriptor, IWarmers, TypeName, IWarmer>, IWarmers
 	{
 		public WarmersDescriptor Warm<T>(string warmerName, Func<WarmerDescriptor<T>, IWarmer> selector) where T : class
 		{

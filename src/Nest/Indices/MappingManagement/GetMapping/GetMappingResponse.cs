@@ -7,6 +7,9 @@ namespace Nest
 {
 	public interface IGetMappingResponse : IResponse
 	{
+		/// <summary>
+		/// TODO dict|indexname, imappings|
+		/// </summary>
 		Dictionary<string, IList<TypeMapping>> Mappings { get; }
 		TypeMapping Mapping { get; }
 		void Accept(IMappingVisitor visitor);
@@ -18,13 +21,16 @@ namespace Nest
 
 	public class GetMappingResponse : BaseResponse, IGetMappingResponse
 	{
+		public override bool IsValid => base.IsValid && this.Mapping != null;
+
 		internal GetMappingResponse(IApiCallDetails status, GetRootObjectMappingWrapping dict)
 		{
 			this.Mappings = new Dictionary<string, IList<TypeMapping>>();
 			//TODO can dict truely ever be null, whats the response look like when field mapping is not found.
 			//does status.Success not already reflect this?
-			this.IsValid = status.Success && dict != null && dict.Count > 0;
-			if (!this.IsValid) return;
+			//this.IsValid = status.Success && dict != null && dict.Count > 0;
+			if (!status.Success || dict == null) return;
+
 			foreach (var index in dict)
 			{
 				if (index.Value == null || !index.Value.ContainsKey("mappings"))
@@ -45,7 +51,7 @@ namespace Nest
 				.FirstOrDefault(t=>t != null);
 		}
 
-		public Dictionary<string, IList<TypeMapping>> Mappings { get; internal set; }= new Dictionary<string, IList<TypeMapping>>();
+		public Dictionary<string, IList<TypeMapping>> Mappings { get; internal set; } = new Dictionary<string, IList<TypeMapping>>();
 
 		public TypeMapping Mapping { get; internal set; }
 

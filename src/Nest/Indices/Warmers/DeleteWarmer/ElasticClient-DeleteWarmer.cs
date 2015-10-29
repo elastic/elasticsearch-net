@@ -33,11 +33,9 @@ namespace Nest
 
 	public partial class ElasticClient
 	{
-		//TODO AllIndices seems weird here 
-
 		/// <inheritdoc/>
 		public IIndicesOperationResponse DeleteWarmer(Indices indices, Names names, Func<DeleteWarmerDescriptor, IDeleteWarmerRequest> selector = null) =>
-			this.DeleteWarmer(selector.InvokeOrDefault(new DeleteWarmerDescriptor(Indices.All, names)));
+			this.DeleteWarmer(selector.InvokeOrDefault(new DeleteWarmerDescriptor(indices, names)));
 
 		/// <inheritdoc/>
 		public IIndicesOperationResponse DeleteWarmer(IDeleteWarmerRequest deleteWarmerRequest) => 

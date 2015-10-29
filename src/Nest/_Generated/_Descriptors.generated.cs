@@ -706,23 +706,23 @@ namespace Nest
 	}
 	
 	///<summary>descriptor for ClusterPutSettings <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</pre></summary>
-	public partial class ClusterSettingsDescriptor  : RequestDescriptorBase<ClusterSettingsDescriptor,ClusterSettingsRequestParameters, IClusterSettingsRequest>, IClusterSettingsRequest
+	public partial class ClusterPutSettingsDescriptor  : RequestDescriptorBase<ClusterPutSettingsDescriptor,ClusterPutSettingsRequestParameters, IClusterPutSettingsRequest>, IClusterPutSettingsRequest
 	{ 
 			
 		///<summary>Return settings in flat format (default: false)</summary>
-		public ClusterSettingsDescriptor FlatSettings(bool flat_settings = true) => AssignParam(p=>p.FlatSettings(flat_settings));
+		public ClusterPutSettingsDescriptor FlatSettings(bool flat_settings = true) => AssignParam(p=>p.FlatSettings(flat_settings));
 
 		///<summary>Explicit operation timeout for connection to master node</summary>
-		public ClusterSettingsDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
+		public ClusterPutSettingsDescriptor MasterTimeout(string master_timeout) => AssignParam(p=>p.MasterTimeout(master_timeout));
 
 		///<summary>Explicit operation timeout</summary>
-		public ClusterSettingsDescriptor Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
+		public ClusterPutSettingsDescriptor Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
 
 		///<summary>The URL-encoded request definition</summary>
-		public ClusterSettingsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public ClusterPutSettingsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public ClusterSettingsDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		public ClusterPutSettingsDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -818,6 +818,9 @@ namespace Nest
 
 		///<summary>Whether to return time and byte values in human-readable format.</summary>
 		public ClusterStatsDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Explicit operation timeout</summary>
+		public ClusterStatsDescriptor Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
 
 		///<summary>The URL-encoded request definition</summary>
 		public ClusterStatsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
@@ -2785,9 +2788,6 @@ namespace Nest
 		
 
 		
-		///<summary>The order for this template when merging multiple matching ones (higher numbers are merged later, overriding the lower numbers)</summary>
-		public PutIndexTemplateDescriptor Order(long order) => AssignParam(p=>p.Order(order));
-
 		///<summary>Whether the index template should only be added if new or can also replace an existing one</summary>
 		public PutIndexTemplateDescriptor Create(bool create = true) => AssignParam(p=>p.Create(create));
 
@@ -3217,14 +3217,14 @@ namespace Nest
 	}
 	
 	///<summary>descriptor for Info <pre>http://www.elastic.co/guide/</pre></summary>
-	public partial class InfoDescriptor  : RequestDescriptorBase<InfoDescriptor,InfoRequestParameters, IInfoRequest>, IInfoRequest
+	public partial class RootNodeInfoDescriptor  : RequestDescriptorBase<RootNodeInfoDescriptor,RootNodeInfoRequestParameters, IRootNodeInfoRequest>, IRootNodeInfoRequest
 	{ 
 			
 		///<summary>The URL-encoded request definition</summary>
-		public InfoDescriptor Source(string source) => AssignParam(p=>p.Source(source));
+		public RootNodeInfoDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public InfoDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		public RootNodeInfoDescriptor FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -3466,6 +3466,9 @@ namespace Nest
 		///<summary>The type to sample (default: cpu)</summary>
 		public NodesHotThreadsDescriptor ThreadType(ThreadType thread_type) => AssignParam(p=>p.ThreadType(thread_type));
 
+		///<summary>Explicit operation timeout</summary>
+		public NodesHotThreadsDescriptor Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
+
 		///<summary>The URL-encoded request definition</summary>
 		public NodesHotThreadsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
 
@@ -3495,6 +3498,9 @@ namespace Nest
 
 		///<summary>Whether to return time and byte values in human-readable format.</summary>
 		public NodesInfoDescriptor Human(bool human = true) => AssignParam(p=>p.Human(human));
+
+		///<summary>Explicit operation timeout</summary>
+		public NodesInfoDescriptor Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
 
 		///<summary>The URL-encoded request definition</summary>
 		public NodesInfoDescriptor Source(string source) => AssignParam(p=>p.Source(source));
@@ -3556,6 +3562,9 @@ namespace Nest
 
 		///<summary>A comma-separated list of document types for the `indexing` index metric</summary>
 		public NodesStatsDescriptor Types(params string[] types) => AssignParam(p=>p.Types(types));
+
+		///<summary>Explicit operation timeout</summary>
+		public NodesStatsDescriptor Timeout(string timeout) => AssignParam(p=>p.Timeout(timeout));
 
 		///<summary>The URL-encoded request definition</summary>
 		public NodesStatsDescriptor Source(string source) => AssignParam(p=>p.Source(source));
@@ -4302,11 +4311,11 @@ namespace Nest
 	}
 	
 	///<summary>descriptor for Termvectors <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html</pre></summary>
-	public partial class TermVectorsDescriptor<T>  : RequestDescriptorBase<TermVectorsDescriptor<T>,TermVectorsRequestParameters, ITermVectorsRequest>, ITermVectorsRequest
+	public partial class TermVectorsDescriptor<TDocument>  : RequestDescriptorBase<TermVectorsDescriptor<TDocument>,TermVectorsRequestParameters, ITermVectorsRequest<TDocument>>, ITermVectorsRequest<TDocument>
 	{ 
-		IndexName ITermVectorsRequest.Index => Self.RouteValues.Get<IndexName>("index");
-		TypeName ITermVectorsRequest.Type => Self.RouteValues.Get<TypeName>("type");
-		Id ITermVectorsRequest.Id => Self.RouteValues.Get<Id>("id");
+		IndexName ITermVectorsRequest<TDocument>.Index => Self.RouteValues.Get<IndexName>("index");
+		TypeName ITermVectorsRequest<TDocument>.Type => Self.RouteValues.Get<TypeName>("type");
+		Id ITermVectorsRequest<TDocument>.Id => Self.RouteValues.Get<Id>("id");
 			/// <summary>/{index}/{type}/_termvectors</summary>
 ///<param name="index"> this parameter is required</param>		
 ///<param name="type"> this parameter is required</param>
@@ -4316,73 +4325,73 @@ namespace Nest
 		/// <summary>/{index}/{type}/_termvectors</summary>
 		
 ///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
-		public TermVectorsDescriptor(DocumentPath<T> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
-		partial void DocumentFromPath(T document);
+		public TermVectorsDescriptor(DocumentPath<TDocument> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
+		partial void DocumentFromPath(TDocument document);
 
 			///<summary>The index in which the document resides.</summary>
-		public TermVectorsDescriptor<T> Index(IndexName index) => Assign(a=>a.RouteValues.Optional("index", index));
+		public TermVectorsDescriptor<TDocument> Index(IndexName index) => Assign(a=>a.RouteValues.Optional("index", index));
 
 		///<summary>The index in which the document resides.</summary>
-		public TermVectorsDescriptor<T> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (IndexName)typeof(TOther)));
+		public TermVectorsDescriptor<TDocument> Index<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("index", (IndexName)typeof(TOther)));
 
 		///<summary>The type of the document.</summary>
-		public TermVectorsDescriptor<T> Type(TypeName type) => Assign(a=>a.RouteValues.Optional("type", type));
+		public TermVectorsDescriptor<TDocument> Type(TypeName type) => Assign(a=>a.RouteValues.Optional("type", type));
 
 		///<summary>The type of the document.</summary>
-		public TermVectorsDescriptor<T> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (TypeName)typeof(TOther)));
+		public TermVectorsDescriptor<TDocument> Type<TOther>() where TOther : class => Assign(a=>a.RouteValues.Optional("type", (TypeName)typeof(TOther)));
 
 		///<summary>The id of the document, when not specified a doc param should be supplied.</summary>
-		public TermVectorsDescriptor<T> Id(Id id) => Assign(a=>a.RouteValues.Optional("id", id));
+		public TermVectorsDescriptor<TDocument> Id(Id id) => Assign(a=>a.RouteValues.Optional("id", id));
 
 	
 		///<summary>Specifies if total term frequency and document frequency should be returned.</summary>
-		public TermVectorsDescriptor<T> TermStatistics(bool term_statistics = true) => AssignParam(p=>p.TermStatistics(term_statistics));
+		public TermVectorsDescriptor<TDocument> TermStatistics(bool term_statistics = true) => AssignParam(p=>p.TermStatistics(term_statistics));
 
 		///<summary>Specifies if document count, sum of document frequencies and sum of total term frequencies should be returned.</summary>
-		public TermVectorsDescriptor<T> FieldStatistics(bool field_statistics = true) => AssignParam(p=>p.FieldStatistics(field_statistics));
+		public TermVectorsDescriptor<TDocument> FieldStatistics(bool field_statistics = true) => AssignParam(p=>p.FieldStatistics(field_statistics));
 
 		///<summary>Specifies if distributed frequencies should be returned instead shard frequencies.</summary>
-		public TermVectorsDescriptor<T> Dfs(bool dfs = true) => AssignParam(p=>p.Dfs(dfs));
+		public TermVectorsDescriptor<TDocument> Dfs(bool dfs = true) => AssignParam(p=>p.Dfs(dfs));
 
 		///<summary>A comma-separated list of fields to return.</summary>
-		public TermVectorsDescriptor<T> Fields(params string[] fields) => AssignParam(p=>p.Fields(fields));
+		public TermVectorsDescriptor<TDocument> Fields(params string[] fields) => AssignParam(p=>p.Fields(fields));
 			
 		///<summary>A comma-separated list of fields to return.</summary>
-		public TermVectorsDescriptor<T> Fields(params Expression<Func<T, object>>[] fields)  =>
+		public TermVectorsDescriptor<TDocument> Fields(params Expression<Func<TDocument, object>>[] fields)  =>
 			AssignParam(p=>p._Fields(fields));
 
 		///<summary>Specifies if term offsets should be returned.</summary>
-		public TermVectorsDescriptor<T> Offsets(bool offsets = true) => AssignParam(p=>p.Offsets(offsets));
+		public TermVectorsDescriptor<TDocument> Offsets(bool offsets = true) => AssignParam(p=>p.Offsets(offsets));
 
 		///<summary>Specifies if term positions should be returned.</summary>
-		public TermVectorsDescriptor<T> Positions(bool positions = true) => AssignParam(p=>p.Positions(positions));
+		public TermVectorsDescriptor<TDocument> Positions(bool positions = true) => AssignParam(p=>p.Positions(positions));
 
 		///<summary>Specifies if term payloads should be returned.</summary>
-		public TermVectorsDescriptor<T> Payloads(bool payloads = true) => AssignParam(p=>p.Payloads(payloads));
+		public TermVectorsDescriptor<TDocument> Payloads(bool payloads = true) => AssignParam(p=>p.Payloads(payloads));
 
 		///<summary>Specify the node or shard the operation should be performed on (default: random).</summary>
-		public TermVectorsDescriptor<T> Preference(string preference) => AssignParam(p=>p.Preference(preference));
+		public TermVectorsDescriptor<TDocument> Preference(string preference) => AssignParam(p=>p.Preference(preference));
 
 		///<summary>Specific routing value.</summary>
-		public TermVectorsDescriptor<T> Routing(string routing) => AssignParam(p=>p.Routing(routing));
+		public TermVectorsDescriptor<TDocument> Routing(string routing) => AssignParam(p=>p.Routing(routing));
 
 		///<summary>Parent id of documents.</summary>
-		public TermVectorsDescriptor<T> Parent(string parent) => AssignParam(p=>p.Parent(parent));
+		public TermVectorsDescriptor<TDocument> Parent(string parent) => AssignParam(p=>p.Parent(parent));
 
 		///<summary>Specifies if request is real-time as opposed to near-real-time (default: true).</summary>
-		public TermVectorsDescriptor<T> Realtime(bool realtime = true) => AssignParam(p=>p.Realtime(realtime));
+		public TermVectorsDescriptor<TDocument> Realtime(bool realtime = true) => AssignParam(p=>p.Realtime(realtime));
 
 		///<summary>Explicit version number for concurrency control</summary>
-		public TermVectorsDescriptor<T> Version(long version) => AssignParam(p=>p.Version(version));
+		public TermVectorsDescriptor<TDocument> Version(long version) => AssignParam(p=>p.Version(version));
 
 		///<summary>Specific version type</summary>
-		public TermVectorsDescriptor<T> VersionType(VersionType version_type) => AssignParam(p=>p.VersionType(version_type));
+		public TermVectorsDescriptor<TDocument> VersionType(VersionType version_type) => AssignParam(p=>p.VersionType(version_type));
 
 		///<summary>The URL-encoded request definition</summary>
-		public TermVectorsDescriptor<T> Source(string source) => AssignParam(p=>p.Source(source));
+		public TermVectorsDescriptor<TDocument> Source(string source) => AssignParam(p=>p.Source(source));
 
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public TermVectorsDescriptor<T> FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
+		public TermVectorsDescriptor<TDocument> FilterPath(string filter_path) => AssignParam(p=>p.FilterPath(filter_path));
 	
 	}
 	
@@ -4459,6 +4468,9 @@ namespace Nest
 
 		///<summary>Specific version type</summary>
 		public UpdateDescriptor<TDocument, TPartialDocument> VersionType(VersionType version_type) => AssignParam(p=>p.VersionType(version_type));
+
+		///<summary>Specifying as true will cause Elasticsearch to check if there are changes and, if there aren&#226;€™t, turn the update request into a noop.</summary>
+		public UpdateDescriptor<TDocument, TPartialDocument> DetectNoop(bool detect_noop = true) => AssignParam(p=>p.DetectNoop(detect_noop));
 
 		///<summary>The URL-encoded request definition</summary>
 		public UpdateDescriptor<TDocument, TPartialDocument> Source(string source) => AssignParam(p=>p.Source(source));

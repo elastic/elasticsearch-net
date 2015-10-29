@@ -5,11 +5,11 @@ We use this information when selecting a node to perform an API call on.
 
 [source, csharp]
 ----
-var audit = new Auditor(() => Cluster
+var audit = new Auditor(() => Framework.Cluster
 				.Nodes(10)
 				.Sniff(s => s.Fails(Always))
 				.Sniff(s => s.OnPort(9202)
-					.Succeeds(Always, Cluster.Nodes(8).MasterEligable(9200, 9201, 9202))
+					.Succeeds(Always, Framework.Cluster.Nodes(8).MasterEligable(9200, 9201, 9202))
 				)
 				.SniffingConnectionPool()
 				.AllDefaults()
@@ -35,11 +35,11 @@ pool.Should().NotBeNull();
 pool.Nodes.Should().HaveCount(8);
 pool.Nodes.Where(n => n.MasterEligable).Should().HaveCount(3);
 await audit.TraceStartup();
-var audit = new Auditor(() => Cluster
+var audit = new Auditor(() => Framework.Cluster
 				.Nodes(10)
 				.Sniff(s => s.Fails(Always))
 				.Sniff(s => s.OnPort(9202)
-					.Succeeds(Always, Cluster.Nodes(8).StoresNoData(9200, 9201, 9202))
+					.Succeeds(Always, Framework.Cluster.Nodes(8).StoresNoData(9200, 9201, 9202))
 				)
 				.SniffingConnectionPool()
 				.AllDefaults()

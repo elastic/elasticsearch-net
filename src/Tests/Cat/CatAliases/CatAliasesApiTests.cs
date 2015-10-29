@@ -12,7 +12,7 @@ using Xunit;
 namespace Tests.Cat.CatAliases
 {
 	[Collection(IntegrationContext.ReadOnly)]
-	public class CatAliasesApiTests : ApiTestBase<ICatResponse<CatAliasesRecord>, ICatAliasesRequest, CatAliasesDescriptor, CatAliasesRequest>
+	public class CatAliasesApiTests : ApiIntegrationTestBase<ICatResponse<CatAliasesRecord>, ICatAliasesRequest, CatAliasesDescriptor, CatAliasesRequest>
 	{
 		public CatAliasesApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(

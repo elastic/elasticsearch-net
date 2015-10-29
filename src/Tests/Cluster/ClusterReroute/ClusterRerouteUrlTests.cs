@@ -15,9 +15,9 @@ namespace Tests.Cluster.ClusterReroute
 		[U] public async Task Urls()
 		{
 			await POST("/_cluster/reroute")
-				.Fluent(c => c.ClusterReroute())
+				.Fluent(c => c.ClusterReroute(r=>r))
 				.Request(c => c.ClusterReroute(new ClusterRerouteRequest()))
-				.FluentAsync(c => c.ClusterRerouteAsync())
+				.FluentAsync(c => c.ClusterRerouteAsync(r=>r))
 				.RequestAsync(c => c.ClusterRerouteAsync(new ClusterRerouteRequest()))
 				;
 		}

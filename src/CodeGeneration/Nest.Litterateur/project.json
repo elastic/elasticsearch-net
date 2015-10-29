@@ -13,7 +13,11 @@
     "net45": {
       "frameworkAssemblies": {
         "System.Runtime": "",
-        "System.Runtime.Serialization" :  ""
+        "System.Runtime.Serialization": "",
+      },
+      "dependencies": {
+        "Microsoft.CSharp": "4.0.1-beta-23225",
+        "Microsoft.CodeAnalysis": "1.1.0-beta1"
       }
     },
     "dotnet": {

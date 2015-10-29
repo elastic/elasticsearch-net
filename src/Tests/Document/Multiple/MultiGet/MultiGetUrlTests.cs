@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Tests.Framework;
 using Tests.Framework.MockData;
 using static Tests.Framework.UrlTester;
+using static Nest.Static;
 
 namespace Tests.Document.Multiple.MultiGet
 {
@@ -24,16 +25,17 @@ namespace Tests.Document.Multiple.MultiGet
 			await POST("/project/_mget")
 				.Fluent(c => c.MultiGet(m => m.Index<Project>()))
 				.Request(c => c.MultiGet(new MultiGetRequest(typeof(Project))))
-				.FluentAsync(c => c.MultiGetAsync(new MultiGetRequest(typeof(Project))))
+				.FluentAsync(c => c.MultiGetAsync(m => m.Index<Project>()))
 				.RequestAsync(c => c.MultiGetAsync(new MultiGetRequest(typeof(Project))))
 				;
 
 			await POST("/project/project/_mget")
 				.Fluent(c => c.MultiGet(m => m.Index<Project>().Type<Project>()))
 				.Request(c => c.MultiGet(new MultiGetRequest(typeof(Project), typeof(Project))))
-				.FluentAsync(c => c.MultiGetAsync(new MultiGetRequest(typeof(Project), typeof(Project))))
+				.FluentAsync(c => c.MultiGetAsync(m => m.Index<Project>().Type<Project>()))
 				.RequestAsync(c => c.MultiGetAsync(new MultiGetRequest(typeof(Project), typeof(Project))))
 				;
+
 		}
 	}
 }

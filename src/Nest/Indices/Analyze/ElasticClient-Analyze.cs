@@ -34,7 +34,7 @@ namespace Nest
 		public IAnalyzeResponse Analyze(IAnalyzeRequest analyzeRequest) => 
 			this.Dispatcher.Dispatch<IAnalyzeRequest, AnalyzeRequestParameters, AnalyzeResponse>(
 				analyzeRequest,
-				(p, d) => this.LowLevelDispatch.IndicesAnalyzeDispatch<AnalyzeResponse>(p, MoveTextFromQueryString(d))
+				(p, d) => this.LowLevelDispatch.IndicesAnalyzeDispatch<AnalyzeResponse>(p, MoveTextFromQueryString(analyzeRequest))
 			);
 
 		/// <inheritdoc/>
@@ -45,7 +45,7 @@ namespace Nest
 		public Task<IAnalyzeResponse> AnalyzeAsync(IAnalyzeRequest analyzeRequest) => 
 			this.Dispatcher.DispatchAsync<IAnalyzeRequest, AnalyzeRequestParameters, AnalyzeResponse, IAnalyzeResponse>(
 				analyzeRequest,
-				(p, d) => this.LowLevelDispatch.IndicesAnalyzeDispatchAsync<AnalyzeResponse>(p, MoveTextFromQueryString(d))
+				(p, d) => this.LowLevelDispatch.IndicesAnalyzeDispatchAsync<AnalyzeResponse>(p, MoveTextFromQueryString(analyzeRequest))
 			);
 
 		private static string MoveTextFromQueryString(IAnalyzeRequest d)

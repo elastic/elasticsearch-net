@@ -989,21 +989,15 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IClusterRerouteRequest : IRequest<ClusterRerouteRequestParameters> 
+	public partial interface IClusterPutSettingsRequest : IRequest<ClusterPutSettingsRequestParameters> 
 	{
 	 } 
-	///<summary>Request parameters for ClusterReroute <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-reroute.html</pre></summary>
-	public partial class ClusterRerouteRequest  : RequestBase<ClusterRerouteRequestParameters>, IClusterRerouteRequest
+	///<summary>Request parameters for ClusterPutSettings <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</pre></summary>
+	public partial class ClusterPutSettingsRequest  : RequestBase<ClusterPutSettingsRequestParameters>, IClusterPutSettingsRequest
 	{
-		protected IClusterRerouteRequest Self => this;
-				///<summary>Simulate the operation only and return the resulting state</summary>
-		public bool DryRun { get { return Q<bool>("dry_run"); } set { Q("dry_run", value); } }
-		
-		///<summary>Return an explanation of why the commands can or cannot be executed</summary>
-		public bool Explain { get { return Q<bool>("explain"); } set { Q("explain", value); } }
-		
-		///<summary>Limit the information returned to the specified metrics. Defaults to all but metadata</summary>
-		public  string[] Metric { get { return Q< string[]>("metric"); } set { Q("metric", value); } }
+		protected IClusterPutSettingsRequest Self => this;
+				///<summary>Return settings in flat format (default: false)</summary>
+		public bool FlatSettings { get { return Q<bool>("flat_settings"); } set { Q("flat_settings", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
@@ -1020,15 +1014,21 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IClusterSettingsRequest : IRequest<ClusterSettingsRequestParameters> 
+	public partial interface IClusterRerouteRequest : IRequest<ClusterRerouteRequestParameters> 
 	{
 	 } 
-	///<summary>Request parameters for ClusterPutSettings <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-update-settings.html</pre></summary>
-	public partial class ClusterSettingsRequest  : RequestBase<ClusterSettingsRequestParameters>, IClusterSettingsRequest
+	///<summary>Request parameters for ClusterReroute <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cluster-reroute.html</pre></summary>
+	public partial class ClusterRerouteRequest  : RequestBase<ClusterRerouteRequestParameters>, IClusterRerouteRequest
 	{
-		protected IClusterSettingsRequest Self => this;
-				///<summary>Return settings in flat format (default: false)</summary>
-		public bool FlatSettings { get { return Q<bool>("flat_settings"); } set { Q("flat_settings", value); } }
+		protected IClusterRerouteRequest Self => this;
+				///<summary>Simulate the operation only and return the resulting state</summary>
+		public bool DryRun { get { return Q<bool>("dry_run"); } set { Q("dry_run", value); } }
+		
+		///<summary>Return an explanation of why the commands can or cannot be executed</summary>
+		public bool Explain { get { return Q<bool>("explain"); } set { Q("explain", value); } }
+		
+		///<summary>Limit the information returned to the specified metrics. Defaults to all but metadata</summary>
+		public  string[] Metric { get { return Q< string[]>("metric"); } set { Q("metric", value); } }
 		
 		///<summary>Explicit operation timeout for connection to master node</summary>
 		public string MasterTimeout { get { return Q<string>("master_timeout"); } set { Q("master_timeout", value); } }
@@ -1121,6 +1121,9 @@ namespace Nest
 		
 		///<summary>Whether to return time and byte values in human-readable format.</summary>
 		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
+		
+		///<summary>Explicit operation timeout</summary>
+		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
@@ -1591,7 +1594,7 @@ namespace Nest
 		/// <summary>/{index}/{type}/{id}</summary>
 		
 ///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
-		public DeleteRequest(DocumentPath<T> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
+		public DeleteRequest(DocumentPath<T> document, IndexName index = null, TypeName type = null, Id id = null) : base(r=>r.Required("index", index ?? document.Self.Index).Required("type", type ?? document.Self.Type).Required("id", id ?? document.Self.Id)){ this.DocumentFromPath(document.Document); }
 		partial void DocumentFromPath(T document);
 
 			///<summary>Specific write consistency setting for the operation</summary>
@@ -1808,7 +1811,7 @@ namespace Nest
 		/// <summary>/{index}/{type}/{id}</summary>
 		
 ///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
-		public DocumentExistsRequest(DocumentPath<T> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
+		public DocumentExistsRequest(DocumentPath<T> document, IndexName index = null, TypeName type = null, Id id = null) : base(r=>r.Required("index", index ?? document.Self.Index).Required("type", type ?? document.Self.Type).Required("id", id ?? document.Self.Id)){ this.DocumentFromPath(document.Document); }
 		partial void DocumentFromPath(T document);
 
 			///<summary>The ID of the parent document</summary>
@@ -1894,7 +1897,7 @@ namespace Nest
 		/// <summary>/{index}/{type}/{id}/_explain</summary>
 		
 ///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
-		public ExplainRequest(DocumentPath<TDocument> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
+		public ExplainRequest(DocumentPath<TDocument> document, IndexName index = null, TypeName type = null, Id id = null) : base(r=>r.Required("index", index ?? document.Self.Index).Required("type", type ?? document.Self.Type).Required("id", id ?? document.Self.Id)){ this.DocumentFromPath(document.Document); }
 		partial void DocumentFromPath(TDocument document);
 
 			///<summary>Specify whether wildcards and prefix queries in the query string query should be analyzed (default: false)</summary>
@@ -2444,7 +2447,7 @@ namespace Nest
 		/// <summary>/{index}/{type}/{id}</summary>
 		
 ///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
-		public GetRequest(DocumentPath<T> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
+		public GetRequest(DocumentPath<T> document, IndexName index = null, TypeName type = null, Id id = null) : base(r=>r.Required("index", index ?? document.Self.Index).Required("type", type ?? document.Self.Type).Required("id", id ?? document.Self.Id)){ this.DocumentFromPath(document.Document); }
 		partial void DocumentFromPath(T document);
 
 			///<summary>A comma-separated list of fields to return in the response</summary>
@@ -2758,7 +2761,7 @@ namespace Nest
 		/// <summary>/{index}/{type}</summary>
 		
 ///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
-		public IndexRequest(DocumentPath<TDocument> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
+		public IndexRequest(DocumentPath<TDocument> document, IndexName index = null, TypeName type = null, Id id = null) : base(r=>r.Required("index", index ?? document.Self.Index).Required("type", type ?? document.Self.Type).Required("id", id ?? document.Self.Id)){ this.DocumentFromPath(document.Document); }
 		partial void DocumentFromPath(TDocument document);
 
 			///<summary>Explicit write consistency setting for the operation</summary>
@@ -2923,22 +2926,6 @@ namespace Nest
 		public Level Level { get { return Q<Level>("level"); } set { Q("level", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
-		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
-		
-		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
-		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
-		
-		}
-	
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface IInfoRequest : IRequest<InfoRequestParameters> 
-	{
-	 } 
-	///<summary>Request parameters for Info <pre>http://www.elastic.co/guide/</pre></summary>
-	public partial class InfoRequest  : RequestBase<InfoRequestParameters>, IInfoRequest
-	{
-		protected IInfoRequest Self => this;
-				///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
@@ -3191,6 +3178,9 @@ namespace Nest
 		///<summary>The type to sample (default: cpu)</summary>
 		public ThreadType ThreadType { get { return Q<ThreadType>("type"); } set { Q("type", value); } }
 		
+		///<summary>Explicit operation timeout</summary>
+		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
+		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
@@ -3236,6 +3226,9 @@ namespace Nest
 		
 		///<summary>Whether to return time and byte values in human-readable format.</summary>
 		public bool Human { get { return Q<bool>("human"); } set { Q("human", value); } }
+		
+		///<summary>Explicit operation timeout</summary>
+		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
@@ -3312,6 +3305,9 @@ namespace Nest
 		
 		///<summary>A comma-separated list of document types for the `indexing` index metric</summary>
 		public  string[] Types { get { return Q< string[]>("types"); } set { Q("types", value); } }
+		
+		///<summary>Explicit operation timeout</summary>
+		public string Timeout { get { return Q<string>("timeout"); } set { Q("timeout", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
@@ -3440,7 +3436,7 @@ namespace Nest
 		/// <summary>/{index}/{type}/_percolate/count</summary>
 		
 ///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
-		public PercolateCountRequest(DocumentPath<TDocument> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
+		public PercolateCountRequest(DocumentPath<TDocument> document, IndexName index = null, TypeName type = null, Id id = null) : base(r=>r.Required("index", index ?? document.Self.Index).Required("type", type ?? document.Self.Type).Required("id", id ?? document.Self.Id)){ this.DocumentFromPath(document.Document); }
 		partial void DocumentFromPath(TDocument document);
 
 			///<summary>A comma-separated list of specific routing values</summary>
@@ -3508,7 +3504,7 @@ namespace Nest
 		/// <summary>/{index}/{type}/_percolate</summary>
 		
 ///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
-		public PercolateRequest(DocumentPath<TDocument> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
+		public PercolateRequest(DocumentPath<TDocument> document, IndexName index = null, TypeName type = null, Id id = null) : base(r=>r.Required("index", index ?? document.Self.Index).Required("type", type ?? document.Self.Type).Required("id", id ?? document.Self.Id)){ this.DocumentFromPath(document.Document); }
 		partial void DocumentFromPath(TDocument document);
 
 			///<summary>A comma-separated list of specific routing values</summary>
@@ -3618,10 +3614,7 @@ namespace Nest
 		public PutIndexTemplateRequest(Name name) : base(r=>r.Required("name", name)){}
 		
 
-			///<summary>The order for this template when merging multiple matching ones (higher numbers are merged later, overriding the lower numbers)</summary>
-		public long Order { get { return Q<long>("order"); } set { Q("order", value); } }
-		
-		///<summary>Whether the index template should only be added if new or can also replace an existing one</summary>
+			///<summary>Whether the index template should only be added if new or can also replace an existing one</summary>
 		public bool Create { get { return Q<bool>("create"); } set { Q("create", value); } }
 		
 		///<summary>Explicit operation timeout</summary>
@@ -3986,6 +3979,22 @@ namespace Nest
 		public bool WaitForCompletion { get { return Q<bool>("wait_for_completion"); } set { Q("wait_for_completion", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
+		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
+		
+		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+		public string FilterPath { get { return Q<string>("filter_path"); } set { Q("filter_path", value); } }
+		
+		}
+	
+	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	public partial interface IRootNodeInfoRequest : IRequest<RootNodeInfoRequestParameters> 
+	{
+	 } 
+	///<summary>Request parameters for Info <pre>http://www.elastic.co/guide/</pre></summary>
+	public partial class RootNodeInfoRequest  : RequestBase<RootNodeInfoRequestParameters>, IRootNodeInfoRequest
+	{
+		protected IRootNodeInfoRequest Self => this;
+				///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }
 		
 		///<summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
@@ -4637,7 +4646,7 @@ namespace Nest
 		/// <summary>/{index}/{type}/{id}/_source</summary>
 		
 ///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
-		public SourceRequest(DocumentPath<T> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
+		public SourceRequest(DocumentPath<T> document, IndexName index = null, TypeName type = null, Id id = null) : base(r=>r.Required("index", index ?? document.Self.Index).Required("type", type ?? document.Self.Type).Required("id", id ?? document.Self.Id)){ this.DocumentFromPath(document.Document); }
 		partial void DocumentFromPath(T document);
 
 			///<summary>The ID of the parent document</summary>
@@ -4808,19 +4817,19 @@ namespace Nest
 		}
 	
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public partial interface ITermVectorsRequest : IRequest<TermVectorsRequestParameters> 
+	public partial interface ITermVectorsRequest<TDocument> : IRequest<TermVectorsRequestParameters> 
 	{
 		IndexName Index { get; }
 		TypeName Type { get; }
 		Id Id { get; }
 	 } 
 	///<summary>Request parameters for Termvectors <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/docs-termvectors.html</pre></summary>
-	public partial class TermVectorsRequest  : RequestBase<TermVectorsRequestParameters>, ITermVectorsRequest
+	public partial class TermVectorsRequest<TDocument>  : RequestBase<TermVectorsRequestParameters>, ITermVectorsRequest<TDocument>
 	{
-		protected ITermVectorsRequest Self => this;
-		IndexName ITermVectorsRequest.Index => Self.RouteValues.Get<IndexName>("index");
-		TypeName ITermVectorsRequest.Type => Self.RouteValues.Get<TypeName>("type");
-		Id ITermVectorsRequest.Id => Self.RouteValues.Get<Id>("id");
+		protected ITermVectorsRequest<TDocument> Self => this;
+		IndexName ITermVectorsRequest<TDocument>.Index => Self.RouteValues.Get<IndexName>("index");
+		TypeName ITermVectorsRequest<TDocument>.Type => Self.RouteValues.Get<TypeName>("type");
+		Id ITermVectorsRequest<TDocument>.Id => Self.RouteValues.Get<Id>("id");
 			/// <summary>/{index}/{type}/_termvectors</summary>
 ///<param name="index">this parameter is required</param>		
 ///<param name="type">this parameter is required</param>
@@ -4833,6 +4842,12 @@ namespace Nest
 ///<param name="id">Optional, accepts null</param>
 		public TermVectorsRequest(IndexName index, TypeName type, Id id) : base(r=>r.Required("index", index).Required("type", type).Optional("id", id)){}
 		
+
+		/// <summary>/{index}/{type}/_termvectors</summary>
+		
+///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
+		public TermVectorsRequest(DocumentPath<TDocument> document, IndexName index = null, TypeName type = null, Id id = null) : base(r=>r.Required("index", index ?? document.Self.Index).Required("type", type ?? document.Self.Type).Required("id", id ?? document.Self.Id)){ this.DocumentFromPath(document.Document); }
+		partial void DocumentFromPath(TDocument document);
 
 			///<summary>Specifies if total term frequency and document frequency should be returned.</summary>
 		public bool TermStatistics { get { return Q<bool>("term_statistics"); } set { Q("term_statistics", value); } }
@@ -4985,7 +5000,7 @@ namespace Nest
 		/// <summary>/{index}/{type}/{id}/_update</summary>
 		
 ///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
-		public UpdateRequest(DocumentPath<TDocument> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
+		public UpdateRequest(DocumentPath<TDocument> document, IndexName index = null, TypeName type = null, Id id = null) : base(r=>r.Required("index", index ?? document.Self.Index).Required("type", type ?? document.Self.Type).Required("id", id ?? document.Self.Id)){ this.DocumentFromPath(document.Document); }
 		partial void DocumentFromPath(TDocument document);
 
 			///<summary>Explicit write consistency setting for the operation</summary>
@@ -5029,6 +5044,9 @@ namespace Nest
 		
 		///<summary>Specific version type</summary>
 		public VersionType VersionType { get { return Q<VersionType>("version_type"); } set { Q("version_type", value); } }
+		
+		///<summary>Specifying as true will cause Elasticsearch to check if there are changes and, if there aren&#226;€™t, turn the update request into a noop.</summary>
+		public bool DetectNoop { get { return Q<bool>("detect_noop"); } set { Q("detect_noop", value); } }
 		
 		///<summary>The URL-encoded request definition</summary>
 		public string Source { get { return Q<string>("source"); } set { Q("source", value); } }

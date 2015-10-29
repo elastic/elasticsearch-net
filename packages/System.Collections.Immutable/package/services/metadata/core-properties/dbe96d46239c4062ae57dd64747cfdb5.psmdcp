@@ -1,8 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?><coreProperties xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.openxmlformats.org/package/2006/metadata/core-properties"><dc:creator>Microsoft</dc:creator><dc:description>This package provides collections that are thread safe and guaranteed to never change their contents, also known as immutable collections. Like strings, any methods that perform modifications will not change the existing instance but instead return a new instance. For efficiency reasons, the implementation uses a sharing mechanism to ensure that newly created instances share as much data as possible with the previous instance while ensuring that operations have a predictable time complexity.
-
-Supported Platforms:
-- .NET Framework 4.5
-- Windows 8
-- Windows Phone Silverlight 8
-- Windows Phone 8.1
-- Portable Class Libraries</dc:description><dc:identifier>System.Collections.Immutable</dc:identifier><version>1.1.32-beta</version><keywords>BCL Microsoft System Immutable Collections</keywords><dc:title>Microsoft Immutable Collections</dc:title><lastModifiedBy>NuGet, Version=2.8.50204.16, Culture=neutral, PublicKeyToken=null;Microsoft Windows NT 6.2.9200.0;.NET Framework 4.5.1</lastModifiedBy></coreProperties>
