@@ -6,6 +6,7 @@ using Nest;
 using Tests.Framework;
 using Tests.Framework.Integration;
 using Xunit;
+using FluentAssertions;
 
 namespace Tests.Indices.AliasManagement.GetAlias
 {
@@ -26,7 +27,10 @@ namespace Tests.Indices.AliasManagement.GetAlias
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override string UrlPath => $"/_all/_alias/alias,x,y";
-
+		protected override void ExpectResponse(IGetAliasesResponse response)
+		{
+			response.Indices.Should().NotBeNull();
+		}
 		protected override bool SupportsDeserialization => false;
 
 		protected override Func<GetAliasDescriptor, IGetAliasRequest> Fluent => d=>d

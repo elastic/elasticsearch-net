@@ -27,17 +27,16 @@ namespace Tests.Cluster.ClusterHealth
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override string UrlPath => "/_cluster/health";
 
-		[I] public async Task Response() => await this.AssertOnAllResponses(r =>
+		protected override void ExpectResponse(IClusterHealthResponse response)
 		{
-			r.ClusterName.Should().NotBeNullOrWhiteSpace();
-			r.Status.Should().NotBeNullOrWhiteSpace();
-			r.TimedOut.Should().BeFalse();
-			r.NumberOfNodes.Should().BeGreaterOrEqualTo(1);
-			r.NumberOfDataNodes.Should().BeGreaterOrEqualTo(1);
-			r.ActivePrimaryShards.Should().BeGreaterOrEqualTo(1);
-			r.ActiveShards.Should().BeGreaterOrEqualTo(1);
-		});
-
+			response.ClusterName.Should().NotBeNullOrWhiteSpace();
+			response.Status.Should().NotBeNullOrWhiteSpace();
+			response.TimedOut.Should().BeFalse();
+			response.NumberOfNodes.Should().BeGreaterOrEqualTo(1);
+			response.NumberOfDataNodes.Should().BeGreaterOrEqualTo(1);
+			response.ActivePrimaryShards.Should().BeGreaterOrEqualTo(1);
+			response.ActiveShards.Should().BeGreaterOrEqualTo(1);
+		}
 	}
 
 }

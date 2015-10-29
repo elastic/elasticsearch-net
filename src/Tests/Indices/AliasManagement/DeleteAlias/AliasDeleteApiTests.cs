@@ -27,14 +27,9 @@ namespace Tests.Indices.AliasManagement.DeleteAlias
 		protected override int ExpectStatusCode => 200;
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
 		protected override string UrlPath => $"/_all/_alias/alias,x,y";
-
 		protected override bool SupportsDeserialization => false;
 
 		protected override Func<DeleteAliasDescriptor, IDeleteAliasRequest> Fluent => null;
 		protected override DeleteAliasRequest Initializer => new DeleteAliasRequest(Static.AllIndices, Names);
-
-		[I] public async Task Response() => await this.AssertOnAllResponses(r =>
-		{
-		});
 	}
 }

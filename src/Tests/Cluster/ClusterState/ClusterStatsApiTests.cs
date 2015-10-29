@@ -29,26 +29,30 @@ namespace Tests.Cluster.ClusterState
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override string UrlPath => "/_cluster/state";
 
-		[I] public async Task Response() => await this.AssertOnAllResponses(r =>
+		protected override void ExpectResponse(IClusterStateResponse response)
 		{
-			r.ClusterName.Should().NotBeNullOrWhiteSpace();
-			r.MasterNode.Should().NotBeNullOrWhiteSpace();
-			r.StateUUID.Should().NotBeNullOrWhiteSpace();
-			r.Version.Should().BeGreaterThan(0);
-		});
+			response.ClusterName.Should().NotBeNullOrWhiteSpace();
+			response.MasterNode.Should().NotBeNullOrWhiteSpace();
+			response.StateUUID.Should().NotBeNullOrWhiteSpace();
+			response.Version.Should().BeGreaterThan(0);
+			AssertNodes(response);
+			AssertMetadata(response);
+			AssertRoutingTable(response);
+			AssertRoutingNodes(response);
+		}
 
-		[I] public async Task NodesResponse() => await this.AssertOnAllResponses(r =>
+		private void AssertNodes(IClusterStateResponse response)
 		{
-			var nodes = r.Nodes;
-			nodes.Should().NotBeEmpty().And.ContainKey(r.MasterNode);
+			var nodes = response.Nodes;
+			nodes.Should().NotBeEmpty().And.ContainKey(response.MasterNode);
 
-			var node = nodes[r.MasterNode];
+			var node = nodes[response.MasterNode];
 
 			node.Name.Should().NotBeNullOrWhiteSpace();
 			node.TransportAddress.Should().NotBeNullOrWhiteSpace();
-		});
+		}
 
-		[I] public async Task MetadataResponse() => await this.AssertOnAllResponses(r =>
+		private void AssertMetadata(IClusterStateResponse r)
 		{
 			var meta = r.Metadata;
 			meta.ClusterUUID.Should().NotBeNullOrWhiteSpace();
@@ -56,7 +60,7 @@ namespace Tests.Cluster.ClusterState
 
 			AssertMetadataTemplate(meta);
 			AssertMetadataIndices(meta);
-		});
+		}
 
 		private void AssertMetadataIndices(MetadataState meta)
 		{
@@ -74,7 +78,7 @@ namespace Tests.Cluster.ClusterState
 			commitsMapping.ParentField.Type.Should().Be(i);
 		}
 
-		private static void AssertMetadataTemplate(MetadataState meta)
+		private void AssertMetadataTemplate(MetadataState meta)
 		{
 			var rawFieldsTemplate = meta.Templates["raw_fields"];
 			rawFieldsTemplate.Template.Should().NotBeNullOrWhiteSpace();
@@ -96,9 +100,9 @@ namespace Tests.Cluster.ClusterState
 			rawField.Index.Should().Be(FieldIndexOption.NotAnalyzed);
 		}
 
-		[I] public async Task RoutingTableResponse() => await this.AssertOnAllResponses(r =>
+		protected void AssertRoutingTable(IClusterStateResponse response)
 		{
-			var table = r.RoutingTable;
+			var table = response.RoutingTable;
 			table.Should().NotBeNull();
 
 			table.Indices.Should().NotBeEmpty().And.ContainKey("project");
@@ -114,15 +118,15 @@ namespace Tests.Cluster.ClusterState
 			shard.Node.Should().NotBeNullOrWhiteSpace();
 			shard.State.Should().NotBeNullOrWhiteSpace();
 			shard.Version.Should().BeGreaterThan(0);
-		});
+		}
 
-		[I] public async Task RoutingNodesResponse() => await this.AssertOnAllResponses(r =>
+		protected void AssertRoutingNodes(IClusterStateResponse response)
 		{
-			var routing = r.RoutingNodes;
+			var routing = response.RoutingNodes;
 			routing.Should().NotBeNull();
 
-			routing.Nodes.Should().NotBeEmpty().And.ContainKey(r.MasterNode);
-			var nodes = routing.Nodes[r.MasterNode];
+			routing.Nodes.Should().NotBeEmpty().And.ContainKey(response.MasterNode);
+			var nodes = routing.Nodes[response.MasterNode];
 
 			nodes.Should().NotBeEmpty();
 			var node = nodes.First();
@@ -132,7 +136,7 @@ namespace Tests.Cluster.ClusterState
 			node.Node.Should().NotBeNullOrWhiteSpace();
 			node.State.Should().NotBeNullOrWhiteSpace();
 			node.Version.Should().BeGreaterThan(0);
-		});
+		}
 	}
 
 }
