@@ -12,7 +12,7 @@ using Xunit;
 namespace Tests.Indices.Warmers.DeleteWarmer
 {
 	[Collection(IntegrationContext.ReadOnly)]
-	public class DeleteWarmerApiTests : ApiTestBase<IIndicesOperationResponse, IDeleteWarmerRequest, DeleteWarmerDescriptor, DeleteWarmerRequest>
+	public class DeleteWarmerApiTests : ApiTestBase<IAcknowledgedResponse, IDeleteWarmerRequest, DeleteWarmerDescriptor, DeleteWarmerRequest>
 	{
 		public DeleteWarmerApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 

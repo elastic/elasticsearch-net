@@ -12,7 +12,7 @@ using static Nest.Static;
 namespace Tests.Indices.Warmers.PutWarmer
 {
 	[Collection(IntegrationContext.ReadOnly)]
-	public class PutWarmerApiTests : ApiTestBase<IIndicesOperationResponse, IPutWarmerRequest, PutWarmerDescriptor, PutWarmerRequest>
+	public class PutWarmerApiTests : ApiTestBase<IAcknowledgedResponse, IPutWarmerRequest, PutWarmerDescriptor, PutWarmerRequest>
 	{
 		public PutWarmerApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
