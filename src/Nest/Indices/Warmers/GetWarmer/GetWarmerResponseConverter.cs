@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Nest
 {
-	public class GetWarmerResponseConverter : JsonConverter
+	internal class GetWarmerResponseConverter : JsonConverter
 	{
 		public override bool CanConvert(Type objectType) => true;
 		public override bool CanWrite => false;
