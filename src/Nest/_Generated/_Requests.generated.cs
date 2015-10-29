@@ -1594,7 +1594,7 @@ namespace Nest
 		/// <summary>/{index}/{type}/{id}</summary>
 		
 ///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
-		public DeleteRequest(DocumentPath<T> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
+		public DeleteRequest(DocumentPath<T> document, IndexName index = null, TypeName type = null, Id id = null) : base(r=>r.Required("index", index ?? document.Self.Index).Required("type", type ?? document.Self.Type).Required("id", id ?? document.Self.Id)){ this.DocumentFromPath(document.Document); }
 		partial void DocumentFromPath(T document);
 
 			///<summary>Specific write consistency setting for the operation</summary>
@@ -1811,7 +1811,7 @@ namespace Nest
 		/// <summary>/{index}/{type}/{id}</summary>
 		
 ///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
-		public DocumentExistsRequest(DocumentPath<T> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
+		public DocumentExistsRequest(DocumentPath<T> document, IndexName index = null, TypeName type = null, Id id = null) : base(r=>r.Required("index", index ?? document.Self.Index).Required("type", type ?? document.Self.Type).Required("id", id ?? document.Self.Id)){ this.DocumentFromPath(document.Document); }
 		partial void DocumentFromPath(T document);
 
 			///<summary>The ID of the parent document</summary>
@@ -1897,7 +1897,7 @@ namespace Nest
 		/// <summary>/{index}/{type}/{id}/_explain</summary>
 		
 ///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
-		public ExplainRequest(DocumentPath<TDocument> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
+		public ExplainRequest(DocumentPath<TDocument> document, IndexName index = null, TypeName type = null, Id id = null) : base(r=>r.Required("index", index ?? document.Self.Index).Required("type", type ?? document.Self.Type).Required("id", id ?? document.Self.Id)){ this.DocumentFromPath(document.Document); }
 		partial void DocumentFromPath(TDocument document);
 
 			///<summary>Specify whether wildcards and prefix queries in the query string query should be analyzed (default: false)</summary>
@@ -2447,7 +2447,7 @@ namespace Nest
 		/// <summary>/{index}/{type}/{id}</summary>
 		
 ///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
-		public GetRequest(DocumentPath<T> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
+		public GetRequest(DocumentPath<T> document, IndexName index = null, TypeName type = null, Id id = null) : base(r=>r.Required("index", index ?? document.Self.Index).Required("type", type ?? document.Self.Type).Required("id", id ?? document.Self.Id)){ this.DocumentFromPath(document.Document); }
 		partial void DocumentFromPath(T document);
 
 			///<summary>A comma-separated list of fields to return in the response</summary>
@@ -2761,7 +2761,7 @@ namespace Nest
 		/// <summary>/{index}/{type}</summary>
 		
 ///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
-		public IndexRequest(DocumentPath<TDocument> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
+		public IndexRequest(DocumentPath<TDocument> document, IndexName index = null, TypeName type = null, Id id = null) : base(r=>r.Required("index", index ?? document.Self.Index).Required("type", type ?? document.Self.Type).Required("id", id ?? document.Self.Id)){ this.DocumentFromPath(document.Document); }
 		partial void DocumentFromPath(TDocument document);
 
 			///<summary>Explicit write consistency setting for the operation</summary>
@@ -3436,7 +3436,7 @@ namespace Nest
 		/// <summary>/{index}/{type}/_percolate/count</summary>
 		
 ///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
-		public PercolateCountRequest(DocumentPath<TDocument> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
+		public PercolateCountRequest(DocumentPath<TDocument> document, IndexName index = null, TypeName type = null, Id id = null) : base(r=>r.Required("index", index ?? document.Self.Index).Required("type", type ?? document.Self.Type).Required("id", id ?? document.Self.Id)){ this.DocumentFromPath(document.Document); }
 		partial void DocumentFromPath(TDocument document);
 
 			///<summary>A comma-separated list of specific routing values</summary>
@@ -3504,7 +3504,7 @@ namespace Nest
 		/// <summary>/{index}/{type}/_percolate</summary>
 		
 ///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
-		public PercolateRequest(DocumentPath<TDocument> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
+		public PercolateRequest(DocumentPath<TDocument> document, IndexName index = null, TypeName type = null, Id id = null) : base(r=>r.Required("index", index ?? document.Self.Index).Required("type", type ?? document.Self.Type).Required("id", id ?? document.Self.Id)){ this.DocumentFromPath(document.Document); }
 		partial void DocumentFromPath(TDocument document);
 
 			///<summary>A comma-separated list of specific routing values</summary>
@@ -4646,7 +4646,7 @@ namespace Nest
 		/// <summary>/{index}/{type}/{id}/_source</summary>
 		
 ///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
-		public SourceRequest(DocumentPath<T> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
+		public SourceRequest(DocumentPath<T> document, IndexName index = null, TypeName type = null, Id id = null) : base(r=>r.Required("index", index ?? document.Self.Index).Required("type", type ?? document.Self.Type).Required("id", id ?? document.Self.Id)){ this.DocumentFromPath(document.Document); }
 		partial void DocumentFromPath(T document);
 
 			///<summary>The ID of the parent document</summary>
@@ -4846,7 +4846,7 @@ namespace Nest
 		/// <summary>/{index}/{type}/_termvectors</summary>
 		
 ///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
-		public TermVectorsRequest(DocumentPath<TDocument> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
+		public TermVectorsRequest(DocumentPath<TDocument> document, IndexName index = null, TypeName type = null, Id id = null) : base(r=>r.Required("index", index ?? document.Self.Index).Required("type", type ?? document.Self.Type).Required("id", id ?? document.Self.Id)){ this.DocumentFromPath(document.Document); }
 		partial void DocumentFromPath(TDocument document);
 
 			///<summary>Specifies if total term frequency and document frequency should be returned.</summary>
@@ -5000,7 +5000,7 @@ namespace Nest
 		/// <summary>/{index}/{type}/{id}/_update</summary>
 		
 ///<param name="document"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>
-		public UpdateRequest(DocumentPath<TDocument> document) : base(r=>r.Required("index", document.Self.Index).Required("type", document.Self.Type).Required("id", document.Self.Id)){ this.DocumentFromPath(document.Document); }
+		public UpdateRequest(DocumentPath<TDocument> document, IndexName index = null, TypeName type = null, Id id = null) : base(r=>r.Required("index", index ?? document.Self.Index).Required("type", type ?? document.Self.Type).Required("id", id ?? document.Self.Id)){ this.DocumentFromPath(document.Document); }
 		partial void DocumentFromPath(TDocument document);
 
 			///<summary>Explicit write consistency setting for the operation</summary>

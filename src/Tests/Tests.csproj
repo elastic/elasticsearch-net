@@ -155,6 +155,7 @@
     <Compile Include="Document\Single\Get\GetUrlTests.cs" />
     <Compile Include="Document\Single\Index\IndexUrlTests.cs" />
     <Compile Include="Document\Single\Index\IndexApiTests.cs" />
+    <Compile Include="Document\Single\DocumentCrudTests.cs" />
     <Compile Include="Document\Single\Source\SourceApiTests.cs" />
     <Compile Include="Document\Single\TermVectors\TermVectorsApiTests.cs" />
     <Compile Include="Document\Single\TermVectors\TermVectorsUrlTests.cs" />

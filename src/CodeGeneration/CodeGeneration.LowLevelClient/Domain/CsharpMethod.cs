@@ -113,10 +113,13 @@ namespace CodeGeneration.LowLevelClient.Domain
 			{
 				var doc = $@"/// <summary>{this.Url.Path}</summary>";
 				doc += "\r\n\t\t\r\n" + $"///<param name=\"document\"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>";
-				var documentRoute = "r=>r.Required(\"index\", document.Self.Index).Required(\"type\", document.Self.Type).Required(\"id\", document.Self.Id)";
+				var documentRoute = "r=>r.Required(\"index\", index ?? document.Self.Index).Required(\"type\", type ?? document.Self.Type).Required(\"id\", id ?? document.Self.Id)";
 				var documentPathGeneric = Regex.Replace(this.DescriptorTypeGeneric, @"^<?([^\s,>]+).*$", "$1");
 				var documentFromPath = $"partial void DocumentFromPath({documentPathGeneric} document);";
-				var c = new Constructor { AdditionalCode = documentFromPath, Generated = $"public {m}(DocumentPath<{documentPathGeneric}> document) : base({documentRoute}){{ this.DocumentFromPath(document.Document); }}", Description = doc, };
+
+				var constructor = $"DocumentPath<{documentPathGeneric}> document, IndexName index = null, TypeName type = null, Id id = null";
+
+				var c = new Constructor { AdditionalCode = documentFromPath, Generated = $"public {m}({constructor}) : base({documentRoute}){{ this.DocumentFromPath(document.Document); }}", Description = doc, };
 				ctors.Add(c);
 			}
 			return ctors.DistinctBy(c => c.Generated);
