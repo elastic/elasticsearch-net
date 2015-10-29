@@ -57,6 +57,13 @@ namespace Tests.Document.Multiple.DeleteByQuery
 			}
 		};
 
+		protected override void ExpectResponse(IDeleteByQueryResponse response)
+		{
+			response.Indices.Should().NotBeEmpty().And.HaveCount(2).And.ContainKey(CallIsolatedValue);
+			response.Indices[CallIsolatedValue].Deleted.Should().Be(1);
+			response.Indices[CallIsolatedValue].Found.Should().Be(1);
+		}
+
 		protected override DeleteByQueryDescriptor<Project> NewDescriptor() => new DeleteByQueryDescriptor<Project>(this.Indices);
 
 		protected override Func<DeleteByQueryDescriptor<Project>, IDeleteByQueryRequest> Fluent => d => d
@@ -73,12 +80,5 @@ namespace Tests.Document.Multiple.DeleteByQuery
 				Values = new [] { Project.Projects.First().Name, "x" }
 			}
 		};
-
-		[I] public async Task Response() => await this.AssertOnAllResponses(r =>
-		{
-			r.Indices.Should().NotBeEmpty().And.HaveCount(2).And.ContainKey(CallIsolatedValue);
-			r.Indices[CallIsolatedValue].Deleted.Should().Be(1);
-			r.Indices[CallIsolatedValue].Found.Should().Be(1);
-		});
 	}
 }

@@ -40,9 +40,5 @@ namespace Tests.Document.Single.TermVectors
 		{
 			Offsets = true,
 		};
-
-		[I] public async Task Response() => await this.AssertOnAllResponses(r =>
-		{
-		});
 	}
 }

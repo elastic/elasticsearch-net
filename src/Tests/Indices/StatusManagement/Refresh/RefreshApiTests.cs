@@ -31,9 +31,5 @@ namespace Tests.Indices.StatusManagement.Refresh
 		protected override Func<RefreshDescriptor, IRefreshRequest> Fluent => d => d.AllowNoIndices();
 
 		protected override RefreshRequest Initializer => new RefreshRequest(AllIndices) { AllowNoIndices = true };
-
-		[I] public async Task Response() => await this.AssertOnAllResponses(r =>
-		{
-		});
 	}
 }

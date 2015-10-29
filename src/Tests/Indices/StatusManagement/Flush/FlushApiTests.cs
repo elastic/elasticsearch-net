@@ -31,9 +31,5 @@ namespace Tests.Indices.StatusManagement.Flush
 		protected override Func<FlushDescriptor, IFlushRequest> Fluent => d => d.AllowNoIndices();
 
 		protected override FlushRequest Initializer => new FlushRequest(AllIndices) { AllowNoIndices = true };
-
-		[I] public async Task Response() => await this.AssertOnAllResponses(r =>
-		{
-		});
 	}
 }

@@ -31,9 +31,5 @@ namespace Tests.Indices.StatusManagement.Optimize
 		protected override Func<OptimizeDescriptor, IOptimizeRequest> Fluent => d => d.AllowNoIndices();
 
 		protected override OptimizeRequest Initializer => new OptimizeRequest(AllIndices) { AllowNoIndices = true };
-
-		[I] public async Task Response() => await this.AssertOnAllResponses(r =>
-		{
-		});
 	}
 }

@@ -46,9 +46,5 @@ namespace Tests.Document.Single.Update
 			Doc = Project.Instance,
 			DocAsUpsert = true
 		};
-
-		[I] public async Task Response() => await this.AssertOnAllResponses(r =>
-		{
-		});
 	}
 }

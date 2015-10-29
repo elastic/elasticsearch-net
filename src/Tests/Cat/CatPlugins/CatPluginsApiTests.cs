@@ -27,11 +27,9 @@ namespace Tests.Cat.CatPlugins
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override string UrlPath => "/_cat/plugins";
 
-		[I] public async Task HasPlugins() => await this.AssertOnAllResponses(r =>
+		protected override void ExpectResponse(ICatResponse<CatPluginsRecord> response)
 		{
-			r.Records.Should().NotBeEmpty().And.Contain(a => !string.IsNullOrEmpty(a.Name) && a.Component == "delete-by-query");
-		});
-
+			response.Records.Should().NotBeEmpty().And.Contain(a => !string.IsNullOrEmpty(a.Name) && a.Component == "delete-by-query");
+		}
 	}
-
 }

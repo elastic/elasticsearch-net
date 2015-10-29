@@ -27,11 +27,10 @@ namespace Tests.Cat.CatSegments
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override string UrlPath => "/_cat/segments";
 
-		[I] public async Task HasSegments() => await this.AssertOnAllResponses(r =>
+		protected override void ExpectResponse(ICatResponse<CatSegmentsRecord> response)
 		{
-			r.Records.Should().NotBeEmpty().And.Contain(a => !string.IsNullOrEmpty(a.Index));
-		});
-
+			response.Records.Should().NotBeEmpty().And.Contain(a => !string.IsNullOrEmpty(a.Index));
+		}
 	}
 
 }

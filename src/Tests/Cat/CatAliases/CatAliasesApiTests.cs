@@ -27,11 +27,10 @@ namespace Tests.Cat.CatAliases
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override string UrlPath => "/_cat/aliases";
 
-		[I] public async Task HasAliases() => await this.AssertOnAllResponses(r =>
+		protected override void ExpectResponse(ICatResponse<CatAliasesRecord> response)
 		{
-			r.Records.Should().NotBeEmpty().And.Contain(a => a.Alias == "projects-alias");
-		});
-
+			response.Records.Should().NotBeEmpty().And.Contain(a => a.Alias == "projects-alias");
+		}
 	}
 
 }

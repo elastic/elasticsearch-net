@@ -31,9 +31,5 @@ namespace Tests.Indices.StatusManagement.SyncedFlush
 		protected override Func<SyncedFlushDescriptor, ISyncedFlushRequest> Fluent => d => d.AllowNoIndices();
 
 		protected override SyncedFlushRequest Initializer => new SyncedFlushRequest(AllIndices) { AllowNoIndices = true };
-
-		[I] public async Task Response() => await this.AssertOnAllResponses(r =>
-		{
-		});
 	}
 }

@@ -41,7 +41,6 @@ namespace Tests.Indices.MappingManagement.PutMapping
 
 		};
 
-
 		protected override Func<PutMappingDescriptor<Project>, IPutMappingRequest> Fluent => d => d
 			.Properties(prop=>prop
 				.String(s=>s.Name(p=>p.Name).NotAnalyzed())

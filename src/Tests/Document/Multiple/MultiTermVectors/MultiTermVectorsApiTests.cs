@@ -48,28 +48,10 @@ namespace Tests.Document.Multiple.MultiTermVectors
 			}).Take(2)
 		};
 
-		protected override Func<MultiTermVectorsDescriptor, IMultiTermVectorsRequest> Fluent => d => d
-			.Index<Developer>()
-			.GetMany<Developer>(Developer.Developers.Select(p => p.Id).Take(2), (p, i) => p.FieldStatistics().Payloads().TermStatistics().Positions().Offsets())
-		;
-
-		protected override MultiTermVectorsRequest Initializer => new MultiTermVectorsRequest(Index<Developer>())
+		protected override void ExpectResponse(IMultiTermVectorsResponse response)
 		{
-			Documents = Developer.Developers.Select(p => p.Id).Take(2)
-				.Select(n => new MultiTermVectorOperation<Developer>(n)
-				{
-					FieldStatistics = true,
-					Payloads = true,
-					TermStatistics = true,
-					Positions = true,
-					Offsets = true
-				})
-		};
-
-		[I] public async Task Response() => await this.AssertOnAllResponses(r =>
-		{
-			r.Documents.Should().NotBeEmpty().And.HaveCount(2).And.OnlyContain(d => d.Found);
-			var termvectorDoc = r.Documents.FirstOrDefault(d => d.TermVectors.Count > 0);
+			response.Documents.Should().NotBeEmpty().And.HaveCount(2).And.OnlyContain(d => d.Found);
+			var termvectorDoc = response.Documents.FirstOrDefault(d => d.TermVectors.Count > 0);
 			termvectorDoc.Should().NotBeNull();
 
 			termvectorDoc.TermVectors.Should().NotBeEmpty().And.ContainKey("firstName");
@@ -87,6 +69,24 @@ namespace Tests.Document.Multiple.MultiTermVectors
 				var token = vectorTerm.Value.Tokens.First();
 				token.EndOffset.Should().BeGreaterThan(0);
 			}
-		});
+		}
+
+		protected override Func<MultiTermVectorsDescriptor, IMultiTermVectorsRequest> Fluent => d => d
+			.Index<Developer>()
+			.GetMany<Developer>(Developer.Developers.Select(p => p.Id).Take(2), (p, i) => p.FieldStatistics().Payloads().TermStatistics().Positions().Offsets())
+		;
+
+		protected override MultiTermVectorsRequest Initializer => new MultiTermVectorsRequest(Index<Developer>())
+		{
+			Documents = Developer.Developers.Select(p => p.Id).Take(2)
+				.Select(n => new MultiTermVectorOperation<Developer>(n)
+				{
+					FieldStatistics = true,
+					Payloads = true,
+					TermStatistics = true,
+					Positions = true,
+					Offsets = true
+				})
+		};
 	}
 }

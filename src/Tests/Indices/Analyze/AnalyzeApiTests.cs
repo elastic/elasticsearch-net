@@ -34,9 +34,5 @@ namespace Tests.Indices.Analyze
 		{
 			Text = new [] { "hello world", "domination" }
 		};
-
-		[I] public async Task Response() => await this.AssertOnAllResponses(r =>
-		{
-		});
 	}
 }

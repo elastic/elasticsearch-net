@@ -30,9 +30,5 @@ namespace Tests.Indices.Monitoring.IndicesStats
 		protected override Func<IndicesStatsDescriptor, IIndicesStatsRequest> Fluent => d => d;
 
 		protected override IndicesStatsRequest Initializer => new IndicesStatsRequest(Static.AllIndices);
-
-		[I] public async Task Response() => await this.AssertOnAllResponses(r =>
-		{
-		});
 	}
 }

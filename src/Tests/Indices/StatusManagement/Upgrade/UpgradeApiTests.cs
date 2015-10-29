@@ -31,9 +31,5 @@ namespace Tests.Indices.StatusManagement.Upgrade
 		protected override Func<UpgradeDescriptor, IUpgradeRequest> Fluent => d => d.AllowNoIndices();
 
 		protected override UpgradeRequest Initializer => new UpgradeRequest(AllIndices) { AllowNoIndices = true };
-
-		[I] public async Task Response() => await this.AssertOnAllResponses(r =>
-		{
-		});
 	}
 }

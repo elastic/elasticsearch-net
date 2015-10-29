@@ -33,9 +33,5 @@ namespace Tests.Document.Single.Get
 
 		protected override Func<GetDescriptor<Project>, IGetRequest> Fluent => null;
 		protected override GetRequest<Project> Initializer => new GetRequest<Project>(this.ProjectId);
-
-		[I] public async Task Response() => await this.AssertOnAllResponses(r =>
-		{
-		});
 	}
 }
