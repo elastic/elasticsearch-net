@@ -7,7 +7,7 @@ using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using static Nest.Static;
 
-namespace Tests.QueryDsl.FullText.MatchPhrasePrefix
+namespace Tests.QueryDsl.FullText.Match
 {
 	public class MatchPhrasePrefixUsageTests : QueryDslUsageTestsBase
 	{
