@@ -32,7 +32,7 @@ namespace Tests.Document.Single
 		protected IndexRequest<Project> CreateInitializer(string index) =>
 			new IndexRequest<Project>(Project.Instance, index) {};
 
-		protected IPutScriptRequest CreateFluent(string id, PutScriptDescriptor d) => d.Script("1+1");
+		protected IIndexRequest<Project> CreateFluent(string id, IndexDescriptor<Project> d) => d.Id(id);
 
 		protected override LazyResponses Read() => Calls<GetScriptDescriptor, GetScriptRequest, IGetScriptRequest, IGetScriptResponse>(
 			ReadInitializer,
