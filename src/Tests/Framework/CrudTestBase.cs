@@ -145,11 +145,20 @@ namespace Tests.Framework
 			await this.AssertOnAllResponses(this._deleteGetResponse, assert);
 		}
 
+		protected virtual void ExpectAfterCreate(TReadResponse response) { }
+		protected virtual void ExpectAfterUpdate(TReadResponse response) { }
+
 		[I] protected async Task CreateCallIsValid() => await this.AssertOnCreate(r => r.IsValid.Should().Be(true));
-		[I] protected async Task GetAfterCreateIsValid() => await this.AssertOnGetAfterCreate(r => r.IsValid.Should().Be(true));
+		[I] protected async Task GetAfterCreateIsValid() => await this.AssertOnGetAfterCreate(r => {
+			r.IsValid.Should().Be(true);
+			ExpectAfterCreate(r);
+		});
 
 		[I] protected async Task UpdateCallIsValid() => await this.AssertOnUpdate(r => r.IsValid.Should().Be(true));
-		[I] protected async Task GetAfterUpdateIsValid() => await this.AssertOnGetAfterUpdate(r => r.IsValid.Should().Be(true));
+		[I] protected async Task GetAfterUpdateIsValid() => await this.AssertOnGetAfterUpdate(r => {
+			r.IsValid.Should().Be(true);
+			ExpectAfterUpdate(r);
+		});
 
 		[I] protected async Task DeleteCallIsValid() => await this.AssertOnDelete(r => r.IsValid.Should().Be(true));
 		[I] protected async Task GetAfterDeleteIsValid() => await this.AssertOnGetAfterDelete(r => r.IsValid.Should().Be(false));

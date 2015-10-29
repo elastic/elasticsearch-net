@@ -71,12 +71,11 @@ namespace Tests.Modules.SnapshotAndRestore.Snapshot
 
 		protected override LazyResponses Update() => LazyResponses.Empty;
 
-		[I]
-		protected async Task GetDeserializes() => await this.AssertOnGetAfterCreate(r =>
-	{
-		r.Snapshots.Should().HaveCount(1);
-		var snapshot = r.Snapshots.FirstOrDefault();
-		snapshot.Should().NotBeNull();
-	});
+		protected override void ExpectAfterCreate(IGetSnapshotResponse response)
+		{
+			response.Snapshots.Should().HaveCount(1);
+			var snapshot = response.Snapshots.FirstOrDefault();
+			snapshot.Should().NotBeNull();
+		}
 	}
 }

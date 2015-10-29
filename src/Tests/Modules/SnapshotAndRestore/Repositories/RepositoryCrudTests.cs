@@ -109,28 +109,29 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories
 
 		protected IDeleteRepositoryRequest DeleteFluent(string name, DeleteRepositoryDescriptor d) => null;
 
-		[I] public async Task ResponseDeserializes() => await this.AssertOnGetAfterCreate(r => {
-			r.Repositories.Should().NotBeNull().And.HaveCount(1);
-			var name = r.Repositories.Keys.First();
-			var repository = r.FileSystem(name);
+		protected override void ExpectAfterCreate(IGetRepositoryResponse response)
+		{ 
+			response.Repositories.Should().NotBeNull().And.HaveCount(1);
+			var name = response.Repositories.Keys.First();
+			var repository = response.FileSystem(name);
 			repository.Should().NotBeNull();
 			repository.Type.Should().Be("fs");
 			repository.Settings.Should().NotBeNull();
 			repository.Settings.ChunkSize.Should().Be("64mb");
 			repository.Settings.Compress.Should().BeTrue();
-        });
+        }
 
-		[I] public async Task RepositoryUpdated() => await this.AssertOnGetAfterUpdate(r =>
+		protected override void ExpectAfterUpdate(IGetRepositoryResponse response)
 		{
-			r.Repositories.Should().NotBeNull().And.HaveCount(1);
-			var name = r.Repositories.Keys.First();
-			var repository = r.FileSystem(name);
+			response.Repositories.Should().NotBeNull().And.HaveCount(1);
+			var name = response.Repositories.Keys.First();
+			var repository = response.FileSystem(name);
 			repository.Should().NotBeNull();
 			repository.Type.Should().Be("fs");
 			repository.Settings.Should().NotBeNull();
 			repository.Settings.ChunkSize.Should().Be("64mb");
 			repository.Settings.Compress.Should().BeTrue();
 			repository.Settings.ConcurrentStreams.Should().Be(5);
-		});
+		}
 	}
 }
