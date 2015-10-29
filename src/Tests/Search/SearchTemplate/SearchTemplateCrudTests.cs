@@ -13,7 +13,7 @@ namespace Tests.Search.SearchTemplate
 {
 	[Collection(IntegrationContext.Indexing)]
 	public class SearchTemplateCrudTests
-		: CrudTestBase<IAcknowledgedResponse, IGetSearchTemplateResponse, IAcknowledgedResponse>
+		: CrudTestBase<IAcknowledgedResponse, IGetSearchTemplateResponse, IAcknowledgedResponse, IAcknowledgedResponse>
 	{
 		public SearchTemplateCrudTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
