@@ -27,7 +27,7 @@ namespace Tests.Modules.SnapshotAndRestore.Snapshot
 			);
 
 			if (!create.IsValid || !create.Acknowledged)
-				throw new Exception("Failed to create snapshot repository");
+				throw new Exception("Setup: failed to create snapshot repository");
 		}
 
 		private string _repositoryLocation;
