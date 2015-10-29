@@ -29,10 +29,10 @@ namespace Tests.Document.Single
 
 		private string _lang = "groovy";
 
-		protected IndexRequest<Project> CreateInitializer(string index) =>
-			new IndexRequest<Project>(Project.Instance, index) {};
+		protected IndexRequest<Project> CreateInitializer(string id) =>
+			new IndexRequest<Project>(Project.Instance, id: id) {};
 
-		protected IPutScriptRequest CreateFluent(string id, PutScriptDescriptor d) => d.Script("1+1");
+		protected IndexDescriptor<Project> CreateFluent(string id, IndexDescriptor<Project> d) => d.Id(id);
 
 		protected override LazyResponses Read() => Calls<GetScriptDescriptor, GetScriptRequest, IGetScriptRequest, IGetScriptResponse>(
 			ReadInitializer,

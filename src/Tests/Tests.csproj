@@ -307,6 +307,9 @@
     <Compile Include="Modules\SnapshotAndRestore\Snapshot\SnapshotStatus\SnapshotStatusUrlTests.cs" />
     <Compile Include="Modules\SnapshotAndRestore\Snapshot\Snapshot\SnapshotApiTests.cs" />
     <Compile Include="Modules\SnapshotAndRestore\Snapshot\Snapshot\SnapshotUrlTests.cs" />
+    <Compile Include="QueryDsl\FullText\CommonTerms\CommonTermsUsageTests.cs" />
+    <Compile Include="QueryDsl\FullText\Match\MatchPhraseUsageTests.cs" />
+    <Compile Include="QueryDsl\QueryDslUsageTestsBase.cs" />
     <Compile Include="Search\Count\CountUrlTests.cs" />
     <Compile Include="Search\Count\CountApiTests.cs" />
     <Compile Include="Search\Explain\ExplainUrlTests.cs" />
@@ -389,7 +392,6 @@
     <Folder Include="Aggregations\Pipeline\" />
     <Folder Include="Migration\" />
     <Folder Include="Plugins\Analysis\Phonetic\" />
-    <Folder Include="QueryDsl\" />
     <Folder Include="Setup\" />
   </ItemGroup>
   <ItemGroup>

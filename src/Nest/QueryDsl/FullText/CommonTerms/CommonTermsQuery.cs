@@ -26,7 +26,7 @@ namespace Nest
 		Operator? HighFrequencyOperator { get; set; }
 
 		[JsonProperty(PropertyName = "minimum_should_match")]
-		string MinimumShouldMatch { get; set; }
+		MinimumShouldMatch MinimumShouldMatch { get; set; }
 
 		[JsonProperty(PropertyName = "analyzer")]
 		string Analyzer { get; set; }
@@ -42,7 +42,7 @@ namespace Nest
 		public double? CutoffFrequency { get; set; }
 		public Operator? LowFrequencyOperator { get; set; }
 		public Operator? HighFrequencyOperator { get; set; }
-		public string MinimumShouldMatch { get; set; }
+		public MinimumShouldMatch MinimumShouldMatch { get; set; }
 		public string Analyzer { get; set; }
 		public bool? DisableCoord { get; set; }
 
@@ -62,7 +62,7 @@ namespace Nest
 		double? ICommonTermsQuery.CutoffFrequency { get; set; }
 		Operator? ICommonTermsQuery.LowFrequencyOperator { get; set; }
 		Operator? ICommonTermsQuery.HighFrequencyOperator { get; set; }
-		string ICommonTermsQuery.MinimumShouldMatch { get; set; }
+		MinimumShouldMatch ICommonTermsQuery.MinimumShouldMatch { get; set; }
 		string ICommonTermsQuery.Analyzer { get; set; }
 		bool? ICommonTermsQuery.DisableCoord { get; set; }
 
@@ -72,6 +72,8 @@ namespace Nest
 		//<inheritdoc/>
 		public CommonTermsQueryDescriptor<T> HighFrequencyOperator(Operator op) => Assign(a => a.HighFrequencyOperator = op);
 
+		public CommonTermsQueryDescriptor<T> LowFrequencyOperator(Operator op) => Assign(a => a.LowFrequencyOperator = op);
+
 		//<inheritdoc/>
 		public CommonTermsQueryDescriptor<T> Analyzer(string analyzer) => Assign(a => a.Analyzer = analyzer);
 
@@ -80,12 +82,8 @@ namespace Nest
 			Assign(a => a.CutoffFrequency = cutOffFrequency);
 
 		//<inheritdoc/>
-		public CommonTermsQueryDescriptor<T> MinimumShouldMatch(string minimumShouldMatch) =>
+		public CommonTermsQueryDescriptor<T> MinimumShouldMatch(MinimumShouldMatch minimumShouldMatch) =>
 			Assign(a => a.MinimumShouldMatch = minimumShouldMatch);
-
-		//<inheritdoc/>
-		public CommonTermsQueryDescriptor<T> MinimumShouldMatch(int minimumShouldMatch) =>
-			Assign(a=>a.MinimumShouldMatch = minimumShouldMatch.ToString(CultureInfo.InvariantCulture));
 
 		//<inheritdoc/>
 		public CommonTermsQueryDescriptor<T> DisableCoord(bool disable = true) => Assign(a => a.DisableCoord = disable);
