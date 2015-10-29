@@ -19,6 +19,7 @@ namespace Tests.Framework
 	{
 		protected abstract int ExpectStatusCode { get; }
 		protected abstract bool ExpectIsValid { get; }
+		protected virtual void ExpectResponse(TResponse response) { }
 
 		protected ApiIntegrationTestBase(IIntegrationCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -29,6 +30,9 @@ namespace Tests.Framework
 
 		[I] protected async Task ReturnsExpectedIsValid() =>
 			await this.AssertOnAllResponses(r=>r.IsValid.Should().Be(this.ExpectIsValid));
+
+		[I] protected async Task ReturnsExpectedResponse() =>
+			await this.AssertOnAllResponses(r => ExpectResponse(r));
 
 		protected override Task AssertOnAllResponses(Action<TResponse> assert)
 		{

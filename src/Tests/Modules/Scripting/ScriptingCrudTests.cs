@@ -13,11 +13,9 @@ namespace Tests.Modules.Scripting
 {
 	[Collection(IntegrationContext.Indexing)]
 	public class ScriptingCrudTests
-		: CrudTestBase<IAcknowledgedResponse, IGetScriptResponse, IAcknowledgedResponse>
+		: CrudTestBase<IAcknowledgedResponse, IGetScriptResponse, IAcknowledgedResponse, IAcknowledgedResponse>
 	{
 		public ScriptingCrudTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) {}
-
-		protected override bool SupportsDeletes => true;
 
 		protected override LazyResponses Create() => Calls<PutScriptDescriptor, PutScriptRequest, IPutScriptRequest, IAcknowledgedResponse>(
 			CreateInitializer,
@@ -30,9 +28,7 @@ namespace Tests.Modules.Scripting
 
 		private string _lang = "groovy";
 
-		protected PutScriptRequest CreateInitializer(string id) =>
-			new PutScriptRequest(_lang, id) {Script = "1+1"};
-
+		protected PutScriptRequest CreateInitializer(string id) => new PutScriptRequest(_lang, id) {Script = "1+1"};
 		protected IPutScriptRequest CreateFluent(string id, PutScriptDescriptor d) => d.Script("1+1");
 
 		protected override LazyResponses Read() => Calls<GetScriptDescriptor, GetScriptRequest, IGetScriptRequest, IGetScriptResponse>(
@@ -45,7 +41,6 @@ namespace Tests.Modules.Scripting
         );
 
 		protected GetScriptRequest ReadInitializer(string id) => new GetScriptRequest(_lang, id);
-
 		protected IGetScriptRequest ReadFluent(string id, GetScriptDescriptor d) => d;
 
 		protected override LazyResponses Update() => Calls<PutScriptDescriptor, PutScriptRequest, IPutScriptRequest, IAcknowledgedResponse>(
@@ -59,9 +54,7 @@ namespace Tests.Modules.Scripting
 
 		private string _updatedScript = "2+2";
 
-		protected PutScriptRequest UpdateInitializer(string id) =>
-			new PutScriptRequest(_lang, id) { Script = _updatedScript};
-
+		protected PutScriptRequest UpdateInitializer(string id) => new PutScriptRequest(_lang, id) { Script = _updatedScript};
 		protected IPutScriptRequest UpdateFluent(string id, PutScriptDescriptor d) => d.Script(_updatedScript);
 
 		protected override LazyResponses Delete() => Calls<DeleteScriptDescriptor, DeleteScriptRequest, IDeleteScriptRequest, IAcknowledgedResponse>(
@@ -74,15 +67,8 @@ namespace Tests.Modules.Scripting
 		);
 
 		protected DeleteScriptRequest DeleteInitializer(string id) => new DeleteScriptRequest(_lang, id);
-
 		protected IDeleteScriptRequest DeleteFluent(string id, DeleteScriptDescriptor d) => d;
 
-		[I] protected async Task ScriptIsUpdated() => await this.AssertOnGetAfterUpdate(r =>
-			r.Script.Should().Be(_updatedScript)
-		);
-
-		[I] protected async Task ScriptIsDeleted() => await this.AssertOnGetAfterDelete(r =>
-			r.IsValid.Should().BeFalse()
-		);
+		protected override void ExpectAfterUpdate(IGetScriptResponse response) => response.Script.Should().Be(_updatedScript);
 	}
 }

@@ -42,7 +42,7 @@ namespace Tests.Framework.Integration
 		public bool RunningIntegrations { get; private set; }
 		public string ClusterName { get; } = Guid.NewGuid().ToString("N").Substring(0, 6);
 		public string NodeName { get; } = Guid.NewGuid().ToString("N").Substring(0, 6);
-		public string RepositoryPath { get; } = @"C:\";
+		public string RepositoryPath { get; private set; }
 		public ElasticsearchNodeInfo Info { get; private set; }
 		public int Port { get; private set; }
 
@@ -65,6 +65,7 @@ namespace Tests.Framework.Integration
 			var appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 			this.RoamingFolder = Path.Combine(appdata, "NEST", this.Version);
 			this.RoamingClusterFolder = Path.Combine(this.RoamingFolder, "elasticsearch-" + elasticsearchVersion);
+			this.RepositoryPath = Path.Combine(RoamingFolder, "repositories");
 			this.Binary = Path.Combine(this.RoamingClusterFolder, "bin", "elasticsearch") + ".bat";
 
 			Console.WriteLine("========> {0}", this.RoamingFolder);
@@ -248,6 +249,11 @@ namespace Tests.Framework.Integration
 			{
 				Console.WriteLine($"attempting to delete log file: {f}");
 				File.Delete(f);
+			}
+			if (Directory.Exists(this.RepositoryPath))
+			{
+				Console.WriteLine("attempting to delete repositories");
+				Directory.Delete(this.RepositoryPath, true);
 			}
 		}
 

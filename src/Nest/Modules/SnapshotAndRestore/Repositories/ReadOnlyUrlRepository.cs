@@ -4,47 +4,45 @@ using System;
 
 namespace Nest
 {
-	public interface IReadOnlyUrlRepository : IRepository
-	{
-		[JsonProperty("settings")]
-		IReadOnlyUrlRepositorySettings Settings { get; set; }
-	}
-
-	public interface IReadOnlyUrlRepositorySettings : INestSerializable
-	{
-		[JsonProperty("location")]
-		string Location { get; set; }
-
-		[JsonProperty("concurrent_streams")]
-		int ConcurrentStreams { get; set; }
-	}
+	public interface IReadOnlyUrlRepository : IRepository<IReadOnlyUrlRepositorySettings> { }
 
 	public class ReadOnlyUrlRepository : IReadOnlyUrlRepository
 	{
 		public ReadOnlyUrlRepository(ReadOnlyUrlRepositorySettings settings)
 		{
-			this.Settings = settings;
+			Settings = settings;
 		}
 
-		string IRepository.Type { get { return "url"; } }
 		public IReadOnlyUrlRepositorySettings Settings { get; set; }
+		public string Type { get; } = "url";
+	}
+
+	public interface IReadOnlyUrlRepositorySettings : IRepositorySettings
+	{
+		[JsonProperty("location")]
+		string Location { get; set; }
+
+		[JsonProperty("concurrent_streams")]
+		int? ConcurrentStreams { get; set; }
 	}
 
 	public class ReadOnlyUrlRepositorySettings : IReadOnlyUrlRepositorySettings
 	{
+		internal ReadOnlyUrlRepositorySettings() { }
+
 		public ReadOnlyUrlRepositorySettings(string location)
 		{
 			this.Location = location;
 		}
 
 		public string Location { get; set; }
-		public int ConcurrentStreams { get; set; }
+		public int? ConcurrentStreams { get; set; }
 	}
 
 	public class ReadOnlyUrlRepositorySettingsDescriptor
 		: DescriptorBase<ReadOnlyUrlRepositorySettingsDescriptor, IReadOnlyUrlRepositorySettings>, IReadOnlyUrlRepositorySettings
 	{
-		int IReadOnlyUrlRepositorySettings.ConcurrentStreams { get; set; }
+		int? IReadOnlyUrlRepositorySettings.ConcurrentStreams { get; set; }
 		string IReadOnlyUrlRepositorySettings.Location { get;set; }
 
 		/// <summary>
@@ -65,7 +63,7 @@ namespace Nest
 		: DescriptorBase<ReadOnlyUrlRepositoryDescriptor, IReadOnlyUrlRepository>, IReadOnlyUrlRepository
 	{
 		string IRepository.Type { get { return "url"; } }
-		IReadOnlyUrlRepositorySettings IReadOnlyUrlRepository.Settings { get; set; }
+		IReadOnlyUrlRepositorySettings IRepository<IReadOnlyUrlRepositorySettings>.Settings { get; set; }
 
 		public ReadOnlyUrlRepositoryDescriptor Settings(string location, Func<ReadOnlyUrlRepositorySettingsDescriptor, IReadOnlyUrlRepositorySettings> settingsSelector = null) =>
 			Assign(a => a.Settings = settingsSelector.InvokeOrDefault(new ReadOnlyUrlRepositorySettingsDescriptor().Location(location)));

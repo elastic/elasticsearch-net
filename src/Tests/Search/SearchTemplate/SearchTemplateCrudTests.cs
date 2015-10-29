@@ -13,7 +13,7 @@ namespace Tests.Search.SearchTemplate
 {
 	[Collection(IntegrationContext.Indexing)]
 	public class SearchTemplateCrudTests
-		: CrudTestBase<IAcknowledgedResponse, IGetSearchTemplateResponse, IAcknowledgedResponse>
+		: CrudTestBase<IAcknowledgedResponse, IGetSearchTemplateResponse, IAcknowledgedResponse, IAcknowledgedResponse>
 	{
 		public SearchTemplateCrudTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
@@ -74,11 +74,9 @@ namespace Tests.Search.SearchTemplate
 		);
 
 		protected DeleteSearchTemplateRequest DeleteInitializer(string id) => new DeleteSearchTemplateRequest(id);
-
 		protected IDeleteSearchTemplateRequest DeleteFluent(string id, DeleteSearchTemplateDescriptor d) => d;
 
-		[I] protected async Task TemplateIsUpdated() => await this.AssertOnGetAfterUpdate(r =>
-			r.Template.Should().Be(_updatedTemplate)
-		);
+		protected override void ExpectAfterUpdate(IGetSearchTemplateResponse response) => 
+			response.Template.Should().Be(_updatedTemplate);
 	}
 }

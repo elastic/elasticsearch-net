@@ -16,7 +16,10 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories
 	public class RepositoryCrudTests
 		: CrudTestBase<IAcknowledgedResponse, IGetRepositoryResponse, IAcknowledgedResponse, IAcknowledgedResponse>
 	{
-		public RepositoryCrudTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public RepositoryCrudTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage)
+		{
+			_rootRepositoryPath = cluster.Node.RepositoryPath;
+		}
 
 		protected override LazyResponses Create() => Calls<CreateRepositoryDescriptor, CreateRepositoryRequest, ICreateRepositoryRequest, IAcknowledgedResponse>(
 			CreateInitializer,
@@ -27,16 +30,28 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories
 			requestAsync: (s, c, r) => c.CreateRepositoryAsync(r)
         );
 
-		private string Location(string name) => $"C:/nest-repository-{name}";
+		private string _rootRepositoryPath;
+		private string GetRepositoryPath(string name) => Path.Combine(_rootRepositoryPath, name);
 
 		protected CreateRepositoryRequest CreateInitializer(string name) =>
 			new CreateRepositoryRequest(name)
 			{
-				Repository = new FileSystemRepository(new FileSystemRepositorySettings(Location(name)))
+				Repository = new FileSystemRepository(
+					new FileSystemRepositorySettings(GetRepositoryPath(name))
+						{
+							ChunkSize = "64mb",
+							Compress = true
+                        }
+					)
             };
 
 		protected ICreateRepositoryRequest CreateFluent(string name, CreateRepositoryDescriptor d) => d
-			.FileSystem(fs => fs.Settings(Location(name)));
+			.FileSystem(fs => fs
+				.Settings(GetRepositoryPath(name), s => s
+					.ChunkSize("64mb")
+					.Compress()
+				)
+			);
 
 		protected override LazyResponses Read() => Calls<GetRepositoryDescriptor, GetRepositoryRequest, IGetRepositoryRequest, IGetRepositoryResponse>(
 			ReadInitializer,
@@ -63,17 +78,21 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories
 
 		protected CreateRepositoryRequest UpdateInitializer(string name) => new CreateRepositoryRequest(name)
 		{
-			Repository = new FileSystemRepository(new FileSystemRepositorySettings(Location(name))
+			Repository = new FileSystemRepository(new FileSystemRepositorySettings(GetRepositoryPath(name))
 				{
-					ChunkSize = "64mb"
+					ChunkSize = "64mb",
+					Compress = true,
+					ConcurrentStreams = 5
 				}
 			)
 		};
 
 		protected ICreateRepositoryRequest UpdateFluent(string name, CreateRepositoryDescriptor d) => d
 			.FileSystem(fs => fs
-				.Settings(Location(name), s => s
+				.Settings(GetRepositoryPath(name), s => s
 					.ChunkSize("64mb")
+					.Compress()
+					.ConcurrentStreams(5)
 				)
 			);
 
@@ -89,5 +108,30 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories
 		protected DeleteRepositoryRequest DeleteInitializer(string name) => new DeleteRepositoryRequest(name);
 
 		protected IDeleteRepositoryRequest DeleteFluent(string name, DeleteRepositoryDescriptor d) => null;
+
+		protected override void ExpectAfterCreate(IGetRepositoryResponse response)
+		{ 
+			response.Repositories.Should().NotBeNull().And.HaveCount(1);
+			var name = response.Repositories.Keys.First();
+			var repository = response.FileSystem(name);
+			repository.Should().NotBeNull();
+			repository.Type.Should().Be("fs");
+			repository.Settings.Should().NotBeNull();
+			repository.Settings.ChunkSize.Should().Be("64mb");
+			repository.Settings.Compress.Should().BeTrue();
+        }
+
+		protected override void ExpectAfterUpdate(IGetRepositoryResponse response)
+		{
+			response.Repositories.Should().NotBeNull().And.HaveCount(1);
+			var name = response.Repositories.Keys.First();
+			var repository = response.FileSystem(name);
+			repository.Should().NotBeNull();
+			repository.Type.Should().Be("fs");
+			repository.Settings.Should().NotBeNull();
+			repository.Settings.ChunkSize.Should().Be("64mb");
+			repository.Settings.Compress.Should().BeTrue();
+			repository.Settings.ConcurrentStreams.Should().Be(5);
+		}
 	}
 }

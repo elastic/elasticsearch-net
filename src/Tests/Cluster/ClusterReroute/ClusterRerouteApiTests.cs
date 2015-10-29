@@ -85,12 +85,11 @@ namespace Tests.Cluster.ClusterReroute
 			}
 		};
 
-		[I] public async Task Response() => await this.AssertOnAllResponses(r =>
+		protected override void ExpectResponse(IClusterRerouteResponse response)
 		{
 			//TODO we expect all three to fail and see it on the response
 			//and exception
-		});
-
+		}
 	}
 
 

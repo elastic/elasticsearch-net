@@ -6,13 +6,15 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace Nest
 {
-	public interface IAzureRepository : IRepository
+	public interface IAzureRepository : IRepository<IAzureRepositorySettings> { }
+
+	public class AzureRepository : IAzureRepository
 	{
-		[JsonProperty("settings")]
-		IAzureRepositorySettings Settings { get; set; }
+		public IAzureRepositorySettings Settings { get; set; }
+		public string Type { get; } = "azure";
 	}
 
-	public interface IAzureRepositorySettings : INestSerializable
+	public interface IAzureRepositorySettings : IRepositorySettings
 	{
 		[JsonProperty("container")]
 		string Container { get; set; }
@@ -21,16 +23,10 @@ namespace Nest
 		string BasePath { get; set; }
 
 		[JsonProperty("compress")]
-		bool Compress { get; set; }
+		bool? Compress { get; set; }
 
 		[JsonProperty("chunk_size")]
 		string ChunkSize { get; set; }
-	}
-
-	public class AzureRepository : IAzureRepository
-	{
-		string IRepository.Type { get; } = "azure";
-		public IAzureRepositorySettings Settings { get; set; }
 	}
 
 	public class AzureRepositorySettings : IAzureRepositorySettings
@@ -42,18 +38,18 @@ namespace Nest
 		public string BasePath { get; set; }
 
 		[JsonProperty("compress")]
-		public bool Compress { get; set; }
+		public bool? Compress { get; set; }
 
 		[JsonProperty("chunk_size")]
 		public string ChunkSize { get; set; }
 	}
 
-	public class AzureRepositorySettingsDescriptor
+	public class AzureRepositorySettingsDescriptor 
 		: DescriptorBase<AzureRepositorySettingsDescriptor, IAzureRepositorySettings>, IAzureRepositorySettings
 	{
 		string IAzureRepositorySettings.BasePath { get; set; }
 		string IAzureRepositorySettings.ChunkSize { get; set; }
-		bool IAzureRepositorySettings.Compress { get; set; }
+		bool? IAzureRepositorySettings.Compress { get; set; }
 		string IAzureRepositorySettings.Container { get; set; }
 
 		/// <summary>
@@ -88,8 +84,8 @@ namespace Nest
 	public class AzureRepositoryDescriptor
 		: DescriptorBase<AzureRepositoryDescriptor, IAzureRepository>, IAzureRepository
 	{
-		string IRepository.Type { get { return "azure"; } }
-		IAzureRepositorySettings IAzureRepository.Settings { get; set; }
+		IAzureRepositorySettings IRepository<IAzureRepositorySettings>.Settings { get; set; }
+		string IRepository.Type { get; } = "azure";
 
 		public AzureRepositoryDescriptor Settings(Func<AzureRepositorySettingsDescriptor, IAzureRepositorySettings> settingsSelector) =>
 			Assign(a => a.Settings = settingsSelector?.Invoke(new AzureRepositorySettingsDescriptor()));

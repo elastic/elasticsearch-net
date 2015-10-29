@@ -27,11 +27,10 @@ namespace Tests.Cluster.ClusterPendingTasks
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override string UrlPath => "/_cluster/pending_tasks";
 
-		[I] public async Task Response() => await this.AssertOnAllResponses(r =>
+		protected override void ExpectResponse(IClusterPendingTasksResponse response)
 		{
-			r.Tasks.Should().NotBeNull(); 
-		});
-
+			response.Tasks.Should().NotBeNull(); 
+		}
 	}
 
 }
