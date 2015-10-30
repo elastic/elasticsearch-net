@@ -5,9 +5,9 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	internal class FilterAggregatorJsonConverter : JsonConverter
+	internal class FilterAggregationJsonConverter : JsonConverter
 	{
-		public override bool CanRead => true;
+		public override bool CanRead => false;
 
 		public override bool CanWrite => true;
 
@@ -15,7 +15,7 @@ namespace Nest
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-			var f = value as IFilterAggregator;
+			var f = value as IFilterAggregation;
 			if (f == null || f.Filter == null)
 			{
 				writer.WriteNull();
@@ -27,13 +27,7 @@ namespace Nest
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
-			if (reader.TokenType != JsonToken.StartObject) return null;
-			var container = new QueryContainer();
-			serializer.Populate(reader, container);
-			var agg = new FilterAggregator();
-			agg.Filter = container;
-
-			return agg;
+			throw new NotSupportedException();
 		}
 	}
 

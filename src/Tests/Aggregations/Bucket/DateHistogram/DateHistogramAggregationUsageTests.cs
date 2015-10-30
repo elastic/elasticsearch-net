@@ -67,7 +67,7 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 		protected override SearchRequest<Project> Initializer =>
 			new SearchRequest<Project>
 			{
-				Aggregations = new DateHistogramAgg("projects_started_per_month")
+				Aggregations = new DateHistogramAggregation("projects_started_per_month")
 				{
 					Field = Field<Project>(p => p.StartedOn),
 					Interval = DateInterval.Month,
@@ -79,7 +79,7 @@ namespace Tests.Aggregations.Bucket.DateHistogram
 					},
 					Order = HistogramOrder.CountAscending,
 					Aggregations =
-						new TermsAgg("project_tags") { Field = Field<Project>(p => p.Tags) }
+						new TermsAggregation("project_tags") { Field = Field<Project>(p => p.Tags) }
 				}
 			};
 

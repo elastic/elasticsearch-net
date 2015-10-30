@@ -59,29 +59,29 @@ namespace Tests.Aggregations.Bucket.Filter
 		protected override SearchRequest<Project> Initializer =>
 			new SearchRequest<Project>
 			{
-				Aggregations = new FilterAgg("bethels_projects")
+				Aggregations = new FilterAggregation("bethels_projects")
 				{
 					Filter = new TermQuery { Field = Field<Project>(p => p.LeadDeveloper.FirstName), Value = FirstNameToFind },
 					Aggregations =
-						new TermsAgg("project_tags") { Field = Field<Project>(p => p.CuratedTags.First().Name) }
+						new TermsAggregation("project_tags") { Field = Field<Project>(p => p.CuratedTags.First().Name) }
 				}
 			};
 
 		[I]
 		public async Task HandlingResponses() => await this.AssertOnAllResponses(response =>
-	{
-		response.IsValid.Should().BeTrue();
+		{
+			response.IsValid.Should().BeTrue();
 
 			/**
 			* Using the `.Agg` aggregation helper we can fetch our aggregation results easily 
 			* in the correct type. [Be sure to read more about `.Agg` vs `.Aggregations` on the response here]()
 			*/
-		var filterAgg = response.Aggs.Filter("bethels_projects");
-		filterAgg.Should().NotBeNull();
-		filterAgg.DocCount.Should().BeGreaterThan(0);
-		var tags = filterAgg.Terms("project_tags");
-		tags.Should().NotBeNull();
-		tags.Items.Should().NotBeEmpty();
-	});
+			var filterAgg = response.Aggs.Filter("bethels_projects");
+			filterAgg.Should().NotBeNull();
+			filterAgg.DocCount.Should().BeGreaterThan(0);
+			var tags = filterAgg.Terms("project_tags");
+			tags.Should().NotBeNull();
+			tags.Items.Should().NotBeEmpty();
+		});
 	}
 }

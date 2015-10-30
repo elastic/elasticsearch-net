@@ -4,20 +4,18 @@ namespace Nest
 {
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<GlobalAggregator>))]
-	public interface IGlobalAggregator : IBucketAggregator { }
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<GlobalAggregation>))]
+	public interface IGlobalAggregation : IBucketAggregation { }
 
-	public class GlobalAggregator : BucketAggregator, IGlobalAggregator { }
-
-	public class GlobalAgg : BucketAgg, IGlobalAggregator
+	public class GlobalAggregation : BucketAggregation, IGlobalAggregation
 	{
-		public GlobalAgg(string name) : base(name) { }
+		public GlobalAggregation(string name) : base(name) { }
 
 		internal override void WrapInContainer(AggregationContainer c) => c.Global = this;
 	}
 
-	public class GlobalAggregatorDescriptor<T> 
-		: BucketAggregatorBaseDescriptor<GlobalAggregatorDescriptor<T>, IGlobalAggregator, T>
-			, IGlobalAggregator
+	public class GlobalAggregationDescriptor<T> 
+		: BucketAggregationDescriptorBase<GlobalAggregationDescriptor<T>, IGlobalAggregation, T>
+			, IGlobalAggregation
 		where T : class { }
 }

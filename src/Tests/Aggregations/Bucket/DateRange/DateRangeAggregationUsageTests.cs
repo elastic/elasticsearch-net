@@ -66,7 +66,7 @@ namespace Tests.Aggregations.Bucket.DateRange
 		protected override SearchRequest<Project> Initializer =>
 			new SearchRequest<Project>
 			{
-				Aggregations = new DateRangeAgg("projects_date_ranges")
+				Aggregations = new DateRangeAggregation("projects_date_ranges")
 				{
 					Field = Field<Project>(p => p.StartedOn),
 					Ranges = new List<DateRangeExpression>
@@ -76,7 +76,7 @@ namespace Tests.Aggregations.Bucket.DateRange
 							{new DateRangeExpression { From = DateMath.Anchored("2012-05-05").Add(TimeSpan.FromDays(1)).Subtract("1m") } }
 					},
 					Aggregations =
-						new TermsAgg("project_tags") { Field = Field<Project>(p => p.Tags) }
+						new TermsAggregation("project_tags") { Field = Field<Project>(p => p.Tags) }
 				}
 			};
 

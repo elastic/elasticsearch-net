@@ -1,15 +1,37 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Nest
 {
 	public interface IBucketAggregation : IAggregation
 	{
-		IDictionary<string, IAggregation> Aggregations { get; }
+		AggregationDictionary Aggregations { get; set; }
 	}
 
-	public abstract class BucketAggregationBase : AggregationsHelper , IBucketAggregation
+	public abstract class BucketAggregation : AggregationBase, IBucketAggregation
 	{
-		protected BucketAggregationBase() { }
-		protected BucketAggregationBase(IDictionary<string, IAggregation> aggregations) : base(aggregations) { }
+		public AggregationDictionary Aggregations { get; set; }
+
+		protected BucketAggregation(string name) : base(name) { }
 	}
+
+	public abstract class BucketAggregationDescriptorBase<TBucketAggregation, TBucketAggregationInterface, T>
+		: IBucketAggregation
+		where TBucketAggregation : BucketAggregationDescriptorBase<TBucketAggregation, TBucketAggregationInterface, T>
+			, TBucketAggregationInterface, IBucketAggregation
+		where T : class
+		where TBucketAggregationInterface : class, IBucketAggregation
+	{
+		AggregationDictionary IBucketAggregation.Aggregations { get; set; }
+		
+		protected TBucketAggregation Assign(Action<TBucketAggregationInterface> assigner) =>
+			Fluent.Assign(((TBucketAggregation)this), assigner);
+
+		protected TBucketAggregationInterface Self => (TBucketAggregation)this;
+
+		public TBucketAggregation Aggregations(Func<AggregationContainerDescriptor<T>, IAggregationContainer> selector) =>
+			Assign(a => a.Aggregations = selector?.Invoke(new AggregationContainerDescriptor<T>())?.Aggregations);
+	}
+
 }

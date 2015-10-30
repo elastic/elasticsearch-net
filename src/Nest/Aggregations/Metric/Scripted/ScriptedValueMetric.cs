@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Nest
 {
-	public class ScriptedValueMetric : IMetricAggregation
+	public class ScriptedValueMetric : IMetric
 	{
 		internal object _Value { get; set; }
 

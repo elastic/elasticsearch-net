@@ -1,6 +1,6 @@
 ﻿namespace Nest
 {
-	public class StatsMetric : IMetricAggregation
+	public class StatsMetric : IMetric
 	{
 		public long Count { get; set; }
 		public double? Min { get; set; }

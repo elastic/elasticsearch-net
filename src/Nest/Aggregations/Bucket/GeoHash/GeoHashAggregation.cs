@@ -7,8 +7,8 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<GeoHashAggregator>))]
-	public interface IGeoHashAggregator : IBucketAggregator
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<GeoHashAggregation>))]
+	public interface IGeoHashAggregation : IBucketAggregation
 	{
 		[JsonProperty("field")]
 		FieldName Field { get; set; }
@@ -23,49 +23,40 @@ namespace Nest
 		GeoHashPrecision? Precision { get; set; }
 	}
 
-	public class GeoHashAggregator : BucketAggregator, IGeoHashAggregator
-	{
-		public FieldName Field { get; set; }
-		public int? Size { get; set; }
-		public int? ShardSize { get; set; }
-		public GeoHashPrecision? Precision { get; set; }
-	}
-
-	public class GeoHashAgg : BucketAgg, IGeoHashAggregator
+	public class GeoHashAggregation : BucketAggregation, IGeoHashAggregation
 	{
 		public FieldName Field { get; set; }
 		public int? Size { get; set; }
 		public int? ShardSize { get; set; }
 		public GeoHashPrecision? Precision { get; set; }
 
-		public GeoHashAgg(string name) : base(name) { }
+		public GeoHashAggregation(string name) : base(name) { }
 
 		internal override void WrapInContainer(AggregationContainer c) => c.GeoHash = this;
 	}
 
-	public class GeoHashAggregatorDescriptor<T> 
-		: BucketAggregatorBaseDescriptor<GeoHashAggregatorDescriptor<T>, IGeoHashAggregator, T>
-			, IGeoHashAggregator 
+	public class GeoHashAggregationDescriptor<T> 
+		: BucketAggregationDescriptorBase<GeoHashAggregationDescriptor<T>, IGeoHashAggregation, T>
+			, IGeoHashAggregation 
 		where T : class
 	{
-		FieldName IGeoHashAggregator.Field { get; set; }
+		FieldName IGeoHashAggregation.Field { get; set; }
 		
-		int? IGeoHashAggregator.Size { get; set; }
+		int? IGeoHashAggregation.Size { get; set; }
 
-		int? IGeoHashAggregator.ShardSize { get; set; }
+		int? IGeoHashAggregation.ShardSize { get; set; }
 
-		GeoHashPrecision? IGeoHashAggregator.Precision { get; set; }
+		GeoHashPrecision? IGeoHashAggregation.Precision { get; set; }
 
-		public GeoHashAggregatorDescriptor<T> Field(string field) => Assign(a => a.Field = field);
+		public GeoHashAggregationDescriptor<T> Field(string field) => Assign(a => a.Field = field);
 
-		public GeoHashAggregatorDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
+		public GeoHashAggregationDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
 
-		public GeoHashAggregatorDescriptor<T> Size(int size) => Assign(a => a.Size = size);
+		public GeoHashAggregationDescriptor<T> Size(int size) => Assign(a => a.Size = size);
 
-		public GeoHashAggregatorDescriptor<T> ShardSize(int shardSize) => Assign(a => a.ShardSize = shardSize);
+		public GeoHashAggregationDescriptor<T> ShardSize(int shardSize) => Assign(a => a.ShardSize = shardSize);
 
-		public GeoHashAggregatorDescriptor<T> GeoHashPrecision(GeoHashPrecision precision) =>
+		public GeoHashAggregationDescriptor<T> GeoHashPrecision(GeoHashPrecision precision) =>
 			Assign(a => a.Precision = precision);
-
 	}
 }

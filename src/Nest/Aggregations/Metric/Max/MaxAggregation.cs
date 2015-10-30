@@ -6,20 +6,18 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<MaxAggregator>))]
-	public interface IMaxAggregator : IMetricAggregator { }
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<MaxAggregation>))]
+	public interface IMaxAggregation : IMetricAggregation { }
 
-	public class MaxAggregator : MetricAggregator, IMaxAggregator { }
-
-	public class MaxAgg : MetricAgg, IMaxAggregator
+	public class MaxAggregation : MetricAggregation, IMaxAggregation
 	{
-		public MaxAgg(string name, FieldName field) : base(name, field) { }
+		public MaxAggregation(string name, FieldName field) : base(name, field) { }
 
 		internal override void WrapInContainer(AggregationContainer c) => c.Max = this;
 	}
 
-	public class MaxAggregatorDescriptor<T> 
-		: MetricAggregationBaseDescriptor<MaxAggregatorDescriptor<T>, IMaxAggregator, T>
-			, IMaxAggregator 
+	public class MaxAggregationDescriptor<T> 
+		: MetricAggregationDescriptorBase<MaxAggregationDescriptor<T>, IMaxAggregation, T>
+			, IMaxAggregation 
 		where T : class { }
 }

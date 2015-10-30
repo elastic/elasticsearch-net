@@ -7,35 +7,30 @@ using System.Text;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<GeoBoundsAggregator>))]
-	public interface IGeoBoundsAggregator : IMetricAggregator
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<GeoBoundsAggregation>))]
+	public interface IGeoBoundsAggregation : IMetricAggregation
 	{
 		[JsonProperty("wrap_longitude")]
 		bool? WrapLongitude { get; set; }
 	}
 
-	public class GeoBoundsAggregator : MetricAggregator, IGeoBoundsAggregator
-	{
-		public bool? WrapLongitude { get; set; }
-	}
-
-	public class GeoBoundsAgg : MetricAgg, IGeoBoundsAggregator
+	public class GeoBoundsAggregation : MetricAggregation, IGeoBoundsAggregation
 	{
 		public bool? WrapLongitude { get; set; }
 
-		public GeoBoundsAgg(string name, FieldName field) : base(name, field) { }
+		public GeoBoundsAggregation(string name, FieldName field) : base(name, field) { }
 
 		internal override void WrapInContainer(AggregationContainer c) => c.GeoBounds = this;
 	}
 
-	public class GeoBoundsAggregatorDescriptor<T> 
-		: MetricAggregationBaseDescriptor<GeoBoundsAggregatorDescriptor<T>, IGeoBoundsAggregator, T>
-			, IGeoBoundsAggregator
+	public class GeoBoundsAggregationDescriptor<T> 
+		: MetricAggregationDescriptorBase<GeoBoundsAggregationDescriptor<T>, IGeoBoundsAggregation, T>
+			, IGeoBoundsAggregation
 		where T : class
 	{
-		bool? IGeoBoundsAggregator.WrapLongitude { get; set; }
+		bool? IGeoBoundsAggregation.WrapLongitude { get; set; }
 
-		public GeoBoundsAggregatorDescriptor<T> WrapLongitude(bool wrapLongitude = true) =>
+		public GeoBoundsAggregationDescriptor<T> WrapLongitude(bool wrapLongitude = true) =>
 			Assign(a => a.WrapLongitude = wrapLongitude);
 
 	}

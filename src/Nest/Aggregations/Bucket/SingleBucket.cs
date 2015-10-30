@@ -1,9 +1,9 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 
 namespace Nest
 {
-	public class SingleBucket : BucketAggregationBase
+	public class SingleBucket : BucketBase
 	{
 		public SingleBucket() { }
 

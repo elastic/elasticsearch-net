@@ -65,7 +65,7 @@ namespace Tests.Aggregations.Bucket.Filters
 		protected override SearchRequest<Project> Initializer =>
 			new SearchRequest<Project>
 			{
-				Aggregations = new FiltersAgg("projects_by_state")
+				Aggregations = new FiltersAggregation("projects_by_state")
 				{
 					Filters = new NamedFiltersContainer
 					{
@@ -74,7 +74,7 @@ namespace Tests.Aggregations.Bucket.Filters
 							{ "very_active", Query<Project>.Term(p=>p.State, StateOfBeing.VeryActive) }
 					},
 					Aggregations =
-						new TermsAgg("project_tags") { Field = Field<Project>(p => p.CuratedTags.First().Name) }
+						new TermsAggregation("project_tags") { Field = Field<Project>(p => p.CuratedTags.First().Name) }
 				}
 			};
 
@@ -150,7 +150,7 @@ namespace Tests.Aggregations.Bucket.Filters
 		protected override SearchRequest<Project> Initializer =>
 			new SearchRequest<Project>
 			{
-				Aggregations = new FiltersAgg("projects_by_state")
+				Aggregations = new FiltersAggregation("projects_by_state")
 				{
 					Filters = new List<IQueryContainer>
 					{
@@ -159,7 +159,7 @@ namespace Tests.Aggregations.Bucket.Filters
 							 Query<Project>.Term(p=>p.State, StateOfBeing.VeryActive)
 					},
 					Aggregations =
-						new TermsAgg("project_tags") { Field = Field<Project>(p => p.CuratedTags.First().Name) }
+						new TermsAggregation("project_tags") { Field = Field<Project>(p => p.CuratedTags.First().Name) }
 				}
 			};
 

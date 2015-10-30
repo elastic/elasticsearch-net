@@ -7,34 +7,29 @@ using System.Text;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<PercentileRanksAggregator>))]
-	public interface IPercentileRanksAggregator : IMetricAggregator
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<PercentileRanksAggregation>))]
+	public interface IPercentileRanksAggregation : IMetricAggregation
 	{
 		[JsonProperty("values")]
 		IEnumerable<double> Values { get; set; }
 	}
 
-	public class PercentileRanksAggregator : MetricAggregator, IPercentileRanksAggregator
-	{
-		public IEnumerable<double> Values { get; set; }
-	}
-
-	public class PercentileRanksAgg : MetricAgg, IPercentileRanksAggregator
+	public class PercentileRanksAggregation : MetricAggregation, IPercentileRanksAggregation
 	{
 		public IEnumerable<double> Values { get; set; }
 
-		public PercentileRanksAgg(string name, FieldName field) : base(name, field) { }
+		public PercentileRanksAggregation(string name, FieldName field) : base(name, field) { }
 
 		internal override void WrapInContainer(AggregationContainer c) => c.PercentileRanks = this;
 	}
 
-	public class PercentileRanksAggregatorDescriptor<T> 
-		: MetricAggregationBaseDescriptor<PercentileRanksAggregatorDescriptor<T>, IPercentileRanksAggregator, T>, IPercentileRanksAggregator
+	public class PercentileRanksAggregationDescriptor<T> 
+		: MetricAggregationDescriptorBase<PercentileRanksAggregationDescriptor<T>, IPercentileRanksAggregation, T>, IPercentileRanksAggregation
 		where T : class
 	{
-		IEnumerable<double> IPercentileRanksAggregator.Values { get; set; }
+		IEnumerable<double> IPercentileRanksAggregation.Values { get; set; }
 
-		public PercentileRanksAggregatorDescriptor<T> Values(IEnumerable<double> values) =>
+		public PercentileRanksAggregationDescriptor<T> Values(IEnumerable<double> values) =>
 			Assign(a => a.Values = values.ToListOrNullIfEmpty());
 
 	}

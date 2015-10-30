@@ -2,7 +2,7 @@
 
 namespace Nest
 {
-	public class RangeItem : BucketAggregationBase, IBucketItem
+	public class RangeItem : BucketBase, IBucketItem
 	{
 		public RangeItem() { }
 		public RangeItem(IDictionary<string, IAggregation> aggregations) : base(aggregations) { }

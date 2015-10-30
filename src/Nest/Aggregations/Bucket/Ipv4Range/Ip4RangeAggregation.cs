@@ -7,8 +7,8 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<Ip4RangeAggregator>))]
-	public interface IIp4RangeAggregator : IBucketAggregator
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<Ip4RangeAggregation>))]
+	public interface IIp4RangeAggregation : IBucketAggregation
 	{
 		[JsonProperty("field")]
 		FieldName Field { get; set; }
@@ -17,37 +17,31 @@ namespace Nest
 		IEnumerable<Ip4ExpressionRange> Ranges { get; set; }
 	}
 
-	public class Ip4RangeAggregator : BucketAggregator, IIp4RangeAggregator
-	{
-		public FieldName Field { get; set; }
-		public IEnumerable<Ip4ExpressionRange> Ranges { get; set; }
-	}
-
-	public class Ip4RangeAgg : BucketAgg, IIp4RangeAggregator
+	public class Ip4RangeAggregation : BucketAggregation, IIp4RangeAggregation
 	{
 		public FieldName Field { get; set; }
 		public IEnumerable<Ip4ExpressionRange> Ranges { get; set; }
 
-		public Ip4RangeAgg(string name) : base(name) { }
+		public Ip4RangeAggregation(string name) : base(name) { }
 
 		internal override void WrapInContainer(AggregationContainer c) => c.IpRange = this;
 	}
 
-	public class Ip4RangeAggregatorDescriptor<T> : 
-		BucketAggregatorBaseDescriptor<Ip4RangeAggregatorDescriptor<T>,IIp4RangeAggregator, T>
-			, IIp4RangeAggregator 
+	public class Ip4RangeAggregationDescriptor<T> : 
+		BucketAggregationDescriptorBase<Ip4RangeAggregationDescriptor<T>,IIp4RangeAggregation, T>
+			, IIp4RangeAggregation 
 		where T : class
 	{
 
-		FieldName IIp4RangeAggregator.Field { get; set; }
+		FieldName IIp4RangeAggregation.Field { get; set; }
 
-		IEnumerable<Ip4ExpressionRange> IIp4RangeAggregator.Ranges { get; set; }
+		IEnumerable<Ip4ExpressionRange> IIp4RangeAggregation.Ranges { get; set; }
 
-		public Ip4RangeAggregatorDescriptor<T> Field(string field) => Assign(a => a.Field = field);
+		public Ip4RangeAggregationDescriptor<T> Field(string field) => Assign(a => a.Field = field);
 
-		public Ip4RangeAggregatorDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
+		public Ip4RangeAggregationDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
 
-		public Ip4RangeAggregatorDescriptor<T> Ranges(params Func<Ip4ExpressionRange, Ip4ExpressionRange>[] ranges) =>
+		public Ip4RangeAggregationDescriptor<T> Ranges(params Func<Ip4ExpressionRange, Ip4ExpressionRange>[] ranges) =>
 			Assign(a => a.Ranges = (from range in ranges let r = new Ip4ExpressionRange() select range(r)).ToListOrNullIfEmpty());
 
 	}

@@ -3,21 +3,19 @@
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<ExtendedStatsAggregator>))]
-	public interface IExtendedStatsAggregator : IMetricAggregator { }
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<ExtendedStatsAggregation>))]
+	public interface IExtendedStatsAggregation : IMetricAggregation { }
 
-	public class ExtendedStatsAggregator : MetricAggregator, IExtendedStatsAggregator { }
-
-	public class ExtendedStatsAgg: MetricAgg, IExtendedStatsAggregator
+	public class ExtendedStatsAggregation : MetricAggregation, IExtendedStatsAggregation
 	{
-		public ExtendedStatsAgg(string name, FieldName field) : base(name, field) { }
+		public ExtendedStatsAggregation(string name, FieldName field) : base(name, field) { }
 
 		internal override void WrapInContainer(AggregationContainer c) => c.ExtendedStats = this;
 	}
 
-	public class ExtendedStatsAggregatorDescriptor<T> 
-		: MetricAggregationBaseDescriptor<ExtendedStatsAggregatorDescriptor<T>, IExtendedStatsAggregator, T>
-			, IExtendedStatsAggregator 
+	public class ExtendedStatsAggregationDescriptor<T> 
+		: MetricAggregationDescriptorBase<ExtendedStatsAggregationDescriptor<T>, IExtendedStatsAggregation, T>
+			, IExtendedStatsAggregation 
 		where T : class { }
 
 }

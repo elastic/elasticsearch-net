@@ -7,8 +7,8 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<TermsAggregator>))]
-	public interface ITermsAggregator : IBucketAggregator
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<TermsAggregation>))]
+	public interface ITermsAggregation : IBucketAggregation
 	{
 		[JsonProperty("field")]
 		FieldName Field { get; set; }
@@ -44,22 +44,7 @@ namespace Nest
 		TermsAggregationCollectMode? CollectMode { get; set; }
 	}
 
-	public class TermsAggregator : BucketAggregator, ITermsAggregator
-	{
-		public FieldName Field { get; set; }
-		public string Script { get; set; }
-		public int? Size { get; set; }
-		public int? ShardSize { get; set; }
-		public int? MinimumDocumentCount { get; set; }
-		public TermsAggregationExecutionHint? ExecutionHint { get; set; }
-		public IDictionary<string, string> Order { get; set; }
-		public TermsIncludeExclude Include { get; set; }
-		public TermsIncludeExclude Exclude { get; set; }
-		public IDictionary<string, object> Params { get; set; }
-		public TermsAggregationCollectMode? CollectMode { get; set; }
-	}
-
-	public class TermsAgg : BucketAgg, ITermsAggregator
+	public class TermsAggregation : BucketAggregation, ITermsAggregation
 	{
 		public FieldName Field { get; set; }
 		public string Script { get; set; }
@@ -73,78 +58,77 @@ namespace Nest
 		public IDictionary<string, object> Params { get; set; }
 		public TermsAggregationCollectMode? CollectMode { get; set; }
 
-		public TermsAgg(string name) : base(name) { }
+		public TermsAggregation(string name) : base(name) { }
 
 		internal override void WrapInContainer(AggregationContainer c) => c.Terms = this;
 	}
 
-
-	public class TermsAggregatorDescriptor<T> 
-		: BucketAggregatorBaseDescriptor<TermsAggregatorDescriptor<T>, ITermsAggregator, T>
-			, ITermsAggregator 
+	public class TermsAggregationDescriptor<T> 
+		: BucketAggregationDescriptorBase<TermsAggregationDescriptor<T>, ITermsAggregation, T>
+			, ITermsAggregation 
 		where T : class
 	{
-		FieldName ITermsAggregator.Field { get; set; }
+		FieldName ITermsAggregation.Field { get; set; }
 		
-		string ITermsAggregator.Script { get; set; }
+		string ITermsAggregation.Script { get; set; }
 		
-		int? ITermsAggregator.Size { get; set; }
+		int? ITermsAggregation.Size { get; set; }
 
-		int? ITermsAggregator.ShardSize { get; set; }
+		int? ITermsAggregation.ShardSize { get; set; }
 
-		int? ITermsAggregator.MinimumDocumentCount { get; set; }
+		int? ITermsAggregation.MinimumDocumentCount { get; set; }
 
-		TermsAggregationExecutionHint? ITermsAggregator.ExecutionHint { get; set; }
+		TermsAggregationExecutionHint? ITermsAggregation.ExecutionHint { get; set; }
 
-		IDictionary<string, string> ITermsAggregator.Order { get; set; }
+		IDictionary<string, string> ITermsAggregation.Order { get; set; }
 
-		TermsIncludeExclude ITermsAggregator.Include { get; set; }
+		TermsIncludeExclude ITermsAggregation.Include { get; set; }
 
-		TermsIncludeExclude ITermsAggregator.Exclude { get; set; }
+		TermsIncludeExclude ITermsAggregation.Exclude { get; set; }
 
-		IDictionary<string, object> ITermsAggregator.Params { get; set; }
+		IDictionary<string, object> ITermsAggregation.Params { get; set; }
 
-		TermsAggregationCollectMode? ITermsAggregator.CollectMode { get; set; }
+		TermsAggregationCollectMode? ITermsAggregation.CollectMode { get; set; }
 
-		public TermsAggregatorDescriptor<T> Field(string field) => Assign(a => a.Field = field);
+		public TermsAggregationDescriptor<T> Field(string field) => Assign(a => a.Field = field);
 
-		public TermsAggregatorDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
+		public TermsAggregationDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
 
 
-		public TermsAggregatorDescriptor<T> Script(string script) => Assign(a => a.Script = script);
+		public TermsAggregationDescriptor<T> Script(string script) => Assign(a => a.Script = script);
 
-		public TermsAggregatorDescriptor<T> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramSelector) =>
+		public TermsAggregationDescriptor<T> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramSelector) =>
 			Assign(a=>a.Params = paramSelector?.Invoke(new FluentDictionary<string, object>()));
 
-		public TermsAggregatorDescriptor<T> Size(int size) => Assign(a => a.Size = size);
+		public TermsAggregationDescriptor<T> Size(int size) => Assign(a => a.Size = size);
 
-		public TermsAggregatorDescriptor<T> ShardSize(int shardSize) => Assign(a => a.ShardSize = shardSize);
+		public TermsAggregationDescriptor<T> ShardSize(int shardSize) => Assign(a => a.ShardSize = shardSize);
 
-		public TermsAggregatorDescriptor<T> MinimumDocumentCount(int minimumDocumentCount) =>
+		public TermsAggregationDescriptor<T> MinimumDocumentCount(int minimumDocumentCount) =>
 			Assign(a => a.MinimumDocumentCount = minimumDocumentCount);
 
-		public TermsAggregatorDescriptor<T> ExecutionHint(TermsAggregationExecutionHint executionHint) =>
+		public TermsAggregationDescriptor<T> ExecutionHint(TermsAggregationExecutionHint executionHint) =>
 			Assign(a => a.ExecutionHint = executionHint);
 
-		public TermsAggregatorDescriptor<T> OrderAscending(string key) =>
+		public TermsAggregationDescriptor<T> OrderAscending(string key) =>
 			Assign(a => a.Order = new Dictionary<string, string> { { key, "asc" } });
 
-		public TermsAggregatorDescriptor<T> OrderDescending(string key) =>
+		public TermsAggregationDescriptor<T> OrderDescending(string key) =>
 			Assign(a => a.Order = new Dictionary<string, string> { { key, "desc" } });
 
-		public TermsAggregatorDescriptor<T> Include(string includePattern, string regexFlags = null) =>
+		public TermsAggregationDescriptor<T> Include(string includePattern, string regexFlags = null) =>
 			Assign(a => a.Include = new TermsIncludeExclude() { Pattern = includePattern, Flags = regexFlags });
 
-		public TermsAggregatorDescriptor<T> Include(IEnumerable<string> values) =>
+		public TermsAggregationDescriptor<T> Include(IEnumerable<string> values) =>
 			Assign(a => a.Include = new TermsIncludeExclude { Values = values });
 
-		public TermsAggregatorDescriptor<T> Exclude(string excludePattern, string regexFlags = null) =>
+		public TermsAggregationDescriptor<T> Exclude(string excludePattern, string regexFlags = null) =>
 			Assign(a => a.Exclude = new TermsIncludeExclude() { Pattern = excludePattern, Flags = regexFlags });
 
-		public TermsAggregatorDescriptor<T> Exclude(IEnumerable<string> values) =>
+		public TermsAggregationDescriptor<T> Exclude(IEnumerable<string> values) =>
 			Assign(a => a.Exclude = new TermsIncludeExclude { Values = values });
 
-		public TermsAggregatorDescriptor<T> CollectMode(TermsAggregationCollectMode collectMode) =>
+		public TermsAggregationDescriptor<T> CollectMode(TermsAggregationCollectMode collectMode) =>
 			Assign(a => a.CollectMode = collectMode);
 
 	}

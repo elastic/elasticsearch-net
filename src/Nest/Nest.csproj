@@ -68,7 +68,10 @@
     <Reference Include="System.ServiceModel" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Aggregations\Bucket\BucketAggregator.cs" />
+    <Compile Include="Aggregations\Bucket\DocCountBucket.cs" />
+    <Compile Include="Aggregations\Bucket\SingleBucket.cs" />
+    <Compile Include="Aggregations\Bucket\KeyedBucket.cs" />
+    <Compile Include="Aggregations\Bucket\BucketAggregation.cs" />
     <Compile Include="Aggregations\Bucket\Filters\NamedFiltersContainerBase.cs" />
     <Compile Include="Aggregations\Bucket\Histogram\ExtendedBounds.cs" />
     <Compile Include="Aggregations\Bucket\Histogram\HistogramOrder.cs" />
@@ -76,7 +79,8 @@
     <Compile Include="Aggregations\Bucket\SignificantTerms\Heuristics\GoogleNormalizedDistanceHeuristic.cs" />
     <Compile Include="Aggregations\Bucket\SignificantTerms\Heuristics\MutualInformationHeuristic.cs" />
     <Compile Include="Aggregations\Bucket\SignificantTerms\Heuristics\PercentageScoreHeuristic.cs" />
-    <Compile Include="Aggregations\IAggregator.cs" />
+    <Compile Include="Aggregations\Aggregation.cs" />
+    <Compile Include="Aggregations\Metric\Metric.cs" />
     <Compile Include="Analysis\Analyzers\Analyzers.cs" />
     <Compile Include="Analysis\Analyzers\AnalyzerJsonConverter.cs" />
     <Compile Include="Analysis\CharFilters\CharFilters.cs" />
@@ -263,21 +267,14 @@
     <Compile Include="QueryDsl\Specialized\MoreLikeThis\MoreLikeThisQueryDocumentsDescriptor.cs" />
     <Compile Include="Aggregations\AggregationsHelper.cs" />
     <Compile Include="Aggregations\Bucket\SignificantTerms\Heuristics\ScriptedHeuristic.cs" />
-    <Compile Include="Aggregations\Bucket\Buckets\Bucket.cs" />
-    <Compile Include="Aggregations\Bucket\BucketAggregation.cs" />
+    <Compile Include="Aggregations\Bucket\Bucket.cs" />
     <Compile Include="Aggregations\Bucket\Filters\FiltersBucket.cs" />
     <Compile Include="Aggregations\Metric\Scripted\ScriptedValueMetric.cs" />
     <Compile Include="Aggregations\Metric\TopHits\TopHitsMetric.cs" />
     <Compile Include="Aggregations\Metric\GeoBounds\GeoBoundsMetric.cs" />
     <Compile Include="Aggregations\Bucket\Histogram\HistogramItem.cs" />
     <Compile Include="Aggregations\Metric\ExtendedStats\ExtendedStatsMetric.cs" />
-    <Compile Include="Aggregations\IAggregation.cs" />
-    <Compile Include="Aggregations\Bucket\Buckets\IBucketItem.cs" />
-    <Compile Include="Aggregations\Bucket\Buckets\IBucketWithCountAggregation.cs" />
-    <Compile Include="Aggregations\Metric\MetricAggregation.cs" />
     <Compile Include="Aggregations\Bucket\SignificantTerms\SignificantTermItem.cs" />
-    <Compile Include="Aggregations\Bucket\Buckets\KeyItem.cs" />
-    <Compile Include="Aggregations\Bucket\Buckets\SingleBucket.cs" />
     <Compile Include="Aggregations\Bucket\Range\RangeItem.cs" />
     <Compile Include="Aggregations\Metric\Percentiles\PercentilesMetric.cs" />
     <Compile Include="Aggregations\Metric\Stats\StatsMetric.cs" />
@@ -641,7 +638,7 @@
     <Compile Include="CommonOptions\Geo\GeoDistance.cs" />
     <Compile Include="CommonAbstractions\LowLevelDispatch\IHighLevelToLowLevelDispatcher.cs" />
     <Compile Include="CommonAbstractions\Extensions\ExceptionExtensions.cs" />
-    <Compile Include="Aggregations\Bucket\Filter\FilterAggregatorJsonConverter.cs" />
+    <Compile Include="Aggregations\Bucket\Filter\FilterAggregationJsonConverter.cs" />
     <Compile Include="Cluster\ClusterReroute\Commands\ClusterRerouteCommandJsonConverter.cs" />
     <Compile Include="Cat\CatFielddata\CatFielddataRecordJsonConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\CompositeJsonConverter.cs" />
@@ -690,7 +687,7 @@
     <Compile Include="Aggregations\Metric\Percentiles\PercentilesAggregation.cs" />
     <Compile Include="Aggregations\Bucket\Ipv4Range\Ip4RangeAggregation.cs" />
     <Compile Include="Aggregations\Metric\ExtendedStats\ExtendedStatsAggregation.cs" />
-    <Compile Include="Aggregations\Metric\MetricAggregator.cs" />
+    <Compile Include="Aggregations\Metric\MetricAggregation.cs" />
     <Compile Include="Aggregations\Bucket\Nested\NestedAggregation.cs" />
     <Compile Include="Aggregations\Bucket\DateRange\DateRangeAggregation.cs" />
     <Compile Include="Aggregations\Bucket\GeoDistance\GeoDistanceAggregation.cs" />

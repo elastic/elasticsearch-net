@@ -5,20 +5,18 @@ namespace Nest
 {
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<ValueCountAggregator>))]
-	public interface IValueCountAggregator : IMetricAggregator { }
-	
-	public class ValueCountAggregator : MetricAggregator, IValueCountAggregator { }
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<ValueCountAggregation>))]
+	public interface IValueCountAggregation : IMetricAggregation { }
 
-	public class ValueCountAgg : MetricAgg, IValueCountAggregator
+	public class ValueCountAggregation : MetricAggregation, IValueCountAggregation
 	{
-		public ValueCountAgg(string name, FieldName field) : base(name, field) { }
+		public ValueCountAggregation(string name, FieldName field) : base(name, field) { }
 
 		internal override void WrapInContainer(AggregationContainer c) => c.ValueCount = this;
 	}
 
-	public class ValueCountAggregatorDescriptor<T> 
-		: MetricAggregationBaseDescriptor<ValueCountAggregatorDescriptor<T>, IValueCountAggregator, T>
-			, IValueCountAggregator 
+	public class ValueCountAggregationDescriptor<T> 
+		: MetricAggregationDescriptorBase<ValueCountAggregationDescriptor<T>, IValueCountAggregation, T>
+			, IValueCountAggregation 
 		where T : class { }
 }

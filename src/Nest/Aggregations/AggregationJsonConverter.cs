@@ -151,7 +151,7 @@ namespace Nest
 				)
 			{
 				var b = this.GetBucketAggregation(reader, serializer) as Bucket;
-				return new BucketWithDocCount()
+				return new DocCountBucket()
 				{
 					DocCount = docCount,
 					Items = b.Items
@@ -282,7 +282,7 @@ namespace Nest
 			if (property == "from" || property == "to")
 				return GetRangeAggregation(reader, serializer, key);
 
-			var keyItem = new KeyItem();
+			var keyItem = new KeyedBucket();
 			keyItem.Key = key;
 
 			if (property == "key_as_string")
@@ -308,7 +308,7 @@ namespace Nest
 
 		}
 
-		private IAggregation GetSignificantTermItem(JsonReader reader, JsonSerializer serializer, KeyItem keyItem)
+		private IAggregation GetSignificantTermItem(JsonReader reader, JsonSerializer serializer, KeyedBucket keyItem)
 		{
 			reader.Read();
 			var score = reader.Value as double?;
