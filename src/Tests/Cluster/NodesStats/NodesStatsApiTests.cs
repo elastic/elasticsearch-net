@@ -27,69 +27,78 @@ namespace Tests.Cluster.NodesStats
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override string UrlPath => "/_nodes/stats";
 
-		[I] public async Task Response() => await this.AssertOnAllResponses(r =>
+		protected override void ExpectResponse(INodesStatsResponse response)
 		{
-			r.ClusterName.Should().NotBeNullOrWhiteSpace();
-			r.Nodes.Should().NotBeEmpty().And.HaveCount(1);
-			var node = r.Nodes.First();
-			node.Key.Should().NotBeNullOrWhiteSpace();
-		});
+			response.ClusterName.Should().NotBeNullOrWhiteSpace();
+			response.Nodes.Should().NotBeEmpty().And.HaveCount(1);
+			var kv = response.Nodes.First();
+			kv.Key.Should().NotBeNullOrWhiteSpace();
+			var node = kv.Value;
+			Assert(node);
+			Assert(node.Indices);
+			Assert(node.OperatingSystem);
+			Assert(node.Process);
+			Assert(node.Transport);
+			Assert(node.Script);
+			Assert(node.Http);
+			Assert(node.Breakers);
+			Assert(node.FileSystem);
+			Assert(node.ThreadPool);
+			Assert(node.Jvm);
+		}
 
-		[I] public async Task NodeResponse() => await this.AssertOnAllResponses(r =>
+		protected void Assert(NodeStats node)
 		{
-			var node = r.Nodes.First().Value;
 			node.Name.Should().NotBeNullOrWhiteSpace();
 			node.Timestamp.Should().BeGreaterThan(0);
 			node.TransportAddress.Should().NotBeNullOrWhiteSpace();
 			node.Host.Should().NotBeNullOrWhiteSpace();
 			node.Ip.Should().NotBeEmpty();
-		});
+		}
 
-		[I] public async Task NodeIndicesResponse() => await this.AssertOnAllResponses(r =>
+		protected void Assert(IndexStats index)
 		{
-			var i = r.Nodes.First().Value.Indices;
-			i.Should().NotBeNull();
+			index.Should().NotBeNull();
 
-			i.Documents.Should().NotBeNull();
-			i.Documents.Count.Should().BeGreaterThan(0);
+			index.Documents.Should().NotBeNull();
+			index.Documents.Count.Should().BeGreaterThan(0);
 
-			i.Store.Should().NotBeNull();
-			i.Store.SizeInBytes.Should().BeGreaterThan(0);
+			index.Store.Should().NotBeNull();
+			index.Store.SizeInBytes.Should().BeGreaterThan(0);
 
-			i.Completion.Should().NotBeNull();
-			i.Fielddata.Should().NotBeNull();
+			index.Completion.Should().NotBeNull();
+			index.Fielddata.Should().NotBeNull();
 
-			i.Flush.Should().NotBeNull();
-			i.Flush.Total.Should().BeGreaterThan(0);
-			i.Flush.TotalTimeInMilliseconds.Should().BeGreaterThan(0);
+			index.Flush.Should().NotBeNull();
+			index.Flush.Total.Should().BeGreaterThan(0);
+			index.Flush.TotalTimeInMilliseconds.Should().BeGreaterThan(0);
 
-			i.Get.Should().NotBeNull();
-			i.Indexing.Should().NotBeNull();
-			i.Merges.Should().NotBeNull();
-			i.Percolate.Should().NotBeNull();
-			i.QueryCache.Should().NotBeNull();
-			i.Recovery.Should().NotBeNull();
+			index.Get.Should().NotBeNull();
+			index.Indexing.Should().NotBeNull();
+			index.Merges.Should().NotBeNull();
+			index.Percolate.Should().NotBeNull();
+			index.QueryCache.Should().NotBeNull();
+			index.Recovery.Should().NotBeNull();
 
-			i.Segments.Should().NotBeNull();
-			i.Segments.Count.Should().BeGreaterThan(0);
-			i.Segments.DocValuesMemoryInBytes.Should().BeGreaterThan(0);
-			i.Segments.IndexWriterMaxMemoryInBytes.Should().BeGreaterThan(0);
-			i.Segments.MemoryInBytes.Should().BeGreaterThan(0);
-			i.Segments.NormsMemoryInBytes.Should().BeGreaterThan(0);
-			i.Segments.StoredFieldsMemoryInBytes.Should().BeGreaterThan(0);
-			i.Segments.TermsMemoryInBytes.Should().BeGreaterThan(0);
+			index.Segments.Should().NotBeNull();
+			index.Segments.Count.Should().BeGreaterThan(0);
+			index.Segments.DocValuesMemoryInBytes.Should().BeGreaterThan(0);
+			index.Segments.IndexWriterMaxMemoryInBytes.Should().BeGreaterThan(0);
+			index.Segments.MemoryInBytes.Should().BeGreaterThan(0);
+			index.Segments.NormsMemoryInBytes.Should().BeGreaterThan(0);
+			index.Segments.StoredFieldsMemoryInBytes.Should().BeGreaterThan(0);
+			index.Segments.TermsMemoryInBytes.Should().BeGreaterThan(0);
 
-			i.Store.Should().NotBeNull();
-			i.Store.SizeInBytes.Should().BeGreaterThan(0);
+			index.Store.Should().NotBeNull();
+			index.Store.SizeInBytes.Should().BeGreaterThan(0);
 
-			i.Suggest.Should().NotBeNull();
-			i.Translog.Should().NotBeNull();
-			i.Warmer.Should().NotBeNull();
-		});
+			index.Suggest.Should().NotBeNull();
+			index.Translog.Should().NotBeNull();
+			index.Warmer.Should().NotBeNull();
+		}
 
-		[I] public async Task NodeOsResponse() => await this.AssertOnAllResponses(r =>
+		protected void Assert(OperatingSystemStats os)
 		{
-			var os = r.Nodes.First().Value.OperatingSystem;
 			os.Should().NotBeNull();
 
 			os.Timestamp.Should().BeGreaterThan(0);
@@ -106,58 +115,51 @@ namespace Tests.Cluster.NodesStats
 			os.Swap.TotalInBytes.Should().BeGreaterThan(0);
 			os.Swap.FreeInBytes.Should().BeGreaterThan(0);
 			os.Swap.UsedInBytes.Should().BeGreaterThan(0);
-		});
+		}
 
-		[I] public async Task NodeProcessResponse() => await this.AssertOnAllResponses(r =>
+		protected void Assert(ProcessStats process)	
 		{
-			var p = r.Nodes.First().Value.Process;
-			p.Should().NotBeNull();
+			process.Should().NotBeNull();
 
-			p.Timestamp.Should().BeGreaterThan(0);
-			p.OpenFileDescriptors.Should().NotBe(0);
+			process.Timestamp.Should().BeGreaterThan(0);
+			process.OpenFileDescriptors.Should().NotBe(0);
 
-			p.CPU.Should().NotBeNull();
-			p.CPU.TotalInMilliseconds.Should().BeGreaterThan(0);
-			p.Memory.Should().NotBeNull();
-			p.Memory.TotalVirtualInBytes.Should().BeGreaterThan(0);
-		});
+			process.CPU.Should().NotBeNull();
+			process.CPU.TotalInMilliseconds.Should().BeGreaterThan(0);
+			process.Memory.Should().NotBeNull();
+			process.Memory.TotalVirtualInBytes.Should().BeGreaterThan(0);
+		}
 
-		[I] public async Task NodeScriptResponse() => await this.AssertOnAllResponses(r =>
+		protected void Assert(ScriptStats script)	
 		{
-			var script = r.Nodes.First().Value.Script;
 			script.Should().NotBeNull();
-		});
+		}
 
-		[I] public async Task NodeTransportResponse() => await this.AssertOnAllResponses(r =>
+		protected void Assert(TransportStats transport)
 		{
-			var transport = r.Nodes.First().Value.Transport;
 			transport.Should().NotBeNull();
 			transport.RXCount.Should().BeGreaterThan(0);
 			transport.RXSizeInBytes.Should().BeGreaterThan(0);
 			transport.TXCount.Should().BeGreaterThan(0);
 			transport.TXSizeInBytes.Should().BeGreaterThan(0);
-		});
+		}
 
-		[I] public async Task NodeHttpResponse() => await this.AssertOnAllResponses(r =>
+		protected void Assert(HttpStats http)
 		{
-			var http = r.Nodes.First().Value.Http;
 			http.Should().NotBeNull();
 			http.TotalOpened.Should().BeGreaterThan(0);
-		});
+		}
 
-		[I] public async Task NodeBreakersResponse() => await this.AssertOnAllResponses(r =>
+		protected void Assert(Dictionary<string, BreakerStats> breakers)
 		{
-			var breakers = r.Nodes.First().Value.Breakers;
 			breakers.Should().NotBeEmpty().And.ContainKey("request");
-
 			var requestBreaker = breakers["request"];
 			requestBreaker.LimitSizeInBytes.Should().BeGreaterThan(0);
 			requestBreaker.Overhead.Should().BeGreaterThan(0);
-		});
+		}
 
-		[I] public async Task NodeFileSystemResponse() => await this.AssertOnAllResponses(r =>
+		protected void Assert(FileSystemStats fileSystem)
 		{
-			var fileSystem = r.Nodes.First().Value.FileSystem;
 			fileSystem.Should().NotBeNull();
 			fileSystem.Timestamp.Should().BeGreaterThan(0);
 			fileSystem.Total.Should().NotBeNull();
@@ -173,19 +175,17 @@ namespace Tests.Cluster.NodesStats
 			path.Mount.Should().NotBeNullOrWhiteSpace();
 			path.Path.Should().NotBeNullOrWhiteSpace();
 			path.Type.Should().NotBeNullOrWhiteSpace();
-		});
+		}
 
-		[I] public async Task NodeThreadPoolResponse() => await this.AssertOnAllResponses(r =>
+		protected void Assert(Dictionary<string, ThreadCountStats> threadPools)
 		{
-			var threadPools = r.Nodes.First().Value.ThreadPool;
 			threadPools.Should().NotBeEmpty().And.ContainKey("management");
 			var threadPool = threadPools["management"];
 			threadPool.Completed.Should().BeGreaterThan(0);
-		});
+		}
 
-		[I] public async Task NodeJvmResponse() => await this.AssertOnAllResponses(r =>
-		{
-			var jvm = r.Nodes.First().Value.Jvm;
+		protected void Assert(NodeJvmStats jvm)
+		{	
 			jvm.Should().NotBeNull();
 
 			jvm.Timestamp.Should().BeGreaterThan(0);
@@ -225,9 +225,6 @@ namespace Tests.Cluster.NodesStats
 			jvm.Threads.Should().NotBeNull();
 			jvm.Threads.Count.Should().BeGreaterThan(0);
 			jvm.Threads.PeakCount.Should().BeGreaterThan(0);
-
-		});
-
+		}
 	}
-
 }

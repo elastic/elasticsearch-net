@@ -35,51 +35,25 @@ namespace Tests.Cluster.ClusterState
 			response.MasterNode.Should().NotBeNullOrWhiteSpace();
 			response.StateUUID.Should().NotBeNullOrWhiteSpace();
 			response.Version.Should().BeGreaterThan(0);
-			AssertNodes(response);
-			AssertMetadata(response);
-			AssertRoutingTable(response);
-			AssertRoutingNodes(response);
+			Assert(response.Nodes, response.MasterNode);
+			Assert(response.Metadata);
+			Assert(response.RoutingTable);
+			Assert(response.RoutingNodes, response.MasterNode);
 		}
 
-		private void AssertNodes(IClusterStateResponse response)
+		private void Assert(Dictionary<string, NodeState> nodes, string master)
 		{
-			var nodes = response.Nodes;
-			nodes.Should().NotBeEmpty().And.ContainKey(response.MasterNode);
-
-			var node = nodes[response.MasterNode];
-
+			nodes.Should().NotBeEmpty().And.ContainKey(master);
+			var node = nodes[master];
 			node.Name.Should().NotBeNullOrWhiteSpace();
 			node.TransportAddress.Should().NotBeNullOrWhiteSpace();
 		}
 
-		private void AssertMetadata(IClusterStateResponse r)
+		private void Assert(MetadataState meta)
 		{
-			var meta = r.Metadata;
 			meta.ClusterUUID.Should().NotBeNullOrWhiteSpace();
 			meta.Templates.Should().NotBeEmpty().And.ContainKey("raw_fields");
 
-			AssertMetadataTemplate(meta);
-			AssertMetadataIndices(meta);
-		}
-
-		private void AssertMetadataIndices(MetadataState meta)
-		{
-			var i = this.Client.Infer.IndexName(Index<Project>());
-			var t = this.Client.Infer.TypeName(Type<CommitActivity>());
-
-			meta.Indices.Should().NotBeEmpty().And.ContainKey(i);
-
-			var index = meta.Indices[i];
-			index.Aliases.Should().NotBeEmpty().And.Contain("projects-alias");
-			index.Mappings.Should().NotBeEmpty().And.ContainKey(t);
-
-			var commitsMapping = index.Mappings[t];
-			commitsMapping.ParentField.Should().NotBeNull();
-			commitsMapping.ParentField.Type.Should().Be(i);
-		}
-
-		private void AssertMetadataTemplate(MetadataState meta)
-		{
 			var rawFieldsTemplate = meta.Templates["raw_fields"];
 			rawFieldsTemplate.Template.Should().NotBeNullOrWhiteSpace();
 			rawFieldsTemplate.Settings.Should().NotBeNull();
@@ -98,15 +72,27 @@ namespace Tests.Cluster.ClusterState
 			var rawField = rawFields.Mapping.Fields["raw"] as IStringProperty;
 			rawField.Should().NotBeNull();
 			rawField.Index.Should().Be(FieldIndexOption.NotAnalyzed);
+
+			var i = this.Client.Infer.IndexName(Index<Project>());
+			var t = this.Client.Infer.TypeName(Type<CommitActivity>());
+
+			meta.Indices.Should().NotBeEmpty().And.ContainKey(i);
+
+			var index = meta.Indices[i];
+			index.Aliases.Should().NotBeEmpty().And.Contain("projects-alias");
+			index.Mappings.Should().NotBeEmpty().And.ContainKey(t);
+
+			var commitsMapping = index.Mappings[t];
+			commitsMapping.ParentField.Should().NotBeNull();
+			commitsMapping.ParentField.Type.Should().Be(i);
 		}
 
-		protected void AssertRoutingTable(IClusterStateResponse response)
+		protected void Assert(RoutingTableState routingTable)
 		{
-			var table = response.RoutingTable;
-			table.Should().NotBeNull();
+			routingTable.Should().NotBeNull();
 
-			table.Indices.Should().NotBeEmpty().And.ContainKey("project");
-			var indices = table.Indices["project"];
+			routingTable.Indices.Should().NotBeEmpty().And.ContainKey("project");
+			var indices = routingTable.Indices["project"];
 
 			indices.Shards.Should().NotBeEmpty();
 			var shards = indices.Shards.First().Value;
@@ -120,13 +106,12 @@ namespace Tests.Cluster.ClusterState
 			shard.Version.Should().BeGreaterThan(0);
 		}
 
-		protected void AssertRoutingNodes(IClusterStateResponse response)
+		protected void Assert(RoutingNodesState routingNodes, string master)
 		{
-			var routing = response.RoutingNodes;
-			routing.Should().NotBeNull();
+			routingNodes.Should().NotBeNull();
 
-			routing.Nodes.Should().NotBeEmpty().And.ContainKey(response.MasterNode);
-			var nodes = routing.Nodes[response.MasterNode];
+			routingNodes.Nodes.Should().NotBeEmpty().And.ContainKey(master);
+			var nodes = routingNodes.Nodes[master];
 
 			nodes.Should().NotBeEmpty();
 			var node = nodes.First();
@@ -138,5 +123,4 @@ namespace Tests.Cluster.ClusterState
 			node.Version.Should().BeGreaterThan(0);
 		}
 	}
-
 }

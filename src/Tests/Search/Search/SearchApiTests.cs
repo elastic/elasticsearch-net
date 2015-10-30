@@ -60,6 +60,14 @@ namespace Tests.Search.Search
 			}
 		};
 
+		protected override void ExpectResponse(ISearchResponse<Project> response)
+		{
+			response.Hits.Count().Should().BeGreaterThan(0);
+			response.Aggregations.Count.Should().BeGreaterThan(0);
+			var startDates = response.Aggs.Terms("startDates");
+			startDates.Should().NotBeNull();
+		}
+
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
 			.From(10)
 			.Size(20)
@@ -90,14 +98,5 @@ namespace Tests.Search.Search
 				Value = "Stable"
 			})
 		};
-
-		[I] public async Task HasHits() => await this.AssertOnAllResponses(r => r.Hits.Count().Should().BeGreaterThan(0));
-
-		[I] public async Task HasAggregations() => await this.AssertOnAllResponses(r =>
-		{
-			r.Aggregations.Count.Should().BeGreaterThan(0);
-			var startDates = r.Aggs.Terms("startDates");
-			startDates.Should().NotBeNull();
-		});
 	}
 }

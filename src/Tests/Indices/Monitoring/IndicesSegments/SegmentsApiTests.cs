@@ -30,9 +30,5 @@ namespace Tests.Indices.Monitoring.IndicesSegments
 		protected override Func<SegmentsDescriptor, ISegmentsRequest> Fluent => d => d;
 
 		protected override SegmentsRequest Initializer => new SegmentsRequest(Static.AllIndices);
-
-		[I] public async Task Response() => await this.AssertOnAllResponses(r =>
-		{
-		});
 	}
 }

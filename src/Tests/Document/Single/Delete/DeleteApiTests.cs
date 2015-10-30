@@ -31,9 +31,5 @@ namespace Tests.Document.Single.Delete
 
 		protected override Func<DeleteDescriptor<Project>, IDeleteRequest> Fluent => null;
 		protected override DeleteRequest<Project> Initializer => new DeleteRequest<Project>(Project.Instance);
-
-		[I] public async Task Response() => await this.AssertOnAllResponses(r =>
-		{
-		});
 	}
 }

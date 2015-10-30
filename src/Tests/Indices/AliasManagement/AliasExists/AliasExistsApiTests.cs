@@ -32,9 +32,5 @@ namespace Tests.Indices.AliasManagement.AliasExists
 			.Name("alias, x,y");
 
 		protected override AliasExistsRequest Initializer => new AliasExistsRequest(Static.Names("alias, x","y"));
-
-		[I] public async Task Response() => await this.AssertOnAllResponses(r =>
-		{
-		});
 	}
 }

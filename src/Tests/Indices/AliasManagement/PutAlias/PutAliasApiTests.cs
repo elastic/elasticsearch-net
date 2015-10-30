@@ -31,9 +31,5 @@ namespace Tests.Indices.AliasManagement.PutAlias
 
 		protected override Func<PutAliasDescriptor, IPutAliasRequest> Fluent => null;
 		protected override PutAliasRequest Initializer => new PutAliasRequest(Static.AllIndices, CallIsolatedValue);
-
-		[I] public async Task Response() => await this.AssertOnAllResponses(r =>
-		{
-		});
 	}
 }

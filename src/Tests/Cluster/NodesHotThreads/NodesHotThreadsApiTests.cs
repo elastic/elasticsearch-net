@@ -27,15 +27,14 @@ namespace Tests.Cluster.NodesHotThreads
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override string UrlPath => "/_cluster/nodes/hotthreads";
 
-		[I] public async Task Response() => await this.AssertOnAllResponses(r =>
+		protected override void ExpectResponse(INodesHotThreadsResponse response)
 		{
-			r.HotThreads.Should().NotBeEmpty();
-			var t = r.HotThreads.First();
+			response.HotThreads.Should().NotBeEmpty();
+			var t = response.HotThreads.First();
 			t.NodeId.Should().NotBeNullOrWhiteSpace();
 			t.NodeName.Should().NotBeNullOrWhiteSpace();
 			t.Hosts.Should().NotBeEmpty();
-		});
-
+		}
 	}
 
 }

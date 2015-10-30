@@ -40,9 +40,5 @@ namespace Tests.Indices.IndexSettings.UpdateIndicesSettings
 		{
 			BlocksWrite = false
 		};
-
-		[I] public async Task Response() => await this.AssertOnAllResponses(r =>
-		{
-		});
 	}
 }

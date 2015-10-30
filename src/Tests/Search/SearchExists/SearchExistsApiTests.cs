@@ -81,7 +81,12 @@ namespace Tests.Search.SearchExists
 				}
 			}
 		};
-		
+
+		protected override void ExpectResponse(IExistsResponse response)
+		{
+			response.Exists.Should().BeFalse();
+		}
+
 		protected override Func<SearchExistsDescriptor<Project>, ISearchExistsRequest> Fluent => s => s
 			.Query(q => q
 				.Match(m => m
@@ -98,7 +103,5 @@ namespace Tests.Search.SearchExists
 				Query = _query
 			})
 		};
-
-		[I] public async Task ExistsIsFalse() => await this.AssertOnAllResponses(r => r.Exists.Should().BeFalse());
 	}
 }

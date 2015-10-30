@@ -50,9 +50,5 @@ namespace Tests.Indices.AliasManagement.Alias
 				new AliasRemoveAction {Remove = new AliasRemoveOperation {Alias = "alias", Index = Static.Index(CallIsolatedValue) }},
 			}
 		};
-
-		[I] public async Task Response() => await this.AssertOnAllResponses(r =>
-		{
-		});
 	}
 }

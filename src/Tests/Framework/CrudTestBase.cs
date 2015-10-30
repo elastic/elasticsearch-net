@@ -148,19 +148,19 @@ namespace Tests.Framework
 		protected virtual void ExpectAfterCreate(TReadResponse response) { }
 		protected virtual void ExpectAfterUpdate(TReadResponse response) { }
 
-		[I] protected async Task CreateCallIsValid() => await this.AssertOnCreate(r => r.IsValid.Should().Be(true));
-		[I] protected async Task GetAfterCreateIsValid() => await this.AssertOnGetAfterCreate(r => {
+		[I] protected virtual async Task CreateCallIsValid() => await this.AssertOnCreate(r => r.IsValid.Should().Be(true));
+		[I] protected virtual async Task GetAfterCreateIsValid() => await this.AssertOnGetAfterCreate(r => {
 			r.IsValid.Should().Be(true);
 			ExpectAfterCreate(r);
 		});
 
-		[I] protected async Task UpdateCallIsValid() => await this.AssertOnUpdate(r => r.IsValid.Should().Be(true));
-		[I] protected async Task GetAfterUpdateIsValid() => await this.AssertOnGetAfterUpdate(r => {
+		[I] protected virtual async Task UpdateCallIsValid() => await this.AssertOnUpdate(r => r.IsValid.Should().Be(true));
+		[I] protected virtual async Task GetAfterUpdateIsValid() => await this.AssertOnGetAfterUpdate(r => {
 			r.IsValid.Should().Be(true);
 			ExpectAfterUpdate(r);
 		});
 
-		[I] protected async Task DeleteCallIsValid() => await this.AssertOnDelete(r => r.IsValid.Should().Be(true));
-		[I] protected async Task GetAfterDeleteIsValid() => await this.AssertOnGetAfterDelete(r => r.IsValid.Should().Be(false));
+		[I] protected virtual async Task DeleteCallIsValid() => await this.AssertOnDelete(r => r.IsValid.Should().Be(true));
+		[I] protected virtual async Task GetAfterDeleteIsValid() => await this.AssertOnGetAfterDelete(r => r.IsValid.Should().Be(false));
 	}
 }

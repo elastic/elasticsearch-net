@@ -30,9 +30,5 @@ namespace Tests.Indices.Monitoring.IndicesRecovery
 		protected override Func<RecoveryStatusDescriptor, IRecoveryStatusRequest> Fluent => d => d;
 
 		protected override RecoveryStatusRequest Initializer => new RecoveryStatusRequest(Static.AllIndices);
-
-		[I] public async Task Response() => await this.AssertOnAllResponses(r =>
-		{
-		});
 	}
 }

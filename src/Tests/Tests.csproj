@@ -280,6 +280,7 @@
     <Compile Include="Indices\Warmers\GetWarmer\GetWarmerUrlTests.cs" />
     <Compile Include="Indices\Warmers\PutWarmer\PutWarmerApiTests.cs" />
     <Compile Include="Indices\Warmers\PutWarmer\PutWarmerUrlTests.cs" />
+    <Compile Include="Indices\Warmers\WarmerCrudTests.cs" />
     <Compile Include="Mapping\Types\String.cs" />
     <Compile Include="Modules\Scripting\DeleteScript\DeleteScriptUrlTests.cs" />
     <Compile Include="Modules\Scripting\DeleteScript\DeleteScriptApiTests.cs" />

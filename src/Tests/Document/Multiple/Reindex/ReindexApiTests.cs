@@ -32,7 +32,7 @@ namespace Tests.Document.Multiple.Reindex
 			this._reindexResult = this._client.Reindex<ILazyDocument>(Index<Developer>(), "dev-copy", r=>r);
 		}
 
-		[I] public void ResponseTests()
+		[I] public void ReturnsExpectedResponse()
 		{
 			var handle = new ManualResetEvent(false);
 			var observer = new ReindexObserver<ILazyDocument>(

@@ -49,6 +49,12 @@ namespace Tests.Search.Percolator.PercolateCount
 			}
 		};
 
+		protected override void ExpectResponse(IPercolateCountResponse response)
+		{
+			response.Took.Should().BeGreaterThan(0);
+			response.Took.Should().BeGreaterThan(0);
+		}
+
 		protected override Func<PercolateCountDescriptor<Project>, IPercolateCountRequest<Project>> Fluent => c => c
 			.Document(Project.Instance)
 			.Query(q => q

@@ -27,14 +27,12 @@ namespace Tests.Cluster.RootNodeInfo
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override string UrlPath => "/";
 
-		[I] public async Task Response() => await this.AssertOnAllResponses(r =>
+		protected override void ExpectResponse(IRootNodeInfoResponse response)
 		{
-			r.Version.Should().NotBeNull();
-			r.Version.LuceneVersion.Should().NotBeNullOrWhiteSpace();
-			r.Tagline.Should().NotBeNullOrWhiteSpace();
-			r.Name.Should().NotBeNullOrWhiteSpace();
-		});
-
+			response.Version.Should().NotBeNull();
+			response.Version.LuceneVersion.Should().NotBeNullOrWhiteSpace();
+			response.Tagline.Should().NotBeNullOrWhiteSpace();
+			response.Name.Should().NotBeNullOrWhiteSpace();
+		}
 	}
-
 }

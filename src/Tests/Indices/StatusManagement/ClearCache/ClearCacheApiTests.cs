@@ -31,9 +31,5 @@ namespace Tests.Indices.StatusManagement.ClearCache
 		protected override Func<ClearCacheDescriptor, IClearCacheRequest> Fluent => d => d.Recycler();
 
 		protected override ClearCacheRequest Initializer => new ClearCacheRequest(AllIndices) { Recycler = true };
-
-		[I] public async Task Response() => await this.AssertOnAllResponses(r =>
-		{
-		});
 	}
 }

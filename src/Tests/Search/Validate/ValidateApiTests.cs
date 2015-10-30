@@ -68,7 +68,9 @@ namespace Tests.Search.Validate
 		protected override HttpMethod HttpMethod => HttpMethod.POST;
 		protected override string UrlPath => "/project/project/_validate/query";
 
-		[I]
-		public async Task IsInvalid() => await this.AssertOnAllResponses(r => r.Valid.Should().BeFalse());
+		protected override void ExpectResponse(IValidateResponse response)
+		{
+			response.Valid.Should().BeFalse();
+		}
 	}
 }

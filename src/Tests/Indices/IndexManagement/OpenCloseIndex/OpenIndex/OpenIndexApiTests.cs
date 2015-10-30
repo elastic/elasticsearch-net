@@ -35,5 +35,5 @@ namespace Tests.Indices.IndexManagement.OpenCloseIndex.OpenIndex
 		{
 			IgnoreUnavailable = true
 		};
-}
+	}
 }

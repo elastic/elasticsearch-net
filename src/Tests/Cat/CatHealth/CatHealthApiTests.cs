@@ -27,11 +27,10 @@ namespace Tests.Cat.CatHealth
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override string UrlPath => "/_cat/health";
 
-		[I] public async Task HasHealth() => await this.AssertOnAllResponses(r =>
+		protected override void ExpectResponse(ICatResponse<CatHealthRecord> response)
 		{
-			r.Records.Should().NotBeEmpty().And.Contain(a => !string.IsNullOrEmpty(a.Status));
-		});
-
+			response.Records.Should().NotBeEmpty().And.Contain(a => !string.IsNullOrEmpty(a.Status));
+		}
 	}
 
 }

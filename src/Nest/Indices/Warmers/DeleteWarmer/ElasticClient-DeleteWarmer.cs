@@ -7,7 +7,7 @@ using Elasticsearch.Net;
 
 namespace Nest
 {
-	using GetWarmerConverter = Func<IApiCallDetails, Stream, WarmerResponse>;
+	using GetWarmerConverter = Func<IApiCallDetails, Stream, GetWarmerResponse>;
 	using CrazyWarmerResponse = Dictionary<string, Dictionary<string, IWarmers>>;
 	
 	public partial interface IElasticClient
@@ -18,41 +18,41 @@ namespace Nest
 		/// </summary>
 		/// <param name="name">The name of the warmer to delete</param>
 		/// <param name="selector">An optional selector specifying additional parameters for the delete warmer operation</param>
-		IIndicesOperationResponse DeleteWarmer(Indices indices, Names names, Func<DeleteWarmerDescriptor, IDeleteWarmerRequest> selector = null);
+		IAcknowledgedResponse DeleteWarmer(Indices indices, Names names, Func<DeleteWarmerDescriptor, IDeleteWarmerRequest> selector = null);
 
 		/// <inheritdoc/>
-		IIndicesOperationResponse DeleteWarmer(IDeleteWarmerRequest deleteWarmerRequest);
+		IAcknowledgedResponse DeleteWarmer(IDeleteWarmerRequest deleteWarmerRequest);
 
 		/// <inheritdoc/>
-		Task<IIndicesOperationResponse> DeleteWarmerAsync(Indices indices, Names names, Func<DeleteWarmerDescriptor, IDeleteWarmerRequest> selector = null);
+		Task<IAcknowledgedResponse> DeleteWarmerAsync(Indices indices, Names names, Func<DeleteWarmerDescriptor, IDeleteWarmerRequest> selector = null);
 
 		/// <inheritdoc/>
-		Task<IIndicesOperationResponse> DeleteWarmerAsync(IDeleteWarmerRequest deleteWarmerRequest);
+		Task<IAcknowledgedResponse> DeleteWarmerAsync(IDeleteWarmerRequest deleteWarmerRequest);
 
 	}
 
 	public partial class ElasticClient
 	{
 		/// <inheritdoc/>
-		public IIndicesOperationResponse DeleteWarmer(Indices indices, Names names, Func<DeleteWarmerDescriptor, IDeleteWarmerRequest> selector = null) =>
+		public IAcknowledgedResponse DeleteWarmer(Indices indices, Names names, Func<DeleteWarmerDescriptor, IDeleteWarmerRequest> selector = null) =>
 			this.DeleteWarmer(selector.InvokeOrDefault(new DeleteWarmerDescriptor(indices, names)));
 
 		/// <inheritdoc/>
-		public IIndicesOperationResponse DeleteWarmer(IDeleteWarmerRequest deleteWarmerRequest) => 
-			this.Dispatcher.Dispatch<IDeleteWarmerRequest, DeleteWarmerRequestParameters, IndicesOperationResponse>(
+		public IAcknowledgedResponse DeleteWarmer(IDeleteWarmerRequest deleteWarmerRequest) => 
+			this.Dispatcher.Dispatch<IDeleteWarmerRequest, DeleteWarmerRequestParameters, AcknowledgedResponse>(
 				deleteWarmerRequest,
-				(p, d) => this.LowLevelDispatch.IndicesDeleteWarmerDispatch<IndicesOperationResponse>(p)
+				(p, d) => this.LowLevelDispatch.IndicesDeleteWarmerDispatch<AcknowledgedResponse>(p)
 			);
 
 		/// <inheritdoc/>
-		public Task<IIndicesOperationResponse> DeleteWarmerAsync(Indices indices, Names names, Func<DeleteWarmerDescriptor, IDeleteWarmerRequest> selector = null) => 
+		public Task<IAcknowledgedResponse> DeleteWarmerAsync(Indices indices, Names names, Func<DeleteWarmerDescriptor, IDeleteWarmerRequest> selector = null) => 
 			this.DeleteWarmerAsync(selector.InvokeOrDefault(new DeleteWarmerDescriptor(indices, names)));
 
 		/// <inheritdoc/>
-		public Task<IIndicesOperationResponse> DeleteWarmerAsync(IDeleteWarmerRequest deleteWarmerRequest) => 
-			this.Dispatcher.DispatchAsync<IDeleteWarmerRequest, DeleteWarmerRequestParameters, IndicesOperationResponse, IIndicesOperationResponse>(
+		public Task<IAcknowledgedResponse> DeleteWarmerAsync(IDeleteWarmerRequest deleteWarmerRequest) => 
+			this.Dispatcher.DispatchAsync<IDeleteWarmerRequest, DeleteWarmerRequestParameters, AcknowledgedResponse, IAcknowledgedResponse>(
 				deleteWarmerRequest,
-				(p, d) => this.LowLevelDispatch.IndicesDeleteWarmerDispatchAsync<IndicesOperationResponse>(p)
+				(p, d) => this.LowLevelDispatch.IndicesDeleteWarmerDispatchAsync<AcknowledgedResponse>(p)
 			);
 	}
 }

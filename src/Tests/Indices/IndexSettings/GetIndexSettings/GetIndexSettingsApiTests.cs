@@ -36,9 +36,5 @@ namespace Tests.Indices.IndexSettings.GetIndexSettings
 		{
 			Local = true
 		};
-
-		[I] public async Task Response() => await this.AssertOnAllResponses(r =>
-		{
-		});
 	}
 }

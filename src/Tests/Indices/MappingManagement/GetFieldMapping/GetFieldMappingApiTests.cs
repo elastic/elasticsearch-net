@@ -33,10 +33,5 @@ namespace Tests.Indices.MappingManagement.GetFieldMapping
 		protected override GetFieldMappingDescriptor<Project> NewDescriptor() => new GetFieldMappingDescriptor<Project>(Fields);
 
 		protected override GetFieldMappingRequest Initializer => new GetFieldMappingRequest(Fields);
-
-		[I] public async Task Response() => await this.AssertOnAllResponses(r =>
-		{
-		});
-
 	}
 }

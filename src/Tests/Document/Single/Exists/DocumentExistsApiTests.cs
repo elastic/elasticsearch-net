@@ -31,9 +31,5 @@ namespace Tests.Document.Single.Exists
 
 		protected override Func<DocumentExistsDescriptor<Project>, IDocumentExistsRequest> Fluent => null;
 		protected override DocumentExistsRequest<Project> Initializer => new DocumentExistsRequest<Project>(Project.Instance);
-
-		[I] public async Task Response() => await this.AssertOnAllResponses(r =>
-		{
-		});
 	}
 }

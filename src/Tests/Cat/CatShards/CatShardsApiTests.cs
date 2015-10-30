@@ -27,11 +27,10 @@ namespace Tests.Cat.CatShards
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override string UrlPath => "/_cat/shards";
 
-		[I] public async Task HasShards() => await this.AssertOnAllResponses(r =>
+		protected override void ExpectResponse(ICatResponse<CatShardsRecord> response)
 		{
-			r.Records.Should().NotBeEmpty().And.Contain(a => !string.IsNullOrEmpty(a.PrimaryOrReplica));
-		});
-
+			response.Records.Should().NotBeEmpty().And.Contain(a => !string.IsNullOrEmpty(a.PrimaryOrReplica));
+		}
 	}
 
 }

@@ -201,6 +201,7 @@
     <Compile Include="Document\Multiple\Bulk\ElasticClient-IndexMany.cs" />
     <Compile Include="Document\Multiple\Bulk\ElasticClient-DeleteMany.cs" />
     <Compile Include="Document\Multiple\MultiGet\EllasticClient-GetMany.cs" />
+    <Compile Include="Indices\Warmers\GetWarmer\GetWarmerResponseConverter.cs" />
     <Compile Include="Indices\Warmers\Warmers.cs" />
     <Compile Include="Mapping\AttributeBased\AttachmentAttribute.cs" />
     <Compile Include="Mapping\AttributeBased\BinaryAttribute.cs" />
@@ -805,7 +806,7 @@
     <Compile Include="Cluster\ClusterState\ElasticClient-ClusterState.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\StatefulDeserialization\ConcreteTypeConverter.cs" />
     <Compile Include="Indices\Warmers\Warmer.cs" />
-    <Compile Include="Indices\Warmers\GetWarmer\WarmerResponse.cs">
+    <Compile Include="Indices\Warmers\GetWarmer\GetWarmerResponse.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Search\Search\Rescoring\Rescore.cs" />

@@ -36,36 +36,36 @@ namespace Tests.Search.Percolator.Percolate
 	
 		protected override object ExpectJson => new
 		{
-			doc = Project.InstanceAnonymous,
-			query = new
-			{
-				range = new
-				{
-					startedOn = new
-					{
-						gt = "2014/01/01"
-					}
-				}
-			}
+			doc = Project.InstanceAnonymous
 		};
 
-		protected override Func<PercolateDescriptor<Project>, IPercolateRequest<Project>> Fluent => c => c
-			.Document(Project.Instance)
-			.Query(q => q
-				.Range(r => r
-					.OnField(p => p.StartedOn)
-					.Greater(new DateTime(2014, 1, 1), "yyyy/MM/dd")
+		protected override void ExpectResponse(IPercolateResponse response)
+		{
+			response.Took.Should().BeGreaterThan(0);
+			response.Total.Should().BeGreaterThan(0);
+			response.Matches.Should().NotBeNull();
+			response.Matches.Count().Should().BeGreaterThan(0);
+			var match = response.Matches.First();
+			match.Id.Should().Be(_percolatorId);
+		}
+
+		private string _percolatorId = RandomString();
+
+		protected override void OnBeforeCall(IElasticClient client)
+		{
+			var register = this.Client.RegisterPercolator<Project>(_percolatorId, r => r
+				.Query(q => q
+					.MatchAll()
 				)
 			);
+		}
+
+		protected override Func<PercolateDescriptor<Project>, IPercolateRequest<Project>> Fluent => c => c
+			.Document(Project.Instance);
 
 		protected override PercolateRequest<Project> Initializer => new PercolateRequest<Project>
 		{
-			Document = Project.Instance,
-			Query = new QueryContainer(new RangeQuery
-			{
-				Field = "startedOn",
-				GreaterThan = "2014/01/01"
-			})
+			Document = Project.Instance
         };
 	}
 

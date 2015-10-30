@@ -37,9 +37,5 @@ namespace Tests.Indices.IndexManagement.TypesExists
 		{
 			IgnoreUnavailable = true
 		};
-
-		[I] public async Task Response() => await this.AssertOnAllResponses(r =>
-		{
-		});
 	}
 }

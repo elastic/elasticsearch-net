@@ -27,16 +27,17 @@ namespace Tests.Cluster.ClusterStats
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override string UrlPath => "/_cluster/stats";
 
-		[I] public async Task Response() => await this.AssertOnAllResponses(r =>
+		protected override void ExpectResponse(IClusterStatsResponse response)
 		{
-			r.ClusterName.Should().NotBeNullOrWhiteSpace();
-			r.Status.Should().NotBe(ClusterStatus.Red);
-			r.Timestamp.Should().BeGreaterThan(0);
-		});
+			response.ClusterName.Should().NotBeNullOrWhiteSpace();
+			response.Status.Should().NotBe(ClusterStatus.Red);
+			response.Timestamp.Should().BeGreaterThan(0);
+			Assert(response.Nodes);
+			Assert(response.Indices);
+		}
 
-		[I] public async Task NodesResponse() => await this.AssertOnAllResponses(r =>
+		protected void Assert(ClusterNodesStats nodes)
 		{
-			var nodes = r.Nodes;
 			nodes.Should().NotBeNull();
 			nodes.Count.Should().NotBeNull();
 			nodes.Count.MasterData.Should().BeGreaterOrEqualTo(1);
@@ -83,50 +84,45 @@ namespace Tests.Cluster.ClusterStats
 			nodes.Process.OpenFileDescriptors.Min.Should().NotBe(0);
 
 			nodes.Versions.Should().NotBeEmpty();
+		}
 
-		});
-
-		[I] public async Task IndicesResponse() => await this.AssertOnAllResponses(r =>
+		protected void Assert(ClusterIndicesStats indices)
 		{
-			var i = r.Indices;
+			indices.Should().NotBeNull();
+			indices.Count.Should().BeGreaterThan(0);
 
-			i.Should().NotBeNull();
-			i.Count.Should().BeGreaterThan(0);
+			indices.Documents.Should().NotBeNull();
+			indices.Documents.Count.Should().BeGreaterThan(0);
 
-			i.Documents.Should().NotBeNull();
-			i.Documents.Count.Should().BeGreaterThan(0);
+			indices.Completion.Should().NotBeNull();
+			indices.Fielddata.Should().NotBeNull();
+			indices.Percolate.Should().NotBeNull();
+			indices.QueryCache.Should().NotBeNull();
 
-			i.Completion.Should().NotBeNull();
-			i.Fielddata.Should().NotBeNull();
-			i.Percolate.Should().NotBeNull();
-			i.QueryCache.Should().NotBeNull();
+			indices.Segments.Should().NotBeNull();
+			indices.Segments.Count.Should().BeGreaterThan(0);
+			indices.Segments.DocValuesMemoryInBytes.Should().BeGreaterThan(0);
+			indices.Segments.IndexWriterMaxMemoryInBytes.Should().BeGreaterThan(0);
+			indices.Segments.MemoryInBytes.Should().BeGreaterThan(0);
+			indices.Segments.NormsMemoryInBytes.Should().BeGreaterThan(0);
+			indices.Segments.StoredFieldsMemoryInBytes.Should().BeGreaterThan(0);
+			indices.Segments.TermsMemoryInBytes.Should().BeGreaterThan(0);
 
-			i.Segments.Should().NotBeNull();
-			i.Segments.Count.Should().BeGreaterThan(0);
-			i.Segments.DocValuesMemoryInBytes.Should().BeGreaterThan(0);
-			i.Segments.IndexWriterMaxMemoryInBytes.Should().BeGreaterThan(0);
-			i.Segments.MemoryInBytes.Should().BeGreaterThan(0);
-			i.Segments.NormsMemoryInBytes.Should().BeGreaterThan(0);
-			i.Segments.StoredFieldsMemoryInBytes.Should().BeGreaterThan(0);
-			i.Segments.TermsMemoryInBytes.Should().BeGreaterThan(0);
+			indices.Shards.Should().NotBeNull();
+			indices.Shards.Primaries.Should().BeGreaterThan(0);
+			indices.Shards.Total.Should().BeGreaterThan(0);
+			indices.Shards.Index.Primaries.Should().NotBeNull();
+			indices.Shards.Index.Primaries.Avg.Should().BeGreaterThan(0);
+			indices.Shards.Index.Primaries.Min.Should().BeGreaterThan(0);
+			indices.Shards.Index.Primaries.Max.Should().BeGreaterThan(0);
+			indices.Shards.Index.Replication.Should().NotBeNull();
+			indices.Shards.Index.Shards.Should().NotBeNull();
+			indices.Shards.Index.Shards.Avg.Should().BeGreaterThan(0);
+			indices.Shards.Index.Shards.Min.Should().BeGreaterThan(0);
+			indices.Shards.Index.Shards.Max.Should().BeGreaterThan(0);
 
-			i.Shards.Should().NotBeNull();
-			i.Shards.Primaries.Should().BeGreaterThan(0);
-			i.Shards.Total.Should().BeGreaterThan(0);
-			i.Shards.Index.Primaries.Should().NotBeNull();
-			i.Shards.Index.Primaries.Avg.Should().BeGreaterThan(0);
-			i.Shards.Index.Primaries.Min.Should().BeGreaterThan(0);
-			i.Shards.Index.Primaries.Max.Should().BeGreaterThan(0);
-			i.Shards.Index.Replication.Should().NotBeNull();
-			i.Shards.Index.Shards.Should().NotBeNull();
-			i.Shards.Index.Shards.Avg.Should().BeGreaterThan(0);
-			i.Shards.Index.Shards.Min.Should().BeGreaterThan(0);
-			i.Shards.Index.Shards.Max.Should().BeGreaterThan(0);
-
-			i.Store.Should().NotBeNull();
-			i.Store.SizeInBytes.Should().BeGreaterThan(0);
-		});
-
+			indices.Store.Should().NotBeNull();
+			indices.Store.SizeInBytes.Should().BeGreaterThan(0);
+		}
 	}
-
 }

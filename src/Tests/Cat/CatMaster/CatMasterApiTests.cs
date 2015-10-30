@@ -27,11 +27,9 @@ namespace Tests.Cat.CatMaster
 		protected override HttpMethod HttpMethod => HttpMethod.GET;
 		protected override string UrlPath => "/_cat/master";
 
-		[I] public async Task HasMaster() => await this.AssertOnAllResponses(r =>
+		protected override void ExpectResponse(ICatResponse<CatMasterRecord> response)
 		{
-			r.Records.Should().NotBeEmpty().And.Contain(a => !string.IsNullOrEmpty(a.Node));
-		});
-
+			response.Records.Should().NotBeEmpty().And.Contain(a => !string.IsNullOrEmpty(a.Node));
+		}
 	}
-
 }

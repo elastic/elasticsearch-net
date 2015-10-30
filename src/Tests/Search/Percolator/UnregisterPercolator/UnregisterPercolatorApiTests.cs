@@ -16,24 +16,41 @@ namespace Tests.Search.Percolator.UnregisterPercolator
 	public class UnregisterPercolatorApiTests
 		: ApiIntegrationTestBase<IUnregisterPercolateResponse, IUnregisterPercolatorRequest, UnregisterPercolatorDescriptor<Project>, UnregisterPercolatorRequest>
 	{
-		public UnregisterPercolatorApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public UnregisterPercolatorApiTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage)
+		{
+		
+		}
+
+		protected override void OnBeforeCall(IElasticClient client)
+		{
+			var register = this.Client.RegisterPercolator<Project>(this.CallIsolatedValue, r => r.Query(q => q.MatchAll()));
+			if (!register.IsValid)
+				throw new Exception($"Setup: failed to first register percolator {this.CallIsolatedValue}");
+		}
 
 		protected override LazyResponses ClientUsage() => Calls(
-			fluent: (c, f) => c.UnregisterPercolator<Project>(_name),
-			fluentAsync: (c, f) => c.UnregisterPercolatorAsync<Project>(_name),
+			fluent: (c, f) => c.UnregisterPercolator<Project>(this.CallIsolatedValue),
+			fluentAsync: (c, f) => c.UnregisterPercolatorAsync<Project>(this.CallIsolatedValue),
 			request: (c, r) => c.UnregisterPercolator(r),
 			requestAsync: (c, r) => c.UnregisterPercolatorAsync(r)
 		);
 
-		private string _name = "name-of-perc";
-
 		protected override int ExpectStatusCode => 200;
 		protected override bool ExpectIsValid => true;
 		protected override HttpMethod HttpMethod => HttpMethod.DELETE;
-		protected override string UrlPath => $"/project/.percolator/{_name}";
+		protected override string UrlPath => $"/project/.percolator/{this.CallIsolatedValue}";
+
+		protected override void ExpectResponse(IUnregisterPercolateResponse response)
+		{
+			response.Found.Should().BeTrue();
+			response.Index.Should().NotBeNullOrEmpty();
+			response.Type.Should().NotBeNullOrEmpty();
+			response.Version.Should().BeGreaterThan(0);
+			response.Id.Should().NotBeNullOrEmpty();
+		}
 
 		protected override Func<UnregisterPercolatorDescriptor<Project>, IUnregisterPercolatorRequest> Fluent => null;
 
-		protected override UnregisterPercolatorRequest Initializer => new UnregisterPercolatorRequest(typeof(Project), _name);
+		protected override UnregisterPercolatorRequest Initializer => new UnregisterPercolatorRequest(typeof(Project), this.CallIsolatedValue);
 	}
 }
