@@ -36,6 +36,8 @@ namespace Nest
 
 		public ValueMetric ValueCount(string key) => this.TryGet<ValueMetric>(key);
 
+		public ValueMetric AverageBucket(string key) => this.TryGet<ValueMetric>(key);
+
 		public ScriptedValueMetric ScriptedMetric(string key)
 		{
 			var valueMetric = this.TryGet<ValueMetric>(key);

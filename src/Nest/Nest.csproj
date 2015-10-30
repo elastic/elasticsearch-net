@@ -81,6 +81,9 @@
     <Compile Include="Aggregations\Bucket\SignificantTerms\Heuristics\PercentageScoreHeuristic.cs" />
     <Compile Include="Aggregations\Aggregation.cs" />
     <Compile Include="Aggregations\Metric\Metric.cs" />
+    <Compile Include="Aggregations\Pipeline\AverageBucket\AverageBucketAggregation.cs" />
+    <Compile Include="Aggregations\Pipeline\GapPolicy.cs" />
+    <Compile Include="Aggregations\Pipeline\PipelineAggregation.cs" />
     <Compile Include="Analysis\Analyzers\Analyzers.cs" />
     <Compile Include="Analysis\Analyzers\AnalyzerJsonConverter.cs" />
     <Compile Include="Analysis\CharFilters\CharFilters.cs" />
@@ -1068,9 +1071,7 @@
   <ItemGroup>
     <None Include="paket.references" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Aggregations\Pipeline\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

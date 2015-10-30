@@ -136,6 +136,9 @@ namespace Nest
 		[JsonProperty("scripted_metric")]
 		IScriptedMetricAggregation ScriptedMetric { get; set; }
 
+		[JsonProperty("avg_bucket")]
+		IAverageBucketAggregation AverageBucket { get; set; }
+
 		[JsonProperty("aggs")]
 		AggregationDictionary Aggregations { get; set; }
 
@@ -193,6 +196,8 @@ namespace Nest
 		public IChildrenAggregation Children { get; set; }
 
 		public IScriptedMetricAggregation ScriptedMetric { get; set; }
+
+		public IAverageBucketAggregation AverageBucket { get; set; }
 
 		public AggregationDictionary Aggregations { get; set; }
 
@@ -271,6 +276,8 @@ namespace Nest
 		IChildrenAggregation IAggregationContainer.Children { get; set; }
 
 		IScriptedMetricAggregation IAggregationContainer.ScriptedMetric { get; set; }
+
+		IAverageBucketAggregation IAggregationContainer.AverageBucket { get; set; }
 
 		public AggregationContainerDescriptor<T> Average(string name,
 			Func<AverageAggregationDescriptor<T>, IAverageAggregation> selector) =>
@@ -387,6 +394,10 @@ namespace Nest
 		public AggregationContainerDescriptor<T> ScriptedMetric(string name,
 			Func<ScriptedMetricAggregationDescriptor<T>, IScriptedMetricAggregation> selector) =>
 			_SetInnerAggregation(name, selector, (a, d) => a.ScriptedMetric = d);
+
+		public AggregationContainerDescriptor<T> AverageBucket(string name,
+			Func<AverageBucketAggregationDescriptor, IAverageBucketAggregation> selector) =>
+			_SetInnerAggregation(name, selector, (a, d) => a.AverageBucket = d);
 
 		/// <summary>
 		/// Fluent methods do not assing to properties on `this` directly but on IAggregationContainers inside `this.Aggregations[string, IContainer]
