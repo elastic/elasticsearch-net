@@ -12,7 +12,7 @@ namespace Nest
 
 	public class ValueCountAgg : MetricAgg, IValueCountAggregator
 	{
-		public ValueCountAgg(string name, FieldName field) : base(name, field) { }
+		public ValueCountAgg(string name, Field field) : base(name, field) { }
 
 		internal override void WrapInContainer(AggregationContainer c) => c.ValueCount = this;
 	}

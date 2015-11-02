@@ -9,6 +9,7 @@ using Tests.Framework.MockData;
 using Xunit.Sdk;
 using static Tests.Framework.RoundTripper;
 using static Nest.Static;
+using Field = Nest.Field;
 
 namespace Tests.ClientConcepts.HighLevel.Inferrence.FieldNames
 {
@@ -25,11 +26,11 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence.FieldNames
 		/** Using the constructor directly is possible but rather involved */
 		[U] public void UsingConstructors()
 		{
-			var fieldString = new FieldName {Name = "name"};
+			var fieldString = new Field {Name = "name"};
 
 			/** especially when using C# expressions since these can not be simply new'ed*/
 			Expression<Func<Project, object>> expression = p => p.Name;
-			var fieldExpression = FieldName.Create(expression);
+			var fieldExpression = Field.Create(expression);
 
 			Expect("name")
 				.WhenSerializing(fieldExpression)
@@ -39,11 +40,11 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence.FieldNames
 		/** Therefor you can also implicitly convert strings and expressions to FieldName's */
 		[U] public void ImplicitConversion()
 		{
-			FieldName fieldString = "name";
+			Field fieldString = "name";
 
 			/** but for expressions this is still rather involved */
 			Expression<Func<Project, object>> expression = p => p.Name;
-			FieldName fieldExpression = expression;
+			Field fieldExpression = expression;
 
 			Expect("name")
 				.WhenSerializing(fieldExpression)
@@ -53,7 +54,7 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence.FieldNames
 		/** to ease creating FieldName's from expressions there is a static Property class you can use */
 		[U] public void UsingStaticPropertyField()
 		{
-			FieldName fieldString = "name";
+			Field fieldString = "name";
 
 			/** but for expressions this is still rather involved */
 			var fieldExpression = Field<Project>(p=>p.Name);
@@ -78,7 +79,7 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence.FieldNames
 			setup.Expect("NAME").WhenSerializing(Field<Project>(p => p.Name));
 
 			/** However string are *always* passed along verbatim */
-			setup.Expect("NaMe").WhenSerializing<FieldName>("NaMe");
+			setup.Expect("NaMe").WhenSerializing<Field>("NaMe");
 
 			/** if you want the same behavior for expressions simply do nothing in the default inferrer */
 			setup = WithConnectionSettings(s => s.SetDefaultFieldNameInferrer(p => p));

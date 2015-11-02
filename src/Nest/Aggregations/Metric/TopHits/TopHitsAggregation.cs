@@ -19,7 +19,7 @@ namespace Nest
 
 		[JsonProperty("sort")]
 		[JsonConverter(typeof(SortCollectionJsonConverter))]
-		IList<KeyValuePair<FieldName, ISort>> Sort { get; set; }
+		IList<KeyValuePair<Field, ISort>> Sort { get; set; }
 
 		[JsonProperty("_source")]
 		ISourceFilter Source { get; set; }
@@ -35,7 +35,7 @@ namespace Nest
 		IDictionary<string, IScriptQuery> ScriptFields { get; set; }
 
 		[JsonProperty("fielddata_fields")]
-		IEnumerable<FieldName> FieldDataFields { get; set; }
+		IEnumerable<Field> FieldDataFields { get; set; }
 
 		[JsonProperty("version")]
 		bool? Version { get; set; }
@@ -45,12 +45,12 @@ namespace Nest
 	{
 		public int? From { get; set; }
 		public int? Size { get; set; }
-		public IList<KeyValuePair<FieldName, ISort>> Sort { get; set; }
+		public IList<KeyValuePair<Field, ISort>> Sort { get; set; }
 		public ISourceFilter Source { get; set; }
 		public IHighlightRequest Highlight { get; set; }
 		public bool? Explain { get; set; }
 		public IDictionary<string, IScriptQuery> ScriptFields { get; set; }
-		public IEnumerable<FieldName> FieldDataFields { get; set; }
+		public IEnumerable<Field> FieldDataFields { get; set; }
 		public bool? Version { get; set; }
 	}
 
@@ -58,15 +58,15 @@ namespace Nest
 	{
 		public int? From { get; set; }
 		public int? Size { get; set; }
-		public IList<KeyValuePair<FieldName, ISort>> Sort { get; set; }
+		public IList<KeyValuePair<Field, ISort>> Sort { get; set; }
 		public ISourceFilter Source { get; set; }
 		public IHighlightRequest Highlight { get; set; }
 		public bool? Explain { get; set; }
 		public IDictionary<string, IScriptQuery> ScriptFields { get; set; }
-		public IEnumerable<FieldName> FieldDataFields { get; set; }
+		public IEnumerable<Field> FieldDataFields { get; set; }
 		public bool? Version { get; set; }
 
-		public TopHitsAgg(string name, FieldName field) : base(name, field) { }
+		public TopHitsAgg(string name, Field field) : base(name, field) { }
 
 		internal override void WrapInContainer(AggregationContainer c) => c.TopHits = this;
 	}
@@ -81,7 +81,7 @@ namespace Nest
 
 		int? ITopHitsAggregator.Size { get; set; }
 
-		IList<KeyValuePair<FieldName, ISort>> ITopHitsAggregator.Sort { get; set; }
+		IList<KeyValuePair<Field, ISort>> ITopHitsAggregator.Sort { get; set; }
 
 		ISourceFilter ITopHitsAggregator.Source { get; set; }
 
@@ -91,7 +91,7 @@ namespace Nest
 
 		IDictionary<string, IScriptQuery> ITopHitsAggregator.ScriptFields { get; set; }
 
-		IEnumerable<FieldName> ITopHitsAggregator.FieldDataFields { get; set; }
+		IEnumerable<Field> ITopHitsAggregator.FieldDataFields { get; set; }
 
 		bool? ITopHitsAggregator.Version { get; set; }
 
@@ -104,10 +104,10 @@ namespace Nest
 			sortSelector.ThrowIfNull("sortSelector");
 
 			if (Self.Sort == null)
-				Self.Sort = new List<KeyValuePair<FieldName, ISort>>();
+				Self.Sort = new List<KeyValuePair<Field, ISort>>();
 
 			var descriptor = sortSelector(new SortFieldDescriptor<T>());
-			this.Self.Sort.Add(new KeyValuePair<FieldName, ISort>(descriptor.Field, descriptor));
+			this.Self.Sort.Add(new KeyValuePair<Field, ISort>(descriptor.Field, descriptor));
 
 			return this;
 		}
@@ -145,11 +145,11 @@ namespace Nest
 			return this;
 		}
 
-		public TopHitsAggregatorDescriptor<T> FieldDataFields(params FieldName[] fields) =>
+		public TopHitsAggregatorDescriptor<T> FieldDataFields(params Field[] fields) =>
 			Assign(a => a.FieldDataFields = fields);
 
 		public TopHitsAggregatorDescriptor<T> FieldDataFields(params Expression<Func<T, object>>[] objectPaths) =>
-			Assign(a => a.FieldDataFields = objectPaths?.Select(e => (FieldName) e).ToListOrNullIfEmpty());
+			Assign(a => a.FieldDataFields = objectPaths?.Select(e => (Field) e).ToListOrNullIfEmpty());
 
 		public TopHitsAggregatorDescriptor<T> Version(bool version = true) => Assign(a => a.Version = version);
 

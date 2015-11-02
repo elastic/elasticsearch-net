@@ -55,7 +55,8 @@ namespace Nest.Resolvers
 
 			else if (objectType == typeof(TypeName)) contract.Converter = new TypeNameJsonConverter();
 			else if (objectType == typeof(IndexName)) contract.Converter = new IndexNameJsonConverter();
-			else if (objectType == typeof(FieldName)) contract.Converter = new FieldNameJsonConverter(this.ConnectionSettings);
+			else if (objectType == typeof(Fields)) contract.Converter = new FieldsJsonConverter(this.ConnectionSettings);
+			else if (objectType == typeof(Field)) contract.Converter = new FieldJsonConverter(this.ConnectionSettings);
 			else if (objectType == typeof(PropertyName)) contract.Converter = new PropertyNameJsonConverter(this.ConnectionSettings);
 
 			//TODO these should not be necessary here

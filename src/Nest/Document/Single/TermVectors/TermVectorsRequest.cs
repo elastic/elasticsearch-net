@@ -18,7 +18,7 @@ namespace Nest
 		TDocument Document { get; set; }
 
 		[JsonProperty("per_field_analyzer")]
-		IDictionary<FieldName, string> PerFieldAnalyzer { get; set; }
+		IDictionary<Field, string> PerFieldAnalyzer { get; set; }
 	}
 
 	public partial class TermVectorsRequest<TDocument>
@@ -28,7 +28,7 @@ namespace Nest
 
 		public TDocument Document { get; set; }
 
-		public IDictionary<FieldName, string> PerFieldAnalyzer { get; set; }
+		public IDictionary<Field, string> PerFieldAnalyzer { get; set; }
 
 		partial void DocumentFromPath(TDocument document)
 		{
@@ -46,18 +46,18 @@ namespace Nest
 
 		TDocument ITermVectorsRequest<TDocument>.Document { get; set; }
 
-		IDictionary<FieldName, string> ITermVectorsRequest<TDocument>.PerFieldAnalyzer { get; set; }
+		IDictionary<Field, string> ITermVectorsRequest<TDocument>.PerFieldAnalyzer { get; set; }
 
 		public TermVectorsDescriptor<TDocument> Document(TDocument document) => Assign(a => a.Document = document);
 
 		public TermVectorsDescriptor<TDocument> PerFieldAnalyzer(Func<FluentDictionary<Expression<Func<TDocument, object>>, string>, FluentDictionary<Expression<Func<TDocument, object>>, string>> analyzerSelector) =>
 			Assign(a=>a.PerFieldAnalyzer = analyzerSelector?
 				.Invoke(new FluentDictionary<Expression<Func<TDocument, object>>, string>())
-				?.ToDictionary(x => FieldName.Create(x.Key), x => x.Value)
+				?.ToDictionary(x => Field.Create(x.Key), x => x.Value)
 			);
 
 		public TermVectorsDescriptor<TDocument> PerFieldAnalyzer(
-			Func<FluentDictionary<FieldName, string>, FluentDictionary<FieldName, string>> analyzerSelector) =>
-				Assign(a => a.PerFieldAnalyzer = analyzerSelector?.Invoke(new FluentDictionary<FieldName, string>()));
+			Func<FluentDictionary<Field, string>, FluentDictionary<Field, string>> analyzerSelector) =>
+				Assign(a => a.PerFieldAnalyzer = analyzerSelector?.Invoke(new FluentDictionary<Field, string>()));
 	}
 }

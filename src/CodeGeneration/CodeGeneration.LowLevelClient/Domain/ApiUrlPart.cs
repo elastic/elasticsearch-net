@@ -22,7 +22,7 @@ namespace CodeGeneration.LowLevelClient.Domain
 					case "node_id": return this.Type == "string" ? "NodeId" : "NodeIds";
 					case "scroll_id": return this.Type == "string" ? "ScrollId" : "ScrollIds";
 					case "field": 
-					case "fields": return this.Type == "string" ? "FieldName" : "FieldNames";
+					case "fields": return this.Type == "string" ? "Field" : "Fields";
 					case "index_metric": return "IndexMetrics";
 					case "metric": return "Metrics";
 					case "feature": return "Features";

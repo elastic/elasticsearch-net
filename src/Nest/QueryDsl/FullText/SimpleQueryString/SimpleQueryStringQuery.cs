@@ -16,10 +16,10 @@ namespace Nest
 		string Query { get; set; }
 
 		[JsonProperty(PropertyName = "default_field")]
-		FieldName DefaultField { get; set; }
+		Field DefaultField { get; set; }
 
 		[JsonProperty(PropertyName = "fields")]
-		IEnumerable<FieldName> Fields { get; set; }
+		IEnumerable<Field> Fields { get; set; }
 
 		[JsonProperty(PropertyName = "default_operator")]
 		[JsonConverter(typeof (StringEnumConverter))]
@@ -48,8 +48,8 @@ namespace Nest
 	{
 		bool IQuery.Conditionless => IsConditionless(this);
 		public string Query { get; set; }
-		public FieldName DefaultField { get; set; }
-		public IEnumerable<FieldName> Fields { get; set; }
+		public Field DefaultField { get; set; }
+		public IEnumerable<Field> Fields { get; set; }
 		public Operator? DefaultOperator { get; set; }
 		public string Analyzer { get; set; }
 		public bool? LowercaseExpendedTerms { get; set; }
@@ -68,8 +68,8 @@ namespace Nest
 	{
 		bool IQuery.Conditionless => SimpleQueryStringQuery.IsConditionless(this);
 		string ISimpleQueryStringQuery.Query { get; set; }
-		FieldName ISimpleQueryStringQuery.DefaultField { get; set; }
-		IEnumerable<FieldName> ISimpleQueryStringQuery.Fields { get; set; }
+		Field ISimpleQueryStringQuery.DefaultField { get; set; }
+		IEnumerable<Field> ISimpleQueryStringQuery.Fields { get; set; }
 		Operator? ISimpleQueryStringQuery.DefaultOperator { get; set; }
 		string ISimpleQueryStringQuery.Analyzer { get; set; }
 		bool? ISimpleQueryStringQuery.AnalyzeWildcard { get; set; }
@@ -84,16 +84,16 @@ namespace Nest
 			Assign(a => a.DefaultField = objectPath);
 
 		public SimpleQueryStringQueryDescriptor<T> OnFields(IEnumerable<string> fields) =>
-			Assign(a => a.Fields = fields?.Select(f => (FieldName) f).ToListOrNullIfEmpty());
+			Assign(a => a.Fields = fields?.Select(f => (Field) f).ToListOrNullIfEmpty());
 
 		public SimpleQueryStringQueryDescriptor<T> OnFields(params Expression<Func<T, object>>[] objectPaths) =>
-			Assign(a => a.Fields = objectPaths?.Select(f => (FieldName) f).ToListOrNullIfEmpty());
+			Assign(a => a.Fields = objectPaths?.Select(f => (Field) f).ToListOrNullIfEmpty());
 
 		public SimpleQueryStringQueryDescriptor<T> OnFieldsWithBoost(Func<
 			FluentDictionary<Expression<Func<T, object>>, double?>, IDictionary<Expression<Func<T, object>>, double?>> boostableSelector) =>
 				Assign(a => a.Fields = boostableSelector?
 					.Invoke(new FluentDictionary<Expression<Func<T, object>>, double?>())
-					.Select(o => FieldName.Create(o.Key, o.Value))
+					.Select(o => Field.Create(o.Key, o.Value))
 					.ToListOrNullIfEmpty()
 				);
 
@@ -101,7 +101,7 @@ namespace Nest
 			Func<FluentDictionary<string, double?>, IDictionary<Expression<Func<T, object>>, double?>> boostableSelector) =>
 				Assign(a => a.Fields = boostableSelector?
 					.Invoke(new FluentDictionary<string, double?>())
-					.Select(o => FieldName.Create(o.Key, o.Value))
+					.Select(o => Field.Create(o.Key, o.Value))
 					.ToListOrNullIfEmpty()
 				);
 

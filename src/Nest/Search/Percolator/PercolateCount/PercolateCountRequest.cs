@@ -21,7 +21,7 @@ namespace Nest
 		public string MultiPercolateName => "count";
         public int? Size { get; set; }
 		public bool? TrackScores { get; set; }
-		public IDictionary<FieldName, ISort> Sort { get; set; }
+		public IDictionary<Field, ISort> Sort { get; set; }
 		public IHighlightRequest Highlight { get; set; }
 		public QueryContainer Query { get; set; }
 		public QueryContainer Filter { get; set; }
@@ -52,7 +52,7 @@ namespace Nest
 		TDocument IPercolateCountRequest<TDocument>.Document { get; set; }
 		
 		//TODO these dictionaries seem badly typed
-		IDictionary<FieldName, ISort> IPercolateOperation.Sort { get; set; }
+		IDictionary<Field, ISort> IPercolateOperation.Sort { get; set; }
 		IDictionary<string, IAggregationContainer> IPercolateOperation.Aggregations { get; set; }
 
 		string IPercolateOperation.MultiPercolateName => "count";
@@ -98,7 +98,7 @@ namespace Nest
 		/// </summary>
 		public PercolateCountDescriptor<TDocument> SortAscending(Expression<Func<TDocument, object>> objectPath)
 		{
-			if (Self.Sort == null) Self.Sort = new Dictionary<FieldName, ISort>();
+			if (Self.Sort == null) Self.Sort = new Dictionary<Field, ISort>();
 
 			Self.Sort.Add(objectPath, new Sort() { Order = SortOrder.Ascending });
 			return this;
@@ -114,7 +114,7 @@ namespace Nest
 		/// </summary>
 		public PercolateCountDescriptor<TDocument> SortDescending(Expression<Func<TDocument, object>> objectPath)
 		{
-			if (Self.Sort == null) Self.Sort = new Dictionary<FieldName, ISort>();
+			if (Self.Sort == null) Self.Sort = new Dictionary<Field, ISort>();
 
 			Self.Sort.Add(objectPath, new Sort() { Order = SortOrder.Descending });
 			return this;
@@ -130,7 +130,7 @@ namespace Nest
 		/// </summary>
 		public PercolateCountDescriptor<TDocument> SortAscending(string field)
 		{
-			if (Self.Sort == null) Self.Sort = new Dictionary<FieldName, ISort>();
+			if (Self.Sort == null) Self.Sort = new Dictionary<Field, ISort>();
 			Self.Sort.Add(field, new Sort() { Order = SortOrder.Ascending });
 			return this;
 		}
@@ -146,7 +146,7 @@ namespace Nest
 		public PercolateCountDescriptor<TDocument> SortDescending(string field)
 		{
 			if (Self.Sort == null)
-				Self.Sort = new Dictionary<FieldName, ISort>();
+				Self.Sort = new Dictionary<Field, ISort>();
 
 			Self.Sort.Add(field, new Sort() { Order = SortOrder.Descending });
 			return this;
@@ -159,7 +159,7 @@ namespace Nest
 		public PercolateCountDescriptor<TDocument> Sort(Func<SortFieldDescriptor<TDocument>, IFieldSort> sortSelector)
 		{
 			if (Self.Sort == null)
-				Self.Sort = new Dictionary<FieldName, ISort>();
+				Self.Sort = new Dictionary<Field, ISort>();
 
 			sortSelector.ThrowIfNull("sortSelector");
 			var descriptor = sortSelector(new SortFieldDescriptor<TDocument>());
@@ -174,7 +174,7 @@ namespace Nest
 		public PercolateCountDescriptor<TDocument> SortGeoDistance(Func<SortGeoDistanceDescriptor<TDocument>, IGeoDistanceSort> sortSelector)
 		{
 			if (Self.Sort == null)
-				Self.Sort = new Dictionary<FieldName, ISort>();
+				Self.Sort = new Dictionary<Field, ISort>();
 
 			sortSelector.ThrowIfNull("sortSelector");
 			var descriptor = sortSelector(new SortGeoDistanceDescriptor<TDocument>());
@@ -189,7 +189,7 @@ namespace Nest
 		public PercolateCountDescriptor<TDocument> SortScript(Func<SortScriptDescriptor<TDocument>, IScriptSort> sortSelector)
 		{
 			if (Self.Sort == null)
-				Self.Sort = new Dictionary<FieldName, ISort>();
+				Self.Sort = new Dictionary<Field, ISort>();
 
 			sortSelector.ThrowIfNull("sortSelector");
 			var descriptor = sortSelector(new SortScriptDescriptor<TDocument>());

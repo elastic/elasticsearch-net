@@ -56,7 +56,7 @@ namespace Nest
 		Operator? Operator { get; set; }
 
 		[JsonProperty(PropertyName = "fields")]
-		IEnumerable<FieldName> Fields { get; set; }
+		Fields Fields { get; set; }
 
 		[JsonProperty(PropertyName = "zero_terms_query")]
 		ZeroTermsQuery? ZeroTermsQuery { get; set; }
@@ -79,13 +79,12 @@ namespace Nest
 		public double? TieBreaker { get; set; }
 		public MinimumShouldMatch MinimumShouldMatch { get; set; }
 		public Operator? Operator { get; set; }
-		public IEnumerable<FieldName> Fields { get; set; }
+		public Fields Fields { get; set; }
 		public ZeroTermsQuery? ZeroTermsQuery { get; set; }
 
 		protected override void WrapInContainer(IQueryContainer c) => c.MultiMatch = this;
 
-		internal static bool IsConditionless(IMultiMatchQuery q) 
-			=> !q.Fields.HasAny() || q.Fields.All(f => f.IsConditionless()) || q.Query.IsNullOrEmpty();
+		internal static bool IsConditionless(IMultiMatchQuery q) => q.Fields.IsConditionless() || q.Query.IsNullOrEmpty();
 	}
 
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
@@ -108,30 +107,11 @@ namespace Nest
 		double? IMultiMatchQuery.TieBreaker { get; set; }
 		MinimumShouldMatch IMultiMatchQuery.MinimumShouldMatch { get; set; }
 		Operator? IMultiMatchQuery.Operator { get; set; }
-		IEnumerable<FieldName> IMultiMatchQuery.Fields { get; set; }
+		Fields IMultiMatchQuery.Fields { get; set; }
 		ZeroTermsQuery? IMultiMatchQuery.ZeroTermsQuery { get; set; }
 
-		public MultiMatchQueryDescriptor<T> OnFields(IEnumerable<string> fields) =>
-			Assign(a => a.Fields = fields?.Select(f => (FieldName)f).ToListOrNullIfEmpty());
-
-		public MultiMatchQueryDescriptor<T> OnFields(params Expression<Func<T, object>>[] objectPaths) =>
-			Assign(a => a.Fields = objectPaths?.Select(f => (FieldName)f).ToListOrNullIfEmpty());
-
-		public MultiMatchQueryDescriptor<T> OnFieldsWithBoost(Func<
-			FluentDictionary<Expression<Func<T, object>>, double?>, IDictionary<Expression<Func<T, object>>, double?>> boostableSelector) =>
-				Assign(a => a.Fields = boostableSelector?
-					.Invoke(new FluentDictionary<Expression<Func<T, object>>, double?>())
-					.Select(o => FieldName.Create(o.Key, o.Value))
-					.ToListOrNullIfEmpty()
-				);
-
-		public MultiMatchQueryDescriptor<T> OnFieldsWithBoost(
-			Func<FluentDictionary<string, double?>, IDictionary<Expression<Func<T, object>>, double?>> boostableSelector) =>
-				Assign(a => a.Fields = boostableSelector?
-					.Invoke(new FluentDictionary<string, double?>())
-					.Select(o => FieldName.Create(o.Key, o.Value))
-					.ToListOrNullIfEmpty()
-				);
+		public MultiMatchQueryDescriptor<T> OnFields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
+			Assign(a => a.Fields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
 
 		public MultiMatchQueryDescriptor<T> Query(string query) => Assign(a => a.Query = query);
 

@@ -98,11 +98,11 @@ namespace Nest
 		}
 
 
-		internal static void ThrowIfNullOrEmpty(this string @object, string parameterName)
+		internal static void ThrowIfNullOrEmpty(this string @object, string parameterName, string when = null)
 		{
-			@object.ThrowIfNull(parameterName);
+			@object.ThrowIfNull(parameterName, when);
 			if (string.IsNullOrWhiteSpace(@object))
-				throw new ArgumentException("Argument can't be null or empty", parameterName);
+				throw new ArgumentException("Argument can't be null or empty" + (when.IsNullOrEmpty() ? "" : " when " + when), parameterName);
 		}
 		internal static void ThrowIfEmpty<T>(this IEnumerable<T> @object, string parameterName)
 		{
@@ -130,7 +130,7 @@ namespace Nest
 		internal static void ThrowIfNull<T>(this T value, string name, string message = null)
 		{
 			if (value == null && message.IsNullOrEmpty()) throw new ArgumentNullException(name);
-			else if (value == null) throw new ArgumentNullException(name, message);
+			else if (value == null) throw new ArgumentNullException(name, "Argument can not be null when " + message);
 		}
 
 		internal static string F(this string format, params object[] args)

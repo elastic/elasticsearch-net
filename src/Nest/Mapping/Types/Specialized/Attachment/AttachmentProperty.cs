@@ -23,7 +23,7 @@ namespace Nest
 	{
 		public AttachmentProperty() : base("attachment") { }
 
-		private IDictionary<FieldName, IProperty> Dictionary => this.Fields.Dictionary as IDictionary<FieldName, IProperty>;
+		private IDictionary<Field, IProperty> Dictionary => this.Fields.Dictionary as IDictionary<Field, IProperty>;
 
 		internal AttachmentProperty(AttachmentAttribute attribute) : base("attachment", attribute) { }
 
@@ -96,7 +96,7 @@ namespace Nest
 		INumberProperty IAttachmentProperty.ContentLengthField { get; set; }
 		IStringProperty IAttachmentProperty.LanguageField { get; set; }
 
-		private IDictionary<FieldName, IProperty> Dictionary => ((IAttachmentProperty)this).Fields.Dictionary as IDictionary<FieldName, IProperty>;
+		private IDictionary<Field, IProperty> Dictionary => ((IAttachmentProperty)this).Fields.Dictionary as IDictionary<Field, IProperty>;
 
 		public AttachmentPropertyDescriptor() : base("attachment") { }
 

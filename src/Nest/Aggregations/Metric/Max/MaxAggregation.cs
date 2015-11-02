@@ -13,7 +13,7 @@ namespace Nest
 
 	public class MaxAgg : MetricAgg, IMaxAggregator
 	{
-		public MaxAgg(string name, FieldName field) : base(name, field) { }
+		public MaxAgg(string name, Field field) : base(name, field) { }
 
 		internal override void WrapInContainer(AggregationContainer c) => c.Max = this;
 	}

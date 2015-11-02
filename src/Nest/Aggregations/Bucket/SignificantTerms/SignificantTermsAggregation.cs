@@ -10,7 +10,7 @@ namespace Nest
 	public interface ISignificantTermsAggregator : IBucketAggregator
 	{
 		[JsonProperty("field")]
-		FieldName Field { get; set; }
+		Field Field { get; set; }
 
 		[JsonProperty("size")]
 		int? Size { get; set; }
@@ -52,7 +52,7 @@ namespace Nest
 
 	public class SignificantTermsAggregator : BucketAggregator, ISignificantTermsAggregator
 	{
-		public FieldName Field { get; set; }
+		public Field Field { get; set; }
 		public int? Size { get; set; }
 		public int? ShardSize { get; set; }
 		public int? MinimumDocumentCount { get; set; }
@@ -69,7 +69,7 @@ namespace Nest
 
 	public class SignificantTermsAgg : BucketAgg, ISignificantTermsAggregator
 	{
-		public FieldName Field { get; set; }
+		public Field Field { get; set; }
 		public int? Size { get; set; }
 		public int? ShardSize { get; set; }
 		public int? MinimumDocumentCount { get; set; }
@@ -93,7 +93,7 @@ namespace Nest
 			, ISignificantTermsAggregator
 		where T : class
 	{
-		FieldName ISignificantTermsAggregator.Field { get; set; }
+		Field ISignificantTermsAggregator.Field { get; set; }
 
 		int? ISignificantTermsAggregator.Size { get; set; }
 

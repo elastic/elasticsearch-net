@@ -11,7 +11,7 @@ namespace Nest
 	public interface IRangeAggregator : IBucketAggregator
 	{
 		[JsonProperty("field")]
-		FieldName Field { get; set; }
+		Field Field { get; set; }
 
 		[JsonProperty("script")]
 		string Script { get; set; }
@@ -25,7 +25,7 @@ namespace Nest
 
 	public class RangeAggregator : BucketAggregator, IRangeAggregator
 	{
-		public FieldName Field { get; set; }
+		public Field Field { get; set; }
 		public string Script { get; set; }
 		public FluentDictionary<string, object> Params { get; set; }
 		public IEnumerable<Range<double>> Ranges { get; set; }
@@ -33,7 +33,7 @@ namespace Nest
 
 	public class RangeAgg : BucketAgg, IRangeAggregator
 	{
-		public FieldName Field { get; set; }
+		public Field Field { get; set; }
 		public string Script { get; set; }
 		public FluentDictionary<string, object> Params { get; set; }
 		public IEnumerable<Range<double>> Ranges { get; set; }
@@ -47,7 +47,7 @@ namespace Nest
 		: BucketAggregatorBaseDescriptor<RangeAggregatorDescriptor<T>, IRangeAggregator, T>, IRangeAggregator
 		where T : class
 	{
-		FieldName IRangeAggregator.Field { get; set; }
+		Field IRangeAggregator.Field { get; set; }
 
 		string IRangeAggregator.Script { get; set; }
 

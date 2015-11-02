@@ -11,7 +11,7 @@ namespace Nest
 	public interface IGeoHashAggregator : IBucketAggregator
 	{
 		[JsonProperty("field")]
-		FieldName Field { get; set; }
+		Field Field { get; set; }
 
 		[JsonProperty("size")]
 		int? Size { get; set; }
@@ -25,7 +25,7 @@ namespace Nest
 
 	public class GeoHashAggregator : BucketAggregator, IGeoHashAggregator
 	{
-		public FieldName Field { get; set; }
+		public Field Field { get; set; }
 		public int? Size { get; set; }
 		public int? ShardSize { get; set; }
 		public GeoHashPrecision? Precision { get; set; }
@@ -33,7 +33,7 @@ namespace Nest
 
 	public class GeoHashAgg : BucketAgg, IGeoHashAggregator
 	{
-		public FieldName Field { get; set; }
+		public Field Field { get; set; }
 		public int? Size { get; set; }
 		public int? ShardSize { get; set; }
 		public GeoHashPrecision? Precision { get; set; }
@@ -48,7 +48,7 @@ namespace Nest
 			, IGeoHashAggregator 
 		where T : class
 	{
-		FieldName IGeoHashAggregator.Field { get; set; }
+		Field IGeoHashAggregator.Field { get; set; }
 		
 		int? IGeoHashAggregator.Size { get; set; }
 

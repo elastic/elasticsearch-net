@@ -81,7 +81,7 @@ namespace Nest
 			{
 
 				writer.WriteStartObject();
-				var fieldName = contract.Infer.FieldName(sort.SortKey);
+				var fieldName = contract.Infer.Field(sort.SortKey);
 				writer.WritePropertyName(fieldName);
 				serializer.Serialize(writer, sort);
 				writer.WriteEndObject();

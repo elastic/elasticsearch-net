@@ -27,7 +27,7 @@ namespace Tests.Search.Request
 		protected override SearchRequest<Project> Initializer =>
 			new SearchRequest<Project>
 			{
-				Fields = new FieldName[] { "name", "startedOn" }
+				Fields = new Field[] { "name", "startedOn" }
 			};
 	}
 }

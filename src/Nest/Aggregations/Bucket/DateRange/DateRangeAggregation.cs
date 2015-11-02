@@ -11,7 +11,7 @@ namespace Nest
 	public interface IDateRangeAggregator : IBucketAggregator
 	{
 		[JsonProperty("field")]
-		FieldName Field { get; set; }
+		Field Field { get; set; }
 
 		[JsonProperty("format")]
 		string Format { get; set; }
@@ -22,14 +22,14 @@ namespace Nest
 
 	public class DateRangeAggregator : BucketAggregator, IDateRangeAggregator
 	{
-		public FieldName Field { get; set; }
+		public Field Field { get; set; }
 		public string Format { get; set; }
 		public IEnumerable<IDateRangeExpression> Ranges { get; set; }
 	}
 
 	public class DateRangeAgg : BucketAgg, IDateRangeAggregator
 	{
-		public FieldName Field { get; set; }
+		public Field Field { get; set; }
 		public string Format { get; set; }
 		public IEnumerable<IDateRangeExpression> Ranges { get; set; }
 
@@ -43,7 +43,7 @@ namespace Nest
 			, IDateRangeAggregator 
 		where T : class
 	{
-		FieldName IDateRangeAggregator.Field { get; set; }
+		Field IDateRangeAggregator.Field { get; set; }
 		
 		string IDateRangeAggregator.Format { get; set; }
 

@@ -18,7 +18,7 @@ namespace Nest
 		[JsonProperty("doc")]
 		object Document { get; set; }
 		[JsonProperty("fields")]
-		IEnumerable<FieldName> Fields { get; set; }
+		IEnumerable<Field> Fields { get; set; }
 		[JsonProperty("offsets")]
 		bool? Offsets { get; set; }
 		[JsonProperty("payloads")]
@@ -45,7 +45,7 @@ namespace Nest
 		public TypeName Type { get; set; }
 		public Id Id { get; set; }
 		public object Document { get; set; }
-		public IEnumerable<FieldName> Fields { get; set; }
+		public IEnumerable<Field> Fields { get; set; }
 		public bool? Offsets { get; set; }
 		public bool? Payloads { get; set; }
 		public bool? Positions { get; set; }
@@ -60,7 +60,7 @@ namespace Nest
 		TypeName IMultiTermVectorOperation.Type { get; set; } = typeof (T);
 		Id IMultiTermVectorOperation.Id { get; set; }
 		object IMultiTermVectorOperation.Document { get; set; }
-		IEnumerable<FieldName> IMultiTermVectorOperation.Fields { get; set; }
+		IEnumerable<Field> IMultiTermVectorOperation.Fields { get; set; }
 		bool? IMultiTermVectorOperation.Offsets { get; set; }
 		bool? IMultiTermVectorOperation.Payloads { get; set; }
 		bool? IMultiTermVectorOperation.Positions { get; set; }
@@ -69,10 +69,10 @@ namespace Nest
 
 		public MultiTermVectorOperationDescriptor<T> Id(Id id) => Assign(a=>a.Id = id);
 
-		public MultiTermVectorOperationDescriptor<T> Fields(params string[] fields) => Assign(a => a.Fields = fields.Select(f => (FieldName) f).ToList());
+		public MultiTermVectorOperationDescriptor<T> Fields(params string[] fields) => Assign(a => a.Fields = fields.Select(f => (Field) f).ToList());
 
 		public MultiTermVectorOperationDescriptor<T> Fields(params Expression<Func<T, object>>[] fields) =>
-			Assign(a => a.Fields = fields.Select(f => (FieldName) f).ToList());
+			Assign(a => a.Fields = fields.Select(f => (Field) f).ToList());
 
 		public MultiTermVectorOperationDescriptor<T> Fields(Func<FluentFieldList<T>, FluentFieldList<T>> fields) =>
 			Assign(a => a.Fields = fields?.Invoke(new FluentFieldList<T>())?.ToList());

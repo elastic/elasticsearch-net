@@ -21,7 +21,7 @@ namespace Nest
 		IQueryContainer Query { get; set; }
 
 		[JsonProperty("path")]
-		FieldName Path { get; set; }
+		Field Path { get; set; }
 
 		[JsonProperty("inner_hits")]
 		[JsonConverter(typeof(ReadAsTypeJsonConverter<InnerHits>))]
@@ -35,7 +35,7 @@ namespace Nest
 		public NestedScore? Score { get; set; }
 		public IQueryContainer Filter { get; set; }
 		public IQueryContainer Query { get; set; }
-		public FieldName Path { get; set; }
+		public Field Path { get; set; }
 		public IInnerHits InnerHits { get; set; }
 
 		protected override void WrapInContainer(IQueryContainer c) => c.Nested = this;
@@ -55,7 +55,7 @@ namespace Nest
 		NestedScore? INestedQuery.Score { get; set; }
 		IQueryContainer INestedQuery.Filter { get; set; }
 		IQueryContainer INestedQuery.Query { get; set; }
-		FieldName INestedQuery.Path { get; set; }
+		Field INestedQuery.Path { get; set; }
 		IInnerHits INestedQuery.InnerHits { get; set; }
 
 		public NestedQueryDescriptor<T> Filter(Func<QueryContainerDescriptor<T>, QueryContainer> selector) => 

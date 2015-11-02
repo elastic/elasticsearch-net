@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -178,16 +178,16 @@ namespace Nest
 	///<summary>descriptor for CatFielddata <pre>http://www.elastic.co/guide/en/elasticsearch/reference/master/cat-fielddata.html</pre></summary>
 	public partial class CatFielddataDescriptor  : RequestDescriptorBase<CatFielddataDescriptor,CatFielddataRequestParameters, ICatFielddataRequest>, ICatFielddataRequest
 	{ 
-		FieldNames ICatFielddataRequest.Fields => Self.RouteValues.Get<FieldNames>("fields");
+		Fields ICatFielddataRequest.Fields => Self.RouteValues.Get<Fields>("fields");
 			/// <summary>/_cat/fielddata</summary>
 		public CatFielddataDescriptor() : base(){}
 		
 
 			///<summary>A comma-separated list of fields to return the fielddata size</summary>
-		public CatFielddataDescriptor Fields(FieldNames fields) => Assign(a=>a.RouteValues.Optional("fields", fields));
+		public CatFielddataDescriptor Fields(Fields fields) => Assign(a=>a.RouteValues.Optional("fields", fields));
 
 		///<summary>A comma-separated list of fields to return the fielddata size</summary>
-		public CatFielddataDescriptor Fields<T>(params Expression<Func<T, object>>[] fields) => Assign(a => a.RouteValues.Optional("fields", (FieldNames)fields));
+		public CatFielddataDescriptor Fields<T>(params Expression<Func<T, object>>[] fields) => Assign(a => a.RouteValues.Optional("fields", (Fields)fields));
 
 	
 		///<summary>The unit in which to display byte values</summary>
@@ -2295,10 +2295,10 @@ namespace Nest
 	{ 
 		Indices IGetFieldMappingRequest.Index => Self.RouteValues.Get<Indices>("index");
 		Types IGetFieldMappingRequest.Type => Self.RouteValues.Get<Types>("type");
-		FieldNames IGetFieldMappingRequest.Fields => Self.RouteValues.Get<FieldNames>("fields");
+		Fields IGetFieldMappingRequest.Fields => Self.RouteValues.Get<Fields>("fields");
 			/// <summary>/_mapping/field/{fields}</summary>
 ///<param name="fields"> this parameter is required</param>
-		public GetFieldMappingDescriptor(FieldNames fields) : base(r=>r.Required("fields", fields)){}
+		public GetFieldMappingDescriptor(Fields fields) : base(r=>r.Required("fields", fields)){}
 		
 
 			///<summary>A comma-separated list of index names</summary>

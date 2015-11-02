@@ -27,7 +27,7 @@ namespace Nest
 		public IEnumerable<double> Percentages { get; set; }
 		public int? Compression { get; set; }
 
-		public PercentilesAgg(string name, FieldName field) : base(name, field) { } 
+		public PercentilesAgg(string name, Field field) : base(name, field) { } 
 
 		internal override void WrapInContainer(AggregationContainer c) => c.Percentiles = this;
 	}

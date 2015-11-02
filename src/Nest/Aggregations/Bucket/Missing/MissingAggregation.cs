@@ -10,17 +10,17 @@ namespace Nest
 	public interface IMissingAggregator : IBucketAggregator
 	{
 		[JsonProperty("field")]
-		FieldName Field { get; set; }
+		Field Field { get; set; }
 	}
 
 	public class MissingAggregator : BucketAggregator, IMissingAggregator
 	{
-		public FieldName Field { get; set; }
+		public Field Field { get; set; }
 	}
 
 	public class MissingAgg : BucketAgg, IMissingAggregator
 	{
-		public FieldName Field { get; set; }
+		public Field Field { get; set; }
 
 		public MissingAgg(string name) : base(name) { }
 
@@ -32,7 +32,7 @@ namespace Nest
 			, IMissingAggregator 
 		where T : class
 	{
-		FieldName IMissingAggregator.Field { get; set; }
+		Field IMissingAggregator.Field { get; set; }
 
 		public MissingAggregatorDescriptor<T> Field(string field) => Assign(a => a.Field = field);
 

@@ -7,12 +7,12 @@ namespace Nest
 {
 	public interface IFieldNameQuery : IQuery
 	{
-		FieldName Field { get; set; }
+		Field Field { get; set; }
 	}
 
 	public abstract class FieldNameQueryBase : QueryBase, IFieldNameQuery
 	{
 		public virtual bool Conditionless => false;
-		public FieldName Field { get; set; }
+		public Field Field { get; set; }
 	}
 }

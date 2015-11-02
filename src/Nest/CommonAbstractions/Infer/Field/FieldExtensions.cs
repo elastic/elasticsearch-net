@@ -5,11 +5,12 @@ using System.Text;
 
 namespace Nest
 {
-	public static class FieldNameExtensions
+	internal static class FieldExtensions
 	{
-		internal static bool IsConditionless(this FieldName field)
+		internal static bool IsConditionless(this Field field)
 		{
 			return field == null || (field.Name.IsNullOrEmpty() && field.Expression == null && field.Property == null);
 		}
+		internal static bool IsConditionless(this Fields field) => field.ListOfFields.All(l => l.IsConditionless());
 	}
 }

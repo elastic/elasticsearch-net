@@ -12,19 +12,19 @@ namespace Nest
 	public interface IReverseNestedAggregator : IBucketAggregator
 	{
 		[JsonProperty("path")]
-		FieldName Path { get; set; }
+		Field Path { get; set; }
 	}
 
 	public class ReverseNestedAggregator : BucketAggregator, IReverseNestedAggregator
 	{
 		[JsonProperty("path")]
-		public FieldName Path { get; set; }
+		public Field Path { get; set; }
 	}
 
 	public class ReverseNestedAgg : BucketAgg, IReverseNestedAggregator
 	{
 		[JsonProperty("path")]
-		public FieldName Path { get; set; }
+		public Field Path { get; set; }
 
 		public ReverseNestedAgg(string name) : base(name) { }
 
@@ -36,7 +36,7 @@ namespace Nest
 			, IReverseNestedAggregator 
 		where T : class
 	{
-		FieldName IReverseNestedAggregator.Path { get; set; }
+		Field IReverseNestedAggregator.Path { get; set; }
 
 		public ReverseNestedAggregationDescriptor<T> Path(string path) => Assign(a => a.Path = path);
 

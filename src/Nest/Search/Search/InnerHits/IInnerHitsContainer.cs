@@ -13,13 +13,13 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "path")]
 		[JsonConverter(typeof (VerbatimDictionaryKeysJsonConverter))]
-		IDictionary<FieldName, IGlobalInnerHit> Path { get; set; }
+		IDictionary<Field, IGlobalInnerHit> Path { get; set; }
 	}
 
 	public class InnerHitsContainer : IInnerHitsContainer
 	{
 		public IDictionary<TypeName, IGlobalInnerHit> Type { get; set; }
-		public IDictionary<FieldName, IGlobalInnerHit> Path { get; set; }
+		public IDictionary<Field, IGlobalInnerHit> Path { get; set; }
 	}
 
 	public class InnerHitsContainerDescriptor<T> : IInnerHitsContainer where T : class
@@ -27,7 +27,7 @@ namespace Nest
 		private IInnerHitsContainer Self { get { return this; }}
 
 		IDictionary<TypeName, IGlobalInnerHit> IInnerHitsContainer.Type { get; set; }
-		IDictionary<FieldName, IGlobalInnerHit> IInnerHitsContainer.Path { get; set; }
+		IDictionary<Field, IGlobalInnerHit> IInnerHitsContainer.Path { get; set; }
 
 		public InnerHitsContainerDescriptor<T> Type(Func<GlobalInnerHitDescriptor<T>, IGlobalInnerHit> globalInnerHitsSelector = null) 
 		{
@@ -46,14 +46,14 @@ namespace Nest
 		public InnerHitsContainerDescriptor<T> Path(string path, Func<GlobalInnerHitDescriptor<T>, IGlobalInnerHit> globalInnerHitsSelector = null) 
 		{
 			var globalInnerHit = globalInnerHitsSelector == null ? new GlobalInnerHit() : globalInnerHitsSelector(new GlobalInnerHitDescriptor<T>());
-			Self.Path = new Dictionary<FieldName, IGlobalInnerHit> {{ path, globalInnerHit}};
+			Self.Path = new Dictionary<Field, IGlobalInnerHit> {{ path, globalInnerHit}};
 			return this;
 		}
 
 		public InnerHitsContainerDescriptor<T> Path(Expression<Func<T, object>> path, Func<GlobalInnerHitDescriptor<T>, IGlobalInnerHit> globalInnerHitsSelector = null) 
 		{
 			var globalInnerHit = globalInnerHitsSelector == null ? new GlobalInnerHit() : globalInnerHitsSelector(new GlobalInnerHitDescriptor<T>());
-			Self.Path = new Dictionary<FieldName, IGlobalInnerHit> {{ path, globalInnerHit}};
+			Self.Path = new Dictionary<Field, IGlobalInnerHit> {{ path, globalInnerHit}};
 			return this;
 		}
 	}

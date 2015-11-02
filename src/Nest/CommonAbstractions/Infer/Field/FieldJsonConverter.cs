@@ -5,10 +5,10 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	internal class FieldNameJsonConverter : JsonConverter
+	internal class FieldJsonConverter : JsonConverter
 	{
 		private readonly ElasticInferrer _infer;
-		public FieldNameJsonConverter(IConnectionSettingsValues connectionSettings)
+		public FieldJsonConverter(IConnectionSettingsValues connectionSettings)
 		{
 			_infer = new ElasticInferrer(connectionSettings);
 		}
@@ -21,13 +21,13 @@ namespace Nest
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-			var field = value as FieldName;
+			var field = value as Field;
 			if (field == null)
 			{
 				writer.WriteNull();
 				return;
 			}
-			writer.WriteValue(this._infer.FieldName(field));
+			writer.WriteValue(this._infer.Field(field));
 		}
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{

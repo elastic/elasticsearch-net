@@ -13,7 +13,7 @@ namespace Nest
 
 	public class MinAgg : MetricAgg, IMinAggregator
 	{
-		public MinAgg(string name, FieldName field) : base(name, field) { }
+		public MinAgg(string name, Field field) : base(name, field) { }
 
 		internal override void WrapInContainer(AggregationContainer c) => c.Min = this;
 	}

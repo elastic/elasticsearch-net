@@ -10,7 +10,7 @@ namespace Nest
 	public interface IHistogramAggregator : IBucketAggregator
 	{
 		[JsonProperty("field")]
-		FieldName Field { get; set; }
+		Field Field { get; set; }
 
 		[JsonProperty("script")]
 		string Script { get; set; }
@@ -39,7 +39,7 @@ namespace Nest
 
 	public class HistogramAggregator : BucketAggregator, IHistogramAggregator
 	{
-		public FieldName Field { get; set; }
+		public Field Field { get; set; }
 		public string Script { get; set; }
 		public FluentDictionary<string, object> Params { get; set; }
 		public double? Interval { get; set; }
@@ -52,7 +52,7 @@ namespace Nest
 
 	public class HistogramAgg : BucketAgg, IHistogramAggregator
 	{
-		public FieldName Field { get; set; }
+		public Field Field { get; set; }
 		public string Script { get; set; }
 		public FluentDictionary<string, object> Params { get; set; }
 		public double? Interval { get; set; }
@@ -71,7 +71,7 @@ namespace Nest
 		: BucketAggregatorBaseDescriptor<HistogramAggregatorDescriptor<T>, IHistogramAggregator, T>, IHistogramAggregator
 		where T : class
 	{
-		FieldName IHistogramAggregator.Field { get; set; }
+		Field IHistogramAggregator.Field { get; set; }
 
 		string IHistogramAggregator.Script { get; set; }
 

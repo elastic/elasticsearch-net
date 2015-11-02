@@ -40,7 +40,7 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "fields")]
 		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
-		Dictionary<FieldName, IHighlightField> Fields { get; set; }
+		Dictionary<Field, IHighlightField> Fields { get; set; }
 
 		[JsonProperty("require_field_match")]
 		bool? RequireFieldMatch { get; set; }
@@ -63,7 +63,7 @@ namespace Nest
 		public int? BoundaryMaxSize { get; set; }
 		public string Encoder { get; set; }
 		public string Order { get; set; }
-		public Dictionary<FieldName, IHighlightField> Fields { get; set; }
+		public Dictionary<Field, IHighlightField> Fields { get; set; }
 		public bool? RequireFieldMatch { get; set; }
 		public string BoundaryChars { get; set; }
 		public IQueryContainer HighlightQuery { get; set; }
@@ -94,7 +94,7 @@ namespace Nest
 
 		string IHighlightRequest.Order { get; set; }
 
-		Dictionary<FieldName, IHighlightField> IHighlightRequest.Fields { get; set; }
+		Dictionary<Field, IHighlightField> IHighlightRequest.Fields { get; set; }
 
 		bool? IHighlightRequest.RequireFieldMatch { get; set; }
 

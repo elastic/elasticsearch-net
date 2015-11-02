@@ -15,7 +15,7 @@ namespace Tests.Indices.MappingManagement.GetFieldMapping
 	public class GetFieldMappingApiTests 
 		: ApiIntegrationTestBase<IGetFieldMappingResponse, IGetFieldMappingRequest, GetFieldMappingDescriptor<Project>, GetFieldMappingRequest>
 	{
-		private static readonly FieldNames Fields = Static.Fields<Project>(p => p.Name, p => p.Tags);
+		private static readonly Fields Fields = Static.Fields<Project>(p => p.Name, p => p.Tags);
 
 		public GetFieldMappingApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 		protected override LazyResponses ClientUsage() => Calls(

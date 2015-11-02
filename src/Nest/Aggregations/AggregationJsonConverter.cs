@@ -336,10 +336,10 @@ namespace Nest
 			var currentDepth = reader.Depth;
 			do
 			{
-				var FieldName = reader.Value as string;
+				var fieldName = reader.Value as string;
 				reader.Read();
 				var agg = this.ReadAggregation(reader, serializer);
-				nestedAggs.Add(FieldName, agg);
+				nestedAggs.Add(fieldName, agg);
 				reader.Read();
 				if (reader.Depth == currentDepth && reader.TokenType == JsonToken.EndObject || reader.Depth < currentDepth)
 					break;

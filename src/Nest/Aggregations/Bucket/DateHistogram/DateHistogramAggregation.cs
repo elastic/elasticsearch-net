@@ -10,7 +10,7 @@ namespace Nest
 	public interface IDateHistogramAggregator : IBucketAggregator
 	{
 		[JsonProperty("field")]
-		FieldName Field { get; set; }
+		Field Field { get; set; }
 
 		[JsonProperty("script")]
 		string Script { get; set; }
@@ -45,7 +45,7 @@ namespace Nest
 
 	public class DateHistogramAggregator : BucketAggregator, IDateHistogramAggregator
 	{
-		public FieldName Field { get; set; }
+		public Field Field { get; set; }
 		public string Script { get; set; }
 		public IDictionary<string, object> Params { get; set; }
 		public Union<DateInterval, TimeUnitExpression>  Interval { get; set; }
@@ -60,7 +60,7 @@ namespace Nest
 
 	public class DateHistogramAgg : BucketAgg, IDateHistogramAggregator
 	{
-		public FieldName Field { get; set; }
+		public Field Field { get; set; }
 		public string Script { get; set; }
 		public IDictionary<string, object> Params { get; set; }
 		public Union<DateInterval, TimeUnitExpression> Interval { get; set; }
@@ -82,7 +82,7 @@ namespace Nest
 			, IDateHistogramAggregator
 		where T : class
 	{
-		FieldName IDateHistogramAggregator.Field { get; set; }
+		Field IDateHistogramAggregator.Field { get; set; }
 
 		string IDateHistogramAggregator.Script { get; set; }
 

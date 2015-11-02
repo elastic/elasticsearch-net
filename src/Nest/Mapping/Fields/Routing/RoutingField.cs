@@ -11,21 +11,21 @@ namespace Nest
 		bool? Required { get; set; }
 
 		[JsonProperty("path")]
-		FieldName Path { get; set; }
+		Field Path { get; set; }
 	}
 
 	public class RoutingField : IRoutingField
 	{
 		public bool? Required { get; set; }
 
-		public FieldName Path { get; set; }
+		public Field Path { get; set; }
 	}
 
 	public class RoutingFieldDescriptor<T> 
 		: DescriptorBase<RoutingFieldDescriptor<T>, IRoutingField>, IRoutingField
 	{
 		bool? IRoutingField.Required { get; set;}
-		FieldName IRoutingField.Path { get; set; }
+		Field IRoutingField.Path { get; set; }
 
 		public RoutingFieldDescriptor<T> Required(bool required = true) => Assign(a => a.Required = required);
 

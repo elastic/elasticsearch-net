@@ -12,7 +12,7 @@ namespace Nest
 		where TInterface : class, IFieldNameQuery
 		where T : class
 	{
-		FieldName IFieldNameQuery.Field { get; set; }
+		Field IFieldNameQuery.Field { get; set; }
 
 		public TDescriptor OnField(string field) => Assign(a => a.Field = field);
 

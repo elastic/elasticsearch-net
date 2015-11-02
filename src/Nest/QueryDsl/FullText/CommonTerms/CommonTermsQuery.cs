@@ -59,7 +59,7 @@ namespace Nest
 		string IQuery.Name { get; set; }
 		bool IQuery.Conditionless => CommonTermsQuery.IsConditionless(this);
 		string ICommonTermsQuery.Query { get; set; }
-		FieldName IFieldNameQuery.Field { get; set; }
+		Field IFieldNameQuery.Field { get; set; }
 		double? ICommonTermsQuery.CutoffFrequency { get; set; }
 		Operator? ICommonTermsQuery.LowFrequencyOperator { get; set; }
 		Operator? ICommonTermsQuery.HighFrequencyOperator { get; set; }

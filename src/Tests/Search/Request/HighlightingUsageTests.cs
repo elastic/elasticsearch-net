@@ -63,7 +63,7 @@ namespace Tests.Search.Request
 				{
 					PreTags = new[] { "<tag1>" },
 					PostTags = new[] { "</tag1>" },
-					Fields = new Dictionary<FieldName, IHighlightField>
+					Fields = new Dictionary<Field, IHighlightField>
 					{
 							{ "name", new HighlightField
 								{

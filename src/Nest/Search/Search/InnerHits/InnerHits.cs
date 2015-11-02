@@ -19,7 +19,7 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "sort")]
 		[JsonConverter(typeof(SortCollectionJsonConverter))]
-		IList<KeyValuePair<FieldName, ISort>> Sort { get; set; }
+		IList<KeyValuePair<Field, ISort>> Sort { get; set; }
 
 		[JsonProperty(PropertyName = "highlight")]
 		IHighlightRequest Highlight { get; set; }
@@ -35,7 +35,7 @@ namespace Nest
 		bool? Version { get; set; }
 
 		[JsonProperty(PropertyName = "fielddata_fields")]
-		IList<FieldName> FielddataFields { get; set; }
+		IList<Field> FielddataFields { get; set; }
 
 		[JsonProperty(PropertyName = "script_fields")]
 		[JsonConverter(typeof (VerbatimDictionaryKeysJsonConverter))]
@@ -50,7 +50,7 @@ namespace Nest
 
 		public int? Size { get; set; }
 
-		public IList<KeyValuePair<FieldName, ISort>> Sort { get; set; }
+		public IList<KeyValuePair<Field, ISort>> Sort { get; set; }
 
 		public IHighlightRequest Highlight { get; set; }
 
@@ -60,7 +60,7 @@ namespace Nest
 
 		public bool? Version { get; set; }
 
-		public IList<FieldName> FielddataFields { get; set; }
+		public IList<Field> FielddataFields { get; set; }
 
 		public IDictionary<string, IScriptQuery> ScriptFields { get; set; }
 	}
@@ -75,12 +75,12 @@ namespace Nest
 		string IInnerHits.Name { get; set; }
 		int? IInnerHits.From { get; set; }
 		int? IInnerHits.Size { get; set; }
-		IList<KeyValuePair<FieldName, ISort>> IInnerHits.Sort { get; set; }
+		IList<KeyValuePair<Field, ISort>> IInnerHits.Sort { get; set; }
 		IHighlightRequest IInnerHits.Highlight { get; set; }
 		bool? IInnerHits.Explain { get; set; }
 		ISourceFilter IInnerHits.Source { get; set; }
 		bool? IInnerHits.Version { get; set; }
-		IList<FieldName> IInnerHits.FielddataFields { get; set; }
+		IList<Field> IInnerHits.FielddataFields { get; set; }
 		IDictionary<string, IScriptQuery> IInnerHits.ScriptFields { get; set; }
 
 		public InnerHitsDescriptor<T> From(int? from) => _assign(a => a.From = from);
@@ -90,10 +90,10 @@ namespace Nest
 		public InnerHitsDescriptor<T> Name(string name) => _assign(a => a.Name = name);
 
 		public InnerHitsDescriptor<T> FielddataFields(params string[] fielddataFields) =>
-			_assign(a => a.FielddataFields = fielddataFields?.Select(f => (FieldName) f).ToListOrNullIfEmpty());
+			_assign(a => a.FielddataFields = fielddataFields?.Select(f => (Field) f).ToListOrNullIfEmpty());
 		
 		public InnerHitsDescriptor<T> FielddataFields(params Expression<Func<T, object>>[] fielddataFields) =>
-			_assign(a => a.FielddataFields = fielddataFields?.Select(f => (FieldName) f).ToListOrNullIfEmpty());
+			_assign(a => a.FielddataFields = fielddataFields?.Select(f => (Field) f).ToListOrNullIfEmpty());
 
 		public InnerHitsDescriptor<T> Explain(bool explain = true) => _assign(a => a.Explain = explain);
 

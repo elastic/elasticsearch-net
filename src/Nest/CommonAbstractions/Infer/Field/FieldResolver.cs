@@ -15,11 +15,11 @@ namespace Nest.Resolvers
 {
 	//Shout out to http://tomlev2.wordpress.com/2010/10/03/entity-framework-using-include-with-lambda-expressions/
 	//replaces my sloppy 300+ lines (though working!) first attempt, thanks Thomas Levesque.	
-	public class FieldNameResolver : ExpressionVisitor
+	public class FieldResolver : ExpressionVisitor
 	{
-		 private readonly IConnectionSettingsValues _settings;
+		private readonly IConnectionSettingsValues _settings;
 
-		public FieldNameResolver(IConnectionSettingsValues settings)
+		public FieldResolver(IConnectionSettingsValues settings)
 		{
 			if (settings == null)
 				throw new ArgumentNullException("settings");
@@ -30,7 +30,7 @@ namespace Nest.Resolvers
 		{
 			if (info == null)
 				return null;
-			
+
 			var name = info.Name;
 
 			var att = ElasticsearchPropertyAttribute.From(info);
@@ -69,7 +69,7 @@ namespace Nest.Resolvers
 			{
 				VisitConstantOrVariable(m, stack);
 				var callingMember = new ReadOnlyCollection<Expression>(
-					new List<Expression> {{m.Arguments.First()}}
+					new List<Expression> { { m.Arguments.First() } }
 				);
 				base.VisitExpressionList(callingMember, stack, properties);
 				return m;
@@ -77,10 +77,10 @@ namespace Nest.Resolvers
 			else if (m.Method.Name == "get_Item" && m.Arguments.Any())
 			{
 				var t = m.Object.Type;
-				var isDict = 
+				var isDict =
 					typeof(IDictionary).IsAssignableFrom(t)
 					|| typeof(IDictionary<,>).IsAssignableFrom(t)
-					|| (t.IsGenericType && t.GetGenericTypeDefinition() == typeof (IDictionary<,>));
+					|| (t.IsGenericType && t.GetGenericTypeDefinition() == typeof(IDictionary<,>));
 
 				if (!isDict)
 				{
@@ -111,35 +111,12 @@ namespace Nest.Resolvers
 				: Expression.Lambda(lastArg).Compile().DynamicInvoke().ToString();
 			stack.Push(value);
 		}
-		
+
 		private static bool IsLinqOperator(MethodInfo method)
 		{
 			if (method.DeclaringType != typeof(Queryable) && method.DeclaringType != typeof(Enumerable))
 				return false;
 			return Attribute.GetCustomAttribute(method, typeof(ExtensionAttribute)) != null;
-		}
-	}
-	
-
-	/// <summary>
-	/// Resolves member infos in an expression, instance may NOT be shared.
-	/// </summary>
-	public class MemberInfoResolver : FieldNameResolver
-	{
-		private readonly IList<MemberInfo> _members = new List<MemberInfo>();
-		public IList<MemberInfo> Members { get { return _members; } } 
-
-		public MemberInfoResolver(IConnectionSettingsValues settings, Expression expression) : base(settings)
-		{
-			var stack = new Stack<string>();
-			var properties = new Stack<ElasticsearchPropertyAttribute>();
-			base.Visit(expression, stack, properties);
-		}
-
-		protected override Expression VisitMemberAccess(MemberExpression expression, Stack<string> stack, Stack<ElasticsearchPropertyAttribute> properties)
-		{
-			this._members.Add(expression.Member);
-			return base.VisitMemberAccess(expression, stack, properties);
 		}
 	}
 }

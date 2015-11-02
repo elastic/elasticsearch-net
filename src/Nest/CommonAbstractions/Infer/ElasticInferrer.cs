@@ -15,7 +15,7 @@ namespace Nest
 		private IdResolver IdResolver { get; set; }
 		private IndexNameResolver IndexNameResolver { get; set; }
 		private TypeNameResolver TypeNameResolver { get; set; }
-		private FieldNameResolver FieldNameResolver { get; set; }
+		private FieldResolver FieldResolver { get; set; }
 
 		public string DefaultIndex
 		{
@@ -32,10 +32,10 @@ namespace Nest
 			this.IdResolver = new IdResolver(this._connectionSettings);
 			this.IndexNameResolver = new IndexNameResolver(this._connectionSettings);
 			this.TypeNameResolver = new TypeNameResolver(this._connectionSettings);
-			this.FieldNameResolver = new FieldNameResolver(this._connectionSettings);
+			this.FieldResolver = new FieldResolver(this._connectionSettings);
 		}
 
-		public string FieldName(FieldName field)
+		public string Field(Field field)
 		{
 			if (field.IsConditionless())
 				return null;
@@ -43,9 +43,9 @@ namespace Nest
 			var name = !field.Name.IsNullOrEmpty()
 				? field.Name
 				: field.Expression != null
-					? this.FieldNameResolver.Resolve(field.Expression)
+					? this.FieldResolver.Resolve(field.Expression)
 					: field.Property != null
-						? this.FieldNameResolver.Resolve(field.Property)
+						? this.FieldResolver.Resolve(field.Property)
 						: null;
 
 			if (name == null)
@@ -57,10 +57,10 @@ namespace Nest
 			return name;
 		}
 
-		public string FieldNames(IEnumerable<FieldName> fields)
+		public string Fields(IEnumerable<Field> fields)
 		{
 			if (!fields.HasAny() || fields.All(f=>f.IsConditionless())) return null;
-			return string.Join(",", fields.Select(FieldName).Where(f => !f.IsNullOrEmpty()));
+			return string.Join(",", fields.Select(Field).Where(f => !f.IsNullOrEmpty()));
 		}
 
 		public string PropertyName(PropertyName property)
@@ -71,9 +71,9 @@ namespace Nest
 			var name = !property.Name.IsNullOrEmpty()
 				? property.Name
 				: property.Expression != null
-					? this.FieldNameResolver.Resolve(property.Expression)
+					? this.FieldResolver.Resolve(property.Expression)
 					: property.Property != null
-						? this.FieldNameResolver.Resolve(property.Property)
+						? this.FieldResolver.Resolve(property.Property)
 						: null;
 
 			if (name == null)

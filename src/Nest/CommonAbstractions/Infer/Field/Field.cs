@@ -9,7 +9,7 @@ using System.Reflection;
 
 namespace Nest
 {
-	public class FieldName : IEquatable<FieldName>, IUrlParameter
+	public class Field : IEquatable<Field>, IUrlParameter
 	{
 		public string Name { get; set; }
 		public Expression Expression { get; set; }
@@ -18,54 +18,55 @@ namespace Nest
 
 		private string ComparisonValue { get; set; }
 
-		public FieldNames And<T>(Expression<Func<T, object>> field) where T : class =>
-			new FieldNames(new [] { this, field });
+		public Fields And<T>(Expression<Func<T, object>> field) where T : class =>
+			new Fields(new [] { this, field });
 
-		public FieldNames And(string field) => new FieldNames(new [] { this, field });
+		public Fields And(string field) => new Fields(new [] { this, field });
 
-		public static FieldName Create(string name, double? boost = null)
+		public static Field Create(string name, double? boost = null)
 		{
-			FieldName fieldName = name;
-			fieldName.Boost = boost;
-			return fieldName;
+			Field field = name;
+			field.Boost = boost;
+			return field;
 		}
 
-		public static FieldName Create(Expression expression, double? boost = null)
+		public static Field Create(Expression expression, double? boost = null)
 		{
-			FieldName fieldName = expression;
-			fieldName.Boost = boost;
-			return fieldName;
+			Field field = expression;
+			field.Boost = boost;
+			return field;
 		}
 
-		public static implicit operator FieldName(string name)
+		public static implicit operator Field(string name)
 		{
-			return name == null ? null : new FieldName
+			name.ThrowIfNullOrEmpty(nameof(name), "trying to implicitly convert from string to field");
+
+			return name == null ? null : new Field
 			{
 				Name = name,
 				ComparisonValue = name
 			};
 		}
 
-		public static implicit operator FieldName(Expression expression)
+		public static implicit operator Field(Expression expression)
 		{
 			if (expression == null) return null;
 
-			var comparisonValue = string.Empty;
 			var lambda = expression as LambdaExpression;
 			if (lambda == null)
-				return new FieldName { Expression = expression, ComparisonValue = expression.ToString() }; 
+				return new Field { Expression = expression, ComparisonValue = expression.ToString() }; 
 
 			var memberExpression = lambda.Body as MemberExpression;
 			if (memberExpression == null)
-				return new FieldName { Expression = expression, ComparisonValue = expression.ToString() }; 
+				return new Field { Expression = expression, ComparisonValue = expression.ToString() }; 
 			
-			return new FieldName { Expression = expression, ComparisonValue = memberExpression.Member.Name}; 
+			return new Field { Expression = expression, ComparisonValue = memberExpression.Member.Name}; 
 
 		}
 
-		public static implicit operator FieldName(PropertyInfo property)
+		public static implicit operator Field(PropertyInfo property)
 		{
-			return property == null ? null : new FieldName
+			return property == null ? null : new Field
 			{
 				Property = property,
 				ComparisonValue = property.Name
@@ -77,14 +78,14 @@ namespace Nest
 			return (ComparisonValue != null) ? ComparisonValue.GetHashCode() : 0;	
 		}
 
-		bool IEquatable<FieldName>.Equals(FieldName other)
+		bool IEquatable<Field>.Equals(Field other)
 		{
 			return Equals(other);
 		}
 
 		public override bool Equals(object obj)
 		{
-			var other = obj as FieldName;
+			var other = obj as Field;
 			if (other == null)
 				return false;
 			return ComparisonValue == other.ComparisonValue;
@@ -96,7 +97,7 @@ namespace Nest
 			if (nestSettings == null)
 				throw new Exception("Tried to pass field name on querysting but it could not be resolved because no nest settings are available");
 			var infer = new ElasticInferrer(nestSettings);
-			return infer.FieldName(this);
+			return infer.Field(this);
 		}
 	}
 }

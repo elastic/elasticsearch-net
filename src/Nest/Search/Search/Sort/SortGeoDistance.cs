@@ -10,7 +10,7 @@ namespace Nest
 	[JsonConverter(typeof(CustomJsonConverter))]
 	public interface IGeoDistanceSort : ISort, ICustomJson
 	{
-		FieldName Field { get; set; }
+		Field Field { get; set; }
 		string PinLocation { get; set; }
 		IEnumerable<string> Points { get; set; }
 		GeoUnit? GeoUnit { get; set; }
@@ -27,11 +27,11 @@ namespace Nest
 		internal static int UnitIndex = 3;
 		internal static int DistanceTypeIndex = 4;
 
-		public FieldName Field { get; set; }
+		public Field Field { get; set; }
 		public string PinLocation { get; set; }
 		public IEnumerable<string> Points { get; set; }
 		public GeoUnit? GeoUnit { get; set; }
-		public override FieldName SortKey { get { return "_geo_distance"; } }
+		public override Field SortKey { get { return "_geo_distance"; } }
 		public GeoDistance? DistanceType { get; set; }
 
 		object ICustomJson.GetCustomJson()
@@ -53,14 +53,14 @@ namespace Nest
 	{
 		private IGeoDistanceSort Self => this;
 
-		FieldName IGeoDistanceSort.Field { get; set; }
+		Field IGeoDistanceSort.Field { get; set; }
 
 		string IGeoDistanceSort.PinLocation { get; set; }
 		IEnumerable<string> IGeoDistanceSort.Points { get; set; }
 
 		GeoUnit? IGeoDistanceSort.GeoUnit { get; set; }
 
-		FieldName ISort.SortKey { get { return "_geo_distance"; } }
+		Field ISort.SortKey { get { return "_geo_distance"; } }
 
 
 		GeoDistance? IGeoDistanceSort.DistanceType { get; set; }

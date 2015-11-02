@@ -18,7 +18,7 @@ namespace Nest
 		bool? IProperty.Store { get; set; }
 		bool? IProperty.DocValues { get; set; }
 		SimilarityOption? IProperty.Similarity { get; set; }
-		IEnumerable<FieldName> IProperty.CopyTo { get; set; }
+		IEnumerable<Field> IProperty.CopyTo { get; set; }
 		IProperties IProperty.Fields { get; set; }
 
 		public PropertyDescriptorBase(string type) { ((IProperty)this).Type = type; }
@@ -37,6 +37,6 @@ namespace Nest
 
 		public TDescriptor Similarity(SimilarityOption similarity) => Assign(a => a.Similarity = similarity);
 
-		public TDescriptor CopyTo(IEnumerable<FieldName> copyTo) => Assign(a => a.CopyTo = copyTo);
+		public TDescriptor CopyTo(IEnumerable<Field> copyTo) => Assign(a => a.CopyTo = copyTo);
 	}
 }

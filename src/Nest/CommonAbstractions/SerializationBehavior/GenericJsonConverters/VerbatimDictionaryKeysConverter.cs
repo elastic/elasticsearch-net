@@ -36,14 +36,14 @@ namespace Nest
 				if (entry.Value == null && serializer.NullValueHandling == NullValueHandling.Ignore)
 					continue;
 				string key;
-				var fieldName = entry.Key as FieldName;
+				var fieldName = entry.Key as Field;
 				var propertyName = entry.Key as PropertyName;
 				var indexName = entry.Key as IndexName;
 				var typeName = entry.Key as TypeName;
 				if (contract == null)
 					key = Convert.ToString(entry.Key, CultureInfo.InvariantCulture);
 				else if (fieldName != null)
-					key = contract.Infer.FieldName(fieldName);
+					key = contract.Infer.Field(fieldName);
 				else if (propertyName != null)
 					key = contract.Infer.PropertyName(propertyName);
 				else if (indexName != null)

@@ -53,10 +53,10 @@ namespace Nest
 		IRescore Rescore { get; set; }
 
 		[JsonProperty(PropertyName = "fields")]
-		IList<FieldName> Fields { get; set; }
+		IList<Field> Fields { get; set; }
 
 		[JsonProperty(PropertyName = "fielddata_fields")]
-		IList<FieldName> FielddataFields { get; set; }
+		IList<Field> FielddataFields { get; set; }
 
 		[JsonProperty(PropertyName = "script_fields")]
 		[JsonConverter(typeof (VerbatimDictionaryKeysJsonConverter))]
@@ -105,8 +105,8 @@ namespace Nest
 		public bool? TrackScores { get; set; }
 		public double? MinScore { get; set; }
 		public long? TerminateAfter { get; set; }
-		public IList<FieldName> Fields { get; set; }
-		public IList<FieldName> FielddataFields { get; set; }
+		public IList<Field> Fields { get; set; }
+		public IList<Field> FielddataFields { get; set; }
 		public IDictionary<string, IScriptQuery> ScriptFields { get; set; }
 		public ISourceFilter Source { get; set; }
 		public IList<ISort> Sort { get; set; }
@@ -148,8 +148,8 @@ namespace Nest
 		public bool? TrackScores { get; set; }
 		public double? MinScore { get; set; }
 		public long? TerminateAfter { get; set; }
-		public IList<FieldName> Fields { get; set; }
-		public IList<FieldName> FielddataFields { get; set; }
+		public IList<Field> Fields { get; set; }
+		public IList<Field> FielddataFields { get; set; }
 		public IDictionary<string, IScriptQuery> ScriptFields { get; set; }
 		public ISourceFilter Source { get; set; }
 		public IList<ISort> Sort { get; set; }
@@ -223,9 +223,9 @@ namespace Nest
 
 		QueryContainer ISearchRequest.PostFilter { get; set; }
 
-		IList<FieldName> ISearchRequest.Fields { get; set; }
+		IList<Field> ISearchRequest.Fields { get; set; }
 
-		IList<FieldName> ISearchRequest.FielddataFields { get; set; }
+		IList<Field> ISearchRequest.FielddataFields { get; set; }
 
 		IDictionary<string, IScriptQuery> ISearchRequest.ScriptFields { get; set; }
 		ISourceFilter ISearchRequest.Source { get; set; }
@@ -407,7 +407,7 @@ namespace Nest
 		/// represented by a search hit. Defaults to load the internal _source field.
 		/// </summary>
 		public SearchDescriptor<T> Fields(params Expression<Func<T, object>>[] expressions) =>
-			Assign(a => a.Fields = expressions?.Select(e => (FieldName) e).ToListOrNullIfEmpty());
+			Assign(a => a.Fields = expressions?.Select(e => (Field) e).ToListOrNullIfEmpty());
 
 		/// <summary>
 		/// Allows to selectively load specific fields for each document 
@@ -421,19 +421,19 @@ namespace Nest
 		/// represented by a search hit. Defaults to load the internal _source field.
 		/// </summary>
 		public SearchDescriptor<T> Fields(params string[] fields)
-			=> Assign(a => a.Fields = fields?.Select(f => (FieldName) f).ToListOrNullIfEmpty());
+			=> Assign(a => a.Fields = fields?.Select(f => (Field) f).ToListOrNullIfEmpty());
 
 		///<summary>
 		///A comma-separated list of fields to return as the field data representation of a field for each hit
 		///</summary>
 		public SearchDescriptor<T> FielddataFields(params string[] fielddataFields) =>
-			Assign(a => a.FielddataFields = fielddataFields?.Select(f => (FieldName) f).ToListOrNullIfEmpty());
+			Assign(a => a.FielddataFields = fielddataFields?.Select(f => (Field) f).ToListOrNullIfEmpty());
 
 		///<summary>
 		///A comma-separated list of fields to return as the field data representation of a field for each hit
 		///</summary>
 		public SearchDescriptor<T> FielddataFields(params Expression<Func<T, object>>[] fielddataFields) =>
-			Assign(a => a.FielddataFields = fielddataFields?.Select(f => (FieldName) f).ToListOrNullIfEmpty());
+			Assign(a => a.FielddataFields = fielddataFields?.Select(f => (Field) f).ToListOrNullIfEmpty());
 
 		//TODO scriptfields needs a seperate encapsulation
 		public SearchDescriptor<T> ScriptFields(
