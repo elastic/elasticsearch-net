@@ -142,6 +142,12 @@ namespace Nest
 		[JsonProperty("derivative")]
 		IDerivativeAggregation Derivative { get; set; }
 
+		[JsonProperty("max_bucket")]
+		IMaxBucketAggregation MaxBucket { get; set; }
+	
+		[JsonProperty("min_bucket")]
+		IMinBucketAggregation MinBucket { get; set; }
+
 		[JsonProperty("aggs")]
 		AggregationDictionary Aggregations { get; set; }
 
@@ -203,6 +209,10 @@ namespace Nest
 		public IAverageBucketAggregation AverageBucket { get; set; }
 
 		public IDerivativeAggregation Derivative { get; set; }
+
+		public IMaxBucketAggregation MaxBucket { get; set; }
+
+		public IMinBucketAggregation MinBucket { get; set; }
 
 		public AggregationDictionary Aggregations { get; set; }
 
@@ -285,6 +295,10 @@ namespace Nest
 		IAverageBucketAggregation IAggregationContainer.AverageBucket { get; set; }
 
 		IDerivativeAggregation IAggregationContainer.Derivative { get; set; }
+
+		IMaxBucketAggregation IAggregationContainer.MaxBucket { get; set; }
+
+		IMinBucketAggregation IAggregationContainer.MinBucket { get; set; }
 
 		public AggregationContainerDescriptor<T> Average(string name,
 			Func<AverageAggregationDescriptor<T>, IAverageAggregation> selector) =>
@@ -409,6 +423,14 @@ namespace Nest
 		public AggregationContainerDescriptor<T> Derivative(string name,
 			Func<DerivativeAggregationDescriptor, IDerivativeAggregation> selector) =>
 			_SetInnerAggregation(name, selector, (a, d) => a.Derivative = d);
+
+		public AggregationContainerDescriptor<T> MaxBucket(string name,
+			Func<MaxBucketAggregationDescriptor, IMaxBucketAggregation> selector) =>
+			_SetInnerAggregation(name, selector, (a, d) => a.MaxBucket = d);
+
+		public AggregationContainerDescriptor<T> MinBucket(string name,
+			Func<MinBucketAggregationDescriptor, IMinBucketAggregation> selector) =>
+			_SetInnerAggregation(name, selector, (a, d) => a.MinBucket = d);
 
 		/// <summary>
 		/// Fluent methods do not assing to properties on `this` directly but on IAggregationContainers inside `this.Aggregations[string, IContainer]

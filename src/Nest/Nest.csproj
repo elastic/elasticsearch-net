@@ -84,6 +84,9 @@
     <Compile Include="Aggregations\Pipeline\AverageBucket\AverageBucketAggregation.cs" />
     <Compile Include="Aggregations\Pipeline\Derivative\DerivativeAggregation.cs" />
     <Compile Include="Aggregations\Pipeline\GapPolicy.cs" />
+    <Compile Include="Aggregations\Pipeline\KeyedValueMetric.cs" />
+    <Compile Include="Aggregations\Pipeline\MaxBucket\MaxBucketAggregation.cs" />
+    <Compile Include="Aggregations\Pipeline\MinBucket\MinBucketAggregation.cs" />
     <Compile Include="Aggregations\Pipeline\PipelineAggregationBase.cs" />
     <Compile Include="Analysis\Analyzers\Analyzers.cs" />
     <Compile Include="Analysis\Analyzers\AnalyzerJsonConverter.cs" />

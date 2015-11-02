@@ -420,8 +420,29 @@ namespace Nest
 				reader.Read();
 				if (reader.TokenType != JsonToken.EndObject)
 				{
-					reader.Read();
-					reader.Read();
+					if (reader.TokenType == JsonToken.PropertyName && (reader.Value as string) == "keys")
+					{
+						var keyedValueMetric = new KeyedValueMetric
+						{
+							Value = valueMetric.Value
+						};
+						var keys = new List<string>();
+						reader.Read();
+						reader.Read();
+						while (reader.TokenType != JsonToken.EndArray)
+						{
+							keys.Add(reader.Value.ToString());
+							reader.Read();
+						}
+						reader.Read();
+						keyedValueMetric.Keys = keys;
+						return keyedValueMetric;
+					}
+					else
+					{
+						reader.Read();
+						reader.Read();
+					}
 				}
 				return valueMetric;
 			}
