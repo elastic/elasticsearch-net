@@ -42,8 +42,11 @@ namespace Tests.Aggregations.Pipeline.AverageBucket
 				{
 					average_commits_per_month = new
 					{
-						buckets_path = "projects_started_per_month>commits",
-						gap_policy = "insert_zeros"
+						avg_bucket = new
+						{
+							buckets_path = "projects_started_per_month>commits",
+							gap_policy = "insert_zeros"
+						}
 					}
 				}
 			}

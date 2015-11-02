@@ -82,6 +82,7 @@
     <Compile Include="Aggregations\Aggregation.cs" />
     <Compile Include="Aggregations\Metric\Metric.cs" />
     <Compile Include="Aggregations\Pipeline\AverageBucket\AverageBucketAggregation.cs" />
+    <Compile Include="Aggregations\Pipeline\Derivative\DerivativeAggregation.cs" />
     <Compile Include="Aggregations\Pipeline\GapPolicy.cs" />
     <Compile Include="Aggregations\Pipeline\PipelineAggregation.cs" />
     <Compile Include="Analysis\Analyzers\Analyzers.cs" />
