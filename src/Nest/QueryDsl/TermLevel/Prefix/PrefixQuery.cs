@@ -4,6 +4,7 @@ using Newtonsoft.Json.Converters;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[JsonConverter(typeof (FieldNameQueryJsonConverter<PrefixQuery>))]
 	public interface IPrefixQuery : ITermQuery
 	{
 		[JsonProperty(PropertyName = "rewrite")]

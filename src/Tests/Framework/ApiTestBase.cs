@@ -144,7 +144,6 @@ namespace Tests.Framework
 			}
 		}
 
-		[U]
 		protected async Task HitsTheCorrectUrl() =>
 			await this.AssertOnAllResponses(r => this.AssertUrl(r.ApiCall.Uri));
 

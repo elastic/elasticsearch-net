@@ -40,19 +40,6 @@
     <NoWarn>1591,1572,1571,1573,1587,1570</NoWarn>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug - Generator|AnyCPU'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\Debug - Generator\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DocumentationFile>bin\Debug\Nest.XML</DocumentationFile>
-    <DebugType>full</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>BasicCorrectnessRules.ruleset</CodeAnalysisRuleSet>
-    <WarningLevel>4</WarningLevel>
-    <Optimize>false</Optimize>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
@@ -142,6 +129,7 @@
     <Compile Include="CommonAbstractions\Infer\FieldName\FieldName.cs" />
     <Compile Include="CommonAbstractions\Response\DictionaryResponse.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\KeyValueJsonConverter.cs" />
+    <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\FromJson.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\ReadAsTypeJsonConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\GenericJsonConverters\ReserializeJsonConverter.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\JsonReaderExtensions.cs" />
@@ -260,6 +248,8 @@
     <Compile Include="QueryDsl\Compound\Indices\NoMatchQueryJsonConverter.cs" />
     <Compile Include="QueryDsl\FieldNameQueryBase.cs" />
     <Compile Include="QueryDsl\FieldNameQueryDescriptorBase.cs" />
+    <Compile Include="QueryDsl\FullText\Match\MatchQueryJsonConverter.cs" />
+    <Compile Include="QueryDsl\FullText\MultiMatch\ZeroTermsQuery.cs" />
     <Compile Include="QueryDsl\QueryDescriptorBase.cs" />
     <Compile Include="QueryDsl\Specialized\MoreLikeThis\MoreLikeThisQueryDocumentsDescriptor.cs" />
     <Compile Include="Aggregations\AggregationsHelper.cs" />
@@ -936,7 +926,6 @@
     <Compile Include="CommonOptions\Fuzziness\FuzzinessJsonConverter.cs" />
     <Compile Include="QueryDsl\Geo\LatLon.cs" />
     <Compile Include="QueryDsl\Span\SpanTermQueryJsonConverter.cs" />
-    <Compile Include="QueryDsl\FullText\Match\MatchQueryJsonConverter.cs" />
     <Compile Include="QueryDsl\TermLevel\Fuzzy\FuzzyQueryJsonConverter.cs" />
     <Compile Include="QueryDsl\TermLevel\Terms\TermsQueryJsonConverter.cs" />
     <Compile Include="Mapping\Fields\Parent\ParentField.cs" />

@@ -16,6 +16,8 @@ namespace Tests.Modules.SnapshotAndRestore.Restore
 	{
 		public RestoreApiTests(IndexingCluster cluster, EndpointUsage usage) : base(cluster, usage)
 		{
+			if (!TestClient.RunIntegrationTests) return;
+
 			_repositoryName = RandomString();
 			_snapshotName = RandomString();
 			var createRepository = this.Client.CreateRepository(_repositoryName, r => r

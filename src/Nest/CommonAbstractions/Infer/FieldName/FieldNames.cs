@@ -32,5 +32,9 @@ namespace Nest
 			this._fieldNames.Add(field);
 			return this;
 		}
+
+		//TODO discuss with @gmarz i'd rather introduce FieldsArray as separate type
+		public IEnumerable<FieldName> ToArray() => this._fieldNames;
+
 	}
 }

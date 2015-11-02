@@ -36,6 +36,8 @@ namespace Tests.Document.Single.Index
 		protected override HttpMethod HttpMethod => HttpMethod.PUT;
 		protected override string UrlPath => "/project/project/SomeProject?consistency=all&op_type=index&refresh=true&routing=route";
 
+		protected override bool SupportsDeserialization => false;
+
 		protected override object ExpectJson =>
 			new
 			{

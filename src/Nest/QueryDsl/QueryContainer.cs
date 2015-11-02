@@ -33,11 +33,9 @@ namespace Nest
 		ITermQuery Term { get; set; }
 
 		[JsonProperty(PropertyName = "wildcard")]
-		[JsonConverter(typeof (FieldNameQueryJsonConverter<WildcardQuery>))]
 		IWildcardQuery Wildcard { get; set; }
 
 		[JsonProperty(PropertyName = "prefix")]
-		[JsonConverter(typeof (FieldNameQueryJsonConverter<PrefixQuery>))]
 		IPrefixQuery Prefix { get; set; }
 
 		[JsonProperty(PropertyName = "boosting")]
@@ -71,18 +69,15 @@ namespace Nest
 		IGeoShapeQuery GeoShape { get; set; }
 
 		[JsonProperty(PropertyName = "common")]
-		[JsonConverter(typeof (FieldNameQueryJsonConverter<CommonTermsQuery>))]
 		ICommonTermsQuery CommonTerms { get; set; }
 
 		[JsonProperty(PropertyName = "terms")]
 		ITermsQuery Terms { get; set; }
 
 		[JsonProperty(PropertyName = "range")]
-		[JsonConverter(typeof (FieldNameQueryJsonConverter<RangeQuery>))]
 		IRangeQuery Range { get; set; }
 
 		[JsonProperty(PropertyName = "regexp")]
-		[JsonConverter(typeof (FieldNameQueryJsonConverter<RegexpQuery>))]
 		IRegexpQuery Regexp { get; set; }
 
 		[JsonProperty(PropertyName = "has_child")]

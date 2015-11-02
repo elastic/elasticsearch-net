@@ -15,12 +15,26 @@ namespace Tests.QueryDsl.FullText.CommonTerms
 
 		protected override object QueryJson => new
 		{
-
+			common = new
+			{
+				description = new
+				{
+					_name = "named_query",
+					boost = 1.1,
+					query = "nelly the elephant not as a",
+					cutoff_frequency = 0.001,
+					low_freq_operator = "or",
+					high_freq_operator = "and",
+					minimum_should_match = 1,
+					analyzer = "standard",
+					disable_coord = true
+				}
+			}
 		};
 
 		protected override QueryContainer QueryInitializer => new CommonTermsQuery()
 		{
-			Field = Field<Project>(p=>p.Description),
+			Field = Field<Project>(p => p.Description),
 			Analyzer = "standard",
 			Boost = 1.1,
 			CutoffFrequency = 0.001,
@@ -32,7 +46,7 @@ namespace Tests.QueryDsl.FullText.CommonTerms
 			Query = "nelly the elephant not as a"
 		};
 
-		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> d) => d
+		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
 			.CommonTerms(c => c
 				.OnField(p => p.Description)
 				.Analyzer("standard")
@@ -45,8 +59,5 @@ namespace Tests.QueryDsl.FullText.CommonTerms
 				.Name("named_query")
 				.Query("nelly the elephant not as a")
 			);
-
-		[I] public void HandlingResponses() { }
-
 	}
 }

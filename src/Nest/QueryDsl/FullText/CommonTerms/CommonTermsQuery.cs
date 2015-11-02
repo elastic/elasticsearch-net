@@ -9,6 +9,7 @@ using Newtonsoft.Json.Converters;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[JsonConverter(typeof (FieldNameQueryJsonConverter<CommonTermsQuery>))]
 	public interface ICommonTermsQuery : IFieldNameQuery
 	{
 		[JsonProperty(PropertyName = "query")]

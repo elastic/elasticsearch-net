@@ -6,6 +6,7 @@ using Newtonsoft.Json.Converters;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[JsonConverter(typeof (FieldNameQueryJsonConverter<WildcardQuery>))]
 	public interface IWildcardQuery : ITermQuery
 	{
 		[JsonProperty(PropertyName = "rewrite")]

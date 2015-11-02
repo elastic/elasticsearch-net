@@ -9,9 +9,9 @@ using static Nest.Static;
 
 namespace Tests.QueryDsl.FullText.Match
 {
-	public class MatchPhraseUsageTests : QueryDslUsageTestsBase
+	public class MatchUsageTests : QueryDslUsageTestsBase
 	{
-		public MatchPhraseUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+		public MatchUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
 		protected override object QueryJson => new
 		{
@@ -32,14 +32,13 @@ namespace Tests.QueryDsl.FullText.Match
 					slop = 2,
 					lenient = true,
 					minimum_should_match = 2,
-			        @operator = "or",
-					type = "phrase"
+			        @operator = "or"
 				}
 			}
 
 		};
 
-		protected override QueryContainer QueryInitializer => new MatchPhraseQuery
+		protected override QueryContainer QueryInitializer => new MatchQuery
 		{
 			Field = Field<Project>(p=>p.Description),
 			Analyzer = "standard",
@@ -59,7 +58,7 @@ namespace Tests.QueryDsl.FullText.Match
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
-			.MatchPhrase(c => c
+			.Match(c => c
 				.OnField(p => p.Description)
 				.Analyzer("standard")
 				.Boost(1.1)

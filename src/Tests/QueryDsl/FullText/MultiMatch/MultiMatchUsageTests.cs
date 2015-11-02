@@ -7,11 +7,11 @@ using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using static Nest.Static;
 
-namespace Tests.QueryDsl.FullText.Match
+namespace Tests.QueryDsl.FullText.MultiMatch
 {
-	public class MatchPhraseUsageTests : QueryDslUsageTestsBase
+	public class MultiMatchUsageTests : QueryDslUsageTestsBase
 	{
-		public MatchPhraseUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+		public MultiMatchUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
 		protected override object QueryJson => new
 		{
@@ -23,7 +23,7 @@ namespace Tests.QueryDsl.FullText.Match
 					boost = 1.1,
 					query = "hello world",
 					analyzer = "standard",
-					rewrite = "constant_score_boolean",
+					fuzzy_rewrite = "constant_score_boolean",
 					fuzziness = "AUTO",
 					fuzzy_transpositions = true,
 					cutoff_frequency = 0.001,
@@ -32,25 +32,21 @@ namespace Tests.QueryDsl.FullText.Match
 					slop = 2,
 					lenient = true,
 					minimum_should_match = 2,
-			        @operator = "or",
-					type = "phrase"
+			        @operator = "or"
 				}
 			}
-
 		};
 
-		protected override QueryContainer QueryInitializer => new MatchPhraseQuery
+		protected override QueryContainer QueryInitializer => new MultiMatchQuery
 		{
-			Field = Field<Project>(p=>p.Description),
+			Fields = Field<Project>(p=>p.Description).And("myOtherField").ToArray(),
 			Analyzer = "standard",
 			Boost = 1.1,
 			Name = "named_query",
 			CutoffFrequency = 0.001,
 			Query = "hello world",
 			Fuzziness = Fuzziness.Auto,
-			FuzzyTranspositions = true,
-			MinimumShouldMatch = 2,
-			Rewrite = RewriteMultiTerm.ConstantScoreBoolean,
+			FuzzyRewrite = RewriteMultiTerm.ConstantScoreBoolean,
 			MaxExpansions = 2,
 			Slop = 2,
 			Lenient = true,
@@ -59,21 +55,22 @@ namespace Tests.QueryDsl.FullText.Match
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
-			.MatchPhrase(c => c
-				.OnField(p => p.Description)
+			.MultiMatch(c => c
+				.OnFields(p => p.Description)
+				.Query("hello world")
 				.Analyzer("standard")
 				.Boost(1.1)
-				.CutoffFrequency(0.001)
-				.Query("hello world")
-				.Fuzziness(Fuzziness.Auto)
-				.Lenient()
-				.FuzzyTranspositions()
-				.MaxExpansions(2)
-				.MinimumShouldMatch(2)
-				.PrefixLength(2)
-				.Operator(Operator.Or)
-				.Rewrite(RewriteMultiTerm.ConstantScoreBoolean)
 				.Slop(2)
+				.Fuzziness(Fuzziness.Auto)
+				.PrefixLength(2)
+				.MaxExpansions(2)
+				.Operator(Operator.Or)
+				.MinimumShouldMatch(2)
+				.FuzzyRewrite(RewriteMultiTerm.ConstantScoreBoolean)
+				.TieBreaker(1.1)
+				.CutoffFrequency(0.001)
+				.Lenient()
+				.ZeroTermsQuery(ZeroTermsQuery.All)
 				.Name("named_query")
 			);
 	}
