@@ -387,6 +387,7 @@
     <Folder Include="Aggregations\Pipeline\" />
     <Folder Include="Migration\" />
     <Folder Include="Plugins\Analysis\Phonetic\" />
+    <Folder Include="QueryDsl\FullText\QueryString\" />
     <Folder Include="Setup\" />
   </ItemGroup>
   <ItemGroup>
