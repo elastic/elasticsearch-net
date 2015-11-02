@@ -34,7 +34,7 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence.Indices
 			);
 		}
 
-		/** to ease creating FieldName's from expressions there is a static Property class you can use */
+		/** to ease creating Field's from expressions there is a static Property class you can use */
 		[U] public void UsingStaticPropertyField()
 		{
 			/** */

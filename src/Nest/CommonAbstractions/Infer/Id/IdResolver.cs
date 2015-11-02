@@ -36,9 +36,9 @@ namespace Nest.Resolvers
 		public string GetIdFor(Type type, object @object)
 		{
 			Func<object, string> cachedLookup;
-			string FieldName;
+			string field;
 
-			var preferLocal = this._connectionSettings.IdProperties.TryGetValue(type, out FieldName);
+			var preferLocal = this._connectionSettings.IdProperties.TryGetValue(type, out field);
 
 			if (LocalIdDelegates.TryGetValue(type, out cachedLookup))
 				return cachedLookup(@object);

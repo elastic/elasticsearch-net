@@ -13,14 +13,14 @@ using Field = Nest.Field;
 
 namespace Tests.ClientConcepts.HighLevel.Inferrence.FieldNames
 {
-	public class FieldNameInferrence
+	public class FieldInferrence
 	{
 		/** # Strongly typed field access 
 		 * 
 		 * Several places in the elasticsearch API expect the path to a field from your original source document as a string.
 		 * NEST allows you to use C# expressions to strongly type these field path strings. 
 		 *
-		 * These expressions are assigned to a type called `FieldName` and there are several ways to create a instance of that type
+		 * These expressions are assigned to a type called `Field` and there are several ways to create a instance of that type
 		 */
 
 		/** Using the constructor directly is possible but rather involved */
@@ -37,7 +37,7 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence.FieldNames
 				.WhenSerializing(fieldString);
 		}
 		
-		/** Therefor you can also implicitly convert strings and expressions to FieldName's */
+		/** Therefor you can also implicitly convert strings and expressions to Field's */
 		[U] public void ImplicitConversion()
 		{
 			Field fieldString = "name";
@@ -51,7 +51,7 @@ namespace Tests.ClientConcepts.HighLevel.Inferrence.FieldNames
 				.WhenSerializing(fieldString);
 		}
 
-		/** to ease creating FieldName's from expressions there is a static Property class you can use */
+		/** to ease creating Field's from expressions there is a static Property class you can use */
 		[U] public void UsingStaticPropertyField()
 		{
 			Field fieldString = "name";

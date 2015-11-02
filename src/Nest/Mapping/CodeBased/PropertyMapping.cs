@@ -13,11 +13,11 @@ namespace Nest
 	{
 		internal IList<IClrTypePropertyMapping<TDocument>> Mappings { get; } = new List<IClrTypePropertyMapping<TDocument>>();
 
-		public PropertyMappingDescriptor<TDocument> Rename(Expression<Func<TDocument, object>> property, string FieldName)
+		public PropertyMappingDescriptor<TDocument> Rename(Expression<Func<TDocument, object>> property, string field)
 		{
-			property.ThrowIfNull("property");
-			FieldName.ThrowIfNullOrEmpty("FieldName");
-			this.Mappings.Add(new RenamePropertyMapping<TDocument>(property, FieldName));
+			property.ThrowIfNull(nameof(property));
+			field.ThrowIfNullOrEmpty(nameof(field));
+			this.Mappings.Add(new RenamePropertyMapping<TDocument>(property, field));
 			return this;
 		}
 
@@ -73,9 +73,9 @@ namespace Nest
 			set { this.Ignore = value; }
 		}
 		
-		public static implicit operator PropertyMapping(string FieldName)
+		public static implicit operator PropertyMapping(string field)
 		{
-			return FieldName == null ? null : new PropertyMapping() { Name = FieldName };
+			return field == null ? null : new PropertyMapping() { Name = field };
 		}
 	}
 }

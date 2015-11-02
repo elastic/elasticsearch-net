@@ -46,10 +46,10 @@ namespace Nest
 			return fq;
 		}
 
-		public TReturn GetPropValue<TReturn>(JObject jObject, string FieldName)
+		public TReturn GetPropValue<TReturn>(JObject jObject, string field)
 		{
 			JToken jToken = null;
-			return !jObject.TryGetValue(FieldName, out jToken) 
+			return !jObject.TryGetValue(field, out jToken) 
 				? default(TReturn) 
 				: jToken.Value<TReturn>();
 		}

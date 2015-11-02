@@ -122,7 +122,7 @@ namespace Nest
 		{
 			//TODO figure out a new way to get MappingsFor<T>.
 			throw new NotImplementedException("responses no longer have settings");
-			//var path = Settings.Inferrer.FieldName(fieldName);
+			//var path = Settings.Inferrer.Field(fieldName);
 			//return this.MappingFor<T>(path);
 
 		}

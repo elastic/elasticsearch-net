@@ -39,26 +39,26 @@ namespace Nest
             var isFields = (mm.Contains("fields") || mm.Contains("source_include") || mm.Contains("source_exclude"));
             if (isFields && fieldType.Contains("string"))
             {
-                fieldType = "IEnumerable<FieldName>";
-                setter = mm + ".Select(f=>(FieldName)f)";
+                fieldType = "IEnumerable<Field>";
+                setter = mm + ".Select(f=>(Field)f)";
             }
             else if (mm.Contains("field") && fieldType.Contains("string"))
             {
-                fieldType = "FieldName";
+                fieldType = "Field";
             }
-            if (isFields && fieldType.Contains("FieldName"))
+            if (isFields && fieldType.Contains("Field"))
             {
 		<text>
 		///<summary>@kv.Value.Description</summary>
 		internal static @method.QueryStringParamName _@(mm.ToPascalCase())@(Raw("<T>"))(this @method.QueryStringParamName qs, @Raw("IEnumerable<Expression<Func<T, object>>> ") @mm) where T : class =>
-			qs.AddQueryString("@kv.Value.OriginalQueryStringParamName", @mm@Raw(".Select(e=>(FieldName)e)"));</text>
+			qs.AddQueryString("@kv.Value.OriginalQueryStringParamName", @mm@Raw(".Select(e=>(Field)e)"));</text>
 		}
-		else if (mm.Contains("field") && fieldType.Contains("FieldName"))
+		else if (mm.Contains("field") && fieldType.Contains("Field"))
 		{
 		<text>
 		///<summary>@kv.Value.Description</summary>
 		internal static @method.QueryStringParamName _@(mm.ToPascalCase())@(Raw("<T>"))(this @method.QueryStringParamName qs, @Raw("Expression<Func<T, object>>") @mm) where T : class =>
-			qs.AddQueryString("@mm", (FieldName)@mm);</text>
+			qs.AddQueryString("@mm", (Field)@mm);</text>
 		}
 	}
 	}
