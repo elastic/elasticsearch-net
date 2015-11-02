@@ -44,7 +44,7 @@ namespace Nest
 		TermsAggregationCollectMode? CollectMode { get; set; }
 	}
 
-	public class TermsAggregation : BucketAggregation, ITermsAggregation
+	public class TermsAggregation : BucketAggregationBase, ITermsAggregation
 	{
 		public FieldName Field { get; set; }
 		public string Script { get; set; }
@@ -57,6 +57,8 @@ namespace Nest
 		public TermsIncludeExclude Exclude { get; set; }
 		public IDictionary<string, object> Params { get; set; }
 		public TermsAggregationCollectMode? CollectMode { get; set; }
+
+		internal TermsAggregation() { }
 
 		public TermsAggregation(string name) : base(name) { }
 

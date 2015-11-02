@@ -13,9 +13,11 @@ namespace Nest
 		Union<INamedFiltersContainer, List<IQueryContainer>> Filters { get; set; }
 	}
 
-	public class FiltersAggregation : BucketAggregation, IFiltersAggregation
+	public class FiltersAggregation : BucketAggregationBase, IFiltersAggregation
 	{
 		public Union<INamedFiltersContainer, List<IQueryContainer>> Filters { get; set; }
+
+		internal FiltersAggregation() { }
 
 		public FiltersAggregation(string name) : base(name) { }
 

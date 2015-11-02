@@ -27,7 +27,7 @@ namespace Nest
 		IEnumerable<Range<double>> Ranges { get; set; }
 	}
 
-	public class GeoDistanceAggregation : BucketAggregation, IGeoDistanceAggregation
+	public class GeoDistanceAggregation : BucketAggregationBase, IGeoDistanceAggregation
 	{
 		public FieldName Field { get; set; }
 
@@ -38,6 +38,8 @@ namespace Nest
 		public GeoDistance? DistanceType { get; set; }
 
 		public IEnumerable<Range<double>> Ranges { get; set; }
+
+		internal GeoDistanceAggregation() { }
 
 		public GeoDistanceAggregation(string name) : base(name) { }
 

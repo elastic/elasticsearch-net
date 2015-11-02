@@ -21,9 +21,11 @@ namespace Nest
 		string Language { get; set; }
 	}
 
-	public abstract class MetricAggregation : AggregationBase, IMetricAggregation
+	public abstract class MetricAggregationBase : AggregationBase, IMetricAggregation
 	{
-		protected MetricAggregation(string name, FieldName field) : base(name)
+		internal MetricAggregationBase() { }
+
+		protected MetricAggregationBase(string name, FieldName field) : base(name)
 		{
 			((IMetricAggregation)this).Field = field;
 		}

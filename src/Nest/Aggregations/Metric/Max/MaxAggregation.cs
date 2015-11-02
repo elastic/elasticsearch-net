@@ -9,8 +9,10 @@ namespace Nest
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<MaxAggregation>))]
 	public interface IMaxAggregation : IMetricAggregation { }
 
-	public class MaxAggregation : MetricAggregation, IMaxAggregation
+	public class MaxAggregation : MetricAggregationBase, IMaxAggregation
 	{
+		internal MaxAggregation() { }
+
 		public MaxAggregation(string name, FieldName field) : base(name, field) { }
 
 		internal override void WrapInContainer(AggregationContainer c) => c.Max = this;

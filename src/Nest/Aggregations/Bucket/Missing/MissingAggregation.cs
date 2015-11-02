@@ -13,9 +13,11 @@ namespace Nest
 		FieldName Field { get; set; }
 	}
 
-	public class MissingAggregation : BucketAggregation, IMissingAggregation
+	public class MissingAggregation : BucketAggregationBase, IMissingAggregation
 	{
 		public FieldName Field { get; set; }
+
+		internal MissingAggregation() { }
 
 		public MissingAggregation(string name) : base(name) { }
 

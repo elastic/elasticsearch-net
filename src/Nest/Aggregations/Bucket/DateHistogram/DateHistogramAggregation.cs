@@ -43,7 +43,7 @@ namespace Nest
 		ExtendedBounds<DateTime> ExtendedBounds { get; set; }
 	}
 
-	public class DateHistogramAggregation : BucketAggregation, IDateHistogramAggregation
+	public class DateHistogramAggregation : BucketAggregationBase, IDateHistogramAggregation
 	{
 		public FieldName Field { get; set; }
 		public string Script { get; set; }
@@ -56,6 +56,8 @@ namespace Nest
 		public string Offset { get; set; }
 		public HistogramOrder Order { get; set; }
 		public ExtendedBounds<DateTime> ExtendedBounds { get; set; }
+
+		internal DateHistogramAggregation() { }
 
 		public DateHistogramAggregation(string name) : base(name) { }
 

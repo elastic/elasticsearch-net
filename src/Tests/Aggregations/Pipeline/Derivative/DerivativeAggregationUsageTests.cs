@@ -1,4 +1,5 @@
-﻿using Nest;
+﻿using FluentAssertions;
+using Nest;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,16 +34,13 @@ namespace Tests.Aggregations.Pipeline.Derivative
 							{
 								field = "numberOfCommits"
 							}
-						}
-					}
-				},
-				aggs = new
-				{
-					commits_derivative = new
-					{
-						derivative = new
+						},
+						commits_derivative = new
 						{
-							buckets_path = "projects_started_per_month>commits"
+							derivative = new
+							{
+								buckets_path = "commits"
+							}
 						}
 					}
 				}
@@ -51,7 +49,19 @@ namespace Tests.Aggregations.Pipeline.Derivative
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
-			base.ExpectResponse(response);
+			response.IsValid.Should().BeTrue();
+
+			var projectsPerMonth = response.Aggs.DateHistogram("projects_started_per_month");
+			projectsPerMonth.Should().NotBeNull();
+			projectsPerMonth.Items.Should().NotBeNull();
+			projectsPerMonth.Items.Count.Should().BeGreaterThan(0);
+
+			foreach (var item in projectsPerMonth.Items)
+			{
+				var commitsDerivative = item.Derivative("commits_derivative");
+				commitsDerivative.Should().NotBeNull();
+				commitsDerivative.Value.Should().NotBe(null);
+			}
 		}
 
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
@@ -64,10 +74,10 @@ namespace Tests.Aggregations.Pipeline.Derivative
 						.Sum("commits", sm => sm
 							.Field(p => p.NumberOfCommits)
 						)
+						.Derivative("commits_derivative", d => d
+							.BucketsPath("commits")
+						)
 					)
-				)
-				.Derivative("commits_derivative", d => d
-					.BucketsPath("projects_started_per_month>commits")
 				)
 			);
 
@@ -78,9 +88,10 @@ namespace Tests.Aggregations.Pipeline.Derivative
 			{
 				Field = "startedOn",
 				Interval = DateInterval.Month,
-				Aggregations = new SumAggregation("commits", "numberOfCommits")
+				Aggregations =
+					new SumAggregation("commits", "numberOfCommits") &&
+					new DerivativeAggregation("commits_derivative", "commits")
 			}
-			&& new DerivativeAggregation("commits_derivative", "projects_started_per_month>commits")
 		};
 	}
 }

@@ -211,7 +211,7 @@ namespace Nest
 			if (aggregator == null) return null;
 			var container = new AggregationContainer();
 			aggregator.WrapInContainer(container);
-			var bucket = aggregator as BucketAggregation;
+			var bucket = aggregator as BucketAggregationBase;
 			container.Aggregations = bucket?.Aggregations;
 			return container;
 		}

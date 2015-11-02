@@ -7,7 +7,7 @@ namespace Nest
 {
 	internal class FilterAggregationJsonConverter : JsonConverter
 	{
-		public override bool CanRead => false;
+		public override bool CanRead => true;
 
 		public override bool CanWrite => true;
 
@@ -27,7 +27,12 @@ namespace Nest
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
-			throw new NotSupportedException();
+			if (reader.TokenType != JsonToken.StartObject) return null;
+			var container = new QueryContainer();
+			serializer.Populate(reader, container);
+			var agg = new FilterAggregation();
+			agg.Filter = container;
+			return agg;
 		}
 	}
 

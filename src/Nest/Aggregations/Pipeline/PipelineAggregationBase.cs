@@ -22,6 +22,8 @@ namespace Nest
 
 	public abstract class PipelineAggregationBase : AggregationBase, IPipelineAggregation
 	{
+		internal PipelineAggregationBase() { }
+
 		public PipelineAggregationBase(string name, string bucketsPath) : base(name)
 		{
 			this.BucketsPath = bucketsPath;

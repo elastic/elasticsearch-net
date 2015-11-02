@@ -10,13 +10,15 @@ namespace Nest
 		IQueryContainer Filter { get; set; }
 	}
 
-	public class FilterAggregation : BucketAggregation, IFilterAggregation
+	public class FilterAggregation : BucketAggregationBase, IFilterAggregation
 	{
 		private IFilterAggregation Self => this;
 
 		IQueryContainer IFilterAggregation.Filter { get; set; }
 		[JsonProperty(PropertyName = "filter")]
 		public QueryContainer Filter { get { return Self.Filter as QueryContainer; } set { Self.Filter = value; } }
+
+		internal FilterAggregation() { }
 
 		public FilterAggregation(string name) : base(name) { }
 

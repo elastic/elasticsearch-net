@@ -41,7 +41,7 @@ namespace Nest
 		bool? Version { get; set; }
 	}
 
-	public class TopHitsAggregation : MetricAggregation, ITopHitsAggregation
+	public class TopHitsAggregation : MetricAggregationBase, ITopHitsAggregation
 	{
 		public int? From { get; set; }
 		public int? Size { get; set; }
@@ -52,6 +52,8 @@ namespace Nest
 		public IDictionary<string, IScriptQuery> ScriptFields { get; set; }
 		public IEnumerable<FieldName> FieldDataFields { get; set; }
 		public bool? Version { get; set; }
+
+		internal TopHitsAggregation() { }
 
 		public TopHitsAggregation(string name, FieldName field) : base(name, field) { }
 

@@ -9,8 +9,10 @@ namespace Nest
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<StatsAggregation>))]
 	public interface IStatsAggregator : IMetricAggregation { }
 
-	public class StatsAggregation : MetricAggregation, IStatsAggregator
+	public class StatsAggregation : MetricAggregationBase, IStatsAggregator
 	{
+		internal StatsAggregation() { }
+
 		public StatsAggregation(string name, FieldName field) : base(name, field) { }
 
 		internal override void WrapInContainer(AggregationContainer c) => c.Stats = this;

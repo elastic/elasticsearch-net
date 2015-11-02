@@ -7,8 +7,10 @@ namespace Nest
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<GlobalAggregation>))]
 	public interface IGlobalAggregation : IBucketAggregation { }
 
-	public class GlobalAggregation : BucketAggregation, IGlobalAggregation
+	public class GlobalAggregation : BucketAggregationBase, IGlobalAggregation
 	{
+		internal GlobalAggregation() { }
+
 		public GlobalAggregation(string name) : base(name) { }
 
 		internal override void WrapInContainer(AggregationContainer c) => c.Global = this;

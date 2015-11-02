@@ -17,10 +17,12 @@ namespace Nest
 		IEnumerable<Ip4ExpressionRange> Ranges { get; set; }
 	}
 
-	public class Ip4RangeAggregation : BucketAggregation, IIp4RangeAggregation
+	public class Ip4RangeAggregation : BucketAggregationBase, IIp4RangeAggregation
 	{
 		public FieldName Field { get; set; }
 		public IEnumerable<Ip4ExpressionRange> Ranges { get; set; }
+
+		internal Ip4RangeAggregation() { }
 
 		public Ip4RangeAggregation(string name) : base(name) { }
 

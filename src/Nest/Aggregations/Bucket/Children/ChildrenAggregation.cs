@@ -14,9 +14,11 @@ namespace Nest
 		TypeName Type { get; set; }
 	}
 
-	public class ChildrenAggregation : BucketAggregation, IChildrenAggregation
+	public class ChildrenAggregation : BucketAggregationBase, IChildrenAggregation
 	{
 		public TypeName Type { get; set; }
+
+		internal ChildrenAggregation() { }
 
 		public ChildrenAggregation(string name, TypeName type) : base(name)
 		{

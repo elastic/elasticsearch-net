@@ -37,7 +37,7 @@ namespace Nest
 		long? PostOffset { get; set; }
 	}
 
-	public class HistogramAggregation : BucketAggregation, IHistogramAggregation
+	public class HistogramAggregation : BucketAggregationBase, IHistogramAggregation
 	{
 		public FieldName Field { get; set; }
 		public string Script { get; set; }
@@ -48,6 +48,8 @@ namespace Nest
 		public ExtendedBounds<double> ExtendedBounds { get; set; }
 		public long? PreOffset { get; set; }
 		public long? PostOffset { get; set; }
+
+		internal HistogramAggregation() { }
 
 		public HistogramAggregation(string name) : base(name) { }
 

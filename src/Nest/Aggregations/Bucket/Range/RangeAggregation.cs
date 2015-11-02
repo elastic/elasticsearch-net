@@ -23,12 +23,14 @@ namespace Nest
 		IEnumerable<Range<double>> Ranges { get; set; }
 	}
 
-	public class RangeAggregation : BucketAggregation, IRangeAggregation
+	public class RangeAggregation : BucketAggregationBase, IRangeAggregation
 	{
 		public FieldName Field { get; set; }
 		public string Script { get; set; }
 		public FluentDictionary<string, object> Params { get; set; }
 		public IEnumerable<Range<double>> Ranges { get; set; }
+
+		internal RangeAggregation() { }
 
 		public RangeAggregation(string name) : base(name) { }
 

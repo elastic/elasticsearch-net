@@ -22,6 +22,8 @@ namespace Nest
 	{
 		string IAggregationBase.Name { get; set; }
 		
+		internal AggregationBase() { }
+
 		protected AggregationBase(string name)
 		{
 			((IAggregationBase) this).Name = name;

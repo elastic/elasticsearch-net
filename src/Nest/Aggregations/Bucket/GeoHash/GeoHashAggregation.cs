@@ -23,12 +23,14 @@ namespace Nest
 		GeoHashPrecision? Precision { get; set; }
 	}
 
-	public class GeoHashAggregation : BucketAggregation, IGeoHashAggregation
+	public class GeoHashAggregation : BucketAggregationBase, IGeoHashAggregation
 	{
 		public FieldName Field { get; set; }
 		public int? Size { get; set; }
 		public int? ShardSize { get; set; }
 		public GeoHashPrecision? Precision { get; set; }
+
+		internal GeoHashAggregation() { }
 
 		public GeoHashAggregation(string name) : base(name) { }
 

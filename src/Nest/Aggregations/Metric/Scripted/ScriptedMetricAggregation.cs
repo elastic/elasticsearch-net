@@ -50,7 +50,7 @@ namespace Nest
 		IDictionary<string, object> ReduceParams { get; set; }
 	}
 
-	public class ScriptedMetricsAggregation : MetricAggregation, IScriptedMetricAggregation
+	public class ScriptedMetricsAggregation : MetricAggregationBase, IScriptedMetricAggregation
 	{
 		public string InitScript { get; set; }
 		public string InitScriptFile { get; set; }
@@ -65,6 +65,8 @@ namespace Nest
 		public string ReduceScriptFile { get; set; }
 		public string ReduceScriptId { get; set; }
 		public IDictionary<string, object> ReduceParams { get; set; }
+
+		internal ScriptedMetricsAggregation() { }
 
 		public ScriptedMetricsAggregation(string name, FieldName field) : base(name, field) { }
 

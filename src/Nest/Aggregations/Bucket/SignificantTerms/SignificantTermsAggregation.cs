@@ -50,7 +50,7 @@ namespace Nest
 
 	}
 
-	public class SignificantTermsAggregation : BucketAggregation, ISignificantTermsAggregation
+	public class SignificantTermsAggregation : BucketAggregationBase, ISignificantTermsAggregation
 	{
 		public FieldName Field { get; set; }
 		public int? Size { get; set; }
@@ -66,6 +66,8 @@ namespace Nest
 		public IScriptedHeuristic Script { get; set; }
 		public IQueryContainer BackgroundFilter { get; set; }
 
+		internal SignificantTermsAggregation() { }
+		
 		public SignificantTermsAggregation(string name) : base(name) { }
 
 		internal override void WrapInContainer(AggregationContainer c) => c.SignificantTerms = this;

@@ -38,21 +38,18 @@ namespace Tests.Aggregations.Pipeline.AverageBucket
 						}
 					}
 				},
-				aggs = new
+				average_commits_per_month = new
 				{
-					average_commits_per_month = new
+					avg_bucket = new
 					{
-						avg_bucket = new
-						{
-							buckets_path = "projects_started_per_month>commits",
-							gap_policy = "insert_zeros"
-						}
+						buckets_path = "projects_started_per_month>commits",
+						gap_policy = "insert_zeros"
 					}
 				}
 			}
 		};
 
-		protected Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
+		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
 			.Size(0)
 			.Aggregations(a => a
 				.DateHistogram("projects_started_per_month", dh => dh
@@ -80,7 +77,9 @@ namespace Tests.Aggregations.Pipeline.AverageBucket
 				Aggregations = new SumAggregation("commits", "numberOfCommits")
 			}
 			&& new AverageBucketAggregation("average_commits_per_month", "projects_started_per_month>commits")
-			
+			{
+				GapPolicy = GapPolicy.InsertZeros
+			}
 		};
 
 		protected override void ExpectResponse(ISearchResponse<Project> response)

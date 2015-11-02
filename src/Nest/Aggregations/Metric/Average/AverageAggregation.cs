@@ -9,8 +9,10 @@ namespace Nest
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<AverageAggregation>))]
 	public interface IAverageAggregation : IMetricAggregation { }
 
-	public class AverageAggregation : MetricAggregation, IAverageAggregation
+	public class AverageAggregation : MetricAggregationBase, IAverageAggregation
 	{
+		internal AverageAggregation() { }
+
 		public AverageAggregation(string name, FieldName field) : base(name, field) { }
 
 		internal override void WrapInContainer(AggregationContainer c) => c.Average = this;

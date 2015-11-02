@@ -71,7 +71,7 @@
     <Compile Include="Aggregations\Bucket\DocCountBucket.cs" />
     <Compile Include="Aggregations\Bucket\SingleBucket.cs" />
     <Compile Include="Aggregations\Bucket\KeyedBucket.cs" />
-    <Compile Include="Aggregations\Bucket\BucketAggregation.cs" />
+    <Compile Include="Aggregations\Bucket\BucketAggregationBase.cs" />
     <Compile Include="Aggregations\Bucket\Filters\NamedFiltersContainerBase.cs" />
     <Compile Include="Aggregations\Bucket\Histogram\ExtendedBounds.cs" />
     <Compile Include="Aggregations\Bucket\Histogram\HistogramOrder.cs" />
@@ -84,7 +84,7 @@
     <Compile Include="Aggregations\Pipeline\AverageBucket\AverageBucketAggregation.cs" />
     <Compile Include="Aggregations\Pipeline\Derivative\DerivativeAggregation.cs" />
     <Compile Include="Aggregations\Pipeline\GapPolicy.cs" />
-    <Compile Include="Aggregations\Pipeline\PipelineAggregation.cs" />
+    <Compile Include="Aggregations\Pipeline\PipelineAggregationBase.cs" />
     <Compile Include="Analysis\Analyzers\Analyzers.cs" />
     <Compile Include="Analysis\Analyzers\AnalyzerJsonConverter.cs" />
     <Compile Include="Analysis\CharFilters\CharFilters.cs" />
@@ -691,7 +691,7 @@
     <Compile Include="Aggregations\Metric\Percentiles\PercentilesAggregation.cs" />
     <Compile Include="Aggregations\Bucket\Ipv4Range\Ip4RangeAggregation.cs" />
     <Compile Include="Aggregations\Metric\ExtendedStats\ExtendedStatsAggregation.cs" />
-    <Compile Include="Aggregations\Metric\MetricAggregation.cs" />
+    <Compile Include="Aggregations\Metric\MetricAggregationBase.cs" />
     <Compile Include="Aggregations\Bucket\Nested\NestedAggregation.cs" />
     <Compile Include="Aggregations\Bucket\DateRange\DateRangeAggregation.cs" />
     <Compile Include="Aggregations\Bucket\GeoDistance\GeoDistanceAggregation.cs" />

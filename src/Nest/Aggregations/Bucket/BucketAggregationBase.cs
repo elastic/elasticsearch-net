@@ -9,11 +9,13 @@ namespace Nest
 		AggregationDictionary Aggregations { get; set; }
 	}
 
-	public abstract class BucketAggregation : AggregationBase, IBucketAggregation
+	public abstract class BucketAggregationBase : AggregationBase, IBucketAggregation
 	{
 		public AggregationDictionary Aggregations { get; set; }
 
-		protected BucketAggregation(string name) : base(name) { }
+		internal BucketAggregationBase() { }
+
+		protected BucketAggregationBase(string name) : base(name) { }
 	}
 
 	public abstract class BucketAggregationDescriptorBase<TBucketAggregation, TBucketAggregationInterface, T>

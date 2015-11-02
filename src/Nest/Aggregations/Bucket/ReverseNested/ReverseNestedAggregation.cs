@@ -15,10 +15,12 @@ namespace Nest
 		FieldName Path { get; set; }
 	}
 
-	public class ReverseNestedAggregation : BucketAggregation, IReverseNestedAggregation
+	public class ReverseNestedAggregation : BucketAggregationBase, IReverseNestedAggregation
 	{
 		[JsonProperty("path")]
 		public FieldName Path { get; set; }
+
+		internal ReverseNestedAggregation() { }
 
 		public ReverseNestedAggregation(string name) : base(name) { }
 

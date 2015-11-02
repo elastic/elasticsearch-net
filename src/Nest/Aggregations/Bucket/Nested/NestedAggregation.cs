@@ -12,9 +12,11 @@ namespace Nest
 		FieldName Path { get; set;}
 	}
 
-	public class NestedAggregation : BucketAggregation, INestedAggregation
+	public class NestedAggregation : BucketAggregationBase, INestedAggregation
 	{
 		public FieldName Path { get; set; }
+
+		internal NestedAggregation() { }
 
 		public NestedAggregation(string name) : base(name) { }
 

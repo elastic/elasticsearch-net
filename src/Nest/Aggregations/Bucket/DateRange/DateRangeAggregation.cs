@@ -20,11 +20,13 @@ namespace Nest
 		IEnumerable<IDateRangeExpression> Ranges { get; set; }
 	}
 
-	public class DateRangeAggregation : BucketAggregation, IDateRangeAggregation
+	public class DateRangeAggregation : BucketAggregationBase, IDateRangeAggregation
 	{
 		public FieldName Field { get; set; }
 		public string Format { get; set; }
 		public IEnumerable<IDateRangeExpression> Ranges { get; set; }
+
+		internal DateRangeAggregation() { }
 
 		public DateRangeAggregation(string name) : base(name) { }
 

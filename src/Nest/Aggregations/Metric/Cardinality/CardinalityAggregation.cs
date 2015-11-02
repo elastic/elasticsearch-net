@@ -16,10 +16,12 @@ namespace Nest
 		bool? Rehash { get; set; }
 	}
 
-	public class CardinalityAggregation : MetricAggregation, ICardinalityAggregation
+	public class CardinalityAggregation : MetricAggregationBase, ICardinalityAggregation
 	{
 		public int? PrecisionThreshold { get; set; }
 		public bool? Rehash { get; set; }
+
+		internal CardinalityAggregation() { }
 
 		public CardinalityAggregation(string name, FieldName field) : base(name, field) { }
 

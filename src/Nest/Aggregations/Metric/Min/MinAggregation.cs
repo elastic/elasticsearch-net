@@ -9,8 +9,10 @@ namespace Nest
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<MinAggregation>))]
 	public interface IMinAggregation : IMetricAggregation { }
 
-	public class MinAggregation : MetricAggregation, IMinAggregation
+	public class MinAggregation : MetricAggregationBase, IMinAggregation
 	{
+		internal MinAggregation() { }
+
 		public MinAggregation(string name, FieldName field) : base(name, field) { }
 
 		internal override void WrapInContainer(AggregationContainer c) => c.Min = this;

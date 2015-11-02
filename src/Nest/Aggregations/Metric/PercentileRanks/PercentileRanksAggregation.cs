@@ -14,9 +14,11 @@ namespace Nest
 		IEnumerable<double> Values { get; set; }
 	}
 
-	public class PercentileRanksAggregation : MetricAggregation, IPercentileRanksAggregation
+	public class PercentileRanksAggregation : MetricAggregationBase, IPercentileRanksAggregation
 	{
 		public IEnumerable<double> Values { get; set; }
+
+		internal PercentileRanksAggregation() { }
 
 		public PercentileRanksAggregation(string name, FieldName field) : base(name, field) { }
 

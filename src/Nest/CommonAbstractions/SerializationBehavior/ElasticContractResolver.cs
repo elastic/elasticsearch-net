@@ -111,6 +111,7 @@ namespace Nest.Resolvers
 			defaultProperties = PropertiesOf<IAggregationContainer>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IMetricAggregation>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IBucketAggregation>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<IPipelineAggregation>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<ISort>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<ISuggestBucket>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<ISuggester>(type, memberSerialization, defaultProperties, lookup);

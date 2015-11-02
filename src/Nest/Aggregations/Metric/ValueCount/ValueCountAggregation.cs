@@ -8,8 +8,10 @@ namespace Nest
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<ValueCountAggregation>))]
 	public interface IValueCountAggregation : IMetricAggregation { }
 
-	public class ValueCountAggregation : MetricAggregation, IValueCountAggregation
+	public class ValueCountAggregation : MetricAggregationBase, IValueCountAggregation
 	{
+		internal ValueCountAggregation() { }
+
 		public ValueCountAggregation(string name, FieldName field) : base(name, field) { }
 
 		internal override void WrapInContainer(AggregationContainer c) => c.ValueCount = this;

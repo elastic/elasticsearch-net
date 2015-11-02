@@ -8,10 +8,13 @@ using System.Threading.Tasks;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<DerivativeAggregation>))]
 	public interface IDerivativeAggregation : IPipelineAggregation { }
 
 	public class DerivativeAggregation : PipelineAggregationBase, IDerivativeAggregation
 	{
+		internal DerivativeAggregation() { }
+
 		public DerivativeAggregation(string name, string bucketsPath)
 			: base(name, bucketsPath) { }
 
