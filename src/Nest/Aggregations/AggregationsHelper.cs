@@ -40,6 +40,8 @@ namespace Nest
 
 		public ValueMetric Derivative(string key) => this.TryGet<ValueMetric>(key);
 
+		public ValueMetric SumBucket(string key) => this.TryGet<ValueMetric>(key);
+
 		public KeyedValueMetric MaxBucket(string key) => this.TryGet<KeyedValueMetric>(key);
 
 		public KeyedValueMetric MinBucket(string key) => this.TryGet<KeyedValueMetric>(key);

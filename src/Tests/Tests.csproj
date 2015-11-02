@@ -63,6 +63,7 @@
     <Compile Include="Aggregations\Pipeline\AverageBucket\AverageBucketAggregationUsageTests.cs" />
     <Compile Include="Aggregations\Pipeline\Derivative\DerivativeAggregationUsageTests.cs" />
     <Compile Include="Aggregations\Pipeline\MinBucket\MinBucketAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Pipeline\SumBucket\SumBucketAggregationUsageTests.cs" />
     <Compile Include="Aggregations\WritingAggregations.doc.cs" />
     <Compile Include="Analysis\Analyzers\AnalyzerUsageTests.cs" />
     <Compile Include="Analysis\CharFilters\CharFilterUsageTests.cs" />

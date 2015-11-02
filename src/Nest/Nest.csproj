@@ -88,6 +88,7 @@
     <Compile Include="Aggregations\Pipeline\MaxBucket\MaxBucketAggregation.cs" />
     <Compile Include="Aggregations\Pipeline\MinBucket\MinBucketAggregation.cs" />
     <Compile Include="Aggregations\Pipeline\PipelineAggregationBase.cs" />
+    <Compile Include="Aggregations\Pipeline\SumBucket\SumBucketAggregation.cs" />
     <Compile Include="Analysis\Analyzers\Analyzers.cs" />
     <Compile Include="Analysis\Analyzers\AnalyzerJsonConverter.cs" />
     <Compile Include="Analysis\CharFilters\CharFilters.cs" />
