@@ -56,7 +56,9 @@ namespace Nest
 	public class MatchQuery : FieldNameQueryBase, IMatchQuery
 	{
 		bool IQuery.Conditionless => IsConditionless(this);
-		public string Type { get; set; }
+		string IMatchQuery.Type => this.MatchQueryType;
+		protected virtual string MatchQueryType => null;
+
 		public string Query { get; set; }
 		public string Analyzer { get; set; }
 		public RewriteMultiTerm? Rewrite { get; set; }
@@ -80,9 +82,9 @@ namespace Nest
 		: FieldNameQueryDescriptorBase<MatchQueryDescriptor<T>, IMatchQuery, T> 
 		, IMatchQuery where T : class
 	{
-		protected virtual string MatchQueryType { get { return null; } }
+		protected virtual string MatchQueryType => null;
+		string IMatchQuery.Type => this.MatchQueryType;
 		bool IQuery.Conditionless => MatchQuery.IsConditionless(this);
-		string IMatchQuery.Type { get { return MatchQueryType; } }
 		string IMatchQuery.Query { get; set; }
 		string IMatchQuery.Analyzer { get; set; }
 		string IMatchQuery.MinimumShouldMatch { get; set; }

@@ -252,13 +252,13 @@ namespace Nest
 		ITypeQuery IQueryContainer.Type { get; set; }
 
 		bool IQueryContainer.IsConditionless { get; set; }
-		public bool IsConditionless { get { return Self.IsConditionless; } }
+		internal bool IsConditionless => Self.IsConditionless;
 
 		bool IQueryContainer.IsStrict { get; set; }
-		public bool IsStrict { get { return Self.IsStrict; } }
-		
+		internal bool IsStrict => Self.IsStrict;
+
 		bool IQueryContainer.IsVerbatim { get; set; }
-		public bool IsVerbatim { get { return Self.IsVerbatim; } }
+		internal bool IsVerbatim => Self.IsVerbatim;
 
 		public QueryContainer() {}
 	
@@ -340,6 +340,7 @@ namespace Nest
 			return q;
 		}
 
+		//TODO remove rely on a custom serializer
 		public object GetCustomJson()
 		{	
 			var f = ((IQueryContainer)this);

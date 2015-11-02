@@ -29,8 +29,8 @@ namespace Tests.Document.Single
 
 		private string _lang = "groovy";
 
-		protected IndexRequest<Project> CreateInitializer(string index) =>
-			new IndexRequest<Project>(Project.Instance, index) {};
+		protected IndexRequest<Project> CreateInitializer(string id) =>
+			new IndexRequest<Project>(Project.Instance, id: id) {};
 
 		protected IIndexRequest<Project> CreateFluent(string id, IndexDescriptor<Project> d) => d.Id(id);
 

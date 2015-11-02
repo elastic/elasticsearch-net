@@ -11,6 +11,7 @@ namespace Tests.Framework.MockData
 	public class Project
 	{
 		public string Name { get; set; }
+		public string Description { get; set; }
 		public StateOfBeing State { get; set; }
 		public DateTime StartedOn { get; set; }
 		public DateTime LastActivity { get; set; }
@@ -22,6 +23,7 @@ namespace Tests.Framework.MockData
 		public static Faker<Project> Generator { get; } =
 			new Faker<Project>()
 				.RuleFor(p => p.Name, f => f.Person.Company.Name)
+				.RuleFor(p => p.Description, f => f.Lorem.Paragraphs(3))
 				.RuleFor(p => p.State, f => f.PickRandom<StateOfBeing>())
 				.RuleFor(p => p.StartedOn, p => p.Date.Past())
 				.RuleFor(p => p.LastActivity, p => p.Date.Recent())

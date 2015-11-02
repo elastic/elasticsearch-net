@@ -148,6 +148,7 @@
     <Compile Include="CommonAbstractions\Static\Static.cs" />
     <Compile Include="CommonAbstractions\Union\UnionJsonConverter.cs" />
     <Compile Include="CommonOptions\Failures\BulkError.cs" />
+    <Compile Include="CommonOptions\MinimumShouldMatch\MinimumShouldMatch.cs" />
     <Compile Include="CommonOptions\Stats\QueryCacheStats.cs" />
     <Compile Include="CommonOptions\Stats\RecoveryStats.cs" />
     <Compile Include="CommonOptions\Stats\RequestCacheStats.cs" />

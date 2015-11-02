@@ -11,6 +11,11 @@ namespace Nest
 	/// <typeparam name="T">Type of document</typeparam>
 	public class MatchPhrasePrefixQueryDescriptor<T> : MatchQueryDescriptor<T> where T : class
 	{
-		protected override string MatchQueryType { get { return "phrase_prefix"; } }
+		protected override string MatchQueryType => "phrase_prefix";
+	}
+
+	public class MatchPhrasePrefixQuery : MatchQuery
+	{
+		protected override string MatchQueryType => "phrase_prefix";
 	}
 }
