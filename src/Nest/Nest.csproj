@@ -87,6 +87,14 @@
     <Compile Include="Aggregations\Pipeline\KeyedValueMetric.cs" />
     <Compile Include="Aggregations\Pipeline\MaxBucket\MaxBucketAggregation.cs" />
     <Compile Include="Aggregations\Pipeline\MinBucket\MinBucketAggregation.cs" />
+    <Compile Include="Aggregations\Pipeline\MovingAverage\Models\EwmaModel.cs" />
+    <Compile Include="Aggregations\Pipeline\MovingAverage\Models\HoltLinearModel.cs" />
+    <Compile Include="Aggregations\Pipeline\MovingAverage\Models\HoltWintersModel.cs" />
+    <Compile Include="Aggregations\Pipeline\MovingAverage\Models\IMovingAverageModel.cs" />
+    <Compile Include="Aggregations\Pipeline\MovingAverage\Models\LinearModel.cs" />
+    <Compile Include="Aggregations\Pipeline\MovingAverage\Models\SimpleModel.cs" />
+    <Compile Include="Aggregations\Pipeline\MovingAverage\MovingAverageAggregation.cs" />
+    <Compile Include="Aggregations\Pipeline\MovingAverage\MovingAverageAggregationJsonConverter.cs" />
     <Compile Include="Aggregations\Pipeline\PipelineAggregationBase.cs" />
     <Compile Include="Aggregations\Pipeline\SumBucket\SumBucketAggregation.cs" />
     <Compile Include="Analysis\Analyzers\Analyzers.cs" />

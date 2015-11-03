@@ -151,9 +151,11 @@ namespace Nest
 		[JsonProperty("sum_bucket")]
 		ISumBucketAggregation SumBucket { get; set; }
 
+		[JsonProperty("moving_avg")]
+		IMovingAverageAggregation MovingAverage { get; set; }
+
 		[JsonProperty("aggs")]
 		AggregationDictionary Aggregations { get; set; }
-
 	}
 
 	public class AggregationContainer : IAggregationContainer
@@ -219,6 +221,8 @@ namespace Nest
 
 		public ISumBucketAggregation SumBucket { get; set; }
 
+		public IMovingAverageAggregation MovingAverage { get; set; }
+
 		public AggregationDictionary Aggregations { get; set; }
 
 		public static implicit operator AggregationContainer(AggregationBase aggregator)
@@ -230,8 +234,6 @@ namespace Nest
 			container.Aggregations = bucket?.Aggregations;
 			return container;
 		}
-
-
 	}
 
 	public class AggregationContainerDescriptor<T> : IAggregationContainer
@@ -306,6 +308,8 @@ namespace Nest
 		IMinBucketAggregation IAggregationContainer.MinBucket { get; set; }
 
 		ISumBucketAggregation IAggregationContainer.SumBucket { get; set; }
+
+		IMovingAverageAggregation IAggregationContainer.MovingAverage { get; set; }
 
 		public AggregationContainerDescriptor<T> Average(string name,
 			Func<AverageAggregationDescriptor<T>, IAverageAggregation> selector) =>
@@ -442,6 +446,10 @@ namespace Nest
 		public AggregationContainerDescriptor<T> SumBucket(string name,
 			Func<SumBucketAggregationDescriptor, ISumBucketAggregation> selector) =>
 			_SetInnerAggregation(name, selector, (a, d) => a.SumBucket = d);
+
+		public AggregationContainerDescriptor<T> MovingAverage(string name,
+			Func<MovingAverageAggregationDescriptor, IMovingAverageAggregation> selector) =>
+			_SetInnerAggregation(name, selector, (a, d) => a.MovingAverage = d);
 
 		/// <summary>
 		/// Fluent methods do not assing to properties on `this` directly but on IAggregationContainers inside `this.Aggregations[string, IContainer]
