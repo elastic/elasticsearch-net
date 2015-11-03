@@ -255,9 +255,10 @@
     <Compile Include="QueryDsl\FullText\Match\MatchQueryJsonConverter.cs" />
     <Compile Include="QueryDsl\FullText\MultiMatch\ZeroTermsQuery.cs" />
     <Compile Include="QueryDsl\FullText\SimpleQueryString\SimpleQueryStringFlags.cs" />
+    <Compile Include="QueryDsl\Geo\GeoFieldNameQueryJsonConverter.cs" />
     <Compile Include="QueryDsl\Geo\Shape\IGeoShapeQuery.cs" />
-    <Compile Include="QueryDsl\Geo\Shape\Indexed\GeoIndexedShapeQuery.cs" />
-    <Compile Include="QueryDsl\Geo\Shape\Indexed\IndexedGeoShape.cs" />
+    <Compile Include="QueryDsl\Geo\Shape\IndexedShape\GeoIndexedShapeQuery.cs" />
+    <Compile Include="QueryDsl\Geo\Shape\IndexedShape\IndexedGeoShape.cs" />
     <Compile Include="QueryDsl\QueryDescriptorBase.cs" />
     <Compile Include="QueryDsl\Specialized\MoreLikeThis\MoreLikeThisQueryDocumentsDescriptor.cs" />
     <Compile Include="Aggregations\AggregationsHelper.cs" />

@@ -21,14 +21,14 @@ namespace Nest
 		/// Latitude
 		/// </summary>
 		[JsonProperty("lat")]
-		public double Latitude { get { return _latitude; } }
+		public double Latitude => _latitude;
 		private readonly double _latitude;
 
 		/// <summary>
 		/// Longitude
 		/// </summary>
 		[JsonProperty("lon")]
-		public double Longtitude { get { return _longitude; } }
+		public double Longtitude => _longitude;
 		private readonly double _longitude;
 
 		/// <summary>
@@ -111,9 +111,6 @@ namespace Nest
 		public override int GetHashCode() =>
 			unchecked((_latitude.GetHashCode()*397) ^ _longitude.GetHashCode());
 
-		public string ToString(string format, IFormatProvider formatProvider)
-		{
-			return ToString();
-		}
+		public string ToString(string format, IFormatProvider formatProvider) => ToString();
 	}
 }
