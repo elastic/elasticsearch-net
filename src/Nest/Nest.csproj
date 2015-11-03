@@ -97,6 +97,7 @@
     <Compile Include="Aggregations\Pipeline\MovingAverage\MovingAverageAggregation.cs" />
     <Compile Include="Aggregations\Pipeline\MovingAverage\MovingAverageAggregationJsonConverter.cs" />
     <Compile Include="Aggregations\Pipeline\PipelineAggregationBase.cs" />
+    <Compile Include="Aggregations\Pipeline\SerialDifferencing\SerialDifferencingAggregation.cs" />
     <Compile Include="Aggregations\Pipeline\SumBucket\SumBucketAggregation.cs" />
     <Compile Include="Analysis\Analyzers\Analyzers.cs" />
     <Compile Include="Analysis\Analyzers\AnalyzerJsonConverter.cs" />

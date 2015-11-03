@@ -46,6 +46,8 @@ namespace Nest
 
 		public ValueMetric CumulativeSum(string key) => this.TryGet<ValueMetric>(key);
 
+		public ValueMetric SerialDifferencing(string key) => this.TryGet<ValueMetric>(key);
+
 		public KeyedValueMetric MaxBucket(string key) => this.TryGet<KeyedValueMetric>(key);
 
 		public KeyedValueMetric MinBucket(string key) => this.TryGet<KeyedValueMetric>(key);
