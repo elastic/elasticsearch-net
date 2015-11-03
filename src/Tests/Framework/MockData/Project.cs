@@ -19,6 +19,7 @@ namespace Tests.Framework.MockData
 		public IEnumerable<Tag> Tags { get; set; }
 		public IList<Tag> CuratedTags { get; set; }
 		public Dictionary<string, Metadata> Metadata { get; set; }
+		public SimpleGeoPoint Location { get; set; }
 
 		public static Faker<Project> Generator { get; } =
 			new Faker<Project>()
@@ -30,6 +31,7 @@ namespace Tests.Framework.MockData
 				.RuleFor(p => p.LeadDeveloper, p => Developer.Developers[Gimme.Random.Number(0, Developer.Developers.Count -1)])
 				.RuleFor(p => p.Tags, f => Tag.Generator.Generate(Gimme.Random.Number(2, 50)))
 				.RuleFor(p => p.CuratedTags, f => Tag.Generator.Generate(Gimme.Random.Number(1, 5)).ToList())
+				.RuleFor(p => p.Location, f => SimpleGeoPoint.Generator.Generate())
 			;
 
 		public static IList<Project> Projects { get; } =
@@ -39,7 +41,8 @@ namespace Tests.Framework.MockData
 		{
 			Name = Projects.First().Name,
 			LeadDeveloper = new Developer() { FirstName = "Martijn", LastName = "Laarman" },
-			StartedOn = new DateTime(2015, 1, 1)
+			StartedOn = new DateTime(2015, 1, 1),
+			Location = new SimpleGeoPoint { Coordinates = new [] { 42.1523, -80.321} }
 		};
 
 		public static object InstanceAnonymous = new
@@ -48,8 +51,19 @@ namespace Tests.Framework.MockData
 			state = "BellyUp",
 			startedOn = "2015-01-01T00:00:00",
 			lastActivity = "0001-01-01T00:00:00",
-			leadDeveloper = new {gender = "Male", id = 0, firstName = "Martijn", lastName = "Laarman"}
+			leadDeveloper = new {gender = "Male", id = 0, firstName = "Martijn", lastName = "Laarman"},
+			location = new {type="point", coordinates= Project.Instance.Location.Coordinates }
 		};
+	}
+
+	public class SimpleGeoPoint
+	{
+		public string Type => "point";
+		public double[] Coordinates { get; set; }
+
+		public static Faker<SimpleGeoPoint> Generator { get; } =
+			new Faker<SimpleGeoPoint>()
+				.RuleFor(p=>p.Coordinates, f => new [] { f.Address.Latitude(), f.Address.Latitude() });
 	}
 
 	[JsonConverter(typeof(StringEnumConverter))]

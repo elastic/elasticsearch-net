@@ -202,6 +202,12 @@ namespace Nest
 			this._assignSelector(selector, (query, container) => container.GeoShape = query);
 
 		/// <summary>
+		/// Use an indexed shape for the geo shape query
+		/// </summary>
+		public QueryContainer GeoIndexedShape(Func<GeoIndexedShapeQueryDescriptor<T>, IGeoIndexedShapeQuery> selector) =>
+			this._assignSelector(selector, (query, container) => container.GeoShape = query);
+
+		/// <summary>
 		/// The geo_shape Filter uses the same grid square representation as the geo_shape mapping to find documents 
 		/// that have a shape that intersects with the line string shape. 
 		/// It will also use the same PrefixTree configuration as defined for the field mapping.

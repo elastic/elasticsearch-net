@@ -67,26 +67,25 @@ namespace Nest
 		string ICommonTermsQuery.Analyzer { get; set; }
 		bool? ICommonTermsQuery.DisableCoord { get; set; }
 
-		//<inheritdoc/>
+		///<inheritdoc/>
 		public CommonTermsQueryDescriptor<T> Query(string query) => Assign(a => a.Query = query);
 
-		//<inheritdoc/>
-		public CommonTermsQueryDescriptor<T> HighFrequencyOperator(Operator op) => Assign(a => a.HighFrequencyOperator = op);
+		///<inheritdoc/>
+		public CommonTermsQueryDescriptor<T> HighFrequencyOperator(Operator? op) => Assign(a => a.HighFrequencyOperator = op);
 
-		public CommonTermsQueryDescriptor<T> LowFrequencyOperator(Operator op) => Assign(a => a.LowFrequencyOperator = op);
+		public CommonTermsQueryDescriptor<T> LowFrequencyOperator(Operator? op) => Assign(a => a.LowFrequencyOperator = op);
 
-		//<inheritdoc/>
+		///<inheritdoc/>
 		public CommonTermsQueryDescriptor<T> Analyzer(string analyzer) => Assign(a => a.Analyzer = analyzer);
 
-		//<inheritdoc/>
-		public CommonTermsQueryDescriptor<T> CutoffFrequency(double cutOffFrequency) => 
-			Assign(a => a.CutoffFrequency = cutOffFrequency);
+		///<inheritdoc/>
+		public CommonTermsQueryDescriptor<T> CutoffFrequency(double? cutOffFrequency) => Assign(a => a.CutoffFrequency = cutOffFrequency);
 
-		//<inheritdoc/>
+		///<inheritdoc/>
 		public CommonTermsQueryDescriptor<T> MinimumShouldMatch(MinimumShouldMatch minimumShouldMatch) =>
 			Assign(a => a.MinimumShouldMatch = minimumShouldMatch);
 
-		//<inheritdoc/>
-		public CommonTermsQueryDescriptor<T> DisableCoord(bool disable = true) => Assign(a => a.DisableCoord = disable);
+		///<inheritdoc/>
+		public CommonTermsQueryDescriptor<T> DisableCoord(bool? disable = true) => Assign(a => a.DisableCoord = disable);
 	}
 }

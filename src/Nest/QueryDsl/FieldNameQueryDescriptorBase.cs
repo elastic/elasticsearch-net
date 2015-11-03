@@ -14,7 +14,7 @@ namespace Nest
 	{
 		Field IFieldNameQuery.Field { get; set; }
 
-		public TDescriptor OnField(string field) => Assign(a => a.Field = field);
+		public TDescriptor OnField(Field field) => Assign(a => a.Field = field);
 
 		public TDescriptor OnField(Expression<Func<T, object>> objectPath) =>
 			Assign(a => a.Field = objectPath);

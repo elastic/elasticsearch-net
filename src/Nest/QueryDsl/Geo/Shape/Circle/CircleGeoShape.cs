@@ -19,8 +19,7 @@ namespace Nest
 	{
 		public CircleGeoShape() : this(null) { }
 
-		public CircleGeoShape(IEnumerable<double> coordinates)
-			: base("circle")
+		public CircleGeoShape(IEnumerable<double> coordinates) : base("circle")
 		{
 			this.Coordinates = coordinates ?? new List<double>();
 		}

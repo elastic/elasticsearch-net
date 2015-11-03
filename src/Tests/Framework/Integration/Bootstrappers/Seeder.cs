@@ -87,36 +87,37 @@ namespace Tests.Framework.Integration
 		private void CreateProjectIndex()
 		{
 			var createProjectIndex = this.Client.CreateIndex(typeof(Project), c => c
-			   .Aliases(a => a
-				   .Alias("projects-alias")
-			   )
-			   .Mappings(map => map
-				   .Map<Project>(m => m
-					   .Properties(props => props
-						   .String(s => s.Name(p => p.Name).NotAnalyzed())
-						   .Date(d => d.Name(p => p.StartedOn))
-						   .String(d => d.Name(p => p.State).NotAnalyzed())
-						   .Nested<Tag>(mo => mo
-							   .Name(p => p.Tags)
-							   .Properties(TagProperties)
-						   )
-						   .Object<Developer>(o => o
-							   .Name(p => p.LeadDeveloper)
-							   .Properties(DeveloperProperties)
-						   )
-					   )
-				   )
-				   .Map<CommitActivity>(m => m
-					   .SetParent<Project>()
-					   .Properties(props => props
-						   .Object<Developer>(o => o
-							   .Name(p => p.Committer)
-							   .Properties(DeveloperProperties)
-						   )
-						   .String(prop => prop.Name(p => p.ProjectName).NotAnalyzed())
-					   )
-				   )
-			   )
+				.Aliases(a => a
+					.Alias("projects-alias")
+				)
+				.Mappings(map => map
+					.Map<Project>(m => m
+						.Properties(props => props
+							.String(s => s.Name(p => p.Name).NotAnalyzed())
+							.Date(d => d.Name(p => p.StartedOn))
+							.String(d => d.Name(p => p.State).NotAnalyzed())
+							.Nested<Tag>(mo => mo
+								.Name(p => p.Tags)
+								.Properties(TagProperties)
+							)
+							.Object<Developer>(o => o
+								.Name(p => p.LeadDeveloper)
+								.Properties(DeveloperProperties)
+							)
+							.GeoShape(g => g.Name(p => p.Location))
+						)
+					)
+					.Map<CommitActivity>(m => m
+						.SetParent<Project>()
+						.Properties(props => props
+							.Object<Developer>(o => o
+								.Name(p => p.Committer)
+								.Properties(DeveloperProperties)
+							)
+							.String(prop => prop.Name(p => p.ProjectName).NotAnalyzed())
+						)
+					)
+				)
 				);
 			createProjectIndex.IsValid.Should().BeTrue();
 		}

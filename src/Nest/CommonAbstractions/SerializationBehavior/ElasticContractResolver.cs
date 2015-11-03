@@ -47,6 +47,8 @@ namespace Nest.Resolvers
 			else if (objectType == typeof(ITokenizer)) contract.Converter = new TokenizerJsonConverter();
 			else if (objectType == typeof(ITokenFilter)) contract.Converter = new TokenFilterJsonConverter();
 
+
+
 			else if (typeof(IClusterRerouteCommand).IsAssignableFrom(objectType))
 				contract.Converter = new ClusterRerouteCommandJsonConverter();
 
@@ -109,6 +111,7 @@ namespace Nest.Resolvers
 			defaultProperties = PropertiesOf<IHighlightField>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IRescore>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IRescoreQuery>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<IIndexedGeoShape>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IAggregationContainer>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IMetricAggregator>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IBucketAggregator>(type, memberSerialization, defaultProperties, lookup);

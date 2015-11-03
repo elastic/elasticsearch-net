@@ -7,11 +7,6 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	public interface IGeoShapeQuery : IFieldNameQuery
-	{
-	}
-
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 	public interface IGeoShapeCircleQuery : IGeoShapeQuery
 	{
 		[JsonProperty("shape")]

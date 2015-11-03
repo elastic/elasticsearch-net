@@ -23,6 +23,9 @@ namespace Nest
 		[JsonProperty(PropertyName = "analyzer")]
 		string Analyzer { get; set; }
 
+		[JsonProperty(PropertyName = "quote_analyzer")]
+		string QuoteAnalyzer { get; set; }
+
 		[JsonProperty(PropertyName = "allow_leading_wildcard")]
 		bool? AllowLeadingWildcard { get; set; }
 
@@ -43,9 +46,6 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "phrase_slop")]
 		double? PhraseSlop { get; set; }
-
-		[JsonProperty(PropertyName = "boost")]
-		double? Boost { get; set; }
 
 		[JsonProperty(PropertyName = "analyze_wildcard")]
 		bool? AnalyzeWildcard { get; set; }
@@ -77,6 +77,9 @@ namespace Nest
 		[JsonProperty(PropertyName = "tie_breaker")]
 		double? TieBreaker { get; set; }
 
+		[JsonProperty(PropertyName = "rewrite")]
+		RewriteMultiTerm? Rewrite { get; set; }
+
 		[JsonProperty(PropertyName = "fuzzy_rewrite")]
 		RewriteMultiTerm? FuzzyRewrite { get; set; }
 
@@ -96,6 +99,7 @@ namespace Nest
 		public Fuzziness Fuzziness { get; set; }
 		public MinimumShouldMatch MinimumShouldMatch { get; set; }
 		public string Locale { get; set; }
+		public RewriteMultiTerm? Rewrite { get; set; }
 		public RewriteMultiTerm? FuzzyRewrite { get; set; }
 		public string QuoteFieldSuffix { get; set; }
 		public bool? Escape { get; set; }
@@ -105,6 +109,7 @@ namespace Nest
 		public Fields Fields { get; set; }
 		public Operator? DefaultOperator { get; set; }
 		public string Analyzer { get; set; }
+		public string QuoteAnalyzer { get; set; }
 		public bool? AllowLeadingWildcard { get; set; }
 		public bool? LowercaseExpendedTerms { get; set; }
 		public bool? EnablePositionIncrements { get; set; }
@@ -128,7 +133,6 @@ namespace Nest
 	{
 		bool IQuery.Conditionless => QueryStringQuery.IsConditionless(this);
 
-		double? IQueryStringQuery.Boost { get; set; }
 		string IQueryStringQuery.Query { get; set; }
 		string IQueryStringQuery.Locale { get; set; }
 		string IQueryStringQuery.Timezone { get; set; }
@@ -136,6 +140,7 @@ namespace Nest
 		Fields IQueryStringQuery.Fields { get; set; }
 		Operator? IQueryStringQuery.DefaultOperator { get; set; }
 		string IQueryStringQuery.Analyzer { get; set; }
+		string IQueryStringQuery.QuoteAnalyzer { get; set; }
 		bool? IQueryStringQuery.AllowLeadingWildcard { get; set; }
 		bool? IQueryStringQuery.LowercaseExpendedTerms { get; set; }
 		bool? IQueryStringQuery.EnablePositionIncrements { get; set; }
@@ -151,23 +156,27 @@ namespace Nest
 		double? IQueryStringQuery.TieBreaker { get; set; }
 		int? IQueryStringQuery.MaximumDeterminizedStates { get; set; }
 		RewriteMultiTerm? IQueryStringQuery.FuzzyRewrite { get; set; }
+		RewriteMultiTerm? IQueryStringQuery.Rewrite { get; set; }
 		string IQueryStringQuery.QuoteFieldSuffix { get; set; }
 		bool? IQueryStringQuery.Escape { get; set; }
 
 		public QueryStringQueryDescriptor<T> DefaultField(Field field) => Assign(a => a.DefaultField = field);
+		public QueryStringQueryDescriptor<T> DefaultField(Expression<Func<T, object>> field) => Assign(a => a.DefaultField = field);
 
 		public QueryStringQueryDescriptor<T> OnFields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
 			Assign(a => a.Fields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
 
 		public QueryStringQueryDescriptor<T> Query(string query) => Assign(a => a.Query = query);
 
-		public QueryStringQueryDescriptor<T> Locale(string locale) => Assign(a => a.Locale = );
+		public QueryStringQueryDescriptor<T> Locale(string locale) => Assign(a => a.Locale = locale);
 
 		public QueryStringQueryDescriptor<T> Timezone(string timezone) => Assign(a => a.Timezone = timezone);
 
 		public QueryStringQueryDescriptor<T> DefaultOperator(Operator? op) => Assign(a => a.DefaultOperator = op);
 
 		public QueryStringQueryDescriptor<T> Analyzer(string analyzer) => Assign(a => a.Analyzer = analyzer);
+
+		public QueryStringQueryDescriptor<T> QuoteAnalyzer(string analyzer) => Assign(a => a.QuoteAnalyzer = analyzer);
 
 		public QueryStringQueryDescriptor<T> AllowLeadingWildcard(bool? allowLeadingWildcard = true) =>
 			Assign(a => a.AllowLeadingWildcard = allowLeadingWildcard);
@@ -180,8 +189,9 @@ namespace Nest
 
 		public QueryStringQueryDescriptor<T> Fuziness(Fuzziness fuzziness) => Assign(a => a.Fuzziness = fuzziness);
 
-		public QueryStringQueryDescriptor<T> FuzzyPrefixLength(int? fuzzyPrefixLength) =>
-			Assign(a => a.FuzzyPrefixLength = fuzzyPrefixLength);
+		public QueryStringQueryDescriptor<T> FuzzyPrefixLength(int? fuzzyPrefixLength) => Assign(a => a.FuzzyPrefixLength = fuzzyPrefixLength);
+
+		public QueryStringQueryDescriptor<T> FuzzyMaxExpansions(int? fuzzyMaxExpansions) => Assign(a => a.FuzzyMaxExpansions = fuzzyMaxExpansions);
 
 		public QueryStringQueryDescriptor<T> PhraseSlop(double? phraseSlop) => Assign(a => a.PhraseSlop = phraseSlop);
 
@@ -200,7 +210,9 @@ namespace Nest
 
 		public QueryStringQueryDescriptor<T> MaximumDeterminizedStates(int? maxDeterminizedStates) => Assign(a => a.MaximumDeterminizedStates = maxDeterminizedStates);
 
-		public QueryStringQueryDescriptor<T> FuzzyRewrite(RewriteMultiTerm rewriteMultiTerm) => Assign(a => a.FuzzyRewrite = rewriteMultiTerm);
+		public QueryStringQueryDescriptor<T> FuzzyRewrite(RewriteMultiTerm? rewriteMultiTerm) => Assign(a => a.FuzzyRewrite = rewriteMultiTerm);
+
+		public QueryStringQueryDescriptor<T> Rewrite(RewriteMultiTerm? rewriteMultiTerm) => Assign(a => a.Rewrite = rewriteMultiTerm);
 
 		public QueryStringQueryDescriptor<T> QuoteFieldSuffix(string quoteFieldSuffix) => Assign(a => a.QuoteFieldSuffix = quoteFieldSuffix);
 

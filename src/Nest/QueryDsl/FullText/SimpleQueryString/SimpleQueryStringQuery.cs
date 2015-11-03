@@ -12,51 +12,50 @@ namespace Nest
 	[JsonConverter(typeof(ReadAsTypeJsonConverter<SimpleQueryStringQueryDescriptor<object>>))]
 	public interface ISimpleQueryStringQuery : IQuery
 	{
+		[JsonProperty(PropertyName = "fields")]
+		Fields Fields { get; set; }
+
 		[JsonProperty(PropertyName = "query")]
 		string Query { get; set; }
-
-		[JsonProperty(PropertyName = "default_field")]
-		Field DefaultField { get; set; }
-
-		[JsonProperty(PropertyName = "fields")]
-		IEnumerable<Field> Fields { get; set; }
-
-		[JsonProperty(PropertyName = "default_operator")]
-		[JsonConverter(typeof (StringEnumConverter))]
-		Operator? DefaultOperator { get; set; }
 
 		[JsonProperty(PropertyName = "analyzer")]
 		string Analyzer { get; set; }
 
-		[JsonProperty(PropertyName = "lowercase_expanded_terms")]
-		bool? LowercaseExpendedTerms { get; set; }
-
-		[JsonProperty(PropertyName = "analyze_wildcard")]
-		bool? AnalyzeWildcard { get; set; }
+		[JsonProperty(PropertyName = "default_operator")]
+		Operator? DefaultOperator { get; set; }
 
 		[JsonProperty(PropertyName = "flags")]
-		string Flags { get; set; }
+		SimpleQueryStringFlags? Flags { get; set; }
 
 		[JsonProperty(PropertyName = "locale")]
 		string Locale { get; set; }
 
+		[JsonProperty(PropertyName = "lowercase_expanded_terms")]
+		bool? LowercaseExpendedTerms { get; set; }
+		
+		[JsonProperty(PropertyName = "lenient")]
+		bool? Lenient { get; set; }
+
+		[JsonProperty(PropertyName = "analyze_wildcard")]
+		bool? AnalyzeWildcard { get; set; }
+
 		[JsonProperty("minimum_should_match")]
-		string MinimumShouldMatch { get; set; }
+		MinimumShouldMatch MinimumShouldMatch { get; set; }
 	}
 
 	public class SimpleQueryStringQuery : QueryBase, ISimpleQueryStringQuery
 	{
 		bool IQuery.Conditionless => IsConditionless(this);
+		public Fields Fields { get; set; }
 		public string Query { get; set; }
-		public Field DefaultField { get; set; }
-		public IEnumerable<Field> Fields { get; set; }
-		public Operator? DefaultOperator { get; set; }
 		public string Analyzer { get; set; }
-		public bool? LowercaseExpendedTerms { get; set; }
-		public bool? AnalyzeWildcard { get; set; }
-		public string Flags { get; set; }
+		public Operator? DefaultOperator { get; set; }
+		public SimpleQueryStringFlags? Flags { get; set; }
 		public string Locale { get; set; }
-		public string MinimumShouldMatch { get; set; }
+		public bool? LowercaseExpendedTerms { get; set; }
+		public bool? Lenient { get; set; }
+		public bool? AnalyzeWildcard { get; set; }
+		public MinimumShouldMatch MinimumShouldMatch { get; set; }
 
 		protected override void WrapInContainer(IQueryContainer c) => c.SimpleQueryString = this;
 		internal static bool IsConditionless(ISimpleQueryStringQuery q) => q.Query.IsNullOrEmpty();
@@ -67,64 +66,40 @@ namespace Nest
 		, ISimpleQueryStringQuery where T : class
 	{
 		bool IQuery.Conditionless => SimpleQueryStringQuery.IsConditionless(this);
+		Fields ISimpleQueryStringQuery.Fields { get; set; }
 		string ISimpleQueryStringQuery.Query { get; set; }
-		Field ISimpleQueryStringQuery.DefaultField { get; set; }
-		IEnumerable<Field> ISimpleQueryStringQuery.Fields { get; set; }
-		Operator? ISimpleQueryStringQuery.DefaultOperator { get; set; }
 		string ISimpleQueryStringQuery.Analyzer { get; set; }
-		bool? ISimpleQueryStringQuery.AnalyzeWildcard { get; set; }
-		bool? ISimpleQueryStringQuery.LowercaseExpendedTerms { get; set; }
-		string ISimpleQueryStringQuery.Flags { get; set; }
+		Operator? ISimpleQueryStringQuery.DefaultOperator { get; set; }
+		SimpleQueryStringFlags? ISimpleQueryStringQuery.Flags { get; set; }
 		string ISimpleQueryStringQuery.Locale { get; set; }
-		string ISimpleQueryStringQuery.MinimumShouldMatch { get; set; }
+		bool? ISimpleQueryStringQuery.LowercaseExpendedTerms { get; set; }
+		bool? ISimpleQueryStringQuery.AnalyzeWildcard { get; set; }
+		bool? ISimpleQueryStringQuery.Lenient { get; set; }
+		MinimumShouldMatch ISimpleQueryStringQuery.MinimumShouldMatch { get; set; }
 
-		public SimpleQueryStringQueryDescriptor<T> DefaultField(string field) => Assign(a => a.DefaultField = field);
-
-		public SimpleQueryStringQueryDescriptor<T> DefaultField(Expression<Func<T, object>> objectPath) => 
-			Assign(a => a.DefaultField = objectPath);
-
-		public SimpleQueryStringQueryDescriptor<T> OnFields(IEnumerable<string> fields) =>
-			Assign(a => a.Fields = fields?.Select(f => (Field) f).ToListOrNullIfEmpty());
-
-		public SimpleQueryStringQueryDescriptor<T> OnFields(params Expression<Func<T, object>>[] objectPaths) =>
-			Assign(a => a.Fields = objectPaths?.Select(f => (Field) f).ToListOrNullIfEmpty());
-
-		public SimpleQueryStringQueryDescriptor<T> OnFieldsWithBoost(Func<
-			FluentDictionary<Expression<Func<T, object>>, double?>, IDictionary<Expression<Func<T, object>>, double?>> boostableSelector) =>
-				Assign(a => a.Fields = boostableSelector?
-					.Invoke(new FluentDictionary<Expression<Func<T, object>>, double?>())
-					.Select(o => Field.Create(o.Key, o.Value))
-					.ToListOrNullIfEmpty()
-				);
-
-		public SimpleQueryStringQueryDescriptor<T> OnFieldsWithBoost(
-			Func<FluentDictionary<string, double?>, IDictionary<Expression<Func<T, object>>, double?>> boostableSelector) =>
-				Assign(a => a.Fields = boostableSelector?
-					.Invoke(new FluentDictionary<string, double?>())
-					.Select(o => Field.Create(o.Key, o.Value))
-					.ToListOrNullIfEmpty()
-				);
+		public SimpleQueryStringQueryDescriptor<T> OnFields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
+			Assign(a => a.Fields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
 
 		public SimpleQueryStringQueryDescriptor<T> Query(string query) => Assign(a => a.Query = query);
 
-		public SimpleQueryStringQueryDescriptor<T> DefaultOperator(Operator op) => Assign(a => a.DefaultOperator = op);
-
 		public SimpleQueryStringQueryDescriptor<T> Analyzer(string analyzer) => Assign(a => a.Analyzer = analyzer);
 
-		public SimpleQueryStringQueryDescriptor<T> Flags(string flags) => Assign(a => a.Flags = flags);
+		public SimpleQueryStringQueryDescriptor<T> DefaultOperator(Operator? op) => Assign(a => a.DefaultOperator = op);
 
-		public SimpleQueryStringQueryDescriptor<T> LowercaseExpendedTerms(bool lowercaseExpendedTerms = true) =>
-			Assign(a => a.LowercaseExpendedTerms = lowercaseExpendedTerms);
-
-		public SimpleQueryStringQueryDescriptor<T> AnalyzeWildcard(bool analyzeWildcard = true) =>
-			Assign(a => a.AnalyzeWildcard = analyzeWildcard);
+		public SimpleQueryStringQueryDescriptor<T> Flags(SimpleQueryStringFlags? flags) => Assign(a => a.Flags = flags);
 
 		public SimpleQueryStringQueryDescriptor<T> Locale(string locale) => Assign(a => a.Locale = locale);
 
-		public SimpleQueryStringQueryDescriptor<T> MinimumShouldMatch(int minimumShouldMatches) =>
-			Assign(a => a.MinimumShouldMatch = minimumShouldMatches.ToString(CultureInfo.InvariantCulture));
+		public SimpleQueryStringQueryDescriptor<T> LowercaseExpendedTerms(bool? lowercaseExpendedTerms = true) =>
+			Assign(a => a.LowercaseExpendedTerms = lowercaseExpendedTerms);
 
-		public SimpleQueryStringQueryDescriptor<T> MinimumShouldMatch(string minimumShouldMatch) =>
+		public SimpleQueryStringQueryDescriptor<T> AnalyzeWildcard(bool? analyzeWildcard = true) =>
+			Assign(a => a.AnalyzeWildcard = analyzeWildcard);
+
+		public SimpleQueryStringQueryDescriptor<T> Lenient(bool? lenient = true) => Assign(a => a.Lenient = lenient);
+
+		public SimpleQueryStringQueryDescriptor<T> MinimumShouldMatch(MinimumShouldMatch minimumShouldMatch) =>
 			Assign(a => a.MinimumShouldMatch = minimumShouldMatch);
+
     }
 }
