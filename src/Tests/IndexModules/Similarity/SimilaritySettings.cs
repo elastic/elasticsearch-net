@@ -9,7 +9,7 @@ using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using static Nest.Static;
 
-namespace Tests.Aggregations
+namespace Tests.IndexModules.Similarity
 {
 	public class SimilaritySettings
 	{
