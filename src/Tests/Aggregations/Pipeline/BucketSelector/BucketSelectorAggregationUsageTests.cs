@@ -14,7 +14,7 @@ namespace Tests.Aggregations.Pipeline.BucketSelector
 	public class BucketSelectorAggregationUsageTests : AggregationUsageTestBase
 	{
 		public BucketSelectorAggregationUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
-
+		
 		protected override object ExpectJson => new
 		{
 			size = 0,
@@ -44,7 +44,10 @@ namespace Tests.Aggregations.Pipeline.BucketSelector
 								{
 									totalCommits = "commits"
 								},
-								script = "totalCommits >= 500"
+								script = new
+								{
+									inline = "totalCommits >= 500"
+								}
 							}
 						}
 					}

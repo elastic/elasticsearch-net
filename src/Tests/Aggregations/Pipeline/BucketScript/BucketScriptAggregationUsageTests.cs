@@ -68,7 +68,10 @@ namespace Tests.Aggregations.Pipeline.BucketScript
 									totalCommits = "commits",
 									stableCommits = "stable_state>commits"
 								},
-								script = "stableCommits / totalCommits * 100"
+								script = new
+								{
+									inline = "stableCommits / totalCommits * 100"
+								}
 							}
 						}
 					}

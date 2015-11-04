@@ -173,6 +173,11 @@
     <Compile Include="CommonAbstractions\Static\Static.cs" />
     <Compile Include="CommonAbstractions\Union\UnionJsonConverter.cs" />
     <Compile Include="CommonOptions\Failures\BulkError.cs" />
+    <Compile Include="CommonOptions\Scripting\FileScript.cs" />
+    <Compile Include="CommonOptions\Scripting\IndexedScript.cs" />
+    <Compile Include="CommonOptions\Scripting\InlineScript.cs" />
+    <Compile Include="CommonOptions\Scripting\Script.cs" />
+    <Compile Include="CommonOptions\Scripting\ScriptJsonConverter.cs" />
     <Compile Include="CommonOptions\Stats\QueryCacheStats.cs" />
     <Compile Include="CommonOptions\Stats\RecoveryStats.cs" />
     <Compile Include="CommonOptions\Stats\RequestCacheStats.cs" />
