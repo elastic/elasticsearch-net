@@ -18,7 +18,7 @@ namespace Tests.Framework.MockData
 		public IEnumerable<Tag> Tags { get; set; }
 		public IList<Tag> CuratedTags { get; set; }
 		public Dictionary<string, Metadata> Metadata { get; set; }
-		public int NumberOfCommits { get; set; }
+		public int? NumberOfCommits { get; set; }
 
 		public static Faker<Project> Generator { get; } =
 			new Faker<Project>()
