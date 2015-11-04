@@ -295,7 +295,7 @@
     <Compile Include="Aggregations\Bucket\SignificantTerms\Heuristics\ScriptedHeuristic.cs" />
     <Compile Include="Aggregations\Bucket\Bucket.cs" />
     <Compile Include="Aggregations\Bucket\Filters\FiltersBucket.cs" />
-    <Compile Include="Aggregations\Metric\Scripted\ScriptedValueMetric.cs" />
+    <Compile Include="Aggregations\Metric\ScriptedMetric\ScriptedValueMetric.cs" />
     <Compile Include="Aggregations\Metric\TopHits\TopHitsMetric.cs" />
     <Compile Include="Aggregations\Metric\GeoBounds\GeoBoundsMetric.cs" />
     <Compile Include="Aggregations\Bucket\Histogram\HistogramItem.cs" />
@@ -489,7 +489,7 @@
     <Compile Include="Aggregations\Bucket\Children\ChildrenAggregation.cs" />
     <Compile Include="Aggregations\Bucket\Filters\FiltersAggregation.cs" />
     <Compile Include="Aggregations\Metric\PercentileRanks\PercentileRanksAggregation.cs" />
-    <Compile Include="Aggregations\Metric\Scripted\ScriptedMetricAggregation.cs" />
+    <Compile Include="Aggregations\Metric\ScriptedMetric\ScriptedMetricAggregation.cs" />
     <Compile Include="Aggregations\Metric\TopHits\TopHitsAggregation.cs" />
     <Compile Include="Aggregations\Metric\GeoBounds\GeoBoundsAggregation.cs" />
     <Compile Include="Aggregations\Bucket\ReverseNested\ReverseNestedAggregation.cs" />
