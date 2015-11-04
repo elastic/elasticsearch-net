@@ -15,12 +15,13 @@ namespace Nest
 	{
 		internal DerivativeAggregation() { }
 
-		public DerivativeAggregation(string name, string bucketsPath)
+		public DerivativeAggregation(string name, SingleBucketsPath bucketsPath)
 			: base(name, bucketsPath) { }
 
 		internal override void WrapInContainer(AggregationContainer c) => c.Derivative = this;
 	}
 
 	public class DerivativeAggregationDescriptor
-		: PipelineAggregationDescriptorBase<DerivativeAggregationDescriptor, IDerivativeAggregation>, IDerivativeAggregation { }
+		: PipelineAggregationDescriptorBase<DerivativeAggregationDescriptor, IDerivativeAggregation, SingleBucketsPath>
+		, IDerivativeAggregation { }
 }

@@ -16,14 +16,15 @@ namespace Nest
 	{
 		internal AverageBucketAggregation () { }
 
-		public AverageBucketAggregation(string name, string bucketsPath)
+		public AverageBucketAggregation(string name, SingleBucketsPath bucketsPath)
 			: base(name, bucketsPath) { }
 
 		internal override void WrapInContainer(AggregationContainer c) => c.AverageBucket = this;
 	}
 
 	public class AverageBucketAggregationDescriptor
-		: PipelineAggregationDescriptorBase<AverageBucketAggregationDescriptor, IAverageBucketAggregation>, IAverageBucketAggregation
+		: PipelineAggregationDescriptorBase<AverageBucketAggregationDescriptor, IAverageBucketAggregation, SingleBucketsPath>
+		, IAverageBucketAggregation
 	{
 	}
 }

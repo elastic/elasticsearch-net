@@ -16,14 +16,15 @@ namespace Nest
 	{
 		internal MinBucketAggregation () { }
 
-		public MinBucketAggregation(string name, string bucketsPath)
+		public MinBucketAggregation(string name, SingleBucketsPath bucketsPath)
 			: base(name, bucketsPath) { }
 
 		internal override void WrapInContainer(AggregationContainer c) => c.MinBucket = this;
 	}
 
 	public class MinBucketAggregationDescriptor
-		: PipelineAggregationDescriptorBase<MinBucketAggregationDescriptor, IMinBucketAggregation>, IMinBucketAggregation
+		: PipelineAggregationDescriptorBase<MinBucketAggregationDescriptor, IMinBucketAggregation, SingleBucketsPath>
+		, IMinBucketAggregation
 	{
 	}
 }

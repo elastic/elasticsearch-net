@@ -16,14 +16,15 @@ namespace Nest
 	{
 		internal SumBucketAggregation () { }
 
-		public SumBucketAggregation(string name, string bucketsPath)
+		public SumBucketAggregation(string name, SingleBucketsPath bucketsPath)
 			: base(name, bucketsPath) { }
 
 		internal override void WrapInContainer(AggregationContainer c) => c.SumBucket = this;
 	}
 
 	public class SumBucketAggregationDescriptor
-		: PipelineAggregationDescriptorBase<SumBucketAggregationDescriptor, ISumBucketAggregation>, ISumBucketAggregation
+		: PipelineAggregationDescriptorBase<SumBucketAggregationDescriptor, ISumBucketAggregation, SingleBucketsPath>
+		, ISumBucketAggregation
 	{
 	}
 }

@@ -21,7 +21,7 @@ namespace Nest
 
 		internal SerialDifferencingAggregation() { }
 
-		public SerialDifferencingAggregation(string name, string bucketsPath)
+		public SerialDifferencingAggregation(string name, SingleBucketsPath bucketsPath)
 			: base(name, bucketsPath)
 		{ }
 
@@ -29,7 +29,8 @@ namespace Nest
 	}
 
 	public class SerialDifferencingAggregationDescriptor
-		: PipelineAggregationDescriptorBase<SerialDifferencingAggregationDescriptor, ISerialDifferencingAggregation>, ISerialDifferencingAggregation
+		: PipelineAggregationDescriptorBase<SerialDifferencingAggregationDescriptor, ISerialDifferencingAggregation, SingleBucketsPath>
+		, ISerialDifferencingAggregation
 	{
 		int? ISerialDifferencingAggregation.Lag { get; set; }
 

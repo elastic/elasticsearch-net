@@ -81,6 +81,8 @@
     <Compile Include="Aggregations\Bucket\SignificantTerms\Heuristics\PercentageScoreHeuristic.cs" />
     <Compile Include="Aggregations\Aggregation.cs" />
     <Compile Include="Aggregations\Metric\Metric.cs" />
+    <Compile Include="Aggregations\Pipeline\BucketScript\BucketScriptAggregation.cs" />
+    <Compile Include="Aggregations\Pipeline\BucketsPath.cs" />
     <Compile Include="Aggregations\Pipeline\CumulativeSum\CumulativeSumAggregation.cs" />
     <Compile Include="Aggregations\Pipeline\AverageBucket\AverageBucketAggregation.cs" />
     <Compile Include="Aggregations\Pipeline\Derivative\DerivativeAggregation.cs" />

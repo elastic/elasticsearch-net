@@ -32,7 +32,7 @@ namespace Nest
 
 		internal MovingAverageAggregation() { }
 
-		public MovingAverageAggregation(string name, string bucketsPath)
+		public MovingAverageAggregation(string name, SingleBucketsPath bucketsPath)
 			: base(name, bucketsPath)
 		{ }
 
@@ -40,7 +40,8 @@ namespace Nest
 	}
 
 	public class MovingAverageAggregationDescriptor
-		: PipelineAggregationDescriptorBase<MovingAverageAggregationDescriptor, IMovingAverageAggregation>, IMovingAverageAggregation
+		: PipelineAggregationDescriptorBase<MovingAverageAggregationDescriptor, IMovingAverageAggregation, SingleBucketsPath>
+		, IMovingAverageAggregation
 	{
 		bool? IMovingAverageAggregation.Minimize { get; set; }
 		IMovingAverageModel IMovingAverageAggregation.Model { get; set; }

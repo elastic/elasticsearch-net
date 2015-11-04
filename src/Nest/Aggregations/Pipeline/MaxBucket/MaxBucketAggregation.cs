@@ -16,14 +16,15 @@ namespace Nest
 	{
 		internal MaxBucketAggregation () { }
 
-		public MaxBucketAggregation(string name, string bucketsPath)
+		public MaxBucketAggregation(string name, SingleBucketsPath bucketsPath)
 			: base(name, bucketsPath) { }
 
 		internal override void WrapInContainer(AggregationContainer c) => c.MaxBucket = this;
 	}
 
 	public class MaxBucketAggregationDescriptor
-		: PipelineAggregationDescriptorBase<MaxBucketAggregationDescriptor, IMaxBucketAggregation>, IMaxBucketAggregation
+		: PipelineAggregationDescriptorBase<MaxBucketAggregationDescriptor, IMaxBucketAggregation, SingleBucketsPath>
+		, IMaxBucketAggregation
 	{
 	}
 }

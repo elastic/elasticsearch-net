@@ -160,6 +160,9 @@ namespace Nest
 		[JsonProperty("serial_diff")]
 		ISerialDifferencingAggregation SerialDifferencing { get; set; }
 
+		[JsonProperty("bucket_script")]
+		IBucketScriptAggregation BucketScript { get; set; }
+
 		[JsonProperty("aggs")]
 		AggregationDictionary Aggregations { get; set; }
 	}
@@ -232,6 +235,8 @@ namespace Nest
 		public ICumulativeSumAggregation CumulativeSum { get; set; }
 
 		public ISerialDifferencingAggregation SerialDifferencing { get; set; }
+
+		public IBucketScriptAggregation BucketScript { get; set; }
 
 		public AggregationDictionary Aggregations { get; set; }
 
@@ -324,6 +329,8 @@ namespace Nest
 		ICumulativeSumAggregation IAggregationContainer.CumulativeSum { get; set; }
 
 		ISerialDifferencingAggregation IAggregationContainer.SerialDifferencing { get; set; }
+
+		IBucketScriptAggregation IAggregationContainer.BucketScript { get; set; }
 
 		public AggregationContainerDescriptor<T> Average(string name,
 			Func<AverageAggregationDescriptor<T>, IAverageAggregation> selector) =>
@@ -472,6 +479,10 @@ namespace Nest
 		public AggregationContainerDescriptor<T> SerialDifferencing(string name,
 			Func<SerialDifferencingAggregationDescriptor, ISerialDifferencingAggregation> selector) =>
 			_SetInnerAggregation(name, selector, (a, d) => a.SerialDifferencing = d);
+
+		public AggregationContainerDescriptor<T> BucketScript(string name,
+			Func<BucketScriptAggregationDescriptor, IBucketScriptAggregation> selector) =>
+			_SetInnerAggregation(name, selector, (a, d) => a.BucketScript = d);
 
 		/// <summary>
 		/// Fluent methods do not assing to properties on `this` directly but on IAggregationContainers inside `this.Aggregations[string, IContainer]

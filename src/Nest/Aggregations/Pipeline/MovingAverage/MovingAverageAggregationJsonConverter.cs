@@ -19,7 +19,7 @@ namespace Nest
 			var ps = o.Properties().ToDictionary(p => p.Name, p => p.Value);
 			return new MovingAverageAggregation
 			{
-				BucketsPath = GetOrDefault<string>("buckets_path", ps),
+				BucketsPath = GetOrDefault<SingleBucketsPath>("buckets_path", ps),
 				Format = GetOrDefault<string>("format", ps),
 				GapPolicy = GetGapPolicy(ps),
 				Minimize = GetOrDefault<bool?>("minimize", ps),
@@ -35,7 +35,7 @@ namespace Nest
 			if (movingAvg == null) return;
 			writer.WriteStartObject();
 			writer.WritePropertyName("buckets_path");
-			writer.WriteValue(movingAvg.BucketsPath);
+			serializer.Serialize(writer, movingAvg.BucketsPath);
 			if (movingAvg.GapPolicy != null)
 			{
 				writer.WritePropertyName("gap_policy");

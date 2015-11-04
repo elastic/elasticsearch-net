@@ -48,6 +48,8 @@ namespace Nest
 
 		public ValueMetric SerialDifferencing(string key) => this.TryGet<ValueMetric>(key);
 
+		public ValueMetric BucketScript(string key) => this.TryGet<ValueMetric>(key);
+
 		public KeyedValueMetric MaxBucket(string key) => this.TryGet<KeyedValueMetric>(key);
 
 		public KeyedValueMetric MinBucket(string key) => this.TryGet<KeyedValueMetric>(key);
