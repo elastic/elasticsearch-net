@@ -166,6 +166,9 @@ namespace Nest
 		[JsonProperty("bucket_selector")]
 		IBucketSelectorAggregation BucketSelector { get; set; }
 
+		[JsonProperty("sampler")]
+		ISamplerAggregation Sampler { get; set; }
+
 		[JsonProperty("aggs")]
 		AggregationDictionary Aggregations { get; set; }
 	}
@@ -242,6 +245,8 @@ namespace Nest
 		public IBucketScriptAggregation BucketScript { get; set; }
 
 		public IBucketSelectorAggregation BucketSelector { get; set; }
+
+		public ISamplerAggregation Sampler { get; set; }
 
 		public AggregationDictionary Aggregations { get; set; }
 
@@ -338,6 +343,8 @@ namespace Nest
 		IBucketScriptAggregation IAggregationContainer.BucketScript { get; set; }
 
 		IBucketSelectorAggregation IAggregationContainer.BucketSelector { get; set; }
+
+		ISamplerAggregation IAggregationContainer.Sampler { get; set; }
 
 		public AggregationContainerDescriptor<T> Average(string name,
 			Func<AverageAggregationDescriptor<T>, IAverageAggregation> selector) =>
@@ -494,6 +501,10 @@ namespace Nest
 		public AggregationContainerDescriptor<T> BucketSelector(string name,
 			Func<BucketSelectorAggregationDescriptor, IBucketSelectorAggregation> selector) =>
 			_SetInnerAggregation(name, selector, (a, d) => a.BucketSelector = d);
+
+		public AggregationContainerDescriptor<T> Sampler(string name,
+			Func<SamplerAggregationDescriptor<T>, ISamplerAggregation> selector) =>
+			_SetInnerAggregation(name, selector, (a, d) => a.Sampler = d);
 
 		/// <summary>
 		/// Fluent methods do not assing to properties on `this` directly but on IAggregationContainers inside `this.Aggregations[string, IContainer]

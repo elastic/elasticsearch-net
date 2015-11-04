@@ -97,6 +97,8 @@ namespace Nest
 
 		public SingleBucket Children(string key) => this.TryGet<SingleBucket>(key);
 
+		public SingleBucket Sampler(string key) => this.TryGet<SingleBucket>(key);
+
 		public DocCountBucket<SignificantTermItem> SignificantTerms(string key)
 		{
 			var bucket = this.TryGet<DocCountBucket>(key);

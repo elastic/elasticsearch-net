@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Aggregations\Bucket\Children\ChildrenAggregationMapping.doc.cs" />
+    <Compile Include="Aggregations\Bucket\Sampler\SamplerAggregationUsageTests.cs" />
     <Compile Include="Aggregations\Bucket\Filters\FiltersAggregationUsageTests.cs" />
     <Compile Include="Aggregations\Bucket\Filter\FilterAggregationUsageTests.cs" />
     <Compile Include="Aggregations\Bucket\DateRange\DateRangeAggregationUsageTests.cs" />
