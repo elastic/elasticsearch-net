@@ -100,10 +100,11 @@ namespace Tests.Aggregations.Pipeline.MovingAverage
 			projectsPerMonth.Should().NotBeNull();
 			projectsPerMonth.Items.Should().NotBeNull();
 			projectsPerMonth.Items.Count.Should().BeGreaterThan(0);
-
-			foreach(var item in projectsPerMonth.Items)
+	
+			// average not calculated for the first bucket
+			foreach(var item in projectsPerMonth.Items.Skip(1))
 			{
-				var movingAvg = item.MovingAverage("commits_moving_avg");
+				var movingAvg = item.Sum("commits_moving_avg");
 				movingAvg.Should().NotBeNull();
 				movingAvg.Value.Should().BeGreaterThan(0);
 			}

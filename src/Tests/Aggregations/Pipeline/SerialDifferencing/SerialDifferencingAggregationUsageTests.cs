@@ -59,9 +59,9 @@ namespace Tests.Aggregations.Pipeline.SerialDifferencing
 
 			foreach (var item in projectsPerMonth.Items)
 			{
-				var thirtiethDifference = item.SerialDifferencing("thirtieth_difference");
-				thirtiethDifference.Should().NotBeNull();
-				thirtiethDifference.Value.Should().NotBe(null);
+				var commits = item.Sum("commits");
+				commits.Should().NotBeNull();
+				commits.Value.Should().NotBe(null);
 			}
 		}
 

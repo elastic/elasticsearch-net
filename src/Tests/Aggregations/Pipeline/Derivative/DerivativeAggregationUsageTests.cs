@@ -56,7 +56,8 @@ namespace Tests.Aggregations.Pipeline.Derivative
 			projectsPerMonth.Items.Should().NotBeNull();
 			projectsPerMonth.Items.Count.Should().BeGreaterThan(0);
 
-			foreach (var item in projectsPerMonth.Items)
+			// derivative not calculated for the first bucket
+			foreach (var item in projectsPerMonth.Items.Skip(1))
 			{
 				var commitsDerivative = item.Derivative("commits_derivative");
 				commitsDerivative.Should().NotBeNull();

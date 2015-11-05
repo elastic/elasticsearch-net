@@ -11,9 +11,9 @@ using Tests.Framework.MockData;
 
 namespace Tests.Aggregations.Pipeline.MovingAverage
 {
-	public class MovingAverageHoltWinterUsageTests : AggregationUsageTestBase
+	public class MovingAverageHoltWintersUsageTests : AggregationUsageTestBase
 	{
-		public MovingAverageHoltWinterUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
+		public MovingAverageHoltWintersUsageTests(ReadOnlyCluster cluster, EndpointUsage usage) : base(cluster, usage) { }
 
 		protected override object ExpectJson => new
 		{
@@ -41,7 +41,7 @@ namespace Tests.Aggregations.Pipeline.MovingAverage
 							moving_avg = new
 							{
 								buckets_path = "commits",
-								window = 30,
+								window = 60,
 								model = "holt_winters",
 								settings = new
 								{
@@ -49,7 +49,7 @@ namespace Tests.Aggregations.Pipeline.MovingAverage
 									alpha = 0.5,
 									beta = 0.5,
 									gamma = 0.5,
-									period = 7,
+									period = 30,
 									pad = false
 								}
 							}
@@ -71,14 +71,14 @@ namespace Tests.Aggregations.Pipeline.MovingAverage
 						)
 						.MovingAverage("commits_moving_avg", mv => mv
 							.BucketsPath("commits")
-							.Window(30)
+							.Window(60)
 							.Model(m => m
 								.HoltWinters(hw => hw
 									.Type(HoltWintersType.Multiplicative)
 									.Alpha(0.5f)
 									.Beta(0.5f)
 									.Gamma(0.5f)
-									.Period(7)
+									.Period(30)
 									.Pad(false)
 								)
 							)
@@ -98,14 +98,14 @@ namespace Tests.Aggregations.Pipeline.MovingAverage
 					new SumAggregation("commits", "numberOfCommits") &&
 					new MovingAverageAggregation("commits_moving_avg", "commits")
 					{
-						Window = 30,
+						Window = 60,
 						Model = new HoltWintersModel
 						{
 							Type = HoltWintersType.Multiplicative,
 							Alpha = 0.5f,
 							Beta = 0.5f,
 							Gamma = 0.5f,
-							Period = 7,
+							Period = 30,
 							Pad = false
 						}
 					}
@@ -115,18 +115,6 @@ namespace Tests.Aggregations.Pipeline.MovingAverage
 		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.IsValid.Should().BeTrue();
-
-			var projectsPerMonth = response.Aggs.DateHistogram("projects_started_per_month");
-			projectsPerMonth.Should().NotBeNull();
-			projectsPerMonth.Items.Should().NotBeNull();
-			projectsPerMonth.Items.Count.Should().BeGreaterThan(0);
-
-			foreach(var item in projectsPerMonth.Items)
-			{
-				var movingAvg = item.MovingAverage("commits_moving_avg");
-				movingAvg.Should().NotBeNull();
-				movingAvg.Value.Should().BeGreaterThan(0);
-			}
 		}
 	}
 }
