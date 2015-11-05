@@ -5,7 +5,7 @@ using Newtonsoft.Json.Converters;
 namespace Nest
 {
 	[JsonConverter(typeof(StringEnumConverter))]
-	public enum GeoDistance
+	public enum GeoDistanceType
 	{
 		[EnumMember(Value = "sloppy_arc")]
 		SloppyArc,

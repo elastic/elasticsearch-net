@@ -13,7 +13,7 @@ namespace Nest
 		GeoTree? Tree { get; set; }
 
 		[JsonProperty("precision")]
-		GeoPrecision Precision { get; set; }
+		GeoDistance Precision { get; set; }
 
 		[JsonProperty("orientation")]
 		GeoOrientation? Orientation { get; set; }
@@ -40,7 +40,7 @@ namespace Nest
 
 		public GeoTree? Tree { get; set; }
 
-		public GeoPrecision Precision { get; set; }
+		public GeoDistance Precision { get; set; }
 
 		public GeoOrientation? Orientation { get; set; }
 
@@ -54,7 +54,7 @@ namespace Nest
 		where T : class
 	{
 		GeoTree? IGeoShapeProperty.Tree { get; set; }
-		GeoPrecision IGeoShapeProperty.Precision { get; set; }
+		GeoDistance IGeoShapeProperty.Precision { get; set; }
 		GeoOrientation? IGeoShapeProperty.Orientation { get; set; }
 		int? IGeoShapeProperty.TreeLevels { get; set; }
 		double? IGeoShapeProperty.DistanceErrorPercentage { get; set; }
@@ -66,7 +66,7 @@ namespace Nest
 		public GeoShapePropertyDescriptor<T> TreeLevels(int treeLevels) => Assign(a => a.TreeLevels = treeLevels);
 
 		public GeoShapePropertyDescriptor<T> Precision(double precision, GeoPrecisionUnit unit) =>
-			Assign(a => a.Precision = new GeoPrecision(precision, unit));
+			Assign(a => a.Precision = new GeoDistance(precision, unit));
 
 		public GeoShapePropertyDescriptor<T> Orientation(GeoOrientation orientation) => Assign(a => a.Orientation = orientation);
 

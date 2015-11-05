@@ -6,12 +6,12 @@ using System.Text.RegularExpressions;
 
 namespace Nest
 {
-	internal class GeoPrecisionJsonConverter : JsonConverter
+	internal class GeoDistanceJsonConverter : JsonConverter
 	{
 		private static readonly Regex SplitRegex = new Regex(@"^(\d+(?:[.,]\d+)?)(\D+)$");
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-			var p = value as GeoPrecision;
+			var p = value as GeoDistance;
 			if (p == null)
 			{
 				writer.WriteNull();
@@ -41,7 +41,7 @@ namespace Nest
 			if (!double.TryParse(sp, out p)) return null;
 			var unit = matches[0].Groups[2].Captures[0].Value.ToEnum<GeoPrecisionUnit>();
 			if (!unit.HasValue) return null;
-			return new GeoPrecision(p, unit.Value);
+			return new GeoDistance(p, unit.Value);
 		}
 
 		public override bool CanConvert(Type objectType)

@@ -21,7 +21,7 @@ namespace Nest
 		GeoUnit? Unit { get; set; }
 
 		[JsonProperty("distance_type")]
-		GeoDistance? DistanceType { get; set; }
+		GeoDistanceType? DistanceType { get; set; }
 
 		[JsonProperty(PropertyName = "ranges")]
 		IEnumerable<Range<double>> Ranges { get; set; }
@@ -35,7 +35,7 @@ namespace Nest
 
 		public GeoUnit? Unit { get; set; }
 
-		public GeoDistance? DistanceType { get; set; }
+		public GeoDistanceType? DistanceType { get; set; }
 
 		public IEnumerable<Range<double>> Ranges { get; set; }
 	}
@@ -48,7 +48,7 @@ namespace Nest
 
 		public GeoUnit? Unit { get; set; }
 
-		public GeoDistance? DistanceType { get; set; }
+		public GeoDistanceType? DistanceType { get; set; }
 
 		public IEnumerable<Range<double>> Ranges { get; set; }
 
@@ -68,7 +68,7 @@ namespace Nest
 
 		GeoUnit? IGeoDistanceAggregator.Unit { get; set; }
 
-		GeoDistance? IGeoDistanceAggregator.DistanceType { get; set; }
+		GeoDistanceType? IGeoDistanceAggregator.DistanceType { get; set; }
 
 		IEnumerable<Range<double>> IGeoDistanceAggregator.Ranges { get; set; }
 
@@ -85,7 +85,7 @@ namespace Nest
 
 		public GeoDistanceAggregatorDescriptor<T> Unit(GeoUnit unit) => Assign(a => a.Unit = unit);
 
-		public GeoDistanceAggregatorDescriptor<T> DistanceType(GeoDistance geoDistance) => Assign(a => a.DistanceType = geoDistance);
+		public GeoDistanceAggregatorDescriptor<T> DistanceType(GeoDistanceType geoDistance) => Assign(a => a.DistanceType = geoDistance);
 
 		public GeoDistanceAggregatorDescriptor<T> Ranges(params Func<Range<double>, Range<double>>[] ranges) =>
 			Assign(a => a.Ranges = (from range in ranges let r = new Range<double>() select range(r)).ToListOrNullIfEmpty());

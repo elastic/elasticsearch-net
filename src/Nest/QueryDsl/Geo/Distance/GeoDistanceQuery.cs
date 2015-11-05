@@ -26,7 +26,7 @@ namespace Nest
 
 		[JsonProperty("distance_type")]
 		[JsonConverter(typeof(StringEnumConverter))]
-		GeoDistance? DistanceType { get; set; }
+		GeoDistanceType? DistanceType { get; set; }
 	}
 
 	public class GeoDistanceQuery : FieldNameQueryBase, IGeoDistanceQuery
@@ -36,7 +36,7 @@ namespace Nest
 		public object Distance { get; set; }
 		public GeoUnit? Unit { get; set; }
 		public GeoOptimizeBBox? OptimizeBoundingBox { get; set; }
-		public GeoDistance? DistanceType { get; set; }
+		public GeoDistanceType? DistanceType { get; set; }
 
 		protected override void WrapInContainer(IQueryContainer c) => c.GeoDistance = this;
 
@@ -51,7 +51,7 @@ namespace Nest
 		string IGeoDistanceQuery.Location { get; set; }
 		object IGeoDistanceQuery.Distance { get; set; }
 		GeoUnit? IGeoDistanceQuery.Unit { get; set; }
-		GeoDistance? IGeoDistanceQuery.DistanceType { get; set; }
+		GeoDistanceType? IGeoDistanceQuery.DistanceType { get; set; }
 		GeoOptimizeBBox? IGeoDistanceQuery.OptimizeBoundingBox { get; set; }
 
 		public GeoDistanceQueryDescriptor<T> Location(double Lat, double Lon) => Assign(a =>
@@ -68,6 +68,6 @@ namespace Nest
 
 		public GeoDistanceQueryDescriptor<T> Optimize(GeoOptimizeBBox optimize) => Assign(a => a.OptimizeBoundingBox = optimize);
 
-		public GeoDistanceQueryDescriptor<T> DistanceType(GeoDistance type) => Assign(a => a.DistanceType = type);
+		public GeoDistanceQueryDescriptor<T> DistanceType(GeoDistanceType type) => Assign(a => a.DistanceType = type);
 	}
 }
