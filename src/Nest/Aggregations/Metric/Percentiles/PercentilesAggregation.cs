@@ -6,8 +6,8 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<PercentilesAggregator>))]
-	public interface IPercentilesAggregator : IMetricAggregator
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<PercentilesAggregation>))]
+	public interface IPercentilesAggregation : IMetricAggregation
 	{
 		[JsonProperty("percents")]
 		IEnumerable<double> Percentages { get; set; }
@@ -16,34 +16,29 @@ namespace Nest
 		int? Compression { get; set; }
 	}
 
-	public class PercentilesAggregator : MetricAggregator, IPercentilesAggregator
-	{
-		public IEnumerable<double> Percentages { get; set; }
-		public int? Compression { get; set; }
-	}
-
-	public class PercentilesAgg : MetricAgg, IPercentilesAggregator
+	public class PercentilesAggregation : MetricAggregationBase, IPercentilesAggregation
 	{
 		public IEnumerable<double> Percentages { get; set; }
 		public int? Compression { get; set; }
 
-		public PercentilesAgg(string name, Field field) : base(name, field) { } 
+		internal PercentilesAggregation() { }
+
+		public PercentilesAggregation(string name, Field field) : base(name, field) { } 
 
 		internal override void WrapInContainer(AggregationContainer c) => c.Percentiles = this;
 	}
 
-	public class PercentilesAggregatorDescriptor<T> 
-		: MetricAggregationBaseDescriptor<PercentilesAggregatorDescriptor<T>, IPercentilesAggregator, T>
-			, IPercentilesAggregator 
+	public class PercentilesAggregationDescriptor<T> 
+		: MetricAggregationDescriptorBase<PercentilesAggregationDescriptor<T>, IPercentilesAggregation, T>
+			, IPercentilesAggregation 
 		where T : class
 	{
-		IEnumerable<double> IPercentilesAggregator.Percentages { get; set; }
+		IEnumerable<double> IPercentilesAggregation.Percentages { get; set; }
 
-		int? IPercentilesAggregator.Compression { get; set; }
+		int? IPercentilesAggregation.Compression { get; set; }
 
-		public PercentilesAggregatorDescriptor<T> Percentages(params double[] percentages) => Assign(a => a.Percentages = percentages);
+		public PercentilesAggregationDescriptor<T> Percentages(params double[] percentages) => Assign(a => a.Percentages = percentages);
 
-		public PercentilesAggregatorDescriptor<T> Compression(int compression) => Assign(a => a.Compression = compression);
-
+		public PercentilesAggregationDescriptor<T> Compression(int compression) => Assign(a => a.Compression = compression);
 	}
 }

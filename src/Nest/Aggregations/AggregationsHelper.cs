@@ -36,6 +36,22 @@ namespace Nest
 
 		public ValueMetric ValueCount(string key) => this.TryGet<ValueMetric>(key);
 
+		public ValueMetric AverageBucket(string key) => this.TryGet<ValueMetric>(key);
+
+		public ValueMetric Derivative(string key) => this.TryGet<ValueMetric>(key);
+
+		public ValueMetric SumBucket(string key) => this.TryGet<ValueMetric>(key);
+
+		public ValueMetric MovingAverage(string key) => this.TryGet<ValueMetric>(key);
+
+		public ValueMetric CumulativeSum(string key) => this.TryGet<ValueMetric>(key);
+
+		public ValueMetric BucketScript(string key) => this.TryGet<ValueMetric>(key);
+
+		public KeyedValueMetric MaxBucket(string key) => this.TryGet<KeyedValueMetric>(key);
+
+		public KeyedValueMetric MinBucket(string key) => this.TryGet<KeyedValueMetric>(key);
+
 		public ScriptedValueMetric ScriptedMetric(string key)
 		{
 			var valueMetric = this.TryGet<ValueMetric>(key);
@@ -79,24 +95,26 @@ namespace Nest
 
 		public SingleBucket Children(string key) => this.TryGet<SingleBucket>(key);
 
-		public BucketWithDocCount<SignificantTermItem> SignificantTerms(string key)
+		public SingleBucket Sampler(string key) => this.TryGet<SingleBucket>(key);
+
+		public DocCountBucket<SignificantTermItem> SignificantTerms(string key)
 		{
-			var bucket = this.TryGet<BucketWithDocCount>(key);
+			var bucket = this.TryGet<DocCountBucket>(key);
 			return bucket == null
 				? null
-				: new BucketWithDocCount<SignificantTermItem>
+				: new DocCountBucket<SignificantTermItem>
 				{
 					DocCount = bucket.DocCount,
 					Items = bucket.Items.OfType<SignificantTermItem>().ToList()
 				};
 		}
 
-		public Bucket<KeyItem> Terms(string key)
+		public Bucket<KeyedBucket> Terms(string key)
 		{
 			var bucket = this.TryGet<Bucket>(key);
 			return bucket == null 
 				? null 
-				: new Bucket<KeyItem> {Items = bucket.Items.OfType<KeyItem>().ToList()};
+				: new Bucket<KeyedBucket> {Items = bucket.Items.OfType<KeyedBucket>().ToList()};
 		}
 
 		public Bucket<HistogramItem> Histogram(string key)
@@ -107,7 +125,7 @@ namespace Nest
 				: new Bucket<HistogramItem>
 				{
 					Items = bucket.Items.OfType<HistogramItem>()
-						.Concat<HistogramItem>(bucket.Items.OfType<KeyItem>()
+						.Concat<HistogramItem>(bucket.Items.OfType<KeyedBucket>()
 							.Select(x =>
 								new HistogramItem
 								{
@@ -122,12 +140,12 @@ namespace Nest
 				};
 		}
 
-		public Bucket<KeyItem> GeoHash(string key)
+		public Bucket<KeyedBucket> GeoHash(string key)
 		{
 			var bucket = this.TryGet<Bucket>(key);
 			return bucket == null 
 				? null 
-				: new Bucket<KeyItem> {Items = bucket.Items.OfType<KeyItem>().ToList()};
+				: new Bucket<KeyedBucket> {Items = bucket.Items.OfType<KeyedBucket>().ToList()};
 		}
 
 		public Bucket<RangeItem> Range(string key)

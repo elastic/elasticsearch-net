@@ -43,12 +43,27 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Aggregations\Bucket\Children\ChildrenAggregationMapping.doc.cs" />
+    <Compile Include="Aggregations\Bucket\Sampler\SamplerAggregationUsageTests.cs" />
     <Compile Include="Aggregations\Bucket\Filters\FiltersAggregationUsageTests.cs" />
     <Compile Include="Aggregations\Bucket\Filter\FilterAggregationUsageTests.cs" />
     <Compile Include="Aggregations\Bucket\DateRange\DateRangeAggregationUsageTests.cs" />
     <Compile Include="Aggregations\Bucket\DateHistogram\DateHistogramAggregationUsageTests.cs" />
     <Compile Include="Aggregations\Bucket\Children\ChildrenAggregationUsageTests.cs" />
     <Compile Include="Aggregations\AggregationUsageTestBase.cs" />
+    <Compile Include="Aggregations\Pipeline\BucketScript\BucketScriptAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Pipeline\BucketSelector\BucketSelectorAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Pipeline\CumulativeSum\CumulativeSumAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Pipeline\SerialDifferencing\SerialDifferencingAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Pipeline\MaxBucket\MaxBucketAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Pipeline\AverageBucket\AverageBucketAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Pipeline\Derivative\DerivativeAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Pipeline\MinBucket\MinBucketAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Pipeline\MovingAverage\MovingAverageHoltLinearAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Pipeline\MovingAverage\MovingAverageEwmaAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Pipeline\MovingAverage\MovingAverageLinearAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Pipeline\MovingAverage\MovingAverageSimpleAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Pipeline\MovingAverage\MovingAverageHoltWintersAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Pipeline\SumBucket\SumBucketAggregationUsageTests.cs" />
     <Compile Include="Aggregations\WritingAggregations.doc.cs" />
     <Compile Include="Analysis\Analyzers\AnalyzerUsageTests.cs" />
     <Compile Include="Analysis\CharFilters\CharFilterUsageTests.cs" />
@@ -398,7 +413,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Aggregations\Metric\" />
-    <Folder Include="Aggregations\Pipeline\" />
     <Folder Include="Migration\" />
     <Folder Include="Plugins\Analysis\Phonetic\" />
     <Folder Include="Setup\" />

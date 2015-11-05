@@ -9,14 +9,14 @@ using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using static Nest.Static;
 
-namespace Tests.Aggregations
+namespace Tests.IndexModules.IndexSettings.SlowLog
 {
 	public class Index_TranslogSettings
 	{
 		/**
 		 */
 
-		public class Usage : UsageTestBase<IIndexSettings, IndexSettingsDescriptor, IndexSettings>
+		public class Usage : UsageTestBase<IIndexSettings, IndexSettingsDescriptor, Nest.IndexSettings>
 		{
 			protected override object ExpectJson => new Dictionary<string, object>
 			{
@@ -68,10 +68,10 @@ namespace Tests.Aggregations
 
 			/**
 			 */
-			protected override IndexSettings Initializer =>
-				new IndexSettings
+			protected override Nest.IndexSettings Initializer =>
+				new Nest.IndexSettings
 				{
-					SlowLog = new SlowLog
+					SlowLog = new Nest.SlowLog
 					{
 						Indexing = new SlowLogIndexing
 						{

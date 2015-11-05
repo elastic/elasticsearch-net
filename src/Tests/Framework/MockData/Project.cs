@@ -20,6 +20,7 @@ namespace Tests.Framework.MockData
 		public IList<Tag> CuratedTags { get; set; }
 		public Dictionary<string, Metadata> Metadata { get; set; }
 		public SimpleGeoPoint Location { get; set; }
+		public int? NumberOfCommits { get; set; }
 
 		public static Faker<Project> Generator { get; } =
 			new Faker<Project>()
@@ -32,6 +33,7 @@ namespace Tests.Framework.MockData
 				.RuleFor(p => p.Tags, f => Tag.Generator.Generate(Gimme.Random.Number(2, 50)))
 				.RuleFor(p => p.CuratedTags, f => Tag.Generator.Generate(Gimme.Random.Number(1, 5)).ToList())
 				.RuleFor(p => p.Location, f => SimpleGeoPoint.Generator.Generate())
+				.RuleFor(p => p.NumberOfCommits, f => Gimme.Random.Number(1, 1000))
 			;
 
 		public static IList<Project> Projects { get; } =

@@ -9,14 +9,14 @@ using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using static Nest.Static;
 
-namespace Tests.Aggregations
+namespace Tests.IndexModules.IndexSettings.Settings
 {
 	public class TypedIndexSettings
 	{
 		/**
 		 */
 
-		public class Usage : UsageTestBase<IIndexSettings, IndexSettingsDescriptor, IndexSettings>
+		public class Usage : UsageTestBase<IIndexSettings, IndexSettingsDescriptor, Nest.IndexSettings>
 		{
 			protected override object ExpectJson => new Dictionary<string, object>
 			{
@@ -63,8 +63,8 @@ namespace Tests.Aggregations
 
 			/**
 			 */
-			protected override IndexSettings Initializer =>
-				new IndexSettings(new Dictionary<string, object>
+			protected override Nest.IndexSettings Initializer =>
+				new Nest.IndexSettings(new Dictionary<string, object>
 				{
 					{ "any.setting", "can be set" },
 					{ "doubles", 1.1 },
