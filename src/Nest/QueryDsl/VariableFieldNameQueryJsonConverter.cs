@@ -37,19 +37,22 @@ namespace Nest
 			var query = this.ReadAs(jo.CreateReader(), typeof(TReadAs), existingValue, serializer);
 
 			var info = GetOrCreateTypeInfo(typeof(TInterface));
+			var deeperPropertyName = info.Item2.FieldName;
+
 			var knownProperties = typeof (TInterface).GetCachedObjectProperties();
 			var unknownProperties = jo.Properties().Select(p => p.Name).Except(knownProperties.Where(p=>p.HasMemberAttribute).Select(p=>p.PropertyName));
 			var fieldProperty = unknownProperties.FirstOrDefault();
 
 			query.Field = fieldProperty;
 
-			var locationField = knownProperties.FirstOrDefault(p => p.PropertyName == fieldProperty);
+			var locationField = knownProperties.FirstOrDefault(p => p.PropertyName == fieldProperty || p.PropertyName == deeperPropertyName);
 			if (locationField == null) return query;
 
 			var propertyValue = jo.Property(fieldProperty).Value;
-			var o = JObject.ReadFrom(propertyValue.CreateReader());
+			var o = JToken.ReadFrom(propertyValue.CreateReader()).Value<JObject>();
+			var r = (deeperPropertyName.IsNullOrEmpty() ? (JToken)o : o.Property(deeperPropertyName).Value).CreateReader();
 
-			var locationValue = serializer.Deserialize(o.CreateReader(), locationField.PropertyType);
+			var locationValue = serializer.Deserialize(r, locationField.PropertyType);
 			locationField.ValueProvider.SetValue(query, locationValue);
 
 			return query;
