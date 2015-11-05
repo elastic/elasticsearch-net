@@ -28,7 +28,7 @@ namespace Nest
 		/// Longitude
 		/// </summary>
 		[JsonProperty("lon")]
-		public double Longtitude => _longitude;
+		public double Longitude => _longitude;
 		private readonly double _longitude;
 
 		/// <summary>
