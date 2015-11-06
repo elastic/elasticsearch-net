@@ -67,8 +67,7 @@ namespace Tests.Aggregations.Bucket.Filter
 				}
 			};
 
-		[I]
-		public async Task HandlingResponses() => await this.AssertOnAllResponses(response =>
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.IsValid.Should().BeTrue();
 
@@ -82,6 +81,6 @@ namespace Tests.Aggregations.Bucket.Filter
 			var tags = filterAgg.Terms("project_tags");
 			tags.Should().NotBeNull();
 			tags.Items.Should().NotBeEmpty();
-		});
+		}
 	}
 }

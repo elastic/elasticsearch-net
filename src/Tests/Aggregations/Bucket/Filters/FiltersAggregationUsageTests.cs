@@ -78,31 +78,30 @@ namespace Tests.Aggregations.Bucket.Filters
 				}
 			};
 
-		[I]
-		public async Task HandlingResponses() => await this.AssertOnAllResponses(response =>
-	{
-		response.IsValid.Should().BeTrue();
+		protected override void ExpectResponse(ISearchResponse<Project> response)
+		{
+			response.IsValid.Should().BeTrue();
 
-		/**
-		* Using the `.Agg` aggregation helper we can fetch our aggregation results easily 
-		* in the correct type. [Be sure to read more about `.Agg` vs `.Aggregations` on the response here]()
-		*/
-		var filterAgg = response.Aggs.Filters("projects_by_state");
-		filterAgg.Should().NotBeNull();
+			/**
+			* Using the `.Agg` aggregation helper we can fetch our aggregation results easily 
+			* in the correct type. [Be sure to read more about `.Agg` vs `.Aggregations` on the response here]()
+			*/
+			var filterAgg = response.Aggs.Filters("projects_by_state");
+			filterAgg.Should().NotBeNull();
 
-		var namedResult = filterAgg.NamedBucket("belly_up");
-		namedResult.Should().NotBeNull();
-		namedResult.DocCount.Should().BeGreaterThan(0);
+			var namedResult = filterAgg.NamedBucket("belly_up");
+			namedResult.Should().NotBeNull();
+			namedResult.DocCount.Should().BeGreaterThan(0);
 
-		namedResult = filterAgg.NamedBucket("stable");
-		namedResult.Should().NotBeNull();
-		namedResult.DocCount.Should().BeGreaterThan(0);
+			namedResult = filterAgg.NamedBucket("stable");
+			namedResult.Should().NotBeNull();
+			namedResult.DocCount.Should().BeGreaterThan(0);
 
-		namedResult = filterAgg.NamedBucket("very_active");
-		namedResult.Should().NotBeNull();
-		namedResult.DocCount.Should().BeGreaterThan(0);
+			namedResult = filterAgg.NamedBucket("very_active");
+			namedResult.Should().NotBeNull();
+			namedResult.DocCount.Should().BeGreaterThan(0);
 
-	});
+		}
 	}
 
 	/** == Anonymous filters **/
@@ -163,8 +162,7 @@ namespace Tests.Aggregations.Bucket.Filters
 				}
 			};
 
-		[I]
-		public async Task HandlingResponses() => await this.AssertOnAllResponses(response =>
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.IsValid.Should().BeTrue();
 
@@ -180,6 +178,6 @@ namespace Tests.Aggregations.Bucket.Filters
 			{
 				singleBucket.DocCount.Should().BeGreaterThan(0);
 			}
-		});
+		}
 	}
 }
