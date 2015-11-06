@@ -20,7 +20,7 @@ namespace Nest
 			var dict = o.Properties().ToDictionary(p => p.Name, p => p.Value);
 			if (!dict.HasAny()) return null;
 
-			Script script = null;
+			IScript script = null;
 			if (dict.ContainsKey("inline"))
 			{
 				var inline = dict["inline"].ToString();

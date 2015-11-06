@@ -12,13 +12,13 @@ namespace Nest
 	public interface IBucketScriptAggregation : IPipelineAggregation
 	{
 		[JsonProperty("script")]
-		Script Script { get; set; }
+		IScript Script { get; set; }
 	}
 
 	public class BucketScriptAggregation
 		: PipelineAggregationBase, IBucketScriptAggregation
 	{
-		public Script Script { get; set; }
+		public IScript Script { get; set; }
 
 		internal BucketScriptAggregation () { }
 
@@ -32,11 +32,11 @@ namespace Nest
 		: PipelineAggregationDescriptorBase<BucketScriptAggregationDescriptor, IBucketScriptAggregation, MultiBucketsPath>
 		, IBucketScriptAggregation
 	{
-		Script IBucketScriptAggregation.Script { get; set; }
+		IScript IBucketScriptAggregation.Script { get; set; }
 
-		public BucketScriptAggregationDescriptor Script(string script) => Assign(a => a.Script = script);
+		public BucketScriptAggregationDescriptor Script(string script) => Assign(a => a.Script = (InlineScript)script);
 
-		public BucketScriptAggregationDescriptor Script(Func<ScriptDescriptor, Script> scriptSelector) =>
+		public BucketScriptAggregationDescriptor Script(Func<ScriptDescriptor, IScript> scriptSelector) =>
 			Assign(a => a.Script = scriptSelector?.Invoke(new ScriptDescriptor()));
 
 		public BucketScriptAggregationDescriptor BucketsPath(Func<FluentDictionary<string, string>, FluentDictionary<string, string>> bucketsPath) =>

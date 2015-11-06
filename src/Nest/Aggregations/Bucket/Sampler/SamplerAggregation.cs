@@ -20,7 +20,7 @@ namespace Nest
 		int? MaxDocsPerValue { get; set; }
 
 		[JsonProperty("script")]
-		Script Script { get; set; }
+		IScript Script { get; set; }
 
 		[JsonProperty("execution_hint")]
 		SamplerAggregationExecutionHint? ExecutionHint { get; set; }
@@ -31,7 +31,7 @@ namespace Nest
 		public SamplerAggregationExecutionHint? ExecutionHint { get; set; }
 		public Field Field { get; set; }
 		public int? MaxDocsPerValue { get; set; }
-		public Script Script { get; set; }
+		public IScript Script { get; set; }
 		public int? ShardSize { get; set; }
 
 		internal SamplerAggregation() { }
@@ -48,7 +48,7 @@ namespace Nest
 		SamplerAggregationExecutionHint? ISamplerAggregation.ExecutionHint { get; set; }
 		Field ISamplerAggregation.Field { get; set; }
 		int? ISamplerAggregation.MaxDocsPerValue { get; set; }
-		Script ISamplerAggregation.Script { get; set; }
+		IScript ISamplerAggregation.Script { get; set; }
 		int? ISamplerAggregation.ShardSize { get; set; }
 
 		public SamplerAggregationDescriptor<T> ExecutionHint(SamplerAggregationExecutionHint executionHint) =>
@@ -60,9 +60,9 @@ namespace Nest
 
 		public SamplerAggregationDescriptor<T> MaxDocsPerValue(int maxDocs) => Assign(a => a.MaxDocsPerValue = maxDocs);
 
-		public SamplerAggregationDescriptor<T> Script(string script) => Assign(a => a.Script = script);
+		public SamplerAggregationDescriptor<T> Script(string script) => Assign(a => a.Script = (InlineScript)script);
 
-		public SamplerAggregationDescriptor<T> Script(Func<ScriptDescriptor, Script> scriptSelector) =>
+		public SamplerAggregationDescriptor<T> Script(Func<ScriptDescriptor, IScript> scriptSelector) =>
 			Assign(a => a.Script = scriptSelector?.Invoke(new ScriptDescriptor()));
 
 		public SamplerAggregationDescriptor<T> ShardSize(int shardSize) => Assign(a => a.ShardSize = shardSize);

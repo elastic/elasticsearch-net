@@ -74,7 +74,7 @@ namespace Tests.Aggregations.Pipeline.BucketSelector
 					)
 				)
 			);
-
+		
 		protected override SearchRequest<Project> Initializer => new SearchRequest<Project>()
 		{
 			Size = 0,
@@ -89,7 +89,7 @@ namespace Tests.Aggregations.Pipeline.BucketSelector
 							{ "totalCommits", "commits" },
 						})
 					{
-						Script = "totalCommits >= 500"
+						Script = (InlineScript)"totalCommits >= 500"
 					}
 			}
 		};
