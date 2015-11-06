@@ -24,7 +24,7 @@ namespace Nest
 		GeoDistance? DistanceType { get; set; }
 
 		[JsonProperty(PropertyName = "ranges")]
-		IEnumerable<Range<double>> Ranges { get; set; }
+		IEnumerable<IGeoDistanceRange> Ranges { get; set; }
 	}
 
 	public class GeoDistanceAggregation : BucketAggregationBase, IGeoDistanceAggregation
@@ -37,7 +37,7 @@ namespace Nest
 
 		public GeoDistance? DistanceType { get; set; }
 
-		public IEnumerable<Range<double>> Ranges { get; set; }
+		public IEnumerable<IGeoDistanceRange> Ranges { get; set; }
 
 		internal GeoDistanceAggregation() { }
 
@@ -59,7 +59,7 @@ namespace Nest
 
 		GeoDistance? IGeoDistanceAggregation.DistanceType { get; set; }
 
-		IEnumerable<Range<double>> IGeoDistanceAggregation.Ranges { get; set; }
+		IEnumerable<IGeoDistanceRange> IGeoDistanceAggregation.Ranges { get; set; }
 
 		public GeoDistanceAggregationDescriptor<T> Field(string field) => Assign(a => a.Field = field);
 
@@ -73,8 +73,8 @@ namespace Nest
 
 		public GeoDistanceAggregationDescriptor<T> DistanceType(GeoDistance geoDistance) => Assign(a => a.DistanceType = geoDistance);
 
-		public GeoDistanceAggregationDescriptor<T> Ranges(params Func<Range<double>, Range<double>>[] ranges) =>
-			Assign(a => a.Ranges = (from range in ranges let r = new Range<double>() select range(r)).ToListOrNullIfEmpty());
+		public GeoDistanceAggregationDescriptor<T> Ranges(params Func<GeoDistanceRangeDescriptor, IGeoDistanceRange>[] ranges) =>
+			Assign(a => a.Ranges = ranges?.Select(r => r(new GeoDistanceRangeDescriptor())));
 
 	}
 }
