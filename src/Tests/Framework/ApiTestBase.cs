@@ -159,5 +159,4 @@ namespace Tests.Framework
 		protected void SerializesFluent() =>
 			this.AssertSerializesAndRoundTrips(this.Fluent?.Invoke(this.ClientDoesThisInternally(NewDescriptor())));
 	}
-
 }

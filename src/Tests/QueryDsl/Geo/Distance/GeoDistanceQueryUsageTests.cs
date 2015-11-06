@@ -13,23 +13,20 @@ namespace Tests.QueryDsl.Geo.Distance
 
 		protected override object QueryJson => new
 		{
-			geo_distance_range = new
+			geo_distance = new
 			{
-				from = "200.0km",
-				to = "400.0mi",
+				_name = "named_query",
+				boost = 1.1,
+				distance = "200.0m",
+				optimize_bbox = "memory",
 				distance_type = "arc",
-				optimize_bbox = "indexed",
-				include_lower = false,
-				include_upper = false,
 				coerce = true,
 				ignore_malformed = true,
 				validation_method = "strict",
-				_name = "named_query",
-				boost = 1.1,
 				location = new
 				{
-					lat = 40.0,
-					lon = -70.0
+					lat = 34.0,
+					lon = -34.0
 				}
 			}
 		};
@@ -40,8 +37,26 @@ namespace Tests.QueryDsl.Geo.Distance
 			Name = "named_query",
 			Field = Static.Field<Project>(p => p.Location),
 			DistanceType = GeoDistanceType.Arc,
+			Coerce = true,
+			Location = new GeoLocation(34,-34),
+			Distance = GeoDistance.Meters(200),
+			IgnoreMalformed = true,
+			OptimizeBoundingBox = GeoOptimizeBBox.Memory,
+			ValidationMethod = GeoValidationMethod.Strict
 		};
 
-		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q;
+		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
+			.GeoDistance(g=>g
+				.Boost(1.1)
+				.Name("named_query")
+				.OnField(p=>p.Location)
+				.DistanceType(GeoDistanceType.Arc)
+				.Coerce()
+				.Location(34, -34)
+				.Distance(200, GeoPrecisionUnit.Meters)
+				.IgnoreMalformed()
+				.Optimize(GeoOptimizeBBox.Memory)
+				.ValidationMethod(GeoValidationMethod.Strict)
+			);
 	}
 }
