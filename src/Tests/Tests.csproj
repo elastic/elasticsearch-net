@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Aggregations\Bucket\Children\ChildrenAggregationMapping.doc.cs" />
+    <Compile Include="Aggregations\Bucket\GeoDistance\GeoDistanceAggregationUsageTests.cs" />
     <Compile Include="Aggregations\Bucket\Sampler\SamplerAggregationUsageTests.cs" />
     <Compile Include="Aggregations\Bucket\Filters\FiltersAggregationUsageTests.cs" />
     <Compile Include="Aggregations\Bucket\Filter\FilterAggregationUsageTests.cs" />
@@ -413,6 +414,16 @@
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Aggregations\Bucket\GeoHash\" />
+    <Folder Include="Aggregations\Bucket\Global\" />
+    <Folder Include="Aggregations\Bucket\Histogram\" />
+    <Folder Include="Aggregations\Bucket\Ipv4Range\" />
+    <Folder Include="Aggregations\Bucket\Missing\" />
+    <Folder Include="Aggregations\Bucket\Nested\" />
+    <Folder Include="Aggregations\Bucket\Range\" />
+    <Folder Include="Aggregations\Bucket\ReverseNested\" />
+    <Folder Include="Aggregations\Bucket\SignificantTerms\" />
+    <Folder Include="Aggregations\Bucket\Terms\" />
     <Folder Include="Aggregations\Metric\" />
     <Folder Include="Migration\" />
     <Folder Include="Plugins\Analysis\Phonetic\" />

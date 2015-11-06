@@ -134,7 +134,7 @@ namespace Tests.Aggregations.Pipeline.BucketScript
 							{ "stableCommits", "stable_state>commits" }
 						})
 					{
-						Script = "stableCommits / totalCommits * 100"
+						Script = (InlineScript)"stableCommits / totalCommits * 100"
 					}
 			}
 		};

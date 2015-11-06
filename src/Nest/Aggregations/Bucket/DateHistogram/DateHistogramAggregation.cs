@@ -13,7 +13,7 @@ namespace Nest
 		Field Field { get; set; }
 
 		[JsonProperty("script")]
-		string Script { get; set; }
+		IScript Script { get; set; }
 
 		[JsonProperty("params")]
 		IDictionary<string, object> Params { get; set; }
@@ -41,12 +41,15 @@ namespace Nest
 
 		[JsonProperty("extended_bounds")]
 		ExtendedBounds<DateTime> ExtendedBounds { get; set; }
-	}
+
+		[JsonProperty("missing")]
+		DateTime? Missing { get; set; }
+    }
 
 	public class DateHistogramAggregation : BucketAggregationBase, IDateHistogramAggregation
 	{
 		public Field Field { get; set; }
-		public string Script { get; set; }
+		public IScript Script { get; set; }
 		public IDictionary<string, object> Params { get; set; }
 		public Union<DateInterval, TimeUnitExpression> Interval { get; set; }
 		public string Format { get; set; }
@@ -56,6 +59,7 @@ namespace Nest
 		public string Offset { get; set; }
 		public HistogramOrder Order { get; set; }
 		public ExtendedBounds<DateTime> ExtendedBounds { get; set; }
+		public DateTime? Missing { get; set; }
 
 		internal DateHistogramAggregation() { }
 
@@ -71,7 +75,7 @@ namespace Nest
 	{
 		Field IDateHistogramAggregation.Field { get; set; }
 
-		string IDateHistogramAggregation.Script { get; set; }
+		IScript IDateHistogramAggregation.Script { get; set; }
 
 		IDictionary<string, object> IDateHistogramAggregation.Params { get; set; }
 
@@ -91,14 +95,16 @@ namespace Nest
 
 		ExtendedBounds<DateTime> IDateHistogramAggregation.ExtendedBounds { get; set; }
 
+		DateTime? IDateHistogramAggregation.Missing { get; set; }
+
 		public DateHistogramAggregationDescriptor<T> Field(string field) => Assign(a => a.Field = field);
 
 		public DateHistogramAggregationDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
 
-		public DateHistogramAggregationDescriptor<T> Script(string script) => Assign(a => a.Script = script);
+		public DateHistogramAggregationDescriptor<T> Script(string script) => Assign(a => a.Script = (InlineScript)script);
 
-		public DateHistogramAggregationDescriptor<T> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramSelector) =>
-			Assign(a => a.Params = paramSelector?.Invoke(new FluentDictionary<string, object>()).NullIfNoKeys());
+		public DateHistogramAggregationDescriptor<T> Script(Func<ScriptDescriptor, IScript> scriptSelector) =>
+			Assign(a => a.Script = scriptSelector?.Invoke(new ScriptDescriptor()));
 
 		public DateHistogramAggregationDescriptor<T> Interval(TimeUnitExpression interval) => Assign(a => a.Interval = interval);
 
@@ -127,5 +133,6 @@ namespace Nest
 		public DateHistogramAggregationDescriptor<T> ExtendedBounds(DateTime min, DateTime max) =>
 			Assign(a=>a.ExtendedBounds = new ExtendedBounds<DateTime> { Minimum = min, Maximum = max });
 
+		public DateHistogramAggregationDescriptor<T> Missing(DateTime missing) => Assign(a => a.Missing = missing);
 	}
 }

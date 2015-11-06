@@ -80,8 +80,7 @@ namespace Tests.Aggregations.Bucket.DateRange
 				}
 			};
 
-		[I]
-		public async Task HandlingResponses() => await this.AssertOnAllResponses(response =>
+		protected override void ExpectResponse(ISearchResponse<Project> response)
 		{
 			response.IsValid.Should().BeTrue();
 
@@ -99,6 +98,6 @@ namespace Tests.Aggregations.Bucket.DateRange
 			{
 				item.DocCount.Should().BeGreaterThan(0);
 			}
-		});
+		}
 	}
 }

@@ -30,7 +30,7 @@ namespace Nest.Resolvers
 
 			// this will only be called once and then cached
 
-			if (typeof(IDictionary).IsAssignableFrom(objectType)  
+			if (typeof(IDictionary).IsAssignableFrom(objectType)
 				&& !typeof(IMappings).IsAssignableFrom(objectType)
 				&& !typeof(IProperties).IsAssignableFrom(objectType)
 				&& !typeof(IAnalyzers).IsAssignableFrom(objectType)
@@ -133,7 +133,7 @@ namespace Nest.Resolvers
 			defaultProperties = PropertiesOf<IMultiTermVectorOperation>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IRepository>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IRepositorySettings>(type, memberSerialization, defaultProperties, lookup);
-
+			defaultProperties = PropertiesOf<IScript>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<INestSerializable>(type, memberSerialization, defaultProperties, lookup);
 
 			return defaultProperties.GroupBy(p => p.PropertyName).Select(p => p.First()).ToList();
