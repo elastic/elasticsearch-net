@@ -9,17 +9,15 @@ using System.Linq.Expressions;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[JsonConverter(typeof (VariableFieldNameQueryJsonConverter<GeoDistanceQuery, IGeoDistanceQuery>))]
 	public interface IGeoDistanceQuery : IFieldNameQuery
 	{
-		string Location { get; set; }
+		[VariableField]
+		GeoLocation Location { get; set; }
 		
 		[JsonProperty("distance")]
-		object Distance { get; set; }
+		GeoDistance Distance { get; set; }
 		
-		[JsonProperty("unit")]
-		[JsonConverter(typeof(StringEnumConverter))]
-		GeoUnit? Unit { get; set; }
-	
 		[JsonProperty("optimize_bbox")]
 		[JsonConverter(typeof(StringEnumConverter))]
 		GeoOptimizeBBox? OptimizeBoundingBox { get; set; }
@@ -32,15 +30,14 @@ namespace Nest
 	public class GeoDistanceQuery : FieldNameQueryBase, IGeoDistanceQuery
 	{
 		bool IQuery.Conditionless => IsConditionless(this);
-		public string Location { get; set; }
-		public object Distance { get; set; }
-		public GeoUnit? Unit { get; set; }
+		public GeoLocation Location { get; set; }
+		public GeoDistance Distance { get; set; }
 		public GeoOptimizeBBox? OptimizeBoundingBox { get; set; }
 		public GeoDistanceType? DistanceType { get; set; }
 
 		protected override void WrapInContainer(IQueryContainer c) => c.GeoDistance = this;
 
-		internal static bool IsConditionless(IGeoDistanceQuery q) => q.Location.IsNullOrEmpty() || q.Distance == null;
+		internal static bool IsConditionless(IGeoDistanceQuery q) => q.Location == null || q.Distance == null;
 	}
 
 	public class GeoDistanceQueryDescriptor<T> 
@@ -48,23 +45,16 @@ namespace Nest
 		, IGeoDistanceQuery where T : class
 	{
 		bool IQuery.Conditionless => GeoDistanceQuery.IsConditionless(this);
-		string IGeoDistanceQuery.Location { get; set; }
-		object IGeoDistanceQuery.Distance { get; set; }
-		GeoUnit? IGeoDistanceQuery.Unit { get; set; }
+		GeoLocation IGeoDistanceQuery.Location { get; set; }
+		GeoDistance IGeoDistanceQuery.Distance { get; set; }
 		GeoDistanceType? IGeoDistanceQuery.DistanceType { get; set; }
 		GeoOptimizeBBox? IGeoDistanceQuery.OptimizeBoundingBox { get; set; }
 
-		public GeoDistanceQueryDescriptor<T> Location(double Lat, double Lon) => Assign(a =>
-		{
-			var c = CultureInfo.InvariantCulture;
-			a.Location = "{0}, {1}".F(Lat.ToString(c), Lon.ToString(c));
-		});
+		public GeoDistanceQueryDescriptor<T> Location(double lat, double lon) => Assign(a => a.Location = new GeoLocation(lat, lon));
 
-		public GeoDistanceQueryDescriptor<T> Location(string geoHash) => Assign(a => a.Location = geoHash);
+		public GeoDistanceQueryDescriptor<T> Distance(GeoDistance distance) => Assign(a => a.Distance = distance);
 
-		public GeoDistanceQueryDescriptor<T> Distance(string distance) => Assign(a => a.Distance = distance);
-
-		public GeoDistanceQueryDescriptor<T> Distance(double distance, GeoUnit unit) => Assign(a => { a.Distance = distance; a.Unit = unit; });
+		public GeoDistanceQueryDescriptor<T> Distance(double distance, GeoPrecisionUnit unit) => Assign(a => a.Distance = new GeoDistance(distance, unit));
 
 		public GeoDistanceQueryDescriptor<T> Optimize(GeoOptimizeBBox optimize) => Assign(a => a.OptimizeBoundingBox = optimize);
 
