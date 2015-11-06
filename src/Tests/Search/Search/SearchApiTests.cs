@@ -88,7 +88,7 @@ namespace Tests.Search.Search
 			From = 10,
 			Size =20,
 			Query = new QueryContainer(new MatchAllQuery()),
-			Aggregations = new TermsAgg("startDates")
+			Aggregations = new TermsAggregation("startDates")
 			{
 				Field = "startedOn"
 			},

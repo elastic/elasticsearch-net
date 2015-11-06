@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Nest
 {
-	public class GeoBoundsMetric : IMetricAggregation
+	public class GeoBoundsMetric : IMetric
 	{
 		public GeoBoundsMetric()
 		{

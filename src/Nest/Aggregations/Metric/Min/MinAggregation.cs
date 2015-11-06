@@ -6,21 +6,20 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<MinAggregator>))]
-	public interface IMinAggregator : IMetricAggregator { }
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<MinAggregation>))]
+	public interface IMinAggregation : IMetricAggregation { }
 
-	public class MinAggregator : MetricAggregator, IMinAggregator { }
-
-	public class MinAgg : MetricAgg, IMinAggregator
+	public class MinAggregation : MetricAggregationBase, IMinAggregation
 	{
-		public MinAgg(string name, Field field) : base(name, field) { }
+		internal MinAggregation() { }
+
+		public MinAggregation(string name, Field field) : base(name, field) { }
 
 		internal override void WrapInContainer(AggregationContainer c) => c.Min = this;
 	}
 
-	public class MinAggregatorDescriptor<T> 
-		: MetricAggregationBaseDescriptor<MinAggregatorDescriptor<T>, IMinAggregator, T>
-			, IMinAggregator 
+	public class MinAggregationDescriptor<T> 
+		: MetricAggregationDescriptorBase<MinAggregationDescriptor<T>, IMinAggregation, T>
+			, IMinAggregation 
 		where T : class { }
-
 }

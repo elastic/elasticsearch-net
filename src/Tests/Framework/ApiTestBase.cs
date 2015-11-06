@@ -132,14 +132,6 @@ namespace Tests.Framework
 				var response = kv.Value as TResponse;
 				try
 				{
-
-				}
-				catch (Exception)
-				{
-					
-					throw;
-				}
-				{
 					this.CallIsolatedValue = UniqueValues[kv.Key];
 					assert(response);
 				}

@@ -113,8 +113,9 @@ namespace Nest.Resolvers
 			defaultProperties = PropertiesOf<IRescoreQuery>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IIndexedGeoShape>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IAggregationContainer>(type, memberSerialization, defaultProperties, lookup);
-			defaultProperties = PropertiesOf<IMetricAggregator>(type, memberSerialization, defaultProperties, lookup);
-			defaultProperties = PropertiesOf<IBucketAggregator>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<IMetricAggregation>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<IBucketAggregation>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<IPipelineAggregation>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<ISort>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<ISuggestBucket>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<ISuggester>(type, memberSerialization, defaultProperties, lookup);

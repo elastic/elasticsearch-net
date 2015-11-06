@@ -6,8 +6,8 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<SignificantTermsAggregator>))]
-	public interface ISignificantTermsAggregator : IBucketAggregator
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<SignificantTermsAggregation>))]
+	public interface ISignificantTermsAggregation : IBucketAggregation
 	{
 		[JsonProperty("field")]
 		Field Field { get; set; }
@@ -50,24 +50,7 @@ namespace Nest
 
 	}
 
-	public class SignificantTermsAggregator : BucketAggregator, ISignificantTermsAggregator
-	{
-		public Field Field { get; set; }
-		public int? Size { get; set; }
-		public int? ShardSize { get; set; }
-		public int? MinimumDocumentCount { get; set; }
-		public TermsAggregationExecutionHint? ExecutionHint { get; set; }
-		public IDictionary<string, string> Include { get; set; }
-		public IDictionary<string, string> Exclude { get; set; }
-		public MutualInformationHeuristic MutualInformation { get; set; }
-		public ChiSquareHeuristic ChiSquare { get; set; }
-		public GoogleNormalizedDistanceHeuristic GoogleNormalizedDistance { get; set; }
-		public PercentageScoreHeuristic PercentageScore { get; set; }
-		public IScriptedHeuristic Script { get; set; }
-		public IQueryContainer BackgroundFilter { get; set; }
-	}
-
-	public class SignificantTermsAgg : BucketAgg, ISignificantTermsAggregator
+	public class SignificantTermsAggregation : BucketAggregationBase, ISignificantTermsAggregation
 	{
 		public Field Field { get; set; }
 		public int? Size { get; set; }
@@ -83,79 +66,81 @@ namespace Nest
 		public IScriptedHeuristic Script { get; set; }
 		public IQueryContainer BackgroundFilter { get; set; }
 
-		public SignificantTermsAgg(string name) : base(name) { }
+		internal SignificantTermsAggregation() { }
+		
+		public SignificantTermsAggregation(string name) : base(name) { }
 
 		internal override void WrapInContainer(AggregationContainer c) => c.SignificantTerms = this;
 	}
 
-	public class SignificantTermsAggregatorDescriptor<T>
-		: BucketAggregatorBaseDescriptor<SignificantTermsAggregatorDescriptor<T>, ISignificantTermsAggregator, T>
-			, ISignificantTermsAggregator
+	public class SignificantTermsAggregationDescriptor<T>
+		: BucketAggregationDescriptorBase<SignificantTermsAggregationDescriptor<T>, ISignificantTermsAggregation, T>
+			, ISignificantTermsAggregation
 		where T : class
 	{
-		Field ISignificantTermsAggregator.Field { get; set; }
+		Field ISignificantTermsAggregation.Field { get; set; }
 
-		int? ISignificantTermsAggregator.Size { get; set; }
+		int? ISignificantTermsAggregation.Size { get; set; }
 
-		int? ISignificantTermsAggregator.ShardSize { get; set; }
+		int? ISignificantTermsAggregation.ShardSize { get; set; }
 
-		int? ISignificantTermsAggregator.MinimumDocumentCount { get; set; }
+		int? ISignificantTermsAggregation.MinimumDocumentCount { get; set; }
 
-		TermsAggregationExecutionHint? ISignificantTermsAggregator.ExecutionHint { get; set; }
+		TermsAggregationExecutionHint? ISignificantTermsAggregation.ExecutionHint { get; set; }
 
-		IDictionary<string, string> ISignificantTermsAggregator.Include { get; set; }
+		IDictionary<string, string> ISignificantTermsAggregation.Include { get; set; }
 
-		IDictionary<string, string> ISignificantTermsAggregator.Exclude { get; set; }
+		IDictionary<string, string> ISignificantTermsAggregation.Exclude { get; set; }
 
-		MutualInformationHeuristic ISignificantTermsAggregator.MutualInformation { get; set; }
+		MutualInformationHeuristic ISignificantTermsAggregation.MutualInformation { get; set; }
 
-		ChiSquareHeuristic ISignificantTermsAggregator.ChiSquare { get; set; }
+		ChiSquareHeuristic ISignificantTermsAggregation.ChiSquare { get; set; }
 
-		GoogleNormalizedDistanceHeuristic ISignificantTermsAggregator.GoogleNormalizedDistance { get; set; }
+		GoogleNormalizedDistanceHeuristic ISignificantTermsAggregation.GoogleNormalizedDistance { get; set; }
 
-		PercentageScoreHeuristic ISignificantTermsAggregator.PercentageScore { get; set; }
+		PercentageScoreHeuristic ISignificantTermsAggregation.PercentageScore { get; set; }
 
-		IScriptedHeuristic ISignificantTermsAggregator.Script { get; set; }
+		IScriptedHeuristic ISignificantTermsAggregation.Script { get; set; }
 
-		IQueryContainer ISignificantTermsAggregator.BackgroundFilter { get; set; }
+		IQueryContainer ISignificantTermsAggregation.BackgroundFilter { get; set; }
 
-		public SignificantTermsAggregatorDescriptor<T> Field(string field) => Assign(a => a.Field = field);
+		public SignificantTermsAggregationDescriptor<T> Field(string field) => Assign(a => a.Field = field);
 
-		public SignificantTermsAggregatorDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
+		public SignificantTermsAggregationDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
 
-		public SignificantTermsAggregatorDescriptor<T> Size(int size) => Assign(a => a.Size = size);
+		public SignificantTermsAggregationDescriptor<T> Size(int size) => Assign(a => a.Size = size);
 
-		public SignificantTermsAggregatorDescriptor<T> ShardSize(int shardSize) => Assign(a => a.ShardSize = shardSize);
+		public SignificantTermsAggregationDescriptor<T> ShardSize(int shardSize) => Assign(a => a.ShardSize = shardSize);
 
-		public SignificantTermsAggregatorDescriptor<T> MinimumDocumentCount(int minimumDocumentCount) =>
+		public SignificantTermsAggregationDescriptor<T> MinimumDocumentCount(int minimumDocumentCount) =>
 			Assign(a => a.MinimumDocumentCount = minimumDocumentCount);
 
-		public SignificantTermsAggregatorDescriptor<T> MutualInformation(bool? backgroundIsSuperSet = null, bool? includeNegatives = null) =>
+		public SignificantTermsAggregationDescriptor<T> MutualInformation(bool? backgroundIsSuperSet = null, bool? includeNegatives = null) =>
 			Assign(a => a.MutualInformation = new MutualInformationHeuristic
 			{
 				BackgroundIsSuperSet = backgroundIsSuperSet,
 				IncludeNegatives = includeNegatives
 			});
 
-		public SignificantTermsAggregatorDescriptor<T> ChiSquare(bool? backgroundIsSuperSet = null, bool? includeNegatives = null) =>
+		public SignificantTermsAggregationDescriptor<T> ChiSquare(bool? backgroundIsSuperSet = null, bool? includeNegatives = null) =>
 			Assign(a => a.ChiSquare = new ChiSquareHeuristic
 			{
 				BackgroundIsSuperSet = backgroundIsSuperSet,
 				IncludeNegatives = includeNegatives
 			});
 
-		public SignificantTermsAggregatorDescriptor<T> GoogleNormalizedDistance(bool? backgroundIsSuperSet = null) =>
+		public SignificantTermsAggregationDescriptor<T> GoogleNormalizedDistance(bool? backgroundIsSuperSet = null) =>
 			Assign(a => a.GoogleNormalizedDistance = new GoogleNormalizedDistanceHeuristic
 			{
 				BackgroundIsSuperSet = backgroundIsSuperSet,
 			});
 
-		public SignificantTermsAggregatorDescriptor<T> PercentageScore() => Assign(a => a.PercentageScore = new PercentageScoreHeuristic());
+		public SignificantTermsAggregationDescriptor<T> PercentageScore() => Assign(a => a.PercentageScore = new PercentageScoreHeuristic());
 
-		public SignificantTermsAggregatorDescriptor<T> Script(Func<ScriptedHeuristicDescriptor, IScriptedHeuristic> scriptSelector) =>
+		public SignificantTermsAggregationDescriptor<T> Script(Func<ScriptedHeuristicDescriptor, IScriptedHeuristic> scriptSelector) =>
 			Assign(a => a.Script = scriptSelector?.Invoke(new ScriptedHeuristicDescriptor()));
 
-		public SignificantTermsAggregatorDescriptor<T> BackgroundFilter(Func<QueryContainerDescriptor<T>, QueryContainer> selector) =>
+		public SignificantTermsAggregationDescriptor<T> BackgroundFilter(Func<QueryContainerDescriptor<T>, QueryContainer> selector) =>
 			Assign(a => a.BackgroundFilter = selector(new QueryContainerDescriptor<T>()));
 	}
 }

@@ -99,7 +99,9 @@ namespace Tests.Framework.Integration
 			this._process = new ObservableProcess(this.Binary,
 				$"-Des.cluster.name={this.ClusterName}",
 				$"-Des.node.name={this.NodeName}",
-				$"-Des.path.repo={this.RepositoryPath}"
+				$"-Des.path.repo={this.RepositoryPath}",
+				$"-Des.script.inline=on",
+				$"-Des.script.indexed=on"
 			);
 			var observable = Observable.Using(() => this._process, process => process.Start())
 				.Select(consoleLine => new ElasticsearchMessage(consoleLine));

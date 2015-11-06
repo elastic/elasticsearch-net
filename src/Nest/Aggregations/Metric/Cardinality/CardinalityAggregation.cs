@@ -6,8 +6,8 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<CardinalityAggregator>))]
-	public interface ICardinalityAggregator : IMetricAggregator
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<CardinalityAggregation>))]
+	public interface ICardinalityAggregation : IMetricAggregation
 	{
 		[JsonProperty("precision_threshold")]
 		int? PrecisionThreshold { get; set; }
@@ -16,35 +16,31 @@ namespace Nest
 		bool? Rehash { get; set; }
 	}
 
-	public class CardinalityAggregator : MetricAggregator, ICardinalityAggregator
-	{
-		public int? PrecisionThreshold { get; set; }
-		public bool? Rehash { get; set; }
-	}
-
-	public class CardinalityAgg : MetricAgg, ICardinalityAggregator
+	public class CardinalityAggregation : MetricAggregationBase, ICardinalityAggregation
 	{
 		public int? PrecisionThreshold { get; set; }
 		public bool? Rehash { get; set; }
 
-		public CardinalityAgg(string name, Field field) : base(name, field) { }
+		internal CardinalityAggregation() { }
+
+		public CardinalityAggregation(string name, Field field) : base(name, field) { }
 
 		internal override void WrapInContainer(AggregationContainer c) => c.Cardinality = this;
 	}
 
-	public class CardinalityAggregatorDescriptor<T> 
-		: MetricAggregationBaseDescriptor<CardinalityAggregatorDescriptor<T>, ICardinalityAggregator, T>
-			, ICardinalityAggregator 
+	public class CardinalityAggregationDescriptor<T> 
+		: MetricAggregationDescriptorBase<CardinalityAggregationDescriptor<T>, ICardinalityAggregation, T>
+			, ICardinalityAggregation 
 		where T : class
 	{
-		int? ICardinalityAggregator.PrecisionThreshold { get; set; }
+		int? ICardinalityAggregation.PrecisionThreshold { get; set; }
 
-		bool? ICardinalityAggregator.Rehash { get; set; }
+		bool? ICardinalityAggregation.Rehash { get; set; }
 
-		public CardinalityAggregatorDescriptor<T> PrecisionThreshold(int precisionThreshold)
+		public CardinalityAggregationDescriptor<T> PrecisionThreshold(int precisionThreshold)
 			=> Assign(a => a.PrecisionThreshold = precisionThreshold);
 
-		public CardinalityAggregatorDescriptor<T> Rehash(bool rehash = true) => Assign(a => a.Rehash = rehash);
+		public CardinalityAggregationDescriptor<T> Rehash(bool rehash = true) => Assign(a => a.Rehash = rehash);
 
 	}
 }
