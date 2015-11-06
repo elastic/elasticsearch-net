@@ -34,7 +34,7 @@ namespace Tests.QueryDsl.Geo.HashCell
 			Field = Static.Field<Project>(p=>p.Location),
 			Location = new GeoLocation(13.4080, 52.5186),
 			Neighbors = true,
-			Precision = GeoPrecision.Meters(3)
+			Precision = GeoDistance.Meters(3)
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
@@ -42,9 +42,9 @@ namespace Tests.QueryDsl.Geo.HashCell
 				.Name("named_query")
 				.Boost(1.1)
 				.OnField(p=>p.Location)
-				.Pin(new GeoLocation(13.4080, 52.5186))
+				.Location(new GeoLocation(13.4080, 52.5186))
 				.Neighbors()
-				.Precision(GeoPrecision.Meters(3))
+				.Precision(GeoDistance.Meters(3))
 			);
 	}
 }

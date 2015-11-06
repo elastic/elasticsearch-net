@@ -13,8 +13,8 @@ namespace Nest
 		Field Field { get; set; }
 		string PinLocation { get; set; }
 		IEnumerable<string> Points { get; set; }
-		GeoUnit? GeoUnit { get; set; }
-		GeoDistance? DistanceType { get; set; }
+		GeoPrecision? GeoUnit { get; set; }
+		GeoDistanceType? DistanceType { get; set; }
 	}
 
 	public class GeoDistanceSort : SortBase, IGeoDistanceSort
@@ -30,9 +30,9 @@ namespace Nest
 		public Field Field { get; set; }
 		public string PinLocation { get; set; }
 		public IEnumerable<string> Points { get; set; }
-		public GeoUnit? GeoUnit { get; set; }
+		public GeoPrecision? GeoUnit { get; set; }
 		public override Field SortKey { get { return "_geo_distance"; } }
-		public GeoDistance? DistanceType { get; set; }
+		public GeoDistanceType? DistanceType { get; set; }
 
 		object ICustomJson.GetCustomJson()
 		{
@@ -58,12 +58,11 @@ namespace Nest
 		string IGeoDistanceSort.PinLocation { get; set; }
 		IEnumerable<string> IGeoDistanceSort.Points { get; set; }
 
-		GeoUnit? IGeoDistanceSort.GeoUnit { get; set; }
+		GeoPrecision? IGeoDistanceSort.GeoUnit { get; set; }
 
 		Field ISort.SortKey { get { return "_geo_distance"; } }
 
-
-		GeoDistance? IGeoDistanceSort.DistanceType { get; set; }
+		GeoDistanceType? IGeoDistanceSort.DistanceType { get; set; }
 
 		public SortGeoDistanceDescriptor<T> PinTo(string geoLocationHash)
 		{
@@ -95,14 +94,14 @@ namespace Nest
 			return this;
 		}
 
-		public SortGeoDistanceDescriptor<T> Unit(GeoUnit unit)
+		public SortGeoDistanceDescriptor<T> Unit(GeoPrecision unit)
 		{
 			unit.ThrowIfNull("unit");
 			Self.GeoUnit = unit;
 			return this;
 		}
 
-		public SortGeoDistanceDescriptor<T> DistanceType(GeoDistance distanceType)
+		public SortGeoDistanceDescriptor<T> DistanceType(GeoDistanceType distanceType)
 		{
 			distanceType.ThrowIfNull("distanceType");
 			Self.DistanceType = distanceType;

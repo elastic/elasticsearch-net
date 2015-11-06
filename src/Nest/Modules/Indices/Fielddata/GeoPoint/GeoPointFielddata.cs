@@ -10,7 +10,7 @@ namespace Nest
 	public interface IGeoPointFielddata : IFielddata
 	{
 		[JsonProperty("precision")]
-		GeoPrecision Precision { get; set; }
+		GeoDistance Precision { get; set; }
 
 		[JsonProperty("format")]
 		GeoPointFielddataFormat? Format { get; set; }
@@ -18,7 +18,7 @@ namespace Nest
 
 	public class GeoPointFielddata : FielddataBase, IGeoPointFielddata
 	{
-		public GeoPrecision Precision { get; set; }
+		public GeoDistance Precision { get; set; }
 
 		public GeoPointFielddataFormat? Format { get; set; }
 	}
@@ -27,10 +27,10 @@ namespace Nest
 		: FielddataDescriptorBase<GeoPointFielddataDescriptor, IGeoPointFielddata>, IGeoPointFielddata
 	{
 		GeoPointFielddataFormat? IGeoPointFielddata.Format { get; set; }
-		GeoPrecision IGeoPointFielddata.Precision { get; set; }
+		GeoDistance IGeoPointFielddata.Precision { get; set; }
 
 		public GeoPointFielddataDescriptor Format(GeoPointFielddataFormat format) => Assign(a => a.Format = format);
 
-		public GeoPointFielddataDescriptor Precision(GeoPrecision precision) => Assign(a => a.Precision = precision);
+		public GeoPointFielddataDescriptor Precision(GeoDistance distance) => Assign(a => a.Precision = distance);
 	}
 }

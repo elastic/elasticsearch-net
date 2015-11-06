@@ -79,13 +79,14 @@ namespace Nest
 			{
 				this.Reserialize(localWriter, value, serializer);
 				var jo = JObject.Parse(sw.ToString());
+				var v = info.Item1.ValueProvider.GetValue(castValue);
+				JToken o = null;
+				if (v != null) o = JToken.FromObject(v);
+
 				if (info.Item2.FieldName.IsNullOrEmpty())
-					jo.Add(field, JToken.FromObject(info.Item1.ValueProvider.GetValue(castValue)));
+					jo.Add(field, o);
 				else
 				{
-					var v = info.Item1.ValueProvider.GetValue(castValue);
-					JToken o = null;
-					if (v != null) o = JToken.FromObject(v);
 					var subObject = new JObject
 					{
 						{info.Item2.FieldName, o}

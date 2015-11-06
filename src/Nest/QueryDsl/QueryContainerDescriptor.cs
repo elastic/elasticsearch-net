@@ -261,6 +261,12 @@ namespace Nest
 		public QueryContainer GeoHashCell(Func<GeoHashCellQueryDescriptor<T>, IGeoHashCellQuery> selector) =>
 			this._assignSelector(selector, (query, container) => container.GeoHashCell = query);
 
+		public QueryContainer GeoDistanceRange(Func<GeoDistanceRangeQueryDescriptor<T>, IGeoDistanceRangeQuery> selector) =>
+			this._assignSelector(selector, (query, container) => container.GeoDistanceRange = query);
+
+		public QueryContainer GeoDistance(Func<GeoDistanceQueryDescriptor<T>, IGeoDistanceQuery> selector) =>
+			this._assignSelector(selector, (query, container) => container.GeoDistance = query);
+
 		/// <summary>
 		/// The common terms query is a modern alternative to stopwords which improves the precision and recall 
 		/// of search results (by taking stopwords into account), without sacrificing performance.
