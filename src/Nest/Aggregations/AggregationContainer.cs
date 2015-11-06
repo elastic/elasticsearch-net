@@ -74,7 +74,7 @@ namespace Nest
 		IGeoDistanceAggregation GeoDistance { get; set; }
 
 		[JsonProperty("geohash_grid")]
-		IGeoHashAggregation GeoHash { get; set; }
+		IGeoHashGridAggregation GeoHash { get; set; }
 
 		[JsonProperty("geo_bounds")]
 		IGeoBoundsAggregation GeoBounds { get; set; }
@@ -194,7 +194,7 @@ namespace Nest
 
 		public IGeoDistanceAggregation GeoDistance { get; set; }
 
-		public IGeoHashAggregation GeoHash { get; set; }
+		public IGeoHashGridAggregation GeoHash { get; set; }
 
 		public IGeoBoundsAggregation GeoBounds { get; set; }
 
@@ -282,7 +282,7 @@ namespace Nest
 
 		IGeoDistanceAggregation IAggregationContainer.GeoDistance { get; set; }
 
-		IGeoHashAggregation IAggregationContainer.GeoHash { get; set; }
+		IGeoHashGridAggregation IAggregationContainer.GeoHash { get; set; }
 
 		IGeoBoundsAggregation IAggregationContainer.GeoBounds { get; set; }
 
@@ -383,7 +383,7 @@ namespace Nest
 			_SetInnerAggregation(name, selector, (a, d) => a.GeoDistance = d);
 
 		public AggregationContainerDescriptor<T> GeoHash(string name,
-			Func<GeoHashAggregationDescriptor<T>, IGeoHashAggregation> selector) =>
+			Func<GeoHashGridAggregationDescriptor<T>, IGeoHashGridAggregation> selector) =>
 			_SetInnerAggregation(name, selector, (a, d) => a.GeoHash = d);
 
 		public AggregationContainerDescriptor<T> GeoBounds(string name,

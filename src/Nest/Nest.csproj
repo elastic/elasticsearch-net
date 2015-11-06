@@ -711,7 +711,7 @@
     <Compile Include="Aggregations\AggregationContainer.cs" />
     <Compile Include="Aggregations\Bucket\DateHistogram\DateHistogramAggregation.cs" />
     <Compile Include="Aggregations\Bucket\Filter\FilterAggregation.cs" />
-    <Compile Include="Aggregations\Bucket\GeoHash\GeoHashAggregation.cs" />
+    <Compile Include="Aggregations\Bucket\GeoHashGrid\GeoHashGridAggregation.cs" />
     <Compile Include="Aggregations\Bucket\Global\GlobalAggregation.cs" />
     <Compile Include="Aggregations\Metric\Percentiles\PercentilesAggregation.cs" />
     <Compile Include="Aggregations\Bucket\Ipv4Range\Ip4RangeAggregation.cs" />
@@ -785,7 +785,7 @@
     <Compile Include="Document\Multiple\DeleteByQuery\DeleteByQueryRequest.cs" />
     <Compile Include="Document\Multiple\MultiGet\Request\MultiGetOperation.cs" />
     <Compile Include="Aggregations\Bucket\Terms\TermsAggregationExecutionHint.cs" />
-    <Compile Include="Aggregations\Bucket\GeoHash\GeoHashPrecision.cs" />
+    <Compile Include="Aggregations\Bucket\GeoHashGrid\GeoHashPrecision.cs" />
     <Compile Include="CommonAbstractions\Exception\DispatchException.cs" />
     <Compile Include="CommonAbstractions\SerializationBehavior\StatefulDeserialization\JsonConverterPiggyBackState.cs" />
     <Compile Include="CommonAbstractions\Extensions\StringExtensions.cs" />
