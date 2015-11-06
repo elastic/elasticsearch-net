@@ -26,7 +26,11 @@ namespace Tests.Aggregations.Bucket.GeoDistance
 					geo_distance = new
 					{
 						field = "location",
-						origin = "52.3760, 4.894",
+						origin = new
+						{
+							lat = 52.376,
+							lon = 4.894
+						},
 						ranges = new object[]
 						{
 							new { to = 100.0 },
@@ -42,7 +46,7 @@ namespace Tests.Aggregations.Bucket.GeoDistance
 			.Aggregations(a => a
 				.GeoDistance("rings_around_amsterdam", g => g
 					.Field(p => p.Location)
-					.Origin("52.3760, 4.894")
+					.Origin(52.376, 4.894)
 					.Ranges(
 						r => r.To(100),
 						r => r.From(100).To(300),
@@ -57,7 +61,7 @@ namespace Tests.Aggregations.Bucket.GeoDistance
 				Aggregations = new GeoDistanceAggregation("rings_around_amsterdam")
 				{
 					Field = Field<Project>(p => p.Location),
-					Origin = "52.3760, 4.894",
+					Origin = "52.376, 4.894",
 					Ranges = new List<Range<double>>
 					{
 						new Range<double>().To(100),

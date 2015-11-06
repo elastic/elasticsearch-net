@@ -15,7 +15,7 @@ namespace Nest
 		Field Field { get; set; }
 
 		[JsonProperty("origin")]
-		string Origin { get; set; }
+		GeoLocation Origin { get; set; }
 
 		[JsonProperty("unit")]
 		GeoUnit? Unit { get; set; }
@@ -31,7 +31,7 @@ namespace Nest
 	{
 		public Field Field { get; set; }
 
-		public string Origin { get; set; }
+		public GeoLocation Origin { get; set; }
 
 		public GeoUnit? Unit { get; set; }
 
@@ -53,7 +53,7 @@ namespace Nest
 	{
 		Field IGeoDistanceAggregation.Field { get; set; }
 
-		string IGeoDistanceAggregation.Origin { get; set; }
+		GeoLocation IGeoDistanceAggregation.Origin { get; set; }
 
 		GeoUnit? IGeoDistanceAggregation.Unit { get; set; }
 
@@ -65,12 +65,9 @@ namespace Nest
 
 		public GeoDistanceAggregationDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
 
-		public GeoDistanceAggregationDescriptor<T> Origin(double Lat, double Lon) =>
-			Assign(a => a.Origin = "{0}, {1}".F(
-				Lat.ToString(CultureInfo.InvariantCulture), Lon.ToString(CultureInfo.InvariantCulture)
-			));
+		public GeoDistanceAggregationDescriptor<T> Origin(double lat, double lon) => Assign(a => a.Origin = new GeoLocation(lat, lon));
 
-		public GeoDistanceAggregationDescriptor<T> Origin(string geoHash) => Assign(a => a.Origin = geoHash);
+		public GeoDistanceAggregationDescriptor<T> Origin(GeoLocation geoLocation) => Assign(a => a.Origin = geoLocation);
 
 		public GeoDistanceAggregationDescriptor<T> Unit(GeoUnit unit) => Assign(a => a.Unit = unit);
 
