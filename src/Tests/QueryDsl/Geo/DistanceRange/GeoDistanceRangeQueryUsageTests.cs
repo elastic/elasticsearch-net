@@ -58,7 +58,7 @@ namespace Tests.QueryDsl.Geo.DistanceRange
 				.OnField(p=>p.Location)
 				.DistanceType(GeoDistanceType.Arc)
 				.Coerce()
-				.From(200, GeoPrecisionUnit.Kilometers)
+				.From(200, GeoPrecision.Kilometers)
 				.IgnoreMalformed()
 				.FromExclusive()
 				.ToExclusive()

@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 namespace Nest
 {
 	[JsonConverter(typeof(StringEnumConverter))]
-	public enum GeoPrecisionUnit
+	public enum GeoPrecision
 	{
 		[EnumMember(Value = "in")]
 		Inch,

@@ -65,7 +65,7 @@ namespace Nest
 
 		public GeoShapePropertyDescriptor<T> TreeLevels(int treeLevels) => Assign(a => a.TreeLevels = treeLevels);
 
-		public GeoShapePropertyDescriptor<T> Precision(double precision, GeoPrecisionUnit unit) =>
+		public GeoShapePropertyDescriptor<T> Precision(double precision, GeoPrecision unit) =>
 			Assign(a => a.Precision = new GeoDistance(precision, unit));
 
 		public GeoShapePropertyDescriptor<T> Orientation(GeoOrientation orientation) => Assign(a => a.Orientation = orientation);

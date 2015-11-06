@@ -53,7 +53,7 @@ namespace Tests.QueryDsl.Geo.Distance
 				.DistanceType(GeoDistanceType.Arc)
 				.Coerce()
 				.Location(34, -34)
-				.Distance(200, GeoPrecisionUnit.Meters)
+				.Distance(200, GeoPrecision.Meters)
 				.IgnoreMalformed()
 				.Optimize(GeoOptimizeBBox.Memory)
 				.ValidationMethod(GeoValidationMethod.Strict)

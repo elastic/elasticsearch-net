@@ -536,7 +536,7 @@
     <Compile Include="Modules\SnapshotAndRestore\Snapshot\Snapshot\ElasticClient-Snapshot.cs" />
     <Compile Include="Search\FieldStats\ElasticClient-FieldStats.cs" />
     <Compile Include="Mapping\Types\Geo\GeoShape\GeoOrientation.cs" />
-    <Compile Include="CommonOptions\Geo\GeoPrecisionUnit.cs" />
+    <Compile Include="CommonOptions\Geo\GeoPrecision.cs" />
     <Compile Include="Modules\Scripting\GetScript\GetScriptRequest.cs" />
     <Compile Include="Search\SearchExists\SearchExistsRequest.cs" />
     <Compile Include="Modules\Scripting\PutScript\PutScriptRequest.cs" />
@@ -946,7 +946,6 @@
     <Compile Include="QueryDsl\Joining\Nested\NestedScore.cs" />
     <Compile Include="QueryDsl\Operator.cs" />
     <Compile Include="QueryDsl\Geo\GeoOptimizeBBox.cs" />
-    <Compile Include="CommonOptions\Geo\GeoUnit.cs" />
     <Compile Include="QueryDsl\Geo\BoundingBox\GeoExecution.cs" />
     <Compile Include="QueryDsl\Specialized\Script\ScriptQuery.cs" />
     <Compile Include="QueryDsl\TermLevel\Missing\MissingQuery.cs" />

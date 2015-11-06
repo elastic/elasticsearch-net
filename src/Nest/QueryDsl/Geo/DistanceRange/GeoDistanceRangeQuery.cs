@@ -81,10 +81,10 @@ namespace Nest
 		public GeoDistanceRangeQueryDescriptor<T> Location(double lat, double lon) => Assign(a => a.Location = new GeoLocation(lat, lon));
 
 		public GeoDistanceRangeQueryDescriptor<T> From(GeoDistance from) => Assign(a => a.From = from);
-		public GeoDistanceRangeQueryDescriptor<T> From(double distance, GeoPrecisionUnit unit) => Assign(a => a.From = new GeoDistance(distance, unit));
+		public GeoDistanceRangeQueryDescriptor<T> From(double distance, GeoPrecision unit) => Assign(a => a.From = new GeoDistance(distance, unit));
 
 		public GeoDistanceRangeQueryDescriptor<T> To(GeoDistance to) => Assign(a => a.To = to);
-		public GeoDistanceRangeQueryDescriptor<T> To(double distance, GeoPrecisionUnit unit) => Assign(a => a.To = new GeoDistance(distance, unit));
+		public GeoDistanceRangeQueryDescriptor<T> To(double distance, GeoPrecision unit) => Assign(a => a.To = new GeoDistance(distance, unit));
 
 		public GeoDistanceRangeQueryDescriptor<T> Optimize(GeoOptimizeBBox optimize) => Assign(a => a.OptimizeBoundingBox = optimize);
 

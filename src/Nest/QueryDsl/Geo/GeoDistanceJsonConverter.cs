@@ -39,7 +39,7 @@ namespace Nest
 			double p;
 			var sp = matches[0].Groups[1].Captures[0].Value;
 			if (!double.TryParse(sp, out p)) return null;
-			var unit = matches[0].Groups[2].Captures[0].Value.ToEnum<GeoPrecisionUnit>();
+			var unit = matches[0].Groups[2].Captures[0].Value.ToEnum<GeoPrecision>();
 			if (!unit.HasValue) return null;
 			return new GeoDistance(p, unit.Value);
 		}
