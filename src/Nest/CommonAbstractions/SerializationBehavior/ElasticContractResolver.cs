@@ -96,8 +96,6 @@ namespace Nest.Resolvers
 			defaultProperties = PropertiesOf<ITokenizer>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<ITokenFilter>(type, memberSerialization, defaultProperties, lookup);
 
-
-
 			defaultProperties = PropertiesOf<ITypeMapping>(type, memberSerialization, defaultProperties, lookup);
 
 			defaultProperties = PropertiesOf<IQuery>(type, memberSerialization, defaultProperties, lookup);
@@ -128,6 +126,7 @@ namespace Nest.Resolvers
 			defaultProperties = PropertiesOf<IInnerHitsContainer>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IInnerHits>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IProperty>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<IBoundingBox>(type, memberSerialization, defaultProperties, lookup);
 
 			defaultProperties = PropertiesOf<IClusterRerouteCommand>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IMultiTermVectorOperation>(type, memberSerialization, defaultProperties, lookup);

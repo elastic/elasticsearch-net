@@ -267,6 +267,9 @@ namespace Nest
 		public QueryContainer GeoDistance(Func<GeoDistanceQueryDescriptor<T>, IGeoDistanceQuery> selector) =>
 			this._assignSelector(selector, (query, container) => container.GeoDistance = query);
 
+		public QueryContainer GeoBoundingBox(Func<GeoBoundingBoxQueryDescriptor<T>, IGeoBoundingBoxQuery> selector) =>
+			this._assignSelector(selector, (query, container) => container.GeoBoundingBox = query);
+
 		/// <summary>
 		/// The common terms query is a modern alternative to stopwords which improves the precision and recall 
 		/// of search results (by taking stopwords into account), without sacrificing performance.

@@ -322,6 +322,7 @@
     <Compile Include="QueryDsl\FullText\MultiMatch\MultiMatchUsageTests.cs" />
     <Compile Include="QueryDsl\FullText\QueryString\QueryStringUsageTests.cs" />
     <Compile Include="QueryDsl\FullText\SimpleQueryString\SimpleQueryStringUsageTests.cs" />
+    <Compile Include="QueryDsl\Geo\BoundingBox\GeoBoundingBoxQueryUsageTests.cs" />
     <Compile Include="QueryDsl\Geo\Distance\GeoDistanceQueryUsageTests.cs" />
     <Compile Include="QueryDsl\Geo\DistanceRange\GeoDistanceRangeQueryUsageTests.cs" />
     <Compile Include="QueryDsl\Geo\HashCell\GeoHashCellQueryUsageTests.cs" />

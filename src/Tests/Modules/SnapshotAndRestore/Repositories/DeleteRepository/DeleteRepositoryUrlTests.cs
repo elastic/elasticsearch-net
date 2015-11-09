@@ -15,7 +15,6 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories.DeleteRepository
 		[U] public async Task Urls()
 		{
 			var repository = "repos";
-			var snapshot = "snap";
 
 			await DELETE($"/_snapshot/{repository}")
 				.Fluent(c => c.DeleteRepository(repository))
