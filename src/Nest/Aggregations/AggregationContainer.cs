@@ -86,7 +86,7 @@ namespace Nest
 		IGlobalAggregation Global { get; set; }
 
 		[JsonProperty("ip_range")]
-		IIp4RangeAggregation IpRange { get; set; }
+		IIpRangeAggregation IpRange { get; set; }
 
 		[JsonProperty("max")]
 		IMaxAggregation Max { get; set; }
@@ -202,7 +202,7 @@ namespace Nest
 
 		public IGlobalAggregation Global { get; set; }
 
-		public IIp4RangeAggregation IpRange { get; set; }
+		public IIpRangeAggregation IpRange { get; set; }
 
 		public ICardinalityAggregation Cardinality { get; set; }
 
@@ -290,7 +290,7 @@ namespace Nest
 
 		IGlobalAggregation IAggregationContainer.Global { get; set; }
 
-		IIp4RangeAggregation IAggregationContainer.IpRange { get; set; }
+		IIpRangeAggregation IAggregationContainer.IpRange { get; set; }
 
 		IMaxAggregation IAggregationContainer.Max { get; set; }
 
@@ -399,7 +399,7 @@ namespace Nest
 			_SetInnerAggregation(name, selector, (a, d) => a.Global = d);
 
 		public AggregationContainerDescriptor<T> IpRange(string name,
-			Func<Ip4RangeAggregationDescriptor<T>, IIp4RangeAggregation> selector) =>
+			Func<IpRangeAggregationDescriptor<T>, IIpRangeAggregation> selector) =>
 			_SetInnerAggregation(name, selector, (a, d) => a.IpRange = d);
 
 		public AggregationContainerDescriptor<T> Max(string name,

@@ -11,6 +11,7 @@ namespace Tests.Framework.MockData
 		public string OnlineHandle { get; set; }
 		public Gender Gender { get; set; }
 		public string PrivateValue { get; set; }
+		public string IPAddress { get; set; }
 
 		public new static Faker<Developer> Generator { get; } =
 			new Faker<Developer>()
@@ -22,6 +23,7 @@ namespace Tests.Framework.MockData
 				.RuleFor(p => p.OnlineHandle, p => p.Internet.UserName())
 				.RuleFor(p => p.Gender, p => p.PickRandom<Gender>())
 				.RuleFor(p => p.PrivateValue, p => "THIS SHOULD NEVER BE INDEXED")
+				.RuleFor(p => p.IPAddress, p => p.Internet.Ip())
 			;
 
 		public static IList<Developer> Developers { get; } =
