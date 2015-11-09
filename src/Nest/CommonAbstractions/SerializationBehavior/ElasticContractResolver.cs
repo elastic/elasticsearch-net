@@ -9,6 +9,13 @@ using System.Collections;
 
 namespace Nest.Resolvers
 {
+
+	internal static class IsPromiseExtension
+	{
+		public static bool IsAssignableFrom<T>(this Type objectType) where T : class =>
+			typeof (T).IsAssignableFrom(objectType);
+	}
+
 	public class ElasticContractResolver : DefaultContractResolver
 	{
 		public static JsonSerializer Empty { get; } = new JsonSerializer();
@@ -24,6 +31,7 @@ namespace Nest.Resolvers
 			this.ConnectionSettings = connectionSettings;
 		}
 
+
 		protected override JsonContract CreateContract(Type objectType)
 		{
 			JsonContract contract = base.CreateContract(objectType);
@@ -31,12 +39,15 @@ namespace Nest.Resolvers
 			// this will only be called once and then cached
 
 			if (typeof(IDictionary).IsAssignableFrom(objectType)
-				&& !typeof(IMappings).IsAssignableFrom(objectType)
-				&& !typeof(IProperties).IsAssignableFrom(objectType)
-				&& !typeof(IAnalyzers).IsAssignableFrom(objectType)
-				&& !typeof(ICharFilters).IsAssignableFrom(objectType)
-				&& !typeof(ITokenFilters).IsAssignableFrom(objectType)
-				&& !typeof(IDynamicIndexSettings).IsAssignableFrom(objectType)
+
+				&& !objectType.IsAssignableFrom<IMappings>()
+				&& !objectType.IsAssignableFrom<IProperties>()
+				&& !objectType.IsAssignableFrom<IAnalyzers>()
+				&& !objectType.IsAssignableFrom<ITokenizers>()
+				&& !objectType.IsAssignableFrom<ISimilarities>()
+				&& !objectType.IsAssignableFrom<ICharFilters>()
+				&& !objectType.IsAssignableFrom<ITokenFilters>()
+				&& !objectType.IsAssignableFrom<IDynamicIndexSettings>()
 				)
 				contract.Converter = new VerbatimDictionaryKeysJsonConverter();
 

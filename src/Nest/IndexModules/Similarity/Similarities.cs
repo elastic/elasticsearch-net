@@ -7,6 +7,7 @@ namespace Nest
 {
 	[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<Similarities, string, ISimilarity>))]
 	public interface ISimilarities : IIsADictionary<string, ISimilarity> { }
+
 	public class Similarities : IsADictionary<string, ISimilarity>, ISimilarities
 	{
 		public Similarities() : base() { }

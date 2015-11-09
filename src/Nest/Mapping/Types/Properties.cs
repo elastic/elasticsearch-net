@@ -59,7 +59,7 @@ namespace Nest
 		where T : class
 	{
 		public PropertiesDescriptor() : base(new Properties<T>()) { }
-		public PropertiesDescriptor(IProperties properties) : base(properties) { }
+		public PropertiesDescriptor(IProperties properties) : base(properties ?? new Properties<T>()) { }
 
 		public PropertiesDescriptor<T> String(Func<StringPropertyDescriptor<T>, IStringProperty> selector) => SetProperty(selector);
 
@@ -110,7 +110,7 @@ namespace Nest
 			if (type.Name.IsConditionless())
 				throw new ArgumentException($"Could not get field name for {typeName} mapping");
 
-			return this.Assign(a => a.Dictionary[type.Name] = type);
+			return this.Assign(a => a.Add(type.Name, type));
 		}
 	}
 }
