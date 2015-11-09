@@ -566,6 +566,16 @@ namespace Nest
 			this._assignSelector(selector, (query, container) => container.SpanMultiTerm = query);
 
 		/// <summary>
+		/// </summary>
+		public QueryContainer SpanContaining(Func<SpanContainingQueryDescriptor<T>, ISpanContainingQuery> selector) =>
+			this._assignSelector(selector, (query, container) => container.SpanContaining = query);
+
+		/// <summary>
+		/// </summary>
+		public QueryContainer SpanWithin(Func<SpanWithinQueryDescriptor<T>, ISpanWithinQuery> selector) =>
+			this._assignSelector(selector, (query, container) => container.SpanWithin = query);
+
+		/// <summary>
 		/// custom_score query allows to wrap another query and customize the scoring of it optionally with a 
 		/// computation derived from other field values in the doc (numeric ones) using script or boost expression
 		/// </summary>

@@ -64,8 +64,6 @@ namespace Nest
 		IFuzzyQuery Fuzzy { get; set; }
 
 		[JsonProperty(PropertyName = "geo_shape")]
-		//TODO BROKE this for now this should NOT use FieldNameQuery
-		//[JsonConverter(typeof(CompositeJsonConverter<GeoShapeQueryJsonReader, FieldNameQueryConverter<EnvelopeGeoShape>>))]
 		IGeoShapeQuery GeoShape { get; set; }
 
 		[JsonProperty(PropertyName = "common")]
@@ -109,6 +107,12 @@ namespace Nest
 
 		[JsonProperty(PropertyName = "span_not")]
 		ISpanNotQuery SpanNot { get; set; }
+
+		[JsonProperty(PropertyName = "span_containing")]
+		ISpanContainingQuery SpanContaining { get; set; }
+
+		[JsonProperty(PropertyName = "span_within")]
+		ISpanWithinQuery SpanWithin { get; set; }
 
 		[JsonProperty(PropertyName = "span_multi")]
 		ISpanMultiTermQuery SpanMultiTerm { get; set; }
@@ -217,6 +221,10 @@ namespace Nest
 		ISpanNotQuery IQueryContainer.SpanNot { get; set; }
 		
 		ISpanNearQuery IQueryContainer.SpanNear { get; set; }
+
+		ISpanContainingQuery IQueryContainer.SpanContaining { get; set; }
+
+		ISpanWithinQuery IQueryContainer.SpanWithin { get; set; }
 
 		ISpanMultiTermQuery IQueryContainer.SpanMultiTerm { get; set; }
 

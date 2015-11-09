@@ -293,6 +293,8 @@
     <Compile Include="QueryDsl\Geo\Shape\IndexedShape\GeoIndexedShapeQuery.cs" />
     <Compile Include="QueryDsl\Geo\Shape\IndexedShape\IndexedGeoShape.cs" />
     <Compile Include="QueryDsl\QueryDescriptorBase.cs" />
+    <Compile Include="QueryDsl\Span\Containing\SpanContainingQuery.cs" />
+    <Compile Include="QueryDsl\Span\Within\SpanWithinQuery.cs" />
     <Compile Include="QueryDsl\Specialized\MoreLikeThis\MoreLikeThisQueryDocumentsDescriptor.cs" />
     <Compile Include="Aggregations\AggregationsHelper.cs" />
     <Compile Include="Aggregations\Bucket\SignificantTerms\Heuristics\ScriptedHeuristic.cs" />
@@ -960,7 +962,6 @@
     <Compile Include="IndexModules\Similarity\SimilarityJsonConverter.cs" />
     <Compile Include="CommonOptions\Fuzziness\FuzzinessJsonConverter.cs" />
     <Compile Include="QueryDsl\Geo\LatLon.cs" />
-    <Compile Include="QueryDsl\Span\SpanTermQueryJsonConverter.cs" />
     <Compile Include="QueryDsl\TermLevel\Fuzzy\FuzzyQueryJsonConverter.cs" />
     <Compile Include="QueryDsl\TermLevel\Terms\TermsQueryJsonConverter.cs" />
     <Compile Include="Mapping\Fields\Parent\ParentField.cs" />

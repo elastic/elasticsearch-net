@@ -7,6 +7,7 @@ using System.Text;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<SpanMultiTermQuery>))]
 	public interface ISpanMultiTermQuery : ISpanSubQuery
 	{
 		[JsonProperty("match")]
