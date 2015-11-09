@@ -8,7 +8,7 @@ using Newtonsoft.Json.Converters;
 namespace Nest
 {
 	[JsonConverter(typeof(StringEnumConverter))]
-	public enum NestedScore
+	public enum NestedScoreMode
 	{
 		[EnumMember(Value = "avg")]
 		Average,

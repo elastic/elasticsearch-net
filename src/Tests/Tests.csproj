@@ -336,6 +336,9 @@
     <Compile Include="QueryDsl\Geo\Shape\Point\GeoPointUsageTests.cs" />
     <Compile Include="QueryDsl\Geo\Shape\Polygon\GeoPolygonUsageTests.cs" />
     <Compile Include="QueryDsl\Geo\Shape\ShapeQueryUsageTestsBase.cs" />
+    <Compile Include="QueryDsl\Joining\HasChild\HasChildQueryUsageTests.cs" />
+    <Compile Include="QueryDsl\Joining\HasParent\HasParentQueryUsageTests.cs" />
+    <Compile Include="QueryDsl\Joining\Nested\NestedQueryUsageTests.cs" />
     <Compile Include="QueryDsl\QueryDslUsageTestsBase.cs" />
     <Compile Include="Search\Count\CountUrlTests.cs" />
     <Compile Include="Search\Count\CountApiTests.cs" />

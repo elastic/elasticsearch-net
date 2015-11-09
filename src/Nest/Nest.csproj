@@ -823,9 +823,9 @@
     <Compile Include="Document\Multiple\Bulk\BulkResponseItem\BulkUpdateResponseItem.cs" />
     <Compile Include="Cluster\ClusterState\ClusterState.cs" />
     <Compile Include="Document\Multiple\Bulk\BulkOperation\BulkUpdate.cs" />
-    <Compile Include="QueryDsl\Joining\HasChild\ChildScoreType.cs" />
+    <Compile Include="QueryDsl\Joining\HasChild\ChildScoreMode.cs" />
     <Compile Include="QueryDsl\Joining\HasParent\HasParentQuery.cs" />
-    <Compile Include="QueryDsl\Joining\HasParent\ParentScoreType.cs" />
+    <Compile Include="QueryDsl\Joining\HasParent\ParentScoreMode.cs" />
     <Compile Include="Search\Percolator\RegisterPercolator\RegisterPercolatorRequest.cs" />
     <Compile Include="Search\Percolator\Percolate\PercolateRequest.cs" />
     <Compile Include="QueryDsl\ExternalFieldDeclaration.cs" />
@@ -944,7 +944,7 @@
     <Compile Include="Mapping\Types\Core\String\IndexOptions.cs" />
     <Compile Include="Search\Search\Rescoring\ScoreMode.cs" />
     <Compile Include="QueryDsl\FullText\MultiMatch\TextQueryType.cs" />
-    <Compile Include="QueryDsl\Joining\Nested\NestedScore.cs" />
+    <Compile Include="QueryDsl\Joining\Nested\NestedScoreMode.cs" />
     <Compile Include="QueryDsl\Operator.cs" />
     <Compile Include="QueryDsl\Geo\GeoOptimizeBBox.cs" />
     <Compile Include="QueryDsl\Geo\BoundingBox\GeoExecution.cs" />

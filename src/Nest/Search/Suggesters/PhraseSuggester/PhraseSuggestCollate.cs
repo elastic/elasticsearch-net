@@ -10,11 +10,11 @@ namespace Nest
 	public interface IPhraseSuggestCollate
 	{
 		[JsonProperty(PropertyName = "query")]
-		IQueryContainer Query { get; set; }
+		QueryContainer Query { get; set; }
 
 		[JsonProperty(PropertyName = "filter")]
 		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeJsonConverter<QueryContainer>, CustomJsonConverter>))]
-		IQueryContainer Filter { get; set; }
+		QueryContainer Filter { get; set; }
 
 		[JsonProperty(PropertyName = "params")]
 		IDictionary<string, object> Params { get; set; }
@@ -25,9 +25,9 @@ namespace Nest
 
 	public class PhraseSuggestCollate : IPhraseSuggestCollate
 	{
-		public IQueryContainer Query { get; set; }
+		public QueryContainer Query { get; set; }
 
-		public IQueryContainer Filter { get; set; }
+		public QueryContainer Filter { get; set; }
 
 		public IDictionary<string, object> Params { get; set; }
 
@@ -39,9 +39,9 @@ namespace Nest
 	{
 		internal IPhraseSuggestCollate Collate = new PhraseSuggestCollate();
 
-		IQueryContainer IPhraseSuggestCollate.Query { get; set; }
+		QueryContainer IPhraseSuggestCollate.Query { get; set; }
 
-		IQueryContainer IPhraseSuggestCollate.Filter { get; set; }
+		QueryContainer IPhraseSuggestCollate.Filter { get; set; }
 
 		IDictionary<string, object> IPhraseSuggestCollate.Params { get; set; }
 

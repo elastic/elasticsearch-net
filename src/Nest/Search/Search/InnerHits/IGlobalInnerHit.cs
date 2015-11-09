@@ -9,7 +9,7 @@ namespace Nest
 	public interface IGlobalInnerHit : IInnerHits
 	{
 		[JsonProperty(PropertyName = "query")]
-		IQueryContainer Query { get; set; }
+		QueryContainer Query { get; set; }
 
 		[JsonProperty(PropertyName = "inner_hits")]
 		[JsonConverter(typeof (VerbatimDictionaryKeysJsonConverter))]
@@ -18,7 +18,7 @@ namespace Nest
 
 	public class GlobalInnerHit : InnerHits, IGlobalInnerHit
 	{
-		public IQueryContainer Query { get; set; }
+		public QueryContainer Query { get; set; }
 		public IDictionary<string, IInnerHitsContainer> InnerHits { get; set; }
 	}
 
@@ -28,7 +28,7 @@ namespace Nest
 
 		private GlobalInnerHitDescriptor<T> _assign(Action<IGlobalInnerHit> assigner) => Fluent.Assign(this, assigner);
 
-		IQueryContainer IGlobalInnerHit.Query { get; set; }
+		QueryContainer IGlobalInnerHit.Query { get; set; }
 		IDictionary<string, IInnerHitsContainer> IGlobalInnerHit.InnerHits { get; set; }
 		string IInnerHits.Name { get; set; }
 		int? IInnerHits.From { get; set; }
@@ -41,7 +41,7 @@ namespace Nest
 		IList<Field> IInnerHits.FielddataFields { get; set; }
 		IDictionary<string, IScriptQuery> IInnerHits.ScriptFields { get; set; }
 
-		public GlobalInnerHitDescriptor<T> Query(Func<QueryContainerDescriptor<T>, IQueryContainer> querySelector) => 
+		public GlobalInnerHitDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> querySelector) => 
 			_assign(a => a.Query = querySelector?.Invoke(new QueryContainerDescriptor<T>()));
 		
 		public GlobalInnerHitDescriptor<T> InnerHits(Func<

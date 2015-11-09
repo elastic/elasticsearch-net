@@ -8,17 +8,11 @@ using Newtonsoft.Json.Converters;
 namespace Nest
 {
 	[JsonConverter(typeof(StringEnumConverter))]
-	public enum ChildScoreType
+	public enum ParentScoreMode
 	{
 		[EnumMember(Value = "none")]
-		None,
-		[EnumMember(Value = "avg")]
-		Average,
-		[EnumMember(Value = "sum")]
-		Sum,
-		[EnumMember(Value = "max")]
-		Max,
-		[EnumMember(Value = "min")]
-		Min
+		None = 0,
+		[EnumMember(Value = "score")]
+		Score
 	}
 }

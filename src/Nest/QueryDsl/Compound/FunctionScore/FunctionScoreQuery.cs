@@ -14,12 +14,10 @@ namespace Nest
 		IEnumerable<IFunctionScoreFunction> Functions { get; set; }
 
 		[JsonProperty(PropertyName = "query")]
-		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeJsonConverter<QueryContainerDescriptor<object>>, CustomJsonConverter>))]
-		IQueryContainer Query { get; set; }
+		QueryContainer Query { get; set; }
 
 		[JsonProperty(PropertyName = "filter")]
-		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeJsonConverter<QueryContainer>, CustomJsonConverter>))]
-		IQueryContainer Filter { get; set; }
+		QueryContainer Filter { get; set; }
 
 		[JsonProperty(PropertyName = "score_mode")]
 		[JsonConverter(typeof (StringEnumConverter))]
@@ -49,8 +47,8 @@ namespace Nest
 	{
 		bool IQuery.Conditionless => IsConditionless(this);
 		public IEnumerable<IFunctionScoreFunction> Functions { get; set; }
-		public IQueryContainer Query { get; set; }
-		public IQueryContainer Filter { get; set; }
+		public QueryContainer Query { get; set; }
+		public QueryContainer Filter { get; set; }
 		public FunctionScoreMode? ScoreMode { get; set; }
 		public FunctionBoostMode? BoostMode { get; set; }
 		public float? MaxBoost { get; set; }
@@ -76,8 +74,8 @@ namespace Nest
 		private bool _forcedConditionless = false;
 		bool IQuery.Conditionless => FunctionScoreQuery.IsConditionless(this, _forcedConditionless);
 		IEnumerable<IFunctionScoreFunction> IFunctionScoreQuery.Functions { get; set; }
-		IQueryContainer IFunctionScoreQuery.Query { get; set; }
-		IQueryContainer IFunctionScoreQuery.Filter { get; set; }
+		QueryContainer IFunctionScoreQuery.Query { get; set; }
+		QueryContainer IFunctionScoreQuery.Filter { get; set; }
 		FunctionScoreMode? IFunctionScoreQuery.ScoreMode { get; set; }
 		FunctionBoostMode? IFunctionScoreQuery.BoostMode { get; set; }
 		float? IFunctionScoreQuery.MaxBoost { get; set; }

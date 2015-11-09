@@ -50,8 +50,7 @@ namespace Nest
 			foreach (var selector in selectors)
 			{
 				var query = selector(new SpanQueryDescriptor<T>());
-				if ((query as IQuery).Conditionless)
-					continue;
+				if (((IQuery)query).Conditionless) continue;
 				clauses.Add(query);
 			}
 			a.Clauses = clauses.HasAny() ? clauses : null;
