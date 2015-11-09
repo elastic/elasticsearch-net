@@ -15,12 +15,13 @@ using Tests.Framework.MockData;
 using System.Threading.Tasks;
 using Tests.Framework.Integration;
 using Xunit;
+using static Tests.Framework.Promisify;
 
 namespace Tests.Analysis
 {
 
 	[Collection(IntegrationContext.Indexing)]
-	public class AnalysisCrudTests 
+	public class AnalysisCrudTests
 		: CrudTestBase<IIndicesOperationResponse, IGetIndexSettingsResponse, IAcknowledgedResponse>
 	{
 		/**
@@ -63,10 +64,10 @@ namespace Tests.Analysis
 		protected ICreateIndexRequest CreateFluent(string indexName, CreateIndexDescriptor c) =>
 			c.Settings(s => s
 				.Analysis(a => a
-					.Analyzers(t => Analyzers.AnalyzerUsageTests.FluentExample(s).Analysis.Analyzers)
-					.CharFilters(t => CharFilters.CharFilterUsageTests.FluentExample(s).Analysis.CharFilters)
-					.Tokenizers(t => Tokenizers.TokenizerUsageTests.FluentExample(s).Analysis.Tokenizers)
-					.TokenFilters(t => TokenFilters.TokenFilterUsageTests.FluentExample(s).Analysis.TokenFilters)
+					.Analyzers(t => Promise(Analyzers.AnalyzerUsageTests.FluentExample(s).Value.Analysis.Analyzers))
+					.CharFilters(t => Promise(CharFilters.CharFilterUsageTests.FluentExample(s).Value.Analysis.CharFilters))
+					.Tokenizers(t => Promise(Tokenizers.TokenizerUsageTests.FluentExample(s).Value.Analysis.Tokenizers))
+					.TokenFilters(t => Promise(TokenFilters.TokenFilterUsageTests.FluentExample(s).Value.Analysis.TokenFilters))
 				)
 			);
 
@@ -144,20 +145,24 @@ namespace Tests.Analysis
 		/**
 		* Here we add a new `HtmlStripCharFilter` called `differentHtml`
 		*/
+
 		protected UpdateIndexSettingsRequest UpdateInitializer(string indexName) => new UpdateIndexSettingsRequest(indexName)
 		{
-			Analysis = new Nest.Analysis
+			IndexSettings = new IndexSettings
 			{
-				CharFilters = new Nest.CharFilters { { "differentHtml", new HtmlStripCharFilter { } } }
+				Analysis = new Nest.Analysis
+				{
+					CharFilters = new Nest.CharFilters {{"differentHtml", new HtmlStripCharFilter {}}}
+				}
 			}
 		};
 
-
 		protected IUpdateIndexSettingsRequest UpdateFluent(string indexName, UpdateIndexSettingsDescriptor u) => u
-			//.Index(indexName)
-			.Analysis(a => a
-				.CharFilters(c => c
-					.HtmlStrip("differentHtml")
+			.IndexSettings(s => s
+				.Analysis(a => a
+					.CharFilters(c => c
+						.HtmlStrip("differentHtml")
+					)
 				)
 			);
 

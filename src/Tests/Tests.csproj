@@ -170,6 +170,7 @@
     <Compile Include="Framework\ApiTestBase.cs" />
     <Compile Include="Framework\Configuration\LocalConfiguration.cs" />
     <Compile Include="Framework\CrudTestBase.cs" />
+    <Compile Include="Framework\Extensions\Promisify.cs" />
     <Compile Include="Framework\Integration\Process\ObservableProcess.cs" />
     <Compile Include="Framework\MockResponses\SniffingResponse.cs" />
     <Compile Include="Framework\UrlTests.cs" />
@@ -439,6 +440,7 @@
     <Folder Include="Aggregations\Metric\" />
     <Folder Include="Migration\" />
     <Folder Include="Plugins\Analysis\Phonetic\" />
+    <Folder Include="QueryDsl\Specialized\MoreLikeThis\" />
     <Folder Include="Setup\" />
   </ItemGroup>
   <ItemGroup>

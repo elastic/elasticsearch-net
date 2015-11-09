@@ -14,7 +14,7 @@ namespace Tests.Analysis.Analyzers
 	/**
 	 */
 
-	public class AnalyzerUsageTests : UsageTestBase<IIndexSettings, IndexSettingsDescriptor, IndexSettings>
+	public class AnalyzerUsageTests : PromiseUsageTestBase<IIndexSettings, IndexSettingsDescriptor, IndexSettings>
 	{
 		protected override object ExpectJson => new
 		{
@@ -75,8 +75,8 @@ namespace Tests.Analysis.Analyzers
 		/**
 		 * 
 		 */
-		protected override Func<IndexSettingsDescriptor, IIndexSettings> Fluent => FluentExample;
-		public static Func<IndexSettingsDescriptor, IIndexSettings> FluentExample => s => s
+		protected override Func<IndexSettingsDescriptor, IPromise<IIndexSettings>> Fluent => FluentExample;
+		public static Func<IndexSettingsDescriptor, IPromise<IndexSettings>> FluentExample => s => s
 			.Analysis(analysis => analysis
 				.Analyzers(analyzers => analyzers
 					.Custom("myCustom", a => a

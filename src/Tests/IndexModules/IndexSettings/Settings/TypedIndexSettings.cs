@@ -16,7 +16,7 @@ namespace Tests.IndexModules.IndexSettings.Settings
 		/**
 		 */
 
-		public class Usage : UsageTestBase<IIndexSettings, IndexSettingsDescriptor, Nest.IndexSettings>
+		public class Usage : PromiseUsageTestBase<IIndexSettings, IndexSettingsDescriptor, Nest.IndexSettings>
 		{
 			protected override object ExpectJson => new Dictionary<string, object>
 			{
@@ -42,7 +42,7 @@ namespace Tests.IndexModules.IndexSettings.Settings
 			/**
 			 * 
 			 */
-			protected override Func<IndexSettingsDescriptor, IIndexSettings> Fluent => s => s
+			protected override Func<IndexSettingsDescriptor, IPromise<IIndexSettings>> Fluent => s => s
 				.Setting("any.setting", "can be set")
 				.Setting("doubles", 1.1)
 				.Setting("bools", false)

@@ -19,9 +19,9 @@ namespace Nest
 		public void Add(string name, IAnalyzer analyzer) => BackingDictionary.Add(name, analyzer);
 	}
 
-	public class AnalyzersDescriptor
-		: IsADictionaryDescriptor<AnalyzersDescriptor, IAnalyzers, string, IAnalyzer>, IAnalyzers
+	public class AnalyzersDescriptor : IsADictionaryDescriptor<AnalyzersDescriptor, IAnalyzers, string, IAnalyzer>
 	{
+		public AnalyzersDescriptor() : base(new Analyzers()) { }
 
 		public AnalyzersDescriptor UserDefined(string name, IAnalyzer analyzer) => Assign(name, analyzer);
 

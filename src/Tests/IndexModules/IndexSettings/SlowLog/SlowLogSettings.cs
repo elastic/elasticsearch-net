@@ -16,7 +16,7 @@ namespace Tests.IndexModules.IndexSettings.SlowLog
 		/**
 		 */
 
-		public class Usage : UsageTestBase<IIndexSettings, IndexSettingsDescriptor, Nest.IndexSettings>
+		public class Usage : PromiseUsageTestBase<IIndexSettings, IndexSettingsDescriptor, Nest.IndexSettings>
 		{
 			protected override object ExpectJson => new Dictionary<string, object>
 			{
@@ -39,7 +39,7 @@ namespace Tests.IndexModules.IndexSettings.SlowLog
 			/**
 			 * 
 			 */
-			protected override Func<IndexSettingsDescriptor, IIndexSettings> Fluent => s => s
+			protected override Func<IndexSettingsDescriptor, IPromise<IIndexSettings>> Fluent => s => s
 				.SlowLog(sl => sl
 					.Indexing(i => i
 						.ThresholdWarn("10s")

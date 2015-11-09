@@ -6,7 +6,7 @@ namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     [JsonConverter(typeof(ReadAsTypeJsonConverter<MultiGetOperationDescriptor<object>>))]
-	public interface IMultiGetOperation
+	public interface ILikeDocument
 	{
 		[JsonProperty(PropertyName = "_index")]
 		IndexName Index { get; set; }
@@ -18,13 +18,16 @@ namespace Nest
 		Id Id { get; set; }
 		
 		[JsonProperty(PropertyName = "fields")]
-		IList<Field> Fields { get; set; }
+		Fields Fields { get; set; }
 		
 		[JsonProperty(PropertyName = "_routing")]
 		string Routing { get; set; }
-		
-		[JsonProperty(PropertyName = "_source")]
-		Union<bool, ISourceFilter> Source { get; set; }
+
+		[JsonProperty(PropertyName = "doc")]
+		object Document { get; set; }
+
+		[JsonProperty(PropertyName = "per_field_analyzer")]
+		IDictionary<Field, string> PerFieldAnalyzer { get; set; }
 
 		Type ClrType { get; }
 

@@ -34,11 +34,16 @@ namespace Tests.Indices.IndexSettings.UpdateIndicesSettings
 		};
 
 		protected override Func<UpdateIndexSettingsDescriptor, IUpdateIndexSettingsRequest> Fluent => d => d
-			.BlocksWrite(false);
+			.IndexSettings(i => i
+				.BlocksWrite(false)
+			);
 
 		protected override UpdateIndexSettingsRequest Initializer => new UpdateIndexSettingsRequest
 		{
-			BlocksWrite = false
+			IndexSettings = new Nest.IndexSettings
+			{
+				BlocksWrite = false
+			}
 		};
 	}
 }

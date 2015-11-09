@@ -295,7 +295,8 @@
     <Compile Include="QueryDsl\QueryDescriptorBase.cs" />
     <Compile Include="QueryDsl\Span\Containing\SpanContainingQuery.cs" />
     <Compile Include="QueryDsl\Span\Within\SpanWithinQuery.cs" />
-    <Compile Include="QueryDsl\Specialized\MoreLikeThis\MoreLikeThisQueryDocumentsDescriptor.cs" />
+    <Compile Include="QueryDsl\Specialized\MoreLikeThis\Like\ILikeDocument.cs" />
+    <Compile Include="QueryDsl\Specialized\MoreLikeThis\Like\LikeDocument.cs" />
     <Compile Include="Aggregations\AggregationsHelper.cs" />
     <Compile Include="Aggregations\Bucket\SignificantTerms\Heuristics\ScriptedHeuristic.cs" />
     <Compile Include="Aggregations\Bucket\Bucket.cs" />

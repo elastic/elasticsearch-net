@@ -7,10 +7,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonConverter(typeof(PropertiesJsonConverter))]
-	public interface IProperties : IIsADictionary<PropertyName, IProperty>
-	{
-		
-	}
+	public interface IProperties : IIsADictionary<PropertyName, IProperty> { }
 
 	public class Properties : IsADictionary<PropertyName, IProperty>, IProperties
 	{
@@ -36,7 +33,7 @@ namespace Nest
 		public void Add(Expression<Func<T, object>> name, IProperty property) => this.BackingDictionary.Add(name, property);
 	}
 
-	public interface IPropertiesDescriptor<T, TReturnType>
+	public interface IPropertiesDescriptor<T, out TReturnType>
 		where T : class
 		where TReturnType : class
 	{
@@ -58,11 +55,10 @@ namespace Nest
 		TReturnType Murmur3Hash(Func<Murmur3HashPropertyDescriptor<T>, IMurmur3HashProperty> selector);
 	}
 
-	public class PropertiesDescriptor<T> 
-		: IsADictionaryDescriptor<PropertiesDescriptor<T>, IProperties, PropertyName, IProperty>, IPropertiesDescriptor<T, PropertiesDescriptor<T>>, IProperties
+	public class PropertiesDescriptor<T> : IsADictionaryDescriptor<PropertiesDescriptor<T>, IProperties, PropertyName, IProperty>, IPropertiesDescriptor<T, PropertiesDescriptor<T>>
 		where T : class
 	{
-		public PropertiesDescriptor() : base() { }
+		public PropertiesDescriptor() : base(new Properties<T>()) { }
 		public PropertiesDescriptor(IProperties properties) : base(properties) { }
 
 		public PropertiesDescriptor<T> String(Func<StringPropertyDescriptor<T>, IStringProperty> selector) => SetProperty(selector);

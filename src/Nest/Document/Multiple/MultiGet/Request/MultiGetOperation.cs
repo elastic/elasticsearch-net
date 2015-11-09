@@ -55,8 +55,6 @@ namespace Nest
 		string IMultiGetOperation.Routing { get; set; }
 		Union<bool, ISourceFilter> IMultiGetOperation.Source { get; set; }
 		IList<Field> IMultiGetOperation.Fields { get; set; }
-		object IMultiGetOperation.Document { get; set; }
-		IDictionary<Field, string> IMultiGetOperation.PerFieldAnalyzer { get; set; }
 		Type IMultiGetOperation.ClrType => typeof(T);
 
 		bool IMultiGetOperation.CanBeFlattened =>
@@ -172,35 +170,5 @@ namespace Nest
 			return this;
 		}
 
-		// Only used for the MLT query for specifying an artificial document.
-		// TODO: For 2.0, we should consider decoupling IMultiGetOperation from 
-		// MoreLikeThisQuery and have a dedicatd MoreLikeThisDocument object.
-		public MultiGetOperationDescriptor<T> Document(T document)
-		{
-			Self.Document = document;
-			return this;
-		}
-
-		// Only used for the MLT query for providing a different analyzer per
-		// artificial document field.
-		// TODO: For 2.0, we should consider decoupling IMultiGetOperation from 
-		// MoreLikeThisQuery and have a dedicatd MoreLikeThisDocument object.
-		public MultiGetOperationDescriptor<T> PerFieldAnalyzer(Func<FluentDictionary<Expression<Func<T, object>>, string>, FluentDictionary<Expression<Func<T, object>>, string>> analyzerSelector)
-		{
-			var d = new FluentDictionary<Expression<Func<T, object>>, string>();
-			analyzerSelector(d);
-			Self.PerFieldAnalyzer = d.ToDictionary(x => Field.Create(x.Key), x => x.Value);
-			return this;
-		}
-
-		// Only used for the MLT query for providing a different analyzer per
-		// artificial document field.
-		// TODO: For 2.0, we should consider decoupling IMultiGetOperation from 
-		// MoreLikeThisQuery and have a dedicatd MoreLikeThisDocument object.
-		public MultiGetOperationDescriptor<T> PerFieldAnalyzer(Func<FluentDictionary<Field, string>, FluentDictionary<Field, string>> analyzerSelector)
-		{
-			Self.PerFieldAnalyzer = analyzerSelector(new FluentDictionary<Field, string>());
-			return this;
-		}
 	}
 }

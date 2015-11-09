@@ -14,23 +14,11 @@ namespace Nest
 		[JsonProperty(PropertyName = "fields")]
 		IEnumerable<Field> Fields { get; set; }
 
-		[JsonProperty(PropertyName = "like_text")]
-		string LikeText { get; set; }
-
-		[JsonProperty(PropertyName = "percent_terms_to_match")]
-		double? TermMatchPercentage { get; set; }
-
-		[JsonProperty(PropertyName = "minimum_should_match")]
-		string MinimumShouldMatch { get; set; }
-
-		[JsonProperty(PropertyName = "stop_words")]
-		StopWords StopWords { get; set; }
+		[JsonProperty(PropertyName = "max_query_terms")]
+		int? MaxQueryTerms { get; set; }
 
 		[JsonProperty(PropertyName = "min_term_freq")]
 		int? MinTermFrequency { get; set; }
-
-		[JsonProperty(PropertyName = "max_query_terms")]
-		int? MaxQueryTerms { get; set; }
 
 		[JsonProperty(PropertyName = "min_doc_freq")]
 		int? MinDocumentFrequency { get; set; }
@@ -44,12 +32,31 @@ namespace Nest
 		[JsonProperty(PropertyName = "max_word_len")]
 		int? MaxWordLength { get; set; }
 
-		[JsonProperty(PropertyName = "boost_terms")]
-		double? BoostTerms { get; set; }
+		[JsonProperty(PropertyName = "stop_words")]
+		StopWords StopWords { get; set; }
 
 		[JsonProperty(PropertyName = "analyzer")]
 		string Analyzer { get; set; }
 		
+		[JsonProperty(PropertyName = "minimum_should_match")]
+		MinimumShouldMatch MinimumShouldMatch { get; set; }
+
+		[JsonProperty(PropertyName = "boost_terms")]
+		double? BoostTerms { get; set; }
+
+		[JsonProperty(PropertyName = "include")]
+		bool? Include { get; set; }
+
+
+
+
+
+
+
+
+		[JsonProperty(PropertyName = "like_text")]
+		string LikeText { get; set; }
+
 		/// <summary>
 		/// A list of document ids. This parameter is required if like_text is not specified. 
 		/// The texts are fetched from fields unless specified in each doc, and cannot be set to _all.
@@ -65,9 +72,6 @@ namespace Nest
 		/// </summary>
 		[JsonProperty("docs")]
 		IEnumerable<IMultiGetOperation> Documents { get; set; }
-		
-		[JsonProperty(PropertyName = "include")]
-		bool? Include { get; set; }
 	}
 
 	public class MoreLikeThisQuery : QueryBase, IMoreLikeThisQuery
@@ -76,7 +80,7 @@ namespace Nest
 		public IEnumerable<Field> Fields { get; set; }
 		public string LikeText { get; set; }
 		public double? TermMatchPercentage { get; set; }
-		public string MinimumShouldMatch { get; set; }
+		public MinimumShouldMatch MinimumShouldMatch { get; set; }
 		public StopWords StopWords { get; set; }
 		public int? MinTermFrequency { get; set; }
 		public int? MaxQueryTerms { get; set; }
@@ -106,8 +110,7 @@ namespace Nest
 		bool IQuery.Conditionless => MoreLikeThisQuery.IsConditionless(this);
 		IEnumerable<Field> IMoreLikeThisQuery.Fields { get; set; }
 		string IMoreLikeThisQuery.LikeText { get; set; }
-		double? IMoreLikeThisQuery.TermMatchPercentage { get; set; }
-		string IMoreLikeThisQuery.MinimumShouldMatch { get; set; }
+		MinimumShouldMatch IMoreLikeThisQuery.MinimumShouldMatch { get; set; }
 		StopWords IMoreLikeThisQuery.StopWords { get; set; }
 		int? IMoreLikeThisQuery.MinTermFrequency { get; set; }
 		int? IMoreLikeThisQuery.MaxQueryTerms { get; set; }
@@ -160,9 +163,6 @@ namespace Nest
 		public MoreLikeThisQueryDescriptor<T> BoostTerms(double boostTerms) =>
 			Assign(a => a.BoostTerms = boostTerms);
 
-		public MoreLikeThisQueryDescriptor<T> TermMatchPercentage(double termMatchPercentage) =>
-			Assign(a => a.TermMatchPercentage = termMatchPercentage);
-
 		public MoreLikeThisQueryDescriptor<T> MinimumShouldMatch(string minMatch) =>
 			Assign(a => a.MinimumShouldMatch = minMatch);
 
@@ -172,25 +172,25 @@ namespace Nest
 		public MoreLikeThisQueryDescriptor<T> Analyzer(string analyzer) =>
 			Assign(a => a.Analyzer = analyzer);
 
-		public MoreLikeThisQueryDescriptor<T> Ids(IEnumerable<long> ids) =>
-			Assign(a => a.Ids = ids.Select(i => i.ToString(CultureInfo.InvariantCulture)));
+		//public MoreLikeThisQueryDescriptor<T> Ids(IEnumerable<long> ids) =>
+		//	Assign(a => a.Ids = ids.Select(i => i.ToString(CultureInfo.InvariantCulture)));
 
-		public MoreLikeThisQueryDescriptor<T> Ids(IEnumerable<string> ids) =>
-			Assign(a => a.Ids = ids);
+		//public MoreLikeThisQueryDescriptor<T> Ids(IEnumerable<string> ids) =>
+		//	Assign(a => a.Ids = ids);
 
-		/// <summary>
-		/// Specify multiple documents to suply the more like this like text
-		/// </summary>
-		public MoreLikeThisQueryDescriptor<T> Documents(Func<MoreLikeThisQueryDocumentsDescriptor<T>, MoreLikeThisQueryDocumentsDescriptor<T>> selector) =>
-			Assign(a => a.Documents = selector(new MoreLikeThisQueryDocumentsDescriptor<T>(true)).GetOperations);
+		///// <summary>
+		///// Specify multiple documents to suply the more like this like text
+		///// </summary>
+		//public MoreLikeThisQueryDescriptor<T> Documents(Func<MoreLikeThisQueryDocumentsDescriptor<T>, MoreLikeThisQueryDocumentsDescriptor<T>> selector) =>
+		//	Assign(a => a.Documents = selector(new MoreLikeThisQueryDocumentsDescriptor<T>(true)).GetOperations);
 
-		/// <summary>
-		/// Specify multiple documents to supply the more like this text, but do not generate index: and type: on the get operations.
-		/// Useful if the node has rest.action.multi.allow_explicit_index set to false
-		/// </summary>
-		/// <param name="selector"></param>
-		/// <returns></returns>
-		public MoreLikeThisQueryDescriptor<T> DocumentsExplicit(Func<MoreLikeThisQueryDocumentsDescriptor<T>, MoreLikeThisQueryDocumentsDescriptor<T>> selector) =>
-			Assign(a => a.Documents = selector(new MoreLikeThisQueryDocumentsDescriptor<T>(false)).GetOperations);
+		///// <summary>
+		///// Specify multiple documents to supply the more like this text, but do not generate index: and type: on the get operations.
+		///// Useful if the node has rest.action.multi.allow_explicit_index set to false
+		///// </summary>
+		///// <param name="selector"></param>
+		///// <returns></returns>
+		//public MoreLikeThisQueryDescriptor<T> DocumentsExplicit(Func<MoreLikeThisQueryDocumentsDescriptor<T>, MoreLikeThisQueryDocumentsDescriptor<T>> selector) =>
+		//	Assign(a => a.Documents = selector(new MoreLikeThisQueryDocumentsDescriptor<T>(false)).GetOperations);
 	}
 }

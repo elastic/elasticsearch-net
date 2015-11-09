@@ -16,7 +16,7 @@ namespace Tests.IndexModules.IndexSettings.Translog
 		/**
 		 */
 
-		public class Usage : UsageTestBase<IIndexSettings, IndexSettingsDescriptor, Nest.IndexSettings>
+		public class Usage : PromiseUsageTestBase<IIndexSettings, IndexSettingsDescriptor, Nest.IndexSettings>
 		{
 			protected override object ExpectJson => new Dictionary<string, object>
 			{
@@ -32,7 +32,7 @@ namespace Tests.IndexModules.IndexSettings.Translog
 			/**
 			 * 
 			 */
-			protected override Func<IndexSettingsDescriptor, IIndexSettings> Fluent => s => s
+			protected override Func<IndexSettingsDescriptor, IPromise<IIndexSettings>> Fluent => s => s
 				.Translog(slowlog => slowlog
 					.Flush(f => f
 						.ThresholdOps(2)

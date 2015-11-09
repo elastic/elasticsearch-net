@@ -94,8 +94,8 @@ namespace Nest
 		public TDescriptor Path(string path) =>
 			Assign(a => a.Path = path);
 
-		public TDescriptor Properties(Func<PropertiesDescriptor<TChild>, PropertiesDescriptor<TChild>> selector) =>
-			Assign(a => a.Properties = selector?.Invoke(new PropertiesDescriptor<TChild>(a.Properties)));
+		public TDescriptor Properties(Func<PropertiesDescriptor<TChild>, IPromise<IProperties>> selector) =>
+			Assign(a => a.Properties = selector?.Invoke(new PropertiesDescriptor<TChild>(a.Properties))?.Value);
 
 		public TDescriptor AutoMap(IPropertyVisitor visitor = null) => Assign(a =>
 		{

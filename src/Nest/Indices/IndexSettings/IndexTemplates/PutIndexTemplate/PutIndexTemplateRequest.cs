@@ -44,16 +44,16 @@ namespace Nest
 
 		public PutIndexTemplateDescriptor Template(string template)=> Assign(a => a.Template = template);
 
-		public PutIndexTemplateDescriptor Settings(Func<IndexSettingsDescriptor, IIndexSettings> settingsSelector) =>
-			Assign(a => a.Settings = settingsSelector?.Invoke(new IndexSettingsDescriptor()));
+		public PutIndexTemplateDescriptor Settings(Func<IndexSettingsDescriptor, IPromise<IIndexSettings>> settingsSelector) =>
+			Assign(a => a.Settings = settingsSelector?.Invoke(new IndexSettingsDescriptor())?.Value);
 
-		public PutIndexTemplateDescriptor Mappings(Func<MappingsDescriptor, IMappings> mappingSelector) =>
-			Assign(a => a.Mappings = mappingSelector?.Invoke(new MappingsDescriptor()));
+		public PutIndexTemplateDescriptor Mappings(Func<MappingsDescriptor, IPromise<IMappings>> mappingSelector) =>
+			Assign(a => a.Mappings = mappingSelector?.Invoke(new MappingsDescriptor())?.Value);
 
-		public PutIndexTemplateDescriptor Warmers(Func<WarmersDescriptor, IWarmers> warmerSelector) =>
-			Assign(a => a.Warmers = warmerSelector?.Invoke(new WarmersDescriptor()));
+		public PutIndexTemplateDescriptor Warmers(Func<WarmersDescriptor, IPromise<IWarmers>> warmerSelector) =>
+			Assign(a => a.Warmers = warmerSelector?.Invoke(new WarmersDescriptor())?.Value);
 
-		public PutIndexTemplateDescriptor Aliases(Func<AliasesDescriptor, IAliases> aliasDescriptor) =>
-			Assign(a => a.Aliases = aliasDescriptor?.Invoke(new AliasesDescriptor()));
+		public PutIndexTemplateDescriptor Aliases(Func<AliasesDescriptor, IPromise<IAliases>> aliasDescriptor) =>
+			Assign(a => a.Aliases = aliasDescriptor?.Invoke(new AliasesDescriptor())?.Value);
 	}
 }
