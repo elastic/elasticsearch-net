@@ -13,10 +13,7 @@ namespace Nest
 		Field Field { get; set; }
 
 		[JsonProperty("script")]
-		string Script { get; set; }
-
-		[JsonProperty("params")]
-		FluentDictionary<string, object> Params { get; set; }
+		IScript Script { get; set; }
 
 		[JsonProperty("interval")]
 		double? Interval { get; set; }
@@ -35,19 +32,22 @@ namespace Nest
 
 		[JsonProperty("post_offset")]
 		long? PostOffset { get; set; }
+
+		[JsonProperty("missing")]
+		double? Missing { get; set; }
 	}
 
 	public class HistogramAggregation : BucketAggregationBase, IHistogramAggregation
 	{
 		public Field Field { get; set; }
-		public string Script { get; set; }
-		public FluentDictionary<string, object> Params { get; set; }
+		public IScript Script { get; set; }
 		public double? Interval { get; set; }
 		public int? MinimumDocumentCount { get; set; }
 		public HistogramOrder Order { get; set; }
 		public ExtendedBounds<double> ExtendedBounds { get; set; }
 		public long? PreOffset { get; set; }
 		public long? PostOffset { get; set; }
+		public double? Missing { get; set; }
 
 		internal HistogramAggregation() { }
 
@@ -62,9 +62,7 @@ namespace Nest
 	{
 		Field IHistogramAggregation.Field { get; set; }
 
-		string IHistogramAggregation.Script { get; set; }
-
-		FluentDictionary<string, object> IHistogramAggregation.Params { get; set; }
+		IScript IHistogramAggregation.Script { get; set; }
 
 		double? IHistogramAggregation.Interval { get; set; }
 
@@ -78,14 +76,16 @@ namespace Nest
 
 		long? IHistogramAggregation.PostOffset { get; set; }
 
+		double? IHistogramAggregation.Missing { get; set; }
+
 		public HistogramAggregationDescriptor<T> Field(string field) => Assign(a => a.Field = field);
 
 		public HistogramAggregationDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
 
-		public HistogramAggregationDescriptor<T> Script(string script) => Assign(a => a.Script = script);
+		public HistogramAggregationDescriptor<T> Script(string script) => Assign(a => a.Script = (InlineScript)script);
 
-		public HistogramAggregationDescriptor<T> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramSelector) =>
-			Assign(a => a.Params = paramSelector?.Invoke(new FluentDictionary<string, object>()));
+		public HistogramAggregationDescriptor<T> Script(Func<ScriptDescriptor, IScript> scriptSelector) =>
+			Assign(a => a.Script = scriptSelector?.Invoke(new ScriptDescriptor()));
 
 		public HistogramAggregationDescriptor<T> Interval(double interval) => Assign(a => a.Interval = interval);
 
@@ -106,5 +106,7 @@ namespace Nest
 		public HistogramAggregationDescriptor<T> PreOffset(long preOffset) => Assign(a => a.PreOffset = preOffset);
 
 		public HistogramAggregationDescriptor<T> PostOffset(long postOffset) => Assign(a => a.PostOffset = postOffset);
+
+		public HistogramAggregationDescriptor<T> Missing(double missing) => Assign(a => a.Missing = missing);
 	}
 }
