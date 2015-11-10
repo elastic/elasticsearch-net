@@ -13,9 +13,9 @@ using static Tests.Framework.RoundTripper;
 
 namespace Tests.Aggregations.Bucket.Missing
 {
-	public class MissingAggregationUsageTest : AggregationUsageTestBase
+	public class MissingAggregationUsageTests : AggregationUsageTestBase
 	{
-		public MissingAggregationUsageTest(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+		public MissingAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
 		protected override object ExpectJson => new
 		{

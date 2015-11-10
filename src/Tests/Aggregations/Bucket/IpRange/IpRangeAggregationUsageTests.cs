@@ -13,9 +13,9 @@ using static Tests.Framework.RoundTripper;
 
 namespace Tests.Aggregations.Bucket.IpRange
 {
-	public class IpRangeAggregationUsageTest : AggregationUsageTestBase
+	public class IpRangeAggregationUsageTests : AggregationUsageTestBase
 	{
-		public IpRangeAggregationUsageTest(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+		public IpRangeAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
 		protected override object ExpectJson => new
 		{
