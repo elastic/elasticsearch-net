@@ -110,7 +110,7 @@ namespace Nest
 			if (type.Name.IsConditionless())
 				throw new ArgumentException($"Could not get field name for {typeName} mapping");
 
-			return this.Assign(a => a.Add(type.Name, type));
+			return this.Assign(a => a[type.Name] = type);
 		}
 	}
 }
