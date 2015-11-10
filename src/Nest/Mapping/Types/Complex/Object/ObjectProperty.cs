@@ -74,7 +74,9 @@ namespace Nest
 		string IObjectProperty.Path { get; set; }
 		IProperties IObjectProperty.Properties { get; set; }
 
-		public ObjectPropertyDescriptorBase() : base("object")
+		public ObjectPropertyDescriptorBase() : this("object") { }
+
+		public ObjectPropertyDescriptorBase(string type) : base(type)
 		{
 			_TypeName = TypeName.Create<TChild>();
 		}
