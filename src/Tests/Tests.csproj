@@ -61,6 +61,7 @@
     <Compile Include="Aggregations\AggregationUsageTestBase.cs" />
     <Compile Include="Aggregations\Bucket\SignificantTerms\SignificantTermsAggregationUsageTests.cs" />
     <Compile Include="Aggregations\Bucket\Terms\TermsAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Metric\AverageAggregationUsageTests.cs" />
     <Compile Include="Aggregations\Pipeline\BucketScript\BucketScriptAggregationUsageTests.cs" />
     <Compile Include="Aggregations\Pipeline\BucketSelector\BucketSelectorAggregationUsageTests.cs" />
     <Compile Include="Aggregations\Pipeline\CumulativeSum\CumulativeSumAggregationUsageTests.cs" />
@@ -437,7 +438,6 @@
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Aggregations\Metric\" />
     <Folder Include="Migration\" />
     <Folder Include="Plugins\Analysis\Phonetic\" />
     <Folder Include="QueryDsl\Specialized\MoreLikeThis\" />
