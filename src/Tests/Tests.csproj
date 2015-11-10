@@ -57,6 +57,7 @@
     <Compile Include="Aggregations\Bucket\Children\ChildrenAggregationUsageTests.cs" />
     <Compile Include="Aggregations\AggregationUsageTestBase.cs" />
     <Compile Include="Aggregations\Bucket\SignificantTerms\SignificantTermsAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Bucket\Terms\TermsAggregationUsageTests.cs" />
     <Compile Include="Aggregations\Pipeline\BucketScript\BucketScriptAggregationUsageTests.cs" />
     <Compile Include="Aggregations\Pipeline\BucketSelector\BucketSelectorAggregationUsageTests.cs" />
     <Compile Include="Aggregations\Pipeline\CumulativeSum\CumulativeSumAggregationUsageTests.cs" />
@@ -436,7 +437,6 @@
     <Folder Include="Aggregations\Bucket\Nested\" />
     <Folder Include="Aggregations\Bucket\Range\" />
     <Folder Include="Aggregations\Bucket\ReverseNested\" />
-    <Folder Include="Aggregations\Bucket\Terms\" />
     <Folder Include="Aggregations\Metric\" />
     <Folder Include="Migration\" />
     <Folder Include="Plugins\Analysis\Phonetic\" />
