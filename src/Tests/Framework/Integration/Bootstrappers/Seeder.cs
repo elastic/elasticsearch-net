@@ -104,7 +104,7 @@ namespace Tests.Framework.Integration
 								.Name(p => p.LeadDeveloper)
 								.Properties(DeveloperProperties)
 							)
-							.GeoShape(g => g.Name(p => p.Location))
+							.GeoPoint(g => g.Name(p => p.Location))
 						)
 					)
 					.Map<CommitActivity>(m => m

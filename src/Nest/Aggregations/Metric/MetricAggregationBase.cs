@@ -16,9 +16,6 @@ namespace Nest
 
 		[JsonProperty("missing")]
 		double? Missing { get; set; }
-
-		[JsonProperty(PropertyName = "lang")]
-		string Language { get; set; }
 	}
 	
 	public abstract class MetricAggregationBase : AggregationBase, IMetricAggregation
@@ -33,7 +30,6 @@ namespace Nest
 		public Field Field { get; set; }
 		public virtual IScript Script { get; set; }
 		public double? Missing { get; set; }
-		public string Language { get; set; }
 	}
 
 	public abstract class MetricAggregationDescriptorBase<TMetricAggregation, TMetricAggregationInterface, T> 
@@ -54,8 +50,6 @@ namespace Nest
 
 		double? IMetricAggregation.Missing { get; set; }
 
-		string IMetricAggregation.Language { get; set; }
-
 		public TMetricAggregation Field(string field) => Assign(a => a.Field = field);
 
 		public TMetricAggregation Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
@@ -66,7 +60,5 @@ namespace Nest
 			Assign(a => a.Script = scriptSelector?.Invoke(new ScriptDescriptor()));
 
 		public TMetricAggregation Missing(double missing) => Assign(a => a.Missing = missing);
-
-		public TMetricAggregation Language(string language) => Assign(a => a.Language = language);
 	}
 }

@@ -61,7 +61,12 @@
     <Compile Include="Aggregations\AggregationUsageTestBase.cs" />
     <Compile Include="Aggregations\Bucket\SignificantTerms\SignificantTermsAggregationUsageTests.cs" />
     <Compile Include="Aggregations\Bucket\Terms\TermsAggregationUsageTests.cs" />
-    <Compile Include="Aggregations\Metric\AverageAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Metric\Cardinality\CardinalityAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Metric\Average\AverageAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Metric\ExtendedStats\ExtendedStatsAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Metric\GeoBounds\GeoBoundsAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Metric\Max\MaxAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Metric\Min\MinAggregationUsageTests.cs" />
     <Compile Include="Aggregations\Pipeline\BucketScript\BucketScriptAggregationUsageTests.cs" />
     <Compile Include="Aggregations\Pipeline\BucketSelector\BucketSelectorAggregationUsageTests.cs" />
     <Compile Include="Aggregations\Pipeline\CumulativeSum\CumulativeSumAggregationUsageTests.cs" />
