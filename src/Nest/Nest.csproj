@@ -287,11 +287,15 @@
     <Compile Include="QueryDsl\FullText\Match\MatchQueryJsonConverter.cs" />
     <Compile Include="QueryDsl\FullText\MultiMatch\ZeroTermsQuery.cs" />
     <Compile Include="QueryDsl\FullText\SimpleQueryString\SimpleQueryStringFlags.cs" />
+    <Compile Include="QueryDsl\Geo\BoundingBox\BoundingBox.cs" />
     <Compile Include="QueryDsl\Geo\Shape\IGeoShapeQuery.cs" />
     <Compile Include="QueryDsl\Geo\Shape\IndexedShape\GeoIndexedShapeQuery.cs" />
     <Compile Include="QueryDsl\Geo\Shape\IndexedShape\IndexedGeoShape.cs" />
     <Compile Include="QueryDsl\QueryDescriptorBase.cs" />
-    <Compile Include="QueryDsl\Specialized\MoreLikeThis\MoreLikeThisQueryDocumentsDescriptor.cs" />
+    <Compile Include="QueryDsl\Span\Containing\SpanContainingQuery.cs" />
+    <Compile Include="QueryDsl\Span\Within\SpanWithinQuery.cs" />
+    <Compile Include="QueryDsl\Specialized\MoreLikeThis\Like\ILikeDocument.cs" />
+    <Compile Include="QueryDsl\Specialized\MoreLikeThis\Like\LikeDocument.cs" />
     <Compile Include="Aggregations\AggregationsHelper.cs" />
     <Compile Include="Aggregations\Bucket\SignificantTerms\Heuristics\ScriptedHeuristic.cs" />
     <Compile Include="Aggregations\Bucket\Bucket.cs" />
@@ -821,9 +825,9 @@
     <Compile Include="Document\Multiple\Bulk\BulkResponseItem\BulkUpdateResponseItem.cs" />
     <Compile Include="Cluster\ClusterState\ClusterState.cs" />
     <Compile Include="Document\Multiple\Bulk\BulkOperation\BulkUpdate.cs" />
-    <Compile Include="QueryDsl\Joining\HasChild\ChildScoreType.cs" />
+    <Compile Include="QueryDsl\Joining\HasChild\ChildScoreMode.cs" />
     <Compile Include="QueryDsl\Joining\HasParent\HasParentQuery.cs" />
-    <Compile Include="QueryDsl\Joining\HasParent\ParentScoreType.cs" />
+    <Compile Include="QueryDsl\Joining\HasParent\ParentScoreMode.cs" />
     <Compile Include="Search\Percolator\RegisterPercolator\RegisterPercolatorRequest.cs" />
     <Compile Include="Search\Percolator\Percolate\PercolateRequest.cs" />
     <Compile Include="QueryDsl\ExternalFieldDeclaration.cs" />
@@ -942,7 +946,7 @@
     <Compile Include="Mapping\Types\Core\String\IndexOptions.cs" />
     <Compile Include="Search\Search\Rescoring\ScoreMode.cs" />
     <Compile Include="QueryDsl\FullText\MultiMatch\TextQueryType.cs" />
-    <Compile Include="QueryDsl\Joining\Nested\NestedScore.cs" />
+    <Compile Include="QueryDsl\Joining\Nested\NestedScoreMode.cs" />
     <Compile Include="QueryDsl\Operator.cs" />
     <Compile Include="QueryDsl\Geo\GeoOptimizeBBox.cs" />
     <Compile Include="QueryDsl\Geo\BoundingBox\GeoExecution.cs" />
@@ -958,7 +962,6 @@
     <Compile Include="IndexModules\Similarity\SimilarityJsonConverter.cs" />
     <Compile Include="CommonOptions\Fuzziness\FuzzinessJsonConverter.cs" />
     <Compile Include="QueryDsl\Geo\LatLon.cs" />
-    <Compile Include="QueryDsl\Span\SpanTermQueryJsonConverter.cs" />
     <Compile Include="QueryDsl\TermLevel\Fuzzy\FuzzyQueryJsonConverter.cs" />
     <Compile Include="QueryDsl\TermLevel\Terms\TermsQueryJsonConverter.cs" />
     <Compile Include="Mapping\Fields\Parent\ParentField.cs" />

@@ -14,22 +14,21 @@ namespace Nest
 		string Routing { get; set; }
 
 		[JsonProperty("filter")]
-		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeJsonConverter<QueryContainer>, CustomJsonConverter>))]
-		IQueryContainer Filter { get; set; }
+		QueryContainer Filter { get; set; }
 	}
 
 	public partial class PutAliasRequest 
 	{
 		public string Routing { get; set; }
 
-		public IQueryContainer Filter { get; set; }
+		public QueryContainer Filter { get; set; }
 	}
 
 	[DescriptorFor("IndicesPutAlias")]
 	public partial class PutAliasDescriptor 
 	{
 		string IPutAliasRequest.Routing { get; set; }
-		IQueryContainer IPutAliasRequest.Filter { get; set; }
+		QueryContainer IPutAliasRequest.Filter { get; set; }
 
 		public PutAliasDescriptor Routing(string routing) => Assign(a => a.Routing = routing);
 

@@ -15,7 +15,6 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories.VerifyRepository
 		[U] public async Task Urls()
 		{
 			var repos = "repos1";
-			var snapshot = "snap";
 
 			await POST($"/_snapshot/repos1/_verify")
 				.Fluent(c => c.VerifyRepository(repos))

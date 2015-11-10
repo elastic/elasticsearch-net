@@ -105,12 +105,12 @@ namespace Nest
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
-			IIndexSettings s = new IndexSettings();
-			if (typeof(IUpdateIndexSettingsRequest).IsAssignableFrom(objectType))
-				s = new UpdateIndexSettingsRequest();
-
+			var s = new IndexSettings();
 			SetKnownIndexSettings(reader, serializer, s);
-			return s;
+			if (!typeof (IUpdateIndexSettingsRequest).IsAssignableFrom(objectType)) return s;
+
+			var request = new UpdateIndexSettingsRequest() { IndexSettings =  s};
+			return request;
 		}
 
 		private void SetKnownIndexSettings(JsonReader reader, JsonSerializer serializer, IIndexSettings s)

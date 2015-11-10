@@ -46,7 +46,7 @@ namespace Nest
 		IScriptedHeuristic Script { get; set; }
 
 		[JsonProperty("background_filter")]
-		IQueryContainer BackgroundFilter { get; set; }
+		QueryContainer BackgroundFilter { get; set; }
 
 	}
 
@@ -64,7 +64,7 @@ namespace Nest
 		public IGoogleNormalizedDistanceHeuristic GoogleNormalizedDistance { get; set; }
 		public IPercentageScoreHeuristic PercentageScore { get; set; }
 		public IScriptedHeuristic Script { get; set; }
-		public IQueryContainer BackgroundFilter { get; set; }
+		public QueryContainer BackgroundFilter { get; set; }
 
 		internal SignificantTermsAggregation() { }
 		
@@ -102,7 +102,7 @@ namespace Nest
 
 		IScriptedHeuristic ISignificantTermsAggregation.Script { get; set; }
 
-		IQueryContainer ISignificantTermsAggregation.BackgroundFilter { get; set; }
+		QueryContainer ISignificantTermsAggregation.BackgroundFilter { get; set; }
 
 		public SignificantTermsAggregationDescriptor<T> Field(string field) => Assign(a => a.Field = field);
 

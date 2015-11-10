@@ -10,8 +10,7 @@ namespace Nest
 	public interface IConstantScoreQuery : IQuery
 	{
 		[JsonProperty(PropertyName = "query")]
-		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeJsonConverter<QueryContainerDescriptor<object>>, CustomJsonConverter>))]
-		IQueryContainer Query { get; set; }
+		QueryContainer Query { get; set; }
 	}
 
 	public class ConstantScoreQuery : QueryBase, IConstantScoreQuery
@@ -20,7 +19,7 @@ namespace Nest
 		public string Lang { get; set; }
 		public string Script { get; set; }
 		public Dictionary<string, object> Params { get; set; }
-		public IQueryContainer Query { get; set; }
+		public QueryContainer Query { get; set; }
 
 		protected override void WrapInContainer(IQueryContainer c) => c.ConstantScore = this;
 		internal static bool IsConditionless(IConstantScoreQuery q) => q.Query == null;
@@ -31,7 +30,7 @@ namespace Nest
 		, IConstantScoreQuery where T : class
 	{
 		bool IQuery.Conditionless => ConstantScoreQuery.IsConditionless(this);
-		IQueryContainer IConstantScoreQuery.Query { get; set; }
+		QueryContainer IConstantScoreQuery.Query { get; set; }
 
 		public ConstantScoreQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> selector) => 
 			Assign(a => a.Query = selector(new QueryContainerDescriptor<T>()));

@@ -35,15 +35,9 @@ namespace Nest
 		ISpanQuery ISpanFirstQuery.Match { get; set; }
 		int? ISpanFirstQuery.End { get; set; }
 
-		public SpanFirstQueryDescriptor<T> MatchTerm(Expression<Func<T, object>> selector, string value, double? boost = null) =>
-			Assign(a => a.Match = new SpanQueryDescriptor<T>().SpanTerm(selector, value, boost));
-
-		public SpanFirstQueryDescriptor<T> MatchTerm(string field, string value, double? boost = null) =>
-			Assign(a => a.Match = new SpanQueryDescriptor<T>().SpanTerm(field, value, boost));
-
 		public SpanFirstQueryDescriptor<T> Match(Func<SpanQueryDescriptor<T>, SpanQueryDescriptor<T>> selector) =>
 			Assign(a => a.Match = selector(new SpanQueryDescriptor<T>()));
 
-		public SpanFirstQueryDescriptor<T> End(int end) => Assign(a => a.End = end);
+		public SpanFirstQueryDescriptor<T> End(int? end) => Assign(a => a.End = end);
 	}
 }

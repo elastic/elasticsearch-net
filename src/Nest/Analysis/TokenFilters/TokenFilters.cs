@@ -19,9 +19,10 @@ namespace Nest
 		public void Add(string name, ITokenFilter analyzer) => BackingDictionary.Add(name, analyzer);
 	}
 
-	public class TokenFiltersDescriptor 
-		: IsADictionaryDescriptor<TokenFiltersDescriptor, ITokenFilters, string, ITokenFilter>, ITokenFilters
+	public class TokenFiltersDescriptor : IsADictionaryDescriptor<TokenFiltersDescriptor, ITokenFilters, string, ITokenFilter>
 	{
+		public TokenFiltersDescriptor() : base(new TokenFilters()) { }
+
 		public TokenFiltersDescriptor UserDefined(string name, ITokenFilter analyzer) => Assign(name, analyzer);
 
 		/// <summary>

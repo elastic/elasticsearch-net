@@ -42,10 +42,11 @@ namespace Nest
 			var knownProperties = typeof (TInterface).GetCachedObjectProperties();
 			var unknownProperties = jo.Properties().Select(p => p.Name).Except(knownProperties.Where(p=>p.HasMemberAttribute).Select(p=>p.PropertyName));
 			var fieldProperty = unknownProperties.FirstOrDefault();
+			var variableProperty = info.Item1.PropertyName;
 
 			query.Field = fieldProperty;
 
-			var locationField = knownProperties.FirstOrDefault(p => p.PropertyName == fieldProperty || p.PropertyName == deeperPropertyName);
+			var locationField = knownProperties.FirstOrDefault(p => p.PropertyName == variableProperty || p.PropertyName == deeperPropertyName);
 			if (locationField == null) return query;
 
 			var propertyValue = jo.Property(fieldProperty).Value;
@@ -81,7 +82,7 @@ namespace Nest
 				var jo = JObject.Parse(sw.ToString());
 				var v = info.Item1.ValueProvider.GetValue(castValue);
 				JToken o = null;
-				if (v != null) o = JToken.FromObject(v);
+				if (v != null) o = JToken.FromObject(v, serializer);
 
 				if (info.Item2.FieldName.IsNullOrEmpty())
 					jo.Add(field, o);

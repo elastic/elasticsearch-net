@@ -267,6 +267,9 @@ namespace Nest
 		public QueryContainer GeoDistance(Func<GeoDistanceQueryDescriptor<T>, IGeoDistanceQuery> selector) =>
 			this._assignSelector(selector, (query, container) => container.GeoDistance = query);
 
+		public QueryContainer GeoBoundingBox(Func<GeoBoundingBoxQueryDescriptor<T>, IGeoBoundingBoxQuery> selector) =>
+			this._assignSelector(selector, (query, container) => container.GeoBoundingBox = query);
+
 		/// <summary>
 		/// The common terms query is a modern alternative to stopwords which improves the precision and recall 
 		/// of search results (by taking stopwords into account), without sacrificing performance.
@@ -561,6 +564,16 @@ namespace Nest
 		/// </summary>
 		public QueryContainer SpanMultiTerm(Func<SpanMultiTermQueryDescriptor<T>, ISpanMultiTermQuery> selector) =>
 			this._assignSelector(selector, (query, container) => container.SpanMultiTerm = query);
+
+		/// <summary>
+		/// </summary>
+		public QueryContainer SpanContaining(Func<SpanContainingQueryDescriptor<T>, ISpanContainingQuery> selector) =>
+			this._assignSelector(selector, (query, container) => container.SpanContaining = query);
+
+		/// <summary>
+		/// </summary>
+		public QueryContainer SpanWithin(Func<SpanWithinQueryDescriptor<T>, ISpanWithinQuery> selector) =>
+			this._assignSelector(selector, (query, container) => container.SpanWithin = query);
 
 		/// <summary>
 		/// custom_score query allows to wrap another query and customize the scoring of it optionally with a 

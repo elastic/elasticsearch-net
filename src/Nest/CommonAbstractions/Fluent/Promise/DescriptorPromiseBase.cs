@@ -14,17 +14,14 @@ namespace Nest
 		where TDescriptor : DescriptorPromiseBase<TDescriptor, TValue>
 		where TValue : class
 	{
-		private readonly TValue _value;
-		TValue IPromise<TValue>.Value => _value;
+		internal readonly TValue PromisedValue;
+		TValue IPromise<TValue>.Value => PromisedValue;
 
-		protected DescriptorPromiseBase(TValue instance)
-		{
-			this._value = instance;
-		}
+		protected DescriptorPromiseBase(TValue instance) { this.PromisedValue = instance; }
 
 		protected TDescriptor Assign(Action<TValue> assigner)
 		{
-			assigner(this._value);
+			assigner(this.PromisedValue);
 			return (TDescriptor) this;
 		}
 

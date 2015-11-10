@@ -49,7 +49,7 @@ namespace Nest
 		string BoundaryChars { get; set; }
 
 		[JsonProperty("highlight_query")]
-		IQueryContainer HighlightQuery { get; set; }
+		QueryContainer HighlightQuery { get; set; }
 	}
 
 	public class HighlightRequest : IHighlightRequest
@@ -66,7 +66,7 @@ namespace Nest
 		public Dictionary<Field, IHighlightField> Fields { get; set; }
 		public bool? RequireFieldMatch { get; set; }
 		public string BoundaryChars { get; set; }
-		public IQueryContainer HighlightQuery { get; set; }
+		public QueryContainer HighlightQuery { get; set; }
 	}
 
 	public class HighlightDescriptor<T> : IHighlightRequest
@@ -100,7 +100,7 @@ namespace Nest
 
 		string IHighlightRequest.BoundaryChars { get; set; }
 
-		IQueryContainer IHighlightRequest.HighlightQuery { get; set; }
+		QueryContainer IHighlightRequest.HighlightQuery { get; set; }
 
 		public HighlightDescriptor<T> OnFields(params Func<HighlightFieldDescriptor<T>, IHighlightField>[] fieldHighlighters) =>
 			_assign(a => a.Fields = fieldHighlighters?

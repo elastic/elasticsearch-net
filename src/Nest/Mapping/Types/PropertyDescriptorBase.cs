@@ -33,7 +33,7 @@ namespace Nest
 
 		public TDescriptor DocValues(bool docValues = true) => Assign(a => a.DocValues = docValues);
 
-		public TDescriptor Fields(Func<PropertiesDescriptor<T>, IProperties> selector) => Assign(a => a.Fields = selector?.Invoke(new PropertiesDescriptor<T>()));
+		public TDescriptor Fields(Func<PropertiesDescriptor<T>, IPromise<IProperties>> selector) => Assign(a => a.Fields = selector?.Invoke(new PropertiesDescriptor<T>())?.Value);
 
 		public TDescriptor Similarity(SimilarityOption similarity) => Assign(a => a.Similarity = similarity);
 

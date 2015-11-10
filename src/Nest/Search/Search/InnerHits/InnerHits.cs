@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<InnerHits>))]
 	public interface IInnerHits
 	{
 		[JsonProperty("name")]
@@ -95,9 +96,9 @@ namespace Nest
 		public InnerHitsDescriptor<T> FielddataFields(params Expression<Func<T, object>>[] fielddataFields) =>
 			_assign(a => a.FielddataFields = fielddataFields?.Select(f => (Field) f).ToListOrNullIfEmpty());
 
-		public InnerHitsDescriptor<T> Explain(bool explain = true) => _assign(a => a.Explain = explain);
+		public InnerHitsDescriptor<T> Explain(bool? explain = true) => _assign(a => a.Explain = explain);
 
-		public InnerHitsDescriptor<T> Version(bool version = true) => _assign(a => a.Version = version);
+		public InnerHitsDescriptor<T> Version(bool? version = true) => _assign(a => a.Version = version);
 
 		public InnerHitsDescriptor<T> Sort(Func<SortDescriptor<T>, SortDescriptor<T>> sortSelector) =>
 			_assign(a => a.Sort = sortSelector?.Invoke(new SortDescriptor<T>()).InternalSortState.ToListOrNullIfEmpty());
@@ -108,6 +109,7 @@ namespace Nest
 		public InnerHitsDescriptor<T> Highlight(Func<HighlightDescriptor<T>, IHighlightRequest> highlightSelector) =>
 			_assign(a => a.Highlight = highlightSelector?.Invoke(new HighlightDescriptor<T>()));
 		
+		//TODO map source of union bool/SourceFileter
 		public InnerHitsDescriptor<T> Source(bool include = true) => _assign(a => a.Source = !include ? SourceFilter.ExcludeAll : null);
 
 		public InnerHitsDescriptor<T> Source(Func<SearchSourceDescriptor<T>, SearchSourceDescriptor<T>> sourceSelector) =>

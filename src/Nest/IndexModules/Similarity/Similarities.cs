@@ -6,7 +6,8 @@ using System.Linq;
 namespace Nest
 {
 	[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter<Similarities, string, ISimilarity>))]
-	public interface ISimilarities : IHasADictionary { }
+	public interface ISimilarities : IIsADictionary<string, ISimilarity> { }
+
 	public class Similarities : IsADictionary<string, ISimilarity>, ISimilarities
 	{
 		public Similarities() : base() { }
@@ -22,20 +23,16 @@ namespace Nest
 
 	}
 	
-	public class SimilaritiesDescriptor : IsADictionaryDescriptor<SimilaritiesDescriptor, ISimilarities, string, ISimilarity>, ISimilarities
+	public class SimilaritiesDescriptor : IsADictionaryDescriptor<SimilaritiesDescriptor, ISimilarities, string, ISimilarity>
 	{
-		public SimilaritiesDescriptor Add(string name, ISimilarity similarity)
-		{
-			this.BackingDictionary.Add(name, similarity);
-			return this;
-		}
+		public SimilaritiesDescriptor() : base(new Similarities()) { }
 
-		public SimilaritiesDescriptor BM25(string name, Func<BM25SimilarityDescriptor, IBM25Similarity> selector) => Add(name, selector?.Invoke(new BM25SimilarityDescriptor()));
-		public SimilaritiesDescriptor Default(string name, Func<DefaultSimilarityDescriptor, IDefaultSimilarity> selector) => Add(name, selector?.Invoke(new DefaultSimilarityDescriptor()));
-		public SimilaritiesDescriptor LMDirichlet(string name, Func<LMDirichletSimilarityDescriptor, ILMDirichletSimilarity> selector) => Add(name, selector?.Invoke(new LMDirichletSimilarityDescriptor()));
-		public SimilaritiesDescriptor LMJelinek(string name, Func<LMJelinekMercerSimilarityDescriptor, ILMJelinekMercerSimilarity> selector) => Add(name, selector?.Invoke(new LMJelinekMercerSimilarityDescriptor()));
-		public SimilaritiesDescriptor DFR(string name, Func<DFRSimilarityDescriptor, IDFRSimilarity> selector) => Add(name, selector?.Invoke(new DFRSimilarityDescriptor()));
-		public SimilaritiesDescriptor IB(string name, Func<IBSimilarityDescriptor, IIBSimilarity> selector) => Add(name, selector?.Invoke(new IBSimilarityDescriptor()));
+		public SimilaritiesDescriptor BM25(string name, Func<BM25SimilarityDescriptor, IBM25Similarity> selector) => Assign(name, selector?.Invoke(new BM25SimilarityDescriptor()));
+		public SimilaritiesDescriptor Default(string name, Func<DefaultSimilarityDescriptor, IDefaultSimilarity> selector) => Assign(name, selector?.Invoke(new DefaultSimilarityDescriptor()));
+		public SimilaritiesDescriptor LMDirichlet(string name, Func<LMDirichletSimilarityDescriptor, ILMDirichletSimilarity> selector) => Assign(name, selector?.Invoke(new LMDirichletSimilarityDescriptor()));
+		public SimilaritiesDescriptor LMJelinek(string name, Func<LMJelinekMercerSimilarityDescriptor, ILMJelinekMercerSimilarity> selector) => Assign(name, selector?.Invoke(new LMJelinekMercerSimilarityDescriptor()));
+		public SimilaritiesDescriptor DFR(string name, Func<DFRSimilarityDescriptor, IDFRSimilarity> selector) => Assign(name, selector?.Invoke(new DFRSimilarityDescriptor()));
+		public SimilaritiesDescriptor IB(string name, Func<IBSimilarityDescriptor, IIBSimilarity> selector) => Assign(name, selector?.Invoke(new IBSimilarityDescriptor()));
 	}
 
 }

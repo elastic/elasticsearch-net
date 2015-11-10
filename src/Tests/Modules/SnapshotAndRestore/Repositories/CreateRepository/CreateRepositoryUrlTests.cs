@@ -15,7 +15,6 @@ namespace Tests.Modules.SnapshotAndRestore.Repositories.CreateRepository
 		[U] public async Task Urls()
 		{
 			var repository = "repos";
-			var snapshot = "snap";
 
 			await PUT($"/_snapshot/{repository}")
 				.Fluent(c => c.CreateRepository(repository, s=>s))

@@ -63,6 +63,8 @@ namespace Nest
 	internal class VerbatimDictionaryKeysJsonConverter<THasDictionary, TKey, TValue> : VerbatimDictionaryKeysJsonConverter
 		where THasDictionary : IHasADictionary
 	{
+		public override bool CanConvert(Type t) => true;
+
 		public override bool CanRead => true;
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)

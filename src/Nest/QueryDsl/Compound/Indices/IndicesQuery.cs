@@ -15,12 +15,11 @@ namespace Nest
 		IEnumerable<IndexName> Indices { get; set; }
 
 		[JsonProperty("query")]
-		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeJsonConverter<QueryContainerDescriptor<object>>, CustomJsonConverter>))]
-		IQueryContainer Query { get; set; }
+		QueryContainer Query { get; set; }
 
 		[JsonProperty("no_match_query")]
 		[JsonConverter(typeof(NoMatchQueryJsonConverter))]
-		IQueryContainer NoMatchQuery { get; set; }
+		QueryContainer NoMatchQuery { get; set; }
 	}
 
 	public class NoMatchQueryContainer : QueryContainer, ICustomJson
@@ -39,8 +38,8 @@ namespace Nest
 	public class IndicesQuery : QueryBase, IIndicesQuery
 	{
 		bool IQuery.Conditionless => IsConditionless(this);
-		public IQueryContainer Query { get; set; }
-		public IQueryContainer NoMatchQuery { get; set; }
+		public QueryContainer Query { get; set; }
+		public QueryContainer NoMatchQuery { get; set; }
 		public IEnumerable<IndexName> Indices { get; set; }
 
 		protected override void WrapInContainer(IQueryContainer c) => c.Indices = this;
@@ -52,8 +51,8 @@ namespace Nest
 		, IIndicesQuery where T : class
 	{
 		bool IQuery.Conditionless => IndicesQuery.IsConditionless(this);
-		IQueryContainer IIndicesQuery.Query { get; set; }
-		IQueryContainer IIndicesQuery.NoMatchQuery { get; set; }
+		QueryContainer IIndicesQuery.Query { get; set; }
+		QueryContainer IIndicesQuery.NoMatchQuery { get; set; }
 		IEnumerable<IndexName> IIndicesQuery.Indices { get; set; }
 
 		public IndicesQueryDescriptor<T> Query(Func<QueryContainerDescriptor<T>, QueryContainer> selector) => Assign(a =>
@@ -80,7 +79,7 @@ namespace Nest
 				a.NoMatchQuery = query;
 		});
 
-		public IndicesQueryDescriptor<T> NoMatchQuery<K>(Func<QueryContainerDescriptor<K>, IQueryContainer> selector) where K : class => Assign(a =>
+		public IndicesQueryDescriptor<T> NoMatchQuery<K>(Func<QueryContainerDescriptor<K>, QueryContainer> selector) where K : class => Assign(a =>
 		{
 			var query = selector(new QueryContainerDescriptor<K>());
 			if (query.IsConditionless)

@@ -16,7 +16,7 @@ namespace Tests.IndexModules.IndexSettings.Merge
 		/**
 		 */
 
-		public class Usage : UsageTestBase<IIndexSettings, IndexSettingsDescriptor, Nest.IndexSettings>
+		public class Usage : PromiseUsageTestBase<IIndexSettings, IndexSettingsDescriptor, Nest.IndexSettings>
 		{
 			protected override object ExpectJson => new Dictionary<string, object>
 			{
@@ -33,7 +33,7 @@ namespace Tests.IndexModules.IndexSettings.Merge
 			/**
 			 * 
 			 */
-			protected override Func<IndexSettingsDescriptor, IIndexSettings> Fluent => s => s
+			protected override Func<IndexSettingsDescriptor, IPromise<IIndexSettings>> Fluent => s => s
 				.Merge(merge => merge
 					.Policy(p => p
 						.ExpungeDeletesAllowed(10)

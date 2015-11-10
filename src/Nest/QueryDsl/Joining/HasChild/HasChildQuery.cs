@@ -13,9 +13,8 @@ namespace Nest
 		[JsonProperty("type")]
 		TypeName Type { get; set; }
 
-		[JsonProperty("score_type")]
-		[JsonConverter(typeof (StringEnumConverter))]
-		ChildScoreType? ScoreType { get; set; }
+		[JsonProperty("score_mode")]
+		ChildScoreMode? ScoreMode { get; set; }
 
 		[JsonProperty("min_children")]
 		int? MinChildren { get; set; }
@@ -24,11 +23,9 @@ namespace Nest
 		int? MaxChildren { get; set; }
 
 		[JsonProperty("query")]
-		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeJsonConverter<QueryContainerDescriptor<object>>, CustomJsonConverter>))]
-		IQueryContainer Query { get; set; }
+		QueryContainer Query { get; set; }
 
 		[JsonProperty("inner_hits")]
-		[JsonConverter(typeof(ReadAsTypeJsonConverter<InnerHits>))]
 		IInnerHits InnerHits { get; set; }
 	}
 	
@@ -36,10 +33,10 @@ namespace Nest
 	{
 		bool IQuery.Conditionless => IsConditionless(this);
 		public TypeName Type { get; set; }
-		public ChildScoreType? ScoreType { get; set; }
+		public ChildScoreMode? ScoreMode { get; set; }
 		public int? MinChildren { get; set; }
 		public int? MaxChildren { get; set; }
-		public IQueryContainer Query { get; set; }
+		public QueryContainer Query { get; set; }
 		public IInnerHits InnerHits { get; set; }
 
 		protected override void WrapInContainer(IQueryContainer c) => c.HasChild = this;
@@ -52,10 +49,10 @@ namespace Nest
 	{
 		bool IQuery.Conditionless => HasChildQuery.IsConditionless(this);
 		TypeName IHasChildQuery.Type { get; set; }
-		ChildScoreType? IHasChildQuery.ScoreType { get; set; }
+		ChildScoreMode? IHasChildQuery.ScoreMode { get; set; }
 		int? IHasChildQuery.MinChildren { get; set; }
 		int? IHasChildQuery.MaxChildren { get; set; }
-		IQueryContainer IHasChildQuery.Query { get; set; }
+		QueryContainer IHasChildQuery.Query { get; set; }
 		IInnerHits IHasChildQuery.InnerHits { get; set; }
 
 		public HasChildQueryDescriptor()
@@ -68,15 +65,13 @@ namespace Nest
 
 		public HasChildQueryDescriptor<T> Type(string type) => Assign(a => a.Type = type);
 
-		public HasChildQueryDescriptor<T> Score(ChildScoreType? scoreType) => Assign(a => a.ScoreType = scoreType);
+		public HasChildQueryDescriptor<T> ScoreMode(ChildScoreMode? scoreMode) => Assign(a => a.ScoreMode = scoreMode);
 
-		public HasChildQueryDescriptor<T> MinChildren(int minChildren) => Assign(a => a.MinChildren = minChildren);
+		public HasChildQueryDescriptor<T> MinChildren(int? minChildren) => Assign(a => a.MinChildren = minChildren);
 
-		public HasChildQueryDescriptor<T> MaxChildren(int maxChildren) => Assign(a => a.MaxChildren = maxChildren);
+		public HasChildQueryDescriptor<T> MaxChildren(int? maxChildren) => Assign(a => a.MaxChildren = maxChildren);
 
-		public HasChildQueryDescriptor<T> InnerHits() => Assign(a => a.InnerHits = new InnerHits());
-
-		public HasChildQueryDescriptor<T> InnerHits(Func<InnerHitsDescriptor<T>, IInnerHits> selector) =>
-			Assign(a => a.InnerHits = selector(new InnerHitsDescriptor<T>()));
+		public HasChildQueryDescriptor<T> InnerHits(Func<InnerHitsDescriptor<T>, IInnerHits> selector = null) =>
+			Assign(a => a.InnerHits = selector.InvokeOrDefault(new InnerHitsDescriptor<T>()));
 	}
 }
