@@ -35,6 +35,11 @@ namespace Tests.Aggregations.Bucket.Terms
 						script = new
 						{
 							inline = "'State of Being: '+_value"
+						},
+						order = new object[]
+						{
+							new { _term = "asc" },
+							new { _count = "desc" }
 						}
 					}
 				}
@@ -52,6 +57,8 @@ namespace Tests.Aggregations.Bucket.Terms
 					.ExecutionHint(TermsAggregationExecutionHint.Map)
 					.Missing("n/a")
 					.Script("'State of Being: '+_value")
+					.Order(TermsOrder.TermAscending)
+					.Order(TermsOrder.CountDescending)
 				)
 			);
 
@@ -67,7 +74,12 @@ namespace Tests.Aggregations.Bucket.Terms
 					ShowTermDocumentCountError = true,
 					ExecutionHint = TermsAggregationExecutionHint.Map,
 					Missing = "n/a",
-					Script = new InlineScript("'State of Being: '+_value")
+					Script = new InlineScript("'State of Being: '+_value"),
+					Order = new List<TermsOrder>
+					{
+						TermsOrder.TermAscending,
+						TermsOrder.CountDescending
+					}
 				}
 			};
 
