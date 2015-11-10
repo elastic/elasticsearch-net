@@ -49,6 +49,7 @@
     <Compile Include="Aggregations\Bucket\Histogram\HistogramAggregationUsageTests.cs" />
     <Compile Include="Aggregations\Bucket\IpRange\IpRangeAggregationUsageTests.cs" />
     <Compile Include="Aggregations\Bucket\Missing\MissingAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Bucket\Nested\NestedAggregationUsageTests.cs" />
     <Compile Include="Aggregations\Bucket\Sampler\SamplerAggregationUsageTests.cs" />
     <Compile Include="Aggregations\Bucket\Filters\FiltersAggregationUsageTests.cs" />
     <Compile Include="Aggregations\Bucket\Filter\FilterAggregationUsageTests.cs" />
@@ -434,7 +435,6 @@
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Aggregations\Bucket\Nested\" />
     <Folder Include="Aggregations\Bucket\Range\" />
     <Folder Include="Aggregations\Bucket\ReverseNested\" />
     <Folder Include="Aggregations\Metric\" />
