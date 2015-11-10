@@ -88,7 +88,7 @@ namespace Tests.Framework.Integration
 				{
 					this.Started = true;
 					this.Port = 9200;
-					this.Info = new ElasticsearchNodeInfo(alreadyUp.Version.Number, "0", alreadyUp.Version.LuceneVersion);
+					this.Info = new ElasticsearchNodeInfo(alreadyUp.Version.Number, null, alreadyUp.Version.LuceneVersion);
 					this._blockingSubject.OnNext(handle);
 					if (!handle.WaitOne(timeout, true))
 						throw new ApplicationException($"Could launch tests on already running elasticsearch within {timeout}");
@@ -229,9 +229,9 @@ namespace Tests.Framework.Integration
 			this._process?.Dispose();
 			this._processListener?.Dispose();
 
-			if (this.Info != null)
+			if (this.Info != null && this.Info.Pid.HasValue)
 			{
-				var esProcess = Process.GetProcessById(this.Info.Pid);
+				var esProcess = Process.GetProcessById(this.Info.Pid.Value);
 				Console.WriteLine($"Killing elasticsearch PID {this.Info.Pid}");
 				esProcess.Kill();
 				esProcess.WaitForExit(5000);
@@ -349,13 +349,14 @@ namespace Tests.Framework.Integration
 	public class ElasticsearchNodeInfo
 	{
 		public string Version { get; }
-		public int Pid { get; }
+		public int? Pid { get; }
 		public string Build { get; }
 
 		public ElasticsearchNodeInfo(string version, string pid, string build)
 		{
 			this.Version = version;
-			Pid = int.Parse(pid);
+			if (!string.IsNullOrEmpty(pid))
+				Pid = int.Parse(pid);
 			Build = build;
 		}
 
