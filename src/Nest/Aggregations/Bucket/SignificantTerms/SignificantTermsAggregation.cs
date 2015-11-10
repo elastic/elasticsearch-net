@@ -31,16 +31,16 @@ namespace Nest
 		IDictionary<string, string> Exclude { get; set; }
 
 		[JsonProperty("mutual_information")]
-		MutualInformationHeuristic MutualInformation { get; set; }
+		IMutualInformationHeuristic MutualInformation { get; set; }
 
 		[JsonProperty("chi_square")]
-		ChiSquareHeuristic ChiSquare { get; set; }
+		IChiSquareHeuristic ChiSquare { get; set; }
 
 		[JsonProperty("gnd")]
-		GoogleNormalizedDistanceHeuristic GoogleNormalizedDistance { get; set; }
+		IGoogleNormalizedDistanceHeuristic GoogleNormalizedDistance { get; set; }
 
 		[JsonProperty("percentage")]
-		PercentageScoreHeuristic PercentageScore { get; set; }
+		IPercentageScoreHeuristic PercentageScore { get; set; }
 
 		[JsonProperty("script_heuristic")]
 		IScriptedHeuristic Script { get; set; }
@@ -59,10 +59,10 @@ namespace Nest
 		public TermsAggregationExecutionHint? ExecutionHint { get; set; }
 		public IDictionary<string, string> Include { get; set; }
 		public IDictionary<string, string> Exclude { get; set; }
-		public MutualInformationHeuristic MutualInformation { get; set; }
-		public ChiSquareHeuristic ChiSquare { get; set; }
-		public GoogleNormalizedDistanceHeuristic GoogleNormalizedDistance { get; set; }
-		public PercentageScoreHeuristic PercentageScore { get; set; }
+		public IMutualInformationHeuristic MutualInformation { get; set; }
+		public IChiSquareHeuristic ChiSquare { get; set; }
+		public IGoogleNormalizedDistanceHeuristic GoogleNormalizedDistance { get; set; }
+		public IPercentageScoreHeuristic PercentageScore { get; set; }
 		public IScriptedHeuristic Script { get; set; }
 		public IQueryContainer BackgroundFilter { get; set; }
 
@@ -92,13 +92,13 @@ namespace Nest
 
 		IDictionary<string, string> ISignificantTermsAggregation.Exclude { get; set; }
 
-		MutualInformationHeuristic ISignificantTermsAggregation.MutualInformation { get; set; }
+		IMutualInformationHeuristic ISignificantTermsAggregation.MutualInformation { get; set; }
 
-		ChiSquareHeuristic ISignificantTermsAggregation.ChiSquare { get; set; }
+		IChiSquareHeuristic ISignificantTermsAggregation.ChiSquare { get; set; }
 
-		GoogleNormalizedDistanceHeuristic ISignificantTermsAggregation.GoogleNormalizedDistance { get; set; }
+		IGoogleNormalizedDistanceHeuristic ISignificantTermsAggregation.GoogleNormalizedDistance { get; set; }
 
-		PercentageScoreHeuristic ISignificantTermsAggregation.PercentageScore { get; set; }
+		IPercentageScoreHeuristic ISignificantTermsAggregation.PercentageScore { get; set; }
 
 		IScriptedHeuristic ISignificantTermsAggregation.Script { get; set; }
 
@@ -115,27 +115,17 @@ namespace Nest
 		public SignificantTermsAggregationDescriptor<T> MinimumDocumentCount(int minimumDocumentCount) =>
 			Assign(a => a.MinimumDocumentCount = minimumDocumentCount);
 
-		public SignificantTermsAggregationDescriptor<T> MutualInformation(bool? backgroundIsSuperSet = null, bool? includeNegatives = null) =>
-			Assign(a => a.MutualInformation = new MutualInformationHeuristic
-			{
-				BackgroundIsSuperSet = backgroundIsSuperSet,
-				IncludeNegatives = includeNegatives
-			});
+		public SignificantTermsAggregationDescriptor<T> MutualInformation(Func<MutualInformationHeuristicDescriptor, IMutualInformationHeuristic> mutualInformationSelector = null) =>
+			Assign(a => a.MutualInformation = mutualInformationSelector?.InvokeOrDefault(new MutualInformationHeuristicDescriptor()));
 
-		public SignificantTermsAggregationDescriptor<T> ChiSquare(bool? backgroundIsSuperSet = null, bool? includeNegatives = null) =>
-			Assign(a => a.ChiSquare = new ChiSquareHeuristic
-			{
-				BackgroundIsSuperSet = backgroundIsSuperSet,
-				IncludeNegatives = includeNegatives
-			});
+		public SignificantTermsAggregationDescriptor<T> ChiSquare(Func<ChiSquareHeuristicDescriptor, IChiSquareHeuristic> chiSquareSelector) =>
+			Assign(a => a.ChiSquare = chiSquareSelector?.InvokeOrDefault(new ChiSquareHeuristicDescriptor()));
 
-		public SignificantTermsAggregationDescriptor<T> GoogleNormalizedDistance(bool? backgroundIsSuperSet = null) =>
-			Assign(a => a.GoogleNormalizedDistance = new GoogleNormalizedDistanceHeuristic
-			{
-				BackgroundIsSuperSet = backgroundIsSuperSet,
-			});
+		public SignificantTermsAggregationDescriptor<T> GoogleNormalizedDistance(Func<GoogleNormalizedDistanceHeuristicDescriptor, IGoogleNormalizedDistanceHeuristic> gndSelector) =>
+			Assign(a => a.GoogleNormalizedDistance = gndSelector?.InvokeOrDefault(new GoogleNormalizedDistanceHeuristicDescriptor()));
 
-		public SignificantTermsAggregationDescriptor<T> PercentageScore() => Assign(a => a.PercentageScore = new PercentageScoreHeuristic());
+		public SignificantTermsAggregationDescriptor<T> PercentageScore(Func<PercentageScoreHeuristicDescriptor, IPercentageScoreHeuristic> percentageScoreSelector) =>
+			Assign(a => a.PercentageScore = percentageScoreSelector?.InvokeOrDefault(new PercentageScoreHeuristicDescriptor()));
 
 		public SignificantTermsAggregationDescriptor<T> Script(Func<ScriptedHeuristicDescriptor, IScriptedHeuristic> scriptSelector) =>
 			Assign(a => a.Script = scriptSelector?.Invoke(new ScriptedHeuristicDescriptor()));
