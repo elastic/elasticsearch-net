@@ -18,10 +18,9 @@ namespace Nest
 		public T Value<T>()
 		{
 			var jToken = this._Value as JToken;
-
-			return jToken != null 
-				? jToken.ToObject<T>() 
-				: (T) this._Value;
+			return jToken != null
+				? jToken.ToObject<T>()
+				: (T)Convert.ChangeType(this._Value, typeof(T));
 		}
 	}
 }

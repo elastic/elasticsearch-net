@@ -67,6 +67,7 @@
     <Compile Include="Aggregations\Metric\GeoBounds\GeoBoundsAggregationUsageTests.cs" />
     <Compile Include="Aggregations\Metric\Max\MaxAggregationUsageTests.cs" />
     <Compile Include="Aggregations\Metric\Min\MinAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Metric\ScriptedMetric\ScriptedMetricAggregationUsageTests.cs" />
     <Compile Include="Aggregations\Metric\Stats\StatsAggregationUsageTests.cs" />
     <Compile Include="Aggregations\Metric\Sum\SumAggregationUsageTests.cs" />
     <Compile Include="Aggregations\Metric\ValueCount\ValueCountAggregationUsageTests.cs" />
