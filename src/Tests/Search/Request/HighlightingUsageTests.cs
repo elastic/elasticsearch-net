@@ -39,19 +39,19 @@ namespace Tests.Search.Request
 			.Highlight(h => h
 				.PreTags("<tag1>")
 				.PostTags("</tag1>")
-				.OnFields(
+				.Fields(
 					fs => fs
-						.OnField(p => p.Name)
+						.Field(p => p.Name)
 						.Type(HighlighterType.Plain)
 						.ForceSource()
 						.FragmentSize(150)
 						.NumberOfFragments(3)
 						.NoMatchSize(150),
 					fs => fs
-						.OnField(p => p.LeadDeveloper)
+						.Field(p => p.LeadDeveloper)
 						.Type(HighlighterType.Fvh),
 					fs => fs
-						.OnField(p => p.Tags)
+						.Field(p => p.Tags)
 						.Type(HighlighterType.Postings)
 				)
 			);

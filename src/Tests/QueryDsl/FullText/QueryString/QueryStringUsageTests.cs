@@ -82,7 +82,7 @@ namespace Tests.QueryDsl.FullText.QueryString
 			.QueryString(c => c
 				.Name("named_query")
 				.Boost(1.1)
-				.OnFields(f => f.Field(p=>p.Description).Field("myOtherField"))
+				.Fields(f => f.Field(p=>p.Description).Field("myOtherField"))
 				.Query("hello world")
 				.DefaultField(p=>p.Description)
 				.DefaultOperator(Operator.Or)

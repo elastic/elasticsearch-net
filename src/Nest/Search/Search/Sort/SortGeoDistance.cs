@@ -108,12 +108,12 @@ namespace Nest
 			return this;
 		}
 
-		public SortGeoDistanceDescriptor<T> OnField(string field)
+		public SortGeoDistanceDescriptor<T> Field(string field)
 		{
 			Self.Field = field;
 			return this;
 		}
-		public SortGeoDistanceDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
+		public SortGeoDistanceDescriptor<T> Field(Expression<Func<T, object>> objectPath)
 		{
 			Self.Field = objectPath;
 			return this;

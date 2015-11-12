@@ -60,7 +60,7 @@ namespace Tests.Search.Percolator.RegisterPercolator
 		protected override Func<RegisterPercolatorDescriptor<Project>, IRegisterPercolatorRequest> Fluent => r => r
 			.Query(q => q
 				.Match(m => m
-					.OnField(p => p.Name)
+					.Field(p => p.Name)
 					.Query("nest")
 				)
 			)

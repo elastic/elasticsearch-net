@@ -86,13 +86,13 @@ namespace Nest
 
 		string IDirectGenerator.PostFilter { get; set; }
 
-		public DirectGeneratorDescriptor<T> OnField(string field)
+		public DirectGeneratorDescriptor<T> Field(string field)
 		{
 			Self.Field = field;
 			return this;
 		}
 
-		public DirectGeneratorDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
+		public DirectGeneratorDescriptor<T> Field(Expression<Func<T, object>> objectPath)
 		{
 			Self.Field = objectPath;
 			return this;

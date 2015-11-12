@@ -90,7 +90,7 @@ namespace Tests.Search.SearchExists
 		protected override Func<SearchExistsDescriptor<Project>, ISearchExistsRequest> Fluent => s => s
 			.Query(q => q
 				.Match(m => m
-					.OnField(p => p.Name)
+					.Field(p => p.Name)
 					.Query(_query)
 				)
 			);

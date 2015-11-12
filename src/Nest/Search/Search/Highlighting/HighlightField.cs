@@ -113,10 +113,10 @@ namespace Nest
 
 		Fields IHighlightField.MatchedFields { get; set; }
 
-		public HighlightFieldDescriptor<T> OnField(Field field) => Assign(a => a.Field = field);
-		public HighlightFieldDescriptor<T> OnField(Expression<Func<T, object>> objectPath) => Assign(a => a.Field = objectPath);
+		public HighlightFieldDescriptor<T> Field(Field field) => Assign(a => a.Field = field);
+		public HighlightFieldDescriptor<T> Field(Expression<Func<T, object>> objectPath) => Assign(a => a.Field = objectPath);
 
-		public HighlightFieldDescriptor<T> OnAll() => this.OnField("_all");
+		public HighlightFieldDescriptor<T> OnAll() => this.Field("_all");
 
 		public HighlightFieldDescriptor<T> TagsSchema(string schema = "styled") => Assign(a => a.TagsSchema = schema);
 

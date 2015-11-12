@@ -163,7 +163,7 @@ namespace Nest
 		public QueryStringQueryDescriptor<T> DefaultField(Field field) => Assign(a => a.DefaultField = field);
 		public QueryStringQueryDescriptor<T> DefaultField(Expression<Func<T, object>> field) => Assign(a => a.DefaultField = field);
 
-		public QueryStringQueryDescriptor<T> OnFields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
+		public QueryStringQueryDescriptor<T> Fields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
 			Assign(a => a.Fields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
 
 		public QueryStringQueryDescriptor<T> Query(string query) => Assign(a => a.Query = query);

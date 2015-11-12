@@ -2908,7 +2908,7 @@ namespace Nest
 		
 
 			///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
-		public Fields CompletionFields { get { return Q<Fields>("completion_fields"); } set { Q("completion_fields", value); } }
+		public Fields CompletiFields { get { return Q<Fields>("completion_fields"); } set { Q("completion_fields", value); } }
 		
 		///<summary>A comma-separated list of fields for `fielddata` index metric (supports wildcards)</summary>
 		public Fields FielddataFields { get { return Q<Fields>("fielddata_fields"); } set { Q("fielddata_fields", value); } }
@@ -3286,7 +3286,7 @@ namespace Nest
 		
 
 			///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
-		public Fields CompletionFields { get { return Q<Fields>("completion_fields"); } set { Q("completion_fields", value); } }
+		public Fields CompletiFields { get { return Q<Fields>("completion_fields"); } set { Q("completion_fields", value); } }
 		
 		///<summary>A comma-separated list of fields for `fielddata` index metric (supports wildcards)</summary>
 		public Fields FielddataFields { get { return Q<Fields>("fielddata_fields"); } set { Q("fielddata_fields", value); } }

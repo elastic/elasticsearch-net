@@ -42,7 +42,7 @@ namespace Tests.QueryDsl.Joining.SpanFirst
 				.Name("named_query")
 				.Boost(1.1)
 				.Match(sq=>sq
-					.SpanTerm(st=>st.OnField(p=>p.Name).Value("value"))
+					.SpanTerm(st=>st.Field(p=>p.Name).Value("value"))
 				)
 				.End(3)
 			);

@@ -43,7 +43,7 @@ var results = client.Search<ElasticsearchProject>(s => s
 	.SortDescending(f => f.Name)
 	.Query(q=>
 		q.Term(f=>f.Name, "NEST", Boost: 2.0) 
-		|| q.Match(mq=>mq.OnField(f=>f.Name).Query(userInput))
+		|| q.Match(mq=>mq.Field(f=>f.Name).Query(userInput))
 	)
 );
 ```

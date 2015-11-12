@@ -49,7 +49,7 @@ namespace Tests.Search.Count
 		protected override Func<CountDescriptor<Project>, ICountRequest> Fluent => c => c
 			.Query(q => q
 				.Match(m => m
-					.OnField(p => p.Name)
+					.Field(p => p.Name)
 					.Query("NEST")
 				)
 			);

@@ -48,7 +48,7 @@ namespace Tests.QueryDsl.FullText.GeoPolygon
 			.GeoPolygon(c => c
 				.Name("named_query")
 				.Boost(1.1)
-				.OnField(p=>p.Location)
+				.Field(p=>p.Location)
 				.IgnoreMalformed()
 				.Coerce()
 				.ValidationMethod(GeoValidationMethod.Strict)

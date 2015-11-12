@@ -46,15 +46,15 @@ namespace Nest
 
 			query.Field = fieldProperty;
 
-			var locationField = knownProperties.FirstOrDefault(p => p.PropertyName == variableProperty || p.PropertyName == deeperPropertyName);
-			if (locationField == null) return query;
+			var locatiField = knownProperties.FirstOrDefault(p => p.PropertyName == variableProperty || p.PropertyName == deeperPropertyName);
+			if (locatiField == null) return query;
 
 			var propertyValue = jo.Property(fieldProperty).Value;
 			var o = JToken.ReadFrom(propertyValue.CreateReader()).Value<JObject>();
 			var r = (deeperPropertyName.IsNullOrEmpty() ? (JToken)o : o.Property(deeperPropertyName).Value).CreateReader();
 
-			var locationValue = serializer.Deserialize(r, locationField.PropertyType);
-			locationField.ValueProvider.SetValue(query, locationValue);
+			var locationValue = serializer.Deserialize(r, locatiField.PropertyType);
+			locatiField.ValueProvider.SetValue(query, locationValue);
 
 			return query;
 		}

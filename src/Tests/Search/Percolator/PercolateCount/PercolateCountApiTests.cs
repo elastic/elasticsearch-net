@@ -59,7 +59,7 @@ namespace Tests.Search.Percolator.PercolateCount
 			.Document(Project.Instance)
 			.Query(q => q
 				.Range(r => r
-					.OnField(p => p.StartedOn)
+					.Field(p => p.StartedOn)
 					.Greater(new DateTime(2014, 1, 1), "yyyy/MM/dd")
 				)
 			);

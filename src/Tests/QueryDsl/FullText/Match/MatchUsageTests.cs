@@ -59,7 +59,7 @@ namespace Tests.QueryDsl.FullText.Match
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
 			.Match(c => c
-				.OnField(p => p.Description)
+				.Field(p => p.Description)
 				.Analyzer("standard")
 				.Boost(1.1)
 				.CutoffFrequency(0.001)

@@ -47,7 +47,7 @@ namespace Tests.Search.Validate
 		private ValidateQueryDescriptor<Project> _descriptor = new ValidateQueryDescriptor<Project>()
 			.Query(q => q
 				.Match(m => m
-					.OnField(p => p.StartedOn)
+					.Field(p => p.StartedOn)
 					.Query("shouldbeadate")
 				)
 			);

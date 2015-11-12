@@ -57,7 +57,7 @@ namespace Tests.QueryDsl.Geo.BoundingBox
 			.GeoBoundingBox(g=>g
 				.Boost(1.1)
 				.Name("named_query")
-				.OnField(p=>p.Location)
+				.Field(p=>p.Location)
 				.BoundingBox(b=>b
 					.TopLeft(34, -34)
 					.BottomRight(-34, 34)

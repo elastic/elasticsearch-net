@@ -33,7 +33,7 @@ namespace Tests.QueryDsl.Geo.Shape.Circle
 			.GeoShapeCircle(c => c
 				.Name("named_query")
 				.Boost(1.1)
-				.OnField(p=>p.Location)
+				.Field(p=>p.Location)
 				.Coordinates(this._coordinates)
 				.Radius("100m")
 			);

@@ -273,13 +273,13 @@ namespace Nest
 
 		Field ISort.SortKey { get { return Self.Field; } }
 
-		public virtual SortFieldDescriptor<T> OnField(string field)
+		public virtual SortFieldDescriptor<T> Field(string field)
 		{
 			Self.Field = field;
 			return this;
 		}
 
-		public virtual SortFieldDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
+		public virtual SortFieldDescriptor<T> Field(Expression<Func<T, object>> objectPath)
 		{
 			Self.Field = objectPath;
 			return this;

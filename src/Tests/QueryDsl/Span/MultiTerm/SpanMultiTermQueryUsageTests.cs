@@ -37,7 +37,7 @@ namespace Tests.QueryDsl.Joining.SpanMultiTerm
 				.Name("named_query")
 				.Boost(1.1)
 				.Match(sq=>sq
-					.Prefix(pr=>pr.OnField(p=>p.Name).Value("pre-*"))
+					.Prefix(pr=>pr.Field(p=>p.Name).Value("pre-*"))
 				)
 			);
 	}

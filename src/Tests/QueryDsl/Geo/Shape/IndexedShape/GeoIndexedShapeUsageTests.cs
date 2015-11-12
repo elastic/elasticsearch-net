@@ -51,7 +51,7 @@ namespace Tests.QueryDsl.Geo.Shape.IndexedShape
 			.GeoIndexedShape(c => c
 				.Name("named_query")
 				.Boost(1.1)
-				.OnField(p=>p.Location)
+				.Field(p=>p.Location)
 				.IndexedShape(p=>p
 					.Id(2)
 					.Path(pp=>pp.Location)

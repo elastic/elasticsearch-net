@@ -77,7 +77,7 @@ namespace Nest
 		bool? ISimpleQueryStringQuery.Lenient { get; set; }
 		MinimumShouldMatch ISimpleQueryStringQuery.MinimumShouldMatch { get; set; }
 
-		public SimpleQueryStringQueryDescriptor<T> OnFields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
+		public SimpleQueryStringQueryDescriptor<T> Fields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
 			Assign(a => a.Fields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
 
 		public SimpleQueryStringQueryDescriptor<T> Query(string query) => Assign(a => a.Query = query);

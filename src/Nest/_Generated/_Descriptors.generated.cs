@@ -3045,11 +3045,11 @@ namespace Nest
 
 	
 		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
-		public IndicesStatsDescriptor CompletionFields(params string[] completion_fields) => AssignParam(p=>p.CompletionFields(completion_fields));
+		public IndicesStatsDescriptor CompletiFields(params string[] completion_fields) => AssignParam(p=>p.CompletiFields(completion_fields));
 			
 		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
-		public IndicesStatsDescriptor CompletionFields<T>(params Expression<Func<T, object>>[] fields) where T : class =>
-			AssignParam(p=>p._CompletionFields(fields));
+		public IndicesStatsDescriptor CompletiFields<T>(params Expression<Func<T, object>>[] fields) where T : class =>
+			AssignParam(p=>p._CompletiFields(fields));
 
 		///<summary>A comma-separated list of fields for `fielddata` index metric (supports wildcards)</summary>
 		public IndicesStatsDescriptor FielddataFields(params string[] fielddata_fields) => AssignParam(p=>p.FielddataFields(fielddata_fields));
@@ -3531,11 +3531,11 @@ namespace Nest
 
 	
 		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
-		public NodesStatsDescriptor CompletionFields(params string[] completion_fields) => AssignParam(p=>p.CompletionFields(completion_fields));
+		public NodesStatsDescriptor CompletiFields(params string[] completion_fields) => AssignParam(p=>p.CompletiFields(completion_fields));
 			
 		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
-		public NodesStatsDescriptor CompletionFields<T>(params Expression<Func<T, object>>[] fields) where T : class =>
-			AssignParam(p=>p._CompletionFields(fields));
+		public NodesStatsDescriptor CompletiFields<T>(params Expression<Func<T, object>>[] fields) where T : class =>
+			AssignParam(p=>p._CompletiFields(fields));
 
 		///<summary>A comma-separated list of fields for `fielddata` index metric (supports wildcards)</summary>
 		public NodesStatsDescriptor FielddataFields(params string[] fielddata_fields) => AssignParam(p=>p.FielddataFields(fielddata_fields));

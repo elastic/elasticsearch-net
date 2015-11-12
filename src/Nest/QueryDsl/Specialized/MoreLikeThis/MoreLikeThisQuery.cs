@@ -99,7 +99,7 @@ namespace Nest
 		IEnumerable<Like> IMoreLikeThisQuery.Like { get; set; }
 		IEnumerable<Like> IMoreLikeThisQuery.Unlike { get; set; }
 
-		public MoreLikeThisQueryDescriptor<T> OnFields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
+		public MoreLikeThisQueryDescriptor<T> Fields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
 			Assign(a => a.Fields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
 
 		public MoreLikeThisQueryDescriptor<T> StopWords(IEnumerable<string> stopWords) => 

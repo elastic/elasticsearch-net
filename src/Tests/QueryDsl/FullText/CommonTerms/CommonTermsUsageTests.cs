@@ -48,7 +48,7 @@ namespace Tests.QueryDsl.FullText.CommonTerms
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
 			.CommonTerms(c => c
-				.OnField(p => p.Description)
+				.Field(p => p.Description)
 				.Analyzer("standard")
 				.Boost(1.1)
 				.CutoffFrequency(0.001)
