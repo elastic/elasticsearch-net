@@ -22,7 +22,9 @@ namespace Nest
 		public static implicit operator SingleBucketsPath(string bucketsPath) => new SingleBucketsPath(bucketsPath);
 	}
 
-	public class MultiBucketsPath : IsADictionary<string, string>, IBucketsPath
+	public interface IMultiBucketsPath : IIsADictionary<string, string>, IBucketsPath { }
+
+	public class MultiBucketsPath : IsADictionary<string, string>, IMultiBucketsPath
 	{
 		public MultiBucketsPath() : base() { }
 		public MultiBucketsPath(IDictionary<string, string> container) : base(container) { }
@@ -33,6 +35,14 @@ namespace Nest
 		public void Add(string name, string bucketsPath) => this.BackingDictionary.Add(name, bucketsPath);
 
 		public static implicit operator MultiBucketsPath(Dictionary<string, string> bucketsPath) => new MultiBucketsPath(bucketsPath);
+	}
+
+	public class MultiBucketsPathDescriptor
+		: IsADictionaryDescriptor<MultiBucketsPathDescriptor, IMultiBucketsPath, string, string>
+	{
+		public MultiBucketsPathDescriptor() : base(new MultiBucketsPath()) { }
+
+		public MultiBucketsPathDescriptor Add(string name, string bucketsPath) => Assign(name, bucketsPath);
 	}
 
 	public class BucketsPathJsonConverter : JsonConverter
