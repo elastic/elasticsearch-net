@@ -65,7 +65,7 @@ namespace Nest
 			qs.AddQueryString("fields", fields.Select(e=>(Field)e));
 		
 		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
-		internal static IndicesStatsRequestParameters _CompletiFields<T>(this IndicesStatsRequestParameters qs, IEnumerable<Expression<Func<T, object>>>  completion_fields) where T : class =>
+		internal static IndicesStatsRequestParameters _CompletionFields<T>(this IndicesStatsRequestParameters qs, IEnumerable<Expression<Func<T, object>>>  completion_fields) where T : class =>
 			qs.AddQueryString("completion_fields", completion_fields.Select(e=>(Field)e));
 		
 		///<summary>A comma-separated list of fields for `fielddata` index metric (supports wildcards)</summary>
@@ -93,7 +93,7 @@ namespace Nest
 			qs.AddQueryString("fields", fields.Select(e=>(Field)e));
 		
 		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
-		internal static NodesStatsRequestParameters _CompletiFields<T>(this NodesStatsRequestParameters qs, IEnumerable<Expression<Func<T, object>>>  completion_fields) where T : class =>
+		internal static NodesStatsRequestParameters _CompletionFields<T>(this NodesStatsRequestParameters qs, IEnumerable<Expression<Func<T, object>>>  completion_fields) where T : class =>
 			qs.AddQueryString("completion_fields", completion_fields.Select(e=>(Field)e));
 		
 		///<summary>A comma-separated list of fields for `fielddata` index metric (supports wildcards)</summary>

@@ -2281,7 +2281,7 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
-		public IndicesStatsRequestParameters CompletiFields(params string[] completion_fields) => this.AddQueryString("completion_fields", completion_fields);
+		public IndicesStatsRequestParameters CompletionFields(params string[] completion_fields) => this.AddQueryString("completion_fields", completion_fields);
 		
 		///<summary>A comma-separated list of fields for `fielddata` index metric (supports wildcards)</summary>
 		public IndicesStatsRequestParameters FielddataFields(params string[] fielddata_fields) => this.AddQueryString("fielddata_fields", fielddata_fields);
@@ -2631,7 +2631,7 @@ namespace Elasticsearch.Net
 	{
 		public override HttpMethod DefaultHttpMethod => HttpMethod.GET;
 		///<summary>A comma-separated list of fields for `fielddata` and `suggest` index metric (supports wildcards)</summary>
-		public NodesStatsRequestParameters CompletiFields(params string[] completion_fields) => this.AddQueryString("completion_fields", completion_fields);
+		public NodesStatsRequestParameters CompletionFields(params string[] completion_fields) => this.AddQueryString("completion_fields", completion_fields);
 		
 		///<summary>A comma-separated list of fields for `fielddata` index metric (supports wildcards)</summary>
 		public NodesStatsRequestParameters FielddataFields(params string[] fielddata_fields) => this.AddQueryString("fielddata_fields", fielddata_fields);

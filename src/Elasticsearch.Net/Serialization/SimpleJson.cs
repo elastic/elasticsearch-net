@@ -1219,7 +1219,7 @@ namespace Elasticsearch.Net.Serialization
 			SetCache = new ReflectionUtils.ThreadSafeDictionary<Type, IDictionary<string, KeyValuePair<Type, ReflectionUtils.SetDelegate>>>(SetterValueFactory);
 		}
 
-		protected virtual string MapClrMemberNameToJsFieldName(string clrFieldName)
+		protected virtual string MapClrMemberNameToJsonFieldName(string clrFieldName)
 		{
 			return clrFieldName;
 		}
@@ -1239,14 +1239,14 @@ namespace Elasticsearch.Net.Serialization
 					MethodInfo getMethod = ReflectionUtils.GetGetterMethodInfo(propertyInfo);
 					if (getMethod.IsStatic || !getMethod.IsPublic)
 						continue;
-					result[MapClrMemberNameToJsFieldName(propertyInfo.Name)] = ReflectionUtils.GetGetMethod(propertyInfo);
+					result[MapClrMemberNameToJsonFieldName(propertyInfo.Name)] = ReflectionUtils.GetGetMethod(propertyInfo);
 				}
 			}
 			foreach (FieldInfo fieldInfo in ReflectionUtils.GetFields(type))
 			{
 				if (fieldInfo.IsStatic || !fieldInfo.IsPublic)
 					continue;
-				result[MapClrMemberNameToJsFieldName(fieldInfo.Name)] = ReflectionUtils.GetGetMethod(fieldInfo);
+				result[MapClrMemberNameToJsonFieldName(fieldInfo.Name)] = ReflectionUtils.GetGetMethod(fieldInfo);
 			}
 			return result;
 		}
@@ -1261,14 +1261,14 @@ namespace Elasticsearch.Net.Serialization
 					MethodInfo setMethod = ReflectionUtils.GetSetterMethodInfo(propertyInfo);
 					if (setMethod.IsStatic || !setMethod.IsPublic)
 						continue;
-					result[MapClrMemberNameToJsFieldName(propertyInfo.Name)] = new KeyValuePair<Type, ReflectionUtils.SetDelegate>(propertyInfo.PropertyType, ReflectionUtils.GetSetMethod(propertyInfo));
+					result[MapClrMemberNameToJsonFieldName(propertyInfo.Name)] = new KeyValuePair<Type, ReflectionUtils.SetDelegate>(propertyInfo.PropertyType, ReflectionUtils.GetSetMethod(propertyInfo));
 				}
 			}
 			foreach (FieldInfo fieldInfo in ReflectionUtils.GetFields(type))
 			{
 				if (fieldInfo.IsInitOnly || fieldInfo.IsStatic || !fieldInfo.IsPublic)
 					continue;
-				result[MapClrMemberNameToJsFieldName(fieldInfo.Name)] = new KeyValuePair<Type, ReflectionUtils.SetDelegate>(fieldInfo.FieldType, ReflectionUtils.GetSetMethod(fieldInfo));
+				result[MapClrMemberNameToJsonFieldName(fieldInfo.Name)] = new KeyValuePair<Type, ReflectionUtils.SetDelegate>(fieldInfo.FieldType, ReflectionUtils.GetSetMethod(fieldInfo));
 			}
 			return result;
 		}
@@ -1463,7 +1463,7 @@ namespace Elasticsearch.Net.Serialization
 			foreach (KeyValuePair<string, ReflectionUtils.GetDelegate> getter in getters)
 			{
 				if (getter.Value != null)
-					obj.Add(MapClrMemberNameToJsFieldName(getter.Key), getter.Value(input));
+					obj.Add(MapClrMemberNameToJsonFieldName(getter.Key), getter.Value(input));
 			}
 			output = obj;
 			return true;
