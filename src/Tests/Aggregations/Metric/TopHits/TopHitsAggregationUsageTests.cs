@@ -100,9 +100,9 @@ namespace Tests.Aggregations.Metric.TopHits
 								.Field(p => p.NumberOfCommits)
 							)
 							.Highlight(h => h
-								.Fields(hf => hf
-									.Field(p => p.Tags)
-									.Field(p => p.Description)
+								.Fields(
+									hf => hf.Field(p => p.Tags),
+									hf => hf.Field(p => p.Description)
 								)
 							)
 							.ScriptFields(sfs => sfs
