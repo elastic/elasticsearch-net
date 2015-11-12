@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using System;
+using System.Collections;
 using System.Linq.Expressions;
 
 namespace Nest
@@ -23,7 +24,7 @@ namespace Nest
 	{
 		public AttachmentProperty() : base("attachment") { }
 
-		private IDictionary<Field, IProperty> Dictionary => this.Fields.Dictionary as IDictionary<Field, IProperty>;
+		private IDictionary Dictionary => this.Fields;
 
 		internal AttachmentProperty(AttachmentAttribute attribute) : base("attachment", attribute) { }
 
@@ -96,7 +97,7 @@ namespace Nest
 		INumberProperty IAttachmentProperty.ContentLengthField { get; set; }
 		IStringProperty IAttachmentProperty.LanguageField { get; set; }
 
-		private IDictionary<Field, IProperty> Dictionary => ((IAttachmentProperty)this).Fields.Dictionary as IDictionary<Field, IProperty>;
+		private IDictionary Dictionary => Self.Fields;
 
 		public AttachmentPropertyDescriptor() : base("attachment") { }
 

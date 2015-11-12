@@ -109,8 +109,6 @@
     <Compile Include="Analysis\Tokenizers\Tokenizers.cs" />
     <Compile Include="Cluster\ClusterHealth.cs" />
     <Compile Include="Cluster\ClusterHealth\ClusterHealthResponse.cs" />
-    <Compile Include="Cluster\ClusterSettings\ClusterPutSettings\ClusterSettings.cs" />
-    <Compile Include="CommonAbstractions\DictionaryLike\IHasADictionary.cs" />
     <Compile Include="CommonAbstractions\Fluent\DescriptorBase.cs" />
     <Compile Include="CommonAbstractions\Fluent\Promise\DescriptorPromiseBase.cs" />
     <Compile Include="CommonAbstractions\Infer\DocumentPath\DocumentPath.cs" />

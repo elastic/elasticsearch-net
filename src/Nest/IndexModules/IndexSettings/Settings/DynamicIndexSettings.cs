@@ -185,7 +185,7 @@ namespace Nest
 		/// </summary>
 		public TDescriptor Setting(string setting, object value)
 		{
-			this.PromisedValue.Dictionary.Add(setting, value);
+			this.PromisedValue.Add(setting, value);
 			return (TDescriptor)this;
 		}
 

@@ -13,8 +13,7 @@ namespace Nest
 	/// </summary>
 	internal class VerbatimDictionaryKeysJsonConverter : JsonConverter
 	{
-		public override bool CanConvert(Type t) => 
-			typeof (IDictionary).IsAssignableFrom(t) || typeof (IHasADictionary).IsAssignableFrom(t);
+		public override bool CanConvert(Type t) => typeof (IDictionary).IsAssignableFrom(t);
 
 		public override bool CanRead => false;
 
@@ -27,10 +26,10 @@ namespace Nest
 		{
 			var contract = serializer.ContractResolver as SettingsContractResolver;
 
-			var isADictionary = value as IHasADictionary;
-			IDictionary dictionary = isADictionary?.Dictionary ?? (value as IDictionary);
-			writer.WriteStartObject();
+			var dictionary = value as IDictionary;
+			if (dictionary == null) return;
 
+			writer.WriteStartObject();
 			foreach (DictionaryEntry entry in dictionary)
 			{
 				if (entry.Value == null && serializer.NullValueHandling == NullValueHandling.Ignore)
@@ -60,8 +59,8 @@ namespace Nest
 		}
 	}
 
-	internal class VerbatimDictionaryKeysJsonConverter<THasDictionary, TKey, TValue> : VerbatimDictionaryKeysJsonConverter
-		where THasDictionary : IHasADictionary
+	internal class VerbatimDictionaryKeysJsonConverter<TIsADictionary, TKey, TValue> : VerbatimDictionaryKeysJsonConverter
+		where TIsADictionary : IIsADictionary
 	{
 		public override bool CanConvert(Type t) => true;
 
@@ -70,7 +69,7 @@ namespace Nest
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
 			var dictionary = serializer.Deserialize<Dictionary<TKey, TValue>>(reader);
-			return typeof(THasDictionary).CreateInstance<THasDictionary>(dictionary);
+			return typeof(TIsADictionary).CreateInstance<TIsADictionary>(dictionary);
 		}
 	}
 }
