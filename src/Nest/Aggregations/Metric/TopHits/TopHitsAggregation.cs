@@ -35,7 +35,7 @@ namespace Nest
 		IDictionary<string, IScriptQuery> ScriptFields { get; set; }
 
 		[JsonProperty("fielddata_fields")]
-		IEnumerable<Field> FieldDataFields { get; set; }
+		Fields FieldDataFields { get; set; }
 
 		[JsonProperty("version")]
 		bool? Version { get; set; }
@@ -50,7 +50,7 @@ namespace Nest
 		public IHighlightRequest Highlight { get; set; }
 		public bool? Explain { get; set; }
 		public IDictionary<string, IScriptQuery> ScriptFields { get; set; }
-		public IEnumerable<Field> FieldDataFields { get; set; }
+		public Fields FieldDataFields { get; set; }
 		public bool? Version { get; set; }
 
 		internal TopHitsAggregation() { }
@@ -80,7 +80,7 @@ namespace Nest
 
 		IDictionary<string, IScriptQuery> ITopHitsAggregation.ScriptFields { get; set; }
 
-		IEnumerable<Field> ITopHitsAggregation.FieldDataFields { get; set; }
+		Fields ITopHitsAggregation.FieldDataFields { get; set; }
 
 		bool? ITopHitsAggregation.Version { get; set; }
 
@@ -134,11 +134,8 @@ namespace Nest
 			return this;
 		}
 
-		public TopHitsAggregationDescriptor<T> FieldDataFields(params Field[] fields) =>
-			Assign(a => a.FieldDataFields = fields);
-
-		public TopHitsAggregationDescriptor<T> FieldDataFields(params Expression<Func<T, object>>[] objectPaths) =>
-			Assign(a => a.FieldDataFields = objectPaths?.Select(e => (Field) e).ToListOrNullIfEmpty());
+		public TopHitsAggregationDescriptor<T> FieldDataFields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) => 
+			Assign(a => a.FieldDataFields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
 
 		public TopHitsAggregationDescriptor<T> Version(bool version = true) => Assign(a => a.Version = version);
 	}

@@ -54,7 +54,6 @@ namespace Nest
 		bool ICollection.IsSynchronized => (Self?.IsSynchronized).GetValueOrDefault(false);
 		ICollection IDictionary.Values => Self?.Values;
 
-
 		[EditorBrowsable(EditorBrowsableState.Never)]
 		bool IDictionary<TKey, TValue>.ContainsKey(TKey key) => this.BackingDictionary.ContainsKey(key);
 		void IDictionary<TKey, TValue>.Add(TKey key, TValue value) => this.BackingDictionary.Add(key, value);

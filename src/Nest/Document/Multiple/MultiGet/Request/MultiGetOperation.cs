@@ -40,8 +40,6 @@ namespace Nest
 
 
 		public object Document { get; set; }
-
-		public IDictionary<Field, string> PerFieldAnalyzer { get; set; }
 	}
 
 	public class MultiGetOperationDescriptor<T> : IMultiGetOperation

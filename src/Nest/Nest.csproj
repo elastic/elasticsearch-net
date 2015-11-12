@@ -109,6 +109,7 @@
     <Compile Include="Analysis\Tokenizers\Tokenizers.cs" />
     <Compile Include="Cluster\ClusterHealth.cs" />
     <Compile Include="Cluster\ClusterHealth\ClusterHealthResponse.cs" />
+    <Compile Include="CommonAbstractions\DictionaryLike\PerFieldAnalyzer\PerFieldAnalyzer.cs" />
     <Compile Include="CommonAbstractions\Fluent\DescriptorBase.cs" />
     <Compile Include="CommonAbstractions\Fluent\Promise\DescriptorPromiseBase.cs" />
     <Compile Include="CommonAbstractions\Infer\DocumentPath\DocumentPath.cs" />
@@ -293,7 +294,7 @@
     <Compile Include="QueryDsl\QueryDescriptorBase.cs" />
     <Compile Include="QueryDsl\Span\Containing\SpanContainingQuery.cs" />
     <Compile Include="QueryDsl\Span\Within\SpanWithinQuery.cs" />
-    <Compile Include="QueryDsl\Specialized\MoreLikeThis\Like\ILikeDocument.cs" />
+    <Compile Include="QueryDsl\Specialized\MoreLikeThis\Like\Like.cs" />
     <Compile Include="QueryDsl\Specialized\MoreLikeThis\Like\LikeDocument.cs" />
     <Compile Include="Aggregations\AggregationsHelper.cs" />
     <Compile Include="Aggregations\Bucket\SignificantTerms\Heuristics\ScriptedHeuristic.cs" />
