@@ -104,7 +104,7 @@ namespace Nest
 			a.Properties = a.Properties ?? new Properties();
 			var autoProperties = new PropertyWalker(typeof(TChild), visitor).GetProperties();
 			foreach (var autoProperty in autoProperties)
-				a.Properties[autoProperty] = autoProperty.Value;
+				a.Properties[autoProperty.Key] = autoProperty.Value;
 		});
 	}
 }

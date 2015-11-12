@@ -57,16 +57,16 @@ namespace Nest
 		private IProperty GetProperty(PropertyInfo propertyInfo, ElasticsearchPropertyAttribute attribute)
 		{
 			var property = _visitor.Visit(propertyInfo, attribute);
-			if (property != null)
-				return property;
+			if (property == null)
+			{
+				if (propertyInfo.GetGetMethod().IsStatic)
+					return null;
 
-			if (propertyInfo.GetGetMethod().IsStatic)
-				return null;
+				if (attribute != null)
+					property = attribute.ToProperty();
 
-			if (attribute != null)
-				property = attribute.ToProperty();
-
-			property = InferProperty(propertyInfo.PropertyType);
+				property = InferProperty(propertyInfo.PropertyType);
+			}
 
 			var objectProperty = property as IObjectProperty;
 			if (objectProperty != null)
