@@ -62,8 +62,8 @@ namespace CodeGeneration.LowLevelClient.Domain
 		private bool IsPartless => this.Url.Parts == null || !this.Url.Parts.Any();
 
 		private string MetricPrefix => this.RequestType.Replace("Request", "");
-		private string ClrParamType(string clrType) => clrType.EndsWith("Metrics", StringComparison.OrdinalIgnoreCase) 
-			?  this.MetricPrefix + clrType.Replace("Metrics", "Metric") : clrType;
+		private string ClrParamType(string clrType) => clrType.EndsWith("Metrics", StringComparison.OrdinalIgnoreCase)
+			? this.MetricPrefix + clrType.Replace("Metrics", "Metric") : clrType;
 
 		public IEnumerable<Constructor> RequestConstructors()
 		{
@@ -252,10 +252,10 @@ namespace CodeGeneration.LowLevelClient.Domain
 				if (paramName == "fields" && p.Type == "list")
 				{
 					code = $"public {returnType} Fields<T>(params Expression<Func<T, object>>[] fields) ";
-					code += "=> Assign(a => a.RouteValues.Optional(\"fields\", (FieldNames)fields));";
+					code += "=> Assign(a => a.RouteValues.Optional(\"fields\", (Fields)fields));";
 					xmlDoc = $"///<summary>{p.Description}</summary>";
 					setters.Add(new FluentRouteSetter { Code = code, XmlDoc = xmlDoc });
-                }
+				}
 			}
 			return setters;
 		}
