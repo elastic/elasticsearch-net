@@ -112,8 +112,8 @@ namespace Nest
 		//TODO map source of union bool/SourceFileter
 		public InnerHitsDescriptor<T> Source(bool include = true) => _assign(a => a.Source = !include ? SourceFilter.ExcludeAll : null);
 
-		public InnerHitsDescriptor<T> Source(Func<SearchSourceDescriptor<T>, SearchSourceDescriptor<T>> sourceSelector) =>
-			_assign(a => a.Source = sourceSelector?.Invoke(new SearchSourceDescriptor<T>()));
+		public InnerHitsDescriptor<T> Source(Func<SourceFilterDescriptor<T>, SourceFilterDescriptor<T>> sourceSelector) =>
+			_assign(a => a.Source = sourceSelector?.Invoke(new SourceFilterDescriptor<T>()));
 		
 		//TODO ScriptFileds needs an encapsulated descriptor
 		public InnerHitsDescriptor<T> ScriptFields(

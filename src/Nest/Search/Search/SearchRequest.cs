@@ -276,8 +276,8 @@ namespace Nest
 
 		public SearchDescriptor<T> Source(bool include = true)=> Assign(a => a.Source = !include ? SourceFilter.ExcludeAll : null);
 		
-		public SearchDescriptor<T> Source(Func<SearchSourceDescriptor<T>, SearchSourceDescriptor<T>> sourceSelector) =>
-			Assign(a => a.Source = sourceSelector?.Invoke(new SearchSourceDescriptor<T>()));
+		public SearchDescriptor<T> Source(Func<SourceFilterDescriptor<T>, SourceFilterDescriptor<T>> sourceSelector) =>
+			Assign(a => a.Source = sourceSelector?.Invoke(new SourceFilterDescriptor<T>()));
 
 		/// <summary>
 		/// The number of hits to return. Defaults to 10. When using scroll search type 

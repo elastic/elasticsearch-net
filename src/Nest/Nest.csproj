@@ -762,7 +762,7 @@
     <Compile Include="Indices\IndexManagement\DeleteIndex\DeleteIndexRequest.cs" />
     <Compile Include="Indices\StatusManagement\Flush\FlushRequest.cs" />
     <Compile Include="Indices\MappingManagement\GetMapping\GetMappingRequest.cs" />
-    <Compile Include="Search\Search\SourceFiltering\SearchSource.cs" />
+    <Compile Include="Search\Search\SourceFiltering\SourceFilter.cs" />
     <Compile Include="Document\Single\TermVectors\TermVectorsRequest.cs" />
     <Compile Include="Search\Percolator\UnregisterPercolator\UnregisterPercolatorRequest.cs" />
     <Compile Include="Indices\IndexSettings\IndexTemplates\DeleteIndexTemplate\DeleteIndexTemplateRequest.cs" />

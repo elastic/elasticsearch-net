@@ -97,8 +97,8 @@ namespace Nest
 		public TopHitsAggregationDescriptor<T> Source(bool include = true) =>
 			Assign(a => a.Source = !include ? SourceFilter.ExcludeAll : null);
 
-		public TopHitsAggregationDescriptor<T> Source(Func<SearchSourceDescriptor<T>, ISourceFilter> sourceSelector) =>
-			Assign(a => a.Source = sourceSelector?.Invoke(new SearchSourceDescriptor<T>()));
+		public TopHitsAggregationDescriptor<T> Source(Func<SourceFilterDescriptor<T>, ISourceFilter> sourceSelector) =>
+			Assign(a => a.Source = sourceSelector?.Invoke(new SourceFilterDescriptor<T>()));
 
 		public TopHitsAggregationDescriptor<T> Highlight(Func<HighlightDescriptor<T>, IHighlight> highlightSelector) =>
 			Assign(a => a.Highlight = highlightSelector?.Invoke(new HighlightDescriptor<T>()));
