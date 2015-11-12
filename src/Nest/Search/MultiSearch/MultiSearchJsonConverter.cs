@@ -28,11 +28,11 @@ namespace Nest
 
 			foreach (var operation in request.Operations.Values)
 			{
-				var index = (request.Index != null && !request.Index.Equals(operation.Index))
+				var index = (request.Index == null || !request.Index.Equals(operation.Index))
 					? operation.Index
 					: null;
 
-				var type = (request.Type != null && !request.Type.Equals(operation.Type))
+				var type = (request.Type == null || !request.Type.Equals(operation.Type))
 					? operation.Type
 					: null;
 
