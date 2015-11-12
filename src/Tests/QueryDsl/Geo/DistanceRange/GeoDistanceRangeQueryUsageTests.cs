@@ -55,7 +55,7 @@ namespace Tests.QueryDsl.Geo.DistanceRange
 			.GeoDistanceRange(g=>g
 				.Boost(1.1)
 				.Name("named_query")
-				.OnField(p=>p.Location)
+				.Field(p=>p.Location)
 				.DistanceType(GeoDistanceType.Arc)
 				.Coerce()
 				.From(200, GeoPrecision.Kilometers)

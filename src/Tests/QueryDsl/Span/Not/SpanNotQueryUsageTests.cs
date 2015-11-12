@@ -52,10 +52,10 @@ namespace Tests.QueryDsl.Joining.SpanNot
 				.Post(13)
 				.Pre(14)
 				.Include(i=>i
-					.SpanTerm(st=>st.OnField("field1").Value("hoya"))
+					.SpanTerm(st=>st.Field("field1").Value("hoya"))
 				)
 				.Exclude(e=>e
-					.SpanTerm(st=>st.OnField("field1").Value("hoya2"))
+					.SpanTerm(st=>st.Field("field1").Value("hoya2"))
 				)
 			);
 	}

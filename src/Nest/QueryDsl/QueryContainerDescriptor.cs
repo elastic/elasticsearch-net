@@ -84,13 +84,13 @@ namespace Nest
 		/// A query that match on any (configurable) of the provided terms. This is a simpler syntax query for using a bool query with several term queries in the should clauses.
 		/// </summary>
 		public QueryContainer Terms(string field, IEnumerable<string> terms) =>
-			this.Terms(t => t.OnField(field).Terms(terms));
+			this.Terms(t => t.Field(field).Terms(terms));
 
 		/// <summary>
 		/// A query that match on any (configurable) of the provided terms. This is a simpler syntax query for using a bool query with several term queries in the should clauses.
 		/// </summary>
 		public QueryContainer Terms<K>(Expression<Func<T, object>> objectPath, IEnumerable<K> terms) =>
-			this.Terms<K>(t => t.OnField(objectPath).Terms(terms));
+			this.Terms<K>(t => t.Field(objectPath).Terms(terms));
 
 		/// <summary>
 		/// A query that match on any (configurable) of the provided terms. This is a simpler syntax query for using a bool query with several term queries in the should clauses.
@@ -102,7 +102,7 @@ namespace Nest
 		/// A query that match on any (configurable) of the provided terms. This is a simpler syntax query for using a bool query with several term queries in the should clauses.
 		/// </summary>
 		public QueryContainer Terms(Expression<Func<T, object>> objectPath, IEnumerable<string> terms) =>
-			this.Terms(t => t.OnField(objectPath).Terms(terms));
+			this.Terms(t => t.Field(objectPath).Terms(terms));
 		/// <summary>
 		/// A query that match on any (configurable) of the provided terms. This is a simpler syntax query for using a bool query with several term queries in the should clauses.
 		/// </summary>
@@ -363,7 +363,7 @@ namespace Nest
 		{
 			return this.Term(t =>
 			{
-				t.OnField(fieldDescriptor).Value(value);
+				t.Field(fieldDescriptor).Value(value);
 				if (Boost.HasValue)
 					t.Boost(Boost.Value);
 				return t;
@@ -378,7 +378,7 @@ namespace Nest
 		{
 			return this.Term(t =>
 			{
-				t.OnField(fieldDescriptor).Value(value);
+				t.Field(fieldDescriptor).Value(value);
 				if (Boost.HasValue)
 					t.Boost(Boost.Value);
 				return t;
@@ -393,7 +393,7 @@ namespace Nest
 		{
 			return this.Term(t =>
 			{
-				t.OnField(field).Value(value);
+				t.Field(field).Value(value);
 				if (Boost.HasValue)
 					t.Boost(Boost.Value);
 				return t;
@@ -418,7 +418,7 @@ namespace Nest
 		{
 			return this.Wildcard(t =>
 			{
-				t.OnField(fieldDescriptor).Value(value);
+				t.Field(fieldDescriptor).Value(value);
 				if (Boost.HasValue) t.Boost(Boost.Value);
 				if (Rewrite.HasValue) t.Rewrite(Rewrite.Value);
 				return t;
@@ -436,7 +436,7 @@ namespace Nest
 		{
 			return this.Wildcard(t =>
 			{
-				t.OnField(field).Value(value);
+				t.Field(field).Value(value);
 				if (Boost.HasValue) t.Boost(Boost.Value);
 				if (Rewrite.HasValue) t.Rewrite(Rewrite.Value);
 				return t;
@@ -461,7 +461,7 @@ namespace Nest
 		{
 			return this.Prefix(t =>
 			{
-				t.OnField(fieldDescriptor).Value(value);
+				t.Field(fieldDescriptor).Value(value);
 				if (Boost.HasValue) t.Boost(Boost.Value);
 				if (Rewrite.HasValue) t.Rewrite(Rewrite.Value);
 				return t;
@@ -476,7 +476,7 @@ namespace Nest
 		{
 			return this.Prefix(t =>
 			{
-				t.OnField(field).Value(value);
+				t.Field(field).Value(value);
 				if (Boost.HasValue) t.Boost(Boost.Value);
 				if (Rewrite.HasValue) t.Rewrite(Rewrite.Value);
 				return t;
@@ -505,7 +505,7 @@ namespace Nest
 		{
 			return this.SpanTerm(t =>
 			{
-				t.OnField(fieldDescriptor).Value(value);
+				t.Field(fieldDescriptor).Value(value);
 				if (Boost.HasValue) t.Boost(Boost.Value);
 				return t;
 			});
@@ -518,7 +518,7 @@ namespace Nest
 		{
 			return this.SpanTerm(t =>
 			{
-				t.OnField(field).Value(value);
+				t.Field(field).Value(value);
 				if (Boost.HasValue) t.Boost(Boost.Value);
 				return t;
 			});

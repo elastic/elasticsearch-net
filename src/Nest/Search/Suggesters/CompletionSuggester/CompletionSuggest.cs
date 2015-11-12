@@ -42,13 +42,13 @@ namespace Nest
 			return this;
 		}
 
-		public CompletionSuggestDescriptor<T> OnField(string field)
+		public CompletionSuggestDescriptor<T> Field(string field)
 		{
 			Self.Field = field;
 			return this;
 		}
 
-		public CompletionSuggestDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
+		public CompletionSuggestDescriptor<T> Field(Expression<Func<T, object>> objectPath)
 		{
 			Self.Field = objectPath;
 			return this;

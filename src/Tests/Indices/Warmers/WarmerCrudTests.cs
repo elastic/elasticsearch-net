@@ -44,7 +44,7 @@ namespace Tests.Indices.Warmers
 			.Search<Project>(s => s
 				.Query(q => q
 					.Match(m => m
-						.OnField(p => p.Name)
+						.Field(p => p.Name)
 						.Query("NEST")
 					)
 				)

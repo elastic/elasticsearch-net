@@ -370,6 +370,7 @@
     <Compile Include="QueryDsl\Span\Or\SpanOrQueryUsageTests.cs" />
     <Compile Include="QueryDsl\Span\Term\SpanTermQueryUsageTests.cs" />
     <Compile Include="QueryDsl\Span\Within\SpanWithinQueryUsageTests.cs" />
+    <Compile Include="QueryDsl\Specialized\MoreLikeThis\MoreLikeThisQueryUsageTests.cs" />
     <Compile Include="Search\Count\CountUrlTests.cs" />
     <Compile Include="Search\Count\CountApiTests.cs" />
     <Compile Include="Search\Explain\ExplainUrlTests.cs" />
@@ -450,7 +451,6 @@
   <ItemGroup>
     <Folder Include="Migration\" />
     <Folder Include="Plugins\Analysis\Phonetic\" />
-    <Folder Include="QueryDsl\Specialized\MoreLikeThis\" />
     <Folder Include="Setup\" />
   </ItemGroup>
   <ItemGroup>

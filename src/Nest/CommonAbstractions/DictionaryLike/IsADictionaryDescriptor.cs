@@ -6,7 +6,9 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	public interface IIsADictionary<TKey, TValue> : IDictionary<TKey, TValue>, IDictionary, IHasADictionary
+	public interface IIsADictionary { }
+
+	public interface IIsADictionary<TKey, TValue> : IDictionary<TKey, TValue>, IDictionary, IIsADictionary
 	{
 		
 	}

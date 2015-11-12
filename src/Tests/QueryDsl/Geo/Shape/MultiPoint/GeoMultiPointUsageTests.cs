@@ -36,7 +36,7 @@ namespace Tests.QueryDsl.Geo.Shape.MultiPoint
 			.GeoShapeMultiPoint(c => c
 				.Name("named_query")
 				.Boost(1.1)
-				.OnField(p=>p.Location)
+				.Field(p=>p.Location)
 				.Coordinates(this._coordinates)
 			);
 	}

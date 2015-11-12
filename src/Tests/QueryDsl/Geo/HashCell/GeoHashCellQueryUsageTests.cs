@@ -41,7 +41,7 @@ namespace Tests.QueryDsl.Geo.HashCell
 			.GeoHashCell(c => c
 				.Name("named_query")
 				.Boost(1.1)
-				.OnField(p=>p.Location)
+				.Field(p=>p.Location)
 				.Location(new GeoLocation(13.4080, 52.5186))
 				.Neighbors()
 				.Precision(GeoDistance.Meters(3))

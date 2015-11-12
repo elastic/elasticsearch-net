@@ -49,7 +49,7 @@ namespace Tests.QueryDsl.Geo.Distance
 			.GeoDistance(g=>g
 				.Boost(1.1)
 				.Name("named_query")
-				.OnField(p=>p.Location)
+				.Field(p=>p.Location)
 				.DistanceType(GeoDistanceType.Arc)
 				.Coerce()
 				.Location(34, -34)

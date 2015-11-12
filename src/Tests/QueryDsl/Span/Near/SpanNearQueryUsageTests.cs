@@ -50,9 +50,9 @@ namespace Tests.QueryDsl.Joining.SpanNear
 				.Name("named_query")
 				.Boost(1.1)
 				.Clauses(
-					c=>c.SpanTerm(st=>st.OnField("field").Value("value1")),
-					c=>c.SpanTerm(st=>st.OnField("field").Value("value2")),
-					c=>c.SpanTerm(st=>st.OnField("field").Value("value3"))
+					c=>c.SpanTerm(st=>st.Field("field").Value("value1")),
+					c=>c.SpanTerm(st=>st.Field("field").Value("value2")),
+					c=>c.SpanTerm(st=>st.Field("field").Value("value3"))
 				)
 				.Slop(12)
 				.InOrder(false)

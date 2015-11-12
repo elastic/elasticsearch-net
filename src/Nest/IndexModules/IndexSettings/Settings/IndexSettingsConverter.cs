@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -7,7 +8,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Nest
 {
-	internal class IndexSettingsConverter : JsonConverter
+	internal class IndexSettingsConverter : VerbatimDictionaryKeysJsonConverter
 	{
 		public override bool CanRead => true;
 		public override bool CanWrite => true;
@@ -15,80 +16,78 @@ namespace Nest
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-			var ds = value as IDynamicIndexSettings;
+			var ds = value as IDynamicIndexSettings ?? (value as IUpdateIndexSettingsRequest)?.IndexSettings;
+			;
 			if (ds == null) return;
 
-			var wrapDictionary = (ds as IHasADictionary);
-			if (wrapDictionary == null) return;
-			var dict = wrapDictionary?.Dictionary ?? new Dictionary<string, object>();
+			IDictionary d = ds;
 
-			dict[UpdatableIndexSettings.NumberOfReplicas] = ds.NumberOfReplicas;
-			dict[UpdatableIndexSettings.AutoExpandReplicas] = ds.AutoExpandReplicas;
-			dict[UpdatableIndexSettings.RefreshInterval] = ds.RefreshInterval;
-			dict[UpdatableIndexSettings.BlocksReadOnly] = ds.BlocksReadOnly;
-			dict[UpdatableIndexSettings.BlocksRead] = ds.BlocksRead;
-			dict[UpdatableIndexSettings.BlocksWrite] = ds.BlocksWrite;
-			dict[UpdatableIndexSettings.BlocksMetadata] = ds.BlocksMetadata;
-			dict[UpdatableIndexSettings.Priority] = ds.Priority;
-			dict[UpdatableIndexSettings.WarmersEnabled] = ds.WarmersEnabled;
-			dict[UpdatableIndexSettings.RequestCacheEnable] = ds.RequestCacheEnabled;
-			dict[UpdatableIndexSettings.RecoveryInitialShards] = ds.RecoveryInitialShards;
-			dict[UpdatableIndexSettings.RoutingAllocationTotalShardsPerNode] =
+			d[UpdatableIndexSettings.NumberOfReplicas] = ds.NumberOfReplicas;
+			d[UpdatableIndexSettings.AutoExpandReplicas] = ds.AutoExpandReplicas;
+			d[UpdatableIndexSettings.RefreshInterval] = ds.RefreshInterval;
+			d[UpdatableIndexSettings.BlocksReadOnly] = ds.BlocksReadOnly;
+			d[UpdatableIndexSettings.BlocksRead] = ds.BlocksRead;
+			d[UpdatableIndexSettings.BlocksWrite] = ds.BlocksWrite;
+			d[UpdatableIndexSettings.BlocksMetadata] = ds.BlocksMetadata;
+			d[UpdatableIndexSettings.Priority] = ds.Priority;
+			d[UpdatableIndexSettings.WarmersEnabled] = ds.WarmersEnabled;
+			d[UpdatableIndexSettings.RequestCacheEnable] = ds.RequestCacheEnabled;
+			d[UpdatableIndexSettings.RecoveryInitialShards] = ds.RecoveryInitialShards;
+			d[UpdatableIndexSettings.RoutingAllocationTotalShardsPerNode] =
 				ds.RoutingAllocationTotalShardsPerNode;
-			dict[UpdatableIndexSettings.UnassignedNodeLeftDelayedTimeout] = ds.UnassignedNodeLeftDelayedTimeout;
+			d[UpdatableIndexSettings.UnassignedNodeLeftDelayedTimeout] = ds.UnassignedNodeLeftDelayedTimeout;
 
 			var translog = ds.Translog;
-			dict[UpdatableIndexSettings.TranslogSyncInterval] = translog?.SyncInterval;
-			dict[UpdatableIndexSettings.TranslogDurability] = translog?.Durability;
-			dict[UpdatableIndexSettings.TranslogFsType] = translog?.FileSystemType;
+			d[UpdatableIndexSettings.TranslogSyncInterval] = translog?.SyncInterval;
+			d[UpdatableIndexSettings.TranslogDurability] = translog?.Durability;
+			d[UpdatableIndexSettings.TranslogFsType] = translog?.FileSystemType;
 
 			var flush = ds.Translog?.Flush;
-			dict[UpdatableIndexSettings.TranslogFlushThresholdSize] = flush?.ThresholdSize;
-			dict[UpdatableIndexSettings.TranslogFlushTreshHoldOps] = flush?.ThresholdOps;
-			dict[UpdatableIndexSettings.TranslogFlushThresholdPeriod] = flush?.ThresholdPeriod;
-			dict[UpdatableIndexSettings.TranslogInterval] = flush?.Interval;
+			d[UpdatableIndexSettings.TranslogFlushThresholdSize] = flush?.ThresholdSize;
+			d[UpdatableIndexSettings.TranslogFlushTreshHoldOps] = flush?.ThresholdOps;
+			d[UpdatableIndexSettings.TranslogFlushThresholdPeriod] = flush?.ThresholdPeriod;
+			d[UpdatableIndexSettings.TranslogInterval] = flush?.Interval;
 
-			dict[UpdatableIndexSettings.MergePolicyExpungeDeletesAllowed] = ds.Merge?.Policy.ExpungeDeletesAllowed;
-			dict[UpdatableIndexSettings.MergePolicyFloorSegment] = ds.Merge?.Policy.FloorSegment;
-			dict[UpdatableIndexSettings.MergePolicyMaxMergeAtOnce] = ds.Merge?.Policy.MaxMergeAtOnce;
-			dict[UpdatableIndexSettings.MergePolicyMaxMergeAtOnceExplicit] = ds.Merge?.Policy.MaxMergeAtOnceExplicit;
-			dict[UpdatableIndexSettings.MergePolicyMaxMergedSegment] = ds.Merge?.Policy.MaxMergedSegment;
-			dict[UpdatableIndexSettings.MergePolicySegmentsPerTier] = ds.Merge?.Policy.SegmentsPerTier;
-			dict[UpdatableIndexSettings.MergePolicyReclaimDeletesWeight] = ds.Merge?.Policy.ReclaimDeletesWeight;
+			d[UpdatableIndexSettings.MergePolicyExpungeDeletesAllowed] = ds.Merge?.Policy.ExpungeDeletesAllowed;
+			d[UpdatableIndexSettings.MergePolicyFloorSegment] = ds.Merge?.Policy.FloorSegment;
+			d[UpdatableIndexSettings.MergePolicyMaxMergeAtOnce] = ds.Merge?.Policy.MaxMergeAtOnce;
+			d[UpdatableIndexSettings.MergePolicyMaxMergeAtOnceExplicit] = ds.Merge?.Policy.MaxMergeAtOnceExplicit;
+			d[UpdatableIndexSettings.MergePolicyMaxMergedSegment] = ds.Merge?.Policy.MaxMergedSegment;
+			d[UpdatableIndexSettings.MergePolicySegmentsPerTier] = ds.Merge?.Policy.SegmentsPerTier;
+			d[UpdatableIndexSettings.MergePolicyReclaimDeletesWeight] = ds.Merge?.Policy.ReclaimDeletesWeight;
 
-			dict[UpdatableIndexSettings.MergeSchedulerMaxThreadCount] = ds.Merge?.Scheduler?.MaxThreadCount;
-			dict[UpdatableIndexSettings.MergeSchedulerAutoThrottle] = ds.Merge?.Scheduler?.AutoThrottle;
+			d[UpdatableIndexSettings.MergeSchedulerMaxThreadCount] = ds.Merge?.Scheduler?.MaxThreadCount;
+			d[UpdatableIndexSettings.MergeSchedulerAutoThrottle] = ds.Merge?.Scheduler?.AutoThrottle;
 
 			var log = ds.SlowLog;
 			var search = log?.Search;
 			var indexing = log?.Indexing;
 
-			dict[UpdatableIndexSettings.SlowlogSearchThresholdQueryWarn] = search?.Query?.ThresholdWarn;
-			dict[UpdatableIndexSettings.SlowlogSearchThresholdQueryInfo] = search?.Query?.ThresholdInfo;
-			dict[UpdatableIndexSettings.SlowlogSearchThresholdQueryDebug] = search?.Query?.ThresholdDebug;
-			dict[UpdatableIndexSettings.SlowlogSearchThresholdQueryTrace] = search?.Query?.ThresholdTrace;
+			d[UpdatableIndexSettings.SlowlogSearchThresholdQueryWarn] = search?.Query?.ThresholdWarn;
+			d[UpdatableIndexSettings.SlowlogSearchThresholdQueryInfo] = search?.Query?.ThresholdInfo;
+			d[UpdatableIndexSettings.SlowlogSearchThresholdQueryDebug] = search?.Query?.ThresholdDebug;
+			d[UpdatableIndexSettings.SlowlogSearchThresholdQueryTrace] = search?.Query?.ThresholdTrace;
 
-			dict[UpdatableIndexSettings.SlowlogSearchThresholdFetchWarn] = search?.Fetch?.ThresholdWarn;
-			dict[UpdatableIndexSettings.SlowlogSearchThresholdFetchInfo] = search?.Fetch?.ThresholdInfo;
-			dict[UpdatableIndexSettings.SlowlogSearchThresholdFetchDebug] = search?.Fetch?.ThresholdDebug;
-			dict[UpdatableIndexSettings.SlowlogSearchThresholdFetchTrace] = search?.Fetch?.ThresholdTrace;
-			dict[UpdatableIndexSettings.SlowlogSearchLevel] = search?.LogLevel;
+			d[UpdatableIndexSettings.SlowlogSearchThresholdFetchWarn] = search?.Fetch?.ThresholdWarn;
+			d[UpdatableIndexSettings.SlowlogSearchThresholdFetchInfo] = search?.Fetch?.ThresholdInfo;
+			d[UpdatableIndexSettings.SlowlogSearchThresholdFetchDebug] = search?.Fetch?.ThresholdDebug;
+			d[UpdatableIndexSettings.SlowlogSearchThresholdFetchTrace] = search?.Fetch?.ThresholdTrace;
+			d[UpdatableIndexSettings.SlowlogSearchLevel] = search?.LogLevel;
 
-			dict[UpdatableIndexSettings.SlowlogIndexingThresholdFetchWarn] = indexing?.ThresholdWarn;
-			dict[UpdatableIndexSettings.SlowlogIndexingThresholdFetchInfo] = indexing?.ThresholdInfo;
-			dict[UpdatableIndexSettings.SlowlogIndexingThresholdFetchDebug] = indexing?.ThresholdDebug;
-			dict[UpdatableIndexSettings.SlowlogIndexingThresholdFetchTrace] = indexing?.ThresholdTrace;
-			dict[UpdatableIndexSettings.SlowlogIndexingLevel] = indexing?.LogLevel;
-			dict[UpdatableIndexSettings.SlowlogIndexingSource] = indexing?.Source;
+			d[UpdatableIndexSettings.SlowlogIndexingThresholdFetchWarn] = indexing?.ThresholdWarn;
+			d[UpdatableIndexSettings.SlowlogIndexingThresholdFetchInfo] = indexing?.ThresholdInfo;
+			d[UpdatableIndexSettings.SlowlogIndexingThresholdFetchDebug] = indexing?.ThresholdDebug;
+			d[UpdatableIndexSettings.SlowlogIndexingThresholdFetchTrace] = indexing?.ThresholdTrace;
+			d[UpdatableIndexSettings.SlowlogIndexingLevel] = indexing?.LogLevel;
+			d[UpdatableIndexSettings.SlowlogIndexingSource] = indexing?.Source;
 
 
 			var indexSettings = value as IIndexSettings;
-			dict["index.number_of_shards"] = indexSettings?.NumberOfShards;
-			dict["index.store.type"] = indexSettings?.FileSystemStorageImplementation;
+			d["index.number_of_shards"] = indexSettings?.NumberOfShards;
+			d["index.store.type"] = indexSettings?.FileSystemStorageImplementation;
 
-			dict["analysis"] = ds.Analysis;
-			serializer.Serialize(writer, dict);
-
+			d["analysis"] = ds.Analysis;
+			base.WriteJson(writer, d, serializer);
 		}
 
 
@@ -191,6 +190,8 @@ namespace Nest
 			Set<int?>(settings, "index.number_of_shards", v => s.NumberOfShards = v);
 			Set<FileSystemStorageImplementation?>(settings, "index.store.type", v => s.FileSystemStorageImplementation = v,
 				serializer);
+
+			IDictionary dict = s;
 			foreach (var kv in settings)
 			{
 				var setting = kv.Value;
@@ -198,18 +199,17 @@ namespace Nest
 					s.Analysis = setting.Value.Value<JObject>().ToObject<Analysis>(serializer);
 				else
 				{
-					((IHasADictionary) s).Dictionary.Add(kv.Key, serializer.Deserialize(kv.Value.Value.CreateReader()));
+					dict?.Add(kv.Key, serializer.Deserialize(kv.Value.Value.CreateReader()));
 				}
 			}
 		}
 
-		public bool Set<T>(IDictionary<string, JProperty> settings, string key, Action<T> assign, JsonSerializer serializer = null)
+		private static void Set<T>(IDictionary<string, JProperty> settings, string key, Action<T> assign, JsonSerializer serializer = null)
 		{
-			if (!settings.ContainsKey(key)) return false;
+			if (!settings.ContainsKey(key)) return;
 			var v = settings[key];
 			assign(serializer == null ? v.Value.ToObject<T>() : v.Value.ToObject<T>(serializer));
 			settings.Remove(key);
-			return true;
 		}
 	}
 }

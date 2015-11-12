@@ -53,7 +53,7 @@ namespace Tests.Search.Explain
 		protected override Func<ExplainDescriptor<Project>, IExplainRequest<Project>> Fluent => e => e
 			.Query(q => q
 				.Match(m => m
-					.OnField(p => p.Name)
+					.Field(p => p.Name)
 					.Query("NEST")
 				)
 			);

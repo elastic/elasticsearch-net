@@ -61,7 +61,7 @@ namespace Tests.QueryDsl.FullText.MultiMatch
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
 			.MultiMatch(c => c
-				.OnFields(f => f.Field(p=>p.Description).Field("myOtherField"))
+				.Fields(f => f.Field(p=>p.Description).Field("myOtherField"))
 				.Query("hello world")
 				.Analyzer("standard")
 				.Boost(1.1)

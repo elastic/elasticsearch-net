@@ -100,7 +100,7 @@ namespace Nest
 
 		QueryContainer IHighlight.HighlightQuery { get; set; }
 
-		public HighlightDescriptor<T> OnFields(params Func<HighlightFieldDescriptor<T>, IHighlightField>[] fieldHighlighters) =>
+		public HighlightDescriptor<T> Fields(params Func<HighlightFieldDescriptor<T>, IHighlightField>[] fieldHighlighters) =>
 			_assign(a => a.Fields = fieldHighlighters?
 				.Select(f =>
 					f(new HighlightFieldDescriptor<T>())

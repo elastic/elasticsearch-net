@@ -37,7 +37,7 @@ namespace Tests.QueryDsl.Joining.SpanTerm
 			.SpanTerm(c => c
 				.Name("named_query")
 				.Boost(1.1)
-				.OnField("user")
+				.Field("user")
 				.Value("kimchy")
 			);
 	}

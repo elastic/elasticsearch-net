@@ -9,6 +9,7 @@ using Tests.Framework.Integration;
 using Tests.Framework.MockData;
 using static Nest.Static;
 using FluentAssertions;
+using System.Linq.Expressions;
 
 namespace Tests.Aggregations.Metric.TopHits
 {
@@ -82,20 +83,26 @@ namespace Tests.Aggregations.Metric.TopHits
 					.Aggregations(aa => aa
 						.TopHits("top_state_hits", th => th
 							.Sort(srt => srt
-								.OnField(p => p.StartedOn)
+								.Field(p => p.StartedOn)
 								.Order(SortOrder.Descending)
 							)
 							.Source(src => src
-								.Include(p => p.Name, p => p.StartedOn)
+								.Include(fs => fs
+									.Field(p => p.Name)
+									.Field(p => p.StartedOn)
+								)
 							)
 							.Size(1)
 							.Version()
 							.Explain()
-							.FielddataFields(p => p.State, p => p.NumberOfCommits)
+							.FielddataFields(fd => fd
+								.Field(p => p.State)
+								.Field(p => p.NumberOfCommits)
+							)
 							.Highlight(h => h
-								.OnFields(
-									hd => hd.OnField(p => p.Tags),
-									hd => hd.OnField(p => p.Description)
+								.Fields(hf => hf
+									.Field(p => p.Tags)
+									.Field(p => p.Description)
 								)
 							)
 							.ScriptFields(sfs => sfs
@@ -126,16 +133,12 @@ namespace Tests.Aggregations.Metric.TopHits
 						},
 						Source = new SourceFilter
 						{
-							Include = new[]
-							{
-								Field<Project>(p => p.Name),
-								Field<Project>(p => p.StartedOn)
-							}
+							Include = new [] { "name", "startedOn" }
 						},
 						Size = 1,
 						Version = true,
 						Explain = true,
-						FielddataFields = new[] { Field<Project>(p => p.State), Field<Project>(p => p.NumberOfCommits) },
+						FielddataFields = new [] { "state", "numberOfCommits" },
 						Highlight = new Highlight
 						{
 							Fields = new Dictionary<Nest.Field, IHighlightField>

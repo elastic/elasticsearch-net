@@ -42,10 +42,10 @@ namespace Tests.QueryDsl.Joining.SpanWithin
 				.Name("named_query")
 				.Boost(1.1)
 				.Little(i=>i
-					.SpanTerm(st=>st.OnField("field1").Value("hoya"))
+					.SpanTerm(st=>st.Field("field1").Value("hoya"))
 				)
 				.Big(e=>e
-					.SpanTerm(st=>st.OnField("field1").Value("hoya2"))
+					.SpanTerm(st=>st.Field("field1").Value("hoya2"))
 				)
 			);
 	}

@@ -110,7 +110,7 @@ namespace Nest
 		Fields IMultiMatchQuery.Fields { get; set; }
 		ZeroTermsQuery? IMultiMatchQuery.ZeroTermsQuery { get; set; }
 
-		public MultiMatchQueryDescriptor<T> OnFields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
+		public MultiMatchQueryDescriptor<T> Fields(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) =>
 			Assign(a => a.Fields = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
 
 		public MultiMatchQueryDescriptor<T> Query(string query) => Assign(a => a.Query = query);

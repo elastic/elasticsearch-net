@@ -37,7 +37,7 @@ namespace Tests.QueryDsl.Geo.Shape.MultiLineString
 			.GeoShapeMultiLineString(c => c
 				.Name("named_query")
 				.Boost(1.1)
-				.OnField(p=>p.Location)
+				.Field(p=>p.Location)
 				.Coordinates(this._coordinates)
 			);
 	}

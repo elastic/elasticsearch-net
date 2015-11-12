@@ -57,12 +57,6 @@ namespace Nest
 			return name;
 		}
 
-		public string Fields(IEnumerable<Field> fields)
-		{
-			if (!fields.HasAny() || fields.All(f=>f.IsConditionless())) return null;
-			return string.Join(",", fields.Select(Field).Where(f => !f.IsNullOrEmpty()));
-		}
-
 		public string PropertyName(PropertyName property)
 		{
 			if (property.IsConditionless())

@@ -68,13 +68,13 @@ namespace Nest
 			return this;
 		}
 
-		public TermSuggestDescriptor<T> OnField(string field)
+		public TermSuggestDescriptor<T> Field(string field)
 		{
 			Self.Field = field;
 			return this;
 		}
 
-		public TermSuggestDescriptor<T> OnField(Expression<Func<T, object>> objectPath)
+		public TermSuggestDescriptor<T> Field(Expression<Func<T, object>> objectPath)
 		{
 			Self.Field = objectPath;
 			return this;

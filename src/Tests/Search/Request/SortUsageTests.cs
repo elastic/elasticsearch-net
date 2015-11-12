@@ -27,11 +27,11 @@ namespace Tests.Search.Request
 
 		protected override Func<SearchDescriptor<Project>, ISearchRequest> Fluent => s => s
 			.Sort(ss => ss
-				.OnField(p => p.StartedOn)
+				.Field(p => p.StartedOn)
 				.Order(SortOrder.Ascending)
 			)
 			.Sort(ss => ss
-				.OnField(p => p.Name)
+				.Field(p => p.Name)
 				.Order(SortOrder.Descending)
 			);
 
