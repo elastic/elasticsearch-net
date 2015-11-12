@@ -35,6 +35,6 @@ namespace Nest
 		public DateRangeExpressionDescriptor To(DateMath to) => Assign(a => a.To = to);
 
 		string IDateRangeExpression.Key { get; set; }
-		public DateRangeExpressionDescriptor From(string key) => Assign(a => a.Key = key);
+		public DateRangeExpressionDescriptor Key(string key) => Assign(a => a.Key = key);
 	}
 }
