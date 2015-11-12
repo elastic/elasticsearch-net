@@ -34,7 +34,7 @@ namespace Nest
 		int? IInnerHits.From { get; set; }
 		int? IInnerHits.Size { get; set; }
 		IList<KeyValuePair<Field, ISort>> IInnerHits.Sort { get; set; }
-		IHighlightRequest IInnerHits.Highlight { get; set; }
+		IHighlight IInnerHits.Highlight { get; set; }
 		bool? IInnerHits.Explain { get; set; }
 		ISourceFilter IInnerHits.Source { get; set; }
 		bool? IInnerHits.Version { get; set; }
@@ -90,7 +90,7 @@ namespace Nest
 		/// <summary>
 		/// Allow to highlight search results on one or more fields. The implementation uses the either lucene fast-vector-highlighter or highlighter. 
 		/// </summary>
-		public GlobalInnerHitDescriptor<T> Highlight(Func<HighlightDescriptor<T>, IHighlightRequest> highlightSelector) =>
+		public GlobalInnerHitDescriptor<T> Highlight(Func<HighlightDescriptor<T>, IHighlight> highlightSelector) =>
 			_assign(a => a.Highlight = highlightSelector?.Invoke(new HighlightDescriptor<T>()));
 		
 		public GlobalInnerHitDescriptor<T> Source(bool include = true)=> _assign(a => a.Source = !include ? SourceFilter.ExcludeAll : null);

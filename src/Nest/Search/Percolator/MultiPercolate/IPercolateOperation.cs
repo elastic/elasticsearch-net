@@ -22,7 +22,7 @@ namespace Nest
 		IDictionary<Field, ISort> Sort { get; set; }
 
 		[JsonProperty(PropertyName = "highlight")]
-		IHighlightRequest Highlight { get; set; }
+		IHighlight Highlight { get; set; }
 
 		[JsonProperty(PropertyName = "query")]
 		QueryContainer Query { get; set; }

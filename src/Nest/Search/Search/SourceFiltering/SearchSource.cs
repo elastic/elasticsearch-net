@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<SourceFilter>))]
 	public interface ISourceFilter
 	{
 		[JsonProperty("include")]

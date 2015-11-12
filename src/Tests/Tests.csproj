@@ -70,6 +70,7 @@
     <Compile Include="Aggregations\Metric\ScriptedMetric\ScriptedMetricAggregationUsageTests.cs" />
     <Compile Include="Aggregations\Metric\Stats\StatsAggregationUsageTests.cs" />
     <Compile Include="Aggregations\Metric\Sum\SumAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Metric\TopHits\TopHitsAggregationUsageTests.cs" />
     <Compile Include="Aggregations\Metric\ValueCount\ValueCountAggregationUsageTests.cs" />
     <Compile Include="Aggregations\Pipeline\BucketScript\BucketScriptAggregationUsageTests.cs" />
     <Compile Include="Aggregations\Pipeline\BucketSelector\BucketSelectorAggregationUsageTests.cs" />

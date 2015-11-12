@@ -23,7 +23,7 @@ namespace Nest
 		IList<KeyValuePair<Field, ISort>> Sort { get; set; }
 
 		[JsonProperty(PropertyName = "highlight")]
-		IHighlightRequest Highlight { get; set; }
+		IHighlight Highlight { get; set; }
 
 		[JsonProperty(PropertyName = "explain")]
 		bool? Explain { get; set; }
@@ -53,7 +53,7 @@ namespace Nest
 
 		public IList<KeyValuePair<Field, ISort>> Sort { get; set; }
 
-		public IHighlightRequest Highlight { get; set; }
+		public IHighlight Highlight { get; set; }
 
 		public bool? Explain { get; set; }
 
@@ -77,7 +77,7 @@ namespace Nest
 		int? IInnerHits.From { get; set; }
 		int? IInnerHits.Size { get; set; }
 		IList<KeyValuePair<Field, ISort>> IInnerHits.Sort { get; set; }
-		IHighlightRequest IInnerHits.Highlight { get; set; }
+		IHighlight IInnerHits.Highlight { get; set; }
 		bool? IInnerHits.Explain { get; set; }
 		ISourceFilter IInnerHits.Source { get; set; }
 		bool? IInnerHits.Version { get; set; }
@@ -106,7 +106,7 @@ namespace Nest
 		/// <summary>
 		/// Allow to highlight search results on one or more fields. The implementation uses the either lucene fast-vector-highlighter or highlighter. 
 		/// </summary>
-		public InnerHitsDescriptor<T> Highlight(Func<HighlightDescriptor<T>, IHighlightRequest> highlightSelector) =>
+		public InnerHitsDescriptor<T> Highlight(Func<HighlightDescriptor<T>, IHighlight> highlightSelector) =>
 			_assign(a => a.Highlight = highlightSelector?.Invoke(new HighlightDescriptor<T>()));
 		
 		//TODO map source of union bool/SourceFileter

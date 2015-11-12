@@ -19,23 +19,23 @@ namespace Nest
 
 		[JsonProperty("sort")]
 		[JsonConverter(typeof(SortCollectionJsonConverter))]
-		IList<KeyValuePair<Field, ISort>> Sort { get; set; }
+		IList<ISort> Sort { get; set; }
 
 		[JsonProperty("_source")]
 		ISourceFilter Source { get; set; }
 
 		[JsonProperty("highlight")]
-		IHighlightRequest Highlight { get; set; }
+		IHighlight Highlight { get; set; }
 
 		[JsonProperty("explain")]
 		bool? Explain { get; set; }
 
 		[JsonProperty("script_fields")]
-		[JsonConverter(typeof(VerbatimDictionaryKeysJsonConverter))]
-		IDictionary<string, IScriptQuery> ScriptFields { get; set; }
+		[JsonConverter(typeof(ReadAsTypeJsonConverter<ScriptFields>))]
+		IScriptFields ScriptFields { get; set; }
 
 		[JsonProperty("fielddata_fields")]
-		IEnumerable<Field> FieldDataFields { get; set; }
+		IEnumerable<Field> FielddataFields { get; set; }
 
 		[JsonProperty("version")]
 		bool? Version { get; set; }
@@ -45,17 +45,17 @@ namespace Nest
 	{
 		public int? From { get; set; }
 		public int? Size { get; set; }
-		public IList<KeyValuePair<Field, ISort>> Sort { get; set; }
+		public IList<ISort> Sort { get; set; }
 		public ISourceFilter Source { get; set; }
-		public IHighlightRequest Highlight { get; set; }
+		public IHighlight Highlight { get; set; }
 		public bool? Explain { get; set; }
-		public IDictionary<string, IScriptQuery> ScriptFields { get; set; }
-		public IEnumerable<Field> FieldDataFields { get; set; }
+		public IScriptFields ScriptFields { get; set; }
+		public IEnumerable<Field> FielddataFields { get; set; }
 		public bool? Version { get; set; }
 
 		internal TopHitsAggregation() { }
 
-		public TopHitsAggregation(string name, Field field) : base(name, field) { }
+		public TopHitsAggregation(string name) : base(name, null) { }
 
 		internal override void WrapInContainer(AggregationContainer c) => c.TopHits = this;
 	}
@@ -65,22 +65,21 @@ namespace Nest
 			, ITopHitsAggregation
 		where T : class
 	{
-
 		int? ITopHitsAggregation.From { get; set; }
 
 		int? ITopHitsAggregation.Size { get; set; }
 
-		IList<KeyValuePair<Field, ISort>> ITopHitsAggregation.Sort { get; set; }
+		IList<ISort> ITopHitsAggregation.Sort { get; set; }
 
 		ISourceFilter ITopHitsAggregation.Source { get; set; }
 
-		IHighlightRequest ITopHitsAggregation.Highlight { get; set; }
+		IHighlight ITopHitsAggregation.Highlight { get; set; }
 
 		bool? ITopHitsAggregation.Explain { get; set; }
 
-		IDictionary<string, IScriptQuery> ITopHitsAggregation.ScriptFields { get; set; }
+		IScriptFields ITopHitsAggregation.ScriptFields { get; set; }
 
-		IEnumerable<Field> ITopHitsAggregation.FieldDataFields { get; set; }
+		IEnumerable<Field> ITopHitsAggregation.FielddataFields { get; set; }
 
 		bool? ITopHitsAggregation.Version { get; set; }
 
@@ -88,18 +87,12 @@ namespace Nest
 
 		public TopHitsAggregationDescriptor<T> Size(int size) => Assign(a => a.Size = size);
 
-		public TopHitsAggregationDescriptor<T> Sort(Func<SortFieldDescriptor<T>, IFieldSort> sortSelector)
+		public TopHitsAggregationDescriptor<T> Sort(Func<SortFieldDescriptor<T>, IFieldSort> sortSelector) => Assign(a =>
 		{
-			sortSelector.ThrowIfNull("sortSelector");
-
-			if (Self.Sort == null)
-				Self.Sort = new List<KeyValuePair<Field, ISort>>();
-
-			var descriptor = sortSelector(new SortFieldDescriptor<T>());
-			this.Self.Sort.Add(new KeyValuePair<Field, ISort>(descriptor.Field, descriptor));
-
-			return this;
-		}
+			a.Sort = a.Sort ?? new List<ISort>();
+			var sort = sortSelector?.Invoke(new SortFieldDescriptor<T>());
+            if (sort != null) a.Sort.Add(sort);		
+		});
 
 		public TopHitsAggregationDescriptor<T> Source(bool include = true) =>
 			Assign(a => a.Source = !include ? SourceFilter.ExcludeAll : null);
@@ -107,38 +100,19 @@ namespace Nest
 		public TopHitsAggregationDescriptor<T> Source(Func<SearchSourceDescriptor<T>, SearchSourceDescriptor<T>> sourceSelector) =>
 			Assign(a => a.Source = sourceSelector?.Invoke(new SearchSourceDescriptor<T>()));
 
-		public TopHitsAggregationDescriptor<T> Highlight(Func<HighlightDescriptor<T>, HighlightDescriptor<T>> highlightDescriptor) =>
-			Assign(a => a.Highlight = highlightDescriptor?.Invoke(new HighlightDescriptor<T>()));
+		public TopHitsAggregationDescriptor<T> Highlight(Func<HighlightDescriptor<T>, HighlightDescriptor<T>> highlightSelector) =>
+			Assign(a => a.Highlight = highlightSelector?.Invoke(new HighlightDescriptor<T>()));
 
 		public TopHitsAggregationDescriptor<T> Explain(bool explain = true) => Assign(a => a.Explain = explain);
-		
-		//TODO scriptfields needs a better encapsulation (seperate descriptor)
-		public TopHitsAggregationDescriptor<T> ScriptFields(
-			Func<FluentDictionary<string, Func<ScriptQueryDescriptor<T>, ScriptQueryDescriptor<T>>>,
-			 FluentDictionary<string, Func<ScriptQueryDescriptor<T>, ScriptQueryDescriptor<T>>>> scriptFields)
-		{
-			scriptFields.ThrowIfNull("scriptFields");
-			var scriptFieldDescriptors = scriptFields(new FluentDictionary<string, Func<ScriptQueryDescriptor<T>, ScriptQueryDescriptor<T>>>());
-			if (scriptFieldDescriptors == null || scriptFieldDescriptors.All(d => d.Value == null))
-			{
-				Self.ScriptFields = null;
-				return this;
-			}
-			Self.ScriptFields = new FluentDictionary<string, IScriptQuery>();
-			foreach (var d in scriptFieldDescriptors)
-			{
-				if (d.Value == null)
-					continue;
-				Self.ScriptFields.Add(d.Key, d.Value(new ScriptQueryDescriptor<T>()));
-			}
-			return this;
-		}
 
-		public TopHitsAggregationDescriptor<T> FieldDataFields(params Field[] fields) =>
-			Assign(a => a.FieldDataFields = fields);
+		public TopHitsAggregationDescriptor<T> ScriptFields(Func<ScriptFieldsDescriptor, IPromise<IScriptFields>> scriptFieldsSelector) =>
+			Assign(a => a.ScriptFields = scriptFieldsSelector?.Invoke(new ScriptFieldsDescriptor())?.Value);
 
-		public TopHitsAggregationDescriptor<T> FieldDataFields(params Expression<Func<T, object>>[] objectPaths) =>
-			Assign(a => a.FieldDataFields = objectPaths?.Select(e => (Field) e).ToListOrNullIfEmpty());
+		public TopHitsAggregationDescriptor<T> FielddataFields(params Field[] fields) =>
+			Assign(a => a.FielddataFields = fields);
+
+		public TopHitsAggregationDescriptor<T> FielddataFields(params Expression<Func<T, object>>[] objectPaths) =>
+			Assign(a => a.FielddataFields = objectPaths?.Select(e => (Field) e).ToListOrNullIfEmpty());
 
 		public TopHitsAggregationDescriptor<T> Version(bool version = true) => Assign(a => a.Version = version);
 	}

@@ -59,7 +59,7 @@ namespace Tests.Search.Request
 		protected override SearchRequest<Project> Initializer =>
 			new SearchRequest<Project>
 			{
-				Highlight = new HighlightRequest
+				Highlight = new Highlight
 				{
 					PreTags = new[] { "<tag1>" },
 					PostTags = new[] { "</tag1>" },

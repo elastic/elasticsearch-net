@@ -173,6 +173,7 @@
     <Compile Include="CommonOptions\Scripting\IndexedScript.cs" />
     <Compile Include="CommonOptions\Scripting\InlineScript.cs" />
     <Compile Include="CommonOptions\Scripting\Script.cs" />
+    <Compile Include="CommonOptions\Scripting\ScriptFields.cs" />
     <Compile Include="CommonOptions\Scripting\ScriptJsonConverter.cs" />
     <Compile Include="CommonOptions\Stats\QueryCacheStats.cs" />
     <Compile Include="CommonOptions\Stats\RecoveryStats.cs" />
@@ -918,7 +919,7 @@
     <Compile Include="QueryDsl\TermLevel\Terms\TermsQuery.cs" />
     <Compile Include="Document\Single\Update\UpdateRequest.cs" />
     <Compile Include="Document\Single\Update\ElasticClient-Update.cs" />
-    <Compile Include="Search\Search\Highlighting\HighlightRequest.cs" />
+    <Compile Include="Search\Search\Highlighting\Highlight.cs" />
     <Compile Include="Search\Search\Highlighting\HighlightField.cs" />
     <Compile Include="QueryDsl\Compound\Boosting\BoostingQuery.cs" />
     <Compile Include="QueryDsl\Compound\ConstantScore\ConstantScoreQuery.cs" />
