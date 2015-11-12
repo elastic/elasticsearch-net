@@ -12,13 +12,10 @@ namespace Nest
 		Field Field { get; set; }
 
 		[JsonProperty("script")]
-		string Script { get; set; }
+		IScript Script { get; set; }
 
-		[JsonProperty("params")]
-		IDictionary<string, object> Params { get; set; }
-
-		[JsonProperty(PropertyName = "lang")]
-		string Language { get; set; }
+		[JsonProperty("missing")]
+		double? Missing { get; set; }
 	}
 	
 	public abstract class MetricAggregationBase : AggregationBase, IMetricAggregation
@@ -31,9 +28,8 @@ namespace Nest
 		}
 
 		public Field Field { get; set; }
-		public virtual string Script { get; set; }
-		public IDictionary<string, object> Params { get; set; }
-		public string Language { get; set; }
+		public virtual IScript Script { get; set; }
+		public double? Missing { get; set; }
 	}
 
 	public abstract class MetricAggregationDescriptorBase<TMetricAggregation, TMetricAggregationInterface, T> 
@@ -50,22 +46,19 @@ namespace Nest
 
 		Field IMetricAggregation.Field { get; set; }
 		
-		string IMetricAggregation.Script { get; set; }
+		IScript IMetricAggregation.Script { get; set; }
 
-		IDictionary<string, object> IMetricAggregation.Params { get; set; }
-
-		string IMetricAggregation.Language { get; set; }
+		double? IMetricAggregation.Missing { get; set; }
 
 		public TMetricAggregation Field(string field) => Assign(a => a.Field = field);
 
 		public TMetricAggregation Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
 
-		public virtual TMetricAggregation Script(string script) => Assign(a => a.Script = script);
+		public virtual TMetricAggregation Script(string script) => Assign(a => a.Script = (InlineScript)script);
 
-		public TMetricAggregation Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramSelector) =>
-				Assign(a => a.Params = paramSelector?.Invoke(new FluentDictionary<string, object>()));
+		public virtual TMetricAggregation Script(Func<ScriptDescriptor, IScript> scriptSelector) =>
+			Assign(a => a.Script = scriptSelector?.Invoke(new ScriptDescriptor()));
 
-		public TMetricAggregation Language(string language) => Assign(a => a.Language = language);
-
+		public TMetricAggregation Missing(double missing) => Assign(a => a.Missing = missing);
 	}
 }

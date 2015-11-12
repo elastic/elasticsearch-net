@@ -13,9 +13,9 @@ using static Tests.Framework.RoundTripper;
 
 namespace Tests.Aggregations.Bucket.Histogram
 {
-	public class HistogramAggregationUsageTest : AggregationUsageTestBase
+	public class HistogramAggregationUsageTests : AggregationUsageTestBase
 	{
-		public HistogramAggregationUsageTest(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+		public HistogramAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
 		protected override object ExpectJson => new
 		{

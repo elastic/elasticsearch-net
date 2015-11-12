@@ -56,7 +56,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Aggregations\Bucket\DocCountBucket.cs" />
-    <Compile Include="Aggregations\Bucket\GeoDistance\GeoDistanceRange.cs" />
     <Compile Include="Aggregations\Bucket\Sampler\SamplerAggregation.cs" />
     <Compile Include="Aggregations\Bucket\Sampler\SamplerAggregationExecutionHint.cs" />
     <Compile Include="Aggregations\Bucket\SingleBucket.cs" />
@@ -70,6 +69,7 @@
     <Compile Include="Aggregations\Bucket\SignificantTerms\Heuristics\MutualInformationHeuristic.cs" />
     <Compile Include="Aggregations\Bucket\SignificantTerms\Heuristics\PercentageScoreHeuristic.cs" />
     <Compile Include="Aggregations\Aggregation.cs" />
+    <Compile Include="Aggregations\Bucket\Terms\TermsOrder.cs" />
     <Compile Include="Aggregations\Metric\Metric.cs" />
     <Compile Include="Aggregations\Pipeline\BucketSelector\BucketSelectorAggregation.cs" />
     <Compile Include="Aggregations\Pipeline\BucketScript\BucketScriptAggregation.cs" />
@@ -190,8 +190,7 @@
     <Compile Include="CommonOptions\DateMath\DateMathExpression.cs" />
     <Compile Include="CommonOptions\DateMath\DateMathOperation.cs" />
     <Compile Include="Aggregations\Bucket\DateRange\DateRangeExpression.cs" />
-    <Compile Include="CommonOptions\Range\Ip4ExpressionRange.cs" />
-    <Compile Include="CommonOptions\Range\Ip4Range.cs" />
+    <Compile Include="Aggregations\Bucket\IpRange\IpRange.cs" />
     <Compile Include="CommonOptions\Range\Range.cs" />
     <Compile Include="CommonOptions\TimeUnit\TimeUnit.cs" />
     <Compile Include="CommonOptions\TimeUnit\TimeUnitExpression.cs" />
@@ -717,7 +716,7 @@
     <Compile Include="Aggregations\Bucket\GeoHashGrid\GeoHashGridAggregation.cs" />
     <Compile Include="Aggregations\Bucket\Global\GlobalAggregation.cs" />
     <Compile Include="Aggregations\Metric\Percentiles\PercentilesAggregation.cs" />
-    <Compile Include="Aggregations\Bucket\Ipv4Range\Ip4RangeAggregation.cs" />
+    <Compile Include="Aggregations\Bucket\IpRange\IpRangeAggregation.cs" />
     <Compile Include="Aggregations\Metric\ExtendedStats\ExtendedStatsAggregation.cs" />
     <Compile Include="Aggregations\Metric\MetricAggregationBase.cs" />
     <Compile Include="Aggregations\Bucket\Nested\NestedAggregation.cs" />

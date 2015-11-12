@@ -104,7 +104,7 @@ namespace Tests.Framework.Integration
 								.Name(p => p.LeadDeveloper)
 								.Properties(DeveloperProperties)
 							)
-							.GeoShape(g => g.Name(p => p.Location))
+							.GeoPoint(g => g.Name(p => p.Location))
 						)
 					)
 					.Map<CommitActivity>(m => m
@@ -134,11 +134,8 @@ namespace Tests.Framework.Integration
 			.String(s => s.Name(p => p.OnlineHandle).NotAnalyzed())
 			.String(s => s.Name(p => p.Gender).NotAnalyzed())
 			.String(s => s.Name(p => p.FirstName).TermVector(TermVectorOption.WithPositionsOffsetsPayloads))
+			.Ip(s => s.Name(p => p.IPAddress))
 			//.GeoPoint(g=>g.Name(p=>p.Location))
 			;
-
 	}
-
-
-
 }

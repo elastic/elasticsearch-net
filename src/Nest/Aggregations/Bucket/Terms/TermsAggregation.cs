@@ -14,7 +14,7 @@ namespace Nest
 		Field Field { get; set; }
 
 		[JsonProperty("script")]
-		string Script { get; set; }
+		IScript Script { get; set; }
 
 		[JsonProperty("size")]
 		int? Size { get; set; }
@@ -29,7 +29,7 @@ namespace Nest
 		TermsAggregationExecutionHint? ExecutionHint { get; set; }
 
 		[JsonProperty("order")]
-		IDictionary<string, string> Order { get; set; }
+		IList<TermsOrder> Order { get; set; }
 
 		[JsonProperty("include")]
 		TermsIncludeExclude Include { get; set; }
@@ -37,26 +37,30 @@ namespace Nest
 		[JsonProperty("exclude")]
 		TermsIncludeExclude Exclude { get; set; }
 
-		[JsonProperty("params")]
-		IDictionary<string, object> Params { get; set; }
-
 		[JsonProperty("collect_mode")]
 		TermsAggregationCollectMode? CollectMode { get; set; }
+
+		[JsonProperty("show_term_doc_error_count")]
+		bool? ShowTermDocumentCountError { get; set; }
+
+		[JsonProperty("missing")]
+		string Missing { get; set; }
 	}
 
 	public class TermsAggregation : BucketAggregationBase, ITermsAggregation
 	{
 		public Field Field { get; set; }
-		public string Script { get; set; }
+		public IScript Script { get; set; }
 		public int? Size { get; set; }
 		public int? ShardSize { get; set; }
 		public int? MinimumDocumentCount { get; set; }
 		public TermsAggregationExecutionHint? ExecutionHint { get; set; }
-		public IDictionary<string, string> Order { get; set; }
+		public IList<TermsOrder> Order { get; set; }
 		public TermsIncludeExclude Include { get; set; }
 		public TermsIncludeExclude Exclude { get; set; }
-		public IDictionary<string, object> Params { get; set; }
 		public TermsAggregationCollectMode? CollectMode { get; set; }
+		public bool? ShowTermDocumentCountError { get; set; }
+		public string Missing { get; set; }
 
 		internal TermsAggregation() { }
 
@@ -72,7 +76,7 @@ namespace Nest
 	{
 		Field ITermsAggregation.Field { get; set; }
 		
-		string ITermsAggregation.Script { get; set; }
+		IScript ITermsAggregation.Script { get; set; }
 		
 		int? ITermsAggregation.Size { get; set; }
 
@@ -82,25 +86,26 @@ namespace Nest
 
 		TermsAggregationExecutionHint? ITermsAggregation.ExecutionHint { get; set; }
 
-		IDictionary<string, string> ITermsAggregation.Order { get; set; }
+		IList<TermsOrder> ITermsAggregation.Order { get; set; }
 
 		TermsIncludeExclude ITermsAggregation.Include { get; set; }
 
 		TermsIncludeExclude ITermsAggregation.Exclude { get; set; }
 
-		IDictionary<string, object> ITermsAggregation.Params { get; set; }
-
 		TermsAggregationCollectMode? ITermsAggregation.CollectMode { get; set; }
+
+		bool? ITermsAggregation.ShowTermDocumentCountError { get; set; }
+
+		string ITermsAggregation.Missing { get; set; }
 
 		public TermsAggregationDescriptor<T> Field(string field) => Assign(a => a.Field = field);
 
 		public TermsAggregationDescriptor<T> Field(Expression<Func<T, object>> field) => Assign(a => a.Field = field);
 
+		public TermsAggregationDescriptor<T> Script(string script) => Assign(a => a.Script = (InlineScript)script);
 
-		public TermsAggregationDescriptor<T> Script(string script) => Assign(a => a.Script = script);
-
-		public TermsAggregationDescriptor<T> Params(Func<FluentDictionary<string, object>, FluentDictionary<string, object>> paramSelector) =>
-			Assign(a=>a.Params = paramSelector?.Invoke(new FluentDictionary<string, object>()));
+		public TermsAggregationDescriptor<T> Script(Func<ScriptDescriptor, IScript> scriptSelector) =>
+			Assign(a => a.Script = scriptSelector?.Invoke(new ScriptDescriptor()));
 
 		public TermsAggregationDescriptor<T> Size(int size) => Assign(a => a.Size = size);
 
@@ -112,11 +117,23 @@ namespace Nest
 		public TermsAggregationDescriptor<T> ExecutionHint(TermsAggregationExecutionHint executionHint) =>
 			Assign(a => a.ExecutionHint = executionHint);
 
-		public TermsAggregationDescriptor<T> OrderAscending(string key) =>
-			Assign(a => a.Order = new Dictionary<string, string> { { key, "asc" } });
+		public TermsAggregationDescriptor<T> Order(TermsOrder order) => Assign(a =>
+		{
+			a.Order = a.Order ?? new List<TermsOrder>();
+			a.Order.Add(order);
+		});
 
-		public TermsAggregationDescriptor<T> OrderDescending(string key) =>
-			Assign(a => a.Order = new Dictionary<string, string> { { key, "desc" } });
+		public TermsAggregationDescriptor<T> OrderAscending(string key) => Assign(a =>
+		{
+			a.Order = a.Order ?? new List<TermsOrder>();
+			a.Order.Add(new TermsOrder { Key = key, Order = SortOrder.Ascending });
+		});
+
+		public TermsAggregationDescriptor<T> OrderDescending(string key) => Assign(a =>
+		{
+			a.Order = a.Order ?? new List<TermsOrder>();
+			a.Order.Add(new TermsOrder { Key = key, Order = SortOrder.Descending });
+		});
 
 		public TermsAggregationDescriptor<T> Include(string includePattern, string regexFlags = null) =>
 			Assign(a => a.Include = new TermsIncludeExclude() { Pattern = includePattern, Flags = regexFlags });
@@ -133,5 +150,9 @@ namespace Nest
 		public TermsAggregationDescriptor<T> CollectMode(TermsAggregationCollectMode collectMode) =>
 			Assign(a => a.CollectMode = collectMode);
 
+		public TermsAggregationDescriptor<T> ShowTermDocumentCountError(bool showTermDocCountError = true) =>
+			Assign(a => a.ShowTermDocumentCountError = showTermDocCountError);
+
+		public TermsAggregationDescriptor<T> Missing(string missing) => Assign(a => a.Missing = missing);
 	}
 }

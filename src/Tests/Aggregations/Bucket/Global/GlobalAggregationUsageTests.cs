@@ -13,9 +13,9 @@ using static Tests.Framework.RoundTripper;
 
 namespace Tests.Aggregations.Bucket.Global
 {
-	public class GlobalAggregationUsageTest : AggregationUsageTestBase
+	public class GlobalAggregationUsageTests : AggregationUsageTestBase
 	{
-		public GlobalAggregationUsageTest(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
+		public GlobalAggregationUsageTests(ReadOnlyCluster i, EndpointUsage usage) : base(i, usage) { }
 
 		protected override object ExpectJson => new
 		{

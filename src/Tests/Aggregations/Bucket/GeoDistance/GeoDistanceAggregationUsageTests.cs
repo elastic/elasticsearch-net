@@ -60,13 +60,13 @@ namespace Tests.Aggregations.Bucket.GeoDistance
 			{
 				Aggregations = new GeoDistanceAggregation("rings_around_amsterdam")
 				{
-					Field = Field<Project>(p => p.Location),
+					Field = Field((Project p) => p.Location),
 					Origin = "52.376, 4.894",
-					Ranges = new List<GeoDistanceRange>
+					Ranges = new List<Nest.Range>
 					{
-						new GeoDistanceRange { To = 100 },
-						new GeoDistanceRange { From = 100, To = 300 },
-						new GeoDistanceRange { From = 300 }
+						new Nest.Range { To = 100 },
+						new Nest.Range { From = 100, To = 300 },
+						new Nest.Range { From = 300 }
 					}
 				}
 			};
