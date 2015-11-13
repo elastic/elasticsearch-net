@@ -2,25 +2,22 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using Newtonsoft.Json;
+using System.Linq;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<PercentilesAggregation>))]
+	[JsonConverter(typeof(PercentilesAggregationJsonConverter))]
 	public interface IPercentilesAggregation : IMetricAggregation
 	{
-		[JsonProperty("percents")]
-		IEnumerable<double> Percentages { get; set; }
-
-		[JsonProperty("compression")]
-		int? Compression { get; set; }
+		IEnumerable<double> Percents { get; set; }
+		IPercentilesMethod Method { get; set; }
 	}
 
 	public class PercentilesAggregation : MetricAggregationBase, IPercentilesAggregation
 	{
-		public IEnumerable<double> Percentages { get; set; }
-		public int? Compression { get; set; }
-
+		public IEnumerable<double> Percents { get; set; }
+		public IPercentilesMethod Method { get; set; }
+			
 		internal PercentilesAggregation() { }
 
 		public PercentilesAggregation(string name, Field field) : base(name, field) { } 
@@ -33,12 +30,17 @@ namespace Nest
 			, IPercentilesAggregation 
 		where T : class
 	{
-		IEnumerable<double> IPercentilesAggregation.Percentages { get; set; }
+		IEnumerable<double> IPercentilesAggregation.Percents { get; set; }
 
-		int? IPercentilesAggregation.Compression { get; set; }
+		IPercentilesMethod IPercentilesAggregation.Method { get; set; }
 
-		public PercentilesAggregationDescriptor<T> Percentages(params double[] percentages) => Assign(a => a.Percentages = percentages);
+		public PercentilesAggregationDescriptor<T> Percents(IEnumerable<double> percentages) => 
+			Assign(a => a.Percents = percentages?.ToList());
 
-		public PercentilesAggregationDescriptor<T> Compression(int compression) => Assign(a => a.Compression = compression);
+		public PercentilesAggregationDescriptor<T> Percents(params double[] percentages) => 
+			Assign(a => a.Percents = percentages?.ToList());
+
+		public PercentilesAggregationDescriptor<T> Method(Func<PercentilesMethodDescriptor, IPercentilesMethod> methodSelector) => 
+			Assign(a => a.Method = methodSelector?.Invoke(new PercentilesMethodDescriptor()));
 	}
 }

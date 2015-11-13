@@ -72,6 +72,8 @@
     <Compile Include="Aggregations\Metric\Sum\SumAggregationUsageTests.cs" />
     <Compile Include="Aggregations\Metric\TopHits\TopHitsAggregationUsageTests.cs" />
     <Compile Include="Aggregations\Metric\ValueCount\ValueCountAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Metric\PercentileRanks\PercentileRanksAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Metric\Percentiles\PercentilesAggregationUsageTests.cs" />
     <Compile Include="Aggregations\Pipeline\BucketScript\BucketScriptAggregationUsageTests.cs" />
     <Compile Include="Aggregations\Pipeline\BucketSelector\BucketSelectorAggregationUsageTests.cs" />
     <Compile Include="Aggregations\Pipeline\CumulativeSum\CumulativeSumAggregationUsageTests.cs" />

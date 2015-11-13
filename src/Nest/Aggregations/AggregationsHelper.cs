@@ -69,7 +69,7 @@ namespace Nest
 
 		public PercentilesMetric Percentiles(string key) => this.TryGet<PercentilesMetric>(key);
 
-		public PercentilesMetric PercentilesRank(string key) => this.TryGet<PercentilesMetric>(key);
+		public PercentilesMetric PercentileRanks(string key) => this.TryGet<PercentilesMetric>(key);
 
 		public TopHitsMetric TopHits(string key) => this.TryGet<TopHitsMetric>(key);
 

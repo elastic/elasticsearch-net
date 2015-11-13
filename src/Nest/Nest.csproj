@@ -71,6 +71,11 @@
     <Compile Include="Aggregations\Aggregation.cs" />
     <Compile Include="Aggregations\Bucket\Terms\TermsOrder.cs" />
     <Compile Include="Aggregations\Metric\Metric.cs" />
+    <Compile Include="Aggregations\Metric\PercentileRanks\PercentileRanksAggregationJsonConverter.cs" />
+    <Compile Include="Aggregations\Metric\Percentiles\Methods\HDRHistogramMethod.cs" />
+    <Compile Include="Aggregations\Metric\Percentiles\Methods\IPercentilesMethod.cs" />
+    <Compile Include="Aggregations\Metric\Percentiles\PercentilesAggregationJsonConverter.cs" />
+    <Compile Include="Aggregations\Metric\Percentiles\Methods\TDigestMethod.cs" />
     <Compile Include="Aggregations\Pipeline\BucketSelector\BucketSelectorAggregation.cs" />
     <Compile Include="Aggregations\Pipeline\BucketScript\BucketScriptAggregation.cs" />
     <Compile Include="Aggregations\Pipeline\BucketsPath.cs" />
