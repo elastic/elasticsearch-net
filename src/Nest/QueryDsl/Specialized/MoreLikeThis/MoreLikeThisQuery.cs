@@ -14,6 +14,12 @@ namespace Nest
 		[JsonProperty(PropertyName = "fields")]
 		Fields Fields { get; set; }
 
+		[JsonProperty(PropertyName = "like")]
+		IEnumerable<Like> Like { get; set; }
+
+		[JsonProperty(PropertyName = "unlike")]
+		IEnumerable<Like> Unlike { get; set; }
+
 		[JsonProperty(PropertyName = "max_query_terms")]
 		int? MaxQueryTerms { get; set; }
 
@@ -47,11 +53,6 @@ namespace Nest
 		[JsonProperty(PropertyName = "include")]
 		bool? Include { get; set; }
 
-		[JsonProperty(PropertyName = "like")]
-		IEnumerable<Like> Like { get; set; }
-
-		[JsonProperty(PropertyName = "unlike")]
-		IEnumerable<Like> Unlike { get; set; }
 
 	}
 
@@ -59,7 +60,6 @@ namespace Nest
 	{
 		bool IQuery.Conditionless => IsConditionless(this);
 		public Fields Fields { get; set; }
-		public string LikeText { get; set; }
 		public double? TermMatchPercentage { get; set; }
 		public MinimumShouldMatch MinimumShouldMatch { get; set; }
 		public StopWords StopWords { get; set; }
@@ -129,11 +129,14 @@ namespace Nest
 		public MoreLikeThisQueryDescriptor<T> MaxWordLength(int maxWordLength) =>
 			Assign(a => a.MaxWordLength = maxWordLength);
 
-		public MoreLikeThisQueryDescriptor<T> BoostTerms(double boostTerms) =>
+		public MoreLikeThisQueryDescriptor<T> BoostTerms(double? boostTerms) =>
 			Assign(a => a.BoostTerms = boostTerms);
 
 		public MoreLikeThisQueryDescriptor<T> MinimumShouldMatch(string minMatch) =>
 			Assign(a => a.MinimumShouldMatch = minMatch);
+
+		public MoreLikeThisQueryDescriptor<T> Include(bool? include = true) =>
+			Assign(a => a.Include = include);
 
 		public MoreLikeThisQueryDescriptor<T> MinimumShouldMatch(int minMatch) =>
 			Assign(a => a.MinimumShouldMatch = minMatch.ToString());

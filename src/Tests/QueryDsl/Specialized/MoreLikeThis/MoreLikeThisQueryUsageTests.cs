@@ -14,32 +14,83 @@ namespace Tests.QueryDsl.Specialized.MoreLikeThis
 
 		protected override object QueryJson => new
 		{
-			span_within = new
+			mlt = new
 			{
-				_name = "named_query",
-				boost = 1.1,
-				little = new
-				{
-					span_term = new { field1 = new { value = "hoya" } }
+				fields = new[] { "name" },
+				minimum_should_match = 1,
+				stop_words = new[] { "and", "the " },
+				min_term_freq = 1,
+				max_query_terms = 12,
+				min_doc_freq = 1,
+				max_doc_freq = 12,
+				min_word_len = 10,
+				max_word_len = 300,
+				boost_terms = 1.1,
+				analyzer = "some_analyzer",
+				include = true,
+				like = new object[] {
+					new {
+						_index = "project",
+						_type = "project",
+						_id = Project.Instance.Name
+					},
+					"some long text"
 				},
-				big = new
-				{
-					span_term = new { field1 = new { value = "hoya2" } }
-				}
+				unlike = new[] { "not like this text" },
+				_name = "named_query",
+				boost = 1.1
 			}
+
 		};
 
 		protected override QueryContainer QueryInitializer => new MoreLikeThisQuery
 		{
 			Name = "named_query",
 			Boost = 1.1,
-			Fields = Fields<Project>(p=>p.Name)
+			Fields = Fields<Project>(p=>p.Name),
+			Like = new List<Like>
+			{
+				new LikeDocument<Project>(Project.Instance.Name),
+				"some long text"
+			},
+			Analyzer = "some_analyzer",
+			BoostTerms = 1.1,
+			Include = true,
+			MaxDocumentFrequency = 12,
+			MaxQueryTerms = 12,
+			MaxWordLength = 300,
+			MinDocumentFrequency = 1,
+			MinTermFrequency = 1,
+			MinWordLength = 10,
+			MinimumShouldMatch = 1,
+			StopWords = new [] { "and", "the "},
+			Unlike = new List<Like>
+			{
+				"not like this text"
+			}
 		};
 
 		protected override QueryContainer QueryFluent(QueryContainerDescriptor<Project> q) => q
 			.MoreLikeThis(sn => sn
 				.Name("named_query")
 				.Boost(1.1)
+				.Like(l=>l
+					.Document(d=>d .Document(Project.Instance))
+					.Text("some long text")
+				)
+				.Analyzer("some_analyzer")
+				.BoostTerms(1.1)
+				.Include()
+				.MaxDocumentFrequency(12)
+				.MaxQueryTerms(12)
+				.MaxWordLength(300)
+				.MinDocumentFrequency(1)
+				.MinTermFrequency(1)
+				.MinWordLength(10)
+				.StopWords("and", "the")
+				.Unlike(l=>l
+					.Text("not like this text")
+				)
 			);
 	}
 }

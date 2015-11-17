@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 namespace Nest
 {
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<MultiGetOperationDescriptor<object>>))]
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<LikeDocument<object>>))]
 	public interface ILikeDocument
 	{
 		[JsonProperty(PropertyName = "_index")]

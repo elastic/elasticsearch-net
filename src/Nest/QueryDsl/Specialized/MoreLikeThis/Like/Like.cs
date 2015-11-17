@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace Nest
 {
+	[JsonConverter(typeof(LikeJsonConverter))]
 	public class Like : Union<string, ILikeDocument>
 	{
 		public Like(string item) : base(item) { }
@@ -13,7 +15,6 @@ namespace Nest
 
 		public static implicit operator Like(string likeText) => new Like(likeText);
 		public static implicit operator Like(LikeDocumentBase like) => new Like(like);
-
 
 		internal static bool IsConditionless(Like like) =>
 			like.Item1.IsNullOrEmpty() && (like.Item2 == null || (like.Item2.Id == null && like.Item2.Document == null));
@@ -33,4 +34,26 @@ namespace Nest
 		}
 
 	}
+	internal class LikeJsonConverter :JsonConverter 
+	{
+		public override bool CanRead => true;
+		public override bool CanWrite => true;
+
+		public static UnionJsonConverter<string, ILikeDocument> Unionconverter = new UnionJsonConverter<string, ILikeDocument>();
+
+		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		{
+			var union = Unionconverter.ReadJson(reader, objectType, existingValue, serializer) as Union<string, ILikeDocument>;
+			if (union.Item1 != null) return new Like(union.Item1);
+			return new Like(union.Item2);
+		}
+
+		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+		{
+			Unionconverter.WriteJson(writer, value, serializer);
+		}
+
+		public override bool CanConvert(Type objectType) => true;
+	}
+
 }
