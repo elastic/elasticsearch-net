@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using Elasticsearch.Net;
 using NUnit.Framework;
 using Nest.Tests.MockData.Domain;
 using Newtonsoft.Json;
@@ -38,7 +39,7 @@ namespace Nest.Tests.Unit.Core.Update
 				  .Add("count", 4)
 			  )
 			  .Upsert(new UpsertCount { Count = 1 }); 
-			this.JsonEquals(s, MethodBase.GetCurrentMethod()); 
+			this.JsonEquals(s, MethodBase.GetCurrentMethod());
 		}
 
 		[Test]
@@ -79,6 +80,5 @@ namespace Nest.Tests.Unit.Core.Update
 
 			this.JsonEquals(s, MethodBase.GetCurrentMethod());
 		}
-
 	}
 }

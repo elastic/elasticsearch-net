@@ -45,7 +45,7 @@ namespace Nest
         [JsonProperty("protected_words")]
         public IList<string> ProtectedWords { get; set; }
 
-        [JsonProperty("protected_words_path ")]
+        [JsonProperty("protected_words_path")]
         public string ProtectedWordsPath { get; set; }
 
         [Obsolete("Please switch to TypeTableList property", true)]

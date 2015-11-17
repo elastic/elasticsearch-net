@@ -8531,6 +8531,16 @@ namespace Elasticsearch.Net
 		}
 		
 		
+		internal bool _detect_noop { get; set; }
+		///<summary>Specifying as true will cause Elasticsearch to check if there are changes and, if there aren’t, turn the update request into a noop.</summary>
+		public UpdateRequestParameters DetectNoop(bool detect_noop)
+		{
+			this._detect_noop = detect_noop;
+			this.AddQueryString("detect_noop", this._detect_noop);
+			return this;
+		}
+		
+		
 		internal string _lang { get; set; }
 		///<summary>The script language (default: groovy)</summary>
 		public UpdateRequestParameters Lang(string lang)

@@ -8,7 +8,7 @@ menuitem: esnet-security
 # Security
 
 
-## Authorization
+## Authentication
 
 NEST and Elasticsearch.NET support basic auth out of the box by setting your credentials on `ConnectionSettings`
 

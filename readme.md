@@ -1,5 +1,30 @@
 Repository for both **Elasticsearch.Net** and **NEST**, the two official [elasticsearch](https://github.com/elasticsearch/elasticsearch) .NET clients.
 
+
+<table>
+    <tr>
+        <th><b>Elasticsearch<b></td>
+        <th><b>.NET client<b></td>
+        <th><b>Supported<b></td>
+    </tr>
+    <tr>
+    	<td>0.x</td>
+    	<td>0.x</td>
+    	<td>No</td>
+    </tr>
+    <tr>
+    	<td>1.x</td>
+    	<td>1.x</td>
+    	<td>Yes</td>
+    </tr>
+    <tr>
+    	<td>2.x</td>
+    	<td>2.x</td>
+    	<td>Yes (But not released yet!)</td>
+    </tr>
+</table>
+
+
 |          |            |
 |:-----------|-------------:|
 | Nuget feed    | [![install from nuget](http://img.shields.io/nuget/v/NEST.svg?style=flat-square)](https://www.nuget.org/packages/NEST)[![downloads](http://img.shields.io/nuget/dt/NEST.svg?style=flat-square)](https://www.nuget.org/packages/NEST)|
