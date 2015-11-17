@@ -190,7 +190,9 @@ namespace Elasticsearch.Net.Connection
 			}
 			catch (Exception exception)
 			{
+#pragma warning disable AsyncFixer002 //this overload does not need to be async
 				return requestData.CreateResponse<TReturn>(exception);
+#pragma warning restore AsyncFixer002 
 			}
 		}
 	}

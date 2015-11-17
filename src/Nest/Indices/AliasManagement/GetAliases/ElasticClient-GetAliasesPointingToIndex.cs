@@ -14,7 +14,7 @@ namespace Nest
 		/// <param name="indexName">The exact indexname we want to know aliases of</param>
 		public static IList<AliasDefinition> GetAliasesPointingToIndex(this IElasticClient client, string indexName)
 		{
-			var aliasesResponse = client.GetAliases(a => a.Index(indexName));
+			var aliasesResponse = client.GetAlias(a => a.Index(indexName));
 			return AliasesPointingToIndex(indexName, aliasesResponse);
 		}
 
@@ -25,7 +25,7 @@ namespace Nest
 		/// <param name="indexName">The exact indexname we want to know aliases of</param>
 		public static Task<IList<AliasDefinition>> GetAliasesPointingToIndexAsync(this IElasticClient client, string indexName)
 		{
-			return client.GetAliasesAsync(a => a.Index(indexName))
+			return client.GetAliasAsync(a => a.Index(indexName))
 				.ContinueWith((t) =>
 				{
 					var aliasesResponse = t.Result;

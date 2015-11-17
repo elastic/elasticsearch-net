@@ -115,7 +115,7 @@ namespace Elasticsearch.Net.Connection
 					foreach (var o in _enumerableOfObject)
 					{
 						settings.Serializer.Serialize(o, stream, indent);
-						stream.Write(new byte[] { (byte)'\n' }, 0, 1);
+						await stream.WriteAsync(new byte[] { (byte)'\n' }, 0, 1, cancellationToken);
 					}
 					break;
 				case Serializable: 

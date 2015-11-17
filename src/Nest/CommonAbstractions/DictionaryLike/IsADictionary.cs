@@ -19,7 +19,6 @@ namespace Nest
 				: new Dictionary<TKey, TValue>();
 		}
 
-
 		void IDictionary.Clear() => this.BackingDictionary.Clear();
 		IDictionaryEnumerator IDictionary.GetEnumerator() => Self?.GetEnumerator();
 		void IDictionary.Remove(object key) => Self?.Remove(key);
@@ -38,6 +37,8 @@ namespace Nest
 		IEnumerator IEnumerable.GetEnumerator() => this.BackingDictionary.GetEnumerator();
 
 		IEnumerator<KeyValuePair<TKey, TValue>> IEnumerable<KeyValuePair<TKey, TValue>>.GetEnumerator() => this.BackingDictionary.GetEnumerator();
+
+		public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator() => this.BackingDictionary.GetEnumerator();
 
 		void ICollection<KeyValuePair<TKey, TValue>>.Clear() => this.BackingDictionary.Clear();
 		[EditorBrowsable(EditorBrowsableState.Never)]

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using FluentAssertions;
 using Nest;
 using Tests.Framework;
@@ -25,7 +26,7 @@ namespace Tests.Search.Request
 			.PostFilter(f => f.MatchAll());
 
 		[I]
-		public async void ShouldHaveHits() => await AssertOnAllResponses((r) =>
+		public async Task ShouldHaveHits() => await AssertOnAllResponses((r) =>
 		{
 			r.Hits.Should().NotBeNull();
 		});
