@@ -105,6 +105,7 @@ namespace Nest
 			return this;
 		}
 		
+		[Obsolete]
 		public PropertiesDescriptor<T> MultiField(Func<MultiFieldMappingDescriptor<T>, MultiFieldMappingDescriptor<T>> selector)
 		{
 			selector.ThrowIfNull("selector");
