@@ -112,7 +112,7 @@ namespace CodeGeneration.LowLevelClient.Domain
 			if (IsDocumentPath && !string.IsNullOrEmpty(this.RequestTypeGeneric))
 			{
 				var doc = $@"/// <summary>{this.Url.Path}</summary>";
-				doc += "\r\n\t\t\r\n" + $"///<param name=\"document\"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>";
+				doc += "\r\n\t\t\r\n" + "///<param name=\"document\"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>";
 				var documentRoute = "r=>r.Required(\"index\", index ?? document.Self.Index).Required(\"type\", type ?? document.Self.Type).Required(\"id\", id ?? document.Self.Id)";
 				var documentPathGeneric = Regex.Replace(this.DescriptorTypeGeneric, @"^<?([^\s,>]+).*$", "$1");
 				var documentFromPath = $"partial void DocumentFromPath({documentPathGeneric} document);";
@@ -129,7 +129,7 @@ namespace CodeGeneration.LowLevelClient.Domain
 		{
 			var generic = this.RequestTypeGeneric?.Replace("<", "").Replace(">", "");
 			var doc = $@"/// <summary>{this.Url.Path}</summary>";
-			doc += "\r\n\t\t\r\n" + $"///<param name=\"document\"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>";
+			doc += "\r\n\t\t\r\n" + "///<param name=\"document\"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>";
 			var c = new Constructor { Generated = $"public {m}() {{}}", Description = doc, };
 			if (!string.IsNullOrEmpty(generic))
 				c = new Constructor { Generated = $"public {m}() : this(typeof({generic}), typeof({generic})) {{}}", Description = doc, };
@@ -181,7 +181,7 @@ namespace CodeGeneration.LowLevelClient.Domain
 			if (IsDocumentPath && !string.IsNullOrEmpty(this.DescriptorTypeGeneric))
 			{
 				var doc = $@"/// <summary>{this.Url.Path}</summary>";
-				doc += "\r\n\t\t\r\n" + $"///<param name=\"document\"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>";
+				doc += "\r\n\t\t\r\n" + "///<param name=\"document\"> describes an elasticsearch document of type T, allows implicit conversion from numeric and string ids </param>";
 				var documentRoute = "r=>r.Required(\"index\", document.Self.Index).Required(\"type\", document.Self.Type).Required(\"id\", document.Self.Id)";
 				var documentPathGeneric = Regex.Replace(this.DescriptorTypeGeneric, @"^<?([^\s,>]+).*$", "$1");
 				var documentFromPath = $"partial void DocumentFromPath({documentPathGeneric} document);";
@@ -230,7 +230,7 @@ namespace CodeGeneration.LowLevelClient.Domain
 				var code = $"public {returnType} {p.InterfaceName}({ClrParamType(p.ClrTypeName)} {paramName}) => Assign(a=>a.RouteValues.Optional(\"{p.Name}\", {routeValue}));";
 				var xmlDoc = $"///<summary>{p.Description}</summary>";
 				setters.Add(new FluentRouteSetter { Code = code, XmlDoc = xmlDoc });
-				if ((paramName == "index" || paramName == "type"))
+				if (paramName == "index" || paramName == "type")
 				{
 					code = $"public {returnType} {p.InterfaceName}<TOther>() where TOther : class ";
 					code += $"=> Assign(a=>a.RouteValues.Optional(\"{p.Name}\", ({p.ClrTypeName})typeof(TOther)));";

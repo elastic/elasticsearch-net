@@ -7,8 +7,6 @@ namespace Elasticsearch.Net.ConnectionPool
 {
 	public class SingleNodeConnectionPool : IConnectionPool
 	{
-		private readonly Node _node;
-
 		public int MaxRetries => 0;
 
 		public bool SupportsReseeding => false;
@@ -26,17 +24,12 @@ namespace Elasticsearch.Net.ConnectionPool
 
 		public SingleNodeConnectionPool(Uri uri, IDateTimeProvider dateTimeProvider = null)
 		{
-			this._node = new Node(uri);
-			this.UsingSsl = this._node.Uri.Scheme == Uri.UriSchemeHttps;
-			this.Nodes = new List<Node> { this._node };
+			var node = new Node(uri);
+			this.UsingSsl = node.Uri.Scheme == Uri.UriSchemeHttps;
+			this.Nodes = new List<Node> { node };
 			this.LastUpdate = (dateTimeProvider ?? new DateTimeProvider()).Now();
 		}
 
-		public IEnumerable<Node> CreateView()
-		{
-			return this.Nodes;
-		}
-
-
+		public IEnumerable<Node> CreateView() => this.Nodes;
 	}
 }

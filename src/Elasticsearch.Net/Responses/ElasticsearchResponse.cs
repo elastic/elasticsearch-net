@@ -1,21 +1,8 @@
 ﻿using System;
-using System.CodeDom;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Configuration;
 using System.Globalization;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.IO;
-using System.Net;
-using System.Threading.Tasks;
-using Elasticsearch.Net;
 using Elasticsearch.Net.Connection;
-using Elasticsearch.Net.ConnectionPool;
-using Elasticsearch.Net.Exceptions;
-using Elasticsearch.Net.Serialization;
 
 namespace Elasticsearch.Net
 {
@@ -53,24 +40,6 @@ namespace Elasticsearch.Net
 			);
 
 		public Exception OriginalException { get; protected internal set; }
-
-		/// <summary>
-		/// This property returns the mapped elasticsearch server exception
-		/// </summary>
-		public ElasticsearchServerError ServerError
-		{
-			get
-			{
-				var esException = this.OriginalException as ElasticsearchServerException;
-				if (esException == null) return null;
-				return new ElasticsearchServerError
-				{
-					Error = esException.Message,
-					ExceptionType = esException.ExceptionType,
-					Status = esException.Status
-				};
-			}
-		}
 
 		public ElasticsearchResponse(Exception e)
 		{

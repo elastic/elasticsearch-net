@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Elasticsearch.Net;
 using Elasticsearch.Net.Connection;
 using Elasticsearch.Net.Connection.Configuration;
-using Elasticsearch.Net.Exceptions;
 using Elasticsearch.Net.Serialization;
 
 namespace Nest
@@ -100,10 +99,7 @@ namespace Nest
 				{
 					if (r.IsFaulted && r.Exception != null)
 					{
-						var mr = r.Exception.InnerException as MaxRetryException;
-						if (mr != null)
-							mr.RethrowKeepingStackTrace();
-
+						//TODO this whole continuewith smells, investigate
 						var ae = r.Exception.Flatten();
 						if (ae.InnerException != null)
 							ae.InnerException.RethrowKeepingStackTrace();

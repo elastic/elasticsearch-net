@@ -1,23 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace CodeGeneration.LowLevelClient.Overrides.Descriptors
 {
-	//CodeGeneration.LowLevelClient.Overrides.Descriptors.MultiTermVectorsDescriptorOverrides
+	// ReSharper disable once UnusedMember.Global
 	public class MultiTermVectorsDescriptorOverrides : IDescriptorOverrides
 	{
-		public IEnumerable<string> SkipQueryStringParams
+		public IEnumerable<string> SkipQueryStringParams => new []
 		{
-			get
-			{
-				return new string[]
-				{
-					"ids"
-				};
-			}
-		}
-		public IDictionary<string, string> RenameQueryStringParams { get { return null; } }
+			"ids"
+		};
+
+		public IDictionary<string, string> RenameQueryStringParams => null;
 	}
 }

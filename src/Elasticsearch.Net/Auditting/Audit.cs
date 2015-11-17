@@ -1,5 +1,4 @@
 using System;
-using System.Diagnostics;
 
 namespace Elasticsearch.Net.Connection
 {
@@ -20,7 +19,7 @@ namespace Elasticsearch.Net.Connection
 		public override string ToString()
 		{
 			var took = Started - Ended;
-			return $"Node: {Node?.Uri.ToString()}, Event: {Event.GetStringValue()} NodeAlive: {Node?.IsAlive}, Took: {took.ToString()}";
+			return $"Node: {Node?.Uri}, Event: {Event.GetStringValue()} NodeAlive: {Node?.IsAlive}, Took: {took.ToString()}";
 		}
 	}
 }

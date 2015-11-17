@@ -48,7 +48,7 @@ namespace Elasticsearch.Net.ConnectionPool
 			{
 				this._readerWriter.EnterWriteLock();
 				var sortedNodes = nodes
-					.OrderBy((item) => this.Randomize ? this.Random.Next() : 1)
+					.OrderBy(item => this.Randomize ? this.Random.Next() : 1)
 					.DistinctBy(n => n.Uri)
 					.ToList();
 

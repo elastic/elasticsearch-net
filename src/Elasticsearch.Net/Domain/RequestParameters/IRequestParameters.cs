@@ -1,9 +1,6 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.IO;
-using Elasticsearch.Net.Connection;
 using Elasticsearch.Net.Connection.Configuration;
 
 namespace Elasticsearch.Net

@@ -3,6 +3,7 @@ using System.Linq;
 
 namespace CodeGeneration.LowLevelClient.Domain
 {
+	// ReSharper disable once ClassNeverInstantiated.Global
 	public class ApiUrl
 	{
 		//these are aliases we much rather pass along inside the querystring
@@ -16,9 +17,8 @@ namespace CodeGeneration.LowLevelClient.Domain
 		{
 			get
 			{
-				return _paths == null ? _paths : _paths
-					.Where(p => !BlackListRouteValues.Any(p.Contains))
-					.ToList();
+				return _paths?.Where(p => !BlackListRouteValues.Any(p.Contains))
+					.ToList() ?? _paths;
 			}
 			set { _paths = value; }
 		}

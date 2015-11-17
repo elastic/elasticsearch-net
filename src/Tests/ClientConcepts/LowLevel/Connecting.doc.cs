@@ -143,6 +143,7 @@ namespace Tests.ClientConcepts.LowLevel
 				 * (see http://msdn.microsoft.com/en-us/library/system.net.httpwebrequest.timeout(v=vs.110).aspx).
 				*/
 
+				//TODO document this properly once we figure out exceptions
 				.ThrowOnElasticsearchServerExceptions()
 				/**
 				* As an alternative to the C/go like error checking on `response.IsValid`, you can instead tell the client to always throw 

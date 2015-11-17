@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
-using System.Text;
-using Elasticsearch.Net.Connection;
 using Elasticsearch.Net.Connection.Configuration;
 
 namespace Elasticsearch.Net
@@ -18,7 +15,7 @@ namespace Elasticsearch.Net
 	public abstract class FluentRequestParameters<T> : IRequestParameters 
 		where T : FluentRequestParameters<T>
 	{
-		private IRequestParameters Self { get { return this; } }
+		private IRequestParameters Self => this;
 
 		public abstract HttpMethod DefaultHttpMethod { get; }
 
@@ -26,7 +23,7 @@ namespace Elasticsearch.Net
 		Func<IApiCallDetails, Stream, object> IRequestParameters.DeserializationOverride { get; set; }
 		IRequestConfiguration IRequestParameters.RequestConfiguration { get; set; }
 
-		public FluentRequestParameters()
+		protected FluentRequestParameters()
 		{
 			Self.QueryString = new Dictionary<string, object>();
 		}

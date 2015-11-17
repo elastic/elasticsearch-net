@@ -6,6 +6,8 @@ using Elasticsearch.Net.Connection.Security;
 
 namespace Elasticsearch.Net.Connection
 {
+	/// TODO SOME OF THESE ARE NO LONGER USED
+	/// this either means we broke something or something no longer applies
 	public interface IConnectionConfigurationValues
 	{
 		/// <summary> The connection pool to use when talking with elasticsearch </summary>

@@ -13,7 +13,7 @@ namespace Elasticsearch.Net.ConnectionPool
 		protected Random Random { get; } = new Random();
 		protected bool Randomize { get; }
 
-		protected List<Node> InternalNodes = new List<Node>();
+		protected List<Node> InternalNodes { get; set; }
 
 		public virtual IReadOnlyCollection<Node> Nodes => this.InternalNodes;
 
@@ -36,6 +36,7 @@ namespace Elasticsearch.Net.ConnectionPool
 		public StaticConnectionPool(IEnumerable<Node> nodes, bool randomize = true, IDateTimeProvider dateTimeProvider = null)
 		{
 			nodes.ThrowIfEmpty(nameof(nodes));
+
 			this.Randomize = randomize;
 			this.DateTimeProvider = dateTimeProvider ?? new DateTimeProvider();
 
@@ -47,7 +48,7 @@ namespace Elasticsearch.Net.ConnectionPool
 			this.UsingSsl = uris.Any(uri => uri.Scheme == Uri.UriSchemeHttps);
 
 			this.InternalNodes = nn
-				.OrderBy((item) => randomize ? this.Random.Next() : 1)
+				.OrderBy(item => randomize ? this.Random.Next() : 1)
 				.DistinctBy(n=>n.Uri)
 				.ToList();
 			this.LastUpdate = this.DateTimeProvider.Now();
@@ -65,7 +66,7 @@ namespace Elasticsearch.Net.ConnectionPool
 
 			var now = this.DateTimeProvider.Now();
 			var nodes = this.InternalNodes.Where(n => n.IsAlive || n.DeadUntil <= now).ToList();
-			var count = nodes.Count();
+			var count = nodes.Count;
 			var globalCursor = Interlocked.Increment(ref GlobalCursor);
 			var localCursor = globalCursor % count;
 

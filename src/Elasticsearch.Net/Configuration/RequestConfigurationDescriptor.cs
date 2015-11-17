@@ -7,7 +7,7 @@ namespace Elasticsearch.Net.Connection.Configuration
 {
 	public class RequestConfigurationDescriptor : IRequestConfiguration
 	{
-		private IRequestConfiguration Self { get { return this; } }
+		private IRequestConfiguration Self => this;
 
 		TimeSpan? IRequestConfiguration.RequestTimeout { get; set; }
 
@@ -30,6 +30,8 @@ namespace Elasticsearch.Net.Connection.Configuration
 		bool IRequestConfiguration.EnableHttpPipelining { get; set; }
 
 		CancellationToken IRequestConfiguration.CancellationToken { get; set; }
+
+		//TODO none of these request overrides are called from tests meaning these ALL need to have tests written against
 
 		public RequestConfigurationDescriptor RequestTimeout(TimeSpan requestTimeout)
 		{

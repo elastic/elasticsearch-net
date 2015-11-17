@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace CodeGeneration.LowLevelClient
 {
-	class Program
+	public static class Program
 	{
 		static void Main(string[] args)
 		{
-			var useCache = (args.Length > 0 && args[0] == "cache");
+			var useCache = args.Length > 0 && args[0] == "cache";
 
 			if (!useCache)
 				ApiGenerator.GenerateEndpointFiles();
@@ -32,7 +31,7 @@ namespace CodeGeneration.LowLevelClient
 
 			ApiGenerator.GenerateRawDispatch(spec);
 
-			Console.WriteLine("Found {0} api documentation endpoints", spec.Endpoints.Count());
+			Console.WriteLine("Found {0} api documentation endpoints", spec.Endpoints.Count);
 		}
 
 	}

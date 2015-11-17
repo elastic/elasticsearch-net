@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using Elasticsearch.Net.Connection;
 
@@ -27,7 +26,7 @@ namespace Elasticsearch.Net.ConnectionPool
 
 		bool SupportsPinging { get; }
 
-		DateTime LastUpdate { get; set; }
+		DateTime LastUpdate { get; }
 
 		/// <summary>
 		/// Whether or not SSL is being using

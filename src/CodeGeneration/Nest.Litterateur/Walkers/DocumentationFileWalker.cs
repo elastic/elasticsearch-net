@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Nest.Litterateur.Walkers
 {
@@ -123,29 +122,6 @@ namespace Nest.Litterateur.Walkers
 			this.InsideMultiLineDocumentation = true;
 			base.VisitTrivia(trivia);
 			this.InsideMultiLineDocumentation = false;
-		}
-
-		public override void VisitTrailingTrivia(SyntaxToken token)
-		{
-			//if (!this.InsideMultiLineDocumentation) return;
-			//if (token.CSharpKind() != SyntaxKind.XmlTextLiteralToken) return;
-
-			base.VisitTrailingTrivia(token);
-		}
-
-		public override void VisitToken(SyntaxToken token)
-		{
-			base.VisitToken(token);
-		}
-
-		public override void DefaultVisit(SyntaxNode node)
-		{
-			base.DefaultVisit(node);
-		}
-
-		public override void Visit(SyntaxNode node)
-		{
-			base.Visit(node);
 		}
 	}
 }

@@ -1,18 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
-using System.Net;
 using System.Text;
 using System.Threading.Tasks;
-using Elasticsearch.Net.Connection.Configuration;
 
 namespace Elasticsearch.Net.Connection
 {
 	public class InMemoryConnection : HttpConnection
 	{
-		private byte[] _fixedResultBytes = Encoding.UTF8.GetBytes("{ \"USING NEST IN MEMORY CONNECTION\"  : null }");
-		private int _statusCode;
+		private static readonly byte[] FixedResultBytes = Encoding.UTF8.GetBytes("{ \"USING NEST IN MEMORY CONNECTION\"  : null }");
+		private readonly byte[] _fixedBytes;
+		private readonly int _statusCode;
 
 		public List<Tuple<string, Uri, PostData<object>>> Requests = new List<Tuple<string, Uri, PostData<object>>>(); 
 		
@@ -23,7 +21,7 @@ namespace Elasticsearch.Net.Connection
 
 		public InMemoryConnection(string fixedResult, int statusCode = 200) 
 		{
-			_fixedResultBytes = Encoding.UTF8.GetBytes(fixedResult);
+			_fixedBytes = Encoding.UTF8.GetBytes(fixedResult);
 			_statusCode = statusCode;
 		}
 
@@ -36,11 +34,7 @@ namespace Elasticsearch.Net.Connection
 		protected ElasticsearchResponse<TReturn> ReturnConnectionStatus<TReturn>(RequestData requestData, byte[] fixedResult = null)
 			where TReturn : class
 		{
-			var request = this.CreateHttpWebRequest(requestData);
-			var method = request.Method;
-			var path = request.RequestUri.ToString();
-
-			var cs = requestData.CreateResponse<TReturn>(this._statusCode, new MemoryStream(fixedResult ?? _fixedResultBytes));
+			var cs = requestData.CreateResponse<TReturn>(this._statusCode, new MemoryStream(fixedResult ?? _fixedBytes ?? FixedResultBytes));
 			return cs;
 		}
 

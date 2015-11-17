@@ -74,16 +74,12 @@
     <Compile Include="Domain\IHideObjectMembers.cs" />
     <Compile Include="Domain\RequestParameters\IRequestParameters.cs" />
     <Compile Include="Responses\VoidResponse.cs" />
-    <Compile Include="Domain\Response\ElasticsearchServerError.cs" />
-    <Compile Include="Exceptions\OneToOneServerException.cs" />
-    <Compile Include="Exceptions\ElasticsearchAuthException.cs" />
     <Compile Include="Extensions\ExceptionExtensions.cs" />
     <Compile Include="Extensions\Fluent.cs" />
     <Compile Include="Extensions\FormattableString.cs" />
     <Compile Include="IElasticsearchClient.cs" />
     <Compile Include="Providers\DateTimeProvider.cs" />
     <Compile Include="Connection\HttpConnection.cs" />
-    <Compile Include="Exceptions\ElasticsearchServerException.cs" />
     <Compile Include="Configuration\ConnectionConfiguration.cs" />
     <Compile Include="ConnectionPool\IConnectionPool.cs" />
     <Compile Include="Providers\IRequestPipelineFactory.cs" />
@@ -100,8 +96,6 @@
     <Compile Include="ElasticsearchClient.Generated.cs" />
     <Compile Include="Responses\DynamicResponse.cs" />
     <Compile Include="Responses\ElasticsearchDynamicValue.cs" />
-    <Compile Include="Exceptions\MaxRetryException.cs" />
-    <Compile Include="Extensions\DateExtensions.cs" />
     <Compile Include="Extensions\Extensions.cs" />
     <Compile Include="Extensions\NameValueCollectionExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
@@ -128,6 +122,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="paket.references" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Domain\Response\" />
+    <Folder Include="Exceptions\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

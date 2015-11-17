@@ -34,14 +34,18 @@ namespace Elasticsearch.Net.Connection
 		/// </summary>
 		/// <param name="connectionPool">A connection pool implementation that'll tell the client what nodes are available</param>
 		public ConnectionConfiguration(IConnectionPool connectionPool)
+			// ReSharper disable once IntroduceOptionalParameters.Global 
 			: this(connectionPool, null, null) { }
 
 		public ConnectionConfiguration(IConnectionPool connectionPool, IConnection connection)
+			// ReSharper disable once IntroduceOptionalParameters.Global
 			: this(connectionPool, connection, null) { }
 
 		public ConnectionConfiguration(IConnectionPool connectionPool, IElasticsearchSerializer serializer)
 			: this(connectionPool, null, serializer) { }
 
+		// ReSharper disable once MemberCanBePrivate.Global
+		// eventhough we use don't use this we very much would like to  expose this constructor
 		public ConnectionConfiguration(IConnectionPool connectionPool, IConnection connection, IElasticsearchSerializer serializer)
 			: base(connectionPool, connection, serializer) { }
 	}
@@ -51,43 +55,43 @@ namespace Elasticsearch.Net.Connection
 	public abstract class ConnectionConfiguration<T> : IConnectionConfigurationValues, IHideObjectMembers
 		where T : ConnectionConfiguration<T>
 	{
-		TimeSpan _timeout;
+		private TimeSpan _timeout;
 		TimeSpan IConnectionConfigurationValues.Timeout => _timeout;
 
-		TimeSpan? _pingTimeout;
+		private TimeSpan? _pingTimeout;
 		TimeSpan? IConnectionConfigurationValues.PingTimeout => _pingTimeout;
 
-		TimeSpan? _connectTimeout;
+		private TimeSpan? _connectTimeout;
 		TimeSpan? IConnectionConfigurationValues.ConnectTimeout => _connectTimeout;
 
-		TimeSpan? _deadTimeout;
+		private TimeSpan? _deadTimeout;
 		TimeSpan? IConnectionConfigurationValues.DeadTimeout => _deadTimeout;
 
-		TimeSpan? _maxDeadTimeout;
+		private TimeSpan? _maxDeadTimeout;
 		TimeSpan? IConnectionConfigurationValues.MaxDeadTimeout => _maxDeadTimeout;
 
-		TimeSpan? _maxRetryTimeout;
+		private TimeSpan? _maxRetryTimeout;
 		TimeSpan? IConnectionConfigurationValues.MaxRetryTimeout => _maxRetryTimeout;
 
-		TimeSpan? _keepAliveTime;
+		private TimeSpan? _keepAliveTime;
 		TimeSpan? IConnectionConfigurationValues.KeepAliveTime => _keepAliveTime;
 
-		TimeSpan? _keepAliveInterval;
+		private TimeSpan? _keepAliveInterval;
 		TimeSpan? IConnectionConfigurationValues.KeepAliveInterval => _keepAliveInterval;
 
-		string _proxyUsername;
+		private string _proxyUsername;
 		string IConnectionConfigurationValues.ProxyUsername => _proxyUsername;
 
-		string _proxyPassword;
+		private  string _proxyPassword;
 		string IConnectionConfigurationValues.ProxyPassword => _proxyPassword;
 
-		bool _disablePings;
+		private bool _disablePings;
 		bool IConnectionConfigurationValues.DisablePings => _disablePings;
 
-		string _proxyAddress;
+		private string _proxyAddress;
 		string IConnectionConfigurationValues.ProxyAddress => _proxyAddress;
 
-		bool _prettyJson;
+		private bool _prettyJson;
 		bool IConnectionConfigurationValues.PrettyJson => _prettyJson;
 
 		private bool _disableDirectStreaming = false;
@@ -96,41 +100,41 @@ namespace Elasticsearch.Net.Connection
 		private bool _enableMetrics = false;
 		bool IConnectionConfigurationValues.MetricsEnabled => _enableMetrics;
 
-		bool _disableAutomaticProxyDetection = false;
+		private bool _disableAutomaticProxyDetection = false;
 		bool IConnectionConfigurationValues.DisableAutomaticProxyDetection => _disableAutomaticProxyDetection;
-		
-		int? _maxRetries;
+
+		private int? _maxRetries;
 		int? IConnectionConfigurationValues.MaxRetries => _maxRetries;
 
-		bool _sniffOnStartup;
+		private bool _sniffOnStartup;
 		bool IConnectionConfigurationValues.SniffsOnStartup => _sniffOnStartup;
 
-		bool _sniffOnConnectionFault;
+		private bool _sniffOnConnectionFault;
 		bool IConnectionConfigurationValues.SniffsOnConnectionFault => _sniffOnConnectionFault;
 
-		TimeSpan? _sniffLifeSpan;
+		private TimeSpan? _sniffLifeSpan;
 		TimeSpan? IConnectionConfigurationValues.SniffInformationLifeSpan => _sniffLifeSpan;
 
-		bool _enableHttpCompression;
+		private bool _enableHttpCompression;
 		bool IConnectionConfigurationValues.EnableHttpCompression => _enableHttpCompression;
 
-		bool _traceEnabled;
+		private bool _traceEnabled;
 		bool IConnectionConfigurationValues.TraceEnabled => _traceEnabled;
 
-		bool _httpPipeliningEnabled;
+		private bool _httpPipeliningEnabled;
 		bool IConnectionConfigurationValues.HttpPipeliningEnabled => _httpPipeliningEnabled;
 
-		bool _throwOnServerExceptions;
+		private bool _throwOnServerExceptions;
 		bool IConnectionConfigurationValues.ThrowOnElasticsearchServerExceptions => _throwOnServerExceptions;
 
-		protected static void DefaultApiCallHandler(IApiCallDetails status) {}
+		private static void DefaultApiCallHandler(IApiCallDetails status) {}
 		Action<IApiCallDetails> _apiCallHandler = DefaultApiCallHandler;
 		Action<IApiCallDetails> IConnectionConfigurationValues.ApiCallHandler => _apiCallHandler;
 
-		NameValueCollection _queryString = new NameValueCollection();
+		private NameValueCollection _queryString = new NameValueCollection();
 		NameValueCollection IConnectionConfigurationValues.QueryStringParameters => _queryString;
 
-		NameValueCollection _headers = new NameValueCollection();
+		private NameValueCollection _headers = new NameValueCollection();
 		NameValueCollection IConnectionConfigurationValues.Headers => _headers;
 
 		BasicAuthenticationCredentials _basicAuthCredentials;
@@ -138,13 +142,13 @@ namespace Elasticsearch.Net.Connection
 
 		/* */
 
-		readonly IElasticsearchSerializer _serializer;
+		private readonly IElasticsearchSerializer _serializer;
 		IElasticsearchSerializer IConnectionConfigurationValues.Serializer => _serializer;
 
-		readonly IConnectionPool _connectionPool;
+		private readonly IConnectionPool _connectionPool;
 		IConnectionPool IConnectionConfigurationValues.ConnectionPool => _connectionPool;
 
-		readonly IConnection _connection;
+		private readonly IConnection _connection;
 		IConnection IConnectionConfigurationValues.Connection => _connection;
 
 		[System.Diagnostics.CodeAnalysis.SuppressMessage(
@@ -154,6 +158,7 @@ namespace Elasticsearch.Net.Connection
 		{
 			this._connectionPool = connectionPool;
 			this._connection = connection ?? new HttpConnection();
+			// ReSharper disable once VirtualMemberCallInContructor
 			this._serializer = serializer ?? this.DefaultSerializer();
 
 			this._timeout = ConnectionConfiguration.DefaultTimeout;
@@ -208,6 +213,7 @@ namespace Elasticsearch.Net.Connection
 		/// </summary>
 		public T EnableMetrics(bool enabled = true) => Assign(a => a._enableMetrics = enabled);
 
+		//TODO this summary is most likely going out of date when we refactor exceptions
 		/// <summary>
 		/// Instead of following a c/go like error checking on response.IsValid always throw an ElasticsearchServerException
 		/// on the client when a call resulted in an exception on the elasticsearch server. 
@@ -315,9 +321,11 @@ namespace Elasticsearch.Net.Connection
 		/// </summary>
 		public T SetBasicAuthentication(string userName, string password)
 		{
-			this._basicAuthCredentials = new BasicAuthenticationCredentials();
-			this._basicAuthCredentials.UserName = userName;
-			this._basicAuthCredentials.Password = password;
+			this._basicAuthCredentials = new BasicAuthenticationCredentials
+			{
+				UserName = userName,
+				Password = password
+			};
 			return (T)this;
 		}
 

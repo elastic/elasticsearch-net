@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Nest.Litterateur.Documentation;
 
 namespace Nest.Litterateur
 {
@@ -22,8 +19,6 @@ namespace Nest.Litterateur
 			using (IEnumerator<T> enumeratorOne = one.GetEnumerator(),
 								  enumeratorTwo = two.GetEnumerator())
 			{
-				
-
 				bool twoFinished = false;
 
 				while (enumeratorOne.MoveNext())
@@ -31,18 +26,14 @@ namespace Nest.Litterateur
 					yield return enumeratorOne.Current;
 
 					if (!twoFinished && enumeratorTwo.MoveNext())
-					{
 						yield return enumeratorTwo.Current;
-					}
+					else twoFinished = true;
 				}
 
-				if (!twoFinished)
-				{
-					while (enumeratorTwo.MoveNext())
-					{
-						yield return enumeratorTwo.Current;
-					}
-				}
+				if (twoFinished) yield break;
+
+				while (enumeratorTwo.MoveNext())
+					yield return enumeratorTwo.Current;
 			}
 		}
 

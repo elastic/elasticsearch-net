@@ -1,24 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Net;
-using System.Runtime.InteropServices;
-using System.Security.Cryptography;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
-using Elasticsearch.Net.Connection.Configuration;
-using Elasticsearch.Net.Providers;
-using PurifyNet;
+// ReSharper disable VirtualMemberNeverOverriden.Global
 
 namespace Elasticsearch.Net.Connection
 {
 	public class HttpConnection : IConnection
 	{
-		const int BUFFER_SIZE = 1024;
-
 		static HttpConnection()
 		{
 			//ServicePointManager.SetTcpKeepAlive(true, 2000, 2000);
@@ -72,7 +64,7 @@ namespace Elasticsearch.Net.Connection
 			var m = requestData.Method.GetStringValue();
 			request.Method = m;
 			if (m != "head" && m != "get" && (requestData.Data == null))
-                request.ContentLength = 0;
+				request.ContentLength = 0;
 
 			return request;
 		}
@@ -192,7 +184,7 @@ namespace Elasticsearch.Net.Connection
 			{
 #pragma warning disable AsyncFixer002 //this overload does not need to be async
 				return requestData.CreateResponse<TReturn>(exception);
-#pragma warning restore AsyncFixer002 
+#pragma warning restore AsyncFixer002
 			}
 		}
 	}
