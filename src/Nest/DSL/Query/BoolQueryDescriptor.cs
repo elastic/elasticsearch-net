@@ -100,9 +100,8 @@ namespace Nest
 		}
 
 		/// <summary>
-		/// 
+		/// Specifies the name of the query.
 		/// </summary>
-		/// <param name="minimumShouldMatches"></param>
 		/// <returns></returns>
 		public BoolQueryDescriptor<T> Name(string name)
 		{
@@ -177,8 +176,7 @@ namespace Nest
 		}
 
 		/// <summary>
-		/// The clause (query) should appear in the matching document. A boolean query with no must clauses, one or more should clauses must match a document. 
-		/// The minimum number of should clauses to match can be set using minimum_should_match parameter.
+		/// The clause (query) must not appear in the matching documents. Note that it is not possible to search on documents that only consists of a must_not clauses.
 		/// </summary>
 		/// <param name="queries"></param>
 		/// <returns></returns>
@@ -198,8 +196,7 @@ namespace Nest
 		}
 		
 		/// <summary>
-		/// The clause (query) should appear in the matching document. A boolean query with no must clauses, one or more should clauses must match a document.
-		///  The minimum number of should clauses to match can be set using minimum_should_match parameter.
+		/// The clause (query) must not appear in the matching documents. Note that it is not possible to search on documents that only consists of a must_not clauses.
 		/// </summary>
 		/// <param name="queries"></param>
 		/// <returns></returns>
@@ -217,7 +214,8 @@ namespace Nest
 		}
 		
 		/// <summary>
-		/// The clause (query) must not appear in the matching documents. Note that it is not possible to search on documents that only consists of a must_not clauses.
+		/// The clause (query) should appear in the matching document. A boolean query with no must clauses, one or more should clauses must match a document. 
+		/// The minimum number of should clauses to match can be set using minimum_should_match parameter.
 		/// </summary>
 		/// <param name="queries"></param>
 		/// <returns></returns>
@@ -237,7 +235,8 @@ namespace Nest
 		}
 
 		/// <summary>
-		/// The clause (query) must not appear in the matching documents. Note that it is not possible to search on documents that only consists of a must_not clauses.
+		/// The clause (query) should appear in the matching document. A boolean query with no must clauses, one or more should clauses must match a document. 
+		/// The minimum number of should clauses to match can be set using minimum_should_match parameter.
 		/// </summary>
 		/// <param name="queries"></param>
 		/// <returns></returns>
