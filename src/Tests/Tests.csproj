@@ -311,7 +311,8 @@
     <Compile Include="Indices\Warmers\PutWarmer\PutWarmerApiTests.cs" />
     <Compile Include="Indices\Warmers\PutWarmer\PutWarmerUrlTests.cs" />
     <Compile Include="Indices\Warmers\WarmerCrudTests.cs" />
-    <Compile Include="Mapping\Types\String.cs" />
+    <Compile Include="Mapping\Types\TypeMappingTestBase.cs" />
+    <Compile Include="Mapping\Types\String\StringMappingTests.cs" />
     <Compile Include="Modules\Scripting\DeleteScript\DeleteScriptUrlTests.cs" />
     <Compile Include="Modules\Scripting\DeleteScript\DeleteScriptApiTests.cs" />
     <Compile Include="Modules\Scripting\GetScript\GetScriptApiTests.cs" />

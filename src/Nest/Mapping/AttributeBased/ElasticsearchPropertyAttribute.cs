@@ -13,7 +13,7 @@ namespace Nest
 		public string IndexName { get; set; }
 		public string Name { get; set; }
 		public bool Ignore { get; set; }
-		public SimilarityOption? Similarity { get; set; }
+		public SimilarityOption Similarity { get; set; }
 		public bool Store { get; set; }
 
 		public abstract IProperty ToProperty();

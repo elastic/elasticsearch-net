@@ -65,8 +65,8 @@ namespace Nest
 
 			if (attribute != null)
 				property = attribute.ToProperty();
-
-			property = InferProperty(propertyInfo.PropertyType);
+			else
+				property = InferProperty(propertyInfo.PropertyType);
 
 			var objectProperty = property as IObjectProperty;
 			if (objectProperty != null)
