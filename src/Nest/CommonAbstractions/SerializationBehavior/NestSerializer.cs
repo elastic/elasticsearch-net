@@ -65,6 +65,26 @@ namespace Nest
 			return Task.FromResult<T>(result);
 		}
 
+
+		public virtual T Deserialize<T>(Stream stream, JsonConverter converter)
+		{
+			if (stream == null) return default(T);
+			var serializer = JsonSerializer.Create(this._serializationSettings);
+			using (var streamReader = new StreamReader(stream))
+			using (var jsonTextReader = new JsonTextReader(streamReader))
+			{
+				var t = converter.ReadJson(jsonTextReader, typeof(T), null, serializer);
+				return (T)t;
+			}
+		}
+
+		public Task<T> DeserializeAsync<T>(Stream stream, JsonConverter converter, CancellationToken cancellationToken = default(CancellationToken))
+		{
+			//Json.NET does not support reading a stream asynchronously :(
+			var result = this.Deserialize<T>(stream, converter);
+			return Task.FromResult<T>(result);
+		}
+
 		internal JsonSerializerSettings CreateSettings(SerializationFormatting formatting, JsonConverter piggyBackJsonConverter = null)
 		{
 			var piggyBackState = new JsonConverterPiggyBackState { ActualJsonConverter = piggyBackJsonConverter };

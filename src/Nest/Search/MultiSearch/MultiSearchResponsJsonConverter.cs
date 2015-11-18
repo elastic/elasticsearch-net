@@ -19,7 +19,7 @@ namespace Nest
 
 		private readonly IMultiSearchRequest _request;
 
-		private static MethodInfo MakeDelegateMethodInfo = typeof(MultiSearchJsonConverter).GetMethod("CreateMultiHit", BindingFlags.Static | BindingFlags.NonPublic);
+		private static MethodInfo MakeDelegateMethodInfo = typeof(MultiSearchResponsJsonConverter).GetMethod("CreateMultiHit", BindingFlags.Static | BindingFlags.NonPublic);
 		private readonly IConnectionSettingsValues _settings;
 
 		public MultiSearchResponsJsonConverter(IConnectionSettingsValues settings, IMultiSearchRequest request)

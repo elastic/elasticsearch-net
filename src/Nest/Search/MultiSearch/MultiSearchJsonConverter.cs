@@ -28,13 +28,13 @@ namespace Nest
 
 			foreach (var operation in request.Operations.Values)
 			{
-				var index = (request.Index != null && !request.Index.Equals(operation.Index))
+				var index = (operation.Index != null)
 					? operation.Index
-					: null;
+					: request.Index;
 
-				var type = (request.Type != null && !request.Type.Equals(operation.Type))
+				var type = (operation.Type != null)
 					? operation.Type
-					: null;
+					: request.Type;
 
 				var searchType = operation.RequestParameters.GetQueryStringValue<SearchType>("search_type").GetStringValue();
 				if (searchType == "query_then_fetch")
