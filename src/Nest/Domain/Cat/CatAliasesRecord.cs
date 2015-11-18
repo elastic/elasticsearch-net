@@ -14,10 +14,10 @@ namespace Nest
 		[JsonProperty("filter")]
 		public string Filter { get; set; }
 
-		[JsonProperty("indexRouting")]
+		[JsonProperty("routing.index")]
 		public string IndexRouting { get; set; }
 
-		[JsonProperty("searchRouting")]
+		[JsonProperty("routing.search")]
 		public string SearchRouting { get; set; }
 	}
 }

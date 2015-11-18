@@ -14,6 +14,10 @@ namespace Nest
 	{
 		[JsonProperty("routing")]
 		string Routing { get; set; }
+		[JsonProperty("search_routing")]
+		string SearchRouting { get; set; }
+		[JsonProperty("index_routing")]
+		string IndexRouting { get; set; }
 
 		[JsonProperty("filter")]
 		[JsonConverter(typeof(CompositeJsonConverter<ReadAsTypeConverter<FilterContainer>, CustomJsonConverter>))]
@@ -35,6 +39,8 @@ namespace Nest
 		public PutAliasRequest(string index, string name) : base(index, name) { }
 
 		public string Routing { get; set; }
+		public string SearchRouting { get; set; }
+		public string IndexRouting { get; set; }
 
 		public IFilterContainer Filter { get; set; }
 
@@ -51,11 +57,25 @@ namespace Nest
 	{
 		IPutAliasRequest Self { get { return this; } }
 		string IPutAliasRequest.Routing { get; set; }
+		string IPutAliasRequest.SearchRouting { get; set; }
+		string IPutAliasRequest.IndexRouting { get; set; }
 		IFilterContainer IPutAliasRequest.Filter { get; set; }
 		
 		public PutAliasDescriptor Routing(string routing)
 		{
 			Self.Routing = routing;
+			return this;
+		}
+
+		public PutAliasDescriptor SearchRouting(string searchRouting)
+		{
+			Self.SearchRouting = searchRouting;
+			return this;
+		}
+
+		public PutAliasDescriptor IndexRouting(string indexRouting)
+		{
+			Self.IndexRouting = indexRouting;
 			return this;
 		}
 
