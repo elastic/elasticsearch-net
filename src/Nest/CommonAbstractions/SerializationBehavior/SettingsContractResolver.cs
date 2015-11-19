@@ -1,11 +1,9 @@
 ﻿using Newtonsoft.Json.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Nest.Resolvers
 {
-	class SettingsContractResolver : IContractResolver
+    class SettingsContractResolver : IContractResolver
 	{
 		/// <summary>
 		/// ConnectionSettings can be requested by JsonConverter's.

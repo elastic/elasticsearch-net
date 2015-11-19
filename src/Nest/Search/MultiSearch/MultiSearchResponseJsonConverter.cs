@@ -11,18 +11,21 @@ using System.Threading.Tasks;
 
 namespace Nest
 {
-	internal class MultiSearchResponsJsonConverter : JsonConverter
+	internal class MultiSearchResponseJsonConverter : JsonConverter
 	{
-		public override bool CanConvert(Type objectType) => true;
+		public override bool CanConvert(Type objectType) => objectType == typeof(MultiSearchResponse);
 		public override bool CanWrite => false;
 		public override bool CanRead => true;
 
 		private readonly IMultiSearchRequest _request;
 
-		private static MethodInfo MakeDelegateMethodInfo = typeof(MultiSearchJsonConverter).GetMethod("CreateMultiHit", BindingFlags.Static | BindingFlags.NonPublic);
+		private static MethodInfo MakeDelegateMethodInfo = typeof(MultiSearchResponseJsonConverter).GetMethod("CreateMultiHit", BindingFlags.Static | BindingFlags.NonPublic);
 		private readonly IConnectionSettingsValues _settings;
+        internal MultiSearchResponseJsonConverter()
+        {
 
-		public MultiSearchResponsJsonConverter(IConnectionSettingsValues settings, IMultiSearchRequest request)
+        }
+		public MultiSearchResponseJsonConverter(IConnectionSettingsValues settings, IMultiSearchRequest request)
 		{
 			this._settings = settings;
 			_request = request;
@@ -34,7 +37,7 @@ namespace Nest
 			{
 				var realConverter = (
 					(serializer.ContractResolver as SettingsContractResolver)
-					?.PiggyBackState?.ActualJsonConverter as MultiSearchJsonConverter
+					?.PiggyBackState?.ActualJsonConverter as MultiSearchResponseJsonConverter
 				);
 				if (realConverter == null)
 					throw new DslException("could not find a stateful multi search converter");
@@ -116,11 +119,16 @@ namespace Nest
 			var errorProperty = tuple.Hit.Children<JProperty>().FirstOrDefault(c=>c.Name == "error");
 			if (errorProperty != null)
 			{
-				//hit.IsValid = false;
-				//TODO es 1.0 will return statuscode pass that into exception
-			}
+                // TODO: set error data
+                // can't set hit.ApiCall, because it will get overwritten in MultiSearchResponse.GetResponses<T>
+                // can't set IsValid to false, because it depends on ApiCall
+                // the same applies to ServerError
+                // hit.IsValid = false;
+                // hit.ApiCall = ???
+                // hit.ServerError = ???
+            }
 
-			collection.Add(tuple.Descriptor.Key, hit);
+            collection.Add(tuple.Descriptor.Key, hit);
 		}
 	}
 }

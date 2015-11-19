@@ -73,7 +73,7 @@ namespace Nest.Resolvers
 			else if (objectType == typeof(PropertyName)) contract.Converter = new PropertyNameJsonConverter(this.ConnectionSettings);
 
 			//TODO these should not be necessary here
-			else if (objectType == typeof(MultiSearchResponse)) contract.Converter = new MultiSearchJsonConverter();
+			else if (objectType == typeof(MultiSearchResponse)) contract.Converter = new MultiSearchResponseJsonConverter();
 			else if (objectType == typeof(MultiGetResponse)) contract.Converter = new MultiGetHitJsonConverter();
 			else if (typeof(IHit<object>).IsAssignableFrom(objectType)) contract.Converter = new DefaultHitJsonConverter();
 

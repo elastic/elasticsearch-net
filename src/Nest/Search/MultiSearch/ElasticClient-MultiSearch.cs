@@ -45,10 +45,9 @@ namespace Nest
 				{
 					var converter = CreateMultiSearchDeserializer(multiSearchRequest);
 					var serializer = new NestSerializer(this.ConnectionSettings, converter);
-					var json = serializer.SerializeToBytes(d).Utf8String();
 					var creator = new MultiSearchCreator((r, s) => serializer.Deserialize<MultiSearchResponse>(s));
 					multiSearchRequest.RequestParameters.DeserializationOverride(creator);
-					return this.LowLevelDispatch.MsearchDispatch<MultiSearchResponse>(p, json);
+					return this.LowLevelDispatch.MsearchDispatch<MultiSearchResponse>(p, d);
 				}
 			);
 		}
@@ -67,10 +66,9 @@ namespace Nest
 				{
 					var converter = CreateMultiSearchDeserializer(multiSearchRequest);
 					var serializer = new NestSerializer(this.ConnectionSettings, converter);
-					var json = serializer.SerializeToBytes(d).Utf8String();
 					var creator = new MultiSearchCreator((r, s) => serializer.Deserialize<MultiSearchResponse>(s));
 					multiSearchRequest.RequestParameters.DeserializationOverride(creator);
-					return this.LowLevelDispatch.MsearchDispatchAsync<MultiSearchResponse>(p, json);
+					return this.LowLevelDispatch.MsearchDispatchAsync<MultiSearchResponse>(p, d);
 				}
 			);
 		}
@@ -83,7 +81,7 @@ namespace Nest
 					CovariantSearch.CloseOverAutomagicCovariantResultSelector(this.Infer, operation);
 			}
 
-			return new MultiSearchResponsJsonConverter(this.ConnectionSettings, request);
+			return new MultiSearchResponseJsonConverter(this.ConnectionSettings, request);
 		}
 	}
 }
