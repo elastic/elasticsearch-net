@@ -3,7 +3,7 @@ using System;
 
 namespace Nest.Resolvers
 {
-    class SettingsContractResolver : IContractResolver
+	class SettingsContractResolver : IContractResolver
 	{
 		/// <summary>
 		/// ConnectionSettings can be requested by JsonConverter's.

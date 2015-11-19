@@ -6,8 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Nest
 {
@@ -21,10 +19,10 @@ namespace Nest
 
 		private static MethodInfo MakeDelegateMethodInfo = typeof(MultiSearchResponseJsonConverter).GetMethod("CreateMultiHit", BindingFlags.Static | BindingFlags.NonPublic);
 		private readonly IConnectionSettingsValues _settings;
-        internal MultiSearchResponseJsonConverter()
-        {
+		internal MultiSearchResponseJsonConverter()
+		{
 
-        }
+		}
 		public MultiSearchResponseJsonConverter(IConnectionSettingsValues settings, IMultiSearchRequest request)
 		{
 			this._settings = settings;
@@ -119,16 +117,16 @@ namespace Nest
 			var errorProperty = tuple.Hit.Children<JProperty>().FirstOrDefault(c=>c.Name == "error");
 			if (errorProperty != null)
 			{
-                // TODO: set error data
-                // can't set hit.ApiCall, because it will get overwritten in MultiSearchResponse.GetResponses<T>
-                // can't set IsValid to false, because it depends on ApiCall
-                // the same applies to ServerError
-                // hit.IsValid = false;
-                // hit.ApiCall = ???
-                // hit.ServerError = ???
-            }
+				// TODO: set error data
+				// can't set hit.ApiCall, because it will get overwritten in MultiSearchResponse.GetResponses<T>
+				// can't set IsValid to false, because it depends on ApiCall
+				// the same applies to ServerError
+				// hit.IsValid = false;
+				// hit.ApiCall = ???
+				// hit.ServerError = ???
+			}
 
-            collection.Add(tuple.Descriptor.Key, hit);
+			collection.Add(tuple.Descriptor.Key, hit);
 		}
 	}
 }
