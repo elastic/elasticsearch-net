@@ -86,7 +86,7 @@ namespace Tests.Framework
 		}
 
 		private TObject Deserialize<TObject>(string json) =>
-			TestClient.GetClient(_connectionSettingsModifier).Serializer.Deserialize<TObject>(new MemoryStream(Encoding.UTF8.GetBytes(json)));
+			GetSerializer().Deserialize<TObject>(new MemoryStream(Encoding.UTF8.GetBytes(json)));
 
 		protected string Serialize<TObject>(TObject o)
 		{

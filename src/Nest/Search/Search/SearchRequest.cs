@@ -47,7 +47,7 @@ namespace Nest
 		IDictionary<string, ISuggestBucket> Suggest { get; set; }
 
 		[JsonProperty(PropertyName = "highlight")]
-		IHighlightRequest Highlight { get; set; }
+		IHighlight Highlight { get; set; }
 
 		[JsonProperty(PropertyName = "rescore")]
 		IRescore Rescore { get; set; }
@@ -116,7 +116,7 @@ namespace Nest
 		public QueryContainer Query { get; set; }
 		public IRescore Rescore { get; set; }
 		public IDictionary<string, ISuggestBucket> Suggest { get; set; }
-		public IHighlightRequest Highlight { get; set; }
+		public IHighlight Highlight { get; set; }
 		public AggregationDictionary Aggregations { get; set; }
 
 		SearchType? ISearchRequest.SearchType => RequestState.RequestParameters?.GetQueryStringValue<SearchType?>("search_type");
@@ -159,7 +159,7 @@ namespace Nest
 		public QueryContainer Query { get; set; }
 		public IRescore Rescore { get; set; }
 		public IDictionary<string, ISuggestBucket> Suggest { get; set; }
-		public IHighlightRequest Highlight { get; set; }
+		public IHighlight Highlight { get; set; }
 		public AggregationDictionary Aggregations { get; set; }
 
 		SearchType? ISearchRequest.SearchType => RequestState.RequestParameters?.GetQueryStringValue<SearchType?>("search_type");
@@ -215,7 +215,7 @@ namespace Nest
 
 		IDictionary<string, ISuggestBucket> ISearchRequest.Suggest { get; set; }
 
-		IHighlightRequest ISearchRequest.Highlight { get; set; }
+		IHighlight ISearchRequest.Highlight { get; set; }
 
 		IRescore ISearchRequest.Rescore { get; set; }
 
@@ -276,8 +276,8 @@ namespace Nest
 
 		public SearchDescriptor<T> Source(bool include = true)=> Assign(a => a.Source = !include ? SourceFilter.ExcludeAll : null);
 		
-		public SearchDescriptor<T> Source(Func<SearchSourceDescriptor<T>, SearchSourceDescriptor<T>> sourceSelector) =>
-			Assign(a => a.Source = sourceSelector?.Invoke(new SearchSourceDescriptor<T>()));
+		public SearchDescriptor<T> Source(Func<SourceFilterDescriptor<T>, SourceFilterDescriptor<T>> sourceSelector) =>
+			Assign(a => a.Source = sourceSelector?.Invoke(new SourceFilterDescriptor<T>()));
 
 		/// <summary>
 		/// The number of hits to return. Defaults to 10. When using scroll search type 
@@ -702,7 +702,7 @@ namespace Nest
 		/// <summary>
 		/// Allow to highlight search results on one or more fields. The implementation uses the either lucene fast-vector-highlighter or highlighter. 
 		/// </summary>
-		public SearchDescriptor<T> Highlight(Func<HighlightDescriptor<T>, IHighlightRequest> highlightSelector) =>
+		public SearchDescriptor<T> Highlight(Func<HighlightDescriptor<T>, IHighlight> highlightSelector) =>
 			Assign(a => a.Highlight = highlightSelector?.Invoke(new HighlightDescriptor<T>()));
 		
 		/// <summary>

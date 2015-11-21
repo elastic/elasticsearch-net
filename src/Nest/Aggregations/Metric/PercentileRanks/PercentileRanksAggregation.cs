@@ -6,17 +6,17 @@ using System.Text;
 
 namespace Nest
 {
-	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<PercentileRanksAggregation>))]
+	[JsonConverter(typeof(PercentileRanksAggregationJsonConverter))]
 	public interface IPercentileRanksAggregation : IMetricAggregation
 	{
-		[JsonProperty("values")]
 		IEnumerable<double> Values { get; set; }
+		IPercentilesMethod Method { get; set; }
 	}
 
 	public class PercentileRanksAggregation : MetricAggregationBase, IPercentileRanksAggregation
 	{
 		public IEnumerable<double> Values { get; set; }
+		public IPercentilesMethod Method { get; set; }
 
 		internal PercentileRanksAggregation() { }
 
@@ -31,7 +31,15 @@ namespace Nest
 	{
 		IEnumerable<double> IPercentileRanksAggregation.Values { get; set; }
 
+		IPercentilesMethod IPercentileRanksAggregation.Method { get; set; }
+
 		public PercentileRanksAggregationDescriptor<T> Values(IEnumerable<double> values) =>
-			Assign(a => a.Values = values.ToListOrNullIfEmpty());
+			Assign(a => a.Values = values?.ToList());
+
+		public PercentileRanksAggregationDescriptor<T> Values(params double[] values) =>
+			Assign(a => a.Values = values?.ToList());
+
+		public PercentileRanksAggregationDescriptor<T> Method(Func<PercentilesMethodDescriptor, IPercentilesMethod> methodSelctor) =>
+			Assign(a => a.Method = methodSelctor?.Invoke(new PercentilesMethodDescriptor()));
 	}
 }

@@ -5,11 +5,9 @@ using Newtonsoft.Json;
 
 namespace Nest
 {
-	//TODO not really a request object, find better name discuss with @gmarz
-
 	[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-	[JsonConverter(typeof(ReadAsTypeJsonConverter<HighlightRequest>))]
-	public interface IHighlightRequest
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<Highlight>))]
+	public interface IHighlight
 	{
 		[JsonProperty("pre_tags")]
 		IEnumerable<string> PreTags { get; set; }
@@ -52,7 +50,7 @@ namespace Nest
 		QueryContainer HighlightQuery { get; set; }
 	}
 
-	public class HighlightRequest : IHighlightRequest
+	public class Highlight : IHighlight
 	{
 		public IEnumerable<string> PreTags { get; set; }
 		public IEnumerable<string> PostTags { get; set; }
@@ -69,38 +67,38 @@ namespace Nest
 		public QueryContainer HighlightQuery { get; set; }
 	}
 
-	public class HighlightDescriptor<T> : IHighlightRequest
+	public class HighlightDescriptor<T> : IHighlight
 		where T : class
 	{
-		protected IHighlightRequest Self => this;
+		protected IHighlight Self => this;
 
-		private HighlightDescriptor<T> _assign(Action<IHighlightRequest> assigner) => Fluent.Assign(this, assigner);
+		private HighlightDescriptor<T> _assign(Action<IHighlight> assigner) => Fluent.Assign(this, assigner);
 
-		IEnumerable<string> IHighlightRequest.PreTags { get; set; }
+		IEnumerable<string> IHighlight.PreTags { get; set; }
 
-		IEnumerable<string> IHighlightRequest.PostTags { get; set; }
+		IEnumerable<string> IHighlight.PostTags { get; set; }
 
-		int? IHighlightRequest.FragmentSize { get; set; }
+		int? IHighlight.FragmentSize { get; set; }
 
-		string IHighlightRequest.TagsSchema { get; set; }
+		string IHighlight.TagsSchema { get; set; }
 
-		int? IHighlightRequest.NumberOfFragments { get; set; }
+		int? IHighlight.NumberOfFragments { get; set; }
 
-		int? IHighlightRequest.FragmentOffset { get; set; }
+		int? IHighlight.FragmentOffset { get; set; }
 
-		int? IHighlightRequest.BoundaryMaxSize { get; set; }
+		int? IHighlight.BoundaryMaxSize { get; set; }
 
-		string IHighlightRequest.Encoder { get; set; }
+		string IHighlight.Encoder { get; set; }
 
-		string IHighlightRequest.Order { get; set; }
+		string IHighlight.Order { get; set; }
 
-		Dictionary<Field, IHighlightField> IHighlightRequest.Fields { get; set; }
+		Dictionary<Field, IHighlightField> IHighlight.Fields { get; set; }
 
-		bool? IHighlightRequest.RequireFieldMatch { get; set; }
+		bool? IHighlight.RequireFieldMatch { get; set; }
 
-		string IHighlightRequest.BoundaryChars { get; set; }
+		string IHighlight.BoundaryChars { get; set; }
 
-		QueryContainer IHighlightRequest.HighlightQuery { get; set; }
+		QueryContainer IHighlight.HighlightQuery { get; set; }
 
 		public HighlightDescriptor<T> Fields(params Func<HighlightFieldDescriptor<T>, IHighlightField>[] fieldHighlighters) =>
 			_assign(a => a.Fields = fieldHighlighters?

@@ -116,7 +116,7 @@ namespace Nest.Resolvers
 			defaultProperties = PropertiesOf<IRequest>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IQueryContainer>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IRandomScoreFunction>(type, memberSerialization, defaultProperties, lookup);
-			defaultProperties = PropertiesOf<IHighlightRequest>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<IHighlight>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IHighlightField>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IRescore>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IRescoreQuery>(type, memberSerialization, defaultProperties, lookup);
@@ -138,12 +138,13 @@ namespace Nest.Resolvers
 			defaultProperties = PropertiesOf<IInnerHits>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IProperty>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IBoundingBox>(type, memberSerialization, defaultProperties, lookup);
-
 			defaultProperties = PropertiesOf<IClusterRerouteCommand>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IMultiTermVectorOperation>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IRepository>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IRepositorySettings>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<IScript>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<IScriptField>(type, memberSerialization, defaultProperties, lookup);
+			defaultProperties = PropertiesOf<ISourceFilter>(type, memberSerialization, defaultProperties, lookup);
 			defaultProperties = PropertiesOf<INestSerializable>(type, memberSerialization, defaultProperties, lookup);
 
 			return defaultProperties.GroupBy(p => p.PropertyName).Select(p => p.First()).ToList();

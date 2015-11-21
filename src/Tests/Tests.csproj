@@ -70,7 +70,10 @@
     <Compile Include="Aggregations\Metric\ScriptedMetric\ScriptedMetricAggregationUsageTests.cs" />
     <Compile Include="Aggregations\Metric\Stats\StatsAggregationUsageTests.cs" />
     <Compile Include="Aggregations\Metric\Sum\SumAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Metric\TopHits\TopHitsAggregationUsageTests.cs" />
     <Compile Include="Aggregations\Metric\ValueCount\ValueCountAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Metric\PercentileRanks\PercentileRanksAggregationUsageTests.cs" />
+    <Compile Include="Aggregations\Metric\Percentiles\PercentilesAggregationUsageTests.cs" />
     <Compile Include="Aggregations\Pipeline\BucketScript\BucketScriptAggregationUsageTests.cs" />
     <Compile Include="Aggregations\Pipeline\BucketSelector\BucketSelectorAggregationUsageTests.cs" />
     <Compile Include="Aggregations\Pipeline\CumulativeSum\CumulativeSumAggregationUsageTests.cs" />
@@ -308,7 +311,8 @@
     <Compile Include="Indices\Warmers\PutWarmer\PutWarmerApiTests.cs" />
     <Compile Include="Indices\Warmers\PutWarmer\PutWarmerUrlTests.cs" />
     <Compile Include="Indices\Warmers\WarmerCrudTests.cs" />
-    <Compile Include="Mapping\Types\String.cs" />
+    <Compile Include="Mapping\Types\TypeMappingTestBase.cs" />
+    <Compile Include="Mapping\Types\String\StringMappingTests.cs" />
     <Compile Include="Modules\Scripting\DeleteScript\DeleteScriptUrlTests.cs" />
     <Compile Include="Modules\Scripting\DeleteScript\DeleteScriptApiTests.cs" />
     <Compile Include="Modules\Scripting\GetScript\GetScriptApiTests.cs" />
@@ -336,6 +340,7 @@
     <Compile Include="Modules\SnapshotAndRestore\Snapshot\SnapshotStatus\SnapshotStatusUrlTests.cs" />
     <Compile Include="Modules\SnapshotAndRestore\Snapshot\Snapshot\SnapshotApiTests.cs" />
     <Compile Include="Modules\SnapshotAndRestore\Snapshot\Snapshot\SnapshotUrlTests.cs" />
+    <Compile Include="QueryDsl\Exact\Term\TermQueryUsageTests.cs" />
     <Compile Include="QueryDsl\FullText\CommonTerms\CommonTermsUsageTests.cs" />
     <Compile Include="QueryDsl\FullText\Match\MatchUsageTests.cs" />
     <Compile Include="QueryDsl\FullText\Match\MatchPhraseUsageTests.cs" />

@@ -52,9 +52,9 @@ namespace Nest
 			fileScript.InvokeOrDefault(new FileScriptDescriptor().File(file));
 
 		public IIndexedScript Indexed(string id, Func<IndexedScriptDescriptor, IIndexedScript> indexedScript = null) =>
-			indexedScript?.InvokeOrDefault(new IndexedScriptDescriptor().Id(id));
+			indexedScript.InvokeOrDefault(new IndexedScriptDescriptor().Id(id));
 
 		public IInlineScript Inline(string script, Func<InlineScriptDescriptor, IInlineScript> inlineScript = null) =>
-			inlineScript?.InvokeOrDefault(new InlineScriptDescriptor().Inline(script));
+			inlineScript.InvokeOrDefault(new InlineScriptDescriptor().Inline(script));
 	}
 }

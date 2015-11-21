@@ -1,10 +1,6 @@
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Elasticsearch.Net;
 using Elasticsearch.Net.Serialization;
 using Nest.Resolvers;
 using Newtonsoft.Json;
@@ -21,7 +17,7 @@ namespace Nest
 		private readonly JsonSerializer _defaultSerializer;
 
 		public NestSerializer(IConnectionSettingsValues settings) : this(settings, null) { }
-		
+
 		/// <summary>
 		/// this constructor is only here for stateful (de)serialization 
 		/// </summary>
@@ -36,24 +32,28 @@ namespace Nest
 
 		public void Serialize(object data, Stream writableStream, SerializationFormatting formatting = SerializationFormatting.Indented)
 		{
+			var defaultFormatting = this._defaultSerializer.Formatting;
+			this._defaultSerializer.Formatting = formatting == SerializationFormatting.Indented ? Formatting.Indented : Formatting.None;
+
 			using (var writer = new StreamWriter(writableStream, _encoding, 8096, leaveOpen: true))
 			using (var jsonWriter = new JsonTextWriter(writer))
 			{
-				var serializer = JsonSerializer.Create(this.CreateSettings(formatting));
-				serializer.Serialize(jsonWriter, data);
+				this._defaultSerializer.Serialize(jsonWriter, data);
 				writer.Flush();
 				jsonWriter.Flush();
 			}
+
+			// restore default
+			_defaultSerializer.Formatting = defaultFormatting;
 		}
 
 		public virtual T Deserialize<T>(Stream stream)
 		{
 			if (stream == null) return default(T);
-			var serializer = JsonSerializer.Create(this._serializationSettings);
 			using (var streamReader = new StreamReader(stream))
 			using (var jsonTextReader = new JsonTextReader(streamReader))
 			{
-				var t = serializer.Deserialize(jsonTextReader, typeof(T));
+				var t = this._defaultSerializer.Deserialize(jsonTextReader, typeof(T));
 				return (T)t;
 			}
 		}

@@ -71,6 +71,11 @@
     <Compile Include="Aggregations\Aggregation.cs" />
     <Compile Include="Aggregations\Bucket\Terms\TermsOrder.cs" />
     <Compile Include="Aggregations\Metric\Metric.cs" />
+    <Compile Include="Aggregations\Metric\PercentileRanks\PercentileRanksAggregationJsonConverter.cs" />
+    <Compile Include="Aggregations\Metric\Percentiles\Methods\HDRHistogramMethod.cs" />
+    <Compile Include="Aggregations\Metric\Percentiles\Methods\IPercentilesMethod.cs" />
+    <Compile Include="Aggregations\Metric\Percentiles\PercentilesAggregationJsonConverter.cs" />
+    <Compile Include="Aggregations\Metric\Percentiles\Methods\TDigestMethod.cs" />
     <Compile Include="Aggregations\Pipeline\BucketSelector\BucketSelectorAggregation.cs" />
     <Compile Include="Aggregations\Pipeline\BucketScript\BucketScriptAggregation.cs" />
     <Compile Include="Aggregations\Pipeline\BucketsPath.cs" />
@@ -172,6 +177,7 @@
     <Compile Include="CommonOptions\Scripting\IndexedScript.cs" />
     <Compile Include="CommonOptions\Scripting\InlineScript.cs" />
     <Compile Include="CommonOptions\Scripting\Script.cs" />
+    <Compile Include="CommonOptions\Scripting\ScriptFields.cs" />
     <Compile Include="CommonOptions\Scripting\ScriptJsonConverter.cs" />
     <Compile Include="CommonOptions\Stats\QueryCacheStats.cs" />
     <Compile Include="CommonOptions\Stats\RecoveryStats.cs" />
@@ -761,7 +767,7 @@
     <Compile Include="Indices\IndexManagement\DeleteIndex\DeleteIndexRequest.cs" />
     <Compile Include="Indices\StatusManagement\Flush\FlushRequest.cs" />
     <Compile Include="Indices\MappingManagement\GetMapping\GetMappingRequest.cs" />
-    <Compile Include="Search\Search\SourceFiltering\SearchSource.cs" />
+    <Compile Include="Search\Search\SourceFiltering\SourceFilter.cs" />
     <Compile Include="Document\Single\TermVectors\TermVectorsRequest.cs" />
     <Compile Include="Search\Percolator\UnregisterPercolator\UnregisterPercolatorRequest.cs" />
     <Compile Include="Indices\IndexSettings\IndexTemplates\DeleteIndexTemplate\DeleteIndexTemplateRequest.cs" />
@@ -917,7 +923,7 @@
     <Compile Include="QueryDsl\TermLevel\Terms\TermsQuery.cs" />
     <Compile Include="Document\Single\Update\UpdateRequest.cs" />
     <Compile Include="Document\Single\Update\ElasticClient-Update.cs" />
-    <Compile Include="Search\Search\Highlighting\HighlightRequest.cs" />
+    <Compile Include="Search\Search\Highlighting\Highlight.cs" />
     <Compile Include="Search\Search\Highlighting\HighlightField.cs" />
     <Compile Include="QueryDsl\Compound\Boosting\BoostingQuery.cs" />
     <Compile Include="QueryDsl\Compound\ConstantScore\ConstantScoreQuery.cs" />

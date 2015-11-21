@@ -132,9 +132,9 @@ namespace Nest
 		/// <summary>
 		/// Control how the document's source is loaded
 		/// </summary>
-		public MultiGetOperationDescriptor<T> Source(Func<SearchSourceDescriptor<T>, ISourceFilter> source)
+		public MultiGetOperationDescriptor<T> Source(Func<SourceFilterDescriptor<T>, ISourceFilter> source)
 		{
-			Self.Source = new Union<bool, ISourceFilter>(source(new SearchSourceDescriptor<T>()));
+			Self.Source = new Union<bool, ISourceFilter>(source(new SourceFilterDescriptor<T>()));
 			return this;
 		}
 

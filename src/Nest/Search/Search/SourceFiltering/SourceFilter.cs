@@ -7,6 +7,7 @@ using static Nest.Static;
 
 namespace Nest
 {
+	[JsonConverter(typeof(ReadAsTypeJsonConverter<SourceFilter>))]
 	public interface ISourceFilter
 	{
 		[JsonProperty("include")]
@@ -25,17 +26,17 @@ namespace Nest
 		public Fields Exclude { get; set; }
 	}
 
-	public class SearchSourceDescriptor<T> : DescriptorBase<SearchSourceDescriptor<T>, ISourceFilter>, ISourceFilter
+	public class SourceFilterDescriptor<T> : DescriptorBase<SourceFilterDescriptor<T>, ISourceFilter>, ISourceFilter
 		where T : class
 	{
 		Fields ISourceFilter.Include { get; set; }
 
 		Fields ISourceFilter.Exclude { get; set; }
 
-		public SearchSourceDescriptor<T> Include(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) => 
+		public SourceFilterDescriptor<T> Include(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) => 
 			Assign(a => a.Include = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
 
-		public SearchSourceDescriptor<T> Exclude(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) => 
+		public SourceFilterDescriptor<T> Exclude(Func<FieldsDescriptor<T>, IPromise<Fields>> fields) => 
 			Assign(a => a.Exclude = fields?.Invoke(new FieldsDescriptor<T>())?.Value);
 
 	}

@@ -22,7 +22,7 @@ namespace Nest
         public int? Size { get; set; }
 		public bool? TrackScores { get; set; }
 		public IDictionary<Field, ISort> Sort { get; set; }
-		public IHighlightRequest Highlight { get; set; }
+		public IHighlight Highlight { get; set; }
 		public QueryContainer Query { get; set; }
 		public QueryContainer Filter { get; set; }
 		public IDictionary<string, IAggregationContainer> Aggregations { get; set; }
@@ -42,7 +42,7 @@ namespace Nest
 	public partial class PercolateCountDescriptor<TDocument> : IPercolateCountRequest<TDocument>
 		where TDocument : class
 	{
-		IHighlightRequest IPercolateOperation.Highlight { get; set; }
+		IHighlight IPercolateOperation.Highlight { get; set; }
 		QueryContainer IPercolateOperation.Query { get; set; }
 		QueryContainer IPercolateOperation.Filter { get; set; }
 
